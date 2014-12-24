@@ -1,5 +1,5 @@
 //*****************************************************************************
-//
+// uarts.c
 //*****************************************************************************
 
 #include <stdint.h>
@@ -53,7 +53,7 @@ void InitUARTs(void) {
     ROM_IntEnable(INT_UART0);
     ROM_UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT);
 
-    UARTSend((uint8_t *)"Enter text: ", 16);
+    UARTSend((uint8_t *)"Start 1", 7);
 }
 
 void UART0IntHandler(void) {

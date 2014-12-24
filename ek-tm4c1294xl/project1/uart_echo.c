@@ -15,17 +15,17 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 #include "driverlib/uart.h"
+#include "utils/uartstdio.h"
+#include "src/timers.h"
+#include "src/uarts.h"
+#include "src/provided/utils/uartstdio.h"
 
 // System clock rate in Hz.
 uint32_t g_ui32SysClock;
-void InitUARTs(void);
-void InitTimers(void);
 
 // The error routine that is called if the driver library encounters an error.
 #ifdef DEBUG
-void
-__error__(char *pcFilename, uint32_t ui32Line)
-{
+void __error__(char *pcFilename, uint32_t ui32Line) {
 }
 #endif
 
@@ -38,6 +38,8 @@ int main(void) {
 
     InitUARTs();
     InitTimers();
+    ROM_IntMasterEnable();
+    UARTprintf("Start 2");
 
     while(1) {
     }
