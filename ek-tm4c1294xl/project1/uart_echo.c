@@ -13,10 +13,12 @@
 #include "driverlib/rom.h"
 #include "driverlib/rom_map.h"
 #include "driverlib/sysctl.h"
+#include "driverlib/timer.h"
 #include "driverlib/uart.h"
 
 // System clock rate in Hz.
 uint32_t g_ui32SysClock;
+void InitTimers(void);
 
 // The error routine that is called if the driver library encounters an error.
 #ifdef DEBUG
@@ -26,8 +28,7 @@ __error__(char *pcFilename, uint32_t ui32Line)
 }
 #endif
 
-// The UART interrupt handler.
-void UARTIntHandler(void) {
+void UART0IntHandler(void) {
     uint32_t ui32Status;
 
     // Get the interrrupt status.
@@ -51,6 +52,15 @@ void UARTIntHandler(void) {
         // Turn off the LED
         GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0);
     }
+}
+
+void Timer0IntHandler(void)
+{
+	TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
+
+    GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0);
+    SysCtlDelay(g_ui32SysClock / (1000 * 3));
+    GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0);
 }
 
 // Send a string to the UART.
@@ -95,6 +105,7 @@ int main(void) {
     ROM_UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT);
 
     UARTSend((uint8_t *)"Enter text: ", 16);
+    InitTimers();
 
     while(1) {
     }
