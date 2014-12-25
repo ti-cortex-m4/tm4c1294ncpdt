@@ -33,7 +33,7 @@ uchar           	bIn0;
 uint            	iwPop0, iwPush0;
 
 // указатель для передачи данных без копирования в выходные буфера
-uchar          	   *pbData0;
+uchar                  *pbData0;
 
 // индекс для перехода в альтернативную систему команд
-uchar 				ibPacket0;
+uchar                   ibPacket0;
