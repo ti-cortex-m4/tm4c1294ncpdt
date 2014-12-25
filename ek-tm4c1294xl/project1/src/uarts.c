@@ -16,16 +16,13 @@
 #include "driverlib/timer.h"
 #include "driverlib/uart.h"
 
-extern uint32_t g_ui32SysClock;
-
-// Send a string to the UART.
-void UARTSend(const uint8_t *pui8Buffer, uint32_t ui32Count) {
-    while(ui32Count--) {
+void UARTSend(const uint8_t *pui8Buffer) {
+    while (*pui8Buffer) {
         ROM_UARTCharPutNonBlocking(UART0_BASE, *pui8Buffer++);
     }
 }
 
-void InitUARTs(void) {
+void InitUARTs(uint32_t ui32SysClock) {
     // Enable the GPIO port that is used for the on-board LED.
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
 
@@ -45,15 +42,14 @@ void InitUARTs(void) {
     ROM_GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
     // Configure the UART for 115,200, 8-N-1 operation.
-    ROM_UARTConfigSetExpClk(UART0_BASE, g_ui32SysClock, 9600,
-                            (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE |
-                             UART_CONFIG_PAR_NONE));
+    ROM_UARTConfigSetExpClk(UART0_BASE, ui32SysClock, 9600,
+                            (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 
     // Enable the UART interrupt.
     ROM_IntEnable(INT_UART0);
     ROM_UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT);
 
-    UARTSend((uint8_t *)"Start 1", 7);
+    UARTSend((uint8_t *)"Start");
 }
 
 void UART0IntHandler(void) {
@@ -75,7 +71,7 @@ void UART0IntHandler(void) {
         GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0);
 
         // Delay for 1 millisecond.  Each SysCtlDelay is about 3 clocks.
-        SysCtlDelay(g_ui32SysClock / (1000 * 3));
+        SysCtlDelay(5000);
 
         // Turn off the LED
         GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0);

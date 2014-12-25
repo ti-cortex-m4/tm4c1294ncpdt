@@ -17,16 +17,15 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 #include "driverlib/uart.h"
-#include "main.h"
 
-void InitTimers(void)
+void InitTimers(uint32_t ui32SysClock)
 {
     // Enable the peripherals.
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
 
     // Configure the 32-bit periodic timer.
     TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
-    TimerLoadSet(TIMER0_BASE, TIMER_A, g_ui32SysClock / 1);
+    TimerLoadSet(TIMER0_BASE, TIMER_A, ui32SysClock / 1);
 
     // Enable processor interrupts.
     IntMasterEnable();
@@ -44,6 +43,6 @@ void Timer0IntHandler(void)
 	TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
 
     GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0);
-    SysCtlDelay(g_ui32SysClock / 1000);
+    SysCtlDelay(5000);
     GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0);
 }

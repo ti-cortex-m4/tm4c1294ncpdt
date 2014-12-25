@@ -2,4 +2,4 @@
 // uarts.h
 //*****************************************************************************
 
-void InitUARTs(void);
+void InitUARTs(uint32_t ui32SysClock);

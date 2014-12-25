@@ -2,4 +2,4 @@
 // timers.h
 //*****************************************************************************
 
-void InitTimers(void);
+void InitTimers(uint32_t ui32SysClock);
