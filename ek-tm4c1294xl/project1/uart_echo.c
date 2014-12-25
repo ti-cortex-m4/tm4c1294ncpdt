@@ -18,10 +18,6 @@
 #include "utils/uartstdio.h"
 #include "src/timers.h"
 #include "src/uarts.h"
-#include "src/provided/utils/uartstdio.h"
-
-// System clock rate in Hz.
-uint32_t g_ui32SysClock;
 
 // The error routine that is called if the driver library encounters an error.
 #ifdef DEBUG
@@ -30,16 +26,17 @@ void __error__(char *pcFilename, uint32_t ui32Line) {
 #endif
 
 int main(void) {
+	uint32_t ui32SysClock;
+
     // Set the clocking to run directly from the crystal at 120MHz.
-    g_ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+	ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
                                              SYSCTL_OSC_MAIN |
                                              SYSCTL_USE_PLL |
                                              SYSCTL_CFG_VCO_480), 120000000);
 
-    InitUARTs();
-    InitTimers();
+    InitUARTs(ui32SysClock);
+    InitTimers(ui32SysClock);
     ROM_IntMasterEnable();
-    UARTprintf("Start 2");
 
     while(1) {
     }
