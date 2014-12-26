@@ -16,6 +16,7 @@
 #include "driverlib/timer.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
+#include "src/rtc.h"
 #include "src/timers.h"
 #include "src/uarts.h"
 #include "src/postinput_crc.h"
@@ -35,6 +36,7 @@ int main(void) {
                                              SYSCTL_USE_PLL |
                                              SYSCTL_CFG_VCO_480), 120000000);
 
+	InitRTC();
     InitUARTs(ui32SysClock);
     InitTimers(ui32SysClock);
     ROM_IntMasterEnable();
