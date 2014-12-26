@@ -9,7 +9,8 @@ PORTS.C
 #include        "mem_settings.h"
 #include        "mem_serial0.h"
 #include        "crc-16.h"
-#include        "ports.h"
+#include        "ports_stack.h"
+#include        "ports_common.h"
 
 
 
