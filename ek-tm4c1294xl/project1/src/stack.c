@@ -24,20 +24,16 @@ void    InitPushCRC(void) {
 }
 
 
-void    Push(void  *pbData, uint  wSize)
-{
-  switch (ibPort)
-  {
+void    Push(void  *pbData, uint  wSize) {
+  switch (ibPort) {
     case 0: 
-//      if (iwPush0+wSize < sizeof(mpbOutBuff0)-bSHADOW)
-      {
+      if (iwPush0+wSize < sizeof(mpbOutBuff0)-bMARGIN) {
         memcpy(&mpbOutBuff0[ iwPush0 ], pbData, wSize);
         iwPush0 += wSize;
       }
       break;
   }
 }
-
 
 
 void    PushChar(uchar  bT) {
@@ -50,29 +46,19 @@ void    PushInt(uint  wT) {
 }
 
 
+uchar   SkipChar(void) {
+  switch (ibPort) {
+    case 0: return mpbOutBuff0[ iwPush0++ ];
+  }
 
-
-
-uchar   SkipChar(void)
-{
-//  switch (ibPort)
-//  {
-//    case 0:
-    	return( mpbOutBuff0[ iwPush0++ ] );
-//    	break;
-//  }
-//  return 0;
+  return 0; // TODO
 }
 
 
-void    Skip(uint  wSize)
-{
-//  switch (ibPort)
-//  {
-//    case 0:
-    	iwPush0 += wSize;
-//    	break;
-//  }
+void    Skip(uint  wSize) {
+  switch (ibPort) {
+    case 0: iwPush0 += wSize; break;
+  }
 }
 
 
@@ -85,26 +71,17 @@ void    InitPop(uint  i) {
 
 
 
-void    Pop(void    *pbData, uint  wSize)
-{
-  switch (ibPort)
-  {
-    case 0:  memcpy(pbData, &mpbInBuff0[ iwPop0 ], wSize);
-             iwPop0 += wSize;
-             break;
+void    Pop(void  *pbData, uint  wSize) {
+  switch (ibPort) {
+    case 0: memcpy(pbData, &mpbInBuff0[ iwPop0 ], wSize); iwPop0 += wSize; break;
   }
 }
 
 
-
-
-uchar   PopChar(void)
-{
-//  switch (ibPort)
-  {
-//    case 0:
-    	return( mpbInBuff0[ iwPop0++ ] );
-//    break;
+uchar   PopChar(void) {
+  switch (ibPort) {
+    case 0: return mpbInBuff0[ iwPop0++ ];
   }
-//  return 0;
+
+  return 0; // TODO
 }
