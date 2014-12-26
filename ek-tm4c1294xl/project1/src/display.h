@@ -1,8 +1,11 @@
 /*------------------------------------------------------------------------------
-MEM_PORTS.C
+PORTS.C
 
 
 ------------------------------------------------------------------------------*/
 
-extern  uchar                   szHi[bDISPLAY + bMARGIN],
+extern  char                    szHi[bDISPLAY + bMARGIN],
                                 szLo[bDISPLAY + bMARGIN];
+
+
+void    InitDisplay(void);
