@@ -13,6 +13,7 @@ POSTINPUT_CRC.C
 #include        "states.h"
 #include        "access.h"
 #include        "crc-16.h"
+#include        "rtc.h"
 #include        "keyboard.h"
 #include        "ports.h"
 
