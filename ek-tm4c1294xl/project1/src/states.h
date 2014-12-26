@@ -4,7 +4,7 @@ STATES.H
 
 ------------------------------------------------------------------------------*/
 
-// ???
+// TODO
 #define bSTA_BEGIN                     0
 #define bSTA_BADCRC                    1
 #define bSTA_BADNUMBER                 2

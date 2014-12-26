@@ -40,6 +40,6 @@ int main(void) {
     ROM_IntMasterEnable();
 
     while(1) {
-    	PostinputCRCAll();
+    	PostinputCRC_Full();
     }
 }
