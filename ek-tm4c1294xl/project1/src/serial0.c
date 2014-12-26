@@ -3,6 +3,8 @@
 #include        "inc/hw_memmap.h"
 #include        "inc/hw_uart.h"
 #include        "inc/hw_types.h"
+#include        "inc/hw_ints.h"
+#include        "driverlib/interrupt.h"
 #include        "driverlib/uart.h"
 #include 		"mem_ports.h"
 #include 		"mem_serial0.h"
@@ -418,7 +420,7 @@ void    InitSerial0(void) {
   DTROff0();
 
   mpwMajInDelay[0] = 10;
-  mppoPorts[0].enStream = STR_SLAVECRC;
+  mppoPorts[0].enStream = STR_SLAVEESC;
 
   mpSerial[0] = SER_BEGIN;
 }
@@ -440,7 +442,8 @@ void    Query0(uint  cwIn, uchar  cbOut, bool  fMinInDelay)
 
   OutputMode0();
   mpSerial[0] = SER_OUTPUT_MASTER;
- // TI = 1;
+
+  IntPendSet(INT_UART0);
 }
 
 
@@ -454,5 +457,5 @@ void    Answer0(uint  wSize, serial  seT)
   mpSerial[0] = seT;
   AnswerBulk0();
 
-//  TI = 1;
+  IntPendSet(INT_UART0);
 }
