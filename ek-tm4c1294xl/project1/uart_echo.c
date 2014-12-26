@@ -18,6 +18,7 @@
 #include "utils/uartstdio.h"
 #include "src/timers.h"
 #include "src/uarts.h"
+#include "src/postinput_crc.h"
 
 // The error routine that is called if the driver library encounters an error.
 #ifdef DEBUG
@@ -39,5 +40,6 @@ int main(void) {
     ROM_IntMasterEnable();
 
     while(1) {
+    	PostinputCRCAll();
     }
 }
