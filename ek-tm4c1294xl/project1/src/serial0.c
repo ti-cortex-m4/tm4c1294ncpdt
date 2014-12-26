@@ -1,5 +1,9 @@
 
 #include 		"main.h"
+#include        "inc/hw_memmap.h"
+#include        "inc/hw_uart.h"
+#include        "inc/hw_types.h"
+#include        "driverlib/uart.h"
 #include 		"mem_ports.h"
 #include 		"mem_serial0.h"
 #include 		"flow.h"
@@ -8,40 +12,62 @@
 #include 		"crc-16.h"
 
 
-static const uchar          szPacketA[bPACKET_HEADER] = "12345678";
-static const uchar          szPacketB[1] = "\x1A";
+
+static const uchar 		szPacketA[bPACKET_HEADER] = {0xCA, 0xE0, 0xEB, 0xFE, 0xEC, 0xED, 0xFB, 0x20};
+
+static const uchar 		szPacketB[1] = { 0x1A };
 
 
-uchar RI,TI,SBUF0,ES0,fSendAT;
 
 void    DTROff0(void) {
 }
 
+
 void    InputMode0(void) {
 }
+
 
 void    OutputMode0(void) {
 }
 
 
 
-void    OutByte0(uchar  bT) {
-
+bool    GetRI0(void) {
+  return UARTCharsAvail(UART0_BASE);
 }
 
-void    Serial0(void) {
-uchar   bT;
 
+bool    GetTI0(void) {
+  return UARTSpaceAvail(UART0_BASE);
+}
+
+
+uchar	InByte0(void) {
+  return HWREG(UART0_BASE + UART_O_DR);
+}
+
+
+void    OutByte0(uchar  bT) {
+	HWREG(UART0_BASE + UART_O_DR) = bT;
+}
+
+
+
+void    UART0IntHandler(void) {
+uchar   bT;
+uint32_t ui32Status;
+
+  ui32Status = UARTIntStatus(UART0_BASE, true);
+  UARTIntClear(UART0_BASE, ui32Status);
 
   // ведущий режим
   if (((mppoPorts[0].enStream == STR_MASTERDIRECT) ||
        (mppoPorts[0].enStream == STR_MASTERMODEM)) &&
       (mpboLocal[0] == boFalse))
   {
-    if (RI == 1)
+    if (GetRI0())
     {
-      RI = 0;
-      bT = SBUF0;
+      bT = InByte0();
 
       if (mpSerial[0] == SER_BEGIN)
       {
@@ -92,10 +118,8 @@ uchar   bT;
       }
     }
 
-    if (TI == 1)
+    if (GetTI0())
     {
-      TI = 0;
-
       if (mpSerial[0] == SER_OUTPUT_MASTER)
       {
         bT = mpbOutBuff0[ iwOutBuff0 ];
@@ -139,12 +163,11 @@ uchar   bT;
   // ведомый режим
   else
   {
-    if (RI == 1)
+    if (GetRI0())
     {
-      RI = 0;
-      bT = SBUF0;
+      bT = InByte0();
 
-      if ((fSendAT == 1) && (IsFlow0() == 0))
+      if ((boSendAT == boTrue) && (IsFlow0() == 0))
       {
         mpcbSendAT[0] = bANSWER_AT;
         mpanSendAT[0] = ANS_TIMEOUT;
@@ -275,10 +298,8 @@ uchar   bT;
       }
     }
 
-    if (TI == 1)
+    if (GetTI0())
     {
-      TI = 0;
-
       if (mpSerial[0] == SER_OUTPUT_SLAVE)
       {
         bT = mpbOutBuff0[ iwOutBuff0++ ];
@@ -384,15 +405,54 @@ void    InDelay0(void) {
   }
 }
 
+
+
 void    InitSerial0(void) {
   mpcbSendAT[0] = bANSWER_AT;
   mpanSendAT[0] = ANS_TIMEOUT;
+  boSendAT = boFalse;
 
   mpboLocal[0] = boFalse;
 
   InputMode0();
   DTROff0();
 
+  mpwMajInDelay[0] = 10;
+  mppoPorts[0].enStream = STR_SLAVECRC;
+
   mpSerial[0] = SER_BEGIN;
-  ES0 = 1;
+}
+
+
+
+void    Query0(uint  cwIn, uchar  cbOut, bool  fMinInDelay)
+{
+  iwInBuff0  = 0;
+  iwOutBuff0 = 0;
+
+  cwInBuff0  = cwIn;
+  cwOutBuff0 = cbOut;
+
+  if (fMinInDelay == true)
+    mpwInDelay[0] = mpwMinInDelay[0];
+  else
+    mpwInDelay[0] = mpwMajInDelay[0];
+
+  OutputMode0();
+  mpSerial[0] = SER_OUTPUT_MASTER;
+ // TI = 1;
+}
+
+
+
+void    Answer0(uint  wSize, serial  seT)
+{
+  iwOutBuff0 = 0;
+  cwOutBuff0 = wSize;
+
+  OutputMode0();
+  mpSerial[0] = seT;
+  AnswerBulk0();
+
+//  TI = 1;
 }
