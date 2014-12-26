@@ -39,7 +39,7 @@ int main(void) {
 	InitRTC();
     InitUARTs(ui32SysClock);
     InitTimers(ui32SysClock);
-    ROM_IntMasterEnable();
+    IntMasterEnable();
 
     while(1) {
     	PostinputCRC_Full();
