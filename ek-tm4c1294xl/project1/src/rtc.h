@@ -9,4 +9,5 @@ RTC.H
 
 
 void    InitRTC(void);
+void    RTC_1Hz(void);
 time    *PGetCurrTimeDate(void);
