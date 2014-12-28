@@ -8,6 +8,7 @@ _TIMEDATE.C
 #include        "memory_program.h"
 #include        "keyboard.h"
 #include        "display.h"
+#include        "slides.h"
 #include        "delay.h"
 #include        "beep.h"
 #include        "rtc.h"
@@ -17,7 +18,7 @@ _TIMEDATE.C
 
 
 //                                         0123456789ABCDEF
-uchar const             szMaskTime[]    = "    __ __ __    ",
+char const              szMaskTime[]    = "    __ __ __    ",
                         szMaskDate[]    = "    __ __ __    ",
                         szTime[]        = "Текущее время   ",
                         szDate[]        = "Текущая дата    ",
