@@ -8,4 +8,16 @@ MEM_SETTINGS.C
 
 
 
+// логический номер прибора
 uchar                   bLogical;
+
+
+
+// правило перехода на сезонное время
+decret                  deDecret;
+
+// даты перехода на сезонное время
+time                    tiSummer, tiWinter;
+
+// счётчики количеств переходов на сезонное время
+uchar                   cbSummer, cbWinter;
