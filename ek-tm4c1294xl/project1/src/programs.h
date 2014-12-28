@@ -12,7 +12,11 @@ PROGRAMS.H
 // режим: программирование
 #define bSET_CURRTIME               9
 #define bSET_CURRDATE               8
-#define bSET_START                  15
+
+
+// режим: функционирование
+#define bGET_CURRTIME               1
+#define bGET_CURRDATE               3
 
 
 // все режимы
