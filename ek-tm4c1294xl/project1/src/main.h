@@ -44,6 +44,15 @@ typedef enum
 } answer;
 
 
+// тип 'правило перехода на сезонное время'
+typedef enum
+{
+  DEC_NONE              = 0,
+  DEC_AUTO              = 1,
+  DEC_CUSTOM            = 2
+} decret;
+
+
 // тип 'сострежим работы прибора'
 typedef enum
 {

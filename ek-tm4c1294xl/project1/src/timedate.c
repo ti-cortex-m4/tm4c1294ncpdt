@@ -8,59 +8,13 @@ TIMEDATE.H
 #include        "display.h"
 #include        "lines.h"
 #include        "engine.h"
+#include        "rtc.h"
 
 
 
 time                    tiAlt;
 
 uchar const             mpbDaysInMonth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-
-
-bool     TrueTimeDate(void)
-{
-  if (tiAlt.bSecond > 59) return false;
-  if (tiAlt.bMinute > 59) return false;
-  if (tiAlt.bHour   > 23) return false;
-
-  if ((tiAlt.bDay == 0) || (tiAlt.bDay > DaysInMonth()))
-    return false;
-
-  if ((tiAlt.bMonth == 0) || (tiAlt.bMonth > 12 ))
-    return false;
-
-  if ((tiAlt.bYear < 2) || (tiAlt.bYear > 99))
-    return false;
-
-  return true;
-}
-
-
-
-uchar   Weekday(void)
-{
-uchar   i;
-
-  wBuffD = 5 - 1 + tiAlt.bDay;
-
-  for (i=1; i<tiAlt.bMonth; i++)
-  {
-    if ((tiAlt.bYear % 4 == 0) && (i == 2))
-      wBuffD += 29;
-    else
-      wBuffD += mpbDaysInMonth[i - 1];
-  }
-
-  for (i=0; i<tiAlt.bYear; i++)
-  {
-    if (i % 4 == 0)
-      wBuffD += 366;
-    else
-      wBuffD += 365;
-  }
-
-  return(wBuffD % 7);
-}
 
 
 
@@ -88,6 +42,67 @@ uint    DaysInYearSpec(uchar  bYear)
     return(366);
   else
     return(365);
+}
+
+
+
+uchar   Weekday(void)
+{
+uchar   i;
+
+  wBuffD = 5 - 1 + tiAlt.bDay;          // 5: суббота - 1 €нвар€ 2000 года
+
+  for (i=1; i<tiAlt.bMonth; i++)
+  {
+    if ((tiAlt.bYear % 4 == 0) && (i == 2))
+      wBuffD += 29;
+    else
+      wBuffD += mpbDaysInMonth[i - 1];
+  }
+
+  for (i=0; i<tiAlt.bYear; i++)
+  {
+    if (i % 4 == 0)
+      wBuffD += 366;
+    else
+      wBuffD += 365;
+  }
+
+  return(wBuffD % 7);
+}
+
+
+bool     TrueTimeDate(void)
+{
+  if (tiAlt.bSecond > 59) return false;
+  if (tiAlt.bMinute > 59) return false;
+  if (tiAlt.bHour   > 23) return false;
+
+  if ((tiAlt.bDay == 0) || (tiAlt.bDay > DaysInMonth()))
+    return false;
+
+  if ((tiAlt.bMonth == 0) || (tiAlt.bMonth > 12 ))
+    return false;
+
+  if ((tiAlt.bYear < 2) || (tiAlt.bYear > 99))
+    return false;
+
+  return true;
+}
+
+
+// находит последнее воскресенье мес€ца текущего года
+void    DecretDate(void)
+{
+uchar   i;
+
+  tiAlt.bYear = (*PGetCurrTimeDate()).bYear;
+
+  for (i=DaysInMonth(); i>0; i--)
+  {
+    tiAlt.bDay = i;
+    if (Weekday() == 6) return;         // 6: воскресенье
+  }
 }
 
 

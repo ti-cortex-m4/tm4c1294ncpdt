@@ -12,12 +12,13 @@ extern  time                    tiAlt;
 
 
 
-bool    TrueTimeDate(void);
-uchar   Weekday(void);
-
 uchar   DaysInMonth(void);
 uchar   DaysInMonthSpec(uchar  bYear, uchar  bMonth);
 uint    DaysInYearSpec(uchar  bYear);
+
+uchar   Weekday(void);
+bool    TrueTimeDate(void);
+void    DecretDate(void);
 
 ulong   DateToSecIndex(void);
 void    SecIndexToDate(ulong  dwT);
