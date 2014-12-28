@@ -9,7 +9,8 @@ RTC.C
 
 
 
-time                    tiGetRTC;
+time                    tiGetRTC, tiSetRTC;
+
 ulong                   dwRTC;
 
 
@@ -28,16 +29,55 @@ void    InitRTC(void) {
   tiAlt.bDay    = 31;
   tiAlt.bMonth  = 12;
   tiAlt.bYear   = 14;
+
   dwRTC = DateToSecIndex();
 }
+
+
+
+time    *PGetCurrTimeDate(void) {
+  return &tiGetRTC;
+}
+
+
+void    SetCurrTimeDate(void) {
+  SecIndexToDate(dwRTC);
+
+  tiAlt.bSecond = tiSetRTC.bSecond;
+  tiAlt.bMinute = tiSetRTC.bMinute;
+  tiAlt.bHour   = tiSetRTC.bHour;
+  tiAlt.bDay    = tiSetRTC.bHour;
+  tiAlt.bMonth  = tiSetRTC.bMonth;
+  tiAlt.bYear   = tiSetRTC.bYear;
+
+  dwRTC = DateToSecIndex();
+}
+
+
+void    SetCurrTime(void) {
+  SecIndexToDate(dwRTC);
+
+  tiAlt.bSecond = tiSetRTC.bSecond;
+  tiAlt.bMinute = tiSetRTC.bMinute;
+  tiAlt.bHour   = tiSetRTC.bHour;
+
+  dwRTC = DateToSecIndex();
+}
+
+
+void    SetCurrDate(void) {
+  SecIndexToDate(dwRTC);
+
+  tiAlt.bDay    = tiSetRTC.bHour;
+  tiAlt.bMonth  = tiSetRTC.bMonth;
+  tiAlt.bYear   = tiSetRTC.bYear;
+
+  dwRTC = DateToSecIndex();
+}
+
 
 
 void    RTC_1Hz(void) {
   SecIndexToDate(++dwRTC);
   tiGetRTC = tiAlt;
-}
-
-
-time    *PGetCurrTimeDate(void) {
-  return &tiGetRTC;
 }

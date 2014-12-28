@@ -8,6 +8,16 @@ RTC.H
 
 
 
+extern  time                    tiGetRTC, tiSetRTC;
+
+
+
 void    InitRTC(void);
-void    RTC_1Hz(void);
+
 time    *PGetCurrTimeDate(void);
+
+void    SetCurrTimeDate(void);
+void    SetCurrTime(void);
+void    SetCurrDate(void);
+
+void    RTC_1Hz(void);
