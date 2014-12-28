@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-TIMERS.C
+TIMER0.C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,11 +12,10 @@ TIMERS.C
 #include 		"driverlib/sysctl.h"
 #include 		"driverlib/timer.h"
 #include 		"serial0.h"
-#include 		"rtc.h"
 
 
 
-void InitTimers(uint32_t ui32SysClock) {
+void InitTimer0(uint32_t ui32SysClock) {
     // Enable the peripherals.
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
 
@@ -38,7 +37,6 @@ void Timer0IntHandler(void) {
 	TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
 
 	InDelay0();
-	RTC_1Hz();
 
     GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0);
     SysCtlDelay(5000);

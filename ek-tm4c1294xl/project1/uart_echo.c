@@ -18,7 +18,8 @@
 #include "utils/uartstdio.h"
 #include "src/rtc.h"
 #include "src/display.h"
-#include "src/timers.h"
+#include "src/timer0.h"
+#include "src/timer1.h"
 #include "src/uarts.h"
 #include "src/postinput_crc.h"
 
@@ -39,8 +40,11 @@ int main(void) {
 
 	InitRTC();
 	InitDisplay();
+
     InitUARTs(ui32SysClock);
-    InitTimers(ui32SysClock);
+    InitTimer0(ui32SysClock);
+    InitTimer1(ui32SysClock);
+
     IntMasterEnable();
 
     while(1) {
