@@ -2,9 +2,10 @@
 #define __MAIN
 
 
-#include <stdint.h>
-#include <stdbool.h>
-#include "system.h"
+#include        <stdint.h>
+#include        <stdbool.h>
+#include        "system.h"
+#include        "main_keyboard.h"
 
 
 typedef unsigned char   uchar;
@@ -41,6 +42,15 @@ typedef enum
   ANS_TIMEOUT           =  1,           // отработка таймаута
   ANS_ANSWER            =  2            // передача команды
 } answer;
+
+
+// тип 'сострежим работы прибора'
+typedef enum
+{
+  GLB_PROGRAM           = 0,
+  GLB_WORK              = 1,
+  GLB_REPROGRAM         = 2
+} global;
 
 
 // тип 'режим работы порта'
