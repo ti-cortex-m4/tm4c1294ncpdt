@@ -1,4 +1,5 @@
 счетчики на вызов прерываний
+__error__
 ASSERT(ibPort > PORTS)
 FaultISR
 NmiSR
