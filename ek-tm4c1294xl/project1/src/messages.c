@@ -10,7 +10,7 @@ MESSAGES.C
 
 
 //                                         0123456789ABCDEF
-char           const    szClear[]       = "                ",
+char const              szClear[]       = "                ",
                         szWarning[]     = "Внимание: ошибка",
                         szError[]       = "    ошибка !    ",
                         szOK[]          = "       ОК       ",
@@ -64,19 +64,6 @@ char           const    szClear[]       = "                ",
                         szTops[]        = "в пиковых зонах ",
                         szMid[]         = "   в полупик    ",
                         szBottom[]      = "в ночной провал ",
-                        szBadFlash[]    = "  фл~ш-памяти ! ",
-                        szBadCODE[]     = "сегмента CODE ! ",
-                        szBadXDATA[]    = "сегмента XDATA !",
-                        szBadRTC1[]     = "доступа к RTC ! ",
-                        szBadRTC2[]     = "показаний RTC ! ",
-                        szIsResetWDT[]  = "  сброс по WDT  ",
-                        szDirectEscU[]  = "Опрос данных: 1 ",
-                        szDirectEscV[]  = "Опрос данных: 2 ",
-                        szDirectEscS[]  = "Опрос данных: 3 ",
-                        szDirectParam[] = "Параметры...    ",
-                        szGraphic[]     = " График опроса  ",
-                        szBlocking[]    = "   запрещен     ",
-                        szEmpty[]       = "      нет       ",
                         szYes[]         = "да ",
                         szNo[]          = "нет";
 
