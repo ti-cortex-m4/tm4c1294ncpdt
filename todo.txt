@@ -1,0 +1,5 @@
+счетчики на вызов прерываний
+ASSERT(ibPort > PORTS)
+FaultISR
+NmiSR
+code -> const

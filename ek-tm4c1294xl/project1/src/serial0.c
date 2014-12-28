@@ -12,12 +12,13 @@
 #include 		"ports.h"
 #include 		"bulk.h"
 #include 		"crc-16.h"
+#include 		"uarts.h"
 
 
 
 static const uchar 		szPacketA[bPACKET_HEADER] = {0xCA, 0xE0, 0xEB, 0xFE, 0xEC, 0xED, 0xFB, 0x20};
 
-static const uchar 		szPacketB[1] = { 0x1A };
+//static const uchar 		szPacketB[1] = { 0x1A };
 
 
 
@@ -34,13 +35,13 @@ void    OutputMode0(void) {
 
 
 
-bool    GetRI0(void) {
-  return UARTCharsAvail(UART0_BASE);
+bool    GetRI0(uint32_t ui32Status) {
+  return ((ui32Status & 0x00000010) != 0) || ((ui32Status & 0x00000040) != 0);
 }
 
 
-bool    GetTI0(void) {
-  return UARTSpaceAvail(UART0_BASE);
+bool    GetTI0(uint32_t ui32Status) {
+  return ((ui32Status & 0x00000020) != 0) || (ui32Status == 0);
 }
 
 
@@ -62,6 +63,7 @@ uint32_t ui32Status;
   ui32Status = UARTIntStatus(UART0_BASE, true);
   UARTIntClear(UART0_BASE, ui32Status);
 
+/*
   // ведущий режим
   if (((mppoPorts[0].enStream == STR_MASTERDIRECT) ||
        (mppoPorts[0].enStream == STR_MASTERMODEM)) &&
@@ -160,12 +162,11 @@ uint32_t ui32Status;
       }
     }
   }
-
+*/
 
   // ведомый режим
-  else
   {
-    if (GetRI0())
+    if (GetRI0(ui32Status))
     {
       bT = InByte0();
 
@@ -300,7 +301,7 @@ uint32_t ui32Status;
       }
     }
 
-    if (GetTI0())
+    if (GetTI0(ui32Status))
     {
       if (mpSerial[0] == SER_OUTPUT_SLAVE)
       {
