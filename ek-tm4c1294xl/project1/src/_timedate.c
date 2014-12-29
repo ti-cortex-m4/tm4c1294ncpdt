@@ -8,7 +8,7 @@ _TIMEDATE.C
 #include        "memory_program.h"
 #include        "keyboard.h"
 #include        "display.h"
-#include        "slides.h"
+#include        "slide.h"
 #include        "delay.h"
 #include        "beep.h"
 #include        "rtc.h"
