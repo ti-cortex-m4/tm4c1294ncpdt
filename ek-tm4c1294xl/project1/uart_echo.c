@@ -17,7 +17,9 @@
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
 #include "src/rtc.h"
+#include "src/keyboard.h"
 #include "src/display.h"
+#include "src/slide.h"
 #include "src/timer0.h"
 #include "src/timer1.h"
 #include "src/uarts.h"
@@ -39,6 +41,8 @@ int main(void) {
                                              SYSCTL_CFG_VCO_480), 120000000);
 
 	InitRTC();
+	InitKeyboard();
+	InitSlide();
 	InitDisplay();
 
     InitUARTs(ui32SysClock);
@@ -48,6 +52,7 @@ int main(void) {
     IntMasterEnable();
 
     while(1) {
+    	Keyboard();
     	PostinputCRC_Full();
     }
 }
