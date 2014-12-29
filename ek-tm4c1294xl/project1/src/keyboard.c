@@ -59,7 +59,7 @@ void    InitKeyboard(void)
   boSetTime     = boFalse;
   boSetDate     = boFalse;
 
-  if (GetLabelXDATA() == 1)
+  if (GetLabelXDATA() == true)
     enGlobal = GLB_WORK;
   else
     enGlobal = GLB_PROGRAM;
@@ -177,8 +177,8 @@ uchar   i;
   }
 
   // факт нажатия на клавиатуру
-  if (fKey == 0) return;
-  fKey = 0;
+  if (fKey == false) return;
+  fKey = false;
 
   for (i=0; i<sizeof(mpbKeys); i++)
     if (bKey == mpbKeys[i]) break;
