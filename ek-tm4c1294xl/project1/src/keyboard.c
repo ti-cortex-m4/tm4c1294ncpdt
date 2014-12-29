@@ -13,6 +13,8 @@ KEYBOARD.C
 #include        "delay.h"
 #include        "programs.h"
 #include        "_timedate.h"
+#include        "keyboard/key_decret.h"
+#include        "keyboard/key_season.h"
 
 
 
@@ -286,11 +288,11 @@ uchar   i;
 //
 //      case bSET_LOGICAL:        key_SetChar();          break;
 //      case bSET_PRIVATE:        key_SetInt();           break;
-//
-//      case bSET_DECRET:         key_SetDecret();        break;
-//      case bSET_WINTER:
-//      case bSET_SUMMER:         key_SetSeason();        break;
-//
+
+      case bSET_DECRET:         key_SetDecret();        break;
+      case bSET_WINTER:
+      case bSET_SUMMER:         key_SetSeason();        break;
+
 //      case bGET_ANALYSIS1:      key_Analysis1();        break;
 
       default:                  NoProgram();            break;
@@ -314,11 +316,11 @@ uchar   i;
 //
 //      case bSET_LOGICAL:        key_SetChar();          break;
 //      case bSET_PRIVATE:        key_SetInt();           break;
-//
-//      case bSET_DECRET:         key_SetDecret();        break;
-//      case bSET_WINTER:
-//      case bSET_SUMMER:         key_SetSeason();        break;
-//
+
+      case bSET_DECRET:         key_SetDecret();        break;
+      case bSET_WINTER:
+      case bSET_SUMMER:         key_SetSeason();        break;
+
 //      case bGET_ANALYSIS1:      key_Analysis1();        break;
 
       default:                  NoProgram();            break;
@@ -345,11 +347,11 @@ uchar   i;
 //
 //      case bSET_LOGICAL:        key_SetChar();          break;
 //      case bSET_PRIVATE:        key_SetInt();           break;
-//
-//      case bSET_DECRET:         key_SetDecret();        break;
-//      case bSET_WINTER:
-//      case bSET_SUMMER:         key_SetSeason();        break;
-//
+
+      case bSET_DECRET:         key_SetDecret();        break;
+      case bSET_WINTER:
+      case bSET_SUMMER:         key_SetSeason();        break;
+
 //      case bGET_ANALYSIS1:      key_Analysis1();        break;
 
       default:                  NoProgram();            break;

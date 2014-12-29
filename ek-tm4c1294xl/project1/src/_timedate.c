@@ -18,16 +18,13 @@ _TIMEDATE.C
 
 
 //                                         0123456789ABCDEF
-char const              szMaskTime[]    = "    __ __ __    ",
+static char const       szMaskTime[]    = "    __ __ __    ",
                         szMaskDate[]    = "    __ __ __    ",
                         szTime[]        = "“екущее врем€   ",
-                        szDate[]        = "“екуща€ дата    ",
-                        szStartDate[]   = "ƒата запуска    ",
-                        szStartTime[]   = "¬рем€ запуска   ";
+                        szDate[]        = "“екуща€ дата    ";
 
 
 
-// установка и просмотр текущего времени
 void    key_SetCurrTime(void)
 {
   if (bKey == bKEY_ENTER)
@@ -116,7 +113,6 @@ void    key_SetCurrTime(void)
 
 
 
-// установка и просмотр текущей даты
 void    key_SetCurrDate(void)
 {
   if (bKey == bKEY_ENTER)
@@ -143,8 +139,6 @@ void    key_SetCurrDate(void)
         SetCurrDate();
 
         boSetDate = boTrue;
-
-        // рассчЄт дат перехода на сезонное врем€
         MakeDecret();
       }
       else
@@ -221,7 +215,6 @@ void    key_SetCurrDate(void)
 
 
 
-// обновление текущего времени раз в секунду
 void   auto_GetCurrTime(void)
 {
   if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
@@ -239,7 +232,6 @@ void   auto_GetCurrTime(void)
 
 
 
-// обновление текущей даты раз в секунду
 void   auto_GetCurrDate(void)
 {
   if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
