@@ -29,6 +29,9 @@ extern  uchar                   ibX, ibY, ibZ;
 void    InitKeyboard(void);
 void    ResetKeyboard(void);
 
+void    ShowTimeNow(void);
+void    NoShowTime(bool  fClear);
+
 void    NoProgram(void);
 void    BlockProgram(uchar  bA);
 void    BlockProgramExt(uchar  bA);
@@ -37,3 +40,4 @@ void    NeedProgram(uchar  bA);
 void    NeedPrograms(uchar  bA, uchar  bB);
 
 void    Keyboard(void);
+
