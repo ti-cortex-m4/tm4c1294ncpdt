@@ -1,42 +1,33 @@
 /*------------------------------------------------------------------------------
 KEYBOARD.H
 
- Главная функция обработки нажатий клавиатуры
+
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
-/*
-#include        "timer0.h"
-#include        "lines.h"
-*/
+#include        "programs.h"
+
 
 extern  uchar                   bKey;
 extern  bool                    fKey;
-/*
-extern  uchar           code    mpbKeys[14];
 
-extern  key             data    enKeyboard;
+extern  key                     enKeyboard;
 
-extern  global          data    enGlobal;
+extern  global                  enGlobal;
 
-extern  uchar           data    ibX,ibY,ibZ;
+extern  uchar                   bProgram;
+extern  uint                    wProgram;
 
-extern  uchar           idata   ibXmin,ibXmax,
-                                ibYmin,ibYmax;
+extern  uchar                   cbShowTime;
 
-extern  uint            idata   iwA,iwAmin,iwAmax;
+extern  time                    tiKey;
 
-extern  uchar           data    bProgram;
-
-extern  bit                     fUpdateA,
-                                fUpdateB;
+extern  uchar                   ibX, ibY, ibZ;
 
 
 
 void    InitKeyboard(void);
 void    ResetKeyboard(void);
-
-void    Keyboard(void);
 
 void    NoProgram(void);
 void    BlockProgram(uchar  bA);
@@ -45,6 +36,4 @@ void    BlockPrograms(uchar  bA, uchar  bB);
 void    NeedProgram(uchar  bA);
 void    NeedPrograms(uchar  bA, uchar  bB);
 
-void    ShowLogin(void);
-uchar   GetMaximum(void);
-*/
+void    Keyboard(void);
