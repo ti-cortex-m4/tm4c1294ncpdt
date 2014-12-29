@@ -20,6 +20,10 @@ PROGRAMS.H
 
 
 // все режимы
+#define bSET_DECRET                 123
+#define bSET_SUMMER                 124
+#define bSET_WINTER                 125
+
 #define bGET_ANALYSIS1              220
 
 
