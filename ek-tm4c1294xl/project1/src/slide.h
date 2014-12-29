@@ -14,4 +14,4 @@ void    InitSlide(void);
 
 void    LoadSlide(char  *ppszT[]);
 void    ShowSlide(char  szT[]);
-void    NextSlide()
+void    NextSlide(void);

@@ -58,8 +58,8 @@ void    ShowSlide(char  szT[])
 }
 
 
-void    NextSlide() {
-  if (fSlide == 1)
+void    NextSlide(void) {
+  if (fSlide == true)
   {
     if (cwSlide == 0)
     {
