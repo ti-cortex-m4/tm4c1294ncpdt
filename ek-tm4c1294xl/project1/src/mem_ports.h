@@ -31,3 +31,5 @@ extern	uchar               bInBuff0,
                             bInBuffA;
 
 extern	uchar               bQuery;
+
+extern	uchar              ibPortActive;

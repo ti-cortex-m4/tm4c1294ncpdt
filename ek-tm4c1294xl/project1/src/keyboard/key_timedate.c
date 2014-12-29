@@ -18,7 +18,7 @@ KEY_TIMEDATE.C
 
 
 //                                         0123456789ABCDEF
-static char const       szMaskTime[]    = "    __ __ __    ",
+char const              szMaskTime[]    = "    __ __ __    ",
                         szMaskDate[]    = "    __ __ __    ",
                         szTime[]        = "“екущее врем€   ",
                         szDate[]        = "“екуща€ дата    ";
@@ -244,36 +244,5 @@ void   auto_GetCurrDate(void)
       tiAlt = *PGetCurrTimeDate();
       ShowDate();
     }
-  }
-}
-
-
-
-// включение просмотра текущего времени при бездействии пользовател€
-void    ShowTimeNow(void)
-{
-  bProgram = bGET_CURRTIME;
-  fSlide = 0; 
-
-  enKeyboard = KBD_POSTENTER;
-  ibZ = 60;
-
-  ShowHi(szTime);     
-  Clear();
-}
-
-
-
-// выключение просмотра текущего времени
-void    NoShowTime(bool  fClear)
-{
-  cbShowTime = 0;
-  fSlide = false;
-
-  if (fClear == true)
-  {
-    enKeyboard = KBD_BEGIN;
-    bProgram = 0;
-    wProgram = 0;
   }
 }

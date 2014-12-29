@@ -18,6 +18,11 @@ typedef unsigned long   ulong;
 typedef signed long     slong;
 
 
+// тип 'строка сообщения'
+typedef uchar           message[bDISPLAY+1];
+
+
+// тип 'время и дата'
 typedef struct
 {
   uchar         bSecond;

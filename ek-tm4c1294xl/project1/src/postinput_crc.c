@@ -38,6 +38,20 @@ void    Common(void  *pbData, uint  wSize) {
 
 
 void    ShowCommandCRC(uchar  bState) {
+  if (bProgram == bGET_ANALYSIS1)
+  {
+#ifdef  MODBUS
+    sprintf(szHi,"Порт %u: Mod%03u %u",ibPort+1,InBuff(3),bState);
+#else
+    if (InBuff(4) == 0xFF)
+      sprintf(szHi,"Порт %u: CFF%03u %u",ibPort+1,InBuff(5),bState);
+    else
+      sprintf(szHi,"Порт %u: CRC%03u %u",ibPort+1,InBuff(4),bState);
+#endif
+
+    ibPortActive = ibPort;
+    NoShowTime(0);
+  }
 }
 
 

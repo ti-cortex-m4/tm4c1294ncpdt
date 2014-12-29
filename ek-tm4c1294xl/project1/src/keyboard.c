@@ -15,6 +15,7 @@ KEYBOARD.C
 #include        "keyboard/key_timedate.h"
 #include        "keyboard/key_decret.h"
 #include        "keyboard/key_season.h"
+#include        "keyboard/key_analysis.h"
 
 
 
@@ -65,6 +66,36 @@ void    InitKeyboard(void)
     enGlobal = GLB_WORK;
   else
     enGlobal = GLB_PROGRAM;
+}
+
+
+
+// включение просмотра текущего времени при бездействии пользователя
+void    ShowTimeNow(void)
+{
+  bProgram = bGET_CURRTIME;
+  fSlide = 0;
+
+  enKeyboard = KBD_POSTENTER;
+  ibZ = 60;
+
+  ShowHi(szTime);
+  Clear();
+}
+
+
+// выключение просмотра текущего времени
+void    NoShowTime(bool  fClear)
+{
+  cbShowTime = 0;
+  fSlide = false;
+
+  if (fClear == true)
+  {
+    enKeyboard = KBD_BEGIN;
+    bProgram = 0;
+    wProgram = 0;
+  }
 }
 
 
@@ -152,7 +183,7 @@ uchar   i;
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
-//      case bGET_ANALYSIS1:      auto_Analysis1();       break;
+      case bGET_ANALYSIS1:      auto_Analysis1();       break;
     }
   }
 
@@ -163,7 +194,7 @@ uchar   i;
       case bGET_CURRTIME:       auto_GetCurrTime();     break;
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
 
-//      case bGET_ANALYSIS1:      auto_Analysis1();       break;
+      case bGET_ANALYSIS1:      auto_Analysis1();       break;
     }                        
   }
 
@@ -174,7 +205,7 @@ uchar   i;
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
-//      case bGET_ANALYSIS1:      auto_Analysis1();       break;
+      case bGET_ANALYSIS1:      auto_Analysis1();       break;
     }
   }
 
@@ -293,7 +324,7 @@ uchar   i;
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
-//      case bGET_ANALYSIS1:      key_Analysis1();        break;
+      case bGET_ANALYSIS1:      key_Analysis1();        break;
 
       default:                  NoProgram();            break;
     }
@@ -321,7 +352,7 @@ uchar   i;
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
-//      case bGET_ANALYSIS1:      key_Analysis1();        break;
+      case bGET_ANALYSIS1:      key_Analysis1();        break;
 
       default:                  NoProgram();            break;
     }
@@ -352,7 +383,7 @@ uchar   i;
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
-//      case bGET_ANALYSIS1:      key_Analysis1();        break;
+      case bGET_ANALYSIS1:      key_Analysis1();        break;
 
       default:                  NoProgram();            break;
     }

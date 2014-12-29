@@ -44,3 +44,6 @@ uchar                   bInBuff0,
 
 // текущий запрос
 uchar                   bQuery;
+
+// анализируемый порт
+uchar                   ibPortActive;
