@@ -12,7 +12,7 @@ KEYBOARD.C
 #include        "label.h"
 #include        "delay.h"
 #include        "programs.h"
-#include        "_timedate.h"
+#include        "keyboard/key_timedate.h"
 #include        "keyboard/key_decret.h"
 #include        "keyboard/key_season.h"
 

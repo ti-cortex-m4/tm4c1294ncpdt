@@ -1,19 +1,19 @@
 /*------------------------------------------------------------------------------
-_TIMEDATE.C
+KEY_TIMEDATE.C
 
-
+ Установка и просмотр текущего времени и даты
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "memory_program.h"
-#include        "keyboard.h"
-#include        "display.h"
-#include        "slide.h"
-#include        "delay.h"
-#include        "beep.h"
-#include        "rtc.h"
-#include        "timedate.h"
-#include        "decret.h"
+#include        "../main.h"
+#include        "../memory_program.h"
+#include        "../keyboard.h"
+#include        "../display.h"
+#include        "../slide.h"
+#include        "../delay.h"
+#include        "../beep.h"
+#include        "../rtc.h"
+#include        "../timedate.h"
+#include        "../decret.h"
 
 
 
