@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-OLDTARIFFS.С
+OLDTARIFFS.Ñ
 
- Подпрограммы управления тарифами (старый вариант)
+ Ïîäïðîãðàììû óïðàâëåíèÿ òàðèôàìè (ñòàðûé âàðèàíò)
 ------------------------------------------------------------------------------*/
 
 #include        <string.h>
@@ -14,12 +14,11 @@ OLDTARIFFS.С
 
 
 
-// внутренняя переменная
 bool                    fEnergy;
 
 
 
-// заменяет во всех изломах переменной zoAlt один тариф на другой
+// çàìåíÿåò âî âñåõ èçëîìàõ ïåðåìåííîé zoAlt îäèí òàðèô íà äðóãîé
 void    ReplaceZone(uchar  ibOld, uchar  ibNew)
 {
 uchar  i;
@@ -37,62 +36,62 @@ uchar  i;
 
 
 
-// записывает в режим ibAltMode изменённый суточный тарифный график из режима 0 (будни)
+// çàïèñûâàåò â ðåæèì ibAltMode èçìåí¸ííûé ñóòî÷íûé òàðèôíûé ãðàôèê èç ðåæèìà 0 (áóäíè)
 void    ReplaceMode(uchar  ibOld, uchar  ibNew)
 {
-  if (fEnergy == false)
+  if (fEnergy == 0)
   {
-    // читаем суточный тарифный график из режима 0 (будни)
+    // ÷èòàåì ñóòî÷íûé òàðèôíûé ãðàôèê èç ðåæèìà 0 (áóäíè)
     ibMode = 0;
     zoAlt = *PGetZonePowMonthMode();
 
-    // заменяем один тариф на другой
+    // çàìåíÿåì îäèí òàðèô íà äðóãîé
     ReplaceZone(ibOld,ibNew);                      
 
-    // подготавливаем запись в режим ibAltMode
+    // ïîäãîòàâëèâàåì çàïèñü â ðåæèì ibAltMode
     ibMode = ibAltMode;
     boAlt = boTrue;
 
-    // записываем изменённый суточный тарифный график
+    // çàïèñûâàåì èçìåí¸ííûé ñóòî÷íûé òàðèôíûé ãðàôèê
     SetZonePowMonthMode();     
     SetBoolPowMonthMode();
   }
   else
   {
-    // читаем суточный тарифный график из режима 0 (будни)
+    // ÷èòàåì ñóòî÷íûé òàðèôíûé ãðàôèê èç ðåæèìà 0 (áóäíè)
     ibMode = 0;
     zoAlt = *PGetZoneEngMonthMode();
 
-    // заменяем один тариф на другой
+    // çàìåíÿåì îäèí òàðèô íà äðóãîé
     ReplaceZone(ibOld,ibNew);
 
-    // подготавливаем запись в режим ibAltMode
+    // ïîäãîòàâëèâàåì çàïèñü â ðåæèì ibAltMode
     ibMode = ibAltMode;
     boAlt = boTrue;
 
-    // записываем изменённый суточный тарифный график
+    // çàïèñûâàåì èçìåí¸ííûé ñóòî÷íûé òàðèôíûé ãðàôèê
     SetZoneEngMonthMode();
     SetBoolEngMonthMode();
   }
 }
-// требует предварительной установки переменных ibMonth,ibAltMode
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííûõ ibMonth,ibAltMode
 
 
 
-// поддержка старого варианта обратотки тарифов в нерабочие дни
+// ïîääåðæêà ñòàðîãî âàðèàíòà îáðàòîòêè òàðèôîâ â íåðàáî÷èå äíè
 void    MakeOldMode(void)
 {
   switch (bOldMode)
   {     
     case 0:         
-      ibAltMode = 1;    // для суббот
-      ReplaceMode(0,0); // одинаковые тарифы в рабочие и нерабочие дни
+      ibAltMode = 1;    // äëÿ ñóááîò
+      ReplaceMode(0,0); // îäèíàêîâûå òàðèôû â ðàáî÷èå è íåðàáî÷èå äíè
       ReplaceMode(1,1);
       ReplaceMode(2,2);
       ReplaceMode(3,3);
 
-      ibAltMode = 2;    // для выходных дней
-      ReplaceMode(0,0); // одинаковые тарифы в рабочие и нерабочие дни
+      ibAltMode = 2;    // äëÿ âûõîäíûõ äíåé
+      ReplaceMode(0,0); // îäèíàêîâûå òàðèôû â ðàáî÷èå è íåðàáî÷èå äíè
       ReplaceMode(1,1);
       ReplaceMode(2,2);
       ReplaceMode(3,3);
@@ -100,109 +99,107 @@ void    MakeOldMode(void)
     
     case 1:
     case 3:          
-      ibAltMode = 1;    // для суббот
-      ReplaceMode(0,1); // в суботние и выходные дни по дневному тарифу
+      ibAltMode = 1;    // äëÿ ñóááîò
+      ReplaceMode(0,1); // â ñóáîòíèå è âûõîäíûå äíè ïî äíåâíîìó òàðèôó
       ReplaceMode(1,1);
       ReplaceMode(2,1);
       ReplaceMode(3,1);
 
-      ibAltMode = 2;    // для выходных дней
-      ReplaceMode(0,1); // в суботние и выходные дни по дневному тарифу
+      ibAltMode = 2;    // äëÿ âûõîäíûõ äíåé
+      ReplaceMode(0,1); // â ñóáîòíèå è âûõîäíûå äíè ïî äíåâíîìó òàðèôó
       ReplaceMode(1,1);
       ReplaceMode(2,1);
       ReplaceMode(3,1);
       break;
     
     case 2:          
-      ibAltMode = 1;    // для суббот
-      ReplaceMode(0,0); // в суботние и выходные дни по ночному тарифу
+      ibAltMode = 1;    // äëÿ ñóááîò
+      ReplaceMode(0,0); // â ñóáîòíèå è âûõîäíûå äíè ïî íî÷íîìó òàðèôó
       ReplaceMode(1,0);
       ReplaceMode(2,0);
       ReplaceMode(3,0);
 
-      ibAltMode = 2;    // для выходных дней
-      ReplaceMode(0,0); // в суботние и выходные дни по ночному тарифу
+      ibAltMode = 2;    // äëÿ âûõîäíûõ äíåé
+      ReplaceMode(0,0); // â ñóáîòíèå è âûõîäíûå äíè ïî íî÷íîìó òàðèôó
       ReplaceMode(1,0);
       ReplaceMode(2,0);
       ReplaceMode(3,0);
       break;
 
     case 4:          
-      ibAltMode = 1;    // для суббот
+      ibAltMode = 1;    // äëÿ ñóááîò
       ReplaceMode(0,0);       
-      ReplaceMode(1,0); // дневной тариф заменяется на ночной тариф
-      ReplaceMode(2,1); // утренний и вечерний тарифы заменяются на дневной тариф
+      ReplaceMode(1,0); // äíåâíîé òàðèô çàìåíÿåòñÿ íà íî÷íîé òàðèô
+      ReplaceMode(2,1); // óòðåííèé è âå÷åðíèé òàðèôû çàìåíÿþòñÿ íà äíåâíîé òàðèô
       ReplaceMode(3,1);
 
-      ibAltMode = 2;    // для выходных дней
+      ibAltMode = 2;    // äëÿ âûõîäíûõ äíåé
       ReplaceMode(0,0);       
-      ReplaceMode(1,0); // дневной тариф заменяется на ночной тариф
-      ReplaceMode(2,1); // утренний и вечерний тарифы заменяются на дневной тариф
+      ReplaceMode(1,0); // äíåâíîé òàðèô çàìåíÿåòñÿ íà íî÷íîé òàðèô
+      ReplaceMode(2,1); // óòðåííèé è âå÷åðíèé òàðèôû çàìåíÿþòñÿ íà äíåâíîé òàðèô
       ReplaceMode(3,1);
       break;
 
     case 5:          
-      ibAltMode = 1;    // для суббот
+      ibAltMode = 1;    // äëÿ ñóááîò
       ReplaceMode(0,0);       
       ReplaceMode(1,1);       
-      ReplaceMode(2,1); // утренний и вечерний тарифы заменяются на дневной тариф
+      ReplaceMode(2,1); // óòðåííèé è âå÷åðíèé òàðèôû çàìåíÿþòñÿ íà äíåâíîé òàðèô
       ReplaceMode(3,1);
 
-      ibAltMode = 2;    // для выходных дней
+      ibAltMode = 2;    // äëÿ âûõîäíûõ äíåé
       ReplaceMode(0,0);       
-      ReplaceMode(1,0); // дневной тариф заменяется на ночной тариф
-      ReplaceMode(2,1); // утренний и вечерний тарифы заменяются на дневной тариф
+      ReplaceMode(1,0); // äíåâíîé òàðèô çàìåíÿåòñÿ íà íî÷íîé òàðèô
+      ReplaceMode(2,1); // óòðåííèé è âå÷åðíèé òàðèôû çàìåíÿþòñÿ íà äíåâíîé òàðèô
       ReplaceMode(3,1);
       break;
   }
 }
-// требует предварительной установки переменных ibMonth,fEnergy
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííûõ ibMonth,fEnergy
 
 
 
-// изменение старого варианта обратотки тарифов в нерабочие дни
+// èçìåíåíèå ñòàðîãî âàðèàíòà îáðàòîòêè òàðèôîâ â íåðàáî÷èå äíè
 void    MakeAllOldModes(uchar  bT)
 {
   bOldMode = bT;
 
   for (ibMonth=0; ibMonth<12; ibMonth++)
   {
-    fEnergy = true; MakeOldMode();
-    fEnergy = false; MakeOldMode();
+    fEnergy = 1; MakeOldMode();
+    fEnergy = 0; MakeOldMode();
   }
 }
 
 
 
-// запись суточного тарифного графика на несколько месяцев (для энергии)
+// çàïèñü ñóòî÷íîãî òàðèôíîãî ãðàôèêà íà íåñêîëüêî ìåñÿöåâ (äëÿ ýíåðãèè)
 void    SetCharEngMonths(uchar  ibBeg, uchar  ibEnd)
 {
   ibMode = 0;
   SetZonesEngMonthsMode(ibBeg,ibEnd);
 
-  fEnergy = true;
+  fEnergy = 1;
   for (ibMonth=ibBeg; ibMonth<=ibEnd; ibMonth++)
   {
     MakeOldMode();
     mpchEngMonth[ibMonth] = chOldMode;
   }
 }
-// требует предварительной установки переменных zoKey,chOldMode
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííûõ zoKey,chOldMode
 
 
-// запись суточного тарифного графика на несколько месяцев (для мощности)
+// çàïèñü ñóòî÷íîãî òàðèôíîãî ãðàôèêà íà íåñêîëüêî ìåñÿöåâ (äëÿ ìîùíîñòè)
 void    SetCharPowMonths(uchar  ibBeg, uchar  ibEnd)
 {
   ibMode = 0;
   SetZonesPowMonthsMode(ibBeg,ibEnd);
 
-  fEnergy = false;
+  fEnergy = 0;
   for (ibMonth=ibBeg; ibMonth<=ibEnd; ibMonth++)
   {
     MakeOldMode();
     mpchPowMonth[ibMonth] = chOldMode;
   }
 }
-// требует предварительной установки переменных zoKey,chOldMode
-
-
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííûõ zoKey,chOldMode

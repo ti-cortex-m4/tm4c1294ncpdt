@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 TARIFFS.C
 
- Подпрограммы управления тарифами
+ Ïîäïðîãðàììû óïðàâëåíèÿ òàðèôàìè
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -9,71 +9,42 @@ TARIFFS.C
 #include        "../display.h"
 #include        "../delay.h"
 #include        "../access.h"
+#include        "../rtc.h"
+#include        "../timedate.h"
 #include        "zones.h"
 #include        "oldtariffs.h"
 #include        "relaxs.h"
-#include        "../rtc.h"
-#include        "../timedate.h"
 #include        "gaps.h"
 
 
-/*
-//                                       0123456789ABCDEF        
-messages        code    msgPeriods[12+4+1] = 
-                                      { " январь         ",
-                                        " февраль        ",
-                                        " март           ",
-                                        " апрель         ",
-                                        " май            ",
-                                        " июнь           ",
-                                        " июль           ",
-                                        " август         ",
-                                        " сентябрь       ",
-                                        " октябрь        ",
-                                        " ноябрь         ",
-                                        " декабрь        ",
-                                        " квартал 1      ",
-                                        " квартал 2      ",
-                                        " квартал 3      ",
-                                        " квартал 4      ",
-                                        " год            " };
 
-//                                       0123456789ABCDEF        
-messages        code    msgOnTariffs[bTARIFFS] = 
-                                       {"   по тарифу 1  ",
-                                        "   по тарифу 2  ",
-                                        "   по тарифу 3  ",
-                                        "   по тарифу 4  "};
-*/
-
-
-// текущие индексы по массивам
+// òåêóùèå èíäåêñû ïî ìàññèâàì
 uchar                   ibMonth,ibMode;
 
 
 
-// записывает факт задания суточного тарифного графика (для энергии)
+// çàïèñûâàåò ôàêò çàäàíèÿ ñóòî÷íîãî òàðèôíîãî ãðàôèêà (äëÿ ýíåðãèè)
 void    SetBoolEngMonthMode(void)
 {
   mpboEngMonthMode[ibMonth][ibMode] = boAlt;
 }
 
 /*
-// читает факт задания суточного тарифного графика (для энергии)
+// ÷èòàåò ôàêò çàäàíèÿ ñóòî÷íîãî òàðèôíîãî ãðàôèêà (äëÿ ýíåðãèè)
 boolean GetBoolEngMonthMode(void)
 {
   return( mpboEngMonthMode[ibMonth][ibMode] );
 }
 */
 
-// записывает факт задания суточного тарифного графика (для мощности)
+// çàïèñûâàåò ôàêò çàäàíèÿ ñóòî÷íîãî òàðèôíîãî ãðàôèêà (äëÿ ìîùíîñòè)
 void    SetBoolPowMonthMode(void)
 {
   mpboPowMonthMode[ibMonth][ibMode] = boAlt;
 }
 
 /*
-// читает факт задания суточного тарифного графика (для мощности)
+// ÷èòàåò ôàêò çàäàíèÿ ñóòî÷íîãî òàðèôíîãî ãðàôèêà (äëÿ ìîùíîñòè)
 boolean GetBoolPowMonthMode(void)
 {
   return( mpboPowMonthMode[ibMonth][ibMode] );
@@ -81,28 +52,28 @@ boolean GetBoolPowMonthMode(void)
 */
 
 
-// записывает суточный тарифный график (для энергии)
+// çàïèñûâàåò ñóòî÷íûé òàðèôíûé ãðàôèê (äëÿ ýíåðãèè)
 void    SetZoneEngMonthMode(void)
 {
   mpzoEngMonthMode[ibMonth][ibMode] = zoAlt;
 }
 
 
-// читает суточный тарифный график (для энергии)
+// ÷èòàåò ñóòî÷íûé òàðèôíûé ãðàôèê (äëÿ ýíåðãèè)
 zones  *PGetZoneEngMonthMode(void)
 {
   return( &mpzoEngMonthMode[ibMonth][ibMode] );
 }
 
 
-// записывает суточный тарифный график (для мощности)
+// çàïèñûâàåò ñóòî÷íûé òàðèôíûé ãðàôèê (äëÿ ìîùíîñòè)
 void    SetZonePowMonthMode(void)
 {
   mpzoPowMonthMode[ibMonth][ibMode] = zoAlt;
 }
 
 
-// читает суточный тарифный график (для мощности)
+// ÷èòàåò ñóòî÷íûé òàðèôíûé ãðàôèê (äëÿ ìîùíîñòè)
 zones  *PGetZonePowMonthMode(void)
 {
   return( &mpzoPowMonthMode[ibMonth][ibMode] );
@@ -110,7 +81,7 @@ zones  *PGetZonePowMonthMode(void)
 
 
 
-// записывает суточный тарифный график на несколько месяцев (для энергии)
+// çàïèñûâàåò ñóòî÷íûé òàðèôíûé ãðàôèê íà íåñêîëüêî ìåñÿöåâ (äëÿ ýíåðãèè)
 void    SetZonesEngMonthsMode(uchar  ibBeg, uchar  ibEnd)
 {
   boAlt = boTrue;
@@ -122,10 +93,10 @@ void    SetZonesEngMonthsMode(uchar  ibBeg, uchar  ibEnd)
     SetBoolEngMonthMode();
   }
 }
-// требует предварительной установки переменных ibMode,zoKey
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííûõ ibMode,zoKey
 
 
-// записывает суточный тарифный график на несколько месяцев (для мощности)
+// çàïèñûâàåò ñóòî÷íûé òàðèôíûé ãðàôèê íà íåñêîëüêî ìåñÿöåâ (äëÿ ìîùíîñòè)
 void    SetZonesPowMonthsMode(uchar  ibBeg, uchar  ibEnd)
 {
   boAlt = boTrue;
@@ -137,7 +108,7 @@ void    SetZonesPowMonthsMode(uchar  ibBeg, uchar  ibEnd)
     SetBoolPowMonthMode();
   }
 }
-// требует предварительной установки переменных ibMode,zoKey
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííûõ ibMode,zoKey
 
 
 
@@ -167,16 +138,16 @@ void    SetTariffsDefault(void)
 
 
 
-// сброс настроек по умолчанию
+// ñáðîñ íàñòðîåê ïî óìîë÷àíèþ
 void    ResetTariffs(void)
 {
-  // совмещённые тарифные графики для мщности и энергии
+  // ñîâìåù¸ííûå òàðèôíûå ãðàôèêè äëÿ ìùíîñòè è ýíåðãèè
   boPublicCurr = boFalse;
 
-  // старый вариант обработки тарифов
+  // ñòàðûé âàðèàíò îáðàáîòêè òàðèôîâ
   boOldTariffs = boTrue;
 
-  // правило обработки тарифов в выходные дни (старый вариант)
+  // ïðàâèëî îáðàáîòêè òàðèôîâ â âûõîäíûå äíè (ñòàðûé âàðèàíò)
   bOldMode = 0;
 
   boAlt = boFalse;
@@ -197,7 +168,7 @@ void    ResetTariffs(void)
 
 
 
-// рассчитывает массив индексов тарифов для каждого получаса текущих суток
+// ðàññ÷èòûâàåò ìàññèâ èíäåêñîâ òàðèôîâ äëÿ êàæäîãî ïîëó÷àñà òåêóùèõ ñóòîê
 void    MakeTariff(uchar  mpTariff[48])
 {
 uchar   i,j;
@@ -216,11 +187,11 @@ uchar   i,j;
     }
   }
 }
-// требует предварительной установки переменных zoAlt
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííûõ zoAlt
 
 
 
-// возвращает тип текущих суток относительнос приска праздников
+// âîçâðàùàåò òèï òåêóùèõ ñóòîê îòíîñèòåëüíîñ ïðèñêà ïðàçäíèêîâ
 uchar   RelaxIndex(void)
 {
 uchar i;
@@ -235,11 +206,11 @@ uchar i;
 
   return 0;
 }
-// требует предварительной установки переменных tiAlt
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííûõ tiAlt
 
 
 
-// рассчитывает массив индексов тарифов для каждого получаса текущих суток (для мощности и энергии)
+// ðàññ÷èòûâàåò ìàññèâ èíäåêñîâ òàðèôîâ äëÿ êàæäîãî ïîëó÷àñà òåêóùèõ ñóòîê (äëÿ ìîùíîñòè è ýíåðãèè)
 void    MakeAllCurrTariffs(void)
 {
 uchar  i,j;
@@ -316,27 +287,4 @@ uchar  i,j;
     }
   }
 }
-// требует предварительной установки переменной tiAlt
-
-
-/*
-// показывает название временного периода (месяца, квартала или года)
-void    ShowPeriodName(uchar  ibPeriod)
-{
-  if (ibPeriod < 12+4+1)
-    ShowLo( szPeriods[ibPeriod] );  
-  else 
-    Error();          
-}
-*/
-
-/*
-// возвращает название тарифа
-uchar   *PGetTariffName(uchar  ibTariff)
-{
-  if (ibTariff < bTARIFFS)
-    return(szOnTariffs[ibTariff]);
-  else 
-    return(szError);
-}
-*/
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííîé tiAlt
