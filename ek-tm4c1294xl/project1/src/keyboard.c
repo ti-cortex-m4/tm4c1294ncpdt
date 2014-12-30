@@ -14,6 +14,7 @@ KEYBOARD.C
 #include        "programs.h"
 #include        "keyboard/key_timedate.h"
 #include        "keyboard/key_password.h"
+#include        "keyboard/key_start.h"
 #include        "keyboard/key_decret.h"
 #include        "keyboard/key_season.h"
 #include        "keyboard/key_delays.h"
@@ -309,8 +310,9 @@ uchar   i;
 
       case bSET_PASSWORD:       key_SetPassword();      break;
 
-//      case bSET_START:          key_Start();            break;
-//      case bSET_DEBUG:          key_Debug();            break;
+      case bSET_STARTHOU:
+      case bSET_START:          key_Start();            break;
+      case bSET_DEBUG:          key_Debug();            break;
 //      case bSET_VERSION:        key_GetVersion();       break;
 //
 //      case bSET_RESETCUSTOM:
@@ -368,8 +370,8 @@ uchar   i;
       case bSET_CURRDATE:       key_SetCurrDate();      break;
 
       case bSET_PASSWORD:       key_SetPassword();      break;
-//      case bSET_START:          key_Restart();          break;
-//
+      case bSET_START:          key_Restart();          break;
+
 //      case bSET_VERSION:        key_GetVersion();       break;
 //
 //      case bSET_RESETCUSTOM:

@@ -11,9 +11,18 @@ PROGRAMS.H
 
 // режим: программирование
 #define bSET_SPEED                  1
+#define bSET_GROUPS                 2
 #define bSET_CURRDATE               8
 #define bSET_CURRTIME               9
 #define bSET_PASSWORD               11
+
+#define bSET_START                  15
+#define bSET_STARTHOU               16
+
+#define bSET_RESETCUSTOM            80
+#define bSET_RESETFULL              81
+#define bSET_RESETWATCHDOG          82
+#define bSET_DEBUG                  83
 
 #define bSET_MAJORDELAYS            97
 #define bSET_MINORDELAYS            98

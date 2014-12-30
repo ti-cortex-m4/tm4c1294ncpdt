@@ -14,5 +14,15 @@ extern  time                    tiSummer, tiWinter;
 
 extern  uchar                   cbSummer, cbWinter;
 
+
+
+extern  time                    tiPowerOn, tiPowerOff;
+
+extern  uchar                   cbPowerOn;
+
+extern  time                    tiStart;
+
+
+
 extern  uchar                   mpbPassOne[10],
                                 mpbPassTwo[10];
