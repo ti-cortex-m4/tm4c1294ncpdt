@@ -11,4 +11,5 @@ MEMORY_PROGRAM.C
 // флаги задания соответствующих программ
 boolean                 boSetTime,
                         boSetDate,
-                        boSetPassword;
+                        boSetPassword,
+                        boSetRelaxs;
