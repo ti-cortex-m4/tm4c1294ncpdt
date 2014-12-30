@@ -1,3 +1,7 @@
+#include        "main_basic.h"
+
+
+
 // тип 'режим работы порта'
 typedef enum
 {
@@ -7,6 +11,15 @@ typedef enum
   STR_MASTERMODEM       = 3,
   STR_SLAVEUNI          = 4
 } stream;
+
+
+// тип 'настройки порта'
+typedef struct
+{
+  uchar         ibSpeed;                // индекс скорости
+  uchar         ibParity;               // индекс контроля чётности
+  stream        enStream;               // режим работы порта
+} port;
 
 
 // тип 'состояние порта'
