@@ -1,3 +1,7 @@
+#include        "main_basic.h"
+
+
+
 // тип 'состояния клавиатуры'
 typedef enum
 {
