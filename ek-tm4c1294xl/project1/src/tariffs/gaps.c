@@ -17,15 +17,12 @@ GAPS.C
 
 
 //                                           0123456789ABCDEF
-char const              szNoGaps[]        = "  нет периодов  ",
+static char const       szNoGaps[]        = "  нет периодов  ",
                         szGapError[]      = " ошибка !";
 
 
-time const              tiGap0 = {0,0,0,14,4,0};
-time const              tiGap1 = {1,0,0,14,10,0};
-
-
-extern  uchar const             mpbDaysInMonth[12];
+static time const       tiGap0 = { 0, 0, 0, 14, 4, 0 };
+static time const       tiGap1 = { 1, 0, 0, 14, 10, 0 };
 
 
 

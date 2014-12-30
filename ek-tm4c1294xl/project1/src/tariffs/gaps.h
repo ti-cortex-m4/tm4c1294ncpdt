@@ -24,5 +24,3 @@ void    ShowGap(uchar  ibGap);
 
 void    OutGaps1(void); 
 void    OutGaps2(void); 
-
-
