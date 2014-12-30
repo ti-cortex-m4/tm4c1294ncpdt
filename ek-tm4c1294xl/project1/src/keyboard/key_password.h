@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------
-ACCESS.H
+KEY_PASSWORD.H
 
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
+void    key_SetPassword(void);
+void    key_GetPassword(void);
+
+
+  
 
 
 
-bool    SuperUser(void);
 
-void    ClearPassOne(void);
-void    ClearPassTwo(void);
 
-bool    TrueKey(uchar  bKey);
