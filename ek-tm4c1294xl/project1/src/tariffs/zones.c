@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 ZONES.C
 
- ГЏГ®Г¤ГЇГ°Г®ГЈГ°Г Г¬Г¬Г» ГіГЇГ°Г ГўГ«ГҐГ­ГЁГї Г±ГіГІГ®Г·Г­Г»Г¬ГЁ ГІГ Г°ГЁГґГ­Г»Г¬ГЁ ГЈГ°Г ГґГЁГЄГ Г¬ГЁ
+ Подпрограммы управления суточными тарифными графиками
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -12,21 +12,21 @@ ZONES.C
 
 
 //                                       0123456789ABCDEF  
-static char const       szNoZones[]   = " Г§Г®Г­Г» Г­ГҐ Г§Г Г¤Г Г­Г» ";
+static char const       szNoZones[]   = " зоны не заданы ";
 
 
 breaks const            brZero = { 0, 0, 0 };
 
 
 
-// Г·ГЁГІГ ГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЁГ§Г«Г®Г¬Г®Гў Гў ГІГ Г°ГЁГґГ­Г®Г¬ ГЈГ°Г ГґГЁГЄГҐ zoAlt
+// читает количество изломов в тарифном графике zoAlt
 uchar   GetZoneAltSize(void)
 {
   return( zoAlt.bSize );
 }
 
 
-// Г§Г ГЇГЁГ±Г»ГўГ ГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЁГ§Г«Г®Г¬Г®Гў Гў ГІГ Г°ГЁГґГ­Г®Г¬ ГЈГ°Г ГґГЁГЄГҐ zoAlt
+// записывает количество изломов в тарифном графике zoAlt
 void    SetZoneAltSize(uchar  bSize)
 {
   zoAlt.bSize = bSize;
@@ -34,14 +34,14 @@ void    SetZoneAltSize(uchar  bSize)
 
 
 
-// Г·ГЁГІГ ГҐГІ ГЁГ§Г«Г®Г¬ brAlt ГЁГ§ ГІГ Г°ГЁГґГ­Г®ГЈГ® ГЈГ°Г ГґГЁГЄГ  zoAlt
+// читает излом brAlt из тарифного графика zoAlt
 void    GetZoneAltBreak(uchar  ibBreak)
 {
   brAlt = zoAlt.mpbrBreaks[ibBreak];
 }
 
 
-// Г§Г ГЇГЁГ±Г»ГўГ ГҐГІ ГЁГ§Г«Г®Г¬ brAlt Гў ГІГ Г°ГЁГґГ­Г»Г© ГЈГ°Г ГґГЁГЄ zoAlt
+// записывает излом brAlt в тарифный график zoAlt
 void    SetZoneAltBreak(uchar  ibBreak)
 {
   zoAlt.mpbrBreaks[ibBreak] = brAlt;
@@ -49,14 +49,14 @@ void    SetZoneAltBreak(uchar  ibBreak)
 
 
 
-// Г·ГЁГІГ ГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЁГ§Г«Г®Г¬Г®Гў Гў ГІГ Г°ГЁГґГ­Г®Г¬ ГЈГ°Г ГґГЁГЄГҐ zoKey
+// читает количество изломов в тарифном графике zoKey
 uchar   GetZoneKeySize(void)
 {
   return( zoKey.bSize );
 }
 
 
-// Г§Г ГЇГЁГ±Г»ГўГ ГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЁГ§Г«Г®Г¬Г®Гў Гў ГІГ Г°ГЁГґГ­Г®Г¬ ГЈГ°Г ГґГЁГЄГҐ zoKey
+// записывает количество изломов в тарифном графике zoKey
 void    SetZoneKeySize(uchar  bSize)
 {
   zoKey.bSize = bSize;
@@ -64,14 +64,14 @@ void    SetZoneKeySize(uchar  bSize)
 
 
 
-// Г·ГЁГІГ ГҐГІ ГЁГ§Г«Г®Г¬ brKey ГЁГ§ ГІГ Г°ГЁГґГ­Г®ГЈГ® ГЈГ°Г ГґГЁГЄГ  zoKey
+// читает излом brKey из тарифного графика zoKey
 void    GetZoneKeyBreak(uchar  ibBreak)
 {
   brKey = zoKey.mpbrBreaks[ibBreak];
 }
 
 
-// Г§Г ГЇГЁГ±Г»ГўГ ГҐГІ ГЁГ§Г«Г®Г¬ brKey Гў ГІГ Г°ГЁГґГ­Г»Г© ГЈГ°Г ГґГЁГЄ zoKey
+// записывает излом brKey в тарифный график zoKey
 void    SetZoneKeyBreak(uchar  ibBreak)
 {
   zoKey.mpbrBreaks[ibBreak] = brKey;
@@ -79,7 +79,7 @@ void    SetZoneKeyBreak(uchar  ibBreak)
 
 
 
-// ГўГ»Г·ГЁГ±Г«ГїГҐГІ ГЁГ­Г¤ГҐГЄГ± ГЇГ®Г«ГіГ·Г Г±Г  Г¤Г«Гї ГЁГ§Г«Г®Г¬Г  ГІГ Г°ГЁГґГ­Г®ГЈГ® ГЈГ°Г ГґГЁГЄГ  zoAlt
+// вычисляет индекс получаса для излома тарифного графика zoAlt
 uchar   GetBreakAltIndex(uchar  ibBreak)
 {
   GetZoneAltBreak(ibBreak);
@@ -87,7 +87,7 @@ uchar   GetBreakAltIndex(uchar  ibBreak)
 }
 
 
-// ГўГ»Г·ГЁГ±Г«ГїГҐГІ ГЁГ­Г¤ГҐГЄГ± ГЇГ®Г«ГіГ·Г Г±Г  Г¤Г«Гї ГЁГ§Г«Г®Г¬Г  ГІГ Г°ГЁГґГ­Г®ГЈГ® ГЈГ°Г ГґГЁГЄГ  zoKey
+// вычисляет индекс получаса для излома тарифного графика zoKey
 uchar   GetBreakKeyIndex(uchar  ibBreak)
 {
   GetZoneKeyBreak(ibBreak);
@@ -96,7 +96,7 @@ uchar   GetBreakKeyIndex(uchar  ibBreak)
 
 
 
-// Г±ГЎГ°Г Г±Г»ГўГ ГҐГІ Г­Г Г±ГІГ°Г®Г©ГЄГЁ ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ Г¤Г«Гї ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г»Гµ zoAlt,zoKey
+// сбрасывает настройки по умолчанию для переменных zoAlt,zoKey
 void    ResetZones(void)
 {
 static uchar const  mpbZone[3*bBREAKS] =
@@ -124,7 +124,7 @@ static uchar const  mpbZone[3*bBREAKS] =
 
 
 
-// ГЇГ®ГЄГ Г§Г»ГўГ ГҐГІ ГЁГ§Г«Г®Г¬ ГІГ Г°ГЁГґГ­Г®ГЈГ® ГЈГ°Г ГґГЁГЄГ  zoAlt
+// показывает излом тарифного графика zoAlt
 void    ShowZoneAltBreak(uchar  ibBreak)
 {
   if (GetZoneAltSize() > 0)
@@ -142,7 +142,7 @@ void    ShowZoneAltBreak(uchar  ibBreak)
 }
 
 
-// ГЇГ®ГЄГ Г§Г»ГўГ ГҐГІ ГЁГ§Г«Г®Г¬ ГІГ Г°ГЁГґГ­Г®ГЈГ® ГЈГ°Г ГґГЁГЄГ  zoKey
+// показывает излом тарифного графика zoKey
 void    ShowZoneKeyBreak(uchar  ibBreak)
 {
   if (GetZoneKeySize() > 0)
@@ -163,10 +163,10 @@ void    ShowZoneKeyBreak(uchar  ibBreak)
 
 #ifndef MODBUS
 
-// ГЇГ°Г®ГўГҐГ°ГїГҐГІ ГЇГ°Г ГўГЁГ«ГјГ­Г®Г±ГІГј Г±ГіГІГ®Г·Г­Г®ГЈГ® ГІГ Г°ГЁГґГ­Г®ГЈГ® ГЈГ°Г ГґГЁГЄГ 
+// проверяет правильность суточного тарифного графика
 bool    TrueZone(void)
 {
-  return(1);
+  return true;
 }
 
 #endif
