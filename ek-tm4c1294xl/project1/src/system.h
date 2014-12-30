@@ -19,6 +19,10 @@ SYSTEM.H
 #define wINBUFF_SIZE    0x100
 
 
+// частота прерывани€ Timer0, √ц
+#define wFREQUENCY_T0   350
+
+
 // длительность паузы между последним выданным запросом и подачей команды 'AT'
 #define bANSWER_AT      10
 
