@@ -22,6 +22,19 @@ time                    tiSummer, tiWinter;
 // счётчики количеств переходов на сезонное время
 uchar                   cbSummer, cbWinter;
 
+
+
+// время/дата последних включений и выключений питения
+time                    tiPowerOn, tiPowerOff;
+
+// счётчик выключений питания
+uchar                   cbPowerOn;
+
+// время/дата запуска
+time                    tiStart;
+
+
+
 // образцовый и проверяемый пароли
 uchar                   mpbPassOne[10],
                         mpbPassTwo[10];
