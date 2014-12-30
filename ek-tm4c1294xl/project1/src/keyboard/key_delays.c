@@ -5,11 +5,13 @@ _DELAYS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../mem_ports.h"
 #include        "../keyboard.h"
 #include        "../display.h"
 #include        "../delay.h"
 #include        "../beep.h"
 #include        "../engine.h"
+#include        "../sensors.h"
 
 
 
@@ -44,7 +46,7 @@ void    ShowDelays(void)
   }
 
   ShowLong(&dwBuffC);
-  sprintf(szLo+10,"мс  %2bu",ibX+1);
+  sprintf(szLo+10,"мс  %2u",ibX+1);
 }
 
 
