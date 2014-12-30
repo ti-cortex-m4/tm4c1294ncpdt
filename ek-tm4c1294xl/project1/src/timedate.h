@@ -10,7 +10,7 @@ TIMEDATE.H
 
 extern  time                    tiZero;
 extern  time                    tiAlt;
-
+extern  uchar const             mpbDaysInMonth[12];
 
 
 uchar   DaysInMonth(void);
