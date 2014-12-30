@@ -5,7 +5,7 @@ KEY_TIMEDATE.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../memory_program.h"
+#include        "../mem_program.h"
 #include        "../keyboard.h"
 #include        "../display.h"
 #include        "../slide.h"
