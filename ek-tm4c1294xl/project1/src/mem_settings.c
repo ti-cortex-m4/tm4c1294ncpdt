@@ -21,3 +21,7 @@ time                    tiSummer, tiWinter;
 
 // счётчики количеств переходов на сезонное время
 uchar                   cbSummer, cbWinter;
+
+// образцовый и проверяемый пароли
+uchar                   mpbPassOne[10],
+                        mpbPassTwo[10];

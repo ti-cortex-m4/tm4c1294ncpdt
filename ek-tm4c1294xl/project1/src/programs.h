@@ -10,8 +10,10 @@ PROGRAMS.H
 
 
 // режим: программирование
-#define bSET_CURRTIME               9
+#define bSET_SPEED                  1
 #define bSET_CURRDATE               8
+#define bSET_CURRTIME               9
+#define bSET_PASSWORD               11
 
 
 // режим: функционирование
