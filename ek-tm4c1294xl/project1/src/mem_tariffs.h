@@ -6,6 +6,10 @@ extern  relaxs                  mpreRelaxs;
 
 extern  time                    tiRelax;
 
+extern  boolean                 boRelaxsFlag;
+
+extern  uchar                   ibRelaxsTariff;
+
 
 
 extern  zones                   mpzoPowMonthMode[12+4+1][bMODES],
@@ -50,9 +54,3 @@ extern  gaps                    mpgaGaps;
 extern  time                    tiGap;
 
 extern  uchar                   mpbGaps[365];
-
-
-
-extern  boolean                 boRelaxsFlag;
-
-extern  uchar                   ibRelaxsTariff;
