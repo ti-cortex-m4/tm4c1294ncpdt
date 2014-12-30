@@ -15,6 +15,9 @@ PROGRAMS.H
 #define bSET_CURRTIME               9
 #define bSET_PASSWORD               11
 
+#define bSET_MAJORDELAYS            97
+#define bSET_MINORDELAYS            98
+
 
 // режим: функционирование
 #define bGET_CURRTIME               1

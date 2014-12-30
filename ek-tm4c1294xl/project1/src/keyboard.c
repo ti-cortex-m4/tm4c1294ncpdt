@@ -16,6 +16,7 @@ KEYBOARD.C
 #include        "keyboard/key_password.h"
 #include        "keyboard/key_decret.h"
 #include        "keyboard/key_season.h"
+#include        "keyboard/key_delays.h"
 #include        "keyboard/key_analysis.h"
 
 
@@ -314,10 +315,10 @@ uchar   i;
 //
 //      case bSET_RESETCUSTOM:
 //      case bSET_RESETFULL:      key_SetYesNo();         break;
-//
-//      case bSET_MAJORDELAYS:
-//      case bSET_MINORDELAYS:    key_SetDelays();        break;
-//
+
+      case bSET_MAJORDELAYS:
+      case bSET_MINORDELAYS:    key_SetDelays();        break;
+
 //      case bSET_LOGICAL:        key_SetChar();          break;
 //      case bSET_PRIVATE:        key_SetInt();           break;
 
@@ -342,10 +343,10 @@ uchar   i;
 
 //      case bSET_VERSION:
 //      case bGET_VERSION:        key_GetVersion();       break;
-//
-//      case bSET_MAJORDELAYS:
-//      case bSET_MINORDELAYS:    key_SetDelays();        break;
-//
+
+      case bSET_MAJORDELAYS:
+      case bSET_MINORDELAYS:    key_SetDelays();        break;
+
 //      case bSET_LOGICAL:        key_SetChar();          break;
 //      case bSET_PRIVATE:        key_SetInt();           break;
 
@@ -373,10 +374,10 @@ uchar   i;
 //
 //      case bSET_RESETCUSTOM:
 //      case bSET_RESETFULL:      key_SetYesNo();         break;
-//
-//      case bSET_MAJORDELAYS:
-//      case bSET_MINORDELAYS:    key_SetDelays();        break;
-//
+
+      case bSET_MAJORDELAYS:
+      case bSET_MINORDELAYS:    key_SetDelays();        break;
+
 //      case bSET_LOGICAL:        key_SetChar();          break;
 //      case bSET_PRIVATE:        key_SetInt();           break;
 
