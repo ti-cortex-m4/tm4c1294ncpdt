@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 ZONES.C
 
- Подпрограммы управления суточными тарифными графиками
+ Ïîäïðîãðàììû óïðàâëåíèÿ ñóòî÷íûìè òàðèôíûìè ãðàôèêàìè
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -12,21 +12,21 @@ ZONES.C
 
 
 //                                       0123456789ABCDEF  
-char const             szNoZones[]   = " зоны не заданы ";
+static char const       szNoZones[]   = " çîíû íå çàäàíû ";
 
 
-breaks const           brZero = { 0, 0, 0 };
+breaks const            brZero = { 0, 0, 0 };
 
 
 
-// читает количество изломов в тарифном графике zoAlt
+// ÷èòàåò êîëè÷åñòâî èçëîìîâ â òàðèôíîì ãðàôèêå zoAlt
 uchar   GetZoneAltSize(void)
 {
   return( zoAlt.bSize );
 }
 
 
-// записывает количество изломов в тарифном графике zoAlt
+// çàïèñûâàåò êîëè÷åñòâî èçëîìîâ â òàðèôíîì ãðàôèêå zoAlt
 void    SetZoneAltSize(uchar  bSize)
 {
   zoAlt.bSize = bSize;
@@ -34,14 +34,14 @@ void    SetZoneAltSize(uchar  bSize)
 
 
 
-// читает излом brAlt из тарифного графика zoAlt
+// ÷èòàåò èçëîì brAlt èç òàðèôíîãî ãðàôèêà zoAlt
 void    GetZoneAltBreak(uchar  ibBreak)
 {
   brAlt = zoAlt.mpbrBreaks[ibBreak];
 }
 
 
-// записывает излом brAlt в тарифный график zoAlt
+// çàïèñûâàåò èçëîì brAlt â òàðèôíûé ãðàôèê zoAlt
 void    SetZoneAltBreak(uchar  ibBreak)
 {
   zoAlt.mpbrBreaks[ibBreak] = brAlt;
@@ -49,14 +49,14 @@ void    SetZoneAltBreak(uchar  ibBreak)
 
 
 
-// читает количество изломов в тарифном графике zoKey
+// ÷èòàåò êîëè÷åñòâî èçëîìîâ â òàðèôíîì ãðàôèêå zoKey
 uchar   GetZoneKeySize(void)
 {
   return( zoKey.bSize );
 }
 
 
-// записывает количество изломов в тарифном графике zoKey
+// çàïèñûâàåò êîëè÷åñòâî èçëîìîâ â òàðèôíîì ãðàôèêå zoKey
 void    SetZoneKeySize(uchar  bSize)
 {
   zoKey.bSize = bSize;
@@ -64,14 +64,14 @@ void    SetZoneKeySize(uchar  bSize)
 
 
 
-// читает излом brKey из тарифного графика zoKey
+// ÷èòàåò èçëîì brKey èç òàðèôíîãî ãðàôèêà zoKey
 void    GetZoneKeyBreak(uchar  ibBreak)
 {
   brKey = zoKey.mpbrBreaks[ibBreak];
 }
 
 
-// записывает излом brKey в тарифный график zoKey
+// çàïèñûâàåò èçëîì brKey â òàðèôíûé ãðàôèê zoKey
 void    SetZoneKeyBreak(uchar  ibBreak)
 {
   zoKey.mpbrBreaks[ibBreak] = brKey;
@@ -79,7 +79,7 @@ void    SetZoneKeyBreak(uchar  ibBreak)
 
 
 
-// вычисляет индекс получаса для излома тарифного графика zoAlt
+// âû÷èñëÿåò èíäåêñ ïîëó÷àñà äëÿ èçëîìà òàðèôíîãî ãðàôèêà zoAlt
 uchar   GetBreakAltIndex(uchar  ibBreak)
 {
   GetZoneAltBreak(ibBreak);
@@ -87,7 +87,7 @@ uchar   GetBreakAltIndex(uchar  ibBreak)
 }
 
 
-// вычисляет индекс получаса для излома тарифного графика zoKey
+// âû÷èñëÿåò èíäåêñ ïîëó÷àñà äëÿ èçëîìà òàðèôíîãî ãðàôèêà zoKey
 uchar   GetBreakKeyIndex(uchar  ibBreak)
 {
   GetZoneKeyBreak(ibBreak);
@@ -96,10 +96,10 @@ uchar   GetBreakKeyIndex(uchar  ibBreak)
 
 
 
-// сбрасывает настройки по умолчанию для переменных zoAlt,zoKey
+// ñáðàñûâàåò íàñòðîéêè ïî óìîë÷àíèþ äëÿ ïåðåìåííûõ zoAlt,zoKey
 void    ResetZones(void)
 {
-uchar const     mpbZone[3*bBREAKS] =
+static uchar const  mpbZone[3*bBREAKS] =
 {  6,  0,  0,
    8,  0,  1,
   10,  0,  2,
@@ -124,7 +124,7 @@ uchar const     mpbZone[3*bBREAKS] =
 
 
 
-// показывает излом тарифного графика zoAlt
+// ïîêàçûâàåò èçëîì òàðèôíîãî ãðàôèêà zoAlt
 void    ShowZoneAltBreak(uchar  ibBreak)
 {
   if (GetZoneAltSize() > 0)
@@ -142,7 +142,7 @@ void    ShowZoneAltBreak(uchar  ibBreak)
 }
 
 
-// показывает излом тарифного графика zoKey
+// ïîêàçûâàåò èçëîì òàðèôíîãî ãðàôèêà zoKey
 void    ShowZoneKeyBreak(uchar  ibBreak)
 {
   if (GetZoneKeySize() > 0)
@@ -161,23 +161,21 @@ void    ShowZoneKeyBreak(uchar  ibBreak)
 
 
 
-#ifdef  DS80C400
 #ifndef MODBUS
 
-// проверяет правильность суточного тарифного графика
-bit     TrueZone(void)
+// ïðîâåðÿåò ïðàâèëüíîñòü ñóòî÷íîãî òàðèôíîãî ãðàôèêà
+bool    TrueZone(void)
 {
   return(1);
 }
 
-#endif
 #endif
 
 
 
 void    SetKeyZonePow(void)
 {
-uchar const    mpbZone[3*bBREAKS] =
+static uchar const  mpbZone[3*bBREAKS] =
 {  6,  0,  0,
    8,  0,  1,
   11,  0,  2,
@@ -201,7 +199,7 @@ uchar const    mpbZone[3*bBREAKS] =
 
 void    SetKeyZoneEng(void)
 {
-uchar const     mpbZone[3*bBREAKS] =
+static uchar const  mpbZone[3*bBREAKS] =
 {  6,  0,  0,
    8,  0,  1,
   11,  0,  2,
@@ -221,6 +219,3 @@ uchar const     mpbZone[3*bBREAKS] =
 
   SetZoneKeySize(5);
 }
-
-
-
