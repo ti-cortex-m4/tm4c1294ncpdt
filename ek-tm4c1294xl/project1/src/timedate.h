@@ -8,6 +8,7 @@ TIMEDATE.H
 
 
 
+extern  time                    tiZero;
 extern  time                    tiAlt;
 
 

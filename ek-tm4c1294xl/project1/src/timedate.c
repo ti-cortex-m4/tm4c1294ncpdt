@@ -14,6 +14,8 @@ TIMEDATE.H
 
 time                    tiAlt;
 
+time const              tiZero = { 0, 0, 0, 0, 0, 0 };
+
 uchar const             mpbDaysInMonth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 
