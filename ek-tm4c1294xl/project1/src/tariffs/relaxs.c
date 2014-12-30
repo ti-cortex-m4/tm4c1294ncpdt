@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 RELAXS.C
 
- Подпрограммы управления праздниками
+ Ïîäïðîãðàììû óïðàâëåíèÿ ïðàçäíèêàìè
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -16,21 +16,21 @@ RELAXS.C
 
 
 //                                           0123456789ABCDEF
-static char const       szNoRelaxs[]      = " нет праздников ",
-                        szRelaxHoliday[]  = " выходной",
-                        szRelaxWeekday[]  = " рабочий ",
-                        szRelaxError[]    = " ошибка !";
+static char const       szNoRelaxs[]      = " íåò ïðàçäíèêîâ ",
+                        szRelaxHoliday[]  = " âûõîäíîé",
+                        szRelaxWeekday[]  = " ðàáî÷èé ",
+                        szRelaxError[]    = " îøèáêà !";
 
 
 
-// читает количество дней в списке праздников
+// ÷èòàåò êîëè÷åñòâî äíåé â ñïèñêå ïðàçäíèêîâ
 uchar   GetRelaxSize(void)
 {
   return( mpreRelaxs.bSize );
 }
 
 
-// записывает количество дней в списке праздников
+// çàïèñûâàåò êîëè÷åñòâî äíåé â ñïèñêå ïðàçäíèêîâ
 void    SetRelaxSize(uchar  bSize)
 {
   mpreRelaxs.bSize = bSize;
@@ -38,14 +38,14 @@ void    SetRelaxSize(uchar  bSize)
 
 
 
-// читает день из списка праздников
+// ÷èòàåò äåíü èç ñïèñêà ïðàçäíèêîâ
 void    GetRelaxDate(uchar  ibRelax)
 {
   tiRelax = mpreRelaxs.mptiDate[ibRelax];
 }
 
 
-// записывает день в списов праздников
+// çàïèñûâàåò äåíü â ñïèñîâ ïðàçäíèêîâ
 void    SetRelaxDate(uchar  ibRelax)
 {
   mpreRelaxs.mptiDate[ibRelax] = tiRelax;
@@ -53,10 +53,10 @@ void    SetRelaxDate(uchar  ibRelax)
 
 
 
-// установка списка праздников по умолчанию
+// óñòàíîâêà ñïèñêà ïðàçäíèêîâ ïî óìîë÷àíèþ
 void    DefaultRelaxs(void)
 {
-uchar const     mpRelaxs[8*3] =
+static char const  mpRelaxs[8*3] =
 { 1,  1,  2,
   2,  1,  2,
   7,  1,  2,
@@ -73,7 +73,7 @@ uchar const     mpRelaxs[8*3] =
   {
     tiRelax.bDay    = mpRelaxs[ibZ++];
     tiRelax.bMonth  = mpRelaxs[ibZ++];
-    tiRelax.bSecond = mpRelaxs[ibZ++];  // тип праздника: будни, суббота, воскресенье
+    tiRelax.bSecond = mpRelaxs[ibZ++];  // òèï ïðàçäíèêà: áóäíè, ñóááîòà, âîñêðåñåíüå
 
     SetRelaxDate(ibX);
     SetRelaxSize(GetRelaxSize() + 1);
@@ -84,7 +84,7 @@ uchar const     mpRelaxs[8*3] =
 
 
 
-// сброс списка праздников
+// ñáðîñ ñïèñêà ïðàçäíèêîâ
 void    ResetRelaxs(void)
 {
   SetRelaxSize(0);
@@ -96,13 +96,13 @@ void    ResetRelaxs(void)
 
 
 
-// определяет тип дня недели
+// îïðåäåëÿåò òèï äíÿ íåäåëè
 uchar   GetModeAlt(void)
 {
 uchar  i;
 
-  if (bOldMode == 0)                    // без учёта выходных и праздничных дней
-    return(0);                          // будни
+  if (bOldMode == 0)                    // áåç ó÷¸òà âûõîäíûõ è ïðàçäíè÷íûõ äíåé
+    return(0);                          // áóäíè
 
   for (i=0; i<GetRelaxSize(); i++)
   {
@@ -110,21 +110,21 @@ uchar  i;
 
     if ((tiRelax.bDay   == tiAlt.bDay) &&
         (tiRelax.bMonth == tiAlt.bMonth)) 
-      return(tiRelax.bSecond);          // тип текущего дня определяется по списку праздников
+      return(tiRelax.bSecond);          // òèï òåêóùåãî äíÿ îïðåäåëÿåòñÿ ïî ñïèñêó ïðàçäíèêîâ
   }
 
-  i = Weekday();                        // тип текущего дня определяется по календарю
+  i = Weekday();                        // òèï òåêóùåãî äíÿ îïðåäåëÿåòñÿ ïî êàëåíäàðþ
 
-  if (i < 5)  return(0);                // будни
+  if (i < 5)  return(0);                // áóäíè
   else 
-  if (i == 5) return(1);                // суббота
-  else        return(2);                // воскресенье
+  if (i == 5) return(1);                // ñóááîòà
+  else        return(2);                // âîñêðåñåíüå
 }
-// требует предварительной установки переменной tiAlt
+// òðåáóåò ïðåäâàðèòåëüíîé óñòàíîâêè ïåðåìåííîé tiAlt
 
 
 
-// показывает тип текущего режима
+// ïîêàçûâàåò òèï òåêóùåãî ðåæèìà
 void    ShowModeName(uchar  ibMode)
 {
   switch (ibMode)
@@ -137,7 +137,7 @@ void    ShowModeName(uchar  ibMode)
 
 
 
-// показывает дату и тип текущего праздника, его номер и общее количество праздников
+// ïîêàçûâàåò äàòó è òèï òåêóùåãî ïðàçäíèêà, åãî íîìåð è îáùåå êîëè÷åñòâî ïðàçäíèêîâ
 void    ShowRelax(uchar  ibRelax)
 {
   if (GetRelaxSize() > 0)
@@ -156,5 +156,3 @@ void    ShowRelax(uchar  ibRelax)
   }
   else ShowLo(szNoRelaxs);    
 }
-
-
