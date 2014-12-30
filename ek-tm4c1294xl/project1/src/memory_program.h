@@ -6,4 +6,5 @@ MEMORY_PROGRAM.H
 
 extern boolean                 boSetTime,
                                boSetDate,
-                               boSetPassword;
+                               boSetPassword,
+                               boSetRelaxs;
