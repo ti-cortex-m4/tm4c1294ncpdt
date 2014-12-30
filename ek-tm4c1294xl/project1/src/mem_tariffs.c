@@ -1,0 +1,84 @@
+#include        "main.h"
+
+
+
+// флаг типа задани€ тарифов
+boolean                 boOldTariffs;
+
+
+
+// массив праздников
+relaxs                  mpreRelaxs;
+
+// внутренн€€ переменна€
+time                    tiRelax;
+
+
+
+// массив суточных тарифных графиков по мес€цам и режимам работы (дл€ мощности и энергии)
+zones                   mpzoPowMonthMode[12+4+1][bMODES],
+                        mpzoEngMonthMode[12+4+1][bMODES];
+
+// массив фактов задани€ суточных тарифных графиков по мес€цам и режимам работы (дл€ мощности и энергии)
+boolean                 mpboPowMonthMode[12+4+1][bMODES],
+                        mpboEngMonthMode[12+4+1][bMODES];
+
+// массив индексов тарифов дл€ каждого получаса текущих суток (дл€ мощности и энергии)
+uchar                   mpibPowCurrTariff[48],
+                        mpibEngCurrTariff[48];
+
+// массив индексов тарифов дл€ каждого получаса текущих суток
+uchar                   mpibPowPrevTariff[48],
+                        mpibEngPrevTariff[48];
+
+// признак совмещЄнных/раздельных суточных тарифных графиков за текущий и предыдущий мес€цы
+boolean                 boPublicCurr,
+                        boPublicPrev;
+
+
+
+// массив символов задани€ тарифных зон по блока и мес€цам (старый вариант)
+uchar                   mpchPowMonth[12],
+                        mpchEngMonth[12];
+
+// правило обработки тарифов в выходные дни (старый вариант)
+uchar                   bOldMode;
+
+// внутренн€€ переменна€
+uchar                   chOldMode;
+
+// внутренн€€ переменна€
+uchar                   ibAltMode;
+
+
+
+// суточные тарифные графики
+zones                   zoAlt,zoKey;
+
+// изломы суточных тарифных графиков
+breaks                  brAlt,brKey;
+
+// глобальна€ переменна€
+boolean                 boAlt;
+
+
+
+// флаг использовани€ тарифных периодов
+boolean                 boGapsFlag;
+
+// массив изломов тарифных периодов
+gaps                    mpgaGaps;
+
+// переменна€
+time                    tiGap;
+
+// график тарифных периодов за год по суткам
+uchar                   mpbGaps[365];
+
+
+
+// признак использовани€ праздников
+boolean                 boRelaxsFlag;
+
+// глобальна€ переменна€
+uchar                   ibRelaxsTariff;
