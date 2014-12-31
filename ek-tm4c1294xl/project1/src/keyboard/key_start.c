@@ -18,9 +18,9 @@ KEY_START.C
 
 
 //                                         0123456789ABCDEF
-static char const       szStart[]       = "Старт           ",
-                        szRestart[]     = "Рестарт         ",
-                        szDebug[]       = "Отладка         ";
+static message          szStart         = "Старт           ",
+                        szRestart       = "Рестарт         ",
+                        szDebug         = "Отладка         ";
 
 
 
