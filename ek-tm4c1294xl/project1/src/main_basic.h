@@ -11,6 +11,8 @@ typedef signed int      sint;
 typedef unsigned long   ulong;
 typedef signed long     slong;
 
+typedef double          real;
+
 
 // тип 'время и дата'
 typedef struct

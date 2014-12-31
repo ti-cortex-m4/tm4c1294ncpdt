@@ -60,4 +60,11 @@ SYSTEM.H
 #define bGAPS           11
 
 
+// количество каналов
+#define bCANALS         64
+
+// количество групп
+#define bGROUPS         32
+
+
 #endif
