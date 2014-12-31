@@ -8,6 +8,7 @@
 #include        "main_keyboard.h"
 #include        "main_serial.h"
 #include        "main_tariffs.h"
+#include        "main_groups.h"
 
 
 typedef enum 
