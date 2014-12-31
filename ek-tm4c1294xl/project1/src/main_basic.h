@@ -31,4 +31,7 @@ typedef enum
 } boolean;
 
 
+typedef char const      message[bDISPLAY];
+
+
 #endif
