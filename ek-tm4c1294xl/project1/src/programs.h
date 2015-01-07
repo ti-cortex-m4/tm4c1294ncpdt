@@ -31,6 +31,7 @@ PROGRAMS.H
 // режим: функционирование
 #define bGET_CURRTIME               1
 #define bGET_CURRDATE               3
+#define bGET_GROUPS                 4
 
 
 // все режимы
