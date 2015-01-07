@@ -19,6 +19,7 @@ KEYBOARD.C
 #include        "keyboard/key_season.h"
 #include        "keyboard/key_groups.h"
 #include        "keyboard/key_delays.h"
+#include        "keyboard/key_reset.h"
 #include        "keyboard/key_analysis.h"
 
 
@@ -317,9 +318,9 @@ uchar   i;
       case bSET_START:          key_Start();            break;
       case bSET_DEBUG:          key_Debug();            break;
 //      case bSET_VERSION:        key_GetVersion();       break;
-//
-//      case bSET_RESETCUSTOM:
-//      case bSET_RESETFULL:      key_SetYesNo();         break;
+
+      case bSET_RESETCUSTOM:
+      case bSET_RESETFULL:      key_SetReset();         break;
 
       case bSET_MAJORDELAYS:
       case bSET_MINORDELAYS:    key_SetDelays();        break;
@@ -380,9 +381,9 @@ uchar   i;
       case bSET_START:          key_Restart();          break;
 
 //      case bSET_VERSION:        key_GetVersion();       break;
-//
-//      case bSET_RESETCUSTOM:
-//      case bSET_RESETFULL:      key_SetYesNo();         break;
+
+      case bSET_RESETCUSTOM:
+      case bSET_RESETFULL:      key_SetReset();         break;
 
       case bSET_MAJORDELAYS:
       case bSET_MINORDELAYS:    key_SetDelays();        break;
