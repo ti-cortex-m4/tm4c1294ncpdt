@@ -22,3 +22,6 @@ boolean                 mpboUsedNodes[bCANALS];
 
 // количество используемых узлов
 uchar                   cbUsedNodes;
+
+// глобальная переменная
+nodes                   noT;
