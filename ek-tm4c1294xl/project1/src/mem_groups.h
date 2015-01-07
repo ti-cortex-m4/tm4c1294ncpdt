@@ -13,3 +13,5 @@ extern  uchar                   cbUsedGroups;
 extern  boolean                 mpboUsedNodes[bCANALS];
 
 extern  uchar                   cbUsedNodes;
+
+extern  nodes                   noT;
