@@ -1,12 +1,8 @@
 /*------------------------------------------------------------------------------
 GROUPS.H
 
- Подпрограммы управления группами
+
 ------------------------------------------------------------------------------*/
-
-#include        "main.h"
-
-
 
 uchar   GetGroupsSize(uchar  ibGroup);
 void    SetGroupsSize(uchar  ibGroup, uchar  bSize);
@@ -19,6 +15,3 @@ uchar   GetGroupsNodeCanal(uchar  ibGroup, uchar  ibNode);
 
 void    MakeUsedNodes(void);
 void    ResetGroups(void);
-
-//bit     CheckGroupNeg(void);
-//bit     CheckAllGroupsNeg(void);
