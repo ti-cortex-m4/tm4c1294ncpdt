@@ -8,6 +8,8 @@ KEY_RESET.C
 #include        "../keyboard.h"
 #include        "../display.h"
 #include        "../beep.h"
+#include        "../label.h"
+#include        "../groups.h"
 
 
 //                                         0123456789ABCDEF
@@ -41,10 +43,11 @@ void    key_SetReset(void)
       switch (bProgram)
       {
         case bSET_RESETCUSTOM:
-//          Waiting(); LongBeep();
-//          Clear();
-//
-//          BreakLabelXDATA();
+          Waiting();
+          LongBeep();
+          Clear();
+
+          BreakLabelXDATA();
 //          ResetCustom();
 //
 //          ResetLimits();
@@ -64,21 +67,24 @@ void    key_SetReset(void)
 //          if (ResetFlash() == 0)
 //          {
 //            ShowHi(szAlarm);
-//            ShowLo(szBadFlash); LongBeep(); DelayMsg();
+//            ShowLo(szBadFlash);
+//            LongBeep();
+//            DelayMsg();
 //          }
 //
 //          Restart();
           break;
 
         case bSET_RESETFULL:  
-//          Waiting(); LongBeep();
-//          Clear();
-//
-//          BreakLabelXDATA();
+          Waiting();
+          LongBeep();
+          Clear();
+
+          BreakLabelXDATA();
 //          ResetXDATA();
 //          ResetKeyboard();
 //          ResetDecret();
-//          ResetGroups();
+          ResetGroups();
 //          ResetTariffs();
 //          ResetZones();
 //          ResetRelaxs();
@@ -110,7 +116,9 @@ void    key_SetReset(void)
 //          if (ResetFlash() == 0)
 //          {
 //            ShowHi(szAlarm);
-//            ShowLo(szBadFlash); LongBeep(); DelayMsg();
+//            ShowLo(szBadFlash);
+//            LongBeep();
+//            DelayMsg();
 //          }
 //
 //          Restart();

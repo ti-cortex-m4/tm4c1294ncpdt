@@ -91,7 +91,7 @@ uchar   i;
 // показываем номер текущего узла и общее количество узлов в текущей группе
 void    ShowNodes(void)
 {
-  sprintf(szLo+11,"%2bu/%-2bu", 
+  sprintf(szLo+11,"%2u/%-2u",
           ibY+1,
           GetGroupsSize(ibX));
 }
@@ -103,7 +103,7 @@ void    ShowGroup(void)
 { 
   if (GetGroupsSize(ibX) > 0)
   {
-    sprintf(szLo,"      %-3bu  ", 
+    sprintf(szLo,"      %-3u  ",
             GetGroupsNodeCanal(ibX,ibY)+1);
 
     if (GetGroupsNodeSign(ibX,ibY) == 0)
@@ -121,7 +121,7 @@ void    ShowGroup(void)
 // показываем номер группы
 void    ShowGroupNumber(void)
 { 
-  sprintf(szHi,"Группа: %bu",ibX+1); 
+  sprintf(szHi,"Группа: %u",ibX+1);
 }
 
 
