@@ -261,8 +261,8 @@ gps.c
 gps.h
 gps2.c
 gps2.h
-groups.c
-groups.h
++       groups.c
++       groups.h
 hours.c
 hours.h
 i2c.c
