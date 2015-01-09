@@ -8,10 +8,4 @@ extern  groups                  mpgrGroups[bGROUPS];
 
 extern  boolean                 mpboUsedGroups[bGROUPS];
 
-extern  uchar                   cbUsedGroups;
-
 extern  boolean                 mpboUsedNodes[bCANALS];
-
-extern  uchar                   cbUsedNodes;
-
-extern  nodes                   noT;

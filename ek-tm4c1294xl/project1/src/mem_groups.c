@@ -11,17 +11,8 @@ MEM_GROUPS.S
 // массив групп
 groups                  mpgrGroups[bGROUPS];
 
-// массив флагов используемых групп
+// массив признаков используемых групп
 boolean                 mpboUsedGroups[bGROUPS];
 
-// количество используемых групп
-uchar                   cbUsedGroups;
-
-// массив флагов используемых узлов
+// массив признаков используемых узлов
 boolean                 mpboUsedNodes[bCANALS];
-
-// количество используемых узлов
-uchar                   cbUsedNodes;
-
-// глобальная переменная
-nodes                   noT;

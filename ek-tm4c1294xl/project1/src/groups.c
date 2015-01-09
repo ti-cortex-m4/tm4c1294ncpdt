@@ -88,6 +88,7 @@ uchar   i,j;
 void    ResetGroups(void)
 {
 uchar   i;
+nodes   noT;
 
   for (i=0; i<bGROUPS; i++)
   {
