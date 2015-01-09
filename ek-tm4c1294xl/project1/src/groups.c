@@ -54,14 +54,10 @@ void    MakeUsedNodes(void)
 {
 uchar   i,j;
 
-  cbUsedGroups = 0;
   for (i=0; i<bGROUPS; i++)
   {
     if (GetGroupsSize(i) != 0) 
-    {
       mpboUsedGroups[i] = boTrue;
-      cbUsedGroups++;
-    }
     else
       mpboUsedGroups[i] = boFalse;
   }
@@ -73,13 +69,6 @@ uchar   i,j;
   {
     for (j=0; j<GetGroupsSize(i); j++)
       mpboUsedNodes[ GetGroupsNodeCanal(i,j) ] = boTrue;
-  }
-
-  cbUsedNodes = 0;
-  for (i=0; i<bCANALS; i++)
-  {
-    if (mpboUsedNodes[i] == boTrue)            
-      cbUsedNodes++;      
   }
 }
 
