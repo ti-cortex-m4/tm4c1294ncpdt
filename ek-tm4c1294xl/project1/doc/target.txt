@@ -283,8 +283,8 @@ keyboard.c
 keyboard.h
 keyboard2.c
 keyboard2.h
-label.c
-label.h
++       label.c
++       label.h
 lcd.c
 lcd.h
 limits.c

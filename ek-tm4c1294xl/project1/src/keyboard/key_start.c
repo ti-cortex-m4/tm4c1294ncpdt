@@ -58,7 +58,7 @@ void    key_Start(void)
 // TODO
 
     // устанавливаем метку режима 'Функционирование'
-    SetLabelXDATA();  
+    SetLabel();
     
     // запоминаем время/дату первого запуска
     tiStart = *PGetCurrTimeDate();

@@ -9,7 +9,6 @@ DISPLAY.C
 #include        <stdlib.h>
 #include        "main.h"
 #include        "mem_program.h"
-#include        "label.h"
 #include        "beep.h"
 #include        "delay.h"
 #include        "keyboard.h"
@@ -43,7 +42,7 @@ void    InitDisplay(void)
   DelayMsg();
   Clear();
 
-  if (GetLabelXDATA() == true)
+  if (enGlobal == GLB_WORK)
     ShowHi(szWork);
   else 
   {
