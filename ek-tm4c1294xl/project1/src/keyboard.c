@@ -298,7 +298,7 @@ uchar   i;
         NeedNumber();
         return;
       }
-      //else boReset = boTrue;
+      else boReset = boTrue;
     }
   }
 

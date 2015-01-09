@@ -8,7 +8,7 @@ LABEL.C
 
 
 
-uchar                   mpbLabel[0x20];
+static uchar            mpbLabel[0x20];
 
 
 
@@ -37,14 +37,3 @@ uchar   i;
 void    BreakLabelXDATA(void) {
   mpbLabel[0] = 0xFF;
 }
-
-
-
-
-
-
-
-
-
-
-

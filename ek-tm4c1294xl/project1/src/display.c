@@ -8,10 +8,12 @@ DISPLAY.C
 #include        <stdio.h>
 #include        <stdlib.h>
 #include        "main.h"
+#include        "mem_program.h"
 #include        "label.h"
 #include        "beep.h"
 #include        "delay.h"
 #include        "keyboard.h"
+#include        "keyboard/key_reset.h"
 #include        "messages.h"
 #include        "slide.h"
 
@@ -44,7 +46,19 @@ void    InitDisplay(void)
   if (GetLabelXDATA() == true)
     ShowHi(szWork);
   else 
+  {
     ShowHi(szSetting);
+    DelayMsg();
+
+    if (boReset == boTrue)
+    {
+      enKeyboard = KBD_ENTER;
+      bKey = bKEY_ENTER;
+
+      bProgram = bSET_RESETFULL;
+      key_SetReset();
+    }
+  }
 }
 
 
