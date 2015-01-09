@@ -515,8 +515,8 @@ _divider.c
 _divider.h
 _door.c
 _door.h
-_double.c
-_double.h
+-       _double.c
+-       _double.h
 _dtr_reset.c
 _dtr_reset.h
 _dtr_test.c
@@ -561,8 +561,8 @@ _gps_gmt.c
 _gps_gmt.h
 _gps_run.c
 _gps_run.h
-_groups.c
-_groups.h
++       _groups.c
++       _groups.h
 _hide_messages.c
 _hide_messages.h
 _hours.c
@@ -603,8 +603,8 @@ _modems2.c
 _modems2.h
 _newprogram79.c
 _newprogram79.h
-_nodes.c
-_nodes.h
+-       _nodes.c
+-       _nodes.h
 _number.c
 _number.h
 _oldmode.c

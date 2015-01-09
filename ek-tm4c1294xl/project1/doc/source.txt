@@ -52,8 +52,8 @@ src\main_serial.h
 src\main_tariffs.h
 src\mem_factors.c
 src\mem_factors.h
-src\mem_groups.c
-src\mem_groups.h
++       src\mem_groups.c
++       src\mem_groups.h
 src\mem_ports.c
 src\mem_ports.h
 src\mem_program.c

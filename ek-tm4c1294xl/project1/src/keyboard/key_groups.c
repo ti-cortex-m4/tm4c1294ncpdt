@@ -15,9 +15,11 @@ KEY_GROUPS.C
 
 
 //                                         0123456789ABCDEF
-static char const       szMaskGroups[]  = "    + ___       ",
-                        szGroups[]      = "Группы          ",
-                        szNoNodes[]     = "  нет каналов   ";
+static message          szMaskGroups    = "    + ___       ",
+                        szGroups        = "Группы          ",
+                        szNoNodes       = "  нет каналов   ";
+
+static nodes            noT;
 
 
 
