@@ -47,7 +47,7 @@ void    key_SetReset(void)
           LongBeep();
           Clear();
 
-          BreakLabelXDATA();
+          BreakLabel();
 //          ResetCustom();
 //
 //          ResetLimits();
@@ -80,7 +80,7 @@ void    key_SetReset(void)
           LongBeep();
           Clear();
 
-          BreakLabelXDATA();
+          BreakLabel();
 //          ResetXDATA();
 //          ResetKeyboard();
 //          ResetDecret();

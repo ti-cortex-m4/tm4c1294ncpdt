@@ -12,7 +12,7 @@ static uchar            mpbLabel[0x20];
 
 
 
-void    SetLabelXDATA(void) {
+void    SetLabel(void) {
 uchar   i;
 
   for (i=0; i<sizeof(mpbLabel); i++)  
@@ -21,7 +21,7 @@ uchar   i;
 
 
 
-bool    GetLabelXDATA(void) {
+bool    GetLabel(void) {
 uchar   i;
 
   for (i=0; i<sizeof(mpbLabel); i++) {
@@ -34,6 +34,6 @@ uchar   i;
 
 
 
-void    BreakLabelXDATA(void) {
+void    BreakLabel(void) {
   mpbLabel[0] = 0xFF;
 }

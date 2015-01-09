@@ -40,8 +40,8 @@ src\hardware
 src\keyboard
 src\keyboard.c
 src\keyboard.h
-src\label.c
-src\label.h
++       src\label.c
++       src\label.h
 src\lines.c
 src\lines.h
 src\main.h

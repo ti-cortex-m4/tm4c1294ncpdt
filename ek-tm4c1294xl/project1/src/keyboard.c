@@ -67,7 +67,7 @@ void    InitKeyboard(void)
   boSetTime     = boFalse;
   boSetDate     = boFalse;
 
-  if (GetLabelXDATA() == true)
+  if (GetLabel() == true)
     enGlobal = GLB_WORK;
   else
     enGlobal = GLB_PROGRAM;

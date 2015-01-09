@@ -4,6 +4,6 @@ LABEL.H
 
 ------------------------------------------------------------------------------*/
 
-void    SetLabelXDATA(void);
-bool    GetLabelXDATA(void);
-void    BreakLabelXDATA(void);
+void    SetLabel(void);
+bool    GetLabel(void);
+void    BreakLabel(void);
