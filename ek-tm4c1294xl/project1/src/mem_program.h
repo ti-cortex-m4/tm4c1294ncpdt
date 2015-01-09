@@ -9,3 +9,5 @@ extern boolean                 boSetTime,
                                boSetGroups,
                                boSetPassword,
                                boSetRelaxs;
+
+extern boolean                 boReset;

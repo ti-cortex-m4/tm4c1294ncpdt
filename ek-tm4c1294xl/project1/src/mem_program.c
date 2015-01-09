@@ -14,3 +14,6 @@ boolean                 boSetTime,
                         boSetGroups,
                         boSetPassword,
                         boSetRelaxs;
+
+//
+boolean                 boReset;
