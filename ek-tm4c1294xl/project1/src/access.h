@@ -4,9 +4,7 @@ ACCESS.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-
-
+void    InitAccess(void);
 
 bool    SuperUser(void);
 
