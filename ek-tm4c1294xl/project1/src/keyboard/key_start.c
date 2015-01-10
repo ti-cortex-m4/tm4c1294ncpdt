@@ -13,6 +13,7 @@ KEY_START.C
 #include        "../delay.h"
 #include        "../beep.h"
 #include        "../access.h"
+#include        "../groups.h"
 #include        "../rtc.h"
 
 
@@ -57,6 +58,9 @@ void    key_Start(void)
 
 // TODO
 
+    // устанавливаем признаки используемых каналов и групп
+    MakeUsedNodes();
+
     // устанавливаем метку режима 'Функционирование'
     SetLabel();
     
@@ -94,6 +98,9 @@ void    key_Restart(void)
 
 // TODO
 
+    // устанавливаем признаки используемых каналов и групп
+    MakeUsedNodes();
+
     DelayMsg();
     Work(); OK(); 
 
@@ -128,6 +135,9 @@ void    key_Debug(void)
     boSetGroups = boTrue;
 
 // TODO
+
+    // устанавливаем признаки используемых каналов и групп
+    MakeUsedNodes();
 
     OK();
 
