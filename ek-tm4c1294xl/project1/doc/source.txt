@@ -17,8 +17,8 @@ uart_echo_ccs.cmd
 .settings\org.eclipse.cdt.codan.core.prefs
 .settings\org.eclipse.cdt.debug.core.prefs
 .settings\org.eclipse.core.resources.prefs
-src\access.c
-src\access.h
++       src\access.c
++       src\access.h
 src\beep.c
 src\beep.h
 src\bulk.c

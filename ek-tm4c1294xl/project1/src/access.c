@@ -11,6 +11,13 @@ ACCESS.C
 
 
 
+void    InitAccess(void)
+{
+// TODO	InitAccess
+}
+
+
+
 bool    SuperUser(void)
 {
   return( (mpbPassTwo[0] == 2) &&
