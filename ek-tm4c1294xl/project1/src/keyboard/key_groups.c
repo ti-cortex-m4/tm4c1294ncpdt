@@ -15,9 +15,9 @@ KEY_GROUPS.C
 
 
 //                                         0123456789ABCDEF
-static message          szMaskGroups    = "    + ___       ",
-                        szGroups        = "Группы          ",
-                        szNoNodes       = "  нет каналов   ";
+static char const       szMaskGroups[]  = "    + ___       ",
+                        szGroups[]      = "Группы          ",
+                        szNoNodes[]     = "  нет каналов   ";
 
 static nodes            noT;
 
@@ -214,7 +214,7 @@ void    key_SetGroups(void)
     if (enKeyboard == KBD_POSTENTER)    // неповредственно подготовка ввода  
     {
       enKeyboard = KBD_INPUT1; 
-      sprintf(szLo, szMaskGroups); 
+      ShowLo(szMaskGroups);
     }
     else if (enKeyboard == KBD_SHOW)    // непосредственно просмотр
       ShowGroup();     
@@ -247,7 +247,7 @@ void    key_SetGroups(void)
       if (GetGroupsSize(ibX) == 0)
       {
         enKeyboard = KBD_INPUT1; 
-        sprintf(szLo,szMaskGroups); 
+        ShowLo(szMaskGroups);
       }
       else ShowGroup();
     }
@@ -278,7 +278,7 @@ void    key_SetGroups(void)
       if (GetGroupsSize(ibX) == 0) 
       {
         enKeyboard = KBD_INPUT1;        // если группа пустая - режим ввода
-        sprintf(szLo, szMaskGroups); 
+        ShowLo(szMaskGroups);
       }
       else                  
       {

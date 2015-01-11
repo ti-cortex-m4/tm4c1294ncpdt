@@ -108,8 +108,8 @@ src\keyboard\key_password.c
 src\keyboard\key_password.h
 src\keyboard\key_season.c
 src\keyboard\key_season.h
-src\keyboard\key_start.c
-src\keyboard\key_start.h
++       src\keyboard\key_start.c
++       src\keyboard\key_start.h
 src\keyboard\key_timedate.c
 src\keyboard\key_timedate.h
 src\tariffs\gaps.c
