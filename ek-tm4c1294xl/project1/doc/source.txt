@@ -36,6 +36,8 @@ src\engine.c
 src\engine.h
 src\flow.c
 src\flow.h
++       src\groups.c
++       src\groups.h
 src\hardware
 src\keyboard
 src\keyboard.c
@@ -104,8 +106,12 @@ src\keyboard\key_decret.c
 src\keyboard\key_decret.h
 src\keyboard\key_delays.c
 src\keyboard\key_delays.h
++       src\keyboard\key_groups.c
++       src\keyboard\key_groups.h
 src\keyboard\key_password.c
 src\keyboard\key_password.h
+src\keyboard\key_reset.c
+src\keyboard\key_reset.h
 src\keyboard\key_season.c
 src\keyboard\key_season.h
 +       src\keyboard\key_start.c
