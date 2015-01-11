@@ -7,6 +7,8 @@ POSTINPUT_CRC.C
 #include        "main.h"
 #include        "display.h"
 #include        "mem_settings.h"
+#include        "mem_program.h"
+#include        "mem_groups.h"
 #include        "mem_ports.h"
 #include        "programs.h"
 #include        "queries.h"
@@ -57,6 +59,8 @@ void    ShowCommandCRC(uchar  bState) {
 
 
 void    PostinputCRC(void) {
+uchar  i;
+
   if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE) {
 
     mpSerial[ibPort] = SER_BEGIN;
@@ -101,6 +105,40 @@ void    PostinputCRC(void) {
     {
       case bINQ_GETCURRTIME:
         Common(PGetCurrTimeDate(), sizeof(time));
+        break;
+
+      case bINQ_GETGROUP:
+        if (bInBuff5 < bGROUPS)
+          Common(&mpgrGroups[ bInBuff5 ], sizeof(groups));
+        else
+          Result(bRES_BADADDRESS);
+        break;
+
+      case bINQ_SETGROUP:
+        if (bInBuff5 < bGROUPS)
+        {
+          if ( (enGlobal == GLB_PROGRAM) ||
+              ((enGlobal == GLB_REPROGRAM) && (mpboUsedGroups[bInBuff5] == boFalse)) )
+          {
+            for (i=0; i<bInBuff6; i++)
+            {
+              if ((InBuff(7+i) & 0x7F) >= bCANALS)
+                break;
+            }
+
+            if (i == bInBuff6)
+            {
+              InitPop(6);
+              Pop(&mpgrGroups[bInBuff5], sizeof(groups));
+
+              boSetGroups = boTrue;
+              LongResult(bRES_OK);
+            }
+            else Result(bRES_BADDATA);
+          }
+          else Result(bRES_NEEDPROGRAM);
+        }
+        else Result(bRES_BADADDRESS);
         break;
 
       case bINQ_SETKEY:

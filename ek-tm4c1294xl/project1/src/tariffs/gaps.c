@@ -137,7 +137,7 @@ uint    j;
 
 void    ShowGapName(uchar  ibMode)
 {
-  if ((ibMode >= 0) && (ibMode < 12))
+  if (ibMode < 12)
     sprintf(szLo+7, "период %u" , ibMode+1);
   else
     strcpy(szLo+7, szGapError);
