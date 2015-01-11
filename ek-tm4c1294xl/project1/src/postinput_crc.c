@@ -21,24 +21,6 @@ POSTINPUT_CRC.C
 
 
 
-static const uchar      mpbKeys[14] = {
-  0x2B, 0x0E, 0x1E, 0x2E, 0x3E, 0x0D, 0x1D, 0x2D, 0x3D, 0x0B,
-  0x1B, 0x3B, 0x07, 0x17
-};
-
-
-
-void    Common(void  *pbData, uint  wSize) {
-  if (5+wSize < wOUTBUFF_SIZE-bMARGIN) {
-    InitPushCRC();
-    Push(pbData, wSize);
-    Output(wSize);
-  }
-  else Result(bRES_OUTOVERFLOW);
-}
-
-
-
 void    ShowCommandCRC(uchar  bState) {
   if (bProgram == bGET_ANALYSIS1)
   {

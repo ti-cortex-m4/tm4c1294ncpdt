@@ -8,6 +8,9 @@ KEYBOARD.H
 #include        "programs.h"
 
 
+
+extern  uchar const             mpbKeys[];
+
 extern  uchar                   bKey;
 extern  bool                    fKey;
 

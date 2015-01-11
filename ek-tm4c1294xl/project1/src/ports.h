@@ -20,3 +20,4 @@ extern	uchar                   ibPort;
 void    Output(uint  wSize);
 void    Result(uchar  bT);
 void    LongResult(uchar  bT);
+void    Common(void  *pbData, uint  wSize);
