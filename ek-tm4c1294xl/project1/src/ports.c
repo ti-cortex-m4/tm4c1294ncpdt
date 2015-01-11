@@ -8,6 +8,7 @@ PORTS.C
 #include        "mem_ports.h"
 #include        "mem_settings.h"
 #include        "mem_serial0.h"
+#include        "queries.h"
 #include        "crc-16.h"
 #include        "ports_stack.h"
 #include        "ports_common.h"
@@ -55,4 +56,14 @@ void    LongResult(uchar  bT) {
   PushChar(0);
 
   Output(2);
+}
+
+
+void    Common(void  *pbData, uint  wSize) {
+  if (5+wSize < wOUTBUFF_SIZE-bMARGIN) {
+    InitPushCRC();
+    Push(pbData, wSize);
+    Output(wSize);
+  }
+  else Result(bRES_OUTOVERFLOW);
 }
