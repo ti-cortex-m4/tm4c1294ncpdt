@@ -11,11 +11,14 @@ QUERIES.H
 
 #define bINQ_GETCURRTIME               1
 
+#define bINQ_GETGROUP                  9
+#define bINQ_SETGROUP                  10
+
 #define bINQ_SETKEY                    246
 #define bINQ_GETDISPLAY                247
 
 
-// ???
+// TODO
 #define bESC_OK                        'O'
 #define bESC_BADCOMMAND                'C'
 #define bESC_BADADDRESS                'A'
@@ -26,7 +29,7 @@ QUERIES.H
 #define bESC_BADDIGITAL                'D'
 
 
-// ???
+// TODO
 #define bRES_OK                        0
 #define bRES_BADCOMMAND                1
 #define bRES_BADADDRESS                2
