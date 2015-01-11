@@ -10,6 +10,8 @@ KEY_RESET.C
 #include        "../beep.h"
 #include        "../label.h"
 #include        "../groups.h"
+#include        "driverlib/sysctl.h"
+
 
 
 //                                         0123456789ABCDEF
@@ -71,8 +73,8 @@ void    key_SetReset(void)
 //            LongBeep();
 //            DelayMsg();
 //          }
-//
-//          Restart();
+
+          SysCtlReset();
           break;
 
         case bSET_RESETFULL:  
@@ -120,8 +122,8 @@ void    key_SetReset(void)
 //            LongBeep();
 //            DelayMsg();
 //          }
-//
-//          Restart();
+
+          SysCtlReset();
           break;
       }
     }
