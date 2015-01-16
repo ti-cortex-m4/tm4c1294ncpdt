@@ -10,6 +10,8 @@
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
+#include "../main.h"
+#include "../display.h"
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
 
@@ -17,11 +19,12 @@
 #define LINE_HI         0x80
 #define LINE_LO         0xC0
 
+#define PF2_TO_PD0_WR
 
 //Биты управления ЖКИ
 #define LCD_BIT_DIR  0x01 //PF0
 #define LCD_BIT_RS   0x02 //PF1
-#define LCD_BIT_WR   0x04 //PF2
+#define LCD_BIT_WR   0x04 //PF2 //PD0
 #define LCD_BIT_E    0x08 //PF3
 
 #define LCD_FLAG_COMM    0x00 // передать команду
@@ -52,6 +55,9 @@ unsigned char           const  mpbCyrillic[0x100] =
 };
 //~ - соответствует символу "э"
 
+static uchar const      szName[]        = "     СЭМ+2      ",
+                        szTest[]        = "   [       ]    ";
+
 unsigned char bCursorPos;
 
 
@@ -62,6 +68,14 @@ void _Delay(unsigned long ulgTime)
  while(ulgTime--);
 }
 
+//3 такта на запуск генераторов периферии
+void RunClocking(void)
+{
+__asm("   nop\n"
+      "   nop\n"
+      "   nop\n");
+}
+
 void _NOP(void)
 {
   __asm(" nop\n");
@@ -70,13 +84,27 @@ void _NOP(void)
 //Установка одного или нескольких из управляющих битов ЖКИ
 void SetCtrlBit_LCD(unsigned int wSetBit)
 {
- HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + (wSetBit << 2) ) = wSetBit;
+ #ifdef	PF2_TO_PD0_WR
+  if(wSetBit & LCD_BIT_WR)
+   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0004) = 0x0001;
+  else
+   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + (wSetBit << 2) ) = wSetBit;
+ #else
+  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + (wSetBit << 2) ) = wSetBit;
+ #endif
 }
 
 //Сброс одного или нескольких из управляющих битов ЖКИ
 void ClearCtrlBit_LCD(unsigned int wSetBit)
 {
- HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + (wSetBit << 2) ) = ~wSetBit;
+ #ifdef	PF2_TO_PD0_WR
+  if(wSetBit & LCD_BIT_WR)
+   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0004) = 0x0000;
+  else
+   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + (wSetBit << 2) ) = ~wSetBit;
+ #else
+  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + (wSetBit << 2) ) = ~wSetBit;
+ #endif
 }
 
 //Порт "К" на передачу данных.
@@ -201,13 +229,15 @@ void    ReadyLCD(void)
 }
 
 //Вывод байта в заданную позицию ЖКИ в HEX(два символа)
-void  ShowCharLCD_HEX(unsigned char  bPos, unsigned char  bBCD)
+void  ShowCharLCD_HEX(unsigned char  bPos, unsigned char  bHEX)
 {
  ReadyLCD(); SetCommLCD(bPos);
- ReadyLCD(); SetDataLCD( ((bBCD >> 4) & 0x0F) + 0x30 );
+ ReadyLCD(); if(((bHEX >> 4)& 0x0F) > 9) SetDataLCD( (((bHEX >> 4) & 0x0F) - 10) + 0x41);
+             else SetDataLCD( ((bHEX >> 4) & 0x0F) + 0x30 );
 
  ReadyLCD(); SetCommLCD(bPos+1);
- ReadyLCD(); SetDataLCD( (bBCD & 0x0F) + 0x30 );
+ ReadyLCD(); if((bHEX & 0x0F) > 9) SetDataLCD( ((bHEX & 0x0F) - 10) + 0x41);
+             else SetDataLCD( (bHEX & 0x0F) + 0x30 );
 }
 
 //Вывод байта в заданную позицию ЖКИ в BCD(два символа)
@@ -247,7 +277,7 @@ void  ShowMsgLCDnCyr(unsigned char bT, unsigned char *szT)
 }
 
 // Прямая запись в строку ЖКИ с кириллицой
-void  ShowMsgLCD(unsigned char  bT, unsigned char  *szT)
+void  ShowMsgLCD(unsigned char  bT, const unsigned char  *szT)
 {
  unsigned char  i;
 
@@ -265,15 +295,24 @@ void  ShowMsgLCD(unsigned char  bT, unsigned char  *szT)
 //Инициализация портов GPIO для работы с индикатором
 void InitGPIO_LCD(void)
 {
- HWREG(SYSCTL_RCGCGPIO) |= 0x0220;//Запуск генераторов портов "F" и "K"
+ #ifdef	PF2_TO_PD0_WR
+  HWREG(SYSCTL_RCGCGPIO) |= 0x0228;//Запуск генераторов портов "F" и "K" и "D"
+ #else
+  HWREG(SYSCTL_RCGCGPIO) |= 0x0220;//Запуск генераторов портов "F" и "K"
+ #endif
 
- _NOP(); _NOP(); _NOP(); //3 пустых такта для запуска генератора
+ RunClocking();
 
  HWREG(GPIO_PORTK_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DEN) |= 0x0F;//работа с цифровым сигналом
 
  SetPortK_Out();//Пины порта "К" на передачу данных
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0x0F;//младшие пины Порта "F" на передачу (управляющие всегда на передаче)
+
+ #ifdef	PF2_TO_PD0_WR
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) |= 0x01;//PD0
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x01;//PD0
+ #endif
 
  ClearCtrlBit_LCD(LCD_BIT_E);  //E=0 Индикатор не выбран
  ClearCtrlBit_LCD(LCD_BIT_WR); //WR=0
@@ -292,4 +331,40 @@ void    InitLCD(void)
   ReadyLCD();   SetCommLCD(0x01);
   ReadyLCD();   SetCommLCD(0x06);
   ReadyLCD();   SetCommLCD(0x0C);
+
+  ShowMsgLCD(0x80, szName);
+  ShowMsgLCD(0xC0, szTest);
+}
+
+static uchar bPos =0;
+void ShowLCD() {
+	  if (GetCommLCD() == 0)
+	  {
+	    if (bPos == 0)
+	    {
+	      SetCommLCD(0x80);
+	      bPos++;
+	    }
+	    else
+	    if (bPos <  17)
+	    {
+	      SetDataLCD( mpbCyrillic[ szHi[bPos-1] ] );
+	      bPos++;
+	    }
+	    else
+	    if (bPos == 17)
+	    {
+	      SetCommLCD(0xC0);
+	      bPos++;
+	    }
+	    else
+	    if (bPos <  34)
+	    {
+	      SetDataLCD( mpbCyrillic[ szLo[bPos-18] ] );
+	      bPos++;
+	    }
+	    else
+	    if (bPos >= 34)
+	      bPos = 0;
+	  }
 }

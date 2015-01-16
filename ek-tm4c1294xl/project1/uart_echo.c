@@ -16,6 +16,7 @@
 #include "driverlib/timer.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
+#include "src/display/lcd.h"
 #include "src/rtc.h"
 #include "src/keyboard.h"
 #include "src/display.h"
@@ -40,6 +41,7 @@ int main(void) {
                                              SYSCTL_USE_PLL |
                                              SYSCTL_CFG_VCO_480), 120000000);
 
+	InitLCD();
 	InitRTC();
 	InitKeyboard();
 	InitSlide();
