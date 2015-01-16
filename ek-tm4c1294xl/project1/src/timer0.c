@@ -12,6 +12,7 @@ TIMER0.C
 #include 		"driverlib/sysctl.h"
 #include 		"driverlib/timer.h"
 #include 		"serial0.h"
+#include 		"display/lcd.h"
 
 
 
@@ -21,7 +22,7 @@ void InitTimer0(uint32_t ui32SysClock) {
 
     // Configure the 32-bit periodic timer.
     TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
-    TimerLoadSet(TIMER0_BASE, TIMER_A, ui32SysClock / 10);
+    TimerLoadSet(TIMER0_BASE, TIMER_A, ui32SysClock / 100);
 
     // Setup the interrupts for the timer timeouts.
     IntEnable(INT_TIMER0A);
@@ -37,6 +38,7 @@ void Timer0IntHandler(void) {
 	TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
 
 	InDelay0();
+	ShowLCD();
 
     GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0);
     SysCtlDelay(5000);
