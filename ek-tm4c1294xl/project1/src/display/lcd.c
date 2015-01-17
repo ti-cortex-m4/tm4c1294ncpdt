@@ -337,7 +337,7 @@ void    InitLCD(void)
 }
 
 static uchar bPos =0;
-void ShowLCD() {
+void LCD_Timer0() {
 	  if (GetCommLCD() == 0)
 	  {
 	    if (bPos == 0)

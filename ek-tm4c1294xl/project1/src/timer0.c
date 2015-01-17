@@ -37,10 +37,6 @@ void InitTimer0(uint32_t ui32SysClock) {
 void Timer0IntHandler(void) {
 	TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
 
-	InDelay0();
-	ShowLCD();
-
-    GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0);
-    SysCtlDelay(5000);
-    GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0);
+	InDelay0_Timer0();
+	LCD_Timer0();
 }
