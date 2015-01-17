@@ -22,7 +22,7 @@ void InitTimer0(uint32_t ui32SysClock) {
 
     // Configure the 32-bit periodic timer.
     TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
-    TimerLoadSet(TIMER0_BASE, TIMER_A, ui32SysClock / 100);
+    TimerLoadSet(TIMER0_BASE, TIMER_A, ui32SysClock / wFREQUENCY_T0);
 
     // Setup the interrupts for the timer timeouts.
     IntEnable(INT_TIMER0A);

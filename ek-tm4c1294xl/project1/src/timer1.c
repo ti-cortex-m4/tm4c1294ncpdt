@@ -21,7 +21,7 @@ void InitTimer1(uint32_t ui32SysClock) {
 
     // Configure the 32-bit periodic timer.
     TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);
-    TimerLoadSet(TIMER1_BASE, TIMER_A, ui32SysClock / 1);
+    TimerLoadSet(TIMER1_BASE, TIMER_A, ui32SysClock / wFREQUENCY_T1);
 
     // Setup the interrupts for the timer timeouts.
     IntEnable(INT_TIMER1A);
@@ -36,5 +36,5 @@ void InitTimer1(uint32_t ui32SysClock) {
 void Timer1IntHandler(void) {
 	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
 
-	RTC_1Hz();
+	RTC_Timer1();
 }

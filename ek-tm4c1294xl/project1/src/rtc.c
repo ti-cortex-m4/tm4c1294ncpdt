@@ -77,7 +77,7 @@ void    SetCurrDate(void) {
 
 
 
-void    RTC_1Hz(void) {
+void    RTC_Timer1(void) {
   SecIndexToDate(++dwRTC);
   tiGetRTC = tiAlt;
 }

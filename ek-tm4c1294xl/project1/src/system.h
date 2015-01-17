@@ -8,6 +8,13 @@ SYSTEM.H
 #define __SYSTEM
 
 
+// частота прерывания Timer0, Гц
+#define wFREQUENCY_T0   350
+
+// частота прерывания Timer1, Гц
+#define wFREQUENCY_T1   1
+
+
 // длина заголовка пакета
 #define bPACKET_HEADER  8
 // длина заголовка пакета при передаче данных по указателю
