@@ -377,7 +377,7 @@ uint32_t ui32Status;
   }
 }
 
-void    InDelay0(void) {
+void    InDelay0_Timer0(void) {
   if (mpSerial[0] == SER_INPUT_SLAVE)
   {
     if (cwInDelay0 == 0)

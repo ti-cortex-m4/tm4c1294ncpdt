@@ -1,2 +1,2 @@
 void    InitLCD(void);
-void ShowLCD();
+void LCD_Timer0();
