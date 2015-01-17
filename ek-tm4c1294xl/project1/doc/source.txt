@@ -92,10 +92,10 @@ src\system.h
 src\tariffs
 src\timedate.c
 src\timedate.h
-src\timer0.c
-src\timer0.h
-src\timer1.c
-src\timer1.h
++       src\timer0.c
++       src\timer0.h
++       src\timer1.c
++       src\timer1.h
 src\uarts.c
 src\uarts.h
 src\hardware\watchdog.c
