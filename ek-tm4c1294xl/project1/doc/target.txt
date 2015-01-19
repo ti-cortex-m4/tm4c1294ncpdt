@@ -81,8 +81,8 @@ correct2.c
 correct2.h
 correct3.c
 correct3.h
-cp1251.c
-cp1251.h
++       cp1251.c
++       cp1251.h
 crc-12.c
 crc-12.h
 crc-16.c
