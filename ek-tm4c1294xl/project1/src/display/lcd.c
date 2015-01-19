@@ -46,7 +46,7 @@ void _Delay(unsigned long ulgTime)
 }
 
 //3 такта на запуск генераторов периферии
-void RunClocking(void)
+static void RunClocking(void)
 {
 __asm("   nop\n"
       "   nop\n"
