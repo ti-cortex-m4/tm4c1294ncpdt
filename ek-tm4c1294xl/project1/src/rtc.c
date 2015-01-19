@@ -1,11 +1,12 @@
 /*------------------------------------------------------------------------------
 RTC.C
               
-
+ DS3234EN
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
 #include        "timedate.h"
+#include        "lines.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
@@ -41,8 +42,8 @@ __asm("   nop\n"
       "   nop\n");
 }
 
-//Передача одного байта
-static void  SPI_CharOut(unsigned char bI)
+
+static void  CharOutSPI(unsigned char bI)
 {
  unsigned char bK;
 
@@ -53,11 +54,10 @@ static void  SPI_CharOut(unsigned char bI)
   HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
   HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
  }
-}//end CharOut
+}
 
 
-//Прием одного байта
-static unsigned char  SPI_CharIn(void)
+static unsigned char  CharInSPI(void)
 {
  unsigned char bRez, bK;
  bRez = 0;
@@ -70,19 +70,12 @@ static unsigned char  SPI_CharIn(void)
  }
 
  return(bRez);
-}//end CharIn
+}
 
-
-//Один синхроимпульс
-static void  SPI_OnePulse(void)
-{
- HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
- HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
-}//end OnePulse
 
 
 //Подготовка к началу работы по SPI
-static void SPI_Start(void)
+static void EnableSPI(void)
 {
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
@@ -92,11 +85,33 @@ static void SPI_Start(void)
 
 
 //Окончание работы по SPI
-static void SPI_Stop(void)
+static void DisableSPI(void)
 {
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
 }
+
+
+
+void    EnableWriteRTC(void) {
+  EnableSPI();
+
+  CharOutSPI(0x8F);
+  CharOutSPI(0x04);
+
+  DisableSPI();
+}
+
+/*
+void    DisableWriteRTC(void) {
+  EnableSPI();
+
+  CharOutSPI(0x8F);
+  CharOutSPI(0x44);
+
+  DisableSPI();
+}
+*/
 
 
 void    InitRTC(void) {
@@ -109,45 +124,67 @@ void    InitRTC(void) {
   HWREG(GPIO_PORTP_BASE + GPIO_O_DIR)   |= 0x001C;//пины на передачу (PP5 на прием)
   HWREG(GPIO_PORTP_BASE + GPIO_O_DEN)   |= 0x003C;//цифровой сигнал
 
-  SPI_Stop();
+  EnableWriteRTC();
+  DisableSPI();
 }
 
 
 
 time    *PGetCurrTimeDate(void) {
-  SPI_Start();
-  SPI_CharOut(0x00); //sec
+  EnableSPI();
+  CharOutSPI(0x00);
 
-  tiGetRTC.bSecond = FromBCD(SPI_CharIn());
-  tiGetRTC.bMinute = FromBCD(SPI_CharIn());
-  tiGetRTC.bHour   = FromBCD(SPI_CharIn());
-	                     SPI_CharIn();      //
-  tiGetRTC.bDay    = FromBCD(SPI_CharIn());
-  tiGetRTC.bMonth  = FromBCD(SPI_CharIn());
-  tiGetRTC.bYear   = FromBCD(SPI_CharIn());
+  tiGetRTC.bSecond = FromBCD(CharInSPI());
+  tiGetRTC.bMinute = FromBCD(CharInSPI());
+  tiGetRTC.bHour   = FromBCD(CharInSPI());
+	                         CharInSPI();	// день недели
+  tiGetRTC.bDay    = FromBCD(CharInSPI());
+  tiGetRTC.bMonth  = FromBCD(CharInSPI());
+  tiGetRTC.bYear   = FromBCD(CharInSPI());
 
-  return( &tiGetRTC );
+  DisableSPI();
+
+  return &tiGetRTC;
 }
 
 
 void    SetCurrTimeDate(void) {
-  SPI_Start();
-  SPI_CharOut(0x8F); //control registr
-  SPI_CharOut(0x04); //write enable
-  SPI_Stop();
+  EnableSPI();
+  CharOutSPI(0x80);
 
-  SPI_Start();
-  SPI_CharOut(0x80); //sec
-  SPI_CharOut(0x00);
-  SPI_Stop();
+  CharOutSPI( ToBCD(tiSetRTC.bSecond) );
+  CharOutSPI( ToBCD(tiSetRTC.bMinute) );
+  CharOutSPI( ToBCD(tiSetRTC.bHour)   );
+  CharOutSPI( 0                       );	// день недели
+  CharOutSPI( ToBCD(tiSetRTC.bDay)    );
+  CharOutSPI( ToBCD(tiSetRTC.bMonth)  );
+  CharOutSPI( ToBCD(tiSetRTC.bYear)   );
+
+  DisableSPI();
 }
 
 
 void    SetCurrTime(void) {
+  EnableSPI();
+  CharOutSPI(0x80);
+
+  CharOutSPI( ToBCD(tiSetRTC.bSecond) );
+  CharOutSPI( ToBCD(tiSetRTC.bMinute) );
+  CharOutSPI( ToBCD(tiSetRTC.bHour)   );
+
+  DisableSPI();
 }
 
 
 void    SetCurrDate(void) {
+  EnableSPI();
+  CharOutSPI(0x84);
+
+  CharOutSPI( ToBCD(tiSetRTC.bDay)    );
+  CharOutSPI( ToBCD(tiSetRTC.bMonth)  );
+  CharOutSPI( ToBCD(tiSetRTC.bYear)   );
+
+  DisableSPI();
 }
 
 
