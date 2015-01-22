@@ -9,10 +9,10 @@ FLASH.H
 
 
 // размер страницы
-#define wPAGE_SIZE      1056
+#define wPAGE_SIZE      528
 
 // размер страницы, доступный для записи данных пользователя
-#define wFREEPAGE_SIZE  1040
+#define wFREEPAGE_SIZE  512
 
 // количество страниц
 #define wPAGES          8192
