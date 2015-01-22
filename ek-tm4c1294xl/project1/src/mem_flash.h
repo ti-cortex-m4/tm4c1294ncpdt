@@ -4,6 +4,10 @@ MEM_FLASH.H
 
 ------------------------------------------------------------------------------*/
 
+#include        "settings/flash.h"
+
+
+
 extern  uint                    wPageIn, wPageOut,
                                 wByteIn, wByteOut;
 

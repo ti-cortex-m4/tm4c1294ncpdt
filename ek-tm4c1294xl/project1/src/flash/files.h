@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 FILES.H
 
- Функции чтения/записи массивов
+ Функции чтения/записи данных по указателю
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
@@ -9,9 +9,8 @@ FILES.H
 
 
 void    OpenOut(uint  wPage);
-bit     Save(void  xdata *pbBase, uint  wSize);
-bit     CloseOut();
+bool    Save(void  *pbBase, uint  wSize);
+bool    CloseOut();
 
-bit     OpenIn(uint  wPage);
-bit     Load(void  xdata *pbBase, uint  wSize);
-
+bool    OpenIn(uint  wPage);
+bool    Load(void  *pbBase, uint  wSize);

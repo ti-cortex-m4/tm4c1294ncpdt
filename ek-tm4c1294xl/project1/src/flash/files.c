@@ -1,13 +1,13 @@
 /*------------------------------------------------------------------------------
 FILES.C
 
- Функции чтения/записи массивов
+ Функции чтения/записи данных по указателю
 ------------------------------------------------------------------------------*/
 
 #include        <string.h>
-#include        "main.h"
-#include        "xdata.h"
-#include        "at45d081.h"
+#include        "../main.h"
+#include        "../mem_flash.h"
+#include        "at45.h"
 
 
 
@@ -20,7 +20,7 @@ void    OpenOut(uint  wPage)
 }
 
 
-bit     Save(void  xdata *pbBase, uint  wSize)
+bool    Save(void  *pbBase, uint  wSize)
 {
 uint    wFree;
 
@@ -50,14 +50,14 @@ uint    wFree;
 }  
 
 
-bit     CloseOut()
+bool    CloseOut()
 {
   return( SafePageWrite() );
 }
 
 
 
-bit     OpenIn(uint  wPage)
+bool    OpenIn(uint  wPage)
 {
   wPageIn = wPage;
 
@@ -68,7 +68,7 @@ bit     OpenIn(uint  wPage)
 }
 
 
-bit     Load(void  xdata *pbBase, uint  wSize)
+bool    Load(void  *pbBase, uint  wSize)
 {     
 uint    wFree;
 
