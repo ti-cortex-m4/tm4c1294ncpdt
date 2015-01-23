@@ -25,3 +25,5 @@ extern  uint                    cwWrnBusy,
                                 cwErrPageErase,
                                 cwErrPageRead,
                                 cwErrPageWrite;
+
+extern  uint                    mpcwFlashControl[wPAGES];
