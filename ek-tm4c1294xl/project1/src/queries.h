@@ -14,6 +14,8 @@ QUERIES.H
 #define bINQ_GETGROUP                  9
 #define bINQ_SETGROUP                  10
 
+#define bINQ_SETDELAY                  243
+
 #define bINQ_SETKEY                    246
 #define bINQ_GETDISPLAY                247
 
