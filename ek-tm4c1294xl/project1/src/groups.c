@@ -8,6 +8,7 @@ GROUPS.C
 #include        "mem_groups.h"
 #include        "mem_program.h"
 #include        "engine.h"
+#include        "flash/files.h"
 
 
 
@@ -95,3 +96,23 @@ nodes   noT;
 
   boSetGroups = boFalse;
 }
+
+
+/*
+bit     SaveGroups()
+{
+  OpenOut(wFLA_IMPMONCAN + ibMonTo*bIMPULSE);
+
+  if (Save(mpimMonCanSpec, sizeof(impulse)*bCANALS) == 0)
+    return(0);
+
+  return( CloseOut() );
+}
+
+
+bit     LoadGroups(uchar  ibMonFrom)
+{
+  OpenIn(wFLA_IMPMONCAN + ibMonFrom*bIMPULSE);
+  return( Load(mpimMonCanSpec, sizeof(impulse)*bCANALS) );
+}
+*/
