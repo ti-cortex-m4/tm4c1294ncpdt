@@ -6,6 +6,8 @@ MEM_SETTINGS.H
 
 extern  uchar                   bLogical;
 
+extern  uint                    wPrivate;
+
 
 
 extern  decret                  deDecret;
