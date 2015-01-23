@@ -5,17 +5,38 @@ DELAY.C
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
-#include 		"driverlib/sysctl.h"
 
 
 
-void    Delay(uint  wMSec)
-{
-  if (wMSec == 0) return;
+void    Nop(void) {
+  __asm("nop");
+}
 
-  while (wMSec-- > 0) {
-    SysCtlDelay(1000);
+
+void    DelayMicro(uint  wMicroSec) {
+uint  i;
+
+  if (wMicroSec == 0) return;
+
+  while (wMicroSec-- > 0) {
+    for (i=0; i<2000; i++)
+      Nop();
   }
+}
+
+
+void    DelayMilly(uint  wMillySec) {
+  if (wMillySec == 0) return;
+
+  while (wMillySec-- > 0) {
+    DelayMicro(1000);
+  }
+}
+
+
+
+void    Delay(uint  wMillySec) {
+  DelayMilly(wMillySec);
 }
 
 
