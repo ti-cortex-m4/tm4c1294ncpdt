@@ -72,7 +72,7 @@ uchar   i;
 }
 
 
-void    MakeCRC16(uchar *pbData, uint  wSize) {
+void    MakeCRC16(uchar  *pbData, uint  wSize) {
   InitCRC();
   while (wSize-- > 0) CalcCRC( *(pbData++) );
 }
