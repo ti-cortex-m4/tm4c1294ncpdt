@@ -14,13 +14,30 @@ void    Nop(void) {
 
 
 void    DelayMicro(uint  wMicroSec) {
-uint  i;
-
   if (wMicroSec == 0) return;
 
   while (wMicroSec-- > 0) {
-    for (i=0; i<2000; i++)
-      Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
+    Nop();
   }
 }
 

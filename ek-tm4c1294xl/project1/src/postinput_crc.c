@@ -13,6 +13,7 @@ POSTINPUT_CRC.C
 #include        "crc-16.h"
 #include        "output/out_rtc.h"
 #include        "output/out_groups.h"
+#include        "output/out_delay.h"
 #include        "output/out_console.h"
 #include        "display.h"
 #include        "keyboard.h"
@@ -92,6 +93,10 @@ void    PostinputCRC(void) {
 
       case bINQ_SETGROUP:
         OutSetGroup();
+        break;
+
+      case bINQ_SETDELAY:
+        OutSetDelay();
         break;
 
       case bINQ_SETKEY:
