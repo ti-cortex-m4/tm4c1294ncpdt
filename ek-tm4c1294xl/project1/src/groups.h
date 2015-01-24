@@ -14,4 +14,6 @@ bool    GetGroupsNodeSign(uchar  ibGroup, uchar  ibNode);
 uchar   GetGroupsNodeCanal(uchar  ibGroup, uchar  ibNode);
 
 void    MakeUsedNodes(void);
+
 void    ResetGroups(void);
+void    InitGroups(void);

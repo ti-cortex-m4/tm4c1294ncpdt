@@ -29,6 +29,7 @@ FLASH.H
 #define wFLA_BEGIN      0
 #define wFLA_PRIVATE    (uint)(wFLA_BEGIN)
 #define wFLA_LABEL      (uint)(wFLA_PRIVATE   + 1)
+#define wFLA_GROUPS     (uint)(wFLA_LABEL     + 1)
 #define wFLA_END        (uint)(wFLA_LABEL     + 1)
 
 
