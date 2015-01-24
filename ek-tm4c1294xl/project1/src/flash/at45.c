@@ -38,76 +38,64 @@ AT45.C
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
 
-#define DS80C400
 
-void    Delay5mcs(void) {}
 
 void    EnableFlash()
 {
-  Delay5mcs();
-
-  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;//PH0
-  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-  HWREG(GPIO_DATABIT_CS)  = ~SPI_BIT_CS;//PH0
-
-  Delay5mcs();
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+  HWREG(GPIO_DATABIT_CS)  = ~SPI_BIT_CS;
 }
 
 
 void    DisableFlash(void)
 {
-  Delay5mcs();
-
-  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;//PH0
-
-  Delay5mcs();
+  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
 }
 
 
-void    CharOut(uchar  bI)
+
+void    CharOut(uchar  bT)
 {
-	  //bit 7
-	  if(bI & 0x80) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;//PQ2
-	  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
-	  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;//PQ0
-	  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-	  //bit 6
-	  if(bI & 0x40) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;//PQ2
-	  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
-	  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;//PQ0
-	  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-	  //bit 5
-	  if(bI & 0x20) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;//PQ2
-	  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
-	  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;//PQ0
-	  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-	  //bit 4
-	  if(bI & 0x10) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;//PQ2
-	  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
-	  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;//PQ0
-	  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-	  //bit 3
-	  if(bI & 0x08) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;//PQ2
-	  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
-	  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;//PQ0
-	  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-	  //bit 2
-	  if(bI & 0x04) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;//PQ2
-	  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
-	  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;//PQ0
-	  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-	  //bit 1
-	  if(bI & 0x02) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;//PQ2
-	  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
-	  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;//PQ0
-	  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
-	  //bit 0
-	  if(bI & 0x01) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;//PQ2
-	  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
-	  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;//PQ0
-	  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;//PQ0
+  if (bT & 0x80) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
+  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+
+  if (bT & 0x40) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
+  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+
+  if (bT & 0x20) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
+  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+
+  if (bT & 0x10) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
+  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+
+  if (bT & 0x08) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
+  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+
+  if (bT & 0x04) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
+  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+
+  if (bT & 0x02) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
+  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+
+  if (bT & 0x01) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
+  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
 }
 
 
@@ -384,31 +372,40 @@ uchar   i;
 }
 
 
-/*
+static void RunClocking(void)
+{
+__asm("   nop\n"
+      "   nop\n"
+      "   nop\n");
+}
+
+
+void Init_SPIhandAT45DB321(void)
+{
+ //Включение периферии
+ HWREG(SYSCTL_RCGCGPIO) |= 0x4080;//Запуск генераторов портов "H" и "Q"
+
+ RunClocking();
+
+ //Для порта "Q" (SPI)
+ HWREG(GPIO_PORTQ_BASE + GPIO_O_DIR)   |= 0x0005;//пины на передачу (PQ3 на прием)
+ HWREG(GPIO_PORTQ_BASE + GPIO_O_DEN)   |= 0x000D;//цифровой сигнал
+
+ //Для порта "H" (CE)
+ HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DIR) |= 0x0001;//пин на передачу
+ HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DEN) |= 0x0001;//цифровой сигнал
+}
+
+
+
 void    InitFlash(void)
 {
-#ifdef  DS80C400
-  TA = 0xAA; TA = 0x55; P5CNT &= 0xF0;
+  Init_SPIhandAT45DB321();
+  DisableFlash();
 
-  P6 |= bMASK_CS;
-  sfSCK = 0;
-#else
-//  sfCS  = 1;                          // Inactive Clock Polarity Low
-  bP4 |= bMASK_CS;
-
-//  sfSCK = 0;
-  bP4 &= ~bMASK_SCK;
-
-//  sfSO  = 1;
-  bP4 |= bMASK_SO;
-
-//  sfSI  = 1;
-  bP4 |= bMASK_SI;
-#endif
-
-//  if (SafeReadStatus() == 0) TestError(szBadFlash);
+// TODO if (SafeReadStatus() == 0) TestError(szBadFlash);
 }
-*/
+
 
 
 uint    GetFlashStatus(void)

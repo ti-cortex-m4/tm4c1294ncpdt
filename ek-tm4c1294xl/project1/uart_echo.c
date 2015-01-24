@@ -19,11 +19,13 @@
 #include "src/display/lcd.h"
 #include "src/rtc.h"
 #include "src/keyboard.h"
+#include "src/flash/at45.h"
 #include "src/display.h"
 #include "src/slide.h"
 #include "src/timer0.h"
 #include "src/timer1.h"
 #include "src/uarts.h"
+#include "src/groups.h"
 #include "src/postinput_crc.h"
 
 // The error routine that is called if the driver library encounters an error.
@@ -42,10 +44,13 @@ int main(void) {
                                              SYSCTL_CFG_VCO_480), 120000000);
 
 	InitLCD();
+	InitFlash();
 	InitRTC();
 	InitKeyboard();
 	InitSlide();
 	InitDisplay();
+
+	InitGroups();
 
     InitUARTs(ui32SysClock);
     InitTimer0(ui32SysClock);
