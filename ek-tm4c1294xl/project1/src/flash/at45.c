@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 AT45.C
 
-
+ AT45DB321B, SPI Mode 0
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -162,17 +162,18 @@ uchar   CharIn(void)
 	 return(bRez);
 }
 
+
+
 uchar   ReadStatus(void)
 {
   EnableFlash();
 
-  CharOut(0x57);
+  CharOut(0xD7);
   bStatusFlash = CharIn();
 
   DisableFlash();
   return(bStatusFlash);
 }
-
 
 
 bool    SafeReadStatus(void)
@@ -270,6 +271,29 @@ uint    i;
 }
 
 
+bool    SafePageRead(void)
+{
+uchar   i;
+
+  for (i=0; i<bMAXREPEAT; i++)
+  {
+    if (PageRead() == 0)
+    {
+      cwWrnPageRead++;
+      continue;
+    }
+    else break;
+  }
+
+  if (i == bMAXREPEAT)
+  {
+    cwErrPageRead++;
+    return(0);
+  }
+  else return(1);
+}
+
+
 
 bool    PageWrite(void)
 {
@@ -326,31 +350,6 @@ uint    i;
     else return(1);
   }
 }
-
-
-
-bool    SafePageRead(void)
-{
-uchar   i;
-
-  for (i=0; i<bMAXREPEAT; i++)
-  {
-    if (PageRead() == 0)
-    {
-      cwWrnPageRead++;
-      continue;
-    }
-    else break;
-  }
-
-  if (i == bMAXREPEAT)
-  {
-    cwErrPageRead++;
-    return(0);
-  }
-  else return(1);
-}
-
 
 
 bool    SafePageWrite(void)
