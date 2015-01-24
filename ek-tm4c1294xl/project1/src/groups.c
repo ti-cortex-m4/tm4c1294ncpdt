@@ -9,6 +9,7 @@ GROUPS.C
 #include        "mem_program.h"
 #include        "engine.h"
 #include        "flash/files.h"
+#include        "settings/flash.h"
 
 
 
@@ -75,6 +76,32 @@ uchar   i,j;
 
 
 
+bool    SaveGroups(void)
+{
+  OpenOut(wFLA_GROUPS);
+
+  if (Save(mpgrGroups, sizeof(groups)) == 0)
+    return(0);
+
+  return CloseOut();
+}
+
+
+bool    LoadGroups(void)
+{
+  OpenIn(wFLA_GROUPS);
+  return Load(mpgrGroups, sizeof(groups));
+}
+
+
+
+void    InitGroups(void)
+{
+  LoadGroups();
+  MakeUsedNodes();
+}
+
+
 void    ResetGroups(void)
 {
 uchar   i;
@@ -91,28 +118,9 @@ nodes   noT;
     }
     else SetGroupsSize(i,0);
   }
+  SaveGroups();
 
   MakeUsedNodes();
 
   boSetGroups = boFalse;
 }
-
-
-/*
-bit     SaveGroups()
-{
-  OpenOut(wFLA_IMPMONCAN + ibMonTo*bIMPULSE);
-
-  if (Save(mpimMonCanSpec, sizeof(impulse)*bCANALS) == 0)
-    return(0);
-
-  return( CloseOut() );
-}
-
-
-bit     LoadGroups(uchar  ibMonFrom)
-{
-  OpenIn(wFLA_IMPMONCAN + ibMonFrom*bIMPULSE);
-  return( Load(mpimMonCanSpec, sizeof(impulse)*bCANALS) );
-}
-*/
