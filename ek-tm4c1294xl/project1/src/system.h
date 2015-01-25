@@ -74,4 +74,17 @@ SYSTEM.H
 #define bGROUPS         32
 
 
+// размер трёхминутных массивов
+#define bMINUTES        40
+
+// размер получасовых массивов
+#define wHOURS          (uint)(10*48)
+
+// размер суточных массивов
+#define bDAYS           14
+
+// размер месячных массивов (обязательно 12 !)
+#define bMONTHS         12
+
+
 #endif

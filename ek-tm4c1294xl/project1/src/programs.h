@@ -11,9 +11,18 @@ PROGRAMS.H
 
 // режим: программирование
 #define bSET_SPEED                  1
-#define bSET_GROUPS                 2
 #define bSET_CURRDATE               8
 #define bSET_CURRTIME               9
+
+#define bSET_GROUPS                 2
+
+#define bSET_TRANS_ENG              4
+#define bSET_TRANS_CNT              244
+#define bSET_PULSE_HOU              5
+#define bSET_PULSE_MNT              245
+#define bSET_COUNT                  6
+#define bSET_LOSSE                  3
+#define bSET_LEVEL                  108
 
 #define bSET_PASSWORD               11
 #define bSET_LOGICAL                13
@@ -34,7 +43,14 @@ PROGRAMS.H
 // режим: функционирование
 #define bGET_CURRTIME               1
 #define bGET_CURRDATE               3
+
 #define bGET_GROUPS                 4
+
+#define bGET_TRANS_ENG              6
+#define bGET_TRANS_CNT              246
+#define bGET_PULSE_HOU              7
+#define bGET_PULSE_MNT              247
+#define bGET_LOSSE                  37
 
 
 // все режимы

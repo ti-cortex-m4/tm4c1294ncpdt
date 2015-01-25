@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_FACTORS.H
+MEM_CANALS.H
 
 
 ------------------------------------------------------------------------------*/
@@ -18,3 +18,5 @@ extern  real                    mpreValueEngHou[bCANALS],
 extern  real                    mpreCount[bCANALS];
 
 extern  real                    mpreLosse[bCANALS];
+
+extern  real                    mpreLevelDiv[bCANALS];
