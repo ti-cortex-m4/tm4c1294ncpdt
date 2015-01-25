@@ -17,6 +17,7 @@ KEYBOARD.C
 #include        "keyboard/key_logical.h"
 #include        "keyboard/key_private.h"
 #include        "keyboard/key_start.h"
+#include        "keyboard/key_version.h"
 #include        "keyboard/key_decret.h"
 #include        "keyboard/key_season.h"
 #include        "keyboard/key_groups.h"
@@ -330,7 +331,8 @@ uchar   i;
       case bSET_STARTHOU:
       case bSET_START:          key_Start();            break;
       case bSET_DEBUG:          key_Debug();            break;
-//      case bSET_VERSION:        key_GetVersion();       break;
+
+      case bSET_VERSION:        key_GetVersion();       break;
 
       case bSET_RESETCUSTOM:
       case bSET_RESETFULL:      key_SetReset();         break;
@@ -368,8 +370,8 @@ uchar   i;
       case bSET_LOGICAL:        key_SetLogical();       break;
       case bSET_PRIVATE:        key_SetPrivate();       break;
 
-//      case bSET_VERSION:
-//      case bGET_VERSION:        key_GetVersion();       break;
+      case bSET_VERSION:
+      case bGET_VERSION:        key_GetVersion();       break;
 
       case bSET_MAJORDELAYS:
       case bSET_MINORDELAYS:    key_SetDelays();        break;
@@ -399,7 +401,7 @@ uchar   i;
 
       case bSET_START:          key_Restart();          break;
 
-//      case bSET_VERSION:        key_GetVersion();       break;
+      case bSET_VERSION:        key_GetVersion();       break;
 
       case bSET_RESETCUSTOM:
       case bSET_RESETFULL:      key_SetReset();         break;
