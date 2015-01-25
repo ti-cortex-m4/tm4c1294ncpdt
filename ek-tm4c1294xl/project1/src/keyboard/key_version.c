@@ -5,13 +5,10 @@ KEY_VERSION.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-//#include        "xdata.h"
 #include        "../keyboard.h"
 #include        "../display.h"
-//#include        "lines.h"
 #include        "../beep.h"
-//#include        "memory.h"
-//#include        "devices.h"
+#include        "../hardware/memory.h"
 
 
 
@@ -30,13 +27,13 @@ void    ShowVersion(void)
     case 0: 
       ShowHi(szVersion); Clear();
       sprintf(szLo+0,"%02u.%02u.%u.%04X",
-              bMAXVERSION,bMINVERSION,GetBuildNumber(),GetCODEChecksum());
+              bMAXVERSION, bMINVERSION, GetBuildNumber(), GetCODEChecksum());
       break;
 
     case 1: 
       ShowHi(szQuantity); Clear();
-      sprintf(szLo+0,"%02u.%02u.%03bu.%05lu",
-              bCANALS,bGROUPS,(uchar)(wHOURS/48),GetCODESize());
+      sprintf(szLo+0,"%02u.%02u.%03u.%05lu",
+              bCANALS, bGROUPS, (uchar)(wHOURS/48), GetCODESize());
       break;
 
     case 2: 
@@ -52,7 +49,7 @@ void    ShowVersion(void)
 
     case 3: 
       ShowHi(szQuality); Clear();
-      sprintf(szLo+3,"типов: %bu",bDEVICES);
+      sprintf(szLo+3,"типов: %u", bDEVICES);
       break;
   }
 }
