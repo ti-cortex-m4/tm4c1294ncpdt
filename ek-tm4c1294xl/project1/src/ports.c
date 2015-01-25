@@ -59,6 +59,47 @@ void    LongResult(uchar  bT) {
 }
 
 
+void    Outptr(void  *pData, uint  wSize)
+{
+  InitPush();
+
+  PushChar(bLogical);
+  PushChar(0);
+
+  PushChar( (bHEADER + wSize + 2) % 0x100 );
+  PushChar( (bHEADER + wSize + 2) / 0x100 );
+
+  PushChar(bQuery);
+
+  InitPushCRC();
+
+  PushChar( 0/*GetHouIndex()*/ );
+  PushChar( 0/*mpibEngCurrTariff[ GetHouIndex() ]*/ );
+  PushChar( 0/*mpibPowCurrTariff[ GetHouIndex() ]*/ );
+
+  PushChar(0/*ibSoftMnt*/);
+  PushInt(0/*iwHardHou*/);
+  PushChar(0/*ibHardDay*/);
+  PushChar(0/*ibHardMon*/);
+
+  PushChar(0/*cbWaitQuery*/);
+  PushChar(0);
+
+  MakeCRC16OutBuff(0,bHEADER);
+
+  switch (ibPort)
+  {
+    case 0:
+      pbData0 = pData;
+      bCRCHi0 = bCRCHi;
+      bCRCLo0 = bCRCLo;
+      break;
+  }
+
+  Answer(wSize+bHEADER,SER_HEADER);
+}
+
+
 void    Common(void  *pbData, uint  wSize) {
   if (5+wSize < wOUTBUFF_SIZE-bMARGIN) {
     InitPushCRC();
