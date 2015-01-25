@@ -12,9 +12,9 @@ SLIDES.C
 
 bool                    fSlide;
 
-char                    **ppszCurr;
+char const              **ppszCurr;
 
-char                    **ppszFirst;
+char const              **ppszFirst;
 
 int                     cwSlide;
 
@@ -30,7 +30,7 @@ void    InitSlide(void)
 }
 
 
-void    LoadSlide(char  *ppszT[])
+void    LoadSlide(char const  *ppszT[])
 {
   fSlide = false;
 

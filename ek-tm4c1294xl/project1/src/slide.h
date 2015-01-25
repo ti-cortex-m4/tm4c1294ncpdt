@@ -12,6 +12,6 @@ extern  uchar                   **ppszFirst;
 
 void    InitSlide(void);
 
-void    LoadSlide(char  *ppszT[]);
+void    LoadSlide(char const  *ppszT[]);
 void    ShowSlide(char  szT[]);
 void    NextSlide(void);

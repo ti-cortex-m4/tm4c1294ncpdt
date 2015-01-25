@@ -6,49 +6,42 @@ ENERGY.C
 
 #include        "main.h"
 #include        "engine.h"
+#include        "mem_canals.h"
+#include        "memory/mem_energy.h"
+#include        "mem_realtime.h"
+#include        "memory/mem_graph3.h"
+#include        "sensors.h"
 
 
 
-// прочитать из канального массива unsigned int
-uint    *PGetCanInt(uint  *mpwT, uchar  ibCanal)
-{
+uint    *PGetCanInt(uint  *mpwT, uchar  ibCanal) {
   return( &mpwT[ibCanal] );
 }
 
 
-// записать в канальный массив unsigned int
-void    SetCanInt(uint  *mpwT, uchar  ibCanal, uint  wT)
-{
+void    SetCanInt(uint  *mpwT, uchar  ibCanal, uint  wT) {
   mpwT[ibCanal] = wT;
 }
 
 
 
-// прочитать из канального массива unsigned int
-ulong   *PGetCanLong(ulong  *mpdwT, uchar  ibCanal)
-{
+ulong   *PGetCanLong(ulong  *mpdwT, uchar  ibCanal) {
   return( &mpdwT[ibCanal] );
 }
 
 
-// записать в канальный массив unsigned int из dwBuffC
-void    SetCanLong(ulong  *mpdwT, uchar  ibCanal)
-{
+void    SetCanLong(ulong  *mpdwT, uchar  ibCanal) {
   mpdwT[ibCanal] = dwBuffC;
 }
 
 
 
-// прочитать из канального массива real
-real    *PGetCanReal(real  *mpreT, uchar  ibCanal)
-{
+real    *PGetCanReal(real  *mpreT, uchar  ibCanal) {
   return( &mpreT[ibCanal] );
 }
 
 
-// записать в канальный массив real из reBuffA
-void    SetCanReal(real  *mpreT, uchar  ibCanal)
-{
+void    SetCanReal(real  *mpreT, uchar  ibCanal) {
   mpreT[ibCanal] = reBuffA;
 }
 
@@ -71,4 +64,24 @@ uchar   i;
     dwBuffC += *PGetCanImp(mpimT,ibCanal,i);
 
   return( &dwBuffC );
+}
+
+
+
+// рассчитать показания счётчиков по приращению импульсов
+real    *PGetCounterOld(uchar  ibCanal)
+{
+  if (GetDigitalDevice(ibCanal) == 19)
+  {
+    reBuffA = mpdwBase[ibCanal] * *PGetCanReal(mpreValueCntHou,ibCanal);
+    reBuffA += *PGetCanReal(mpreCount,ibCanal);
+  }
+  else
+  {
+    reBuffA  = *PGetCanInt(mpwImpMntCan[ibSoftMnt],ibCanal) * *PGetCanReal(mpreValueCntMnt,ibCanal);
+    reBuffA += *PGetCanImpAll(mpimAbsCan,ibCanal)           * *PGetCanReal(mpreValueCntHou,ibCanal);
+    reBuffA += *PGetCanReal(mpreCount,ibCanal);
+  }
+
+  return( &reBuffA );
 }

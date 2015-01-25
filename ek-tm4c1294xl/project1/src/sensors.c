@@ -9,13 +9,37 @@ SENSORS.C
 
 
 
-ulong   GetMajDelay(uchar  i)
-{
-  return( (ulong)1000*mpwMajInDelay[i]/wFREQUENCY_T0 );
+ulong   GetMajDelay(uchar  ibPort) {
+  return (ulong)1000*mpwMajInDelay[ibPort]/wFREQUENCY_T0;
 }
 
 
-ulong   GetMinDelay(uchar  i)
-{
-  return( (ulong)1000*mpwMinInDelay[i]/wFREQUENCY_T0 );
+ulong   GetMinDelay(uchar  ibPort) {
+  return (ulong)1000*mpwMinInDelay[ibPort]/wFREQUENCY_T0;
+}
+
+
+
+uchar   GetDigitalPort(uchar  ibCanal) {
+  return 0;
+}
+
+
+uchar   GetDigitalPhone(uchar  ibCanal) {
+  return 0;
+}
+
+
+uchar   GetDigitalDevice(uchar  ibCanal) {
+  return 0;
+}
+
+
+uchar   GetDigitalAddress(uchar  ibCanal) {
+  return 0;
+}
+
+
+uchar   GetDigitalLine(uchar  ibCanal) {
+  return 0;
 }
