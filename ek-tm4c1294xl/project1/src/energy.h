@@ -15,3 +15,5 @@ void    SetCanReal(real  *mpreT, uchar  ibCanal);
 
 ulong   *PGetCanImp(impulse  *mpimT, uchar  ibCanal, uchar  ibTariff);
 ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCanal);
+
+real    *PGetCounterOld(uchar  ibCanal);
