@@ -80,6 +80,12 @@ void    ShowLong(ulong  *pdwT)
 }
 
 
+void    ShowReal(real  *preT)
+{
+  sprintf(szLo,"%13.3f",  *preT);
+}
+
+
 void    ShowBoolean(boolean  boT)
 {
   if (boT == boFalse) 
