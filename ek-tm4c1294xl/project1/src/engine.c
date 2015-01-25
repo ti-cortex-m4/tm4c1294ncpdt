@@ -8,12 +8,14 @@ ENGINE.Ñ
 
 
 
-uchar                   ibCan,ibGrp,ibDig;
+uchar                   ibCan, ibGrp, ibDig;
 
-uchar                   ibDay,ibMon;
+uchar                   ibDay, ibMon;
 
 uint                    iwHou;
 
 ulong                   dwBuffC;
 
 uint                    wBuffD;
+
+real                    reBuffA, reBuffB;

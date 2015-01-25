@@ -10,9 +10,13 @@ KEY_CANALS.C
 #include        "../memory/mem_energy.h"
 #include        "../memory/mem_graph3.h"
 #include        "../display.h"
+#include        "../slide.h"
+#include        "../lines.h"
 #include        "../beep.h"
 #include        "../keyboard.h"
 #include        "../programs.h"
+#include        "../engine.h"
+#include        "../energy.h"
 
 
 
@@ -22,15 +26,11 @@ static char const       szTransEng[]    = "  трансформации ",
                         szLosse[]       = "  потерь, %     ",
                         szLevel[]       = "  отношени€     ",
                         szCount[]       = "—четчики        ",
-                        szValueEngHou[] = "Ёквиваленты: A  ",
-                        szValueCntHou[] = "Ёквиваленты: B  ",
-                        szValueEngMnt[] = "Ёквиваленты: C  ",
-                        szValueCntMnt[] = "Ёквиваленты: D  ",
                         szSpecial[]     = " (специальный)  ",
                         szMaskCanals[]  = "_________ ___";
                       
-static *char const      pszTransCnt[]   = { szTransEng, szSpecial, "" },
-                        pszPulseMnt[]   = { szPulseHou, szSpecial, "" };
+static char const      *pszTransCnt[]   = { szTransEng, szSpecial, "" },
+                       *pszPulseMnt[]   = { szPulseHou, szSpecial, "" };
 
 
 
@@ -69,7 +69,7 @@ void    ShowCanals(void)
     }
   }
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 }
 
 

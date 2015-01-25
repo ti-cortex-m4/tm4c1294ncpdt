@@ -26,6 +26,7 @@ void    InitDisplay(void);
 void    ShowChar(uchar  bT);
 void    ShowInt(uint  wT);
 void    ShowLong(ulong  *pdwT);
+void    ShowReal(real  *preT);
 
 void    ShowBoolean(boolean  boT);
 void    ShowAnswer(void);

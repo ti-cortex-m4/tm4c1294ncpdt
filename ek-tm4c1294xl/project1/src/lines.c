@@ -95,6 +95,17 @@ uchar   GetChar(uchar  ibBeg, uchar  ibEnd)
 }            
 
 
+real    *PGetReal(uchar  ibBeg, uchar  ibEnd)
+{
+  reBuffB = 0;
+
+  while (ibBeg <= ibEnd)
+    reBuffB = reBuffB*10 + ToChar( szLo[ibBeg++] );
+
+  return( &reBuffB );
+}
+
+
 
 void    Hi(uchar  i, uchar  bT)
 {
