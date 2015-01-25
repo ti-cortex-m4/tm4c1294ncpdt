@@ -36,10 +36,13 @@ SYSTEM.H
 
 // количество портов
 #define bPORTS          4
+
 // количество скоростей
 #define bSPEEDS         9
+
 // количество типов четности
 #define bPARITYS        5
+
 // количество режимов портов
 #define bSTREAMS        5
 
@@ -67,11 +70,21 @@ SYSTEM.H
 #define bGAPS           11
 
 
+// мажорная версия прибора
+#define bMAXVERSION     4
+
+// минорная версия прибора
+#define bMINVERSION     18
+
+
 // количество каналов
 #define bCANALS         64
 
 // количество групп
 #define bGROUPS         32
+
+// количество типов цифровых счётчиков
+#define bDEVICES        0
 
 
 // размер трёхминутных массивов

@@ -27,6 +27,7 @@ PROGRAMS.H
 #define bSET_PASSWORD               11
 #define bSET_LOGICAL                13
 #define bSET_PRIVATE                99
+#define bSET_VERSION                115
 
 #define bSET_START                  15
 #define bSET_STARTHOU               16
@@ -45,6 +46,8 @@ PROGRAMS.H
 #define bGET_CURRDATE               3
 
 #define bGET_GROUPS                 4
+
+#define bGET_VERSION                15
 
 #define bGET_TRANS_ENG              6
 #define bGET_TRANS_CNT              246
