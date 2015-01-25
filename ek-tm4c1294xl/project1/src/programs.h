@@ -27,6 +27,8 @@ PROGRAMS.H
 #define bSET_MAJORDELAYS            97
 #define bSET_MINORDELAYS            98
 
+#define bSET_PRIVATE                99
+
 
 // режим: функционирование
 #define bGET_CURRTIME               1
