@@ -14,12 +14,13 @@ KEYBOARD.C
 #include        "programs.h"
 #include        "keyboard/key_timedate.h"
 #include        "keyboard/key_password.h"
+#include        "keyboard/key_logical.h"
+#include        "keyboard/key_private.h"
 #include        "keyboard/key_start.h"
 #include        "keyboard/key_decret.h"
 #include        "keyboard/key_season.h"
 #include        "keyboard/key_groups.h"
 #include        "keyboard/key_delays.h"
-#include        "keyboard/key_private.h"
 #include        "keyboard/key_reset.h"
 #include        "keyboard/key_analysis.h"
 
@@ -314,6 +315,8 @@ uchar   i;
       case bSET_GROUPS:         key_SetGroups();        break;
 
       case bSET_PASSWORD:       key_SetPassword();      break;
+      case bSET_LOGICAL:        key_SetLogical();       break;
+      case bSET_PRIVATE:        key_SetPrivate();       break;
 
       case bSET_STARTHOU:
       case bSET_START:          key_Start();            break;
@@ -325,9 +328,6 @@ uchar   i;
 
       case bSET_MAJORDELAYS:
       case bSET_MINORDELAYS:    key_SetDelays();        break;
-
-//      case bSET_LOGICAL:        key_SetChar();          break;
-      case bSET_PRIVATE:        key_SetPrivate();       break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
@@ -349,15 +349,14 @@ uchar   i;
       case bGET_GROUPS:         key_GetGroups();        break;
 
       case bSET_PASSWORD:       key_GetPassword();      break;
+      case bSET_LOGICAL:        key_SetLogical();       break;
+      case bSET_PRIVATE:        key_SetPrivate();       break;
 
 //      case bSET_VERSION:
 //      case bGET_VERSION:        key_GetVersion();       break;
 
       case bSET_MAJORDELAYS:
       case bSET_MINORDELAYS:    key_SetDelays();        break;
-
-//      case bSET_LOGICAL:        key_SetChar();          break;
-      case bSET_PRIVATE:        key_SetPrivate();       break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
@@ -379,6 +378,9 @@ uchar   i;
       case bSET_GROUPS:         key_SetGroups();        break;
 
       case bSET_PASSWORD:       key_SetPassword();      break;
+      case bSET_LOGICAL:        key_SetLogical();       break;
+      case bSET_PRIVATE:        key_SetPrivate();       break;
+
       case bSET_START:          key_Restart();          break;
 
 //      case bSET_VERSION:        key_GetVersion();       break;
@@ -388,9 +390,6 @@ uchar   i;
 
       case bSET_MAJORDELAYS:
       case bSET_MINORDELAYS:    key_SetDelays();        break;
-
-//      case bSET_LOGICAL:        key_SetChar();          break;
-      case bSET_PRIVATE:        key_SetPrivate();       break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
