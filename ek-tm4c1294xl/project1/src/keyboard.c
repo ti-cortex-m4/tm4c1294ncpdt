@@ -20,6 +20,7 @@ KEYBOARD.C
 #include        "keyboard/key_decret.h"
 #include        "keyboard/key_season.h"
 #include        "keyboard/key_groups.h"
+#include        "keyboard/key_canals.h"
 #include        "keyboard/key_delays.h"
 #include        "keyboard/key_reset.h"
 #include        "keyboard/key_analysis.h"
@@ -314,6 +315,14 @@ uchar   i;
 
       case bSET_GROUPS:         key_SetGroups();        break;
 
+      case bSET_TRANS_ENG:
+      case bSET_TRANS_CNT:
+      case bSET_PULSE_HOU:
+      case bSET_PULSE_MNT:
+      case bSET_LOSSE:
+      case bSET_LEVEL:
+      case bSET_COUNT:          key_SetCanals();        break;
+
       case bSET_PASSWORD:       key_SetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;
       case bSET_PRIVATE:        key_SetPrivate();       break;
@@ -347,6 +356,13 @@ uchar   i;
       case bGET_CURRDATE:       key_SetCurrDate();      break;
 
       case bGET_GROUPS:         key_GetGroups();        break;
+
+      case bGET_TRANS_ENG:
+      case bGET_TRANS_CNT:
+      case bGET_PULSE_HOU:
+      case bGET_PULSE_MNT:
+      case bGET_LOSSE:
+      case bSET_LEVEL:          key_GetCanals();        break;
 
       case bSET_PASSWORD:       key_GetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;

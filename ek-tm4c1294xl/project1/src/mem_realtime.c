@@ -10,3 +10,12 @@ MEM_REALTIME.S
 
 // переменные для обработки переходов времени
 time                    tiCurr, tiPrev;
+
+// индексы по кольцевым буферам
+uchar                   ibSoftMnt,
+                        ibSoftHou,
+                        ibSoftDay, ibHardDay,
+                        ibSoftMon, ibHardMon;
+
+// индексы по кольцевому буферу
+uint                    iwHardHou;
