@@ -14,7 +14,10 @@ PROGRAMS.H
 #define bSET_GROUPS                 2
 #define bSET_CURRDATE               8
 #define bSET_CURRTIME               9
+
 #define bSET_PASSWORD               11
+#define bSET_LOGICAL                13
+#define bSET_PRIVATE                99
 
 #define bSET_START                  15
 #define bSET_STARTHOU               16
@@ -26,8 +29,6 @@ PROGRAMS.H
 
 #define bSET_MAJORDELAYS            97
 #define bSET_MINORDELAYS            98
-
-#define bSET_PRIVATE                99
 
 
 // режим: функционирование
