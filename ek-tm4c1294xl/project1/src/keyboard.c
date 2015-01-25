@@ -19,6 +19,7 @@ KEYBOARD.C
 #include        "keyboard/key_season.h"
 #include        "keyboard/key_groups.h"
 #include        "keyboard/key_delays.h"
+#include        "keyboard/key_private.h"
 #include        "keyboard/key_reset.h"
 #include        "keyboard/key_analysis.h"
 
@@ -326,7 +327,7 @@ uchar   i;
       case bSET_MINORDELAYS:    key_SetDelays();        break;
 
 //      case bSET_LOGICAL:        key_SetChar();          break;
-//      case bSET_PRIVATE:        key_SetInt();           break;
+      case bSET_PRIVATE:        key_SetPrivate();       break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
@@ -356,7 +357,7 @@ uchar   i;
       case bSET_MINORDELAYS:    key_SetDelays();        break;
 
 //      case bSET_LOGICAL:        key_SetChar();          break;
-//      case bSET_PRIVATE:        key_SetInt();           break;
+      case bSET_PRIVATE:        key_SetPrivate();       break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
@@ -389,7 +390,7 @@ uchar   i;
       case bSET_MINORDELAYS:    key_SetDelays();        break;
 
 //      case bSET_LOGICAL:        key_SetChar();          break;
-//      case bSET_PRIVATE:        key_SetInt();           break;
+      case bSET_PRIVATE:        key_SetPrivate();       break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
