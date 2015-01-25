@@ -11,7 +11,7 @@ KEY_RESET.C
 #include        "../label.h"
 #include        "../groups.h"
 #include        "../engine.h"
-#include        "driverlib/sysctl.h"
+#include        "../hardware/memory.h"
 
 
 
@@ -75,7 +75,7 @@ void    key_SetReset(void)
 //            DelayMsg();
 //          }
 
-          SysCtlReset();
+          Restart();
           break;
 
         case bSET_RESETFULL:  
@@ -124,7 +124,7 @@ void    key_SetReset(void)
 //            DelayMsg();
 //          }
 
-          SysCtlReset();
+          Restart();
           break;
       }
     }
