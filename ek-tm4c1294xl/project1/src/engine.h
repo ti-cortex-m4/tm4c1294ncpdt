@@ -15,3 +15,8 @@ extern  ulong                   dwBuffC;
 extern  uint                    wBuffD;
 
 extern  real                    reBuffA, reBuffB;
+
+
+
+void    ResetEngine(void);
+void    MakeValue(void);

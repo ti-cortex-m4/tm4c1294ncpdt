@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 KEY_RESET.C
 
- ¬вод и просмотр двоичных операций
+
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -10,6 +10,7 @@ KEY_RESET.C
 #include        "../beep.h"
 #include        "../label.h"
 #include        "../groups.h"
+#include        "../engine.h"
 #include        "driverlib/sysctl.h"
 
 
@@ -91,7 +92,7 @@ void    key_SetReset(void)
 //          ResetZones();
 //          ResetRelaxs();
 //          ResetGaps();
-//          ResetEngine();
+          ResetEngine();
 //          ResetSpeeds();
 //          ResetSendAT();
 //          ResetPhones();
