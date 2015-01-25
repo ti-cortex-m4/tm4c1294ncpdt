@@ -15,6 +15,7 @@ KEY_START.C
 #include        "../access.h"
 #include        "../groups.h"
 #include        "../rtc.h"
+#include        "../engine.h"
 
 
 
@@ -58,6 +59,9 @@ void    key_Start(void)
 
 // TODO
 
+    // рассчитываем массив К эквивалентов
+    MakeValue();
+
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
 
@@ -97,6 +101,9 @@ void    key_Restart(void)
     }
 
 // TODO
+
+    // рассчитываем массив К эквивалентов
+    MakeValue();
 
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
