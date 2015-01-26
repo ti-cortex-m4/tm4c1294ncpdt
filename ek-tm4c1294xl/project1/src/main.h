@@ -4,6 +4,7 @@
 
 #include        <stdint.h>
 #include        <stdbool.h>
+#include        <string.h>
 #include        "system.h"
 #include        "main_keyboard.h"
 #include        "main_serial.h"
