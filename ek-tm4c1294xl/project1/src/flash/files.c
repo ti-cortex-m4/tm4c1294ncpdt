@@ -6,7 +6,7 @@ FILES.C
 
 #include        <string.h>
 #include        "../main.h"
-#include        "../mem_flash.h"
+#include        "../memory/mem_flash.h"
 #include        "at45.h"
 
 

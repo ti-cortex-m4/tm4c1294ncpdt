@@ -5,9 +5,9 @@ OUT_GROUPS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_ports.h"
-#include        "../mem_groups.h"
-#include        "../mem_program.h"
+#include        "../memory/mem_ports.h"
+#include        "../memory/mem_groups.h"
+#include        "../memory/mem_program.h"
 #include        "../ports.h"
 #include        "../keyboard.h"
 #include        "../groups.h"

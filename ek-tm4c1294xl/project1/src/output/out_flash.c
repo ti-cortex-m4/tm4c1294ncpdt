@@ -5,8 +5,8 @@ OUT_FLASH.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_ports.h"
-#include        "../mem_flash.h"
+#include        "../memory/mem_ports.h"
+#include        "../memory/mem_flash.h"
 #include        "../ports.h"
 #include        "../flash/at45.h"
 

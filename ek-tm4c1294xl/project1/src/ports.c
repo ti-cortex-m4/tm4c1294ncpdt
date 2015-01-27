@@ -5,9 +5,9 @@ PORTS.C
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
-#include        "mem_ports.h"
-#include        "mem_settings.h"
-#include        "mem_serial0.h"
+#include        "memory/mem_ports.h"
+#include        "memory/mem_settings.h"
+#include        "memory/mem_serial0.h"
 #include        "include/queries.h"
 #include        "crc-16.h"
 #include        "ports_stack.h"

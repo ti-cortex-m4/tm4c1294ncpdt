@@ -8,7 +8,7 @@ DISPLAY.C
 #include        <stdio.h>
 #include        <stdlib.h>
 #include        "main.h"
-#include        "mem_program.h"
+#include        "memory/mem_program.h"
 #include        "beep.h"
 #include        "delay.h"
 #include        "keyboard.h"

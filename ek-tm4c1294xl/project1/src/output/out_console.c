@@ -5,7 +5,7 @@ OUT_CONSOLE.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_ports.h"
+#include        "../memory/mem_ports.h"
 #include        "../ports.h"
 #include        "../access.h"
 #include        "../display.h"

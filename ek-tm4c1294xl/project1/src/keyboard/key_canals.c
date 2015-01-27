@@ -5,8 +5,8 @@ KEY_CANALS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_canals.h"
-#include        "../mem_realtime.h"
+#include        "../memory/mem_canals.h"
+#include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../memory/mem_graph3.h"
 #include        "../display.h"

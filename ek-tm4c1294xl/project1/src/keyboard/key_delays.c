@@ -5,7 +5,7 @@ _DELAYS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_ports.h"
+#include        "../memory/mem_ports.h"
 #include        "../keyboard.h"
 #include        "../display.h"
 #include        "../delay.h"

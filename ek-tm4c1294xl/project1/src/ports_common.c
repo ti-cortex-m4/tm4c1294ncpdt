@@ -5,7 +5,7 @@ PORTS_COMMON.C
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
-#include        "mem_serial0.h"
+#include        "memory/mem_serial0.h"
 #include        "serial0.h"
 #include        "crc-16.h"
 #include        "ports.h"

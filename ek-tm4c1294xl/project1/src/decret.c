@@ -6,7 +6,7 @@ DECRET.C
 
 #include        <string.h>
 #include        "main.h"
-#include        "mem_settings.h"
+#include        "memory/mem_settings.h"
 #include        "timedate.h"
 
 
