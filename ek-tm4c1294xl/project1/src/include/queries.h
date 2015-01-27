@@ -14,6 +14,25 @@ QUERIES.H
 #define bINQ_GETGROUP                  9
 #define bINQ_SETGROUP                  10
 
+#define bINQ_GETPUBLIC                 14
+#define bINQ_SETPUBLIC                 15
+#define bINQ_GETOLDMODE                16
+#define bINQ_SETOLDMODE                17
+
+#define bINQ_GETOLDPOWTARIFFS          18
+#define bINQ_SETOLDPOWTARIFFS          19
+#define bINQ_GETOLDENGTARIFFS          20
+#define bINQ_SETOLDENGTARIFFS          21
+#define bINQ_GETOLDPUBTARIFFS          22
+#define bINQ_SETOLDPUBTARIFFS          23
+
+#define bINQ_GETNEWPOWTARIFFS          24
+#define bINQ_SETNEWPOWTARIFFS          25
+#define bINQ_GETNEWENGTARIFFS          26
+#define bINQ_SETNEWENGTARIFFS          27
+#define bINQ_GETNEWPUBTARIFFS          28
+#define bINQ_SETNEWPUBTARIFFS          29
+
 #define bINQ_SETDELAY                  243
 
 #define bINQ_GETFLASHPAGE              249
