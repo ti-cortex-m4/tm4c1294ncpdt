@@ -23,6 +23,7 @@ void    OpenOut(uint  wPage)
 bool    Save(void  *pbBase, uint  wSize)
 {
 uint    wFree;
+uint    i;
 
   while (wSize > 0)
   {
@@ -36,7 +37,8 @@ uint    wFree;
 
       OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
-      pbBase += wFree;                          // переходим на следующую позицию источника данных
+      for (i=0; i<wFree; i++)
+    	  pbBase = (char *)pbBase + 1;                          // переходим на следующую позицию источника данных
       wSize  -= wFree;                          // уменьшаем размер блока данных
     }
     else
@@ -71,6 +73,7 @@ bool    OpenIn(uint  wPage)
 bool    Load(void  *pbBase, uint  wSize)
 {     
 uint    wFree;
+uint    i;
 
   while (wSize > 0)
   {
@@ -82,7 +85,8 @@ uint    wFree;
 
       if (OpenIn(wPageIn + 1) == 0) return(0);  // читаем в буфер следующую страницу
 
-      pbBase += wFree;                          // переходим на следующую позицию назначения данных
+      for (i=0; i<wFree; i++)
+    	  pbBase = (char *)pbBase + 1;                          // переходим на следующую позицию источника данных
       wSize  -= wFree;                          // уменьшаем размер блока данных
     }
     else
