@@ -5,7 +5,7 @@ ENGINE.Ñ
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
-#include        "mem_canals.h"
+#include        "memory/mem_canals.h"
 #include        "energy.h"
 
 

@@ -7,7 +7,7 @@ OLDTARIFFS.Ñ
 #include        <string.h>
 #include        <stdio.h>
 #include        "../main.h"
-#include        "../mem_tariffs.h"
+#include        "../memory/mem_tariffs.h"
 #include        "../access.h"
 #include        "tariffs.h"
 #include        "zones.h"

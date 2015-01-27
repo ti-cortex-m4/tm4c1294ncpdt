@@ -5,7 +5,7 @@ KEYBOARD.C
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
-#include        "mem_program.h"
+#include        "memory/mem_program.h"
 #include        "display.h"
 #include        "slide.h"
 #include        "beep.h"

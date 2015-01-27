@@ -5,7 +5,7 @@ KEY_DECRET.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_settings.h"
+#include        "../memory/mem_settings.h"
 #include        "../keyboard.h"
 #include        "../display.h"
 #include        "../beep.h"

@@ -5,7 +5,7 @@ OUT_DELAY.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_ports.h"
+#include        "../memory/mem_ports.h"
 #include        "../ports.h"
 #include        "../delay.h"
 

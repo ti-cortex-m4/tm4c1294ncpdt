@@ -5,8 +5,8 @@ _ANALYSIS.H
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_serial0.h"
-#include        "../mem_ports.h"
+#include        "../memory/mem_serial0.h"
+#include        "../memory/mem_ports.h"
 #include        "../keyboard.h"
 #include        "../display.h"
 #include        "../delay.h"

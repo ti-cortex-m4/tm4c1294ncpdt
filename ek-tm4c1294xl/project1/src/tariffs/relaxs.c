@@ -5,8 +5,8 @@ RELAXS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_tariffs.h"
-#include        "../mem_program.h"
+#include        "../memory/mem_tariffs.h"
+#include        "../memory/mem_program.h"
 #include        "../keyboard.h"
 #include        "../display.h"
 #include        "../timedate.h"

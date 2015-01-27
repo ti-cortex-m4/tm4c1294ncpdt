@@ -5,7 +5,7 @@ GAPS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_tariffs.h"
+#include        "../memory/mem_tariffs.h"
 #include        "../keyboard.h"
 #include        "../display.h"
 #include        "../engine.h"

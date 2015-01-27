@@ -5,8 +5,8 @@ KEY_GROUPS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../mem_groups.h"
-#include        "../mem_program.h"
+#include        "../memory/mem_groups.h"
+#include        "../memory/mem_program.h"
 #include        "../display.h"
 #include        "../beep.h"
 #include        "../keyboard.h"
