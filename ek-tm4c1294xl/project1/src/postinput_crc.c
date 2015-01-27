@@ -7,7 +7,6 @@ POSTINPUT_CRC.C
 #include        "main.h"
 #include        "mem_settings.h"
 #include        "mem_ports.h"
-#include        "queries.h"
 #include        "states.h"
 #include        "access.h"
 #include        "crc-16.h"

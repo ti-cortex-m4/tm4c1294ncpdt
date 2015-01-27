@@ -8,7 +8,6 @@ OUT_GROUPS.C
 #include        "../mem_ports.h"
 #include        "../mem_groups.h"
 #include        "../mem_program.h"
-#include        "../queries.h"
 #include        "../ports.h"
 #include        "../keyboard.h"
 #include        "../groups.h"
