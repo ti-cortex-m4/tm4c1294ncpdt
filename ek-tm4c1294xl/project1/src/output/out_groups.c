@@ -43,7 +43,11 @@ uchar  i;
         InitPop(6);
         Pop(&mpgrGroups[bInBuff5], sizeof(groups));
 
+        if (bInBuff5 == bGROUPS - 1)
+          SaveGroups();
+
         boSetGroups = boTrue;
+
         LongResult(bRES_OK);
       }
       else Result(bRES_BADDATA);

@@ -6,6 +6,8 @@ KEYBOARD.H
 
 #include        "main.h"
 #include        "include/programs.h"
+#include        "delay.h"
+#include        "beep.h"
 
 
 

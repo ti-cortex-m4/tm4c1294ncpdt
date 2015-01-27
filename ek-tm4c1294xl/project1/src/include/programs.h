@@ -24,6 +24,19 @@ PROGRAMS.H
 #define bSET_LOSSE                  3
 #define bSET_LEVEL                  108
 
+#define bSET_DAYZONE                7
+#define bSET_PUBLIC                 26
+
+#define bSET_PROGRAM10              10
+#define bSET_PROGRAM17              17
+#define bSET_PROGRAM20              20
+#define bSET_PROGRAM27              27
+
+#define bSET_PROGRAM18              18
+#define bSET_RELAXS_FLAG            117
+#define bSET_RELAXS_TARIFF          118
+#define bSET_RELAXS                 119
+
 #define bSET_PASSWORD               11
 #define bSET_LOGICAL                13
 #define bSET_PRIVATE                99

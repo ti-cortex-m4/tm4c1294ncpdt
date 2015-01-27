@@ -21,6 +21,7 @@ KEYBOARD.C
 #include        "keyboard/key_decret.h"
 #include        "keyboard/key_season.h"
 #include        "keyboard/key_groups.h"
+#include        "keyboard/key_dayzone.h"
 #include        "keyboard/key_canals.h"
 #include        "keyboard/key_delays.h"
 #include        "keyboard/key_reset.h"
@@ -324,6 +325,8 @@ uchar   i;
       case bSET_LEVEL:
       case bSET_COUNT:          key_SetCanals();        break;
 
+      case bSET_DAYZONE:        key_SetDayZone();       break;
+
       case bSET_PASSWORD:       key_SetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;
       case bSET_PRIVATE:        key_SetPrivate();       break;
@@ -394,6 +397,8 @@ uchar   i;
       case bSET_CURRDATE:       key_SetCurrDate();      break;
 
       case bSET_GROUPS:         key_SetGroups();        break;
+
+      case bSET_DAYZONE:        key_SetDayZone();       break;
 
       case bSET_PASSWORD:       key_SetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;
