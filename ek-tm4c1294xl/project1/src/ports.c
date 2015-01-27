@@ -8,7 +8,7 @@ PORTS.C
 #include        "mem_ports.h"
 #include        "mem_settings.h"
 #include        "mem_serial0.h"
-#include        "queries.h"
+#include        "include/queries.h"
 #include        "crc-16.h"
 #include        "ports_stack.h"
 #include        "ports_common.h"

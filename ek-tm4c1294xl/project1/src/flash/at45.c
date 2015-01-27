@@ -8,7 +8,7 @@ AT45.C
 #include        "../mem_flash.h"
 #include        "../mem_settings.h"
 #include        "../mem_realtime.h"
-#include        "../settings/flash.h"
+#include        "../include/flash.h"
 #include        "flash_control.h"
 //#include        "rtc.h"
 //#include        "delay.h"

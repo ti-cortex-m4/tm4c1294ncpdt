@@ -9,7 +9,7 @@ GROUPS.C
 #include        "mem_program.h"
 #include        "engine.h"
 #include        "flash/files.h"
-#include        "settings/flash.h"
+#include        "include/flash.h"
 
 
 
