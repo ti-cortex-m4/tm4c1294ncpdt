@@ -11,7 +11,7 @@ KEYBOARD.C
 #include        "beep.h"
 #include        "label.h"
 #include        "delay.h"
-#include        "programs.h"
+#include        "include/programs.h"
 #include        "keyboard/key_timedate.h"
 #include        "keyboard/key_password.h"
 #include        "keyboard/key_logical.h"

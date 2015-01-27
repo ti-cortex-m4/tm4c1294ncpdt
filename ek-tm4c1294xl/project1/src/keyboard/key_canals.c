@@ -14,7 +14,6 @@ KEY_CANALS.C
 #include        "../lines.h"
 #include        "../beep.h"
 #include        "../keyboard.h"
-#include        "../programs.h"
 #include        "../engine.h"
 #include        "../energy.h"
 #include        "../sensors.h"
