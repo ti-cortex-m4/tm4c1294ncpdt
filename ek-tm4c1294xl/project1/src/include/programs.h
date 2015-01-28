@@ -25,7 +25,9 @@ PROGRAMS.H
 #define bSET_LEVEL                  108
 
 #define bSET_DAYZONE                7
+
 #define bSET_PUBLIC                 26
+#define bGET_PUBLIC                 126
 
 #define bSET_PROGRAM10              10
 #define bSET_PROGRAM17              17
