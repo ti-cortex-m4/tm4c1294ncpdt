@@ -5,9 +5,14 @@ TODO SaveTariffs
  ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_ports.h"
 #include        "../memory/mem_tariffs.h"
+#include        "../keyboard.h"
 #include        "../ports.h"
-#include        "../tariffs.h"
+#include        "../access.h"
+#include        "../tariffs/tariffs.h"
+#include        "../tariffs/oldtariffs.h"
+#include        "../tariffs/zones.h"
 
 
 

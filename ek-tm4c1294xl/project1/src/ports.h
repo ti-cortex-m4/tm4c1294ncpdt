@@ -21,4 +21,5 @@ void    Output(uint  wSize);
 void    Result(uchar  bT);
 void    LongResult(uchar  bT);
 void    Outptr(void  *pData, uint  wSize);
+void    OutptrOutBuff(uint  wSize);
 void    Common(void  *pbData, uint  wSize);
