@@ -32,7 +32,8 @@ PROGRAMS.H
 #define bSET_PROGRAM20              20
 #define bSET_PROGRAM27              27
 
-//#define bSET_PROGRAM18              18
+#define bSET_OLDMODE                18
+
 //#define bSET_RELAXS_FLAG            117
 //#define bSET_RELAXS_TARIFF          118
 //#define bSET_RELAXS                 119
@@ -61,7 +62,8 @@ PROGRAMS.H
 #define bGET_GROUPS                 4
 
 #define bGET_PUBLIC                 126
-//#define bGET_PROGRAM38              38
+
+#define bGET_OLDMODE                38
 
 #define bGET_VERSION                15
 
