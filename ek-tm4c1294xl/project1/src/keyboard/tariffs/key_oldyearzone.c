@@ -21,7 +21,6 @@ static char const       szOnMonths[]    = "   по мес€цам   ",
                         szOnQuarters[]  = "  по кварталам  ",
                         szMaskZones[]   = "01            12";
 
-
 static char const      *pszPubPrg10[]   = { szZones, szOnMonths,   "" },
                        *pszPubPrg17[]   = { szZones, szOnQuarters, "" },
                        *pszPowPrg10[]   = { szZones, szOnMonths,   szForPower,  "" },
