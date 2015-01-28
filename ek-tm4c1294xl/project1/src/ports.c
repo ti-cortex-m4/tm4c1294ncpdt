@@ -100,6 +100,13 @@ void    Outptr(void  *pData, uint  wSize)
 }
 
 
+void    OutptrOutBuff(uint  wSize) {
+  switch (ibPort) {
+    case 0:  Outptr(&mpbOutBuff0[bHEADER], wSize);  break;
+  }
+}
+
+
 void    Common(void  *pbData, uint  wSize) {
   if (5+wSize < wOUTBUFF_SIZE-bMARGIN) {
     InitPushCRC();

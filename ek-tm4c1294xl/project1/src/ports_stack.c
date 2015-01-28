@@ -24,6 +24,12 @@ void    InitPushCRC(void) {
 }
 
 
+void    InitPushPtr(void) {
+  switch (ibPort) {
+    case 0:  iwPush0 = bHEADER;  break;
+  }
+}
+
 
 void    Push(void  *pbData, uint  wSize) {
   switch (ibPort) {

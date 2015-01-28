@@ -33,6 +33,8 @@ QUERIES.H
 #define bINQ_GETNEWPUBTARIFFS          28
 #define bINQ_SETNEWPUBTARIFFS          29
 
+#define bINQ_GETTARIFFSDAY             150
+
 #define bINQ_SETDELAY                  243
 
 #define bINQ_GETFLASHPAGE              249
