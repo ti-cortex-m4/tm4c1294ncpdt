@@ -23,6 +23,7 @@ KEYBOARD.C
 #include        "keyboard/key_groups.h"
 #include        "keyboard/key_dayzone.h"
 #include        "keyboard/tariffs/key_public.h"
+#include        "keyboard/tariffs/key_oldyearzone.h"
 #include        "keyboard/key_canals.h"
 #include        "keyboard/key_delays.h"
 #include        "keyboard/key_reset.h"
@@ -329,6 +330,15 @@ uchar   i;
       case bSET_DAYZONE:        key_SetDayZone();       break;
       case bSET_PUBLIC:         key_SetPublic();        break;
 
+      case bSET_PROGRAM10:
+      case bSET_PROGRAM17:
+      case bSET_PROGRAM20:
+      case bSET_PROGRAM27:      key_SetOldYearZone();   break;
+
+//      case bSET_PROGRAM18:      key_SetOldMode();       break;
+
+//      case bSET_RELAXS:         key_SetRelaxs();        break;
+
       case bSET_PASSWORD:       key_SetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;
       case bSET_PRIVATE:        key_SetPrivate();       break;
@@ -366,12 +376,23 @@ uchar   i;
 
       case bGET_PUBLIC:         key_SetPublic();        break;
 
+//      case bGET_PROGRAM5:       key_GetOldProgram5();   break;
+//      case bGET_PROGRAM84:
+//      case bGET_PROGRAM85:      key_GetOldProgram84();  break;
+
+//      case bGET_PROGRAM38:      key_SetOldMode();       break;
+
+//      case bSET_RELAXS:         key_GetRelaxs();        break;
+
       case bGET_TRANS_ENG:
       case bGET_TRANS_CNT:
       case bGET_PULSE_HOU:
       case bGET_PULSE_MNT:
       case bGET_LOSSE:
       case bSET_LEVEL:          key_GetCanals();        break;
+
+//      case bGET_PROGRAM18:      key_GetProgram18();     break;
+//      case bGET_PROGRAM19:      key_GetProgram19();     break;
 
       case bSET_PASSWORD:       key_GetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;
@@ -404,6 +425,15 @@ uchar   i;
 
       case bSET_DAYZONE:        key_SetDayZone();       break;
       case bSET_PUBLIC:         key_SetPublic();        break;
+
+      case bSET_PROGRAM10:
+      case bSET_PROGRAM17:
+      case bSET_PROGRAM20:
+      case bSET_PROGRAM27:      key_SetOldYearZone();   break;
+
+//      case bSET_PROGRAM18:      key_SetOldMode();       break;
+
+//      case bSET_RELAXS:         key_SetRelaxs();        break;
 
       case bSET_PASSWORD:       key_SetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;
