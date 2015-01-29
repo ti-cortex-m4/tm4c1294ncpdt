@@ -25,6 +25,7 @@ KEYBOARD.C
 #include        "keyboard/tariffs/key_public.h"
 #include        "keyboard/tariffs/key_oldyearzone.h"
 #include        "keyboard/tariffs/key_oldmode.h"
+#include        "keyboard/tariffs/key_oldprogram5.h"
 #include        "keyboard/key_canals.h"
 #include        "keyboard/key_delays.h"
 #include        "keyboard/key_reset.h"
@@ -330,13 +331,12 @@ uchar   i;
 
       case bSET_DAYZONE:        key_SetDayZone();       break;
       case bSET_PUBLIC:         key_SetPublic();        break;
+      case bSET_OLDMODE:        key_SetOldMode();       break;
 
       case bSET_PROGRAM10:
       case bSET_PROGRAM17:
       case bSET_PROGRAM20:
       case bSET_PROGRAM27:      key_SetOldYearZone();   break;
-
-      case bSET_OLDMODE:        key_SetOldMode();       break;
 
 //      case bSET_RELAXS:         key_SetRelaxs();        break;
 
@@ -376,12 +376,11 @@ uchar   i;
       case bGET_GROUPS:         key_GetGroups();        break;
 
       case bGET_PUBLIC:         key_SetPublic();        break;
-
-//      case bGET_PROGRAM5:       key_GetOldProgram5();   break;
-//      case bGET_PROGRAM84:
-//      case bGET_PROGRAM85:      key_GetOldProgram84();  break;
-
       case bGET_OLDMODE:        key_SetOldMode();       break;
+
+      case bGET_PROGRAM5:       key_GetOldProgram5();   break;
+      case bGET_PROGRAM84:
+      case bGET_PROGRAM85:      key_GetOldProgram84();  break;
 
 //      case bSET_RELAXS:         key_GetRelaxs();        break;
 
@@ -426,13 +425,12 @@ uchar   i;
 
       case bSET_DAYZONE:        key_SetDayZone();       break;
       case bSET_PUBLIC:         key_SetPublic();        break;
+      case bSET_OLDMODE:        key_SetOldMode();       break;
 
       case bSET_PROGRAM10:
       case bSET_PROGRAM17:
       case bSET_PROGRAM20:
       case bSET_PROGRAM27:      key_SetOldYearZone();   break;
-
-      case bSET_OLDMODE:        key_SetOldMode();       break;
 
 //      case bSET_RELAXS:         key_SetRelaxs();        break;
 
