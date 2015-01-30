@@ -16,6 +16,7 @@ POSTINPUT_CRC.C
 #include        "output/out_flash.h"
 #include        "output/out_delay.h"
 #include        "output/out_console.h"
+#include        "output/response2_crc.h"
 #include        "display.h"
 #include        "keyboard.h"
 #include        "ports.h"
@@ -136,6 +137,10 @@ void    PostinputCRC(void) {
 
       case bINQ_GETDISPLAY:
         OutGetDisplay();
+        break;
+
+      case bINQ_RESPONSE2:
+      	Response2_CRC();
         break;
 
       default:

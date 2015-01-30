@@ -5,3 +5,5 @@ POSTINPUT_CRC.H
 ------------------------------------------------------------------------------*/
 
 void    PostinputCRC_Full(void);
+
+void    ShowCommandCRC(uchar  bState);
