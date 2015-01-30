@@ -26,7 +26,7 @@
 #include "src/timer1.h"
 #include "src/uarts.h"
 #include "src/groups.h"
-#include "src/output/postinput_crc.h"
+#include "src/output/response_crc.h"
 
 // The error routine that is called if the driver library encounters an error.
 #ifdef DEBUG
@@ -60,6 +60,6 @@ int main(void) {
 
     while(1) {
     	Keyboard();
-    	PostinputCRC_Full();
+    	ResponseCRC_Full();
     }
 }

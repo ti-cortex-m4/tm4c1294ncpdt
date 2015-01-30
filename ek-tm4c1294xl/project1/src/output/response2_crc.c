@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-
+RESPONSE2_CRC.C
 
 
 ------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@
 #include        "../memory/mem_ports.h"
 #include        "../states.h"
 #include        "../ports.h"
-#include        "../output/postinput_crc.h"
+#include        "../output/response_crc.h"
 #include        "../tariffs/gaps.h"
 #include        "../output/out_groups.h"
 #include        "../output/out_relaxs.h"
