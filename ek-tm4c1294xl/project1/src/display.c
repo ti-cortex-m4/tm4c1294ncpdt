@@ -21,6 +21,8 @@ DISPLAY.C
 char                    szHi[bDISPLAY + bMARGIN],
                         szLo[bDISPLAY + bMARGIN];
 
+char                    szAlfa[bDISPLAY + bMARGIN],
+                        szBeta[bDISPLAY + bMARGIN];
 
 
 

@@ -16,6 +16,9 @@ DISPLAY.H
 extern  char                    szHi[bDISPLAY + bMARGIN],
                                 szLo[bDISPLAY + bMARGIN];
 
+extern  char                    szAlfa[bDISPLAY + bMARGIN],
+                                szBeta[bDISPLAY + bMARGIN];
+
 
 
 void    ShowHi(char const  *szT);

@@ -48,29 +48,51 @@ uint    DaysInYearSpec(uchar  bYear)
 
 
 
+// возвращает день недели (0: понедельник, ..., 6: воскресенье)
 uchar   Weekday(void)
 {
 uchar   i;
+uint    wT;
 
-  wBuffD = 5 - 1 + tiAlt.bDay;          // 5: суббота - 1 января 2000 года
+  wT = 5 - 1 + tiAlt.bDay;          // 5: суббота - 1 января 2000 года
 
   for (i=1; i<tiAlt.bMonth; i++)
   {
     if ((tiAlt.bYear % 4 == 0) && (i == 2))
-      wBuffD += 29;
+      wT += 29;
     else
-      wBuffD += mpbDaysInMonth[i - 1];
+      wT += mpbDaysInMonth[i - 1];
   }
 
   for (i=0; i<tiAlt.bYear; i++)
   {
     if (i % 4 == 0)
-      wBuffD += 366;
+      wT += 366;
     else
-      wBuffD += 365;
+      wT += 365;
   }
 
-  return(wBuffD % 7);
+  return(wT % 7);
+}
+
+
+// вычисляет количество дней с начала года
+uint    GetDayIndex(void)
+{
+uchar   i;
+uint    wT;
+
+  wT = tiAlt.bDay - 1;
+
+  for (i=1; i<tiAlt.bMonth; i++)
+  {
+    if ((tiAlt.bYear % 4 == 0) && (i == 2))
+      wT += 29;
+    else
+      wT += mpbDaysInMonth[i - 1];
+  }
+
+  return(wT);
 }
 
 
@@ -187,3 +209,12 @@ void    ShowTimeDate(void)
                  tiAlt.bMonth,
                  tiAlt.bYear);
 }
+
+
+
+void    LoadBetaMonth(uchar  ibMonth)
+{
+  strcpy(szBeta,szOnMonth);
+  sprintf(szBeta+11, "%-2u", ibMonth + 1);
+}
+

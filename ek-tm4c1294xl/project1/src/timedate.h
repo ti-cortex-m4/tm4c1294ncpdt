@@ -18,6 +18,7 @@ uchar   DaysInMonthSpec(uchar  bYear, uchar  bMonth);
 uint    DaysInYearSpec(uchar  bYear);
 
 uchar   Weekday(void);
+uint    GetDayIndex(void);
 bool    TrueTimeDate(void);
 void    DecretDate(void);
 
@@ -27,3 +28,5 @@ void    SecIndexToDate(ulong  dwT);
 void    ShowTime(void);
 void    ShowDate(void);
 void    ShowTimeDate(void);
+
+void    LoadBetaMonth(uchar  ibMonth);

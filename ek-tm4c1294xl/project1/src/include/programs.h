@@ -10,6 +10,7 @@ PROGRAMS.H
 
 
 // режим: программирование
+
 #define bSET_SPEED                  1
 #define bSET_CURRDATE               8
 #define bSET_CURRTIME               9
@@ -33,10 +34,6 @@ PROGRAMS.H
 #define bSET_PROGRAM20              20
 #define bSET_PROGRAM27              27
 
-//#define bSET_RELAXS_FLAG            117
-//#define bSET_RELAXS_TARIFF          118
-//#define bSET_RELAXS                 119
-
 #define bSET_PASSWORD               11
 #define bSET_LOGICAL                13
 #define bSET_PRIVATE                99
@@ -55,6 +52,7 @@ PROGRAMS.H
 
 
 // режим: функционирование
+
 #define bGET_CURRTIME               1
 #define bGET_CURRDATE               3
 
@@ -77,6 +75,11 @@ PROGRAMS.H
 
 
 // все режимы
+
+#define bSET_RELAXS_FLAG            117
+#define bSET_RELAXS_TARIFF          118
+#define bSET_RELAXS                 119
+
 #define bSET_DECRET                 123
 #define bSET_SUMMER                 124
 #define bSET_WINTER                 125
