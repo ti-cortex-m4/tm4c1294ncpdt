@@ -12,6 +12,7 @@ RESPONSE_CRC.C
 #include        "../crc-16.h"
 #include        "../display.h"
 #include        "../keyboard.h"
+#include        "../keyboard/key_timedate.h"
 #include        "../ports.h"
 #include        "response1_crc.h"
 
