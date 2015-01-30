@@ -1,10 +1,8 @@
 /*------------------------------------------------------------------------------
-OUT_GROUPS.H
+OUT_RELAXS.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    OutGetGroup(void);
-void    OutSetGroup(void);
-
-void    OutGetGroupsExt(void);
+void    OutGetRelaxs(void);
+void    OutSetRelaxs(void);

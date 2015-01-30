@@ -1,10 +1,7 @@
 /*------------------------------------------------------------------------------
-OUT_GROUPS.H
+OUT_VERSION.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    OutGetGroup(void);
-void    OutSetGroup(void);
-
-void    OutGetGroupsExt(void);
+void    OutVersion(void);
