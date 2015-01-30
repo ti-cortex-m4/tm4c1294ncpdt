@@ -26,6 +26,9 @@ KEYBOARD.C
 #include        "keyboard/tariffs/key_oldyearzone.h"
 #include        "keyboard/tariffs/key_oldmode.h"
 #include        "keyboard/tariffs/key_oldprogram5.h"
+#include        "keyboard/tariffs/key_relaxs_flag.h"
+#include        "keyboard/tariffs/key_relaxs_tariff.h"
+#include        "keyboard/tariffs/key_relaxs.h"
 #include        "keyboard/key_canals.h"
 #include        "keyboard/key_delays.h"
 #include        "keyboard/key_reset.h"
@@ -338,7 +341,9 @@ uchar   i;
       case bSET_PROGRAM20:
       case bSET_PROGRAM27:      key_SetOldYearZone();   break;
 
-//      case bSET_RELAXS:         key_SetRelaxs();        break;
+      case bSET_RELAXS_FLAG:    key_SetRelaxsFlag();    break;
+      case bSET_RELAXS_TARIFF:  key_SetRelaxsTariff();  break;
+      case bSET_RELAXS:         key_SetRelaxs();        break;
 
       case bSET_PASSWORD:       key_SetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;
@@ -382,7 +387,9 @@ uchar   i;
       case bGET_PROGRAM84:
       case bGET_PROGRAM85:      key_GetOldProgram84();  break;
 
-//      case bSET_RELAXS:         key_GetRelaxs();        break;
+      case bSET_RELAXS_FLAG:    key_SetRelaxsFlag();    break;
+      case bSET_RELAXS_TARIFF:  key_SetRelaxsTariff();  break;
+      case bSET_RELAXS:         key_GetRelaxs();        break;
 
       case bGET_TRANS_ENG:
       case bGET_TRANS_CNT:
@@ -432,7 +439,9 @@ uchar   i;
       case bSET_PROGRAM20:
       case bSET_PROGRAM27:      key_SetOldYearZone();   break;
 
-//      case bSET_RELAXS:         key_SetRelaxs();        break;
+      case bSET_RELAXS_FLAG:    key_SetRelaxsFlag();    break;
+      case bSET_RELAXS_TARIFF:  key_SetRelaxsTariff();  break;
+      case bSET_RELAXS:         key_SetRelaxs();        break;
 
       case bSET_PASSWORD:       key_SetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;

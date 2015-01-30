@@ -6,10 +6,12 @@ KEY_OLDPROGRAM5.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_tariffs.h"
+#include        "../../memory/mem_realtime.h"
 #include        "../../keyboard.h"
 #include        "../../display.h"
 #include        "../../slide.h"
 #include        "../../access.h"
+#include        "../../timedate.h"
 #include        "../../tariffs/zones.h"
 #include        "../../tariffs/tariffs.h"
 #include        "../../tariffs/oldtariffs.h"
