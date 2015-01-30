@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-POSTINPUT_CRC.C
+RESPONSE_CRC.C
 
 
 ------------------------------------------------------------------------------*/
@@ -42,7 +42,7 @@ void    ShowCommandCRC(uchar  bState) {
 
 
 
-void    PostinputCRC(void) {
+void    ResponseCRC(void) {
   if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE) {
 
     mpSerial[ibPort] = SER_BEGIN;
@@ -152,8 +152,8 @@ void    PostinputCRC(void) {
 }
 
 
-void    PostinputCRC_Full(void) {
+void    ResponseCRC_Full(void) {
   ibPort = 0;
-  PostinputCRC();
+  ResponseCRC();
 }
 

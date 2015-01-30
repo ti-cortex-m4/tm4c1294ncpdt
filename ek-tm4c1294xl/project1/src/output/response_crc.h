@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-POSTINPUT_CRC.H
+RESPONSE_CRC.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    PostinputCRC_Full(void);
+void    ResponseCRC_Full(void);
 
 void    ShowCommandCRC(uchar  bState);
