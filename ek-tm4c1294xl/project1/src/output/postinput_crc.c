@@ -4,22 +4,22 @@ POSTINPUT_CRC.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "memory/mem_settings.h"
-#include        "memory/mem_ports.h"
-#include        "states.h"
-#include        "access.h"
-#include        "crc-16.h"
-#include        "output/out_rtc.h"
-#include        "output/out_groups.h"
-#include        "output/out_tariffs.h"
-#include        "output/out_flash.h"
-#include        "output/out_delay.h"
-#include        "output/out_console.h"
-#include        "output/response2_crc.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "ports.h"
+#include        "../main.h"
+#include        "../memory/mem_settings.h"
+#include        "../memory/mem_ports.h"
+#include        "../states.h"
+#include        "../access.h"
+#include        "../crc-16.h"
+#include        "../display.h"
+#include        "../keyboard.h"
+#include        "../ports.h"
+#include        "out_rtc.h"
+#include        "out_groups.h"
+#include        "out_tariffs.h"
+#include        "out_flash.h"
+#include        "out_delay.h"
+#include        "out_console.h"
+#include        "response2_crc.h"
 
 
 
