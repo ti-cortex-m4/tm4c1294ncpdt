@@ -56,3 +56,26 @@ uchar  i;
   }
   else Result(bRES_BADADDRESS);
 }
+
+
+
+void    OutGetGroupsExt(void)
+{
+uchar   i;
+uchar   wT;
+
+  InitPushPtr();
+  wT = 0;
+
+  for (i=0; i<bGROUPS; i++)
+  {
+    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    {
+      Push(&mpgrGroups[i], sizeof(groups));
+      wT += sizeof(groups);
+    }
+  }
+
+  OutptrOutBuff(wT);
+}
+
