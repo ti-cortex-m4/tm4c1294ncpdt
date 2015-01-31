@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PRIVATE.C
+SETTINGS.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,22 +7,24 @@ PRIVATE.C
 #include        "main.h"
 #include        "memory/mem_settings.h"
 #include        "flash/files.h"
+#include        "settings.h"
 
 
 
-bool    SavePrivate(void)
-{
-  OpenOut(wFLA_PRIVATE);
-
-  if (Save(&wPrivate, sizeof(uint)) == 0)
-    return 0;
-
-  return CloseOut();
+void    InitSettings(void) {
+  if (LoadPrivate() == 0) {
+    wPrivate = 1;
+    SavePrivate();
+  }
 }
 
 
-bool    LoadPrivate(void)
-{
-  OpenIn(wFLA_PRIVATE);
-  return Load(&wPrivate, sizeof(uint));
+
+bool    SavePrivate(void) {
+	return SaveBuff(wFLA_PRIVATE, &wPrivate, sizeof(uint));
+}
+
+
+bool    LoadPrivate(void) {
+  return LoadBuff(wFLA_PRIVATE, &wPrivate, sizeof(uint));
 }

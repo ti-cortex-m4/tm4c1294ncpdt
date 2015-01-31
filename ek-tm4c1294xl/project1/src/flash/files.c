@@ -99,3 +99,23 @@ uint    i;
   }
 }
 
+
+
+bool    SaveBuff(uint  wPage, void  *pbBuff, uint  wSize)
+{
+  OpenOut(wPage);
+
+  if (Save(&pbBuff, wSize) == 0)
+    return 0;
+
+  return CloseOut();
+}
+
+
+bool    LoadBuff(uint  wPage, void  *pbBuff, uint  wSize)
+{
+  OpenIn(wPage);
+  return Load(&pbBuff, wSize);
+}
+
+
