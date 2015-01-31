@@ -25,6 +25,7 @@
 #include "src/timer0.h"
 #include "src/timer1.h"
 #include "src/uarts.h"
+#include "src/settings.h"
 #include "src/groups.h"
 #include "src/output/response_crc.h"
 
@@ -50,6 +51,7 @@ int main(void) {
 	InitSlide();
 	InitDisplay();
 
+	InitSettings();
 	InitGroups();
 
     InitUARTs(ui32SysClock);

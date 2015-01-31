@@ -72,7 +72,7 @@ void    ShowChar(uchar  bT)
 
 void    ShowInt(uint  wT)
 {
-  sprintf(szLo,"    %5u",wT);
+  sprintf(szLo+4,"%5u",wT);
 }
 
 
