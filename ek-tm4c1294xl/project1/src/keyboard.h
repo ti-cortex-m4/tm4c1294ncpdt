@@ -6,6 +6,7 @@ KEYBOARD.H
 
 #include        "main.h"
 #include        "include/programs.h"
+#include        "include/programs2.h"
 #include        "delay.h"
 #include        "beep.h"
 
@@ -35,7 +36,9 @@ void    InitKeyboard(void);
 void    ResetKeyboard(void);
 
 void    NoProgram(void);
+void    NoProgram2(void);
 void    BlockProgram(uchar  bA);
+void    BlockProgram2(uint  wA, bool fBeep);
 void    BlockProgramExt(uchar  bA);
 void    BlockPrograms(uchar  bA, uchar  bB);
 void    NeedProgram(uchar  bA);
