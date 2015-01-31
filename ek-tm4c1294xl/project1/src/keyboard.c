@@ -77,12 +77,28 @@ void    NoProgram(void)
 }
 
 
+void    NoProgram2(void)
+{
+  ShowHi(szNot);
+  sprintf(szLo,"  программы %u  ",wProgram);
+  LongBeep();
+}
+
+
 // выводит сообщение о невозможности выполнения программы
 void    BlockProgram(uchar  bA)
 {
   ShowHi(szBlock);
   sprintf(szLo," программой %u  ",bA);
   LongBeep();
+}
+
+
+void    BlockProgram2(uint  wA, bool fBeep)
+{
+  ShowHi(szBlock);
+  sprintf(szLo," программой %u  ",wA);
+  if (fBeep == 1) LongBeep();
 }
 
 
