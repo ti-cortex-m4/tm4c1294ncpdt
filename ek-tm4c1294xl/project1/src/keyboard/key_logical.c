@@ -36,6 +36,7 @@ void    key_SetLogical(void)
       enKeyboard = KBD_POSTENTER;
 
       bLogical = GetChar(6,8);
+      SaveLogical();
       ShowChar(bLogical);
     }
     else Beep();

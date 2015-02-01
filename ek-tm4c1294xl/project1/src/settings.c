@@ -18,6 +18,10 @@ void    InitSettings(void) {
   }
 
   LoadGlobal();
+  if ((enGlobal != GLB_PROGRAM) && (enGlobal != GLB_WORK))
+  	enGlobal = GLB_PROGRAM;
+
+  LoadLogical();
 }
 
 
@@ -46,4 +50,15 @@ bool    SaveGlobal(void) {
 
 bool    LoadGlobal(void) {
   return LoadBuff(wFLA_GLOBAL, &enGlobal, sizeof(global));
+}
+
+
+
+bool    SaveLogical(void) {
+	return SaveBuff(wFLA_LOGICAL, &bLogical, sizeof(uchar));
+}
+
+
+bool    LoadLogical(void) {
+  return LoadBuff(wFLA_LOGICAL, &bLogical, sizeof(uchar));
 }
