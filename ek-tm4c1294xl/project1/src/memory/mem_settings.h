@@ -8,6 +8,8 @@ extern  uchar                   bLogical;
 
 extern  uint                    wPrivate;
 
+extern  global                  enGlobal;
+
 
 
 extern  decret                  deDecret;

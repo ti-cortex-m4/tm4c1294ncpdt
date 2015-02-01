@@ -5,11 +5,11 @@ KEYBOARD.C
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
+#include        "memory/mem_settings.h"
 #include        "memory/mem_program.h"
 #include        "display.h"
 #include        "slide.h"
 #include        "beep.h"
-#include        "label.h"
 #include        "delay.h"
 #include        "include/programs.h"
 #include        "keyboard_auto.h"
@@ -36,8 +36,6 @@ bool                    fKey;
 
 key                     enKeyboard;
 
-global                  enGlobal;
-
 uchar                   bProgram;
 uint                    wProgram;
 
@@ -60,11 +58,6 @@ void    InitKeyboard(void)
 
   boSetTime     = boFalse;
   boSetDate     = boFalse;
-
-  if (GetLabel() == true)
-    enGlobal = GLB_WORK;
-  else
-    enGlobal = GLB_PROGRAM;
 }
 
 

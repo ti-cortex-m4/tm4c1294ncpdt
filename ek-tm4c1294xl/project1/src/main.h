@@ -30,7 +30,7 @@ typedef enum
 } decret;
 
 
-// тип 'сострежим работы прибора'
+// тип 'режим работы прибора'
 typedef enum
 {
   GLB_PROGRAM           = 0,
