@@ -4,7 +4,7 @@ MEM_GROUPS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  groups                  mpgrGroups[bGROUPS];
+extern  group                   mpgrGroups[bGROUPS];
 
 extern  boolean                 mpboUsedGroups[bGROUPS];
 

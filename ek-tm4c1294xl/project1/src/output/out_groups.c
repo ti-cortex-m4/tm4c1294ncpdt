@@ -17,7 +17,7 @@ OUT_GROUPS.C
 void    OutGetGroup(void)
 {
   if (bInBuff5 < bGROUPS)
-    Common(&mpgrGroups[ bInBuff5 ], sizeof(groups));
+    Common(&mpgrGroups[ bInBuff5 ], sizeof(group));
   else
     Result(bRES_BADADDRESS);
 }
@@ -41,7 +41,7 @@ uchar  i;
       if (i == bInBuff6)
       {
         InitPop(6);
-        Pop(&mpgrGroups[bInBuff5], sizeof(groups));
+        Pop(&mpgrGroups[bInBuff5], sizeof(group));
 
         if (bInBuff5 == bGROUPS - 1)
           SaveGroups();
@@ -71,8 +71,8 @@ uchar   wT;
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
     {
-      Push(&mpgrGroups[i], sizeof(groups));
-      wT += sizeof(groups);
+      Push(&mpgrGroups[i], sizeof(group));
+      wT += sizeof(group);
     }
   }
 

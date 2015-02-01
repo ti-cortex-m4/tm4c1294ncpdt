@@ -19,7 +19,7 @@ static char const       szMaskGroups[]  = "    + ___       ",
                         szGroups[]      = "Группы          ",
                         szNoNodes[]     = "  нет каналов   ";
 
-static nodes            noT;
+static node             noT;
 
 
 

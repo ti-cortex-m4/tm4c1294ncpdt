@@ -10,6 +10,7 @@ KEY_LOGICAL.C
 #include        "../display.h"
 #include        "../beep.h"
 #include        "../access.h"
+#include        "../flash/files.h"
 #include        "../settings.h"
 
 
@@ -36,7 +37,7 @@ void    key_SetLogical(void)
       enKeyboard = KBD_POSTENTER;
 
       bLogical = GetChar(6,8);
-      SaveLogical();
+      SaveFile(&flLogical);
       ShowChar(bLogical);
     }
     else Beep();

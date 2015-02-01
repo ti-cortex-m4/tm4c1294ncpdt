@@ -45,7 +45,8 @@ void    PushChar(uchar  bT) {
 
 
 void    PushInt(uint  wT) {
-  Push(&wT, sizeof(uint));
+	PushChar(wT / 0x100);
+	PushChar(wT % 0x100);
 }
 
 

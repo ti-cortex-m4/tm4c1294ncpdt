@@ -9,7 +9,7 @@ MEM_GROUPS.S
 
 
 // массив групп
-groups                  mpgrGroups[bGROUPS];
+group                   mpgrGroups[bGROUPS];
 
 // массив признаков используемых групп
 boolean                 mpboUsedGroups[bGROUPS];

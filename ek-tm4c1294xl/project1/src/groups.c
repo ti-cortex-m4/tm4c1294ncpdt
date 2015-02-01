@@ -26,13 +26,13 @@ void    SetGroupsSize(uchar  ibGroup, uchar  bSize)
 
 
 
-nodes   GetGroupsNode(uchar  ibGroup, uchar  ibNode)
+node    GetGroupsNode(uchar  ibGroup, uchar  ibNode)
 {
   return( mpgrGroups[ibGroup].mpnoNodes[ibNode] );
 }
 
 
-void    SetGroupsNode(uchar  ibGroup, uchar  ibNode, nodes  noT)
+void    SetGroupsNode(uchar  ibGroup, uchar  ibNode, node  noT)
 {
   mpgrGroups[ibGroup].mpnoNodes[ibNode] = noT;
 }
@@ -80,7 +80,7 @@ bool    SaveGroups(void)
 {
   OpenOut(wFLA_GROUPS);
 
-  if (Save(mpgrGroups, sizeof(groups)*bGROUPS) == 0)
+  if (Save(mpgrGroups, sizeof(group)*bGROUPS) == 0)
     return(0);
 
   return CloseOut();
@@ -90,7 +90,7 @@ bool    SaveGroups(void)
 bool    LoadGroups(void)
 {
   OpenIn(wFLA_GROUPS);
-  return Load(mpgrGroups, sizeof(groups)*bGROUPS);
+  return Load(mpgrGroups, sizeof(group)*bGROUPS);
 }
 
 
@@ -105,7 +105,7 @@ void    InitGroups(void)
 void    ResetGroups(void)
 {
 uchar   i;
-nodes   noT;
+node    noT;
 
   memset(&mpgrGroups, 0, sizeof(mpgrGroups));
 
