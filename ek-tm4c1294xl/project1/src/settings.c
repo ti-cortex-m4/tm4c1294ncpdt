@@ -25,9 +25,14 @@ void    InitSettings(void) {
 }
 
 
-void    ResetSettings(void) {
+void    ResetSettings(bool  fFullReset) {
 	enGlobal = GLB_PROGRAM;
   SaveGlobal();
+
+  if (fFullReset) {
+  	bLogical = 0;
+    SaveLogical();
+  }
 }
 
 

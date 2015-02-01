@@ -10,24 +10,20 @@ PORTS_STACK.H
 
 
 
-void    InitPush(void) {
+void    InitPush(uchar  ibPush) {
   switch (ibPort) {
-    case 0: iwPush0 = 0; break;
+    case 0: iwPush0 = ibPush; break;
   }
 }
 
 
 void    InitPushCRC(void) {
-  switch (ibPort) {
-    case 0: iwPush0 = 5; break;
-  }
+	InitPush(5);
 }
 
 
 void    InitPushPtr(void) {
-  switch (ibPort) {
-    case 0:  iwPush0 = bHEADER;  break;
-  }
+	InitPush(bHEADER);
 }
 
 

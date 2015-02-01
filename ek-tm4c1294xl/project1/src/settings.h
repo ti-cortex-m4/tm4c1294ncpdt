@@ -5,7 +5,7 @@ SETTINGS.H
 ------------------------------------------------------------------------------*/
 
 void    InitSettings(void);
-void    ResetSettings(void);
+void    ResetSettings(bool  fFullReset);
 
 bool    SavePrivate(void);
 bool    LoadPrivate(void);

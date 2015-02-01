@@ -8,6 +8,7 @@ PORTS.C
 #include        "memory/mem_ports.h"
 #include        "memory/mem_settings.h"
 #include        "memory/mem_serial0.h"
+#include        "memory/mem_realtime.h"
 #include        "include/queries.h"
 #include        "crc-16.h"
 #include        "ports_stack.h"
@@ -22,7 +23,7 @@ uchar                   ibPort;
 
 
 void    Output(uint  wSize) {
-  InitPush();
+  InitPush(0);
 
   PushChar(bLogical);
   PushChar(0);
@@ -61,7 +62,7 @@ void    LongResult(uchar  bT) {
 
 void    Outptr(void  *pData, uint  wSize)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(bLogical);
   PushChar(0);
@@ -77,10 +78,10 @@ void    Outptr(void  *pData, uint  wSize)
   PushChar( 0/*mpibEngCurrTariff[ GetHouIndex() ]*/ );
   PushChar( 0/*mpibPowCurrTariff[ GetHouIndex() ]*/ );
 
-  PushChar(0/*ibSoftMnt*/);
-  PushInt(0/*iwHardHou*/);
-  PushChar(0/*ibHardDay*/);
-  PushChar(0/*ibHardMon*/);
+  PushChar(ibSoftMnt);
+  PushInt(iwHardHou);
+  PushChar(ibHardDay);
+  PushChar(ibHardMon);
 
   PushChar(0/*cbWaitQuery*/);
   PushChar(0);

@@ -4,7 +4,7 @@ PORTS_STACK.H
 
 ------------------------------------------------------------------------------*/
 
-void    InitPush(void);
+void    InitPush(uchar  ibPush);
 void    InitPushCRC(void);
 void    InitPushPtr(void);
 
