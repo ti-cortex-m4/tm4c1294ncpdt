@@ -173,7 +173,7 @@ uint    i;
   i = 0;
   while ((ReadStatus() & 0x80) == 0)
   {
-    if (++i > wMAXBUSY)
+    if (++i > wREAD_STATUS)
     {
       cwWrnBusy++;
       return(0);
