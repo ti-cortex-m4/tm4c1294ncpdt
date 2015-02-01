@@ -16,6 +16,14 @@ void    InitSettings(void) {
     wPrivate = 1;
     SavePrivate();
   }
+
+  LoadGlobal();
+}
+
+
+void    ResetSettings(void) {
+	enGlobal = GLB_PROGRAM;
+  SaveGlobal();
 }
 
 
@@ -27,4 +35,15 @@ bool    SavePrivate(void) {
 
 bool    LoadPrivate(void) {
   return LoadBuff(wFLA_PRIVATE, &wPrivate, sizeof(uint));
+}
+
+
+
+bool    SaveGlobal(void) {
+	return SaveBuff(wFLA_GLOBAL, &enGlobal, sizeof(global));
+}
+
+
+bool    LoadGlobal(void) {
+  return LoadBuff(wFLA_GLOBAL, &enGlobal, sizeof(global));
 }

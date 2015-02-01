@@ -8,9 +8,9 @@ KEY_RESET.C
 #include        "../keyboard.h"
 #include        "../display.h"
 #include        "../beep.h"
-#include        "../label.h"
 #include        "../groups.h"
 #include        "../engine.h"
+#include        "../settings.h"
 #include        "../hardware/memory.h"
 
 
@@ -50,7 +50,7 @@ void    key_SetReset(void)
           LongBeep();
           Clear();
 
-          BreakLabel();
+          ResetSettings();
 //          ResetCustom();
 //
 //          ResetLimits();
@@ -83,7 +83,7 @@ void    key_SetReset(void)
           LongBeep();
           Clear();
 
-          BreakLabel();
+          ResetSettings();
 //          ResetXDATA();
 //          ResetKeyboard();
 //          ResetDecret();

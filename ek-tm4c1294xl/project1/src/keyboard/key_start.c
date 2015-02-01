@@ -9,10 +9,10 @@ KEY_START.C
 #include        "../memory/mem_program.h"
 #include        "../keyboard.h"
 #include        "../display.h"
-#include        "../label.h"
 #include        "../delay.h"
 #include        "../beep.h"
 #include        "../access.h"
+#include        "../settings.h"
 #include        "../groups.h"
 #include        "../rtc.h"
 #include        "../engine.h"
@@ -64,9 +64,6 @@ void    key_Start(void)
 
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
-
-    // устанавливаем метку режима 'Функционирование'
-    SetLabel();
     
     // запоминаем время/дату первого запуска
     tiStart = *PGetCurrTimeDate();
@@ -75,7 +72,9 @@ void    key_Start(void)
     Work(); OK(); 
 
     LongBeep();
+
     enGlobal = GLB_WORK;  
+    SaveGlobal();
 
 //    AddSysRecord(EVE_START);
   }
