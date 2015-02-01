@@ -2,14 +2,14 @@
 #define __MAIN_BASIC
 
 
-typedef unsigned char   uchar;
-typedef signed char     schar;
+typedef uint8_t         uchar;
+typedef int8_t          schar;
 
-typedef unsigned int    uint;
-typedef signed int      sint;
+typedef uint16_t        uint;
+typedef int16_t         sint;
 
-typedef unsigned long   ulong;
-typedef signed long     slong;
+typedef uint32_t        ulong;
+typedef int32_t         slong;
 
 typedef double          real;
 
