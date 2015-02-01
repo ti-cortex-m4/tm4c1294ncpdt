@@ -19,7 +19,7 @@ FLASH.H
 
 
 // количество повторов при чтении регистра состояния
-#define wMAXBUSY        1000
+#define wREAD_STATUS    50000
 
 // количество повторов при чтения/записи страницы
 #define bMAXREPEAT      8
@@ -30,6 +30,7 @@ BEGIN(wFLA_BEGIN, 0)
 
 RESERVE(wFLA_PRIVATE, 1)
 RESERVE(wFLA_GLOBAL, 1)
+RESERVE(wFLA_LOGICAL, 1)
 RESERVE(wFLA_GROUPS, 10)
 
 END(wFLA_END)
