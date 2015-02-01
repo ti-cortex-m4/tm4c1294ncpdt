@@ -119,3 +119,22 @@ bool    LoadBuff(uint  wPage, void  *pbBuff, uint  wSize)
 }
 
 
+
+bool    SaveFile(file const  *pfl)
+{
+  OpenOut((*pfl).wPage);
+
+  if (Save((*pfl).pbBuff, (*pfl).wSize) == 0)
+    return 0;
+
+  return CloseOut();
+}
+
+
+bool    LoadFile(file const  *pfl)
+{
+  OpenIn((*pfl).wPage);
+  return Load((*pfl).pbBuff, (*pfl).wSize);
+}
+
+

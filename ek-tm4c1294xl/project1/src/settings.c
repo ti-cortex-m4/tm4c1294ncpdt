@@ -11,6 +11,10 @@ SETTINGS.C
 
 
 
+file const              flLogical = {wFLA_LOGICAL, &bLogical, sizeof(uchar)};
+
+
+
 void    InitSettings(void) {
   if (LoadPrivate() == 0) {
     wPrivate = 1;
@@ -18,10 +22,10 @@ void    InitSettings(void) {
   }
 
   LoadGlobal();
-  if ((enGlobal != GLB_PROGRAM) && (enGlobal != GLB_WORK))
+  if ((enGlobal != GLB_PROGRAM) && (enGlobal != GLB_WORK)) // TODO LoadGlobal
   	enGlobal = GLB_PROGRAM;
 
-  LoadLogical();
+  LoadFile(&flLogical);
 }
 
 
@@ -31,7 +35,7 @@ void    ResetSettings(bool  fFullReset) {
 
   if (fFullReset) {
   	bLogical = 0;
-    SaveLogical();
+    SaveFile(&flLogical);
   }
 }
 
@@ -55,15 +59,4 @@ bool    SaveGlobal(void) {
 
 bool    LoadGlobal(void) {
   return LoadBuff(wFLA_GLOBAL, &enGlobal, sizeof(global));
-}
-
-
-
-bool    SaveLogical(void) {
-	return SaveBuff(wFLA_LOGICAL, &bLogical, sizeof(uchar));
-}
-
-
-bool    LoadLogical(void) {
-  return LoadBuff(wFLA_LOGICAL, &bLogical, sizeof(uchar));
 }

@@ -33,6 +33,15 @@ typedef enum
 } boolean;
 
 
+//
+typedef struct
+{
+  uint          wPage;
+  void          *pbBuff;
+  uint          wSize;
+} file;
+
+
 typedef char const      message[bDISPLAY];
 
 

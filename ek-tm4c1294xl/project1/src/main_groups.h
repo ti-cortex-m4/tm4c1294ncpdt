@@ -6,12 +6,12 @@
 typedef struct
 {
   uchar         ibCanal;                // индекс канала
-} nodes;
+} node;
 
 
 // тип 'группа'
 typedef struct
 {
   uchar         bSize;                  // количество узлов в группе
-  nodes         mpnoNodes[bCANALS];     // узлы группы
-} groups;
+  node          mpnoNodes[bCANALS];     // узлы группы
+} group;
