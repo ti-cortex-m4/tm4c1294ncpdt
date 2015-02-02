@@ -36,22 +36,22 @@ void    key_Start(void)
     Clear();
 
 
-    if (boSetTime == boFalse)
+    if (boSetTime == false)
     {
       NeedProgram(bSET_CURRTIME);
       return;
     }
-    else if (boSetDate == boFalse)
+    else if (boSetDate == false)
     {
       NeedProgram(bSET_CURRDATE);
       return;
     }
-    else if (boSetGroups == boFalse)
+    else if (boSetGroups == false)
     {
       NeedProgram(bSET_GROUPS);
       return;
     }
-    else if (boSetPassword == boFalse)
+    else if (boSetPassword == false)
     {
       NeedProgram(bSET_PASSWORD);
       return;
@@ -93,7 +93,7 @@ void    key_Restart(void)
     ShowHi(szRestart);     
     Clear();    
 
-    if (boSetPassword == boFalse)
+    if (boSetPassword == false)
     {
       NeedProgram(bSET_PASSWORD);
       return;
@@ -115,7 +115,7 @@ void    key_Restart(void)
 
 //    AddSysRecord(EVE_RESTART);
 
-//    if (boDTREnable == boTrue) DTROff_All();
+//    if (boDTREnable == true) DTROff_All();
   }
   else Beep();
 }
@@ -132,13 +132,13 @@ void    key_Debug(void)
     ShowHi(szDebug);     
     Clear();
 
-    boSetTime = boTrue;
-    boSetDate = boTrue;
+    boSetTime = true;
+    boSetDate = true;
 
     ClearPassOne();
-    boSetPassword = boTrue;
+    boSetPassword = true;
 
-    boSetGroups = boTrue;
+    boSetGroups = true;
 
 // TODO
 
@@ -147,7 +147,7 @@ void    key_Debug(void)
 
     OK();
 
-//    if (boDTREnable == boTrue) DTROff_All();
+//    if (boDTREnable == true) DTROff_All();
   }
   else Beep();
 }

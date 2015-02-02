@@ -141,7 +141,7 @@ void    key_SetGroups(void)
       ShowHi(szGroups); 
       Group();
 
-      boSetGroups = boTrue; 
+      boSetGroups = true; 
     }
     else if (enKeyboard == KBD_INPUT2)  // номер группы не введён
     {                                   // начинаем с первой группы
@@ -195,7 +195,7 @@ void    key_SetGroups(void)
     if (enKeyboard == KBD_POSTINPUT3)
     {
       // при перепрограммировании разрешается редактировать незаданные группы
-      if ((enGlobal == GLB_REPROGRAM) && (mpboUsedGroups[ibX] == boTrue))
+      if ((enGlobal == GLB_REPROGRAM) && (mpboUsedGroups[ibX] == true))
       {
         Error();
         LongBeep();

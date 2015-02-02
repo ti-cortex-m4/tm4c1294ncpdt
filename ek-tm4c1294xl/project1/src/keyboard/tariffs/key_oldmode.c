@@ -38,7 +38,7 @@ void    key_SetOldMode(void)
       Clear();
       ShowChar(bOldMode);
 
-      boOldTariffs = boTrue;
+      boOldTariffs = true;
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {

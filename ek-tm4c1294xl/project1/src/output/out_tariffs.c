@@ -26,7 +26,7 @@ void    OutSetPublic(void)
 {
 	if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
 	{
-		if ((bInBuff5 == boTrue) || (bInBuff5 == boFalse))
+		if ((bInBuff5 == true) || (bInBuff5 == false))
 		{
 			boPublicCurr = bInBuff5;
 			Result(bRES_OK);
@@ -62,7 +62,7 @@ void    OutSetOldMode(void)
 
 void    OutGetOldPowTariffs(void)
 {
-	if ((boPublicCurr == boFalse) || (SuperUser() == 1))
+	if ((boPublicCurr == false) || (SuperUser() == 1))
 	{
 		if (bInBuff5 < 12)
 		{
@@ -102,7 +102,7 @@ void    OutSetOldPowTariffs(void)
 
 void    OutGetOldEngTariffs(void)
 {
-	if ((boPublicCurr == boFalse) || (SuperUser() == 1))
+	if ((boPublicCurr == false) || (SuperUser() == 1))
 	{
 		if (bInBuff5 < 12)
 		{
@@ -142,7 +142,7 @@ void    OutSetOldEngTariffs(void)
 
 void    OutGetOldPubTariffs(void)
 {
-	if ((boPublicCurr == boTrue) || (SuperUser() == 1))
+	if ((boPublicCurr == true) || (SuperUser() == 1))
 	{
 		if (bInBuff5 < 12)
 		{
@@ -183,7 +183,7 @@ void    OutSetOldPubTariffs(void)
 
 void    OutGetNewPowTariffs(void)
 {
-	if (boPublicCurr == boFalse)
+	if (boPublicCurr == false)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
 		{
@@ -223,7 +223,7 @@ void    OutSetNewPowTariffs(void)
 
 void    OutGetNewEngTariffs(void)
 {
-	if (boPublicCurr == boFalse)
+	if (boPublicCurr == false)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
 		{
@@ -263,7 +263,7 @@ void    OutSetNewEngTariffs(void)
 
 void    OutGetNewPubTariffs(void)
 {
-	if (boPublicCurr == boTrue)
+	if (boPublicCurr == true)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
 		{

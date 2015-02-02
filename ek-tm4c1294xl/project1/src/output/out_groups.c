@@ -30,7 +30,7 @@ uchar  i;
   if (bInBuff5 < bGROUPS)
   {
     if ( (enGlobal == GLB_PROGRAM) ||
-        ((enGlobal == GLB_REPROGRAM) && (mpboUsedGroups[bInBuff5] == boFalse)) )
+        ((enGlobal == GLB_REPROGRAM) && (mpboUsedGroups[bInBuff5] == false)) )
     {
       for (i=0; i<bInBuff6; i++)
       {
@@ -46,7 +46,7 @@ uchar  i;
         if (bInBuff5 == bGROUPS - 1)
           SaveGroups();
 
-        boSetGroups = boTrue;
+        boSetGroups = true;
 
         LongResult(bRES_OK);
       }

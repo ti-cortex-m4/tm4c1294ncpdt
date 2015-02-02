@@ -12,7 +12,7 @@ BULK.C
 #ifdef  BULK
 bit     BulkEnabled(void)
 {
-  return (boEnableBulk == boTrue) && (bMaxBulk > 0);
+  return (boEnableBulk == true) && (bMaxBulk > 0);
 }
 #endif
 

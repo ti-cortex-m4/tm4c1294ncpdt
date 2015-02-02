@@ -84,7 +84,7 @@ zones  *PGetZonePowMonthMode(void)
 // записывает суточный тарифный график на несколько мес€цев (дл€ энергии)
 void    SetZonesEngMonthsMode(uchar  ibBeg, uchar  ibEnd)
 {
-  boAlt = boTrue;
+  boAlt = true;
   memcpy(&zoAlt, &zoKey, sizeof(zones));
 
   for (ibMonth=ibBeg; ibMonth<=ibEnd; ibMonth++)
@@ -99,7 +99,7 @@ void    SetZonesEngMonthsMode(uchar  ibBeg, uchar  ibEnd)
 // записывает суточный тарифный график на несколько мес€цев (дл€ мощности)
 void    SetZonesPowMonthsMode(uchar  ibBeg, uchar  ibEnd)
 {
-  boAlt = boTrue;
+  boAlt = true;
   memcpy(&zoAlt, &zoKey, sizeof(zones));
 
   for (ibMonth=ibBeg; ibMonth<=ibEnd; ibMonth++)
@@ -114,7 +114,7 @@ void    SetZonesPowMonthsMode(uchar  ibBeg, uchar  ibEnd)
 
 void    SetTariffsDefault(void)
 {
-  if (boPublicCurr == boTrue)
+  if (boPublicCurr == true)
   {
     chOldMode = '_';
 
@@ -142,15 +142,15 @@ void    SetTariffsDefault(void)
 void    ResetTariffs(void)
 {
   // совмещЄнные тарифные графики дл€ мщности и энергии
-  boPublicCurr = boFalse;
+  boPublicCurr = false;
 
   // старый вариант обработки тарифов
-  boOldTariffs = boTrue;
+  boOldTariffs = true;
 
   // правило обработки тарифов в выходные дни (старый вариант)
   bOldMode = 0;
 
-  boAlt = boFalse;
+  boAlt = false;
   for (ibMonth=0; ibMonth<12+4+1; ibMonth++)
   {
     for (ibMode=0; ibMode<bMODES; ibMode++)
@@ -217,7 +217,7 @@ uchar  i,j;
 
   tiAlt = *PGetCurrTimeDate();
 
-  if (boGapsFlag == boFalse) 
+  if (boGapsFlag == false) 
   {
     ibMonth = tiAlt.bMonth - 1;
   }
@@ -235,7 +235,7 @@ uchar  i,j;
   zoAlt = *PGetZonePowMonthMode();
   MakeTariff(mpibPowCurrTariff);
 
-  if (boRelaxsFlag == boTrue)
+  if (boRelaxsFlag == true)
   {
     j = RelaxIndex();
     i = Weekday();
@@ -256,7 +256,7 @@ uchar  i,j;
 
   ibMonth = tiAlt.bMonth - 1;                   
 
-  if (boGapsFlag == boFalse) 
+  if (boGapsFlag == false) 
   {
     ibMonth = tiAlt.bMonth - 1;
   }
@@ -274,7 +274,7 @@ uchar  i,j;
   zoAlt = *PGetZonePowMonthMode();
   MakeTariff(mpibPowPrevTariff);
 
-  if (boRelaxsFlag == boTrue)
+  if (boRelaxsFlag == true)
   {
     j = RelaxIndex();
     i = Weekday();

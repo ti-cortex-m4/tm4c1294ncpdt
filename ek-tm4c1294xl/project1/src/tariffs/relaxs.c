@@ -79,7 +79,7 @@ static uchar const  mpRelaxs[8*3] =
     SetRelaxSize(GetRelaxSize() + 1);
   }
 
-  boSetRelaxs = boTrue; //boFalse;
+  boSetRelaxs = true; //false;
 }
 
 
@@ -88,9 +88,9 @@ static uchar const  mpRelaxs[8*3] =
 void    ResetRelaxs(void)
 {
   SetRelaxSize(0);
-  boSetRelaxs = boTrue; //boFalse;
+  boSetRelaxs = true; //false;
 
-  boRelaxsFlag = boFalse;
+  boRelaxsFlag = false;
   ibRelaxsTariff = 1;
 }
 

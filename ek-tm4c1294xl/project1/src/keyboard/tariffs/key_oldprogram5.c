@@ -31,7 +31,7 @@ void    key_GetOldProgram5(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (boPublicCurr == boFalse) 
+      if (boPublicCurr == false) 
       {
         NeedPrograms(bGET_PROGRAM84, bGET_PROGRAM85); 
         return;
@@ -71,7 +71,7 @@ void    key_GetOldProgram84(void)
   {
     if (enKeyboard == KBD_ENTER)
     { 
-      if (boPublicCurr == boTrue)
+      if (boPublicCurr == true)
       {
         switch (bProgram)
         {

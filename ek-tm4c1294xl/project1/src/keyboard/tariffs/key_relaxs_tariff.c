@@ -30,7 +30,7 @@ void    key_SetRelaxsTariff(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (boRelaxsFlag == boTrue)
+      if (boRelaxsFlag == true)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();

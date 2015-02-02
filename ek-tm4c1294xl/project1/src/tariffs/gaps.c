@@ -103,7 +103,7 @@ uchar i;
 
   SetGapSize(2);
 
-  boGapsFlag = boFalse;
+  boGapsFlag = false;
 }
 
 

@@ -13,6 +13,8 @@ typedef int32_t         slong;
 
 typedef double          real;
 
+typedef bool            boolean;
+
 
 // тип 'время и дата'
 typedef struct
@@ -24,13 +26,6 @@ typedef struct
   uchar         bMonth;
   uchar         bYear;
 } time;
-
-
-typedef enum
-{
-  boFalse               = 0x00,
-  boTrue                = 0xFF
-} boolean;
 
 
 //

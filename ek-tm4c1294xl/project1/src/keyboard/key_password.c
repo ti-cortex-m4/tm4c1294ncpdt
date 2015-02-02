@@ -35,7 +35,7 @@ void    key_SetPassword(void)
       ClearPassOne();
       ibX = 3;
 
-      boSetPassword = boFalse;
+      boSetPassword = false;
     }
     else if (enKeyboard == KBD_INPUT1)
     {
@@ -54,7 +54,7 @@ void    key_SetPassword(void)
         enKeyboard = KBD_BEGIN;
         OK();
 
-        boSetPassword = boTrue;
+        boSetPassword = true;
       }
       else 
       {
@@ -113,7 +113,7 @@ void    key_GetPassword(void)
         enKeyboard = KBD_BEGIN;
         OK();
 
-        boSetPassword = boTrue;
+        boSetPassword = true;
 
         enGlobal = GLB_REPROGRAM;
         Setting();

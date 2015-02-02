@@ -56,8 +56,8 @@ void    InitKeyboard(void)
 
   cbShowTime = 0;
 
-  boSetTime     = boFalse;
-  boSetDate     = boFalse;
+  boSetTime     = false;
+  boSetDate     = false;
 }
 
 
@@ -239,7 +239,7 @@ uchar   i;
         NeedNumber();
         return;
       }
-      else boReset = boTrue;
+      else boReset = true;
     }
   }
 

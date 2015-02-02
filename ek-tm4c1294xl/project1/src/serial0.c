@@ -67,7 +67,7 @@ uint32_t ui32Status;
   // ведущий режим
   if (((mppoPorts[0].enStream == STR_MASTERDIRECT) ||
        (mppoPorts[0].enStream == STR_MASTERMODEM)) &&
-      (mpboLocal[0] == boFalse))
+      (mpboLocal[0] == false))
   {
     if (GetRI0())
     {
@@ -143,7 +143,7 @@ uint32_t ui32Status;
             InputMode0();                       // передача с ответом
             mpSerial[0] = SER_BEGIN;            // начинаем приём
 
-            mpboLocal[0] = boTrue;
+            mpboLocal[0] = true;
           }
           else
           if (cwInBuff0 == SERIAL_MODEM)
@@ -170,7 +170,7 @@ uint32_t ui32Status;
     {
       bT = InByte0();
 
-      if ((boSendAT == boTrue) && (IsFlow0() == 0))
+      if ((boSendAT == true) && (IsFlow0() == 0))
       {
         mpcbSendAT[0] = bANSWER_AT;
         mpanSendAT[0] = ANS_TIMEOUT;
@@ -413,9 +413,9 @@ void    InDelay0_Timer0(void) {
 void    InitSerial0(void) {
   mpcbSendAT[0] = bANSWER_AT;
   mpanSendAT[0] = ANS_TIMEOUT;
-  boSendAT = boFalse;
+  boSendAT = false;
 
-  mpboLocal[0] = boFalse;
+  mpboLocal[0] = false;
 
   InputMode0();
   DTROff0();
