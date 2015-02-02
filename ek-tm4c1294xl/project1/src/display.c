@@ -51,7 +51,7 @@ void    InitDisplay(void)
     ShowHi(szSetting);
     DelayMsg();
 
-    if (boReset == boTrue)
+    if (boReset == true)
     {
       enKeyboard = KBD_ENTER;
       bKey = bKEY_ENTER;
@@ -90,7 +90,7 @@ void    ShowReal(real  *preT)
 
 void    ShowBoolean(boolean  boT)
 {
-  if (boT == boFalse) 
+  if (boT == false) 
     strcpy(szLo+1,szNo);
   else         
     strcpy(szLo+1,szYes);
@@ -102,7 +102,7 @@ void    ShowBoolean(boolean  boT)
 
 void    ShowAnswer(void)
 {
-  ShowBoolean(enKeyboard != KBD_INPUT1 ? boTrue : boFalse);
+  ShowBoolean(enKeyboard != KBD_INPUT1 ? true : false);
 }
 
 

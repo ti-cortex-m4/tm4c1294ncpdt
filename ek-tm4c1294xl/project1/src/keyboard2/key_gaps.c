@@ -102,7 +102,7 @@ void    key_SetGaps(void)
   {
     if (enKeyboard == KBD_ENTER)
     {                                  
-      if (boGapsFlag == boFalse)
+      if (boGapsFlag == false)
       { BlockProgram2(wSET_GAPS_FLAG, 1); return; }
       else
       {
@@ -261,7 +261,7 @@ void    key_GetGaps(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (boGapsFlag == boFalse)
+      if (boGapsFlag == false)
       { BlockProgram2(wSET_GAPS_FLAG, 1); return; }
       else
       {

@@ -50,7 +50,7 @@ void    ReplaceMode(uchar  ibOld, uchar  ibNew)
 
     // подготавливаем запись в режим ibAltMode
     ibMode = ibAltMode;
-    boAlt = boTrue;
+    boAlt = true;
 
     // записываем изменённый суточный тарифный график
     SetZonePowMonthMode();     
@@ -67,7 +67,7 @@ void    ReplaceMode(uchar  ibOld, uchar  ibNew)
 
     // подготавливаем запись в режим ibAltMode
     ibMode = ibAltMode;
-    boAlt = boTrue;
+    boAlt = true;
 
     // записываем изменённый суточный тарифный график
     SetZoneEngMonthMode();

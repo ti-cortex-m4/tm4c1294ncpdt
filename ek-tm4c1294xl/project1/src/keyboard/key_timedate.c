@@ -47,7 +47,7 @@ void    key_SetCurrTime(void)
         memcpy(&tiSetRTC, &tiKey, sizeof(time));
         SetCurrTime();
 
-        boSetTime = boTrue;
+        boSetTime = true;
       }
       else Beep();
     }
@@ -138,7 +138,7 @@ void    key_SetCurrDate(void)
         memcpy(&tiSetRTC, &tiKey, sizeof(time));
         SetCurrDate();
 
-        boSetDate = boTrue;
+        boSetDate = true;
         MakeDecret();
       }
       else

@@ -20,7 +20,7 @@ static char const       szPublic[]      = "Тарифы ?        ",
 
 void    ShowPublic(void)
 {
-  if (boPublicCurr == boFalse) 
+  if (boPublicCurr == false) 
     ShowLo(szTarCustom);
   else 
     ShowLo(szTarCommon);

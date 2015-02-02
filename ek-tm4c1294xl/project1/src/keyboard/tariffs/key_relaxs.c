@@ -108,7 +108,7 @@ void    key_SetRelaxs(void)
   {
     if (enKeyboard == KBD_ENTER)
     {                                  
-      if (boRelaxsFlag == boFalse)
+      if (boRelaxsFlag == false)
       { BlockProgram(bSET_RELAXS_FLAG); return; }
       else
       {
@@ -267,7 +267,7 @@ void    key_GetRelaxs(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (boRelaxsFlag == boFalse)
+      if (boRelaxsFlag == false)
       { BlockProgram(bSET_RELAXS_FLAG); return; }
       else
       {
