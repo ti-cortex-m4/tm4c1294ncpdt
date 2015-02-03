@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-KEY_CANALS.C
+KEY_FACTORS.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../memory/mem_canals.h"
+#include        "../memory/mem_factors.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../memory/mem_graph3.h"
@@ -27,14 +27,14 @@ static char const       szTransEng[]    = "К трансформации ",
                         szLevel[]       = "К отношения     ",
                         szCount[]       = "Счетчики        ",
                         szSpecial[]     = " (специальный)  ",
-                        szMaskCanals[]  = "_________ ___";
+                        szMaskFactors[]  = "_________ ___";
                       
 static char const      *pszTransCnt[]   = { szTransEng, szSpecial, "" },
                        *pszPulseMnt[]   = { szPulseHou, szSpecial, "" };
 
 
 
-void    ShowCanals(void)
+void    ShowFactors(void)
 {
   if (enGlobal != GLB_WORK)
   {
@@ -74,7 +74,7 @@ void    ShowCanals(void)
 
 
 
-void    key_SetCanals(void)
+void    key_SetFactors(void)
 {
   if (bKey == bKEY_ENTER)
   {                                           
@@ -99,23 +99,23 @@ void    key_SetCanals(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowCanals();
+      ShowFactors();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((ibX = GetChar(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowCanals();
+        ShowFactors();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) 
+      if (++ibX >= bCANALS)
         ibX = 0;
 
-      ShowCanals();
+      ShowFactors();
     }
     else if ((enKeyboard == KBD_POSTINPUT2) || (enKeyboard == KBD_POSTINPUT3))
     {      
@@ -197,17 +197,17 @@ void    key_SetCanals(void)
 
       if (enKeyboard == KBD_POSTENTER)
       {
-        if (++ibX >= bCANALS) 
+        if (++ibX >= bCANALS)
           ibX = 0;
 
-        ShowCanals();
+        ShowFactors();
       }
       else 
       {
         enKeyboard = KBD_INPUT2;
         LongBeep();
 
-        ShowLo(szMaskCanals);
+        ShowLo(szMaskFactors);
       }
     }
   }
@@ -229,7 +229,7 @@ void    key_SetCanals(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT2;
-      ShowLo(szMaskCanals);
+      ShowLo(szMaskFactors);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
@@ -255,7 +255,7 @@ void    key_SetCanals(void)
 
 
 
-void    key_GetCanals(void)
+void    key_GetFactors(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -279,23 +279,23 @@ void    key_GetCanals(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowCanals();
+      ShowFactors();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((ibX = GetChar(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowCanals();
+        ShowFactors();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) 
+      if (++ibX >= bCANALS)
         ibX = 0;
 
-      ShowCanals();
+      ShowFactors();
     }
   }
 
