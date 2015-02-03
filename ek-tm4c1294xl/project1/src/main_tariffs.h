@@ -19,6 +19,14 @@ typedef struct
 } zones;
 
 
+// тип 'мощность/энергия'
+typedef enum
+{
+  DOM_POWER,
+  DOM_ENERGY
+} domain;
+
+
 // тип 'список праздников'
 typedef struct
 {

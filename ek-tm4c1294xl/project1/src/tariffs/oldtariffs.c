@@ -14,10 +14,6 @@ OLDTARIFFS.С
 
 
 
-bool                    fEnergy;
-
-
-
 // заменяет во всех изломах переменной zoAlt один тариф на другой
 void    ReplaceZone(uchar  ibTariffOld, uchar  ibTariffNew)
 {
@@ -37,9 +33,9 @@ uchar  i;
 
 
 // записывает в режим ibAltMode изменённый суточный тарифный график из режима 0 (будни)
-void    ReplaceMode(uchar  ibMonth, uchar  ibMode, uchar  ibTariffOld, uchar  ibTariffNew)
+void    ReplaceMode(uchar  ibMonth, uchar  ibMode, domain  doT, uchar  ibTariffOld, uchar  ibTariffNew)
 {
-  if (fEnergy == 0)
+  if (doT == DOM_POWER)
   {
     // читаем суточный тарифный график из режима 0 (будни)
     zoAlt = *PGetZonePowMonthMode(ibMonth, 0);
@@ -68,7 +64,7 @@ void    ReplaceMode(uchar  ibMonth, uchar  ibMode, uchar  ibTariffOld, uchar  ib
 
 
 // поддержка старого варианта обратотки тарифов в нерабочие дни
-void    MakeOldMode(uchar  ibMonth)
+void    MakeOldMode(uchar  ibMonth, domain  doT)
 {
 uchar  ibMode;
 
@@ -76,73 +72,73 @@ uchar  ibMode;
   {     
     case 0:         
     	ibMode = 1;                      // для суббот
-      ReplaceMode(ibMonth,ibMode,0,0); // одинаковые тарифы в рабочие и нерабочие дни
-      ReplaceMode(ibMonth,ibMode,1,1);
-      ReplaceMode(ibMonth,ibMode,2,2);
-      ReplaceMode(ibMonth,ibMode,3,3);
+      ReplaceMode(ibMonth,ibMode,doT,0,0); // одинаковые тарифы в рабочие и нерабочие дни
+      ReplaceMode(ibMonth,ibMode,doT,1,1);
+      ReplaceMode(ibMonth,ibMode,doT,2,2);
+      ReplaceMode(ibMonth,ibMode,doT,3,3);
 
       ibMode = 2;                      // для выходных дней
-      ReplaceMode(ibMonth,ibMode,0,0); // одинаковые тарифы в рабочие и нерабочие дни
-      ReplaceMode(ibMonth,ibMode,1,1);
-      ReplaceMode(ibMonth,ibMode,2,2);
-      ReplaceMode(ibMonth,ibMode,3,3);
+      ReplaceMode(ibMonth,ibMode,doT,0,0); // одинаковые тарифы в рабочие и нерабочие дни
+      ReplaceMode(ibMonth,ibMode,doT,1,1);
+      ReplaceMode(ibMonth,ibMode,doT,2,2);
+      ReplaceMode(ibMonth,ibMode,doT,3,3);
       break;
     
     case 1:
     case 3:          
     	ibMode = 1;                      // для суббот
-      ReplaceMode(ibMonth,ibMode,0,1); // в суботние и выходные дни по дневному тарифу
-      ReplaceMode(ibMonth,ibMode,1,1);
-      ReplaceMode(ibMonth,ibMode,2,1);
-      ReplaceMode(ibMonth,ibMode,3,1);
+      ReplaceMode(ibMonth,ibMode,doT,0,1); // в суботние и выходные дни по дневному тарифу
+      ReplaceMode(ibMonth,ibMode,doT,1,1);
+      ReplaceMode(ibMonth,ibMode,doT,2,1);
+      ReplaceMode(ibMonth,ibMode,doT,3,1);
 
       ibMode = 2;                      // для выходных дней
-      ReplaceMode(ibMonth,ibMode,0,1); // в суботние и выходные дни по дневному тарифу
-      ReplaceMode(ibMonth,ibMode,1,1);
-      ReplaceMode(ibMonth,ibMode,2,1);
-      ReplaceMode(ibMonth,ibMode,3,1);
+      ReplaceMode(ibMonth,ibMode,doT,0,1); // в суботние и выходные дни по дневному тарифу
+      ReplaceMode(ibMonth,ibMode,doT,1,1);
+      ReplaceMode(ibMonth,ibMode,doT,2,1);
+      ReplaceMode(ibMonth,ibMode,doT,3,1);
       break;
     
     case 2:          
     	ibMode = 1;                      // для суббот
-      ReplaceMode(ibMonth,ibMode,0,0); // в суботние и выходные дни по ночному тарифу
-      ReplaceMode(ibMonth,ibMode,1,0);
-      ReplaceMode(ibMonth,ibMode,2,0);
-      ReplaceMode(ibMonth,ibMode,3,0);
+      ReplaceMode(ibMonth,ibMode,doT,0,0); // в суботние и выходные дни по ночному тарифу
+      ReplaceMode(ibMonth,ibMode,doT,1,0);
+      ReplaceMode(ibMonth,ibMode,doT,2,0);
+      ReplaceMode(ibMonth,ibMode,doT,3,0);
 
       ibMode = 2;                      // для выходных дней
-      ReplaceMode(ibMonth,ibMode,0,0); // в суботние и выходные дни по ночному тарифу
-      ReplaceMode(ibMonth,ibMode,1,0);
-      ReplaceMode(ibMonth,ibMode,2,0);
-      ReplaceMode(ibMonth,ibMode,3,0);
+      ReplaceMode(ibMonth,ibMode,doT,0,0); // в суботние и выходные дни по ночному тарифу
+      ReplaceMode(ibMonth,ibMode,doT,1,0);
+      ReplaceMode(ibMonth,ibMode,doT,2,0);
+      ReplaceMode(ibMonth,ibMode,doT,3,0);
       break;
 
     case 4:          
     	ibMode = 1;                      // для суббот
-      ReplaceMode(ibMonth,ibMode,0,0);
-      ReplaceMode(ibMonth,ibMode,1,0); // дневной тариф заменяется на ночной тариф
-      ReplaceMode(ibMonth,ibMode,2,1); // утренний и вечерний тарифы заменяются на дневной тариф
-      ReplaceMode(ibMonth,ibMode,3,1);
+      ReplaceMode(ibMonth,ibMode,doT,0,0);
+      ReplaceMode(ibMonth,ibMode,doT,1,0); // дневной тариф заменяется на ночной тариф
+      ReplaceMode(ibMonth,ibMode,doT,2,1); // утренний и вечерний тарифы заменяются на дневной тариф
+      ReplaceMode(ibMonth,ibMode,doT,3,1);
 
       ibMode = 2;                      // для выходных дней
-      ReplaceMode(ibMonth,ibMode,0,0);
-      ReplaceMode(ibMonth,ibMode,1,0); // дневной тариф заменяется на ночной тариф
-      ReplaceMode(ibMonth,ibMode,2,1); // утренний и вечерний тарифы заменяются на дневной тариф
-      ReplaceMode(ibMonth,ibMode,3,1);
+      ReplaceMode(ibMonth,ibMode,doT,0,0);
+      ReplaceMode(ibMonth,ibMode,doT,1,0); // дневной тариф заменяется на ночной тариф
+      ReplaceMode(ibMonth,ibMode,doT,2,1); // утренний и вечерний тарифы заменяются на дневной тариф
+      ReplaceMode(ibMonth,ibMode,doT,3,1);
       break;
 
     case 5:          
     	ibMode = 1;                      // для суббот
-      ReplaceMode(ibMonth,ibMode,0,0);
-      ReplaceMode(ibMonth,ibMode,1,1);
-      ReplaceMode(ibMonth,ibMode,2,1); // утренний и вечерний тарифы заменяются на дневной тариф
-      ReplaceMode(ibMonth,ibMode,3,1);
+      ReplaceMode(ibMonth,ibMode,doT,0,0);
+      ReplaceMode(ibMonth,ibMode,doT,1,1);
+      ReplaceMode(ibMonth,ibMode,doT,2,1); // утренний и вечерний тарифы заменяются на дневной тариф
+      ReplaceMode(ibMonth,ibMode,doT,3,1);
 
       ibMode = 2;                      // для выходных дней
-      ReplaceMode(ibMonth,ibMode,0,0);
-      ReplaceMode(ibMonth,ibMode,1,0); // дневной тариф заменяется на ночной тариф
-      ReplaceMode(ibMonth,ibMode,2,1); // утренний и вечерний тарифы заменяются на дневной тариф
-      ReplaceMode(ibMonth,ibMode,3,1);
+      ReplaceMode(ibMonth,ibMode,doT,0,0);
+      ReplaceMode(ibMonth,ibMode,doT,1,0); // дневной тариф заменяется на ночной тариф
+      ReplaceMode(ibMonth,ibMode,doT,2,1); // утренний и вечерний тарифы заменяются на дневной тариф
+      ReplaceMode(ibMonth,ibMode,doT,3,1);
       break;
   }
 }
@@ -159,8 +155,8 @@ uchar  ibMonth;
 
   for (ibMonth=0; ibMonth<12; ibMonth++)
   {
-    fEnergy = 1; MakeOldMode(ibMonth);
-    fEnergy = 0; MakeOldMode(ibMonth);
+    MakeOldMode(ibMonth, DOM_ENERGY);
+    MakeOldMode(ibMonth, DOM_POWER);
   }
 }
 
@@ -173,10 +169,9 @@ uchar  ibMonth;
 
   SetZonesEngMonthsMode(ibMonthBeg, ibMonthEnd, 0, pzoT);
 
-  fEnergy = 1;
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
-    MakeOldMode(ibMonth);
+    MakeOldMode(ibMonth, DOM_ENERGY);
     mpchEngMonth[ibMonth] = chOldMode;
   }
 }
@@ -190,10 +185,9 @@ uchar  ibMonth;
 
   SetZonesPowMonthsMode(ibMonthBeg, ibMonthEnd, 0, pzoT);
 
-  fEnergy = 0;
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
-    MakeOldMode(ibMonth);
+    MakeOldMode(ibMonth, DOM_POWER);
     mpchPowMonth[ibMonth] = chOldMode;
   }
 }
