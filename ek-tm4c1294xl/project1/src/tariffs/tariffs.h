@@ -1,31 +1,23 @@
 /*------------------------------------------------------------------------------
 TARIFFS.H
 
- Подпрограммы управления тарифами
+ Новый вариант задания тарифов
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
+void    SetBoolEngMonthMode(uchar ibMonth, uchar ibMode, boolean boT);
+boolean GetBoolEngMonthMode(uchar ibMonth, uchar ibMode);
 
+void    SetBoolPowMonthMode(uchar ibMonth, uchar ibMode, boolean boT);
+boolean GetBoolPowMonthMode(uchar ibMonth, uchar ibMode);
 
+void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT);
+zones   *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode);
 
-extern  uchar                   ibMonth,ibMode;
+void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT);
+zones   *PGetZonePowMonthMode(uchar ibMonth, uchar ibMode);
 
-
-
-void    SetBoolEngMonthMode(void);
-boolean GetBoolEngMonthMode(void);
-
-void    SetBoolPowMonthMode(void);
-boolean GetBoolPowMonthMode(void);
-
-void    SetZoneEngMonthMode(void);
-zones   *PGetZoneEngMonthMode(void);
-
-void    SetZonePowMonthMode(void);
-zones   *PGetZonePowMonthMode(void);
-
-void    SetZonesEngMonthsMode(uchar  ibBeg, uchar  ibEnd);
-void    SetZonesPowMonthsMode(uchar  ibBeg, uchar  ibEnd);
+void    SetZonesEngMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzoT);
+void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzoT);
 
 void    MakeTariff(uchar  mpTariff[48]);
 

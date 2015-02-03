@@ -65,12 +65,9 @@ void    OutGetOldPowTariffs(void)
 	if ((boPublicCurr == false) || (SuperUser() == 1))
 	{
 		if (bInBuff5 < 12)
-		{
-			ibMonth = bInBuff5;
-			ibMode = 0;
-			Common(PGetZonePowMonthMode(), sizeof(zones));
-		}
-		else Result(bRES_BADDATA);
+			Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zones));
+		else
+			Result(bRES_BADDATA);
 	}
 	else Result(bRES_BADMODE);
 }
@@ -88,7 +85,7 @@ void    OutSetOldPowTariffs(void)
 			if (TrueZone() == 1)
 			{
 				chOldMode = '_';
-				SetCharPowMonths(bInBuff5, bInBuff5);
+				SetCharPowMonths(bInBuff5, bInBuff5, &zoKey);
 				LongResult(bRES_OK);
 			}
 			else Result(bRES_BADDATA);
@@ -105,12 +102,9 @@ void    OutGetOldEngTariffs(void)
 	if ((boPublicCurr == false) || (SuperUser() == 1))
 	{
 		if (bInBuff5 < 12)
-		{
-			ibMonth = bInBuff5;
-			ibMode = 0;
-			Common(PGetZoneEngMonthMode(), sizeof(zones));
-		}
-		else Result(bRES_BADDATA);
+			Common(PGetZoneEngMonthMode(bInBuff5, 0), sizeof(zones));
+		else
+			Result(bRES_BADDATA);
 	}
 	else Result(bRES_BADMODE);
 }
@@ -128,7 +122,7 @@ void    OutSetOldEngTariffs(void)
 			if (TrueZone() == 1)
 			{
 				chOldMode = '_';
-				SetCharEngMonths(bInBuff5, bInBuff5);
+				SetCharEngMonths(bInBuff5, bInBuff5, &zoKey);
 				LongResult(bRES_OK);
 			}
 			else Result(bRES_BADDATA);
@@ -145,12 +139,9 @@ void    OutGetOldPubTariffs(void)
 	if ((boPublicCurr == true) || (SuperUser() == 1))
 	{
 		if (bInBuff5 < 12)
-		{
-			ibMonth = bInBuff5;
-			ibMode = 0;
-			Common(PGetZonePowMonthMode(), sizeof(zones));
-		}
-		else Result(bRES_BADDATA);
+			Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zones));
+		else
+			Result(bRES_BADDATA);
 	}
 	else Result(bRES_BADMODE);
 }
@@ -168,8 +159,8 @@ void    OutSetOldPubTariffs(void)
 			if (TrueZone() == 1)
 			{
 				chOldMode = '_';
-				SetCharPowMonths(bInBuff5, bInBuff5);
-				SetCharEngMonths(bInBuff5, bInBuff5);
+				SetCharPowMonths(bInBuff5, bInBuff5, &zoKey);
+				SetCharEngMonths(bInBuff5, bInBuff5, &zoKey);
 				LongResult(bRES_OK);
 			}
 			else Result(bRES_BADDATA);
@@ -186,12 +177,9 @@ void    OutGetNewPowTariffs(void)
 	if (boPublicCurr == false)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
-		{
-			ibMonth = bInBuff5;
-			ibMode = bInBuff6;
-			Common(PGetZonePowMonthMode(), sizeof(zones));
-		}
-		else Result(bRES_BADDATA);
+			Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zones));
+		else
+			Result(bRES_BADDATA);
 	}
 	else Result(bRES_BADMODE);
 }
@@ -208,8 +196,7 @@ void    OutSetNewPowTariffs(void)
 
 			if (TrueZone() == 1)
 			{
-				ibMode = bInBuff6;
-				SetZonesPowMonthsMode(bInBuff5, bInBuff5);
+				SetZonesPowMonthsMode(bInBuff5, bInBuff5, bInBuff6, &zoKey);
 				LongResult(bRES_OK);
 			}
 			else Result(bRES_BADDATA);
@@ -226,12 +213,9 @@ void    OutGetNewEngTariffs(void)
 	if (boPublicCurr == false)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
-		{
-			ibMonth = bInBuff5;
-			ibMode = bInBuff6;
-			Common(PGetZoneEngMonthMode(), sizeof(zones));
-		}
-		else Result(bRES_BADDATA);
+			Common(PGetZoneEngMonthMode(bInBuff5, bInBuff6), sizeof(zones));
+		else
+			Result(bRES_BADDATA);
 	}
 	else Result(bRES_BADMODE);
 }
@@ -248,8 +232,7 @@ void    OutSetNewEngTariffs(void)
 
 			if (TrueZone() == 1)
 			{
-				ibMode = bInBuff6;
-				SetZonesEngMonthsMode(bInBuff5, bInBuff5);
+				SetZonesEngMonthsMode(bInBuff5, bInBuff5, bInBuff6, &zoKey);
 				LongResult(bRES_OK);
 			}
 			else Result(bRES_BADDATA);
@@ -266,12 +249,9 @@ void    OutGetNewPubTariffs(void)
 	if (boPublicCurr == true)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
-		{
-			ibMonth = bInBuff5;
-			ibMode = bInBuff6;
-			Common(PGetZonePowMonthMode(), sizeof(zones));
-		}
-		else Result(bRES_BADDATA);
+			Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zones));
+		else
+			Result(bRES_BADDATA);
 	}
 	else Result(bRES_BADMODE);
 }
@@ -288,9 +268,8 @@ void    OutSetNewPubTariffs(void)
 
 			if (TrueZone() == 1)
 			{
-				ibMode = bInBuff6;
-				SetZonesPowMonthsMode(bInBuff5, bInBuff5);
-				SetZonesEngMonthsMode(bInBuff5, bInBuff5);
+				SetZonesPowMonthsMode(bInBuff5, bInBuff5, bInBuff6, &zoKey);
+				SetZonesEngMonthsMode(bInBuff5, bInBuff5, bInBuff6, &zoKey);
 				LongResult(bRES_OK);
 			}
 			else Result(bRES_BADDATA);

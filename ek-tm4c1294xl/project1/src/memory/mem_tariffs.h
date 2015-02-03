@@ -41,8 +41,6 @@ extern  uchar                   bOldMode;
 
 extern  uchar                   chOldMode;
 
-extern  uchar                   ibAltMode;
-
 
 
 extern  zones                   zoAlt,zoKey;

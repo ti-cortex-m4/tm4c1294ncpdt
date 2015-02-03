@@ -153,8 +153,8 @@ void    key_SetOldYearZone(void)
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17:  
-            SetCharPowMonths(ibYmin,ibYmax);
-            SetCharEngMonths(ibYmin,ibYmax); 
+            SetCharPowMonths(ibYmin,ibYmax,&zoKey);
+            SetCharEngMonths(ibYmin,ibYmax,&zoKey);
             ShowOldZones();  break;
         }
       }
@@ -164,12 +164,12 @@ void    key_SetOldYearZone(void)
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17: 
-            SetCharPowMonths(ibYmin,ibYmax);  
+            SetCharPowMonths(ibYmin,ibYmax,&zoKey);
             ShowOldZones();  break;
 
           case bSET_PROGRAM20: 
           case bSET_PROGRAM27: 
-            SetCharEngMonths(ibYmin,ibYmax);  
+            SetCharEngMonths(ibYmin,ibYmax,&zoKey);
             ShowOldZones();  break;
         }        
       }

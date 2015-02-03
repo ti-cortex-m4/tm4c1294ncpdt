@@ -59,9 +59,6 @@ uchar                   bOldMode;
 // внутренн€€ переменна€
 uchar                   chOldMode;
 
-// внутренн€€ переменна€
-uchar                   ibAltMode;
-
 
 
 // суточные тарифные графики
