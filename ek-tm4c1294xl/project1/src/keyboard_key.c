@@ -25,7 +25,7 @@ KEYBOARD_KEY.C
 #include        "keyboard/tariffs/key_relaxs_flag.h"
 #include        "keyboard/tariffs/key_relaxs_tariff.h"
 #include        "keyboard/tariffs/key_relaxs.h"
-#include        "keyboard/key_canals.h"
+#include        "keyboard/key_factors.h"
 #include        "keyboard/key_delays.h"
 #include        "keyboard/key_reset.h"
 #include        "keyboard/key_analysis.h"
@@ -51,7 +51,7 @@ void    Keyboard_Key(void)
       case bSET_PULSE_MNT:
       case bSET_LOSSE:
       case bSET_LEVEL:
-      case bSET_COUNT:          key_SetCanals();        break;
+      case bSET_COUNT:          key_SetFactors();       break;
 
       case bSET_DAYZONE:        key_SetDayZone();       break;
       case bSET_PUBLIC:         key_SetPublic();        break;
@@ -119,7 +119,7 @@ void    Keyboard_Key(void)
       case bGET_PULSE_HOU:
       case bGET_PULSE_MNT:
       case bGET_LOSSE:
-      case bSET_LEVEL:          key_GetCanals();        break;
+      case bSET_LEVEL:          key_GetFactors();       break;
 
 //      case bGET_PROGRAM18:      key_GetProgram18();     break;
 //      case bGET_PROGRAM19:      key_GetProgram19();     break;

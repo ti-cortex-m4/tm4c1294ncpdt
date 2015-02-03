@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-KEY_CANALS.H
+KEY_FACTORS.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetCanals(void);
-void    key_GetCanals(void);
+void    key_SetFactors(void);
+void    key_GetFactors(void);

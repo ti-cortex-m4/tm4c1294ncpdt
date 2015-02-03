@@ -6,7 +6,7 @@ ENERGY.C
 
 #include        "main.h"
 #include        "engine.h"
-#include        "memory/mem_canals.h"
+#include        "memory/mem_factors.h"
 #include        "memory/mem_energy.h"
 #include        "memory/mem_realtime.h"
 #include        "memory/mem_graph3.h"
