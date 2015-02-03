@@ -45,9 +45,7 @@ void    key_GetOldProgram5(void)
       ibY = tiCurr.bMonth - 1;
       LoadBetaMonth(ibY);
 
-      ibMonth = ibY; 
-      ibMode  = 0;
-      zoAlt = *PGetZonePowMonthMode();
+      zoAlt = *PGetZonePowMonthMode(ibY, 0);
 
       ibX = 0;                         
       ShowZoneAltBreak(ibX);
@@ -131,17 +129,14 @@ void    key_GetOldProgram84(void)
   {
     enKeyboard = KBD_POSTENTER;
 
-    ibMonth = ibY; 
-    ibMode  = 0;
-
     switch (bProgram)
     {
       case bGET_PROGRAM84: 
-        zoAlt = *PGetZoneEngMonthMode();
+        zoAlt = *PGetZoneEngMonthMode(ibY, 0);
         break;
 
       case bGET_PROGRAM85:  
-        zoAlt = *PGetZonePowMonthMode();
+        zoAlt = *PGetZonePowMonthMode(ibY, 0);
         break;
     }
 

@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 TARIFFS.C
 
- Подпрограммы управления тарифами
+ Новый вариант задания тарифов
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -18,97 +18,72 @@ TARIFFS.C
 
 
 
-// текущие индексы по массивам
-uchar                   ibMonth,ibMode;
-
-
-
-// записывает факт задания суточного тарифного графика (для энергии)
-void    SetBoolEngMonthMode(void)
-{
-  mpboEngMonthMode[ibMonth][ibMode] = boAlt;
+void    SetBoolEngMonthMode(uchar ibMonth, uchar ibMode, boolean boT) {
+  mpboEngMonthMode[ibMonth][ibMode] = boT;
 }
 
 /*
-// читает факт задания суточного тарифного графика (для энергии)
-boolean GetBoolEngMonthMode(void)
-{
+boolean GetBoolEngMonthMode(uchar ibMonth, uchar ibMode) {
   return( mpboEngMonthMode[ibMonth][ibMode] );
 }
 */
 
-// записывает факт задания суточного тарифного графика (для мощности)
-void    SetBoolPowMonthMode(void)
-{
-  mpboPowMonthMode[ibMonth][ibMode] = boAlt;
+void    SetBoolPowMonthMode(uchar ibMonth, uchar ibMode, boolean boT) {
+  mpboPowMonthMode[ibMonth][ibMode] = boT;
 }
 
 /*
-// читает факт задания суточного тарифного графика (для мощности)
-boolean GetBoolPowMonthMode(void)
-{
+boolean GetBoolPowMonthMode(uchar ibMonth, uchar ibMode) {
   return( mpboPowMonthMode[ibMonth][ibMode] );
 }
 */
 
 
-// записывает суточный тарифный график (для энергии)
-void    SetZoneEngMonthMode(void)
-{
-  mpzoEngMonthMode[ibMonth][ibMode] = zoAlt;
+void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
+  mpzoEngMonthMode[ibMonth][ibMode] = *pzoT;
 }
 
 
-// читает суточный тарифный график (для энергии)
-zones  *PGetZoneEngMonthMode(void)
-{
+zones  *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode) {
   return( &mpzoEngMonthMode[ibMonth][ibMode] );
 }
 
 
-// записывает суточный тарифный график (для мощности)
-void    SetZonePowMonthMode(void)
-{
-  mpzoPowMonthMode[ibMonth][ibMode] = zoAlt;
+void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
+  mpzoPowMonthMode[ibMonth][ibMode] = *pzoT;
 }
 
 
-// читает суточный тарифный график (для мощности)
-zones  *PGetZonePowMonthMode(void)
-{
+zones  *PGetZonePowMonthMode(uchar ibMonth, uchar ibMode) {
   return( &mpzoPowMonthMode[ibMonth][ibMode] );
 }
 
 
 
 // записывает суточный тарифный график на несколько месяцев (для энергии)
-void    SetZonesEngMonthsMode(uchar  ibBeg, uchar  ibEnd)
+void    SetZonesEngMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzoT)
 {
-  boAlt = true;
-  memcpy(&zoAlt, &zoKey, sizeof(zones));
+uchar  ibMonth;
 
-  for (ibMonth=ibBeg; ibMonth<=ibEnd; ibMonth++)
+  for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
-    SetZoneEngMonthMode();
-    SetBoolEngMonthMode();
+    SetZoneEngMonthMode(ibMonth, ibMode, pzoT);
+    SetBoolEngMonthMode(ibMonth, ibMode, true);
   }
 }
-// требует предварительной установки переменных ibMode,zoKey
 
 
 // записывает суточный тарифный график на несколько месяцев (для мощности)
-void    SetZonesPowMonthsMode(uchar  ibBeg, uchar  ibEnd)
+void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzoT)
 {
-  boAlt = true;
-  memcpy(&zoAlt, &zoKey, sizeof(zones));
+uchar  ibMonth;
 
-  for (ibMonth=ibBeg; ibMonth<=ibEnd; ibMonth++)
+  for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
-    SetZonePowMonthMode();
-    SetBoolPowMonthMode();
+    SetZonePowMonthMode(ibMonth, ibMode, pzoT);
+    SetBoolPowMonthMode(ibMonth, ibMode, true);
   }
 }
-// требует предварительной установки переменных ibMode,zoKey
 
 
 
@@ -119,20 +94,20 @@ void    SetTariffsDefault(void)
     chOldMode = '_';
 
     SetKeyZonePow();
-    SetCharEngMonths(0,11);
+    SetCharEngMonths(0,11,&zoKey);
 
     SetKeyZonePow();
-    SetCharPowMonths(0,11);
+    SetCharPowMonths(0,11,&zoKey);
   }
   else
   {
     chOldMode = '_';
 
     SetKeyZoneEng();
-    SetCharEngMonths(0,11);
+    SetCharEngMonths(0,11,&zoKey);
 
     SetKeyZonePow();
-    SetCharPowMonths(0,11);
+    SetCharPowMonths(0,11,&zoKey);
   }
 }
 
@@ -141,6 +116,8 @@ void    SetTariffsDefault(void)
 // сброс настроек по умолчанию
 void    ResetTariffs(void)
 {
+uchar  ibMonth, ibMode;
+
   // совмещённые тарифные графики для мщности и энергии
   boPublicCurr = false;
 
@@ -150,13 +127,12 @@ void    ResetTariffs(void)
   // правило обработки тарифов в выходные дни (старый вариант)
   bOldMode = 0;
 
-  boAlt = false;
   for (ibMonth=0; ibMonth<12+4+1; ibMonth++)
   {
     for (ibMode=0; ibMode<bMODES; ibMode++)
     {
-      SetBoolEngMonthMode(); 
-      SetBoolPowMonthMode(); 
+      SetBoolEngMonthMode(ibMonth, ibMode, false);
+      SetBoolPowMonthMode(ibMonth, ibMode, false);
     }
   }
 
@@ -213,7 +189,8 @@ uchar i;
 // рассчитывает массив индексов тарифов для каждого получаса текущих суток (для мощности и энергии)
 void    MakeAllCurrTariffs(void)
 {
-uchar  i,j;
+uchar  i, j;
+uchar  ibMonth, ibMode;
 
   tiAlt = *PGetCurrTimeDate();
 
@@ -229,10 +206,10 @@ uchar  i,j;
 
   ibMode  = GetModeAlt();               
 
-  zoAlt = *PGetZoneEngMonthMode();
+  zoAlt = *PGetZoneEngMonthMode(ibMonth,ibMode);
   MakeTariff(mpibEngCurrTariff);
 
-  zoAlt = *PGetZonePowMonthMode();
+  zoAlt = *PGetZonePowMonthMode(ibMonth,ibMode);
   MakeTariff(mpibPowCurrTariff);
 
   if (boRelaxsFlag == true)
@@ -252,7 +229,8 @@ uchar  i,j;
 
 void    MakeAllPrevTariffs(void)
 {
-uchar  i,j;
+uchar  i, j;
+uchar  ibMonth, ibMode;
 
   ibMonth = tiAlt.bMonth - 1;                   
 
@@ -268,10 +246,10 @@ uchar  i,j;
 
   ibMode  = GetModeAlt();               
 
-  zoAlt = *PGetZoneEngMonthMode();
+  zoAlt = *PGetZoneEngMonthMode(ibMonth,ibMode);
   MakeTariff(mpibEngPrevTariff);
 
-  zoAlt = *PGetZonePowMonthMode();
+  zoAlt = *PGetZonePowMonthMode(ibMonth,ibMode);
   MakeTariff(mpibPowPrevTariff);
 
   if (boRelaxsFlag == true)
