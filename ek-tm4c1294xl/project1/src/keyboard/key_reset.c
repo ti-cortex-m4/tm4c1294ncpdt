@@ -10,6 +10,7 @@ KEY_RESET.C
 #include        "../beep.h"
 #include        "../groups.h"
 #include        "../engine.h"
+#include        "../factors.h"
 #include        "../settings.h"
 #include        "../hardware/memory.h"
 
@@ -88,11 +89,11 @@ void    key_SetReset(void)
 //          ResetKeyboard();
 //          ResetDecret();
           ResetGroups();
+          ResetFactors();
 //          ResetTariffs();
 //          ResetZones();
 //          ResetRelaxs();
 //          ResetGaps();
-          ResetEngine();
 //          ResetSpeeds();
 //          ResetSendAT();
 //          ResetPhones();
