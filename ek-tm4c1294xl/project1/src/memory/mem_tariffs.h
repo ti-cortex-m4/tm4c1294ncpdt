@@ -47,8 +47,6 @@ extern  zones                   zoAlt,zoKey;
 
 extern  breaks                  brAlt,brKey;
 
-extern  boolean                 boAlt;
-
 
 
 extern  boolean                 boGapsFlag;
