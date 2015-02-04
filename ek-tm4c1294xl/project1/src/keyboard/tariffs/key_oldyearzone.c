@@ -6,6 +6,7 @@ KEY_OLDYEARZONE.Ñ
 
 #include        "../../main.h"
 #include        "../../memory/mem_tariffs.h"
+#include        "../../memory/mem_program.h"
 #include        "../../keyboard.h"
 #include        "../../display.h"
 #include        "../../slide.h"
@@ -29,6 +30,8 @@ static char const      *pszPubPrg10[]   = { szZones, szOnMonths,   "" },
                        *pszEngPrg27[]   = { szZones, szOnQuarters, szForEnergy, "" };
 
 static uchar            ibX, ibXmax, ibYmin, ibYmax;
+
+static uchar            chOldMode;
 
 
 
@@ -67,8 +70,6 @@ void    key_SetOldYearZone(void)
         NeedProgram(bSET_DAYZONE); 
         return;
       }      
-
-      boOldTariffs = true;
 
       if (boPublicCurr == true)
       {
@@ -153,8 +154,8 @@ void    key_SetOldYearZone(void)
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17:  
-            SetCharPowMonths(ibYmin,ibYmax,&zoKey);
-            SetCharEngMonths(ibYmin,ibYmax,&zoKey);
+            SetCharPowMonths(ibYmin,ibYmax,&zoKey,chOldMode);
+            SetCharEngMonths(ibYmin,ibYmax,&zoKey,chOldMode);
             ShowOldZones();  break;
         }
       }
@@ -164,12 +165,12 @@ void    key_SetOldYearZone(void)
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17: 
-            SetCharPowMonths(ibYmin,ibYmax,&zoKey);
+            SetCharPowMonths(ibYmin,ibYmax,&zoKey,chOldMode);
             ShowOldZones();  break;
 
           case bSET_PROGRAM20: 
           case bSET_PROGRAM27: 
-            SetCharEngMonths(ibYmin,ibYmax,&zoKey);
+            SetCharEngMonths(ibYmin,ibYmax,&zoKey,chOldMode);
             ShowOldZones();  break;
         }        
       }

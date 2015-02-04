@@ -8,11 +8,6 @@ MEM_TARIFFS.S
 
 
 
-// флаг типа задани€ тарифов
-boolean                 boOldTariffs;
-
-
-
 // массив праздников
 relaxs                  mpreRelaxs;
 
@@ -55,9 +50,6 @@ uchar                   mpchPowMonth[12],
 
 // правило обработки тарифов в выходные дни (старый вариант)
 uchar                   bOldMode;
-
-// внутренн€€ переменна€
-uchar                   chOldMode;
 
 
 
