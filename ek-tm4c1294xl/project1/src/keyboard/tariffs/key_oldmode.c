@@ -6,6 +6,7 @@ _OLDMODE.Ñ
 
 #include        "../../main.h"
 #include        "../../memory/mem_tariffs.h"
+#include        "../../memory/mem_program.h"
 #include        "../../keyboard.h"
 #include        "../../display.h"
 #include        "../../slide.h"
@@ -37,8 +38,6 @@ void    key_SetOldMode(void)
       LoadSlide(pszOldMode);
       Clear();
       ShowChar(bOldMode);
-
-      boOldTariffs = true;
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {

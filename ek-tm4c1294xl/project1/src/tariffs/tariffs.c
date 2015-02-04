@@ -6,6 +6,7 @@ TARIFFS.C
 
 #include        "../main.h"
 #include        "../memory/mem_tariffs.h"
+#include        "../memory/mem_program.h"
 #include        "../display.h"
 #include        "../delay.h"
 #include        "../access.h"
@@ -89,25 +90,27 @@ uchar  ibMonth;
 
 void    SetTariffsDefault(void)
 {
+uchar  chOldMode;
+
   if (boPublicCurr == true)
   {
     chOldMode = '_';
 
     SetKeyZonePow();
-    SetCharEngMonths(0,11,&zoKey);
+    SetCharEngMonths(0,11,&zoKey,chOldMode);
 
     SetKeyZonePow();
-    SetCharPowMonths(0,11,&zoKey);
+    SetCharPowMonths(0,11,&zoKey,chOldMode);
   }
   else
   {
     chOldMode = '_';
 
     SetKeyZoneEng();
-    SetCharEngMonths(0,11,&zoKey);
+    SetCharEngMonths(0,11,&zoKey,chOldMode);
 
     SetKeyZonePow();
-    SetCharPowMonths(0,11,&zoKey);
+    SetCharPowMonths(0,11,&zoKey,chOldMode);
   }
 }
 
@@ -120,9 +123,6 @@ uchar  ibMonth, ibMode;
 
   // совмещённые тарифные графики для мщности и энергии
   boPublicCurr = false;
-
-  // старый вариант обработки тарифов
-  boOldTariffs = true;
 
   // правило обработки тарифов в выходные дни (старый вариант)
   bOldMode = 0;

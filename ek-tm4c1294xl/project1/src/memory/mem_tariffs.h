@@ -4,10 +4,6 @@ MEM_TARIFFS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 boOldTariffs;
-
-
-
 extern  relaxs                  mpreRelaxs;
 
 extern  time                    tiRelax;
@@ -38,8 +34,6 @@ extern  uchar                   mpchPowMonth[12],
                                 mpchEngMonth[12];
 
 extern  uchar                   bOldMode;
-
-extern  uchar                   chOldMode;
 
 
 
