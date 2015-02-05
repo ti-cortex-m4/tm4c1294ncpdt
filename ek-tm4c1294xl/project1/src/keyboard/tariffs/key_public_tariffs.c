@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_PUBLIC.C
+KEY_PUBLIC_TARIFFS.C
 
 
 ------------------------------------------------------------------------------*/
@@ -13,24 +13,24 @@ KEY_PUBLIC.C
 
 
 //                                         0123456789ABCDEF
-static char const       szPublic[]      = "Тарифы ?        ",
-                        szTarCommon[]   = " совмещенные    ",
-                        szTarCustom[]   = " раздельные     ";
+static char const       szTariffs[]     = "Тарифы ?        ",
+                        szCommon[]      = " совмещенные    ",
+                        szCustom[]      = " раздельные     ";
 
 
-void    ShowPublic(void)
+void    ShowPublicTariffs(void)
 {
   if (fPublicTariffsCurr == false) 
-    ShowLo(szTarCustom);
+    ShowLo(szCustom);
   else 
-    ShowLo(szTarCommon);
+    ShowLo(szCommon);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';
 }
 
 
-void    key_SetPublic(void)
+void    key_SetPublicTariffs(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -39,8 +39,8 @@ void    key_SetPublic(void)
       enKeyboard = KBD_INPUT1;
       Clear();
       
-      ShowHi(szPublic);
-      ShowPublic();
+      ShowHi(szTariffs);
+      ShowPublicTariffs();
     } 
     else Beep();
   }
@@ -54,7 +54,7 @@ void    key_SetPublic(void)
       {           
         fPublicTariffsCurr = ~fPublicTariffsCurr;
         SetTariffsDefault();
-        ShowPublic();
+        ShowPublicTariffs();
       }
       else Beep(); 
     }

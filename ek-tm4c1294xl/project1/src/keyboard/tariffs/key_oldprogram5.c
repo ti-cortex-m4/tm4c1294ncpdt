@@ -73,7 +73,7 @@ void    key_GetOldProgram84(void)
         switch (bProgram)
         {
           case bGET_PROGRAM84: 
-            BlockProgram(bGET_PUBLIC); 
+            BlockProgram(bGET_PUBLIC_TARIFFS);
             return;
 
           case bGET_PROGRAM85:  

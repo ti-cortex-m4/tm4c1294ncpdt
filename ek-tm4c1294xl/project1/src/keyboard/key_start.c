@@ -7,8 +7,10 @@ KEY_START.C
 #include        "../main.h"
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_program.h"
+#include        "../memory/mem_tariffs.h"
 #include        "../keyboard.h"
 #include        "../display/display.h"
+#include        "../tariffs/tariffs.h"
 #include        "../access.h"
 #include        "../settings.h"
 #include        "../groups.h"
@@ -20,7 +22,46 @@ KEY_START.C
 //                                         0123456789ABCDEF
 static message          szStart         = "Старт           ",
                         szRestart       = "Рестарт         ",
-                        szDebug         = "Отладка         ";
+                        szDebug         = "Отладка         ",
+                        szNoOldTariff   = "Нет тарифов     ",
+                        szBadRTC        = "показаний RTC ! ";
+
+
+void    ShowNoOldTariff(uchar  ibMonth)
+{
+  ShowHi(szNoOldTariff);
+  Clear();
+
+  sprintf(szLo,"для месяца: %-2u ",ibMonth+1);
+  DelayMsg();
+}
+
+
+bool    TestOldTariffs(void)
+{
+uchar  ibMonth;
+
+  for (ibMonth=0; ibMonth<12; ibMonth++)
+  {
+    // тарифные графики совмещённые или раздельные для мощности
+    if (mpchPowMonth[ibMonth] == 0)
+    {
+    	ShowNoOldTariff(ibMonth);
+      NeedPrograms(bSET_PROGRAM10, bSET_PROGRAM17);
+      return(0);
+    }
+
+    // тарифные графики раздельные для энергии
+    if (mpchEngMonth[ibMonth] == 0)
+    {
+    	ShowNoOldTariff(ibMonth);
+      NeedPrograms(bSET_PROGRAM20, bSET_PROGRAM27);
+      return(0);
+    }
+  }
+
+  return(1);
+}
 
 
 
@@ -55,7 +96,21 @@ void    key_Start(void)
       return;
     }
 
-// TODO
+    if (TestOldTariffs() == 0)
+      return;
+
+    PGetCurrTimeDate();
+    if (TrueCurrTimeDate() == 0)
+    {
+      ShowHi(szAlarm);
+      ShowLo(szBadRTC); LongBeep(); DelayMsg();
+      return;
+    }
+
+// TODO key_Start
+
+    // рассчитываем массивы индексов тарифов для каждого получаса текущих суток (для мощности и энергии)
+    MakeAllCurrTariffs();
 
     // рассчитываем массив К эквивалентов
     MakeFactors();
@@ -97,7 +152,10 @@ void    key_Restart(void)
       return;
     }
 
-// TODO
+// TODO key_Restart
+
+    // рассчитываем массивы индексов тарифов для каждого получаса текущих суток (для мощности и энергии)
+    MakeAllCurrTariffs();
 
     // рассчитываем массив К эквивалентов
     MakeFactors();
@@ -138,8 +196,28 @@ void    key_Debug(void)
 
     boSetGroups = true;
 
-// TODO
+// TODO key_Debug
+/*
+    // сбрасываем настройки по умолчанию для переменных zoAlt,zoKey
+    ResetZones();
 
+    // сбрасываем настройки по умолчанию для переменной bOldMode
+    ResetTariffs();
+
+    // новый вариант задания тарифов
+    for (ibMode=0; ibMode<bMODES; ibMode++)
+    {
+      // для задания тарифных графиков используется переменная zoKey
+      SetZonesEngMonthsMode(0,11);
+      SetZonesPowMonthsMode(0,11);
+    }
+
+    // старый вариант задания тарифов
+    chOldMode = '_';
+
+    SetCharEngMonths(0,11);
+    SetCharPowMonths(0,11);
+*/
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
 
