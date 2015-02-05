@@ -5,6 +5,7 @@ TARIFFS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "driverlib/debug.h"
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_program.h"
 #include        "../display.h"
@@ -19,28 +20,9 @@ TARIFFS.C
 
 
 
-void    SetBoolEngMonthMode(uchar ibMonth, uchar ibMode, boolean boT) {
-  mpboEngMonthMode[ibMonth][ibMode] = boT;
-}
-
-/*
-boolean GetBoolEngMonthMode(uchar ibMonth, uchar ibMode) {
-  return( mpboEngMonthMode[ibMonth][ibMode] );
-}
-*/
-
-void    SetBoolPowMonthMode(uchar ibMonth, uchar ibMode, boolean boT) {
-  mpboPowMonthMode[ibMonth][ibMode] = boT;
-}
-
-/*
-boolean GetBoolPowMonthMode(uchar ibMonth, uchar ibMode) {
-  return( mpboPowMonthMode[ibMonth][ibMode] );
-}
-*/
-
-
 void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
+	ASSERT(ibMonth < 12);
+	ASSERT(ibMode < bMODES);
   mpzoEngMonthMode[ibMonth][ibMode] = *pzoT;
 }
 

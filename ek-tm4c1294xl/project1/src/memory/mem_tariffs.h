@@ -14,11 +14,8 @@ extern  uchar                   ibRelaxsTariff;
 
 
 
-extern  zones                   mpzoPowMonthMode[12+4+1][bMODES],
-                                mpzoEngMonthMode[12+4+1][bMODES];
-
-extern  boolean                 mpboPowMonthMode[12+4+1][bMODES],
-                                mpboEngMonthMode[12+4+1][bMODES];
+extern  zones                   mpzoPowMonthMode[12][bMODES],
+                                mpzoEngMonthMode[12][bMODES];
 
 extern  uchar                   mpibPowCurrTariff[48],
                                 mpibEngCurrTariff[48];
