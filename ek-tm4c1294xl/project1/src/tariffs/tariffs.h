@@ -18,7 +18,7 @@ void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMod
 
 void    MakeTariff(uchar  mpTariff[48]);
 
-void    SetTariffsDefault(void);
+void    SetDefaultTariffs(void);
 
 void    MakeAllCurrTariffs(void);
 void    MakeAllPrevTariffs(void);

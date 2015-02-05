@@ -53,8 +53,9 @@ void    key_SetPublicTariffs(void)
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
         fPublicTariffsCurr = ~fPublicTariffsCurr;
-        SetTariffsDefault();
         ShowPublicTariffs();
+
+        SetDefaultTariffs();
       }
       else Beep(); 
     }

@@ -7,6 +7,7 @@ TARIFFS.C
 #include        "../main.h"
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_program.h"
+#include        "../memory/mem_settings.h"
 #include        "../display/display.h"
 #include        "../delay.h"
 #include        "../flash/files.h"
@@ -79,23 +80,28 @@ uchar  ibMonth, ibMode;
     	LoadZonesEng(ibMonth, ibMode);
     }
   }
+
+  if (enGlobal == GLB_WORK)
+  {
+  	MakeAllCurrTariffs();
+  }
+  else
+  {
+  	memset(&mpchPowMonth, 0, sizeof(mpchPowMonth));
+    memset(&mpchEngMonth, 0, sizeof(mpchEngMonth));
+  }
 }
 
 
 void    ResetTariffs(void)
 {
-  // совмещённые тарифные графики для мщности и энергии
   fPublicTariffsCurr = false;
   SaveFile(&flPublicTariffs);
 
-  // правило обработки тарифов в выходные дни (старый вариант)
   bOldTariffsMode = 0;
   SaveFile(&flOldTariffsMode);
 
-//  memset(&mpchEngMonth, '\0', sizeof(mpchEngMonth));
-//  memset(&mpchPowMonth, '\0', sizeof(mpchPowMonth));
-//
-//  SetTariffsDefault();
+  SetDefaultTariffs();
 }
 
 
@@ -157,7 +163,7 @@ uchar  ibMonth;
 
 
 
-void    SetTariffsDefault(void)
+void    SetDefaultTariffs(void)
 {
 uchar  chOldMode;
 
