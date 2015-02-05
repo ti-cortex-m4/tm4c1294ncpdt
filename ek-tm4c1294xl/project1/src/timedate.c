@@ -5,8 +5,7 @@ TIMEDATE.H
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
-#include        "display.h"
-#include        "lines.h"
+#include        "display/display.h"
 #include        "engine.h"
 #include        "rtc.h"
 

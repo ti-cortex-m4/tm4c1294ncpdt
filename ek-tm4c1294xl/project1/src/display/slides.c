@@ -4,9 +4,9 @@ SLIDES.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
+#include        "../main.h"
+#include        "../delay.h"
 #include        "display.h"
-#include        "delay.h"
 
 
 

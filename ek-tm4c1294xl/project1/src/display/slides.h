@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
-SLIDE.H
+SLIDES.H
 
 
 ------------------------------------------------------------------------------*/
 
 extern  bool                    fSlide;
-extern  uchar                   **ppszCurr;
-extern  uchar                   **ppszFirst;
+extern  char const              **ppszCurr;
+extern  char const              **ppszFirst;
 
 
 

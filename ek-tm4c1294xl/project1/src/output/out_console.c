@@ -8,7 +8,7 @@ OUT_CONSOLE.C
 #include        "../memory/mem_ports.h"
 #include        "../ports.h"
 #include        "../access.h"
-#include        "../display.h"
+#include        "../display/display.h"
 #include        "../keyboard.h"
 
 

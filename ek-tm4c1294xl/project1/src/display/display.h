@@ -7,8 +7,9 @@ DISPLAY.H
 #include        <string.h>
 #include        <stdio.h>
 #include        <stdlib.h>
-#include        "main.h"
+#include        "../main.h"
 #include        "lines.h"
+#include        "slides.h"
 #include        "messages.h"
 
 
