@@ -8,9 +8,7 @@ _ANALYSIS.H
 #include        "../memory/mem_serial0.h"
 #include        "../memory/mem_ports.h"
 #include        "../keyboard.h"
-#include        "../display.h"
-#include        "../delay.h"
-#include        "../beep.h"
+#include        "../display/display.h"
 #include        "../ports.h"
 
 

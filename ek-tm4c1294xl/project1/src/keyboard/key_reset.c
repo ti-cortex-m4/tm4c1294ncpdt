@@ -6,8 +6,7 @@ KEY_RESET.C
 
 #include        "../main.h"
 #include        "../keyboard.h"
-#include        "../display.h"
-#include        "../beep.h"
+#include        "../display/display.h"
 #include        "../groups.h"
 #include        "../engine.h"
 #include        "../factors.h"

@@ -7,14 +7,12 @@ DISPLAY.C
 #include        <string.h>
 #include        <stdio.h>
 #include        <stdlib.h>
-#include        "main.h"
-#include        "memory/mem_program.h"
-#include        "beep.h"
-#include        "delay.h"
-#include        "keyboard.h"
-#include        "keyboard/key_reset.h"
+#include        "../main.h"
+#include        "../memory/mem_program.h"
+#include        "../keyboard.h"
+#include        "../keyboard/key_reset.h"
 #include        "messages.h"
-#include        "slide.h"
+#include        "slides.h"
 
 
 

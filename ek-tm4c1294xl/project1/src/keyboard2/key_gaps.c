@@ -7,7 +7,7 @@ _GAPS.C
 #include        "../main.h"
 #include        "../memory/mem_tariffs.h"
 #include        "../keyboard.h"
-#include        "../display.h"
+#include        "../display/display.h"
 #include        "../tariffs/gaps.h"
 #include        "../timedate.h"
 

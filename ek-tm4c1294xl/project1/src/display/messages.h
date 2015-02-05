@@ -4,10 +4,6 @@ MESSAGES.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-
-
-
 extern  char const              szClear[],
                                 szWarning[],
                                 szError[],

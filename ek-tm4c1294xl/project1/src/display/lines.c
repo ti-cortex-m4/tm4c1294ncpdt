@@ -4,10 +4,10 @@ LINES.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "keyboard.h"
+#include        "../main.h"
+#include        "../keyboard.h"
+#include        "../engine.h"
 #include        "display.h"
-#include        "engine.h"
 
 
 

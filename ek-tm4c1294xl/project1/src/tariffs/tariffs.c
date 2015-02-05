@@ -7,7 +7,7 @@ TARIFFS.C
 #include        "../main.h"
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_program.h"
-#include        "../display.h"
+#include        "../display/display.h"
 #include        "../delay.h"
 #include        "../flash/files.h"
 #include        "../access.h"

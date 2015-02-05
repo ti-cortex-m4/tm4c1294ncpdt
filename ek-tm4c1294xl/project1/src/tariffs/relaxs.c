@@ -8,7 +8,7 @@ RELAXS.C
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_program.h"
 #include        "../keyboard.h"
-#include        "../display.h"
+#include        "../display/display.h"
 #include        "../timedate.h"
 #include        "../rtc.h"
 #include        "tariffs.h"

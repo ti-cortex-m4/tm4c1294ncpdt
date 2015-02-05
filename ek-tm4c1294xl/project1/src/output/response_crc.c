@@ -10,7 +10,7 @@ RESPONSE_CRC.C
 #include        "../states.h"
 #include        "../access.h"
 #include        "../crc-16.h"
-#include        "../display.h"
+#include        "../display/display.h"
 #include        "../keyboard.h"
 #include        "../keyboard/key_timedate.h"
 #include        "../ports.h"

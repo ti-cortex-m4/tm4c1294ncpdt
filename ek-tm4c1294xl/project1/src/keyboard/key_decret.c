@@ -7,7 +7,7 @@ KEY_DECRET.C
 #include        "../main.h"
 #include        "../memory/mem_settings.h"
 #include        "../keyboard.h"
-#include        "../display.h"
+#include        "../display/display.h"
 #include        "../beep.h"
 #include        "../decret.h"
 #include        "../rtc.h"

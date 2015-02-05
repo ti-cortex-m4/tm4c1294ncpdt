@@ -11,7 +11,7 @@
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
 #include "../main.h"
-#include "../display.h"
+#include "../display/display.h"
 #include "cp1251.h"
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
