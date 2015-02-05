@@ -23,14 +23,14 @@ extern  uchar                   mpibPowCurrTariff[48],
 extern  uchar                   mpibPowPrevTariff[48],
                                 mpibEngPrevTariff[48];
 
-extern  boolean                 boPublicCurr,
-                                boPublicPrev;
+extern  boolean                 fPublicTariffsCurr,
+                                fPublicTariffsPrev;
 
 
 extern  uchar                   mpchPowMonth[12],
                                 mpchEngMonth[12];
 
-extern  uchar                   bOldMode;
+extern  uchar                   bOldTariffsMode;
 
 
 

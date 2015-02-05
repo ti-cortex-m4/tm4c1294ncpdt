@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 MEM_TARIFFS.S
 
-
+ TODO add requests for tariffs for all modes
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -35,8 +35,8 @@ uchar                   mpibPowPrevTariff[48],
                         mpibEngPrevTariff[48];
 
 // признак совмещЄнных/раздельных суточных тарифных графиков за текущий и предыдущий мес€цы
-boolean                 boPublicCurr,
-                        boPublicPrev;
+boolean                 fPublicTariffsCurr,
+                        fPublicTariffsPrev;
 
 
 
@@ -45,7 +45,7 @@ uchar                   mpchPowMonth[12],
                         mpchEngMonth[12];
 
 // правило обработки тарифов в выходные дни (старый вариант)
-uchar                   bOldMode;
+uchar                   bOldTariffsMode;
 
 
 

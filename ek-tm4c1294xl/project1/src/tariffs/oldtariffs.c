@@ -45,7 +45,6 @@ void    ReplaceMode(uchar  ibMonth, uchar  ibMode, domain  doT, uchar  ibTariffO
 
     // записываем изменённый суточный тарифный график
     SetZonePowMonthMode(ibMonth, ibMode, &zoAlt);
-    SetBoolPowMonthMode(ibMonth, ibMode, true);
   }
   else
   {
@@ -57,7 +56,6 @@ void    ReplaceMode(uchar  ibMonth, uchar  ibMode, domain  doT, uchar  ibTariffO
 
     // записываем изменённый суточный тарифный график
     SetZoneEngMonthMode(ibMonth, ibMode, &zoAlt);
-    SetBoolEngMonthMode(ibMonth, ibMode, true);
   }
 }
 
@@ -68,7 +66,7 @@ void    MakeOldMode(uchar  ibMonth, domain  doT)
 {
 uchar  ibMode;
 
-  switch (bOldMode)
+  switch (bOldTariffsMode)
   {     
     case 0:         
     	ibMode = 1;                          // для суббот
@@ -150,7 +148,7 @@ void    MakeAllOldModes(uchar  bT)
 {
 uchar  ibMonth;
 
-  bOldMode = bT;
+  bOldTariffsMode = bT;
 
   for (ibMonth=0; ibMonth<12; ibMonth++)
   {
