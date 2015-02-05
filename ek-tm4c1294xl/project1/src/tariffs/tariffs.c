@@ -26,11 +26,59 @@ file const              flOldTariffsMode = {wFLA_OLD_TARIFFS_MODE, &bOldTariffsM
 
 
 
+boolean SaveZonesPow(uchar  ibMonth, uchar  ibMode)
+{
+  OpenOut(wFLA_ZONES_POW + ibMonth*bMODES + ibMode);
+
+  if (Save(&mpzoPowMonthMode[ibMonth][ibMode], sizeof(zones)) == 0)
+    return 0;
+
+  return CloseOut();
+}
+
+
+boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode)
+{
+  OpenIn(wFLA_ZONES_POW + ibMonth*bMODES + ibMode);
+  return Load(&mpzoPowMonthMode[ibMonth][ibMode], sizeof(zones));
+}
+
+
+
+boolean SaveZonesEng(uchar  ibMonth, uchar  ibMode)
+{
+  OpenOut(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode);
+
+  if (Save(&mpzoEngMonthMode[ibMonth][ibMode], sizeof(zones)) == 0)
+    return 0;
+
+  return CloseOut();
+}
+
+
+boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode)
+{
+  OpenIn(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode);
+  return Load(&mpzoEngMonthMode[ibMonth][ibMode], sizeof(zones));
+}
+
+
+
 void    InitTariffs(void)
 {
-  LoadFile(&flPublicTariffs);
+uchar  ibMonth, ibMode;
 
+  LoadFile(&flPublicTariffs);
   LoadFile(&flOldTariffsMode);
+
+  for (ibMonth=0; ibMonth<12-1; ibMonth++)
+  {
+    for (ibMode=0; ibMode<bMODES; ibMode++)
+    {
+    	LoadZonesPow(ibMonth, ibMode);
+    	LoadZonesEng(ibMonth, ibMode);
+    }
+  }
 }
 
 
@@ -52,24 +100,11 @@ void    ResetTariffs(void)
 
 
 
-void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
-	ASSERT(ibMonth < 12);
-	ASSERT(ibMode < bMODES);
-  mpzoEngMonthMode[ibMonth][ibMode] = *pzoT;
-}
-
-
-zones  *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode) {
-	ASSERT(ibMonth < 12);
-	ASSERT(ibMode < bMODES);
-  return( &mpzoEngMonthMode[ibMonth][ibMode] );
-}
-
-
 void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
 	ASSERT(ibMonth < 12);
 	ASSERT(ibMode < bMODES);
   mpzoPowMonthMode[ibMonth][ibMode] = *pzoT;
+  SaveZonesPow(ibMonth, ibMode);
 }
 
 
@@ -77,6 +112,22 @@ zones  *PGetZonePowMonthMode(uchar ibMonth, uchar ibMode) {
 	ASSERT(ibMonth < 12);
 	ASSERT(ibMode < bMODES);
   return( &mpzoPowMonthMode[ibMonth][ibMode] );
+}
+
+
+
+void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
+	ASSERT(ibMonth < 12);
+	ASSERT(ibMode < bMODES);
+  mpzoEngMonthMode[ibMonth][ibMode] = *pzoT;
+  SaveZonesEng(ibMonth, ibMode);
+}
+
+
+zones  *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode) {
+	ASSERT(ibMonth < 12);
+	ASSERT(ibMode < bMODES);
+  return( &mpzoEngMonthMode[ibMonth][ibMode] );
 }
 
 

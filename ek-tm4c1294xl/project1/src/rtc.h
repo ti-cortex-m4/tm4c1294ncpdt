@@ -20,4 +20,6 @@ void    SetCurrTimeDate(void);
 void    SetCurrTime(void);
 void    SetCurrDate(void);
 
+bool    TrueCurrTimeDate(void);
+
 void    RTC_Timer1(void);

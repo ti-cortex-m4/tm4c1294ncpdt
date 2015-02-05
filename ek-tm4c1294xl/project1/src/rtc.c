@@ -189,6 +189,32 @@ void    SetCurrDate(void) {
 
 
 
+bool    TrueCurrTimeDate(void)
+{
+  if (tiGetRTC.bSecond == FromBCD(0xFF)) return(0);
+  if (tiGetRTC.bMinute == FromBCD(0xFF)) return(0);
+  if (tiGetRTC.bHour   == FromBCD(0xFF)) return(0);
+  if (tiGetRTC.bDay    == FromBCD(0xFF)) return(0);
+  if (tiGetRTC.bMonth  == FromBCD(0xFF)) return(0);
+  if (tiGetRTC.bYear   == FromBCD(0xFF)) return(0);
+
+  if (tiGetRTC.bSecond > 59) return(0);
+  if (tiGetRTC.bMinute > 59) return(0);
+  if (tiGetRTC.bHour   > 23) return(0);
+
+  if ((tiGetRTC.bDay == 0) ||
+      (tiGetRTC.bDay > 31)) return(0);
+
+  if ((tiGetRTC.bMonth == 0) ||
+      (tiGetRTC.bMonth > 12 )) return(0);
+
+  if ((tiGetRTC.bYear < 2) ||
+      (tiGetRTC.bYear > 99)) return(0);
+
+  return(1);
+}
+
+
 void    RTC_Timer1(void) {
 }
 

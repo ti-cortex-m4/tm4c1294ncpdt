@@ -26,7 +26,7 @@ PROGRAMS.H
 #define bSET_LEVEL                  108
 
 #define bSET_DAYZONE                7
-#define bSET_PUBLIC                 26
+#define bSET_PUBLIC_TARIFFS         26
 #define bSET_OLDMODE                18
 
 #define bSET_PROGRAM10              10
@@ -58,7 +58,7 @@ PROGRAMS.H
 
 #define bGET_GROUPS                 4
 
-#define bGET_PUBLIC                 126
+#define bGET_PUBLIC_TARIFFS         126
 #define bGET_OLDMODE                38
 
 #define bGET_PROGRAM5               5

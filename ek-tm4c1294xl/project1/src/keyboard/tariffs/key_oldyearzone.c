@@ -82,7 +82,7 @@ void    key_SetOldYearZone(void)
                                 ShowOldZones();  break; 
 
           case bSET_PROGRAM20: 
-          case bSET_PROGRAM27:  NeedProgram(bSET_PUBLIC);  
+          case bSET_PROGRAM27:  NeedProgram(bSET_PUBLIC_TARIFFS);
                                 return;
         }
       }
