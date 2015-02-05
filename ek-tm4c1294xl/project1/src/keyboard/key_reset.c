@@ -8,6 +8,7 @@ KEY_RESET.C
 #include        "../keyboard.h"
 #include        "../display/display.h"
 #include        "../groups.h"
+#include        "../tariffs/tariffs.h"
 #include        "../engine.h"
 #include        "../factors.h"
 #include        "../settings.h"
@@ -89,7 +90,7 @@ void    key_SetReset(void)
 //          ResetDecret();
           ResetGroups();
           ResetFactors();
-//          ResetTariffs();
+          ResetTariffs();
 //          ResetZones();
 //          ResetRelaxs();
 //          ResetGaps();
