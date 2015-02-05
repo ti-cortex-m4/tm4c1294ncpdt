@@ -71,7 +71,7 @@ void    key_SetOldYearZone(void)
         return;
       }      
 
-      if (boPublicCurr == true)
+      if (fPublicTariffsCurr == true)
       {
         switch (bProgram)
         {
@@ -148,7 +148,7 @@ void    key_SetOldYearZone(void)
 
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (boPublicCurr == true)
+      if (fPublicTariffsCurr == true)
       {
         switch (bProgram)
         {

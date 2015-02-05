@@ -4,6 +4,9 @@ TARIFFS.H
  Новый вариант задания тарифов
 ------------------------------------------------------------------------------*/
 
+void    InitTariffs(void);
+void    ResetTariffs(void);
+
 void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT);
 zones   *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode);
 
@@ -16,7 +19,6 @@ void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMod
 void    MakeTariff(uchar  mpTariff[48]);
 
 void    SetTariffsDefault(void);
-void    ResetTariffs(void);
 
 void    MakeAllCurrTariffs(void);
 void    MakeAllPrevTariffs(void);

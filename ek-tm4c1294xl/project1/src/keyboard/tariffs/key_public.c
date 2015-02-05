@@ -20,7 +20,7 @@ static char const       szPublic[]      = "Тарифы ?        ",
 
 void    ShowPublic(void)
 {
-  if (boPublicCurr == false) 
+  if (fPublicTariffsCurr == false) 
     ShowLo(szTarCustom);
   else 
     ShowLo(szTarCommon);
@@ -52,7 +52,7 @@ void    key_SetPublic(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        boPublicCurr = ~boPublicCurr;
+        fPublicTariffsCurr = ~fPublicTariffsCurr;
         SetTariffsDefault();
         ShowPublic();
       }

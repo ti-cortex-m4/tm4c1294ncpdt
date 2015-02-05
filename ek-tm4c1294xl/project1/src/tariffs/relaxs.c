@@ -101,7 +101,7 @@ uchar   GetModeAlt(void)
 {
 uchar  i;
 
-  if (bOldMode == 0)                    // без учёта выходных и праздничных дней
+  if (bOldTariffsMode == 0)                    // без учёта выходных и праздничных дней
     return(0);                          // будни
 
   for (i=0; i<GetRelaxSize(); i++)

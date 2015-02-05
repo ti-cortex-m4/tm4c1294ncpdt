@@ -18,7 +18,7 @@ TODO SaveTariffs
 
 void    OutGetPublic(void)
 {
-	LongResult(boPublicCurr);
+	LongResult(fPublicTariffsCurr);
 }
 
 
@@ -28,7 +28,7 @@ void    OutSetPublic(void)
 	{
 		if ((bInBuff5 == true) || (bInBuff5 == false))
 		{
-			boPublicCurr = bInBuff5;
+			fPublicTariffsCurr = bInBuff5;
 			Result(bRES_OK);
 		}
 		else Result(bRES_BADDATA);
@@ -40,7 +40,7 @@ void    OutSetPublic(void)
 
 void    OutGetOldMode(void)
 {
-	LongResult(bOldMode);
+	LongResult(bOldTariffsMode);
 }
 
 
@@ -62,7 +62,7 @@ void    OutSetOldMode(void)
 
 void    OutGetOldPowTariffs(void)
 {
-	if ((boPublicCurr == false) || (SuperUser() == 1))
+	if ((fPublicTariffsCurr == false) || (SuperUser() == 1))
 	{
 		if (bInBuff5 < 12)
 			Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zones));
@@ -101,7 +101,7 @@ uchar  chOldMode;
 
 void    OutGetOldEngTariffs(void)
 {
-	if ((boPublicCurr == false) || (SuperUser() == 1))
+	if ((fPublicTariffsCurr == false) || (SuperUser() == 1))
 	{
 		if (bInBuff5 < 12)
 			Common(PGetZoneEngMonthMode(bInBuff5, 0), sizeof(zones));
@@ -140,7 +140,7 @@ uchar  chOldMode;
 
 void    OutGetOldPubTariffs(void)
 {
-	if ((boPublicCurr == true) || (SuperUser() == 1))
+	if ((fPublicTariffsCurr == true) || (SuperUser() == 1))
 	{
 		if (bInBuff5 < 12)
 			Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zones));
@@ -180,7 +180,7 @@ uchar  chOldMode;
 
 void    OutGetNewPowTariffs(void)
 {
-	if (boPublicCurr == false)
+	if (fPublicTariffsCurr == false)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
 			Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zones));
@@ -216,7 +216,7 @@ void    OutSetNewPowTariffs(void)
 
 void    OutGetNewEngTariffs(void)
 {
-	if (boPublicCurr == false)
+	if (fPublicTariffsCurr == false)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
 			Common(PGetZoneEngMonthMode(bInBuff5, bInBuff6), sizeof(zones));
@@ -252,7 +252,7 @@ void    OutSetNewEngTariffs(void)
 
 void    OutGetNewPubTariffs(void)
 {
-	if (boPublicCurr == true)
+	if (fPublicTariffsCurr == true)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
 			Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zones));

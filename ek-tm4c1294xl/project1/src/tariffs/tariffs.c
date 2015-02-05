@@ -5,11 +5,11 @@ TARIFFS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "driverlib/debug.h"
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_program.h"
 #include        "../display.h"
 #include        "../delay.h"
+#include        "../flash/files.h"
 #include        "../access.h"
 #include        "../rtc.h"
 #include        "../timedate.h"
@@ -17,6 +17,38 @@ TARIFFS.C
 #include        "oldtariffs.h"
 #include        "relaxs.h"
 #include        "gaps.h"
+#include        "tariffs.h"
+
+
+
+file const              flPublicTariffs = {wFLA_PUBLIC_TARIFFS, &fPublicTariffsCurr, sizeof(boolean)};
+file const              flOldTariffsMode = {wFLA_OLD_TARIFFS_MODE, &bOldTariffsMode, sizeof(uchar)};
+
+
+
+void    InitTariffs(void)
+{
+  LoadFile(&flPublicTariffs);
+
+  LoadFile(&flOldTariffsMode);
+}
+
+
+void    ResetTariffs(void)
+{
+  // совмещённые тарифные графики для мщности и энергии
+  fPublicTariffsCurr = false;
+  SaveFile(&flPublicTariffs);
+
+  // правило обработки тарифов в выходные дни (старый вариант)
+  bOldTariffsMode = 0;
+  SaveFile(&flOldTariffsMode);
+
+//  memset(&mpchEngMonth, '\0', sizeof(mpchEngMonth));
+//  memset(&mpchPowMonth, '\0', sizeof(mpchPowMonth));
+//
+//  SetTariffsDefault();
+}
 
 
 
@@ -28,16 +60,22 @@ void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
 
 
 zones  *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode) {
+	ASSERT(ibMonth < 12);
+	ASSERT(ibMode < bMODES);
   return( &mpzoEngMonthMode[ibMonth][ibMode] );
 }
 
 
 void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
+	ASSERT(ibMonth < 12);
+	ASSERT(ibMode < bMODES);
   mpzoPowMonthMode[ibMonth][ibMode] = *pzoT;
 }
 
 
 zones  *PGetZonePowMonthMode(uchar ibMonth, uchar ibMode) {
+	ASSERT(ibMonth < 12);
+	ASSERT(ibMode < bMODES);
   return( &mpzoPowMonthMode[ibMonth][ibMode] );
 }
 
@@ -51,7 +89,6 @@ uchar  ibMonth;
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
     SetZoneEngMonthMode(ibMonth, ibMode, pzoT);
-    SetBoolEngMonthMode(ibMonth, ibMode, true);
   }
 }
 
@@ -64,7 +101,6 @@ uchar  ibMonth;
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
     SetZonePowMonthMode(ibMonth, ibMode, pzoT);
-    SetBoolPowMonthMode(ibMonth, ibMode, true);
   }
 }
 
@@ -74,7 +110,7 @@ void    SetTariffsDefault(void)
 {
 uchar  chOldMode;
 
-  if (boPublicCurr == true)
+  if (fPublicTariffsCurr == true)
   {
     chOldMode = '_';
 
@@ -94,34 +130,6 @@ uchar  chOldMode;
     SetKeyZonePow();
     SetCharPowMonths(0,11,&zoKey,chOldMode);
   }
-}
-
-
-
-// сброс настроек по умолчанию
-void    ResetTariffs(void)
-{
-uchar  ibMonth, ibMode;
-
-  // совмещённые тарифные графики для мщности и энергии
-  boPublicCurr = false;
-
-  // правило обработки тарифов в выходные дни (старый вариант)
-  bOldMode = 0;
-
-  for (ibMonth=0; ibMonth<12+4+1; ibMonth++)
-  {
-    for (ibMode=0; ibMode<bMODES; ibMode++)
-    {
-      SetBoolEngMonthMode(ibMonth, ibMode, false);
-      SetBoolPowMonthMode(ibMonth, ibMode, false);
-    }
-  }
-
-  memset(&mpchEngMonth, '\0', sizeof(mpchEngMonth)); 
-  memset(&mpchPowMonth, '\0', sizeof(mpchPowMonth)); 
-
-  SetTariffsDefault();
 }
 
 

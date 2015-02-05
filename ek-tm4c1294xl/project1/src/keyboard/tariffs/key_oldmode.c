@@ -37,7 +37,7 @@ void    key_SetOldMode(void)
 
       LoadSlide(pszOldMode);
       Clear();
-      ShowChar(bOldMode);
+      ShowChar(bOldTariffsMode);
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
@@ -45,10 +45,10 @@ void    key_SetOldMode(void)
 
       if ((ibX = GetChar(6,8)) <= bMAXOLDMODES)
       {
-        ShowChar(bOldMode);
+        ShowChar(bOldTariffsMode);
         MakeAllOldModes(ibX); 
 
-        if (bOldMode == 0)
+        if (bOldTariffsMode == 0)
           ResetRelaxs();
         else
           DefaultRelaxs();
