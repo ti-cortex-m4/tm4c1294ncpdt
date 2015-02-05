@@ -23,12 +23,8 @@ uchar                   ibRelaxsTariff;
 
 
 // массив суточных тарифных графиков по мес€цам и режимам работы (дл€ мощности и энергии)
-zones                   mpzoPowMonthMode[12+4+1][bMODES],
-                        mpzoEngMonthMode[12+4+1][bMODES];
-
-// массив фактов задани€ суточных тарифных графиков по мес€цам и режимам работы (дл€ мощности и энергии)
-boolean                 mpboPowMonthMode[12+4+1][bMODES],
-                        mpboEngMonthMode[12+4+1][bMODES];
+zones                   mpzoPowMonthMode[12][bMODES],
+                        mpzoEngMonthMode[12][bMODES];
 
 // массив индексов тарифов дл€ каждого получаса текущих суток (дл€ мощности и энергии)
 uchar                   mpibPowCurrTariff[48],
