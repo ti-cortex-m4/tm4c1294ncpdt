@@ -20,7 +20,7 @@ KEYBOARD_KEY.C
 #include        "keyboard/tariffs/key_dayzone.h"
 #include        "keyboard/tariffs/key_public_tariffs.h"
 #include        "keyboard/tariffs/key_oldyearzone.h"
-#include        "keyboard/tariffs/key_oldmode.h"
+#include        "keyboard/tariffs/key_old_tariffs_mode.h"
 #include        "keyboard/tariffs/key_oldprogram5.h"
 #include        "keyboard/tariffs/key_relaxs_flag.h"
 #include        "keyboard/tariffs/key_relaxs_tariff.h"
@@ -55,7 +55,7 @@ void    Keyboard_Key(void)
 
       case bSET_DAYZONE:        key_SetDayZone();       break;
       case bSET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
-      case bSET_OLDMODE:        key_SetOldMode();       break;
+      case bSET_OLD_TARIFFS_MODE:		key_SetOldTariffsMode();		break;
 
       case bSET_PROGRAM10:
       case bSET_PROGRAM17:
@@ -104,7 +104,7 @@ void    Keyboard_Key(void)
       case bGET_GROUPS:         key_GetGroups();        break;
 
       case bGET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
-      case bGET_OLDMODE:        key_SetOldMode();       break;
+      case bGET_OLD_TARIFFS_MODE:		key_SetOldTariffsMode();		break;
 
       case bGET_PROGRAM5:       key_GetOldProgram5();   break;
       case bGET_PROGRAM84:
@@ -157,7 +157,7 @@ void    Keyboard_Key(void)
 
       case bSET_DAYZONE:        key_SetDayZone();       break;
       case bSET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
-      case bSET_OLDMODE:        key_SetOldMode();       break;
+      case bSET_OLD_TARIFFS_MODE:		key_SetOldTariffsMode();		break;
 
       case bSET_PROGRAM10:
       case bSET_PROGRAM17:

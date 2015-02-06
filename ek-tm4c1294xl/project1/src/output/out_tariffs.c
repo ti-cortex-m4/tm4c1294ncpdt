@@ -48,9 +48,10 @@ void    OutSetOldMode(void)
 {
 	if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
 	{
-		if (bInBuff5 <= bMAXOLDMODES)
+		if (bInBuff5 <= bOLDTARIFFSMODES)
 		{
-			MakeAllOldModes(bInBuff5);
+			bOldTariffsMode = bInBuff5;
+			MakeOldTariffsMode();
 			Result(bRES_OK);
 		}
 		else Result(bRES_BADDATA);

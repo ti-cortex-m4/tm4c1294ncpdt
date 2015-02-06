@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_OLDMODE.С
+KEY_OLD_TARIFFS_MODE.С
 
  Задание и просмотр правила обработки тарифов в нерабочие дни (старый вариант)
 ------------------------------------------------------------------------------*/
@@ -26,7 +26,7 @@ static char const      *pszOldMode[]    = { szWorkMode, szHolidays, "" };
 
 
 
-void    key_SetOldMode(void)
+void    key_SetOldTariffsMode(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -42,10 +42,11 @@ void    key_SetOldMode(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      if ((ibX = GetChar(6,8)) <= bMAXOLDMODES)
+      if ((ibX = GetChar(6,8)) <= bOLDTARIFFSMODES)
       {
+      	bOldTariffsMode = ibX;
         ShowChar(bOldTariffsMode);
-        MakeAllOldModes(ibX); 
+        MakeOldTariffsMode();
 
         if (bOldTariffsMode == 0)
           ResetRelaxs();
