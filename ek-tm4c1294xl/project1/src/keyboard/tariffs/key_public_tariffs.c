@@ -55,7 +55,7 @@ void    key_SetPublicTariffs(void)
         fPublicTariffsCurr = ~fPublicTariffsCurr;
         ShowPublicTariffs();
 
-        SetDefaultTariffs();
+        DefaultTariffs();
       }
       else Beep(); 
     }

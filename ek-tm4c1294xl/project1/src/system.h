@@ -70,7 +70,7 @@ SYSTEM.H
 #define bGAPS           11
 
 // количество видов тарифов в зависимости от дня недели (старый вариант задания тарифами)
-#define bMAXOLDMODES    5
+#define bOLDTARIFFSMODES	5
 
 
 // мажорная версия прибора
