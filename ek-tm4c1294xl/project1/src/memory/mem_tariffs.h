@@ -27,8 +27,8 @@ extern  boolean                 fPublicTariffsCurr,
                                 fPublicTariffsPrev;
 
 
-extern  uchar                   mpchPowMonth[12],
-                                mpchEngMonth[12];
+extern  uchar                   mpcPowMonth[12],
+                                mpcEngMonth[12];
 
 extern  uchar                   bTariffsMode;
 

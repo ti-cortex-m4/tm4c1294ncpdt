@@ -35,12 +35,15 @@ FLASH.H
 #define wFLA_GROUPS             (uint)(wFLA_LOGICAL + 1)
 
 #define wFLA_PUBLIC_TARIFFS     (uint)(wFLA_GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1)
-#define wFLA_OLD_TARIFFS_MODE   (uint)(wFLA_PUBLIC_TARIFFS + 1)
+#define wFLA_TARIFFS_MODE       (uint)(wFLA_PUBLIC_TARIFFS + 1)
 
-#define wFLA_ZONES_POW          (uint)(wFLA_OLD_TARIFFS_MODE + 1)
+#define wFLA_ZONES_POW          (uint)(wFLA_TARIFFS_MODE + 1)
 #define wFLA_ZONES_ENG          (uint)(wFLA_ZONES_POW + 12*bMODES)
 
-#define wFLA_TRANS_ENG          (uint)(wFLA_ZONES_ENG + 12*bMODES)
+#define wFLA_MONTHS_POW         (uint)(wFLA_ZONES_ENG + 12*bMODES)
+#define wFLA_MONTHS_ENG         (uint)(wFLA_MONTHS_POW + 1)
+
+#define wFLA_TRANS_ENG          (uint)(wFLA_MONTHS_ENG + 1)
 #define wFLA_TRANS_CNT          (uint)(wFLA_TRANS_ENG + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 #define wFLA_PULSE_HOU          (uint)(wFLA_TRANS_CNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 #define wFLA_PULSE_MNT          (uint)(wFLA_PULSE_HOU + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
