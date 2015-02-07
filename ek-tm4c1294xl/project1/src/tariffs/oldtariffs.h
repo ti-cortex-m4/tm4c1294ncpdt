@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
 OLDTARIFFS.H
 
- Подпрограммы управления тарифами (старый вариант)
+ Управления тарифами (старый вариант)
 ------------------------------------------------------------------------------*/
 
 void    MakeTariffsMode(void);
 
-void    SetCharEngMonths(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzoT, uchar  chOldMode);
-void    SetCharPowMonths(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzoT, uchar  chOldMode);
+void    SetPeriodTariffsEng(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzo, period  pe);
+void    SetPeriodTariffsPow(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzo, period  pe);

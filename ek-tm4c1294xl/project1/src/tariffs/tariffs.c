@@ -25,8 +25,8 @@ TARIFFS.C
 file const              flPublicTariffs = {wFLA_PUBLIC_TARIFFS, &fPublicTariffsCurr, sizeof(boolean)};
 file const              flTariffsMode = {wFLA_TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
 
-file const              flPowMonth = {wFLA_MONTHS_POW, &mpcPowMonth, sizeof(mpcPowMonth)};
-file const              flEngMonth = {wFLA_MONTHS_ENG, &mpcEngMonth, sizeof(mpcEngMonth)};
+file const              flPeriodTariffPow = {wFLA_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow)};
+file const              flPeriodTariffEng = {wFLA_PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng)};
 
 
 
@@ -66,6 +66,9 @@ uchar  ibMonth, ibMode;
     }
   }
 
+  LoadFile(&flPeriodTariffPow);
+  LoadFile(&flPeriodTariffEng);
+
   if (enGlobal == GLB_WORK)
   {
   	MakeAllCurrTariffs();
@@ -87,6 +90,9 @@ void    ResetTariffs(void)
   SaveFile(&flTariffsMode);
 
   DefaultTariffs();
+
+  SaveFile(&flPeriodTariffPow);
+  SaveFile(&flPeriodTariffEng);
 }
 
 
@@ -129,9 +135,7 @@ void    SetZonesEngMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMod
 uchar  ibMonth;
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
-  {
     SetZoneEngMonthMode(ibMonth, ibMode, pzoT);
-  }
 }
 
 
@@ -141,37 +145,30 @@ void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMod
 uchar  ibMonth;
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
-  {
     SetZonePowMonthMode(ibMonth, ibMode, pzoT);
-  }
 }
 
 
 
 void    DefaultTariffs(void)
 {
-uchar  chOldMode;
 zones  *pzo;
 
   if (fPublicTariffsCurr == true)
   {
-    chOldMode = '_';
+    pzo = PGetDefaultZonePow();
+    SetPeriodTariffsEng(0,11,pzo,PER_YEAR);
 
     pzo = PGetDefaultZonePow();
-    SetCharEngMonths(0,11,pzo,chOldMode);
-
-    pzo = PGetDefaultZonePow();
-    SetCharPowMonths(0,11,pzo,chOldMode);
+    SetPeriodTariffsPow(0,11,pzo,PER_YEAR);
   }
   else
   {
-    chOldMode = '_';
-
     pzo = PGetDefaultZoneEng();
-    SetCharEngMonths(0,11,pzo,chOldMode);
+    SetPeriodTariffsEng(0,11,pzo,PER_YEAR);
 
     pzo = PGetDefaultZonePow();
-    SetCharPowMonths(0,11,pzo,chOldMode);
+    SetPeriodTariffsPow(0,11,pzo,PER_YEAR);
   }
 }
 

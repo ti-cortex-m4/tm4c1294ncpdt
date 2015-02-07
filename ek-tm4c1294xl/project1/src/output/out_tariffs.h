@@ -4,20 +4,8 @@ OUT_TARIFFS.H
 
 ------------------------------------------------------------------------------*/
 
-void    OutGetPublic(void);
-void    OutSetPublic(void);
-
-void    OutGetOldMode(void);
-void    OutSetOldMode(void);
-
-void    OutGetOldPowTariffs(void);
-void    OutSetOldPowTariffs(void);
-
-void    OutGetOldEngTariffs(void);
-void    OutSetOldEngTariffs(void);
-
-void    OutGetOldPubTariffs(void);
-void    OutSetOldPubTariffs(void);
+void    OutGetPublicTariffs(void);
+void    OutSetPublicTariffs(void);
 
 void    OutGetNewPowTariffs(void);
 void    OutSetNewPowTariffs(void);

@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 OLDTARIFFS.С
 
- Подпрограммы управления тарифами (старый вариант)
+ Управления тарифами (старый вариант)
 ------------------------------------------------------------------------------*/
 
 #include        <string.h>
@@ -9,6 +9,7 @@ OLDTARIFFS.С
 #include        "../main.h"
 #include        "../memory/mem_tariffs.h"
 #include        "../access.h"
+#include        "../flash/files.h"
 #include        "tariffs.h"
 #include        "zones.h"
 
@@ -158,30 +159,40 @@ uchar  ibMonth;
 
 
 // запись суточного тарифного графика на несколько месяцев (для энергии)
-void    SetCharEngMonths(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzoT, uchar  chOldMode)
+void    SetPeriodTariffsEng(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzo, period  pe)
 {
 uchar  ibMonth;
 
-  SetZonesEngMonthsMode(ibMonthBeg, ibMonthEnd, 0, pzoT);
+  SetZonesEngMonthsMode(ibMonthBeg, ibMonthEnd, 0, pzo);
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
   	MakeTariffsModeMonth(ibMonth, DOM_ENERGY);
-    mpcEngMonth[ibMonth] = chOldMode;
+  	SaveZonesEng(ibMonth, 1);
+  	SaveZonesEng(ibMonth, 2);
+
+  	mpeTariffEng[ibMonth] = pe;
   }
+
+  SaveFile(&flPeriodTariffEng);
 }
 
 
 // запись суточного тарифного графика на несколько месяцев (для мощности)
-void    SetCharPowMonths(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzoT, uchar  chOldMode)
+void    SetPeriodTariffsPow(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzo, period  pe)
 {
 uchar  ibMonth;
 
-  SetZonesPowMonthsMode(ibMonthBeg, ibMonthEnd, 0, pzoT);
+  SetZonesPowMonthsMode(ibMonthBeg, ibMonthEnd, 0, pzo);
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
   	MakeTariffsModeMonth(ibMonth, DOM_POWER);
-    mpcPowMonth[ibMonth] = chOldMode;
+  	SaveZonesPow(ibMonth, 1);
+  	SaveZonesPow(ibMonth, 2);
+
+  	mpeTariffPow[ibMonth] = pe;
   }
+
+  SaveFile(&flPeriodTariffPow);
 }
