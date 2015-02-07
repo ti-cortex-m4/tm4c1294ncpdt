@@ -53,7 +53,7 @@ void    Keyboard_Key(void)
       case bSET_LEVEL:
       case bSET_COUNT:          key_SetFactors();       break;
 
-      case bSET_DAYZONE:        key_SetDayZone();       break;
+      case bSET_DAY_ZONE:       key_SetDayZone();       break;
       case bSET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
       case bSET_TARIFFS_MODE:		key_SetTariffsMode();		break;
 
@@ -155,7 +155,7 @@ void    Keyboard_Key(void)
 
       case bSET_GROUPS:         key_SetGroups();        break;
 
-      case bSET_DAYZONE:        key_SetDayZone();       break;
+      case bSET_DAY_ZONE:       key_SetDayZone();       break;
       case bSET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
       case bSET_TARIFFS_MODE:		key_SetTariffsMode();		break;
 

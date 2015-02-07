@@ -66,7 +66,7 @@ void    key_SetOldYearZone(void)
     {
       if (GetZoneKeySize() == 0) 
       {
-        NeedProgram(bSET_DAYZONE); 
+        NeedProgram(bSET_DAY_ZONE);
         return;
       }      
 

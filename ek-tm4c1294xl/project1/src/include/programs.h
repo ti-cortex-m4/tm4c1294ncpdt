@@ -25,7 +25,7 @@ PROGRAMS.H
 #define bSET_LOSSE                  3
 #define bSET_LEVEL                  108
 
-#define bSET_DAYZONE                7
+#define bSET_DAY_ZONE               7
 #define bSET_PUBLIC_TARIFFS         26
 #define bSET_TARIFFS_MODE           18
 
