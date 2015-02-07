@@ -57,7 +57,7 @@ uchar  ibMonth, ibMode;
   LoadFile(&flPublicTariffs);
   LoadFile(&flTariffsMode);
 
-  for (ibMonth=0; ibMonth<12-1; ibMonth++)
+  for (ibMonth=0; ibMonth<12; ibMonth++)
   {
     for (ibMode=0; ibMode<bMODES; ibMode++)
     {
