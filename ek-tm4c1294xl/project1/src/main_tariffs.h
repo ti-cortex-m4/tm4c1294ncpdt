@@ -8,14 +8,14 @@ typedef struct
   uchar         bHour;                  // час
   uchar         bMinute;                // минуты
   uchar         ibTariff;               // индекс тарифа
-} breaks;
+} br3ak;
 
 
 // тип 'тарифный график за сутки'
 typedef struct
 {
   uchar         bSize;                  // количество изломов в тарифном графике
-  breaks        mpbrBreaks[bBREAKS];    // изломы тарифного графика
+  br3ak         mpbrBreaks[bBREAKS];    // изломы тарифного графика
 } zone;
 
 

@@ -15,7 +15,7 @@ ZONES.C
 static char const       szNoZones[]   = " зоны не заданы ";
 
 
-breaks const            brZero = { 0, 0, 0 };
+br3ak const            brZero = { 0, 0, 0 };
 
 
 
@@ -184,7 +184,7 @@ static uchar const  mpbZone[3*bBREAKS] = {
 };
 
 static zone  zo;
-breaks  br;
+br3ak  br;
 uchar  i, j;
 
   i = 0;
@@ -214,7 +214,7 @@ static uchar const  mpbZone[3*bBREAKS] = {
 };
 
 static zone  zo;
-breaks  br;
+br3ak  br;
 uchar  i, j;
 
   i = 0;

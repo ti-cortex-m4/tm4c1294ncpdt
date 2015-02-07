@@ -23,13 +23,13 @@ KEY_START.C
 static message          szStart         = "Старт           ",
                         szRestart       = "Рестарт         ",
                         szDebug         = "Отладка         ",
-                        szNoOldTariff   = "Нет тарифов     ",
+                        szNoTariffs     = "Нет тарифов     ",
                         szBadRTC        = "показаний RTC ! ";
 
 
-void    ShowNoOldTariff(uchar  ibMonth)
+void    ShowNoTariffs(uchar  ibMonth)
 {
-  ShowHi(szNoOldTariff);
+  ShowHi(szNoTariffs);
   Clear();
 
   sprintf(szLo,"для месяца: %-2u ",ibMonth+1);
@@ -46,7 +46,7 @@ uchar  ibMonth;
     // тарифные графики совмещённые или раздельные для мощности
     if (mpeTariffPow[ibMonth] == NONE)
     {
-    	ShowNoOldTariff(ibMonth);
+    	ShowNoTariffs(ibMonth);
       NeedPrograms(bSET_PROGRAM10, bSET_PROGRAM17);
       return(0);
     }
@@ -54,7 +54,7 @@ uchar  ibMonth;
     // тарифные графики раздельные для энергии
     if (mpeTariffEng[ibMonth] == NONE)
     {
-    	ShowNoOldTariff(ibMonth);
+    	ShowNoTariffs(ibMonth);
       NeedPrograms(bSET_PROGRAM20, bSET_PROGRAM27);
       return(0);
     }

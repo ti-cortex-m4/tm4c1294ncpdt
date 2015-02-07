@@ -14,7 +14,7 @@ extern  uchar                   ibRelaxsTariff;
 
 
 
-extern  zone                   mpzoPowMonthMode[12][bMODES],
+extern  zone                    mpzoPowMonthMode[12][bMODES],
                                 mpzoEngMonthMode[12][bMODES];
 
 extern  uchar                   mpibPowCurrTariff[48],
@@ -33,15 +33,15 @@ extern  uchar                   bTariffsMode;
 
 
 
-extern  zone                   zoAlt,zoKey;
+extern  zone                    zoAlt, zoKey;
 
-extern  breaks                  brAlt,brKey;
+extern  br3ak                   brAlt, brKey;
 
 
 
 extern  boolean                 boGapsFlag;
 
-extern  gap                    mpgaGaps;
+extern  gap                     mpgaGaps;
 
 extern  time                    tiGap;
 
