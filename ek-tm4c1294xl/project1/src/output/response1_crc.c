@@ -35,20 +35,8 @@ void    Response1_CRC(void)
         OutSetGroup();
         break;
 
-      case bINQ_GETPUBLIC: OutGetPublic(); break;
-      case bINQ_SETPUBLIC: OutSetPublic(); break;
-
-      case bINQ_GETOLDMODE: OutGetOldMode(); break;
-      case bINQ_SETOLDMODE: OutSetOldMode(); break;
-
-      case bINQ_GETOLDPOWTARIFFS: OutGetOldPowTariffs(); break;
-      case bINQ_SETOLDPOWTARIFFS: OutSetOldPowTariffs(); break;
-
-      case bINQ_GETOLDENGTARIFFS: OutGetOldEngTariffs(); break;
-      case bINQ_SETOLDENGTARIFFS: OutSetOldEngTariffs(); break;
-
-      case bINQ_GETOLDPUBTARIFFS: OutGetOldPubTariffs(); break;
-      case bINQ_SETOLDPUBTARIFFS: OutSetOldPubTariffs(); break;
+      case bINQ_GETPUBLIC_TARIFFS: OutGetPublicTariffs(); break;
+      case bINQ_SETPUBLIC_TARIFFS: OutSetPublicTariffs(); break;
 
       case bINQ_GETNEWPOWTARIFFS: OutGetNewPowTariffs(); break;
       case bINQ_SETNEWPOWTARIFFS: OutSetNewPowTariffs(); break;

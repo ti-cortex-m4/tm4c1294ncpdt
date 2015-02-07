@@ -38,11 +38,9 @@ uchar                   mpibPowPrevTariff[48],
 boolean                 fPublicTariffsCurr,
                         fPublicTariffsPrev;
 
-
-
 // массив символов задани€ тарифных зон по блока и мес€цам (старый вариант)
-uchar                   mpcPowMonth[12],
-                        mpcEngMonth[12];
+period                  mpeTariffPow[12],
+                        mpeTariffEng[12];
 
 // правило обработки тарифов в выходные дни (старый вариант)
 uchar                   bTariffsMode;

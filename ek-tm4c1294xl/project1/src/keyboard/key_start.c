@@ -44,7 +44,7 @@ uchar  ibMonth;
   for (ibMonth=0; ibMonth<12; ibMonth++)
   {
     // тарифные графики совмещённые или раздельные для мощности
-    if (mpcPowMonth[ibMonth] == 0)
+    if (mpeTariffPow[ibMonth] == PER_INIT)
     {
     	ShowNoOldTariff(ibMonth);
       NeedPrograms(bSET_PROGRAM10, bSET_PROGRAM17);
@@ -52,7 +52,7 @@ uchar  ibMonth;
     }
 
     // тарифные графики раздельные для энергии
-    if (mpcEngMonth[ibMonth] == 0)
+    if (mpeTariffEng[ibMonth] == PER_INIT)
     {
     	ShowNoOldTariff(ibMonth);
       NeedPrograms(bSET_PROGRAM20, bSET_PROGRAM27);
@@ -215,8 +215,8 @@ void    key_Debug(void)
     // старый вариант задания тарифов
     chOldMode = '_';
 
-    SetCharEngMonths(0,11);
-    SetCharPowMonths(0,11);
+    SetPeriodTariffsEng(0,11);
+    SetPeriodTariffsPow(0,11);
 */
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();

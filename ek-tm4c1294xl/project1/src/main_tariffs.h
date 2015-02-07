@@ -27,6 +27,16 @@ typedef enum
 } domain;
 
 
+// тип 'период задания тарифов'
+typedef enum
+{
+  PER_INIT              = 0,
+  PER_MONTH             = 1,
+  PER_QUARTER           = '-',
+  PER_YEAR              = '_',
+} period;
+
+
 // тип 'список праздников'
 typedef struct
 {

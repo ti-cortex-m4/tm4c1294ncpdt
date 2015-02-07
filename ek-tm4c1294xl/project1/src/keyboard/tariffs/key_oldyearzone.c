@@ -30,7 +30,7 @@ static char const      *pszPubPrg10[]   = { szZones, szOnMonths,   "" },
 
 static uchar            ibX, ibXmax, ibYmin, ibYmax;
 
-static uchar            chOldMode;
+static period           pe;
 
 
 
@@ -45,13 +45,13 @@ uchar   i;
     case bSET_PROGRAM10:  
     case bSET_PROGRAM17:
       for (i=0; i<12; i++)
-        szLo[i+2] = mpcPowMonth[i];
+        szLo[i+2] = mpeTariffPow[i];
       break; 
 
     case bSET_PROGRAM20:  
     case bSET_PROGRAM27:  
       for (i=0; i<12; i++)
-        szLo[i+2] = mpcEngMonth[i];
+        szLo[i+2] = mpeTariffEng[i];
       break;
   }
 }
@@ -116,7 +116,7 @@ void    key_SetOldYearZone(void)
         ibYmin = 0; 
         ibYmax = 11;
 
-        chOldMode = '_';
+        pe = PER_YEAR;
       }
       else if ((ibXmax == 4) && (ibX <= ibXmax))
       {
@@ -130,7 +130,7 @@ void    key_SetOldYearZone(void)
           case 4:  ibYmin = 9; ibYmax = 11;  break;
         }
 
-        chOldMode = '-';
+        pe = PER_QUARTER;
       }
       else if ((ibXmax == 12) && (ibX <= ibXmax))
       {
@@ -139,7 +139,7 @@ void    key_SetOldYearZone(void)
         ibYmin = ibX-1;
         ibYmax = ibX-1;
 
-        chOldMode = 0x01;
+        pe = PER_MONTH;
       }
       else Beep();
     }
@@ -153,8 +153,8 @@ void    key_SetOldYearZone(void)
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17:  
-            SetCharPowMonths(ibYmin,ibYmax,&zoKey,chOldMode);
-            SetCharEngMonths(ibYmin,ibYmax,&zoKey,chOldMode);
+            SetPeriodTariffsPow(ibYmin,ibYmax,&zoKey,pe);
+            SetPeriodTariffsEng(ibYmin,ibYmax,&zoKey,pe);
             ShowOldZones();  break;
         }
       }
@@ -164,12 +164,12 @@ void    key_SetOldYearZone(void)
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17: 
-            SetCharPowMonths(ibYmin,ibYmax,&zoKey,chOldMode);
+            SetPeriodTariffsPow(ibYmin,ibYmax,&zoKey,pe);
             ShowOldZones();  break;
 
           case bSET_PROGRAM20: 
           case bSET_PROGRAM27: 
-            SetCharEngMonths(ibYmin,ibYmax,&zoKey,chOldMode);
+            SetPeriodTariffsEng(ibYmin,ibYmax,&zoKey,pe);
             ShowOldZones();  break;
         }        
       }
