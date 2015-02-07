@@ -23,7 +23,7 @@ uchar                   ibRelaxsTariff;
 
 
 // массив суточных тарифных графиков по мес€цам и режимам работы (дл€ мощности и энергии)
-zone                   mpzoPowMonthMode[12][bMODES],
+zone                    mpzoPowMonthMode[12][bMODES],
                         mpzoEngMonthMode[12][bMODES];
 
 // массив индексов тарифов дл€ каждого получаса текущих суток (дл€ мощности и энергии)
@@ -48,10 +48,10 @@ uchar                   bTariffsMode;
 
 
 // суточные тарифные графики
-zone                   zoAlt,zoKey;
+zone                    zoAlt, zoKey;
 
 // изломы суточных тарифных графиков
-breaks                  brAlt,brKey;
+br3ak                   brAlt, brKey;
 
 
 
@@ -59,7 +59,7 @@ breaks                  brAlt,brKey;
 boolean                 boGapsFlag;
 
 // массив изломов тарифных периодов
-gap                    mpgaGaps;
+gap                     mpgaGaps;
 
 // переменна€
 time                    tiGap;
