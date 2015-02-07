@@ -97,10 +97,10 @@ void    ResetTariffs(void)
 
 
 
-void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
+void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzo) {
 	ASSERT(ibMonth < 12);
 	ASSERT(ibMode < bMODES);
-  mpzoPowMonthMode[ibMonth][ibMode] = *pzoT;
+  mpzoPowMonthMode[ibMonth][ibMode] = *pzo;
   SaveZonesPow(ibMonth, ibMode);
 }
 
@@ -113,10 +113,10 @@ zones  *PGetZonePowMonthMode(uchar ibMonth, uchar ibMode) {
 
 
 
-void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT) {
+void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzo) {
 	ASSERT(ibMonth < 12);
 	ASSERT(ibMode < bMODES);
-  mpzoEngMonthMode[ibMonth][ibMode] = *pzoT;
+  mpzoEngMonthMode[ibMonth][ibMode] = *pzo;
   SaveZonesEng(ibMonth, ibMode);
 }
 
@@ -130,22 +130,22 @@ zones  *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode) {
 
 
 // записывает суточный тарифный график на несколько мес€цев (дл€ энергии)
-void    SetZonesEngMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzoT)
+void    SetZonesEngMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzo)
 {
 uchar  ibMonth;
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
-    SetZoneEngMonthMode(ibMonth, ibMode, pzoT);
+    SetZoneEngMonthMode(ibMonth, ibMode, pzo);
 }
 
 
 // записывает суточный тарифный график на несколько мес€цев (дл€ мощности)
-void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzoT)
+void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzo)
 {
 uchar  ibMonth;
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
-    SetZonePowMonthMode(ibMonth, ibMode, pzoT);
+    SetZonePowMonthMode(ibMonth, ibMode, pzo);
 }
 
 
