@@ -34,8 +34,8 @@ uchar   i,j;
     {           
       // заменяем знак узла
       SetGroupsNode(ibX,i,noT);
-      SaveGroups();
 
+      SaveGroups();
       return(0);
     }
   }
@@ -59,8 +59,8 @@ uchar   i,j;
 
   // увеличиваем размер группы
   SetGroupsSize(ibX, GetGroupsSize(ibX)+1);
-  SaveGroups();
 
+  SaveGroups();
   return(1);
 }
 
@@ -88,6 +88,8 @@ uchar   i;
   // уменьшаем количество узлов в группе
   if (GetGroupsSize(ibX) != 0)
     SetGroupsSize(ibX, GetGroupsSize(ibX)-1);
+
+  SaveGroups();
 }
 
 

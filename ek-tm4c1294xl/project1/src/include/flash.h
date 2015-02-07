@@ -37,7 +37,9 @@ FLASH.H
 #define wFLA_PUBLIC_TARIFFS     (uint)(wFLA_GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1)
 #define wFLA_TARIFFS_MODE       (uint)(wFLA_PUBLIC_TARIFFS + 1)
 
-#define wFLA_ZONES_POW          (uint)(wFLA_TARIFFS_MODE + 1)
+#define wFLA_ZONE               (uint)(wFLA_TARIFFS_MODE + 1)
+
+#define wFLA_ZONES_POW          (uint)(wFLA_ZONE + 1)
 #define wFLA_ZONES_ENG          (uint)(wFLA_ZONES_POW + 12*bMODES)
 
 #define wFLA_PERIOD_POW         (uint)(wFLA_ZONES_ENG + 12*bMODES)

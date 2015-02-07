@@ -26,6 +26,7 @@
 #include "src/uarts.h"
 #include "src/settings.h"
 #include "src/groups.h"
+#include "src/tariffs/zones.h"
 #include "src/tariffs/tariffs.h"
 #include "src/output/response_crc.h"
 
@@ -53,6 +54,7 @@ int main(void) {
 
 	InitSettings();
 	InitGroups();
+	InitZones();
 	InitTariffs();
 
     InitUARTs(ui32SysClock);

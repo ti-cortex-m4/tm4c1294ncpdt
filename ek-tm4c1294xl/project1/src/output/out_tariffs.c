@@ -64,7 +64,7 @@ zone  zo;
 			InitPop(7);
 			Pop(&zo, sizeof(zone));
 
-			if (TrueZone() == 1)
+			if (TrueZone(&zo))
 			{
 				SetPeriodTariffsPow(bInBuff5, bInBuff5, &zo, YEAR);
 				LongResult(bRES_OK);
@@ -102,7 +102,7 @@ zone  zo;
 			InitPop(7);
 			Pop(&zo, sizeof(zone));
 
-			if (TrueZone() == 1)
+			if (TrueZone(&zo))
 			{
 				SetPeriodTariffsEng(bInBuff5, bInBuff5, &zo, YEAR);
 				LongResult(bRES_OK);
@@ -140,7 +140,7 @@ zone  zo;
 			InitPop(7);
 			Pop(&zo, sizeof(zone));
 
-			if (TrueZone() == 1)
+			if (TrueZone(&zo))
 			{
 				SetPeriodTariffsPow(bInBuff5, bInBuff5, &zo, YEAR);
 				SetPeriodTariffsEng(bInBuff5, bInBuff5, &zo, YEAR);
@@ -179,7 +179,7 @@ zone  zo;
 			InitPop(7);
 			Pop(&zo, sizeof(zone));
 
-			if (TrueZone() == 1)
+			if (TrueZone(&zo))
 			{
 				SetZonesPowMonthsMode(bInBuff5, bInBuff5, bInBuff6, &zo);
 				LongResult(bRES_OK);
@@ -217,7 +217,7 @@ zone  zo;
 			InitPop(7);
 			Pop(&zo, sizeof(zone));
 
-			if (TrueZone() == 1)
+			if (TrueZone(&zo))
 			{
 				SetZonesEngMonthsMode(bInBuff5, bInBuff5, bInBuff6, &zo);
 				LongResult(bRES_OK);
@@ -255,7 +255,7 @@ zone  zo;
 			InitPop(7);
 			Pop(&zo, sizeof(zone));
 
-			if (TrueZone() == 1)
+			if (TrueZone(&zo))
 			{
 				SetZonesPowMonthsMode(bInBuff5, bInBuff5, bInBuff6, &zo);
 				SetZonesEngMonthsMode(bInBuff5, bInBuff5, bInBuff6, &zo);

@@ -10,6 +10,7 @@ KEY_DAYZONE.С
 #include        "../../keyboard.h"
 #include        "../../tariffs/tariffs.h"
 #include        "../../tariffs/zones.h"
+#include        "../../flash/files.h"
 
 
 
@@ -35,6 +36,8 @@ uchar   i,j;
       // заменяем тариф
       GetZoneKeyBreak(ibX);
       SetZoneKeyBreak(i);
+
+      SaveFile(&flZone);
       return(0);
     }
   }
@@ -60,6 +63,8 @@ uchar   i,j;
 
   // увеличиваем размер суточного тарифного графика
   SetZoneKeySize(GetZoneKeySize() + 1);
+
+  SaveFile(&flZone);
   return(1);
 }
 
@@ -94,6 +99,8 @@ uchar   i;
     brKey = brZero;
     SetZoneKeyBreak(GetZoneKeySize());
   }
+
+  SaveFile(&flZone);
 }
 
 

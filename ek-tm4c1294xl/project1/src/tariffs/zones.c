@@ -8,6 +8,7 @@ ZONES.C
 #include        "../memory/mem_tariffs.h"
 #include        "../keyboard.h"
 #include        "../display/display.h"
+#include        "../flash/files.h"
 
 
 
@@ -15,9 +16,9 @@ ZONES.C
 static char const       szNoZones[]   = " зоны не заданы ";
 
 
-br3ak const            brZero = { 0, 0, 0 };
+br3ak const             brZero = { 0, 0, 0 };
 
-zone const             zoDefaultPow = {
+zone const              zoDefaultPow = {
 		bSize: 6,
 		mpbrBreaks: {
 		 	{6,  0,  0},
@@ -29,7 +30,7 @@ zone const             zoDefaultPow = {
 		}
 };
 
-zone const             zoDefaultEng = {
+zone const              zoDefaultEng = {
 		bSize: 5,
 		mpbrBreaks: {
 			{6,  0,  0},
@@ -41,63 +42,76 @@ zone const             zoDefaultEng = {
 		}
 };
 
+zone const              zoDefault = {
+		bSize: 6,
+		mpbrBreaks: {
+			{6,  0,  0},
+			{8,  0,  1},
+			{10, 0,  2},
+			{18, 0,  1},
+			{20, 0,  3},
+			{21, 30, 1}
+		}
+};
+
+file const              flZone = {wFLA_ZONE, &zoKey, sizeof(zone)};
 
 
-// читает количество изломов в тарифном графике zoAlt
-uchar   GetZoneAltSize(void)
+
+void    InitZones(void)
 {
+  LoadFile(&flZone);
+}
+
+
+
+void    ResetZones(void)
+{
+	zoKey = zoDefault;
+  SaveFile(&flZone);
+}
+
+
+
+uchar   GetZoneAltSize(void) {
   return( zoAlt.bSize );
 }
 
 
-// записывает количество изломов в тарифном графике zoAlt
-void    SetZoneAltSize(uchar  bSize)
-{
+void    SetZoneAltSize(uchar  bSize) {
   zoAlt.bSize = bSize;
 }
 
 
 
-// читает излом brAlt из тарифного графика zoAlt
-void    GetZoneAltBreak(uchar  ibBreak)
-{
+void    GetZoneAltBreak(uchar  ibBreak) {
   brAlt = zoAlt.mpbrBreaks[ibBreak];
 }
 
 
-// записывает излом brAlt в тарифный график zoAlt
-void    SetZoneAltBreak(uchar  ibBreak)
-{
+void    SetZoneAltBreak(uchar  ibBreak) {
   zoAlt.mpbrBreaks[ibBreak] = brAlt;
 }
 
 
 
-// читает количество изломов в тарифном графике zoKey
-uchar   GetZoneKeySize(void)
-{
+uchar   GetZoneKeySize(void) {
   return( zoKey.bSize );
 }
 
 
-// записывает количество изломов в тарифном графике zoKey
-void    SetZoneKeySize(uchar  bSize)
-{
+void    SetZoneKeySize(uchar  bSize) {
   zoKey.bSize = bSize;
 }
 
 
 
-// читает излом brKey из тарифного графика zoKey
-void    GetZoneKeyBreak(uchar  ibBreak)
-{
+void    GetZoneKeyBreak(uchar  ibBreak) {
   brKey = zoKey.mpbrBreaks[ibBreak];
 }
 
 
-// записывает излом brKey в тарифный график zoKey
-void    SetZoneKeyBreak(uchar  ibBreak)
-{
+void    SetZoneKeyBreak(uchar  ibBreak) {
   zoKey.mpbrBreaks[ibBreak] = brKey;
 }
 
@@ -116,34 +130,6 @@ uchar   GetBreakKeyIndex(uchar  ibBreak)
 {
   GetZoneKeyBreak(ibBreak);
   return( brKey.bHour*2 + brKey.bMinute/30 );
-}
-
-
-
-// сбрасывает настройки по умолчанию для переменных zoAlt,zoKey
-void    ResetZones(void)
-{
-static uchar const  mpbZone[3*bBREAKS] =
-{  6,  0,  0,
-   8,  0,  1,
-  10,  0,  2,
-  18,  0,  1,
-  20,  0,  3,
-  21, 30,  1 };
-
-  ibY = 0;
-  for (ibX=0; ibX<bBREAKS; ibX++)
-  {    
-    brAlt.bHour    = mpbZone[ibY++];
-    brAlt.bMinute  = mpbZone[ibY++];
-    brAlt.ibTariff = mpbZone[ibY++];
-
-    SetZoneAltBreak(ibX);
-  }
-
-  SetZoneAltSize(bBREAKS);
-
-  memcpy(&zoKey, &zoAlt, sizeof(zone));
 }
 
 
@@ -185,12 +171,7 @@ void    ShowZoneKeyBreak(uchar  ibBreak)
 
 
 
-#ifndef MODBUS
-
-// проверяет правильность суточного тарифного графика
-bool    TrueZone(void)
+boolean TrueZone(zone  *pzo)
 {
   return true;
 }
-
-#endif
