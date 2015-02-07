@@ -8,7 +8,10 @@ ZONES.H
 
 
 
-extern  br3ak                  brZero;
+extern  br3ak const            brZero;
+
+extern  zone const             zoDefaultPow;
+extern  zone const             zoDefaultEng;
 
 
 
@@ -33,6 +36,3 @@ void    ShowZoneAltBreak(uchar  ibBreak);
 void    ShowZoneKeyBreak(uchar  ibBreak);
 
 bool    TrueZone(void);
-
-zone   *PGetDefaultZonePow(void);
-zone   *PGetDefaultZoneEng(void);

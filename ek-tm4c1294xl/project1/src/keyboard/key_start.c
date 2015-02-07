@@ -37,7 +37,7 @@ void    ShowNoTariffs(uchar  ibMonth)
 }
 
 
-bool    TestOldTariffs(void)
+bool    TestTariffs(void)
 {
 uchar  ibMonth;
 
@@ -96,7 +96,7 @@ void    key_Start(void)
       return;
     }
 
-    if (TestOldTariffs() == 0)
+    if (TestTariffs() == 0)
       return;
 
     PGetCurrTimeDate();
@@ -197,27 +197,13 @@ void    key_Debug(void)
     boSetGroups = true;
 
 // TODO key_Debug
-/*
-    // сбрасываем настройки по умолчанию для переменных zoAlt,zoKey
-    ResetZones();
 
-    // сбрасываем настройки по умолчанию для переменной bOldMode
+    // сбрасываем настройки по умолчанию для переменных zoAlt,zoKey
+//    ResetZones();
+
+    // сбрасываем настройки по умолчанию для
     ResetTariffs();
 
-    // новый вариант задания тарифов
-    for (ibMode=0; ibMode<bMODES; ibMode++)
-    {
-      // для задания тарифных графиков используется переменная zoKey
-      SetZonesEngMonthsMode(0,11);
-      SetZonesPowMonthsMode(0,11);
-    }
-
-    // старый вариант задания тарифов
-    chOldMode = '_';
-
-    SetPeriodTariffsEng(0,11);
-    SetPeriodTariffsPow(0,11);
-*/
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
 
