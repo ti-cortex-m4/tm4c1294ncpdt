@@ -17,6 +17,13 @@ QUERIES.H
 #define bINQ_GETPUBLIC_TARIFFS         14
 #define bINQ_SETPUBLIC_TARIFFS         15
 
+#define bINQ_GETOLDPOWTARIFFS          18
+#define bINQ_SETOLDPOWTARIFFS          19
+#define bINQ_GETOLDENGTARIFFS          20
+#define bINQ_SETOLDENGTARIFFS          21
+#define bINQ_GETOLDPUBTARIFFS          22
+#define bINQ_SETOLDPUBTARIFFS          23
+
 #define bINQ_GETNEWPOWTARIFFS          24
 #define bINQ_SETNEWPOWTARIFFS          25
 #define bINQ_GETNEWENGTARIFFS          26
