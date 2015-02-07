@@ -31,21 +31,21 @@ file const              flPeriodTariffEng = {wFLA_PERIOD_ENG, &mpeTariffEng, siz
 
 
 boolean SaveZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(wFLA_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zones));
+	return SaveBuff(wFLA_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return LoadBuff(wFLA_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zones));
+	return LoadBuff(wFLA_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 
 
 boolean SaveZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zones));
+	return SaveBuff(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return LoadBuff(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zones));
+	return LoadBuff(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 
@@ -97,7 +97,7 @@ void    ResetTariffs(void)
 
 
 
-void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzo) {
+void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zone *pzo) {
 	ASSERT(ibMonth < 12);
 	ASSERT(ibMode < bMODES);
   mpzoPowMonthMode[ibMonth][ibMode] = *pzo;
@@ -105,7 +105,7 @@ void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzo) {
 }
 
 
-zones  *PGetZonePowMonthMode(uchar ibMonth, uchar ibMode) {
+zone  *PGetZonePowMonthMode(uchar ibMonth, uchar ibMode) {
 	ASSERT(ibMonth < 12);
 	ASSERT(ibMode < bMODES);
   return( &mpzoPowMonthMode[ibMonth][ibMode] );
@@ -113,7 +113,7 @@ zones  *PGetZonePowMonthMode(uchar ibMonth, uchar ibMode) {
 
 
 
-void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzo) {
+void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zone *pzo) {
 	ASSERT(ibMonth < 12);
 	ASSERT(ibMode < bMODES);
   mpzoEngMonthMode[ibMonth][ibMode] = *pzo;
@@ -121,7 +121,7 @@ void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzo) {
 }
 
 
-zones  *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode) {
+zone  *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode) {
 	ASSERT(ibMonth < 12);
 	ASSERT(ibMode < bMODES);
   return( &mpzoEngMonthMode[ibMonth][ibMode] );
@@ -130,7 +130,7 @@ zones  *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode) {
 
 
 // записывает суточный тарифный график на несколько мес€цев (дл€ энергии)
-void    SetZonesEngMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzo)
+void    SetZonesEngMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zone *pzo)
 {
 uchar  ibMonth;
 
@@ -140,7 +140,7 @@ uchar  ibMonth;
 
 
 // записывает суточный тарифный график на несколько мес€цев (дл€ мощности)
-void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzo)
+void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zone *pzo)
 {
 uchar  ibMonth;
 
@@ -152,23 +152,23 @@ uchar  ibMonth;
 
 void    DefaultTariffs(void)
 {
-zones  *pzo;
+zone  *pzo;
 
   if (fPublicTariffsCurr == true)
   {
     pzo = PGetDefaultZonePow();
-    SetPeriodTariffsEng(0,11,pzo,PER_YEAR);
+    SetPeriodTariffsEng(0,11,pzo,YEAR);
 
     pzo = PGetDefaultZonePow();
-    SetPeriodTariffsPow(0,11,pzo,PER_YEAR);
+    SetPeriodTariffsPow(0,11,pzo,YEAR);
   }
   else
   {
     pzo = PGetDefaultZoneEng();
-    SetPeriodTariffsEng(0,11,pzo,PER_YEAR);
+    SetPeriodTariffsEng(0,11,pzo,YEAR);
 
     pzo = PGetDefaultZonePow();
-    SetPeriodTariffsPow(0,11,pzo,PER_YEAR);
+    SetPeriodTariffsPow(0,11,pzo,YEAR);
   }
 }
 

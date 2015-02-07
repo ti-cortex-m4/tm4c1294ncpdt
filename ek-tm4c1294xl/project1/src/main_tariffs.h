@@ -16,24 +16,24 @@ typedef struct
 {
   uchar         bSize;                  // количество изломов в тарифном графике
   breaks        mpbrBreaks[bBREAKS];    // изломы тарифного графика
-} zones;
+} zone;
 
 
 // тип 'мощность/энерги€'
 typedef enum
 {
-  DOM_POWER,
-  DOM_ENERGY
+  POWER,
+  ENERGY
 } domain;
 
 
 // тип 'период задани€ тарифов'
 typedef enum
 {
-  PER_INIT              = 0,
-  PER_MONTH             = 1,
-  PER_QUARTER           = '-',
-  PER_YEAR              = '_',
+  NONE          = 0,
+  MONTH         = 1,
+  QUARTER       = '-',
+  YEAR          = '_',
 } period;
 
 
@@ -42,12 +42,12 @@ typedef struct
 {
   uchar         bSize;                  // количество праздников
   time          mptiDate[bRELAXS];      // даты праздников
-} relaxs;
+} relax;
 
 
-// тип 'излом тарифного периода'
+// тип 'специальные тарифные периоды'
 typedef struct
 {
-  uchar         bSize;                  // количество изломов
-  time          mptiDate[bGAPS]  ;      // даты изломов (секунда - номер псевдо-мес€ца)
-} gaps;
+  uchar         bSize;                  // количество периодов
+  time          mptiDate[bGAPS];        // даты периодов (секунда - номер псевдо-мес€ца)
+} gap;

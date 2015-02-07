@@ -45,7 +45,7 @@ void    OutGetNewPowTariffs(void)
 	if (fPublicTariffsCurr == false)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
-			Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zones));
+			Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zone));
 		else
 			Result(bRES_BADDATA);
 	}
@@ -55,14 +55,14 @@ void    OutGetNewPowTariffs(void)
 
 void    OutSetNewPowTariffs(void)
 {
-zones  zo;
+zone  zo;
 
 	if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
 		{
 			InitPop(7);
-			Pop(&zo, sizeof(zones));
+			Pop(&zo, sizeof(zone));
 
 			if (TrueZone() == 1)
 			{
@@ -83,7 +83,7 @@ void    OutGetNewEngTariffs(void)
 	if (fPublicTariffsCurr == false)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
-			Common(PGetZoneEngMonthMode(bInBuff5, bInBuff6), sizeof(zones));
+			Common(PGetZoneEngMonthMode(bInBuff5, bInBuff6), sizeof(zone));
 		else
 			Result(bRES_BADDATA);
 	}
@@ -93,14 +93,14 @@ void    OutGetNewEngTariffs(void)
 
 void    OutSetNewEngTariffs(void)
 {
-zones  zo;
+zone  zo;
 
 	if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
 		{
 			InitPop(7);
-			Pop(&zo, sizeof(zones));
+			Pop(&zo, sizeof(zone));
 
 			if (TrueZone() == 1)
 			{
@@ -121,7 +121,7 @@ void    OutGetNewPubTariffs(void)
 	if (fPublicTariffsCurr == true)
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
-			Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zones));
+			Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zone));
 		else
 			Result(bRES_BADDATA);
 	}
@@ -131,14 +131,14 @@ void    OutGetNewPubTariffs(void)
 
 void    OutSetNewPubTariffs(void)
 {
-zones  zo;
+zone  zo;
 
 	if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
 	{
 		if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
 		{
 			InitPop(7);
-			Pop(&zo, sizeof(zones));
+			Pop(&zo, sizeof(zone));
 
 			if (TrueZone() == 1)
 			{
