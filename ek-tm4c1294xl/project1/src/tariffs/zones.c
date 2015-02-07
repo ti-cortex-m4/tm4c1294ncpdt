@@ -17,6 +17,30 @@ static char const       szNoZones[]   = " зоны не заданы ";
 
 br3ak const            brZero = { 0, 0, 0 };
 
+zone const             zoDefaultPow = {
+		bSize: 6,
+		mpbrBreaks: {
+		 	{6,  0,  0},
+		 	{8,  0,  1},
+		 	{11, 0,  2},
+		  {17, 0,  1},
+		  {20, 0,  3},
+		  {23, 0,  1}
+		}
+};
+
+zone const             zoDefaultEng = {
+		bSize: 5,
+		mpbrBreaks: {
+			{6,  0,  0},
+			{8,  0,  1},
+			{11, 0,  2},
+			{23, 0,  1},
+			{24, 0,  0},
+			{0,  0,  0}
+		}
+};
+
 
 
 // читает количество изломов в тарифном графике zoAlt
@@ -170,64 +194,3 @@ bool    TrueZone(void)
 }
 
 #endif
-
-
-
-zone   *PGetDefaultZonePow(void) {
-static uchar const  mpbZone[3*bBREAKS] = {
- 	 6,  0,  0,
-   8,  0,  1,
-  11,  0,  2,
-  17,  0,  1,
-  20,  0,  3,
-  23,  0,  1
-};
-
-static zone  zo;
-br3ak  br;
-uchar  i, j;
-
-  i = 0;
-  for (j=0; j<bBREAKS; j++)
-  {    
-  	br.bHour    = mpbZone[i++];
-  	br.bMinute  = mpbZone[i++];
-  	br.ibTariff = mpbZone[i++];
-
-  	zo.mpbrBreaks[j] = br;
-  }
-
-  zo.bSize = 6;
-
-  return &zo;
-}
-
-
-zone   *PGetDefaultZoneEng(void) {
-static uchar const  mpbZone[3*bBREAKS] = {
-   6,  0,  0,
-   8,  0,  1,
-  11,  0,  2,
-  23,  0,  1,
-  24,  0,  0,
-   0,  0,  0
-};
-
-static zone  zo;
-br3ak  br;
-uchar  i, j;
-
-  i = 0;
-  for (j=0; j<bBREAKS; j++)
-  {    
-  	br.bHour    = mpbZone[i++];
-  	br.bMinute  = mpbZone[i++];
-  	br.ibTariff = mpbZone[i++];
-
-  	zo.mpbrBreaks[j] = br;
-  }
-
-  zo.bSize = 5;
-
-  return &zo;
-}

@@ -152,23 +152,15 @@ uchar  ibMonth;
 
 void    DefaultTariffs(void)
 {
-zone  *pzo;
-
   if (fPublicTariffsCurr == true)
   {
-    pzo = PGetDefaultZonePow();
-    SetPeriodTariffsEng(0,11,pzo,YEAR);
-
-    pzo = PGetDefaultZonePow();
-    SetPeriodTariffsPow(0,11,pzo,YEAR);
+    SetPeriodTariffsEng(0,11,(zone *)&zoDefaultPow,YEAR);
+    SetPeriodTariffsPow(0,11,(zone *)&zoDefaultPow,YEAR);
   }
   else
   {
-    pzo = PGetDefaultZoneEng();
-    SetPeriodTariffsEng(0,11,pzo,YEAR);
-
-    pzo = PGetDefaultZonePow();
-    SetPeriodTariffsPow(0,11,pzo,YEAR);
+    SetPeriodTariffsEng(0,11,(zone *)&zoDefaultEng,YEAR);
+    SetPeriodTariffsPow(0,11,(zone *)&zoDefaultPow,YEAR);
   }
 }
 
