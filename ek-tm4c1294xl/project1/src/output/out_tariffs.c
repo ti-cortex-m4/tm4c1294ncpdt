@@ -40,6 +40,121 @@ void    OutSetPublicTariffs(void)
 
 
 
+void    OutGetOldPowTariffs(void)
+{
+	if ((fPublicTariffsCurr == false) || (SuperUser() == 1))
+	{
+		if (bInBuff5 < 12)
+			Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zone));
+		else
+			Result(bRES_BADDATA);
+	}
+	else Result(bRES_BADMODE);
+}
+
+
+void    OutSetOldPowTariffs(void)
+{
+zone  zo;
+
+	if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
+	{
+		if (bInBuff5 < 12)
+		{
+			InitPop(7);
+			Pop(&zo, sizeof(zone));
+
+			if (TrueZone() == 1)
+			{
+				SetPeriodTariffsPow(bInBuff5, bInBuff5, &zo, YEAR);
+				LongResult(bRES_OK);
+			}
+			else Result(bRES_BADDATA);
+		}
+		else Result(bRES_BADADDRESS);
+	}
+	else Result(bRES_NEEDREPROGRAM);
+}
+
+
+
+void    OutGetOldEngTariffs(void)
+{
+	if ((fPublicTariffsCurr == false) || (SuperUser() == 1))
+	{
+		if (bInBuff5 < 12)
+			Common(PGetZoneEngMonthMode(bInBuff5, 0), sizeof(zone));
+		else
+			Result(bRES_BADDATA);
+	}
+	else Result(bRES_BADMODE);
+}
+
+
+void    OutSetOldEngTariffs(void)
+{
+zone  zo;
+
+	if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
+	{
+		if (bInBuff5 < 12)
+		{
+			InitPop(7);
+			Pop(&zo, sizeof(zone));
+
+			if (TrueZone() == 1)
+			{
+				SetPeriodTariffsEng(bInBuff5, bInBuff5, &zo, YEAR);
+				LongResult(bRES_OK);
+			}
+			else Result(bRES_BADDATA);
+		}
+		else Result(bRES_BADADDRESS);
+	}
+	else Result(bRES_NEEDREPROGRAM);
+}
+
+
+
+void    OutGetOldPubTariffs(void)
+{
+	if ((fPublicTariffsCurr == true) || (SuperUser() == 1))
+	{
+		if (bInBuff5 < 12)
+			Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zone));
+		else
+			Result(bRES_BADDATA);
+	}
+	else Result(bRES_BADMODE);
+}
+
+
+void    OutSetOldPubTariffs(void)
+{
+zone  zo;
+
+	if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
+	{
+		if (bInBuff5 < 12)
+		{
+			InitPop(7);
+			Pop(&zo, sizeof(zone));
+
+			if (TrueZone() == 1)
+			{
+				SetPeriodTariffsPow(bInBuff5, bInBuff5, &zo, YEAR);
+				SetPeriodTariffsEng(bInBuff5, bInBuff5, &zo, YEAR);
+				LongResult(bRES_OK);
+			}
+			else Result(bRES_BADDATA);
+		}
+		else Result(bRES_BADADDRESS);
+	}
+	else Result(bRES_NEEDREPROGRAM);
+}
+
+
+
 void    OutGetNewPowTariffs(void)
 {
 	if (fPublicTariffsCurr == false)
