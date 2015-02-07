@@ -9,21 +9,22 @@ KEY_PUBLIC_TARIFFS.C
 #include        "../../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../tariffs/tariffs.h"
+#include        "../../flash/files.h"
 
 
 
 //                                         0123456789ABCDEF
 static char const       szTariffs[]     = "Тарифы ?        ",
-                        szCommon[]      = " совмещенные    ",
-                        szCustom[]      = " раздельные     ";
+                        szPublic[]      = " совмещенные    ",
+                        szPrivate[]     = " раздельные     ";
 
 
 void    ShowPublicTariffs(void)
 {
   if (fPublicTariffsCurr == false) 
-    ShowLo(szCustom);
+    ShowLo(szPrivate);
   else 
-    ShowLo(szCommon);
+    ShowLo(szPublic);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';
@@ -53,6 +54,7 @@ void    key_SetPublicTariffs(void)
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
         fPublicTariffsCurr = ~fPublicTariffsCurr;
+        SaveFile(&flPublicTariffs);
         ShowPublicTariffs();
 
         DefaultTariffs();

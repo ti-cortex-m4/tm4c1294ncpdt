@@ -45,7 +45,7 @@ uchar                   mpchPowMonth[12],
                         mpchEngMonth[12];
 
 // правило обработки тарифов в выходные дни (старый вариант)
-uchar                   bOldTariffsMode;
+uchar                   bTariffsMode;
 
 
 

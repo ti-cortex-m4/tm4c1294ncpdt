@@ -62,11 +62,11 @@ void    ReplaceMode(uchar  ibMonth, uchar  ibMode, domain  doT, uchar  ibTariffO
 
 
 // поддержка старого варианта обратотки тарифов в нерабочие дни
-void    MakeOldTariffsModeMonth(uchar  ibMonth, domain  doT)
+void    MakeTariffsModeMonth(uchar  ibMonth, domain  doT)
 {
 uchar  ibMode;
 
-  switch (bOldTariffsMode)
+  switch (bTariffsMode)
   {     
     case 0:         
     	ibMode = 1;                          // для суббот
@@ -144,14 +144,14 @@ uchar  ibMode;
 
 
 // изменение старого варианта обратотки тарифов в нерабочие дни
-void    MakeOldTariffsMode(void)
+void    MakeTariffsMode(void)
 {
 uchar  ibMonth;
 
   for (ibMonth=0; ibMonth<12; ibMonth++)
   {
-  	MakeOldTariffsModeMonth(ibMonth, DOM_ENERGY);
-  	MakeOldTariffsModeMonth(ibMonth, DOM_POWER);
+  	MakeTariffsModeMonth(ibMonth, DOM_ENERGY);
+  	MakeTariffsModeMonth(ibMonth, DOM_POWER);
   }
 }
 
@@ -166,7 +166,7 @@ uchar  ibMonth;
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
-  	MakeOldTariffsModeMonth(ibMonth, DOM_ENERGY);
+  	MakeTariffsModeMonth(ibMonth, DOM_ENERGY);
     mpchEngMonth[ibMonth] = chOldMode;
   }
 }
@@ -181,7 +181,7 @@ uchar  ibMonth;
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
-  	MakeOldTariffsModeMonth(ibMonth, DOM_POWER);
+  	MakeTariffsModeMonth(ibMonth, DOM_POWER);
     mpchPowMonth[ibMonth] = chOldMode;
   }
 }

@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-KEY_OLD_TARIFFS_MODE.С
+KEY_TARIFFS_MODE.С
 
- Задание и просмотр правила обработки тарифов в нерабочие дни (старый вариант)
+ Правила обработки тарифов в нерабочие дни (старый вариант)
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
@@ -14,6 +14,7 @@ KEY_OLD_TARIFFS_MODE.С
 #include        "../../tariffs/tariffs.h"
 #include        "../../tariffs/oldtariffs.h"
 #include        "../../tariffs/relaxs.h"
+#include        "../../flash/files.h"
 
 
 
@@ -22,11 +23,11 @@ static char const       szWorkMode[]    = "  Режим работы  ",
                         szHolidays[]    = " по праздникам  ",   
                         szMaskOldMode[] = "      ___       ";
 
-static char const      *pszOldMode[]    = { szWorkMode, szHolidays, "" };
+static char const      *pszTariffsMode[]= { szWorkMode, szHolidays, "" };
 
 
 
-void    key_SetOldTariffsMode(void)
+void    key_SetTariffsMode(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -34,21 +35,23 @@ void    key_SetOldTariffsMode(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      LoadSlide(pszOldMode);
+      LoadSlide(pszTariffsMode);
       Clear();
-      ShowChar(bOldTariffsMode);
+      ShowChar(bTariffsMode);
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       enKeyboard = KBD_POSTENTER;
 
-      if ((ibX = GetChar(6,8)) <= bOLDTARIFFSMODES)
+      if ((ibX = GetChar(6,8)) <= bTARIFFSMODES)
       {
-      	bOldTariffsMode = ibX;
-        ShowChar(bOldTariffsMode);
-        MakeOldTariffsMode();
+      	bTariffsMode = ibX;
+      	SaveFile(&flTariffsMode);
+        ShowChar(bTariffsMode);
 
-        if (bOldTariffsMode == 0)
+        MakeTariffsMode();
+
+        if (bTariffsMode == 0)
           ResetRelaxs();
         else
           DefaultRelaxs();

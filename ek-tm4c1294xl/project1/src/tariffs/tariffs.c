@@ -23,7 +23,7 @@ TARIFFS.C
 
 
 file const              flPublicTariffs = {wFLA_PUBLIC_TARIFFS, &fPublicTariffsCurr, sizeof(boolean)};
-file const              flOldTariffsMode = {wFLA_OLD_TARIFFS_MODE, &bOldTariffsMode, sizeof(uchar)};
+file const              flTariffsMode = {wFLA_OLD_TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
 
 
 
@@ -54,7 +54,7 @@ void    InitTariffs(void)
 uchar  ibMonth, ibMode;
 
   LoadFile(&flPublicTariffs);
-  LoadFile(&flOldTariffsMode);
+  LoadFile(&flTariffsMode);
 
   for (ibMonth=0; ibMonth<12-1; ibMonth++)
   {
@@ -82,8 +82,8 @@ void    ResetTariffs(void)
   fPublicTariffsCurr = false;
   SaveFile(&flPublicTariffs);
 
-  bOldTariffsMode = 0;
-  SaveFile(&flOldTariffsMode);
+  bTariffsMode = 0;
+  SaveFile(&flTariffsMode);
 
   DefaultTariffs();
 }
