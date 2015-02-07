@@ -34,5 +34,5 @@ void    ShowZoneKeyBreak(uchar  ibBreak);
 
 bool    TrueZone(void);
 
-void    SetKeyZonePow(void);
-void    SetKeyZoneEng(void);
+zones   *PGetDefaultZonePow(void);
+zones   *PGetDefaultZoneEng(void);

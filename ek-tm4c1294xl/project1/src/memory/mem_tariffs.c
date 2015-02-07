@@ -41,8 +41,8 @@ boolean                 fPublicTariffsCurr,
 
 
 // массив символов задани€ тарифных зон по блока и мес€цам (старый вариант)
-uchar                   mpchPowMonth[12],
-                        mpchEngMonth[12];
+uchar                   mpcPowMonth[12],
+                        mpcEngMonth[12];
 
 // правило обработки тарифов в выходные дни (старый вариант)
 uchar                   bTariffsMode;

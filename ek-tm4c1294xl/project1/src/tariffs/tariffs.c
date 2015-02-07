@@ -23,14 +23,16 @@ TARIFFS.C
 
 
 file const              flPublicTariffs = {wFLA_PUBLIC_TARIFFS, &fPublicTariffsCurr, sizeof(boolean)};
-file const              flTariffsMode = {wFLA_OLD_TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
+file const              flTariffsMode = {wFLA_TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
+
+file const              flPowMonth = {wFLA_MONTHS_POW, &mpcPowMonth, sizeof(mpcPowMonth)};
+file const              flEngMonth = {wFLA_MONTHS_ENG, &mpcEngMonth, sizeof(mpcEngMonth)};
 
 
 
 boolean SaveZonesPow(uchar  ibMonth, uchar  ibMode) {
 	return SaveBuff(wFLA_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zones));
 }
-
 
 boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
 	return LoadBuff(wFLA_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zones));
@@ -41,7 +43,6 @@ boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
 boolean SaveZonesEng(uchar  ibMonth, uchar  ibMode) {
 	return SaveBuff(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zones));
 }
-
 
 boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode) {
 	return LoadBuff(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zones));
@@ -71,8 +72,8 @@ uchar  ibMonth, ibMode;
   }
   else
   {
-  	memset(&mpchPowMonth, 0, sizeof(mpchPowMonth));
-    memset(&mpchEngMonth, 0, sizeof(mpchEngMonth));
+  	memset(&mpibPowCurrTariff, 0, sizeof(mpibPowCurrTariff));
+    memset(&mpibEngCurrTariff, 0, sizeof(mpibEngCurrTariff));
   }
 }
 
@@ -150,26 +151,27 @@ uchar  ibMonth;
 void    DefaultTariffs(void)
 {
 uchar  chOldMode;
+zones  *pzo;
 
   if (fPublicTariffsCurr == true)
   {
     chOldMode = '_';
 
-    SetKeyZonePow();
-    SetCharEngMonths(0,11,&zoKey,chOldMode);
+    pzo = PGetDefaultZonePow();
+    SetCharEngMonths(0,11,pzo,chOldMode);
 
-    SetKeyZonePow();
-    SetCharPowMonths(0,11,&zoKey,chOldMode);
+    pzo = PGetDefaultZonePow();
+    SetCharPowMonths(0,11,pzo,chOldMode);
   }
   else
   {
     chOldMode = '_';
 
-    SetKeyZoneEng();
-    SetCharEngMonths(0,11,&zoKey,chOldMode);
+    pzo = PGetDefaultZoneEng();
+    SetCharEngMonths(0,11,pzo,chOldMode);
 
-    SetKeyZonePow();
-    SetCharPowMonths(0,11,&zoKey,chOldMode);
+    pzo = PGetDefaultZonePow();
+    SetCharPowMonths(0,11,pzo,chOldMode);
   }
 }
 

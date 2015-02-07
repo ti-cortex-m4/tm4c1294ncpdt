@@ -45,13 +45,13 @@ uchar   i;
     case bSET_PROGRAM10:  
     case bSET_PROGRAM17:
       for (i=0; i<12; i++)
-        szLo[i+2] = mpchPowMonth[i];
+        szLo[i+2] = mpcPowMonth[i];
       break; 
 
     case bSET_PROGRAM20:  
     case bSET_PROGRAM27:  
       for (i=0; i<12; i++)
-        szLo[i+2] = mpchEngMonth[i];
+        szLo[i+2] = mpcEngMonth[i];
       break;
   }
 }

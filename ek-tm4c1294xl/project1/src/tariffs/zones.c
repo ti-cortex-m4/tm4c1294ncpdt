@@ -173,49 +173,61 @@ bool    TrueZone(void)
 
 
 
-void    SetKeyZonePow(void)
-{
-static uchar const  mpbZone[3*bBREAKS] =
-{  6,  0,  0,
+zones   *PGetDefaultZonePow(void) {
+static uchar const  mpbZone[3*bBREAKS] = {
+ 	 6,  0,  0,
    8,  0,  1,
   11,  0,  2,
   17,  0,  1,
   20,  0,  3,
-  23,  0,  1 };
+  23,  0,  1
+};
 
-  ibY = 0;
-  for (ibX=0; ibX<bBREAKS; ibX++)
+static zones  zo;
+breaks  br;
+uchar  i, j;
+
+  i = 0;
+  for (j=0; j<bBREAKS; j++)
   {    
-    brKey.bHour    = mpbZone[ibY++];
-    brKey.bMinute  = mpbZone[ibY++];
-    brKey.ibTariff = mpbZone[ibY++];
+  	br.bHour    = mpbZone[i++];
+  	br.bMinute  = mpbZone[i++];
+  	br.ibTariff = mpbZone[i++];
 
-    SetZoneKeyBreak(ibX);
+  	zo.mpbrBreaks[j] = br;
   }
 
-  SetZoneKeySize(6);
+  zo.bSize = 6;
+
+  return &zo;
 }
 
 
-void    SetKeyZoneEng(void)
-{
-static uchar const  mpbZone[3*bBREAKS] =
-{  6,  0,  0,
+zones   *PGetDefaultZoneEng(void) {
+static uchar const  mpbZone[3*bBREAKS] = {
+   6,  0,  0,
    8,  0,  1,
   11,  0,  2,
   23,  0,  1,
   24,  0,  0,
-   0,  0,  0 };
+   0,  0,  0
+};
 
-  ibY = 0;
-  for (ibX=0; ibX<bBREAKS; ibX++)
+static zones  zo;
+breaks  br;
+uchar  i, j;
+
+  i = 0;
+  for (j=0; j<bBREAKS; j++)
   {    
-    brKey.bHour    = mpbZone[ibY++];
-    brKey.bMinute  = mpbZone[ibY++];
-    brKey.ibTariff = mpbZone[ibY++];
+  	br.bHour    = mpbZone[i++];
+  	br.bMinute  = mpbZone[i++];
+  	br.ibTariff = mpbZone[i++];
 
-    SetZoneKeyBreak(ibX);
+  	zo.mpbrBreaks[j] = br;
   }
 
-  SetZoneKeySize(5);
+  zo.bSize = 5;
+
+  return &zo;
 }

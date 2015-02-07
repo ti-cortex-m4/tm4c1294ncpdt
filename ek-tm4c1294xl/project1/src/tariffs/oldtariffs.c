@@ -167,7 +167,7 @@ uchar  ibMonth;
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
   	MakeTariffsModeMonth(ibMonth, DOM_ENERGY);
-    mpchEngMonth[ibMonth] = chOldMode;
+    mpcEngMonth[ibMonth] = chOldMode;
   }
 }
 
@@ -182,6 +182,6 @@ uchar  ibMonth;
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
   	MakeTariffsModeMonth(ibMonth, DOM_POWER);
-    mpchPowMonth[ibMonth] = chOldMode;
+    mpcPowMonth[ibMonth] = chOldMode;
   }
 }
