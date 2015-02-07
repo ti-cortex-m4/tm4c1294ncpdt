@@ -40,7 +40,7 @@ void    OutSetPublic(void)
 
 void    OutGetOldMode(void)
 {
-	LongResult(bOldTariffsMode);
+	LongResult(bTariffsMode);
 }
 
 
@@ -48,10 +48,10 @@ void    OutSetOldMode(void)
 {
 	if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
 	{
-		if (bInBuff5 <= bOLDTARIFFSMODES)
+		if (bInBuff5 <= bTARIFFSMODES)
 		{
-			bOldTariffsMode = bInBuff5;
-			MakeOldTariffsMode();
+			bTariffsMode = bInBuff5;
+			MakeTariffsMode();
 			Result(bRES_OK);
 		}
 		else Result(bRES_BADDATA);

@@ -4,6 +4,11 @@ TARIFFS.H
  Новый вариант задания тарифов
 ------------------------------------------------------------------------------*/
 
+extern  file const              flPublicTariffs;
+extern  file const              flTariffsMode;
+
+
+
 void    InitTariffs(void);
 void    ResetTariffs(void);
 
