@@ -9,7 +9,7 @@ MEM_TARIFFS.S
 
 
 // массив праздников
-relaxs                  mpreRelaxs;
+relax                  mpreRelaxs;
 
 // внутренн€€ переменна€
 time                    tiRelax;
@@ -23,7 +23,7 @@ uchar                   ibRelaxsTariff;
 
 
 // массив суточных тарифных графиков по мес€цам и режимам работы (дл€ мощности и энергии)
-zones                   mpzoPowMonthMode[12][bMODES],
+zone                   mpzoPowMonthMode[12][bMODES],
                         mpzoEngMonthMode[12][bMODES];
 
 // массив индексов тарифов дл€ каждого получаса текущих суток (дл€ мощности и энергии)
@@ -48,7 +48,7 @@ uchar                   bTariffsMode;
 
 
 // суточные тарифные графики
-zones                   zoAlt,zoKey;
+zone                   zoAlt,zoKey;
 
 // изломы суточных тарифных графиков
 breaks                  brAlt,brKey;
@@ -59,7 +59,7 @@ breaks                  brAlt,brKey;
 boolean                 boGapsFlag;
 
 // массив изломов тарифных периодов
-gaps                    mpgaGaps;
+gap                    mpgaGaps;
 
 // переменна€
 time                    tiGap;

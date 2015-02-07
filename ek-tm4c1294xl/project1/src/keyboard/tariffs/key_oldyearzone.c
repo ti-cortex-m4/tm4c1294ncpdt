@@ -116,7 +116,7 @@ void    key_SetOldYearZone(void)
         ibYmin = 0; 
         ibYmax = 11;
 
-        pe = PER_YEAR;
+        pe = YEAR;
       }
       else if ((ibXmax == 4) && (ibX <= ibXmax))
       {
@@ -130,7 +130,7 @@ void    key_SetOldYearZone(void)
           case 4:  ibYmin = 9; ibYmax = 11;  break;
         }
 
-        pe = PER_QUARTER;
+        pe = QUARTER;
       }
       else if ((ibXmax == 12) && (ibX <= ibXmax))
       {
@@ -139,7 +139,7 @@ void    key_SetOldYearZone(void)
         ibYmin = ibX-1;
         ibYmax = ibX-1;
 
-        pe = PER_MONTH;
+        pe = MONTH;
       }
       else Beep();
     }

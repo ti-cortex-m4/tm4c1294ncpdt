@@ -4,7 +4,7 @@ MEM_TARIFFS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  relaxs                  mpreRelaxs;
+extern  relax                  mpreRelaxs;
 
 extern  time                    tiRelax;
 
@@ -14,7 +14,7 @@ extern  uchar                   ibRelaxsTariff;
 
 
 
-extern  zones                   mpzoPowMonthMode[12][bMODES],
+extern  zone                   mpzoPowMonthMode[12][bMODES],
                                 mpzoEngMonthMode[12][bMODES];
 
 extern  uchar                   mpibPowCurrTariff[48],
@@ -33,7 +33,7 @@ extern  uchar                   bTariffsMode;
 
 
 
-extern  zones                   zoAlt,zoKey;
+extern  zone                   zoAlt,zoKey;
 
 extern  breaks                  brAlt,brKey;
 
@@ -41,7 +41,7 @@ extern  breaks                  brAlt,brKey;
 
 extern  boolean                 boGapsFlag;
 
-extern  gaps                    mpgaGaps;
+extern  gap                    mpgaGaps;
 
 extern  time                    tiGap;
 

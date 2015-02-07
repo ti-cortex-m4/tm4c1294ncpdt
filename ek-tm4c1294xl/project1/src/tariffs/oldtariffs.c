@@ -36,7 +36,7 @@ uchar  i;
 // записывает в режим ibAltMode изменЄнный суточный тарифный график из режима 0 (будни)
 void    ReplaceMode(uchar  ibMonth, uchar  ibMode, domain  doT, uchar  ibTariffOld, uchar  ibTariffNew)
 {
-  if (doT == DOM_POWER)
+  if (doT == POWER)
   {
     // читаем суточный тарифный график из режима 0 (будни)
     zoAlt = *PGetZonePowMonthMode(ibMonth, 0);
@@ -151,15 +151,15 @@ uchar  ibMonth;
 
   for (ibMonth=0; ibMonth<12; ibMonth++)
   {
-  	MakeTariffsModeMonth(ibMonth, DOM_ENERGY);
-  	MakeTariffsModeMonth(ibMonth, DOM_POWER);
+  	MakeTariffsModeMonth(ibMonth, ENERGY);
+  	MakeTariffsModeMonth(ibMonth, POWER);
   }
 }
 
 
 
 // запись суточного тарифного графика на несколько мес€цев (дл€ энергии)
-void    SetPeriodTariffsEng(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzo, period  pe)
+void    SetPeriodTariffsEng(uchar  ibMonthBeg, uchar  ibMonthEnd, zone  *pzo, period  pe)
 {
 uchar  ibMonth;
 
@@ -167,7 +167,7 @@ uchar  ibMonth;
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
-  	MakeTariffsModeMonth(ibMonth, DOM_ENERGY);
+  	MakeTariffsModeMonth(ibMonth, ENERGY);
   	SaveZonesEng(ibMonth, 1);
   	SaveZonesEng(ibMonth, 2);
 
@@ -179,7 +179,7 @@ uchar  ibMonth;
 
 
 // запись суточного тарифного графика на несколько мес€цев (дл€ мощности)
-void    SetPeriodTariffsPow(uchar  ibMonthBeg, uchar  ibMonthEnd, zones  *pzo, period  pe)
+void    SetPeriodTariffsPow(uchar  ibMonthBeg, uchar  ibMonthEnd, zone  *pzo, period  pe)
 {
 uchar  ibMonth;
 
@@ -187,7 +187,7 @@ uchar  ibMonth;
 
   for (ibMonth=ibMonthBeg; ibMonth<=ibMonthEnd; ibMonth++)
   {
-  	MakeTariffsModeMonth(ibMonth, DOM_POWER);
+  	MakeTariffsModeMonth(ibMonth, POWER);
   	SaveZonesPow(ibMonth, 1);
   	SaveZonesPow(ibMonth, 2);
 

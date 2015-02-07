@@ -119,7 +119,7 @@ static uchar const  mpbZone[3*bBREAKS] =
 
   SetZoneAltSize(bBREAKS);
 
-  memcpy(&zoKey, &zoAlt, sizeof(zones));
+  memcpy(&zoKey, &zoAlt, sizeof(zone));
 }
 
 
@@ -173,7 +173,7 @@ bool    TrueZone(void)
 
 
 
-zones   *PGetDefaultZonePow(void) {
+zone   *PGetDefaultZonePow(void) {
 static uchar const  mpbZone[3*bBREAKS] = {
  	 6,  0,  0,
    8,  0,  1,
@@ -183,7 +183,7 @@ static uchar const  mpbZone[3*bBREAKS] = {
   23,  0,  1
 };
 
-static zones  zo;
+static zone  zo;
 breaks  br;
 uchar  i, j;
 
@@ -203,7 +203,7 @@ uchar  i, j;
 }
 
 
-zones   *PGetDefaultZoneEng(void) {
+zone   *PGetDefaultZoneEng(void) {
 static uchar const  mpbZone[3*bBREAKS] = {
    6,  0,  0,
    8,  0,  1,
@@ -213,7 +213,7 @@ static uchar const  mpbZone[3*bBREAKS] = {
    0,  0,  0
 };
 
-static zones  zo;
+static zone  zo;
 breaks  br;
 uchar  i, j;
 
