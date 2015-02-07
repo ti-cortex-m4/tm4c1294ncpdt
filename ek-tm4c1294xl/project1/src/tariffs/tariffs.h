@@ -19,14 +19,14 @@ boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode);
 void    InitTariffs(void);
 void    ResetTariffs(void);
 
-void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT);
+void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zones *pzo);
 zones   *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode);
 
-void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzoT);
+void    SetZonePowMonthMode(uchar ibMonth, uchar ibMode, zones *pzo);
 zones   *PGetZonePowMonthMode(uchar ibMonth, uchar ibMode);
 
-void    SetZonesEngMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzoT);
-void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzoT);
+void    SetZonesEngMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzo);
+void    SetZonesPowMonthsMode(uchar  ibMonthBeg, uchar  ibMonthEnd, uchar  ibMode, zones *pzo);
 
 void    MakeTariff(uchar  mpTariff[48]);
 
