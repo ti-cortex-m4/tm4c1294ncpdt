@@ -12,8 +12,7 @@ MEMORY_PROGRAM.C
 boolean                 boSetTime,
                         boSetDate,
                         boSetGroups,
-                        boSetPassword,
-                        boSetRelaxs;
+                        boSetPassword;
 
 // TODO: SaveFile
 boolean                 boReset;

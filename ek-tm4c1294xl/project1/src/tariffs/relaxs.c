@@ -11,7 +11,9 @@ RELAXS.C
 #include        "../display/display.h"
 #include        "../timedate.h"
 #include        "../rtc.h"
+#include        "../flash/files.h"
 #include        "tariffs.h"
+#include        "relaxs.h"
 
 
 
@@ -22,18 +24,77 @@ static char const       szNoRelaxs[]      = " нет праздников ",
                         szRelaxError[]    = " ошибка !";
 
 
+file const              flRelaxsFlag = {wFLA_RELAXS_FLAG, &boRelaxsFlag, sizeof(boolean)};
+file const              flRelaxsTariff = {wFLA_RELAXS_TARIFF, &ibRelaxsTariff, sizeof(uchar)};
+file const              flRelaxs = {wFLA_RELAXS_TARIFF, &reRelaxs, sizeof(relax)};
+
+
+
+void    InitRelaxs(void)
+{
+	LoadFile(&flRelaxsFlag);
+	LoadFile(&flRelaxsTariff);
+	LoadFile(&flRelaxs);
+}
+
+
+void    ResetRelaxs(void)
+{
+  boRelaxsFlag = false;
+  SaveFile(&flRelaxsFlag);
+
+  ibRelaxsTariff = 1;
+  SaveFile(&flRelaxsTariff);
+
+  memset(&reRelaxs, 0, sizeof(relax));
+	SaveFile(&flRelaxs);
+}
+
+
+void    DefaultRelaxs(void)
+{
+static uchar const  mpRelaxs[8*3] = {
+	1,  1,  2,
+  2,  1,  2,
+  7,  1,  2,
+  8,  3,  2,
+  1,  5,  2,
+  9,  5,  2,
+  7, 11,  2,
+ 25, 12,  2
+};
+
+uchar  i, j;
+
+  SetRelaxSize(0);
+
+  j = 0;
+  for (i=0; i<sizeof(mpRelaxs)/3; i++)
+  {
+    tiRelax.bDay    = mpRelaxs[j++];
+    tiRelax.bMonth  = mpRelaxs[j++];
+    tiRelax.bSecond = mpRelaxs[j++];  // тип праздника: будни, суббота, воскресенье
+
+    SetRelaxDate(i);
+    SetRelaxSize(GetRelaxSize() + 1);
+  }
+
+	SaveFile(&flRelaxs);
+}
+
+
 
 // читает количество дней в списке праздников
 uchar   GetRelaxSize(void)
 {
-  return( mpreRelaxs.bSize );
+  return( reRelaxs.bSize );
 }
 
 
 // записывает количество дней в списке праздников
 void    SetRelaxSize(uchar  bSize)
 {
-  mpreRelaxs.bSize = bSize;
+  reRelaxs.bSize = bSize;
 }
 
 
@@ -41,57 +102,14 @@ void    SetRelaxSize(uchar  bSize)
 // читает день из списка праздников
 void    GetRelaxDate(uchar  ibRelax)
 {
-  tiRelax = mpreRelaxs.mptiDate[ibRelax];
+  tiRelax = reRelaxs.mptiDate[ibRelax];
 }
 
 
 // записывает день в списов праздников
 void    SetRelaxDate(uchar  ibRelax)
 {
-  mpreRelaxs.mptiDate[ibRelax] = tiRelax;
-}
-
-
-
-// установка списка праздников по умолчанию
-void    DefaultRelaxs(void)
-{
-static uchar const  mpRelaxs[8*3] =
-{ 1,  1,  2,
-  2,  1,  2,
-  7,  1,  2,
-  8,  3,  2,
-  1,  5,  2,
-  9,  5,  2,
-  7, 11,  2,
- 25, 12,  2 };
-
-  SetRelaxSize(0);
-
-  ibZ = 0;
-  for (ibX=0; ibX<sizeof(mpRelaxs)/3; ibX++)
-  {
-    tiRelax.bDay    = mpRelaxs[ibZ++];
-    tiRelax.bMonth  = mpRelaxs[ibZ++];
-    tiRelax.bSecond = mpRelaxs[ibZ++];  // тип праздника: будни, суббота, воскресенье
-
-    SetRelaxDate(ibX);
-    SetRelaxSize(GetRelaxSize() + 1);
-  }
-
-  boSetRelaxs = true; //false;
-}
-
-
-
-// сброс списка праздников
-void    ResetRelaxs(void)
-{
-  SetRelaxSize(0);
-  boSetRelaxs = true; //false;
-
-  boRelaxsFlag = false;
-  ibRelaxsTariff = 1;
+  reRelaxs.mptiDate[ibRelax] = tiRelax;
 }
 
 

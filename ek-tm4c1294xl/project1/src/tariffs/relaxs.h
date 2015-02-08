@@ -4,18 +4,21 @@ RELAXS.H
  Подпрограммы управления праздниками
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
+extern  file const              flRelaxsFlag;
+extern  file const              flRelaxsTariff;
+extern  file const              flRelaxs;
 
 
+
+void    InitRelaxs(void);
+void    ResetRelaxs(void);
+void    DefaultRelaxs(void);
 
 uchar   GetRelaxSize(void);
 void    SetRelaxSize(uchar  bSize);
 
 void    GetRelaxDate(uchar  ibRelax);
 void    SetRelaxDate(uchar  ibRelax);
-
-void    DefaultRelaxs(void);
-void    ResetRelaxs(void);
 
 uchar   GetModeAlt(void);
 
