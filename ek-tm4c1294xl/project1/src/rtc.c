@@ -208,8 +208,8 @@ bool    TrueCurrTimeDate(void)
   if ((tiGetRTC.bMonth == 0) ||
       (tiGetRTC.bMonth > 12 )) return(0);
 
-  if ((tiGetRTC.bYear < 2) ||
-      (tiGetRTC.bYear > 99)) return(0);
+  if ((tiGetRTC.bYear < bMINYEAR) ||
+      (tiGetRTC.bYear > bMAXYEAR)) return(0);
 
   return(1);
 }
