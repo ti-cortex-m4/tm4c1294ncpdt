@@ -26,7 +26,8 @@ void    OutGaps1(void)
 
 void    OutGaps2(void)
 {
-  if (enGlobal == GLB_PROGRAM) MakeGaps();
+  if (enGlobal == GLB_PROGRAM)
+  	MakeGaps();
 
   InitPushCRC();
   PushChar(boGapsFlag);

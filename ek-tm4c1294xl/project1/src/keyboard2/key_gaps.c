@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_GAPS.C
+KEY_GAPS.C
 
 
 ------------------------------------------------------------------------------*/
@@ -15,8 +15,34 @@ _GAPS.C
 
 
 //                                         0123456789ABCDEF
-static char const       szGaps[]        = "Тарифные периоды",
-                        szMaskGap[]     = "__ __           ";
+static char const       szGaps[]        = "Периоды         ",
+                        szMaskGap[]     = "__ __           ",
+                        szNoGaps[]      = "  нет периодов  ",
+                        szGapError[]    = " ошибка !";
+
+
+
+void    ShowGapName(uchar  ibMode)
+{
+  if (ibMode < 12)
+    sprintf(szLo+7, "период %u" , ibMode+1);
+  else
+    strcpy(szLo+7, szGapError);
+}
+
+
+void    ShowGap(uchar  ibGap)
+{
+  if (GetGapSize() > 0)
+  {
+    GetGapDate(ibGap);
+
+    sprintf(szLo,"%2u.%02u", tiGap.bDay, tiGap.bMonth);
+    ShowGapName(tiGap.bSecond);
+    sprintf(szHi+11,"%2u/%-2u", ibGap+1, GetGapSize());
+  }
+  else ShowLo(szNoGaps);
+}
 
 
 

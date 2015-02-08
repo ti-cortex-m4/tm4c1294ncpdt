@@ -23,6 +23,3 @@ uint    GetDayIndex_Gap(void);
 uchar   DaysInMonth_Gap(void);
 
 void    MakeGaps(void);
-
-void    ShowGapName(uchar  ibMode);
-void    ShowGap(uchar  ibGap);
