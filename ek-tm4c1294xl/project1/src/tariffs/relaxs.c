@@ -106,7 +106,7 @@ uchar   GetModeAlt(void)
 {
 uchar  i;
 
-  if (bTariffsMode == 0)                    // без учёта выходных и праздничных дней
+  if (bTariffsMode == 0)                // без учёта выходных и праздничных дней
     return(0);                          // будни
 
   for (i=0; i<GetRelaxSize(); i++)
@@ -118,7 +118,7 @@ uchar  i;
       return(tiRelax.bSecond);          // тип текущего дня определяется по списку праздников
   }
 
-  i = Weekday();                        // тип текущего дня определяется по календарю
+  i = GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay);
 
   if (i < 5)  return(0);                // будни
   else 

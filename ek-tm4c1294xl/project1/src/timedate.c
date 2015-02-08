@@ -7,7 +7,6 @@ TIMEDATE.H
 #include        "main.h"
 #include        "display/display.h"
 #include        "engine.h"
-#include        "rtc.h"
 
 
 
@@ -53,31 +52,45 @@ uint    GetDaysInYearY(uchar  bYear)
 }
 
 
-// день недели (0: понедельник, ..., 6: воскресенье)
-uchar   Weekday(void)
+// день недели: 0 - понедельник, ..., 6 - воскресенье (1 января 2000 года: 5 - суббота)
+uchar   GetWeekdayYMD(uchar  bYear, uchar  bMonth, uchar  bDay)
 {
 uchar   i;
-uint    wT;
+uint    j;
 
-  wT = 5 - 1 + tiAlt.bDay;          // 5: суббота - 1 января 2000 года
+  ASSERT((bYear >= bMINYEAR) && (bYear <= bMAXYEAR));
+  ASSERT((bMonth >= 1) && (bMonth <= 12));
+  ASSERT((bDay >= 1) && (bDay <= 31));
 
-  for (i=1; i<tiAlt.bMonth; i++)
-  {
-    if ((tiAlt.bYear % 4 == 0) && (i == 2))
-      wT += 29;
-    else
-      wT += mpbDaysInMonth[i - 1];
-  }
+  j = 5 + bDay - 1;
 
-  for (i=0; i<tiAlt.bYear; i++)
-  {
-    if (i % 4 == 0)
-      wT += 366;
-    else
-      wT += 365;
-  }
+  for (i=1; i<bMonth; i++)
+  	j += GetDaysInMonthYM(bYear, i);
 
-  return(wT % 7);
+  for (i=0; i<bYear; i++)
+  	j += GetDaysInYearY(i);
+
+  return j % 7;
+}
+
+
+// последнее воскресенье месяца
+time   *GetDecretDate(time  *pti, uchar  bMonth)
+{
+static time ti;
+
+  ASSERT((bMonth >= 1) && (bMonth <= 12));
+
+  ti = *pti;
+
+  ti.bSecond = 0;
+  ti.bMinute = 0;
+  ti.bHour   = 0;
+
+  for (ti.bDay=GetDaysInMonthYM(ti.bYear, ti.bMonth); ti.bDay>0; ti.bDay--)
+    if (GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) == 6) break;
+
+  return &ti;
 }
 
 
@@ -89,6 +102,7 @@ uint    j;
 
   ASSERT((bYear >= bMINYEAR) && (bYear <= bMAXYEAR));
 	ASSERT((bMonth >= 1) && (bMonth <= 12));
+	ASSERT((bDay >= 1) && (bDay <= 31));
 
   j = bDay - 1;
 
@@ -106,6 +120,7 @@ uchar   i;
 uint    j;
 
   ASSERT((bMonth >= 1) && (bMonth <= 12));
+	ASSERT((bDay >= 1) && (bDay <= 31));
 
   j = bDay - 1;
 
@@ -136,21 +151,6 @@ bool     TrueTimeDate(void)
     return false;
 
   return true;
-}
-
-
-// находит последнее воскресенье месяца текущего года
-void    DecretDate(void)
-{
-uchar   i;
-
-  tiAlt.bYear = (*PGetCurrTimeDate()).bYear;
-
-  for (i=GetDaysInMonthYM(tiAlt.bYear, tiAlt.bMonth); i>0; i--)
-  {
-    tiAlt.bDay = i;
-    if (Weekday() == 6) return;         // 6: воскресенье
-  }
 }
 
 
@@ -220,7 +220,7 @@ void    ShowDate(void)
                  tiAlt.bMonth,
                  tiAlt.bYear);
 
-  szLo[14] = szDigits[Weekday() + 1];
+  szLo[14] = szDigits[GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay) + 1];
 }
 
 
