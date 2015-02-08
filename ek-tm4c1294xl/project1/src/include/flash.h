@@ -49,7 +49,10 @@ FLASH.H
 #define wFLA_RELAXS_TARIFF      (uint)(wFLA_RELAXS_FLAG + 1)
 #define wFLA_RELAXS             (uint)(wFLA_RELAXS_TARIFF + 1)
 
-#define wFLA_TRANS_ENG          (uint)(wFLA_RELAXS + 1)
+#define wFLA_GAPS_FLAG          (uint)(wFLA_RELAXS + 1)
+#define wFLA_GAPS               (uint)(wFLA_GAPS_FLAG + 1)
+
+#define wFLA_TRANS_ENG          (uint)(wFLA_GAPS + 1)
 #define wFLA_TRANS_CNT          (uint)(wFLA_TRANS_ENG + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 #define wFLA_PULSE_HOU          (uint)(wFLA_TRANS_CNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 #define wFLA_PULSE_MNT          (uint)(wFLA_PULSE_HOU + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)

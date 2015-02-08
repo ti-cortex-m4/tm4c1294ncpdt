@@ -8,7 +8,7 @@ extern  boolean                 boRelaxsFlag;
 
 extern  uchar                   ibRelaxsTariff;
 
-extern  relax                   reRelaxs;
+extern  relaxs                  reRelaxs;
 
 extern  time                    tiRelax;
 
@@ -41,7 +41,7 @@ extern  br3ak                   brAlt, brKey;
 
 extern  boolean                 boGapsFlag;
 
-extern  gap                     mpgaGaps;
+extern  gaps                    gaGaps;
 
 extern  time                    tiGap;
 

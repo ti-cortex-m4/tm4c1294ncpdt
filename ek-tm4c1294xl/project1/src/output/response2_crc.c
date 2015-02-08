@@ -13,6 +13,7 @@ RESPONSE2_CRC.C
 #include        "../tariffs/gaps.h"
 #include        "../output/out_groups.h"
 #include        "../output/out_relaxs.h"
+#include        "../output/out_gaps.h"
 #include        "../output/out_version.h"
 
 

@@ -10,6 +10,8 @@ KEY_RESET.C
 #include        "../groups.h"
 #include        "../tariffs/zones.h"
 #include        "../tariffs/tariffs.h"
+#include        "../tariffs/relaxs.h"
+#include        "../tariffs/gaps.h"
 #include        "../engine.h"
 #include        "../factors.h"
 #include        "../settings.h"
@@ -93,8 +95,8 @@ void    key_SetReset(void)
           ResetFactors();
           ResetZones();
           ResetTariffs();
-//          ResetRelaxs();
-//          ResetGaps();
+          ResetRelaxs();
+          ResetGaps();
 //          ResetSpeeds();
 //          ResetSendAT();
 //          ResetPhones();

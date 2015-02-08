@@ -26,7 +26,7 @@ static char const       szNoRelaxs[]      = " нет праздников ",
 
 file const              flRelaxsFlag = {wFLA_RELAXS_FLAG, &boRelaxsFlag, sizeof(boolean)};
 file const              flRelaxsTariff = {wFLA_RELAXS_TARIFF, &ibRelaxsTariff, sizeof(uchar)};
-file const              flRelaxs = {wFLA_RELAXS_TARIFF, &reRelaxs, sizeof(relax)};
+file const              flRelaxs = {wFLA_RELAXS_TARIFF, &reRelaxs, sizeof(relaxs)};
 
 
 
@@ -46,7 +46,7 @@ void    ResetRelaxs(void)
   ibRelaxsTariff = 1;
   SaveFile(&flRelaxsTariff);
 
-  memset(&reRelaxs, 0, sizeof(relax));
+  memset(&reRelaxs, 0, sizeof(relaxs));
 	SaveFile(&flRelaxs);
 }
 
@@ -65,6 +65,8 @@ static uchar const  mpRelaxs[8*3] = {
 };
 
 uchar  i, j;
+
+  memset(&reRelaxs, 0, sizeof(relaxs));
 
   SetRelaxSize(0);
 

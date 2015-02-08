@@ -42,7 +42,7 @@ typedef struct
 {
   uchar         bSize;                  // количество праздников
   time          mptiDate[bRELAXS];      // даты праздников
-} relax;
+} relaxs;
 
 
 // тип 'специальные тарифные периоды'
@@ -50,4 +50,4 @@ typedef struct
 {
   uchar         bSize;                  // количество периодов
   time          mptiDate[bGAPS];        // даты периодов (секунда - номер псевдо-мес€ца)
-} gap;
+} gaps;
