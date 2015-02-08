@@ -1,18 +1,13 @@
 /*------------------------------------------------------------------------------
 GAPS.C
 
-
+ Тарифные периоды: Отчет №66 от 17_08_2010
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
 #include        "../memory/mem_tariffs.h"
-#include        "../keyboard.h"
-#include        "../display/display.h"
-#include        "../engine.h"
-#include        "../rtc.h"
-#include        "../timedate.h"
-#include        "../ports.h"
 #include        "../flash/files.h"
+#include        "../timedate.h"
 #include        "tariffs.h"
 #include        "gaps.h"
 

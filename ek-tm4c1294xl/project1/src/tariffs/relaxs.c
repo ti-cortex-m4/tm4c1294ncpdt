@@ -1,27 +1,16 @@
 /*------------------------------------------------------------------------------
 RELAXS.C
 
- Подпрограммы управления праздниками
+ Праздники
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
 #include        "../memory/mem_tariffs.h"
-#include        "../memory/mem_program.h"
-#include        "../keyboard.h"
-#include        "../display/display.h"
-#include        "../timedate.h"
-#include        "../rtc.h"
 #include        "../flash/files.h"
+#include        "../timedate.h"
 #include        "tariffs.h"
 #include        "relaxs.h"
 
-
-
-//                                           0123456789ABCDEF
-static char const       szNoRelaxs[]      = " нет праздников ",
-                        szRelaxHoliday[]  = " выходной",
-                        szRelaxWeekday[]  = " рабочий ",
-                        szRelaxError[]    = " ошибка !";
 
 
 file const              flRelaxsFlag = {wFLA_RELAXS_FLAG, &boRelaxsFlag, sizeof(boolean)};
@@ -137,38 +126,3 @@ uchar  i;
   else        return(2);                // воскресенье
 }
 // требует предварительной установки переменной tiAlt
-
-
-
-// показывает тип текущего режима
-void    ShowModeName(uchar  ibMode)
-{
-  switch (ibMode)
-  {
-    case 1:  strcpy(szLo+7, szRelaxHoliday);  break;
-    case 2:  strcpy(szLo+7, szRelaxWeekday);  break;
-    default: strcpy(szLo+7, szRelaxError);    break;
-  }
-}
-
-
-
-// показывает дату и тип текущего праздника, его номер и общее количество праздников
-void    ShowRelax(uchar  ibRelax)
-{
-  if (GetRelaxSize() > 0)
-  {
-    GetRelaxDate(ibRelax);
-   
-    sprintf(szLo," %2u.%02u",
-                 tiRelax.bDay,
-                 tiRelax.bMonth);
-
-    ShowModeName(tiRelax.bSecond);
-
-    sprintf(szHi+11,"%2u/%-2u",
-                    ibRelax+1,
-                    GetRelaxSize());    
-  }
-  else ShowLo(szNoRelaxs);    
-}
