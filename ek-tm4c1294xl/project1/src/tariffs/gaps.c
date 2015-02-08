@@ -43,6 +43,9 @@ void    ResetGaps(void)
 {
 uchar i;
 
+  boGapsFlag = false;
+  SaveFile(&flGapsFlag);
+
   tiGap = tiZero;
   for (i=0; i<bGAPS; i++)
     SetGapDate(i);
@@ -55,7 +58,7 @@ uchar i;
 
   SetGapSize(2);
 
-  boGapsFlag = false;
+	SaveFile(&flGaps);
 }
 
 

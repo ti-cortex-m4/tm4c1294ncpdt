@@ -9,7 +9,7 @@
 #include        "../keyboard.h"
 #include        "../display/display.h"
 #include        "../tariffs/gaps.h"
-
+#include        "../flash/files.h"
 
 
 
@@ -42,6 +42,8 @@ void    key_SetGapsFlag(void)
       {           
         boGapsFlag = ~boGapsFlag;
         ShowBoolean(boGapsFlag);
+
+        SaveFile(&flGapsFlag);
       }
       else Beep(); 
     }
