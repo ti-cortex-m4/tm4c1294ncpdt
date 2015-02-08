@@ -11,6 +11,7 @@ OUT_RELAXS.C
 #include        "../timedate.h"
 #include        "../keyboard.h"
 #include        "../tariffs/relaxs.h"
+#include        "../flash/files.h"
 
 
 
@@ -19,31 +20,35 @@ void    OutGetRelaxs(void)
   InitPushCRC();
   PushChar(boRelaxsFlag);
   PushChar(ibRelaxsTariff);
-  Push(&mpreRelaxs, sizeof(mpreRelaxs));
-  Output(2+sizeof(mpreRelaxs));
+  Push(&reRelaxs, sizeof(relax));
+  Output(2+sizeof(relax));
 }
 
 
 void    OutSetRelaxs(void)
 {
 uchar  i;
+time   ti;
 
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     InitPop(6);
+
     i = PopChar();
     if (i <= bRELAXS)
     {
-      memset(&mpreRelaxs, 0, sizeof(mpreRelaxs));
-      mpreRelaxs.bSize = i;
-      if (mpreRelaxs.bSize > 0)
+      memset(&reRelaxs, 0, sizeof(reRelaxs));
+      reRelaxs.bSize = i;
+      if (reRelaxs.bSize > 0)
       {
-        for (i=0; i<mpreRelaxs.bSize; i++)
+        for (i=0; i<reRelaxs.bSize; i++)
         {
-          Pop(&tiAlt, sizeof(time));
-          mpreRelaxs.mptiDate[i] = tiAlt;
+          Pop(&ti, sizeof(time));
+          reRelaxs.mptiDate[i] = ti;
         }
       }
+    	SaveFile(&flRelaxs);
+
       LongResult(bRES_OK);
     }
     else Result(bRES_BADDATA);

@@ -8,17 +8,17 @@ MEM_TARIFFS.S
 
 
 
-// массив праздников
-relax                  mpreRelaxs;
-
-// внутренняя переменная
-time                    tiRelax;
-
 // признак использования праздников
 boolean                 boRelaxsFlag;
 
-// глобальная переменная
+// тариф при использовании праздников
 uchar                   ibRelaxsTariff;
+
+// массив праздников
+relax                   reRelaxs;
+
+// глобальная переменная
+time                    tiRelax;
 
 
 

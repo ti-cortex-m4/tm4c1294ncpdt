@@ -9,6 +9,8 @@ KEY_RELAXS_FLAG.C
 #include        "../../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../tariffs/tariffs.h"
+#include        "../../tariffs/relaxs.h"
+#include        "../../flash/files.h"
 
 
 
@@ -41,6 +43,8 @@ void    key_SetRelaxsFlag(void)
       {           
         boRelaxsFlag = ~boRelaxsFlag;
         ShowBoolean(boRelaxsFlag);
+
+        SaveFile(&flRelaxsFlag);
       }
       else Beep(); 
     }

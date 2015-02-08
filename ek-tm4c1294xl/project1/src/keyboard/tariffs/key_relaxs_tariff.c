@@ -10,6 +10,8 @@ KEY_RELAXS_TARIFF.C
 #include        "../../keyboard.h"
 #include        "../../tariffs/tariffs.h"
 #include        "../../tariffs/zones.h"
+#include        "../../tariffs/relaxs.h"
+#include        "../../flash/files.h"
 
 
 
@@ -17,9 +19,9 @@ KEY_RELAXS_TARIFF.C
 static char const       szTariffsFor[]  = "   Тариф для    ",
                         szHoliday[]     = " выходных дней  ",
                         szCelebration[] = "  и праздников  ",
-                        szMaskRelaxs2[] = "      ___       ";
+                        szMaskRelaxs[]  = "      ___       ";
 
-static char const      *pszRelaxs2[] = { szTariffsFor, szHoliday, szCelebration, "" };
+static char const      *pszRelaxs[]     = { szTariffsFor, szHoliday, szCelebration, "" };
 
 
 
@@ -34,7 +36,7 @@ void    key_SetRelaxsTariff(void)
         enKeyboard = KBD_POSTENTER;
         Clear();
 
-        LoadSlide(pszRelaxs2); 
+        LoadSlide(pszRelaxs);
         ShowChar(ibRelaxsTariff+1); 
       }
       else BlockProgram(bSET_RELAXS_FLAG);
@@ -48,13 +50,15 @@ void    key_SetRelaxsTariff(void)
       {
         ibRelaxsTariff = ibX-1;
         ShowChar(ibRelaxsTariff+1); 
+
+        SaveFile(&flRelaxsTariff);
       }
       else 
       {
         enKeyboard = KBD_INPUT1;
         LongBeep();
 
-        ShowLo(szMaskRelaxs2);        
+        ShowLo(szMaskRelaxs);
       }
     }
     else Beep();
@@ -66,7 +70,7 @@ void    key_SetRelaxsTariff(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT1;
-      ShowLo(szMaskRelaxs2);        
+      ShowLo(szMaskRelaxs);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))

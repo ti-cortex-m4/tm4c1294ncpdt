@@ -4,13 +4,13 @@ MEM_TARIFFS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  relax                  mpreRelaxs;
-
-extern  time                    tiRelax;
-
 extern  boolean                 boRelaxsFlag;
 
 extern  uchar                   ibRelaxsTariff;
+
+extern  relax                   reRelaxs;
+
+extern  time                    tiRelax;
 
 
 
