@@ -90,6 +90,12 @@ SYSTEM.H
 #define bDEVICES        0
 
 
+// минимальный год
+#define bMINYEAR        15
+
+// максимальный год
+#define bMAXYEAR        99
+
 // размер трёхминутных массивов
 #define bMINUTES        40
 

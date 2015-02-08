@@ -113,13 +113,16 @@ bool     TrueTimeDate(void)
   if (tiAlt.bMinute > 59) return false;
   if (tiAlt.bHour   > 23) return false;
 
-  if ((tiAlt.bDay == 0) || (tiAlt.bDay > GetDaysInYearMonth(tiAlt.bYear, tiAlt.bMonth)))
+  if ((tiAlt.bDay == 0) ||
+  		(tiAlt.bDay > GetDaysInYearMonth(tiAlt.bYear, tiAlt.bMonth)))
     return false;
 
-  if ((tiAlt.bMonth == 0) || (tiAlt.bMonth > 12 ))
+  if ((tiAlt.bMonth == 0) ||
+  		(tiAlt.bMonth > 12 ))
     return false;
 
-  if ((tiAlt.bYear < 2) || (tiAlt.bYear > 99))
+  if ((tiAlt.bYear < bMINYEAR) ||
+  		(tiAlt.bYear > bMAXYEAR))
     return false;
 
   return true;
