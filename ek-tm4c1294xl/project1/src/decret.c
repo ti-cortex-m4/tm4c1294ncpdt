@@ -1,13 +1,14 @@
 /*------------------------------------------------------------------------------
 DECRET.C
 
-  Подпрограммы управления правилами перехода на сезонное время
+  Правила перехода на сезонное время
 ------------------------------------------------------------------------------*/
 
 #include        <string.h>
 #include        "main.h"
 #include        "memory/mem_settings.h"
 #include        "timedate.h"
+#include        "rtc.h"
 
 
 
@@ -15,18 +16,13 @@ void    MakeDecret(void)
 {
   if (deDecret == DEC_NONE)
   {
-    memset(&tiSummer, '\0', sizeof(time));
-    memset(&tiWinter, '\0', sizeof(time));
+    memset(&tiSummer, 0, sizeof(time));
+    memset(&tiWinter, 0, sizeof(time));
   }
   else if (deDecret == DEC_AUTO)
   {
-    tiAlt.bMonth = 3;
-    DecretDate();
-    memcpy(&tiSummer, &tiAlt, sizeof(time));
-
-    tiAlt.bMonth = 10;
-    DecretDate();
-    memcpy(&tiWinter, &tiAlt, sizeof(time));
+    tiSummer = *GetDecretDate(PGetCurrTimeDate(), 3);
+    tiWinter = *GetDecretDate(PGetCurrTimeDate(), 10);
   }
 }
 

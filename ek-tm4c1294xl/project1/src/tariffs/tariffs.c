@@ -237,7 +237,8 @@ uchar  ibMonth, ibMode;
   if (boRelaxsFlag == true)
   {
     j = RelaxIndex();
-    i = Weekday();
+    i = GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay);
+
     if ((j != 2) && ((i == 5) || (i == 6) || (j == 1)))
     {
       i = ibRelaxsTariff; 
@@ -277,7 +278,8 @@ uchar  ibMonth, ibMode;
   if (boRelaxsFlag == true)
   {
     j = RelaxIndex();
-    i = Weekday();
+    i = GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay);
+
     if ((j != 2) && ((i == 5) || (i == 6) || (j == 1)))
     {
       i = ibRelaxsTariff; 
