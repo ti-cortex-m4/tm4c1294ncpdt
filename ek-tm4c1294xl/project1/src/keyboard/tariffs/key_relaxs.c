@@ -53,12 +53,10 @@ uint    k;
     for(j=0; j<=GetRelaxSize(); j++)
     {
       GetRelaxDate(i);
-      tiAlt = tiRelax; k = GetDayIndex();
+      k = GetDayIndexMonthDay(tiRelax.bMonth, tiRelax.bDay);
 
-      GetRelaxDate(j); 
-      tiAlt = tiRelax;
-
-      if (k < GetDayIndex())
+      GetRelaxDate(j);
+      if (k < GetDayIndexMonthDay(tiRelax.bMonth, tiRelax.bDay))
       {
         GetRelaxDate(i); tiAlt = tiRelax;
 
@@ -107,7 +105,6 @@ uchar  i;
 
 
 
-// задание списка праздников
 void    key_SetRelaxs(void)
 {
   if (bKey == bKEY_ENTER)
@@ -137,11 +134,9 @@ void    key_SetRelaxs(void)
       tiKey.bMonth = GetChar(4,5);
       tiKey.bYear  = (*PGetCurrTimeDate()).bYear;
 
-      tiAlt = tiKey;
-
       if ((tiKey.bMonth == 0) || (tiKey.bMonth > 12))
         Beep();
-      else if (tiKey.bDay > DaysInMonth())
+      else if (tiKey.bDay > GetDaysInYearMonth(tiKey.bYear, tiKey.bMonth))
       {
         enKeyboard = KBD_INPUT2; 
         LongBeep();
@@ -266,7 +261,6 @@ void    key_SetRelaxs(void)
 
 
 
-// просмотр списка проаздников
 void    key_GetRelaxs(void)
 {
   if (bKey == bKEY_ENTER)
@@ -291,30 +285,3 @@ void    key_GetRelaxs(void)
     }
   }
 }
-
-
-/*
-// просмотр параметров текущих суток
-void    key_GetWeekday(void)
-{
-  if (bKey == bKEY_ENTER)
-  {
-    if (enKeyboard == KBD_ENTER)
-    {
-      enKeyboard = KBD_POSTENTER;   
-
-      ShowHi(szWeekday); 
-
-      tiAlt = *PGetCurrTimeDate();        
-      switch ( GetModeAlt() )
-      {
-        case 0:  strcpy(szLo, szMode1);  break;
-        case 1:  strcpy(szLo, szMode2);  break;
-        case 2:  strcpy(szLo, szMode3);  break;
-        default: Error();                break;
-      }
-    }
-  }
-}
-*/
-

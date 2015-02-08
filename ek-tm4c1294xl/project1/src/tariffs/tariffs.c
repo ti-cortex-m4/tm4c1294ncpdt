@@ -223,7 +223,7 @@ uchar  ibMonth, ibMode;
   else
   {
     MakeGaps();
-    ibMonth = mpbGaps[GetDayIndex_Alt()];
+    ibMonth = mpbGaps[GetDayIndexMonthDay(tiAlt.bMonth, tiAlt.bDay)];
   } 
 
   ibMode  = GetModeAlt();               
@@ -263,7 +263,7 @@ uchar  ibMonth, ibMode;
   else
   {
     MakeGaps();
-    ibMonth = mpbGaps[GetDayIndex_Alt()];
+    ibMonth = mpbGaps[GetDayIndexMonthDay(tiAlt.bMonth, tiAlt.bDay)];
   } 
 
   ibMode  = GetModeAlt();               

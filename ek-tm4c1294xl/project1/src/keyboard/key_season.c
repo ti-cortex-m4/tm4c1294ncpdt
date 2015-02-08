@@ -71,19 +71,17 @@ void    key_SetSeason(void)
       tiKey.bMonth = GetChar(8,9);
       tiKey.bYear  = (*PGetCurrTimeDate()).bYear;
 
-      if ((tiKey.bMonth > 0) && (tiKey.bMonth <= 12))
+      if ((tiKey.bMonth >= 1) && (tiKey.bMonth <= 12))
       {
-        memcpy(&tiAlt, &tiKey, sizeof(time));
-
-        if (tiKey.bDay <= DaysInMonth())
+        if (tiKey.bDay <= GetDaysInYearMonth(tiKey.bYear, tiKey.bMonth))
         {
           enKeyboard = KBD_POSTENTER;
 
           switch (bProgram)
           {
-            case bSET_SUMMER:  memcpy(&tiSummer, &tiKey, sizeof(time)); 
+            case bSET_SUMMER:  tiSummer = tiKey;
                                ShowSummer();  break;
-            case bSET_WINTER:  memcpy(&tiWinter, &tiKey, sizeof(time)); 
+            case bSET_WINTER:  tiWinter = tiKey;
                                ShowWinter();  break;
           }
         }

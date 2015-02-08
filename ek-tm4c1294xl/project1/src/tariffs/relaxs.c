@@ -86,14 +86,12 @@ uchar  i, j;
 
 
 
-// читает количество дней в списке праздников
 uchar   GetRelaxSize(void)
 {
-  return( reRelaxs.bSize );
+  return reRelaxs.bSize;
 }
 
 
-// записывает количество дней в списке праздников
 void    SetRelaxSize(uchar  bSize)
 {
   reRelaxs.bSize = bSize;
@@ -101,14 +99,12 @@ void    SetRelaxSize(uchar  bSize)
 
 
 
-// читает день из списка праздников
 void    GetRelaxDate(uchar  ibRelax)
 {
   tiRelax = reRelaxs.mptiDate[ibRelax];
 }
 
 
-// записывает день в списов праздников
 void    SetRelaxDate(uchar  ibRelax)
 {
   reRelaxs.mptiDate[ibRelax] = tiRelax;

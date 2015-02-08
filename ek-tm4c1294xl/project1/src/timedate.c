@@ -15,39 +15,40 @@ time                    tiAlt;
 
 time const              tiZero = { 0, 0, 0, 0, 0, 0 };
 
-uchar const             mpbDaysInMonth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+static uchar const      mpbDaysInMonth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 
 
-uchar   DaysInMonth(void)
+// количество дней в месяце
+uchar   GetDaysInMonth(uchar  bMonth)
 {
-  if ((tiAlt.bYear % 4 == 0) && (tiAlt.bMonth == 2))
-    return(29);
-  else
-    return( mpbDaysInMonth[tiAlt.bMonth - 1] );
+	ASSERT(bMonth >= 1);
+	ASSERT(bMonth <= 12);
+  return mpbDaysInMonth[bMonth-1];
 }
 
 
-uchar   DaysInMonthSpec(uchar  bYear, uchar  bMonth)
+// количество дней в месяце
+uchar   GetDaysInYearMonth(uchar  bYear, uchar  bMonth)
 {
   if ((bYear % 4 == 0) && (bMonth == 2))
-    return(29);
+    return 29;
   else
-    return( mpbDaysInMonth[bMonth-1] );
+    return GetDaysInMonth(bMonth);
 }
 
 
-uint    DaysInYearSpec(uchar  bYear)
+// количество дней в году
+uint    GetDaysInYear(uchar  bYear)
 {
   if (bYear % 4 == 0)
-    return(366);
+    return 366;
   else
-    return(365);
+    return 365;
 }
 
 
-
-// возвращает день недели (0: понедельник, ..., 6: воскресенье)
+// день недели (0: понедельник, ..., 6: воскресенье)
 uchar   Weekday(void)
 {
 uchar   i;
@@ -75,24 +76,35 @@ uint    wT;
 }
 
 
-// вычисляет количество дней с начала года
-uint    GetDayIndex(void)
+// количество дней с начала года
+uint    GetDayIndexYearMonthDay(uchar  bYear, uchar  bMonth, uchar  bDay)
 {
 uchar   i;
-uint    wT;
+uint    j;
 
-  wT = tiAlt.bDay - 1;
+  j = bDay - 1;
 
-  for (i=1; i<tiAlt.bMonth; i++)
-  {
-    if ((tiAlt.bYear % 4 == 0) && (i == 2))
-      wT += 29;
-    else
-      wT += mpbDaysInMonth[i - 1];
-  }
+  for (i=1; i<bMonth; i++)
+  	 j += GetDaysInYearMonth(bYear, i);
 
-  return(wT);
+  return j;
 }
+
+
+// количество дней с начала года
+uint    GetDayIndexMonthDay(uchar  bMonth, uchar  bDay)
+{
+uchar   i;
+uint    j;
+
+  j = bDay - 1;
+
+  for (i=1; i<bMonth; i++)
+    j += GetDaysInMonth(i);
+
+  return j;
+}
+
 
 
 bool     TrueTimeDate(void)
@@ -101,7 +113,7 @@ bool     TrueTimeDate(void)
   if (tiAlt.bMinute > 59) return false;
   if (tiAlt.bHour   > 23) return false;
 
-  if ((tiAlt.bDay == 0) || (tiAlt.bDay > DaysInMonth()))
+  if ((tiAlt.bDay == 0) || (tiAlt.bDay > GetDaysInYearMonth(tiAlt.bYear, tiAlt.bMonth)))
     return false;
 
   if ((tiAlt.bMonth == 0) || (tiAlt.bMonth > 12 ))
@@ -121,7 +133,7 @@ uchar   i;
 
   tiAlt.bYear = (*PGetCurrTimeDate()).bYear;
 
-  for (i=DaysInMonth(); i>0; i--)
+  for (i=GetDaysInYearMonth(tiAlt.bYear, tiAlt.bMonth); i>0; i--)
   {
     tiAlt.bDay = i;
     if (Weekday() == 6) return;         // 6: воскресенье
@@ -137,10 +149,10 @@ uchar   i;
   dwBuffC = 0;
 
   for (i=0; i<tiAlt.bYear; i++)
-    dwBuffC += DaysInYearSpec(i);
+    dwBuffC += GetDaysInYear(i);
 
   for (i=1; i<tiAlt.bMonth; i++)
-    dwBuffC += DaysInMonthSpec(tiAlt.bYear,i);
+    dwBuffC += GetDaysInYearMonth(tiAlt.bYear, i);
 
   dwBuffC += tiAlt.bDay-1;
   dwBuffC *= 1440;
@@ -155,16 +167,16 @@ uchar   i;
 void    SecIndexToDate(ulong  dwT)
 {
   tiAlt.bYear = 0;
-  while (dwT >= (ulong)24*60*60*DaysInYearSpec(tiAlt.bYear))
+  while (dwT >= (ulong)24*60*60*GetDaysInYear(tiAlt.bYear))
   {
-    dwT -= (ulong)24*60*60*DaysInYearSpec(tiAlt.bYear);
+    dwT -= (ulong)24*60*60*GetDaysInYear(tiAlt.bYear);
     tiAlt.bYear++;
   }
 
   tiAlt.bMonth = 1;
-  while (dwT >= (ulong)24*60*60*DaysInMonthSpec(tiAlt.bYear,tiAlt.bMonth))
+  while (dwT >= (ulong)24*60*60*GetDaysInYearMonth(tiAlt.bYear,tiAlt.bMonth))
   {
-    dwT -= (ulong)24*60*60*DaysInMonthSpec(tiAlt.bYear,tiAlt.bMonth);
+    dwT -= (ulong)24*60*60*GetDaysInYearMonth(tiAlt.bYear,tiAlt.bMonth);
     tiAlt.bMonth++;
   }
 

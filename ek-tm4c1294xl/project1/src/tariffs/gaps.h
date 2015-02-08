@@ -18,8 +18,4 @@ void    SetGapSize(uchar  bSize);
 void    GetGapDate(uchar  ibGap);
 void    SetGapDate(uchar  ibGap);
 
-uint    GetDayIndex_Alt(void);
-uint    GetDayIndex_Gap(void);
-uchar   DaysInMonth_Gap(void);
-
 void    MakeGaps(void);

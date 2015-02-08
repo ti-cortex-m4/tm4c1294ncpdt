@@ -125,14 +125,13 @@ void    key_SetCurrDate(void)
     else if (enKeyboard == KBD_POSTINPUT3)
     {
       tiKey.bYear = GetChar(10,11);
-      memcpy(&tiAlt, &tiKey, sizeof(time));
 
-      if ((tiKey.bYear <= 100) && (tiKey.bDay <= DaysInMonth()))
+      if ((tiKey.bYear <= 100) && (tiKey.bDay <= GetDaysInYearMonth(tiKey.bYear, tiKey.bMonth)))
       {
         enKeyboard = KBD_POSTENTER;
         ibZ = 60;
 
-        memcpy(&tiSetRTC, &tiKey, sizeof(time));
+        tiSetRTC = tiKey;
         SetCurrDate();
 
         boSetDate = true;
@@ -167,7 +166,7 @@ void    key_SetCurrDate(void)
     {
       tiKey.bMonth = GetChar(7,8);
 
-      if ((tiKey.bMonth > 0) && (tiKey.bMonth <= 12))
+      if ((tiKey.bMonth >= 1) && (tiKey.bMonth <= 12))
       {
         enKeyboard = KBD_INPUT3;
         szLo[9] = '.';

@@ -4,21 +4,16 @@ TIMEDATE.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-
-
-
 extern  time                    tiZero;
 extern  time                    tiAlt;
-extern  uchar const             mpbDaysInMonth[12];
 
 
-uchar   DaysInMonth(void);
-uchar   DaysInMonthSpec(uchar  bYear, uchar  bMonth);
-uint    DaysInYearSpec(uchar  bYear);
-
+uchar   GetDaysInMonth(uchar  bMonth);
+uchar   GetDaysInYearMonth(uchar  bYear, uchar  bMonth);
+uint    GetDaysInYear(uchar  bYear);
 uchar   Weekday(void);
-uint    GetDayIndex(void);
+uint    GetDayIndexYearMonthDay(uchar  bYear, uchar  bMonth, uchar  bDay);
+uint    GetDayIndexMonthDay(uchar  bMonth, uchar  bDay);
 bool    TrueTimeDate(void);
 void    DecretDate(void);
 
