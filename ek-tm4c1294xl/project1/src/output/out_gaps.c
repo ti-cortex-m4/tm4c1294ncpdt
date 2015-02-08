@@ -19,8 +19,8 @@ void    OutGaps1(void)
 {
   InitPushCRC();
   PushChar(boGapsFlag);
-  Push(&gaGaps, sizeof(gaps));
-  Output(1+sizeof(gaps));
+  Push(&gaGaps, sizeof(gaGaps));
+  Output(1+sizeof(gaGaps));
 }
 
 
@@ -33,6 +33,6 @@ void    OutGaps2(void)
   PushChar(boGapsFlag);
   Push(PGetCurrTimeDate(), sizeof(time));
   PushChar(mpbGaps[GetDayIndex_Alt()]);
-  Push(&mpbGaps, sizeof(gaps));
-  Output(1+sizeof(time)+1+sizeof(gaps));
+  Push(&mpbGaps, sizeof(gaGaps));
+  Output(1+sizeof(time)+1+sizeof(gaGaps));
 }
