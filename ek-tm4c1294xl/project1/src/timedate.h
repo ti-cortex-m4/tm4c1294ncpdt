@@ -8,12 +8,12 @@ extern  time                    tiZero;
 extern  time                    tiAlt;
 
 
-uchar   GetDaysInMonth(uchar  bMonth);
-uchar   GetDaysInYearMonth(uchar  bYear, uchar  bMonth);
-uint    GetDaysInYear(uchar  bYear);
+uchar   GetDaysInMonthM(uchar  bMonth);
+uchar   GetDaysInMonthYM(uchar  bYear, uchar  bMonth);
+uint    GetDaysInYearY(uchar  bYear);
 uchar   Weekday(void);
-uint    GetDayIndexYearMonthDay(uchar  bYear, uchar  bMonth, uchar  bDay);
-uint    GetDayIndexMonthDay(uchar  bMonth, uchar  bDay);
+uint    GetDayIndexYMD(uchar  bYear, uchar  bMonth, uchar  bDay);
+uint    GetDayIndexMD(uchar  bMonth, uchar  bDay);
 bool    TrueTimeDate(void);
 void    DecretDate(void);
 
