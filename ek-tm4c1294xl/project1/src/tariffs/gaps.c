@@ -47,7 +47,6 @@ void    ResetGaps(void)
   SetGapDate(1);
 
   SetGapSize(2);
-
 	SaveFile(&flGaps);
 }
 
@@ -79,41 +78,6 @@ void    SetGapDate(uchar  ibGap)
 
 
 
-uint    GetDayIndex_Alt(void) 
-{
-uchar   i;
-uint    j;
-
-  j = tiAlt.bDay - 1; 
-
-  for (i=1; i<tiAlt.bMonth; i++)
-    j += mpbDaysInMonth[i - 1];
-
-  return j;
-}
-
-
-uint    GetDayIndex_Gap(void) 
-{
-uchar   i;
-uint    j;
-
-  j = tiGap.bDay - 1; 
-
-  for (i=1; i<tiGap.bMonth; i++)
-    j += mpbDaysInMonth[i - 1];
-
-  return j;
-}
-
-
-uchar   DaysInMonth_Gap(void)
-{
-  return mpbDaysInMonth[tiAlt.bMonth - 1];
-}
-
-
-
 void    MakeGaps(void)
 {
 uchar   i;
@@ -134,7 +98,7 @@ uint    j;
     {
       GetGapDate(GetGapSize()-1-i);
 
-      for (j=0; j<=GetDayIndex_Gap(); j++)
+      for (j=0; j<=GetDayIndexMonthDay(tiGap.bMonth, tiGap.bDay); j++)
         mpbGaps[j] = tiGap.bSecond;
     }
   }
