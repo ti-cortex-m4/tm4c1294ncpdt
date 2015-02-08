@@ -128,7 +128,7 @@ void    key_SetCurrDate(void)
 
       if ((tiKey.bYear >= bMINYEAR) &&
           (tiKey.bYear <= bMAXYEAR) &&
-          (tiKey.bDay <= GetDaysInYearMonth(tiKey.bYear, tiKey.bMonth)))
+          (tiKey.bDay <= GetDaysInMonthYM(tiKey.bYear, tiKey.bMonth)))
       {
         enKeyboard = KBD_POSTENTER;
         ibZ = 60;

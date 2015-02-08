@@ -83,10 +83,10 @@ uint    k;
     for(j=0; j<=GetRelaxSize(); j++)
     {
       GetRelaxDate(i);
-      k = GetDayIndexMonthDay(tiRelax.bMonth, tiRelax.bDay);
+      k = GetDayIndexMD(tiRelax.bMonth, tiRelax.bDay);
 
       GetRelaxDate(j);
-      if (k < GetDayIndexMonthDay(tiRelax.bMonth, tiRelax.bDay))
+      if (k < GetDayIndexMD(tiRelax.bMonth, tiRelax.bDay))
       {
         GetRelaxDate(i); tiAlt = tiRelax;
 
@@ -166,7 +166,7 @@ void    key_SetRelaxs(void)
 
       if ((tiKey.bMonth == 0) || (tiKey.bMonth > 12))
         Beep();
-      else if (tiKey.bDay > GetDaysInYearMonth(tiKey.bYear, tiKey.bMonth))
+      else if (tiKey.bDay > GetDaysInMonthYM(tiKey.bYear, tiKey.bMonth))
       {
         enKeyboard = KBD_INPUT2; 
         LongBeep();

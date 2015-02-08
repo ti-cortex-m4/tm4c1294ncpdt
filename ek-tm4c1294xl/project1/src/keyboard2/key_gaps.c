@@ -76,10 +76,10 @@ uint    k;
     for(j=0; j<=GetGapSize(); j++)
     {
       GetGapDate(i);
-      k = GetDayIndexMonthDay(tiGap.bMonth, tiGap.bDay);
+      k = GetDayIndexMD(tiGap.bMonth, tiGap.bDay);
 
       GetGapDate(j); 
-      if (k < GetDayIndexMonthDay(tiGap.bMonth, tiGap.bDay))
+      if (k < GetDayIndexMD(tiGap.bMonth, tiGap.bDay))
       {
         GetGapDate(i); tiAlt = tiGap;
 
@@ -160,7 +160,7 @@ void    key_SetGaps(void)
 
       if ((tiKey.bMonth == 0) || (tiKey.bMonth > 12))
         Beep();
-      else if (tiKey.bDay > GetDaysInMonth(tiKey.bMonth))
+      else if (tiKey.bDay > GetDaysInMonthM(tiKey.bMonth))
       {
         enKeyboard = KBD_INPUT2; 
         LongBeep();

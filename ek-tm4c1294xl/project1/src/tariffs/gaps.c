@@ -93,7 +93,7 @@ uint    j;
     {
       GetGapDate(GetGapSize()-1-i);
 
-      for (j=0; j<=GetDayIndexMonthDay(tiGap.bMonth, tiGap.bDay); j++)
+      for (j=0; j<=GetDayIndexMD(tiGap.bMonth, tiGap.bDay); j++)
         mpbGaps[j] = tiGap.bSecond;
     }
   }

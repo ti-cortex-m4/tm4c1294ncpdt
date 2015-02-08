@@ -73,7 +73,7 @@ void    key_SetSeason(void)
 
       if ((tiKey.bMonth >= 1) && (tiKey.bMonth <= 12))
       {
-        if (tiKey.bDay <= GetDaysInYearMonth(tiKey.bYear, tiKey.bMonth))
+        if (tiKey.bDay <= GetDaysInMonthYM(tiKey.bYear, tiKey.bMonth))
         {
           enKeyboard = KBD_POSTENTER;
 
