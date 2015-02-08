@@ -18,16 +18,16 @@ KEY_GAPS.C
 static char const       szGaps[]        = "Периоды         ",
                         szMaskGap[]     = "__ __           ",
                         szNoGaps[]      = "  нет периодов  ",
-                        szGapError[]    = " ошибка !";
+                        szError[]       = " ошибка !";
 
 
 
-void    ShowGapName(uchar  ibMode)
+void    ShowGapName(uchar  i)
 {
-  if (ibMode < 12)
-    sprintf(szLo+7, "период %u" , ibMode+1);
+  if (i < 12)
+    sprintf(szLo+7, "период %u" , i+1);
   else
-    strcpy(szLo+7, szGapError);
+    strcpy(szLo+7, szError);
 }
 
 

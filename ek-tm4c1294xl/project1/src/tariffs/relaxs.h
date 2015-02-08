@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 RELAXS.H
 
- Подпрограммы управления праздниками
+ Праздники
 ------------------------------------------------------------------------------*/
 
 extern  file const              flRelaxsFlag;
@@ -21,6 +21,3 @@ void    GetRelaxDate(uchar  ibRelax);
 void    SetRelaxDate(uchar  ibRelax);
 
 uchar   GetModeAlt(void);
-
-void    ShowModeName(uchar  ibMode);
-void    ShowRelax(uchar  ibRelax);

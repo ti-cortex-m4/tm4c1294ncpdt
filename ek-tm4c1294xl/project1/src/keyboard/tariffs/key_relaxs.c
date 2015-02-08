@@ -19,7 +19,37 @@ KEY_RELAXS.C
 
 //                                         0123456789ABCDEF
 static char const       szRelaxs[]      = "ѕраздники       ",
-                        szMaskRelax[]   = " __ __          ";
+                        szMaskRelax[]   = " __ __          ",
+                        szNoRelaxs[]    = " нет праздников ",
+                        szHoliday[]     = " выходной",
+                        szWeekday[]     = " рабочий ",
+                        szError[]       = " ошибка !";
+
+
+
+void    ShowRelaxName(uchar  i)
+{
+  switch (i)
+  {
+    case 1:  strcpy(szLo+7, szHoliday);  break;
+    case 2:  strcpy(szLo+7, szWeekday);  break;
+    default: strcpy(szLo+7, szError);    break;
+  }
+}
+
+
+void    ShowRelax(uchar  ibRelax)
+{
+  if (GetRelaxSize() > 0)
+  {
+    GetRelaxDate(ibRelax);
+
+    sprintf(szLo," %2u.%02u", tiRelax.bDay, tiRelax.bMonth);
+    ShowRelaxName(tiRelax.bSecond);
+    sprintf(szHi+11,"%2u/%-2u", ibRelax+1, GetRelaxSize());
+  }
+  else ShowLo(szNoRelaxs);
+}
 
 
 
@@ -148,7 +178,7 @@ void    key_SetRelaxs(void)
         enKeyboard = KBD_INPUT4;
         tiKey.bSecond = 1;              // тип праздника (режим работы)              
 
-        ShowModeName(tiKey.bSecond);
+        ShowRelaxName(tiKey.bSecond);
         szLo[7] = '.';
       }
     }
@@ -251,7 +281,7 @@ void    key_SetRelaxs(void)
     {
       if (++tiKey.bSecond > 2) tiKey.bSecond = 1;
 
-      ShowModeName(tiKey.bSecond);
+      ShowRelaxName(tiKey.bSecond);
       szLo[7] = '.';
     }
     else Beep();
