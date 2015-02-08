@@ -8,13 +8,14 @@ _GAPS.C
 #include        "../memory/mem_tariffs.h"
 #include        "../keyboard.h"
 #include        "../display/display.h"
-#include        "../tariffs/gaps.h"
 #include        "../timedate.h"
+#include        "../tariffs/gaps.h"
+#include        "../flash/files.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szGaps[]        = "Периоды         ",
+static char const       szGaps[]        = "Тарифные периоды",
                         szMaskGap[]     = "__ __           ";
 
 
@@ -33,6 +34,8 @@ uint    k;
     {
       // заменяем тип излома, не добавляя его в список
       SetGapDate(i);
+
+      SaveFile(&flGaps);
       return(0);
     }
   }
@@ -63,7 +66,9 @@ uint    k;
   }
 
   // увеличиваем размер списка
-  SetGapSize(GetGapSize() + 1);             
+  SetGapSize(GetGapSize() + 1);
+
+  SaveFile(&flGaps);
   return(1);
 }
 
@@ -91,6 +96,8 @@ uchar  i;
   // уменьшаем количество изломов
   if (GetGapSize() != 0)
     SetGapSize(GetGapSize() - 1);
+
+  SaveFile(&flGaps);
 }
 
 
