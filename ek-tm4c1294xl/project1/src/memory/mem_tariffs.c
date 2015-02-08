@@ -15,7 +15,7 @@ boolean                 boRelaxsFlag;
 uchar                   ibRelaxsTariff;
 
 // массив праздников
-relax                   reRelaxs;
+relaxs                  reRelaxs;
 
 // глобальная переменная
 time                    tiRelax;
@@ -59,7 +59,7 @@ br3ak                   brAlt, brKey;
 boolean                 boGapsFlag;
 
 // массив изломов тарифных периодов
-gap                     mpgaGaps;
+gaps                    gaGaps;
 
 // переменная
 time                    tiGap;

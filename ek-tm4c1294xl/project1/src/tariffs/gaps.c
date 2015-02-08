@@ -12,7 +12,9 @@ GAPS.C
 #include        "../rtc.h"
 #include        "../timedate.h"
 #include        "../ports.h"
+#include        "../flash/files.h"
 #include        "tariffs.h"
+#include        "gaps.h"
 
 
 
@@ -24,30 +26,62 @@ static char const       szNoGaps[]        = "  нет периодов  ",
 static time const       tiGap0 = { 0, 0, 0, 14, 4, 0 };
 static time const       tiGap1 = { 1, 0, 0, 14, 10, 0 };
 
+file const              flGapsFlag = {wFLA_GAPS_FLAG, &boGapsFlag, sizeof(boolean)};
+file const              flGaps = {wFLA_GAPS, &gaGaps, sizeof(gaps)};
+
+
+
+
+void    InitGaps(void)
+{
+	LoadFile(&flGapsFlag);
+	LoadFile(&flGaps);
+}
+
+
+void    ResetGaps(void)
+{
+uchar i;
+
+  tiGap = tiZero;
+  for (i=0; i<bGAPS; i++)
+    SetGapDate(i);
+
+  tiGap = tiGap0;
+  SetGapDate(0);
+
+  tiGap = tiGap1;
+  SetGapDate(1);
+
+  SetGapSize(2);
+
+  boGapsFlag = false;
+}
+
 
 
 uchar   GetGapSize(void) 
 {
-  return( mpgaGaps.bSize );
+  return( gaGaps.bSize );
 }
 
 
 void    SetGapSize(uchar  bSize) 
 {
-  mpgaGaps.bSize = bSize;
+  gaGaps.bSize = bSize;
 }
 
 
 
 void    GetGapDate(uchar  ibGap) 
 {
-  tiGap = mpgaGaps.mptiDate[ibGap];
+  tiGap = gaGaps.mptiDate[ibGap];
 }
 
 
 void    SetGapDate(uchar  ibGap) 
 {
-  mpgaGaps.mptiDate[ibGap] = tiGap;
+  gaGaps.mptiDate[ibGap] = tiGap;
 }
 
 
@@ -85,26 +119,6 @@ uchar   DaysInMonth_Gap(void)
   return mpbDaysInMonth[tiAlt.bMonth - 1];
 }
 
-
-
-void    ResetGaps(void)
-{
-uchar i;
-
-  tiGap = tiZero;
-  for (i=0; i<bGAPS; i++)
-    SetGapDate(i);
-
-  tiGap = tiGap0;
-  SetGapDate(0);
-
-  tiGap = tiGap1;
-  SetGapDate(1);
-
-  SetGapSize(2);
-
-  boGapsFlag = false;
-}
 
 
 void    MakeGaps(void)
@@ -159,31 +173,3 @@ void    ShowGap(uchar  ibGap)
   }
   else ShowLo(szNoGaps);    
 }
-
-
-
-#ifndef MODBUS
-
-void    OutGaps1(void) 
-{
-  InitPushCRC();
-  PushChar(boGapsFlag);
-  Push(&mpgaGaps, sizeof(mpgaGaps));
-  Output(1+sizeof(mpgaGaps));
-}
-
-
-void    OutGaps2(void) 
-{
-  if (enGlobal == GLB_PROGRAM) MakeGaps();
-
-  InitPushCRC();
-  PushChar(boGapsFlag);
-  tiAlt = *PGetCurrTimeDate();
-  Push(&tiAlt, sizeof(time));
-  PushChar(mpbGaps[GetDayIndex_Alt()]);
-  Push(&mpbGaps, sizeof(mpbGaps));
-  Output(1+sizeof(time)+1+sizeof(mpbGaps));
-}
-
-#endif

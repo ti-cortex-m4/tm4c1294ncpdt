@@ -20,8 +20,8 @@ void    OutGetRelaxs(void)
   InitPushCRC();
   PushChar(boRelaxsFlag);
   PushChar(ibRelaxsTariff);
-  Push(&reRelaxs, sizeof(relax));
-  Output(2+sizeof(relax));
+  Push(&reRelaxs, sizeof(relaxs));
+  Output(2+sizeof(relaxs));
 }
 
 
