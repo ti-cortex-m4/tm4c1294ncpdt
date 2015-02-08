@@ -18,17 +18,11 @@ GAPS.C
 
 
 
-//                                           0123456789ABCDEF
-static char const       szNoGaps[]        = "  нет периодов  ",
-                        szGapError[]      = " ошибка !";
-
-
-static time const       tiGap0 = { 0, 0, 0, 14, 4, 0 };
+static time const       tiGap0 = { 0, 0, 0, 14,  4, 0 };
 static time const       tiGap1 = { 1, 0, 0, 14, 10, 0 };
 
 file const              flGapsFlag = {wFLA_GAPS_FLAG, &boGapsFlag, sizeof(boolean)};
 file const              flGaps = {wFLA_GAPS, &gaGaps, sizeof(gaps)};
-
 
 
 
@@ -41,14 +35,10 @@ void    InitGaps(void)
 
 void    ResetGaps(void)
 {
-uchar i;
-
   boGapsFlag = false;
   SaveFile(&flGapsFlag);
 
-  tiGap = tiZero;
-  for (i=0; i<bGAPS; i++)
-    SetGapDate(i);
+  memset(&gaGaps, 0, sizeof(gaps));
 
   tiGap = tiGap0;
   SetGapDate(0);
@@ -148,31 +138,4 @@ uint    j;
         mpbGaps[j] = tiGap.bSecond;
     }
   }
-}
-
-
-
-void    ShowGapName(uchar  ibMode)
-{
-  if (ibMode < 12)
-    sprintf(szLo+7, "период %u" , ibMode+1);
-  else
-    strcpy(szLo+7, szGapError);
-}
-
-
-
-void    ShowGap(uchar  ibGap)
-{
-  if (GetGapSize() > 0)
-  {
-    GetGapDate(ibGap);
-   
-    sprintf(szLo,"%2u.%02u", tiGap.bDay, tiGap.bMonth);
-
-    ShowGapName(tiGap.bSecond);
-
-    sprintf(szHi+11,"%2u/%-2u", ibGap+1, GetGapSize());
-  }
-  else ShowLo(szNoGaps);    
 }
