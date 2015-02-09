@@ -76,6 +76,8 @@ PROGRAMS.H
 
 // все режимы
 
+#define bSET_DIGITALS               90
+
 #define bSET_RELAXS_FLAG            117
 #define bSET_RELAXS_TARIFF          118
 #define bSET_RELAXS                 119
