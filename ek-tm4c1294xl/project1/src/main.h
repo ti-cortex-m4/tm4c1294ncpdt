@@ -11,6 +11,7 @@
 #include        "main_serial.h"
 #include        "main_tariffs.h"
 #include        "main_groups.h"
+#include        "main_digitals.h"
 #include        "main_energy.h"
 
 

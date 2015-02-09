@@ -14,6 +14,7 @@ KEYBOARD_KEY.C
 #include        "keyboard/key_private.h"
 #include        "keyboard/key_start.h"
 #include        "keyboard/key_version.h"
+#include        "keyboard/digitals/key_digitals.h"
 #include        "keyboard/key_decret.h"
 #include        "keyboard/key_season.h"
 #include        "keyboard/key_groups.h"
@@ -82,6 +83,8 @@ void    Keyboard_Key(void)
       case bSET_MAJORDELAYS:
       case bSET_MINORDELAYS:    key_SetDelays();        break;
 
+      case bSET_DIGITALS:       key_SetDigitals();      break;
+
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
@@ -134,6 +137,8 @@ void    Keyboard_Key(void)
       case bSET_MAJORDELAYS:
       case bSET_MINORDELAYS:    key_SetDelays();        break;
 
+      case bSET_DIGITALS:       key_SetDigitals();      break;
+
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
@@ -181,6 +186,8 @@ void    Keyboard_Key(void)
 
       case bSET_MAJORDELAYS:
       case bSET_MINORDELAYS:    key_SetDelays();        break;
+
+      case bSET_DIGITALS:       key_SetDigitals();      break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
