@@ -75,17 +75,17 @@ uint    j;
 
 
 // последнее воскресенье месяца
-time   *GetDecretDate(time  *pti, uchar  bMonth)
+time   *GetDecretDateYM(uchar  bYear, uchar  bMonth)
 {
 static time ti;
 
+  ASSERT((bYear >= bMINYEAR) && (bYear <= bMAXYEAR));
   ASSERT((bMonth >= 1) && (bMonth <= 12));
 
-  ti = *pti;
+  ti = tiZero;
 
-  ti.bSecond = 0;
-  ti.bMinute = 0;
-  ti.bHour   = 0;
+  ti.bYear  = bYear;
+  ti.bMonth = bMonth;
 
   for (ti.bDay=GetDaysInMonthYM(ti.bYear, ti.bMonth); ti.bDay>0; ti.bDay--)
     if (GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) == 6) break;

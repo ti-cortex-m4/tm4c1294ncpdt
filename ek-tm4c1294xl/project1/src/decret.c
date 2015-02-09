@@ -21,8 +21,9 @@ void    MakeDecret(void)
   }
   else if (deDecret == DEC_AUTO)
   {
-    tiSummer = *GetDecretDate(PGetCurrTimeDate(), 3);
-    tiWinter = *GetDecretDate(PGetCurrTimeDate(), 10);
+  	uchar  bYear = PGetCurrTimeDate()->bYear;
+    tiSummer = *GetDecretDateYM(bYear, 3);
+    tiWinter = *GetDecretDateYM(bYear, 10);
   }
 }
 
