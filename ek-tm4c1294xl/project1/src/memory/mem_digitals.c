@@ -10,3 +10,10 @@ MEM_DIGITALS.C
 
 // массив цифровых счётчиков
 digital                 mpdiDigital[bCANALS];
+
+// битовая маска используемых цифровых счётчиков
+uint                    wDigitals;
+
+// массив разрешенных каналов
+boolean                 mpboEnblCan[bCANALS];
+

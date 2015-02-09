@@ -6,7 +6,7 @@ MEM_PORTS.H
 
 extern  port                mppoPorts[bPORTS];
 
-extern	boolean				boSendAT;
+extern	boolean		      		boSendAT;
 
 extern  uchar               mpcbSendAT[bPORTS];
 

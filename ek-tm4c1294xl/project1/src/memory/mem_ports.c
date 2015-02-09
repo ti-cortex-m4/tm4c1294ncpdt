@@ -12,7 +12,7 @@ MEM_PORTS.C
 port                    mppoPorts[bPORTS];
 
 // флаг передачи 'AT'
-boolean     			boSendAT;
+boolean     	       		boSendAT;
 
 // массив таймаутов передачи 'AT'
 uchar                   mpcbSendAT[bPORTS];
