@@ -13,6 +13,7 @@
 #include        "main_groups.h"
 #include        "main_digitals.h"
 #include        "main_energy.h"
+#include        "main_events.h"
 
 
 typedef enum 

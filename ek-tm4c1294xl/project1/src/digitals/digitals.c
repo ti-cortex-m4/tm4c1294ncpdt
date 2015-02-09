@@ -6,6 +6,7 @@ DIGITALS.C
 
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
+#include        "../display/display.h"
 #include        "../flash/files.h"
 
 
@@ -16,14 +17,14 @@ file const              flDigitals = {wFLA_GAPS, &mpdiDigital, sizeof(digital)*b
 
 void    InitDigitals(void)
 {
-	LoadFile(&flDigitals);
+  LoadFile(&flDigitals);
 }
 
 
 void    ResetDigitals(void)
 {
-  memset(&gaGaps, 0, sizeof(gaGaps));
-	SaveFile(&flDigitals);
+  memset(&mpdiDigital, 0, sizeof(mpdiDigital));
+  SaveFile(&flDigitals);
 }
 
 
@@ -53,15 +54,36 @@ uchar   GetDigitalLine(uchar  ibCan) {
 
 
 
+void    SetDigital(uchar  ibCan, digital  *pdi)
+{
+  mpdiDigital[ibCan] = *pdi;
+}
+
+
+
+void    MakeDigitals(void)
+{
+uchar   i;
+
+  wDigitals = 0x0000;
+  for (i=0; i<16; i++)
+  {
+    if (GetDigitalDevice(i) == 0)
+      wDigitals |= (1 << i);
+  }
+}
+
+
+
 void    ShowDigital(uchar  i)
 {
-  sprintf(szLo,"%1bu.%02bu.%02bu.%03bu.%02bu  ",
+  sprintf(szLo,"%1u.%02u.%02u.%03u.%02u  ",
                GetDigitalPort(i)+1,
                GetDigitalPhone(i),
                GetDigitalDevice(i),
                GetDigitalAddress(i),
                GetDigitalLine(i)+1);
 
-  sprintf(szHi+14,"%02bu",i+1);
-  (mpboEnblCan[i] == boTrue) ? (szHi[13] = '+') : (szHi[13] = '-');
+  sprintf(szHi+14,"%02u",i+1);
+  (mpboEnblCan[i]) ? (szHi[13] = '+') : (szHi[13] = '-');
 }
