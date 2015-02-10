@@ -12,6 +12,7 @@ KEY_DIGITALS.C
 #include        "../../flash/files.h"
 #include        "../../flash/records.h"
 #include        "../../digitals/digitals.h"
+#include        "../../serial/speed.h"
 
 
 
@@ -81,7 +82,7 @@ void    key_SetDigitals(void)
     else if (enKeyboard == KBD_POSTINPUT6)
     {
       diT.ibLine = GetChar(12,13) - 1;
-      if ((diT.ibLine < mpbMaxLines[ diT.bDevice ]) || (diT.bDevice == 99))
+      if (diT.ibLine < mpbMaxLines[ diT.bDevice ])
       {
         enKeyboard = KBD_POSTENTER;
         ShowHi(szDigitals);
@@ -90,7 +91,7 @@ void    key_SetDigitals(void)
         SetDigital(ibX, &diT);
         AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
-        MakeDigitals();  
+        MakeDigitalsMask();  
         MakeKeys();
         MakeCorrectLimit();
         // mpbAddLines[ibX] = diT.ibLine;
@@ -224,7 +225,7 @@ void    key_SetDigitals(void)
     else if (enKeyboard == KBD_POSTINPUT4)
     {
       diT.bDevice = GetChar(5,6);
-      if ((diT.bDevice <= bDEVICES) || (diT.bDevice == 99))
+      if (diT.bDevice <= bDEVICES)
       {
         if (diT.bDevice == 0)
         {
@@ -238,7 +239,7 @@ void    key_SetDigitals(void)
           SetDigital(ibX, &diT);
           AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
-          MakeDigitals();  
+          MakeDigitalsMask();  
           MakeKeys();
           // mpbAddLines[ibX] = diT.ibLine;
 
@@ -296,7 +297,7 @@ void    key_SetDigitals(void)
         SetDigital(ibX, &diT);
         AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
-        MakeDigitals();  
+        MakeDigitalsMask();  
         MakeKeys();
 
         ShowDigital(ibX);

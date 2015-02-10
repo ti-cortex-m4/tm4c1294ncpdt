@@ -13,7 +13,7 @@ KEY_FACTORS.C
 #include        "../display/display.h"
 #include        "../engine.h"
 #include        "../energy.h"
-#include        "../sensors.h"
+#include        "../digitals/digitals.h"
 
 
 

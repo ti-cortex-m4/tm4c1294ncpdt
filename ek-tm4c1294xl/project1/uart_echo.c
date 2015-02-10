@@ -30,7 +30,7 @@
 #include "src/tariffs/tariffs.h"
 #include "src/tariffs/relaxs.h"
 #include "src/tariffs/gaps.h"
-
+#include "src/digitals/digitals.h"
 #include "src/output/response_crc.h"
 
 // The error routine that is called if the driver library encounters an error.
@@ -61,6 +61,7 @@ int main(void) {
 	InitTariffs();
 	InitRelaxs();
 	InitGaps();
+	InitDigitals();
 
     InitUARTs(ui32SysClock);
     InitTimer0(ui32SysClock);

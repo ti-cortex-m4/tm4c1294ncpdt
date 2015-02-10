@@ -17,9 +17,10 @@ uchar   GetDigitalDevice(uchar  ibCan);
 uchar   GetDigitalAddress(uchar  ibCan);
 uchar   GetDigitalLine(uchar  ibCan);
 
+bool    TrueDigital(digital  *pdi);
 void    SetDigital(uchar  ibCan, digital  *pdi);
 
-void    MakeDigitals(void);
+void    MakeDigitalsMask(void);
 
-void    ShowDigital(uchar  i);
+void    ShowDigital(uchar  ibCan);
 

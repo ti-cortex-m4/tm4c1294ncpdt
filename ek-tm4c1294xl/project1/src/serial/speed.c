@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_DIGITALS.C
+SPEED.C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,8 +8,14 @@ MEM_DIGITALS.C
 
 
 
-// битовая маска используемых цифровых счётчиков
-uint                    wDigitalsMask;
+boolean StreamPortCan(uchar  ibPort, uchar  ibCanal)
+{
+  return(1);
+}
 
-// массив разрешенных каналов
-boolean                 mpfEnblCan[bCANALS];
+
+
+boolean StreamPortPhoneCan(uchar  ibPort, uchar  ibPhone, uchar  ibCanal)
+{
+  return(1);
+}

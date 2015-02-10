@@ -1,8 +1,7 @@
 /*------------------------------------------------------------------------------
-SENSORS.H
+MEM_DIGITALS0.H
 
 
 ------------------------------------------------------------------------------*/
 
-ulong   GetMajDelay(uchar  ibPort);
-ulong   GetMinDelay(uchar  ibPort);
+extern  digital                 mpdiDigital[bCANALS];

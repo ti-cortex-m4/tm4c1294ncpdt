@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-SENSORS.H
+SPEED.H
 
 
 ------------------------------------------------------------------------------*/
 
-ulong   GetMajDelay(uchar  ibPort);
-ulong   GetMinDelay(uchar  ibPort);
+boolean StreamPortCan(uchar  ibPort, uchar  ibCanal);
+boolean StreamPortPhoneCan(uchar  ibPort, uchar  ibPhone, uchar  ibCanal);

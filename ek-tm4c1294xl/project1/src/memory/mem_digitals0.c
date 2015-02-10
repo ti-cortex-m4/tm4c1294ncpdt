@@ -1,8 +1,12 @@
 /*------------------------------------------------------------------------------
-SENSORS.H
+MEM_DIGITALS0.C
 
 
 ------------------------------------------------------------------------------*/
 
-ulong   GetMajDelay(uchar  ibPort);
-ulong   GetMinDelay(uchar  ibPort);
+#include        "../main.h"
+
+
+
+// массив цифровых счётчиков
+digital                 mpdiDigital[bCANALS];
