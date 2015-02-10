@@ -50,6 +50,9 @@ QUERIES.H
 #define bINQ_GETLEVEL                  180
 #define bINQ_SETLEVEL                  181
 
+#define bINQ_GETDIGITAL                42
+#define bINQ_SETDIGITAL                43
+
 #define bINQ_GETTARIFFSDAY             150
 
 #define bINQ_SETDELAY                  243

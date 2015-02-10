@@ -10,6 +10,7 @@ ENERGY.C
 #include        "memory/mem_energy.h"
 #include        "memory/mem_realtime.h"
 #include        "memory/mem_graph3.h"
+#include        "digitals/digitals.h"
 #include        "sensors.h"
 
 

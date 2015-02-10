@@ -5,8 +5,9 @@ RESPONSE2_CRC.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../memory/mem_factors.h"
 #include        "../memory/mem_ports.h"
+#include        "../memory/mem_factors.h"
+#include        "../memory/mem_digitals.h"
 #include        "../states.h"
 #include        "../ports.h"
 #include        "../output/response_crc.h"
@@ -14,86 +15,111 @@ RESPONSE2_CRC.C
 #include        "../output/out_groups.h"
 #include        "../output/out_relaxs.h"
 #include        "../output/out_gaps.h"
+#include        "../output/out_digitals.h"
 #include        "../output/out_version.h"
 
 
 
-void    OutRealCanExt(real  *mpreT)
+static void OutRealCan(real  *mpe)
 {
 uchar   i;
-uchar   wT;
+uchar   w;
 
   InitPushPtr();
-  wT = 0;
+  w = 0;
 
   for (i=0; i<bCANALS; i++)
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
     {
-      Push(&mpreT[i], sizeof(real));
-      wT += sizeof(real);
+      Push(&mpe[i], sizeof(real));
+      w += sizeof(real);
     }
   }
 
-  OutptrOutBuff(wT);
+  OutptrOutBuff(w);
 }
 
 /*
-void    OutIntCanExt(uint  *mpwT)
+static void OutIntCan(uint  *mpw)
 {
 uchar   i;
-uchar   wT;
+uchar   w;
 
   InitPushPtr();
-  wT = 0;
+  w = 0;
 
   for (i=0; i<bCANALS; i++)
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
     {
-      Push(&mpwT[i], sizeof(uint));
-      wT += sizeof(uint);
+      Push(&mpw[i], sizeof(uint));
+      w += sizeof(uint);
     }
   }
 
-  OutptrOutBuff(wT);
+  OutptrOutBuff(w);
 }
 
 
-void    OutCharCanExt(uchar  *mpbT)
+static void OutCharCan(uchar  *mpb)
 {
 uchar   i;
-uchar   wT;
+uchar   w;
 
   InitPushPtr();
-  wT = 0;
+  w = 0;
 
   for (i=0; i<bCANALS; i++)
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
     {
-      Push(&mpbT[i], sizeof(uchar));
-      wT += sizeof(uchar);
+      Push(&mpb[i], sizeof(uchar));
+      w += sizeof(uchar);
     }
   }
 
-  OutptrOutBuff(wT);
+  OutptrOutBuff(w);
 }
 */
+
+static void OutBoolCan(bool  *mpf)
+{
+uchar   i;
+uchar   w;
+
+  InitPushPtr();
+  w = 0;
+
+  for (i=0; i<bCANALS; i++)
+  {
+    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    {
+      Push(&mpf[i], sizeof(bool));
+      w += sizeof(bool);
+    }
+  }
+
+  OutptrOutBuff(w);
+}
+
 
 
 void    Response2_CRC(void)
 {
   switch (bInBuff5)
   {
-    case bINQ_GETTRANS_ENG: OutRealCanExt(mpreTransEng); break;
-    case bINQ_GETTRANS_CNT: OutRealCanExt(mpreTransCnt); break;
-    case bINQ_GETPULSE_HOU: OutRealCanExt(mprePulseHou); break;
-    case bINQ_GETPULSE_MNT: OutRealCanExt(mprePulseMnt); break;
-    case bINQ_GETCOUNT:     OutRealCanExt(mpreCount);    break;
-    case bINQ_GETLOSSE:     OutRealCanExt(mpreLosse);    break;
+    case bINQ_GETTRANS_ENG: OutRealCan(mpreTransEng); break;
+    case bINQ_GETTRANS_CNT: OutRealCan(mpreTransCnt); break;
+    case bINQ_GETPULSE_HOU: OutRealCan(mprePulseHou); break;
+    case bINQ_GETPULSE_MNT: OutRealCan(mprePulseMnt); break;
+    case bINQ_GETCOUNT:     OutRealCan(mpreCount);    break;
+    case bINQ_GETLOSSE:     OutRealCan(mpreLosse);    break;
 
     case bEXT_GETGROUPS: OutGetGroupsExt(); break;
+
+    case bEXT_GETDIGITALS: OutDigitalsExt(); break;
+    case bEXT_GETENBLCAN: OutBoolCan(mpfEnblCan); break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;

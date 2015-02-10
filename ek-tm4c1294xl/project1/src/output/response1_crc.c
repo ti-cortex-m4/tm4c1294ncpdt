@@ -6,11 +6,13 @@ RESPONSE1_CRC.C
 
 #include        "../main.h"
 #include        "../memory/mem_ports.h"
+#include        "../memory/mem_factors.h"
 #include        "../states.h"
 #include        "../ports.h"
 #include        "out_rtc.h"
 #include        "out_groups.h"
 #include        "out_tariffs.h"
+#include        "out_digitals.h"
 #include        "out_flash.h"
 #include        "out_delay.h"
 #include        "out_console.h"
@@ -55,6 +57,17 @@ void    Response1_CRC(void)
 
       case bINQ_GETNEWPUBTARIFFS: OutGetNewPubTariffs(); break;
       case bINQ_SETNEWPUBTARIFFS: OutSetNewPubTariffs(); break;
+
+      case bINQ_GETTRANS_ENG: Common(mpreTransEng, sizeof(real)*bCANALS); break;
+      case bINQ_GETTRANS_CNT: Common(mpreTransCnt, sizeof(real)*bCANALS); break;
+      case bINQ_GETPULSE_HOU: Common(mprePulseHou, sizeof(real)*bCANALS); break;
+      case bINQ_GETPULSE_MNT: Common(mprePulseMnt, sizeof(real)*bCANALS); break;
+      case bINQ_GETCOUNT: Common(mpreCount, sizeof(real)*bCANALS); break;
+      case bINQ_GETLOSSE: Common(mpreLosse, sizeof(real)*bCANALS); break;
+      case bINQ_GETLEVEL: Common(mpreLevelDiv, sizeof(real)*bCANALS); break;
+
+      case bINQ_GETDIGITAL: OutGetDigital(); break;
+      case bINQ_SETDIGITAL: OutSetDigital(); break;
 
       case bINQ_GETTARIFFSDAY: OutGetTariffsDay(); break;
 

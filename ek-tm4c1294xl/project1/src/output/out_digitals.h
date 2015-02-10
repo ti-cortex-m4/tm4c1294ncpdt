@@ -1,8 +1,10 @@
 /*------------------------------------------------------------------------------
-SENSORS.H
+OUT_DIGITALS.H
 
 
 ------------------------------------------------------------------------------*/
 
-ulong   GetMajDelay(uchar  ibPort);
-ulong   GetMinDelay(uchar  ibPort);
+void    OutGetDigital(void);
+void    OutSetDigital(void);
+
+void    OutDigitalsExt(void);

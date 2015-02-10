@@ -10,6 +10,8 @@ QUERIES2.H
 
 
 #define bEXT_GETGROUPS                 7
+#define bEXT_GETDIGITALS               8
+#define bEXT_GETENBLCAN                13
 
 #define bEXT_GETRELAXS                 45
 #define bEXT_SETRELAXS                 46

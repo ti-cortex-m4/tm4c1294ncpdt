@@ -61,7 +61,9 @@ FLASH.H
 #define wFLA_LOSSE              (uint)(wFLA_COUNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 #define wFLA_LEVEL              (uint)(wFLA_LOSSE + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 
-#define wFLA_END                (uint)(wFLA_LEVEL + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
+#define wFLA_DIGITALS           (uint)(wFLA_LEVEL + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
+
+#define wFLA_END                (uint)(wFLA_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1)
 
 
 #endif
