@@ -19,3 +19,9 @@ boolean StreamPortPhoneCan(uchar  ibPort, uchar  ibPhone, uchar  ibCanal)
 {
   return(1);
 }
+
+
+
+void    MakeCorrectLimit(void)
+{
+}

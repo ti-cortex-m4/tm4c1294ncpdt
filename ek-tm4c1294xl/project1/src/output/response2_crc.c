@@ -20,7 +20,7 @@ RESPONSE2_CRC.C
 
 
 
-static void OutRealCan(real  *mpe)
+void    OutRealCanExt(real  *mpe)
 {
 uchar   i;
 uchar   w;
@@ -41,7 +41,7 @@ uchar   w;
 }
 
 /*
-static void OutIntCan(uint  *mpw)
+void    OutIntCanExt(uint  *mpw)
 {
 uchar   i;
 uchar   w;
@@ -62,7 +62,7 @@ uchar   w;
 }
 
 
-static void OutCharCan(uchar  *mpb)
+void    OutCharCanExt(uchar  *mpb)
 {
 uchar   i;
 uchar   w;
@@ -83,7 +83,7 @@ uchar   w;
 }
 */
 
-static void OutBoolCan(bool  *mpf)
+void    OutBoolCanExt(bool  *mpf)
 {
 uchar   i;
 uchar   w;
@@ -109,17 +109,17 @@ void    Response2_CRC(void)
 {
   switch (bInBuff5)
   {
-    case bINQ_GETTRANS_ENG: OutRealCan(mpreTransEng); break;
-    case bINQ_GETTRANS_CNT: OutRealCan(mpreTransCnt); break;
-    case bINQ_GETPULSE_HOU: OutRealCan(mprePulseHou); break;
-    case bINQ_GETPULSE_MNT: OutRealCan(mprePulseMnt); break;
-    case bINQ_GETCOUNT:     OutRealCan(mpreCount);    break;
-    case bINQ_GETLOSSE:     OutRealCan(mpreLosse);    break;
+    case bINQ_GETTRANS_ENG: OutRealCanExt(mpreTransEng); break;
+    case bINQ_GETTRANS_CNT: OutRealCanExt(mpreTransCnt); break;
+    case bINQ_GETPULSE_HOU: OutRealCanExt(mprePulseHou); break;
+    case bINQ_GETPULSE_MNT: OutRealCanExt(mprePulseMnt); break;
+    case bINQ_GETCOUNT:     OutRealCanExt(mpreCount);    break;
+    case bINQ_GETLOSSE:     OutRealCanExt(mpreLosse);    break;
 
     case bEXT_GETGROUPS: OutGetGroupsExt(); break;
 
     case bEXT_GETDIGITALS: OutDigitalsExt(); break;
-    case bEXT_GETENBLCAN: OutBoolCan(mpfEnblCan); break;
+    case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnabledCan); break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;

@@ -11,3 +11,11 @@ typedef struct
   uchar         bAddress;               // логический адрес
   uchar         ibLine;                 // вид энергии
 } digital;
+
+
+
+// тип 'телефона'
+typedef struct
+{
+  uchar         szNumber[bPHONENUMBER+1];
+} phone;

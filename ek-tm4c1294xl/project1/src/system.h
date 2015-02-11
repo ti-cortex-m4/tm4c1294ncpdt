@@ -87,7 +87,7 @@ SYSTEM.H
 #define bGROUPS         32
 
 // количество типов цифровых счЄтчиков
-#define bDEVICES        0
+#define bDEVICES        3
 
 
 // минимальный год
@@ -107,6 +107,10 @@ SYSTEM.H
 
 // размер мес€чных массивов (об€зательно 12 !)
 #define bMONTHS         12
+
+
+// размер телефонного номера
+#define bPHONENUMBER    13
 
 
 #endif
