@@ -93,5 +93,5 @@ void    ShowDigital(uchar  ibCan)
                GetDigitalLine(ibCan)+1);
 
   sprintf(szHi+14,"%02u",ibCan+1);
-  (mpfEnblCan[ibCan]) ? (szHi[13] = '+') : (szHi[13] = '-');
+  (mpboEnabledCan[ibCan]) ? (szHi[13] = '+') : (szHi[13] = '-');
 }

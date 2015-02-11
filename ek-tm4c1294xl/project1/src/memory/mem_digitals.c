@@ -12,4 +12,12 @@ MEM_DIGITALS.C
 uint                    wDigitalsMask;
 
 // массив разрешенных каналов
-boolean                 mpfEnblCan[bCANALS];
+boolean                 mpboEnabledCan[bCANALS];
+
+
+
+// флаг использования паролей счётчиков
+boolean                 boEnableKeys;
+
+// массив паролей счётчиков
+phone                   mpphKeys[bCANALS];

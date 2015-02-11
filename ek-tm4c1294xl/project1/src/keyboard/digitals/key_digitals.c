@@ -12,6 +12,7 @@ KEY_DIGITALS.C
 #include        "../../flash/files.h"
 #include        "../../flash/records.h"
 #include        "../../digitals/digitals.h"
+#include        "../../digitals/devices.h"
 #include        "../../serial/speed.h"
 
 
@@ -35,11 +36,11 @@ void    MakeKeys(void)
 {
   switch (diT.bDevice)
   {
-    case 1:   strcpy(&mpphKeys[ibX].szNumber, "000000");  break;
-    case 2:   strcpy(&mpphKeys[ibX].szNumber, "222222");  break;
-    case 4:   strcpy(&mpphKeys[ibX].szNumber, "00000000");  break;
-    case 21:  strcpy(&mpphKeys[ibX].szNumber, "00000000");  break;
-    default:  strcpy(&mpphKeys[ibX].szNumber, "0");       break;
+    case 1:   strcpy((char *) &mpphKeys[ibX].szNumber, "000000");  break;
+    case 2:   strcpy((char *)&mpphKeys[ibX].szNumber, "222222");  break;
+    case 4:   strcpy((char *)&mpphKeys[ibX].szNumber, "00000000");  break;
+    case 21:  strcpy((char *)&mpphKeys[ibX].szNumber, "00000000");  break;
+    default:  strcpy((char *)&mpphKeys[ibX].szNumber, "0");       break;
   }
 }
 
@@ -94,7 +95,6 @@ void    key_SetDigitals(void)
         MakeDigitalsMask();  
         MakeKeys();
         MakeCorrectLimit();
-        // mpbAddLines[ibX] = diT.ibLine;
 
         if (diT.bDevice != 0)
         {
