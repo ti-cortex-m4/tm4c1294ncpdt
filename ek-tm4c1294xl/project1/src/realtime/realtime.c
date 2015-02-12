@@ -7,6 +7,7 @@ REALTIME.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
+#include        "../memory/mem_energy.h"
 #include        "../keyboard/key_timedate.h"
 
 
@@ -160,37 +161,24 @@ void    ProcessNextTim(void)
 
   MakeCurrTimPar(); 
 }
-
+*/
 
 // обработка перехода на следующие три минуты
 void    ProcessNextMnt(void)
 {
-  memset(&mpwImpMntCan[(ibSoftMnt+1) % bMINUTES], '\0', sizeof(uint)*bCANALS);
+  memset(&mpwImpMntCan[(ibSoftMnt+1) % bMINUTES], 0, sizeof(uint)*bCANALS); // TODO Init/Reset mpwImpMntCan
 
-  ET0 = 0;
-  memcpy(&mpwImpCurrMntCan, &mpwImpMntCan[ibSoftMnt], sizeof(uint)*bCANALS);
-  if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
-  ET0 = 1;
+//  ET0 = 0;
+//  memcpy(&mpwImpCurrMntCan, &mpwImpMntCan[ibSoftMnt], sizeof(uint)*bCANALS);
+//  if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
+//  ET0 = 1;
 
-  MakeImpulse();    
+//  MakeImpulse();
 
-  if (boQuickParam == boTrue) ProcessNextTim();
-
-  if (fActive == 1) 
-  {
-    MakeContacts1();
-    if (bContactMode == 4) 
-    { 
-      if (cbContact > 0) { cbContact--; AddSysRecord(EVE_CONTACTS3_COUNTER); } 
-      MakeContacts4();
-    }
-  }
-
-  NextMntCurrent2();
   cdwMinutes3++;
 }
 
-
+/*
 // обработка перехода на следующий получас
 void    ProcessNextHou(void)
 {
@@ -247,7 +235,7 @@ void    ProcessTime(void)
     if ((fActive == 1) && (enGlobal == GLB_WORK))
     {
       if (cbShowTime >= 2)
-        ShowTime();
+				ShowTimeNow();
       else 
         cbShowTime++;  
     }
@@ -257,9 +245,7 @@ void    ProcessTime(void)
   // переход на следующие три минуты
   if ((tiCurr.bMinute % 3 == 0) && (tiPrev.bMinute % 3 != 0))
   {
-    cdwMinutes3++;
-
-//    ProcessNextMnt();
+    ProcessNextMnt();
   }
 
 
