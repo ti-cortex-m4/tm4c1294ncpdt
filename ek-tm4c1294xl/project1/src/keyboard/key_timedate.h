@@ -9,5 +9,5 @@ void    key_SetCurrDate(void);
 void    auto_GetCurrTime(void);   
 void    auto_GetCurrDate(void); 
 
-void    ShowTimeNow(void);
+void    ShowTime(void);
 void    NoShowTime(bool  fClearProgram);

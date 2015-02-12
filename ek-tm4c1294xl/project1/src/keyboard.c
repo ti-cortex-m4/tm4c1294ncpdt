@@ -7,6 +7,7 @@ KEYBOARD.C
 #include        "main.h"
 #include        "memory/mem_settings.h"
 #include        "memory/mem_program.h"
+#include        "memory/mem_realtime.h"
 #include        "display/display.h"
 #include        "beep.h"
 #include        "delay.h"
@@ -37,8 +38,6 @@ key                     enKeyboard;
 
 uchar                   bProgram;
 uint                    wProgram;
-
-uchar                   cbShowTime;
 
 time                    tiKey;
 

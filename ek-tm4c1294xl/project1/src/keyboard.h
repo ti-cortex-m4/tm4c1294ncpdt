@@ -23,8 +23,6 @@ extern  key                     enKeyboard;
 extern  uchar                   bProgram;
 extern  uint                    wProgram;
 
-extern  uchar                   cbShowTime;
-
 extern  time                    tiKey;
 
 extern  uchar                   ibX, ibY, ibZ;
