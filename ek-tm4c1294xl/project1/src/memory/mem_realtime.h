@@ -12,3 +12,11 @@ extern  uchar                   ibSoftMnt,
                                 ibSoftMon, ibHardMon;
 
 extern  uint                    iwHardHou;
+
+extern  uchar                   cbShowTime;
+
+
+
+extern  ulong                   cdwSeconds, cdwMinutes1, cdwMinutes3, cdwMinutes30;
+
+extern  uint                    cwDays, cwMonths, cwYears;

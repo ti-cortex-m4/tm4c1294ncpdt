@@ -19,3 +19,15 @@ uchar                   ibSoftMnt,
 
 // индексы по кольцевому буферу
 uint                    iwHardHou;
+
+// сечетчик включения отображения текущего времени
+uchar                   cbShowTime;
+
+
+
+// счётчики отработанного времени
+ulong                   cdwSeconds, cdwMinutes1, cdwMinutes3, cdwMinutes30;
+
+// счётчики отработанного времени
+uint                    cwDays, cwMonths, cwYears;
+

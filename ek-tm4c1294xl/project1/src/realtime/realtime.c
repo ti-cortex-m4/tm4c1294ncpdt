@@ -6,6 +6,8 @@ REALTIME.C
 
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
+#include        "../memory/mem_settings.h"
+#include        "../keyboard/key_timedate.h"
 
 
 /*
@@ -14,10 +16,10 @@ bit                     fSeason;
 
 // признаки перехода на сезонное время при выключенном состоянии
 bit                     fSummer,fWinter;
-
+*/
 // признак работы в активном режиме
-bit                     fActive;
-
+bool                    fActive;
+/*
 // признаки для запуска локальных задач
 bit                     fProfile,fCurrent;
 
@@ -228,103 +230,36 @@ void    ProcessNextHou(void)
 */
 
 
-// базовая программа обработки переходов времени
 void    ProcessTime(void)
 {
   // переход на следующую секунду
   if (tiCurr.bSecond != tiPrev.bSecond)
-  {/*
+  {
     cdwSeconds++;
-    if (fActive == 1) cwHouLength++;
-
-    if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
-    {
-      if ((fProfile == 1) && (cbWaitQuery == 0))
-      {
-        if ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= cbTimeoutHou)
-        { 
-          boManual = boFalse;
-          fProfile = 0;
-          RunProfile((boControlTime == boTrue) && (ControlTime() == 1));
-        }
-      }
-    }
-
-    if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
-    {
-      if ((fCurrent == 1) && (cbWaitQuery == 0))
-      {
-        if ((tiCurr.bMinute % 3)*60 + tiCurr.bSecond >= cbTimeoutMnt)
-        { 
-//          fCurrent = 0;
-
-#ifdef POWER
-          RunCurrent();
-#endif
-        }
-      }
-    }
-
-    if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
-    {
-       if (bDelayPhone2 > 0) {
-           if (bDelayPhone2-- == 1) MakePhones2();
-       } 
-       cwTimeLockoutP++; 
-    }
-
-    if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
-    {
-       if (cbCheckupRun > 0) {
-           if (--cbCheckupRun == 0) NexttimeCheckup();
-       } 
-    }*/
   }
 
 
   // переход на следующую минуту
   if (tiCurr.bMinute != tiPrev.bMinute)
-  {/*
+  {
     cdwMinutes1++;
-
-    if (fActive == 1) fSendAT = 1;
-    if (fActive == 1) RunSMK();
 
     if ((fActive == 1) && (enGlobal == GLB_WORK))
     {
       if (cbShowTime >= 2)
-        ShowTimeNow();
+        ShowTime();
       else 
         cbShowTime++;  
-    }*/
+    }
   }
 
 
   // переход на следующие три минуты
   if ((tiCurr.bMinute % 3 == 0) && (tiPrev.bMinute % 3 != 0))
-  {/*
-    ProcessNextMnt();
-
-    // начало опроса цифровых счётчиков по трём минутам
-    if (fActive == 1) fCurrent = 1;
-
-/ *  if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
-    {
-      if ((fCurrent == 1) && (cbWaitQuery == 0))
-      {
-//        fCurrent = 0;
-
-#ifdef POWER
-        RunCurrent();
-#endif
-      }
-    }  */
-  }
-
-
-  if ((tiCurr.bMinute % 15 == 0) && (tiPrev.bMinute % 15 != 0))
   {
-//    if (fActive == 1) RunGPS();
+    cdwMinutes3++;
+
+//    ProcessNextMnt();
   }
 
 

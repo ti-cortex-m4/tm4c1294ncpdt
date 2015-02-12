@@ -6,6 +6,7 @@ KEY_TIMEDATE.C
 
 #include        "../main.h"
 #include        "../memory/mem_program.h"
+#include        "../memory/mem_realtime.h"
 #include        "../keyboard.h"
 #include        "../display/display.h"
 #include        "../rtc.h"
@@ -248,7 +249,7 @@ void   auto_GetCurrDate(void)
 
 
 // включение просмотра текущего времени при бездействии пользователя
-void    ShowTimeNow(void)
+void    ShowTime(void)
 {
   bProgram = bGET_CURRTIME;
   fSlide = 0;
