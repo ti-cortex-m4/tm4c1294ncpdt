@@ -13,7 +13,7 @@ DIGITALS.C
 
 
 
-file const              flDigitals = {wFLA_GAPS, &mpdiDigital, sizeof(digital)*bCANALS};
+file const              flDigitals = {wFLA_DIGITALS, &mpdiDigital, sizeof(digital)*bCANALS};
 
 
 
@@ -21,6 +21,8 @@ void    InitDigitals(void)
 {
   LoadFile(&flDigitals);
   MakeDigitalsMask();
+
+//  LoadFile(&flEnabledCan);
 }
 
 
