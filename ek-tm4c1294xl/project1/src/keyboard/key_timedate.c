@@ -249,7 +249,7 @@ void   auto_GetCurrDate(void)
 
 
 // включение просмотра текущего времени при бездействии пользователя
-void    ShowTime(void)
+void    ShowTimeNow(void)
 {
   bProgram = bGET_CURRTIME;
   fSlide = 0;
