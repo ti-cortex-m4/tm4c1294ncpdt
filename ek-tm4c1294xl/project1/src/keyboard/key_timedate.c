@@ -265,7 +265,7 @@ void    ShowCurrentTime(void)
 // выключение просмотра текущего времени
 void    HideCurrentTime(bool  fClearProgram)
 {
-  cbShowTime = 0;
+  cbShowCurrentTime = 0;
   fSlide = false;
 
   if (fClearProgram == true)

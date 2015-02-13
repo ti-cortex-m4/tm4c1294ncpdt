@@ -52,7 +52,7 @@ void    InitKeyboard(void)
   bKey = 0;
   fKey = 0;
 
-  cbShowTime = 0;
+  cbShowCurrentTime = 0;
 
   boSetTime     = false;
   boSetDate     = false;
@@ -164,7 +164,7 @@ uchar   i;
 
 
   // обнуляем счётчик вызова программы по умолчанию
-  cbShowTime = 0;
+  cbShowCurrentTime = 0;
 
   // перед вызовом программы необходимо нажать кнопку 'Программа'
   if ((enKeyboard == KBD_BEGIN) && (bKey != bKEY_PROGRAM))

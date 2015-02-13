@@ -13,7 +13,7 @@ extern  uchar                   ibSoftMnt,
 
 extern  uint                    iwHardHou;
 
-extern  uchar                   cbShowTime;
+extern  uchar                   cbShowCurrentTime;
 
 
 
