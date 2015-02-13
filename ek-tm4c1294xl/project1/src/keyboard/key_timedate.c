@@ -249,7 +249,7 @@ void   auto_GetCurrDate(void)
 
 
 // включение просмотра текущего времени при бездействии пользователя
-void    ShowTimeNow(void)
+void    ShowCurrentTime(void)
 {
   bProgram = bGET_CURRTIME;
   fSlide = 0;
@@ -263,7 +263,7 @@ void    ShowTimeNow(void)
 
 
 // выключение просмотра текущего времени
-void    NoShowTime(bool  fClearProgram)
+void    HideCurrentTime(bool  fClearProgram)
 {
   cbShowTime = 0;
   fSlide = false;

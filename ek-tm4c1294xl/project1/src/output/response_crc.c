@@ -31,7 +31,7 @@ void    ShowCommandCRC(uchar  bState) {
 #endif
 
     ibPortActive = ibPort;
-    NoShowTime(0);
+    HideCurrentTime(0);
   }
 }
 

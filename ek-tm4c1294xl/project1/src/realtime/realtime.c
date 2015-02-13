@@ -235,7 +235,7 @@ void    ProcessTime(void)
     if ((fActive == 1) && (enGlobal == GLB_WORK))
     {
       if (cbShowTime >= 2)
-				ShowTimeNow();
+				ShowCurrentTime();
       else 
         cbShowTime++;  
     }
