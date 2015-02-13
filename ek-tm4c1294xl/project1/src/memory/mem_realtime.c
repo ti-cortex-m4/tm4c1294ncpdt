@@ -21,7 +21,7 @@ uchar                   ibSoftMnt,
 uint                    iwHardHou;
 
 // сечетчик включения отображения текущего времени
-uchar                   cbShowTime;
+uchar                   cbShowCurrentTime;
 
 
 

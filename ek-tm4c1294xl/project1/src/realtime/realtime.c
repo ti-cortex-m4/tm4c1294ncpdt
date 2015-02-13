@@ -8,6 +8,7 @@ REALTIME.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_energy.h"
+#include        "../decret.h"
 #include        "../keyboard/key_timedate.h"
 
 
@@ -234,10 +235,10 @@ void    ProcessTime(void)
 
     if ((fActive == 1) && (enGlobal == GLB_WORK))
     {
-      if (cbShowTime >= 2)
+      if (cbShowCurrentTime >= 2)
 				ShowCurrentTime();
       else 
-        cbShowTime++;  
+        cbShowCurrentTime++;  
     }
   }
 
@@ -400,11 +401,10 @@ void    ProcessTime(void)
 
   // переход на следующий год
   if (tiCurr.bYear != tiPrev.bYear)
-  {/*
-    // рассчёт дат перехода на сезонное время
-    MakeDecret(); 
+  {
+    cwYears++;
 
-    cwYears++;*/
+    MakeDecret(); // TODO persist MakeDecret
   }
 }
 
