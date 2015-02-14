@@ -214,7 +214,7 @@ void    MakeAllCurrTariffs(void)
 uchar  i, j;
 uchar  ibMonth, ibMode;
 
-  tiAlt = *PGetCurrTimeDate();
+  tiAlt = *GetCurrTimeDate();
 
   if (boGapsFlag == false) 
   {

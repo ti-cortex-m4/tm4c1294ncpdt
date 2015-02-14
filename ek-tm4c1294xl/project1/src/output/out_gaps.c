@@ -34,7 +34,7 @@ time  ti;
 
   InitPushCRC();
   PushChar(boGapsFlag);
-  ti = *PGetCurrTimeDate();
+  ti = *GetCurrTimeDate();
   Push(&ti, sizeof(time));
   PushChar(mpbGaps[GetDayIndexMD(ti.bMonth, ti.bDay)]);
   Push(&mpbGaps, sizeof(gaGaps));

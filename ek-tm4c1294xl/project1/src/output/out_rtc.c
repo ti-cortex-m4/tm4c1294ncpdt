@@ -12,5 +12,5 @@ OUT_RTC.C
 
 void    OutGetCurrTimeDate(void)
 {
-  Common(PGetCurrTimeDate(), sizeof(time));
+  Common(GetCurrTimeDate(), sizeof(time));
 }

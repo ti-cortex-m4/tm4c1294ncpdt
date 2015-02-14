@@ -14,10 +14,6 @@ RTC.C
 
 
 
-time                    tiGetRTC, tiSetRTC;
-
-
-
 #if true
 
 //Биты управления SPI
@@ -130,86 +126,92 @@ void    InitRTC(void) {
 
 
 
-time    *PGetCurrTimeDate(void) {
+time    *GetCurrTimeDate(void)
+{
+static time ti;
+
   EnableSPI();
   CharOutSPI(0x00);
 
-  tiGetRTC.bSecond = FromBCD(CharInSPI());
-  tiGetRTC.bMinute = FromBCD(CharInSPI());
-  tiGetRTC.bHour   = FromBCD(CharInSPI());
-	                         CharInSPI();	// день недели
-  tiGetRTC.bDay    = FromBCD(CharInSPI());
-  tiGetRTC.bMonth  = FromBCD(CharInSPI());
-  tiGetRTC.bYear   = FromBCD(CharInSPI());
+  ti.bSecond = FromBCD(CharInSPI());
+  ti.bMinute = FromBCD(CharInSPI());
+  ti.bHour   = FromBCD(CharInSPI());
+                       CharInSPI(); // день недели
+  ti.bDay    = FromBCD(CharInSPI());
+  ti.bMonth  = FromBCD(CharInSPI());
+  ti.bYear   = FromBCD(CharInSPI());
 
   DisableSPI();
 
-  return &tiGetRTC;
+  return &ti;
 }
 
 
-void    SetCurrTimeDate(void) {
+void    SetCurrTimeDate(time  *pti)
+{
   EnableSPI();
   CharOutSPI(0x80);
 
-  CharOutSPI( ToBCD(tiSetRTC.bSecond) );
-  CharOutSPI( ToBCD(tiSetRTC.bMinute) );
-  CharOutSPI( ToBCD(tiSetRTC.bHour)   );
-  CharOutSPI( 0                       );	// день недели
-  CharOutSPI( ToBCD(tiSetRTC.bDay)    );
-  CharOutSPI( ToBCD(tiSetRTC.bMonth)  );
-  CharOutSPI( ToBCD(tiSetRTC.bYear)   );
+  CharOutSPI( ToBCD(pti->bSecond) );
+  CharOutSPI( ToBCD(pti->bMinute) );
+  CharOutSPI( ToBCD(pti->bHour)   );
+  CharOutSPI( 0 ); // день недели
+  CharOutSPI( ToBCD(pti->bDay)    );
+  CharOutSPI( ToBCD(pti->bMonth)  );
+  CharOutSPI( ToBCD(pti->bYear)   );
 
   DisableSPI();
 }
 
 
-void    SetCurrTime(void) {
+void    SetCurrTime(time  *pti)
+{
   EnableSPI();
   CharOutSPI(0x80);
 
-  CharOutSPI( ToBCD(tiSetRTC.bSecond) );
-  CharOutSPI( ToBCD(tiSetRTC.bMinute) );
-  CharOutSPI( ToBCD(tiSetRTC.bHour)   );
+  CharOutSPI( ToBCD(pti->bSecond) );
+  CharOutSPI( ToBCD(pti->bMinute) );
+  CharOutSPI( ToBCD(pti->bHour)   );
 
   DisableSPI();
 }
 
 
-void    SetCurrDate(void) {
+void    SetCurrDate(time  *pti)
+{
   EnableSPI();
   CharOutSPI(0x84);
 
-  CharOutSPI( ToBCD(tiSetRTC.bDay)    );
-  CharOutSPI( ToBCD(tiSetRTC.bMonth)  );
-  CharOutSPI( ToBCD(tiSetRTC.bYear)   );
+  CharOutSPI( ToBCD(pti->bDay)   );
+  CharOutSPI( ToBCD(pti->bMonth) );
+  CharOutSPI( ToBCD(pti->bYear)  );
 
   DisableSPI();
 }
 
 
 
-bool    TrueCurrTimeDate(void)
+bool    TrueCurrTimeDate(time  *pti)
 {
-  if (tiGetRTC.bSecond == FromBCD(0xFF)) return(0);
-  if (tiGetRTC.bMinute == FromBCD(0xFF)) return(0);
-  if (tiGetRTC.bHour   == FromBCD(0xFF)) return(0);
-  if (tiGetRTC.bDay    == FromBCD(0xFF)) return(0);
-  if (tiGetRTC.bMonth  == FromBCD(0xFF)) return(0);
-  if (tiGetRTC.bYear   == FromBCD(0xFF)) return(0);
+  if (pti->bSecond == FromBCD(0xFF)) return(0);
+  if (pti->bMinute == FromBCD(0xFF)) return(0);
+  if (pti->bHour   == FromBCD(0xFF)) return(0);
+  if (pti->bDay    == FromBCD(0xFF)) return(0);
+  if (pti->bMonth  == FromBCD(0xFF)) return(0);
+  if (pti->bYear   == FromBCD(0xFF)) return(0);
 
-  if (tiGetRTC.bSecond > 59) return(0);
-  if (tiGetRTC.bMinute > 59) return(0);
-  if (tiGetRTC.bHour   > 23) return(0);
+  if (pti->bSecond > 59) return(0);
+  if (pti->bMinute > 59) return(0);
+  if (pti->bHour   > 23) return(0);
 
-  if ((tiGetRTC.bDay == 0) ||
-      (tiGetRTC.bDay > 31)) return(0);
+  if ((pti->bDay == 0) ||
+      (pti->bDay > 31)) return(0);
 
-  if ((tiGetRTC.bMonth == 0) ||
-      (tiGetRTC.bMonth > 12 )) return(0);
+  if ((pti->bMonth == 0) ||
+      (pti->bMonth > 12 )) return(0);
 
-  if ((tiGetRTC.bYear < bMINYEAR) ||
-      (tiGetRTC.bYear > bMAXYEAR)) return(0);
+  if ((pti->bYear < bMINYEAR) ||
+      (pti->bYear > bMAXYEAR)) return(0);
 
   return(1);
 }
@@ -244,7 +246,7 @@ void    InitRTC(void) {
 
 
 
-time    *PGetCurrTimeDate(void) {
+time    *GetCurrTimeDate(void) {
   return &tiGetRTC;
 }
 

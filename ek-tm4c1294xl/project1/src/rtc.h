@@ -4,22 +4,18 @@ RTC.H
  DS3234EN
 ------------------------------------------------------------------------------*/
 
-#include 		"main.h"
-
-
-
-extern  time                    tiGetRTC, tiSetRTC;
+#include        "main.h"
 
 
 
 void    InitRTC(void);
 
-time    *PGetCurrTimeDate(void);
+time   *GetCurrTimeDate(void);
 
-void    SetCurrTimeDate(void);
-void    SetCurrTime(void);
-void    SetCurrDate(void);
+void    SetCurrTimeDate(time  *pti);
+void    SetCurrTime(time  *pti);
+void    SetCurrDate(time  *pti);
 
-bool    TrueCurrTimeDate(void);
+bool    TrueCurrTimeDate(time  *pti);
 
 void    RTC_Timer1(void);

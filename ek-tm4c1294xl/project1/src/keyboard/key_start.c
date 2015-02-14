@@ -99,8 +99,7 @@ void    key_Start(void)
     if (TestTariffs() == 0)
       return;
 
-    PGetCurrTimeDate();
-    if (TrueCurrTimeDate() == 0)
+    if (TrueCurrTimeDate(GetCurrTimeDate()) == false)
     {
       ShowHi(szAlarm);
       ShowLo(szBadRTC); LongBeep(); DelayMsg();
@@ -119,7 +118,7 @@ void    key_Start(void)
     MakeUsedNodes();
     
     // запоминаем время/дату первого запуска
-    tiStart = *PGetCurrTimeDate();
+    tiStart = *GetCurrTimeDate();
 
     DelayMsg();
     Work(); OK(); 

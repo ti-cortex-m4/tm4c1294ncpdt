@@ -162,7 +162,7 @@ void    key_SetRelaxs(void)
     else if (enKeyboard == KBD_POSTINPUT3)              
     {                                  
       tiKey.bMonth = GetChar(4,5);
-      tiKey.bYear  = (*PGetCurrTimeDate()).bYear;
+      tiKey.bYear  = GetCurrTimeDate()->bYear;
 
       if ((tiKey.bMonth == 0) || (tiKey.bMonth > 12))
         Beep();

@@ -42,8 +42,7 @@ void    key_SetCurrTime(void)
         enKeyboard = KBD_POSTENTER;
         ibZ = 60;
 
-        memcpy(&tiSetRTC, &tiKey, sizeof(time));
-        SetCurrTime();
+        SetCurrTime(&tiKey);
 
         boSetTime = true;
       }
@@ -134,8 +133,7 @@ void    key_SetCurrDate(void)
         enKeyboard = KBD_POSTENTER;
         ibZ = 60;
 
-        tiSetRTC = tiKey;
-        SetCurrDate();
+        SetCurrDate(&tiKey);
 
         boSetDate = true;
         MakeDecret();
@@ -218,12 +216,12 @@ void   auto_GetCurrTime(void)
 {
   if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
   {
-    ibY = (*PGetCurrTimeDate()).bSecond;
+    ibY = GetCurrTimeDate()->bSecond;
     if (ibY != ibZ)
     {
       ibZ = ibY;
 
-      tiAlt = *PGetCurrTimeDate();
+      tiAlt = *GetCurrTimeDate();
       ShowTime();
     }
   }
@@ -235,12 +233,12 @@ void   auto_GetCurrDate(void)
 {
   if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
   {
-    ibY = (*PGetCurrTimeDate()).bSecond;
+    ibY = GetCurrTimeDate()->bSecond;
     if (ibY != ibZ)
     {
       ibZ = ibY;
 
-      tiAlt = *PGetCurrTimeDate();
+      tiAlt = *GetCurrTimeDate();
       ShowDate();
     }
   }
