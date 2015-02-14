@@ -9,6 +9,7 @@ REALTIME.C
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_energy.h"
 #include        "../decret.h"
+#include        "../energy.h"
 #include        "../keyboard/key_timedate.h"
 
 
@@ -174,10 +175,27 @@ void    ProcessNextMnt(void)
 //  if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
 //  ET0 = 1;
 
-//  MakeImpulse();
+  MakeImpulse();
 
   cdwMinutes3++;
 }
+
+
+// обработка перехода на следующие три минуты
+void    ProcessNextMntSpec(void)
+{
+  memset(&mpwImpMntCan[(ibSoftMnt+1) % bMINUTES], 0, sizeof(uint)*bCANALS); // TODO Init/Reset mpwImpMntCan
+
+//  ET0 = 0;
+//  memcpy(&mpwImpCurrMntCan, &mpwImpMntCan[ibSoftMnt], sizeof(uint)*bCANALS);
+//  if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
+//  ET0 = 1;
+
+  MakeImpulseSpec();
+
+  cdwMinutes3++;
+}
+
 
 /*
 // обработка перехода на следующий получас
@@ -422,7 +440,7 @@ void    MakeNexttime(void)
   ibHardDay = 0;
 
   ibSoftMon = 0;
-  ibHardMon = (*PGetCurrTimeDate()).bMonth - 1;
+  ibHardMon = *PGetCurrTimeDate()->bMonth - 1;
 
   ibSoftTim = 0;
   iwHardTim = 0;
@@ -644,49 +662,6 @@ void    Nexttime(void)
 
       ClearNewTime();
     }
-
-    // запись прошедшего времени
-    tiPrev = tiCurr;
-  }
-}
-
-
-
-// базовая программа обработки переходов времени
-void    ProcessTimeMnt(void)
-{
-  // переход на следующие три минуты
-  if ((tiCurr.bMinute % 3 == 0) && (tiPrev.bMinute % 3 != 0))
-  {
-    ProcessNextMnt();
-    fCurrent = 1;
-  }
-
-  // переход на следующие тридцать минут
-  if ((tiCurr.bMinute % 30 == 0) && (tiPrev.bMinute % 30 != 0))
-  {
-    ProcessNextHou();
-    bHouInc++;
-  }
-}
-
-
-// программа обработки переходов в реальном времени
-void    NexttimeMnt(void)
-{
-  ResetWDT();
-  if (GetLabelRTC() == 0) return;
-
-  PGetCurrTimeDate();
-  if (TrueCurrTimeDate() == 0) return;
-
-  if (tiCurr.bSecond != tiGetRTC.bSecond)
-  {
-    // чтение текущего времени
-    tiCurr = tiGetRTC;
-
-    if (enGlobal != GLB_PROGRAM)
-      ProcessTimeMnt();
 
     // запись прошедшего времени
     tiPrev = tiCurr;
