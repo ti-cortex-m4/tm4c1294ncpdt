@@ -25,6 +25,21 @@ FLASH.H
 #define bMAXREPEAT      8
 
 
+// количество страниц на блок данных определённого типа
+#define bUINT           (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
+#define bIMPULSE        (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
+#define bPOWER          (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
+#define bREAL           (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
+
+
+// количество страниц для графика профилей по получасам
+#ifdef  DAYS100
+#define wPROFILE_SIZE   (uint)(wHOURS/4)
+#else
+#define wPROFILE_SIZE   (uint)(wHOURS/1)
+#endif
+
+
 // адреса блоков данных
 #define wFLA_BEGIN              0
 
@@ -63,7 +78,14 @@ FLASH.H
 
 #define wFLA_DIGITALS           (uint)(wFLA_LEVEL + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 
-#define wFLA_END                (uint)(wFLA_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1)
+#define wFLA_IMPHOUCAN          (uint)(wFLA_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1)
+#define wFLA_IMPDAYCAN          (uint)(wFLA_IMPHOUCAN + wPROFILE_SIZE)
+#define wFLA_IMPMONCAN          (uint)(wFLA_IMPDAYCAN + bIMPULSE*bDAYS)
+#define wFLA_POWDAYGRP          (uint)(wFLA_IMPMONCAN + bIMPULSE*bMONTHS)
+#define wFLA_POWMONGRP          (uint)(wFLA_POWDAYGRP + bPOWER*bDAYS)
+#define wFLA_CNTMONCAN          (uint)(wFLA_POWMONGRP + bPOWER*bMONTHS)
+
+#define wFLA_END                (uint)(wFLA_CNTMONCAN + bREAL*bMONTHS)
 
 
 #endif
