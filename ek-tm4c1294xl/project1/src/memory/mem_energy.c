@@ -8,6 +8,9 @@ MEM_ENERGY.C
 
 
 
+// массивы накопленных импульсов (по текущим трёмминутам)
+uint                    mpwImpCurrMntCan[bCANALS];
+
 // массивы накопленных импульсов (по трём минутам и получасам)
 uint                    mpwImpMntCan[bMINUTES][bCANALS],
                         mpwImpHouCan[2][bCANALS];

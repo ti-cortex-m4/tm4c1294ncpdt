@@ -4,6 +4,8 @@ MEM_ENERGY.H
 
 ------------------------------------------------------------------------------*/
 
+extern  uint                    mpwImpCurrMntCan[bCANALS];
+
 extern  uint                    mpwImpMntCan[bMINUTES][bCANALS],
                                 mpwImpHouCan[2][bCANALS];
 
