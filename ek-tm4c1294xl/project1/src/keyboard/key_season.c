@@ -69,7 +69,7 @@ void    key_SetSeason(void)
     else if (enKeyboard == KBD_POSTINPUT2)
     {
       tiKey.bMonth = GetChar(8,9);
-      tiKey.bYear  = (*PGetCurrTimeDate()).bYear;
+      tiKey.bYear  = GetCurrTimeDate()->bYear;
 
       if ((tiKey.bMonth >= 1) && (tiKey.bMonth <= 12))
       {
