@@ -101,7 +101,7 @@ uint    i;
 
 
 
-bool    SaveBuff(uint  wPage, void  *pbBuff, uint  wSize)
+bool    SaveBuff(uint wPage, void *pbBuff, uint wSize)
 {
   OpenOut(wPage);
 
@@ -112,7 +112,7 @@ bool    SaveBuff(uint  wPage, void  *pbBuff, uint  wSize)
 }
 
 
-bool    LoadBuff(uint  wPage, void  *pbBuff, uint  wSize)
+bool    LoadBuff(uint wPage, void *pbBuff, uint wSize)
 {
   OpenIn(wPage);
   return Load(pbBuff, wSize);
@@ -120,21 +120,13 @@ bool    LoadBuff(uint  wPage, void  *pbBuff, uint  wSize)
 
 
 
-bool    SaveFile(file const  *pfl)
+bool    SaveFile(file const *pfl)
 {
-  OpenOut((*pfl).wPage);
-
-  if (Save((*pfl).pbBuff, (*pfl).wSize) == 0)
-    return 0;
-
-  return CloseOut();
+  return SaveBuff(pfl->wPage, pfl->pbBuff, pfl->wSize);
 }
 
 
-bool    LoadFile(file const  *pfl)
+bool    LoadFile(file const *pfl)
 {
-  OpenIn((*pfl).wPage);
-  return Load((*pfl).pbBuff, (*pfl).wSize);
+  return LoadBuff(pfl->wPage, pfl->pbBuff, pfl->wSize);
 }
-
-
