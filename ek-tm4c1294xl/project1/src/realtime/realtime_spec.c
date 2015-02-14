@@ -11,8 +11,7 @@ REALTIME_SPEC.C
 
 
 
-
-// базовая программа обработки переходов времени
+/*
 void    ProcessTimeMntSpec(void)
 {
   // переход на следующие три минуты
@@ -31,7 +30,6 @@ void    ProcessTimeMntSpec(void)
 }
 
 
-// программа обработки переходов в реальном времени
 void    NexttimeMntSpec(void)
 {
 time  ti;
@@ -44,14 +42,12 @@ time  ti;
 
   if (tiCurr.bSecond != ti.bSecond)
   {
-    // чтение текущего времени
     tiCurr = ti;
 
     if (enGlobal != GLB_PROGRAM)
       ProcessTimeMntSpec();
 
-    // запись прошедшего времени
     tiPrev = tiCurr;
   }
 }
-
+*/
