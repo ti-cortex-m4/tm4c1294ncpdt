@@ -10,16 +10,18 @@ REALTIME.C
 #include        "../memory/mem_energy.h"
 #include        "../decret.h"
 #include        "../energy.h"
+#include        "../energy2.h"
+#include        "../rtc.h"
 #include        "../keyboard/key_timedate.h"
 
 
-/*
+
 // признак перехода на сезонное врем€ в текущие сутки
-bit                     fSeason;
+bool                    fSeason;
 
 // признаки перехода на сезонное врем€ при выключенном состо€нии
-bit                     fSummer,fWinter;
-*/
+bool                    fSummer, fWinter;
+
 // признак работы в активном режиме
 bool                    fActive;
 /*
@@ -35,7 +37,7 @@ void    ClearNewTime(void)
 {
   boNewSec = boNewMin = boNewMnt = boNewHou = boNewDay = boNewMon = boNewYea = boTrue;
 }
-
+*/
 
 
 uchar   PrevSoftMnt(void)
@@ -90,22 +92,7 @@ uchar   PrevHardMon(void)
 }
 
 
-
-uchar   PrevSoftTim(void)
-{
-  if (ibSoftTim > 0) return(0);
-  else               return(1);
-}
-
-/ *
-uint    PrevHardTim(void)
-{
-  if (iwHardTim > 0) return(iwHardTim - 1);
-  else               return(wTIMES-1);
-}
-* /
-
-
+/*
 // возвращает индекс текущего получаса
 uchar   GetHouIndex(void)
 {
@@ -197,44 +184,31 @@ void    ProcessNextMntSpec(time  *ptiOldDay, time  *ptiOldMon)
 }
 
 
-/*
+
 // обработка перехода на следующий получас
 void    ProcessNextHou(void)
 {
-  // состо€ние: начало нового получаса
-  InfoTime();
-
-  // расчЄт максимумов мощности за текущие сутки и мес€ц 
-  MakeAllMaxPowNow();
-
-  // расчЄт пределов опроса счЄтчиков
-  MakeLimits();
+//  // расчЄт максимумов мощности за текущие сутки и мес€ц
+//  MakeAllMaxPowNow();
+//
+//  // расчЄт пределов опроса счЄтчиков
+//  MakeLimits();
 
   SaveImpHou(0,iwHardHou,ibSoftHou);
 
   if (++iwHardHou >= wHOURS) iwHardHou = 0;
   if (++ibSoftHou >= 2)      ibSoftHou = 0;
 
-  memset(&mpwImpHouCan[ibSoftHou], '\0', sizeof(uint)*bCANALS);
+  memset(&mpwImpHouCan[ibSoftHou], 0, sizeof(uint)*bCANALS);
 
-  MakeCurrHouCan();
-  NextHouDiagram();
-  NextHouLimitsAux();
-  IOControl();
+//  MakeCurrHouCan();
+//  NextHouDiagram();
+//  NextHouLimitsAux();
+//  IOControl();
 
-  if (boQuickParam == boFalse) ProcessNextTim();
-  / *
-  if ((fActive == 1) && (GetFlashStatus() != 0))
-  {
-    ShowHi(szAlarm); 
-    ShowLo(szBadFlash); LongBeep();
-
-    NoShowTime(1);
-  }
-  * /
   cdwMinutes30++;
 }
-*/
+
 
 
 void    ProcessTime(void)
@@ -270,16 +244,7 @@ void    ProcessTime(void)
 
   // переход на следующий получас
   if ((tiCurr.bMinute % 30 == 0) && (tiPrev.bMinute % 30 != 0))
-  {/*
-    // флаг наступлени€ нового получаса
-    boNewHou = boTrue;
-
-    // управление сигналом DTR
-    if (fActive == 1) RunDTR();
-
-    // начало опроса цифровых счЄтчиков по получасам
-    if (fActive == 1) fProfile = 1;
-
+  {
     if ((tiCurr.bDay   == tiSummer.bDay)   &&
         (tiCurr.bMonth == tiSummer.bMonth) &&
         (tiCurr.bHour  == 2)               && (fSeason == 0))
@@ -289,8 +254,7 @@ void    ProcessTime(void)
       if (fActive == 1)
       {
         tiCurr.bHour = 3;
-        tiSetRTC = tiCurr;
-        SetCurrTimeDate();
+        SetCurrTimeDate(&tiCurr);
       }
       else fSummer = 1;
 
@@ -310,8 +274,7 @@ void    ProcessTime(void)
       if (fActive == 1)
       {
         tiCurr.bHour = 2;
-        tiSetRTC = tiCurr;
-        SetCurrTimeDate();
+        SetCurrTimeDate(&tiCurr);
       }
       else fWinter = 1;
 
@@ -323,7 +286,7 @@ void    ProcessTime(void)
         (tiCurr.bHour  == 2)               && (fSeason == 1))
       { }
     else
-      ProcessNextHou();*/
+      ProcessNextHou();
   }
 
 

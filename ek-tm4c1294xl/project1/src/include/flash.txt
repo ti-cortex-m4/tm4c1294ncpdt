@@ -25,6 +25,21 @@ FLASH.H
 #define bMAXREPEAT      8
 
 
+// количество страниц на блок данных определённого типа
+#define bUINT           (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
+#define bIMPULSE        (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
+#define bPOWER          (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
+#define bREAL           (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
+
+
+// количество страниц для графика профилей по получасам
+#ifdef  DAYS100
+#define wPROFILE_SIZE   (uint)(wHOURS/4)
+#else
+#define wPROFILE_SIZE   (uint)(wHOURS/1)
+#endif
+
+
 // адреса блоков данных
 BEGIN(wFLA_BEGIN, 0)
 
@@ -62,6 +77,13 @@ RESERVE(wFLA_LOSSE, sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 RESERVE(wFLA_LEVEL, sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 
 RESERVE(wFLA_DIGITALS, sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1)
+
+RESERVE(wFLA_IMPHOUCAN, wPROFILE_SIZE)
+RESERVE(wFLA_IMPDAYCAN, bIMPULSE*bDAYS)
+RESERVE(wFLA_IMPMONCAN, bIMPULSE*bMONTHS)
+RESERVE(wFLA_POWDAYGRP, bPOWER*bDAYS)
+RESERVE(wFLA_POWMONGRP, bPOWER*bMONTHS)
+RESERVE(wFLA_CNTMONCAN, bREAL*bMONTHS)
 
 END(wFLA_END)
 
