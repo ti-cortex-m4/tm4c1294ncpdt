@@ -182,7 +182,7 @@ void    ProcessNextMnt(void)
 
 
 // обработка перехода на следующие три минуты
-void    ProcessNextMntSpec(void)
+void    ProcessNextMntSpec(time  *ptiOldDay, time  *ptiOldMon)
 {
   memset(&mpwImpMntCan[(ibSoftMnt+1) % bMINUTES], 0, sizeof(uint)*bCANALS); // TODO Init/Reset mpwImpMntCan
 
@@ -191,7 +191,7 @@ void    ProcessNextMntSpec(void)
 //  if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
 //  ET0 = 1;
 
-  MakeImpulseSpec();
+  MakeImpulseSpec(ptiOldDay, ptiOldMon);
 
   cdwMinutes3++;
 }
