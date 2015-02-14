@@ -26,17 +26,17 @@ FLASH.H
 
 
 // количество страниц на блок данных определённого типа
-#define bUINT           (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
-#define bIMPULSE        (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
-#define bPOWER          (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
-#define bREAL           (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
+#define bUINT_CAN       (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
+#define bIMPULSE_CAN    (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
+#define bPOWER_GRP      (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
+#define bREAL_CAN       (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
 
 
 // количество страниц для графика профилей по получасам
 #ifdef  DAYS100
-#define wPROFILE_SIZE   (uint)(wHOURS/4)
+#define wIMPHOUCAN_SIZE (uint)(wHOURS/4)
 #else
-#define wPROFILE_SIZE   (uint)(wHOURS/1)
+#define wIMPHOUCAN_SIZE (uint)(wHOURS/1)
 #endif
 
 
@@ -79,13 +79,13 @@ FLASH.H
 #define wFLA_DIGITALS           (uint)(wFLA_LEVEL + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
 
 #define wFLA_IMPHOUCAN          (uint)(wFLA_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1)
-#define wFLA_IMPDAYCAN          (uint)(wFLA_IMPHOUCAN + wPROFILE_SIZE)
-#define wFLA_IMPMONCAN          (uint)(wFLA_IMPDAYCAN + bIMPULSE*bDAYS)
-#define wFLA_POWDAYGRP          (uint)(wFLA_IMPMONCAN + bIMPULSE*bMONTHS)
-#define wFLA_POWMONGRP          (uint)(wFLA_POWDAYGRP + bPOWER*bDAYS)
-#define wFLA_CNTMONCAN          (uint)(wFLA_POWMONGRP + bPOWER*bMONTHS)
+#define wFLA_IMPDAYCAN          (uint)(wFLA_IMPHOUCAN + wIMPHOUCAN_SIZE)
+#define wFLA_IMPMONCAN          (uint)(wFLA_IMPDAYCAN + bIMPULSE_CAN*bDAYS)
+#define wFLA_POWDAYGRP          (uint)(wFLA_IMPMONCAN + bIMPULSE_CAN*bMONTHS)
+#define wFLA_POWMONGRP          (uint)(wFLA_POWDAYGRP + bPOWER_GRP*bDAYS)
+#define wFLA_CNTMONCAN          (uint)(wFLA_POWMONGRP + bPOWER_GRP*bMONTHS)
 
-#define wFLA_END                (uint)(wFLA_CNTMONCAN + bREAL*bMONTHS)
+#define wFLA_END                (uint)(wFLA_CNTMONCAN + bREAL_CAN*bMONTHS)
 
 
 #endif
