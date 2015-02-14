@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 ENERGY2.C
 
-
+ TODO SaveBuff&LoadBuff
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
@@ -84,7 +84,7 @@ bool    SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
   }
   else
   {
-    OpenOut(wFLA_IMPHOUCAN + iwHouTo*bUINT);
+    OpenOut(wFLA_IMPHOUCAN + iwHouTo*bUINT_CAN);
 
     if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS) == 0)
       return(0);
@@ -106,7 +106,7 @@ bool    fAlt;
   }
   else
   {
-    OpenIn(wFLA_IMPHOUCAN + iwHouFrom*bUINT);
+    OpenIn(wFLA_IMPHOUCAN + iwHouFrom*bUINT_CAN);
     fAlt = Load(mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS);
   }
 
@@ -129,7 +129,7 @@ bool    LoadImpHouFree(uint  iwHouFrom)
   }
   else
   {
-    OpenIn(wFLA_IMPHOUCAN + iwHouFrom*bUINT);
+    OpenIn(wFLA_IMPHOUCAN + iwHouFrom*bUINT_CAN);
     return(Load(mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS));
   }
 }
@@ -146,7 +146,7 @@ bool    SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
   }
   else
   {
-    OpenOut(wFLA_IMPDAYCAN + ibDayTo*bIMPULSE);
+    OpenOut(wFLA_IMPDAYCAN + ibDayTo*bIMPULSE_CAN);
 
     if (Save(mpimDayCan[ ibDayFrom ], sizeof(impulse)*bCANALS) == 0)
       return(0);
@@ -165,7 +165,7 @@ bool    LoadImpDay(uchar  ibDayFrom)
   }
   else
   {
-    OpenIn(wFLA_IMPDAYCAN + ibDayFrom*bIMPULSE);
+    OpenIn(wFLA_IMPDAYCAN + ibDayFrom*bIMPULSE_CAN);
     return( Load(mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS) );
   }
 }
@@ -181,7 +181,7 @@ bool    SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
   }
   else
   {
-    OpenOut(wFLA_IMPMONCAN + ibMonTo*bIMPULSE);
+    OpenOut(wFLA_IMPMONCAN + ibMonTo*bIMPULSE_CAN);
 
     if (Save(mpimMonCan[ ibMonFrom ], sizeof(impulse)*bCANALS) == 0)
       return(0);
@@ -200,7 +200,7 @@ bool    LoadImpMon(uchar  ibMonFrom)
   }
   else
   {
-    OpenIn(wFLA_IMPMONCAN + ibMonFrom*bIMPULSE);
+    OpenIn(wFLA_IMPMONCAN + ibMonFrom*bIMPULSE_CAN);
     return( Load(mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS) );
   }
 }
@@ -216,7 +216,7 @@ bool    SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
   }
   else
   {
-    OpenOut(wFLA_POWDAYGRP + ibDayTo*bPOWER);
+    OpenOut(wFLA_POWDAYGRP + ibDayTo*bPOWER_GRP);
 
     if (Save(mppoDayGrp[ ibDayFrom ], sizeof(power)*bGROUPS) == 0)
       return(0);
@@ -235,7 +235,7 @@ bool    LoadPowDay(uchar  ibDayFrom)
   }
   else
   {
-    OpenIn(wFLA_POWDAYGRP + ibDayFrom*bPOWER);
+    OpenIn(wFLA_POWDAYGRP + ibDayFrom*bPOWER_GRP);
     return( Load(mppoDayGrp[ PrevSoftDay() ], sizeof(power)*bGROUPS) );
   }
 }
@@ -251,7 +251,7 @@ bool    SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
   }
   else
   {
-    OpenOut(wFLA_POWMONGRP + ibMonTo*bPOWER);
+    OpenOut(wFLA_POWMONGRP + ibMonTo*bPOWER_GRP);
 
     if (Save(mppoMonGrp[ ibMonFrom ], sizeof(power)*bGROUPS) == 0)
       return(0);
@@ -270,7 +270,7 @@ bool    LoadPowMon(uchar  ibMonFrom)
   }
   else
   {
-    OpenIn(wFLA_POWMONGRP + ibMonFrom*bPOWER);
+    OpenIn(wFLA_POWMONGRP + ibMonFrom*bPOWER_GRP);
     return( Load(mppoMonGrp[ PrevSoftMon() ], sizeof(power)*bGROUPS) );
   }
 }
@@ -286,7 +286,7 @@ bool    SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
   }
   else
   {
-    OpenOut(wFLA_CNTMONCAN + ibMonTo*bREAL);
+    OpenOut(wFLA_CNTMONCAN + ibMonTo*bREAL_CAN);
 
     if (Save(mpreCntMonCan[ ibMonFrom ], sizeof(real)*bCANALS) == 0)
       return(0);
@@ -305,7 +305,7 @@ bool    LoadCntMon(uchar  ibMonFrom)
   }
   else
   {
-    OpenIn(wFLA_CNTMONCAN + ibMonFrom*bREAL);
+    OpenIn(wFLA_CNTMONCAN + ibMonFrom*bREAL_CAN);
     return( Load(mpreCntMonCan[ PrevSoftMon() ], sizeof(real)*bCANALS) );
   }
 }
