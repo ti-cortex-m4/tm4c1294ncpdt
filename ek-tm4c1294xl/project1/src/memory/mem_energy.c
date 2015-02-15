@@ -29,6 +29,3 @@ real                    mpreCntMonCan[2][bCANALS];
 // массивы максимумов мощности по тарифам (по суткам и мес€цам)
 power                   mppoDayGrp[2][bGROUPS],
                         mppoMonGrp[2][bGROUPS];
-
-// глобальна€ переменна€
-maximum                 maAlt;
