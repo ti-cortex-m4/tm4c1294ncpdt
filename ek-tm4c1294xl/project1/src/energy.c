@@ -267,12 +267,12 @@ uchar   j;
 
 
 // добавляем к канальному массиву impulse (по текущему тарифу для энергии)
-void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal)
+void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uchar  wImp)
 {
 uchar   i;
 
   i = tiPrev.bHour*2 + tiPrev.bMinute/30;
-  mpimT[ibCanal].mpdwImp[ mpibEngCurrTariff[i] ] += wBuffD;
+  mpimT[ibCanal].mpdwImp[ mpibEngCurrTariff[i] ] += wImp;
 }
 
 
@@ -300,6 +300,7 @@ real    *PGetCounterOld(uchar  ibCanal)
 void    MakeImpulse(void)
 {
 uchar  ibCan;
+uint   wT;
 
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
@@ -307,12 +308,12 @@ uchar  ibCan;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-      wBuffD = *PGetCanInt(mpwImpCurrMntCan,ibCan);
-      mpwImpHouCan[ibSoftHou][ibCan] += wBuffD;
+    	wT = *PGetCanInt(mpwImpCurrMntCan,ibCan);
+      mpwImpHouCan[ibSoftHou][ibCan] += wT;
 
-      AddCanImpEng(mpimDayCan[ibSoftDay], ibCan);
-      AddCanImpEng(mpimMonCan[ibSoftMon], ibCan);
-      AddCanImpEng(mpimAbsCan,            ibCan);
+      AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, wT);
+      AddCanImpEng(mpimMonCan[ibSoftMon], ibCan, wT);
+      AddCanImpEng(mpimAbsCan,            ibCan, wT);
     }
   }
 }
@@ -321,6 +322,7 @@ uchar  ibCan;
 void    MakeImpulseSpec(time  *ptiOldDay, time  *ptiOldMon)
 {
 uchar  ibCan;
+uint   wT;
 
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
@@ -328,21 +330,21 @@ uchar  ibCan;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-      wBuffD = *PGetCanInt(mpwImpCurrMntCan,ibCan);
-      mpwImpHouCan[ibSoftHou][ibCan] += wBuffD;
+    	wT = *PGetCanInt(mpwImpCurrMntCan,ibCan);
+      mpwImpHouCan[ibSoftHou][ibCan] += wT;
 
-      AddCanImpEng(mpimDayCan[ibSoftDay], ibCan);
-      AddCanImpEng(mpimMonCan[ibSoftMon], ibCan);
-      AddCanImpEng(mpimAbsCan,            ibCan);
+      AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, wT);
+      AddCanImpEng(mpimMonCan[ibSoftMon], ibCan, wT);
+      AddCanImpEng(mpimAbsCan,            ibCan, wT);
 
       if ((ptiOldDay->bYear  == tiCurr.bYear)  &&
           (ptiOldDay->bMonth == tiCurr.bMonth) &&
           (ptiOldDay->bDay   == tiCurr.bDay))
-        AddCanImpEng(mpimDayCanSpec, ibCan);
+        AddCanImpEng(mpimDayCanSpec, ibCan, wT);
 
       if ((ptiOldMon->bYear  == tiCurr.bYear)  &&
           (ptiOldMon->bMonth == tiCurr.bMonth))
-        AddCanImpEng(mpimMonCanSpec, ibCan);
+        AddCanImpEng(mpimMonCanSpec, ibCan, wT);
     }
   }
 }

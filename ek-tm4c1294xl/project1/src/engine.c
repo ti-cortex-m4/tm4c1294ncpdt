@@ -18,6 +18,4 @@ uint                    iwHou;
 
 ulong                   dwBuffC;
 
-uint                    wBuffD;
-
 real                    reBuffA, reBuffB;

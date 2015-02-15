@@ -75,21 +75,25 @@ ulong   GetLong(uchar  ibBeg, uchar  ibEnd)
 
 uint    GetInt(uchar  ibBeg, uchar  ibEnd)
 {
-  wBuffD = 0;
+uint  w;
+
+  w = 0;
 
   while (ibBeg <= ibEnd)
-    wBuffD = wBuffD*10 + ToChar( szLo[ibBeg++] );
+    w = w*10 + ToChar( szLo[ibBeg++] );
 
-  return(wBuffD);
+  return(w);
 }
 
 
 uchar   GetChar(uchar  ibBeg, uchar  ibEnd)
 {
-  wBuffD = GetInt(ibBeg,ibEnd);
+uint  w;
+
+  w = GetInt(ibBeg,ibEnd);
   
-  if (wBuffD / 0x100 == 0) 
-    return(wBuffD % 0x100);
+  if (w / 0x100 == 0)
+    return(w % 0x100);
   else 
     return(0xFF);
 }            

@@ -12,6 +12,4 @@ extern  uint                    iwHou;
 
 extern  ulong                   dwBuffC;
 
-extern  uint                    wBuffD;
-
 extern  real                    reBuffA, reBuffB;
