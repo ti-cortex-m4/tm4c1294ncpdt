@@ -9,6 +9,7 @@ REALTIME.C
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_energy.h"
+#include        "../tariffs/tariffs.h"
 #include        "../decret.h"
 #include        "../energy.h"
 #include        "../energy2.h"
@@ -308,11 +309,11 @@ void    ProcessTime(void)
     // обнуление признака перехода на сезонное времени в текущие сутки
     fSeason = 0;
 
-//    // рассчЄт показаний счЄтчиков по мес€цам
-//    MakeCounters();
-//
-//    // рассчЄт массивов индексов тарифов дл€ каждого получаса текущих суток дл€ всех блоков (дл€ мощности и энергии)
-//    MakeAllCurrTariffs();
+    // рассчЄт показаний счЄтчиков по мес€цам
+    MakeCounters();
+
+    // рассчЄт массивов индексов тарифов дл€ каждого получаса текущих суток дл€ всех блоков (дл€ мощности и энергии)
+    MakeAllCurrTariffs();
 
     SaveImpDay(0,ibHardDay,ibSoftDay);
     SavePowDay(0,ibHardDay,ibSoftDay);
@@ -372,9 +373,9 @@ void    ProcessTime(void)
     // сохран€ем признак совмещЄнных/раздельных суточных тарифных графиков за предыдущий мес€ц
     fPublicTariffsPrev = fPublicTariffsCurr;
 
-//    // рассчЄт показаний счЄтчиков по мес€цам
-//    MakeCounters();
-//
+    // рассчЄт показаний счЄтчиков по мес€цам
+    MakeCounters();
+
 //    // обработка достоверности по мес€цам
 //    NextMonDef();
 
