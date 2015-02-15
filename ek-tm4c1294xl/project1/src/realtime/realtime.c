@@ -7,6 +7,7 @@ REALTIME.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
+#include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_energy.h"
 #include        "../decret.h"
 #include        "../energy.h"
@@ -293,25 +294,25 @@ void    ProcessTime(void)
 
   // переход на следующие сутки
   if (tiCurr.bDay != tiPrev.bDay)
-  {/*
-    // флаг наступлени€ новых суток
-    boNewDay = boTrue;
-    NextDayExtended4();
-    NextDayExtended5();
-    NextDayExtended6();
-    NextDayExtended7();
-
-    // программирование модема
-    ResetSendAT();
+  {
+//    // флаг наступлени€ новых суток
+//    boNewDay = boTrue;
+//    NextDayExtended4();
+//    NextDayExtended5();
+//    NextDayExtended6();
+//    NextDayExtended7();
+//
+//    // программирование модема
+//    ResetSendAT();
 
     // обнуление признака перехода на сезонное времени в текущие сутки
     fSeason = 0;
 
-    // рассчЄт показаний счЄтчиков по мес€цам
-    MakeCounters();
-
-    // рассчЄт массивов индексов тарифов дл€ каждого получаса текущих суток дл€ всех блоков (дл€ мощности и энергии)
-    MakeAllCurrTariffs();
+//    // рассчЄт показаний счЄтчиков по мес€цам
+//    MakeCounters();
+//
+//    // рассчЄт массивов индексов тарифов дл€ каждого получаса текущих суток дл€ всех блоков (дл€ мощности и энергии)
+//    MakeAllCurrTariffs();
 
     SaveImpDay(0,ibHardDay,ibSoftDay);
     SavePowDay(0,ibHardDay,ibSoftDay);
@@ -319,24 +320,24 @@ void    ProcessTime(void)
     if (++ibHardDay >= bDAYS) ibHardDay = 0;
     if (++ibSoftDay >= 2)     ibSoftDay = 0;
 
-    memset(&mpimDayCan[ibSoftDay], '\0', sizeof(impulse)*bCANALS);
-    memset(&mppoDayGrp[ibSoftDay], '\0', sizeof(power)*bGROUPS);
+    memset(&mpimDayCan[ibSoftDay], 0, sizeof(impulse)*bCANALS);
+    memset(&mppoDayGrp[ibSoftDay], 0, sizeof(power)*bGROUPS);
 
-    // обработка брака по суткам
-    tiAlt = tiCurr;
-    MakeDefectDay(0);
-
-    // обработка достоверности по суткам
-    NextDayDef();
-
-    EnableAnswer();
-    cwDays++;*/
+//    // обработка брака по суткам
+//    tiAlt = tiCurr;
+//    MakeDefectDay(0);
+//
+//    // обработка достоверности по суткам
+//    NextDayDef();
+//
+//    EnableAnswer();
+    cwDays++;
   }
 
 
   // переход на следующий мес€ц
   if (tiCurr.bMonth != tiPrev.bMonth)
-  {/*
+  {
     SaveImpMon(0,ibHardMon,ibSoftMon);
     SavePowMon(0,ibHardMon,ibSoftMon);
     SaveCntMon(0,ibHardMon,ibSoftMon);
@@ -344,40 +345,40 @@ void    ProcessTime(void)
     if (++ibHardMon >= bMONTHS) ibHardMon = 0;
     if (++ibSoftMon >= 2)       ibSoftMon = 0;
 
-    memset(&mpimMonCan[ibSoftMon],    '\0', sizeof(impulse)*bCANALS);
-    memset(&mppoMonGrp[ibSoftMon],    '\0', sizeof(power)*bGROUPS);
-    memset(&mpreCntMonCan[ibSoftMon], '\0', sizeof(real)*bCANALS);
+    memset(&mpimMonCan[ibSoftMon],    0, sizeof(impulse)*bCANALS);
+    memset(&mppoMonGrp[ibSoftMon],    0, sizeof(power)*bGROUPS);
+    memset(&mpreCntMonCan[ibSoftMon], 0, sizeof(real)*bCANALS);
 
-    NextMonExtended4();
-    NextMonExtended4T();
-    NextMonExtended6();
-
-    // обработка брака по мес€цам
-    tiAlt = tiCurr;
-    MakeDefectMon(0);
-
-    // сохранение данныех коррекции за предыдущий мес€ц
-    memcpy(&mpcwPosValuePrev, &mpcwPosValueCurr, sizeof(mpcwPosValuePrev));
-    memcpy(&mpcwNegValuePrev, &mpcwNegValueCurr, sizeof(mpcwNegValuePrev));
-    memcpy(&mpcwPosCountPrev, &mpcwPosCountCurr, sizeof(mpcwPosCountPrev));
-    memcpy(&mpcwNegCountPrev, &mpcwNegCountCurr, sizeof(mpcwNegCountPrev));
-
-    // обнуление данныех коррекции за текущий мес€ц
-    memset(&mpcwPosValueCurr, 0, sizeof(mpcwPosValueCurr));
-    memset(&mpcwNegValueCurr, 0, sizeof(mpcwNegValueCurr));
-    memset(&mpcwPosCountCurr, 0, sizeof(mpcwPosCountCurr));
-    memset(&mpcwNegCountCurr, 0, sizeof(mpcwNegCountCurr));
+//    NextMonExtended4();
+//    NextMonExtended4T();
+//    NextMonExtended6();
+//
+//    // обработка брака по мес€цам
+//    tiAlt = tiCurr;
+//    MakeDefectMon(0);
+//
+//    // сохранение данныех коррекции за предыдущий мес€ц
+//    memcpy(&mpcwPosValuePrev, &mpcwPosValueCurr, sizeof(mpcwPosValuePrev));
+//    memcpy(&mpcwNegValuePrev, &mpcwNegValueCurr, sizeof(mpcwNegValuePrev));
+//    memcpy(&mpcwPosCountPrev, &mpcwPosCountCurr, sizeof(mpcwPosCountPrev));
+//    memcpy(&mpcwNegCountPrev, &mpcwNegCountCurr, sizeof(mpcwNegCountPrev));
+//
+//    // обнуление данныех коррекции за текущий мес€ц
+//    memset(&mpcwPosValueCurr, 0, sizeof(mpcwPosValueCurr));
+//    memset(&mpcwNegValueCurr, 0, sizeof(mpcwNegValueCurr));
+//    memset(&mpcwPosCountCurr, 0, sizeof(mpcwPosCountCurr));
+//    memset(&mpcwNegCountCurr, 0, sizeof(mpcwNegCountCurr));
 
     // сохран€ем признак совмещЄнных/раздельных суточных тарифных графиков за предыдущий мес€ц
-    boPublicPrev = boPublicCurr;
+    fPublicTariffsPrev = fPublicTariffsCurr;
 
-    // рассчЄт показаний счЄтчиков по мес€цам
-    MakeCounters();
+//    // рассчЄт показаний счЄтчиков по мес€цам
+//    MakeCounters();
+//
+//    // обработка достоверности по мес€цам
+//    NextMonDef();
 
-    // обработка достоверности по мес€цам
-    NextMonDef();
-
-    cwMonths++;*/
+    cwMonths++;
   }
 
 
