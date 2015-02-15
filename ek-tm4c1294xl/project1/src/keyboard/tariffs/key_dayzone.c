@@ -125,7 +125,7 @@ void    key_SetDayZone(void)
         bKey = 0; ShiftLo(5,6);
       }
 
-      brKey.bMinute = GetChar(5,6);
+      brKey.bMinute = GetCharLo(5,6);
 
       if ((brKey.bMinute % 30) == 0)
       {
@@ -136,7 +136,7 @@ void    key_SetDayZone(void)
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      brKey.ibTariff = GetChar(10,10) - 1;
+      brKey.ibTariff = GetCharLo(10,10) - 1;
 
       if (brKey.ibTariff < bTARIFFS)
       {
@@ -212,7 +212,7 @@ void    key_SetDayZone(void)
   {
     if (enKeyboard == KBD_POSTINPUT1)
     {
-      brKey.bHour = GetChar(2,3);
+      brKey.bHour = GetCharLo(2,3);
 
       if (brKey.bHour <= 24)
       {

@@ -151,7 +151,7 @@ void    key_SetRelaxs(void)
     }     
     else if (enKeyboard == KBD_POSTINPUT2)              
     {                                   
-      tiKey.bDay = GetChar(1,2);
+      tiKey.bDay = GetCharLo(1,2);
       if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
       {
         enKeyboard = KBD_INPUT3;
@@ -161,7 +161,7 @@ void    key_SetRelaxs(void)
     }      
     else if (enKeyboard == KBD_POSTINPUT3)              
     {                                  
-      tiKey.bMonth = GetChar(4,5);
+      tiKey.bMonth = GetCharLo(4,5);
       tiKey.bYear  = GetCurrTimeDate()->bYear;
 
       if ((tiKey.bMonth == 0) || (tiKey.bMonth > 12))
@@ -269,7 +269,7 @@ void    key_SetRelaxs(void)
   {    
     if (enKeyboard == KBD_POSTINPUT2)              
     {                                   
-      tiKey.bDay = GetChar(1,2);
+      tiKey.bDay = GetCharLo(1,2);
       if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
       {
         enKeyboard = KBD_INPUT3;

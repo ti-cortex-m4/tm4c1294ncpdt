@@ -53,27 +53,31 @@ uchar   ToChar(uchar  chT)
 
 ulong   GetLongHi(uchar  ibBeg, uchar  ibEnd)
 {
-  dwBuffC = 0;
+ulong	dw;
+
+  dw = 0;
 
   while (ibBeg <= ibEnd)
-    dwBuffC = dwBuffC*10 + ToChar( szHi[ibBeg++] );
+    dw = dw*10 + ToChar( szHi[ibBeg++] );
 
-  return(dwBuffC);
+  return dw;
 }
 
 
-ulong   GetLong(uchar  ibBeg, uchar  ibEnd)
+ulong   GetLongLo(uchar  ibBeg, uchar  ibEnd)
 {
-  dwBuffC = 0;
+ulong	dw;
+
+  dw = 0;
 
   while (ibBeg <= ibEnd)
-    dwBuffC = dwBuffC*10 + ToChar( szLo[ibBeg++] );
+    dw = dw*10 + ToChar( szLo[ibBeg++] );
 
-  return(dwBuffC);
+  return dw;
 }
 
 
-uint    GetInt(uchar  ibBeg, uchar  ibEnd)
+uint    GetIntLo(uchar  ibBeg, uchar  ibEnd)
 {
 uint  w;
 
@@ -86,11 +90,11 @@ uint  w;
 }
 
 
-uchar   GetChar(uchar  ibBeg, uchar  ibEnd)
+uchar   GetCharLo(uchar  ibBeg, uchar  ibEnd)
 {
 uint  w;
 
-  w = GetInt(ibBeg,ibEnd);
+  w = GetIntLo(ibBeg,ibEnd);
   
   if (w / 0x100 == 0)
     return(w % 0x100);
@@ -99,14 +103,16 @@ uint  w;
 }            
 
 
-real    *PGetReal(uchar  ibBeg, uchar  ibEnd)
+real    GetRealLo(uchar  ibBeg, uchar  ibEnd)
 {
-  reBuffB = 0;
+real re;
+
+  re = 0;
 
   while (ibBeg <= ibEnd)
-    reBuffB = reBuffB*10 + ToChar( szLo[ibBeg++] );
+    re = re*10 + ToChar( szLo[ibBeg++] );
 
-  return( &reBuffB );
+  return re;
 }
 
 

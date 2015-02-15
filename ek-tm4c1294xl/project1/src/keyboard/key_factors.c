@@ -100,7 +100,7 @@ void    key_SetFactors(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < bCANALS)
+      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         ShowFactors();
@@ -116,7 +116,7 @@ void    key_SetFactors(void)
     }
     else if ((enKeyboard == KBD_POSTINPUT2) || (enKeyboard == KBD_POSTINPUT3))
     {      
-      reBuffA = *PGetReal(0,8) + *PGetReal(10,12)/1000;
+      reBuffA = GetRealLo(0,8) + GetRealLo(10,12)/1000;
 
       switch (bProgram)
       {
@@ -280,7 +280,7 @@ void    key_GetFactors(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < bCANALS)
+      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         ShowFactors();

@@ -229,7 +229,7 @@ uchar   i;
     {      
       enKeyboard = KBD_ENTER;
 
-      wProgram = GetInt(1,3);
+      wProgram = GetIntLo(1,3);
       if (wProgram > 0xFF) bProgram = 0xFF; else bProgram = wProgram;
 
       if (bProgram == 0)

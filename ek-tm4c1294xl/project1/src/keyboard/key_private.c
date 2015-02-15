@@ -34,7 +34,7 @@ void    key_SetPrivate(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      wPrivate = GetInt(4,8);
+      wPrivate = GetIntLo(4,8);
       SavePrivate() ? ShowInt(wPrivate) : Error();
     }
     else Beep();

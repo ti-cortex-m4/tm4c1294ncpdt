@@ -77,7 +77,7 @@ void    key_SetDelays(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {            
-      dwBuffC = GetLong(3,8);
+      dwBuffC = GetLongLo(3,8);
 
       if (( (ulong)wFREQUENCY_T0*dwBuffC/1000 ) <= 0xFFFF)
       {

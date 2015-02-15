@@ -45,7 +45,7 @@ void    key_SetRelaxsTariff(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = GetChar(6,8);
+      ibX = GetCharLo(6,8);
       if ((ibX > 0) && (ibX <= bTARIFFS))
       {
         ibRelaxsTariff = ibX-1;

@@ -152,7 +152,7 @@ void    key_SetGroups(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {                                   
-      if ((ibX = GetChar(10,11)-1) < bGROUPS)
+      if ((ibX = GetCharLo(10,11)-1) < bGROUPS)
       {                                 // получили индекс группы
         enKeyboard = KBD_POSTINPUT3;
         ShowGroupNumber();
@@ -161,7 +161,7 @@ void    key_SetGroups(void)
     }    
     else if (enKeyboard == KBD_POSTINPUT1)              
     {                                   // запись данных после ввода
-      if ((noT.ibCanal = GetChar(6,8)-1) < bCANALS)
+      if ((noT.ibCanal = GetCharLo(6,8)-1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;     
 
@@ -320,7 +320,7 @@ void    key_GetGroups(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((ibX = GetChar(10,11)-1) < bGROUPS)
+      if ((ibX = GetCharLo(10,11)-1) < bGROUPS)
       {
         enKeyboard = KBD_POSTENTER;   
         ShowGroupNumber();

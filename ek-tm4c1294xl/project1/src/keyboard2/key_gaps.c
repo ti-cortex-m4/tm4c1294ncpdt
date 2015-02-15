@@ -145,7 +145,7 @@ void    key_SetGaps(void)
     }     
     else if (enKeyboard == KBD_POSTINPUT2)              
     {                                   
-      tiKey.bDay = GetChar(0,1);
+      tiKey.bDay = GetCharLo(0,1);
       if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
       {
         enKeyboard = KBD_INPUT3;
@@ -155,7 +155,7 @@ void    key_SetGaps(void)
     }      
     else if (enKeyboard == KBD_POSTINPUT3)              
     {                                  
-      tiKey.bMonth = GetChar(3,4);
+      tiKey.bMonth = GetCharLo(3,4);
       tiKey.bYear  = 0;
 
       if ((tiKey.bMonth == 0) || (tiKey.bMonth > 12))
@@ -263,7 +263,7 @@ void    key_SetGaps(void)
   {    
     if (enKeyboard == KBD_POSTINPUT2)              
     {                                   
-      tiKey.bDay = GetChar(0,1);
+      tiKey.bDay = GetCharLo(0,1);
       if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
       {
         enKeyboard = KBD_INPUT3;
