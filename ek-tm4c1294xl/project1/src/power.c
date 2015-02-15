@@ -15,11 +15,11 @@ POWER.C
 
 
 
-void    SetGrpMaxPow(power  *mppoT, uchar  ibGrp, uchar  ibTar, maximum  *pma)
+void    SetGrpMaxPow(power  *mppoT, uchar  ibGrp, uchar  ibTar, value  *pvaT)
 {  
 	ASSERT(ibGrp < bGROUPS);
 	ASSERT(ibTar < bTARIFFS);
-  mppoT[ibGrp].mpmaMax[ibTar] = *pma;
+  mppoT[ibGrp].mpmaMax[ibTar] = *pvaT;
 }
 
 
@@ -27,7 +27,7 @@ real    GetGrpMaxPowReal(power  *mppoT, uchar  ibGrp, uchar  ibTar)
 {  
 	ASSERT(ibGrp < bGROUPS);
 	ASSERT(ibTar < bTARIFFS);
-  return mppoT[ibGrp].mpmaMax[ibTar].rePow;
+  return mppoT[ibGrp].mpmaMax[ibTar].reSelf;
 }
 
 
@@ -35,12 +35,12 @@ time    GetGrpMaxPowTime(power  *mppoT, uchar  ibGrp, uchar  ibTar)
 {
 	ASSERT(ibGrp < bGROUPS);
 	ASSERT(ibTar < bTARIFFS);
-  return mppoT[ibGrp].mpmaMax[ibTar].tiNow;
+  return mppoT[ibGrp].mpmaMax[ibTar].tiSelf;
 }
 
 
 
-// находит индекс тарифа с наибольшим значением maximum из всех тарифов
+// находит индекс тарифа с наибольшим значением value из всех тарифов
 uchar   GetGrpMaxPowIndex(power  *mppoT, uchar  ibGrp)
 {
 uchar  i,j;
@@ -58,12 +58,11 @@ uchar  i,j;
 
 
 
-// рассчитывает маскимумы мощности для выбранного интервала
 void    MakeMaxPow(power  *mppoT)
 {
 uchar   g,t;
 real   	re;
-static maximum maAlt;
+static value va;
 
   t = mpibPowCurrTariff[tiPrev.bHour*2 + tiPrev.bMinute/30];
 
@@ -73,9 +72,9 @@ static maximum maAlt;
 
     if (re >= GetGrpMaxPowReal(mppoT,g,t))
     {
-      maAlt.rePow = re;
-      maAlt.tiNow = tiPrev;
-      SetGrpMaxPow(mppoT,g,t,&maAlt);
+      va.reSelf = re;
+      va.tiSelf = tiPrev;
+      SetGrpMaxPow(mppoT,g,t,&va);
     }
   }
 }
@@ -85,7 +84,7 @@ void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  *ptiT)
 {
 uchar		t;
 real   	re;
-static maximum maAlt;
+static value va;
 
   t = mpibPowPrevTariff[ ptiT->bHour*2 + ptiT->bMinute/30 ];
 
@@ -93,9 +92,9 @@ static maximum maAlt;
 
   if (re >= GetGrpMaxPowReal(mppoT,ibGrp,t))
   {
-    maAlt.rePow = re;
-    maAlt.tiNow = *ptiT;
-    SetGrpMaxPow(mppoT,ibGrp,t,&maAlt);
+    va.reSelf = re;
+    va.tiSelf = *ptiT;
+    SetGrpMaxPow(mppoT,ibGrp,t,&va);
   }
 }
 

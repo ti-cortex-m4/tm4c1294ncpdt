@@ -2,18 +2,18 @@
 
 
 
-// тип 'максимум мощности'
+// тип 'время/дата + значение'
 typedef struct
 {
-  time          tiNow;                  // время/дата
-  real          rePow;                  // значение максимума мощности
-} maximum;
+  time          tiSelf;                 // время/дата
+  real          reSelf;                 // значение
+} value;
 
 
 // тип 'максимум мощности по тарифам'
 typedef struct
 {
-  maximum       mpmaMax[bTARIFFS];
+  value         mpmaMax[bTARIFFS];
 } power;
 
 
