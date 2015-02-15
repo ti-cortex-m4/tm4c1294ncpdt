@@ -50,7 +50,7 @@ uchar   i;
 
   for (i=0; i<bCANALS; i++)
   {
-    if (*PGetCanInt(mpwImpHouCan[ PrevSoftHou() ], i) == 0xFFFF)
+    if (*GetCanInt(mpwImpHouCan[ PrevSoftHou() ], i) == 0xFFFF)
       SetCanInt(mpwImpHouCan[ PrevSoftHou() ], i, 0);
   }
 
@@ -112,7 +112,7 @@ bool    fAlt;
 
   for (i=0; i<bCANALS; i++)
   {
-    if (*PGetCanInt(mpwImpHouCan[ PrevSoftHou() ], i) == 0xFFFF)
+    if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], i) == 0xFFFF)
       SetCanInt(mpwImpHouCan[ PrevSoftHou() ], i, 0);
   }
 

@@ -19,35 +19,41 @@ ENERGY.C
 
 
 
-uint    *PGetCanInt(uint  *mpwT, uchar  ibCanal) {
-  return( &mpwT[ibCanal] );
+uint    GetCanInt(uint  *mpwT, uchar  ibCan) {
+	ASSERT(ibCan < bCANALS);
+  return mpwT[ibCan];
 }
 
 
-void    SetCanInt(uint  *mpwT, uchar  ibCanal, uint  wT) {
-  mpwT[ibCanal] = wT;
-}
-
-
-
-ulong   *PGetCanLong(ulong  *mpdwT, uchar  ibCanal) {
-  return( &mpdwT[ibCanal] );
-}
-
-
-void    SetCanLong(ulong  *mpdwT, uchar  ibCanal) {
-  mpdwT[ibCanal] = dwBuffC;
+void    SetCanInt(uint  *mpwT, uchar  ibCan, uint  wT) {
+	ASSERT(ibCan < bCANALS);
+  mpwT[ibCan] = wT;
 }
 
 
 
-real    *PGetCanReal(real  *mpreT, uchar  ibCanal) {
-  return( &mpreT[ibCanal] );
+ulong   GetCanLong(ulong  *mpdwT, uchar  ibCan) {
+	ASSERT(ibCan < bCANALS);
+  return mpdwT[ibCan];
 }
 
 
-void    SetCanReal(real  *mpreT, uchar  ibCanal) {
-  mpreT[ibCanal] = reBuffA;
+void    SetCanLong(ulong  *mpdwT, uchar  ibCan, ulong  *pdwT) {
+	ASSERT(ibCan < bCANALS);
+  mpdwT[ibCan] = *pdwT;
+}
+
+
+
+real    GetCanReal(real  *mpreT, uchar  ibCan) {
+	ASSERT(ibCan < bCANALS);
+  return mpreT[ibCan];
+}
+
+
+void    SetCanReal(real  *mpreT, uchar  ibCan, real  *preT) {
+	ASSERT(ibCan < bCANALS);
+  mpreT[ibCan] = *preT;
 }
 
 
@@ -79,7 +85,7 @@ uchar   i,j;
   for (i=0; i<GetGroupsSize(ibGroup); i++)
   {
     j = GetGroupsNodeCanal(ibGroup,i);
-    reBuffB = *PGetCanReal(mpreValueEngMnt,j) * *PGetCanInt(mpwT,j);
+    reBuffB = GetCanReal(mpreValueEngMnt,j) * *PGetCanInt(mpwT,j);
 
     if (GetGroupsNodeSign(ibGroup,i) == 0)
       reBuffA += reBuffB;
@@ -95,7 +101,7 @@ uchar   i,j;
 // рассчитать групповое значение на основе канального массива unsigned int (трёхминутная мощность)
 real    *PGetCanMntInt2Real(uint  *mpwT, uchar  ibCanal, uchar  bMul)
 {
-  reBuffA = *PGetCanReal(mpreValueEngMnt,ibCanal) * *PGetCanInt(mpwT,ibCanal);
+  reBuffA = GetCanReal(mpreValueEngMnt,ibCanal) * *PGetCanInt(mpwT,ibCanal);
 
   reBuffA *= bMul;
   return( &reBuffA );
@@ -114,10 +120,10 @@ real    reBuffB;
   {
     j = GetGroupsNodeCanal(ibGroup,i);
 
-    if (*PGetCanInt(mpwT,j) == 0xFFFF)
+    if (GetCanInt(mpwT,j) == 0xFFFF)
       reBuffB = 0;
     else
-      reBuffB = *PGetCanReal(mpreValueEngHou,j) * *PGetCanInt(mpwT,j);
+      reBuffB = GetCanReal(mpreValueEngHou,j) * GetCanInt(mpwT,j);
 
     if (GetGroupsNodeSign(ibGroup,i) == 0)
       reBuffA += reBuffB;
@@ -133,10 +139,10 @@ real    reBuffB;
 // рассчитать канальное значение на основе канального массива unsigned int (получасовая мощность)
 real    *PGetCanHouInt2Real(uint  *mpwT, uchar  ibCanal, uchar  bMul)
 {
-  if (*PGetCanInt(mpwT,ibCanal) == 0xFFFF)
+  if (GetCanInt(mpwT,ibCanal) == 0xFFFF)
     reBuffA = 0;
   else
-    reBuffA = *PGetCanReal(mpreValueEngHou,ibCanal) * *PGetCanInt(mpwT,ibCanal);
+    reBuffA = GetCanReal(mpreValueEngHou,ibCanal) * GetCanInt(mpwT,ibCanal);
 
   reBuffA *= bMul;
   return( &reBuffA );
@@ -199,7 +205,7 @@ uchar   i,j;
     if ((bMask & 0x08) != 0)
       dwBuffC += *PGetCanImp(mpimT,j,3);
 
-    reBuffB = *PGetCanReal(mpreValueEngHou,j) * dwBuffC;
+    reBuffB = GetCanReal(mpreValueEngHou,j) * dwBuffC;
 
     if (GetGroupsNodeSign(ibGroup,i) == 0)
       reBuffA += reBuffB;
@@ -226,7 +232,7 @@ real    *PGetCanImp2RealEng(impulse  *mpimT, uchar  ibCanal, uchar  bMask)
   if ((bMask & 0x08) != 0)
     dwBuffC += *PGetCanImp(mpimT,ibCanal,3);
 
-  reBuffA = *PGetCanReal(mpreValueEngHou,ibCanal) * dwBuffC;
+  reBuffA = GetCanReal(mpreValueEngHou,ibCanal) * dwBuffC;
 
   return( &reBuffA );
 }
@@ -288,16 +294,16 @@ uchar  ibCan;
     if (GetDigitalDevice(ibCan) == 0)
     {
       reBuffA  = *PGetCanImpAll(mpimAbsCan,ibCan);
-      reBuffA *= *PGetCanReal(mpreValueCntHou,ibCan);
-      reBuffA += *PGetCanReal(mpreCount,ibCan);
+      reBuffA *= GetCanReal(mpreValueCntHou,ibCan);
+      reBuffA += GetCanReal(mpreCount,ibCan);
     }
     else
     {
-      reBuffA = mpdwBase[ibCan] * *PGetCanReal(mpreValueCntHou,ibCan);
-      if (GetDigitalDevice(ibCan) == 19) reBuffA += *PGetCanReal(mpreCount,ibCan);
+      reBuffA = mpdwBase[ibCan] * GetCanReal(mpreValueCntHou,ibCan);
+      if (GetDigitalDevice(ibCan) == 19) reBuffA += GetCanReal(mpreCount,ibCan);
     }
 
-    SetCanReal(mpreCntMonCan[ ibSoftMon ],ibCan);
+    SetCanReal(mpreCntMonCan[ ibSoftMon ],ibCan, &reBuffA);
   }
 }
 
@@ -307,14 +313,14 @@ real    *PGetCounterOld(uchar  ibCanal)
 {
   if (GetDigitalDevice(ibCanal) == 19)
   {
-    reBuffA = mpdwBase[ibCanal] * *PGetCanReal(mpreValueCntHou,ibCanal);
-    reBuffA += *PGetCanReal(mpreCount,ibCanal);
+    reBuffA = mpdwBase[ibCanal] * GetCanReal(mpreValueCntHou,ibCanal);
+    reBuffA += GetCanReal(mpreCount,ibCanal);
   }
   else
   {
-    reBuffA  = *PGetCanInt(mpwImpMntCan[ibSoftMnt],ibCanal) * *PGetCanReal(mpreValueCntMnt,ibCanal);
-    reBuffA += *PGetCanImpAll(mpimAbsCan,ibCanal)           * *PGetCanReal(mpreValueCntHou,ibCanal);
-    reBuffA += *PGetCanReal(mpreCount,ibCanal);
+    reBuffA  = GetCanInt(mpwImpMntCan[ibSoftMnt],ibCanal) * GetCanReal(mpreValueCntMnt,ibCanal);
+    reBuffA += *PGetCanImpAll(mpimAbsCan,ibCanal)         * GetCanReal(mpreValueCntHou,ibCanal);
+    reBuffA += GetCanReal(mpreCount,ibCanal);
   }
 
   return( &reBuffA );
@@ -333,7 +339,7 @@ uint   wT;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-    	wT = *PGetCanInt(mpwImpCurrMntCan,ibCan);
+    	wT = GetCanInt(mpwImpCurrMntCan,ibCan);
       mpwImpHouCan[ibSoftHou][ibCan] += wT;
 
       AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, wT);
@@ -355,7 +361,7 @@ uint   wT;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-    	wT = *PGetCanInt(mpwImpCurrMntCan,ibCan);
+    	wT = GetCanInt(mpwImpCurrMntCan,ibCan);
       mpwImpHouCan[ibSoftHou][ibCan] += wT;
 
       AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, wT);

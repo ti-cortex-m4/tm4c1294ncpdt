@@ -43,7 +43,7 @@ void    ShowDelays(void)
     case bSET_MINORDELAYS:  dwBuffC = GetMinDelay(ibX);  break;
   }
 
-  ShowLong(&dwBuffC);
+  ShowLong(dwBuffC);
   sprintf(szLo+10,"мс  %2u",ibX+1);
 }
 
