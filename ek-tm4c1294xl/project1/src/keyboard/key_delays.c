@@ -50,12 +50,14 @@ void    ShowDelays(void)
 
 void    SetDelays(void)
 {
-  wBuffD = (ulong)dwBuffC*wFREQUENCY_T0/1000;
+uint  w;
+
+  w = (ulong)dwBuffC*wFREQUENCY_T0/1000;
 
   switch (bProgram)
   {
-    case bSET_MAJORDELAYS:  mpwMajInDelay[ibX] = wBuffD;  break;
-    case bSET_MINORDELAYS:  mpwMinInDelay[ibX] = wBuffD;  break;
+    case bSET_MAJORDELAYS:  mpwMajInDelay[ibX] = w;  break;
+    case bSET_MINORDELAYS:  mpwMinInDelay[ibX] = w;  break;
   }
 }
 
