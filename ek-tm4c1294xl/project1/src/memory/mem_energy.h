@@ -19,5 +19,3 @@ extern  real                    mpreCntMonCan[2][bCANALS];
 
 extern  power                   mppoDayGrp[2][bGROUPS],
                                 mppoMonGrp[2][bGROUPS];
-
-extern  maximum                 maAlt;

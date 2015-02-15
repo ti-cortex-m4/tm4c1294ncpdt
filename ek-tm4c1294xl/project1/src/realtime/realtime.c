@@ -192,7 +192,7 @@ void    ProcessNextMntSpec(time  *ptiOldDay, time  *ptiOldMon)
 void    ProcessNextHou(void)
 {
   // расчЄт максимумов мощности за текущие сутки и мес€ц
-  MakeAllMaxPowNow();
+  MakeMaxPowAll();
 
 //  // расчЄт пределов опроса счЄтчиков
 //  MakeLimits();

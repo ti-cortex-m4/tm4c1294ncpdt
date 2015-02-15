@@ -15,36 +15,41 @@ POWER.C
 
 
 
-void    SetGrpMaxPow(power  *mppoT, uchar  ibGroup, uchar  ibTariff)
+void    SetGrpMaxPow(power  *mppoT, uchar  ibGrp, uchar  ibTar, maximum  *pma)
 {  
-  mppoT[ibGroup].mpmaMax[ibTariff] = maAlt ;
+	ASSERT(ibGrp < bGROUPS);
+	ASSERT(ibTar < bTARIFFS);
+  mppoT[ibGrp].mpmaMax[ibTar] = *pma;
 }
 
 
-
-real    *PGetGrpMaxPowReal(power  *mppoT, uchar  ibGroup, uchar  ibTariff)
+real    GetGrpMaxPowReal(power  *mppoT, uchar  ibGrp, uchar  ibTar)
 {  
-  return( &mppoT[ibGroup].mpmaMax[ibTariff].rePow );
+	ASSERT(ibGrp < bGROUPS);
+	ASSERT(ibTar < bTARIFFS);
+  return mppoT[ibGrp].mpmaMax[ibTar].rePow;
 }
 
 
-time    *PGetGrpMaxPowTime(power  *mppoT, uchar  ibGroup, uchar  ibTariff)
+time    GetGrpMaxPowTime(power  *mppoT, uchar  ibGrp, uchar  ibTar)
 {
-  return( &mppoT[ibGroup].mpmaMax[ibTariff].tiNow );
+	ASSERT(ibGrp < bGROUPS);
+	ASSERT(ibTar < bTARIFFS);
+  return mppoT[ibGrp].mpmaMax[ibTar].tiNow;
 }
 
 
 
 // находит индекс тарифа с наибольшим значением maximum из всех тарифов
-uchar   GetGrpMaxPowIndex(power  *mppoT, uchar  ibGroup)
+uchar   GetGrpMaxPowIndex(power  *mppoT, uchar  ibGrp)
 {
 uchar  i,j;
 
   j = 0;
   for (i=0; i<bTARIFFS; i++)
   {
-    if (*PGetGrpMaxPowReal(mppoT,ibGroup,i) >=
-        *PGetGrpMaxPowReal(mppoT,ibGroup,j))
+    if (GetGrpMaxPowReal(mppoT,ibGrp,i) >=
+        GetGrpMaxPowReal(mppoT,ibGrp,j))
       j = i;
   }
 
@@ -54,50 +59,49 @@ uchar  i,j;
 
 
 // рассчитывает маскимумы мощности для выбранного интервала
-void    MakeMaxPowNow(power  *mppoT)
+void    MakeMaxPow(power  *mppoT)
 {
-uchar  i,j;
+uchar   g,t;
+real   	re;
+static maximum maAlt;
 
-  j = mpibPowCurrTariff[tiPrev.bHour*2 + tiPrev.bMinute/30];
+  t = mpibPowCurrTariff[tiPrev.bHour*2 + tiPrev.bMinute/30];
 
-  for (i=0; i<bGROUPS; i++)
+  for (g=0; g<bGROUPS; g++)
   {
-    reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ ibSoftHou ],i,2);
+    re = *PGetGrpHouInt2Real(mpwImpHouCan[ ibSoftHou ],g,2);
 
-    if (reBuffA >= *PGetGrpMaxPowReal(mppoT,i,j))
+    if (re >= GetGrpMaxPowReal(mppoT,g,t))
     {
-      maAlt.rePow = reBuffA;
+      maAlt.rePow = re;
       maAlt.tiNow = tiPrev;
-      SetGrpMaxPow(mppoT,i,j);
+      SetGrpMaxPow(mppoT,g,t,&maAlt);
     }
   }
 }
 
 
-/*
-// рассчитывает максимумы мощности для выбранного интервала
-void    MakeMaxPowSpec(power  *mppoT)
+void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  *ptiT)
 {
-uchar   j;
+uchar		t;
+real   	re;
+static maximum maAlt;
 
-  j = mpibPowPrevTariff[ tiAlt.bHour*2 + tiAlt.bMinute/30 ];
+  t = mpibPowPrevTariff[ ptiT->bHour*2 + ptiT->bMinute/30 ];
 
-  reBuffA = *PGetGrpHouInt2Real(mpwImpHouCanSpec,ibGrp,2);
+  re = *PGetGrpHouInt2Real(mpwImpHouCanSpec,ibGrp,2);
 
-  if (reBuffA >= *PGetGrpMaxPowReal(mppoT,ibGrp,j))
+  if (re >= GetGrpMaxPowReal(mppoT,ibGrp,t))
   {
-    maAlt.rePow = reBuffA;
-    maAlt.tiNow = tiAlt;
-    SetGrpMaxPow(mppoT,ibGrp,j);
+    maAlt.rePow = re;
+    maAlt.tiNow = *ptiT;
+    SetGrpMaxPow(mppoT,ibGrp,t,&maAlt);
   }
 }
-// требует предварительной установки переменной tiAlt 
-*/
 
 
-// рассчитывает маскимумы мощности для всех интервалов
-void    MakeAllMaxPowNow(void)
+void    MakeMaxPowAll(void)
 {       
-  MakeMaxPowNow( mppoDayGrp[ibSoftDay] );
-  MakeMaxPowNow( mppoMonGrp[ibSoftMon] );
+  MakeMaxPow( mppoDayGrp[ibSoftDay] );
+  MakeMaxPow( mppoMonGrp[ibSoftMon] );
 }
