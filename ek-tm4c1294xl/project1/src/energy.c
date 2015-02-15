@@ -277,6 +277,28 @@ uchar   i;
 
 
 
+// расчитывает значени€ счЄтчиков дл€ текущего мес€ца
+void    MakeCounters(void)
+{
+  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  {
+    if (GetDigitalDevice(ibCan) == 0)
+    {
+      reBuffA  = *PGetCanImpAll(mpimAbsCan,ibCan);
+      reBuffA *= *PGetCanReal(mpreValueCntHou,ibCan);
+      reBuffA += *PGetCanReal(mpreCount,ibCan);
+    }
+    else
+    {
+      reBuffA = mpdwBase[ibCan] * *PGetCanReal(mpreValueCntHou,ibCan);
+      if (GetDigitalDevice(ibCan) == 19) reBuffA += *PGetCanReal(mpreCount,ibCan);
+    }
+
+    SetCanReal(mpreCntMonCan[ ibSoftMon ],ibCan);
+  }
+}
+
+
 // рассчитать показани€ счЄтчиков по приращению импульсов
 real    *PGetCounterOld(uchar  ibCanal)
 {
