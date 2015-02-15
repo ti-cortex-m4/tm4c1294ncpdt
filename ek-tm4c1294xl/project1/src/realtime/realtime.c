@@ -11,6 +11,7 @@ REALTIME.C
 #include        "../decret.h"
 #include        "../energy.h"
 #include        "../energy2.h"
+#include        "../power.h"
 #include        "../rtc.h"
 #include        "../keyboard/key_timedate.h"
 
@@ -188,9 +189,9 @@ void    ProcessNextMntSpec(time  *ptiOldDay, time  *ptiOldMon)
 // обработка перехода на следующий получас
 void    ProcessNextHou(void)
 {
-//  // расчЄт максимумов мощности за текущие сутки и мес€ц
-//  MakeAllMaxPowNow();
-//
+  // расчЄт максимумов мощности за текущие сутки и мес€ц
+  MakeAllMaxPowNow();
+
 //  // расчЄт пределов опроса счЄтчиков
 //  MakeLimits();
 
