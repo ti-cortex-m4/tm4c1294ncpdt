@@ -10,10 +10,8 @@ ENGINE.Ñ
 
 
 
-uchar                   ibDay, ibMon;
-
 uint                    iwHou;
 
 ulong                   dwBuffC;
 
-real                    reBuffA, reBuffB;
+real                    reBuffA;
