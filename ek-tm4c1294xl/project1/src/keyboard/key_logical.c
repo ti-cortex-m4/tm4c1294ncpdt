@@ -35,7 +35,7 @@ void    key_SetLogical(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      bLogical = GetChar(6,8);
+      bLogical = GetCharLo(6,8);
       SaveFile(&flLogical);
       ShowChar(bLogical);
     }

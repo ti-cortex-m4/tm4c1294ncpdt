@@ -57,7 +57,7 @@ void    key_SetSeason(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      tiKey.bDay = GetChar(5,6);
+      tiKey.bDay = GetCharLo(5,6);
 
       if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
       {
@@ -68,7 +68,7 @@ void    key_SetSeason(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      tiKey.bMonth = GetChar(8,9);
+      tiKey.bMonth = GetCharLo(8,9);
       tiKey.bYear  = GetCurrTimeDate()->bYear;
 
       if ((tiKey.bMonth >= 1) && (tiKey.bMonth <= 12))

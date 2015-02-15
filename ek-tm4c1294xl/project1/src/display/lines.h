@@ -13,10 +13,10 @@ void    ShiftLo(uchar  ibBeg, uchar  ibEnd);
 uchar   ToChar(uchar  chT);
 
 ulong   GetLongHi(uchar  ibBeg, uchar  ibEnd);
-ulong   GetLong(uchar  ibBeg, uchar  ibEnd);
-uint    GetInt(uchar  ibBeg, uchar  ibEnd);
-uchar   GetChar(uchar  ibBeg, uchar  ibEnd);
-real    *PGetReal(uchar  ibBeg, uchar  ibEnd);
+ulong   GetLongLo(uchar  ibBeg, uchar  ibEnd);
+uint    GetIntLo(uchar  ibBeg, uchar  ibEnd);
+uchar   GetCharLo(uchar  ibBeg, uchar  ibEnd);
+real    GetRealLo(uchar  ibBeg, uchar  ibEnd);
 
 void    Hi(uchar  i, uchar  bT);
 void    Lo(uchar  i, uchar  bT);

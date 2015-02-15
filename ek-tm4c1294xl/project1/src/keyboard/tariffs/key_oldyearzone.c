@@ -109,7 +109,7 @@ void    key_SetOldYearZone(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11)) == 0)
+      if ((ibX = GetCharLo(10,11)) == 0)
       {
         enKeyboard = KBD_POSTENTER;
 

@@ -66,7 +66,7 @@ void    key_SetDigitals(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < bCANALS)
+      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         ShowDigital(ibX);
@@ -82,7 +82,7 @@ void    key_SetDigitals(void)
     }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
-      diT.ibLine = GetChar(12,13) - 1;
+      diT.ibLine = GetCharLo(12,13) - 1;
       if (diT.ibLine < mpbMaxLines[ diT.bDevice ])
       {
         enKeyboard = KBD_POSTENTER;
@@ -196,7 +196,7 @@ void    key_SetDigitals(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((diT.ibPort = GetChar(0,0) - 1) < bPORTS)
+      if ((diT.ibPort = GetCharLo(0,0) - 1) < bPORTS)
       {
         if (StreamPortCan(diT.ibPort,ibX) == 1) 
         {
@@ -210,7 +210,7 @@ void    key_SetDigitals(void)
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      if ((diT.ibPhone = GetChar(2,3)) < bCANALS)
+      if ((diT.ibPhone = GetCharLo(2,3)) < bCANALS)
       { 
         if (StreamPortPhoneCan(diT.ibPort,diT.ibPhone,ibX) == 1) 
         {
@@ -224,7 +224,7 @@ void    key_SetDigitals(void)
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
-      diT.bDevice = GetChar(5,6);
+      diT.bDevice = GetCharLo(5,6);
       if (diT.bDevice <= bDEVICES)
       {
         if (diT.bDevice == 0)
@@ -256,7 +256,7 @@ void    key_SetDigitals(void)
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
-      if ((diT.bAddress = GetChar(8,10)) < 255)
+      if ((diT.bAddress = GetCharLo(8,10)) < 255)
       {
         if (((diT.bDevice == 9) || (diT.bDevice == 10)) && (diT.bAddress == 0))
           Beep();

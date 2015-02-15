@@ -106,7 +106,7 @@ void    key_GetOldProgram84(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibY = GetChar(10,11) - 1) < 12)
+      if ((ibY = GetCharLo(10,11) - 1) < 12)
       {
         enKeyboard = KBD_SHOW;
 

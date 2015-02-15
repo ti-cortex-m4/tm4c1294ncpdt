@@ -43,7 +43,7 @@ void    key_SetTariffsMode(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      if ((ibX = GetChar(6,8)) <= bTARIFFSMODES)
+      if ((ibX = GetCharLo(6,8)) <= bTARIFFSMODES)
       {
       	bTariffsMode = ibX;
       	SaveFile(&flTariffsMode);
