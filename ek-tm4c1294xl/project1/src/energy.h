@@ -16,6 +16,8 @@ void    SetCanReal(real  *mpreT, uchar  ibCanal);
 ulong   *PGetCanImp(impulse  *mpimT, uchar  ibCanal, uchar  ibTariff);
 ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCanal);
 
+real    *PGetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul);
+
 real    *PGetCounterOld(uchar  ibCanal);
 
 void    MakeImpulse(void);

@@ -14,6 +14,7 @@ ENERGY.C
 #include        "memory/mem_realtime.h"
 #include        "memory/mem_graph3.h"
 #include        "digitals/digitals.h"
+#include        "groups.h"
 #include        "sensors.h"
 
 
@@ -99,7 +100,7 @@ real    *PGetCanMntInt2Real(uint  *mpwT, uchar  ibCanal, uchar  bMul)
   reBuffA *= bMul;
   return( &reBuffA );
 }
-
+*/
 
 
 // рассчитать групповое значение на основе канального массива unsigned int (получасовая мощность)
@@ -140,7 +141,7 @@ real    *PGetCanHouInt2Real(uint  *mpwT, uchar  ibCanal, uchar  bMul)
   return( &reBuffA );
 }
 
-
+/*
 real    *PGetPowGrpHouCurr(uchar  ibGroup, uchar  bMul)
 {
 uchar   i,j;
