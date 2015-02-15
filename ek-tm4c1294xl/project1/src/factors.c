@@ -74,7 +74,7 @@ uchar   c;
 
 
 
-void    AddLosse(void)
+void    AddLosse(uchar  ibCan)
 {
   reBuffA *= 1 + *PGetCanReal(mpreLosse,ibCan);
 }
@@ -82,24 +82,24 @@ void    AddLosse(void)
 
 void    MakeFactors(void)
 {
-uchar  c;
+uchar  ibCan;
 
-  for (c=0; c<bCANALS; c++)
+  for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
-    reBuffA = *PGetCanReal(mpreTransEng,c) / *PGetCanReal(mprePulseHou,c);
-    AddLosse();
-    SetCanReal(mpreValueEngHou,c);
+    reBuffA = *PGetCanReal(mpreTransEng,ibCan) / *PGetCanReal(mprePulseHou,ibCan);
+    AddLosse(ibCan);
+    SetCanReal(mpreValueEngHou,ibCan);
 
-    reBuffA = *PGetCanReal(mpreTransCnt,c) / *PGetCanReal(mprePulseHou,c);
-    AddLosse();
-    SetCanReal(mpreValueCntHou,c);
+    reBuffA = *PGetCanReal(mpreTransCnt,ibCan) / *PGetCanReal(mprePulseHou,ibCan);
+    AddLosse(ibCan);
+    SetCanReal(mpreValueCntHou,ibCan);
 
-    reBuffA = *PGetCanReal(mpreTransEng,c) / *PGetCanReal(mprePulseMnt,c);
-    AddLosse();
-    SetCanReal(mpreValueEngMnt,c);
+    reBuffA = *PGetCanReal(mpreTransEng,ibCan) / *PGetCanReal(mprePulseMnt,ibCan);
+    AddLosse(ibCan);
+    SetCanReal(mpreValueEngMnt,ibCan);
 
-    reBuffA = *PGetCanReal(mpreTransCnt,c) / *PGetCanReal(mprePulseMnt,c);
-    AddLosse();
-    SetCanReal(mpreValueCntMnt,c);
+    reBuffA = *PGetCanReal(mpreTransCnt,ibCan) / *PGetCanReal(mprePulseMnt,ibCan);
+    AddLosse(ibCan);
+    SetCanReal(mpreValueCntMnt,ibCan);
   }
 }
