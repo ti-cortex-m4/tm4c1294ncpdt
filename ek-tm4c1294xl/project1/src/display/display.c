@@ -74,15 +74,15 @@ void    ShowInt(uint  wT)
 }
 
 
-void    ShowLong(ulong  *pdwT)
+void    ShowLong(ulong  dwT)
 {
-  sprintf(szLo,"%9lu", *pdwT);
+  sprintf(szLo,"%9lu", dwT);
 }
 
 
-void    ShowReal(real  *preT)
+void    ShowReal(real  reT)
 {
-  sprintf(szLo,"%13.3f",  *preT);
+  sprintf(szLo,"%13.3f",  reT);
 }
 
 

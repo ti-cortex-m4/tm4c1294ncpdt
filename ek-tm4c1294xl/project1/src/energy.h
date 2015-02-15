@@ -4,14 +4,14 @@ ENERGY.H
 
 ------------------------------------------------------------------------------*/
 
-uint    *PGetCanInt(uint  *mpwT, uchar  ibCanal);
-void    SetCanInt(uint  *mpwT, uchar  ibCanal, uint  wT);
+uint    GetCanInt(uint  *mpwT, uchar  ibCan);
+void    SetCanInt(uint  *mpwT, uchar  ibCan, uint  wT);
 
-ulong   *PGetCanLong(ulong  *mpdwT, uchar  ibCanal);
-void    SetCanLong(ulong  *mpdwT, uchar  ibCanal);
+ulong   GetCanLong(ulong  *mpdwT, uchar  ibCan);
+void    SetCanLong(ulong  *mpdwT, uchar  ibCan, ulong  *pdwT);
 
-real    *PGetCanReal(real  *mpreT, uchar  ibCanal);
-void    SetCanReal(real  *mpreT, uchar  ibCanal);
+real    GetCanReal(real  *mpreT, uchar  ibCan);
+void    SetCanReal(real  *mpreT, uchar  ibCan, real  *preT);
 
 ulong   *PGetCanImp(impulse  *mpimT, uchar  ibCanal, uchar  ibTariff);
 ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCanal);

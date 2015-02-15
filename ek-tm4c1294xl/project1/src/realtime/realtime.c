@@ -426,7 +426,7 @@ void    MakeNexttime(void)
   {
     if (GetDigitalDevice(ibCan) == 0)
     {
-      reBuffA = *PGetCanReal(mpreCount,ibCan);
+      reBuffA = GetCanReal(mpreCount,ibCan);
       SetCanReal(mpreCntMonCan[ ibSoftMon ],ibCan);    
     }    
   }
