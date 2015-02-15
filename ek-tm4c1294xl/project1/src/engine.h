@@ -4,8 +4,6 @@ ENGINE.H
 
 ------------------------------------------------------------------------------*/
 
-extern  uchar                   ibCan, ibGrp, ibDig;
-
 extern  uchar                   ibDay, ibMon;
 
 extern  uint                    iwHou;

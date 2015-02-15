@@ -280,6 +280,8 @@ uchar   i;
 // расчитывает значени€ счЄтчиков дл€ текущего мес€ца
 void    MakeCounters(void)
 {
+uchar  ibCan;
+
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     if (GetDigitalDevice(ibCan) == 0)

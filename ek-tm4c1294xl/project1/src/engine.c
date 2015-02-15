@@ -10,8 +10,6 @@ ENGINE.Ñ
 
 
 
-uchar                   ibCan, ibGrp, ibDig;
-
 uchar                   ibDay, ibMon;
 
 uint                    iwHou;
