@@ -107,6 +107,7 @@ real    *PGetCanMntInt2Real(uint  *mpwT, uchar  ibCanal, uchar  bMul)
 real    *PGetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul)
 {
 uchar   i,j;
+real    reBuffB;
 
   reBuffA = 0;
   for (i=0; i<GetGroupsSize(ibGroup); i++)
