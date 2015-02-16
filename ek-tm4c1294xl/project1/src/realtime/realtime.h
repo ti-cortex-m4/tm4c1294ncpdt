@@ -4,6 +4,10 @@ REALTIME.H
 
 ------------------------------------------------------------------------------*/
 
+extern  bool                    fActive;
+
+
+
 uchar   PrevSoftMnt(void);
 uchar   PrevSoftHou(void);
 uint    PrevHardHou(void);

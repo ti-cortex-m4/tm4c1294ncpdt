@@ -10,12 +10,17 @@ REALTIME.C
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_energy.h"
 #include        "../tariffs/tariffs.h"
-#include        "../decret.h"
+#include        "next_second.h"
+#include        "next_minute1.h"
+#include        "next_minute3.h"
+#include        "next_minute30.h"
+#include        "next_day.h"
+#include        "next_month.h"
+#include        "next_year.h"
 #include        "../energy.h"
 #include        "../energy2.h"
 #include        "../power.h"
 #include        "../rtc.h"
-#include        "../keyboard/key_timedate.h"
 
 
 
@@ -219,22 +224,14 @@ void    ProcessTime(void)
   // переход на следующую секунду
   if (tiCurr.bSecond != tiPrev.bSecond)
   {
-    cdwSeconds++;
+    NextSecond();
   }
 
 
   // переход на следующую минуту
   if (tiCurr.bMinute != tiPrev.bMinute)
   {
-    cdwMinutes1++;
-
-    if ((fActive == 1) && (enGlobal == GLB_WORK))
-    {
-      if (cbShowCurrentTime >= 2)
-				ShowCurrentTime();
-      else 
-        cbShowCurrentTime++;  
-    }
+    NextMinute1();
   }
 
 
@@ -386,9 +383,7 @@ void    ProcessTime(void)
   // переход на следующий год
   if (tiCurr.bYear != tiPrev.bYear)
   {
-    cwYears++;
-
-    MakeDecret(); // TODO persist MakeDecret
+    NextYear();
   }
 }
 
