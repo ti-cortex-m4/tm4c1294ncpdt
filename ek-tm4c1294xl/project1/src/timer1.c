@@ -11,6 +11,7 @@ TIMER1.C
 #include 		"driverlib/interrupt.h"
 #include 		"driverlib/sysctl.h"
 #include 		"driverlib/timer.h"
+#include 		"realtime/impulses.h"
 #include 		"rtc.h"
 
 
@@ -37,4 +38,5 @@ void Timer1IntHandler(void) {
 	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
 
 	RTC_Timer1();
+	Impulses_Timer1();
 }
