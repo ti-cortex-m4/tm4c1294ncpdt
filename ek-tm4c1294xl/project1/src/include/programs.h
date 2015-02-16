@@ -73,6 +73,53 @@ PROGRAMS.H
 #define bGET_PULSE_MNT              247
 #define bGET_LOSSE                  37
 
+//#define bGET_IMPCANCURRMNT          9
+//#define bGET_POWGRPCURRMNT          20
+
+//#define bGET_POWGRPPREVHOU          21
+//#define bGET_POWGRPCURRHOU          22
+
+//#define bGET_POWGRPDAYPREV_ABCD     23
+//#define bGET_POWGRPDAYPREV_C        24
+//#define bGET_POWGRPDAYPREV_D        25
+
+//#define bGET_POWGRPDAYCURR_ABCD     26
+//#define bGET_POWGRPDAYCURR_C        27
+//#define bGET_POWGRPDAYCURR_D        28
+
+//#define bGET_POWGRPMONPREV_ABCD     29
+//#define bGET_POWGRPMONPREV_C        30
+//#define bGET_POWGRPMONPREV_D        31
+
+//#define bGET_POWGRPMONCURR_ABCD     32
+//#define bGET_POWGRPMONCURR_C        33
+//#define bGET_POWGRPMONCURR_D        34
+
+//#define bGET_ENGGRPDAYPREV_ABCD     50
+//#define bGET_ENGGRPDAYPREV_CD       51
+//#define bGET_ENGGRPDAYPREV_B        52
+//#define bGET_ENGGRPDAYPREV_A        53
+
+//#define bGET_ENGGRPDAYCURR_ABCD     54
+//#define bGET_ENGGRPDAYCURR_CD       55
+//#define bGET_ENGGRPDAYCURR_B        56
+//#define bGET_ENGGRPDAYCURR_A        57
+
+//#define bGET_ENGGRPMONPREV_ABCD     58
+//#define bGET_ENGGRPMONPREV_CD       59
+//#define bGET_ENGGRPMONPREV_B        60
+//#define bGET_ENGGRPMONPREV_A        61
+
+//#define bGET_ENGGRPMONCURR_ABCD     62
+//#define bGET_ENGGRPMONCURR_CD       63
+//#define bGET_ENGGRPMONCURR_B        64
+//#define bGET_ENGGRPMONCURR_A        65
+
+//#define bGET_ENGGRPYEAR_ABCD        80
+//#define bGET_ENGGRPYEAR_CD          81
+//#define bGET_ENGGRPYEAR_B           82
+//#define bGET_ENGGRPYEAR_A           83
+
 
 // все режимы
 
