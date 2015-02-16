@@ -99,6 +99,7 @@ static value va;
 }
 
 
+// расчЄт максимумов мощности за текущие сутки и мес€ц
 void    MakeMaxPowAll(void)
 {       
   MakeMaxPow( mppoDayGrp[ibSoftDay] );

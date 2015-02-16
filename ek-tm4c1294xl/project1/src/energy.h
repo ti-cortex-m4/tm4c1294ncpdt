@@ -18,7 +18,7 @@ ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCanal);
 
 real    *PGetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul);
 
-void    MakeCounters(void);
+void    MakeCntMonCan(void);
 real    *PGetCounterOld(uchar  ibCanal);
 
 void    MakeImpulse(void);
