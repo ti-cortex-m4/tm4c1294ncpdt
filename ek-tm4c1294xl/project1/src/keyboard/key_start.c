@@ -14,6 +14,7 @@ KEY_START.C
 #include        "../access.h"
 #include        "../settings.h"
 #include        "../groups.h"
+#include        "../realtime/impulses.h"
 #include        "../rtc.h"
 #include        "../factors.h"
 
@@ -117,6 +118,8 @@ void    key_Start(void)
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
     
+    StartImpulses();
+
     // запоминаем время/дату первого запуска
     tiStart = *GetCurrTimeDate();
 
