@@ -1,15 +1,7 @@
 /*------------------------------------------------------------------------------
-NEXT_SECOND.C
+NEXT_MINUTE1.H
 
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_realtime.h"
-
-
-
-void    NextSecond(void)
-{
-  cdwSeconds++;
-}
+void    NextMinute1(void);
