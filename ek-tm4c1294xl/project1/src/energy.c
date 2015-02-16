@@ -13,6 +13,7 @@ ENERGY.C
 #include        "memory/mem_tariffs.h"
 #include        "memory/mem_realtime.h"
 #include        "memory/mem_graph3.h"
+#include        "memory/mem_special.h"
 #include        "digitals/digitals.h"
 #include        "groups.h"
 #include        "sensors.h"

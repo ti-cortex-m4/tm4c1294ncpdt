@@ -25,6 +25,7 @@
 #include "src/timer1.h"
 #include "src/uarts.h"
 #include "src/settings.h"
+#include "src/realtime/impulses.h"
 #include "src/groups.h"
 #include "src/tariffs/zones.h"
 #include "src/tariffs/tariffs.h"
@@ -56,6 +57,7 @@ int main(void) {
 	InitDisplay();
 
 	InitSettings();
+	InitImpulses();
 	InitGroups();
 	InitZones();
 	InitTariffs();

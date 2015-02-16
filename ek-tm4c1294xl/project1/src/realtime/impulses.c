@@ -5,6 +5,7 @@ IMPULSES.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_settings.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "realtime.h"
@@ -34,4 +35,20 @@ void    Impulses_Timer1(void)
 	{
 		mpwImpMntCan[ibSoftMnt][0]++;
 	}
+}
+
+
+
+void    InitImpulses(void)
+{
+	if (enGlobal == GLB_WORK)
+		EnableImpulses();
+	else
+		DisableImpulses();
+}
+
+
+void    StartImpulses(void)
+{
+	EnableImpulses();
 }

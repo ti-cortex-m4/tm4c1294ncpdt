@@ -1,13 +1,9 @@
 /*------------------------------------------------------------------------------
-IMPULSES.H
+MEM_SPECIAL.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    EnableImpulses(void);
-void    DisableImpulses(void);
+extern  time                    tiOldDay, tiOldMon;
 
-void    Impulses_Timer1(void);
-
-void    InitImpulses(void);
-void    StartImpulses(void);
+extern  uchar                   ibOldDay, ibOldMon;
