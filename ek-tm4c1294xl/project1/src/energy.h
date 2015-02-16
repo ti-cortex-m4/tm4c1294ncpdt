@@ -22,4 +22,4 @@ void    MakeCounters(void);
 real    *PGetCounterOld(uchar  ibCanal);
 
 void    MakeImpulse(void);
-void    MakeImpulseSpec(time  *ptiOldDay, time  *ptiOldMon);
+void    MakeImpulseSpec(void);

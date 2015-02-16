@@ -350,7 +350,7 @@ uint   wT;
 }
 
 
-void    MakeImpulseSpec(time  *ptiOldDay, time  *ptiOldMon)
+void    MakeImpulseSpec(void)
 {
 uchar  ibCan;
 uint   wT;
@@ -368,13 +368,13 @@ uint   wT;
       AddCanImpEng(mpimMonCan[ibSoftMon], ibCan, wT);
       AddCanImpEng(mpimAbsCan,            ibCan, wT);
 
-      if ((ptiOldDay->bYear  == tiCurr.bYear)  &&
-          (ptiOldDay->bMonth == tiCurr.bMonth) &&
-          (ptiOldDay->bDay   == tiCurr.bDay))
+      if ((tiOldDay.bYear  == tiCurr.bYear)  &&
+          (tiOldDay.bMonth == tiCurr.bMonth) &&
+          (tiOldDay.bDay   == tiCurr.bDay))
         AddCanImpEng(mpimDayCanSpec, ibCan, wT);
 
-      if ((ptiOldMon->bYear  == tiCurr.bYear)  &&
-          (ptiOldMon->bMonth == tiCurr.bMonth))
+      if ((tiOldMon.bYear  == tiCurr.bYear)  &&
+          (tiOldMon.bMonth == tiCurr.bMonth))
         AddCanImpEng(mpimMonCanSpec, ibCan, wT);
     }
   }

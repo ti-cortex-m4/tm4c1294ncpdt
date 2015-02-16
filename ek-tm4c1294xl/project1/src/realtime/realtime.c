@@ -160,38 +160,6 @@ void    ProcessNextTim(void)
 }
 */
 
-// обработка перехода на следующие три минуты
-void    ProcessNextMnt(void)
-{
-  memset(&mpwImpMntCan[(ibSoftMnt+1) % bMINUTES], 0, sizeof(uint)*bCANALS); // TODO Init/Reset mpwImpMntCan
-
-//  ET0 = 0;
-//  memcpy(&mpwImpCurrMntCan, &mpwImpMntCan[ibSoftMnt], sizeof(uint)*bCANALS);
-//  if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
-//  ET0 = 1;
-
-  MakeImpulse();
-
-  cdwMinutes3++;
-}
-
-
-// обработка перехода на следующие три минуты
-void    ProcessNextMntSpec(time  *ptiOldDay, time  *ptiOldMon)
-{
-  memset(&mpwImpMntCan[(ibSoftMnt+1) % bMINUTES], 0, sizeof(uint)*bCANALS); // TODO Init/Reset mpwImpMntCan
-
-//  ET0 = 0;
-//  memcpy(&mpwImpCurrMntCan, &mpwImpMntCan[ibSoftMnt], sizeof(uint)*bCANALS);
-//  if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
-//  ET0 = 1;
-
-  MakeImpulseSpec(ptiOldDay, ptiOldMon);
-
-  cdwMinutes3++;
-}
-
-
 
 // обработка перехода на следующий получас
 void    ProcessNextHou(void)
@@ -238,7 +206,7 @@ void    ProcessTime(void)
   // переход на следующие три минуты
   if ((tiCurr.bMinute % 3 == 0) && (tiPrev.bMinute % 3 != 0))
   {
-    ProcessNextMnt();
+    NextMinute3();
   }
 
 
