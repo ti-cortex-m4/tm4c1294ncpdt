@@ -22,7 +22,7 @@ TARIFFS.C
 
 
 
-file const              flPublicTariffs = {wFLA_PUBLIC_TARIFFS, &fPublicTariffsCurr, sizeof(boolean)};
+file const              flPublicTariffs = {wFLA_PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean)};
 file const              flTariffsMode = {wFLA_TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
 
 file const              flPeriodTariffPow = {wFLA_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow)};
@@ -83,7 +83,7 @@ uchar  ibMonth, ibMode;
 
 void    ResetTariffs(void)
 {
-  fPublicTariffsCurr = false;
+  fPublicTariffs = false;
   SaveFile(&flPublicTariffs);
 
   bTariffsMode = 0;
@@ -152,7 +152,7 @@ uchar  ibMonth;
 
 void    DefaultTariffs(void)
 {
-  if (fPublicTariffsCurr == true)
+  if (fPublicTariffs == true)
   {
     SetPeriodTariffsEng(0,11,(zone *)&zoDefaultPow,YEAR);
     SetPeriodTariffsPow(0,11,(zone *)&zoDefaultPow,YEAR);
