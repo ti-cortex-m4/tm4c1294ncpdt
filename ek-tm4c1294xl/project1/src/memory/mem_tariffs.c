@@ -35,7 +35,7 @@ uchar                   mpibPowPrevTariff[48],
                         mpibEngPrevTariff[48];
 
 // признак совмещЄнных/раздельных суточных тарифных графиков за текущий и предыдущий мес€цы
-boolean                 fPublicTariffsCurr;
+boolean                 fPublicTariffs;
 
 // массив символов задани€ тарифных зон по блока и мес€цам (старый вариант)
 period                  mpeTariffPow[12],

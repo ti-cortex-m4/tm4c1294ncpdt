@@ -21,7 +21,7 @@ static char const       szTariffs[]     = "Тарифы ?        ",
 
 void    ShowPublicTariffs(void)
 {
-  if (fPublicTariffsCurr == false) 
+  if (fPublicTariffs == false) 
     ShowLo(szPrivate);
   else 
     ShowLo(szPublic);
@@ -53,7 +53,7 @@ void    key_SetPublicTariffs(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        fPublicTariffsCurr = ~fPublicTariffsCurr;
+        fPublicTariffs = ~fPublicTariffs;
         SaveFile(&flPublicTariffs);
         ShowPublicTariffs();
 
