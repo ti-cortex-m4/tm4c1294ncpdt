@@ -286,7 +286,7 @@ uchar   i;
 
 
 // расчитывает значени€ счЄтчиков дл€ текущего мес€ца
-void    MakeCounters(void)
+void    MakeCntMonCan(void)
 {
 uchar  ibCan;
 

@@ -7,9 +7,6 @@ REALTIME.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
-#include        "../memory/mem_tariffs.h"
-#include        "../memory/mem_energy.h"
-#include        "../tariffs/tariffs.h"
 #include        "next_second.h"
 #include        "next_minute1.h"
 #include        "next_minute3.h"
@@ -17,9 +14,6 @@ REALTIME.C
 #include        "next_day.h"
 #include        "next_month.h"
 #include        "next_year.h"
-#include        "../energy.h"
-#include        "../energy2.h"
-#include        "../power.h"
 #include        "../rtc.h"
 
 
@@ -32,20 +26,7 @@ bool                    fSummer, fWinter;
 
 // признак работы в активном режиме
 bool                    fActive;
-/*
-// признаки дл€ запуска локальных задач
-bit                     fProfile,fCurrent;
 
-// признак выдачи команды на программирование модема
-bit                     fSendAT;
-
-        
-
-void    ClearNewTime(void)
-{
-  boNewSec = boNewMin = boNewMnt = boNewHou = boNewDay = boNewMon = boNewYea = boTrue;
-}
-*/
 
 
 uchar   PrevSoftMnt(void)
@@ -100,92 +81,6 @@ uchar   PrevHardMon(void)
 }
 
 
-/*
-// возвращает индекс текущего получаса
-uchar   GetHouIndex(void)
-{
-  return(tiCurr.bHour*2 + tiCurr.bMinute/30);
-}
-
-
-// возвращает индекс на первый получас требуемых суток назад
-uint    PrevDayIndex(uchar  bDay)
-{
-uchar   i;
-uint    j;
-
-  // индекс на первый получас текущих суток
-  j = (wHOURS+iwHardHou-GetHouIndex()) % wHOURS;
-
-  // индексы на первые получасы суток назад
-  for (i=0; i<bDay; i++) j = (wHOURS+j-48) % wHOURS;
-
-  // индекс на первый получас требуемых суток
-  return(j);
-}
-
-
-
-void    MakeCurrHouCan(void)
-{
-uchar   i;
-
-  for (i=0; i<bCANALS; i++)
-  {
-    if ((GetDigitalDevice(i) != 0) && (IsSpecCurrent(GetDigitalDevice(i)) == 0)) 
-      SetCanInt(mpwImpHouCan[ibSoftHou], i, 0xFFFF); 
-  }
-}
-
-
-void    MakeCurrTimPar(void)
-{
-}
-
-
-
-// обработка перехода на следующий интервал
-void    ProcessNextTim(void)
-{
-  SaveParTim(iwHardTim,ibSoftTim);
-
-  if (++iwHardTim >= wTIMES) iwHardTim = 0;
-  if (++ibSoftTim >= 2)      ibSoftTim = 0; 
-
-  memset(&mpreParBuff[ibSoftTim], 0xFF, sizeof(real)*wPARAMS);
-
-  if (cwParamTim < wTIMES-1) cwParamTim++;
-
-  MakeCurrTimPar(); 
-}
-*/
-
-
-// обработка перехода на следующий получас
-void    ProcessNextHou(void)
-{
-  // расчЄт максимумов мощности за текущие сутки и мес€ц
-  MakeMaxPowAll();
-
-//  // расчЄт пределов опроса счЄтчиков
-//  MakeLimits();
-
-  SaveImpHou(0,iwHardHou,ibSoftHou);
-
-  if (++iwHardHou >= wHOURS) iwHardHou = 0;
-  if (++ibSoftHou >= 2)      ibSoftHou = 0;
-
-  memset(&mpwImpHouCan[ibSoftHou], 0, sizeof(uint)*bCANALS);
-
-//  MakeCurrHouCan();
-//  NextHouDiagram();
-//  NextHouLimitsAux();
-//  IOControl();
-
-  cdwMinutes30++;
-}
-
-
 
 void    ProcessTime(void)
 {
@@ -228,9 +123,9 @@ void    ProcessTime(void)
 
       fSeason = 1;
 
-      ProcessNextHou();
-      ProcessNextHou();
-      ProcessNextHou();
+      NextMinute30();
+      NextMinute30();
+      NextMinute30();
     }
     else
     if ((tiCurr.bDay   == tiWinter.bDay)   &&
@@ -254,97 +149,22 @@ void    ProcessTime(void)
         (tiCurr.bHour  == 2)               && (fSeason == 1))
       { }
     else
-      ProcessNextHou();
+      NextMinute30();
   }
 
 
   // переход на следующие сутки
   if (tiCurr.bDay != tiPrev.bDay)
   {
-//    // флаг наступлени€ новых суток
-//    boNewDay = boTrue;
-//    NextDayExtended4();
-//    NextDayExtended5();
-//    NextDayExtended6();
-//    NextDayExtended7();
-//
-//    // программирование модема
-//    ResetSendAT();
-
-    // обнуление признака перехода на сезонное времени в текущие сутки
     fSeason = 0;
-
-    // рассчЄт показаний счЄтчиков по мес€цам
-    MakeCounters();
-
-    // рассчЄт массивов индексов тарифов дл€ каждого получаса текущих суток дл€ всех блоков (дл€ мощности и энергии)
-    MakeAllCurrTariffs();
-
-    SaveImpDay(0,ibHardDay,ibSoftDay);
-    SavePowDay(0,ibHardDay,ibSoftDay);
-
-    if (++ibHardDay >= bDAYS) ibHardDay = 0;
-    if (++ibSoftDay >= 2)     ibSoftDay = 0;
-
-    memset(&mpimDayCan[ibSoftDay], 0, sizeof(impulse)*bCANALS);
-    memset(&mppoDayGrp[ibSoftDay], 0, sizeof(power)*bGROUPS);
-
-//    // обработка брака по суткам
-//    tiAlt = tiCurr;
-//    MakeDefectDay(0);
-//
-//    // обработка достоверности по суткам
-//    NextDayDef();
-//
-//    EnableAnswer();
-    cwDays++;
+    NextDay();
   }
 
 
   // переход на следующий мес€ц
   if (tiCurr.bMonth != tiPrev.bMonth)
   {
-    SaveImpMon(0,ibHardMon,ibSoftMon);
-    SavePowMon(0,ibHardMon,ibSoftMon);
-    SaveCntMon(0,ibHardMon,ibSoftMon);
-
-    if (++ibHardMon >= bMONTHS) ibHardMon = 0;
-    if (++ibSoftMon >= 2)       ibSoftMon = 0;
-
-    memset(&mpimMonCan[ibSoftMon],    0, sizeof(impulse)*bCANALS);
-    memset(&mppoMonGrp[ibSoftMon],    0, sizeof(power)*bGROUPS);
-    memset(&mpreCntMonCan[ibSoftMon], 0, sizeof(real)*bCANALS);
-
-//    NextMonExtended4();
-//    NextMonExtended4T();
-//    NextMonExtended6();
-//
-//    // обработка брака по мес€цам
-//    tiAlt = tiCurr;
-//    MakeDefectMon(0);
-//
-//    // сохранение данныех коррекции за предыдущий мес€ц
-//    memcpy(&mpcwPosValuePrev, &mpcwPosValueCurr, sizeof(mpcwPosValuePrev));
-//    memcpy(&mpcwNegValuePrev, &mpcwNegValueCurr, sizeof(mpcwNegValuePrev));
-//    memcpy(&mpcwPosCountPrev, &mpcwPosCountCurr, sizeof(mpcwPosCountPrev));
-//    memcpy(&mpcwNegCountPrev, &mpcwNegCountCurr, sizeof(mpcwNegCountPrev));
-//
-//    // обнуление данныех коррекции за текущий мес€ц
-//    memset(&mpcwPosValueCurr, 0, sizeof(mpcwPosValueCurr));
-//    memset(&mpcwNegValueCurr, 0, sizeof(mpcwNegValueCurr));
-//    memset(&mpcwPosCountCurr, 0, sizeof(mpcwPosCountCurr));
-//    memset(&mpcwNegCountCurr, 0, sizeof(mpcwNegCountCurr));
-
-    // сохран€ем признак совмещЄнных/раздельных суточных тарифных графиков за предыдущий мес€ц
-    fPublicTariffsPrev = fPublicTariffsCurr;
-
-    // рассчЄт показаний счЄтчиков по мес€цам
-    MakeCounters();
-
-//    // обработка достоверности по мес€цам
-//    NextMonDef();
-
-    cwMonths++;
+  	NextMonth();
   }
 
 
