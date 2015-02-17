@@ -65,181 +65,195 @@ ulong   *PGetCanImp(impulse  *mpimT, uchar  ibCanal, uchar  ibTariff) {
 
 
 
-ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCanal) {
+ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCanal)
+{
 uchar   i;
+static ulong   dw;
 
-  dwBuffC = 0;
+  dw = 0;
   for (i=0; i<bTARIFFS; i++)
-    dwBuffC += *PGetCanImp(mpimT,ibCanal,i);
+    dw += *PGetCanImp(mpimT,ibCanal,i);
 
-  return( &dwBuffC );
+  return( &dw );
 }
 
 
-/*
-// рассчитать групповое значение на основе канального массива unsigned int (трЄхминутна€ мощность)
-real    *PGetGrpMntInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul)
+
+// рассчитывает групповое значение на основе канального массива uint (трЄхминутна€ мощность)
+real    GetGrpMntInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul)
 {
-uchar   i,j;
+uchar   i, j;
+real    reA, reB;
 
-  reBuffA = 0;
-  for (i=0; i<GetGroupsSize(ibGroup); i++)
+  reA = 0;
+  for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    j = GetGroupsNodeCanal(ibGroup,i);
-    reBuffB = GetCanReal(mpreValueEngMnt,j) * *PGetCanInt(mpwT,j);
+    j = GetGroupsNodeCanal(ibGrp,i);
+    reB = GetCanReal(mpreValueEngMnt,j) * GetCanInt(mpwT,j);
 
-    if (GetGroupsNodeSign(ibGroup,i) == 0)
-      reBuffA += reBuffB;
+    if (GetGroupsNodeSign(ibGrp,i) == 0)
+      reA += reB;
     else
-      reBuffA -= reBuffB;
+      reA -= reB;
   }
 
-  reBuffA *= bMul;
-  return( &reBuffA );
+  reA *= bMul;
+  return reA;
 }
 
 
-// рассчитать групповое значение на основе канального массива unsigned int (трЄхминутна€ мощность)
-real    *PGetCanMntInt2Real(uint  *mpwT, uchar  ibCanal, uchar  bMul)
+// рассчитывает групповое значение на основе канального массива uint (трЄхминутна€ мощность)
+real    GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
 {
-  reBuffA = GetCanReal(mpreValueEngMnt,ibCanal) * *PGetCanInt(mpwT,ibCanal);
+real    re;
 
-  reBuffA *= bMul;
-  return( &reBuffA );
+  re = GetCanReal(mpreValueEngMnt,ibCan) * GetCanInt(mpwT,ibCan);
+
+  re *= bMul;
+  return re;
 }
-*/
 
 
-// рассчитать групповое значение на основе канального массива unsigned int (получасова€ мощность)
-real    *PGetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul)
+
+// рассчитывает групповое значение на основе канального массива uint (получасова€ мощность)
+real     GetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul)
 {
-uchar   i,j;
-real    reBuffB;
+uchar   i, j;
+real    reA, reB;
 
-  reBuffA = 0;
+  reA = 0;
   for (i=0; i<GetGroupsSize(ibGroup); i++)
   {
     j = GetGroupsNodeCanal(ibGroup,i);
 
     if (GetCanInt(mpwT,j) == 0xFFFF)
-      reBuffB = 0;
+      reB = 0;
     else
-      reBuffB = GetCanReal(mpreValueEngHou,j) * GetCanInt(mpwT,j);
+      reB = GetCanReal(mpreValueEngHou,j) * GetCanInt(mpwT,j);
 
     if (GetGroupsNodeSign(ibGroup,i) == 0)
-      reBuffA += reBuffB;
+      reA += reB;
     else
-      reBuffA -= reBuffB;
+      reA -= reB;
   }
 
-  reBuffA *= bMul;
-  return( &reBuffA );
+  reA *= bMul;
+  return reA;
 }
 
 
-// рассчитать канальное значение на основе канального массива unsigned int (получасова€ мощность)
-real    *PGetCanHouInt2Real(uint  *mpwT, uchar  ibCanal, uchar  bMul)
+// рассчитывает канальное значение на основе канального массива uint (получасова€ мощность)
+real    GetCanHouInt2Real(uint  *mpwT, uchar  ibCanal, uchar  bMul)
 {
+real    re;
+
   if (GetCanInt(mpwT,ibCanal) == 0xFFFF)
-    reBuffA = 0;
+    re = 0;
   else
-    reBuffA = GetCanReal(mpreValueEngHou,ibCanal) * GetCanInt(mpwT,ibCanal);
+    re = GetCanReal(mpreValueEngHou,ibCanal) * GetCanInt(mpwT,ibCanal);
 
-  reBuffA *= bMul;
-  return( &reBuffA );
+  re *= bMul;
+  return re;
 }
 
-/*
-real    *PGetPowGrpHouCurr(uchar  ibGroup, uchar  bMul)
+
+real    GetPowGrpHouCurr(uchar  ibGroup, uchar  bMul)
 {
-uchar   i,j;
+uchar   i, j;
+real    reA, reB; 
 
   j = (tiCurr.bMinute % 30) / 3;
   if (j == 0) j = 10;
 
-  reBuffX = 0;
+  reB = 0;
   for (i=1; i<=j; i++)
-    reBuffX += *PGetGrpMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibGroup, bMul);
+    reB += GetGrpMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibGroup, bMul);
 
-  reBuffA = 10*reBuffX/j;
+  reA = 10*reB/j;
 
-  return( &reBuffA );
+  return reA;
 }
 
 
-real    *PGetPowCanHouCurr(uchar  ibCanal, uchar  bMul)
+real    GetPowCanHouCurr(uchar  ibCan, uchar  bMul)
 {
 uchar   i,j;
+real    reA, reB;
 
   j = (tiCurr.bMinute % 30) / 3;
   if (j == 0) j = 10;
 
-  reBuffX = 0;
+  reB = 0;
   for (i=1; i<=j; i++)
-    reBuffX += *PGetCanMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibCanal, bMul);
+    reB += GetCanMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibCan, bMul);
 
-  reBuffA = 10*reBuffX/j;
+  reA = 10*reB/j;
 
-  return( &reBuffA );
+  return reA;
 }
 
 
 
-// рассчитать групповое значение на основе канального массива impulse (суточна€ и мес€чна€ энерги€)
-real    *PGetGrpImp2RealEng(impulse  *mpimT, uchar  ibGroup, uchar  bMask)
+// рассчитывает групповое значение на основе канального массива impulse (суточна€ и мес€чна€ энерги€)
+real    GetGrpImp2RealEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask)
 {
-uchar   i,j;
+uchar   i, j;
+real    reA, reB;
+ulong   dw;
 
-  reBuffA = 0;
-  for (i=0; i<GetGroupsSize(ibGroup); i++)
+  reA = 0;
+  for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    j = GetGroupsNodeCanal(ibGroup,i);
+    j = GetGroupsNodeCanal(ibGrp,i);
 
-    dwBuffC = 0;
+    dw = 0;
 
     if ((bMask & 0x01) != 0)
-      dwBuffC += *PGetCanImp(mpimT,j,0);
+      dw += *PGetCanImp(mpimT,j,0);
     if ((bMask & 0x02) != 0)
-      dwBuffC += *PGetCanImp(mpimT,j,1);
+      dw += *PGetCanImp(mpimT,j,1);
     if ((bMask & 0x04) != 0)
-      dwBuffC += *PGetCanImp(mpimT,j,2);
+      dw += *PGetCanImp(mpimT,j,2);
     if ((bMask & 0x08) != 0)
-      dwBuffC += *PGetCanImp(mpimT,j,3);
+      dw += *PGetCanImp(mpimT,j,3);
 
-    reBuffB = GetCanReal(mpreValueEngHou,j) * dwBuffC;
+    reB = GetCanReal(mpreValueEngHou,j) * dw;
 
-    if (GetGroupsNodeSign(ibGroup,i) == 0)
-      reBuffA += reBuffB;
+    if (GetGroupsNodeSign(ibGrp,i) == 0)
+      reA += reB;
     else
-      reBuffA -= reBuffB;
+      reA -= reB;
   }
 
-  return( &reBuffA );
+  return reA;
 }
 
 
 
-// рассчитать канальное значение на основе канального массива impulse (суточна€ и мес€чна€ энерги€)
-real    *PGetCanImp2RealEng(impulse  *mpimT, uchar  ibCanal, uchar  bMask)
+// рассчитывает канальное значение на основе канального массива impulse (суточна€ и мес€чна€ энерги€)
+real    GetCanImp2RealEng(impulse  *mpimT, uchar  ibCan, uchar  bMask)
 {
-  dwBuffC = 0;
+real    re;
+ulong   dw;
+
+  dw = 0;
 
   if ((bMask & 0x01) != 0)
-    dwBuffC += *PGetCanImp(mpimT,ibCanal,0);
+    dw += *PGetCanImp(mpimT,ibCan,0);
   if ((bMask & 0x02) != 0)
-    dwBuffC += *PGetCanImp(mpimT,ibCanal,1);
+    dw += *PGetCanImp(mpimT,ibCan,1);
   if ((bMask & 0x04) != 0)
-    dwBuffC += *PGetCanImp(mpimT,ibCanal,2);
+    dw += *PGetCanImp(mpimT,ibCan,2);
   if ((bMask & 0x08) != 0)
-    dwBuffC += *PGetCanImp(mpimT,ibCanal,3);
+    dw += *PGetCanImp(mpimT,ibCan,3);
 
-  reBuffA = GetCanReal(mpreValueEngHou,ibCanal) * dwBuffC;
+  re = GetCanReal(mpreValueEngHou,ibCan) * dw;
 
-  return( &reBuffA );
+  return re;
 }
 
 
-
+/*
 // рассчитывает импульсы дл€ выбранного интервала
 void    MakeImpSpec(impulse  *mpimT)
 {
@@ -288,43 +302,46 @@ uchar   i;
 // расчитывает значени€ счЄтчиков дл€ текущего мес€ца
 void    MakeCntMonCan(void)
 {
-uchar  ibCan;
+uchar  c;
+real   re;
 
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  for (c=0; c<bCANALS; c++)
   {
-    if (GetDigitalDevice(ibCan) == 0)
+    if (GetDigitalDevice(c) == 0)
     {
-      reBuffA  = *PGetCanImpAll(mpimAbsCan,ibCan);
-      reBuffA *= GetCanReal(mpreValueCntHou,ibCan);
-      reBuffA += GetCanReal(mpreCount,ibCan);
+      re  = *PGetCanImpAll(mpimAbsCan,c);
+      re *= GetCanReal(mpreValueCntHou,c);
+      re += GetCanReal(mpreCount,c);
     }
     else
     {
-      reBuffA = mpdwBase[ibCan] * GetCanReal(mpreValueCntHou,ibCan);
-      if (GetDigitalDevice(ibCan) == 19) reBuffA += GetCanReal(mpreCount,ibCan);
+      re = mpdwBase[c] * GetCanReal(mpreValueCntHou,c);
+      if (GetDigitalDevice(c) == 19) re += GetCanReal(mpreCount,c);
     }
 
-    SetCanReal(mpreCntMonCan[ ibSoftMon ],ibCan, &reBuffA);
+    SetCanReal(mpreCntMonCan[ ibSoftMon ],c, &re);
   }
 }
 
 
-// рассчитать показани€ счЄтчиков по приращению импульсов
-real    *PGetCounterOld(uchar  ibCanal)
+// рассчитывает показани€ счЄтчиков по приращению импульсов
+real    GetCounterOld(uchar  ibCan)
 {
-  if (GetDigitalDevice(ibCanal) == 19)
+real    re;
+
+  if (GetDigitalDevice(ibCan) == 19)
   {
-    reBuffA = mpdwBase[ibCanal] * GetCanReal(mpreValueCntHou,ibCanal);
-    reBuffA += GetCanReal(mpreCount,ibCanal);
+    re = mpdwBase[ibCan] * GetCanReal(mpreValueCntHou,ibCan);
+    re += GetCanReal(mpreCount,ibCan);
   }
   else
   {
-    reBuffA  = GetCanInt(mpwImpMntCan[ibSoftMnt],ibCanal) * GetCanReal(mpreValueCntMnt,ibCanal);
-    reBuffA += *PGetCanImpAll(mpimAbsCan,ibCanal)         * GetCanReal(mpreValueCntHou,ibCanal);
-    reBuffA += GetCanReal(mpreCount,ibCanal);
+    re  = GetCanInt(mpwImpMntCan[ibSoftMnt],ibCan) * GetCanReal(mpreValueCntMnt,ibCan);
+    re += *PGetCanImpAll(mpimAbsCan,ibCan)         * GetCanReal(mpreValueCntHou,ibCan);
+    re += GetCanReal(mpreCount,ibCan);
   }
 
-  return( &reBuffA );
+  return re;
 }
 
 

@@ -37,6 +37,14 @@ typedef struct
 } file;
 
 
+//
+typedef enum
+{
+  CANALS,
+  GROUPS
+} index;
+
+
 typedef char const      message[bDISPLAY];
 
 

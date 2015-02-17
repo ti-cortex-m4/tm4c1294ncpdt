@@ -1,12 +1,17 @@
 /*------------------------------------------------------------------------------
 KEY_SINGLE2.C
 
- Просмотр групповых величин (новый вариант)
+ Просмотр канальных и групповых величин (новый вариант)
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_energy.h"
 #include        "../keyboard.h"
 #include        "../display/display.h"
+#include        "../realtime/realtime.h"
+#include        "../energy.h"
+#include        "../energy2.h"
 
 
 
@@ -40,28 +45,28 @@ static char const      *pszEngCanCurrMin[]     = { szPower, szOnCanals, szMiddle
 void    ShowCanDayPrevEng(uchar  bMask)
 {
   LoadImpDay( PrevHardDay() );
-  ShowReal(PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowReal(GetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowCanDayCurrEng(uchar  bMask)
 {
   LoadImpDay( ibHardDay );
-  ShowReal(PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowReal(GetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowCanMonPrevEng(uchar  bMask)
 {
   LoadImpMon( PrevHardMon() );
-  ShowReal(PGetCanImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowReal(GetCanImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
 void    ShowCanMonCurrEng(uchar  bMask)
 {
   LoadImpMon( ibHardMon );
-  ShowReal(PGetCanImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowReal(GetCanImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
@@ -71,17 +76,16 @@ void    ShowSingle2(void)
   switch (bProgram)
   {
     case bGET_POWCANCURRMNT:
-      ShowReal(PGetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
+      ShowReal(GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
       break;
 
     case bGET_POWCANPREVHOU:      
       LoadImpHou( PrevHardHou() );
-      ShowReal(PGetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
+      ShowReal(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
       break;
 
-    case bGET_POWCANCURRHOU:            // прогнозируемая получасовая средняя мощность                 
-      PGetPowCanHouCurr(ibX,2);
-      ShowReal(&reBuffA);
+    case bGET_POWCANCURRHOU:
+      ShowReal(GetPowCanHouCurr(ibX,2));
       break;
 
     case bGET_ENGCANDAYPREV_ABCD:  ShowCanDayPrevEng(0x0F);  break;
@@ -105,7 +109,7 @@ void    ShowSingle2(void)
     case bGET_ENGCANMONCURR_A:     ShowCanMonCurrEng(0x01);  break; 
   }      
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 }
 
 
@@ -157,7 +161,7 @@ void    key_GetSingle2(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < bCANALS)
+      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();

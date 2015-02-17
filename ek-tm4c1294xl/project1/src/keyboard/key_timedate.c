@@ -220,9 +220,7 @@ void   auto_GetCurrTime(void)
     if (ibY != ibZ)
     {
       ibZ = ibY;
-
-      tiAlt = *GetCurrTimeDate();
-      ShowTime();
+      ShowTime(*GetCurrTimeDate());
     }
   }
 }
@@ -237,9 +235,7 @@ void   auto_GetCurrDate(void)
     if (ibY != ibZ)
     {
       ibZ = ibY;
-
-      tiAlt = *GetCurrTimeDate();
-      ShowDate();
+      ShowDate(*GetCurrTimeDate());
     }
   }
 }

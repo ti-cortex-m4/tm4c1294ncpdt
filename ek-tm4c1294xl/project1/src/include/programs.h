@@ -73,11 +73,16 @@ PROGRAMS.H
 #define bGET_PULSE_MNT              247
 #define bGET_LOSSE                  37
 
+#define bGET_COUNTNEW               10
+#define bGET_COUNTOLD               110
+#define bGET_READTIMEDATE1          111
+#define bGET_READTIMEDATE2          112
+
 #define bGET_IMPCANCURRMNT          9
 #define bGET_POWGRPCURRMNT          20
 
 #define bGET_POWGRPPREVHOU          21
-#define bGET_POWGRPCURRHOU          22
+#define bGET_POWGRPCURRHOU          22 // прогнозируема€ получасова€ средн€€ мощность
 
 #define bGET_POWGRPDAYPREV_ABCD     23
 #define bGET_POWGRPDAYPREV_C        24

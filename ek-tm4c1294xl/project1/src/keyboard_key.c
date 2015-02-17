@@ -87,6 +87,10 @@ void    Keyboard_Key(void)
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
 
+      case bGET_COUNTOLD:
+      case bGET_READTIMEDATE1:
+      case bGET_READTIMEDATE2:  key_GetSingle(CANALS);  break;
+
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
@@ -141,55 +145,11 @@ void    Keyboard_Key(void)
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
 
-      case bSET_DECRET:         key_SetDecret();        break;
-      case bSET_WINTER:
-      case bSET_SUMMER:         key_SetSeason();        break;
-
-      case bGET_ANALYSIS1:      key_Analysis1();        break;
-
-      default:                  NoProgram();            break;
-    }
-  }
-
-  else if (enGlobal == GLB_REPROGRAM)
-  {
-    switch (bProgram)
-    {
-      case 0xFF:                Keyboard2Reprogram();   break;
-
-      case bSET_CURRTIME:       key_SetCurrTime();      break;
-      case bSET_CURRDATE:       key_SetCurrDate();      break;
-
-      case bSET_GROUPS:         key_SetGroups();        break;
-
-      case bSET_DAY_ZONE:       key_SetDayZone();       break;
-      case bSET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
-      case bSET_TARIFFS_MODE:		key_SetTariffsMode();		break;
-
-      case bSET_PROGRAM10:
-      case bSET_PROGRAM17:
-      case bSET_PROGRAM20:
-      case bSET_PROGRAM27:      key_SetOldYearZone();   break;
-
-      case bSET_RELAXS_FLAG:    key_SetRelaxsFlag();    break;
-      case bSET_RELAXS_TARIFF:  key_SetRelaxsTariff();  break;
-      case bSET_RELAXS:         key_SetRelaxs();        break;
-
-      case bSET_PASSWORD:       key_SetPassword();      break;
-      case bSET_LOGICAL:        key_SetLogical();       break;
-      case bSET_PRIVATE:        key_SetPrivate();       break;
-
-      case bSET_START:          key_Restart();          break;
-
-      case bSET_VERSION:        key_GetVersion();       break;
-
-      case bSET_RESETCUSTOM:
-      case bSET_RESETFULL:      key_SetReset();         break;
-
-      case bSET_MAJORDELAYS:
-      case bSET_MINORDELAYS:    key_SetDelays();        break;
-
-      case bSET_DIGITALS:       key_SetDigitals();      break;
+      case bGET_COUNTNEW:
+      case bGET_COUNTOLD:
+      case bGET_READTIMEDATE1:
+      case bGET_READTIMEDATE2:
+      case bGET_IMPCANCURRMNT:  key_GetSingle(CANALS);  break;
 
       case bGET_POWGRPPREVHOU:
       case bGET_POWGRPCURRHOU:
@@ -256,6 +216,60 @@ void    Keyboard_Key(void)
       case bGET_ENGCANMONCURR_A:
 
       case bGET_POWCANCURRMNT:  key_GetSingle2();       break;
+
+      case bSET_DECRET:         key_SetDecret();        break;
+      case bSET_WINTER:
+      case bSET_SUMMER:         key_SetSeason();        break;
+
+      case bGET_ANALYSIS1:      key_Analysis1();        break;
+
+      default:                  NoProgram();            break;
+    }
+  }
+
+  else if (enGlobal == GLB_REPROGRAM)
+  {
+    switch (bProgram)
+    {
+      case 0xFF:                Keyboard2Reprogram();   break;
+
+      case bSET_CURRTIME:       key_SetCurrTime();      break;
+      case bSET_CURRDATE:       key_SetCurrDate();      break;
+
+      case bSET_GROUPS:         key_SetGroups();        break;
+
+      case bSET_DAY_ZONE:       key_SetDayZone();       break;
+      case bSET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
+      case bSET_TARIFFS_MODE:	key_SetTariffsMode();	break;
+
+      case bSET_PROGRAM10:
+      case bSET_PROGRAM17:
+      case bSET_PROGRAM20:
+      case bSET_PROGRAM27:      key_SetOldYearZone();   break;
+
+      case bSET_RELAXS_FLAG:    key_SetRelaxsFlag();    break;
+      case bSET_RELAXS_TARIFF:  key_SetRelaxsTariff();  break;
+      case bSET_RELAXS:         key_SetRelaxs();        break;
+
+      case bSET_PASSWORD:       key_SetPassword();      break;
+      case bSET_LOGICAL:        key_SetLogical();       break;
+      case bSET_PRIVATE:        key_SetPrivate();       break;
+
+      case bSET_START:          key_Restart();          break;
+
+      case bSET_VERSION:        key_GetVersion();       break;
+
+      case bSET_RESETCUSTOM:
+      case bSET_RESETFULL:      key_SetReset();         break;
+
+      case bSET_MAJORDELAYS:
+      case bSET_MINORDELAYS:    key_SetDelays();        break;
+
+      case bSET_DIGITALS:       key_SetDigitals();      break;
+
+      case bGET_COUNTOLD:
+      case bGET_READTIMEDATE1:
+      case bGET_READTIMEDATE2:  key_GetSingle(CANALS);  break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:

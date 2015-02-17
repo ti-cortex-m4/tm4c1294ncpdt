@@ -20,8 +20,8 @@ bool    TrueTimeDate(void);
 ulong   DateToSecIndex(void);
 void    SecIndexToDate(ulong  dwT);
 
-void    ShowTime(void);
-void    ShowDate(void);
-void    ShowTimeDate(void);
+void    ShowTime(time  ti);
+void    ShowDate(time  ti);
+void    ShowTimeDate(time  ti);
 
 void    LoadBetaMonth(uchar  ibMonth);
