@@ -28,6 +28,8 @@ KEYBOARD_KEY.C
 #include        "keyboard/tariffs/key_relaxs.h"
 #include        "keyboard/key_factors.h"
 #include        "keyboard/key_delays.h"
+#include        "keyboard/key_single.h"
+#include        "keyboard/key_single2.h"
 #include        "keyboard/key_reset.h"
 #include        "keyboard/key_analysis.h"
 
@@ -188,6 +190,72 @@ void    Keyboard_Key(void)
       case bSET_MINORDELAYS:    key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
+
+      case bGET_POWGRPPREVHOU:
+      case bGET_POWGRPCURRHOU:
+
+      case bGET_POWGRPDAYPREV_ABCD:
+      case bGET_POWGRPDAYPREV_C:
+      case bGET_POWGRPDAYPREV_D:
+
+      case bGET_POWGRPDAYCURR_ABCD:
+      case bGET_POWGRPDAYCURR_C:
+      case bGET_POWGRPDAYCURR_D:
+
+      case bGET_POWGRPMONPREV_ABCD:
+      case bGET_POWGRPMONPREV_C:
+      case bGET_POWGRPMONPREV_D:
+
+      case bGET_POWGRPMONCURR_ABCD:
+      case bGET_POWGRPMONCURR_C:
+      case bGET_POWGRPMONCURR_D:
+
+      case bGET_ENGGRPDAYPREV_ABCD:
+      case bGET_ENGGRPDAYPREV_CD:
+      case bGET_ENGGRPDAYPREV_B:
+      case bGET_ENGGRPDAYPREV_A:
+
+      case bGET_ENGGRPDAYCURR_ABCD:
+      case bGET_ENGGRPDAYCURR_CD:
+      case bGET_ENGGRPDAYCURR_B:
+      case bGET_ENGGRPDAYCURR_A:
+
+      case bGET_ENGGRPMONPREV_ABCD:
+      case bGET_ENGGRPMONPREV_CD:
+      case bGET_ENGGRPMONPREV_B:
+      case bGET_ENGGRPMONPREV_A:
+
+      case bGET_ENGGRPMONCURR_ABCD:
+      case bGET_ENGGRPMONCURR_CD:
+      case bGET_ENGGRPMONCURR_B:
+      case bGET_ENGGRPMONCURR_A:
+
+      case bGET_POWGRPCURRMNT:  key_GetSingle(GROUPS);  break;
+
+      case bGET_POWCANPREVHOU:
+      case bGET_POWCANCURRHOU:
+
+      case bGET_ENGCANDAYPREV_ABCD:
+      case bGET_ENGCANDAYPREV_CD:
+      case bGET_ENGCANDAYPREV_B:
+      case bGET_ENGCANDAYPREV_A:
+
+      case bGET_ENGCANDAYCURR_ABCD:
+      case bGET_ENGCANDAYCURR_CD:
+      case bGET_ENGCANDAYCURR_B:
+      case bGET_ENGCANDAYCURR_A:
+
+      case bGET_ENGCANMONPREV_ABCD:
+      case bGET_ENGCANMONPREV_CD:
+      case bGET_ENGCANMONPREV_B:
+      case bGET_ENGCANMONPREV_A:
+
+      case bGET_ENGCANMONCURR_ABCD:
+      case bGET_ENGCANMONCURR_CD:
+      case bGET_ENGCANMONCURR_B:
+      case bGET_ENGCANMONCURR_A:
+
+      case bGET_POWCANCURRMNT:  key_GetSingle2();       break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
