@@ -1,10 +1,7 @@
 /*------------------------------------------------------------------------------
-SENSORS.H
+CURRENT.H
 
 
 ------------------------------------------------------------------------------*/
 
-ulong   GetMajDelay(uchar  ibPort);
-ulong   GetMinDelay(uchar  ibPort);
-
-bool    IsPulseCanal(uchar  ibCan);
+bool    IsSpecCurrent(uchar  i);

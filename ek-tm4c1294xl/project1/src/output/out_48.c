@@ -13,6 +13,9 @@ OUT_48.C
 #include        "../realtime/realtime.h"
 #include        "../energy.h"
 #include        "../energy2.h"
+#include        "../digitals/digitals.h"
+#include        "../sensors.h"
+#include        "../current.h"
 
 
 
