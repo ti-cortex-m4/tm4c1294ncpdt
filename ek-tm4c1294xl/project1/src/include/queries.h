@@ -53,6 +53,12 @@ QUERIES.H
 #define bINQ_GETDIGITAL                42
 #define bINQ_SETDIGITAL                43
 
+#define bINQ_GETIMPCANMNT_ALL          200
+#define bINQ_GETIMPCANHOU_ALL          201
+#define bINQ_GETIMPCANDAY_ALL          202
+#define bINQ_GETIMPCANMON_ALL          203
+#define bINQ_GETIMPCANABS_ALL          204
+
 #define bINQ_GETPOWGRPMNTPREV          110
 #define bINQ_GETPOWGRPMNT              111
 
