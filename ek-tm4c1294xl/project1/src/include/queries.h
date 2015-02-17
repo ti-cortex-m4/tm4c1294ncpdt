@@ -118,6 +118,10 @@ QUERIES.H
 
 #define bINQ_GETTARIFFSDAY             150
 
+#define bINQ_GETPOWGRPHOU_DAY          157
+#define bINQ_GETIMPCANHOU_DAY          158
+#define bINQ_GETPOWCANHOU_DAY          159
+
 #define bINQ_SETDELAY                  243
 
 #define bINQ_GETFLASHPAGE              249

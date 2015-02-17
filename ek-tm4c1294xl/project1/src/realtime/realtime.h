@@ -7,6 +7,8 @@ REALTIME.H
 extern  bool                    fActive;
 
 
+uchar   GetCurrHouIndex(void);
+uint    GetDayHouIndex(uchar  bDay);
 
 uchar   PrevSoftMnt(void);
 uchar   PrevSoftHou(void);

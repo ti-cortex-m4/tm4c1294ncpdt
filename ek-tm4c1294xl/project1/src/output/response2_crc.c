@@ -19,6 +19,7 @@ RESPONSE2_CRC.C
 #include        "../output/out_max_power.h"
 #include        "../output/out_energy.h"
 #include        "../output/out_impulse.h"
+#include        "../output/out_48.h"
 #include        "../output/out_version.h"
 
 
@@ -133,11 +134,10 @@ void    Response2_CRC(void)
     case bINQ_GETIMPCANDAY_ALL:     OutImpDayCanExt();     break;
     case bINQ_GETIMPCANMON_ALL:     OutImpMonCanExt();     break;
 
-//    case bINQ_GETPOWGRPHOU_DAY:     OutPowGrpHou48Ext();            break;
-//    case bINQ_GETIMPCANHOU_DAY:     OutImpCanHou48Ext();            break;
-//    case bINQ_GETPOWCANHOU_DAY:     OutPowCanHou48Ext();            break;
-//    case bINQ_GETDEFCANHOU_DAY:     OutDefCanHou48Ext();            break;
-//
+    case bINQ_GETPOWGRPHOU_DAY:     OutPowGrpHou48Ext();            break;
+    case bINQ_GETIMPCANHOU_DAY:     OutImpCanHou48Ext();            break;
+    case bINQ_GETPOWCANHOU_DAY:     OutPowCanHou48Ext();            break;
+
 //    case bINQ_GETIMPCANMNT_ALL:     OutImpMntCanExt();              break;
 //    case bINQ_GETPOWCANMNT_ALL:     OutPowMntCanExt();              break;
 //
