@@ -15,8 +15,8 @@ ENERGY.C
 #include        "memory/mem_graph3.h"
 #include        "memory/mem_special.h"
 #include        "digitals/digitals.h"
+#include        "digitals/sensors.h"
 #include        "groups.h"
-#include        "sensors.h"
 
 
 

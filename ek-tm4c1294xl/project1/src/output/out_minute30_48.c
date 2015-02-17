@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-OUT_48.C
+OUT_MINUTE30_48.C
                     
 
 ------------------------------------------------------------------------------*/
@@ -14,8 +14,8 @@ OUT_48.C
 #include        "../energy.h"
 #include        "../energy2.h"
 #include        "../digitals/digitals.h"
-#include        "../sensors.h"
-#include        "../current.h"
+#include        "../digitals/sensors.h"
+#include        "../digitals/current.h"
 
 
 
