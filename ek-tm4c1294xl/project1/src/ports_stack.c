@@ -50,6 +50,12 @@ void    PushInt(uint  wT) {
 }
 
 
+void    PushReal(real  reT)
+{
+  Push(&reT, sizeof(real));
+}
+
+
 uchar   SkipChar(void) {
   switch (ibPort) {
     case 0: return mpbOutBuff0[ iwPush0++ ];
