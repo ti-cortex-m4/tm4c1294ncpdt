@@ -118,6 +118,43 @@ void    Response2_CRC(void)
 
     case bEXT_GETGROUPS: OutGetGroupsExt(); break;
 
+//    case bINQ_GETMAXPOWGRPDAY_ALL:  OutMaxPowDayGrpExt();           break;
+//    case bINQ_GETMAXPOWGRPMON_ALL:  OutMaxPowMonGrpExt();           break;
+//
+//    case bEXT_GETMAXPOWGRPDAY_CUST1: OutMaxPowDayGrpCust1();        break;
+//    case bEXT_GETMAXPOWGRPDAY_CUST2: OutMaxPowDayGrpCust2();        break;
+//
+//    case bINQ_GETENGGRPDAY_ALL:     OutEngDayGrpExt0();             break;
+//    case bINQ_GETENGGRPMON_ALL:     OutEngMonGrpExt0();             break;
+//
+//    case bINQ_GETENGGRPDAY_ALLSUM:  OutEngDayGrpExt1();             break;
+//    case bINQ_GETENGGRPMON_ALLSUM:  OutEngMonGrpExt1();             break;
+//
+//    case bINQ_GETIMPCANDAY_ALL:     OutImpDayCanExt();              break;
+//    case bINQ_GETIMPCANMON_ALL:     OutImpMonCanExt();              break;
+//
+//    case bINQ_GETENGGRPHOU_ALL:     OutEngGrpHouExt1();             break;
+//    case bEXT_GETENGGRPHOU_ALL:     OutEngGrpHouExt2();             break;
+//
+//    case bINQ_GETPOWGRPHOU_DAY:     OutPowGrpHou48Ext();            break;
+//    case bINQ_GETIMPCANHOU_DAY:     OutImpCanHou48Ext();            break;
+//    case bINQ_GETPOWCANHOU_DAY:     OutPowCanHou48Ext();            break;
+//    case bINQ_GETDEFCANHOU_DAY:     OutDefCanHou48Ext();            break;
+//
+//    case bINQ_GETIMPCANMNT_ALL:     OutImpMntCanExt();              break;
+//    case bINQ_GETPOWCANMNT_ALL:     OutPowMntCanExt();              break;
+//
+//    case bINQ_GETCNTCANMONCURR_ALL: OutCntCanMonCurrExt();          break;
+
+//    case bEXT_GETIMPCANHOU:         OutImpCanHouExt();              break;
+//    case bEXT_GETADDRESSES:         OutAddressesExt();              break;
+//    case bEXT_GETIMPCANMNT:         OutImpCanMntExt();              break;
+//    case bEXT_GETPOWCANMNT:         OutPowCanMntExt();              break;
+//
+//    case bEXT_GETENG3MIN_DATA:      OutEng3MinDataExt();            break;
+//    case bEXT_GETENG3MIN_TIME:      OutEng3MinTimeExt();            break;
+//    case bEXT_GETCURRENT:           OutCurrentExt();                break;
+
     case bEXT_GETDIGITALS: OutDigitalsExt(); break;
     case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnabledCan); break;
 

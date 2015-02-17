@@ -5,14 +5,21 @@ KEY_SINGLE.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_energy.h"
 #include        "../keyboard.h"
 #include        "../display/display.h"
+#include        "../realtime/realtime.h"
+#include        "../energy.h"
+#include        "../energy2.h"
+#include        "../power.h"
+#include        "../timedate.h"
 
 
+//                                             0123456789ABCDEF
+static char const       szTimeDate[]        = "¬рем€ и дата    ";
 
-//                                         0123456789ABCDEF
-static char const       szFree[]        = "      нет    ";
-                        
+
 static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "" },
                        *pszCountersB[]      = { szCounters, szForDigital, "" },
 
@@ -45,8 +52,6 @@ static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "
                        *pszEngDayCurrB[]    = { szEnergy, szDayCurr, szMid,    "" },
                        *pszEngDayCurrA[]    = { szEnergy, szDayCurr, szBottom, "" },
 
-                       *pszEngMonPrevSpec[] = { szEnergy, szMonPrev, szFull,   szDeviceD, "" },
-
                        *pszEngMonPrevABCD[] = { szEnergy, szMonPrev, szFull,   "" },
                        *pszEngMonPrevCD[]   = { szEnergy, szMonPrev, szTops,   "" },
                        *pszEngMonPrevB[]    = { szEnergy, szMonPrev, szMid,    "" },
@@ -59,29 +64,50 @@ static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "
 
 
 
+uchar   GetMax(index  in)
+{
+  if (in == GROUPS)
+    return(bGROUPS);
+  else
+    return(bCANALS);
+}
+
+
+void    ShowLogin(index  in)
+{
+  if (in == GROUPS)
+    Group();
+  else
+    Canal();
+}
+
 
 void    ShowGrpDayMaxPow(void)
 {
-  tiAlt = *PGetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ);
+time  ti;
+
+  ti = GetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ);
 
   switch (ibY)
   {
-    case 0:  ShowReal(PGetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ));  break;
-    case 1:  ShowTime();  break;
-    case 2:  ShowDate();  break;
+    case 0:  ShowReal(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ));  break;
+    case 1:  ShowTime(ti);  break;
+    case 2:  ShowDate(ti);  break;
   }
 }
 
 
 void    ShowGrpMonMaxPow(void)
 {
-  tiAlt = *PGetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ);
+time  ti;
+
+  ti = GetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ);
 
   switch (ibY)
   {
-    case 0:  ShowReal(PGetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ));  break;
-    case 1:  ShowTime();  break;
-    case 2:  ShowDate();  break;
+    case 0:  ShowReal(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ));  break;
+    case 1:  ShowTime(ti);  break;
+    case 2:  ShowDate(ti);  break;
   }
 }
 
@@ -90,88 +116,82 @@ void    ShowGrpMonMaxPow(void)
 void    ShowGrpDayPrevEng(uchar  bMask)
 {
   LoadImpDay( PrevHardDay() );
-  ShowReal(PGetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowReal(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowGrpDayCurrEng(uchar  bMask)
 {
   LoadImpDay( ibHardDay );
-  ShowReal(PGetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowReal(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowGrpMonPrevEng(uchar  bMask)
 {
   LoadImpMon( PrevHardMon() );
-  ShowReal(PGetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
-}
-
-
-void    ShowGrpMonPrevEngSpec(void)
-{
-  ShowReal(PGetGrpImp2RealEng(mpimMonCanSpec,ibX,0x0F));
+  ShowReal(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
 void    ShowGrpMonCurrEng(uchar  bMask)
 {
   LoadImpMon( ibHardMon );
-  ShowReal(PGetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowReal(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
 void    ShowModemReadSensors(void)
 {
-  if (GetDigitalDevice(ibX) == 0)
-    ShowReal(PGetCounterOld(ibX));
-  else
-  {
-    LoadCurrDigital(ibX);
-    ibPort = diCurr.ibPort;
-
-    if (LoadConnect(ibX) == 0) return;
-    Clear();
-
-    if (mpboEnblCan[ibX] == boFalse)
-      ShowLo(szBlocking); 
-    else 
-      (ReadSensors(ibX) == 1) ? ShowReal(&reBuffA) : Error();   
-
-    SaveConnect();
-  }
+//  if (GetDigitalDevice(ibX) == 0)
+//    ShowReal(PGetCounterOld(ibX));
+//  else
+//  {
+//    LoadCurrDigital(ibX);
+//    ibPort = diCurr.ibPort;
+//
+//    if (LoadConnect(ibX) == 0) return;
+//    Clear();
+//
+//    if (mpboEnblCan[ibX] == false)
+//      ShowLo(szBlocking);
+//    else
+//      (ReadSensors(ibX) == 1) ? ShowReal(&reBuffA) : Error();
+//
+//    SaveConnect();
+//  }
 }
 
 
-void    ShowModemReadTimeDate(bit  fShow)
+void    ShowModemReadTimeDate(bool  fShowTimeDate)
 {
-  ShowHi(szTimeDate); 
-
-  if (GetDigitalDevice(ibX) == 0)
-    ShowLo(szFree); 
-  else
-  {
-    LoadCurrDigital(ibX);
-    ibPort = diCurr.ibPort;
-
-    if (LoadConnect(ibX) == 0) return;
-    Clear();
-
-    if (mpboEnblCan[ibX] == boFalse)
-    { 
-      sprintf(szHi+14,"%2bu",ibX+1);
-      ShowLo(szBlocking); 
-    }
-    else if (ReadTimeDate(ibX) == 1)
-    {
-      sprintf(szHi+14,"%2bu",ibX+1);  
-      Clear(); 
-      (fShow == 1) ? ShowTimeDate() : ShowDeltaTime();
-    }
-    else Error();   
-
-    SaveConnect();
-  }
+//  ShowHi(szTimeDate);
+//
+//  if (GetDigitalDevice(ibX) == 0)
+//    ShowLo(szFree);
+//  else
+//  {
+//    LoadCurrDigital(ibX);
+//    ibPort = diCurr.ibPort;
+//
+//    if (LoadConnect(ibX) == 0) return;
+//    Clear();
+//
+//    if (mpboEnblCan[ibX] == false)
+//    {
+//      sprintf(szHi+14,"%2bu",ibX+1);
+//      ShowLo(szBlocking);
+//    }
+//    else if (ReadTimeDate(ibX) == 1)
+//    {
+//      sprintf(szHi+14,"%2bu",ibX+1);
+//      Clear();
+//      (fShowTimeDate) ? ShowTimeDate() : ShowDeltaTime();
+//    }
+//    else Error();
+//
+//    SaveConnect();
+//  }
 }
 
 
@@ -189,21 +209,20 @@ void    ShowSingle(void)
       break;
 
     case bGET_POWGRPCURRMNT:
-      ShowReal(PGetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
+      ShowReal(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
       break;
 
     case bGET_IMPCANCURRMNT:
-      ShowInt(*PGetCanInt(mpwImpMntCan[ ibSoftMnt ],ibX));  
+      ShowInt(GetCanInt(mpwImpMntCan[ ibSoftMnt ],ibX));
       break;
 
     case bGET_POWGRPPREVHOU:      
       LoadImpHou( PrevHardHou() );
-      ShowReal(PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
+      ShowReal(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
       break;
 
-    case bGET_POWGRPCURRHOU:            // прогнозируема€ получасова€ средн€€ мощность                 
-      PGetPowGrpHouCurr(ibX,2);
-      ShowReal(&reBuffA);
+    case bGET_POWGRPCURRHOU:
+      ShowReal(GetPowGrpHouCurr(ibX,2));
       break;
 
     case bGET_POWGRPDAYPREV_ABCD:  
@@ -288,8 +307,6 @@ void    ShowSingle(void)
     case bGET_ENGGRPDAYCURR_B:     ShowGrpDayCurrEng(0x02);  break;
     case bGET_ENGGRPDAYCURR_A:     ShowGrpDayCurrEng(0x01);  break;
 
-    case bGET_ENGGRPMONPREV_SPEC:  ShowGrpMonPrevEngSpec();  break;
-
     case bGET_ENGGRPMONPREV_ABCD:  ShowGrpMonPrevEng(0x0F);  break;
     case bGET_ENGGRPMONPREV_CD:    ShowGrpMonPrevEng(0x0C);  break;
     case bGET_ENGGRPMONPREV_B:     ShowGrpMonPrevEng(0x02);  break;
@@ -301,27 +318,27 @@ void    ShowSingle(void)
     case bGET_ENGGRPMONCURR_A:     ShowGrpMonCurrEng(0x01);  break; 
   }      
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 
   switch (bProgram)
   {
-    case bGET_READTIMEDATE1:  ShowModemReadTimeDate(1);  break;
-    case bGET_READTIMEDATE2:  ShowModemReadTimeDate(0);  break;
+    case bGET_READTIMEDATE1:  ShowModemReadTimeDate(true);  break;
+    case bGET_READTIMEDATE2:  ShowModemReadTimeDate(false);  break;
   }
 }
 
 
 
-void    key_GetSingle(void)
+void    key_GetSingle(index  in)
 {
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
-      ShowLogin();
+      ShowLogin(in);
 
-      InitConnectKey();
+//    TODO  InitConnectKey();
 
       switch (bProgram)
       {
@@ -363,11 +380,6 @@ void    key_GetSingle(void)
         case bGET_ENGGRPDAYCURR_B:     LoadSlide(pszEngDayCurrB);     break;
         case bGET_ENGGRPDAYCURR_A:     LoadSlide(pszEngDayCurrA);     break;
 
-        case bGET_ENGGRPMONPREV_SPEC:  LoadSlide(pszEngMonPrevSpec);  
-                                       SaveDisplay();
-                                       MakeMonPrevEngSpec(); 
-                                       LoadDisplay();                 break;
-
         case bGET_ENGGRPMONPREV_ABCD:  LoadSlide(pszEngMonPrevABCD);  break;
         case bGET_ENGGRPMONPREV_CD:    LoadSlide(pszEngMonPrevCD);    break;
         case bGET_ENGGRPMONPREV_B:     LoadSlide(pszEngMonPrevB);     break;
@@ -390,7 +402,7 @@ void    key_GetSingle(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < GetMaximum())
+      if ((ibX = GetCharLo(10,11) - 1) < GetMax(in))
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
@@ -402,7 +414,7 @@ void    key_GetSingle(void)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= GetMaximum()) 
+      if (++ibX >= GetMax(in))
         ibX = 0;
 
       ibY = 0;
@@ -414,8 +426,8 @@ void    key_GetSingle(void)
 
   else if (bKey == bKEY_MINUS)
   {        
-    ResetDTR();
-    if ((reReview == REV_GROUPS) && (enKeyboard == KBD_POSTENTER))
+//  TODO  ResetDTR();
+    if ((in == GROUPS) && (enKeyboard == KBD_POSTENTER))
     {
       if (++ibY >= 3) 
         ibY = 0;
@@ -433,7 +445,7 @@ void    key_GetSingle(void)
       if (ibX > 0) 
         ibX--;
       else         
-        ibX = GetMaximum() - 1;
+        ibX = GetMax(in) - 1;
 
       ibY = 0;
       ShowSingle();

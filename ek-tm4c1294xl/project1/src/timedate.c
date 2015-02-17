@@ -204,34 +204,34 @@ void    SecIndexToDate(ulong  dwT)
 
 
 
-void    ShowTime(void)
+void    ShowTime(time  ti)
 {
   sprintf(szLo+4,"%02u:%02u:%02u",
-                 tiAlt.bHour,
-                 tiAlt.bMinute,
-                 tiAlt.bSecond);
+                 ti.bHour,
+                 ti.bMinute,
+                 ti.bSecond);
 }
 
 
-void    ShowDate(void)
+void    ShowDate(time  ti)
 {
   sprintf(szLo+4,"%02u.%02u.%02u",
-                 tiAlt.bDay,
-                 tiAlt.bMonth,
-                 tiAlt.bYear);
+                 ti.bDay,
+                 ti.bMonth,
+                 ti.bYear);
 
-  szLo[14] = szDigits[GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay) + 1];
+  szLo[14] = szDigits[GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) + 1];
 }
 
 
-void    ShowTimeDate(void)
+void    ShowTimeDate(time  ti)
 {
   sprintf(szLo+1,"%02u:%02u %02u.%02u.%02u",
-                 tiAlt.bHour,
-                 tiAlt.bMinute,
-                 tiAlt.bDay,
-                 tiAlt.bMonth,
-                 tiAlt.bYear);
+                 ti.bHour,
+                 ti.bMinute,
+                 ti.bDay,
+                 ti.bMonth,
+                 ti.bYear);
 }
 
 

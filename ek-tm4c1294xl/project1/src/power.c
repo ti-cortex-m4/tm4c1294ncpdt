@@ -68,8 +68,7 @@ static value va;
 
   for (g=0; g<bGROUPS; g++)
   {
-    re = *PGetGrpHouInt2Real(mpwImpHouCan[ ibSoftHou ],g,2);
-
+    re = GetGrpHouInt2Real(mpwImpHouCan[ ibSoftHou ],g,2);
     if (re >= GetGrpMaxPowReal(mppoT,g,t))
     {
       va.reSelf = re;
@@ -88,8 +87,7 @@ static value va;
 
   t = mpibPowPrevTariff[ ptiT->bHour*2 + ptiT->bMinute/30 ];
 
-  re = *PGetGrpHouInt2Real(mpwImpHouCanSpec,ibGrp,2);
-
+  re = GetGrpHouInt2Real(mpwImpHouCanSpec,ibGrp,2);
   if (re >= GetGrpMaxPowReal(mppoT,ibGrp,t))
   {
     va.reSelf = re;

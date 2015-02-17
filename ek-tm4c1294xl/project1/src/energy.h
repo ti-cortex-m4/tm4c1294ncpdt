@@ -13,13 +13,22 @@ void    SetCanLong(ulong  *mpdwT, uchar  ibCan, ulong  *pdwT);
 real    GetCanReal(real  *mpreT, uchar  ibCan);
 void    SetCanReal(real  *mpreT, uchar  ibCan, real  *preT);
 
-ulong   *PGetCanImp(impulse  *mpimT, uchar  ibCanal, uchar  ibTariff);
-ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCanal);
+ulong   *PGetCanImp(impulse  *mpimT, uchar  ibCan, uchar  ibTariff);
+ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCan);
 
-real    *PGetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul);
+real    GetGrpMntInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul);
+real    GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
+
+real    GetGrpHouInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul);
+real    GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
+real    GetPowGrpHouCurr(uchar  ibGrp, uchar  bMul);
+real    GetPowCanHouCurr(uchar  ibCan, uchar  bMul);
+
+real    GetGrpImp2RealEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);
+real    GetCanImp2RealEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
 
 void    MakeCntMonCan(void);
-real    *PGetCounterOld(uchar  ibCanal);
+real    GetCounterOld(uchar  ibCan);
 
 void    MakeImpulse(void);
 void    MakeImpulseSpec(void);
