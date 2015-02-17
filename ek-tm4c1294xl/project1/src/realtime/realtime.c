@@ -29,6 +29,31 @@ bool                    fActive;
 
 
 
+// возвращает индекс текущего получаса
+uchar   GetCurrHouIndex(void)
+{
+  return(tiCurr.bHour*2 + tiCurr.bMinute/30);
+}
+
+
+// возвращает индекс на первый получас требуемых суток назад
+uint    GetDayHouIndex(uchar  bDay)
+{
+uchar   i;
+uint    j;
+
+  // индекс на первый получас текущих суток
+  j = (wHOURS+iwHardHou-GetCurrHouIndex()) % wHOURS;
+
+  // индексы на первые получасы суток назад
+  for (i=0; i<bDay; i++) j = (wHOURS+j-48) % wHOURS;
+
+  // индекс на первый получас требуемых суток
+  return(j);
+}
+
+
+
 uchar   PrevSoftMnt(void)
 {
   if (ibSoftMnt > 0) return(ibSoftMnt - 1);
