@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_DELAYS.C
+KEY_DELAYS.C
 
  
 ------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@ _DELAYS.C
 #include        "../keyboard.h"
 #include        "../display/display.h"
 #include        "../engine.h"
-#include        "../sensors.h"
+#include        "../digitals/sensors.h"
 
 
 

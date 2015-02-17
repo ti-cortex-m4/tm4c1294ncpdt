@@ -4,9 +4,9 @@ SENSORS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "memory/mem_ports.h"
-#include        "digitals/digitals.h"
+#include        "../main.h"
+#include        "../memory/mem_ports.h"
+#include        "../digitals/digitals.h"
 
 
 
