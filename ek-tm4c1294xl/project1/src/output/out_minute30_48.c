@@ -64,7 +64,7 @@ real    re;
 
 void    PushImpHouCan(uint  wT, uchar  ibCan)
 {
-  if ((IsPulseCanal(ibCan) || IsSpecCurrent(GetDigitalDevice(ibCan))) && (wT == 0xFFFF)) wT = 0;
+  if ((IsPulseCanal(ibCan) || IsSpecGraph3(GetDigitalDevice(ibCan))) && (wT == 0xFFFF)) wT = 0;
   PushInt(wT);
 }
 
