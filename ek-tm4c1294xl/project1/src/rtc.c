@@ -110,22 +110,6 @@ void    DisableWriteRTC(void) {
 */
 
 
-void    InitRTC(void) {
-  //Включение периферии
-  HWREG(SYSCTL_RCGCGPIO) |= 0x2000;//Запуск генератора порта "P"
-
-  RunClocking();
-
-  //Для порта "P" (SPI+CE)
-  HWREG(GPIO_PORTP_BASE + GPIO_O_DIR)   |= 0x001C;//пины на передачу (PP5 на прием)
-  HWREG(GPIO_PORTP_BASE + GPIO_O_DEN)   |= 0x003C;//цифровой сигнал
-
-  EnableWriteRTC();
-  DisableSPI();
-}
-
-
-
 time    *GetCurrTimeDate(void)
 {
 static time ti;
@@ -191,6 +175,36 @@ void    SetCurrDate(time  *pti)
 
 
 
+void    SetLabelRTC(void)
+{
+uchar   i;
+
+  EnableSPI();
+
+  CharOutSPI(0xA0);
+  for (i=0; i<0x10; i++) CharOutSPI(i);
+
+  DisableSPI();
+}
+
+
+bool    GetLabelRTC(void)
+{
+uchar   i;
+
+  EnableSPI();
+
+  CharOutSPI(0x20);
+  for (i=0; i<0x10; i++)
+    if (CharInSPI() != i) return(0);
+
+  DisableSPI();
+
+  return(1);
+}
+
+
+
 bool    TrueCurrTimeDate(time  *pti)
 {
   if (pti->bSecond == FromBCD(0xFF)) return(0);
@@ -215,6 +229,25 @@ bool    TrueCurrTimeDate(time  *pti)
 
   return(1);
 }
+
+
+
+void    InitRTC(void) {
+  //Включение периферии
+  HWREG(SYSCTL_RCGCGPIO) |= 0x2000;//Запуск генератора порта "P"
+
+  RunClocking();
+
+  //Для порта "P" (SPI+CE)
+  HWREG(GPIO_PORTP_BASE + GPIO_O_DIR)   |= 0x001C;//пины на передачу (PP5 на прием)
+  HWREG(GPIO_PORTP_BASE + GPIO_O_DEN)   |= 0x003C;//цифровой сигнал
+
+  EnableWriteRTC();
+  SetLabelRTC();
+
+  DisableSPI();
+}
+
 
 
 void    RTC_Timer1(void) {

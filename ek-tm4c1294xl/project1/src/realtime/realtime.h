@@ -17,3 +17,5 @@ uchar   PrevSoftDay(void);
 uchar   PrevHardDay(void);
 uchar   PrevSoftMon(void);
 uchar   PrevHardMon(void);
+
+void    Realtime(void);
