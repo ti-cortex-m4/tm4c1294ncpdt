@@ -105,10 +105,6 @@ PROGRAMS.H
 #define bSET_SETRECALC              230
 #define bSET_RECALC_ALWAYS          231
 
-#define bSET_DTR_ENABLE             234
-#define bSET_DTR_TEST               235
-#define bSET_DTR_RESET              236
-
 #define bGET_DEVICESINT             144
 #define bGET_DEVICESREAL            145
 

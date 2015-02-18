@@ -17,6 +17,7 @@ KEY_START.C
 #include        "../realtime/impulses.h"
 #include        "../rtc.h"
 #include        "../factors.h"
+#include        "../flash/records.h"
 
 
 
@@ -171,9 +172,7 @@ void    key_Restart(void)
     LongBeep();
     enGlobal = GLB_WORK;  
 
-//    AddSysRecord(EVE_RESTART);
-
-//    if (boDTREnable == true) DTROff_All();
+    AddSysRecord(EVE_RESTART);
   }
   else Beep();
 }
@@ -210,8 +209,6 @@ void    key_Debug(void)
     MakeUsedNodes();
 
     OK();
-
-//    if (boDTREnable == true) DTROff_All();
   }
   else Beep();
 }
