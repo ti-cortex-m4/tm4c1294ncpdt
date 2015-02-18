@@ -325,7 +325,7 @@ real   re;
 
 
 // рассчитывает показания счётчиков по приращению импульсов
-real    GetCounterOld(uchar  ibCan)
+real    GetCntCurrImp(uchar  ibCan)
 {
 real    re;
 

@@ -42,7 +42,7 @@ void    ShowFactors(void)
       case bSET_PULSE_HOU:     ShowReal( GetCanReal(mprePulseHou,    ibX) );  break;
       case bSET_PULSE_MNT:     ShowReal( GetCanReal(mprePulseMnt,    ibX) );  break;
 
-      case bSET_COUNT:         ShowReal( GetCounterOld(ibX) );                break;
+      case bSET_COUNT:         ShowReal( GetCntCurrImp(ibX) );                break;
 
       case bSET_LOSSE:         ShowReal( GetCanReal(mpreLosse, ibX)*100 );    break;
 

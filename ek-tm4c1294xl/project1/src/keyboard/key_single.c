@@ -10,6 +10,7 @@ KEY_SINGLE.C
 #include        "../keyboard.h"
 #include        "../display/display.h"
 #include        "../realtime/realtime.h"
+#include        "../digitals/digitals.h"
 #include        "../energy.h"
 #include        "../energy2.h"
 #include        "../power.h"
@@ -17,8 +18,8 @@ KEY_SINGLE.C
 
 
 //                                             0123456789ABCDEF
-static char const       szTimeDate[]        = "Время и дата    ";
-
+static char const       szTimeDate[]        = "Время и дата    ",
+                        szNone[]            = "      нет    ";
 
 static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "" },
                        *pszCountersB[]      = { szCounters, szForDigital, "" },
@@ -143,8 +144,8 @@ void    ShowGrpMonCurrEng(uchar  bMask)
 
 void    ShowModemReadSensors(void)
 {
-//  if (GetDigitalDevice(ibX) == 0)
-//    ShowReal(PGetCounterOld(ibX));
+  if (GetDigitalDevice(ibX) == 0)
+    ShowReal(GetCntCurrImp(ibX));
 //  else
 //  {
 //    LoadCurrDigital(ibX);
@@ -165,10 +166,10 @@ void    ShowModemReadSensors(void)
 
 void    ShowModemReadTimeDate(bool  fShowTimeDate)
 {
-//  ShowHi(szTimeDate);
-//
-//  if (GetDigitalDevice(ibX) == 0)
-//    ShowLo(szFree);
+  ShowHi(szTimeDate);
+
+  if (GetDigitalDevice(ibX) == 0)
+    ShowLo(szNone);
 //  else
 //  {
 //    LoadCurrDigital(ibX);
