@@ -28,7 +28,7 @@ real    GetGrpImp2RealEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);
 real    GetCanImp2RealEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
 
 void    MakeCntMonCan(void);
-real    GetCounterOld(uchar  ibCan);
+real    GetCntCurrImp(uchar  ibCan);
 
 void    MakeImpulse(void);
 void    MakeImpulseSpec(void);
