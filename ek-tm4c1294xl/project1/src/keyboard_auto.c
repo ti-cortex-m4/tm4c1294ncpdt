@@ -12,6 +12,7 @@ KEYBOARD_AUTO.C
 #include        "keyboard/key_single.h"
 #include        "keyboard/key_single2.h"
 #include        "digitals/digitals.h"
+#include        "realtime/impulses.h"
 
 
 
@@ -39,9 +40,9 @@ void    Keyboard_Auto(void)
     }
 
     // обновление показаний с каждым импульсом
-    if (fUpdateA == 1)
+    if (fUpdateImpulse == 1)
     {
-      fUpdateA = 0;
+      fUpdateImpulse = 0;
       switch (bProgram)
       {
         case bGET_COUNTNEW:
@@ -53,9 +54,9 @@ void    Keyboard_Auto(void)
     }
 
     // обновление показаний с частотой 1 √ц
-    if (fUpdateB == 1)
+    if (fUpdateSecond == 1)
     {
-      fUpdateB = 0;
+      fUpdateSecond = 0;
       switch (bProgram)
       {
         case bGET_POWGRPPREVHOU:

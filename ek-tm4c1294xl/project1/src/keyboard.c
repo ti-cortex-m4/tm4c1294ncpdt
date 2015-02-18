@@ -15,6 +15,7 @@ KEYBOARD.C
 #include        "keyboard_auto.h"
 #include        "keyboard_key.h"
 #include        "keyboard/key_timedate.h"
+#include        "realtime/impulses.h"
 
 
 
@@ -42,8 +43,6 @@ uint                    wProgram;
 time                    tiKey;
 
 uchar                   ibX, ibY, ibZ;
-
-volatile bool           fUpdateA, fUpdateB;
 
 
 
@@ -166,8 +165,8 @@ uchar   i;
 
 
   // обновляем показания на дисплее
-  fUpdateA = 1;
-  fUpdateB = 1;
+  fUpdateImpulse = 1;
+  fUpdateSecond = 1;
 
   // обнуляем счётчик вызова программы по умолчанию
   cbShowCurrentTime = 0;

@@ -12,8 +12,7 @@ IMPULSES.C
 
 
 
-extern  volatile bool           fUpdateA;
-
+volatile bool           fUpdateImpulse, fUpdateSecond;
 
 static volatile bool    fImpulses = false;
 
@@ -36,7 +35,7 @@ void    Impulses_Timer1(void)
 {
 	if (fImpulses)
 	{
-		fUpdateA = 1;
+		fUpdateImpulse = 1;
 		mpwImpMntCan[ibSoftMnt][0]++;
 	}
 }

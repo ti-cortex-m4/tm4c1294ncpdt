@@ -27,8 +27,6 @@ extern  time                    tiKey;
 
 extern  uchar                   ibX, ibY, ibZ;
 
-extern  volatile bool           fUpdateA, fUpdateB;
-
 
 
 void    InitKeyboard(void);
