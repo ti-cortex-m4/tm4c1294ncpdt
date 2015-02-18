@@ -29,14 +29,14 @@ bool                    fActive;
 
 
 
-// возвращает индекс текущего получаса
+// TODO rename возвращает индекс текущего получаса
 uchar   GetCurrHouIndex(void)
 {
   return(tiCurr.bHour*2 + tiCurr.bMinute/30);
 }
 
 
-// возвращает индекс на первый получас требуемых суток назад
+// TODO rename возвращает индекс на первый получас требуемых суток назад
 uint    GetDayHouIndex(uchar  bDay)
 {
 uchar   i;
@@ -408,21 +408,22 @@ void    InitNexttime(void)
     SetCurrTimeDate();
   }
 }
-
+*/
 
 
 // программа обработки переходов в реальном времени
-void    Nexttime(void)
+void    Realtime(void)
 {
-  if (GetLabelRTC() == 0) return;
+time    ti;
 
-  PGetCurrTimeDate();
-  if (TrueCurrTimeDate() == 0) return;
+  if (GetLabelRTC() == 0) return; // TODO notify
 
-  if (tiCurr.bSecond != tiGetRTC.bSecond)
+  ti = *GetCurrTimeDate();
+  if (TrueCurrTimeDate(&ti) == 0) return; // TODO notify
+
+  if (tiCurr.bSecond != ti.bSecond)
   {
-    // чтение текущего времени
-    tiCurr = tiGetRTC;
+    tiCurr = ti;
 
     if (enGlobal != GLB_PROGRAM)
     {
@@ -431,14 +432,10 @@ void    Nexttime(void)
     }
     else
     {
-      fProfile = 0;
-      fCurrent = 0;
-
-      ClearNewTime();
+//      fProfile = 0;
+//      fCurrent = 0;
     }
 
-    // запись прошедшего времени
     tiPrev = tiCurr;
   }
 }
-*/
