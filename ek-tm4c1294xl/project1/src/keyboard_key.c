@@ -87,7 +87,7 @@ void    Keyboard_Key(void)
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
 
-      case bGET_COUNTOLD:
+      case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
       case bGET_READTIMEDATE2:  key_GetSingle(CANALS);  break;
 
@@ -145,8 +145,8 @@ void    Keyboard_Key(void)
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
 
-      case bGET_COUNTNEW:
-      case bGET_COUNTOLD:
+      case bGET_CNTCURR_10:
+      case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
       case bGET_READTIMEDATE2:
       case bGET_IMPCANCURRMNT:  key_GetSingle(CANALS);  break;
@@ -267,7 +267,7 @@ void    Keyboard_Key(void)
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
 
-      case bGET_COUNTOLD:
+      case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
       case bGET_READTIMEDATE2:  key_GetSingle(CANALS);  break;
 

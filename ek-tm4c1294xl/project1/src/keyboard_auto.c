@@ -45,8 +45,8 @@ void    Keyboard_Auto(void)
       fUpdateImpulse = 0;
       switch (bProgram)
       {
-        case bGET_COUNTNEW:
-        case bGET_COUNTOLD:         if (GetDigitalDevice(ibX) == 0)
+        case bGET_CNTCURR_10:
+        case bGET_CNTCURR_110:      if (GetDigitalDevice(ibX) == 0)
                                     auto_GetSingle();   break;
 
         case bGET_IMPCANCURRMNT:    auto_GetSingle();   break;

@@ -73,8 +73,8 @@ PROGRAMS.H
 #define bGET_PULSE_MNT              247
 #define bGET_LOSSE                  37
 
-#define bGET_COUNTNEW               10
-#define bGET_COUNTOLD               110
+#define bGET_CNTCURR_10             10
+#define bGET_CNTCURR_110            110
 #define bGET_READTIMEDATE1          111
 #define bGET_READTIMEDATE2          112
 
