@@ -426,7 +426,6 @@ void    key_GetSingle(index  in)
 
   else if (bKey == bKEY_MINUS)
   {        
-//  TODO  ResetDTR();
     if ((in == GROUPS) && (enKeyboard == KBD_POSTENTER))
     {
       if (++ibY >= 3) 
