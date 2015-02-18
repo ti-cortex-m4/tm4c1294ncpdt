@@ -75,3 +75,48 @@ real    re;
   }
   else Result(bRES_NEEDWORK);
 }
+
+
+
+void    OutImpCanMntExt(void)
+{
+  InitPushPtr();
+
+  if (enGlobal == GLB_PROGRAM)
+    Result(bRES_NEEDWORK);
+  else
+  {
+    Push( &mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ], sizeof(uint)*bCANALS );
+    OutptrOutBuff(sizeof(uint)*bCANALS);
+  }
+}
+
+
+void    OutPowCanMntExt(void)
+{
+uchar   c;
+uint    w;
+real    re;
+
+  InitPushPtr();
+  w = 0;
+
+  if (enGlobal == GLB_PROGRAM)
+    Result(bRES_NEEDWORK);
+  else
+  {
+    for (c=0; c<bCANALS; c++)
+    {
+      if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
+      {
+        re = GetCanMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ], c, 20);
+        PushReal(re);
+
+        w += sizeof(real);
+      }
+    }
+
+    OutptrOutBuff(w);
+  }
+}
+
