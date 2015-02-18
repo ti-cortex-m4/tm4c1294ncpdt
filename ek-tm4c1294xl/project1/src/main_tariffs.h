@@ -19,14 +19,6 @@ typedef struct
 } zone;
 
 
-// тип 'мощность/энергия'
-typedef enum
-{
-  POWER,
-  ENERGY
-} domain;
-
-
 // тип 'период задания тарифов'
 typedef enum
 {

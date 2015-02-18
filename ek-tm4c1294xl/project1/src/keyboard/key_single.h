@@ -4,5 +4,5 @@ KEY_SINGLE.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetSingle(index  in);
+void    key_GetSingle(item  it);
 void    auto_GetSingle(void);
