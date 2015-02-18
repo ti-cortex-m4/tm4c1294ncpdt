@@ -13,7 +13,7 @@ KEY_SINGLE.C
 #include        "../digitals/digitals.h"
 #include        "../energy.h"
 #include        "../energy2.h"
-#include        "../power.h"
+#include        "../impulses/max_power.h"
 #include        "../timedate.h"
 
 
@@ -65,18 +65,18 @@ static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "
 
 
 
-uchar   GetMax(index  in)
+uchar   GetMaxItem(item  it)
 {
-  if (in == GROUPS)
+  if (it == GROUPS)
     return(bGROUPS);
   else
     return(bCANALS);
 }
 
 
-void    ShowLogin(index  in)
+void    ShowItemName(item  it)
 {
-  if (in == GROUPS)
+  if (it == GROUPS)
     Group();
   else
     Canal();
@@ -330,14 +330,14 @@ void    ShowSingle(void)
 
 
 
-void    key_GetSingle(index  in)
+void    key_GetSingle(item  it)
 {
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
-      ShowLogin(in);
+      ShowItemName(it);
 
 //    TODO  InitConnectKey();
 
@@ -403,7 +403,7 @@ void    key_GetSingle(index  in)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < GetMax(in))
+      if ((ibX = GetCharLo(10,11) - 1) < GetMaxItem(it))
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
@@ -415,7 +415,7 @@ void    key_GetSingle(index  in)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= GetMax(in))
+      if (++ibX >= GetMaxItem(it))
         ibX = 0;
 
       ibY = 0;
@@ -427,7 +427,7 @@ void    key_GetSingle(index  in)
 
   else if (bKey == bKEY_MINUS)
   {        
-    if ((in == GROUPS) && (enKeyboard == KBD_POSTENTER))
+    if ((it == GROUPS) && (enKeyboard == KBD_POSTENTER))
     {
       if (++ibY >= 3) 
         ibY = 0;
@@ -445,7 +445,7 @@ void    key_GetSingle(index  in)
       if (ibX > 0) 
         ibX--;
       else         
-        ibX = GetMax(in) - 1;
+        ibX = GetMaxItem(it) - 1;
 
       ibY = 0;
       ShowSingle();

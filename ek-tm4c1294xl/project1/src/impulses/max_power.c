@@ -1,17 +1,16 @@
 /*------------------------------------------------------------------------------
-POWER.C
+MAX_POWER.C
 
  Максимумы мощности
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "memory/mem_realtime.h"
-#include        "memory/mem_tariffs.h"
-#include        "memory/mem_energy.h"
-#include        "memory/mem_energy_spec.h"
-#include        "realtime/realtime.h"
-#include        "engine.h"
-#include        "energy.h"
+#include        "../main.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_tariffs.h"
+#include        "../memory/mem_energy.h"
+#include        "../memory/mem_energy_spec.h"
+#include        "../realtime/realtime.h"
+#include        "../energy.h"
 
 
 

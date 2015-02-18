@@ -11,7 +11,7 @@ TIMER1.C
 #include 		"driverlib/interrupt.h"
 #include 		"driverlib/sysctl.h"
 #include 		"driverlib/timer.h"
-#include 		"realtime/impulses.h"
+#include 		"impulses/impulses.h"
 #include 		"rtc.h"
 
 

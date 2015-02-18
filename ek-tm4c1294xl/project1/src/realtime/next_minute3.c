@@ -8,7 +8,7 @@ NEXT_MINUTE3.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../energy.h"
-#include        "impulses.h"
+#include        "../impulses/impulses.h"
 
 
 

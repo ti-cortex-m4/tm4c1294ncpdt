@@ -14,7 +14,7 @@ KEY_START.C
 #include        "../access.h"
 #include        "../settings.h"
 #include        "../groups.h"
-#include        "../realtime/impulses.h"
+#include        "../impulses/impulses.h"
 #include        "../rtc.h"
 #include        "../factors.h"
 #include        "../flash/records.h"

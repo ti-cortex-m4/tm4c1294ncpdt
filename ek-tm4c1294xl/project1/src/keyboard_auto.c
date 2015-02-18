@@ -12,7 +12,7 @@ KEYBOARD_AUTO.C
 #include        "keyboard/key_single.h"
 #include        "keyboard/key_single2.h"
 #include        "digitals/digitals.h"
-#include        "realtime/impulses.h"
+#include        "impulses/impulses.h"
 
 
 

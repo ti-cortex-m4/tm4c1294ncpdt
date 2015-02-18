@@ -37,12 +37,20 @@ typedef struct
 } file;
 
 
-//
+// тип 'канал/группа'
 typedef enum
 {
   CANALS,
   GROUPS
-} index;
+} item;
+
+
+// тип 'мощность/энергия'
+typedef enum
+{
+  POWER,
+  ENERGY
+} domain;
 
 
 typedef char const      message[bDISPLAY];
