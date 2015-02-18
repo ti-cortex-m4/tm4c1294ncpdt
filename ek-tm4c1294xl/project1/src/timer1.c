@@ -16,7 +16,7 @@ TIMER1.C
 
 
 
-extern  volatile bool           fUpdateSecond;
+extern  volatile bool           fOnSecond;
 
 
 
@@ -41,7 +41,7 @@ void InitTimer1(uint32_t ui32SysClock) {
 void Timer1IntHandler(void) {
 	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
 
-	fUpdateSecond = 1;
+	fOnSecond = 1;
 
 	RTC_Timer1();
 	Impulses_Timer1();
