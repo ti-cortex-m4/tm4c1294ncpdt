@@ -1,10 +1,7 @@
 /*------------------------------------------------------------------------------
-FACTORS.H
+PROFILE.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    InitFactors(void);
-void    ResetFactors(void);
-
-void    StartFactors(void);
+void    MakeCurrHouCan(void);

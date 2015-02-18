@@ -36,7 +36,7 @@ void    InitFactors(void)
   LoadFile(&flLosse);
   LoadFile(&flLevel);
 
-  MakeFactors();
+  StartFactors();
 }
 
 
@@ -80,7 +80,7 @@ void    AddLosse(uchar  ibCan)
 }
 
 
-void    MakeFactors(void)
+void    StartFactors(void)
 {
 uchar  ibCan;
 

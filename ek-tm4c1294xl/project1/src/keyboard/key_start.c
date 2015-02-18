@@ -14,6 +14,7 @@ KEY_START.C
 #include        "../access.h"
 #include        "../settings.h"
 #include        "../groups.h"
+#include        "../realtime/realtime.h"
 #include        "../impulses/impulses.h"
 #include        "../rtc.h"
 #include        "../factors.h"
@@ -113,13 +114,12 @@ void    key_Start(void)
     // рассчитываем массивы индексов тарифов дл€ каждого получаса текущих суток (дл€ мощности и энергии)
     MakeAllCurrTariffs();
 
-    // рассчитываем массив   эквивалентов
-    MakeFactors();
+    StartFactors();
+    StartRealtime();
+    StartImpulses();
 
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
-    
-    StartImpulses();
 
     // запоминаем врем€/дату первого запуска
     tiStart = *GetCurrTimeDate();
@@ -161,7 +161,7 @@ void    key_Restart(void)
     MakeAllCurrTariffs();
 
     // рассчитываем массив   эквивалентов
-    MakeFactors();
+    StartFactors();
 
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();

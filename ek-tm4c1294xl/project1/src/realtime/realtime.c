@@ -7,6 +7,8 @@ REALTIME.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
+#include        "../memory/mem_factors.h"
+#include        "../memory/mem_energy.h"
 #include        "next_second.h"
 #include        "next_minute1.h"
 #include        "next_minute3.h"
@@ -15,6 +17,10 @@ REALTIME.C
 #include        "next_month.h"
 #include        "next_year.h"
 #include        "../rtc.h"
+#include        "../impulses/impulses.h"
+#include        "../energy.h"
+#include        "../digitals/digitals.h"
+#include        "../digitals/profile.h"
 
 
 
@@ -201,10 +207,12 @@ void    ProcessTime(void)
 }
 
 
-/*
-// начальная инициализация индексов
-void    MakeNexttime(void)
+
+void    StartRealtime(void)
 {
+uchar    c;
+real     re;
+
   ibSoftMnt = 0;
 
   ibSoftHou = 0;
@@ -214,34 +222,29 @@ void    MakeNexttime(void)
   ibHardDay = 0;
 
   ibSoftMon = 0;
-  ibHardMon = *PGetCurrTimeDate()->bMonth - 1;
-
-  ibSoftTim = 0;
-  iwHardTim = 0;
+  ibHardMon = (GetCurrTimeDate()->bMonth) - 1;
 
   cbSummer = 0;
   cbWinter = 0;
 
-  ET0 = 0;
-  memset(&mpwImpMntCan[ibSoftMnt], '\0', sizeof(uint)*bCANALS);
-  ET0 = 1;
+  DisableImpulses();
+  memset(&mpwImpMntCan[ibSoftMnt], 0, sizeof(uint)*bCANALS);
+  EnableImpulses(); // TODO EnableImpulses
 
   MakeCurrHouCan();
 
-  MakeCurrTimPar();
-
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  for (c=0; c<bCANALS; c++)
   {
-    if (GetDigitalDevice(ibCan) == 0)
+    if (GetDigitalDevice(c) == 0)
     {
-      reBuffA = GetCanReal(mpreCount,ibCan);
-      SetCanReal(mpreCntMonCan[ ibSoftMon ],ibCan);    
-    }    
+    	re = GetCanReal(mpreCount,c);
+      SetCanReal(mpreCntMonCan[ ibSoftMon ], c, &re);
+    }
   }
 }
 
 
-
+/*
 // программа обработки переходов в виртуальном времени
 bit     NexttimeOff(void)
 {

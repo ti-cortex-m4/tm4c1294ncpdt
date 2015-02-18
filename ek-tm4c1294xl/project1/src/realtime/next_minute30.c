@@ -8,20 +8,8 @@ NEXT_MINUTE30.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../impulses/max_power.h"
+#include        "../digitals/profile.h"
 #include        "../energy2.h"
-
-
-
-void    MakeCurrHouCan(void)
-{
-//uchar   c;
-//
-//  for (c=0; c<bCANALS; c++)
-//  {
-//    if ((GetDigitalDevice(c) != 0) && (IsSpecCurrent(GetDigitalDevice(c)) == 0))
-//      SetCanInt(mpwImpHouCan[ibSoftHou], c, 0xFFFF);
-//  }
-}
 
 
 
