@@ -200,11 +200,11 @@ void    ShowSingle(void)
 {
   switch (bProgram)
   {
-    case bGET_COUNTNEW: 
+    case bGET_CNTCURR_10:
       ShowModemReadSensors(); 
       break;
 
-    case bGET_COUNTOLD: 
+    case bGET_CNTCURR_110:
       ShowModemReadSensors(); 
       break;
 
@@ -345,8 +345,8 @@ void    key_GetSingle(index  in)
         case bGET_IMPCANCURRMNT:       ShowHi(szImpulseA);            break;
         case bGET_POWGRPCURRMNT:       LoadSlide(pszEngCurrMin);      break;
 
-        case bGET_COUNTNEW:            ShowHi(szCounters);            break;
-        case bGET_COUNTOLD:            LoadSlide(pszCountersB);       break;
+        case bGET_CNTCURR_10:          ShowHi(szCounters);            break;
+        case bGET_CNTCURR_110:         LoadSlide(pszCountersB);       break;
 
         case bGET_READTIMEDATE1:     
         case bGET_READTIMEDATE2:       ShowHi(szTimeDate);            break;
