@@ -4,6 +4,10 @@ IMPULSES.H
 
 ------------------------------------------------------------------------------*/
 
+extern  volatile bool           fUpdateImpulse, fUpdateSecond;
+
+
+
 void    EnableImpulses(void);
 void    DisableImpulses(void);
 

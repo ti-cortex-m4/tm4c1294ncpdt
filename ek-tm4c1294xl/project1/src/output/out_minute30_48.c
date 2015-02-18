@@ -15,7 +15,7 @@ OUT_MINUTE30_48.C
 #include        "../energy2.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/sensors.h"
-#include        "../digitals/graph3.h"
+#include        "../digitals/current.h"
 
 
 
@@ -64,7 +64,7 @@ real    re;
 
 void    PushImpHouCan(uint  wT, uchar  ibCan)
 {
-  if ((IsPulseCanal(ibCan) || IsSpecGraph3(GetDigitalDevice(ibCan))) && (wT == 0xFFFF)) wT = 0;
+  if ((IsPulseCanal(ibCan) || IsSpecCurrent(GetDigitalDevice(ibCan))) && (wT == 0xFFFF)) wT = 0;
   PushInt(wT);
 }
 
