@@ -12,46 +12,37 @@ IMPULSES.C
 
 
 
-volatile bool           fUpdateImpulse, fUpdateSecond;
+volatile bool           fOnImpulse, fOnSecond;
 
-static volatile bool    fImpulses = false;
+static volatile bool    fEnabledImpulses = false;
 
 
 
-void    EnableImpulses(void)
-{
-	fImpulses = true;
+void    EnableImpulses(void) {
+	fEnabledImpulses = true;
 }
 
 
-void    DisableImpulses(void)
-{
-	fImpulses = false;
+void    DisableImpulses(void) {
+	fEnabledImpulses = false;
 }
 
 
 
-void    Impulses_Timer1(void)
-{
-	if (fImpulses)
-	{
-		fUpdateImpulse = 1;
+void    Impulses_Timer1(void) {
+	if (fEnabledImpulses)	{
+		fOnImpulse = 1;
 		mpwImpMntCan[ibSoftMnt][0]++;
 	}
 }
 
 
 
-void    InitImpulses(void)
-{
-	if (enGlobal == GLB_WORK)
-		EnableImpulses();
-	else
-		DisableImpulses();
+void    InitImpulses(void) {
+	(enGlobal == GLB_WORK) ? EnableImpulses() : DisableImpulses();
 }
 
 
-void    StartImpulses(void)
-{
+void    StartImpulses(void) {
 	EnableImpulses();
 }

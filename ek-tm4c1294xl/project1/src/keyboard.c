@@ -165,8 +165,8 @@ uchar   i;
 
 
   // обновляем показания на дисплее
-  fUpdateImpulse = 1;
-  fUpdateSecond = 1;
+  fOnImpulse = 1;
+  fOnSecond = 1;
 
   // обнуляем счётчик вызова программы по умолчанию
   cbShowCurrentTime = 0;

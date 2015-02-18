@@ -4,7 +4,7 @@ IMPULSES.H
 
 ------------------------------------------------------------------------------*/
 
-extern  volatile bool           fUpdateImpulse, fUpdateSecond;
+extern  volatile bool           fOnImpulse, fOnSecond;
 
 
 

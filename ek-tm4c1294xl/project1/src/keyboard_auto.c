@@ -40,9 +40,9 @@ void    Keyboard_Auto(void)
     }
 
     // обновление показаний с каждым импульсом
-    if (fUpdateImpulse == 1)
+    if (fOnImpulse == 1)
     {
-      fUpdateImpulse = 0;
+      fOnImpulse = 0;
       switch (bProgram)
       {
         case bGET_CNTCURR_10:
@@ -54,9 +54,9 @@ void    Keyboard_Auto(void)
     }
 
     // обновление показаний с частотой 1 √ц
-    if (fUpdateSecond == 1)
+    if (fOnSecond == 1)
     {
-      fUpdateSecond = 0;
+      fOnSecond = 0;
       switch (bProgram)
       {
         case bGET_POWGRPPREVHOU:
