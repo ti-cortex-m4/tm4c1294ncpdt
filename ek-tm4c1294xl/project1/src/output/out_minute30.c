@@ -11,18 +11,17 @@ OUT_MINUTE30.C
 #include        "../memory/mem_energy.h"
 #include        "../ports.h"
 #include        "../realtime/realtime.h"
-//#include        "../energy.h"
+#include        "../timedate.h"
 #include        "../energy2.h"
-//#include        "../digitals/digitals.h"
-//#include        "../digitals/sensors.h"
-//#include        "../digitals/graph3.h"
 
 
 
 void    OutImpCanHouExt(void)
 {
-uchar   i, j;
-uint    w;
+uchar   c, j;
+uint    w, iwHou;
+ulong   dw;
+time    ti;
 
   InitPushPtr();
   w = 0;
@@ -37,24 +36,22 @@ uint    w;
   {
     for (j=0; j<bInBuff8; j++)
     {
-      tiAlt = tiCurr;
-      dwBuffC = DateToHouIndex();
+      dw = DateToHouIndex(tiCurr);
+      dw -= iwHou;
+      ti = HouIndexToDate(dw);
 
-      dwBuffC -= iwHou;
-      HouIndexToDate(dwBuffC);
-
-      Push(&tiAlt, sizeof(time));
+      Push(&ti, sizeof(time));
       w += sizeof(time);
 
       if (LoadImpHouFree((wHOURS+iwHardHou-iwHou) % wHOURS) == 0) break;
       else
       {
-        for (i=0; i<bCANALS; i++)
+        for (c=0; c<bCANALS; c++)
         {
           if (iwHou >= wHOURS)
             PushInt(0);
           else
-            PushInt( mpwImpHouCan[ PrevSoftHou() ][ i ] );
+            PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
 
           w += sizeof(uint);
         }
