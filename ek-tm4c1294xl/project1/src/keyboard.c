@@ -43,6 +43,8 @@ time                    tiKey;
 
 uchar                   ibX, ibY, ibZ;
 
+volatile bool           fUpdateA, fUpdateB;
+
 
 
 void    InitKeyboard(void)
@@ -162,6 +164,10 @@ uchar   i;
       
   if (i < sizeof(mpbKeys)) bKey = i; else return;
 
+
+  // обновляем показания на дисплее
+  fUpdateA = 1;
+  fUpdateB = 1;
 
   // обнуляем счётчик вызова программы по умолчанию
   cbShowCurrentTime = 0;

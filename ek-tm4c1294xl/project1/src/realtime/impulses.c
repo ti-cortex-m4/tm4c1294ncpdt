@@ -12,6 +12,9 @@ IMPULSES.C
 
 
 
+extern  volatile bool           fUpdateA;
+
+
 static volatile bool    fImpulses = false;
 
 
@@ -32,7 +35,10 @@ void    DisableImpulses(void)
 void    Impulses_Timer1(void)
 {
 	if (fImpulses)
+	{
+		fUpdateA = 1;
 		mpwImpMntCan[ibSoftMnt][0]++;
+	}
 }
 
 

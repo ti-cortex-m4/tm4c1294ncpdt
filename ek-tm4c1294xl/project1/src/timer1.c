@@ -16,6 +16,10 @@ TIMER1.C
 
 
 
+extern  volatile bool           fUpdateB;
+
+
+
 void InitTimer1(uint32_t ui32SysClock) {
     // Enable the peripherals.
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
@@ -36,6 +40,8 @@ void InitTimer1(uint32_t ui32SysClock) {
 
 void Timer1IntHandler(void) {
 	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+
+	fUpdateB = 1;
 
 	RTC_Timer1();
 	Impulses_Timer1();
