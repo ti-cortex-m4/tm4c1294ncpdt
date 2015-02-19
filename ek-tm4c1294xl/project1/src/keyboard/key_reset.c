@@ -73,10 +73,10 @@ void    key_SetReset(void)
 //          ResetCurrent2();
 //          ResetCheckupCustom();
 
-          if (ResetDataFlash() == 0)
+          if (ResetFlash() == 0)
           {
             ShowHi(szAlarm);
-            ShowLo(szBadDataFlash);
+            ShowLo(szBadFlash);
             LongBeep();
             DelayMsg();
           }
@@ -123,10 +123,10 @@ void    key_SetReset(void)
 //
 //          ResetLimits();
 
-          if (ResetDataFlash() == 0)
+          if (ResetFlash() == 0)
           {
             ShowHi(szAlarm);
-            ShowLo(szBadDataFlash);
+            ShowLo(szBadFlash);
             LongBeep();
             DelayMsg();
           }

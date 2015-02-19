@@ -4,4 +4,4 @@ STORAGE.H
 
 ------------------------------------------------------------------------------*/
 
-bool    ResetDataFlash(void);
+bool    ResetFlash(void);

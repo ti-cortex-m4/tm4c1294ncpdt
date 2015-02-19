@@ -64,6 +64,7 @@ char const              szClear[]       = "                ",
                         szTops[]        = "в пиковых зонах ",
                         szMid[]         = "   в полупик    ",
                         szBottom[]      = "в ночной провал ",
+                        szBadFlash[]    = "  фл~ш-памяти ! ",
                         szYes[]         = "да ",
                         szNo[]          = "нет";
 
