@@ -17,6 +17,7 @@ KEY_RESET.C
 #include        "../factors.h"
 #include        "../settings.h"
 #include        "../hardware/memory.h"
+#include        "../storage/storage.h"
 
 
 
@@ -71,14 +72,14 @@ void    key_SetReset(void)
 //          ResetLimitsAux_All();
 //          ResetCurrent2();
 //          ResetCheckupCustom();
-//
-//          if (ResetFlash() == 0)
-//          {
-//            ShowHi(szAlarm);
-//            ShowLo(szBadFlash);
-//            LongBeep();
-//            DelayMsg();
-//          }
+
+          if (ResetDataFlash() == 0)
+          {
+            ShowHi(szAlarm);
+            ShowLo(szBadDataFlash);
+            LongBeep();
+            DelayMsg();
+          }
 
           Restart();
           break;
@@ -121,14 +122,14 @@ void    key_SetReset(void)
 //          ResetCheckupFull();
 //
 //          ResetLimits();
-//
-//          if (ResetFlash() == 0)
-//          {
-//            ShowHi(szAlarm);
-//            ShowLo(szBadFlash);
-//            LongBeep();
-//            DelayMsg();
-//          }
+
+          if (ResetDataFlash() == 0)
+          {
+            ShowHi(szAlarm);
+            ShowLo(szBadDataFlash);
+            LongBeep();
+            DelayMsg();
+          }
 
           Restart();
           break;

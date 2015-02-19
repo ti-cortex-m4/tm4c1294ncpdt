@@ -11,6 +11,7 @@ DISPLAY.C
 #include        "../memory/mem_program.h"
 #include        "../keyboard.h"
 #include        "../keyboard/key_reset.h"
+#include        "../hardware/watchdog.h"
 #include        "messages.h"
 #include        "slides.h"
 
@@ -104,7 +105,10 @@ void    ShowAnswer(void)
 }
 
 
-
+void    ShowPercent(uchar  bT)
+{
+  sprintf(szLo+5,"%3u%c",bT,'%'); ResetWDT();
+}
 
 
 
