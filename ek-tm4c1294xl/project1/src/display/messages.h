@@ -58,6 +58,7 @@ extern  char const              szClear[],
                                 szTops[],
                                 szMid[],
                                 szBottom[],
+                                szBadFlash[],
                                 szYes[],
                                 szNo[];
 
