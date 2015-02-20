@@ -32,7 +32,7 @@ uint    w;
       {
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
-          Push(&mpwImpMntCan[ j ][ c ], sizeof(uint));
+          PushInt(mpwImpMntCan[ j ][ c ]);
           w += sizeof(uint);
         }
       }
