@@ -21,9 +21,9 @@ SYSTEM.H
 #define bHEADER         15
 
 
-// размер выходного и входного буферов портов
-#define wOUTBUFF_SIZE   0x100
-#define wINBUFF_SIZE    0x100
+// размер входного и выходного буферов портов
+#define wINBUFF_SIZE    0x0800
+#define wOUTBUFF_SIZE   0x1900
 
 
 // частота прерывани€ Timer0, √ц
