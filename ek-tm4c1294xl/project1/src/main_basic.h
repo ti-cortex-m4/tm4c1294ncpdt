@@ -11,7 +11,7 @@ typedef int16_t         sint;
 typedef uint32_t        ulong;
 typedef int32_t         slong;
 
-typedef double          real;
+typedef float           real;
 
 typedef bool            boolean;
 

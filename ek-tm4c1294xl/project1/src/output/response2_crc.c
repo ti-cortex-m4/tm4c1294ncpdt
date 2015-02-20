@@ -59,7 +59,7 @@ uchar   w;
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
     {
-      Push(&mpw[i], sizeof(uint));
+      PushInt(mpw[i]);
       w += sizeof(uint);
     }
   }
