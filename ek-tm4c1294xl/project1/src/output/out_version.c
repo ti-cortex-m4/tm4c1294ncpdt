@@ -7,7 +7,7 @@ OUT_VERSION.C
 #include        "../main.h"
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_ports.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 #include        "../hardware/memory.h"
 
 

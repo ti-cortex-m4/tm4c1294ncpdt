@@ -8,7 +8,7 @@
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_settings.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 #include        "../timedate.h"
 #include        "../rtc.h"
 #include        "../flash/files.h"

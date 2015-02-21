@@ -9,7 +9,7 @@ OUT_MINUTE30.C
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 #include        "../realtime/realtime.h"
 #include        "../timedate.h"
 #include        "../energy2.h"

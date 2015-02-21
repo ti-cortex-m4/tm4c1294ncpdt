@@ -5,7 +5,7 @@ OUT_RTC.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 #include        "../rtc.h"
 
 

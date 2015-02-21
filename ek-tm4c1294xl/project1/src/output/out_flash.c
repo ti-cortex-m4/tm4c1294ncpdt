@@ -8,7 +8,7 @@ OUT_FLASH.C
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_flash.h"
 #include        "../memory/mem_settings.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 #include        "../flash/at45.h"
 #include        "../hardware/memory.h"
 

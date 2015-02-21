@@ -4,9 +4,9 @@ PORTS_STACK.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
+#include        "../main.h"
+#include        "../memory/mem_serial0.h"
 #include        "ports.h"
-#include        "memory/mem_serial0.h"
 
 
 

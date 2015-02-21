@@ -9,7 +9,7 @@ _ANALYSIS.H
 #include        "../memory/mem_ports.h"
 #include        "../keyboard.h"
 #include        "../display/display.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 
 
 
