@@ -14,8 +14,6 @@ RTC.C
 
 
 
-#if true
-
 //Биты управления SPI
 #define SPI_BIT_SCK   0x0008 //PP3
 #define SPI_BIT_SI    0x0010 //PP4
@@ -203,6 +201,25 @@ uchar   i;
   return(1);
 }
 
+/*
+void    TODO OutLabelRTC(void) {
+uchar   i;
+
+  InitPushCRC();
+
+  EnableSPI();
+
+  CharOutSPI(0x20);
+  for (i=0; i<0x10; i++)
+    PushChar(CharInSPI());
+
+  DisableSPI();
+
+  PushChar(GetLabelRTC());
+
+  Output(0x10+sizeof(bool));
+}
+*/
 
 
 bool    TrueCurrTimeDate(time  *pti)
@@ -230,6 +247,21 @@ bool    TrueCurrTimeDate(time  *pti)
   return(1);
 }
 
+/*
+void    TODO OutTrueCurrTimeDate(void) {
+uchar   i;
+time    ti;
+
+  InitPushCRC();
+
+  ti = *GetCurrTimeDate();
+  Push(&ti, sizeof(time));
+
+  PushChar(TrueCurrTimeDate(&ti));
+
+  Output(sizeof(time)+sizeof(bool));
+}
+*/
 
 
 void    InitRTC(void) {
@@ -252,78 +284,3 @@ void    InitRTC(void) {
 
 void    RTC_Timer1(void) {
 }
-
-#else
-
-ulong                   dwRTC;
-
-
-
-void    InitRTC(void) {
-  tiGetRTC.bSecond = 0;
-  tiGetRTC.bMinute = 0;
-  tiGetRTC.bHour   = 0;
-  tiGetRTC.bDay    = 0;
-  tiGetRTC.bMonth  = 0;
-  tiGetRTC.bYear   = 0;
-
-  tiAlt.bSecond = 0;
-  tiAlt.bMinute = 0;
-  tiAlt.bHour   = 0;
-  tiAlt.bDay    = 31;
-  tiAlt.bMonth  = 12;
-  tiAlt.bYear   = 14;
-
-  dwRTC = DateToSecIndex();
-}
-
-
-
-time    *GetCurrTimeDate(void) {
-  return &tiGetRTC;
-}
-
-
-void    SetCurrTimeDate(void) {
-  SecIndexToDate(dwRTC);
-
-  tiAlt.bSecond = tiSetRTC.bSecond;
-  tiAlt.bMinute = tiSetRTC.bMinute;
-  tiAlt.bHour   = tiSetRTC.bHour;
-  tiAlt.bDay    = tiSetRTC.bHour;
-  tiAlt.bMonth  = tiSetRTC.bMonth;
-  tiAlt.bYear   = tiSetRTC.bYear;
-
-  dwRTC = DateToSecIndex();
-}
-
-
-void    SetCurrTime(void) {
-  SecIndexToDate(dwRTC);
-
-  tiAlt.bSecond = tiSetRTC.bSecond;
-  tiAlt.bMinute = tiSetRTC.bMinute;
-  tiAlt.bHour   = tiSetRTC.bHour;
-
-  dwRTC = DateToSecIndex();
-}
-
-
-void    SetCurrDate(void) {
-  SecIndexToDate(dwRTC);
-
-  tiAlt.bDay    = tiSetRTC.bHour;
-  tiAlt.bMonth  = tiSetRTC.bMonth;
-  tiAlt.bYear   = tiSetRTC.bYear;
-
-  dwRTC = DateToSecIndex();
-}
-
-
-
-void    RTC_Timer1(void) {
-  SecIndexToDate(++dwRTC);
-  tiGetRTC = tiAlt;
-}
-
-#endif

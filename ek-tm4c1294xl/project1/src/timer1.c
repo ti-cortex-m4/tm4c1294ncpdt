@@ -12,7 +12,6 @@ TIMER1.C
 #include 		"driverlib/sysctl.h"
 #include 		"driverlib/timer.h"
 #include 		"impulses/impulses.h"
-#include 		"rtc.h"
 
 
 
@@ -43,6 +42,5 @@ void Timer1IntHandler(void) {
 
 	fOnSecond = 1;
 
-	RTC_Timer1();
 	Impulses_Timer1();
 }
