@@ -9,7 +9,7 @@ OUT_DIGITALS.C
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_digitals0.h"
 #include        "../digitals/digitals.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 
 
 

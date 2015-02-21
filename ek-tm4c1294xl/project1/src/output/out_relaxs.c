@@ -7,7 +7,7 @@ OUT_RELAXS.C
 #include        "../main.h"
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_tariffs.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 #include        "../timedate.h"
 #include        "../keyboard.h"
 #include        "../tariffs/relaxs.h"

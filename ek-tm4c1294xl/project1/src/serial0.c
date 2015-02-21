@@ -9,7 +9,7 @@
 #include 		"memory/mem_ports.h"
 #include 		"memory/mem_serial0.h"
 #include 		"flow.h"
-#include 		"ports.h"
+#include 		"serial/ports.h"
 #include 		"bulk.h"
 #include 		"crc-16.h"
 #include 		"uarts.h"

@@ -8,7 +8,7 @@ FLASH_CONTROL.C
 #include        "../main.h"
 #include        "../memory/mem_flash.h"
 #include        "../memory/mem_ports.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 
 
 

@@ -8,7 +8,7 @@ RESPONSE1_CRC.C
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_factors.h"
 #include        "../states.h"
-#include        "../ports.h"
+#include        "../serial/ports.h"
 #include        "out_rtc.h"
 #include        "out_groups.h"
 #include        "out_tariffs.h"
