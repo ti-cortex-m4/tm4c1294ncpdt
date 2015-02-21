@@ -62,6 +62,13 @@ void    PushReal(real  reT)
 }
 
 
+void    PushTime(time  *pti)
+{
+  Push(pti, sizeof(time));
+}
+
+
+
 uchar   SkipChar(void) {
   switch (ibPort) {
     case 0: return mpbOutBuff0[ iwPush0++ ];
