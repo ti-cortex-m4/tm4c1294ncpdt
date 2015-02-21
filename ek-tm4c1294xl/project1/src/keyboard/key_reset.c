@@ -22,8 +22,8 @@ KEY_RESET.C
 
 
 //                                         0123456789ABCDEF
-static message          szResetFull     = "Полный сброс    ",
-                        szResetCustom   = "Частичный сброс ";
+static char const       szResetFull[]   = "Полный сброс    ",
+                        szResetCustom[] = "Частичный сброс ";
 
 
 
@@ -44,7 +44,8 @@ void    key_SetReset(void)
 
         case bSET_RESETFULL:  
           ShowHi(szResetFull);    
-          ShowAnswer();  break;
+          ShowAnswer();
+          break;
       }                 
     } 
     else if (enKeyboard == KBD_POSTINPUT1)

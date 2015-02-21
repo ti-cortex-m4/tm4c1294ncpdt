@@ -11,8 +11,21 @@ OUT_IMPULSE.C
 #include        "../memory/mem_energy.h"
 #include        "../ports.h"
 #include        "../realtime/realtime.h"
-//#include        "../energy.h"
 #include        "../energy2.h"
+
+
+
+void    PushImpulse(impulse  *pim)
+{
+uchar   t;
+ulong   dw;
+
+	for (t=0; t<bTARIFFS; t++)
+	{
+    dw = (*pim).mpdwImp[t];
+    PushLong(dw);
+	}
+}
 
 
 
@@ -34,7 +47,7 @@ uint    w;
         {
           if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
           {
-            Push(&mpimDayCan[ PrevSoftDay() ][ c ], sizeof(impulse));
+          	PushImpulse(&mpimDayCan[ PrevSoftDay() ][ c ]);
             w += sizeof(impulse);
           }
         }
@@ -66,7 +79,7 @@ uint    w;
         {
           if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
           {
-            Push(&mpimMonCan[ PrevSoftMon() ][ c ], sizeof(impulse));
+          	PushImpulse(&mpimMonCan[ PrevSoftMon() ][ c ]);
             w += sizeof(impulse);
           }
         }

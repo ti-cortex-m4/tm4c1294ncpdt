@@ -10,7 +10,7 @@ DEVICES.C
 
 
 //                                         0123456789ABCDEF
-message const           msgDevices[bDEVICES+1] = {
+char const              mpszDevices[bDEVICES+1][bDISPLAY+1] = {
                                           ".модем          ",
                                           ".СЭТ-4ТМ        ",
                                           ".Меркурий-230   ",
@@ -53,7 +53,7 @@ void    ShowDeviceName(uchar  ibDevice)
 {
   if (ibDevice < bDEVICES+1)
   {
-    ShowLo( msgDevices[ibDevice] );  
+    ShowLo( mpszDevices[ibDevice] );  
     (IsDevice(ibDevice) == 1) ? (szLo[15] = '+') : (szLo[15] = '-');
   }
   else Error();          

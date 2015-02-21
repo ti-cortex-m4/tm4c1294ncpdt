@@ -419,7 +419,7 @@ void    Realtime(void)
 {
 time    ti;
 
-  if (GetLabelRTC() == 0) return; // TODO notify
+//  if (GetLabelRTC() == 0) return; // TODO notify
 
   ti = *GetCurrTimeDate();
   if (TrueCurrTimeDate(&ti) == 0) return; // TODO notify

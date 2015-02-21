@@ -50,6 +50,12 @@ void    PushInt(uint  wT) {
 }
 
 
+void    PushLong(ulong  dwT) {
+	PushInt(dwT / 0x10000);
+	PushInt(dwT % 0x10000);
+}
+
+
 void    PushReal(real  reT)
 {
   Push(&reT, sizeof(real));
