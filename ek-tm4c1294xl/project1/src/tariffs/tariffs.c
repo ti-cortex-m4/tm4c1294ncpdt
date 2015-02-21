@@ -22,30 +22,30 @@ TARIFFS.C
 
 
 
-file const              flPublicTariffs = {wFLA_PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean)};
-file const              flTariffsMode = {wFLA_TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
+file const              flPublicTariffs = {DF_PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean)};
+file const              flTariffsMode = {DF_TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
 
-file const              flPeriodTariffPow = {wFLA_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow)};
-file const              flPeriodTariffEng = {wFLA_PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng)};
+file const              flPeriodTariffPow = {DF_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow)};
+file const              flPeriodTariffEng = {DF_PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng)};
 
 
 
 boolean SaveZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(wFLA_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
+	return SaveBuff(DF_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return LoadBuff(wFLA_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
+	return LoadBuff(DF_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 
 
 boolean SaveZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
+	return SaveBuff(DF_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return LoadBuff(wFLA_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
+	return LoadBuff(DF_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 

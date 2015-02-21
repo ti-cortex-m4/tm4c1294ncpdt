@@ -13,7 +13,7 @@ DIGITALS.C
 
 
 
-file const              flDigitals = {wFLA_DIGITALS, &mpdiDigital, sizeof(digital)*bCANALS};
+file const              flDigitals = {DF_DIGITALS, &mpdiDigital, sizeof(digital)*bCANALS};
 
 
 
