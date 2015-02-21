@@ -20,5 +20,3 @@ bool    GetLabelRTC(void);
 bool    TrueCurrTimeDate(time  *pti);
 
 void    InitRTC(void);
-
-void    RTC_Timer1(void);

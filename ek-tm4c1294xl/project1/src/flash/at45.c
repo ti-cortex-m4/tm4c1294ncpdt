@@ -437,3 +437,17 @@ bool    GetFlashChecksum(void)
 
   return(1);
 }
+
+
+/*
+void    TODO OutFlashReadStatus(void) { + add (++i > wREAD_STATUS) + add cwWrnBusy etc
+  InitPushCRC();
+
+  ReadStatus();
+  PushChar(bStatusFlash);
+
+  PushChar(ReadStatus());
+
+  Output(sizeof(char)+sizeof(char));
+}
+*/
