@@ -15,6 +15,19 @@ OUT_MAX_POWER.C
 
 
 
+void    PushMaxPow(power  *ppo)
+{
+uchar   t;
+
+	for (t=0; t<bTARIFFS; t++)
+	{
+    PushTime(&(ppo->mpmaMax[t]).tiSelf);
+    PushReal(ppo->mpmaMax[t].reSelf);
+	}
+}
+
+
+
 void    OutMaxPowDayGrpExt(void)
 {
 uchar   g;
@@ -33,8 +46,8 @@ uint    w;
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
-            Push(&mppoDayGrp[ PrevSoftDay() ][ g ], sizeof(power));
-            w += sizeof(power);
+          	PushMaxPow(&mppoDayGrp[ PrevSoftDay() ][ g ]);
+            w += (sizeof(time) + sizeof(real))*bTARIFFS;
           }
         }
 
@@ -66,8 +79,8 @@ uint    w;
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
-            Push(&mppoMonGrp[ PrevSoftMon() ][ g ], sizeof(power));
-            w += sizeof(power);
+          	PushMaxPow(&mppoMonGrp[ PrevSoftMon() ][ g ]);
+            w += (sizeof(time) + sizeof(real))*bTARIFFS;
           }
         }
 

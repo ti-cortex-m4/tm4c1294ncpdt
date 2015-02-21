@@ -13,6 +13,8 @@ void    PushChar(uchar  bT);
 void    PushInt(uint  wT);
 void    PushLong(ulong  dwT);
 void    PushReal(real  reT);
+void    PushTime(time  *pti);
+
 uchar   SkipChar(void);
 void    Skip(uint  wSize);
 
