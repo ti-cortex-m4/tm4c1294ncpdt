@@ -11,6 +11,7 @@ void    InitPushPtr(void);
 void    Push(void  *pbData, uint  wSize);
 void    PushChar(uchar  bT);
 void    PushInt(uint  wT);
+void    PushLong(ulong  dwT);
 void    PushReal(real  reT);
 uchar   SkipChar(void);
 void    Skip(uint  wSize);

@@ -4,7 +4,7 @@ DEVICES.H
 
 ------------------------------------------------------------------------------*/
 
-extern  message const           msgDevices[bDEVICES+1];
+extern  char const              mpszDevices[bDEVICES+1][bDISPLAY+1];
 extern  uchar const             mpbMaxLines[bDEVICES+1];
 
 

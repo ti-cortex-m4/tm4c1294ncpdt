@@ -26,6 +26,7 @@
 #include "src/uarts.h"
 #include "src/settings.h"
 #include "src/impulses/impulses.h"
+#include "src/realtime/realtime.h"
 #include "src/factors.h"
 #include "src/groups.h"
 #include "src/tariffs/zones.h"
@@ -74,6 +75,7 @@ int main(void) {
     IntMasterEnable();
 
     while(1) {
+    	Realtime();
     	Keyboard();
     	ResponseCRC_Full();
     }

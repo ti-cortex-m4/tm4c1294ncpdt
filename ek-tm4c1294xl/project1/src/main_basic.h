@@ -53,7 +53,4 @@ typedef enum
 } domain;
 
 
-typedef char const      message[bDISPLAY];
-
-
 #endif

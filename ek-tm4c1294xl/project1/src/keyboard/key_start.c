@@ -23,11 +23,11 @@ KEY_START.C
 
 
 //                                         0123456789ABCDEF
-static message          szStart         = "Старт           ",
-                        szRestart       = "Рестарт         ",
-                        szDebug         = "Отладка         ",
-                        szNoTariffs     = "Нет тарифов     ",
-                        szBadRTC        = "показаний RTC ! ";
+static char const       szStart[]       = "Старт           ",
+                        szRestart[]     = "Рестарт         ",
+                        szDebug[]       = "Отладка         ",
+                        szNoTariffs[]   = "Нет тарифов     ",
+                        szBadRTC[]      = "показаний RTC ! ";
 
 
 void    ShowNoTariffs(uchar  ibMonth)
