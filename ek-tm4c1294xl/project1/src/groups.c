@@ -78,7 +78,7 @@ uchar   i,j;
 
 bool    SaveGroups(void)
 {
-  OpenOut(wFLA_GROUPS);
+  OpenOut(DF_GROUPS);
 
   if (Save(mpgrGroups, sizeof(group)*bGROUPS) == 0)
     return(0);
@@ -89,7 +89,7 @@ bool    SaveGroups(void)
 
 bool    LoadGroups(void)
 {
-  OpenIn(wFLA_GROUPS);
+  OpenIn(DF_GROUPS);
   return Load(mpgrGroups, sizeof(group)*bGROUPS);
 }
 

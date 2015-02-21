@@ -41,51 +41,55 @@ FLASH.H
 
 
 // адреса блоков данных
-#define wFLA_BEGIN              0
+typedef enum
+{
+  DF_BEGIN              = 0,
 
-#define wFLA_PRIVATE            (uint)(wFLA_BEGIN)
-#define wFLA_GLOBAL             (uint)(wFLA_PRIVATE + 1)
-#define wFLA_LOGICAL            (uint)(wFLA_GLOBAL + 1)
+  DF_PRIVATE            = DF_BEGIN,
+  DF_GLOBAL             = DF_PRIVATE + 1,
+  DF_LOGICAL            = DF_GLOBAL + 1,
 
-#define wFLA_GROUPS             (uint)(wFLA_LOGICAL + 1)
+  DF_GROUPS             = DF_LOGICAL + 1,
 
-#define wFLA_PUBLIC_TARIFFS     (uint)(wFLA_GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1)
-#define wFLA_TARIFFS_MODE       (uint)(wFLA_PUBLIC_TARIFFS + 1)
+  DF_PUBLIC_TARIFFS     = DF_GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1,
+  DF_TARIFFS_MODE       = DF_PUBLIC_TARIFFS + 1,
 
-#define wFLA_DAY_ZONE           (uint)(wFLA_TARIFFS_MODE + 1)
+  DF_DAY_ZONE           = DF_TARIFFS_MODE + 1,
 
-#define wFLA_ZONES_POW          (uint)(wFLA_DAY_ZONE + 1)
-#define wFLA_ZONES_ENG          (uint)(wFLA_ZONES_POW + 12*bMODES)
+  DF_ZONES_POW          = DF_DAY_ZONE + 1,
+  DF_ZONES_ENG          = DF_ZONES_POW + 12*bMODES,
 
-#define wFLA_PERIOD_POW         (uint)(wFLA_ZONES_ENG + 12*bMODES)
-#define wFLA_PERIOD_ENG         (uint)(wFLA_PERIOD_POW + 1)
+  DF_PERIOD_POW         = DF_ZONES_ENG + 12*bMODES,
+  DF_PERIOD_ENG         = DF_PERIOD_POW + 1,
 
-#define wFLA_RELAXS_FLAG        (uint)(wFLA_PERIOD_ENG + 1)
-#define wFLA_RELAXS_TARIFF      (uint)(wFLA_RELAXS_FLAG + 1)
-#define wFLA_RELAXS             (uint)(wFLA_RELAXS_TARIFF + 1)
+  DF_RELAXS_FLAG        = DF_PERIOD_ENG + 1,
+  DF_RELAXS_TARIFF      = DF_RELAXS_FLAG + 1,
+  DF_RELAXS             = DF_RELAXS_TARIFF + 1,
 
-#define wFLA_GAPS_FLAG          (uint)(wFLA_RELAXS + sizeof(relaxs)/wFREEPAGE_SIZE + 1)
-#define wFLA_GAPS               (uint)(wFLA_GAPS_FLAG + 1)
+  DF_GAPS_FLAG          = DF_RELAXS + sizeof(relaxs)/wFREEPAGE_SIZE + 1,
+  DF_GAPS               = DF_GAPS_FLAG + 1,
 
-#define wFLA_TRANS_ENG          (uint)(wFLA_GAPS + sizeof(gaps)/wFREEPAGE_SIZE + 1)
-#define wFLA_TRANS_CNT          (uint)(wFLA_TRANS_ENG + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
-#define wFLA_PULSE_HOU          (uint)(wFLA_TRANS_CNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
-#define wFLA_PULSE_MNT          (uint)(wFLA_PULSE_HOU + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
+  DF_TRANS_ENG          = DF_GAPS + sizeof(gaps)/wFREEPAGE_SIZE + 1,
+  DF_TRANS_CNT          = DF_TRANS_ENG + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
+  DF_PULSE_HOU          = DF_TRANS_CNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
+  DF_PULSE_MNT          = DF_PULSE_HOU + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
 
-#define wFLA_COUNT              (uint)(wFLA_PULSE_MNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
-#define wFLA_LOSSE              (uint)(wFLA_COUNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
-#define wFLA_LEVEL              (uint)(wFLA_LOSSE + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
+  DF_COUNT              = DF_PULSE_MNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
+  DF_LOSSE              = DF_COUNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
+  DF_LEVEL              = DF_LOSSE + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
 
-#define wFLA_DIGITALS           (uint)(wFLA_LEVEL + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1)
+  DF_DIGITALS           = DF_LEVEL + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
 
-#define wFLA_IMPHOUCAN          (uint)(wFLA_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1)
-#define wFLA_IMPDAYCAN          (uint)(wFLA_IMPHOUCAN + wIMPHOUCAN_SIZE)
-#define wFLA_IMPMONCAN          (uint)(wFLA_IMPDAYCAN + bIMPULSE_CAN*bDAYS)
-#define wFLA_POWDAYGRP          (uint)(wFLA_IMPMONCAN + bIMPULSE_CAN*bMONTHS)
-#define wFLA_POWMONGRP          (uint)(wFLA_POWDAYGRP + bPOWER_GRP*bDAYS)
-#define wFLA_CNTMONCAN          (uint)(wFLA_POWMONGRP + bPOWER_GRP*bMONTHS)
+  DF_IMPHOUCAN          = DF_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1,
+  DF_IMPDAYCAN          = DF_IMPHOUCAN + wIMPHOUCAN_SIZE,
+  DF_IMPMONCAN          = DF_IMPDAYCAN + bIMPULSE_CAN*bDAYS,
+  DF_POWDAYGRP          = DF_IMPMONCAN + bIMPULSE_CAN*bMONTHS,
+  DF_POWMONGRP          = DF_POWDAYGRP + bPOWER_GRP*bDAYS,
+  DF_CNTMONCAN          = DF_POWMONGRP + bPOWER_GRP*bMONTHS,
 
-#define wFLA_END                (uint)(wFLA_CNTMONCAN + bREAL_CAN*bMONTHS)
+  DF_END                = DF_CNTMONCAN + bREAL_CAN*bMONTHS,
+} flash;
+
 
 
 #endif
