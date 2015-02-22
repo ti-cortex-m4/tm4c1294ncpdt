@@ -145,7 +145,7 @@ bool    SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
     return(1);
   }
   else
-    return SaveBuff(DF_IMPDAYCAN + ibDayFrom*bIMPULSE_CAN, mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS);
+    return SaveBuff(DF_IMPDAYCAN + ibDayTo*bIMPULSE_CAN, mpimDayCan[ ibDayFrom ], sizeof(impulse)*bCANALS);
 }
 
 
@@ -170,7 +170,7 @@ bool    SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
     return(1);
   }
   else
-  	return SaveBuff(DF_IMPMONCAN + ibMonFrom*bIMPULSE_CAN, mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS);
+  	return SaveBuff(DF_IMPMONCAN + ibMonTo*bIMPULSE_CAN, mpimMonCan[ ibMonFrom ], sizeof(impulse)*bCANALS);
 }
 
 
@@ -195,7 +195,7 @@ bool    SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
     return(1);
   }
   else
-    return SaveBuff(DF_POWDAYGRP + ibDayFrom*bPOWER_GRP, mppoDayGrp[ PrevSoftDay() ], sizeof(power)*bGROUPS);
+    return SaveBuff(DF_POWDAYGRP + ibDayTo*bPOWER_GRP, mppoDayGrp[ ibDayFrom ], sizeof(power)*bGROUPS);
 }
 
 
@@ -220,7 +220,7 @@ bool    SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
     return(1);
   }
   else
-  	return SaveBuff(DF_POWMONGRP + ibMonFrom*bPOWER_GRP, mppoMonGrp[ PrevSoftMon() ], sizeof(power)*bGROUPS);
+  	return SaveBuff(DF_POWMONGRP + ibMonTo*bPOWER_GRP, mppoMonGrp[ ibMonFrom ], sizeof(power)*bGROUPS);
 }
 
 
