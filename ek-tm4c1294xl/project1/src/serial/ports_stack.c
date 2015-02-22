@@ -10,6 +10,10 @@ PORTS_STACK.H
 
 
 
+static char const       szHex[0x10]  = "0123456789ABCDEF";
+
+
+
 void    InitPush(uchar  ibPush) {
   switch (ibPort) {
     case 0: iwPush0 = ibPush; break;
@@ -67,6 +71,25 @@ void    PushTime(time  *pti)
   Push(pti, sizeof(time));
 }
 
+
+void    PushString(char  *psz)
+{
+  while (true)
+  {
+    if (!*psz) break;
+    PushChar(*psz++);
+  }
+}
+
+
+void    PushIntAsString(uint  wT)
+{
+	PushChar(szHex[(wT % 100000) / 10000]);
+	PushChar(szHex[(wT % 10000) / 1000]);
+	PushChar(szHex[(wT % 1000) / 100]);
+	PushChar(szHex[(wT % 100) / 10]);
+	PushChar(szHex[wT % 10]);
+}
 
 
 uchar   SkipChar(void) {

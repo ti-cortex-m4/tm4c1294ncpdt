@@ -17,7 +17,8 @@ RESPONSE1_CRC.C
 #include        "out_delay.h"
 #include        "out_console.h"
 #include        "response_crc.h"
-#include        "response2_crc.h"
+#include        "response254_crc.h"
+#include        "response255_crc.h"
 
 
 
@@ -87,8 +88,12 @@ void    Response1_CRC(void)
         OutGetDisplay();
         break;
 
-      case bINQ_RESPONSE2:
-      	Response2_CRC();
+      case bINQ_RESPONSE_254:
+      	Response254_CRC();
+        break;
+
+      case bINQ_RESPONSE_255:
+      	Response255_CRC();
         break;
 
       default:
