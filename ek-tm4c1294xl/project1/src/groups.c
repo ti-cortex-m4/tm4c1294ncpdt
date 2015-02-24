@@ -59,18 +59,18 @@ uchar   i,j;
   for (i=0; i<bGROUPS; i++)
   {
     if (GetGroupsSize(i) != 0) 
-      mpboUsedGroups[i] = true;
+      mpboUsedGroups[i] = TRUE;
     else
-      mpboUsedGroups[i] = false;
+      mpboUsedGroups[i] = FALSE;
   }
 
   for (i=0; i<bCANALS; i++)
-    mpboUsedNodes[i] = false;            
+    mpboUsedNodes[i] = FALSE;
 
   for (i=0; i<bGROUPS; i++)
   {
     for (j=0; j<GetGroupsSize(i); j++)
-      mpboUsedNodes[ GetGroupsNodeCanal(i,j) ] = true;
+      mpboUsedNodes[ GetGroupsNodeCanal(i,j) ] = TRUE;
   }
 }
 
@@ -125,5 +125,5 @@ node    noT;
 
   MakeUsedNodes();
 
-  boSetGroups = false;
+  boSetGroups = FALSE;
 }

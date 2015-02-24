@@ -44,7 +44,7 @@ void    key_SetCurrTime(void)
 
         SetCurrTime(&tiKey);
 
-        boSetTime = true;
+        boSetTime = TRUE;
       }
       else Beep();
     }
@@ -135,7 +135,7 @@ void    key_SetCurrDate(void)
 
         SetCurrDate(&tiKey);
 
-        boSetDate = true;
+        boSetDate = TRUE;
         MakeDecret();
       }
       else

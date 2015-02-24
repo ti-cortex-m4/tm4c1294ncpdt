@@ -74,7 +74,7 @@ void    key_SetReset(void)
 //          ResetCurrent2();
 //          ResetCheckupCustom();
 
-          if (ResetFlash() == 0)
+          if (ResetDataFlash() == 0)
           {
             ShowHi(szAlarm);
             ShowLo(szBadFlash);
@@ -124,7 +124,7 @@ void    key_SetReset(void)
 //
 //          ResetLimits();
 
-          if (ResetFlash() == 0)
+          if (ResetDataFlash() == 0)
           {
             ShowHi(szAlarm);
             ShowLo(szBadFlash);

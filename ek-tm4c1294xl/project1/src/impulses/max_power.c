@@ -14,26 +14,26 @@ MAX_POWER.C
 
 
 
-void    SetGrpMaxPow(power  *mppoT, uchar  ibGrp, uchar  ibTar, value  *pvaT)
-{  
-	ASSERT(ibGrp < bGROUPS);
-	ASSERT(ibTar < bTARIFFS);
-  mppoT[ibGrp].mpmaMax[ibTar] = *pvaT;
+void    SetGrpMaxPow(power  *mppoT, uchar  ibGrp, uchar  ibTar, value  *pva)
+{
+  ASSERT(ibGrp < bGROUPS);
+  ASSERT(ibTar < bTARIFFS);
+  mppoT[ibGrp].mpmaMax[ibTar] = *pva;
 }
 
 
 real    GetGrpMaxPowReal(power  *mppoT, uchar  ibGrp, uchar  ibTar)
-{  
-	ASSERT(ibGrp < bGROUPS);
-	ASSERT(ibTar < bTARIFFS);
+{
+  ASSERT(ibGrp < bGROUPS);
+  ASSERT(ibTar < bTARIFFS);
   return mppoT[ibGrp].mpmaMax[ibTar].reSelf;
 }
 
 
 time    GetGrpMaxPowTime(power  *mppoT, uchar  ibGrp, uchar  ibTar)
 {
-	ASSERT(ibGrp < bGROUPS);
-	ASSERT(ibTar < bTARIFFS);
+  ASSERT(ibGrp < bGROUPS);
+  ASSERT(ibTar < bTARIFFS);
   return mppoT[ibGrp].mpmaMax[ibTar].tiSelf;
 }
 
@@ -61,7 +61,7 @@ void    MakeMaxPow(power  *mppoT)
 {
 uchar   g,t;
 real   	re;
-static value va;
+value   va;
 
   t = mpibPowCurrTariff[tiPrev.bHour*2 + tiPrev.bMinute/30];
 
@@ -78,19 +78,19 @@ static value va;
 }
 
 
-void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  *ptiT)
+void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  *pti)
 {
-uchar		t;
+uchar   t;
 real   	re;
-static value va;
+value   va;
 
-  t = mpibPowPrevTariff[ ptiT->bHour*2 + ptiT->bMinute/30 ];
+  t = mpibPowPrevTariff[ pti->bHour*2 + pti->bMinute/30 ];
 
   re = GetGrpHouInt2Real(mpwImpHouCanSpec,ibGrp,2);
   if (re >= GetGrpMaxPowReal(mppoT,ibGrp,t))
   {
     va.reSelf = re;
-    va.tiSelf = *ptiT;
+    va.tiSelf = *pti;
     SetGrpMaxPow(mppoT,ibGrp,t,&va);
   }
 }
@@ -98,7 +98,7 @@ static value va;
 
 // расчЄт максимумов мощности за текущие сутки и мес€ц
 void    MakeMaxPowAll(void)
-{       
+{
   MakeMaxPow( mppoDayGrp[ibSoftDay] );
   MakeMaxPow( mppoMonGrp[ibSoftMon] );
 }

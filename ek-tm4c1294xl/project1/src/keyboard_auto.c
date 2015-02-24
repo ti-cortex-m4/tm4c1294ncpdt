@@ -9,6 +9,7 @@ KEYBOARD_AUTO.C
 #include        "keyboard.h"
 #include        "keyboard/key_timedate.h"
 #include        "keyboard/key_analysis.h"
+#include        "keyboard/key_health.h"
 #include        "keyboard/key_single.h"
 #include        "keyboard/key_single2.h"
 #include        "digitals/digitals.h"
@@ -26,6 +27,7 @@ void    Keyboard_Auto(void)
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
       case bGET_ANALYSIS1:      auto_Analysis1();       break;
+      case bGET_HEALTH:         auto_GetHealth();       break;
     }
   }
 
@@ -37,6 +39,7 @@ void    Keyboard_Auto(void)
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
 
       case bGET_ANALYSIS1:      auto_Analysis1();       break;
+      case bGET_HEALTH:         auto_GetHealth();       break;
     }
 
     // обновление показаний с каждым импульсом
@@ -83,6 +86,7 @@ void    Keyboard_Auto(void)
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
       case bGET_ANALYSIS1:      auto_Analysis1();       break;
+      case bGET_HEALTH:         auto_GetHealth();       break;
     }
   }
 }

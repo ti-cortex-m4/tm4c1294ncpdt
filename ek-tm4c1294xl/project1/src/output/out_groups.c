@@ -46,7 +46,7 @@ uchar  i;
         if (bInBuff5 == bGROUPS - 1)
           SaveGroups();
 
-        boSetGroups = true;
+        boSetGroups = TRUE;
 
         LongResult(bRES_OK);
       }

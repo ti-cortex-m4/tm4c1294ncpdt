@@ -29,7 +29,7 @@ void    InitRelaxs(void)
 
 void    ResetRelaxs(void)
 {
-  boRelaxsFlag = false;
+  boRelaxsFlag = FALSE;
   SaveFile(&flRelaxsFlag);
 
   ibRelaxsTariff = 1;

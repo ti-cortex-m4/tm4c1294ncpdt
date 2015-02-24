@@ -26,7 +26,6 @@
 #include "src/uarts.h"
 #include "src/settings.h"
 #include "src/impulses/impulses.h"
-#include "src/realtime/realtime.h"
 #include "src/factors.h"
 #include "src/groups.h"
 #include "src/tariffs/zones.h"
@@ -34,6 +33,8 @@
 #include "src/tariffs/relaxs.h"
 #include "src/tariffs/gaps.h"
 #include "src/digitals/digitals.h"
+#include "src/storage/storage.h"
+#include "src/realtime/realtime.h"
 #include "src/output/response_crc.h"
 
 // The error routine that is called if the driver library encounters an error.
@@ -67,6 +68,8 @@ int main(void) {
 	InitRelaxs();
 	InitGaps();
 	InitDigitals();
+	InitStorage();
+	InitRealtime();
 
     InitUARTs(ui32SysClock);
     InitTimer0(ui32SysClock);

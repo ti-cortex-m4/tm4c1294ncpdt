@@ -8,6 +8,7 @@ NEXT_MINUTE3.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../energy.h"
+#include        "../energy3.h"
 #include        "../impulses/impulses.h"
 
 
@@ -25,6 +26,9 @@ void    NextMinute3(void)
 
   MakeImpulse();
 
+//  SaveImpDayBuff();
+//  SaveImpMonBuff();
+//  SaveImpAbsBuff();
 }
 
 

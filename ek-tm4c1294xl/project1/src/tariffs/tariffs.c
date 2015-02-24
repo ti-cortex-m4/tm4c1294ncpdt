@@ -83,7 +83,7 @@ uchar  ibMonth, ibMode;
 
 void    ResetTariffs(void)
 {
-  fPublicTariffs = false;
+  fPublicTariffs = FALSE;
   SaveFile(&flPublicTariffs);
 
   bTariffsMode = 0;

@@ -9,30 +9,30 @@ RECORDS.C
 
 
 boolean AddKeyRecord(event  ev) {
-	return false;
+	return FALSE;
 }
 
 
 boolean AddSysRecord(event  ev) {
-	return false;
+	return FALSE;
 }
 
 
 boolean AddSysRecordReprogram(event  ev) {
-	return false;
+	return FALSE;
 }
 
 
 boolean AddDigRecord(event  ev) {
-	return false;
+	return FALSE;
 }
 
 
 boolean AddImpRecord(event  ev) {
-	return false;
+	return FALSE;
 }
 
 
 boolean AddModRecord(event  ev) {
-	return false;
+	return FALSE;
 }

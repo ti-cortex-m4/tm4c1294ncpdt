@@ -30,7 +30,7 @@ void    InitGaps(void)
 
 void    ResetGaps(void)
 {
-  boGapsFlag = false;
+  boGapsFlag = FALSE;
   SaveFile(&flGapsFlag);
 
   memset(&gaGaps, 0, sizeof(gaGaps));

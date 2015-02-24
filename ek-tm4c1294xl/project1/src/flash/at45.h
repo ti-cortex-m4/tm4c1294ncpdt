@@ -10,9 +10,9 @@ AT45.H
 
 void    InitFlash(void);
 
-bool    SafePageErase(void);
-bool    SafePageRead(void);
-bool    SafePageWrite(void);
+boolean SafePageErase(void);
+boolean SafePageRead(void);
+boolean SafePageWrite(void);
 
 uint    GetFlashStatus(void);
-bool    GetFlashChecksum(void);
+boolean GetFlashChecksum(void);

@@ -169,6 +169,7 @@ PROGRAMS.H
 #define bSET_WINTER                 125
 
 #define bGET_ANALYSIS1              220
+#define bGET_HEALTH                 229
 
 
 #endif

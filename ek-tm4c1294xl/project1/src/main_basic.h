@@ -13,7 +13,14 @@ typedef int32_t         slong;
 
 typedef float           real;
 
-typedef bool            boolean;
+
+// тип 'логический'
+typedef enum
+{
+  UNDEFINED           = 0x55,
+  FALSE               = 0x00,
+  TRUE                = 0xFF
+} boolean;
 
 
 // тип 'время и дата'

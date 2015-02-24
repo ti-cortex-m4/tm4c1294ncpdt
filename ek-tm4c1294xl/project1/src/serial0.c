@@ -413,9 +413,9 @@ void    InDelay0_Timer0(void) {
 void    InitSerial0(void) {
   mpcbSendAT[0] = bANSWER_AT;
   mpanSendAT[0] = ANS_TIMEOUT;
-  boSendAT = false;
+  boSendAT = FALSE;
 
-  mpboLocal[0] = false;
+  mpboLocal[0] = FALSE;
 
   InputMode0();
   DTROff0();
