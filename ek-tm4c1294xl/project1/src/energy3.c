@@ -13,57 +13,34 @@ ENERGY3.C
 
 
 
-bool    SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
-{
-  if ((fCurr == 1) && (ibDayTo == ibHardDay))
-  {
-    memcpy(mpimDayCan[ ibSoftDay ], mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS);
-    return(1);
-  }
-  else
-    return SaveBuff(DF_IMPDAYCAN + ibDayTo*bIMPULSE_CAN, mpimDayCan[ ibDayFrom ], sizeof(impulse)*bCANALS);
+bool    SaveImpDayBuff(void) {
+  return SaveBuff(DF_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
+}
+
+bool    LoadImpDayBuff(void) {
+  return LoadBuff(DF_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
 }
 
 
-bool    LoadImpDay(uchar  ibDayFrom)
-{
-  if (ibDayFrom == ibHardDay)
-  {
-    memcpy(mpimDayCan[ PrevSoftDay() ], mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
-    return(1);
-  }
-  else
-    return LoadBuff(DF_IMPDAYCAN + ibDayFrom*bIMPULSE_CAN, mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS);
+bool    SaveImpMonBuff(void) {
+	return SaveBuff(DF_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
+}
+
+bool    LoadImpMonBuff(void) {
+  return LoadBuff(DF_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
 }
 
 
+bool    SaveImpAbsBuff(void) {
+	return SaveBuff(DF_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
+}
 
-bool    SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
-{
-  if ((fCurr == 1) && (ibMonTo == ibHardMon))
-  {
-    memcpy(mpimMonCan[ ibSoftMon ], mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS);
-    return(1);
-  }
-  else
-  	return SaveBuff(DF_IMPMONCAN + ibMonTo*bIMPULSE_CAN, mpimMonCan[ ibMonFrom ], sizeof(impulse)*bCANALS);
+bool    LoadImpAbsBuff(void) {
+  return LoadBuff(DF_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
 }
 
 
-bool    LoadImpMon(uchar  ibMonFrom)
-{
-  if (ibMonFrom == ibHardMon)
-  {
-    memcpy(mpimMonCan[ PrevSoftMon() ], mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
-    return(1);
-  }
-  else
-    return LoadBuff(DF_IMPMONCAN + ibMonFrom*bIMPULSE_CAN, mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS);
-}
-
-
-
-bool    SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
+bool    SavePowDayBuff(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
 {
   if ((fCurr == 1) && (ibDayTo == ibHardDay))
   {
@@ -75,7 +52,7 @@ bool    SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
 }
 
 
-bool    LoadPowDay(uchar  ibDayFrom)
+bool    LoadPowDayBuff(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
@@ -88,7 +65,7 @@ bool    LoadPowDay(uchar  ibDayFrom)
 
 
 
-bool    SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
+bool    SavePowMonBuff(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 {
   if ((fCurr == 1) && (ibMonTo == ibHardMon))
   {
@@ -100,7 +77,7 @@ bool    SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 }
 
 
-bool    LoadPowMon(uchar  ibMonFrom)
+bool    LoadPowMonBuff(uchar  ibMonFrom)
 {
   if (ibMonFrom == ibHardMon)
   {
