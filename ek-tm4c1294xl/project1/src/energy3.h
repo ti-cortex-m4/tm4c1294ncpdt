@@ -4,14 +4,17 @@ ENERGY3.H
 
 ------------------------------------------------------------------------------*/
 
-bool    SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom);
-bool    LoadImpDay(uchar  ibDayFrom);
+bool    SaveImpDayBuff(void);
+bool    LoadImpDayBuff(void);
 
-bool    SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom);
-bool    LoadImpMon(uchar  ibMonFrom);
+bool    SaveImpMonBuff(void);
+bool    LoadImpMonBuff(void);
 
-bool    SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom);
-bool    LoadPowDay(uchar  ibDayFrom);
+bool    SaveImpAbsBuff(void);
+bool    LoadImpAbsBuff(void);
 
-bool    SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom);
-bool    LoadPowMon(uchar  ibMonFrom);
+bool    SavePowDayBuff(void);
+bool    LoadPowDayBuff(void);
+
+bool    SavePowMonBuff(void);
+bool    LoadPowMonBuff(void);
