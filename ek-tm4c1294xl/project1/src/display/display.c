@@ -89,7 +89,7 @@ void    ShowReal(real  reT)
 
 void    ShowBoolean(boolean  boT)
 {
-  if (boT == false) 
+  if (boT == FALSE)
     strcpy(szLo+1,szNo);
   else         
     strcpy(szLo+1,szYes);
@@ -101,7 +101,7 @@ void    ShowBoolean(boolean  boT)
 
 void    ShowAnswer(void)
 {
-  ShowBoolean(enKeyboard != KBD_INPUT1 ? true : false);
+  ShowBoolean(enKeyboard != KBD_INPUT1 ? TRUE : FALSE);
 }
 
 

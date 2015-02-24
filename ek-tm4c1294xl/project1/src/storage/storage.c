@@ -11,6 +11,7 @@ STORAGE.C
 #include        "../hardware/watchdog.h"
 #include        "../flash/at45.h"
 #include        "../energy2.h"
+#include        "../energy3.h"
 #include        "../display/display.h"
 #include        "../delay.h"
 
@@ -28,7 +29,7 @@ static uint             wPage;
 void    ShowFlashErase(void)
 {
   ResetWDT();
-  ShowPercent((ulong)100*(++wPage)/(wIMPHOUCAN_SIZE+bDAYS*2+bMONTHS*3));
+  ShowPercent((ulong)100*(++wPage)/(wIMPHOUCAN_SIZE+bDAYS*2+bMONTHS*3+5));
 }
 
 
@@ -40,7 +41,19 @@ void    ShowFlashRead(void)
 
 
 
-bool    ResetFlash(void)
+void    InitStorage(void)
+{
+//  LoadImpDayBuff();
+//  LoadImpMonBuff();
+//  LoadImpAbsBuff();
+
+//  LoadPowDayBuff();
+//  LoadPowMonBuff();
+}
+
+
+
+bool    ResetDataFlash(void)
 {
 uint    i;
 
@@ -61,6 +74,7 @@ uint    i;
     if (GetFlashStatus() != 0) return(0);
     ShowFlashErase();
   }
+  if (SaveImpDayBuff() == 0) return(0);
 
   memset(&mpimMonCan, 0, sizeof(mpimMonCan));
   for (i=0; i<bMONTHS; i++) 
@@ -69,6 +83,10 @@ uint    i;
     if (GetFlashStatus() != 0) return(0);
     ShowFlashErase();
   }
+  if (SaveImpMonBuff() == 0) return(0);
+
+  memset(&mpimAbsCan, 0, sizeof(mpimAbsCan));
+  if (SaveImpAbsBuff() == 0) return(0);
 
   memset(&mppoDayGrp, 0, sizeof(mppoDayGrp));
   for (i=0; i<bDAYS; i++) 
@@ -77,6 +95,7 @@ uint    i;
     if (GetFlashStatus() != 0) return(0);
     ShowFlashErase();
   }
+  if (SavePowDayBuff() == 0) return(0);
 
   memset(&mppoMonGrp, 0, sizeof(mppoMonGrp));
   for (i=0; i<bMONTHS; i++) 
@@ -85,6 +104,7 @@ uint    i;
     if (GetFlashStatus() != 0) return(0);
     ShowFlashErase();
   }
+  if (SavePowMonBuff() == 0) return(0);
 
   memset(&mpreCntMonCan, 0, sizeof(mpreCntMonCan));
   for (i=0; i<bMONTHS; i++) 

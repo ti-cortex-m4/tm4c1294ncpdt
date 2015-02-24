@@ -19,6 +19,7 @@ REALTIME.C
 #include        "../rtc.h"
 #include        "../impulses/impulses.h"
 #include        "../energy.h"
+#include        "../health.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/profile.h"
 
@@ -206,6 +207,11 @@ void    ProcessTime(void)
   }
 }
 
+
+
+void    InitRealtime(void)
+{
+}
 
 
 void    StartRealtime(void)
@@ -419,10 +425,18 @@ void    Realtime(void)
 {
 time    ti;
 
-//  if (GetLabelRTC() == 0) return; // TODO notify
+//  if (GetLabelRTC() == 0) {
+//	boHealthLabelRTC = FALSE;
+//    return;
+//  }
+//  boHealthLabelRTC = TRUE;
 
   ti = *GetCurrTimeDate();
-  if (TrueCurrTimeDate(&ti) == 0) return; // TODO notify
+  if (TrueCurrTimeDate(&ti) == 0) {
+    boHealthTimeRTC = FALSE;
+	return;
+  }
+  boHealthTimeRTC = TRUE;
 
   if (tiCurr.bSecond != ti.bSecond)
   {

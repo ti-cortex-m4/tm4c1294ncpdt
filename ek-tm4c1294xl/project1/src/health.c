@@ -1,8 +1,11 @@
 /*------------------------------------------------------------------------------
-STORAGE.H
+HEALTH.C
 
 
 ------------------------------------------------------------------------------*/
 
-void    InitStorage(void);
-bool    ResetDataFlash(void);
+#include        "main.h"
+
+
+boolean                 boHealthLabelRTC = UNDEFINED;
+boolean                 boHealthTimeRTC = UNDEFINED;

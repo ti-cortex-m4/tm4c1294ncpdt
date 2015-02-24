@@ -189,13 +189,13 @@ void    key_Debug(void)
     ShowHi(szDebug);     
     Clear();
 
-    boSetTime = true;
-    boSetDate = true;
+    boSetTime = TRUE;
+    boSetDate = TRUE;
 
     ClearPassOne();
-    boSetPassword = true;
+    boSetPassword = TRUE;
 
-    boSetGroups = true;
+    boSetGroups = TRUE;
 
 // TODO key_Debug
 

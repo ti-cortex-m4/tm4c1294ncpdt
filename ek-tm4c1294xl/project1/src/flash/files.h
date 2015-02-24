@@ -10,14 +10,14 @@ FILES.H
 
 
 void    OpenOut(uint  wPage);
-bool    Save(void  *pbBase, uint  wSize);
-bool    CloseOut();
+boolean Save(void  *pbBase, uint  wSize);
+boolean CloseOut();
 
-bool    OpenIn(uint  wPage);
-bool    Load(void  *pbBase, uint  wSize);
+boolean OpenIn(uint  wPage);
+boolean Load(void  *pbBase, uint  wSize);
 
-bool    SaveBuff(uint wPage, void *pbBuff, uint wSize);
-bool    LoadBuff(uint wPage, void *pbBuff, uint wSize);
+boolean SaveBuff(uint wPage, void *pbBuff, uint wSize);
+boolean LoadBuff(uint wPage, void *pbBuff, uint wSize);
 
-bool    SaveFile(file const *pfl);
-bool    LoadFile(file const *pfl);
+boolean SaveFile(file const *pfl);
+boolean LoadFile(file const *pfl);

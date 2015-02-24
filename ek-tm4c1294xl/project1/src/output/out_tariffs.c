@@ -29,7 +29,7 @@ void    OutSetPublicTariffs(void)
 	{
 		if ((bInBuff5 == true) || (bInBuff5 == false))
 		{
-			fPublicTariffs = bInBuff5;
+			fPublicTariffs = (bInBuff5 == TRUE ? FALSE : TRUE);
 			SaveFile(&flPublicTariffs);
 			Result(bRES_OK);
 		}

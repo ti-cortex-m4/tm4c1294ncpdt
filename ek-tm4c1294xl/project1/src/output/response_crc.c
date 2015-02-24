@@ -26,6 +26,8 @@ void    ShowCommandCRC(uchar  bState) {
 #else
     if (InBuff(4) == 0xFF)
       sprintf(szHi,"Порт %u: CFF%03u %u",ibPort+1,InBuff(5),bState);
+    else if (InBuff(4) == 0xFE)
+      sprintf(szHi,"Порт %u: CFE%03u %u",ibPort+1,InBuff(5),bState);
     else
       sprintf(szHi,"Порт %u: CRC%03u %u",ibPort+1,InBuff(4),bState);
 #endif

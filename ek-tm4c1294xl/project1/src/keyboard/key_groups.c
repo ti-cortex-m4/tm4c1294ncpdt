@@ -43,7 +43,7 @@ uchar   i,j;
   // добавляем узел в конец группы
   SetGroupsNode(ibX,ibY, noT);
 
-  // сортировка узлов     
+  // сортировка узлов
   for(i=0; i<=GetGroupsSize(ibX); i++)
   {
     for(j=0; j<=GetGroupsSize(ibX); j++)
@@ -142,7 +142,7 @@ void    key_SetGroups(void)
       ShowHi(szGroups); 
       Group();
 
-      boSetGroups = true; 
+      boSetGroups = TRUE;
     }
     else if (enKeyboard == KBD_INPUT2)  // номер группы не введён
     {                                   // начинаем с первой группы
@@ -169,7 +169,7 @@ void    key_SetGroups(void)
           noT.ibCanal |= 0x80;
 
         if (AddNode() == 1)             // добавление узла в группу
-        {                               // нет такого узла                                        
+        {                               // нет такого узла
           if (++ibY == bCANALS)      // если группа заполнена полностью
           {
             enKeyboard = KBD_SHOW;      // переходим в режим просмотра
@@ -183,12 +183,12 @@ void    key_SetGroups(void)
     else if (enKeyboard == KBD_SHOW)
     {                                   // продолжаем просмотр
       ibY++;                            // переходим на следующий узел
-      if (ibY == GetGroupsSize(ibX))    // дошли до последнего узла     
+      if (ibY == GetGroupsSize(ibX))    // дошли до последнего узла
       {                                 
         if (GetGroupsSize(ibX) == bCANALS) 
           ibY = 0;                      // если полный список - продолжаем просмотр с начала
         else 
-          enKeyboard = KBD_POSTENTER;   // иначе ввод нового узла        
+          enKeyboard = KBD_POSTENTER;   // иначе ввод нового узла
       }
     }
 
@@ -215,7 +215,7 @@ void    key_SetGroups(void)
     }
 
 
-    if (enKeyboard == KBD_POSTENTER)    // неповредственно подготовка ввода  
+    if (enKeyboard == KBD_POSTENTER)    // неповредственно подготовка ввода
     {
       enKeyboard = KBD_INPUT1; 
       ShowLo(szMaskGroups);
@@ -259,7 +259,7 @@ void    key_SetGroups(void)
 
     else if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1)) 
     {                                   // в режиме ввода
-      if (szLo[4] == '-')               // изменить знак узла на противоположный 
+      if (szLo[4] == '-')               // изменить знак узла на противоположный
         szLo[4] = '+';
       else
         szLo[4] = '-';

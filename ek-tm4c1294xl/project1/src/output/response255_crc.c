@@ -89,7 +89,7 @@ uchar   w;
 }
 */
 
-void    OutBoolCanExt(bool  *mpf)
+void    OutBoolCanExt(boolean  *mpf)
 {
 uchar   i;
 uchar   w;
@@ -101,8 +101,8 @@ uchar   w;
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
     {
-      Push(&mpf[i], sizeof(bool));
-      w += sizeof(bool);
+      Push(&mpf[i], sizeof(boolean));
+      w += sizeof(boolean);
     }
   }
 

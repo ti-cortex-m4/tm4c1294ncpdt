@@ -10,14 +10,14 @@ SPEED.C
 
 boolean StreamPortCan(uchar  ibPort, uchar  ibCanal)
 {
-  return(1);
+  return TRUE;
 }
 
 
 
 boolean StreamPortPhoneCan(uchar  ibPort, uchar  ibPhone, uchar  ibCanal)
 {
-  return(1);
+  return TRUE;
 }
 
 

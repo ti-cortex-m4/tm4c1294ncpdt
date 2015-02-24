@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-STORAGE.H
+KEY_HEALTH.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    InitStorage(void);
-bool    ResetDataFlash(void);
+void    key_GetHealth(void);
+void    auto_GetHealth(void);

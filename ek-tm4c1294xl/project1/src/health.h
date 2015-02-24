@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-STORAGE.H
+HEALTH.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    InitStorage(void);
-bool    ResetDataFlash(void);
+extern  boolean                 boHealthLabelRTC;
+extern  boolean                 boHealthTimeRTC;

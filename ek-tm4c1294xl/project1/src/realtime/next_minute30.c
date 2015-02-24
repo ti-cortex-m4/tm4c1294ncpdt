@@ -10,6 +10,7 @@ NEXT_MINUTE30.C
 #include        "../impulses/max_power.h"
 #include        "../digitals/profile.h"
 #include        "../energy2.h"
+#include        "../energy3.h"
 
 
 
@@ -18,6 +19,9 @@ void    NextMinute30(void)
   cdwMinutes30++;
 
   MakeMaxPowAll();
+
+//  SavePowDayBuff();
+//  SavePowMonBuff();
 
   SaveImpHou(0,iwHardHou,ibSoftHou);
 
