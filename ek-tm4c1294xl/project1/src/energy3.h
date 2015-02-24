@@ -1,0 +1,17 @@
+/*------------------------------------------------------------------------------
+ENERGY3.H
+
+
+------------------------------------------------------------------------------*/
+
+bool    SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom);
+bool    LoadImpDay(uchar  ibDayFrom);
+
+bool    SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom);
+bool    LoadImpMon(uchar  ibMonFrom);
+
+bool    SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom);
+bool    LoadPowDay(uchar  ibDayFrom);
+
+bool    SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom);
+bool    LoadPowMon(uchar  ibMonFrom);
