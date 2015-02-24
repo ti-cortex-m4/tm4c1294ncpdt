@@ -20,8 +20,8 @@ void    NextMinute30(void)
 
   MakeMaxPowAll();
 
-//  SavePowDayBuff();
-//  SavePowMonBuff();
+  SavePowDayBuff();
+  SavePowMonBuff();
 
   SaveImpHou(0,iwHardHou,ibSoftHou);
 

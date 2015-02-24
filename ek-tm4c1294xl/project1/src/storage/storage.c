@@ -43,12 +43,12 @@ void    ShowFlashRead(void)
 
 void    InitStorage(void)
 {
-//  LoadImpDayBuff();
-//  LoadImpMonBuff();
-//  LoadImpAbsBuff();
+  LoadImpDayBuff();
+  LoadImpMonBuff();
+  LoadImpAbsBuff();
 
-//  LoadPowDayBuff();
-//  LoadPowMonBuff();
+  LoadPowDayBuff();
+  LoadPowMonBuff();
 }
 
 
@@ -119,7 +119,7 @@ uint    i;
 
   for (wPageIn=DF_BEGIN; wPageIn<DF_END; wPageIn += 8)
   {
-    if (SafePageRead() == 0) return(0);
+    if (SafePageRead() == FALSE) return(0);
     if (GetFlashChecksum() == 0) return(0);
     ShowFlashRead();
   }

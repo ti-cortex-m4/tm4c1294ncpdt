@@ -32,6 +32,7 @@ KEYBOARD_KEY.C
 #include        "keyboard/key_single2.h"
 #include        "keyboard/key_reset.h"
 #include        "keyboard/key_analysis.h"
+#include        "keyboard/key_health.h"
 
 
 
@@ -95,7 +96,8 @@ void    Keyboard_Key(void)
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
-      case bGET_ANALYSIS1:      key_Analysis1();        break;
+      case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
+      case bGET_HEALTH:         key_GetHealth();        break;
 
       default:                  NoProgram();            break;
     }
@@ -221,7 +223,8 @@ void    Keyboard_Key(void)
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
-      case bGET_ANALYSIS1:      key_Analysis1();        break;
+      case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
+      case bGET_HEALTH:         key_GetHealth();        break;
 
       default:                  NoProgram();            break;
     }
@@ -275,7 +278,8 @@ void    Keyboard_Key(void)
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
-      case bGET_ANALYSIS1:      key_Analysis1();        break;
+      case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
+      case bGET_HEALTH:         key_GetHealth();        break;
 
       default:                  NoProgram();            break;
     }

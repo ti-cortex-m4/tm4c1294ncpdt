@@ -26,7 +26,7 @@ void    Keyboard_Auto(void)
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
-      case bGET_ANALYSIS1:      auto_Analysis1();       break;
+      case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
       case bGET_HEALTH:         auto_GetHealth();       break;
     }
   }
@@ -38,7 +38,7 @@ void    Keyboard_Auto(void)
       case bGET_CURRTIME:       auto_GetCurrTime();     break;
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
 
-      case bGET_ANALYSIS1:      auto_Analysis1();       break;
+      case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
       case bGET_HEALTH:         auto_GetHealth();       break;
     }
 
@@ -85,7 +85,7 @@ void    Keyboard_Auto(void)
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
-      case bGET_ANALYSIS1:      auto_Analysis1();       break;
+      case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
       case bGET_HEALTH:         auto_GetHealth();       break;
     }
   }

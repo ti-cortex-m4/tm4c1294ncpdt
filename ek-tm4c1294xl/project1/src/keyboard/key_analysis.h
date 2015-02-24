@@ -4,5 +4,5 @@ KEY_ANALYSIS.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_Analysis1(void);
-void    auto_Analysis1(void); 
+void    key_GetAnalysis1(void);
+void    auto_GetAnalysis1(void); 

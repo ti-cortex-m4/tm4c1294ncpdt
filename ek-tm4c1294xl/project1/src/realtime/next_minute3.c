@@ -26,9 +26,9 @@ void    NextMinute3(void)
 
   MakeImpulse();
 
-//  SaveImpDayBuff();
-//  SaveImpMonBuff();
-//  SaveImpAbsBuff();
+  SaveImpDayBuff();
+  SaveImpMonBuff();
+  SaveImpAbsBuff();
 }
 
 

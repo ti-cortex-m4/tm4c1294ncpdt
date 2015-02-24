@@ -18,7 +18,7 @@ static char const       szAnalysis1[]   = "Запросы         ";
 
 
 
-void    key_Analysis1(void)
+void    key_GetAnalysis1(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -34,7 +34,7 @@ void    key_Analysis1(void)
 
 
 
-void    auto_Analysis1(void)
+void    auto_GetAnalysis1(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   { 
