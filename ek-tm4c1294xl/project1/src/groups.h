@@ -15,5 +15,8 @@ uchar   GetGroupsNodeCanal(uchar  ibGroup, uchar  ibNode);
 
 void    MakeUsedNodes(void);
 
+boolean SaveGroups(void);
+boolean LoadGroups(void);
+
 void    ResetGroups(void);
 void    InitGroups(void);

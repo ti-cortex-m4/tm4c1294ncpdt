@@ -14,7 +14,7 @@ ENERGY3.C
 
 
 boolean SaveImpDayBuff(void) {
-  return SaveBuff(DF_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
+  return SaveBuff(DF_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS, FOR_IMPULSE);
 }
 
 
@@ -25,7 +25,7 @@ boolean LoadImpDayBuff(void) {
 
 
 boolean SaveImpMonBuff(void) {
-  return SaveBuff(DF_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
+  return SaveBuff(DF_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS, FOR_IMPULSE);
 }
 
 
@@ -36,7 +36,7 @@ boolean LoadImpMonBuff(void) {
 
 
 boolean SaveImpAbsBuff(void) {
-  return SaveBuff(DF_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
+  return SaveBuff(DF_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS, FOR_REAL);
 }
 
 
@@ -47,7 +47,7 @@ boolean LoadImpAbsBuff(void) {
 
 
 boolean SavePowDayBuff(void) {
-  return SaveBuff(DF_POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
+  return SaveBuff(DF_POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS, FOR_MAX_POWER);
 }
 
 
@@ -58,7 +58,7 @@ boolean LoadPowDayBuff(void) {
 
 
 boolean SavePowMonBuff(void) {
-  return SaveBuff(DF_POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
+  return SaveBuff(DF_POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS, FOR_MAX_POWER);
 }
 
 
@@ -69,7 +69,7 @@ boolean LoadPowMonBuff(void) {
 
 
 boolean SaveCntMonBuff(void) {
-  return SaveBuff(DF_CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
+  return SaveBuff(DF_CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS, FOR_REAL);
 }
 
 

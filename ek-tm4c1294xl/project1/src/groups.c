@@ -80,6 +80,19 @@ uchar   i,j;
 
 
 
+boolean SaveGroups(void)
+{
+  return SaveFile(&flGroups);
+}
+
+
+boolean LoadGroups(void)
+{
+  return LoadFile(&flGroups);
+}
+
+
+
 void    InitGroups(void)
 {
   LoadGroups();
@@ -106,7 +119,7 @@ node    noT;
     else SetGroupsSize(i,0);
   }
 
-  SaveGroups();
+  SaveFile(&flGroups);
 
   MakeUsedNodes();
 
