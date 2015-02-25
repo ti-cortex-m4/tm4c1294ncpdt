@@ -12,6 +12,7 @@ NEXT_DAY.C
 #include        "../tariffs/tariffs.h"
 #include        "../energy.h"
 #include        "../energy2.h"
+#include        "../energy3.h"
 
 
 
@@ -21,6 +22,8 @@ void    NextDay(void)
 
   MakeCntMonCan();
   MakeAllCurrTariffs();
+
+  SaveCntMonBuff();
 
   SaveImpDay(0,ibHardDay,ibSoftDay);
   SavePowDay(0,ibHardDay,ibSoftDay);

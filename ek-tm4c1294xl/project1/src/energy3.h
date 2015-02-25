@@ -4,17 +4,20 @@ ENERGY3.H
 
 ------------------------------------------------------------------------------*/
 
-bool    SaveImpDayBuff(void);
-bool    LoadImpDayBuff(void);
+boolean SaveImpDayBuff(void);
+boolean LoadImpDayBuff(void);
 
-bool    SaveImpMonBuff(void);
-bool    LoadImpMonBuff(void);
+boolean SaveImpMonBuff(void);
+boolean LoadImpMonBuff(void);
 
-bool    SaveImpAbsBuff(void);
-bool    LoadImpAbsBuff(void);
+boolean SaveImpAbsBuff(void);
+boolean LoadImpAbsBuff(void);
 
-bool    SavePowDayBuff(void);
-bool    LoadPowDayBuff(void);
+boolean SavePowDayBuff(void);
+boolean LoadPowDayBuff(void);
 
-bool    SavePowMonBuff(void);
-bool    LoadPowMonBuff(void);
+boolean SavePowMonBuff(void);
+boolean LoadPowMonBuff(void);
+
+boolean SaveCntMonBuff(void);
+boolean LoadCntMonBuff(void);
