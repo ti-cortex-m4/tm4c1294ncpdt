@@ -49,6 +49,8 @@ void    InitStorage(void)
 
   LoadPowDayBuff();
   LoadPowMonBuff();
+
+  LoadCntMonBuff();
 }
 
 
@@ -113,6 +115,7 @@ uint    i;
     if (GetFlashStatus() != 0) return(0);
     ShowFlashErase();
   }
+  if (SaveCntMonBuff() == 0) return(0);
 
   ShowHi(szFlashRead);
   wPage = 0;
