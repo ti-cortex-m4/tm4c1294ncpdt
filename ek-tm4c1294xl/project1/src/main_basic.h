@@ -35,15 +35,6 @@ typedef struct
 } time;
 
 
-//
-typedef struct
-{
-  uint          wPage;
-  void          *pbBuff;
-  uint          wSize;
-} file;
-
-
 // тип 'канал/группа'
 typedef enum
 {

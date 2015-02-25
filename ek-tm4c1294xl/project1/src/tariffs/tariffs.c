@@ -22,11 +22,11 @@ TARIFFS.C
 
 
 
-file const              flPublicTariffs = {DF_PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean)};
-file const              flTariffsMode = {DF_TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
+file const              flPublicTariffs = {DF_PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean), FOR_DEFAULT};
+file const              flTariffsMode = {DF_TARIFFS_MODE, &bTariffsMode, sizeof(uchar), FOR_DEFAULT};
 
-file const              flPeriodTariffPow = {DF_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow)};
-file const              flPeriodTariffEng = {DF_PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng)};
+file const              flPeriodTariffPow = {DF_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow), FOR_DEFAULT};
+file const              flPeriodTariffEng = {DF_PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng), FOR_DEFAULT};
 
 
 

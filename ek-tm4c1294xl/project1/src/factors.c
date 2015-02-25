@@ -13,15 +13,15 @@ FACTORS.C
 #include        "factors.h"
 
 
-file const              flTransEng = {DF_TRANS_ENG, &mpreTransEng, sizeof(real)*bCANALS};
-file const              flTransCnt = {DF_TRANS_CNT, &mpreTransCnt, sizeof(real)*bCANALS};
+file const              flTransEng = {DF_TRANS_ENG, &mpreTransEng, sizeof(real)*bCANALS, FOR_REAL};
+file const              flTransCnt = {DF_TRANS_CNT, &mpreTransCnt, sizeof(real)*bCANALS, FOR_REAL};
 
-file const              flPulseHou = {DF_PULSE_HOU, &mprePulseHou, sizeof(real)*bCANALS};
-file const              flPulseMnt = {DF_PULSE_MNT, &mprePulseMnt, sizeof(real)*bCANALS};
+file const              flPulseHou = {DF_PULSE_HOU, &mprePulseHou, sizeof(real)*bCANALS, FOR_REAL};
+file const              flPulseMnt = {DF_PULSE_MNT, &mprePulseMnt, sizeof(real)*bCANALS, FOR_REAL};
 
-file const              flCount = {DF_COUNT, &mpreCount, sizeof(real)*bCANALS};
-file const              flLosse = {DF_LOSSE, &mpreLosse, sizeof(real)*bCANALS};
-file const              flLevel = {DF_LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS};
+file const              flCount = {DF_COUNT, &mpreCount, sizeof(real)*bCANALS, FOR_REAL};
+file const              flLosse = {DF_LOSSE, &mpreLosse, sizeof(real)*bCANALS, FOR_REAL};
+file const              flLevel = {DF_LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS, FOR_REAL};
 
 
 void    InitFactors(void)

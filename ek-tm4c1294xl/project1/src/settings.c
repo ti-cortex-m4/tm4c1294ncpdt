@@ -11,7 +11,7 @@ SETTINGS.C
 
 
 
-file const              flLogical = {DF_LOGICAL, &bLogical, sizeof(uchar)};
+file const              flLogical = {DF_LOGICAL, &bLogical, sizeof(uchar), FOR_DEFAULT};
 
 
 

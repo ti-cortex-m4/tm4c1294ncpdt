@@ -14,6 +14,7 @@
 #include        "main_digitals.h"
 #include        "main_energy.h"
 #include        "main_events.h"
+#include        "main_storage.h"
 
 
 typedef enum 

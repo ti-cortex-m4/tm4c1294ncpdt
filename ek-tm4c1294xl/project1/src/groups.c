@@ -13,6 +13,10 @@ GROUPS.C
 
 
 
+file const              flGroups = {DF_GROUPS, &mpgrGroups, sizeof(group)*bGROUPS, FOR_DEFAULT};
+
+
+
 uchar   GetGroupsSize(uchar  ibGroup)
 {
   return( mpgrGroups[ibGroup].bSize );
@@ -72,25 +76,6 @@ uchar   i,j;
     for (j=0; j<GetGroupsSize(i); j++)
       mpboUsedNodes[ GetGroupsNodeCanal(i,j) ] = TRUE;
   }
-}
-
-
-
-bool    SaveGroups(void)
-{
-  OpenOut(DF_GROUPS);
-
-  if (Save(mpgrGroups, sizeof(group)*bGROUPS) == 0)
-    return(0);
-
-  return CloseOut();
-}
-
-
-bool    LoadGroups(void)
-{
-  OpenIn(DF_GROUPS);
-  return Load(mpgrGroups, sizeof(group)*bGROUPS);
 }
 
 

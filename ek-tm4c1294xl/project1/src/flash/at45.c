@@ -342,12 +342,16 @@ uint    i;
 }
 
 
-boolean SafePageWrite(void)
+boolean SafePageWrite(format  fo)
 {
 uchar   i;
 
-  memcpy(&mpbPageOut[wFREEPAGE_SIZE+0], &wPrivate, sizeof(uint));
-  memcpy(&mpbPageOut[wFREEPAGE_SIZE+2], &wPageOut, sizeof(uint));
+  mpbPageOut[wFREEPAGE_SIZE+0] = fo;
+  mpbPageOut[wFREEPAGE_SIZE+1] = 0;
+
+  mpbPageOut[wFREEPAGE_SIZE+2] = wPageOut / 0x100;
+  mpbPageOut[wFREEPAGE_SIZE+3] = wPageOut % 0x100;
+
   memcpy(&mpbPageOut[wFREEPAGE_SIZE+4], &tiCurr,   sizeof(time));
 
   MakeCRC16(mpbPageOut, wPAGE_SIZE-2);

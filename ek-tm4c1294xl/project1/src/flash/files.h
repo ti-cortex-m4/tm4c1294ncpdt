@@ -10,8 +10,8 @@ FILES.H
 
 
 void    OpenOut(uint  wPage);
-boolean Save(void  *pbBase, uint  wSize);
-boolean CloseOut();
+boolean Save(void  *pbBase, uint  wSize, format  fo);
+boolean CloseOut(format  fo);
 
 boolean OpenIn(uint  wPage);
 boolean Load(void  *pbBase, uint  wSize);
