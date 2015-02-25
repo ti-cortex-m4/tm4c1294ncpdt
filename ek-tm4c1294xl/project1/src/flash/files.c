@@ -20,7 +20,7 @@ void    OpenOut(uint  wPage)
 }
 
 
-boolean Save(void  *pbBase, uint  wSize)
+boolean Save(void  *pbBase, uint  wSize, format  fo)
 {
 uint    wFree;
 uint    i;
@@ -33,7 +33,7 @@ uint    i;
     {                                           // заполняем всё свободное место
       memcpy(mpbPageOut + wByteOut, pbBase, wFree);                                
 
-      if (SafePageWrite() == 0) return FALSE;      // записываем буфер
+      if (SafePageWrite(fo) == 0) return FALSE; // записываем буфер
 
       OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
@@ -52,9 +52,9 @@ uint    i;
 }  
 
 
-boolean CloseOut()
+boolean CloseOut(format  fo)
 {
-  return( SafePageWrite() );
+  return SafePageWrite(fo);
 }
 
 
@@ -101,14 +101,14 @@ uint    i;
 
 
 
-boolean SaveBuff(uint wPage, void *pbBuff, uint wSize)
+boolean SaveBuff(uint wPage, void *pbBuff, uint wSize, format  fo)
 {
   OpenOut(wPage);
 
-  if (Save(pbBuff, wSize) == 0)
+  if (Save(pbBuff, wSize, fo) == 0)
     return FALSE;
 
-  return CloseOut();
+  return CloseOut(fo);
 }
 
 
@@ -122,7 +122,7 @@ boolean LoadBuff(uint wPage, void *pbBuff, uint wSize)
 
 boolean SaveFile(file const *pfl)
 {
-  return SaveBuff(pfl->wPage, pfl->pbBuff, pfl->wSize);
+  return SaveBuff(pfl->wPage, pfl->pbBuff, pfl->wSize, pfl->foSelf);
 }
 
 

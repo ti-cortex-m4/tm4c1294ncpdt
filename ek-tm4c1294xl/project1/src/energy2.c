@@ -15,7 +15,7 @@ ENERGY2.C
 
 #ifdef  DAYS100
 
-bool    SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
+boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
 {
   if ((fCurr == 1) && (iwHouTo == iwHardHou))
   {
@@ -34,7 +34,7 @@ bool    SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
 }
 
 
-bool    LoadImpHou(uint  iwHouFrom)
+boolean LoadImpHou(uint  iwHouFrom)
 {
 uchar   i;
 
@@ -58,7 +58,7 @@ uchar   i;
 }
 
 
-bool    LoadImpHouFree(uint  iwHouFrom)
+boolean LoadImpHouFree(uint  iwHouFrom)
 {
   if (iwHouFrom == iwHardHou)
   {
@@ -75,7 +75,7 @@ bool    LoadImpHouFree(uint  iwHouFrom)
 
 #else
 
-bool    SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
+boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
 {
   if ((fCurr == 1) && (iwHouTo == iwHardHou))
   {
@@ -86,18 +86,18 @@ bool    SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
   {
     OpenOut(DF_IMPHOUCAN + iwHouTo*bUINT_CAN);
 
-    if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS) == 0)
+    if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS, FOR_IMPULSE) == 0)
       return(0);
 
-    return( CloseOut() );
+    return( CloseOut(FOR_IMPULSE) );
   }
 }
 
 
-bool    LoadImpHou(uint  iwHouFrom)
+boolean LoadImpHou(uint  iwHouFrom)
 {
 uchar   i;
-bool    fAlt;
+boolean fAlt;
 
   if (iwHouFrom == iwHardHou)
   {
@@ -120,7 +120,7 @@ bool    fAlt;
 }
 
 
-bool    LoadImpHouFree(uint  iwHouFrom)
+boolean LoadImpHouFree(uint  iwHouFrom)
 {
   if (iwHouFrom == iwHardHou)
   {
@@ -137,7 +137,7 @@ bool    LoadImpHouFree(uint  iwHouFrom)
 #endif
 
 
-bool    SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
+boolean SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
 {
   if ((fCurr == 1) && (ibDayTo == ibHardDay))
   {
@@ -149,7 +149,7 @@ bool    SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
 }
 
 
-bool    LoadImpDay(uchar  ibDayFrom)
+boolean LoadImpDay(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
@@ -162,7 +162,7 @@ bool    LoadImpDay(uchar  ibDayFrom)
 
 
 
-bool    SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
+boolean SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 {
   if ((fCurr == 1) && (ibMonTo == ibHardMon))
   {
@@ -174,7 +174,7 @@ bool    SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 }
 
 
-bool    LoadImpMon(uchar  ibMonFrom)
+boolean LoadImpMon(uchar  ibMonFrom)
 {
   if (ibMonFrom == ibHardMon)
   {
@@ -187,7 +187,7 @@ bool    LoadImpMon(uchar  ibMonFrom)
 
 
 
-bool    SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
+boolean SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
 {
   if ((fCurr == 1) && (ibDayTo == ibHardDay))
   {
@@ -199,7 +199,7 @@ bool    SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
 }
 
 
-bool    LoadPowDay(uchar  ibDayFrom)
+boolean LoadPowDay(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
@@ -212,7 +212,7 @@ bool    LoadPowDay(uchar  ibDayFrom)
 
 
 
-bool    SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
+boolean SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 {
   if ((fCurr == 1) && (ibMonTo == ibHardMon))
   {
@@ -224,7 +224,7 @@ bool    SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 }
 
 
-bool    LoadPowMon(uchar  ibMonFrom)
+boolean LoadPowMon(uchar  ibMonFrom)
 {
   if (ibMonFrom == ibHardMon)
   {
@@ -237,7 +237,7 @@ bool    LoadPowMon(uchar  ibMonFrom)
 
 
 
-bool    SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
+boolean SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 {
   if ((fCurr == 1) && (ibMonTo == ibHardMon))
   {
@@ -249,7 +249,7 @@ bool    SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 }
 
 
-bool    LoadCntMon(uchar  ibMonFrom)
+boolean LoadCntMon(uchar  ibMonFrom)
 {
   if (ibMonFrom == ibHardMon)
   {
