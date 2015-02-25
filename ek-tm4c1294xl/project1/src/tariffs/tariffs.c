@@ -31,7 +31,7 @@ file const              flPeriodTariffEng = {DF_PERIOD_ENG, &mpeTariffEng, sizeo
 
 
 boolean SaveZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(DF_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
+	return SaveBuff(DF_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone), FOR_DEFAULT);
 }
 
 boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
@@ -41,7 +41,7 @@ boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
 
 
 boolean SaveZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(DF_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
+	return SaveBuff(DF_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone), FOR_DEFAULT);
 }
 
 boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode) {

@@ -42,7 +42,7 @@ void    ResetSettings(bool  fFullReset) {
 
 
 bool    SavePrivate(void) {
-	return SaveBuff(DF_PRIVATE, &wPrivate, sizeof(uint));
+	return SaveBuff(DF_PRIVATE, &wPrivate, sizeof(uint), FOR_DEFAULT);
 }
 
 
@@ -53,7 +53,7 @@ bool    LoadPrivate(void) {
 
 
 bool    SaveGlobal(void) {
-	return SaveBuff(DF_GLOBAL, &enGlobal, sizeof(global));
+	return SaveBuff(DF_GLOBAL, &enGlobal, sizeof(global), FOR_DEFAULT);
 }
 
 
