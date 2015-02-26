@@ -19,6 +19,5 @@ uchar   PrevSoftMon(void);
 uchar   PrevHardMon(void);
 
 void    InitRealtime(void);
-void    StartRealtime(void);
 
 void    Realtime(void);
