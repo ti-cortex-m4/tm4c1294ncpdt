@@ -7,13 +7,14 @@ REALTIME_INIT.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
+#include        "../flash/records.h"
+#include        "realtime.h"
 #include        "realtime_storage.h"
 
 
-/*
-// программа обработки переходов в виртуальном времени
-bit     RealtimeOffline(void)
-{
+
+void    RealtimeOffline(void)
+{/*
 uchar   i;
 
   cbWaitQuery = 0;
@@ -102,11 +103,11 @@ uchar   i;
       // запись прошедшего времени
       tiPrev = tiCurr;
     }
-  }
+  }*/
 }
 
 
-
+/*
 // программа обработки переходов в виртуальном времени с переходами на сезонное время
 void    InitNexttime(void)
 {
@@ -120,89 +121,110 @@ void    InitNexttime(void)
     return;
   }
 
-  fSummer = 0;
-  fWinter = 0;
+  ...
 
-  AddSysRecord(EVE_PREVNEXTTIME2);
-  RealtimeOffline();
-  AddSysRecord(EVE_POSTNEXTTIME);
-
-  if (fSummer == 1)
-  {
-    if (++tiCurr.bHour >= 24)
-    {
-      tiCurr.bHour = 0;
-
-      tiAlt = tiCurr;
-      if (++tiCurr.bDay > DaysInMonth())
-      {
-        tiCurr.bDay = 1;
-        if (++tiCurr.bMonth > 12)
-        {
-          tiCurr.bMonth = 1;
-          tiCurr.bYear++;
-        }
-      }
-    }
-
-    tiSetRTC = tiCurr;
-    SetCurrTimeDate();
-  }
-
-  if (fWinter == 1)
-  {
-    if (tiCurr.bHour > 0)
-      tiCurr.bHour--;
-    else
-    {
-      tiCurr.bHour = 23;
-      if (tiCurr.bDay > 1)
-        tiCurr.bDay--;
-      else
-      {
-        if (tiCurr.bMonth > 1)
-          tiCurr.bMonth--;
-        else
-        {
-          tiCurr.bMonth = 12;
-          tiCurr.bYear--;
-        }
-
-        tiAlt = tiCurr;
-        tiCurr.bDay = DaysInMonth();
-      }
-    }
-
-    tiSetRTC = tiCurr;
-    SetCurrTimeDate();
-  }
+  ...
 }
 */
 
-
-
-void    InitRealtime(void)
+void    RealtimeSeason(void)
 {
-  if (enGlobal == GLB_WORK)
-  {
+	  if (fSummer == 1)
+	  {
+	    if (++tiCurr.bHour >= 24)
+	    {
+	      tiCurr.bHour = 0;
+
+	      tiAlt = tiCurr;
+	      if (++tiCurr.bDay > DaysInMonth())
+	      {
+	        tiCurr.bDay = 1;
+	        if (++tiCurr.bMonth > 12)
+	        {
+	          tiCurr.bMonth = 1;
+	          tiCurr.bYear++;
+	        }
+	      }
+	    }
+
+	    tiSetRTC = tiCurr;
+	    SetCurrTimeDate();
+	  }
+
+	  if (fWinter == 1)
+	  {
+	    if (tiCurr.bHour > 0)
+	      tiCurr.bHour--;
+	    else
+	    {
+	      tiCurr.bHour = 23;
+	      if (tiCurr.bDay > 1)
+	        tiCurr.bDay--;
+	      else
+	      {
+	        if (tiCurr.bMonth > 1)
+	          tiCurr.bMonth--;
+	        else
+	        {
+	          tiCurr.bMonth = 12;
+	          tiCurr.bYear--;
+	        }
+
+	        tiAlt = tiCurr;
+	        tiCurr.bDay = DaysInMonth();
+	      }
+	    }
+
+	    tiSetRTC = tiCurr;
+	    SetCurrTimeDate();
+	  }
+}
+
+
+
+void    LoadRealtime(void)
+{
     LoadPointersMnt();
     LoadPointersHou();
     LoadPointersDay();
     LoadPointersMon();
 
     LoadTimeCurr();
+}
+
+
+void    DefaultRealtime(void)
+{
+  ibSoftMnt = 0;
+
+  ibSoftHou = 0;
+  iwHardHou = 0;
+
+  ibSoftDay = 0;
+  ibHardDay = 0;
+
+  ibSoftMon = 0;
+  ibHardMon = 0;
+}
+
+
+void    InitRealtime(void)
+{
+  if (enGlobal == GLB_WORK)
+  {
+    LoadRealtime();
+
+    fSummer = 0;
+    fWinter = 0;
+
+    AddSysRecord(EVE_PREVNEXTTIME2);
+    RealtimeOffline();
+    AddSysRecord(EVE_POSTNEXTTIME);
+
+    RealtimeSeason();
   }
   else
   {
-    ibSoftMnt = 0;
-
-    ibSoftHou = 0;
-	iwHardHou = 0;
-
-	ibSoftDay = 0;
-	ibHardDay = 0;
-
-	ibSoftMon = 0;
-	ibHardMon = 0;
+    DefaultRealtime();
   }
 }
