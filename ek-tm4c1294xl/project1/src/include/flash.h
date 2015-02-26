@@ -98,8 +98,9 @@ typedef enum
   DF_PTRHOU             = DF_PTRMNT + 1,
   DF_PTRDAY             = DF_PTRHOU + 1,
   DF_PTRMON             = DF_PTRDAY + 1,
+  DF_TICURR             = DF_PTRMON + 1,
 
-  DF_END                = DF_PTRMON + 1
+  DF_END                = DF_TICURR + 1
 } flash;
 
 

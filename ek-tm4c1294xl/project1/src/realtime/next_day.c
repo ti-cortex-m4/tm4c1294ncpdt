@@ -13,6 +13,7 @@ NEXT_DAY.C
 #include        "../energy.h"
 #include        "../energy2.h"
 #include        "../energy3.h"
+#include        "realtime_storage.h"
 
 
 
@@ -30,6 +31,7 @@ void    NextDay(void)
 
   if (++ibHardDay >= bDAYS) ibHardDay = 0;
   if (++ibSoftDay >= 2)     ibSoftDay = 0;
+  SavePointersDay();
 
   memset(&mpimDayCan[ibSoftDay], 0, sizeof(impulse)*bCANALS);
   memset(&mppoDayGrp[ibSoftDay], 0, sizeof(power)*bGROUPS);
