@@ -11,6 +11,7 @@ NEXT_MINUTE30.C
 #include        "../digitals/profile.h"
 #include        "../energy2.h"
 #include        "../energy3.h"
+#include        "realtime_storage.h"
 
 
 
@@ -27,6 +28,7 @@ void    NextMinute30(void)
 
   if (++iwHardHou >= wHOURS) iwHardHou = 0;
   if (++ibSoftHou >= 2)      ibSoftHou = 0;
+  SavePointersHou();
 
   memset(&mpwImpHouCan[ibSoftHou], 0, sizeof(uint)*bCANALS);
 

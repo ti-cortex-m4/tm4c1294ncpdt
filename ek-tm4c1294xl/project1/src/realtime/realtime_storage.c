@@ -104,3 +104,16 @@ boolean LoadPointersMon(void)
 
   return Load(&ibHardMon, sizeof(uchar));
 }
+
+
+
+boolean SaveTimeCurr(void)
+{
+  return SaveBuff(DF_TICURR, &tiCurr, sizeof(time), FOR_DEFAULT);
+}
+
+
+boolean LoadTimeCurr(void)
+{
+  return LoadBuff(DF_TICURR, &tiCurr, sizeof(time));
+}

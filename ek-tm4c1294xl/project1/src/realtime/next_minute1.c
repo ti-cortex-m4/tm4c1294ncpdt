@@ -19,7 +19,7 @@ void    NextMinute1(void)
   if ((fActive == 1) && (enGlobal == GLB_WORK))
   {
     if (cbShowCurrentTime >= 2)
-			ShowCurrentTime();
+      ShowCurrentTime();
     else
       cbShowCurrentTime++;
   }

@@ -9,6 +9,12 @@ TODO атомарные операции
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_factors.h"
 #include        "../memory/mem_energy.h"
+#include        "../rtc.h"
+#include        "../impulses/impulses.h"
+#include        "../energy.h"
+#include        "../health.h"
+#include        "../digitals/digitals.h"
+#include        "../digitals/profile.h"
 #include        "next_second.h"
 #include        "next_minute1.h"
 #include        "next_minute3.h"
@@ -16,12 +22,7 @@ TODO атомарные операции
 #include        "next_day.h"
 #include        "next_month.h"
 #include        "next_year.h"
-#include        "../rtc.h"
-#include        "../impulses/impulses.h"
-#include        "../energy.h"
-#include        "../health.h"
-#include        "../digitals/digitals.h"
-#include        "../digitals/profile.h"
+#include        "realtime_storage.h"
 
 
 
@@ -211,6 +212,15 @@ void    ProcessTime(void)
 
 void    InitRealtime(void)
 {
+  if (enGlobal == GLB_WORK)
+  {
+    LoadPointersMnt();
+    LoadPointersHou();
+    LoadPointersDay();
+    LoadPointersMon();
+
+    LoadTimeCurr();
+  }
 }
 
 

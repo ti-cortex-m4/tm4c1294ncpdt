@@ -10,6 +10,7 @@ NEXT_MINUTE3.C
 #include        "../energy.h"
 #include        "../energy3.h"
 #include        "../impulses/impulses.h"
+#include        "realtime_storage.h"
 
 
 
@@ -22,6 +23,7 @@ void    NextMinute3(void)
   DisableImpulses();
   memcpy(&mpwImpCurrMntCan, &mpwImpMntCan[ibSoftMnt], sizeof(uint)*bCANALS);
   if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
+  SavePointersMnt();
   EnableImpulses();
 
   MakeImpulse();
