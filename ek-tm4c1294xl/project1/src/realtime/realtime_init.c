@@ -11,6 +11,7 @@ REALTIME_INIT.C
 #include        "../timedate.h"
 #include        "../rtc.h"
 #include        "../display/display.h"
+#include        "../hardware/watchdog.h"
 #include        "realtime.h"
 #include        "realtime_storage.h"
 
@@ -21,66 +22,65 @@ boolean RealtimeOffline(void)
 uchar   cbDays;
 time    tiT;
 
-    cbPowerOn++;
-    tiPowerOff = tiCurr;
+  cbPowerOn++;
+  tiPowerOff = tiCurr;
 
-    cbDays = 0;
-    while (1)
+  cbDays = 0;
+  while (1)
+  {
+    ResetWDT();
+
+    tiT = *GetCurrTimeDate();
+
+    // копируем секунды для последующего сравнения
+    tiCurr.bSecond = tiT.bSecond;
+
+    // сохраняем время включения питания
+    tiPowerOn = tiT;
+
+    if (tiCurr == tiT) return TRUE;
+
+    // перевод время в интервалом в минуту
+    if (++tiCurr.bMinute >= 60)
     {
-      ResetWDT();
-
-      // чтение текущего времени
-      tiT = *PGetCurrTimeDate();
-      // копируем секунды для последующего сравнения
-      tiCurr.bSecond = tiT.bSecond;
-
-      // сохраняем время включения питания
-      tiPowerOn = tiT;
-
-      if (tiCurr == tiT) return TRUE;
-
-      // перевод время в интервалом в минуту
-      if (++tiCurr.bMinute >= 60)
+      tiCurr.bMinute = 0;
+      if (++tiCurr.bHour >= 24)
       {
-        tiCurr.bMinute = 0;
-        if (++tiCurr.bHour >= 24)
+        tiCurr.bHour = 0;
+
+        // предельное время выключения питания
+        if (++cbDays > 30) return FALSE;
+
+        if (++tiCurr.bDay > GetDaysInMonthYM(tiCurr.bYear, tiCurr.bMonth))
         {
-          tiCurr.bHour = 0;
-
-          // предельное время выключения питания
-          if (++cbDays > 30) return FALSE;
-
-          tiAlt = tiCurr;
-          if (++tiCurr.bDay > DaysInMonth())
+          tiCurr.bDay = 1;
+          if (++tiCurr.bMonth > 12)
           {
-            tiCurr.bDay = 1;
-            if (++tiCurr.bMonth > 12)
-            {
-              tiCurr.bMonth = 1;
-              tiCurr.bYear++;
-            }
+            tiCurr.bMonth = 1;
+            tiCurr.bYear++;
           }
         }
       }
-
-      ProcessTime();
-
-      sprintf(szHi," %02u:%02u %02u.%02u.%02u ",
-                     tiCurr.bHour,
-                     tiCurr.bMinute,
-                     tiCurr.bDay,
-                     tiCurr.bMonth,
-                     tiCurr.bYear);
-
-      sprintf(szLo," %02u:%02u %02u.%02u.%02u ",
-                     tiT.bHour,
-                     tiT.bMinute,
-                     tiT.bDay,
-                     tiT.bMonth,
-                     tiT.bYear);
-
-      tiPrev = tiCurr;
     }
+
+    ProcessTime();
+
+    sprintf(szHi," %02u:%02u %02u.%02u.%02u ",
+                   tiCurr.bHour,
+                   tiCurr.bMinute,
+                   tiCurr.bDay,
+                   tiCurr.bMonth,
+                   tiCurr.bYear);
+
+    sprintf(szLo," %02u:%02u %02u.%02u.%02u ",
+                   tiT.bHour,
+                   tiT.bMinute,
+                   tiT.bDay,
+                   tiT.bMonth,
+                   tiT.bYear);
+
+    tiPrev = tiCurr;
+  }
 }
 
 
