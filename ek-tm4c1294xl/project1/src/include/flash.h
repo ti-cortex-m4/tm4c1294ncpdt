@@ -94,7 +94,12 @@ typedef enum
   DF_POWMONGRP_BUFF     = DF_POWDAYGRP_BUFF + bPOWER_GRP,
   DF_CNTMONCAN_BUFF     = DF_POWMONGRP_BUFF + bPOWER_GRP,
 
-  DF_END                = DF_CNTMONCAN_BUFF + bREAL_CAN
+  DF_PTRMNT             = DF_CNTMONCAN_BUFF + bREAL_CAN,
+  DF_PTRHOU             = DF_PTRMNT + 1,
+  DF_PTRDAY             = DF_PTRHOU + 1,
+  DF_PTRMON             = DF_PTRDAY + 1,
+
+  DF_END                = DF_PTRMON + 1
 } flash;
 
 

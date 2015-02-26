@@ -105,7 +105,7 @@ boolean SaveBuff(uint wPage, void *pbBuff, uint wSize, format  fo)
 {
   OpenOut(wPage);
 
-  if (Save(pbBuff, wSize, fo) == 0)
+  if (Save(pbBuff, wSize, fo) == FALSE)
     return FALSE;
 
   return CloseOut(fo);

@@ -86,7 +86,7 @@ boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
   {
     OpenOut(DF_IMPHOUCAN + iwHouTo*bUINT_CAN);
 
-    if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS, FOR_IMPULSE) == 0)
+    if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS, FOR_IMPULSE) == FALSE)
       return FALSE;
 
     return( CloseOut(FOR_IMPULSE) );

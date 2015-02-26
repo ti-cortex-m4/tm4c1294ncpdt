@@ -11,8 +11,8 @@ extern  file const              flLogical;
 void    InitSettings(void);
 void    ResetSettings(bool  fFullReset);
 
-bool    SavePrivate(void);
-bool    LoadPrivate(void);
+boolean SavePrivate(void);
+boolean LoadPrivate(void);
 
-bool    SaveGlobal(void);
-bool    LoadGlobal(void);
+boolean SaveGlobal(void);
+boolean LoadGlobal(void);

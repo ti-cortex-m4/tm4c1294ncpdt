@@ -32,7 +32,7 @@ real    re;
 
   for (h=0; h<48; h++)
   {
-    if (LoadImpHou(iwHou) == 0) break;
+    if (LoadImpHou(iwHou) == FALSE) break; // TODO
     else
     {
       for (g=0; g<bGROUPS; g++)
@@ -81,7 +81,7 @@ uint    w, iwHou;
 
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == 0) break;
+    if (LoadImpHouFree(iwHou) == FALSE) break; // TODO
     else
     {
       for (c=0; c<bCANALS; c++)
@@ -122,7 +122,7 @@ real    re;
 
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == 0) break;
+    if (LoadImpHouFree(iwHou) == FALSE) break; // TODO
     else
     {
       for (c=0; c<bCANALS; c++)
