@@ -12,7 +12,7 @@ REALTIME_INIT.C
 
 /*
 // программа обработки переходов в виртуальном времени
-bit     NexttimeOff(void)
+bit     RealtimeOffline(void)
 {
 uchar   i;
 
@@ -124,7 +124,7 @@ void    InitNexttime(void)
   fWinter = 0;
 
   AddSysRecord(EVE_PREVNEXTTIME2);
-  NexttimeOff();
+  RealtimeOffline();
   AddSysRecord(EVE_POSTNEXTTIME);
 
   if (fSummer == 1)
@@ -191,5 +191,18 @@ void    InitRealtime(void)
     LoadPointersMon();
 
     LoadTimeCurr();
+  }
+  else
+  {
+    ibSoftMnt = 0;
+
+    ibSoftHou = 0;
+	iwHardHou = 0;
+
+	ibSoftDay = 0;
+	ibHardDay = 0;
+
+	ibSoftMon = 0;
+	ibHardMon = 0;
   }
 }
