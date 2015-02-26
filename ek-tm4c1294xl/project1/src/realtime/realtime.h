@@ -23,4 +23,5 @@ uchar   PrevHardDay(void);
 uchar   PrevSoftMon(void);
 uchar   PrevHardMon(void);
 
+void    ProcessTime(void);
 void    Realtime(void);
