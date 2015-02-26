@@ -12,7 +12,6 @@ REALTIME_START.C
 #include        "../rtc.h"
 #include        "../impulses/impulses.h"
 #include        "../energy.h"
-//#include        "../health.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/profile.h"
 

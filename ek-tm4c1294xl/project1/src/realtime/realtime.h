@@ -18,6 +18,4 @@ uchar   PrevHardDay(void);
 uchar   PrevSoftMon(void);
 uchar   PrevHardMon(void);
 
-void    InitRealtime(void);
-
 void    Realtime(void);
