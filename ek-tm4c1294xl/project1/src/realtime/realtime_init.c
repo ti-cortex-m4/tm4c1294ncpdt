@@ -8,46 +8,36 @@ REALTIME_INIT.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
 #include        "../flash/records.h"
+#include        "../timedate.h"
+#include        "../rtc.h"
+#include        "../display/display.h"
 #include        "realtime.h"
 #include        "realtime_storage.h"
 
 
 
-void    RealtimeOffline(void)
-{/*
-uchar   i;
+boolean RealtimeOffline(void)
+{
+uchar   cbDays;
+time    tiT;
 
-  cbWaitQuery = 0;
-
-  fProfile = 0;
-  fCurrent = 0;
-
-  fSeason  = 0;
-
-  if (GetLabelXDATA() == 0)
-    return(1);
-  else
-  {
-    // увеличиваем счётчик включений питания
     cbPowerOn++;
-    // сохраняем время выключения питания
     tiPowerOff = tiCurr;
 
-    i = 0;
+    cbDays = 0;
     while (1)
     {
       ResetWDT();
 
       // чтение текущего времени
-      tiKey = *PGetCurrTimeDate();
+      tiT = *PGetCurrTimeDate();
       // копируем секунды для последующего сравнения
-      tiCurr.bSecond = tiKey.bSecond;
+      tiCurr.bSecond = tiT.bSecond;
 
       // сохраняем время включения питания
-      tiPowerOn = tiKey;
+      tiPowerOn = tiT;
 
-      if (memcmp(&tiCurr, &tiKey, sizeof(time)) == 0)
-        return(1);
+      if (tiCurr == tiT) return TRUE;
 
       // перевод время в интервалом в минуту
       if (++tiCurr.bMinute >= 60)
@@ -58,7 +48,7 @@ uchar   i;
           tiCurr.bHour = 0;
 
           // предельное время выключения питания
-          if (++i > 30) return(0);
+          if (++cbDays > 30) return FALSE;
 
           tiAlt = tiCurr;
           if (++tiCurr.bDay > DaysInMonth())
@@ -73,37 +63,24 @@ uchar   i;
         }
       }
 
-      // обработка переходов времени
       ProcessTime();
-/ *
-      sprintf(szHi,"Дата   %02bu.%02bu.%02bu",
-              tiCurr.bDay,
-              tiCurr.bMonth,
-              tiCurr.bYear);
 
-      sprintf(szLo,"Время  %02bu:%02bu:%02bu",
-              tiCurr.bHour,
-              tiCurr.bMinute,
-              tiCurr.bSecond);
-* /
-      sprintf(szHi," %02bu:%02bu %02bu.%02bu.%02bu ",
+      sprintf(szHi," %02u:%02u %02u.%02u.%02u ",
                      tiCurr.bHour,
                      tiCurr.bMinute,
                      tiCurr.bDay,
                      tiCurr.bMonth,
                      tiCurr.bYear);
 
-      sprintf(szLo," %02bu:%02bu %02bu.%02bu.%02bu ",
-                     tiKey.bHour,
-                     tiKey.bMinute,
-                     tiKey.bDay,
-                     tiKey.bMonth,
-                     tiKey.bYear);
+      sprintf(szLo," %02u:%02u %02u.%02u.%02u ",
+                     tiT.bHour,
+                     tiT.bMinute,
+                     tiT.bDay,
+                     tiT.bMonth,
+                     tiT.bYear);
 
-      // запись прошедшего времени
       tiPrev = tiCurr;
     }
-  }*/
 }
 
 
@@ -127,69 +104,67 @@ void    InitNexttime(void)
 }
 */
 
+
 void    RealtimeSeason(void)
 {
-	  if (fSummer == 1)
-	  {
-	    if (++tiCurr.bHour >= 24)
-	    {
-	      tiCurr.bHour = 0;
+  if (fSummer == 1)
+  {
+    if (++tiCurr.bHour >= 24)
+    {
+      tiCurr.bHour = 0;
 
-	      tiAlt = tiCurr;
-	      if (++tiCurr.bDay > DaysInMonth())
-	      {
-	        tiCurr.bDay = 1;
-	        if (++tiCurr.bMonth > 12)
-	        {
-	          tiCurr.bMonth = 1;
-	          tiCurr.bYear++;
-	        }
-	      }
-	    }
+      tiAlt = tiCurr;
+      if (++tiCurr.bDay > GetDaysInMonthYM(tiCurr.bYear, tiCurr.bMonth))
+      {
+        tiCurr.bDay = 1;
+        if (++tiCurr.bMonth > 12)
+        {
+          tiCurr.bMonth = 1;
+          tiCurr.bYear++;
+        }
+      }
+    }
 
-	    tiSetRTC = tiCurr;
-	    SetCurrTimeDate();
-	  }
+    SetCurrTimeDate(&tiCurr);
+  }
 
-	  if (fWinter == 1)
-	  {
-	    if (tiCurr.bHour > 0)
-	      tiCurr.bHour--;
-	    else
-	    {
-	      tiCurr.bHour = 23;
-	      if (tiCurr.bDay > 1)
-	        tiCurr.bDay--;
-	      else
-	      {
-	        if (tiCurr.bMonth > 1)
-	          tiCurr.bMonth--;
-	        else
-	        {
-	          tiCurr.bMonth = 12;
-	          tiCurr.bYear--;
-	        }
+  if (fWinter == 1)
+  {
+    if (tiCurr.bHour > 0)
+      tiCurr.bHour--;
+    else
+    {
+      tiCurr.bHour = 23;
+      if (tiCurr.bDay > 1)
+        tiCurr.bDay--;
+      else
+      {
+        if (tiCurr.bMonth > 1)
+          tiCurr.bMonth--;
+        else
+        {
+          tiCurr.bMonth = 12;
+          tiCurr.bYear--;
+        }
 
-	        tiAlt = tiCurr;
-	        tiCurr.bDay = DaysInMonth();
-	      }
-	    }
+        tiCurr.bDay = GetDaysInMonthYM(tiCurr.bYear, tiCurr.bMonth);
+      }
+    }
 
-	    tiSetRTC = tiCurr;
-	    SetCurrTimeDate();
-	  }
+    SetCurrTimeDate(&tiCurr);
+  }
 }
 
 
 
 void    LoadRealtime(void)
 {
-    LoadPointersMnt();
-    LoadPointersHou();
-    LoadPointersDay();
-    LoadPointersMon();
+  LoadPointersMnt();
+  LoadPointersHou();
+  LoadPointersDay();
+  LoadPointersMon();
 
-    LoadTimeCurr();
+  LoadTimeCurr();
 }
 
 
@@ -217,6 +192,8 @@ void    InitRealtime(void)
     fSummer = 0;
     fWinter = 0;
 
+    fSeason = 0;
+
     AddSysRecord(EVE_PREVNEXTTIME2);
     RealtimeOffline();
     AddSysRecord(EVE_POSTNEXTTIME);
@@ -227,4 +204,7 @@ void    InitRealtime(void)
   {
     DefaultRealtime();
   }
+
+//  fProfile = 0;
+//  fCurrent = 0;
 }

@@ -207,7 +207,7 @@ void    ProcessTime(void)
 // программа обработки переходов в реальном времени
 void    Realtime(void)
 {
-time    ti;
+time    tiT;
 
 //  if (GetLabelRTC() == 0) {
 //	boHealthLabelRTC = FALSE;
@@ -215,26 +215,21 @@ time    ti;
 //  }
 //  boHealthLabelRTC = TRUE;
 
-  ti = *GetCurrTimeDate();
-  if (TrueCurrTimeDate(&ti) == 0) {
+  tiT = *GetCurrTimeDate();
+  if (TrueCurrTimeDate(&tiT) == 0) {
     boHealthTimeRTC = FALSE;
 	return;
   }
   boHealthTimeRTC = TRUE;
 
-  if (tiCurr.bSecond != ti.bSecond)
+  if (tiCurr.bSecond != tiT.bSecond)
   {
-    tiCurr = ti;
+    tiCurr = tiT;
 
     if (enGlobal != GLB_PROGRAM)
     {
       fActive = 1;
       ProcessTime();
-    }
-    else
-    {
-//      fProfile = 0;
-//      fCurrent = 0;
     }
 
     tiPrev = tiCurr;
