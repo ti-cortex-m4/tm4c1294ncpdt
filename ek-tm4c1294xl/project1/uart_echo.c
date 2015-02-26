@@ -35,6 +35,7 @@
 #include "src/digitals/digitals.h"
 #include "src/storage/storage.h"
 #include "src/realtime/realtime.h"
+#include "src/realtime/realtime_init.h"
 #include "src/output/response_crc.h"
 
 // The error routine that is called if the driver library encounters an error.
