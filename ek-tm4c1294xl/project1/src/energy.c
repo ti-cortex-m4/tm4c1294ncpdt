@@ -349,7 +349,7 @@ real    re;
 void    MakeImpulse(void)
 {
 uchar  ibCan;
-uint   wT;
+uint   w;
 
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
@@ -357,12 +357,12 @@ uint   wT;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-      wT = GetCanInt(mpwImpCurrMntCan,ibCan);
-      mpwImpHouCan[ibSoftHou][ibCan] += wT;
+      w = GetCanInt(mpwImpCurrMntCan,ibCan);
+      mpwImpHouCan[ibSoftHou][ibCan] += w;
 
-      AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, wT);
-      AddCanImpEng(mpimMonCan[ibSoftMon], ibCan, wT);
-      AddCanImpEng(mpimAbsCan,            ibCan, wT);
+      AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, w);
+      AddCanImpEng(mpimMonCan[ibSoftMon], ibCan, w);
+      AddCanImpEng(mpimAbsCan,            ibCan, w);
     }
   }
 }
@@ -371,7 +371,7 @@ uint   wT;
 void    MakeImpulseSpec(void)
 {
 uchar  ibCan;
-uint   wT;
+uint   w;
 
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
@@ -379,21 +379,21 @@ uint   wT;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-    	wT = GetCanInt(mpwImpCurrMntCan,ibCan);
-      mpwImpHouCan[ibSoftHou][ibCan] += wT;
+      w = GetCanInt(mpwImpCurrMntCan,ibCan);
+      mpwImpHouCan[ibSoftHou][ibCan] += w;
 
-      AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, wT);
-      AddCanImpEng(mpimMonCan[ibSoftMon], ibCan, wT);
-      AddCanImpEng(mpimAbsCan,            ibCan, wT);
+      AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, w);
+      AddCanImpEng(mpimMonCan[ibSoftMon], ibCan, w);
+      AddCanImpEng(mpimAbsCan,            ibCan, w);
 
       if ((tiOldDay.bYear  == tiCurr.bYear)  &&
           (tiOldDay.bMonth == tiCurr.bMonth) &&
           (tiOldDay.bDay   == tiCurr.bDay))
-        AddCanImpEng(mpimDayCanSpec, ibCan, wT);
+        AddCanImpEng(mpimDayCanSpec, ibCan, w);
 
       if ((tiOldMon.bYear  == tiCurr.bYear)  &&
           (tiOldMon.bMonth == tiCurr.bMonth))
-        AddCanImpEng(mpimMonCanSpec, ibCan, wT);
+        AddCanImpEng(mpimMonCanSpec, ibCan, w);
     }
   }
 }
