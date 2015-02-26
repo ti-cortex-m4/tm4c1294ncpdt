@@ -4,7 +4,12 @@ REALTIME.H
 
 ------------------------------------------------------------------------------*/
 
+extern  bool                    fSeason;
+
+extern  bool                    fSummer, fWinter;
+
 extern  bool                    fActive;
+
 
 
 uchar   GetCurrHouIndex(void);
