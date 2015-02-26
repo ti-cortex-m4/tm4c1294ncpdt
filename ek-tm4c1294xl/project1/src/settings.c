@@ -16,7 +16,7 @@ file const              flLogical = {DF_LOGICAL, &bLogical, sizeof(uchar), FOR_D
 
 
 void    InitSettings(void) {
-  if (LoadPrivate() == 0) {
+  if (LoadPrivate() == FALSE) {
     wPrivate = 1;
     SavePrivate();
   }
@@ -41,22 +41,22 @@ void    ResetSettings(bool  fFullReset) {
 
 
 
-bool    SavePrivate(void) {
+boolean SavePrivate(void) {
 	return SaveBuff(DF_PRIVATE, &wPrivate, sizeof(uint), FOR_DEFAULT);
 }
 
 
-bool    LoadPrivate(void) {
+boolean LoadPrivate(void) {
   return LoadBuff(DF_PRIVATE, &wPrivate, sizeof(uint));
 }
 
 
 
-bool    SaveGlobal(void) {
+boolean SaveGlobal(void) {
 	return SaveBuff(DF_GLOBAL, &enGlobal, sizeof(global), FOR_DEFAULT);
 }
 
 
-bool    LoadGlobal(void) {
+boolean LoadGlobal(void) {
   return LoadBuff(DF_GLOBAL, &enGlobal, sizeof(global));
 }
