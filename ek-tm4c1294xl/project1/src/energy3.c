@@ -13,8 +13,19 @@ ENERGY3.C
 
 
 
+boolean SaveImpHouBuff(void) {
+  return SaveBuff(FLS_IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS, FRM_UINT);
+}
+
+
+boolean LoadImpHouBuff(void) {
+  return LoadBuff(FLS_IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
+}
+
+
+
 boolean SaveImpDayBuff(void) {
-  return SaveBuff(FLS_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS, FOR_IMPULSE);
+  return SaveBuff(FLS_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS, FRM_IMPULSE);
 }
 
 
@@ -25,7 +36,7 @@ boolean LoadImpDayBuff(void) {
 
 
 boolean SaveImpMonBuff(void) {
-  return SaveBuff(FLS_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS, FOR_IMPULSE);
+  return SaveBuff(FLS_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS, FRM_IMPULSE);
 }
 
 
@@ -36,7 +47,7 @@ boolean LoadImpMonBuff(void) {
 
 
 boolean SaveImpAbsBuff(void) {
-  return SaveBuff(FLS_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS, FOR_REAL);
+  return SaveBuff(FLS_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS, FRM_REAL);
 }
 
 
@@ -47,7 +58,7 @@ boolean LoadImpAbsBuff(void) {
 
 
 boolean SavePowDayBuff(void) {
-  return SaveBuff(FLS_POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS, FOR_MAX_POWER);
+  return SaveBuff(FLS_POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS, FRM_MAX_POWER);
 }
 
 
@@ -58,7 +69,7 @@ boolean LoadPowDayBuff(void) {
 
 
 boolean SavePowMonBuff(void) {
-  return SaveBuff(FLS_POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS, FOR_MAX_POWER);
+  return SaveBuff(FLS_POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS, FRM_MAX_POWER);
 }
 
 
@@ -69,7 +80,7 @@ boolean LoadPowMonBuff(void) {
 
 
 boolean SaveCntMonBuff(void) {
-  return SaveBuff(FLS_CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS, FOR_REAL);
+  return SaveBuff(FLS_CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS, FRM_REAL);
 }
 
 

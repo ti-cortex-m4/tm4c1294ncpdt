@@ -14,10 +14,10 @@ boolean SavePointersMnt(void)
 {
   OpenOut(FLS_PTRMNT);
 
-  if (Save(&ibSoftMnt, sizeof(uchar), FOR_DEFAULT) == FALSE)
+  if (Save(&ibSoftMnt, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
 
-  return CloseOut(FOR_DEFAULT);
+  return CloseOut(FRM_DEFAULT);
 }
 
 
@@ -33,13 +33,13 @@ boolean SavePointersHou(void)
 {
   OpenOut(FLS_PTRHOU);
 
-  if (Save(&ibSoftHou, sizeof(uchar), FOR_DEFAULT) == FALSE)
+  if (Save(&ibSoftHou, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
 
-  if (Save(&iwHardHou, sizeof(uint), FOR_DEFAULT) == FALSE)
+  if (Save(&iwHardHou, sizeof(uint), FRM_DEFAULT) == FALSE)
     return FALSE;
 
-  return CloseOut(FOR_DEFAULT);
+  return CloseOut(FRM_DEFAULT);
 }
 
 
@@ -59,13 +59,13 @@ boolean SavePointersDay(void)
 {
   OpenOut(FLS_PTRDAY);
 
-  if (Save(&ibSoftDay, sizeof(uchar), FOR_DEFAULT) == FALSE)
+  if (Save(&ibSoftDay, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
 
-  if (Save(&ibHardDay, sizeof(uchar), FOR_DEFAULT) == FALSE)
+  if (Save(&ibHardDay, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
 
-  return CloseOut(FOR_DEFAULT);
+  return CloseOut(FRM_DEFAULT);
 }
 
 
@@ -85,13 +85,13 @@ boolean SavePointersMon(void)
 {
   OpenOut(FLS_PTRMON);
 
-  if (Save(&ibSoftMon, sizeof(uchar), FOR_DEFAULT) == FALSE)
+  if (Save(&ibSoftMon, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
 
-  if (Save(&ibHardMon, sizeof(uchar), FOR_DEFAULT) == FALSE)
+  if (Save(&ibHardMon, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
 
-  return CloseOut(FOR_DEFAULT);
+  return CloseOut(FRM_DEFAULT);
 }
 
 
@@ -109,7 +109,7 @@ boolean LoadPointersMon(void)
 
 boolean SaveTimeCurr(void)
 {
-  return SaveBuff(FLS_TICURR, &tiCurr, sizeof(time), FOR_DEFAULT);
+  return SaveBuff(FLS_TICURR, &tiCurr, sizeof(time), FRM_DEFAULT);
 }
 
 

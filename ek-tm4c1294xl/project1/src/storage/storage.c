@@ -43,6 +43,8 @@ void    ShowFlashRead(void)
 
 void    InitStorage(void)
 {
+  LoadImpHouBuff();
+
   LoadImpDayBuff();
   LoadImpMonBuff();
   LoadImpAbsBuff();
