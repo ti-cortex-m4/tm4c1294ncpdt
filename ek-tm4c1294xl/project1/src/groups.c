@@ -12,7 +12,7 @@ GROUPS.C
 
 
 
-file const              flGroups = {DF_GROUPS, &mpgrGroups, sizeof(group)*bGROUPS, FOR_DEFAULT};
+file const              flGroups = {FLS_GROUPS, &mpgrGroups, sizeof(group)*bGROUPS, FOR_DEFAULT};
 
 
 

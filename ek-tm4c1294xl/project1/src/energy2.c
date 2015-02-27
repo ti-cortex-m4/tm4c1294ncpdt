@@ -24,7 +24,7 @@ boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
   }
   else
   {
-    OpenOut(DF_IMPHOUCAN + iwHouTo/4);
+    OpenOut(FLS_IMPHOUCAN + iwHouTo/4);
 
     memcpy(mpbPageOut, mpbPageIn, wFREEPAGE_SIZE);
     memcpy(mpbPageOut + (iwHouTo%4)*wPROFILE_LENGTH, mpwImpHouCan[ iwHouFrom ], wPROFILE_LENGTH);
@@ -44,7 +44,7 @@ uchar   i;
   }
   else
   {
-    OpenIn(DF_IMPHOUCAN + iwHouFrom/4);
+    OpenIn(FLS_IMPHOUCAN + iwHouFrom/4);
     memcpy(mpwImpHouCan[ PrevSoftHou() ], mpbPageIn + (iwHouFrom%4)*wPROFILE_LENGTH, wPROFILE_LENGTH);
   }
 
@@ -67,7 +67,7 @@ boolean LoadImpHouFree(uint  iwHouFrom)
   }
   else
   {
-    OpenIn(DF_IMPHOUCAN + iwHouFrom/4);
+    OpenIn(FLS_IMPHOUCAN + iwHouFrom/4);
     memcpy(mpwImpHouCan[ PrevSoftHou() ], mpbPageIn + (iwHouFrom%4)*wPROFILE_LENGTH, wPROFILE_LENGTH);
     return TRUE;
   }
@@ -84,7 +84,7 @@ boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
   }
   else
   {
-    OpenOut(DF_IMPHOUCAN + iwHouTo*bUINT_CAN);
+    OpenOut(FLS_IMPHOUCAN + iwHouTo*bUINT_CAN);
 
     if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS, FOR_IMPULSE) == FALSE)
       return FALSE;
@@ -106,7 +106,7 @@ boolean bo;
   }
   else
   {
-    OpenIn(DF_IMPHOUCAN + iwHouFrom*bUINT_CAN);
+    OpenIn(FLS_IMPHOUCAN + iwHouFrom*bUINT_CAN);
     bo = Load(mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS);
   }
 
@@ -129,7 +129,7 @@ boolean LoadImpHouFree(uint  iwHouFrom)
   }
   else
   {
-    OpenIn(DF_IMPHOUCAN + iwHouFrom*bUINT_CAN);
+    OpenIn(FLS_IMPHOUCAN + iwHouFrom*bUINT_CAN);
     return(Load(mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS));
   }
 }
@@ -145,7 +145,7 @@ boolean SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
     return TRUE;
   }
   else
-    return SaveBuff(DF_IMPDAYCAN + ibDayTo*bIMPULSE_CAN, mpimDayCan[ ibDayFrom ], sizeof(impulse)*bCANALS, FOR_IMPULSE);
+    return SaveBuff(FLS_IMPDAYCAN + ibDayTo*bIMPULSE_CAN, mpimDayCan[ ibDayFrom ], sizeof(impulse)*bCANALS, FOR_IMPULSE);
 }
 
 
@@ -157,7 +157,7 @@ boolean LoadImpDay(uchar  ibDayFrom)
     return TRUE;
   }
   else
-    return LoadBuff(DF_IMPDAYCAN + ibDayFrom*bIMPULSE_CAN, mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS);
+    return LoadBuff(FLS_IMPDAYCAN + ibDayFrom*bIMPULSE_CAN, mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS);
 }
 
 
@@ -170,7 +170,7 @@ boolean SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
     return TRUE;
   }
   else
-  	return SaveBuff(DF_IMPMONCAN + ibMonTo*bIMPULSE_CAN, mpimMonCan[ ibMonFrom ], sizeof(impulse)*bCANALS, FOR_IMPULSE);
+  	return SaveBuff(FLS_IMPMONCAN + ibMonTo*bIMPULSE_CAN, mpimMonCan[ ibMonFrom ], sizeof(impulse)*bCANALS, FOR_IMPULSE);
 }
 
 
@@ -182,7 +182,7 @@ boolean LoadImpMon(uchar  ibMonFrom)
     return TRUE;
   }
   else
-    return LoadBuff(DF_IMPMONCAN + ibMonFrom*bIMPULSE_CAN, mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS);
+    return LoadBuff(FLS_IMPMONCAN + ibMonFrom*bIMPULSE_CAN, mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS);
 }
 
 
@@ -195,7 +195,7 @@ boolean SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
     return TRUE;
   }
   else
-    return SaveBuff(DF_POWDAYGRP + ibDayTo*bPOWER_GRP, mppoDayGrp[ ibDayFrom ], sizeof(power)*bGROUPS, FOR_MAX_POWER);
+    return SaveBuff(FLS_POWDAYGRP + ibDayTo*bPOWER_GRP, mppoDayGrp[ ibDayFrom ], sizeof(power)*bGROUPS, FOR_MAX_POWER);
 }
 
 
@@ -207,7 +207,7 @@ boolean LoadPowDay(uchar  ibDayFrom)
     return TRUE;
   }
   else
-    return LoadBuff(DF_POWDAYGRP + ibDayFrom*bPOWER_GRP, mppoDayGrp[ PrevSoftDay() ], sizeof(power)*bGROUPS);
+    return LoadBuff(FLS_POWDAYGRP + ibDayFrom*bPOWER_GRP, mppoDayGrp[ PrevSoftDay() ], sizeof(power)*bGROUPS);
 }
 
 
@@ -220,7 +220,7 @@ boolean SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
     return TRUE;
   }
   else
-  	return SaveBuff(DF_POWMONGRP + ibMonTo*bPOWER_GRP, mppoMonGrp[ ibMonFrom ], sizeof(power)*bGROUPS, FOR_MAX_POWER);
+  	return SaveBuff(FLS_POWMONGRP + ibMonTo*bPOWER_GRP, mppoMonGrp[ ibMonFrom ], sizeof(power)*bGROUPS, FOR_MAX_POWER);
 }
 
 
@@ -232,7 +232,7 @@ boolean LoadPowMon(uchar  ibMonFrom)
     return TRUE;
   }
   else
-    return LoadBuff(DF_POWMONGRP + ibMonFrom*bPOWER_GRP, mppoMonGrp[ PrevSoftMon() ], sizeof(power)*bGROUPS);
+    return LoadBuff(FLS_POWMONGRP + ibMonFrom*bPOWER_GRP, mppoMonGrp[ PrevSoftMon() ], sizeof(power)*bGROUPS);
 }
 
 
@@ -245,7 +245,7 @@ boolean SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
     return TRUE;
   }
   else
-    return SaveBuff(DF_CNTMONCAN + ibMonTo*bREAL_CAN, mpreCntMonCan[ ibMonFrom ], sizeof(real)*bCANALS, FOR_REAL);
+    return SaveBuff(FLS_CNTMONCAN + ibMonTo*bREAL_CAN, mpreCntMonCan[ ibMonFrom ], sizeof(real)*bCANALS, FOR_REAL);
 }
 
 
@@ -257,5 +257,5 @@ boolean LoadCntMon(uchar  ibMonFrom)
     return TRUE;
   }
   else
-    return LoadBuff(DF_CNTMONCAN + ibMonFrom*bREAL_CAN, mpreCntMonCan[ PrevSoftMon() ], sizeof(real)*bCANALS);
+    return LoadBuff(FLS_CNTMONCAN + ibMonFrom*bREAL_CAN, mpreCntMonCan[ PrevSoftMon() ], sizeof(real)*bCANALS);
 }

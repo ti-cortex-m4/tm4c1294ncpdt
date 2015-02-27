@@ -11,7 +11,7 @@ SETTINGS.C
 
 
 
-file const              flLogical = {DF_LOGICAL, &bLogical, sizeof(uchar), FOR_DEFAULT};
+file const              flLogical = {FLS_LOGICAL, &bLogical, sizeof(uchar), FOR_DEFAULT};
 
 
 
@@ -42,21 +42,21 @@ void    ResetSettings(bool  fFullReset) {
 
 
 boolean SavePrivate(void) {
-	return SaveBuff(DF_PRIVATE, &wPrivate, sizeof(uint), FOR_DEFAULT);
+	return SaveBuff(FLS_PRIVATE, &wPrivate, sizeof(uint), FOR_DEFAULT);
 }
 
 
 boolean LoadPrivate(void) {
-  return LoadBuff(DF_PRIVATE, &wPrivate, sizeof(uint));
+  return LoadBuff(FLS_PRIVATE, &wPrivate, sizeof(uint));
 }
 
 
 
 boolean SaveGlobal(void) {
-	return SaveBuff(DF_GLOBAL, &enGlobal, sizeof(global), FOR_DEFAULT);
+	return SaveBuff(FLS_GLOBAL, &enGlobal, sizeof(global), FOR_DEFAULT);
 }
 
 
 boolean LoadGlobal(void) {
-  return LoadBuff(DF_GLOBAL, &enGlobal, sizeof(global));
+  return LoadBuff(FLS_GLOBAL, &enGlobal, sizeof(global));
 }

@@ -22,30 +22,30 @@ TARIFFS.C
 
 
 
-file const              flPublicTariffs = {DF_PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean), FOR_DEFAULT};
-file const              flTariffsMode = {DF_TARIFFS_MODE, &bTariffsMode, sizeof(uchar), FOR_DEFAULT};
+file const              flPublicTariffs = {FLS_PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean), FOR_DEFAULT};
+file const              flTariffsMode = {FLS_TARIFFS_MODE, &bTariffsMode, sizeof(uchar), FOR_DEFAULT};
 
-file const              flPeriodTariffPow = {DF_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow), FOR_DEFAULT};
-file const              flPeriodTariffEng = {DF_PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng), FOR_DEFAULT};
+file const              flPeriodTariffPow = {FLS_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow), FOR_DEFAULT};
+file const              flPeriodTariffEng = {FLS_PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng), FOR_DEFAULT};
 
 
 
 boolean SaveZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(DF_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone), FOR_DEFAULT);
+	return SaveBuff(FLS_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone), FOR_DEFAULT);
 }
 
 boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return LoadBuff(DF_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
+	return LoadBuff(FLS_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 
 
 boolean SaveZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(DF_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone), FOR_DEFAULT);
+	return SaveBuff(FLS_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone), FOR_DEFAULT);
 }
 
 boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return LoadBuff(DF_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
+	return LoadBuff(FLS_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 
