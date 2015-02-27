@@ -5,11 +5,11 @@
 // тип 'формат данных в памяти'
 typedef enum
 {
-  FOR_DEFAULT           = 0,
-  FOR_UINT              = 1,
-  FOR_REAL              = 2,
-  FOR_IMPULSE           = 3,
-  FOR_MAX_POWER         = 4,
+  FRM_DEFAULT           = 0,
+  FRM_UINT              = 1,
+  FRM_REAL              = 2,
+  FRM_IMPULSE           = 3,
+  FRM_MAX_POWER         = 4,
 } format;
 
 

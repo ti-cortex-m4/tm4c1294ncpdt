@@ -13,15 +13,15 @@ FACTORS.C
 #include        "factors.h"
 
 
-file const              flTransEng = {FLS_TRANS_ENG, &mpreTransEng, sizeof(real)*bCANALS, FOR_REAL};
-file const              flTransCnt = {FLS_TRANS_CNT, &mpreTransCnt, sizeof(real)*bCANALS, FOR_REAL};
+file const              flTransEng = {FLS_TRANS_ENG, &mpreTransEng, sizeof(real)*bCANALS, FRM_REAL};
+file const              flTransCnt = {FLS_TRANS_CNT, &mpreTransCnt, sizeof(real)*bCANALS, FRM_REAL};
 
-file const              flPulseHou = {FLS_PULSE_HOU, &mprePulseHou, sizeof(real)*bCANALS, FOR_REAL};
-file const              flPulseMnt = {FLS_PULSE_MNT, &mprePulseMnt, sizeof(real)*bCANALS, FOR_REAL};
+file const              flPulseHou = {FLS_PULSE_HOU, &mprePulseHou, sizeof(real)*bCANALS, FRM_REAL};
+file const              flPulseMnt = {FLS_PULSE_MNT, &mprePulseMnt, sizeof(real)*bCANALS, FRM_REAL};
 
-file const              flCount = {FLS_COUNT, &mpreCount, sizeof(real)*bCANALS, FOR_REAL};
-file const              flLosse = {FLS_LOSSE, &mpreLosse, sizeof(real)*bCANALS, FOR_REAL};
-file const              flLevel = {FLS_LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS, FOR_REAL};
+file const              flCount = {FLS_COUNT, &mpreCount, sizeof(real)*bCANALS, FRM_REAL};
+file const              flLosse = {FLS_LOSSE, &mpreLosse, sizeof(real)*bCANALS, FRM_REAL};
+file const              flLevel = {FLS_LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS, FRM_REAL};
 
 
 void    InitFactors(void)

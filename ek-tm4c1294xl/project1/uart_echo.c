@@ -69,6 +69,7 @@ int main(void) {
 	InitRelaxs();
 	InitGaps();
 	InitDigitals();
+
 	InitStorage();
 	InitRealtime();
 

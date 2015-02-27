@@ -4,6 +4,9 @@ ENERGY3.H
 
 ------------------------------------------------------------------------------*/
 
+boolean SaveImpHouBuff(void);
+boolean LoadImpHouBuff(void);
+
 boolean SaveImpDayBuff(void);
 boolean LoadImpDayBuff(void);
 
