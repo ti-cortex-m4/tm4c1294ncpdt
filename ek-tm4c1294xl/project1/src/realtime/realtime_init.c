@@ -28,11 +28,14 @@ time    tiT;
     ResetWDT();
 
     tiT = *GetCurrTimeDate();
-
-    // копируем секунды для последующего сравнения
     tiCurr.bSecond = tiT.bSecond;
 
-    if (tiCurr == tiT) return TRUE;
+    if ((tiCurr.bMinute == tiT.bMinute) &&
+        (tiCurr.bHour   == tiT.bHour)   &&
+        (tiCurr.bDay    == tiT.bDay)    &&
+        (tiCurr.bMonth  == tiT.bMonth)  &&
+        (tiCurr.bYear   == tiT.bYear))
+    	return TRUE;
 
     // перевод время в интервалом в минуту
     if (++tiCurr.bMinute >= 60)
@@ -76,26 +79,6 @@ time    tiT;
   }
 }
 
-
-/*
-// программа обработки переходов в виртуальном времени с переходами на сезонное время
-void    InitNexttime(void)
-{
-  if (GetLabelRTC() == 0) TestError(szBadRTC1);
-
-  PGetCurrTimeDate();
-  if (TrueCurrTimeDate() == 0) // TestError(szBadRTC2);
-  {
-    ShowHi(szAlarm);
-    ShowLo(szBadRTC2); LongBeep(); DelayMsg();
-    return;
-  }
-
-  ...
-
-  ...
-}
-*/
 
 
 void    RealtimeSeason(void)
@@ -178,6 +161,16 @@ void    DefaultRealtime(void)
 
 void    InitRealtime(void)
 {
+//  if (GetLabelRTC() == 0) TestError(szBadRTC1);
+
+//  PGetCurrTimeDate();
+//  if (TrueCurrTimeDate() == 0) // TestError(szBadRTC2);
+//  {
+//    ShowHi(szAlarm);
+//    ShowLo(szBadRTC2); LongBeep(); DelayMsg();
+//    return;
+//  }
+
   if (enGlobal == GLB_WORK)
   {
     LoadRealtime();
