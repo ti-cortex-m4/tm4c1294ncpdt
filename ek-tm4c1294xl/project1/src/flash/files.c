@@ -14,8 +14,15 @@ FILES.C
 void    OpenOut(uint  wPage)
 {
   wPageOut = wPage;
+  wByteOut = 0;
 
-//  memset(&mpbPageOut, '\0', sizeof(mpbPageOut));
+  bBlockOut = 0;
+}
+
+
+void    OpenOut2(uint  wPage)
+{
+  wPageOut = wPage;
   wByteOut = 0;
 }
 
@@ -35,7 +42,7 @@ uint    i;
 
       if (SafePageWrite(fo) == FALSE) return FALSE; // записываем буфер
 
-      OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
+      OpenOut2(wPageOut + 1);                   // подготавливаемся к записи следующей страницы
 
       for (i=0; i<wFree; i++)
     	  pbBase = (char *)pbBase + 1;                          // TODO переходим на следующую позицию источника данных
@@ -66,7 +73,7 @@ uint    wFree;
 
       if (SafePageWrite(fo) == FALSE) return FALSE; // записываем буфер
 
-      OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
+      OpenOut2(wPageOut + 1);                   // подготавливаемся к записи следующей страницы
 
       wSize  -= wFree;                          // уменьшаем размер блока данных
     }
@@ -91,8 +98,6 @@ boolean CloseOut(format  fo)
 boolean OpenIn(uint  wPage)
 {
   wPageIn = wPage;
-
-//  memset(&mpbPageIn, '\0', sizeof(mpbPageIn));
   wByteIn = 0;
 
   return( SafePageRead() );

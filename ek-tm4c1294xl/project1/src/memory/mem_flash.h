@@ -11,6 +11,8 @@ MEM_FLASH.H
 extern  uint                    wPageIn, wPageOut,
                                 wByteIn, wByteOut;
 
+extern  uchar                   bBlockOut;
+
 extern  uchar                   bStatusFlash;
 
 extern  uchar                   mpbPageIn[wPAGE_SIZE],

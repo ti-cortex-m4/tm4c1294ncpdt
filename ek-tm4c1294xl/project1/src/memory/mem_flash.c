@@ -13,6 +13,9 @@ MEM_FLASH.C
 uint                    wPageIn, wPageOut,
                         wByteIn, wByteOut;
 
+// номер страницы в блоке
+uchar                   bBlockOut;
+
 // слово состояния флэш-памяти
 uchar                   bStatusFlash;
 
