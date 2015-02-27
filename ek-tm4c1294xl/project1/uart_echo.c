@@ -71,7 +71,7 @@ int main(void) {
 	InitDigitals();
 
 	InitStorage();
-//	InitRealtime();
+	InitRealtime();
 
     InitUARTs(ui32SysClock);
     InitTimer0(ui32SysClock);

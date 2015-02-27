@@ -191,7 +191,7 @@ void    InitRealtime(void)
 */
     tiPowerOn = tiCurr;
 
-    RealtimeSeason();
+    //RealtimeSeason();
   }
   else
   {
