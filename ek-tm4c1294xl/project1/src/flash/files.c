@@ -33,7 +33,7 @@ uint    i;
     {                                           // заполняем всё свободное место
       memcpy(mpbPageOut + wByteOut, pbBase, wFree);                                
 
-      if (SafePageWrite(fo) == 0) return FALSE; // записываем буфер
+      if (SafePageWrite(fo) == FALSE) return FALSE; // записываем буфер
 
       OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
@@ -50,6 +50,35 @@ uint    i;
     }
   }
 }  
+
+
+boolean Clean(uint  wSize, format  fo)
+{
+uint    wFree;
+
+  while (wSize > 0)
+  {
+    wFree = wFREEPAGE_SIZE - wByteOut;          // размер свободной части буфера
+
+    if (wSize > wFree)                          // блок данных больше размера свободной части буфера
+    {                                           // заполняем всё свободное место
+      memset(mpbPageOut + wByteOut, 0, wFree);
+
+      if (SafePageWrite(fo) == FALSE) return FALSE; // записываем буфер
+
+      OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
+
+      wSize  -= wFree;                          // уменьшаем размер блока данных
+    }
+    else
+    {                                           // заносим все данные в буфер
+    	memset(mpbPageOut + wByteOut, 0, wSize);
+      wByteOut += wSize;                        // увеличиваем счётчик заполнения буфера
+
+      return TRUE;
+    }
+  }
+}
 
 
 boolean CloseOut(format  fo)

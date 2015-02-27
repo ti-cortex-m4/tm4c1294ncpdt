@@ -11,6 +11,7 @@ FILES.H
 
 void    OpenOut(uint  wPage);
 boolean Save(void  *pbBase, uint  wSize, format  fo);
+boolean Clean(uint  wSize, format  fo);
 boolean CloseOut(format  fo);
 
 boolean OpenIn(uint  wPage);

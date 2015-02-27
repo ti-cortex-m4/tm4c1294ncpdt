@@ -191,7 +191,7 @@ uint    i;
 
   IncFlashControl();
 
-  if (SafeReadStatus() == 0)
+  if (SafeReadStatus() == FALSE)
     return FALSE;
   else
   {
@@ -238,7 +238,7 @@ boolean PageRead(void)
 {
 uint    i;
 
-  if (SafeReadStatus() == 0)
+  if (SafeReadStatus() == FALSE)
     return FALSE;
   else
   {
@@ -291,7 +291,7 @@ uint    i;
 
   IncFlashControl();
 
-  if (SafeReadStatus() == 0)
+  if (SafeReadStatus() == FALSE)
     return FALSE;
   else                                  // запись
   {
@@ -309,7 +309,7 @@ uint    i;
     DisableFlash();
   }
 
-  if (SafeReadStatus() == 0)
+  if (SafeReadStatus() == FALSE)
     return FALSE;
   else                                  // проверка записи
   {
@@ -325,7 +325,7 @@ uint    i;
     DisableFlash();
   }
 
-  if (SafeReadStatus() == 0)
+  if (SafeReadStatus() == FALSE)
   {
     cwErrCompare++;
     return FALSE;
@@ -409,7 +409,7 @@ void    InitFlash(void)
   Init_SPIhandAT45DB321();
   DisableFlash();
 
-// TODO if (SafeReadStatus() == 0) TestError(szBadFlash);
+// TODO if (SafeReadStatus() == FALSE) TestError(szBadFlash);
 }
 
 
