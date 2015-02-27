@@ -18,6 +18,7 @@ boolean OpenIn(uint  wPage);
 boolean Load(void  *pbBase, uint  wSize);
 
 boolean SaveBuff(uint wPage, void *pbBuff, uint wSize, format  fo);
+boolean CleanBuff(uint wPage, uint wSize, format  fo);
 boolean LoadBuff(uint wPage, void *pbBuff, uint wSize);
 
 boolean SaveFile(file const *pfl);

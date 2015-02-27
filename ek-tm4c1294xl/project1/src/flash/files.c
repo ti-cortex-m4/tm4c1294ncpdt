@@ -146,6 +146,17 @@ boolean SaveBuff(uint wPage, void *pbBuff, uint wSize, format  fo)
 }
 
 
+boolean CleanBuff(uint wPage, uint wSize, format  fo)
+{
+  OpenOut(wPage);
+
+  if (Clean(wSize, fo) == FALSE)
+    return FALSE;
+
+  return CloseOut(fo);
+}
+
+
 boolean LoadBuff(uint wPage, void *pbBuff, uint wSize)
 {
   OpenIn(wPage);

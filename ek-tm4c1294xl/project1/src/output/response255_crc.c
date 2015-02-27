@@ -8,7 +8,7 @@ RESPONSE255_CRC.C
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_factors.h"
 #include        "../memory/mem_digitals.h"
-#include        "../states.h"
+#include        "../include/states.h"
 #include        "../serial/ports.h"
 #include        "../output/response_crc.h"
 #include        "../tariffs/gaps.h"

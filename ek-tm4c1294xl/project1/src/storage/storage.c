@@ -29,7 +29,7 @@ static uint             wPage;
 void    ShowFlashErase(void)
 {
   ResetWDT();
-  ShowPercent((ulong)100*(++wPage)/(IMPHOUCAN_PAGES + bDAYS*2 + bMONTHS*3 + 6));
+  ShowPercent((ulong)100*(++wPage)/(IMPHOUCAN_PAGES + bDAYS*2 + bMONTHS*3 + 7));
 }
 
 
@@ -64,6 +64,9 @@ uint    i;
   ShowHi(szFlashErase);
   wPage = 0;
 
+  ibSoftDay = 0;
+  ibSoftMon = 0; // TODO
+
   for (wPageOut=FLS_IMPHOUCAN; wPageOut<FLS_IMPDAYCAN; wPageOut++) 
   {
     if (SafePageErase() == FALSE) return FALSE;
@@ -71,56 +74,56 @@ uint    i;
     ShowFlashErase();
   }
 
-  memset(&mpwImpHouCan, 0, sizeof(mpwImpHouCan));
-  if (SaveImpHouBuff() == 0) return FALSE;
-
   memset(&mpimDayCan, 0, sizeof(mpimDayCan));
   for (i=0; i<bDAYS; i++) 
   {
-    if (SaveImpDay(0,i,ibSoftDay) == 0) return FALSE;
+    if (SaveImpDay(0,i,ibSoftDay) == FALSE) return FALSE;
     if (GetFlashStatus() != 0) return FALSE;
     ShowFlashErase();
   }
-  if (SaveImpDayBuff() == 0) return FALSE;
 
   memset(&mpimMonCan, 0, sizeof(mpimMonCan));
   for (i=0; i<bMONTHS; i++) 
   {
-    if (SaveImpMon(0,i,ibSoftMon) == 0) return FALSE;
+    if (SaveImpMon(0,i,ibSoftMon) == FALSE) return FALSE;
     if (GetFlashStatus() != 0) return FALSE;
     ShowFlashErase();
   }
-  if (SaveImpMonBuff() == 0) return FALSE;
-
-  memset(&mpimAbsCan, 0, sizeof(mpimAbsCan));
-  if (SaveImpAbsBuff() == 0) return FALSE;
 
   memset(&mppoDayGrp, 0, sizeof(mppoDayGrp));
   for (i=0; i<bDAYS; i++) 
   {
-    if (SavePowDay(0,i,ibSoftDay) == 0) return FALSE;
+    if (SavePowDay(0,i,ibSoftDay) == FALSE) return FALSE;
     if (GetFlashStatus() != 0) return FALSE;
     ShowFlashErase();
   }
-  if (SavePowDayBuff() == 0) return FALSE;
 
   memset(&mppoMonGrp, 0, sizeof(mppoMonGrp));
   for (i=0; i<bMONTHS; i++) 
   {
-    if (SavePowMon(0,i,ibSoftMon) == 0) return FALSE;
+    if (SavePowMon(0,i,ibSoftMon) == FALSE) return FALSE;
     if (GetFlashStatus() != 0) return FALSE;
     ShowFlashErase();
   }
-  if (SavePowMonBuff() == 0) return FALSE;
 
   memset(&mpreCntMonCan, 0, sizeof(mpreCntMonCan));
   for (i=0; i<bMONTHS; i++) 
   {
-    if (SaveCntMon(0,i,ibSoftMon) == 0) return FALSE;
+    if (SaveCntMon(0,i,ibSoftMon) == FALSE) return FALSE;
     if (GetFlashStatus() != 0) return FALSE;
     ShowFlashErase();
   }
-  if (SaveCntMonBuff() == 0) return FALSE;
+
+  if (CleanImpHouBuff() == FALSE) return FALSE;
+
+  if (CleanImpDayBuff() == FALSE) return FALSE;
+  if (CleanImpMonBuff() == FALSE) return FALSE;
+  if (CleanImpAbsBuff() == FALSE) return FALSE;
+
+  if (CleanPowDayBuff() == FALSE) return FALSE;
+  if (CleanPowMonBuff() == FALSE) return FALSE;
+
+  if (CleanCntMonBuff() == FALSE) return FALSE;
 
   ShowHi(szFlashRead);
   wPage = 0;
