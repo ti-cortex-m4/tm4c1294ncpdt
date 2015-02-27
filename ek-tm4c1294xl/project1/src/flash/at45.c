@@ -347,7 +347,7 @@ boolean SafePageWrite(format  fo)
 uchar   i;
 
   mpbPageOut[wFREEPAGE_SIZE+0] = fo;
-  mpbPageOut[wFREEPAGE_SIZE+1] = 0;
+  mpbPageOut[wFREEPAGE_SIZE+1] = bBlockOut++;
 
   mpbPageOut[wFREEPAGE_SIZE+2] = wPageOut / 0x100;
   mpbPageOut[wFREEPAGE_SIZE+3] = wPageOut % 0x100;
