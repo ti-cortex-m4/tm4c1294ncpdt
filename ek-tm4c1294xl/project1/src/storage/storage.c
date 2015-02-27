@@ -29,7 +29,7 @@ static uint             wPage;
 void    ShowFlashErase(void)
 {
   ResetWDT();
-  ShowPercent((ulong)100*(++wPage)/(wIMPHOUCAN_SIZE+bDAYS*2+bMONTHS*3+5));
+  ShowPercent((ulong)100*(++wPage)/(IMPHOUCAN_PAGES + bDAYS*2 + bMONTHS*3 + 5));
 }
 
 

@@ -100,7 +100,7 @@ SYSTEM.H
 #define bMINUTES        40
 
 // размер получасовых массивов
-#define wHOURS          (uint)(10*48)
+#define wHOURS          (uint)(5*48)
 
 // размер суточных массивов
 #define bDAYS           14

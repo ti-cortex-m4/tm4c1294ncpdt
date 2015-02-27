@@ -84,7 +84,7 @@ boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
   }
   else
   {
-    OpenOut(FLS_IMPHOUCAN + iwHouTo*bUINT_CAN);
+    OpenOut(FLS_IMPHOUCAN + iwHouTo*UINTCAN_PAGES);
 
     if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS, FOR_IMPULSE) == FALSE)
       return FALSE;
@@ -106,7 +106,7 @@ boolean bo;
   }
   else
   {
-    OpenIn(FLS_IMPHOUCAN + iwHouFrom*bUINT_CAN);
+    OpenIn(FLS_IMPHOUCAN + iwHouFrom*UINTCAN_PAGES);
     bo = Load(mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS);
   }
 
@@ -129,7 +129,7 @@ boolean LoadImpHouFree(uint  iwHouFrom)
   }
   else
   {
-    OpenIn(FLS_IMPHOUCAN + iwHouFrom*bUINT_CAN);
+    OpenIn(FLS_IMPHOUCAN + iwHouFrom*UINTCAN_PAGES);
     return(Load(mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS));
   }
 }

@@ -18,15 +18,14 @@ FLASH.H
 #define wPAGES          8192
 
 
-// количество повторов при чтении регистра состояния
+// количество повторов при чтении регистра состояния (TODO: use milliseconds)
 #define wREAD_STATUS    50000
 
 // количество повторов при чтения/записи страницы
 #define bMAXREPEAT      8
 
 
-// количество страниц на блок данных определённого типа
-#define bUINT_CAN       (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
+// количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
 #define bIMPULSE_CAN    (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
 #define bPOWER_GRP      (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
 #define bREAL_CAN       (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
@@ -34,9 +33,14 @@ FLASH.H
 
 // количество страниц для графика профилей по получасам
 #ifdef  DAYS100
-#define wIMPHOUCAN_SIZE (uint)(wHOURS/4)
+
+#define IMPHOUCAN_PAGES (uint)(wHOURS/4)
+
 #else
-#define wIMPHOUCAN_SIZE (uint)(wHOURS/1)
+
+#define IMPHOUCAN_PAGES (uint)(wHOURS/1)
+#define UINTCAN_PAGES   (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
+
 #endif
 
 
@@ -81,13 +85,14 @@ typedef enum
   FLS_DIGITALS          = FLS_LEVEL + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
 
   FLS_IMPHOUCAN         = FLS_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1,
-  FLS_IMPDAYCAN         = FLS_IMPHOUCAN + wIMPHOUCAN_SIZE,
+  FLS_IMPDAYCAN         = FLS_IMPHOUCAN + IMPHOUCAN_PAGES,
   FLS_IMPMONCAN         = FLS_IMPDAYCAN + bIMPULSE_CAN*bDAYS,
   FLS_POWDAYGRP         = FLS_IMPMONCAN + bIMPULSE_CAN*bMONTHS,
   FLS_POWMONGRP         = FLS_POWDAYGRP + bPOWER_GRP*bDAYS,
   FLS_CNTMONCAN         = FLS_POWMONGRP + bPOWER_GRP*bMONTHS,
 
-  FLS_IMPDAYCAN_BUFF    = FLS_CNTMONCAN + bREAL_CAN*bMONTHS,
+  FLS_IMPHOUCAN_BUFF    = FLS_CNTMONCAN + bREAL_CAN*bMONTHS,
+  FLS_IMPDAYCAN_BUFF    = FLS_IMPHOUCAN_BUFF + 1,
   FLS_IMPMONCAN_BUFF    = FLS_IMPDAYCAN_BUFF + bIMPULSE_CAN,
   FLS_IMPABSCAN_BUFF    = FLS_IMPMONCAN_BUFF + bIMPULSE_CAN,
   FLS_POWDAYGRP_BUFF    = FLS_IMPABSCAN_BUFF + bIMPULSE_CAN,
