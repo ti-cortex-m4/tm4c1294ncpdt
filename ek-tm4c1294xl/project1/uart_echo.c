@@ -71,7 +71,7 @@ int main(void) {
 	InitDigitals();
 
 	InitStorage();
-	InitRealtime();
+//	InitRealtime();
 
     InitUARTs(ui32SysClock);
     InitTimer0(ui32SysClock);
@@ -80,7 +80,7 @@ int main(void) {
     IntMasterEnable();
 
     while (1) {
-    	Realtime();
+//    	Realtime();
     	Keyboard();
     	ResponseCRC_Full();
     }
