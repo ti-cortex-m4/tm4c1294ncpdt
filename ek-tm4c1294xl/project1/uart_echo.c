@@ -79,7 +79,7 @@ int main(void) {
 
     IntMasterEnable();
 
-    while(1) {
+    while (1) {
     	Realtime();
     	Keyboard();
     	ResponseCRC_Full();
