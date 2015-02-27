@@ -87,5 +87,3 @@ boolean SaveCntMonBuff(void) {
 boolean LoadCntMonBuff(void) {
   return LoadBuff(FLS_CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
 }
-
-reset all
