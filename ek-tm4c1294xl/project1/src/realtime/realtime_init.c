@@ -182,13 +182,13 @@ void    InitRealtime(void)
 
     cbPowerOn++;
     tiPowerOff = tiCurr;
-
+/*
     AddSysRecord(EVE_PREVNEXTTIME2);
     if (RealtimeOffline() == TRUE) {
     } else {
     }
     AddSysRecord(EVE_POSTNEXTTIME);
-
+*/
     tiPowerOn = tiCurr;
 
     RealtimeSeason();
