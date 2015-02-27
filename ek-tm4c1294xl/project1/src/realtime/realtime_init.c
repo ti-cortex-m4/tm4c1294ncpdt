@@ -22,9 +22,6 @@ boolean RealtimeOffline(void)
 uchar   cbDays;
 time    tiT;
 
-  cbPowerOn++;
-  tiPowerOff = tiCurr;
-
   cbDays = 0;
   while (1)
   {
@@ -34,9 +31,6 @@ time    tiT;
 
     // копируем секунды для последующего сравнения
     tiCurr.bSecond = tiT.bSecond;
-
-    // сохраняем время включения питания
-    tiPowerOn = tiT;
 
     if (tiCurr == tiT) return TRUE;
 
@@ -48,8 +42,7 @@ time    tiT;
       {
         tiCurr.bHour = 0;
 
-        // предельное время выключения питания
-        if (++cbDays > 30) return FALSE;
+        if (++cbDays > bMAXDAYS_OFF) return FALSE;
 
         if (++tiCurr.bDay > GetDaysInMonthYM(tiCurr.bYear, tiCurr.bMonth))
         {
@@ -194,9 +187,16 @@ void    InitRealtime(void)
 
     fSeason = 0;
 
+    cbPowerOn++;
+    tiPowerOff = tiCurr;
+
     AddSysRecord(EVE_PREVNEXTTIME2);
-    RealtimeOffline();
+    if (RealtimeOffline() == TRUE) {
+    } else {
+    }
     AddSysRecord(EVE_POSTNEXTTIME);
+
+    tiPowerOn = tiCurr;
 
     RealtimeSeason();
   }
