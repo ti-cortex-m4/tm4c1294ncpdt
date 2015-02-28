@@ -204,7 +204,6 @@ void    ProcessTime(void)
 
 
 
-// программа обработки переходов в реальном времени
 void    Realtime(void)
 {
 time    tiT;
@@ -228,6 +227,17 @@ time    tiT;
 
     if (enGlobal != GLB_PROGRAM)
     {
+    	ASSERT(ibSoftMnt < bMINUTES);
+
+    	ASSERT(iwHardHou < wHOURS);
+    	ASSERT(ibSoftHou < 2);
+
+    	ASSERT(iwHardDay < bDAYS);
+    	ASSERT(ibSoftDay < 2);
+
+    	ASSERT(iwHardMon < bMONTHS);
+    	ASSERT(ibSoftMon < 2);
+
       fActive = 1;
       ProcessTime();
     }

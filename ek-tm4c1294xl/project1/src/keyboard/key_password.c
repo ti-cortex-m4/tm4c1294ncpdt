@@ -7,7 +7,7 @@ KEY_PASSWORD.C
 #include        "../main.h"
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_program.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../beep.h"
 #include        "../access.h"

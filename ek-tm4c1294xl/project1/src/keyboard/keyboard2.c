@@ -4,11 +4,11 @@ KEYBOARD2.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
+#include        "../main.h"
+#include        "../include/programs2.h"
 #include        "keyboard.h"
-#include        "include/programs2.h"
-#include        "keyboard2/key_gaps_flag.h"
-#include        "keyboard2/key_gaps.h"
+#include        "key_gaps_flag.h"
+#include        "key_gaps.h"
 
 
 

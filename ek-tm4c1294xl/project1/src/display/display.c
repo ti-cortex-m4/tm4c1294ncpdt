@@ -9,7 +9,7 @@ DISPLAY.C
 #include        <stdlib.h>
 #include        "../main.h"
 #include        "../memory/mem_program.h"
-#include        "../keyboard.h"
+#include        "../keyboard/keyboard.h"
 #include        "../keyboard/key_reset.h"
 #include        "../hardware/watchdog.h"
 #include        "messages.h"

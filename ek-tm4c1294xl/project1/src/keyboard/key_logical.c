@@ -6,7 +6,7 @@ KEY_LOGICAL.C
 
 #include        "../main.h"
 #include        "../memory/mem_settings.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../access.h"
 #include        "../flash/files.h"

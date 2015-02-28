@@ -7,7 +7,7 @@ KEY_GROUPS.C
 #include        "../main.h"
 #include        "../memory/mem_groups.h"
 #include        "../memory/mem_program.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../groups.h"
 

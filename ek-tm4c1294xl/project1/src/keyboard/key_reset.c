@@ -5,7 +5,7 @@ KEY_RESET.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../groups.h"
 #include        "../tariffs/zones.h"

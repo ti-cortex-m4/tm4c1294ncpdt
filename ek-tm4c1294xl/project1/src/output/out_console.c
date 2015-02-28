@@ -9,7 +9,7 @@ OUT_CONSOLE.C
 #include        "../serial/ports.h"
 #include        "../access.h"
 #include        "../display/display.h"
-#include        "../keyboard.h"
+#include        "../keyboard/keyboard.h"
 
 
 

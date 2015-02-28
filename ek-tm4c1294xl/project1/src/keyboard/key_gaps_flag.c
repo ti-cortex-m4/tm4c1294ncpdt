@@ -6,7 +6,7 @@ KEY_GAPS_FLAG.C
 
 #include        "../main.h"
 #include        "../memory/mem_tariffs.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../tariffs/gaps.h"
 #include        "../flash/files.h"

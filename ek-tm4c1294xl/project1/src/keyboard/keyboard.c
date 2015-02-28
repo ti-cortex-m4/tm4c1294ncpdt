@@ -4,18 +4,18 @@ KEYBOARD.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "memory/mem_settings.h"
-#include        "memory/mem_program.h"
-#include        "memory/mem_realtime.h"
-#include        "display/display.h"
-#include        "beep.h"
-#include        "delay.h"
-#include        "include/programs.h"
+#include        "../main.h"
+#include        "../memory/mem_settings.h"
+#include        "../memory/mem_program.h"
+#include        "../memory/mem_realtime.h"
+#include        "../display/display.h"
+#include        "../beep.h"
+#include        "../delay.h"
+#include        "../include/programs.h"
+#include        "../impulses/impulses.h"
 #include        "keyboard_auto.h"
 #include        "keyboard_key.h"
-#include        "keyboard/key_timedate.h"
-#include        "impulses/impulses.h"
+#include        "key_timedate.h"
 
 
 

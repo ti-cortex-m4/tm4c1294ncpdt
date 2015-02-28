@@ -6,7 +6,7 @@ KEY_SEASON.C
 
 #include        "../main.h"
 #include        "../memory/mem_settings.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../rtc.h"
 #include        "../timedate.h"

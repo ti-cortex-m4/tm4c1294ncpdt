@@ -8,7 +8,7 @@ KEY_RELAXS.C
 #include        "../../memory/mem_tariffs.h"
 #include        "../../memory/mem_settings.h"
 #include        "../../memory/mem_realtime.h"
-#include        "../../keyboard.h"
+#include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../timedate.h"
 #include        "../../rtc.h"

@@ -7,7 +7,7 @@ KEY_TIMEDATE.C
 #include        "../main.h"
 #include        "../memory/mem_program.h"
 #include        "../memory/mem_realtime.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../rtc.h"
 #include        "../timedate.h"

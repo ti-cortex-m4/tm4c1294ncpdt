@@ -4,16 +4,16 @@ KEYBOARD_AUTO.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "include/programs.h"
+#include        "../main.h"
+#include        "../include/programs.h"
+#include        "../digitals/digitals.h"
+#include        "../impulses/impulses.h"
 #include        "keyboard.h"
-#include        "keyboard/key_timedate.h"
-#include        "keyboard/key_analysis.h"
-#include        "keyboard/key_health.h"
-#include        "keyboard/key_single.h"
-#include        "keyboard/key_single2.h"
-#include        "digitals/digitals.h"
-#include        "impulses/impulses.h"
+#include        "key_timedate.h"
+#include        "key_analysis.h"
+#include        "key_health.h"
+#include        "key_single.h"
+#include        "key_single2.h"
 
 
 

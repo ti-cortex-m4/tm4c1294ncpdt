@@ -8,7 +8,7 @@ KEY_DIGITALS.C
 #include        "../../memory/mem_digitals.h"
 #include        "../../memory/mem_ports.h"
 #include        "../../display/display.h"
-#include        "../../keyboard.h"
+#include        "../keyboard.h"
 #include        "../../flash/files.h"
 #include        "../../flash/records.h"
 #include        "../../digitals/digitals.h"

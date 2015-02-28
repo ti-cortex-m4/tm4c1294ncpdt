@@ -7,7 +7,7 @@ TODO чтение тарифов отдельно по modes
 #include        "../main.h"
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_tariffs.h"
-#include        "../keyboard.h"
+#include        "../keyboard/keyboard.h"
 #include        "../serial/ports.h"
 #include        "../access.h"
 #include        "../flash/files.h"

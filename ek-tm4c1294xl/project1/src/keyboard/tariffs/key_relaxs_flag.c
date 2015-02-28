@@ -6,7 +6,7 @@ KEY_RELAXS_FLAG.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_tariffs.h"
-#include        "../../keyboard.h"
+#include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../tariffs/tariffs.h"
 #include        "../../tariffs/relaxs.h"

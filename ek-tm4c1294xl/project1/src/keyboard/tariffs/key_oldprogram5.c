@@ -7,7 +7,7 @@ KEY_OLDPROGRAM5.C
 #include        "../../main.h"
 #include        "../../memory/mem_tariffs.h"
 #include        "../../memory/mem_realtime.h"
-#include        "../../keyboard.h"
+#include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../access.h"
 #include        "../../timedate.h"
