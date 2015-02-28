@@ -6,8 +6,9 @@ MEM_ENERGY.H
 
 extern  uint                    mpwImpCurrMntCan[bCANALS];
 
-extern  uint                    mpwImpMntCan[bMINUTES][bCANALS],
-                                mpwImpHouCan[2][bCANALS];
+extern  uint                    mpwImpMntCan[bMINUTES][bCANALS];
+
+extern  uint                    mpwImpHouCan[2][bCANALS];
 
 extern  impulse                 mpimDayCan[2][bCANALS],
                                 mpimMonCan[2][bCANALS],
