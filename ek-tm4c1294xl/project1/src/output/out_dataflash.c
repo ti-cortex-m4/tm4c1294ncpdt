@@ -21,7 +21,7 @@ void    OutDataFlashMap(void)
 uint    i;
 
   InitPushCRC();
-  for (i=0; i<1000; i++) PushChar(0);
+  for (i=0; i<2000; i++) PushChar(0);
 
   InitPushCRC();
 
@@ -86,5 +86,5 @@ uint    i;
 
   PUSH_ENUM(FLS_END)
 
-  Output(1000);
+  Output(2000);
 }
