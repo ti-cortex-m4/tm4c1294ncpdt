@@ -8,6 +8,7 @@ QUERIES.H
 #ifndef __INQUIRYS
 #define __INQUIRYS
 
+#define bINQ_GETGLOBAL                 0
 
 #define bINQ_GETCURRTIME               1
 

@@ -7,6 +7,7 @@ RESPONSE1_CRC.C
 #include        "../main.h"
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_factors.h"
+#include        "../memory/mem_settings.h"
 #include        "../include/states.h"
 #include        "../serial/ports.h"
 #include        "out_rtc.h"
@@ -26,6 +27,10 @@ void    Response1_CRC(void)
 {
     switch (bInBuff4)
     {
+      case bINQ_GETGLOBAL:
+        LongResult(enGlobal);
+        break;
+
       case bINQ_GETCURRTIME:
         OutGetCurrTimeDate();
         break;
