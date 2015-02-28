@@ -38,6 +38,8 @@ real     re;
   ibHardMon = (GetCurrTimeDate()->bMonth) - 1;
   SavePointersMon();
 
+//  TODO save tiCurr tiPrev
+
   cbSummer = 0;
   cbWinter = 0;
 

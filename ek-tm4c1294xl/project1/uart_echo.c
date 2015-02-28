@@ -41,6 +41,7 @@ TODO .C
 #include "src/output/response_crc.h"
 
 
+ void InitSerial0();
 
 int main(void) {
 	uint32_t ui32SysClock;
@@ -50,6 +51,7 @@ int main(void) {
                                              SYSCTL_OSC_MAIN |
                                              SYSCTL_USE_PLL |
                                              SYSCTL_CFG_VCO_480), 120000000);
+  InitUARTs(ui32SysClock);
 
 	InitLCD();
 	InitFlash();
@@ -71,7 +73,12 @@ int main(void) {
 	InitStorage();
 	InitRealtime();
 
-    InitUARTs(ui32SysClock);
+    InitSerial0();
+
+    // Enable the UART interrupt.
+    ROM_IntEnable(INT_UART0);
+    ROM_UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+
     InitTimer0(ui32SysClock);
     InitTimer1(ui32SysClock);
 
