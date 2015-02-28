@@ -4,6 +4,10 @@ RTC.H
  DS3234EN
 ------------------------------------------------------------------------------*/
 
+#include        "../main.h"
+
+
+
 time    *GetCurrTimeDate(void);
 
 void    SetCurrTimeDate(time  *pti);
