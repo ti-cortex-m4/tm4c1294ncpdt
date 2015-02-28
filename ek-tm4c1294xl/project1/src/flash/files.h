@@ -10,11 +10,13 @@ FILES.H
 
 
 void    OpenOut(uint  wPage);
+void    ClearOut(void);
 boolean Save(void  *pbBase, uint  wSize, format  fo);
 boolean Clean(uint  wSize, format  fo);
 boolean CloseOut(format  fo);
 
 boolean OpenIn(uint  wPage);
+void    ClearIn(void);
 boolean Load(void  *pbBase, uint  wSize);
 
 boolean SaveBuff(uint wPage, void *pbBuff, uint wSize, format  fo);

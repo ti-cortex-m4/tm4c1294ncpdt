@@ -435,7 +435,7 @@ boolean GetFlashChecksum(void)
 
   if ((bCRCHi != 0x00) && (bCRCLo != 0x00))
   {
-    if ((bCRCHi != 0x70) && (bCRCLo != 0x7F))
+    if ((bCRCHi != 0x0F) && (bCRCLo != 0x74))
       return FALSE;
   }
 

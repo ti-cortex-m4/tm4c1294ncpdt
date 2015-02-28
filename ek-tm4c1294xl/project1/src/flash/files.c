@@ -27,6 +27,12 @@ void    OpenOut2(uint  wPage)
 }
 
 
+void ClearOut(void)
+{
+  memset(&mpbPageOut, 0, sizeof(mpbPageOut));
+}
+
+
 boolean Save(void  *pbBase, uint  wSize, format  fo)
 {
 uint    wFree;
@@ -101,6 +107,12 @@ boolean OpenIn(uint  wPage)
   wByteIn = 0;
 
   return( SafePageRead() );
+}
+
+
+void ClearIn(void)
+{
+  memset(&mpbPageIn, 0, sizeof(mpbPageIn));
 }
 
 
