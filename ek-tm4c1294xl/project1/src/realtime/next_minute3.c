@@ -32,6 +32,8 @@ void    NextMinute3(void)
   SaveImpDayBuff();
   SaveImpMonBuff();
   SaveImpAbsBuff();
+
+  SaveTimeCurr(); // TODO another place
 }
 
 

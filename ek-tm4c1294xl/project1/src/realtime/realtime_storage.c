@@ -13,6 +13,7 @@ REALTIME_STORAGE.C
 boolean SavePointersMnt(void)
 {
   OpenOut(FLS_PTRMNT);
+  ClearOut();
 
   if (Save(&ibSoftMnt, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
@@ -32,6 +33,7 @@ boolean LoadPointersMnt(void)
 boolean SavePointersHou(void)
 {
   OpenOut(FLS_PTRHOU);
+  ClearOut();
 
   if (Save(&ibSoftHou, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
@@ -58,6 +60,7 @@ boolean LoadPointersHou(void)
 boolean SavePointersDay(void)
 {
   OpenOut(FLS_PTRDAY);
+  ClearOut();
 
   if (Save(&ibSoftDay, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
@@ -84,6 +87,7 @@ boolean LoadPointersDay(void)
 boolean SavePointersMon(void)
 {
   OpenOut(FLS_PTRMON);
+  ClearOut();
 
   if (Save(&ibSoftMon, sizeof(uchar), FRM_DEFAULT) == FALSE)
     return FALSE;
@@ -109,11 +113,25 @@ boolean LoadPointersMon(void)
 
 boolean SaveTimeCurr(void)
 {
-  return SaveBuff(FLS_TICURR, &tiCurr, sizeof(time), FRM_DEFAULT);
+  OpenOut(FLS_TICURR);
+  ClearOut();
+
+  if (Save(&tiCurr, sizeof(time), FRM_DEFAULT) == FALSE)
+    return FALSE;
+
+  if (Save(&tiPrev, sizeof(time), FRM_DEFAULT) == FALSE)
+    return FALSE;
+
+  return CloseOut(FRM_DEFAULT);
 }
 
 
 boolean LoadTimeCurr(void)
 {
-  return LoadBuff(FLS_TICURR, &tiCurr, sizeof(time));
+  OpenIn(FLS_TICURR);
+
+  if (Load(&tiCurr, sizeof(time)) == FALSE)
+    return FALSE;
+
+  return Load(&tiPrev, sizeof(time));
 }
