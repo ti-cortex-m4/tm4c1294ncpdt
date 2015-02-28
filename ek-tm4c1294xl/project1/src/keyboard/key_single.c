@@ -7,7 +7,7 @@ KEY_SINGLE.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../realtime/realtime.h"
 #include        "../digitals/digitals.h"

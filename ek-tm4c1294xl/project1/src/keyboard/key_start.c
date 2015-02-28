@@ -8,7 +8,7 @@ KEY_START.C
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_program.h"
 #include        "../memory/mem_tariffs.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../tariffs/tariffs.h"
 #include        "../access.h"

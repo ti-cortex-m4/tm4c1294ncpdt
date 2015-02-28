@@ -4,12 +4,12 @@ KEYBOARD.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "memory/mem_settings.h"
-#include        "include/programs.h"
-#include        "include/programs2.h"
-#include        "delay.h"
-#include        "beep.h"
+#include        "../main.h"
+#include        "../memory/mem_settings.h"
+#include        "../include/programs.h"
+#include        "../include/programs2.h"
+#include        "../delay.h"
+#include        "../beep.h"
 
 
 

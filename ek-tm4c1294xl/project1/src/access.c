@@ -6,7 +6,7 @@ ACCESS.C
 
 #include        <string.h>
 #include        "main.h"
-#include        "keyboard.h"
+#include        "keyboard/keyboard.h"
 #include        "memory/mem_settings.h"
 
 

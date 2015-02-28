@@ -20,7 +20,7 @@ TODO .C
 #include "utils/uartstdio.h"
 #include "src/display/lcd.h"
 #include "src/rtc.h"
-#include "src/keyboard.h"
+#include "src/keyboard/keyboard.h"
 #include "src/flash/at45.h"
 #include "src/display/display.h"
 #include "src/timer0.h"
@@ -40,11 +40,7 @@ TODO .C
 #include "src/realtime/realtime_init.h"
 #include "src/output/response_crc.h"
 
-// The error routine that is called if the driver library encounters an error.
-#ifdef DEBUG
-void __error__(char *pcFilename, uint32_t ui32Line) {
-}
-#endif
+
 
 int main(void) {
 	uint32_t ui32SysClock;
@@ -82,7 +78,7 @@ int main(void) {
     IntMasterEnable();
 
     while (1) {
-//    	Realtime();
+    	Realtime();
     	Keyboard();
     	ResponseCRC_Full();
     }

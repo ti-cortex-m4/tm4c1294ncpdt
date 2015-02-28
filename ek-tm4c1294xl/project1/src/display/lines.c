@@ -5,7 +5,7 @@ LINES.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../keyboard.h"
+#include        "../keyboard/keyboard.h"
 #include        "../engine.h"
 #include        "display.h"
 

@@ -9,7 +9,7 @@ KEY_FACTORS.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../memory/mem_current.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../engine.h"
 #include        "../energy.h"

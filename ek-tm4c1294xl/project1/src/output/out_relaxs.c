@@ -9,7 +9,7 @@ OUT_RELAXS.C
 #include        "../memory/mem_tariffs.h"
 #include        "../serial/ports.h"
 #include        "../timedate.h"
-#include        "../keyboard.h"
+#include        "../keyboard/keyboard.h"
 #include        "../tariffs/relaxs.h"
 #include        "../flash/files.h"
 

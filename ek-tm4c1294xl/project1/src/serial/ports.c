@@ -7,9 +7,11 @@ PORTS.C
 #include        "../main.h"
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_settings.h"
+#include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_serial0.h"
 #include        "../memory/mem_realtime.h"
 #include        "../include/queries.h"
+#include        "../realtime/realtime.h"
 #include        "../crc-16.h"
 #include        "ports_stack.h"
 #include        "ports_common.h"
@@ -74,9 +76,9 @@ void    Outptr(void  *pData, uint  wSize)
 
   InitPushCRC();
 
-  PushChar( 0/*GetHouIndex()*/ );
-  PushChar( 0/*mpibEngCurrTariff[ GetHouIndex() ]*/ );
-  PushChar( 0/*mpibPowCurrTariff[ GetHouIndex() ]*/ );
+  PushChar( GetCurrHouIndex() );
+  PushChar( mpibEngCurrTariff[ GetCurrHouIndex() ] );
+  PushChar( mpibPowCurrTariff[ GetCurrHouIndex() ] );
 
   PushChar(ibSoftMnt);
   PushInt(iwHardHou);

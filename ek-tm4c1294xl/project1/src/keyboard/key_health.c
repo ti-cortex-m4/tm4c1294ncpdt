@@ -5,7 +5,7 @@ KEY_HEALTH.H
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../health.h"
 

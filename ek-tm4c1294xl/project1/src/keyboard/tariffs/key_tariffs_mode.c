@@ -7,7 +7,7 @@ KEY_TARIFFS_MODE.Ñ
 #include        "../../main.h"
 #include        "../../memory/mem_tariffs.h"
 #include        "../../memory/mem_program.h"
-#include        "../../keyboard.h"
+#include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../access.h"
 #include        "../../tariffs/zones.h"

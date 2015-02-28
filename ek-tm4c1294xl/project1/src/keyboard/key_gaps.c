@@ -6,7 +6,7 @@ KEY_GAPS.C
 
 #include        "../main.h"
 #include        "../memory/mem_tariffs.h"
-#include        "../keyboard.h"
+#include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../timedate.h"
 #include        "../tariffs/gaps.h"

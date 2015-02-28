@@ -9,7 +9,7 @@ OUT_GROUPS.C
 #include        "../memory/mem_groups.h"
 #include        "../memory/mem_program.h"
 #include        "../serial/ports.h"
-#include        "../keyboard.h"
+#include        "../keyboard/keyboard.h"
 #include        "../groups.h"
 
 
