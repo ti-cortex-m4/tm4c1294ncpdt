@@ -54,11 +54,11 @@ int main(void) {
 	InitLCD();
 	InitFlash();
 	InitRTC();
+
+	InitSettings();
 	InitKeyboard();
 	InitSlide();
 	InitDisplay();
-
-	InitSettings();
 	InitImpulses();
 	InitFactors();
 	InitGroups();
@@ -78,6 +78,8 @@ int main(void) {
     IntMasterEnable();
 
     while (1) {
+    	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM))
+
     	Realtime();
     	Keyboard();
     	ResponseCRC_Full();
