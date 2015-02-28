@@ -9,7 +9,7 @@ REALTIME_INIT.C
 #include        "../memory/mem_settings.h"
 #include        "../flash/records.h"
 #include        "../timedate.h"
-#include        "../rtc.h"
+#include        "../hardware/rtc.h"
 #include        "../display/display.h"
 #include        "../hardware/watchdog.h"
 #include        "realtime.h"

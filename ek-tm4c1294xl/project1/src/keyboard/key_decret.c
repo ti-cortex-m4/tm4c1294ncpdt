@@ -10,7 +10,7 @@ KEY_DECRET.C
 #include        "../display/display.h"
 #include        "../beep.h"
 #include        "../decret.h"
-#include        "../rtc.h"
+#include        "../hardware/rtc.h"
 
 
 

@@ -11,7 +11,7 @@ KEY_RELAXS.C
 #include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../timedate.h"
-#include        "../../rtc.h"
+#include        "../../hardware/rtc.h"
 #include        "../../tariffs/relaxs.h"
 #include        "../../flash/files.h"
 
