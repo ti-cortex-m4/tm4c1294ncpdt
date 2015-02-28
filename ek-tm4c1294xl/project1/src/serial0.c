@@ -9,9 +9,9 @@
 #include        "driverlib/uart.h"
 #include 		"memory/mem_ports.h"
 #include 		"memory/mem_serial0.h"
-#include 		"flow.h"
+#include 		"serial/flow.h"
 #include 		"serial/ports.h"
-#include 		"bulk.h"
+#include 		"serial/bulk.h"
 #include 		"crc-16.h"
 #include 		"uarts.h"
 
