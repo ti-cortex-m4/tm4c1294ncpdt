@@ -14,6 +14,7 @@ REALTIME_START.C
 #include        "../energy.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/profile.h"
+#include        "realtime_storage.h"
 
 
 
@@ -23,15 +24,19 @@ uchar    c;
 real     re;
 
   ibSoftMnt = 0;
+  SavePointersMnt();
 
   ibSoftHou = 0;
   iwHardHou = 0;
+  SavePointersHou();
 
   ibSoftDay = 0;
   ibHardDay = 0;
+  SavePointersDay();
 
   ibSoftMon = 0;
   ibHardMon = (GetCurrTimeDate()->bMonth) - 1;
+  SavePointersMon();
 
   cbSummer = 0;
   cbWinter = 0;
