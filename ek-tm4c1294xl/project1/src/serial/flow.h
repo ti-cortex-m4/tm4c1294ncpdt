@@ -4,10 +4,6 @@ FLOW.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-
-
-
 void    InitFlow(void);
 void    RepeatFlow(void);
 
