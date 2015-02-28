@@ -8,7 +8,7 @@ KEY_SEASON.C
 #include        "../memory/mem_settings.h"
 #include        "keyboard.h"
 #include        "../display/display.h"
-#include        "../rtc.h"
+#include        "../hardware/rtc.h"
 #include        "../timedate.h"
 
 

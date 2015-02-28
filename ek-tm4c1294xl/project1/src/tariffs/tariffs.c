@@ -12,7 +12,7 @@ TARIFFS.C
 #include        "../delay.h"
 #include        "../flash/files.h"
 #include        "../access.h"
-#include        "../rtc.h"
+#include        "../hardware/rtc.h"
 #include        "../timedate.h"
 #include        "zones.h"
 #include        "oldtariffs.h"

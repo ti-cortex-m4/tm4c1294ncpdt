@@ -8,7 +8,7 @@ DECRET.C
 #include        "main.h"
 #include        "memory/mem_settings.h"
 #include        "timedate.h"
-#include        "rtc.h"
+#include        "hardware/rtc.h"
 
 
 

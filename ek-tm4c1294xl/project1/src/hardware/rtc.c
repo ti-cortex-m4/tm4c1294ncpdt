@@ -4,9 +4,9 @@ RTC.C
  DS3234EN
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "timedate.h"
-#include        "display/lines.h"
+#include        "../main.h"
+#include        "../timedate.h"
+#include        "../display/lines.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"

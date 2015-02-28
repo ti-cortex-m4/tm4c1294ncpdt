@@ -10,7 +10,7 @@
 #include        "../memory/mem_settings.h"
 #include        "../serial/ports.h"
 #include        "../timedate.h"
-#include        "../rtc.h"
+#include        "../hardware/rtc.h"
 #include        "../flash/files.h"
 #include        "../tariffs/gaps.h"
 

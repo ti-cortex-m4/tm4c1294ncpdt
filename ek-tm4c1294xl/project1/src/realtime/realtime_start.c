@@ -9,7 +9,7 @@ REALTIME_START.C
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_factors.h"
 #include        "../memory/mem_energy.h"
-#include        "../rtc.h"
+#include        "../hardware/rtc.h"
 #include        "../impulses/impulses.h"
 #include        "../energy.h"
 #include        "../digitals/digitals.h"

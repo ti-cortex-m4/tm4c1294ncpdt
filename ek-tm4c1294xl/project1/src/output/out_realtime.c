@@ -9,6 +9,7 @@
 #include        "../memory/mem_realtime.h"
 #include        "../serial/ports.h"
 #include        "../realtime/realtime.h"
+#include        "../hardware/rtc.h"
 
 
 
@@ -16,6 +17,7 @@ void    OutRealtime(void)
 {
 	InitPushCRC();
 
+	PushTime(GetCurrTimeDate());
 	PushTime(&tiCurr);
 	PushTime(&tiPrev);
 
@@ -42,5 +44,5 @@ void    OutRealtime(void)
 	PushInt(cwMonths);
 	PushInt(cwYears);
 
-	Output((6 + 6) + (1 + 1 + 1) + 1 + ((2 + 2) + (2 + 2) + (2 + 2) + (2 + 2)) + (4 + 4 + 4 + 4 + 2 + 2 + 2));
+	Output((6 + 6 + 6) + (1 + 1 + 1) + 1 + ((2 + 2) + (2 + 2) + (2 + 2) + (2 + 2)) + (4 + 4 + 4 + 4 + 2 + 2 + 2));
 }
