@@ -34,7 +34,7 @@ uint    w;
       {
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
-          PushInt(mpwImpMntCan1[ PrevSoftMnt() ][ c ]);
+          PushInt(mpwImpMntCan[ PrevSoftMnt() ][ c ]);
           w += sizeof(uint);
         }
       }
@@ -65,7 +65,7 @@ real    re;
       {
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
-          re = GetCanMntInt2Real(mpwImpMntCan1[ PrevSoftMnt() ], c, 20);
+          re = GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], c, 20);
           PushReal(re);
 
           w += sizeof(real);
@@ -90,7 +90,7 @@ void    OutImpCanMntExt(void)
   {
   	if (LoadImpMnt((bMINUTES+ibHardMnt-1) % bMINUTES) == FALSE) { Result(bRES_BADFLASH); return; }
 
-    Push( &mpwImpMntCan1[ PrevSoftMnt() ], sizeof(uint)*bCANALS );
+    Push( &mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS );
     OutptrOutBuff(sizeof(uint)*bCANALS);
   }
 }
@@ -115,7 +115,7 @@ real    re;
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
       {
-        re = GetCanMntInt2Real(mpwImpMntCan1[ PrevSoftMnt() ], c, 20);
+        re = GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], c, 20);
         PushReal(re);
 
         w += sizeof(real);

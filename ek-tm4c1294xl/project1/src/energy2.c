@@ -18,14 +18,14 @@ boolean SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom)
 {
   if ((fCurr == 1) && (ibMntTo == ibHardMnt))
   {
-    memcpy(mpwImpMntCan1[ ibSoftMnt ], mpwImpMntCan1[ PrevSoftMnt() ], sizeof(uint)*bCANALS);
+    memcpy(mpwImpMntCan[ ibSoftMnt ], mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS);
     return TRUE;
   }
   else
   {
     OpenOut(FLS_IMPMNTCAN + ibMntTo*UINTCAN_PAGES);
 
-    if (Save(mpwImpMntCan1[ ibMntFrom ], sizeof(uint)*bCANALS) == FALSE)
+    if (Save(mpwImpMntCan[ ibMntFrom ], sizeof(uint)*bCANALS) == FALSE)
       return FALSE;
 
     return( CloseOut() );
@@ -37,13 +37,13 @@ boolean LoadImpMnt(uchar  ibMntFrom)
 {
   if (ibMntFrom == ibHardMnt)
   {
-    memcpy(mpwImpMntCan1[ PrevSoftMnt() ], mpwImpMntCan1[ ibSoftMnt ], sizeof(uint)*bCANALS);
+    memcpy(mpwImpMntCan[ PrevSoftMnt() ], mpwImpMntCan[ ibSoftMnt ], sizeof(uint)*bCANALS);
     return TRUE;
   }
   else
   {
     OpenIn(FLS_IMPMNTCAN + ibMntFrom*UINTCAN_PAGES);
-    return(Load(mpwImpMntCan1[ PrevSoftMnt() ], sizeof(uint)*bCANALS));
+    return(Load(mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS));
   }
 }
 

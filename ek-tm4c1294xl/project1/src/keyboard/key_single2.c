@@ -12,6 +12,7 @@ KEY_SINGLE2.C
 #include        "../realtime/realtime.h"
 #include        "../energy.h"
 #include        "../energy2.h"
+#include        "../energy4.h"
 
 
 
@@ -77,7 +78,7 @@ void    ShowSingle2(void)
   {
     case bGET_POWCANCURRMNT:
     	LoadImpMnt( PrevHardMnt() );
-      ShowReal(GetCanMntInt2Real(mpwImpMntCan1[ PrevSoftMnt() ],ibX,20));
+      ShowReal(GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
       break;
 
     case bGET_POWCANPREVHOU:      

@@ -21,8 +21,6 @@ real    GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
 
 real    GetGrpHouInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul);
 real    GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
-real    GetPowGrpHouCurr(uchar  ibGrp, uchar  bMul);
-real    GetPowCanHouCurr(uchar  ibCan, uchar  bMul);
 
 real    GetGrpImp2RealEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);
 real    GetCanImp2RealEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
