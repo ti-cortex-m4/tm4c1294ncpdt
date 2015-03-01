@@ -63,6 +63,13 @@ uchar   PrevSoftMnt(void)
 }
 
 
+uchar   PrevHardMnt(void)
+{
+  if (ibHardMnt > 0) return(ibHardMnt - 1);
+  else               return(bMINUTES-1);
+}
+
+
 
 uchar   PrevSoftHou(void)
 {

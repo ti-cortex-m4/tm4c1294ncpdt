@@ -18,6 +18,9 @@ boolean SavePointersMnt(void)
   if (Save(&ibSoftMnt, sizeof(uchar)) == FALSE)
     return FALSE;
 
+  if (Save(&ibHardMnt, sizeof(uchar)) == FALSE)
+    return FALSE;
+
   return CloseOut();
 }
 
@@ -25,7 +28,11 @@ boolean SavePointersMnt(void)
 boolean LoadPointersMnt(void)
 {
   OpenIn(FLS_PTRMNT);
-  return Load(&ibSoftMnt, sizeof(uchar));
+
+  if (Load(&ibSoftMnt, sizeof(uchar)) == FALSE)
+    return FALSE;
+
+  return Load(&ibHardMnt, sizeof(uchar));
 }
 
 

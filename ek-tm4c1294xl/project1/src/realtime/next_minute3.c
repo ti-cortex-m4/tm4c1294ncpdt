@@ -21,7 +21,7 @@ void    NextMinute3(void)
   memset(&mpwImpMntCan[(ibSoftMnt+1) % bMINUTES], 0, sizeof(uint)*bCANALS); // TODO Init/Reset mpwImpMntCan
 
   DisableImpulses();
-  memcpy(&mpwImpMntCanCurr, &mpwImpMntCan[ibSoftMnt], sizeof(uint)*bCANALS);
+  memcpy(&mpwImpMntCanCurr, &mpwImpMntCan1[ibSoftMnt], sizeof(uint)*bCANALS);
   if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
   SavePointersMnt();
   EnableImpulses();
@@ -44,7 +44,7 @@ void    NextMinute3Spec(void)
   memset(&mpwImpMntCan[(ibSoftMnt+1) % bMINUTES], 0, sizeof(uint)*bCANALS); // TODO Init/Reset mpwImpMntCan
 
   DisableImpulses();
-  memcpy(&mpwImpMntCanCurr, &mpwImpMntCan[ibSoftMnt], sizeof(uint)*bCANALS);
+  memcpy(&mpwImpMntCanCurr, &mpwImpMntCan1[ibSoftMnt], sizeof(uint)*bCANALS);
   if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
   EnableImpulses();
 

@@ -6,7 +6,7 @@ MEM_REALTIME.H
 
 extern  time                    tiCurr, tiPrev;
 
-extern  uchar                   ibSoftMnt,
+extern  uchar                   ibSoftMnt, ibHardMnt,
                                 ibSoftHou,
                                 ibSoftDay, ibHardDay,
                                 ibSoftMon, ibHardMon;

@@ -28,7 +28,7 @@ FLASH.H
 // количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
 #define bIMPULSE_CAN    (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
 #define bPOWER_GRP      (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
-#define bREAL_CAN       (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
+#define REALCAN_PAGES   (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
 
 
 // количество страниц для графика профилей по получасам
@@ -74,24 +74,26 @@ typedef enum
   FLS_GAPS              = FLS_GAPS_FLAG + 1,
 
   FLS_TRANS_ENG         = FLS_GAPS + sizeof(gaps)/wFREEPAGE_SIZE + 1,
-  FLS_TRANS_CNT         = FLS_TRANS_ENG + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
-  FLS_PULSE_HOU         = FLS_TRANS_CNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
-  FLS_PULSE_MNT         = FLS_PULSE_HOU + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_TRANS_CNT         = FLS_TRANS_ENG + REALCAN_PAGES,
+  FLS_PULSE_HOU         = FLS_TRANS_CNT + REALCAN_PAGES,
+  FLS_PULSE_MNT         = FLS_PULSE_HOU + REALCAN_PAGES,
 
-  FLS_COUNT             = FLS_PULSE_MNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
-  FLS_LOSSE             = FLS_COUNT + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
-  FLS_LEVEL             = FLS_LOSSE + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_COUNT             = FLS_PULSE_MNT + REALCAN_PAGES,
+  FLS_LOSSE             = FLS_COUNT + REALCAN_PAGES,
+  FLS_LEVEL             = FLS_LOSSE + REALCAN_PAGES,
 
-  FLS_DIGITALS          = FLS_LEVEL + sizeof(real)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_DIGITALS          = FLS_LEVEL + REALCAN_PAGES,
 
-  FLS_IMPHOUCAN         = FLS_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_IMPMNTCAN         = FLS_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_IMPHOUCAN         = FLS_IMPMNTCAN + bMINUTES,
+
   FLS_IMPDAYCAN         = FLS_IMPHOUCAN + IMPHOUCAN_PAGES,
   FLS_IMPMONCAN         = FLS_IMPDAYCAN + bIMPULSE_CAN*bDAYS,
   FLS_POWDAYGRP         = FLS_IMPMONCAN + bIMPULSE_CAN*bMONTHS,
   FLS_POWMONGRP         = FLS_POWDAYGRP + bPOWER_GRP*bDAYS,
   FLS_CNTMONCAN         = FLS_POWMONGRP + bPOWER_GRP*bMONTHS,
 
-  FLS_IMPHOUCAN_BUFF    = FLS_CNTMONCAN + bREAL_CAN*bMONTHS,
+  FLS_IMPHOUCAN_BUFF    = FLS_CNTMONCAN + REALCAN_PAGES*bMONTHS,
   FLS_IMPDAYCAN_BUFF    = FLS_IMPHOUCAN_BUFF + 1,
   FLS_IMPMONCAN_BUFF    = FLS_IMPDAYCAN_BUFF + bIMPULSE_CAN,
   FLS_IMPABSCAN_BUFF    = FLS_IMPMONCAN_BUFF + bIMPULSE_CAN,
@@ -99,7 +101,7 @@ typedef enum
   FLS_POWMONGRP_BUFF    = FLS_POWDAYGRP_BUFF + bPOWER_GRP,
   FLS_CNTMONCAN_BUFF    = FLS_POWMONGRP_BUFF + bPOWER_GRP,
 
-  FLS_PTRMNT            = FLS_CNTMONCAN_BUFF + bREAL_CAN,
+  FLS_PTRMNT            = FLS_CNTMONCAN_BUFF + REALCAN_PAGES,
   FLS_PTRHOU            = FLS_PTRMNT + 1,
   FLS_PTRDAY            = FLS_PTRHOU + 1,
   FLS_PTRMON            = FLS_PTRDAY + 1,

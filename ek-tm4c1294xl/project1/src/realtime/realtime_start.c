@@ -44,7 +44,7 @@ real     re;
   cbWinter = 0;
 
   DisableImpulses();
-  memset(&mpwImpMntCan[ibSoftMnt], 0, sizeof(uint)*bCANALS);
+  memset(&mpwImpMntCan1[ibSoftMnt], 0, sizeof(uint)*bCANALS);
   EnableImpulses(); // TODO EnableImpulses
 
   MakeCurrHouCan();

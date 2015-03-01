@@ -29,7 +29,7 @@ static uint             wPage;
 void    ShowFlashErase(void)
 {
   ResetWDT();
-  ShowPercent((ulong)100*(++wPage)/(IMPHOUCAN_PAGES + bDAYS*2 + bMONTHS*3 + 7));
+  ShowPercent((ulong)100*(++wPage)/(IMPHOUCAN_PAGES + bMINUTES + bDAYS*2 + bMONTHS*3 + 7));
 }
 
 
@@ -67,7 +67,14 @@ uint    i;
   ibSoftDay = 0;
   ibSoftMon = 0; // TODO
 
-  for (wPageOut=FLS_IMPHOUCAN; wPageOut<FLS_IMPDAYCAN; wPageOut++) 
+  for (wPageOut=FLS_IMPMNTCAN; wPageOut<(FLS_IMPMNTCAN+bMINUTES); wPageOut++)
+  {
+    if (SafePageErase() == FALSE) return FALSE;
+    if (GetFlashStatus() != 0) return FALSE;
+    ShowFlashErase();
+  }
+
+  for (wPageOut=FLS_IMPHOUCAN; wPageOut<(FLS_IMPHOUCAN+IMPHOUCAN_PAGES); wPageOut++)
   {
     if (SafePageErase() == FALSE) return FALSE;
     if (GetFlashStatus() != 0) return FALSE;
