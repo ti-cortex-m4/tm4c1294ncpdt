@@ -10,6 +10,42 @@ ENERGY2.C
 #include        "energy.h"
 #include        "realtime/realtime.h"
 #include        "flash/files.h"
+#include        "energy2.h"
+
+
+
+boolean SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom)
+{
+  if ((fCurr == 1) && (ibMntTo == ibHardMnt))
+  {
+    memcpy(mpwImpMntCan1[ ibSoftMnt ], mpwImpMntCan1[ PrevSoftMnt() ], sizeof(uint)*bCANALS);
+    return TRUE;
+  }
+  else
+  {
+    OpenOut(FLS_IMPMNTCAN + ibMntTo*UINTCAN_PAGES);
+
+    if (Save(mpwImpMntCan1[ ibMntFrom ], sizeof(uint)*bCANALS) == FALSE)
+      return FALSE;
+
+    return( CloseOut() );
+  }
+}
+
+
+boolean LoadImpMnt(uchar  ibMntFrom)
+{
+  if (ibMntFrom == ibHardMnt)
+  {
+    memcpy(mpwImpMntCan1[ PrevSoftMnt() ], mpwImpMntCan1[ ibSoftMnt ], sizeof(uint)*bCANALS);
+    return TRUE;
+  }
+  else
+  {
+    OpenIn(FLS_IMPMNTCAN + ibMntFrom*UINTCAN_PAGES);
+    return(Load(mpwImpMntCan1[ PrevSoftMnt() ], sizeof(uint)*bCANALS));
+  }
+}
 
 
 

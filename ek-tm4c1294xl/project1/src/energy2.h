@@ -1,8 +1,11 @@
 /*------------------------------------------------------------------------------
-ENERGY.H
+ENERGY2.H
 
 
 ------------------------------------------------------------------------------*/
+
+boolean SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom);
+boolean LoadImpMnt(uchar  ibMntFrom);
 
 boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom);
 boolean LoadImpHou(uint  iwHouFrom);

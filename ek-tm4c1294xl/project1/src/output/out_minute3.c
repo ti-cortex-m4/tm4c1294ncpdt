@@ -10,13 +10,15 @@ OUT_MINUTE3.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../serial/ports.h"
+#include        "../realtime/realtime.h"
 #include        "../energy.h"
+#include        "../energy2.h"
 
 
 
 void    OutImpMntCanExt(void)
 {
-uchar   c, i, j;
+uchar   c, i;
 uint    w;
 
   if (enGlobal != GLB_PROGRAM)
@@ -26,13 +28,13 @@ uint    w;
 
     for (i=0; i<bMINUTES; i++)
     {
-      j = (bMINUTES+ibSoftMnt-i) % bMINUTES;
+    	if (LoadImpMnt((bMINUTES+ibHardMnt-i) % bMINUTES) == FALSE) { Result(bRES_BADFLASH); return; }
 
       for (c=0; c<bCANALS; c++)
       {
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
-          PushInt(mpwImpMntCan[ j ][ c ]);
+          PushInt(mpwImpMntCan1[ PrevSoftMnt() ][ c ]);
           w += sizeof(uint);
         }
       }
@@ -46,7 +48,7 @@ uint    w;
 
 void    OutPowMntCanExt(void)
 {
-uchar   c, i, m;
+uchar   c, i;
 uint    w;
 real    re;
 
@@ -57,13 +59,13 @@ real    re;
 
     for (i=0; i<bMINUTES; i++)
     {
-      m = (bMINUTES+ibSoftMnt-i) % bMINUTES;
+    	if (LoadImpMnt((bMINUTES+ibHardMnt-i) % bMINUTES) == FALSE) { Result(bRES_BADFLASH); return; }
 
       for (c=0; c<bCANALS; c++)
       {
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
-          re = GetCanMntInt2Real(mpwImpMntCan[ m ], c, 20);
+          re = GetCanMntInt2Real(mpwImpMntCan1[ PrevSoftMnt() ], c, 20);
           PushReal(re);
 
           w += sizeof(real);
@@ -86,7 +88,9 @@ void    OutImpCanMntExt(void)
     Result(bRES_NEEDWORK);
   else
   {
-    Push( &mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ], sizeof(uint)*bCANALS );
+  	if (LoadImpMnt((bMINUTES+ibHardMnt-1) % bMINUTES) == FALSE) { Result(bRES_BADFLASH); return; }
+
+    Push( &mpwImpMntCan1[ PrevSoftMnt() ], sizeof(uint)*bCANALS );
     OutptrOutBuff(sizeof(uint)*bCANALS);
   }
 }
@@ -105,11 +109,13 @@ real    re;
     Result(bRES_NEEDWORK);
   else
   {
+  	if (LoadImpMnt((bMINUTES+ibHardMnt-1) % bMINUTES) == FALSE) { Result(bRES_BADFLASH); return; }
+
     for (c=0; c<bCANALS; c++)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
       {
-        re = GetCanMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ], c, 20);
+        re = GetCanMntInt2Real(mpwImpMntCan1[ PrevSoftMnt() ], c, 20);
         PushReal(re);
 
         w += sizeof(real);
