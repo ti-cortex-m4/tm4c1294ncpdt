@@ -22,6 +22,7 @@ AT45.C
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
+#include "at45.h"
 
 
 //Биты управления SPI
@@ -342,11 +343,11 @@ uint    i;
 }
 
 
-boolean SafePageWrite(format  fo)
+boolean SafePageWrite(void)
 {
 uchar   i;
 
-  mpbPageOut[wFREEPAGE_SIZE+0] = fo;
+  mpbPageOut[wFREEPAGE_SIZE+0] = 0;
   mpbPageOut[wFREEPAGE_SIZE+1] = bBlockOut++;
 
   mpbPageOut[wFREEPAGE_SIZE+2] = wPageOut / 0x100;

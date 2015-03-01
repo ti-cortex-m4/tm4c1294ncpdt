@@ -86,10 +86,10 @@ boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
   {
     OpenOut(FLS_IMPHOUCAN + iwHouTo*UINTCAN_PAGES);
 
-    if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS, FRM_IMPULSE) == FALSE)
+    if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS) == FALSE)
       return FALSE;
 
-    return( CloseOut(FRM_IMPULSE) );
+    return( CloseOut() );
   }
 }
 
@@ -145,7 +145,7 @@ boolean SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
     return TRUE;
   }
   else
-    return SaveBuff(FLS_IMPDAYCAN + ibDayTo*bIMPULSE_CAN, mpimDayCan[ ibDayFrom ], sizeof(impulse)*bCANALS, FRM_IMPULSE);
+    return SaveBuff(FLS_IMPDAYCAN + ibDayTo*bIMPULSE_CAN, mpimDayCan[ ibDayFrom ], sizeof(impulse)*bCANALS);
 }
 
 
@@ -170,7 +170,7 @@ boolean SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
     return TRUE;
   }
   else
-  	return SaveBuff(FLS_IMPMONCAN + ibMonTo*bIMPULSE_CAN, mpimMonCan[ ibMonFrom ], sizeof(impulse)*bCANALS, FRM_IMPULSE);
+  	return SaveBuff(FLS_IMPMONCAN + ibMonTo*bIMPULSE_CAN, mpimMonCan[ ibMonFrom ], sizeof(impulse)*bCANALS);
 }
 
 
@@ -195,7 +195,7 @@ boolean SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
     return TRUE;
   }
   else
-    return SaveBuff(FLS_POWDAYGRP + ibDayTo*bPOWER_GRP, mppoDayGrp[ ibDayFrom ], sizeof(power)*bGROUPS, FRM_MAX_POWER);
+    return SaveBuff(FLS_POWDAYGRP + ibDayTo*bPOWER_GRP, mppoDayGrp[ ibDayFrom ], sizeof(power)*bGROUPS);
 }
 
 
@@ -220,7 +220,7 @@ boolean SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
     return TRUE;
   }
   else
-  	return SaveBuff(FLS_POWMONGRP + ibMonTo*bPOWER_GRP, mppoMonGrp[ ibMonFrom ], sizeof(power)*bGROUPS, FRM_MAX_POWER);
+  	return SaveBuff(FLS_POWMONGRP + ibMonTo*bPOWER_GRP, mppoMonGrp[ ibMonFrom ], sizeof(power)*bGROUPS);
 }
 
 
@@ -245,7 +245,7 @@ boolean SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
     return TRUE;
   }
   else
-    return SaveBuff(FLS_CNTMONCAN + ibMonTo*bREAL_CAN, mpreCntMonCan[ ibMonFrom ], sizeof(real)*bCANALS, FRM_REAL);
+    return SaveBuff(FLS_CNTMONCAN + ibMonTo*bREAL_CAN, mpreCntMonCan[ ibMonFrom ], sizeof(real)*bCANALS);
 }
 
 

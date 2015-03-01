@@ -15,10 +15,10 @@ boolean SavePointersMnt(void)
   OpenOut(FLS_PTRMNT);
   ClearOut();
 
-  if (Save(&ibSoftMnt, sizeof(uchar), FRM_DEFAULT) == FALSE)
+  if (Save(&ibSoftMnt, sizeof(uchar)) == FALSE)
     return FALSE;
 
-  return CloseOut(FRM_DEFAULT);
+  return CloseOut();
 }
 
 
@@ -35,13 +35,13 @@ boolean SavePointersHou(void)
   OpenOut(FLS_PTRHOU);
   ClearOut();
 
-  if (Save(&ibSoftHou, sizeof(uchar), FRM_DEFAULT) == FALSE)
+  if (Save(&ibSoftHou, sizeof(uchar)) == FALSE)
     return FALSE;
 
-  if (Save(&iwHardHou, sizeof(uint), FRM_DEFAULT) == FALSE)
+  if (Save(&iwHardHou, sizeof(uint)) == FALSE)
     return FALSE;
 
-  return CloseOut(FRM_DEFAULT);
+  return CloseOut();
 }
 
 
@@ -62,13 +62,13 @@ boolean SavePointersDay(void)
   OpenOut(FLS_PTRDAY);
   ClearOut();
 
-  if (Save(&ibSoftDay, sizeof(uchar), FRM_DEFAULT) == FALSE)
+  if (Save(&ibSoftDay, sizeof(uchar)) == FALSE)
     return FALSE;
 
-  if (Save(&ibHardDay, sizeof(uchar), FRM_DEFAULT) == FALSE)
+  if (Save(&ibHardDay, sizeof(uchar)) == FALSE)
     return FALSE;
 
-  return CloseOut(FRM_DEFAULT);
+  return CloseOut();
 }
 
 
@@ -89,13 +89,13 @@ boolean SavePointersMon(void)
   OpenOut(FLS_PTRMON);
   ClearOut();
 
-  if (Save(&ibSoftMon, sizeof(uchar), FRM_DEFAULT) == FALSE)
+  if (Save(&ibSoftMon, sizeof(uchar)) == FALSE)
     return FALSE;
 
-  if (Save(&ibHardMon, sizeof(uchar), FRM_DEFAULT) == FALSE)
+  if (Save(&ibHardMon, sizeof(uchar)) == FALSE)
     return FALSE;
 
-  return CloseOut(FRM_DEFAULT);
+  return CloseOut();
 }
 
 
@@ -116,13 +116,13 @@ boolean SaveTimeCurr(void)
   OpenOut(FLS_TICURR);
   ClearOut();
 
-  if (Save(&tiCurr, sizeof(time), FRM_DEFAULT) == FALSE)
+  if (Save(&tiCurr, sizeof(time)) == FALSE)
     return FALSE;
 
-  if (Save(&tiPrev, sizeof(time), FRM_DEFAULT) == FALSE)
+  if (Save(&tiPrev, sizeof(time)) == FALSE)
     return FALSE;
 
-  return CloseOut(FRM_DEFAULT);
+  return CloseOut();
 }
 
 

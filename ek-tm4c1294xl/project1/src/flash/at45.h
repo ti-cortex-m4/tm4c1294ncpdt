@@ -12,7 +12,7 @@ void    InitFlash(void);
 
 boolean SafePageErase(void);
 boolean SafePageRead(void);
-boolean SafePageWrite(format  fo);
+boolean SafePageWrite(void);
 
 uint    GetFlashStatus(void);
 boolean GetFlashChecksum(void);
