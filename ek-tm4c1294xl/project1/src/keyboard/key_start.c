@@ -16,7 +16,7 @@ KEY_START.C
 #include        "../groups.h"
 #include        "../realtime/realtime_start.h"
 #include        "../impulses/impulses.h"
-#include        "../hardware/rtc.h"
+#include        "../time/rtc.h"
 #include        "../factors.h"
 #include        "../flash/records.h"
 

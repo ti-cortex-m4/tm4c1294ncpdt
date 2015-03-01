@@ -9,9 +9,9 @@ KEY_TIMEDATE.C
 #include        "../memory/mem_realtime.h"
 #include        "keyboard.h"
 #include        "../display/display.h"
-#include        "../hardware/rtc.h"
-#include        "../timedate.h"
-#include        "../decret.h"
+#include        "../time/rtc.h"
+#include        "../time/timedate.h"
+#include        "../time/decret.h"
 
 
 

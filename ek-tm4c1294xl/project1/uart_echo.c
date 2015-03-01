@@ -19,7 +19,7 @@ TODO .C
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
 #include "src/display/lcd.h"
-#include "src/hardware/rtc.h"
+#include "src/time/rtc.h"
 #include "src/keyboard/keyboard.h"
 #include "src/flash/at45.h"
 #include "src/display/display.h"

@@ -9,8 +9,8 @@
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_settings.h"
 #include        "../serial/ports.h"
-#include        "../timedate.h"
-#include        "../hardware/rtc.h"
+#include        "../time/timedate.h"
+#include        "../time/rtc.h"
 #include        "../flash/files.h"
 #include        "../tariffs/gaps.h"
 

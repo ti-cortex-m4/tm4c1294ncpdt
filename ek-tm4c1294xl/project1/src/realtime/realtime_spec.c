@@ -7,7 +7,7 @@ REALTIME_SPEC.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
-#include        "../hardware/rtc.h"
+#include        "../time/rtc.h"
 
 
 

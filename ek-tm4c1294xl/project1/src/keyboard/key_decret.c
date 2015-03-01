@@ -9,8 +9,8 @@ KEY_DECRET.C
 #include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../beep.h"
-#include        "../decret.h"
-#include        "../hardware/rtc.h"
+#include        "../time/decret.h"
+#include        "../time/rtc.h"
 
 
 

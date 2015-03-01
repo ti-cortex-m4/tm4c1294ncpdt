@@ -10,8 +10,8 @@ KEY_RELAXS.C
 #include        "../../memory/mem_realtime.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
-#include        "../../timedate.h"
-#include        "../../hardware/rtc.h"
+#include        "../../time/timedate.h"
+#include        "../../time/rtc.h"
 #include        "../../tariffs/relaxs.h"
 #include        "../../flash/files.h"
 

@@ -5,7 +5,7 @@ RTC.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../timedate.h"
+#include        "../time/timedate.h"
 #include        "../display/lines.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
