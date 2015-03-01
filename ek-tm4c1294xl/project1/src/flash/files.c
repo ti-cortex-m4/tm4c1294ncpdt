@@ -16,15 +16,6 @@ void    OpenOut(uint  wPage)
 {
   wPageOut = wPage;
   wByteOut = 0;
-
-  bBlockOut = 0;
-}
-
-
-void    OpenOut2(uint  wPage)
-{
-  wPageOut = wPage;
-  wByteOut = 0;
 }
 
 
@@ -49,7 +40,7 @@ uint    i;
 
       if (SafePageWrite() == FALSE) return FALSE; // записываем буфер
 
-      OpenOut2(wPageOut + 1);                   // подготавливаемся к записи следующей страницы
+      OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
       for (i=0; i<wFree; i++)
     	  pbBase = (char *)pbBase + 1;                          // TODO переходим на следующую позицию источника данных
@@ -80,7 +71,7 @@ uint    wFree;
 
       if (SafePageWrite() == FALSE) return FALSE; // записываем буфер
 
-      OpenOut2(wPageOut + 1);                   // подготавливаемся к записи следующей страницы
+      OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
       wSize  -= wFree;                          // уменьшаем размер блока данных
     }
