@@ -9,7 +9,7 @@ MEM_ENERGY.C
 
 
 // массивы накопленных импульсов (по текущим трёмминутам)
-uint                    mpwImpCurrMntCan[bCANALS];
+uint                    mpwImpMntCanCurr[bCANALS];
 
 // массивы накопленных импульсов (по трёмминутам) TODO volatile
 uint                    mpwImpMntCan[bMINUTES][bCANALS];

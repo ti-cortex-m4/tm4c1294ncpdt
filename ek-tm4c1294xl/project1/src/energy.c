@@ -357,7 +357,7 @@ uint   w;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-      w = GetCanInt(mpwImpCurrMntCan,ibCan);
+      w = GetCanInt(mpwImpMntCanCurr,ibCan);
       mpwImpHouCan[ibSoftHou][ibCan] += w;
 
       AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, w);
@@ -379,7 +379,7 @@ uint   w;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-      w = GetCanInt(mpwImpCurrMntCan,ibCan);
+      w = GetCanInt(mpwImpMntCanCurr,ibCan);
       mpwImpHouCan[ibSoftHou][ibCan] += w;
 
       AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, w);
