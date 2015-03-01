@@ -179,3 +179,6 @@ boolean LoadFile(file const *pfl)
 {
   return LoadBuff(pfl->wPage, pfl->pbBuff, pfl->wSize);
 }
+
+
+// TODO читать побайтно и хранить счетчик записей

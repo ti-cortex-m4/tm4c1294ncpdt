@@ -15,6 +15,7 @@ REALTIME_INIT.C
 #include        "realtime.h"
 #include        "realtime_storage.h"
 
+#include        "../display/lcd.h"
 
 
 boolean RealtimeOffline(void)
@@ -74,6 +75,9 @@ time    tiT;
                    tiT.bDay,
                    tiT.bMonth,
                    tiT.bYear);
+
+    ShowMsgLCD2(0x80, szHi);
+    ShowMsgLCD2(0xC0, szLo);
 
     tiPrev = tiCurr;
   }
@@ -185,9 +189,9 @@ void    InitRealtime(void)
     tiPowerOff = tiCurr;
 
     AddSysRecord(EVE_PREVNEXTTIME2);
-//    if (RealtimeOffline() == TRUE) {
-//    } else {
-//    }
+    if (RealtimeOffline() == TRUE) {
+    } else {
+    }
     AddSysRecord(EVE_POSTNEXTTIME);
 
     tiPowerOn = tiCurr;
