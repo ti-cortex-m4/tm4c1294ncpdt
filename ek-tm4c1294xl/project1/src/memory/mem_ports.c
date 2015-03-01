@@ -11,15 +11,6 @@ MEM_PORTS.C
 // массив портов
 port                    mppoPorts[bPORTS];
 
-// флаг передачи 'AT'
-boolean     	       		boSendAT;
-
-// массив таймаутов передачи 'AT'
-uchar                   mpcbSendAT[bPORTS];
-
-// массив состояний передачи 'AT'
-answer                  mpanSendAT[bPORTS];
-
 // текущие счётчики таймаута на приём
 uint                    mpwInDelay[bPORTS];
 

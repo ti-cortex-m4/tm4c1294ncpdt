@@ -23,14 +23,6 @@ MAIN.H
 #include        "main_storage.h"
 
 
-typedef enum 
-{ 
-  ANS_BEGIN             =  0,           // начальное состояние
-  ANS_TIMEOUT           =  1,           // отработка таймаута
-  ANS_ANSWER            =  2            // передача команды
-} answer;
-
-
 // тип 'правило перехода на сезонное время'
 typedef enum
 {
