@@ -336,7 +336,7 @@ real    re;
   }
   else
   {
-    re  = GetCanInt(mpwImpMntCan[ibSoftMnt],ibCan) * GetCanReal(mpreValueCntMnt,ibCan);
+    re  = GetCanInt(mpwImpMntCan1[ibSoftMnt],ibCan) * GetCanReal(mpreValueCntMnt,ibCan);
     re += *PGetCanImpAll(mpimAbsCan,ibCan)         * GetCanReal(mpreValueCntHou,ibCan);
     re += GetCanReal(mpreCount,ibCan);
   }

@@ -28,7 +28,7 @@ void    OutRealtime(void)
 	PushChar(fActive);
 
 	PushInt(ibSoftMnt);
-	PushInt(0);
+	PushInt(ibHardMnt);
 	PushInt(ibSoftHou);
 	PushInt(iwHardHou);
 	PushInt(ibSoftDay);

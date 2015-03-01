@@ -12,7 +12,7 @@ MEM_ENERGY.C
 uint                    mpwImpMntCanCurr[bCANALS];
 
 // массивы накопленных импульсов (по трёмминутам) TODO volatile
-uint                    mpwImpMntCan[bMINUTES][bCANALS];
+uint                    mpwImpMntCan1[2][bCANALS];
 
 // массивы накопленных импульсов (по получасам)
 uint                    mpwImpHouCan[2][bCANALS];

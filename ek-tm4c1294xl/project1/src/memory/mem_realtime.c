@@ -12,7 +12,7 @@ MEM_REALTIME.S
 time                    tiCurr, tiPrev;
 
 // индексы по кольцевым буферам
-uchar                   ibSoftMnt,
+uchar                   ibSoftMnt, ibHardMnt,
                         ibSoftHou,
                         ibSoftDay, ibHardDay,
                         ibSoftMon, ibHardMon;
