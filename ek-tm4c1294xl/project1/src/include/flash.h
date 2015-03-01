@@ -73,7 +73,9 @@ typedef enum
   FLS_GAPS_FLAG         = FLS_RELAXS + sizeof(relaxs)/wFREEPAGE_SIZE + 1,
   FLS_GAPS              = FLS_GAPS_FLAG + 1,
 
-  FLS_TRANS_ENG         = FLS_GAPS + sizeof(gaps)/wFREEPAGE_SIZE + 1,
+  FLS_DECRET            = FLS_GAPS + sizeof(gaps)/wFREEPAGE_SIZE + 1,
+
+  FLS_TRANS_ENG         = FLS_DECRET + 1,
   FLS_TRANS_CNT         = FLS_TRANS_ENG + REALCAN_PAGES,
   FLS_PULSE_HOU         = FLS_TRANS_CNT + REALCAN_PAGES,
   FLS_PULSE_MNT         = FLS_PULSE_HOU + REALCAN_PAGES,
