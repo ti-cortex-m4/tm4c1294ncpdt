@@ -108,9 +108,9 @@ typedef enum
   FLS_PTRDAY            = FLS_PTRHOU + 1,
   FLS_PTRMON            = FLS_PTRDAY + 1,
 
-  FLS_TICURR            = FLS_PTRMON + 1,
+  FLS_REALTIME            = FLS_PTRMON + 1,
 
-  FLS_END               = FLS_TICURR + 1
+  FLS_END               = FLS_REALTIME + 1
 } flash;
 
 
