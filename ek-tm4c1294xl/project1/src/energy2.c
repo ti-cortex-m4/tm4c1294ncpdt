@@ -35,16 +35,27 @@ boolean SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom)
 
 boolean LoadImpMnt(uchar  ibMntFrom)
 {
+uchar   i;
+boolean bo;
+
   if (ibMntFrom == ibHardMnt)
   {
     memcpy(mpwImpMntCan[ PrevSoftMnt() ], mpwImpMntCan[ ibSoftMnt ], sizeof(uint)*bCANALS);
-    return TRUE;
+    bo = TRUE;
   }
   else
   {
     OpenIn(FLS_IMPMNTCAN + ibMntFrom*UINTCAN_PAGES);
-    return(Load(mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS));
+    bo = Load(mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS);
   }
+
+  for (i=0; i<bCANALS; i++)
+  {
+    if (GetCanInt(mpwImpMntCan[ PrevSoftMnt() ], i) == 0xFFFF)
+      SetCanInt(mpwImpMntCan[ PrevSoftMnt() ], i, 0);
+  }
+
+  return bo;
 }
 
 
