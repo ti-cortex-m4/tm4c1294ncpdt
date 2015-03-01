@@ -9,7 +9,7 @@
 #include        "../memory/mem_realtime.h"
 #include        "../serial/ports.h"
 #include        "../realtime/realtime.h"
-#include        "../hardware/rtc.h"
+#include        "../time/rtc.h"
 
 
 

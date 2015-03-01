@@ -5,10 +5,10 @@ DECRET.C
 ------------------------------------------------------------------------------*/
 
 #include        <string.h>
-#include        "main.h"
-#include        "memory/mem_settings.h"
+#include        "../main.h"
+#include        "../memory/mem_settings.h"
 #include        "timedate.h"
-#include        "hardware/rtc.h"
+#include        "rtc.h"
 
 
 

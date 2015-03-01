@@ -6,7 +6,7 @@ OUT_RTC.C
 
 #include        "../main.h"
 #include        "../serial/ports.h"
-#include        "../hardware/rtc.h"
+#include        "../time/rtc.h"
 
 
 

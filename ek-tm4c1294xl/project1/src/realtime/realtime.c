@@ -7,7 +7,7 @@ TODO атомарные операции
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
-#include        "../hardware/rtc.h"
+#include        "../time/rtc.h"
 #include        "../health.h"
 #include        "next_second.h"
 #include        "next_minute1.h"

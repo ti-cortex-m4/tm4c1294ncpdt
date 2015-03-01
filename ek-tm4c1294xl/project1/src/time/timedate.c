@@ -4,9 +4,9 @@ TIMEDATE.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "display/display.h"
-#include        "engine.h"
+#include        "../main.h"
+#include        "../display/display.h"
+#include        "../engine.h"
 
 
 
