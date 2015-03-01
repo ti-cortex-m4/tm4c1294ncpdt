@@ -253,7 +253,7 @@ void  ShowCharLCD(unsigned char  bPos, unsigned char  bSymb)
 }
 
 // Прямая запись в строку ЖКИ без кириллицы
-void  ShowMsgLCDnCyr(unsigned char bT, unsigned char *szT)
+void  ShowMsgLCDnCyr(uchar bT, uchar *szT)
 {
  unsigned char   i;
 
@@ -269,7 +269,22 @@ void  ShowMsgLCDnCyr(unsigned char bT, unsigned char *szT)
 }
 
 // Прямая запись в строку ЖКИ с кириллицой
-void  ShowMsgLCD(unsigned char  bT, const unsigned char  *szT)
+void  ShowMsgLCD(uchar  bT, const uchar  *szT)
+{
+ unsigned char  i;
+
+  ReadyLCD();
+  SetCommLCD(bT);
+
+  for (i=0; i<16; i++)
+  {
+    if ( !*szT ) break;
+    ReadyLCD();
+    SetDataLCD( mpbCyrillic[ *szT++ ] );
+  }
+}
+
+void  ShowMsgLCD2(uchar  bT, char  *szT)
 {
  unsigned char  i;
 
@@ -337,7 +352,7 @@ uchar  i;
   ShowMsgLCD(0xC0, szTest);
 }
 
-static uchar bPos =0;
+ uchar bPos =0;
 void LCD_Timer0() {
 	  if (GetCommLCD() == 0)
 	  {
@@ -369,3 +384,4 @@ void LCD_Timer0() {
 	      bPos = 0;
 	  }
 }
+

@@ -4,5 +4,9 @@ LCD.H
 
 ------------------------------------------------------------------------------*/
 
+#include 		"../main.h"
+
+void  ShowMsgLCD2(uchar  bT, char  *szT);
+
 void    InitLCD(void);
 void LCD_Timer0();

@@ -60,8 +60,6 @@ int main(void) {
 
 	InitSettings();
 	InitKeyboard();
-	InitSlide();
-	InitDisplay();
 	InitImpulses();
 	InitFactors();
 	InitGroups();
@@ -72,8 +70,10 @@ int main(void) {
 	InitDecret();
 	InitDigitals();
 
+	InitSlide();
 	InitStorage();
 	InitRealtime();
+	InitDisplay();
 
     InitSerial0();
 
