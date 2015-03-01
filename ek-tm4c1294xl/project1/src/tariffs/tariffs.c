@@ -22,16 +22,16 @@ TARIFFS.C
 
 
 
-file const              flPublicTariffs = {FLS_PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean), FRM_DEFAULT};
-file const              flTariffsMode = {FLS_TARIFFS_MODE, &bTariffsMode, sizeof(uchar), FRM_DEFAULT};
+file const              flPublicTariffs = {FLS_PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean)};
+file const              flTariffsMode = {FLS_TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
 
-file const              flPeriodTariffPow = {FLS_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow), FRM_DEFAULT};
-file const              flPeriodTariffEng = {FLS_PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng), FRM_DEFAULT};
+file const              flPeriodTariffPow = {FLS_PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow)};
+file const              flPeriodTariffEng = {FLS_PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng)};
 
 
 
 boolean SaveZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(FLS_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone), FRM_DEFAULT);
+	return SaveBuff(FLS_ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
@@ -41,7 +41,7 @@ boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
 
 
 boolean SaveZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(FLS_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone), FRM_DEFAULT);
+	return SaveBuff(FLS_ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
 }
 
 boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode) {

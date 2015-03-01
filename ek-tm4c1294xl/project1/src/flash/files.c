@@ -8,6 +8,7 @@ FILES.C
 #include        "../main.h"
 #include        "../memory/mem_flash.h"
 #include        "at45.h"
+#include        "files.h"
 
 
 
@@ -33,7 +34,7 @@ void ClearOut(void)
 }
 
 
-boolean Save(void  *pbBase, uint  wSize, format  fo)
+boolean Save(void  *pbBase, uint  wSize)
 {
 uint    wFree;
 uint    i;
@@ -46,7 +47,7 @@ uint    i;
     {                                           // заполняем всё свободное место
       memcpy(mpbPageOut + wByteOut, pbBase, wFree);                                
 
-      if (SafePageWrite(fo) == FALSE) return FALSE; // записываем буфер
+      if (SafePageWrite() == FALSE) return FALSE; // записываем буфер
 
       OpenOut2(wPageOut + 1);                   // подготавливаемся к записи следующей страницы
 
@@ -65,7 +66,7 @@ uint    i;
 }  
 
 
-boolean Clean(uint  wSize, format  fo)
+boolean Clean(uint  wSize)
 {
 uint    wFree;
 
@@ -77,7 +78,7 @@ uint    wFree;
     {                                           // заполняем всё свободное место
       memset(mpbPageOut + wByteOut, 0, wFree);
 
-      if (SafePageWrite(fo) == FALSE) return FALSE; // записываем буфер
+      if (SafePageWrite() == FALSE) return FALSE; // записываем буфер
 
       OpenOut2(wPageOut + 1);                   // подготавливаемся к записи следующей страницы
 
@@ -94,9 +95,9 @@ uint    wFree;
 }
 
 
-boolean CloseOut(format  fo)
+boolean CloseOut(void)
 {
-  return SafePageWrite(fo);
+  return SafePageWrite();
 }
 
 
@@ -147,25 +148,25 @@ uint    i;
 
 
 
-boolean SaveBuff(uint wPage, void *pbBuff, uint wSize, format  fo)
+boolean SaveBuff(uint wPage, void *pbBuff, uint wSize)
 {
   OpenOut(wPage);
 
-  if (Save(pbBuff, wSize, fo) == FALSE)
+  if (Save(pbBuff, wSize) == FALSE)
     return FALSE;
 
-  return CloseOut(fo);
+  return CloseOut();
 }
 
 
-boolean CleanBuff(uint wPage, uint wSize, format  fo)
+boolean CleanBuff(uint wPage, uint wSize)
 {
   OpenOut(wPage);
 
-  if (Clean(wSize, fo) == FALSE)
+  if (Clean(wSize) == FALSE)
     return FALSE;
 
-  return CloseOut(fo);
+  return CloseOut();
 }
 
 
@@ -179,7 +180,7 @@ boolean LoadBuff(uint wPage, void *pbBuff, uint wSize)
 
 boolean SaveFile(file const *pfl)
 {
-  return SaveBuff(pfl->wPage, pfl->pbBuff, pfl->wSize, pfl->foSelf);
+  return SaveBuff(pfl->wPage, pfl->pbBuff, pfl->wSize);
 }
 
 

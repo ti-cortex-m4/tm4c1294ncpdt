@@ -14,11 +14,11 @@ ENERGY3.C
 
 
 boolean SaveImpHouBuff(void) {
-  return SaveBuff(FLS_IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS, FRM_UINT);
+  return SaveBuff(FLS_IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
 }
 
 boolean CleanImpHouBuff(void) {
-  return CleanBuff(FLS_IMPHOUCAN_BUFF, sizeof(uint)*bCANALS, FRM_UINT);
+  return CleanBuff(FLS_IMPHOUCAN_BUFF, sizeof(uint)*bCANALS);
 }
 
 boolean LoadImpHouBuff(void) {
@@ -28,11 +28,11 @@ boolean LoadImpHouBuff(void) {
 
 
 boolean SaveImpDayBuff(void) {
-  return SaveBuff(FLS_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS, FRM_IMPULSE);
+  return SaveBuff(FLS_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
 }
 
 boolean CleanImpDayBuff(void) {
-  return CleanBuff(FLS_IMPDAYCAN_BUFF, sizeof(impulse)*bCANALS, FRM_IMPULSE);
+  return CleanBuff(FLS_IMPDAYCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 boolean LoadImpDayBuff(void) {
@@ -42,11 +42,11 @@ boolean LoadImpDayBuff(void) {
 
 
 boolean SaveImpMonBuff(void) {
-  return SaveBuff(FLS_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS, FRM_IMPULSE);
+  return SaveBuff(FLS_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
 }
 
 boolean CleanImpMonBuff(void) {
-  return CleanBuff(FLS_IMPMONCAN_BUFF, sizeof(impulse)*bCANALS, FRM_IMPULSE);
+  return CleanBuff(FLS_IMPMONCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 boolean LoadImpMonBuff(void) {
@@ -56,11 +56,11 @@ boolean LoadImpMonBuff(void) {
 
 
 boolean SaveImpAbsBuff(void) {
-  return SaveBuff(FLS_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS, FRM_REAL);
+  return SaveBuff(FLS_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
 }
 
 boolean CleanImpAbsBuff(void) {
-  return CleanBuff(FLS_IMPABSCAN_BUFF, sizeof(impulse)*bCANALS, FRM_REAL);
+  return CleanBuff(FLS_IMPABSCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 boolean LoadImpAbsBuff(void) {
@@ -70,11 +70,11 @@ boolean LoadImpAbsBuff(void) {
 
 
 boolean SavePowDayBuff(void) {
-  return SaveBuff(FLS_POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS, FRM_MAX_POWER);
+  return SaveBuff(FLS_POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
 }
 
 boolean CleanPowDayBuff(void) {
-  return CleanBuff(FLS_POWDAYGRP_BUFF, sizeof(power)*bGROUPS, FRM_MAX_POWER);
+  return CleanBuff(FLS_POWDAYGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
 boolean LoadPowDayBuff(void) {
@@ -84,11 +84,11 @@ boolean LoadPowDayBuff(void) {
 
 
 boolean SavePowMonBuff(void) {
-  return SaveBuff(FLS_POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS, FRM_MAX_POWER);
+  return SaveBuff(FLS_POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
 }
 
 boolean CleanPowMonBuff(void) {
-  return CleanBuff(FLS_POWMONGRP_BUFF, sizeof(power)*bGROUPS, FRM_MAX_POWER);
+  return CleanBuff(FLS_POWMONGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
 boolean LoadPowMonBuff(void) {
@@ -98,11 +98,11 @@ boolean LoadPowMonBuff(void) {
 
 
 boolean SaveCntMonBuff(void) {
-  return SaveBuff(FLS_CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS, FRM_REAL);
+  return SaveBuff(FLS_CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
 }
 
 boolean CleanCntMonBuff(void) {
-  return CleanBuff(FLS_CNTMONCAN_BUFF, sizeof(real)*bCANALS, FRM_REAL);
+  return CleanBuff(FLS_CNTMONCAN_BUFF, sizeof(real)*bCANALS);
 }
 
 boolean LoadCntMonBuff(void) {
