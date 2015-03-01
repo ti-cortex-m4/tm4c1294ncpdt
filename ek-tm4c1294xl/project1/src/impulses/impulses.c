@@ -32,7 +32,7 @@ void    DisableImpulses(void) {
 void    Impulses_Timer1(void) {
 	if (fEnabledImpulses)	{
 		fOnImpulse = 1;
-		mpwImpMntCan1[ibSoftMnt][0]++;
+		mpwImpMntCan[ibSoftMnt][0]++;
 	}
 }
 

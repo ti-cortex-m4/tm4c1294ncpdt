@@ -164,7 +164,7 @@ void    key_SetFactors(void)
             }
             else
             {
-              reBuffA -= GetCanInt(mpwImpMntCan1[ibSoftMnt],ibX) * GetCanReal(mpreValueCntMnt,ibX);
+              reBuffA -= GetCanInt(mpwImpMntCan[ibSoftMnt],ibX) * GetCanReal(mpreValueCntMnt,ibX);
               reBuffA -= *PGetCanImpAll(mpimAbsCan,ibX)         * GetCanReal(mpreValueCntHou,ibX);
             }
 

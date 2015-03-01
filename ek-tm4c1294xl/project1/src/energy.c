@@ -17,6 +17,7 @@ ENERGY.C
 #include        "digitals/digitals.h"
 #include        "digitals/sensors.h"
 #include        "groups.h"
+#include        "energy.h"
 
 
 
@@ -154,42 +155,6 @@ real    re;
 
   re *= bMul;
   return re;
-}
-
-
-real    GetPowGrpHouCurr(uchar  ibGroup, uchar  bMul)
-{
-uchar   i, j;
-real    reA, reB; 
-
-  j = (tiCurr.bMinute % 30) / 3;
-  if (j == 0) j = 10;
-
-  reB = 0;
-  for (i=1; i<=j; i++)
-    reB += GetGrpMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibGroup, bMul);
-
-  reA = 10*reB/j;
-
-  return reA;
-}
-
-
-real    GetPowCanHouCurr(uchar  ibCan, uchar  bMul)
-{
-uchar   i,j;
-real    reA, reB;
-
-  j = (tiCurr.bMinute % 30) / 3;
-  if (j == 0) j = 10;
-
-  reB = 0;
-  for (i=1; i<=j; i++)
-    reB += GetCanMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibCan, bMul);
-
-  reA = 10*reB/j;
-
-  return reA;
 }
 
 
@@ -336,7 +301,7 @@ real    re;
   }
   else
   {
-    re  = GetCanInt(mpwImpMntCan1[ibSoftMnt],ibCan) * GetCanReal(mpreValueCntMnt,ibCan);
+    re  = GetCanInt(mpwImpMntCan[ibSoftMnt],ibCan) * GetCanReal(mpreValueCntMnt,ibCan);
     re += *PGetCanImpAll(mpimAbsCan,ibCan)         * GetCanReal(mpreValueCntHou,ibCan);
     re += GetCanReal(mpreCount,ibCan);
   }

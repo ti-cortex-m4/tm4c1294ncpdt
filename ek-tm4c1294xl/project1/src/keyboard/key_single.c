@@ -13,6 +13,7 @@ KEY_SINGLE.C
 #include        "../digitals/digitals.h"
 #include        "../energy.h"
 #include        "../energy2.h"
+#include        "../energy4.h"
 #include        "../impulses/max_power.h"
 #include        "../timedate.h"
 
@@ -211,11 +212,11 @@ void    ShowSingle(void)
 
     case bGET_POWGRPCURRMNT:
     	LoadImpMnt( PrevHardMnt() );
-      ShowReal(GetGrpMntInt2Real(mpwImpMntCan1[ PrevSoftMnt() ],ibX,20));
+      ShowReal(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
       break;
 
     case bGET_IMPCANCURRMNT:
-      ShowInt(GetCanInt(mpwImpMntCan1[ ibSoftMnt ],ibX));
+      ShowInt(GetCanInt(mpwImpMntCan[ ibSoftMnt ],ibX));
       break;
 
     case bGET_POWGRPPREVHOU:      
