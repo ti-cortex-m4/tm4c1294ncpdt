@@ -72,3 +72,5 @@ void    ResetDecret(void)
   deDecret = DEC_NONE;
   MakeDecret();
 }
+
+// TODO: сохранять количество переходов отдельно + события

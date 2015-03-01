@@ -120,7 +120,7 @@ boolean LoadPointersMon(void)
 
 boolean SaveTimeCurr(void)
 {
-  OpenOut(FLS_TICURR);
+  OpenOut(FLS_REALTIME);
   ClearOut();
 
   if (Save(&tiCurr, sizeof(time)) == FALSE) return FALSE;
@@ -141,7 +141,7 @@ boolean SaveTimeCurr(void)
 
 boolean LoadTimeCurr(void)
 {
-  OpenIn(FLS_TICURR);
+  OpenIn(FLS_REALTIME);
 
   if (Load(&tiCurr, sizeof(time)) == FALSE) return FALSE;
   if (Load(&tiPrev, sizeof(time)) == FALSE) return FALSE;
