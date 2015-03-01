@@ -12,6 +12,7 @@ OUT_MINUTE30.C
 #include        "../serial/ports.h"
 #include        "../realtime/realtime.h"
 #include        "../time/timedate.h"
+#include        "../time/calendar.h"
 #include        "../energy2.h"
 
 
