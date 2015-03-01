@@ -175,12 +175,6 @@ uint32_t ui32Status;
     {
       bT = InByte0();
 
-      if ((boSendAT == true) && (IsFlow0() == 0))
-      {
-        mpcbSendAT[0] = bANSWER_AT;
-        mpanSendAT[0] = ANS_TIMEOUT;
-      }
-
       cwIn0++;
       bIn0 = bT;
 
@@ -416,10 +410,6 @@ void    InDelay0_Timer0(void) {
 
 
 void    InitSerial0(void) {
-  mpcbSendAT[0] = bANSWER_AT;
-  mpanSendAT[0] = ANS_TIMEOUT;
-  boSendAT = FALSE;
-
   mpboLocal[0] = FALSE;
 
   InputMode0();
