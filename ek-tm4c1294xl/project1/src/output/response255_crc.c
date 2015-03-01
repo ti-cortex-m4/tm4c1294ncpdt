@@ -15,6 +15,7 @@ RESPONSE255_CRC.C
 #include        "../output/out_groups.h"
 #include        "../output/out_relaxs.h"
 #include        "../output/out_gaps.h"
+#include        "../output/out_decret.h"
 #include        "../output/out_digitals.h"
 #include        "../output/out_max_power.h"
 #include        "../output/out_energy.h"
@@ -157,17 +158,9 @@ void    Response255_CRC(void)
 
     case bEXT_GETGAPS1: OutGaps1(); break;
     case bEXT_GETGAPS2: OutGaps2(); break;
-/*
-    case bEXT_GETDECRET:
-      InitPushCRC();
-      PushChar(deDecret);
-      Push(&tiSummer, sizeof(time));
-      PushChar(cbSummer);
-      Push(&tiWinter, sizeof(time));
-      PushChar(cbWinter);
-      Output(1+6+1+6+1);
-      break;
 
+    case bEXT_GETDECRET: OutDecret(); break;
+/*
     case bEXT_GETSTART:
       InitPushCRC();
       Push(&tiStart, sizeof(time));

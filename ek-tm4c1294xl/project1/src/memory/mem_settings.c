@@ -25,7 +25,7 @@ decret                  deDecret;
 // даты перехода на сезонное время
 time                    tiSummer, tiWinter;
 
-// счётчики количеств переходов на сезонное время
+// счётчики количеств переходов на сезонное время TODO persist cbSummer, cbWinter
 uchar                   cbSummer, cbWinter;
 
 

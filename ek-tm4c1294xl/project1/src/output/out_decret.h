@@ -1,10 +1,7 @@
 /*------------------------------------------------------------------------------
-DECRET.H
+OUT_DECRET.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    MakeDecret(void);
-
-void    InitDecret(void);
-void    ResetDecret(void);
+void    OutDecret(void);

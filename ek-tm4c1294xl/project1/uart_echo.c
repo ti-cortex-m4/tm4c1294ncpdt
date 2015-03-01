@@ -36,6 +36,7 @@ TODO .C
 #include "src/tariffs/gaps.h"
 #include "src/digitals/digitals.h"
 #include "src/storage/storage.h"
+#include "src/time/decret.h"
 #include "src/realtime/realtime.h"
 #include "src/realtime/realtime_init.h"
 #include "src/output/response_crc.h"
@@ -68,6 +69,7 @@ int main(void) {
 	InitTariffs();
 	InitRelaxs();
 	InitGaps();
+	InitDecret();
 	InitDigitals();
 
 	InitStorage();
