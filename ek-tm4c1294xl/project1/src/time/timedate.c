@@ -18,7 +18,7 @@ static uchar const      mpbDaysInMonth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 3
 
 
 
-// ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã¤Ã­Ã¥Ã© Ã¢ Ã¬Ã¥Ã±Ã¿Ã¶Ã¥
+// êîëè÷åñòâî äíåé â ìåñÿöå
 uchar   GetDaysInMonthM(uchar  bMonth)
 {
 	ASSERT((bMonth >= 1) && (bMonth <= 12));
@@ -27,7 +27,7 @@ uchar   GetDaysInMonthM(uchar  bMonth)
 }
 
 
-// ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã¤Ã­Ã¥Ã© Ã¢ Ã¬Ã¥Ã±Ã¿Ã¶Ã¥
+// êîëè÷åñòâî äíåé â ìåñÿöå
 uchar   GetDaysInMonthYM(uchar  bYear, uchar  bMonth)
 {
   ASSERT((bYear >= bMINYEAR) && (bYear <= bMAXYEAR));
@@ -40,7 +40,7 @@ uchar   GetDaysInMonthYM(uchar  bYear, uchar  bMonth)
 }
 
 
-// ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã¤Ã­Ã¥Ã© Ã¢ Ã£Ã®Ã¤Ã³
+// êîëè÷åñòâî äíåé â ãîäó
 uint    GetDaysInYearY(uchar  bYear)
 {
   ASSERT((bYear >= bMINYEAR) && (bYear <= bMAXYEAR));
@@ -52,7 +52,7 @@ uint    GetDaysInYearY(uchar  bYear)
 }
 
 
-// Ã¤Ã¥Ã­Ã¼ Ã­Ã¥Ã¤Ã¥Ã«Ã¨: 0 - Ã¯Ã®Ã­Ã¥Ã¤Ã¥Ã«Ã¼Ã­Ã¨Ãª, ..., 6 - Ã¢Ã®Ã±ÃªÃ°Ã¥Ã±Ã¥Ã­Ã¼Ã¥ (1 Ã¿Ã­Ã¢Ã Ã°Ã¿ 2000 Ã£Ã®Ã¤Ã : 5 - Ã±Ã³Ã¡Ã¡Ã®Ã²Ã )
+// äåíü íåäåëè: 0 - ïîíåäåëüíèê, ..., 6 - âîñêðåñåíüå (1 ÿíâàðÿ 2000 ãîäà: 5 - ñóááîòà)
 uchar   GetWeekdayYMD(uchar  bYear, uchar  bMonth, uchar  bDay)
 {
 uchar   i;
@@ -74,7 +74,7 @@ uint    j;
 }
 
 
-// Ã¯Ã®Ã±Ã«Ã¥Ã¤Ã­Ã¥Ã¥ Ã¢Ã®Ã±ÃªÃ°Ã¥Ã±Ã¥Ã­Ã¼Ã¥ Ã¬Ã¥Ã±Ã¿Ã¶Ã 
+// ïîñëåäíåå âîñêðåñåíüå ìåñÿöà
 time   *GetDecretDateYM(uchar  bYear, uchar  bMonth)
 {
 static time ti;
@@ -94,7 +94,7 @@ static time ti;
 }
 
 
-// ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã¤Ã­Ã¥Ã© Ã± Ã­Ã Ã·Ã Ã«Ã  Ã£Ã®Ã¤Ã 
+// êîëè÷åñòâî äíåé ñ íà÷àëà ãîäà
 uint    GetDayIndexYMD(uchar  bYear, uchar  bMonth, uchar  bDay)
 {
 uchar   i;
@@ -113,7 +113,7 @@ uint    j;
 }
 
 
-// ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã¤Ã­Ã¥Ã© Ã± Ã­Ã Ã·Ã Ã«Ã  Ã£Ã®Ã¤Ã 
+// êîëè÷åñòâî äíåé ñ íà÷àëà ãîäà
 uint    GetDayIndexMD(uchar  bMonth, uchar  bDay)
 {
 uchar   i;

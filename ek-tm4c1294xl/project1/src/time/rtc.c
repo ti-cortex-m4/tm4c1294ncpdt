@@ -14,13 +14,13 @@ RTC.C
 
 
 
-//ГЃГЁГІГ» ГіГЇГ°Г ГўГ«ГҐГ­ГЁГї SPI
+//Биты управления SPI
 #define SPI_BIT_SCK   0x0008 //PP3
 #define SPI_BIT_SI    0x0010 //PP4
 #define SPI_BIT_SO    0x0020 //PP5
-#define SPI_BIT_CS    0x0004 //PP2 //ГўГ»ГЎГ®Г°ГЄГ  Г·Г Г±Г®Гў ГЇГ°ГЁ PP2=1 !!!
+#define SPI_BIT_CS    0x0004 //PP2 //выборка часов при PP2=1 !!!
 
-//ГЂГ¤Г°ГҐГ±Г  ГЇГЁГ­Г®Гў ГіГЇГ°Г ГўГ«ГҐГ­ГЁГї SPI
+//Адреса пинов управления SPI
 #define GPIO_DATABIT_SCK (GPIO_PORTP_BASE + GPIO_O_DATA + 0x0020)//PP3
 #define GPIO_DATABIT_SI  (GPIO_PORTP_BASE + GPIO_O_DATA + 0x0040)//PP4
 #define GPIO_DATABIT_SO  (GPIO_PORTP_BASE + GPIO_O_DATA + 0x0080)//PP5
@@ -28,7 +28,7 @@ RTC.C
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
 
-//3 ГІГ ГЄГІГ  Г­Г  Г§Г ГЇГіГ±ГЄ ГЈГҐГ­ГҐГ°Г ГІГ®Г°Г®Гў ГЇГҐГ°ГЁГґГҐГ°ГЁГЁ
+//3 такта на запуск генераторов периферии
 static void RunClocking(void)
 {
 __asm("   nop\n"
@@ -68,7 +68,7 @@ static unsigned char  CharInSPI(void)
 
 
 
-//ГЏГ®Г¤ГЈГ®ГІГ®ГўГЄГ  ГЄ Г­Г Г·Г Г«Гі Г°Г ГЎГ®ГІГ» ГЇГ® SPI
+//Подготовка к началу работы по SPI
 static void EnableSPI(void)
 {
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
@@ -78,7 +78,7 @@ static void EnableSPI(void)
 }
 
 
-//ГЋГЄГ®Г­Г·Г Г­ГЁГҐ Г°Г ГЎГ®ГІГ» ГЇГ® SPI
+//Окончание работы по SPI
 static void DisableSPI(void)
 {
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
@@ -118,7 +118,7 @@ static time ti;
   ti.bSecond = FromBCD(CharInSPI());
   ti.bMinute = FromBCD(CharInSPI());
   ti.bHour   = FromBCD(CharInSPI());
-                       CharInSPI(); // Г¤ГҐГ­Гј Г­ГҐГ¤ГҐГ«ГЁ
+                       CharInSPI(); // день недели
   ti.bDay    = FromBCD(CharInSPI());
   ti.bMonth  = FromBCD(CharInSPI());
   ti.bYear   = FromBCD(CharInSPI());
@@ -137,7 +137,7 @@ void    SetCurrTimeDate(time  *pti)
   CharOutSPI( ToBCD(pti->bSecond) );
   CharOutSPI( ToBCD(pti->bMinute) );
   CharOutSPI( ToBCD(pti->bHour)   );
-  CharOutSPI( 0 ); // Г¤ГҐГ­Гј Г­ГҐГ¤ГҐГ«ГЁ
+  CharOutSPI( 0 ); // день недели
   CharOutSPI( ToBCD(pti->bDay)    );
   CharOutSPI( ToBCD(pti->bMonth)  );
   CharOutSPI( ToBCD(pti->bYear)   );
@@ -265,14 +265,14 @@ time    ti;
 
 
 void    InitRTC(void) {
-  //Г‚ГЄГ«ГѕГ·ГҐГ­ГЁГҐ ГЇГҐГ°ГЁГґГҐГ°ГЁГЁ
-  HWREG(SYSCTL_RCGCGPIO) |= 0x2000;//Г‡Г ГЇГіГ±ГЄ ГЈГҐГ­ГҐГ°Г ГІГ®Г°Г  ГЇГ®Г°ГІГ  "P"
+  //Включение периферии
+  HWREG(SYSCTL_RCGCGPIO) |= 0x2000;//Запуск генератора порта "P"
 
   RunClocking();
 
-  //Г„Г«Гї ГЇГ®Г°ГІГ  "P" (SPI+CE)
-  HWREG(GPIO_PORTP_BASE + GPIO_O_DIR)   |= 0x001C;//ГЇГЁГ­Г» Г­Г  ГЇГҐГ°ГҐГ¤Г Г·Гі (PP5 Г­Г  ГЇГ°ГЁГҐГ¬)
-  HWREG(GPIO_PORTP_BASE + GPIO_O_DEN)   |= 0x003C;//Г¶ГЁГґГ°Г®ГўГ®Г© Г±ГЁГЈГ­Г Г«
+  //Для порта "P" (SPI+CE)
+  HWREG(GPIO_PORTP_BASE + GPIO_O_DIR)   |= 0x001C;//пины на передачу (PP5 на прием)
+  HWREG(GPIO_PORTP_BASE + GPIO_O_DEN)   |= 0x003C;//цифровой сигнал
 
   EnableWriteRTC();
   SetLabelRTC();
