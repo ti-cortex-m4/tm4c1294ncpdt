@@ -147,6 +147,7 @@ void    LoadRealtime(void)
 void    DefaultRealtime(void)
 {
   ibSoftMnt = 0;
+  ibHardMnt = 0;
 
   ibSoftHou = 0;
   iwHardHou = 0;
@@ -184,9 +185,9 @@ void    InitRealtime(void)
     tiPowerOff = tiCurr;
 
     AddSysRecord(EVE_PREVNEXTTIME2);
-    if (RealtimeOffline() == TRUE) {
-    } else {
-    }
+//    if (RealtimeOffline() == TRUE) {
+//    } else {
+//    }
     AddSysRecord(EVE_POSTNEXTTIME);
 
     tiPowerOn = tiCurr;

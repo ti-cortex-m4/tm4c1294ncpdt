@@ -123,11 +123,17 @@ boolean SaveTimeCurr(void)
   OpenOut(FLS_TICURR);
   ClearOut();
 
-  if (Save(&tiCurr, sizeof(time)) == FALSE)
-    return FALSE;
+  if (Save(&tiCurr, sizeof(time)) == FALSE) return FALSE;
+  if (Save(&tiPrev, sizeof(time)) == FALSE) return FALSE;
 
-  if (Save(&tiPrev, sizeof(time)) == FALSE)
-    return FALSE;
+  if (Save(&cdwSeconds, sizeof(ulong)) == FALSE) return FALSE;
+  if (Save(&cdwMinutes1, sizeof(ulong)) == FALSE) return FALSE;
+  if (Save(&cdwMinutes3, sizeof(ulong)) == FALSE) return FALSE;
+  if (Save(&cdwMinutes30, sizeof(ulong)) == FALSE) return FALSE;
+
+  if (Save(&cwDays, sizeof(uint)) == FALSE) return FALSE;
+  if (Save(&cwMonths, sizeof(uint)) == FALSE) return FALSE;
+  if (Save(&cwYears, sizeof(uint)) == FALSE) return FALSE;
 
   return CloseOut();
 }
@@ -137,8 +143,17 @@ boolean LoadTimeCurr(void)
 {
   OpenIn(FLS_TICURR);
 
-  if (Load(&tiCurr, sizeof(time)) == FALSE)
-    return FALSE;
+  if (Load(&tiCurr, sizeof(time)) == FALSE) return FALSE;
+  if (Load(&tiPrev, sizeof(time)) == FALSE) return FALSE;
 
-  return Load(&tiPrev, sizeof(time));
+  if (Load(&cdwSeconds, sizeof(ulong)) == FALSE) return FALSE;
+  if (Load(&cdwMinutes1, sizeof(ulong)) == FALSE) return FALSE;
+  if (Load(&cdwMinutes3, sizeof(ulong)) == FALSE) return FALSE;
+  if (Load(&cdwMinutes30, sizeof(ulong)) == FALSE) return FALSE;
+
+  if (Load(&cwDays, sizeof(uint)) == FALSE) return FALSE;
+  if (Load(&cwMonths, sizeof(uint)) == FALSE) return FALSE;
+  if (Load(&cwYears, sizeof(uint)) == FALSE) return FALSE;
+
+  return TRUE;
 }
