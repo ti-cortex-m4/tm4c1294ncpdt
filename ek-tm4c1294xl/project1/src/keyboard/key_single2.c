@@ -76,7 +76,8 @@ void    ShowSingle2(void)
   switch (bProgram)
   {
     case bGET_POWCANCURRMNT:
-      ShowReal(GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
+    	LoadImpMnt( PrevHardMnt() );
+      ShowReal(GetCanMntInt2Real(mpwImpMntCan1[ PrevSoftMnt() ],ibX,20));
       break;
 
     case bGET_POWCANPREVHOU:      

@@ -22,7 +22,8 @@ void    NextMinute3(void)
 
   DisableImpulses();
   memcpy(&mpwImpMntCanCurr, &mpwImpMntCan1[ibSoftMnt], sizeof(uint)*bCANALS);
-  if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
+  if (++ibHardMnt >= bMINUTES) ibHardMnt = 0;
+  if (++ibSoftMnt >= 2)        ibSoftMnt = 0;
   SavePointersMnt();
   EnableImpulses();
 
@@ -45,7 +46,9 @@ void    NextMinute3Spec(void)
 
   DisableImpulses();
   memcpy(&mpwImpMntCanCurr, &mpwImpMntCan1[ibSoftMnt], sizeof(uint)*bCANALS);
-  if (++ibSoftMnt >= bMINUTES) ibSoftMnt = 0;
+  if (++ibHardMnt >= bMINUTES) ibHardMnt = 0;
+  if (++ibSoftMnt >= 2)        ibSoftMnt = 0;
+
   EnableImpulses();
 
   MakeImpulseSpec();

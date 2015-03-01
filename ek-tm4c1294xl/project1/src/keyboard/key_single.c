@@ -210,11 +210,12 @@ void    ShowSingle(void)
       break;
 
     case bGET_POWGRPCURRMNT:
-      ShowReal(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
+    	LoadImpMnt( PrevHardMnt() );
+      ShowReal(GetGrpMntInt2Real(mpwImpMntCan1[ PrevSoftMnt() ],ibX,20));
       break;
 
     case bGET_IMPCANCURRMNT:
-      ShowInt(GetCanInt(mpwImpMntCan[ ibSoftMnt ],ibX));
+      ShowInt(GetCanInt(mpwImpMntCan1[ ibSoftMnt ],ibX));
       break;
 
     case bGET_POWGRPPREVHOU:      
