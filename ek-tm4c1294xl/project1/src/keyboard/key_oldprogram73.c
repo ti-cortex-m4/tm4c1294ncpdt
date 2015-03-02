@@ -1,25 +1,20 @@
 /*------------------------------------------------------------------------------
-_OLDPROGRAM73.C
+KEY_OLDPROGRAM73.C
 
  ѕросмотр получасовой мощности за сутки по каналам
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"                 
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "display.h"
-#include        "tariffs.h"
+#include        "../main.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_energy.h"
 #include        "keyboard.h"
-#include        "programs.h"
-#include        "energy.h"
-#include        "engine.h"
-#include        "general.h"
-#include        "nexttime.h"
+#include        "../display/display.h"
+#include        "../realtime/realtime.h"
+#include        "../energy.h"
 
 
 
-uchar           *code   pszPowCanAlfa[] = { szPower, szAlfa, szBeta, ""};                            
+static char const      *pszPowCanAlfa[] = { szPower, szAlfa, szBeta, ""};
 
 
 
@@ -31,26 +26,26 @@ void    ShowPowCanHou(void)
       sprintf(szLo,"         -    ");
     else
     {
-      reBuffA = *PGetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibX, 2);
+      reBuffA = GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibX, 2);
       ShowReal(&reBuffA);   
     }
   }
   else Error();
 
-  sprintf(szLo+14, "%2bu", ibZ);
+  sprintf(szLo+14, "%2u", ibZ);
 }
 
 
 
 void    LoadBetaCan(void)
 {
-  sprintf(szBeta, "  по каналу %-2bu   ", ibX+1);
+  sprintf(szBeta, "  по каналу %-2u   ", ibX+1);
 }
 
 
 void    LoadAlfaDayCan(void)
 {
-  sprintf(szAlfa, "   за сутки %-2bu   ", ibY);
+  sprintf(szAlfa, "   за сутки %-2u   ", ibY);
 }
 
 
@@ -80,7 +75,7 @@ void    key_GetOldProgram73(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11)-1) < bCANALS)
+      if ((ibX = GetCharLo(10,11)-1) < bCANALS)
       {
         enKeyboard = KBD_INPUT2;
         Day();
@@ -102,7 +97,7 @@ void    key_GetOldProgram73(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((ibY = GetChar(10,11)) < wHOURS/48)
+      if ((ibY = GetCharLo(10,11)) < wHOURS/48)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
