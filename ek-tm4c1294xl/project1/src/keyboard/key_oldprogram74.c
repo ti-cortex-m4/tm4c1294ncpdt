@@ -11,6 +11,7 @@ KEY_OLDPROGRAM74.C
 #include        "../display/display.h"
 #include        "../realtime/realtime.h"
 #include        "../energy.h"
+#include        "../energy2.h"
 
 
 
@@ -21,9 +22,9 @@ static char const      *pszPowGrpAlfa[] = { szPower, szAlfa, szBeta, ""};
 
 void    ShowPowGrpHou(void)
 {
-  if (LoadImpHou( (PrevDayIndex(ibY)+ibZ)%wHOURS ) == 1)
+  if (LoadImpHou( (GetDayHouIndex(ibY)+ibZ)%wHOURS ) == 1)
   {
-    if ((ibY == 0) && (ibZ > GetHouIndex()))
+    if ((ibY == 0) && (ibZ > GetCurrHouIndex()))
       sprintf(szLo,"         -    ");
     else
     {
@@ -92,7 +93,7 @@ void    key_GetOldProgram74(void)
       ibY = 0;                          // день
       LoadAlfaDayGrp();
 
-      ibZ = 0;                          // получас 
+      ibZ = 0;                          // получас
       ShowPowGrpHou(); 
     }
     else if (enKeyboard == KBD_POSTINPUT2)
@@ -104,7 +105,7 @@ void    key_GetOldProgram74(void)
 
         LoadAlfaDayGrp();
 
-        ibZ = 0;                        // получас 
+        ibZ = 0;                        // получас
         ShowPowGrpHou(); 
       }
       else Beep();
