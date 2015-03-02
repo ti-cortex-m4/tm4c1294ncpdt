@@ -5,7 +5,8 @@ PRINT.H
 ------------------------------------------------------------------------------*/
 
 void    PrintStart(void);
-void    PrintString(const char *pcString);
-void    PrintChar(const uchar bT);
-void    PrintInt(const uint wT);
+void    PrintString(const char  *psz);
+void    PrintChar(uchar  b);
+void    PrintInt(uint  w);
+void    PrintTime(time  ti);
 void    PrintStop(void);
