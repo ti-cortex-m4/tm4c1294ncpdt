@@ -11,6 +11,7 @@ KEY_OLDPROGRAM73.C
 #include        "../display/display.h"
 #include        "../realtime/realtime.h"
 #include        "../energy.h"
+#include        "../energy2.h"
 
 
 
@@ -20,14 +21,13 @@ static char const      *pszPowCanAlfa[] = { szPower, szAlfa, szBeta, ""};
 
 void    ShowPowCanHou(void)
 {
-  if (LoadImpHou( (PrevDayIndex(ibY)+ibZ)%wHOURS ) == 1)
+  if (LoadImpHou( (GetDayHouIndex(ibY)+ibZ)%wHOURS ) == 1)
   {
-    if ((ibY == 0) && (ibZ > GetHouIndex()))
+    if ((ibY == 0) && (ibZ > GetCurrHouIndex()))
       sprintf(szLo,"         -    ");
     else
     {
-      reBuffA = GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibX, 2);
-      ShowReal(&reBuffA);   
+      ShowReal(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibX, 2));
     }
   }
   else Error();
@@ -92,7 +92,7 @@ void    key_GetOldProgram73(void)
       ibY = 0;                          // день
       LoadAlfaDayCan();
 
-      ibZ = 0;                          // получас 
+      ibZ = 0;                          // получас
       ShowPowCanHou(); 
     }
     else if (enKeyboard == KBD_POSTINPUT2)
@@ -104,7 +104,7 @@ void    key_GetOldProgram73(void)
 
         LoadAlfaDayCan();
 
-        ibZ = 0;                        // получас 
+        ibZ = 0;                        // получас
         ShowPowCanHou(); 
       }
       else Beep();
