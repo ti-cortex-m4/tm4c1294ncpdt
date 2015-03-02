@@ -12,8 +12,10 @@ KEYBOARD_AUTO.C
 #include        "key_timedate.h"
 #include        "key_analysis.h"
 #include        "key_health.h"
-#include        "key_single.h"
-#include        "key_single2.h"
+#include        "impulses/key_single.h"
+#include        "impulses/key_single2.h"
+#include        "impulses/key_oldprogram73.h"
+#include        "impulses/key_oldprogram74.h"
 
 
 
@@ -72,8 +74,8 @@ void    Keyboard_Auto(void)
 
         case bGET_POWCANCURRMNT:    auto_GetSingle2();  break;
 
-//        case bGET_PROGRAM73:    auto_GetOldProgram73(); break;
-//        case bGET_PROGRAM74:    auto_GetOldProgram74(); break;
+        case bGET_PROGRAM73:   auto_GetOldProgram73();  break;
+        case bGET_PROGRAM74:   auto_GetOldProgram74();  break;
       }
     }
   }

@@ -125,6 +125,9 @@ PROGRAMS.H
 #define bGET_ENGGRPYEAR_B           82
 #define bGET_ENGGRPYEAR_A           83
 
+#define bGET_PROGRAM73              73
+#define bGET_PROGRAM74              74
+
 #define bGET_POWCANCURRMNT          120
 
 #define bGET_POWCANPREVHOU          121
