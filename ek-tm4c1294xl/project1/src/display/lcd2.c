@@ -1,10 +1,8 @@
-/*
- * Подпрограммы работы с ЖКИ
- */
+/*------------------------------------------------------------------------------
+LCD2.C
 
-//tm4c1294ncpdt.pdf :
-// GPIO - page 757 
 
+------------------------------------------------------------------------------*/
 
 #include <stdint.h>
 #include <stdio.h>
@@ -16,12 +14,12 @@
 #include "../main.h"
 #include "../display/display.h"
 #include "cp1251.h"
-
 #include "lcd.h"
 
 #ifdef NATIVE_LCD
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
+
 //#define PF2_TO_PD0_WR
 
 //Биты управления ЖКИ
@@ -37,6 +35,7 @@
 #define LCD_BIT_WR   0x02 //PG1
 #define LCD_BIT_E    0x08 //PC4
 
+//3 такта на запуск генераторов периферии
 static void RunClocking(void)
 {
 __asm("   nop\n"
@@ -200,5 +199,6 @@ void InitGPIO_LCD(void)
  ClearCtrlBit_LCD(LCD_BIT_E);  //E=0 Индикатор не выбран
  ClearCtrlBit_LCD(LCD_BIT_WR); //WR=0
 }
+
 
 #endif

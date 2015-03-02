@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-LCD.C
+LCD1.C
 
 
 ------------------------------------------------------------------------------*/
@@ -20,10 +20,6 @@ LCD.C
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
 
-//адреса строк дисплея
-#define LINE_HI         0x80
-#define LINE_LO         0xC0
-
 #define PF2_TO_PD0_WR
 
 //Биты управления ЖКИ
@@ -35,17 +31,6 @@ LCD.C
 
 
 
-
-//unsigned char bCursorPos;
-
-
-// Задержка
-//~[ 1 = 440 nsec; 2300000 = 1 sec - for 25MHz]
-void _Delay(unsigned long ulgTime)
-{
- while(ulgTime--);
-}
-
 //3 такта на запуск генераторов периферии
 static void RunClocking(void)
 {
@@ -54,7 +39,7 @@ __asm("   nop\n"
       "   nop\n");
 }
 
-void _NOP(void)
+static void _NOP(void)
 {
   __asm(" nop\n");
 }
@@ -98,6 +83,7 @@ void SetPortK_In(void)
  ClearCtrlBit_LCD(LCD_BIT_DIR);//DIR = 0, Буфер согласования уровней на прием
  HWREG(GPIO_PORTK_BASE + GPIO_O_DIR) &= 0xFFFFFF00;//Пины порта "К" на прием
 }
+
 
 //Запись байта в ЖКИ
 void Write_Byte_LCD(unsigned char bflagDC, unsigned char bData)
