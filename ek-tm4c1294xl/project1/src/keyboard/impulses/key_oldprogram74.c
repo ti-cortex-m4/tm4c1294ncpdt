@@ -22,7 +22,7 @@ static char const      *pszPowGrpAlfa[] = { szPower, szAlfa, szBeta, ""};
 
 void    ShowPowGrpHou(void)
 {
-  if (LoadImpHou( (GetDayHouIndex(ibY)+ibZ)%wHOURS ) == 1)
+  if (LoadImpHou( (GetDayHouIndex(ibY)+ibZ)%wHOURS ) == TRUE)
   {
     if ((ibY == 0) && (ibZ > GetCurrHouIndex()))
       sprintf(szLo,"         -    ");
