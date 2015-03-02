@@ -24,6 +24,7 @@ uchar    c;
 real     re;
 
   ibSoftMnt = 0;
+  ibHardMnt = 0;
   SavePointersMnt();
 
   ibSoftHou = 0;
@@ -38,7 +39,9 @@ real     re;
   ibHardMon = (GetCurrTimeDate()->bMonth) - 1;
   SavePointersMon();
 
-//  TODO save tiCurr tiPrev
+  tiCurr = *GetCurrTimeDate();
+  tiPrev = tiCurr;
+  SaveTimeCurr();
 
   cbSummer = 0;
   cbWinter = 0;
