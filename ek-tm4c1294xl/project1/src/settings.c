@@ -51,7 +51,7 @@ boolean LoadPrivate(void) {
 }
 
 
-
+// TODO GlobalLabel
 boolean SaveGlobal(void) {
 	return SaveBuff(FLS_GLOBAL, &enGlobal, sizeof(global));
 }
