@@ -8,6 +8,11 @@ RTC.H
 
 
 
+//#define NATIVE_RTC
+
+
+void    InitGPIO_RTC();
+
 time    *GetCurrTimeDate(void);
 
 void    SetCurrTimeDate(time  *pti);
