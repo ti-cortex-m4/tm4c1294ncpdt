@@ -11,30 +11,12 @@ RTC.C
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
+#include "rtc.h"
+#include "rtc1.h"
+#include "rtc2.h"
 
-
-
-//Биты управления SPI
-#define SPI_BIT_SCK   0x0008 //PP3
-#define SPI_BIT_SI    0x0010 //PP4
-#define SPI_BIT_SO    0x0020 //PP5
-#define SPI_BIT_CS    0x0004 //PP2 //выборка часов при PP2=1 !!!
-
-//Адреса пинов управления SPI
-#define GPIO_DATABIT_SCK (GPIO_PORTP_BASE + GPIO_O_DATA + 0x0020)//PP3
-#define GPIO_DATABIT_SI  (GPIO_PORTP_BASE + GPIO_O_DATA + 0x0040)//PP4
-#define GPIO_DATABIT_SO  (GPIO_PORTP_BASE + GPIO_O_DATA + 0x0080)//PP5
-#define GPIO_DATABIT_CS  (GPIO_PORTP_BASE + GPIO_O_DATA + 0x0010)//PP2
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
-
-//3 такта на запуск генераторов периферии
-static void RunClocking(void)
-{
-__asm("   nop\n"
-      "   nop\n"
-      "   nop\n");
-}
 
 
 static void  CharOutSPI(unsigned char bI)
@@ -265,22 +247,10 @@ time    ti;
 
 
 void    InitRTC(void) {
-  //Включение периферии
-  HWREG(SYSCTL_RCGCGPIO) |= 0x2000;//Запуск генератора порта "P"
-
-  RunClocking();
-
-  //Для порта "P" (SPI+CE)
-  HWREG(GPIO_PORTP_BASE + GPIO_O_DIR)   |= 0x001C;//пины на передачу (PP5 на прием)
-  HWREG(GPIO_PORTP_BASE + GPIO_O_DEN)   |= 0x003C;//цифровой сигнал
+	InitGPIO_RTC();
 
   EnableWriteRTC();
   SetLabelRTC();
 
   DisableSPI();
-}
-
-
-
-void    RTC_Timer1(void) {
 }
