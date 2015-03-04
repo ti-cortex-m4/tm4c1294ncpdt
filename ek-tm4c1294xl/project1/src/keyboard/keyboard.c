@@ -32,8 +32,8 @@ char const              szProgram[]     = "Программа ?     ",
 // коды отклика клавиш: '0'..'9', '-', '.', 'Программа', 'Ввод'
 uchar const             mpbKeys[14] = { 0x2B, 0x0E, 0x1E, 0x2E, 0x3E, 0x0D, 0x1D, 0x2D, 0x3D, 0x0B, 0x1B, 0x3B, 0x07, 0x17 };
 
-uchar                   bKey;
-bool                    fKey;
+volatile uchar          bKey;
+volatile bool           fKey;
 
 key                     enKeyboard;
 

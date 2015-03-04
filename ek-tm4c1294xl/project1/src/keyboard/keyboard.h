@@ -15,8 +15,8 @@ KEYBOARD.H
 
 extern  uchar const             mpbKeys[];
 
-extern  uchar                   bKey;
-extern  bool                    fKey;
+extern  volatile uchar          bKey;
+extern  volatile bool           fKey;
 
 extern  key                     enKeyboard;
 
