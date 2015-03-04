@@ -10,7 +10,7 @@ KEYBOARD.C
 #include        "../memory/mem_realtime.h"
 #include        "../display/display.h"
 #include        "../beep.h"
-#include        "../delay.h"
+#include        "../time/delay.h"
 #include        "../include/programs.h"
 #include        "../impulses/impulses.h"
 #include        "keyboard_auto.h"
