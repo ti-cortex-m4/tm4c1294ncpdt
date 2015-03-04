@@ -22,13 +22,10 @@ AT45.C
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
+#include        "inc/hw_types.h"
 #include "at45.h"
 #include "flash1.h"
 #include "flash2.h"
-
-
-
-#define HWREG(x) (*((volatile uint32_t *)(x)))
 
 
 

@@ -21,8 +21,6 @@ LCD2.C
 
 #ifdef NATIVE_LCD
 
-#define HWREG(x) (*((volatile uint32_t *)(x)))
-
 //#define PF2_TO_PD0_WR
 
 //Биты управления ЖКИ

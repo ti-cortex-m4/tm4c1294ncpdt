@@ -16,11 +16,6 @@ FLASH2.C
 
 #ifdef NATIVE_FLASH
 
-
-#define HWREG(x) (*((volatile uint32_t *)(x)))
-
-
-
 void Init_SPIhandAT45DB321(void)
 {
 	 //Включение периферии

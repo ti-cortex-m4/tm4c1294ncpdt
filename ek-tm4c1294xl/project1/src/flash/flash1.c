@@ -8,6 +8,7 @@ FLASH1.C
 #include 		"inc/hw_gpio.h"
 #include 		"inc/hw_memmap.h"
 #include 		"inc/hw_sysctl.h"
+#include        "inc/hw_types.h"
 #include        "../time/delay.h"
 #include        "at45.h"
 #include        "flash1.h"
@@ -15,11 +16,6 @@ FLASH1.C
 
 
 #ifndef NATIVE_FLASH
-
-
-#define HWREG(x) (*((volatile uint32_t *)(x)))
-
-
 
 void Init_SPIhandAT45DB321(void)
 {
