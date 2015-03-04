@@ -11,16 +11,14 @@ RTC.C
 #include 		"inc/hw_gpio.h"
 #include 		"inc/hw_memmap.h"
 #include        "inc/hw_ssi.h"
+#include        "inc/hw_types.h"
 #include        "../time/delay.h"
 #include        "rtc.h"
 #include        "rtc1.h"
 
 
+
 #ifndef NATIVE_RTC
-
-
-#define HWREG(x) (*((volatile uint32_t *)(x)))
-
 
 void    InitGPIO_RTC(void) {
   //Включение периферии

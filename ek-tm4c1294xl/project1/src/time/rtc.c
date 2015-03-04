@@ -7,16 +7,15 @@ RTC.C
 #include        "../main.h"
 #include        "../time/timedate.h"
 #include        "../display/lines.h"
-#include "inc/hw_sysctl.h"
-#include "inc/hw_gpio.h"
-#include "inc/hw_memmap.h"
-#include "inc/hw_ssi.h"
-#include "rtc.h"
-#include "rtc1.h"
-#include "rtc2.h"
+#include        "inc/hw_sysctl.h"
+#include        "inc/hw_gpio.h"
+#include        "inc/hw_memmap.h"
+#include        "inc/hw_ssi.h"
+#include        "inc/hw_types.h"
+#include        "rtc.h"
+#include        "rtc1.h"
+#include        "rtc2.h"
 
-
-#define HWREG(x) (*((volatile uint32_t *)(x)))
 
 
 static void  CharOutSPI(unsigned char bI)

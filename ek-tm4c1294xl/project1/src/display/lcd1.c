@@ -11,15 +11,16 @@ LCD1.C
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
+#include        "inc/hw_types.h"
 #include "../main.h"
 #include "../display/display.h"
 #include "../time/delay.h"
 #include "cp1251.h"
 #include "lcd.h"
 
-#ifndef NATIVE_LCD
 
-#define HWREG(x) (*((volatile uint32_t *)(x)))
+
+#ifndef NATIVE_LCD
 
 #define PF2_TO_PD0_WR
 
