@@ -23,19 +23,10 @@ AT45.C
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
 #include "at45.h"
+#include "flash1.h"
+#include "flash2.h"
 
 
-//Биты управления SPI
-#define SPI_bTT_SCK   0x0001 //PQ0
-#define SPI_bTT_SI    0x0004 //PQ2
-#define SPI_bTT_SO    0x0008 //PQ3
-#define SPI_bTT_CS    0x0001 //PH0
-
-//Адреса пинов управления SPI
-#define GPIO_DATAbTT_SCK (GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0004)//PQ0
-#define GPIO_DATAbTT_SI  (GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0010)//PQ2
-#define GPIO_DATAbTT_SO  (GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0020)//PQ3
-#define GPIO_DATAbTT_CS  (GPIO_PORTH_AHB_BASE + GPIO_O_DATA + 0x0004)//PH0
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
 
@@ -377,32 +368,6 @@ uchar   i;
   }
   else return TRUE;
 }
-
-
-static void RunClocking(void)
-{
-__asm("   nop\n"
-      "   nop\n"
-      "   nop\n");
-}
-
-
-void Init_SPIhandAT45DB321(void)
-{
-	 //Включение периферии
-	 HWREG(SYSCTL_RCGCGPIO) |= 0x4080;//Запуск генераторов портов "H" и "Q"
-
-	 RunClocking();
-
-	 //Для порта "Q" (SPI)
-	 HWREG(GPIO_PORTQ_BASE + GPIO_O_DIR)   |= 0x0005;//пины на передачу (PQ3 на прием)
-	 HWREG(GPIO_PORTQ_BASE + GPIO_O_DEN)   |= 0x000D;//цифровой сигнал
-
-	 //Для порта "H" (CE)
-	 HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DIR) |= 0x0001;//пин на передачу
-	 HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DEN) |= 0x0001;//цифровой сигнал
-}
-
 
 
 void    InitFlash(void)
