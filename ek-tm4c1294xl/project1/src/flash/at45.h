@@ -8,6 +8,10 @@ AT45.H
 
 
 
+//#define NATIVE_FLASH
+
+
+
 void    InitFlash(void);
 
 boolean SafePageErase(void);
