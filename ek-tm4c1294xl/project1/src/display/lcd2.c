@@ -13,8 +13,11 @@ LCD2.C
 #include "inc/hw_ssi.h"
 #include "../main.h"
 #include "../display/display.h"
+#include "../time/delay.h"
 #include "cp1251.h"
 #include "lcd.h"
+
+
 
 #ifdef NATIVE_LCD
 
@@ -35,18 +38,7 @@ LCD2.C
 #define LCD_BIT_WR   0x02 //PG1
 #define LCD_BIT_E    0x08 //PC4
 
-//3 такта на запуск генераторов периферии
-static void RunClocking(void)
-{
-__asm("   nop\n"
-      "   nop\n"
-      "   nop\n");
-}
 
-static void _NOP(void)
-{
-  __asm(" nop\n");
-}
 
 //”становка одного или нескольких из управл€ющих битов ∆ »
 void SetCtrlBit_LCD(unsigned int wSetBit)

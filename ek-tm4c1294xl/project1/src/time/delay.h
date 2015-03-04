@@ -4,6 +4,9 @@ DELAY.H
 
 ------------------------------------------------------------------------------*/
 
+void    Nop(void);
+void    RunClocking(void);
+
 void    DelayMicro(uint  wMicroSec);
 void    DelayMilly(uint  wMillySec);
 
