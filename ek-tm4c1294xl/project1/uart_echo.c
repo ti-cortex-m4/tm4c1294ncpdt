@@ -20,6 +20,7 @@ TODO .C
 #include "utils/uartstdio.h"
 #include "src/display/lcd.h"
 #include "src/time/rtc.h"
+#include "src/keyboard/key.h"
 #include "src/keyboard/keyboard.h"
 #include "src/flash/at45.h"
 #include "src/display/display.h"
@@ -59,6 +60,7 @@ int main(void) {
 	InitRTC();
 
 	InitSettings();
+	InitKey();
 	InitKeyboard();
 	InitImpulses();
 	InitFactors();
