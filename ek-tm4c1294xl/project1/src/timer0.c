@@ -12,6 +12,7 @@ TODO volatile
 #include 		"driverlib/sysctl.h"
 #include 		"driverlib/timer.h"
 #include 		"serial0.h"
+#include 		"keyboard/key.h"
 #include 		"display/lcd.h"
 
 
@@ -39,4 +40,5 @@ void Timer0IntHandler(void) {
 
 	InDelay0_Timer0();
 	LCD_Timer0();
+	Key_Timer0();
 }

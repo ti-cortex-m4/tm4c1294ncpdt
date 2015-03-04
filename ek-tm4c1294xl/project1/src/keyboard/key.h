@@ -5,3 +5,6 @@ KEY.H
 ------------------------------------------------------------------------------*/
 
 #define NATIVE_KEYBOARD
+
+void    InitKey(void);
+void	  Key_Timer0(void);
