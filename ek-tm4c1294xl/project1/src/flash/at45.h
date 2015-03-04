@@ -8,7 +8,7 @@ AT45.H
 
 
 
-//#define NATIVE_FLASH
+#define NATIVE_FLASH
 
 
 void    Init_SPIhandAT45DB321(void);

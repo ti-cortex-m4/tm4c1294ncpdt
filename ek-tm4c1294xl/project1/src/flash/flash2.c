@@ -8,6 +8,7 @@ FLASH2.C
 #include 		"inc/hw_gpio.h"
 #include 		"inc/hw_memmap.h"
 #include 		"inc/hw_sysctl.h"
+#include 		"inc/hw_types.h"
 #include        "../time/delay.h"
 #include        "at45.h"
 #include        "flash1.h"
