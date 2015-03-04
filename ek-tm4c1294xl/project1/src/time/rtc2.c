@@ -11,6 +11,7 @@ RTC2.C
 #include 				"inc/hw_gpio.h"
 #include 				"inc/hw_memmap.h"
 #include        "inc/hw_ssi.h"
+#include "../time/delay.h"
 #include        "rtc.h"
 #include        "rtc2.h"
 
@@ -21,13 +22,6 @@ RTC2.C
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
 
-//3 такта на запуск генераторов периферии
-static void RunClocking(void)
-{
-__asm("   nop\n"
-      "   nop\n"
-      "   nop\n");
-}
 
 
 void    InitGPIO_RTC() {

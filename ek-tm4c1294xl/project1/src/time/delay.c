@@ -13,6 +13,14 @@ void    Nop(void) {
 }
 
 
+void    RunClocking(void) {
+__asm("   nop\n"
+      "   nop\n"
+      "   nop\n");
+}
+
+
+
 void    DelayMicro(uint  wMicroSec) {
   if (wMicroSec == 0) return;
 

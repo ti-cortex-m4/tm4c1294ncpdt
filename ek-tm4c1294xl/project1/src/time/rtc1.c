@@ -7,10 +7,11 @@ RTC.C
 #include        "../main.h"
 #include        "../time/timedate.h"
 #include        "../display/lines.h"
-#include 				"inc/hw_sysctl.h"
-#include 				"inc/hw_gpio.h"
-#include 				"inc/hw_memmap.h"
+#include 		"inc/hw_sysctl.h"
+#include 		"inc/hw_gpio.h"
+#include 		"inc/hw_memmap.h"
 #include        "inc/hw_ssi.h"
+#include        "../time/delay.h"
 #include        "rtc.h"
 #include        "rtc1.h"
 
@@ -19,14 +20,6 @@ RTC.C
 
 
 #define HWREG(x) (*((volatile uint32_t *)(x)))
-
-//3 такта на запуск генераторов периферии
-static void RunClocking(void)
-{
-__asm("   nop\n"
-      "   nop\n"
-      "   nop\n");
-}
 
 
 void    InitGPIO_RTC(void) {
