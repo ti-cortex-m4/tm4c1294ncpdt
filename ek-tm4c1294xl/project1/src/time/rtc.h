@@ -8,7 +8,7 @@ RTC.H
 
 
 
-//#define NATIVE_RTC
+#define NATIVE_RTC
 
 
 void    InitGPIO_RTC();

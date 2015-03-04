@@ -11,6 +11,7 @@ LCD2.C
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
+#include "inc/hw_types.h"
 #include "../main.h"
 #include "../display/display.h"
 #include "../time/delay.h"
@@ -123,7 +124,7 @@ void Write_Byte_LCD(unsigned char bflagDC, unsigned char bData)
  HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + 0x3FC) = bData;//записываем в порт "K" 8 бит данных (шина данных)
 
  SetCtrlBit_LCD(LCD_BIT_E);    //E=1
- _NOP();//мин. импульс 230 нсек.
+ Nop();//мин. импульс 230 нсек.
  ClearCtrlBit_LCD(LCD_BIT_E);  //E=0
 }
 
@@ -137,7 +138,7 @@ unsigned char Read_Byte_LCD(unsigned char bflagDC)
 
  SetCtrlBit_LCD(LCD_BIT_WR);   //WR=1 - чтение
  SetCtrlBit_LCD(LCD_BIT_E);    //E=1
- _NOP();//мин. импульс 230 нсек.
+ Nop();//мин. импульс 230 нсек.
 
  //bflagDC = HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x3FC);//читаем из порта "K" 8 бит данных (шина данных)
  bflagDC = HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + 0x3FC);//читаем из порта "K" 8 бит данных (шина данных)
