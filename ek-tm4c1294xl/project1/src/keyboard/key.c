@@ -14,8 +14,8 @@ KEY.C
 #include        "key.h"
 
 
+
 static uchar            bRepeat;        // счётчик для обработка антидребезга
-static uchar            cbAmount;       // количество нажатых клавиш за цикл сканирования
 static uchar            bPrevKey;       // код нажатой клавишы за предыдущий период сканирования
 
 
@@ -50,7 +50,7 @@ void    InitKey(void)
 #endif
 }
 
-//Lo(5, HWREG((GPIO_PORTN_BASE + GPIO_O_DATA + 0x0004)));
+
 
 uint    GetKey(void)
 {
@@ -110,7 +110,6 @@ uint   i;
 
     if (i != 0)                                // если есть нажатие клавишы
     {
-      //cbAmount++;
       bKey = ConvertKey(i);
     }
     else                                       // если не нажато ни одной клавиши
@@ -119,19 +118,15 @@ uint   i;
       bRepeat  = 0;
     }
 
-      if (/*(cbAmount == 1) &&*/ (bPrevKey == 0))   // если нажата одна клавиша (без повторов)
+    if ((bKey != 0) && (bPrevKey == 0))         // если нажата одна клавиша (без повторов)
+    {
+      if (++bRepeat > 5)                        // обработка антидребезга
       {
-        if (++bRepeat > 5)                      // обработка антидребезга
-        {
-          bRepeat  = 0;
-          bPrevKey = bKey;
+        bRepeat  = 0;
+        bPrevKey = bKey;
 
-          fKey = true;                          // можно обрабатывать нажатие клавишы
-        }
+        fKey = true;                            // можно обрабатывать нажатие клавишы
       }
-
-
-      //cbAmount = 0;
     }
-
+  }
 }
