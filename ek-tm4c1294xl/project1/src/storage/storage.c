@@ -13,7 +13,7 @@ STORAGE.C
 #include        "../energy2.h"
 #include        "../energy3.h"
 #include        "../display/display.h"
-#include        "../delay.h"
+#include        "../time/delay.h"
 
 
 
