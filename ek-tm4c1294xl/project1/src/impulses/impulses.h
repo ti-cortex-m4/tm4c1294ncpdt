@@ -15,6 +15,7 @@ extern  volatile bool           fOnImpulse, fOnSecond;
 void    EnableImpulses(void);
 void    DisableImpulses(void);
 
+void    Impulses_Timer0(void);
 void    Impulses_Timer1(void);
 
 void    InitImpulses(void);

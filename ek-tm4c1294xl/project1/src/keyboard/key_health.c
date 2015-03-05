@@ -16,7 +16,7 @@ KEY_HEALTH.H
 
 
 //                                         0123456789ABCDEF
-static char const       szHealth[]      = "Запросы         ";
+static char const       szHealth[]      = "Проверка часов  ";
 
 
 
@@ -54,8 +54,6 @@ void    auto_GetHealth(void)
   if (enKeyboard == KBD_POSTENTER)
   { 
     szLo[0]= GetHealth(boHealthLabelRTC);
-	  szLo[1]= GetHealth(boHealthTimeRTC);
-
-	  Lo(5, HWREG((GPIO_PORTK_BASE + GPIO_O_DATA + 0x0004)));
+    szLo[1]= GetHealth(boHealthTimeRTC);
   }
 }
