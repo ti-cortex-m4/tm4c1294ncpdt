@@ -4,7 +4,7 @@ IMPULSES.H
 
 ------------------------------------------------------------------------------*/
 
-//#define NATIVE_IMPULSES
+#define NATIVE_IMPULSES
 
 
 

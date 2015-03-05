@@ -18,6 +18,7 @@ TODO .C
 #include "driverlib/timer.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
+#include "src/beep.h"
 #include "src/display/lcd.h"
 #include "src/time/rtc.h"
 #include "src/keyboard/key.h"
@@ -55,6 +56,7 @@ int main(void) {
                                              SYSCTL_CFG_VCO_480), 120000000);
   InitUARTs(ui32SysClock);
 
+	InitBeep();
 	InitLCD();
 	InitFlash();
 	InitRTC();

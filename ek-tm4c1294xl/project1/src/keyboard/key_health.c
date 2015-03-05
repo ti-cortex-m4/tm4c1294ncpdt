@@ -8,6 +8,10 @@ KEY_HEALTH.H
 #include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../health.h"
+#include       "inc/hw_gpio.h"
+#include       "inc/hw_memmap.h"
+#include       "inc/hw_sysctl.h"
+#include       "inc/hw_types.h"
 
 
 
@@ -50,6 +54,8 @@ void    auto_GetHealth(void)
   if (enKeyboard == KBD_POSTENTER)
   { 
     szLo[0]= GetHealth(boHealthLabelRTC);
-	szLo[1]= GetHealth(boHealthTimeRTC);
+	  szLo[1]= GetHealth(boHealthTimeRTC);
+
+	  Lo(5, HWREG((GPIO_PORTK_BASE + GPIO_O_DATA + 0x0004)));
   }
 }
