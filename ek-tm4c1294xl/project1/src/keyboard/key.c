@@ -25,25 +25,17 @@ void    InitKey(void)
 #ifdef NATIVE_KEYBOARD
 
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R12; // GPIO Port N Run Mode Clock Gating Control
-
   RunClocking();
-
   HWREG(GPIO_PORTN_BASE + GPIO_O_DIR) &= 0xFFC0; // GPIO Direction
   HWREG(GPIO_PORTN_BASE + GPIO_O_DEN) |= 0x003F; // GPIO Digital Enable
 
-
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R7; // GPIO Port H Run Mode Clock Gating Control
-
   RunClocking();
-
   HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DIR) &= 0xFFF0; // GPIO Direction
   HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DEN) |= 0x000F; // GPIO Digital Enable
 
-
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R14; // GPIO Port Q Run Mode Clock Gating Control
-
   RunClocking();
-
   HWREG(GPIO_PORTQ_BASE + GPIO_O_DIR) &= 0xFFF0; // GPIO Direction
   HWREG(GPIO_PORTQ_BASE + GPIO_O_DEN) |= 0x000F; // GPIO Digital Enable
 

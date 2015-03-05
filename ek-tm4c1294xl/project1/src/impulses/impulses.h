@@ -4,6 +4,10 @@ IMPULSES.H
 
 ------------------------------------------------------------------------------*/
 
+//#define NATIVE_IMPULSES
+
+
+
 extern  volatile bool           fOnImpulse, fOnSecond;
 
 
