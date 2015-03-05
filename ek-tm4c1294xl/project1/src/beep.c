@@ -37,9 +37,7 @@ void    InitBeep(void) {
 #ifdef NATIVE_BEEP
 
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R4; // GPIO Port E Run Mode Clock Gating Control
-
   RunClocking();
-
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DIR) |= 0x0008; // GPIO Direction
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DEN) |= 0x0008; // GPIO Digital Enable
 
