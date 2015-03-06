@@ -10,12 +10,14 @@ REALTIME_INIT.C
 #include        "../flash/records.h"
 #include        "../time/timedate.h"
 #include        "../time/rtc.h"
+#include        "../time/delay.h"
 #include        "../display/display.h"
+#include        "../display/lcd.h"
 #include        "../hardware/watchdog.h"
+#include        "../beep.h"
 #include        "realtime.h"
 #include        "realtime_storage.h"
 
-#include        "../display/lcd.h"
 
 
 boolean RealtimeOffline(void)
@@ -168,17 +170,33 @@ void    InitRealtime(void)
 {
 //  if (GetLabelRTC() == 0) TestError(szBadRTC1);
 
-//  PGetCurrTimeDate();
-//  if (TrueCurrTimeDate() == 0) // TestError(szBadRTC2);
-//  {
-//    ShowHi(szAlarm);
-//    ShowLo(szBadRTC2); LongBeep(); DelayMsg();
-//    return;
-//  }
+  if (TrueCurrTimeDate(GetCurrTimeDate()) == false)
+  {
+    ShowHi(szAlarm);
+    ShowLo(szBadRTC2);
+
+    LongBeep();
+    DelayMsg();
+
+    enGlobal = GLB_PROGRAM;
+    return;
+  }
 
   if (enGlobal == GLB_WORK)
   {
     LoadRealtime();
+
+    if (TrueCurrTimeDate(&tiCurr) == false)
+    {
+      ShowHi(szAlarm);
+      ShowLo(szBadRTC2); // TODO
+
+      LongBeep();
+      DelayMsg();
+
+      enGlobal = GLB_PROGRAM;
+      return;
+    }
 
     fSummer = 0;
     fWinter = 0;
