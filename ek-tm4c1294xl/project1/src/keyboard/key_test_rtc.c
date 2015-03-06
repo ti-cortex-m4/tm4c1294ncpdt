@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_HEALTH.H
+KEY_TEST_RTC.H
 
  
 ------------------------------------------------------------------------------*/
@@ -16,11 +16,11 @@ KEY_HEALTH.H
 
 
 //                                         0123456789ABCDEF
-static char const       szHealth[]      = "Проверка часов  ";
+static char const       szTestRTC[]     = "Тест часов      ";
 
 
 
-void    key_GetHealth(void)
+void    key_GetTestRTC(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -28,7 +28,7 @@ void    key_GetHealth(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ShowHi(szHealth);
+      ShowHi(szTestRTC);
       Clear();
     }
   }
@@ -36,7 +36,7 @@ void    key_GetHealth(void)
 
 
 
-uchar   GetHealth(boolean  bo)
+uchar   ShowTestRTC(boolean  bo)
 {
   switch (bo)
   {
@@ -49,11 +49,11 @@ uchar   GetHealth(boolean  bo)
 
 
 
-void    auto_GetHealth(void)
+void    auto_GetTestRTC(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   { 
-    szLo[0]= GetHealth(boHealthLabelRTC);
-    szLo[1]= GetHealth(boHealthTimeRTC);
+    szLo[0]= ShowTestRTC(boHealthLabelRTC);
+    szLo[1]= ShowTestRTC(boHealthTimeRTC);
   }
 }

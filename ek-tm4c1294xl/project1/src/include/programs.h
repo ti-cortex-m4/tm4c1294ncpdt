@@ -172,7 +172,9 @@ PROGRAMS.H
 #define bSET_WINTER                 125
 
 #define bGET_ANALYSIS1              220
-#define bGET_HEALTH                 229
+#define bGET_TEST_IMPULSES          227
+#define bGET_TEST_KEYS              228
+#define bGET_TEST_RTC               229
 
 
 #endif

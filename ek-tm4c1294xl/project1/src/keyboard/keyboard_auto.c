@@ -10,12 +10,14 @@ KEYBOARD_AUTO.C
 #include        "../impulses/impulses.h"
 #include        "keyboard.h"
 #include        "key_timedate.h"
-#include        "key_analysis.h"
-#include        "key_health.h"
 #include        "impulses/key_single.h"
 #include        "impulses/key_single2.h"
 #include        "impulses/key_oldprogram73.h"
 #include        "impulses/key_oldprogram74.h"
+#include        "key_analysis.h"
+#include        "key_test_impulses.h"
+#include        "key_test_keys.h"
+#include        "key_test_rtc.h"
 
 
 
@@ -29,7 +31,10 @@ void    Keyboard_Auto(void)
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
       case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
-      case bGET_HEALTH:         auto_GetHealth();       break;
+
+      case bGET_TEST_IMPULSES:  auto_GetTestImpulses(); break;
+      case bGET_TEST_KEYS:      auto_GetTestKeys();     break;
+      case bGET_TEST_RTC:       auto_GetTestRTC();      break;
     }
   }
 
@@ -41,7 +46,10 @@ void    Keyboard_Auto(void)
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
 
       case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
-      case bGET_HEALTH:         auto_GetHealth();       break;
+
+      case bGET_TEST_IMPULSES:  auto_GetTestImpulses(); break;
+      case bGET_TEST_KEYS:      auto_GetTestKeys();     break;
+      case bGET_TEST_RTC:       auto_GetTestRTC();      break;
     }
 
     // обновление показаний с каждым импульсом
@@ -88,7 +96,9 @@ void    Keyboard_Auto(void)
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
       case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
-      case bGET_HEALTH:         auto_GetHealth();       break;
-    }
+
+      case bGET_TEST_IMPULSES:  auto_GetTestImpulses(); break;
+      case bGET_TEST_KEYS:      auto_GetTestKeys();     break;
+      case bGET_TEST_RTC:       auto_GetTestRTC();      break;    }
   }
 }

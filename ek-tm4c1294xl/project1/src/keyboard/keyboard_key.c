@@ -34,7 +34,9 @@ KEYBOARD_KEY.C
 #include        "impulses/key_oldprogram74.h"
 #include        "key_reset.h"
 #include        "key_analysis.h"
-#include        "key_health.h"
+#include        "key_test_impulses.h"
+#include        "key_test_keys.h"
+#include        "key_test_rtc.h"
 
 
 
@@ -99,7 +101,10 @@ void    Keyboard_Key(void)
       case bSET_SUMMER:         key_SetSeason();        break;
 
       case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
-      case bGET_HEALTH:         key_GetHealth();        break;
+
+      case bGET_TEST_IMPULSES:  key_GetTestImpulses();  break;
+      case bGET_TEST_KEYS:      key_GetTestKeys();      break;
+      case bGET_TEST_RTC:       key_GetTestRTC();       break;
 
       default:                  NoProgram();            break;
     }
@@ -229,7 +234,10 @@ void    Keyboard_Key(void)
       case bSET_SUMMER:         key_SetSeason();        break;
 
       case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
-      case bGET_HEALTH:         key_GetHealth();        break;
+
+      case bGET_TEST_IMPULSES:  key_GetTestImpulses();  break;
+      case bGET_TEST_KEYS:      key_GetTestKeys();      break;
+      case bGET_TEST_RTC:       key_GetTestRTC();       break;
 
       default:                  NoProgram();            break;
     }
@@ -284,7 +292,10 @@ void    Keyboard_Key(void)
       case bSET_SUMMER:         key_SetSeason();        break;
 
       case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
-      case bGET_HEALTH:         key_GetHealth();        break;
+
+      case bGET_TEST_IMPULSES:  key_GetTestImpulses();  break;
+      case bGET_TEST_KEYS:      key_GetTestKeys();      break;
+      case bGET_TEST_RTC:       key_GetTestRTC();       break;
 
       default:                  NoProgram();            break;
     }
