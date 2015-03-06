@@ -36,7 +36,7 @@ void    key_TestImpulses(void)
 
 static void ShowImpulses(uchar  i, uint  w)
 {
-
+  szLo[i] = (w == 0) ? '0' : '1';
 }
 
 
