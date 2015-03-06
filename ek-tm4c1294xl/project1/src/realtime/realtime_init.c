@@ -15,6 +15,7 @@ REALTIME_INIT.C
 #include        "../display/lcd.h"
 #include        "../hardware/watchdog.h"
 #include        "../beep.h"
+#include        "../serial/print.h"
 #include        "realtime.h"
 #include        "realtime_storage.h"
 
@@ -33,12 +34,19 @@ time    tiT;
     tiT = *GetCurrTimeDate();
     tiCurr.bSecond = tiT.bSecond;
 
+    PrintString("\n");
+    PrintString("\n"); PrintTime(&tiCurr);
+    PrintString("\n"); PrintTime(&tiT);
+
     if ((tiCurr.bMinute == tiT.bMinute) &&
         (tiCurr.bHour   == tiT.bHour)   &&
         (tiCurr.bDay    == tiT.bDay)    &&
         (tiCurr.bMonth  == tiT.bMonth)  &&
         (tiCurr.bYear   == tiT.bYear))
-    	return TRUE;
+    {
+    	PrintString("\n Finish OK");
+      return TRUE;
+    }
 
     // перевод время в интервалом в минуту
     if (++tiCurr.bMinute >= 60)
@@ -62,6 +70,7 @@ time    tiT;
       }
     }
 
+    PrintString(" ProcessTime");
     ProcessTime();
 
     sprintf(szHi," %02u:%02u %02u.%02u.%02u ",
@@ -147,6 +156,10 @@ void    LoadRealtime(void)
   LoadPointersMon();
 
   LoadTimeCurr();
+
+  PrintString("\n LoadRealtime");
+  PrintString("\n tiCurr="); PrintTime(&tiCurr);
+  PrintString("\n tiPrev="); PrintTime(&tiPrev);
 }
 
 
@@ -168,6 +181,7 @@ void    DefaultRealtime(void)
 
 void    InitRealtime(void)
 {
+  PrintStart();
 //  if (GetLabelRTC() == 0) TestError(szBadRTC1);
 
   if (TrueCurrTimeDate(GetCurrTimeDate()) == false)

@@ -13,36 +13,61 @@ PRINT.C
 
 
 void    PrintStart(void) {
-  IntEnable(INT_UART0);
+#ifdef ENABLE_PRINT
+
+  IntDisable(INT_UART0);
+  UARTStdioConfig(0, 9600, 120000000);
+
+#endif
 }
 
 
 void    PrintString(const char  *psz) {
+#ifdef ENABLE_PRINT
+
   UARTprintf(psz);
+
+#endif
 }
 
 
 void    PrintChar(uchar  b) {
+#ifdef ENABLE_PRINT
+
   UARTprintf("u", b);
+
+#endif
 }
 
 
 void    PrintInt(uint  w) {
+#ifdef ENABLE_PRINT
+
   UARTprintf("u", w);
+
+#endif
 }
 
 
-void    PrintTime(time  ti) {
+void    PrintTime(time  *pti) {
+#ifdef ENABLE_PRINT
+
   UARTprintf("%02u:%02u:%02u %02u.%02u.%02u",
-             ti.bHour,
-             ti.bMinute,
-             ti.bSecond,
-             ti.bDay,
-             ti.bMonth,
-             ti.bYear);
+             pti->bHour,
+             pti->bMinute,
+             pti->bSecond,
+             pti->bDay,
+             pti->bMonth,
+             pti->bYear);
+
+#endif
 }
 
 
 void    PrintStop(void) {
-	IntDisable(INT_UART0);
+#ifdef ENABLE_PRINT
+
+	IntEnable(INT_UART0);
+
+#endif
 }

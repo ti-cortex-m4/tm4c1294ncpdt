@@ -128,6 +128,7 @@ void    ProcessTime(void)
   // переход на следующую минуту
   if (tiCurr.bMinute != tiPrev.bMinute)
   {
+    PrintString("\n Next 1 min");
     NextMinute1();
   }
 
@@ -135,6 +136,7 @@ void    ProcessTime(void)
   // переход на следующие три минуты
   if ((tiCurr.bMinute % 3 == 0) && (tiPrev.bMinute % 3 != 0))
   {
+    PrintString("\n Next 3 min");
     NextMinute3();
   }
 
@@ -183,13 +185,17 @@ void    ProcessTime(void)
         (tiCurr.bHour  == 2)               && (fSeason == 1))
       { }
     else
+    {
+      PrintString("\n Next 30 min");
       NextMinute30();
+    }
   }
 
 
   // переход на следующие сутки
   if (tiCurr.bDay != tiPrev.bDay)
   {
+    PrintString("\n Next day");
     fSeason = 0;
     NextDay();
   }
@@ -198,6 +204,7 @@ void    ProcessTime(void)
   // переход на следующий месяц
   if (tiCurr.bMonth != tiPrev.bMonth)
   {
+    PrintString("\n Next month");
   	NextMonth();
   }
 
