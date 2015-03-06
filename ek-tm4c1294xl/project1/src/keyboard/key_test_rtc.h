@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-KEY_HEALTH.H
+KEY_TEST_RTC.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetHealth(void);
-void    auto_GetHealth(void);
+void    key_GetTestRTC(void);
+void    auto_GetTestRTC(void);
