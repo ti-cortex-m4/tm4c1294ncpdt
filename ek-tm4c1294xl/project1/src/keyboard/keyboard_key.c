@@ -63,7 +63,7 @@ void    Keyboard_Key(void)
 
       case bSET_DAY_ZONE:       key_SetDayZone();       break;
       case bSET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
-      case bSET_TARIFFS_MODE:		key_SetTariffsMode();		break;
+      case bSET_TARIFFS_MODE:   key_SetTariffsMode();   break;
 
       case bSET_PROGRAM10:
       case bSET_PROGRAM17:
@@ -102,9 +102,9 @@ void    Keyboard_Key(void)
 
       case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
 
-      case bGET_TEST_IMPULSES:  key_GetTestImpulses();  break;
-      case bGET_TEST_KEYS:      key_GetTestKeys();      break;
-      case bGET_TEST_RTC:       key_GetTestRTC();       break;
+      case bTEST_IMPULSES:      key_TestImpulses();     break;
+      case bTEST_KEYS:          key_TestKeys();         break;
+      case bTEST_RTC:           key_TestRTC();          break;
 
       default:                  NoProgram();            break;
     }
@@ -122,7 +122,7 @@ void    Keyboard_Key(void)
       case bGET_GROUPS:         key_GetGroups();        break;
 
       case bGET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
-      case bGET_TARIFFS_MODE:		key_SetTariffsMode();		break;
+      case bGET_TARIFFS_MODE:   key_SetTariffsMode();   break;
 
       case bGET_PROGRAM5:       key_GetOldProgram5();   break;
       case bGET_PROGRAM84:
@@ -235,9 +235,9 @@ void    Keyboard_Key(void)
 
       case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
 
-      case bGET_TEST_IMPULSES:  key_GetTestImpulses();  break;
-      case bGET_TEST_KEYS:      key_GetTestKeys();      break;
-      case bGET_TEST_RTC:       key_GetTestRTC();       break;
+      case bTEST_IMPULSES:      key_TestImpulses();     break;
+      case bTEST_KEYS:          key_TestKeys();         break;
+      case bTEST_RTC:           key_TestRTC();          break;
 
       default:                  NoProgram();            break;
     }
@@ -293,9 +293,9 @@ void    Keyboard_Key(void)
 
       case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
 
-      case bGET_TEST_IMPULSES:  key_GetTestImpulses();  break;
-      case bGET_TEST_KEYS:      key_GetTestKeys();      break;
-      case bGET_TEST_RTC:       key_GetTestRTC();       break;
+      case bTEST_IMPULSES:      key_TestImpulses();     break;
+      case bTEST_KEYS:          key_TestKeys();         break;
+      case bTEST_RTC:           key_TestRTC();          break;
 
       default:                  NoProgram();            break;
     }

@@ -4,5 +4,5 @@ KEY_TEST_IMPULSES.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetTestImpulses(void);
-void    auto_GetTestImpulses(void);
+void    key_TestImpulses(void);
+void    auto_TestImpulses(void);
