@@ -16,7 +16,8 @@ KEY_TEST_RTC.H
 
 
 //                                         0123456789ABCDEF
-static char const       szTestRTC[]     = "Тест часов      ";
+static char const       szTestRTC1[]    = "Тест часов      ",
+                        szTestRTC2[]    = "метка    время  ";
 
 
 
@@ -28,8 +29,8 @@ void    key_TestRTC(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ShowHi(szTestRTC);
-      Clear();
+      ShowHi(szTestRTC1);
+      ShowLo(szTestRTC2);
     }
   }
 }
@@ -43,7 +44,7 @@ static uchar ShowRTC(boolean  bo)
     case TRUE:      return '+';
     case FALSE:     return '-';
     case UNDEFINED: return '?';
-    default:        return '.';
+    default:        return ' ';
   }
 }
 
@@ -53,7 +54,7 @@ void    auto_TestRTC(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   { 
-    szLo[0]= ShowRTC(boHealthLabelRTC);
-    szLo[1]= ShowRTC(boHealthTimeRTC);
+    szLo[6]  = ShowRTC(boHealthLabelRTC);
+    szLo[15] = ShowRTC(boHealthTimeRTC);
   }
 }
