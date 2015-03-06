@@ -20,7 +20,7 @@ static char const       szTestKeys[]    = "Тест клавиатуры ";
 
 
 
-void    key_GetTestKeys(void)
+void    key_TestKeys(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -36,7 +36,7 @@ void    key_GetTestKeys(void)
 
 
 
-void    auto_GetTestKeys(void)
+void    auto_TestKeys(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   { 

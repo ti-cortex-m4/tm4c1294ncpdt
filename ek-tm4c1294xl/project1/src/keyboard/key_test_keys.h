@@ -4,5 +4,5 @@ KEY_TEST_KEYS.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetTestKeys(void);
-void    auto_GetTestKeys(void);
+void    key_TestKeys(void);
+void    auto_TestKeys(void);

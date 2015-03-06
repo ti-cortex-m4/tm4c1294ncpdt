@@ -20,7 +20,7 @@ static char const       szTestRTC[]     = "Тест часов      ";
 
 
 
-void    key_GetTestRTC(void)
+void    key_TestRTC(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -36,7 +36,7 @@ void    key_GetTestRTC(void)
 
 
 
-uchar   ShowTestRTC(boolean  bo)
+static uchar ShowRTC(boolean  bo)
 {
   switch (bo)
   {
@@ -49,11 +49,11 @@ uchar   ShowTestRTC(boolean  bo)
 
 
 
-void    auto_GetTestRTC(void)
+void    auto_TestRTC(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   { 
-    szLo[0]= ShowTestRTC(boHealthLabelRTC);
-    szLo[1]= ShowTestRTC(boHealthTimeRTC);
+    szLo[0]= ShowRTC(boHealthLabelRTC);
+    szLo[1]= ShowRTC(boHealthTimeRTC);
   }
 }

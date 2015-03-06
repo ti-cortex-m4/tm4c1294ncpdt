@@ -4,5 +4,5 @@ KEY_TEST_RTC.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetTestRTC(void);
-void    auto_GetTestRTC(void);
+void    key_TestRTC(void);
+void    auto_TestRTC(void);

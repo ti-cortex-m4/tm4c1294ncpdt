@@ -32,9 +32,9 @@ void    Keyboard_Auto(void)
 
       case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
 
-      case bGET_TEST_IMPULSES:  auto_GetTestImpulses(); break;
-      case bGET_TEST_KEYS:      auto_GetTestKeys();     break;
-      case bGET_TEST_RTC:       auto_GetTestRTC();      break;
+      case bTEST_IMPULSES:      auto_TestImpulses();    break;
+      case bTEST_KEYS:          auto_TestKeys();        break;
+      case bTEST_RTC:           auto_TestRTC();         break;
     }
   }
 
@@ -47,9 +47,9 @@ void    Keyboard_Auto(void)
 
       case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
 
-      case bGET_TEST_IMPULSES:  auto_GetTestImpulses(); break;
-      case bGET_TEST_KEYS:      auto_GetTestKeys();     break;
-      case bGET_TEST_RTC:       auto_GetTestRTC();      break;
+      case bTEST_IMPULSES:      auto_TestImpulses();    break;
+      case bTEST_KEYS:          auto_TestKeys();        break;
+      case bTEST_RTC:           auto_TestRTC();         break;
     }
 
     // обновление показаний с каждым импульсом
@@ -97,8 +97,9 @@ void    Keyboard_Auto(void)
 
       case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
 
-      case bGET_TEST_IMPULSES:  auto_GetTestImpulses(); break;
-      case bGET_TEST_KEYS:      auto_GetTestKeys();     break;
-      case bGET_TEST_RTC:       auto_GetTestRTC();      break;    }
+      case bTEST_IMPULSES:      auto_TestImpulses();    break;
+      case bTEST_KEYS:          auto_TestKeys();        break;
+      case bTEST_RTC:           auto_TestRTC();         break;
+    }
   }
 }
