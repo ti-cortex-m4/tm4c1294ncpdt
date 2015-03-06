@@ -36,7 +36,7 @@ void    ShowFlashErase(void)
 void    ShowFlashRead(void)
 {
   ResetWDT();
-  ShowPercent((ulong)100*(++wPage)/((FLS_END-FLS_BEGIN)/8));
+  ShowPercent((ulong)100*(++wPage)/((FLS_END-FLS_BEGIN+1)/2));
 }
 
 
@@ -135,7 +135,7 @@ uint    i;
   ShowHi(szFlashRead);
   wPage = 0;
 
-  for (wPageIn=FLS_BEGIN; wPageIn<FLS_END; wPageIn += 8)
+  for (wPageIn=FLS_BEGIN; wPageIn<FLS_END; wPageIn += 2)
   {
     if (SafePageRead() == FALSE) return FALSE;
     if (GetFlashChecksum() == 0) return FALSE;

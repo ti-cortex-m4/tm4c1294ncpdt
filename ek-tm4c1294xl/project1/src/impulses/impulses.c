@@ -69,7 +69,6 @@ uint  i = 0;
 
 void    Impulses_Timer0(void) {
 // TODO uint *pwImpMntCan = mpwImpMntCan[ibSoftMnt];
-// TODO fOnImpulse
 
 	if (fEnabledImpulses)	{
 #ifdef NATIVE_IMPULSES
