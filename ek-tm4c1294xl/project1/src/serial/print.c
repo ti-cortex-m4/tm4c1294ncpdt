@@ -34,7 +34,7 @@ void    PrintString(const char  *psz) {
 void    PrintChar(uchar  b) {
 #ifdef ENABLE_PRINT
 
-  UARTprintf("u", b);
+  UARTprintf(" u ", b);
 
 #endif
 }
@@ -43,7 +43,7 @@ void    PrintChar(uchar  b) {
 void    PrintInt(uint  w) {
 #ifdef ENABLE_PRINT
 
-  UARTprintf("u", w);
+  UARTprintf(" u ", w);
 
 #endif
 }

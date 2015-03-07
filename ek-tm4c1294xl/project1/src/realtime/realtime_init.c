@@ -34,9 +34,7 @@ time    tiT;
     tiT = *GetCurrTimeDate();
     tiCurr.bSecond = tiT.bSecond;
 
-    PrintString("\n");
-    PrintString("\n"); PrintTime(&tiCurr);
-    PrintString("\n"); PrintTime(&tiT);
+    PrintString("\n"); PrintTime(&tiCurr); PrintTime(&tiT);
 
     if ((tiCurr.bMinute == tiT.bMinute) &&
         (tiCurr.bHour   == tiT.bHour)   &&
@@ -70,7 +68,6 @@ time    tiT;
       }
     }
 
-    PrintString(" ProcessTime");
     ProcessTime();
 
     sprintf(szHi," %02u:%02u %02u.%02u.%02u ",
@@ -155,11 +152,15 @@ void    LoadRealtime(void)
   LoadPointersDay();
   LoadPointersMon();
 
+  PrintString("\n 3min.   "); PrintInt(ibSoftMnt); PrintInt(ibHardMnt);
+  PrintString("\n 30 min. "); PrintInt(ibSoftHou); PrintInt(iwHardHou);
+  PrintString("\n day     "); PrintInt(ibSoftDay); PrintInt(ibHardDay);
+  PrintString("\n month   "); PrintInt(ibSoftMon); PrintInt(ibHardMon);
+
   LoadTimeCurr();
 
-  PrintString("\n LoadRealtime");
-  PrintString("\n tiCurr="); PrintTime(&tiCurr);
-  PrintString("\n tiPrev="); PrintTime(&tiPrev);
+  PrintString("\n tiCurr "); PrintTime(&tiCurr);
+  PrintString("\n tiPrev "); PrintTime(&tiPrev);
 }
 
 
@@ -181,7 +182,6 @@ void    DefaultRealtime(void)
 
 void    InitRealtime(void)
 {
-  PrintStart();
 //  if (GetLabelRTC() == 0) TestError(szBadRTC1);
 
   if (TrueCurrTimeDate(GetCurrTimeDate()) == false)
