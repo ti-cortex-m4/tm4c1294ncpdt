@@ -7,12 +7,17 @@ LCD.C
 #include <stdint.h>
 #include <stdio.h>
 
+#include "../main.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
+#include "driverlib/interrupt.h"
 #include "../main.h"
 #include "../display/display.h"
+#include "../time/delay.h"
+#include "../beep.h"
+#include "../hardware/watchdog.h"
 #include "cp1251.h"
 
 #define LCD_FLAG_COMM    0x00 // передать команду
@@ -206,6 +211,29 @@ void  ShowMsgLCD2(uchar  bT, char  *szT)
 }
 
 
+// вывод отметки о прохождении очередного теста
+void    TestOK(void)
+{
+  ReadyLCD();   SetDataLCD('-');
+}
+
+
+// вывод сообщения о ошибке теста
+void    TestError(const uchar  *szT)
+{
+	IntMasterDisable();
+
+  ShowMsgLCD(0x80, (const uchar *)szAlarm);
+  ShowMsgLCD(0xC0, szT);
+
+  while (1)
+  {
+    ResetWDT();
+    DelayMsg(); Beep();
+  }
+}
+
+
 void    InitLCD(void)
 {
 uchar  i;
@@ -231,6 +259,8 @@ uchar  i;
 
   ShowMsgLCD(0x80, szName);
   ShowMsgLCD(0xC0, szTest);
+
+  ReadyLCD();   SetCommLCD(0xC4);
 }
 
  uchar bPos =0;
