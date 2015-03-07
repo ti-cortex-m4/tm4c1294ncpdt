@@ -14,7 +14,7 @@ KEYBOARD_AUTO.C
 #include        "impulses/key_single2.h"
 #include        "impulses/key_oldprogram73.h"
 #include        "impulses/key_oldprogram74.h"
-#include        "key_analysis.h"
+#include        "key_test_response.h"
 #include        "key_test_impulses.h"
 #include        "key_test_keys.h"
 #include        "key_test_rtc.h"
@@ -30,8 +30,7 @@ void    Keyboard_Auto(void)
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
-      case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
-
+      case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
       case bTEST_RTC:           auto_TestRTC();         break;
@@ -45,8 +44,7 @@ void    Keyboard_Auto(void)
       case bGET_CURRTIME:       auto_GetCurrTime();     break;
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
 
-      case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
-
+      case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
       case bTEST_RTC:           auto_TestRTC();         break;
@@ -95,8 +93,7 @@ void    Keyboard_Auto(void)
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
-      case bGET_ANALYSIS1:      auto_GetAnalysis1();    break;
-
+      case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
       case bTEST_RTC:           auto_TestRTC();         break;

@@ -211,7 +211,7 @@ void    Response255_CRC(void)
       break;
 */
     default:
-      ShowCommandCRC(bSTA_BADCOMMAND);
+      ShowTestResponse(bSTA_BADCOMMAND);
       Result(bRES_BADCOMMAND);
       break;
   }

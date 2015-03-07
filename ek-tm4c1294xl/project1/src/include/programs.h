@@ -171,7 +171,7 @@ PROGRAMS.H
 #define bSET_SUMMER                 124
 #define bSET_WINTER                 125
 
-#define bGET_ANALYSIS1              220
+#define bTEST_RESPONSE              220
 #define bTEST_IMPULSES              227
 #define bTEST_KEYS                  228
 #define bTEST_RTC                   229

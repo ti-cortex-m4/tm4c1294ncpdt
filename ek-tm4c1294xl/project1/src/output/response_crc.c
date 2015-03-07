@@ -18,8 +18,8 @@ RESPONSE_CRC.C
 
 
 
-void    ShowCommandCRC(uchar  bState) {
-  if (bProgram == bGET_ANALYSIS1)
+void    ShowTestResponse(uchar  bState) {
+  if (bProgram == bTEST_RESPONSE)
   {
 #ifdef  MODBUS
     sprintf(szHi,"Порт %u: Mod%03u %u",ibPort+1,InBuff(3),bState);
@@ -43,11 +43,11 @@ void    ResponseCRC(void) {
   if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE) {
 
     mpSerial[ibPort] = SER_BEGIN;
-    ShowCommandCRC(bSTA_BEGIN);
+    ShowTestResponse(bSTA_BEGIN);
 
     MakeCRC16InBuff( 0, IndexInBuff() );
     if ((bCRCHi != 0) || (bCRCLo != 0)) {
-      ShowCommandCRC(bSTA_BADCRC);
+      ShowTestResponse(bSTA_BADCRC);
       return;
     }
 
@@ -67,18 +67,18 @@ void    ResponseCRC(void) {
 
     if ((bInBuff0 != 0) || (bInBuff1 != 0)) {
       if ((bInBuff0 != bLogical) || (bInBuff1 != 0)) {
-        ShowCommandCRC(bSTA_BADNUMBER);
+        ShowTestResponse(bSTA_BADNUMBER);
         return;
       }
     }
 
     if (bInBuff2 + bInBuff3*0x100 != IndexInBuff()) {
-      ShowCommandCRC(bSTA_BADSIZE);
+      ShowTestResponse(bSTA_BADSIZE);
       Result(bRES_BADSIZE);
       return;
     }
 
-    ShowCommandCRC(bSTA_OK);
+    ShowTestResponse(bSTA_OK);
     Response1_CRC();
   }
 }

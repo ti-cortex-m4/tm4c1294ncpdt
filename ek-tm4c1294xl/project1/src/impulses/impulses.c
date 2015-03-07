@@ -116,13 +116,13 @@ void    InitImpulses(void) {
 
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R9; // GPIO Port K Run Mode Clock Gating Control
   RunClocking();
-  HWREG(GPIO_PORTK_BASE + GPIO_O_DIR) &= 0xFFF0; // GPIO Direction
-  HWREG(GPIO_PORTK_BASE + GPIO_O_DEN) |= 0x000F; // GPIO Digital Enable
+  HWREG(GPIO_PORTK_BASE + GPIO_O_DIR) &= 0xFF00; // GPIO Direction
+  HWREG(GPIO_PORTK_BASE + GPIO_O_DEN) |= 0x00FF; // GPIO Digital Enable
 
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R11; // GPIO Port M Run Mode Clock Gating Control
   RunClocking();
-  HWREG(GPIO_PORTM_BASE + GPIO_O_DIR) &= 0xFFF0; // GPIO Direction
-  HWREG(GPIO_PORTM_BASE + GPIO_O_DEN) |= 0x000F; // GPIO Digital Enable
+  HWREG(GPIO_PORTM_BASE + GPIO_O_DIR) &= 0xFF00; // GPIO Direction
+  HWREG(GPIO_PORTM_BASE + GPIO_O_DEN) |= 0x00FF; // GPIO Digital Enable
 
   bLo0 = bLo1 = bLo2 = bLo3 = 0;
 

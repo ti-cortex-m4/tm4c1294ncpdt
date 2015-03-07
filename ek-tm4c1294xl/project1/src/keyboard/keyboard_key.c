@@ -33,7 +33,7 @@ KEYBOARD_KEY.C
 #include        "impulses/key_oldprogram73.h"
 #include        "impulses/key_oldprogram74.h"
 #include        "key_reset.h"
-#include        "key_analysis.h"
+#include        "key_test_response.h"
 #include        "key_test_impulses.h"
 #include        "key_test_keys.h"
 #include        "key_test_rtc.h"
@@ -100,8 +100,7 @@ void    Keyboard_Key(void)
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
-      case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
-
+      case bTEST_RESPONSE:      key_TestResponse();     break;
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
@@ -233,8 +232,7 @@ void    Keyboard_Key(void)
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
-      case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
-
+      case bTEST_RESPONSE:      key_TestResponse();     break;
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
@@ -291,8 +289,7 @@ void    Keyboard_Key(void)
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
-      case bGET_ANALYSIS1:      key_GetAnalysis1();     break;
-
+      case bTEST_RESPONSE:      key_TestResponse();     break;
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;

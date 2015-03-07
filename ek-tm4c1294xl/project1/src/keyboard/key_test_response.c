@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_ANALYSIS.H
+KEY_RESPONSE.H
 
  
 ------------------------------------------------------------------------------*/
@@ -13,12 +13,12 @@ _ANALYSIS.H
 
 
 
-//                                         0123456789ABCDEF
-static char const       szAnalysis1[]   = "Запросы         ";
+//                                          0123456789ABCDEF
+static char const       szTestResponse[] = "Запросы         ";
 
 
 
-void    key_GetAnalysis1(void)
+void    key_TestResponse(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -26,7 +26,7 @@ void    key_GetAnalysis1(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ShowHi(szAnalysis1);
+      ShowHi(szTestResponse);
       Clear();
     }
   }
@@ -34,7 +34,7 @@ void    key_GetAnalysis1(void)
 
 
 
-void    auto_GetAnalysis1(void)
+void    auto_TestResponse(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   { 
