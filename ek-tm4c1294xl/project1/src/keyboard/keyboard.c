@@ -11,6 +11,7 @@ KEYBOARD.C
 #include        "../display/display.h"
 #include        "../beep.h"
 #include        "../time/delay.h"
+#include        "../serial/print.h"
 #include        "../include/programs.h"
 #include        "../impulses/impulses.h"
 #include        "keyboard_auto.h"
@@ -212,6 +213,7 @@ uchar   i;
     if (enGlobal == GLB_REPROGRAM)
       szLo[0] = '=';
 
+    PrintStop();
     return;
   }
 

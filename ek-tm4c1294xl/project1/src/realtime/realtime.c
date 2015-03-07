@@ -129,7 +129,9 @@ void    ProcessTime(void)
   // переход на следующую минуту
   if (tiCurr.bMinute != tiPrev.bMinute)
   {
-  	if (fActive == 0) PrintString("\n next 1 min.");
+  	PrintStart();
+  	PrintString("\n tiCurr="); PrintTime(&tiCurr); PrintString(" tiPrev="); PrintTime(&tiPrev);
+  	PrintString("\n next 1 min.");
     NextMinute1();
   }
 
@@ -137,9 +139,9 @@ void    ProcessTime(void)
   // переход на следующие три минуты
   if ((tiCurr.bMinute % 3 == 0) && (tiPrev.bMinute % 3 != 0))
   {
-    if (fActive == 0) PrintString("\n next 3 min.");
+    PrintString("\n next 3 min.");
     NextMinute3();
-    if (fActive == 0) { PrintInt(ibSoftMnt); PrintInt(ibHardMnt); }
+    PrintInt(ibSoftMnt); PrintInt(ibHardMnt);
   }
 
 
@@ -188,9 +190,9 @@ void    ProcessTime(void)
       { }
     else
     {
-    	if (fActive == 0) PrintString("\n next 30 min.");
+    	PrintString("\n next 30 min.");
       NextMinute30();
-      if (fActive == 0) { PrintInt(ibSoftHou); PrintInt(iwHardHou); }
+      PrintInt(ibSoftHou); PrintInt(iwHardHou);
     }
   }
 
@@ -198,19 +200,19 @@ void    ProcessTime(void)
   // переход на следующие сутки
   if (tiCurr.bDay != tiPrev.bDay)
   {
-  	if (fActive == 0) PrintString("\n next day");
+  	PrintString("\n next day");
     fSeason = 0;
     NextDay();
-    if (fActive == 0) { PrintInt(ibSoftDay); PrintInt(ibHardDay); }
+    PrintInt(ibSoftDay); PrintInt(ibHardDay);
   }
 
 
   // переход на следующий месяц
   if (tiCurr.bMonth != tiPrev.bMonth)
   {
-  	if (fActive == 0) PrintString("\n next month");
+  	PrintString("\n next month");
   	NextMonth();
-  	if (fActive == 0) { PrintInt(ibSoftMon); PrintInt(ibHardMon); }
+  	PrintInt(ibSoftMon); PrintInt(ibHardMon);
   }
 
 
