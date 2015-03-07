@@ -14,6 +14,7 @@ DISPLAY.C
 #include        "../hardware/watchdog.h"
 #include        "messages.h"
 #include        "slides.h"
+#include        "lcd.h"
 
 
 
@@ -36,6 +37,18 @@ void    ShowLo(char const  *szT)
   strcpy(szLo, szT);
 }
 
+
+
+void    ShowHiDirect(char const  *szT)
+{
+  ShowMsgLCD(0x80, (const uchar *)szT);
+}
+
+
+void    ShowLoDirect(char const  *szT)
+{
+  ShowMsgLCD(0xC0, (const uchar *)szT);
+}
 
 
 void    InitDisplay(void)
