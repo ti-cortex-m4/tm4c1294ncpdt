@@ -53,7 +53,7 @@ void    ShowLoDirect(char const  *szT)
 
 void    InitDisplay(void)
 {
-  DelayMsg();
+  Delay(1000);
   Clear();
 
   if (enGlobal == GLB_WORK)
@@ -61,7 +61,7 @@ void    InitDisplay(void)
   else 
   {
     ShowHi(szSetting);
-    DelayMsg();
+    Delay(1000);
 
     if (boReset == true)
     {

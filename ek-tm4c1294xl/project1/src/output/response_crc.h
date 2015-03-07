@@ -6,4 +6,4 @@ RESPONSE_CRC.H
 
 void    ResponseCRC_Full(void);
 
-void    ShowCommandCRC(uchar  bState);
+void    ShowTestResponse(uchar  bState);

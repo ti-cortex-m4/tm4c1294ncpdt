@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-KEY_ANALYSIS.H
+KEY_RESPONSE.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetAnalysis1(void);
-void    auto_GetAnalysis1(void); 
+void    key_TestResponse(void);
+void    auto_TestResponse(void); 

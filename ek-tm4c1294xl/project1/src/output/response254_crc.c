@@ -26,7 +26,7 @@ void    Response254_CRC(void)
     case 2: OutHealth(); break;
 
     default:
-      ShowCommandCRC(bSTA_BADCOMMAND);
+      ShowTestResponse(bSTA_BADCOMMAND);
       Result(bRES_BADCOMMAND);
       break;
   }
