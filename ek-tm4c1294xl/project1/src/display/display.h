@@ -25,6 +25,9 @@ extern  char                    szAlfa[bDISPLAY + bMARGIN],
 void    ShowHi(char const  *szT);
 void    ShowLo(char const  *szT);
 
+void    ShowHiDirect(char const  *szT);
+void    ShowLoDirect(char const  *szT);
+
 void    InitDisplay(void);
 
 void    ShowChar(uchar  bT);

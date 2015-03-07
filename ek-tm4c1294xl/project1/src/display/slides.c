@@ -22,11 +22,11 @@ int                     cwSlide;
 
 void    InitSlide(void)
 {
-  DelayMsg();
+	DelayMsg();
   fSlide = false;
 
-  ShowHi(szRun);
-  Clear();
+  ShowHiDirect(szRun);
+  ShowLoDirect(szClear);
 }
 
 
