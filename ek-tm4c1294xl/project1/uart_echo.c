@@ -59,24 +59,24 @@ int main(void) {
 
 	InitBeep();
 	InitLCD();
-	InitFlash();
+	InitFlash();            TestOK();
 	InitRTC();
 
-	InitSettings();
+	InitSettings();         TestOK();
 	InitKey();
-	InitKeyboard();
+	InitKeyboard();         TestOK();
 	InitImpulses();
 	InitFactors();
-	InitGroups();
+	InitGroups();           TestOK();
 	InitZones();
 	InitTariffs();
-	InitRelaxs();
+	InitRelaxs();           TestOK();
 	InitGaps();
 	InitDecret();
-	InitDigitals();
+	InitDigitals();         TestOK();
 
 	InitSlide();
-	InitStorage();
+	InitStorage();          TestOK();
 
   PrintStart();
 	InitRealtime();
