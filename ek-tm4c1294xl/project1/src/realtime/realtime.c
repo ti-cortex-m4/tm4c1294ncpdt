@@ -9,6 +9,7 @@ TODO атомарные операции
 #include        "../memory/mem_settings.h"
 #include        "../time/rtc.h"
 #include        "../health.h"
+#include        "../serial/print.h"
 #include        "next_second.h"
 #include        "next_minute1.h"
 #include        "next_minute3.h"
@@ -128,7 +129,7 @@ void    ProcessTime(void)
   // переход на следующую минуту
   if (tiCurr.bMinute != tiPrev.bMinute)
   {
-    PrintString("\n Next 1 min");
+  	if (fActive == 0) PrintString("\n next 1 min.");
     NextMinute1();
   }
 
@@ -136,8 +137,9 @@ void    ProcessTime(void)
   // переход на следующие три минуты
   if ((tiCurr.bMinute % 3 == 0) && (tiPrev.bMinute % 3 != 0))
   {
-    PrintString("\n Next 3 min");
+    if (fActive == 0) PrintString("\n next 3 min.");
     NextMinute3();
+    if (fActive == 0) { PrintInt(ibSoftMnt); PrintInt(ibHardMnt); }
   }
 
 
@@ -186,8 +188,9 @@ void    ProcessTime(void)
       { }
     else
     {
-      PrintString("\n Next 30 min");
+    	if (fActive == 0) PrintString("\n next 30 min.");
       NextMinute30();
+      if (fActive == 0) { PrintInt(ibSoftHou); PrintInt(iwHardHou); }
     }
   }
 
@@ -195,17 +198,19 @@ void    ProcessTime(void)
   // переход на следующие сутки
   if (tiCurr.bDay != tiPrev.bDay)
   {
-    PrintString("\n Next day");
+  	if (fActive == 0) PrintString("\n next day");
     fSeason = 0;
     NextDay();
+    if (fActive == 0) { PrintInt(ibSoftDay); PrintInt(ibHardDay); }
   }
 
 
   // переход на следующий месяц
   if (tiCurr.bMonth != tiPrev.bMonth)
   {
-    PrintString("\n Next month");
+  	if (fActive == 0) PrintString("\n next month");
   	NextMonth();
+  	if (fActive == 0) { PrintInt(ibSoftMon); PrintInt(ibHardMon); }
   }
 
 

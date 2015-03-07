@@ -28,6 +28,7 @@ TODO .C
 #include "src/timer0.h"
 #include "src/timer1.h"
 #include "src/uarts.h"
+#include "src/serial/print.h"
 #include "src/settings.h"
 #include "src/impulses/impulses.h"
 #include "src/factors.h"
@@ -76,7 +77,11 @@ int main(void) {
 
 	InitSlide();
 	InitStorage();
+
+  PrintStart();
 	InitRealtime();
+  PrintStop();
+
 	InitDisplay();
 
     InitSerial0();
