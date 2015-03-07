@@ -34,7 +34,7 @@ time    tiT;
     tiT = *GetCurrTimeDate();
     tiCurr.bSecond = tiT.bSecond;
 
-    PrintString("\n"); PrintTime(&tiCurr); PrintTime(&tiT);
+    PrintString("\n tiCurr="); PrintTime(&tiCurr); PrintString(" tiT="); PrintTime(&tiT);
 
     if ((tiCurr.bMinute == tiT.bMinute) &&
         (tiCurr.bHour   == tiT.bHour)   &&
@@ -42,7 +42,8 @@ time    tiT;
         (tiCurr.bMonth  == tiT.bMonth)  &&
         (tiCurr.bYear   == tiT.bYear))
     {
-    	PrintString("\n Finish OK");
+    	PrintString("\n Finish TRUE");
+    	tiPrev = tiCurr;
       return TRUE;
     }
 
