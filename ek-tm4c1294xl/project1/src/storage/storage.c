@@ -18,7 +18,8 @@ STORAGE.C
 
 
 //                                         0123456789ABCDEF
-static char const       szFlashErase[]  = "Тест памяти: 2  ",
+static char const       szMemoryTest1[] = "Тест памяти: 1  ",
+                        szFlashErase[]  = "Тест памяти: 2  ",
                         szFlashRead[]   = "Тест памяти: 3  ";
 
 
@@ -60,6 +61,15 @@ void    InitStorage(void)
 boolean ResetFlash(void)
 {
 uint    i;
+
+  ShowHi(szMemoryTest1);
+  for (i=0; i<=100; i++)
+  {
+    ResetWDT();
+    ShowPercent(i);
+    Delay(20);
+  }
+
 
   ShowHi(szFlashErase);
   wPage = 0;
@@ -131,6 +141,7 @@ uint    i;
   if (CleanPowMonBuff() == FALSE) return FALSE;
 
   if (CleanCntMonBuff() == FALSE) return FALSE;
+
 
   ShowHi(szFlashRead);
   wPage = 0;
