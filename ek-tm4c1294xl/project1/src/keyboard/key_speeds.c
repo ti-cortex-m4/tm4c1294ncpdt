@@ -5,7 +5,7 @@ KEY_SPEEDS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../memory/mem_settings.h"
+#include        "../memory/mem_ports.h"
 #include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../serial/speeds.h"
