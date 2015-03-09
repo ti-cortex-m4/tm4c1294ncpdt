@@ -109,6 +109,13 @@ void    key_Start(void)
       return;
     }
 
+    // провер€ем правильность задани€ портов
+    for (i=0; i<bCANALS; i++)
+    {
+      if (GetDigitalDevice(i) != 0)
+      { if (StreamPortCan(GetDigitalPort(i),i) == 0) return; }
+    }
+
 // TODO key_Start
 
     // рассчитываем массивы индексов тарифов дл€ каждого получаса текущих суток (дл€ мощности и энергии)
