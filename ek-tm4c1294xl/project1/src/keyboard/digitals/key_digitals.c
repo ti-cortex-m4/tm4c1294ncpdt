@@ -13,7 +13,7 @@ KEY_DIGITALS.C
 #include        "../../flash/records.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/devices.h"
-#include        "../../serial/speed.h"
+#include        "../../serial/speeds.h"
 
 
 

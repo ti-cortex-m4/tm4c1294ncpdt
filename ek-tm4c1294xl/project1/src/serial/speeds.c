@@ -328,7 +328,7 @@ bool    StreamPortModem(uchar  i)
 
 
 
-void    ShowStreamPortCan(static char const  *szT, uchar  i, uchar  ibCanal)
+void    ShowStreamPortCan(char const  *szT, uchar  i, uchar  ibCanal)
 {
   SaveDisplay();
 
