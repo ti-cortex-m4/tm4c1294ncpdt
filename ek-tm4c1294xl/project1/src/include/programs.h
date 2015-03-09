@@ -53,6 +53,8 @@ PROGRAMS.H
 
 // режим: функционирование
 
+#define bGET_SPEED                  14
+
 #define bGET_CURRTIME               1
 #define bGET_CURRDATE               3
 

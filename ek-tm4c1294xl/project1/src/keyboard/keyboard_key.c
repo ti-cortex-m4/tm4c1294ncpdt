@@ -8,6 +8,7 @@ KEYBOARD_KEY.C
 #include        "../include/programs.h"
 #include        "keyboard.h"
 #include        "keyboard2.h"
+#include        "key_speeds.h"
 #include        "key_timedate.h"
 #include        "key_password.h"
 #include        "key_logical.h"
@@ -47,6 +48,8 @@ void    Keyboard_Key(void)
     switch (bProgram)
     {
       case 0xFF:                Keyboard2Program();     break;
+
+      case bSET_SPEED:          key_SetSpeeds();        break;
 
       case bSET_CURRTIME:       key_SetCurrTime();      break;
       case bSET_CURRDATE:       key_SetCurrDate();      break;
@@ -114,6 +117,8 @@ void    Keyboard_Key(void)
     switch (bProgram)
     {
       case 0xFF:                Keyboard2Work();        break;
+
+      case bGET_SPEED:          key_SetSpeeds();        break;
 
       case bGET_CURRTIME:       key_SetCurrTime();      break;
       case bGET_CURRDATE:       key_SetCurrDate();      break;
@@ -246,6 +251,8 @@ void    Keyboard_Key(void)
     switch (bProgram)
     {
       case 0xFF:                Keyboard2Reprogram();   break;
+
+      case bSET_SPEED:          key_SetSpeeds();        break;
 
       case bSET_CURRTIME:       key_SetCurrTime();      break;
       case bSET_CURRDATE:       key_SetCurrDate();      break;
