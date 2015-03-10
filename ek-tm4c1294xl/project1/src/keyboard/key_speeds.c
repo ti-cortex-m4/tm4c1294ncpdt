@@ -9,7 +9,7 @@ KEY_SPEEDS.C
 #include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../serial/speeds.h"
-#include        "../serial/speeds2.h"
+#include        "../serial/speeds_display.h"
 
 
 
