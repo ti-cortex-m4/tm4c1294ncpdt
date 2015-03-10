@@ -14,6 +14,7 @@ KEY_DIGITALS.C
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/devices.h"
 #include        "../../serial/speeds.h"
+#include        "../../serial/speeds2.h"
 
 
 
