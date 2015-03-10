@@ -10,7 +10,7 @@ SLIDES.C
 
 
 
-bool                    fSlide;
+bool                    fSlide, fSlideSave;
 
 char const              **ppszCurr;
 

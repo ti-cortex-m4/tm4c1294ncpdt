@@ -4,7 +4,7 @@ SLIDES.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                    fSlide;
+extern  bool                    fSlide, fSlideSave;
 extern  char const              **ppszCurr;
 extern  char const              **ppszFirst;
 

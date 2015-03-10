@@ -17,9 +17,9 @@ static char const       szPorts[]       = "Порты           ";
 
 
 
-void    ShowPortLo(void)
+static void ShowPort(void)
 { 
-  sprintf(szLo+15,"%bu",ibX+1); 
+  sprintf(szLo+15,"%u",ibX+1);
 }
 
 
@@ -37,7 +37,7 @@ void    key_SetSpeeds(void)
 
       ibX = 0;                    
       ShowSpeeds(ibX,1);
-      ShowPortLo();
+      ShowPort();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {                                   
@@ -45,7 +45,7 @@ void    key_SetSpeeds(void)
         ibX = 0;
 
       ShowSpeeds(ibX,1);      
-      ShowPortLo();
+      ShowPort();
     }
   }
 
@@ -73,7 +73,7 @@ void    key_SetSpeeds(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {                                   
       if (++mppoPorts[ibX].enStream >= bSTREAMS) 
-        mppoPorts[ibX].enStream = 0; 
+        mppoPorts[ibX].enStream = STR_SLAVEESC;
 
       SetSpeeds(ibX);
       SetCorrectLimit(ibX);
@@ -107,12 +107,12 @@ void    key_SetSpeeds(void)
     {
       if (IsMaster(ibX) == 1) 
       {
-        if (mpboLocalDisable[ibX] == boTrue)
-          mpboLocalDisable[ibX] = boFalse; 
+        if (mpboLocalDisable[ibX] == TRUE)
+          mpboLocalDisable[ibX] = FALSE;
         else 
         { 
-          mpboLocalDisable[ibX] = boTrue; 
-          mpboLocal[ibX] = boFalse;
+          mpboLocalDisable[ibX] = TRUE;
+          mpboLocal[ibX] = FALSE;
         }
 
         ShowSpeeds(ibX,1);

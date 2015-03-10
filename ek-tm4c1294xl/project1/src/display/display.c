@@ -21,6 +21,9 @@ DISPLAY.C
 char                    szHi[bDISPLAY + bMARGIN],
                         szLo[bDISPLAY + bMARGIN];
 
+char                    szHiSave[bDISPLAY + bMARGIN],
+                        szLoSave[bDISPLAY + bMARGIN];
+
 char                    szAlfa[bDISPLAY + bMARGIN],
                         szBeta[bDISPLAY + bMARGIN];
 
@@ -125,4 +128,21 @@ void    ShowPercent(uchar  bT)
 
 
 
+void    SaveDisplay(void)
+{
+  memcpy(szHiSave, szHi, bDISPLAY);
+  memcpy(szLoSave, szLo, bDISPLAY);
+
+  fSlideSave = fSlide;
+  fSlide = 0;
+}
+
+
+void    LoadDisplay(void)
+{
+  memcpy(szHi, szHiSave, bDISPLAY);
+  memcpy(szLo, szLoSave, bDISPLAY);
+
+  fSlide = fSlideSave;
+}
 

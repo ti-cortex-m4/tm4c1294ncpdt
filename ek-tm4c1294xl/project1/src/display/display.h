@@ -38,3 +38,6 @@ void    ShowReal(real  reT);
 void    ShowBoolean(boolean  boT);
 void    ShowAnswer(void);
 void    ShowPercent(uchar  bT);
+
+void    SaveDisplay(void);
+void    LoadDisplay(void);

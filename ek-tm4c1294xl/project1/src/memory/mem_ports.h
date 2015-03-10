@@ -12,6 +12,8 @@ extern  uint                mpwMinInDelay[bPORTS], mpwMajInDelay[bPORTS];
 
 extern  boolean             mpboLocal[bPORTS];
 
+extern  boolean             mpboLocalDisable[bPORTS];
+
 extern	uchar               bInBuff0,
                             bInBuff1,
                             bInBuff2,
