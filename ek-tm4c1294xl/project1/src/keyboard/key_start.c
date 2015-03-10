@@ -20,7 +20,7 @@ KEY_START.C
 #include        "../time/rtc.h"
 #include        "../factors.h"
 #include        "../flash/records.h"
-#include        "../serial/speeds.h"
+#include        "../serial/speeds2.h"
 
 
 
