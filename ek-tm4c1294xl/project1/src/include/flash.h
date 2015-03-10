@@ -53,9 +53,9 @@ typedef enum
   FLS_GLOBAL            = FLS_PRIVATE + 1,
   FLS_LOGICAL           = FLS_GLOBAL + 1,
 
-  FLS_SPEEDS            = FLS_LOGICAL + 1,
+  FLS_PORTS             = FLS_LOGICAL + 1,
 
-  FLS_GROUPS            = FLS_SPEEDS + 1,
+  FLS_GROUPS            = FLS_PORTS + 1,
 
   FLS_PUBLIC_TARIFFS    = FLS_GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1,
   FLS_TARIFFS_MODE      = FLS_PUBLIC_TARIFFS + 1,
