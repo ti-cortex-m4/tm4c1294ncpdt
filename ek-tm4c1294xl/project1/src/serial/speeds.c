@@ -23,7 +23,7 @@ message                 msgStreams[bSTREAMS] =
                                         "Ведомый,Modbus  ",
 #endif
                                         "Ведущий,прямой  ",
-                                        "Ведущий,модемный", 
+                                        "Ведущий,модемный",
                                         "Ведомый,УПИО    "};
 
 static char const       szMasters[]   = " ведущие режимы ",
@@ -36,12 +36,11 @@ static char const       szMasters[]   = " ведущие режимы ",
 
 
 // массив значений скоростей обмена
-ulong                   mpdwSpeeds[bSPEEDS] =
+static ulong const      mpdwSpeeds[bSPEEDS] =
 { 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400 };
 
-
 // массив таймаутов на приём для портов RS-232 (время передачи 100 бит на данной скорости)
-uchar                   mpwInDelaySlave[bSPEEDS] =
+static uint const       mpwInDelaySlave[bSPEEDS] =
 {
   (uint)(wFREQUENCY_T0*0.0833),
   (uint)(wFREQUENCY_T0*0.0417),
@@ -55,7 +54,7 @@ uchar                   mpwInDelaySlave[bSPEEDS] =
 };
 
 // массив таймаутов на приём для порта RS-485 (300 миллисекунд плюс время передачи 1000 бит на данной скорости)
-uint                    mpwInDelayMaster[bSPEEDS] =
+static uint const       mpwInDelayMaster[bSPEEDS] =
 {
   (uint)(wFREQUENCY_T0*1.1333),
   (uint)(wFREQUENCY_T0*0.7167),
@@ -68,10 +67,10 @@ uint                    mpwInDelayMaster[bSPEEDS] =
   (uint)(wFREQUENCY_T0*0.3044)
 };
 
-
+// четности
 static char const       szParitys[]     = "neoms";
 
-                                  
+
 
 void    SetSpeed0(void)
 {
@@ -110,16 +109,16 @@ bool    IsSlave(uchar  ibPrt)
 
 
 
-void    SetCorrectLimit(uchar  i)
+void    SetCorrectLimit(uchar  ibPrt)
 {
-//  mpbCorrectLimit[i] = (mppoPorts[i].enStream == STR_MASTERMODEM) ? bCORRECT_MODEM : bCORRECT_DIRECT;
+//  mpbCorrectLimit[ibPrt] = (mppoPorts[ibPrt].enStream == STR_MASTERMODEM) ? bCORRECT_MODEM : bCORRECT_DIRECT;
 }
 
 
-void    CheckCorrectLimit(uchar  i)
+void    CheckCorrectLimit(uchar  ibPrt)
 {
-//  if (mpbCorrectLimit[i] < bCORRECT_MINIMUM) SetCorrectLimit(i);
-//  if (mpbCorrectLimit[i] > bCORRECT_MAXIMUM) mpbCorrectLimit[i] = bCORRECT_MAXIMUM;
+//  if (mpbCorrectLimit[ibPrt] < bCORRECT_MINIMUM) SetCorrectLimit(ibPrt);
+//  if (mpbCorrectLimit[ibPrt] > bCORRECT_MAXIMUM) mpbCorrectLimit[ibPrt] = bCORRECT_MAXIMUM;
 }
 
 
@@ -130,35 +129,22 @@ void    MakeCorrectLimit(void)
 
 
 
-void    SetDelay(uchar  i)    
+void    SetDelay(uchar  ibPrt)    
 {
-uint    j;
+uint    w;
 
-  mpSerial[i] = SER_BEGIN;
+  mpSerial[ibPrt] = SER_BEGIN;
 
-  if ((mppoPorts[i].enStream == STR_MASTERDIRECT) || 
-      (mppoPorts[i].enStream == STR_MASTERMODEM))
-    j = mpwInDelayMaster[ mppoPorts[i].ibSpeed ];
+  if ((mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) || 
+      (mppoPorts[ibPrt].enStream == STR_MASTERMODEM))
+    w = mpwInDelayMaster[ mppoPorts[ibPrt].ibSpeed ];
   else
-    j = mpwInDelaySlave[ mppoPorts[i].ibSpeed ];
+    w = mpwInDelaySlave[ mppoPorts[ibPrt].ibSpeed ];
 
-  mpwMajInDelay[i] = j;
-  mpwMinInDelay[i] = j;
+  mpwMajInDelay[ibPrt] = w;
+  mpwMinInDelay[ibPrt] = w;
 }
 
-
-/*
-void    ResetAllSerial(void)
-{
-uchar   i;
-
-  // ожидаем окончания передачи
-  DelayInf(); 
-
-  // сбрасываем состояния для возможности переключения в ведомый режим
-  for (i=0; i<bPORTS; i++) mpSerial[i] = SER_BEGIN;
-}
-*/
 
 
 void    ResetSpeeds(void)
@@ -170,23 +156,23 @@ uchar   i;
   mppoPorts[2].enStream = STR_MASTERDIRECT;
   mppoPorts[3].enStream = STR_MASTERDIRECT;
 
-  for (i=0; i<bPORTS; i++)
+  for (i=0; p<bPORTS; p++)
   {
-    mppoPorts[i].ibSpeed  = 3;
-    mppoPorts[i].ibParity = 0;
+    mppoPorts[p].ibSpeed  = 3;
+    mppoPorts[p].ibParity = 0;
 
-    SetDelay(i);
-    SetCorrectLimit(i);
+    SetDelay(p);
+    SetCorrectLimit(p);
   }
 }
 
 
 
-void    SetSpeeds(uchar  i)
+void    SetSpeeds(uchar  ibPrt)
 {
-  mpSerial[i] = SER_BEGIN;
+  mpSerial[ibPrt] = SER_BEGIN;
 
-  switch (i)
+  switch (ibPrt)
   {
     case 0:  SetSpeed0();  break;
     case 1:  SetSpeed1();  break;
@@ -199,46 +185,46 @@ void    SetSpeeds(uchar  i)
 
 void    InitSpeeds(void)
 {
-uchar   i;
+uchar   p;
 
-  for (i=0; i<bPORTS; i++)
+  for (p=0; p<bPORTS; p++)
   {
-    if (mppoPorts[i].ibSpeed >= bSPEEDS)
+    if (mppoPorts[p].ibSpeed >= bSPEEDS)
     {
-      mppoPorts[i].ibSpeed = 0;
-      SetDelay(i);
+      mppoPorts[p].ibSpeed = 0;
+      SetDelay(p);
     }
 
-    if (mppoPorts[i].enStream >= bSTREAMS)
-      mppoPorts[i].enStream = STR_SLAVEESC;
+    if (mppoPorts[p].enStream >= bSTREAMS)
+      mppoPorts[p].enStream = STR_SLAVEESC;
 
-    SetSpeeds(i);               
-    CheckCorrectLimit(i);
+    SetSpeeds(p);               
+    CheckCorrectLimit(p);
   }
 }
 
 
 
-void    ShowSpeeds(uchar  i, bool fShow)
+void    ShowSpeeds(uchar  ibPrt, bool  fShowLocalDisable)
 {
   Clear();
-  sprintf(szLo+1,"%-6lu",mpdwSpeeds[ mppoPorts[i].ibSpeed ]);
-  sprintf(szLo+15,"%u",i+1);
+  sprintf(szLo+1,"%-6lu",mpdwSpeeds[ mppoPorts[ibPrt].ibSpeed ]);
+  sprintf(szLo+15,"%u",ibPrt+1);
 
-  if (mppoPorts[i].ibParity < bPARITYS)
-    szLo[8] = szParitys[ mppoPorts[i].ibParity ];
+  if (mppoPorts[ibPrt].ibParity < bPARITYS)
+    szLo[8] = szParitys[ mppoPorts[ibPrt].ibParity ];
   else
     szLo[8] = '?';
 
-  if (mppoPorts[i].enStream < bSTREAMS)
-    ShowHi(msgStreams[ mppoPorts[i].enStream ]);
+  if (mppoPorts[ibPrt].enStream < bSTREAMS)
+    ShowHi(msgStreams[ mppoPorts[ibPrt].enStream ]);
   else 
     ShowHi(szError);
 
-  if (fShow)
+  if (fShowLocalDisable)
   {
-    if (IsMaster(i))
-      (mpboLocalDisable[i] == TRUE) ? (szLo[13] = '-') : (szLo[13] = '+');
+    if (IsMaster(ibPrt))
+      (mpboLocalDisable[ibPrt] == TRUE) ? (szLo[13] = '-') : (szLo[13] = '+');
     else
       szLo[13] = ' ';
   }
