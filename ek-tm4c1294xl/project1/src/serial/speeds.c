@@ -180,24 +180,6 @@ uchar   i;
     SetDelay(i);
     SetCorrectLimit(i);
   }
-
-#ifdef  UPGRADE
-  mpwMajInDelay[3] += (uint)(wFREQUENCY_T0*0.1);
-  mpwMinInDelay[3] += (uint)(wFREQUENCY_T0*0.1);
-#endif
-}
-
-
-
-void    ResetSendAT(void)
-{  
-uchar   i;
-
-  for (i=0; i<bPORTS; i++)
-  {
-    mpcbSendAT[i] = bANSWER_AT; 
-    mpanSendAT[i] = ANS_TIMEOUT; 
-  }
 }
 
 
@@ -243,7 +225,9 @@ uchar   i;
 
 void    ShowSpeeds(uchar  i, bool fShow)
 {
-  sprintf(szLo," %-6lu        %bu",mpdwSpeeds[ mppoPorts[i].ibSpeed ],i+1);
+  ClearLo();
+  sprintf(szLo+1,"%-6lu",mpdwSpeeds[ mppoPorts[i].ibSpeed ]);
+  sprintf(szLo+15,"%u",i+1);
 
   if (mppoPorts[i].ibParity < bPARITYS)
     szLo[8] = szParitys[ mppoPorts[i].ibParity ];
@@ -258,7 +242,7 @@ void    ShowSpeeds(uchar  i, bool fShow)
   if (fShow)
   {
     if (IsMaster(i))
-      (mpboLocalDisable[i] == boTrue) ? (szLo[13] = '-') : (szLo[13] = '+'); 
+      (mpboLocalDisable[i] == TRUE) ? (szLo[13] = '-') : (szLo[13] = '+');
     else
       szLo[13] = ' ';
   }
@@ -277,20 +261,22 @@ bool    StreamPort(uchar  i)
   {
     SaveDisplay();
 
-    sprintf(szHi,"Порт %bu: нужны   ",i+1);
+    ClearLo();
+    sprintf(szHi,"Порт %u: нужны",i+1);
     ShowLo(szMasters);
     DelayMsg();
 
     BlockProgram(bSET_SPEED);
     DelayMsg();
 
-    LoadDisplay(); return(0);
+    LoadDisplay();
+    return(0);
   }
 }
 
 
 
-void    ShowStreamPort(uchar  *szT)
+void    ShowStreamPort(char const  *szT)
 {
   SaveDisplay();
 

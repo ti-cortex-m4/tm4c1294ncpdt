@@ -9,11 +9,10 @@ SPEEDS.H
 bool    IsMaster(uchar  i);
 bool    IsSlave(uchar  i);
 
-//void    SetDelay(uchar  i);
+void    SetDelay(uchar  i);
 //void    ResetAllSerial(void);
 //
 //void    ResetSpeeds(void);
-//void    ResetSendAT(void);
 void    SetSpeeds(uchar  i);
 
 void    SetCorrectLimit(uchar  i);

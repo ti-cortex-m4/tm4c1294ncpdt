@@ -20,6 +20,9 @@ uint                    mpwMinInDelay[bPORTS], mpwMajInDelay[bPORTS];
 // массив временной смены режима портов
 boolean                 mpboLocal[bPORTS];
 
+// флаги запрещения временной смены режима
+boolean                 mpboLocalDisable[bPORTS];
+
 // переменные
 uchar                   bInBuff0,
                         bInBuff1,

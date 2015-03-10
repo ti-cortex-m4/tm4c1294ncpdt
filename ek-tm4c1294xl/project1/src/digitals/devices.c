@@ -10,7 +10,7 @@ DEVICES.C
 
 
 //                                         0123456789ABCDEF
-char const              mpszDevices[bDEVICES+1][bDISPLAY+1] = {
+message                 mpszDevices[bDEVICES+1] = {
                                           ".модем          ",
                                           ".СЭТ-4ТМ        ",
                                           ".Меркурий-230   ",
