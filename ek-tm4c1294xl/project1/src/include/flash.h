@@ -53,7 +53,9 @@ typedef enum
   FLS_GLOBAL            = FLS_PRIVATE + 1,
   FLS_LOGICAL           = FLS_GLOBAL + 1,
 
-  FLS_GROUPS            = FLS_LOGICAL + 1,
+  FLS_SPEEDS            = FLS_LOGICAL + 1,
+
+  FLS_GROUPS            = FLS_SPEEDS + 1,
 
   FLS_PUBLIC_TARIFFS    = FLS_GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1,
   FLS_TARIFFS_MODE      = FLS_PUBLIC_TARIFFS + 1,
@@ -108,7 +110,7 @@ typedef enum
   FLS_PTRDAY            = FLS_PTRHOU + 1,
   FLS_PTRMON            = FLS_PTRDAY + 1,
 
-  FLS_REALTIME            = FLS_PTRMON + 1,
+  FLS_REALTIME          = FLS_PTRMON + 1,
 
   FLS_END               = FLS_REALTIME + 1
 } flash;
