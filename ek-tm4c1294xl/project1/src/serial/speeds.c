@@ -30,8 +30,8 @@ static char const       szMasters[]   = " ведущие режимы ",
                         szDirectYes[] = "прямая связь: 0 ",
                         szDirectNo[]  = "телефонный номер",
                         szFunction[]  = "Данная функция: ",
-                        szOnlyDirect[]= "для прямой связи",
-                        szOnlyModem[] = "   для модема   ";
+                        szDirectOnly[]= "для прямой связи",
+                        szModemOnly[] = "   для модема   ";
 
 
 
@@ -97,15 +97,15 @@ void    SetSpeed3(void)
 
 
 
-bool    IsMaster(uchar  i)
+bool    IsMaster(uchar  ibPrt)
 {
-  return((mppoPorts[i].enStream == STR_MASTERDIRECT) || (mppoPorts[i].enStream == STR_MASTERMODEM));
+  return((mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) || (mppoPorts[ibPrt].enStream == STR_MASTERMODEM));
 }
 
 
-bool    IsSlave(uchar  i)
+bool    IsSlave(uchar  ibPrt)
 {
-  return( ~IsMaster(i) );
+  return( ~IsMaster(ibPrt) );
 }
 
 
@@ -249,16 +249,16 @@ void    ShowSpeeds(uchar  i, bool fShow)
 
 
 
-bool    StreamPort(uchar  i)
+bool    StreamPort(uchar  ibPrt)
 {
-  if ((mppoPorts[i].enStream == STR_MASTERDIRECT) ||
-      (mppoPorts[i].enStream == STR_MASTERMODEM)) return(1);
+  if ((mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) ||
+      (mppoPorts[ibPrt].enStream == STR_MASTERMODEM)) return(1);
   else
   {
     SaveDisplay();
 
     Clear();
-    sprintf(szHi,"Порт %u: нужны",i+1);
+    sprintf(szHi,"Порт %u: нужны",ibPrt+1);
     ShowLo(szMasters);
     DelayMsg();
 
@@ -287,40 +287,40 @@ void    ShowStreamPort(char const  *szT)
 }
 
 
-bool    StreamPortDirect(uchar  i)
+bool    StreamPortDirect(uchar  ibPrt)
 {
-  if (mppoPorts[i].enStream == STR_MASTERDIRECT) return(1);
+  if (mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) return(1);
   else
   {
-    ShowStreamPort(szOnlyDirect);
+    ShowStreamPort(szDirectOnly);
     return(0);
   }
 }
 
 
-bool    StreamPortModem(uchar  i)
+bool    StreamPortModem(uchar  ibPrt)
 {
-  if (mppoPorts[i].enStream == STR_MASTERMODEM) return(1);
+  if (mppoPorts[ibPrt].enStream == STR_MASTERMODEM) return(1);
   else
   {
-    ShowStreamPort(szOnlyModem);
+    ShowStreamPort(szModemOnly);
     return(0);
   }
 }
 
 
 
-void    ShowStreamPortCan(char const  *szT, uchar  i, uchar  ibCanal)
+void    ShowStreamPortCan(char const  *szT, uchar  ibPrt, uchar  ibCan)
 {
   SaveDisplay();
 
   ShowHi(szWarning);
   Clear();
-  sprintf(szLo+4,"канала %u",ibCanal+1);
+  sprintf(szLo+4,"канала %u",ibCan+1);
   DelayMsg();
 
   Clear();
-  sprintf(szHi,"Порт %u: нужны",i+1);
+  sprintf(szHi,"Порт %u: нужны",ibPrt+1);
   ShowLo(szT);
   DelayMsg();
 
@@ -332,30 +332,30 @@ void    ShowStreamPortCan(char const  *szT, uchar  i, uchar  ibCanal)
 
 
 
-bool    StreamPortCan(uchar  i, uchar  ibCanal)
+bool    StreamPortCan(uchar  ibPrt, uchar  ibCan)
 {
-  if ((mppoPorts[i].enStream == STR_MASTERDIRECT) ||
-      (mppoPorts[i].enStream == STR_MASTERMODEM)) return(1);
+  if ((mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) ||
+      (mppoPorts[ibPrt].enStream == STR_MASTERMODEM)) return(1);
   else
   {
-    ShowStreamPortCan(szMasters,i,ibCanal);
+    ShowStreamPortCan(szMasters,ibPrt,ibCan);
     return(0);
   }
 }
 
 
 
-bool    StreamPortPhoneCan(uchar  i, uchar  ibPhone, uchar  ibCanal)
+bool    StreamPortPhoneCan(uchar  ibPrt, uchar  ibPhn, uchar  ibCan)
 {
-  if ((mppoPorts[i].enStream == STR_MASTERDIRECT) && (ibPhone != 0)) 
+  if ((mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) && (ibPhn != 0)) 
   {
-    ShowStreamPortCan(szDirectYes,i,ibCanal);
+    ShowStreamPortCan(szDirectYes,ibPrt,ibCan);
     return(0);
   }
   else
-  if ((mppoPorts[i].enStream == STR_MASTERMODEM) && (ibPhone == 0)) 
+  if ((mppoPorts[ibPrt].enStream == STR_MASTERMODEM) && (ibPhn == 0)) 
   {
-    ShowStreamPortCan(szDirectNo,i,ibCanal);
+    ShowStreamPortCan(szDirectNo,ibPrt,ibCan);
     return(0);
   }
   else return(1);
