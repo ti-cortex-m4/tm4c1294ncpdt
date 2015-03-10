@@ -16,9 +16,11 @@ KEY_START.C
 #include        "../groups.h"
 #include        "../realtime/realtime_start.h"
 #include        "../impulses/impulses.h"
+#include        "../digitals/digitals.h"
 #include        "../time/rtc.h"
 #include        "../factors.h"
 #include        "../flash/records.h"
+#include        "../serial/speeds.h"
 
 
 
@@ -67,6 +69,22 @@ uchar  ibMonth;
 }
 
 
+bool    TestDigitals()
+{
+uchar   c;
+
+  for (c=0; c<bCANALS; c++)
+  {
+    if (GetDigitalDevice(c) != 0)
+    {
+      if (StreamPortCan(GetDigitalPort(c),c) == 0) return 0;
+    }
+  }
+
+  return 1;
+}
+
+
 
 void    key_Start(void)
 {
@@ -109,12 +127,8 @@ void    key_Start(void)
       return;
     }
 
-    // проверяем правильность задания портов
-    for (i=0; i<bCANALS; i++)
-    {
-      if (GetDigitalDevice(i) != 0)
-      { if (StreamPortCan(GetDigitalPort(i),i) == 0) return; }
-    }
+    if (TestDigitals() == 0)
+      return;
 
 // TODO key_Start
 

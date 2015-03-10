@@ -175,8 +175,6 @@ uchar   i;
     mppoPorts[i].ibSpeed  = 3;
     mppoPorts[i].ibParity = 0;
 
-    mpibActives[i] = 0;
-
     SetDelay(i);
     SetCorrectLimit(i);
   }
@@ -195,8 +193,6 @@ void    SetSpeeds(uchar  i)
     case 2:  SetSpeed2();  break;
     case 3:  SetSpeed3();  break;
   }
-
-  ResetSendAT();
 }
 
 
@@ -225,7 +221,7 @@ uchar   i;
 
 void    ShowSpeeds(uchar  i, bool fShow)
 {
-  ClearLo();
+  Clear();
   sprintf(szLo+1,"%-6lu",mpdwSpeeds[ mppoPorts[i].ibSpeed ]);
   sprintf(szLo+15,"%u",i+1);
 
@@ -261,7 +257,7 @@ bool    StreamPort(uchar  i)
   {
     SaveDisplay();
 
-    ClearLo();
+    Clear();
     sprintf(szHi,"Порт %u: нужны",i+1);
     ShowLo(szMasters);
     DelayMsg();
@@ -319,10 +315,12 @@ void    ShowStreamPortCan(char const  *szT, uchar  i, uchar  ibCanal)
   SaveDisplay();
 
   ShowHi(szWarning);
-  sprintf(szLo,"    канала %bu    ",ibCanal+1);
+  Clear();
+  sprintf(szLo+4,"канала %u",ibCanal+1);
   DelayMsg();
 
-  sprintf(szHi,"Порт %bu: нужны   ",i+1);
+  Clear();
+  sprintf(szHi,"Порт %u: нужны",i+1);
   ShowLo(szT);
   DelayMsg();
 
