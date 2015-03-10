@@ -4,21 +4,18 @@ SPEEDS.H
 
 ------------------------------------------------------------------------------*/
 
-//void    InitSpeeds(void);
+void    InitSpeeds(void);
 
 bool    IsMaster(uchar  ibPrt);
 bool    IsSlave(uchar  ibPrt);
 
-void    SetDelay(uchar  i);
-//void    ResetAllSerial(void);
-//
-//void    ResetSpeeds(void);
-void    SetSpeeds(uchar  i);
+void    SetDelay(uchar  ibPrt);
+void    SetSpeeds(uchar  ibPrt);
 
-void    SetCorrectLimit(uchar  i);
+void    SetCorrectLimit(uchar  ibPrt);
 void    MakeCorrectLimit(void);
 
-void    ShowSpeeds(uchar  i, bool fShow);
+void    ShowSpeeds(uchar  ibPrt, bool  fShowLocalDisable);
 
 bool    StreamPort(uchar  ibPrt);
 bool    StreamPortDirect(uchar  ibPrt);
