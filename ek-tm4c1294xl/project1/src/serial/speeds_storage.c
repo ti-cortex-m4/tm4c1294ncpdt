@@ -10,7 +10,7 @@ SPEEDS_STORAGE.C
 
 
 
-file const              flPorts = {FLS_SPEEDS, &mppoPorts, sizeof(mppoPorts)};
+file const              flPorts = {FLS_PORTS, &mppoPorts, sizeof(mppoPorts)};
 
 
 
