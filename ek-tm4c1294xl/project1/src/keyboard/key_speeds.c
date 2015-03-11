@@ -61,7 +61,7 @@ void    key_SetSpeeds(void)
         mppoPorts[ibX].ibSpeed = 0;
 
       SetSpeed(ibX);
-      if (IsSlave(ibX) == 1) SetDelay(ibX);
+      if (IsSlave(ibX) == 1) SetDefaultDelay(ibX);
 
       ShowSpeeds(ibX,1);
     }
@@ -78,7 +78,7 @@ void    key_SetSpeeds(void)
 
       SetSpeed(ibX);
       SetCorrectLimit(ibX);
-      if (IsSlave(ibX) == 1) SetDelay(ibX);
+      if (IsSlave(ibX) == 1) SetDefaultDelay(ibX);
 
       ShowSpeeds(ibX,1);
     }
@@ -94,7 +94,7 @@ void    key_SetSpeeds(void)
         mppoPorts[ibX].ibParity = 0; 
 
       SetSpeed(ibX);
-      if (IsSlave(ibX) == 1) SetDelay(ibX);
+      if (IsSlave(ibX) == 1) SetDefaultDelay(ibX);
 
       ShowSpeeds(ibX,1);
     }

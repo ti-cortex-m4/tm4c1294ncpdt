@@ -56,8 +56,8 @@ uint  w;
 
   switch (bProgram)
   {
-    case bSET_MAJORDELAYS:  mpwMajInDelay[ibX] = w;  break;
-    case bSET_MINORDELAYS:  mpwMinInDelay[ibX] = w;  break;
+    case bSET_MAJORDELAYS:  mpwMajorInDelay[ibX] = w;  break;
+    case bSET_MINORDELAYS:  mpwMinorInDelay[ibX] = w;  break;
   }
 }
 

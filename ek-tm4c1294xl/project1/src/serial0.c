@@ -185,7 +185,7 @@ uint32_t ui32Status;
 
         if (mpSerial[0] == SER_BEGIN)           // приём первого байта в запросе
         {
-          cwInDelay0 = mpwMinInDelay[0];
+          cwInDelay0 = mpwMinorInDelay[0];
 
           mpSerial[0] = SER_INPUT_SLAVE;
           iwInBuff0 = 0;
@@ -200,7 +200,7 @@ uint32_t ui32Status;
           }
           else
           {
-            cwInDelay0 = mpwMinInDelay[0];      // продолжаем приём
+            cwInDelay0 = mpwMinorInDelay[0];      // продолжаем приём
             mpbInBuff0[ iwInBuff0++ ] = bT;
           }
 
@@ -221,7 +221,7 @@ uint32_t ui32Status;
       {
         if (mpSerial[0] == SER_BEGIN)           // приём первого байта в запросе
         {
-          cwInDelay0 = mpwMinInDelay[0];
+          cwInDelay0 = mpwMinorInDelay[0];
 
           mpSerial[0] = SER_INPUT_SLAVE2;
           iwInBuff0 = 0;
@@ -236,7 +236,7 @@ uint32_t ui32Status;
           }
           else
           {
-            cwInDelay0 = mpwMinInDelay[0];      // продолжаем приём
+            cwInDelay0 = mpwMinorInDelay[0];      // продолжаем приём
             mpbInBuff0[ iwInBuff0++ ] = bT;
           }
 
@@ -415,7 +415,7 @@ void    InitSerial0(void) {
   InputMode0();
   DTROff0();
 
-  mpwMajInDelay[0] = 10;
+  mpwMajorInDelay[0] = 10;
   mppoPorts[0].enStream = STR_SLAVEESC;
 
   mpSerial[0] = SER_BEGIN;
@@ -432,9 +432,9 @@ void    Query0(uint  cwIn, uchar  cbOut, bool  fMinInDelay)
   cwOutBuff0 = cbOut;
 
   if (fMinInDelay == true)
-    mpwInDelay[0] = mpwMinInDelay[0];
+    mpwInDelay[0] = mpwMinorInDelay[0];
   else
-    mpwInDelay[0] = mpwMajInDelay[0];
+    mpwInDelay[0] = mpwMajorInDelay[0];
 
   OutputMode0();
   mpSerial[0] = SER_OUTPUT_MASTER;

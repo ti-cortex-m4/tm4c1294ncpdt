@@ -112,36 +112,36 @@ void    key_SetDigitals(void)
               case 11:
               case 20:
               case 18:
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*0.4);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*0.4); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*0.4);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*0.4); break;
 
               case 6: 
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*1);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*1); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*1);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*1); break;
 
               case 7: 
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*60);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*5); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*60);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*5); break;
 
               case 15: 
               case 8: 
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*5);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*5); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*5);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*5); break;
 
               case 21: 
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*3);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*3); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*3);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*3); break;
 
               case 17: 
               case 16: 
               case 14: 
               case 13: 
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*2);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*2); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*2);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*2); break;
 
               default:
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*4);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*4); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*4);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*4); break;
             }
           }
           else
@@ -157,21 +157,21 @@ void    key_SetDigitals(void)
               case 11:
               case 20:
               case 18:
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*2);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*2); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*2);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*2); break;
 
               case 7: 
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*60);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*10); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*60);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*10); break;
 
               case 15: 
               case 8: 
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*10);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*10); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*10);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*10); break;
 
               default:
-                mpwMajInDelay[ibY] = (uint)(wFREQUENCY_T0*8);
-                mpwMinInDelay[ibY] = (uint)(wFREQUENCY_T0*8); break;
+                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*8);
+                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*8); break;
             }
           }
         }

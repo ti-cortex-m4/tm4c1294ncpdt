@@ -15,7 +15,7 @@ port                    mppoPorts[bPORTS];
 uint                    mpwInDelay[bPORTS];
 
 // начальные счётчики таймаута на приём (нормальные и расширенные)
-uint                    mpwMinInDelay[bPORTS], mpwMajInDelay[bPORTS];
+uint                    mpwMinorInDelay[bPORTS], mpwMajorInDelay[bPORTS];
 
 // массив временной смены режима портов
 boolean                 mpboLocal[bPORTS];
