@@ -4,6 +4,10 @@ SPEEDS.H
 
 ------------------------------------------------------------------------------*/
 
+extern  ulong const             mpdwSpeeds[bSPEEDS];
+
+
+
 bool    IsMaster(uchar  ibPrt);
 bool    IsSlave(uchar  ibPrt);
 

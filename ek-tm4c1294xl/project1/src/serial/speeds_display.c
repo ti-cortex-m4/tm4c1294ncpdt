@@ -35,10 +35,6 @@ static char const       szMasters[]   = " ведущие режимы ",
 
 
 
-// массив скоростей обмена
-static ulong const      mpdwSpeeds[bSPEEDS] =
-{ 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400 };
-
 // массив четностей
 static char const       szParitys[]     = "neoms";
 
