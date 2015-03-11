@@ -6,6 +6,4 @@ ENGINE.H
 
 extern  uint                    iwHou;
 
-extern  ulong                   dwBuffC;
-
 extern  real                    reBuffA;
