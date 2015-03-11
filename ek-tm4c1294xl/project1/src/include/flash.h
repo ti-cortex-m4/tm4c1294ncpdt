@@ -112,7 +112,10 @@ typedef enum
 
   FLS_REALTIME          = FLS_PTRMON + 1,
 
-  FLS_END               = FLS_REALTIME + 1
+  FLS_MAJOR_IN_DELAY    = FLS_REALTIME + 1,
+  FLS_MINOR_IN_DELAY    = FLS_MAJOR_IN_DELAY + 1,
+
+  FLS_END               = FLS_MINOR_IN_DELAY + 1
 } flash;
 
 

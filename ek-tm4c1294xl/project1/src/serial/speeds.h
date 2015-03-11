@@ -7,7 +7,7 @@ SPEEDS.H
 bool    IsMaster(uchar  ibPrt);
 bool    IsSlave(uchar  ibPrt);
 
-void    SetDelay(uchar  ibPrt);
+void    SetDefaultDelay(uchar  ibPrt);
 void    SetSpeed(uchar  ibPrt);
 
 void    SetCorrectLimit(uchar  ibPrt);

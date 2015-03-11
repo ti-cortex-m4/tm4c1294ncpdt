@@ -99,7 +99,7 @@ void    MakeCorrectLimit(void)
 
 
 
-void    SetDelay(uchar  ibPrt)    
+void    SetDefaultDelay(uchar  ibPrt)
 {
 uint    w;
 
@@ -111,8 +111,8 @@ uint    w;
   else
     w = mpwInDelaySlave[ mppoPorts[ibPrt].ibSpeed ];
 
-  mpwMajInDelay[ibPrt] = w;
-  mpwMinInDelay[ibPrt] = w;
+  mpwMajorInDelay[ibPrt] = w;
+  mpwMinorInDelay[ibPrt] = w;
 }
 
 
@@ -137,13 +137,15 @@ void    InitSpeeds(void)
 uchar   p;
 
   LoadPorts();
+  LoadMajorInDelay();
+  LoadMinorInDelay();
 
   for (p=0; p<bPORTS; p++)
   {
     if (mppoPorts[p].ibSpeed >= bSPEEDS)
     {
       mppoPorts[p].ibSpeed = 0;
-      SetDelay(p);
+      SetDefaultDelay(p);
     }
 
     if (mppoPorts[p].enStream >= bSTREAMS)
@@ -170,9 +172,11 @@ uchar   p;
     mppoPorts[p].ibSpeed  = 3;
     mppoPorts[p].ibParity = 0;
 
-    SetDelay(p);
+    SetDefaultDelay(p);
     SetCorrectLimit(p);
   }
 
   SavePorts();
+  SaveMajorInDelay();
+  SaveMinorInDelay();
 }

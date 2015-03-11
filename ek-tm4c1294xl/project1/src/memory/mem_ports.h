@@ -8,7 +8,7 @@ extern  port                mppoPorts[bPORTS];
 
 extern  uint                mpwInDelay[bPORTS];
 
-extern  uint                mpwMinInDelay[bPORTS], mpwMajInDelay[bPORTS];
+extern  uint                mpwMinorInDelay[bPORTS], mpwMajorInDelay[bPORTS];
 
 extern  boolean             mpboLocal[bPORTS];
 
