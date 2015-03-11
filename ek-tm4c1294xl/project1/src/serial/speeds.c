@@ -9,6 +9,7 @@ SPEEDS.C
 #include        "driverlib/uart.h"
 #include        "inc/hw_memmap.h"
 #include        "../memory/mem_ports.h"
+#include        "../hardware/system_clock.h"
 #include        "../serial/ports.h"
 #include        "speeds.h"
 #include        "speeds_storage.h"
@@ -49,34 +50,34 @@ static uint const       mpwInDelayMaster[bSPEEDS] =
 
 
 
-static void SetUart(uchar  ibPrt, ulong  uartBase)
+void     SetUART(uchar  ibPrt, ulong  dwBase)
 {
-  ROM_UARTConfigSetExpClk(uartBase, ui32SysClock, 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+//  ROM_UARTConfigSetExpClk(dwBase, GetSystemClockFrequency(), 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
 
 
 
 void    SetSpeed0(void)
 {
-  SetUart(0, UART0_BASE);
+  SetUART(0, UART0_BASE);
 }
 
 
 void    SetSpeed1(void)
 {
-  SetUart(1, UART1_BASE);
+  SetUART(1, UART1_BASE);
 }
 
 
 void    SetSpeed2(void)
 {
-  SetUart(2, UART2_BASE);
+  SetUART(2, UART2_BASE);
 }
 
 
 void    SetSpeed3(void)
 {
-  SetUart(3, UART3_BASE);
+  SetUART(3, UART3_BASE);
 }
 
 

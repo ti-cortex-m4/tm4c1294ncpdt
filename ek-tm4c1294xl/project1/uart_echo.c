@@ -18,6 +18,7 @@ TODO .C
 #include "driverlib/timer.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
+#include "src/hardware/system_clock.h"
 #include "src/beep.h"
 #include "src/display/lcd.h"
 #include "src/time/rtc.h"
@@ -49,13 +50,8 @@ TODO .C
  void InitSerial0();
 
 int main(void) {
-	uint32_t ui32SysClock;
+  uint32_t ui32SysClock = GetSystemClockFrequency();
 
-    // Set the clocking to run directly from the crystal at 120MHz.
-	ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
-                                             SYSCTL_OSC_MAIN |
-                                             SYSCTL_USE_PLL |
-                                             SYSCTL_CFG_VCO_480), 120000000);
   InitUARTs(ui32SysClock);
 
 	InitBeep();
