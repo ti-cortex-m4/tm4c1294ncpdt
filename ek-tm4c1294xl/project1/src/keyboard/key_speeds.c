@@ -55,10 +55,10 @@ void    key_SetSpeeds(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {                                   
-      ((ibX == 0) || (ibX == 1)) ? (ibY = bSPEEDS) : (ibY = 7);
+      ((ibX == 0) || (ibX == 1)) ? (ibY = bBAUDS) : (ibY = 7);
 
-      if (++mppoPorts[ibX].ibSpeed >= ibY) 
-        mppoPorts[ibX].ibSpeed = 0;
+      if (++mppoPorts[ibX].ibBaud >= ibY) 
+        mppoPorts[ibX].ibBaud = 0;
 
       SetSpeed(ibX);
       if (IsSlave(ibX) == 1) SetDefaultDelay(ibX);

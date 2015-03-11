@@ -43,7 +43,7 @@ static char const       szParitys[]     = "neoms";
 void    ShowSpeeds(uchar  ibPrt, bool  fShowLocalDisable)
 {
   Clear();
-  sprintf(szLo+1,"%-6lu",mpdwSpeeds[ mppoPorts[ibPrt].ibSpeed ]);
+  sprintf(szLo+1,"%-6lu",mpdwBauds[ mppoPorts[ibPrt].ibBaud ]);
   sprintf(szLo+15,"%u",ibPrt+1);
 
   if (mppoPorts[ibPrt].ibParity < bPARITYS)
