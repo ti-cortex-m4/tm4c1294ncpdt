@@ -10,6 +10,7 @@ KEY_DELAYS.C
 #include        "../display/display.h"
 #include        "../engine.h"
 #include        "../digitals/sensors.h"
+#include        "../serial/speeds_storage.h"
 
 
 
@@ -18,31 +19,31 @@ static char const       szDelays[]       = "Таймауты        ",
                         szMajorDelays[]  = "  расширенные   ",
                         szMinorDelays[]  = "    базовые     ",
                         szMaskDelays[]   = "   ______ мс  ";
-                      
 
 
-void    ShowDelaysName(void)
+
+static void ShowDelaysName(void)
 {
   ShowHi(szDelays);
   switch (bProgram)
   {
-    case bSET_MAJORDELAYS:  ShowLo(szMajorDelays);  break;
-    case bSET_MINORDELAYS:  ShowLo(szMinorDelays);  break;
+    case bSET_MAJOR_DELAYS:  ShowLo(szMajorDelays);  break;
+    case bSET_MINOR_DELAYS:  ShowLo(szMinorDelays);  break;
   }
 
   DelayInf();
 }
 
 
-void    ShowDelays(void)
+static void ShowDelays(void)
 {
 ulong   dw;
 
   Clear();
   switch (bProgram)
   {
-    case bSET_MAJORDELAYS:  dw = GetMajDelay(ibX);  break;
-    case bSET_MINORDELAYS:  dw = GetMinDelay(ibX);  break;
+    case bSET_MAJOR_DELAYS:  dw = GetMajorDelay(ibX); SaveMajorInDelay();  break;
+    case bSET_MINOR_DELAYS:  dw = GetMinorDelay(ibX); SaveMinorInDelay();  break;
   }
 
   ShowLong(dw);
@@ -50,7 +51,7 @@ ulong   dw;
 }
 
 
-void    SetDelays(ulong  dw)
+static void SetDelays(ulong  dw)
 {
 uint  w;
 
@@ -58,8 +59,8 @@ uint  w;
 
   switch (bProgram)
   {
-    case bSET_MAJORDELAYS:  mpwMajorInDelay[ibX] = w;  break;
-    case bSET_MINORDELAYS:  mpwMinorInDelay[ibX] = w;  break;
+    case bSET_MAJOR_DELAYS:  mpwMajorInDelay[ibX] = w;  break;
+    case bSET_MINOR_DELAYS:  mpwMinorInDelay[ibX] = w;  break;
   }
 }
 

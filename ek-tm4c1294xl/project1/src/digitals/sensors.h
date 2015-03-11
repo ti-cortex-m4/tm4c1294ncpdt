@@ -4,7 +4,7 @@ SENSORS.H
 
 ------------------------------------------------------------------------------*/
 
-ulong   GetMajDelay(uchar  ibPort);
-ulong   GetMinDelay(uchar  ibPort);
+ulong   GetMajorDelay(uchar  ibPort);
+ulong   GetMinorDelay(uchar  ibPort);
 
 bool    IsPulseCanal(uchar  ibCan);

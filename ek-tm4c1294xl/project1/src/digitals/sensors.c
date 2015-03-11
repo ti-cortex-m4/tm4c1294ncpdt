@@ -10,12 +10,12 @@ SENSORS.C
 
 
 
-ulong   GetMajDelay(uchar  ibPort) {
+ulong   GetMajorDelay(uchar  ibPort) {
   return (ulong)1000*mpwMajorInDelay[ibPort]/wFREQUENCY_T0;
 }
 
 
-ulong   GetMinDelay(uchar  ibPort) {
+ulong   GetMinorDelay(uchar  ibPort) {
   return (ulong)1000*mpwMinorInDelay[ibPort]/wFREQUENCY_T0;
 }
 

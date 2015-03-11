@@ -113,6 +113,9 @@ uint    w;
 
   mpwMajorInDelay[ibPrt] = w;
   mpwMinorInDelay[ibPrt] = w;
+
+  SaveMajorInDelay();
+  SaveMinorInDelay();
 }
 
 

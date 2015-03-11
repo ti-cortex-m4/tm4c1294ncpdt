@@ -47,8 +47,8 @@ PROGRAMS.H
 #define bSET_RESETWATCHDOG          82
 #define bSET_DEBUG                  83
 
-#define bSET_MAJORDELAYS            97
-#define bSET_MINORDELAYS            98
+#define bSET_MAJOR_DELAYS           97
+#define bSET_MINOR_DELAYS           98
 
 
 // режим: функционирование
