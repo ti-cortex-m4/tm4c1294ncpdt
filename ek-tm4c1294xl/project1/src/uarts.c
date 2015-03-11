@@ -51,7 +51,7 @@ void InitUARTs(uint32_t ui32SysClock) {
     //UARTFIFOEnable(INT_UART0);
 
     // Configure the UART for 115,200, 8-N-1 operation.
-    ROM_UARTConfigSetExpClk(UART0_BASE, ui32SysClock, 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+//    ROM_UARTConfigSetExpClk(UART0_BASE, ui32SysClock, 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 
     InitSerial0();
 
