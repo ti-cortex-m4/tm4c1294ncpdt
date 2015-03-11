@@ -9,10 +9,13 @@ SPEEDS.C
 #include        "driverlib/uart.h"
 #include        "inc/hw_memmap.h"
 #include        "../memory/mem_ports.h"
-#include        "../hardware/system_clock.h"
 #include        "../serial/ports.h"
 #include        "speeds.h"
 #include        "speeds_storage.h"
+
+
+
+extern  uint32_t                ui32SysClock;
 
 
 
@@ -47,38 +50,6 @@ static uint const       mpwInDelayMaster[bSPEEDS] =
   (uint)(wFREQUENCY_T0*0.3087),
   (uint)(wFREQUENCY_T0*0.3044)
 };
-
-
-
-void     SetUART(uchar  ibPrt, ulong  dwBase)
-{
-//  ROM_UARTConfigSetExpClk(dwBase, GetSystemClockFrequency(), 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
-}
-
-
-
-void    SetSpeed0(void)
-{
-  SetUART(0, UART0_BASE);
-}
-
-
-void    SetSpeed1(void)
-{
-  SetUART(1, UART1_BASE);
-}
-
-
-void    SetSpeed2(void)
-{
-  SetUART(2, UART2_BASE);
-}
-
-
-void    SetSpeed3(void)
-{
-  SetUART(3, UART3_BASE);
-}
 
 
 
@@ -134,6 +105,35 @@ uint    w;
   SaveMinorInDelay();
 }
 
+
+
+void     SetUART(uchar  ibPrt, ulong  dwBase) {
+  ROM_UARTConfigSetExpClk(dwBase, ui32SysClock, 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+}
+
+
+void    SetSpeed0(void)
+{
+  SetUART(0, UART0_BASE);
+}
+
+
+void    SetSpeed1(void)
+{
+//  SetUART(1, UART1_BASE);
+}
+
+
+void    SetSpeed2(void)
+{
+//  SetUART(2, UART2_BASE);
+}
+
+
+void    SetSpeed3(void)
+{
+//  SetUART(3, UART3_BASE);
+}
 
 
 void    SetSpeed(uchar  ibPrt)

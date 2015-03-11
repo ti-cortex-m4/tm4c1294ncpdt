@@ -47,10 +47,13 @@ TODO .C
 #include "src/output/response_crc.h"
 
 
- void InitSerial0();
+
+uint32_t                ui32SysClock;
+
+
 
 int main(void) {
-  uint32_t ui32SysClock = GetSystemClockFrequency();
+  ui32SysClock = GetSystemClockFrequency();
 
   InitUARTs(ui32SysClock);
 
