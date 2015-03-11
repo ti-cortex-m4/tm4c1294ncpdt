@@ -36,23 +36,25 @@ void    ShowDelaysName(void)
 
 void    ShowDelays(void)
 {
+ulong   dw;
+
   Clear();
   switch (bProgram)
   {
-    case bSET_MAJORDELAYS:  dwBuffC = GetMajDelay(ibX);  break;
-    case bSET_MINORDELAYS:  dwBuffC = GetMinDelay(ibX);  break;
+    case bSET_MAJORDELAYS:  dw = GetMajDelay(ibX);  break;
+    case bSET_MINORDELAYS:  dw = GetMinDelay(ibX);  break;
   }
 
-  ShowLong(dwBuffC);
+  ShowLong(dw);
   sprintf(szLo+10,"мс  %2u",ibX+1);
 }
 
 
-void    SetDelays(void)
+void    SetDelays(ulong  dw)
 {
 uint  w;
 
-  w = (ulong)dwBuffC*wFREQUENCY_T0/1000;
+  w = (ulong)dw*wFREQUENCY_T0/1000;
 
   switch (bProgram)
   {
@@ -65,6 +67,8 @@ uint  w;
 
 void    key_SetDelays(void)
 {
+ulong   dw;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -77,12 +81,12 @@ void    key_SetDelays(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {            
-      dwBuffC = GetLongLo(3,8);
+      dw = GetLongLo(3,8);
 
-      if (( (ulong)wFREQUENCY_T0*dwBuffC/1000 ) <= 0xFFFF)
+      if (((ulong)wFREQUENCY_T0*dw/1000 ) <= 0xFFFF)
       {
         enKeyboard = KBD_POSTENTER;
-        SetDelays();
+        SetDelays(dw);
 
         if (++ibX >= bPORTS) ibX = 0;
         ShowDelays();

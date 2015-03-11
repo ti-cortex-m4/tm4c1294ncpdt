@@ -12,6 +12,4 @@ ENGINE.Ñ
 
 uint                    iwHou;
 
-ulong                   dwBuffC;
-
 real                    reBuffA;
