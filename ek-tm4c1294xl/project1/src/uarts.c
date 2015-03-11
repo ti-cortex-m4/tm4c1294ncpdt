@@ -53,28 +53,9 @@ void InitUARTs(uint32_t ui32SysClock) {
     // Configure the UART for 115,200, 8-N-1 operation.
     ROM_UARTConfigSetExpClk(UART0_BASE, ui32SysClock, 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 
-//    InitSerial0();
-//
-//    // Enable the UART interrupt.
-//    ROM_IntEnable(INT_UART0);
-//    ROM_UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+    InitSerial0();
 
-    //UARTSend((uint8_t *)"Start");
+    // Enable the UART interrupt.
+    ROM_IntEnable(INT_UART0);
+    ROM_UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 }
-
-/*
-void UART0IntHandler2(void) {
-uint32_t ui32Status;
-
-    ui32Status = UARTIntStatus(UART0_BASE, true);
-    UARTIntClear(UART0_BASE, ui32Status);
-
-    while(ROM_UARTCharsAvail(UART0_BASE)) {
-        ROM_UARTCharPutNonBlocking(UART0_BASE, ROM_UARTCharGetNonBlocking(UART0_BASE));
-
-        GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, GPIO_PIN_0);
-        SysCtlDelay(5000);
-        GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0);
-    }
-}
-*/
