@@ -38,6 +38,7 @@ TODO .C
 #include "src/tariffs/relaxs.h"
 #include "src/tariffs/gaps.h"
 #include "src/digitals/digitals.h"
+#include "src/serial/speeds.h"
 #include "src/storage/storage.h"
 #include "src/time/decret.h"
 #include "src/realtime/realtime.h"
@@ -74,6 +75,7 @@ int main(void) {
 	InitGaps();             Delay(100); TestOK();
 	InitDecret();
 	InitDigitals();         Delay(100); TestOK();
+	InitSpeeds();
 
 	InitSlide();
 	InitStorage();
@@ -83,12 +85,6 @@ int main(void) {
   PrintStop();
 
 	InitDisplay();
-
-    InitSerial0();
-
-    // Enable the UART interrupt.
-    ROM_IntEnable(INT_UART0);
-    ROM_UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
     InitTimer0(ui32SysClock);
     InitTimer1(ui32SysClock);
