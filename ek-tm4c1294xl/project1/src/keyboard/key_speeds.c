@@ -60,7 +60,7 @@ void    key_SetSpeeds(void)
       if (++mppoPorts[ibX].ibSpeed >= ibY) 
         mppoPorts[ibX].ibSpeed = 0;
 
-      SetSpeeds(ibX);
+      SetSpeed(ibX);
       if (IsSlave(ibX) == 1) SetDelay(ibX);
 
       ShowSpeeds(ibX,1);
@@ -76,7 +76,7 @@ void    key_SetSpeeds(void)
       if (++mppoPorts[ibX].enStream >= bSTREAMS) 
         mppoPorts[ibX].enStream = STR_SLAVEESC;
 
-      SetSpeeds(ibX);
+      SetSpeed(ibX);
       SetCorrectLimit(ibX);
       if (IsSlave(ibX) == 1) SetDelay(ibX);
 
@@ -93,7 +93,7 @@ void    key_SetSpeeds(void)
       if (++mppoPorts[ibX].ibParity >= bPARITYS) 
         mppoPorts[ibX].ibParity = 0; 
 
-      SetSpeeds(ibX);
+      SetSpeed(ibX);
       if (IsSlave(ibX) == 1) SetDelay(ibX);
 
       ShowSpeeds(ibX,1);

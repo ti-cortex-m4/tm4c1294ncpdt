@@ -8,6 +8,7 @@ SPEEDS.C
 #include        "../memory/mem_ports.h"
 #include        "../serial/ports.h"
 #include        "speeds.h"
+#include        "speeds_storage.h"
 
 
 
@@ -116,28 +117,7 @@ uint    w;
 
 
 
-void    ResetSpeeds(void)
-{  
-uchar   p;
-
-  mppoPorts[0].enStream = STR_SLAVEESC;
-  mppoPorts[1].enStream = STR_SLAVEESC;
-  mppoPorts[2].enStream = STR_MASTERDIRECT;
-  mppoPorts[3].enStream = STR_MASTERDIRECT;
-
-  for (p=0; p<bPORTS; p++)
-  {
-    mppoPorts[p].ibSpeed  = 3;
-    mppoPorts[p].ibParity = 0;
-
-    SetDelay(p);
-    SetCorrectLimit(p);
-  }
-}
-
-
-
-void    SetSpeeds(uchar  ibPrt)
+void    SetSpeed(uchar  ibPrt)
 {
   mpSerial[ibPrt] = SER_BEGIN;
 
@@ -156,6 +136,8 @@ void    InitSpeeds(void)
 {
 uchar   p;
 
+  LoadPorts();
+
   for (p=0; p<bPORTS; p++)
   {
     if (mppoPorts[p].ibSpeed >= bSPEEDS)
@@ -167,10 +149,30 @@ uchar   p;
     if (mppoPorts[p].enStream >= bSTREAMS)
       mppoPorts[p].enStream = STR_SLAVEESC;
 
-    SetSpeeds(p);               
+    SetSpeed(p);
     CheckCorrectLimit(p);
   }
 }
 
 
 
+void    ResetSpeeds(void)
+{  
+uchar   p;
+
+  mppoPorts[0].enStream = STR_SLAVEESC;
+  mppoPorts[1].enStream = STR_SLAVEESC;
+  mppoPorts[2].enStream = STR_MASTERDIRECT;
+  mppoPorts[3].enStream = STR_MASTERDIRECT;
+
+  for (p=0; p<bPORTS; p++)
+  {
+    mppoPorts[p].ibSpeed  = 3;
+    mppoPorts[p].ibParity = 0;
+
+    SetDelay(p);
+    SetCorrectLimit(p);
+  }
+
+  SavePorts();
+}
