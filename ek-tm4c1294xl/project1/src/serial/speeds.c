@@ -20,11 +20,11 @@ extern  uint32_t                ui32SysClock;
 
 
 // массив скоростей обмена
-ulong const             mpdwSpeeds[bSPEEDS] =
+ulong const             mpdwBauds[bBAUDS] =
 { 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400 };
 
 // массив таймаутов на приём для портов RS-232 (время передачи 100 бит на данной скорости)
-static uint const       mpwInDelaySlave[bSPEEDS] =
+static uint const       mpwInDelaySlave[bBAUDS] =
 {
   (uint)(wFREQUENCY_T0*0.0833),
   (uint)(wFREQUENCY_T0*0.0417),
@@ -38,7 +38,7 @@ static uint const       mpwInDelaySlave[bSPEEDS] =
 };
 
 // массив таймаутов на приём для порта RS-485 (300 миллисекунд плюс время передачи 1000 бит на данной скорости)
-static uint const       mpwInDelayMaster[bSPEEDS] =
+static uint const       mpwInDelayMaster[bBAUDS] =
 {
   (uint)(wFREQUENCY_T0*1.1333),
   (uint)(wFREQUENCY_T0*0.7167),
@@ -94,9 +94,9 @@ uint    w;
 
   if ((mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) || 
       (mppoPorts[ibPrt].enStream == STR_MASTERMODEM))
-    w = mpwInDelayMaster[ mppoPorts[ibPrt].ibSpeed ];
+    w = mpwInDelayMaster[ mppoPorts[ibPrt].ibBaud ];
   else
-    w = mpwInDelaySlave[ mppoPorts[ibPrt].ibSpeed ];
+    w = mpwInDelaySlave[ mppoPorts[ibPrt].ibBaud ];
 
   mpwMajorInDelay[ibPrt] = w;
   mpwMinorInDelay[ibPrt] = w;
@@ -107,8 +107,11 @@ uint    w;
 
 
 
-void     SetUART(uchar  ibPrt, ulong  dwBase) {
-  ROM_UARTConfigSetExpClk(dwBase, ui32SysClock, 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+void     SetUART(uchar  ibPrt, ulong  dwBase)
+{
+ulong   dwBaud = mpdwBauds[ mppoPorts[ibPrt].ibBaud ];
+
+  ROM_UARTConfigSetExpClk(dwBase, ui32SysClock, dwBaud, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
 
 
@@ -163,9 +166,9 @@ uchar   p;
 
   for (p=0; p<bPORTS; p++)
   {
-    if (mppoPorts[p].ibSpeed >= bSPEEDS)
+    if (mppoPorts[p].ibBaud >= bBAUDS)
     {
-      mppoPorts[p].ibSpeed = 0;
+      mppoPorts[p].ibBaud = 0;
       SetDefaultDelay(p);
     }
 
@@ -190,7 +193,7 @@ uchar   p;
 
   for (p=0; p<bPORTS; p++)
   {
-    mppoPorts[p].ibSpeed  = 3;
+    mppoPorts[p].ibBaud  = 3;
     mppoPorts[p].ibParity = 0;
 
     SetDefaultDelay(p);

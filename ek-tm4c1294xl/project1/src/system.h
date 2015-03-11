@@ -38,7 +38,7 @@ SYSTEM.H
 #define bPORTS          4
 
 // количество скоростей
-#define bSPEEDS         9
+#define bBAUDS          9
 
 // количество типов четности
 #define bPARITYS        5

@@ -22,7 +22,7 @@ typedef enum
 // тип 'настройки порта'
 typedef struct
 {
-  uchar         ibSpeed;                // индекс скорости
+  uchar         ibBaud;                // индекс скорости
   uchar         ibParity;               // индекс контроля чётности
   stream        enStream;               // режим работы порта
 } port;

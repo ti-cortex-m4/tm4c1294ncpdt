@@ -4,7 +4,7 @@ SPEEDS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  ulong const             mpdwSpeeds[bSPEEDS];
+extern  ulong const             mpdwBauds[bBAUDS];
 
 
 
