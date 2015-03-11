@@ -90,8 +90,8 @@ void    Keyboard_Key(void)
       case bSET_RESETCUSTOM:
       case bSET_RESETFULL:      key_SetReset();         break;
 
-      case bSET_MAJORDELAYS:
-      case bSET_MINORDELAYS:    key_SetDelays();        break;
+      case bSET_MAJOR_DELAYS:
+      case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
 
@@ -153,8 +153,8 @@ void    Keyboard_Key(void)
       case bSET_VERSION:
       case bGET_VERSION:        key_GetVersion();       break;
 
-      case bSET_MAJORDELAYS:
-      case bSET_MINORDELAYS:    key_SetDelays();        break;
+      case bSET_MAJOR_DELAYS:
+      case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
 
@@ -283,8 +283,8 @@ void    Keyboard_Key(void)
       case bSET_RESETCUSTOM:
       case bSET_RESETFULL:      key_SetReset();         break;
 
-      case bSET_MAJORDELAYS:
-      case bSET_MINORDELAYS:    key_SetDelays();        break;
+      case bSET_MAJOR_DELAYS:
+      case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
 
