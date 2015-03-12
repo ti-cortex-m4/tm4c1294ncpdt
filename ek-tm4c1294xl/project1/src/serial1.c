@@ -80,15 +80,15 @@ uint32_t ui32Status;
 
       if (mpSerial[1] == SER_BEGIN)
       {
-        if (bT == szPacketB[ibPacket0])
+        if (bT == szPacketB[ibPacket1])
         {
-          if (++ibPacket0 >= sizeof(szPacketB))
+          if (++ibPacket1 >= sizeof(szPacketB))
           {
-            ibPacket0 = 0;
+            ibPacket1 = 0;
             mpSerial[1] = SER_LOCAL;
           }
         }
-        else ibPacket0 = 0;
+        else ibPacket1 = 0;
       }
       else if ((mpSerial[1] == SER_OUTPUT_MASTER) ||
                (mpSerial[1] == SER_INPUT_MASTER)  ||
@@ -175,8 +175,8 @@ uint32_t ui32Status;
     {
       bT = InByte1();
 
-      cwIn0++;
-      bIn0 = bT;
+      cwIn1++;
+      bIn1 = bT;
 
       if ((mppoPorts[1].enStream == STR_SLAVECRC) || (IsFlow1() == 1))
       {
@@ -252,16 +252,16 @@ uint32_t ui32Status;
       }
       else
       {
-        if (bT == szPacketA[ibPacket0])
+        if (bT == szPacketA[ibPacket1])
         {
-          if (++ibPacket0 >= bPACKET_HEADER)
+          if (++ibPacket1 >= bPACKET_HEADER)
           {
-            ibPacket0 = 0;
+            ibPacket1 = 0;
             mpSerial[1] = SER_PACKET_HEADER;
             iwInBuff1 = 0;
           }
         }
-        else if (bT != szPacketA[1]) ibPacket0 = 0;
+        else if (bT != szPacketA[1]) ibPacket1 = 0;
 
         if (mpSerial[1] == SER_PACKET_BODY)
         {
@@ -336,12 +336,12 @@ uint32_t ui32Status;
       }
       else if (mpSerial[1] == SER_POINTER)
       {
-        bT = bCRCHi1 ^ *pbData0;
+        bT = bCRCHi1 ^ *pbData1;
 
         bCRCHi1 = bCRCLo1 ^ mpbCRCHi[bT];
         bCRCLo1 = mpbCRCLo[bT];
 
-        bT = *(pbData0++);
+        bT = *(pbData1++);
 
         if (++iwOutBuff1 < cwOutBuff1)
         {

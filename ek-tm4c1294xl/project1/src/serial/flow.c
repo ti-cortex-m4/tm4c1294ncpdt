@@ -19,5 +19,10 @@ void    RepeatFlow(void) {
 
 
 uchar   IsFlow0(void) {
-	return(0);
+  return(0);
+}
+
+
+uchar   IsFlow1(void) {
+  return(0);
 }
