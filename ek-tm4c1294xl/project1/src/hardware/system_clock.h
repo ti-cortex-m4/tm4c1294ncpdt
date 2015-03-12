@@ -4,4 +4,8 @@ SYSTEM_CLOCK.H
 
 ------------------------------------------------------------------------------*/
 
+extern  uint32_t                ui32SysClock;
+
+
+
 uint32_t GetSystemClockFrequency(void);
