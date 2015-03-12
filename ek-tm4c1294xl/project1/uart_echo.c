@@ -53,7 +53,7 @@ int main(void) {
   ui32SysClock = GetSystemClockFrequency();
 
   InitUart0(ui32SysClock);
-  InitUart1(ui32SysClock);
+  InitUart2(ui32SysClock);
 
 	InitBeep();
 	InitLCD();
