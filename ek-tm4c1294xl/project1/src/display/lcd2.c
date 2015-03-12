@@ -38,6 +38,19 @@ LCD2.C
 #define LCD_BIT_E    0x08 //PC4
 
 
+static void Wait(void) // TODO
+{
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+}
 
 //Установка одного или нескольких из управляющих битов ЖКИ
 void SetCtrlBit_LCD(unsigned int wSetBit)
@@ -53,7 +66,7 @@ void SetCtrlBit_LCD(unsigned int wSetBit)
  else
   HWREG(GPIO_PORTC_AHB_BASE + GPIO_O_DATA + 0x000040) = 0x0010;
 
-
+  Wait();
 /*
  #ifdef	PF2_TO_PD0_WR
   if(wSetBit & LCD_BIT_WR)
@@ -80,6 +93,7 @@ void ClearCtrlBit_LCD(unsigned int wSetBit)
 	 else
 	  HWREG(GPIO_PORTC_AHB_BASE + GPIO_O_DATA + 0x000040) = ~0x0010;
 
+	  Wait();
 
 /*
  #ifdef	PF2_TO_PD0_WR
@@ -98,15 +112,19 @@ void SetPortK_Out(void)
 {
  SetCtrlBit_LCD(LCD_BIT_DIR);//DIR = 1, Буфер согласования уровней на передачу
  //HWREG(GPIO_PORTK_BASE + GPIO_O_DIR) |= 0x000000FF;//Пины порта "К" на передачу
+ Wait();
  HWREG(GPIO_PORTL_BASE + GPIO_O_DIR) |= 0x000000FF;//
+ Wait();
 }
 
 //Порт "К" на прием данных.
 void SetPortK_In(void)
 {
  ClearCtrlBit_LCD(LCD_BIT_DIR);//DIR = 0, Буфер согласования уровней на прием
+ Wait();
  //HWREG(GPIO_PORTK_BASE + GPIO_O_DIR) &= 0xFFFFFF00;//Пины порта "К" на прием
  HWREG(GPIO_PORTL_BASE + GPIO_O_DIR) &= 0xFFFFFF00;//
+ Wait();
 }
 
 
@@ -117,15 +135,20 @@ void Write_Byte_LCD(unsigned char bflagDC, unsigned char bData)
 
  if(bflagDC) SetCtrlBit_LCD(LCD_BIT_RS);  //RS=1 - данные
  else ClearCtrlBit_LCD(LCD_BIT_RS);       //RS=0 - команда
+ Wait();
 
  ClearCtrlBit_LCD(LCD_BIT_WR);//WR=0 - запись
+ Wait();
 
  //HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x3FC) = bData;//записываем в порт "K" 8 бит данных (шина данных)
  HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + 0x3FC) = bData;//записываем в порт "K" 8 бит данных (шина данных)
+ Wait();
 
  SetCtrlBit_LCD(LCD_BIT_E);    //E=1
+ Wait();
  Nop();//мин. импульс 230 нсек.
  ClearCtrlBit_LCD(LCD_BIT_E);  //E=0
+ Wait();
 }
 
 //Чтение байта из ЖКИ
@@ -135,16 +158,22 @@ unsigned char Read_Byte_LCD(unsigned char bflagDC)
 
  if(bflagDC) SetCtrlBit_LCD(LCD_BIT_RS);  //RS=1 - данные
  else ClearCtrlBit_LCD(LCD_BIT_RS);       //RS=0 - команда
+ Wait();
 
  SetCtrlBit_LCD(LCD_BIT_WR);   //WR=1 - чтение
+ Wait();
  SetCtrlBit_LCD(LCD_BIT_E);    //E=1
  Nop();//мин. импульс 230 нсек.
+ Wait();
 
  //bflagDC = HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x3FC);//читаем из порта "K" 8 бит данных (шина данных)
  bflagDC = HWREG(GPIO_PORTL_BASE + GPIO_O_DATA + 0x3FC);//читаем из порта "K" 8 бит данных (шина данных)
+ Wait();
 
  ClearCtrlBit_LCD(LCD_BIT_E);  //E=0
+ Wait();
  ClearCtrlBit_LCD(LCD_BIT_WR); //WR=0
+ Wait();
 
  return(bflagDC);
 }
@@ -164,19 +193,27 @@ void InitGPIO_LCD(void)
  HWREG(SYSCTL_RCGCGPIO) |= 0xFFFF;//Запуск генераторов портов
 
  RunClocking();
+ Wait();
 /*
  HWREG(GPIO_PORTK_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DEN) |= 0x0F;//работа с цифровым сигналом
 */
  HWREG(GPIO_PORTL_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом
+ Wait();
  HWREG(GPIO_PORTG_AHB_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом
+ Wait();
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом
+ Wait();
  HWREG(GPIO_PORTC_AHB_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом
+ Wait();
 
  SetPortK_Out();//Пины порта "К" на передачу данных
  HWREG(GPIO_PORTG_AHB_BASE + GPIO_O_DIR) |= 0xFF;//
+ Wait();
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0xFF;//
+ Wait();
  HWREG(GPIO_PORTC_AHB_BASE + GPIO_O_DIR) |= 0xFF;//
+ Wait();
 /*
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0x0F;//младшие пины Порта "F" на передачу (управляющие всегда на передаче)
 
@@ -188,7 +225,9 @@ void InitGPIO_LCD(void)
 */
 
  ClearCtrlBit_LCD(LCD_BIT_E);  //E=0 Индикатор не выбран
+ Wait();
  ClearCtrlBit_LCD(LCD_BIT_WR); //WR=0
+ Wait();
 }
 
 

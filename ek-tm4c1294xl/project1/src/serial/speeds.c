@@ -120,7 +120,7 @@ void    SetSpeed0(void)
 
 void    SetSpeed1(void)
 {
-//  SetUART(1, UART1_BASE);
+  SetUART(1, UART2_BASE);
 }
 
 

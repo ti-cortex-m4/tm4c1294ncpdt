@@ -7,6 +7,7 @@ RTC.C
 #include        "../main.h"
 #include        "../time/timedate.h"
 #include        "../display/lines.h"
+#include        "../time/delay.h"
 #include        "inc/hw_sysctl.h"
 #include        "inc/hw_gpio.h"
 #include        "inc/hw_memmap.h"
@@ -18,6 +19,21 @@ RTC.C
 
 
 
+static void Wait(void) // TODO
+{
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+}
+
+
 static void  CharOutSPI(unsigned char bI)
 {
  unsigned char bK;
@@ -26,8 +42,11 @@ static void  CharOutSPI(unsigned char bI)
  {
   if(bI & (0x80 >> bK )) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
   else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  Wait();
   HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  Wait();
   HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+  Wait();
  }
 }
 
@@ -40,8 +59,11 @@ static unsigned char  CharInSPI(void)
  for(bK=0; bK<8; bK++)
  {
   HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  Wait();
   HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+  Wait();
   if(HWREG(GPIO_DATABIT_SO)) bRez |= 0x80 >> bK;
+  Wait();
  }
 
  return(bRez);
@@ -53,9 +75,13 @@ static unsigned char  CharInSPI(void)
 static void EnableSPI(void)
 {
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+ Wait();
  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
+ Wait();
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+ Wait();
  HWREG(GPIO_DATABIT_CS)  = ~SPI_BIT_CS;
+ Wait();
 }
 
 
@@ -63,7 +89,9 @@ static void EnableSPI(void)
 static void DisableSPI(void)
 {
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+ Wait();
  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
+ Wait();
 }
 
 
