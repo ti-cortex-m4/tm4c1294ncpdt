@@ -9,9 +9,12 @@ BULK.H
 
 
 void    AnswerBulk0(void);
+void    AnswerBulk1(void);
 
 void    OutByteBulk0(void);
+void    OutByteBulk1(void);
 
 void    RunBulk0(void);
+void    RunBulk1(void);
 
 void    ResetBulk(void);

@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 SERIAL1.C
 
-
+TODO: volatile
 ------------------------------------------------------------------------------*/
 
 #include 		"main.h"
@@ -94,7 +94,7 @@ uint32_t ui32Status;
                (mpSerial[1] == SER_INPUT_MASTER)  ||
                (mpSerial[1] == SER_ANSWER_MODEM))
       {
-        if (iwInBuff0 >= wINBUFF_SIZE)          // переполнение входного буфера ?
+        if (iwInBuff1 >= wINBUFF_SIZE)          // переполнение входного буфера ?
         {
           InputMode1();
           mpSerial[1] = SER_OVERFLOW;
@@ -103,7 +103,7 @@ uint32_t ui32Status;
         {
           if (mpSerial[1] == SER_ANSWER_MODEM)
           {
-            mpbInBuff0[ iwInBuff0++ ] = bT;
+            mpbInBuff1[ iwInBuff1++ ] = bT;
 
             if ((bT == '\r') || (bT == '\n'))   // приём завершён
             {
@@ -114,10 +114,10 @@ uint32_t ui32Status;
           else
           if (mpSerial[1] == SER_INPUT_MASTER)
           {
-            mpbInBuff0[ iwInBuff0 ] = bT;
-            cwInDelay0 = mpwInDelay[1];
+            mpbInBuff1[ iwInBuff1 ] = bT;
+            cwInDelay1 = mpwInDelay[1];
 
-            if (++iwInBuff0 == cwInBuff0)       // приём завершён
+            if (++iwInBuff1 == cwInBuff1)       // приём завершён
             {
               InputMode1();
               mpSerial[1] = SER_POSTINPUT_MASTER;
@@ -131,19 +131,19 @@ uint32_t ui32Status;
     {
       if (mpSerial[1] == SER_OUTPUT_MASTER)
       {
-        bT = mpbOutBuff0[ iwOutBuff0 ];
+        bT = mpbOutBuff1[ iwOutBuff1 ];
 
-        if (++iwOutBuff0 <= cwOutBuff0)         // продолжаем передачу ?
+        if (++iwOutBuff1 <= cwOutBuff1)         // продолжаем передачу ?
           OutByte1(bT);
         else                                    // передача завершена
         {
-          if (cwInBuff0 == 0)
+          if (cwInBuff1 == 0)
           {
             InputMode1();
             mpSerial[1] = SER_BEGIN;            // передача без ответа
           }
           else
-          if (cwInBuff0 == SERIAL_LOCAL)
+          if (cwInBuff1 == SERIAL_LOCAL)
           {
             InputMode1();                       // передача с ответом
             mpSerial[1] = SER_BEGIN;            // начинаем приём
@@ -151,7 +151,7 @@ uint32_t ui32Status;
             mpboLocal[1] = true;
           }
           else
-          if (cwInBuff0 == SERIAL_MODEM)
+          if (cwInBuff1 == SERIAL_MODEM)
           {
             InputMode1();                       // передача с ответом
             mpSerial[1] = SER_ANSWER_MODEM;     // начинаем приём
@@ -159,7 +159,7 @@ uint32_t ui32Status;
           else
           {
             InputMode1();                       // передача с ответом
-            cwInDelay0 = mpwInDelay[1];
+            cwInDelay1 = mpwInDelay[1];
 
             mpSerial[1] = SER_INPUT_MASTER;     // начинаем приём
           }
@@ -185,29 +185,29 @@ uint32_t ui32Status;
 
         if (mpSerial[1] == SER_BEGIN)           // приём первого байта в запросе
         {
-          cwInDelay0 = mpwMinorInDelay[1];
+          cwInDelay1 = mpwMinorInDelay[1];
 
           mpSerial[1] = SER_INPUT_SLAVE;
-          iwInBuff0 = 0;
+          iwInBuff1 = 0;
         }
 
         if (mpSerial[1] == SER_INPUT_SLAVE)
         {
-          if (iwInBuff0 >= wINBUFF_SIZE)        // переполнение входного буфера ?
+          if (iwInBuff1 >= wINBUFF_SIZE)        // переполнение входного буфера ?
           {
             InputMode1();
             mpSerial[1] = SER_BEGIN;            // начинаем приём сначала
           }
           else
           {
-            cwInDelay0 = mpwMinorInDelay[1];      // продолжаем приём
-            mpbInBuff0[ iwInBuff0++ ] = bT;
+            cwInDelay1 = mpwMinorInDelay[1];      // продолжаем приём
+            mpbInBuff1[ iwInBuff1++ ] = bT;
           }
 
 #ifndef MODBUS
           if (IsFlow1() == 0)                   // приём закончен: по количеству байт
           {
-            if ((iwInBuff0 >= 4) && (iwInBuff0 == mpbInBuff0[2] + mpbInBuff0[3]*0x100))
+            if ((iwInBuff1 >= 4) && (iwInBuff1 == mpbInBuff1[2] + mpbInBuff1[3]*0x100))
             {
               InputMode1();
               mpSerial[1] = SER_POSTINPUT_SLAVE;    // приём закончен: по количеству байт
@@ -221,28 +221,28 @@ uint32_t ui32Status;
       {
         if (mpSerial[1] == SER_BEGIN)           // приём первого байта в запросе
         {
-          cwInDelay0 = mpwMinorInDelay[1];
+          cwInDelay1 = mpwMinorInDelay[1];
 
           mpSerial[1] = SER_INPUT_SLAVE2;
-          iwInBuff0 = 0;
+          iwInBuff1 = 0;
         }
 
         if (mpSerial[1] == SER_INPUT_SLAVE2)
         {
-          if (iwInBuff0 >= wINBUFF_SIZE)        // переполнение входного буфера ?
+          if (iwInBuff1 >= wINBUFF_SIZE)        // переполнение входного буфера ?
           {
             InputMode1();
             mpSerial[1] = SER_BEGIN;            // начинаем приём сначала
           }
           else
           {
-            cwInDelay0 = mpwMinorInDelay[1];      // продолжаем приём
-            mpbInBuff0[ iwInBuff0++ ] = bT;
+            cwInDelay1 = mpwMinorInDelay[1];      // продолжаем приём
+            mpbInBuff1[ iwInBuff1++ ] = bT;
           }
 
           if (IsFlow1() == 0)                   // приём закончен: по количеству байт
           {
-            if ((iwInBuff0 >= 10) && (iwInBuff0 == mpbInBuff0[3] + mpbInBuff0[2]*0x100))
+            if ((iwInBuff1 >= 10) && (iwInBuff1 == mpbInBuff1[3] + mpbInBuff1[2]*0x100))
             {
               InputMode1();
               mpSerial[1] = SER_POSTINPUT_SLAVE2;   // приём закончен: по количеству байт
@@ -258,22 +258,22 @@ uint32_t ui32Status;
           {
             ibPacket0 = 0;
             mpSerial[1] = SER_PACKET_HEADER;
-            iwInBuff0 = 0;
+            iwInBuff1 = 0;
           }
         }
         else if (bT != szPacketA[1]) ibPacket0 = 0;
 
         if (mpSerial[1] == SER_PACKET_BODY)
         {
-          if (iwInBuff0 >= wINBUFF_SIZE)        // переполнение входного буфера ?
+          if (iwInBuff1 >= wINBUFF_SIZE)        // переполнение входного буфера ?
           {
             InputMode1();
             mpSerial[1] = SER_BEGIN;            // начинаем приём сначала
           }
           else
-            mpbInBuff0[ iwInBuff0++ ] = bT;     // продолжаем приём
+            mpbInBuff1[ iwInBuff1++ ] = bT;     // продолжаем приём
 
-          if ((iwInBuff0 >= 7) && (iwInBuff0 == mpbInBuff0[2] + mpbInBuff0[3]*0x100))
+          if ((iwInBuff1 >= 7) && (iwInBuff1 == mpbInBuff1[2] + mpbInBuff1[3]*0x100))
           {
             InputMode1();
             mpSerial[1] = SER_POSTINPUT_SLAVE;  // приём закончен: по количеству байт
@@ -294,7 +294,7 @@ uint32_t ui32Status;
             InputMode1();
             mpSerial[1] = SER_CHAR;
 
-            mpbInBuff0[1] = bT;
+            mpbInBuff1[1] = bT;
           }
         }
       }
@@ -304,9 +304,9 @@ uint32_t ui32Status;
     {
       if (mpSerial[1] == SER_OUTPUT_SLAVE)
       {
-        bT = mpbOutBuff0[ iwOutBuff0++ ];
+        bT = mpbOutBuff1[ iwOutBuff1++ ];
 
-        if (iwOutBuff0 <= cwOutBuff0)           // продолжаем передачу ?
+        if (iwOutBuff1 <= cwOutBuff1)           // продолжаем передачу ?
         {
           OutByte1(bT);
           OutByteBulk1();
@@ -320,9 +320,9 @@ uint32_t ui32Status;
 
       else if (mpSerial[1] == SER_HEADER)
       {
-        bT = mpbOutBuff0[ iwOutBuff0++ ];
+        bT = mpbOutBuff1[ iwOutBuff1++ ];
 
-        if (iwOutBuff0 < bHEADER)
+        if (iwOutBuff1 < bHEADER)
         {
           OutByte1(bT);
           OutByteBulk1();
@@ -336,14 +336,14 @@ uint32_t ui32Status;
       }
       else if (mpSerial[1] == SER_POINTER)
       {
-        bT = bCRCHi0 ^ *pbData0;
+        bT = bCRCHi1 ^ *pbData0;
 
-        bCRCHi0 = bCRCLo0 ^ mpbCRCHi[bT];
-        bCRCLo0 = mpbCRCLo[bT];
+        bCRCHi1 = bCRCLo1 ^ mpbCRCHi[bT];
+        bCRCLo1 = mpbCRCLo[bT];
 
         bT = *(pbData0++);
 
-        if (++iwOutBuff0 < cwOutBuff0)
+        if (++iwOutBuff1 < cwOutBuff1)
         {
           OutByte1(bT);
           OutByteBulk1();
@@ -357,13 +357,13 @@ uint32_t ui32Status;
       }
       else if (mpSerial[1] == SER_CRCHI)
       {
-        OutByte1(bCRCHi0);
+        OutByte1(bCRCHi1);
         mpSerial[1] = SER_CRCLO;
         OutByteBulk1();
       }
       else if (mpSerial[1] == SER_CRCLO)
       {
-        OutByte1(bCRCLo0);
+        OutByte1(bCRCLo1);
         mpSerial[1] = SER_CLOSE;
         OutByteBulk1();
       }
@@ -376,29 +376,29 @@ uint32_t ui32Status;
   }
 }
 
-void    InDelay0_Timer0(void) {
+void    InDelay1_Timer0(void) {
   if (mpSerial[1] == SER_INPUT_SLAVE)
   {
-    if (cwInDelay0 == 0)
+    if (cwInDelay1 == 0)
       mpSerial[1] = SER_POSTINPUT_SLAVE;        // приём закончен: по таймауту
     else
-      cwInDelay0--;
+      cwInDelay1--;
   }
   else
   if (mpSerial[1] == SER_INPUT_SLAVE2)
   {
-    if (cwInDelay0 == 0)
+    if (cwInDelay1 == 0)
       mpSerial[1] = SER_POSTINPUT_SLAVE2;       // приём закончен: по таймауту
     else
-      cwInDelay0--;
+      cwInDelay1--;
   }
   else
   if (mpSerial[1] == SER_INPUT_MASTER)
   {
-    if (cwInDelay0 == 0)
+    if (cwInDelay1 == 0)
       mpSerial[1] = SER_BADLINK;                // приём закончен: нет данных
     else
-      cwInDelay0--;
+      cwInDelay1--;
   }
   else
   if (mpSerial[1] == SER_BULK)
@@ -425,11 +425,11 @@ void    InitSerial1(void) {
 
 void    Query1(uint  cwIn, uchar  cbOut, bool  fMinInDelay)
 {
-  iwInBuff0  = 0;
-  iwOutBuff0 = 0;
+  iwInBuff1  = 0;
+  iwOutBuff1 = 0;
 
-  cwInBuff0  = cwIn;
-  cwOutBuff0 = cbOut;
+  cwInBuff1  = cwIn;
+  cwOutBuff1 = cbOut;
 
   if (fMinInDelay == true)
     mpwInDelay[1] = mpwMinorInDelay[1];
@@ -446,8 +446,8 @@ void    Query1(uint  cwIn, uchar  cbOut, bool  fMinInDelay)
 
 void    Answer1(uint  wSize, serial  seT)
 {
-  iwOutBuff0 = 0;
-  cwOutBuff0 = wSize;
+  iwOutBuff1 = 0;
+  cwOutBuff1 = wSize;
 
   OutputMode1();
   mpSerial[1] = seT;
