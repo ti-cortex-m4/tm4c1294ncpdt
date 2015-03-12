@@ -10,6 +10,10 @@ SYSTEM_CLOCK.C
 
 
 
+uint32_t                ui32SysClock;
+
+
+
 uint32_t GetSystemClockFrequency(void)
 {
   // Set the clocking to run directly from the crystal at 120MHz.

@@ -48,10 +48,6 @@ TODO .C
 
 
 
-uint32_t                ui32SysClock;
-
-
-
 int main(void) {
   ui32SysClock = GetSystemClockFrequency();
 

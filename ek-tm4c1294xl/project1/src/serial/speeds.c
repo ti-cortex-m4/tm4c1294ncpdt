@@ -8,14 +8,11 @@ SPEEDS.C
 #include        "driverlib/rom.h"
 #include        "driverlib/uart.h"
 #include        "inc/hw_memmap.h"
+#include        "../hardware/system_clock.h"
 #include        "../memory/mem_ports.h"
 #include        "../serial/ports.h"
 #include        "speeds.h"
 #include        "speeds_storage.h"
-
-
-
-extern  uint32_t                ui32SysClock;
 
 
 
