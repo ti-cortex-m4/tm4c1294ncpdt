@@ -30,6 +30,7 @@ TODO .C
 #include "src/timer1.h"
 #include "src/uarts.h"
 #include "src/serial0.h"
+#include "src/serial1.h"
 #include "src/serial/print.h"
 #include "src/settings.h"
 #include "src/impulses/impulses.h"
@@ -84,6 +85,7 @@ int main(void) {
 	InitDisplay();
 
     InitSerial0();
+    InitSerial1();
 
 
     InitTimer0(ui32SysClock);
