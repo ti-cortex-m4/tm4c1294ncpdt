@@ -13,7 +13,6 @@ UARTS.Ñ
 #include        "driverlib/sysctl.h"
 #include        "driverlib/timer.h"
 #include        "driverlib/uart.h"
-#include        "serial0.h"
 
 
 
