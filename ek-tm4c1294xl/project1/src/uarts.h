@@ -4,4 +4,5 @@ UARTS.H
 
 ------------------------------------------------------------------------------*/
 
-void InitUARTs(uint32_t ui32SysClock);
+void    InitUart0(uint32_t ui32SysClock);
+void    InitUart1(uint32_t ui32SysClock);

@@ -29,6 +29,7 @@ TODO .C
 #include "src/timer0.h"
 #include "src/timer1.h"
 #include "src/uarts.h"
+#include "src/serial0.h"
 #include "src/serial/print.h"
 #include "src/settings.h"
 #include "src/impulses/impulses.h"
@@ -51,7 +52,8 @@ TODO .C
 int main(void) {
   ui32SysClock = GetSystemClockFrequency();
 
-  InitUARTs(ui32SysClock);
+  InitUart0(ui32SysClock);
+  InitUart1(ui32SysClock);
 
 	InitBeep();
 	InitLCD();
@@ -80,6 +82,9 @@ int main(void) {
   PrintStop();
 
 	InitDisplay();
+
+    InitSerial0();
+
 
     InitTimer0(ui32SysClock);
     InitTimer1(ui32SysClock);
