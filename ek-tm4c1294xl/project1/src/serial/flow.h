@@ -8,3 +8,4 @@ void    InitFlow(void);
 void    RepeatFlow(void);
 
 uchar   IsFlow0(void);
+uchar   IsFlow1(void);
