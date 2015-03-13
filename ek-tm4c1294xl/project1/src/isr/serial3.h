@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
-SERIAL0.H
+SERIAL3.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    InitSerial0(void);
-void    InDelay0_Timer0(void);
-void    Query0(uint  cwIn, uchar  cbOut, bool  fMinInDelay);
-void    Answer0(uint  wSize, serial  seT);
+void    InitSerial3(void);
+void    InDelay3_Timer0(void);
+void    Query3(uint  cwIn, uchar  cbOut, bool  fMinInDelay);
+void    Answer3(uint  wSize, serial  seT);

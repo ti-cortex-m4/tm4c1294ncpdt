@@ -261,7 +261,7 @@ uint32_t ui32Status;
             iwInBuff2 = 0;
           }
         }
-        else if (bT != szPacketA[2]) ibPacket2 = 0;
+        else if (bT != szPacketA[0]) ibPacket2 = 0;
 
         if (mpSerial[2] == SER_PACKET_BODY)
         {

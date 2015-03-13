@@ -17,6 +17,7 @@ TODO volatile
 #include        "serial0.h"
 #include        "serial1.h"
 #include        "serial2.h"
+#include        "serial3.h"
 
 
 
@@ -44,6 +45,7 @@ void Timer0IntHandler(void) {
 	InDelay0_Timer0();
 	InDelay1_Timer0();
 	InDelay2_Timer0();
+	InDelay3_Timer0();
 
 	Impulses_Timer0();
 	LCD_Timer0();
