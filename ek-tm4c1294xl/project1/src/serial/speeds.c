@@ -104,7 +104,7 @@ uint    w;
 
 
 
-void     SetUART(uchar  ibPrt, ulong  dwBase)
+void     MakeSpeed(uchar  ibPrt, ulong  dwBase)
 {
 ulong   dwBaud = mpdwBauds[ mppoPorts[ibPrt].ibBaud ];
 
@@ -114,25 +114,25 @@ ulong   dwBaud = mpdwBauds[ mppoPorts[ibPrt].ibBaud ];
 
 void    SetSpeed0(void)
 {
-  SetUART(0, UART0_BASE);
+  MakeSpeed(0, UART0_BASE);
 }
 
 
 void    SetSpeed1(void)
 {
-  SetUART(1, UART2_BASE);
+  MakeSpeed(1, UART2_BASE);
 }
 
 
 void    SetSpeed2(void)
 {
-//  SetUART(2, UART2_BASE);
+//  MakeSpeed(2, UART2_BASE);
 }
 
 
 void    SetSpeed3(void)
 {
-//  SetUART(3, UART3_BASE);
+//  MakeSpeed(3, UART3_BASE);
 }
 
 
