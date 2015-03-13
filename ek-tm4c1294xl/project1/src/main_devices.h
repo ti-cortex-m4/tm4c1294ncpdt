@@ -1,9 +1,15 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC2.H
-              
+MAIN_DEVICES.H
+
 
 ------------------------------------------------------------------------------*/
 
-//bit     ReadSensors(uchar  ibCanal);
-bool    ReadTimeDate(uchar  ibCan);
-//bit     ReadCntMonCan(uchar  ibMonth, uchar  ibCanal);
+#ifndef __MAIN_DEVICES
+#define __MAIN_DEVICES
+
+
+#define SKIP_A
+#define SKIP_C
+
+
+#endif

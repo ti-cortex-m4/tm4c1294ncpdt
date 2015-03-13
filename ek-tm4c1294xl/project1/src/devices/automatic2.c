@@ -3,8 +3,9 @@ _AUTOMATIC2.C
               
 
 ------------------------------------------------------------------------------*/
+
+#include        "../main.h"
 /*
-#include        "main.h"
 #include        "xdata.h"
 #include        "display.h"
 #include        "timedate.h"
@@ -657,13 +658,13 @@ uchar   i;
 }
 
 #endif
-
+*/
 
 
 #ifndef SKIP_B
 
 //  чтение значение времени/даты дл€ счЄтчиков ћеркурий-230
-bit     ReadTimeDateB(void)                 
+bool    ReadTimeDateB(void)
 {
 uchar   i;
 
@@ -682,7 +683,7 @@ uchar   i;
 #endif
 
 
-
+/*
 #ifndef SKIP_C
 
 //  чтение значение времени/даты дл€ счЄтчиков CC-301
@@ -1987,11 +1988,11 @@ bit     ReadSensors(uchar  ibCanal)
     default: reBuffA = 0; return(0);   break;
   }
 }
-
+*/
 
 
 // прочитать значение времени/даты с цифровых счЄтчиков
-bit     ReadTimeDate(uchar  ibCanal)
+bool    ReadTimeDate(uchar  ibCanal)
 {
   Clear();
 
@@ -2016,87 +2017,12 @@ bit     ReadTimeDate(uchar  ibCanal)
     case 3:  return( ReadTimeDateC() );  break;
 #endif
 
-#ifndef SKIP_D
-    case 4:  return( ReadTimeDateD() );  break;
-#endif
-
-#ifndef SKIP_E
-    case 7:  
-    case 5:  return( ReadTimeDateE() );  break;
-#endif
-
-#ifndef SKIP_F
-    case 6:  return( ReadTimeDateF() );  break;
-#endif
-
-#ifndef SKIP_G
-    case 9:  return( ReadTimeDateG() );  break;
-#endif
-
-#ifndef SKIP_H
-    case 10: return( ReadTimeDateH() );  break;
-#endif
-
-#ifndef SKIP_I
-    case 11: return( ReadTimeDateI() );  break;
-#endif
-
-#ifndef SKIP_K
-    case 14:
-    case 13: return( ReadTimeDateK() );  break;
-#endif
-
-#ifndef SKIP_L
-    case 17:
-    case 16: tiAlt = tiCurr; return(1);  break;
-#endif
-
-#ifndef SKIP_M
-    case 18: tiAlt = tiCurr; return(1);  break;
-#endif
-
-#ifndef SKIP_N
-    case 19: tiAlt = tiCurr; return(1);  break;
-#endif
-
-#ifndef SKIP_O
-    case 20: return( ReadTimeDateO() );  break;
-#endif
-
-#ifndef SKIP_P
-    case 21: return( ReadTimeDateP() );  break;
-#endif
-
-#ifndef SKIP_Q
-    case 22: return( ReadTimeDateQ() );  break;
-#endif
-
-#ifndef SKIP_R
-    case 23: tiAlt = tiCurr; return(1);  break;
-#endif
-
-#ifndef SKIP_S
-    case 24: return( ReadTimeDateS() );  break;
-#endif
-
-#ifndef SKIP_T
-    case 25: return( ReadTimeDateT() );  break;
-#endif
-
-#ifndef SKIP_U
-    case 26: return( ReadTimeDateU() );  break;
-#endif
-
-#ifndef SKIP_Z
-    case 99: return( ReadTimeDateZ() );  break;
-#endif
-
     default: tiAlt = tiZero; return(0);  break;
   }
 }
 
 
-
+/*
 // прочитать показани€ счЄтчиков по мес€цам с цифровых счЄтчиков
 bit     ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
 {
