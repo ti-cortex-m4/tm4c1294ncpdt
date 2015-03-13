@@ -3,8 +3,12 @@ DEVICE_B.C
               
  
 ------------------------------------------------------------------------------*/
+
+#include        "../main.h"
+#include        "../display/lines.h"
+#include        "../serial/ports_stack.h"
+#include        "../serial/ports_devices.h"
 /*
-#include        "main.h"
 #include        "xdata.h"
 #include        "display.h"
 #include        "lines.h"        
@@ -41,13 +45,13 @@ bit     ReadResultB(void)
   TestResult(InBuff(1));
   return(ReadAddressB() && (InBuff(1) == 0));
 }
+*/
 
 
-
-// посылка запроса на открытие канала связи для счётчика Меркурий-230
+// открытие канала связи для счётчика Меркурий-230
 void    QueryOpenB(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);         
   PushChar(1);         
@@ -84,7 +88,7 @@ void    QueryOpenB(void)
 }
 
 
-
+/*
 // посылка запроса на чтение версии для счётчика Меркурий-230
 void    QueryVersionB(void)
 {
@@ -233,13 +237,13 @@ void    QueryManageB(void)
 
   QueryIO(1+1+2, 3+8+2);
 }
-* /
+*/
 
 
-// посылка запроса на чтене времени/даты для счётчика Меркурий-230
+// чтене времени/даты для счётчика Меркурий-230
 void    QueryTimeB(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);       
   PushChar(4);
@@ -265,7 +269,7 @@ void    ReadTimeAltB(void)
   tiAlt.bYear   = FromBCD( PopChar() );
 }
 
-
+/*
 // чтение времени/даты для счётчика Меркурий-230
 void    ReadTimeDigB(void)
 {
@@ -513,48 +517,6 @@ uchar   i;
   }
 
   MakeCurrent();
-}
-
-
-
-bit     QueryOpenB_Full(uchar  bPercent)
-{
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryOpenB();
-
-    if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(bPercent);
-
-  return(1);
-}
-
-
-bit     QueryTimeAltB_Full(uchar  bPercent)
-{
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryTimeB();
-
-    if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(bPercent);
-
-  ReadTimeAltB();
-  return(1);
 }
 
 

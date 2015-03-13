@@ -1,10 +1,13 @@
 /*------------------------------------------------------------------------------
-_AUTOMATIC2.C
+AUTOMATIC2.C
               
 
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../display/display.h"
+#include        "../time/timedate.h"
+#include        "automatic_b.h"
 /*
 #include        "xdata.h"
 #include        "display.h"
@@ -1992,32 +1995,32 @@ bit     ReadSensors(uchar  ibCanal)
 
 
 // прочитать значение времени/даты с цифровых счётчиков
-bool    ReadTimeDate(uchar  ibCanal)
+bool    ReadTimeDate(uchar  ibCan)
 {
   Clear();
 
-  LoadCurrDigital(ibCanal);
+  LoadCurrDigital(ibCan);
   ibPort = diCurr.ibPort;
 
   switch (diCurr.bDevice)
   {
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadTimeDateA() );  break;
+    case 1:  return( ReadTimeDateA() );
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadTimeDateB() );  break;
+    case 2:  return( ReadTimeDateB() );
 
-    case 12: tiAlt = tiCurr; return(1);  break;
+    case 12: tiAlt = tiCurr; return(1);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadTimeDateC() );  break;
+    case 3:  return( ReadTimeDateC() );
 #endif
 
-    default: tiAlt = tiZero; return(0);  break;
+    default: tiAlt = tiZero; return(0);
   }
 }
 
