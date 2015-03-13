@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-SERIAL0.C
+SERIAL3.C
 
 // TODO volatile
 ------------------------------------------------------------------------------*/
@@ -12,7 +12,7 @@ SERIAL0.C
 #include        "driverlib/interrupt.h"
 #include        "driverlib/uart.h"
 #include        "../memory/mem_ports.h"
-#include        "../memory/mem_serial0.h"
+#include        "../memory/mem_serial3.h"
 #include        "../serial/flow.h"
 #include        "../serial/ports.h"
 #include        "../serial/bulk.h"
@@ -27,141 +27,141 @@ static const uchar 		szPacketA[bPACKET_HEADER] = {0xCA, 0xE0, 0xEB, 0xFE, 0xEC, 
 
 
 
-void    DTROff0(void) {
+void    DTROff3(void) {
 }
 
 
-void    InputMode0(void) {
+void    InputMode3(void) {
 }
 
 
-void    OutputMode0(void) {
+void    OutputMode3(void) {
 }
 
 
 
-bool    GetRI0(uint32_t ui32Status) {
+bool    GetRI3(uint32_t ui32Status) {
   return ((ui32Status & 0x00000010) != 0) || ((ui32Status & 0x00000040) != 0);
 }
 
 
-bool    GetTI0(uint32_t ui32Status) {
+bool    GetTI3(uint32_t ui32Status) {
   return ((ui32Status & 0x00000020) != 0) || (ui32Status == 0);
 }
 
 
-uchar	InByte0(void) {
-  return HWREG(UART0_BASE + UART_O_DR);
+uchar	InByte3(void) {
+  return HWREG(UART4_BASE + UART_O_DR);
 }
 
 
-void    OutByte0(uchar  bT) {
-	HWREG(UART0_BASE + UART_O_DR) = bT;
+void    OutByte3(uchar  bT) {
+	HWREG(UART4_BASE + UART_O_DR) = bT;
 }
 
 
 
-void    UART0IntHandler(void) {
+void    UART4IntHandler(void) {
 uchar   bT;
 uint32_t ui32Status;
 
-  ui32Status = UARTIntStatus(UART0_BASE, true);
-  UARTIntClear(UART0_BASE, ui32Status);
+  ui32Status = UARTIntStatus(UART4_BASE, true);
+  UARTIntClear(UART4_BASE, ui32Status);
 
 /*
   // ведущий режим
-  if (((mppoPorts[0].enStream == STR_MASTERDIRECT) ||
-       (mppoPorts[0].enStream == STR_MASTERMODEM)) &&
-      (mpboLocal[0] == false))
+  if (((mppoPorts[3].enStream == STR_MASTERDIRECT) ||
+       (mppoPorts[3].enStream == STR_MASTERMODEM)) &&
+      (mpboLocal[3] == false))
   {
-    if (GetRI0())
+    if (GetRI3())
     {
-      bT = InByte0();
+      bT = InByte3();
 
-      if (mpSerial[0] == SER_BEGIN)
+      if (mpSerial[3] == SER_BEGIN)
       {
-        if (bT == szPacketB[ibPacket0])
+        if (bT == szPacketB[ibPacket3])
         {
-          if (++ibPacket0 >= sizeof(szPacketB))
+          if (++ibPacket3 >= sizeof(szPacketB))
           {
-            ibPacket0 = 0;
-            mpSerial[0] = SER_LOCAL;
+            ibPacket3 = 0;
+            mpSerial[3] = SER_LOCAL;
           }
         }
-        else ibPacket0 = 0;
+        else ibPacket3 = 0;
       }
-      else if ((mpSerial[0] == SER_OUTPUT_MASTER) ||
-               (mpSerial[0] == SER_INPUT_MASTER)  ||
-               (mpSerial[0] == SER_ANSWER_MODEM))
+      else if ((mpSerial[3] == SER_OUTPUT_MASTER) ||
+               (mpSerial[3] == SER_INPUT_MASTER)  ||
+               (mpSerial[3] == SER_ANSWER_MODEM))
       {
-        if (iwInBuff0 >= wINBUFF_SIZE)          // переполнение входного буфера ?
+        if (iwInBuff3 >= wINBUFF_SIZE)          // переполнение входного буфера ?
         {
-          InputMode0();
-          mpSerial[0] = SER_OVERFLOW;
+          InputMode3();
+          mpSerial[3] = SER_OVERFLOW;
         }
         else
         {
-          if (mpSerial[0] == SER_ANSWER_MODEM)
+          if (mpSerial[3] == SER_ANSWER_MODEM)
           {
-            mpbInBuff0[ iwInBuff0++ ] = bT;
+            mpbInBuff3[ iwInBuff3++ ] = bT;
 
             if ((bT == '\r') || (bT == '\n'))   // приём завершён
             {
-              InputMode0();
-              mpSerial[0] = SER_POSTANSWER_MODEM;
+              InputMode3();
+              mpSerial[3] = SER_POSTANSWER_MODEM;
             }
           }
           else
-          if (mpSerial[0] == SER_INPUT_MASTER)
+          if (mpSerial[3] == SER_INPUT_MASTER)
           {
-            mpbInBuff0[ iwInBuff0 ] = bT;
-            cwInDelay0 = mpwInDelay[0];
+            mpbInBuff3[ iwInBuff3 ] = bT;
+            cwInDelay3 = mpwInDelay[3];
 
-            if (++iwInBuff0 == cwInBuff0)       // приём завершён
+            if (++iwInBuff3 == cwInBuff3)       // приём завершён
             {
-              InputMode0();
-              mpSerial[0] = SER_POSTINPUT_MASTER;
+              InputMode3();
+              mpSerial[3] = SER_POSTINPUT_MASTER;
             }
           }
         }
       }
     }
 
-    if (GetTI0())
+    if (GetTI3())
     {
-      if (mpSerial[0] == SER_OUTPUT_MASTER)
+      if (mpSerial[3] == SER_OUTPUT_MASTER)
       {
-        bT = mpbOutBuff0[ iwOutBuff0 ];
+        bT = mpbOutBuff3[ iwOutBuff3 ];
 
-        if (++iwOutBuff0 <= cwOutBuff0)         // продолжаем передачу ?
-          OutByte0(bT);
+        if (++iwOutBuff3 <= cwOutBuff3)         // продолжаем передачу ?
+          OutByte3(bT);
         else                                    // передача завершена
         {
-          if (cwInBuff0 == 0)
+          if (cwInBuff3 == 0)
           {
-            InputMode0();
-            mpSerial[0] = SER_BEGIN;            // передача без ответа
+            InputMode3();
+            mpSerial[3] = SER_BEGIN;            // передача без ответа
           }
           else
-          if (cwInBuff0 == SERIAL_LOCAL)
+          if (cwInBuff3 == SERIAL_LOCAL)
           {
-            InputMode0();                       // передача с ответом
-            mpSerial[0] = SER_BEGIN;            // начинаем приём
+            InputMode3();                       // передача с ответом
+            mpSerial[3] = SER_BEGIN;            // начинаем приём
 
-            mpboLocal[0] = true;
+            mpboLocal[3] = true;
           }
           else
-          if (cwInBuff0 == SERIAL_MODEM)
+          if (cwInBuff3 == SERIAL_MODEM)
           {
-            InputMode0();                       // передача с ответом
-            mpSerial[0] = SER_ANSWER_MODEM;     // начинаем приём
+            InputMode3();                       // передача с ответом
+            mpSerial[3] = SER_ANSWER_MODEM;     // начинаем приём
           }
           else
           {
-            InputMode0();                       // передача с ответом
-            cwInDelay0 = mpwInDelay[0];
+            InputMode3();                       // передача с ответом
+            cwInDelay3 = mpwInDelay[3];
 
-            mpSerial[0] = SER_INPUT_MASTER;     // начинаем приём
+            mpSerial[3] = SER_INPUT_MASTER;     // начинаем приём
           }
         }
       }
@@ -171,287 +171,287 @@ uint32_t ui32Status;
 
   // ведомый режим
   {
-    if (GetRI0(ui32Status))
+    if (GetRI3(ui32Status))
     {
-      bT = InByte0();
+      bT = InByte3();
 
-      cwIn0++;
-      bIn0 = bT;
+      cwIn3++;
+      bIn3 = bT;
 
-      if ((mppoPorts[0].enStream == STR_SLAVECRC) || (IsFlow0() == 1))
+      if ((mppoPorts[3].enStream == STR_SLAVECRC) || (IsFlow3() == 1))
       {
-        if (mppoPorts[0].enStream != STR_SLAVEUNI)
+        if (mppoPorts[3].enStream != STR_SLAVEUNI)
           RepeatFlow();
 
-        if (mpSerial[0] == SER_BEGIN)           // приём первого байта в запросе
+        if (mpSerial[3] == SER_BEGIN)           // приём первого байта в запросе
         {
-          cwInDelay0 = mpwMinorInDelay[0];
+          cwInDelay3 = mpwMinorInDelay[3];
 
-          mpSerial[0] = SER_INPUT_SLAVE;
-          iwInBuff0 = 0;
+          mpSerial[3] = SER_INPUT_SLAVE;
+          iwInBuff3 = 0;
         }
 
-        if (mpSerial[0] == SER_INPUT_SLAVE)
+        if (mpSerial[3] == SER_INPUT_SLAVE)
         {
-          if (iwInBuff0 >= wINBUFF_SIZE)        // переполнение входного буфера ?
+          if (iwInBuff3 >= wINBUFF_SIZE)        // переполнение входного буфера ?
           {
-            InputMode0();
-            mpSerial[0] = SER_BEGIN;            // начинаем приём сначала
+            InputMode3();
+            mpSerial[3] = SER_BEGIN;            // начинаем приём сначала
           }
           else
           {
-            cwInDelay0 = mpwMinorInDelay[0];      // продолжаем приём
-            mpbInBuff0[ iwInBuff0++ ] = bT;
+            cwInDelay3 = mpwMinorInDelay[3];      // продолжаем приём
+            mpbInBuff3[ iwInBuff3++ ] = bT;
           }
 
 #ifndef MODBUS
-          if (IsFlow0() == 0)                   // приём закончен: по количеству байт
+          if (IsFlow3() == 0)                   // приём закончен: по количеству байт
           {
-            if ((iwInBuff0 >= 4) && (iwInBuff0 == mpbInBuff0[2] + mpbInBuff0[3]*0x100))
+            if ((iwInBuff3 >= 4) && (iwInBuff3 == mpbInBuff3[2] + mpbInBuff3[3]*0x100))
             {
-              InputMode0();
-              mpSerial[0] = SER_POSTINPUT_SLAVE;    // приём закончен: по количеству байт
+              InputMode3();
+              mpSerial[3] = SER_POSTINPUT_SLAVE;    // приём закончен: по количеству байт
             }
           }
 #endif
 
         }
       }
-      else if (mppoPorts[0].enStream == STR_SLAVEUNI)
+      else if (mppoPorts[3].enStream == STR_SLAVEUNI)
       {
-        if (mpSerial[0] == SER_BEGIN)           // приём первого байта в запросе
+        if (mpSerial[3] == SER_BEGIN)           // приём первого байта в запросе
         {
-          cwInDelay0 = mpwMinorInDelay[0];
+          cwInDelay3 = mpwMinorInDelay[3];
 
-          mpSerial[0] = SER_INPUT_SLAVE2;
-          iwInBuff0 = 0;
+          mpSerial[3] = SER_INPUT_SLAVE2;
+          iwInBuff3 = 0;
         }
 
-        if (mpSerial[0] == SER_INPUT_SLAVE2)
+        if (mpSerial[3] == SER_INPUT_SLAVE2)
         {
-          if (iwInBuff0 >= wINBUFF_SIZE)        // переполнение входного буфера ?
+          if (iwInBuff3 >= wINBUFF_SIZE)        // переполнение входного буфера ?
           {
-            InputMode0();
-            mpSerial[0] = SER_BEGIN;            // начинаем приём сначала
+            InputMode3();
+            mpSerial[3] = SER_BEGIN;            // начинаем приём сначала
           }
           else
           {
-            cwInDelay0 = mpwMinorInDelay[0];      // продолжаем приём
-            mpbInBuff0[ iwInBuff0++ ] = bT;
+            cwInDelay3 = mpwMinorInDelay[3];      // продолжаем приём
+            mpbInBuff3[ iwInBuff3++ ] = bT;
           }
 
-          if (IsFlow0() == 0)                   // приём закончен: по количеству байт
+          if (IsFlow3() == 0)                   // приём закончен: по количеству байт
           {
-            if ((iwInBuff0 >= 10) && (iwInBuff0 == mpbInBuff0[3] + mpbInBuff0[2]*0x100))
+            if ((iwInBuff3 >= 10) && (iwInBuff3 == mpbInBuff3[3] + mpbInBuff3[2]*0x100))
             {
-              InputMode0();
-              mpSerial[0] = SER_POSTINPUT_SLAVE2;   // приём закончен: по количеству байт
+              InputMode3();
+              mpSerial[3] = SER_POSTINPUT_SLAVE2;   // приём закончен: по количеству байт
             }
           }
         }
       }
       else
       {
-        if (bT == szPacketA[ibPacket0])
+        if (bT == szPacketA[ibPacket3])
         {
-          if (++ibPacket0 >= bPACKET_HEADER)
+          if (++ibPacket3 >= bPACKET_HEADER)
           {
-            ibPacket0 = 0;
-            mpSerial[0] = SER_PACKET_HEADER;
-            iwInBuff0 = 0;
+            ibPacket3 = 0;
+            mpSerial[3] = SER_PACKET_HEADER;
+            iwInBuff3 = 0;
           }
         }
-        else if (bT != szPacketA[0]) ibPacket0 = 0;
+        else if (bT != szPacketA[0]) ibPacket3 = 0;
 
-        if (mpSerial[0] == SER_PACKET_BODY)
+        if (mpSerial[3] == SER_PACKET_BODY)
         {
-          if (iwInBuff0 >= wINBUFF_SIZE)        // переполнение входного буфера ?
+          if (iwInBuff3 >= wINBUFF_SIZE)        // переполнение входного буфера ?
           {
-            InputMode0();
-            mpSerial[0] = SER_BEGIN;            // начинаем приём сначала
+            InputMode3();
+            mpSerial[3] = SER_BEGIN;            // начинаем приём сначала
           }
           else
-            mpbInBuff0[ iwInBuff0++ ] = bT;     // продолжаем приём
+            mpbInBuff3[ iwInBuff3++ ] = bT;     // продолжаем приём
 
-          if ((iwInBuff0 >= 7) && (iwInBuff0 == mpbInBuff0[2] + mpbInBuff0[3]*0x100))
+          if ((iwInBuff3 >= 7) && (iwInBuff3 == mpbInBuff3[2] + mpbInBuff3[3]*0x100))
           {
-            InputMode0();
-            mpSerial[0] = SER_POSTINPUT_SLAVE;  // приём закончен: по количеству байт
+            InputMode3();
+            mpSerial[3] = SER_POSTINPUT_SLAVE;  // приём закончен: по количеству байт
           }
         }
-        else if (mpSerial[0] == SER_PACKET_HEADER)
-          mpSerial[0] = SER_PACKET_BODY;
+        else if (mpSerial[3] == SER_PACKET_HEADER)
+          mpSerial[3] = SER_PACKET_BODY;
         else
         {
           if (bT == 0x1A)
-            mpSerial[0] = SER_CTRL_Z;
+            mpSerial[3] = SER_CTRL_Z;
 
-          else if ((bT == 0x1B) && ((mpSerial[0] == SER_BEGIN) || (mpSerial[0] == SER_PAUSE)))
-            mpSerial[0] = SER_ESC;
+          else if ((bT == 0x1B) && ((mpSerial[3] == SER_BEGIN) || (mpSerial[3] == SER_PAUSE)))
+            mpSerial[3] = SER_ESC;
 
-          else if ((bT != 0x1B) && (mpSerial[0] == SER_ESC))
+          else if ((bT != 0x1B) && (mpSerial[3] == SER_ESC))
           {
-            InputMode0();
-            mpSerial[0] = SER_CHAR;
+            InputMode3();
+            mpSerial[3] = SER_CHAR;
 
-            mpbInBuff0[0] = bT;
+            mpbInBuff3[3] = bT;
           }
         }
       }
     }
 
-    if (GetTI0(ui32Status))
+    if (GetTI3(ui32Status))
     {
-      if (mpSerial[0] == SER_OUTPUT_SLAVE)
+      if (mpSerial[3] == SER_OUTPUT_SLAVE)
       {
-        bT = mpbOutBuff0[ iwOutBuff0++ ];
+        bT = mpbOutBuff3[ iwOutBuff3++ ];
 
-        if (iwOutBuff0 <= cwOutBuff0)           // продолжаем передачу ?
+        if (iwOutBuff3 <= cwOutBuff3)           // продолжаем передачу ?
         {
-          OutByte0(bT);
-          OutByteBulk0();
+          OutByte3(bT);
+          OutByteBulk3();
         }
         else
         {
-          InputMode0();
-          mpSerial[0] = SER_BEGIN;              // передача завершена
+          InputMode3();
+          mpSerial[3] = SER_BEGIN;              // передача завершена
         }
       }
 
-      else if (mpSerial[0] == SER_HEADER)
+      else if (mpSerial[3] == SER_HEADER)
       {
-        bT = mpbOutBuff0[ iwOutBuff0++ ];
+        bT = mpbOutBuff3[ iwOutBuff3++ ];
 
-        if (iwOutBuff0 < bHEADER)
+        if (iwOutBuff3 < bHEADER)
         {
-          OutByte0(bT);
-          OutByteBulk0();
+          OutByte3(bT);
+          OutByteBulk3();
         }
         else
         {
-          mpSerial[0] = SER_POINTER;
-          OutByte0(bT);
-          OutByteBulk0();
+          mpSerial[3] = SER_POINTER;
+          OutByte3(bT);
+          OutByteBulk3();
         }
       }
-      else if (mpSerial[0] == SER_POINTER)
+      else if (mpSerial[3] == SER_POINTER)
       {
-        bT = bCRCHi0 ^ *pbData0;
+        bT = bCRCHi3 ^ *pbData3;
 
-        bCRCHi0 = bCRCLo0 ^ mpbCRCHi[bT];
-        bCRCLo0 = mpbCRCLo[bT];
+        bCRCHi3 = bCRCLo3 ^ mpbCRCHi[bT];
+        bCRCLo3 = mpbCRCLo[bT];
 
-        bT = *(pbData0++);
+        bT = *(pbData3++);
 
-        if (++iwOutBuff0 < cwOutBuff0)
+        if (++iwOutBuff3 < cwOutBuff3)
         {
-          OutByte0(bT);
-          OutByteBulk0();
+          OutByte3(bT);
+          OutByteBulk3();
         }
         else
         {
-          mpSerial[0] = SER_CRCHI;
-          OutByte0(bT);
-          OutByteBulk0();
+          mpSerial[3] = SER_CRCHI;
+          OutByte3(bT);
+          OutByteBulk3();
         }
       }
-      else if (mpSerial[0] == SER_CRCHI)
+      else if (mpSerial[3] == SER_CRCHI)
       {
-        OutByte0(bCRCHi0);
-        mpSerial[0] = SER_CRCLO;
-        OutByteBulk0();
+        OutByte3(bCRCHi3);
+        mpSerial[3] = SER_CRCLO;
+        OutByteBulk3();
       }
-      else if (mpSerial[0] == SER_CRCLO)
+      else if (mpSerial[3] == SER_CRCLO)
       {
-        OutByte0(bCRCLo0);
-        mpSerial[0] = SER_CLOSE;
-        OutByteBulk0();
+        OutByte3(bCRCLo3);
+        mpSerial[3] = SER_CLOSE;
+        OutByteBulk3();
       }
-      else if (mpSerial[0] == SER_CLOSE)
+      else if (mpSerial[3] == SER_CLOSE)
       {
-        InputMode0();
-        mpSerial[0] = SER_BEGIN;                // передача завершена
+        InputMode3();
+        mpSerial[3] = SER_BEGIN;                // передача завершена
       }
     }
   }
 }
 
-void    InDelay0_Timer0(void) {
-  if (mpSerial[0] == SER_INPUT_SLAVE)
+void    InDelay3_Timer0(void) {
+  if (mpSerial[3] == SER_INPUT_SLAVE)
   {
-    if (cwInDelay0 == 0)
-      mpSerial[0] = SER_POSTINPUT_SLAVE;        // приём закончен: по таймауту
+    if (cwInDelay3 == 0)
+      mpSerial[3] = SER_POSTINPUT_SLAVE;        // приём закончен: по таймауту
     else
-      cwInDelay0--;
+      cwInDelay3--;
   }
   else
-  if (mpSerial[0] == SER_INPUT_SLAVE2)
+  if (mpSerial[3] == SER_INPUT_SLAVE2)
   {
-    if (cwInDelay0 == 0)
-      mpSerial[0] = SER_POSTINPUT_SLAVE2;       // приём закончен: по таймауту
+    if (cwInDelay3 == 0)
+      mpSerial[3] = SER_POSTINPUT_SLAVE2;       // приём закончен: по таймауту
     else
-      cwInDelay0--;
+      cwInDelay3--;
   }
   else
-  if (mpSerial[0] == SER_INPUT_MASTER)
+  if (mpSerial[3] == SER_INPUT_MASTER)
   {
-    if (cwInDelay0 == 0)
-      mpSerial[0] = SER_BADLINK;                // приём закончен: нет данных
+    if (cwInDelay3 == 0)
+      mpSerial[3] = SER_BADLINK;                // приём закончен: нет данных
     else
-      cwInDelay0--;
+      cwInDelay3--;
   }
   else
-  if (mpSerial[0] == SER_BULK)
+  if (mpSerial[3] == SER_BULK)
   {
-    RunBulk0();
+    RunBulk3();
   }
 }
 
 
 
-void    InitSerial0(void) {
-  mpboLocal[0] = FALSE;
+void    InitSerial3(void) {
+  mpboLocal[3] = FALSE;
 
-  InputMode0();
-  DTROff0();
+  InputMode3();
+  DTROff3();
 
-  mpwMajorInDelay[0] = 10;
-  mppoPorts[0].enStream = STR_SLAVEESC;
+  mpwMajorInDelay[3] = 10;
+  mppoPorts[3].enStream = STR_SLAVEESC;
 
-  mpSerial[0] = SER_BEGIN;
+  mpSerial[3] = SER_BEGIN;
 }
 
 
 
-void    Query0(uint  cwIn, uchar  cbOut, bool  fMinInDelay)
+void    Query3(uint  cwIn, uchar  cbOut, bool  fMinInDelay)
 {
-  iwInBuff0  = 0;
-  iwOutBuff0 = 0;
+  iwInBuff3  = 0;
+  iwOutBuff3 = 0;
 
-  cwInBuff0  = cwIn;
-  cwOutBuff0 = cbOut;
+  cwInBuff3  = cwIn;
+  cwOutBuff3 = cbOut;
 
   if (fMinInDelay == true)
-    mpwInDelay[0] = mpwMinorInDelay[0];
+    mpwInDelay[3] = mpwMinorInDelay[3];
   else
-    mpwInDelay[0] = mpwMajorInDelay[0];
+    mpwInDelay[3] = mpwMajorInDelay[3];
 
-  OutputMode0();
-  mpSerial[0] = SER_OUTPUT_MASTER;
+  OutputMode3();
+  mpSerial[3] = SER_OUTPUT_MASTER;
 
-  IntPendSet(INT_UART0);
+  IntPendSet(INT_UART4);
 }
 
 
 
-void    Answer0(uint  wSize, serial  seT)
+void    Answer3(uint  wSize, serial  seT)
 {
-  iwOutBuff0 = 0;
-  cwOutBuff0 = wSize;
+  iwOutBuff3 = 0;
+  cwOutBuff3 = wSize;
 
-  OutputMode0();
-  mpSerial[0] = seT;
-  AnswerBulk0();
+  OutputMode3();
+  mpSerial[3] = seT;
+  AnswerBulk3();
 
-  IntPendSet(INT_UART0);
+  IntPendSet(INT_UART4);
 }
