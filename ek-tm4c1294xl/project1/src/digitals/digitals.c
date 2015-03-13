@@ -33,6 +33,13 @@ void    ResetDigitals(void)
 }
 
 
+
+void    LoadCurrDigital(uchar  ibCan)
+{
+  diCurr = mpdiDigital[ ibCan ];
+}
+
+
 uchar   GetDigitalPort(uchar  ibCan) {
   return mpdiDigital[ibCan].ibPort;
 }

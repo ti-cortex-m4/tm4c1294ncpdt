@@ -8,7 +8,7 @@ PORTS_DEVICES.H
 #include        "../crc-16.h"
 #include        "../keyboard/keyboard.h"
 #include        "../hardware/watchdog.h"
-#include        "../digitals/sensors.h"
+#include        "../digitals/wait_answer.h"
 #include        "../isr/serial0.h"
 #include        "../isr/serial1.h"
 #include        "../isr/serial2.h"

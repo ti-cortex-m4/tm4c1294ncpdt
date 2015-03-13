@@ -4,8 +4,10 @@ PORTS_COMMON.H
 
 ------------------------------------------------------------------------------*/
 
-uchar   InBuff(uint  i);
 void    Answer(uint  wSize, serial  seT);
+
+uchar   InBuff(uint  i);
+uint    CountInBuff(void);
 uint    IndexInBuff(void);
 
 void    MakeCRC16OutBuff(uchar  bOffset, uint  wSize);

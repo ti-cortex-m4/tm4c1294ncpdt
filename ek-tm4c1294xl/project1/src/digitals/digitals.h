@@ -11,6 +11,8 @@ extern  file const              flDigitals;
 void    InitDigitals(void);
 void    ResetDigitals(void);
 
+void    LoadCurrDigital(uchar  ibCan);
+
 uchar   GetDigitalPort(uchar  ibCan);
 uchar   GetDigitalPhone(uchar  ibCan);
 uchar   GetDigitalDevice(uchar  ibCan);

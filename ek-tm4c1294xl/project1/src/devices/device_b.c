@@ -5,6 +5,7 @@ DEVICE_B.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_digitals0.h"
 #include        "../display/lines.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
@@ -69,10 +70,10 @@ void    QueryOpenB(void)
   }
   else
   {
+ 	 bool fAlt = 0;
+   phT = mpphKeys[ibDig];
+
     uchar  i;
-
-    phT = mpphKeys[ibDig]; fAlt = 0;
-
     for (i=0; i<6; i++)
     {
       if (phT.szNumber[i] == 0) fAlt = 1;
