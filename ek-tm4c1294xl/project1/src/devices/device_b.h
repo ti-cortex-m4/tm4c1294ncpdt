@@ -4,15 +4,13 @@ DEVICE_B.H
  
 ------------------------------------------------------------------------------*/
 
-
-
 #ifndef SKIP_B
 
 //bit     ReadAddressB(void);
 //bit     ReadResultB(void);
-//
-//void    QueryOpenB(void);
-//
+
+void    QueryOpenB(void);
+
 //void    QueryVersionB(void);
 //void    ReadVersionB(void);
 //bit     TestVersionB710(void);
@@ -25,9 +23,9 @@ DEVICE_B.H
 //
 //void    QueryControlB(void);
 ////void    QueryManageB(void);
-//
-//void    QueryTimeB(void);
-//void    ReadTimeAltB(void);
+
+void    QueryTimeB(void);
+void    ReadTimeAltB(void);
 //void    ReadTimeDigB(void);
 //
 //void    QueryTopB(void);

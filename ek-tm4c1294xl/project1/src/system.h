@@ -116,4 +116,8 @@ SYSTEM.H
 #define bPHONENUMBER    13
 
 
+// максимальное количество повторов при чтении данных с цифровых счётчиков
+#define bMINORREPEATS   5
+
+
 #endif

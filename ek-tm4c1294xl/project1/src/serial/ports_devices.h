@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC_B.H
+PORTS_DEVICES.H
 
 
 ------------------------------------------------------------------------------*/
 
-bool    QueryOpenB_Full(uchar  bPercent);
-bool    QueryTimeAltB_Full(uchar  bPercent);
+void    QueryIO(uint  cwIn, uchar  cbOut);
+serial  Input(void);
