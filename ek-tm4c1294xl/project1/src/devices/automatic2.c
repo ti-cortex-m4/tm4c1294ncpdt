@@ -5,8 +5,10 @@ AUTOMATIC2.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_digitals0.h"
 #include        "../display/display.h"
 #include        "../time/timedate.h"
+#include        "../digitals/digitals.h"
 #include        "automatic_b.h"
 /*
 #include        "xdata.h"

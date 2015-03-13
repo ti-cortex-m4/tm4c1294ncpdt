@@ -10,3 +10,6 @@ MEM_DIGITALS0.C
 
 // массив цифровых счётчиков
 digital                 mpdiDigital[bCANALS];
+
+// цифровой счётчики
+digital                 diPrev, diCurr;

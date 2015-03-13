@@ -18,18 +18,6 @@ PORTS_COMMON.C
 
 
 
-uchar   InBuff(uint  i) {
-  switch (ibPort) {
-    case 0: return mpbInBuff0[i];
-    case 1: return mpbInBuff1[i];
-    case 2: return mpbInBuff2[i];
-    case 3: return mpbInBuff3[i];
-  }
-
-  return 0; // TODO
-}
-
-
 void    Answer(uint  wSize, serial  seT) {
   switch (ibPort) {
     case 0:	Answer0(wSize, seT); break;
@@ -40,12 +28,43 @@ void    Answer(uint  wSize, serial  seT) {
 }
 
 
-uint    IndexInBuff(void) {
-  switch (ibPort) {
-    case 0: return iwInBuff0;
-    case 1: return iwInBuff1;
-    case 2: return iwInBuff2;
-    case 3: return iwInBuff3;
+
+uchar   InBuff(uint  i)
+{
+  switch (ibPort)
+  {
+    case 0:  return( mpbInBuff0[i] );
+    case 1:  return( mpbInBuff1[i] );
+    case 2:  return( mpbInBuff2[i] );
+    case 3:  return( mpbInBuff3[i] );
+  }
+
+  return 0; // TODO
+}
+
+
+uint    CountInBuff(void)
+{
+  switch (ibPort)
+  {
+    case 0:  return(cwInBuff0);
+    case 1:  return(cwInBuff1);
+    case 2:  return(cwInBuff2);
+    case 3:  return(cwInBuff3);
+  }
+
+  return 0; // TODO
+}
+
+
+uint    IndexInBuff(void)
+{
+  switch (ibPort)
+  {
+    case 0:  return(iwInBuff0);
+    case 1:  return(iwInBuff1);
+    case 2:  return(iwInBuff2);
+    case 3:  return(iwInBuff3);
   }
 
   return 0; // TODO
