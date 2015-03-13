@@ -102,7 +102,7 @@ void    Impulses_Timer0(void) {
 }
 
 
-void    Impulses_Timer1(void) {
+void    Impulses_1Hz(void) {
 	if (fEnabledImpulses)	{
 		fOnImpulse = 1;
 		mpwImpMntCan[ibSoftMnt][0]++;

@@ -1,10 +1,12 @@
 /*------------------------------------------------------------------------------
-WAIT_ANSWER.H
+WAIT_QUERY.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    WaitAnswer_1Hz(void);
-void    InitWaitAnswer(void);
-void    ShowWaitAnswer(bool  fShow);
-bool    GetWaitAnswer(void);
+extern  uchar                   cbWaitQuery;
+
+
+
+void    InitWaitQuery(void);
+void    WaitQuery_1Hz(void);

@@ -120,4 +120,8 @@ SYSTEM.H
 #define bMINORREPEATS   5
 
 
+// таймаут после посылки последного запроса
+#define bMAXWAITQUERY   20
+
+
 #endif

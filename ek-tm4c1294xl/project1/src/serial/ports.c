@@ -14,6 +14,7 @@ PORTS.C
 #include        "../memory/mem_serial3.h"
 #include        "../memory/mem_realtime.h"
 #include        "../include/queries.h"
+#include        "../digitals/wait_query.h"
 #include        "../realtime/realtime.h"
 #include        "../crc-16.h"
 #include        "ports_stack.h"
@@ -21,7 +22,7 @@ PORTS.C
 
 
 
-serial 					mpSerial[bPORTS];
+serial                  mpSerial[bPORTS];
 
 uchar                   ibPort;
 
@@ -88,7 +89,7 @@ void    Outptr(void  *pData, uint  wSize)
   PushChar(ibHardDay);
   PushChar(ibHardMon);
 
-  PushChar(0/*cbWaitQuery*/);
+  PushChar(cbWaitQuery);
   PushChar(0);
 
   MakeCRC16OutBuff(0,bHEADER);

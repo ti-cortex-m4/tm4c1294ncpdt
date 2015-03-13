@@ -9,6 +9,7 @@ PORTS_DEVICES.H
 #include        "../keyboard/keyboard.h"
 #include        "../hardware/watchdog.h"
 #include        "../digitals/wait_answer.h"
+#include        "../digitals/wait_query.h"
 #include        "../isr/serial0.h"
 #include        "../isr/serial1.h"
 #include        "../isr/serial2.h"
@@ -22,10 +23,10 @@ void    Query(uint  cwIn, uchar  cbOut, bool  fMinor)
 //  DebugOut(cwIn, cbOut);
 
   // при передаче порт переключается в ведущий режим из временного ведомого
-  mpboLocal[ibPort] = boFalse;
+  mpboLocal[ibPort] = FALSE;
 
   // включаем защитный интервал обращения к счётчикам (кроме переключения в временный ведомый режим из ведущего)
-  if (cwIn != SERIAL_LOCAL) cbWaitQuery = bWAITQUERY;
+  if (cwIn != SERIAL_LOCAL) cbWaitQuery = bMAXWAITQUERY;
 
   switch (ibPort)
   {
