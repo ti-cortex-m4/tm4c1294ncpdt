@@ -5,7 +5,7 @@ PORTS_DEVICES.H
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../crc-16.h"
+#include        "../memory/mem_ports.h"
 #include        "../keyboard/keyboard.h"
 #include        "../hardware/watchdog.h"
 #include        "../digitals/wait_answer.h"
@@ -14,6 +14,7 @@ PORTS_DEVICES.H
 #include        "../isr/serial1.h"
 #include        "../isr/serial2.h"
 #include        "../isr/serial3.h"
+#include        "../crc-16.h"
 #include        "ports.h"
 
 

@@ -5,5 +5,3 @@ MEM_DIGITALS0.H
 ------------------------------------------------------------------------------*/
 
 extern  digital                 mpdiDigital[bCANALS];
-
-extern  digital                 diPrev, diCurr;
