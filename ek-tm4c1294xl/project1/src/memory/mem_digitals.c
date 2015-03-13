@@ -21,3 +21,24 @@ boolean                 boEnableKeys;
 
 // массив паролей счётчиков
 phone                   mpphKeys[bCANALS];
+
+
+
+// цифровой счётчики
+digital                 diPrev, diCurr;
+
+
+
+// массив признаков для исключения повторного опроса
+boolean                 mpboChannelsA[bCHANNELS];
+
+// промежуточные массивы
+ulong                   mpdwChannelsA[bCHANNELS],
+                        mpdwChannelsB[bCHANNELS];
+
+// промежуточные массивы
+real                    mpreChannelsA[bCHANNELS],
+                        mpreChannelsB[bCHANNELS];
+
+// промежуточная переменная
+time                    tiChannelC;

@@ -5,8 +5,9 @@ DEVICE_B.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../memory/mem_digitals0.h"
+#include        "../memory/mem_digitals.h"
 #include        "../display/lines.h"
+#include        "../time/timedate.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
 /*

@@ -5,7 +5,8 @@ AUTOMATIC2.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../memory/mem_digitals0.h"
+#include        "../memory/mem_digitals.h"
+#include        "../memory/mem_realtime.h"
 #include        "../display/display.h"
 #include        "../time/timedate.h"
 #include        "../serial/ports.h"
