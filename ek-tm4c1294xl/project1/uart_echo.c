@@ -30,6 +30,7 @@ TODO .C
 #include "src/isr/timer1.h"
 #include "src/isr/serial0.h"
 #include "src/isr/serial1.h"
+#include "src/isr/serial2.h"
 #include "src/uarts.h"
 #include "src/serial/print.h"
 #include "src/settings.h"
@@ -55,6 +56,8 @@ int main(void) {
 
   InitUart0(ui32SysClock);
   InitUart2(ui32SysClock);
+  InitUart3(ui32SysClock);
+  InitUart4(ui32SysClock);
 
 	InitBeep();
 	InitLCD();
@@ -86,7 +89,7 @@ int main(void) {
 
     InitSerial0();
     InitSerial1();
-
+    InitSerial2();
 
     InitTimer0(ui32SysClock);
     InitTimer1(ui32SysClock);

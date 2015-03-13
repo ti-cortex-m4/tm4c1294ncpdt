@@ -16,6 +16,7 @@ TODO volatile
 #include        "../impulses/impulses.h"
 #include        "serial0.h"
 #include        "serial1.h"
+#include        "serial2.h"
 
 
 
@@ -42,6 +43,7 @@ void Timer0IntHandler(void) {
 
 	InDelay0_Timer0();
 	InDelay1_Timer0();
+	InDelay2_Timer0();
 
 	Impulses_Timer0();
 	LCD_Timer0();
