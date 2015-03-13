@@ -4,4 +4,4 @@ AUTOMATIC_B.H
 
 ------------------------------------------------------------------------------*/
 
-status4 ReadCntMonCanTariffB(uchar  ibMonth, uchar  ibTariff);
+//status4 ReadCntMonCanTariffB(uchar  ibMonth, uchar  ibTariff);
