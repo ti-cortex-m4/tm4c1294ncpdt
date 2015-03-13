@@ -11,6 +11,8 @@ PORTS_COMMON.C
 #include        "../memory/mem_serial3.h"
 #include        "../isr/serial0.h"
 #include        "../isr/serial1.h"
+#include        "../isr/serial2.h"
+#include        "../isr/serial3.h"
 #include        "../crc-16.h"
 #include        "ports.h"
 
@@ -32,8 +34,8 @@ void    Answer(uint  wSize, serial  seT) {
   switch (ibPort) {
     case 0:	Answer0(wSize, seT); break;
     case 1:	Answer1(wSize, seT); break;
-//    case 2:	Answer2(wSize, seT); break;
-//    case 3:	Answer3(wSize, seT); break;
+    case 2:	Answer2(wSize, seT); break;
+    case 3:	Answer3(wSize, seT); break;
   }
 }
 
