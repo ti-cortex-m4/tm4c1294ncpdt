@@ -46,6 +46,7 @@ TODO .C
 #include "src/serial/speeds.h"
 #include "src/storage/storage.h"
 #include "src/time/decret.h"
+#include "src/digitals/wait_query.h"
 #include "src/realtime/realtime.h"
 #include "src/realtime/realtime_init.h"
 #include "src/output/response_crc.h"
@@ -87,6 +88,8 @@ int main(void) {
   PrintStop();
 
 	InitDisplay();
+
+    InitWaitQuery();
 
     InitSerial0();
     InitSerial1();

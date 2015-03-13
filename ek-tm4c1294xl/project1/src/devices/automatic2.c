@@ -8,6 +8,7 @@ AUTOMATIC2.C
 #include        "../memory/mem_digitals0.h"
 #include        "../display/display.h"
 #include        "../time/timedate.h"
+#include        "../serial/ports.h"
 #include        "../digitals/digitals.h"
 #include        "automatic_b.h"
 /*
@@ -680,7 +681,7 @@ uchar   i;
   if (QueryTimeAltB_Full(75) == 0) return(0);
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = boTrue;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = TRUE;
 
   return(1);
 }

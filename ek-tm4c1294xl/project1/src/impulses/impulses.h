@@ -16,7 +16,7 @@ void    EnableImpulses(void);
 void    DisableImpulses(void);
 
 void    Impulses_Timer0(void);
-void    Impulses_Timer1(void);
+void    Impulses_1Hz(void);
 
 void    InitImpulses(void);
 void    StartImpulses(void);

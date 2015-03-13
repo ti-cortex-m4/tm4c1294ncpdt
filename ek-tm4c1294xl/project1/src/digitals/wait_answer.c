@@ -7,19 +7,25 @@ WAIT_ANSWER.C
 #include        "../main.h"
 #include        "../memory/mem_ports.h"
 #include        "../display/display.h"
-//#include        "../digitals/digitals.h"
+#include        "../serial/ports.h"
 
 
 
 // счётчики секунд
-uchar                   cbWaitAnswer, cbWaitAnswerPrev,
-                        cbWaitOnline, cbWaitOnlinePrev;
+static uchar            cbWaitAnswer, cbWaitAnswerPrev;
 
+
+
+void    WaitAnswer_1Hz(void)
+{
+  cbWaitAnswer++;
+}
 
 
 void    InitWaitAnswer(void)
 {
-  cbWaitAnswerPrev = cbWaitAnswer = 0;
+  cbWaitAnswerPrev = 0;
+  cbWaitAnswer = 0;
 }
 
 
