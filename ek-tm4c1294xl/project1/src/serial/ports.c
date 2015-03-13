@@ -9,6 +9,9 @@ PORTS.C
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_tariffs.h"
 #include        "../memory/mem_serial0.h"
+#include        "../memory/mem_serial1.h"
+#include        "../memory/mem_serial2.h"
+#include        "../memory/mem_serial3.h"
 #include        "../memory/mem_realtime.h"
 #include        "../include/queries.h"
 #include        "../realtime/realtime.h"
@@ -97,6 +100,24 @@ void    Outptr(void  *pData, uint  wSize)
       bCRCHi0 = bCRCHi;
       bCRCLo0 = bCRCLo;
       break;
+
+    case 1:
+      pbData1 = pData;
+      bCRCHi1 = bCRCHi;
+      bCRCLo1 = bCRCLo;
+      break;
+
+    case 2:
+      pbData2 = pData;
+      bCRCHi2 = bCRCHi;
+      bCRCLo2 = bCRCLo;
+      break;
+
+    case 3:
+      pbData3 = pData;
+      bCRCHi3 = bCRCHi;
+      bCRCLo3 = bCRCLo;
+      break;
   }
 
   Answer(wSize+bHEADER,SER_HEADER);
@@ -106,6 +127,9 @@ void    Outptr(void  *pData, uint  wSize)
 void    OutptrOutBuff(uint  wSize) {
   switch (ibPort) {
     case 0:  Outptr(&mpbOutBuff0[bHEADER], wSize);  break;
+    case 1:  Outptr(&mpbOutBuff1[bHEADER], wSize);  break;
+    case 2:  Outptr(&mpbOutBuff2[bHEADER], wSize);  break;
+    case 3:  Outptr(&mpbOutBuff3[bHEADER], wSize);  break;
   }
 }
 
