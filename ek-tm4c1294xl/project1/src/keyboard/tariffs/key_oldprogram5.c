@@ -11,6 +11,7 @@ KEY_OLDPROGRAM5.C
 #include        "../../display/display.h"
 #include        "../../access.h"
 #include        "../../time/timedate.h"
+#include        "../../time/timedate_display.h"
 #include        "../../tariffs/zones.h"
 #include        "../../tariffs/tariffs.h"
 #include        "../../tariffs/oldtariffs.h"
