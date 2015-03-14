@@ -16,9 +16,3 @@ time   *GetDecretDateYM(uchar  bYear, uchar  bMonth);
 uint    GetDayIndexYMD(uchar  bYear, uchar  bMonth, uchar  bDay);
 uint    GetDayIndexMD(uchar  bMonth, uchar  bDay);
 bool    TrueTimeDate(void);
-
-void    ShowTime(time  ti);
-void    ShowDate(time  ti);
-void    ShowTimeDate(time  ti);
-
-void    LoadBetaMonth(uchar  ibMonth);
