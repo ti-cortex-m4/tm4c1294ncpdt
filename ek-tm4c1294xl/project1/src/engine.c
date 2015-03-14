@@ -12,4 +12,4 @@ ENGINE.Ñ
 
 uint                    iwHou;
 
-real                    reBuffA;
+real                    reBuffA, reBuffB;

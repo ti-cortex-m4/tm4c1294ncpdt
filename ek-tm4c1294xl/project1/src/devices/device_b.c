@@ -10,6 +10,7 @@ DEVICE_B.C
 #include        "../time/timedate.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
+#include        "../energy.h"
 /*
 #include        "xdata.h"
 #include        "display.h"
@@ -150,13 +151,13 @@ bit     ReadIdB(void)
 
   return 1;
 }
-
+*/
 
 
 // посылка запроса на чтение энергии для счётчиков Меркурий-230
 void    QueryEnergyB(uchar  bTime)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(5);                          // чтение накопленной энергии
@@ -187,15 +188,14 @@ uchar   i;
         (coEnergy.mpbBuff[2] == 0xFF) &&
         (coEnergy.mpbBuff[3] == 0xFF)) coEnergy.dwBuff = 0;
 
-    dwBuffC = coEnergy.dwBuff;
-    SetCanLong(mpdwChannelsA, i);
+    SetCanLong(mpdwChannelsA, i, coEnergy.dwBuff);
   }
 
-  coEnergy.dwBuff = *PGetCanLong(&mpdwChannelsA, diCurr.ibLine);
+  coEnergy.dwBuff = GetCanLong(mpdwChannelsA, diCurr.ibLine);
 }
 
 
-
+/*
 // посылка запроса на коррекцию времени для счётчика Меркурий-230
 void    QueryControlB(void)
 {
@@ -520,28 +520,6 @@ uchar   i;
 
   MakeCurrent();
 }
-
-
-bit     QueryEnergyB_Full(uchar  bTime, uchar  bPercent)
-{
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryEnergyB(bTime);
-
-    if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(bPercent);
-
-  ReadEnergyB();
-  return(1);
-}
-
 
 
 bit     QueryIdB_Full(void)

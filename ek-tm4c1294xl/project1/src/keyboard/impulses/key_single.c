@@ -11,6 +11,7 @@ KEY_SINGLE.C
 #include        "../../display/display.h"
 #include        "../../realtime/realtime.h"
 #include        "../../digitals/digitals.h"
+#include        "../../engine.h"
 #include        "../../energy.h"
 #include        "../../energy2.h"
 #include        "../../energy4.h"
@@ -160,7 +161,7 @@ void    ShowModemReadSensors(void)
 //    if (mpboEnblCan[ibX] == false)
 //      ShowLo(szBlocking);
 //    else
-//      (ReadSensors(ibX) == 1) ? ShowReal(&reBuffA) : Error();
+      (ReadSensors(ibX) == 1) ? ShowReal(reBuffA) : Error();
 //
 //    SaveConnect();
 //  }

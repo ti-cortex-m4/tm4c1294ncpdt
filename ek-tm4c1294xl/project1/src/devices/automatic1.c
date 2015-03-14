@@ -3,8 +3,13 @@ _AUTOMATIC1.C
               
 
 ------------------------------------------------------------------------------*/
+
+#include        "../main.h"
+#include        "../keyboard/keyboard.h"
+#include        "../serial/ports_stack.h"
+#include        "../serial/ports_devices.h"
+#include        "../engine.h"
 /*
-#include        "main.h"
 #include        "xdata.h"
 #include        "display.h"
 #include        "beep.h"
@@ -194,10 +199,10 @@ uchar   i;
 
   return(1);
 }
-
+*/
 
 // чтение коэффициентов для счётчика Меркурий-230
-bit     ReadKoeffDeviceB_Special(void)                 
+bool    ReadKoeffDeviceB_Special(void)
 {
 uchar   i;
 
@@ -206,7 +211,7 @@ uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
-    InitPush();
+    InitPush(0);
     PushChar(diCurr.bAddress);           
     PushChar(8);           
     PushChar(2);                        // чтение коэффициентов
@@ -230,7 +235,7 @@ uchar   i;
 
   return(1);
 }
-
+/*
 #endif
 
 

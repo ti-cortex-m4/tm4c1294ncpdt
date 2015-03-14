@@ -37,6 +37,8 @@ void    LoadSlide(char const  *ppszT[])
   ppszCurr  = ppszT;
   ppszFirst = ppszT;
 
+  strncpy(szHi, *ppszCurr, bDISPLAY);
+
   cwSlide = 0;
   fSlide  = true;
 }
