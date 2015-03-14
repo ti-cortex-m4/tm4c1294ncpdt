@@ -188,7 +188,7 @@ uchar   i;
         (coEnergy.mpbBuff[2] == 0xFF) &&
         (coEnergy.mpbBuff[3] == 0xFF)) coEnergy.dwBuff = 0;
 
-    SetCanLong(mpdwChannelsA, i, coEnergy.dwBuff);
+    SetCanLong(mpdwChannelsA, i, &coEnergy.dwBuff);
   }
 
   coEnergy.dwBuff = GetCanLong(mpdwChannelsA, diCurr.ibLine);

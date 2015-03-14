@@ -20,6 +20,8 @@ extern  digital                 diPrev, diCurr;
 
 
 
+extern  combo                   coEnergy;
+
 extern  boolean                 mpboChannelsA[bCHANNELS];
 
 extern  ulong                   mpdwChannelsA[bCHANNELS],

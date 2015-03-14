@@ -29,6 +29,9 @@ digital                 diPrev, diCurr;
 
 
 
+// глобальная переменная
+combo                   coEnergy;
+
 // массив признаков для исключения повторного опроса
 boolean                 mpboChannelsA[bCHANNELS];
 

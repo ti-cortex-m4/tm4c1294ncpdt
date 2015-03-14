@@ -6,6 +6,8 @@ AUTOMATIC2.C
 
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_factors.h"
+#include        "../memory/mem_current.h"
 #include        "../memory/mem_realtime.h"
 #include        "../display/display.h"
 #include        "../time/timedate.h"
@@ -13,6 +15,7 @@ AUTOMATIC2.C
 #include        "../digitals/digitals.h"
 #include        "../engine.h"
 #include        "../energy.h"
+#include        "automatic1.h"
 #include        "automatic_b.h"
 /*
 #include        "xdata.h"
