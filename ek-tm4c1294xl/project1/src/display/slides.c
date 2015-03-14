@@ -58,7 +58,7 @@ void    ShowSlide(char  szT[])
 }
 
 
-void    NextSlide(void) {
+void    Slides_1Hz(void) {
   if (fSlide == true)
   {
     if (cwSlide == 0)

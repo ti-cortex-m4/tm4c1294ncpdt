@@ -11,6 +11,7 @@ TODO volatile
 #include        "driverlib/interrupt.h"
 #include        "driverlib/sysctl.h"
 #include        "driverlib/timer.h"
+#include        "../display/slides.h"
 #include        "../impulses/impulses.h"
 #include        "../digitals/wait_answer.h"
 #include        "../digitals/wait_query.h"
@@ -44,6 +45,7 @@ void Timer1IntHandler(void) {
 
 	fOnSecond = 1;
 
+  Slides_1Hz();
 	Impulses_1Hz();
 
 	WaitAnswer_1Hz();
