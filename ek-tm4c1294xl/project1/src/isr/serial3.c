@@ -9,6 +9,8 @@ SERIAL3.C
 #include        "inc/hw_uart.h"
 #include        "inc/hw_types.h"
 #include        "inc/hw_ints.h"
+#include        "inc/hw_sysctl.h"
+#include        "inc/hw_gpio.h"
 #include        "driverlib/interrupt.h"
 #include        "driverlib/uart.h"
 #include        "../memory/mem_ports.h"
@@ -16,6 +18,7 @@ SERIAL3.C
 #include        "../serial/flow.h"
 #include        "../serial/ports.h"
 #include        "../serial/bulk.h"
+#include        "../time/delay.h"
 #include        "../crc-16.h"
 #include        "../uarts.h"
 
@@ -23,7 +26,7 @@ SERIAL3.C
 
 static const uchar 		szPacketA[bPACKET_HEADER] = {0xCA, 0xE0, 0xEB, 0xFE, 0xEC, 0xED, 0xFB, 0x20};
 
-//static const uchar 		szPacketB[1] = { 0x1A };
+static const uchar 		szPacketB[1] = { 0x1A };
 
 
 
@@ -32,10 +35,12 @@ void    DTROff3(void) {
 
 
 void    InputMode3(void) {
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0100) = 0x0040;
 }
 
 
 void    OutputMode3(void) {
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0100) = ~0x0040;
 }
 
 
@@ -68,13 +73,13 @@ uint32_t ui32Status;
   ui32Status = UARTIntStatus(UART4_BASE, true);
   UARTIntClear(UART4_BASE, ui32Status);
 
-/*
+
   // ведущий режим
   if (((mppoPorts[3].enStream == STR_MASTERDIRECT) ||
        (mppoPorts[3].enStream == STR_MASTERMODEM)) &&
       (mpboLocal[3] == false))
   {
-    if (GetRI3())
+    if (GetRI3(ui32Status))
     {
       bT = InByte3();
 
@@ -127,7 +132,7 @@ uint32_t ui32Status;
       }
     }
 
-    if (GetTI3())
+    if (GetTI3(ui32Status))
     {
       if (mpSerial[3] == SER_OUTPUT_MASTER)
       {
@@ -148,7 +153,7 @@ uint32_t ui32Status;
             InputMode3();                       // передача с ответом
             mpSerial[3] = SER_BEGIN;            // начинаем приём
 
-            mpboLocal[3] = true;
+            mpboLocal[3] = TRUE;
           }
           else
           if (cwInBuff3 == SERIAL_MODEM)
@@ -167,9 +172,10 @@ uint32_t ui32Status;
       }
     }
   }
-*/
+
 
   // ведомый режим
+  else
   {
     if (GetRI3(ui32Status))
     {
@@ -411,6 +417,11 @@ void    InDelay3_Timer0(void) {
 
 void    InitSerial3(void)
 {
+  HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R3; // GPIO Port D Run Mode Clock Gating Control
+  RunClocking();
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) |= 0x0040; // GPIO Direction
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x0040; // GPIO Digital Enable
+
   mpboLocal[3] = FALSE;
 
   InputMode3();

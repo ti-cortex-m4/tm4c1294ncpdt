@@ -38,7 +38,7 @@ void    MakeKeys(void)
 {
   switch (diT.bDevice)
   {
-    case 1:   strcpy((char *) &mpphKeys[ibX].szNumber, "000000");  break;
+    case 1:   strcpy((char *)&mpphKeys[ibX].szNumber, "000000");  break;
     case 2:   strcpy((char *)&mpphKeys[ibX].szNumber, "222222");  break;
     case 4:   strcpy((char *)&mpphKeys[ibX].szNumber, "00000000");  break;
     case 21:  strcpy((char *)&mpphKeys[ibX].szNumber, "00000000");  break;

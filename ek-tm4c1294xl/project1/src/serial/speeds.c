@@ -126,13 +126,13 @@ void    SetSpeed1(void)
 
 void    SetSpeed2(void)
 {
-//  MakeSpeed(2, UART3_BASE);
+  MakeSpeed(2, UART3_BASE);
 }
 
 
 void    SetSpeed3(void)
 {
-//  MakeSpeed(3, UART4_BASE);
+  MakeSpeed(3, UART4_BASE);
 }
 
 
