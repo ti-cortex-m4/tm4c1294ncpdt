@@ -75,6 +75,7 @@ bool    TrueDigital(digital  *pdi)
 void    SetDigital(uchar  ibCan, digital  *pdi)
 {
   mpdiDigital[ibCan] = *pdi;
+  SaveFile(&flDigitals);
 }
 
 

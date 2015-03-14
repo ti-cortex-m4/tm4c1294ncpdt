@@ -409,14 +409,12 @@ void    InDelay2_Timer0(void) {
 
 
 
-void    InitSerial2(void) {
+void    InitSerial2(void)
+{
   mpboLocal[2] = FALSE;
 
   InputMode2();
   DTROff2();
-
-  mpwMajorInDelay[2] = 10;
-  mppoPorts[2].enStream = STR_SLAVEESC;
 
   mpSerial[2] = SER_BEGIN;
 }
