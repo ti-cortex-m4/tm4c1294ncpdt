@@ -9,6 +9,8 @@ SERIAL2.C
 #include        "inc/hw_uart.h"
 #include        "inc/hw_types.h"
 #include        "inc/hw_ints.h"
+#include        "inc/hw_sysctl.h"
+#include        "inc/hw_gpio.h"
 #include        "driverlib/interrupt.h"
 #include        "driverlib/uart.h"
 #include        "../memory/mem_ports.h"
@@ -23,7 +25,7 @@ SERIAL2.C
 
 static const uchar 		szPacketA[bPACKET_HEADER] = {0xCA, 0xE0, 0xEB, 0xFE, 0xEC, 0xED, 0xFB, 0x20};
 
-//static const uchar 		szPacketB[1] = { 0x1A };
+static const uchar 		szPacketB[1] = { 0x1A };
 
 
 
@@ -32,10 +34,12 @@ void    DTROff2(void) {
 
 
 void    InputMode2(void) {
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0080) = 0x0020;
 }
 
 
 void    OutputMode2(void) {
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0080) = ~0x0020;
 }
 
 
@@ -68,13 +72,13 @@ uint32_t ui32Status;
   ui32Status = UARTIntStatus(UART3_BASE, true);
   UARTIntClear(UART3_BASE, ui32Status);
 
-/*
+
   // ведущий режим
   if (((mppoPorts[2].enStream == STR_MASTERDIRECT) ||
        (mppoPorts[2].enStream == STR_MASTERMODEM)) &&
       (mpboLocal[2] == false))
   {
-    if (GetRI2())
+    if (GetRI2(ui32Status))
     {
       bT = InByte2();
 
@@ -127,7 +131,7 @@ uint32_t ui32Status;
       }
     }
 
-    if (GetTI2())
+    if (GetTI2(ui32Status))
     {
       if (mpSerial[2] == SER_OUTPUT_MASTER)
       {
@@ -148,7 +152,7 @@ uint32_t ui32Status;
             InputMode2();                       // передача с ответом
             mpSerial[2] = SER_BEGIN;            // начинаем приём
 
-            mpboLocal[2] = true;
+            mpboLocal[2] = TRUE;
           }
           else
           if (cwInBuff2 == SERIAL_MODEM)
@@ -167,9 +171,10 @@ uint32_t ui32Status;
       }
     }
   }
-*/
+
 
   // ведомый режим
+  else
   {
     if (GetRI2(ui32Status))
     {
@@ -411,6 +416,11 @@ void    InDelay2_Timer0(void) {
 
 void    InitSerial2(void)
 {
+  HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R3; // GPIO Port D Run Mode Clock Gating Control
+  RunClocking();
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) |= 0x0020; // GPIO Direction
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x0020; // GPIO Digital Enable
+
   mpboLocal[2] = FALSE;
 
   InputMode2();
