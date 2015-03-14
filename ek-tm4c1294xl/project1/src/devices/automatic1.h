@@ -6,7 +6,7 @@ _AUTOMATIC1.H
 
 //bit     ReadKoeffDeviceA(void);
 //bit     ReadKoeffDeviceB(void);
-//bit     ReadKoeffDeviceB_Special(void);
+bool      ReadKoeffDeviceB_Special(void);
 //bit     ReadKoeffDeviceC(void);
 //bit     OpenDeviceD(void);
 //bit     ReadAllEnergyD(void);

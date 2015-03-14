@@ -41,6 +41,15 @@ typedef struct
 } time;
 
 
+// тип 'комбинированный'
+typedef union
+{
+  uchar         mpbBuff[4];
+  ulong         dwBuff;
+  real          reBuff;
+} combo;
+
+
 // тип 'канал/группа'
 typedef enum
 {

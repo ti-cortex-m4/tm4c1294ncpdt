@@ -1,14 +1,18 @@
 /*------------------------------------------------------------------------------
-_AUTOMATIC1.C
-              
+AUTOMATIC1.C
+
 
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_digitals.h"
 #include        "../keyboard/keyboard.h"
+#include        "../display/display.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
+#include        "../serial/ports_common.h"
 #include        "../engine.h"
+#include        "automatic_b.h"
 /*
 #include        "xdata.h"
 #include        "display.h"
