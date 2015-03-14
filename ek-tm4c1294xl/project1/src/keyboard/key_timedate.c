@@ -11,6 +11,7 @@ KEY_TIMEDATE.C
 #include        "../display/display.h"
 #include        "../time/rtc.h"
 #include        "../time/timedate.h"
+#include        "../time/timedate_display.h"
 #include        "../time/decret.h"
 
 
