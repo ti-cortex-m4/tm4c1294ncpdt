@@ -15,6 +15,7 @@ KEY_DIGITALS.C
 #include        "../../digitals/devices.h"
 #include        "../../serial/speeds.h"
 #include        "../../serial/speeds_display.h"
+#include        "../../serial/speeds_storage.h"
 
 
 
@@ -174,6 +175,9 @@ void    key_SetDigitals(void)
                 mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*8); break;
             }
           }
+
+          SaveMajorInDelay();
+          SaveMinorInDelay();
         }
 
         if (++ibX >= bCANALS) 

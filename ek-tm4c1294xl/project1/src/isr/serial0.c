@@ -170,6 +170,7 @@ uint32_t ui32Status;
 
 
   // ведомый режим
+  else
   {
     if (GetRI0(ui32Status))
     {
@@ -409,14 +410,12 @@ void    InDelay0_Timer0(void) {
 
 
 
-void    InitSerial0(void) {
+void    InitSerial0(void)
+{
   mpboLocal[0] = FALSE;
 
   InputMode0();
   DTROff0();
-
-  mpwMajorInDelay[0] = 10;
-  mppoPorts[0].enStream = STR_SLAVEESC;
 
   mpSerial[0] = SER_BEGIN;
 }

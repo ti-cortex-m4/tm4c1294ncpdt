@@ -409,14 +409,12 @@ void    InDelay1_Timer0(void) {
 
 
 
-void    InitSerial1(void) {
+void    InitSerial1(void)
+{
   mpboLocal[1] = FALSE;
 
   InputMode1();
   DTROff1();
-
-  mpwMajorInDelay[1] = 10;
-  mppoPorts[1].enStream = STR_SLAVEESC;
 
   mpSerial[1] = SER_BEGIN;
 }
