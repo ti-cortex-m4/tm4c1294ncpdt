@@ -18,6 +18,7 @@ SERIAL2.C
 #include        "../serial/flow.h"
 #include        "../serial/ports.h"
 #include        "../serial/bulk.h"
+#include        "../time/delay.h"
 #include        "../crc-16.h"
 #include        "../uarts.h"
 
