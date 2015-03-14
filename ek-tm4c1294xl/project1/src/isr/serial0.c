@@ -23,7 +23,7 @@ SERIAL0.C
 
 static const uchar 		szPacketA[bPACKET_HEADER] = {0xCA, 0xE0, 0xEB, 0xFE, 0xEC, 0xED, 0xFB, 0x20};
 
-//static const uchar 		szPacketB[1] = { 0x1A };
+static const uchar 		szPacketB[1] = { 0x1A };
 
 
 
@@ -68,13 +68,13 @@ uint32_t ui32Status;
   ui32Status = UARTIntStatus(UART0_BASE, true);
   UARTIntClear(UART0_BASE, ui32Status);
 
-/*
+
   // ведущий режим
   if (((mppoPorts[0].enStream == STR_MASTERDIRECT) ||
        (mppoPorts[0].enStream == STR_MASTERMODEM)) &&
       (mpboLocal[0] == false))
   {
-    if (GetRI0())
+    if (GetRI0(ui32Status))
     {
       bT = InByte0();
 
@@ -127,7 +127,7 @@ uint32_t ui32Status;
       }
     }
 
-    if (GetTI0())
+    if (GetTI0(ui32Status))
     {
       if (mpSerial[0] == SER_OUTPUT_MASTER)
       {
@@ -148,7 +148,7 @@ uint32_t ui32Status;
             InputMode0();                       // передача с ответом
             mpSerial[0] = SER_BEGIN;            // начинаем приём
 
-            mpboLocal[0] = true;
+            mpboLocal[0] = TRUE;
           }
           else
           if (cwInBuff0 == SERIAL_MODEM)
@@ -167,7 +167,7 @@ uint32_t ui32Status;
       }
     }
   }
-*/
+
 
   // ведомый режим
   {

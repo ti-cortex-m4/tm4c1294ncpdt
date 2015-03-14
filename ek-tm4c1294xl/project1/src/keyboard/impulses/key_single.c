@@ -15,7 +15,9 @@ KEY_SINGLE.C
 #include        "../../energy2.h"
 #include        "../../energy4.h"
 #include        "../../impulses/max_power.h"
+#include        "../../devices/automatic2.h"
 #include        "../../time/timedate.h"
+#include        "../../time/timedate_display.h"
 
 
 //                                             0123456789ABCDEF
@@ -184,13 +186,14 @@ void    ShowModemReadTimeDate(bool  fShowTimeDate)
 //      sprintf(szHi+14,"%2bu",ibX+1);
 //      ShowLo(szBlocking);
 //    }
-//    else if (ReadTimeDate(ibX) == 1)
-//    {
-//      sprintf(szHi+14,"%2bu",ibX+1);
-//      Clear();
-//      (fShowTimeDate) ? ShowTimeDate() : ShowDeltaTime();
-//    }
-//    else Error();
+//    else
+    if (ReadTimeDate(ibX) == 1)
+    {
+      sprintf(szHi+14,"%2u",ibX+1);
+      Clear();
+      (fShowTimeDate) ? ShowTimeDate(tiAlt) : ShowDeltaTime(tiAlt);
+    }
+    else Error();
 //
 //    SaveConnect();
 //  }
