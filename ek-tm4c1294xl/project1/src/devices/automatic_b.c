@@ -55,3 +55,25 @@ uchar   i;
   return(1);
 }
 
+
+
+bool    QueryEnergyB_Full(uchar  bTime, uchar  bPercent)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryEnergyB(bTime);
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == 1) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(bPercent);
+
+  ReadEnergyB();
+  return(1);
+}
+

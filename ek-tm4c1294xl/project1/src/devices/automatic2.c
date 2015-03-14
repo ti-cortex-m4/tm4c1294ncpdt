@@ -11,6 +11,8 @@ AUTOMATIC2.C
 #include        "../time/timedate.h"
 #include        "../serial/ports.h"
 #include        "../digitals/digitals.h"
+#include        "../engine.h"
+#include        "../energy.h"
 #include        "automatic_b.h"
 /*
 #include        "xdata.h"
@@ -83,13 +85,13 @@ uchar   i;
 }
 
 #endif
-
+*/
 
 
 #ifndef SKIP_B
 
 // чтение реальных показаний счётчиков для счётчиков Меркурий-230
-bit     ReadSensorB(void)                 
+bool    ReadSensorB(void)
 {
 uchar   i;
 
@@ -103,10 +105,10 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = *PGetCanLong(mpdwChannelsA, i) * reBuffB * 2;
-    SetCanReal(mpreChannelsB, i);
+    reBuffA = GetCanLong(mpdwChannelsA, i) * reBuffB * 2;
+    SetCanReal(mpreChannelsB, i, &reBuffA);
 
-    mpboChannelsA[i] = boTrue;     
+    mpboChannelsA[i] = TRUE;
   }
 
   reBuffA = reBuffB*coEnergy.dwBuff * 2;
@@ -117,7 +119,7 @@ uchar   i;
 #endif
 
 
-
+/*
 #ifndef SKIP_C
 
 // чтение реальных показаний счётчиков для счётчиков СС-301
@@ -1881,11 +1883,11 @@ uchar   i,j;
 }
 
 #endif
-
+*/
 
 
 // прочитать показания счётчиков с цифровых счётчиков
-bit     ReadSensors(uchar  ibCanal)
+bool    ReadSensors(uchar  ibCanal)
 {
   Clear();
 
@@ -1894,108 +1896,29 @@ bit     ReadSensors(uchar  ibCanal)
 
   switch (diCurr.bDevice)
   {
-    case 0:  reBuffA = *PGetCounterOld(ibCanal);
-             return(1);                break;
+    case 0:  reBuffA = GetCntCurrImp(ibCanal);
+             return(1);
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadSensorA() );  break;
+    case 1:  return( ReadSensorA() );
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadSensorB() );  break;
+    case 2:  return( ReadSensorB() );
 
-    case 12: reBuffA = mpdwBase[ibCanal] * *PGetCanReal(mpreValueCntHou,ibCanal);
-             return(1);                break;
+    case 12: reBuffA = mpdwBase[ibCanal] * GetCanReal(mpreValueCntHou,ibCanal);
+             return(1);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadSensorC() );  break;
+    case 3:  return( ReadSensorC() );
 #endif
 
-#ifndef SKIP_D
-    case 4:  return( ReadSensorD() );  break;
-#endif
-
-#ifndef SKIP_E
-    case 7:  
-    case 5:  return( ReadSensorE('S',1) );  break;
-#endif
-
-#ifndef SKIP_F
-    case 6:  return( ReadSensorF() );  break;
-#endif
-
-#ifndef SKIP_G
-    case 9:  return( ReadSensorG() );  break;
-#endif
-
-#ifndef SKIP_H
-    case 10: return( ReadSensorH() );  break;
-#endif
-
-#ifndef SKIP_I
-    case 11: return( ReadSensorI() );  break;
-#endif
-
-#ifndef SKIP_K
-    case 13: return( ReadSensorK(4) ); break;
-    case 14: return( ReadSensorK(1) ); break;
-#endif
-
-#ifndef SKIP_L
-    case 17:
-    case 16: reBuffA = mpdwBase[ibCanal] * *PGetCanReal(mpreValueCntHou,ibCanal);
-             return(1);                break;
-#endif
-
-#ifndef SKIP_M
-    case 18: return( ReadSensorM() );  break;
-#endif
-
-#ifndef SKIP_N
-    case 19: reBuffA = mpdwBase[ibCanal] * *PGetCanReal(mpreValueCntHou,ibCanal);
-             reBuffA += *PGetCanReal(mpreCount,ibCanal);
-             return(1);                break;
-#endif
-
-#ifndef SKIP_O
-    case 20: return( ReadSensorO() );  break;
-#endif
-
-#ifndef SKIP_P
-    case 21: return( ReadSensorP() );  break;
-#endif
-
-#ifndef SKIP_Q
-    case 22: return( ReadSensorQ() );  break;
-#endif
-
-#ifndef SKIP_R
-    case 23: return( ReadSensorR() );  break;
-#endif
-
-#ifndef SKIP_S
-    case 24: return( ReadSensorS() );  break;
-#endif
-
-#ifndef SKIP_T
-    case 25: return( ReadSensorT() );  break;
-#endif
-
-#ifndef SKIP_U
-    case 26: return( ReadSensorU() );  break;
-#endif
-
-#ifndef SKIP_Z
-    case 99: reBuffA = 0; return(1);   break;
-#endif
-
-    default: reBuffA = 0; return(0);   break;
+    default: reBuffA = 0; return(0);
   }
 }
-*/
 
 
 // прочитать значение времени/даты с цифровых счётчиков

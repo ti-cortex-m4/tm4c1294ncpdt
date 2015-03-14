@@ -17,10 +17,10 @@ void    QueryOpenB(void);
 //
 //void    QueryIdB(void);
 //bit     ReadIdB(void);
-//
-//void    QueryEnergyB(uchar  bTime);
-//void    ReadEnergyB(void);
-//
+
+void    QueryEnergyB(uchar  bTime);
+void    ReadEnergyB(void);
+
 //void    QueryControlB(void);
 ////void    QueryManageB(void);
 
