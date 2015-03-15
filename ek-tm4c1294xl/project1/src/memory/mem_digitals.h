@@ -31,3 +31,9 @@ extern  real                    mpreChannelsA[bCHANNELS],
                                 mpreChannelsB[bCHANNELS];
 
 extern  time                    tiChannelC;
+
+
+
+extern  boolean                 boEnblCurrent, boEnblProfile;
+
+extern  uchar                   bTimeoutCurrent, bTimeoutProfile;

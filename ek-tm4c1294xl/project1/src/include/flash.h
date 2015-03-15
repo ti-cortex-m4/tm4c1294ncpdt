@@ -116,7 +116,12 @@ typedef enum
   FLS_DIGITALS          = FLS_MINOR_IN_DELAY + 1,
   FLS_ENBL_CAN          = FLS_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1,
 
-  FLS_END               = FLS_ENBL_CAN + 1
+  FLS_ENBL_CURRENT      = FLS_ENBL_CAN + 1,
+  FLS_ENBL_PROFILE      = FLS_ENBL_CURRENT + 1,
+  FLS_TIMEOUT_CURRENT   = FLS_ENBL_PROFILE + 1,
+  FLS_TIMEOUT_PROFILE   = FLS_TIMEOUT_CURRENT + 1,
+
+  FLS_END               = FLS_TIMEOUT_PROFILE + 1
 } flash;
 
 

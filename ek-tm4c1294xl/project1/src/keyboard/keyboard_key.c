@@ -17,6 +17,8 @@ KEYBOARD_KEY.C
 #include        "key_version.h"
 #include        "digitals/key_digitals.h"
 #include        "digitals/key_enbl_canals.h"
+#include        "digitals/key_enbl_current.h"
+#include        "digitals/key_enbl_profile.h"
 #include        "key_decret.h"
 #include        "key_season.h"
 #include        "key_groups.h"
@@ -97,6 +99,11 @@ void    Keyboard_Key(void)
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
+      case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
+      case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
+      case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
+      case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
+
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
       case bGET_READTIMEDATE2:  key_GetSingle(CANALS);  break;
@@ -160,6 +167,11 @@ void    Keyboard_Key(void)
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
+
+      case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
+      case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
+      case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
+      case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
 
       case bGET_CNTCURR_10:
       case bGET_CNTCURR_110:
@@ -264,7 +276,7 @@ void    Keyboard_Key(void)
 
       case bSET_DAY_ZONE:       key_SetDayZone();       break;
       case bSET_PUBLIC_TARIFFS: key_SetPublicTariffs(); break;
-      case bSET_TARIFFS_MODE:	key_SetTariffsMode();	break;
+      case bSET_TARIFFS_MODE:   key_SetTariffsMode();   break;
 
       case bSET_PROGRAM10:
       case bSET_PROGRAM17:
@@ -291,6 +303,11 @@ void    Keyboard_Key(void)
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
+
+      case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
+      case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
+      case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
+      case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
