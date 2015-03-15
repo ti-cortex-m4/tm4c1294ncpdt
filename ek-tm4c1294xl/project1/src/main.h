@@ -22,6 +22,7 @@ MAIN.H
 #include        "main_events.h"
 #include        "main_storage.h"
 #include        "main_defines.h"
+#include        "main_devices.h"
 
 
 // тип 'правило перехода на сезонное время'

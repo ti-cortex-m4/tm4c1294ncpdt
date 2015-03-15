@@ -26,6 +26,8 @@ serial                  mpSerial[bPORTS];
 
 uchar                   ibPort;
 
+uchar                   ibPortPause;
+
 
 
 void    Output(uint  wSize) {

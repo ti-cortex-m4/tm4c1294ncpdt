@@ -124,4 +124,8 @@ SYSTEM.H
 #define bMAXWAITQUERY   20
 
 
+// пауза между посылкой нескольких запросов к одному цифровому счётчику
+#define ePAUSE          0.1
+
+
 #endif
