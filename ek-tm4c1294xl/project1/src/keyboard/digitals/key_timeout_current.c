@@ -13,9 +13,9 @@ KEY_TIMEOUT_CURRENT.C
 
 
 
-//                                                0123456789ABCDEF
-static char const       szTimeoutCurrent[]     = "Таймаут: 3 мин. ",
-                        szMaskTimeoutCurrent[] = "      ___       ";
+//                                            0123456789ABCDEF
+static char const       szTimeoutCurrent[] = "Таймаут: 3 мин. ",
+                        szMaskChar[]       = "      ___       ";
 
 
 
@@ -37,6 +37,7 @@ void    key_SetTimeoutCurrent(void)
 
       bTimeoutCurrent = GetCharLo(6,8);
       SaveFile(&flTimeoutCurrent);
+
       ShowChar(bTimeoutCurrent);
     }
     else Beep();
@@ -48,7 +49,7 @@ void    key_SetTimeoutCurrent(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT1;
-      ShowLo(szMaskTimeoutCurrent);
+      ShowLo(szMaskChar);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))

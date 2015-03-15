@@ -41,9 +41,9 @@ void    key_SetGapsFlag(void)
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
         boGapsFlag = (boGapsFlag == TRUE ? FALSE : TRUE);
-        ShowBoolean(boGapsFlag);
-
         SaveFile(&flGapsFlag);
+
+        ShowBoolean(boGapsFlag);
       }
       else Beep(); 
     }

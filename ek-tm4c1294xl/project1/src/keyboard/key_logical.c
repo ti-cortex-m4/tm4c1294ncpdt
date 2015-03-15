@@ -37,6 +37,7 @@ void    key_SetLogical(void)
 
       bLogical = GetCharLo(6,8);
       SaveFile(&flLogical);
+
       ShowChar(bLogical);
     }
     else Beep();

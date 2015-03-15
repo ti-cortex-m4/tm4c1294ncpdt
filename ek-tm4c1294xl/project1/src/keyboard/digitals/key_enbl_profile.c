@@ -14,11 +14,10 @@ KEY_ENBL_PROFILE.C
 
 
 //                                         0123456789ABCDEF
-//                                         0123456789ABCDEF
-static char const       szLoad[]        = "   Загружать    ",
+static char const       szEnbl[]        = "   Загружать    ",
                         szProfile[]     = "30-мин. данные ?";
 
-static char const       *pszEnblProfile[]   = { szLoad, szProfile, "" };
+static char const       *pszEnblProfile[] = { szEnbl, szProfile, "" };
 
 
 
@@ -45,9 +44,9 @@ void    key_SetEnblProfile(void)
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
         boEnblProfile = (boEnblProfile == TRUE ? FALSE : TRUE);
-        ShowBoolean(boEnblProfile);
-
         SaveFile(&flEnblProfile);
+
+        ShowBoolean(boEnblProfile);
       }
       else Beep(); 
     }
