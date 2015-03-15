@@ -7,6 +7,9 @@ TODO атомарные операции
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
+#include        "../memory/mem_digitals.h"
+#include        "../digitals/current_run.h"
+#include        "../digitals/wait_query.h"
 #include        "../time/rtc.h"
 #include        "../health.h"
 #include        "../serial/print.h"
@@ -29,6 +32,9 @@ bool                    fSummer, fWinter;
 
 // признак работы в активном режиме
 bool                    fActive;
+
+// признаки для запуска задач
+bool                    fCurrent, fProfile;
 
 
 
@@ -123,6 +129,17 @@ void    ProcessTime(void)
   if (tiCurr.bSecond != tiPrev.bSecond)
   {
     NextSecond();
+
+    if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
+    {
+      if ((fCurrent == 1) && (cbWaitQuery == 0))
+      {
+        if ((tiCurr.bMinute % 3)*60 + tiCurr.bSecond >= bTimeoutCurrent)
+        {
+          RunCurrent();
+        }
+      }
+    }
   }
 
 
@@ -142,6 +159,8 @@ void    ProcessTime(void)
     PrintString("\n next 3 min.");
     NextMinute3();
     PrintInt(ibSoftMnt); PrintInt(ibHardMnt);
+
+    if (fActive == 1) fCurrent = 1;
   }
 
 

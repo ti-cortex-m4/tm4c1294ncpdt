@@ -183,6 +183,10 @@ void    DefaultRealtime(void)
 
 void    InitRealtime(void)
 {
+  fActive = 0;
+
+  fCurrent = 0;
+
 //  if (GetLabelRTC() == 0) TestError(szBadRTC1);
 
   if (TrueCurrTimeDate(GetCurrTimeDate()) == false)
