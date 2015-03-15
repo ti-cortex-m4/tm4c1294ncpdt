@@ -43,10 +43,11 @@ TODO .C
 #include "src/tariffs/relaxs.h"
 #include "src/tariffs/gaps.h"
 #include "src/digitals/digitals.h"
+#include "src/digitals/profile_core.h"
+#include "src/digitals/wait_query.h"
 #include "src/serial/speeds.h"
 #include "src/storage/storage.h"
 #include "src/time/decret.h"
-#include "src/digitals/wait_query.h"
 #include "src/realtime/realtime.h"
 #include "src/realtime/realtime_init.h"
 #include "src/output/response_crc.h"
@@ -78,6 +79,7 @@ int main(void) {
 	InitGaps();             Delay(100); TestOK();
 	InitDecret();
 	InitDigitals();         Delay(100); TestOK();
+	InitProfile();
 	InitSpeeds();
 
 	InitSlide();

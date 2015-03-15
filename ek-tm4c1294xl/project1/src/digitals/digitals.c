@@ -21,8 +21,6 @@ void    InitDigitals(void)
 {
   LoadFile(&flDigitals);
   MakeDigitalsMask();
-
-//  LoadFile(&flEnabledCan);
 }
 
 
@@ -103,5 +101,5 @@ void    ShowDigital(uchar  ibCan)
                GetDigitalLine(ibCan)+1);
 
   sprintf(szHi+14,"%02u",ibCan+1);
-  (mpboEnabledCan[ibCan]) ? (szHi[13] = '+') : (szHi[13] = '-');
+  (mpboEnblCan[ibCan]) ? (szHi[13] = '+') : (szHi[13] = '-');
 }

@@ -16,6 +16,7 @@ KEYBOARD_KEY.C
 #include        "key_start.h"
 #include        "key_version.h"
 #include        "digitals/key_digitals.h"
+#include        "digitals/key_enbl_canals.h"
 #include        "key_decret.h"
 #include        "key_season.h"
 #include        "key_groups.h"
@@ -94,6 +95,7 @@ void    Keyboard_Key(void)
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
+      case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
@@ -157,6 +159,7 @@ void    Keyboard_Key(void)
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
+      case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
       case bGET_CNTCURR_10:
       case bGET_CNTCURR_110:
@@ -287,6 +290,7 @@ void    Keyboard_Key(void)
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
+      case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
