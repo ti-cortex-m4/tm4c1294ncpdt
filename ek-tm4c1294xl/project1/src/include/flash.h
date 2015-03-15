@@ -86,9 +86,7 @@ typedef enum
   FLS_LOSSE             = FLS_COUNT + REALCAN_PAGES,
   FLS_LEVEL             = FLS_LOSSE + REALCAN_PAGES,
 
-  FLS_DIGITALS          = FLS_LEVEL + REALCAN_PAGES,
-
-  FLS_IMPMNTCAN         = FLS_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_IMPMNTCAN         = FLS_LEVEL + REALCAN_PAGES,
   FLS_IMPHOUCAN         = FLS_IMPMNTCAN + bMINUTES,
 
   FLS_IMPDAYCAN         = FLS_IMPHOUCAN + IMPHOUCAN_PAGES,
@@ -115,7 +113,10 @@ typedef enum
   FLS_MAJOR_IN_DELAY    = FLS_REALTIME + 1,
   FLS_MINOR_IN_DELAY    = FLS_MAJOR_IN_DELAY + 1,
 
-  FLS_END               = FLS_MINOR_IN_DELAY + 1
+  FLS_DIGITALS          = FLS_MINOR_IN_DELAY + 1,
+  FLS_ENBL_CAN          = FLS_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1,
+
+  FLS_END               = FLS_ENBL_CAN + 1
 } flash;
 
 

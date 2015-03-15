@@ -6,7 +6,7 @@ MEM_DIGITALS.H
 
 extern  uint                    wDigitalsMask;
 
-extern  boolean                 mpboEnabledCan[bCANALS];
+extern  boolean                 mpboEnblCan[bCANALS];
 
 
 

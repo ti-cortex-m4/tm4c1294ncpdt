@@ -149,7 +149,7 @@ void    Response255_CRC(void)
     case bEXT_GETPOWCANMNT:         OutPowCanMntExt();     break;
 
     case bEXT_GETDIGITALS: OutDigitalsExt(); break;
-    case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnabledCan); break;
+    case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnblCan); break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;

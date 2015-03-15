@@ -12,7 +12,7 @@ MEM_DIGITALS.C
 uint                    wDigitalsMask;
 
 // массив разрешенных каналов
-boolean                 mpboEnabledCan[bCANALS];
+boolean                 mpboEnblCan[bCANALS];
 
 
 

@@ -164,6 +164,7 @@ PROGRAMS.H
 // все режимы
 
 #define bSET_DIGITALS               90
+#define bSET_ENBL_CANALS            185
 
 #define bSET_RELAXS_FLAG            117
 #define bSET_RELAXS_TARIFF          118
