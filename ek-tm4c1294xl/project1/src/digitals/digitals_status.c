@@ -3,16 +3,14 @@ DIGITALS_STATUS.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
+
+#include        "../main.h"
 
 
 
-bit             fStatus;
+bool                    fStatus;
 
-
-extern  uint            xdata   wCurr,wPause,wNext;
+uint                    wCurr, wPause, wNext;
 
 
 
@@ -66,8 +64,7 @@ uint    GetNext(void)
 
 
 
-bit     GetStatus(void)
+bool    GetStatus(void)
 {
   return fStatus;
 }
-*/
