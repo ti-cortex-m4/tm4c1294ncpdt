@@ -3,15 +3,13 @@ DIGITALS_PAUSE.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "ports.h"
-#include        "status.h"
+
+#include        "../main.h"
+#include        "digitals_status.h"
 
 
 
-extern  uint            xdata   wCurr;
+extern  uint                    wCurr;
 
 
 
@@ -57,6 +55,7 @@ void    MakeLongPause(uint  w, uchar  bSecond)
 }
 
 
+
 // повтор обработки задержки 
 void    NextPause(void)
 {
@@ -66,4 +65,3 @@ void    NextPause(void)
     SetCurr(DEV_PAUSE);
   }
 }
-*/

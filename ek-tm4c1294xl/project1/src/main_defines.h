@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-MAIN_DEVICES.H
+MAIN_DEFINES.H
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __MAIN_DEVICES
-#define __MAIN_DEVICES
+#ifndef __MAIN_DEFINES
+#define __MAIN_DEFINES
 
 
 #define SKIP_A
