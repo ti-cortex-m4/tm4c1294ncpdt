@@ -14,7 +14,9 @@ PORTS.H
 
 extern  serial                  mpSerial[bPORTS];
 
-extern	uchar                   ibPort;
+extern  uchar                   ibPort;
+
+extern  uchar                   ibPortPause;
 
 
 

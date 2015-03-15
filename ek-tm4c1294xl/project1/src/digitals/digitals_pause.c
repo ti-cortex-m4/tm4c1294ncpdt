@@ -5,7 +5,13 @@ DIGITALS_PAUSE.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../serial/ports.h"
 #include        "digitals_status.h"
+
+
+
+// счётчик для отрабоки задержки между запросами
+uint                    mpcwPause[bPORTS];
 
 
 
