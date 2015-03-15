@@ -15,7 +15,7 @@ uint                    mpcwPause[bPORTS];
 
 
 
-extern  uint                    wCurr;
+extern  volatile device         deCurr;
 
 
 
@@ -28,7 +28,7 @@ void    Pause(void)
   {
     if (mpcwPause[ibPortPause] == 0)
     {
-      wCurr = GetPause();
+      deCurr = GetPause();
       mpSerial[ibPortPause] = SER_PAUSE;
     }
     else mpcwPause[ibPortPause]--;
@@ -38,25 +38,25 @@ void    Pause(void)
 
 
 // подготовка обработки задержки между запросами
-void    MakePause(uint  w)
+void    MakePause(device  de)
 {
   mpcwPause[ibPort] = (uint)(wFREQUENCY_T0*ePAUSE);   
 
   ibPortPause = ibPort;
 
-  SetPause(w);
+  SetPause(de);
   SetCurr(DEV_PAUSE);
 }
 
 
 // подготовка обработки задержки между запросами
-void    MakeLongPause(uint  w, uchar  bSecond)
+void    MakeLongPause(device  de, uchar  bSecond)
 {
   mpcwPause[ibPort] = (uint)(wFREQUENCY_T0*bSecond);   
 
   ibPortPause = ibPort;
 
-  SetPause(w);
+  SetPause(de);
   SetCurr(DEV_PAUSE);
 }
 
