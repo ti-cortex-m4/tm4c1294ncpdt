@@ -4,13 +4,13 @@ DIGITALS_STATUS.H
 
 ------------------------------------------------------------------------------*/
 
-void    SetCurr(uint  w);
-uint    GetCurr(void);
+void    SetCurr(device  de);
+device  GetCurr(void);
 
-void    SetPause(uint  w);
-uint    GetPause(void);
+void    SetPause(device  de);
+device  GetPause(void);
 
-void    SetNext(uint  w);
-uint    GetNext(void);
+void    SetNext(device  de);
+device  GetNext(void);
 
 bool    GetStatus(void);

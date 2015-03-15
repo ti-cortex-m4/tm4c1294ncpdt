@@ -8,58 +8,58 @@ DIGITALS_STATUS.C
 
 
 
-bool                    fStatus;
+volatile bool           fStatus;
 
-uint                    wCurr, wPause, wNext;
+volatile device         deCurr, dePause, deNext;
 
 
 
-void    SetCurr(uint  w)
+void    SetCurr(device  de)
 {
   fStatus = 1;
-  wCurr = w;
+  deCurr = de;
   fStatus = 0;
 }
 
 
-uint    GetCurr(void)
+device  GetCurr(void)
 {
-uint  w;
+device de;
 
   fStatus = 1;
-  w = wCurr;
+  de = deCurr;
   fStatus = 0;
-  return w;
+  return de;
 }
 
 
 
-void    SetPause(uint  w)
+void    SetPause(device  de)
 {
   fStatus = 1;
-  wPause = w;
-  fStatus = 0;
-}
-
-
-uint    GetPause(void)
-{
-  return wPause;
-}
-
-
-
-void    SetNext(uint  w)
-{
-  fStatus = 1;
-  wNext = w;
+  dePause = de;
   fStatus = 0;
 }
 
 
-uint    GetNext(void)
+device  GetPause(void)
 {
-  return wNext;
+  return dePause;
+}
+
+
+
+void    SetNext(device  de)
+{
+  fStatus = 1;
+  deNext = de;
+  fStatus = 0;
+}
+
+
+device  GetNext(void)
+{
+  return deNext;
 }
 
 
