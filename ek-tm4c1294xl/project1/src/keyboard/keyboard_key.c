@@ -19,6 +19,8 @@ KEYBOARD_KEY.C
 #include        "digitals/key_enbl_canals.h"
 #include        "digitals/key_enbl_current.h"
 #include        "digitals/key_enbl_profile.h"
+#include        "digitals/key_timeout_current.h"
+#include        "digitals/key_timeout_profile.h"
 #include        "key_decret.h"
 #include        "key_season.h"
 #include        "key_groups.h"
