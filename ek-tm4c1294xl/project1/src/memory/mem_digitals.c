@@ -45,3 +45,11 @@ real                    mpreChannelsA[bCHANNELS],
 
 // промежуточная переменная
 time                    tiChannelC;
+
+
+
+//
+boolean                 boEnblCurrent, boEnblProfile;
+
+//
+uchar                   bTimeoutCurrent, bTimeoutProfile;

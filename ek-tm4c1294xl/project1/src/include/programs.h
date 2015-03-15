@@ -166,6 +166,11 @@ PROGRAMS.H
 #define bSET_DIGITALS               90
 #define bSET_ENBL_CANALS            185
 
+#define bSET_ENBL_CURRENT           192
+#define bSET_ENBL_PROFILE           193
+#define bSET_TIMEOUT_PROFILE        194
+#define bSET_TIMEOUT_CURRENT        195
+
 #define bSET_RELAXS_FLAG            117
 #define bSET_RELAXS_TARIFF          118
 #define bSET_RELAXS                 119
