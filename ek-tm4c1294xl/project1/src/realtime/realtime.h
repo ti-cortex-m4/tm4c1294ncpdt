@@ -10,6 +10,8 @@ extern  bool                    fSummer, fWinter;
 
 extern  bool                    fActive;
 
+extern  bool                    fCurrent, fProfile;
+
 
 
 uchar   GetCurrHouIndex(void);
