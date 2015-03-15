@@ -14,11 +14,10 @@ KEY_ENBL_CURRENT.C
 
 
 //                                         0123456789ABCDEF
-//                                         0123456789ABCDEF
-static char const       szLoad[]        = "   Загружать    ",
+static char const       szEnbl[]        = "   Загружать    ",
                         szCurrent[]     = " 3-мин. данные ?";
 
-static char const       *pszEnblCurrent[]   = { szLoad, szCurrent, "" };
+static char const       *pszEnblCurrent[] = { szEnbl, szCurrent, "" };
 
 
 
@@ -45,9 +44,9 @@ void    key_SetEnblCurrent(void)
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
         boEnblCurrent = (boEnblCurrent == TRUE ? FALSE : TRUE);
-        ShowBoolean(boEnblCurrent);
-
         SaveFile(&flEnblCurrent);
+
+        ShowBoolean(boEnblCurrent);
       }
       else Beep(); 
     }

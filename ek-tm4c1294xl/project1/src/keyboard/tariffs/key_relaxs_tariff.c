@@ -49,9 +49,9 @@ void    key_SetRelaxsTariff(void)
       if ((ibX > 0) && (ibX <= bTARIFFS))
       {
         ibRelaxsTariff = ibX-1;
-        ShowChar(ibRelaxsTariff+1); 
-
         SaveFile(&flRelaxsTariff);
+
+        ShowChar(ibRelaxsTariff+1); 
       }
       else 
       {

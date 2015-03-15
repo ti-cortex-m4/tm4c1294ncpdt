@@ -13,9 +13,9 @@ KEY_TIMEOUT_PROFILE.C
 
 
 
-//                                                0123456789ABCDEF
-static char const       szTimeoutProfile[]     = "Таймаут: 30 мин.",
-                        szMaskTimeoutProfile[] = "      ___       ";
+//                                            0123456789ABCDEF
+static char const       szTimeoutProfile[] = "Таймаут: 30 мин.",
+                        szMaskChar[]       = "      ___       ";
 
 
 
@@ -37,6 +37,7 @@ void    key_SetTimeoutProfile(void)
 
       bTimeoutProfile = GetCharLo(6,8);
       SaveFile(&flTimeoutProfile);
+
       ShowChar(bTimeoutProfile);
     }
     else Beep();
@@ -48,7 +49,7 @@ void    key_SetTimeoutProfile(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT1;
-      ShowLo(szMaskTimeoutProfile);
+      ShowLo(szMaskChar);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
