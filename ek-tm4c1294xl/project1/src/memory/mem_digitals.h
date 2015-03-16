@@ -37,3 +37,7 @@ extern  time                    tiChannelC;
 extern  boolean                 boEnblCurrent, boEnblProfile;
 
 extern  uchar                   bTimeoutCurrent, bTimeoutProfile;
+
+
+
+extern  uchar                   mpboReadyCan[bCANALS];

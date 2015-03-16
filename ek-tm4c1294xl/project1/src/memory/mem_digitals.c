@@ -53,3 +53,8 @@ boolean                 boEnblCurrent, boEnblProfile;
 
 //
 uchar                   bTimeoutCurrent, bTimeoutProfile;
+
+
+
+// массив признаков для исключения повторного опроса каналов, принадлежащих одному цифорвому счётчику
+uchar                   mpboReadyCan[bCANALS];

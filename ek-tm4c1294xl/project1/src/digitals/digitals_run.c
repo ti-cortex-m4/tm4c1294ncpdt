@@ -3,8 +3,9 @@ DIGITALS_RUN.C
               
 
 ------------------------------------------------------------------------------*/
+
+#include        "../main.h"
 /*
-#include        "main.h"
 #include        "xdata.h"
 #include        "digitals2.h"
 #include        "label.h"
@@ -140,10 +141,10 @@ uchar           data    cbRepeat;
 
 // признак прекращения опроса профиля нагрузки
 bit                     fBreakRead;
-
-// признак нахождени в режимах connect
-bit                     fConnect;
-
+*/
+// признак нахождени в режимах connect модема
+bool                    fConnect;
+/*
 // признак разрыва соединеия при нажатии кнопки
 bit                     fKeyOn;
 
