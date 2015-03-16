@@ -142,6 +142,9 @@ uchar           data    cbRepeat;
 // признак прекращения опроса профиля нагрузки
 bit                     fBreakRead;
 */
+// индекс текущего цифрового счетчика
+uchar                   ibDig;
+
 // признак нахождени в режимах connect модема
 bool                    fConnect;
 /*
@@ -258,9 +261,9 @@ uchar   i,bT;
       ShowHi(szManual); Clear();
 
       if (cbWaitOnline <= bMAXWAITONLINE)
-        sprintf(szLo,"  осталось: %bu c ",(uchar)(bMAXWAITONLINE-cbWaitOnline)); 
+        sprintf(szLo,"  осталось: %bu c ",(uchar)(bMAXWAITONLINE-cbWaitOnline));
       else
-        sprintf(szLo,"окончились: %bu c ",(uchar)bMAXWAITONLINE); 
+        sprintf(szLo,"окончились: %bu c ",(uchar)bMAXWAITONLINE);
 
       DelayMsg();
       LoadDisplay();
@@ -1232,7 +1235,7 @@ uchar   i,bT;
       tiAlt = tiCurr;                       // текущие время/дата сумматора
 
       if (wBuffD != GetDayIndex())          
-      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна 
+      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
       else 
       {
         if (dwBuffC > GetSecondIndex())                                         // необходима коррекция времени ведомого счётчика назад
@@ -1242,7 +1245,7 @@ uchar   i,bT;
 
         if (dwBuffC < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }     
-        else if (dwBuffC < bMAJORCORRECT_B)                                     // простая коррекция 
+        else if (dwBuffC < bMAJORCORRECT_B)                                     // простая коррекция
         {
           if (cbCorrects == 0)
           { 
