@@ -4,6 +4,6 @@ RESPONSE_CRC.H
 
 ------------------------------------------------------------------------------*/
 
-void    ResponseCRC_Full(void);
+void    RunResponseCRC_All(void);
 
 void    ShowTestResponse(uchar  bState);

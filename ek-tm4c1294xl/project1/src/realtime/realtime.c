@@ -244,7 +244,7 @@ void    ProcessTime(void)
 
 
 
-void    Realtime(void)
+void    RunRealtime(void)
 {
 time    tiT;
 

@@ -13,3 +13,4 @@ extern  bool                    fConnect;
 
 
 void    InitDevices(void);
+void    RunDevices(void);

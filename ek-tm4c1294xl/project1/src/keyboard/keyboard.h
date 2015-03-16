@@ -41,5 +41,5 @@ void    BlockPrograms(uchar  bA, uchar  bB);
 void    NeedProgram(uchar  bA);
 void    NeedPrograms(uchar  bA, uchar  bB);
 
-void    Keyboard(void);
+void    RunKeyboard(void);
 

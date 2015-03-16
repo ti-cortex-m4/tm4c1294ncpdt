@@ -17,6 +17,7 @@ CURRENT_RUN.C
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_pause.h"
 #include        "../digitals/digitals_run.h"
+#include        "../digitals/digitals_messages.h"
 #include        "../keyboard/key_timedate.h"
 #include        "../time/rtc.h"
 
@@ -52,7 +53,7 @@ bool    StartCurrent(uchar  ibCanal)
         {
           ShowHi(szClear);
           sprintf(szHi,"Канал: %-2u",ibDig+1);
-          //TODO ShowLo(szDisabledCan); if (boHideMessages == FALSE) Delay(300);
+          ShowLo(szDisabledCan); if (boHideMessages == FALSE) Delay(300);
         }
         else break;
       }

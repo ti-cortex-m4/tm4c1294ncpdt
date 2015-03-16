@@ -91,52 +91,6 @@ DIGITALS_RUN.C
 
 
 
-//                                         0123456789ABCDEF
-uchar           code    szBaudOK[]      = "   модем: OK    ",
-                        szCommonOK[]    = " настройки 1: OK",
-                        szCustomOK[]    = " настройки 2: OK",
-                        szEscapeOK[]    = "     +++: OK    ",
-                        szHookOffOK[]   = " отключение: OK ",
-                        szOpen[]        = " вызов ...      ",
-                        szOpenOK[]      = " вызов: OK      ",
-                        szRepeats[]     = " повтор   ...   ",
-                        szCorrectNo[]   = " коррекция: нет ",
-                        szCorrectYes[]  = " коррекция: есть",
-                        szCorrectNext[] = " без коррекции  ",
-                        szManageNo[]    = " контроль: нет  ",
-                        szManageYes[]   = " контроль: есть ",
-                        szCorrectBig[]  = "  невозможно !  ",
-                        szBadDates[]    = "даты: различны !",
-                        szBadClock[]    = "ошибка времени !",
-                        szStamp[]       = " время/дата ... ",
-                        szStampOK[]     = " время/дата: OK ",
-                        szDelay[]       = " ожидание 1 ... ",
-                        szDefect[]      = " ожидание 2 ... ",
-                        szIndex[]       = " проверка ...   ",
-                        szIndexOK[]     = " проверка: OK   ",
-                        szManual[]      = "Управление      ",
-                        szPause[]       = "Ожидайте:       ",
-                        szModemStop[]   = "   отключение   ",
-                        szDisabledHou[] = "получас запрещен",
-                        szDisabledCan[] = " канал запрещен ",
-                        szNoLink[]      = "  нет связи !   ",
-                        szNoDevice[]    = " ошибка связи ! ",
-                        szNoData[]      = "данные не готовы",
-                        szNoVersion[]   = "ошибка версии ! ",
-                        szPowerOK[]     = "  мощность: OK  ",
-                        szPowerNo[]     = "  мощность: нет ",
-                        szNewSeason[]   = "Смена сезона:   ",
-                        szIsWinter[]    = "на зинее время  ",
-                        szClosing[]     = "   закрытие...  ",
-                        szNoRecalc[]    = "без перерасчета ",
-                        szCorrectQ1[]   = " коррекция...   ",
-                        szCorrectQ2[]   = " коррекция...OK ",
-                        szWorkDone[]    = "Опрос завершен  ",
-                        szFailure1[]    = " сбой потока !  ",
-                        szFailure2[]    = " сбой данных !  ",
-                        szFailure20[]   = "сбой данных !   ";
-
-
 // счётчик повторов
 uchar           data    cbRepeat;
 
@@ -188,52 +142,46 @@ void    InitDevices(void)
 {
   boSeparateCan = FALSE;
   boHideMessages = FALSE;
+
+//uchar   i,j;
+//
+//  if (GetLabelXDATA() == 0)
+//  {
+//    MakeDigitals();
+//
+//    for (i=0; i<bCANALS; i++) mpboBase[i] = boFalse;
+//
+//    for (i=0; i<bCANALS; i++) mpreEngFrac[i] = 0;
+//
+//    for (i=0; i<bCANALS; i++)
+//      for (j=0; j<6; j++) mpreEngFracDigCan[i][j] = 0;
+//  }
+//
+//  SetCurr(DEV_BEGIN);
+//  SetPause(DEV_BEGIN);
+//
+//  InitWaitAnswer();
+//  cbWaitOnline = 0;
+//
+//  InitConnectKey();
+//  InfoBegin();
+//
+//  ibPortPause = 0xFF;
+//  EnableAnswer();
+//
+//  InitDeviceR();
+//  InitMaxRepeats();
+//  InitCurrent2();
+//
+//  InitExtended4();
+//  InitExtended4T();
+//
+//  if ((bPlcUSize < 1) || (bPlcUSize > 8)) bPlcUSize = 6;
+//  if ((wPlcUShutdown < 10) || (wPlcUShutdown > 500)) wPlcUShutdown = 100;
 }
 
 
 /*
-// начальная инициализация переменных
-void    InitDigitals(void)
-{
-uchar   i,j;
-
-  if (GetLabelXDATA() == 0)
-  { 
-    MakeDigitals();
-
-    for (i=0; i<bCANALS; i++) mpboBase[i] = boFalse;
-
-    for (i=0; i<bCANALS; i++) mpreEngFrac[i] = 0;
-
-    for (i=0; i<bCANALS; i++) 
-      for (j=0; j<6; j++) mpreEngFracDigCan[i][j] = 0;
-  }
-
-  SetCurr(DEV_BEGIN);
-  SetPause(DEV_BEGIN);
-
-  InitWaitAnswer();
-  cbWaitOnline = 0;
-
-  InitConnectKey();
-  InfoBegin();
-
-  ibPortPause = 0xFF;
-  EnableAnswer();
-
-  InitDeviceR();
-  InitMaxRepeats();
-  InitCurrent2();
-
-  InitExtended4();
-  InitExtended4T();
-
-  if ((bPlcUSize < 1) || (bPlcUSize > 8)) bPlcUSize = 6;
-  if ((wPlcUShutdown < 10) || (wPlcUShutdown > 500)) wPlcUShutdown = 100;
-}
-
-
-
 void    ShowProgressRepeat(void)
 {
   sprintf(szLo,"   повтор: %bu    ",cbRepeat); DelayInf();
@@ -252,12 +200,13 @@ uint    i;
   ShowProgress(12,i);
   InfoProgress(i);
 }
-
+*/
 
 
 // базовая подпрограмма опроса цифоровых счётчиков
-void    Digitals(void)
+void    RunDevices(void)
 {
+/*
 uchar   i,bT;
 
   LoadCurrDigital(ibDig);
@@ -1642,5 +1591,6 @@ uchar   i,bT;
 #endif
 
   }
-}
 */
+}
+
