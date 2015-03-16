@@ -108,8 +108,9 @@ int main(void) {
     while (1) {
     	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM))
 
-    	Realtime();
-    	Keyboard();
-    	ResponseCRC_Full();
+    	RunRealtime();
+    	RunKeyboard();
+    	RunDevices();
+    	RunResponseCRC_All();
     }
 }

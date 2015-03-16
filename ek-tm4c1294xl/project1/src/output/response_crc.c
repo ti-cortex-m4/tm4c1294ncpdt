@@ -39,7 +39,7 @@ void    ShowTestResponse(uchar  bState) {
 
 
 
-void    ResponseCRC(void) {
+void    RunResponseCRC(void) {
   if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE) {
 
     mpSerial[ibPort] = SER_BEGIN;
@@ -84,17 +84,17 @@ void    ResponseCRC(void) {
 }
 
 
-void    ResponseCRC_Full(void) {
+void    RunResponseCRC_All(void) {
   ibPort = 0;
-  ResponseCRC();
+  RunResponseCRC();
 
   ibPort = 1;
-  ResponseCRC();
+  RunResponseCRC();
 
   ibPort = 2;
-  ResponseCRC();
+  RunResponseCRC();
 
   ibPort = 3;
-  ResponseCRC();
+  RunResponseCRC();
 }
 

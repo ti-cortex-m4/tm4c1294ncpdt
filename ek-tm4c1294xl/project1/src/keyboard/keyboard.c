@@ -148,7 +148,7 @@ void    NeedNumber(void)
 
 
 // главная функция обработки нажатий на клавиатуру
-void    Keyboard(void)
+void    RunKeyboard(void)
 {
 uchar   i;
 
