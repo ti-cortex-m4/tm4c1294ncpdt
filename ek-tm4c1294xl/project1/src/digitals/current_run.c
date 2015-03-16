@@ -5,17 +5,23 @@ CURRENT_RUN.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_digitals.h"
+#include        "../display/display.h"
+#include        "../keyboard/keyboard.h"
+#include        "../serial/flow.h"
+#include        "../realtime/realtime.h"
+#include        "../digitals/digitals_status.h"
+#include        "../digitals/digitals_pause.h"
+#include        "../digitals/digitals_run.h"
 
 
 
-/*
-#ifdef  POWER
-
-bit     StartCurrent(uchar  ibCanal)
-{
+bool    StartCurrent(uchar  ibCanal)
+{/*
   ibDig = ibCanal;
 
-  while (ibDig < bCANALS)               // проверяем тип цифровых счётчиков
+  while (ibDig < bCANALS)
   {
     LoadCurrDigital(ibDig);
 
@@ -141,28 +147,21 @@ bit     StartCurrent(uchar  ibCanal)
 #endif
   }
 
-  exExtended = EXT_CURRENT_3MIN;
+  exExtended = EXT_CURRENT_3MIN;*/
   MakePause(DEV_MODEM_START);
   return(1);
 }
-*/
+
 
 void    RunCurrent(void)
 {
-/*
-  if (boLoadMnt == boTrue)
+  if (boEnblCurrent == TRUE)
   {
-#ifdef  FLOW
     CloseFlow();
-#endif
 
     if (GetCurr() == DEV_PAUSE) return;
     if (fConnect == 1) return;
 
-    enModbusCurrent = MB1_PROGRESS;
-    boErrorCurrent = boFalse;
-
-    StartCurrent2();
     memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
     if (StartCurrent(0) == 0)
     {
@@ -170,10 +169,9 @@ void    RunCurrent(void)
       Work(); OK();
 
       bProgram = 0; wProgram = 0;
-      cbShowTime = 2;
+      cbShowCurrentTime = 2;
     }
   }
-*/
 }
 
 /*

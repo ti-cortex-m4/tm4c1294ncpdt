@@ -36,3 +36,16 @@ uchar   IsFlow2(void) {
 uchar   IsFlow3(void) {
   return(0);
 }
+
+
+
+void    CloseFlow(void)
+{
+//  if (fFlow == 1)
+//  {
+//    cbFlowDelay = 0;
+//    fFlow = 0;
+//
+//    NextPause(); // внимание !
+//  }
+}
