@@ -9,8 +9,10 @@ CURRENT_RUN.C
 #include        "../memory/mem_digitals.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
+#include        "../serial/ports.h"
 #include        "../serial/flow.h"
 #include        "../realtime/realtime.h"
+#include        "../digitals/digitals.h"
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_pause.h"
 #include        "../digitals/digitals_run.h"
@@ -174,7 +176,7 @@ void    RunCurrent(void)
   }
 }
 
-/*
+
 void    NextCurrent(void)
 {
   Clear();
@@ -208,28 +210,22 @@ void    NextCurrent(void)
 
   mpSerial[diCurr.ibPort] = SER_BEGIN;
 
-  if (StartCurrent(ibDig+1) == 0)       // опрос завершён
+  if (StartCurrent(ibDig+1) == 0) // опрос завершён
   {
     SetCurr(DEV_BEGIN);
 
     fCurrent = 0;
-    MakeContacts1();
-    MakeContacts4();
-    StopCurrent2();
     Work(); OK();
 
     bProgram = 0; wProgram = 0;
-    cbShowTime = 2;
+    cbShowCurrentTime = 2;
 
     ibPortPause = 0xFF;
-
-    bDelayPhone2 = 3;
-    enModbusCurrent = (boErrorCurrent == boFalse) ? MB1_READY : MB1_ERROR;
   }
 }
 
 
-
+/*
 void    MakeCurrent(void)
 {
   ShowLo(szPowerOK); Delay(200);
