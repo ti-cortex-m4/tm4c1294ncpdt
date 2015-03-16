@@ -38,6 +38,23 @@ void    LoadCurrDigital(uchar  ibCan)
 }
 
 
+void    LoadPrevDigital(uchar  ibCan)
+{
+  diPrev = mpdiDigital[ ibCan ];
+}
+
+
+bool    CompareCurrPrevLines(uchar  ibDig, uchar  ibCan)
+{
+  return( (diPrev.ibPort   == diCurr.ibPort)   &&
+          (diPrev.ibPhone  == diCurr.ibPhone)  &&
+          (diPrev.bDevice  == diCurr.bDevice)  &&
+          (diPrev.bAddress == diCurr.bAddress) &&
+          ((ibDig == ibCan) || (boSeparateCan == FALSE)) );
+}
+
+
+
 uchar   GetDigitalPort(uchar  ibCan) {
   return mpdiDigital[ibCan].ibPort;
 }

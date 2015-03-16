@@ -7,6 +7,7 @@ CURRENT_RUN.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_current.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../serial/ports.h"
@@ -16,11 +17,13 @@ CURRENT_RUN.C
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_pause.h"
 #include        "../digitals/digitals_run.h"
+#include        "../keyboard/key_timedate.h"
+#include        "../time/rtc.h"
 
 
 
 bool    StartCurrent(uchar  ibCanal)
-{/*
+{
   ibDig = ibCanal;
 
   while (ibDig < bCANALS)
@@ -43,12 +46,13 @@ bool    StartCurrent(uchar  ibCanal)
         (diCurr.bDevice == 23) ||
         (diCurr.bDevice == 24))
     {
-      if (mpboReadyCan[ibDig] == boFalse)
+      if (mpboReadyCan[ibDig] == FALSE)
       {
-        if (mpboEnblCan[ibDig] == boFalse)
+        if (mpboEnblCan[ibDig] == FALSE)
         {
-          sprintf(szHi,"Канал: %-2bu       ",ibDig+1);
-          ShowLo(szDisabledCan); if (boHideMessages == boFalse) Delay(300);
+          Clear();
+          sprintf(szHi,"Канал: %-2u",ibDig+1);
+          ShowLo(szDisabledCan); if (boHideMessages == FALSE) Delay(300);
         }
         else break;
       }
@@ -60,7 +64,7 @@ bool    StartCurrent(uchar  ibCanal)
   if (ibDig >= bCANALS) return(0);
 
 
-  NoShowTime(1);
+  HideCurrentTime(1);
   ShowDigitalHi(); Clear();
 
   LoadCurrDigital(ibDig);
@@ -77,11 +81,11 @@ bool    StartCurrent(uchar  ibCanal)
     case 8:
     case 2:  SetNext(DEV_START_B3);  break;
 #endif
-
+/*
 #ifndef SKIP_B
     case 12: SetNext(DEV_START_B312);  break;
 #endif
-
+*/
 #ifndef SKIP_C
     case 3:  SetNext(DEV_START_C3);  break;
 #endif
@@ -149,7 +153,7 @@ bool    StartCurrent(uchar  ibCanal)
 #endif
   }
 
-  exExtended = EXT_CURRENT_3MIN;*/
+  exExtended = EXT_CURRENT_3MIN;
   MakePause(DEV_MODEM_START);
   return(1);
 }
@@ -238,18 +242,18 @@ void    MakeCurrent(void)
     {
       mpbCurrent2Curr[ibCan/8] |= (0x80 >> ibCan%8);
 
-      if (boMntEscS == boTrue)
+      if (boMntEscS == TRUE)
       {
         mpreEsc_S[ibCan] = mpreValueCntHou[ibCan] * mpdwBase[ibCan];
         mptiEsc_S[ibCan] = *PGetCurrTimeDate();
       }
 
-      mpboReadyCan[ibCan] = boTrue;
+      mpboReadyCan[ibCan] = TRUE;
 
       mpwTrue[ibCan]++;
-      if (mpboBase[ibCan] == boFalse)
+      if (mpboBase[ibCan] == FALSE)
       {
-        mpboBase[ibCan] = boTrue;
+        mpboBase[ibCan] = TRUE;
 
         mpdwBase[ibCan] = mpdwBaseDig[ diPrev.ibLine ];
         mpreBase[ibCan] = 0;
@@ -305,16 +309,16 @@ void    MakeCurrent(void)
 
   NextCurrent();
 }
-
+*/
 
 
 void    ErrorCurrent(void)
 {
-  boErrorCurrent = boTrue;
   SaveDisplay();
 
   ShowHi(szWarning);
-  sprintf(szLo,"запроса %02bX.%02bX.%02bX",(uchar)(GetCurr() / 0x100),(uchar)(GetCurr() % 0x100),(uchar)mpSerial[ibPort]);
+  Clear();
+  sprintf(szLo,"запроса %02X.%02X.%02X",(uchar)(GetCurr() / 0x100),(uchar)(GetCurr() % 0x100),(uchar)mpSerial[ibPort]);
   LongBeep();
 
   DelayMsg();
@@ -322,14 +326,15 @@ void    ErrorCurrent(void)
 
   // запрещаем опрашивать другие каналы, принадлежащие текущему счётчику
   LoadCurrDigital(ibDig);
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1)
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
-      mpboReadyCan[ibCan] = boTrue;
+      mpboReadyCan[ibCan] = TRUE;
 
-      mptiBaseError[ibCan] = *PGetCurrTimeDate();
+      mptiBaseError[ibCan] = *GetCurrTimeDate();
       mpwFalse[ibCan]++;
     }
   }
@@ -337,6 +342,3 @@ void    ErrorCurrent(void)
   SetCurr(DEV_BEGIN);
   NextCurrent();
 }
-
-#endif
- */

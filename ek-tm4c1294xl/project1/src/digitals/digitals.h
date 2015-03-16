@@ -12,6 +12,8 @@ void    InitDigitals(void);
 void    ResetDigitals(void);
 
 void    LoadCurrDigital(uchar  ibCan);
+void    LoadPrevDigital(uchar  ibCan);
+bool    CompareCurrPrevLines(uchar  ibDig, uchar  ibCan);
 
 uchar   GetDigitalPort(uchar  ibCan);
 uchar   GetDigitalPhone(uchar  ibCan);
