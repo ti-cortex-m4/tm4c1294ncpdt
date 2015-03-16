@@ -6,8 +6,8 @@ MODEMS.H
 
 void    KeyBreakConnect(void);
 
-//uchar   GetModemAnswer(void);
-//
+uchar   GetModemAnswer(void);
+
 //void    QueryModemBaud(bool  fShow);
 //void    QueryModemCommon(bool  fShow);
 //void    QueryModemCustom(void);

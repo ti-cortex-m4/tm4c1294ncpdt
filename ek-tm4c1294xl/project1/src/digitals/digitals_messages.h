@@ -4,12 +4,11 @@ MESSAGES_DIGITALS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  char const
-//                                szBaudOK[],
-//                                szCommonOK[],
-//                                szCustomOK[],
-//                                szEscapeOK[],
-//                                szHookOffOK[],
+extern  char const              szBaudOK[],
+                                szCommonOK[],
+                                szCustomOK[],
+                                szEscapeOK[],
+                                szHookOffOK[],
 //                                szOpen[],
 //                                szOpenOK[],
 //                                szRepeats[],
