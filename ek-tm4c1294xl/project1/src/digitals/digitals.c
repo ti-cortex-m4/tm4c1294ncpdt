@@ -134,3 +134,10 @@ void    ShowCanalNumber(uchar  ibCan)
   ShowHi(szClear);
   sprintf(szHi,"Канал: %-2u",ibCan+1);
 }
+
+
+void    ShowPort(uchar  ibPort)
+{
+  ShowHi(szClear);
+  sprintf(szHi,"Порт: %u",ibPort+1);
+}
