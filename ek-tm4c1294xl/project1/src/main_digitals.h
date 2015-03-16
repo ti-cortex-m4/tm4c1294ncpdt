@@ -25,3 +25,13 @@ typedef struct
 {
   uchar         szNumber[bPHONENUMBER+1];
 } phone;
+
+
+
+// тип 'вид опроса счётчиков'
+typedef enum
+{
+  EXT_PROFILE_30MIN,
+  EXT_CURRENT_3MIN,
+  EXT_PROFILE_CHECKUP
+} extended;

@@ -27,4 +27,7 @@ void    SetDigital(uchar  ibCan, digital  *pdi);
 void    MakeDigitalsMask(void);
 
 void    ShowDigital(uchar  ibCan);
+void    ShowDigitalNumber(uchar  ibDig);
+void    ShowCanalNumber(uchar  ibCan);
+
 

@@ -146,6 +146,9 @@ bit                     fBreakRead;
 // индекс текущего цифрового счетчика
 uchar                   ibDig;
 
+// вид опроса счётчиков
+extended                exExtended;
+
 // признак нахождени в режимах connect модема
 bool                    fConnect;
 /*

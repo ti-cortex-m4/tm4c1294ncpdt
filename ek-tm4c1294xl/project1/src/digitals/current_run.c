@@ -50,7 +50,7 @@ bool    StartCurrent(uchar  ibCanal)
       {
         if (mpboEnblCan[ibDig] == FALSE)
         {
-          Clear();
+          ShowHi(szClear);
           sprintf(szHi,"Канал: %-2u",ibDig+1);
           ShowLo(szDisabledCan); if (boHideMessages == FALSE) Delay(300);
         }
@@ -65,7 +65,8 @@ bool    StartCurrent(uchar  ibCanal)
 
 
   HideCurrentTime(1);
-  ShowDigitalHi(); Clear();
+
+  ShowDigitalNumber(ibDig); Clear();
 
   LoadCurrDigital(ibDig);
   ibPort = diCurr.ibPort;
