@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-PORTS_DEVICES.H
+PORTS_MODEMS.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    Query(uint  cwIn, uchar  cbOut, bool  fMinor);
-void    QueryIO(uint  cwIn, uchar  cbOut);
-serial  Input(void);
+serial  ModInput(uchar  bSecond, bool  fShow);
+bool    ModInputOK(uchar  bSecond);
+bool    ModSerialOK(void);
