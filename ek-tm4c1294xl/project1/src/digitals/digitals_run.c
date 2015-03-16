@@ -5,6 +5,7 @@ DIGITALS_RUN.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_digitals.h"
 /*
 #include        "xdata.h"
 #include        "digitals2.h"
@@ -177,9 +178,17 @@ void    KeyBreakConnect(void)
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_KEYBREAK);
 }
+*/
 
 
+void    InitDevices(void)
+{
+  boSeparateCan = FALSE;
+  boHideMessages = FALSE;
+}
 
+
+/*
 // начальная инициализация переменных
 void    InitDigitals(void)
 {

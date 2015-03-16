@@ -38,6 +38,10 @@ extern  boolean                 boEnblCurrent, boEnblProfile;
 
 extern  uchar                   bTimeoutCurrent, bTimeoutProfile;
 
+extern  boolean                 boSeparateCan;
+
+extern  boolean                 boHideMessages;
+
 
 
 extern  uchar                   mpboReadyCan[bCANALS];

@@ -44,6 +44,7 @@ TODO .C
 #include "src/tariffs/gaps.h"
 #include "src/digitals/digitals.h"
 #include "src/digitals/profile_core.h"
+#include "src/digitals/digitals_run.h"
 #include "src/digitals/wait_query.h"
 #include "src/serial/speeds.h"
 #include "src/storage/storage.h"
@@ -91,6 +92,7 @@ int main(void) {
 
 	InitDisplay();
 
+    InitDevices();
     InitWaitQuery();
 
     InitSerial0();
