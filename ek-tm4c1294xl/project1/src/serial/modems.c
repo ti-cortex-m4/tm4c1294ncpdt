@@ -5,12 +5,19 @@ MODEMS.C
 ------------------------------------------------------------------------------*/
 
 #include    "../main.h"
+#include    "../memory/mem_digitals.h"
 #include    "../display/display.h"
+#include    "../keyboard/keyboard.h"
+#include    "../keyboard/key_timedate.h"
 #include    "../time/delay.h"
+#include    "../serial/ports.h"
 #include    "../serial/ports_stack.h"
 #include    "../serial/ports_common.h"
 #include    "../serial/ports_devices.h"
 #include    "../serial/ports_modems.h"
+#include    "../serial/speeds_display.h"
+#include    "../digitals/digitals.h"
+#include    "../digitals/digitals_pause.h"
 
 
 
@@ -36,29 +43,54 @@ static char const       szBaud[]        = "   модем ...    ",
 
 
 
+// принудительный разрыв connect при действии/бездействии клавиатуры
+void    KeyBreakConnect(void)
+{
+  if (fConnect == 1)
+  {
+    ShowHi(szPause);
+    ShowLo(szModemStop);
+
+    fSlide = 0;
+    DelayMsg();
+  }
+  else Stop();
+
+  enKeyboard = KBD_BEGIN;
+  bProgram = 0; wProgram = 0;
+
+  fKeyOn = 1;
+  MakePause(DEV_MODEM_STOP);
+
+  if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_KEYBREAK);
+}
+
+
+
 uchar   GetModemAnswer(void)
 {
 uchar   i,j;
-       
+uchar   w;
+
   if ((IndexInBuff() >= 2) && (IndexInBuff() <= 4))
   {
-    wBuffD = 0;
+    w = 0;
     for (i=0; i<IndexInBuff()-1; i++)
     {
       j = InBuff(i);
       if ((j >= '0') && (j <= '9'))
-        wBuffD = wBuffD*10 + ToChar(j);
+        w = w*10 + ToChar(j);
       else
       {
-        wBuffD = 0xFF;
+        w = 0xFF;
         break;
       }
     }
   }
-  else wBuffD = 0xFE;
+  else w = 0xFE;
 
-  if (wBuffD < 0x100)
-    return(wBuffD);
+  if (w < 0x100)
+    return(w);
   else
     return(0xFD);  
 }
@@ -143,7 +175,7 @@ void    QueryModemConnect(void)
 {
 uchar   i;
 
-  NoShowTime(0);
+  HideCurrentTime(0);
 
   InitPush(0);
 
@@ -173,7 +205,7 @@ uchar   i;
 
 bool    ShowModemConnect(void)
 {
-  fAlt = 0;
+  bool fAlt = 0;
 
   switch ( GetModemAnswer() ) 
   {
@@ -186,10 +218,10 @@ bool    ShowModemConnect(void)
 
     case 0xFF: 
     case 0xFE: 
-    case 0xFD: sprintf(szLo,"   ошибка: %bu   ", GetModemAnswer()); 
+    case 0xFD: Clear(); sprintf(szLo+3,"ошибка: %u", GetModemAnswer());
                                     break;
 
-    default:   sprintf(szLo," соединение: %bu ", GetModemAnswer());
+    default:   Clear(); sprintf(szLo+1,"соединение: %u", GetModemAnswer());
                fAlt = 1;            break;
   }
 
@@ -239,7 +271,7 @@ void    ModemDTROff(void)
 {
   ShowLo(szDTROff); //DelayInf();
 
-  DTROff();
+//  DTROff();
 }
 
 
@@ -378,7 +410,7 @@ bool    SafeConnect(void)
 #endif
 
   SaveDisplay();
-  fAlt = Connect();
+  bool fAlt = Connect();
   LoadDisplay();
 
 //  QueResult(bRES_CONNECT, (uchar)fAlt);
@@ -464,7 +496,7 @@ bool    SafeDisconnect(void)
 #endif
 
   SaveDisplay();
-  fAlt = Disconnect();
+  bool fAlt = Disconnect();
   LoadDisplay();
 
 //  QueResult(bRES_DISCONNECT, (uchar)fAlt);
@@ -508,7 +540,7 @@ void    DoneConnectQue(void)
 // требует установки diCurr
 bool    BreakConnect(void)
 {
-  fAlt = ((diLast.ibPort != diCurr.ibPort) || (diLast.ibPhone != diCurr.ibPhone)); 
+	bool fAlt = ((diLast.ibPort != diCurr.ibPort) || (diLast.ibPhone != diCurr.ibPhone));
 
   if (fAlt == 1)
   {
@@ -551,7 +583,7 @@ bool    LoadConnect(uchar  ibCanal)
       if (NeedDisconnect() == 1)
       {
         diNext = diCurr; diCurr = diLast;
-        fAlt = SafeDisconnect();
+        bool fAlt = SafeDisconnect();
         diCurr = diNext;
 
         if (fAlt == 0) { ShowLo(szNoDisconnect); InitConnect(); return(0); }

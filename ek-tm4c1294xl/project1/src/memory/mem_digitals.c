@@ -64,3 +64,14 @@ boolean                 boHideMessages;
 
 // массив признаков для исключения повторного опроса каналов, принадлежащих одному цифорвому счётчику
 uchar                   mpboReadyCan[bCANALS];
+
+
+
+// счётчики для контроля работы модемной связи
+uint                    mpcwBaud[bPORTS],
+                        mpcwCommon[bPORTS],
+                        mpcwCustom[bPORTS],
+                        mpcwConnect[bPORTS],
+                        mpcwEscape[bPORTS],
+                        mpcwHookOff[bPORTS],
+                        mpcwDTROff[bPORTS];

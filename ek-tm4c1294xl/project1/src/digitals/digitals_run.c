@@ -36,30 +36,6 @@ bit                     fKeyOn;
 
 // признак коррекции времени при опросе цифровых счётчиков
 bit                     fCurrCtrlHou;
-
-
-
-// принудительный разрыв connect при действии/бездействии клавиатуры
-void    KeyBreakConnect(void)
-{
-  if (fConnect == 1)
-  {
-    ShowHi(szPause);
-    ShowLo(szModemStop);
-
-    fSlide = 0;
-    DelayMsg();
-  }
-  else Stop();  
-
-  enKeyboard = KBD_BEGIN;
-  bProgram = 0; wProgram = 0;
-
-  fKeyOn = 1;
-  MakePause(DEV_MODEM_STOP);
-
-  if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_KEYBREAK);
-}
 */
 
 

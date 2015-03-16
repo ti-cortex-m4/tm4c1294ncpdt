@@ -45,3 +45,13 @@ extern  boolean                 boHideMessages;
 
 
 extern  uchar                   mpboReadyCan[bCANALS];
+
+
+
+extern  uint                    mpcwBaud[bPORTS],
+                                mpcwCommon[bPORTS],
+                                mpcwCustom[bPORTS],
+                                mpcwConnect[bPORTS],
+                                mpcwEscape[bPORTS],
+                                mpcwHookOff[bPORTS],
+                                mpcwDTROff[bPORTS];
