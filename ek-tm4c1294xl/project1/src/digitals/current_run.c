@@ -52,7 +52,7 @@ bool    StartCurrent(uchar  ibCanal)
         {
           ShowHi(szClear);
           sprintf(szHi,"Канал: %-2u",ibDig+1);
-          ShowLo(szDisabledCan); if (boHideMessages == FALSE) Delay(300);
+          //TODO ShowLo(szDisabledCan); if (boHideMessages == FALSE) Delay(300);
         }
         else break;
       }

@@ -87,5 +87,14 @@ void    ResponseCRC(void) {
 void    ResponseCRC_Full(void) {
   ibPort = 0;
   ResponseCRC();
+
+  ibPort = 1;
+  ResponseCRC();
+
+  ibPort = 2;
+  ResponseCRC();
+
+  ibPort = 3;
+  ResponseCRC();
 }
 

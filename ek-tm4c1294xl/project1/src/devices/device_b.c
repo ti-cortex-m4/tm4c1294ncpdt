@@ -178,10 +178,10 @@ uchar   i;
 
   for (i=0; i<4; i++)
   {
-    coEnergy.mpbBuff[1] = PopChar();
-    coEnergy.mpbBuff[0] = PopChar();
-    coEnergy.mpbBuff[3] = PopChar();
     coEnergy.mpbBuff[2] = PopChar();
+    coEnergy.mpbBuff[3] = PopChar();
+    coEnergy.mpbBuff[0] = PopChar();
+    coEnergy.mpbBuff[1] = PopChar();
 
     if ((coEnergy.mpbBuff[0] == 0xFF) &&
         (coEnergy.mpbBuff[1] == 0xFF) &&
