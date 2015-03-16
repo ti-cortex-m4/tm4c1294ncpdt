@@ -16,7 +16,7 @@ extern  phone                   mpphKeys[bCANALS];
 
 
 
-extern  digital                 diPrev, diCurr;
+extern  digital                 diPrev, diCurr, diNext, diLast;
 
 
 

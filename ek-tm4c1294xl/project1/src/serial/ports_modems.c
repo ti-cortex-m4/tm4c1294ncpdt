@@ -12,7 +12,8 @@ PORTS_MODEMS.H
 #include        "../digitals/wait_query.h"
 #include        "../digitals/digitals_pause.h"
 #include        "../digitals/digitals_status.h"
-#include        "../serial/ports_modems.h"
+#include        "ports_modems.h"
+#include        "modems.h"
 #include        "ports.h"
 
 

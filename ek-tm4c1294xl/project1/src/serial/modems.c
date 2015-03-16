@@ -10,14 +10,17 @@ MODEMS.C
 #include    "../keyboard/keyboard.h"
 #include    "../keyboard/key_timedate.h"
 #include    "../time/delay.h"
-#include    "../serial/ports.h"
-#include    "../serial/ports_stack.h"
-#include    "../serial/ports_common.h"
-#include    "../serial/ports_devices.h"
-#include    "../serial/ports_modems.h"
-#include    "../serial/speeds_display.h"
+#include    "../flash/records.h"
 #include    "../digitals/digitals.h"
 #include    "../digitals/digitals_pause.h"
+#include    "../digitals/digitals_run.h"
+#include    "../digitals/digitals_messages.h"
+#include    "ports.h"
+#include    "ports_stack.h"
+#include    "ports_common.h"
+#include    "ports_devices.h"
+#include    "ports_modems.h"
+#include    "speeds_display.h"
 
 
 
@@ -280,7 +283,7 @@ void    Local(void)
 {
   if (mpSerial[ibPort] == SER_LOCAL)
   {
-    if (mpboLocalDisable[ibPort] == boTrue)
+    if (mpboLocalDisable[ibPort] == TRUE)
       mpSerial[ibPort] = SER_BEGIN;
     else
     {
@@ -310,7 +313,7 @@ uchar   i;
   if (StreamPort(diCurr.ibPort) == 0) return(0);
   if (diCurr.ibPhone == 0) return(1); 
 
-  if (mpboEnblCan[ibDig] == boFalse) { ShowLo(szBlockingAll); DelayInf(); return(1); }
+  if (mpboEnblCan[ibDig] == FALSE) { ShowLo(szBlockingAll); DelayInf(); return(1); }
 
   ShowPort(diCurr.ibPort);
   ShowLo(szConnect); DelayInf();
@@ -361,7 +364,7 @@ uchar   i;
   ShowLo(szCommonOK); DelayInf(); mpcwCommon[diCurr.ibPort]++;
 
 
-  if (boCustomModem == boTrue)
+  if (boCustomModem == TRUE)
   {
     for (i=0; i<bMINORREPEATS; i++)
     {

@@ -25,7 +25,7 @@ phone                   mpphKeys[bCANALS];
 
 
 // цифровой счётчики
-digital                 diPrev, diCurr;
+digital                 diPrev, diCurr, diNext, diLast;
 
 
 

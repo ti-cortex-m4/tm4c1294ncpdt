@@ -9,12 +9,11 @@ MESSAGES_DIGITALS.C
 
 
 //                                         0123456789ABCDEF
-char const
-//                        szBaudOK[]      = "   модем: OK    ",
-//                        szCommonOK[]    = " настройки 1: OK",
-//                        szCustomOK[]    = " настройки 2: OK",
-//                        szEscapeOK[]    = "     +++: OK    ",
-//                        szHookOffOK[]   = " отключение: OK ",
+char const              szBaudOK[]      = "   модем: OK    ",
+                        szCommonOK[]    = " настройки 1: OK",
+                        szCustomOK[]    = " настройки 2: OK",
+                        szEscapeOK[]    = "     +++: OK    ",
+                        szHookOffOK[]   = " отключение: OK ",
 //                        szOpen[]        = " вызов ...      ",
 //                        szOpenOK[]      = " вызов: OK      ",
 //                        szRepeats[]     = " повтор   ...   ",
