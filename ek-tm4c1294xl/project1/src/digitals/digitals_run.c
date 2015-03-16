@@ -6,91 +6,13 @@ DIGITALS_RUN.C
 
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
+#include        "../digitals/digitals_status.h"
+#include        "../digitals/wait_answer.h"
+#include        "../digitals/wait_query.h"
+#include        "../serial/ports.h"
+
+
 /*
-#include        "xdata.h"
-#include        "digitals2.h"
-#include        "label.h"
-#include        "programs.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "access.h"
-#include        "devices.h"
-#include        "devices_far.h"
-#include        "device_a.h"
-#include        "device_b.h"
-#include        "device_b2.h"
-#include        "device_b12.h"
-#include        "device_c.h"
-#include        "device_c2.h"
-#include        "device_d.h"
-#include        "device_d2.h"
-#include        "device_e.h"
-#include        "device_f.h"
-#include        "device_g.h"
-#include        "device_h.h"
-#include        "device_i.h"
-#include        "device_k.h"
-#include        "device_m.h"
-#include        "device_n.h"
-#include        "device_o.h"
-#include        "device_p.h"
-#include        "device_q.h"
-#include        "device_r.h"
-#include        "device_s.h"
-#include        "device_t.h"
-#include        "device_u.h"
-#include        "device_u2.h"
-#include        "device_z.h"
-#include        "decompress_c.h"
-#include        "decompress_g.h"
-#include        "decompress_k.h"
-#include        "decompress_s.h"
-#include        "beep.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "crc-16.h"
-#include        "rtc.h"
-#include        "nexttime.h"
-#include        "timedate.h"
-#include        "delay.h"
-#include        "display.h"
-#include        "defects.h"
-#include        "essential.h"
-#include        "ports.h"
-#include        "status.h"
-#include        "pause.h"
-#include        "sensors.h"
-#include        "modems.h"
-#include        "speed.h"
-#include        "hours.h"
-#include        "c_digitals.h"
-#include        "log.h"
-#include        "limits.h"
-#include        "groups.h"
-#include        "decret.h"
-#include        "flow.h"
-#include        "info.h"
-#include        "contacts.h"
-#include        "current.h"
-#include        "record.h"
-#include        "dtr.h"
-#include        "recalc_cust.h"
-#include        "calc3.h"
-#include        "extended_3.h"
-#include        "extended_4.h"
-#include        "extended_4t.h"
-#include        "extended_5.h"
-#include        "phones2.h"
-#include        "answer_flag.h"
-#include        "max_repeats.h"
-#include        "checkup_loader.h"
-#include        "checkup.h"
-#include        "checkup_b.h"
-#include        "checkup_c.h"
-#include        "_timedate.h"
-
-
-
 // счётчик повторов
 uchar           data    cbRepeat;
 
@@ -105,6 +27,9 @@ extended                exExtended;
 
 // признак нахождени в режимах connect модема
 bool                    fConnect;
+
+// счетчик
+uchar                   cbWaitOnline;
 /*
 // признак разрыва соединеия при нажатии кнопки
 bit                     fKeyOn;
@@ -156,28 +81,20 @@ void    InitDevices(void)
 //    for (i=0; i<bCANALS; i++)
 //      for (j=0; j<6; j++) mpreEngFracDigCan[i][j] = 0;
 //  }
-//
-//  SetCurr(DEV_BEGIN);
-//  SetPause(DEV_BEGIN);
-//
-//  InitWaitAnswer();
-//  cbWaitOnline = 0;
-//
+
+  SetCurr(DEV_BEGIN);
+  SetPause(DEV_BEGIN);
+
+  InitWaitAnswer();
+  InitWaitQuery();
+  cbWaitOnline = 0;
+
 //  InitConnectKey();
-//  InfoBegin();
-//
-//  ibPortPause = 0xFF;
+
+  ibPortPause = 0xFF;
 //  EnableAnswer();
-//
-//  InitDeviceR();
+
 //  InitMaxRepeats();
-//  InitCurrent2();
-//
-//  InitExtended4();
-//  InitExtended4T();
-//
-//  if ((bPlcUSize < 1) || (bPlcUSize > 8)) bPlcUSize = 6;
-//  if ((wPlcUShutdown < 10) || (wPlcUShutdown > 500)) wPlcUShutdown = 100;
 }
 
 
