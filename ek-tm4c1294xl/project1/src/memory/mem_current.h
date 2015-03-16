@@ -17,3 +17,12 @@ extern  uint                    mpwTrue[bCANALS],
                                 mpwMore[bCANALS],
                                 mpwLess[bCANALS],
                                 mpwRepeat[bCANALS];
+
+
+
+extern  uint                    mpwMore100[bCANALS],
+                                mpwMore1000[bCANALS],
+                                mpwMore10000[bCANALS];
+
+extern  time                    mptiBaseOK[bCANALS],
+                                mptiBaseError[bCANALS];

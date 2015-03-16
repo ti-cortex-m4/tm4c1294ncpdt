@@ -26,3 +26,14 @@ uint                    mpwTrue[bCANALS],
                         mpwMore[bCANALS],
                         mpwLess[bCANALS],
                         mpwRepeat[bCANALS];
+
+
+
+// массивы вспомогательных переменных
+uint                    mpwMore100[bCANALS],
+                        mpwMore1000[bCANALS],
+                        mpwMore10000[bCANALS];
+
+// массивы вспомогательных переменных
+time                    mptiBaseOK[bCANALS],
+                        mptiBaseError[bCANALS];
