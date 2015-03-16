@@ -5,6 +5,12 @@ MODEMS.C
 ------------------------------------------------------------------------------*/
 
 #include    "../main.h"
+#include    "../display/display.h"
+#include    "../time/delay.h"
+#include    "../serial/ports_stack.h"
+#include    "../serial/ports_common.h"
+#include    "../serial/ports_devices.h"
+#include    "../serial/ports_modems.h"
 
 
 
@@ -63,7 +69,7 @@ void    QueryModemBaud(bool fShow)
 {
   if (fShow == 1) ShowLo(szBaud); 
 
-  InitPush();
+  InitPush(0);
 
   PushChar('A');
   PushChar('T');
@@ -79,7 +85,7 @@ void    QueryModemCommon(bool fShow)
 {
   if (fShow == 1) ShowLo(szCommon); 
 
-  InitPush();
+  InitPush(0);
 
   PushChar('A');
   PushChar('T');
@@ -101,7 +107,7 @@ void    QueryModemCustom(void)
 {
   ShowLo(szCustom); //DelayInf();
 
-  InitPush();
+  InitPush(0);
 
   PushChar('A');
   PushChar('T');
@@ -139,7 +145,7 @@ uchar   i;
 
   NoShowTime(0);
 
-  InitPush();
+  InitPush(0);
 
   PushChar('A');
   PushChar('T');
@@ -198,7 +204,7 @@ void    QueryModemEscape(void)
 
   Delay(1500);
 
-  InitPush();
+  InitPush(0);
 
   PushChar('+');
   PushChar('+');
@@ -214,7 +220,7 @@ void    QueryModemHookOff(void)
 {
   ShowLo(szHookOff); //DelayInf();
 
-  InitPush();
+  InitPush(0);
 
   PushChar('A');
   PushChar('T');
@@ -246,7 +252,7 @@ void    Local(void)
       mpSerial[ibPort] = SER_BEGIN;
     else
     {
-      InitPush();
+      InitPush(0);
 
       PushChar('O');
       PushChar('K');
