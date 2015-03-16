@@ -120,3 +120,17 @@ void    ShowDigital(uchar  ibCan)
   sprintf(szHi+14,"%02u",ibCan+1);
   (mpboEnblCan[ibCan]) ? (szHi[13] = '+') : (szHi[13] = '-');
 }
+
+
+void    ShowDigitalNumber(uchar  ibDig)
+{
+  ShowHi(szClear);
+  sprintf(szHi,"Канал: %-2u",ibDig+1);
+}
+
+
+void    ShowCanalNumber(uchar  ibCan)
+{
+  ShowHi(szClear);
+  sprintf(szHi,"Канал: %-2u",ibCan+1);
+}

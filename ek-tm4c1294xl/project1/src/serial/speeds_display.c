@@ -78,7 +78,7 @@ bool    StreamPort(uchar  ibPrt)
   {
     SaveDisplay();
 
-    Clear();
+    ShowHi(szClear);
     sprintf(szHi,"Порт %u: нужны",ibPrt+1);
     ShowLo(szMasters);
     DelayMsg();
@@ -140,7 +140,7 @@ void    ShowStreamPortCan(char const  *szT, uchar  ibPrt, uchar  ibCan)
   sprintf(szLo+4,"канала %u",ibCan+1);
   DelayMsg();
 
-  Clear();
+  ShowHi(szClear);
   sprintf(szHi,"Порт %u: нужны",ibPrt+1);
   ShowLo(szT);
   DelayMsg();
