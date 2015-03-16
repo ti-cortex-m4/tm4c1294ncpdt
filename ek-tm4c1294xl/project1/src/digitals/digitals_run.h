@@ -7,3 +7,7 @@ DIGITALS_RUN.H
 extern  uchar                   ibDig;
 
 extern  bool                    fConnect;
+
+
+
+void    InitDevices(void);

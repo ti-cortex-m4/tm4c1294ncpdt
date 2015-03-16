@@ -48,11 +48,17 @@ time                    tiChannelC;
 
 
 
-//
+// флаги разрешения опроса трехминутных и получасовых графиков
 boolean                 boEnblCurrent, boEnblProfile;
 
-//
+// таймайты начала опроса трехминутных и получасовых графиков
 uchar                   bTimeoutCurrent, bTimeoutProfile;
+
+// флаг раздельного опроса нескольких каналов одного цифрового счётчика
+boolean                 boSeparateCan;
+
+// флаг сокращенного вывода сообщений
+boolean                 boHideMessages;
 
 
 
