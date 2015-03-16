@@ -35,12 +35,12 @@ void    DTROff3(void) {
 
 
 void    InputMode3(void) {
-  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0100) = 0x0040;
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0100) = ~0x0040;
 }
 
 
 void    OutputMode3(void) {
-  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0100) = ~0x0040;
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0100) = 0x0040;
 }
 
 
