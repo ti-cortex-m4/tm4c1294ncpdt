@@ -4,20 +4,20 @@ KEY_PHONES.C
  Задание и просмотр номеров телефонов
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "programs.h"
+#include        "../../main.h"
+#include        "../../memory/mem_digitals.h"
+#include        "../../memory/mem_ports.h"
+#include        "../../display/display.h"
+#include        "../keyboard.h"
+#include        "../../digitals/phones.h"
+#include        "../../flash/files.h"
 
 
 
 //                                         0123456789ABCDEF
-uchar           code    szPhones[]      = "Телефоны        ",
+static char const       szPhones[]      = "Телефоны        ",
                         szMaskPhones[]  = "_____________";
-                      
+
 
 
 void    ShowPhones(void)
@@ -25,7 +25,7 @@ void    ShowPhones(void)
   Clear();
   strcpy(szLo, mpphPhones[ibX].szNumber);
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 }
 
 
@@ -60,7 +60,7 @@ void    key_SetPhones(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < bCANALS)
+      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         ShowPhones();
@@ -82,6 +82,7 @@ void    key_SetPhones(void)
 
         szLo[ibY] = 0;
         strcpy(&mpphPhones[ibX].szNumber,szLo);
+        SaveFile(&flPhones);
       }
 
       if (enKeyboard == KBD_POSTENTER)

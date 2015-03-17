@@ -179,6 +179,9 @@ PROGRAMS.H
 #define bSET_SUMMER                 124
 #define bSET_WINTER                 125
 
+#define bSET_PHONES                 180
+#define bSET_MAX_CONNECT            181
+
 #define bTEST_RESPONSE              220
 #define bTEST_IMPULSES              227
 #define bTEST_KEYS                  228

@@ -187,15 +187,15 @@ uchar   i;
   PushChar('D');
   PushChar('P');
 
-  phT = mpphPhones[diCurr.ibPhone - 1];
+  phone ph = mpphPhones[diCurr.ibPhone - 1];
 
   Clear();
-  strcpy(szLo, phT.szNumber);
+  strcpy(szLo, ph.szNumber);
 
   for (i=0; i<bPHONENUMBER; i++)
   {
-    if ( phT.szNumber[i] == 0 ) break;
-    PushChar( phT.szNumber[i] );
+    if ( ph.szNumber[i] == 0 ) break;
+    PushChar( ph.szNumber[i] );
   }
 
   PushChar('\r');
@@ -391,7 +391,7 @@ uchar   i;
     fConnect = 1;
     QueryModemConnect();
 
-    if ((ModInput(bConnect,1) == SER_POSTANSWER_MODEM) && (ShowModemConnect() == 1)) break;
+    if ((ModInput(bMaxConnect,1) == SER_POSTANSWER_MODEM) && (ShowModemConnect() == 1)) break;
     if (fKey == 1) return(0);
   }
 
