@@ -24,9 +24,9 @@ uchar   GetModemAnswer(void);
 //
 //bool    SafeConnect(void);
 //bool    SafeDisconnect(void);
-//
-//void    InitConnectKey(void);
-//
+
+void    InitConnectKey(void);
+
 //void    InitConnectQue(void);
 //void    DoneConnectQue(void);
 //
