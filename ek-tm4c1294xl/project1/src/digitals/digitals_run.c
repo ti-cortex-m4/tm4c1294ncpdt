@@ -30,13 +30,10 @@ bool                    fConnect;
 
 // счетчик
 uchar                   cbWaitOnline;
-/*
-// признак разрыва соединеия при нажатии кнопки
-bit                     fKeyOn;
 
-// признак коррекции времени при опросе цифровых счётчиков
-bit                     fCurrCtrlHou;
-*/
+// признак разрыва соединеия при нажатии кнопки
+bool                    fKeyOn;
+
 
 
 void    InitDevices(void)
