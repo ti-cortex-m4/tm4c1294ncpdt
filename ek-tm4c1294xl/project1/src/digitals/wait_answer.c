@@ -12,7 +12,7 @@ WAIT_ANSWER.C
 
 
 // счётчики секунд
-static uchar            cbWaitAnswer, cbWaitAnswerPrev;
+uchar                   cbWaitAnswer, cbWaitAnswerPrev;
 
 
 

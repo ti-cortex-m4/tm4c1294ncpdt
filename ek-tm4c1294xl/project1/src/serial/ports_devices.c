@@ -15,7 +15,10 @@ PORTS_DEVICES.H
 #include        "../isr/serial2.h"
 #include        "../isr/serial3.h"
 #include        "../crc-16.h"
+#include        "../display/display.h"
+#include        "../time/delay.h"
 #include        "ports.h"
+#include        "ports_devices.h"
 
 
 
@@ -84,4 +87,16 @@ serial  Input(void)
   }
 
   return( mpSerial[ibPort] );
+}
+
+
+
+void    TestResult(uchar  bT)
+{
+  if (bT != 0)
+  {
+    Clear();
+    sprintf(szLo+1,"код ответа: %02X ",bT);
+    DelayInf();
+  }
 }

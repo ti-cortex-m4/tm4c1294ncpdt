@@ -7,7 +7,7 @@ DEVICE_B.H
 #ifndef SKIP_B
 
 //bit     ReadAddressB(void);
-//bit     ReadResultB(void);
+bool    ReadResultB(void);
 
 void    QueryOpenB(void);
 
@@ -35,9 +35,9 @@ void    ReadTimeAltB(void);
 //void    QueryHeaderB_Plus(uchar  bSize);
 //bit     TestHeaderB(uchar  ibBlock);
 //bit     ReadHeaderB(uchar  ibBlock, bit  fDelay);
-//
-//void    ReadCurrentB(void);
-//
+
+void    ReadCurrentB(void);
+
 //bit     QueryOpenB_Full(uchar  bPercent);
 //bit     QueryTimeAltB_Full(uchar  bPercent);
 //bit     QueryEnergyB_Full(uchar  bTime, uchar  bPercent);

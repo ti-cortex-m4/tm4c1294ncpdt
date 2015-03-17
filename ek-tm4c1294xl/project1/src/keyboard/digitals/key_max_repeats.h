@@ -1,10 +1,7 @@
 /*------------------------------------------------------------------------------
-CURRENT_RUN.H
+_MAX_REPEATS.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    RunCurrent(void);
-void    NextCurrent(void);
-void    MakeCurrent(void);
-void    ErrorCurrent(void);
+void    key_SetMaxRepeats(void);

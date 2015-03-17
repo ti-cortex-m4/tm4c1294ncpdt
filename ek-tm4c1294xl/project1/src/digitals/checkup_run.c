@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PROFILE_RUN.C
+CHECKUP_RUN.C
 
 
 ------------------------------------------------------------------------------*/
@@ -23,22 +23,22 @@ PROFILE_RUN.C
 
 
 
-bool    StartProfile(uchar  ibCan)
+bool    StartCheckup(uchar  ibCan)
 {
   return(1);
 }
 
 
-void    RunProfile(void)
+void    RunCheckup(void)
 {
 }
 
 
-void    NextProfile(void)
+void    NextCheckup(void)
 {
 }
 
 
-void    ErrorProfile(void)
+void    ErrorCheckup(void)
 {
 }

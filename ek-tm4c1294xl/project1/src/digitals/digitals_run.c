@@ -18,6 +18,8 @@ DIGITALS_RUN.C
 #include        "../digitals/wait_query.h"
 #include        "../digitals/current_run.h"
 #include        "../digitals/profile_run.h"
+#include        "../digitals/checkup_run.h"
+#include        "../digitals/max_repeats.h"
 #include        "../devices/device_b.h"
 #include        "../serial/ports.h"
 #include        "../serial/ports_modems.h"
@@ -131,9 +133,9 @@ void    RunDevices(void)
       ShowHi(szManual); Clear();
 
       if (cbWaitOnline <= bMAXWAITONLINE)
-        sprintf(szLo,"  осталось: %bu c ",(uchar)(bMAXWAITONLINE-cbWaitOnline));
+        sprintf(szLo,"  осталось: %u c ",(uchar)(bMAXWAITONLINE-cbWaitOnline));
       else
-        sprintf(szLo,"окончились: %bu c ",(uchar)bMAXWAITONLINE);
+        sprintf(szLo,"окончились: %u c ",(uchar)bMAXWAITONLINE);
 
       DelayMsg();
       LoadDisplay();
@@ -152,7 +154,7 @@ void    RunDevices(void)
 
     case DEV_MODEM_CONNECT:
       cbWaitQuery = bMAXWAITQUERY;
-      sprintf(szLo+13,"%3bu",cbWaitAnswer); HideCurrentTime(1);
+      sprintf(szLo+13,"%3u",cbWaitAnswer); HideCurrentTime(1);
       break;
 
 #ifndef SKIP_E
@@ -842,7 +844,7 @@ void    RunDevices(void)
     case DEV_MODEM_CONNECT:
       if ((mpSerial[ibPort] == SER_POSTANSWER_MODEM) && (ShowModemConnect() == 1)) 
       {
-        ShowDigitalHi();
+        ShowDigitalNumber(ibDig);
 
         cbWaitOnline = 0;
 
@@ -896,7 +898,7 @@ void    RunDevices(void)
 
     case DEV_MODEM_STOP:
       if (fKeyOn == 0)
-        ShowDigitalHi();
+        ShowDigitalNumber(ibDig);
       else
         ShowHi(szManual);
 

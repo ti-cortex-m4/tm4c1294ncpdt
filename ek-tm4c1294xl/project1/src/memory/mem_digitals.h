@@ -45,3 +45,5 @@ extern  boolean                 boHideMessages;
 
 
 extern  uchar                   mpboReadyCan[bCANALS];
+
+extern  ulong                   mpdwBaseDig[bCHANNELS];
