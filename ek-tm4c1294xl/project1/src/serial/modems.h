@@ -8,18 +8,18 @@ void    KeyBreakConnect(void);
 
 uchar   GetModemAnswer(void);
 
-//void    QueryModemBaud(bool  fShow);
-//void    QueryModemCommon(bool  fShow);
-//void    QueryModemCustom(void);
-//void    QueryModemConnect(void);
-//
-//bool    ShowModemConnect(void);
-//
-//void    QueryModemEscape(void);
-//void    QueryModemHookOff(void);
-//
-//void    ModemDTROff(void);
-//
+void    QueryModemBaud(bool  fShow);
+void    QueryModemCommon(bool  fShow);
+void    QueryModemCustom(void);
+void    QueryModemConnect(void);
+
+bool    ShowModemConnect(void);
+
+void    QueryModemEscape(void);
+void    QueryModemHookOff(void);
+
+void    ModemDTROff(void);
+
 //void    Local(void);
 //
 //bool    SafeConnect(void);

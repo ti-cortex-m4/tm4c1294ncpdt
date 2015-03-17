@@ -411,7 +411,7 @@ bit     TestHeaderB(uchar  ibBlock)
 // чтение заголовка часового блока для счётчика Меркурий-230
 bit     ReadHeaderB(uchar  ibBlock, bit  fDelay)
 {
-  NoShowTime(1);                                        // запрещаем автоматическое отображение времени
+  HideCurrentTime(1);                                        // запрещаем автоматическое отображение времени
   
   tiDig.bHour   = FromBCD( InBuff((uint)2+ibBlock*18) );// время/дата часового блока
   tiDig.bMinute = FromBCD( InBuff((uint)3+ibBlock*18) );
