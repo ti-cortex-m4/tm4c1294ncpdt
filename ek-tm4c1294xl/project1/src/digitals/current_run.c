@@ -231,11 +231,11 @@ void    NextCurrent(void)
 }
 
 
-/*
+
 void    MakeCurrent(void)
 {
   ShowLo(szPowerOK); Delay(200);
-
+/*
   LoadCurrDigital(ibDig);
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
@@ -308,10 +308,10 @@ void    MakeCurrent(void)
       }
     }
   }
-
+(*/
   NextCurrent();
 }
-*/
+
 
 
 void    ErrorCurrent(void)

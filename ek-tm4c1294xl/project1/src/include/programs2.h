@@ -15,6 +15,7 @@ PROGRAMS2.H
 #define wGET_READTRANS        354
 #define wGET_READPULSE        355
 
+#define wSET_MAX_REPEATS      409
 
 #endif
 

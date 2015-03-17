@@ -9,6 +9,7 @@ KEYBOARD2.C
 #include        "keyboard.h"
 #include        "key_gaps_flag.h"
 #include        "key_gaps.h"
+#include        "digitals/key_max_repeats.h"
 
 
 
@@ -18,6 +19,8 @@ void    Keyboard2Program(void)
   {
     case wSET_GAPS_FLAG:      key_SetGapsFlag();        break;
     case wSET_GAPS:           key_SetGaps();            break;
+
+    case wSET_MAX_REPEATS:    key_SetMaxRepeats();      break;
 
     default:                  NoProgram2();             break;
   }
@@ -31,6 +34,8 @@ void    Keyboard2Work(void)
     case wSET_GAPS_FLAG:      key_SetGapsFlag();        break;
     case wSET_GAPS:           key_GetGaps();            break;
 
+    case wSET_MAX_REPEATS:    key_SetMaxRepeats();      break;
+
     default:                  NoProgram2();             break;
   }
 }
@@ -42,6 +47,8 @@ void    Keyboard2Reprogram(void)
   {
     case wSET_GAPS_FLAG:      key_SetGapsFlag();        break;
     case wSET_GAPS:           key_SetGaps();            break;
+
+    case wSET_MAX_REPEATS:    key_SetMaxRepeats();      break;
 
     default:                  NoProgram2();             break;
   }

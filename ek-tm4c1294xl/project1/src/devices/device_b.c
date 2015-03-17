@@ -1,57 +1,43 @@
 /*------------------------------------------------------------------------------
 DEVICE_B.C
-              
- 
+
+ Меркурий-230
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_factors.h"
 #include        "../display/lines.h"
 #include        "../time/timedate.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
+#include        "../serial/ports_common.h"
+#include        "../digitals/digitals_run.h"
+#include        "../digitals/current_run.h"
 #include        "../energy.h"
-/*
-#include        "xdata.h"
-#include        "display.h"
-#include        "lines.h"        
-#include        "timedate.h"
-#include        "delay.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "digitals.h"
-#include        "essential.h"
-#include        "essential2.h"
-#include        "ports.h"        
-#include        "display.h"        
-#include        "timer0.h"        
-#include        "limits.h"
-#include        "device_b2.h"
-#include        "record.h"
-#include        "_timedate.h"
 
 
 
 #ifndef SKIP_B
 
-// проверка сетевого адреса для счётчиков Меркурий-230
-bit     ReadAddressB(void)
+// проверка сетевого адреса
+bool    ReadAddressB(void)
 {
 //  return(InBuff(0) == diCurr.bAddress);
   return(1);
 }
 
 
-// проверка результата операции для счётчиков Меркурий-230
-bit     ReadResultB(void)
+// проверка результата операции
+bool    ReadResultB(void)
 {
   TestResult(InBuff(1));
   return(ReadAddressB() && (InBuff(1) == 0));
 }
-*/
 
 
-// открытие канала связи для счётчика Меркурий-230
+
+// открытие канала связи
 void    QueryOpenB(void)
 {
   InitPush(0);
@@ -92,7 +78,7 @@ void    QueryOpenB(void)
 
 
 /*
-// посылка запроса на чтение версии для счётчика Меркурий-230
+// посылка запроса на чтение версии
 void    QueryVersionB(void)
 {
   InitPush();
@@ -105,7 +91,7 @@ void    QueryVersionB(void)
 }
 
 
-// чтение версии для счётчика Меркурий-230
+// чтение версии
 void    ReadVersionB(void)
 {
   InitPop(1);
@@ -120,7 +106,7 @@ void    ReadVersionB(void)
 }
 
 
-// проверка версии для счётчика Меркурий-230: 7.1.0 и выше
+// проверка версии: 7.1.0 и выше
 bit     TestVersionB710(void)
 {
   return ((uint)100*bVersionB1 + 10*bVersionB2 + bVersionB3 >= 710);
@@ -128,7 +114,7 @@ bit     TestVersionB710(void)
 
 
 
-// посылка запроса на чтение логического номера для счётчика Меркурий-230
+// посылка запроса на чтение логического номера
 void    QueryIdB(void)
 {
   InitPush();
@@ -141,7 +127,7 @@ void    QueryIdB(void)
 }
 
 
-// чтение логического номера для счётчика Меркурий-230
+// чтение логического номера
 bit     ReadIdB(void)
 {
   InitPop(0);
@@ -154,7 +140,7 @@ bit     ReadIdB(void)
 */
 
 
-// посылка запроса на чтение энергии для счётчиков Меркурий-230
+// посылка запроса на чтение энергии
 void    QueryEnergyB(uchar  bTime)
 {
   InitPush(0);
@@ -169,7 +155,7 @@ void    QueryEnergyB(uchar  bTime)
 }
 
 
-// чтение энергии для счётчика Меркурий-230
+// чтение энергии
 void    ReadEnergyB(void)
 {
 uchar   i;
@@ -196,7 +182,7 @@ uchar   i;
 
 
 /*
-// посылка запроса на коррекцию времени для счётчика Меркурий-230
+// посылка запроса на коррекцию времени
 void    QueryControlB(void)
 {
   InitPush();
@@ -214,7 +200,7 @@ void    QueryControlB(void)
 
 
 / *
-// посылка запроса на установку времени для счётчика Меркурий-230
+// посылка запроса на установку времени
 void    QueryManageB(void)
 {
   InitPush();
@@ -242,7 +228,7 @@ void    QueryManageB(void)
 */
 
 
-// чтене времени/даты для счётчика Меркурий-230
+// чтене времени/даты
 void    QueryTimeB(void)
 {
   InitPush(0);
@@ -255,7 +241,7 @@ void    QueryTimeB(void)
 }
 
 
-// чтение времени/даты для счётчика Меркурий-230
+// чтение времени/даты
 void    ReadTimeAltB(void)
 {
   InitPop(1);
@@ -272,7 +258,7 @@ void    ReadTimeAltB(void)
 }
 
 /*
-// чтение времени/даты для счётчика Меркурий-230
+// чтение времени/даты
 void    ReadTimeDigB(void)
 {
   InitPop(1);
@@ -290,7 +276,7 @@ void    ReadTimeDigB(void)
 
 
 
-// посылка запроса на чтение вершины массива для счётчика Меркурий-230
+// посылка запроса на чтение вершины массива
 void    QueryTopB(void)
 {
   InitPush();
@@ -303,7 +289,7 @@ void    QueryTopB(void)
 }
 
 
-// чтение вершины массива для счётчика Меркурий-230
+// чтение вершины массива
 void    ReadTopBOld(void)
 { 
   // адрес обрабатываемого блока
@@ -347,7 +333,7 @@ void    ReadTopBOld(void)
 
 
 
-// посылка запроса на чтение заголовка часового блока для счётчика Меркурий-230
+// посылка запроса на чтение заголовка часового блока
 void    QueryHeaderB(void)
 {
   InitPush();
@@ -365,7 +351,7 @@ void    QueryHeaderB(void)
 }
 
 
-// посылка запроса на чтение заголовка часового блока для счётчика Меркурий-230
+// посылка запроса на чтение заголовка часового блока
 void    QueryHeaderB_Plus(uchar  bSize)
 {
   ShowLo(szWaiting); 
@@ -408,7 +394,7 @@ bit     TestHeaderB(uchar  ibBlock)
 }
 
 
-// чтение заголовка часового блока для счётчика Меркурий-230
+// чтение заголовка часового блока
 bit     ReadHeaderB(uchar  ibBlock, bit  fDelay)
 {
   HideCurrentTime(1);                                        // запрещаем автоматическое отображение времени
@@ -502,26 +488,28 @@ bit     ReadHeaderB(uchar  ibBlock, bit  fDelay)
   if (boRefillDisable == boFalse) MakeRefill();
   return(MakeStopHou(0));  
 }
-
+*/
 
 
 void    ReadCurrentB(void)
 {
 uchar   i;
+ulong   dwBuffC;
+real    reBuffA;
 
   ReadEnergyB();
-  reBuffA = *PGetCanReal(mpreLevelDiv, ibDig);
+  reBuffA = GetCanReal(mpreLevelDiv, ibDig);
 
   for (i=0; i<4; i++)
   {
-    dwBuffC = *PGetCanLong(mpdwChannelsA, i) * reBuffA;
-    SetCanLong(mpdwBaseDig, i);
+    dwBuffC = GetCanLong(mpdwChannelsA, i) * reBuffA;
+    SetCanLong(mpdwBaseDig, i, &dwBuffC);
   }
 
   MakeCurrent();
 }
 
-
+/*
 bit     QueryIdB_Full(void)
 {
   for (x=0; x<bMINORREPEATS; x++)
@@ -564,7 +552,5 @@ uchar   i;
   ReadEnergyB();
   return(1);
 }
-
-#endif
 */
-
+#endif

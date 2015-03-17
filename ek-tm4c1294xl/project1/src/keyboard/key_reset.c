@@ -15,6 +15,7 @@ KEY_RESET.C
 #include        "../digitals/digitals.h"
 #include        "../digitals/profile_core.h"
 #include        "../digitals/phones.h"
+#include        "../digitals/max_repeats.h"
 #include        "../serial/speeds.h"
 #include        "../engine.h"
 #include        "../factors.h"
@@ -106,6 +107,7 @@ void    key_SetReset(void)
           ResetDigitals();
           ResetPhones();
           ResetProfile();
+          ResetMaxRepeats();
           ResetSpeeds();
 //          ResetSendAT();
 //          ResetPhones2();

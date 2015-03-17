@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------
-CURRENT_RUN.H
+CHECKUP_RUN.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    RunCurrent(void);
-void    NextCurrent(void);
-void    MakeCurrent(void);
-void    ErrorCurrent(void);
+void    RunCheckup(void);
+void    NextCheckup(void);
+void    ErrorCheckup(void);
