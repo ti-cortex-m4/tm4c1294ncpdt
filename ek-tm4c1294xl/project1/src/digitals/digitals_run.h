@@ -12,6 +12,8 @@ extern  bool                    fConnect;
 
 extern  uchar                   cbWaitOnline;
 
+extern  bool                    fKeyOn;
+
 
 
 void    InitDevices(void);
