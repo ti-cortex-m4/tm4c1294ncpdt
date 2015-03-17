@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-CURRENT_RUN.H
+PROFILE_RUN.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    RunCurrent(void);
-void    NextCurrent(void);
-void    ErrorCurrent(void);
+void    RunProfile(void);
+void    NextProfile(void);
+void    ErrorProfile(void);

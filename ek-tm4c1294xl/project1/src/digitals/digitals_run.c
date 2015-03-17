@@ -6,17 +6,32 @@ DIGITALS_RUN.C
 
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_phones.h"
+#include        "../display/display.h"
+#include        "../keyboard/keyboard.h"
+#include        "../keyboard/key_timedate.h"
+#include        "../digitals/digitals.h"
 #include        "../digitals/digitals_status.h"
+#include        "../digitals/digitals_pause.h"
+#include        "../digitals/digitals_messages.h"
 #include        "../digitals/wait_answer.h"
 #include        "../digitals/wait_query.h"
+#include        "../digitals/current_run.h"
+#include        "../digitals/profile_run.h"
+#include        "../devices/device_b.h"
 #include        "../serial/ports.h"
+#include        "../serial/ports_modems.h"
 #include        "../serial/modems.h"
+#include        "../serial/speeds_display.h"
+#include        "../flash/records.h"
+#include        "../time/delay.h"
+#include        "../crc-16.h"
 
 
-/*
+
 // счётчик повторов
-uchar           data    cbRepeat;
-
+uchar                   cbRepeat;
+/*
 // признак прекращения опроса профиля нагрузки
 bit                     fBreakRead;
 */
@@ -72,15 +87,15 @@ void    InitDevices(void)
 }
 
 
-/*
+
 void    ShowProgressRepeat(void)
 {
-  sprintf(szLo,"   повтор: %bu    ",cbRepeat); DelayInf();
-//  sprintf(szHi+14,"*%1bu",cbRepeat);
-//  ShowProgress(12,(ulong)100* /(bMINORREPEATS-1));
+  Clear();
+  sprintf(szLo+3,"повтор: %u",cbRepeat); DelayInf();
 }
 
 
+/*
 void    ShowProgressDigHou(void)
 {
 uint    i;
@@ -94,15 +109,18 @@ uint    i;
 */
 
 
+void    ErrorLink(void)
+{
+  ShowLo(szNoLink);
+  sprintf(szLo+14,"%2u",cbRepeat); DelayInf();
+}
+
+
 // базовая подпрограмма опроса цифоровых счётчиков
 void    RunDevices(void)
 {
-/*
-uchar   i,bT;
-
   LoadCurrDigital(ibDig);
   ibPort = diCurr.ibPort;
-
 
 
   if ((fConnect == 1) && (bProgram != 0))
@@ -134,13 +152,13 @@ uchar   i,bT;
 
     case DEV_MODEM_CONNECT:
       cbWaitQuery = bMAXWAITQUERY;
-      sprintf(szLo+13,"%3bu",cbWaitAnswer); NoShowTime(1);
+      sprintf(szLo+13,"%3bu",cbWaitAnswer); HideCurrentTime(1);
       break;
 
 #ifndef SKIP_E
     case DEV_ENERGY_E2:      
       cbWaitQuery = bMAXWAITQUERY;
-      sprintf(szLo+13,"%3bu",cbWaitAnswer); NoShowTime(1);
+      sprintf(szLo+13,"%3bu",cbWaitAnswer); HideCurrentTime(1);
       if (IndexInBuff() > 0) sprintf(szLo," прием: %-4u ",IndexInBuff());
       break;
 #endif
@@ -769,7 +787,7 @@ uchar   i,bT;
       break;
 
     case DEV_MODEM_POSTCOMMON:
-      if (boCustomModem == boTrue)
+      if (boCustomModem == TRUE)
         MakePause(DEV_MODEM_NORMAL);
       else
         MakePause(DEV_MODEM_POSTCUSTOM);
@@ -816,7 +834,7 @@ uchar   i,bT;
 
       fConnect = 1;
       QueryModemConnect();
-      MakeLongPause(DEV_MODEM_CONNECT,bConnect);
+      MakeLongPause(DEV_MODEM_CONNECT,bMaxConnect);
 
       AddModRecord(EVE_MODEMCONNECT);
       break;
@@ -846,7 +864,7 @@ uchar   i,bT;
 
           fConnect = 1;
           QueryModemConnect();
-          MakeLongPause(DEV_MODEM_CONNECT,bConnect);
+          MakeLongPause(DEV_MODEM_CONNECT, bMaxConnect);
 
           AddModRecord(EVE_MODEMCONNECT_NEXT);
         }
@@ -854,6 +872,7 @@ uchar   i,bT;
       break;
 
     case DEV_MODEM_POSTCONNECT:
+/*
       if (exExtended == EXT_PROFILE_30MIN)
       {
         MakeExtended1();
@@ -868,8 +887,8 @@ uchar   i,bT;
 
       if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == boTrue)) 
         MakeExtended2();
-
-      NoShowTime(1);
+*/
+      HideCurrentTime(1);
       MakePause(GetNext());
       break;
 
@@ -1016,7 +1035,7 @@ uchar   i,bT;
           NextCheckup();
       }
       break;
-
+/*
 #ifndef SKIP_B
 
     case DEV_START_B2:                     
@@ -1428,7 +1447,7 @@ uchar   i,bT;
       break;
 
 #endif
-
+*/
 #ifndef SKIP_B
 
     case DEV_START_B3:
@@ -1482,6 +1501,6 @@ uchar   i,bT;
 #endif
 
   }
-*/
+
 }
 
