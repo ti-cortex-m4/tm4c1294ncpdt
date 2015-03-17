@@ -45,17 +45,3 @@ extern  boolean                 boHideMessages;
 
 
 extern  uchar                   mpboReadyCan[bCANALS];
-
-
-
-extern  phone                   mpphPhones[bCANALS];
-
-extern  uchar                   bMaxConnect;
-
-extern  uint                    mpcwBaud[bPORTS],
-                                mpcwCommon[bPORTS],
-                                mpcwCustom[bPORTS],
-                                mpcwConnect[bPORTS],
-                                mpcwEscape[bPORTS],
-                                mpcwHookOff[bPORTS],
-                                mpcwDTROff[bPORTS];

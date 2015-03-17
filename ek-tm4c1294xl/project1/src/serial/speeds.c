@@ -158,6 +158,7 @@ void    InitSpeeds(void)
 uchar   p;
 
   LoadPorts();
+  LoadLocalDisable();
   LoadMajorInDelay();
   LoadMinorInDelay();
 
@@ -194,10 +195,12 @@ uchar   p;
     mppoPorts[p].ibParity = 0;
 
     SetDefaultDelay(p);
+		mpboLocalDisable[p] = FALSE;
     SetCorrectLimit(p);
   }
 
   SavePorts();
+  SaveLocalDisable();
   SaveMajorInDelay();
   SaveMinorInDelay();
 }

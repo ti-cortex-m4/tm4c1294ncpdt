@@ -53,9 +53,7 @@ typedef enum
   FLS_GLOBAL            = FLS_PRIVATE + 1,
   FLS_LOGICAL           = FLS_GLOBAL + 1,
 
-  FLS_PORTS             = FLS_LOGICAL + 1,
-
-  FLS_GROUPS            = FLS_PORTS + 1,
+  FLS_GROUPS            = FLS_LOGICAL + 1,
 
   FLS_PUBLIC_TARIFFS    = FLS_GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1,
   FLS_TARIFFS_MODE      = FLS_PUBLIC_TARIFFS + 1,
@@ -110,7 +108,10 @@ typedef enum
 
   FLS_REALTIME          = FLS_PTRMON + 1,
 
-  FLS_MAJOR_IN_DELAY    = FLS_REALTIME + 1,
+  FLS_PORTS             = FLS_REALTIME + 1,
+  FLS_LOCAL_DISABLE     = FLS_PORTS + 1,
+
+  FLS_MAJOR_IN_DELAY    = FLS_LOCAL_DISABLE + 1,
   FLS_MINOR_IN_DELAY    = FLS_MAJOR_IN_DELAY + 1,
 
   FLS_DIGITALS          = FLS_MINOR_IN_DELAY + 1,
