@@ -4,7 +4,6 @@ KEY_ENBL_CANALS.Ñ
 
 ------------------------------------------------------------------------------*/
 
-
 #include        "../../main.h"
 #include        "../../memory/mem_digitals.h"
 #include        "../../memory/mem_ports.h"
