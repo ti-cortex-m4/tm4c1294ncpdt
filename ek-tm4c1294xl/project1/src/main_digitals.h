@@ -20,7 +20,7 @@ typedef struct
 
 
 
-// тип 'телефона'
+// тип 'номер телефона'
 typedef struct
 {
   uchar         szNumber[bPHONENUMBER+1];

@@ -46,6 +46,7 @@ TODO .C
 #include "src/digitals/profile_core.h"
 #include "src/digitals/digitals_run.h"
 #include "src/serial/speeds.h"
+#include "src/serial/phones.h"
 #include "src/storage/storage.h"
 #include "src/time/decret.h"
 #include "src/realtime/realtime.h"
@@ -79,6 +80,7 @@ int main(void) {
 	InitGaps();             Delay(100); TestOK();
 	InitDecret();
 	InitDigitals();         Delay(100); TestOK();
+	InitPhones();
 	InitProfile();
 	InitSpeeds();
 

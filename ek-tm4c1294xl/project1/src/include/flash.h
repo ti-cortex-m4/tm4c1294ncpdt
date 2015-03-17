@@ -121,7 +121,10 @@ typedef enum
   FLS_TIMEOUT_CURRENT   = FLS_ENBL_PROFILE + 1,
   FLS_TIMEOUT_PROFILE   = FLS_TIMEOUT_CURRENT + 1,
 
-  FLS_END               = FLS_TIMEOUT_PROFILE + 1
+  FLS_PHONES            = FLS_TIMEOUT_PROFILE + 1,
+  FLS_MAX_CONNECT       = FLS_PHONES + sizeof(phone)*bCANALS/wFREEPAGE_SIZE + 1,
+
+  FLS_END               = FLS_MAX_CONNECT + 1
 } flash;
 
 

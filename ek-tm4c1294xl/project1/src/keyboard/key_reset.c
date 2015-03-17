@@ -15,6 +15,7 @@ KEY_RESET.C
 #include        "../digitals/digitals.h"
 #include        "../digitals/profile_core.h"
 #include        "../serial/speeds.h"
+#include        "../serial/phones.h"
 #include        "../engine.h"
 #include        "../factors.h"
 #include        "../settings.h"
@@ -103,10 +104,10 @@ void    key_SetReset(void)
           ResetRelaxs();
           ResetGaps();
           ResetDigitals();
+          ResetPhones();
           ResetProfile();
           ResetSpeeds();
 //          ResetSendAT();
-//          ResetPhones();
 //          ResetPhones2();
 //          ResetParams();
 //          ResetGPS();
