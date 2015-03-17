@@ -10,6 +10,7 @@ DIGITALS_RUN.C
 #include        "../digitals/wait_answer.h"
 #include        "../digitals/wait_query.h"
 #include        "../serial/ports.h"
+#include        "../serial/modems.h"
 
 
 /*
@@ -62,7 +63,7 @@ void    InitDevices(void)
   InitWaitQuery();
   cbWaitOnline = 0;
 
-//  InitConnectKey();
+  InitConnectKey();
 
   ibPortPause = 0xFF;
 //  EnableAnswer();
@@ -132,13 +133,13 @@ uchar   i,bT;
 #endif
 
     case DEV_MODEM_CONNECT:
-      cbWaitQuery = bWAITQUERY;
+      cbWaitQuery = bMAXWAITQUERY;
       sprintf(szLo+13,"%3bu",cbWaitAnswer); NoShowTime(1);
       break;
 
 #ifndef SKIP_E
     case DEV_ENERGY_E2:      
-      cbWaitQuery = bWAITQUERY;
+      cbWaitQuery = bMAXWAITQUERY;
       sprintf(szLo+13,"%3bu",cbWaitAnswer); NoShowTime(1);
       if (IndexInBuff() > 0) sprintf(szLo," прием: %-4u ",IndexInBuff());
       break;

@@ -129,6 +129,10 @@ PROGRAMS.H
 
 #define bGET_PROGRAM73              73
 #define bGET_PROGRAM74              74
+#define bGET_CNTCANYEAR1            79
+#define bGET_CNTCANYEAR10           49
+#define bGET_CNTCANYEAR2            78
+#define bGET_CNTCANYEAR20           48
 
 #define bGET_POWCANCURRMNT          120
 
@@ -181,6 +185,8 @@ PROGRAMS.H
 
 #define bSET_PHONES                 180
 #define bSET_MAX_CONNECT            181
+
+#define bGET_STREAM                 216
 
 #define bTEST_RESPONSE              220
 #define bTEST_IMPULSES              227

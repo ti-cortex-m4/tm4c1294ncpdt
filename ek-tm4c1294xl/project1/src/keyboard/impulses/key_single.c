@@ -11,6 +11,7 @@ KEY_SINGLE.C
 #include        "../../display/display.h"
 #include        "../../realtime/realtime.h"
 #include        "../../digitals/digitals.h"
+#include        "../../serial/modems.h"
 #include        "../../engine.h"
 #include        "../../energy.h"
 #include        "../../energy2.h"
@@ -345,7 +346,7 @@ void    key_GetSingle(item  it)
       enKeyboard = KBD_INPUT1;
       ShowItemName(it);
 
-//    TODO  InitConnectKey();
+      InitConnectKey();
 
       switch (bProgram)
       {

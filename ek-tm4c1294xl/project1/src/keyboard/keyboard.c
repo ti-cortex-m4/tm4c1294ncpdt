@@ -10,10 +10,16 @@ KEYBOARD.C
 #include        "../memory/mem_realtime.h"
 #include        "../display/display.h"
 #include        "../beep.h"
+#include        "../realtime/realtime.h"
 #include        "../time/delay.h"
 #include        "../serial/print.h"
+#include        "../serial/modems.h"
 #include        "../include/programs.h"
+#include        "../include/programs2.h"
 #include        "../impulses/impulses.h"
+#include        "../digitals/digitals_status.h"
+#include        "../digitals/digitals_run.h"
+#include        "../digitals/wait_query.h"
 #include        "keyboard_auto.h"
 #include        "keyboard_key.h"
 #include        "key_timedate.h"
@@ -171,6 +177,46 @@ uchar   i;
 
   // обнуляем счётчик вызова программы по умолчанию
   cbShowCurrentTime = 0;
+
+  // разрешаем оставаться в режиме connect на следующие паузу bMAXWAITONLINE
+  cbWaitOnline = 0;
+
+  // останавливаем опрос цифровых счётчиков
+  if ((fConnect == 1) || (GetCurr() != DEV_BEGIN))
+  {
+//    if (bKey != bKEY_PROGRAM) return;
+
+    if (((bProgram != bGET_READTIMEDATE1) &&
+         (bProgram != bGET_READTIMEDATE2) &&
+         (wProgram != wGET_READTRANS)     &&
+         (wProgram != wGET_READPULSE)     &&
+         (bProgram != bGET_STREAM)        &&
+         (bProgram != bGET_CNTCANYEAR1)   &&
+         (bProgram != bGET_CNTCANYEAR10)  &&
+//         (bProgram != bGET_CNTCANYEAR2)   &&
+//         (bProgram != bGET_CNTCANYEAR20)  &&
+         (bProgram != bGET_CNTCURR_10)    &&
+         (bProgram != bGET_CNTCURR_110))  || (bKey == bKEY_PROGRAM))
+    {
+      SetCurr(DEV_BEGIN);
+      SetPause(DEV_BEGIN);
+
+//      if (IsOpenSpecial()) { InfoBreak(); CloseSpecial(); Stop(); }
+//      boOpenCalc = boFalse;
+//      AddDigRecord(EVE_SPECIALCLOSE);
+
+      KeyBreakConnect();
+//      EnableAnswer();
+      return;
+    }
+  }
+
+  // останавливаем опрос цифровых счётчиков
+  if (fCurrent == 1)
+  {
+    SetCurr(DEV_BEGIN);
+    if (cbWaitQuery == 0) cbWaitQuery = bMAXWAITQUERY;
+  }
 
   // перед вызовом программы необходимо нажать кнопку 'Программа'
   if ((enKeyboard == KBD_BEGIN) && (bKey != bKEY_PROGRAM))
