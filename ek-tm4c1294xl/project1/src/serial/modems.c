@@ -5,7 +5,9 @@ MODEMS.C
 ------------------------------------------------------------------------------*/
 
 #include    "../main.h"
+#include    "../memory/mem_ports.h"
 #include    "../memory/mem_digitals.h"
+#include    "../memory/mem_phones.h"
 #include    "../display/display.h"
 #include    "../keyboard/keyboard.h"
 #include    "../keyboard/key_timedate.h"

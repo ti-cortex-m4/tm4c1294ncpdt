@@ -5,7 +5,7 @@ PHONES.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../memory/mem_digitals.h"
+#include        "../memory/mem_phones.h"
 #include        "../flash/files.h"
 
 
@@ -19,16 +19,18 @@ void    InitPhones(void)
 {
   LoadFile(&flPhones);
   LoadFile(&flMaxConnect);
+
+  boCustomModem = FALSE;
 }
 
 
 
 void    ResetPhones(void)
 {
-uchar   i;
+uchar   c;
 
-  for (i=0; i<bCANALS; i++)
-    strcpy(&mpphPhones[i].szNumber, "0");
+  for (c=0; c<bCANALS; c++)
+    strcpy((char *)mpphPhones[c].szNumber, "0");
 
   SaveFile(&flPhones);
 

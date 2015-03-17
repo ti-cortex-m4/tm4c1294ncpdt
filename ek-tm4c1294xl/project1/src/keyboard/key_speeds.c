@@ -10,6 +10,7 @@ KEY_SPEEDS.C
 #include        "../display/display.h"
 #include        "../serial/speeds.h"
 #include        "../serial/speeds_display.h"
+#include        "../serial/speeds_storage.h"
 
 
 
@@ -115,6 +116,7 @@ void    key_SetSpeeds(void)
           mpboLocalDisable[ibX] = TRUE;
           mpboLocal[ibX] = FALSE;
         }
+        SaveLocalDisable();
 
         ShowSpeeds(ibX,1);
       }  

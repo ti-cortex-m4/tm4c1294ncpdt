@@ -5,7 +5,7 @@ KEY_PHONES.C
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
+#include        "../../memory/mem_phones.h"
 #include        "../../memory/mem_ports.h"
 #include        "../../display/display.h"
 #include        "../keyboard.h"
@@ -81,7 +81,7 @@ void    key_SetPhones(void)
         enKeyboard = KBD_POSTENTER;
 
         szLo[ibY] = 0;
-        strcpy(&mpphPhones[ibX].szNumber,szLo);
+        strcpy((char *)mpphPhones[ibX].szNumber, szLo);
         SaveFile(&flPhones);
       }
 
