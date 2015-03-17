@@ -48,6 +48,10 @@ extern  uchar                   mpboReadyCan[bCANALS];
 
 
 
+extern  phone                   mpphPhones[bCANALS];
+
+extern  uchar                   bMaxConnect;
+
 extern  uint                    mpcwBaud[bPORTS],
                                 mpcwCommon[bPORTS],
                                 mpcwCustom[bPORTS],

@@ -67,6 +67,12 @@ uchar                   mpboReadyCan[bCANALS];
 
 
 
+// массив номеров телефонов
+phone                   mpphPhones[bCANALS];
+
+// максимальное время ожидания сигнала Connect
+uchar                   bMaxConnect;
+
 // счётчики для контроля работы модемной связи
 uint                    mpcwBaud[bPORTS],
                         mpcwCommon[bPORTS],
