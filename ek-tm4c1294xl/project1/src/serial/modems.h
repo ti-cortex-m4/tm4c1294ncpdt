@@ -29,6 +29,6 @@ void    InitConnectKey(void);
 
 //void    InitConnectQue(void);
 //void    DoneConnectQue(void);
-//
-//bool    LoadConnect(uchar  ibCanal);
-//void    SaveConnect(void);
+
+bool    LoadConnect(uchar  ibCanal);
+void    SaveConnect(void);

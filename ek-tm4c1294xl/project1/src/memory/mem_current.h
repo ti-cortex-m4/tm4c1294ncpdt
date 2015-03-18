@@ -12,6 +12,8 @@ extern  time                    mptiBase[bCANALS];
 
 extern  boolean                 mpboBase[bCANALS];
 
+extern  ulong                   mpdwBaseDig[bCHANNELS];
+
 extern  uint                    mpwTrue[bCANALS],
                                 mpwFalse[bCANALS],
                                 mpwMore[bCANALS],

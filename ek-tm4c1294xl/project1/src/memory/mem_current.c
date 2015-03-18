@@ -20,6 +20,9 @@ time                    mptiBase[bCANALS];
 // массив флагов установки базовых величин
 boolean                 mpboBase[bCANALS];
 
+// массив для хранения базовых значений всех каналов одного счетчика
+ulong                   mpdwBaseDig[bCHANNELS];
+
 // массивы вспомогательных переменных
 uint                    mpwTrue[bCANALS],
                         mpwFalse[bCANALS],
