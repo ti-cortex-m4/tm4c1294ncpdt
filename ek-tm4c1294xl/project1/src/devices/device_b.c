@@ -6,6 +6,7 @@ DEVICE_B.C
 
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_current.h"
 #include        "../memory/mem_factors.h"
 #include        "../display/lines.h"
 #include        "../time/timedate.h"

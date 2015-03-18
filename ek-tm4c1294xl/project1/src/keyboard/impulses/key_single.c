@@ -6,11 +6,14 @@ KEY_SINGLE.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_realtime.h"
+#include        "../../memory/mem_digitals.h"
 #include        "../../memory/mem_energy.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../realtime/realtime.h"
 #include        "../../digitals/digitals.h"
+#include        "../../digitals/digitals_messages.h"
+#include        "../../serial/ports.h"
 #include        "../../serial/modems.h"
 #include        "../../engine.h"
 #include        "../../energy.h"
@@ -151,21 +154,21 @@ void    ShowModemReadSensors(void)
 {
   if (GetDigitalDevice(ibX) == 0)
     ShowReal(GetCntCurrImp(ibX));
-//  else
-//  {
-//    LoadCurrDigital(ibX);
-//    ibPort = diCurr.ibPort;
-//
-//    if (LoadConnect(ibX) == 0) return;
-//    Clear();
-//
-//    if (mpboEnblCan[ibX] == false)
-//      ShowLo(szBlocking);
-//    else
+  else
+  {
+    LoadCurrDigital(ibX);
+    ibPort = diCurr.ibPort;
+
+    if (LoadConnect(ibX) == 0) return;
+    Clear();
+
+    if (mpboEnblCan[ibX] == false)
+      ShowLo(szBlocking);
+    else
       (ReadSensors(ibX) == 1) ? ShowReal(reBuffA) : Error();
-//
-//    SaveConnect();
-//  }
+
+    SaveConnect();
+  }
 }
 
 
@@ -175,20 +178,20 @@ void    ShowModemReadTimeDate(bool  fShowTimeDate)
 
   if (GetDigitalDevice(ibX) == 0)
     ShowLo(szNone);
-//  else
-//  {
-//    LoadCurrDigital(ibX);
-//    ibPort = diCurr.ibPort;
-//
-//    if (LoadConnect(ibX) == 0) return;
-//    Clear();
-//
-//    if (mpboEnblCan[ibX] == false)
-//    {
-//      sprintf(szHi+14,"%2bu",ibX+1);
-//      ShowLo(szBlocking);
-//    }
-//    else
+  else
+  {
+    LoadCurrDigital(ibX);
+    ibPort = diCurr.ibPort;
+
+    if (LoadConnect(ibX) == 0) return;
+    Clear();
+
+    if (mpboEnblCan[ibX] == false)
+    {
+      sprintf(szHi+14,"%2u",ibX+1);
+      ShowLo(szBlocking);
+    }
+    else
     if (ReadTimeDate(ibX) == 1)
     {
       sprintf(szHi+14,"%2u",ibX+1);
@@ -196,9 +199,9 @@ void    ShowModemReadTimeDate(bool  fShowTimeDate)
       (fShowTimeDate) ? ShowTimeDate(tiAlt) : ShowDeltaTime(tiAlt);
     }
     else Error();
-//
-//    SaveConnect();
-//  }
+
+    SaveConnect();
+  }
 }
 
 
