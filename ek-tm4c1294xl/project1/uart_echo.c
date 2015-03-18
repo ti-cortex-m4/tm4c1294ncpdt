@@ -47,7 +47,6 @@ TODO .C
 #include "src/digitals/profile_core.h"
 #include "src/digitals/digitals_run.h"
 #include "src/digitals/phones.h"
-#include "src/digitals/max_repeats.h"
 #include "src/serial/speeds.h"
 #include "src/storage/storage.h"
 #include "src/time/decret.h"
@@ -84,7 +83,6 @@ int main(void) {
 	InitDigitals();         Delay(100); TestOK();
 	InitPhones();
 	InitProfile();
-	InitMaxRepeats();
 	InitSpeeds();
 
 	InitSlide();

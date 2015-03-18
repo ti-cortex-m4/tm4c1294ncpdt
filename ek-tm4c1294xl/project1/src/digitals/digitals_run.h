@@ -17,4 +17,6 @@ extern  bool                    fKeyOn;
 
 
 void    InitDevices(void);
+void    ResetDevices(void);
+
 void    RunDevices(void);

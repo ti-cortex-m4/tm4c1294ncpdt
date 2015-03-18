@@ -80,12 +80,19 @@ void    InitDevices(void)
   InitWaitQuery();
   cbWaitOnline = 0;
 
+  fConnect = 0;
   InitConnectKey();
 
   ibPortPause = 0xFF;
 //  EnableAnswer();
 
-//  InitMaxRepeats();
+  InitMaxRepeats();
+}
+
+
+void    ResetDevices(void)
+{
+  ResetMaxRepeats();
 }
 
 

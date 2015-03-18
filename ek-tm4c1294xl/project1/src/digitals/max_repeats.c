@@ -19,7 +19,12 @@ file const              flMaxRepeats = {FLS_MAX_REPEATS, &bMaxRepeats, sizeof(uc
 void    InitMaxRepeats(void) 
 {
   LoadFile(&flMaxRepeats);
-  if ((bMaxRepeats <= 0) || (bMaxRepeats > 20)) bMaxRepeats = bMINORREPEATS;
+
+  if ((bMaxRepeats <= 0) || (bMaxRepeats > 20))
+  {
+    bMaxRepeats = bMINORREPEATS;
+    SaveFile(&flMaxRepeats);
+  }
 }
 
 
