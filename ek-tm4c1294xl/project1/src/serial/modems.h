@@ -20,8 +20,9 @@ void    QueryModemHookOff(void);
 
 void    ModemDTROff(void);
 
-//void    Local(void);
-//
+void    Local(void);
+void    RunLocal(void);
+
 //bool    SafeConnect(void);
 //bool    SafeDisconnect(void);
 

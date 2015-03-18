@@ -302,6 +302,21 @@ void    Local(void)
 }
 
 
+void    RunLocal(void)
+{
+  ibPort = 0;
+  Local();
+
+  ibPort = 1;
+  Local();
+
+  ibPort = 2;
+  Local();
+
+  ibPort = 3;
+  Local();
+}
+
 
 // соединение с каналом (требует установки diCurr)
 bool    Connect(void)
