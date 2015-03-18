@@ -15,6 +15,7 @@ KEY_SINGLE.C
 #include        "../../digitals/digitals_messages.h"
 #include        "../../serial/ports.h"
 #include        "../../serial/modems.h"
+#include        "../../serial/dtr.h"
 #include        "../../engine.h"
 #include        "../../energy.h"
 #include        "../../energy2.h"
@@ -436,7 +437,8 @@ void    key_GetSingle(item  it)
 
 
   else if (bKey == bKEY_MINUS)
-  {        
+  {
+    ResetDTR();
     if ((it == GROUPS) && (enKeyboard == KBD_POSTENTER))
     {
       if (++ibY >= 3) 
