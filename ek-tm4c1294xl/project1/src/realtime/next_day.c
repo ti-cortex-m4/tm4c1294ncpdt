@@ -13,6 +13,7 @@ NEXT_DAY.C
 #include        "../energy.h"
 #include        "../energy2.h"
 #include        "../energy3.h"
+#include        "../serial/answer.h"
 #include        "realtime_storage.h"
 
 
@@ -35,4 +36,6 @@ void    NextDay(void)
 
   memset(&mpimDayCan[ibSoftDay], 0, sizeof(impulse)*bCANALS);
   memset(&mppoDayGrp[ibSoftDay], 0, sizeof(power)*bGROUPS);
+
+  EnableAnswer();
 }

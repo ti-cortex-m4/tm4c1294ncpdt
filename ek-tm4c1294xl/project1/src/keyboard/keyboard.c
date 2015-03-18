@@ -14,6 +14,7 @@ KEYBOARD.C
 #include        "../time/delay.h"
 #include        "../serial/print.h"
 #include        "../serial/modems.h"
+#include        "../serial/answer.h"
 #include        "../include/programs.h"
 #include        "../include/programs2.h"
 #include        "../impulses/impulses.h"
@@ -206,7 +207,7 @@ uchar   i;
 //      AddDigRecord(EVE_SPECIALCLOSE);
 
       KeyBreakConnect();
-//      EnableAnswer();
+      EnableAnswer();
       return;
     }
   }
