@@ -33,6 +33,7 @@ TODO .C
 #include "src/isr/serial2.h"
 #include "src/isr/serial3.h"
 #include "src/uarts.h"
+#include "src/serial/modems.h"
 #include "src/serial/print.h"
 #include "src/settings.h"
 #include "src/impulses/impulses.h"
@@ -113,6 +114,7 @@ int main(void) {
     	RunRealtime();
     	RunKeyboard();
     	RunDevices();
+    	RunLocal();
     	RunResponseCRC_All();
     }
 }
