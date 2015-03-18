@@ -12,6 +12,7 @@ TODO атомарные операции
 #include        "../digitals/wait_query.h"
 #include        "../time/rtc.h"
 #include        "../health.h"
+#include        "../serial/dtr.h"
 #include        "../serial/print.h"
 #include        "next_second.h"
 #include        "next_minute1.h"
@@ -167,6 +168,10 @@ void    ProcessTime(void)
   // переход на следующий получас
   if ((tiCurr.bMinute % 30 == 0) && (tiPrev.bMinute % 30 != 0))
   {
+    if (fActive == 1) RunDTR();
+
+//    if (fActive == 1) fProfile = 1;
+
     if ((tiCurr.bDay   == tiSummer.bDay)   &&
         (tiCurr.bMonth == tiSummer.bMonth) &&
         (tiCurr.bHour  == 2)               && (fSeason == 0))

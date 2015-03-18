@@ -154,7 +154,9 @@ void    key_Start(void)
     enGlobal = GLB_WORK;  
     SaveGlobal();
 
-//    AddSysRecord(EVE_START);
+    AddSysRecord(EVE_START);
+
+//    if (boDTREnable == boTrue) DTROff_All();
   }
   else Beep();
 }
@@ -196,6 +198,8 @@ void    key_Restart(void)
     enGlobal = GLB_WORK;  
 
     AddSysRecord(EVE_RESTART);
+
+//    if (boDTREnable == boTrue) DTROff_All();
   }
   else Beep();
 }
@@ -232,6 +236,8 @@ void    key_Debug(void)
     MakeUsedNodes();
 
     OK();
+
+//    if (boDTREnable == boTrue) DTROff_All();
   }
   else Beep();
 }
