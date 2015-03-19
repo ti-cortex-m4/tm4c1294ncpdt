@@ -25,7 +25,7 @@ DIGITALS_RUN.C
 #include        "../serial/ports_modems.h"
 #include        "../serial/modems.h"
 #include        "../serial/speeds_display.h"
-#include        "../serial/answer.h"
+#include        "../digitals/answer.h"
 #include        "../flash/records.h"
 #include        "../time/delay.h"
 #include        "../crc-16.h"
