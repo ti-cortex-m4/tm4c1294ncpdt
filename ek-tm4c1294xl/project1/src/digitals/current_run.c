@@ -23,9 +23,9 @@ CURRENT_RUN.C
 
 
 
-bool    StartCurrent(uchar  ibCanal)
+bool    StartCurrent(uchar  ibCan)
 {
-  ibDig = ibCanal;
+  ibDig = ibCan;
 
   while (ibDig < bCANALS)
   {

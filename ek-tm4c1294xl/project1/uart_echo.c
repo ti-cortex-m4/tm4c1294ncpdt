@@ -94,6 +94,8 @@ int main(void) {
 
 	InitDisplay();
 
+//    InitCurrent();
+//    InitProfiles();
     InitDevices();
 
     InitSerial0();

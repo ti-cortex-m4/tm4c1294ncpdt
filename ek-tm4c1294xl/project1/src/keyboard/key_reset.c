@@ -107,8 +107,10 @@ void    key_SetReset(void)
           ResetDigitals();
           ResetPhones();
           ResetProfile();
-          ResetDevices();
           ResetSpeeds();
+//          ResetCurrent();
+//          ResetProfiles();
+          ResetDevices();
 //          ResetSendAT();
 //          ResetPhones2();
 //          ResetParams();
