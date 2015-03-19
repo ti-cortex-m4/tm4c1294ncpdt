@@ -7,6 +7,7 @@ CURRENT_RUN.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_energy.h"
 #include        "../memory/mem_current.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
@@ -21,6 +22,7 @@ CURRENT_RUN.C
 #include        "../keyboard/key_timedate.h"
 #include        "../time/timedate.h"
 #include        "../time/rtc.h"
+#include        "../energy2.h"
 
 
 
@@ -299,7 +301,10 @@ uchar   ibCan;
           mpwUnderflow[ibCan]++;
         else
         {
-//          mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dwImpulse;
+          LoadImpMnt((bMINUTES+ibHardMnt-1) % bMINUTES);
+          mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImpulse; // TODO bufferize
+          SaveImpMnt(0, (bMINUTES+ibHardMnt-1) % bMINUTES, PrevSoftMnt());
+
 //          MakeSpecCurrent();
         }
       }
