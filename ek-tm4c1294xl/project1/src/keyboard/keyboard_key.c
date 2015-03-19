@@ -22,6 +22,7 @@ KEYBOARD_KEY.C
 #include        "digitals/key_timeout_current.h"
 #include        "digitals/key_timeout_profile.h"
 #include        "digitals/key_phones.h"
+#include        "digitals/key_addresses.h"
 #include        "digitals/key_enbl_keys.h"
 #include        "digitals/key_keys.h"
 #include        "key_decret.h"
@@ -109,6 +110,7 @@ void    Keyboard_Key(void)
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
 
+      case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
 
@@ -183,6 +185,7 @@ void    Keyboard_Key(void)
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
 
+      case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
 
@@ -324,6 +327,7 @@ void    Keyboard_Key(void)
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
 
+      case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
 
