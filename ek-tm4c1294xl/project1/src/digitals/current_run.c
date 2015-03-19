@@ -262,46 +262,44 @@ uchar   ibCan;
         time tiDig = *GetCurrTimeDate();
         time tiAlt = mptiBase[ibCan];
 
-        ulong dwBuffC;
+        ulong dwSecond;
 
         if ((tiAlt.bYear  == tiDig.bYear)  &&
             (tiAlt.bMonth == tiDig.bMonth) &&
             (tiAlt.bDay   == tiDig.bDay))
-          dwBuffC = 0;
+          dwSecond = 0;
         else
-          dwBuffC = (ulong)24*3600;
+          dwSecond = (ulong)24*3600;
 
-        slong dwUpdate = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
+        slong dwImpulse = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
         mpdwBase[ibCan] = mpdwBaseDig[ GetDigitalLine(ibCan) ];
 
-        tiAlt = tiDig;
-        dwBuffC += GetSecondIndex(&tiAlt);
-        tiAlt = mptiBase[ibCan];
-        dwBuffC -= GetSecondIndex(&tiAlt);
+        dwSecond += GetSecondIndex(&tiDig);
+        dwSecond -= GetSecondIndex(&mptiBase[ibCan]);
 
         mptiBase[ibCan] = tiDig;
         mptiOffs[ibCan] = tiOffs;
 
         mptiBaseOK[ibCan] = *GetCurrTimeDate();
 
-        if ((dwBuffC > 0) && (dwBuffC < 1800))
-          mpreBase[ibCan] += (real)180*dwUpdate/dwBuffC;
+        if ((dwSecond > 0) && (dwSecond < 1800))
+          mpreBase[ibCan] += (real)180*dwImpulse/dwSecond;
 
-        dwUpdate = mpreBase[ibCan];
-        mpreBase[ibCan] -= dwUpdate;
+        dwImpulse = mpreBase[ibCan];
+        mpreBase[ibCan] -= dwImpulse;
 
-        if (dwUpdate > 100) mpwMore100[ibCan]++;
-        if (dwUpdate > 1000) mpwMore1000[ibCan]++;
-        if (dwUpdate > 10000) mpwMore10000[ibCan]++;
+        if (dwImpulse > 100) mpwMore100[ibCan]++;
+        if (dwImpulse > 1000) mpwMore1000[ibCan]++;
+        if (dwImpulse > 10000) mpwMore10000[ibCan]++;
 
-        if (dwUpdate > 0xFFFF)
+        if (dwImpulse > 0xFFFF)
           mpwOverflow[ibCan]++;
         else
-        if (dwUpdate < 0)
+        if (dwImpulse < 0)
           mpwUnderflow[ibCan]++;
         else
         {
-//          mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dwUpdate;
+//          mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dwImpulse;
 //          MakeSpecCurrent();
         }
       }
