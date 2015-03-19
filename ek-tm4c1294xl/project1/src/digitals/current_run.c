@@ -19,6 +19,7 @@ CURRENT_RUN.C
 #include        "../digitals/digitals_run.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../keyboard/key_timedate.h"
+#include        "../time/timedate.h"
 #include        "../time/rtc.h"
 
 
@@ -234,22 +235,16 @@ void    NextCurrent(void)
 
 void    MakeCurrent(void)
 {
+uchar   ibCan;
+
   ShowLo(szPowerOK); Delay(200);
-/*
+
   LoadCurrDigital(ibDig);
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1)
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
-      mpbCurrent2Curr[ibCan/8] |= (0x80 >> ibCan%8);
-
-      if (boMntEscS == TRUE)
-      {
-        mpreEsc_S[ibCan] = mpreValueCntHou[ibCan] * mpdwBase[ibCan];
-        mptiEsc_S[ibCan] = *PGetCurrTimeDate();
-      }
-
       mpboReadyCan[ibCan] = TRUE;
 
       mpwTrue[ibCan]++;
@@ -259,31 +254,35 @@ void    MakeCurrent(void)
 
         mpdwBase[ibCan] = mpdwBaseDig[ diPrev.ibLine ];
         mpreBase[ibCan] = 0;
-        mptiBase[ibCan] = *PGetCurrTimeDate();
+        mptiBase[ibCan] = *GetCurrTimeDate();
         mptiOffs[ibCan] = tiOffs;
       }
       else
       {
-        tiDig = *PGetCurrTimeDate();
-        tiAlt = mptiBase[ibCan];
+        time tiDig = *GetCurrTimeDate();
+        time tiAlt = mptiBase[ibCan];
 
-        if (CompareAltDig(0x07) == 1)           // сравниваем: день, мес€ц, год
+        ulong dwBuffC;
+
+        if ((tiAlt.bYear  == tiDig.bYear)  &&
+            (tiAlt.bMonth == tiDig.bMonth) &&
+            (tiAlt.bDay   == tiDig.bDay))
           dwBuffC = 0;
         else
           dwBuffC = (ulong)24*3600;
 
-        dwUpdate = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
+        slong dwUpdate = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
         mpdwBase[ibCan] = mpdwBaseDig[ GetDigitalLine(ibCan) ];
 
         tiAlt = tiDig;
-        dwBuffC += GetSecondIndex();
+        dwBuffC += GetSecondIndex(&tiAlt);
         tiAlt = mptiBase[ibCan];
-        dwBuffC -= GetSecondIndex();
+        dwBuffC -= GetSecondIndex(&tiAlt);
 
         mptiBase[ibCan] = tiDig;
         mptiOffs[ibCan] = tiOffs;
 
-        mptiBaseOK[ibCan] = *PGetCurrTimeDate();
+        mptiBaseOK[ibCan] = *GetCurrTimeDate();
 
         if ((dwBuffC > 0) && (dwBuffC < 1800))
           mpreBase[ibCan] += (real)180*dwUpdate/dwBuffC;
@@ -295,20 +294,20 @@ void    MakeCurrent(void)
         if (dwUpdate > 1000) mpwMore1000[ibCan]++;
         if (dwUpdate > 10000) mpwMore10000[ibCan]++;
 
-        if (dwUpdate > 0xFFFF)                  // переполнение
-          mpwMore[ibCan]++;
+        if (dwUpdate > 0xFFFF)
+          mpwOverflow[ibCan]++;
         else
-        if (dwUpdate < 0)                       // заЄм
-          mpwLess[ibCan]++;
+        if (dwUpdate < 0)
+          mpwUnderflow[ibCan]++;
         else
         {
-          mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dwUpdate;
-          MakeSpecCurrent();
+//          mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dwUpdate;
+//          MakeSpecCurrent();
         }
       }
     }
   }
-(*/
+
   NextCurrent();
 }
 

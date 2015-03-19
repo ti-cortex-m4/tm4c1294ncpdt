@@ -23,11 +23,17 @@ boolean                 mpboBase[bCANALS];
 // массив для хранения базовых значений всех каналов одного счетчика
 ulong                   mpdwBaseDig[bCHANNELS];
 
+// массив времени/даты счётчиков
+time                    mptiOffs[bCANALS];
+
+// глобальная переменная
+time                    tiOffs;
+
 // массивы вспомогательных переменных
 uint                    mpwTrue[bCANALS],
                         mpwFalse[bCANALS],
-                        mpwMore[bCANALS],
-                        mpwLess[bCANALS],
+                        mpwOverflow[bCANALS],
+                        mpwUnderflow[bCANALS],
                         mpwRepeat[bCANALS];
 
 
