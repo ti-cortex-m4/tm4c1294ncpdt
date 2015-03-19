@@ -8,7 +8,7 @@ KEY_KEYS.C
 #include        "../../memory/mem_digitals.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
-#include        "../../digitals/profile_core.h"
+#include        "../../digitals/digitals.h"
 #include        "../../flash/files.h"
 #include        "../../flash/records.h"
 
@@ -24,7 +24,7 @@ void    ShowKeys(void)
 {
   Clear();
 
-  if ((enGlobal == GLB_PROGRAM) || ((enGlobal == GLB_REPROGRAM) /*&& SuperUser()*/))
+  if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
     strcpy(szLo, mpphKeys[ibX].szNumber);
   else
     strcpy(szLo, "*************");
@@ -93,7 +93,10 @@ void    key_SetKeys(void)
 
         AddSysRecordReprogram(EVE_EDIT_KEY10);
         AddSysRecordReprogram(EVE_EDIT_KEY11);
+
         strcpy((char *)mpphKeys[ibX].szNumber, szLo);
+        SaveFile(&flKeys);
+
         AddSysRecordReprogram(EVE_EDIT_KEY20);
         AddSysRecordReprogram(EVE_EDIT_KEY21);
       }

@@ -27,8 +27,7 @@ void    InitPhones(void)
 
 void    ResetPhones(void)
 {
-uchar   c;
-
+  uchar c;
   for (c=0; c<bCANALS; c++)
     strcpy((char *)mpphPhones[c].szNumber, "0");
 
