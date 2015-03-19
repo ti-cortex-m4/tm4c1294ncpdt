@@ -22,6 +22,10 @@ boolean                 boEnblKeys;
 // массив паролей счётчиков
 phone                   mpphKeys[bCANALS];
 
+// дополнительные параметры цифровых счётчиков
+ulong                   mpdwAddress1[bCANALS],
+                        mpdwAddress2[bCANALS];
+
 
 
 // цифровой счётчики

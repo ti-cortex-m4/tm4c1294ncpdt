@@ -14,6 +14,9 @@ extern  boolean                 boEnblKeys;
 
 extern  phone                   mpphKeys[bCANALS];
 
+extern  ulong                   mpdwAddress1[bCANALS],
+                                mpdwAddress2[bCANALS];
+
 
 
 extern  digital                 diPrev, diCurr, diNext, diLast;
