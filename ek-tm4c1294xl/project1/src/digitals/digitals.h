@@ -6,6 +6,9 @@ DIGITALS.H
 
 extern  file const              flDigitals;
 
+extern  file const              flEnblKeys;
+extern  file const              flKeys;
+
 
 
 void    InitDigitals(void);
