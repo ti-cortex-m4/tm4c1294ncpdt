@@ -14,10 +14,14 @@ extern  boolean                 mpboBase[bCANALS];
 
 extern  ulong                   mpdwBaseDig[bCHANNELS];
 
+extern  time                    mptiOffs[bCANALS];
+
+extern  time                    tiOffs;
+
 extern  uint                    mpwTrue[bCANALS],
                                 mpwFalse[bCANALS],
-                                mpwMore[bCANALS],
-                                mpwLess[bCANALS],
+                                mpwOverflow[bCANALS],
+                                mpwUnderflow[bCANALS],
                                 mpwRepeat[bCANALS];
 
 

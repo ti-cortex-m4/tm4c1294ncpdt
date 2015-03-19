@@ -151,3 +151,12 @@ bool     TrueTimeDate(void)
 
   return true;
 }
+
+
+
+// количество секунд с начала дня
+ulong   GetSecondIndex(time  *pti)
+{
+  return( (ulong)pti->bHour*3600 + pti->bMinute*60 + pti->bSecond );
+}
+
