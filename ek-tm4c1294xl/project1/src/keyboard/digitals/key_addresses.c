@@ -8,7 +8,9 @@ KEY_ADDRESSES.C
 #include        "../../memory/mem_digitals.h"
 #include        "../../display/display.h"
 #include        "../keyboard.h"
+#include        "../../digitals/digitals.h"
 #include        "../../flash/files.h"
+#include        "../../flash/records.h"
 
 
 
@@ -34,7 +36,7 @@ void    ShowAddresses(void)
     sprintf(szLo+8,"********");
   }
 
-  sprintf(szLo,"%2bu",ibX+1);
+  sprintf(szLo,"%2u",ibX+1);
 }
 
 
@@ -59,7 +61,7 @@ void    key_SetAddresses(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < bCANALS)
+      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         ShowAddresses();
@@ -72,13 +74,15 @@ void    key_SetAddresses(void)
       ShowAddresses();
     }
     else if (enKeyboard == KBD_POSTINPUT3)
-    {      
-      if ((dwBuffC = GetLong(8,15)) <= 100000000)
+    {
+      ulong dw;
+      if ((dw = GetLongLo(8,15)) <= 100000000)
       {
         enKeyboard = KBD_POSTENTER;
 
         AddSysRecordReprogram(EVE_EDIT_ADDRESS20);
-        mpdwAddress2[ibX] = dwBuffC;
+        mpdwAddress2[ibX] = dw;
+        SaveFile(&flAddress2);
         AddSysRecordReprogram(EVE_EDIT_ADDRESS21);
 
         if (++ibX >= bCANALS) ibX = 0;
@@ -102,14 +106,16 @@ void    key_SetAddresses(void)
       ShowAddresses();
     } 
     else if (enKeyboard == KBD_POSTINPUT2)
-    {      
-      if ((dwBuffC = GetLongHi(8,15)) <= 100000000)
+    {
+      ulong dw;
+      if ((dw = GetLongHi(8,15)) <= 100000000)
       {
         enKeyboard = KBD_INPUT3;
         sprintf(szLo+8,szMaskAddresses);
 
         AddSysRecordReprogram(EVE_EDIT_ADDRESS10);
-        mpdwAddress1[ibX] = dwBuffC;
+        mpdwAddress1[ibX] = dw;
+        SaveFile(&flAddress1);
         AddSysRecordReprogram(EVE_EDIT_ADDRESS11);
       }
       else Beep();

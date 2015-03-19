@@ -6,6 +6,7 @@ PHONES.H
 
 extern  file const              flPhones;
 extern  file const              flMaxConnect;
+extern  file const              flCustomModem;
 
 
 

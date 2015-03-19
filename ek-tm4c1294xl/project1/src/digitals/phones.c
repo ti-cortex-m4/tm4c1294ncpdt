@@ -12,15 +12,22 @@ PHONES.C
 
 file const              flPhones = {FLS_PHONES, &mpphPhones, sizeof(phone)*bCANALS};
 file const              flMaxConnect = {FLS_MAX_CONNECT, &bMaxConnect, sizeof(uchar)};
+file const              flCustomModem = {FLS_CUSTOM_MODEM, &boCustomModem, sizeof(bool)};
 
 
 
 void    InitPhones(void)
 {
   LoadFile(&flPhones);
-  LoadFile(&flMaxConnect);
 
-  boCustomModem = FALSE;
+  LoadFile(&flMaxConnect);
+  if ((bMaxConnect == 0) || (bMaxConnect > 180))
+  {
+  	bMaxConnect = 60;
+    SaveFile(&flMaxConnect);
+  }
+
+  LoadFile(&flCustomModem);
 }
 
 
@@ -35,6 +42,9 @@ void    ResetPhones(void)
 
   bMaxConnect = 60;
   SaveFile(&flMaxConnect);
+
+  boCustomModem = FALSE;
+  SaveFile(&flCustomModem);
 }
 
 
