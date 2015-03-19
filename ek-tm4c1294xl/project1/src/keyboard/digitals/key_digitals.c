@@ -289,7 +289,7 @@ void    key_SetDigitals(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if ((enGlobal == GLB_PROGRAM) || ((enGlobal == GLB_REPROGRAM) /*&& SuperUser()*/))
+      if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
       {
         enKeyboard = KBD_POSTENTER;
         ShowHi(szDigitals);
@@ -319,7 +319,7 @@ void    key_SetDigitals(void)
   {        
     if (enKeyboard == KBD_POSTENTER)
     {
-      if ((enGlobal == GLB_PROGRAM) || ((enGlobal == GLB_REPROGRAM) /*&& SuperUser()*/))
+      if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
       {
         enKeyboard = KBD_INPUT2;
         ShowHi(szPort);

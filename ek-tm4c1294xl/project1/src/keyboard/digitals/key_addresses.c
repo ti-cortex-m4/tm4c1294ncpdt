@@ -23,7 +23,7 @@ void    ShowAddresses(void)
 {
   Clear();
 
-  if ((enGlobal == GLB_PROGRAM) || ((enGlobal == GLB_REPROGRAM) /*&& SuperUser()*/))
+  if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     sprintf(szHi+8,"%8lu",mpdwAddress1[ibX]);
     sprintf(szLo+8,"%8lu",mpdwAddress2[ibX]);
@@ -122,7 +122,7 @@ void    key_SetAddresses(void)
   {        
     if (enKeyboard == KBD_POSTENTER)
     {
-      if ((enGlobal == GLB_PROGRAM) || ((enGlobal == GLB_REPROGRAM) /*&& SuperUser()*/))
+      if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
       {
         enKeyboard = KBD_INPUT2;
         sprintf(szHi+8,szMaskAddresses);
