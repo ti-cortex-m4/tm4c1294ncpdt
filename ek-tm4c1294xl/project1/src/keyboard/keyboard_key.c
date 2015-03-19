@@ -22,6 +22,8 @@ KEYBOARD_KEY.C
 #include        "digitals/key_timeout_current.h"
 #include        "digitals/key_timeout_profile.h"
 #include        "digitals/key_phones.h"
+#include        "digitals/key_max_connect.h"
+#include        "digitals/key_custom_modem.h"
 #include        "digitals/key_addresses.h"
 #include        "digitals/key_enbl_keys.h"
 #include        "digitals/key_keys.h"
@@ -115,6 +117,8 @@ void    Keyboard_Key(void)
       case bSET_KEYS:           key_SetKeys();          break;
 
       case bSET_PHONES:         key_SetPhones();        break;
+      case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
+      case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
@@ -190,6 +194,8 @@ void    Keyboard_Key(void)
       case bSET_KEYS:           key_SetKeys();          break;
 
       case bSET_PHONES:         key_SetPhones();        break;
+      case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
+      case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
 
       case bGET_CNTCURR_10:
       case bGET_CNTCURR_110:
@@ -332,6 +338,8 @@ void    Keyboard_Key(void)
       case bSET_KEYS:           key_SetKeys();          break;
 
       case bSET_PHONES:         key_SetPhones();        break;
+      case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
+      case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:

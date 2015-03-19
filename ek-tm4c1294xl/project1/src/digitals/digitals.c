@@ -18,6 +18,9 @@ file const              flDigitals = {FLS_DIGITALS, &mpdiDigital, sizeof(digital
 file const              flEnblKeys = {FLS_ENBL_KEYS, &boEnblKeys, sizeof(boolean)};
 file const              flKeys = {FLS_KEYS, &mpphKeys, sizeof(phone)*bCANALS};
 
+file const              flAddress1 = {FLS_ADDRESS1, &mpdwAddress1, sizeof(ulong)*bCANALS};
+file const              flAddress2 = {FLS_ADDRESS2, &mpdwAddress2, sizeof(ulong)*bCANALS};
+
 
 
 void    InitDigitals(void)
@@ -28,6 +31,9 @@ void    InitDigitals(void)
   LoadFile(&flEnblKeys);
 
   LoadFile(&flKeys);
+
+  LoadFile(&flAddress1);
+  LoadFile(&flAddress2);
 }
 
 
@@ -44,6 +50,15 @@ void    ResetDigitals(void)
     strcpy((char *)mpphKeys[c].szNumber, "0");
 
   SaveFile(&flKeys);
+
+  for (c=0; c<bCANALS; c++)
+  {
+    mpdwAddress1[c] = 0;
+    mpdwAddress2[c] = 0;
+  }
+
+  SaveFile(&flAddress1);
+  SaveFile(&flAddress2);
 }
 
 

@@ -9,6 +9,9 @@ extern  file const              flDigitals;
 extern  file const              flEnblKeys;
 extern  file const              flKeys;
 
+extern  file const              flAddress1;
+extern  file const              flAddress2;
+
 
 
 void    InitDigitals(void);
