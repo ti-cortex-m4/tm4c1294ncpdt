@@ -17,7 +17,7 @@ boolean                 mpboEnblCan[bCANALS];
 
 
 // флаг использования паролей счётчиков
-boolean                 boEnableKeys;
+boolean                 boEnblKeys;
 
 // массив паролей счётчиков
 phone                   mpphKeys[bCANALS];

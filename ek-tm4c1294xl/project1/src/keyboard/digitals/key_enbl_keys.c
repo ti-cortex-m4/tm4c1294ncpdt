@@ -8,16 +8,13 @@ KEY_ENBL_KEYS.C
 #include        "../../memory/mem_digitals.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
-#include        "../../digitals/profile_core.h"
+#include        "../../digitals/digitals.h"
 #include        "../../flash/files.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szEnbl[]        = "   Загружать    ",
-                        szProfile[]     = "30-мин. данные ?";
-
-static char const       *pszEnblProfile[] = { szEnbl, szProfile, "" };
+static char const       szEnblKeys[]    = "Пароли ?        ";
 
 
 
@@ -30,8 +27,8 @@ void    key_SetEnblKeys(void)
       enKeyboard = KBD_INPUT1;
       Clear();
       
-      LoadSlide(pszEnblProfile);
-      ShowBoolean(boEnblProfile);
+      ShowHi(szEnblKeys);
+      ShowBoolean(boEnblKeys);
     }
     else Beep();
   }
@@ -43,10 +40,10 @@ void    key_SetEnblKeys(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        boEnblProfile = (boEnblProfile == TRUE ? FALSE : TRUE);
-        SaveFile(&flEnblProfile);
+        boEnblKeys = (boEnblKeys == TRUE ? FALSE : TRUE);
+        SaveFile(&flEnblKeys);
 
-        ShowBoolean(boEnblProfile);
+        ShowBoolean(boEnblKeys);
       }
       else Beep(); 
     }

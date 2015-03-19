@@ -15,12 +15,17 @@ DIGITALS.C
 
 file const              flDigitals = {FLS_DIGITALS, &mpdiDigital, sizeof(digital)*bCANALS};
 
+file const              flEnblKeys = {FLS_ENBL_KEYS, &boEnblKeys, sizeof(boolean)};
+file const              flKeys = {FLS_KEYS, &mpphKeys, sizeof(phone)*bCANALS};
+
 
 
 void    InitDigitals(void)
 {
   LoadFile(&flDigitals);
   MakeDigitalsMask();
+
+  LoadFile(&flEnblKeys);
 }
 
 
@@ -28,6 +33,9 @@ void    ResetDigitals(void)
 {
   memset(&mpdiDigital, 0, sizeof(mpdiDigital));
   SaveFile(&flDigitals);
+
+  boEnblKeys = FALSE;
+  SaveFile(&flEnblKeys);
 }
 
 

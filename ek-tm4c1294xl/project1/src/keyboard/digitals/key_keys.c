@@ -10,6 +10,7 @@ KEY_KEYS.C
 #include        "../../display/display.h"
 #include        "../../digitals/profile_core.h"
 #include        "../../flash/files.h"
+#include        "../../flash/records.h"
 
 
 
@@ -28,7 +29,7 @@ void    ShowKeys(void)
   else
     strcpy(szLo, "*************");
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 }
 
 
@@ -49,8 +50,8 @@ void    key_SetKeys(void)
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boEnableKeys != boTrue)
-      { BlockProgram(bSET_ENABLE_KEYS); return; }
+      if (boEnblKeys != TRUE)
+      { BlockProgram(bSET_ENBL_KEYS); return; }
       else
       {
         enKeyboard = KBD_INPUT1;
@@ -92,7 +93,7 @@ void    key_SetKeys(void)
 
         AddSysRecordReprogram(EVE_EDIT_KEY10);
         AddSysRecordReprogram(EVE_EDIT_KEY11);
-        strcpy(&mpphKeys[ibX].szNumber,szLo);
+        strcpy((char *)mpphKeys[ibX].szNumber, szLo);
         AddSysRecordReprogram(EVE_EDIT_KEY20);
         AddSysRecordReprogram(EVE_EDIT_KEY21);
       }

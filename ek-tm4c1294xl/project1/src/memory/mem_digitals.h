@@ -10,7 +10,7 @@ extern  boolean                 mpboEnblCan[bCANALS];
 
 
 
-extern  boolean                 boEnableKeys;
+extern  boolean                 boEnblKeys;
 
 extern  phone                   mpphKeys[bCANALS];
 
