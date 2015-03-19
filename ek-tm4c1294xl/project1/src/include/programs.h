@@ -183,6 +183,9 @@ PROGRAMS.H
 #define bSET_SUMMER                 124
 #define bSET_WINTER                 125
 
+#define bSET_ENBL_KEYS              170
+#define bSET_KEYS                   171
+
 #define bSET_PHONES                 180
 #define bSET_MAX_CONNECT            181
 
