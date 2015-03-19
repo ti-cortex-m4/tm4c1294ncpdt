@@ -26,6 +26,8 @@ void    InitDigitals(void)
   MakeDigitalsMask();
 
   LoadFile(&flEnblKeys);
+
+  LoadFile(&flKeys);
 }
 
 
@@ -36,6 +38,12 @@ void    ResetDigitals(void)
 
   boEnblKeys = FALSE;
   SaveFile(&flEnblKeys);
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+    strcpy((char *)mpphKeys[c].szNumber, "0");
+
+  SaveFile(&flKeys);
 }
 
 

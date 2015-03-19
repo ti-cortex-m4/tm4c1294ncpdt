@@ -44,6 +44,8 @@ void    MakeKeys(void)
     case 21:  strcpy((char *)&mpphKeys[ibX].szNumber, "00000000");  break;
     default:  strcpy((char *)&mpphKeys[ibX].szNumber, "0");       break;
   }
+
+  SaveFile(&flKeys);
 }
 
 

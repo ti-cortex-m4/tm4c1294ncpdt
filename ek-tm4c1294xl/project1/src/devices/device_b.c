@@ -46,9 +46,9 @@ void    QueryOpenB(void)
   PushChar(diCurr.bAddress);         
   PushChar(1);         
 
-  PushChar(2);                          // пароль уровня 2
+  PushChar(2); // пароль уровня 2
 
-//  if (boEnableKeys != boTrue)
+  if (boEnblKeys != TRUE)
   {
     PushChar(2);
     PushChar(2);
@@ -57,22 +57,21 @@ void    QueryOpenB(void)
     PushChar(2);
     PushChar(2);
   }
-//  else
-//  {
-// 	 bool fAlt = 0;
-//   phT = mpphKeys[ibDig];
-//
-//    uchar  i;
-//    for (i=0; i<6; i++)
-//    {
-//      if (phT.szNumber[i] == 0) fAlt = 1;
-//
-//      if (fAlt == 0)
-//        PushChar(phT.szNumber[i] - '0');
-//      else
-//        PushChar(0);
-//    }
-//  }
+  else
+  {
+    phone ph = mpphKeys[ibDig];
+    bool  f = 0;
+    uchar i;
+    for (i=0; i<6; i++)
+    {
+      if (ph.szNumber[i] == 0) f = 1;
+
+      if (f == 0)
+        PushChar(ph.szNumber[i] - '0');
+      else
+        PushChar(0);
+    }
+  }
 
   QueryIO(2+2, 2+1+6+2);
 }
