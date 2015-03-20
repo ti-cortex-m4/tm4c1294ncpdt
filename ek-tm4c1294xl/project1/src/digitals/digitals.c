@@ -17,10 +17,10 @@ DIGITALS.C
 file const              flDigitals = {FLS_DIGITALS, &mpdiDigital, sizeof(digital)*bCANALS};
 
 file const              flEnblKeys = {FLS_ENBL_KEYS, &boEnblKeys, sizeof(boolean)};
-file const              flKeys = {FLS_KEYS, &mpphKeys, sizeof(phone)*bCANALS};
+file const              flKeys = {FLS_KEYS, &mpphKeys, sizeof(mpphKeys)};
 
-file const              flAddress1 = {FLS_ADDRESS1, &mpdwAddress1, sizeof(ulong)*bCANALS};
-file const              flAddress2 = {FLS_ADDRESS2, &mpdwAddress2, sizeof(ulong)*bCANALS};
+file const              flAddress1 = {FLS_ADDRESS1, &mpdwAddress1, sizeof(mpdwAddress1)};
+file const              flAddress2 = {FLS_ADDRESS2, &mpdwAddress2, sizeof(mpdwAddress2)};
 
 
 
