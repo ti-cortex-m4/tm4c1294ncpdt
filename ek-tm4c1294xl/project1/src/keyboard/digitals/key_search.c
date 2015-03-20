@@ -11,6 +11,7 @@ KEY_SEARCH.C
 #include        "../keyboard.h"
 #include        "../../digitals/devices.h"
 #include        "../../digitals/digitals.h"
+#include        "../../digitals/digitals_display.h"
 #include        "../../devices/device_b.h"
 #include        "../../serial/ports.h"
 #include        "../../serial/ports_stack.h"

@@ -21,3 +21,7 @@ extern  uchar                   mpbGroupMaskUni[16];
 extern  uchar                   mpbDefUni[64];
 
 extern  boolean                 boStrictUni;
+
+extern  uchar                   bMaxDelayUni;
+
+extern  boolean                 boRepeatFlowUni;

@@ -12,6 +12,7 @@ KEY_DIGITALS.C
 #include        "../../flash/files.h"
 #include        "../../flash/records.h"
 #include        "../../digitals/digitals.h"
+#include        "../../digitals/digitals_display.h"
 #include        "../../digitals/devices.h"
 #include        "../../serial/speeds.h"
 #include        "../../serial/speeds_display.h"
