@@ -6,9 +6,9 @@ MEM_UNI.H
 
 extern  uchar                   szObjectName[bNAME];
 
-extern  uchar                   mpszCanalName[bCANALS][bNAME];
+extern  uchar                   mpszCanalsName[bCANALS][bNAME];
 
-extern  uchar                   mpszGroupName[bGROUPS][bNAME];
+extern  uchar                   mpszGroupsName[bGROUPS][bNAME];
 
 extern  digital                 mpdiDevicesUni[bCANALS];
 

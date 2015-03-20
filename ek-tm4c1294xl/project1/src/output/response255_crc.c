@@ -191,19 +191,19 @@ void    Response255_CRC(void)
       break;
 
     case bEXT_GETCANALNAME: 
-      GetCanalNameExt();
+      GetCanalsNameExt();
       break;
 
     case bEXT_SETCANALNAME: 
-      SetCanalNameExt();
+      SetCanalsNameExt();
       break;
 
     case bEXT_GETGROUPNAME: 
-      GetGroupNameExt();
+      GetGroupsNameExt();
       break;
 
     case bEXT_SETGROUPNAME: 
-      SetGroupNameExt();
+      SetGroupsNameExt();
       break;
 
     case bEXT_FLASH_CONTROL:

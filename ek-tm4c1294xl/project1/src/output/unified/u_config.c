@@ -406,7 +406,7 @@ void    GetCanalsUni(void)
       if (mpboEnblCan[ibCan-1] != boTrue) ibGrp |= 0x01;     
       PushChar(ibGrp);
 
-      Push(mpszCanalName[ibCan-1], 32);
+      Push(mpszCanalsName[ibCan-1], 32);
     }
     Output2((uint)(2+2+2+4+4+4+1+1+32)*bInBuff9);
   }
@@ -449,7 +449,7 @@ uchar   i;
       }
       Push(mpbGroupMaskUni, sizeof(mpbGroupMaskUni));
 
-      Push(mpszGroupName[ibGrp], bNAME);
+      Push(mpszGroupsName[ibGrp], bNAME);
     }
 
     Output2((uint)(2+128+32)*bInBuff9);

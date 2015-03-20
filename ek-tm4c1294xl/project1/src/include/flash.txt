@@ -7,6 +7,9 @@ FLASH.H
 #ifndef __FLASH
 #define __FLASH
 
+#include        "../memory/mem_uni.h"
+
+
 
 // размер страницы
 #define wPAGE_SIZE      528
@@ -136,6 +139,14 @@ RESERVE(FLS_ADDRESS1, sizeof(ulong)*bCANALS/wFREEPAGE_SIZE + 1)
 RESERVE(FLS_ADDRESS2, sizeof(ulong)*bCANALS/wFREEPAGE_SIZE + 1)
 
 RESERVE(FLS_MAX_REPEATS, 1)
+
+RESERVE(FLS_OBJECT_NAME, 1)
+RESERVE(FLS_CANALS_NAME, sizeof(mpszCanalsName)/wFREEPAGE_SIZE + 1)
+RESERVE(FLS_GROUPS_NAME, sizeof(mpszGroupsName)/wFREEPAGE_SIZE + 1)
+
+RESERVE(FLS_STRICT_UNI, 1)
+RESERVE(FLS_MAX_DELAY_UNI, 1)
+RESERVE(FLS_REPEAT_FLOW_INI, 1)
 
 END(FLS_END)
 } flash;
