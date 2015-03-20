@@ -22,14 +22,6 @@ static char const       szGraphic[]     = " График опроса  ",
 static char const       *pszEnblHours[] = { szGraphic, szByHours, "" };
 
 
-
-static void ShowPort(void)
-{ 
-  ShowHi(szClear);
-  sprintf(szHi,"Порт: %u", ibX+1);
-}
-
-
 static void ShowHours(void)
 {
   Clear();
@@ -64,7 +56,7 @@ void    key_SetEnblHours(void)
       ibX = 0;
       if (StreamPort(ibX) == 1)
       {
-        ShowPort();
+        ShowPort(ibX);
 
         enKeyboard = KBD_INPUT2;
         Hour();
@@ -76,7 +68,7 @@ void    key_SetEnblHours(void)
       {
         if (StreamPort(ibX) == 1)
         {
-          ShowPort();
+          ShowPort(ibX);
 
           enKeyboard = KBD_INPUT2;
           Hour();
