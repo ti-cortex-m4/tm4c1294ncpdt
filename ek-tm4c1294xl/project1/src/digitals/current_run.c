@@ -19,6 +19,7 @@ CURRENT_RUN.C
 #include        "../digitals/digitals_pause.h"
 #include        "../digitals/digitals_run.h"
 #include        "../digitals/digitals_messages.h"
+#include        "../digitals/digitals_display.h"
 #include        "../keyboard/key_timedate.h"
 #include        "../time/timedate.h"
 #include        "../time/rtc.h"
