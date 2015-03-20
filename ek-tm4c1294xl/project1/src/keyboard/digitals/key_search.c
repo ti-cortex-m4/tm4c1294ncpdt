@@ -15,15 +15,17 @@ KEY_SEARCH.C
 #include        "../../serial/ports.h"
 #include        "../../serial/ports_stack.h"
 #include        "../../serial/ports_devices.h"
+#include        "../../serial/modems.h"
 #include        "../../serial/ports_modems.h"
+#include        "../../serial/speeds.h"
 #include        "../../serial/speeds_display.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szFindDevices[] = "Поиск устройств ",
-                        szOnSpeeds[]    = "  по скоростям  ",
-                        szOnNumbers[]   = "  по номерами   ";
+static char const       szSearch[]      = "Поиск устройств ",
+                        szBySpeed[]     = "  по скоростям  ",
+                        szByNumber[]    = "  по номерами   ";
 
 
 
@@ -34,7 +36,7 @@ static uchar            ibXmax, ibYmin, ibYmax;
 void    ShowFoundNumber(uchar  i)
 {
   Beep();
-  sprintf(szLo+10,"%03bu",i);
+  sprintf(szLo+10,"%03u",i);
 }
 
 
@@ -258,8 +260,8 @@ void    key_SearchBySpeed(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ShowHi(szFindDevices);
-      ShowLo(szOnSpeeds); DelayMsg(); fKey = 0;
+      ShowHi(szSearch);
+      ShowLo(szBySpeed); DelayMsg(); fKey = 0;
 
       ibXmax = 0;
       ShowDeviceName(ibXmax);
@@ -301,18 +303,18 @@ void    key_SearchBySpeed(void)
       ibPort = ibX;
 
       diCurr.ibPort = ibX;
-      ShowPortDelayHi();
+      ShowPortDelayHi(ibPort);
 
       ibZ = 0;                                  // результат операции
       for (ibYmin=bBAUDS; ibYmin>0; ibYmin--)
       {
-        mppoPorts[ibX].ibSpeed = ibYmin-1;
+        mppoPorts[ibX].ibBaud = ibYmin-1;
 
         for (ibYmax=0; ibYmax<bPARITYS; ibYmax++)
         {
           mppoPorts[ibX].ibParity = ibYmax;
 
-          SetSpeeds(ibX);
+          SetSpeed(ibX);
           ShowSpeeds(ibX,0);
 
           switch (ibXmax)
@@ -357,7 +359,7 @@ void    key_SearchBySpeed(void)
         if (ibZ != 0) break;
       }
 
-      ShowHi(szFindDevices);
+      ShowHi(szSearch);
 
       if (ibZ == 0xFF) 
         Stop();
@@ -563,8 +565,8 @@ void    key_SearchByNumber(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ShowHi(szFindDevices);
-      ShowLo(szOnNumbers); DelayMsg(); fKey = 0;
+      ShowHi(szSearch);
+      ShowLo(szByNumber); DelayMsg(); fKey = 0;
 
       ibXmax = 1;
       ShowDeviceName(ibXmax);
@@ -615,12 +617,12 @@ void    key_SearchByNumber(void)
       diCurr.ibPort  = ibX;
 
       ibPort = ibX;
-      ShowPortDelayHi();
+      ShowPortDelayHi(ibPort);
 
       ibYmin = 0;
       for (ibY=ibYmax; ibY<255; ibY++)
       {
-        sprintf(szLo+8,"%03bu", ibY);
+        sprintf(szLo+8,"%03u", ibY);
 
         ibZ = 0;                                // результат операции
 
@@ -658,7 +660,7 @@ void    key_SearchByNumber(void)
 
         if (ibZ == 0xEE)
         {
-          sprintf(szLo,"%03bu:%-3bu", ibY,++ibYmin);
+          sprintf(szLo,"%03u:%-3u", ibY,++ibYmin);
           LongBeep(); DelayMsg();
         }
 
@@ -667,7 +669,7 @@ void    key_SearchByNumber(void)
         if (ibZ == 0xFF) break;
       }
 
-      ShowHi(szFindDevices); OK();
+      ShowHi(szSearch); OK();
     } 
   }
 
