@@ -6,11 +6,17 @@ KEY_SEARCH.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_digitals.h"
+#include        "../../memory/mem_ports.h"
 #include        "../../display/display.h"
 #include        "../keyboard.h"
+#include        "../../digitals/devices.h"
 #include        "../../digitals/digitals.h"
-#include        "../../serial/speeds_display.h"
+#include        "../../devices/device_b.h"
+#include        "../../serial/ports.h"
+#include        "../../serial/ports_stack.h"
+#include        "../../serial/ports_devices.h"
 #include        "../../serial/ports_modems.h"
+#include        "../../serial/speeds_display.h"
 
 
 
@@ -21,7 +27,7 @@ static char const       szFindDevices[] = "ѕоиск устройств ",
 
 
 
-static uchar            ibXmax, ibYmax;
+static uchar            ibXmax, ibYmin, ibYmax;
 
 
 
@@ -93,7 +99,7 @@ bool    ChangeSpeedA(void)
 
 bool    ChangeSpeedB(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0);          
   PushChar(0);                          // тест канала св€зи
 
@@ -108,7 +114,7 @@ bool    ChangeSpeedB(void)
   if (Input() != SER_GOODCHECK) return(0);
   Beep();
 
-  InitPush();
+  InitPush(0);
   PushChar(0);           
   PushChar(8);           
   PushChar(5);                          // чтение сетевого адреса
@@ -298,7 +304,7 @@ void    key_SearchBySpeed(void)
       ShowPortDelayHi();
 
       ibZ = 0;                                  // результат операции
-      for (ibYmin=bSPEEDS; ibYmin>0; ibYmin--)
+      for (ibYmin=bBAUDS; ibYmin>0; ibYmin--)
       {
         mppoPorts[ibX].ibSpeed = ibYmin-1;
 
@@ -420,7 +426,7 @@ bool    ChangeNumberA(void)
 
 bool    ChangeNumberB(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(ibY);           
   PushChar(0);                          // тест канала св€зи
 
