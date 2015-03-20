@@ -26,6 +26,7 @@ KEYBOARD_KEY.C
 #include        "digitals/key_addresses.h"
 #include        "digitals/key_enbl_keys.h"
 #include        "digitals/key_keys.h"
+#include        "digitals/key_search.h"
 #include        "phones/key_phones.h"
 #include        "phones/key_max_connect.h"
 #include        "phones/key_custom_modem.h"
@@ -102,6 +103,9 @@ void    Keyboard_Key(void)
 
       case bSET_RESETCUSTOM:
       case bSET_RESETFULL:      key_SetReset();         break;
+
+      case bSEARCH_BY_NUMBER:   key_SearchByNumber();   break;
+      case bSEARCH_BY_SPEED:    key_SearchBySpeed();    break;
 
       case bSET_MAJOR_DELAYS:
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
@@ -327,6 +331,9 @@ void    Keyboard_Key(void)
 
       case bSET_RESETCUSTOM:
       case bSET_RESETFULL:      key_SetReset();         break;
+
+      case bSEARCH_BY_NUMBER:   key_SearchByNumber();   break;
+      case bSEARCH_BY_SPEED:    key_SearchBySpeed();    break;
 
       case bSET_MAJOR_DELAYS:
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;

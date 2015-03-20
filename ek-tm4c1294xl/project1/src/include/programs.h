@@ -47,6 +47,9 @@ PROGRAMS.H
 #define bSET_RESETWATCHDOG          82
 #define bSET_DEBUG                  83
 
+#define bSEARCH_BY_NUMBER           88
+#define bSEARCH_BY_SPEED            89
+
 #define bSET_MAJOR_DELAYS           97
 #define bSET_MINOR_DELAYS           98
 
