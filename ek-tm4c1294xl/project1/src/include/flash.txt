@@ -7,6 +7,8 @@ FLASH.H
 #ifndef __FLASH
 #define __FLASH
 
+#include        "../memory/mem_digitals.h"
+#include        "../memory/mem_phones.h"
 #include        "../memory/mem_uni.h"
 
 
@@ -128,15 +130,15 @@ RESERVE(FLS_ENBL_PROFILE, 1)
 RESERVE(FLS_TIMEOUT_CURRENT, 1)
 RESERVE(FLS_TIMEOUT_PROFILE, 1)
 
-RESERVE(FLS_PHONES, sizeof(phone)*bCANALS/wFREEPAGE_SIZE + 1)
+RESERVE(FLS_PHONES, sizeof(mpphPhones)/wFREEPAGE_SIZE + 1)
 RESERVE(FLS_MAX_CONNECT, 1)
 RESERVE(FLS_CUSTOM_MODEM, 1)
 
 RESERVE(FLS_ENBL_KEYS, 1)
-RESERVE(FLS_KEYS, sizeof(phone)*bCANALS/wFREEPAGE_SIZE + 1)
+RESERVE(FLS_KEYS, sizeof(mpphKeys)/wFREEPAGE_SIZE + 1)
 
-RESERVE(FLS_ADDRESS1, sizeof(ulong)*bCANALS/wFREEPAGE_SIZE + 1)
-RESERVE(FLS_ADDRESS2, sizeof(ulong)*bCANALS/wFREEPAGE_SIZE + 1)
+RESERVE(FLS_ADDRESS1, sizeof(mpdwAddress1)/wFREEPAGE_SIZE + 1)
+RESERVE(FLS_ADDRESS2, sizeof(mpdwAddress2)/wFREEPAGE_SIZE + 1)
 
 RESERVE(FLS_MAX_REPEATS, 1)
 

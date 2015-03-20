@@ -10,7 +10,7 @@ PHONES.C
 
 
 
-file const              flPhones = {FLS_PHONES, &mpphPhones, sizeof(phone)*bCANALS};
+file const              flPhones = {FLS_PHONES, &mpphPhones, sizeof(mpphPhones)};
 file const              flMaxConnect = {FLS_MAX_CONNECT, &bMaxConnect, sizeof(uchar)};
 file const              flCustomModem = {FLS_CUSTOM_MODEM, &boCustomModem, sizeof(bool)};
 

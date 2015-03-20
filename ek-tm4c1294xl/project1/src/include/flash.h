@@ -7,6 +7,8 @@ FLASH.H
 #ifndef __FLASH
 #define __FLASH
 
+#include        "../memory/mem_digitals.h"
+#include        "../memory/mem_phones.h"
 #include        "../memory/mem_uni.h"
 
 
@@ -129,16 +131,16 @@ typedef enum
   FLS_TIMEOUT_PROFILE   = FLS_TIMEOUT_CURRENT + 1,
 
   FLS_PHONES            = FLS_TIMEOUT_PROFILE + 1,
-  FLS_MAX_CONNECT       = FLS_PHONES + sizeof(phone)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_MAX_CONNECT       = FLS_PHONES + sizeof(mpphPhones)/wFREEPAGE_SIZE + 1,
   FLS_CUSTOM_MODEM      = FLS_MAX_CONNECT + 1,
 
   FLS_ENBL_KEYS         = FLS_CUSTOM_MODEM + 1,
   FLS_KEYS              = FLS_ENBL_KEYS + 1,
 
-  FLS_ADDRESS1          = FLS_KEYS + sizeof(phone)*bCANALS/wFREEPAGE_SIZE + 1,
-  FLS_ADDRESS2          = FLS_ADDRESS1 + sizeof(ulong)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_ADDRESS1          = FLS_KEYS + sizeof(mpphKeys)/wFREEPAGE_SIZE + 1,
+  FLS_ADDRESS2          = FLS_ADDRESS1 + sizeof(mpdwAddress1)/wFREEPAGE_SIZE + 1,
 
-  FLS_MAX_REPEATS       = FLS_ADDRESS2 + sizeof(ulong)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_MAX_REPEATS       = FLS_ADDRESS2 + sizeof(mpdwAddress2)/wFREEPAGE_SIZE + 1,
 
   FLS_OBJECT_NAME       = FLS_MAX_REPEATS + 1,
   FLS_CANALS_NAME       = FLS_OBJECT_NAME + 1,
