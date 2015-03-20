@@ -7,6 +7,9 @@ FLASH.H
 #ifndef __FLASH
 #define __FLASH
 
+#include        "../memory/mem_uni.h"
+
+
 
 // размер страницы
 #define wPAGE_SIZE      528
@@ -137,7 +140,15 @@ typedef enum
 
   FLS_MAX_REPEATS       = FLS_ADDRESS2 + sizeof(ulong)*bCANALS/wFREEPAGE_SIZE + 1,
 
-  FLS_END               = FLS_MAX_REPEATS + 1
+  FLS_OBJECT_NAME       = FLS_MAX_REPEATS + 1,
+  FLS_CANALS_NAME       = FLS_OBJECT_NAME + 1,
+  FLS_GROUPS_NAME       = FLS_CANALS_NAME + sizeof(mpszCanalsName)/wFREEPAGE_SIZE + 1,
+
+  FLS_STRICT_UNI        = FLS_GROUPS_NAME + sizeof(mpszGroupsName)/wFREEPAGE_SIZE + 1,
+  FLS_MAX_DELAY_UNI     = FLS_STRICT_UNI + 1,
+  FLS_REPEAT_FLOW_INI   = FLS_MAX_DELAY_UNI + 1,
+
+  FLS_END               = FLS_REPEAT_FLOW_INI + 1
 } flash;
 
 

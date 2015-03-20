@@ -12,10 +12,10 @@ MEM_UNI.S
 uchar                   szObjectName[bNAME];
 
 // имена каналов
-uchar                   mpszCanalName[bCANALS][bNAME];
+uchar                   mpszCanalsName[bCANALS][bNAME];
 
 // имена групп
-uchar                   mpszGroupName[bGROUPS][bNAME];
+uchar                   mpszGroupsName[bGROUPS][bNAME];
 
 // устройства
 digital                 mpdiDevicesUni[bCANALS];

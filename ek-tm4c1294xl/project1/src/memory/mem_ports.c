@@ -34,7 +34,7 @@ uchar                   bInBuff0,
                         bInBuff7,
                         bInBuff8,
                         bInBuff9,
-                        bInBuffA
+                        bInBuffA,
                         bInBuffB,
                         bInBuffC,
                         bInBuffD,

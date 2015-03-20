@@ -3,34 +3,48 @@ POSTINPUT2.H
 
 
 ------------------------------------------------------------------------------*/
+
+#include        "../main.h"
+#include        "../memory/mem_settings.h"
+#include        "../memory/mem_ports.h"
+#include        "../memory/mem_uni.h"
+#include        "../crc-16.h"
+#include        "../display/display.h"
+#include        "../keyboard/keyboard.h"
+#include        "../serial/ports.h"
+#include        "../flash/files.h"
+
+//#include        "main.h"
+//#include        "xdata.h"
+//#include        "ports.h"
+//#include        "flow.h"
+//#include        "crc-16.h"
+//#include        "states.h"
+//#include        "queries2.h"
+//#include        "keyboard.h"
+//#include        "programs.h"
+//#include        "display.h"
+//#include        "groups.h"
+//#include        "nexttime.h"
+//#include        "rtc.h"
+//#include        "u_config.h"
+//#include        "u_mnt.h"
+//#include        "u_hou.h"
+//#include        "u_day.h"
+//#include        "u_energy.h"
+//#include        "u_cnt.h"
+//#include        "u_param.h"
+//#include        "u_transit.h"
+//#include        "u_events.h"
+//#include        "u_query_crc.h"
+//#include        "_timedate.h"
+
+
+file const              flObjectName = {FLS_OBJECT_NAME, &szObjectName, sizeof(szObjectName)};
+file const              flCanalsName = {FLS_CANALS_NAME, &mpszCanalsName, sizeof(mpszCanalsName)};
+file const              flGroupsName = {FLS_GROUPS_NAME, &mpszGroupsName, sizeof(mpszGroupsName)};
+
 /*
-#include        "main.h"
-#include        "xdata.h"
-#include        "ports.h"
-#include        "flow.h"
-#include        "crc-16.h"
-#include        "states.h"
-#include        "queries2.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "display.h"
-#include        "groups.h"
-#include        "nexttime.h"
-#include        "rtc.h"
-#include        "u_config.h"
-#include        "u_mnt.h"
-#include        "u_hou.h"
-#include        "u_day.h"
-#include        "u_energy.h"
-#include        "u_cnt.h"
-#include        "u_param.h"
-#include        "u_transit.h"
-#include        "u_events.h"
-#include        "u_query_crc.h"
-#include        "_timedate.h"
-
-
-
 void    InitUni(void)
 {
 uchar   i;
@@ -48,16 +62,16 @@ void    ResetUni(void)
 uchar   i;
 
   memset(&szObjectName,  0, sizeof(szObjectName));
-  memset(&mpszCanalName, 0, sizeof(mpszCanalName));
-  memset(&mpszGroupName, 0, sizeof(mpszGroupName));
+  memset(&mpszCanalsName, 0, sizeof(mpszCanalsName));
+  memset(&mpszGroupsName, 0, sizeof(mpszGroupsName));
 
   sprintf(&szObjectName, "object %u", wPrivate);
 
   for (i=0; i<bCANALS; i++)
-    sprintf(mpszCanalName[i], "canal %bu", i+1);
+    sprintf(mpszCanalsName[i], "canal %bu", i+1);
 
   for (i=0; i<bGROUPS; i++)
-    sprintf(mpszGroupName[i], "group %bu", i+1);
+    sprintf(mpszGroupsName[i], "group %bu", i+1);
 
   boStrictUni = boTrue;
 
