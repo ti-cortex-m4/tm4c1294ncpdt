@@ -34,3 +34,9 @@ uchar                   mpbDefUni[64];
 
 // признак строгого соблюдения протокола
 boolean                 boStrictUni;
+
+// максимальный счетчик
+uchar                   bMaxDelayUni;
+
+// флаг
+boolean                 boRepeatFlowUni;

@@ -9,6 +9,7 @@ KEY_ENBL_HOURS.Ñ
 #include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../digitals/digitals.h"
+#include        "../../digitals/digitals_display.h"
 #include        "../../digitals/enbl_hours.h"
 #include        "../../serial/speeds_display.h"
 #include        "../../flash/files.h"
