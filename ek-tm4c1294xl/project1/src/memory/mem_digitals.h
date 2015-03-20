@@ -8,6 +8,10 @@ extern  uint                    wDigitalsMask;
 
 extern  boolean                 mpboEnblCan[bCANALS];
 
+extern  boolean                 mpboEnblPrtHou[bPORTS][48];
+
+extern  boolean                 mpboCtrlHou[48];
+
 
 
 extern  boolean                 boEnblKeys;
@@ -48,4 +52,3 @@ extern  boolean                 boHideMessages;
 
 
 extern  uchar                   mpboReadyCan[bCANALS];
-

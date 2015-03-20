@@ -16,6 +16,8 @@ KEYBOARD_KEY.C
 #include        "key_start.h"
 #include        "key_version.h"
 #include        "digitals/key_digitals.h"
+#include        "digitals/key_enbl_hours.h"
+#include        "digitals/key_ctrl_hours.h"
 #include        "digitals/key_enbl_canals.h"
 #include        "digitals/key_enbl_current.h"
 #include        "digitals/key_enbl_profile.h"
@@ -105,6 +107,8 @@ void    Keyboard_Key(void)
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
+      case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
+      case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
@@ -182,6 +186,8 @@ void    Keyboard_Key(void)
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
+      case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
+      case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
@@ -326,6 +332,8 @@ void    Keyboard_Key(void)
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
+      case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
+      case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;

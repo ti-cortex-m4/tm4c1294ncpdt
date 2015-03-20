@@ -168,6 +168,8 @@ PROGRAMS.H
 // все режимы
 
 #define bSET_DIGITALS               90
+#define bSET_ENBL_HOURS             182
+#define bSET_CONTROL_HOURS          183
 #define bSET_ENBL_CANALS            185
 
 #define bSET_ENBL_CURRENT           192
