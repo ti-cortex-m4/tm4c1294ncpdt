@@ -107,6 +107,7 @@ int main(void) {
     InitTimer1(ui32SysClock);
 
     IntMasterEnable();
+    LongBeep();
 
     while (1) {
     	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM))
