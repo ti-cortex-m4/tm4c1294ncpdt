@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 KEY_AUTOMATIC.C
               
-TODO persist
+
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
@@ -15,6 +15,7 @@ TODO persist
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_messages.h"
 #include        "../../digitals/digitals_display.h"
+#include        "../../factors.h"
 
 
 
@@ -179,6 +180,8 @@ uchar   i;
 
       DelayMsg();
       KeyBreakConnect();
+
+      SaveFactors();
 }
 
 

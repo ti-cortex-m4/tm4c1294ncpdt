@@ -17,7 +17,7 @@ void    IncFlashControl(void)
   mpcwFlashControl[wPageOut]++;
 }
 
-// TODO OutFlashControl
+
 void    OutFlashControl(void) 
 {
 uint    i;

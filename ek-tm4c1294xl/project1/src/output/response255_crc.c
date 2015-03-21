@@ -11,6 +11,7 @@ RESPONSE255_CRC.C
 #include        "../include/states.h"
 #include        "../serial/ports.h"
 #include        "../output/response_crc.h"
+#include        "../flash/flash_control.h"
 #include        "../tariffs/gaps.h"
 #include        "../output/out_groups.h"
 #include        "../output/out_relaxs.h"
@@ -210,11 +211,11 @@ void    Response255_CRC(void)
     case bEXT_SETGROUPNAME: 
       SetGroupsNameExt();
       break;
-
+*/
     case bEXT_FLASH_CONTROL:
       OutFlashControl();
       break;
-*/
+
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
       Result(bRES_BADCOMMAND);
