@@ -89,7 +89,13 @@ void    PushLong(ulong  dwT) {
 
 void    PushReal(real  reT)
 {
-  Push(&reT, sizeof(real));
+  static combo coT;
+  coT.reBuff = reT;
+
+  PushChar(coT.mpbBuff[3]);
+  PushChar(coT.mpbBuff[2]);
+  PushChar(coT.mpbBuff[1]);
+  PushChar(coT.mpbBuff[0]);
 }
 
 
