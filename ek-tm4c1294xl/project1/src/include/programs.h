@@ -50,6 +50,9 @@ PROGRAMS.H
 #define bSEARCH_BY_NUMBER           88
 #define bSEARCH_BY_SPEED            89
 
+#define bSET_AUTOMATIC1             94
+#define bSET_AUTOMATIC2             149
+
 #define bSET_MAJOR_DELAYS           97
 #define bSET_MINOR_DELAYS           98
 
