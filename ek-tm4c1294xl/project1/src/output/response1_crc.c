@@ -17,6 +17,7 @@ RESPONSE1_CRC.C
 #include        "out_flash.h"
 #include        "out_delay.h"
 #include        "out_console.h"
+#include        "out_config.h"
 #include        "response_crc.h"
 #include        "response254_crc.h"
 #include        "response255_crc.h"
@@ -91,6 +92,10 @@ void    Response1_CRC(void)
 
       case bINQ_GETDISPLAY:
         OutGetDisplay();
+        break;
+
+      case bINQ_GETCONFIG:
+        OutGetConfig();
         break;
 
       case bINQ_RESPONSE_254:
