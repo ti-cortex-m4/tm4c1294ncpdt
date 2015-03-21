@@ -21,7 +21,7 @@ file const              flPulseMnt = {FLS_PULSE_MNT, &mprePulseMnt, sizeof(real)
 
 file const              flCount = {FLS_COUNT, &mpreCount, sizeof(real)*bCANALS};
 file const              flLosse = {FLS_LOSSE, &mpreLosse, sizeof(real)*bCANALS};
-file const              flLevel = {FLS_LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS};
+file const              flLevelDiv = {FLS_LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS};
 
 
 void    InitFactors(void)
@@ -34,7 +34,7 @@ void    InitFactors(void)
 
   LoadFile(&flCount);
   LoadFile(&flLosse);
-  LoadFile(&flLevel);
+  LoadFile(&flLevelDiv);
 
   StartFactors();
 }
@@ -69,7 +69,21 @@ uchar   c;
 
   SaveFile(&flCount);
   SaveFile(&flLosse);
-  SaveFile(&flLevel);
+  SaveFile(&flLevelDiv);
+}
+
+
+void    SaveFactors(void)
+{
+  SaveFile(&flTransEng);
+  SaveFile(&flTransCnt);
+
+  SaveFile(&flPulseHou);
+  SaveFile(&flPulseMnt);
+
+  SaveFile(&flCount);
+  SaveFile(&flLosse);
+  SaveFile(&flLevelDiv);
 }
 
 

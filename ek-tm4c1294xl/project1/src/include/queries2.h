@@ -34,5 +34,7 @@ QUERIES2.H
 
 #define bEXT_GETDECRET                 105
 
+#define bEXT_FLASH_CONTROL             250
+
 
 #endif
