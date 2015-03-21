@@ -7,62 +7,27 @@ AUTOMATIC2.C
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_factors.h"
+#include        "../memory/mem_energy.h"
 #include        "../memory/mem_current.h"
 #include        "../memory/mem_realtime.h"
 #include        "../display/display.h"
+#include        "../realtime/realtime.h"
 #include        "../time/timedate.h"
 #include        "../serial/ports.h"
+#include        "../devices/device_b.h"
 #include        "../digitals/digitals.h"
 #include        "../engine.h"
 #include        "../energy.h"
+#include        "../energy2.h"
 #include        "automatic1.h"
 #include        "automatic_b.h"
-/*
-#include        "xdata.h"
-#include        "display.h"
-#include        "timedate.h"
-#include        "keyboard.h"
-#include        "engine.h"
-#include        "nexttime.h"
-#include        "general.h"
-#include        "device_a.h"
-#include        "device_b.h"
-#include        "device_c.h"
-#include        "device_d.h"
-#include        "device_e.h"
-#include        "device_f.h"
-#include        "device_g.h"
-#include        "device_g2.h"
-#include        "device_h.h"
-#include        "device_h2.h"
-#include        "device_i.h"
-#include        "device_k.h"
-#include        "device_m.h"
-#include        "device_n.h"
-#include        "device_o.h"
-#include        "device_p.h"
-#include        "device_z.h"
-#include        "_automatic1.h"
-#include        "automatic_k.h"
-#include        "automatic_p.h"
-#include        "automatic_q.h"
-#include        "automatic_r.h"
-#include        "automatic_s.h"
-#include        "automatic_t.h"
-#include        "automatic_u.h"
-#include        "queries.h"
-#include        "energy.h"
-#include        "delay.h"
-#include        "esc.h"
-#include        "ports.h"
-#include        "sensors.h"
 
 
 
 #ifndef SKIP_A
 
 // чтение реальных показаний счётчиков для счётчиков СЭТ-4ТМ
-bit     ReadSensorA(void)                 
+bool    ReadSensorA(void)
 {
 uchar   i;
 
@@ -76,7 +41,7 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = *PGetCanLong(mpdwChannelsA, i) * reBuffB;
+    reBuffA = GetCanLong(mpdwChannelsA, i) * reBuffB;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = boTrue;     
@@ -88,7 +53,7 @@ uchar   i;
 }
 
 #endif
-*/
+
 
 
 #ifndef SKIP_B
@@ -126,7 +91,7 @@ uchar   i;
 #ifndef SKIP_C
 
 // чтение реальных показаний счётчиков для счётчиков СС-301
-bit     ReadSensorC(void)                 
+bool    ReadSensorC(void)
 {
 uchar   i;
 
@@ -147,7 +112,7 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = *PGetCanLong(mpdwChannelsA, i) * reBuffB;
+    reBuffA = GetCanLong(mpdwChannelsA, i) * reBuffB;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = boTrue;     
@@ -165,7 +130,7 @@ uchar   i;
 #ifndef SKIP_D
 
 // чтение реальных показаний счётчиков для счётчиков ABB Альфа
-bit     ReadSensorD(void)                 
+bool    ReadSensorD(void)
 {
   Clear();
   if (OpenDeviceD() == 0) return(0);
@@ -187,7 +152,7 @@ bit     ReadSensorD(void)
 
 #ifndef SKIP_E
 
-bit     ReadSensorE(uchar  chEsc, bit  fOpen)                
+bool    ReadSensorE(uchar  chEsc, bool fOpen)
 {
 uchar   i;
 
@@ -239,7 +204,7 @@ uchar   i;
 #ifndef SKIP_F
 
 // чтение реальных показаний счётчиков для сумматора СЭМ+2
-bit     ReadSensorF(void)                
+bool    ReadSensorF(void)
 {
 uchar   i;
 
@@ -268,7 +233,7 @@ uchar   i;
 #ifndef SKIP_G
 
 // чтение реальных показаний счётчиков для счётчиков Энергия-9 a
-bit     ReadSensorG(void)                 
+bool    ReadSensorG(void)
 {
 uchar   i;
 
@@ -305,7 +270,7 @@ uchar   i;
 #ifndef SKIP_H
 
 // чтение реальных показаний счётчиков для счётчиков Энергия-9
-bit     ReadSensorH(void)                 
+bool    ReadSensorH(void)
 {
 uchar   i,j;
 
@@ -371,7 +336,7 @@ uchar   i,j;
 #ifndef SKIP_I
 
 // чтение реальных показаний счётчиков для счётчиков СЭБ-2А.07
-bit     ReadSensorI(void)                 
+bool    ReadSensorI(void)
 {
 uchar   i,j;
 
@@ -425,7 +390,7 @@ uchar   i,j;
 #ifndef SKIP_K
 
 // чтение реальных показаний счётчиков для счётчиков ЦЭ6850М
-bit     ReadSensorK(uchar  bMaxLines)                 
+bool    ReadSensorK(uchar  bMaxLines)
 {
 uchar   i,j;
 
@@ -474,7 +439,7 @@ uchar   i,j;
 #ifndef SKIP_M
 
 // чтение реальных показаний счётчиков для счётчиков Меркурий-200
-bit     ReadSensorM(void)
+bool    ReadSensorM(void)
 {
 uchar   i;
 
@@ -513,7 +478,7 @@ uchar   i;
 #ifndef SKIP_N
 
 // чтение реальных показаний счётчиков для преобразователей ПИ-1.4
-bit     ReadSensorN(void)
+bool    ReadSensorN(void)
 {
 uchar   i;
 
@@ -533,7 +498,7 @@ uchar   i;
   ReadEnergyN();
 
 
-  reBuffA = *PGetCanLong(mpdwChannelsA, 0) * *PGetCanReal(mpreValueCntHou,ibDig);
+  reBuffA = GetCanLong(mpdwChannelsA, 0) * *PGetCanReal(mpreValueCntHou,ibDig);
   reBuffA += *PGetCanReal(mpreCount,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
@@ -552,7 +517,7 @@ uchar   i;
 #ifndef SKIP_O
 
 // чтение реальных показаний счётчиков для счётчиков ПСЧ-4ТА.04
-bit     ReadSensorO(void)                 
+bool    ReadSensorO(void)
 {
 uchar   i,j;
 
@@ -605,7 +570,7 @@ uchar   i,j;
 
 #ifndef SKIP_P
 
-bit     ReadSensorP(void)
+bool    ReadSensorP(void)
 {
 uchar   i;
 
@@ -653,7 +618,7 @@ uchar   i;
 #ifndef SKIP_A
 
 //  чтение значение времени/даты для счётчиков СЭТ-4ТМ
-bit     ReadTimeDateA(void)                 
+bool    ReadTimeDateA(void)
 {
 uchar   i;
 
@@ -699,7 +664,7 @@ uchar   i;
 #ifndef SKIP_C
 
 //  чтение значение времени/даты для счётчиков CC-301
-bit     ReadTimeDateC(void)                 
+bool    ReadTimeDateC(void)
 {
 uchar   i;
 
@@ -735,7 +700,7 @@ uchar   i;
 #ifndef SKIP_D
 
 // чтение значение времени/даты для счётчиков ABB Альфа
-bit     ReadTimeDateD(void)                 
+bool    ReadTimeDateD(void)
 {
 uchar   i;
 
@@ -773,7 +738,7 @@ uchar   i;
 #ifndef SKIP_E
 
 // чтение значение времени/даты для сумматора СЭМ-2
-bit     ReadTimeDateE(void)                
+bool    ReadTimeDateE(void)
 {
 uchar   i;
 
@@ -812,7 +777,7 @@ uchar   i;
 #ifndef SKIP_F
 
 // чтение значение времени/даты для сумматора СЭМ+2
-bit     ReadTimeDateF(void)                
+bool    ReadTimeDateF(void)
 {
 uchar   i;
 
@@ -845,7 +810,7 @@ uchar   i;
 #ifndef SKIP_G
 
 //  чтение значение времени/даты для счётчиков Энергия-9 a
-bit     ReadTimeDateG(void)                 
+bool    ReadTimeDateG(void)
 {
 uchar   i;
 
@@ -883,7 +848,7 @@ uchar   i;
 #ifndef SKIP_H
 
 //  чтение значение времени/даты для счётчиков Энергия-9
-bit     ReadTimeDateH(void)                 
+bool    ReadTimeDateH(void)
 {
 uchar   i;
 
@@ -921,7 +886,7 @@ uchar   i;
 #ifndef SKIP_I
 
 //  чтение значение времени/даты для счётчиков СЭБ-2А.07
-bit     ReadTimeDateI(void)                 
+bool    ReadTimeDateI(void)
 {
 uchar   i;
 
@@ -957,7 +922,7 @@ uchar   i;
 #ifndef SKIP_K
 
 //  чтение значение времени/даты для счётчиков ЦЭ6850М
-bit     ReadTimeDateK(void)                 
+bool    ReadTimeDateK(void)
 {
 uchar   i;
 
@@ -1013,7 +978,7 @@ uchar   i;
 #ifndef SKIP_O
 
 //  чтение значение времени/даты для счётчиков ПСЧ-4ТА.04
-bit     ReadTimeDateO(void)                 
+bool    ReadTimeDateO(void)
 {
 uchar   i;
 
@@ -1048,7 +1013,7 @@ uchar   i;
 
 #ifndef SKIP_P
 
-bit     ReadTimeDateP(void)
+bool    ReadTimeDateP(void)
 {
 uchar   i;
 
@@ -1084,7 +1049,7 @@ uchar   i;
 #ifndef SKIP_Z
 
 //  чтение значение времени/даты
-bit     ReadTimeDateZ(void)                 
+bool    ReadTimeDateZ(void)
 {
 uchar   i;
 
@@ -1113,13 +1078,13 @@ uchar   i;
 }
 
 #endif
-
+*/
 
 
 #ifndef SKIP_A
 
 // чтение реальных показаний счётчиков по месяцам для счётчика СЭТ-4ТМ
-bit     ReadCntMonCanA(uchar  ibMonth)                 
+bool    ReadCntMonCanA(uchar  ibMonth)
 { 
 uchar   i,j;
 
@@ -1134,15 +1099,15 @@ uchar   i,j;
     if (QueryEnergyA_Full2(0x40,98) == 0) return(0);
     for (i=0; i<4; i++)
     {
-      dwBuffC = *PGetCanLong(mpdwChannelsA, i);
+      dwBuffC = GetCanLong(mpdwChannelsA, i);
       SetCanLong(mpdwChannelsB, i);
     }
 
     if (QueryEnergyA_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-      dwBuffC -= *PGetCanLong(mpdwChannelsB, i);
+      dwBuffC  = GetCanLong(mpdwChannelsA, i);
+      dwBuffC -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i);
     }
@@ -1158,8 +1123,8 @@ uchar   i,j;
       if (QueryEnergyA_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return(0);             
       for (i=0; i<4; i++)
       {
-        dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-        dwBuffC += *PGetCanLong(mpdwChannelsB, i);
+        dwBuffC  = GetCanLong(mpdwChannelsA, i);
+        dwBuffC += GetCanLong(mpdwChannelsB, i);
 
         SetCanLong(mpdwChannelsB, i);
       }
@@ -1169,8 +1134,8 @@ uchar   i,j;
     if (QueryEnergyA_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-      dwBuffC -= *PGetCanLong(mpdwChannelsB, i);
+      dwBuffC  = GetCanLong(mpdwChannelsA, i);
+      dwBuffC -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i);
     }
@@ -1183,13 +1148,13 @@ uchar   i,j;
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
 
-    reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB;
+    reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = boTrue;     
   }
 
-  reBuffA = *PGetCanLong(mpdwChannelsB, diCurr.ibLine) * reBuffB;
+  reBuffA = GetCanLong(mpdwChannelsB, diCurr.ibLine) * reBuffB;
 
   return(1);
 }
@@ -1201,9 +1166,10 @@ uchar   i,j;
 #ifndef SKIP_B
 
 // чтение реальных показаний счётчиков по месяцам для счётчика Меркурий-230
-bit     ReadCntMonCanB(uchar  ibMonth)                 
+bool    ReadCntMonCanB(uchar  ibMonth)
 { 
 uchar   i,j;
+ulong   dwBuffC;
 
   Clear();
   if (ReadKoeffDeviceB_Special() == 0) return(0);
@@ -1216,23 +1182,23 @@ uchar   i,j;
     if (QueryEnergyB_Full2(0x40,98) == 0) return(0);                   
     for (i=0; i<4; i++)
     {
-      dwBuffC = *PGetCanLong(mpdwChannelsA, i);
-      SetCanLong(mpdwChannelsB, i);
+      dwBuffC = GetCanLong(mpdwChannelsA, i);
+      SetCanLong(mpdwChannelsB, i, &dwBuffC);
     }
 
     if (QueryEnergyB_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-      dwBuffC -= *PGetCanLong(mpdwChannelsB, i);
+      dwBuffC  = GetCanLong(mpdwChannelsA, i);
+      dwBuffC -= GetCanLong(mpdwChannelsB, i);
 
-      SetCanLong(mpdwChannelsB, i);
+      SetCanLong(mpdwChannelsB, i, &dwBuffC);
     }
   }
   else
   {
     dwBuffC = 0;
-    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i);
+    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i, &dwBuffC);
 
     j = ibMonth + 2;
     do
@@ -1240,10 +1206,10 @@ uchar   i,j;
       if (QueryEnergyB_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return(0);
       for (i=0; i<4; i++)
       {
-        dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-        dwBuffC += *PGetCanLong(mpdwChannelsB, i);
+        dwBuffC  = GetCanLong(mpdwChannelsA, i);
+        dwBuffC += GetCanLong(mpdwChannelsB, i);
 
-        SetCanLong(mpdwChannelsB, i);
+        SetCanLong(mpdwChannelsB, i, &dwBuffC);
       }
     }
     while ((bMONTHS + tiAlt.bMonth - j++) % bMONTHS != 0 );
@@ -1251,10 +1217,10 @@ uchar   i,j;
     if (QueryEnergyB_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-      dwBuffC -= *PGetCanLong(mpdwChannelsB, i);
+      dwBuffC  = GetCanLong(mpdwChannelsA, i);
+      dwBuffC -= GetCanLong(mpdwChannelsB, i);
 
-      SetCanLong(mpdwChannelsB, i);
+      SetCanLong(mpdwChannelsB, i, &dwBuffC);
     }
   }
 
@@ -1265,13 +1231,13 @@ uchar   i,j;
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
 
-    reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB * 2;
-    SetCanReal(mpreChannelsB, i);
+    reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB * 2;
+    SetCanReal(mpreChannelsB, i, &reBuffA);
 
-    mpboChannelsA[i] = boTrue;     
+    mpboChannelsA[i] = TRUE;
   }
 
-  reBuffA = *PGetCanLong(mpdwChannelsB, diCurr.ibLine) * reBuffB * 2;
+  reBuffA = GetCanLong(mpdwChannelsB, diCurr.ibLine) * reBuffB * 2;
 
   return(1);
 }
@@ -1282,7 +1248,7 @@ uchar   i,j;
 
 #ifndef SKIP_C
 
-bit     ReadCntMonCanC(uchar  ibMonth)                 
+bool    ReadCntMonCanC(uchar  ibMonth)
 { 
 uchar   i,j;
 
@@ -1303,7 +1269,7 @@ uchar   i,j;
     if (QueryEnergyDayC_Full2(0, 98) == 0) return(0);
     for (i=0; i<4; i++)
     {
-      dwBuffC = *PGetCanLong(mpdwChannelsA, i);
+      dwBuffC = GetCanLong(mpdwChannelsA, i);
       SetCanLong(mpdwChannelsB, i);
     }
 
@@ -1311,8 +1277,8 @@ uchar   i,j;
     if (QueryEnergyAbsC_Full2(99) == 0) return(0);
     for (i=0; i<4; i++)
     {
-      dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-      dwBuffC -= *PGetCanLong(mpdwChannelsB, i);
+      dwBuffC  = GetCanLong(mpdwChannelsA, i);
+      dwBuffC -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i);
     }
@@ -1328,8 +1294,8 @@ uchar   i,j;
       if (QueryEnergyMonC_Full2(-((12-1+tiAlt.bMonth-j)%12), 76+j) == 0) return(0);
       for (i=0; i<4; i++)
       {
-        dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-        dwBuffC += *PGetCanLong(mpdwChannelsB, i);
+        dwBuffC  = GetCanLong(mpdwChannelsA, i);
+        dwBuffC += GetCanLong(mpdwChannelsB, i);
 
         SetCanLong(mpdwChannelsB, i);
       }
@@ -1340,8 +1306,8 @@ uchar   i,j;
     if (QueryEnergyAbsC_Full2(99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-      dwBuffC -= *PGetCanLong(mpdwChannelsB, i);
+      dwBuffC  = GetCanLong(mpdwChannelsA, i);
+      dwBuffC -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i);
     }
@@ -1352,13 +1318,13 @@ uchar   i,j;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB;
+    reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = boTrue;     
   }
 
-  reBuffA = *PGetCanLong(mpdwChannelsB, diCurr.ibLine) * reBuffB;
+  reBuffA = GetCanLong(mpdwChannelsB, diCurr.ibLine) * reBuffB;
 
   return(1);
 }
@@ -1369,7 +1335,7 @@ uchar   i,j;
 
 #ifndef SKIP_D
 
-bit     ReadCntMonCanD(uchar  ibMonth)                 
+bool    ReadCntMonCanD(uchar  ibMonth)
 { 
 uchar	i,j;
 
@@ -1455,7 +1421,7 @@ uchar	i,j;
 #ifndef SKIP_E
 
 // чтение реальных показаний счётчиков по месяцам для сумматора СЭМ-2
-bit     ReadCntMonCanE(uchar  ibMonth)                 
+bool    ReadCntMonCanE(uchar  ibMonth)
 {
   Clear();
   if (ReadTimeDateE() == 0) return(0);
@@ -1489,7 +1455,7 @@ bit     ReadCntMonCanE(uchar  ibMonth)
 #ifndef SKIP_F
 
 //  чтение значение показаний счётчиков для сумматоров СЭМ+2
-bit     ReadCntMonCanF(uchar  ibMonth)                 
+bool    ReadCntMonCanF(uchar  ibMonth)
 {
 uchar   i;
 
@@ -1536,7 +1502,7 @@ uchar   i;
 #ifndef SKIP_G
 
 //  чтение значение показаний счётчиков для счётчиков Энергия-9
-bit     ReadCntMonCanG(uchar  ibMonth)                 
+bool    ReadCntMonCanG(uchar  ibMonth)
 {
 uchar   i;
 
@@ -1607,7 +1573,7 @@ uchar   i;
 #ifndef SKIP_H
 
 //  чтение значение показаний счётчиков для счётчиков Энергия-9
-bit     ReadCntMonCanH(uchar  ibMonth)                 
+bool    ReadCntMonCanH(uchar  ibMonth)
 {
 uchar   i,j;
 
@@ -1692,7 +1658,7 @@ uchar   i,j;
 
 #ifndef SKIP_I
 
-bit     ReadCntMonCanI(uchar  ibMonth)                 
+bool    ReadCntMonCanI(uchar  ibMonth)
 { 
 uchar   i,j;
 
@@ -1763,7 +1729,7 @@ uchar   i,j;
 #ifndef SKIP_K
 
 // чтение значение показаний счётчиков для счётчиков ЦЭ6850М
-bit     ReadCntMonCanK(void)                 
+bool    ReadCntMonCanK(void)
 {
   if (ReadTimeDateK() == 0) return(0);
   if (tiAlt.bMonth != ibMon+1) return(0);     // значенияе счётчиков на начало текущего месяца
@@ -1801,7 +1767,7 @@ bit     ReadCntMonCanK(void)
 
 #ifndef SKIP_O
 
-bit     ReadCntMonCanO(uchar  ibMonth)                 
+bool    ReadCntMonCanO(uchar  ibMonth)
 { 
 uchar   i,j;
 
@@ -1886,10 +1852,10 @@ uchar   i,j;
 }
 
 #endif
-*/
 
 
-// прочитать показания счётчиков с цифровых счётчиков
+
+// прочитать показания счётчиков текущие с цифровых счётчиков
 bool    ReadSensors(uchar  ibCanal)
 {
   Clear();
@@ -1955,9 +1921,9 @@ bool    ReadTimeDate(uchar  ibCan)
 }
 
 
-/*
+
 // прочитать показания счётчиков по месяцам с цифровых счётчиков
-bit     ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
+bool    ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
 {
   Clear();
 
@@ -1967,8 +1933,8 @@ bit     ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
   switch (diCurr.bDevice)
   {
     case 0:  if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
-             return(1); break;
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+             return(1);
 
 #ifndef SKIP_A
     case 15:
@@ -1977,11 +1943,11 @@ bit     ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadCntMonCanB(ibMonth) ); break;
+    case 2:  return( ReadCntMonCanB(ibMonth) );
 
     case 12: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
-             return(1); break;
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+             return(1);
 #endif
 
 #ifndef SKIP_C
@@ -2073,7 +2039,7 @@ bit     ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
     case 99: reBuffA = 0; return(1);            break;
 #endif
 
-    default: reBuffA = 0; return(0);            break;
+    default: reBuffA = 0; return(0);
   }
 }
-*/
+

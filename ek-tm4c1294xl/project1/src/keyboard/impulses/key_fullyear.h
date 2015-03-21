@@ -1,9 +1,7 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC2.H
-              
+KEY_FULLYEAR.H
+
 
 ------------------------------------------------------------------------------*/
 
-bool    ReadSensors(uchar  ibCan);
-bool    ReadTimeDate(uchar  ibCan);
-bool    ReadCntMonCan(uchar  ibMon, uchar  ibCan);
+void    key_GetFullYear(item  it);

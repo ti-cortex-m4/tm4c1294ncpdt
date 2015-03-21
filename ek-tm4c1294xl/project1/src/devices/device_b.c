@@ -111,13 +111,13 @@ bit     TestVersionB710(void)
 {
   return ((uint)100*bVersionB1 + 10*bVersionB2 + bVersionB3 >= 710);
 }
-
+*/
 
 
 // посылка запроса на чтение логического номера
 void    QueryIdB(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(8);
@@ -128,7 +128,7 @@ void    QueryIdB(void)
 
 
 // чтение логического номера
-bit     ReadIdB(void)
+bool    ReadIdB(void)
 {
   InitPop(0);
   if (PopChar() != diCurr.bAddress) return 0;
@@ -137,7 +137,7 @@ bit     ReadIdB(void)
 
   return 1;
 }
-*/
+
 
 
 // посылка запроса на чтение энергии
@@ -509,48 +509,5 @@ real    reBuffA;
   MakeCurrent();
 }
 
-/*
-bit     QueryIdB_Full(void)
-{
-  for (x=0; x<bMINORREPEATS; x++)
-  {
-    DelayOff();
-    QueryIdB();
 
-    if ((Input() == SER_GOODCHECK) && (ReadIdB() == 1)) break;
-    if (fKey == 1) return(0);
-
-    ShowLo(szFailure20); Delay(1000);
-    mpcwFailure2[ibDig]++;
-  }
-
-  Clear();
-  if (x == bMINORREPEATS) return(0);
-
-  return(1);
-}
-
-
-bit     QueryEnergyB_Full2(uchar  bTime, uchar  bPercent)
-{
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryEnergyB(bTime);
-
-    if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
-
-    if (QueryIdB_Full() == 0) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(bPercent);
-
-  ReadEnergyB();
-  return(1);
-}
-*/
 #endif

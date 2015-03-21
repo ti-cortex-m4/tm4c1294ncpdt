@@ -14,9 +14,9 @@ void    QueryOpenB(void);
 //void    QueryVersionB(void);
 //void    ReadVersionB(void);
 //bit     TestVersionB710(void);
-//
-//void    QueryIdB(void);
-//bit     ReadIdB(void);
+
+void    QueryIdB(void);
+bool    ReadIdB(void);
 
 void    QueryEnergyB(uchar  bTime);
 void    ReadEnergyB(void);
@@ -37,10 +37,5 @@ void    ReadTimeAltB(void);
 //bit     ReadHeaderB(uchar  ibBlock, bit  fDelay);
 
 void    ReadCurrentB(void);
-
-//bit     QueryOpenB_Full(uchar  bPercent);
-//bit     QueryTimeAltB_Full(uchar  bPercent);
-//bit     QueryEnergyB_Full(uchar  bTime, uchar  bPercent);
-//bit     QueryEnergyB_Full2(uchar  bTime, uchar  bPercent);
 
 #endif

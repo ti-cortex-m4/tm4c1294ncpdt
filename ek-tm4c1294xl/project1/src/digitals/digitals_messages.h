@@ -37,7 +37,7 @@ extern  char const              szBaudOK[],
 //                                szNoData[],
 //                                szNoVersion[],
                                 szPowerOK[],
-                                szPowerNo[];
+                                szPowerNo[],
 //                                szNewSeason[],
 //                                szIsWinter[],
 //                                szClosing[],
@@ -45,3 +45,6 @@ extern  char const              szBaudOK[],
 //                                szCorrectQ1[],
 //                                szCorrectQ2[],
 //                                szWorkDone[];
+                                szFailure1[],
+                                szFailure2[],
+                                szFailure20[];

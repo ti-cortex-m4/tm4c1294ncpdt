@@ -42,7 +42,7 @@ char const              szBaudOK[]      = "   модем: OK    ",
 //                        szNoData[]      = "данные не готовы",
 //                        szNoVersion[]   = "ошибка версии ! ",
                         szPowerOK[]     = "  мощность: OK  ",
-                        szPowerNo[]     = "  мощность: нет ";
+                        szPowerNo[]     = "  мощность: нет ",
 //                        szNewSeason[]   = "Смена сезона:   ",
 //                        szIsWinter[]    = "на зинее время  ",
 //                        szClosing[]     = "   закрытие...  ",
@@ -50,4 +50,7 @@ char const              szBaudOK[]      = "   модем: OK    ",
 //                        szCorrectQ1[]   = " коррекция...   ",
 //                        szCorrectQ2[]   = " коррекция...OK ",
 //                        szWorkDone[]    = "Опрос завершен  ";
+                        szFailure1[]    = " сбой потока !  ",
+                        szFailure2[]    = " сбой данных !  ",
+                        szFailure20[]   = "сбой данных !   ";
 
