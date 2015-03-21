@@ -14,6 +14,7 @@ TODO volatile
 #include        "../keyboard/key.h"
 #include        "../display/lcd.h"
 #include        "../impulses/impulses.h"
+#include        "../digitals/digitals_pause.h"
 #include        "serial0.h"
 #include        "serial1.h"
 #include        "serial2.h"
@@ -46,6 +47,8 @@ void Timer0IntHandler(void) {
 	InDelay1_Timer0();
 	InDelay2_Timer0();
 	InDelay3_Timer0();
+
+	Pause();
 
 	Impulses_Timer0();
 	LCD_Timer0();

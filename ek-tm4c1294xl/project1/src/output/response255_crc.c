@@ -23,7 +23,9 @@ RESPONSE255_CRC.C
 #include        "../output/out_minute3.h"
 #include        "../output/out_minute30.h"
 #include        "../output/out_minute30_48.h"
+#include        "../output/out_current.h"
 #include        "../output/out_version.h"
+#include        "../output/out_ports.h"
 
 
 
@@ -148,6 +150,8 @@ void    Response255_CRC(void)
     case bEXT_GETIMPCANMNT:         OutImpCanMntExt();     break;
     case bEXT_GETPOWCANMNT:         OutPowCanMntExt();     break;
 
+    case bEXT_GETCURRENT:           OutCurrentExt();       break;
+
     case bEXT_GETDIGITALS: OutDigitalsExt(); break;
     case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnblCan); break;
 
@@ -155,6 +159,7 @@ void    Response255_CRC(void)
     case bEXT_SETRELAXS: OutSetRelaxs(); break;
 
     case bEXT_GETVERSION: OutVersion(); break;
+    case bEXT_GETPORTS: OutPorts(); break;
 
     case bEXT_GETGAPS1: OutGaps1(); break;
     case bEXT_GETGAPS2: OutGaps2(); break;
