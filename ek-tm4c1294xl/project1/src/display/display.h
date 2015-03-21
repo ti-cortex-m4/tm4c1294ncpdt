@@ -38,6 +38,7 @@ void    ShowReal(real  reT);
 void    ShowBoolean(boolean  boT);
 void    ShowAnswer(void);
 void    ShowPercent(uchar  bT);
+void    ShowProgress(uchar  ibPos, uchar  bT);
 
 void    SaveDisplay(void);
 void    LoadDisplay(void);

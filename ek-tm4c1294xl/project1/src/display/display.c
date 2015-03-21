@@ -127,6 +127,15 @@ void    ShowPercent(uchar  bT)
 }
 
 
+void    ShowProgress(uchar  ibPos, uchar  bT)
+{
+  if (ibPos < 16)
+    sprintf(szHi+ibPos,"%3u%c",bT,'%');
+  else
+    sprintf(szLo+(ibPos-16),"%3u%c",bT,'%');
+}
+
+
 
 void    SaveDisplay(void)
 {
