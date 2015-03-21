@@ -17,6 +17,7 @@ MODEMS.C
 #include    "../digitals/digitals_pause.h"
 #include    "../digitals/digitals_run.h"
 #include    "../digitals/digitals_messages.h"
+#include    "../digitals/digitals_display.h"
 #include    "ports.h"
 #include    "ports_stack.h"
 #include    "ports_common.h"

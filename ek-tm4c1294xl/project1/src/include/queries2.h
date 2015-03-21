@@ -21,10 +21,13 @@ QUERIES2.H
 #define bEXT_GETENG3MIN_DATA           24
 #define bEXT_GETENG3MIN_TIME           25
 
+#define bEXT_GETCURRENT                35
+
 #define bEXT_GETRELAXS                 45
 #define bEXT_SETRELAXS                 46
 
 #define bEXT_GETVERSION                53
+#define bEXT_GETPORTS                  55
 
 #define bEXT_GETGAPS1                  96
 #define bEXT_GETGAPS2                  97
