@@ -4,6 +4,6 @@ AUTOMATIC2.H
 
 ------------------------------------------------------------------------------*/
 
-bool    ReadSensors(uchar  ibCan);
-bool    ReadTimeDate(uchar  ibCan);
+bool    ReadCntCurrCan(uchar  ibCan);
+bool    ReadTimeCan(uchar  ibCan);
 bool    ReadCntMonCan(uchar  ibMon, uchar  ibCan);
