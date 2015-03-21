@@ -46,6 +46,7 @@ KEYBOARD_KEY.C
 #include        "key_delays.h"
 #include        "impulses/key_single.h"
 #include        "impulses/key_single2.h"
+#include        "impulses/key_fullyear.h"
 #include        "impulses/key_oldprogram73.h"
 #include        "impulses/key_oldprogram74.h"
 #include        "key_reset.h"
@@ -282,6 +283,16 @@ void    Keyboard_Key(void)
       case bGET_ENGCANMONCURR_A:
 
       case bGET_POWCANCURRMNT:  key_GetSingle2();       break;
+
+      case bGET_ENGGRPYEAR_ABCD:
+      case bGET_ENGGRPYEAR_CD:
+      case bGET_ENGGRPYEAR_B:
+      case bGET_ENGGRPYEAR_A:  key_GetFullYear(GROUPS); break;
+
+      case bGET_CNTCANYEAR1:
+      case bGET_CNTCANYEAR10:
+      case bGET_CNTCANYEAR2:
+      case bGET_CNTCANYEAR20:  key_GetFullYear(CANALS); break;
 
       case bGET_PROGRAM73:      key_GetOldProgram73();  break;
       case bGET_PROGRAM74:      key_GetOldProgram74();  break;

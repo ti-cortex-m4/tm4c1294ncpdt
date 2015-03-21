@@ -74,3 +74,8 @@ boolean                 boHideMessages;
 
 // массив признаков для исключения повторного опроса каналов, принадлежащих одному цифровому счётчику
 uchar                   mpboReadyCan[bCANALS];
+
+
+
+// счетчикм событий
+uint                    mpcwFailure2[bCANALS];

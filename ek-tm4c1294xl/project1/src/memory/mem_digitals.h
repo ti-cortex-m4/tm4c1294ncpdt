@@ -52,3 +52,6 @@ extern  boolean                 boHideMessages;
 
 
 extern  uchar                   mpboReadyCan[bCANALS];
+
+
+extern  uint                    mpcwFailure2[bCANALS];
