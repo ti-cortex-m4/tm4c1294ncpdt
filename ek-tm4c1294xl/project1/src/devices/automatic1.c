@@ -5,63 +5,23 @@ AUTOMATIC1.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_factors.h"
 #include        "../memory/mem_digitals.h"
 #include        "../keyboard/keyboard.h"
 #include        "../display/display.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
 #include        "../serial/ports_common.h"
+#include        "../digitals/digitals_run.h"
 #include        "../engine.h"
 #include        "automatic_b.h"
-/*
-#include        "xdata.h"
-#include        "display.h"
-#include        "beep.h"
-#include        "keyboard.h"
-#include        "engine.h"
-#include        "device_a.h"
-#include        "device_b.h"
-#include        "device_c.h"
-#include        "device_d.h"
-#include        "device_d2.h"
-#include        "device_e.h"
-#include        "device_f.h"
-#include        "device_g.h"
-#include        "device_h.h"
-#include        "device_i.h"
-#include        "device_k.h"
-#include        "device_m.h"
-#include        "device_n.h"
-#include        "device_o.h"
-#include        "device_p.h"
-#include        "device_s.h"
-#include        "device_t.h"
-#include        "automatic_r.h"
-#include        "automatic_s.h"
-#include        "digitals.h"
-#include        "queries.h"
-#include        "energy.h"
-#include        "delay.h"
-#include        "esc.h"
-#include        "ports.h"
-#include        "speed.h"      
-#include        "sensors.h"
-#include        "modems.h"
-
-
-
-//                                         0123456789ABCDEF
-message         code    szAutomatic     = "Заполнение      ",
-                        szCana1s        = "Каналы:         ",
-                        szCana1FromMask = " от: __",
-                        szCana1ToMask   = " до: __";
 
 
 
 #ifndef SKIP_A
 
 // чтение коэффициентов для счётчика СЭТ-4ТМ
-bit     ReadKoeffDeviceA(void)                 
+bool    ReadKoeffDeviceA(void)
 {
 uchar   i;
 
@@ -70,7 +30,7 @@ uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
-    InitPush();
+    InitPush(0);
     PushChar(diCurr.bAddress);           
     PushChar(8);           
     PushChar(2);                        // чтение коэффициентов
@@ -92,7 +52,7 @@ uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
-    InitPush();
+    InitPush(0);
     PushChar(diCurr.bAddress);           
     PushChar(8);           
     PushChar(0x12);                     // чтение постоянной счётчика
@@ -130,7 +90,7 @@ uchar   i;
 #ifndef SKIP_B
 
 // чтение коэффициентов для счётчика Меркурий-230
-bit     ReadKoeffDeviceB(void)                 
+bool    ReadKoeffDeviceB(void)
 {
 uchar   i;
 
@@ -139,7 +99,7 @@ uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
-    InitPush();
+    InitPush(0);
     PushChar(diCurr.bAddress);           
     PushChar(8);           
     PushChar(2);                        // чтение коэффициентов
@@ -162,7 +122,7 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     // первый вариант: ответ 3 байта
-    InitPush();
+    InitPush(0);
     PushChar(diCurr.bAddress);           
     PushChar(8);           
     PushChar(0x12);                     // чтение постоянной счётчика
@@ -174,7 +134,7 @@ uchar   i;
     if (fKey == 1) return(0);
                                         
     // второй вариант: ответ 6 байт
-    InitPush();
+    InitPush(0);
     PushChar(diCurr.bAddress);           
     PushChar(8);           
     PushChar(0x12);                     // чтение постоянной счётчика
@@ -203,7 +163,7 @@ uchar   i;
 
   return(1);
 }
-*/
+
 
 // чтение коэффициентов для счётчика Меркурий-230
 bool    ReadKoeffDeviceB_Special(void)
@@ -239,7 +199,7 @@ uchar   i;
 
   return(1);
 }
-/*
+
 #endif
 
 
@@ -247,7 +207,7 @@ uchar   i;
 #ifndef SKIP_C
 
 // чтение коэффициентов для счётчика СС-301
-bit     ReadKoeffDeviceC(void)                 
+bool    ReadKoeffDeviceC(void)
 {
 uchar   i;
 
@@ -268,7 +228,7 @@ uchar   i;
   {
     DelayOff();
 
-    InitPush();
+    InitPush(0);
     PushChar(diCurr.bAddress);           
     PushChar(3);
     PushChar(34);
@@ -306,7 +266,7 @@ uchar   i;
   {
     DelayOff();
 
-    InitPush();
+    InitPush(0);
     PushChar(diCurr.bAddress);
     PushChar(3);
     PushChar(24);
@@ -337,7 +297,7 @@ uchar   i;
 
 #ifndef SKIP_G
 
-bit     ReadKoeffDeviceG(void)                 
+bool    ReadKoeffDeviceG(void)
 {
 uchar   i;
 
@@ -397,7 +357,7 @@ uchar   i;
 
 #ifndef SKIP_H
 
-bit     ReadKoeffDeviceH(void)                 
+bool    ReadKoeffDeviceH(void)
 {
 uchar   i;
 
@@ -430,7 +390,7 @@ uchar   i;
 
 #ifndef SKIP_P
 
-bit     ReadKoeffDeviceP(void)
+bool    ReadKoeffDeviceP(void)
 {
 uchar   i;
 
@@ -471,7 +431,7 @@ void    SetCanalsAll(void)
 #endif
 
 
-/ *
+/*
 #if (defined SKIP_A && defined SKIP_B && defined SKIP_C)
 #else
 
@@ -485,13 +445,13 @@ void    SetEnergyAll(void)
 }
 
 #endif
-* /
+*/
 
 
 #ifndef SKIP_A
 
 // задание параметров для счётчиков СЭТ-4ТМ
-bit     AutomaticA(void)                 
+bool    AutomaticA(void)
 {
   if (ReadKoeffDeviceA() == 0) return(0);
 
@@ -510,7 +470,7 @@ bit     AutomaticA(void)
 #ifndef SKIP_B
 
 // задание параметров для счётчиков Меркурий-230
-bit     AutomaticB(void)                
+bool    AutomaticB(void)
 {
   if (ReadKoeffDeviceB() == 0) return(0);
 
@@ -524,7 +484,7 @@ bit     AutomaticB(void)
 
 
 // задание параметров для счётчиков Меркурий-230
-bit     AutomaticJ(void)                
+bool    AutomaticJ(void)
 {
   if (ReadKoeffDeviceB_Special() == 0) return(0);
   mpreLevelDiv[ibDig] = reBuffA / 1000;
@@ -544,7 +504,7 @@ bit     AutomaticJ(void)
 #ifndef SKIP_C
 
 // задание параметров для счётчиков СС-301
-bit     AutomaticC(void)                
+bool    AutomaticC(void)
 {
   if (ReadKoeffDeviceC() == 0) return(0);
 
@@ -556,10 +516,10 @@ bit     AutomaticC(void)
 
   if (RevInput() != SER_GOODCHECK) return(0);
   ShowPercent(100);
-/ *
+/*
   ReadEnergyC();
   SetEnergyAll();                       // сохранение показаний счётчиков
-* /
+*/
   return(1);
 }
 
@@ -570,7 +530,7 @@ bit     AutomaticC(void)
 #ifndef SKIP_D
 
 // открытие канала для счётчиков ABB Альфа
-bit     OpenDeviceD(void)                 
+bool    OpenDeviceD(void)
 {
 uchar   i;
 
@@ -615,7 +575,7 @@ uchar   i;
 #ifndef SKIP_E
 
 // открытие канала для сумматоров СЭМ-2
-bit     OpenDeviceE(void)
+bool    OpenDeviceE(void)
 {
 uchar   i;
 
@@ -625,7 +585,7 @@ uchar   i;
     {   
       QueryBreakE();
 
-      InitPush();
+      InitPush(0);
       PushChar(0x1B);          
       PushChar('0'+diCurr.bAddress);            
 
@@ -650,7 +610,7 @@ uchar   i;
 #ifndef SKIP_G
 
 // открытие канала для счётчиков Энергия-9 a
-bit     OpenDeviceG(void)                
+bool    OpenDeviceG(void)
 {
 uchar   i;
 
@@ -677,7 +637,7 @@ uchar   i;
 #ifndef SKIP_H
 
 // открытие канала для счётчиков Энергия-9 a
-bit     OpenDeviceH(void)                
+bool    OpenDeviceH(void)
 {
 uchar   i;
 
@@ -704,7 +664,7 @@ uchar   i;
 #ifndef SKIP_D
 
 // чтение вснй накопленной энергии для счётчиков ABB Альфа
-bit     ReadAllEnergyD(void)                
+bool    ReadAllEnergyD(void)
 {
 uchar   i;
 
@@ -767,7 +727,7 @@ uchar   i;
 #ifndef SKIP_P
 
 // открытие канала для счётчиков Elster A1140
-bit     OpenDeviceP(void)
+bool    OpenDeviceP(void)
 {
 uchar   i;
 
@@ -819,7 +779,7 @@ uchar   i;
 #ifndef SKIP_D
 
 // задание параметров для счётчиков ABB Альфа
-bit     AutomaticD(void)                
+bool    AutomaticD(void)
 {
 uchar   i;
 
@@ -863,7 +823,7 @@ uchar   i;
 #ifndef SKIP_E
 
 // задание параметров для сумматора СЭМ-2
-bit     AutomaticE(void)                
+bool    AutomaticE(void)
 {
 uchar   i;
 
@@ -872,7 +832,7 @@ uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
-    InitPush();
+    InitPush(0);
     PushChar(0x1B);          
     PushChar('w');            
 
@@ -902,7 +862,7 @@ uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)       // чтение накопленной энергии
   {
-    InitPush();
+    InitPush(0);
     PushChar(0x1B);          
     PushChar('S');            
 
@@ -937,7 +897,7 @@ uchar   i;
 #ifndef SKIP_F
 
 // задание параметров для сумматора СЭМ+2
-bit     AutomaticF(void)                
+bool    AutomaticF(void)
 {
 uchar   i;
 
@@ -981,7 +941,7 @@ uchar   i;
 
 #ifndef SKIP_G
 
-bit     AutomaticG(void)                
+bool    AutomaticG(void)
 {
   if (ReadKoeffDeviceG() == 0) return(0);
   ShowPercent(100);
@@ -997,7 +957,7 @@ bit     AutomaticG(void)
 
 #ifndef SKIP_H
 
-bit     AutomaticH(void)                
+bool    AutomaticH(void)
 {
   if (ReadKoeffDeviceH() == 0) return(0);
   ShowPercent(100);
@@ -1013,7 +973,7 @@ bit     AutomaticH(void)
 
 #ifndef SKIP_I
 
-bit     AutomaticI(void)                
+bool    AutomaticI(void)
 {
 uchar   i;
 
@@ -1044,7 +1004,7 @@ uchar   i;
 
 #ifndef SKIP_K
 
-bit     AutomaticK(void)                
+bool    AutomaticK(void)
 {
 uchar   i,bT;
 
@@ -1083,7 +1043,7 @@ uchar   i,bT;
 
 #ifndef SKIP_M
 
-bit     AutomaticM(void)                
+bool    AutomaticM(void)
 {
 uchar   i;
 
@@ -1113,13 +1073,13 @@ uchar   i;
 
 #ifndef SKIP_N
 
-bit     AutomaticN(void)                
+bool    AutomaticN(void)
 {
 uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
-    InitPush();
+    InitPush(0);
     PushChar(0);   
     PushChar(diCurr.bAddress);
 
@@ -1176,7 +1136,7 @@ uchar   i;
 
 #ifndef SKIP_O
 
-bit     AutomaticO(void)                
+bool    AutomaticO(void)
 {
 uchar   i;
 
@@ -1207,7 +1167,7 @@ uchar   i;
 
 #ifndef SKIP_T
 
-bit     AutomaticT(void)                
+bool    AutomaticT(void)
 {
 uchar   i;
 
@@ -1240,7 +1200,7 @@ uchar   i;
 
 #ifndef SKIP_P
 
-bit     AutomaticP(void)
+bool    AutomaticP(void)
 {
 uchar   i;
 
@@ -1275,7 +1235,7 @@ uchar   i;
 
 #ifndef SKIP_R
 
-bit     AutomaticR(void)
+bool    AutomaticR(void)
 {
   Clear();
 
@@ -1294,7 +1254,7 @@ bit     AutomaticR(void)
 
 #ifndef SKIP_S
 
-bit     AutomaticS(void)
+bool    AutomaticS(void)
 {
   Clear();
 
@@ -1308,229 +1268,3 @@ bit     AutomaticS(void)
 }
 
 #endif
-
-
-
-void    Automatic(uchar  ibMin, uchar  ibMax)
-{
-uchar   i;
-
-      enKeyboard = KBD_POSTENTER;
-
-      ShowHi(szAutomatic);
-      Clear(); DelayInf();
-
-      for (ibPort=0; ibPort<bPORTS; ibPort++)
-      {
-        ShowPortDelayLo();
-        DelayInf(); fKey = 0;
-      }
-
-      Clear();
-      InitConnectKey();
-      
-      ibX = 0;
-
-      for (i=ibMin; i<ibMax; i++)
-      {
-        if (GetDigitalDevice(i) == 0) continue;
-
-        ibZ = 0;
-
-        LoadCurrDigital(i);
-        ibPort = diCurr.ibPort;
-
-        if (GetDigitalDevice(i) != 0)
-        {
-          if (StreamPortCan(GetDigitalPort(i),i) == 0) 
-          { ibZ = 0xEE; break; }
-        }
-
-        ShowCanalHi(i); 
-        ShowProgress(12,(ulong)100*i/(bCANALS-1)); DelayInf();
-
-        if (LoadConnect(i) == 0) break;
-        Clear();
-
-        if (mpboEnblCan[i] == boFalse)
-        { 
-          ShowLo(szBlocking); 
-          DelayMsg();
-        }
-        else switch (diCurr.bDevice)
-        {
-#ifndef SKIP_A
-          case 15:
-          case 1:  if (AutomaticA() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_B
-          case 12: if (AutomaticJ() != 1) ibZ = 0xEE; break;                
-
-          case 8:
-          case 2:  if (AutomaticB() != 1) ibZ = 0xEE; break;                
-#endif
-
-#ifndef SKIP_C
-          case 3:  if (AutomaticC() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_D
-          case 4:  if (AutomaticD() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_E
-          case 7: 
-          case 5:  if (AutomaticE() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_F
-          case 6:  if (AutomaticF() != 1) ibZ = 0xEE; break;
-#endif             
-
-#ifndef SKIP_G
-          case 9:  if (AutomaticG() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_H
-          case 10: if (AutomaticH() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_I
-          case 11: if (AutomaticI() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_K
-          case 14:
-          case 13: if (AutomaticK() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_L
-          case 17:
-          case 16: if (AutomaticK() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_M
-          case 18: if (AutomaticM() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_N
-          case 19: if (AutomaticN() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_O
-          case 20: if (AutomaticO() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_P
-          case 21: if (AutomaticP() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_Q
-          case 22: if (AutomaticK() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_R
-          case 23: if (AutomaticR() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_S
-          case 24: if (AutomaticS() != 1) ibZ = 0xEE; break;
-#endif
-
-#ifndef SKIP_T
-          case 25: if (AutomaticT() != 1) ibZ = 0xEE; break;
-#endif
-        }            
-
-        SaveConnect();
-
-        if (ibZ == 0xEE) 
-        {
-          ibX++;
-          Error(); Beep(); DelayMsg();
-        }
-
-        if (fKey == 1) ibZ = 0xFF;
-        fKey = 0;
-
-        if (ibZ == 0xFF) break;
-      }
-
-      ShowHi(szAutomatic);
-      if (ibX != 0) { sprintf(szLo, "   ошибок: %-2bu   ", ibX); LongBeep(); DelayMsg(); }  else OK();
-
-      DelayMsg();
-      KeyBreakConnect();
-}
-
-
-
-void    key_Automatic(void)
-{
-  if (bKey == bKEY_ENTER)
-  {
-    if (enKeyboard == KBD_ENTER)
-    {
-      Automatic(0,bCANALS);
-    } 
-  }
-}
-
-
-void    key_Automatic2(void)
-{ 
-  if (bKey == bKEY_ENTER)
-  {                                           
-    if (enKeyboard == KBD_ENTER)
-    {
-      enKeyboard = KBD_INPUT1;
-
-      ShowHi(szAutomatic);
-      Clear(); DelayInf();
-
-      ShowHi(szCana1s);
-      strcpy(szLo+0,szCana1FromMask);
-    } 
-    else if (enKeyboard == KBD_POSTINPUT1)
-    {
-      ibXmin = GetChar(5,6) - 1;
-      if (ibXmin < bCANALS)
-      {
-        enKeyboard = KBD_INPUT2;
-        strcpy(szLo+8,szCana1ToMask);
-      }
-      else Beep();
-    }
-    else if (enKeyboard == KBD_POSTINPUT2)
-    {
-      ibXmax = GetChar(13,14) - 1;
-      if ((ibXmax < bCANALS) && (ibXmax >= ibXmin))
-      {
-        Automatic(ibXmin,ibXmax+1);
-      }
-      else Beep();
-    }
-    else Beep();
-  }
-
-
-
-  else if (bKey < 10)
-  {        
-    if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
-    {
-      enKeyboard = KBD_POSTINPUT1;
-      ShiftLo(5,6);
-    }
-    else 
-    if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
-    {
-      enKeyboard = KBD_POSTINPUT2;
-      ShiftLo(13,14);
-    }
-    else Beep(); 
-  }
-  else Beep();
-}
-*/
