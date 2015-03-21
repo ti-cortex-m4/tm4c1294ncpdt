@@ -14,6 +14,7 @@ AUTOMATIC1.C
 #include        "../serial/ports_common.h"
 #include        "../digitals/digitals_run.h"
 #include        "../engine.h"
+#include        "../energy.h"
 #include        "automatic_b.h"
 
 
@@ -420,12 +421,12 @@ uchar   i;
 // сохранение К преобразования и К трасформации
 void    SetCanalsAll(void)
 {
-  SetCanReal(mprePulseHou,ibDig);    
-  SetCanReal(mprePulseMnt,ibDig);    
+  SetCanReal(mprePulseHou,ibDig,&reBuffA);
+  SetCanReal(mprePulseMnt,ibDig,&reBuffA);
   reBuffA = reBuffB;
 
-  SetCanReal(mpreTransEng,ibDig);  
-  SetCanReal(mpreTransCnt,ibDig);  
+  SetCanReal(mpreTransEng,ibDig,&reBuffA);
+  SetCanReal(mpreTransCnt,ibDig,&reBuffA);
 }
 
 #endif
