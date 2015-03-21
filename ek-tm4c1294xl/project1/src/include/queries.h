@@ -130,6 +130,8 @@ QUERIES.H
 #define bINQ_SETKEY                    246
 #define bINQ_GETDISPLAY                247
 
+#define bINQ_GETCONFIG                 248
+
 #define bINQ_RESPONSE_254              254
 #define bINQ_RESPONSE_255              255
 
