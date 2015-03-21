@@ -5,21 +5,16 @@ TODO persist
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
-//#include        "../../memory/mem_factors.h"
 #include        "../../memory/mem_digitals.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../serial/ports.h"
-//#include        "../../serial/ports_devices.h"
 #include        "../../serial/speeds_display.h"
 #include        "../../serial/modems.h"
 #include        "../../devices/automatic1.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_messages.h"
 #include        "../../digitals/digitals_display.h"
-//#include        "../../digitals/digitals_run.h"
-//#include        "../../engine.h"
-//#include        "../../energy.h"
 
 
 
