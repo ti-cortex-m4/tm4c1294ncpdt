@@ -1240,7 +1240,7 @@ bool    AutomaticR(void)
 {
   Clear();
 
-  if (ReadSensorR() == 0) return(0);
+  if (ReadCntCurrR() == 0) return(0);
 
   reBuffA = 1;                          // K преобразования
   reBuffB = 1;                          // K трансформации

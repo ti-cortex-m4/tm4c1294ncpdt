@@ -150,7 +150,7 @@ void    ShowGrpMonCurrEng(uchar  bMask)
 }
 
 
-void    ShowModemReadSensors(void)
+void    ShowModemReadCntCurrCan(void)
 {
   if (GetDigitalDevice(ibX) == 0)
     ShowReal(GetCntCurrImp(ibX));
@@ -165,14 +165,14 @@ void    ShowModemReadSensors(void)
     if (mpboEnblCan[ibX] == false)
       ShowLo(szBlocking);
     else
-      (ReadSensors(ibX) == 1) ? ShowReal(reBuffA) : Error();
+      (ReadCntCurrCan(ibX) == 1) ? ShowReal(reBuffA) : Error();
 
     SaveConnect();
   }
 }
 
 
-void    ShowModemReadTimeDate(bool  fShowTimeDate)
+void    ShowModemReadTimeCan(bool  fShowTimeDate)
 {
   ShowHi(szTimeDate);
 
@@ -192,7 +192,7 @@ void    ShowModemReadTimeDate(bool  fShowTimeDate)
       ShowLo(szBlocking);
     }
     else
-    if (ReadTimeDate(ibX) == 1)
+    if (ReadTimeCan(ibX) == 1)
     {
       sprintf(szHi+14,"%2u",ibX+1);
       Clear();
@@ -211,11 +211,11 @@ void    ShowSingle(void)
   switch (bProgram)
   {
     case bGET_CNTCURR_10:
-      ShowModemReadSensors(); 
+      ShowModemReadCntCurrCan(); 
       break;
 
     case bGET_CNTCURR_110:
-      ShowModemReadSensors(); 
+      ShowModemReadCntCurrCan(); 
       break;
 
     case bGET_POWGRPCURRMNT:
@@ -333,8 +333,8 @@ void    ShowSingle(void)
 
   switch (bProgram)
   {
-    case bGET_READTIMEDATE1:  ShowModemReadTimeDate(true);  break;
-    case bGET_READTIMEDATE2:  ShowModemReadTimeDate(false);  break;
+    case bGET_READTIMEDATE1:  ShowModemReadTimeCan(true);  break;
+    case bGET_READTIMEDATE2:  ShowModemReadTimeCan(false);  break;
   }
 }
 

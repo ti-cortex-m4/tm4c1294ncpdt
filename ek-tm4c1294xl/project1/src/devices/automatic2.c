@@ -27,7 +27,7 @@ AUTOMATIC2.C
 #ifndef SKIP_A
 
 // чтение реальных показаний счётчиков для счётчиков СЭТ-4ТМ
-bool    ReadSensorA(void)
+bool    ReadCntCurrA(void)
 {
 uchar   i;
 
@@ -59,7 +59,7 @@ uchar   i;
 #ifndef SKIP_B
 
 // чтение реальных показаний счётчиков для счётчиков Меркурий-230
-bool    ReadSensorB(void)
+bool    ReadCntCurrB(void)
 {
 uchar   i;
 
@@ -91,7 +91,7 @@ uchar   i;
 #ifndef SKIP_C
 
 // чтение реальных показаний счётчиков для счётчиков СС-301
-bool    ReadSensorC(void)
+bool    ReadCntCurrC(void)
 {
 uchar   i;
 
@@ -130,7 +130,7 @@ uchar   i;
 #ifndef SKIP_D
 
 // чтение реальных показаний счётчиков для счётчиков ABB Альфа
-bool    ReadSensorD(void)
+bool    ReadCntCurrD(void)
 {
   Clear();
   if (OpenDeviceD() == 0) return(0);
@@ -152,7 +152,7 @@ bool    ReadSensorD(void)
 
 #ifndef SKIP_E
 
-bool    ReadSensorE(uchar  chEsc, bool fOpen)
+bool    ReadCntCurrE(uchar  chEsc, bool fOpen)
 {
 uchar   i;
 
@@ -204,7 +204,7 @@ uchar   i;
 #ifndef SKIP_F
 
 // чтение реальных показаний счётчиков для сумматора СЭМ+2
-bool    ReadSensorF(void)
+bool    ReadCntCurrF(void)
 {
 uchar   i;
 
@@ -233,7 +233,7 @@ uchar   i;
 #ifndef SKIP_G
 
 // чтение реальных показаний счётчиков для счётчиков Энергия-9 a
-bool    ReadSensorG(void)
+bool    ReadCntCurrG(void)
 {
 uchar   i;
 
@@ -270,7 +270,7 @@ uchar   i;
 #ifndef SKIP_H
 
 // чтение реальных показаний счётчиков для счётчиков Энергия-9
-bool    ReadSensorH(void)
+bool    ReadCntCurrH(void)
 {
 uchar   i,j;
 
@@ -336,7 +336,7 @@ uchar   i,j;
 #ifndef SKIP_I
 
 // чтение реальных показаний счётчиков для счётчиков СЭБ-2А.07
-bool    ReadSensorI(void)
+bool    ReadCntCurrI(void)
 {
 uchar   i,j;
 
@@ -390,7 +390,7 @@ uchar   i,j;
 #ifndef SKIP_K
 
 // чтение реальных показаний счётчиков для счётчиков ЦЭ6850М
-bool    ReadSensorK(uchar  bMaxLines)
+bool    ReadCntCurrK(uchar  bMaxLines)
 {
 uchar   i,j;
 
@@ -439,7 +439,7 @@ uchar   i,j;
 #ifndef SKIP_M
 
 // чтение реальных показаний счётчиков для счётчиков Меркурий-200
-bool    ReadSensorM(void)
+bool    ReadCntCurrM(void)
 {
 uchar   i;
 
@@ -478,7 +478,7 @@ uchar   i;
 #ifndef SKIP_N
 
 // чтение реальных показаний счётчиков для преобразователей ПИ-1.4
-bool    ReadSensorN(void)
+bool    ReadCntCurrN(void)
 {
 uchar   i;
 
@@ -517,7 +517,7 @@ uchar   i;
 #ifndef SKIP_O
 
 // чтение реальных показаний счётчиков для счётчиков ПСЧ-4ТА.04
-bool    ReadSensorO(void)
+bool    ReadCntCurrO(void)
 {
 uchar   i,j;
 
@@ -570,7 +570,7 @@ uchar   i,j;
 
 #ifndef SKIP_P
 
-bool    ReadSensorP(void)
+bool    ReadCntCurrP(void)
 {
 uchar   i;
 
@@ -618,7 +618,7 @@ uchar   i;
 #ifndef SKIP_A
 
 //  чтение значение времени/даты для счётчиков СЭТ-4ТМ
-bool    ReadTimeDateA(void)
+bool    ReadTimeCanA(void)
 {
 uchar   i;
 
@@ -641,7 +641,7 @@ uchar   i;
 #ifndef SKIP_B
 
 //  чтение значение времени/даты для счётчиков Меркурий-230
-bool    ReadTimeDateB(void)
+bool    ReadTimeCanB(void)
 {
 uchar   i;
 
@@ -664,7 +664,7 @@ uchar   i;
 #ifndef SKIP_C
 
 //  чтение значение времени/даты для счётчиков CC-301
-bool    ReadTimeDateC(void)
+bool    ReadTimeCanC(void)
 {
 uchar   i;
 
@@ -700,7 +700,7 @@ uchar   i;
 #ifndef SKIP_D
 
 // чтение значение времени/даты для счётчиков ABB Альфа
-bool    ReadTimeDateD(void)
+bool    ReadTimeCanD(void)
 {
 uchar   i;
 
@@ -738,7 +738,7 @@ uchar   i;
 #ifndef SKIP_E
 
 // чтение значение времени/даты для сумматора СЭМ-2
-bool    ReadTimeDateE(void)
+bool    ReadTimeCanE(void)
 {
 uchar   i;
 
@@ -777,7 +777,7 @@ uchar   i;
 #ifndef SKIP_F
 
 // чтение значение времени/даты для сумматора СЭМ+2
-bool    ReadTimeDateF(void)
+bool    ReadTimeCanF(void)
 {
 uchar   i;
 
@@ -810,7 +810,7 @@ uchar   i;
 #ifndef SKIP_G
 
 //  чтение значение времени/даты для счётчиков Энергия-9 a
-bool    ReadTimeDateG(void)
+bool    ReadTimeCanG(void)
 {
 uchar   i;
 
@@ -848,7 +848,7 @@ uchar   i;
 #ifndef SKIP_H
 
 //  чтение значение времени/даты для счётчиков Энергия-9
-bool    ReadTimeDateH(void)
+bool    ReadTimeCanH(void)
 {
 uchar   i;
 
@@ -886,7 +886,7 @@ uchar   i;
 #ifndef SKIP_I
 
 //  чтение значение времени/даты для счётчиков СЭБ-2А.07
-bool    ReadTimeDateI(void)
+bool    ReadTimeCanI(void)
 {
 uchar   i;
 
@@ -922,7 +922,7 @@ uchar   i;
 #ifndef SKIP_K
 
 //  чтение значение времени/даты для счётчиков ЦЭ6850М
-bool    ReadTimeDateK(void)
+bool    ReadTimeCanK(void)
 {
 uchar   i;
 
@@ -978,7 +978,7 @@ uchar   i;
 #ifndef SKIP_O
 
 //  чтение значение времени/даты для счётчиков ПСЧ-4ТА.04
-bool    ReadTimeDateO(void)
+bool    ReadTimeCanO(void)
 {
 uchar   i;
 
@@ -1013,7 +1013,7 @@ uchar   i;
 
 #ifndef SKIP_P
 
-bool    ReadTimeDateP(void)
+bool    ReadTimeCanP(void)
 {
 uchar   i;
 
@@ -1049,7 +1049,7 @@ uchar   i;
 #ifndef SKIP_Z
 
 //  чтение значение времени/даты
-bool    ReadTimeDateZ(void)
+bool    ReadTimeCanZ(void)
 {
 uchar   i;
 
@@ -1424,7 +1424,7 @@ uchar	i,j;
 bool    ReadCntMonCanE(uchar  ibMonth)
 {
   Clear();
-  if (ReadTimeDateE() == 0) return(0);
+  if (ReadTimeCanE() == 0) return(0);
 
 
   ibMonth = (bMONTHS+tiAlt.bMonth-1-ibMonth) % bMONTHS;
@@ -1442,7 +1442,7 @@ bool    ReadCntMonCanE(uchar  ibMonth)
   Clear();
   //ShowPercent(80);
 
-  if (ReadSensorE('V',0) == 0) return(0);
+  if (ReadCntCurrE('V',0) == 0) return(0);
 
 
   return(1);
@@ -1731,11 +1731,11 @@ uchar   i,j;
 // чтение значение показаний счётчиков для счётчиков ЦЭ6850М
 bool    ReadCntMonCanK(void)
 {
-  if (ReadTimeDateK() == 0) return(0);
+  if (ReadTimeCanK() == 0) return(0);
   if (tiAlt.bMonth != ibMon+1) return(0);     // значенияе счётчиков на начало текущего месяца
 
 
-  if (ReadSensorK(4) == 0) return(0);
+  if (ReadCntCurrK(4) == 0) return(0);
 
   // энергия за текущие сутки рассчитывается, а не запрашивается со счётчика (как должно быть) !
   if (LoadImpDay( ibHardDay ) == 0) return(0);
@@ -1856,7 +1856,7 @@ uchar   i,j;
 
 
 // прочитать показания счётчиков текущие с цифровых счётчиков
-bool    ReadSensors(uchar  ibCanal)
+bool    ReadCntCurrCan(uchar  ibCanal)
 {
   Clear();
 
@@ -1870,19 +1870,19 @@ bool    ReadSensors(uchar  ibCanal)
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadSensorA() );
+    case 1:  return( ReadCntCurrA() );
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadSensorB() );
+    case 2:  return( ReadCntCurrB() );
 
     case 12: reBuffA = mpdwBase[ibCanal] * GetCanReal(mpreValueCntHou,ibCanal);
              return(1);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadSensorC() );
+    case 3:  return( ReadCntCurrC() );
 #endif
 
     default: reBuffA = 0; return(0);
@@ -1891,7 +1891,7 @@ bool    ReadSensors(uchar  ibCanal)
 
 
 // прочитать значение времени/даты с цифровых счётчиков
-bool    ReadTimeDate(uchar  ibCan)
+bool    ReadTimeCan(uchar  ibCan)
 {
   Clear();
 
@@ -1902,18 +1902,18 @@ bool    ReadTimeDate(uchar  ibCan)
   {
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadTimeDateA() );
+    case 1:  return( ReadTimeCanA() );
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadTimeDateB() );
+    case 2:  return( ReadTimeCanB() );
 
     case 12: tiAlt = tiCurr; return(1);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadTimeDateC() );
+    case 3:  return( ReadTimeCanC() );
 #endif
 
     default: tiAlt = tiZero; return(0);
