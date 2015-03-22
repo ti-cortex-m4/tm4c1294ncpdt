@@ -229,11 +229,11 @@ uint32_t ui32Status;
         {
           cwInDelay3 = mpwMinorInDelay[3];
 
-          mpSerial[3] = SER_INPUT_SLAVE2;
+          mpSerial[3] = SER_INPUT_SLAVE_UNI;
           iwInBuff3 = 0;
         }
 
-        if (mpSerial[3] == SER_INPUT_SLAVE2)
+        if (mpSerial[3] == SER_INPUT_SLAVE_UNI)
         {
           if (iwInBuff3 >= wINBUFF_SIZE)        // переполнение входного буфера ?
           {
@@ -251,7 +251,7 @@ uint32_t ui32Status;
             if ((iwInBuff3 >= 10) && (iwInBuff3 == mpbInBuff3[3] + mpbInBuff3[2]*0x100))
             {
               InputMode3();
-              mpSerial[3] = SER_POSTINPUT_SLAVE2;   // приём закончен: по количеству байт
+              mpSerial[3] = SER_POSTINPUT_SLAVE_UNI;   // приём закончен: по количеству байт
             }
           }
         }
@@ -391,10 +391,10 @@ void    InDelay3_Timer0(void) {
       cwInDelay3--;
   }
   else
-  if (mpSerial[3] == SER_INPUT_SLAVE2)
+  if (mpSerial[3] == SER_INPUT_SLAVE_UNI)
   {
     if (cwInDelay3 == 0)
-      mpSerial[3] = SER_POSTINPUT_SLAVE2;       // приём закончен: по таймауту
+      mpSerial[3] = SER_POSTINPUT_SLAVE_UNI;       // приём закончен: по таймауту
     else
       cwInDelay3--;
   }
