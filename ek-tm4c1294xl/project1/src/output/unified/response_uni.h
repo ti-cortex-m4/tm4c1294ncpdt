@@ -4,8 +4,8 @@ RESPONSE_UNI.H
 
 ------------------------------------------------------------------------------*/
 
-//void    UniMaster(void);
-//
+void    RunResponseUNI_All(void);
+
 //void    Output2(uint  wSize);
 //void    Output2_Code(uint  wSize, uchar  bCode, time  *mptiCode);
 //void    Result2(uchar  bT);

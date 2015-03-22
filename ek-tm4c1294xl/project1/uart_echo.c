@@ -49,6 +49,7 @@ TODO .C
 #include "src/digitals/phones.h"
 #include "src/serial/speeds.h"
 #include "src/output/unified/uni.h"
+#include "src/output/unified/response_uni.h"
 #include "src/storage/storage.h"
 #include "src/time/decret.h"
 #include "src/realtime/realtime.h"
@@ -119,5 +120,6 @@ int main(void) {
     	RunDevices();
     	RunLocal();
     	RunResponseCRC_All();
+    	RunResponseUNI_All();
     }
 }
