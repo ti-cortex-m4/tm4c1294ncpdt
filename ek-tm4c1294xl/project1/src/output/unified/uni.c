@@ -56,12 +56,14 @@ void    InitUni(void)
 void    ResetUni(void)
 {
   memset(&szObjectName,  0, sizeof(szObjectName));
+
   sprintf(szObjectName, "object %u", wPrivate);
 
   SaveFile(&flObjectName);
 
 
   memset(&mpszCanalsName, 0, sizeof(mpszCanalsName));
+
   uchar c;
   for (c=0; c<bCANALS; c++)
     sprintf(mpszCanalsName[c], "canal %u", c+1);
@@ -70,6 +72,7 @@ void    ResetUni(void)
 
 
   memset(&mpszGroupsName, 0, sizeof(mpszGroupsName));
+
   uchar g;
   for (g=0; g<bGROUPS; g++)
     sprintf(mpszGroupsName[g], "group %u", g+1);
