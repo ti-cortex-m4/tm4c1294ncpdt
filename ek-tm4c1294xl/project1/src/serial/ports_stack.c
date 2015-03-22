@@ -37,6 +37,12 @@ void    InitPushPtr(void) {
 }
 
 
+void    InitPushUNI(void) {
+	InitPush(6);
+}
+
+
+
 void    Push(void  *pbData, uint  wSize) {
   switch (ibPort) {
     case 0: 

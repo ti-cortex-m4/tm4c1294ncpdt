@@ -5,50 +5,37 @@ RESPONSE_UNI.C
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
-
-//#include        "main.h"
-//#include        "xdata.h"
-//#include        "ports.h"
-//#include        "flow.h"
-//#include        "crc-16.h"
-//#include        "states.h"
-//#include        "queries2.h"
-//#include        "keyboard.h"
-//#include        "programs.h"
-//#include        "display.h"
-//#include        "groups.h"
-//#include        "nexttime.h"
-//#include        "rtc.h"
-//#include        "u_config.h"
-//#include        "u_mnt.h"
-//#include        "u_hou.h"
-//#include        "u_day.h"
-//#include        "u_energy.h"
-//#include        "u_cnt.h"
-//#include        "u_param.h"
-//#include        "u_transit.h"
-//#include        "u_events.h"
-//#include        "u_query_crc.h"
-//#include        "_timedate.h"
+#include        "../../memory/mem_settings.h"
+#include        "../../memory/mem_ports.h"
+#include        "../../memory/mem_uni.h"
+#include        "../../keyboard/keyboard.h"
+#include        "../../keyboard/key_timedate.h"
+#include        "../../display/display.h"
+#include        "../../serial/ports.h"
+#include        "../../include/states.h"
+#include        "../../include/queries_uni.h"
+#include        "../../time/rtc.h"
+#include        "../../crc-16.h"
+#include        "uni.h"
 
 
-/*
+
 void    ShowCommandUni(uchar  i)
 {
-  if (bProgram == bGET_ANALYSIS1)
+  if (bProgram == bTEST_RESPONSE)
   {
     sprintf(szHi,"Порт %bu: U-%02bX%02bX %bu",ibPort+1,InBuff(4),InBuff(5),i);
     sprintf(szLo+14,"%02bu",mpbDelayUni[ibPort]);
 
     ibPortActive = ibPort;
-    NoShowTime(0);
+    HideCurrentTime(0);
   }
 }
 
 
 void    ShowInfoUni(uchar  bInfo)
 {
-  if (bProgram == bGET_ANALYSIS1)
+  if (bProgram == bTEST_RESPONSE)
   {
     sprintf(szHi+8,"%bu",bInfo);
   }
@@ -60,7 +47,7 @@ void    ShowInfoUni(uchar  bInfo)
 
 void    Output2_Code(uint  wSize, uchar  bCode, time  *mptiCode)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0xC3);
   PushChar(bLogical);
@@ -94,26 +81,26 @@ void    Output2_Code(uint  wSize, uchar  bCode, time  *mptiCode)
 
 void    Output2(uint  wSize)
 {
-  Output2_Code(wSize, 0, PGetCurrTimeDate());
+  Output2_Code(wSize, 0, GetCurrTimeDate());
 }
 
 
 void    Result2(uchar  bT)
 {
-  Output2_Code(0, bT, PGetCurrTimeDate());
+  Output2_Code(0, bT, GetCurrTimeDate());
 }
 
 
 void    Result2_Info(uchar  bT, uchar  bInfo)
 {
   ShowInfoUni(bInfo);
-  Output2_Code(0, bT, PGetCurrTimeDate());
+  Output2_Code(0, bT, GetCurrTimeDate());
 }
 
 
-void    Common2(void  xdata  *pbData, uint  wSize)
+void    Common2(void  *pbData, uint  wSize)
 {
-  if (16+wSize < wOUTBUFF_SIZE-bSHADOW)
+  if (16+wSize < wOUTBUFF_SIZE-bMARGIN)
   {
     InitPushUni();
     Push(pbData, wSize);
@@ -130,9 +117,9 @@ void    SetDelayUni(void)
 
 
 
-void    Postinput2(void)
+void    RunResponseUNI(void)
 {
-  if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE2)
+  if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE_UNI)
   {
     mpSerial[ibPort] = SER_BEGIN;
 
@@ -184,7 +171,7 @@ void    Postinput2(void)
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETOPEN) &&
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETQUERY_CRC))
     {
-      if (boDisablePasswordUni == boFalse)
+      if (boDisablePasswordUni == FALSE)
       {
         Result2(bUNI_BADACCESS);
         return;
@@ -197,9 +184,9 @@ void    Postinput2(void)
     switch (bInBuff5 + bInBuff4*0x100)
     {
       case wUNI_GETCURRTIME:
-        Common2(PGetCurrTimeDate(), sizeof(time));
+        Common2(GetCurrTimeDate(), sizeof(time));
         break;
-
+/*
       case wUNI_GETCORRECTTIME: 
         GetCorrectUni(); 
         break;
@@ -323,7 +310,7 @@ void    Postinput2(void)
       case wUNI_GETQUERY_CRC:
         GetQueryCRCUni(); 
         break;
-
+*/
       default:
         ShowCommandUni(bSTA_BADCOMMAND);
         Result2(bUNI_BADCOMMAND);
@@ -333,32 +320,30 @@ void    Postinput2(void)
 }
 
 
-void    UniMaster(void)
+void    RunResponseUNI_All(void)
 {
   ibPort = 0;
-  if (IsFlow0() == 0) Postinput2();
+  /*if (IsFlow0() == 0)*/ RunResponseUNI();
 
   ibPort = 1;
-  if (IsFlow1() == 0) Postinput2();
+  /*if (IsFlow1() == 0)*/ RunResponseUNI();
 
   ibPort = 2;
-  Postinput2();
+  RunResponseUNI();
 
-#ifdef  UPGRADE
   ibPort = 3;
-  Postinput2();
-#endif
+  RunResponseUNI();
 }
 
 
-
-bit     GetDefCan(uchar  ibCanal)
+/*
+bool    GetDefCan(uchar  ibCanal)
 {
   return (mpwImpHouCan[ PrevSoftHou() ][ibCanal] == 0xFFFF);
 }
 
 
-bit     GetDefGrp(uchar  ibGroup)
+bool    GetDefGrp(uchar  ibGroup)
 {
 uchar   i;
 
@@ -411,6 +396,5 @@ void    PushRealUni(status4  status, real  *preT)
     }
   }
 }
-
-#endif
 */
+#endif

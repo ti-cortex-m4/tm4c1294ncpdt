@@ -7,6 +7,7 @@ PORTS_STACK.H
 void    InitPush(uchar  ibPush);
 void    InitPushCRC(void);
 void    InitPushPtr(void);
+void    InitPushUNI(void);
 
 void    Push(void  *pbData, uint  wSize);
 void    PushChar(uchar  bT);
