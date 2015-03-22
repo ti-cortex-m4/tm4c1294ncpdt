@@ -23,7 +23,7 @@ TODO: volatile
 
 static const uchar 		szPacketA[bPACKET_HEADER] = {0xCA, 0xE0, 0xEB, 0xFE, 0xEC, 0xED, 0xFB, 0x20};
 
-//static const uchar 		szPacketB[1] = { 0x1A };
+static const uchar 		szPacketB[1] = { 0x1A };
 
 
 
@@ -68,13 +68,13 @@ uint32_t ui32Status;
   ui32Status = UARTIntStatus(UART2_BASE, true);
   UARTIntClear(UART2_BASE, ui32Status);
 
-/*
+
   // ведущий режим
   if (((mppoPorts[1].enStream == STR_MASTERDIRECT) ||
        (mppoPorts[1].enStream == STR_MASTERMODEM)) &&
       (mpboLocal[1] == false))
   {
-    if (GetRI1())
+    if (GetRI1(ui32Status))
     {
       bT = InByte1();
 
@@ -127,7 +127,7 @@ uint32_t ui32Status;
       }
     }
 
-    if (GetTI1())
+    if (GetTI1(ui32Status))
     {
       if (mpSerial[1] == SER_OUTPUT_MASTER)
       {
@@ -148,7 +148,7 @@ uint32_t ui32Status;
             InputMode1();                       // передача с ответом
             mpSerial[1] = SER_BEGIN;            // начинаем приём
 
-            mpboLocal[1] = true;
+            mpboLocal[1] = TRUE;
           }
           else
           if (cwInBuff1 == SERIAL_MODEM)
@@ -167,9 +167,10 @@ uint32_t ui32Status;
       }
     }
   }
-*/
+
 
   // ведомый режим
+  else
   {
     if (GetRI1(ui32Status))
     {
