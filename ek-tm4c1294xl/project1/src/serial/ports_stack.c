@@ -115,6 +115,21 @@ void    PushString(char  *psz)
 }
 
 
+void    PushBuffInt(uint  *pwData, uint  wSize)
+{
+  while (wSize-- > 0)
+    PushInt(*pwData++);
+}
+
+
+void    PushBuffLong(ulong  *pdwData, uint  wSize)
+{
+  while (wSize-- > 0)
+    PushLong(*pdwData++);
+}
+
+
+
 void    PushIntAsString(uint  wT)
 {
 	PushChar(szHex[(wT % 100000) / 10000]);
