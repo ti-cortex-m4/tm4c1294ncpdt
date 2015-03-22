@@ -11,6 +11,7 @@ extern  file const              flGroupsName;
 extern  file const              flStrictUni;
 extern  file const              flMaxDelayUni;
 extern  file const              flRepeatFlowUni;
+extern  file const              flDsblPasswordUni;
 
 
 

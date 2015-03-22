@@ -149,8 +149,9 @@ typedef enum
   FLS_STRICT_UNI        = FLS_GROUPS_NAME + sizeof(mpszGroupsName)/wFREEPAGE_SIZE + 1,
   FLS_MAX_DELAY_UNI     = FLS_STRICT_UNI + 1,
   FLS_REPEAT_FLOW_INI   = FLS_MAX_DELAY_UNI + 1,
+  FLS_DSBL_PASSWORD_INI = FLS_REPEAT_FLOW_INI + 1,
 
-  FLS_END               = FLS_REPEAT_FLOW_INI + 1
+  FLS_END               = FLS_DSBL_PASSWORD_INI + 1
 } flash;
 
 
