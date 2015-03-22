@@ -20,14 +20,13 @@ void    Response254_CRC(void)
 {
   switch (bInBuff5)
   {
-    case 0: OutSetDelay1(); break;
-    case 1: OutSetDelay10(); break;
+    case 0: OutDelay(); break;
 
-    case 2: OutRealtime(); break;
+    case 1: OutRealtime(); break;
 
-    case 3: OutDataFlashMap(); break;
+    case 2: OutDataFlashMap(); break;
 
-    case 4: OutHealth(); break;
+    case 3: OutHealth(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
