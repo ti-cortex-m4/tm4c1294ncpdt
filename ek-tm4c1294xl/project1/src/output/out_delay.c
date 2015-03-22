@@ -11,15 +11,13 @@ OUT_DELAY.C
 
 
 
-void    OutSetDelay(void) {
-uchar  i;
+void    OutDelay1(void) {
+  Delay(1000);
+  LongResult(bRES_OK);
+}
 
-  if ((bInBuff5 > 0) && (bInBuff5 <= 10)) {
 
-	for (i=0; i<bInBuff5; i++)
-      Delay(1000);
-
-	LongResult(bRES_OK);
-  } else
-    LongResult(bRES_BADDATA);
+void    OutDelay10(void) {
+  Delay(10000);
+  LongResult(bRES_OK);
 }

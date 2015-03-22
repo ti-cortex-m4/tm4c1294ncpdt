@@ -15,7 +15,6 @@ RESPONSE1_CRC.C
 #include        "out_tariffs.h"
 #include        "out_digitals.h"
 #include        "out_flash.h"
-#include        "out_delay.h"
 #include        "out_console.h"
 #include        "out_config.h"
 #include        "response_crc.h"
@@ -80,10 +79,6 @@ void    Response1_CRC(void)
 
       case bINQ_GETFLASHPAGE:
         OutFlashPage();
-        break;
-
-      case bINQ_SETDELAY:
-        OutSetDelay();
         break;
 
       case bINQ_SETKEY:

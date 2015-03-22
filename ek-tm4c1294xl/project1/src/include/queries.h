@@ -123,8 +123,6 @@ QUERIES.H
 #define bINQ_GETIMPCANHOU_DAY          158
 #define bINQ_GETPOWCANHOU_DAY          159
 
-#define bINQ_SETDELAY                  243
-
 #define bINQ_GETFLASHPAGE              249
 
 #define bINQ_SETKEY                    246
