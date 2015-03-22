@@ -37,7 +37,7 @@ void    InitPushPtr(void) {
 }
 
 
-void    InitPushUNI(void) {
+void    InitPushUni(void) {
 	InitPush(6);
 }
 

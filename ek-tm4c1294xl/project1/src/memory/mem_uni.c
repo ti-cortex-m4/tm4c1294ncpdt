@@ -40,3 +40,6 @@ uchar                   bMaxDelayUni;
 
 // פכאד
 boolean                 boRepeatFlowUni;
+
+// פכאד
+boolean                 boDsblPasswordUni;

@@ -24,8 +24,8 @@ void    ShowCommandUni(uchar  i)
 {
   if (bProgram == bTEST_RESPONSE)
   {
-    sprintf(szHi,"Порт %bu: U-%02bX%02bX %bu",ibPort+1,InBuff(4),InBuff(5),i);
-    sprintf(szLo+14,"%02bu",mpbDelayUni[ibPort]);
+    sprintf(szHi,"Порт %u: U-%02X%02X %u",ibPort+1,InBuff(4),InBuff(5),i);
+    sprintf(szLo+14,"%02u",mpbDelayUni[ibPort]);
 
     ibPortActive = ibPort;
     HideCurrentTime(0);
@@ -37,7 +37,7 @@ void    ShowInfoUni(uchar  bInfo)
 {
   if (bProgram == bTEST_RESPONSE)
   {
-    sprintf(szHi+8,"%bu",bInfo);
+    sprintf(szHi+8,"%u",bInfo);
   }
 }
 
@@ -171,7 +171,7 @@ void    RunResponseUNI(void)
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETOPEN) &&
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETQUERY_CRC))
     {
-      if (boDisablePasswordUni == FALSE)
+      if (boDsblPasswordUni == FALSE)
       {
         Result2(bUNI_BADACCESS);
         return;
