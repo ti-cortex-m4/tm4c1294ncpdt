@@ -17,6 +17,12 @@ PROGRAMS2.H
 
 #define wSET_MAX_REPEATS      409
 
+#define wSET_REPEAT_FLOW_UNI  288
+#define wSET_STRICT_UNI       417
+#define wSET_PASSWORD_UNI     418
+#define wSET_MAX_DELAY_UNI    422
+
+
 #endif
 
 
