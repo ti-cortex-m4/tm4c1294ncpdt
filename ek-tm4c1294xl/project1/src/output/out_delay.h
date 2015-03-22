@@ -4,4 +4,5 @@ OUT_DELAY.H
 
 ------------------------------------------------------------------------------*/
 
-void    OutSetDelay(void);
+void    OutDelay1(void);
+void    OutDelay10(void);
