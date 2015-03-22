@@ -367,7 +367,7 @@ void    PushFFFFFF(void)
 
 void    PushRealUni(status4  status, real  *preT)
 {
-  if (boStrictUni == boTrue)
+  if (boStrictUni == TRUE)
   {
     switch (status)
     {

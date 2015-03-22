@@ -13,6 +13,7 @@ TODO: volatile
 #include        "driverlib/uart.h"
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_serial1.h"
+#include        "../memory/mem_uni.h"
 #include        "../serial/flow.h"
 #include        "../serial/ports.h"
 #include        "../serial/bulk.h"
@@ -181,7 +182,7 @@ uint32_t ui32Status;
 
       if ((mppoPorts[1].enStream == STR_SLAVECRC) || (IsFlow1() == 1))
       {
-        if (mppoPorts[1].enStream != STR_SLAVEUNI)
+        if ((mppoPorts[1].enStream != STR_SLAVEUNI) || (boRepeatFlowUni == TRUE))
           RepeatFlow();
 
         if (mpSerial[1] == SER_BEGIN)           // приём первого байта в запросе

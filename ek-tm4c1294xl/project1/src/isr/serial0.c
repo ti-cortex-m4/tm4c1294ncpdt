@@ -13,6 +13,7 @@ SERIAL0.C
 #include        "driverlib/uart.h"
 #include        "../memory/mem_ports.h"
 #include        "../memory/mem_serial0.h"
+#include        "../memory/mem_uni.h"
 #include        "../serial/flow.h"
 #include        "../serial/ports.h"
 #include        "../serial/bulk.h"
@@ -181,7 +182,7 @@ uint32_t ui32Status;
 
       if ((mppoPorts[0].enStream == STR_SLAVECRC) || (IsFlow0() == 1))
       {
-        if (mppoPorts[0].enStream != STR_SLAVEUNI)
+        if ((mppoPorts[0].enStream != STR_SLAVEUNI) || (boRepeatFlowUni == TRUE))
           RepeatFlow();
 
         if (mpSerial[0] == SER_BEGIN)           // приём первого байта в запросе
