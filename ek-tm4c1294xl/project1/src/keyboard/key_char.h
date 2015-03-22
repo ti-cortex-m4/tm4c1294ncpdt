@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-OUT_DELAY.H
+KEY_CHAR.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    OutDelay(void);
+void    key_SetChar(file const  *pflFile, char const  *pszSlide[], uchar const  bMin, uchar const  bMax);
