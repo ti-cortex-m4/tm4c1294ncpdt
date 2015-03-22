@@ -48,6 +48,7 @@ TODO .C
 #include "src/digitals/digitals_run.h"
 #include "src/digitals/phones.h"
 #include "src/serial/speeds.h"
+#include "src/output/unified/uni.h"
 #include "src/storage/storage.h"
 #include "src/time/decret.h"
 #include "src/realtime/realtime.h"
@@ -84,6 +85,7 @@ int main(void) {
 	InitPhones();
 	InitProfile();
 	InitSpeeds();
+	InitUni();
 
 	InitSlide();
 	InitStorage();

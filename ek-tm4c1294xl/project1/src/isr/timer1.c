@@ -15,6 +15,7 @@ TODO volatile
 #include        "../impulses/impulses.h"
 #include        "../digitals/wait_answer.h"
 #include        "../digitals/wait_query.h"
+#include        "../output/unified/uni.h"
 
 
 
@@ -50,4 +51,5 @@ void Timer1IntHandler(void) {
 
 	WaitAnswer_1Hz();
 	WaitQuery_1Hz();
+	DelayUni_1Hz();
 }

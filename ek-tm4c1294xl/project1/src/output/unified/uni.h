@@ -14,6 +14,7 @@ extern  file const              flRepeatFlowUni;
 
 
 
-//void    InitUni(void);
-//void    ResetUni(void);
-//void    DelayUni(void);
+void    InitUni(void);
+void    ResetUni(void);
+
+void    DelayUni_1Hz(void);

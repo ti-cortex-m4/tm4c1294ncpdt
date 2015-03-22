@@ -16,7 +16,9 @@ KEY_RESET.C
 #include        "../digitals/profile_core.h"
 #include        "../digitals/phones.h"
 #include        "../digitals/digitals_run.h"
+#include        "../digitals/digitals_run.h"
 #include        "../serial/speeds.h"
+#include        "../output/unified/uni.h"
 #include        "../engine.h"
 #include        "../factors.h"
 #include        "../settings.h"
@@ -108,6 +110,7 @@ void    key_SetReset(void)
           ResetPhones();
           ResetProfile();
           ResetSpeeds();
+          ResetUni();
 //          ResetCurrent();
 //          ResetProfiles();
           ResetDevices();
