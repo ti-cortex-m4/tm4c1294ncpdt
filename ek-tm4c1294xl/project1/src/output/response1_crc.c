@@ -18,7 +18,7 @@ RESPONSE1_CRC.C
 #include        "out_console.h"
 #include        "out_config.h"
 #include        "response_crc.h"
-#include        "response254_crc.h"
+#include        "response252_crc.h"
 #include        "response255_crc.h"
 
 
@@ -93,8 +93,8 @@ void    Response1_CRC(void)
         OutGetConfig();
         break;
 
-      case bINQ_RESPONSE_254:
-      	Response254_CRC();
+      case bINQ_RESPONSE_252:
+      	Response252_CRC();
         break;
 
       case bINQ_RESPONSE_255:
