@@ -16,6 +16,8 @@ void    PushReal(real  reT);
 void    PushTime(time  *pti);
 void    PushString(char  *psz);
 void    PushIntAsString(uint  wT);
+void    PushBuffInt(uint  *pwData, uint  wSize);
+void    PushBuffLong(ulong  *pdwData, uint  wSize);
 
 uchar   SkipChar(void);
 void    Skip(uint  wSize);
