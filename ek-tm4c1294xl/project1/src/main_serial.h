@@ -67,8 +67,8 @@ typedef enum
   SER_LOCAL             = 60,
   SER_BULK              = 61,
 
-  SER_INPUT_SLAVE2      = 62,           // приём
-  SER_POSTINPUT_SLAVE2  = 63,           // приём завершён
+  SER_INPUT_SLAVE_UNI      = 62,           // приём
+  SER_POSTINPUT_SLAVE_UNI  = 63,           // приём завершён
 } serial;
 
 
