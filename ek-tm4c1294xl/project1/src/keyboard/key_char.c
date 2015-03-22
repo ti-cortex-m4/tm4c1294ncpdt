@@ -8,11 +8,14 @@ KEY_CHAR.C
 #include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../flash/files.h"
+#include        "key_char.h"
 
 
 
 //                                            0123456789ABCDEF
 static char const       szMaskChar[]       = "      ___       ";
+
+char                    szCharLimits[bDISPLAY + bMARGIN];
 
 
 
@@ -26,6 +29,9 @@ void    key_SetChar(file const  *pflFile, char const  *pszSlide[], uchar const  
     {
       enKeyboard = KBD_POSTENTER;
       Clear();
+
+      strcpy(szCharLimits, szClear);
+      sprintf(szCharLimits+4, "%3u..%-3u", bMin, bMax);
 
       LoadSlide(pszSlide);
       ShowChar(*pbValue);

@@ -8,6 +8,7 @@ KEY_FLAG.C
 #include        "keyboard.h"
 #include        "../display/display.h"
 #include        "../flash/files.h"
+#include        "key_flag.h"
 
 
 
