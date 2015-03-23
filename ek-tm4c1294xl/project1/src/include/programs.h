@@ -202,7 +202,12 @@ PROGRAMS.H
 #define bSET_CUSTOM_MODEM           203
 
 #define bTEST_DIRECT                216
+
 #define bTEST_RESPONSE              220
+#define bTEST_FLOW                  221
+#define bTEST_PORTS_IO              237
+#define bTEST_UNI                   238
+
 #define bTEST_IMPULSES              227
 #define bTEST_KEYS                  228
 #define bTEST_RTC                   229
