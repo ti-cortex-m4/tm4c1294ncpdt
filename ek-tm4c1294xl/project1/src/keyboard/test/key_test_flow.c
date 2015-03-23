@@ -5,6 +5,7 @@ KEY_TEST_FLOW.H
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
+#include        "../../memory/mem_flow.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
 
@@ -23,7 +24,7 @@ void    key_TestFlow(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ShowHi(szAnalysis2);
+      ShowHi(szTestFlow);
       Clear();
     }
   }
