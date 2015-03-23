@@ -9,10 +9,13 @@ OUT_NAMES.C
 #include        "../memory/mem_uni.h"
 #include        "../memory/mem_ports.h"
 #include        "../serial/ports.h"
+#include        "../flash/files.h"
+#include        "unified/uni.h"
+#include        "out_names.h"
 
 
 
-void    CommonX(void  *pbData, uint  wSize)
+static void OutputName(void  *pbData, uint  wSize)
 {
   if (5+wSize < wOUTBUFF_SIZE-bMARGIN)
   {
@@ -27,7 +30,7 @@ void    CommonX(void  *pbData, uint  wSize)
 
 void    GetObjectNameExt(void)
 {
-  CommonX(&szObjectName, bNAME);
+  OutputName(&szObjectName, bNAME);
 }
 
 
@@ -42,6 +45,8 @@ uchar   i;
 
     szObjectName[bNAME-1] = 0;
 
+    SaveFile(&flObjectName);
+
     LongResult(bRES_OK);
   }
   else Result(bRES_NEEDPROGRAM);
@@ -52,7 +57,7 @@ uchar   i;
 void    GetCanalsNameExt(void)
 {
   if (bInBuff6 < bCANALS)
-    CommonX(&mpszCanalsName[ bInBuff6 ], bNAME);
+    OutputName(&mpszCanalsName[ bInBuff6 ], bNAME);
   else
     Result(bRES_BADADDRESS);
 }
@@ -71,6 +76,9 @@ uchar   i;
 
       mpszCanalsName[bInBuff6][bNAME-1] = 0;
 
+      if (bInBuff6 == bCANALS - 1)
+        SaveFile(&flCanalsName);
+
       LongResult(bRES_OK);
     }
     else Result(bRES_BADADDRESS);
@@ -83,7 +91,7 @@ uchar   i;
 void    GetGroupsNameExt(void)
 {
   if (bInBuff6 < bGROUPS)
-    CommonX(&mpszGroupsName[ bInBuff6 ], bNAME);
+    OutputName(&mpszGroupsName[ bInBuff6 ], bNAME);
   else
     Result(bRES_BADADDRESS);
 }
@@ -101,6 +109,9 @@ uchar   i;
         mpszGroupsName[bInBuff6][i] = InBuff(7+i);
 
       mpszGroupsName[bInBuff6][bNAME-1] = 0;
+
+      if (bInBuff6 == bGROUPS - 1)
+        SaveFile(&flGroupsName);
 
       LongResult(bRES_OK);
     }
