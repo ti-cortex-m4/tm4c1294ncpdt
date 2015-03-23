@@ -130,9 +130,7 @@ bool    StartProfile(uchar  ibCanal)
 
   NoShowTime(1);
   ShowDigitalHi(); Clear();
-  InfoDigital();
 
-//  cwDefects1 = cwDefHou;
   cwHouRead = 0;
 
   fBreakRead = 0;
@@ -227,26 +225,21 @@ bool    StartProfile(uchar  ibCanal)
 
 void    RunProfile(bool  fCtrlHou)
 {
-  if (boLoadHou == TRUE)
+  if (boEnblProfile == TRUE)
   {
 #ifdef  FLOW
     CloseFlow();
 #endif
 
-    InfoRun();
-
     fCurrCtrlHou = fCtrlHou;
     memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
     cwHouLength = 0;
-
-    Log(LOG_BEG_RUNPROFILE);
-//    if (boShowMessages == TRUE) LongBeep();
 
     if (boDTREnable == TRUE) DTROff_All();
 
     if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
   }
-  else BlockProgramExt(bSET_ENABLELOADHOU);
+  else BlockProgramExt(bSET_ENBL_PROFILE);
 }
 
 
@@ -320,10 +313,6 @@ void    NextProfile(void)
 
     SetCurr(DEV_BEGIN);
 
-    Log(LOG_END_RUNPROFILE);
-    Log(LOG_BEG_CALCPROFILE);
-
-    InfoEnd();
     OnHours();
     AddDigRecord(EVE_PROFILECLOSE2);
 
@@ -359,14 +348,10 @@ void    NextProfile(void)
 
     Work(); OK();
 
-    boNewDay = FALSE;
-    boNewHou = FALSE;
-
     boManualProfile = FALSE;
 
     ibPortPause = 0xFF;
 
-    Log(LOG_END_CALCPROFILE);
     EnableAnswer();
 
     if (mpboCheckupHou[GetHouIndex()] == TRUE) cbCheckupRun = 10;
@@ -381,11 +366,10 @@ void    NextProfile(void)
 // аварийный переход на следующий канал
 void    ErrorProfile(void)
 {
-  InfoError();
   SaveDisplay();
 
   ShowHi(szWarning);
-  sprintf(szLo,"запроса %02bX.%02bX.%02bX",(uchar)(GetCurr() / 0x100),(uchar)(GetCurr() % 0x100),(uchar)mpSerial[ibPort]);
+  sprintf(szLo,"запроса %02X.%02X.%02X",(uchar)(GetCurr() / 0x100),(uchar)(GetCurr() % 0x100),(uchar)mpSerial[ibPort]);
   LongBeep();
 
   LoadCurrDigital(ibDig);
