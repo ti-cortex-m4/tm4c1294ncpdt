@@ -199,8 +199,7 @@ PROGRAMS.H
 #define bSET_MAX_CONNECT            181
 #define bSET_CUSTOM_MODEM           203
 
-#define bGET_STREAM                 216
-
+#define bTEST_DIRECT                216
 #define bTEST_RESPONSE              220
 #define bTEST_IMPULSES              227
 #define bTEST_KEYS                  228

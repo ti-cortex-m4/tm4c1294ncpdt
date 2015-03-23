@@ -45,6 +45,9 @@ extern  char const              szBaudOK[],
 //                                szCorrectQ1[],
 //                                szCorrectQ2[],
 //                                szWorkDone[];
+                                szDirectEscU[],
+                                szDirectEscV[],
+                                szDirectEscS[],
                                 szFailure1[],
                                 szFailure2[],
                                 szFailure20[];

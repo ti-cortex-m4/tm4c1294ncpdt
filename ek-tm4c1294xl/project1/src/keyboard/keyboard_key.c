@@ -50,6 +50,7 @@ KEYBOARD_KEY.C
 #include        "impulses/key_oldprogram73.h"
 #include        "impulses/key_oldprogram74.h"
 #include        "key_reset.h"
+#include        "test/key_test_direct.h"
 #include        "test/key_test_response.h"
 #include        "test/key_test_impulses.h"
 #include        "test/key_test_keys.h"
@@ -141,6 +142,7 @@ void    Keyboard_Key(void)
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
+      case bTEST_DIRECT:        key_TestDirect();       break;
       case bTEST_RESPONSE:      key_TestResponse();     break;
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
@@ -301,6 +303,7 @@ void    Keyboard_Key(void)
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
+      case bTEST_DIRECT:        key_TestDirect();       break;
       case bTEST_RESPONSE:      key_TestResponse();     break;
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
@@ -382,6 +385,7 @@ void    Keyboard_Key(void)
       case bSET_WINTER:
       case bSET_SUMMER:         key_SetSeason();        break;
 
+      case bTEST_DIRECT:        key_TestDirect();       break;
       case bTEST_RESPONSE:      key_TestResponse();     break;
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;

@@ -191,7 +191,7 @@ uchar   i;
          (bProgram != bGET_READTIMEDATE2) &&
          (wProgram != wGET_READTRANS)     &&
          (wProgram != wGET_READPULSE)     &&
-         (bProgram != bGET_STREAM)        &&
+         (bProgram != bTEST_DIRECT)       &&
          (bProgram != bGET_CNTCANYEAR1)   &&
          (bProgram != bGET_CNTCANYEAR10)  &&
 //         (bProgram != bGET_CNTCANYEAR2)   &&
