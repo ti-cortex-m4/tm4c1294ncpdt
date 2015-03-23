@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_DIRECT.C
+MEM_D.C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,9 +8,12 @@ MEM_DIRECT.C
 
 
 
-// флаг начала опроса 30-минутных графиков в ручном режиме
-boolean                 boManualProfile;
-
 // счётчики событий
-uint                    mpcwProfile_OK[bCANALS],
-                        mpcwProfile_Error[bCANALS];
+uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
+                        mpcwEscS_OK[bCANALS], mpcwEscS_Error[bCANALS],
+                        mpcwEscU_OK[bCANALS], mpcwEscU_Error[bCANALS];
+
+// признаки брака непосредственных показаний
+boolean                 mpboDefEscV[bCANALS],
+                        mpboDefEscS[bCANALS],
+                        mpboDefEscU[bCANALS];

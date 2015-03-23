@@ -207,6 +207,7 @@ PROGRAMS.H
 #define bTEST_FLOW                  221
 #define bTEST_PORTS_IO              237
 #define bTEST_UNI                   238
+#define bTEST_FLASH                 239
 
 #define bTEST_IMPULSES              227
 #define bTEST_KEYS                  228

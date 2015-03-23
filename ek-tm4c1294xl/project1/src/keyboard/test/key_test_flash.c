@@ -1,22 +1,22 @@
 /*------------------------------------------------------------------------------
-KEY_TEST_UNI.H
+KEY_TEST_FLOW.H
 
  
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
-#include        "../../memory/mem_uni.h"
+#include        "../../memory/mem_flash.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szTestUni[]     = "“‡ÈÏ‡ÛÚ˚ ”œ»Œ   ";
+static char const       szTestFlash[]   = "AT45            ";
 
 
 
-void    key_TestUni(void)
+void    key_TestFlash(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -24,22 +24,27 @@ void    key_TestUni(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ShowHi(szTestUni);
+      ShowHi(szTestFlash);
       Clear();
-
-      Lo(14, bMaxDelayUni);
     }
   }
 }
 
 
-void    auto_TestUni(void)
+void    auto_TestFlash(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   {
-    Lo(0,  mpbDelayUni[0]);
-    Lo(3,  mpbDelayUni[1]);
-    Lo(6,  mpbDelayUni[2]);
-    Lo(9,  mpbDelayUni[3]);
+  	szHi[11] = 'E';
+    Hi(12, cwPageErase / 0x100);
+    Hi(14, cwPageErase % 0x100);
+
+    szLo[5] = 'R';
+    Lo(6,  cwPageRead / 0x100);
+    Lo(8,  cwPageRead % 0x100);
+
+    szLo[11] = 'W';
+    Lo(12, cwPageWrite / 0x100);
+    Lo(14, cwPageWrite % 0x100);
   }
 }
