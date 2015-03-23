@@ -53,6 +53,9 @@ KEYBOARD_KEY.C
 #include        "key_reset.h"
 #include        "test/key_test_direct.h"
 #include        "test/key_test_response.h"
+#include        "test/key_test_flow.h"
+#include        "test/key_test_ports_io.h"
+#include        "test/key_test_uni.h"
 #include        "test/key_test_impulses.h"
 #include        "test/key_test_keys.h"
 #include        "test/key_test_rtc.h"
@@ -144,7 +147,12 @@ void    Keyboard_Key(void)
       case bSET_SUMMER:         key_SetSeason();        break;
 
       case bTEST_DIRECT:        key_TestDirect();       break;
+
       case bTEST_RESPONSE:      key_TestResponse();     break;
+      case bTEST_FLOW:          key_TestFlow();         break;
+      case bTEST_PORTS_IO:      key_TestPortsIO();      break;
+      case bTEST_UNI:           key_TestUni();          break;
+
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
@@ -307,7 +315,12 @@ void    Keyboard_Key(void)
       case bSET_SUMMER:         key_SetSeason();        break;
 
       case bTEST_DIRECT:        key_TestDirect();       break;
+
       case bTEST_RESPONSE:      key_TestResponse();     break;
+      case bTEST_FLOW:          key_TestFlow();         break;
+      case bTEST_PORTS_IO:      key_TestPortsIO();      break;
+      case bTEST_UNI:           key_TestUni();          break;
+
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
@@ -389,7 +402,12 @@ void    Keyboard_Key(void)
       case bSET_SUMMER:         key_SetSeason();        break;
 
       case bTEST_DIRECT:        key_TestDirect();       break;
+
       case bTEST_RESPONSE:      key_TestResponse();     break;
+      case bTEST_FLOW:          key_TestFlow();         break;
+      case bTEST_PORTS_IO:      key_TestPortsIO();      break;
+      case bTEST_UNI:           key_TestUni();          break;
+
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;

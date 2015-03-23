@@ -15,6 +15,9 @@ KEYBOARD_AUTO.C
 #include        "impulses/key_oldprogram73.h"
 #include        "impulses/key_oldprogram74.h"
 #include        "test/key_test_response.h"
+#include        "test/key_test_flow.h"
+#include        "test/key_test_ports_io.h"
+#include        "test/key_test_uni.h"
 #include        "test/key_test_impulses.h"
 #include        "test/key_test_keys.h"
 #include        "test/key_test_rtc.h"
@@ -31,6 +34,10 @@ void    Keyboard_Auto(void)
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
       case bTEST_RESPONSE:      auto_TestResponse();    break;
+      case bTEST_FLOW:          auto_TestFlow();        break;
+      case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
+      case bTEST_UNI:           auto_TestUni();         break;
+
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
       case bTEST_RTC:           auto_TestRTC();         break;
@@ -45,6 +52,10 @@ void    Keyboard_Auto(void)
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
 
       case bTEST_RESPONSE:      auto_TestResponse();    break;
+      case bTEST_FLOW:          auto_TestFlow();        break;
+      case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
+      case bTEST_UNI:           auto_TestUni();         break;
+
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
       case bTEST_RTC:           auto_TestRTC();         break;
@@ -94,6 +105,10 @@ void    Keyboard_Auto(void)
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
       case bTEST_RESPONSE:      auto_TestResponse();    break;
+      case bTEST_FLOW:          auto_TestFlow();        break;
+      case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
+      case bTEST_UNI:           auto_TestUni();         break;
+
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
       case bTEST_RTC:           auto_TestRTC();         break;
