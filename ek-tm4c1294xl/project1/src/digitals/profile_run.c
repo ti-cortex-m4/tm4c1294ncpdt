@@ -23,22 +23,414 @@ PROFILE_RUN.C
 
 
 
-bool    StartProfile(uchar  ibCan)
+bool    StartProfile(uchar  ibCanal)
 {
+//uint    i;
+
+  ibDig = ibCanal;
+  while (ibDig < bCANALS)               // проверяем тип цифровых счётчиков
+  {
+    LoadCurrDigital(ibDig);
+
+    if ((diCurr.bDevice ==  1) || (diCurr.bDevice == 15) ||
+        (diCurr.bDevice ==  2) || (diCurr.bDevice ==  8) ||
+        (diCurr.bDevice ==  3) ||
+        (diCurr.bDevice ==  4) ||
+        (diCurr.bDevice ==  5) || (diCurr.bDevice ==  7) ||
+        (diCurr.bDevice ==  6) ||
+        (diCurr.bDevice ==  9) || (diCurr.bDevice == 10) ||
+        (diCurr.bDevice == 11) || (diCurr.bDevice == 20) || (diCurr.bDevice == 25) ||
+        (diCurr.bDevice == 13) || (diCurr.bDevice == 14) ||
+        (diCurr.bDevice == 21) ||
+        (diCurr.bDevice == 22) || (diCurr.bDevice == 26) ||
+        (diCurr.bDevice == 23) ||
+        (diCurr.bDevice == 24) ||
+        (diCurr.bDevice == 99))
+    {
+      if (mpboReadyCan[ibDig] == boFalse)
+      {
+        if (mpboEnblCan[ibDig] == boFalse)
+        {
+          sprintf(szHi,"Канал: %-2bu       ",ibDig+1);
+          ShowLo(szDisabledCan); if (boHideMessages == boFalse) DelayInf();
+          AddDigRecord(EVE_CANAL_DISABLED);
+        }
+        else if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == boFalse) && (boManual == boFalse))
+        {
+          sprintf(szHi,"Канал: %-2bu       ",ibDig+1);
+          sprintf(szHi+14,"%02bu",GetHouIndex());
+          ShowLo(szDisabledHou); if (boHideMessages == boFalse) DelayMsg();
+          AddDigRecord(EVE_PROFILE_DISABLED);
+        }
+        else break;
+      }
+    }
+
+    ibDig++;
+  }
+
+  if (ibDig >= bCANALS) return(0);
+
+/*
+  cwDefHou = 0;                         // провреряем наличие брака связи по получасам
+  for (i=0; i<wHOURS; i++)
+  {
+    LoadAltDefHou(i);
+    stAlt = GetStatus(ibDig);
+
+    if ((stAlt == STA_NONE) || (stAlt == STA_DATAOFF)) cwDefHou++;
+  }
+
+  if (cwDefHou == 0) return(0);
+*/
+
+
+  tiAlt = tiCurr;
+  if (IsWinterAlt())
+  {
+    ShowHi(szNewSeason);
+    ShowLo(szIsWinter); DelayMsg();
+    Work(); OK();
+    return(0);                          // проверяем переход на зимнее время
+  }
+/*
+#ifdef  DS80C400
+  if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == boFalse) && (boManual == boFalse))
+  {
+    sprintf(szHi,"Получас: %-2bu     ",GetHouIndex());
+    ShowLo(szDisabledHou); DelayMsg();
+
+    AddDigRecord(EVE_PROFILE_DISABLED);
+    Work(); OK();
+    return(0);                          // проверяем водможность доступа в данный получас
+  }
+#endif
+*/
+
+  boRecalcCurr = mpboRecalcHou[GetHouIndex()];
+
+  AddDigRecord(EVE_PROFILE2);
+  if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILE);
+
+  mpboDefEscV[ibDig] = boFalse;
+  mpboDefEscS[ibDig] = boFalse;
+  mpboDefEscU[ibDig] = boFalse;
+
+  if (boManual == boFalse)
+  {
+    AddDigRecord(EVE_PROFILEOPEN);
+    if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEOPEN);
+  }
+  else
+  {
+    AddDigRecord(EVE_SPECIALOPEN);
+    if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_SPECIALOPEN);
+  }
+
+
+  NoShowTime(1);
+  ShowDigitalHi(); Clear();
+  InfoDigital();
+
+//  cwDefects1 = cwDefHou;
+  cwHouRead = 0;
+
+  fBreakRead = 0;
+
+  LoadCurrDigital(ibDig);
+  ibPort = diCurr.ibPort;
+
+  switch (diCurr.bDevice)
+  {
+#ifndef SKIP_A
+    case 15:
+    case 1:  SetNext(DEV_START_A2);  break;
+#endif
+
+#ifndef SKIP_B
+    case 8:
+    case 2:  SetNext(DEV_START_B2);  break;
+#endif
+
+#ifndef SKIP_C
+    case 3:  SetNext(DEV_START_C2);  break;
+#endif
+
+#ifndef SKIP_D
+    case 4:  SetNext(DEV_START_D2);  break;
+#endif
+
+#ifndef SKIP_E
+    case 7:
+    case 5:  SetNext(DEV_START_E2);  break;
+#endif
+
+#ifndef SKIP_F
+    case 6:  SetNext(DEV_START_F2);  break;
+#endif
+
+#ifndef SKIP_G
+    case 9:  SetNext(DEV_START_G2);  break;
+#endif
+
+#ifndef SKIP_H
+    case 10: SetNext(DEV_START_H2);  break;
+#endif
+
+#ifndef SKIP_I
+    case 11: SetNext(DEV_START_I2);  break;
+#endif
+
+#ifndef SKIP_K
+    case 14:
+    case 13: SetNext(DEV_START_K2);  break;
+#endif
+
+#ifndef SKIP_O
+    case 20: SetNext(DEV_START_O2);  break;
+#endif
+
+#ifndef SKIP_P
+    case 21: SetNext(DEV_START_P2);  break;
+#endif
+
+#ifndef SKIP_Q
+    case 22: SetNext(DEV_START_Q2);  break;
+#endif
+
+#ifndef SKIP_R
+    case 23: SetNext(DEV_START_R2);  break;
+#endif
+
+#ifndef SKIP_S
+    case 24: SetNext(DEV_START_S2);  break;
+#endif
+
+#ifndef SKIP_T
+    case 25: SetNext(DEV_START_T2);  break;
+#endif
+
+#ifndef SKIP_U
+    case 26: SetNext(DEV_START_U2);  break;
+#endif
+
+#ifndef SKIP_Z
+    case 99: SetNext(DEV_START_Z2);  break;
+#endif
+  }
+
+  exExtended = EXT_PROFILE_30MIN;
+  MakePause(DEV_MODEM_START);
   return(1);
 }
 
 
-void    RunProfile(void)
+void    RunProfile(bit  fCtrlHou)
 {
+  if (boLoadHou == boTrue)
+  {
+#ifdef  FLOW
+    CloseFlow();
+#endif
+
+    InfoRun();
+
+    fCurrCtrlHou = fCtrlHou;
+    memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
+    cwHouLength = 0;
+
+    Log(LOG_BEG_RUNPROFILE);
+//    if (boShowMessages == boTrue) LongBeep();
+
+    if (boDTREnable == boTrue) DTROff_All();
+
+    if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+  }
+  else BlockProgramExt(bSET_ENABLELOADHOU);
 }
+
 
 
 void    NextProfile(void)
 {
+//  cwDefects2 = cwDefHou;
+
+  if (boHideMessages == boFalse)
+  {
+//    sprintf(szLo,"   %04u/%04u    ",cwDefects1,cwDefects2);
+    sprintf(szLo," принято: %04u  ",cwHouRead);
+    DelayMsg();
+  }
+
+  LoadCurrDigital(ibDig);
+  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  {
+    LoadPrevDigital(ibCan);
+    if (CompareCurrPrevLines() == 1) mpcwProfile_OK[ibCan]++;
+  }
+
+  AddDigRecord(EVE_PROFILE_OK2);
+  if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEOK);
+
+
+  if (cwHouRead == 0)
+  {
+    // запрещаем опрашивать другие каналы, принадлежащие текущему счётчику
+    LoadCurrDigital(ibDig);
+    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    {
+      LoadPrevDigital(ibCan);
+      if (CompareCurrPrevLines() == 1) mpboReadyCan[ibCan] = boTrue;
+    }
+
+    ShowLo(szNoData); if (boHideMessages == boFalse) DelayMsg();
+  }
+
+  Clear();
+
+
+  LoadCurrDigital(ibDig);
+  ibPort = diCurr.ibPort;
+
+  switch (diCurr.bDevice)
+  {
+#ifndef SKIP_D
+    case 4:  QueryCloseD(1); break;
+#endif
+#ifndef SKIP_K
+    case 14:
+    case 13: QueryCloseK();  break;
+#endif
+#ifndef SKIP_P
+    case 21: QueryCloseP();  break;
+#endif
+#ifndef SKIP_Q
+    case 22: QueryCloseQ();  break;
+#endif
+#ifndef SKIP_U
+    case 26: QueryCloseU();  break;
+#endif
+  }
+
+  if (StartProfile(ibDig+1) == 0)       // опрос завершён
+  {
+    ShowHi(szWorkDone);
+    sprintf(szLo+4,"за %u:%02bu", (uint)(cwHouLength / 60), (uchar)(cwHouLength % 60)); if (boHideMessages == boFalse) DelayMsg();
+
+    SetCurr(DEV_BEGIN);
+
+    Log(LOG_END_RUNPROFILE);
+    Log(LOG_BEG_CALCPROFILE);
+
+    InfoEnd();
+    OnHours();
+    AddDigRecord(EVE_PROFILECLOSE2);
+
+    if (boDTREnable == boTrue) DTROff_All();
+
+    /*if (CheckAllGroupsNeg() == 1) {
+      if (boRecalcCurr != boTrue) {
+        ShowLo(szNoRecalc); DelayMsg();
+        AddDigRecord(EVE_RECALCFREE);
+      }
+      else {
+        if (boRecalcAlways == boTrue) {
+          AddDigRecord(EVE_RECALC20);
+          Recalc(1,1);
+          AddDigRecord(EVE_RECALC21);
+        }
+        else {
+          AddDigRecord(EVE_RECALC10);
+          Recalc(0,1);
+          AddDigRecord(EVE_RECALC11);
+        }
+      }
+    }
+    else*/ if ((boRecalcCurr == boTrue) /*&& (boRecalcAlways == boTrue)*/) {
+      AddDigRecord(EVE_RECALC20);
+      Recalc(1,1);
+      AddDigRecord(EVE_RECALC21);
+    } else if (boRecalcMaxPowCurrDay == boTrue)
+      Recalc_MaxPowCurrDay();
+
+    if ((boRecalcCurr == boTrue) && (boRecalcEnable == boTrue))
+      Recalc_Cust();
+
+    Work(); OK();
+
+    boNewDay = boFalse;
+    boNewHou = boFalse;
+
+    boManual = boFalse;
+
+    ibPortPause = 0xFF;
+
+    Log(LOG_END_CALCPROFILE);
+    EnableAnswer();
+
+    if (mpboCheckupHou[GetHouIndex()] == boTrue) cbCheckupRun = 10;
+  }
+
+  mpSerial[diCurr.ibPort] = SER_BEGIN;
+//  ResetAllSerial();
 }
 
 
+
+// аварийный переход на следующий канал
 void    ErrorProfile(void)
 {
+  InfoError();
+  SaveDisplay();
+
+  ShowHi(szWarning);
+  sprintf(szLo,"запроса %02bX.%02bX.%02bX",(uchar)(GetCurr() / 0x100),(uchar)(GetCurr() % 0x100),(uchar)mpSerial[ibPort]);
+  LongBeep();
+
+  LoadCurrDigital(ibDig);
+  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  {
+    LoadPrevDigital(ibCan);
+    if (CompareCurrPrevLines() == 1) mpcwProfile_Error[ibCan]++;
+  }
+
+  AddDigRecord(EVE_PROFILE_ERROR2);
+  if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEERROR2);
+
+
+  DelayMsg();
+  LoadDisplay();
+
+  // запрещаем опрашивать другие каналы, принадлежащие текущему счётчику
+  LoadCurrDigital(ibDig);
+  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  {
+    LoadPrevDigital(ibCan);
+    if (CompareCurrPrevLines() == 1) mpboReadyCan[ibCan] = boTrue;
+  }
+
+  fKeyOn = 0;
+  MakePause(DEV_MODEM_STOP);
+}
+
+
+// нормальный переход на следующий канал
+void    DoneProfile(void)
+{
+  NewLimits();                                      // переход границы со стороны счётчика
+
+  fKeyOn = 0;
+  MakePause(DEV_MODEM_STOP);
+
+  if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE1);
+}
+
+
+// нормальный переход на следующий канал
+void    DoneProfile_Stop(void)
+{
+  fKeyOn = 0;
+  MakePause(DEV_MODEM_STOP);
+
+  if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE2);
 }
