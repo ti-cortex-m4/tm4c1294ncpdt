@@ -28,6 +28,8 @@ uchar                   ibPort;
 
 uchar                   ibPortPause;
 
+uchar                   bPortsStatus;
+
 
 
 void    Output(uint  wSize) {
