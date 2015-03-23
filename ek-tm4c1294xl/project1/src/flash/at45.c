@@ -203,6 +203,8 @@ boolean SafePageErase(void)
 {
 uchar   i;
 
+  cwPageErase++;
+
   for (i=0; i<bMAXREPEAT; i++)
   {
     if (PageErase() == 0)
@@ -253,6 +255,8 @@ uint    i;
 boolean SafePageRead(void)
 {
 uchar   i;
+
+  cwPageRead++;
 
   for (i=0; i<bMAXREPEAT; i++)
   {
@@ -347,6 +351,8 @@ uchar   i;
 
   mpbPageOut[wPAGE_SIZE-2] = bCRCHi;
   mpbPageOut[wPAGE_SIZE-1] = bCRCLo;
+
+  cwPageWrite++;
 
   for (i=0; i<bMAXREPEAT; i++)
   {
