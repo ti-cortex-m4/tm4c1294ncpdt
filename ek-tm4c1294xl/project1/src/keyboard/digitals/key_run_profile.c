@@ -8,6 +8,7 @@ RUN_PROFILE.Ñ
 #include        "../../memory/mem_profile.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
+#include        "../../realtime/realtime.h"
 #include        "../../digitals/profile_run.h"
 
 
