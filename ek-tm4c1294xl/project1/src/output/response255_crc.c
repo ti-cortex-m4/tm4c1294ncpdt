@@ -27,6 +27,7 @@ RESPONSE255_CRC.C
 #include        "../output/out_current.h"
 #include        "../output/out_version.h"
 #include        "../output/out_ports.h"
+#include        "../output/out_names.h"
 
 
 
@@ -187,7 +188,7 @@ void    Response255_CRC(void)
       Push(&mpSerial_Bulk, sizeof(mpSerial_Bulk));
       Output(1+1+4*1+2+4*2+4*1+4*1);
       break;
-
+*/
     case bEXT_GETOBJECTNAME: 
       GetObjectNameExt();
       break;
@@ -196,22 +197,22 @@ void    Response255_CRC(void)
       SetObjectNameExt();
       break;
 
-    case bEXT_GETCANALNAME: 
+    case bEXT_GETCANALSNAME:
       GetCanalsNameExt();
       break;
 
-    case bEXT_SETCANALNAME: 
+    case bEXT_SETCANALSNAME:
       SetCanalsNameExt();
       break;
 
-    case bEXT_GETGROUPNAME: 
+    case bEXT_GETGROUPSNAME:
       GetGroupsNameExt();
       break;
 
-    case bEXT_SETGROUPNAME: 
+    case bEXT_SETGROUPSNAME:
       SetGroupsNameExt();
       break;
-*/
+
     case bEXT_FLASH_CONTROL:
       OutFlashControl();
       break;
