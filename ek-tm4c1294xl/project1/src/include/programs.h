@@ -170,6 +170,8 @@ PROGRAMS.H
 #define bGET_ENGCANYEAR_B           168
 #define bGET_ENGCANYEAR_A           169
 
+#define bRUN_PROFILE                190
+
 
 // все режимы
 

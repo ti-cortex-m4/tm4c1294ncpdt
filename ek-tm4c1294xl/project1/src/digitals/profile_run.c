@@ -7,6 +7,7 @@ PROFILE_RUN.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_profile.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../serial/ports.h"
@@ -50,13 +51,13 @@ bool    StartProfile(uchar  ibCanal)
       {
         if (mpboEnblCan[ibDig] == FALSE)
         {
-          sprintf(szHi,"Канал: %-2bu       ",ibDig+1);
+          sprintf(szHi,"Канал: %-2u       ",ibDig+1);
           ShowLo(szDisabledCan); if (boHideMessages == FALSE) DelayInf();
           AddDigRecord(EVE_CANAL_DISABLED);
         }
-        else if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == FALSE) && (boManual == FALSE))
+        else if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == FALSE) && (boManualProfile == FALSE))
         {
-          sprintf(szHi,"Канал: %-2bu       ",ibDig+1);
+          sprintf(szHi,"Канал: %-2u       ",ibDig+1);
           sprintf(szHi+14,"%02bu",GetHouIndex());
           ShowLo(szDisabledHou); if (boHideMessages == FALSE) DelayMsg();
           AddDigRecord(EVE_PROFILE_DISABLED);
@@ -96,7 +97,7 @@ bool    StartProfile(uchar  ibCanal)
 #ifdef  DS80C400
   if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == FALSE) && (boManual == FALSE))
   {
-    sprintf(szHi,"Получас: %-2bu     ",GetHouIndex());
+    sprintf(szHi,"Получас: %-2u     ",GetHouIndex());
     ShowLo(szDisabledHou); DelayMsg();
 
     AddDigRecord(EVE_PROFILE_DISABLED);
@@ -115,7 +116,7 @@ bool    StartProfile(uchar  ibCanal)
   mpboDefEscS[ibDig] = FALSE;
   mpboDefEscU[ibDig] = FALSE;
 
-  if (boManual == FALSE)
+  if (boManualProfile == FALSE)
   {
     AddDigRecord(EVE_PROFILEOPEN);
     if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEOPEN);
@@ -361,7 +362,7 @@ void    NextProfile(void)
     boNewDay = FALSE;
     boNewHou = FALSE;
 
-    boManual = FALSE;
+    boManualProfile = FALSE;
 
     ibPortPause = 0xFF;
 
