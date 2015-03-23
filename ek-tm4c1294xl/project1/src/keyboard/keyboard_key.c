@@ -28,6 +28,7 @@ KEYBOARD_KEY.C
 #include        "digitals/key_keys.h"
 #include        "digitals/key_search.h"
 #include        "digitals/key_automatic.h"
+#include        "digitals/key_run_profile.h"
 #include        "phones/key_phones.h"
 #include        "phones/key_max_connect.h"
 #include        "phones/key_custom_modem.h"
@@ -295,6 +296,8 @@ void    Keyboard_Key(void)
       case bGET_CNTCANYEAR10:
       case bGET_CNTCANYEAR2:
       case bGET_CNTCANYEAR20:  key_GetFullYear(CANALS); break;
+
+      case bRUN_PROFILE:        key_RunProfile();       break;
 
       case bGET_PROGRAM73:      key_GetOldProgram73();  break;
       case bGET_PROGRAM74:      key_GetOldProgram74();  break;
