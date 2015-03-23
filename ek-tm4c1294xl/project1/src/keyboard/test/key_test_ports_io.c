@@ -7,6 +7,7 @@ KEY_TEST_PORTS_IO.H
 #include        "../../main.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
+#include        "../../serial/ports.h"
 #include        "../../isr/serial2.h"
 #include        "../../isr/serial3.h"
 

@@ -18,6 +18,8 @@ extern  uchar                   ibPort;
 
 extern  uchar                   ibPortPause;
 
+extern  uchar                   bPortsStatus;
+
 
 
 void    Output(uint  wSize);

@@ -36,11 +36,13 @@ void    DTROff2(void) {
 
 void    InputMode2(void) {
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0080) = ~0x0020;
+  bPortsStatus &= 0xFE;
 }
 
 
 void    OutputMode2(void) {
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DATA + 0x0080) = 0x0020;
+  bPortsStatus |= 0x01;
 }
 
 
