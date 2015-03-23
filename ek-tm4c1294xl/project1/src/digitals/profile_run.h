@@ -4,6 +4,6 @@ PROFILE_RUN.H
 
 ------------------------------------------------------------------------------*/
 
-void    RunProfile(void);
+void    RunProfile(bool  fCtrlHou);
 void    NextProfile(void);
 void    ErrorProfile(void);
