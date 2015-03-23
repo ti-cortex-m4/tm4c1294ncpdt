@@ -4,10 +4,10 @@ KEY_TEST_KEYS.H
  
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
-#include        "../health.h"
+#include        "../../main.h"
+#include        "../keyboard.h"
+#include        "../../display/display.h"
+#include        "../../health.h"
 #include       "inc/hw_gpio.h"
 #include       "inc/hw_memmap.h"
 #include       "inc/hw_sysctl.h"
