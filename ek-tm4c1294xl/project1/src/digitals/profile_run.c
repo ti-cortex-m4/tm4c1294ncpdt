@@ -24,7 +24,7 @@ PROFILE_RUN.C
 
 
 bool    StartProfile(uchar  ibCanal)
-{
+{/*
 //uint    i;
 
   ibDig = ibCanal;
@@ -71,7 +71,7 @@ bool    StartProfile(uchar  ibCanal)
 
   if (ibDig >= bCANALS) return(0);
 
-/*
+/ *
   cwDefHou = 0;                         // провреряем наличие брака связи по получасам
   for (i=0; i<wHOURS; i++)
   {
@@ -82,7 +82,7 @@ bool    StartProfile(uchar  ibCanal)
   }
 
   if (cwDefHou == 0) return(0);
-*/
+* /
 
 
   tiAlt = tiCurr;
@@ -93,7 +93,7 @@ bool    StartProfile(uchar  ibCanal)
     Work(); OK();
     return(0);                          // проверяем переход на зимнее время
   }
-/*
+/ *
 #ifdef  DS80C400
   if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == FALSE) && (boManual == FALSE))
   {
@@ -105,7 +105,7 @@ bool    StartProfile(uchar  ibCanal)
     return(0);                          // проверяем водможность доступа в данный получас
   }
 #endif
-*/
+* /
 
   boRecalcCurr = mpboRecalcHou[GetHouIndex()];
 
@@ -218,13 +218,13 @@ bool    StartProfile(uchar  ibCanal)
   }
 
   exExtended = EXT_PROFILE_30MIN;
-  MakePause(DEV_MODEM_START);
+  MakePause(DEV_MODEM_START);*/
   return(1);
 }
 
 
 void    RunProfile(bool  fCtrlHou)
-{
+{/*
   if (boEnblProfile == TRUE)
   {
 #ifdef  FLOW
@@ -239,13 +239,13 @@ void    RunProfile(bool  fCtrlHou)
 
     if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
   }
-  else BlockProgramExt(bSET_ENBL_PROFILE);
+  else BlockProgramExt(bSET_ENBL_PROFILE);*/
 }
 
 
 
 void    NextProfile(void)
-{
+{/*
 //  cwDefects2 = cwDefHou;
 
   if (boHideMessages == FALSE)
@@ -318,7 +318,7 @@ void    NextProfile(void)
 
     if (boDTREnable == TRUE) DTROff_All();
 
-    /*if (CheckAllGroupsNeg() == 1) {
+    / *if (CheckAllGroupsNeg() == 1) {
       if (boRecalcCurr != TRUE) {
         ShowLo(szNoRecalc); DelayMsg();
         AddDigRecord(EVE_RECALCFREE);
@@ -336,7 +336,7 @@ void    NextProfile(void)
         }
       }
     }
-    else*/ if ((boRecalcCurr == TRUE) /*&& (boRecalcAlways == TRUE)*/) {
+    else* / if ((boRecalcCurr == TRUE) / *&& (boRecalcAlways == TRUE)* /) {
       AddDigRecord(EVE_RECALC20);
       Recalc(1,1);
       AddDigRecord(EVE_RECALC21);
@@ -358,14 +358,14 @@ void    NextProfile(void)
   }
 
   mpSerial[diCurr.ibPort] = SER_BEGIN;
-//  ResetAllSerial();
+//  ResetAllSerial();*/
 }
 
 
 
 // аварийный переход на следующий канал
 void    ErrorProfile(void)
-{
+{/*
   SaveDisplay();
 
   ShowHi(szWarning);
@@ -396,10 +396,10 @@ void    ErrorProfile(void)
   }
 
   fKeyOn = 0;
-  MakePause(DEV_MODEM_STOP);
+  MakePause(DEV_MODEM_STOP);*/
 }
 
-
+/*
 // нормальный переход на следующий канал
 void    DoneProfile(void)
 {
@@ -420,3 +420,4 @@ void    DoneProfile_Stop(void)
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE2);
 }
+*/

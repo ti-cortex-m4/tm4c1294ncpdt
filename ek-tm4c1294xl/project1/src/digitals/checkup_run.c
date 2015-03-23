@@ -24,7 +24,7 @@ CHECKUP_RUN.C
 
 
 bool    StartCheckup(uchar  ibCanal)
-{
+{/*
   ibDig = ibCanal;
   while (ibDig < bCANALS)
   {
@@ -82,14 +82,14 @@ bool    StartCheckup(uchar  ibCanal)
   }
 
   exExtended = EXT_PROFILE_CHECKUP;
-  MakePause(DEV_MODEM_START);
+  MakePause(DEV_MODEM_START);*/
   return(1);
 }
 
 
 
 void    RunCheckup(bool  fReadonly)
-{
+{/*
 #ifdef  FLOW
   CloseFlow();
 #endif
@@ -102,21 +102,21 @@ void    RunCheckup(bool  fReadonly)
 
   if (boDTREnable == TRUE) DTROff_All();
 
-  if (StartCheckup(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
+  if (StartCheckup(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }*/
 }
 
 
-
+/*
 void    NexttimeCheckup(void)
 {
   if (boCheckupEnable == TRUE)
     RunCheckup(0);
 }
-
+*/
 
 
 void    NextCheckup(void)
-{
+{/*
   if (boHideMessages == FALSE)
   {
     sprintf(szLo," принято: %04u  ",cwHouRead);
@@ -176,13 +176,13 @@ void    NextCheckup(void)
     EnableAnswer();
   }
 
-  mpSerial[diCurr.ibPort] = SER_BEGIN;
+  mpSerial[diCurr.ibPort] = SER_BEGIN;*/
 }
 
 
 
 void    ErrorCheckup(void)
-{
+{/*
   SaveDisplay();
 
   ShowHi(szWarning);
@@ -210,11 +210,11 @@ void    ErrorCheckup(void)
   }
 
   fKeyOn = 0;
-  MakePause(DEV_MODEM_STOP);
+  MakePause(DEV_MODEM_STOP);*/
 }
 
 
-
+/*
 // нормальный переход на следующий канал
 void    DoneCheckup(void)
 {
@@ -223,3 +223,4 @@ void    DoneCheckup(void)
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE2);
 }
+*/
