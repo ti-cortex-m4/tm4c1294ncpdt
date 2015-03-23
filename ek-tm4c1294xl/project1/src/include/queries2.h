@@ -34,6 +34,13 @@ QUERIES2.H
 
 #define bEXT_GETDECRET                 105
 
+#define bEXT_GETOBJECTNAME             111
+#define bEXT_SETOBJECTNAME             112
+#define bEXT_GETCANALSNAME             113
+#define bEXT_SETCANALSNAME             114
+#define bEXT_GETGROUPSNAME             115
+#define bEXT_SETGROUPSNAME             116
+
 #define bEXT_FLASH_CONTROL             250
 
 
