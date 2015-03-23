@@ -14,10 +14,10 @@ KEYBOARD_AUTO.C
 #include        "impulses/key_single2.h"
 #include        "impulses/key_oldprogram73.h"
 #include        "impulses/key_oldprogram74.h"
-#include        "key_test_response.h"
-#include        "key_test_impulses.h"
-#include        "key_test_keys.h"
-#include        "key_test_rtc.h"
+#include        "test/key_test_response.h"
+#include        "test/key_test_impulses.h"
+#include        "test/key_test_keys.h"
+#include        "test/key_test_rtc.h"
 
 
 
