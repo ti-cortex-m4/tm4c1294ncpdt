@@ -7,32 +7,19 @@ KEY_TEST_DIRECT.C
 #include        "../../main.h"
 #include        "../../memory/mem_realtime.h"
 #include        "../../memory/mem_digitals.h"
-//#include        "../../memory/mem_energy.h"
 #include        "../keyboard.h"
 #include        "../../display/display.h"
-//#include        "../../realtime/realtime.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_messages.h"
 #include        "../../serial/ports.h"
 #include        "../../serial/modems.h"
-//#include        "../../engine.h"
-//#include        "../../energy.h"
-//#include        "../../energy2.h"
-//#include        "../../energy4.h"
-//#include        "../../impulses/max_power.h"
 #include        "../../devices/automatic2.h"
-//#include        "../../time/timedate.h"
-//#include        "../../time/timedate_display.h"
 
 
 
 //                                         0123456789ABCDEF
 static char const       szTestDirect[]  = "Тест связи      ",
                         szNoDirect[]    = "      нет       ";
-
-
-
-static uchar            ibYmin, ibYmax;
 
 
 
@@ -54,30 +41,30 @@ static void ShowTestDirect(void)
       ShowLo(szBlocking); 
     else 
     {
-      ibYmin = 0;
-      ibY    = 0;
-      ibYmax = 0;
+      uchar bA = 0;
+      uchar bB = 0;
+      uchar bC = 0;
 
       for (ibZ=0; ibZ<100; ibZ++)
       {
         Clear();
  
         ShowHi(szDirectEscU); DelayInf();
-        if (ReadTimeCan(ibX) == 1) ibYmax++;
+        if (ReadTimeCan(ibX) == 1) bC++;
         if (fKey == 1) break;
 
         ShowHi(szDirectEscV); DelayInf();
-        if (ReadCntMonCan(tiCurr.bMonth-1, ibX) == 1) ibYmin++;
+        if (ReadCntMonCan(tiCurr.bMonth-1, ibX) == 1) bA++;
         if (fKey == 1) break;
 
         ShowHi(szDirectEscS); DelayInf();
-        if (ReadCntCurrCan(ibX) == 1) ibY++;
+        if (ReadCntCurrCan(ibX) == 1) bB++;
         if (fKey == 1) break;
 
         ShowHi(szTestDirect); sprintf(szHi+14,"%2u",ibX+1);
 
         Clear();
-        sprintf(szLo,"%02u   %02u-%02u-%02u",ibZ+1,ibYmin,ibY,ibYmax);
+        sprintf(szLo,"%02u   %02u-%02u-%02u",ibZ+1,bA,bB,bC);
 
         Delay(1000); 
       }
