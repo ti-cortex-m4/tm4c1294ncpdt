@@ -10,6 +10,7 @@ ENERGY_SPEC.C
 #include        "../memory/mem_energy_spec.h"
 #include        "../realtime/realtime.h"
 #include        "../flash/files.h"
+#include        "../energy.h"
 
 
 
