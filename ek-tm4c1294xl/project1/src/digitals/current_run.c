@@ -27,9 +27,9 @@ CURRENT_RUN.C
 
 
 
-bool    StartCurrent(uchar  ibCan)
+bool    StartCurrent(uchar  ibCanal)
 {
-  ibDig = ibCan;
+  ibDig = ibCanal;
 
   while (ibDig < bCANALS)
   {
@@ -86,11 +86,11 @@ bool    StartCurrent(uchar  ibCan)
     case 8:
     case 2:  SetNext(DEV_START_B3);  break;
 #endif
-/*
+
 #ifndef SKIP_B
     case 12: SetNext(DEV_START_B312);  break;
 #endif
-*/
+
 #ifndef SKIP_C
     case 3:  SetNext(DEV_START_C3);  break;
 #endif
