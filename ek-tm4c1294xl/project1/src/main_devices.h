@@ -114,12 +114,12 @@ typedef enum
   DEV_OPENCANAL_B3      =  0x241,
   DEV_POSTOPENCANAL_B3  =  0x242,
   DEV_ENERGY_B3         =  0x243,
-/*
+
   DEV_START_B312        =  0x250,
   DEV_OPENCANAL_B312    =  0x251,
   DEV_POSTOPENCANAL_B312=  0x252,
   DEV_ENERGY_B312       =  0x253,
-*/
+
   DEV_START_B4          =  0x260,
   DEV_OPENCANAL_B4      =  0x261,
   DEV_CHECKUP_DAY_B4    =  0x262,

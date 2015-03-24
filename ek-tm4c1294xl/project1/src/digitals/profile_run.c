@@ -8,8 +8,10 @@ PROFILE_RUN.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_profile.h"
+#include        "../memory/mem_direct.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
+#include        "../keyboard/key_timedate.h"
 #include        "../serial/ports.h"
 #include        "../serial/flow.h"
 #include        "../serial/dtr.h"
@@ -18,17 +20,18 @@ PROFILE_RUN.C
 #include        "../digitals/digitals_pause.h"
 #include        "../digitals/digitals_run.h"
 #include        "../digitals/digitals_messages.h"
+#include        "../digitals/digitals_display.h"
 #include        "../digitals/answer.h"
+#include        "../time/timedate.h"
 #include        "../flash/records.h"
 
 
 
 bool    StartProfile(uchar  ibCanal)
-{/*
-//uint    i;
-
+{
   ibDig = ibCanal;
-  while (ibDig < bCANALS)               // проверяем тип цифровых счётчиков
+
+  while (ibDig < bCANALS)
   {
     LoadCurrDigital(ibDig);
 
@@ -58,7 +61,7 @@ bool    StartProfile(uchar  ibCanal)
         else if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == FALSE) && (boManualProfile == FALSE))
         {
           ShowCanalNumber(ibDig);
-          sprintf(szHi+14,"%02bu",GetHouIndex());
+          sprintf(szHi+14,"%02u",GetHouIndex());
           ShowLo(szDisabledHou); if (boHideMessages == FALSE) DelayMsg();
           AddDigRecord(EVE_PROFILE_DISABLED);
         }
@@ -71,41 +74,19 @@ bool    StartProfile(uchar  ibCanal)
 
   if (ibDig >= bCANALS) return(0);
 
-/ *
-  cwDefHou = 0;                         // провреряем наличие брака связи по получасам
-  for (i=0; i<wHOURS; i++)
-  {
-    LoadAltDefHou(i);
-    stAlt = GetStatus(ibDig);
-
-    if ((stAlt == STA_NONE) || (stAlt == STA_DATAOFF)) cwDefHou++;
-  }
-
-  if (cwDefHou == 0) return(0);
-* /
 
 
-  tiAlt = tiCurr;
-  if (IsWinterAlt())
+  if (IsWinter(&tiCurr, &tiWinter))
   {
     ShowHi(szNewSeason);
-    ShowLo(szIsWinter); DelayMsg();
-    Work(); OK();
-    return(0);                          // проверяем переход на зимнее время
-  }
-/ *
-#ifdef  DS80C400
-  if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == FALSE) && (boManual == FALSE))
-  {
-    sprintf(szHi,"Получас: %-2u     ",GetHouIndex());
-    ShowLo(szDisabledHou); DelayMsg();
+    ShowLo(szIsWinter);
+    DelayMsg();
 
-    AddDigRecord(EVE_PROFILE_DISABLED);
-    Work(); OK();
-    return(0);                          // проверяем водможность доступа в данный получас
+    Work();
+    OK();
+    return(0);
   }
-#endif
-* /
+
 
   boRecalcCurr = mpboRecalcHou[GetHouIndex()];
 
@@ -219,7 +200,7 @@ bool    StartProfile(uchar  ibCanal)
   }
 
   exExtended = EXT_PROFILE_30MIN;
-  MakePause(DEV_MODEM_START);*/
+  MakePause(DEV_MODEM_START);
   return(1);
 }
 

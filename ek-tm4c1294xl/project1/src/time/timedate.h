@@ -15,6 +15,8 @@ uchar   GetWeekdayYMD(uchar  bYear, uchar  bMonth, uchar  bDay);
 time   *GetDecretDateYM(uchar  bYear, uchar  bMonth);
 uint    GetDayIndexYMD(uchar  bYear, uchar  bMonth, uchar  bDay);
 uint    GetDayIndexMD(uchar  bMonth, uchar  bDay);
+
+bool    IsWinter(time  *pti, time  *ptiWinter);
 bool    TrueTimeDate(void);
 
 ulong   GetSecondIndex(time  *pti);
