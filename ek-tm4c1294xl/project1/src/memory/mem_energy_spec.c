@@ -56,3 +56,9 @@ impulse                 mpdeDayCan[bCANALS],
 
 // достоверность
 uint                    mpwImpHouCanDef[bCANALS];
+
+
+
+// массив брака по дням и месяцам
+time                    mpdeDay[bDAYS],
+                        mpdeMon[bMONTHS];

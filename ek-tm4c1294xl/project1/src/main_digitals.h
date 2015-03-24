@@ -35,3 +35,11 @@ typedef enum
   EXT_CURRENT_3MIN,
   EXT_PROFILE_CHECKUP
 } extended;
+
+
+
+// тип 'брак связи'
+typedef struct
+{
+  time          tiNow;
+} defects;

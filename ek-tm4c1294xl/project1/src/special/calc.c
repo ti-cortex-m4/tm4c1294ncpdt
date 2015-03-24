@@ -59,7 +59,7 @@ static time tiDig;
     uchar ibDay;
     for (ibDay=0; ibDay<bDAYS; ibDay++)
     {
-      tiDig = mpdeDay[ibDay].tiNow;                   
+      tiDig = mpdeDay[ibDay];
       if ((tiAlt.bYear  == tiDig.bYear)  &&            
           (tiAlt.bMonth == tiDig.bMonth) &&
           (tiAlt.bDay   == tiDig.bDay)) break;
@@ -92,7 +92,7 @@ static time tiDig;
     uchar ibMon;
     for (ibMon=0; ibMon<bMONTHS; ibMon++)
     {
-      tiDig = mpdeMon[ibMon].tiNow;                   
+      tiDig = mpdeMon[ibMon];
       if ((tiAlt.bYear  == tiDig.bYear)  &&            
           (tiAlt.bMonth == tiDig.bMonth)) break;
     }
