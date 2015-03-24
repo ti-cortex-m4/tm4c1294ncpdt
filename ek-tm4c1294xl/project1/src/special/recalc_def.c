@@ -64,7 +64,7 @@ uchar   i;
   for (i=0; i<bMONTHS; i++)
     SaveDefMon(i);
 }
-
+*/
 
 void    NextDayDef(void) 
 {
@@ -78,7 +78,7 @@ void    NextMonDef(void)
   memset(&mpdeMonCan, 0, sizeof(mpdeMonCan));
   SaveDefMon(ibHardMon);
 }
-*/
+
 
 
 void    MakeDefSpec(impulse  *mpimT, uchar  ibCan, time  *pti)
