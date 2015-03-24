@@ -8,8 +8,12 @@ CALC.C
 #include        "../memory/mem_energy_spec.h"
 #include        "../impulses/energy_spec.h"
 #include        "../time/timedate.h"
-#include        "special.h"
+#include        "calc.h"
 
+
+
+bool                    fLoadHou, fLoadDay, fLoadMon,
+                        fLoadMem, fSaveDay, fSaveMon;
 
 
 

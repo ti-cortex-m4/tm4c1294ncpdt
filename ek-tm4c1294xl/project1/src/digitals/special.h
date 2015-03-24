@@ -4,11 +4,6 @@ SPECIAL.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                    fLoadHou, fLoadDay, fLoadMon,
-                                fLoadMem, fSaveDay, fSaveMon;
-
-
-
 bool    IsDefect(uchar    ibCan);
 
 bool    IsOpenSpecial(void);
