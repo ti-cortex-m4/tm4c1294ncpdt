@@ -119,7 +119,7 @@ typedef enum
   DEV_OPENCANAL_B312    =  0x251,
   DEV_POSTOPENCANAL_B312=  0x252,
   DEV_ENERGY_B312       =  0x253,
-
+*/
   DEV_START_B4          =  0x260,
   DEV_OPENCANAL_B4      =  0x261,
   DEV_CHECKUP_DAY_B4    =  0x262,
@@ -149,7 +149,7 @@ typedef enum
   DEV_ERROR4_B4         =  0x27A,
   DEV_POSTERROR4_B4     =  0x27B,
   DEV_POSTHEADER1_B4    =  0x27C,
-*/
+
 #endif
 
 #ifndef SKIP_C

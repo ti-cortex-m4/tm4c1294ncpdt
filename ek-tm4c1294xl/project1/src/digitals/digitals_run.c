@@ -866,7 +866,7 @@ void    RunDevices(void)
     case DEV_MODEM_CONNECT:
       if ((mpSerial[ibPort] == SER_POSTANSWER_MODEM) && (ShowModemConnect() == 1)) 
       {
-        ShowDigitalNumber(ibDig);
+        ShowCanalNumber(ibDig);
 
         cbWaitOnline = 0;
 
@@ -920,7 +920,7 @@ void    RunDevices(void)
 
     case DEV_MODEM_STOP:
       if (fKeyOn == 0)
-        ShowDigitalNumber(ibDig);
+        ShowCanalNumber(ibDig);
       else
         ShowHi(szManual);
 

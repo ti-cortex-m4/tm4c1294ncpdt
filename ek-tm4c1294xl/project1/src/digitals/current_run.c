@@ -55,8 +55,7 @@ bool    StartCurrent(uchar  ibCan)
       {
         if (mpboEnblCan[ibDig] == FALSE)
         {
-          ShowHi(szClear);
-          sprintf(szHi,"Канал: %-2u",ibDig+1);
+          ShowCanalNumber(ibDig);
           ShowLo(szDisabledCan); if (boHideMessages == FALSE) Delay(300);
         }
         else break;
