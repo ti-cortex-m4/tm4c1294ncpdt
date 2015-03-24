@@ -221,25 +221,27 @@ ulong   dw;
 // рассчитывает импульсы для выбранного интервала
 void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  *pti)
 {
-  uchar j = mpibEngPrevTariff[ pti->bHour*2 + pti->bMinute/30 ];
-  ulong dw  = *PGetCanImp(mpimT,ibCan,j);
+  uchar i = pti->bHour*2 + pti->bMinute/30;
+  uchar t = mpibEngPrevTariff[i];
+  ulong dw = *PGetCanImp(mpimT,ibCan,t);
 
   if (GetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF)
     dw += GetCanInt(mpwImpHouCanSpec, ibCan);
 
-  mpimT[ibCan].mpdwImp[j] = dw;
+  mpimT[ibCan].mpdwImp[t] = dw;
 }
 
 
 // рассчитывает импульсы для выбранного интервала: во избежание двойного сложения
 void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  *pti)
 {
-  uchar j = mpibEngPrevTariff[ pti->bHour*2 + pti->bMinute/30 ];
-  ulong dw = *PGetCanImp(mpimT,ibCan,j);
+  uchar i = pti->bHour*2 + pti->bMinute/30;
+  uchar t = mpibEngPrevTariff[i];
+  ulong dw = *PGetCanImp(mpimT,ibCan,t);
 
   dw -= GetCanInt(mpwImpHouCanSpec, ibCan);
 
-  mpimT[ibCan].mpdwImp[j] = dw;
+  mpimT[ibCan].mpdwImp[t] = dw;
 }
 
 
@@ -247,10 +249,9 @@ void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  *pti)
 // добавляем к канальному массиву impulse (по текущему тарифу для энергии)
 void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uchar  wImp)
 {
-uchar   i;
-
-  i = tiPrev.bHour*2 + tiPrev.bMinute/30;
-  mpimT[ibCanal].mpdwImp[ mpibEngCurrTariff[i] ] += wImp;
+  uchar i = tiPrev.bHour*2 + tiPrev.bMinute/30;
+  uchar t = mpibEngCurrTariff[i];
+  mpimT[ibCanal].mpdwImp[t] += wImp;
 }
 
 
