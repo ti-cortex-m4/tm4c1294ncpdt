@@ -21,7 +21,7 @@ CHECKUP_RUN.C
 #include        "../digitals/digitals_display.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/answer.h"
-#include        "../digitals/special.h"
+#include        "../special/special.h"
 #include        "../time/timedate.h"
 #include        "../flash/records.h"
 #include        "checkup.h"

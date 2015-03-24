@@ -22,7 +22,7 @@ KEYBOARD.C
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_run.h"
 #include        "../digitals/wait_query.h"
-#include        "../digitals/special.h"
+#include        "../special/special.h"
 #include        "../settings.h"
 #include        "../flash/files.h"
 #include        "../flash/records.h"
