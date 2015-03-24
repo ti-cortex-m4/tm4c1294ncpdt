@@ -8,6 +8,9 @@ MEM_ENERGY_SPEC.C
 
 
 
+// индекс на текущий интервал данных, хранимой в цифровых счётчиках
+uint                    iwDigHou;
+
 // массивы накопленных импульсов (по получасам)
 uint                    mpwImpHouCanSpec[bCANALS];
 

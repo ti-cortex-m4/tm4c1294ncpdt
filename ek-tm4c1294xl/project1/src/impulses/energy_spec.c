@@ -103,7 +103,7 @@ uchar   i;
     memcpy(mpwImpHouCanDef, mpwImpHouCanSpec, sizeof(uint)*bCANALS);
     for (i=0; i<bCANALS; i++)
     {
-      if (*PGetCanInt(mpwImpHouCanSpec, i) == 0xFFFF)
+      if (GetCanInt(mpwImpHouCanSpec, i) == 0xFFFF)
         SetCanInt(mpwImpHouCanSpec, i, 0);  
     }
   }

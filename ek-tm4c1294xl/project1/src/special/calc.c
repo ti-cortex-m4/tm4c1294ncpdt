@@ -6,6 +6,7 @@ CALC.C
 
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
+#include        "../memory/mem_groups.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_energy_spec.h"
 #include        "../impulses/energy_spec.h"
@@ -36,6 +37,8 @@ void    OpenCalc(void)
 
 void    CalcTimeDate(bool  fUseImp, bool  fUsePow)
 {
+static time tiDig;
+
   if ((tiOldDay.bYear  != tiAlt.bYear)  ||          // обработка по дням
       (tiOldDay.bMonth != tiAlt.bMonth) ||
       (tiOldDay.bDay   != tiAlt.bDay)) 
@@ -123,9 +126,9 @@ void    CalcDigCanals(void)
       {
         w = mpwChannels[ diPrev.ibLine ];
 
-        if (IsDouble(ibCan) && (*PGetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF))
+        if (IsDouble(ibCan) && (GetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF))
         {
-          w += *PGetCanInt(mpwImpHouCanSpec, ibCan);
+          w += GetCanInt(mpwImpHouCanSpec, ibCan);
           mpbWinterCan[ibCan]++;
 
           if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec );

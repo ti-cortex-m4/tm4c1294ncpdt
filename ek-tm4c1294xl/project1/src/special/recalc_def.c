@@ -15,7 +15,7 @@ RECALC_DEF.C
 
 bool    SaveDefDay(uchar  ibDayTo)
 {
-  OpenOut(wFLA_DEFDAYCAN + ibDayTo*bIMPULSE_CAN);
+  OpenOut(FLS_DEFDAYCAN + ibDayTo*bIMPULSE_CAN);
 
   if (Save(mpdeDayCan, sizeof(impulse)*bCANALS) == 0)
     return(0);
@@ -26,7 +26,7 @@ bool    SaveDefDay(uchar  ibDayTo)
 
 bool    LoadDefDay(uchar  ibDayFrom)
 {
-  OpenIn(wFLA_DEFDAYCAN + ibDayFrom*bIMPULSE_CAN);
+  OpenIn(FLS_DEFDAYCAN + ibDayFrom*bIMPULSE_CAN);
   return( Load(mpdeDayCan, sizeof(impulse)*bCANALS) );
 }
 
@@ -34,7 +34,7 @@ bool    LoadDefDay(uchar  ibDayFrom)
 
 bool    SaveDefMon(uchar  ibMonTo)
 {
-  OpenOut(wFLA_DEFMONCAN + ibMonTo*bIMPULSE_CAN);
+  OpenOut(FLS_DEFMONCAN + ibMonTo*bIMPULSE_CAN);
 
   if (Save(mpdeMonCan, sizeof(impulse)*bCANALS) == 0)
     return(0);
@@ -45,7 +45,7 @@ bool    SaveDefMon(uchar  ibMonTo)
 
 bool    LoadDefMon(uchar  ibMonFrom)
 {
-  OpenIn(wFLA_DEFMONCAN + ibMonFrom*bIMPULSE_CAN);
+  OpenIn(FLS_DEFMONCAN + ibMonFrom*bIMPULSE_CAN);
   return( Load(mpdeMonCan, sizeof(impulse)*bCANALS) );
 }
 
