@@ -11,6 +11,7 @@ CURRENT_RUN.C
 #include        "../memory/mem_current.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
+#include        "../keyboard/key_timedate.h"
 #include        "../serial/ports.h"
 #include        "../serial/flow.h"
 #include        "../realtime/realtime.h"
@@ -20,7 +21,6 @@ CURRENT_RUN.C
 #include        "../digitals/digitals_run.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/digitals_display.h"
-#include        "../keyboard/key_timedate.h"
 #include        "../time/timedate.h"
 #include        "../time/rtc.h"
 #include        "../energy2.h"
@@ -69,8 +69,8 @@ bool    StartCurrent(uchar  ibCan)
 
 
   HideCurrentTime(1);
-
-  ShowDigitalNumber(ibDig); Clear();
+  ShowCanalNumber(ibDig);
+  Clear();
 
   LoadCurrDigital(ibDig);
   ibPort = diCurr.ibPort;
