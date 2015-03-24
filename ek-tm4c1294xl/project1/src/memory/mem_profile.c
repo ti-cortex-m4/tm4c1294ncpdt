@@ -14,6 +14,9 @@ boolean                 boManualProfile;
 // счётчик принятых получасов
 uint                    cwHouRead;
 
+// длительность получасового опроса
+uint                    cwHouLength;
+
 // счётчики событий
 uint                    mpcwProfile_OK[bCANALS],
                         mpcwProfile_Error[bCANALS];

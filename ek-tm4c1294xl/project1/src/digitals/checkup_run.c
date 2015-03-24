@@ -21,8 +21,10 @@ CHECKUP_RUN.C
 #include        "../digitals/digitals_display.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/answer.h"
+#include        "../digitals/special.h"
 #include        "../time/timedate.h"
 #include        "../flash/records.h"
+#include        "checkup.h"
 
 
 
@@ -96,7 +98,7 @@ bool    StartCheckup(uchar  ibCanal)
 
 
 void    RunCheckup(bool  fReadonly)
-{/*
+{
 #ifdef  FLOW
   CloseFlow();
 #endif
@@ -107,9 +109,9 @@ void    RunCheckup(bool  fReadonly)
   boCheckupReadonly = (fReadonly == 1) ? TRUE : FALSE;
   ClearCheckup();
 
-  if (boDTREnable == TRUE) DTROff_All();
+//  if (boDTREnable == TRUE) DTROff_All();
 
-  if (StartCheckup(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }*/
+  if (StartCheckup(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
 }
 
 

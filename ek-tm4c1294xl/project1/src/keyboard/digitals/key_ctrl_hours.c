@@ -9,6 +9,7 @@ KEY_CTRL_HOURS.Ñ
 #include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../digitals/digitals.h"
+#include        "../../digitals/profile_core.h"
 #include        "../../flash/files.h"
 
 
@@ -78,6 +79,9 @@ void    key_SetCtrlHours(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       mpboCtrlHou[ibX] = (mpboCtrlHou[ibX] == TRUE ? FALSE : TRUE);
+
+      SaveFile(&flCtrlHou);
+
       ShowCtrlHours();
     }
     else Beep();

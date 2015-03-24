@@ -10,6 +10,7 @@ KEY_ENBL_HOURS.Ñ
 #include        "../../display/display.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_display.h"
+#include        "../../digitals/profile_core.h"
 #include        "../../digitals/enbl_hours.h"
 #include        "../../serial/speeds_display.h"
 #include        "../../flash/files.h"
@@ -108,7 +109,9 @@ void    key_SetEnblHours(void)
     {
       boolean bo = (GetEnblPrtHou(ibX,ibY) == TRUE ? FALSE : TRUE);
       SetEnblPrtHou(ibX,ibY,bo);
-      
+
+      SaveFile(&flEnblPrtHou);
+
       ShowHours();
     }
     else Beep();
