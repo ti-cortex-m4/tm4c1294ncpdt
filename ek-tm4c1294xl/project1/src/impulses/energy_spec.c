@@ -74,7 +74,7 @@ bool    SaveImpHouSpec(bool  fCurr, uint  iwHouTo)
   }
   else
   {
-    OpenOut(FLS_IMPHOUCAN + iwHouTo*bUINT);
+    OpenOut(FLS_IMPHOUCAN + iwHouTo*UINTCAN_PAGES);
 
     if (Save(mpwImpHouCanSpec, sizeof(uint)*bCANALS) == 0)
       return(0);
@@ -96,7 +96,7 @@ bool    fAlt;
   }
   else                              
   {
-    OpenIn(FLS_IMPHOUCAN + iwHouFrom*bUINT);
+    OpenIn(FLS_IMPHOUCAN + iwHouFrom*UINTCAN_PAGES);
     fAlt = Load(mpwImpHouCanSpec, sizeof(uint)*bCANALS);
   }
 
