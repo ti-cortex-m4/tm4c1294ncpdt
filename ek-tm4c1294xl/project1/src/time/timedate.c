@@ -131,14 +131,6 @@ uint    j;
 
 
 
-bool    IsWinter(time  *pti, time  *ptiWinter)
-{
-  return((pti->bDay   == ptiWinter->bDay)   &&
-         (pti->bMonth == ptiWinter->bMonth) &&
-         (pti->bHour  <= 3));
-}
-
-
 bool    TrueTimeDate(void)
 {
   if (tiAlt.bSecond > 59) return false;

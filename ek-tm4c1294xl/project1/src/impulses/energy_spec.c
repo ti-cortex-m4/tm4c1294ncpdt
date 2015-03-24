@@ -87,7 +87,8 @@ bool    SaveImpHouSpec(bool  fCurr, uint  iwHouTo)
 bool    LoadImpHouSpec(uint  iwHouFrom, bool  fFree)
 {
 uchar   i;
-   
+bool    fAlt;
+
   if (iwHouFrom == iwHardHou)          
   {
     memcpy(mpwImpHouCanSpec, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);

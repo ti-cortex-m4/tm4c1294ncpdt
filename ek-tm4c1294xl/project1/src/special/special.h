@@ -5,6 +5,7 @@ SPECIAL.H
 ------------------------------------------------------------------------------*/
 
 bool    IsDefect(uchar    ibCan);
+bool    IsWinterDouble(uchar  ibCan);
 
 bool    IsOpenSpecial(void);
 void    OpenSpecial(void);

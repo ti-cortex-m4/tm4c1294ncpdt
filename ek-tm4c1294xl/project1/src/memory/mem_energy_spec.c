@@ -32,6 +32,19 @@ uchar                   ibOldDay, ibOldMon;
 
 
 
+// массив счётчиков для обработки перехода на зимнее время
+uchar                   mpbWinterCan[bCANALS];
+
+
+
+// количество каналов в цифровом счётчике
+uchar                   cbChannels;
+
+// массив каналов в цифровом счётчике
+uint                    mpwChannels[bCHANNELS];
+
+
+
 // флаг наличия открытых буферов
 uchar                   boOpenCalc;
 

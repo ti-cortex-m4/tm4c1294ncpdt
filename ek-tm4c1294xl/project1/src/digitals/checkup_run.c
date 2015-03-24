@@ -22,7 +22,7 @@ CHECKUP_RUN.C
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/answer.h"
 #include        "../special/special.h"
-#include        "../time/timedate.h"
+#include        "../time/decret.h"
 #include        "../flash/records.h"
 #include        "checkup.h"
 
@@ -55,7 +55,7 @@ bool    StartCheckup(uchar  ibCanal)
   if (ibDig >= bCANALS) return(0);
 
 
-  if (IsWinter(&tiCurr, &tiWinter))
+  if (IsWinter(&tiCurr))
   {
     ShowHi(szNewSeason);
     ShowLo(szIsWinter);
