@@ -21,6 +21,8 @@ KEYBOARD.C
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_run.h"
 #include        "../digitals/wait_query.h"
+#include        "../settings.h"
+#include        "../flash/files.h"
 #include        "keyboard_auto.h"
 #include        "keyboard_key.h"
 #include        "key_timedate.h"
@@ -291,7 +293,11 @@ uchar   i;
         NeedNumber();
         return;
       }
-      else boReset = TRUE;
+      else
+      {
+        boFirstReset = TRUE;
+        SaveFile(&flFirstReset);
+      }
     }
   }
 

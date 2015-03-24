@@ -15,4 +15,4 @@ boolean                 boSetTime,
                         boSetPassword;
 
 // TODO: SaveFile
-boolean                 boReset;
+boolean                 boFirstReset;
