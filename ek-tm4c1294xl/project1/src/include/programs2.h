@@ -9,6 +9,8 @@ PROGRAMS2.H
 #define __PROGRAMS2
 
 
+#define wSET_HIDE_MESSAGES    299
+
 #define wSET_GAPS_FLAG        300
 #define wSET_GAPS             301
 

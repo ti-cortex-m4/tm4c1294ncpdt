@@ -29,6 +29,7 @@ KEYBOARD_KEY.C
 #include        "digitals/key_search.h"
 #include        "digitals/key_automatic.h"
 #include        "digitals/key_run_profile.h"
+#include        "digitals/key_separate_can.h"
 #include        "phones/key_phones.h"
 #include        "phones/key_max_connect.h"
 #include        "phones/key_custom_modem.h"
@@ -139,6 +140,8 @@ void    Keyboard_Key(void)
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
 
+      case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
+
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
       case bGET_READTIMEDATE2:  key_GetSingle(CANALS);  break;
@@ -224,6 +227,8 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
+
+      case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
 
       case bGET_CNTCURR_10:
       case bGET_CNTCURR_110:
@@ -395,6 +400,8 @@ void    Keyboard_Key(void)
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
+
+      case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
