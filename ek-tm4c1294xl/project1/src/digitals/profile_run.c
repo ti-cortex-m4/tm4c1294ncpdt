@@ -25,7 +25,7 @@ PROFILE_RUN.C
 #include        "../digitals/answer.h"
 #include        "../digitals/enbl_hours.h"
 #include        "../special/special.h"
-#include        "../time/timedate.h"
+#include        "../time/decret.h"
 #include        "../flash/records.h"
 
 
@@ -79,7 +79,7 @@ bool    StartProfile(uchar  ibCanal)
 
 
 
-  if (IsWinter(&tiCurr, &tiWinter))
+  if (IsWinter(&tiCurr))
   {
     ShowHi(szNewSeason);
     ShowLo(szIsWinter);

@@ -12,8 +12,10 @@ CALC.C
 #include        "../impulses/max_power.h"
 #include        "../impulses/energy_spec.h"
 #include        "../digitals/digitals.h"
+#include        "../digitals/digitals_run.h"
 #include        "../special/recalc_def.h"
 #include        "../time/timedate.h"
+#include        "../energy.h"
 #include        "calc.h"
 
 
@@ -127,7 +129,7 @@ void    CalcDigCanals(void)
       {
         w = mpwChannels[ diPrev.ibLine ];
 
-        if (IsDouble(ibCan) && (GetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF))
+        if (IsWinterDouble(ibCan) && (GetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF))
         {
           w += GetCanInt(mpwImpHouCanSpec, ibCan);
           mpbWinterCan[ibCan]++;
@@ -146,8 +148,8 @@ void    CalcDigCanals(void)
       if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec );    
       if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec );    
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, ibCan );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, ibCan );
     }
   }
 
@@ -175,8 +177,8 @@ void    CalcAllCanals(bool  fUseImp)
       if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec );    
       if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec );    
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, ibCan );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, ibCan );
     }
   }
 }

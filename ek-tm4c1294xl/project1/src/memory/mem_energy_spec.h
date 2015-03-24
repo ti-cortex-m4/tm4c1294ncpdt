@@ -22,6 +22,16 @@ extern  uchar                   ibOldDay, ibOldMon;
 
 
 
+extern  uchar                   mpbWinterCan[bCANALS];
+
+
+
+extern  uchar                   cbChannels;
+
+extern  uint                    mpwChannels[bCHANNELS];
+
+
+
 extern  uchar                   boOpenCalc;
 
 

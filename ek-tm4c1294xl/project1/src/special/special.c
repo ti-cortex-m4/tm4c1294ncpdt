@@ -9,7 +9,9 @@ SPECIAL.C
 #include        "../memory/mem_energy_spec.h"
 #include        "../display/display.h"
 #include        "../impulses/energy_spec.h"
+#include        "../digitals/digitals_run.h"
 #include        "../time/delay.h"
+#include        "../time/decret.h"
 #include        "../energy.h"
 #include        "calc.h"
 #include        "special.h"
@@ -26,6 +28,12 @@ bool    IsDefect(uchar  ibCan)
 {
   LoadImpHouSpec(iwDigHou,1);
   return(GetCanInt(mpwImpHouCanSpec, ibCan) == 0xFFFF);
+}
+
+
+bool    IsWinterDouble(uchar  ibCan)
+{
+  return(IsWinter(&tiAlt) && (mpbWinterCan[ibCan] < 2));
 }
 
 
@@ -47,7 +55,7 @@ void    OpenSpecial(void)
 
 void    MakeSpecial(void)
 {
-  if (IsDefect(ibDig) || IsDouble(ibDig))
+  if (IsDefect(ibDig) || IsWinterDouble(ibDig))
   {
     cwHouRead++;
     sprintf(szLo," %02u:%02u",tiAlt.bHour,tiAlt.bMinute);

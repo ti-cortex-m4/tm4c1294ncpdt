@@ -73,4 +73,14 @@ void    ResetDecret(void)
   MakeDecret();
 }
 
+
+
+bool    IsWinter(time  *pti)
+{
+  return((pti->bDay   == tiWinter.bDay)   &&
+         (pti->bMonth == tiWinter.bMonth) &&
+         (pti->bHour  <= 3));
+}
+
+
 // TODO: сохранять количество переходов отдельно + события
