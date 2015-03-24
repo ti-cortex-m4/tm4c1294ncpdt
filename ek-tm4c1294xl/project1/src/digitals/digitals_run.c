@@ -27,6 +27,7 @@ DIGITALS_RUN.C
 #include        "../serial/modems.h"
 #include        "../serial/speeds_display.h"
 #include        "../digitals/answer.h"
+#include        "../flash/files.h"
 #include        "../flash/records.h"
 #include        "../time/delay.h"
 #include        "../crc-16.h"
@@ -56,10 +57,15 @@ bool                    fKeyOn;
 
 
 
+file const              flSeparateCan = {FLS_SEPARATE_CAN, &boSeparateCan, sizeof(boolean)};
+file const              flHideMessages = {FLS_HIDE_MESSAGES, &boHideMessages, sizeof(boolean)};
+
+
+
 void    InitDevices(void)
 {
-  boSeparateCan = FALSE;
-  boHideMessages = FALSE;
+  LoadFile(&flSeparateCan);
+  LoadFile(&flHideMessages);
 
 //uchar   i,j;
 //
@@ -95,6 +101,12 @@ void    InitDevices(void)
 
 void    ResetDevices(void)
 {
+  boSeparateCan = FALSE;
+  SaveFile(&flSeparateCan);
+
+  boHideMessages = FALSE;
+  SaveFile(&flHideMessages);
+
   ResetMaxRepeats();
 }
 

@@ -201,6 +201,8 @@ PROGRAMS.H
 #define bSET_MAX_CONNECT            181
 #define bSET_CUSTOM_MODEM           203
 
+#define bSET_SEPARATE_CAN           218
+
 #define bTEST_DIRECT                216
 
 #define bTEST_RESPONSE              220
