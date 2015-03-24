@@ -59,11 +59,12 @@ uchar  i,j;
 
 void    MakeMaxPow(power  *mppoT)
 {
-uchar   g,t;
+uchar   g;
 real   	re;
 value   va;
 
-  t = mpibPowCurrTariff[tiPrev.bHour*2 + tiPrev.bMinute/30];
+  uchar i = tiPrev.bHour*2 + tiPrev.bMinute/30;
+  uchar t = mpibPowCurrTariff[i];
 
   for (g=0; g<bGROUPS; g++)
   {
@@ -80,11 +81,11 @@ value   va;
 
 void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  *pti)
 {
-uchar   t;
 real   	re;
 value   va;
 
-  t = mpibPowPrevTariff[ pti->bHour*2 + pti->bMinute/30 ];
+  uchar i = pti->bHour*2 + pti->bMinute/30;
+  uchar t = mpibPowPrevTariff[i];
 
   re = GetGrpHouInt2Real(mpwImpHouCanSpec,ibGrp,2);
   if (re >= GetGrpMaxPowReal(mppoT,ibGrp,t))
