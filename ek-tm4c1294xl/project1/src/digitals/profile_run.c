@@ -128,8 +128,9 @@ bool    StartProfile(uchar  ibCanal)
   }
 
 
-  NoShowTime(1);
-  ShowDigitalHi(); Clear();
+  HideCurrentTime(1);
+  ShowCanalNumber(ibDig);
+  Clear();
 
   cwHouRead = 0;
 

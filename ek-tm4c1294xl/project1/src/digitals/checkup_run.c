@@ -10,6 +10,7 @@ CHECKUP_RUN.C
 #include        "../memory/mem_profile.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
+#include        "../keyboard/key_timedate.h"
 #include        "../serial/ports.h"
 #include        "../serial/flow.h"
 #include        "../serial/dtr.h"
@@ -17,6 +18,7 @@ CHECKUP_RUN.C
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_pause.h"
 #include        "../digitals/digitals_run.h"
+#include        "../digitals/digitals_display.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/answer.h"
 #include        "../flash/records.h"
@@ -63,8 +65,9 @@ bool    StartCheckup(uchar  ibCanal)
   AddDigRecord(EVE_CHECKUP_START);
   //if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILE);
 
-  NoShowTime(1);
-  ShowDigitalHi(); Clear();
+  HideCurrentTime(1);
+  ShowCanalNumber(ibDig);
+  Clear();
 
   cwHouRead = 0;
 
