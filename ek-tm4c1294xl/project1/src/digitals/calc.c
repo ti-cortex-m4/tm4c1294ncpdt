@@ -5,6 +5,7 @@ CALC.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_realtime.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_energy_spec.h"
 #include        "../impulses/energy_spec.h"
@@ -108,6 +109,8 @@ void    CalcDigCanals(void)
   LoadImpHouSpec(iwDigHou,1);                       // обработка по получасам
 
   LoadCurrDigital(ibDig);                           // обработка по каналам
+
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)                           
   {
     LoadPrevDigital(ibCan);
@@ -159,6 +162,7 @@ void    CalcAllCanals(bool  fUseImp)
       LoadImpHouSpec(iwDigHou,0);                   // обработка по получасам
     }
 
+    uchar ibCan;
     for (ibCan=0; ibCan<bCANALS; ibCan++)           // обработка по каналам
     { 
       // если канал не используется: пропустить
