@@ -5,6 +5,8 @@ SPECIAL.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../display/display.h"
+#include        "../time/delay.h"
 #include        "calc.h"
 
 
