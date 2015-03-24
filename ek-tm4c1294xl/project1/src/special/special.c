@@ -6,6 +6,7 @@ SPECIAL.C
 
 #include        "../main.h"
 #include        "../memory/mem_profile.h"
+#include        "../memory/mem_energy_spec.h"
 #include        "../display/display.h"
 #include        "../impulses/energy_spec.h"
 #include        "../time/delay.h"
