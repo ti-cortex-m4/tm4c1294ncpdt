@@ -21,3 +21,10 @@ extern  uchar                   ibOldDay, ibOldMon;
 
 
 extern  uchar                   boOpenCalc;
+
+
+
+extern  impulse                 mpdeDayCan[bCANALS],
+                                mpdeMonCan[bCANALS];
+
+extern  uint                    mpwImpHouCanDef[bCANALS];

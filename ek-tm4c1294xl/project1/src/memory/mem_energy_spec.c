@@ -31,3 +31,12 @@ uchar                   ibOldDay, ibOldMon;
 
 // флаг наличия открытых буферов
 uchar                   boOpenCalc;
+
+
+
+// достоверность
+impulse                 mpdeDayCan[bCANALS],
+                        mpdeMonCan[bCANALS];
+
+// достоверность
+uint                    mpwImpHouCanDef[bCANALS];

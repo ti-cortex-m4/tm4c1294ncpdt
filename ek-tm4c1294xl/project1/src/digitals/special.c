@@ -5,8 +5,10 @@ SPECIAL.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_profile.h"
 #include        "../display/display.h"
 #include        "../time/delay.h"
+#include        "../energy.h"
 #include        "calc.h"
 #include        "special.h"
 
@@ -21,7 +23,7 @@ static char const       szSpecialBegin[] = " подготовка...  ",
 bool    IsDefect(uchar  ibCan)
 {
   LoadImpHouSpec(iwDigHou,1);
-  return(*PGetCanInt(mpwImpHouCanSpec, ibCan) == 0xFFFF);
+  return(GetCanInt(mpwImpHouCanSpec, ibCan) == 0xFFFF);
 }
 
 
@@ -46,7 +48,7 @@ void    MakeSpecial(void)
   if (IsDefect(ibDig) || IsDouble(ibDig))
   {
     cwHouRead++;
-    sprintf(szLo," %02bu:%02bu",tiAlt.bHour,tiAlt.bMinute);
+    sprintf(szLo," %02u:%02u",tiAlt.bHour,tiAlt.bMinute);
 
     CalcTimeDate(1,1);
 
