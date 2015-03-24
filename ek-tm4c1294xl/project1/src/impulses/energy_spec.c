@@ -124,7 +124,7 @@ bool    SaveImpDaySpec(bool  fCurr, uchar  ibDayTo)
   }
   else
   {
-    OpenOut(FLS_IMPDAYCAN + ibDayTo*bIMPULSE);
+    OpenOut(FLS_IMPDAYCAN + ibDayTo*bIMPULSE_CAN);
 
     if (Save(mpimDayCanSpec, sizeof(impulse)*bCANALS) == 0)
       return(0);
@@ -143,7 +143,7 @@ bool    LoadImpDaySpec(uchar  ibDayFrom)
   }
   else
   {
-    OpenIn(FLS_IMPDAYCAN + ibDayFrom*bIMPULSE);
+    OpenIn(FLS_IMPDAYCAN + ibDayFrom*bIMPULSE_CAN);
     return( Load(mpimDayCanSpec, sizeof(impulse)*bCANALS) );
   }
 }
@@ -159,7 +159,7 @@ bool    SaveImpMonSpec(bool  fCurr, uchar  ibMonTo)
   }
   else
   {
-    OpenOut(FLS_IMPMONCAN + ibMonTo*bIMPULSE);
+    OpenOut(FLS_IMPMONCAN + ibMonTo*bIMPULSE_CAN);
 
     if (Save(mpimMonCanSpec, sizeof(impulse)*bCANALS) == 0)
       return(0);
@@ -178,7 +178,7 @@ bool    LoadImpMonSpec(uchar  ibMonFrom)
   }
   else
   {
-    OpenIn(FLS_IMPMONCAN + ibMonFrom*bIMPULSE);
+    OpenIn(FLS_IMPMONCAN + ibMonFrom*bIMPULSE_CAN);
     return( Load(mpimMonCanSpec, sizeof(impulse)*bCANALS) );
   }
 }
@@ -194,7 +194,7 @@ bool    SavePowDaySpec(bool  fCurr, uchar  ibDayTo)
   }
   else
   {
-    OpenOut(FLS_POWDAYGRP + ibDayTo*bPOWER);
+    OpenOut(FLS_POWDAYGRP + ibDayTo*bPOWER_GRP);
 
     if (Save(mppoDayGrpSpec, sizeof(power)*bGROUPS) == 0)
       return(0);
@@ -213,7 +213,7 @@ bool    LoadPowDaySpec(uchar  ibDayFrom)
   }
   else
   {
-    OpenIn(FLS_POWDAYGRP + ibDayFrom*bPOWER);
+    OpenIn(FLS_POWDAYGRP + ibDayFrom*bPOWER_GRP);
     return( Load(mppoDayGrpSpec, sizeof(power)*bGROUPS) );
   }
 }
@@ -229,7 +229,7 @@ bool    SavePowMonSpec(bool  fCurr, uchar  ibMonTo)
   }
   else
   {
-    OpenOut(FLS_POWMONGRP + ibMonTo*bPOWER);
+    OpenOut(FLS_POWMONGRP + ibMonTo*bPOWER_GRP);
 
     if (Save(mppoMonGrpSpec, sizeof(power)*bGROUPS) == 0)
       return(0);
@@ -248,7 +248,7 @@ bool    LoadPowMonSpec(uchar  ibMonFrom)
   }
   else
   {
-    OpenIn(FLS_POWMONGRP + ibMonFrom*bPOWER);
+    OpenIn(FLS_POWMONGRP + ibMonFrom*bPOWER_GRP);
     return( Load(mppoMonGrpSpec, sizeof(power)*bGROUPS) );
   }
 }

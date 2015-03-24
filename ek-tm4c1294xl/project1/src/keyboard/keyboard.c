@@ -8,6 +8,7 @@ KEYBOARD.C
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_program.h"
 #include        "../memory/mem_realtime.h"
+#include        "../memory/mem_energy_spec.h"
 #include        "../display/display.h"
 #include        "../beep.h"
 #include        "../realtime/realtime.h"
@@ -207,7 +208,7 @@ uchar   i;
       SetPause(DEV_BEGIN);
 
       if (IsOpenSpecial()) { CloseSpecial(); Stop(); }
-      boOpenCalc = boFalse;
+      boOpenCalc = FALSE;
       AddDigRecord(EVE_SPECIALCLOSE);
 
       KeyBreakConnect();

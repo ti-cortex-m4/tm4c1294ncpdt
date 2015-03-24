@@ -5,8 +5,11 @@ CALC.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_digitals.h"
 #include        "../memory/mem_energy_spec.h"
 #include        "../impulses/energy_spec.h"
+#include        "../digitals/digitals.h"
+#include        "../special/recalc_def.h"
 #include        "../time/timedate.h"
 #include        "calc.h"
 
@@ -25,7 +28,7 @@ void    OpenCalc(void)
   fLoadDay = 0;
   fLoadMon = 0;
 
-  boOpenCalc = boTrue;
+  boOpenCalc = TRUE;
 }
 
 
@@ -108,17 +111,18 @@ void    CalcDigCanals(void)
   for (ibCan=0; ibCan<bCANALS; ibCan++)                           
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1)
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
+      uint w;
       if (iwDigHou == iwHardHou)
-        wBuffD = 0xFFFF;
+        w = 0xFFFF;
       else
       {
-        wBuffD = mpwChannels[ diPrev.ibLine ];
+        w = mpwChannels[ diPrev.ibLine ];
 
         if (IsDouble(ibCan) && (*PGetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF))
         {
-          wBuffD += *PGetCanInt(mpwImpHouCanSpec, ibCan); 
+          w += *PGetCanInt(mpwImpHouCanSpec, ibCan);
           mpbWinterCan[ibCan]++;
 
           if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec );
@@ -126,10 +130,10 @@ void    CalcDigCanals(void)
         }
       }
 
-      SetCanInt(mpwImpHouCanSpec, ibCan, wBuffD); 
-      mpwImpHouCanDef[ibCan] = wBuffD; 
+      SetCanInt(mpwImpHouCanSpec, ibCan, w);
+      mpwImpHouCanDef[ibCan] = w;
 
-      mpboReadyCan[ibCan] = boTrue;
+      mpboReadyCan[ibCan] = TRUE;
       mpcwCalcDig[ibCan]++;
 
       if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec );    
@@ -158,7 +162,7 @@ void    CalcAllCanals(bool  fUseImp)
     for (ibCan=0; ibCan<bCANALS; ibCan++)           // обработка по каналам
     { 
       // если канал не используется: пропустить
-      //if (mpboUsedNodes[ibCan] == boFalse) continue;
+      //if (mpboUsedNodes[ibCan] == FALSE) continue;
      
       if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec );    
       if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec );    
@@ -181,9 +185,10 @@ void    CalcAllGroups(bool  fUsePow)
       LoadImpHouSpec(iwDigHou,0);                   // обработка по получасам
     }
 
+    uchar ibGrp;
     for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)           // обработка по группам
     {
-      if (mpboUsedGroups[ibGrp] == boFalse) continue;
+      if (mpboUsedGroups[ibGrp] == FALSE) continue;
 
       if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec );
       if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec );
@@ -211,6 +216,6 @@ void    CloseCalc(bool  fUseImp, bool  fUsePow)
     if (fUseImp == 1) SaveDefMon(ibOldMon);
   }
 
-  boOpenCalc = boFalse;
+  boOpenCalc = FALSE;
 }
 
