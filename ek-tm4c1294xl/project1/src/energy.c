@@ -217,39 +217,31 @@ ulong   dw;
 }
 
 
-/*
+
 // рассчитывает импульсы для выбранного интервала
-void    MakeImpSpec(impulse  *mpimT)
+void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  *pti)
 {
-uchar   j;
+  uchar j = mpibEngPrevTariff[ pti->bHour*2 + pti->bMinute/30 ];
+  ulong dw  = *PGetCanImp(mpimT,ibCan,j);
 
-  j = mpibEngPrevTariff[ tiAlt.bHour*2 + tiAlt.bMinute/30 ];
+  if (GetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF)
+    dw += GetCanInt(mpwImpHouCanSpec, ibCan);
 
-  dwBuffC  = *PGetCanImp(mpimT,ibCan,j);
-
-  if (*PGetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF)
-    dwBuffC += *PGetCanInt(mpwImpHouCanSpec, ibCan);
-
-  mpimT[ibCan].mpdwImp[j] = dwBuffC;
+  mpimT[ibCan].mpdwImp[j] = dw;
 }
-// требует предварительной установки переменной tiAlt
 
 
 // рассчитывает импульсы для выбранного интервала: во избежание двойного сложения
-void    MakeImpSpec_Winter(impulse  *mpimT)
+void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  *pti)
 {
-uchar   j;
+  uchar j = mpibEngPrevTariff[ pti->bHour*2 + pti->bMinute/30 ];
+  ulong dw = *PGetCanImp(mpimT,ibCan,j);
 
-  j = mpibEngPrevTariff[ tiAlt.bHour*2 + tiAlt.bMinute/30 ];
+  dw -= GetCanInt(mpwImpHouCanSpec, ibCan);
 
-  dwBuffC  = *PGetCanImp(mpimT,ibCan,j);
-
-  dwBuffC -= *PGetCanInt(mpwImpHouCanSpec, ibCan);
-
-  mpimT[ibCan].mpdwImp[j] = dwBuffC;
+  mpimT[ibCan].mpdwImp[j] = dw;
 }
-// требует предварительной установки переменной tiAlt
-*/
+
 
 
 // добавляем к канальному массиву impulse (по текущему тарифу для энергии)
