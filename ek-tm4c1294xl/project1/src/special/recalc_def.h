@@ -13,4 +13,4 @@ bool    LoadDefMon(uchar  ibMonFrom);
 //void    NextDayDef(void);
 //void    NextMonDef(void);
 
-void    MakeDefSpec(impulse  *mpimT, uchar  ibCan);
+void    MakeDefSpec(impulse  *mpimT, uchar  ibCan, time  *pti);

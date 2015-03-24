@@ -8,6 +8,7 @@ CALC.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_groups.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_profile.h"
 #include        "../memory/mem_energy_spec.h"
 #include        "../impulses/max_power.h"
 #include        "../impulses/energy_spec.h"
@@ -134,8 +135,8 @@ void    CalcDigCanals(void)
           w += GetCanInt(mpwImpHouCanSpec, ibCan);
           mpbWinterCan[ibCan]++;
 
-          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec );
-          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec );
+          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, ibCan, &tiAlt );
+          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec, ibCan, &tiAlt );
         }
       }
 
@@ -145,11 +146,11 @@ void    CalcDigCanals(void)
       mpboReadyCan[ibCan] = TRUE;
       mpcwCalcDig[ibCan]++;
 
-      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec );    
-      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec );    
+      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, ibCan, &tiAlt );
+      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, ibCan, &tiAlt );
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, ibCan );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, ibCan );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, ibCan, &tiAlt );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, ibCan, &tiAlt );
     }
   }
 
@@ -174,11 +175,11 @@ void    CalcAllCanals(bool  fUseImp)
       // если канал не используется: пропустить
       //if (mpboUsedNodes[ibCan] == FALSE) continue;
      
-      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec );    
-      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec );    
+      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, ibCan, &tiAlt );
+      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, ibCan, &tiAlt );
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, ibCan );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, ibCan );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, ibCan, &tiAlt );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, ibCan, &tiAlt );
     }
   }
 }
