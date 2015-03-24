@@ -127,7 +127,7 @@ void    NextCheckup(void)
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1) mpcwProfile_OK[ibCan]++;
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpcwProfile_OK[ibCan]++;
   }
 
   AddDigRecord(EVE_CHECKUP_NEXT);
@@ -141,7 +141,7 @@ void    NextCheckup(void)
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines() == 1) mpboReadyCan[ibCan] = TRUE;
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = TRUE;
     }
 
     //ShowLo(szNoData); if (boHideMessages == FALSE) DelayMsg();
@@ -182,18 +182,21 @@ void    NextCheckup(void)
 
 
 void    ErrorCheckup(void)
-{/*
+{
+uchar   ibCan;
+
   SaveDisplay();
 
   ShowHi(szWarning);
-  sprintf(szLo,"запроса %02bX.%02bX.%02bX",(uchar)(GetCurr() / 0x100),(uchar)(GetCurr() % 0x100),(uchar)mpSerial[ibPort]);
+  Clear();
+  sprintf(szLo,"запроса %02X.%02X.%02X",(uchar)(GetCurr() / 0x100),(uchar)(GetCurr() % 0x100),(uchar)mpSerial[ibPort]);
   LongBeep();
 
   LoadCurrDigital(ibDig);
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1) mpcwProfile_Error[ibCan]++;
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpcwProfile_Error[ibCan]++;
   }
 
   AddDigRecord(EVE_PROFILE_ERROR2);
@@ -202,19 +205,21 @@ void    ErrorCheckup(void)
   DelayMsg();
   LoadDisplay();
 
+
+  // запрещаем опрашивать другие каналы, принадлежащие текущему счётчику
   LoadCurrDigital(ibDig);
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1) mpboReadyCan[ibCan] = TRUE;
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = TRUE;
   }
 
   fKeyOn = 0;
-  MakePause(DEV_MODEM_STOP);*/
+  MakePause(DEV_MODEM_STOP);
 }
 
 
-/*
+
 // нормальный переход на следующий канал
 void    DoneCheckup(void)
 {
@@ -223,4 +228,4 @@ void    DoneCheckup(void)
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE2);
 }
-*/
+

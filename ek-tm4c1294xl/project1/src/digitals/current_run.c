@@ -319,6 +319,8 @@ uchar   ibCan;
 
 void    ErrorCurrent(void)
 {
+uchar   ibCan;
+
   SaveDisplay();
 
   ShowHi(szWarning);
@@ -329,9 +331,9 @@ void    ErrorCurrent(void)
   DelayMsg();
   LoadDisplay();
 
+
   // запрещаем опрашивать другие каналы, принадлежащие текущему счётчику
   LoadCurrDigital(ibDig);
-  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);

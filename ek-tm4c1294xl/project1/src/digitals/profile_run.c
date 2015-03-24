@@ -365,15 +365,17 @@ void    NextProfile(void)
 
 // аварийный переход на следующий канал
 void    ErrorProfile(void)
-{/*
+{
+uchar   ibCan;
+
   SaveDisplay();
 
   ShowHi(szWarning);
+  Clear();
   sprintf(szLo,"запроса %02X.%02X.%02X",(uchar)(GetCurr() / 0x100),(uchar)(GetCurr() % 0x100),(uchar)mpSerial[ibPort]);
   LongBeep();
 
   LoadCurrDigital(ibDig);
-  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
@@ -383,9 +385,9 @@ void    ErrorProfile(void)
   AddDigRecord(EVE_PROFILE_ERROR2);
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEERROR2);
 
-
   DelayMsg();
   LoadDisplay();
+
 
   // запрещаем опрашивать другие каналы, принадлежащие текущему счётчику
   LoadCurrDigital(ibDig);
@@ -396,7 +398,7 @@ void    ErrorProfile(void)
   }
 
   fKeyOn = 0;
-  MakePause(DEV_MODEM_STOP);*/
+  MakePause(DEV_MODEM_STOP);
 }
 
 /*
@@ -410,7 +412,7 @@ void    DoneProfile(void)
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE1);
 }
-
+*/
 
 // нормальный переход на следующий канал
 void    DoneProfile_Stop(void)
@@ -420,4 +422,3 @@ void    DoneProfile_Stop(void)
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE2);
 }
-*/
