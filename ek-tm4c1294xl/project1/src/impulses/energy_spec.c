@@ -6,6 +6,8 @@ ENERGY_SPEC.C
 
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
+#include        "../memory/mem_energy.h"
+#include        "../memory/mem_energy_spec.h"
 #include        "../realtime/realtime.h"
 #include        "../flash/files.h"
 
@@ -22,8 +24,8 @@ bool    SaveImpHouSpec(bool  fCurr, uint  iwHouTo)
   }
   else
   {
-    OpenIn(wFLA_IMPHOUCAN + iwHouTo/4);
-    OpenOut(wFLA_IMPHOUCAN + iwHouTo/4);
+    OpenIn(FLS_IMPHOUCAN + iwHouTo/4);
+    OpenOut(FLS_IMPHOUCAN + iwHouTo/4);
 
     memcpy(mpbPageOut, mpbPageIn, wFREEPAGE_SIZE);
     memcpy(mpbPageOut + (iwHouTo%4)*wPROFILE_LENGTH, mpwImpHouCanSpec, wPROFILE_LENGTH);
@@ -43,7 +45,7 @@ uchar   i;
   }
   else                              
   {
-    OpenIn(wFLA_IMPHOUCAN + iwHouFrom/4);
+    OpenIn(FLS_IMPHOUCAN + iwHouFrom/4);
     memcpy(mpwImpHouCanSpec, mpbPageIn + (iwHouFrom%4)*wPROFILE_LENGTH, wPROFILE_LENGTH);
   }
 
@@ -71,7 +73,7 @@ bool    SaveImpHouSpec(bool  fCurr, uint  iwHouTo)
   }
   else
   {
-    OpenOut(wFLA_IMPHOUCAN + iwHouTo*bUINT);
+    OpenOut(FLS_IMPHOUCAN + iwHouTo*bUINT);
 
     if (Save(mpwImpHouCanSpec, sizeof(uint)*bCANALS) == 0)
       return(0);
@@ -92,7 +94,7 @@ uchar   i;
   }
   else                              
   {
-    OpenIn(wFLA_IMPHOUCAN + iwHouFrom*bUINT);
+    OpenIn(FLS_IMPHOUCAN + iwHouFrom*bUINT);
     fAlt = Load(mpwImpHouCanSpec, sizeof(uint)*bCANALS);
   }
 
@@ -122,7 +124,7 @@ bool    SaveImpDaySpec(bool  fCurr, uchar  ibDayTo)
   }
   else
   {
-    OpenOut(wFLA_IMPDAYCAN + ibDayTo*bIMPULSE);
+    OpenOut(FLS_IMPDAYCAN + ibDayTo*bIMPULSE);
 
     if (Save(mpimDayCanSpec, sizeof(impulse)*bCANALS) == 0)
       return(0);
@@ -141,7 +143,7 @@ bool    LoadImpDaySpec(uchar  ibDayFrom)
   }
   else
   {
-    OpenIn(wFLA_IMPDAYCAN + ibDayFrom*bIMPULSE);
+    OpenIn(FLS_IMPDAYCAN + ibDayFrom*bIMPULSE);
     return( Load(mpimDayCanSpec, sizeof(impulse)*bCANALS) );
   }
 }
@@ -157,7 +159,7 @@ bool    SaveImpMonSpec(bool  fCurr, uchar  ibMonTo)
   }
   else
   {
-    OpenOut(wFLA_IMPMONCAN + ibMonTo*bIMPULSE);
+    OpenOut(FLS_IMPMONCAN + ibMonTo*bIMPULSE);
 
     if (Save(mpimMonCanSpec, sizeof(impulse)*bCANALS) == 0)
       return(0);
@@ -176,7 +178,7 @@ bool    LoadImpMonSpec(uchar  ibMonFrom)
   }
   else
   {
-    OpenIn(wFLA_IMPMONCAN + ibMonFrom*bIMPULSE);
+    OpenIn(FLS_IMPMONCAN + ibMonFrom*bIMPULSE);
     return( Load(mpimMonCanSpec, sizeof(impulse)*bCANALS) );
   }
 }
@@ -192,7 +194,7 @@ bool    SavePowDaySpec(bool  fCurr, uchar  ibDayTo)
   }
   else
   {
-    OpenOut(wFLA_POWDAYGRP + ibDayTo*bPOWER);
+    OpenOut(FLS_POWDAYGRP + ibDayTo*bPOWER);
 
     if (Save(mppoDayGrpSpec, sizeof(power)*bGROUPS) == 0)
       return(0);
@@ -211,7 +213,7 @@ bool    LoadPowDaySpec(uchar  ibDayFrom)
   }
   else
   {
-    OpenIn(wFLA_POWDAYGRP + ibDayFrom*bPOWER);
+    OpenIn(FLS_POWDAYGRP + ibDayFrom*bPOWER);
     return( Load(mppoDayGrpSpec, sizeof(power)*bGROUPS) );
   }
 }
@@ -227,7 +229,7 @@ bool    SavePowMonSpec(bool  fCurr, uchar  ibMonTo)
   }
   else
   {
-    OpenOut(wFLA_POWMONGRP + ibMonTo*bPOWER);
+    OpenOut(FLS_POWMONGRP + ibMonTo*bPOWER);
 
     if (Save(mppoMonGrpSpec, sizeof(power)*bGROUPS) == 0)
       return(0);
@@ -246,7 +248,7 @@ bool    LoadPowMonSpec(uchar  ibMonFrom)
   }
   else
   {
-    OpenIn(wFLA_POWMONGRP + ibMonFrom*bPOWER);
+    OpenIn(FLS_POWMONGRP + ibMonFrom*bPOWER);
     return( Load(mppoMonGrpSpec, sizeof(power)*bGROUPS) );
   }
 }

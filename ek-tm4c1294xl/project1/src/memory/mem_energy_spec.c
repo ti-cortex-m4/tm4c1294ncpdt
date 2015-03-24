@@ -18,3 +18,11 @@ impulse                 mpimDayCanSpec[bCANALS],
 // массивы максимумов мощности по тарифам (по суткам и мес€цам)
 power                   mppoDayGrpSpec[bGROUPS],
                         mppoMonGrpSpec[bGROUPS];
+
+
+
+// врем€/дата данных в специальных буферах
+time                    tiOldDay, tiOldMon;
+
+// индексы данных в специальных буферах
+uchar                   ibOldDay, ibOldMon;
