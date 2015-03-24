@@ -40,3 +40,8 @@ extern  impulse                 mpdeDayCan[bCANALS],
                                 mpdeMonCan[bCANALS];
 
 extern  uint                    mpwImpHouCanDef[bCANALS];
+
+
+
+extern  time                    mpdeDay[bDAYS],
+                                mpdeMon[bMONTHS];
