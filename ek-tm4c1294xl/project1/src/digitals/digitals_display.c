@@ -31,13 +31,6 @@ void    ShowDigital(uchar  ibCan)
 }
 
 
-void    ShowDigitalNumber(uchar  ibDig)
-{
-  ShowHi(szClear);
-  sprintf(szHi,"Канал: %-2u",ibDig+1);
-}
-
-
 void    ShowCanalNumber(uchar  ibCan)
 {
   ShowHi(szClear);

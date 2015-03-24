@@ -51,13 +51,13 @@ bool    StartProfile(uchar  ibCanal)
       {
         if (mpboEnblCan[ibDig] == FALSE)
         {
-          sprintf(szHi,"Канал: %-2u       ",ibDig+1);
+          ShowCanalNumber(ibDig);
           ShowLo(szDisabledCan); if (boHideMessages == FALSE) DelayInf();
           AddDigRecord(EVE_CANAL_DISABLED);
         }
         else if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == FALSE) && (boManualProfile == FALSE))
         {
-          sprintf(szHi,"Канал: %-2u       ",ibDig+1);
+          ShowCanalNumber(ibDig);
           sprintf(szHi+14,"%02bu",GetHouIndex());
           ShowLo(szDisabledHou); if (boHideMessages == FALSE) DelayMsg();
           AddDigRecord(EVE_PROFILE_DISABLED);

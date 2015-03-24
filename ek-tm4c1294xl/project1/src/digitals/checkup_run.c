@@ -24,7 +24,7 @@ CHECKUP_RUN.C
 
 
 bool    StartCheckup(uchar  ibCanal)
-{/*
+{
   ibDig = ibCanal;
   while (ibDig < bCANALS)
   {
@@ -36,7 +36,7 @@ bool    StartCheckup(uchar  ibCanal)
       {
         if (mpboEnblCan[ibDig] == FALSE)
         {
-          sprintf(szHi,"Канал: %-2bu       ",ibDig+1);
+          ShowCanalNumber(ibDig);
           ShowLo(szDisabledCan); if (boHideMessages == FALSE) DelayInf();
           AddDigRecord(EVE_CANAL_DISABLED);
         }
@@ -82,7 +82,7 @@ bool    StartCheckup(uchar  ibCanal)
   }
 
   exExtended = EXT_PROFILE_CHECKUP;
-  MakePause(DEV_MODEM_START);*/
+  MakePause(DEV_MODEM_START);
   return(1);
 }
 
