@@ -11,6 +11,7 @@ SPECIAL.C
 #include        "../impulses/energy_spec.h"
 #include        "../digitals/digitals_run.h"
 #include        "../time/delay.h"
+#include        "../time/timedate.h"
 #include        "../time/decret.h"
 #include        "../energy.h"
 #include        "calc.h"
