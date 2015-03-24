@@ -82,6 +82,7 @@ bool    StartCheckup(uchar  ibCanal)
 #ifndef SKIP_B
     case 2:  SetNext(DEV_START_B4);  break;
 #endif
+
 #ifndef SKIP_C
     case 3:  SetNext(DEV_START_C4);  break;
 #endif

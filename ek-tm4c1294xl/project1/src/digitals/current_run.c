@@ -198,20 +198,25 @@ void    NextCurrent(void)
 #ifndef SKIP_D
     case 4:  QueryCloseD(0); break;
 #endif
+
 #ifndef SKIP_K
     case 14:
     case 13: QueryCloseK();  break;
 #endif
+
 #ifndef SKIP_L
     case 16:
     case 17: QueryCloseK();  break;
 #endif
+
 #ifndef SKIP_P
     case 21: QueryCloseP();  break;
 #endif
+
 #ifndef SKIP_Q
     case 22: QueryCloseQ();  break;
 #endif
+
 #ifndef SKIP_U
     case 26: QueryCloseU();  break;
 #endif
