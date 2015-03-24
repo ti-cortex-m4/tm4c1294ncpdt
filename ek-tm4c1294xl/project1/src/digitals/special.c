@@ -8,17 +8,13 @@ SPECIAL.C
 #include        "../display/display.h"
 #include        "../time/delay.h"
 #include        "calc.h"
+#include        "special.h"
 
 
 
 //                                          0123456789ABCDEF
 static char const       szSpecialBegin[] = " подготовка...  ",
                         szSpecialEnd[]   = " завершение...  ";
-
-
-
-bool                    fLoadHou, fLoadDay, fLoadMon,
-                        fLoadMem, fSaveDay, fSaveMon;
 
 
 

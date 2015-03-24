@@ -26,3 +26,8 @@ time                    tiOldDay, tiOldMon;
 
 // индексы данных в специальных буферах
 uchar                   ibOldDay, ibOldMon;
+
+
+
+// флаг наличия открытых буферов
+uchar                   boOpenCalc;

@@ -17,3 +17,7 @@ extern  power                   mppoDayGrpSpec[bGROUPS],
 extern  time                    tiOldDay, tiOldMon;
 
 extern  uchar                   ibOldDay, ibOldMon;
+
+
+
+extern  uchar                   boOpenCalc;
