@@ -77,20 +77,17 @@ void    NextMonDef(void)
   memset(&mpdeMonCan, 0, sizeof(mpdeMonCan));
   SaveDefMon(ibHardMon);
 }
+*/
 
 
-
-void    MakeDefSpec(impulse  _xdata  *mpimT)
+void    MakeDefSpec(impulse  *mpimT)
 {
-uchar   j;
-
-  j = mpibEngPrevTariff[ tiAlt.bHour*2 + tiAlt.bMinute/30 ];
-
-  dwBuffC = mpimT[ibCan].mpdwImp[j];
+  uchar j = mpibEngPrevTariff[ tiAlt.bHour*2 + tiAlt.bMinute/30 ];
+  ulong dw = mpimT[ibCan].mpdwImp[j];
 
   if (mpwImpHouCanDef[ibCan] != 0xFFFF)
-    dwBuffC++;
+    dw++;
 
-  mpimT[ibCan].mpdwImp[j] = dwBuffC;
+  mpimT[ibCan].mpdwImp[j] = dw;
 }
-*/
+

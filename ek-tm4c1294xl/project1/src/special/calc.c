@@ -9,6 +9,7 @@ CALC.C
 #include        "../memory/mem_groups.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_energy_spec.h"
+#include        "../impulses/max_power.h"
 #include        "../impulses/energy_spec.h"
 #include        "../digitals/digitals.h"
 #include        "../special/recalc_def.h"
