@@ -11,3 +11,9 @@ extern  impulse                 mpimDayCanSpec[bCANALS],
 
 extern  power                   mppoDayGrpSpec[bGROUPS],
                                 mppoMonGrpSpec[bGROUPS];
+
+
+
+extern  time                    tiOldDay, tiOldMon;
+
+extern  uchar                   ibOldDay, ibOldMon;

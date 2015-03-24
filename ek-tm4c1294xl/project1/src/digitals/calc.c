@@ -8,7 +8,7 @@ CALC.C
 #include        "../memory/mem_energy_spec.h"
 #include        "../impulses/energy_spec.h"
 #include        "../time/timedate.h"
-#include        "../special.h"
+#include        "special.h"
 
 
 
@@ -40,6 +40,7 @@ void    CalcTimeDate(bool  fUseImp, bool  fUsePow)
       if (fUseImp == 1) SaveDefDay(ibOldDay);
     }
 
+    uchar ibDay;
     for (ibDay=0; ibDay<bDAYS; ibDay++)
     {
       tiDig = mpdeDay[ibDay].tiNow;                   
@@ -72,6 +73,7 @@ void    CalcTimeDate(bool  fUseImp, bool  fUsePow)
       if (fUseImp == 1) SaveDefMon(ibOldMon);
     }
 
+    uchar ibMon;
     for (ibMon=0; ibMon<bMONTHS; ibMon++)
     {
       tiDig = mpdeMon[ibMon].tiNow;                   
