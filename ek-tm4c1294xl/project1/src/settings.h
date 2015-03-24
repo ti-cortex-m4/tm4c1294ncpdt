@@ -6,6 +6,8 @@ SETTINGS.H
 
 extern  file const              flLogical;
 
+extern  file const              flFirstReset;
+
 
 
 void    InitSettings(void);
