@@ -17,6 +17,7 @@ CALC.C
 #include        "../special/recalc_def.h"
 #include        "../time/timedate.h"
 #include        "../energy.h"
+#include        "special.h"
 #include        "calc.h"
 
 
