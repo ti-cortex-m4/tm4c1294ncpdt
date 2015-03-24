@@ -106,9 +106,21 @@ uint    w;
 
 void     MakeSpeed(uchar  ibPrt, ulong  dwBase)
 {
-ulong   dwBaud = mpdwBauds[ mppoPorts[ibPrt].ibBaud ];
+  ulong dwBaud = mpdwBauds[ mppoPorts[ibPrt].ibBaud ];
 
-  ROM_UARTConfigSetExpClk(dwBase, ui32SysClock, dwBaud, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  ulong dwParity;
+  switch (mppoPorts[ibPrt].ibParity)
+  {
+    case 0:  dwParity = UART_CONFIG_PAR_NONE;  break;
+    case 1:  dwParity = UART_CONFIG_PAR_EVEN;  break;
+    case 2:  dwParity = UART_CONFIG_PAR_ODD;   break;
+    case 3:  dwParity = UART_CONFIG_PAR_ONE;   break;
+    case 4:  dwParity = UART_CONFIG_PAR_ZERO;  break;
+
+    default: dwParity = UART_CONFIG_PAR_NONE;  break;
+  }
+
+  ROM_UARTConfigSetExpClk(dwBase, ui32SysClock, dwBaud, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | dwParity));
 }
 
 
@@ -170,6 +182,9 @@ uchar   p;
       SetDefaultDelay(p);
     }
 
+    if (mppoPorts[p].ibParity >= bPARITYS)
+      mppoPorts[p].ibParity = 0;
+
     if (mppoPorts[p].enStream >= bSTREAMS)
       mppoPorts[p].enStream = STR_SLAVEESC;
 
@@ -195,7 +210,7 @@ uchar   p;
     mppoPorts[p].ibParity = 0;
 
     SetDefaultDelay(p);
-		mpboLocalDisable[p] = FALSE;
+    mpboLocalDisable[p] = FALSE;
     SetCorrectLimit(p);
   }
 
