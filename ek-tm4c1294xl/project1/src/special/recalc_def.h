@@ -10,7 +10,7 @@ bool    SaveDefMon(uchar  ibMonTo);
 bool    LoadDefMon(uchar  ibMonFrom);
 
 //void    ResetFlashDef(void);
-//void    NextDayDef(void);
-//void    NextMonDef(void);
+void    NextDayDef(void);
+void    NextMonDef(void);
 
 void    MakeDefSpec(impulse  *mpimT, uchar  ibCan, time  *pti);

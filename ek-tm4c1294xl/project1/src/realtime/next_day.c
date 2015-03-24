@@ -37,5 +37,12 @@ void    NextDay(void)
   memset(&mpimDayCan[ibSoftDay], 0, sizeof(impulse)*bCANALS);
   memset(&mppoDayGrp[ibSoftDay], 0, sizeof(power)*bGROUPS);
 
+  // обработка брака по суткам
+  tiAlt = tiCurr;
+  MakeDefectDay(0);
+
+  // обработка достоверности по суткам
+  NextDayDef();
+
   EnableAnswer();
 }

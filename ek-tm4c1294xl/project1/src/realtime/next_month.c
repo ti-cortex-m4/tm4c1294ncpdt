@@ -32,4 +32,11 @@ void    NextMonth(void)
   memset(&mpreCntMonCan[ibSoftMon], 0, sizeof(real)*bCANALS);
 
   MakeCntMonCan();
+
+  // обработка брака по месяцам
+  tiAlt = tiCurr;
+  MakeDefectMon(0);
+
+  // обработка достоверности по месяцам
+  NextMonDef();
 }
