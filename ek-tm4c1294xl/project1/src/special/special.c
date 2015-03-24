@@ -7,6 +7,7 @@ SPECIAL.C
 #include        "../main.h"
 #include        "../memory/mem_profile.h"
 #include        "../display/display.h"
+#include        "../impulses/energy_spec.h"
 #include        "../time/delay.h"
 #include        "../energy.h"
 #include        "calc.h"
