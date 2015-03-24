@@ -12,6 +12,7 @@ PROFILE_RUN.C
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../keyboard/key_timedate.h"
+#include        "../realtime/realtime.h"
 #include        "../serial/ports.h"
 #include        "../serial/flow.h"
 #include        "../serial/dtr.h"
@@ -22,6 +23,8 @@ PROFILE_RUN.C
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/digitals_display.h"
 #include        "../digitals/answer.h"
+#include        "../digitals/enbl_hours.h"
+#include        "../digitals/special.h"
 #include        "../time/timedate.h"
 #include        "../flash/records.h"
 
@@ -58,10 +61,10 @@ bool    StartProfile(uchar  ibCanal)
           ShowLo(szDisabledCan); if (boHideMessages == FALSE) DelayInf();
           AddDigRecord(EVE_CANAL_DISABLED);
         }
-        else if ((GetEnblPorHou(diCurr.ibPort,GetHouIndex()) == FALSE) && (boManualProfile == FALSE))
+        else if ((GetEnblPrtHou(diCurr.ibPort, GetCurrHouIndex()) == FALSE) && (boManualProfile == FALSE))
         {
           ShowCanalNumber(ibDig);
-          sprintf(szHi+14,"%02u",GetHouIndex());
+          sprintf(szHi+14,"%02u",GetCurrHouIndex());
           ShowLo(szDisabledHou); if (boHideMessages == FALSE) DelayMsg();
           AddDigRecord(EVE_PROFILE_DISABLED);
         }
@@ -88,7 +91,7 @@ bool    StartProfile(uchar  ibCanal)
   }
 
 
-  boRecalcCurr = mpboRecalcHou[GetHouIndex()];
+  // TODO boRecalcCurr = mpboRecalcHou[GetHouIndex()];
 
   AddDigRecord(EVE_PROFILE2);
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILE);
@@ -115,7 +118,7 @@ bool    StartProfile(uchar  ibCanal)
 
   cwHouRead = 0;
 
-  fBreakRead = 0;
+  // TODO fBreakRead = 0;
 
   LoadCurrDigital(ibDig);
   ibPort = diCurr.ibPort;
@@ -206,7 +209,7 @@ bool    StartProfile(uchar  ibCanal)
 
 
 void    RunProfile(bool  fCtrlHou)
-{/*
+{
   if (boEnblProfile == TRUE)
   {
 #ifdef  FLOW
@@ -217,11 +220,11 @@ void    RunProfile(bool  fCtrlHou)
     memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
     cwHouLength = 0;
 
-    if (boDTREnable == TRUE) DTROff_All();
+//    if (boDTREnable == TRUE) DTROff_All();
 
     if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
   }
-  else BlockProgramExt(bSET_ENBL_PROFILE);*/
+  else BlockProgramExt(bSET_ENBL_PROFILE);
 }
 
 

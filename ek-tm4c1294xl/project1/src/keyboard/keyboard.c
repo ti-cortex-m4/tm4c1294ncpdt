@@ -21,8 +21,10 @@ KEYBOARD.C
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_run.h"
 #include        "../digitals/wait_query.h"
+#include        "../digitals/special.h"
 #include        "../settings.h"
 #include        "../flash/files.h"
+#include        "../flash/records.h"
 #include        "keyboard_auto.h"
 #include        "keyboard_key.h"
 #include        "key_timedate.h"
@@ -204,9 +206,9 @@ uchar   i;
       SetCurr(DEV_BEGIN);
       SetPause(DEV_BEGIN);
 
-//      if (IsOpenSpecial()) { InfoBreak(); CloseSpecial(); Stop(); }
+      if (IsOpenSpecial()) { CloseSpecial(); Stop(); }
 //      boOpenCalc = boFalse;
-//      AddDigRecord(EVE_SPECIALCLOSE);
+      AddDigRecord(EVE_SPECIALCLOSE);
 
       KeyBreakConnect();
       EnableAnswer();
