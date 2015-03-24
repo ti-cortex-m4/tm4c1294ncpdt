@@ -200,8 +200,8 @@ void    CalcAllGroups(bool  fUsePow)
     {
       if (mpboUsedGroups[ibGrp] == FALSE) continue;
 
-      if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec );
-      if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec );
+      if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec, ibGrp, &tiAlt );
+      if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec, ibGrp, &tiAlt );
     }
   }
 }

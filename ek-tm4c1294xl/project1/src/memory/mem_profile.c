@@ -19,4 +19,6 @@ uint                    cwHouLength;
 
 // счётчики событий
 uint                    mpcwProfile_OK[bCANALS],
-                        mpcwProfile_Error[bCANALS];
+                        mpcwProfile_Error[bCANALS],
+                        mpcwDigital_OK[bCANALS],
+                        mpcwCalcDig[bCANALS];
