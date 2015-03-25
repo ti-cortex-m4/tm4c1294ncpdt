@@ -6,6 +6,7 @@ TIMEDATE_DISPLAY.H
 
 #include        "../main.h"
 #include        "../display/display.h"
+#include        "rtc.h"
 #include        "timedate.h"
 #include        "timedate_display.h"
 
@@ -43,33 +44,30 @@ void    ShowTimeDate(time  ti)
 
 
 void    ShowDeltaTime(time  ti)
-{ ShowTimeDate(ti);
-/*
-uint    i;
-
+{
   Clear();
-  sprintf(szLo+0,"%02bu:%02bu:%02bu",
-                 tiAlt.bHour,
-                 tiAlt.bMinute,
-                 tiAlt.bSecond);
+  sprintf(szLo+0,"%02u:%02u:%02u",
+                 ti.bHour,
+                 ti.bMinute,
+                 ti.bSecond);
 
-  dwBuffC = GetSecondIndex();
-  i = GetDayIndex();
+  ulong dwSecond = GetSecondIndex(&ti);
+  uint ibDay = GetDayIndexMD(ti.bMonth, ti.bDay);
 
-  tiAlt = *PGetCurrTimeDate();
+  time ti2 = *GetCurrTimeDate();
 
-  if (i != GetDayIndex())
+  if (ibDay != GetDayIndexMD(ti2.bMonth, ti2.bDay))
     sprintf(szLo+9,"?");
-  else if (dwBuffC > GetSecondIndex())
+  else if (dwSecond > GetSecondIndex(&ti2))
   {
-    dwBuffC = dwBuffC - GetSecondIndex();
-    sprintf(szLo+9,"-%lu", dwBuffC);
+    dwSecond = dwSecond - GetSecondIndex(&ti2);
+    sprintf(szLo+9,"-%lu", dwSecond);
   }
   else
   {
-    dwBuffC = GetSecondIndex() - dwBuffC;
-    sprintf(szLo+9,"+%lu", dwBuffC);
-  }*/
+    dwSecond = GetSecondIndex(&ti2) - dwSecond;
+    sprintf(szLo+9,"+%lu", dwSecond);
+  }
 }
 
 
