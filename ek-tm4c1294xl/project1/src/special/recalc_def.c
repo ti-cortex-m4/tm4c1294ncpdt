@@ -52,20 +52,28 @@ bool    LoadDefMon(uchar  ibMonFrom)
 }
 
 
-/*
-void    ResetFlashDef(void)
-{
-uchar   i;
 
+void    InitDef(void)
+{
+}
+
+
+void    ResetDef(void)
+{
   memset(&mpdeDayCan, 0, sizeof(mpdeDayCan));
-  for (i=0; i<bDAYS; i++)
-    SaveDefDay(i);
+
+  uchar d;
+  for (d=0; d<bDAYS; d++)
+    SaveDefDay(d);
 
   memset(&mpdeMonCan, 0, sizeof(mpdeMonCan));
-  for (i=0; i<bMONTHS; i++)
-    SaveDefMon(i);
+
+  uchar m;
+  for (m=0; m<bMONTHS; m++)
+    SaveDefMon(m);
 }
-*/
+
+
 
 void    NextDayDef(void) 
 {

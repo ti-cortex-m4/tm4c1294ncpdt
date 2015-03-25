@@ -21,6 +21,7 @@ DIGITALS_RUN.C
 #include        "../digitals/profile_run.h"
 #include        "../digitals/checkup_run.h"
 #include        "../digitals/max_repeats.h"
+#include        "../special/recalc_def.h"
 #include        "../devices/device_b.h"
 #include        "../serial/ports.h"
 #include        "../serial/ports_modems.h"
@@ -96,6 +97,7 @@ void    InitDevices(void)
   EnableAnswer();
 
   InitMaxRepeats();
+  InitDef();
 }
 
 
@@ -108,6 +110,7 @@ void    ResetDevices(void)
   SaveFile(&flHideMessages);
 
   ResetMaxRepeats();
+  ResetDef();
 }
 
 
