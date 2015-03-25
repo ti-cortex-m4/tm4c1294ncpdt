@@ -16,6 +16,6 @@ time   *GetDecretDateYM(uchar  bYear, uchar  bMonth);
 uint    GetDayIndexYMD(uchar  bYear, uchar  bMonth, uchar  bDay);
 uint    GetDayIndexMD(uchar  bMonth, uchar  bDay);
 
-bool    TrueTimeDate(void);
+bool    TrueTimeDate(time  ti);
 
 ulong   GetSecondIndex(time  *pti);
