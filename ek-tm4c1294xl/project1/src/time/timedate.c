@@ -131,22 +131,22 @@ uint    j;
 
 
 
-bool    TrueTimeDate(void)
+bool    TrueTimeDate(time  ti)
 {
-  if (tiAlt.bSecond > 59) return false;
-  if (tiAlt.bMinute > 59) return false;
-  if (tiAlt.bHour   > 23) return false;
+  if (ti.bSecond > 59) return false;
+  if (ti.bMinute > 59) return false;
+  if (ti.bHour   > 23) return false;
 
-  if ((tiAlt.bDay == 0) ||
-  		(tiAlt.bDay > GetDaysInMonthYM(tiAlt.bYear, tiAlt.bMonth)))
+  if ((ti.bDay == 0) ||
+  		(ti.bDay > GetDaysInMonthYM(ti.bYear, ti.bMonth)))
     return false;
 
-  if ((tiAlt.bMonth == 0) ||
-  		(tiAlt.bMonth > 12 ))
+  if ((ti.bMonth == 0) ||
+  		(ti.bMonth > 12 ))
     return false;
 
-  if ((tiAlt.bYear < bMINYEAR) ||
-  		(tiAlt.bYear > bMAXYEAR))
+  if ((ti.bYear < bMINYEAR) ||
+  		(ti.bYear > bMAXYEAR))
     return false;
 
   return true;
