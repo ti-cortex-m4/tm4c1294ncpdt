@@ -8,6 +8,7 @@ CHECKUP_RUN.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_profile.h"
+#include        "../memory/mem_checkup.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../keyboard/key_timedate.h"
@@ -97,7 +98,7 @@ bool    StartCheckup(uchar  ibCanal)
 
 
 
-void    RunCheckup(bool  fReadonly)
+void    RunCheckup(bool  _fCheckupReadOnly)
 {
 #ifdef  FLOW
   CloseFlow();
@@ -106,7 +107,7 @@ void    RunCheckup(bool  fReadonly)
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
   cwHouLength = 0;
 
-  boCheckupReadonly = (fReadonly == 1) ? TRUE : FALSE;
+  boCheckupReadOnly = (_fCheckupReadOnly == 1) ? TRUE : FALSE;
   ClearCheckup();
 
 //  if (boDTREnable == TRUE) DTROff_All();

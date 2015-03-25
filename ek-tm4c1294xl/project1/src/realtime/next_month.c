@@ -11,6 +11,8 @@ NEXT_MONTH.C
 #include        "../memory/mem_energy.h"
 #include        "../energy.h"
 #include        "../energy2.h"
+#include        "../special/defects.h"
+#include        "../special/recalc_def.h"
 #include        "realtime_storage.h"
 
 
@@ -34,8 +36,7 @@ void    NextMonth(void)
   MakeCntMonCan();
 
   // обработка брака по месяцам
-  tiAlt = tiCurr;
-  MakeDefectMon(0);
+  MakeDefectMon(0, &tiCurr);
 
   // обработка достоверности по месяцам
   NextMonDef();

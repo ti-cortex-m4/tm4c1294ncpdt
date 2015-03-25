@@ -9,6 +9,7 @@ DEFECTS.C
 #include        "../memory/mem_energy_spec.h"
 #include        "../time/timedate.h"
 #include        "../time/rtc.h"
+#include        "defects.h"
 
 
 
