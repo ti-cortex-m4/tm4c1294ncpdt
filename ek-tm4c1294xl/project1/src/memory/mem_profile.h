@@ -14,3 +14,5 @@ extern  uint                    mpcwProfile_OK[bCANALS],
                                 mpcwProfile_Error[bCANALS],
                                 mpcwDigital_OK[bCANALS],
                                 mpcwCalcDig[bCANALS];
+
+extern  bool                    fCurrCtrl;

@@ -8,6 +8,7 @@ SPECIAL.C
 #include        "../memory/mem_profile.h"
 #include        "../memory/mem_energy_spec.h"
 #include        "../display/display.h"
+#include        "../tariffs/tariffs.h"
 #include        "../impulses/energy_spec.h"
 #include        "../digitals/digitals_run.h"
 #include        "../time/delay.h"

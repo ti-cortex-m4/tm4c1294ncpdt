@@ -22,3 +22,6 @@ uint                    mpcwProfile_OK[bCANALS],
                         mpcwProfile_Error[bCANALS],
                         mpcwDigital_OK[bCANALS],
                         mpcwCalcDig[bCANALS];
+
+// признак коррекции времени при опросе цифровых счётчиков
+bool                    fCurrCtrl;

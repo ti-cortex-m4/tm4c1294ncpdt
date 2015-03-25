@@ -14,6 +14,8 @@ NEXT_DAY.C
 #include        "../energy2.h"
 #include        "../energy3.h"
 #include        "../digitals/answer.h"
+#include        "../special/defects.h"
+#include        "../special/recalc_def.h"
 #include        "realtime_storage.h"
 
 
@@ -38,8 +40,7 @@ void    NextDay(void)
   memset(&mppoDayGrp[ibSoftDay], 0, sizeof(power)*bGROUPS);
 
   // обработка брака по суткам
-  tiAlt = tiCurr;
-  MakeDefectDay(0);
+  MakeDefectDay(0, &tiCurr);
 
   // обработка достоверности по суткам
   NextDayDef();

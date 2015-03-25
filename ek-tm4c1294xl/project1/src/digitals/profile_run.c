@@ -208,7 +208,7 @@ bool    StartProfile(uchar  ibCanal)
 }
 
 
-void    RunProfile(bool  fCtrlHou)
+void    RunProfile(bool  _fCtrlHou)
 {
   if (boEnblProfile == TRUE)
   {
@@ -216,7 +216,7 @@ void    RunProfile(bool  fCtrlHou)
     CloseFlow();
 #endif
 
-    fCurrCtrlHou = fCtrlHou;
+    fCurrCtrl = _fCtrlHou;
     memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
     cwHouLength = 0;
 

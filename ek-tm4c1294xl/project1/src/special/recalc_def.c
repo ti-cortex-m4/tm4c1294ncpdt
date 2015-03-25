@@ -11,6 +11,7 @@ RECALC_DEF.C
 #include        "../memory/mem_energy_spec.h"
 #include        "../realtime/realtime.h"
 #include        "../flash/files.h"
+#include        "recalc_def.h"
 
 
 
