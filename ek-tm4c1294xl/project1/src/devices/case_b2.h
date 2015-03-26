@@ -84,7 +84,7 @@
           if (cbCorrects == 0)
           {
             bDeltaOld = (uchar)dwBuffC;
-            (boShowMessages == boTrue) ? DelayMsg() : DelayInf();
+            (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
             ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_B2);
           }
           else

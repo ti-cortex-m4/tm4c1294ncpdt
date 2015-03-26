@@ -61,10 +61,10 @@ uchar   i;
   }
 
   for (i=0; i<48; i++) mpboCheckupHou[i] = boFalse;
-  mpboCheckupHou[2] = boTrue;
-  mpboCheckupHou[3] = boTrue;
-  mpboCheckupHou[4] = boTrue;
-  mpboCheckupHou[5] = boTrue;
+  mpboCheckupHou[2] = TRUE;
+  mpboCheckupHou[3] = TRUE;
+  mpboCheckupHou[4] = TRUE;
+  mpboCheckupHou[5] = TRUE;
 }
 
 
@@ -330,7 +330,7 @@ uchar   i;
         daAlt.bYear  = tiAlt.bYear;
 
         cbCheckupErrorDay++;
-        if (boCheckupReadonly == boTrue)
+        if (boCheckupReadonly == TRUE)
         {
           AddDigRecord(EVE_CHECKUP_DAY);
         }
@@ -412,7 +412,7 @@ uchar   i;
         daAlt.bYear  = tiAlt.bYear;
 
         cbCheckupErrorMon++;
-        if (boCheckupReadonly == boTrue)
+        if (boCheckupReadonly == TRUE)
         {
           AddDigRecord(EVE_CHECKUP_MON);
         }
@@ -469,7 +469,7 @@ void    CheckupClearCanals(void)
 {
 uchar   i;
 
-  boCheckupRecalc = boTrue;
+  boCheckupRecalc = TRUE;
   memset(&mpboReadyCheckup, 0, sizeof(mpboReadyCheckup));
 
   for (i=ibXmin; i<=ibXmax; i++)
@@ -480,7 +480,7 @@ uchar   i;
       LoadPrevDigital(ibCan);
 
       if (CompareCurrPrevLines() == 1)
-        mpboReadyCheckup[ibCan] = boTrue;
+        mpboReadyCheckup[ibCan] = TRUE;
     } 
   }
 
@@ -502,7 +502,7 @@ uchar   i;
     
       for (ibCan=0; ibCan<bCANALS; ibCan++)         // обработка по каналам
       {
-        if (mpboReadyCheckup[ibCan] == boTrue) 
+        if (mpboReadyCheckup[ibCan] == TRUE) 
         { 
           SetCanInt(mpwImpHouCanSpec, ibCan, 0xFFFF); 
         }

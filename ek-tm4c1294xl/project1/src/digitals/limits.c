@@ -12,7 +12,7 @@ void    ResetLimits(void)
 {
 uchar   i;
 
-  boStartCan = boTrue;
+  boStartCan = TRUE;
   for (i=0; i<bCANALS; i++)
   {
     mpcwStartRelCan[i] = 0;
@@ -27,7 +27,7 @@ uchar   i;
 
 bit     UseBounds(void)
 {
-  return (boStartCan == boTrue);
+  return (boStartCan == TRUE);
 }
 
 
@@ -62,7 +62,7 @@ void    NewBoundsAbs(uint  i)
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines() == 1)
     { 
-      mpboStartCan[ibCan] = boTrue;
+      mpboStartCan[ibCan] = TRUE;
       mpcwStartAbsCan[ibCan] = i;
     } 
   }
@@ -77,7 +77,7 @@ void    NewBoundsAbs2(ulong  dw)
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines() == 1)
     { 
-      mpboStartCan[ibCan] = boTrue;
+      mpboStartCan[ibCan] = TRUE;
       mpcdwStartAbsCan[ibCan] = dw;
     } 
   }

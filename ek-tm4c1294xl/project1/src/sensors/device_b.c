@@ -8,7 +8,7 @@ DEVICE_B.C
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_current.h"
 #include        "../memory/mem_factors.h"
-#include        "../display/lines.h"
+#include        "../display/display.h"
 #include        "../time/timedate.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
@@ -77,7 +77,7 @@ void    QueryOpenB(void)
 }
 
 
-/*
+
 // посылка запроса на чтение версии
 void    QueryVersionB(void)
 {
@@ -102,16 +102,16 @@ void    ReadVersionB(void)
   
   Clear();
   sprintf(szLo+1, "версия %bu.%bu.%bu", bVersionB1, bVersionB2, bVersionB3);
-  (boShowMessages == boTrue) ? DelayMsg() : DelayInf();
+  (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
 }
 
 
 // проверка версии: 7.1.0 и выше
-bit     TestVersionB710(void)
+bool    TestVersionB710(void)
 {
   return ((uint)100*bVersionB1 + 10*bVersionB2 + bVersionB3 >= 710);
 }
-*/
+
 
 
 // посылка запроса на чтение логического номера
@@ -257,7 +257,7 @@ void    ReadTimeAltB(void)
   tiAlt.bYear   = FromBCD( PopChar() );
 }
 
-/*
+
 // чтение времени/даты
 void    ReadTimeDigB(void)
 {
@@ -303,17 +303,17 @@ void    ReadTopBOld(void)
     if (mpboStartCan[ibDig] == boFalse) 
     {
       wBaseCurr = InBuff(1)*0x100 + InBuff(2);
-      if (boShowMessages == boTrue) sprintf(szLo,"  начало %04X * ",wBaseCurr);
+      if (boShowMessages == TRUE) sprintf(szLo,"  начало %04X * ",wBaseCurr);
       ResetLimitsAux(ibDig);
     }
     else 
     {
       wBaseCurr = mpcwStartAbsCan[ibDig];
-      if (boShowMessages == boTrue) sprintf(szLo,"  начало %04X   ",wBaseCurr);
+      if (boShowMessages == TRUE) sprintf(szLo,"  начало %04X   ",wBaseCurr);
       iwMajor = wBaseCurr; AddDigRecord(EVE_PREVIOUS_TOP);
     }
 
-    if (boShowMessages == boTrue) DelayMsg();
+    if (boShowMessages == TRUE) DelayMsg();
   }
 
   // индекс по получасовому массиву
@@ -372,7 +372,7 @@ void    QueryHeaderB_Plus(uchar  bSize)
 
 
 
-bit     TestHeaderB(uchar  ibBlock)
+bool    TestHeaderB(uchar  ibBlock)
 {
   tiDig.bHour   = FromBCD( InBuff((uint)2+ibBlock*18) );// время/дата часового блока
   tiDig.bMinute = FromBCD( InBuff((uint)3+ibBlock*18) );
@@ -395,7 +395,7 @@ bit     TestHeaderB(uchar  ibBlock)
 
 
 // чтение заголовка часового блока
-bit     ReadHeaderB(uchar  ibBlock, bit  fDelay)
+bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 {
   HideCurrentTime(1);                                        // запрещаем автоматическое отображение времени
   
@@ -488,7 +488,7 @@ bit     ReadHeaderB(uchar  ibBlock, bit  fDelay)
   if (boRefillDisable == boFalse) MakeRefill();
   return(MakeStopHou(0));  
 }
-*/
+
 
 
 void    ReadCurrentB(void)
