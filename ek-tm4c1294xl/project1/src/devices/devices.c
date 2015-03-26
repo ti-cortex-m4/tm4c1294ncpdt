@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DIGITALS_RUN.C
+DEVICES.C
               
 
 ------------------------------------------------------------------------------*/
@@ -35,15 +35,16 @@ DIGITALS_RUN.C
 #include        "devices_input.h"
 #include        "devices_postinput.h"
 #include        "devices_pause.h"
+#include        "devices_init.h"
 
 
 
 // счётчик повторов
 uchar                   cbRepeat;
-/*
+
 // признак прекращения опроса профиля нагрузки
-bit                     fBreakRead;
-*/
+//bit                     fBreakRead;
+
 // индекс текущего цифрового счетчика
 uchar                   ibDig;
 
@@ -58,65 +59,6 @@ uchar                   cbWaitOnline;
 
 // признак разрыва соединеия при нажатии кнопки
 bool                    fKeyOn;
-
-
-
-file const              flSeparateCan = {FLS_SEPARATE_CAN, &boSeparateCan, sizeof(boolean)};
-file const              flHideMessages = {FLS_HIDE_MESSAGES, &boHideMessages, sizeof(boolean)};
-
-
-
-void    InitDevices(void)
-{
-  LoadFile(&flSeparateCan);
-  LoadFile(&flHideMessages);
-
-//uchar   i,j;
-//
-//  if (GetLabelXDATA() == 0)
-//  {
-//    MakeDigitals();
-//
-//    for (i=0; i<bCANALS; i++) mpboBase[i] = boFalse;
-//
-//    for (i=0; i<bCANALS; i++) mpreEngFrac[i] = 0;
-//
-//    for (i=0; i<bCANALS; i++)
-//      for (j=0; j<6; j++) mpreEngFracDigCan[i][j] = 0;
-//  }
-
-  SetCurr(DEV_BEGIN);
-  SetPause(DEV_BEGIN);
-
-  InitWaitAnswer();
-  InitWaitQuery();
-  cbWaitOnline = 0;
-
-  fConnect = 0;
-  InitConnectKey();
-
-  ibPortPause = 0xFF;
-
-  EnableAnswer();
-
-  InitMaxRepeats();
-  InitDef();
-  InitDefects();
-}
-
-
-void    ResetDevices(void)
-{
-  boSeparateCan = FALSE;
-  SaveFile(&flSeparateCan);
-
-  boHideMessages = FALSE;
-  SaveFile(&flHideMessages);
-
-  ResetMaxRepeats();
-  ResetDef();
-  ResetDefects();
-}
 
 
 
@@ -148,7 +90,7 @@ void    ErrorLink(void)
 }
 
 
-// базовая подпрограмма опроса цифоровых счётчиков
+
 void    RunDevices(void)
 {
   LoadCurrDigital(ibDig);
