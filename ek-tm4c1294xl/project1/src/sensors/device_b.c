@@ -8,18 +8,27 @@ DEVICE_B.C
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_current.h"
 #include        "../memory/mem_factors.h"
+#include        "../memory/mem_energy_spec.h"
+#include        "../memory/mem_profile.h"
 #include        "../display/display.h"
 #include        "../time/timedate.h"
+#include        "../time/delay.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
 #include        "../serial/ports_common.h"
 #include        "../devices/devices.h"
 #include        "../digitals/current_run.h"
+#include        "../flash/records.h"
 #include        "../energy.h"
 
 
 
 #ifndef SKIP_B
+
+// версии
+uchar                   bVersionB1, bVersionB2, bVersionB3;
+
+
 
 // проверка сетевого адреса
 bool    ReadAddressB(void)
@@ -81,7 +90,7 @@ void    QueryOpenB(void)
 // посылка запроса на чтение версии
 void    QueryVersionB(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(8);
@@ -279,7 +288,7 @@ void    ReadTimeDigB(void)
 // посылка запроса на чтение вершины массива
 void    QueryTopB(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);         
   PushChar(8);      
@@ -300,7 +309,7 @@ void    ReadTopBOld(void)
   }
   else 
   {
-    if (mpboStartCan[ibDig] == boFalse) 
+    if (mpboStartCan[ibDig] == FALSE) 
     {
       wBaseCurr = InBuff(1)*0x100 + InBuff(2);
       if (boShowMessages == TRUE) sprintf(szLo,"  начало %04X * ",wBaseCurr);
@@ -336,7 +345,7 @@ void    ReadTopBOld(void)
 // посылка запроса на чтение заголовка часового блока
 void    QueryHeaderB(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);         
   PushChar(6);      
@@ -356,7 +365,7 @@ void    QueryHeaderB_Plus(uchar  bSize)
 {
   ShowLo(szWaiting); 
 
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);         
   PushChar(6);      
@@ -485,7 +494,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 
   MakeRefillWinter();
   MakePrevHou();  
-  if (boRefillDisable == boFalse) MakeRefill();
+  if (boRefillDisable == FALSE) MakeRefill();
   return(MakeStopHou(0));  
 }
 

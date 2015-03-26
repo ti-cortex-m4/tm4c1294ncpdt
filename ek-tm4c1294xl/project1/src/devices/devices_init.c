@@ -56,7 +56,7 @@ void    InitDevices(void)
 //  {
 //    MakeDigitals();
 //
-//    for (i=0; i<bCANALS; i++) mpboBase[i] = boFalse;
+//    for (i=0; i<bCANALS; i++) mpboBase[i] = FALSE;
 //
 //    for (i=0; i<bCANALS; i++) mpreEngFrac[i] = 0;
 //

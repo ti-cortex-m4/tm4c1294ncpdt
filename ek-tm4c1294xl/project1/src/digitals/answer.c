@@ -17,7 +17,7 @@ void    EnableAnswer(void)
 
 void    DisableAnswer(void) 
 {
-//  boAnswerFlag = boFalse;
+//  boAnswerFlag = FALSE;
 //  cdwAnswerDisable++; tiAnswerDisable = tiCurr;
 }
 

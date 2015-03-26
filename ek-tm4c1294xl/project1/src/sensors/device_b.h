@@ -6,6 +6,10 @@ DEVICE_B.H
 
 #ifndef SKIP_B
 
+extern  uchar                   bVersionB1, bVersionB2, bVersionB3;
+
+
+
 //bit     ReadAddressB(void);
 bool    ReadResultB(void);
 
@@ -34,7 +38,7 @@ void    ReadTopBOld(void);
 void    QueryHeaderB(void);
 void    QueryHeaderB_Plus(uchar  bSize);
 bool    TestHeaderB(uchar  ibBlock);
-bool    ReadHeaderB(uchar  ibBlock, bit  fDelay);
+bool    ReadHeaderB(uchar  ibBlock, bool  fDelay);
 
 void    ReadCurrentB(void);
 

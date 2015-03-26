@@ -18,7 +18,7 @@ uchar   i;
     mpcwStartRelCan[i] = 0;
     mpcwStartAbsCan[i] = 0;
     mpcdwStartAbsCan[i] = 0;
-    mpboStartCan[i] = boFalse;
+    mpboStartCan[i] = FALSE;
     mpcwStopCan[i] = wHOURS_62-1;                   // самый старый получас
   }
 }
@@ -52,10 +52,10 @@ void    NewBoundsRel(uint  i)
       mpcwStartRelCan[ibCan] = i;
   }
 }
-
+*/
 
 void    NewBoundsAbs(uint  i)
-{
+{/*
   LoadCurrDigital(ibDig);      
   for (ibCan=0; ibCan<bCANALS; ibCan++)                           
   {
@@ -65,10 +65,10 @@ void    NewBoundsAbs(uint  i)
       mpboStartCan[ibCan] = TRUE;
       mpcwStartAbsCan[ibCan] = i;
     } 
-  }
+  }*/
 }
 
-
+/*
 void    NewBoundsAbs2(ulong  dw)
 {
   LoadCurrDigital(ibDig);
@@ -95,7 +95,7 @@ void    NewLimits(void)
       mpcwStartRelCan[ibCan] = 0;
       mpcwStartAbsCan[ibCan] = 0;
       mpcdwStartAbsCan[ibCan] = 0;
-      mpboStartCan[ibCan] = boFalse;
+      mpboStartCan[ibCan] = FALSE;
 
       if (UseBounds() && IsLimitsAux(GetDigitalDevice(ibCan)))
       {

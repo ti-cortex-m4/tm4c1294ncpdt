@@ -10,7 +10,7 @@ CHECKUP.C
 
 void    ClearCheckup(void)
 {
-//  boCheckupRecalc = boFalse;
+//  boCheckupRecalc = FALSE;
 //
 //  cbCheckupDays = 0;
 //  memset(&mpCheckupDays, 0, sizeof(mpCheckupDays));
@@ -22,7 +22,7 @@ void    ClearCheckup(void)
 /*
 void    ResetCheckupCustom(void)
 {
-  boCheckupRecalc = boFalse;
+  boCheckupRecalc = FALSE;
 
   cbCheckupEventDay = 0;
   memset(&mpCheckupEventDay, 0, sizeof(mpCheckupEventDay));
@@ -52,7 +52,7 @@ uchar   i;
 
   ResetCheckupCustom();
 
-  boCheckupEnable = boFalse;
+  boCheckupEnable = FALSE;
 
   for (i=0; i<bCANALS; i++)
   {
@@ -60,7 +60,7 @@ uchar   i;
     mpbCheckupLimitM[i] = 0;
   }
 
-  for (i=0; i<48; i++) mpboCheckupHou[i] = boFalse;
+  for (i=0; i<48; i++) mpboCheckupHou[i] = FALSE;
   mpboCheckupHou[2] = TRUE;
   mpboCheckupHou[3] = TRUE;
   mpboCheckupHou[4] = TRUE;

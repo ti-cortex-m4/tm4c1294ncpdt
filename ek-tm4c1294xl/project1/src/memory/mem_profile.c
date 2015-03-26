@@ -25,3 +25,10 @@ uint                    mpcwProfile_OK[bCANALS],
 
 // признак коррекции времени при опросе цифровых счётчиков
 bool                    fCurrCtrl;
+
+
+
+// адреса заголовков и адреса блоков данных: текущие и последние прочитанные
+uint                    wBaseCurr,
+                        wOffsCurr,
+                        wBaseLast;

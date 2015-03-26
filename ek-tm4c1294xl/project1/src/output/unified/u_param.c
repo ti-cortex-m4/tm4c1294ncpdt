@@ -85,7 +85,7 @@ void    FixParamsUni(void)
 {
   if ((diT.ibLine == PAR_P) || (diT.ibLine == PAR_P1) || (diT.ibLine == PAR_P2) || (diT.ibLine == PAR_P3))
   {
-    if ((diT.bDevice == 3) && (boFixParamBugs == boFalse))
+    if ((diT.bDevice == 3) && (boFixParamBugs == FALSE))
     {
       reBuffA *= 1000;
     }
@@ -93,7 +93,7 @@ void    FixParamsUni(void)
 
   if ((diT.ibLine == PAR_Q) || (diT.ibLine == PAR_Q1) || (diT.ibLine == PAR_Q2) || (diT.ibLine == PAR_Q3))
   {
-    if ((diT.bDevice == 3) && (boFixParamBugs == boFalse))
+    if ((diT.bDevice == 3) && (boFixParamBugs == FALSE))
     {
       reBuffA *= 1000;
     }
@@ -101,10 +101,10 @@ void    FixParamsUni(void)
 
   if ((diT.ibLine == PAR_I) || (diT.ibLine == PAR_I1) || (diT.ibLine == PAR_I2) || (diT.ibLine == PAR_I3))
   {
-    if (((diT.bDevice == 2) || (diT.bDevice == 8) || (diT.bDevice == 12)) && (boFixParamBugs == boFalse)) 
+    if (((diT.bDevice == 2) || (diT.bDevice == 8) || (diT.bDevice == 12)) && (boFixParamBugs == FALSE)) 
     { 
     }
-    else if ((diT.bDevice == 3) && (boFixParamBugs == boFalse)) 
+    else if ((diT.bDevice == 3) && (boFixParamBugs == FALSE)) 
     { 
     }
     else

@@ -421,7 +421,7 @@ void    RunDevices(void)
         MakeExtended4T();
       }
 
-      if ((exExtended == EXT_PROFILE_30MIN) && (boQuickParam == boFalse))
+      if ((exExtended == EXT_PROFILE_30MIN) && (boQuickParam == FALSE))
         MakeExtended2();
 
       if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == TRUE))
