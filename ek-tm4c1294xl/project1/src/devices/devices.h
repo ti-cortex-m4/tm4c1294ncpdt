@@ -19,5 +19,6 @@ extern  bool                    fKeyOn;
 
 
 void    ShowProgressDigHou(void);
+bool    MakeStopHou(uint  wAdd);
 
 void    RunDevices(void);

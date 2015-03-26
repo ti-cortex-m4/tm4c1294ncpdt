@@ -43,3 +43,7 @@ uchar                   ibMinor, ibMinorMax;
 // глобальная переменная
 uint                    iwMajor;
 
+
+
+// разница времени сумматора и счётчика
+uchar                   bDeltaOld, bDeltaNew;

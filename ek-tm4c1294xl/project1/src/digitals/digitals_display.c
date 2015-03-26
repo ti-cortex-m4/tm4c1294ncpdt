@@ -7,8 +7,11 @@ DIGITALS_DISPLAY.C
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
 #include        "../display/display.h"
+#include        "../time/timedate.h"
+#include        "../time/delay.h"
 #include        "digitals.h"
 #include        "sensors.h"
+#include        "digitals_display.h"
 
 
 
@@ -67,4 +70,25 @@ void    ShowPortDelayLo(uchar  ibPrt)
     sprintf(szLo+8,"%5lu мс", GetMinorDelay(ibPrt));
   else
     sprintf(szLo+8,"%5lu с ", GetMinorDelay(ibPrt)/1000);
+}
+
+
+
+void    ShowDeltaPos(uchar  ibCan, ulong  dwSecond)
+{
+	dwSecond = GetSecondIndex() - dwSecond;
+
+  ShowCanalNumber(ibCan);
+  Clear();
+  sprintf(szLo+1,"сдвиг: +%lu с", dwSecond); (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
+}
+
+
+void    ShowDeltaNeg(uchar  ibCan, ulong  dwSecond)
+{
+	dwSecond = dwSecond - GetSecondIndex();
+
+  ShowCanalNumber(ibCan);
+  Clear();
+  sprintf(szLo+1,"сдвиг: -%lu с", dwSecond); (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
 }

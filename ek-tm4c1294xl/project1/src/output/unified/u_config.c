@@ -180,7 +180,7 @@ void    GetCorrectUni(void)
         (tiCurr.bYear  != tiAlt.bYear))
       Result2(bUNI_BADTIME);
     else
-    if (GetHouIndex() != (tiAlt.bHour*2 + tiAlt.bMinute/30))
+    if (GetCurrHouIndex() != (tiAlt.bHour*2 + tiAlt.bMinute/30))
       Result2(bUNI_BADTIME);
     else
     { 
