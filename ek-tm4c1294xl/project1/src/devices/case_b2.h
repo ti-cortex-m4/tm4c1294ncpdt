@@ -33,7 +33,7 @@
 
     case DEV_POSTOPENCANAL_B2:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
+      sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = bMINORREPEATS;
       QueryTimeB();
@@ -339,6 +339,7 @@
       break;
 
     case DEV_POSTHEADER_B2PLUS:
+      uchar i;
       for (i=0; i<bBLOCKS_B; i++)
         if (TestHeaderB(i) == 0) break;
 

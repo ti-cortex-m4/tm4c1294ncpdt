@@ -19,6 +19,13 @@ extern  bool                    fCurrCtrl;
 
 
 
-extern  uint                    wBaseCurr,
-                                wOffsCurr,
+extern  uint                    wBaseCurr, wOffsCurr,
                                 wBaseLast;
+
+extern  ulong                   dwBaseCurr;
+
+
+
+extern  uchar                   ibMinor, ibMinorMax;
+
+extern  uint                    iwMajor;

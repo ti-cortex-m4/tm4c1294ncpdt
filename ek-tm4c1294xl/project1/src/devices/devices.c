@@ -24,6 +24,7 @@ DEVICES.C
 #include        "../special/recalc_def.h"
 #include        "../special/defects.h"
 #include        "../sensors/device_b.h"
+#include        "../sensors/device_b2.h"
 #include        "../serial/ports.h"
 #include        "../serial/ports_modems.h"
 #include        "../serial/modems.h"
@@ -609,7 +610,7 @@ void    RunDevices(void)
 
     case DEV_POSTOPENCANAL_B2:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
+      sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = bMINORREPEATS;
       QueryTimeB();
@@ -915,6 +916,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_B2PLUS:
+      uchar i;
       for (i=0; i<bBLOCKS_B; i++)
         if (TestHeaderB(i) == 0) break;
 
