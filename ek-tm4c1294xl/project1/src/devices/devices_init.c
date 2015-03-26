@@ -41,6 +41,7 @@ DEVICES_INIT.C
 
 
 file const              flSeparateCan = {FLS_SEPARATE_CAN, &boSeparateCan, sizeof(boolean)};
+file const              flShowMessages = {FLS_SHOW_MESSAGES, &boShowMessages, sizeof(boolean)};
 file const              flHideMessages = {FLS_HIDE_MESSAGES, &boHideMessages, sizeof(boolean)};
 
 
@@ -48,6 +49,7 @@ file const              flHideMessages = {FLS_HIDE_MESSAGES, &boHideMessages, si
 void    InitDevices(void)
 {
   LoadFile(&flSeparateCan);
+  LoadFile(&flShowMessages);
   LoadFile(&flHideMessages);
 
 //uchar   i,j;
@@ -88,6 +90,9 @@ void    ResetDevices(void)
 {
   boSeparateCan = FALSE;
   SaveFile(&flSeparateCan);
+
+  boShowMessages = FALSE;
+  SaveFile(&flShowMessages);
 
   boHideMessages = FALSE;
   SaveFile(&flHideMessages);

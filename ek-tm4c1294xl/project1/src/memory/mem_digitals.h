@@ -47,6 +47,8 @@ extern  uchar                   bTimeoutCurrent, bTimeoutProfile;
 
 extern  boolean                 boSeparateCan;
 
+extern  boolean                 boShowMessages;
+
 extern  boolean                 boHideMessages;
 
 
