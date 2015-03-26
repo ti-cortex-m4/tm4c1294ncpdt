@@ -6,6 +6,7 @@ DEVICES.C
 
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_profile.h"
 #include        "../memory/mem_phones.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
@@ -37,6 +38,7 @@ DEVICES.C
 #include        "devices_postinput.h"
 #include        "devices_pause.h"
 #include        "devices_init.h"
+#include        "devices.h"
 
 
 
@@ -70,18 +72,14 @@ void    ShowProgressRepeat(void)
 }
 
 
-/*
 void    ShowProgressDigHou(void)
 {
-uint    i;
-
-  i = (ulong)100*((wHOURS+iwHardHou-iwDigHou)%wHOURS)/mpcwStopCan[ibDig];
+  uint i = (ulong)100*((wHOURS+iwHardHou-iwDigHou)%wHOURS)/mpcwStopCan[ibDig];
   if (i > 100) i = 100;
 
   ShowProgress(12,i);
-  InfoProgress(i);
 }
-*/
+
 
 
 void    ErrorLink(void)

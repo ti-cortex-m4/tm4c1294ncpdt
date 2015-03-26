@@ -18,4 +18,6 @@ extern  bool                    fKeyOn;
 
 
 
+void    ShowProgressDigHou(void);
+
 void    RunDevices(void);

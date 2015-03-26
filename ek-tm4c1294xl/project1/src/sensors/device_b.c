@@ -5,6 +5,7 @@ DEVICE_B.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_settings.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_current.h"
 #include        "../memory/mem_factors.h"
@@ -409,7 +410,7 @@ bool    TestHeaderB(uchar  ibBlock)
 // чтение заголовка часового блока
 bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 {
-  HideCurrentTime(1);                                        // запрещаем автоматическое отображение времени
+  HideCurrentTime(1);                                   // запрещаем автоматическое отображение времени
   
   tiDig.bHour   = FromBCD( InBuff((uint)2+ibBlock*18) );// время/дата часового блока
   tiDig.bMinute = FromBCD( InBuff((uint)3+ibBlock*18) );
@@ -484,16 +485,14 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   ShowProgressDigHou();      
   if (fDelay == 1) DelayOff();
   
-//  InitPop(8);
-  uchar ibCan;
-  for (ibCan=0; ibCan<4; ibCan++)        
+  uchar c;
+  for (c=0; c<4; c++)        
   {
-    uint w = InBuff( (uint)8+ibBlock*18+ibCan*2 );         //PopChar();
-    w     += InBuff( (uint)9+ibBlock*18+ibCan*2 )*0x100;   //PopChar()*0x100;
+    uint w = InBuff( (uint)8+ibBlock*18+c*2 );
+    w     += InBuff( (uint)9+ibBlock*18+c*2 )*0x100;
 
     if (w == 0xFFFF) w = 0;
-
-    mpwChannels[ibCan] = w;
+    mpwChannels[c] = w;
   }
 
   MakeRefillWinter();
