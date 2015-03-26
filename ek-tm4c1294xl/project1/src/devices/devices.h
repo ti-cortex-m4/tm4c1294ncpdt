@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DIGITALS_RUN.H
+DEVICES.H
 
 
 ------------------------------------------------------------------------------*/
@@ -15,13 +15,5 @@ extern  uchar                   cbWaitOnline;
 extern  bool                    fKeyOn;
 
 
-
-extern  file const              flSeparateCan;
-extern  file const              flHideMessages;
-
-
-
-void    InitDevices(void);
-void    ResetDevices(void);
 
 void    RunDevices(void);
