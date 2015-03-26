@@ -232,13 +232,11 @@ void    RunProfile(bool  _fCtrlHou)
 
 
 void    NextProfile(void)
-{/*
-//  cwDefects2 = cwDefHou;
-
+{
   if (boHideMessages == FALSE)
   {
-//    sprintf(szLo,"   %04u/%04u    ",cwDefects1,cwDefects2);
-    sprintf(szLo," принято: %04u  ",cwHouRead);
+    Clear();
+    sprintf(szLo+1,"принято: %04u",cwHouRead);
     DelayMsg();
   }
 
@@ -297,47 +295,23 @@ void    NextProfile(void)
 #endif
   }
 
-  if (StartProfile(ibDig+1) == 0)       // опрос завершён
+  if (StartProfile(ibDig+1) == 0) // опрос завершён
   {
     ShowHi(szWorkDone);
-    sprintf(szLo+4,"за %u:%02bu", (uint)(cwHouLength / 60), (uchar)(cwHouLength % 60)); if (boHideMessages == FALSE) DelayMsg();
+    sprintf(szLo+4,"за %u:%02u", (uint)(cwHouLength / 60), (uchar)(cwHouLength % 60)); if (boHideMessages == FALSE) DelayMsg();
 
     SetCurr(DEV_BEGIN);
 
-    OnHours();
+    CloseSpecial();
+
     AddDigRecord(EVE_PROFILECLOSE2);
 
-    if (boDTREnable == TRUE) DTROff_All();
+//    if (boDTREnable == TRUE) DTROff_All();
 
-    / *if (CheckAllGroupsNeg() == 1) {
-      if (boRecalcCurr != TRUE) {
-        ShowLo(szNoRecalc); DelayMsg();
-        AddDigRecord(EVE_RECALCFREE);
-      }
-      else {
-        if (boRecalcAlways == TRUE) {
-          AddDigRecord(EVE_RECALC20);
-          Recalc(1,1);
-          AddDigRecord(EVE_RECALC21);
-        }
-        else {
-          AddDigRecord(EVE_RECALC10);
-          Recalc(0,1);
-          AddDigRecord(EVE_RECALC11);
-        }
-      }
-    }
-    else* / if ((boRecalcCurr == TRUE) / *&& (boRecalcAlways == TRUE)* /) {
-      AddDigRecord(EVE_RECALC20);
-      Recalc(1,1);
-      AddDigRecord(EVE_RECALC21);
-    } else if (boRecalcMaxPowCurrDay == TRUE)
-      Recalc_MaxPowCurrDay();
+    // TODO: recalc
 
-    if ((boRecalcCurr == TRUE) && (boRecalcEnable == TRUE))
-      Recalc_Cust();
-
-    Work(); OK();
+    Work();
+    OK();
 
     boManualProfile = FALSE;
 
@@ -345,11 +319,10 @@ void    NextProfile(void)
 
     EnableAnswer();
 
-    if (mpboCheckupHou[GetHouIndex()] == TRUE) cbCheckupRun = 10;
+//    if (mpboCheckupHou[GetHouIndex()] == TRUE) cbCheckupRun = 10;
   }
 
   mpSerial[diCurr.ibPort] = SER_BEGIN;
-//  ResetAllSerial();*/
 }
 
 
