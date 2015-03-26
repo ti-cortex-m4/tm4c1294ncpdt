@@ -5,6 +5,7 @@ DEFECTS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_settings.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy_spec.h"
 #include        "../time/timedate.h"
@@ -76,4 +77,30 @@ time    ti;
       ti.bYear--;
     }
   }
+}
+
+
+
+void    InitDefects(void)
+{
+  if (enGlobal == GLB_PROGRAM)
+  {
+    memset(&mpdeDay, 0, sizeof(mpdeDay));
+    memset(&mpdeMon, 0, sizeof(mpdeMon));
+  }
+  else
+  {
+    MakeAllDefects();
+  }
+}
+
+
+void    ResetDefects(void)
+{
+}
+
+
+void    StartDefects(void)
+{
+  MakeAllDefects();
 }

@@ -17,6 +17,7 @@ KEY_START.C
 #include        "../realtime/realtime_start.h"
 #include        "../impulses/impulses.h"
 #include        "../digitals/digitals.h"
+#include        "../special/defects.h"
 #include        "../time/rtc.h"
 #include        "../factors.h"
 #include        "../flash/records.h"
@@ -141,6 +142,8 @@ void    key_Start(void)
 
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
+
+    StartDefects();
 
     // запоминаем время/дату первого запуска
     tiStart = *GetCurrTimeDate();
