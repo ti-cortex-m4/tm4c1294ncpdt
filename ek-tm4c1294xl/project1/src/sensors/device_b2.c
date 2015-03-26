@@ -5,6 +5,7 @@ DEVICE_B2.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_settings.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_current.h"
 #include        "../memory/mem_factors.h"
@@ -14,6 +15,7 @@ DEVICE_B2.C
 #include        "../display/display.h"
 #include        "../time/timedate.h"
 #include        "../time/calendar.h"
+#include        "../time/decret.h"
 #include        "../time/delay.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
@@ -79,7 +81,7 @@ void    QueryHeaderBNew(void)
 
 bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
 {
-  NoShowTime(1);                                        // запрещаем автоматическое отображение времени
+	HideCurrentTime(1);                                   // запрещаем автоматическое отображение времени
   
   InitPop((uint)(1+(16-ibBlock)*15));
 
@@ -151,13 +153,15 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
   if (fDelay == 1) DelayOff();
 
   PopChar();
-  for (ibCan=0; ibCan<4; ibCan++)        
-  {
-    wBuffD  = PopChar();
-    wBuffD += PopChar()*0x100;
 
-    if (wBuffD == 0xFFFF) wBuffD = 0;
-    mpwChannels[ibCan] = wBuffD;
+  uchar c;
+  for (c=0; c<4; c++)
+  {
+    uint w = PopChar();
+    w += PopChar()*0x100;
+
+    if (w == 0xFFFF) w = 0;
+    mpwChannels[c] = w;
   }
 
   MakePrevHou();  
