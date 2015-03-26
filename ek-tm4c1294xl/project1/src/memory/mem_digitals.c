@@ -67,6 +67,9 @@ uchar                   bTimeoutCurrent, bTimeoutProfile;
 // флаг раздельного опроса нескольких каналов одного цифрового счётчика
 boolean                 boSeparateCan;
 
+// флаг выдачи информации для пользователя/администратора
+boolean                 boShowMessages;
+
 // флаг сокращенного вывода сообщений
 boolean                 boHideMessages;
 
