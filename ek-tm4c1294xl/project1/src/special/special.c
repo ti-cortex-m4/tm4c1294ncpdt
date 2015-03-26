@@ -10,7 +10,7 @@ SPECIAL.C
 #include        "../display/display.h"
 #include        "../tariffs/tariffs.h"
 #include        "../impulses/energy_spec.h"
-#include        "../digitals/digitals_run.h"
+#include        "../devices/devices.h"
 #include        "../time/delay.h"
 #include        "../time/timedate.h"
 #include        "../time/decret.h"

@@ -13,7 +13,7 @@ DEVICE_B.C
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
 #include        "../serial/ports_common.h"
-#include        "../digitals/digitals_run.h"
+#include        "../devices/devices.h"
 #include        "../digitals/current_run.h"
 #include        "../energy.h"
 

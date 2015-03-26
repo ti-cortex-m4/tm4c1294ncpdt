@@ -6,7 +6,7 @@ KEY_SEPARATE_CAN.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_digitals.h"
-#include        "../../digitals/digitals_run.h"
+#include        "../../devices/devices.h"
 #include        "../key_flag.h"
 
 

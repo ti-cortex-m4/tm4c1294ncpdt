@@ -20,7 +20,7 @@ KEYBOARD.C
 #include        "../include/programs2.h"
 #include        "../impulses/impulses.h"
 #include        "../digitals/digitals_status.h"
-#include        "../digitals/digitals_run.h"
+#include        "../devices/devices.h"
 #include        "../digitals/wait_query.h"
 #include        "../special/special.h"
 #include        "../settings.h"

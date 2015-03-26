@@ -11,7 +11,7 @@ AUTOMATIC_B.C
 #include        "../time/delay.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
-#include        "../digitals/digitals_run.h"
+#include        "../devices/devices.h"
 #include        "../digitals/digitals_messages.h"
 #include        "device_b.h"
 
