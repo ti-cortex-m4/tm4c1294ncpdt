@@ -4,6 +4,8 @@ DEVICES.H
 
 ------------------------------------------------------------------------------*/
 
+extern  uchar                   cbRepeat, cbRepeat2;
+
 extern  uchar                   ibDig;
 
 extern  extended                exExtended;

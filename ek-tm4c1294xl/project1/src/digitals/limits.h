@@ -8,7 +8,7 @@ LIMITS.H
 //
 //bit     UseBounds(void);
 //void    NewBoundsRel(uint  i);
-//void    NewBoundsAbs(uint  i);
+void    NewBoundsAbs(uint  i);
 //void    NewBoundsAbs2(ulong  dw);
 
 void    NewLimits(void);

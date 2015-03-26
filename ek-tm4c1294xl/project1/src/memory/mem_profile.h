@@ -16,3 +16,9 @@ extern  uint                    mpcwProfile_OK[bCANALS],
                                 mpcwCalcDig[bCANALS];
 
 extern  bool                    fCurrCtrl;
+
+
+
+extern  uint                    wBaseCurr,
+                                wOffsCurr,
+                                wBaseLast;
