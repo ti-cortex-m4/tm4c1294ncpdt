@@ -153,7 +153,7 @@ uchar   i;
         fAlt |= GetDefCan(ibCan-1);
         InitPush2((uint)(6 + 4*48*(ibCan-bInBuff7) + i*4));
 
-        if ((bInBuffB == 0) && (i > GetHouIndex()))
+        if ((bInBuffB == 0) && (i > GetCurrHouIndex()))
         {
           PushChar(0xFF);
           PushChar(0xFF);
@@ -219,7 +219,7 @@ uchar   i;
         fAlt |= GetDefCan(ibGrp-1);
         InitPush2((uint)(6 + 4*48*(ibGrp-bInBuff7) + i*4));
 
-        if ((bInBuffB == 0) && (i > GetHouIndex()))
+        if ((bInBuffB == 0) && (i > GetCurrHouIndex()))
         {
           PushChar(0xFF);
           PushChar(0xFF);

@@ -30,7 +30,7 @@ void    DTROff_All(void)
 void    RunDTR(void)
 {
 //  if (boDTREnable != TRUE) return;
-//  if (mpboDTRResetHou[ GetHouIndex() ] != TRUE) return;
+//  if (mpboDTRResetHou[ GetCurrHouIndex() ] != TRUE) return;
 
   if (cbWaitQuery == 0) DTROff_All();
 }

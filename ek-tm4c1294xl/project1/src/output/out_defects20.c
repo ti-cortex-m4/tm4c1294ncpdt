@@ -40,7 +40,7 @@ uchar   i,j;
       {
         if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
         {
-          if ((bInBuff6 == 0) && (j > GetHouIndex()))
+          if ((bInBuff6 == 0) && (j > GetCurrHouIndex()))
             PushInt(0xFFFF);
           else
             PushInt( mpwImpHouCan[ PrevSoftHou() ][ i ] );
@@ -79,7 +79,7 @@ uchar   i,j;
       {
         if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
         {
-          if ((bInBuff6 == 0) && (j > GetHouIndex()))
+          if ((bInBuff6 == 0) && (j > GetCurrHouIndex()))
             PushRealDef();
           else {
             if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], i) == 0)

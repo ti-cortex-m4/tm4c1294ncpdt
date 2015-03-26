@@ -93,7 +93,7 @@ bool    StartProfile(uchar  ibCanal)
   }
 
 
-  // TODO boRecalcCurr = mpboRecalcHou[GetHouIndex()];
+  // TODO boRecalcCurr = mpboRecalcHou[GetCurrHouIndex()];
 
   AddDigRecord(EVE_PROFILE2);
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILE);
@@ -319,7 +319,7 @@ void    NextProfile(void)
 
     EnableAnswer();
 
-//    if (mpboCheckupHou[GetHouIndex()] == TRUE) cbCheckupRun = 10;
+//    if (mpboCheckupHou[GetCurrHouIndex()] == TRUE) cbCheckupRun = 10;
   }
 
   mpSerial[diCurr.ibPort] = SER_BEGIN;

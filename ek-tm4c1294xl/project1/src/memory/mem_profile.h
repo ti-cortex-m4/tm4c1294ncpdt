@@ -29,3 +29,7 @@ extern  ulong                   dwBaseCurr;
 extern  uchar                   ibMinor, ibMinorMax;
 
 extern  uint                    iwMajor;
+
+
+
+extern  uchar                   bDeltaOld, bDeltaNew;

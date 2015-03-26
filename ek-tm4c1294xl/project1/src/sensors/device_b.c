@@ -12,7 +12,9 @@ DEVICE_B.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy_spec.h"
 #include        "../memory/mem_profile.h"
+#include        "../memory/mem_limits.h"
 #include        "../display/display.h"
+#include        "../keyboard/key_timedate.h"
 #include        "../time/timedate.h"
 #include        "../time/calendar.h"
 #include        "../time/delay.h"
@@ -20,8 +22,10 @@ DEVICE_B.C
 #include        "../serial/ports_devices.h"
 #include        "../serial/ports_common.h"
 #include        "../devices/devices.h"
+#include        "../devices/devices_time.h"
 #include        "../digitals/current_run.h"
 #include        "../digitals/digitals_messages.h"
+#include        "../digitals/limits.h"
 #include        "../flash/records.h"
 #include        "../energy.h"
 
@@ -335,7 +339,7 @@ void    ReadTopBOld(void)
   // счётчик получасов в выключенном состоянии
   iwMajor = 0;
 
-  InitRefill();
+  // TODO InitRefill();
 
 #ifdef  DAYS100
   dwTmpPrev = 0;
@@ -475,11 +479,9 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 
   iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;                // время записи должно соответсвовать началу получасового блока
 
-  tiAlt = tiCurr;
-  dwBuffC = DateToHouIndex();
-
+  ulong dwBuffC = DateToHouIndex(tiCurr);
   dwBuffC -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
-  HouIndexToDate(dwBuffC);
+  tiAlt = HouIndexToDate(dwBuffC);
 
 
   ShowProgressDigHou();      
@@ -495,9 +497,9 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
     mpwChannels[c] = w;
   }
 
-  MakeRefillWinter();
+  // TODO MakeRefillWinter();
   MakePrevHou();  
-  if (boRefillDisable == FALSE) MakeRefill();
+  // TODO if (boRefillDisable == FALSE) MakeRefill();
   return(MakeStopHou(0));  
 }
 

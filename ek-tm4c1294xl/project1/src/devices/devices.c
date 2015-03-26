@@ -5,8 +5,11 @@ DEVICES.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_realtime.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_profile.h"
+#include        "../memory/mem_energy_spec.h"
+#include        "../memory/mem_limits.h"
 #include        "../memory/mem_phones.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
@@ -31,8 +34,12 @@ DEVICES.C
 #include        "../serial/modems.h"
 #include        "../serial/speeds_display.h"
 #include        "../digitals/answer.h"
+#include        "../digitals/limits.h"
+#include        "../digitals/digitals_display.h"
+#include        "../digitals/profile_run.h"
 #include        "../flash/files.h"
 #include        "../flash/records.h"
+#include        "../time/timedate.h"
 #include        "../time/delay.h"
 #include        "devices_input.h"
 #include        "devices_postinput.h"
@@ -80,6 +87,20 @@ void    ShowProgressDigHou(void)
   ShowProgress(12,i);
 }
 
+
+bool    MakeStopHou(uint  wAdd)
+{
+  if (((wHOURS+iwHardHou-iwDigHou) % wHOURS) < (mpcwStopCan[ibDig]+wAdd))
+  {
+    NewBoundsRel((wHOURS+iwHardHou-iwDigHou) % wHOURS);
+    return(1);
+  }
+  else
+  {
+    NewLimits(); // переход границы со стороны сумматора
+    return(0);
+  }
+}
 
 
 void    ErrorLink(void)
@@ -671,7 +692,7 @@ void    RunDevices(void)
               cbCorrects++;
               MakePause(DEV_POSTOPENCANAL_B2);
             }
-            else if (GetHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))
+            else if (GetCurrHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))
             { ShowLo(szCorrectNext); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
             else
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
