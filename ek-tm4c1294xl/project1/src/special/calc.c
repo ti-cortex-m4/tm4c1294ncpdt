@@ -13,7 +13,7 @@ CALC.C
 #include        "../impulses/max_power.h"
 #include        "../impulses/energy_spec.h"
 #include        "../digitals/digitals.h"
-#include        "../digitals/digitals_run.h"
+#include        "../devices/devices.h"
 #include        "../special/recalc_def.h"
 #include        "../time/timedate.h"
 #include        "../energy.h"

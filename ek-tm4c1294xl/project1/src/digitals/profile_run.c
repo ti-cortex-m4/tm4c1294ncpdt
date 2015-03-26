@@ -19,7 +19,7 @@ PROFILE_RUN.C
 #include        "../digitals/digitals.h"
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_pause.h"
-#include        "../digitals/digitals_run.h"
+#include        "../devices/devices.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/digitals_display.h"
 #include        "../digitals/answer.h"

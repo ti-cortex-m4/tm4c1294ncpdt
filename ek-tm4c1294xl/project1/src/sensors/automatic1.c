@@ -12,7 +12,7 @@ AUTOMATIC1.C
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
 #include        "../serial/ports_common.h"
-#include        "../digitals/digitals_run.h"
+#include        "../devices/devices.h"
 #include        "../engine.h"
 #include        "../energy.h"
 #include        "automatic_b.h"
