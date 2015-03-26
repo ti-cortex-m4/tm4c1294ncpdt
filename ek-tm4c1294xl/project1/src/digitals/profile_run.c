@@ -27,6 +27,8 @@ PROFILE_RUN.C
 #include        "../special/special.h"
 #include        "../time/decret.h"
 #include        "../flash/records.h"
+#include        "limits.h"
+#include        "profile_run.h"
 
 
 
@@ -390,18 +392,18 @@ uchar   ibCan;
   MakePause(DEV_MODEM_STOP);
 }
 
-/*
+
 // нормальный переход на следующий канал
 void    DoneProfile(void)
 {
-  NewLimits();                                      // переход границы со стороны счётчика
+  NewLimits(); // переход границы со стороны счётчика
 
   fKeyOn = 0;
   MakePause(DEV_MODEM_STOP);
 
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEDONE1);
 }
-*/
+
 
 // нормальный переход на следующий канал
 void    DoneProfile_Stop(void)
