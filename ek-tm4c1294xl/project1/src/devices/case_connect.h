@@ -255,7 +255,7 @@
       if ((exExtended == EXT_PROFILE_30MIN) && (boQuickParam == boFalse))
         MakeExtended2();
 
-      if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == boTrue))
+      if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == TRUE))
         MakeExtended2();
 */
       HideCurrentTime(1);

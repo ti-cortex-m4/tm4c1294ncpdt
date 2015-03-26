@@ -345,10 +345,10 @@ uchar   i,j;
 
       PushChar(0);
       ibGrp = 0;
-      if (boLoadMnt == boTrue) ibGrp |= 0x01;
+      if (boLoadMnt == TRUE) ibGrp |= 0x01;
       ibGrp |= 0x02;
-      if (boLoadHou == boTrue) ibGrp |= 0x04;
-      if (boEnableParam == boTrue) ibGrp |= 0x08;
+      if (boLoadHou == TRUE) ibGrp |= 0x04;
+      if (boEnableParam == TRUE) ibGrp |= 0x08;
       PushChar(ibGrp);
 
       j = mpdiDevicesUni[ibCan-1].bDevice - 1;
@@ -403,7 +403,7 @@ void    GetCanalsUni(void)
       PushChar(GetDigitalLine(ibCan-1));
 
       ibGrp = 0;
-      if (mpboEnblCan[ibCan-1] != boTrue) ibGrp |= 0x01;     
+      if (mpboEnblCan[ibCan-1] != TRUE) ibGrp |= 0x01;     
       PushChar(ibGrp);
 
       Push(mpszCanalsName[ibCan-1], 32);

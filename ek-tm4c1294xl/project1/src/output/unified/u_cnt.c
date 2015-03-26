@@ -64,7 +64,7 @@ uchar   i;
       PushCntCanMonAllUni(ibCan-1, i);
     }
 
-    Output2_Code((uint)4*bInBuff9, ((boExt4Flag == boTrue) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
+    Output2_Code((uint)4*bInBuff9, ((boExt4Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
   }
 }
 
@@ -118,7 +118,7 @@ uchar   i;
       }
     }
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((boExt4TFlag == boTrue) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((boExt4TFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
   }
 }
 
@@ -156,7 +156,7 @@ void    GetCntCanAllUni(void)
 
     tiAlt = *PGetCurrTimeDate();
 
-    Output2_Code((uint)(4+6)*bInBuff9, ((boDisableEsc3 != boTrue) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
+    Output2_Code((uint)(4+6)*bInBuff9, ((boDisableEsc3 != TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
   }
 }
 
@@ -193,7 +193,7 @@ uchar   i;
 
     tiAlt = *PGetCurrTimeDate();
 
-    Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((boExt5Flag == boTrue) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
+    Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((boExt5Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
   }
 }
 

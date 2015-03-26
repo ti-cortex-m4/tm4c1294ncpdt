@@ -159,7 +159,7 @@ void    key_Start(void)
 
     AddSysRecord(EVE_START);
 
-//    if (boDTREnable == boTrue) DTROff_All();
+//    if (boDTREnable == TRUE) DTROff_All();
   }
   else Beep();
 }
@@ -202,7 +202,7 @@ void    key_Restart(void)
 
     AddSysRecord(EVE_RESTART);
 
-//    if (boDTREnable == boTrue) DTROff_All();
+//    if (boDTREnable == TRUE) DTROff_All();
   }
   else Beep();
 }
@@ -240,7 +240,7 @@ void    key_Debug(void)
 
     OK();
 
-//    if (boDTREnable == boTrue) DTROff_All();
+//    if (boDTREnable == TRUE) DTROff_All();
   }
   else Beep();
 }

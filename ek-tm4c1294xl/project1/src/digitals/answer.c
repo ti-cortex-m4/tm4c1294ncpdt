@@ -10,7 +10,7 @@ ANSWER.C
 
 void    EnableAnswer(void) 
 {
-//  boAnswerFlag = boTrue;
+//  boAnswerFlag = TRUE;
 //  cdwAnswerEnable++; tiAnswerEnable = tiCurr;
 }
 
@@ -24,6 +24,6 @@ void    DisableAnswer(void)
 
 bool   AnswerDisabled(void)
 {
-  return 0; // boAnswerFlag != boTrue;
+  return 0; // boAnswerFlag != TRUE;
 }
 

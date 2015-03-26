@@ -167,7 +167,7 @@ uint    j;
 void    GetTimeAltParamUni(int  i)
 {
   tiAlt = *PGetCurrTimeDate();
-  if (boQuickParam == boTrue)
+  if (boQuickParam == TRUE)
   {
     dwBuffC = DateToMntIndex();
     dwBuffC -= i;
@@ -208,7 +208,7 @@ void    GetParamUni1(void)
 
     GetTimeAltParamUni(iwTim);
 
-    Output2_Code(wBuffD, ((boEnableParam == boTrue) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
+    Output2_Code(wBuffD, ((boEnableParam == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
   }
 }
 
@@ -255,7 +255,7 @@ uint    i,j;
       ResetWDT();
     }
 
-    Output2_Code(wBuffD, ((boEnableParam == boTrue) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
+    Output2_Code(wBuffD, ((boEnableParam == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
   }
 }
 

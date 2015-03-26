@@ -424,7 +424,7 @@ void    RunDevices(void)
       if ((exExtended == EXT_PROFILE_30MIN) && (boQuickParam == boFalse))
         MakeExtended2();
 
-      if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == boTrue))
+      if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == TRUE))
         MakeExtended2();
 */
       HideCurrentTime(1);
@@ -574,7 +574,7 @@ void    RunDevices(void)
           NextCheckup();
       }
       break;
-/*
+
 #ifndef SKIP_B
 
     case DEV_START_B2:
@@ -660,7 +660,7 @@ void    RunDevices(void)
           if (cbCorrects == 0)
           {
             bDeltaOld = (uchar)dwBuffC;
-            (boShowMessages == boTrue) ? DelayMsg() : DelayInf();
+            (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
             ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_B2);
           }
           else
@@ -711,7 +711,7 @@ void    RunDevices(void)
         }
       }
       break;
-/ *
+/*
     case DEV_MANAGE_B2:
       if (++cbCorrects > bMINORREPEATS)
         MakePause(DEV_POSTCORRECT_B2);
@@ -739,7 +739,7 @@ void    RunDevices(void)
         }
       }
       break;
-* /
+*/
 
     case DEV_POSTCORRECT_B2:
       Clear();
@@ -829,7 +829,7 @@ void    RunDevices(void)
       {
         ShowLo(szFailure1);
         MakePause(DEV_ERROR_B2);
-/ *
+/*
         if (cbRepeat == 0) ErrorProfile();
         else
         {
@@ -838,7 +838,7 @@ void    RunDevices(void)
 
           QueryHeaderB();
           SetCurr(DEV_HEADER_B2);
-        }* /
+        }*/
       }
       break;
 
@@ -986,7 +986,6 @@ void    RunDevices(void)
       break;
 
 #endif
-*/
 
 #ifndef SKIP_B
 
