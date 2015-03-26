@@ -29,6 +29,17 @@ bool                    fCurrCtrl;
 
 
 // адреса заголовков и адреса блоков данных: текущие и последние прочитанные
-uint                    wBaseCurr,
-                        wOffsCurr,
+uint                    wBaseCurr, wOffsCurr,
                         wBaseLast;
+
+// указатель
+ulong                   dwBaseCurr;
+
+
+
+// глобальная переменная
+uchar                   ibMinor, ibMinorMax;
+
+// глобальная переменная
+uint                    iwMajor;
+

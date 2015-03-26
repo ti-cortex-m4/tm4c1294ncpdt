@@ -24,6 +24,7 @@ DEVICES.C
 #include        "../special/recalc_def.h"
 #include        "../special/defects.h"
 #include        "../sensors/device_b.h"
+#include        "../sensors/device_b2.h"
 #include        "../serial/ports.h"
 #include        "../serial/ports_modems.h"
 #include        "../serial/modems.h"

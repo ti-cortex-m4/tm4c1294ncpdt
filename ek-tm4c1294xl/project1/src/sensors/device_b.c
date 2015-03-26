@@ -8,16 +8,19 @@ DEVICE_B.C
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_current.h"
 #include        "../memory/mem_factors.h"
+#include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy_spec.h"
 #include        "../memory/mem_profile.h"
 #include        "../display/display.h"
 #include        "../time/timedate.h"
+#include        "../time/calendar.h"
 #include        "../time/delay.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
 #include        "../serial/ports_common.h"
 #include        "../devices/devices.h"
 #include        "../digitals/current_run.h"
+#include        "../digitals/digitals_messages.h"
 #include        "../flash/records.h"
 #include        "../energy.h"
 
@@ -110,7 +113,7 @@ void    ReadVersionB(void)
   bVersionB3 = FromBCD( PopChar() );
   
   Clear();
-  sprintf(szLo+1, "версия %bu.%bu.%bu", bVersionB1, bVersionB2, bVersionB3);
+  sprintf(szLo+1, "версия %u.%u.%u", bVersionB1, bVersionB2, bVersionB3);
   (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
 }
 
@@ -481,15 +484,16 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   ShowProgressDigHou();      
   if (fDelay == 1) DelayOff();
   
-//  InitPop(8);                              
+//  InitPop(8);
+  uchar ibCan;
   for (ibCan=0; ibCan<4; ibCan++)        
   {
-    wBuffD  = InBuff( (uint)8+ibBlock*18+ibCan*2 );         //PopChar();
-    wBuffD += InBuff( (uint)9+ibBlock*18+ibCan*2 )*0x100;   //PopChar()*0x100;
+    uint w = InBuff( (uint)8+ibBlock*18+ibCan*2 );         //PopChar();
+    w     += InBuff( (uint)9+ibBlock*18+ibCan*2 )*0x100;   //PopChar()*0x100;
 
-    if (wBuffD == 0xFFFF) wBuffD = 0;
+    if (w == 0xFFFF) w = 0;
 
-    mpwChannels[ibCan] = wBuffD;
+    mpwChannels[ibCan] = w;
   }
 
   MakeRefillWinter();
