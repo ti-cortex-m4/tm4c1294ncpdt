@@ -35,6 +35,8 @@ DEVICES_INIT.C
 #include        "devices_input.h"
 #include        "devices_postinput.h"
 #include        "devices_pause.h"
+#include        "devices.h"
+#include        "devices_init.h"
 
 
 

@@ -6,7 +6,7 @@ KEY_HIDE_MESSAGES.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_digitals.h"
-#include        "../../devices/devices.h"
+#include        "../../devices/devices_init.h"
 #include        "../key_flag.h"
 
 
