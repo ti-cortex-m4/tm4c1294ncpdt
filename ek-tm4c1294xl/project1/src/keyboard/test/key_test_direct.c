@@ -13,7 +13,7 @@ KEY_TEST_DIRECT.C
 #include        "../../digitals/digitals_messages.h"
 #include        "../../serial/ports.h"
 #include        "../../serial/modems.h"
-#include        "../../devices/automatic2.h"
+#include        "../../sensors/automatic2.h"
 
 
 

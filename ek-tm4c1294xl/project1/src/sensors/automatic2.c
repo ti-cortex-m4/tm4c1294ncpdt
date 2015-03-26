@@ -14,12 +14,12 @@ AUTOMATIC2.C
 #include        "../realtime/realtime.h"
 #include        "../time/timedate.h"
 #include        "../serial/ports.h"
-#include        "../devices/device_b.h"
 #include        "../digitals/digitals.h"
 #include        "../engine.h"
 #include        "../energy.h"
 #include        "../energy2.h"
 #include        "automatic1.h"
+#include        "device_b.h"
 #include        "automatic_b.h"
 
 

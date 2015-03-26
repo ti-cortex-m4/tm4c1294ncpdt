@@ -12,7 +12,7 @@ KEY_SEARCH.C
 #include        "../../digitals/devices.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_display.h"
-#include        "../../devices/device_b.h"
+#include        "../../sensors/device_b.h"
 #include        "../../serial/ports.h"
 #include        "../../serial/ports_stack.h"
 #include        "../../serial/ports_devices.h"

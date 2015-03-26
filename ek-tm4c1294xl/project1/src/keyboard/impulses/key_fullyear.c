@@ -11,7 +11,7 @@ KEY_FULLYEAR.C
 #include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../realtime/realtime.h"
-#include        "../../devices/automatic2.h"
+#include        "../../sensors/automatic2.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_messages.h"
 #include        "../../serial/ports.h"
