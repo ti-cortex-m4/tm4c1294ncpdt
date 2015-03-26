@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 DEVICES.C
-              
+
 
 ------------------------------------------------------------------------------*/
 
@@ -130,7 +130,7 @@ void    RunDevices(void)
       break;
 
 #ifndef SKIP_E
-    case DEV_ENERGY_E2:      
+    case DEV_ENERGY_E2:
       cbWaitQuery = bMAXWAITQUERY;
       sprintf(szLo+13,"%3bu",cbWaitAnswer); HideCurrentTime(1);
       if (IndexInBuff() > 0) sprintf(szLo," прием: %-4u ",IndexInBuff());
@@ -149,7 +149,7 @@ void    RunDevices(void)
     DevicesPostInput();
   }
 
-  else if ((mpSerial[ibPort] == SER_OVERFLOW) || 
+  else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
            (mpSerial[ibPort] == SER_BADLINK)  ||
            (mpSerial[ibPort] == SER_POSTANSWER_MODEM)  ||
            (mpSerial[ibPort] == SER_PAUSE))
@@ -163,14 +163,13 @@ void    RunDevices(void)
   switch (GetCurr())
   {
     case DEV_PAUSE:
-      if (mpSerial[ibPort] == SER_POSTANSWER_MODEM) 
+      if (mpSerial[ibPort] == SER_POSTANSWER_MODEM)
         SetCurr(GetPause());
       break;
 
 
-
     case DEV_MODEM_START:
-      if ((exExtended == EXT_CURRENT_3MIN) && (diCurr.ibPhone != 0)) 
+      if ((exExtended == EXT_CURRENT_3MIN) && (diCurr.ibPhone != 0))
       {
         ShowLo(szPowerNo); DelayInf();
         cbWaitQuery = 3;
@@ -179,14 +178,14 @@ void    RunDevices(void)
       else
       {
         fConnect = 0;
-        if (StreamPortCan(diCurr.ibPort,ibDig) == 0) 
+        if (StreamPortCan(diCurr.ibPort,ibDig) == 0)
         {
           fKeyOn = 0;
           MakePause(DEV_MODEM_STOP);
 
-          AddModRecord(EVE_MODEM_ERROR); 
+          AddModRecord(EVE_MODEM_ERROR);
         }
-        else if (diCurr.ibPhone != 0) 
+        else if (diCurr.ibPhone != 0)
           MakePause(DEV_MODEM_POSTSTART);
         else
           MakePause(DEV_MODEM_POSTCONNECT);
@@ -197,10 +196,10 @@ void    RunDevices(void)
       cbRepeat = bMINORREPEATS;
 
       QueryModemBaud(1);
-      MakeLongPause(DEV_MODEM_BAUD,1);        
+      MakeLongPause(DEV_MODEM_BAUD,1);
 
       AddDigRecord(EVE_MODEMCONNECT1);
-      AddModRecord(EVE_MODEMBAUD); 
+      AddModRecord(EVE_MODEMBAUD);
       break;
 
     case DEV_MODEM_BAUD:
@@ -210,21 +209,21 @@ void    RunDevices(void)
         mpcwBaud[diCurr.ibPort]++;
         MakePause(DEV_MODEM_POSTBAUD);
 
-        AddModRecord(EVE_MODEMBAUD_OK); 
+        AddModRecord(EVE_MODEMBAUD_OK);
       }
       else
       {
-        if (cbRepeat == 0) MakePause(DEV_MODEM_POSTBAUD); 
+        if (cbRepeat == 0) MakePause(DEV_MODEM_POSTBAUD);
         else
         {
           cbRepeat--;
           ShowProgressRepeat();
-  
+
           QueryModemBaud(1);
-          MakeLongPause(DEV_MODEM_BAUD,1);        
+          MakeLongPause(DEV_MODEM_BAUD,1);
 
           AddModRecord(EVE_MODEMBAUD_NEXT);
-        } 
+        }
       }
       break;
 
@@ -248,23 +247,23 @@ void    RunDevices(void)
       }
       else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           cbRepeat--;
           ShowProgressRepeat();
-          
+
           if (cbRepeat == bMINORREPEATS-1)
           {
             QueryModemCommon(1);
-            MakeLongPause(DEV_MODEM_COMMON,1);        
+            MakeLongPause(DEV_MODEM_COMMON,1);
 
             AddModRecord(EVE_MODEMCOMMON1_NEXT);
           }
           else
           {
             QueryModemEscape();
-            MakeLongPause(DEV_MODEM_ONLINE,1);        
+            MakeLongPause(DEV_MODEM_ONLINE,1);
 
             AddModRecord(EVE_MODEMESCAPE1_NEXT);
           }
@@ -279,7 +278,7 @@ void    RunDevices(void)
         mpcwEscape[diCurr.ibPort]++;
 
         QueryModemHookOff();
-        MakeLongPause(DEV_MODEM_POSTONLINE,1);        
+        MakeLongPause(DEV_MODEM_POSTONLINE,1);
 
         AddModRecord(EVE_MODEMHOOKOFF1);
       }
@@ -292,7 +291,7 @@ void    RunDevices(void)
           ShowProgressRepeat();
 
           QueryModemHookOff();
-          MakeLongPause(DEV_MODEM_POSTONLINE,1);        
+          MakeLongPause(DEV_MODEM_POSTONLINE,1);
 
           AddModRecord(EVE_MODEMHOOKOFF1_NEXT);
         }
@@ -306,7 +305,7 @@ void    RunDevices(void)
         mpcwHookOff[diCurr.ibPort]++;
 
         QueryModemCommon(1);
-        MakeLongPause(DEV_MODEM_COMMON,1);        
+        MakeLongPause(DEV_MODEM_COMMON,1);
 
         AddModRecord(EVE_MODEMCOMMON2);
       }
@@ -319,7 +318,7 @@ void    RunDevices(void)
           ShowProgressRepeat();
 
           QueryModemCommon(1);
-          MakeLongPause(DEV_MODEM_COMMON,1);        
+          MakeLongPause(DEV_MODEM_COMMON,1);
 
           AddModRecord(EVE_MODEMCOMMON2_NEXT);
         }
@@ -358,7 +357,7 @@ void    RunDevices(void)
         {
           cbRepeat--;
           ShowProgressRepeat();
-          
+
           QueryModemCustom();
           MakeLongPause(DEV_MODEM_CUSTOM,1);
 
@@ -380,7 +379,7 @@ void    RunDevices(void)
       break;
 
     case DEV_MODEM_CONNECT:
-      if ((mpSerial[ibPort] == SER_POSTANSWER_MODEM) && (ShowModemConnect() == 1)) 
+      if ((mpSerial[ibPort] == SER_POSTANSWER_MODEM) && (ShowModemConnect() == 1))
       {
         ShowCanalNumber(ibDig);
 
@@ -399,7 +398,7 @@ void    RunDevices(void)
         {
           cbRepeat--;
           ShowProgressRepeat();
-          
+
           InitWaitAnswer();
 
           fConnect = 1;
@@ -422,10 +421,10 @@ void    RunDevices(void)
         MakeExtended4T();
       }
 
-      if ((exExtended == EXT_PROFILE_30MIN) && (boQuickParam == boFalse)) 
+      if ((exExtended == EXT_PROFILE_30MIN) && (boQuickParam == boFalse))
         MakeExtended2();
 
-      if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == boTrue)) 
+      if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == boTrue))
         MakeExtended2();
 */
       HideCurrentTime(1);
@@ -442,7 +441,7 @@ void    RunDevices(void)
 
       if ((diCurr.ibPhone != 0) && (fConnect == 1))
         MakePause(DEV_MODEM_POSTSTOP);
-      else 
+      else
         MakePause(DEV_MODEM_POSTBREAK);
       break;
 
@@ -450,7 +449,7 @@ void    RunDevices(void)
       cbRepeat = bMINORREPEATS;
 
       QueryModemEscape();
-      MakeLongPause(DEV_MODEM_ESCAPE,3);        
+      MakeLongPause(DEV_MODEM_ESCAPE,3);
 
       AddDigRecord(EVE_MODEMBREAK1);
       AddModRecord(EVE_MODEMESCAPE2);
@@ -473,9 +472,9 @@ void    RunDevices(void)
         {
           cbRepeat--;
           ShowProgressRepeat();
-          
+
           QueryModemHookOff();
-          MakeLongPause(DEV_MODEM_PREVHOOKOFF,1);        
+          MakeLongPause(DEV_MODEM_PREVHOOKOFF,1);
 
           AddModRecord(EVE_MODEMHOOKOFF2_NEXT);
         }
@@ -499,7 +498,7 @@ void    RunDevices(void)
         {
           cbRepeat--;
           ShowProgressRepeat();
-          
+
           QueryModemEscape();
           MakeLongPause(DEV_MODEM_ESCAPE,3);
 
@@ -512,7 +511,7 @@ void    RunDevices(void)
       cbRepeat = bMINORREPEATS;
 
       QueryModemHookOff();
-      MakeLongPause(DEV_MODEM_HOOKOFF,1);        
+      MakeLongPause(DEV_MODEM_HOOKOFF,1);
 
       AddModRecord(EVE_MODEMHOOKOFF3);
       break;
@@ -535,7 +534,7 @@ void    RunDevices(void)
         {
           cbRepeat--;
           ShowProgressRepeat();
-          
+
           QueryModemHookOff();
           MakeLongPause(DEV_MODEM_HOOKOFF,1);
 
@@ -565,9 +564,9 @@ void    RunDevices(void)
         SetCurr(DEV_BEGIN);
         SetPause(DEV_BEGIN);
 
-        Work(); OK();  
+        Work(); OK();
       }
-      else 
+      else
       {
         if (exExtended == EXT_PROFILE_30MIN)
           NextProfile();
@@ -578,7 +577,7 @@ void    RunDevices(void)
 /*
 #ifndef SKIP_B
 
-    case DEV_START_B2:                     
+    case DEV_START_B2:
       cbCorrects = 0;
 
       cbRepeat = bMINORREPEATS;
@@ -586,56 +585,56 @@ void    RunDevices(void)
       SetCurr(DEV_OPENCANAL_B2);
       break;
 
-    case DEV_OPENCANAL_B2:                     
+    case DEV_OPENCANAL_B2:
       if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultB() == 1))
       {
         if (fCurrCtrlHou == 1)
           MakePause(DEV_POSTOPENCANAL_B2);
         else
-          MakePause(DEV_POSTCORRECT_B2);  
+          MakePause(DEV_POSTCORRECT_B2);
       }
-      else                                      
+      else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryOpenB();
           SetCurr(DEV_OPENCANAL_B2);
         }
-      }  
+      }
       break;
 
-    case DEV_POSTOPENCANAL_B2:                  
+    case DEV_POSTOPENCANAL_B2:
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
 
       cbRepeat = bMINORREPEATS;
-      QueryTimeB();                          
-      SetCurr(DEV_TIME_B2);          
+      QueryTimeB();
+      SetCurr(DEV_TIME_B2);
       break;
 
-    case DEV_TIME_B2:                      
+    case DEV_TIME_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltB();                  
-        ReadTimeDigB();                  
+        ReadTimeAltB();
+        ReadTimeDigB();
         MakePause(DEV_POSTTIME_B2);
       }
-      else                                    
+      else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryTimeB();
           SetCurr(DEV_TIME_B2);
         }
-      } 
+      }
       break;
 
 
@@ -645,9 +644,9 @@ void    RunDevices(void)
 
       tiAlt = tiCurr;                       // текущие время/дата сумматора
 
-      if (wBuffD != GetDayIndex())          
+      if (wBuffD != GetDayIndex())
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
-      else 
+      else
       {
         if (dwBuffC > GetSecondIndex())                                         // необходима коррекция времени ведомого счётчика назад
           ShowDeltaNeg();
@@ -655,14 +654,14 @@ void    RunDevices(void)
           ShowDeltaPos();
 
         if (dwBuffC < MinorCorrect())                                           // без коррекции
-        { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }     
+        { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
         else if (dwBuffC < bMAJORCORRECT_B)                                     // простая коррекция
         {
           if (cbCorrects == 0)
-          { 
+          {
             bDeltaOld = (uchar)dwBuffC;
             (boShowMessages == boTrue) ? DelayMsg() : DelayInf();
-            ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_B2); 
+            ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_B2);
           }
           else
           {
@@ -674,24 +673,24 @@ void    RunDevices(void)
               MakePause(DEV_POSTOPENCANAL_B2);
             }
             else if (GetHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))
-            { ShowLo(szCorrectNext); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }     
+            { ShowLo(szCorrectNext); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
             else
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
           }
-        } 
-        else                                                                    
+        }
+        else
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
       }
       break;
 
 
-    case DEV_CONTROL_B2: 
-      if (++cbCorrects > bMINORREPEATS)          
+    case DEV_CONTROL_B2:
+      if (++cbCorrects > bMINORREPEATS)
         MakePause(DEV_POSTCORRECT_B2);
       else
       {
-        cbRepeat = bMINORREPEATS;                         
-        QueryControlB();                          
+        cbRepeat = bMINORREPEATS;
+        QueryControlB();
         SetCurr(DEV_POSTCONTROL_B2);
       }
       break;
@@ -699,27 +698,27 @@ void    RunDevices(void)
     case DEV_POSTCONTROL_B2:
       if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultB() == 1))
         MakePause(DEV_POSTOPENCANAL_B2);
-      else                                    
+      else
       {
         if (cbRepeat == 0) MakePause(DEV_POSTOPENCANAL_B2);   // да !
         else
         {
           DelayOff(); // ErrorLink();
           cbRepeat--;
-          
+
           QueryControlB();
           SetCurr(DEV_POSTCONTROL_B2);
         }
-      } 
+      }
       break;
 / *
-    case DEV_MANAGE_B2:                  
-      if (++cbCorrects > bMINORREPEATS)          
+    case DEV_MANAGE_B2:
+      if (++cbCorrects > bMINORREPEATS)
         MakePause(DEV_POSTCORRECT_B2);
       else
       {
         cbRepeat = bMINORREPEATS;
-        QueryManageB();                          
+        QueryManageB();
         SetCurr(DEV_POSTMANAGE_B2);
       }
       break;
@@ -727,22 +726,22 @@ void    RunDevices(void)
     case DEV_POSTMANAGE_B2:
       if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultB() == 1))
         MakePause(DEV_POSTOPENCANAL_B2);
-      else                                    
+      else
       {
         if (cbRepeat == 0) MakePause(DEV_POSTOPENCANAL_B2);   // да !
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryManageB();
           SetCurr(DEV_POSTMANAGE_B2);
         }
-      } 
+      }
       break;
 * /
 
-    case DEV_POSTCORRECT_B2:                  
+    case DEV_POSTCORRECT_B2:
       Clear();
 
       cbRepeat = bMINORREPEATS;
@@ -758,47 +757,47 @@ void    RunDevices(void)
       }
       else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryVersionB();
           SetCurr(DEV_VERSION_B2);
         }
-      } 
+      }
       break;
 
     case DEV_POSTVERSION_B2:
       Clear();
 
       cbRepeat = bMINORREPEATS;
-      QueryTopB();                          
+      QueryTopB();
       SetCurr(DEV_TOP_B2);
       break;
 
-    case DEV_TOP_B2:                      
+    case DEV_TOP_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         if (TestVersionB710()) ReadTopBNew(); else ReadTopBOld();
         MakePause(DEV_POSTTOP_B2);
       }
-      else                                    
+      else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryTopB();
           SetCurr(DEV_TOP_B2);
         }
-      } 
+      }
       break;
 
-    case DEV_POSTTOP_B2:              
+    case DEV_POSTTOP_B2:
       cbRepeat2 = 0;
       if (diCurr.bDevice == 2)
       {
@@ -816,22 +815,22 @@ void    RunDevices(void)
         }
       }
       else
-      { 
+      {
         cbRepeat = bMINORREPEATS;
-        QueryHeaderB_Plus(bBLOCKS_B);                         
+        QueryHeaderB_Plus(bBLOCKS_B);
         SetCurr(DEV_HEADER_B2PLUS);
       }
       break;
 
-    case DEV_HEADER_B2:                    
+    case DEV_HEADER_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_B2);
-      else                                  
+      else
       {
         ShowLo(szFailure1);
         MakePause(DEV_ERROR_B2);
 / *
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -840,14 +839,14 @@ void    RunDevices(void)
           QueryHeaderB();
           SetCurr(DEV_HEADER_B2);
         }* /
-      } 
+      }
       break;
 
-    case DEV_ERROR_B2: 
+    case DEV_ERROR_B2:
       mpcwOutput1[ibDig]++; //Beep();
 
       if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
-      else 
+      else
       {
         cbRepeat = bMINORREPEATS;
         QueryIdB();
@@ -855,7 +854,7 @@ void    RunDevices(void)
       }
       break;
 
-    case DEV_POSTERROR_B2: 
+    case DEV_POSTERROR_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         if (ReadIdB() == 1)
@@ -871,7 +870,7 @@ void    RunDevices(void)
       }
       else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -880,16 +879,16 @@ void    RunDevices(void)
           QueryIdB();
           SetCurr(DEV_POSTERROR_B2);
         }
-      } 
+      }
       break;
 
-    case DEV_POSTHEADER_B2:                   
+    case DEV_POSTHEADER_B2:
       cbRepeat2 = 0;
       NewBoundsAbs(wBaseCurr);
       if (ReadHeaderB(0,0) == 0)
-        DoneProfile();  
-      else 
-      { 
+        DoneProfile();
+      else
+      {
         (wBaseCurr == 0) ? (wBaseCurr = 0xFFF0) : (wBaseCurr -= 0x0010);
 
         cbRepeat = bMINORREPEATS;
@@ -901,9 +900,9 @@ void    RunDevices(void)
     case DEV_HEADER_B2PLUS:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_B2PLUS);
-      else                                  
+      else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -912,7 +911,7 @@ void    RunDevices(void)
           QueryHeaderB_Plus(bBLOCKS_B);
           SetCurr(DEV_HEADER_B2PLUS);
         }
-      } 
+      }
       break;
 
     case DEV_POSTHEADER_B2PLUS:
@@ -921,7 +920,7 @@ void    RunDevices(void)
 
       if (i != bBLOCKS_B)
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -942,7 +941,7 @@ void    RunDevices(void)
 
         if (i != bBLOCKS_B)
           DoneProfile();
-        else 
+        else
         {
           cbRepeat = bMINORREPEATS;
           QueryHeaderB_Plus(bBLOCKS_B);
@@ -965,7 +964,7 @@ void    RunDevices(void)
           QueryHeaderBNew();
           SetCurr(DEV_HEADER_B2NEXT);
         }
-      } 
+      }
       break;
 
     case DEV_POSTHEADER_B2NEXT:
@@ -978,7 +977,7 @@ void    RunDevices(void)
 
         if (i != 17)
           DoneProfile();
-        else 
+        else
         {
           cbRepeat = bMINORREPEATS;
           QueryHeaderBNew();
@@ -988,12 +987,13 @@ void    RunDevices(void)
 
 #endif
 */
+
 #ifndef SKIP_B
 
     case DEV_START_B3:
       cbRepeat = GetMaxRepeats();
       QueryOpenB();
-      SetCurr(DEV_OPENCANAL_B3);             
+      SetCurr(DEV_OPENCANAL_B3);
       break;
 
     case DEV_OPENCANAL_B3:
@@ -1023,24 +1023,22 @@ void    RunDevices(void)
     case DEV_ENERGY_B3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         ReadCurrentB();
-      else 
+      else
       {
         if (cbRepeat == 0)
-          ErrorCurrent(); 
+          ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryEnergyB(0);
           SetCurr(DEV_ENERGY_B3);
         }
-      } 
+      }
       break;
 
 #endif
-
   }
 
 }
-
