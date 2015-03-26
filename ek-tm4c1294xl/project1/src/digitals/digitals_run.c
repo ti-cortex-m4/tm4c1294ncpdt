@@ -23,7 +23,7 @@ DIGITALS_RUN.C
 #include        "../digitals/max_repeats.h"
 #include        "../special/recalc_def.h"
 #include        "../special/defects.h"
-#include        "../devices/device_b.h"
+#include        "../sensors/device_b.h"
 #include        "../serial/ports.h"
 #include        "../serial/ports_modems.h"
 #include        "../serial/modems.h"

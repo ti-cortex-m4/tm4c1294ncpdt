@@ -20,7 +20,7 @@ KEY_SINGLE.C
 #include        "../../energy2.h"
 #include        "../../energy4.h"
 #include        "../../impulses/max_power.h"
-#include        "../../devices/automatic2.h"
+#include        "../../sensors/automatic2.h"
 #include        "../../time/timedate.h"
 #include        "../../time/timedate_display.h"
 
