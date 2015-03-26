@@ -1,4 +1,4 @@
-/*
+
 #ifndef SKIP_B
 
     case DEV_START_B2:
@@ -135,7 +135,7 @@
         }
       }
       break;
-/ *
+/*
     case DEV_MANAGE_B2:
       if (++cbCorrects > bMINORREPEATS)
         MakePause(DEV_POSTCORRECT_B2);
@@ -163,7 +163,7 @@
         }
       }
       break;
-* /
+*/
 
     case DEV_POSTCORRECT_B2:
       Clear();
@@ -253,7 +253,7 @@
       {
         ShowLo(szFailure1);
         MakePause(DEV_ERROR_B2);
-/ *
+/*
         if (cbRepeat == 0) ErrorProfile();
         else
         {
@@ -262,7 +262,7 @@
 
           QueryHeaderB();
           SetCurr(DEV_HEADER_B2);
-        }* /
+        }*/
       }
       break;
 
@@ -410,4 +410,3 @@
       break;
 
 #endif
-*/
