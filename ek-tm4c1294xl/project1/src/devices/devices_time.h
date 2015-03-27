@@ -4,4 +4,4 @@ DEVICES_TIME.H
 
 ------------------------------------------------------------------------------*/
 
-bool    SearchDefHouIndex(void);
+bool    SearchDefHouIndex(time  tiExt);

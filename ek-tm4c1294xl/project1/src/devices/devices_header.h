@@ -52,7 +52,10 @@ DEVICES.C
 
 
 // счётчик повторов
-uchar                   cbRepeat;
+uchar                   cbRepeat, cbRepeat2;
+
+// счётчик коррекций времени
+uchar                   cbCorrects;
 
 // признак прекращения опроса профиля нагрузки
 //bit                     fBreakRead;

@@ -26,6 +26,7 @@ DEVICE_B2.C
 #include        "../devices/devices_time.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/limits.h"
+#include        "../special/special.h"
 #include        "../flash/records.h"
 #include        "../energy.h"
 
@@ -132,11 +133,11 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
   if ((tiDig.bMinute % 30) != 0)                        // обрабатываем неполный получасовой блок
   {
     tiDig.bMinute = (tiDig.bMinute / 30)*30;
-    if (SearchDefHouIndex() == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
+    if (SearchDefHouIndex(tiDig) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
 
     iwDigHou = (wHOURS+iwDigHou+1)%wHOURS;   
   }
-  else if (SearchDefHouIndex() == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); } 
+  else if (SearchDefHouIndex(tiDig) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
 
 
   iwMajor = 0;                                          // обнул€ем счЄтчик после получени€ правильных данных

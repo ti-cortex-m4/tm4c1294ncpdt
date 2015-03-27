@@ -33,3 +33,14 @@ extern  uint                    iwMajor;
 
 
 extern  uchar                   bDeltaOld, bDeltaNew;
+
+
+
+extern  uint                    mpcwOutputZ[bCANALS],
+                                mpcwOutputC[bCANALS],
+                                mpcwOutput0[bCANALS],
+                                mpcwOutput1[bCANALS],
+                                mpcwOutput2[bCANALS],
+                                mpcwOutput3[bCANALS];
+
+
