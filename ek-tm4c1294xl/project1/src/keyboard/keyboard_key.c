@@ -128,6 +128,13 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
+//      case bSET_LIMITS:         key_SetLimits();        break;
+//      case bSET_LIMITS2:        key_SetLimits2();       break;
+//      case bSET_LIMITS30:       key_SetLimits30();      break;
+//      case bSET_LIMITS31:       key_SetLimits31();      break;
+//      case bSET_LIMITS32:       key_SetLimits32();      break;
+//      case bSET_LIMITS33:       key_SetLimits33();      break;
+
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
@@ -217,6 +224,13 @@ void    Keyboard_Key(void)
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
+
+//      case bSET_LIMITS:         key_SetLimits();        break;
+//      case bSET_LIMITS2:        key_SetLimits2();       break;
+//      case bSET_LIMITS30:       key_SetLimits30();      break;
+//      case bSET_LIMITS31:       key_SetLimits31();      break;
+//      case bSET_LIMITS32:       key_SetLimits32();      break;
+//      case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
@@ -392,6 +406,13 @@ void    Keyboard_Key(void)
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
+
+//      case bSET_LIMITS:         key_SetLimits();        break;
+//      case bSET_LIMITS2:        key_SetLimits2();       break;
+//      case bSET_LIMITS30:       key_SetLimits30();      break;
+//      case bSET_LIMITS31:       key_SetLimits31();      break;
+//      case bSET_LIMITS32:       key_SetLimits32();      break;
+//      case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
