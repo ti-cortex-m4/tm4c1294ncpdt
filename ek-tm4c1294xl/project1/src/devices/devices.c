@@ -14,6 +14,7 @@ DEVICES.C
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../keyboard/key_timedate.h"
+#include        "../realtime/realtime.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_pause.h"
@@ -25,6 +26,7 @@ DEVICES.C
 #include        "../digitals/profile_run.h"
 #include        "../digitals/checkup_run.h"
 #include        "../digitals/max_repeats.h"
+#include        "../digitals/correct_limit.h"
 #include        "../special/recalc_def.h"
 #include        "../special/defects.h"
 #include        "../sensors/device_b.h"
@@ -57,6 +59,9 @@ uchar                   cbRepeat;
 
 // индекс текущего цифрового счетчика
 uchar                   ibDig;
+
+//
+time                    tiDig;
 
 // вид опроса счётчиков
 extended                exExtended;
@@ -608,7 +613,7 @@ void    RunDevices(void)
     case DEV_OPENCANAL_B2:
       if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultB() == 1))
       {
-        if (fCurrCtrlHou == 1)
+        if (fCurrCtrl == 1)
           MakePause(DEV_POSTOPENCANAL_B2);
         else
           MakePause(DEV_POSTCORRECT_B2);
@@ -659,19 +664,21 @@ void    RunDevices(void)
 
 
     case DEV_POSTTIME_B2:
-      wBuffD  = GetDayIndex();              // количество дней с начала года ведомого счётчика
-      dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
+    {
+      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);                    // количество дней с начала года ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(&tiAlt);                                 // количество секунд ведомого счётчика
 
-      tiAlt = tiCurr;                       // текущие время/дата сумматора
+      uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
+      ulong dwSecond2 = GetSecondIndex(&tiCurr);                                // количество секунд сумматора
 
-      if (wBuffD != GetDayIndex())
+      if (iwDay1 != iwDay2())
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
       else
       {
-        if (dwBuffC > GetSecondIndex())                                         // необходима коррекция времени ведомого счётчика назад
-          ShowDeltaNeg();
-        else
-          ShowDeltaPos();
+        slong dwDelta = dwSecond1 - dwSecond2;
+        ShowDeltaTime(ibDig, dwDelta);
+
+        dwDelta = (dwDelta < 0 ? -dwDelta : dwDelta);
 
         if (dwBuffC < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
@@ -701,6 +708,7 @@ void    RunDevices(void)
         else
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
       }
+    }
       break;
 
 
@@ -935,6 +943,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_B2PLUS:
+    {
       uchar i;
       for (i=0; i<bBLOCKS_B; i++)
         if (TestHeaderB(i) == 0) break;
@@ -969,6 +978,7 @@ void    RunDevices(void)
           SetCurr(DEV_HEADER_B2PLUS);
         }
       }
+    }
       break;
 
     case DEV_HEADER_B2NEXT:

@@ -14,6 +14,7 @@ DEVICES.C
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../keyboard/key_timedate.h"
+#include        "../realtime/realtime.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/digitals_status.h"
 #include        "../digitals/digitals_pause.h"
@@ -25,6 +26,7 @@ DEVICES.C
 #include        "../digitals/profile_run.h"
 #include        "../digitals/checkup_run.h"
 #include        "../digitals/max_repeats.h"
+#include        "../digitals/correct_limit.h"
 #include        "../special/recalc_def.h"
 #include        "../special/defects.h"
 #include        "../sensors/device_b.h"
@@ -57,6 +59,9 @@ uchar                   cbRepeat;
 
 // индекс текущего цифрового счетчика
 uchar                   ibDig;
+
+//
+time                    tiDig;
 
 // вид опроса счётчиков
 extended                exExtended;
