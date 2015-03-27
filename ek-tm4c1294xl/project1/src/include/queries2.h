@@ -26,11 +26,15 @@ QUERIES2.H
 #define bEXT_GETRELAXS                 45
 #define bEXT_SETRELAXS                 46
 
+#define bEXT_GETSTARTCAN               52
+
 #define bEXT_GETVERSION                53
 #define bEXT_GETPORTS                  55
 
 #define bEXT_GETGAPS1                  96
 #define bEXT_GETGAPS2                  97
+
+#define bEXT_GETSTOPAUXCAN             104
 
 #define bEXT_GETDECRET                 105
 

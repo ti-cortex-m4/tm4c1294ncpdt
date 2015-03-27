@@ -28,6 +28,7 @@ RESPONSE255_CRC.C
 #include        "../output/out_version.h"
 #include        "../output/out_ports.h"
 #include        "../output/out_names.h"
+#include        "../output/profile/out_limits.h"
 
 
 
@@ -160,6 +161,8 @@ void    Response255_CRC(void)
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;
 
+    case bEXT_GETSTARTCAN: OutStartCan(); break;
+
     case bEXT_GETVERSION: OutVersion(); break;
     case bEXT_GETPORTS: OutPorts(); break;
 /*
@@ -183,6 +186,8 @@ void    Response255_CRC(void)
 */
     case bEXT_GETGAPS1: OutGaps1(); break;
     case bEXT_GETGAPS2: OutGaps2(); break;
+
+    case bEXT_GETSTOPAUXCAN: OutStopAuxCan(); break;
 
     case bEXT_GETDECRET: OutDecret(); break;
 /*

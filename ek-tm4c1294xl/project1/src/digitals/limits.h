@@ -26,5 +26,4 @@ void    NewLimits(void);
 void    MakeLimits(void);
 
 void    ResetLimitsAux(uchar  ibDig);
-void    ResetLimitsAux_All(void);
 void    NextHouLimitsAux(void);

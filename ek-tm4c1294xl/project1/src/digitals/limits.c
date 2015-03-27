@@ -20,6 +20,7 @@ file const              flStartAbs16Can = {FLS_START_ABS16_CAN, &mpcwStartAbs16C
 file const              flStartAbs32Can = {FLS_START_ABS32_CAN, &mpcdwStartAbs32Can, sizeof(mpcdwStartAbs32Can)};
 file const              flStartCan = {FLS_START_CAN, &mpboStartCan, sizeof(mpboStartCan)};
 file const              flStopCan = {FLS_STOP_CAN, &mpcwStopCan, sizeof(mpcwStopCan)};
+file const              flStopAuxCan = {FLS_STOP_AUX_CAN, &mpcwStopAuxCan, sizeof(mpcwStopAuxCan)};
 
 
 
@@ -32,6 +33,7 @@ void    InitLimits(void)
   LoadFile(&flStartAbs32Can);
   LoadFile(&flStartCan);
   LoadFile(&flStopCan);
+  LoadFile(&flStopAuxCan);
 }
 
 
@@ -49,6 +51,7 @@ void    ResetLimits(void)
     mpcdwStartAbs32Can[c] = 0;
     mpboStartCan[c] = FALSE;
     mpcwStopCan[c] = wHOURS_62-1; // самый старый получас
+    mpcwStopAuxCan[c] = 0;
   }
 
   SaveFile(&flStartRelCan);
@@ -56,6 +59,7 @@ void    ResetLimits(void)
   SaveFile(&flStartAbs32Can);
   SaveFile(&flStartCan);
   SaveFile(&flStopCan);
+  SaveFile(&flStopAuxCan);
 }
 
 
@@ -198,14 +202,8 @@ void    ResetLimitsAux(uchar  ibDig)
       mpcwStopAuxCan[c] = 0;
     }
   }
-}
 
-
-void    ResetLimitsAux_All(void)
-{
-  uchar c;
-  for (c=0; c<bCANALS; c++)
-    ResetLimitsAux(c);
+  SaveFile(&flStopAuxCan);
 }
 
 
@@ -221,5 +219,7 @@ void    NextHouLimitsAux(void)
         mpcwStopAuxCan[c]++;
       }
     }
+
+    SaveFile(&flStopAuxCan);
   }
 }
