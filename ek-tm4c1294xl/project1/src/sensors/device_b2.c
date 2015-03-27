@@ -50,7 +50,7 @@ void    ReadTopBNew(void)
     }
     else 
     {
-      dwBaseCurr = mpcdwStartAbsCan[ibDig];
+      dwBaseCurr = mpcdwStartAbs32Can[ibDig];
       if (boShowMessages == TRUE) sprintf(szLo," начало %05lX   ",dwBaseCurr);
       iwMajor = dwBaseCurr % 0x10000; AddDigRecord(EVE_PREVIOUS_TOP);
     }
