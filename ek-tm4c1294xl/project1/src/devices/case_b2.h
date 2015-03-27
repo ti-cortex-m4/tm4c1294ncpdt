@@ -12,7 +12,7 @@
     case DEV_OPENCANAL_B2:
       if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultB() == 1))
       {
-        if (fCurrCtrlHou == 1)
+        if (fCurrCtrl == 1)
           MakePause(DEV_POSTOPENCANAL_B2);
         else
           MakePause(DEV_POSTCORRECT_B2);
@@ -63,22 +63,19 @@
 
 
     case DEV_POSTTIME_B2:
-      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);              // количество дней с начала года ведомого счётчика
-      ulong dwSecond1 = GetSecondIndex(&tiAlt);                           // количество секунд ведомого счётчика
+    {
+      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);                    // количество дней с начала года ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(&tiAlt);                                 // количество секунд ведомого счётчика
 
-      uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);              // количество дней с начала года сумматора
-      ulong dwSecond2 = GetSecondIndex(&tiCurr);                            // количество секунд сумматора
+      uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
+      ulong dwSecond2 = GetSecondIndex(&tiCurr);                                // количество секунд сумматора
 
       if (iwDay1 != iwDay2())
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
       else
       {
         slong dwDelta = dwSecond1 - dwSecond2;
-
-        if (dwDelta > 0)                                         // необходима коррекция времени ведомого счётчика назад
-          ShowDeltaNegative(ibDig, dwDelta);
-        else
-          ShowDeltaPositive(ibDig, -dwDelta);
+        ShowDeltaTime(ibDig, dwDelta);
 
         dwDelta = (dwDelta < 0 ? -dwDelta : dwDelta);
 
@@ -110,6 +107,7 @@
         else
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
       }
+    }
       break;
 
 
@@ -344,6 +342,7 @@
       break;
 
     case DEV_POSTHEADER_B2PLUS:
+    {
       uchar i;
       for (i=0; i<bBLOCKS_B; i++)
         if (TestHeaderB(i) == 0) break;
@@ -378,6 +377,7 @@
           SetCurr(DEV_HEADER_B2PLUS);
         }
       }
+    }
       break;
 
     case DEV_HEADER_B2NEXT:

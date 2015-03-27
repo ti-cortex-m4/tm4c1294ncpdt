@@ -127,8 +127,7 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
   }
 
 
-  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",           // показываем время/дату часового блока
-          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
   if ((tiDig.bMinute % 30) != 0)                        // обрабатываем неполный получасовой блок
   {
@@ -159,13 +158,13 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
   for (c=0; c<4; c++)
   {
     uint w = PopChar();
-    w += PopChar()*0x100;
+    w     += PopChar()*0x100;
 
     if (w == 0xFFFF) w = 0;
     mpwChannels[c] = w;
   }
 
-  MakePrevHou();  
+  MakeSpecial();
   return(MakeStopHou(0));
 }
 

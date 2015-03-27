@@ -11,6 +11,7 @@ SPEEDS.C
 #include        "../hardware/system_clock.h"
 #include        "../memory/mem_ports.h"
 #include        "../serial/ports.h"
+#include        "../digitals/correct_limit.h"
 #include        "speeds.h"
 #include        "speeds_storage.h"
 
@@ -59,26 +60,6 @@ bool    IsMaster(uchar  ibPrt)
 bool    IsSlave(uchar  ibPrt)
 {
   return( ~IsMaster(ibPrt) );
-}
-
-
-
-void    SetCorrectLimit(uchar  ibPrt)
-{
-//  mpbCorrectLimit[ibPrt] = (mppoPorts[ibPrt].enStream == STR_MASTERMODEM) ? bCORRECT_MODEM : bCORRECT_DIRECT;
-}
-
-
-void    CheckCorrectLimit(uchar  ibPrt)
-{
-//  if (mpbCorrectLimit[ibPrt] < bCORRECT_MINIMUM) SetCorrectLimit(ibPrt);
-//  if (mpbCorrectLimit[ibPrt] > bCORRECT_MAXIMUM) mpbCorrectLimit[ibPrt] = bCORRECT_MAXIMUM;
-}
-
-
-void    MakeCorrectLimit(void)
-{
-//  if (diT.bDevice == 24) mpbCorrectLimit[diT.ibPort] = bCORRECT_DEVICE_S;
 }
 
 

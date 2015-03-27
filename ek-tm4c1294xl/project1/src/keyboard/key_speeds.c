@@ -11,6 +11,7 @@ KEY_SPEEDS.C
 #include        "../serial/speeds.h"
 #include        "../serial/speeds_display.h"
 #include        "../serial/speeds_storage.h"
+#include        "../digitals/correct_limit.h"
 
 
 

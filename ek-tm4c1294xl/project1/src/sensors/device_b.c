@@ -454,8 +454,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   }
 
 
-  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",           // показываем время/дату часового блока
-          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
   if ((tiDig.bMinute % 30) != 0)                        // обрабатываем неполный получасовой блок
   {
@@ -498,7 +497,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   }
 
   // TODO MakeRefillWinter();
-  MakePrevHou();  
+  MakeSpecial();
   // TODO if (boRefillDisable == FALSE) MakeRefill();
   return(MakeStopHou(0));  
 }

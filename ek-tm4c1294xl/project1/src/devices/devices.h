@@ -8,6 +8,8 @@ extern  uchar                   cbRepeat, cbRepeat2;
 
 extern  uchar                   ibDig;
 
+extern  time                    tiDig;
+
 extern  extended                exExtended;
 
 extern  bool                    fConnect;
