@@ -22,16 +22,16 @@ uchar   i;
     mpcwStopCan[i] = wHOURS_62-1;                   // самый старый получас
   }
 }
+*/
 
 
-
-bit     UseBounds(void)
+bool    UseBounds(void)
 {
-  return (boStartCan == TRUE);
+  return false;//(boStartCan == TRUE);
 }
 
 
-
+/*
 bit     IsLimitsAux(uchar  i)
 {
   if ((i == 1) 
@@ -39,20 +39,20 @@ bit     IsLimitsAux(uchar  i)
 
   return(0);
 }
-
+*/
 
 
 void    NewBoundsRel(uint  i)
-{
+{/*
   LoadCurrDigital(ibDig);      
   for (ibCan=0; ibCan<bCANALS; ibCan++)                           
   {
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines() == 1) 
       mpcwStartRelCan[ibCan] = i;
-  }
+  }*/
 }
-*/
+
 
 void    NewBoundsAbs(uint  i)
 {/*
@@ -68,9 +68,9 @@ void    NewBoundsAbs(uint  i)
   }*/
 }
 
-/*
+
 void    NewBoundsAbs2(ulong  dw)
-{
+{/*
   LoadCurrDigital(ibDig);
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
@@ -80,9 +80,9 @@ void    NewBoundsAbs2(ulong  dw)
       mpboStartCan[ibCan] = TRUE;
       mpcdwStartAbsCan[ibCan] = dw;
     } 
-  }
+  }*/
 }
-*/
+
 
 void    NewLimits(void)
 {/*
@@ -118,11 +118,11 @@ void    MakeLimits(void)
       mpcwStopCan[ibCan]++;          
   }
 }
-
+*/
 
 
 void    ResetLimitsAux(uchar  ibDig) 
-{
+{/*
   LoadCurrDigital(ibDig);
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
@@ -131,10 +131,10 @@ void    ResetLimitsAux(uchar  ibDig)
     {
       mpcwStopAuxCan[ibCan] = 0;
     }
-  }
+  }*/
 }
 
-
+/*
 void    ResetLimitsAux_All(void)
 {
   for (ibCan=0; ibCan<bCANALS; ibCan++)

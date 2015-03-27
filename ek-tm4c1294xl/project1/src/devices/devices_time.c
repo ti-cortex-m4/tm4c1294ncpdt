@@ -11,20 +11,17 @@ DEVICES_TIME.C
 
 
 
-bool    SearchDefHouIndex(void)
+bool    SearchDefHouIndex(time  tiExt)
 {
-  tiAlt = tiDig;
-  dwTmp = DateToHouIndex();
+  ulong dwExt = DateToHouIndex(tiExt);
+  ulong dwInt = DateToHouIndex(tiCurr);
 
-  tiAlt = tiCurr;
-  dwBuffC = DateToHouIndex();
+  if (dwExt > dwInt) return(0);
 
-  if (dwTmp > dwBuffC) return(0);
+  ulong dwT = dwInt - dwExt;
+  if (dwT > wHOURS) return(0);
 
-  dwTmp = dwBuffC - dwTmp;
-  if (dwTmp > wHOURS) return(0);
-
-  iwDigHou = (wHOURS+iwHardHou-dwTmp) % wHOURS;
+  iwDigHou = (wHOURS+iwHardHou-dwT) % wHOURS;
   return(1);
 }
 

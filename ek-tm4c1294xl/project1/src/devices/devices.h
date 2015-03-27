@@ -6,6 +6,8 @@ DEVICES.H
 
 extern  uchar                   cbRepeat, cbRepeat2;
 
+extern  uchar                   cbCorrects;
+
 extern  uchar                   ibDig;
 
 extern  time                    tiDig;

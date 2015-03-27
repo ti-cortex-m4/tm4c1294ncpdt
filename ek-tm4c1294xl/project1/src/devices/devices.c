@@ -52,7 +52,10 @@ DEVICES.C
 
 
 // счётчик повторов
-uchar                   cbRepeat;
+uchar                   cbRepeat, cbRepeat2;
+
+// счётчик коррекций времени
+uchar                   cbCorrects;
 
 // признак прекращения опроса профиля нагрузки
 //bit                     fBreakRead;
@@ -671,28 +674,28 @@ void    RunDevices(void)
       uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
       ulong dwSecond2 = GetSecondIndex(&tiCurr);                                // количество секунд сумматора
 
-      if (iwDay1 != iwDay2())
+      if (iwDay1 != iwDay2)
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
       else
       {
         slong dwDelta = dwSecond1 - dwSecond2;
-        ShowDeltaTime(ibDig, dwDelta);
+        ShowDeltaTime2(ibDig, dwDelta);
 
         dwDelta = (dwDelta < 0 ? -dwDelta : dwDelta);
 
-        if (dwBuffC < MinorCorrect())                                           // без коррекции
+        if (dwDelta < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
-        else if (dwBuffC < bMAJORCORRECT_B)                                     // простая коррекция
+        else if (dwDelta < bMAJORCORRECT_B)                                     // простая коррекция
         {
           if (cbCorrects == 0)
           {
-            bDeltaOld = (uchar)dwBuffC;
+            bDeltaOld = (uchar)dwDelta;
             (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
             ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_B2);
           }
           else
           {
-            bDeltaNew = (uchar)dwBuffC;
+            bDeltaNew = (uchar)dwDelta;
             if ((bDeltaNew < bDeltaOld) && (cbCorrects < 100))
             {
               bDeltaOld = bDeltaNew;
@@ -999,7 +1002,9 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_B2NEXT:
+    {
         NewBoundsAbs2(dwBaseCurr);
+        uchar i;
         for (i=0; i<17; i++)
         {
           if (ReadHeaderBNew(i,1) == 0) break;
@@ -1014,6 +1019,7 @@ void    RunDevices(void)
           QueryHeaderBNew();
           SetCurr(DEV_HEADER_B2NEXT);
         }
+    }
       break;
 
 #endif

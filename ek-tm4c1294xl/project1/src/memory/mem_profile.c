@@ -47,3 +47,14 @@ uint                    iwMajor;
 
 // разница времени сумматора и счётчика
 uchar                   bDeltaOld, bDeltaNew;
+
+
+
+// счетчикм событий
+uint                    mpcwOutputZ[bCANALS],
+                        mpcwOutputC[bCANALS],
+                        mpcwOutput0[bCANALS],
+                        mpcwOutput1[bCANALS],
+                        mpcwOutput2[bCANALS],
+                        mpcwOutput3[bCANALS];
+

@@ -26,6 +26,7 @@ DEVICE_B.C
 #include        "../digitals/current_run.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/limits.h"
+#include        "../special/special.h"
 #include        "../flash/records.h"
 #include        "../energy.h"
 
@@ -198,11 +199,11 @@ uchar   i;
 }
 
 
-/*
+
 // посылка запроса на коррекцию времени
 void    QueryControlB(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(3);      
@@ -216,7 +217,7 @@ void    QueryControlB(void)
 }
 
 
-/ *
+/*
 // посылка запроса на установку времени
 void    QueryManageB(void)
 {
@@ -459,7 +460,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   if ((tiDig.bMinute % 30) != 0)                        // обрабатываем неполный получасовой блок
   {
     tiDig.bMinute = (tiDig.bMinute / 30)*30;
-    if (SearchDefHouIndex() == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
+    if (SearchDefHouIndex(tiDig) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
 
     iwDigHou = (wHOURS+iwDigHou+1)%wHOURS;   
   }
@@ -469,7 +470,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   if ((wBasePrev > wBaseInit) && (wBaseCurr <= wBaseInit)) return 0;
   wBasePrev = wBaseCurr;
 #else
-  else if (SearchDefHouIndex() == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); } 
+  else if (SearchDefHouIndex(tiDig) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
 #endif
 
 
