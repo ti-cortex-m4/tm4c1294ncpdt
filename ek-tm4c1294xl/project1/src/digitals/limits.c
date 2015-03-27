@@ -81,13 +81,13 @@ void    NewBoundsRel(uint  wRel)
 {
   LoadCurrDigital(ibDig);
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)                           
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == 1)
     {
-      mpcwStartRelCan[ibCan] = wRel;
+      mpcwStartRelCan[c] = wRel;
     }
   }
 
@@ -99,14 +99,14 @@ void    NewBoundsAbs16(uint  wAbs)
 {
   LoadCurrDigital(ibDig);
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)                           
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == 1)
     { 
-      mpboStartCan[ibCan] = TRUE;
-      mpcwStartAbs16Can[ibCan] = wAbs;
+      mpboStartCan[c] = TRUE;
+      mpcwStartAbs16Can[c] = wAbs;
     } 
   }
 
@@ -119,14 +119,14 @@ void    NewBoundsAbs32(ulong  dwAbs)
 {
   LoadCurrDigital(ibDig);
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == 1)
     { 
-      mpboStartCan[ibCan] = TRUE;
-      mpcdwStartAbs32Can[ibCan] = dwAbs;
+      mpboStartCan[c] = TRUE;
+      mpcdwStartAbs32Can[c] = dwAbs;
     } 
   }
 
@@ -139,25 +139,25 @@ void    NewLimits(void)
 {
   LoadCurrDigital(ibDig);
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)                           
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == 1)
     {
-      mpcwStartRelCan[ibCan] = 0;
-      mpcwStartAbs16Can[ibCan] = 0;
-      mpcdwStartAbs32Can[ibCan] = 0;
-      mpboStartCan[ibCan] = FALSE;
+      mpcwStartRelCan[c] = 0;
+      mpcwStartAbs16Can[c] = 0;
+      mpcdwStartAbs32Can[c] = 0;
+      mpboStartCan[c] = FALSE;
 
-      if (UseBounds() && IsLimitsAux(GetDigitalDevice(ibCan)))
+      if (UseBounds() && IsLimitsAux(GetDigitalDevice(c)))
       {
-        mpcwStopCan[ibCan] = 4 + mpcwStopAuxCan[ibCan];
-        if (mpcwStopCan[ibCan] > wHOURS-1) mpcwStopCan[ibCan] = wHOURS-1;
+        mpcwStopCan[c] = 4 + mpcwStopAuxCan[c];
+        if (mpcwStopCan[c] > wHOURS-1) mpcwStopCan[c] = wHOURS-1;
       }
       else
       {
-        mpcwStopCan[ibCan] = 4;
+        mpcwStopCan[c] = 4;
       }
     }
   }
@@ -173,11 +173,11 @@ void    NewLimits(void)
 
 void    MakeLimits(void)
 {
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)                           
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if (mpcwStopCan[ibCan] < wHOURS-1)
-      mpcwStopCan[ibCan]++;          
+    if (mpcwStopCan[c] < wHOURS-1)
+      mpcwStopCan[c]++;
   }
 
   SaveFile(&flStopCan);
@@ -189,13 +189,13 @@ void    ResetLimitsAux(uchar  ibDig)
 {
   LoadCurrDigital(ibDig);
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == 1)
     {
-      mpcwStopAuxCan[ibCan] = 0;
+      mpcwStopAuxCan[c] = 0;
     }
   }
 }
@@ -203,9 +203,9 @@ void    ResetLimitsAux(uchar  ibDig)
 
 void    ResetLimitsAux_All(void)
 {
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
-    ResetLimitsAux(ibCan);
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+    ResetLimitsAux(c);
 }
 
 
@@ -213,12 +213,12 @@ void    NextHouLimitsAux(void)
 {
   if (UseBounds())
   {
-    uchar ibCan;
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      if (IsLimitsAux(GetDigitalDevice(ibCan)))
+      if (IsLimitsAux(GetDigitalDevice(c)))
       {
-        mpcwStopAuxCan[ibCan]++;
+        mpcwStopAuxCan[c]++;
       }
     }
   }
