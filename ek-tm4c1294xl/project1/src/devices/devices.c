@@ -915,7 +915,7 @@ void    RunDevices(void)
 
     case DEV_POSTHEADER_B2:
       cbRepeat2 = 0;
-      NewBoundsAbs(wBaseCurr);
+      NewBoundsAbs16(wBaseCurr);
       if (ReadHeaderB(0,0) == 0)
         DoneProfile();
       else
@@ -965,7 +965,7 @@ void    RunDevices(void)
       }
       else
       {
-        NewBoundsAbs(wBaseCurr);
+        NewBoundsAbs16(wBaseCurr);
         for (i=0; i<bBLOCKS_B; i++)
         {
           if (ReadHeaderB(i,1) == 0) break;
@@ -1003,7 +1003,7 @@ void    RunDevices(void)
 
     case DEV_POSTHEADER_B2NEXT:
     {
-        NewBoundsAbs2(dwBaseCurr);
+        NewBoundsAbs32(dwBaseCurr);
         uchar i;
         for (i=0; i<17; i++)
         {

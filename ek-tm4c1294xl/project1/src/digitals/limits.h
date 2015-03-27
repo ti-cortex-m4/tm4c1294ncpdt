@@ -18,9 +18,9 @@ void    InitLimits(void);
 void    ResetLimits(void);
 
 bool    UseBounds(void);
-void    NewBoundsRel(uint  i);
-void    NewBoundsAbs(uint  i);
-void    NewBoundsAbs2(ulong  dw);
+void    NewBoundsRel(uint  wRel);
+void    NewBoundsAbs16(uint  wAbs);
+void    NewBoundsAbs32(ulong  dwAbs);
 
 void    NewLimits(void);
 void    MakeLimits(void);
