@@ -52,11 +52,11 @@ void    ShowDeltaTime(time  ti)
                  ti.bSecond);
 
   ulong dwSecond = GetSecondIndex(&ti);
-  uint ibDay = GetDayIndexMD(ti.bMonth, ti.bDay);
+  uint iwDay = GetDayIndexMD(ti.bMonth, ti.bDay);
 
   time ti2 = *GetCurrTimeDate();
 
-  if (ibDay != GetDayIndexMD(ti2.bMonth, ti2.bDay))
+  if (iwDay != GetDayIndexMD(ti2.bMonth, ti2.bDay))
     sprintf(szLo+9,"?");
   else if (dwSecond > GetSecondIndex(&ti2))
   {
