@@ -180,6 +180,13 @@ PROGRAMS.H
 #define bSET_CONTROL_HOURS          183
 #define bSET_ENBL_CANALS            185
 
+#define bSET_LIMITS                 184
+#define bSET_LIMITS2                148
+#define bSET_LIMITS30               143
+#define bSET_LIMITS31               146
+#define bSET_LIMITS32               147
+#define bSET_LIMITS33               142
+
 #define bSET_ENBL_CURRENT           192
 #define bSET_ENBL_PROFILE           193
 #define bSET_TIMEOUT_PROFILE        194
