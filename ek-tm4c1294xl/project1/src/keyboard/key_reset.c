@@ -74,8 +74,7 @@ void    key_SetReset(void)
 //          ResetExtended6();
 //          ResetCorrect2();
 //          ResetCorrect3();
-//          ResetDevices();
-//          ResetLimitsAux_All();
+          ResetDevices();
 //          ResetCurrent2();
 //          ResetCheckupCustom();
 
@@ -124,12 +123,9 @@ void    key_SetReset(void)
 //          ResetExtended6();
 //          ResetCorrect2();
 //          ResetCorrect3();
-//          ResetDevices();
-//          ResetLimitsAux_All();
 //          ResetCurrent2();
 //          ResetBulk();
 //          ResetRecordDisable();
-//          ResetUni();
 //          ResetCheckupFull();
 //
 //          ResetLimits();

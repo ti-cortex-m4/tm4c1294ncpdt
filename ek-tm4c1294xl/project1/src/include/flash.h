@@ -165,8 +165,9 @@ typedef enum
   FLS_START_ABS32_CAN   = FLS_START_ABS16_CAN + 1,
   FLS_START_CAN         = FLS_START_ABS32_CAN + 1,
   FLS_STOP_CAN          = FLS_START_CAN + 1,
+  FLS_STOP_AUX_CAN      = FLS_STOP_CAN + 1,
 
-  FLS_END               = FLS_STOP_CAN + 1
+  FLS_END               = FLS_STOP_AUX_CAN + 1
 } flash;
 
 
