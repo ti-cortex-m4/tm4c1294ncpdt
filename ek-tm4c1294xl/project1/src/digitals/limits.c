@@ -86,7 +86,9 @@ void    NewBoundsRel(uint  wRel)
   {
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+    {
       mpcwStartRelCan[ibCan] = wRel;
+    }
   }
 
   SaveFile(&flStartRelCan);
@@ -134,16 +136,18 @@ void    NewBoundsAbs32(ulong  dwAbs)
 
 
 void    NewLimits(void)
-{/*
-  LoadCurrDigital(ibDig);      
+{
+  LoadCurrDigital(ibDig);
+
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)                           
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1) 
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
       mpcwStartRelCan[ibCan] = 0;
-      mpcwStartAbsCan[ibCan] = 0;
-      mpcdwStartAbsCan[ibCan] = 0;
+      mpcwStartAbs16Can[ibCan] = 0;
+      mpcdwStartAbs32Can[ibCan] = 0;
       mpboStartCan[ibCan] = FALSE;
 
       if (UseBounds() && IsLimitsAux(GetDigitalDevice(ibCan)))
@@ -152,40 +156,54 @@ void    NewLimits(void)
         if (mpcwStopCan[ibCan] > wHOURS-1) mpcwStopCan[ibCan] = wHOURS-1;
       }
       else
+      {
         mpcwStopCan[ibCan] = 4;
+      }
     }
-  }*/
+  }
+
+  SaveFile(&flStartRelCan);
+  SaveFile(&flStartAbs16Can);
+  SaveFile(&flStartAbs32Can);
+  SaveFile(&flStartCan);
+  SaveFile(&flStopCan);
 }
 
 
-/*
+
 void    MakeLimits(void)
 {
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)                           
   {
     if (mpcwStopCan[ibCan] < wHOURS-1)
       mpcwStopCan[ibCan]++;          
   }
+
+  SaveFile(&flStopCan);
 }
-*/
+
 
 
 void    ResetLimitsAux(uchar  ibDig) 
-{/*
+{
   LoadCurrDigital(ibDig);
+
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1) 
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
       mpcwStopAuxCan[ibCan] = 0;
     }
-  }*/
+  }
 }
 
-/*
+
 void    ResetLimitsAux_All(void)
 {
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
     ResetLimitsAux(ibCan);
 }
@@ -195,6 +213,7 @@ void    NextHouLimitsAux(void)
 {
   if (UseBounds())
   {
+    uchar ibCan;
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       if (IsLimitsAux(GetDigitalDevice(ibCan)))
@@ -204,4 +223,3 @@ void    NextHouLimitsAux(void)
     }
   }
 }
-*/

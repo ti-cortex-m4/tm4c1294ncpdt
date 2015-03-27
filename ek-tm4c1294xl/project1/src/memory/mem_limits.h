@@ -16,3 +16,4 @@ extern  boolean                 mpboStartCan[bCANALS];
 
 extern  uint                    mpcwStopCan[bCANALS];
 
+extern  uint                    mpcwStopAuxCan[bCANALS];
