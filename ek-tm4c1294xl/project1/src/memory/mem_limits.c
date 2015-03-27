@@ -25,3 +25,6 @@ boolean                 mpboStartCan[bCANALS];
 
 // массив индексов дальней границы опроса
 uint                    mpcwStopCan[bCANALS];
+
+// массив дополнительных индексов дальней границы опроса
+uint                    mpcwStopAuxCan[bCANALS];
