@@ -6,6 +6,8 @@ LIMITS.C
 
 #include    "../main.h"
 #include    "../memory/mem_limits.h"
+#include    "../digitals/digitals.h"
+#include    "../devices/devices.h"
 #include    "../flash/files.h"
 #include    "limits.h"
 
@@ -75,45 +77,59 @@ bool    IsLimitsAux(uchar  ibDev)
 
 
 
-void    NewBoundsRel(uint  i)
-{/*
-  LoadCurrDigital(ibDig);      
+void    NewBoundsRel(uint  wRel)
+{
+  LoadCurrDigital(ibDig);
+
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)                           
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1) 
-      mpcwStartRelCan[ibCan] = i;
-  }*/
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+      mpcwStartRelCan[ibCan] = wRel;
+  }
+
+  SaveFile(&flStartRelCan);
 }
 
 
-void    NewBoundsAbs(uint  i)
-{/*
-  LoadCurrDigital(ibDig);      
+void    NewBoundsAbs16(uint  wAbs)
+{
+  LoadCurrDigital(ibDig);
+
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)                           
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1)
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     { 
       mpboStartCan[ibCan] = TRUE;
-      mpcwStartAbsCan[ibCan] = i;
+      mpcwStartAbs16Can[ibCan] = wAbs;
     } 
-  }*/
+  }
+
+  SaveFile(&flStartCan);
+  SaveFile(&flStartAbs16Can);
 }
 
 
-void    NewBoundsAbs2(ulong  dw)
-{/*
+void    NewBoundsAbs32(ulong  dwAbs)
+{
   LoadCurrDigital(ibDig);
+
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1)
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     { 
       mpboStartCan[ibCan] = TRUE;
-      mpcdwStartAbsCan[ibCan] = dw;
+      mpcdwStartAbs32Can[ibCan] = dwAbs;
     } 
-  }*/
+  }
+
+  SaveFile(&flStartCan);
+  SaveFile(&flStartAbs32Can);
 }
 
 
