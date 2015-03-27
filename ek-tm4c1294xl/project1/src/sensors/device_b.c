@@ -326,7 +326,7 @@ void    ReadTopBOld(void)
     }
     else 
     {
-      wBaseCurr = mpcwStartAbsCan[ibDig];
+      wBaseCurr = mpcwStartAbs16Can[ibDig];
       if (boShowMessages == TRUE) sprintf(szLo,"  начало %04X   ",wBaseCurr);
       iwMajor = wBaseCurr; AddDigRecord(EVE_PREVIOUS_TOP);
     }

@@ -5,41 +5,74 @@ LIMITS.C
 ------------------------------------------------------------------------------*/
 
 #include    "../main.h"
+#include    "../memory/mem_limits.h"
+#include    "../flash/files.h"
+#include    "limits.h"
 
 
-/*
+
+file const              flUseBounds = {FLS_USE_BOUNDS, &boUseBounds, sizeof(boolean)};
+
+file const              flStartRelCan = {FLS_START_REL_CAN, &mpcwStartRelCan, sizeof(mpcwStartRelCan)};
+file const              flStartAbs16Can = {FLS_START_ABS16_CAN, &mpcwStartAbs16Can, sizeof(mpcwStartAbs16Can)};
+file const              flStartAbs32Can = {FLS_START_ABS32_CAN, &mpcdwStartAbs32Can, sizeof(mpcdwStartAbs32Can)};
+file const              flStartCan = {FLS_START_CAN, &mpboStartCan, sizeof(mpboStartCan)};
+file const              flStopCan = {FLS_STOP_CAN, &mpcwStopCan, sizeof(mpcwStopCan)};
+
+
+
+void    InitLimits(void)
+{
+  LoadFile(&flUseBounds);
+
+  LoadFile(&flStartRelCan);
+  LoadFile(&flStartAbs16Can);
+  LoadFile(&flStartAbs32Can);
+  LoadFile(&flStartCan);
+  LoadFile(&flStopCan);
+}
+
+
 void    ResetLimits(void)
 {
-uchar   i;
 
-  boStartCan = TRUE;
-  for (i=0; i<bCANALS; i++)
+	boUseBounds = TRUE;
+  SaveFile(&flUseBounds);
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    mpcwStartRelCan[i] = 0;
-    mpcwStartAbsCan[i] = 0;
-    mpcdwStartAbsCan[i] = 0;
-    mpboStartCan[i] = FALSE;
-    mpcwStopCan[i] = wHOURS_62-1;                   // самый старый получас
+    mpcwStartRelCan[c] = 0;
+    mpcwStartAbs16Can[c] = 0;
+    mpcdwStartAbs32Can[c] = 0;
+    mpboStartCan[c] = FALSE;
+    mpcwStopCan[c] = wHOURS_62-1; // самый старый получас
   }
+
+  SaveFile(&flStartRelCan);
+  SaveFile(&flStartAbs16Can);
+  SaveFile(&flStartAbs32Can);
+  SaveFile(&flStartCan);
+  SaveFile(&flStopCan);
 }
-*/
+
 
 
 bool    UseBounds(void)
 {
-  return false;//(boStartCan == TRUE);
+  return boUseBounds == TRUE;
 }
 
 
-/*
-bit     IsLimitsAux(uchar  i)
+
+bool    IsLimitsAux(uchar  ibDev)
 {
-  if ((i == 1) 
-   || (i == 2)) return(1);
+  if ((ibDev == 1) 
+   || (ibDev == 2)) return(1);
 
   return(0);
 }
-*/
+
 
 
 void    NewBoundsRel(uint  i)
