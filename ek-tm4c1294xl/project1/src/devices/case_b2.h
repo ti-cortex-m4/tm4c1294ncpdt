@@ -63,19 +63,24 @@
 
 
     case DEV_POSTTIME_B2:
-      wBuffD  = GetDayIndex();              // количество дней с начала года ведомого счётчика
-      dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
+      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);              // количество дней с начала года ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(&tiAlt);                           // количество секунд ведомого счётчика
 
-      tiAlt = tiCurr;                       // текущие время/дата сумматора
+      uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);              // количество дней с начала года сумматора
+      ulong dwSecond2 = GetSecondIndex(&tiCurr);                            // количество секунд сумматора
 
-      if (wBuffD != GetDayIndex())
+      if (iwDay1 != iwDay2())
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
       else
       {
-        if (dwBuffC > GetSecondIndex())                                         // необходима коррекция времени ведомого счётчика назад
-          ShowDeltaNeg();
+        slong dwDelta = dwSecond1 - dwSecond2;
+
+        if (dwDelta > 0)                                         // необходима коррекция времени ведомого счётчика назад
+          ShowDeltaNegative(ibDig, dwDelta);
         else
-          ShowDeltaPos();
+          ShowDeltaPositive(ibDig, -dwDelta);
+
+        dwDelta = (dwDelta < 0 ? -dwDelta : dwDelta);
 
         if (dwBuffC < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }

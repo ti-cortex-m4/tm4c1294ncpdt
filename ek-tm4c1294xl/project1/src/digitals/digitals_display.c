@@ -7,7 +7,6 @@ DIGITALS_DISPLAY.C
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
 #include        "../display/display.h"
-#include        "../time/timedate.h"
 #include        "../time/delay.h"
 #include        "digitals.h"
 #include        "sensors.h"
@@ -74,20 +73,16 @@ void    ShowPortDelayLo(uchar  ibPrt)
 
 
 
-void    ShowDeltaPos(uchar  ibCan, ulong  dwSecond)
+void    ShowDeltaPositive(uchar  ibCan, ulong  dwSecond)
 {
-	dwSecond = GetSecondIndex() - dwSecond;
-
   ShowCanalNumber(ibCan);
   Clear();
   sprintf(szLo+1,"сдвиг: +%lu с", dwSecond); (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
 }
 
 
-void    ShowDeltaNeg(uchar  ibCan, ulong  dwSecond)
+void    ShowDeltaNegative(uchar  ibCan, ulong  dwSecond)
 {
-	dwSecond = dwSecond - GetSecondIndex();
-
   ShowCanalNumber(ibCan);
   Clear();
   sprintf(szLo+1,"сдвиг: -%lu с", dwSecond); (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
