@@ -1,19 +1,19 @@
 /*------------------------------------------------------------------------------
-KEY_LIMITS32.C
+KEY_LIMITS2.C
 
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_limits.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../digitals/limits.h"
+#include        "../../../main.h"
+#include        "../../../memory/mem_limits.h"
+#include        "../../keyboard.h"
+#include        "../../../display/display.h"
+#include        "../../../digitals/limits.h"
 
 
 
 //                                           0123456789ABCDEF
-static char const       szLimits[]        = "Нижняя граница  ",
+static char const       szLimits[]        = "Верхняя граница ",
                         szCanals[]        = "Каналы:         ",
                         szMaskLimits[]    = "    ____        ",
                         szCanalFromMask[] = " от: __",
@@ -23,23 +23,19 @@ static uchar            ibXmin, ibXmax;
 
 
 
-void    key_SetLimits32(void)
+void    key_SetLimits2(void)
 { 
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boUseBounds == TRUE)
-      {
-        enKeyboard = KBD_INPUT1;
+      enKeyboard = KBD_INPUT1;
 
-        ShowHi(szLimits);
-        Clear(); DelayInf();
+      ShowHi(szLimits);
+      Clear(); DelayInf();
 
-        ShowHi(szCanals);
-        strcpy(szLo+0,szCanalFromMask);
-      }
-      else BlockProgram(bSET_LIMITS30);
+      ShowHi(szCanals);
+      strcpy(szLo+0,szCanalFromMask);
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
@@ -70,7 +66,7 @@ void    key_SetLimits32(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        for (ibX=ibXmin; ibX<=ibXmax; ibX++) mpcwStartRelCan[ibX] = w;
+        for (ibX=ibXmin; ibX<=ibXmax; ibX++) mpcwStopCan[ibX] = w;
         OK();
       }
       else Beep();
