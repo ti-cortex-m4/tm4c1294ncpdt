@@ -340,7 +340,7 @@ void    ReadTopBOld(void)
   // счётчик получасов в выключенном состоянии
   iwMajor = 0;
 
-  // TODO InitRefill();
+  // TODO StartRefill();
 
 #ifdef  DAYS100
   dwTmpPrev = 0;
