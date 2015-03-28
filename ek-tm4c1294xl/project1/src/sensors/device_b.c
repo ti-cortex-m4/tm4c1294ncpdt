@@ -26,6 +26,7 @@ DEVICE_B.C
 #include        "../digitals/current_run.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/limits.h"
+#include        "../digitals/profile/refill.h"
 #include        "../special/special.h"
 #include        "../flash/records.h"
 #include        "../energy.h"
@@ -340,7 +341,7 @@ void    ReadTopBOld(void)
   // счётчик получасов в выключенном состоянии
   iwMajor = 0;
 
-  // TODO StartRefill();
+  StartRefill();
 
 #ifdef  DAYS100
   dwTmpPrev = 0;
@@ -497,9 +498,9 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
     mpwChannels[c] = w;
   }
 
-  // TODO MakeRefillWinter();
+  MakeRefillWinter(&tiAlt);
   MakeSpecial();
-  // TODO if (boRefillDisable == FALSE) MakeRefill();
+  if (boDsblRefill == FALSE) MakeRefill(&tiAlt);
   return(MakeStopHou(0));  
 }
 

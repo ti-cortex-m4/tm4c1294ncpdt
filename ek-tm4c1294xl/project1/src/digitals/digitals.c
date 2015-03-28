@@ -85,6 +85,16 @@ bool    CompareCurrPrevLines(uchar  ibDig, uchar  ibCan)
 }
 
 
+bool    CompareLines(uchar  ibDig, uchar  ibCan)
+{
+  return( (GetDigitalPort(ibDig)    == GetDigitalPort(ibCan))   &&
+          (GetDigitalPhone(ibDig)   == GetDigitalPhone(ibCan))  &&
+          (GetDigitalDevice(ibDig)  == GetDigitalDevice(ibCan))  &&
+          (GetDigitalAddress(ibDig) == GetDigitalAddress(ibCan)) &&
+          ((ibDig == ibCan) || (boSeparateCan == FALSE)) );
+}
+
+
 
 uchar   GetDigitalPort(uchar  ibCan) {
   return mpdiDigital[ibCan].ibPort;

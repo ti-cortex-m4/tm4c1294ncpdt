@@ -1,10 +1,16 @@
 /*------------------------------------------------------------------------------
-ESSENTIAL2.H
+REFILL.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    StartRefill(void);
-void    MakeRefillWinter(void);
-void    MakeRefill(void);
+extern  boolean                 boDsblRefill;
 
+
+extern  file const              flDsblRefill;
+
+
+
+void    StartRefill(void);
+void    MakeRefillWinter(time  *pti);
+void    MakeRefill(time  *pti);
