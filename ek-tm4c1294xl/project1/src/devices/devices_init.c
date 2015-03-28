@@ -30,6 +30,7 @@ DEVICES_INIT.C
 #include        "../serial/speeds_display.h"
 #include        "../digitals/answer.h"
 #include        "../digitals/limits.h"
+#include        "../digitals/profile/refill.h"
 #include        "../flash/files.h"
 #include        "../flash/records.h"
 #include        "../time/delay.h"
@@ -85,6 +86,7 @@ void    InitDevices(void)
   InitDef();
   InitDefects();
   InitLimits();
+  InitRefill();
 }
 
 
@@ -103,4 +105,5 @@ void    ResetDevices(void)
   ResetDef();
   ResetDefects();
   ResetLimits();
+  ResetRefill();
 }
