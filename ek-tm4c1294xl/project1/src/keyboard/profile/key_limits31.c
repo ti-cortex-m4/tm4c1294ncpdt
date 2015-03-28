@@ -14,8 +14,8 @@ KEY_LIMITS31.C
 
 
 //                                          0123456789ABCDEF
-static char const       szLimits31[]     = "Нижняя граница  ",
-                        szMaskLimits31[] = "    ____     ";
+static char const       szLimits[]       = "Нижняя граница  ",
+                        szMaskLimits[]   = "    ____     ";
 
                         
 
@@ -43,7 +43,7 @@ void    key_SetLimits31(void)
       if (boUseBounds == TRUE)
       {
         enKeyboard = KBD_INPUT1;
-        ShowHi(szLimits31);
+        ShowHi(szLimits);
 
         Canal();
       }
@@ -102,7 +102,7 @@ void    key_SetLimits31(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT2;
-      ShowLo(szMaskLimits31);
+      ShowLo(szMaskLimits);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))

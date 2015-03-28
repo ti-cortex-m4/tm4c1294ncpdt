@@ -13,9 +13,9 @@ KEY_LIMITS2.C
 
 
 //                                           0123456789ABCDEF
-static char const       szLimits2[]       = "Верхняя граница ",
+static char const       szLimits[]        = "Верхняя граница ",
                         szCanals[]        = "Каналы:         ",
-                        szMaskLimits2[]   = "    ____        ",
+                        szMaskLimits[]    = "    ____        ",
                         szCanalFromMask[] = " от: __",
                         szCanalToMask[]   = " до: __";
 
@@ -31,7 +31,7 @@ void    key_SetLimits2(void)
     {
       enKeyboard = KBD_INPUT1;
 
-      ShowHi(szLimits2);
+      ShowHi(szLimits);
       Clear(); DelayInf();
 
       ShowHi(szCanals);
@@ -54,8 +54,8 @@ void    key_SetLimits2(void)
       {
         enKeyboard = KBD_INPUT3;
 
-        ShowHi(szLimits2);
-        ShowLo(szMaskLimits2);
+        ShowHi(szLimits);
+        ShowLo(szMaskLimits);
       }
       else Beep();
     }
