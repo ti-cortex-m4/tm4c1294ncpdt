@@ -8,7 +8,6 @@ KEY_DECRET.C
 #include        "../memory/mem_settings.h"
 #include        "keyboard.h"
 #include        "../display/display.h"
-#include        "../beep.h"
 #include        "../time/decret.h"
 #include        "../time/rtc.h"
 

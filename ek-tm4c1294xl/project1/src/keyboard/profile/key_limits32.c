@@ -1,26 +1,25 @@
 /*------------------------------------------------------------------------------
-_LIMITS2.C
+KEY_LIMITS32.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "delay.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "display.h"
+
+#include        "../../main.h"
+#include        "../../memory/mem_limits.h"
+#include        "../keyboard.h"
+#include        "../../display/display.h"
+#include        "../../digitals/limits.h"
 
 
 
 //                                           0123456789ABCDEF
-message          code   szLimits32        = "Нижняя граница  ",
-                        szCanals32        = "Каналы:         ",
-                        szMaskLimits32    = "    ____        ",
-                        szCanalFromMask32 = " от: __",
-                        szCanalToMask32   = " до: __";
+static char const       szLimits32[]        = "Нижняя граница  ",
+                        szCanals32[]        = "Каналы:         ",
+                        szMaskLimits32[]    = "    ____        ",
+                        szCanalFromMask32[] = " от: __",
+                        szCanalToMask32[]   = " до: __";
+
+static uchar            ibXmin, ibXmax;
 
 
 
@@ -30,7 +29,7 @@ void    key_SetLimits32(void)
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boStartCan == boTrue)
+      if (boUseBounds == TRUE)
       {
         enKeyboard = KBD_INPUT1;
 
@@ -44,7 +43,7 @@ void    key_SetLimits32(void)
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ibXmin = GetChar(5,6) - 1;
+      ibXmin = GetCharLo(5,6) - 1;
       if (ibXmin < bCANALS)
       {
         enKeyboard = KBD_INPUT2;
@@ -54,7 +53,7 @@ void    key_SetLimits32(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      ibXmax = GetChar(13,14) - 1;
+      ibXmax = GetCharLo(13,14) - 1;
       if ((ibXmax < bCANALS) && (ibXmax >= ibXmin))
       {
         enKeyboard = KBD_INPUT3;
@@ -66,11 +65,12 @@ void    key_SetLimits32(void)
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      if ((iwA = GetInt(4,7)) < wHOURS)
+      uint w;
+      if ((w = GetIntLo(4,7)) < wHOURS)
       {
         enKeyboard = KBD_POSTENTER;
 
-        for (ibX=ibXmin; ibX<=ibXmax; ibX++) mpcwStartRelCan[ibX] = iwA;
+        for (ibX=ibXmin; ibX<=ibXmax; ibX++) mpcwStartRelCan[ibX] = w;
         OK();
       }
       else Beep();
@@ -99,8 +99,9 @@ void    key_SetLimits32(void)
       enKeyboard = KBD_POSTINPUT3;
       ShiftLo(4,7);
 
-      if ((iwA = GetInt(4,7)) < wHOURS)
-        sprintf(szLo+8,":%02bu",(uchar)(iwA/48 + 1));
+      uint w;
+      if ((w = GetIntLo(4,7)) < wHOURS)
+        sprintf(szLo+8,":%02u",(uchar)(w/48 + 1));
       else
         sprintf(szLo+8," ? ");
     }
@@ -108,5 +109,3 @@ void    key_SetLimits32(void)
   }
   else Beep();
 }
-
-*/

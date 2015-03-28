@@ -1,37 +1,35 @@
 /*------------------------------------------------------------------------------
-_LIMITS31.C
+KEY_LIMITS31.C
 
  
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "sensors.h"
+
+#include        "../../main.h"
+#include        "../../memory/mem_limits.h"
+#include        "../keyboard.h"
+#include        "../../display/display.h"
+#include        "../../digitals/digitals.h"
+#include        "../../digitals/limits.h"
 
 
 
 //                                          0123456789ABCDEF
-message         code    szLimits31       = "Нижняя граница  ",
-                        szMaskLimits31   = "    ____     ";
+static char const       szLimits31[]     = "Нижняя граница  ",
+                        szMaskLimits31[] = "    ____     ";
 
                         
 
 void    ShowLimits31(void)
 {
   Clear();
-  sprintf(szLo+4,"%04u:%02bu",mpcwStartRelCan[ibX],(uchar)(mpcwStartRelCan[ibX]/48 + 1));
+  sprintf(szLo+4,"%04u:%02u",mpcwStartRelCan[ibX],(uchar)(mpcwStartRelCan[ibX]/48 + 1));
 
   if (GetDigitalDevice(ibX) == 6) 
     szLo[2] = '+';  
   else 
     szLo[2] = ' ';
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 }
 
 
@@ -42,7 +40,7 @@ void    key_SetLimits31(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (boStartCan == boTrue)
+      if (boUseBounds == TRUE)
       {
         enKeyboard = KBD_INPUT1;
         ShowHi(szLimits31);
@@ -60,7 +58,7 @@ void    key_SetLimits31(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < bCANALS)
+      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         ShowLimits31();
@@ -74,11 +72,12 @@ void    key_SetLimits31(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((iwA = GetInt(4,7) - 1) < wHOURS)
+      uint w;
+      if ((w = GetIntLo(4,7) - 1) < wHOURS)
       {
         enKeyboard = KBD_POSTENTER;
 
-        mpcwStartRelCan[ibX] = iwA + 1;
+        mpcwStartRelCan[ibX] = w + 1;
         ShowLimits31();
       }
       else Beep();
@@ -121,5 +120,3 @@ void    key_SetLimits31(void)
   }
   else Beep();
 }
-*/
-
