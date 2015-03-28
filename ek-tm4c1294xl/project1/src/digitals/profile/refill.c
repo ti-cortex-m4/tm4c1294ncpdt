@@ -8,6 +8,7 @@ REFILL.C
 #include        "../../memory/mem_energy_spec.h"
 #include        "../../display/display.h"
 #include        "../../keyboard/keyboard.h"
+#include        "../../realtime/realtime_spec.h"
 #include        "../../digitals/digitals.h"
 #include        "../../devices/devices.h"
 #include        "../../impulses/energy_spec.h"
@@ -60,9 +61,11 @@ void    DoRefill(void)
   
   while (iwHou != iwBmax) {
     if (fKey == 1) { fKey = 0; Beep(); }
-    //TODO if ((iwHou % 0x10) == 0) NexttimeMnt();
+    if ((iwHou % 0x10) == 0) NexttimeMnt();
 
-    sprintf(szLo,"обработано: %u  ",++iwB);
+    Clear();
+    sprintf(szLo,"обработано: %u",++iwB);
+
     LoadImpHouSpec(iwHou,1);
 
     uchar ibCan;

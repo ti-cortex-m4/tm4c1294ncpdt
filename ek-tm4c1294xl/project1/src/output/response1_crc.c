@@ -10,6 +10,7 @@ RESPONSE1_CRC.C
 #include        "../memory/mem_settings.h"
 #include        "../include/states.h"
 #include        "../serial/ports.h"
+#include        "out_common.h"
 #include        "out_rtc.h"
 #include        "out_groups.h"
 #include        "out_tariffs.h"
@@ -64,13 +65,13 @@ void    Response1_CRC(void)
       case bINQ_GETNEWPUBTARIFFS: OutGetNewPubTariffs(); break;
       case bINQ_SETNEWPUBTARIFFS: OutSetNewPubTariffs(); break;
 
-      case bINQ_GETTRANS_ENG: Common(mpreTransEng, sizeof(real)*bCANALS); break;
-      case bINQ_GETTRANS_CNT: Common(mpreTransCnt, sizeof(real)*bCANALS); break;
-      case bINQ_GETPULSE_HOU: Common(mprePulseHou, sizeof(real)*bCANALS); break;
-      case bINQ_GETPULSE_MNT: Common(mprePulseMnt, sizeof(real)*bCANALS); break;
-      case bINQ_GETCOUNT: Common(mpreCount, sizeof(real)*bCANALS); break;
-      case bINQ_GETLOSSE: Common(mpreLosse, sizeof(real)*bCANALS); break;
-      case bINQ_GETLEVEL: Common(mpreLevelDiv, sizeof(real)*bCANALS); break;
+      case bINQ_GETTRANS_ENG: OutReal(mpreTransEng, bCANALS); break;
+      case bINQ_GETTRANS_CNT: OutReal(mpreTransCnt, bCANALS); break;
+      case bINQ_GETPULSE_HOU: OutReal(mprePulseHou, bCANALS); break;
+      case bINQ_GETPULSE_MNT: OutReal(mprePulseMnt, bCANALS); break;
+      case bINQ_GETCOUNT: OutReal(mpreCount, bCANALS); break;
+      case bINQ_GETLOSSE: OutReal(mpreLosse, bCANALS); break;
+      case bINQ_GETLEVEL: OutReal(mpreLevelDiv, bCANALS); break;
 
       case bINQ_GETDIGITAL: OutGetDigital(); break;
       case bINQ_SETDIGITAL: OutSetDigital(); break;

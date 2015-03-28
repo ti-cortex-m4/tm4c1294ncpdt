@@ -20,3 +20,7 @@ extern  uchar                   cbShowCurrentTime;
 extern  ulong                   cdwSeconds, cdwMinutes1, cdwMinutes3, cdwMinutes30;
 
 extern  uint                    cwDays, cwMonths, cwYears;
+
+
+
+extern  uchar                   bHouInc;
