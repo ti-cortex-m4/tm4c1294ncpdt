@@ -86,7 +86,7 @@ SYSTEM.H
 // количество типов цифровых счётчиков
 #define bDEVICES        3
 
-// количество линий учёта в цифровом счётчике
+// максимальное количество линий учёта в цифровом счётчике
 #define bCHANNELS       128
 
 
@@ -100,10 +100,10 @@ SYSTEM.H
 #define bMINUTES        40
 
 // размер получасовых массивов
-#define wHOURS          (uint)(5*48)
+#define wHOURS          (uint)(62*48)
 
 // размер получасовых массивов
-#define wHOURS_62       (uint)(5*48)
+#define wHOURS_62       (uint)(62*48)
 
 // размер суточных массивов
 #define bDAYS           14

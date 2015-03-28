@@ -31,3 +31,7 @@ ulong                   cdwSeconds, cdwMinutes1, cdwMinutes3, cdwMinutes30;
 // счётчики отработанного времени
 uint                    cwDays, cwMonths, cwYears;
 
+
+
+// переменная
+uchar                   bHouInc;
