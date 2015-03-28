@@ -62,6 +62,7 @@ PROGRAMS.H
 #define bGET_SPEED                  14
 
 #define bGET_CURRTIME               1
+#define bGET_CORRECT_TIME           2
 #define bGET_CURRDATE               3
 
 #define bGET_GROUPS                 4

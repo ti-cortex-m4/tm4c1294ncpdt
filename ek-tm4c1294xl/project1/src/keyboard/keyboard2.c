@@ -10,6 +10,7 @@ KEYBOARD2.C
 #include        "key_gaps_flag.h"
 #include        "key_gaps.h"
 #include        "digitals/key_hide_messages.h"
+#include        "digitals/profile/key_dsbl_refill.h"
 #include        "digitals/key_max_repeats.h"
 #include        "unified/key_strict_uni.h"
 #include        "unified/key_dsbl_password_uni.h"
@@ -27,6 +28,7 @@ void    Keyboard2Program(void)
     case wSET_GAPS_FLAG:      key_SetGapsFlag();        break;
     case wSET_GAPS:           key_SetGaps();            break;
 
+    case wSET_DSBL_REFILL:    key_SetDsblRefill();      break;
     case wSET_MAX_REPEATS:    key_SetMaxRepeats();      break;
 
     case wSET_STRICT_UNI:         key_SetStrictUni();        break;
@@ -48,6 +50,7 @@ void    Keyboard2Work(void)
     case wSET_GAPS_FLAG:      key_SetGapsFlag();        break;
     case wSET_GAPS:           key_GetGaps();            break;
 
+    case wSET_DSBL_REFILL:    key_SetDsblRefill();      break;
     case wSET_MAX_REPEATS:    key_SetMaxRepeats();      break;
 
     case wSET_STRICT_UNI:         key_SetStrictUni();        break;
@@ -69,6 +72,7 @@ void    Keyboard2Reprogram(void)
     case wSET_GAPS_FLAG:      key_SetGapsFlag();        break;
     case wSET_GAPS:           key_SetGaps();            break;
 
+    case wSET_DSBL_REFILL:    key_SetDsblRefill();      break;
     case wSET_MAX_REPEATS:    key_SetMaxRepeats();      break;
 
     case wSET_STRICT_UNI:         key_SetStrictUni();        break;

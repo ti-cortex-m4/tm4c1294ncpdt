@@ -167,7 +167,9 @@ typedef enum
   FLS_STOP_CAN          = FLS_START_CAN + 1,
   FLS_STOP_AUX_CAN      = FLS_STOP_CAN + 1,
 
-  FLS_END               = FLS_STOP_AUX_CAN + 1
+  FLS_DSBL_REFILL       = FLS_STOP_AUX_CAN + 1,
+
+  FLS_END               = FLS_DSBL_REFILL + 1
 } flash;
 
 
