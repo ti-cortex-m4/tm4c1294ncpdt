@@ -3,7 +3,7 @@ CHECKUP_B.C
 
 
 ------------------------------------------------------------------------------*/
-
+/*
 #include        "main.h"
 #include        "xdata.h"
 #include        "checkup.h"
@@ -56,7 +56,7 @@ void    ReadTopBOld_Checkup(void)
 { 
   wBaseCurr = InBuff(1)*0x100 + InBuff(2);
 
-  InitRefill();
+  StartRefill();
 }
 
 
@@ -283,7 +283,7 @@ bit    ReadHeaderB_Checkup2(void)
   daAlt.bDay   = tiDig.bDay;
   daAlt.bMonth = tiDig.bMonth;
   daAlt.bYear  = tiDig.bYear;
-  if (IsCheckupDayAdded() == 0) { szLo[4] = '*'; InitRefill(); return(1); } // не нужно проверять эти сутки
+  if (IsCheckupDayAdded() == 0) { szLo[4] = '*'; StartRefill(); return(1); } // не нужно проверять эти сутки
 
 
   ibXmin = ibDig;
@@ -314,3 +314,4 @@ bit    ReadHeaderB_Checkup2(void)
 
   return(1);
 }
+*/

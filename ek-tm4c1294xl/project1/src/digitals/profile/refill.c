@@ -1,14 +1,31 @@
 /*------------------------------------------------------------------------------
-ESSENTIAL2.C
+REFILL.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
+#include        "../../memory/mem_energy_spec.h"
 #include        "../../display/display.h"
 #include        "../../keyboard/keyboard.h"
+#include        "../../digitals/digitals.h"
+#include        "../../devices/devices.h"
+#include        "../../impulses/energy_spec.h"
+#include        "../../time/decret.h"
+#include        "../../flash/records.h"
 #include        "../../flash/files.h"
+#include        "refill.h"
 
+
+
+// запрет очистки неинициализованных получасовых графиков
+boolean                 boDsblRefill;
+
+// переменные для заполнения пропущенных получасов
+static uint             iwB,iwBmin,iwBmax;
+
+// переменные для обработки перехода на зимнее время
+static uchar            bRefillWinter, mpbRefillWinter[10];
 
 
 file const              flDsblRefill = {FLS_DSBL_REFILL, &boDsblRefill, sizeof(boolean)};
@@ -18,7 +35,7 @@ file const              flDsblRefill = {FLS_DSBL_REFILL, &boDsblRefill, sizeof(b
 void    StartRefill(void)
 {
   iwBmin = 0xFFFF;
-  memset(&mpbRefillWinter, boFalse, sizeof(mpbRefillWinter));
+  memset(&mpbRefillWinter, 0, sizeof(mpbRefillWinter));
 }
 
 
@@ -26,15 +43,16 @@ void    StartRefill(void)
 void    DoRefill(void)
 {
   iwB = 0;
-  iwHou = iwBmin; 
+  uint iwHou = iwBmin;
   
   while (iwHou != iwBmax) {
     if (fKey == 1) { fKey = 0; Beep(); }
-    if ((iwHou % 0x10) == 0) NexttimeMnt();
+    //TODO if ((iwHou % 0x10) == 0) NexttimeMnt();
 
     sprintf(szLo,"обработано: %u  ",++iwB);
     LoadImpHouSpec(iwHou,1);
 
+    uchar ibCan;
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       if (CompareLines(ibDig,ibCan) == 1) 
@@ -49,18 +67,18 @@ void    DoRefill(void)
 
 
 
-void    MakeRefillWinter(void)
+void    MakeRefillWinter(time  *pti)
 {
-  if (IsWinterAlt()) {
-    bRefillWinter = ++mpbRefillWinter[tiAlt.bHour*2 + tiAlt.bMinute/30]; 
+  if (IsWinter(pti)) {
+    bRefillWinter = ++mpbRefillWinter[pti->bHour*2 + pti->bMinute/30];
   }
 }
 
 
 
-void    MakeRefill(void)
+void    MakeRefill(time  *pti)
 {
-  if (IsWinterAlt() && (bRefillWinter > 1)) return;
+  if (IsWinter(pti) && (bRefillWinter > 1)) return;
 
   if ((iwBmin != 0xFFFF) && (iwBmin != iwDigHou))
   {
