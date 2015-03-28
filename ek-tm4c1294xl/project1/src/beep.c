@@ -43,7 +43,7 @@ void    InitBeep(void) {
 
 #endif
 
-  SoundOff();       
+  Beep();
 }
 
 

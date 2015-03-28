@@ -120,6 +120,7 @@ int main(void) {
     	RunDevices();
     	RunKeyboard();
     	RunLocal();
+
     	RunResponseCRC_All();
     	RunResponseUNI_All();
     }
