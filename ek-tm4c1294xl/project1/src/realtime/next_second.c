@@ -21,6 +21,7 @@ void    NextSecond(void)
 
   if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
   {
+    cwHouLength++;
     if ((fProfile == 1) && (cbWaitQuery == 0))
     {
       if ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= bTimeoutProfile)

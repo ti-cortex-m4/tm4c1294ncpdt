@@ -678,10 +678,17 @@ void    RunDevices(void)
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
       else
       {
-        slong dwDelta = dwSecond1 - dwSecond2;
-        ShowDeltaTime2(ibDig, dwDelta);
-
-        dwDelta = (dwDelta < 0 ? -dwDelta : dwDelta);
+        ulong dwDelta;
+        if (dwSecond1 > dwSecond2)
+        {
+          dwDelta = dwSecond1 - dwSecond2;
+          ShowDeltaTimeNegative(ibDig, dwDelta);
+        }
+        else
+        {
+          dwDelta = dwSecond2 - dwSecond1;
+          ShowDeltaTimePositive(ibDig, dwDelta);
+        }
 
         if (dwDelta < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }

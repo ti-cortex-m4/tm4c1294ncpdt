@@ -74,10 +74,17 @@
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
       else
       {
-        slong dwDelta = dwSecond1 - dwSecond2;
-        ShowDeltaTime2(ibDig, dwDelta);
-
-        dwDelta = (dwDelta < 0 ? -dwDelta : dwDelta);
+        ulong dwDelta;
+        if (dwSecond1 > dwSecond2)
+        {
+          dwDelta = dwSecond1 - dwSecond2;
+          ShowDeltaTimeNegative(ibDig, dwDelta);
+        }
+        else
+        {
+          dwDelta = dwSecond2 - dwSecond1;
+          ShowDeltaTimePositive(ibDig, dwDelta);
+        }
 
         if (dwDelta < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
@@ -311,7 +318,7 @@
 
     case DEV_POSTHEADER_B2:
       cbRepeat2 = 0;
-      NewBoundsAbs(wBaseCurr);
+      NewBoundsAbs16(wBaseCurr);
       if (ReadHeaderB(0,0) == 0)
         DoneProfile();
       else
@@ -361,7 +368,7 @@
       }
       else
       {
-        NewBoundsAbs(wBaseCurr);
+        NewBoundsAbs16(wBaseCurr);
         for (i=0; i<bBLOCKS_B; i++)
         {
           if (ReadHeaderB(i,1) == 0) break;
@@ -399,7 +406,7 @@
 
     case DEV_POSTHEADER_B2NEXT:
     {
-        NewBoundsAbs2(dwBaseCurr);
+        NewBoundsAbs32(dwBaseCurr);
         uchar i;
         for (i=0; i<17; i++)
         {
