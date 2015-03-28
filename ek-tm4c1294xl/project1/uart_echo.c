@@ -44,7 +44,7 @@ TODO .C
 #include "src/tariffs/relaxs.h"
 #include "src/tariffs/gaps.h"
 #include "src/digitals/digitals.h"
-#include "src/digitals/profile_core.h"
+#include "src/digitals/profile/profile_core.h"
 #include "src/devices/devices_init.h"
 #include "src/devices/devices.h"
 #include "src/digitals/phones.h"

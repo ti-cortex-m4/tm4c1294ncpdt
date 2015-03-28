@@ -10,7 +10,7 @@ KEY_ENBL_HOURS.Ñ
 #include        "../../display/display.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_display.h"
-#include        "../../digitals/profile_core.h"
+#include        "../../digitals/profile/profile_core.h"
 #include        "../../digitals/enbl_hours.h"
 #include        "../../serial/speeds_display.h"
 #include        "../../flash/files.h"

@@ -8,7 +8,7 @@ KEY_TIMEOUT_PROFILE.C
 #include        "../../../memory/mem_digitals.h"
 #include        "../../keyboard.h"
 #include        "../../../display/display.h"
-#include        "../../../digitals/profile_core.h"
+#include        "../../../digitals/profile/profile_core.h"
 #include        "../../../flash/files.h"
 
 

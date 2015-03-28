@@ -10,7 +10,7 @@ KEY_ENBL_CANALS.Ñ
 #include        "../../display/display.h"
 #include        "../keyboard.h"
 #include        "../../flash/files.h"
-#include        "../../digitals/profile_core.h"
+#include        "../../digitals/profile/profile_core.h"
 
 
 

@@ -8,7 +8,7 @@ NEXT_MINUTE30.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../impulses/max_power.h"
-#include        "../digitals/profile.h"
+#include        "../digitals/profile/profile.h"
 #include        "../digitals/limits.h"
 #include        "../energy2.h"
 #include        "../energy3.h"

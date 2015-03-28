@@ -6,7 +6,7 @@ KEY_ENBL_PROFILE.C
 
 #include        "../../../main.h"
 #include        "../../../memory/mem_digitals.h"
-#include        "../../../digitals/profile_core.h"
+#include        "../../../digitals/profile/profile_core.h"
 #include        "../../key_flag.h"
 
 
