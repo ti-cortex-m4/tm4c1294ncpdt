@@ -117,8 +117,8 @@ int main(void) {
     	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM))
 
     	RunRealtime();
-    	RunKeyboard();
     	RunDevices();
+    	RunKeyboard();
     	RunLocal();
     	RunResponseCRC_All();
     	RunResponseUNI_All();

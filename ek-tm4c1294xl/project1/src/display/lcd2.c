@@ -40,16 +40,6 @@ LCD2.C
 
 static void Wait(void) // TODO
 {
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
 }
 
 //”становка одного или нескольких из управл€ющих битов ∆ »

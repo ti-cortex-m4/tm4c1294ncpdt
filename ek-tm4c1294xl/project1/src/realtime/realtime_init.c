@@ -186,6 +186,7 @@ void    InitRealtime(void)
   fActive = 0;
 
   fCurrent = 0;
+  fProfile = 0;
 
 //  if (GetLabelRTC() == 0) TestError(szBadRTC1);
 
