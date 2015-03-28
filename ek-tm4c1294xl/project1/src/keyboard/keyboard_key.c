@@ -31,6 +31,12 @@ KEYBOARD_KEY.C
 #include        "digitals/key_run_profile.h"
 #include        "digitals/key_show_messages.h"
 #include        "digitals/key_separate_can.h"
+#include        "profile/key_limits.h"
+#include        "profile/key_limits2.h"
+#include        "profile/key_limits30.h"
+#include        "profile/key_limits31.h"
+#include        "profile/key_limits32.h"
+#include        "profile/key_limits33.h"
 #include        "phones/key_phones.h"
 #include        "phones/key_max_connect.h"
 #include        "phones/key_custom_modem.h"
@@ -128,12 +134,12 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-//      case bSET_LIMITS:         key_SetLimits();        break;
-//      case bSET_LIMITS2:        key_SetLimits2();       break;
-//      case bSET_LIMITS30:       key_SetLimits30();      break;
-//      case bSET_LIMITS31:       key_SetLimits31();      break;
-//      case bSET_LIMITS32:       key_SetLimits32();      break;
-//      case bSET_LIMITS33:       key_SetLimits33();      break;
+      case bSET_LIMITS:         key_SetLimits();        break;
+      case bSET_LIMITS2:        key_SetLimits2();       break;
+      case bSET_LIMITS30:       key_SetLimits30();      break;
+      case bSET_LIMITS31:       key_SetLimits31();      break;
+      case bSET_LIMITS32:       key_SetLimits32();      break;
+      case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
@@ -225,12 +231,12 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-//      case bSET_LIMITS:         key_SetLimits();        break;
-//      case bSET_LIMITS2:        key_SetLimits2();       break;
-//      case bSET_LIMITS30:       key_SetLimits30();      break;
-//      case bSET_LIMITS31:       key_SetLimits31();      break;
-//      case bSET_LIMITS32:       key_SetLimits32();      break;
-//      case bSET_LIMITS33:       key_SetLimits33();      break;
+      case bSET_LIMITS:         key_SetLimits();        break;
+      case bSET_LIMITS2:        key_SetLimits2();       break;
+      case bSET_LIMITS30:       key_SetLimits30();      break;
+      case bSET_LIMITS31:       key_SetLimits31();      break;
+      case bSET_LIMITS32:       key_SetLimits32();      break;
+      case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
@@ -407,12 +413,12 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-//      case bSET_LIMITS:         key_SetLimits();        break;
-//      case bSET_LIMITS2:        key_SetLimits2();       break;
-//      case bSET_LIMITS30:       key_SetLimits30();      break;
-//      case bSET_LIMITS31:       key_SetLimits31();      break;
-//      case bSET_LIMITS32:       key_SetLimits32();      break;
-//      case bSET_LIMITS33:       key_SetLimits33();      break;
+      case bSET_LIMITS:         key_SetLimits();        break;
+      case bSET_LIMITS2:        key_SetLimits2();       break;
+      case bSET_LIMITS30:       key_SetLimits30();      break;
+      case bSET_LIMITS31:       key_SetLimits31();      break;
+      case bSET_LIMITS32:       key_SetLimits32();      break;
+      case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;

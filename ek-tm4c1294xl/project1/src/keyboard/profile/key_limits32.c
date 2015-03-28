@@ -13,11 +13,11 @@ KEY_LIMITS32.C
 
 
 //                                           0123456789ABCDEF
-static char const       szLimits32[]        = "Нижняя граница  ",
-                        szCanals32[]        = "Каналы:         ",
-                        szMaskLimits32[]    = "    ____        ",
-                        szCanalFromMask32[] = " от: __",
-                        szCanalToMask32[]   = " до: __";
+static char const       szLimits[]        = "Нижняя граница  ",
+                        szCanals[]        = "Каналы:         ",
+                        szMaskLimits[]    = "    ____        ",
+                        szCanalFromMask[] = " от: __",
+                        szCanalToMask[]   = " до: __";
 
 static uchar            ibXmin, ibXmax;
 
@@ -33,11 +33,11 @@ void    key_SetLimits32(void)
       {
         enKeyboard = KBD_INPUT1;
 
-        ShowHi(szLimits32);
+        ShowHi(szLimits);
         Clear(); DelayInf();
 
-        ShowHi(szCanals32);
-        strcpy(szLo+0,szCanalFromMask32);
+        ShowHi(szCanals);
+        strcpy(szLo+0,szCanalFromMask);
       }
       else BlockProgram(bSET_LIMITS30);
     } 
@@ -47,7 +47,7 @@ void    key_SetLimits32(void)
       if (ibXmin < bCANALS)
       {
         enKeyboard = KBD_INPUT2;
-        strcpy(szLo+8,szCanalToMask32);
+        strcpy(szLo+8,szCanalToMask);
       }
       else Beep();
     }
@@ -58,8 +58,8 @@ void    key_SetLimits32(void)
       {
         enKeyboard = KBD_INPUT3;
 
-        ShowHi(szLimits32);
-        ShowLo(szMaskLimits32);
+        ShowHi(szLimits);
+        ShowLo(szMaskLimits);
       }
       else Beep();
     }

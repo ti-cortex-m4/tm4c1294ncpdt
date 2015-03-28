@@ -1,33 +1,31 @@
 /*------------------------------------------------------------------------------
-_LIMITS33.С
+KEY_LIMITS33.С
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "access.h"
-#include        "display.h"
-#include        "keyboard.h"
+
+#include        "../../main.h"
+#include        "../../memory/mem_limits.h"
+#include        "../keyboard.h"
+#include        "../../display/display.h"
+#include        "../../digitals/limits.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szFlag33        = "    Признаки    ",
-                        szStartCan      = " начала опроса  ";
+static char const       szFlag[]        = "    Признаки    ",
+                        szStartCan[]    = " начала опроса  ";
                      
-uchar           *code   pszLimits33[]   = { szFlag33, szStartCan, "" };
+static char const       *pszLimits[]   = { szFlag, szStartCan, "" };
 
 
 
 void    ShowLimits33(void)
 {
   Clear();
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 
-  if (mpboStartCan[ibX] == boFalse) 
+  if (mpboStartCan[ibX] == FALSE)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -45,7 +43,7 @@ void    key_SetLimits33(void)
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
-      LoadSlide(pszLimits33);
+      LoadSlide(pszLimits);
 
       Canal();
     } 
@@ -78,7 +76,7 @@ void    key_SetLimits33(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      mpboStartCan[ibX] = ~mpboStartCan[ibX];      
+      mpboStartCan[ibX] = (mpboStartCan[ibX] == TRUE ? FALSE : TRUE);
       ShowLimits33();
     }
     else Beep();
@@ -96,5 +94,3 @@ void    key_SetLimits33(void)
   }
   else Beep();
 }
-
-*/
