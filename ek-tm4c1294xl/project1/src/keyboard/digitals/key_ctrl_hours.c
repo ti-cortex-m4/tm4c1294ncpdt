@@ -9,7 +9,7 @@ KEY_CTRL_HOURS.Ñ
 #include        "../keyboard.h"
 #include        "../../display/display.h"
 #include        "../../digitals/digitals.h"
-#include        "../../digitals/profile_core.h"
+#include        "../../digitals/profile/profile_core.h"
 #include        "../../flash/files.h"
 
 

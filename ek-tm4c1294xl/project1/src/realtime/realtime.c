@@ -8,7 +8,7 @@ TODO атомарные операции
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_digitals.h"
-#include        "../digitals/current_run.h"
+#include        "../digitals/current/current_run.h"
 #include        "../digitals/wait_query.h"
 #include        "../time/rtc.h"
 #include        "../health.h"

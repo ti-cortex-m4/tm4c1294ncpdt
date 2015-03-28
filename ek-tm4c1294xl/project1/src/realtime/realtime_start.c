@@ -13,7 +13,7 @@ REALTIME_START.C
 #include        "../impulses/impulses.h"
 #include        "../energy.h"
 #include        "../digitals/digitals.h"
-#include        "../digitals/profile.h"
+#include        "../digitals/profile/profile.h"
 #include        "realtime_storage.h"
 
 

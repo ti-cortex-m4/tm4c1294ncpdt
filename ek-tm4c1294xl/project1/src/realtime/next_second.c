@@ -10,7 +10,7 @@ NEXT_SECOND.C
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_profile.h"
 #include        "../digitals/wait_query.h"
-#include        "../digitals/profile_run.h"
+#include        "../digitals/profile/profile_run.h"
 #include        "realtime.h"
 
 

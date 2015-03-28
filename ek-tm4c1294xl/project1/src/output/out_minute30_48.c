@@ -15,7 +15,7 @@ OUT_MINUTE30_48.C
 #include        "../energy2.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/sensors.h"
-#include        "../digitals/current.h"
+#include        "../digitals/current/current.h"
 
 
 

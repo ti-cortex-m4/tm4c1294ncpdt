@@ -23,7 +23,7 @@ DEVICE_B.C
 #include        "../serial/ports_common.h"
 #include        "../devices/devices.h"
 #include        "../devices/devices_time.h"
-#include        "../digitals/current_run.h"
+#include        "../digitals/current/current_run.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/limits.h"
 #include        "../digitals/profile/refill.h"
