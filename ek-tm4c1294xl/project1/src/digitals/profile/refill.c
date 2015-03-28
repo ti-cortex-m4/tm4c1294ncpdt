@@ -22,7 +22,7 @@ REFILL.C
 boolean                 boDsblRefill;
 
 // переменные для заполнения пропущенных получасов
-static uint             iwB,iwBmin,iwBmax;
+static uint             iwBmin, iwBmax;
 
 // переменные для обработки перехода на зимнее время
 static uchar            bRefillWinter, mpbRefillWinter[10];
@@ -30,6 +30,19 @@ static uchar            bRefillWinter, mpbRefillWinter[10];
 
 file const              flDsblRefill = {FLS_DSBL_REFILL, &boDsblRefill, sizeof(boolean)};
 
+
+
+void    InitRefill(void)
+{
+  LoadFile(&flDsblRefill);
+}
+
+
+void    ResetRefill(void)
+{
+	boDsblRefill = FALSE;
+  SaveFile(&flDsblRefill);
+}
 
 
 void    StartRefill(void)
@@ -42,7 +55,7 @@ void    StartRefill(void)
 
 void    DoRefill(void)
 {
-  iwB = 0;
+  uint iwB = 0;
   uint iwHou = iwBmin;
   
   while (iwHou != iwBmax) {
