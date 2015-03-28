@@ -170,7 +170,7 @@ void    ProcessTime(void)
   {
     if (fActive == 1) RunDTR();
 
-//    if (fActive == 1) fProfile = 1;
+    if (fActive == 1) fProfile = 1;
 
     if ((tiCurr.bDay   == tiSummer.bDay)   &&
         (tiCurr.bMonth == tiSummer.bMonth) &&

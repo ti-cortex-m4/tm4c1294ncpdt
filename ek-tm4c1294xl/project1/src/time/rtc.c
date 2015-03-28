@@ -21,16 +21,6 @@ RTC.C TODO RTC read temperature
 
 static void Wait(void) // TODO
 {
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
-  Nop();
 }
 
 

@@ -13,7 +13,9 @@ KEY_FACTORS.C
 #include        "../display/display.h"
 #include        "../engine.h"
 #include        "../energy.h"
+#include        "../factors.h"
 #include        "../digitals/digitals.h"
+#include        "../flash/files.h"
 
 
 
@@ -122,35 +124,51 @@ void    key_SetFactors(void)
           if (reBuffA > 0)
           {
             enKeyboard = KBD_POSTENTER;
+
             SetCanReal(mpreTransEng,ibX,&reBuffA);
+            SaveFile(&flTransEng);
+
             reBuffA = 1;
             SetCanReal(mpreTransCnt,ibX,&reBuffA);
+            SaveFile(&flTransCnt);
           }
+          else Beep();
           break;
 
         case bSET_TRANS_CNT:   
           if (reBuffA > 0)
           {
             enKeyboard = KBD_POSTENTER;
+
             SetCanReal(mpreTransCnt,ibX,&reBuffA);
+            SaveFile(&flTransCnt);
           }
+          else Beep();
           break;
 
         case bSET_PULSE_HOU:  
           if (reBuffA > 0)
           {
             enKeyboard = KBD_POSTENTER;
+
             SetCanReal(mprePulseHou,ibX,&reBuffA);
+            SaveFile(&flPulseHou);
+
             SetCanReal(mprePulseMnt,ibX,&reBuffA);
+            SaveFile(&flPulseMnt);
           }
+          else Beep();
           break;
 
         case bSET_PULSE_MNT:  
           if (reBuffA > 0)
           {
             enKeyboard = KBD_POSTENTER;
+
             SetCanReal(mprePulseMnt,ibX,&reBuffA);
+            SaveFile(&flPulseMnt);
           }
+          else Beep();
           break;
 
         case bSET_COUNT:    
@@ -169,24 +187,32 @@ void    key_SetFactors(void)
             }
 
             SetCanReal(mpreCount,ibX,&reBuffA);
+            SaveFile(&flCount);
           }
+          else Beep();
           break;
 
         case bSET_LOSSE:   
           if (reBuffA < 100)
           {
             enKeyboard = KBD_POSTENTER;
+
             reBuffA /= 100;
             SetCanReal(mpreLosse,ibX,&reBuffA);
+            SaveFile(&flLosse);
           }   
+          else Beep();
           break;
 
         case bSET_LEVEL:  
           if (reBuffA > 0)
           {
             enKeyboard = KBD_POSTENTER;
+
             SetCanReal(mpreLevelDiv,ibX,&reBuffA);
+            SaveFile(&flLevelDiv);
           }
+          else Beep();
           break;
       }
 
