@@ -11,6 +11,7 @@ TODO чтение тарифов отдельно по modes
 #include        "../serial/ports.h"
 #include        "../access.h"
 #include        "../flash/files.h"
+#include        "../kernel/boolean.h"
 #include        "../tariffs/tariffs.h"
 #include        "../tariffs/oldtariffs.h"
 #include        "../tariffs/zones.h"
@@ -29,7 +30,7 @@ void    OutSetPublicTariffs(void)
 	{
 		if ((bInBuff5 == TRUE) || (bInBuff5 == FALSE))
 		{
-			fPublicTariffs = (bInBuff5 == TRUE ? TRUE : FALSE);
+			fPublicTariffs = CharToBoolean(bInBuff5);
 			SaveFile(&flPublicTariffs);
 			Result(bRES_OK);
 		}

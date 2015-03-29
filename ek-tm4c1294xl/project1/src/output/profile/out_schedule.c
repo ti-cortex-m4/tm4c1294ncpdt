@@ -8,6 +8,7 @@ OUT_SCHEDULE.C
 #include        "../../memory/mem_ports.h"
 #include        "../../memory/mem_schedule.h"
 #include        "../../serial/ports.h"
+#include        "../../kernel/boolean.h"
 #include        "../../digitals/schedule/schedule.h"
 #include        "../../flash/files.h"
 
@@ -30,7 +31,7 @@ void    OutSetEnblPrtHou(void)
 
     uchar i;
     for (i=0; i<48; i++)
-      mpboEnblPrtHou[bInBuff6][i] = (PopChar() == TRUE ? TRUE : FALSE);
+      mpboEnblPrtHou[bInBuff6][i] = CharToBoolean(PopChar());
 
     SaveFile(&flEnblPrtHou);
 
@@ -54,7 +55,7 @@ void    OutSetCtrlHou(void)
 
   uchar i;
   for (i=0; i<48; i++)
-    mpboCtrlHou[i] = (PopChar() == TRUE ? TRUE : FALSE);
+    mpboCtrlHou[i] = CharToBoolean(PopChar());
 
   SaveFile(&flCtrlHou);
 
@@ -76,12 +77,12 @@ void    OutSetRecalcHou1(void)
 {
   InitPop(6);
 
-  boRecalcAlways = (PopChar() == TRUE ? TRUE : FALSE);
+  boRecalcAlways = CharToBoolean(PopChar());
   SaveFile(&flRecalcAlways);
 
   uchar i;
   for (i=0; i<48; i++)
-    mpboRecalcHou[i] = (PopChar() == TRUE ? TRUE : FALSE);
+    mpboRecalcHou[i] = CharToBoolean(PopChar());
 
   SaveFile(&flRecalcHou);
 
@@ -97,7 +98,7 @@ void    OutSetRecalcHou2(void)
 
   uchar i;
   for (i=0; i<48; i++)
-    mpboRecalcHou[i] = (PopChar() == TRUE ? TRUE : FALSE);
+    mpboRecalcHou[i] = CharToBoolean(PopChar());
 
   SaveFile(&flRecalcHou);
 
