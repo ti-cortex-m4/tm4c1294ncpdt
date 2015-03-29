@@ -9,7 +9,7 @@ KEYBOARD.H
 #include        "../include/programs.h"
 #include        "../include/programs2.h"
 #include        "../time/delay.h"
-#include        "../beep.h"
+#include        "../hardware/beep.h"
 
 
 

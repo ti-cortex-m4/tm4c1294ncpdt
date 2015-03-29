@@ -10,7 +10,7 @@ KEYBOARD.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy_spec.h"
 #include        "../display/display.h"
-#include        "../beep.h"
+#include        "../hardware/beep.h"
 #include        "../realtime/realtime.h"
 #include        "../time/delay.h"
 #include        "../serial/print.h"

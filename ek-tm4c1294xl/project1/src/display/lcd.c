@@ -16,7 +16,7 @@ LCD.C
 #include "../main.h"
 #include "../display/display.h"
 #include "../time/delay.h"
-#include "../beep.h"
+#include "../hardware/beep.h"
 #include "../hardware/watchdog.h"
 #include "cp1251.h"
 
