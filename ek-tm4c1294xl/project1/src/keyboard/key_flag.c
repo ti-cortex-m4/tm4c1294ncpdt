@@ -36,7 +36,7 @@ void    key_SetFlag(file const  *pflFile, char const  *pszSlide[])
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        *pboFlag = (*pboFlag == TRUE ? FALSE : TRUE);
+        *pboFlag = InvertBoolean(*pboFlag);
         SaveFile(pflFile);
 
         ShowBoolean(*pboFlag);

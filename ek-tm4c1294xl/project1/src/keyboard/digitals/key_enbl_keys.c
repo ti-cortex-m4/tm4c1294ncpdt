@@ -40,7 +40,7 @@ void    key_SetEnblKeys(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        boEnblKeys = (boEnblKeys == TRUE ? FALSE : TRUE);
+        boEnblKeys = InvertBoolean(boEnblKeys);
         SaveFile(&flEnblKeys);
 
         ShowBoolean(boEnblKeys);

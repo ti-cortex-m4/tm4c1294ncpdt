@@ -53,7 +53,7 @@ void    key_SetPublicTariffs(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        fPublicTariffs = (fPublicTariffs == TRUE ? FALSE : TRUE);
+        fPublicTariffs = InvertBoolean(fPublicTariffs);
         SaveFile(&flPublicTariffs);
         ShowPublicTariffs();
 

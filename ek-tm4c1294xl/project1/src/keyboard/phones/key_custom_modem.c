@@ -43,7 +43,7 @@ void    key_SetCustomModem(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        boCustomModem = (boCustomModem == TRUE ? FALSE : TRUE);
+        boCustomModem = InvertBoolean(boCustomModem);
         SaveFile(&flCustomModem);
 
         ShowBoolean(boCustomModem);

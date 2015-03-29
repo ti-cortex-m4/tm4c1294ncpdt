@@ -78,7 +78,7 @@ void    key_SetEnblCanals(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      mpboEnblCan[ibX] = (mpboEnblCan[ibX] == TRUE ? FALSE : TRUE);
+      mpboEnblCan[ibX] = InvertBoolean(mpboEnblCan[ibX]);
       ShowEnblCanals();
       SaveFile(&flEnblCan);
     }

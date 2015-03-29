@@ -11,7 +11,6 @@ TODO чтение тарифов отдельно по modes
 #include        "../serial/ports.h"
 #include        "../access.h"
 #include        "../flash/files.h"
-#include        "../kernel/boolean.h"
 #include        "../tariffs/tariffs.h"
 #include        "../tariffs/oldtariffs.h"
 #include        "../tariffs/zones.h"
