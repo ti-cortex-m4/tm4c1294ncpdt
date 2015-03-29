@@ -16,6 +16,12 @@ extern  time                    mptiEsc_V[bCANALS];
 
 
 
+extern  moment                  moAlt;
+
+extern  moment                  mpmoEsc_U[bCANALS];
+
+
+
 extern  uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
                                 mpcwEscS_OK[bCANALS], mpcwEscS_Error[bCANALS],
                                 mpcwEscU_OK[bCANALS], mpcwEscU_Error[bCANALS];
