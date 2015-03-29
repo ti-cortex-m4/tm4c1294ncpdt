@@ -6,12 +6,20 @@ EXTENDED1.Ñ
 
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_realtime.h"
 #include        "../memory/mem_extended1.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
+#include        "../hardware/watchdog.h"
 #include        "../digitals/digitals.h"
+#include        "../digitals/digitals_messages.h"
+#include        "../devices/devices.h"
 #include        "../sensors/automatic2.h"
+#include        "../time/timedate.h"
+#include        "../time/rtc.h"
+#include        "../engine.h"
 #include        "../energy.h"
+#include        "extended1.h"
 
 
 
@@ -38,11 +46,11 @@ uchar   ibCan;
   else if (mpboDefEscU[ibDig] == FALSE)
   {
     ShowHi(szDirectEscU); Clear();
-    sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
+    sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadTimeDate(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_U_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_U_ERROR);*/ }
+    if (ReadTimeCan(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_U_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_U_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
     for (ibCan=0; ibCan<bCANALS; ibCan++)
@@ -56,7 +64,7 @@ uchar   ibCan;
           mpcwEscU_OK[ibCan]++;
 
           moAlt.tiBeta = *GetCurrTimeDate();
-          SetCanMoment(&mpmoEsc_U, ibCan);
+          mpmoEsc_U[ibCan] = moAlt;
 
           mpboDefEscU[ibCan] = TRUE;
           //AddDigRecord(EVE_ESC_U_DATA);
@@ -77,7 +85,7 @@ uchar   ibCan;
   else if (mpboDefEscV[ibDig] == FALSE)
   {
     ShowHi(szDirectEscV); Clear();
-    sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
+    sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
@@ -91,12 +99,11 @@ uchar   ibCan;
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          reBuffA = *PGetCanReal(mpreChannelsB, diPrev.ibLine);
+          reBuffA = GetCanReal(mpreChannelsB, diPrev.ibLine);
           mpcwEscV_OK[ibCan]++;
 
-          SetCanReal(&mpreEsc_V, ibCan);
-          tiAlt = *GetCurrTimeDate();
-          SetCanTime(mptiEsc_V, ibCan);
+          mpreEsc_V[ibCan] = reBuffA;
+          mptiEsc_V[ibCan] = *GetCurrTimeDate();
 
           mpboDefEscV[ibCan] = TRUE;
           //AddDigRecord(EVE_ESC_V_DATA);
@@ -117,11 +124,11 @@ uchar   ibCan;
   else if (mpboDefEscS[ibDig] == FALSE)
   {
     ShowHi(szDirectEscS); Clear();
-    sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
+    sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadSensors(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_S_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_S_ERROR);*/ }
+    if (ReadCntCurrCan(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_S_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_S_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
     for (ibCan=0; ibCan<bCANALS; ibCan++)
@@ -132,16 +139,15 @@ uchar   ibCan;
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           ResetWDT();
-          reBuffA = *PGetCanReal(mpreChannelsB, diPrev.ibLine);
+          reBuffA = GetCanReal(mpreChannelsB, diPrev.ibLine);
           mpcwEscS_OK[ibCan]++;
 
-          SetCanReal(&mpreEsc_S, ibCan);
-          tiAlt = *GetCurrTimeDate();
-          SetCanTime(mptiEsc_S, ibCan);
+          mpreEsc_S[ibCan] = reBuffA;
+          mptiEsc_S[ibCan] = *GetCurrTimeDate();
 
-          MakeExtended6(ibCan);
-          MakeExtended7(ibCan);
-          MakeDiagram(ibCan);
+//          MakeExtended6(ibCan);
+//          MakeExtended7(ibCan);
+//          MakeDiagram(ibCan);
 
           mpboDefEscS[ibCan] = TRUE;
           //AddDigRecord(EVE_ESC_S_DATA);

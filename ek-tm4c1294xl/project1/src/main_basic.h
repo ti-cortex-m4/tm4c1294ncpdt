@@ -41,6 +41,14 @@ typedef struct
 } time;
 
 
+// тип 'двойное время/дата'
+typedef struct
+{
+  time          tiAlfa;
+  time          tiBeta;
+} moment;
+
+
 // тип 'комбинированный'
 typedef union
 {

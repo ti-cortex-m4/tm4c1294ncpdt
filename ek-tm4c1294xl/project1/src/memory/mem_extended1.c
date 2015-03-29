@@ -25,6 +25,14 @@ time                    mptiEsc_V[bCANALS];
 
 
 
+// глобальная переменная
+moment                  moAlt;
+
+// массив переменных moment для расширенного опроса цифровых счётчиков
+moment                  mpmoEsc_U[bCANALS];
+
+
+
 // счётчики событий
 uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
                         mpcwEscS_OK[bCANALS], mpcwEscS_Error[bCANALS],
