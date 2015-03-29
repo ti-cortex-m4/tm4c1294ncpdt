@@ -41,7 +41,7 @@ void    key_SetReset(void)
       enKeyboard = KBD_INPUT1;
       Clear();
       
-      switch (bProgram)
+      switch (wProgram)
       { 
         case bSET_RESETCUSTOM:  
           ShowHi(szResetCustom);    
@@ -55,7 +55,7 @@ void    key_SetReset(void)
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      switch (bProgram)
+      switch (wProgram)
       {
         case bSET_RESETCUSTOM:
           Waiting();
@@ -152,7 +152,7 @@ void    key_SetReset(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        switch (bProgram)
+        switch (wProgram)
         {                        
           case bSET_RESETCUSTOM:   
           case bSET_RESETFULL:

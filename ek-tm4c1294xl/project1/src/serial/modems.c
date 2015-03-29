@@ -63,7 +63,7 @@ void    KeyBreakConnect(void)
   else Stop();
 
   enKeyboard = KBD_BEGIN;
-  bProgram = 0; wProgram = 0;
+  wProgram = 0;
 
   fKeyOn = 1;
   MakePause(DEV_MODEM_STOP);

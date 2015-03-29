@@ -74,7 +74,7 @@ void    ShowCanMonCurrEng(uchar  bMask)
 
 void    ShowSingle2(void)
 {
-  switch (bProgram)
+  switch (wProgram)
   {
     case bGET_POWCANCURRMNT:
     	LoadImpMnt( PrevHardMnt() );
@@ -125,7 +125,7 @@ void    key_GetSingle2(void)
       enKeyboard = KBD_INPUT1;
       Canal();
 
-      switch (bProgram)
+      switch (wProgram)
       {
         case bGET_POWCANCURRMNT:       LoadSlide(pszEngCanCurrMin);      break;
 

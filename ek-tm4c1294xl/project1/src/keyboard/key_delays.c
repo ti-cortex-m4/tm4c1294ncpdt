@@ -25,7 +25,7 @@ static char const       szDelays[]       = "Таймауты        ",
 static void ShowDelaysName(void)
 {
   ShowHi(szDelays);
-  switch (bProgram)
+  switch (wProgram)
   {
     case bSET_MAJOR_DELAYS:  ShowLo(szMajorDelays);  break;
     case bSET_MINOR_DELAYS:  ShowLo(szMinorDelays);  break;
@@ -40,7 +40,7 @@ static void ShowDelays(void)
 ulong   dw;
 
   Clear();
-  switch (bProgram)
+  switch (wProgram)
   {
     case bSET_MAJOR_DELAYS:  dw = GetMajorDelay(ibX); SaveMajorInDelay();  break;
     case bSET_MINOR_DELAYS:  dw = GetMinorDelay(ibX); SaveMinorInDelay();  break;
@@ -57,7 +57,7 @@ uint  w;
 
   w = (ulong)dw*wFREQUENCY_T0/1000;
 
-  switch (bProgram)
+  switch (wProgram)
   {
     case bSET_MAJOR_DELAYS:  mpwMajorInDelay[ibX] = w;  break;
     case bSET_MINOR_DELAYS:  mpwMinorInDelay[ibX] = w;  break;

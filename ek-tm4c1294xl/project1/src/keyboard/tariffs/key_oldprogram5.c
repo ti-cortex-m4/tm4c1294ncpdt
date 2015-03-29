@@ -71,7 +71,7 @@ void    key_GetOldProgram84(void)
     { 
       if (fPublicTariffs == true)
       {
-        switch (bProgram)
+        switch (wProgram)
         {
           case bGET_PROGRAM84: 
             BlockProgram(bGET_PUBLIC_TARIFFS);
@@ -84,7 +84,7 @@ void    key_GetOldProgram84(void)
       }
       else
       {
-        switch (bProgram)
+        switch (wProgram)
         {
           case bGET_PROGRAM84:  LoadSlide(pszEngPrg84);  break;
           case bGET_PROGRAM85:  LoadSlide(pszPowPrg85);  break;
@@ -129,7 +129,7 @@ void    key_GetOldProgram84(void)
   {
     enKeyboard = KBD_POSTENTER;
 
-    switch (bProgram)
+    switch (wProgram)
     {
       case bGET_PROGRAM84: 
         zoAlt = *PGetZoneEngMonthMode(ibY, 0);

@@ -19,7 +19,7 @@ RESPONSE_CRC.C
 
 
 void    ShowTestResponse(uchar  bState) {
-  if (bProgram == bTEST_RESPONSE)
+  if (wProgram == bTEST_RESPONSE)
   {
 #ifdef  MODBUS
     sprintf(szHi,"Порт %u: Mod%03u %u",ibPort+1,InBuff(3),bState);

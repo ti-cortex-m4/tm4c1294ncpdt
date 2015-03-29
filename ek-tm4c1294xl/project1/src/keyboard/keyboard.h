@@ -20,7 +20,6 @@ extern  volatile bool           fKey;
 
 extern  key                     enKeyboard;
 
-extern  uchar                   bProgram;
 extern  uint                    wProgram;
 
 extern  time                    tiKey;
@@ -33,7 +32,6 @@ void    InitKeyboard(void);
 void    ResetKeyboard(void);
 
 void    NoProgram(void);
-void    NoProgram2(void);
 void    BlockProgram(uchar  bA);
 void    BlockProgram2(uint  wA, bool fBeep);
 void    BlockProgramExt(uchar  bA);

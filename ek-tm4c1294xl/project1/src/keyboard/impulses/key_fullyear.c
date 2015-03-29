@@ -58,7 +58,7 @@ void    ShowGrpFullYearEng(uchar  bMask)
 
 void    ShowFullYear(void)   
 {
-  switch (bProgram)
+  switch (wProgram)
   {
     case bGET_ENGGRPYEAR_ABCD:  ShowGrpFullYearEng(0x0F);  break;
     case bGET_ENGGRPYEAR_CD:    ShowGrpFullYearEng(0x0C);  break;
@@ -160,7 +160,7 @@ void    key_GetFullYear(item  it)
       InitConnectKey();
       ibZ = 0;
 
-      switch (bProgram)
+      switch (wProgram)
       {
         case bGET_ENGGRPYEAR_ABCD:  LoadSlide(pszEngFull);    break;
         case bGET_ENGGRPYEAR_CD:    LoadSlide(pszEngTops);    break;

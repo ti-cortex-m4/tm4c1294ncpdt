@@ -22,7 +22,7 @@ RESPONSE_UNI.C
 
 void    ShowCommandUni(uchar  i)
 {
-  if (bProgram == bTEST_RESPONSE)
+  if (wProgram == bTEST_RESPONSE)
   {
     sprintf(szHi,"Порт %u: U-%02X%02X %u",ibPort+1,InBuff(4),InBuff(5),i);
     sprintf(szLo+14,"%02u",mpbDelayUni[ibPort]);
@@ -35,7 +35,7 @@ void    ShowCommandUni(uchar  i)
 
 void    ShowInfoUni(uchar  bInfo)
 {
-  if (bProgram == bTEST_RESPONSE)
+  if (wProgram == bTEST_RESPONSE)
   {
     sprintf(szHi+8,"%u",bInfo);
   }

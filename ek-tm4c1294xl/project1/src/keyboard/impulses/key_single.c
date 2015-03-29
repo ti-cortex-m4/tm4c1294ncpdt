@@ -208,7 +208,7 @@ void    ShowModemReadTimeCan(bool  fShowTimeDate)
 
 void    ShowSingle(void)
 {
-  switch (bProgram)
+  switch (wProgram)
   {
     case bGET_CNTCURR_10:
       ShowModemReadCntCurrCan(); 
@@ -331,7 +331,7 @@ void    ShowSingle(void)
 
   sprintf(szLo+14,"%2u",ibX+1);
 
-  switch (bProgram)
+  switch (wProgram)
   {
     case bGET_READTIMEDATE1:  ShowModemReadTimeCan(true);  break;
     case bGET_READTIMEDATE2:  ShowModemReadTimeCan(false);  break;
@@ -351,7 +351,7 @@ void    key_GetSingle(item  it)
 
       InitConnectKey();
 
-      switch (bProgram)
+      switch (wProgram)
       {
         case bGET_IMPCANCURRMNT:       ShowHi(szImpulseA);            break;
         case bGET_POWGRPCURRMNT:       LoadSlide(pszEngCurrMin);      break;

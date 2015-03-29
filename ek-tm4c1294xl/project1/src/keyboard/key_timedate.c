@@ -246,7 +246,7 @@ void   auto_GetCurrDate(void)
 // включение просмотра текущего времени при бездействии пользователя
 void    ShowCurrentTime(void)
 {
-  bProgram = bGET_CURRTIME;
+  wProgram = bGET_CURRTIME;
   fSlide = 0;
 
   enKeyboard = KBD_POSTENTER;
@@ -266,7 +266,6 @@ void    HideCurrentTime(bool  fClearProgram)
   if (fClearProgram == true)
   {
     enKeyboard = KBD_BEGIN;
-    bProgram = 0;
     wProgram = 0;
   }
 }
