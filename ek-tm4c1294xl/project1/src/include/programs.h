@@ -229,4 +229,23 @@ PROGRAMS.H
 #define bTEST_RTC                   229
 
 
+#define wSET_HIDE_MESSAGES          299
+
+#define wSET_GAPS_FLAG              300
+#define wSET_GAPS                   301
+
+#define wGET_READTRANS              354
+#define wGET_READPULSE              355
+
+#define wSET_DSBL_REFILL            405
+#define wSET_MAX_REPEATS            409
+
+#define wSET_DISABLE_ESC            410
+
+#define wSET_STRICT_UNI             417
+#define wSET_DSBL_PASSWORD_UNI      418
+#define wSET_MAX_DELAY_UNI          422
+#define wSET_REPEAT_FLOW_UNI        288
+
+
 #endif

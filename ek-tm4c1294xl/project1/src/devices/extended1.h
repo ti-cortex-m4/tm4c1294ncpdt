@@ -4,4 +4,7 @@ EXTENDED1.H
 
 ------------------------------------------------------------------------------*/
 
+void    InitExtended1(void);
+void    ResetExtended1(void);
+
 void    MakeExtended1(void);
