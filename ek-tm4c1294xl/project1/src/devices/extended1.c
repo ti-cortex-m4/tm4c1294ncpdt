@@ -12,6 +12,7 @@ EXTENDED1.С
 #include        "../keyboard/keyboard.h"
 #include        "../hardware/watchdog.h"
 #include        "../digitals/digitals.h"
+#include        "../digitals/digitals_display.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../devices/devices.h"
 #include        "../sensors/automatic2.h"
@@ -33,13 +34,9 @@ void    ResetExtended1(void)
 }
 
 
+
 void    MakeExtended1(void)
 {
-uchar   ibCan;
-
-//  AddDigRecord(EVE_EXTENDED);
-
-  // расширенный опрос информации для Esc U
   if (boDisableEsc1 == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
@@ -53,32 +50,32 @@ uchar   ibCan;
     if (ReadTimeCan(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_U_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_U_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+      LoadPrevDigital(c);
+      if (CompareCurrPrevLines(ibDig, c) == 1)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           moAlt.tiAlfa = tiChannelC;
-          mpcwEscU_OK[ibCan]++;
+          mpcwEscU_OK[c]++;
 
           moAlt.tiBeta = *GetCurrTimeDate();
-          mpmoEsc_U[ibCan] = moAlt;
+          mpmoEsc_U[c] = moAlt;
 
-          mpboDefEscU[ibCan] = TRUE;
+          mpboDefEscU[c] = TRUE;
           //AddDigRecord(EVE_ESC_U_DATA);
         }
         else
         {
           moAlt.tiAlfa = tiZero;
-          mpcwEscU_Error[ibCan]++;
+          mpcwEscU_Error[c]++;
         }
       }
     }
   }
 
-  // расширенный опрос информации для Esc V (только за текущий месяц)
   if (boDisableEsc2 == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
@@ -92,32 +89,32 @@ uchar   ibCan;
     if (ReadCntMonCan(tiCurr.bMonth-1, ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_V_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_V_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+      LoadPrevDigital(c);
+      if (CompareCurrPrevLines(ibDig, c) == 1)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           reBuffA = GetCanReal(mpreChannelsB, diPrev.ibLine);
-          mpcwEscV_OK[ibCan]++;
+          mpcwEscV_OK[c]++;
 
-          mpreEsc_V[ibCan] = reBuffA;
-          mptiEsc_V[ibCan] = *GetCurrTimeDate();
+          mpreEsc_V[c] = reBuffA;
+          mptiEsc_V[c] = *GetCurrTimeDate();
 
-          mpboDefEscV[ibCan] = TRUE;
+          mpboDefEscV[c] = TRUE;
           //AddDigRecord(EVE_ESC_V_DATA);
         }
         else
         {
           reBuffA = 0;
-          mpcwEscV_Error[ibCan]++;
+          mpcwEscV_Error[c]++;
         }
       }
     }
   }
 
-  // расширенный опрос информации для Esc S
   if (boDisableEsc3 == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
@@ -131,36 +128,38 @@ uchar   ibCan;
     if (ReadCntCurrCan(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_S_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_S_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+      LoadPrevDigital(c);
+      if (CompareCurrPrevLines(ibDig, c) == 1)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           ResetWDT();
           reBuffA = GetCanReal(mpreChannelsB, diPrev.ibLine);
-          mpcwEscS_OK[ibCan]++;
+          mpcwEscS_OK[c]++;
 
-          mpreEsc_S[ibCan] = reBuffA;
-          mptiEsc_S[ibCan] = *GetCurrTimeDate();
+          mpreEsc_S[c] = reBuffA;
+          mptiEsc_S[c] = *GetCurrTimeDate();
 
 //          MakeExtended6(ibCan);
 //          MakeExtended7(ibCan);
 //          MakeDiagram(ibCan);
 
-          mpboDefEscS[ibCan] = TRUE;
+          mpboDefEscS[c] = TRUE;
           //AddDigRecord(EVE_ESC_S_DATA);
         }
         else
         {
           reBuffA = 0;
-          mpcwEscS_Error[ibCan]++;
+          mpcwEscS_Error[c]++;
         }
       }
     }
   }
 
-  ShowDigitalHi(); Clear();
+  ShowCanalNumber(ibDig);
+  Clear();
 }
 
