@@ -24,7 +24,7 @@ void    MakeExtended1(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadTimeDate(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_U_OK);* / } else { Error(); /*AddDigRecord(EVE_ESC_U_ERROR);* / }
+    if (ReadTimeDate(ibDig) == 1) { OK(); / *AddDigRecord(EVE_ESC_U_OK);* / } else { Error(); / *AddDigRecord(EVE_ESC_U_ERROR);* / }
 
     LoadCurrDigital(ibDig);
     for (ibCan=0; ibCan<bCANALS; ibCan++)
@@ -63,7 +63,7 @@ void    MakeExtended1(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadCntMonCan(tiCurr.bMonth-1, ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_V_OK);* / } else { Error(); /*AddDigRecord(EVE_ESC_V_ERROR);* / }
+    if (ReadCntMonCan(tiCurr.bMonth-1, ibDig) == 1) { OK(); / *AddDigRecord(EVE_ESC_V_OK);* / } else { Error(); / *AddDigRecord(EVE_ESC_V_ERROR);* / }
 
     LoadCurrDigital(ibDig);
     for (ibCan=0; ibCan<bCANALS; ibCan++)
@@ -103,7 +103,7 @@ void    MakeExtended1(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadSensors(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_S_OK);* / } else { Error(); /*AddDigRecord(EVE_ESC_S_ERROR);* / }
+    if (ReadSensors(ibDig) == 1) { OK(); / *AddDigRecord(EVE_ESC_S_OK);* / } else { Error(); / *AddDigRecord(EVE_ESC_S_ERROR);* / }
 
     LoadCurrDigital(ibDig);
     for (ibCan=0; ibCan<bCANALS; ibCan++)

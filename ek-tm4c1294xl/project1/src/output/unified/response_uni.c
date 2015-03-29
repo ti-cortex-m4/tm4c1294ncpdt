@@ -15,7 +15,7 @@ RESPONSE_UNI.C
 #include        "../../include/states.h"
 #include        "../../include/queries_uni.h"
 #include        "../../time/rtc.h"
-#include        "../../crc-16.h"
+#include        "../../kernel/crc-16.h"
 #include        "uni.h"
 
 

@@ -6,7 +6,7 @@ DEVICES_POSTINPUT.C
 
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
-#include        "../crc-16.h"
+#include        "../kernel/crc-16.h"
 #include        "../serial/ports.h"
 
 
