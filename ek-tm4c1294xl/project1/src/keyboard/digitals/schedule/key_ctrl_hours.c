@@ -4,13 +4,13 @@ KEY_CTRL_HOURS.Ñ
  
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../digitals/digitals.h"
-#include        "../../digitals/profile/profile_core.h"
-#include        "../../flash/files.h"
+#include        "../../../main.h"
+#include        "../../../memory/mem_schedule.h"
+#include        "../../keyboard.h"
+#include        "../../../display/display.h"
+#include        "../../../digitals/digitals.h"
+#include        "../../../digitals/schedule/schedule.h"
+#include        "../../../flash/files.h"
 
 
 

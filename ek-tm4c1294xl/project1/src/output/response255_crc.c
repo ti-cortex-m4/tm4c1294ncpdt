@@ -29,6 +29,7 @@ RESPONSE255_CRC.C
 #include        "../output/out_ports.h"
 #include        "../output/out_names.h"
 #include        "../output/profile/out_limits.h"
+#include        "../output/profile/out_schedule.h"
 
 
 
@@ -159,56 +160,15 @@ void    Response255_CRC(void)
 
     case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnblCan); break;
 
-    case bEXT_GETCTRLHOU:           Common(&mpboCtrlHou, 48);       break;
+    case bEXT_GETCTRLHOU: OutGetCtrlHou(); break;
+    case bEXT_SETCTRLHOU: OutSetCtrlHou(); break;
 
-    case bEXT_SETCTRLHOU:
-      InitPop(6);
-      for (i=0; i<48; i++)
-        mpboCtrlHou[i] = PopChar();
-      Result(bRES_OK);
-      break;
+    case bEXT_GETENBLPORTHOU: OutGetEnblPrtHou(); break;
+    case bEXT_SETENBLPORTHOU: OutSetEnblPrtHou(); break;
 
-    case bEXT_GETENBLPORTHOU:
-      if (bInBuff6 < bPORTS)
-        Common(&mpboEnblPorHou[ bInBuff6 ], 48);
-      else
-        Result(bRES_BADADDRESS);
-      break;
-
-    case bEXT_SETENBLPORTHOU:
-      if (bInBuff6 < bPORTS)
-      {
-        InitPop(7);
-        for (i=0; i<48; i++)
-          mpboEnblPorHou[bInBuff6][i] = PopChar();
-        LongResult(bRES_OK);
-      }
-      else
-        Result(bRES_BADADDRESS);
-      break;
-
-    case bEXT_GETRECALC:
-      InitPushCRC();
-      PushChar(boRecalcAlways);
-      Push(&mpboRecalcHou, sizeof(mpboRecalcHou));
-      Output(1+48);
-      break;
-
-    case bEXT_SETRECALC1:
-      InitPop(6);
-      boRecalcAlways = PopChar();
-      for (i=0; i<48; i++)
-        mpboRecalcHou[i] = PopChar();
-      Result(bRES_OK);
-      break;
-
-    case bEXT_SETRECALC2:
-      InitPop(6);
-      PopChar();
-      for (i=0; i<48; i++)
-        mpboRecalcHou[i] = PopChar();
-      Result(bRES_OK);
-      break;
+    case bEXT_GETRECALC: OutGetRecalcHou(); break;
+    case bEXT_SETRECALC1: OutSetRecalcHou1(); break;
+    case bEXT_SETRECALC2: OutSetRecalcHou2(); break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;

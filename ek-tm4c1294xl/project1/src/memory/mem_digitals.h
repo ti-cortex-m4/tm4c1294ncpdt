@@ -8,10 +8,6 @@ extern  uint                    wDigitalsMask;
 
 extern  boolean                 mpboEnblCan[bCANALS];
 
-extern  boolean                 mpboEnblPrtHou[bPORTS][48];
-
-extern  boolean                 mpboCtrlHou[48];
-
 
 
 extern  boolean                 boEnblKeys;

@@ -23,7 +23,7 @@ PROFILE_RUN.C
 #include        "../../digitals/digitals_messages.h"
 #include        "../../digitals/digitals_display.h"
 #include        "../../digitals/answer.h"
-#include        "../../digitals/enbl_hours.h"
+#include        "../../digitals/schedule/enbl_hours.h"
 #include        "../../special/special.h"
 #include        "../../time/decret.h"
 #include        "../../flash/records.h"
