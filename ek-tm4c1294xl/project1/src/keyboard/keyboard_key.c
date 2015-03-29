@@ -165,8 +165,8 @@ void    Keyboard_Key(void)
 
       case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
 
-      case bSET_RECALC:         key_SetRecals();        break;
-      case bSET_RECALC_ALWAYS:  key_SetRecalsAlways();  break;
+      case bSET_RECALC:         key_SetRecalc();        break;
+      case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
@@ -277,8 +277,8 @@ void    Keyboard_Key(void)
 
       case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
 
-      case bSET_RECALC:         key_SetRecals();        break;
-      case bSET_RECALC_ALWAYS:  key_SetRecalsAlways();  break;
+      case bSET_RECALC:         key_SetRecalc();        break;
+      case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
 
       case bGET_CNTCURR_10:
       case bGET_CNTCURR_110:
@@ -474,8 +474,8 @@ void    Keyboard_Key(void)
 
       case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
 
-      case bSET_RECALC:         key_SetRecals();        break;
-      case bSET_RECALC_ALWAYS:  key_SetRecalsAlways();  break;
+      case bSET_RECALC:         key_SetRecalc();        break;
+      case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
