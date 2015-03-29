@@ -41,7 +41,7 @@ void    key_SetRelaxsFlag(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        boRelaxsFlag = (boRelaxsFlag == TRUE ? FALSE : TRUE);
+        boRelaxsFlag = InvertBoolean(boRelaxsFlag);
         SaveFile(&flRelaxsFlag);
 
         ShowBoolean(boRelaxsFlag);

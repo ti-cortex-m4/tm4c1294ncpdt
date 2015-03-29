@@ -8,7 +8,6 @@ OUT_SCHEDULE.C
 #include        "../../memory/mem_ports.h"
 #include        "../../memory/mem_schedule.h"
 #include        "../../serial/ports.h"
-#include        "../../kernel/boolean.h"
 #include        "../../digitals/schedule/schedule.h"
 #include        "../../flash/files.h"
 

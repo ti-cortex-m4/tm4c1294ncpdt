@@ -78,7 +78,7 @@ void    key_SetCtrlHours(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      mpboCtrlHou[ibX] = (mpboCtrlHou[ibX] == TRUE ? FALSE : TRUE);
+      mpboCtrlHou[ibX] = InvertBoolean(mpboCtrlHou[ibX]);
 
       SaveFile(&flCtrlHou);
 
