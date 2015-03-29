@@ -35,7 +35,7 @@ uchar   ibCan;
   if (boDisableEsc1 == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
-  else if (mpboDefEscU[ibDig] == boFalse)
+  else if (mpboDefEscU[ibDig] == FALSE)
   {
     ShowHi(szDirectEscU); Clear();
     sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
@@ -55,7 +55,7 @@ uchar   ibCan;
           moAlt.tiAlfa = tiChannelC;
           mpcwEscU_OK[ibCan]++;
 
-          moAlt.tiBeta = *PGetCurrTimeDate();
+          moAlt.tiBeta = *GetCurrTimeDate();
           SetCanMoment(&mpmoEsc_U, ibCan);
 
           mpboDefEscU[ibCan] = TRUE;
@@ -74,7 +74,7 @@ uchar   ibCan;
   if (boDisableEsc2 == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
-  else if (mpboDefEscV[ibDig] == boFalse)
+  else if (mpboDefEscV[ibDig] == FALSE)
   {
     ShowHi(szDirectEscV); Clear();
     sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
@@ -95,7 +95,7 @@ uchar   ibCan;
           mpcwEscV_OK[ibCan]++;
 
           SetCanReal(&mpreEsc_V, ibCan);
-          tiAlt = *PGetCurrTimeDate();
+          tiAlt = *GetCurrTimeDate();
           SetCanTime(mptiEsc_V, ibCan);
 
           mpboDefEscV[ibCan] = TRUE;
@@ -114,7 +114,7 @@ uchar   ibCan;
   if (boDisableEsc3 == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
-  else if (mpboDefEscS[ibDig] == boFalse)
+  else if (mpboDefEscS[ibDig] == FALSE)
   {
     ShowHi(szDirectEscS); Clear();
     sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
@@ -136,7 +136,7 @@ uchar   ibCan;
           mpcwEscS_OK[ibCan]++;
 
           SetCanReal(&mpreEsc_S, ibCan);
-          tiAlt = *PGetCurrTimeDate();
+          tiAlt = *GetCurrTimeDate();
           SetCanTime(mptiEsc_S, ibCan);
 
           MakeExtended6(ibCan);

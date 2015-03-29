@@ -8,6 +8,23 @@ MEM_DIRECT.C
 
 
 
+//
+time                    mptiEsc_T[bCANALS];
+
+//
+real                    mpreEsc_S[bCANALS];
+
+//
+time                    mptiEsc_S[bCANALS];
+
+//
+real                    mpreEsc_V[bCANALS];
+
+//
+time                    mptiEsc_V[bCANALS];
+
+
+
 // счётчики событий
 uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
                         mpcwEscS_OK[bCANALS], mpcwEscS_Error[bCANALS],

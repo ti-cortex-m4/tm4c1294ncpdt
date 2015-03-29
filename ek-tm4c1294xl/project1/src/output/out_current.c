@@ -7,7 +7,7 @@ OUT_CURRENT.C
 #include        "../main.h"
 #include        "../memory/mem_factors.h"
 #include        "../memory/mem_current.h"
-#include        "../memory/mem_esc.h"
+#include        "../memory/mem_extended1.h"
 #include        "../memory/mem_ports.h"
 #include        "../digitals/sensors.h"
 #include        "../serial/ports.h"
