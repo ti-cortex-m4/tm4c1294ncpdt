@@ -13,6 +13,9 @@ QUERIES2.H
 #define bEXT_GETDIGITALS               8
 #define bEXT_GETENBLCAN                13
 
+#define bEXT_GETENBLPORTHOU            15
+#define bEXT_SETENBLPORTHOU            73
+
 #define bEXT_GETIMPCANHOU              16
 #define bEXT_GETADDRESSES              17
 #define bEXT_GETIMPCANMNT              18

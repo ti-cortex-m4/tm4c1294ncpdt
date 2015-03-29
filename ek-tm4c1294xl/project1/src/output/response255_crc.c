@@ -156,7 +156,34 @@ void    Response255_CRC(void)
     case bEXT_GETCURRENT:           OutCurrentExt();       break;
 
     case bEXT_GETDIGITALS: OutDigitalsExt(); break;
+
     case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnblCan); break;
+
+    case bEXT_SETCTRLHOU:
+      InitPop(6);
+      for (i=0; i<48; i++)
+        mpboCtrlHou[i] = PopChar();
+      Result(bRES_OK);
+      break;
+
+    case bEXT_GETENBLPORTHOU:
+      if (bInBuff6 < bPORTS)
+        Common(&mpboEnblPorHou[ bInBuff6 ], 48);
+      else
+        Result(bRES_BADADDRESS);
+      break;
+
+    case bEXT_SETENBLPORTHOU:
+      if (bInBuff6 < bPORTS)
+      {
+        InitPop(7);
+        for (i=0; i<48; i++)
+          mpboEnblPorHou[bInBuff6][i] = PopChar();
+        LongResult(bRES_OK);
+      }
+      else
+        Result(bRES_BADADDRESS);
+      break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;

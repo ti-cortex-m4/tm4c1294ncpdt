@@ -279,7 +279,6 @@ uchar   i;
       enKeyboard = KBD_ENTER;
 
       wProgram = GetIntLo(1,3);
-
       if (wProgram == 0)
       { 
         NeedNumber();
