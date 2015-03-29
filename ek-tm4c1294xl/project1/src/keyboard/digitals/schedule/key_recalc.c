@@ -8,12 +8,6 @@ KEY_RECALC.Ñ
 #include        "../../../memory/mem_schedule.h"
 #include        "../../keyboard.h"
 #include        "../../../display/display.h"
-//#include        "../../../digitals/digitals.h"
-//#include        "../../../digitals/digitals_display.h"
-//#include        "../../../digitals/profile/profile_core.h"
-//#include        "../../../digitals/schedule/enbl_hours.h"
-//#include        "../../../digitals/schedule/schedule.h"
-//#include        "../../../serial/speeds_display.h"
 #include        "../../../flash/files.h"
 
 
