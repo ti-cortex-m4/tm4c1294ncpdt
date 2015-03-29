@@ -17,7 +17,7 @@ SERIAL0.C
 #include        "../serial/flow.h"
 #include        "../serial/ports.h"
 #include        "../serial/bulk.h"
-#include        "../crc-16.h"
+#include        "../kernel/crc-16.h"
 #include        "../uarts.h"
 
 

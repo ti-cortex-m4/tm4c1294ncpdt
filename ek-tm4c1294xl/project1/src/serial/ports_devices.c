@@ -14,7 +14,7 @@ PORTS_DEVICES.H
 #include        "../isr/serial1.h"
 #include        "../isr/serial2.h"
 #include        "../isr/serial3.h"
-#include        "../crc-16.h"
+#include        "../kernel/crc-16.h"
 #include        "../display/display.h"
 #include        "../time/delay.h"
 #include        "ports.h"

@@ -9,7 +9,7 @@ RESPONSE_CRC.C
 #include        "../memory/mem_ports.h"
 #include        "../include/states.h"
 #include        "../access.h"
-#include        "../crc-16.h"
+#include        "../kernel/crc-16.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../keyboard/key_timedate.h"

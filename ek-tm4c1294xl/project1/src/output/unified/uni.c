@@ -8,7 +8,7 @@ UNI.C
 #include        "../../memory/mem_settings.h"
 #include        "../../memory/mem_ports.h"
 #include        "../../memory/mem_uni.h"
-#include        "../../crc-16.h"
+#include        "../../kernel/crc-16.h"
 #include        "../../display/display.h"
 #include        "../../keyboard/keyboard.h"
 #include        "../../serial/ports.h"
