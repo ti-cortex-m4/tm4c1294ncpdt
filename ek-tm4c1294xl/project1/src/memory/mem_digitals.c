@@ -14,12 +14,6 @@ uint                    wDigitalsMask;
 // массив разрешенных каналов
 boolean                 mpboEnblCan[bCANALS];
 
-//  график опроса цифровых счётчиков по портам и получасам
-boolean                 mpboEnblPrtHou[bPORTS][48];
-
-//  график коррекции времени цифровых счётчиков по получасам
-boolean                 mpboCtrlHou[48];
-
 
 
 // флаг использования паролей счётчиков

@@ -31,6 +31,7 @@ DEVICES_INIT.C
 #include        "../digitals/answer.h"
 #include        "../digitals/limits.h"
 #include        "../digitals/profile/refill.h"
+#include        "../digitals/schedule/schedule.h"
 #include        "../flash/files.h"
 #include        "../flash/records.h"
 #include        "../time/delay.h"
@@ -87,6 +88,7 @@ void    InitDevices(void)
   InitDefects();
   InitLimits();
   InitRefill();
+  InitSchedule();
 }
 
 
@@ -106,4 +108,5 @@ void    ResetDevices(void)
   ResetDefects();
   ResetLimits();
   ResetRefill();
+  ResetSchedule();
 }
