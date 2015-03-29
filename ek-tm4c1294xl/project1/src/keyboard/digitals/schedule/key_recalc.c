@@ -26,9 +26,9 @@ static char const       szSetRecalc[]   = "Перерасчет      ";
 void    ShowRecalc(void)
 {
   Clear();
-  sprintf(szLo+1,"%02bu:%02bu",ibX/2,(ibX%2)*30);
+  sprintf(szLo+1,"%02u:%02u",ibX/2,(ibX%2)*30);
 
-  if (mpboRecalcHou[ibX] == boFalse) 
+  if (mpboRecalcHou[ibX] == FALSE)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -36,7 +36,7 @@ void    ShowRecalc(void)
   if (enGlobal != GLB_WORK)
     szLo[7] = '.';
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 }
 
 
@@ -61,7 +61,7 @@ void    key_SetRecalc(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetChar(10,11) - 1) < 48)
+      if ((ibX = GetCharLo(10,11) - 1) < 48)
       {
         enKeyboard = KBD_POSTENTER;
         ShowRecalc();
@@ -80,7 +80,7 @@ void    key_SetRecalc(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      mpboRecalcHou[ibX] = ~mpboRecalcHou[ibX];      
+      mpboRecalcHou[ibX] = InvertBoolean(mpboRecalcHou[ibX]);
       ShowRecalc();
     }
     else Beep();
