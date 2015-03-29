@@ -13,8 +13,15 @@ QUERIES2.H
 #define bEXT_GETDIGITALS               8
 #define bEXT_GETENBLCAN                13
 
+#define bEXT_GETCTRLHOU                14
+#define bEXT_SETCTRLHOU                72
+
 #define bEXT_GETENBLPORTHOU            15
 #define bEXT_SETENBLPORTHOU            73
+
+#define bEXT_GETRECALC                 41
+#define bEXT_SETRECALC1                74
+#define bEXT_SETRECALC2                75
 
 #define bEXT_GETIMPCANHOU              16
 #define bEXT_GETADDRESSES              17

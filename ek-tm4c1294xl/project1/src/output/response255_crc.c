@@ -159,6 +159,8 @@ void    Response255_CRC(void)
 
     case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnblCan); break;
 
+    case bEXT_GETCTRLHOU:           Common(&mpboCtrlHou, 48);       break;
+
     case bEXT_SETCTRLHOU:
       InitPop(6);
       for (i=0; i<48; i++)
@@ -183,6 +185,29 @@ void    Response255_CRC(void)
       }
       else
         Result(bRES_BADADDRESS);
+      break;
+
+    case bEXT_GETRECALC:
+      InitPushCRC();
+      PushChar(boRecalcAlways);
+      Push(&mpboRecalcHou, sizeof(mpboRecalcHou));
+      Output(1+48);
+      break;
+
+    case bEXT_SETRECALC1:
+      InitPop(6);
+      boRecalcAlways = PopChar();
+      for (i=0; i<48; i++)
+        mpboRecalcHou[i] = PopChar();
+      Result(bRES_OK);
+      break;
+
+    case bEXT_SETRECALC2:
+      InitPop(6);
+      PopChar();
+      for (i=0; i<48; i++)
+        mpboRecalcHou[i] = PopChar();
+      Result(bRES_OK);
       break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
