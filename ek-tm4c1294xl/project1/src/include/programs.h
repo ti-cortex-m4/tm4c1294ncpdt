@@ -213,6 +213,9 @@ PROGRAMS.H
 
 #define bSET_SEPARATE_CAN           218
 
+#define bSET_RECALC                 230
+#define bSET_RECALC_ALWAYS          231
+
 #define bTEST_DIRECT                216
 
 #define bTEST_RESPONSE              220
