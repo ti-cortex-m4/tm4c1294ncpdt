@@ -5,16 +5,34 @@ EXTENDED1.С
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../memory/mem_digitals.h"
+#include        "../memory/mem_extended1.h"
+#include        "../display/display.h"
+#include        "../keyboard/keyboard.h"
+#include        "../digitals/digitals.h"
+#include        "../sensors/automatic2.h"
+#include        "../energy.h"
 
 
 
-/*
+void    InitExtended1(void)
+{
+}
+
+
+void    ResetExtended1(void)
+{
+}
+
+
 void    MakeExtended1(void)
 {
+uchar   ibCan;
+
 //  AddDigRecord(EVE_EXTENDED);
 
   // расширенный опрос информации для Esc U
-  if (boDisableEsc1 == boTrue) {
+  if (boDisableEsc1 == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
   else if (mpboDefEscU[ibDig] == boFalse)
@@ -24,15 +42,15 @@ void    MakeExtended1(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadTimeDate(ibDig) == 1) { OK(); / *AddDigRecord(EVE_ESC_U_OK);* / } else { Error(); / *AddDigRecord(EVE_ESC_U_ERROR);* / }
+    if (ReadTimeDate(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_U_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_U_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines() == 1)
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
       {
-        if (mpboChannelsA[diPrev.ibLine] == boTrue)
+        if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           moAlt.tiAlfa = tiChannelC;
           mpcwEscU_OK[ibCan]++;
@@ -40,7 +58,7 @@ void    MakeExtended1(void)
           moAlt.tiBeta = *PGetCurrTimeDate();
           SetCanMoment(&mpmoEsc_U, ibCan);
 
-          mpboDefEscU[ibCan] = boTrue;
+          mpboDefEscU[ibCan] = TRUE;
           //AddDigRecord(EVE_ESC_U_DATA);
         }
         else
@@ -53,7 +71,7 @@ void    MakeExtended1(void)
   }
 
   // расширенный опрос информации для Esc V (только за текущий месяц)
-  if (boDisableEsc2 == boTrue) {
+  if (boDisableEsc2 == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
   else if (mpboDefEscV[ibDig] == boFalse)
@@ -63,15 +81,15 @@ void    MakeExtended1(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadCntMonCan(tiCurr.bMonth-1, ibDig) == 1) { OK(); / *AddDigRecord(EVE_ESC_V_OK);* / } else { Error(); / *AddDigRecord(EVE_ESC_V_ERROR);* / }
+    if (ReadCntMonCan(tiCurr.bMonth-1, ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_V_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_V_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines() == 1)
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
       {
-        if (mpboChannelsA[diPrev.ibLine] == boTrue)
+        if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           reBuffA = *PGetCanReal(mpreChannelsB, diPrev.ibLine);
           mpcwEscV_OK[ibCan]++;
@@ -80,7 +98,7 @@ void    MakeExtended1(void)
           tiAlt = *PGetCurrTimeDate();
           SetCanTime(mptiEsc_V, ibCan);
 
-          mpboDefEscV[ibCan] = boTrue;
+          mpboDefEscV[ibCan] = TRUE;
           //AddDigRecord(EVE_ESC_V_DATA);
         }
         else
@@ -93,7 +111,7 @@ void    MakeExtended1(void)
   }
 
   // расширенный опрос информации для Esc S
-  if (boDisableEsc3 == boTrue) {
+  if (boDisableEsc3 == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
   else if (mpboDefEscS[ibDig] == boFalse)
@@ -103,15 +121,15 @@ void    MakeExtended1(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadSensors(ibDig) == 1) { OK(); / *AddDigRecord(EVE_ESC_S_OK);* / } else { Error(); / *AddDigRecord(EVE_ESC_S_ERROR);* / }
+    if (ReadSensors(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_S_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_S_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines() == 1)
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
       {
-        if (mpboChannelsA[diPrev.ibLine] == boTrue)
+        if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           ResetWDT();
           reBuffA = *PGetCanReal(mpreChannelsB, diPrev.ibLine);
@@ -125,7 +143,7 @@ void    MakeExtended1(void)
           MakeExtended7(ibCan);
           MakeDiagram(ibCan);
 
-          mpboDefEscS[ibCan] = boTrue;
+          mpboDefEscS[ibCan] = TRUE;
           //AddDigRecord(EVE_ESC_S_DATA);
         }
         else
@@ -139,4 +157,4 @@ void    MakeExtended1(void)
 
   ShowDigitalHi(); Clear();
 }
-*/
+

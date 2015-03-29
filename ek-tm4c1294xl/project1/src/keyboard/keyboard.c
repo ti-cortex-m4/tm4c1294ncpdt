@@ -17,7 +17,6 @@ KEYBOARD.C
 #include        "../serial/modems.h"
 #include        "../digitals/answer.h"
 #include        "../include/programs.h"
-#include        "../include/programs2.h"
 #include        "../impulses/impulses.h"
 #include        "../digitals/digitals_status.h"
 #include        "../devices/devices.h"

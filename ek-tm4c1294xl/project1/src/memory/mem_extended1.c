@@ -17,3 +17,6 @@ uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
 boolean                 mpboDefEscV[bCANALS],
                         mpboDefEscS[bCANALS],
                         mpboDefEscU[bCANALS];
+
+// флаги запрета опроса показаний
+boolean                 boDisableEsc1, boDisableEsc2, boDisableEsc3;
