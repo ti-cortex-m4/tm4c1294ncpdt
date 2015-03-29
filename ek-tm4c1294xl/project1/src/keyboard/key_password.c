@@ -9,7 +9,6 @@ KEY_PASSWORD.C
 #include        "../memory/mem_program.h"
 #include        "keyboard.h"
 #include        "../display/display.h"
-#include        "../beep.h"
 #include        "../access.h"
 
 

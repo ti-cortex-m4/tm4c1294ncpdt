@@ -14,7 +14,7 @@ REALTIME_INIT.C
 #include        "../display/display.h"
 #include        "../display/lcd.h"
 #include        "../hardware/watchdog.h"
-#include        "../beep.h"
+#include        "../hardware/beep.h"
 #include        "../serial/print.h"
 #include        "realtime.h"
 #include        "realtime_storage.h"

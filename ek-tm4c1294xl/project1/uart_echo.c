@@ -19,7 +19,7 @@ TODO .C
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
 #include "src/hardware/system_clock.h"
-#include "src/beep.h"
+#include "src/hardware/beep.h"
 #include "src/display/lcd.h"
 #include "src/time/rtc.h"
 #include "src/keyboard/key.h"
