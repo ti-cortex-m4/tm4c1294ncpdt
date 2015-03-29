@@ -23,7 +23,7 @@ MAIN.H
 #include        "main_storage.h"
 #include        "main_defines.h"
 #include        "main_devices.h"
-#include        "engine/boolean.h"
+#include        "kernel/boolean.h"
 
 
 // тип 'правило перехода на сезонное время'
