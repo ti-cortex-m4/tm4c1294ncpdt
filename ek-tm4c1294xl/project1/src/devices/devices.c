@@ -125,7 +125,7 @@ void    RunDevices(void)
   ibPort = diCurr.ibPort;
 
 
-  if ((fConnect == 1) && (bProgram != 0))
+  if ((fConnect == 1) && (wProgram != 0))
   {
     if ((cbWaitOnline > 0) && (cbWaitOnline % 10 == 5))
     {

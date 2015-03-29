@@ -179,7 +179,7 @@ void    RunCurrent(void)
       fCurrent = 0;
       Work(); OK();
 
-      bProgram = 0; wProgram = 0;
+      wProgram = 0;
       cbShowCurrentTime = 2;
     }
   }
@@ -231,7 +231,7 @@ void    NextCurrent(void)
     fCurrent = 0;
     Work(); OK();
 
-    bProgram = 0; wProgram = 0;
+    wProgram = 0;
     cbShowCurrentTime = 2;
 
     ibPortPause = 0xFF;

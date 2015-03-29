@@ -29,7 +29,7 @@ void    Keyboard_Auto(void)
 {
   if (enGlobal == GLB_PROGRAM)
   {
-    switch (bProgram)
+    switch (wProgram)
     {
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
@@ -48,7 +48,7 @@ void    Keyboard_Auto(void)
 
   else if (enGlobal == GLB_WORK)
   {
-    switch (bProgram)
+    switch (wProgram)
     {
       case bGET_CURRTIME:       auto_GetCurrTime();     break;
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
@@ -68,7 +68,7 @@ void    Keyboard_Auto(void)
     if (fOnImpulse == 1)
     {
       fOnImpulse = 0;
-      switch (bProgram)
+      switch (wProgram)
       {
         case bGET_CNTCURR_10:
         case bGET_CNTCURR_110:      if (GetDigitalDevice(ibX) == 0)
@@ -82,7 +82,7 @@ void    Keyboard_Auto(void)
     if (fOnSecond == 1)
     {
       fOnSecond = 0;
-      switch (bProgram)
+      switch (wProgram)
       {
         case bGET_POWGRPPREVHOU:
         case bGET_POWGRPCURRHOU:
@@ -102,7 +102,7 @@ void    Keyboard_Auto(void)
 
   else if (enGlobal == GLB_REPROGRAM)
   {
-    switch (bProgram)
+    switch (wProgram)
     {
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;

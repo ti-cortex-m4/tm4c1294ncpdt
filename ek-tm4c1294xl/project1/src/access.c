@@ -50,13 +50,13 @@ bool    TrueKey(uchar  bKey)
   if (bKey > 13) return false;
   else
   {
-    if ((enGlobal == GLB_WORK) && (bProgram == bSET_PASSWORD))
+    if ((enGlobal == GLB_WORK) && (wProgram == bSET_PASSWORD))
     {
       if ((bKey == bKEY_ENTER) && (SuperUser() == 0))
         return false;
     }
 
-    if ((enGlobal != GLB_WORK) && (bProgram == bSET_SPEED))
+    if ((enGlobal != GLB_WORK) && (wProgram == bSET_SPEED))
     {
       if ((bKey != bKEY_PROGRAM) && (bKey != bKEY_ENTER))
         return false;

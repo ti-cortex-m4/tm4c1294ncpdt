@@ -7,7 +7,6 @@ KEYBOARD_KEY.C
 #include        "../main.h"
 #include        "../include/programs.h"
 #include        "keyboard.h"
-#include        "keyboard2.h"
 #include        "key_speeds.h"
 #include        "key_timedate.h"
 #include        "key_password.h"
@@ -68,17 +67,23 @@ KEYBOARD_KEY.C
 #include        "test/key_test_impulses.h"
 #include        "test/key_test_keys.h"
 #include        "test/key_test_rtc.h"
-
+#include        "key_gaps_flag.h"
+#include        "key_gaps.h"
+#include        "digitals/key_hide_messages.h"
+#include        "digitals/profile/key_dsbl_refill.h"
+#include        "digitals/key_max_repeats.h"
+#include        "unified/key_strict_uni.h"
+#include        "unified/key_dsbl_password_uni.h"
+#include        "unified/key_max_delay_uni.h"
+#include        "unified/key_repeat_flow_uni.h"
 
 
 void    Keyboard_Key(void)
 {
   if (enGlobal == GLB_PROGRAM)
   {
-    switch (bProgram)
+    switch (wProgram)
     {
-      case 0xFF:                Keyboard2Program();     break;
-
       case bSET_SPEED:          key_SetSpeeds();        break;
 
       case bSET_CURRTIME:       key_SetCurrTime();      break;
@@ -178,16 +183,28 @@ void    Keyboard_Key(void)
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
 
+
+      case wSET_HIDE_MESSAGES:  key_SetHideMessages();  break;
+
+      case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;
+      case wSET_GAPS:           key_SetGaps();          break;
+
+      case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
+      case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
+
+      case wSET_STRICT_UNI:         key_SetStrictUni();        break;
+      case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
+      case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
+      case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
+
       default:                  NoProgram();            break;
     }
   }
 
   else if (enGlobal == GLB_WORK)
   {
-    switch (bProgram)
+    switch (wProgram)
     {
-      case 0xFF:                Keyboard2Work();        break;
-
       case bGET_SPEED:          key_SetSpeeds();        break;
 
       case bGET_CURRTIME:       key_SetCurrTime();      break;
@@ -358,16 +375,28 @@ void    Keyboard_Key(void)
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
 
+
+      case wSET_HIDE_MESSAGES:  key_SetHideMessages();  break;
+
+      case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;
+      case wSET_GAPS:           key_SetGaps();          break;
+
+      case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
+      case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
+
+      case wSET_STRICT_UNI:         key_SetStrictUni();        break;
+      case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
+      case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
+      case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
+
       default:                  NoProgram();            break;
     }
   }
 
   else if (enGlobal == GLB_REPROGRAM)
   {
-    switch (bProgram)
+    switch (wProgram)
     {
-      case 0xFF:                Keyboard2Reprogram();   break;
-
       case bSET_SPEED:          key_SetSpeeds();        break;
 
       case bSET_CURRTIME:       key_SetCurrTime();      break;
@@ -456,6 +485,20 @@ void    Keyboard_Key(void)
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
+
+
+      case wSET_HIDE_MESSAGES:  key_SetHideMessages();  break;
+
+      case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;
+      case wSET_GAPS:           key_SetGaps();          break;
+
+      case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
+      case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
+
+      case wSET_STRICT_UNI:         key_SetStrictUni();        break;
+      case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
+      case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
+      case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
 
       default:                  NoProgram();            break;
     }

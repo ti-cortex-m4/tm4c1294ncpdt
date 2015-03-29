@@ -37,7 +37,7 @@ void    ShowFactors(void)
 {
   if (enGlobal != GLB_WORK)
   {
-    switch (bProgram)
+    switch (wProgram)
     {
       case bSET_TRANS_ENG:     ShowReal( GetCanReal(mpreTransEng,    ibX) );  break;
       case bSET_TRANS_CNT:     ShowReal( GetCanReal(mpreTransCnt,    ibX) );  break;
@@ -53,7 +53,7 @@ void    ShowFactors(void)
   }
   else
   {
-    switch (bProgram)
+    switch (wProgram)
     {
       case bGET_TRANS_ENG:     ShowReal( GetCanReal(mpreTransEng,    ibX) );  break;
       case bGET_TRANS_CNT:     ShowReal( GetCanReal(mpreTransCnt,    ibX) );  break;
@@ -80,7 +80,7 @@ void    key_SetFactors(void)
       enKeyboard = KBD_INPUT1;
       Canal();
 
-      switch (bProgram)
+      switch (wProgram)
       {
         case bSET_TRANS_ENG:  ShowHi(szTransEng);      break;
         case bSET_TRANS_CNT:  LoadSlide(pszTransCnt);  break;
@@ -118,7 +118,7 @@ void    key_SetFactors(void)
     {      
       reBuffA = GetRealLo(0,8) + GetRealLo(10,12)/1000;
 
-      switch (bProgram)
+      switch (wProgram)
       {
         case bSET_TRANS_ENG:   
           if (reBuffA > 0)
@@ -285,7 +285,7 @@ void    key_GetFactors(void)
       enKeyboard = KBD_INPUT1;
       Canal();
 
-      switch (bProgram)
+      switch (wProgram)
       {
         case bGET_TRANS_ENG:     ShowHi(szTransEng);         break;
         case bGET_TRANS_CNT:     LoadSlide(pszTransCnt);     break;

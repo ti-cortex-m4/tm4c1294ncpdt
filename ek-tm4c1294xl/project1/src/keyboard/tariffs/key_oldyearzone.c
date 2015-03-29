@@ -40,7 +40,7 @@ uchar   i;
 
   ShowLo(szMaskZones);
 
-  switch (bProgram)
+  switch (wProgram)
   {
     case bSET_PROGRAM10:  
     case bSET_PROGRAM17:
@@ -72,7 +72,7 @@ void    key_SetOldYearZone(void)
 
       if (fPublicTariffs == true)
       {
-        switch (bProgram)
+        switch (wProgram)
         {
           case bSET_PROGRAM10:  LoadSlide(pszPubPrg10); 
                                 ibXmax = 12;
@@ -88,7 +88,7 @@ void    key_SetOldYearZone(void)
       }
       else
       {
-        switch (bProgram)
+        switch (wProgram)
         {
           case bSET_PROGRAM10:  LoadSlide(pszPowPrg10);
                                 ibXmax = 12;  
@@ -149,7 +149,7 @@ void    key_SetOldYearZone(void)
     {
       if (fPublicTariffs == true)
       {
-        switch (bProgram)
+        switch (wProgram)
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17:  
@@ -160,7 +160,7 @@ void    key_SetOldYearZone(void)
       }
       else
       {
-        switch (bProgram)
+        switch (wProgram)
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17: 
@@ -183,7 +183,7 @@ void    key_SetOldYearZone(void)
     {
       enKeyboard = KBD_INPUT1;
 
-      switch (bProgram)
+      switch (wProgram)
       {
         case bSET_PROGRAM10:  
         case bSET_PROGRAM20:  Month();    break;

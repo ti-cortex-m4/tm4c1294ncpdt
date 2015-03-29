@@ -47,7 +47,7 @@ void    key_SetSeason(void)
       enKeyboard = KBD_POSTENTER;
       Clear();
 
-      switch (bProgram)
+      switch (wProgram)
       {
         case bSET_SUMMER:  ShowHi(szSummer); 
                            ShowSummer();  break;
@@ -77,7 +77,7 @@ void    key_SetSeason(void)
         {
           enKeyboard = KBD_POSTENTER;
 
-          switch (bProgram)
+          switch (wProgram)
           {
             case bSET_SUMMER:  tiSummer = tiKey;
                                ShowSummer();  break;

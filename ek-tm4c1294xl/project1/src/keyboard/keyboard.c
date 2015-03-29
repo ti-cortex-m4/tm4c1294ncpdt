@@ -50,7 +50,6 @@ volatile bool           fKey;
 
 key                     enKeyboard;
 
-uchar                   bProgram;
 uint                    wProgram;
 
 time                    tiKey;
@@ -75,14 +74,6 @@ void    InitKeyboard(void)
 
 // выводит сообщение об отсутствии программы
 void    NoProgram(void)
-{
-  ShowHi(szNot);
-  sprintf(szLo,"  программы %u  ",bProgram);
-  LongBeep();
-}
-
-
-void    NoProgram2(void)
 {
   ShowHi(szNot);
   sprintf(szLo,"  программы %u  ",wProgram);
@@ -192,17 +183,17 @@ uchar   i;
   {
 //    if (bKey != bKEY_PROGRAM) return;
 
-    if (((bProgram != bGET_READTIMEDATE1) &&
-         (bProgram != bGET_READTIMEDATE2) &&
+    if (((wProgram != bGET_READTIMEDATE1) &&
+         (wProgram != bGET_READTIMEDATE2) &&
          (wProgram != wGET_READTRANS)     &&
          (wProgram != wGET_READPULSE)     &&
-         (bProgram != bTEST_DIRECT)       &&
-         (bProgram != bGET_CNTCANYEAR1)   &&
-         (bProgram != bGET_CNTCANYEAR10)  &&
-//         (bProgram != bGET_CNTCANYEAR2)   &&
-//         (bProgram != bGET_CNTCANYEAR20)  &&
-         (bProgram != bGET_CNTCURR_10)    &&
-         (bProgram != bGET_CNTCURR_110))  || (bKey == bKEY_PROGRAM))
+         (wProgram != bTEST_DIRECT)       &&
+         (wProgram != bGET_CNTCANYEAR1)   &&
+         (wProgram != bGET_CNTCANYEAR10)  &&
+//         (wProgram != bGET_CNTCANYEAR2)   &&
+//         (wProgram != bGET_CNTCANYEAR20)  &&
+         (wProgram != bGET_CNTCURR_10)    &&
+         (wProgram != bGET_CNTCURR_110))  || (bKey == bKEY_PROGRAM))
     {
       SetCurr(DEV_BEGIN);
       SetPause(DEV_BEGIN);
@@ -248,7 +239,6 @@ uchar   i;
   if (bKey == bKEY_PROGRAM)
   {
     enKeyboard = KBD_PROGRAM;
-    bProgram = 0;
     wProgram = 0;
 
     fSlide = false;
@@ -289,9 +279,8 @@ uchar   i;
       enKeyboard = KBD_ENTER;
 
       wProgram = GetIntLo(1,3);
-      if (wProgram > 0xFF) bProgram = 0xFF; else bProgram = wProgram;
 
-      if (bProgram == 0)
+      if (wProgram == 0)
       { 
         NeedNumber();
         return;

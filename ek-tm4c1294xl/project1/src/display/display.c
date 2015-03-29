@@ -71,7 +71,7 @@ void    InitDisplay(void)
       enKeyboard = KBD_ENTER;
       bKey = bKEY_ENTER;
 
-      bProgram = bSET_RESETFULL;
+      wProgram = bSET_RESETFULL;
       key_SetReset();
     }
   }
