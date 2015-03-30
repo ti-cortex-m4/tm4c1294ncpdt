@@ -5,7 +5,8 @@ OUT_DECRET.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
-#include        "../memory/mem_settings.h"
+#include        "../memory/mem_extended1.h"
+#include        "../display/display.h"
 #include        "../serial/ports.h"
 
 
@@ -33,14 +34,14 @@ uint    wSize;
       {
         reBuffA = *PGetCounterOld(i);
 
-        tiAlt = *PGetCurrTimeDate();
+        tiAlt = *GetCurrTimeDate();
         SetCanTime(mptiEsc_S, i);   
       }
       else if (mpboEnblCan[i] == boFalse)
       {
         reBuffA = 0;
 
-        tiAlt = *PGetCurrTimeDate();
+        tiAlt = *GetCurrTimeDate();
         SetCanTime(mptiEsc_S, i);   
       }
       else if ((boExtendedEscS == boTrue) || (GetDigitalPhone(i) != 0))
@@ -59,7 +60,7 @@ uint    wSize;
           if (fAlt == 0) reBuffA = 0;
         }
 
-        tiAlt = *PGetCurrTimeDate();
+        tiAlt = *GetCurrTimeDate();
         SetCanTime(mptiEsc_S, i);   
       }
 
@@ -96,7 +97,7 @@ uint    wSize;
 
       if (GetDigitalDevice(i) == 0)
       {
-        moAlt.tiAlfa = *PGetCurrTimeDate();
+        moAlt.tiAlfa = *GetCurrTimeDate();
         moAlt.tiBeta = moAlt.tiAlfa;
       }
       else if (mpboEnblCan[i] == boFalse)
@@ -120,7 +121,7 @@ uint    wSize;
           if (fAlt == 0) moAlt.tiAlfa = tiZero; else moAlt.tiAlfa = tiAlt;
         }
 
-        moAlt.tiBeta = *PGetCurrTimeDate();
+        moAlt.tiBeta = *GetCurrTimeDate();
       }
 
       Push(&moAlt, sizeof(moment));
@@ -163,7 +164,7 @@ uint    wSize;
         else
           reBuffA = 0;
 
-        tiAlt = *PGetCurrTimeDate();
+        tiAlt = *GetCurrTimeDate();
         SetCanTime(mptiEsc_V, i);   
       }
       else if (CheckDirectCnt1(i)) {
@@ -173,7 +174,7 @@ uint    wSize;
       {
         reBuffA = 0;
 
-        tiAlt = *PGetCurrTimeDate();
+        tiAlt = *GetCurrTimeDate();
         SetCanTime(mptiEsc_V, i);   
       }
       else if ((boExtendedEscV == boTrue) || (GetDigitalPhone(i) != 0))
@@ -192,7 +193,7 @@ uint    wSize;
           if (fAlt == 0) reBuffA = 0;
         }
 
-        tiAlt = *PGetCurrTimeDate();
+        tiAlt = *GetCurrTimeDate();
         SetCanTime(mptiEsc_V, i);   
       }
 

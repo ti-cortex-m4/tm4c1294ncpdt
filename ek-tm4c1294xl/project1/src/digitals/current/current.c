@@ -5,6 +5,10 @@ CURRENT.C
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
+#include        "../../memory/mem_realtime.h"
+#include        "../../memory/mem_energy.h"
+#include        "../../memory/mem_extended1.h"
+#include        "../../digitals/digitals.h"
 #include        "current.h"
 
 
@@ -44,7 +48,7 @@ void    MakeSpecCurrent(void)
       reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
     SetCanReal(&mpreEsc_V, ibCan);
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     SetCanTime(mptiEsc_V, ibCan);
 
 
@@ -53,14 +57,14 @@ void    MakeSpecCurrent(void)
     if (GetDigitalDevice(ibCan) == 19) reBuffA += *PGetCanReal(mpreCount,ibCan);
     SetCanReal(&mpreEsc_S, ibCan);
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     SetCanTime(mptiEsc_S, ibCan);
 
 
     // подготовка информации для Esc U
     moAlt.tiAlfa = tiCurr;
 
-    moAlt.tiBeta = *PGetCurrTimeDate();
+    moAlt.tiBeta = *GetCurrTimeDate();
     SetCanMoment(&mpmoEsc_U, ibCan);
   }
 }

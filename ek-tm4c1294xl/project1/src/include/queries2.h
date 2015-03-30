@@ -9,6 +9,12 @@ QUERIES2.H
 #define __INQUIRYS2
 
 
+#define bEXT_GETSIMPLE_ESC_U           3
+#define bEXT_GETSIMPLE_ESC_S           4
+
+#define bEXT_GETTIME_ESC_S             5
+#define bEXT_GETTIME_ESC_V             6
+
 #define bEXT_GETGROUPS                 7
 #define bEXT_GETDIGITALS               8
 #define bEXT_GETENBLCAN                13
