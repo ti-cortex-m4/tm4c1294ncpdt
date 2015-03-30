@@ -129,6 +129,14 @@ void    Response255_CRC(void)
     case bINQ_GETCOUNT:     OutRealCanExt(mpreCount);    break;
     case bINQ_GETLOSSE:     OutRealCanExt(mpreLosse);    break;
 
+    case bINQ_GETCNTCANMONCURR_ALL: OutCntCanMonCurrExt();          break;
+
+    case bEXT_GETSIMPLE_ESC_S:      OutSimpleEscSExt();             break;
+    case bEXT_GETSIMPLE_ESC_U:      OutSimpleEscUExt();             break;
+
+    case bEXT_GETTIME_ESC_S:        OutTimeEscSExt();               break;
+    case bEXT_GETTIME_ESC_V:        OutTimeEscVExt();               break;
+
     case bEXT_GETGROUPS: OutGetGroupsExt(); break;
 
     case bINQ_GETMAXPOWGRPDAY_ALL:  OutMaxPowDayGrpExt();  break;

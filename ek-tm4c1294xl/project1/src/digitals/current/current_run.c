@@ -252,6 +252,12 @@ uchar   ibCan;
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
+      if (boMntEscS == boTrue)
+      {
+        mpreEsc_S[ibCan] = mpreValueCntHou[ibCan] * mpdwBase[ibCan];
+        mptiEsc_S[ibCan] = *PGetCurrTimeDate();
+      }
+
       mpboReadyCan[ibCan] = TRUE;
 
       mpwTrue[ibCan]++;
@@ -310,7 +316,7 @@ uchar   ibCan;
           mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImpulse; // TODO bufferize
           SaveImpMnt(0, (bMINUTES+ibHardMnt-1) % bMINUTES, PrevSoftMnt());
 
-//          MakeSpecCurrent();
+          MakeSpecCurrent();
         }
       }
     }
