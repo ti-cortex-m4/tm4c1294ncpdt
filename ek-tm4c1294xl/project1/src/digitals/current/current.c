@@ -33,8 +33,8 @@ void    MakeSpecCurrent(void)
   if (IsSpecCurrent(GetDigitalDevice(ibCan)) == 1)
   {
     // обработка информации по импульсам
-    wBuffD = (uint)dwUpdate;
-    mpwImpHouCan[ibSoftHou][ibCan] += wBuffD;
+    uint w = (uint)dwUpdate;
+    mpwImpHouCan[ibSoftHou][ibCan] += w;
 
     AddCanImpEng(mpimDayCan[ibSoftDay], ibCan);
     AddCanImpEng(mpimMonCan[ibSoftMon], ibCan);
@@ -46,6 +46,7 @@ void    MakeSpecCurrent(void)
       reBuffA = 0;
     else
       reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
+
     SetCanReal(&mpreEsc_V, ibCan);
 
     tiAlt = *GetCurrTimeDate();
