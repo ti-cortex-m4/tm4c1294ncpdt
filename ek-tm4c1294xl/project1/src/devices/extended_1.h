@@ -4,15 +4,15 @@ EXTENDED_1.H
 
 ------------------------------------------------------------------------------*/
 
-file const              flDsblEscU;
-file const              flDsblEscV;
-file const              flDsblEscS;
+extern  file const              flDsblEscU;
+extern  file const              flDsblEscV;
+extern  file const              flDsblEscS;
 
-file const              flMntEscS;
+extern  file const              flMntEscS;
 
-file const              flExtendedEscU;
-file const              flExtendedEscV;
-file const              flExtendedEscS;
+extern  file const              flExtendedEscU;
+extern  file const              flExtendedEscV;
+extern  file const              flExtendedEscS;
 
 
 
