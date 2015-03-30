@@ -20,7 +20,20 @@ EXTENDED_1.Ñ
 #include        "../time/rtc.h"
 #include        "../engine.h"
 #include        "../energy.h"
+#include        "../flash/files.h"
 #include        "extended_1.h"
+
+
+
+file const              flDsblEscU = {FLS_DSBL_ESC_U, &boDsblEscU, sizeof(boolean)};
+file const              flDsblEscV = {FLS_DSBL_ESC_V, &boDsblEscV, sizeof(boolean)};
+file const              flDsblEscS = {FLS_DSBL_ESC_S, &boDsblEscS, sizeof(boolean)};
+
+file const              flMntEscS = {FLS_MNT_ESC_S, &boMntEscS, sizeof(boolean)};
+
+file const              flExtendedEscU = {FLS_EXTENDED_ESC_U, &boExtendedEscU, sizeof(boolean)};
+file const              flExtendedEscV = {FLS_EXTENDED_ESC_V, &boExtendedEscV, sizeof(boolean)};
+file const              flExtendedEscS = {FLS_EXTENDED_ESC_S, &boExtendedEscS, sizeof(boolean)};
 
 
 
@@ -37,7 +50,7 @@ void    ResetExtended1(void)
 
 void    MakeExtended1(void)
 {
-  if (boDisableEsc1 == TRUE) {
+  if (boDsblEscU == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
   else if (mpboDefEscU[ibDig] == FALSE)
@@ -76,7 +89,7 @@ void    MakeExtended1(void)
     }
   }
 
-  if (boDisableEsc2 == TRUE) {
+  if (boDsblEscV == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
   else if (mpboDefEscV[ibDig] == FALSE)
@@ -115,7 +128,7 @@ void    MakeExtended1(void)
     }
   }
 
-  if (boDisableEsc3 == TRUE) {
+  if (boDsblEscS == TRUE) {
     BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
   }
   else if (mpboDefEscS[ibDig] == FALSE)

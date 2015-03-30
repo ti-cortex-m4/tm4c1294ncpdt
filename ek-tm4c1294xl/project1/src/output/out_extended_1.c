@@ -46,13 +46,11 @@ real    re;
       if (GetDigitalDevice(c) == 0)
       {
         re = GetCntCurrImp(c);
-
         mptiEsc_S[c] = *GetCurrTimeDate();
       }
       else if (mpboEnblCan[c] == FALSE)
       {
         re = 0;
-
         mptiEsc_S[c] = *GetCurrTimeDate();
       }
       else if ((boExtendedEscS == TRUE) || (GetDigitalPhone(c) != 0))
@@ -183,7 +181,6 @@ real    re;
       else if (mpboEnblCan[c] == FALSE)
       {
         re = 0;
-
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
       else if ((boExtendedEscV == TRUE) || (GetDigitalPhone(c) != 0))

@@ -32,11 +32,9 @@ extern  boolean                 mpboDefEscV[bCANALS],
 
 
 
-extern  boolean                 boDisableEsc1, boDisableEsc2, boDisableEsc3;
+extern  boolean                 boDsblEscU, boDsblEscV, boDsblEscS;
 
 extern  boolean                 boMntEscS;
 
-extern  boolean                 boExtendedEscS,
-                                boExtendedEscV,
-                                boExtendedEscU;
+extern  boolean                 boExtendedEscU, boExtendedEscV, boExtendedEscS;
 

@@ -172,7 +172,15 @@ typedef enum
 
   FLS_DSBL_REFILL       = FLS_STOP_AUX_CAN + 1,
 
-  FLS_END               = FLS_DSBL_REFILL + 1
+  FLS_DSBL_ESC_U        = FLS_DSBL_REFILL + 1,
+  FLS_DSBL_ESC_V        = FLS_DSBL_ESC_U + 1,
+  FLS_DSBL_ESC_S        = FLS_DSBL_ESC_V + 1,
+  FLS_MNT_ESC_S         = FLS_DSBL_ESC_S + 1,
+  FLS_EXTENDED_ESC_U    = FLS_MNT_ESC_S + 1,
+  FLS_EXTENDED_ESC_V    = FLS_EXTENDED_ESC_U + 1,
+  FLS_EXTENDED_ESC_S    = FLS_EXTENDED_ESC_V + 1,
+
+  FLS_END               = FLS_EXTENDED_ESC_S + 1
 } flash;
 
 
