@@ -310,7 +310,7 @@ bit    ReadHeaderB_Checkup2(void)
 
   MakeRefillWinter();
   MakePrevHou();  
-  if (boRefillDisable == boFalse) MakeRefill();
+  if (boRefillDisable == FALSE) MakeRefill();
 
   return(1);
 }

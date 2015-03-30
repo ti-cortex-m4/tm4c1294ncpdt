@@ -6,9 +6,15 @@ CURRENT.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_realtime.h"
+#include        "../../memory/mem_factors.h"
 #include        "../../memory/mem_energy.h"
+#include        "../../memory/mem_current.h"
 #include        "../../memory/mem_extended1.h"
+#include        "../../realtime/realtime.h"
 #include        "../../digitals/digitals.h"
+#include        "../../time/rtc.h"
+#include        "../../energy.h"
+#include        "../../energy2.h"
 #include        "current.h"
 
 
@@ -28,44 +34,42 @@ bool    IsSpecCurrent(uchar  i)
 
 
 
-void    MakeSpecCurrent(void)
+void    MakeSpecCurrent(uchar  ibCan, uint  wImp)
 {
+real    re;
+
   if (IsSpecCurrent(GetDigitalDevice(ibCan)) == 1)
   {
     // обработка информации по импульсам
-    uint w = (uint)dwUpdate;
-    mpwImpHouCan[ibSoftHou][ibCan] += w;
+    mpwImpHouCan[ibSoftHou][ibCan] += wImp;
 
-    AddCanImpEng(mpimDayCan[ibSoftDay], ibCan);
-    AddCanImpEng(mpimMonCan[ibSoftMon], ibCan);
-    AddCanImpEng(mpimAbsCan,            ibCan);
+    AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, wImp);
+    AddCanImpEng(mpimMonCan[ibSoftMon], ibCan, wImp);
+    AddCanImpEng(mpimAbsCan,            ibCan,wImp);
 
 
     // подготовка информации для Esc V
     if (LoadCntMon(tiCurr.bMonth-1) == 0)
-      reBuffA = 0;
+      re = 0;
     else
-      reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
+      re = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
 
-    SetCanReal(&mpreEsc_V, ibCan);
-
-    tiAlt = *GetCurrTimeDate();
-    SetCanTime(mptiEsc_V, ibCan);
+    mpreEsc_V[ibCan] = re;
+    mptiEsc_V[ibCan] = *GetCurrTimeDate();
 
 
     // подготовка информации для Esc S
-    reBuffA  = mpdwBase[ibCan] * *PGetCanReal(mpreValueCntHou,ibCan);
-    if (GetDigitalDevice(ibCan) == 19) reBuffA += *PGetCanReal(mpreCount,ibCan);
-    SetCanReal(&mpreEsc_S, ibCan);
+    re  = mpdwBase[ibCan] * GetCanReal(mpreValueCntHou,ibCan);
+    if (GetDigitalDevice(ibCan) == 19)
+      re += GetCanReal(mpreCount,ibCan);
 
-    tiAlt = *GetCurrTimeDate();
-    SetCanTime(mptiEsc_S, ibCan);
+    mpreEsc_S[ibCan] = re;
+    mptiEsc_S[ibCan] = *GetCurrTimeDate();
 
 
     // подготовка информации для Esc U
     moAlt.tiAlfa = tiCurr;
-
     moAlt.tiBeta = *GetCurrTimeDate();
-    SetCanMoment(&mpmoEsc_U, ibCan);
+    mpmoEsc_U[ibCan] = moAlt;
   }
 }

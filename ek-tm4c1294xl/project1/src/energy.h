@@ -28,6 +28,8 @@ real    GetCanImp2RealEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
 void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  *pti);
 void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  *pti);
 
+void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uchar  wImp);
+
 void    MakeCntMonCan(void);
 real    GetCntCurrImp(uchar  ibCan);
 
