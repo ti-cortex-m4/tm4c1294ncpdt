@@ -255,7 +255,7 @@ uchar   ibCan;
       if (boMntEscS == boTrue)
       {
         mpreEsc_S[ibCan] = mpreValueCntHou[ibCan] * mpdwBase[ibCan];
-        mptiEsc_S[ibCan] = *PGetCurrTimeDate();
+        mptiEsc_S[ibCan] = *GetCurrTimeDate();
       }
 
       mpboReadyCan[ibCan] = TRUE;
