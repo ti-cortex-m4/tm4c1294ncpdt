@@ -39,11 +39,42 @@ file const              flExtendedEscS = {FLS_EXTENDED_ESC_S, &boExtendedEscS, s
 
 void    InitExtended1(void)
 {
+  LoadFile(&flDsblEscU);
+  LoadFile(&flDsblEscV);
+  LoadFile(&flDsblEscS);
+
+  LoadFile(&flMntEscS);
+
+  LoadFile(&flExtendedEscU);
+  LoadFile(&flExtendedEscV);
+  LoadFile(&flExtendedEscS);
 }
 
 
 void    ResetExtended1(void)
 {
+  boDsblEscU = FALSE;
+  SaveFile(&flDsblEscU);
+
+  boDsblEscV = FALSE;
+  SaveFile(&flDsblEscV);
+
+  boDsblEscS = FALSE;
+  SaveFile(&flDsblEscS);
+
+
+  boMntEscS = FALSE;
+  SaveFile(&flMntEscS);
+
+
+  boExtendedEscU = TRUE;
+  SaveFile(&flExtendedEscU);
+
+  boExtendedEscV = TRUE;
+  SaveFile(&flExtendedEscV);
+
+  boExtendedEscS = TRUE;
+  SaveFile(&flExtendedEscS);
 }
 
 
@@ -51,7 +82,7 @@ void    ResetExtended1(void)
 void    MakeExtended1(void)
 {
   if (boDsblEscU == TRUE) {
-    BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
+    BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
   }
   else if (mpboDefEscU[ibDig] == FALSE)
   {
@@ -90,7 +121,7 @@ void    MakeExtended1(void)
   }
 
   if (boDsblEscV == TRUE) {
-    BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
+    BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
   }
   else if (mpboDefEscV[ibDig] == FALSE)
   {
@@ -129,7 +160,7 @@ void    MakeExtended1(void)
   }
 
   if (boDsblEscS == TRUE) {
-    BlockProgram2(wSET_DISABLE_ESC, 0); DelayInf();
+    BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
   }
   else if (mpboDefEscS[ibDig] == FALSE)
   {

@@ -74,6 +74,7 @@ KEYBOARD_KEY.C
 #include        "digitals/key_hide_messages.h"
 #include        "digitals/profile/key_dsbl_refill.h"
 #include        "digitals/key_max_repeats.h"
+#include        "digitals/key_dsbl_esc.h"
 #include        "unified/key_strict_uni.h"
 #include        "unified/key_dsbl_password_uni.h"
 #include        "unified/key_max_delay_uni.h"
@@ -196,6 +197,8 @@ void    Keyboard_Key(void)
 
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
+
+      case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
@@ -392,6 +395,8 @@ void    Keyboard_Key(void)
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
 
+      case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
+
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
@@ -505,6 +510,8 @@ void    Keyboard_Key(void)
 
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
+
+      case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;

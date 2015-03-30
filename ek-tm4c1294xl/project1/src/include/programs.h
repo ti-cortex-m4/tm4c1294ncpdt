@@ -240,7 +240,7 @@ PROGRAMS.H
 #define wSET_DSBL_REFILL            405
 #define wSET_MAX_REPEATS            409
 
-#define wSET_DISABLE_ESC            410
+#define wSET_DSBL_ESC               410
 
 #define wSET_STRICT_UNI             417
 #define wSET_DSBL_PASSWORD_UNI      418
