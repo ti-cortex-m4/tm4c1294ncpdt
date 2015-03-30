@@ -8,6 +8,8 @@ OUT_DECRET.C
 #include        "../memory/mem_extended1.h"
 #include        "../display/display.h"
 #include        "../serial/ports.h"
+#include        "../digitals/digitals.h"
+#include        "../energy.h"
 
 
 
@@ -45,12 +47,12 @@ uint    wSize;
         SetCanTime(mptiEsc_S, i);   
       }
       else if ((boExtendedEscS == boTrue) || (GetDigitalPhone(i) != 0))
-        reBuffA = *PGetCanReal(mpreEsc_S, i);
+        reBuffA = *GetCanReal(mpreEsc_S, i);
       else
       {
         LoadCurrDigital(i);
         if (mpboChannelsA[diCurr.ibLine] == boTrue)
-          reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
+          reBuffA = *GetCanReal(mpreChannelsB, diCurr.ibLine);
         else
         {
           j = ibPort;
@@ -160,7 +162,7 @@ uint    wSize;
       if (GetDigitalDevice(i) == 0)
       {
         if (LoadCntMon(ibMon) == 1) 
-          reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], i);
+          reBuffA = *GetCanReal(mpreCntMonCan[ PrevSoftMon() ], i);
         else
           reBuffA = 0;
 
@@ -178,12 +180,12 @@ uint    wSize;
         SetCanTime(mptiEsc_V, i);   
       }
       else if ((boExtendedEscV == boTrue) || (GetDigitalPhone(i) != 0))
-        reBuffA = *PGetCanReal(mpreEsc_V, i);
+        reBuffA = *GetCanReal(mpreEsc_V, i);
       else
       {
         LoadCurrDigital(i);
         if (mpboChannelsA[diCurr.ibLine] == boTrue)
-          reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
+          reBuffA = *GetCanReal(mpreChannelsB, diCurr.ibLine);
         else
         {
           j = ibPort;
@@ -222,9 +224,9 @@ uint    wSize;
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
     {
-      tiAlt = *PGetCanTime(mptiEsc_S, i);
+      tiAlt = mptiEsc_S[i];
 
-      Push(&tiAlt, sizeof(time));
+      PushTime(&tiAlt, sizeof(time));
       wSize += sizeof(time);
     }
   }
