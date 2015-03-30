@@ -6,19 +6,25 @@ OUT_DECRET.C
 
 #include        "../main.h"
 #include        "../memory/mem_ports.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_energy.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_extended1.h"
 #include        "../display/display.h"
 #include        "../serial/ports.h"
+#include        "../realtime/realtime.h"
 #include        "../digitals/digitals.h"
+#include        "../digitals/digitals_pause.h"
+#include        "../sensors/automatic2.h"
+#include        "../time/timedate.h"
 #include        "../time/rtc.h"
 #include        "../energy.h"
+#include        "../energy2.h"
 
 
 
 void    OutSimpleEscSExt(void)
 {
-uchar   j;
 uint    wSize;
 real    re;
 
@@ -39,17 +45,15 @@ real    re;
 
       if (GetDigitalDevice(c) == 0)
       {
-        re = *PGetCounterOld(c);
+        re = GetCntCurrImp(c);
 
-        tiAlt = *GetCurrTimeDate();
-        SetCanTime(mptiEsc_S, c);
+        mptiEsc_S[c] = *GetCurrTimeDate();
       }
       else if (mpboEnblCan[c] == FALSE)
       {
         re = 0;
 
-        tiAlt = *GetCurrTimeDate();
-        SetCanTime(mptiEsc_S, c);
+        mptiEsc_S[c] = *GetCurrTimeDate();
       }
       else if ((boExtendedEscS == TRUE) || (GetDigitalPhone(c) != 0))
         re = GetCanReal(mpreEsc_S, c);
@@ -60,15 +64,14 @@ real    re;
           re = GetCanReal(mpreChannelsB, diCurr.ibLine);
         else
         {
-          j = ibPort;
-          fAlt = ReadSensors(c);
-          ibPort = j;
+          uchar i = ibPort;
+          bool f = ReadCntCurrCan(c);
+          ibPort = i;
 
-          if (fAlt == 0) re = 0;
+          if (f == 0) re = 0;
         }
 
-        tiAlt = *GetCurrTimeDate();
-        SetCanTime(mptiEsc_S, c);
+        mptiEsc_S[c] = *GetCurrTimeDate();
       }
 
       PushReal(re);
@@ -85,7 +88,6 @@ real    re;
 
 void    OutSimpleEscUExt(void)
 {
-uchar   j;
 uint    wSize;
 
   SaveDisplay();
@@ -114,7 +116,7 @@ uint    wSize;
         moAlt.tiBeta = moAlt.tiAlfa;
       }
       else if ((boExtendedEscU == TRUE) || (GetDigitalPhone(c) != 0))
-        moAlt = *PGetCanMoment(mpmoEsc_U, c);
+        moAlt = mpmoEsc_U[c];
       else
       {
         LoadCurrDigital(c);
@@ -122,11 +124,11 @@ uint    wSize;
           moAlt.tiAlfa = tiChannelC;
         else
         {
-          j = ibPort;
-          fAlt = ReadTimeDate(c);
-          ibPort = j;
+          uchar i = ibPort;
+          bool f = ReadTimeCan(c);
+          ibPort = i;
 
-          if (fAlt == 0) moAlt.tiAlfa = tiZero; else moAlt.tiAlfa = tiAlt;
+          if (f == 0) moAlt.tiAlfa = tiZero; else moAlt.tiAlfa = tiAlt;
         }
 
         moAlt.tiBeta = *GetCurrTimeDate();
@@ -146,14 +148,13 @@ uint    wSize;
 
 void    OutCntCanMonCurrExt(void)
 {
-uchar   j;
 uint    wSize;
 real    re;
 
   SaveDisplay();
   sprintf(szHi,"Порт %u: CRC%03u ",ibPort+1,bInBuff5); Clear();
 
-  ibMon = ibHardMon;
+  uchar ibMon = ibHardMon;
 
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
@@ -174,18 +175,16 @@ real    re;
         else
           re = 0;
 
-        tiAlt = *GetCurrTimeDate();
-        SetCanTime(mptiEsc_V, c);
+        mptiEsc_V[c] = *GetCurrTimeDate();
       }
-      else if (CheckDirectCnt1(c)) {
-        LoadDirectCntReal(c);
-      }
+//      else if (CheckDirectCnt1(c)) {
+//        LoadDirectCntReal(c);
+//      }
       else if (mpboEnblCan[c] == FALSE)
       {
         re = 0;
 
-        tiAlt = *GetCurrTimeDate();
-        SetCanTime(mptiEsc_V, c);
+        mptiEsc_V[c] = *GetCurrTimeDate();
       }
       else if ((boExtendedEscV == TRUE) || (GetDigitalPhone(c) != 0))
         re = GetCanReal(mpreEsc_V, c);
@@ -196,15 +195,14 @@ real    re;
           re = GetCanReal(mpreChannelsB, diCurr.ibLine);
         else
         {
-          j = ibPort;
-          fAlt = ReadCntMonCan(ibMon, c);
-          ibPort = j;
+          uchar i = ibPort;
+          bool f = ReadCntMonCan(ibMon, c);
+          ibPort = i;
 
-          if (fAlt == 0) re = 0;
+          if (f == 0) re = 0;
         }
 
-        tiAlt = *GetCurrTimeDate();
-        SetCanTime(mptiEsc_V, c);
+        mptiEsc_V[c] = *GetCurrTimeDate();
       }
 
       PushReal(re);
@@ -222,19 +220,15 @@ real    re;
 
 void    OutTimeEscSExt(void)
 {
-uchar   i;
-uint    wSize;
-
   InitPushPtr();
-  wSize = 0;
+  uint wSize = 0;
 
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      tiAlt = mptiEsc_S[i];
-
-      PushTime(&tiAlt, sizeof(time));
+      PushTime(&mptiEsc_S[c]);
       wSize += sizeof(time);
     }
   }
@@ -245,22 +239,19 @@ uint    wSize;
 
 void    OutTimeEscVExt(void)
 {
-uchar   i;
-uint    wSize;
-
   InitPushPtr();
-  wSize = 0;
+  uint wSize = 0;
 
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      if (CheckDirectCnt1(i))
-        LoadDirectCntTime(i);
-      else
-        tiAlt = *PGetCanTime(mptiEsc_V, i);
+//      if (CheckDirectCnt1(c))
+//        LoadDirectCntTime(c);
+//      else
 
-      Push(&tiAlt, sizeof(time));
+      PushTime(&mptiEsc_V[c]);
       wSize += sizeof(time);
     }
   }

@@ -43,5 +43,15 @@ boolean                 mpboDefEscV[bCANALS],
                         mpboDefEscS[bCANALS],
                         mpboDefEscU[bCANALS];
 
+
+
 // флаги запрета опроса показаний
 boolean                 boDisableEsc1, boDisableEsc2, boDisableEsc3;
+
+// флаг
+boolean                 boMntEscS;
+
+// флаг специальной подготовки данных для Esc-запросов
+boolean                 boExtendedEscS,
+                        boExtendedEscV,
+                        boExtendedEscU;

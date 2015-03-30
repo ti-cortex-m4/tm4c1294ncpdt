@@ -287,7 +287,7 @@ uchar   ibCan;
         else
           dwSecond = (ulong)24*3600;
 
-        slong dwImpulse = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
+        slong dwImp = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
         mpdwBase[ibCan] = mpdwBaseDig[ GetDigitalLine(ibCan) ];
 
         dwSecond += GetSecondIndex(&tiDig);
@@ -299,27 +299,27 @@ uchar   ibCan;
         mptiBaseOK[ibCan] = *GetCurrTimeDate();
 
         if ((dwSecond > 0) && (dwSecond < 1800))
-          mpreBase[ibCan] += (real)180*dwImpulse/dwSecond;
+          mpreBase[ibCan] += (real)180*dwImp/dwSecond;
 
-        dwImpulse = mpreBase[ibCan];
-        mpreBase[ibCan] -= dwImpulse;
+        dwImp = mpreBase[ibCan];
+        mpreBase[ibCan] -= dwImp;
 
-        if (dwImpulse > 100) mpwMore100[ibCan]++;
-        if (dwImpulse > 1000) mpwMore1000[ibCan]++;
-        if (dwImpulse > 10000) mpwMore10000[ibCan]++;
+        if (dwImp > 100) mpwMore100[ibCan]++;
+        if (dwImp > 1000) mpwMore1000[ibCan]++;
+        if (dwImp > 10000) mpwMore10000[ibCan]++;
 
-        if (dwImpulse > 0xFFFF)
+        if (dwImp > 0xFFFF)
           mpwOverflow[ibCan]++;
         else
-        if (dwImpulse < 0)
+        if (dwImp < 0)
           mpwUnderflow[ibCan]++;
         else
         {
           LoadImpMnt((bMINUTES+ibHardMnt-1) % bMINUTES);
-          mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImpulse; // TODO bufferize
+          mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImp; // TODO bufferize
           SaveImpMnt(0, (bMINUTES+ibHardMnt-1) % bMINUTES, PrevSoftMnt());
 
-          MakeSpecCurrent(ibCan, (uint)dwUpdate);
+          MakeSpecCurrent(ibCan, (uint)dwImp);
         }
       }
     }
