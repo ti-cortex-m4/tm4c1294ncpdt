@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-EXTENDED1.Ñ
+EXTENDED_1.Ñ
 
 
 ------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ EXTENDED1.Ñ
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_realtime.h"
-#include        "../memory/mem_extended1.h"
+#include        "../memory/mem_extended_1.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../hardware/watchdog.h"
@@ -20,7 +20,7 @@ EXTENDED1.Ñ
 #include        "../time/rtc.h"
 #include        "../engine.h"
 #include        "../energy.h"
-#include        "extended1.h"
+#include        "extended_1.h"
 
 
 
