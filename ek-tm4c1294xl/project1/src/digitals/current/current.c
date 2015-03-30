@@ -5,6 +5,7 @@ CURRENT.C
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
+#include        "current.h"
 
 
 
@@ -19,4 +20,47 @@ bool    IsSpecCurrent(uchar  i)
       (i == 23)) return(1);
 
   return(0);
+}
+
+
+
+void    MakeSpecCurrent(void)
+{
+  if (IsSpecCurrent(GetDigitalDevice(ibCan)) == 1)
+  {
+    // обработка информации по импульсам
+    wBuffD = (uint)dwUpdate;
+    mpwImpHouCan[ibSoftHou][ibCan] += wBuffD;
+
+    AddCanImpEng(mpimDayCan[ibSoftDay], ibCan);
+    AddCanImpEng(mpimMonCan[ibSoftMon], ibCan);
+    AddCanImpEng(mpimAbsCan,            ibCan);
+
+
+    // подготовка информации для Esc V
+    if (LoadCntMon(tiCurr.bMonth-1) == 0)
+      reBuffA = 0;
+    else
+      reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
+    SetCanReal(&mpreEsc_V, ibCan);
+
+    tiAlt = *PGetCurrTimeDate();
+    SetCanTime(mptiEsc_V, ibCan);
+
+
+    // подготовка информации для Esc S
+    reBuffA  = mpdwBase[ibCan] * *PGetCanReal(mpreValueCntHou,ibCan);
+    if (GetDigitalDevice(ibCan) == 19) reBuffA += *PGetCanReal(mpreCount,ibCan);
+    SetCanReal(&mpreEsc_S, ibCan);
+
+    tiAlt = *PGetCurrTimeDate();
+    SetCanTime(mptiEsc_S, ibCan);
+
+
+    // подготовка информации для Esc U
+    moAlt.tiAlfa = tiCurr;
+
+    moAlt.tiBeta = *PGetCurrTimeDate();
+    SetCanMoment(&mpmoEsc_U, ibCan);
+  }
 }
