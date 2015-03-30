@@ -6,4 +6,4 @@ CURRENT.H
 
 bool    IsSpecCurrent(uchar  i);
 
-void    MakeSpecCurrent(void);
+void    MakeSpecCurrent(uchar  ibCan, uint  wImp);

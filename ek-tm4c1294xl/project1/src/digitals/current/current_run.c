@@ -6,9 +6,11 @@ CURRENT_RUN.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_realtime.h"
+#include        "../../memory/mem_factors.h"
 #include        "../../memory/mem_digitals.h"
 #include        "../../memory/mem_energy.h"
 #include        "../../memory/mem_current.h"
+#include        "../../memory/mem_extended1.h"
 #include        "../../display/display.h"
 #include        "../../keyboard/keyboard.h"
 #include        "../../keyboard/key_timedate.h"
@@ -21,6 +23,7 @@ CURRENT_RUN.C
 #include        "../../devices/devices.h"
 #include        "../../digitals/digitals_messages.h"
 #include        "../../digitals/digitals_display.h"
+#include        "../../digitals/current/current.h"
 #include        "../../time/timedate.h"
 #include        "../../time/rtc.h"
 #include        "../../energy2.h"
@@ -252,7 +255,7 @@ uchar   ibCan;
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
-      if (boMntEscS == boTrue)
+      if (boMntEscS == TRUE)
       {
         mpreEsc_S[ibCan] = mpreValueCntHou[ibCan] * mpdwBase[ibCan];
         mptiEsc_S[ibCan] = *GetCurrTimeDate();
@@ -316,7 +319,7 @@ uchar   ibCan;
           mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImpulse; // TODO bufferize
           SaveImpMnt(0, (bMINUTES+ibHardMnt-1) % bMINUTES, PrevSoftMnt());
 
-          MakeSpecCurrent();
+          MakeSpecCurrent(ibCan, (uint)dwUpdate);
         }
       }
     }
