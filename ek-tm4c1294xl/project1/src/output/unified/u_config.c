@@ -6,15 +6,18 @@ U_CONFIG.C
 
 
 #include        "../../main.h"
+#include        "../../memory/mem_settings.h"
 #include        "../../memory/mem_ports.h"
 #include        "../../memory/mem_factors.h"
 #include        "../../memory/mem_digitals.h"
 #include        "../../memory/mem_phones.h"
+#include        "../../memory/mem_params.h"
 #include        "../../memory/mem_uni.h"
 #include        "../../include/states.h"
 #include        "../../include/queries_uni.h"
 #include        "../../serial/ports.h"
 #include        "../../digitals/digitals.h"
+#include        "../../digitals/devices.h"
 #include        "../../hardware/memory.h"
 #include        "../../groups.h"
 #include        "response_uni.h"
@@ -111,7 +114,7 @@ uchar   i=0;
   return i;
 }
 
-/*
+
 uchar   GetCanalsCount(uchar  ibDev)
 {
 uchar   i,j;
@@ -127,7 +130,7 @@ uchar   i,j;
 
   return j; 
 }
-*/
+
 
 uchar   GetFirstCanalsNumber(uchar  ibDev)
 {
@@ -143,19 +146,18 @@ uchar   GetFirstCanalsNumber(uchar  ibDev)
   return 0;
 }
 
-/*
-uchar   GetDeviceNumber(uchar  c)
-{
-uchar   i;
 
+uchar   GetDeviceNumber(uchar  ibCan)
+{
   if (cbDevicesUni > 0)
   {
+    uchar i;
     for (i=0; i<cbDevicesUni; i++)
     {
-      if( (mpdiDevicesUni[i].ibPort   == GetDigitalPort(c)) &&
-          (mpdiDevicesUni[i].ibPhone  == GetDigitalPhone(c)) &&
-          (mpdiDevicesUni[i].bDevice  == GetDigitalDevice(c)) &&
-          (mpdiDevicesUni[i].bAddress == GetDigitalAddress(c)) ) return i + 1;
+      if( (mpdiDevicesUni[i].ibPort   == GetDigitalPort(ibCan)) &&
+          (mpdiDevicesUni[i].ibPhone  == GetDigitalPhone(ibCan)) &&
+          (mpdiDevicesUni[i].bDevice  == GetDigitalDevice(ibCan)) &&
+          (mpdiDevicesUni[i].bAddress == GetDigitalAddress(ibCan)) ) return i + 1;
     }
   }
 
@@ -163,7 +165,7 @@ uchar   i;
 }
 
 
-
+/*
 void    GetCorrectUni(void)
 {
   InitPop(6);
@@ -292,9 +294,9 @@ void    GetSensorsUni(void)
     {
       PushInt(c);
 
-      uchar g;
-      for (g=1; g<16; g++)
-        PushChar(msgDevices[c][g]);
+      uchar i;
+      for (i=1; i<16; i++)
+        PushChar(mpszDevices[c][i]);
 
       PushChar(0);
     }
@@ -346,10 +348,10 @@ uchar   i,j;
 
       PushChar(0);
       g = 0;
-      if (boLoadMnt == TRUE) g |= 0x01;
+      if (boEnblCurrent == TRUE) g |= 0x01;
       g |= 0x02;
-      if (boLoadHou == TRUE) g |= 0x04;
-      if (boEnableParam == TRUE) g |= 0x08;
+      if (boEnblProfile == TRUE) g |= 0x04;
+      if (boEnblParams == TRUE) g |= 0x08;
       PushChar(g);
 
       j = mpdiDevicesUni[c-1].bDevice - 1;
@@ -400,7 +402,7 @@ void    GetCanalsUni(void)
 
       PushChar(GetDigitalLine(c-1));
 
-      g = 0;
+      uchar g = 0;
       if (mpboEnblCan[c-1] != TRUE) g |= 0x01;
       PushChar(g);
 
