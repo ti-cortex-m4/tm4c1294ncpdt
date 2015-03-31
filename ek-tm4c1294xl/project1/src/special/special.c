@@ -15,6 +15,7 @@ SPECIAL.C
 #include        "../time/timedate.h"
 #include        "../time/decret.h"
 #include        "../energy.h"
+#include        "../energy3.h"
 #include        "calc.h"
 #include        "special.h"
 
@@ -81,4 +82,15 @@ void    CloseSpecial(void)
   DelayInf(); Clear();
 
   CloseCalc(1,1);
+}
+
+
+// TODO CloseSpecialBuff - add flags
+void    CloseSpecialBuff(void)
+{
+  SaveImpDayBuff();
+  SaveImpMonBuff();
+
+  SavePowDayBuff();
+  SavePowMonBuff();
 }
