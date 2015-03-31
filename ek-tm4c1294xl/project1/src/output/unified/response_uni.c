@@ -17,6 +17,7 @@ RESPONSE_UNI.C
 #include        "../../time/rtc.h"
 #include        "../../kernel/crc-16.h"
 #include        "u_config.h"
+#include        "u_energy.h"
 #include        "uni.h"
 
 
@@ -231,19 +232,19 @@ void    RunResponseUNI(void)
       case wUNI_GETGROUPS: 
         GetGroupsUni(); 
         break;
-/*
+
       case wUNI_GETENGCANDAY: 
         GetEngCanDayUni(); 
         break;
-
+/*
       case wUNI_GETENGGRPDAY: 
         GetEngGrpDayUni(); 
         break;
-
+*/
       case wUNI_GETENGCANMON: 
         GetEngCanMonUni(); 
         break;
-
+/*
       case wUNI_GETENGGRPMON: 
         GetEngGrpMonUni(); 
         break;
