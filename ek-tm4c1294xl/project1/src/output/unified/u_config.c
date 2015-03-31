@@ -3,30 +3,21 @@ U_CONFIG.C
 
 
 ------------------------------------------------------------------------------*/
+
+
+#include        "../../main.h"
+#include        "../../memory/mem_ports.h"
+#include        "../../memory/mem_factors.h"
+#include        "../../memory/mem_uni.h"
+#include        "../../include/states.h"
+#include        "../../include/queries_uni.h"
+#include        "../../serial/ports.h"
+#include        "../../groups.h"
+#include        "response_uni.h"
+#include        "u_config.h"
+
+
 /*
-#include        <string.h>
-#include        "main.h"
-#include        "xdata.h"
-#include        "x_digitals.h"
-#include        "queries2.h"
-#include        "keyboard.h"
-#include        "ports.h"
-#include        "access.h"
-#include        "memory.h"
-#include        "engine.h"
-#include        "sensors.h"
-#include        "groups.h"
-#include        "devices.h"
-#include        "timedate.h"
-#include        "nexttime.h"
-#include        "rtc.h"
-#include        "gps2.h"
-#include        "postinput2.h"
-
-
-
-#ifndef MODBUS
-
 uchar           code    mpbDevicesMask[bDEVICES][8] = 
                         {
                           {0x00,0x00,0x00,0x00,0x00,0x7F,0xFF,0xFF}, // 1
@@ -411,7 +402,7 @@ void    GetCanalsUni(void)
     Output2((uint)(2+2+2+4+4+4+1+1+32)*bInBuff9);
   }
 }
-
+*/
 
 
 void    GetGroupsUni(void) 
@@ -428,10 +419,12 @@ uchar   i;
   {
     InitPushUni();
 
+    uchar ibGrp;
     for (ibGrp=bInBuff7-1; ibGrp<bInBuff7+bInBuff9-1; ibGrp++)
     {
       PushInt(ibGrp+1);
 
+      uchar ibCan;
       for (ibCan=0; ibCan<128-16; ibCan++)
         PushChar(0);
 
@@ -455,6 +448,3 @@ uchar   i;
     Output2((uint)(2+128+32)*bInBuff9);
   }
 }
-
-#endif
-*/
