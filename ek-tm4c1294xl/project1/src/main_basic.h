@@ -44,8 +44,8 @@ typedef struct
 // тип 'двойное время/дата'
 typedef struct
 {
-  time          tiAlfa;
-  time          tiBeta;
+  time          ti1;
+  time          ti2;
 } moment;
 
 
