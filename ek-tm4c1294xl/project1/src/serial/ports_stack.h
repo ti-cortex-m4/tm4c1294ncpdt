@@ -19,6 +19,8 @@ void    PushString(char  *psz);
 void    PushIntAsString(uint  wT);
 void    PushBuffInt(uint  *pwData, uint  wSize);
 void    PushBuffLong(ulong  *pdwData, uint  wSize);
+void	PushCharHex2Txt(uchar  bT);
+void	PushCharDec2Txt(uchar  bT);
 
 uchar   SkipChar(void);
 void    Skip(uint  wSize);

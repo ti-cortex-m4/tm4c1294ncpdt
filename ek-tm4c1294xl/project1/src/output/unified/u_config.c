@@ -8,22 +8,26 @@ U_CONFIG.C
 #include        "../../main.h"
 #include        "../../memory/mem_ports.h"
 #include        "../../memory/mem_factors.h"
+#include        "../../memory/mem_digitals.h"
+#include        "../../memory/mem_phones.h"
 #include        "../../memory/mem_uni.h"
 #include        "../../include/states.h"
 #include        "../../include/queries_uni.h"
 #include        "../../serial/ports.h"
+#include        "../../digitals/digitals.h"
+#include        "../../hardware/memory.h"
 #include        "../../groups.h"
 #include        "response_uni.h"
 #include        "u_config.h"
 
 
-/*
-uchar           code    mpbDevicesMask[bDEVICES][8] = 
+
+static char const       mpbDevicesMask[bDEVICES][8] =
                         {
                           {0x00,0x00,0x00,0x00,0x00,0x7F,0xFF,0xFF}, // 1
                           {0x00,0x00,0x00,0x00,0x00,0x7F,0xFF,0xFF}, // 2
                           {0x00,0x00,0x00,0x00,0x00,0x7F,0x70,0xFF}, // 3
-                          {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // 4
+                        /*{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // 4
                           {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // 5
                           {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // 6
                           {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // 7
@@ -46,10 +50,10 @@ uchar           code    mpbDevicesMask[bDEVICES][8] =
                           {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // 24
                           {0x00,0x00,0x00,0x00,0x00,0x7F,0x00,0xFF}, // 25
                           {0x00,0x00,0x00,0x00,0x00,0x7F,0x00,0x07}, // 26
-                        };
+                      */};
 
 
-
+/*
 bit     IsDeviceAdded(uchar  ibDev)
 {
 uchar   i;
@@ -76,18 +80,19 @@ void    MakeDevicesUni(void)
   memset(&mpdiDevicesUni, 0, sizeof(mpdiDevicesUni));
   cbDevicesUni = 0;
 
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
-    if (IsDeviceAdded(ibCan) == 0) 
-       mpdiDevicesUni[cbDevicesUni++] = mpdiDigital[ibCan];
+  for (c=0; c<bCANALS; c++)
+    if (IsDeviceAdded(c) == 0)
+       mpdiDevicesUni[cbDevicesUni++] = mpdiDigital[c];
 }
-
+*/
 
 uchar   GetUsedCanals(void)
 {
 uchar   i=0;
 
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
-    if (GetDigitalDevice(ibCan) != 0)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+    if (GetDigitalDevice(c) != 0)
       i++;
 
   return i;
@@ -98,14 +103,15 @@ uchar   GetUsedGroups(void)
 {
 uchar   i=0;
 
-  for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
-    if (GetGroupsSize(ibGrp) > 0)
+  uchar g;
+  for (g=0; g<bGROUPS; g++)
+    if (GetGroupsSize(g) > 0)
       i++;
 
   return i;
 }
 
-
+/*
 uchar   GetCanalsCount(uchar  ibDev)
 {
 uchar   i,j;
@@ -121,12 +127,11 @@ uchar   i,j;
 
   return j; 
 }
-
+*/
 
 uchar   GetFirstCanalsNumber(uchar  ibDev)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bCANALS; i++)
   {
     if( (mpdiDevicesUni[ibDev].ibPort   == GetDigitalPort(i)) &&
@@ -138,8 +143,8 @@ uchar   i;
   return 0;
 }
 
-
-uchar   GetDeviceNumber(uchar  ibCan)
+/*
+uchar   GetDeviceNumber(uchar  c)
 {
 uchar   i;
 
@@ -147,10 +152,10 @@ uchar   i;
   {
     for (i=0; i<cbDevicesUni; i++)
     {
-      if( (mpdiDevicesUni[i].ibPort   == GetDigitalPort(ibCan)) &&
-          (mpdiDevicesUni[i].ibPhone  == GetDigitalPhone(ibCan)) &&
-          (mpdiDevicesUni[i].bDevice  == GetDigitalDevice(ibCan)) &&
-          (mpdiDevicesUni[i].bAddress == GetDigitalAddress(ibCan)) ) return i + 1;
+      if( (mpdiDevicesUni[i].ibPort   == GetDigitalPort(c)) &&
+          (mpdiDevicesUni[i].ibPhone  == GetDigitalPhone(c)) &&
+          (mpdiDevicesUni[i].bDevice  == GetDigitalDevice(c)) &&
+          (mpdiDevicesUni[i].bAddress == GetDigitalAddress(c)) ) return i + 1;
     }
   }
 
@@ -188,11 +193,11 @@ void    GetCorrectUni(void)
 void    GetCorrectionsUni(void)
 {
   InitPushUni();
-  for (ibCan=bInBuff6; ibCan<bInBuff6+bInBuff7; ibCan++)
+  for (c=bInBuff6; c<bInBuff6+bInBuff7; c++)
   {
-    if (ibCan == 0)
+    if (c == 0)
       PushInt((sint)(mpcwPosValueCurr[0] - mpcwNegValueCurr[0]));
-    else if (ibCan == 1)
+    else if (c == 1)
       PushInt((sint)(mpcwPosValuePrev[0] - mpcwNegValuePrev[0]));
     else
       PushInt(0);
@@ -221,7 +226,7 @@ uchar   i;
     Result2(bUNI_BADPASSWORD);
   }
 }
-
+*/
 
 
 void    GetConfigUni(void) 
@@ -281,12 +286,15 @@ void    GetSensorsUni(void)
   else
   {
     InitPushUni();
-    for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
-    {
-      PushInt(ibCan);
 
-      for (ibGrp=1; ibGrp<16; ibGrp++) 
-        PushChar(msgDevices[ibCan][ibGrp]);
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
+    {
+      PushInt(c);
+
+      uchar g;
+      for (g=1; g<16; g++)
+        PushChar(msgDevices[c][g]);
 
       PushChar(0);
     }
@@ -311,21 +319,23 @@ uchar   i,j;
   else
   {
     InitPushUni();
-    for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushInt(ibCan);
+      PushInt(c);
 
-      PushInt(mpdiDevicesUni[ibCan-1].bDevice);
+      PushInt(mpdiDevicesUni[c-1].bDevice);
 
       PushChar(0xFF);
       PushChar(0xFF);
       PushChar(0xFF);
       PushChar(0xFF);
 
-      PushInt(mpdiDevicesUni[ibCan-1].bAddress);
-      PushInt(GetCanalsCount(ibCan-1));
+      PushInt(mpdiDevicesUni[c-1].bAddress);
+      PushInt(GetCanalsCount(c-1));
       PushInt(wHOURS);
-      PushInt(GetFirstCanalsNumber(ibCan-1));
+      PushInt(GetFirstCanalsNumber(c-1));
 
       PushChar(0);
       PushChar(0);
@@ -335,25 +345,25 @@ uchar   i,j;
       PushChar(0);
 
       PushChar(0);
-      ibGrp = 0;
-      if (boLoadMnt == TRUE) ibGrp |= 0x01;
-      ibGrp |= 0x02;
-      if (boLoadHou == TRUE) ibGrp |= 0x04;
-      if (boEnableParam == TRUE) ibGrp |= 0x08;
-      PushChar(ibGrp);
+      g = 0;
+      if (boLoadMnt == TRUE) g |= 0x01;
+      g |= 0x02;
+      if (boLoadHou == TRUE) g |= 0x04;
+      if (boEnableParam == TRUE) g |= 0x08;
+      PushChar(g);
 
-      j = mpdiDevicesUni[ibCan-1].bDevice - 1;
+      j = mpdiDevicesUni[c-1].bDevice - 1;
       for (i=0; i<8; i++)
         PushChar(mpbDevicesMask[j][i]);
 
-      if (mpdiDevicesUni[ibCan-1].ibPhone == 0)
+      if (mpdiDevicesUni[c-1].ibPhone == 0)
       {
-        for (ibGrp=0; ibGrp<32; ibGrp++) PushChar(0);
+        for (g=0; g<32; g++) PushChar(0);
       }
       else
       { 
-        Push(&mpphPhones[ mpdiDevicesUni[ibCan-1].ibPhone - 1 ].szNumber, 13);
-        for (ibGrp=0; ibGrp<32-13; ibGrp++) PushChar(0);
+        Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szNumber, 13);
+        for (g=0; g<32-13; g++) PushChar(0);
       }    
     }
   }
@@ -375,34 +385,31 @@ void    GetCanalsUni(void)
   else
   {
     InitPushUni();
-    for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushInt(ibCan);
+      PushInt(c);
 
-      PushInt(GetDeviceNumber(ibCan-1));
-      PushInt(GetDigitalLine(ibCan-1)+1);
+      PushInt(GetDeviceNumber(c-1));
+      PushInt(GetDigitalLine(c-1)+1);
 
-      reBuffA = mpreTransEng[ibCan-1];
-      PushReal();
+      PushReal(mpreTransEng[c-1]);
+      PushReal(mprePulseHou[c-1]);
+      PushReal(mpreLosse[c-1]);
 
-      reBuffA = mprePulseHou[ibCan-1];
-      PushReal();
+      PushChar(GetDigitalLine(c-1));
 
-      reBuffA = mpreLosse[ibCan-1];
-      PushReal();
+      g = 0;
+      if (mpboEnblCan[c-1] != TRUE) g |= 0x01;
+      PushChar(g);
 
-      PushChar(GetDigitalLine(ibCan-1));
-
-      ibGrp = 0;
-      if (mpboEnblCan[ibCan-1] != TRUE) ibGrp |= 0x01;     
-      PushChar(ibGrp);
-
-      Push(mpszCanalsName[ibCan-1], 32);
+      Push(mpszCanalsName[c-1], 32);
     }
     Output2((uint)(2+2+2+4+4+4+1+1+32)*bInBuff9);
   }
 }
-*/
+
 
 
 void    GetGroupsUni(void) 
@@ -419,30 +426,30 @@ uchar   i;
   {
     InitPushUni();
 
-    uchar ibGrp;
-    for (ibGrp=bInBuff7-1; ibGrp<bInBuff7+bInBuff9-1; ibGrp++)
+    uchar g;
+    for (g=bInBuff7-1; g<bInBuff7+bInBuff9-1; g++)
     {
-      PushInt(ibGrp+1);
+      PushInt(g+1);
 
-      uchar ibCan;
-      for (ibCan=0; ibCan<128-16; ibCan++)
+      uchar c;
+      for (c=0; c<128-16; c++)
         PushChar(0);
 
       memset(&mpbGroupMaskUni, 0, sizeof(mpbGroupMaskUni));
-      if (GetGroupsSize(ibGrp) > 0)
+      if (GetGroupsSize(g) > 0)
       {
-        for (ibCan=0; ibCan<GetGroupsSize(ibGrp); ibCan++)
+        for (c=0; c<GetGroupsSize(g); c++)
         {
-          i = GetGroupsNodeCanal(ibGrp, ibCan);
+          i = GetGroupsNodeCanal(g, c);
           mpbGroupMaskUni[16-1 - (i / 4)] |= (0x01 << ((i % 4) * 2));
 
-          if (GetGroupsNodeSign(ibGrp, ibCan) == 1)
+          if (GetGroupsNodeSign(g, c) == 1)
             mpbGroupMaskUni[16-1 - (i / 4)] |= (0x02 << ((i % 4) * 2));   
         }
       }
       Push(mpbGroupMaskUni, sizeof(mpbGroupMaskUni));
 
-      Push(mpszGroupsName[ibGrp], bNAME);
+      Push(mpszGroupsName[g], bNAME);
     }
 
     Output2((uint)(2+128+32)*bInBuff9);
