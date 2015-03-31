@@ -3,9 +3,9 @@ OUT_DEFECTS20.C
 
 
 ------------------------------------------------------------------------------*/
+
+#include        "../main.h"
 /*
-#include        <string.h>
-#include        "xdata.h"
 #include        "queries.h"
 #include        "ports.h"
 #include        "engine.h"
@@ -135,18 +135,20 @@ void    GetMonGrpMaxDef(uchar  ibGroup)
   GetMonCanMaxDef();
   dwBuffC *= GetGroupsSize(ibGroup);
 }
+*/
 
-
-void    GetCanCurrDef(impulse  _xdata  *mpimT, uchar  ibCanal)
+ulong   GetCanCurrDef(impulse  *mpimT, uchar  ibCan)
 {
-uchar   i;
+  ulong dw = 0;
 
-  dwTmp = 0;
-  for (i=0; i<bTARIFFS; i++)
-    dwTmp += mpimT[ibCanal].mpdwImp[i];
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
+    dw += mpimT[ibCan].mpdwImp[t];
+
+  return dw;
 }
 
-
+/*
 void    GetGrpCurrDef(impulse  _xdata  *mpimT, uchar  ibGroup)
 {
 uchar   i,j,k;

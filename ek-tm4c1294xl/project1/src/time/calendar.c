@@ -165,19 +165,19 @@ time    ti;
 }
 
 
-/*
-ulong   DateToDayIndex(void)
+
+ulong   DateToDayIndex(time  ti)
 {
 uchar   i;
-time    ti;
+ulong   dw;
 
   dw = 0;
 
   for (i=0; i<ti.bYear; i++)
-    dw += DaysInYearSpec(i);
+    dw += GetDaysInYearY(i);
 
   for (i=1; i<ti.bMonth; i++)
-    dw += DaysInMonthSpec(ti.bYear,i);
+    dw += GetDaysInMonthYM(ti.bYear,i);
 
   dw += ti.bDay-1;
 
@@ -185,21 +185,21 @@ time    ti;
 }
 
 
-void    DayIndexToDate(ulong  dw)
+time    DayIndexToDate(ulong  dw)
 {
 time    ti;
 
   ti.bYear = 0;
-  while (dw >= DaysInYearSpec(ti.bYear))
+  while (dw >= GetDaysInYearY(ti.bYear))
   {
-    dw -= DaysInYearSpec(ti.bYear);
+    dw -= GetDaysInYearY(ti.bYear);
     ti.bYear++;
   }
 
   ti.bMonth = 1;
-  while (dw >= DaysInMonthSpec(ti.bYear,ti.bMonth))
+  while (dw >= GetDaysInMonthYM(ti.bYear,ti.bMonth))
   {
-    dw -= DaysInMonthSpec(ti.bYear,ti.bMonth);
+    dw -= GetDaysInMonthYM(ti.bYear,ti.bMonth);
     ti.bMonth++;
   }
 
@@ -209,14 +209,16 @@ time    ti;
   ti.bHour   = 0;
   ti.bMinute = 0;
   ti.bSecond = 0;
+
+  return ti;
 }
 
 
 
-ulong   DateToMonIndex(void)
+ulong   DateToMonIndex(time  ti)
 {
 uchar   i;
-time    ti;
+ulong   dw;
 
   dw = 0;
 
@@ -229,7 +231,7 @@ time    ti;
 }
 
 
-void    MonIndexToDate(ulong  dw)
+time    MonIndexToDate(ulong  dw)
 {
 time    ti;
 
@@ -246,5 +248,6 @@ time    ti;
   ti.bHour   = 0;
   ti.bMinute = 0;
   ti.bSecond = 0;
+
+  return ti;
 }
-*/
