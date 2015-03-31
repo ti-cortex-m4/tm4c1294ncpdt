@@ -103,6 +103,12 @@ void    ShowReal(real  reT)
 }
 
 
+void    ShowDouble(double  *pdb)
+{
+  sprintf(szLo, "%13.3f", *pdb);
+}
+
+
 void    ShowBoolean(boolean  boT)
 {
   if (boT == FALSE)
