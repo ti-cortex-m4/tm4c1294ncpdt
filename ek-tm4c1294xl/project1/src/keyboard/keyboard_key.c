@@ -79,6 +79,8 @@ KEYBOARD_KEY.C
 #include        "unified/key_dsbl_password_uni.h"
 #include        "unified/key_max_delay_uni.h"
 #include        "unified/key_repeat_flow_uni.h"
+#include        "digitals/key_mnt_esc_s.h"
+
 
 
 void    Keyboard_Key(void)
@@ -204,6 +206,8 @@ void    Keyboard_Key(void)
       case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
+
+      case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
 
       default:                  NoProgram();            break;
     }
@@ -402,6 +406,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
 
+      case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
+
       default:                  NoProgram();            break;
     }
   }
@@ -517,6 +523,8 @@ void    Keyboard_Key(void)
       case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
+
+      case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
 
       default:                  NoProgram();            break;
     }
