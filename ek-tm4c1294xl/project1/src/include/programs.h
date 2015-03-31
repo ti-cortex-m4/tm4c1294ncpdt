@@ -193,6 +193,10 @@ PROGRAMS.H
 #define bSET_TIMEOUT_PROFILE        194
 #define bSET_TIMEOUT_CURRENT        195
 
+#define bSET_EXTENDED_ESC_S         200
+#define bSET_EXTENDED_ESC_V         201
+#define bSET_EXTENDED_ESC_U         202
+
 #define bSET_RELAXS_FLAG            117
 #define bSET_RELAXS_TARIFF          118
 #define bSET_RELAXS                 119
