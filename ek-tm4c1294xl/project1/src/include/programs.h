@@ -247,5 +247,7 @@ PROGRAMS.H
 #define wSET_MAX_DELAY_UNI          422
 #define wSET_REPEAT_FLOW_UNI        288
 
+#define wSET_MNT_ESC_S              500
+
 
 #endif
