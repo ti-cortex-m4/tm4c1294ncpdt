@@ -9,6 +9,7 @@ PORTS_STACK.H
 #include        "../memory/mem_serial1.h"
 #include        "../memory/mem_serial2.h"
 #include        "../memory/mem_serial3.h"
+#include        "../display/lines.h"
 #include        "ports.h"
 
 
@@ -144,6 +145,22 @@ void    PushIntAsString(uint  wT)
 	PushChar(szHex[(wT % 100) / 10]);
 	PushChar(szHex[wT % 10]);
 }
+
+
+
+void	PushCharHex2Txt(uchar  bT)
+{
+  PushChar(szDigits[ bT / 0x10 ]);
+  PushChar(szDigits[ bT % 0x10 ]);
+}
+
+
+void	PushCharDec2Txt(uchar  bT)
+{
+  PushChar(szDigits[ bT / 10 ]);
+  PushChar(szDigits[ bT % 10 ]);
+}
+
 
 
 uchar   SkipChar(void) {

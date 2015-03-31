@@ -211,7 +211,7 @@ void    RunResponseUNI(void)
       case wUNI_GETTRANSIT:
         GetTransitUni(); 
         break;
-
+*/
       case wUNI_GETCONFIG: 
         GetConfigUni(); 
         break;
@@ -227,7 +227,7 @@ void    RunResponseUNI(void)
       case wUNI_GETCANALS: 
         GetCanalsUni(); 
         break;
-*/
+
       case wUNI_GETGROUPS: 
         GetGroupsUni(); 
         break;
