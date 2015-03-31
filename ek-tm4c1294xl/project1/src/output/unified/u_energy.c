@@ -23,12 +23,10 @@ U_ENERGY.C
 #include        "u_energy.h"
 
 
-/*
-#ifndef MODBUS
 
-void    GetCanCurrDef(impulse  _xdata  *mpimT, uchar  ibCanal);
-void    GetGrpCurrDef(impulse  _xdata  *mpimT, uchar  ibGroup);
-*/
+ulong   GetCanCurrDef(impulse  *mpimT, uchar  ibCan);
+//void    GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp);
+
 
 
 ulong   GetDayCanMaxDefCount(void)
@@ -69,9 +67,9 @@ bool    CheckDefCanDayUni(void)
   for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
   {
     ulong dw1 = GetDayCanMaxDefCount();
-    GetCanCurrDef(mpdeDayCan, c-1);
+    ulong dw2 = GetCanCurrDef(mpdeDayCan, c-1);
 
-    if (dw1 != dwTmp) return 1;
+    if (dw1 != dw2) return 1;
   }
 
   return 0;
@@ -102,9 +100,9 @@ bool    CheckDefCanMonUni(uchar  bMonth)
   for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
   {
     ulong dw1 = GetMonCanMaxDefCount(bMonth);
-    GetCanCurrDef(mpdeMonCan, c-1);
+    ulong dw2 = GetCanCurrDef(mpdeMonCan, c-1);
 
-    if (dw1 != dwTmp) return 1;
+    if (dw1 != dw2) return 1;
   }
 
   return 0;
