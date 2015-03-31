@@ -9,6 +9,7 @@ U_CONFIG.C
 #include        "../../memory/mem_settings.h"
 #include        "../../memory/mem_ports.h"
 #include        "../../memory/mem_factors.h"
+#include        "../../memory/mem_digitals0.h"
 #include        "../../memory/mem_digitals.h"
 #include        "../../memory/mem_phones.h"
 #include        "../../memory/mem_params.h"
@@ -56,16 +57,15 @@ static char const       mpbDevicesMask[bDEVICES][8] =
                       */};
 
 
-/*
-bit     IsDeviceAdded(uchar  ibDev)
-{
-uchar   i;
 
+bool    IsDeviceAdded(uchar  ibDev)
+{
   if (GetDigitalDevice(ibDev) == 0) return 1;
 
   if (cbDevicesUni > 0)
   {
-    for (i=0; i<cbDevicesUni; i++)
+   uchar i;
+   for (i=0; i<cbDevicesUni; i++)
     {
       if( (mpdiDevicesUni[i].ibPort   == GetDigitalPort(ibDev)) &&
           (mpdiDevicesUni[i].ibPhone  == GetDigitalPhone(ibDev)) &&
@@ -83,11 +83,12 @@ void    MakeDevicesUni(void)
   memset(&mpdiDevicesUni, 0, sizeof(mpdiDevicesUni));
   cbDevicesUni = 0;
 
+  uchar c;
   for (c=0; c<bCANALS; c++)
     if (IsDeviceAdded(c) == 0)
        mpdiDevicesUni[cbDevicesUni++] = mpdiDigital[c];
 }
-*/
+
 
 uchar   GetUsedCanals(void)
 {
@@ -347,12 +348,13 @@ uchar   i,j;
       PushChar(0);
 
       PushChar(0);
-      g = 0;
-      if (boEnblCurrent == TRUE) g |= 0x01;
-      g |= 0x02;
-      if (boEnblProfile == TRUE) g |= 0x04;
-      if (boEnblParams == TRUE) g |= 0x08;
-      PushChar(g);
+
+      i = 0;
+      if (boEnblCurrent == TRUE) i |= 0x01;
+      i |= 0x02;
+      if (boEnblProfile == TRUE) i |= 0x04;
+      if (boEnblParams == TRUE) i |= 0x08;
+      PushChar(i);
 
       j = mpdiDevicesUni[c-1].bDevice - 1;
       for (i=0; i<8; i++)
@@ -360,12 +362,12 @@ uchar   i,j;
 
       if (mpdiDevicesUni[c-1].ibPhone == 0)
       {
-        for (g=0; g<32; g++) PushChar(0);
+        for (i=0; i<32; i++) PushChar(0);
       }
       else
       { 
         Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szNumber, 13);
-        for (g=0; g<32-13; g++) PushChar(0);
+        for (i=0; i<32-13; i++) PushChar(0);
       }    
     }
   }
