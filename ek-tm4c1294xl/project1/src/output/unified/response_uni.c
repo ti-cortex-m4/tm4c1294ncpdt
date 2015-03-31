@@ -16,6 +16,7 @@ RESPONSE_UNI.C
 #include        "../../include/queries_uni.h"
 #include        "../../time/rtc.h"
 #include        "../../kernel/crc-16.h"
+#include        "u_config.h"
 #include        "uni.h"
 
 
@@ -226,11 +227,11 @@ void    RunResponseUNI(void)
       case wUNI_GETCANALS: 
         GetCanalsUni(); 
         break;
-
+*/
       case wUNI_GETGROUPS: 
         GetGroupsUni(); 
         break;
-
+/*
       case wUNI_GETENGCANDAY: 
         GetEngCanDayUni(); 
         break;
