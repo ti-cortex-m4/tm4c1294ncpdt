@@ -20,7 +20,7 @@ static char const      *pszPowGrpAlfa[] = { szPower, szAlfa, szBeta, ""};
 
 
 
-void    ShowPowGrpHou(void)
+static void ShowPowGrpHou(void)
 {
   if (LoadImpHou( (GetDayHouIndex(ibY)+ibZ)%wHOURS ) == TRUE)
   {
@@ -38,15 +38,15 @@ void    ShowPowGrpHou(void)
 
 
 
-void    LoadBetaGrp(void)
+static void LoadBetaGrp(void)
 {
-  sprintf(szBeta, "  по группе %-2u   ", ibX+1);
+  sprintf(szBeta, "  по группе %-2u  ", ibX+1);
 }
 
 
-void    LoadAlfaDayGrp(void)
+static void LoadAlfaDay(void)
 {
-  sprintf(szAlfa, "   за сутки %-2u   ", ibY);
+  sprintf(szAlfa, "  за сутки %-2u   ", ibY);
 }
 
 
@@ -91,7 +91,7 @@ void    key_GetOldProgram74(void)
       Clear();
       
       ibY = 0;                          // день
-      LoadAlfaDayGrp();
+      LoadAlfaDay();
 
       ibZ = 0;                          // получас
       ShowPowGrpHou(); 
@@ -103,7 +103,7 @@ void    key_GetOldProgram74(void)
         enKeyboard = KBD_POSTENTER;
         Clear();
 
-        LoadAlfaDayGrp();
+        LoadAlfaDay();
 
         ibZ = 0;                        // получас
         ShowPowGrpHou(); 
