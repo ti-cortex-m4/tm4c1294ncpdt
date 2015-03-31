@@ -102,18 +102,18 @@ void    MakeExtended1(void)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          moAlt.tiAlfa = tiChannelC;
+          moT.tiAlfa = tiChannelC;
           mpcwEscU_OK[c]++;
 
-          moAlt.tiBeta = *GetCurrTimeDate();
-          mpmoEsc_U[c] = moAlt;
+          moT.tiBeta = *GetCurrTimeDate();
+          mpmoEsc_U[c] = moT;
 
           mpboDefEscU[c] = TRUE;
           //AddDigRecord(EVE_ESC_U_DATA);
         }
         else
         {
-          moAlt.tiAlfa = tiZero;
+          moT.tiAlfa = tiZero;
           mpcwEscU_Error[c]++;
         }
       }

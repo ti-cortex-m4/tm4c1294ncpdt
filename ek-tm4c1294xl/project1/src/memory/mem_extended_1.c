@@ -9,9 +9,6 @@ MEM_EXTENDED1.C
 
 
 //
-time                    mptiEsc_T[bCANALS];
-
-//
 real                    mpreEsc_S[bCANALS];
 
 //
@@ -23,12 +20,10 @@ real                    mpreEsc_V[bCANALS];
 //
 time                    mptiEsc_V[bCANALS];
 
+//
+moment                  moT;
 
-
-// глобальная переменная
-moment                  moAlt;
-
-// массив переменных moment для расширенного опроса цифровых счётчиков
+//
 moment                  mpmoEsc_U[bCANALS];
 
 
