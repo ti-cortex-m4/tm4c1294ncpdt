@@ -80,6 +80,7 @@ KEYBOARD_KEY.C
 #include        "unified/key_max_delay_uni.h"
 #include        "unified/key_repeat_flow_uni.h"
 #include        "digitals/key_mnt_esc_s.h"
+#include        "digitals/key_extended_esc.h"
 
 
 
@@ -155,6 +156,10 @@ void    Keyboard_Key(void)
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
+
+      case bSET_EXTENDED_ESC_S: key_SetExtendedEscS();  break;
+      case bSET_EXTENDED_ESC_V: key_SetExtendedEscV();  break;
+      case bSET_EXTENDED_ESC_U: key_SetExtendedEscU();  break;
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
@@ -271,6 +276,10 @@ void    Keyboard_Key(void)
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
+
+      case bSET_EXTENDED_ESC_S: key_SetExtendedEscS();  break;
+      case bSET_EXTENDED_ESC_V: key_SetExtendedEscV();  break;
+      case bSET_EXTENDED_ESC_U: key_SetExtendedEscU();  break;
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
@@ -472,6 +481,10 @@ void    Keyboard_Key(void)
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
+
+      case bSET_EXTENDED_ESC_S: key_SetExtendedEscS();  break;
+      case bSET_EXTENDED_ESC_V: key_SetExtendedEscV();  break;
+      case bSET_EXTENDED_ESC_U: key_SetExtendedEscU();  break;
 
       case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
