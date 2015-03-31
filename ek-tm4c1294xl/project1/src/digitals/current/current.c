@@ -68,8 +68,8 @@ real    re;
 
 
     // подготовка информации для Esc U
-    moAlt.tiAlfa = tiCurr;
-    moAlt.tiBeta = *GetCurrTimeDate();
-    mpmoEsc_U[ibCan] = moAlt;
+    moT.tiAlfa = tiCurr;
+    moT.tiBeta = *GetCurrTimeDate();
+    mpmoEsc_U[ibCan] = moT;
   }
 }

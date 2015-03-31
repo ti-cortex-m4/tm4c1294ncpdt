@@ -105,34 +105,34 @@ uint    wSize;
 
       if (GetDigitalDevice(c) == 0)
       {
-        moAlt.tiAlfa = *GetCurrTimeDate();
-        moAlt.tiBeta = moAlt.tiAlfa;
+        moT.tiAlfa = *GetCurrTimeDate();
+        moT.tiBeta = moT.tiAlfa;
       }
       else if (mpboEnblCan[c] == FALSE)
       {
-        moAlt.tiAlfa = tiZero;
-        moAlt.tiBeta = moAlt.tiAlfa;
+        moT.tiAlfa = tiZero;
+        moT.tiBeta = moT.tiAlfa;
       }
       else if ((boExtendedEscU == TRUE) || (GetDigitalPhone(c) != 0))
-        moAlt = mpmoEsc_U[c];
+        moT = mpmoEsc_U[c];
       else
       {
         LoadCurrDigital(c);
         if (mpboChannelsA[diCurr.ibLine] == TRUE)
-          moAlt.tiAlfa = tiChannelC;
+          moT.tiAlfa = tiChannelC;
         else
         {
           uchar i = ibPort;
           bool f = ReadTimeCan(c);
           ibPort = i;
 
-          if (f == 0) moAlt.tiAlfa = tiZero; else moAlt.tiAlfa = tiAlt;
+          if (f == 0) moT.tiAlfa = tiZero; else moT.tiAlfa = tiAlt;
         }
 
-        moAlt.tiBeta = *GetCurrTimeDate();
+        moT.tiBeta = *GetCurrTimeDate();
       }
 
-      Push(&moAlt, sizeof(moment));
+      Push(&moT, sizeof(moment));
       wSize += sizeof(moment);
     }
   }
