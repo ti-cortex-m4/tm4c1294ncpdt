@@ -236,19 +236,19 @@ void    RunResponseUNI(void)
       case wUNI_GETENGCANDAY: 
         GetEngCanDayUni(); 
         break;
-/*
+
       case wUNI_GETENGGRPDAY: 
         GetEngGrpDayUni(); 
         break;
-*/
+
       case wUNI_GETENGCANMON: 
         GetEngCanMonUni(); 
         break;
-/*
+
       case wUNI_GETENGGRPMON: 
         GetEngGrpMonUni(); 
         break;
-
+/*
       case wUNI_GETPOWCANMNT: 
         GetPowCanMntUni(); 
         break;

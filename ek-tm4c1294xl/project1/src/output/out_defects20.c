@@ -5,6 +5,7 @@ OUT_DEFECTS20.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../groups.h"
 /*
 #include        "queries.h"
 #include        "ports.h"
@@ -148,21 +149,25 @@ ulong   GetCanCurrDef(impulse  *mpimT, uchar  ibCan)
   return dw;
 }
 
-/*
-void    GetGrpCurrDef(impulse  _xdata  *mpimT, uchar  ibGroup)
-{
-uchar   i,j,k;
 
-  dwTmp = 0;
-  for (i=0; i<GetGroupsSize(ibGroup); i++)
+ulong   GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp)
+{
+  ulong dw = 0;
+
+  uchar i;
+  for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    j = GetGroupsNodeCanal(ibGroup,i);
-    for (k=0; k<bTARIFFS; k++)
-      dwTmp += mpimT[j].mpdwImp[k];
+    uchar c = GetGroupsNodeCanal(ibGrp,i);
+
+    uchar t;
+    for (t=0; t<bTARIFFS; t++)
+      dw += mpimT[c].mpdwImp[t];
   }
+
+  return dw;
 }
 
-
+/*
 void    PushGrpDef(impulse  _xdata  *mpimT, uchar  ibGroup)
 {
 uchar   i,j,k;

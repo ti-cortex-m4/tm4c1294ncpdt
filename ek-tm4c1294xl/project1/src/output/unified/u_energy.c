@@ -17,6 +17,7 @@ U_ENERGY.C
 #include        "../../time/timedate.h"
 #include        "../../time/calendar.h"
 #include        "../../special/recalc_def.h"
+#include        "../../groups.h"
 #include        "../../energy.h"
 #include        "../../energy2.h"
 #include        "response_uni.h"
@@ -25,7 +26,7 @@ U_ENERGY.C
 
 
 ulong   GetCanCurrDef(impulse  *mpimT, uchar  ibCan);
-//void    GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp);
+ulong   GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp);
 
 
 
@@ -34,13 +35,12 @@ ulong   GetDayCanMaxDefCount(void)
   return (ulong)48;
 }
 
-/*
-void    GetDayGrpMaxDef2(uchar  ibGroup)
+
+ulong   GetDayGrpMaxDefCount(uchar  ibGrp)
 {
-  GetDayCanMaxDefCount();
-  dwBuffC *= GetGroupsSize(ibGroup);
+  return GetDayCanMaxDefCount() * GetGroupsSize(ibGrp);
 }
-*/
+
 
 ulong   GetMonCanMaxDefCount(uchar  bMonth)
 {
@@ -50,13 +50,12 @@ ulong   GetMonCanMaxDefCount(uchar  bMonth)
   return (ulong)48*GetDaysInMonthYM(y, m);
 }
 
-/*
-void    GetMonGrpMaxDef2(uchar  ibGroup)
+
+ulong   GetMonGrpMaxDefCount(uchar  bMonth, uchar  ibGrp)
 {
-  GetMonCanMaxDefCount();
-  dwBuffC *= GetGroupsSize(ibGroup);
+  return GetMonCanMaxDefCount(bMonth) * GetGroupsSize(ibGrp);
 }
-*/
+
 
 
 bool    CheckDefCanDayUni(void)
@@ -75,22 +74,23 @@ bool    CheckDefCanDayUni(void)
   return 0;
 }
 
-/*
-bit     CheckDefGrpDayUni(void)
+
+bool    CheckDefGrpDayUni(void)
 {
   LoadDefDay((bDAYS+ibHardDay-bInBuffB) % bDAYS);
 
-  for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
+  uchar g;
+  for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
   {
-    GetDayGrpMaxDef2(ibGrp-1);
-    GetGrpCurrDef(mpdeDayCan, ibGrp-1);
+    ulong dw1 = GetDayGrpMaxDefCount(g-1);
+    ulong dw2 = GetGrpCurrDef(mpdeDayCan, g-1);
 
-    if (dwBuffC != dwTmp) return 1;
+    if (dw1 != dw2) return 1;
   }
 
   return 0;
 }
-*/
+
 
 bool    CheckDefCanMonUni(uchar  bMonth)
 {
@@ -108,22 +108,23 @@ bool    CheckDefCanMonUni(uchar  bMonth)
   return 0;
 }
 
-/*
-bit     CheckDefGrpMonUni(void)
+
+bool    CheckDefGrpMonUni(uchar  bMonth)
 {
   LoadDefMon((bMONTHS+ibHardMon-bInBuffB) % bMONTHS);
 
-  for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
+  uchar g;
+  for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
   {
-    GetMonGrpMaxDef2(ibGrp-1);
-    GetGrpCurrDef(mpdeMonCan, ibGrp-1);
+    ulong dw1 = GetMonGrpMaxDefCount(bMonth, g-1);
+    ulong dw2 = GetGrpCurrDef(mpdeMonCan, g-1);
 
-    if (dwBuffC != dwTmp) return 1;
+    if (dw1 != dw2) return 1;
   }
 
   return 0;
 }
-*/
+
 
 
 void    GetEngCanDayUni(void)
@@ -163,11 +164,9 @@ void    GetEngCanDayUni(void)
   }
 }
 
-/*
+
 void    GetEngGrpDayUni(void)
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bGROUPS)
@@ -185,24 +184,24 @@ uchar   i;
     InitPushUni();
     LoadImpDay((bDAYS+ibHardDay-bInBuffB) % bDAYS);
 
-    for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
+    uchar g;
+    for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
     {
+      uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        reBuffA = *PGetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], ibGrp-1, 0x01 << (i-1));
-        PushReal();
+        PushReal(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], g-1, 0x01 << (i-1)));
       }
     }
 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToDayIndex();
-    dwBuffC -= bInBuffB;
-    DayIndexToDate(dwBuffC);
+    ulong dw = DateToDayIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &tiAlt);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
   }
 }
-*/
+
 
 
 void    GetEngCanMonUni(void)
@@ -242,11 +241,9 @@ void    GetEngCanMonUni(void)
   }
 }
 
-/*
+
 void    GetEngGrpMonUni(void)
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bGROUPS)
@@ -264,26 +261,26 @@ uchar   i;
     InitPushUni();
     LoadImpMon((bMONTHS+ibHardMon-bInBuffB) % bMONTHS);
 
+    uchar ibGrp;
     for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
     {
+      uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        reBuffA = *PGetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp-1, 0x01 << (i-1));
-        PushReal();
+        PushReal(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp-1, 0x01 << (i-1)));
       }
     }
 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToMonIndex();
-    dwBuffC -= bInBuffB;
-    MonIndexToDate(dwBuffC);
+    ulong dw = DateToMonIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti = MonIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefGrpMonUni() == 0) ? bUNI_OK : bUNI_DEFECT), &tiAlt);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefGrpMonUni(ti.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
   }
 }
 
 
-
+/*
 void    GetMaxGrpDayUni(void)
 {
 uchar   i;
