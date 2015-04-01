@@ -196,13 +196,24 @@ void    GetEngGrpDayUni(bool  x2)
     InitPushUni();
     LoadImpDay((bDAYS+ibHardDay-bInBuffB) % bDAYS);
 
+    uint wSize = 0;
+
     uchar g;
     for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
     {
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushFloat(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], g-1, 0x01 << (i-1)));
+        if (x2)
+        {
+          PushDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ], g-1, 0x01 << (i-1)));
+          wSize += sizeof(double);
+        }
+        else
+        {
+          PushFloat(GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], g-1, 0x01 << (i-1)));
+          wSize += sizeof(float);
+        }
       }
     }
 
@@ -210,7 +221,7 @@ void    GetEngGrpDayUni(bool  x2)
     dw -= bInBuffB;
     time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code(wSize, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
   }
 }
 
@@ -235,13 +246,24 @@ void    GetEngCanMonUni(bool  x2)
     InitPushUni();
     LoadImpMon((bMONTHS+ibHardMon-bInBuffB) % bMONTHS);
 
+    uint wSize = 0;
+
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushFloat(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ], c-1, 0x01 << (i-1)));
+        if (x2)
+        {
+          PushDouble(GetCanImp2DoubleEng(mpimMonCan[ PrevSoftMon() ], c-1, 0x01 << (i-1)));
+          wSize += sizeof(double);
+        }
+        else
+        {
+          PushFloat(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ], c-1, 0x01 << (i-1)));
+          wSize += sizeof(float);
+        }
       }
     }
 
@@ -249,7 +271,7 @@ void    GetEngCanMonUni(bool  x2)
     dw -= bInBuffB;
     time ti = MonIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefCanMonUni(ti.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code(wSize, ((CheckDefCanMonUni(ti.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
   }
 }
 
@@ -273,13 +295,24 @@ void    GetEngGrpMonUni(bool  x2)
     InitPushUni();
     LoadImpMon((bMONTHS+ibHardMon-bInBuffB) % bMONTHS);
 
-    uchar ibGrp;
-    for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
+    uint wSize = 0;
+
+    uchar g;
+    for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
     {
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushFloat(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp-1, 0x01 << (i-1)));
+        if (x2)
+        {
+          PushDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ], g-1, 0x01 << (i-1)));
+          wSize += sizeof(double);
+        }
+        else
+        {
+          PushFloat(GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], g-1, 0x01 << (i-1)));
+          wSize += sizeof(float);
+        }
       }
     }
 

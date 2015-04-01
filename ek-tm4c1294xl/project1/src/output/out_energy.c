@@ -28,7 +28,7 @@ real   re;
   {
     for (t=0; t<bTARIFFS; t++)
     {
-      re = GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
+      re = GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
 
       w += sizeof(real);
       PushFloat(re);
@@ -38,7 +38,7 @@ real   re;
   {
     re = 0;
     for (t=0; t<bTARIFFS; t++)
-      re += GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
+      re += GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
 
     w += sizeof(real);
     PushFloat(re);
@@ -60,7 +60,7 @@ real   re;
   {
     for (t=0; t<bTARIFFS; t++)
     {
-      re = GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
+      re = GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
 
       w += sizeof(real);
       PushFloat(re);
@@ -70,7 +70,7 @@ real   re;
   {
     re = 0;
     for (t=0; t<bTARIFFS; t++)
-      re += GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
+      re += GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
 
     w += sizeof(real);
     PushFloat(re);

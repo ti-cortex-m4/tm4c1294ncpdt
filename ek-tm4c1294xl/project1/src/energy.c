@@ -158,14 +158,13 @@ real    re;
 
 
 
-// рассчитывает групповое значение на основе канального массива impulse (суточна€ и мес€чна€ энерги€)
-real    GetGrpImp2RealEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask)
+float   GetGrpImp2FloatEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask)
 {
 uchar   i, j;
-real    reA, reB;
+float   flA, flB;
 ulong   dw;
 
-  reA = 0;
+  flA = 0;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
     j = GetGroupsNodeCanal(ibGrp,i);
@@ -181,17 +180,50 @@ ulong   dw;
     if ((bMask & 0x08) != 0)
       dw += *PGetCanImp(mpimT,j,3);
 
-    reB = GetCanReal(mpreValueEngHou,j) * dw;
+    flB = (float)mpreValueEngHou[j] * dw;
 
     if (GetGroupsNodeSign(ibGrp,i) == 0)
-      reA += reB;
+      flA += flB;
     else
-      reA -= reB;
+      flA -= flB;
   }
 
-  return reA;
+  return flA;
 }
 
+
+double  GetGrpImp2DoubleEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask)
+{
+uchar   i, j;
+double  dbA, dbB;
+ulong   dw;
+
+  dbA = 0;
+  for (i=0; i<GetGroupsSize(ibGrp); i++)
+  {
+    j = GetGroupsNodeCanal(ibGrp,i);
+
+    dw = 0;
+
+    if ((bMask & 0x01) != 0)
+      dw += *PGetCanImp(mpimT,j,0);
+    if ((bMask & 0x02) != 0)
+      dw += *PGetCanImp(mpimT,j,1);
+    if ((bMask & 0x04) != 0)
+      dw += *PGetCanImp(mpimT,j,2);
+    if ((bMask & 0x08) != 0)
+      dw += *PGetCanImp(mpimT,j,3);
+
+    dbB = (double)mpreValueEngHou[j] * dw;
+
+    if (GetGroupsNodeSign(ibGrp,i) == 0)
+      dbA += dbB;
+    else
+      dbA -= dbB;
+  }
+
+  return dbA;
+}
 
 
 float   GetCanImp2FloatEng(impulse  *mpimT, uchar  ibCan, uchar  bMask)
