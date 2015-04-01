@@ -125,28 +125,28 @@ time  ti;
 void    ShowGrpDayPrevEng(uchar  bMask)
 {
   LoadImpDay( PrevHardDay() );
-  ShowFloat(GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowGrpDayCurrEng(uchar  bMask)
 {
   LoadImpDay( ibHardDay );
-  ShowFloat(GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowGrpMonPrevEng(uchar  bMask)
 {
   LoadImpMon( PrevHardMon() );
-  ShowFloat(GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
 void    ShowGrpMonCurrEng(uchar  bMask)
 {
   LoadImpMon( ibHardMon );
-  ShowFloat(GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 

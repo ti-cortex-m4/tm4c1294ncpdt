@@ -51,7 +51,7 @@ void    ShowItemName(item  it);
 void    ShowGrpFullYearEng(uchar  bMask)
 {
   LoadImpMon( ibY );
-  ShowFloat(GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
