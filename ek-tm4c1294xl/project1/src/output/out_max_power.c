@@ -22,7 +22,7 @@ uchar   t;
 	for (t=0; t<bTARIFFS; t++)
 	{
     PushTime(&(ppo->mpmaMax[t]).tiSelf);
-    PushReal(ppo->mpmaMax[t].reSelf);
+    PushFloat(ppo->mpmaMax[t].reSelf);
 	}
 }
 

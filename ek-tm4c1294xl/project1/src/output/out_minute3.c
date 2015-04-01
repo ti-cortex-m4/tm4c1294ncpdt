@@ -66,7 +66,7 @@ real    re;
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
           re = GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], c, 20);
-          PushReal(re);
+          PushFloat(re);
 
           w += sizeof(real);
         }
@@ -116,7 +116,7 @@ real    re;
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
       {
         re = GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], c, 20);
-        PushReal(re);
+        PushFloat(re);
 
         w += sizeof(real);
       }

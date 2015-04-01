@@ -398,9 +398,9 @@ void    GetCanalsUni(void)
       PushInt(GetDeviceNumber(c-1));
       PushInt(GetDigitalLine(c-1)+1);
 
-      PushReal(mpreTransEng[c-1]);
-      PushReal(mprePulseHou[c-1]);
-      PushReal(mpreLosse[c-1]);
+      PushFloat(mpreTransEng[c-1]);
+      PushFloat(mprePulseHou[c-1]);
+      PushFloat(mpreLosse[c-1]);
 
       PushChar(GetDigitalLine(c-1));
 

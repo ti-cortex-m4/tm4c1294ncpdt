@@ -17,7 +17,7 @@ void    OutReal(real  *mpe, uchar  bCount)
 
   while (bCount-- > 0)
   {
-    PushReal(*mpe++);
+    PushFloat(*mpe++);
     wSize += sizeof(real);
   }
 

@@ -72,7 +72,7 @@ real    re;
         mptiEsc_S[c] = *GetCurrTimeDate();
       }
 
-      PushReal(re);
+      PushFloat(re);
       wSize += sizeof(real);
     }
   }
@@ -202,7 +202,7 @@ real    re;
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
 
-      PushReal(re);
+      PushFloat(re);
       wSize += sizeof(real);
     }
   }
