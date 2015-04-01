@@ -128,7 +128,7 @@ bool    CheckDefGrpMonUni(uchar  bMonth)
 
 
 
-void    GetEngCanDayUni(void)
+void    GetEngCanDayUni(bool  x2)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -166,7 +166,7 @@ void    GetEngCanDayUni(void)
 }
 
 
-void    GetEngGrpDayUni(void)
+void    GetEngGrpDayUni(bool  x2)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -205,7 +205,7 @@ void    GetEngGrpDayUni(void)
 
 
 
-void    GetEngCanMonUni(void)
+void    GetEngCanMonUni(bool  x2)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -243,7 +243,7 @@ void    GetEngCanMonUni(void)
 }
 
 
-void    GetEngGrpMonUni(void)
+void    GetEngGrpMonUni(bool  x2)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);

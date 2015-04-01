@@ -96,7 +96,7 @@ void    PushLong(ulong  dwT) {
 
 void    PushReal(real  reT)
 {
-  static combo coT;
+  static combo32 coT;
   coT.reBuff = reT;
 
   PushChar(coT.mpbBuff[3]);

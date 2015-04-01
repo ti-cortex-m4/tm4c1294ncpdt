@@ -233,10 +233,15 @@ void    RunResponseUNI(void)
         GetGroupsUni(); 
         break;
 
-      case wUNI_GETENGCANDAY: GetEngCanDayUni(); break;
-      case wUNI_GETENGGRPDAY: GetEngGrpDayUni(); break;
-      case wUNI_GETENGCANMON: GetEngCanMonUni(); break;
-      case wUNI_GETENGGRPMON: GetEngGrpMonUni(); break;
+      case wUNI_GETENGCANDAY: GetEngCanDayUni(false); break;
+      case wUNI_GETENGGRPDAY: GetEngGrpDayUni(false); break;
+      case wUNI_GETENGCANMON: GetEngCanMonUni(false); break;
+      case wUNI_GETENGGRPMON: GetEngGrpMonUni(false); break;
+
+      case wUNI_GETENGCANDAY_X2: GetEngCanDayUni(true); break;
+      case wUNI_GETENGGRPDAY_X2: GetEngGrpDayUni(true); break;
+      case wUNI_GETENGCANMON_X2: GetEngCanMonUni(true); break;
+      case wUNI_GETENGGRPMON_X2: GetEngGrpMonUni(true); break;
 /*
       case wUNI_GETPOWCANMNT: 
         GetPowCanMntUni(); 

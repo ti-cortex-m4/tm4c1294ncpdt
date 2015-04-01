@@ -49,13 +49,22 @@ typedef struct
 } moment;
 
 
-// тип 'комбинированный'
+// тип 'комбинированный 32 бита'
 typedef union
 {
   uchar         mpbBuff[4];
   ulong         dwBuff;
-  real          reBuff;
-} combo;
+  float         reBuff;
+} combo32;
+
+
+// тип 'комбинированный 64 бита'
+typedef union
+{
+  uchar         mpbBuff[8];
+  uint64_t      qwBuff;
+  double        dbBuff;
+} combo64;
 
 
 // тип 'канал/группа'
