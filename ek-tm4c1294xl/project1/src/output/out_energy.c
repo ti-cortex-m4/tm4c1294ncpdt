@@ -31,7 +31,7 @@ real   re;
       re = GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
 
       w += sizeof(real);
-      PushReal(re);
+      PushFloat(re);
     }
   }
   else
@@ -41,7 +41,7 @@ real   re;
       re += GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
 
     w += sizeof(real);
-    PushReal(re);
+    PushFloat(re);
   }
 
   return w;
@@ -63,7 +63,7 @@ real   re;
       re = GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
 
       w += sizeof(real);
-      PushReal(re);
+      PushFloat(re);
     }
   }
   else
@@ -73,7 +73,7 @@ real   re;
       re += GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
 
     w += sizeof(real);
-    PushReal(re);
+    PushFloat(re);
   }
 
   return w;

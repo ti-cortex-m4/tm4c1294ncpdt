@@ -94,15 +94,31 @@ void    PushLong(ulong  dwT) {
 }
 
 
-void    PushReal(real  reT)
+void    PushFloat(float  fl)
 {
-  static combo32 coT;
-  coT.reBuff = reT;
+  static combo32 co;
+  co.reBuff = fl;
 
-  PushChar(coT.mpbBuff[3]);
-  PushChar(coT.mpbBuff[2]);
-  PushChar(coT.mpbBuff[1]);
-  PushChar(coT.mpbBuff[0]);
+  PushChar(co.mpbBuff[3]);
+  PushChar(co.mpbBuff[2]);
+  PushChar(co.mpbBuff[1]);
+  PushChar(co.mpbBuff[0]);
+}
+
+
+void    PushDouble(double  db)
+{
+  static combo64 co;
+  co.dbBuff = db;
+
+  PushChar(co.mpbBuff[7]);
+  PushChar(co.mpbBuff[6]);
+  PushChar(co.mpbBuff[5]);
+  PushChar(co.mpbBuff[4]);
+  PushChar(co.mpbBuff[3]);
+  PushChar(co.mpbBuff[2]);
+  PushChar(co.mpbBuff[1]);
+  PushChar(co.mpbBuff[0]);
 }
 
 

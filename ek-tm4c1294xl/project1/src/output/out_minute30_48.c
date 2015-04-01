@@ -44,7 +44,7 @@ real    re;
           else
             re = GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g, 2);
 
-          PushReal(re);
+          PushFloat(re);
 
           w += sizeof(real);
           if (w >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
@@ -132,7 +132,7 @@ real    re;
           if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
           {
             re = 0;
-            PushReal(re);
+            PushFloat(re);
           }
           else
           if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], c) == 0xFFFF)
@@ -145,7 +145,7 @@ real    re;
           else
           {
             re = GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2);
-            PushReal(re);
+            PushFloat(re);
           }
 
           w += sizeof(real);

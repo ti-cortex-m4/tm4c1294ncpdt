@@ -147,13 +147,15 @@ void    GetEngCanDayUni(bool  x2)
     InitPushUni();
     LoadImpDay((bDAYS+ibHardDay-bInBuffB) % bDAYS);
 
+    uint wSize = 0;
+
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushReal(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ], c-1, 0x01 << (i-1)));
+        PushFloat(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ], c-1, 0x01 << (i-1)));
       }
     }
 
@@ -191,7 +193,7 @@ void    GetEngGrpDayUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushReal(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], g-1, 0x01 << (i-1)));
+        PushFloat(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], g-1, 0x01 << (i-1)));
       }
     }
 
@@ -230,7 +232,7 @@ void    GetEngCanMonUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushReal(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ], c-1, 0x01 << (i-1)));
+        PushFloat(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ], c-1, 0x01 << (i-1)));
       }
     }
 
@@ -268,7 +270,7 @@ void    GetEngGrpMonUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushReal(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp-1, 0x01 << (i-1)));
+        PushFloat(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp-1, 0x01 << (i-1)));
       }
     }
 
@@ -307,7 +309,7 @@ void    GetMaxGrpDayUni(void)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushReal(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ], ibGrp-1, i-1));
+        PushFloat(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ], ibGrp-1, i-1));
         time ti1 = GetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ], ibGrp-1, i-1);
         PushChar(ti1.bDay);
         PushChar(ti1.bHour*2 + ti1.bMinute/30);
@@ -348,7 +350,7 @@ void    GetMaxGrpMonUni(void)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushReal(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ], ibGrp-1, i-1));
+        PushFloat(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ], ibGrp-1, i-1));
         time ti1 = GetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ], ibGrp-1, i-1);
         PushChar(ti1.bDay);
         PushChar(ti1.bHour*2 + ti1.bMinute/30);
