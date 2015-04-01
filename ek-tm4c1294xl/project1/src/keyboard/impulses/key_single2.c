@@ -46,28 +46,28 @@ static char const      *pszEngCanCurrMin[]     = { szPower, szOnCanals, szMiddle
 void    ShowCanDayPrevEng(uchar  bMask)
 {
   LoadImpDay( PrevHardDay() );
-  ShowFloat(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowDouble(GetCanImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowCanDayCurrEng(uchar  bMask)
 {
   LoadImpDay( ibHardDay );
-  ShowFloat(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowDouble(GetCanImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowCanMonPrevEng(uchar  bMask)
 {
   LoadImpMon( PrevHardMon() );
-  ShowFloat(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowDouble(GetCanImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
 void    ShowCanMonCurrEng(uchar  bMask)
 {
   LoadImpMon( ibHardMon );
-  ShowFloat(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowDouble(GetCanImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
