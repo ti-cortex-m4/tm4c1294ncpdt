@@ -303,6 +303,7 @@ void    NextProfile(void)
     SetCurr(DEV_BEGIN);
 
     CloseSpecial();
+    CloseSpecialBuff();
 
     AddDigRecord(EVE_PROFILECLOSE2);
 
