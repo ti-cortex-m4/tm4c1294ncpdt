@@ -1,0 +1,456 @@
+/*------------------------------------------------------------------------------
+DEVICE_C.C
+              
+ 
+------------------------------------------------------------------------------*/
+
+#include        "../main.h"
+#include        "../memory/mem_settings.h"
+#include        "../memory/mem_digitals.h"
+#include        "../memory/mem_current.h"
+#include        "../memory/mem_factors.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_energy_spec.h"
+#include        "../memory/mem_profile.h"
+#include        "../memory/mem_limits.h"
+#include        "../display/display.h"
+#include        "../keyboard/key_timedate.h"
+#include        "../time/timedate.h"
+#include        "../time/calendar.h"
+#include        "../time/delay.h"
+#include        "../serial/ports_stack.h"
+#include        "../serial/ports_devices.h"
+#include        "../serial/ports_common.h"
+#include        "../devices/devices.h"
+#include        "../devices/devices_time.h"
+#include        "../digitals/current/current_run.h"
+#include        "../digitals/digitals_messages.h"
+#include        "../digitals/limits.h"
+#include        "../digitals/profile/refill.h"
+#include        "../special/special.h"
+#include        "../flash/records.h"
+#include        "../energy.h"
+
+
+
+#ifndef SKIP_C
+
+// проверка сетевого адреса для счётчиков CC-301
+bool    ReadAddressC(void)
+{
+  return(InBuff(0) == diCurr.bAddress);
+}
+
+
+// проверка результата операции для счётчиков CC-301
+bool    ReadResultC(void)
+{
+  TestResult(InBuff(3));
+  return(ReadAddressC() && (InBuff(3) == 0));
+}
+
+
+
+// посылка запроса на открытие канала связи для счётчика CC-301
+void    QueryOpenC(void)
+{ /*
+  InitPush();
+
+  PushChar(diCurr.bAddress);       
+  PushChar(31);
+  PushChar(0);
+  PushChar(0);
+
+  PushChar('0');
+  PushChar('0');
+  PushChar('0');
+  PushChar('0');
+  PushChar('0');
+  PushChar('0');
+  PushChar('0');
+  PushChar('0');
+
+  RevQueryIO(4+2, 4+8+2);
+  */
+  InitPush();
+
+  PushChar(diCurr.bAddress);       
+  PushChar(3);
+  PushChar(32);
+
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+
+  RevQueryIO(4+6+2, 3+3+2);
+}
+
+
+
+// посылка запроса на чтение логического номера для счётчика CC-301
+void    QueryIdC(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);       
+  PushChar(3);
+  PushChar(21);
+
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+
+  RevQueryIO(4+1+2, 3+3+2);
+}
+
+
+// чтение логического номера для счётчика CC-301
+bool    ReadIdC(void)
+{
+  InitPop(0);
+  if (PopChar() != diCurr.bAddress) return 0;
+  if (PopChar() != 3) return 0;
+  if (PopChar() != 21) return 0;
+  if (PopChar() != 0) return 0;
+  if ((PopChar() != diCurr.bAddress) && (0 != diCurr.bAddress)) return 0;
+
+  return 1;
+}
+
+
+
+// посылка запроса на чтене времени/даты для счётчика CC-301
+void    QueryTimeC(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);       
+  PushChar(3);
+  PushChar(32);
+
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+
+  RevQueryIO(4+6+2, 3+3+2);
+}
+
+
+// чтение времени/даты для счётчика CC-301
+void    ReadTimeAltC(void)
+{
+  InitPop(4);
+
+  tiAlt.bSecond = PopChar();
+  tiAlt.bMinute = PopChar();
+  tiAlt.bHour   = PopChar();
+  tiAlt.bDay    = PopChar();
+  tiAlt.bMonth  = PopChar();
+  tiAlt.bYear   = PopChar();
+}
+
+
+
+void    QueryControlC(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);       
+  PushChar(16);
+  PushChar(32);
+  PushChar(0);
+
+  PushChar( tiCurr.bSecond );
+  PushChar( tiCurr.bMinute );
+  PushChar( tiCurr.bHour   );
+  PushChar( tiCurr.bDay    );
+  PushChar( tiCurr.bMonth  );
+  PushChar( tiCurr.bYear   );
+
+  RevQueryIO(4+2, 4+6+2);
+}
+
+
+void    QueryVersionC(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);
+  PushChar(3);
+  PushChar(20);
+
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+
+  RevQueryIO(4+4+2, 3+3+2);
+}
+
+
+void    ReadVersionC(void)
+{
+  InitPop(4);
+  
+  Clear();
+  sprintf(szLo+2, "версия %c%c%c%c", PopChar(), PopChar(), PopChar(), PopChar());
+}
+
+
+// посылка запроса на чтение энергии для счётчиков CC-301
+void    QueryEnergyAbsC(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);           
+  PushChar(3);
+  PushChar(1);
+
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+
+  RevQueryIO(4+16+2, 3+3+2);
+}
+
+
+// посылка запроса на чтение энергии для счётчиков CC-301
+void    QueryEnergyMonC(uchar  ibMonth)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);           
+  PushChar(3);
+  PushChar(3);
+
+  PushChar(ibMonth);
+  PushChar(0);
+  PushChar(0);
+
+  RevQueryIO(4+16+2, 3+3+2);
+}
+
+
+// посылка запроса на чтение энергии для счётчиков CC-301
+void    QueryEnergyDayC(uchar  ibDay)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);           
+  PushChar(3);
+  PushChar(2);
+
+  PushChar(ibDay);
+  PushChar(0);
+  PushChar(0);
+
+  RevQueryIO(4+16+2, 3+3+2);
+}
+
+
+void    QueryCounterMonTariffC(uchar  ibMonth, uchar  bTariff) // на начало месяца
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);           
+  PushChar(3);
+  PushChar(43);
+
+  PushChar(ibMonth);
+  PushChar(bTariff);
+  PushChar(0);
+
+  RevQueryIO(4+16+2, 3+3+2);
+}
+
+
+// чтение энергии для счётчика CC-301
+void    ReadEnergyC(void)
+{
+uchar   i;
+
+  InitPop(4);
+
+  for (i=0; i<4; i++)
+  {
+    coEnergy.mpbBuff[3] = PopChar();
+    coEnergy.mpbBuff[2] = PopChar();
+    coEnergy.mpbBuff[1] = PopChar();
+    coEnergy.mpbBuff[0] = PopChar();
+
+    dwBuffC = coEnergy.dwBuff;
+    SetCanLong(mpdwChannelsA, i);
+  }
+
+  coEnergy.dwBuff = *PGetCanLong(&mpdwChannelsA, diCurr.ibLine);
+}
+
+
+void    InitHeaderC_1(void)
+{
+  iwMajor = 0;
+
+  if (!UseBounds())
+    wBaseCurr = 0;
+  else 
+  {
+    wBaseCurr = mpcwStartRelCan[ibDig];
+    sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    if (boShowMessages == boTrue) DelayMsg();
+  }
+
+  tiDigPrev = tiCurr;
+}
+
+
+void    InitHeaderC_6(void)
+{
+uchar i;
+
+  if (!UseBounds())
+    wBaseCurr = 0;
+  else 
+  {
+    wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
+    sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    if (boShowMessages == boTrue) DelayMsg();
+  }
+
+  tiDigPrev = tiCurr;
+
+  i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
+  i = (i / 6) * 6;
+
+  tiDigPrev.bHour = i / 2;
+  tiDigPrev.bMinute = (i % 2)*30;
+}
+
+
+void    QueryHeaderC_1(void)
+{
+  NoShowTime(1);
+
+  tiAlt = tiDigPrev;
+  dwBuffC = DateToHouIndex();
+
+  dwBuffC -= wBaseCurr;
+
+  HouIndexToDate(dwBuffC);
+  tiDig = tiAlt;
+
+
+  InitPush();
+
+  PushChar(diCurr.bAddress);
+  PushChar(3);
+  PushChar(36);
+
+  PushChar(tiDig.bMonth);
+  PushChar(tiDig.bDay);
+  PushChar(tiDig.bHour*2 + tiDig.bMinute/30);
+
+  RevQueryIO(4+8+2, 3+3+2);
+}
+
+
+void    QueryHeaderC_6(void)
+{
+  NoShowTime(1);
+
+  tiAlt = tiDigPrev;
+  dwBuffC = DateToHouIndex();
+
+  dwBuffC -= wBaseCurr;
+
+  HouIndexToDate(dwBuffC);
+  tiDig = tiAlt;
+
+
+  InitPush();
+
+  PushChar(diCurr.bAddress);           
+  PushChar(3);
+  PushChar(40);
+
+  PushChar(tiDig.bMonth);
+  PushChar(tiDig.bDay);
+  PushChar(tiDig.bHour*2 + tiDig.bMinute/30);
+
+  RevQueryIO(4+8*6+2, 3+3+2);
+}
+
+
+bool    ReadHeaderC(uchar  i)
+{
+  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",           // показываем время/дату часового блока
+          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+
+  tiAlt = tiDig;
+  if (SearchDefHouIndex() == 0) return(1); 
+
+
+  ShowProgressDigHou();      
+
+  InitPop(4+i*8);                                    
+  for (ibCan=0; ibCan<4; ibCan++)        
+  {
+    wBuffD  = PopChar();
+    wBuffD += PopChar()*0x100;
+
+    mpwChannels[ibCan] = wBuffD;
+  }
+
+  tiAlt = tiDig;
+  if (IsDefect(ibDig)) MakePrevHou();  
+  return(MakeStopHou(0));  
+}
+
+
+bool    ReadHeaderC_1(void)
+{
+  return ReadHeaderC(0);
+}
+
+
+bool    ReadHeaderC_6(void)
+{
+uchar i;
+
+  for (i=0; i<6; i++)
+  {
+    tiAlt = tiDigPrev;
+    dwBuffC = DateToHouIndex();
+
+    dwBuffC += 5;
+    dwBuffC -= (wBaseCurr + i);
+
+    HouIndexToDate(dwBuffC);
+    tiDig = tiAlt;
+
+    if (dwBuffC < dwValueC)     
+      if (ReadHeaderC(5-i) == 0) return(0);
+  }
+  
+  wBaseCurr += 6;
+  if (wBaseCurr > wHOURS) return(0);
+
+  return(1);
+}
+
+
+
+void    ReadCurrentC(void)
+{
+uchar   i;
+
+  ReadEnergyC();
+
+  for (i=0; i<4; i++)
+  {
+    dwBuffC = *PGetCanLong(mpdwChannelsA, i);
+    SetCanLong(mpdwBaseDig, i);
+  }
+
+  MakeCurrent2();
+}
+
+#endif
