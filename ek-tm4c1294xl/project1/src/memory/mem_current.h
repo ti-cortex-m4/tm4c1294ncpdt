@@ -35,7 +35,7 @@ extern  time                    mptiBaseOK[bCANALS],
 
 
 
-extern  boolean                 mpboCurrent2;
+extern  boolean                 boCurrent2;
 
 extern  uchar                   mpbCurrent2Curr[8],
                                 mpbCurrent2Prev[8],
