@@ -6,10 +6,7 @@
 
 #include        "../main.h"
 #include        "../serial/ports.h"
-
-
-
-void    SetCountInBuff(uint  wT);
+#include        "../serial/ports2.h"
 
 
 

@@ -380,8 +380,7 @@ bool    ReadHeaderC(uchar  i)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
-  tiAlt = tiDig;
-  if (SearchDefHouIndex() == 0) return(1); 
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
   ShowProgressDigHou();      
@@ -414,16 +413,12 @@ uchar i;
 
   for (i=0; i<6; i++)
   {
-    tiAlt = tiDigPrev;
-    dwBuffC = DateToHouIndex();
+    ulong dw = DateToHouIndex(tiDigPrev);
+    dw += 5;
+    dw -= (wBaseCurr + i);
+    tiDig = HouIndexToDate(dw);
 
-    dwBuffC += 5;
-    dwBuffC -= (wBaseCurr + i);
-
-    HouIndexToDate(dwBuffC);
-    tiDig = tiAlt;
-
-    if (dwBuffC < dwValueC)     
+    if (dw < dwValueC)     
       if (ReadHeaderC(5-i) == 0) return(0);
   }
   

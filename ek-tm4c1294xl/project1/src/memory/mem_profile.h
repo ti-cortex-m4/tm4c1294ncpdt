@@ -46,3 +46,8 @@ extern  uint                    mpcwOutputZ[bCANALS],
                                 mpcwOutput3[bCANALS];
 
 
+
+extern  time                    tiValueC;
+
+extern  ulong                   dwValueC;
+
