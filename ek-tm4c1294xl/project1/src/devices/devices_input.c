@@ -5,6 +5,8 @@ DEVICES_INPUT.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "../digitals/digitals_status.h"
+#include        "../devices/decompress_c.h"
 
 
 

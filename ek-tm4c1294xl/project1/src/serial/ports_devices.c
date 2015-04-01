@@ -91,6 +91,91 @@ serial  Input(void)
 
 
 
+#ifndef SKIP_C
+
+// передача запроса по прерыванию (из выходного буфера)
+void    RevQueryIO(uint  cwIn, uchar  cbOut)
+{
+  MakeCRC16OutBuff(0,cbOut-2);
+
+  InitPush();
+  bOutputC0 = SkipChar();
+  bOutputC1 = SkipChar();
+  bOutputC2 = SkipChar();
+
+  InitPush();
+  Skip(cbOut-2);
+
+  PushChar(bCRCLo);
+  PushChar(bCRCHi);
+
+  Query(cwIn,cbOut,1);
+}
+
+
+bool    RevLinkErrors(void)
+{
+  if (InBuff(0) != bOutputC0) {
+    mpcwOutput0[ibDig]++;
+    return 1;
+  }
+
+  if ((InBuff(1) & 0x7F) != bOutputC1) {
+    mpcwOutput0[ibDig]++;
+    return 1;
+  }
+
+  if (InBuff(2) != bOutputC2) {
+    mpcwOutput0[ibDig]++;
+    return 1;
+  }
+
+  return 0;
+}
+
+
+serial  RevInput(void)
+{
+  InitWaitAnswer();
+
+  while (1)
+  {
+    if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
+
+    ResetWDT();
+    ShowWaitAnswer(1);
+    if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
+
+    if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
+    {
+      MakeCRC16InBuff( 0, CountInBuff()-2 );
+
+      if ((bCRCHi == InBuff( CountInBuff()-1 )) &&
+          (bCRCLo == InBuff( CountInBuff()-2 ))) {
+
+          if (RevLinkErrors() == 0)
+            mpSerial[ibPort] = SER_GOODCHECK;
+          else
+            mpSerial[ibPort] = SER_BADCHECK;
+        }
+        else {
+          mpSerial[ibPort] = SER_BADCHECK;
+          ChecksumError();
+        }
+
+      break;
+    }
+    else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
+             (mpSerial[ibPort] == SER_BADLINK)) break;
+  }
+
+  return( mpSerial[ibPort] );
+}
+
+#endif
+
+
+
 void    TestResult(uchar  bT)
 {
   if (bT != 0)
