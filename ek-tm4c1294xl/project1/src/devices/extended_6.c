@@ -153,7 +153,7 @@ void    ShowCntMonCan6(uchar  ibCanal, uchar  ibMonth)
 
 bit     CheckDirectCnt1(uchar  ibCanal)
 {
-  return (((boDirectCntD == boTrue) && (GetDigitalDevice(ibCanal) == 4)) || 
+  return (((boDirectCntD == TRUE) && (GetDigitalDevice(ibCanal) == 4)) || 
                                        (GetDigitalDevice(ibCanal) == 21));
 }
 

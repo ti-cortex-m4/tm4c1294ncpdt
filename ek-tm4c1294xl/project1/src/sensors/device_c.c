@@ -294,8 +294,11 @@ void    InitHeaderC_1(void)
   else 
   {
     wBaseCurr = mpcwStartRelCan[ibDig];
-    sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-    if (boShowMessages == boTrue) DelayMsg();
+
+    Clear();
+    sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+
+    if (boShowMessages == TRUE) DelayMsg();
   }
 
   tiDigPrev = tiCurr;
@@ -311,8 +314,11 @@ uchar i;
   else 
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
-    sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-    if (boShowMessages == boTrue) DelayMsg();
+
+    Clear();
+    sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+
+    if (boShowMessages == TRUE) DelayMsg();
   }
 
   tiDigPrev = tiCurr;

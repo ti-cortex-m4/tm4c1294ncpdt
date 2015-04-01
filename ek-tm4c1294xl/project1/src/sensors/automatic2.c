@@ -11,6 +11,7 @@ AUTOMATIC2.C
 #include        "../memory/mem_current.h"
 #include        "../memory/mem_realtime.h"
 #include        "../display/display.h"
+#include        "../keyboard/keyboard.h"
 #include        "../realtime/realtime.h"
 #include        "../time/timedate.h"
 #include        "../serial/ports.h"

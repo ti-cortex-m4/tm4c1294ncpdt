@@ -335,7 +335,7 @@
         Clear();
         sprintf(szLo+4, "брак: %bu", cbCheckupDays);
 
-        if (boCheckupReadonly == boTrue)
+        if (boCheckupReadonly == TRUE)
         {
           DelayInf();
           DoneCheckup();
