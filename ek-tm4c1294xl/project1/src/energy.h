@@ -23,7 +23,7 @@ real    GetGrpHouInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul);
 real    GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
 
 real    GetGrpImp2RealEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);
-real    GetCanImp2RealEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
+real    GetCanImp2FloatEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
 
 void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  *pti);
 void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  *pti);

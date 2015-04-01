@@ -39,30 +39,30 @@ void    ShowFactors(void)
   {
     switch (wProgram)
     {
-      case bSET_TRANS_ENG:     ShowReal( GetCanReal(mpreTransEng,    ibX) );  break;
-      case bSET_TRANS_CNT:     ShowReal( GetCanReal(mpreTransCnt,    ibX) );  break;
-      case bSET_PULSE_HOU:     ShowReal( GetCanReal(mprePulseHou,    ibX) );  break;
-      case bSET_PULSE_MNT:     ShowReal( GetCanReal(mprePulseMnt,    ibX) );  break;
+      case bSET_TRANS_ENG:     ShowFloat( GetCanReal(mpreTransEng,    ibX) );  break;
+      case bSET_TRANS_CNT:     ShowFloat( GetCanReal(mpreTransCnt,    ibX) );  break;
+      case bSET_PULSE_HOU:     ShowFloat( GetCanReal(mprePulseHou,    ibX) );  break;
+      case bSET_PULSE_MNT:     ShowFloat( GetCanReal(mprePulseMnt,    ibX) );  break;
 
-      case bSET_COUNT:         ShowReal( GetCntCurrImp(ibX) );                break;
+      case bSET_COUNT:         ShowFloat( GetCntCurrImp(ibX) );                break;
 
-      case bSET_LOSSE:         ShowReal( GetCanReal(mpreLosse, ibX)*100 );    break;
+      case bSET_LOSSE:         ShowFloat( GetCanReal(mpreLosse, ibX)*100 );    break;
 
-      case bSET_LEVEL:         ShowReal( GetCanReal(mpreLevelDiv,    ibX) );  break;
+      case bSET_LEVEL:         ShowFloat( GetCanReal(mpreLevelDiv,    ibX) );  break;
     }
   }
   else
   {
     switch (wProgram)
     {
-      case bGET_TRANS_ENG:     ShowReal( GetCanReal(mpreTransEng,    ibX) );  break;
-      case bGET_TRANS_CNT:     ShowReal( GetCanReal(mpreTransCnt,    ibX) );  break;
-      case bGET_PULSE_HOU:     ShowReal( GetCanReal(mprePulseHou,    ibX) );  break;
-      case bGET_PULSE_MNT:     ShowReal( GetCanReal(mprePulseMnt,    ibX) );  break;
+      case bGET_TRANS_ENG:     ShowFloat( GetCanReal(mpreTransEng,    ibX) );  break;
+      case bGET_TRANS_CNT:     ShowFloat( GetCanReal(mpreTransCnt,    ibX) );  break;
+      case bGET_PULSE_HOU:     ShowFloat( GetCanReal(mprePulseHou,    ibX) );  break;
+      case bGET_PULSE_MNT:     ShowFloat( GetCanReal(mprePulseMnt,    ibX) );  break;
 
-      case bGET_LOSSE:         ShowReal( GetCanReal(mpreLosse, ibX)*100 );    break;
+      case bGET_LOSSE:         ShowFloat( GetCanReal(mpreLosse, ibX)*100 );    break;
 
-      case bSET_LEVEL:         ShowReal( GetCanReal(mpreLevelDiv,    ibX) );  break;
+      case bSET_LEVEL:         ShowFloat( GetCanReal(mpreLevelDiv,    ibX) );  break;
     }
   }
 

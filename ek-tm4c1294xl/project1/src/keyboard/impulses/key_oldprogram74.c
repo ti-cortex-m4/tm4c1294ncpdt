@@ -28,7 +28,7 @@ static void ShowPowGrpHou(void)
       sprintf(szLo,"         -    ");
     else
     {
-      ShowReal(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibX, 2));
+      ShowFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibX, 2));
     }
   }
   else Error();

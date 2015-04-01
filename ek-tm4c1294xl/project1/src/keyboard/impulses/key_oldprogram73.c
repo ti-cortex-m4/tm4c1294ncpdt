@@ -27,7 +27,7 @@ static void ShowPowCanHou(void)
       sprintf(szLo,"         -    ");
     else
     {
-      ShowReal(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibX, 2));
+      ShowFloat(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibX, 2));
     }
   }
   else Error();
