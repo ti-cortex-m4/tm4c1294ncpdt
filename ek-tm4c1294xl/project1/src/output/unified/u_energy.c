@@ -155,7 +155,16 @@ void    GetEngCanDayUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushFloat(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ], c-1, 0x01 << (i-1)));
+        if (x2)
+        {
+          PushDouble(GetCanImp2DoubleEng(mpimDayCan[ PrevSoftDay() ], c-1, 0x01 << (i-1)));
+          wSize += sizeof(double);
+        }
+        else
+        {
+          PushFloat(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ], c-1, 0x01 << (i-1)));
+          wSize += sizeof(float);
+        }
       }
     }
 
@@ -163,7 +172,7 @@ void    GetEngCanDayUni(bool  x2)
     dw -= bInBuffB;
     time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefCanDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code(wSize, ((CheckDefCanDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
   }
 }
 

@@ -194,7 +194,6 @@ ulong   dw;
 
 
 
-// рассчитывает канальное значение на основе канального массива impulse (суточная и месячная энергия)
 float   GetCanImp2FloatEng(impulse  *mpimT, uchar  ibCan, uchar  bMask)
 {
 float   fl;
@@ -211,11 +210,32 @@ ulong   dw;
   if ((bMask & 0x08) != 0)
     dw += *PGetCanImp(mpimT,ibCan,3);
 
-  fl = mpreValueEngHou[ibCan] * dw;
+  fl = (float)mpreValueEngHou[ibCan] * dw;
 
   return fl;
 }
 
+
+double  GetCanImp2DoubleEng(impulse  *mpimT, uchar  ibCan, uchar  bMask)
+{
+double  db;
+ulong   dw;
+
+  dw = 0;
+
+  if ((bMask & 0x01) != 0)
+    dw += *PGetCanImp(mpimT,ibCan,0);
+  if ((bMask & 0x02) != 0)
+    dw += *PGetCanImp(mpimT,ibCan,1);
+  if ((bMask & 0x04) != 0)
+    dw += *PGetCanImp(mpimT,ibCan,2);
+  if ((bMask & 0x08) != 0)
+    dw += *PGetCanImp(mpimT,ibCan,3);
+
+  db = (double)mpreValueEngHou[ibCan] * dw;
+
+  return db;
+}
 
 
 // рассчитывает импульсы для выбранного интервала
