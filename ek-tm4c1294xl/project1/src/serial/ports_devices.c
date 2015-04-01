@@ -6,10 +6,12 @@ PORTS_DEVICES.H
 
 #include        "../main.h"
 #include        "../memory/mem_ports.h"
+#include        "../memory/mem_profile.h"
 #include        "../keyboard/keyboard.h"
 #include        "../hardware/watchdog.h"
 #include        "../digitals/wait_answer.h"
 #include        "../digitals/wait_query.h"
+#include        "../devices/devices.h"
 #include        "../isr/serial0.h"
 #include        "../isr/serial1.h"
 #include        "../isr/serial2.h"
@@ -98,12 +100,12 @@ void    RevQueryIO(uint  cwIn, uchar  cbOut)
 {
   MakeCRC16OutBuff(0,cbOut-2);
 
-  InitPush();
+  InitPush(0);
   bOutputC0 = SkipChar();
   bOutputC1 = SkipChar();
   bOutputC2 = SkipChar();
 
-  InitPush();
+  InitPush(0);
   Skip(cbOut-2);
 
   PushChar(bCRCLo);
@@ -174,6 +176,12 @@ serial  RevInput(void)
 
 #endif
 
+
+
+void    ChecksumError(void)
+{
+  mpcwOutputC[ibDig]++;
+}
 
 
 void    TestResult(uchar  bT)

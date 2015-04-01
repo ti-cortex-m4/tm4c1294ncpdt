@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC_B.C
+AUTOMATIC_CS.C
 
 
 ------------------------------------------------------------------------------*/
@@ -126,7 +126,7 @@ uchar   i;
   return(1);
 }
 
-
+/*
 bool    QueryCounterMonTariffC_Full(uchar  ibMonth, uchar  bTariff)
 {
 uchar   i;
@@ -145,3 +145,4 @@ uchar   i;
   ReadEnergyC();
   return(1);
 }
+*/

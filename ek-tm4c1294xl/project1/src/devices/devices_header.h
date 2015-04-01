@@ -64,7 +64,7 @@ uchar                   cbCorrects;
 uchar                   ibDig;
 
 //
-time                    tiDig;
+time                    tiDig, tiDigPrev;
 
 // вид опроса счётчиков
 extended                exExtended;

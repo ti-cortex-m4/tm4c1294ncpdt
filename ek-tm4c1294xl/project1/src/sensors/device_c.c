@@ -54,7 +54,7 @@ bool    ReadResultC(void)
 // посылка запроса на открытие канала св€зи дл€ счЄтчика CC-301
 void    QueryOpenC(void)
 { /*
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);       
   PushChar(31);
@@ -72,7 +72,7 @@ void    QueryOpenC(void)
 
   RevQueryIO(4+2, 4+8+2);
   */
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);       
   PushChar(3);
@@ -90,7 +90,7 @@ void    QueryOpenC(void)
 // посылка запроса на чтение логического номера дл€ счЄтчика CC-301
 void    QueryIdC(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);       
   PushChar(3);
@@ -122,7 +122,7 @@ bool    ReadIdC(void)
 // посылка запроса на чтене времени/даты дл€ счЄтчика CC-301
 void    QueryTimeC(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);       
   PushChar(3);
@@ -153,7 +153,7 @@ void    ReadTimeAltC(void)
 
 void    QueryControlC(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);       
   PushChar(16);
@@ -173,7 +173,7 @@ void    QueryControlC(void)
 
 void    QueryVersionC(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(3);
@@ -199,7 +199,7 @@ void    ReadVersionC(void)
 // посылка запроса на чтение энергии дл€ счЄтчиков CC-301
 void    QueryEnergyAbsC(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(3);
@@ -216,7 +216,7 @@ void    QueryEnergyAbsC(void)
 // посылка запроса на чтение энергии дл€ счЄтчиков CC-301
 void    QueryEnergyMonC(uchar  ibMonth)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(3);
@@ -233,7 +233,7 @@ void    QueryEnergyMonC(uchar  ibMonth)
 // посылка запроса на чтение энергии дл€ счЄтчиков CC-301
 void    QueryEnergyDayC(uchar  ibDay)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(3);
@@ -249,7 +249,7 @@ void    QueryEnergyDayC(uchar  ibDay)
 
 void    QueryCounterMonTariffC(uchar  ibMonth, uchar  bTariff) // на начало мес€ца
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(3);
@@ -281,7 +281,7 @@ uchar   i;
     SetCanLong(mpdwChannelsA, i);
   }
 
-  coEnergy.dwBuff = *PGetCanLong(&mpdwChannelsA, diCurr.ibLine);
+  coEnergy.dwBuff = mpdwChannelsA[diCurr.ibLine];
 }
 
 
@@ -327,7 +327,7 @@ uchar i;
 
 void    QueryHeaderC_1(void)
 {
-  NoShowTime(1);
+  HideCurrentTime(1);
 
   tiAlt = tiDigPrev;
   dwBuffC = DateToHouIndex();
@@ -338,7 +338,7 @@ void    QueryHeaderC_1(void)
   tiDig = tiAlt;
 
 
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(3);
@@ -354,7 +354,7 @@ void    QueryHeaderC_1(void)
 
 void    QueryHeaderC_6(void)
 {
-  NoShowTime(1);
+  HideCurrentTime(1);
 
   tiAlt = tiDigPrev;
   dwBuffC = DateToHouIndex();
@@ -365,7 +365,7 @@ void    QueryHeaderC_6(void)
   tiDig = tiAlt;
 
 
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(3);
@@ -381,8 +381,7 @@ void    QueryHeaderC_6(void)
 
 bool    ReadHeaderC(uchar  i)
 {
-  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",           // показываем врем€/дату часового блока
-          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
   tiAlt = tiDig;
   if (SearchDefHouIndex() == 0) return(1); 
@@ -400,7 +399,7 @@ bool    ReadHeaderC(uchar  i)
   }
 
   tiAlt = tiDig;
-  if (IsDefect(ibDig)) MakePrevHou();  
+  if (IsDefect(ibDig)) MakeSpecial();
   return(MakeStopHou(0));  
 }
 
@@ -446,7 +445,7 @@ uchar   i;
 
   for (i=0; i<4; i++)
   {
-    dwBuffC = *PGetCanLong(mpdwChannelsA, i);
+    dwBuffC = mpdwChannelsA[i];
     SetCanLong(mpdwBaseDig, i);
   }
 

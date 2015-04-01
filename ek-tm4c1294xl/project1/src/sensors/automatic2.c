@@ -14,13 +14,17 @@ AUTOMATIC2.C
 #include        "../realtime/realtime.h"
 #include        "../time/timedate.h"
 #include        "../serial/ports.h"
+#include        "../serial/ports_devices.h"
 #include        "../digitals/digitals.h"
+#include        "../time/delay.h"
 #include        "../engine.h"
 #include        "../energy.h"
 #include        "../energy2.h"
 #include        "automatic1.h"
 #include        "device_b.h"
+#include        "device_c.h"
 #include        "automatic_b.h"
+#include        "automatic_c.h"
 
 
 
@@ -87,7 +91,7 @@ uchar   i;
 #endif
 
 
-/*
+
 #ifndef SKIP_C
 
 // чтение реальных показаний счётчиков для счётчиков СС-301
@@ -126,7 +130,7 @@ uchar   i;
 #endif
 
 
-
+/*
 #ifndef SKIP_D
 
 // чтение реальных показаний счётчиков для счётчиков ABB Альфа
@@ -162,7 +166,7 @@ uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
-    InitPush();
+    InitPush(0);
     PushChar(0x1B);          
     PushChar(chEsc);            
 
@@ -660,7 +664,7 @@ uchar   i;
 #endif
 
 
-/*
+
 #ifndef SKIP_C
 
 //  чтение значение времени/даты для счётчиков CC-301
@@ -696,7 +700,7 @@ uchar   i;
 #endif
 
 
-
+/*
 #ifndef SKIP_D
 
 // чтение значение времени/даты для счётчиков ABB Альфа
@@ -747,7 +751,7 @@ uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
-    InitPush();
+    InitPush(0);
     PushChar(0x1B);          
     PushChar('T');            
 
@@ -1951,7 +1955,7 @@ bool    ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadCntMonCanC(ibMonth) ); break;
+    case 3:  return( ReadCntMonCanC(ibMonth) );
 #endif
 
 #ifndef SKIP_D

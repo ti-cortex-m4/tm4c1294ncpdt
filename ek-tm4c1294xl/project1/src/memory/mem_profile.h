@@ -36,6 +36,8 @@ extern  uchar                   bDeltaOld, bDeltaNew;
 
 
 
+extern  uchar                   bOutputC0, bOutputC1, bOutputC2;
+
 extern  uint                    mpcwOutputZ[bCANALS],
                                 mpcwOutputC[bCANALS],
                                 mpcwOutput0[bCANALS],

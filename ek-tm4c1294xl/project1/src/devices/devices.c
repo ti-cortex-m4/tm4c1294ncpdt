@@ -22,9 +22,9 @@ DEVICES.C
 #include        "../digitals/digitals_display.h"
 #include        "../digitals/wait_answer.h"
 #include        "../digitals/wait_query.h"
-#include        "../digitals/current/current_run.h"
-#include        "../digitals/profile/profile_run.h"
-#include        "../digitals/checkup/checkup_run.h"
+#include        "../digitals/current_run.h"
+#include        "../digitals/profile_run.h"
+#include        "../digitals/checkup_run.h"
 #include        "../digitals/max_repeats.h"
 #include        "../digitals/correct_limit.h"
 #include        "../special/recalc_def.h"
@@ -38,7 +38,7 @@ DEVICES.C
 #include        "../digitals/answer.h"
 #include        "../digitals/limits.h"
 #include        "../digitals/digitals_display.h"
-#include        "../digitals/profile/profile_run.h"
+#include        "../digitals/profile_run.h"
 #include        "../flash/files.h"
 #include        "../flash/records.h"
 #include        "../time/timedate.h"
@@ -64,7 +64,7 @@ uchar                   cbCorrects;
 uchar                   ibDig;
 
 //
-time                    tiDig;
+time                    tiDig, tiDigPrev;
 
 // вид опроса счётчиков
 extended                exExtended;
@@ -125,7 +125,7 @@ void    RunDevices(void)
   ibPort = diCurr.ibPort;
 
 
-  if ((fConnect == 1) && (wProgram != 0))
+  if ((fConnect == 1) && (bProgram != 0))
   {
     if ((cbWaitOnline > 0) && (cbWaitOnline % 10 == 5))
     {

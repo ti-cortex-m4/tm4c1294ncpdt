@@ -50,6 +50,9 @@ uchar                   bDeltaOld, bDeltaNew;
 
 
 
+// байты в составе передаваемого запроса
+uchar                   bOutputC0, bOutputC1, bOutputC2;
+
 // счетчикм событий
 uint                    mpcwOutputZ[bCANALS],
                         mpcwOutputC[bCANALS],

@@ -50,7 +50,7 @@ void    QueryHeaderC0_6(uint  wT)
   tiDig = tiAlt;
 
 
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(3);

@@ -66,7 +66,7 @@ bool    ChangeSpeedModem(void)
 
 bool    ChangeSpeedA(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0);          
   PushChar(0);                          // тест канала связи
 
@@ -81,7 +81,7 @@ bool    ChangeSpeedA(void)
   if (Input() != SER_GOODCHECK) return(0);
   Beep();
 
-  InitPush();
+  InitPush(0);
   PushChar(0);           
   PushChar(8);           
   PushChar(5);                          // чтение сетевого адреса
@@ -138,7 +138,7 @@ bool    ChangeSpeedB(void)
 
 bool    ChangeSpeedC(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0);           
   PushChar(3);
   PushChar(21);
@@ -172,7 +172,7 @@ uchar   i;
 
     QueryBreakE();
 
-    InitPush();
+    InitPush(0);
     PushChar(0x1B);          
     PushChar('0'+i);            
 
@@ -225,7 +225,7 @@ bool    ChangeSpeedF(void)
 
 bool    ChangeSpeedN(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0);                          // логический номер
   PushChar(0);
 
@@ -409,7 +409,7 @@ void    key_SearchBySpeed(void)
 
 bool    ChangeNumberA(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(ibY);           
   PushChar(0);                          // тест канала связи
 
@@ -449,7 +449,7 @@ bool    ChangeNumberB(void)
 
 bool    ChangeNumberC(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(ibY);           
   PushChar(3);
   PushChar(21);
@@ -478,7 +478,7 @@ bool    ChangeNumberE(void)
   {
     QueryBreakE();
 
-    InitPush();
+    InitPush(0);
     PushChar(0x1B);          
     PushChar('0'+ibY);            
 
@@ -531,7 +531,7 @@ bool    ChangeNumberF(void)
 
 bool    ChangeNumberN(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0);                          // логический номер
   PushChar(ibY);
 
