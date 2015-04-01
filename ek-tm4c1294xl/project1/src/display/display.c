@@ -105,7 +105,7 @@ void    ShowFloat(float  fl)
 
 void    ShowDouble(double  db)
 {
-  sprintf(szLo, "%13.3f", db);
+  sprintf(szLo, "%13.4f", db);
 }
 
 

@@ -22,7 +22,8 @@ real    GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
 real    GetGrpHouInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul);
 real    GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
 
-real    GetGrpImp2RealEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);
+float   GetGrpImp2FloatEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);
+double  GetGrpImp2DoubleEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);
 float   GetCanImp2FloatEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
 double  GetCanImp2DoubleEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
 
