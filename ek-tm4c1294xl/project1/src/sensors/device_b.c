@@ -222,7 +222,7 @@ void    QueryControlB(void)
 // посылка запроса на установку времени
 void    QueryManageB(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(3);      

@@ -10,7 +10,7 @@ extern  uchar                   cbCorrects;
 
 extern  uchar                   ibDig;
 
-extern  time                    tiDig;
+extern  time                    tiDig, tiDigPrev;
 
 extern  extended                exExtended;
 
