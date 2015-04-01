@@ -12,10 +12,15 @@ CURRENT2.C
 #include        "../../memory/mem_extended_1.h"
 #include        "../../realtime/realtime.h"
 #include        "../../digitals/digitals.h"
+#include        "../../digitals/digitals_messages.h"
+#include        "../../devices/devices.h"
 #include        "../../time/rtc.h"
 #include        "../../energy.h"
 #include        "../../energy2.h"
+#include        "../../flash/records.h"
 #include        "current.h"
+#include        "current_run.h"
+#include        "current2.h"
 
 
 
@@ -42,7 +47,7 @@ void    InitCurrent2(void)
 {
   memset(&mpbCurrent2Curr, 0, 8);
   memset(&mpbCurrent2Prev, 0, 8);
-  mpboCurrent2 = TRUE;
+  boCurrent2 = TRUE;
 }
 
 
@@ -54,33 +59,35 @@ void    StartCurrent2(void)
 
 
 
-void    Current2Disabled()
+void    Current2Disabled(uchar  ibCan)
 {
+  uint wImp;
+
   if (dwUpdate > 0xFFFF)
   { 
-    wBuffD = 0xFFFF;
+    wImp = 0xFFFF;
     mpwCurrent2Overflow[ibCan]++;
     AddDigRecord(EVE_CURRENT2_OVERFLOW);
   }
   else
-    wBuffD = (uint)dwUpdate;
+    wImp = (uint)dwUpdate;
 
-  mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = wBuffD;
+  mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = wImp;
   MakeSpecCurrent();
 }
 
 
-void    Current2Enabled()
+void    Current2Enabled(uchar  ibCan)
 {
 uchar i;
 
   if (mpwCurrent2Mnt[ibCan] == 1)
   {
-    Current2Disabled();
+    Current2Disabled(ibCan);
   }
   else if (mpwCurrent2Mnt[ibCan] > (tiCurr.bMinute%30)/3)
   {
-    Current2Disabled();
+    Current2Disabled(ibCan);
     AddDigRecord(EVE_CURRENT2_LIMIT);
   }
   else
@@ -107,34 +114,36 @@ void    MakeCurrent2(void)
   ShowLo(szPowerOK); Delay(200);
 
   LoadCurrDigital(ibDig);
+
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines() == 1)
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
       mpbCurrent2Curr[ibCan/8] |= (0x80 >> ibCan%8);
 
       if (boMntEscS == TRUE)
       {
         mpreEsc_S[ibCan] = mpreValueCntHou[ibCan] * mpdwBase[ibCan];
-        mptiEsc_S[ibCan] = *PGetCurrTimeDate();
+        mptiEsc_S[ibCan] = *GetCurrTimeDate();
       }
 
       mpboReadyCan[ibCan] = TRUE;
 
       mpwTrue[ibCan]++;
-      if (mpboBase[ibCan] == boFalse)
+      if (mpboBase[ibCan] == FALSE)
       {
         mpboBase[ibCan] = TRUE;
 
         mpdwBase[ibCan] = mpdwBaseDig[ diPrev.ibLine ];
         mpreBase[ibCan] = 0;
-        mptiBase[ibCan] = *PGetCurrTimeDate();
+        mptiBase[ibCan] = *GetCurrTimeDate();
         mptiOffs[ibCan] = tiOffs;
       }
       else
       {
-        tiDig = *PGetCurrTimeDate();      
+        tiDig = *GetCurrTimeDate();
         tiAlt = mptiBase[ibCan];
 
         if (CompareAltDig(0x07) == 1)           // сравниваем: день, мес€ц, год
@@ -153,7 +162,7 @@ void    MakeCurrent2(void)
         mptiBase[ibCan] = tiDig;
         mptiOffs[ibCan] = tiOffs;
 
-        mptiBaseOK[ibCan] = *PGetCurrTimeDate();
+        mptiBaseOK[ibCan] = *GetCurrTimeDate();
 
         mpreBase[ibCan] += dwUpdate;            // обеспециваем измерение энергии, а не средней мощности
 
@@ -184,7 +193,7 @@ void    MakeCurrent2(void)
 
 
 
-bit     Currect2First()
+bool    Currect2First()
 {
 uchar i;
 
@@ -196,7 +205,7 @@ uchar i;
 }
 
 
-bit     Currect2Next()
+bool    Currect2Next()
 {
 uchar i;
 
@@ -225,7 +234,7 @@ uchar i;
 
 void    StopCurrent2(void) 
 {
-  if (mpboCurrent2 == TRUE )
+  if (boCurrent2 == TRUE )
   {
     if (Currect2First() == 0) Currect2Record();
   }
@@ -234,6 +243,6 @@ void    StopCurrent2(void)
     if (Currect2Next() == 0) Currect2Record();
   }
 
-  mpboCurrent2 = boFalse;
+  boCurrent2 = FALSE;
   memcpy(&mpbCurrent2Prev, &mpbCurrent2Curr, 8);
 }

@@ -24,6 +24,7 @@ DEVICE_C.C
 #include        "../devices/devices.h"
 #include        "../devices/devices_time.h"
 #include        "../digitals/current/current_run.h"
+#include        "../digitals/current/current2.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../digitals/limits.h"
 #include        "../digitals/profile/refill.h"
@@ -429,7 +430,7 @@ uchar i;
 }
 
 
-/*
+
 void    ReadCurrentC(void)
 {
 uchar   i;
@@ -444,5 +445,5 @@ uchar   i;
 
   MakeCurrent2();
 }
-*/
+
 #endif
