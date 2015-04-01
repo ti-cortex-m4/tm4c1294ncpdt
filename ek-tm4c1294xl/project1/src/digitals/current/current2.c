@@ -8,12 +8,14 @@ CURRENT2.C
 #include        "../../memory/mem_realtime.h"
 #include        "../../memory/mem_factors.h"
 #include        "../../memory/mem_energy.h"
+#include        "../../memory/mem_digitals.h"
 #include        "../../memory/mem_current.h"
 #include        "../../memory/mem_extended_1.h"
 #include        "../../realtime/realtime.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_messages.h"
 #include        "../../devices/devices.h"
+#include        "../../time/timedate.h"
 #include        "../../time/rtc.h"
 #include        "../../energy.h"
 #include        "../../energy2.h"
@@ -23,7 +25,7 @@ CURRENT2.C
 #include        "current2.h"
 
 
-
+/*
 void    ResetCurrent2(void)
 {
   memset(&mpwCurrent2Mnt, 0, sizeof(mpwCurrent2Mnt));
@@ -146,38 +148,40 @@ void    MakeCurrent2(void)
         tiDig = *GetCurrTimeDate();
         tiAlt = mptiBase[ibCan];
 
-        if (CompareAltDig(0x07) == 1)           // сравниваем: день, месяц, год
-          dwBuffC = 0;
-        else
-          dwBuffC = (ulong)24*3600;
+        ulong dwSecond;
 
-        dwUpdate = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
+        if ((tiAlt.bYear  == tiDig.bYear)  &&
+            (tiAlt.bMonth == tiDig.bMonth) &&
+            (tiAlt.bDay   == tiDig.bDay))
+          dwSecond = 0;
+        else
+          dwSecond = (ulong)24*3600;
+
+        slong dwImp = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
         mpdwBase[ibCan] = mpdwBaseDig[ GetDigitalLine(ibCan) ];
 
-        tiAlt = tiDig;
-        dwBuffC += GetSecondIndex();
-        tiAlt = mptiBase[ibCan];
-        dwBuffC -= GetSecondIndex();
+        dwSecond += GetSecondIndex(&tiDig);
+        dwSecond -= GetSecondIndex(&mptiBase[ibCan]);
 
         mptiBase[ibCan] = tiDig;
         mptiOffs[ibCan] = tiOffs;
 
         mptiBaseOK[ibCan] = *GetCurrTimeDate();
 
-        mpreBase[ibCan] += dwUpdate;            // обеспециваем измерение энергии, а не средней мощности
+        mpreBase[ibCan] += dwImp;            // обеспечиваем измерение энергии, а не средней мощности
 
-        dwUpdate = mpreBase[ibCan];
-        mpreBase[ibCan] -= dwUpdate;
+        dwImp = mpreBase[ibCan];
+        mpreBase[ibCan] -= dwImp;
 
-        if (dwUpdate > 100) mpwMore100[ibCan]++;
-        if (dwUpdate > 1000) mpwMore1000[ibCan]++;
-        if (dwUpdate > 10000) mpwMore10000[ibCan]++;
+        if (dwImp > 100) mpwMore100[ibCan]++;
+        if (dwImp > 1000) mpwMore1000[ibCan]++;
+        if (dwImp > 10000) mpwMore10000[ibCan]++;
 
-        if (dwUpdate > 0xFFFF)                  // переполнение
-          mpwMore[ibCan]++;
+        if (dwImp > 0xFFFF)                  // переполнение
+          mpwOverflow[ibCan]++;
         else
-        if (dwUpdate < 0)                       // заём
-          mpwLess[ibCan]++;
+        if (dwImp < 0)                       // заём
+          mpwUnderflow[ibCan]++;
         else
         {
           (boCurrent2Enable == TRUE ? Current2Enabled() : Current2Disabled());
@@ -246,3 +250,4 @@ void    StopCurrent2(void)
   boCurrent2 = FALSE;
   memcpy(&mpbCurrent2Prev, &mpbCurrent2Curr, 8);
 }
+*/

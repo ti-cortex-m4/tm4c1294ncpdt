@@ -10,7 +10,7 @@
 #include        "../../key_flag.h"
 
 
-
+/*
 //                                         0123456789ABCDEF
 static char const       szEnbl1[]       = "   Перерасчет   ",
                         szEnbl2[]       = "  трехминутных  ",
@@ -19,11 +19,11 @@ static char const       szEnbl1[]       = "   Перерасчет   ",
                         szEnbl5[]       = "  счетчиков ?   ";
 
 static char const       *pszEnblCurrent2[]  = { szEnbl1, szEnbl2, szEnbl3, szEnbl4, szEnbl5, "" };
-
+*/
 
 
 void    key_SetEnblCurrent2(void)
 {
-  key_SetFlag(&flEnblCurrent2, pszEnblCurrent2);
+//  key_SetFlag(&flEnblCurrent2, pszEnblCurrent2);
 }
 

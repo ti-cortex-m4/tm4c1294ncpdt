@@ -433,14 +433,12 @@ uchar i;
 
 void    ReadCurrentC(void)
 {
-uchar   i;
-
   ReadEnergyC();
 
+  uchar i;
   for (i=0; i<4; i++)
   {
-    dwBuffC = mpdwChannelsA[i];
-    SetCanLong(mpdwBaseDig, i);
+    mpdwBaseDig[i] = mpdwChannelsA[i];
   }
 
   MakeCurrent2();
