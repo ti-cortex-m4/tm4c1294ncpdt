@@ -23,7 +23,7 @@ extern  digital                 diPrev, diCurr, diNext, diLast;
 
 
 
-extern  combo32                   coEnergy;
+extern  combo32                 coEnergy;
 
 extern  boolean                 mpboChannelsA[bCHANNELS];
 
