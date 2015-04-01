@@ -46,3 +46,22 @@ uint                    mpwMore100[bCANALS],
 // массивы вспомогательных переменных
 time                    mptiBaseOK[bCANALS],
                         mptiBaseError[bCANALS];
+
+
+
+// флаг первого запуска
+boolean                 mpboCurrent2;
+
+// битовые маски каналов
+uchar                   mpbCurrent2Curr[8],
+                        mpbCurrent2Prev[8],
+                        mpbCurrent2Buff[8];
+
+// разрешения перерасчета
+boolean                 boEnblCurrent2;
+
+// счетчики интервалов перерасчета
+uint                    mpwCurrent2Mnt[bCANALS];
+
+// счетчики переполнения
+uint                    mpwCurrent2Overflow[bCANALS];

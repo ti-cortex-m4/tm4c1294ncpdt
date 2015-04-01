@@ -23,7 +23,7 @@ void    ResetCurrent2(void)
 {
   memset(&mpwCurrent2Mnt, 0, sizeof(mpwCurrent2Mnt));
   memset(&mpwCurrent2Overflow, 0, sizeof(mpwCurrent2Overflow));
-  boCurrent2Enable = boTrue;
+  boCurrent2Enable = TRUE;
 }
 
 
@@ -42,7 +42,7 @@ void    InitCurrent2(void)
 {
   memset(&mpbCurrent2Curr, 0, 8);
   memset(&mpbCurrent2Prev, 0, 8);
-  mpboCurrent2 = boTrue;
+  mpboCurrent2 = TRUE;
 }
 
 
@@ -114,18 +114,18 @@ void    MakeCurrent2(void)
     {
       mpbCurrent2Curr[ibCan/8] |= (0x80 >> ibCan%8);
 
-      if (boMntEscS == boTrue)
+      if (boMntEscS == TRUE)
       {
         mpreEsc_S[ibCan] = mpreValueCntHou[ibCan] * mpdwBase[ibCan];
         mptiEsc_S[ibCan] = *PGetCurrTimeDate();
       }
 
-      mpboReadyCan[ibCan] = boTrue;
+      mpboReadyCan[ibCan] = TRUE;
 
       mpwTrue[ibCan]++;
       if (mpboBase[ibCan] == boFalse)
       {
-        mpboBase[ibCan] = boTrue;
+        mpboBase[ibCan] = TRUE;
 
         mpdwBase[ibCan] = mpdwBaseDig[ diPrev.ibLine ];
         mpreBase[ibCan] = 0;
@@ -171,7 +171,7 @@ void    MakeCurrent2(void)
           mpwLess[ibCan]++;
         else
         {
-          (boCurrent2Enable == boTrue ? Current2Enabled() : Current2Disabled());
+          (boCurrent2Enable == TRUE ? Current2Enabled() : Current2Disabled());
         }
       }
 
@@ -225,7 +225,7 @@ uchar i;
 
 void    StopCurrent2(void) 
 {
-  if (mpboCurrent2 == boTrue )
+  if (mpboCurrent2 == TRUE )
   {
     if (Currect2First() == 0) Currect2Record();
   }

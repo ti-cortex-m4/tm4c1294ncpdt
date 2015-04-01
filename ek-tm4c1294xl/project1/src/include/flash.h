@@ -171,8 +171,9 @@ typedef enum
   FLS_STOP_AUX_CAN      = FLS_STOP_CAN + 1,
 
   FLS_DSBL_REFILL       = FLS_STOP_AUX_CAN + 1,
+  FLS_ENBL_CURRENT2     = FLS_DSBL_REFILL + 1,
 
-  FLS_DSBL_ESC_U        = FLS_DSBL_REFILL + 1,
+  FLS_DSBL_ESC_U        = FLS_ENBL_CURRENT2 + 1,
   FLS_DSBL_ESC_V        = FLS_DSBL_ESC_U + 1,
   FLS_DSBL_ESC_S        = FLS_DSBL_ESC_V + 1,
   FLS_MNT_ESC_S         = FLS_DSBL_ESC_S + 1,
