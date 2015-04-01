@@ -250,6 +250,8 @@ uchar   i;
   ShowPercent(50);
 
 
+  combo32 coTrue;
+
   coTrue.mpbBuff[3] = InBuff(4);
   coTrue.mpbBuff[2] = InBuff(5);
   coTrue.mpbBuff[1] = InBuff(6);

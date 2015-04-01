@@ -277,8 +277,7 @@ uchar   i;
     coEnergy.mpbBuff[1] = PopChar();
     coEnergy.mpbBuff[0] = PopChar();
 
-    dwBuffC = coEnergy.dwBuff;
-    SetCanLong(mpdwChannelsA, i);
+    SetCanLong(mpdwChannelsA, i, &coEnergy.dwBuff);
   }
 
   coEnergy.dwBuff = mpdwChannelsA[diCurr.ibLine];
@@ -335,13 +334,9 @@ void    QueryHeaderC_1(void)
 {
   HideCurrentTime(1);
 
-  tiAlt = tiDigPrev;
-  dwBuffC = DateToHouIndex();
-
-  dwBuffC -= wBaseCurr;
-
-  HouIndexToDate(dwBuffC);
-  tiDig = tiAlt;
+  ulong dw = DateToHouIndex(tiDigPrev);
+  dw -= wBaseCurr;
+  tiDig = HouIndexToDate(dw);
 
 
   InitPush(0);
@@ -362,13 +357,9 @@ void    QueryHeaderC_6(void)
 {
   HideCurrentTime(1);
 
-  tiAlt = tiDigPrev;
-  dwBuffC = DateToHouIndex();
-
-  dwBuffC -= wBaseCurr;
-
-  HouIndexToDate(dwBuffC);
-  tiDig = tiAlt;
+  ulong dw = DateToHouIndex(tiDigPrev);
+  dw -= wBaseCurr;
+  tiDig = HouIndexToDate(dw);
 
 
   InitPush(0);
@@ -395,13 +386,14 @@ bool    ReadHeaderC(uchar  i)
 
   ShowProgressDigHou();      
 
-  InitPop(4+i*8);                                    
-  for (ibCan=0; ibCan<4; ibCan++)        
+  InitPop(4+i*8);
+  uchar c;
+  for (c=0; c<4; c++)        
   {
-    wBuffD  = PopChar();
-    wBuffD += PopChar()*0x100;
+    uint w = PopChar();
+    w += PopChar()*0x100;
 
-    mpwChannels[ibCan] = wBuffD;
+    mpwChannels[c] = w;
   }
 
   tiAlt = tiDig;
@@ -442,7 +434,7 @@ uchar i;
 }
 
 
-
+/*
 void    ReadCurrentC(void)
 {
 uchar   i;
@@ -457,5 +449,5 @@ uchar   i;
 
   MakeCurrent2();
 }
-
+*/
 #endif

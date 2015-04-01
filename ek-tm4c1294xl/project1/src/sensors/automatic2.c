@@ -118,7 +118,7 @@ uchar   i;
   for (i=0; i<4; i++) 
   {
     reBuffA = GetCanLong(mpdwChannelsA, i) * reBuffB;
-    SetCanReal(mpreChannelsB, i);
+    SetCanReal(mpreChannelsB, i, &reBuffA);
 
     mpboChannelsA[i] = TRUE;     
   }
@@ -1274,24 +1274,24 @@ uchar   i,j;
     if (QueryEnergyDayC_Full2(0, 98) == 0) return(0);
     for (i=0; i<4; i++)
     {
-      dwBuffC = GetCanLong(mpdwChannelsA, i);
-      SetCanLong(mpdwChannelsB, i);
+      ulong dw = GetCanLong(mpdwChannelsA, i);
+      SetCanLong(mpdwChannelsB, i, &dw);
     }
 
 
     if (QueryEnergyAbsC_Full2(99) == 0) return(0);
     for (i=0; i<4; i++)
     {
-      dwBuffC  = GetCanLong(mpdwChannelsA, i);
-      dwBuffC -= GetCanLong(mpdwChannelsB, i);
+      ulong dw  = GetCanLong(mpdwChannelsA, i);
+      dw -= GetCanLong(mpdwChannelsB, i);
 
-      SetCanLong(mpdwChannelsB, i);
+      SetCanLong(mpdwChannelsB, i, &dw);
     }
   }
   else
   {
-    dwBuffC = 0;
-    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i);
+    ulong dw = 0;
+    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i, &dw);
 
     j = (ibMonth + 1)%12;
     do
@@ -1299,10 +1299,10 @@ uchar   i,j;
       if (QueryEnergyMonC_Full2(-((12-1+tiAlt.bMonth-j)%12), 76+j) == 0) return(0);
       for (i=0; i<4; i++)
       {
-        dwBuffC  = GetCanLong(mpdwChannelsA, i);
-        dwBuffC += GetCanLong(mpdwChannelsB, i);
+        ulong dw = GetCanLong(mpdwChannelsA, i);
+        dw += GetCanLong(mpdwChannelsB, i);
 
-        SetCanLong(mpdwChannelsB, i);
+        SetCanLong(mpdwChannelsB, i, &dw);
       }
     }
     while ((bMONTHS + tiAlt.bMonth - ++j) % bMONTHS != 0 );
@@ -1311,10 +1311,10 @@ uchar   i,j;
     if (QueryEnergyAbsC_Full2(99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = GetCanLong(mpdwChannelsA, i);
-      dwBuffC -= GetCanLong(mpdwChannelsB, i);
+      ulong dw = GetCanLong(mpdwChannelsA, i);
+      dw -= GetCanLong(mpdwChannelsB, i);
 
-      SetCanLong(mpdwChannelsB, i);
+      SetCanLong(mpdwChannelsB, i, &dw);
     }
   }
 
@@ -1324,7 +1324,7 @@ uchar   i,j;
   for (i=0; i<4; i++) 
   {
     reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB;
-    SetCanReal(mpreChannelsB, i);
+    SetCanReal(mpreChannelsB, i, &reBuffA);
 
     mpboChannelsA[i] = TRUE;     
   }
