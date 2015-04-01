@@ -19,6 +19,7 @@ U_ENERGY.C
 #include        "../../special/recalc_def.h"
 #include        "../../groups.h"
 #include        "../../energy.h"
+#include        "../../impulses/max_power.h"
 #include        "../../energy2.h"
 #include        "response_uni.h"
 #include        "u_energy.h"
@@ -280,11 +281,9 @@ void    GetEngGrpMonUni(void)
 }
 
 
-/*
+
 void    GetMaxGrpDayUni(void)
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bGROUPS)
@@ -302,32 +301,30 @@ uchar   i;
     InitPushUni();
     LoadPowDay((bDAYS+ibHardDay-bInBuffB) % bDAYS);
 
+    uchar ibGrp;
     for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
     {
+      uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        reBuffA = *PGetGrpMaxPowReal(&mppoDayGrp[ PrevSoftDay() ], ibGrp-1, i-1);
-        PushReal();
-        tiAlt = *PGetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ], ibGrp-1, i-1);
-        PushChar(tiAlt.bDay);
-        PushChar(tiAlt.bHour*2 + tiAlt.bMinute/30);
+        PushReal(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ], ibGrp-1, i-1));
+        time ti1 = GetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ], ibGrp-1, i-1);
+        PushChar(ti1.bDay);
+        PushChar(ti1.bHour*2 + ti1.bMinute/30);
       }
     }
 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToDayIndex();
-    dwBuffC -= bInBuffB;
-    DayIndexToDate(dwBuffC);
+    ulong dw = DateToDayIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti2 = DayIndexToDate(dw);
 
-    Output2_Code((uint)6*bInBuff9*bInBuffD, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &tiAlt);
+    Output2_Code((uint)6*bInBuff9*bInBuffD, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &ti2);
   }
 }
 
 
 void    GetMaxGrpMonUni(void)
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bGROUPS)
@@ -345,26 +342,23 @@ uchar   i;
     InitPushUni();
     LoadPowMon((bMONTHS+ibHardMon-bInBuffB) % bMONTHS);
 
+    uchar ibGrp;
     for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
     {
+      uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        reBuffA = *PGetGrpMaxPowReal(&mppoMonGrp[ PrevSoftMon() ], ibGrp-1, i-1);
-        PushReal();
-        tiAlt = *PGetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ], ibGrp-1, i-1);
-        PushChar(tiAlt.bDay);
-        PushChar(tiAlt.bHour*2 + tiAlt.bMinute/30);
+        PushReal(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ], ibGrp-1, i-1));
+        time ti1 = GetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ], ibGrp-1, i-1);
+        PushChar(ti1.bDay);
+        PushChar(ti1.bHour*2 + ti1.bMinute/30);
       }
     }
 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToMonIndex();
-    dwBuffC -= bInBuffB;
-    MonIndexToDate(dwBuffC);
+    ulong dw = DateToMonIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti2 = MonIndexToDate(dw);
 
-    Output2_Code((uint)6*bInBuff9*bInBuffD, ((CheckDefGrpMonUni() == 0) ? bUNI_OK : bUNI_DEFECT), &tiAlt);
+    Output2_Code((uint)6*bInBuff9*bInBuffD, ((CheckDefGrpMonUni(ti2.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), &ti2);
   }
 }
-
-#endif
-*/
