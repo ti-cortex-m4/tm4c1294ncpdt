@@ -51,7 +51,7 @@ void    ShowItemName(item  it);
 void    ShowGrpFullYearEng(uchar  bMask)
 {
   LoadImpMon( ibY );
-  ShowReal(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowFloat(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
@@ -67,7 +67,7 @@ void    ShowFullYear(void)
 
     case bGET_CNTCANYEAR1:     
       if (GetDigitalDevice(ibX) == 0)
-        (ReadCntMonCan(ibY,ibX) == 1) ? ShowReal(reBuffA) : Error();
+        (ReadCntMonCan(ibY,ibX) == 1) ? ShowFloat(reBuffA) : Error();
 //      else if (CheckDirectCnt2(ibX,ibY)) {
 //        ShowDirectCnt(ibX);
 //      }
@@ -86,7 +86,7 @@ void    ShowFullYear(void)
         else 
         {
 //          if (GetDigitalDevice(ibX) != 6)
-            (ReadCntMonCan(ibY,ibX) == 1) ? ShowReal(reBuffA) : Error();
+            (ReadCntMonCan(ibY,ibX) == 1) ? ShowFloat(reBuffA) : Error();
 //          else
 //            (ReadCntMonCanFCurr(ibY,ibX) == 1) ? ShowCntMonCanF2() : Error();
         }
@@ -100,7 +100,7 @@ void    ShowFullYear(void)
       if (ibY == tiCurr.bMonth)
         ShowLo(szCntCanNoData);
       else if (GetDigitalDevice(ibX) == 0)
-        (ReadCntMonCan(ibZ,ibX) == 1) ? ShowReal(reBuffA) : Error();
+        (ReadCntMonCan(ibZ,ibX) == 1) ? ShowFloat(reBuffA) : Error();
 //      else if (CheckDirectCnt2(ibX,ibY)) {
 //        ShowDirectCnt(ibX);
 //      }
@@ -119,7 +119,7 @@ void    ShowFullYear(void)
         else 
         {
 //          if (GetDigitalDevice(ibX) != 6)
-            (ReadCntMonCan(ibZ,ibX) == 1) ? ShowReal(reBuffA) : Error();
+            (ReadCntMonCan(ibZ,ibX) == 1) ? ShowFloat(reBuffA) : Error();
 //          else
 //            (ReadCntMonCanFCurr(ibZ,ibX) == 1) ? ShowCntMonCanF2() : Error();
         }

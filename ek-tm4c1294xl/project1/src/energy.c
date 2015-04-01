@@ -195,9 +195,9 @@ ulong   dw;
 
 
 // рассчитывает канальное значение на основе канального массива impulse (суточная и месячная энергия)
-real    GetCanImp2RealEng(impulse  *mpimT, uchar  ibCan, uchar  bMask)
+float   GetCanImp2FloatEng(impulse  *mpimT, uchar  ibCan, uchar  bMask)
 {
-real    re;
+float   fl;
 ulong   dw;
 
   dw = 0;
@@ -211,9 +211,9 @@ ulong   dw;
   if ((bMask & 0x08) != 0)
     dw += *PGetCanImp(mpimT,ibCan,3);
 
-  re = GetCanReal(mpreValueEngHou,ibCan) * dw;
+  fl = mpreValueEngHou[ibCan] * dw;
 
-  return re;
+  return fl;
 }
 
 

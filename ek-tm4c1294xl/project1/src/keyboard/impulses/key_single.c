@@ -99,7 +99,7 @@ time  ti;
 
   switch (ibY)
   {
-    case 0:  ShowReal(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ));  break;
+    case 0:  ShowFloat(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ));  break;
     case 1:  ShowTime(ti);  break;
     case 2:  ShowDate(ti);  break;
   }
@@ -114,7 +114,7 @@ time  ti;
 
   switch (ibY)
   {
-    case 0:  ShowReal(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ));  break;
+    case 0:  ShowFloat(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ));  break;
     case 1:  ShowTime(ti);  break;
     case 2:  ShowDate(ti);  break;
   }
@@ -125,35 +125,35 @@ time  ti;
 void    ShowGrpDayPrevEng(uchar  bMask)
 {
   LoadImpDay( PrevHardDay() );
-  ShowReal(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowFloat(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowGrpDayCurrEng(uchar  bMask)
 {
   LoadImpDay( ibHardDay );
-  ShowReal(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowFloat(GetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowGrpMonPrevEng(uchar  bMask)
 {
   LoadImpMon( PrevHardMon() );
-  ShowReal(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowFloat(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
 void    ShowGrpMonCurrEng(uchar  bMask)
 {
   LoadImpMon( ibHardMon );
-  ShowReal(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowFloat(GetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
 void    ShowModemReadCntCurrCan(void)
 {
   if (GetDigitalDevice(ibX) == 0)
-    ShowReal(GetCntCurrImp(ibX));
+    ShowFloat(GetCntCurrImp(ibX));
   else
   {
     LoadCurrDigital(ibX);
@@ -165,7 +165,7 @@ void    ShowModemReadCntCurrCan(void)
     if (mpboEnblCan[ibX] == false)
       ShowLo(szBlocking);
     else
-      (ReadCntCurrCan(ibX) == 1) ? ShowReal(reBuffA) : Error();
+      (ReadCntCurrCan(ibX) == 1) ? ShowFloat(reBuffA) : Error();
 
     SaveConnect();
   }
@@ -220,7 +220,7 @@ void    ShowSingle(void)
 
     case bGET_POWGRPCURRMNT:
     	LoadImpMnt( PrevHardMnt() );
-      ShowReal(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
+      ShowFloat(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
       break;
 
     case bGET_IMPCANCURRMNT:
@@ -229,11 +229,11 @@ void    ShowSingle(void)
 
     case bGET_POWGRPPREVHOU:      
       LoadImpHou( PrevHardHou() );
-      ShowReal(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
+      ShowFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
       break;
 
     case bGET_POWGRPCURRHOU:
-      ShowReal(GetPowGrpHouCurr(ibX,2));
+      ShowFloat(GetPowGrpHouCurr(ibX,2));
       break;
 
     case bGET_POWGRPDAYPREV_ABCD:  

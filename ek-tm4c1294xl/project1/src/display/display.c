@@ -97,15 +97,15 @@ void    ShowLong(ulong  dwT)
 }
 
 
-void    ShowReal(real  reT)
+void    ShowFloat(float  fl)
 {
-  sprintf(szLo,"%13.3f",  reT);
+  sprintf(szLo, "%13.3f", fl);
 }
 
 
-void    ShowDouble(double  *pdb)
+void    ShowDouble(double  pd)
 {
-  sprintf(szLo, "%13.3f", *pdb);
+  sprintf(szLo, "%13.3f", db);
 }
 
 

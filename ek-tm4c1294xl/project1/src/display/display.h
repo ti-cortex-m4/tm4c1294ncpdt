@@ -33,8 +33,8 @@ void    InitDisplay(void);
 void    ShowChar(uchar  bT);
 void    ShowInt(uint  wT);
 void    ShowLong(ulong  dwT);
-void    ShowReal(real  reT);
-void    ShowDouble(double  *pdb);
+void    ShowFloat(float  fl);
+void    ShowDouble(double  db);
 
 void    ShowBoolean(boolean  boT);
 void    ShowAnswer(void);

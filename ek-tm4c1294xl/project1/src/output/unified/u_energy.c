@@ -153,7 +153,7 @@ void    GetEngCanDayUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushReal(GetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ], c-1, 0x01 << (i-1)));
+        PushReal(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ], c-1, 0x01 << (i-1)));
       }
     }
 
@@ -230,7 +230,7 @@ void    GetEngCanMonUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        PushReal(GetCanImp2RealEng(mpimMonCan[ PrevSoftMon() ], c-1, 0x01 << (i-1)));
+        PushReal(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ], c-1, 0x01 << (i-1)));
       }
     }
 

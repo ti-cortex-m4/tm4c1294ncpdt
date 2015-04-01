@@ -46,28 +46,28 @@ static char const      *pszEngCanCurrMin[]     = { szPower, szOnCanals, szMiddle
 void    ShowCanDayPrevEng(uchar  bMask)
 {
   LoadImpDay( PrevHardDay() );
-  ShowReal(GetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowFloat(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowCanDayCurrEng(uchar  bMask)
 {
   LoadImpDay( ibHardDay );
-  ShowReal(GetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowFloat(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
 void    ShowCanMonPrevEng(uchar  bMask)
 {
   LoadImpMon( PrevHardMon() );
-  ShowReal(GetCanImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowFloat(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
 void    ShowCanMonCurrEng(uchar  bMask)
 {
   LoadImpMon( ibHardMon );
-  ShowReal(GetCanImp2RealEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowFloat(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
@@ -78,16 +78,16 @@ void    ShowSingle2(void)
   {
     case bGET_POWCANCURRMNT:
     	LoadImpMnt( PrevHardMnt() );
-      ShowReal(GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
+      ShowFloat(GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
       break;
 
     case bGET_POWCANPREVHOU:      
       LoadImpHou( PrevHardHou() );
-      ShowReal(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
+      ShowFloat(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
       break;
 
     case bGET_POWCANCURRHOU:
-      ShowReal(GetPowCanHouCurr(ibX,2));
+      ShowFloat(GetPowCanHouCurr(ibX,2));
       break;
 
     case bGET_ENGCANDAYPREV_ABCD:  ShowCanDayPrevEng(0x0F);  break;
