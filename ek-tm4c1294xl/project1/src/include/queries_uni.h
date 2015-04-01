@@ -13,6 +13,11 @@ QUERIES2.H
 #define wUNI_GETENGCANMON              0x0042
 #define wUNI_GETENGGRPMON              0x0043
 
+#define wUNI_GETENGCANDAY_X2           0x1040
+#define wUNI_GETENGGRPDAY_X2           0x1041
+#define wUNI_GETENGCANMON_X2           0x1042
+#define wUNI_GETENGGRPMON_X2           0x1043
+
 #define wUNI_GETPOWCANMNT              0x0050
 #define wUNI_GETPOWGRPMNT              0x0051
 

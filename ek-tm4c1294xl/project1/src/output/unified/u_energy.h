@@ -4,10 +4,10 @@ U_ENERGY.H
 
 ------------------------------------------------------------------------------*/
 
-void    GetEngCanDayUni(void); 
-void    GetEngGrpDayUni(void); 
-void    GetEngCanMonUni(void); 
-void    GetEngGrpMonUni(void); 
+void    GetEngCanDayUni(bool  x2);
+void    GetEngGrpDayUni(bool  x2);
+void    GetEngCanMonUni(bool  x2);
+void    GetEngGrpMonUni(bool  x2);
 
 void    GetMaxGrpDayUni(void);
 void    GetMaxGrpMonUni(void);
