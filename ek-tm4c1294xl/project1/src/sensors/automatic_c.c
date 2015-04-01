@@ -19,7 +19,8 @@ AUTOMATIC_CS.C
 
 bool    QueryIdC_Full(void)
 {
-  for (x=0; x<bMINORREPEATS; x++)
+  uchar i;
+  for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
     QueryIdC();
@@ -32,7 +33,7 @@ bool    QueryIdC_Full(void)
   }
 
   Clear();
-  if (x == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return(0);
 
   return(1);
 }
