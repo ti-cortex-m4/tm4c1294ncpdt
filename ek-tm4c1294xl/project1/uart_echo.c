@@ -114,7 +114,7 @@ int main(void) {
     LongBeep();
 
     while (1) {
-    	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM))
+    	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM));
 
     	RunRealtime();
     	RunDevices();

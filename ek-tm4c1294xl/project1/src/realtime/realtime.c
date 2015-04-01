@@ -277,10 +277,10 @@ time    tiT;
     	ASSERT(iwHardHou < wHOURS);
     	ASSERT(ibSoftHou < 2);
 
-    	ASSERT(iwHardDay < bDAYS);
+    	ASSERT(ibHardDay < bDAYS);
     	ASSERT(ibSoftDay < 2);
 
-    	ASSERT(iwHardMon < bMONTHS);
+    	ASSERT(ibHardMon < bMONTHS);
     	ASSERT(ibSoftMon < 2);
 
       fActive = 1;

@@ -67,4 +67,4 @@ SECTIONS
     .stack  :   > SRAM
 }
 
-__STACK_TOP = __stack + 1024;
+__STACK_TOP = __stack + 8192;
