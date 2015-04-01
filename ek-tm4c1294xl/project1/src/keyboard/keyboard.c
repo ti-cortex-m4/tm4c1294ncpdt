@@ -198,7 +198,8 @@ uchar   i;
       SetPause(DEV_BEGIN);
 
       if (IsOpenSpecial()) { CloseSpecial(); Stop(); }
-      boOpenCalc = FALSE;
+      CloseSpecialBuff();
+
       AddDigRecord(EVE_SPECIALCLOSE);
 
       KeyBreakConnect();

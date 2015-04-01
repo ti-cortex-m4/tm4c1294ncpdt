@@ -19,7 +19,7 @@ static char const      *pszPowCanAlfa[] = { szPower, szAlfa, szBeta, ""};
 
 
 
-void    ShowPowCanHou(void)
+static void ShowPowCanHou(void)
 {
   if (LoadImpHou( (GetDayHouIndex(ibY)+ibZ)%wHOURS ) == TRUE)
   {
@@ -37,13 +37,13 @@ void    ShowPowCanHou(void)
 
 
 
-void    LoadBetaCan(void)
+static void LoadBetaCan(void)
 {
   sprintf(szBeta, "  по каналу %-2u   ", ibX+1);
 }
 
 
-void    LoadAlfaDayCan(void)
+static void LoadAlfaDay(void)
 {
   sprintf(szAlfa, "   за сутки %-2u   ", ibY);
 }
@@ -90,7 +90,7 @@ void    key_GetOldProgram73(void)
       Clear();
       
       ibY = 0;                          // день
-      LoadAlfaDayCan();
+      LoadAlfaDay();
 
       ibZ = 0;                          // получас
       ShowPowCanHou(); 
@@ -102,7 +102,7 @@ void    key_GetOldProgram73(void)
         enKeyboard = KBD_POSTENTER;
         Clear();
 
-        LoadAlfaDayCan();
+        LoadAlfaDay();
 
         ibZ = 0;                        // получас
         ShowPowCanHou(); 
