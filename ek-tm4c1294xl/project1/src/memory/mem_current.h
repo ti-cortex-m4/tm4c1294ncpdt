@@ -32,3 +32,17 @@ extern  uint                    mpwMore100[bCANALS],
 
 extern  time                    mptiBaseOK[bCANALS],
                                 mptiBaseError[bCANALS];
+
+
+
+extern  boolean                 mpboCurrent2;
+
+extern  uchar                   mpbCurrent2Curr[8],
+                                mpbCurrent2Prev[8],
+                                mpbCurrent2Buff[8];
+
+extern  boolean                 boCurrent2Enable;
+
+extern  uint                    mpwCurrent2Mnt[bCANALS];
+
+extern  uint                    mpwCurrent2Overflow[bCANALS];
