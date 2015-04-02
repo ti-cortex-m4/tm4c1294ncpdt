@@ -5,20 +5,9 @@ U_DEF.C
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
-//#include        "../../memory/mem_settings.h"
-//#include        "../../memory/mem_ports.h"
 #include        "../../memory/mem_energy.h"
-//#include        "../../keyboard/keyboard.h"
-//#include        "../../keyboard/key_timedate.h"
-//#include        "../../display/display.h"
-//#include        "../../serial/ports.h"
 #include        "../../realtime/realtime.h"
-//#include        "../../include/queries_uni.h"
-//#include        "../../time/rtc.h"
 #include        "../../groups.h"
-//#include        "u_config.h"
-//#include        "u_hou.h"
-//#include        "u_energy.h"
 #include        "u_def.h"
 
 
