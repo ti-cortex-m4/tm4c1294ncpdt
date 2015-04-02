@@ -123,6 +123,8 @@ void    Outptr(void  *pData, uint  wSize)
       bCRCHi3 = bCRCHi;
       bCRCLo3 = bCRCLo;
       break;
+
+    default: ASSERT(false);
   }
 
   Answer(wSize+bHEADER,SER_HEADER);
@@ -135,6 +137,7 @@ void    OutptrOutBuff(uint  wSize) {
     case 1:  Outptr(&mpbOutBuff1[bHEADER], wSize);  break;
     case 2:  Outptr(&mpbOutBuff2[bHEADER], wSize);  break;
     case 3:  Outptr(&mpbOutBuff3[bHEADER], wSize);  break;
+    default: ASSERT(false);
   }
 }
 

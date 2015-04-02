@@ -40,6 +40,7 @@ void    Query(uint  cwIn, uchar  cbOut, bool  fMinor)
     case 1:  Query1(cwIn, cbOut, fMinor);  break;
     case 2:  Query2(cwIn, cbOut, fMinor);  break;
     case 3:  Query3(cwIn, cbOut, fMinor);  break;
+    default: ASSERT(false);
   }
 }
 

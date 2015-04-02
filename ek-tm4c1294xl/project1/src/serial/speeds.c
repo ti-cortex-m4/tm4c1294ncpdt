@@ -98,7 +98,7 @@ void     MakeSpeed(uchar  ibPrt, ulong  dwBase)
     case 3:  dwParity = UART_CONFIG_PAR_ONE;   break;
     case 4:  dwParity = UART_CONFIG_PAR_ZERO;  break;
 
-    default: dwParity = UART_CONFIG_PAR_NONE;  break;
+    default: ASSERT(false); dwParity = UART_CONFIG_PAR_NONE;  break;
   }
 
   ROM_UARTConfigSetExpClk(dwBase, ui32SysClock, dwBaud, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | dwParity));
@@ -139,6 +139,7 @@ void    SetSpeed(uchar  ibPrt)
     case 1:  SetSpeed1();  break;
     case 2:  SetSpeed2();  break;
     case 3:  SetSpeed3();  break;
+    default: ASSERT(false);
   }
 
   SavePorts();
