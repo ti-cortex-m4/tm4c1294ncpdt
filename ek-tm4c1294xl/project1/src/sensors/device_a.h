@@ -1,20 +1,18 @@
 /*------------------------------------------------------------------------------
 DEVICE_A.H
               
- Подпрограммы доступа к цифровому счётчику СЭТ-4ТМ
+
 ------------------------------------------------------------------------------*/
-
-
 
 #ifndef SKIP_A
 
-bit     ReadAddressA(void);
-bit     ReadResultA(void);
+bool    ReadAddressA(void);
+bool    ReadResultA(void);
 
 void    QueryOpenA(void);
 
 void    QueryIdA(void);
-bit     ReadIdA(void);
+bool    ReadIdA(void);
 
 void    QueryEnergyA(uchar  bTime);
 void    ReadEnergyA(void);
@@ -33,9 +31,9 @@ void    QueryHeaderA_Plus(uchar  bSize);
 void    ReadHeaderA(void);
 
 void    QueryDataA(void);
-bit     ReadDataA(void);
-bit     TestDataA_Plus(uchar  ibBlock);
-bit     ReadDataA_Plus(uchar  ibBlock);
+bool    ReadDataA(void);
+bool    TestDataA_Plus(uchar  ibBlock);
+bool    ReadDataA_Plus(uchar  ibBlock);
 
 void    ReadCurrentA(void);
 

@@ -82,6 +82,8 @@ uchar   i;
 
 bool    QueryIdA_Full(void)
 {
+uchar  x;
+
   for (x=0; x<bMINORREPEATS; x++)
   {
     DelayOff();
