@@ -56,12 +56,12 @@ bool    ReadResultA(void)
 // посылка запроса на открытие канала связи для счётчика СЭТ-4ТМ
 void    QueryOpenA(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);         
   PushChar(1);      
 
-  if (boEnableKeys != boTrue)
+  if (boEnableKeys != TRUE)
   {
     PushChar('0');                        
     PushChar('0');         
@@ -95,7 +95,7 @@ void    QueryOpenA(void)
 // посылка запроса на чтение логического номера для счётчика СЭТ-4ТМ
 void    QueryIdA(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(8);
@@ -121,7 +121,7 @@ bool    ReadIdA(void)
 // посылка запроса на чтение энергии для счётчиков СЭТ-4ТМ
 void    QueryEnergyA(uchar  bTime)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(5);                          // чтение накопленной энергии
@@ -151,7 +151,7 @@ uchar   i;
     SetCanLong(mpdwChannelsA, i);
   }
 
-  coEnergy.dwBuff = *PGetCanLong(&mpdwChannelsA, diCurr.ibLine);
+  coEnergy.dwBuff = *GetCanLong(mpdwChannelsA, diCurr.ibLine);
 }
 
 
@@ -159,7 +159,7 @@ uchar   i;
 // посылка запроса на коррекцию времени для счётчика СЭТ-4ТМ
 void    QueryControlA(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(3);      
@@ -177,7 +177,7 @@ void    QueryControlA(void)
 // посылка запроса на установку времени для счётчика СЭТ-4ТМ
 void    QueryManageA(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(3);      
@@ -205,7 +205,7 @@ void    QueryManageA(void)
 // посылка запроса на чтене времени/даты для счётчика СЭТ-4ТМ
 void    QueryTimeA(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);       
   PushChar(4);
@@ -236,7 +236,7 @@ void    ReadTimeAltA(void)
 // посылка запроса на чтение вершины массива для счётчика СЭТ-4ТМ
 void    QueryTopA(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);         
   PushChar(8);      
@@ -261,20 +261,26 @@ void    ReadTopA(void)
   }
   else 
   {
-    if (mpboStartCan[ibDig] == boFalse) 
+    if (mpboStartCan[ibDig] == FALSE)
     {
       iwMajor = (InBuff(6)*0x100 + InBuff(7)) / 24;
-      if (boShowMessages == boTrue) sprintf(szLo,"  начало %04X * ",iwMajor);
+
+      Clear();
+      if (boShowMessages == TRUE) sprintf(szLo+2,"начало %04X *",iwMajor);
+
       ResetLimitsAux(ibDig);
     }
     else 
     {
       iwMajor = mpcwStartAbsCan[ibDig];
-      if (boShowMessages == boTrue) sprintf(szLo,"  начало %04X   ",iwMajor);
+
+      Clear();
+      if (boShowMessages == TRUE) sprintf(szLo+2,"начало %04X",iwMajor);
+
       AddDigRecord(EVE_PREVIOUS_TOP);
     }
 
-    if (boShowMessages == boTrue) DelayMsg();
+    if (boShowMessages == TRUE) DelayMsg();
   }
 
   // адрес заголовка текущего блока
@@ -292,7 +298,7 @@ void    ReadTopA(void)
 
 void    QueryHeaderA(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);         
   PushChar(6);      
@@ -313,7 +319,7 @@ void    QueryHeaderA_Plus(uchar  bSize)
 {
   ShowLo(szWaiting); 
 
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);         
   PushChar(6);      
@@ -342,7 +348,7 @@ void    QueryDataA(void)
 {
 uint    i;
 
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);         
   PushChar(6);      
@@ -372,7 +378,7 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
   if (SearchDefHouIndex() == 0)                         // выход: часовой блок не имеется в массиве получасового брака
   {
     if (++ibMinor > 48) return(0);
-    if (ibMinor > 2) sprintf(szLo," выключено: %-2bu   ",ibMinor);
+    if (ibMinor > 2) sprintf(szLo," выключено: %-2u   ",ibMinor);
     
     return(1);
   }
@@ -381,8 +387,7 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
 
   tiAlt = tiDig;
 
-  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",           // показываем время/дату часового блока
-          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
   ShowProgressDigHou();        
     
@@ -391,8 +396,9 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
 
   InitPop(bOffset+ibRecord*8+ibBlock*30);               // читаем количество импульсов по каналам: A+,A-,R+,R-
 
-  for (ibCan=0; ibCan<4; ibCan++)        
-    mpwChannels[ibCan] = (PopChar()*0x100 + PopChar()) & 0x7FFF;
+  uchar c;
+  for (c=0; c<4; c++)        
+    mpwChannels[c] = (PopChar()*0x100 + PopChar()) & 0x7FFF;
 
   MakePrevHou();
   return(MakeStopHou(0));  
@@ -401,7 +407,7 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
 
 bool    ReadDataA(void)
 {
-  NoShowTime(1);                                        // запрещаем автоматическое отображение времени
+  HideCurrentTime(1);                                   // запрещаем автоматическое отображение времени
     
   tiDig.bHour  = FromBCD( mpbInBuffSave[1] );           // время/дата часового блока
   tiDig.bDay   = FromBCD( mpbInBuffSave[2] );
