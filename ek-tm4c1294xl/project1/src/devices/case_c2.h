@@ -34,7 +34,7 @@
 
     case DEV_POSTOPENCANAL_C2:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
+      sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = bMINORREPEATS;
       QueryTimeC();                          
@@ -70,7 +70,7 @@
       tiAlt = tiCurr;                       // текущие время/дата сумматора
 
       if (wBuffD != GetDayIndex())          
-      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна 
+      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
       else 
       {
         if (dwBuffC > GetSecondIndex())                                         // необходима коррекция времени ведомого счётчика назад
@@ -80,7 +80,7 @@
 
         if (dwBuffC < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_C2); }     
-        else if (GetHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))           // простая коррекция 
+        else if (GetHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))           // простая коррекция
         { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_C2);  } 
         else                                                                    
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
