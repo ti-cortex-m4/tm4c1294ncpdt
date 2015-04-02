@@ -27,7 +27,7 @@ void    OutImpCanHou48Def(void)
 {
 uchar   i,j;
 
-  iwHou = PrevDayIndex(bInBuff6);
+  iwHou = GetDayHouIndex(bInBuff6);
             
   InitPushPtr();
   wBuffD = 0;
@@ -66,7 +66,7 @@ void    OutPowGrpHou48Def(void)
 {
 uchar   i,j;
 
-  iwHou = PrevDayIndex(bInBuff6);
+  iwHou = GetDayHouIndex(bInBuff6);
             
   InitPushPtr();
   wBuffD = 0;

@@ -115,7 +115,7 @@ uchar   ibBlock;
   //x_str("\n day index "); x_intdec(0x100*bInBuff8+bInBuff9);
   //x_str("\n days count "); x_intdec(0x100*bInBuffA+bInBuffB);
 
-  tiAlt = *PGetCurrTimeDate();
+  tiAlt = *GetCurrTimeDate();
   dwBuffY = DateToDayIndex();
 
   fAlt = 0;
@@ -183,7 +183,7 @@ uint    i;
     PushInt(GetMaxRecordsCount(bInBuff7));
     PushInt(GetRecordsCount(bInBuff7));
     
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToDayIndex();
 
     for (i=0; i<0x100*bInBuffA+bInBuffB; i++)

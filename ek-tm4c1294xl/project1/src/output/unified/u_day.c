@@ -48,7 +48,7 @@ uchar   i,j,k;
       ResetWDT();
       memset(&mpbDefUni, 0, sizeof(mpbDefUni));
 
-      iwHou = PrevDayIndex(j);
+      iwHou = GetDayHouIndex(j);
       for (i=0; i<48; i++)
       {
         LoadImpHouFree(iwHou);
@@ -65,7 +65,7 @@ uchar   i,j,k;
       Push(mpbDefUni, k);
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToDayIndex();
     dwBuffC -= bInBuffB;
     DayIndexToDate(dwBuffC);
@@ -102,7 +102,7 @@ uchar   i,j,k;
       ResetWDT();
       memset(&mpbDefUni, 0, sizeof(mpbDefUni));
 
-      iwHou = PrevDayIndex(j);
+      iwHou = GetDayHouIndex(j);
       for (i=0; i<48; i++)
       {
         LoadImpHouFree(iwHou);
@@ -119,7 +119,7 @@ uchar   i,j,k;
       Push(mpbDefUni, k);
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToDayIndex();
     dwBuffC -= bInBuffB;
     DayIndexToDate(dwBuffC);

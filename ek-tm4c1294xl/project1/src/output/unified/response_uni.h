@@ -14,7 +14,4 @@ void    Common2(void  *pbData, uint  wSize);
 
 //void    SetDelayUni(void);
 //
-//bit     GetDefCan(uchar  ibCanal);
-//bit     GetDefGrp(uchar  ibGroup);
-//
 //void    PushRealUni(status4  status, real  *preT);

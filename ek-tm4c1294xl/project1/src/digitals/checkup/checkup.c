@@ -289,7 +289,7 @@ uchar   i;
   }
   else
   {
-    iwHou = PrevDayIndex(ibDay);
+    iwHou = GetDayHouIndex(ibDay);
     for (i=0; i<48; i++)
     {
       LoadImpHouFree(iwHou);

@@ -166,7 +166,7 @@ uint    j;
 
 void    GetTimeAltParamUni(int  i)
 {
-  tiAlt = *PGetCurrTimeDate();
+  tiAlt = *GetCurrTimeDate();
   if (boQuickParam == TRUE)
   {
     dwBuffC = DateToMntIndex();

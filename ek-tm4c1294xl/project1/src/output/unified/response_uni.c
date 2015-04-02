@@ -17,6 +17,7 @@ RESPONSE_UNI.C
 #include        "../../time/rtc.h"
 #include        "../../kernel/crc-16.h"
 #include        "u_config.h"
+#include        "u_hou.h"
 #include        "u_energy.h"
 #include        "uni.h"
 
@@ -250,23 +251,13 @@ void    RunResponseUNI(void)
       case wUNI_GETPOWGRPMNT: 
         GetPowGrpMntUni(); 
         break;
+*/
+      case wUNI_GETPOWCANHOU: GetPowCanHouUni(); break;
+      case wUNI_GETPOWGRPHOU: GetPowGrpHouUni(); break;
 
-      case wUNI_GETPOWCANHOU:
-        GetPowCanHouUni(); 
-        break;
-
-      case wUNI_GETPOWGRPHOU:
-        GetPowGrpHouUni(); 
-        break;
-
-      case wUNI_GETPOWCANHOU48:
-        GetPowCanHou48Uni(); 
-        break;
-
-      case wUNI_GETPOWGRPHOU48:
-        GetPowGrpHou48Uni(); 
-        break;
-
+      case wUNI_GETPOWCANHOU48: GetPowCanHou48Uni(); break;
+      case wUNI_GETPOWGRPHOU48: GetPowGrpHou48Uni(); break;
+/*
       case wUNI_GETCNTCANMON:
         GetCntCanMonUni(); 
         break;
@@ -328,28 +319,6 @@ void    RunResponseUNI_All(void)
 
 
 /*
-bool    GetDefCan(uchar  ibCanal)
-{
-  return (mpwImpHouCan[ PrevSoftHou() ][ibCanal] == 0xFFFF);
-}
-
-
-bool    GetDefGrp(uchar  ibGroup)
-{
-uchar   i;
-
-  if (GetGroupsSize(ibGroup) == 0)
-    return 0;
-
-  for (i=0; i<GetGroupsSize(ibGroup); i++)
-    if (mpwImpHouCan[ PrevSoftHou() ][ GetGroupsNodeCanal(ibGroup, i) ] == 0xFFFF)
-      return 1;
-
-  return 0;
-}
-
-
-
 void    PushFFFFFF(void)
 {
   PushChar(0xFF); PushChar(0xFF); PushChar(0xFF);
