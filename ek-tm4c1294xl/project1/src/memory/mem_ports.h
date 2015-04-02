@@ -34,3 +34,13 @@ extern	uchar               bInBuff0,
 extern	uchar               bQuery;
 
 extern	uchar              ibPortActive;
+
+
+
+extern  uint                    iwPopSave;
+
+extern  uint                    iwInBuffSave;
+
+extern  uint                    cwInBuffSave;
+
+extern  uchar                   mpbInBuffSave[wINBUFF_SIZE];
