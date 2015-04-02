@@ -24,6 +24,7 @@ void    InitPush(uchar  ibPush) {
     case 1: iwPush1 = ibPush; break;
     case 2: iwPush2 = ibPush; break;
     case 3: iwPush3 = ibPush; break;
+    default: ASSERT(false);
   }
 }
 
@@ -73,6 +74,8 @@ void    Push(void  *pbData, uint  wSize) {
         iwPush3 += wSize;
       }
       break;
+
+    default: ASSERT(false);
   }
 }
 
@@ -185,9 +188,8 @@ uchar   SkipChar(void) {
     case 1: return mpbOutBuff1[ iwPush1++ ];
     case 2: return mpbOutBuff2[ iwPush2++ ];
     case 3: return mpbOutBuff3[ iwPush3++ ];
+    default: ASSERT(false); return 0;
   }
-
-  return 0; // TODO
 }
 
 
@@ -197,6 +199,7 @@ void    Skip(uint  wSize) {
     case 1: iwPush1 += wSize; break;
     case 2: iwPush2 += wSize; break;
     case 3: iwPush3 += wSize; break;
+    default: ASSERT(false);
   }
 }
 
@@ -208,6 +211,7 @@ void    InitPop(uint  i) {
     case 1: iwPop1 = i; break;
     case 2: iwPop2 = i; break;
     case 3: iwPop3 = i; break;
+    default: ASSERT(false);
   }
 }
 
@@ -219,6 +223,7 @@ void    Pop(void  *pbData, uint  wSize) {
     case 1: memcpy(pbData, &mpbInBuff1[ iwPop1 ], wSize); iwPop1 += wSize; break;
     case 2: memcpy(pbData, &mpbInBuff2[ iwPop2 ], wSize); iwPop2 += wSize; break;
     case 3: memcpy(pbData, &mpbInBuff3[ iwPop3 ], wSize); iwPop3 += wSize; break;
+    default: ASSERT(false);
   }
 }
 
@@ -229,7 +234,6 @@ uchar   PopChar(void) {
     case 1: return mpbInBuff1[ iwPop1++ ];
     case 2: return mpbInBuff2[ iwPop2++ ];
     case 3: return mpbInBuff3[ iwPop3++ ];
+    default: ASSERT(false); return 0;
   }
-
-  return 0; // TODO
 }
