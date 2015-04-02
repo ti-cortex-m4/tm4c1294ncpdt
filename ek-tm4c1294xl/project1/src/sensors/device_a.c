@@ -11,6 +11,7 @@ DEVICE_A.C
 #include        "../memory/mem_factors.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy_spec.h"
+#include        "../memory/mem_ports.h"
 #include        "../memory/mem_profile.h"
 #include        "../memory/mem_limits.h"
 #include        "../display/display.h"
@@ -18,9 +19,11 @@ DEVICE_A.C
 #include        "../time/timedate.h"
 #include        "../time/calendar.h"
 #include        "../time/delay.h"
+#include        "../realtime/realtime.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
 #include        "../serial/ports_common.h"
+#include        "../serial/save_in_buff.h"
 #include        "../devices/devices.h"
 #include        "../devices/devices_time.h"
 #include        "../digitals/current/current_run.h"
@@ -185,8 +188,7 @@ void    QueryManageA(void)
   PushChar( ToBCD(tiCurr.bMinute) );
   PushChar( ToBCD(tiCurr.bHour)   );
 
-  tiAlt = tiCurr;
-  PushChar(Weekday()+1);
+  PushChar(GetWeekdayYMD(tiCurr.bYear, tiCurr.bMonth, tiCurr.bDay) + 1);
 
   PushChar( ToBCD(tiCurr.bDay)   );
   PushChar( ToBCD(tiCurr.bMonth) );
@@ -270,7 +272,7 @@ void    ReadTopA(void)
     }
     else 
     {
-      iwMajor = mpcwStartAbsCan[ibDig];
+      iwMajor = mpcwStartAbs16Can[ibDig];
 
       Clear();
       if (boShowMessages == TRUE) sprintf(szLo+2,"начало %04X",iwMajor);
@@ -388,7 +390,7 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
 
   ShowProgressDigHou();        
     
-  if ((wBaseCurr == wBaseLast) && (GetHouIndex() != bCurrHouIndex))
+  if ((wBaseCurr == wBaseLast) && (GetCurrHouIndex() != bCurrHouIndex))
     return(1);                                          // выход: часовой блок не готов
 
   InitPop(bOffset+ibRecord*8+ibBlock*30);               // читаем количество импульсов по каналам: A+,A-,R+,R-

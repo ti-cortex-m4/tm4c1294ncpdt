@@ -46,3 +46,17 @@ uchar                   bQuery;
 
 // анализируемый порт
 uchar                   ibPortActive;
+
+
+
+// индекс для доступа к буферу в режиме стека
+uint                    iwPopSave;
+
+// индекс по буферу
+uint                    iwInBuffSave;
+
+// счётчик по буферу
+uint                    cwInBuffSave;
+
+// промежуточный буфер
+uchar                   mpbInBuffSave[wINBUFF_SIZE];
