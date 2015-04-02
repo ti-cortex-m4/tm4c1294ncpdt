@@ -22,8 +22,10 @@ AUTOMATIC2.C
 #include        "../energy.h"
 #include        "../energy2.h"
 #include        "automatic1.h"
+#include        "device_a.h"
 #include        "device_b.h"
 #include        "device_c.h"
+#include        "automatic_a.h"
 #include        "automatic_b.h"
 #include        "automatic_c.h"
 

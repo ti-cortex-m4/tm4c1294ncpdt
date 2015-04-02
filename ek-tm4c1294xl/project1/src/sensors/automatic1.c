@@ -15,7 +15,10 @@ AUTOMATIC1.C
 #include        "../devices/devices.h"
 #include        "../engine.h"
 #include        "../energy.h"
+#include        "device_a.h"
+#include        "device_b.h"
 #include        "device_c.h"
+#include        "automatic_a.h"
 #include        "automatic_b.h"
 #include        "automatic_c.h"
 

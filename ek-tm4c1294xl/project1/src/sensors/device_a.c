@@ -1,0 +1,487 @@
+/*------------------------------------------------------------------------------
+DEVICE_A.C
+              
+ Подпрограммы доступа к цифровому счётчику СЭТ-4ТМ
+------------------------------------------------------------------------------*/
+
+#include        "main.h"
+#include        "xdata.h"
+#include        "display.h"
+#include        "lines.h"
+#include        "nexttime.h"
+#include        "timedate.h"
+#include        "engine.h"
+#include        "energy.h"
+#include        "digitals.h"
+#include        "sensors.h"
+#include        "defects.h"
+#include        "essential.h"
+#include        "ports.h"
+#include        "delay.h"
+#include        "savebuff.h"
+#include        "timer0.h"        
+#include        "limits.h"
+#include        "record.h"
+#include        "_timedate.h"
+
+
+
+#ifndef SKIP_A
+
+// проверка сетевого адреса для счётчиков СЭТ-4ТМ
+bit     ReadAddressA(void)
+{
+//  return(InBuff(0) == diCurr.bAddress);
+  return(1);
+}
+
+
+// проверка результата операции для счётчиков СЭТ-4ТМ
+bit     ReadResultA(void)
+{
+  TestResult(InBuff(1));
+  return(ReadAddressA() && (InBuff(1) == 0));
+}
+
+
+
+// посылка запроса на открытие канала связи для счётчика СЭТ-4ТМ
+void    QueryOpenA(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);         
+  PushChar(1);      
+
+  if (boEnableKeys != boTrue)
+  {
+    PushChar('0');                        
+    PushChar('0');         
+    PushChar('0');
+    PushChar('0');
+    PushChar('0');
+    PushChar('0');
+  }
+  else
+  {
+    uchar  i;
+
+    phT = mpphKeys[ibDig]; fAlt = 0;
+
+    for (i=0; i<6; i++)
+    {
+      if (phT.szNumber[i] == 0) fAlt = 1;
+
+      if (fAlt == 0)
+        PushChar(phT.szNumber[i]);
+      else  
+        PushChar(0);
+    }
+  }
+
+  QueryIO(2+2, 2+6+2);
+}
+ 
+
+
+// посылка запроса на чтение логического номера для счётчика СЭТ-4ТМ
+void    QueryIdA(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);
+  PushChar(8);
+  PushChar(5);
+
+  QueryIO(1+2+2, 3+0+2);
+}
+
+
+// чтение логического номера для счётчика СЭТ-4ТМ
+bit     ReadIdA(void)
+{
+  InitPop(0);
+  if (PopChar() != diCurr.bAddress) return 0;
+  if (PopChar() != 0) return 0;
+  if ((PopChar() != diCurr.bAddress) && (0 != diCurr.bAddress)) return 0;
+
+  return 1;
+}
+
+
+
+// посылка запроса на чтение энергии для счётчиков СЭТ-4ТМ
+void    QueryEnergyA(uchar  bTime)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);           
+  PushChar(5);                          // чтение накопленной энергии
+
+  PushChar(bTime);                      // вид энергии
+  PushChar(0);                          // по всем тарифам
+
+  QueryIO(1+16+2, 2+2+2);
+}
+
+
+// чтение энергии для счётчика СЭТ-4ТМ
+void    ReadEnergyA(void)
+{
+uchar   i;
+
+  InitPop(1);
+
+  for (i=0; i<4; i++)
+  {
+    coEnergy.mpbBuff[0] = PopChar();
+    coEnergy.mpbBuff[1] = PopChar();
+    coEnergy.mpbBuff[2] = PopChar();
+    coEnergy.mpbBuff[3] = PopChar();
+
+    dwBuffC = coEnergy.dwBuff;
+    SetCanLong(mpdwChannelsA, i);
+  }
+
+  coEnergy.dwBuff = *PGetCanLong(&mpdwChannelsA, diCurr.ibLine);
+}
+
+
+
+// посылка запроса на коррекцию времени для счётчика СЭТ-4ТМ
+void    QueryControlA(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);
+  PushChar(3);      
+  PushChar(0x0D);      
+
+  PushChar( ToBCD(tiCurr.bSecond) );
+  PushChar( ToBCD(tiCurr.bMinute) );
+  PushChar( ToBCD(tiCurr.bHour)   );
+
+  QueryIO(1+1+2, 3+3+2);
+}
+
+
+
+// посылка запроса на установку времени для счётчика СЭТ-4ТМ
+void    QueryManageA(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);
+  PushChar(3);      
+  PushChar(0x0C);      
+
+  PushChar( ToBCD(tiCurr.bSecond) );
+  PushChar( ToBCD(tiCurr.bMinute) );
+  PushChar( ToBCD(tiCurr.bHour)   );
+
+  tiAlt = tiCurr;
+  PushChar(Weekday()+1);
+
+  PushChar( ToBCD(tiCurr.bDay)   );
+  PushChar( ToBCD(tiCurr.bMonth) );
+  PushChar( ToBCD(tiCurr.bYear)  );
+
+  tiAlt = tiCurr;
+  PushChar(Season());
+
+  QueryIO(1+1+2, 3+8+2);
+}
+
+
+
+// посылка запроса на чтене времени/даты для счётчика СЭТ-4ТМ
+void    QueryTimeA(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);       
+  PushChar(4);
+  PushChar(0);
+
+  QueryIO(1+8+2, 3+0+2);
+}
+
+
+// чтение времени/даты для счётчика СЭТ-4ТМ
+void    ReadTimeAltA(void)
+{
+  InitPop(1);
+
+  tiAlt.bSecond = FromBCD( PopChar() );
+  tiAlt.bMinute = FromBCD( PopChar() );
+  tiAlt.bHour   = FromBCD( PopChar() );
+
+  PopChar();
+
+  tiAlt.bDay    = FromBCD( PopChar() );
+  tiAlt.bMonth  = FromBCD( PopChar() );
+  tiAlt.bYear   = FromBCD( PopChar() );
+}
+
+
+
+// посылка запроса на чтение вершины массива для счётчика СЭТ-4ТМ
+void    QueryTopA(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);         
+  PushChar(8);      
+  PushChar(4);      
+
+  QueryIO(1+7+2, 2+1+2);
+}
+
+
+// чтение вершины массива для счётчика СЭТ-4ТМ
+void    ReadTopA(void)
+{
+  // индекс текущего получаса
+  bCurrHouIndex = FromBCD(InBuff(2))*2 + FromBCD(InBuff(1) & 0x7F)/30;
+
+
+  // индекс текущего блока
+  if (!UseBounds())
+  {
+    iwMajor = (InBuff(6)*0x100 + InBuff(7)) / 24;
+    ResetLimitsAux(ibDig);
+  }
+  else 
+  {
+    if (mpboStartCan[ibDig] == boFalse) 
+    {
+      iwMajor = (InBuff(6)*0x100 + InBuff(7)) / 24;
+      if (boShowMessages == boTrue) sprintf(szLo,"  начало %04X * ",iwMajor);
+      ResetLimitsAux(ibDig);
+    }
+    else 
+    {
+      iwMajor = mpcwStartAbsCan[ibDig];
+      if (boShowMessages == boTrue) sprintf(szLo,"  начало %04X   ",iwMajor);
+      AddDigRecord(EVE_PREVIOUS_TOP);
+    }
+
+    if (boShowMessages == boTrue) DelayMsg();
+  }
+
+  // адрес заголовка текущего блока
+  wBaseCurr = iwMajor*24;
+
+
+  // счётчик прочитанных блоков
+  cwDigHou = 0;
+
+  // счётчик пропущенных записей
+  ibMinor = 0;
+}
+
+
+
+void    QueryHeaderA(void)
+{
+  InitPush();
+
+  PushChar(diCurr.bAddress);         
+  PushChar(6);      
+  PushChar(3);      
+
+  wBaseLast = iwMajor*24;
+
+  PushChar(wBaseLast / 0x100);      
+  PushChar(wBaseLast % 0x100);      
+
+  PushChar(8);      
+
+  QueryIO(1+8+2, 3+3+2);
+}
+
+
+void    QueryHeaderA_Plus(uchar  bSize)
+{
+  ShowLo(szWaiting); 
+
+  InitPush();
+
+  PushChar(diCurr.bAddress);         
+  PushChar(6);      
+  PushChar(5);      
+
+  wBaseLast = iwMajor*24;
+
+  PushChar(wBaseLast / 0x100);      
+  PushChar(wBaseLast % 0x100);      
+
+  PushChar(bSize);      
+
+  QueryIO((uint)30*bSize+2, 3+3+2);
+}
+
+
+
+void    ReadHeaderA(void)
+{
+  SaveInBuff();
+}
+
+
+
+void    QueryDataA(void)
+{
+uint    i;
+
+  InitPush();
+
+  PushChar(diCurr.bAddress);         
+  PushChar(6);      
+  PushChar(3);      
+
+  i = iwMajor*24 + 8;
+
+  PushChar(i / 0x100);      
+  PushChar(i % 0x100);      
+
+  PushChar(16);      
+
+  QueryIO(1+16+2, 3+3+2);
+}
+
+
+
+bit     ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
+{
+  if (++cwDigHou >= 8192/3) return(0);
+
+
+  tiDig = tiDigPrev;                                    // восстанавливаем...
+
+  tiDig.bMinute = ibRecord*30;                          // рассчитываем минуты записи из часового блока
+
+  if (SearchDefHouIndex() == 0)                         // выход: часовой блок не имеется в массиве получасового брака
+  {
+    if (++ibMinor > 48) return(0);
+    if (ibMinor > 2) sprintf(szLo," выключено: %-2bu   ",ibMinor);
+    
+    return(1);
+  }
+  else ibMinor = 0;
+
+
+  tiAlt = tiDig;
+
+  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",           // показываем время/дату часового блока
+          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+
+  ShowProgressDigHou();        
+    
+  if ((wBaseCurr == wBaseLast) && (GetHouIndex() != bCurrHouIndex))
+    return(1);                                          // выход: часовой блок не готов
+
+  InitPop(bOffset+ibRecord*8+ibBlock*30);               // читаем количество импульсов по каналам: A+,A-,R+,R-
+
+  for (ibCan=0; ibCan<4; ibCan++)        
+    mpwChannels[ibCan] = (PopChar()*0x100 + PopChar()) & 0x7FFF;
+
+  MakePrevHou();
+  return(MakeStopHou(0));  
+}
+
+
+bit     ReadDataA(void)
+{
+  NoShowTime(1);                                        // запрещаем автоматическое отображение времени
+    
+  tiDig.bHour  = FromBCD( mpbInBuffSave[1] );           // время/дата часового блока
+  tiDig.bDay   = FromBCD( mpbInBuffSave[2] );
+  tiDig.bMonth = FromBCD( mpbInBuffSave[3] );
+  tiDig.bYear  = FromBCD( mpbInBuffSave[4] );
+ 
+  tiDigPrev = tiDig;                                    // сохраняем...
+
+  if (mpbInBuffSave[1] +                                // выход: неправильная контрольная сумма часового блока
+      mpbInBuffSave[2] +                                
+      mpbInBuffSave[3] + 
+      mpbInBuffSave[4] + 
+      mpbInBuffSave[5] + 
+      mpbInBuffSave[6] != mpbInBuffSave[7]) return(1);
+
+  if (mpbInBuffSave[6] != 30) return(1);                // выход: неправильный период интегрирования
+  
+  if (ReadDataBlockA(1,0,0) == 0) return(0);
+  if (ReadDataBlockA(1,1,0) == 0) return(0);
+
+  return(1);
+}
+
+
+
+bit     TestDataA_Plus(uchar  ibBlock)
+{
+  tiDig.bHour  = FromBCD( InBuff((uint)1+ibBlock*30) ); // время/дата часового блока
+  tiDig.bDay   = FromBCD( InBuff((uint)2+ibBlock*30) );
+  tiDig.bMonth = FromBCD( InBuff((uint)3+ibBlock*30) );
+  tiDig.bYear  = FromBCD( InBuff((uint)4+ibBlock*30) );
+
+  if ((tiDig.bHour   == 99) &&                          // ошибка преобразователя
+      (tiDig.bDay    == 99) &&
+      (tiDig.bMonth  == 99) &&
+      (tiDig.bYear   == 99)) 
+  {
+    ShowLo(szNoDevice); DelayMsg();
+    return(0);
+  }
+
+  return(1);
+}
+
+
+bit     ReadDataA_Plus(uchar  ibBlock)
+{
+  NoShowTime(1);                                        // запрещаем автоматическое отображение времени
+  DelayOff();
+        
+  tiDig.bHour  = FromBCD( InBuff((uint)1+ibBlock*30) ); // время/дата часового блока
+  tiDig.bDay   = FromBCD( InBuff((uint)2+ibBlock*30) );
+  tiDig.bMonth = FromBCD( InBuff((uint)3+ibBlock*30) );
+  tiDig.bYear  = FromBCD( InBuff((uint)4+ibBlock*30) );
+
+  tiDigPrev = tiDig;                                    // сохраняем...
+ 
+  if (InBuff((uint)1+ibBlock*30) +                      // выход: неправильная контрольная сумма часового блока
+      InBuff((uint)2+ibBlock*30) +                      
+      InBuff((uint)3+ibBlock*30) + 
+      InBuff((uint)4+ibBlock*30) + 
+      InBuff((uint)5+ibBlock*30) + 
+      InBuff((uint)6+ibBlock*30) != InBuff((uint)7+ibBlock*30)) return(1);
+
+  if (InBuff((uint)6+ibBlock*30) != 30) return(1);      // выход: неправильный период интегрирования
+  
+  if (ReadDataBlockA(12,0,ibBlock) == 0) return(0);
+  if (ReadDataBlockA(12,1,ibBlock) == 0) return(0);
+
+  return(1);
+}
+
+
+
+void    ReadCurrentA(void)
+{
+uchar   i;
+
+  ReadEnergyA();
+
+  for (i=0; i<4; i++)
+  {
+    dwBuffC = *PGetCanLong(mpdwChannelsA, i);
+    SetCanLong(mpdwBaseDig, i);
+  }
+
+  MakeCurrent();
+}
+
+#endif
+
