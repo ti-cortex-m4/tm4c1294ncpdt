@@ -42,20 +42,21 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   {
-    bool fAlt = 0;
+    bool fDef = 0;
     uint wSize = 0;
 
-    iwHou = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
+    uint iwHou = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
     for (i=0; i<bInBuffD; i++)
     {
       LoadImpHouFree(iwHou);
 
-      for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+      uchar c;
+      for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
       {      
-        fAlt |= GetDefCan(ibCan-1);
-        InitPush((uint)(6 + 4*bInBuffD*(ibCan-bInBuff7) + i*4));
+        fDef |= GetDefCan(c-1);
+        InitPush((uint)(6 + 4*bInBuffD*(c-bInBuff7) + i*4));
 
-        if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], ibCan-1) == 0xFFFF)
+        if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], c-1) == 0xFFFF)
         {
           PushChar(0xFF);
           PushChar(0xFF);
@@ -64,7 +65,7 @@ uchar   i;
         }
         else
         {
-          PushFloat(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibCan-1, 2));
+          PushFloat(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c-1, 2));
         }
 
         wSize += sizeof(real);
@@ -76,9 +77,9 @@ uchar   i;
 
     ulong dw = DateToHouIndex(*GetCurrTimeDate());
     dw -= bInBuffB;
-    HouIndexToDate(dw);
+    time ti = HouIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((fAlt == 0) ? bUNI_OK : bUNI_DEFECT), &tiAlt);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
   }
 }
 
@@ -98,20 +99,21 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   {
-    bool fAlt = 0;
+    bool fDef = 0;
     uint wSize = 0;
 
-    iwHou = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
+    uint iwHou = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
     for (i=0; i<bInBuffD; i++)
     {
       LoadImpHouFree(iwHou);
 
-      for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
+      uchar g;
+      for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
       {      
-        fAlt |= GetDefCan(ibGrp-1);
-        InitPush((uint)(6 + 4*bInBuffD*(ibGrp-bInBuff7) + i*4));
+        fDef |= GetDefCan(g-1);
+        InitPush((uint)(6 + 4*bInBuffD*(g-bInBuff7) + i*4));
 
-        PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp-1, 2));
+        PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g-1, 2));
 
         wSize += sizeof(real);
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
@@ -122,9 +124,9 @@ uchar   i;
 
     ulong dw = DateToHouIndex(*GetCurrTimeDate());
     dw -= bInBuffB;
-    HouIndexToDate(dw);
+    time ti = HouIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((fAlt == 0) ? bUNI_OK : bUNI_DEFECT), &tiAlt);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
   }
 }
 
@@ -144,18 +146,19 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   {
-    bool fAlt = 0;
+    bool fDef = 0;
     uint wSize = 0;
 
-    iwHou = GetDayHouIndex(bInBuffB);
+    uint iwHou = GetDayHouIndex(bInBuffB);
     for (i=0; i<48; i++)
     {
       LoadImpHouFree(iwHou);
 
-      for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+      uchar c;
+      for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
       {      
-        fAlt |= GetDefCan(ibCan-1);
-        InitPush((uint)(6 + 4*48*(ibCan-bInBuff7) + i*4));
+        fDef |= GetDefCan(c-1);
+        InitPush((uint)(6 + 4*48*(c-bInBuff7) + i*4));
 
         if ((bInBuffB == 0) && (i > GetCurrHouIndex()))
         {
@@ -165,7 +168,7 @@ uchar   i;
           PushChar(0xFF);
         }
         else 
-        if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], ibCan-1) == 0xFFFF)
+        if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], c-1) == 0xFFFF)
         {
           PushChar(0xFF);
           PushChar(0xFF);
@@ -174,7 +177,7 @@ uchar   i;
         }
         else
         {
-          PushFloat(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibCan-1, 2));
+          PushFloat(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c-1, 2));
         }
 
         wSize += sizeof(real);
@@ -186,9 +189,9 @@ uchar   i;
 
     ulong dw = DateToDayIndex(*GetCurrTimeDate());
     dw -= bInBuffB;
-    DayIndexToDate(dw);
+    time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)4*48*bInBuff9, ((fAlt == 0) ? bUNI_OK : bUNI_DEFECT), &tiAlt);
+    Output2_Code((uint)4*48*bInBuff9, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
   }
 }
 
@@ -208,18 +211,19 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   {
-    bool fAlt = 0;
+    bool fDef = 0;
     uint wSize = 0;
 
-    iwHou = GetDayHouIndex(bInBuffB);
+    uint iwHou = GetDayHouIndex(bInBuffB);
     for (i=0; i<48; i++)
     {
       LoadImpHouFree(iwHou);
 
-      for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
+      uchar g;
+      for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
       {      
-        fAlt |= GetDefCan(ibGrp-1);
-        InitPush((uint)(6 + 4*48*(ibGrp-bInBuff7) + i*4));
+        fDef |= GetDefCan(g-1);
+        InitPush((uint)(6 + 4*48*(g-bInBuff7) + i*4));
 
         if ((bInBuffB == 0) && (i > GetCurrHouIndex()))
         {
@@ -230,7 +234,7 @@ uchar   i;
         }
         else 
         {
-          PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp-1, 2));
+          PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g-1, 2));
         }
 
         wSize += sizeof(real);
@@ -242,9 +246,9 @@ uchar   i;
 
     ulong dw = DateToDayIndex(*GetCurrTimeDate());
     dw -= bInBuffB;
-    DayIndexToDate(dw);
+    time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)4*48*bInBuff9, ((fAlt == 0) ? bUNI_OK : bUNI_DEFECT), &tiAlt);
+    Output2_Code((uint)4*48*bInBuff9, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
   }
 }
 
