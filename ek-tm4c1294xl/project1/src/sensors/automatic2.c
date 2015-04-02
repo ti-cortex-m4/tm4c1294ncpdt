@@ -619,7 +619,7 @@ uchar   i;
 }
 
 #endif
-
+*/
 
 
 #ifndef SKIP_A
@@ -642,7 +642,7 @@ uchar   i;
 }
 
 #endif
-*/
+
 
 
 #ifndef SKIP_B
@@ -1945,7 +1945,7 @@ bool    ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadCntMonCanA(ibMonth) ); break;
+    case 1:  return( ReadCntMonCanA(ibMonth) );
 #endif
 
 #ifndef SKIP_B
