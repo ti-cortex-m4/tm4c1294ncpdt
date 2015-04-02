@@ -29,6 +29,7 @@ DEVICE_B2.C
 #include        "../special/special.h"
 #include        "../flash/records.h"
 #include        "../energy.h"
+#include        "device_b2.h"
 
 
 

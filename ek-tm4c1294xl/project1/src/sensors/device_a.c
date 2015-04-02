@@ -4,32 +4,40 @@ DEVICE_A.C
  Подпрограммы доступа к цифровому счётчику СЭТ-4ТМ
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "lines.h"
-#include        "nexttime.h"
-#include        "timedate.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "digitals.h"
-#include        "sensors.h"
-#include        "defects.h"
-#include        "essential.h"
-#include        "ports.h"
-#include        "delay.h"
-#include        "savebuff.h"
-#include        "timer0.h"        
-#include        "limits.h"
-#include        "record.h"
-#include        "_timedate.h"
+#include        "../main.h"
+#include        "../memory/mem_settings.h"
+#include        "../memory/mem_digitals.h"
+#include        "../memory/mem_current.h"
+#include        "../memory/mem_factors.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_energy_spec.h"
+#include        "../memory/mem_profile.h"
+#include        "../memory/mem_limits.h"
+#include        "../display/display.h"
+#include        "../keyboard/key_timedate.h"
+#include        "../time/timedate.h"
+#include        "../time/calendar.h"
+#include        "../time/delay.h"
+#include        "../serial/ports_stack.h"
+#include        "../serial/ports_devices.h"
+#include        "../serial/ports_common.h"
+#include        "../devices/devices.h"
+#include        "../devices/devices_time.h"
+#include        "../digitals/current/current_run.h"
+#include        "../digitals/digitals_messages.h"
+#include        "../digitals/limits.h"
+#include        "../digitals/profile/refill.h"
+#include        "../special/special.h"
+#include        "../flash/records.h"
+#include        "../energy.h"
+#include        "device_a.h"
 
 
 
 #ifndef SKIP_A
 
 // проверка сетевого адреса для счётчиков СЭТ-4ТМ
-bit     ReadAddressA(void)
+bool    ReadAddressA(void)
 {
 //  return(InBuff(0) == diCurr.bAddress);
   return(1);
@@ -37,7 +45,7 @@ bit     ReadAddressA(void)
 
 
 // проверка результата операции для счётчиков СЭТ-4ТМ
-bit     ReadResultA(void)
+bool    ReadResultA(void)
 {
   TestResult(InBuff(1));
   return(ReadAddressA() && (InBuff(1) == 0));
@@ -98,7 +106,7 @@ void    QueryIdA(void)
 
 
 // чтение логического номера для счётчика СЭТ-4ТМ
-bit     ReadIdA(void)
+bool    ReadIdA(void)
 {
   InitPop(0);
   if (PopChar() != diCurr.bAddress) return 0;
@@ -352,7 +360,7 @@ uint    i;
 
 
 
-bit     ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
+bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
 {
   if (++cwDigHou >= 8192/3) return(0);
 
@@ -391,7 +399,7 @@ bit     ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
 }
 
 
-bit     ReadDataA(void)
+bool    ReadDataA(void)
 {
   NoShowTime(1);                                        // запрещаем автоматическое отображение времени
     
@@ -419,7 +427,7 @@ bit     ReadDataA(void)
 
 
 
-bit     TestDataA_Plus(uchar  ibBlock)
+bool    TestDataA_Plus(uchar  ibBlock)
 {
   tiDig.bHour  = FromBCD( InBuff((uint)1+ibBlock*30) ); // время/дата часового блока
   tiDig.bDay   = FromBCD( InBuff((uint)2+ibBlock*30) );
@@ -439,7 +447,7 @@ bit     TestDataA_Plus(uchar  ibBlock)
 }
 
 
-bit     ReadDataA_Plus(uchar  ibBlock)
+bool    ReadDataA_Plus(uchar  ibBlock)
 {
   NoShowTime(1);                                        // запрещаем автоматическое отображение времени
   DelayOff();

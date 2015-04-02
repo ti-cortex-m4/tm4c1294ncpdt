@@ -9,10 +9,6 @@ KEY_SEARCH.C
 #include        "../../memory/mem_ports.h"
 #include        "../../display/display.h"
 #include        "../keyboard.h"
-#include        "../../digitals/devices.h"
-#include        "../../digitals/digitals.h"
-#include        "../../digitals/digitals_display.h"
-#include        "../../sensors/device_b.h"
 #include        "../../serial/ports.h"
 #include        "../../serial/ports_stack.h"
 #include        "../../serial/ports_devices.h"
@@ -20,6 +16,12 @@ KEY_SEARCH.C
 #include        "../../serial/ports_modems.h"
 #include        "../../serial/speeds.h"
 #include        "../../serial/speeds_display.h"
+#include        "../../digitals/devices.h"
+#include        "../../digitals/digitals.h"
+#include        "../../digitals/digitals_display.h"
+#include        "../../sensors/device_a.h"
+#include        "../../sensors/device_b.h"
+#include        "../../sensors/device_c.h"
 
 
 

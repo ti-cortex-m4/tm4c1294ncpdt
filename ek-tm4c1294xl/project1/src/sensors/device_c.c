@@ -31,6 +31,7 @@ DEVICE_C.C
 #include        "../special/special.h"
 #include        "../flash/records.h"
 #include        "../energy.h"
+#include        "device_c.h"
 
 
 
