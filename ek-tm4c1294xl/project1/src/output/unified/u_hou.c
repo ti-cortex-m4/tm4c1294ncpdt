@@ -3,18 +3,26 @@ U_HOU.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "rtc.h"
-#include        "timedate.h"
-#include        "queries2.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "general.h"
-#include        "nexttime.h"
-#include        "postinput2.h"
+
+#include        "../../main.h"
+#include        "../../memory/mem_ports.h"
+#include        "../../memory/mem_realtime.h"
+#include        "../../memory/mem_energy.h"
+#include        "../../memory/mem_energy_spec.h"
+#include        "../../include/states.h"
+#include        "../../include/queries_uni.h"
+#include        "../../serial/ports.h"
+#include        "../../realtime/realtime.h"
+#include        "../../time/rtc.h"
+#include        "../../time/timedate.h"
+#include        "../../time/calendar.h"
+#include        "../../special/recalc_def.h"
+#include        "../../groups.h"
+#include        "../../energy.h"
+#include        "../../energy2.h"
+#include        "response_uni.h"
+#include        "u_def.h"
+#include        "u_hou.h"
 
 
 
@@ -45,9 +53,9 @@ uchar   i;
       for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
       {      
         fAlt |= GetDefCan(ibCan-1);
-        InitPush2((uint)(6 + 4*bInBuffD*(ibCan-bInBuff7) + i*4));
+        InitPush((uint)(6 + 4*bInBuffD*(ibCan-bInBuff7) + i*4));
 
-        if (*PGetCanInt(mpwImpHouCan[ PrevSoftHou() ], ibCan-1) == 0xFFFF)
+        if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], ibCan-1) == 0xFFFF)
         {
           PushChar(0xFF);
           PushChar(0xFF);
@@ -56,8 +64,8 @@ uchar   i;
         }
         else
         {
-          reBuffA = *PGetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibCan-1, 2);
-          PushReal();
+          reBuffA = GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibCan-1, 2);
+          PushFloat();
         }
 
         wBuffD += sizeof(real);
@@ -67,7 +75,7 @@ uchar   i;
       if (iwHou > 0) iwHou--; else iwHou = wHOURS-1;
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToHouIndex();
     dwBuffC -= bInBuffB;
     HouIndexToDate(dwBuffC);
@@ -103,10 +111,10 @@ uchar   i;
       for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
       {      
         fAlt |= GetDefCan(ibGrp-1);
-        InitPush2((uint)(6 + 4*bInBuffD*(ibGrp-bInBuff7) + i*4));
+        InitPush((uint)(6 + 4*bInBuffD*(ibGrp-bInBuff7) + i*4));
 
-        reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp-1, 2);
-        PushReal();
+        reBuffA = GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp-1, 2);
+        PushFloat();
 
         wBuffD += sizeof(real);
         if (wBuffD >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
@@ -115,7 +123,7 @@ uchar   i;
       if (iwHou > 0) iwHou--; else iwHou = wHOURS-1;
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToHouIndex();
     dwBuffC -= bInBuffB;
     HouIndexToDate(dwBuffC);
@@ -143,7 +151,7 @@ uchar   i;
     fAlt = 0;
     wBuffD = 0;
 
-    iwHou = PrevDayIndex(bInBuffB);
+    iwHou = GetDayHouIndex(bInBuffB);
     for (i=0; i<48; i++)
     {
       LoadImpHouFree(iwHou);
@@ -151,7 +159,7 @@ uchar   i;
       for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
       {      
         fAlt |= GetDefCan(ibCan-1);
-        InitPush2((uint)(6 + 4*48*(ibCan-bInBuff7) + i*4));
+        InitPush((uint)(6 + 4*48*(ibCan-bInBuff7) + i*4));
 
         if ((bInBuffB == 0) && (i > GetCurrHouIndex()))
         {
@@ -161,7 +169,7 @@ uchar   i;
           PushChar(0xFF);
         }
         else 
-        if (*PGetCanInt(mpwImpHouCan[ PrevSoftHou() ], ibCan-1) == 0xFFFF)
+        if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], ibCan-1) == 0xFFFF)
         {
           PushChar(0xFF);
           PushChar(0xFF);
@@ -170,8 +178,8 @@ uchar   i;
         }
         else
         {
-          reBuffA = *PGetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibCan-1, 2);
-          PushReal();
+          reBuffA = GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibCan-1, 2);
+          PushFloat();
         }
 
         wBuffD += sizeof(real);
@@ -181,7 +189,7 @@ uchar   i;
       if (++iwHou >= wHOURS) iwHou = 0;
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToDayIndex();
     dwBuffC -= bInBuffB;
     DayIndexToDate(dwBuffC);
@@ -209,7 +217,7 @@ uchar   i;
     fAlt = 0;
     wBuffD = 0;
 
-    iwHou = PrevDayIndex(bInBuffB);
+    iwHou = GetDayHouIndex(bInBuffB);
     for (i=0; i<48; i++)
     {
       LoadImpHouFree(iwHou);
@@ -217,7 +225,7 @@ uchar   i;
       for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
       {      
         fAlt |= GetDefCan(ibGrp-1);
-        InitPush2((uint)(6 + 4*48*(ibGrp-bInBuff7) + i*4));
+        InitPush((uint)(6 + 4*48*(ibGrp-bInBuff7) + i*4));
 
         if ((bInBuffB == 0) && (i > GetCurrHouIndex()))
         {
@@ -228,8 +236,8 @@ uchar   i;
         }
         else 
         {
-          reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp-1, 2);
-          PushReal();
+          reBuffA = *GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp-1, 2);
+          PushFloat();
         }
 
         wBuffD += sizeof(real);
@@ -239,7 +247,7 @@ uchar   i;
       if (++iwHou >= wHOURS) iwHou = 0;
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToDayIndex();
     dwBuffC -= bInBuffB;
     DayIndexToDate(dwBuffC);
@@ -249,4 +257,3 @@ uchar   i;
 }
 
 #endif
-*/

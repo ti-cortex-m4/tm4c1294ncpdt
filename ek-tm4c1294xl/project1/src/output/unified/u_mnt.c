@@ -39,11 +39,11 @@ uchar   i;
       for (i=bInBuffB; i<bInBuffB+bInBuffD; i++)
       {
         reBuffA = *PGetCanMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibCan-1, 20);
-        PushReal();
+        PushFloat();
       }
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToMntIndex();
     dwBuffC -= bInBuffB;
     MntIndexToDate(dwBuffC);
@@ -75,11 +75,11 @@ uchar   i;
       for (i=bInBuffB; i<bInBuffB+bInBuffD; i++)
       {
         reBuffA = *PGetGrpMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibGrp-1, 20);
-        PushReal();
+        PushFloat();
       }
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToMntIndex();
     dwBuffC -= bInBuffB;
     MntIndexToDate(dwBuffC);

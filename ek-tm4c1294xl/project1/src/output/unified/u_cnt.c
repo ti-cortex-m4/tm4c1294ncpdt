@@ -50,7 +50,7 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   { 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToMonIndex();
     dwBuffC -= bInBuffB;
     MonIndexToDate(dwBuffC);
@@ -103,7 +103,7 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   { 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
     dwBuffC = DateToMonIndex();
     dwBuffC -= bInBuffB;
     MonIndexToDate(dwBuffC);
@@ -151,10 +151,10 @@ void    GetCntCanAllUni(void)
       tiAlt = mptiEsc_S[ibCan-1];
       Push(&tiAlt, sizeof(time));
       reBuffA = mpreEsc_S[ibCan-1];
-      PushReal();
+      PushFloat();
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
 
     Output2_Code((uint)(4+6)*bInBuff9, ((boDisableEsc3 != TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
   }
@@ -187,11 +187,11 @@ uchar   i;
         tiAlt = mpvaValue51[ibCan-1].tiSelf;
         Push(&tiAlt, sizeof(time));
         reBuffA = mpvaValue51[ibCan-1].vaValue50.mpreSelf[i-1];
-        PushReal();
+        PushFloat();
       }
     }
 
-    tiAlt = *PGetCurrTimeDate();
+    tiAlt = *GetCurrTimeDate();
 
     Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((boExt5Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
   }
