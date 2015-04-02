@@ -19,6 +19,7 @@ RESPONSE_UNI.C
 #include        "u_config.h"
 #include        "u_hou.h"
 #include        "u_energy.h"
+#include        "u_query_crc.h"
 #include        "uni.h"
 
 
@@ -288,11 +289,11 @@ void    RunResponseUNI(void)
       case wUNI_GETEVENTS_MESSAGES:
         GetEventsMessagesUni(); 
         break;
-
+*/
       case wUNI_GETQUERY_CRC:
         GetQueryCRCUni(); 
         break;
-*/
+
       default:
         ShowCommandUni(bSTA_BADCOMMAND);
         Result2(bUNI_BADCOMMAND);

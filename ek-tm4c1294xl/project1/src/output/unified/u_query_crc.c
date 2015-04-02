@@ -3,12 +3,11 @@ U_QUERY_CRC.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "ports.h"
-#include        "ports2.h"
-#include        "postinput.h"
+
+#include        "../../main.h"
+#include        "../../serial/ports.h"
+#include        "../../serial/ports2.h"
+#include        "u_query_crc.h"
 
 
 
@@ -25,4 +24,3 @@ uint    i;
 }
 
 #endif
-*/
