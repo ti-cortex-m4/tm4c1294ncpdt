@@ -99,7 +99,7 @@
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
           }
         }
-        else if (dwBuffC < wLIMITCORRECT_A)                                     // сложная коррекция
+        else if (dwDelta < wLIMITCORRECT_A)                                     // сложная коррекция
         {
           if (boManageTime == TRUE)
           { ShowLo(szManageYes); DelayInf();  MakePause(DEV_MANAGE_A2); }
@@ -346,7 +346,7 @@
 
     case DEV_POSTDATA_A2:                           
       cbRepeat2 = 0;
-      NewBoundsAbs(iwMajor);
+      NewBoundsAbs16(iwMajor);
       if (ReadDataA() == 0)
         DoneProfile();  
       else 
@@ -378,6 +378,7 @@
 
     case DEV_DATA_A2PLUS:
     {
+      uchar i;
       for (i=0; i<bBLOCKS_A; i++)
         if (TestDataA_Plus(i) == 0) break;
 
@@ -395,7 +396,7 @@
       }
       else
       {
-        NewBoundsAbs(iwMajor);
+        NewBoundsAbs16(iwMajor);
         for (i=0; i<bBLOCKS_A; i++)
         { 
           if (ReadDataA_Plus(i) == 0) break;

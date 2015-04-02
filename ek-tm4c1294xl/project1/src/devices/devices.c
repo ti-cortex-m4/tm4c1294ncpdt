@@ -32,6 +32,7 @@ DEVICES.C
 #include        "../sensors/device_a.h"
 #include        "../sensors/device_b.h"
 #include        "../sensors/device_b2.h"
+#include        "../sensors/device_b12.h"
 #include        "../sensors/device_c.h"
 #include        "../serial/ports.h"
 #include        "../serial/ports_modems.h"
@@ -704,7 +705,7 @@ void    RunDevices(void)
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
           }
         }
-        else if (dwBuffC < wLIMITCORRECT_A)                                     // сложная коррекция
+        else if (dwDelta < wLIMITCORRECT_A)                                     // сложная коррекция
         {
           if (boManageTime == TRUE)
           { ShowLo(szManageYes); DelayInf();  MakePause(DEV_MANAGE_A2); }
@@ -951,7 +952,7 @@ void    RunDevices(void)
 
     case DEV_POSTDATA_A2:                           
       cbRepeat2 = 0;
-      NewBoundsAbs(iwMajor);
+      NewBoundsAbs16(iwMajor);
       if (ReadDataA() == 0)
         DoneProfile();  
       else 
@@ -983,6 +984,7 @@ void    RunDevices(void)
 
     case DEV_DATA_A2PLUS:
     {
+      uchar i;
       for (i=0; i<bBLOCKS_A; i++)
         if (TestDataA_Plus(i) == 0) break;
 
@@ -1000,7 +1002,7 @@ void    RunDevices(void)
       }
       else
       {
-        NewBoundsAbs(iwMajor);
+        NewBoundsAbs16(iwMajor);
         for (i=0; i<bBLOCKS_A; i++)
         { 
           if (ReadDataA_Plus(i) == 0) break;

@@ -17,6 +17,8 @@ AUTOMATIC_A.C
 
 
 
+#ifndef SKIP_A
+
 bool    QueryOpenA_Full(uchar  bPercent)
 {
 uchar   i;
@@ -124,3 +126,5 @@ uchar   i;
   ReadEnergyA();
   return(1);
 }
+
+#endif

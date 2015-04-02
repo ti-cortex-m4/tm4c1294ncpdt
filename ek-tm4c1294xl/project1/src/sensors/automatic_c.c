@@ -17,6 +17,8 @@ AUTOMATIC_CS.C
 
 
 
+#ifndef SKIP_C
+
 bool    QueryIdC_Full(void)
 {
   uchar i;
@@ -147,3 +149,5 @@ uchar   i;
   return(1);
 }
 */
+
+#endif
