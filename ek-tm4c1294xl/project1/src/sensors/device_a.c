@@ -18,6 +18,7 @@ DEVICE_A.C
 #include        "../keyboard/key_timedate.h"
 #include        "../time/timedate.h"
 #include        "../time/calendar.h"
+#include        "../time/decret.h"
 #include        "../time/delay.h"
 #include        "../realtime/realtime.h"
 #include        "../serial/ports_stack.h"
@@ -194,8 +195,7 @@ void    QueryManageA(void)
   PushChar( ToBCD(tiCurr.bMonth) );
   PushChar( ToBCD(tiCurr.bYear)  );
 
-  tiAlt = tiCurr;
-  PushChar(Season());
+  PushChar(GetSeasonMD(tiCurr.bMonth, tiCurr.bDay));
 
   QueryIO(1+1+2, 3+8+2);
 }

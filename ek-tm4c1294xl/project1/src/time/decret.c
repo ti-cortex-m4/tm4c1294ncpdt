@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DECRET.C
+DECRET.C // TODO: сохранять количество переходов отдельно + события
 
   Правила перехода на сезонное время
 ------------------------------------------------------------------------------*/
@@ -83,4 +83,15 @@ bool    IsWinter(time  *pti)
 }
 
 
-// TODO: сохранять количество переходов отдельно + события
+// возвращает день недели (1: зимнее время, 0: летнее время)
+uchar   GetSeasonMD(uchar  bMonth, uchar  bDay)
+{
+uint    i;
+
+  i = GetDayIndexMD(bMonth, bDay);
+
+  if (i >= GetDayIndexMD(tiWinter.bMonth, tiWinter.bDay)) return(1);
+  if (i >= GetDayIndexMD(tiSummer.bMonth, tiSummer.bDay)) return(0);
+
+  return(1);
+}
