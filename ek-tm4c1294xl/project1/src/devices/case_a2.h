@@ -12,7 +12,7 @@
     case DEV_OPENCANAL_A2:                     
       if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultA() == 1))
       {
-        if (fCurrCtrlHou == 1)
+        if (fCurrCtrl == 1)
           MakePause(DEV_POSTOPENCANAL_A2);
         else
           MakePause(DEV_POSTCORRECT_A2);  
@@ -33,7 +33,7 @@
 
     case DEV_POSTOPENCANAL_A2:                  
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
+      sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = bMINORREPEATS;
       QueryTimeA();                          
@@ -62,23 +62,32 @@
 
 
     case DEV_POSTTIME_A2:
-      wBuffD  = GetDayIndex();              // количество дней с начала года ведомого СЭТ-4ТМ
-      dwBuffC = GetSecondIndex();           // количество секунд ведомого СЭТ-4ТМ
+    {
+      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);                    // количество дней с начала года ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(&tiAlt);                                 // количество секунд ведомого счётчика
 
-      tiAlt = tiCurr;                       // текущие время/дата сумматора
+      uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
+      ulong dwSecond2 = GetSecondIndex(&tiCurr);                                // количество секунд сумматора
 
-      if (wBuffD != GetDayIndex())          
-      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна 
-      else 
+      if (iwDay1 != iwDay2)
+      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
+      else
       {
-        if (dwBuffC > GetSecondIndex())                                         // необходима коррекция времени ведомого СЭТ-4ТМ назад
-          ShowDeltaNeg();
+        ulong dwDelta;
+        if (dwSecond1 > dwSecond2)
+        {
+          dwDelta = dwSecond1 - dwSecond2;
+          ShowDeltaTimeNegative(ibDig, dwDelta);
+        }
         else
-          ShowDeltaPos();
+        {
+          dwDelta = dwSecond2 - dwSecond1;
+          ShowDeltaTimePositive(ibDig, dwDelta);
+        }
 
-        if (dwBuffC < MinorCorrect())                                           // без коррекции
+        if (dwDelta < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_A2); }     
-        else if (dwBuffC < bMAJORCORRECT_A)                                     // простая коррекция 
+        else if (dwDelta < bMAJORCORRECT_A)                                     // простая коррекция
         {
           if (cbCorrects == 0)
           { ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_A2); }
@@ -90,7 +99,7 @@
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
           }
         }
-        else if (dwBuffC < wLIMITCORRECT_A)                                     // сложная коррекция 
+        else if (dwBuffC < wLIMITCORRECT_A)                                     // сложная коррекция
         {
           if (boManageTime == TRUE)
           { ShowLo(szManageYes); DelayInf();  MakePause(DEV_MANAGE_A2); }
@@ -100,6 +109,7 @@
         else                                                                    
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
       }
+    }
       break;
 
 
@@ -366,7 +376,8 @@
       } 
       break;
 
-    case DEV_DATA_A2PLUS:                   
+    case DEV_DATA_A2PLUS:
+    {
       for (i=0; i<bBLOCKS_A; i++)
         if (TestDataA_Plus(i) == 0) break;
 
@@ -400,6 +411,7 @@
           SetCurr(DEV_HEADER_A2PLUS);
         }
       }
+    }
       break;
 
 #endif
