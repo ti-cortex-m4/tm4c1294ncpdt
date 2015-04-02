@@ -61,7 +61,7 @@ void    QueryOpenA(void)
   PushChar(diCurr.bAddress);         
   PushChar(1);      
 
-  if (boEnableKeys != TRUE)
+  if (boEnblKeys != TRUE)
   {
     PushChar('0');                        
     PushChar('0');         
@@ -72,16 +72,15 @@ void    QueryOpenA(void)
   }
   else
   {
-    uchar  i;
-
-    phT = mpphKeys[ibDig]; fAlt = 0;
-
+    phone ph = mpphKeys[ibDig];
+    bool f = 0;
+    uchar i;
     for (i=0; i<6; i++)
     {
-      if (phT.szNumber[i] == 0) fAlt = 1;
+      if (ph.szNumber[i] == 0) f = 1;
 
-      if (fAlt == 0)
-        PushChar(phT.szNumber[i]);
+      if (f == 0)
+        PushChar(ph.szNumber[i]);
       else  
         PushChar(0);
     }
@@ -147,11 +146,10 @@ uchar   i;
     coEnergy.mpbBuff[2] = PopChar();
     coEnergy.mpbBuff[3] = PopChar();
 
-    dwBuffC = coEnergy.dwBuff;
-    SetCanLong(mpdwChannelsA, i);
+    SetCanLong(mpdwChannelsA, i, &coEnergy.dwBuff);
   }
 
-  coEnergy.dwBuff = *GetCanLong(mpdwChannelsA, diCurr.ibLine);
+  coEnergy.dwBuff = GetCanLong(mpdwChannelsA, diCurr.ibLine);
 }
 
 
@@ -372,10 +370,9 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
 
 
   tiDig = tiDigPrev;                                    // восстанавливаем...
-
   tiDig.bMinute = ibRecord*30;                          // рассчитываем минуты записи из часового блока
 
-  if (SearchDefHouIndex() == 0)                         // выход: часовой блок не имеется в массиве получасового брака
+  if (SearchDefHouIndex(tiDig) == 0)                    // выход: часовой блок не имеется в массиве получасового брака
   {
     if (++ibMinor > 48) return(0);
     if (ibMinor > 2) sprintf(szLo," выключено: %-2u   ",ibMinor);
@@ -400,7 +397,7 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
   for (c=0; c<4; c++)        
     mpwChannels[c] = (PopChar()*0x100 + PopChar()) & 0x7FFF;
 
-  MakePrevHou();
+  MakeSpecial();
   return(MakeStopHou(0));  
 }
 
@@ -455,7 +452,7 @@ bool    TestDataA_Plus(uchar  ibBlock)
 
 bool    ReadDataA_Plus(uchar  ibBlock)
 {
-  NoShowTime(1);                                        // запрещаем автоматическое отображение времени
+  HideCurrentTime(1);                                   // запрещаем автоматическое отображение времени
   DelayOff();
         
   tiDig.bHour  = FromBCD( InBuff((uint)1+ibBlock*30) ); // время/дата часового блока
@@ -490,8 +487,7 @@ uchar   i;
 
   for (i=0; i<4; i++)
   {
-    dwBuffC = *PGetCanLong(mpdwChannelsA, i);
-    SetCanLong(mpdwBaseDig, i);
+    mpdwBaseDig[i] = mpdwChannelsA[i];
   }
 
   MakeCurrent();

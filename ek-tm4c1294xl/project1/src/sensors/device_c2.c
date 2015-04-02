@@ -66,7 +66,7 @@ void    QueryHeaderC0_6(uint  wT)
 
 void    QueryHeaderC1_6(void)
 {
-  sprintf(szLo,"чтение     "); 
+  sprintf(szLo,"чтение     ");
   //x_str("\n QUERY MAIN"); x_inthex(wBaseCurr); x_time_dig();
 
   QueryHeaderC0_6(wBaseCurr);
@@ -75,7 +75,7 @@ void    QueryHeaderC1_6(void)
 
 void    QueryHeaderC2_6(void)
 {
-  sprintf(szLo,"проверка %bu ",ibHouCheck+1); 
+  sprintf(szLo,"проверка %bu ",ibHouCheck+1);
   //x_str("\n QUERY TEST"); x_inthex(wBaseLast); x_time_dig(); 
 
   QueryHeaderC0_6(wBaseLast);
@@ -227,7 +227,7 @@ bit   SaveDataC_7(uchar  i)
   }
 
   tiAlt = tiDig;
-  if (IsDefect(ibDig)) MakePrevHou();  
+  if (IsDefect(ibDig)) MakeSpecial();
   return(MakeStopHou(0)); 
 }
 

@@ -4,8 +4,6 @@ MEM_ENERGY_SPEC.H
 
 ------------------------------------------------------------------------------*/
 
-extern  uint                    iwDigHou;
-
 extern  uint                    mpwImpHouCanSpec[bCANALS];
 
 extern  impulse                 mpimDayCanSpec[bCANALS],

@@ -19,10 +19,18 @@ extern  bool                    fCurrCtrl;
 
 
 
+extern  uint                    iwDigHou;
+
+extern  uint                    cwDigHou;
+
+
+
 extern  uint                    wBaseCurr, wOffsCurr,
                                 wBaseLast;
 
 extern  ulong                   dwBaseCurr;
+
+extern  uchar                   bCurrHouIndex;
 
 
 
