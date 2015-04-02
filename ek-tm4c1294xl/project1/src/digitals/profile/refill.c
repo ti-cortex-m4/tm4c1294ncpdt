@@ -5,7 +5,7 @@ REFILL.C
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
-#include        "../../memory/mem_energy_spec.h"
+#include        "../../memory/mem_profile.h"
 #include        "../../display/display.h"
 #include        "../../keyboard/keyboard.h"
 #include        "../../realtime/realtime_spec.h"

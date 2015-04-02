@@ -49,7 +49,7 @@ uchar   i;
   for (i=0; i<4; i++) 
   {
     reBuffA = GetCanLong(mpdwChannelsA, i) * reBuffB;
-    SetCanReal(mpreChannelsB, i);
+    SetCanReal(mpreChannelsB, i, &reBuffA);
 
     mpboChannelsA[i] = TRUE;     
   }
@@ -1094,6 +1094,7 @@ uchar   i;
 bool    ReadCntMonCanA(uchar  ibMonth)
 { 
 uchar   i,j;
+ulong   dw;
 
   Clear();
   if (ReadKoeffDeviceA() == 0) return(0);
@@ -1106,23 +1107,23 @@ uchar   i,j;
     if (QueryEnergyA_Full2(0x40,98) == 0) return(0);
     for (i=0; i<4; i++)
     {
-      dwBuffC = GetCanLong(mpdwChannelsA, i);
-      SetCanLong(mpdwChannelsB, i);
+      dw = GetCanLong(mpdwChannelsA, i);
+      SetCanLong(mpdwChannelsB, i, &dw);
     }
 
     if (QueryEnergyA_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = GetCanLong(mpdwChannelsA, i);
-      dwBuffC -= GetCanLong(mpdwChannelsB, i);
+      dw  = GetCanLong(mpdwChannelsA, i);
+      dw -= GetCanLong(mpdwChannelsB, i);
 
-      SetCanLong(mpdwChannelsB, i);
+      SetCanLong(mpdwChannelsB, i, &dw);
     }
   }
   else
   {
-    dwBuffC = 0;
-    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i);
+    dw = 0;
+    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i, &dw);
 
     j = ibMonth + 2;
     do
@@ -1130,10 +1131,10 @@ uchar   i,j;
       if (QueryEnergyA_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return(0);             
       for (i=0; i<4; i++)
       {
-        dwBuffC  = GetCanLong(mpdwChannelsA, i);
-        dwBuffC += GetCanLong(mpdwChannelsB, i);
+        dw  = GetCanLong(mpdwChannelsA, i);
+        dw += GetCanLong(mpdwChannelsB, i);
 
-        SetCanLong(mpdwChannelsB, i);
+        SetCanLong(mpdwChannelsB, i, &dw);
       }
     }
     while ((bMONTHS + tiAlt.bMonth - j++) % bMONTHS != 0 );
@@ -1141,10 +1142,10 @@ uchar   i,j;
     if (QueryEnergyA_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = GetCanLong(mpdwChannelsA, i);
-      dwBuffC -= GetCanLong(mpdwChannelsB, i);
+      dw  = GetCanLong(mpdwChannelsA, i);
+      dw -= GetCanLong(mpdwChannelsB, i);
 
-      SetCanLong(mpdwChannelsB, i);
+      SetCanLong(mpdwChannelsB, i, &dw);
     }
   }
 
@@ -1156,7 +1157,7 @@ uchar   i,j;
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
 
     reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB;
-    SetCanReal(mpreChannelsB, i);
+    SetCanReal(mpreChannelsB, i, &reBuffA);
 
     mpboChannelsA[i] = TRUE;     
   }
@@ -1176,7 +1177,7 @@ uchar   i,j;
 bool    ReadCntMonCanB(uchar  ibMonth)
 { 
 uchar   i,j;
-ulong   dwBuffC;
+ulong   dw;
 
   Clear();
   if (ReadKoeffDeviceB_Special() == 0) return(0);
@@ -1189,23 +1190,23 @@ ulong   dwBuffC;
     if (QueryEnergyB_Full2(0x40,98) == 0) return(0);                   
     for (i=0; i<4; i++)
     {
-      dwBuffC = GetCanLong(mpdwChannelsA, i);
-      SetCanLong(mpdwChannelsB, i, &dwBuffC);
+      dw = GetCanLong(mpdwChannelsA, i);
+      SetCanLong(mpdwChannelsB, i, &dw);
     }
 
     if (QueryEnergyB_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = GetCanLong(mpdwChannelsA, i);
-      dwBuffC -= GetCanLong(mpdwChannelsB, i);
+      dw  = GetCanLong(mpdwChannelsA, i);
+      dw -= GetCanLong(mpdwChannelsB, i);
 
-      SetCanLong(mpdwChannelsB, i, &dwBuffC);
+      SetCanLong(mpdwChannelsB, i, &dw);
     }
   }
   else
   {
-    dwBuffC = 0;
-    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i, &dwBuffC);
+    dw = 0;
+    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i, &dw);
 
     j = ibMonth + 2;
     do
@@ -1213,10 +1214,10 @@ ulong   dwBuffC;
       if (QueryEnergyB_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return(0);
       for (i=0; i<4; i++)
       {
-        dwBuffC  = GetCanLong(mpdwChannelsA, i);
-        dwBuffC += GetCanLong(mpdwChannelsB, i);
+        dw  = GetCanLong(mpdwChannelsA, i);
+        dw += GetCanLong(mpdwChannelsB, i);
 
-        SetCanLong(mpdwChannelsB, i, &dwBuffC);
+        SetCanLong(mpdwChannelsB, i, &dw);
       }
     }
     while ((bMONTHS + tiAlt.bMonth - j++) % bMONTHS != 0 );
@@ -1224,10 +1225,10 @@ ulong   dwBuffC;
     if (QueryEnergyB_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dwBuffC  = GetCanLong(mpdwChannelsA, i);
-      dwBuffC -= GetCanLong(mpdwChannelsB, i);
+      dw  = GetCanLong(mpdwChannelsA, i);
+      dw -= GetCanLong(mpdwChannelsB, i);
 
-      SetCanLong(mpdwChannelsB, i, &dwBuffC);
+      SetCanLong(mpdwChannelsB, i, &dw);
     }
   }
 
