@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 DEVICES_INIT.C
-              
+
 
 ------------------------------------------------------------------------------*/
 
@@ -46,6 +46,8 @@ DEVICES_INIT.C
 file const              flSeparateCan = {FLS_SEPARATE_CAN, &boSeparateCan, sizeof(boolean)};
 file const              flShowMessages = {FLS_SHOW_MESSAGES, &boShowMessages, sizeof(boolean)};
 file const              flHideMessages = {FLS_HIDE_MESSAGES, &boHideMessages, sizeof(boolean)};
+file const              flControlTime = {FLS_CONTROL_TIME, &boControlTime, sizeof(boolean)};
+file const              flManageTime = {FLS_MANAGE_TIME, &boManageTime, sizeof(boolean)};
 
 
 
@@ -54,6 +56,8 @@ void    InitDevices(void)
   LoadFile(&flSeparateCan);
   LoadFile(&flShowMessages);
   LoadFile(&flHideMessages);
+  LoadFile(&flControlTime);
+  LoadFile(&flManageTime);
 
 //uchar   i,j;
 //
@@ -102,6 +106,12 @@ void    ResetDevices(void)
 
   boHideMessages = FALSE;
   SaveFile(&flHideMessages);
+
+  boControlTime = TRUE;
+  SaveFile(&flControlTime);
+
+  boManageTime = TRUE;
+  SaveFile(&flManageTime);
 
   ResetMaxRepeats();
   ResetDef();
