@@ -11,6 +11,7 @@ NEXT_SECOND.C
 #include        "../memory/mem_profile.h"
 #include        "../digitals/wait_query.h"
 #include        "../digitals/profile/profile_run.h"
+#include        "../digitals/schedule/ctrl_hours.h"
 #include        "realtime.h"
 
 
@@ -28,7 +29,7 @@ void    NextSecond(void)
       {
         boManualProfile = FALSE;
         fProfile = 0;
-        RunProfile(true/*(boControlTime == TRUE) && (ControlTime() == 1)*/);
+        RunProfile((boControlTime == TRUE) && (ControlTime() == 1));
       }
     }
   }
