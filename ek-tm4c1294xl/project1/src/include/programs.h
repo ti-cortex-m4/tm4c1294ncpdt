@@ -192,6 +192,8 @@ PROGRAMS.H
 #define bSET_ENBL_PROFILE           193
 #define bSET_TIMEOUT_PROFILE        194
 #define bSET_TIMEOUT_CURRENT        195
+#define bSET_CONTROL_TIME           196
+#define bSET_MANAGE_TIME            197
 
 #define bSET_EXTENDED_ESC_S         200
 #define bSET_EXTENDED_ESC_V         201
