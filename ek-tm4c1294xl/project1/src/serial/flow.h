@@ -18,3 +18,5 @@ uchar   IsFlow2(void);
 uchar   IsFlow3(void);
 
 void    CloseFlow(void);
+
+void    RunResponseFlow_All(void);

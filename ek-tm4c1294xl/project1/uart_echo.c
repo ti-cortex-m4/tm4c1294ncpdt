@@ -49,6 +49,7 @@ TODO .C
 #include "src/devices/devices.h"
 #include "src/digitals/phones.h"
 #include "src/serial/speeds.h"
+#include "src/serial/flow.h"
 #include "src/output/unified/uni.h"
 #include "src/output/unified/response_uni.h"
 #include "src/storage/storage.h"
@@ -88,6 +89,7 @@ int main(void) {
 	InitProfile();
 	InitSpeeds();
 	InitUni();
+	InitFlow();
 
 	InitSlide();
 	InitStorage();
@@ -123,5 +125,6 @@ int main(void) {
 
     	RunResponseCRC_All();
     	RunResponseUNI_All();
+    	// TODO RunResponseFlow_All();
     }
 }
