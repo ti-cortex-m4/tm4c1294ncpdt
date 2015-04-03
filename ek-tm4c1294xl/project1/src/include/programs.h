@@ -188,6 +188,10 @@ PROGRAMS.H
 #define bSET_LIMITS32               147
 #define bSET_LIMITS33               142
 
+#define bSET_FLOW_PORT_TO           187
+#define bSET_MAX_FLOW_DELAY         188
+#define bSET_FLOW_PORT_FROM         189
+
 #define bSET_ENBL_CURRENT           192
 #define bSET_ENBL_PROFILE           193
 #define bSET_TIMEOUT_PROFILE        194

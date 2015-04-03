@@ -183,7 +183,10 @@ typedef enum
   FLS_EXTENDED_ESC_V    = FLS_EXTENDED_ESC_U + 1,
   FLS_EXTENDED_ESC_S    = FLS_EXTENDED_ESC_V + 1,
 
-  FLS_END               = FLS_EXTENDED_ESC_S + 1
+  FLS_FLOW_PORT_FROM    = FLS_EXTENDED_ESC_S + 1,
+  FLS_FLOW_PORT_TO      = FLS_FLOW_PORT_FROM + 1,
+
+  FLS_END               = FLS_FLOW_PORT_TO + 1
 } flash;
 
 
