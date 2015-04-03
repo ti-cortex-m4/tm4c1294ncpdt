@@ -14,6 +14,7 @@ RESPONSE_CRC.C
 #include        "../keyboard/keyboard.h"
 #include        "../keyboard/key_timedate.h"
 #include        "../serial/ports.h"
+#include        "../serial/flow.h"
 #include        "response1_crc.h"
 
 
@@ -86,10 +87,10 @@ void    RunResponseCRC(void) {
 
 void    RunResponseCRC_All(void) {
   ibPort = 0;
-  RunResponseCRC();
+  if (IsFlow0() == 0) RunResponseCRC();
 
   ibPort = 1;
-  RunResponseCRC();
+  if (IsFlow1() == 0) RunResponseCRC();
 
   ibPort = 2;
   RunResponseCRC();

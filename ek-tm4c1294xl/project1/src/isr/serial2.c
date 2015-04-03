@@ -188,8 +188,8 @@ uint32_t ui32Status;
 
       if ((mppoPorts[2].enStream == STR_SLAVECRC) || (IsFlow2() == 1))
       {
-        if (mppoPorts[2].enStream != STR_SLAVEUNI)
-          RepeatFlow();
+//        if (mppoPorts[2].enStream != STR_SLAVEUNI)
+//          RepeatFlow();
 
         if (mpSerial[2] == SER_BEGIN)           // приём первого байта в запросе
         {

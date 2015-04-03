@@ -16,6 +16,10 @@ FLOW.C
 #include        "../isr/serial2.h"
 #include        "../isr/serial3.h"
 #include        "../serial/ports.h"
+#include        "../display/display.h"
+#include        "../keyboard/keyboard.h"
+#include        "../keyboard/key_timedate.h"
+#include        "../digitals/digitals_pause.h"
 #include        "../flash/files.h"
 #include        "flow.h"
 
@@ -54,21 +58,25 @@ void    ResetFlow(void)
 
 
 void    RepeatFlow(void) {
+  if (fFlow == 1)
+    cbFlowDelay = cbMaxFlowDelay;
 }
 
 
 
 void    RunFlow(void)
 {
-//  if (bProgram == bGET_ANALYSIS2)
-//  {
-//    sprintf(szHi,"Порт %bu: лимит   ",ibPortFrom+1);
-//    Clear();
-//    NoShowTime(0);
-//  }
-//
-//  cbFlowDelay = cbMaxFlowDelay;
-//  fFlow = 1;
+  if (wProgram == bTEST_FLOW)
+  {
+    ShowHi(szClear);
+    sprintf(szHi,"Порт %u: лимит",ibPortFrom+1);
+
+    Clear();
+    HideCurrentTime(0);
+  }
+
+  cbFlowDelay = cbMaxFlowDelay;
+  fFlow = 1;
 }
 
 
@@ -86,36 +94,46 @@ void    RunFlow1(void)
 }
 
 
-uchar   IsFlow0(void) {
-  return(0);
+bool    IsFlow0(void) {
+  return (fFlow == 1) && (ibPortFrom == 0);
 }
 
 
-uchar   IsFlow1(void) {
-  return(0);
+bool    IsFlow1(void) {
+  return (fFlow == 1) && (ibPortFrom == 1);
 }
 
 
-uchar   IsFlow2(void) {
-  return(0);
+bool    IsFlow2(void) {
+  return false;
 }
 
 
-uchar   IsFlow3(void) {
-  return(0);
+bool    IsFlow3(void) {
+  return false;
 }
 
 
 
 void    CloseFlow(void)
 {
-//  if (fFlow == 1)
-//  {
-//    cbFlowDelay = 0;
-//    fFlow = 0;
-//
-//    NextPause(); // внимание !
-//  }
+  if (fFlow == 1)
+  {
+    cbFlowDelay = 0;
+    fFlow = 0;
+
+    NextPause(); // внимание !
+  }
+}
+
+
+
+void    DelayFlow_1Hz(void)
+{
+  if (cbFlowDelay == 0)
+    CloseFlow();
+  else
+    cbFlowDelay--;
 }
 
 
