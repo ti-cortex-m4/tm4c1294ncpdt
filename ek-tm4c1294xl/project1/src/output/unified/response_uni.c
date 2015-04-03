@@ -12,6 +12,7 @@ RESPONSE_UNI.C
 #include        "../../keyboard/key_timedate.h"
 #include        "../../display/display.h"
 #include        "../../serial/ports.h"
+#include        "../../serial/flow.h"
 #include        "../../include/states.h"
 #include        "../../include/queries_uni.h"
 #include        "../../time/rtc.h"
@@ -306,10 +307,10 @@ void    RunResponseUNI(void)
 void    RunResponseUNI_All(void)
 {
   ibPort = 0;
-  /*if (IsFlow0() == 0)*/ RunResponseUNI();
+  if (IsFlow0() == 0) RunResponseUNI();
 
   ibPort = 1;
-  /*if (IsFlow1() == 0)*/ RunResponseUNI();
+  if (IsFlow1() == 0) RunResponseUNI();
 
   ibPort = 2;
   RunResponseUNI();
