@@ -47,6 +47,10 @@ extern  boolean                 boShowMessages;
 
 extern  boolean                 boHideMessages;
 
+extern  boolean                 boControlTime;
+
+extern  boolean                 boManageTime;
+
 
 
 extern  uchar                   mpboReadyCan[bCANALS];
