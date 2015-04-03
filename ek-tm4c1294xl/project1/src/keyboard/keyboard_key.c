@@ -32,6 +32,8 @@ KEYBOARD_KEY.C
 #include        "digitals/profile/key_run_profile.h"
 #include        "digitals/key_show_messages.h"
 #include        "digitals/key_separate_can.h"
+#include        "digitals/profile/key_control_time.h"
+#include        "digitals/profile/key_manage_time.h"
 #include        "digitals/profile/key_limits.h"
 #include        "digitals/profile/key_limits2.h"
 #include        "digitals/profile/key_limits30.h"
@@ -156,6 +158,8 @@ void    Keyboard_Key(void)
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
+      case bSET_CONTROL_TIME:   key_SetControlTime();   break;
+      case bSET_MANAGE_TIME:    key_SetmanageTime();    break;
 
       case bSET_EXTENDED_ESC_S: key_SetExtendedEscS();  break;
       case bSET_EXTENDED_ESC_V: key_SetExtendedEscV();  break;
@@ -276,6 +280,8 @@ void    Keyboard_Key(void)
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
+      case bSET_CONTROL_TIME:   key_SetControlTime();   break;
+      case bSET_MANAGE_TIME:    key_SetmanageTime();    break;
 
       case bSET_EXTENDED_ESC_S: key_SetExtendedEscS();  break;
       case bSET_EXTENDED_ESC_V: key_SetExtendedEscV();  break;
@@ -481,6 +487,8 @@ void    Keyboard_Key(void)
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
+      case bSET_CONTROL_TIME:   key_SetControlTime();   break;
+      case bSET_MANAGE_TIME:    key_SetmanageTime();    break;
 
       case bSET_EXTENDED_ESC_S: key_SetExtendedEscS();  break;
       case bSET_EXTENDED_ESC_V: key_SetExtendedEscV();  break;
