@@ -61,7 +61,7 @@ uint    i;
   for (i=0; i<wPARAMS; i++) 
   {
     mpreParamDiv[i] = 1;
-    mpboEnblPar[i] = boTrue;
+    mpboEnblPar[i] = TRUE;
   }
 }
 

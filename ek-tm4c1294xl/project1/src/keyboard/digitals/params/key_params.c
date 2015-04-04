@@ -113,7 +113,7 @@ void    key_SetParams(void)
         if (StreamPortCan(di.ibPort,iwPrm) == 1) 
         {
           enKeyboard = KBD_INPUT3;
-          ShowHi(szParPhone);
+          ShowHi(szPhone);
           szLo[1] = '.';
         }
         else Beep();
@@ -127,7 +127,7 @@ void    key_SetParams(void)
         if (StreamPortPhoneCan(di.ibPort,di.ibPhone,iwPrm) == 1) 
         {
           enKeyboard = KBD_INPUT4;
-          ShowHi(szParDevice);
+          ShowHi(szDevice);
           szLo[4] = '.';
         }
         else Beep();
@@ -154,7 +154,7 @@ void    key_SetParams(void)
         else
         {
           enKeyboard = KBD_INPUT5;
-          ShowHi(szParAddress);
+          ShowHi(szAddress);
           szLo[7] = '.';
         }
       }
@@ -169,7 +169,7 @@ void    key_SetParams(void)
         else
         {
           enKeyboard = KBD_INPUT6;
-          ShowHi(szParLine);
+          ShowHi(szLine);
 
           szLo[11] = '.';
         }
@@ -187,8 +187,8 @@ void    key_SetParams(void)
       if (enGlobal != GLB_WORK)
       {
         enKeyboard = KBD_INPUT2;
-        ShowHi(szParPort);
-        ShowLo(szMaskParams);
+        ShowHi(szPort);
+        ShowLo(szMask);
       }
     }
 

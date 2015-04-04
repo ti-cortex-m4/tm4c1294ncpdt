@@ -89,7 +89,7 @@ uchar   i;
     QueryOpenA();
 
     if (Input() != SER_GOODCHECK) return(0);
-    boBeginParam = boTrue;
+    boBeginParam = TRUE;
   }
 
   ShowPercent(100);
@@ -208,7 +208,7 @@ uchar   i;
     QueryOpenB();
 
     if (Input() != SER_GOODCHECK) return(0);
-    boBeginParam = boTrue;
+    boBeginParam = TRUE;
   }
 
   ShowPercent(100);
@@ -325,7 +325,7 @@ bit     ReadParamC(void)
     QueryOpenC();
 
     if (RevInput() != SER_GOODCHECK) return(0);
-    boBeginParam = boTrue;
+    boBeginParam = TRUE;
   }
 
   ShowPercent(100);
@@ -480,7 +480,7 @@ bit     ReadParamG(void)
 
     if (CodInput() != SER_GOODCHECK) return(0);
 
-    boBeginParam = boTrue;
+    boBeginParam = TRUE;
   }
 
   switch (diCurr.ibLine)
@@ -654,7 +654,7 @@ bit     ReadParamP(void)
     if (ElsInput(0) != SER_GOODCHECK) return(0); 
 
     QueryCloseP();
-    boBeginParam = boTrue;
+    boBeginParam = TRUE;
   }
 
   switch (diCurr.ibLine)
@@ -758,7 +758,7 @@ bit     ReadParamT(void)
     if (TxtInput() != SER_GOODCHECK) return(0);
     ReadParamT3();
 
-    boBeginParam = boTrue;
+    boBeginParam = TRUE;
   }
 
   switch (diCurr.ibLine)
@@ -867,7 +867,7 @@ bit     ReadParamU(void)
     ReadParamU4();
 
 
-    boBeginParam = boTrue;
+    boBeginParam = TRUE;
   }
 
   switch (diCurr.ibLine)
@@ -955,7 +955,7 @@ void    MakeExtended2(void)
 uchar   i;
 uint    j;
 
-  if (boEnableParam == boTrue)
+  if (boEnableParam == TRUE)
   {
     ShowHi(szDirectParam); Clear();
     sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
@@ -1006,7 +1006,7 @@ uint    j;
 
 void    MakeParamDividers(uint  iwPrm)
 {
-  reBuffA = 1;
+  real re = 1;
 
   if (GetParamDevice(iwPrm) == 1)
   {
@@ -1025,14 +1025,14 @@ void    MakeParamDividers(uint  iwPrm)
       case PAR_S  :
       case PAR_S1 :
       case PAR_S2 :
-      case PAR_S3 : reBuffA = 1000; break;
+      case PAR_S3 : re = 1000; break;
 
       case PAR_I  : 
       case PAR_I1 : 
       case PAR_I2 : 
-      case PAR_I3 : reBuffA = 10;   break;
+      case PAR_I3 : re = 10;   break;
 
-      default:      reBuffA = 100;  break;
+      default:      re = 100;  break;
     }
   }
   else if ((GetParamDevice(iwPrm) == 2) ||
@@ -1045,16 +1045,16 @@ void    MakeParamDividers(uint  iwPrm)
 
       case PAR_I1 : 
       case PAR_I2 : 
-      case PAR_I3 : reBuffA = 1000; break;
+      case PAR_I3 : re = 1000; break;
 
       case PAR_U  : mpboEnblPar[iwPrm] = FALSE; break;
 
       case PAR_C  :
       case PAR_C1 :
       case PAR_C2 :
-      case PAR_C3 : reBuffA = 1000; break;
+      case PAR_C3 : re = 1000; break;
 
-      default:      reBuffA = 100;  break;
+      default:      re = 100;  break;
     }
   }
   else if (GetParamDevice(iwPrm) == 3)
@@ -1074,7 +1074,7 @@ void    MakeParamDividers(uint  iwPrm)
       case PAR_F2 :
       case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
 
-      default:      reBuffA = 1;    break;
+      default:      re = 1;    break;
     }
   }
   else if (GetParamDevice(iwPrm) == 9)
@@ -1092,7 +1092,7 @@ void    MakeParamDividers(uint  iwPrm)
 
       case PAR_F  : mpboEnblPar[iwPrm] = FALSE; break;
 
-      default:      reBuffA = 1;    break;
+      default:      re = 1;    break;
     }
   }
   else if (GetParamDevice(iwPrm) == 18)
@@ -1101,8 +1101,8 @@ void    MakeParamDividers(uint  iwPrm)
       mpboEnblPar[iwPrm] = FALSE;
     else
     {
-      reBuffA = 1;
-      mpboEnblPar[iwPrm] = boTrue;
+      re = 1;
+      mpboEnblPar[iwPrm] = TRUE;
     }
   }
   else if (GetParamDevice(iwPrm) == 21)
@@ -1122,7 +1122,7 @@ void    MakeParamDividers(uint  iwPrm)
       case PAR_F2 : 
       case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
 
-      default:      reBuffA = 1;    break;
+      default:      re = 1;    break;
     }
   }
   else if (GetParamDevice(iwPrm) == 25)
@@ -1147,7 +1147,7 @@ void    MakeParamDividers(uint  iwPrm)
       case PAR_F2 : 
       case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
 
-      default:      reBuffA = 1;    break;
+      default:      re = 1;    break;
     }
   }
   else if (GetParamDevice(iwPrm) == 26)
@@ -1179,11 +1179,11 @@ void    MakeParamDividers(uint  iwPrm)
       case PAR_F2 : 
       case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
 
-      default:      reBuffA = 1;    break;
+      default:      re = 1;    break;
     }
   }
 
-  mpreParamDiv[iwPrm] = reBuffA;
+  mpreParamDiv[iwPrm] = re;
 }
 
 /*
