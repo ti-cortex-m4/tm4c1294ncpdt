@@ -70,6 +70,16 @@ SYSTEM.H
 #define bTARIFFSMODES	  5
 
 
+// количество записей в таблице параметров
+#define wPARAMS         500
+
+// количество параметров
+#define bPARAM_BLOCK    (4*7+1)
+
+// количество временных блоков
+#define wTIMES          (uint)(10*48)
+
+
 // мажорная версия прибора
 #define bMAXVERSION     4
 
