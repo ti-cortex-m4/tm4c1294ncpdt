@@ -16,6 +16,7 @@ RESPONSE1_CRC.C
 #include        "out_tariffs.h"
 #include        "out_digitals.h"
 #include        "out_flash.h"
+#include        "out_transit.h"
 #include        "out_console.h"
 #include        "out_config.h"
 #include        "response_crc.h"
@@ -77,6 +78,11 @@ void    Response1_CRC(void)
       case bINQ_SETDIGITAL: OutSetDigital(); break;
 
       case bINQ_GETTARIFFSDAY: OutGetTariffsDay(); break;
+
+      case bINQ_TRANSIT_EXECUTE1: SafeTransitExecute();  break;
+      case bINQ_TRANSIT_EXECUTE2: SafeTransitExecute2(); break;
+      case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
+      case bINQ_TRANSIT_EXECUTE4: SafeTransitExecute4(); break;
 
       case bINQ_GETFLASHPAGE:
         OutFlashPage();

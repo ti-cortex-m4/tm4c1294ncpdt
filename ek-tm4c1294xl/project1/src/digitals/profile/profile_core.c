@@ -42,7 +42,7 @@ void    ResetProfile(void)
 
   SaveFile(&flEnblCan);
 
-  boEnblCurrent = TRUE;
+  boEnblCurrent = FALSE;
   SaveFile(&flEnblCurrent);
 
   boEnblProfile = TRUE;

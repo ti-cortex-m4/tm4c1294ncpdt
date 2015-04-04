@@ -4,6 +4,12 @@ FLOW.H
 
 ------------------------------------------------------------------------------*/
 
+extern  file const              flFlowPortFrom;
+extern  file const              flMaxFlowDelay;
+extern  file const              flFlowPortTo;
+
+
+
 void    InitFlow(void);
 void    ResetFlow(void);
 

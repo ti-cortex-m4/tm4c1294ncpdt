@@ -1,8 +1,7 @@
 /*------------------------------------------------------------------------------
-KEY_FLOW.H
+KEY_MAX_FLOW_DELAY.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_PortFrom(void);
-void    key_PortTo(void);
+void    key_SetMaxFlowDelay(void);

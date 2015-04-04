@@ -49,6 +49,7 @@ DEVICES.C
 #include        "devices_postinput.h"
 #include        "devices_pause.h"
 #include        "devices_init.h"
+#include        "extended_1.h"
 #include        "devices.h"
 
 
@@ -441,16 +442,16 @@ void    RunDevices(void)
       break;
 
     case DEV_MODEM_POSTCONNECT:
-/*
+
       if (exExtended == EXT_PROFILE_30MIN)
       {
         MakeExtended1();
-        MakeExtended4();
-        MakeExtended5();
-        MakeExtended3();
-        MakeExtended4T();
+//        MakeExtended4();
+//        MakeExtended5();
+//        MakeExtended3();
+//        MakeExtended4T();
       }
-
+/*
       if ((exExtended == EXT_PROFILE_30MIN) && (boQuickParam == FALSE))
         MakeExtended2();
 

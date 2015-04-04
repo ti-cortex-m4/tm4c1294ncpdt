@@ -1,8 +1,10 @@
 /*------------------------------------------------------------------------------
-KEY_FLOW.H
+OUT_TRANSIT.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_PortFrom(void);
-void    key_PortTo(void);
+void    SafeTransitExecute1(void);
+void    SafeTransitExecute2(void);
+//void    SafeTransitExecute3(void);
+void    SafeTransitExecute4(void);
