@@ -7,7 +7,9 @@ FLASH.H
 #ifndef __FLASH
 #define __FLASH
 
+#include        "../memory/mem_digitals0.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_params.h"
 #include        "../memory/mem_phones.h"
 #include        "../memory/mem_uni.h"
 
@@ -131,7 +133,7 @@ typedef enum
 
   FLS_DIGITALS          = FLS_MINOR_IN_DELAY + 1,
 
-  FLS_ENBL_CAN          = FLS_DIGITALS + sizeof(digital)*bCANALS/wFREEPAGE_SIZE + 1,
+  FLS_ENBL_CAN          = FLS_DIGITALS + sizeof(mpdiDigital)/wFREEPAGE_SIZE + 1,
 
   FLS_ENBL_PRT_HOU      = FLS_ENBL_CAN + 1,
   FLS_CTRL_HOU          = FLS_ENBL_PRT_HOU + 1,
@@ -189,8 +191,9 @@ typedef enum
 
   FLS_ENBL_PARAMS       = FLS_FLOW_PORT_TO + 1,
   FLS_MNT_PARAMS        = FLS_ENBL_PARAMS + 1,
+  FLS_PARAMS            = FLS_MNT_PARAMS + 1,
 
-  FLS_END               = FLS_MNT_PARAMS + 1
+  FLS_END               = FLS_PARAMS + sizeof(mpdiParam)/wFREEPAGE_SIZE + 1
 } flash;
 
 
