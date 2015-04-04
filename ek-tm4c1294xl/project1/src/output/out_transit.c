@@ -12,6 +12,7 @@ OUT_TRANSIT.C
 #include        "../serial/ports_devices.h"
 #include        "../serial/save_in_buff.h"
 #include        "../serial/speeds.h"
+#include        "../hardware/watchdog.h"
 
 
 
@@ -35,7 +36,7 @@ uchar   j;
 
     ibPort = bInBuff5;
 
-    InitPush();
+    InitPush(0);
     for (i=0; i<iwInBuffSave-10; i++) PushChar(mpbInBuffSave[i+8]);
     Query(bInBuff6+bInBuff7*0x100, iwInBuffSave-10, 1);
 
@@ -215,7 +216,7 @@ uchar   j;
 
     ibPort = bInBuff5;
 
-    InitPush();
+    InitPush(0);
     for (i=0; i<iwInBuffSave-10; i++) PushChar(mpbInBuffSave[i+8]);
     Query(bInBuff6+bInBuff7*0x100, iwInBuffSave-10, 1);
 

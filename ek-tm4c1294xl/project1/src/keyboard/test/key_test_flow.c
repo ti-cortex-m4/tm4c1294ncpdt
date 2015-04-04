@@ -37,7 +37,7 @@ void    auto_TestFlow(void)
   {
     Hi(14, cbFlowDelay);
 
-    if (ibPortFrom == 0)
+    if (ibFlowPortFrom == 0)
     {
       Lo(0,  cbInFlow0);
       Lo(3,  iwInFlow0 / 0x100);
@@ -48,7 +48,7 @@ void    auto_TestFlow(void)
       Lo(14, iwOutFlow0 % 0x100);
     }
 
-    if (ibPortFrom == 1)
+    if (ibFlowPortFrom == 1)
     {
       Lo(0,  cbInFlow1);
       Lo(3,  iwInFlow1 / 0x100);
