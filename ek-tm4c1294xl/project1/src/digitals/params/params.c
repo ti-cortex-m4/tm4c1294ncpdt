@@ -14,12 +14,16 @@ PARAMS.C
 file const              flEnblParams = {FLS_ENBL_PARAMS, &boEnblParams, sizeof(boolean)};
 file const              flMntParams = {FLS_MNT_PARAMS, &boMntParams, sizeof(boolean)};
 
+file const              flParams = {FLS_PARAMS, &mpdiParam, sizeof(mpdiParam)};
+
 
 
 void    InitParams(void)
 {
   LoadFile(&flEnblParams);
   LoadFile(&flMntParams);
+
+  LoadFile(&flParams);
 }
 
 
@@ -30,6 +34,9 @@ void    ResetParams(void)
 
   boMntParams = FALSE;
   SaveFile(&flMntParams);
+
+  memset(&mpdiParam, 0, sizeof(mpdiParam));
+  SaveFile(&flParams);
 }
 
 /*
@@ -129,7 +136,7 @@ bool    TrueParamLine(uchar  ibLine)
 void    SetParam(uint  iwPrm, digital  *pdi)
 {
   mpdiParam[iwPrm] = *pdi;
-//  SaveFile(&flDigitals);
+  SaveFile(&flParams);
 }
 
 

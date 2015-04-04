@@ -13,7 +13,7 @@ DIGITALS.C
 
 
 
-file const              flDigitals = {FLS_DIGITALS, &mpdiDigital, sizeof(digital)*bCANALS};
+file const              flDigitals = {FLS_DIGITALS, &mpdiDigital, sizeof(mpdiDigital)};
 
 file const              flEnblKeys = {FLS_ENBL_KEYS, &boEnblKeys, sizeof(boolean)};
 file const              flKeys = {FLS_KEYS, &mpphKeys, sizeof(mpphKeys)};

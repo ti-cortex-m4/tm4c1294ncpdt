@@ -11,6 +11,8 @@ PARAMS.C
 extern  file const              flEnblParams;
 extern  file const              flMntParams;
 
+extern  file const              flParams;
+
 
 
 void    InitParams(void);
