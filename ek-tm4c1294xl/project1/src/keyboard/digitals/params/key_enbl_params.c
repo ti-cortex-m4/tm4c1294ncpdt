@@ -1,25 +1,22 @@
 /*------------------------------------------------------------------------------
-KEY_STRICT_UNI.C
+KEY_ENBL_PARAMS.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../../output/unified/uni.h"
-#include        "../key_flag.h"
+
+#include        "../../../main.h"
+#include        "../../../digitals/params/params.h"
+#include        "../../key_flag.h"
 
 
-//                                        0123456789ABCDEF
-static char const       szStrictUni1[] = "   Расширение   ",
-                        szStrictUni2[] = "протокола УПИО ?";
+//                                         0123456789ABCDEF
+static char const       szEnblParams[]  = "Параметры ?     ";
 
-static char const       *pszStrictUni[] = { szStrictUni1, szStrictUni2, "" };
+static char const       *pszEnblParams[] = { szEnblParams, "" };
 
 
 
-void    key_SetStrictUni(void)
+void    key_SetEnblParams(void)
 {
-  key_SetFlag(&flStrictUni, pszStrictUni);
+  key_SetFlag(&flEnblParams, pszEnblParams);
 }
-*/
