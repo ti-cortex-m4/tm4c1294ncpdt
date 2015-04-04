@@ -1,8 +1,36 @@
 /*------------------------------------------------------------------------------
 PARAMS.C
 
-
+ ћгновенные параметры
 ------------------------------------------------------------------------------*/
+
+#include    "../../main.h"
+#include    "../../flash/files.h"
+#include    "params.h"
+
+
+
+file const              flEnblParams = {FLS_ENBL_PARAMS, &boEnblParams, sizeof(boolean)};
+file const              flMntParams = {FLS_MNT_PARAMS, &boMntParams, sizeof(boolean)};
+
+
+
+void    InitParams(void)
+{
+  LoadFile(&flEnblParams);
+  LoadFile(&flMntParams);
+}
+
+
+void    ResetParams(void)
+{
+  boEnblParams = FALSE;
+  SaveFile(&flEnblParams);
+
+  boMntParams = FALSE;
+  SaveFile(&flMntParams);
+}
+
 /*
 #include        "main.h"
 #include        "xdata.h"

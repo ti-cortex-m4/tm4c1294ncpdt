@@ -1,7 +1,8 @@
 /*------------------------------------------------------------------------------
-KEY_ENBL_PARAMS.H
+CONSOLE.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetEnblParams(void);
+#include        "keyboard/keyboard.h"
+#include        "display/display.h"

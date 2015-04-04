@@ -3,6 +3,20 @@ PARAMS.C
 
 
 ------------------------------------------------------------------------------*/
+
+#include    "../../memory/mem_params.h"
+
+
+
+extern  file const              flEnblParams;
+extern  file const              flMntParams;
+
+
+
+void    InitParams(void);
+void    ResetParams(void);
+
+
 /*
 #include        "main.h"
 

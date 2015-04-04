@@ -85,6 +85,8 @@ KEYBOARD_KEY.C
 #include        "digitals/key_extended_esc.h"
 #include        "serial/key_flow.h"
 #include        "serial/key_max_flow_delay.h"
+#include        "digitals/params/key_enbl_params.h"
+#include        "digitals/params/key_mnt_params.h"
 
 
 
@@ -149,8 +151,8 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-//      case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
-//      case bSET_MNT_PARAMS:     key_SeQuickParams();    break;
+      case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
+      case bSET_MNT_PARAMS:     key_SetMntParams();     break;
 //      case bSET_PARAMS:         key_SetParams();        break;
 //      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
 //      case bGET_PARAMS_CURR:
@@ -283,8 +285,8 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-//      case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
-//      case bSET_MNT_PARAMS:     key_SeQuickParams();    break;
+      case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
+      case bSET_MNT_PARAMS:     key_SetMntParams();     break;
 //      case bSET_PARAMS:         key_SetParams();        break;
 //      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
 //      case bGET_PARAMS_CURR:
@@ -502,8 +504,8 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-//      case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
-//      case bSET_QUICK_PARAMS:   key_SeQuickParams();    break;
+      case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
+      case bSET_MNT_PARAMS:     key_SetMntParams();     break;
 //      case bSET_PARAMS:         key_SetParams();        break;
 //      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
 //      case bGET_PARAMS_CURR:

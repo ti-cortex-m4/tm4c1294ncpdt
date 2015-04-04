@@ -13,6 +13,7 @@ KEY_RESET.C
 #include        "../tariffs/relaxs.h"
 #include        "../tariffs/gaps.h"
 #include        "../digitals/digitals.h"
+#include        "../digitals/params/params.h"
 #include        "../digitals/profile/profile_core.h"
 #include        "../digitals/phones.h"
 #include        "../devices/devices_init.h"
@@ -106,6 +107,7 @@ void    key_SetReset(void)
           ResetRelaxs();
           ResetGaps();
           ResetDigitals();
+          ResetParams();
           ResetPhones();
           ResetProfile();
           ResetSpeeds();
