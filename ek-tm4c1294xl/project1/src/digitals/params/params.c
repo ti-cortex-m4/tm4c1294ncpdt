@@ -5,6 +5,7 @@ PARAMS.C
 ------------------------------------------------------------------------------*/
 
 #include    "../../main.h"
+#include    "../../display/display.h"
 #include    "../../flash/files.h"
 #include    "params.h"
 
@@ -66,9 +67,9 @@ uint    i;
 
 
 
-void    LoadCurrParam(uint  iwPar)
+void    LoadCurrParam(uint  iwPrm)
 {
-  diCurr = mpdiParam[ iwPar ];
+  diCurr = mpdiParam[ iwPrm ];
 }
 
 
@@ -124,57 +125,59 @@ bit     TrueParamLine(uchar  ibLine)
     default:      return(0);
    }
 }
-
-
-
-void    SetParam(uint  iwPar)
-{
-  mpdiParam[iwPar] = diT;
-}
-
-
-
-uchar   GetParamPort(uint  iwPar)
-{
-  return( mpdiParam[iwPar].ibPort );
-}
-
-
-uchar   GetParamPhone(uint  iwPar)
-{
-  return( mpdiParam[iwPar].ibPhone );
-}
-
-
-uchar   GetParamDevice(uint  iwPar)
-{
-  return( mpdiParam[iwPar].bDevice );
-}
-
-
-uchar   GetParamAddress(uint  iwPar)
-{
-  return( mpdiParam[iwPar].bAddress );
-}
-
-
-uchar   GetParamLine(uint  iwPar)
-{
-  return( mpdiParam[iwPar].ibLine );
-}
-
-
-
-void    ShowParam(uint  iwPar)
-{
-  sprintf(szLo,"%1bu.%02bu.%02bu.%03bu.%02bu  ",
-               GetParamPort(iwPar)+1,
-               GetParamPhone(iwPar),
-               GetParamDevice(iwPar),
-               GetParamAddress(iwPar),
-               GetParamLine(iwPar));
-
-  sprintf(szHi+13,"%03u",iwPar+1);
-  (mpboEnblPar[iwPar] == boTrue) ? (szHi[12] = '+') : (szHi[12] = '-');
-}
 */
+
+
+void    SetParam(uint  iwPrm, digital  *pdi)
+{
+  mpdiParam[iwPrm] = *pdi;
+//  SaveFile(&flDigitals);
+}
+
+
+
+uchar   GetParamPort(uint  iwPrm)
+{
+  return( mpdiParam[iwPrm].ibPort );
+}
+
+
+uchar   GetParamPhone(uint  iwPrm)
+{
+  return( mpdiParam[iwPrm].ibPhone );
+}
+
+
+uchar   GetParamDevice(uint  iwPrm)
+{
+  return( mpdiParam[iwPrm].bDevice );
+}
+
+
+uchar   GetParamAddress(uint  iwPrm)
+{
+  return( mpdiParam[iwPrm].bAddress );
+}
+
+
+uchar   GetParamLine(uint  iwPrm)
+{
+  return( mpdiParam[iwPrm].ibLine );
+}
+
+
+
+void    ShowParam(uint  iwPrm)
+{
+  Clear();
+  sprintf(szLo,"%1bu.%02bu.%02bu.%03bu.%02bu",
+               GetParamPort(iwPrm)+1,
+               GetParamPhone(iwPrm),
+               GetParamDevice(iwPrm),
+               GetParamAddress(iwPrm),
+               GetParamLine(iwPrm));
+
+  sprintf(szHi+13,"%03u",iwPrm+1);
+  (mpboEnblPar[iwPrm] == TRUE) ? (szHi[12] = '+') : (szHi[12] = '-');
+}
+

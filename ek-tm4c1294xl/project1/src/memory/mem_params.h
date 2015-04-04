@@ -7,9 +7,9 @@ MEM_PARAMS.H
 extern  boolean                 boEnblParams;
 
 extern  boolean                 boMntParams;
-/*
-extern  digital                 mpdiParam[wPARAMS];
 
+extern  digital                 mpdiParam[wPARAMS];
+/*
 extern  real                    mpreParamDiv[wPARAMS];
 
 extern  boolean                 mpboEnblPar[wPARAMS];
