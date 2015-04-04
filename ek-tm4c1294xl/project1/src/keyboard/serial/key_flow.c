@@ -20,7 +20,7 @@ static char const       szPortFrom[]     = "Транзит: запуск ",
 
 
 
-void    key_PortFrom(void)
+void    key_FlowPortFrom(void)
 {
   if (bKey == bKEY_ENTER)
   {                                           
@@ -63,7 +63,7 @@ void    key_PortFrom(void)
 
 
 
-void    key_PortTo(void)
+void    key_FlowPortTo(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -83,6 +83,8 @@ void    key_PortTo(void)
       if ((ibX == 3) || (ibX == 4))
       {
         ibFlowPortTo = ibX;
+
+        SaveFile(&flFlowPortTo);
         ShowChar(ibFlowPortTo);  
       }
       else 
