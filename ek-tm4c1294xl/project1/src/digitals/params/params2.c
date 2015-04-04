@@ -5,6 +5,7 @@ DEVICES_FAR.C
 ------------------------------------------------------------------------------*/
 
 #include    "../../main.h"
+#include    "params.h"
 
 
 /*
@@ -82,7 +83,7 @@ uchar   i;
 
   Clear();
 
-  if (boBeginParam == boFalse)
+  if (boBeginParam == FALSE)
   {
     DelayOff();
     QueryOpenA();
@@ -201,7 +202,7 @@ uchar   i;
 
   Clear();
 
-  if (boBeginParam == boFalse)
+  if (boBeginParam == FALSE)
   {
     DelayOff();
     QueryOpenB();
@@ -273,7 +274,7 @@ uchar   i;
 
     case PAR_I1 : 
     case PAR_I2 : 
-    case PAR_I3 : if (boFixParamBugs != boFalse) reBuffA *= 1000; break;
+    case PAR_I3 : if (boFixParamBugs != FALSE) reBuffA *= 1000; break;
   }
 
   return(1);
@@ -318,7 +319,7 @@ bit     ReadParamC(void)
 {
   Clear();
 
-  if (boBeginParam == boFalse)
+  if (boBeginParam == FALSE)
   {
     DelayOff();
     QueryOpenC();
@@ -403,12 +404,12 @@ bit     ReadParamC(void)
     case PAR_Q  :
     case PAR_Q1 :
     case PAR_Q2 :
-    case PAR_Q3 : if (boFixParamBugs == boFalse) reBuffA /= 1000; break;
+    case PAR_Q3 : if (boFixParamBugs == FALSE) reBuffA /= 1000; break;
 
     case PAR_I  :
     case PAR_I1 :
     case PAR_I2 :
-    case PAR_I3 : if (boFixParamBugs != boFalse) reBuffA *= 1000; break;
+    case PAR_I3 : if (boFixParamBugs != FALSE) reBuffA *= 1000; break;
   }
 
   return(1);
@@ -464,7 +465,7 @@ bit     ReadParamG(void)
 {
   Clear();
 
-  if (boBeginParam == boFalse)
+  if (boBeginParam == FALSE)
   {
     DelayOff();
     QueryOpenG();
@@ -632,7 +633,7 @@ bit     ReadParamP(void)
 {
   Clear();
 
-  if (boBeginParam == boFalse)
+  if (boBeginParam == FALSE)
   {
     if (OpenDeviceP() == 0) return(0);
 
@@ -737,7 +738,7 @@ bit     ReadParamT(void)
 {
   Clear();
 
-  if (boBeginParam == boFalse)
+  if (boBeginParam == FALSE)
   {
     DelayOff();
     QueryParamT1();
@@ -836,7 +837,7 @@ bit     ReadParamU(void)
 {
   Clear();
 
-  if (boBeginParam == boFalse)
+  if (boBeginParam == FALSE)
   {
     QueryCloseU();
     QueryParamU1();
@@ -895,14 +896,14 @@ bit     ReadParamU(void)
 
 
 
-bit     ReadParam(uint  iwPar)
+bit     ReadParam(uint  iwPrm)
 {
   Clear();
 
-  LoadCurrParam(iwPar);
+  LoadCurrParam(iwPrm);
   ibPort = diCurr.ibPort;
 
-  reParamDiv = mpreParamDiv[iwPar];
+  reParamDiv = mpreParamDiv[iwPrm];
 
   switch (diCurr.bDevice)
   {
@@ -959,7 +960,7 @@ uint    j;
     ShowHi(szDirectParam); Clear();
     sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
 
-    boBeginParam = boFalse;
+    boBeginParam = FALSE;
 
     LoadPrevDigital(ibDig);
     for (j=0; j<wPARAMS; j++)
@@ -974,7 +975,7 @@ uint    j;
       {
         sprintf(szHi+13,"%3u",j+1);
 
-        if (mpboEnblPar[j] == boFalse)
+        if (mpboEnblPar[j] == FALSE)
           reBuffA = 0;
         else
         {
@@ -1003,13 +1004,13 @@ uint    j;
 */
 
 
-void    MakeParamDividers(uint  iwPar)
+void    MakeParamDividers(uint  iwPrm)
 {
   reBuffA = 1;
 
-  if (GetParamDevice(iwPar) == 1)
+  if (GetParamDevice(iwPrm) == 1)
   {
-    switch (GetParamLine(iwPar))
+    switch (GetParamLine(iwPrm))
     {
       case PAR_P  :
       case PAR_P1 :
@@ -1034,19 +1035,19 @@ void    MakeParamDividers(uint  iwPar)
       default:      reBuffA = 100;  break;
     }
   }
-  else if ((GetParamDevice(iwPar) == 2) ||
-           (GetParamDevice(iwPar) == 8) ||
-           (GetParamDevice(iwPar) == 12))
+  else if ((GetParamDevice(iwPrm) == 2) ||
+           (GetParamDevice(iwPrm) == 8) ||
+           (GetParamDevice(iwPrm) == 12))
   {
-    switch (GetParamLine(iwPar))
+    switch (GetParamLine(iwPrm))
     {
-      case PAR_I  : mpboEnblPar[iwPar] = boFalse; break;
+      case PAR_I  : mpboEnblPar[iwPrm] = FALSE; break;
 
       case PAR_I1 : 
       case PAR_I2 : 
       case PAR_I3 : reBuffA = 1000; break;
 
-      case PAR_U  : mpboEnblPar[iwPar] = boFalse; break;
+      case PAR_U  : mpboEnblPar[iwPrm] = FALSE; break;
 
       case PAR_C  :
       case PAR_C1 :
@@ -1056,9 +1057,9 @@ void    MakeParamDividers(uint  iwPar)
       default:      reBuffA = 100;  break;
     }
   }
-  else if (GetParamDevice(iwPar) == 3)
+  else if (GetParamDevice(iwPrm) == 3)
   {
-    switch (GetParamLine(iwPar))
+    switch (GetParamLine(iwPrm))
     {
       case PAR_S  :
       case PAR_S1 :
@@ -1071,14 +1072,14 @@ void    MakeParamDividers(uint  iwPar)
 
       case PAR_F1 :
       case PAR_F2 :
-      case PAR_F3 : mpboEnblPar[iwPar] = boFalse; break;
+      case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
 
       default:      reBuffA = 1;    break;
     }
   }
-  else if (GetParamDevice(iwPar) == 9)
+  else if (GetParamDevice(iwPrm) == 9)
   {
-    switch (GetParamLine(iwPar))
+    switch (GetParamLine(iwPrm))
     {
       case PAR_P  :
       case PAR_Q  :
@@ -1089,24 +1090,24 @@ void    MakeParamDividers(uint  iwPar)
 
       case PAR_C  : 
 
-      case PAR_F  : mpboEnblPar[iwPar] = boFalse; break;
+      case PAR_F  : mpboEnblPar[iwPrm] = FALSE; break;
 
       default:      reBuffA = 1;    break;
     }
   }
-  else if (GetParamDevice(iwPar) == 18)
+  else if (GetParamDevice(iwPrm) == 18)
   {
-    if (GetParamLine(iwPar) != PAR_P) 
-      mpboEnblPar[iwPar] = boFalse;
+    if (GetParamLine(iwPrm) != PAR_P) 
+      mpboEnblPar[iwPrm] = FALSE;
     else
     {
       reBuffA = 1;
-      mpboEnblPar[iwPar] = boTrue;
+      mpboEnblPar[iwPrm] = boTrue;
     }
   }
-  else if (GetParamDevice(iwPar) == 21)
+  else if (GetParamDevice(iwPrm) == 21)
   {
-    switch (GetParamLine(iwPar))
+    switch (GetParamLine(iwPrm))
     {
       case PAR_U  : 
 
@@ -1119,14 +1120,14 @@ void    MakeParamDividers(uint  iwPar)
 
       case PAR_F1 : 
       case PAR_F2 : 
-      case PAR_F3 : mpboEnblPar[iwPar] = boFalse; break;
+      case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
 
       default:      reBuffA = 1;    break;
     }
   }
-  else if (GetParamDevice(iwPar) == 25)
+  else if (GetParamDevice(iwPrm) == 25)
   {
-    switch (GetParamLine(iwPar))
+    switch (GetParamLine(iwPrm))
     {
       case PAR_S  : 
       case PAR_S1 : 
@@ -1144,14 +1145,14 @@ void    MakeParamDividers(uint  iwPar)
 
       case PAR_F1 : 
       case PAR_F2 : 
-      case PAR_F3 : mpboEnblPar[iwPar] = boFalse; break;
+      case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
 
       default:      reBuffA = 1;    break;
     }
   }
-  else if (GetParamDevice(iwPar) == 26)
+  else if (GetParamDevice(iwPrm) == 26)
   {
-    switch (GetParamLine(iwPar))
+    switch (GetParamLine(iwPrm))
     {
       case PAR_P  : 
 
@@ -1176,13 +1177,13 @@ void    MakeParamDividers(uint  iwPar)
 
       case PAR_F1 : 
       case PAR_F2 : 
-      case PAR_F3 : mpboEnblPar[iwPar] = boFalse; break;
+      case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
 
       default:      reBuffA = 1;    break;
     }
   }
 
-  mpreParamDiv[iwPar] = reBuffA;
+  mpreParamDiv[iwPrm] = reBuffA;
 }
 
 /*

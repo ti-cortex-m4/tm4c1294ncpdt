@@ -36,11 +36,11 @@ extern  message         code    szRecP ,
 */
 
 
-//bit     ReadParam(uint  iwPar);
+//bit     ReadParam(uint  iwPrm);
 //
 //void    MakeExtended2(void);
 
-void    MakeParamDividers(uint  iwPar);
+void    MakeParamDividers(uint  iwPrm);
 //void    MakeAllDividers(void);
 //
 //uint    GetParamIndex(void);
