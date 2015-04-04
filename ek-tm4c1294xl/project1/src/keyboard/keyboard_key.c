@@ -149,6 +149,14 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
+//      case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
+//      case bSET_MNT_PARAMS:     key_SeQuickParams();    break;
+//      case bSET_PARAMS:         key_SetParams();        break;
+//      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
+//      case bGET_PARAMS_CURR:
+//      case bGET_PARAMS_BUFF:
+//      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
+
       case bSET_LIMITS:         key_SetLimits();        break;
       case bSET_LIMITS2:        key_SetLimits2();       break;
       case bSET_LIMITS30:       key_SetLimits30();      break;
@@ -274,6 +282,14 @@ void    Keyboard_Key(void)
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
+
+//      case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
+//      case bSET_MNT_PARAMS:     key_SeQuickParams();    break;
+//      case bSET_PARAMS:         key_SetParams();        break;
+//      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
+//      case bGET_PARAMS_CURR:
+//      case bGET_PARAMS_BUFF:
+//      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
 
       case bSET_LIMITS:         key_SetLimits();        break;
       case bSET_LIMITS2:        key_SetLimits2();       break;
@@ -485,6 +501,14 @@ void    Keyboard_Key(void)
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
+
+//      case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
+//      case bSET_QUICK_PARAMS:   key_SeQuickParams();    break;
+//      case bSET_PARAMS:         key_SetParams();        break;
+//      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
+//      case bGET_PARAMS_CURR:
+//      case bGET_PARAMS_BUFF:
+//      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
 
       case bSET_LIMITS:         key_SetLimits();        break;
       case bSET_LIMITS2:        key_SetLimits2();       break;

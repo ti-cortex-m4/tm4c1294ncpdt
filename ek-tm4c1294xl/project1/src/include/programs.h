@@ -181,6 +181,14 @@ PROGRAMS.H
 #define bSET_CONTROL_HOURS          183
 #define bSET_ENBL_CANALS            185
 
+#define bSET_ENBL_PARAMS            101
+#define bSET_MNT_PARAMS             102
+#define bSET_PARAMS                 103
+#define bSET_PARAMS_DIV             104
+#define bGET_PARAM_CURR             105
+#define bGET_PARAM_BUFF             106
+#define bGET_PARAM_FULL             107
+
 #define bSET_LIMITS                 184
 #define bSET_LIMITS2                148
 #define bSET_LIMITS30               143
