@@ -71,19 +71,17 @@ void    LoadCurrParam(uint  iwPrm)
 {
   diCurr = mpdiParam[ iwPrm ];
 }
+*/
 
 
 
-#ifndef MODBUS
-bit     TrueParam(void)
+bool    TrueParam(void)
 {
   return(1);
 }
-#endif
 
 
-
-bit     TrueParamLine(uchar  ibLine)
+bool    TrueParamLine(uchar  ibLine)
 {
   switch (ibLine)
   {
@@ -125,7 +123,7 @@ bit     TrueParamLine(uchar  ibLine)
     default:      return(0);
    }
 }
-*/
+
 
 
 void    SetParam(uint  iwPrm, digital  *pdi)
@@ -170,7 +168,7 @@ uchar   GetParamLine(uint  iwPrm)
 void    ShowParam(uint  iwPrm)
 {
   Clear();
-  sprintf(szLo,"%1bu.%02bu.%02bu.%03bu.%02bu",
+  sprintf(szLo,"%1u.%02u.%02u.%03u.%02u",
                GetParamPort(iwPrm)+1,
                GetParamPhone(iwPrm),
                GetParamDevice(iwPrm),

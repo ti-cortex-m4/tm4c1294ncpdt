@@ -29,10 +29,10 @@ extern  param           code    mppaParamMap[bPARAM_BLOCK];
 void    ResetParams(void);
 
 void    LoadCurrParam(uint  iwPrm);
-
-bit     TrueParam(void);
-bit     TrueParamLine(uchar  ibLine);
 */
+bool    TrueParam(void);
+bool    TrueParamLine(uchar  ibLine);
+
 void    SetParam(uint  iwPrm, digital  *pdi);
 
 uchar   GetParamPort(uint  iwPrm);
