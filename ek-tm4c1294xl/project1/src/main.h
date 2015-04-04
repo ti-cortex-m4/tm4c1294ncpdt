@@ -23,6 +23,7 @@ MAIN.H
 #include        "main_storage.h"
 #include        "main_defines.h"
 #include        "main_devices.h"
+#include        "main_params.h"
 #include        "kernel/boolean.h"
 
 

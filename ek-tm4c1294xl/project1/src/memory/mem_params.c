@@ -16,13 +16,13 @@ boolean                 boMntParams;
 
 // массив мгновенных параметров
 digital                 mpdiParam[wPARAMS];
-/*
-// массив коэффициентов
+
+// массив коэффициентов деления
 real                    mpreParamDiv[wPARAMS];
 
-// график опроса по параметрам
+// массив разрешения опроса по параметрам
 boolean                 mpboEnblPar[wPARAMS];
-
+/*
 // промежуточный массив
 real                    mpreParBuff[2][wPARAMS];
 
