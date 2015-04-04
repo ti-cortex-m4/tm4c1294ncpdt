@@ -3,22 +3,16 @@ _PARAMS.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "params.h"
-#include        "speed.h"
-#include        "access.h"
-#include        "devices_far.h"
+
+#include        "../../../main.h"
+#include        "../../../console.h"
+#include        "../../../digitals/params/params.h"
+#include        "../../../flash/files.h"
 
 
 
 //                                          0123456789ABCDEF
-uchar           code    szParams[]       = "Параметры       ",
+static char const       szParams[]       = "Параметры       ",
                         szParPort[]      = "Порт...         ",
                         szParPhone[]     = "Телефон...      ",
                         szParDevice[]    = "Тип счетчика... ",
@@ -26,7 +20,12 @@ uchar           code    szParams[]       = "Параметры       ",
                         szParLine[]      = "Вид параметра...",
                         szMaskParams[]   = "_ __ __ ___ __";
 
-                       
+
+static uint             iwA;
+
+static digital          diT;
+
+
 
 void    key_SetParams(void)
 {
@@ -48,7 +47,7 @@ void    key_SetParams(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((iwA = GetInt(10,12) - 1) < wPARAMS)
+      if ((iwA = GetIntLo(10,12) - 1) < wPARAMS)
       {
         enKeyboard = KBD_POSTENTER;
         ShowParam(iwA);
@@ -230,5 +229,3 @@ void    key_SetParams(void)
   }
   else Beep();
 }
-
-*/

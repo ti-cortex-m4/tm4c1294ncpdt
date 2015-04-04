@@ -13,10 +13,10 @@ boolean                 boEnblParams;
 
 // флаг периода опроса мгновенных параметров (TRUE: каждые 3 минуты, FALSE: каждые 30 минут)
 boolean                 boMntParams;
-/*
-// массив параметров
-digital                 mpdiParam[wPARAMS];
 
+// массив мгновенных параметров
+digital                 mpdiParam[wPARAMS];
+/*
 // массив коэффициентов
 real                    mpreParamDiv[wPARAMS];
 

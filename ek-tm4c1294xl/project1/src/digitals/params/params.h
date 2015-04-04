@@ -28,18 +28,17 @@ extern  param           code    mppaParamMap[bPARAM_BLOCK];
 
 void    ResetParams(void);
 
-void    LoadCurrParam(uint  iwPar);
+void    LoadCurrParam(uint  iwPrm);
 
 bit     TrueParam(void);
 bit     TrueParamLine(uchar  ibLine);
-
-void    SetParam(uint  iwPar);
-
-uchar   GetParamPort(uint  iwPar);
-uchar   GetParamPhone(uint  iwPar);
-uchar   GetParamDevice(uint  iwPar);
-uchar   GetParamAddress(uint  iwPar);
-uchar   GetParamLine(uint  iwPar);
-
-void    ShowParam(uint  iwPar);
 */
+void    SetParam(uint  iwPrm, digital  *pdi);
+
+uchar   GetParamPort(uint  iwPrm);
+uchar   GetParamPhone(uint  iwPrm);
+uchar   GetParamDevice(uint  iwPrm);
+uchar   GetParamAddress(uint  iwPrm);
+uchar   GetParamLine(uint  iwPrm);
+
+void    ShowParam(uint  iwPrm);

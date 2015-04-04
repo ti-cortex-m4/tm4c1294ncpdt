@@ -4,9 +4,8 @@ KEY_MNT_PARAMS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../../main.h"
-#include        "../../../digitals/params/params.h"
 #include        "../../../console.h"
+#include        "../../../digitals/params/params.h"
 #include        "../../key_flag.h"
 
 
@@ -18,7 +17,7 @@ static char const       szMntParams[]   = "Параметры: время",
 
 
 
-void    ShowMntParams(boolean  bo)
+static void Show(boolean  bo)
 {
   if (bo == FALSE)
     strcpy(szLo,szMinute30);
@@ -40,7 +39,7 @@ void    key_SetMntParams(void)
       Clear();
 
       ShowHi(szMntParams);
-      ShowMntParams(boMntParams);
+      Show(boMntParams);
     }
     else Beep();
   }
@@ -53,7 +52,7 @@ void    key_SetMntParams(void)
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {
         boMntParams = InvertBoolean(boMntParams);
-        ShowMntParams(boMntParams);
+        Show(boMntParams);
       }
       else Beep();
     }
