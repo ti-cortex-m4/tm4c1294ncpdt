@@ -59,7 +59,7 @@ bool    IsMaster(uchar  ibPrt)
 
 bool    IsSlave(uchar  ibPrt)
 {
-  return( ~IsMaster(ibPrt) );
+  return( IsMaster(ibPrt) ? false : true );
 }
 
 

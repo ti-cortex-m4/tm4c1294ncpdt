@@ -136,7 +136,10 @@ uchar   j;
   }
 }
 
-/*
+
+
+#ifndef SKIP_K
+
 void    SafeTransitExecute3(void)
 {
 uint    i;
@@ -160,7 +163,7 @@ uchar   j;
     cbHeaderBcc = bInBuff8;
     cwInBuffBcc = 0;
 
-    InitPush();
+    InitPush(0);
     for (i=0; i<iwInBuffSave-11; i++) PushChar(mpbInBuffSave[i+9]);
     Query(bInBuff6+bInBuff7*0x100, iwInBuffSave-11, 1);
 
@@ -194,7 +197,10 @@ uchar   j;
     Output(iwInBuffSave);
   }
 }
-*/
+
+#endif
+
+
 
 void    SafeTransitExecute4(void)
 {

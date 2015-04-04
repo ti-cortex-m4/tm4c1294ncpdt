@@ -81,7 +81,9 @@ void    Response1_CRC(void)
 
       case bINQ_TRANSIT_EXECUTE1: SafeTransitExecute1(); break;
       case bINQ_TRANSIT_EXECUTE2: SafeTransitExecute2(); break;
-//      case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
+#ifndef SKIP_K
+      case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
+#endif
       case bINQ_TRANSIT_EXECUTE4: SafeTransitExecute4(); break;
 
       case bINQ_GETFLASHPAGE:
