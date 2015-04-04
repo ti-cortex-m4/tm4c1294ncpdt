@@ -49,6 +49,7 @@ DEVICES.C
 #include        "devices_postinput.h"
 #include        "devices_pause.h"
 #include        "devices_init.h"
+#include        "extended_1.h"
 #include        "devices.h"
 
 

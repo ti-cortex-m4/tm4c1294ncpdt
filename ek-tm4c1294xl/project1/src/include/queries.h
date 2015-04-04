@@ -131,6 +131,11 @@ QUERIES.H
 #define bINQ_GETIMPCANHOU_DAY          158
 #define bINQ_GETPOWCANHOU_DAY          159
 
+#define bINQ_TRANSIT_EXECUTE1          172
+#define bINQ_TRANSIT_EXECUTE2          173
+#define bINQ_TRANSIT_EXECUTE3          174
+#define bINQ_TRANSIT_EXECUTE4          175
+
 #define bINQ_GETFLASHPAGE              249
 
 #define bINQ_SETKEY                    246

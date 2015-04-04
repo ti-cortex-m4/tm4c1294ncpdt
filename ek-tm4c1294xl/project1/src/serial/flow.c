@@ -26,6 +26,7 @@ FLOW.C
 
 
 file const              flFlowPortFrom = {FLS_FLOW_PORT_FROM, &ibPortFrom, sizeof(uchar)};
+file const              flMaxFlowDelay = {FLS_MAX_FLOW_DELAY, &cbMaxFlowDelay, sizeof(uchar)};
 file const              flFlowPortTo = {FLS_FLOW_PORT_TO, &ibPortTo, sizeof(uchar)};
 
 
@@ -36,6 +37,7 @@ void    InitFlow(void)
   cbFlowDelay = 0;
 
   LoadFile(&flFlowPortFrom);
+  LoadFile(&flMaxFlowDelay);
   LoadFile(&flFlowPortTo);
 
   if ((ibPortTo != 2+1) && (ibPortTo != 3+1))
@@ -50,6 +52,9 @@ void    ResetFlow(void)
 {
   ibPortFrom = 0;
   SaveFile(&flFlowPortFrom);
+
+  cbMaxFlowDelay = 10;
+  SaveFile(&flMaxFlowDelay);
 
   ibPortTo = 2+1;
   SaveFile(&flFlowPortTo);
