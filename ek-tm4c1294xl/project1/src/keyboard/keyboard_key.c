@@ -156,9 +156,9 @@ void    Keyboard_Key(void)
       case bSET_LIMITS32:       key_SetLimits32();      break;
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
-      case bSET_FLOW_PORT_TO:   key_PortTo();           break;
+      case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
       case bSET_MAX_FLOW_DELAY: key_SetMaxFlowDelay();  break;
-      case bSET_FLOW_PORT_FROM: key_PortFrom();         break;
+      case bSET_FLOW_PORT_FROM: key_FlowPortFrom();     break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
@@ -282,9 +282,9 @@ void    Keyboard_Key(void)
       case bSET_LIMITS32:       key_SetLimits32();      break;
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
-      case bSET_FLOW_PORT_TO:   key_PortTo();           break;
+      case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
       case bSET_MAX_FLOW_DELAY: key_SetMaxFlowDelay();  break;
-      case bSET_FLOW_PORT_FROM: key_PortFrom();         break;
+      case bSET_FLOW_PORT_FROM: key_FlowPortFrom();     break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
@@ -493,9 +493,9 @@ void    Keyboard_Key(void)
       case bSET_LIMITS32:       key_SetLimits32();      break;
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
-      case bSET_FLOW_PORT_TO:   key_PortTo();           break;
+      case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
       case bSET_MAX_FLOW_DELAY: key_SetMaxFlowDelay();  break;
-      case bSET_FLOW_PORT_FROM: key_PortFrom();         break;
+      case bSET_FLOW_PORT_FROM: key_FlowPortFrom();     break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
