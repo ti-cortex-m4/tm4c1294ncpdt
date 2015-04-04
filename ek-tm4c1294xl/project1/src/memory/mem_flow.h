@@ -6,9 +6,9 @@ MEM_FLOW.H
 
 extern  bool                    fFlow;
 
-extern  uchar                   ibPortFrom;
+extern  uchar                   ibFlowPortFrom;
 
-extern  uchar                   ibPortTo;
+extern  uchar                   ibFlowPortTo;
 
 extern  uchar                   cbFlowDelay;
 

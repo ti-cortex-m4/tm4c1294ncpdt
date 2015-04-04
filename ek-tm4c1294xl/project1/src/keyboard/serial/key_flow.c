@@ -73,7 +73,7 @@ void    key_PortTo(void)
       Clear();
 
       ShowHi(szPortTo); 
-      ShowChar(ibPortTo);  
+      ShowChar(ibFlowPortTo);  
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
@@ -82,8 +82,8 @@ void    key_PortTo(void)
       ibX = GetCharLo(6,8);
       if ((ibX == 3) || (ibX == 4))
       {
-        ibPortTo = ibX;
-        ShowChar(ibPortTo);  
+        ibFlowPortTo = ibX;
+        ShowChar(ibFlowPortTo);  
       }
       else 
       {

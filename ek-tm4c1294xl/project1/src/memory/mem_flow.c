@@ -12,10 +12,10 @@ MEM_FLOW.C
 bool                    fFlow;
 
 // номер ведущего порта
-uchar                   ibPortFrom;
+uchar                   ibFlowPortFrom;
 
 // номер ведомого порта
-uchar                   ibPortTo;
+uchar                   ibFlowPortTo;
 
 // счётчик таймаута транзита
 uchar                   cbFlowDelay;

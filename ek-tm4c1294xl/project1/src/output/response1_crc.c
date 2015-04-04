@@ -79,9 +79,9 @@ void    Response1_CRC(void)
 
       case bINQ_GETTARIFFSDAY: OutGetTariffsDay(); break;
 
-      case bINQ_TRANSIT_EXECUTE1: SafeTransitExecute();  break;
+      case bINQ_TRANSIT_EXECUTE1: SafeTransitExecute1(); break;
       case bINQ_TRANSIT_EXECUTE2: SafeTransitExecute2(); break;
-      case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
+//      case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
       case bINQ_TRANSIT_EXECUTE4: SafeTransitExecute4(); break;
 
       case bINQ_GETFLASHPAGE:

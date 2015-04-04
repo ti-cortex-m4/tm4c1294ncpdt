@@ -25,9 +25,9 @@ FLOW.C
 
 
 
-file const              flFlowPortFrom = {FLS_FLOW_PORT_FROM, &ibPortFrom, sizeof(uchar)};
+file const              flFlowPortFrom = {FLS_FLOW_PORT_FROM, &ibFlowPortFrom, sizeof(uchar)};
 file const              flMaxFlowDelay = {FLS_MAX_FLOW_DELAY, &cbMaxFlowDelay, sizeof(uchar)};
-file const              flFlowPortTo = {FLS_FLOW_PORT_TO, &ibPortTo, sizeof(uchar)};
+file const              flFlowPortTo = {FLS_FLOW_PORT_TO, &ibFlowPortTo, sizeof(uchar)};
 
 
 
@@ -37,12 +37,18 @@ void    InitFlow(void)
   cbFlowDelay = 0;
 
   LoadFile(&flFlowPortFrom);
-  LoadFile(&flMaxFlowDelay);
-  LoadFile(&flFlowPortTo);
-
-  if ((ibPortTo != 2+1) && (ibPortTo != 3+1))
+  if ((ibFlowPortFrom != 0) && (ibFlowPortFrom != 1))
   {
-    ibPortTo = 2+1;
+  	ibFlowPortFrom = 0;
+    SaveFile(&flFlowPortFrom);
+  }
+
+  LoadFile(&flMaxFlowDelay);
+
+  LoadFile(&flFlowPortTo);
+  if ((ibFlowPortTo != 2+1) && (ibFlowPortTo != 3+1))
+  {
+    ibFlowPortTo = 2+1;
     SaveFile(&flFlowPortTo);
   }
 }
@@ -50,13 +56,13 @@ void    InitFlow(void)
 
 void    ResetFlow(void)
 {
-  ibPortFrom = 0;
+  ibFlowPortFrom = 0;
   SaveFile(&flFlowPortFrom);
 
   cbMaxFlowDelay = 10;
   SaveFile(&flMaxFlowDelay);
 
-  ibPortTo = 2+1;
+  ibFlowPortTo = 2+1;
   SaveFile(&flFlowPortTo);
 }
 
@@ -74,7 +80,7 @@ void    RunFlow(void)
   if (wProgram == bTEST_FLOW)
   {
     ShowHi(szClear);
-    sprintf(szHi,"Порт %u: лимит",ibPortFrom+1);
+    sprintf(szHi,"Порт %u: лимит",ibFlowPortFrom+1);
 
     Clear();
     HideCurrentTime(0);
@@ -87,25 +93,25 @@ void    RunFlow(void)
 
 void    RunFlow0(void)
 {
-  ibPortFrom = 0;
+  ibFlowPortFrom = 0;
   RunFlow();
 }
 
 
 void    RunFlow1(void)
 {
-  ibPortFrom = 1;
+  ibFlowPortFrom = 1;
   RunFlow();
 }
 
 
 bool    IsFlow0(void) {
-  return (fFlow == 1) && (ibPortFrom == 0);
+  return (fFlow == 1) && (ibFlowPortFrom == 0);
 }
 
 
 bool    IsFlow1(void) {
-  return (fFlow == 1) && (ibPortFrom == 1);
+  return (fFlow == 1) && (ibFlowPortFrom == 1);
 }
 
 
@@ -145,9 +151,9 @@ void    DelayFlow_1Hz(void)
 
 void    RunResponseFlow2(void)
 {
-  if ((fFlow == 0) || (ibPortTo != 2+1)) return;
+  if ((fFlow == 0) || (ibFlowPortTo != 2+1)) return;
 
-  if (ibPortFrom == 0)
+  if (ibFlowPortFrom == 0)
   {
     if (mpSerial[0] == SER_POSTINPUT_SLAVE)
     {
@@ -171,7 +177,7 @@ void    RunResponseFlow2(void)
     }
   }
 
-  if (ibPortFrom == 1)
+  if (ibFlowPortFrom == 1)
   {
     if (mpSerial[1] == SER_POSTINPUT_SLAVE)
     {
@@ -199,9 +205,9 @@ void    RunResponseFlow2(void)
 
 void    RunResponseFlow3(void)
 {
-  if ((fFlow == 0) || (ibPortTo != 3+1)) return;
+  if ((fFlow == 0) || (ibFlowPortTo != 3+1)) return;
 
-  if (ibPortFrom == 0)
+  if (ibFlowPortFrom == 0)
   {
     if (mpSerial[0] == SER_POSTINPUT_SLAVE)
     {
@@ -225,7 +231,7 @@ void    RunResponseFlow3(void)
     }
   }
 
-  if (ibPortFrom == 1)
+  if (ibFlowPortFrom == 1)
   {
     if (mpSerial[1] == SER_POSTINPUT_SLAVE)
     {
