@@ -188,6 +188,7 @@ PROGRAMS.H
 #define bGET_PARAMS_CURR            105
 #define bGET_PARAMS_BUFF            106
 #define bGET_PARAMS_FULL            107
+#define wSET_FIX_PARAMS_BUGS        303
 
 #define bSET_LIMITS                 184
 #define bSET_LIMITS2                148
