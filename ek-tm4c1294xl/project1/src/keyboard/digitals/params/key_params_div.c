@@ -1,40 +1,35 @@
 /*------------------------------------------------------------------------------
-_DIVIDER.C
+KEY_PARAMS_DIV.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "access.h"
-#include        "energy.h"
-#include        "engine.h"
+
+#include        "../../../main.h"
+#include        "../../../console.h"
+#include        "../../../digitals/params/params.h"
+#include        "../../../flash/files.h"
 
 
 
 //                                         0123456789ABCDEF
-uchar           code    szDivider[]     = "К пропрорц.     ",
-                        szMaskDivider[] = "________ ___";
-                      
+static char const       szParamDiv[]    = "К пропрорц.     ",
+                        szMask[]        = "________ ___";
+
+
+static uint             iwPrm;
 
 
 
-void    ShowDivider(void)
+static void  Show(void)
 {
-  reBuffA = mpreParamDiv[iwA];
-  sprintf(szLo,"%12.3f", reBuffA);
-
-  sprintf(szLo+13,"%3u",iwA+1);
+  Clear();
+  sprintf(szLo,"%12.3f", mpreParamDiv[iwPrm]);
+  sprintf(szLo+13,"%3u",iwPrm+1);
 }
 
 
 
-void    key_SetDivider(void)
+void    key_SetParamsDiv(void)
 {
   if (bKey == bKEY_ENTER)
   {                                           
@@ -43,54 +38,55 @@ void    key_SetDivider(void)
       enKeyboard = KBD_INPUT1;
       Param();
 
-      ShowHi(szDivider);
+      ShowHi(szParamDiv);
     } 
     else if (enKeyboard == KBD_INPUT1)
     {
       enKeyboard = KBD_POSTENTER;
 
-      iwA = 0;
-      ShowDivider();
+      iwPrm = 0;
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((iwA = GetInt(10,12) - 1) < wPARAMS)
+      if ((iwPrm = GetIntLo(10,12) - 1) < wPARAMS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowDivider();
+        Show();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++iwA >= wPARAMS) iwA = 0;
+      if (++iwPrm >= wPARAMS) iwPrm = 0;
 
-      ShowDivider();
+      Show();
     }
     else if ((enKeyboard == KBD_POSTINPUT2) || (enKeyboard == KBD_POSTINPUT3))
     {      
-      reBuffA = *PGetReal(0,7) + *PGetReal(9,11)/1000;
+      real reBuffA = GetRealLo(0,7) + GetRealLo(9,11)/1000;
 
       if (reBuffA >= 0)
       {
         enKeyboard = KBD_POSTENTER;
 
-        mpreParamDiv[iwA] = reBuffA;
+        mpreParamDiv[iwPrm] = reBuffA;
+        SaveFile(&flParamsDiv);
       }
       else Beep();
 
       if (enKeyboard == KBD_POSTENTER)
       {
-        if (++iwA >= wPARAMS) iwA = 0;
+        if (++iwPrm >= wPARAMS) iwPrm = 0;
 
-        ShowDivider();
+        Show();
       }
       else 
       {
         enKeyboard = KBD_INPUT2;
         LongBeep();
 
-        ShowLo(szMaskDivider);
+        ShowLo(szMask);
       }
     }
   }
@@ -100,9 +96,9 @@ void    key_SetDivider(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (iwA > 0) iwA--; else iwA = wPARAMS-1;
+      if (iwPrm > 0) iwPrm--; else iwPrm = wPARAMS-1;
 
-      ShowDivider();
+      Show();
     }
     else if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
@@ -118,7 +114,7 @@ void    key_SetDivider(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT2;
-      ShowLo(szMaskDivider);
+      ShowLo(szMask);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
@@ -142,4 +138,3 @@ void    key_SetDivider(void)
   else Beep();
 }
 
-*/
