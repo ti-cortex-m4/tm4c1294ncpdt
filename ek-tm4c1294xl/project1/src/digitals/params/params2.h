@@ -35,9 +35,12 @@ extern  char const              szRecP[],
                                 szRecNo[];
 
 
+extern  boolean                 boBeginParam;
 
-//bit     ReadParam(uint  iwPrm);
-//
+
+
+bool    ReadParam(uint  iwPrm);
+
 //void    MakeExtended2(void);
 
 void    MakeParamDividers(uint  iwPrm);

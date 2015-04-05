@@ -5,6 +5,14 @@ PARAMS2.C
 ------------------------------------------------------------------------------*/
 
 #include    "../../main.h"
+#include    "../../memory/mem_digitals.h"
+#include    "../../serial/ports.h"
+#include    "../../serial/ports_devices.h"
+#include    "../../digitals/digitals.h"
+#include    "../../sensors/device_b.h"
+#include    "../../time/delay.h"
+#include    "../../console.h"
+#include    "../../engine.h"
 #include    "params.h"
 #include    "params2.h"
 
@@ -42,12 +50,15 @@ char const              szRecP[]  =  "P, Вт           ",
                         szRecNo[] =  "Нет параметра   ";
 
 
-/*
+boolean                 boBeginParam;
+
+
+
 #ifndef SKIP_A
 
 void    QueryArrayA(uchar  bT)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(0x08);
@@ -78,7 +89,7 @@ uchar   i;
 }
 
 
-bit     ReadParamA(void)
+bool    ReadParamA(void)
 {
 uchar   i;
 
@@ -166,7 +177,7 @@ uchar   i;
 
 void    QueryArrayB(uchar  bT)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(0x08);
@@ -197,7 +208,7 @@ uchar   i;
 }
 
 
-bit     ReadParamB(void)
+bool    ReadParamB(void)
 {
 uchar   i;
 
@@ -251,7 +262,7 @@ uchar   i;
     case PAR_F2 : i = 0x42; break;
     case PAR_F3 : i = 0x43; break;
 
-    default:     return(0); break;
+    default:     return(0);
    }
 
   DelayOff();
@@ -289,7 +300,7 @@ uchar   i;
 
 void    QueryArrayC(uchar  bT, uchar  bSize)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(3);
@@ -316,7 +327,7 @@ void    ReadArrayC(uchar  bT)
 }
 
 
-bit     ReadParamC(void)
+bool    ReadParamC(void)
 {
   Clear();
 
@@ -423,7 +434,7 @@ bit     ReadParamC(void)
 
 void    QueryArrayG(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0x7E);
   PushChar(0x00);
@@ -462,7 +473,7 @@ void    CalsParC_G(uchar ibP, uchar ibQ)
 }
 
 
-bit     ReadParamG(void)
+bool    ReadParamG(void)
 {
   Clear();
 
@@ -527,7 +538,7 @@ bit     ReadParamG(void)
 
 void    QueryArrayM(void)
 {
-  InitPush();
+  InitPush(0);
   Push(&mpdwAddress1[diCurr.bAddress-1], sizeof(ulong));
   PushChar(0x26);
 
@@ -542,7 +553,7 @@ void    ReadArrayM(void)
 }
 
 
-bit     ReadParamM(void)
+bool    ReadParamM(void)
 {
   Clear();
   DelayOff();
@@ -564,7 +575,7 @@ bit     ReadParamM(void)
 
 void    QueryArrayP(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
@@ -588,7 +599,7 @@ void    QueryArrayP(void)
 
 void    QueryArray2P(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
@@ -630,7 +641,7 @@ void    ReadArray2P(uchar  i)
 }
 
 
-bit     ReadParamP(void)
+bool    ReadParamP(void)
 {
   Clear();
 
@@ -735,7 +746,7 @@ void    ReadParamT3(void)
 }
 
 
-bit     ReadParamT(void)
+bool    ReadParamT(void)
 {
   Clear();
 
@@ -834,7 +845,7 @@ void    ReadParamU4(void)
 }
 
 
-bit     ReadParamU(void)
+bool    ReadParamU(void)
 {
   Clear();
 
@@ -897,7 +908,7 @@ bit     ReadParamU(void)
 
 
 
-bit     ReadParam(uint  iwPrm)
+bool    ReadParam(uint  iwPrm)
 {
   Clear();
 
@@ -908,7 +919,7 @@ bit     ReadParam(uint  iwPrm)
 
   switch (diCurr.bDevice)
   {
-    case 0:  reBuffA = 0; return(1);  break;
+    case 0:  reBuffA = 0; return(1);
 
 #ifndef SKIP_A
     case 15:
@@ -918,7 +929,7 @@ bit     ReadParam(uint  iwPrm)
 #ifndef SKIP_B
     case 12:
     case 8:
-    case 2:  return( ReadParamB() );  break;
+    case 2:  return( ReadParamB() );
 #endif
 
 #ifndef SKIP_C
@@ -945,7 +956,7 @@ bit     ReadParam(uint  iwPrm)
     case 26: return( ReadParamU() );  break;
 #endif
 
-    default: reBuffA = 0; return(0);  break;
+    default: reBuffA = 0; return(0);
   }
 }
 
@@ -958,8 +969,10 @@ uint    j;
 
   if (boEnableParam == TRUE)
   {
-    ShowHi(szDirectParam); Clear();
-    sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
+    ShowHi(szDirectParam);
+    Clear();
+    sprintf(szLo+14,"%2u",ibDig+1);
+    DelayInf();
 
     boBeginParam = FALSE;
 
@@ -1002,7 +1015,7 @@ uint    j;
 
   ShowDigitalHi(); Clear();
 }
-*/
+
 
 
 void    MakeParamDividers(uint  iwPrm)

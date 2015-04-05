@@ -185,9 +185,9 @@ PROGRAMS.H
 #define bSET_MNT_PARAMS             102
 #define bSET_PARAMS                 103
 #define bSET_PARAMS_DIV             104
-#define bGET_PARAM_CURR             105
-#define bGET_PARAM_BUFF             106
-#define bGET_PARAM_FULL             107
+#define bGET_PARAMS_CURR            105
+#define bGET_PARAMS_BUFF            106
+#define bGET_PARAMS_FULL            107
 
 #define bSET_LIMITS                 184
 #define bSET_LIMITS2                148
