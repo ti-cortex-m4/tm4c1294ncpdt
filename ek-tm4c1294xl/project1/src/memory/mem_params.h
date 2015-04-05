@@ -23,3 +23,5 @@ extern  time                    mptiParBuff[wPARAMS];
 extern  uchar                   ibSoftTim;
 
 extern  uint                    iwHardTim;
+
+extern  uint                    cwParamTim;

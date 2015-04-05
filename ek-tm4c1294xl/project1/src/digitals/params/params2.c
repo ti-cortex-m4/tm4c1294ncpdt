@@ -970,9 +970,6 @@ bool    ReadParam(uint  iwPrm)
 
 void    MakeExtended2(void)
 {
-uchar   i;
-uint    j;
-
   if (boEnblAllParams == TRUE)
   {
     ShowHi(szDirectParam);
@@ -983,6 +980,8 @@ uint    j;
     boBeginParam = FALSE;
 
     LoadPrevDigital(ibDig);
+
+    uint j;
     for (j=0; j<wPARAMS; j++)
     {
       if (fKey == 1) break;
@@ -999,6 +998,7 @@ uint    j;
           reBuffA = 0;
         else
         {
+          uchar i;
           for (i=0; i<bMINORREPEATS; i++)
           {
             if (fKey == 1) break;

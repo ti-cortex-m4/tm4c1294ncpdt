@@ -7,9 +7,11 @@ NEXT_MINUTE3.C
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
+#include        "../memory/mem_params.h"
 #include        "../energy.h"
 #include        "../energy3.h"
 #include        "../impulses/impulses.h"
+#include        "next_params_time.h"
 #include        "realtime_storage.h"
 #include        "../energy2.h"
 
@@ -22,10 +24,9 @@ static void PrepareImpulses(void)
 
   if (++ibHardMnt >= bMINUTES) ibHardMnt = 0;
   if (++ibSoftMnt >= 2)        ibSoftMnt = 0;
+  SavePointersMnt();
 
   memset(&mpwImpMntCan[ibSoftMnt], 0, sizeof(uint)*bCANALS);
-
-  SavePointersMnt();
 }
 
 
@@ -46,6 +47,8 @@ void    NextMinute3(void)
   SaveImpAbsBuff();
 
   SaveTimeCurr(); // TODO another place
+
+  if (boMntParams == TRUE) NextParamsTime();
 }
 
 
