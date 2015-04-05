@@ -88,6 +88,7 @@ KEYBOARD_KEY.C
 #include        "digitals/params/key_enbl_params.h"
 #include        "digitals/params/key_mnt_params.h"
 #include        "digitals/params/key_params.h"
+#include        "digitals/params/key_params_div.h"
 
 
 
@@ -155,7 +156,7 @@ void    Keyboard_Key(void)
       case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
-//      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
+      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
 //      case bGET_PARAMS_CURR:
 //      case bGET_PARAMS_BUFF:
 //      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
@@ -289,7 +290,7 @@ void    Keyboard_Key(void)
       case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
-//      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
+      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
 //      case bGET_PARAMS_CURR:
 //      case bGET_PARAMS_BUFF:
 //      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
@@ -508,7 +509,7 @@ void    Keyboard_Key(void)
       case bSET_ENBL_PARAMS:    key_SetEnblParams();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
-//      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
+      case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
 //      case bGET_PARAMS_CURR:
 //      case bGET_PARAMS_BUFF:
 //      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;

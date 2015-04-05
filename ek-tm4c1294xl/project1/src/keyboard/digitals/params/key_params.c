@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_PARAMS.C
+KEY_PARAMS.C
 
 
 ------------------------------------------------------------------------------*/
@@ -90,6 +90,8 @@ void    key_SetParams(void)
       if (enGlobal != GLB_WORK)
       { 
         mpboEnblPar[iwPrm] = InvertBoolean(mpboEnblPar[iwPrm]);
+
+        SaveFile(&flEnblParams);
         ShowParam(iwPrm);
       } 
       else Beep();

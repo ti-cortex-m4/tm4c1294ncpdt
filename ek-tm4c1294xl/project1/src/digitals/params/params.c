@@ -26,6 +26,8 @@ void    InitParams(void)
   LoadFile(&flMntParams);
 
   LoadFile(&flParams);
+  LoadFile(&flParamsDiv);
+  LoadFile(&flEnblParams);
 }
 
 
@@ -39,6 +41,16 @@ void    ResetParams(void)
 
   memset(&mpdiParam, 0, sizeof(mpdiParam));
   SaveFile(&flParams);
+
+  uint i;
+  for (i=0; i<wPARAMS; i++)
+  {
+    mpreParamDiv[i] = 1;
+    mpboEnblPar[i] = TRUE;
+  }
+
+  SaveFile(&flParamsDiv);
+  SaveFile(&flEnblParams);
 }
 
 /*
@@ -60,19 +72,6 @@ param           code    mppaParamMap[bPARAM_BLOCK] =
   PAR_F , PAR_F1 , PAR_F2 , PAR_F3 ,
   0
 };
-
-
-
-void    ResetParams(void)
-{
-uint    i;
-
-  for (i=0; i<wPARAMS; i++) 
-  {
-    mpreParamDiv[i] = 1;
-    mpboEnblPar[i] = TRUE;
-  }
-}
 
 
 
