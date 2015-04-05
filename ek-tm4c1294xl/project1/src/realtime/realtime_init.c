@@ -6,6 +6,7 @@ REALTIME_INIT.C
 
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
+#include        "../memory/mem_params.h"
 #include        "../memory/mem_settings.h"
 #include        "../flash/records.h"
 #include        "../time/timedate.h"
@@ -152,11 +153,13 @@ void    LoadRealtime(void)
   LoadPointersHou();
   LoadPointersDay();
   LoadPointersMon();
+  LoadPointersTim();
 
   PrintString("\n 3min.   "); PrintInt(ibSoftMnt); PrintInt(ibHardMnt);
   PrintString("\n 30 min. "); PrintInt(ibSoftHou); PrintInt(iwHardHou);
   PrintString("\n day     "); PrintInt(ibSoftDay); PrintInt(ibHardDay);
   PrintString("\n month   "); PrintInt(ibSoftMon); PrintInt(ibHardMon);
+  PrintString("\n time    "); PrintInt(ibSoftTim); PrintInt(iwHardTim);
 
   LoadTimeCurr();
 
@@ -178,6 +181,9 @@ void    DefaultRealtime(void)
 
   ibSoftMon = 0;
   ibHardMon = 0;
+
+  ibSoftTim = 0;
+  iwHardTim = 0;
 }
 
 

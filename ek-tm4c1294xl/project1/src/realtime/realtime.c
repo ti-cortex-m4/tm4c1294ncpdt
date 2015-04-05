@@ -290,6 +290,9 @@ time    tiT;
     	ASSERT(ibHardMon < bMONTHS);
     	ASSERT(ibSoftMon < 2);
 
+    	ASSERT(iwHardTim < wTIMES);
+    	ASSERT(ibSoftTim < 2);
+
       fActive = 1;
       ProcessTime();
     }

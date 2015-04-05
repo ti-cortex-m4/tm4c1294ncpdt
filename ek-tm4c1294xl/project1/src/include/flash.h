@@ -115,8 +115,9 @@ typedef enum
   FLS_PTRHOU            = FLS_PTRMNT + 1,
   FLS_PTRDAY            = FLS_PTRHOU + 1,
   FLS_PTRMON            = FLS_PTRDAY + 1,
+  FLS_PTRTIM            = FLS_PTRMON + 1,
 
-  FLS_REALTIME          = FLS_PTRMON + 1,
+  FLS_REALTIME          = FLS_PTRTIM + 1,
 
   FLS_SEPARATE_CAN      = FLS_REALTIME + 1,
   FLS_SHOW_MESSAGES     = FLS_SEPARATE_CAN + 1,

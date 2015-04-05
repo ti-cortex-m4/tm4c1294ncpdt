@@ -118,6 +118,33 @@ boolean LoadPointersMon(void)
 
 
 
+boolean SavePointersTim(void)
+{
+  OpenOut(FLS_PTRTIM);
+  ClearOut();
+
+  if (Save(&ibSoftTim, sizeof(uchar)) == FALSE)
+    return FALSE;
+
+  if (Save(&iwHardTim, sizeof(uint)) == FALSE)
+    return FALSE;
+
+  return CloseOut();
+}
+
+
+boolean LoadPointersTim(void)
+{
+  OpenIn(FLS_PTRTIM);
+
+  if (Load(&ibSoftTim, sizeof(uchar)) == FALSE)
+    return FALSE;
+
+  return Load(&iwHardTim, sizeof(uint));
+}
+
+
+
 boolean SaveTimeCurr(void)
 {
   OpenOut(FLS_REALTIME);
