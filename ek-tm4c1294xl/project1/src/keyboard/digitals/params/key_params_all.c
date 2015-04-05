@@ -20,12 +20,12 @@ static char const       szParamCurr[]  = "Значения        ",
                         szParamFull[]  = "Значения: массив";
 
 
-static uint             iwA, iwAmin;
+static uint             iwPrm, iwAmin;
 
 
 
 static void ShowParamCurr(void)
-{
+{/*
   if (GetParamDevice(iwA) == 0)
     ShowLo(szEmpty);
   else
@@ -43,12 +43,12 @@ static void ShowParamCurr(void)
       sprintf(szLo,"%12.3f", reBuffA);
     else
       Error();   
-  }
+  }*/
 }
 
 
 static void ShowParamBuff(void)
-{
+{/*
   if (GetParamDevice(iwA) == 0)
     ShowLo(szEmpty);
   else
@@ -64,12 +64,12 @@ static void ShowParamBuff(void)
         case 2:  ShowDate(mptiParBuff[iwA]);  break;
       }
     }
-  }
+  }*/
 }
 
 
 static void ShowParamFull(void)
-{
+{/*
   if (GetParamDevice(iwA) == 0)
     ShowLo(szEmpty);
   else
@@ -91,14 +91,14 @@ static void ShowParamFull(void)
        }
        else Error();
     }
-  }
+  }*/
 }
 
 
 
-static void ShowAnother(void)
+static void ShowParams(void)
 {   
-  switch (GetParamLine(iwA))
+  switch (GetParamLine(iwPrm))
   {
     case PAR_P  : ShowHi(szRecP);  break;
     case PAR_P1 : ShowHi(szRecP1); break;
@@ -145,7 +145,7 @@ static void ShowAnother(void)
     case bGET_PARAM_FULL: ShowParamFull();  break;
   }
 
-  sprintf(szLo+13,"%3u",iwA+1);
+  sprintf(szLo+13,"%3u",iwPrm+1);
 }
 
 
@@ -174,28 +174,28 @@ void    key_GetParamsAll(void)
       ibY = 0;
       iwAmin = 0;
 
-      iwA = 0;
-      ShowAnother();
+      iwPrm = 0;
+      ShowParams();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((iwA = GetIntLo(10,12) - 1) < wPARAMS)
+      if ((iwPrm = GetIntLo(10,12) - 1) < wPARAMS)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
 
-        ShowAnother();
+        ShowParams();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++iwA >= wPARAMS) iwA = 0;
+      if (++iwPrm >= wPARAMS) iwPrm = 0;
 
       ibY = 0; 
       iwAmin = 0;
 
-      ShowAnother();
+      ShowParams();
     }
     else Beep();
   }
@@ -205,12 +205,12 @@ void    key_GetParamsAll(void)
   {        
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (iwA > 0) iwA--; else iwA = wPARAMS - 1;
+      if (iwPrm > 0) iwPrm--; else iwPrm = wPARAMS - 1;
 
       ibY = 0; 
       iwAmin = 0;
 
-      ShowAnother();
+      ShowParams();
     }
     else Beep();
   }
@@ -221,7 +221,7 @@ void    key_GetParamsAll(void)
     if (++ibY >= 3) ibY = 0;
     if (++iwAmin >= wTIMES) iwAmin = 0;
 
-    ShowAnother();
+    ShowParams();
   }
 
 
