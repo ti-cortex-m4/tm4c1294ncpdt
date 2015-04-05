@@ -11,6 +11,7 @@ KEY_PARAMS_ALL.C
 #include        "../../../digitals/digitals_messages.h"
 #include        "../../../time/timedate_display.h"
 #include        "../../../flash/files.h"
+#include        "../../../engine.h"
 
 
 
@@ -25,7 +26,7 @@ static uint             iwPrm, iwAmin;
 
 
 static void ShowParamCurr(void)
-{/*
+{
   if (GetParamDevice(iwA) == 0)
     ShowLo(szEmpty);
   else
@@ -43,7 +44,7 @@ static void ShowParamCurr(void)
       sprintf(szLo,"%12.3f", reBuffA);
     else
       Error();   
-  }*/
+  }
 }
 
 
@@ -140,9 +141,9 @@ static void ShowParams(void)
 
   switch (wProgram)
   { 
-    case bGET_PARAM_CURR: ShowParamCurr();  break;
-    case bGET_PARAM_BUFF: ShowParamBuff();  break;
-    case bGET_PARAM_FULL: ShowParamFull();  break;
+    case bGET_PARAMS_CURR: ShowParamCurr();  break;
+    case bGET_PARAMS_BUFF: ShowParamBuff();  break;
+    case bGET_PARAMS_FULL: ShowParamFull();  break;
   }
 
   sprintf(szLo+13,"%3u",iwPrm+1);
@@ -161,9 +162,9 @@ void    key_GetParamsAll(void)
 
       switch (wProgram)
       { 
-        case bGET_PARAM_CURR: ShowHi(szParamCurr); break;
-        case bGET_PARAM_BUFF: ShowHi(szParamBuff); break;
-        case bGET_PARAM_FULL: ShowHi(szParamFull); break;
+        case bGET_PARAMS_CURR: ShowHi(szParamCurr); break;
+        case bGET_PARAMS_BUFF: ShowHi(szParamBuff); break;
+        case bGET_PARAMS_FULL: ShowHi(szParamFull); break;
       }
     } 
     else if (enKeyboard == KBD_INPUT1)
