@@ -10,6 +10,7 @@ KEY_PARAMS_ALL.C
 #include        "../../../digitals/params/params2.h"
 #include        "../../../digitals/digitals_messages.h"
 #include        "../../../time/timedate_display.h"
+#include        "../../../serial/ports.h"
 #include        "../../../flash/files.h"
 #include        "../../../engine.h"
 
@@ -21,26 +22,26 @@ static char const       szParamCurr[]  = "Значения        ",
                         szParamFull[]  = "Значения: массив";
 
 
-static uint             iwPrm, iwAmin;
+static uint             iwPrm, iwTime;
 
 
 
 static void ShowParamCurr(void)
 {
-  if (GetParamDevice(iwA) == 0)
+  if (GetParamDevice(iwPrm) == 0)
     ShowLo(szEmpty);
   else
   {
     boBeginParam = FALSE;
 
-    LoadCurrParam(iwA);
+    LoadCurrParam(iwPrm);
     ibPort = diCurr.ibPort;
 
-    if (mpboEnblPar[iwA] == FALSE)
+    if (mpboEnblPar[iwPrm] == FALSE)
       ShowLo(szBlocking); 
     else if (diCurr.ibPhone != 0)
       ShowLo(szEmpty);
-    else if (ReadParam(iwA) == 1) 
+    else if (ReadParam(iwPrm) == 1)
       sprintf(szLo,"%12.3f", reBuffA);
     else
       Error();   
@@ -50,19 +51,19 @@ static void ShowParamCurr(void)
 
 static void ShowParamBuff(void)
 {/*
-  if (GetParamDevice(iwA) == 0)
+  if (GetParamDevice(iwPrm) == 0)
     ShowLo(szEmpty);
   else
   {
-    if (mpboEnblPar[iwA] == FALSE)
+    if (mpboEnblPar[iwPrm] == FALSE)
       ShowLo(szBlocking); 
     else
     {
       switch (ibY)
       {
-        case 0:  sprintf(szLo,"%12.3f", mpreParBuff[ibSoftTim][iwA]); break;
-        case 1:  ShowTime(mptiParBuff[iwA]);  break;
-        case 2:  ShowDate(mptiParBuff[iwA]);  break;
+        case 0:  sprintf(szLo,"%12.3f", mpreParBuff[ibSoftTim][iwPrm]); break;
+        case 1:  ShowTime(mptiParBuff[iwPrm]);  break;
+        case 2:  ShowDate(mptiParBuff[iwPrm]);  break;
       }
     }
   }*/
@@ -71,19 +72,19 @@ static void ShowParamBuff(void)
 
 static void ShowParamFull(void)
 {/*
-  if (GetParamDevice(iwA) == 0)
+  if (GetParamDevice(iwPrm) == 0)
     ShowLo(szEmpty);
   else
   {
-    if (mpboEnblPar[iwA] == FALSE)
+    if (mpboEnblPar[iwPrm] == FALSE)
       ShowLo(szBlocking); 
     else
     {
-       if (LoadParTim((wTIMES + iwHardTim - iwAmin) % wTIMES) == 1)
+       if (LoadParTim((wTIMES + iwHardTim - iwTime) % wTIMES) == 1)
        {
-         sprintf(szHi+12,"-%03u",iwAmin);
+         sprintf(szHi+12,"-%03u",iwTime);
 
-         reBuffA = mpreParBuff[ PrevSoftTim() ][ iwA ];
+         reBuffA = mpreParBuff[ PrevSoftTim() ][ iwPrm ];
 
          if (_chkfloat_(reBuffA) < 2)
            sprintf(szLo,"%12.3f", reBuffA); 
@@ -173,7 +174,7 @@ void    key_GetParamsAll(void)
       Clear();
 
       ibY = 0;
-      iwAmin = 0;
+      iwTime = 0;
 
       iwPrm = 0;
       ShowParams();
@@ -194,7 +195,7 @@ void    key_GetParamsAll(void)
       if (++iwPrm >= wPARAMS) iwPrm = 0;
 
       ibY = 0; 
-      iwAmin = 0;
+      iwTime = 0;
 
       ShowParams();
     }
@@ -209,7 +210,7 @@ void    key_GetParamsAll(void)
       if (iwPrm > 0) iwPrm--; else iwPrm = wPARAMS - 1;
 
       ibY = 0; 
-      iwAmin = 0;
+      iwTime = 0;
 
       ShowParams();
     }
@@ -220,7 +221,7 @@ void    key_GetParamsAll(void)
   else if (bKey == bKEY_MINUS)
   {        
     if (++ibY >= 3) ibY = 0;
-    if (++iwAmin >= wTIMES) iwAmin = 0;
+    if (++iwTime >= wTIMES) iwTime = 0;
 
     ShowParams();
   }

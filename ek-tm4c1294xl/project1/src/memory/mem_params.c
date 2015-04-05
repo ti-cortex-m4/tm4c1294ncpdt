@@ -14,6 +14,9 @@ boolean                 boEnblAllParams;
 // флаг периода опроса мгновенных параметров (TRUE: каждые 3 минуты, FALSE: каждые 30 минут)
 boolean                 boMntParams;
 
+//
+boolean                 boFixParamsBugs;
+
 // массив мгновенных параметров
 digital                 mpdiParam[wPARAMS];
 
@@ -28,13 +31,9 @@ real                    mpreParBuff[2][wPARAMS];
 
 // промежуточный массив
 time                    mptiParBuff[wPARAMS];
-/*
-// промежуточная переменная
-real                    reParamDiv;
 
 // индекс по кольцевому буферу
 uchar                   ibSoftTim;
 
 // индекс по кольцевому буферу
 uint                    iwHardTim;
-*/
