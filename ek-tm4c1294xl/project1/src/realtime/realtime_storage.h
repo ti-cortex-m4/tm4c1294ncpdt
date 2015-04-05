@@ -16,5 +16,8 @@ boolean LoadPointersDay(void);
 boolean SavePointersMon(void);
 boolean LoadPointersMon(void);
 
+boolean SavePointersTim(void);
+boolean LoadPointersTim(void);
+
 boolean SaveTimeCurr(void);
 boolean LoadTimeCurr(void);

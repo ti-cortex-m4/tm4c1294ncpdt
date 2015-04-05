@@ -35,6 +35,8 @@ void    OutRealtime(void)
 	PushInt(ibHardDay);
 	PushInt(ibSoftMon);
 	PushInt(ibHardMon);
+	PushInt(ibSoftTim);
+	PushInt(iwHardTim);
 
 	PushLong(cdwSeconds);
 	PushLong(cdwMinutes1);
@@ -44,5 +46,5 @@ void    OutRealtime(void)
 	PushInt(cwMonths);
 	PushInt(cwYears);
 
-	Output((6 + 6 + 6) + (1 + 1 + 1) + 1 + ((2 + 2) + (2 + 2) + (2 + 2) + (2 + 2)) + (4 + 4 + 4 + 4 + 2 + 2 + 2));
+	Output((6 + 6 + 6) + (1 + 1 + 1) + 1 + ((2 + 2) + (2 + 2) + (2 + 2) + (2 + 2) + (2 + 2)) + (4 + 4 + 4 + 4 + 2 + 2 + 2));
 }

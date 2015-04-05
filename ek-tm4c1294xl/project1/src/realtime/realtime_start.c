@@ -6,6 +6,7 @@ REALTIME_START.C
 
 #include        "../main.h"
 #include        "../memory/mem_realtime.h"
+#include        "../memory/mem_params.h"
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_factors.h"
 #include        "../memory/mem_energy.h"
@@ -38,6 +39,10 @@ real     re;
   ibSoftMon = 0;
   ibHardMon = (GetCurrTimeDate()->bMonth) - 1;
   SavePointersMon();
+
+  ibSoftTim = 0;
+  iwHardTim = 0;
+  SavePointersTim();
 
   tiCurr = *GetCurrTimeDate();
   tiPrev = tiCurr;

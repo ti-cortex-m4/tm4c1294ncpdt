@@ -18,6 +18,7 @@ void    NextParamsTime(void)
 
   if (++iwHardTim >= wTIMES) iwHardTim = 0;
   if (++ibSoftTim >= 2)      ibSoftTim = 0;
+  SavePointersTim();
 
   memset(&mpreParBuff[ibSoftTim], 0xFF, sizeof(real)*wPARAMS);
 
