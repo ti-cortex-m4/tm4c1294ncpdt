@@ -89,6 +89,7 @@ KEYBOARD_KEY.C
 #include        "digitals/params/key_mnt_params.h"
 #include        "digitals/params/key_params.h"
 #include        "digitals/params/key_params_div.h"
+#include        "digitals/params/key_params_all.h"
 
 
 
@@ -157,9 +158,9 @@ void    Keyboard_Key(void)
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
       case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
-//      case bGET_PARAMS_CURR:
-//      case bGET_PARAMS_BUFF:
-//      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
+      case bGET_PARAMS_CURR:
+      case bGET_PARAMS_BUFF:
+      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
 
       case bSET_LIMITS:         key_SetLimits();        break;
       case bSET_LIMITS2:        key_SetLimits2();       break;
@@ -291,9 +292,9 @@ void    Keyboard_Key(void)
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
       case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
-//      case bGET_PARAMS_CURR:
-//      case bGET_PARAMS_BUFF:
-//      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
+      case bGET_PARAMS_CURR:
+      case bGET_PARAMS_BUFF:
+      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
 
       case bSET_LIMITS:         key_SetLimits();        break;
       case bSET_LIMITS2:        key_SetLimits2();       break;
@@ -510,9 +511,9 @@ void    Keyboard_Key(void)
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
       case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
-//      case bGET_PARAMS_CURR:
-//      case bGET_PARAMS_BUFF:
-//      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
+      case bGET_PARAMS_CURR:
+      case bGET_PARAMS_BUFF:
+      case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
 
       case bSET_LIMITS:         key_SetLimits();        break;
       case bSET_LIMITS2:        key_SetLimits2();       break;
