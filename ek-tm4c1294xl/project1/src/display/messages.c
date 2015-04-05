@@ -67,6 +67,7 @@ char const              szClear[]       = "                ",
                         szBadFlash[]    = "  фл~ш-памяти ! ",
                         szBadRTC1[]     = "доступа к RTC ! ",
                         szBadRTC2[]     = "показаний RTC ! ",
+                        szEmpty[]       = "      нет       ",
                         szYes[]         = "да ",
                         szNo[]          = "нет";
 

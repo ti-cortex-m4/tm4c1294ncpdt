@@ -1,47 +1,48 @@
 /*------------------------------------------------------------------------------
-DEVICES_FAR.C
+PARAMS2.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include    "../../main.h"
 #include    "params.h"
+#include    "params2.h"
+
+
+
+//                                    0123456789ABCDEF
+char const              szRecP[]  =  "P, Âò           ",
+                        szRecP1[] =  "P1, Âò          ",
+                        szRecP2[] =  "P2, Âò          ",
+                        szRecP3[] =  "P3, Âò          ",
+                        szRecQ[]  =  "Q, ÂÀÐ          ",
+                        szRecQ1[] =  "Q1, ÂÀÐ         ",
+                        szRecQ2[] =  "Q2, ÂÀÐ         ",
+                        szRecQ3[] =  "Q3, ÂÀÐ         ",
+                        szRecS[]  =  "S, ÂÀ           ",
+                        szRecS1[] =  "S1, ÂÀ          ",
+                        szRecS2[] =  "S2, ÂÀ          ",
+                        szRecS3[] =  "S3, ÂÀ          ",
+                        szRecU[]  =  "U, Â            ",
+                        szRecU1[] =  "U1, Â           ",
+                        szRecU2[] =  "U2, Â           ",
+                        szRecU3[] =  "U3, Â           ",
+                        szRecI[]  =  "I, ìÀ           ",
+                        szRecI1[] =  "I1, ìÀ          ",
+                        szRecI2[] =  "I2, ìÀ          ",
+                        szRecI3[] =  "I3, ìÀ          ",
+                        szRecC[]  =  "cos            ",
+                        szRecC1[] =  "cos  1         ",
+                        szRecC2[] =  "cos  2         ",
+                        szRecC3[] =  "cos  3         ",
+                        szRecF[]  =  "f, Ãö           ",
+                        szRecF1[] =  "f1, Ãö          ",
+                        szRecF2[] =  "f2, Ãö          ",
+                        szRecF3[] =  "f3, Ãö          ",
+                        szRecNo[] =  "Íåò ïàðàìåòðà   ";
 
 
 /*
-//                                  0123456789ABCDEF
-message         code    szRecP  =  "P, Âò           ",
-                        szRecP1 =  "P1, Âò          ",
-                        szRecP2 =  "P2, Âò          ",
-                        szRecP3 =  "P3, Âò          ",
-                        szRecQ  =  "Q, ÂÀÐ          ",
-                        szRecQ1 =  "Q1, ÂÀÐ         ",
-                        szRecQ2 =  "Q2, ÂÀÐ         ",
-                        szRecQ3 =  "Q3, ÂÀÐ         ",
-                        szRecS  =  "S, ÂÀ           ",
-                        szRecS1 =  "S1, ÂÀ          ",
-                        szRecS2 =  "S2, ÂÀ          ",
-                        szRecS3 =  "S3, ÂÀ          ",
-                        szRecU  =  "U, Â            ",
-                        szRecU1 =  "U1, Â           ",
-                        szRecU2 =  "U2, Â           ",
-                        szRecU3 =  "U3, Â           ",
-                        szRecI  =  "I, ìÀ           ",
-                        szRecI1 =  "I1, ìÀ          ",
-                        szRecI2 =  "I2, ìÀ          ",
-                        szRecI3 =  "I3, ìÀ          ",
-                        szRecC  =  "cos            ",
-                        szRecC1 =  "cos  1         ",
-                        szRecC2 =  "cos  2         ",
-                        szRecC3 =  "cos  3         ",
-                        szRecF  =  "f, Ãö           ",
-                        szRecF1 =  "f1, Ãö          ",
-                        szRecF2 =  "f2, Ãö          ",
-                        szRecF3 =  "f3, Ãö          ",
-                        szRecNo =  "Íåò ïàðàìåòðà   ";
-
-
-
 #ifndef SKIP_A
 
 void    QueryArrayA(uchar  bT)

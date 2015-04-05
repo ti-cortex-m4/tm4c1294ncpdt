@@ -31,9 +31,9 @@ extern  param           code    mppaParamMap[bPARAM_BLOCK];
 
 
 void    ResetParams(void);
-
-void    LoadCurrParam(uint  iwPrm);
 */
+void    LoadCurrParam(uint  iwPrm);
+
 bool    TrueParam(void);
 bool    TrueParamLine(uchar  ibLine);
 
