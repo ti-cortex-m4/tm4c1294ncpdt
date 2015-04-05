@@ -4,37 +4,29 @@ PARAMS_STORAGE.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-//#include        "memory/mem_energy.h"
-//#include        "memory/mem_realtime.h"
-//#include        "energy.h"
-//#include        "realtime/realtime.h"
-#include        "flash/files.h"
+#include        "../../main.h"
+#include        "../../memory/mem_realtime.h"
+#include        "../../realtime/realtime.h"
+#include        "../../flash/files.h"
+#include        "params_storage.h"
 
 
 
-bool    SaveParams(uint  iwPrmTo, uint  iwPrmFrom)
+boolean SavePrmTim(uint  iwTimTo, uint  iwTimFrom)
 {
-  OpenOut(wFLA_REATIMPAR + iwPrmTo*bPARAM);
-
-  if (Save_Far(mpreParBuff[ iwPrmFrom ], sizeof(real)*wPARAMS) == 0)
-    return(0);
-
-  return( CloseOut() );
+  return SaveBuff(FLS_PARAMS_VALUES + iwTimTo*PARAMS_PAGES, mpreParBuff[ iwTimFrom ], sizeof(real)*wPARAMS);
 }
 
 
-bool    LoadParams(uint  iwPrmFrom)
+boolean LoadPrmTim(uint  iwTimFrom)
 {
-  if (iwPrmFrom == iwHardTim)
+  if (iwTimFrom == iwHardTim)
   { 
     memcpy(mpreParBuff[ PrevSoftTim() ], mpreParBuff[ ibSoftTim ], sizeof(real)*wPARAMS);
-    return(1);
+    return TRUE;
   }
   else
-  { 
-    OpenIn(wFLA_REATIMPAR + iwPrmFrom*bPARAM);
-    return( Load_Far(mpreParBuff[ PrevSoftTim() ], sizeof(real)*wPARAMS) );
+  {
+    return LoadBuff(FLS_PARAMS_VALUES + iwTimFrom*PARAMS_PAGES, mpreParBuff[ PrevSoftTim() ], sizeof(real)*wPARAMS);
   }
 }
-

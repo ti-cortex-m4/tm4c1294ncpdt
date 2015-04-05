@@ -11,7 +11,7 @@ NEXT_PARAMS_TIME.C
 #include        "../keyboard/key_timedate.h"
 
 
-
+/*
 void    NextParamsTime(void)
 {
   SaveParTim(iwHardTim,ibSoftTim);
@@ -25,3 +25,4 @@ void    NextParamsTime(void)
 
   MakeCurrTimPar();
 }
+*/
