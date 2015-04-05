@@ -25,6 +25,7 @@ DEVICES.C
 #include        "../digitals/current/current_run.h"
 #include        "../digitals/profile/profile_run.h"
 #include        "../digitals/checkup/checkup_run.h"
+#include        "../digitals/params/params2.h"
 #include        "../digitals/max_repeats.h"
 #include        "../digitals/correct_limit.h"
 #include        "../special/recalc_def.h"

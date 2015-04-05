@@ -37,3 +37,6 @@ uchar                   ibSoftTim;
 
 // индекс по кольцевому буферу
 uint                    iwHardTim;
+
+// количество записей в журнале мгновенных параметров
+uint                    cwParamTim;

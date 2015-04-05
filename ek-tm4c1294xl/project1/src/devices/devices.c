@@ -25,6 +25,7 @@ DEVICES.C
 #include        "../digitals/current/current_run.h"
 #include        "../digitals/profile/profile_run.h"
 #include        "../digitals/checkup/checkup_run.h"
+#include        "../digitals/params/params2.h"
 #include        "../digitals/max_repeats.h"
 #include        "../digitals/correct_limit.h"
 #include        "../special/recalc_def.h"
@@ -451,13 +452,13 @@ void    RunDevices(void)
 //        MakeExtended3();
 //        MakeExtended4T();
       }
-/*
-      if ((exExtended == EXT_PROFILE_30MIN) && (boQuickParam == FALSE))
+
+      if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == FALSE))
         MakeExtended2();
 
-      if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == TRUE))
+      if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == TRUE))
         MakeExtended2();
-*/
+
       HideCurrentTime(1);
       MakePause(GetNext());
       break;

@@ -251,13 +251,13 @@
 //        MakeExtended3();
 //        MakeExtended4T();
       }
-/*
-      if ((exExtended == EXT_PROFILE_30MIN) && (boQuickParam == FALSE))
+
+      if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == FALSE))
         MakeExtended2();
 
-      if ((exExtended == EXT_CURRENT_3MIN) && (boQuickParam == TRUE))
+      if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == TRUE))
         MakeExtended2();
-*/
+
       HideCurrentTime(1);
       MakePause(GetNext());
       break;
