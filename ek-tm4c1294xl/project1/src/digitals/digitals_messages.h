@@ -48,6 +48,7 @@ extern  char const              szBaudOK[],
                                 szDirectEscU[],
                                 szDirectEscV[],
                                 szDirectEscS[],
+                                szDirectParam[],
                                 szFailure1[],
                                 szFailure2[],
                                 szFailure20[];

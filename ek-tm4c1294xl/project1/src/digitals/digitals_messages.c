@@ -53,6 +53,7 @@ char const              szBaudOK[]      = "   модем: OK    ",
                         szDirectEscU[]  = "Опрос данных: 1 ",
                         szDirectEscV[]  = "Опрос данных: 2 ",
                         szDirectEscS[]  = "Опрос данных: 3 ",
+                        szDirectParam[] = "Параметры...    ",
                         szFailure1[]    = " сбой потока !  ",
                         szFailure2[]    = " сбой данных !  ",
                         szFailure20[]   = "сбой данных !   ";
