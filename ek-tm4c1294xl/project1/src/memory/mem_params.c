@@ -22,13 +22,13 @@ real                    mpreParamDiv[wPARAMS];
 
 // массив разрешения опроса по параметрам
 boolean                 mpboEnblPar[wPARAMS];
-/*
+
 // промежуточный массив
 real                    mpreParBuff[2][wPARAMS];
 
 // промежуточный массив
 time                    mptiParBuff[wPARAMS];
-
+/*
 // промежуточная переменная
 real                    reParamDiv;
 

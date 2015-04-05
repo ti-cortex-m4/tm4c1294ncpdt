@@ -1,36 +1,30 @@
 /*------------------------------------------------------------------------------
-_ANOTHER.C
+KEY_PARAMS_ALL.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        <intrins.h>
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "nexttime.h"
-#include        "engine.h"
-#include        "timedate.h"
-#include        "ports.h"
-#include        "params.h"
-#include        "devices_far.h"
-#include        "general_far.h"
+
+#include        "../../../main.h"
+#include        "../../../console.h"
+#include        "../../../digitals/params/params.h"
+#include        "../../../digitals/params/params2.h"
+#include        "../../../digitals/digitals_messages.h"
+#include        "../../../time/timedate_display.h"
+#include        "../../../flash/files.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szParamCurr    = "Значения        ",
-                        szParamBuff    = "Значения: буфер ",
-                        szParamFull    = "Значения: массив";
+static char const       szParamCurr[]  = "Значения        ",
+                        szParamBuff[]  = "Значения: буфер ",
+                        szParamFull[]  = "Значения: массив";
+
+
+static uint             iwA, iwAmin;
 
 
 
-
-void    ShowParamCurr(void)
+static void ShowParamCurr(void)
 {
   if (GetParamDevice(iwA) == 0)
     ShowLo(szEmpty);
@@ -53,7 +47,7 @@ void    ShowParamCurr(void)
 }
 
 
-void    ShowParamBuff(void)
+static void ShowParamBuff(void)
 {
   if (GetParamDevice(iwA) == 0)
     ShowLo(szEmpty);
@@ -63,22 +57,18 @@ void    ShowParamBuff(void)
       ShowLo(szBlocking); 
     else
     {
-      tiAlt = mptiParBuff[iwA];
-
       switch (ibY)
       {
-        case 0:  reBuffA = mpreParBuff[ibSoftTim][iwA];
-                 sprintf(szLo,"%12.3f", reBuffA); break;
-
-        case 1:  ShowTime();  break;
-        case 2:  ShowDate();  break;
+        case 0:  sprintf(szLo,"%12.3f", mpreParBuff[ibSoftTim][iwA]); break;
+        case 1:  ShowTime(mptiParBuff[iwA]);  break;
+        case 2:  ShowDate(mptiParBuff[iwA]);  break;
       }
     }
   }
 }
 
 
-void    ShowParamFull(void)
+static void ShowParamFull(void)
 {
   if (GetParamDevice(iwA) == 0)
     ShowLo(szEmpty);
@@ -106,7 +96,7 @@ void    ShowParamFull(void)
 
 
 
-void    ShowAnother(void)
+static void ShowAnother(void)
 {   
   switch (GetParamLine(iwA))
   {
@@ -148,11 +138,11 @@ void    ShowAnother(void)
     default:      ShowHi(szRecNo); break;
   }
 
-  switch (bProgram)
+  switch (wProgram)
   { 
-    case bGET_PARAMCURR: ShowParamCurr();  break;
-    case bGET_PARAMBUFF: ShowParamBuff();  break;
-    case bGET_PARAMFULL: ShowParamFull();  break;
+    case bGET_PARAM_CURR: ShowParamCurr();  break;
+    case bGET_PARAM_BUFF: ShowParamBuff();  break;
+    case bGET_PARAM_FULL: ShowParamFull();  break;
   }
 
   sprintf(szLo+13,"%3u",iwA+1);
@@ -160,7 +150,7 @@ void    ShowAnother(void)
 
 
 
-void    key_GetAnother(void)
+void    key_GetParamsAll(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -169,11 +159,11 @@ void    key_GetAnother(void)
       enKeyboard = KBD_INPUT1;
       Param();
 
-      switch (bProgram)
+      switch (wProgram)
       { 
-        case bGET_PARAMCURR: ShowHi(szParamCurr); break;
-        case bGET_PARAMBUFF: ShowHi(szParamBuff); break;
-        case bGET_PARAMFULL: ShowHi(szParamFull); break;
+        case bGET_PARAM_CURR: ShowHi(szParamCurr); break;
+        case bGET_PARAM_BUFF: ShowHi(szParamBuff); break;
+        case bGET_PARAM_FULL: ShowHi(szParamFull); break;
       }
     } 
     else if (enKeyboard == KBD_INPUT1)
@@ -189,7 +179,7 @@ void    key_GetAnother(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((iwA = GetInt(10,12) - 1) < wPARAMS)
+      if ((iwA = GetIntLo(10,12) - 1) < wPARAMS)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
@@ -246,11 +236,3 @@ void    key_GetAnother(void)
   }
   else Beep();
 }
-*/
-
-
-
-
-
-
-

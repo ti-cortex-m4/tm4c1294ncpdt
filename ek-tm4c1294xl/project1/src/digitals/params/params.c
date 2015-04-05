@@ -72,14 +72,13 @@ param           code    mppaParamMap[bPARAM_BLOCK] =
   PAR_F , PAR_F1 , PAR_F2 , PAR_F3 ,
   0
 };
-
+*/
 
 
 void    LoadCurrParam(uint  iwPrm)
 {
   diCurr = mpdiParam[ iwPrm ];
 }
-*/
 
 
 

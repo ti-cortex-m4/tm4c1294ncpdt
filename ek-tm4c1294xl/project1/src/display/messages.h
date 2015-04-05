@@ -61,6 +61,7 @@ extern  char const              szClear[],
                                 szBadFlash[],
                                 szBadRTC1[],
                                 szBadRTC2[],
+                                szEmpty[],
                                 szYes[],
                                 szNo[];
 
