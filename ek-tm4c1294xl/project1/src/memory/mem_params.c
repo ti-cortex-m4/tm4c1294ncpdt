@@ -9,7 +9,7 @@ MEM_PARAMS.C
 
 
 // флаг разрешения опроса мгновенных параметров
-boolean                 boEnblParams;
+boolean                 boEnblAllParams;
 
 // флаг периода опроса мгновенных параметров (TRUE: каждые 3 минуты, FALSE: каждые 30 минут)
 boolean                 boMntParams;

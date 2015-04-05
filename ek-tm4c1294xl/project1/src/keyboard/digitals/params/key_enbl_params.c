@@ -18,5 +18,5 @@ static char const       *pszEnblParams[] = { szEnblParams, "" };
 
 void    key_SetEnblParams(void)
 {
-  key_SetFlag(&flEnblParams, pszEnblParams);
+  key_SetFlag(&flEnblAllParams, pszEnblParams);
 }
