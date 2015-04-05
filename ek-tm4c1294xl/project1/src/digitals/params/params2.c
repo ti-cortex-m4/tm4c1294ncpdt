@@ -6,9 +6,13 @@ PARAMS2.C
 
 #include    "../../main.h"
 #include    "../../memory/mem_digitals.h"
+#include    "../../memory/mem_realtime.h"
 #include    "../../serial/ports.h"
 #include    "../../serial/ports_devices.h"
 #include    "../../digitals/digitals.h"
+#include    "../../digitals/digitals_display.h"
+#include    "../../digitals/digitals_messages.h"
+#include    "../../devices/devices.h"
 #include    "../../sensors/device_b.h"
 #include    "../../time/delay.h"
 #include    "../../console.h"
@@ -51,6 +55,8 @@ char const              szRecP[]  =  "P, Âò           ",
 
 
 boolean                 boBeginParam;
+
+static real             reParamDiv;
 
 
 
@@ -286,7 +292,7 @@ uchar   i;
 
     case PAR_I1 : 
     case PAR_I2 : 
-    case PAR_I3 : if (boFixParamBugs != FALSE) reBuffA *= 1000; break;
+    case PAR_I3 : if (boFixParamsBugs != FALSE) reBuffA *= 1000; break;
   }
 
   return(1);
@@ -967,7 +973,7 @@ void    MakeExtended2(void)
 uchar   i;
 uint    j;
 
-  if (boEnableParam == TRUE)
+  if (boEnblAllParams == TRUE)
   {
     ShowHi(szDirectParam);
     Clear();
@@ -1001,8 +1007,9 @@ uint    j;
 
           if (i == bMINORREPEATS) 
           {
-            coFloat.dwBuff = 0xFFFFFFFF; 
-            reBuffA = coFloat.reBuff;
+            combo32 co;
+            co.dwBuff = 0xFFFFFFFF; 
+            reBuffA = co.reBuff;
           }
         }
 
@@ -1013,7 +1020,8 @@ uint    j;
   }
 
 
-  ShowDigitalHi(); Clear();
+  ShowCanalNumber(ibDig);
+  Clear();
 }
 
 

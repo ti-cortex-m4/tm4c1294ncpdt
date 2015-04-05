@@ -15,6 +15,8 @@ extern  file const              flParams;
 extern  file const              flParamsDiv;
 extern  file const              flEnblParams;
 
+extern  file const              flFixParamsBugs;
+
 
 
 void    InitParams(void);

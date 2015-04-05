@@ -18,6 +18,8 @@ file const              flParams = {FLS_PARAMS, &mpdiParam, sizeof(mpdiParam)};
 file const              flParamsDiv = {FLS_PARAMS_DIV, &mpreParamDiv, sizeof(mpreParamDiv)};
 file const              flEnblParams = {FLS_ENBL_PARAMS, &mpboEnblPar, sizeof(mpboEnblPar)};
 
+file const              flFixParamsBugs = {FLS_FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(boolean)};
+
 
 
 void    InitParams(void)
@@ -28,6 +30,8 @@ void    InitParams(void)
   LoadFile(&flParams);
   LoadFile(&flParamsDiv);
   LoadFile(&flEnblParams);
+
+  LoadFile(&flFixParamsBugs);
 }
 
 
@@ -51,16 +55,12 @@ void    ResetParams(void)
 
   SaveFile(&flParamsDiv);
   SaveFile(&flEnblParams);
+
+  boFixParamsBugs = FALSE;
+  SaveFile(&flFixParamsBugs);
 }
 
 /*
-#include        "main.h"
-#include        "xdata.h"
-#include        "x_params.h"
-#include        "display.h"
-
-
-
 param           code    mppaParamMap[bPARAM_BLOCK] =
 {
   PAR_P , PAR_P1 , PAR_P2 , PAR_P3 ,

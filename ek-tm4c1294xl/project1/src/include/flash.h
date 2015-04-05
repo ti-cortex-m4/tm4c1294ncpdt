@@ -194,8 +194,9 @@ typedef enum
   FLS_PARAMS            = FLS_MNT_PARAMS + 1,
   FLS_PARAMS_DIV        = FLS_PARAMS + sizeof(mpdiParam)/wFREEPAGE_SIZE + 1,
   FLS_ENBL_PARAMS       = FLS_PARAMS_DIV + 1,
+  FLS_FIX_PARAMS_BUGS   = FLS_ENBL_PARAMS + 1,
 
-  FLS_END               = FLS_ENBL_PARAMS + 1
+  FLS_END               = FLS_FIX_PARAMS_BUGS + 1
 } flash;
 
 
