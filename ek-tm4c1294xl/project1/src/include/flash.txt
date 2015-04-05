@@ -36,7 +36,7 @@ FLASH.H
 #define bIMPULSE_CAN    (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
 #define bPOWER_GRP      (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
 #define REALCAN_PAGES   (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
-
+#define PARAMS_PAGES    (uchar)(sizeof(real)    * wPARAMS/wFREEPAGE_SIZE + 1)
 
 // количество страниц для графика профилей по получасам
 #ifdef  DAYS100
@@ -195,6 +195,8 @@ RESERVE(FLS_PARAMS, sizeof(mpdiParam)/wFREEPAGE_SIZE + 1)
 RESERVE(FLS_PARAMS_DIV, 1)
 RESERVE(FLS_ENBL_PARAMS, 1)
 RESERVE(FLS_FIX_PARAMS_BUGS, 1)
+
+RESERVE(FLS_PARAMS_VALUES, PARAMS_PAGES*wTIMES)
 
 END(FLS_END)
 } flash;

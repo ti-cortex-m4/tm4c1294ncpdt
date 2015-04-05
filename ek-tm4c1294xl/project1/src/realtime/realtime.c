@@ -8,6 +8,7 @@ TODO атомарные операции
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_digitals.h"
+#include        "../memory/mem_params.h"
 #include        "../digitals/current/current_run.h"
 #include        "../digitals/wait_query.h"
 #include        "../time/rtc.h"
@@ -122,6 +123,12 @@ uchar   PrevHardMon(void)
   else               return(bMONTHS-1);
 }
 
+
+uchar   PrevSoftTim(void)
+{
+  if (ibSoftTim > 0) return(0);
+  else               return(1);
+}
 
 
 void    ProcessTime(void)

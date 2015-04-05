@@ -36,7 +36,7 @@ FLASH.H
 #define bIMPULSE_CAN    (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
 #define bPOWER_GRP      (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
 #define REALCAN_PAGES   (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
-
+#define PARAMS_PAGES    (uchar)(sizeof(real)    * wPARAMS/wFREEPAGE_SIZE + 1)
 
 // количество страниц для графика профилей по получасам
 #ifdef  DAYS100
@@ -196,7 +196,9 @@ typedef enum
   FLS_ENBL_PARAMS       = FLS_PARAMS_DIV + 1,
   FLS_FIX_PARAMS_BUGS   = FLS_ENBL_PARAMS + 1,
 
-  FLS_END               = FLS_FIX_PARAMS_BUGS + 1
+  FLS_PARAMS_VALUES     = FLS_FIX_PARAMS_BUGS + 1,
+
+  FLS_END               = FLS_PARAMS_VALUES + PARAMS_PAGES*wTIMES
 } flash;
 
 
