@@ -8,10 +8,12 @@ PARAMS.C
 
 
 
-extern  file const              flEnblParams;
+extern  file const              flEnblAllParams;
 extern  file const              flMntParams;
 
 extern  file const              flParams;
+extern  file const              flParamsDiv;
+extern  file const              flEnblParams;
 
 
 

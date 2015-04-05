@@ -11,16 +11,18 @@ PARAMS.C
 
 
 
-file const              flEnblParams = {FLS_ENBL_PARAMS, &boEnblParams, sizeof(boolean)};
+file const              flEnblAllParams = {FLS_ENBL_ALL_PARAMS, &boEnblAllParams, sizeof(boolean)};
 file const              flMntParams = {FLS_MNT_PARAMS, &boMntParams, sizeof(boolean)};
 
 file const              flParams = {FLS_PARAMS, &mpdiParam, sizeof(mpdiParam)};
+file const              flParamsDiv = {FLS_PARAMS_DIV, &mpreParamDiv, sizeof(mpreParamDiv)};
+file const              flEnblParams = {FLS_ENBL_PARAMS, &mpboEnblPar, sizeof(mpboEnblPar)};
 
 
 
 void    InitParams(void)
 {
-  LoadFile(&flEnblParams);
+  LoadFile(&flEnblAllParams);
   LoadFile(&flMntParams);
 
   LoadFile(&flParams);
@@ -29,8 +31,8 @@ void    InitParams(void)
 
 void    ResetParams(void)
 {
-  boEnblParams = FALSE;
-  SaveFile(&flEnblParams);
+  boEnblAllParams = FALSE;
+  SaveFile(&flEnblAllParams);
 
   boMntParams = FALSE;
   SaveFile(&flMntParams);

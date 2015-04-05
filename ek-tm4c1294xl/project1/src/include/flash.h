@@ -189,11 +189,13 @@ typedef enum
   FLS_MAX_FLOW_DELAY    = FLS_FLOW_PORT_FROM + 1,
   FLS_FLOW_PORT_TO      = FLS_MAX_FLOW_DELAY + 1,
 
-  FLS_ENBL_PARAMS       = FLS_FLOW_PORT_TO + 1,
-  FLS_MNT_PARAMS        = FLS_ENBL_PARAMS + 1,
+  FLS_ENBL_ALL_PARAMS   = FLS_FLOW_PORT_TO + 1,
+  FLS_MNT_PARAMS        = FLS_ENBL_ALL_PARAMS + 1,
   FLS_PARAMS            = FLS_MNT_PARAMS + 1,
+  FLS_PARAMS_DIV        = FLS_PARAMS + sizeof(mpdiParam)/wFREEPAGE_SIZE + 1,
+  FLS_ENBL_PARAMS       = FLS_PARAMS_DIV + 1,
 
-  FLS_END               = FLS_PARAMS + sizeof(mpdiParam)/wFREEPAGE_SIZE + 1
+  FLS_END               = FLS_ENBL_PARAMS + 1
 } flash;
 
 

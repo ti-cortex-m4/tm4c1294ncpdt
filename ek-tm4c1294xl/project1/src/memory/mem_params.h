@@ -4,7 +4,7 @@ MEM_PARAMS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 boEnblParams;
+extern  boolean                 boEnblAllParams;
 
 extern  boolean                 boMntParams;
 
