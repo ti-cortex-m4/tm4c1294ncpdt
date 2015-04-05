@@ -8,7 +8,9 @@ KEY_PARAMS_ALL.C
 #include        "../../../console.h"
 #include        "../../../digitals/params/params.h"
 #include        "../../../digitals/params/params2.h"
+#include        "../../../digitals/params/params_storage.h"
 #include        "../../../digitals/digitals_messages.h"
+#include        "../../../realtime/realtime.h"
 #include        "../../../time/timedate_display.h"
 #include        "../../../serial/ports.h"
 #include        "../../../flash/files.h"
@@ -50,7 +52,7 @@ static void ShowParamCurr(void)
 
 
 static void ShowParamBuff(void)
-{/*
+{
   if (GetParamDevice(iwPrm) == 0)
     ShowLo(szEmpty);
   else
@@ -66,12 +68,12 @@ static void ShowParamBuff(void)
         case 2:  ShowDate(mptiParBuff[iwPrm]);  break;
       }
     }
-  }*/
+  }
 }
 
 
 static void ShowParamFull(void)
-{/*
+{
   if (GetParamDevice(iwPrm) == 0)
     ShowLo(szEmpty);
   else
@@ -80,20 +82,21 @@ static void ShowParamFull(void)
       ShowLo(szBlocking); 
     else
     {
-       if (LoadParTim((wTIMES + iwHardTim - iwTime) % wTIMES) == 1)
+       if (LoadPrmTim((wTIMES + iwHardTim - iwTime) % wTIMES) == TRUE)
        {
          sprintf(szHi+12,"-%03u",iwTime);
 
-         reBuffA = mpreParBuff[ PrevSoftTim() ][ iwPrm ];
+         combo32 co;
+         co.reBuff = mpreParBuff[ PrevSoftTim() ][ iwPrm ];
 
-         if (_chkfloat_(reBuffA) < 2)
-           sprintf(szLo,"%12.3f", reBuffA); 
+         if (co.dwBuff != 0xFFFFFFFF)
+           sprintf(szLo,"%12.3f", co.reBuff);
          else
            ShowLo(szEmpty);
        }
        else Error();
     }
-  }*/
+  }
 }
 
 
