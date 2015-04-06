@@ -248,7 +248,7 @@ void    OutGetParamDig(void)
         mpboEnblPar[wPARAMS-1] = TRUE;
         MakeDividers(wPARAMS-1);
 
-        if (boParamDivider == TRUE)
+        if (boUseParamsDiv == TRUE)
         {
           uint iw = GetParamIndex(di);
           if (iw != 0xFFFF)

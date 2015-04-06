@@ -91,6 +91,7 @@ KEYBOARD_KEY.C
 #include        "digitals/params/key_params_div.h"
 #include        "digitals/params/key_params_all.h"
 #include        "digitals/params/key_fix_params_bugs.h"
+#include        "digitals/params/key_use_params_div.h"
 
 
 
@@ -163,6 +164,7 @@ void    Keyboard_Key(void)
       case bGET_PARAMS_BUFF:
       case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
       case wSET_FIX_PARAMS_BUGS:key_SetFixParamsBugs(); break;
+      case wSET_USE_PARAMS_DIV: key_SetUseParamsDiv();  break;
 
       case bSET_LIMITS:         key_SetLimits();        break;
       case bSET_LIMITS2:        key_SetLimits2();       break;
@@ -298,6 +300,7 @@ void    Keyboard_Key(void)
       case bGET_PARAMS_BUFF:
       case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
       case wSET_FIX_PARAMS_BUGS:key_SetFixParamsBugs(); break;
+      case wSET_USE_PARAMS_DIV: key_SetUseParamsDiv();  break;
 
       case bSET_LIMITS:         key_SetLimits();        break;
       case bSET_LIMITS2:        key_SetLimits2();       break;
@@ -518,6 +521,7 @@ void    Keyboard_Key(void)
       case bGET_PARAMS_BUFF:
       case bGET_PARAMS_FULL:    key_GetParamsAll();     break;
       case wSET_FIX_PARAMS_BUGS:key_SetFixParamsBugs(); break;
+      case wSET_USE_PARAMS_DIV: key_SetUseParamsDiv();  break;
 
       case bSET_LIMITS:         key_SetLimits();        break;
       case bSET_LIMITS2:        key_SetLimits2();       break;

@@ -43,7 +43,7 @@ bool    ReadParam(uint  iwPrm);
 
 void    MakeExtended2(void);
 
-void    MakeParamDividers(uint  iwPrm);
+void    MakeParamDiv(uint  iwPrm);
 //void    MakeAllDividers(void);
 //
 uint    GetParamIndex(digital  di);

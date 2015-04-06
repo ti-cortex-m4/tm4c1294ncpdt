@@ -8,8 +8,6 @@ extern  boolean                 boEnblAllParams;
 
 extern  boolean                 boMntParams;
 
-extern  boolean                 boFixParamsBugs;
-
 extern  digital                 mpdiParam[wPARAMS];
 
 extern  real                    mpreParamDiv[wPARAMS];
@@ -25,3 +23,7 @@ extern  uchar                   ibSoftTim;
 extern  uint                    iwHardTim;
 
 extern  uint                    cwParamTim;
+
+extern  boolean                 boFixParamsBugs;
+
+extern  boolean                 boUseParamsDiv;

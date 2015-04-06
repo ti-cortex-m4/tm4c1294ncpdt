@@ -14,9 +14,6 @@ boolean                 boEnblAllParams;
 // флаг периода опроса мгновенных параметров (TRUE: каждые 3 минуты, FALSE: каждые 30 минут)
 boolean                 boMntParams;
 
-// признак
-boolean                 boFixParamsBugs;
-
 // массив мгновенных параметров
 digital                 mpdiParam[wPARAMS];
 
@@ -40,3 +37,9 @@ uint                    iwHardTim;
 
 // количество записей в журнале мгновенных параметров
 uint                    cwParamTim;
+
+// признак
+boolean                 boFixParamsBugs;
+
+// признак
+boolean                 boUseParamsDiv;

@@ -1026,7 +1026,7 @@ void    MakeExtended2(void)
 
 
 
-void    MakeParamDividers(uint  iwPrm)
+void    MakeParamDiv(uint  iwPrm)
 {
   real re = 1;
 
