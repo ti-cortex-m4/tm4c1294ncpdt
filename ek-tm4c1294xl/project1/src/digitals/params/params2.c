@@ -17,6 +17,7 @@ PARAMS2.C
 #include    "../../time/delay.h"
 #include    "../../console.h"
 #include    "../../engine.h"
+#include    "../../flash/files.h"
 #include    "params.h"
 #include    "params2.h"
 

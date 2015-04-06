@@ -245,7 +245,7 @@ void    OutGetParamsAll(void)
         mpdiParam[wPARAMS-1] = di;
 
         mpboEnblPar[wPARAMS-1] = TRUE;
-        MakeDividers(wPARAMS-1);
+        MakeParamDiv(wPARAMS-1);
 
         if (boUseParamsDiv == TRUE)
         {
