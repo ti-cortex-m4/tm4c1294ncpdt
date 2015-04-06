@@ -11,6 +11,19 @@ PARAMS.C
 
 
 
+param const             mppaParamMap[bPARAM_BLOCK] =
+{
+  PAR_P , PAR_P1 , PAR_P2 , PAR_P3 ,
+  PAR_Q , PAR_Q1 , PAR_Q2 , PAR_Q3 ,
+  PAR_S , PAR_S1 , PAR_S2 , PAR_S3 ,
+  PAR_U , PAR_U1 , PAR_U2 , PAR_U3 ,
+  PAR_I , PAR_I1 , PAR_I2 , PAR_I3 ,
+  PAR_C , PAR_C1 , PAR_C2 , PAR_C3 ,
+  PAR_F , PAR_F1 , PAR_F2 , PAR_F3 ,
+  (param) 0
+};
+
+
 file const              flEnblAllParams = {FLS_ENBL_ALL_PARAMS, &boEnblAllParams, sizeof(boolean)};
 file const              flMntParams = {FLS_MNT_PARAMS, &boMntParams, sizeof(boolean)};
 
@@ -60,19 +73,6 @@ void    ResetParams(void)
   SaveFile(&flFixParamsBugs);
 }
 
-/*
-param           code    mppaParamMap[bPARAM_BLOCK] =
-{
-  PAR_P , PAR_P1 , PAR_P2 , PAR_P3 ,
-  PAR_Q , PAR_Q1 , PAR_Q2 , PAR_Q3 ,
-  PAR_S , PAR_S1 , PAR_S2 , PAR_S3 ,
-  PAR_U , PAR_U1 , PAR_U2 , PAR_U3 ,
-  PAR_I , PAR_I1 , PAR_I2 , PAR_I3 ,
-  PAR_C , PAR_C1 , PAR_C2 , PAR_C3 ,
-  PAR_F , PAR_F1 , PAR_F2 , PAR_F3 ,
-  0
-};
-*/
 
 
 void    LoadCurrParam(uint  iwPrm)

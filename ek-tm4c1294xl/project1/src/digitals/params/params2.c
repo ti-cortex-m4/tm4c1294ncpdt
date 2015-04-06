@@ -1218,13 +1218,12 @@ uint  i;
     MakeDividers(i);   
 }
 #endif
+*/
 
 
-
-uint    GetParamIndex(void)
+uint    GetParamIndex(digital  diT)
 {
-uint    i;
-
+  uint i;
   for (i=0; i<wPARAMS; i++)
   {
     if ((mpdiParam[i].ibPort   == diT.ibPort) &&
@@ -1236,4 +1235,3 @@ uint    i;
 
   return 0xFFFF;
 }
-*/
