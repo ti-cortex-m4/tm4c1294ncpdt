@@ -8,6 +8,9 @@ PARAMS.C
 
 
 
+extern  param const             mppaParamMap[bPARAM_BLOCK];
+
+
 extern  file const              flEnblAllParams;
 extern  file const              flMntParams;
 

@@ -46,4 +46,4 @@ void    MakeExtended2(void);
 void    MakeParamDividers(uint  iwPrm);
 //void    MakeAllDividers(void);
 //
-//uint    GetParamIndex(void);
+uint    GetParamIndex(digital  di);
