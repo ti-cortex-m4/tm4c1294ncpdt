@@ -82,7 +82,7 @@ void    LoadCurrParam(uint  iwPrm)
 
 
 
-bool    TrueParam(void)
+bool    TrueParam(digital  *pdi)
 {
   return(1);
 }

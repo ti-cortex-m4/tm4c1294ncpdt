@@ -7,6 +7,7 @@ OUT_PARAMS.H
 void    OutGetParams100(void);
 void    OutGetParams(void);
 void    OutSetParam(void);
+
 void    OutGetParamDiv(void);
 void    OutSetParamDiv(void);
 
