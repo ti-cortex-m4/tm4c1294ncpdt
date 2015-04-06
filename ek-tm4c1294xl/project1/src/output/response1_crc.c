@@ -19,6 +19,7 @@ RESPONSE1_CRC.C
 #include        "out_transit.h"
 #include        "out_console.h"
 #include        "out_config.h"
+#include        "out_params.h"
 #include        "response_crc.h"
 #include        "response252_crc.h"
 #include        "response255_crc.h"
@@ -76,6 +77,17 @@ void    Response1_CRC(void)
 
       case bINQ_GETDIGITAL: OutGetDigital(); break;
       case bINQ_SETDIGITAL: OutSetDigital(); break;
+
+      case bINQ_GETPARAM_100: OutGetParams100(); break;
+      case bINQ_GETPARAM: OutGetParams(); break;
+      case bINQ_SETPARAM: OutSetParam(); break;
+      case bINQ_GETDIVIDER: OutGetParamDiv(); break;
+      case bINQ_SETDIVIDER: OutSetParamDiv(); break;
+      case bINQ_GETPARAMCURR: OutGetParamCurr(); break;
+      case bINQ_GETPARAMBUFF: OutGetParamBuff(); break;
+      case bINQ_GETPARAMFULL: OutGetParamFull(); break;
+      case bINQ_RESETDIVIDERS: OutGetParamDivs(); break;
+      case bINQ_GETPARAMDIG: OutGetParamDig(); break;
 
       case bINQ_GETTARIFFSDAY: OutGetTariffsDay(); break;
 
