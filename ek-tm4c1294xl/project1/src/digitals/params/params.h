@@ -22,21 +22,9 @@ extern  file const              flFixParamsBugs;
 void    InitParams(void);
 void    ResetParams(void);
 
-
-/*
-#include        "main.h"
-
-
-
-extern  param           code    mppaParamMap[bPARAM_BLOCK];
-
-
-
-void    ResetParams(void);
-*/
 void    LoadCurrParam(uint  iwPrm);
 
-bool    TrueParam(void);
+bool    TrueParam(digital  *pdi);
 bool    TrueParamLine(uchar  ibLine);
 
 void    SetParam(uint  iwPrm, digital  *pdi);

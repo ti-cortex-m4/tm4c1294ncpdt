@@ -6,8 +6,10 @@ OUT_PARAMS.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_ports.h"
+#include        "../../memory/mem_digitals0.h"
 #include        "../../memory/mem_realtime.h"
 #include        "../../serial/ports.h"
+#include        "../../realtime/realtime.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_pause.h"
 #include        "../../digitals/digitals_messages.h"
@@ -18,52 +20,47 @@ OUT_PARAMS.C
 
 
 
-//      case bINQ_GETPARAM_100:
 void    OutGetParams100(void)
 {
   if ((uint)100*bInBuff5 < wPARAMS)
   {
     InitPushCRC();
     Push(&mpdiParam[ (uint)100*bInBuff5 ],(uint)100*sizeof(digital));
-
     Output((uint)100*sizeof(digital));
   }
   else Result(bRES_BADADDRESS);
 }
 
 
-//      case bINQ_GETPARAM:
 void    OutGetParams(void)
 {
-       if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
+  if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
   {
     InitPushCRC();
     Push(&mpdiParam[ bInBuff5*0x100 + bInBuff6 ],sizeof(digital));
-
     Output(sizeof(digital));
   }
   else Result(bRES_BADADDRESS);
 }
 
 
-//      case bINQ_SETPARAM:
 void    OutSetParam(void)
 {
   if (enGlobal != GLB_WORK)
   {
     if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
     {
-      digital diT;
+      digital di;
 
-      diT.ibPort   = InBuff(7);
-      diT.ibPhone  = InBuff(8);
-      diT.bDevice  = InBuff(9);
-      diT.bAddress = InBuff(10);
-      diT.ibLine   = InBuff(11);
+      di.ibPort   = InBuff(7);
+      di.ibPhone  = InBuff(8);
+      di.bDevice  = InBuff(9);
+      di.bAddress = InBuff(10);
+      di.ibLine   = InBuff(11);
 
-      if (TrueParam() == 1)
+      if (TrueParam(&di) == 1)
       {
-        mpdiParam[ bInBuff5*0x100 + bInBuff6 ] = diT;
+        mpdiParam[ bInBuff5*0x100 + bInBuff6 ] = di;
         LongResult(bRES_OK);
       }
       else Result(bRES_BADDATA);
@@ -73,7 +70,8 @@ void    OutSetParam(void)
   else Result(bRES_NEEDREPROGRAM);
 }
 
-//      case bINQ_GETDIVIDER:
+
+
 void    OutGetParamDiv(void)
 {
   if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
@@ -86,7 +84,6 @@ void    OutGetParamDiv(void)
 }
 
 
-//case bINQ_SETDIVIDER:
 void    OutSetParamDiv(void)
 {
   if (enGlobal != GLB_WORK)
@@ -94,10 +91,7 @@ void    OutSetParamDiv(void)
     if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
     {
       InitPop(7);
-
-      PopReal();
-      mpreParamDiv[bInBuff5*0x100 + bInBuff6] = reBuffA;
-
+      mpreParamDiv[bInBuff5*0x100 + bInBuff6] = PopReal();
       LongResult(bRES_OK);
     }
     else Result(bRES_BADADDRESS);
@@ -119,7 +113,8 @@ void    OutGetParamCurr(void)
 
     boBeginParam = FALSE;
 
-    fAlt = 1;
+    bool fAlt = 1;
+    uchar ibCan;
     for (ibCan=0; ibCan<10; ibCan++)
     {
       sprintf(szHi+13,"%03u",(uint)10*bInBuff5+ibCan+1);
@@ -130,7 +125,7 @@ void    OutGetParamCurr(void)
           reBuffA = 0;
         else
         {
-          i = ibPort;
+          uchar i = ibPort;
           fAlt = ReadParam((uint)10*bInBuff5+ibCan);
           ibPort = i;
         }
@@ -187,7 +182,7 @@ void    OutGetParamFull(void)
 
           PushInt(iwHardTim);
           PushInt(wTIMES);
-          PushChar(boQuickParam);
+          PushChar(boMntParams);
           Push(&tiCurr, sizeof(time));
 
           Push(&mpreParBuff[ PrevSoftTim() ][ (uint)10*bInBuff5 ], (uint)10*bInBuff6*sizeof(real));
@@ -234,13 +229,15 @@ void    OutGetParamDig(void)
 
     boBeginParam = FALSE;
 
-    fAlt = 1;
+    bool fAlt = 1;
+    uchar ibCan;
     for (ibCan=0; ibCan<bPARAM_BLOCK; ibCan++)
     {
-      sprintf(szHi+14,"%2bu",ibCan+1);
+      sprintf(szHi+14,"%2u",ibCan+1);
 
       if (fAlt == 1)
       {
+        digital diT;
         diT.ibPort   = mpdiDigital[bInBuff5].ibPort;
         diT.ibPhone  = mpdiDigital[bInBuff5].ibPhone;
         diT.bDevice  = mpdiDigital[bInBuff5].bDevice;
@@ -265,7 +262,7 @@ void    OutGetParamDig(void)
         {
           ibDig = bInBuff5;
 
-          i = ibPort;
+          uchar i = ibPort;
           fAlt = ReadParam(wPARAMS-1);
           ibPort = i;
         }

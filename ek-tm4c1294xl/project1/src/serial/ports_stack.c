@@ -237,3 +237,11 @@ uchar   PopChar(void) {
     default: ASSERT(false); return 0;
   }
 }
+
+
+real    PopReal(void)
+{
+  real re;
+  Pop(&re, sizeof(real));
+  return re;
+}

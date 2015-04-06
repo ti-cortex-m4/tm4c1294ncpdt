@@ -54,14 +54,14 @@ QUERIES.H
 #define bINQ_GETDIGITAL                42
 #define bINQ_SETDIGITAL                43
 
-#define bINQ_GETPARAM_100              53
+#define bINQ_GETPARAMS_100             53
 #define bINQ_GETPARAM                  44
 #define bINQ_SETPARAM                  45
-#define bINQ_GETDIVIDER                46
-#define bINQ_SETDIVIDER                47
-#define bINQ_GETPARAMCURR              48
-#define bINQ_GETPARAMBUFF              49
-#define bINQ_GETPARAMFULL              50
+#define bINQ_GETPARAM_DIV              46
+#define bINQ_SETPARAM_DIV              47
+#define bINQ_GETPARAM_CURR             48
+#define bINQ_GETPARAM_BUFF             49
+#define bINQ_GETPARAM_FULL             50
 #define bINQ_RESETDIVIDERS             51
 #define bINQ_GETPARAMDIG               52
 
