@@ -3,25 +3,30 @@ U_PARAM.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        <intrins.h>
-#include        "main.h"
-#include        "xdata.h"
-#include        "x_params.h"
-#include        "rtc.h"
-#include        "watchdog.h"
-#include        "nexttime.h"
-#include        "timedate.h"
-#include        "queries2.h"
-#include        "ports.h"
-#include        "general_far.h"
-#include        "engine.h"
-#include        "postinput2.h"
-#include        "u_config.h"
+
+#include        "../../main.h"
+#include        "../../memory/mem_ports.h"
+//#include        "../../memory/mem_realtime.h"
+//#include        "../../memory/mem_energy.h"
+//#include        "../../memory/mem_energy_spec.h"
+#include        "../../include/states.h"
+//#include        "../../include/queries_uni.h"
+#include        "../../serial/ports.h"
+//#include        "../../realtime/realtime.h"
+//#include        "../../time/rtc.h"
+//#include        "../../time/timedate.h"
+//#include        "../../time/calendar.h"
+#include        "../../digitals/params/params.h"
+#include        "../../digitals/params/params2.h"
+#include        "../../digitals/params/params_storage.h"
+//#include        "../../groups.h"
+//#include        "../../energy.h"
+//#include        "../../impulses/max_power.h"
+//#include        "../../energy2.h"
+#include        "response_uni.h"
+#include        "u_param.h"
 
 
-
-#ifndef MODBUS
 
 uchar   GetParamLineUni(uchar  i)
 {
@@ -260,4 +265,3 @@ uint    i,j;
 }
 
 #endif
-*/
