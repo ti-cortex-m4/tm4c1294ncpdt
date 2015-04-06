@@ -44,6 +44,6 @@ bool    ReadParam(uint  iwPrm);
 void    MakeExtended2(void);
 
 void    MakeParamDiv(uint  iwPrm);
-//void    MakeAllDividers(void);
-//
+void    MakeParamDivAll(void);
+
 uint    GetParamIndex(digital  di);

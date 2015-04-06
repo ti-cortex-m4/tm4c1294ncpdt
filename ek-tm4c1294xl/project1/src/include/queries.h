@@ -63,7 +63,7 @@ QUERIES.H
 #define bINQ_GETPARAM_BUFF             49
 #define bINQ_GETPARAM_FULL             50
 #define bINQ_RESETDIVIDERS             51
-#define bINQ_GETPARAMDIG               52
+#define bINQ_GETPARAMS_ALL             52
 
 #define bINQ_GETIMPCANMNT_ALL          200
 #define bINQ_GETIMPCANHOU_ALL          201

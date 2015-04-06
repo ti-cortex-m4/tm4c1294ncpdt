@@ -1208,17 +1208,17 @@ void    MakeParamDiv(uint  iwPrm)
   mpreParamDiv[iwPrm] = re;
 }
 
-/*
-#ifndef MODBUS
-void    MakeAllDividers(void)
-{
-uint  i;
 
-  for (i=0; i<wPARAMS; i++) 
-    MakeDividers(i);   
+void    MakeParamDivAll(void)
+{
+  uint  i;
+  for (i=0; i<wPARAMS; i++)
+  {
+    MakeParamDiv(i);
+  }
+
+  SaveFile(&flParamsDiv);
 }
-#endif
-*/
 
 
 uint    GetParamIndex(digital  diT)

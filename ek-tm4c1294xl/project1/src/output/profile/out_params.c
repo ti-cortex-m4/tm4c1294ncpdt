@@ -115,20 +115,20 @@ void    OutGetParamCurr(void)
     boBeginParam = FALSE;
 
     bool f = 1;
-    uchar ibCan;
-    for (ibCan=0; ibCan<10; ibCan++)
+    uchar i;
+    for (i=0; i<10; i++)
     {
-      sprintf(szHi+13,"%03u",(uint)10*bInBuff5+ibCan+1);
+      sprintf(szHi+13,"%03u",(uint)10*bInBuff5+i+1);
 
       if (f == 1)
       {
-        if (mpboEnblPar[(uint)10*bInBuff5+ibCan] != TRUE)
+        if (mpboEnblPar[(uint)10*bInBuff5+i] != TRUE)
           reBuffA = 0;
         else
         {
-          uchar i = ibPort;
-          f = ReadParam((uint)10*bInBuff5+ibCan);
-          ibPort = i;
+          uchar p = ibPort;
+          f = ReadParam((uint)10*bInBuff5+i);
+          ibPort = p;
         }
       }
 
@@ -199,20 +199,19 @@ void    OutGetParamFull(void)
 
 
 
-//      case bINQ_RESETDIVIDERS:
 void    OutGetParamDivs(void)
 {
   if (enGlobal != GLB_WORK)
   {
-    MakeAllDividers();
+    MakeParamDivAll();
     Result(bRES_OK);
   }
   else Result(bRES_NEEDREPROGRAM);
 }
 
 
-//      case bINQ_GETPARAMDIG:
-void    OutGetParamDig(void)
+
+void    OutGetParamsAll(void)
 {
   if (bInBuff5 >= bCANALS)
     Result(bRES_BADADDRESS);
@@ -229,10 +228,10 @@ void    OutGetParamDig(void)
     boBeginParam = FALSE;
 
     bool f = 1;
-    uchar ibCan;
-    for (ibCan=0; ibCan<bPARAM_BLOCK; ibCan++)
+    uchar i;
+    for (i=0; i<bPARAM_BLOCK; i++)
     {
-      sprintf(szHi+14,"%2u",ibCan+1);
+      sprintf(szHi+14,"%2u",i+1);
 
       if (f == 1)
       {
@@ -241,7 +240,7 @@ void    OutGetParamDig(void)
         di.ibPhone  = mpdiDigital[bInBuff5].ibPhone;
         di.bDevice  = mpdiDigital[bInBuff5].bDevice;
         di.bAddress = mpdiDigital[bInBuff5].bAddress;
-        di.ibLine   = mppaParamMap[ibCan];
+        di.ibLine   = mppaParamMap[i];
 
         mpdiParam[wPARAMS-1] = di;
 
@@ -261,9 +260,9 @@ void    OutGetParamDig(void)
         {
           ibDig = bInBuff5;
 
-          uchar i = ibPort;
+          uchar p = ibPort;
           f = ReadParam(wPARAMS-1);
-          ibPort = i;
+          ibPort = p;
         }
       }
 
