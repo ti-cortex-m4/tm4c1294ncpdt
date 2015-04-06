@@ -57,3 +57,7 @@ extern  uchar                   mpboReadyCan[bCANALS];
 
 
 extern  uint                    mpcwFailure2[bCANALS];
+
+
+
+extern  uchar                   bKeysLevelB;

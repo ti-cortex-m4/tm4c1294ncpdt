@@ -27,6 +27,7 @@ KEYBOARD_KEY.C
 #include        "digitals/key_addresses.h"
 #include        "digitals/key_enbl_keys.h"
 #include        "digitals/key_keys.h"
+#include        "sensors/key_keys_level_b.h"
 #include        "digitals/key_search.h"
 #include        "digitals/key_automatic.h"
 #include        "digitals/profile/key_run_profile.h"
@@ -191,6 +192,7 @@ void    Keyboard_Key(void)
       case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
+      case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
 
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
@@ -327,6 +329,7 @@ void    Keyboard_Key(void)
       case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
+      case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
 
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
@@ -548,6 +551,7 @@ void    Keyboard_Key(void)
       case bSET_ADDRESSES:      key_SetAddresses();     break;
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
+      case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
 
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;

@@ -66,7 +66,7 @@ void    QueryOpenB(void)
   PushChar(diCurr.bAddress);         
   PushChar(1);         
 
-  PushChar(2); // пароль уровня 2
+  PushChar(bKeysLevelB);
 
   if (boEnblKeys != TRUE)
   {
