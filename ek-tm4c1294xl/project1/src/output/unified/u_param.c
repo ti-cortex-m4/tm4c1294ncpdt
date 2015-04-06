@@ -10,15 +10,18 @@ U_PARAM.C
 #include        "../../include/states.h"
 #include        "../../include/queries_uni.h"
 #include        "../../serial/ports.h"
+#include        "../../realtime/realtime.h"
 #include        "../../time/rtc.h"
 #include        "../../time/timedate.h"
 #include        "../../time/calendar.h"
+#include        "../../hardware/watchdog.h"
 #include        "../../digitals/params/params.h"
 #include        "../../digitals/params/params2.h"
 #include        "../../digitals/params/params_storage.h"
 #include        "../../engine.h"
 #include        "response_uni.h"
 #include        "u_config.h"
+#include        "u_float.h"
 #include        "u_param.h"
 
 
@@ -85,7 +88,7 @@ void    FixParamsUni(digital  diT)
 {
   if ((diT.ibLine == PAR_P) || (diT.ibLine == PAR_P1) || (diT.ibLine == PAR_P2) || (diT.ibLine == PAR_P3))
   {
-    if ((diT.bDevice == 3) && (flFixParamsBugs == FALSE))
+    if ((diT.bDevice == 3) && (boFixParamsBugs == FALSE))
     {
       reBuffA *= 1000;
     }
@@ -93,7 +96,7 @@ void    FixParamsUni(digital  diT)
 
   if ((diT.ibLine == PAR_Q) || (diT.ibLine == PAR_Q1) || (diT.ibLine == PAR_Q2) || (diT.ibLine == PAR_Q3))
   {
-    if ((diT.bDevice == 3) && (flFixParamsBugs == FALSE))
+    if ((diT.bDevice == 3) && (boFixParamsBugs == FALSE))
     {
       reBuffA *= 1000;
     }
@@ -101,10 +104,10 @@ void    FixParamsUni(digital  diT)
 
   if ((diT.ibLine == PAR_I) || (diT.ibLine == PAR_I1) || (diT.ibLine == PAR_I2) || (diT.ibLine == PAR_I3))
   {
-    if (((diT.bDevice == 2) || (diT.bDevice == 8) || (diT.bDevice == 12)) && (flFixParamsBugs == FALSE))
+    if (((diT.bDevice == 2) || (diT.bDevice == 8) || (diT.bDevice == 12)) && (boFixParamsBugs == FALSE))
     { 
     }
-    else if ((diT.bDevice == 3) && (flFixParamsBugs == FALSE))
+    else if ((diT.bDevice == 3) && (boFixParamsBugs == FALSE))
     { 
     }
     else
@@ -116,19 +119,21 @@ void    FixParamsUni(digital  diT)
 
 
 
-void    PushParamsUni(uchar  ibPtr)
+uint    PushParamsUni(uchar  ibPtr, uchar  ibCan)
 {
 uchar   i;
 uint    j;
 
-  uchar ibGrp;
-  for (ibGrp=0; ibGrp<23; ibGrp++)
-  {
-    if ((InBuff(ibPtr + 7 - ibGrp/8) & (0x01 << ibGrp%8)) != 0) 
-    {
-      wBuffD += sizeof(real);
+  uint wSize = 0;
 
-      i = GetParamLineUni(ibGrp);
+  uchar p;
+  for (p=0; p<23; p++)
+  {
+    if ((InBuff(ibPtr + 7 - p/8) & (0x01 << p%8)) != 0) 
+    {
+      wSize += sizeof(real);
+
+      i = GetParamLineUni(p);
       if (i == 0xFF)
       {
         reBuffA = 0; 
@@ -148,8 +153,11 @@ uint    j;
         else
         {
           reBuffA = mpreParBuff[ PrevSoftTim() ][ j ];
-              
-          if (_chkfloat_(reBuffA) < 2)
+
+          combo32 co;
+          co.reBuff = reBuffA;
+
+          if (co.dwBuff != 0xFFFFFFFF)
           {
             FixParamsUni(diT);
 
@@ -161,6 +169,8 @@ uint    j;
       }
     }
   }
+
+  return wSize;
 }
 
 
@@ -200,15 +210,16 @@ void    GetParamUni1(void)
     uint iwTim = bInBuffA*0x100+bInBuffB;
     LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES);
 
-    wBuffD = 0;
+    uint wSize = 0;
 
     InitPushUni();
+
     uchar ibCan;
     for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
-      PushParamsUni(12);
+      PushParamsUni(12, ibCan);
 
     time ti = GetTimeParamUni(iwTim);
-    Output2_Code(wBuffD, ((boEnblAllParams == TRUE) ? bUNI_OK : bUNI_NOTREADY), &ti);
+    Output2_Code(wSize, ((boEnblAllParams == TRUE) ? bUNI_OK : bUNI_NOTREADY), &ti);
   }
 }
 
@@ -233,28 +244,29 @@ uint    i,j;
 
     InitPushUni();
     PushInt(cwParamTim*cbDevicesUni);
-    wBuffD = 2;
+    uint wSize = 2;
 
+    time ti;
     while (i < j)
     {
-      ibCan = ((i-1) % cbDevicesUni)+1;
+      uchar ibCan = ((i-1) % cbDevicesUni)+1;
       uint iwTim = (i-1) / cbDevicesUni;
       i++;
 
       LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES);
 
-      GetTimeParamUni(iwTim);
+      ti = GetTimeParamUni(iwTim);
 
       PushInt(ibCan);
-      Push(&tiAlt, sizeof(time));
-      wBuffD += 2+6;
+      Push(&ti, sizeof(time));
+      wSize += 2+6;
 
-      PushParamsUni(10);
+      wSize += PushParamsUni(10, ibCan);
 
-      if (wBuffD >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
+      if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       ResetWDT();
     }
 
-    Output2_Code(wBuffD, ((boEnblAllParams == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
+    Output2_Code(wSize, ((boEnblAllParams == TRUE) ? bUNI_OK : bUNI_NOTREADY), &ti);
   }
 }
