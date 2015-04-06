@@ -6,24 +6,17 @@ U_PARAM.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_ports.h"
-//#include        "../../memory/mem_realtime.h"
-//#include        "../../memory/mem_energy.h"
-//#include        "../../memory/mem_energy_spec.h"
 #include        "../../include/states.h"
-//#include        "../../include/queries_uni.h"
+#include        "../../include/queries_uni.h"
 #include        "../../serial/ports.h"
-//#include        "../../realtime/realtime.h"
-//#include        "../../time/rtc.h"
-//#include        "../../time/timedate.h"
-//#include        "../../time/calendar.h"
+#include        "../../time/rtc.h"
+#include        "../../time/timedate.h"
+#include        "../../time/calendar.h"
 #include        "../../digitals/params/params.h"
 #include        "../../digitals/params/params2.h"
 #include        "../../digitals/params/params_storage.h"
-//#include        "../../groups.h"
-//#include        "../../energy.h"
-//#include        "../../impulses/max_power.h"
-//#include        "../../energy2.h"
 #include        "response_uni.h"
+#include        "u_config.h"
 #include        "u_param.h"
 
 
@@ -126,6 +119,7 @@ void    PushParamsUni(uchar  ibPtr)
 uchar   i;
 uint    j;
 
+  uchar ibGrp;
   for (ibGrp=0; ibGrp<23; ibGrp++)
   {
     if ((InBuff(ibPtr + 7 - ibGrp/8) & (0x01 << ibGrp%8)) != 0) 
@@ -172,7 +166,7 @@ uint    j;
 void    GetTimeAltParamUni(int  i)
 {
   tiAlt = *GetCurrTimeDate();
-  if (boQuickParam == TRUE)
+  if (boMntParams == TRUE)
   {
     dwBuffC = DateToMntIndex();
     dwBuffC -= i;
@@ -203,7 +197,7 @@ void    GetParamUni1(void)
   else
   {
     iwTim = bInBuffA*0x100+bInBuffB;
-    LoadParTim((wTIMES + iwHardTim - iwTim) % wTIMES);
+    LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES);
 
     wBuffD = 0;
 
@@ -246,7 +240,7 @@ uint    i,j;
       iwTim = (i-1) / cbDevicesUni;
       i++;
 
-      LoadParTim((wTIMES + iwHardTim - iwTim) % wTIMES);
+      LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES);
 
       GetTimeAltParamUni(iwTim);
 
