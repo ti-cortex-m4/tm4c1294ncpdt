@@ -5,12 +5,19 @@ OUT_PARAMS.C
 ------------------------------------------------------------------------------*/
 
 #include        "../../main.h"
+#include        "../../memory/mem_ports.h"
 #include        "../../serial/ports.h"
+#include        "../../digitals/digitals.h"
+#include        "../../digitals/digitals_pause.h"
 #include        "../../digitals/params/params.h"
+#include        "../../digitals/params/params2.h"
+#include        "../../console.h"
 
 
-/*
-      case bINQ_GETPARAM_100:
+
+//      case bINQ_GETPARAM_100:
+void    OutGetParams100(void)
+{
         if ((uint)100*bInBuff5 < wPARAMS)
         {
           InitPushCRC();
@@ -19,10 +26,13 @@ OUT_PARAMS.C
           Output((uint)100*sizeof(digital));
         }
         else Result(bRES_BADADDRESS);
-        break;
+}
 
-      case bINQ_GETPARAM:
-        if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
+
+//      case bINQ_GETPARAM:
+void    OutGetParams(void)
+{
+       if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
         {
           InitPushCRC();
           Push(&mpdiParam[ bInBuff5*0x100 + bInBuff6 ],sizeof(digital));
@@ -30,9 +40,12 @@ OUT_PARAMS.C
           Output(sizeof(digital));
         }
         else Result(bRES_BADADDRESS);
-        break;
+}
 
-      case bINQ_SETPARAM:
+
+//      case bINQ_SETPARAM:
+void    OutSetParam(void)
+{
         if (enGlobal != GLB_WORK)
         {
           if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
@@ -54,8 +67,11 @@ OUT_PARAMS.C
         }
         else Result(bRES_NEEDREPROGRAM);
         break;
+}
 
-      case bINQ_GETDIVIDER:
+//      case bINQ_GETDIVIDER:
+void    OutGetParamDiv(void)
+{
         if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
         {
           InitPushCRC();
@@ -63,9 +79,12 @@ OUT_PARAMS.C
           Output(sizeof(real));
         }
         else Result(bRES_BADADDRESS);
-        break;
+}
 
-      case bINQ_SETDIVIDER:
+
+//case bINQ_SETDIVIDER:
+void    OutSetParamDiv(void)
+{
         if (enGlobal != GLB_WORK)
         {
           if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
@@ -81,8 +100,12 @@ OUT_PARAMS.C
         }
         else Result(bRES_NEEDREPROGRAM);
         break;
+}
 
-      case bINQ_GETPARAMCURR:
+
+//      case bINQ_GETPARAMCURR:
+void    OutGetParamCurr(void)
+{
         if ((uint)10*bInBuff5 < wPARAMS)
         {
           SaveDisplay();
@@ -128,8 +151,12 @@ OUT_PARAMS.C
         }
         else Result(bRES_BADADDRESS);
         break;
+}
 
-      case bINQ_GETPARAMBUFF:
+
+//      case bINQ_GETPARAMBUFF:
+void    OutGetParamBuff(void)
+{
         if (((uint)10*bInBuff5 < wPARAMS) && ((uint)10*bInBuff6 <= wPARAMS))
         {
           InitPushCRC();
@@ -140,9 +167,12 @@ OUT_PARAMS.C
           Output((uint)10*bInBuff6*(sizeof(time)+sizeof(real)));
         }
         else Result(bRES_BADADDRESS);
-        break;
+}
 
-      case bINQ_GETPARAMFULL:
+
+//      case bINQ_GETPARAMFULL:
+void    OutGetParamFull(void)
+{
         if (enGlobal != GLB_PROGRAM)
         {
           if (((uint)10*bInBuff5 < wPARAMS) && ((uint)10*bInBuff6 <= wPARAMS))
@@ -169,18 +199,25 @@ OUT_PARAMS.C
           else Result(bRES_BADADDRESS);
         }
         else Result(bRES_NEEDWORK);
-        break;
+}
 
-      case bINQ_RESETDIVIDERS:
+
+
+//      case bINQ_RESETDIVIDERS:
+void    OutGetParamDivs(void)
+{
         if (enGlobal != GLB_WORK)
         {
           MakeAllDividers();
           Result(bRES_OK);
         }
         else Result(bRES_NEEDREPROGRAM);
-        break;
+}
 
-      case bINQ_GETPARAMDIG:
+
+//      case bINQ_GETPARAMDIG:
+void    OutGetParamDig(void)
+{
         if (bInBuff5 >= bCANALS)
           Result(bRES_BADADDRESS);
         else if ((GetDigitalPhone(bInBuff5) != 0) || (GetDigitalDevice(bInBuff5) == 0))
@@ -248,5 +285,4 @@ OUT_PARAMS.C
 
           LoadDisplay();
         }
-        break;
-*/
+}
