@@ -6,11 +6,14 @@ OUT_PARAMS.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_ports.h"
+#include        "../../memory/mem_realtime.h"
 #include        "../../serial/ports.h"
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_pause.h"
+#include        "../../digitals/digitals_messages.h"
 #include        "../../digitals/params/params.h"
 #include        "../../digitals/params/params2.h"
+#include        "../../engine.h"
 #include        "../../console.h"
 
 
@@ -50,6 +53,8 @@ void    OutSetParam(void)
         {
           if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
           {
+            digital diT;
+
             diT.ibPort   = InBuff(7);
             diT.ibPhone  = InBuff(8);
             diT.bDevice  = InBuff(9);
@@ -66,7 +71,6 @@ void    OutSetParam(void)
           else Result(bRES_BADADDRESS);
         }
         else Result(bRES_NEEDREPROGRAM);
-        break;
 }
 
 //      case bINQ_GETDIVIDER:
@@ -99,7 +103,6 @@ void    OutSetParamDiv(void)
           else Result(bRES_BADADDRESS);
         }
         else Result(bRES_NEEDREPROGRAM);
-        break;
 }
 
 
@@ -150,7 +153,6 @@ void    OutGetParamCurr(void)
           LoadDisplay();
         }
         else Result(bRES_BADADDRESS);
-        break;
 }
 
 
