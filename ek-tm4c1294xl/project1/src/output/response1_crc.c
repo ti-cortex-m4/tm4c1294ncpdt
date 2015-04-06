@@ -87,7 +87,7 @@ void    Response1_CRC(void)
       case bINQ_GETPARAM_BUFF: OutGetParamBuff(); break;
       case bINQ_GETPARAM_FULL: OutGetParamFull(); break;
       case bINQ_RESETDIVIDERS: OutGetParamDivs(); break;
-      case bINQ_GETPARAMDIG: OutGetParamDig(); break;
+      case bINQ_GETPARAMS_ALL: OutGetParamsAll(); break;
 
       case bINQ_GETTARIFFSDAY: OutGetTariffsDay(); break;
 

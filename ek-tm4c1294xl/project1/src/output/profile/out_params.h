@@ -16,4 +16,4 @@ void    OutGetParamBuff(void);
 void    OutGetParamFull(void);
 
 void    OutGetParamDivs(void);
-void    OutGetParamDig(void);
+void    OutGetParamsAll(void);

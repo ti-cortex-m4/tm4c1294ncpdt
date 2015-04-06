@@ -62,9 +62,9 @@ real    re;
           re = GetCanReal(mpreChannelsB, diCurr.ibLine);
         else
         {
-          uchar i = ibPort;
+          uchar p = ibPort;
           bool f = ReadCntCurrCan(c);
-          ibPort = i;
+          ibPort = p;
 
           if (f == 0) re = 0;
         }
@@ -122,9 +122,9 @@ uint    wSize;
           moT.ti1 = tiChannelC;
         else
         {
-          uchar i = ibPort;
+          uchar p = ibPort;
           bool f = ReadTimeCan(c);
-          ibPort = i;
+          ibPort = p;
 
           if (f == 0) moT.ti1 = tiZero; else moT.ti1 = tiAlt;
         }
@@ -192,9 +192,9 @@ real    re;
           re = GetCanReal(mpreChannelsB, diCurr.ibLine);
         else
         {
-          uchar i = ibPort;
+          uchar p = ibPort;
           bool f = ReadCntMonCan(ibMon, c);
-          ibPort = i;
+          ibPort = p;
 
           if (f == 0) re = 0;
         }
