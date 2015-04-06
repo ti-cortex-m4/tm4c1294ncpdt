@@ -14,6 +14,7 @@ PARAMS2.C
 #include    "../../digitals/digitals_messages.h"
 #include    "../../devices/devices.h"
 #include    "../../sensors/device_b.h"
+#include    "../../sensors/device_c.h"
 #include    "../../time/delay.h"
 #include    "../../console.h"
 #include    "../../engine.h"
@@ -378,7 +379,7 @@ bool    ReadParamC(void)
 
     case PAR_F  : QueryArrayC(13,1); break;
 
-    default:              return(0); break;
+    default:              return(0);
    }
 
 
@@ -410,7 +411,7 @@ bool    ReadParamC(void)
 
     case PAR_F  : ReadArrayC(4);  break;
 
-    default:           return(0); break;
+    default:           return(0);
    }
 
   switch (diCurr.ibLine)
@@ -423,12 +424,12 @@ bool    ReadParamC(void)
     case PAR_Q  :
     case PAR_Q1 :
     case PAR_Q2 :
-    case PAR_Q3 : if (flFixParamsBugs == FALSE) reBuffA /= 1000; break;
+    case PAR_Q3 : if (boFixParamsBugs == FALSE) reBuffA /= 1000; break;
 
     case PAR_I  :
     case PAR_I1 :
     case PAR_I2 :
-    case PAR_I3 : if (flFixParamsBugs != FALSE) reBuffA *= 1000; break;
+    case PAR_I3 : if (boFixParamsBugs != FALSE) reBuffA *= 1000; break;
   }
 
   return(1);
@@ -940,7 +941,7 @@ bool    ReadParam(uint  iwPrm)
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadParamC() );  break;
+    case 3:  return( ReadParamC() );
 #endif
 
 #ifndef SKIP_G

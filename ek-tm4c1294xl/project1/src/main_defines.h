@@ -10,7 +10,7 @@ MAIN_DEFINES.H
 
 #define SKIP_A
 //#define SKIP_B
-#define SKIP_C
+//#define SKIP_C
 #define SKIP_D
 #define SKIP_E
 #define SKIP_F
