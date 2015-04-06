@@ -71,7 +71,9 @@ void    key_SetParams(void)
         ShowHi(szParams);
 
         SetParam(iwPrm, &di);
-        MakeParamDividers(iwPrm);
+
+        MakeParamDiv(iwPrm);
+        SaveFile(&flParamsDiv);
 
         if (++iwPrm >= wPARAMS) iwPrm = 0;
 
