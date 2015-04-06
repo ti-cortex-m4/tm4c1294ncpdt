@@ -18,6 +18,7 @@ RESPONSE_UNI.C
 #include        "../../time/rtc.h"
 #include        "../../kernel/crc-16.h"
 #include        "u_config.h"
+#include        "u_param.h"
 #include        "u_hou.h"
 #include        "u_energy.h"
 #include        "u_query_crc.h"
@@ -203,7 +204,7 @@ void    RunResponseUNI(void)
       case wUNI_GETOPEN: 
         GetOpenUni(); 
         break;
-
+*/
       case wUNI_GETPARAMS1:
         GetParamUni1(); 
         break;
@@ -211,7 +212,7 @@ void    RunResponseUNI(void)
       case wUNI_GETPARAMS2:
         GetParamUni2(); 
         break;
-
+/*
       case wUNI_GETTRANSIT:
         GetTransitUni(); 
         break;
