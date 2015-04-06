@@ -35,7 +35,7 @@ uint    GetCODEChecksum(void)
 
 uint    GetBuildNumber(void)
 {
-  return 8; //GetCODE(2)*0x100 + GetCODE(3);
+  return 9; //GetCODE(2)*0x100 + GetCODE(3);
 }
 
 

@@ -200,7 +200,9 @@ typedef enum
 
   FLS_PARAMS_VALUES     = FLS_USE_PARAMS_DIV + 1,
 
-  FLS_END               = FLS_PARAMS_VALUES + PARAMS_PAGES*wTIMES
+  FLS_KEYS_LEVEL_B      = FLS_PARAMS_VALUES + PARAMS_PAGES*wTIMES,
+
+  FLS_END               = FLS_KEYS_LEVEL_B + 1
 } flash;
 
 

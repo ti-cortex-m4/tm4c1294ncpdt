@@ -82,3 +82,8 @@ uchar                   mpboReadyCan[bCANALS];
 
 // счетчикм событий
 uint                    mpcwFailure2[bCANALS];
+
+
+
+// уровень доступа к счетчику Меркурий-230
+uchar                   bKeysLevelB;

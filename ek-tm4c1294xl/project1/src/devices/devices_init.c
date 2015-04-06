@@ -49,6 +49,7 @@ file const              flHideMessages = {FLS_HIDE_MESSAGES, &boHideMessages, si
 file const              flControlTime = {FLS_CONTROL_TIME, &boControlTime, sizeof(boolean)};
 file const              flManageTime = {FLS_MANAGE_TIME, &boManageTime, sizeof(boolean)};
 
+file const              flKeysLevelB = {FLS_KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
 
 
 void    InitDevices(void)
@@ -58,6 +59,13 @@ void    InitDevices(void)
   LoadFile(&flHideMessages);
   LoadFile(&flControlTime);
   LoadFile(&flManageTime);
+
+  LoadFile(&flKeysLevelB);
+  if ((bKeysLevelB < 1) || (bKeysLevelB > 2))
+  {
+    bKeysLevelB = 2;
+    SaveFile(&flKeysLevelB);
+  }
 
 //uchar   i,j;
 //
@@ -112,6 +120,9 @@ void    ResetDevices(void)
 
   boManageTime = TRUE;
   SaveFile(&flManageTime);
+
+  bKeysLevelB = 2;
+  SaveFile(&flKeysLevelB);
 
   ResetMaxRepeats();
   ResetDef();

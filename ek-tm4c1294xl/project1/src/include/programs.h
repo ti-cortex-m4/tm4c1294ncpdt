@@ -224,6 +224,7 @@ PROGRAMS.H
 #define bSET_ADDRESSES              100
 #define bSET_ENBL_KEYS              170
 #define bSET_KEYS                   171
+#define wSET_KEYS_LEVEL_B           271
 
 #define bSET_PHONES                 180
 #define bSET_MAX_CONNECT            181
