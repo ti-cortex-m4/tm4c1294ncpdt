@@ -423,12 +423,12 @@ bool    ReadParamC(void)
     case PAR_Q  :
     case PAR_Q1 :
     case PAR_Q2 :
-    case PAR_Q3 : if (boFixParamBugs == FALSE) reBuffA /= 1000; break;
+    case PAR_Q3 : if (flFixParamsBugs == FALSE) reBuffA /= 1000; break;
 
     case PAR_I  :
     case PAR_I1 :
     case PAR_I2 :
-    case PAR_I3 : if (boFixParamBugs != FALSE) reBuffA *= 1000; break;
+    case PAR_I3 : if (flFixParamsBugs != FALSE) reBuffA *= 1000; break;
   }
 
   return(1);

@@ -41,6 +41,15 @@ typedef struct
 } time;
 
 
+// тип 'время'
+typedef struct
+{
+  uchar         bSecond;
+  uchar         bMinute;
+  uchar         bHour;
+} time2;
+
+
 // тип 'двойное время/дата'
 typedef struct
 {
