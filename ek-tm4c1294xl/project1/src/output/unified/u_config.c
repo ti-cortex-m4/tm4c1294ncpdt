@@ -207,7 +207,7 @@ void    GetCorrectionsUni(void)
   }
   Output2(2*(bInBuff7-bInBuff6));
 }
-
+*/
 
 
 void    GetOpenUni(void) 
@@ -229,7 +229,7 @@ uchar   i;
     Result2(bUNI_BADPASSWORD);
   }
 }
-*/
+
 
 
 void    GetConfigUni(void) 

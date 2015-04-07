@@ -3,16 +3,26 @@ U_MNT.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "rtc.h"
-#include        "timedate.h"
-#include        "queries2.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "postinput2.h"
+
+#include        "../../main.h"
+#include        "../../memory/mem_ports.h"
+#include        "../../memory/mem_realtime.h"
+//#include        "../../memory/mem_energy.h"
+//#include        "../../memory/mem_energy_spec.h"
+#include        "../../include/states.h"
+#include        "../../include/queries_uni.h"
+#include        "../../serial/ports.h"
+#include        "../../realtime/realtime.h"
+#include        "../../time/rtc.h"
+#include        "../../time/timedate.h"
+#include        "../../time/calendar.h"
+//#include        "../../special/recalc_def.h"
+//#include        "../../groups.h"
+//#include        "../../energy.h"
+//#include        "../../energy2.h"
+#include        "response_uni.h"
+//#include        "u_def.h"
+#include        "u_mnt.h"
 
 
 
@@ -34,6 +44,7 @@ uchar   i;
   {
     InitPushUni();
 
+    uchar ibCan;
     for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
     {
       for (i=bInBuffB; i<bInBuffB+bInBuffD; i++)
@@ -70,6 +81,7 @@ uchar   i;
   {
     InitPushUni();
 
+    uchar ibGrp;
     for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
     {
       for (i=bInBuffB; i<bInBuffB+bInBuffD; i++)
@@ -89,4 +101,3 @@ uchar   i;
 }
 
 #endif
-*/
