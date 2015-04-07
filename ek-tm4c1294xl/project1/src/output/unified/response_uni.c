@@ -20,7 +20,9 @@ RESPONSE_UNI.C
 #include        "u_config.h"
 #include        "u_param.h"
 #include        "u_transit.h"
+#include        "u_mnt.h"
 #include        "u_hou.h"
+#include        "u_day.h"
 #include        "u_energy.h"
 #include        "u_query_crc.h"
 #include        "uni.h"
@@ -218,25 +220,11 @@ void    RunResponseUNI(void)
         GetTransitUni(); 
         break;
 
-      case wUNI_GETCONFIG: 
-        GetConfigUni(); 
-        break;
-
-      case wUNI_GETSENSORS: 
-        GetSensorsUni(); 
-        break;
-
-      case wUNI_GETDIGITALS: 
-        GetDigitalsUni(); 
-        break;
-
-      case wUNI_GETCANALS: 
-        GetCanalsUni(); 
-        break;
-
-      case wUNI_GETGROUPS: 
-        GetGroupsUni(); 
-        break;
+      case wUNI_GETCONFIG: GetConfigUni(); break;
+      case wUNI_GETSENSORS: GetSensorsUni(); break;
+      case wUNI_GETDIGITALS: GetDigitalsUni(); break;
+      case wUNI_GETCANALS: GetCanalsUni(); break;
+      case wUNI_GETGROUPS: GetGroupsUni(); break;
 
       case wUNI_GETENGCANDAY: GetEngCanDayUni(false); break;
       case wUNI_GETENGGRPDAY: GetEngGrpDayUni(false); break;
@@ -247,15 +235,10 @@ void    RunResponseUNI(void)
       case wUNI_GETENGGRPDAY_X2: GetEngGrpDayUni(true); break;
       case wUNI_GETENGCANMON_X2: GetEngCanMonUni(true); break;
       case wUNI_GETENGGRPMON_X2: GetEngGrpMonUni(true); break;
-/*
-      case wUNI_GETPOWCANMNT: 
-        GetPowCanMntUni(); 
-        break;
 
-      case wUNI_GETPOWGRPMNT: 
-        GetPowGrpMntUni(); 
-        break;
-*/
+      case wUNI_GETPOWCANMNT: GetPowCanMntUni(); break;
+      case wUNI_GETPOWGRPMNT: GetPowGrpMntUni(); break;
+
       case wUNI_GETPOWCANHOU: GetPowCanHouUni(); break;
       case wUNI_GETPOWGRPHOU: GetPowGrpHouUni(); break;
 
@@ -272,15 +255,10 @@ void    RunResponseUNI(void)
 */
       case wUNI_GETMAXGRPDAY: GetMaxGrpDayUni(); break;
       case wUNI_GETMAXGRPMON: GetMaxGrpMonUni(); break;
+
+      case wUNI_GETDEFCANDAY: GetDefCanDayUni(); break;
+      case wUNI_GETDEFGRPDAY: GetDefGrpDayUni(); break;
 /*
-      case wUNI_GETDEFCANDAY:
-        GetDefCanDayUni(); 
-        break;
-
-      case wUNI_GETDEFGRPDAY:
-        GetDefGrpDayUni(); 
-        break;
-
       case wUNI_GETEVENTS_COUNTS:
         GetEventsCountsUni(); 
         break;
