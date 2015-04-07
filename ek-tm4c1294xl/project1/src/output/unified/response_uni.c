@@ -24,6 +24,7 @@ RESPONSE_UNI.C
 #include        "u_hou.h"
 #include        "u_day.h"
 #include        "u_energy.h"
+#include        "u_cnt.h"
 #include        "u_query_crc.h"
 #include        "uni.h"
 
@@ -248,11 +249,9 @@ void    RunResponseUNI(void)
       case wUNI_GETCNTCANMON:
         GetCntCanMonUni(); 
         break;
-
-      case wUNI_GETCNTCAN:
-        GetCntCanUni(); 
-        break;
 */
+      case wUNI_GETCNTCAN: GetCntCanUni(); break;
+
       case wUNI_GETMAXGRPDAY: GetMaxGrpDayUni(); break;
       case wUNI_GETMAXGRPMON: GetMaxGrpMonUni(); break;
 
