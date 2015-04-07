@@ -11,6 +11,7 @@ extern  file const              flControlTime;
 extern  file const              flManageTime;
 
 extern  file const              flKeysLevelB;
+extern  file const              flShortProfileC;
 
 
 

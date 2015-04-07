@@ -87,3 +87,6 @@ uint                    mpcwFailure2[bCANALS];
 
 // уровень доступа к счетчику Меркурий-230
 uchar                   bKeysLevelB;
+
+// флаг чтения профилей счетчика СС-301 (x6 - false, x1 - true)
+boolean                 boShortProfileC;

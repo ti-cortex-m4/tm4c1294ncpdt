@@ -50,6 +50,8 @@ file const              flControlTime = {FLS_CONTROL_TIME, &boControlTime, sizeo
 file const              flManageTime = {FLS_MANAGE_TIME, &boManageTime, sizeof(boolean)};
 
 file const              flKeysLevelB = {FLS_KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
+file const              flShortProfileC = {FLS_SHORT_PROFILE_C, &boShortProfileC, sizeof(boolean)};
+
 
 
 void    InitDevices(void)
@@ -66,6 +68,8 @@ void    InitDevices(void)
     bKeysLevelB = 2;
     SaveFile(&flKeysLevelB);
   }
+
+  LoadFile(&flShortProfileC);
 
 //uchar   i,j;
 //
@@ -123,6 +127,9 @@ void    ResetDevices(void)
 
   bKeysLevelB = 2;
   SaveFile(&flKeysLevelB);
+
+  boShortProfileC = FALSE;
+  SaveFile(&flShortProfileC);
 
   ResetMaxRepeats();
   ResetDef();
