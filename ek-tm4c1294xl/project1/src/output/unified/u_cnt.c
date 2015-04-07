@@ -3,24 +3,31 @@ U_CNT.C
 
 
 ------------------------------------------------------------------------------*/
+
+#include        "../../main.h"
+#include        "../../memory/mem_ports.h"
+//#include        "../../memory/mem_realtime.h"
+//#include        "../../memory/mem_energy.h"
+//#include        "../../memory/mem_uni.h"
+#include        "../../include/states.h"
+#include        "../../include/queries_uni.h"
+#include        "../../serial/ports.h"
+//#include        "../../realtime/realtime.h"
+#include        "../../time/rtc.h"
+//#include        "../../time/timedate.h"
+//#include        "../../time/calendar.h"
+//#include        "../../special/recalc_def.h"
+//#include        "../../impulses/max_power.h"
+//#include        "../../hardware/watchdog.h"
+//#include        "../../groups.h"
+//#include        "../../energy.h"
+//#include        "../../energy2.h"
+#include        "response_uni.h"
+//#include        "u_def.h"
+#include        "u_cnt.h"
+
+
 /*
-#include        "main.h"
-#include        "xdata.h"
-#include        "rtc.h"
-#include        "timedate.h"
-#include        "queries2.h"
-#include        "ports.h"
-#include        "general.h"
-#include        "engine.h"
-#include        "sensors.h"
-#include        "nexttime.h"
-#include        "postinput2.h"
-#include        "automatic3.h"
-
-
-
-#ifndef MODBUS
-
 void    PushCntCanMonAllUni(uchar  ibCanal, uchar  ibMonth)
 {
   if (GetDigitalDevice(ibCanal) == 0)
@@ -131,11 +138,11 @@ void    GetCntCanMonUni(void)
   else
     GetCntCanMonTarUni();
 }
-
+*/
 
 
 void    GetCntCanAllUni(void) 
-{
+{/*
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -146,6 +153,7 @@ void    GetCntCanAllUni(void)
   { 
     InitPushUni();
 
+    uchar ibCan;
     for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
     {
       tiAlt = mptiEsc_S[ibCan-1];
@@ -155,17 +163,14 @@ void    GetCntCanAllUni(void)
     }
 
     tiAlt = *GetCurrTimeDate();
-
     Output2_Code((uint)(4+6)*bInBuff9, ((boDisableEsc3 != TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
-  }
+  }*/
 }
 
 
 
 void    GetCntCanTarUni(void) 
-{
-uchar   i;
-
+{/*
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -180,8 +185,10 @@ uchar   i;
   { 
     InitPushUni();
 
+    uchar ibCan;
     for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
     {
+      uchar i;
       for (i=bInBuffA; i<bInBuffA+bInBuffB; i++)
       {
         tiAlt = mpvaValue51[ibCan-1].tiSelf;
@@ -192,9 +199,8 @@ uchar   i;
     }
 
     tiAlt = *GetCurrTimeDate();
-
     Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((boExt5Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
-  }
+  }*/
 }
 
 
@@ -206,6 +212,3 @@ void    GetCntCanUni(void)
   else
     GetCntCanTarUni();
 }
-
-#endif
-*/
