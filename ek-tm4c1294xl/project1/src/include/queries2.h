@@ -42,6 +42,9 @@ QUERIES2.H
 #define bEXT_GETRELAXS                 45
 #define bEXT_SETRELAXS                 46
 
+#define bEXT_GETEXTENDED50             49
+#define bEXT_GETEXTENDED51             50
+
 #define bEXT_GETSTARTCAN               52
 
 #define bEXT_GETVERSION                53
