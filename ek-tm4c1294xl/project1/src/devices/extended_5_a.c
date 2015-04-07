@@ -19,7 +19,7 @@ EXTENDED_5_A.C
 
 void    QueryEnergyTariffA(uchar  bTime, uchar  bTariff)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(5);
@@ -88,7 +88,7 @@ uchar   i;
       reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB;
 
     SetCanReal(mpreChannelsB, i);
-    mpboChannelsA[i] = boTrue;     
+    mpboChannelsA[i] = TRUE;     
   }
 
   return(1);

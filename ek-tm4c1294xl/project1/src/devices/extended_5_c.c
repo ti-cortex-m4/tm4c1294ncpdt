@@ -3,23 +3,25 @@ EXTENDED_5_C.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "delay.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "keyboard.h"
-#include        "device_c.h"
-#include        "_automatic1.h"
+
+#include        "../main.h"
+#include        "../memory/mem_digitals.h"
+#include        "../serial/ports.h"
+#include        "../serial/ports_devices.h"
+#include        "../console.h"
+#include        "../sensors/automatic1.h"
+#include        "../sensors/device_c.h"
+#include        "../energy.h"
+#include        "../engine.h"
+#include        "extended_5_c.h"
 
 
+
+#ifndef SKIP_C
 
 void    QueryEnergyDayTariffC(uchar  bTariff)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(3);
@@ -35,7 +37,7 @@ void    QueryEnergyDayTariffC(uchar  bTariff)
 
 void    QueryEnergyAbsTariffC(uchar  bTariff)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(3);
@@ -49,7 +51,7 @@ void    QueryEnergyAbsTariffC(uchar  bTariff)
 }
 
 
-bit     QueryEnergyDayTariffC_Full(uchar  bTariff)
+bool    QueryEnergyDayTariffC_Full(uchar  bTariff)
 {
 uchar   i;
 
@@ -69,7 +71,7 @@ uchar   i;
 }
 
 
-bit     QueryEnergyAbsTariffC_Full(uchar  bTariff)
+bool    QueryEnergyAbsTariffC_Full(uchar  bTariff)
 {
 uchar   i;
 
@@ -89,9 +91,10 @@ uchar   i;
 }
 
 
-bit     ReadCntAbsTariffC(uchar  bTariff)                 
+bool    ReadCntAbsTariffC(uchar  bTariff)
 { 
 uchar   i;
+ulong   dw;
 
   Clear();
   if (ReadKoeffDeviceC() == 0) return(0);
@@ -101,18 +104,18 @@ uchar   i;
   ShowPercent(60+bTariff);
   for (i=0; i<4; i++)
   {
-    dwBuffC = *PGetCanLong(mpdwChannelsA, i);
-    SetCanLong(mpdwChannelsB, i);
+    dw = GetCanLong(mpdwChannelsA, i);
+    SetCanLong(mpdwChannelsB, i, &dw);
   }
 
   if (QueryEnergyAbsTariffC_Full(bTariff) == 0) return(0);             
   ShowPercent(80+bTariff);
   for (i=0; i<4; i++)
   {
-    dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-    dwBuffC -= *PGetCanLong(mpdwChannelsB, i);
+    dw  = GetCanLong(mpdwChannelsA, i);
+    dw -= GetCanLong(mpdwChannelsB, i);
 
-    SetCanLong(mpdwChannelsB, i);
+    SetCanLong(mpdwChannelsB, i, &dw);
   }
 
 
@@ -120,12 +123,13 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB;
+    reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB;
 
-    SetCanReal(mpreChannelsB, i);
-    mpboChannelsA[i] = boTrue;     
+    SetCanReal(mpreChannelsB, i, &reBuffA);
+    mpboChannelsA[i] = TRUE;     
   }
 
   return(1);
 }
-*/
+
+#endif

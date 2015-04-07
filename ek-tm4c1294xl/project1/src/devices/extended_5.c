@@ -72,7 +72,7 @@ uchar i,j;
 
 void    MakeExtended5(void)
 { 
-  if ((boExt5Flag == boTrue) && ((mpvaValue51[ibDig].boSelf == boFalse) || (boManual == boTrue)))
+  if ((boExt5Flag == TRUE) && ((mpvaValue51[ibDig].boSelf == boFalse) || (boManual == TRUE)))
   {
     ShowHi(szExtended5); Clear();
    
@@ -87,7 +87,7 @@ void    MakeExtended5(void)
           mpvaValue51[ibCan].cwOK++;
           mpvaValue51[ibCan].tiSelf = *PGetCurrTimeDate();
           mpvaValue51[ibCan].vaValue50 = mpvaValue50[diPrev.ibLine];
-          mpvaValue51[ibCan].boSelf = boTrue;
+          mpvaValue51[ibCan].boSelf = TRUE;
         }
       }
     }
