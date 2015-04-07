@@ -253,21 +253,21 @@ uchar   i;
   ShowPercent(50);
 
 
-  combo32 coTrue;
+  combo32 co;
 
-  coTrue.mpbBuff[3] = InBuff(4);
-  coTrue.mpbBuff[2] = InBuff(5);
-  coTrue.mpbBuff[1] = InBuff(6);
-  coTrue.mpbBuff[0] = InBuff(7);
+  co.mpbBuff[0] = InBuff(4);
+  co.mpbBuff[1] = InBuff(5);
+  co.mpbBuff[2] = InBuff(6);
+  co.mpbBuff[3] = InBuff(7);
 
-  reBuffB = coTrue.dwBuff; 
+  reBuffB = co.dwBuff;
 
-  coTrue.mpbBuff[3] = InBuff(8);
-  coTrue.mpbBuff[2] = InBuff(9);
-  coTrue.mpbBuff[1] = InBuff(10);
-  coTrue.mpbBuff[0] = InBuff(11);
+  co.mpbBuff[0] = InBuff(8);
+  co.mpbBuff[1] = InBuff(9);
+  co.mpbBuff[2] = InBuff(10);
+  co.mpbBuff[3] = InBuff(11);
 
-  reBuffB *= coTrue.dwBuff;             // K трансформации
+  reBuffB *= co.dwBuff;             // K трансформации
 
 
   for (i=0; i<bMINORREPEATS; i++)

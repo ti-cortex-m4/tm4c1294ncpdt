@@ -274,10 +274,10 @@ uchar   i;
 
   for (i=0; i<4; i++)
   {
-    coEnergy.mpbBuff[3] = PopChar();
-    coEnergy.mpbBuff[2] = PopChar();
-    coEnergy.mpbBuff[1] = PopChar();
     coEnergy.mpbBuff[0] = PopChar();
+    coEnergy.mpbBuff[1] = PopChar();
+    coEnergy.mpbBuff[2] = PopChar();
+    coEnergy.mpbBuff[3] = PopChar();
 
     SetCanLong(mpdwChannelsA, i, &coEnergy.dwBuff);
   }
