@@ -3,33 +3,37 @@ U_TRANSIT.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "queries2.h"
-#include        "postinput2.h"
-#include        "ports.h"
-#include        "flow.h"
+
+#include        "../../main.h"
+#include        "../../memory/mem_ports.h"
+#include        "../../memory/mem_realtime.h"
+#include        "../../memory/mem_uni.h"
+#include        "../../memory/mem_flow.h"
+#include        "../../include/queries_uni.h"
+#include        "../../digitals/wait_query.h"
+#include        "../../serial/ports.h"
+#include        "../../serial/flow.h"
+#include        "response_uni.h"
 #include        "u_config.h"
+#include        "u_transit.h"
 
 
 
-#ifndef MODBUS
-
-void    SetFlowUni(void)
+static void SetFlowUni(uchar  ibPort)
 {
-  ibPortTo = diT.ibPort+1;
+  ibFlowPortTo = ibPort+1;
   cbMaxFlowDelay = bInBuff9;
 }
 
 
 
-void    ResultFlowUni(void)
+static void ResultFlowUni(void)
 {
-  tiAlt = tiCurr;
-  tiAlt.bSecond = bUNI_GOODTRANSIT;
+  time ti;
+  ti = tiCurr;
+  ti.bSecond = bUNI_GOODTRANSIT;
 
-  Output2_Code(0, bUNI_GOODTRANSIT, &tiAlt);
+  Output2_Code(0, bUNI_GOODTRANSIT, &ti);
 }
 
 
@@ -44,8 +48,8 @@ void    GetTransitUni(void)
     Result2_Info(bUNI_BADDATA,2);
   else
   {
-    diT = mpdiDevicesUni[bInBuff7-1];
-    if ((diT.ibPort != 2) && (diT.ibPort != 3))
+    digital di = mpdiDevicesUni[bInBuff7-1];
+    if ((di.ibPort != 2) && (di.ibPort != 3))
       Result2_Info(bUNI_BADDATA,3);
     else
     {
@@ -53,13 +57,13 @@ void    GetTransitUni(void)
         Result2(bUNI_BADTRANSIT);
       else if (ibPort == 0) 
       {
-        SetFlowUni();
+        SetFlowUni(di.ibPort);
         RunFlow0();
         ResultFlowUni();
       }
       else if (ibPort == 1)
       {
-        SetFlowUni();
+        SetFlowUni(di.ibPort);
         RunFlow1();
         ResultFlowUni();
       } 
@@ -68,6 +72,3 @@ void    GetTransitUni(void)
     }
   }
 }
-
-#endif
-*/
