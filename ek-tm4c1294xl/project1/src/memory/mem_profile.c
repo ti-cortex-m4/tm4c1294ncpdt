@@ -77,5 +77,3 @@ time                    tiValueC;
 
 // глобальная переменная
 ulong                   dwValueC;
-
-

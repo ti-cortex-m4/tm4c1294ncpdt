@@ -442,7 +442,7 @@ void    ReadCurrentC(void)
     mpdwBaseDig[i] = mpdwChannelsA[i];
   }
 
-  MakeCurrent2();
+  MakeCurrent(); // TODO MakeCurrent2();
 }
 
 #endif
