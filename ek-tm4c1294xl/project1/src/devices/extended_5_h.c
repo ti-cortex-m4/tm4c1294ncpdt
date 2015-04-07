@@ -118,7 +118,7 @@ uchar   i;
 
   reBuffA = mpreChannelsB[0] * mpreTransCnt[ibDig] - reBuffA;
   mpreChannelsB[0] = reBuffA;
-  mpboChannelsA[0] = boTrue;     
+  mpboChannelsA[0] = TRUE;     
 
 
   return(1);

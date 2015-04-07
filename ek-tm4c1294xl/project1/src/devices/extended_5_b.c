@@ -3,23 +3,25 @@ EXTENDED_5_B.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "delay.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "keyboard.h"
-#include        "device_b.h"
-#include        "_automatic1.h"
+
+#include        "../main.h"
+#include        "../memory/mem_digitals.h"
+#include        "../serial/ports.h"
+#include        "../serial/ports_devices.h"
+#include        "../console.h"
+#include        "../sensors/automatic1.h"
+#include        "../sensors/device_b.h"
+#include        "../energy.h"
+#include        "../engine.h"
+#include        "extended_5_b.h"
 
 
+
+#ifndef SKIP_B
 
 void    QueryEnergyTariffB(uchar  bTime, uchar  bTariff)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);
   PushChar(5);
@@ -31,7 +33,7 @@ void    QueryEnergyTariffB(uchar  bTime, uchar  bTariff)
 }
 
 
-bit     QueryEnergyTariffB_Full(uchar  bTime, uchar  bTariff)
+bool    QueryEnergyTariffB_Full(uchar  bTime, uchar  bTariff)
 {
 uchar   i;
 
@@ -51,9 +53,10 @@ uchar   i;
 }
 
 
-bit     ReadCntAbsTariffB(uchar  bTariff)                 
+bool    ReadCntAbsTariffB(uchar  bTariff)
 { 
 uchar   i;
+ulong   dw;
 
   Clear();
   if (ReadKoeffDeviceB_Special() == 0) return(0);
@@ -63,7 +66,7 @@ uchar   i;
   ShowPercent(60+bTariff);
   for (i=0; i<4; i++)
   {
-    dwBuffC = *PGetCanLong(mpdwChannelsA, i);
+    dw = GetCanLong(mpdwChannelsA, i);
     SetCanLong(mpdwChannelsB, i);
   }
 
@@ -71,8 +74,8 @@ uchar   i;
   ShowPercent(80+bTariff);
   for (i=0; i<4; i++)
   {
-    dwBuffC  = *PGetCanLong(mpdwChannelsA, i);
-    dwBuffC -= *PGetCanLong(mpdwChannelsB, i);
+    dw  = GetCanLong(mpdwChannelsA, i);
+    dw -= GetCanLong(mpdwChannelsB, i);
 
     SetCanLong(mpdwChannelsB, i);
   }
@@ -85,12 +88,14 @@ uchar   i;
     if (mpdwChannelsB[i] > 0xF0000000)
       reBuffA = 0;
     else
-      reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB * 2;
+      reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB * 2;
 
     SetCanReal(mpreChannelsB, i);
-    mpboChannelsA[i] = boTrue;     
+    mpboChannelsA[i] = TRUE;     
   }
 
   return(1);
 }
-*/
+
+#endif
+
