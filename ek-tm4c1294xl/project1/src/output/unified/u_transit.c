@@ -29,8 +29,7 @@ static void SetFlowUni(uchar  ibPort)
 
 static void ResultFlowUni(void)
 {
-  time ti;
-  ti = tiCurr;
+  time ti = tiCurr;
   ti.bSecond = bUNI_GOODTRANSIT;
 
   Output2_Code(0, bUNI_GOODTRANSIT, &ti);

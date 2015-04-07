@@ -201,11 +201,11 @@ void    RunResponseUNI(void)
       case wUNI_GETCORRECTIONS: 
         GetCorrectionsUni(); 
         break;
-
+*/
       case wUNI_GETOPEN: 
         GetOpenUni(); 
         break;
-*/
+
       case wUNI_GETPARAMS1:
         GetParamUni1(); 
         break;
