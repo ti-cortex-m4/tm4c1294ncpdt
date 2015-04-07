@@ -3,30 +3,38 @@ EXTENDED_5.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "rtc.h"
-#include        "delay.h"
-#include        "sensors.h"
-#include        "ports.h"
-#include        "queries.h"
-#include        "engine.h"
-#include        "keyboard.h"
-#include        "extended_5_a.h"
+
+#include        "../main.h"
+#include        "../memory/mem_digitals.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_extended_5.h"
+//#include        "../display/display.h"
+//#include        "../keyboard/keyboard.h"
+//#include        "../hardware/watchdog.h"
+#include        "../digitals/digitals.h"
+#include        "../digitals/digitals_display.h"
+//#include        "../digitals/digitals_messages.h"
+#include        "../devices/devices.h"
+//#include        "../sensors/automatic2.h"
+#include        "../serial/ports.h"
+//#include        "../time/timedate.h"
+#include        "../time/rtc.h"
+#include        "../console.h"
+//#include        "../engine.h"
+//#include        "../energy.h"
+//#include        "../flash/files.h"
 #include        "extended_5_b.h"
 #include        "extended_5_c.h"
-#include        "extended_5_h.h"
+#include        "extended_5.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szExtended5     = "Опрос данных: 5 ";
+static char const       szExtended5[]   = "Опрос данных: 5 ";
 
 
 
-bit     ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
+bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 {
   Clear();
 
@@ -35,20 +43,28 @@ bit     ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 
   switch (diCurr.bDevice)
   {
+#ifndef SKIP_A
     case 15:
-    case 1:  return( ReadCntAbsTariffA(bTariff) );  break;
+    case 1:  return( ReadCntAbsTariffA(bTariff) );
+#endif
 
+#ifndef SKIP_B
     case 8:
-    case 2:  return( ReadCntAbsTariffB(bTariff) );  break;
+    case 2:  return( ReadCntAbsTariffB(bTariff) );
+#endif
 
-    case 3:  return( ReadCntAbsTariffC(bTariff) );  break;
+#ifndef SKIP_C
+    case 3:  return( ReadCntAbsTariffC(bTariff) );
+#endif
 
-    case 10: return( ReadCntAbsTariffH(bTariff) );  break;
+#ifndef SKIP_H
+    case 10: return( ReadCntAbsTariffH(bTariff) );
+#endif
   }
 }
 
 
-bit     CoreExtended5(void)
+bool    CoreExtended5(void)
 {
 uchar i,j;
 
@@ -72,20 +88,22 @@ uchar i,j;
 
 void    MakeExtended5(void)
 { 
-  if ((boExt5Flag == TRUE) && ((mpvaValue51[ibDig].boSelf == boFalse) || (boManual == TRUE)))
+  if ((boExt5Flag == TRUE) && ((mpvaValue51[ibDig].boSelf == FALSE) || (boManualProfile == TRUE)))
   {
     ShowHi(szExtended5); Clear();
    
     if (CoreExtended5() == 1)
     {
-      LoadCurrDigital(ibDig);      
+      LoadCurrDigital(ibDig);
+
+      uchar ibCan;
       for (ibCan=0; ibCan<bCANALS; ibCan++)
       {
         LoadPrevDigital(ibCan);
-        if (CompareCurrPrevLines() == 1)
+        if (CompareCurrPrevLines(ibDig, ibCan) == 1)
         {
           mpvaValue51[ibCan].cwOK++;
-          mpvaValue51[ibCan].tiSelf = *PGetCurrTimeDate();
+          mpvaValue51[ibCan].tiSelf = *GetCurrTimeDate();
           mpvaValue51[ibCan].vaValue50 = mpvaValue50[diPrev.ibLine];
           mpvaValue51[ibCan].boSelf = TRUE;
         }
@@ -93,11 +111,13 @@ void    MakeExtended5(void)
     }
     else
     {
-      LoadCurrDigital(ibDig);      
+      LoadCurrDigital(ibDig);
+
+      uchar ibCan;
       for (ibCan=0; ibCan<bCANALS; ibCan++)
       {
         LoadPrevDigital(ibCan);
-        if (CompareCurrPrevLines() == 1)
+        if (CompareCurrPrevLines(ibDig, ibCan) == 1)
         {
           mpvaValue51[ibCan].cwError++;
         }
@@ -105,15 +125,17 @@ void    MakeExtended5(void)
       Error(); DelayInf();
     }  
 
-    ShowDigitalHi(); Clear();
+    ShowCanalNumber(ibDig);
+    Clear();
   }
 }
 
 
 void    NextDayExtended5(void)
 {
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
-    mpvaValue51[ibCan].boSelf = boFalse;
+    mpvaValue51[ibCan].boSelf = FALSE;
 }
 
 
@@ -129,7 +151,7 @@ uchar   i;
   {
     InitPushPtr();            
     PushChar(boExt5Flag);
-    wBuffD = 1;
+    uint wBuffD = 1;
 
     for (i=0; i<bCANALS; i++)
     {
@@ -155,7 +177,7 @@ uchar   i;
   {
     InitPushPtr();            
     PushChar(boExt5Flag);
-    wBuffD = 1;
+    uint wBuffD = 1;
 
     for (i=0; i<bCANALS; i++)
     {
@@ -173,4 +195,3 @@ uchar   i;
 }
 
 #endif
-*/

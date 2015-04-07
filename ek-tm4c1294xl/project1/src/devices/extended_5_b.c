@@ -67,7 +67,7 @@ ulong   dw;
   for (i=0; i<4; i++)
   {
     dw = GetCanLong(mpdwChannelsA, i);
-    SetCanLong(mpdwChannelsB, i);
+    SetCanLong(mpdwChannelsB, i, &dw);
   }
 
   if (QueryEnergyTariffB_Full(0,bTariff) == 0) return(0);             
@@ -77,7 +77,7 @@ ulong   dw;
     dw  = GetCanLong(mpdwChannelsA, i);
     dw -= GetCanLong(mpdwChannelsB, i);
 
-    SetCanLong(mpdwChannelsB, i);
+    SetCanLong(mpdwChannelsB, i, &dw);
   }
 
 
@@ -90,7 +90,7 @@ ulong   dw;
     else
       reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB * 2;
 
-    SetCanReal(mpreChannelsB, i);
+    SetCanReal(mpreChannelsB, i, &reBuffA);
     mpboChannelsA[i] = TRUE;     
   }
 
