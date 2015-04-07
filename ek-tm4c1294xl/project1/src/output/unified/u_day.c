@@ -8,7 +8,7 @@ U_DAY.C
 #include        "../../memory/mem_ports.h"
 #include        "../../memory/mem_realtime.h"
 #include        "../../memory/mem_energy.h"
-#include        "../../memory/mem_energy_spec.h"
+#include        "../../memory/mem_uni.h"
 #include        "../../include/states.h"
 #include        "../../include/queries_uni.h"
 #include        "../../serial/ports.h"
@@ -23,11 +23,10 @@ U_DAY.C
 #include        "../../energy.h"
 #include        "../../energy2.h"
 #include        "response_uni.h"
-#include        "u_energy.h"
+#include        "u_def.h"
+#include        "u_day.h"
 
 
-
-#ifndef MODBUS
 
 void    GetDefCanDayUni(void) 
 {
@@ -60,11 +59,11 @@ uchar   i,j,k;
       {
         LoadImpHouFree(iwHou);
 
-        uchar ibCan;
-        for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+        uchar c;
+        for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
         {   
-          if (GetDefCan(ibCan-1) == 1) 
-            mpbDefUni[k-1 - ((ibCan - bInBuff7) / 8)] |= (uchar)(0x01 << ((ibCan - bInBuff7) % 8));
+          if (GetDefCan(c-1) == 1) 
+            mpbDefUni[k-1 - ((c - bInBuff7) / 8)] |= (uchar)(0x01 << ((c - bInBuff7) % 8));
         }
 
         if (++iwHou >= wHOURS) iwHou = 0;
@@ -73,11 +72,11 @@ uchar   i,j,k;
       Push(mpbDefUni, k);
     }
 
-    ulong dwBuffC = DateToDayIndex(*GetCurrTimeDate());
-    dwBuffC -= bInBuffB;
-    time tiAlt = DayIndexToDate(dwBuffC);
+    ulong dw = DateToDayIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)k*bInBuffD, 0, &tiAlt);
+    Output2_Code((uint)k*bInBuffD, 0, &ti);
   }
 }
 
@@ -114,11 +113,11 @@ uchar   i,j,k;
       {
         LoadImpHouFree(iwHou);
 
-        uchar ibGrp;
-        for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
+        uchar g;
+        for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
         {   
-          if (GetDefGrp(ibGrp-1) == 1) 
-            mpbDefUni[k-1 - ((ibGrp - bInBuff7) / 8)] |= (uchar)(0x01 << ((ibGrp - bInBuff7) % 8));
+          if (GetDefGrp(g-1) == 1) 
+            mpbDefUni[k-1 - ((g - bInBuff7) / 8)] |= (uchar)(0x01 << ((g - bInBuff7) % 8));
         }
 
         if (++iwHou >= wHOURS) iwHou = 0;
@@ -127,12 +126,10 @@ uchar   i,j,k;
       Push(mpbDefUni, k);
     }
 
-    ulong dwBuffC = DateToDayIndex(*GetCurrTimeDate());
-    dwBuffC -= bInBuffB;
-    time tiAlt = DayIndexToDate(dwBuffC);
+    ulong dw = DateToDayIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)k*bInBuffD, 0, &tiAlt);
+    Output2_Code((uint)k*bInBuffD, 0, &ti);
   }
 }
-
-#endif
