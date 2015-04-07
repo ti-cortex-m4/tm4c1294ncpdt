@@ -70,7 +70,7 @@ uint    k;
   // записываем излом в конец списка
   tiGap = tiKey; SetGapDate(ibX);
 
-  // сортировка      
+  // сортировка
   for(i=0; i<=GetGapSize(); i++)
   {
     for(j=0; j<=GetGapSize(); j++)
@@ -81,12 +81,14 @@ uint    k;
       GetGapDate(j); 
       if (k < GetDayIndexMD(tiGap.bMonth, tiGap.bDay))
       {
-        GetGapDate(i); tiAlt = tiGap;
+        GetGapDate(i);
+        time ti = tiGap;
 
         GetGapDate(j);
         SetGapDate(i);
 
-        tiGap = tiAlt; SetGapDate(j);
+        tiGap = ti;
+        SetGapDate(j);
       }
     }
   }
@@ -170,7 +172,7 @@ void    key_SetGaps(void)
       else
       {
         enKeyboard = KBD_INPUT4;
-        tiKey.bSecond = 0;              // тип излома (режим работы)              
+        tiKey.bSecond = 0;              // тип излома (режим работы)
 
         ShowGapName(tiKey.bSecond);
         szLo[6] = '.';
@@ -178,7 +180,7 @@ void    key_SetGaps(void)
     }
     else if (enKeyboard == KBD_INPUT4)              
     {
-      enKeyboard = KBD_POSTENTER;       // переходим в режим ввода 
+      enKeyboard = KBD_POSTENTER;       // переходим в режим ввода
 
       if (AddGap() == 1)                // добавляем новый излома в список
       {                               
@@ -193,12 +195,12 @@ void    key_SetGaps(void)
     else if (enKeyboard == KBD_SHOW)    // режим проcмотра
     {                                   
       ibX++;                            // переходим на следующий излом
-      if (ibX == GetGapSize())          // дошли до конца списка      
+      if (ibX == GetGapSize())          // дошли до конца списка
       {                                 
         if (GetGapSize() == bGAPS) 
           ibX = 0;                      // если список заполнен - продолжаем просмотр с начала
         else 
-          enKeyboard = KBD_POSTENTER;   // если в списке есть свободное место - переходим в режим ввода        
+          enKeyboard = KBD_POSTENTER;   // если в списке есть свободное место - переходим в режим ввода
       }
     }
 
@@ -207,13 +209,13 @@ void    key_SetGaps(void)
     {                                   // начинаем или продолжаем просмотр списка изломов
       ibX = 0;                          // переходим на начало
       if (GetGapSize() == 0) 
-        enKeyboard = KBD_POSTENTER;     // если список пустой - переходим в режим ввода 
+        enKeyboard = KBD_POSTENTER;     // если список пустой - переходим в режим ввода
       else                  
         enKeyboard = KBD_SHOW;          // если список не пустой - переходим в режим просмотра
     }
 
 
-    if (enKeyboard == KBD_POSTENTER)    // режим ввода  
+    if (enKeyboard == KBD_POSTENTER)    // режим ввода
     {
       enKeyboard = KBD_INPUT2;          // подготовка к вводу излома
       ShowLo(szMaskGap);
@@ -241,7 +243,7 @@ void    key_SetGaps(void)
 
   else if (bKey == bKEY_MINUS)
   {    
-    if (enKeyboard == KBD_SHOW)         // в режиме просмотра         
+    if (enKeyboard == KBD_SHOW)         // в режиме просмотра
     {
       DelGap();                         // удаляем излом из списка
       LongBeep();

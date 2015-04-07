@@ -102,8 +102,6 @@ void    RealtimeSeason(void)
     if (++tiCurr.bHour >= 24)
     {
       tiCurr.bHour = 0;
-
-      tiAlt = tiCurr;
       if (++tiCurr.bDay > GetDaysInMonthYM(tiCurr.bYear, tiCurr.bMonth))
       {
         tiCurr.bDay = 1;
