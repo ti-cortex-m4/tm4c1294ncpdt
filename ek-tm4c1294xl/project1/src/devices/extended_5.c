@@ -7,22 +7,14 @@ EXTENDED_5.C
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_realtime.h"
+#include        "../memory/mem_profile.h"
 #include        "../memory/mem_extended_5.h"
-//#include        "../display/display.h"
-//#include        "../keyboard/keyboard.h"
-//#include        "../hardware/watchdog.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/digitals_display.h"
-//#include        "../digitals/digitals_messages.h"
 #include        "../devices/devices.h"
-//#include        "../sensors/automatic2.h"
 #include        "../serial/ports.h"
-//#include        "../time/timedate.h"
 #include        "../time/rtc.h"
 #include        "../console.h"
-//#include        "../engine.h"
-//#include        "../energy.h"
-//#include        "../flash/files.h"
 #include        "extended_5_b.h"
 #include        "extended_5_c.h"
 #include        "extended_5.h"
@@ -60,26 +52,30 @@ bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 #ifndef SKIP_H
     case 10: return( ReadCntAbsTariffH(bTariff) );
 #endif
+
+    default: return 0;
   }
 }
 
 
 bool    CoreExtended5(void)
 {
-uchar i,j;
-
   memset(&mpvaValue50, 0, sizeof(mpvaValue50));  
 
-  for (i=0; i<bTARIFFS; i++)
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
   {
     if (fKey == 1) return (0);
     Clear();
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
-    if (ReadCntAbsTariff(ibDig,i+1) == 0) return (0);
+    if (ReadCntAbsTariff(ibDig,t+1) == 0) return (0);
 
-    for (j=0; j<4; j++)
-      mpvaValue50[j].mpreSelf[i] = mpreChannelsB[j];
+    uchar i;
+    for (i=0; i<4; i++)
+    {
+      mpvaValue50[i].mpreSelf[t] = mpreChannelsB[i];
+    }
   }
 
   return (1);
@@ -96,16 +92,16 @@ void    MakeExtended5(void)
     {
       LoadCurrDigital(ibDig);
 
-      uchar ibCan;
-      for (ibCan=0; ibCan<bCANALS; ibCan++)
+      uchar c;
+      for (c=0; c<bCANALS; c++)
       {
-        LoadPrevDigital(ibCan);
-        if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+        LoadPrevDigital(c);
+        if (CompareCurrPrevLines(ibDig, c) == 1)
         {
-          mpvaValue51[ibCan].cwOK++;
-          mpvaValue51[ibCan].tiSelf = *GetCurrTimeDate();
-          mpvaValue51[ibCan].vaValue50 = mpvaValue50[diPrev.ibLine];
-          mpvaValue51[ibCan].boSelf = TRUE;
+          mpvaValue51[c].cwOK++;
+          mpvaValue51[c].tiSelf = *GetCurrTimeDate();
+          mpvaValue51[c].vaValue50 = mpvaValue50[diPrev.ibLine];
+          mpvaValue51[c].boSelf = TRUE;
         }
       }
     }
@@ -113,16 +109,18 @@ void    MakeExtended5(void)
     {
       LoadCurrDigital(ibDig);
 
-      uchar ibCan;
-      for (ibCan=0; ibCan<bCANALS; ibCan++)
+      uchar c;
+      for (c=0; c<bCANALS; c++)
       {
-        LoadPrevDigital(ibCan);
-        if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+        LoadPrevDigital(c);
+        if (CompareCurrPrevLines(ibDig, c) == 1)
         {
-          mpvaValue51[ibCan].cwError++;
+          mpvaValue51[c].cwError++;
         }
-      } 
-      Error(); DelayInf();
+      }
+
+      Error();
+      DelayInf();
     }  
 
     ShowCanalNumber(ibDig);
@@ -133,9 +131,11 @@ void    MakeExtended5(void)
 
 void    NextDayExtended5(void)
 {
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
-    mpvaValue51[ibCan].boSelf = FALSE;
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    mpvaValue51[c].boSelf = FALSE;
+  }
 }
 
 
@@ -143,33 +143,31 @@ void    NextDayExtended5(void)
 
 void    OutExtended50(void)
 {
-uchar   i;
-
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
   else
   {
     InitPushPtr();            
     PushChar(boExt5Flag);
-    uint wBuffD = 1;
+    uint wSize = 1;
 
-    for (i=0; i<bCANALS; i++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
+      if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        Push(&mpvaValue51[i], sizeof(value51));
-        wBuffD += sizeof(value51);
+        Push(&mpvaValue51[c], sizeof(value51));
+        wSize += sizeof(value51);
       }
     }
 
-    OutptrOutBuff(wBuffD);
+    OutptrOutBuff(wSize);
   }
 }
 
 
 void    OutExtended51(void)
 {
-uchar   i;
 
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -177,20 +175,21 @@ uchar   i;
   {
     InitPushPtr();            
     PushChar(boExt5Flag);
-    uint wBuffD = 1;
+    uint wSize = 1;
 
-    for (i=0; i<bCANALS; i++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
+      if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        Push(&mpvaValue51[i].vaValue50, sizeof(value50));
-        wBuffD += sizeof(value50);
-        Push(&mpvaValue51[i].tiSelf, sizeof(time));
-        wBuffD += sizeof(time);
+        Push(&mpvaValue51[c].vaValue50, sizeof(value50));
+        wSize += sizeof(value50);
+        Push(&mpvaValue51[c].tiSelf, sizeof(time));
+        wSize += sizeof(time);
       }
     }
 
-    OutptrOutBuff(wBuffD);
+    OutptrOutBuff(wSize);
   }
 }
 
