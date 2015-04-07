@@ -77,7 +77,7 @@ uint    k;
   // записываем праздник в конец списка
   tiRelax = tiKey; SetRelaxDate(ibX);
 
-  // сортировка      
+  // сортировка
   for(i=0; i<=GetRelaxSize(); i++)
   {
     for(j=0; j<=GetRelaxSize(); j++)
@@ -88,12 +88,14 @@ uint    k;
       GetRelaxDate(j);
       if (k < GetDayIndexMD(tiRelax.bMonth, tiRelax.bDay))
       {
-        GetRelaxDate(i); tiAlt = tiRelax;
+        GetRelaxDate(i);
+        time ti = tiRelax;
 
         GetRelaxDate(j);
         SetRelaxDate(i);
 
-        tiRelax = tiAlt; SetRelaxDate(j);
+        tiRelax = ti;
+        SetRelaxDate(j);
       }
     }
   }
@@ -176,7 +178,7 @@ void    key_SetRelaxs(void)
       else
       {
         enKeyboard = KBD_INPUT4;
-        tiKey.bSecond = 1;              // тип праздника (режим работы)              
+        tiKey.bSecond = 1;              // тип праздника (режим работы)
 
         ShowRelaxName(tiKey.bSecond);
         szLo[7] = '.';
@@ -184,7 +186,7 @@ void    key_SetRelaxs(void)
     }
     else if (enKeyboard == KBD_INPUT4)              
     {
-      enKeyboard = KBD_POSTENTER;       // переходим в режим ввода 
+      enKeyboard = KBD_POSTENTER;       // переходим в режим ввода
 
       if (AddRelax() == 1)              // добавляем новый праздника в список
       {
@@ -199,12 +201,12 @@ void    key_SetRelaxs(void)
     else if (enKeyboard == KBD_SHOW)    // режим проcмотра
     {                                   
       ibX++;                            // переходим на следующий праздник
-      if (ibX == GetRelaxSize())        // дошли до конца списка      
+      if (ibX == GetRelaxSize())        // дошли до конца списка
       {                                 
         if (GetRelaxSize() == bRELAXS) 
           ibX = 0;                      // если список заполнен - продолжаем просмотр с начала
         else 
-          enKeyboard = KBD_POSTENTER;   // если в списке есть свободное место - переходим в режим ввода        
+          enKeyboard = KBD_POSTENTER;   // если в списке есть свободное место - переходим в режим ввода
       }
     }
 
@@ -213,13 +215,13 @@ void    key_SetRelaxs(void)
     {                                   // начинаем или продолжаем просмотр списка праздников
       ibX = 0;                          // переходим на начало
       if (GetRelaxSize() == 0) 
-        enKeyboard = KBD_POSTENTER;     // если список пустой - переходим в режим ввода 
+        enKeyboard = KBD_POSTENTER;     // если список пустой - переходим в режим ввода
       else                  
         enKeyboard = KBD_SHOW;          // если список не пустой - переходим в режим просмотра
     }
 
 
-    if (enKeyboard == KBD_POSTENTER)    // режим ввода  
+    if (enKeyboard == KBD_POSTENTER)    // режим ввода
     {
       enKeyboard = KBD_INPUT2;          // подготовка к вводу праздника
       ShowLo(szMaskRelax);
@@ -247,7 +249,7 @@ void    key_SetRelaxs(void)
 
   else if (bKey == bKEY_MINUS)
   {    
-    if (enKeyboard == KBD_SHOW)         // в режиме просмотра         
+    if (enKeyboard == KBD_SHOW)         // в режиме просмотра
     {
       DelRelax();                       // удаляем праздник из списка
       LongBeep();
