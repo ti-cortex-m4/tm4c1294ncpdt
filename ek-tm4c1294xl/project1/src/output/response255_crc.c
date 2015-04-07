@@ -47,7 +47,7 @@ uchar   w;
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
     {
-      Push(&mpe[i], sizeof(real));
+      PushFloat(mpe[i]);
       w += sizeof(real);
     }
   }

@@ -79,7 +79,7 @@ void    OutGetParamDiv(void)
   if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
   {
     InitPushCRC();
-    Push(&mpreParamDiv[bInBuff5*0x100 + bInBuff6], sizeof(real));
+    PushFloat(mpreParamDiv[bInBuff5*0x100 + bInBuff6]);
     Output(sizeof(real));
   }
   else Result(bRES_BADADDRESS);
@@ -133,7 +133,7 @@ void    OutGetParamCurr(void)
       }
 
       if (f == 1)
-        Push(&reBuffA, sizeof(real));
+        PushFloat(reBuffA);
       else
       {
         PushChar(0xFF);
@@ -267,7 +267,7 @@ void    OutGetParamsAll(void)
       }
 
       if (f == 1)
-        Push(&reBuffA, sizeof(real));
+        PushFloat(reBuffA);
       else
       {
         PushChar(0xFF);

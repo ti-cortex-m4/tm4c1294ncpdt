@@ -31,7 +31,7 @@ void    PushRealUni(status4  status, real  *preT)
       case ST4_BADFLASH:      PushFFFFFF(); PushChar(0xFF); break;
       case ST4_BADPORT:       PushFFFFFF(); PushChar(0xFE); break;
       case ST4_BADENABLING:   PushFFFFFF(); PushChar(0xFF); break;
-      default:                Push(preT, sizeof(real)); break;
+      default:                PushFloat(*preT); break;
     }
   }
   else
@@ -45,7 +45,7 @@ void    PushRealUni(status4  status, real  *preT)
       case ST4_BADFLASH:      PushFFFFFF(); PushChar(0xE4); break;
       case ST4_BADPORT:       PushFFFFFF(); PushChar(0xE5); break;
       case ST4_BADENABLING:   PushFFFFFF(); PushChar(0xE6); break;
-      default:                Push(preT, sizeof(real)); break;
+      default:                PushFloat(*preT); break;
     }
   }
 }
