@@ -12,6 +12,4 @@ void    Result2(uchar  bT);
 void    Result2_Info(uchar  bT, uchar  bInfo);
 void    Common2(void  *pbData, uint  wSize);
 
-//void    SetDelayUni(void);
-//
-//void    PushRealUni(status4  status, real  *preT);
+void    SetDelayUni(void);

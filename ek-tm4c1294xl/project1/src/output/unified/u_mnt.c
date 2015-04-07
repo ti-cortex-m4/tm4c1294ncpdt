@@ -7,8 +7,7 @@ U_MNT.C
 #include        "../../main.h"
 #include        "../../memory/mem_ports.h"
 #include        "../../memory/mem_realtime.h"
-//#include        "../../memory/mem_energy.h"
-//#include        "../../memory/mem_energy_spec.h"
+#include        "../../memory/mem_energy.h"
 #include        "../../include/states.h"
 #include        "../../include/queries_uni.h"
 #include        "../../serial/ports.h"
@@ -16,12 +15,8 @@ U_MNT.C
 #include        "../../time/rtc.h"
 #include        "../../time/timedate.h"
 #include        "../../time/calendar.h"
-//#include        "../../special/recalc_def.h"
-//#include        "../../groups.h"
-//#include        "../../energy.h"
-//#include        "../../energy2.h"
+#include        "../../energy.h"
 #include        "response_uni.h"
-//#include        "u_def.h"
 #include        "u_mnt.h"
 
 
@@ -44,22 +39,20 @@ uchar   i;
   {
     InitPushUni();
 
-    uchar ibCan;
-    for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
       for (i=bInBuffB; i<bInBuffB+bInBuffD; i++)
       {
-        reBuffA = *PGetCanMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibCan-1, 20);
-        PushFloat();
+        PushFloat(GetCanMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], c-1, 20));
       }
     }
 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToMntIndex();
-    dwBuffC -= bInBuffB;
-    MntIndexToDate(dwBuffC);
+    ulong dw = DateToMntIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti = MntIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuffD*bInBuff9, 0, &tiAlt);
+    Output2_Code((uint)4*bInBuffD*bInBuff9, 0, &ti);
   }
 }
 
@@ -81,22 +74,20 @@ uchar   i;
   {
     InitPushUni();
 
-    uchar ibGrp;
-    for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
+    uchar g;
+    for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
     {
       for (i=bInBuffB; i<bInBuffB+bInBuffD; i++)
       {
-        reBuffA = *PGetGrpMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], ibGrp-1, 20);
-        PushFloat();
+        PushFloat(GetGrpMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], g-1, 20));
       }
     }
 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToMntIndex();
-    dwBuffC -= bInBuffB;
-    MntIndexToDate(dwBuffC);
+    ulong dw = DateToMntIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti = MntIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuffD*bInBuff9, 0, &tiAlt);
+    Output2_Code((uint)4*bInBuffD*bInBuff9, 0, &ti);
   }
 }
 

@@ -20,6 +20,7 @@ U_CONFIG.C
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/devices.h"
 #include        "../../hardware/memory.h"
+#include        "../../access.h"
 #include        "../../groups.h"
 #include        "response_uni.h"
 #include        "u_config.h"
