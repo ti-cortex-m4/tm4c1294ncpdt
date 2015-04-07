@@ -3,20 +3,27 @@ U_DAY.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        <string.h>
-#include        "main.h"
-#include        "xdata.h"
-#include        "rtc.h"
-#include        "nexttime.h"
-#include        "timedate.h"
-#include        "queries2.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "general.h"
-#include        "watchdog.h"
-#include        "postinput2.h"
+
+#include        "../../main.h"
+#include        "../../memory/mem_ports.h"
+#include        "../../memory/mem_realtime.h"
+#include        "../../memory/mem_energy.h"
+#include        "../../memory/mem_energy_spec.h"
+#include        "../../include/states.h"
+#include        "../../include/queries_uni.h"
+#include        "../../serial/ports.h"
+#include        "../../realtime/realtime.h"
+#include        "../../time/rtc.h"
+#include        "../../time/timedate.h"
+#include        "../../time/calendar.h"
+#include        "../../special/recalc_def.h"
+#include        "../../impulses/max_power.h"
+#include        "../../hardware/watchdog.h"
+#include        "../../groups.h"
+#include        "../../energy.h"
+#include        "../../energy2.h"
+#include        "response_uni.h"
+#include        "u_energy.h"
 
 
 
@@ -48,11 +55,12 @@ uchar   i,j,k;
       ResetWDT();
       memset(&mpbDefUni, 0, sizeof(mpbDefUni));
 
-      iwHou = GetDayHouIndex(j);
+      uint iwHou = GetDayHouIndex(j);
       for (i=0; i<48; i++)
       {
         LoadImpHouFree(iwHou);
 
+        uchar ibCan;
         for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
         {   
           if (GetDefCan(ibCan-1) == 1) 
@@ -65,10 +73,9 @@ uchar   i,j,k;
       Push(mpbDefUni, k);
     }
 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToDayIndex();
+    ulong dwBuffC = DateToDayIndex(*GetCurrTimeDate());
     dwBuffC -= bInBuffB;
-    DayIndexToDate(dwBuffC);
+    time tiAlt = DayIndexToDate(dwBuffC);
 
     Output2_Code((uint)k*bInBuffD, 0, &tiAlt);
   }
@@ -102,11 +109,12 @@ uchar   i,j,k;
       ResetWDT();
       memset(&mpbDefUni, 0, sizeof(mpbDefUni));
 
-      iwHou = GetDayHouIndex(j);
+      uint iwHou = GetDayHouIndex(j);
       for (i=0; i<48; i++)
       {
         LoadImpHouFree(iwHou);
 
+        uchar ibGrp;
         for (ibGrp=bInBuff7; ibGrp<bInBuff7+bInBuff9; ibGrp++)
         {   
           if (GetDefGrp(ibGrp-1) == 1) 
@@ -119,14 +127,12 @@ uchar   i,j,k;
       Push(mpbDefUni, k);
     }
 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToDayIndex();
+    ulong dwBuffC = DateToDayIndex(*GetCurrTimeDate());
     dwBuffC -= bInBuffB;
-    DayIndexToDate(dwBuffC);
+    time tiAlt = DayIndexToDate(dwBuffC);
 
     Output2_Code((uint)k*bInBuffD, 0, &tiAlt);
   }
 }
 
 #endif
-*/
