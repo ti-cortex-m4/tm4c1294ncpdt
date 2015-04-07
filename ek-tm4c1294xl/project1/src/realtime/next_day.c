@@ -14,6 +14,7 @@ NEXT_DAY.C
 #include        "../energy2.h"
 #include        "../energy3.h"
 #include        "../digitals/answer.h"
+#include        "../devices/extended_5.h"
 #include        "../special/defects.h"
 #include        "../special/recalc_def.h"
 #include        "realtime_storage.h"
@@ -23,6 +24,11 @@ NEXT_DAY.C
 void    NextDay(void)
 {
   cwDays++;
+
+//  NextDayExtended4();
+  NextDayExtended5();
+//  NextDayExtended6();
+//  NextDayExtended7();
 
   MakeCntMonCan();
   MakeAllCurrTariffs();
