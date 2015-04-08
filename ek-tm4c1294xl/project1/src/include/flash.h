@@ -203,7 +203,9 @@ typedef enum
   FLS_KEYS_LEVEL_B      = FLS_PARAMS_VALUES + PARAMS_PAGES*wTIMES,
   FLS_SHORT_PROFILE_C   = FLS_KEYS_LEVEL_B + 1,
 
-  FLS_END               = FLS_SHORT_PROFILE_C + 1
+  FLS_EXT_5_FLAG        = FLS_SHORT_PROFILE_C + 1,
+
+  FLS_END               = FLS_EXT_5_FLAG + 1
 } flash;
 
 

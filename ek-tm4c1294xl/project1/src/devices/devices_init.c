@@ -35,6 +35,8 @@ DEVICES_INIT.C
 #include        "../flash/files.h"
 #include        "../flash/records.h"
 #include        "../time/delay.h"
+#include        "extended_1.h"
+#include        "extended_5.h"
 #include        "devices_input.h"
 #include        "devices_postinput.h"
 #include        "devices_pause.h"
@@ -105,6 +107,8 @@ void    InitDevices(void)
   InitLimits();
   InitRefill();
   InitSchedule();
+  InitExtended1();
+  InitExtended5();
 }
 
 
@@ -137,4 +141,6 @@ void    ResetDevices(void)
   ResetLimits();
   ResetRefill();
   ResetSchedule();
+  ResetExtended1();
+  ResetExtended5();
 }
