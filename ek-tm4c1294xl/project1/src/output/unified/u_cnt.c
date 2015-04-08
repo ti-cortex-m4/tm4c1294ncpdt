@@ -6,24 +6,13 @@ U_CNT.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_ports.h"
-//#include        "../../memory/mem_realtime.h"
-//#include        "../../memory/mem_energy.h"
-//#include        "../../memory/mem_uni.h"
+#include        "../../memory/mem_extended_1.h"
+#include        "../../memory/mem_extended_5.h"
 #include        "../../include/states.h"
 #include        "../../include/queries_uni.h"
 #include        "../../serial/ports.h"
-//#include        "../../realtime/realtime.h"
 #include        "../../time/rtc.h"
-//#include        "../../time/timedate.h"
-//#include        "../../time/calendar.h"
-//#include        "../../special/recalc_def.h"
-//#include        "../../impulses/max_power.h"
-//#include        "../../hardware/watchdog.h"
-//#include        "../../groups.h"
-//#include        "../../energy.h"
-//#include        "../../energy2.h"
 #include        "response_uni.h"
-//#include        "u_def.h"
 #include        "u_cnt.h"
 
 
@@ -142,7 +131,7 @@ void    GetCntCanMonUni(void)
 
 
 void    GetCntCanAllUni(void) 
-{/*
+{
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -153,24 +142,21 @@ void    GetCntCanAllUni(void)
   { 
     InitPushUni();
 
-    uchar ibCan;
-    for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      tiAlt = mptiEsc_S[ibCan-1];
-      Push(&tiAlt, sizeof(time));
-      reBuffA = mpreEsc_S[ibCan-1];
-      PushFloat();
+      PushTime(&mptiEsc_S[c-1]);
+      PushFloat(mpreEsc_S[c-1]);
     }
 
-    tiAlt = *GetCurrTimeDate();
-    Output2_Code((uint)(4+6)*bInBuff9, ((boDisableEsc3 != TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
-  }*/
+    Output2_Code((uint)(4+6)*bInBuff9, ((boDsblEscS != TRUE) ? bUNI_OK : bUNI_NOTREADY), GetCurrTimeDate());
+  }
 }
 
 
 
 void    GetCntCanTarUni(void) 
-{/*
+{
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -191,16 +177,13 @@ void    GetCntCanTarUni(void)
       uchar i;
       for (i=bInBuffA; i<bInBuffA+bInBuffB; i++)
       {
-        tiAlt = mpvaValue51[ibCan-1].tiSelf;
-        Push(&tiAlt, sizeof(time));
-        reBuffA = mpvaValue51[ibCan-1].vaValue50.mpreSelf[i-1];
-        PushFloat();
+        PushTime(&mpvaValue51[ibCan-1].tiSelf);
+        PushFloat(mpvaValue51[ibCan-1].vaValue50.mpreSelf[i-1]);
       }
     }
 
-    tiAlt = *GetCurrTimeDate();
-    Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((boExt5Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
-  }*/
+    Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((boExt5Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), GetCurrTimeDate());
+  }
 }
 
 
