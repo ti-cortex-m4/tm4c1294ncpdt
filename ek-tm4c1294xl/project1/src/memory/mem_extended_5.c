@@ -12,7 +12,4 @@ MEM_EXTENDED_5.C
 boolean                 boExt5Flag;
 
 // глобальная переменная
-value50                 mpvaValue50[4];
-
-// глобальная переменная
 value51                 mpvaValue51[bCANALS];

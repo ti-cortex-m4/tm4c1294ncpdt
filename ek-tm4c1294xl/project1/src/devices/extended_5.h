@@ -4,6 +4,9 @@ EXTENDED_5.H
 
 ------------------------------------------------------------------------------*/
 
+void    InitExtended5(void);
+void    ResetExtended5(void);
+
 void    MakeExtended5(void);
 void    NextDayExtended5(void);
 

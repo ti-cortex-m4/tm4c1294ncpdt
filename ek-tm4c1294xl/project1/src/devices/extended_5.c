@@ -25,6 +25,26 @@ EXTENDED_5.C
 static char const       szExtended5[]   = "Опрос данных: 5 ";
 
 
+file const              flExt5Flag = {FLS_EXT_5_FLAG, &boExt5Flag, sizeof(boolean)};
+
+
+static value50          vaBuff[4];
+
+
+
+void    InitExtended5(void)
+{
+  LoadFile(&flExt5Flag);
+}
+
+
+void    ResetExtended5(void)
+{
+  boExt5Flag = FALSE;
+  SaveFile(&flExt5Flag);
+}
+
+
 
 bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 {
@@ -60,7 +80,7 @@ bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 
 bool    CoreExtended5(void)
 {
-  memset(&mpvaValue50, 0, sizeof(mpvaValue50));  
+  memset(&vaBuff, 0, sizeof(vaBuff));  
 
   uchar t;
   for (t=0; t<bTARIFFS; t++)
@@ -74,7 +94,7 @@ bool    CoreExtended5(void)
     uchar i;
     for (i=0; i<4; i++)
     {
-      mpvaValue50[i].mpreSelf[t] = mpreChannelsB[i];
+      vaBuff[i].mpreSelf[t] = mpreChannelsB[i];
     }
   }
 
@@ -100,7 +120,7 @@ void    MakeExtended5(void)
         {
           mpvaValue51[c].cwOK++;
           mpvaValue51[c].tiSelf = *GetCurrTimeDate();
-          mpvaValue51[c].vaValue50 = mpvaValue50[diPrev.ibLine];
+          mpvaValue51[c].vaValue50 = vaBuff[diPrev.ibLine];
           mpvaValue51[c].boSelf = TRUE;
         }
       }
