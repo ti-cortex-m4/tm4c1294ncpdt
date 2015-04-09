@@ -3,21 +3,16 @@ AUTOMATIC3.C
               
  «начени€ счетчиков по тарифам на начало мес€ца
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "engine.h"
+
+#include        "../main.h"
+#include        "../digitals/digitals.h"
+#include        "../display/display.h"
 #include        "automatic_b.h"
 #include        "automatic_c.h"
-#include        "automatic_k.h"
-#include        "automatic_p.h"
-#include        "ports.h"
-#include        "sensors.h"
 
 
 
-bit     IsCntMonCanTariff(uchar  ibCanal)
+bool    IsCntMonCanTariff(uchar  ibCanal)
 {
   LoadCurrDigital(ibCanal);
 
@@ -49,11 +44,10 @@ status4 ReadCntMonCanTariff(uchar  ibMonth, uchar  ibCanal, uchar  ibTariff)
 
     case 3:  return( ReadCntMonCanTariffC(ibMonth,ibTariff) );
 
-    case 13: return( ReadCntMonCanTariffK(ibMonth,ibTariff) );
+//    case 13: return( ReadCntMonCanTariffK(ibMonth,ibTariff) );
 
-    case 21: return( ReadCntMonCanTariffP(ibMonth,ibTariff) );
+//    case 21: return( ReadCntMonCanTariffP(ibMonth,ibTariff) );
 
     default: return(ST4_NOTSUPPORTED);
   }
 }
-*/

@@ -32,7 +32,7 @@ void    key_SetExtended4TMonths(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (boExt4TFlag == boTrue)
+      if (boExt4TFlag == TRUE)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();

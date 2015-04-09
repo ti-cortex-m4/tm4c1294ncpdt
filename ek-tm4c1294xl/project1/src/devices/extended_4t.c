@@ -5,6 +5,10 @@ EXTENDED_4T.C
 ------------------------------------------------------------------------------*/
 
 #include        "../console.h"
+#include        "../digitals/digitals.h"
+#include        "../devices/devices.h"
+#include        "../sensors/automatic3.h"
+#include        "../time/rtc.h"
 #include        "extended_4t.h"
 
 
@@ -13,16 +17,13 @@ file const              flExt4TFlag = {FLS_EXT_4T_FLAG, &boExt4TFlag, sizeof(boo
 file const              flExt4TMonths = {FLS_EXT_4T_MONTHS, &bExt4TMonths, sizeof(uchar)};
 
 
-/*
+
 //                                         0123456789ABCDEF
-message         code    szExtended4T    = "ќпрос данных: 6 ";
-
-extern	message         code    szNoLink;
+static char const       szExtended4T[]  = "ќпрос данных: 6 ";
 
 
-// переменна€
-value6t                 v6tBuff;
-*/
+static value6t          vaBuff;
+
 
 
 static boolean SaveExt4TValues(uchar  ibMonth)
@@ -81,30 +82,32 @@ void    NextMonExtended4T(void)
 {
   memset(&mpCntMonCan4T_[ibHardMon], 0, sizeof(value6t)*bCANALS);
 }
+*/
 
 
-
-bit     MakeSimple4T(uchar	ibTariff)
+bool    MakeSimple4T(uchar  ibTariff)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
 
-  ibX = ReadCntMonCanTariff(ibMon, ibDig, ibTariff);
+  status4 ibX = ReadCntMonCanTariff(ibMon, ibDig, ibTariff);
 
   if ((ibX == ST4_BADDIGITAL) || (ibX == ST4_NOTSUPPORTED) || (ibX == ST4_NOTPRESENTED)) 
   { 
-    LoadCurrDigital(ibDig);      
+    LoadCurrDigital(ibDig);
+
+    uchar ibCan;
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines() == 1)
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
       {
-        v6tBuff = mpCntMonCan4T_[ibMon][ibCan];
+        vaBuff = mpCntMonCan4T_[ibMon][ibCan];
 
-        v6tBuff.bSelf = ibX;
-        v6tBuff.mpreSelf[ibTariff] = 0;
+        vaBuff.bSelf = ibX;
+        vaBuff.mpreSelf[ibTariff] = 0;
 
-        v6tBuff.tiSelf = *PGetCurrTimeDate();
-        mpCntMonCan4T_[ibMon][ibCan] = v6tBuff;
+        vaBuff.tiSelf = *GetCurrTimeDate();
+        mpCntMonCan4T_[ibMon][ibCan] = vaBuff;
       }
     }
 
@@ -113,21 +116,23 @@ bit     MakeSimple4T(uchar	ibTariff)
   }
   else
   { 
-    LoadCurrDigital(ibDig);      
+    LoadCurrDigital(ibDig);
+
+    uchar ibCan;
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines() == 1)
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
       {
-        if (mpboChannelsA[diPrev.ibLine] == boTrue)
+        if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          v6tBuff = mpCntMonCan4T_[ibMon][ibCan];
+          vaBuff = mpCntMonCan4T_[ibMon][ibCan];
 
-          v6tBuff.bSelf = ST4_OK;
-          v6tBuff.mpreSelf[ibTariff] = mpreChannelsB[diPrev.ibLine];
+          vaBuff.bSelf = ST4_OK;
+          vaBuff.mpreSelf[ibTariff] = mpreChannelsB[diPrev.ibLine];
 
-          v6tBuff.tiSelf = *PGetCurrTimeDate();
-          mpCntMonCan4T_[ibMon][ibCan] = v6tBuff;
+          vaBuff.tiSelf = *GetCurrTimeDate();
+          mpCntMonCan4T_[ibMon][ibCan] = vaBuff;
         }
       }
     }
@@ -140,23 +145,23 @@ bit     MakeSimple4T(uchar	ibTariff)
 
 void    MakeExtended4T(void)
 {
-uchar   i,j;
-
-  if ((boExt4TFlag == boTrue) && (mpEnblCan4[ibDig] == boTrue))
+  if ((boExt4TFlag == TRUE) && (mpEnblCan4[ibDig] == TRUE))
   {
     ShowHi(szExtended4T); 
     Clear(); sprintf(szLo+3,"глубина: %bu", bExt4TMonths); DelayInf();
     ibMinor = 0xFF;
 
+    uchar i;
     for (i=0; i<bExt4TMonths; i++)
     {
       if (fKey == 1) break;
 
       ibMon = (bMONTHS + ibHardMon - i) % bMONTHS;
 
-      v6tBuff = mpCntMonCan4T_[ibMon][ibDig];
-      if ((v6tBuff.bSelf == ST4_OK) || (v6tBuff.bSelf == ST4_NOTPRESENTED)) continue;
+      vaBuff = mpCntMonCan4T_[ibMon][ibDig];
+      if ((vaBuff.bSelf == ST4_OK) || (vaBuff.bSelf == ST4_NOTPRESENTED)) continue;
 
+      uchar j;
       for (j=0; j<bTARIFFS; j++)
       {
         Clear(); sprintf(szLo+3,"мес€ц: %-2bu",ibMon+1); sprintf(szLo+14,"T%bu",j+1); DelayInf();
@@ -170,7 +175,7 @@ uchar   i,j;
 }
 
 
-
+/*
 #ifndef MODBUS
 
 void    PushData4T(uchar  ibCanal, uchar  ibMonth)

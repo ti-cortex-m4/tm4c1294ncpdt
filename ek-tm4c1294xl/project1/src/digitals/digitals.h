@@ -4,6 +4,10 @@ DIGITALS.H
 
 ------------------------------------------------------------------------------*/
 
+#include        "../memory/mem_digitals.h"
+
+
+
 extern  file const              flDigitals;
 
 extern  file const              flEnblKeys;

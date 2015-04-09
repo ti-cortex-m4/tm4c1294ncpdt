@@ -5,6 +5,7 @@ _AUTOMATIC1.H
 ------------------------------------------------------------------------------*/
 
 bool    ReadKoeffDeviceA(void);
+bool    ReadKoeffDeviceB(void);
 bool    ReadKoeffDeviceB_Special(void);
 bool    ReadKoeffDeviceC(void);
 

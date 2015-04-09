@@ -14,7 +14,7 @@ KEY_FLAG.C
 
 void    key_SetFlag(file const  *pflFile, char const  *pszSlide[])
 {
-  boolean *pboFlag = (boolean *) pflFile->pbBuff;
+  boolean *pboVal = (boolean *) pflFile->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {
@@ -24,7 +24,7 @@ void    key_SetFlag(file const  *pflFile, char const  *pszSlide[])
       Clear();
 
       LoadSlide(pszSlide);
-      ShowBoolean(*pboFlag);
+      ShowBoolean(*pboVal);
     }
     else Beep();
   }
@@ -36,10 +36,10 @@ void    key_SetFlag(file const  *pflFile, char const  *pszSlide[])
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        *pboFlag = InvertBoolean(*pboFlag);
+        *pboVal = InvertBoolean(*pboVal);
         SaveFile(pflFile);
 
-        ShowBoolean(*pboFlag);
+        ShowBoolean(*pboVal);
       }
       else Beep(); 
     }
