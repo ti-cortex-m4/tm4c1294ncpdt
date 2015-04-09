@@ -8,11 +8,11 @@ MEM_EXTENDED_4T.C
 
 
 
-// буфер значений счетчиков на начало 12 мес€цев (по тарифам)
-value6t                 mpCntMonCan4T[bCANALS];
-
 // глобальна€ переменна€
 boolean                 boExt4TFlag;
 
 // глобальна€ переменна€
 uchar                   bExt4TMonths;
+
+// буфер значений счетчиков на начало 12 мес€цев (по тарифам)
+value6t                 mpCntMonCan4T[bCANALS];

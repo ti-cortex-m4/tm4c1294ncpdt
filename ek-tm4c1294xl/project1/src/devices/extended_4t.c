@@ -3,22 +3,17 @@ EXTENDED_4T.C
 
  Значения счетчиков по тарифам на НАЧАЛО месяца
 ------------------------------------------------------------------------------*/
+
+#include        "../console.h"
+#include        "extended_4t.h"
+
+
+
+file const              flExt4TFlag = {FLS_EXT_4T_FLAG, &boExt4TFlag, sizeof(boolean)};
+file const              flExt4TMonths = {FLS_EXT_4T_MONTHS, &bExt4TMonths, sizeof(uchar)};
+
+
 /*
-#include        "main.h"
-#include        "xdata.h"
-#include        "rtc.h"
-#include        "delay.h"
-#include        "display.h"
-#include        "timedate.h"
-#include        "engine.h"
-#include        "sensors.h"
-#include        "ports.h"
-#include        "queries.h"
-#include        "keyboard.h"
-#include        "automatic3.h"
-
-
-
 //                                         0123456789ABCDEF
 message         code    szExtended4T    = "Опрос данных: 6 ";
 
@@ -27,7 +22,22 @@ extern	message         code    szNoLink;
 
 // переменная
 value6t                 v6tBuff;
+*/
 
+
+static boolean SaveExt4TValues(uchar  ibMonth)
+{
+  return SaveBuff(FLS_EXT_4T_VALUES + ibMonth*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
+}
+
+
+static boolean LoadExt4TValues(uchar  ibMonth)
+{
+  return LoadBuff(FLS_EXT_4T_VALUES + ibMonth*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
+}
+
+
+/*
 void    InitExtended4T(void) 
 { 
   if ((bExt4TMonths <= 0) || (bExt4TMonths > 12))

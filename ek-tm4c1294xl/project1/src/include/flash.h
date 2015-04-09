@@ -12,6 +12,7 @@ FLASH.H
 #include        "../memory/mem_params.h"
 #include        "../memory/mem_phones.h"
 #include        "../memory/mem_uni.h"
+#include        "../memory/mem_extended_4t.h"
 
 
 
@@ -33,20 +34,22 @@ FLASH.H
 
 
 // количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
-#define bIMPULSE_CAN    (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
-#define bPOWER_GRP      (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
-#define REALCAN_PAGES   (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
-#define PARAMS_PAGES    (uchar)(sizeof(real)    * wPARAMS/wFREEPAGE_SIZE + 1)
+#define bIMPULSE_CAN        (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
+#define bPOWER_GRP          (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
+#define REALCAN_PAGES       (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
+#define PARAMS_PAGES        (uchar)(sizeof(real)    * wPARAMS/wFREEPAGE_SIZE + 1)
+#define VALUE6T_CAN_PAGES   (uchar)(sizeof(mpCntMonCan4T)/wFREEPAGE_SIZE + 1)
+
 
 // количество страниц для графика профилей по получасам
 #ifdef  DAYS100
 
-#define IMPHOUCAN_PAGES (uint)(wHOURS/4)
+#define IMPHOUCAN_PAGES     (uint)(wHOURS/4)
 
 #else
 
-#define IMPHOUCAN_PAGES (uint)(wHOURS/1)
-#define UINTCAN_PAGES   (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
+#define IMPHOUCAN_PAGES     (uint)(wHOURS/1)
+#define UINTCAN_PAGES       (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
 
 #endif
 
@@ -205,7 +208,11 @@ typedef enum
 
   FLS_EXT_5_FLAG        = FLS_SHORT_PROFILE_C + 1,
 
-  FLS_END               = FLS_EXT_5_FLAG + 1
+  FLS_EXT_4T_FLAG       = FLS_EXT_5_FLAG + 1,
+  FLS_EXT_4T_MONTHS     = FLS_EXT_4T_FLAG + 1,
+  FLS_EXT_4T_VALUES     = FLS_EXT_4T_MONTHS + 1,
+
+  FLS_END               = FLS_EXT_4T_VALUES + VALUE6T_CAN_PAGES*bMONTHS
 } flash;
 
 
