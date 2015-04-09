@@ -271,6 +271,12 @@ PROGRAMS.H
 
 #define wSET_MNT_ESC_S              500
 
+#define bSET_EXT4_FLAG              249
+#define bSET_EXT4_MONTHS            250
+#define bSET_EXT4_CANALS            252
+#define bSET_EXT4_RESET             253
+#define bSET_EXT6_RESET             254
+
 #define wSET_EXT4T_FLAG             516
 #define wSET_EXT4T_MONTHS           517
 #define wSET_EXT4T_RESET1           518
