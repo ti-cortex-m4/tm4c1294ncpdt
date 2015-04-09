@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_EXTENDED_4T_RESET1.C
+KEY_EXT_4T_RESET1.C
 
 
 ------------------------------------------------------------------------------*/
@@ -25,7 +25,7 @@ uchar           *code   pszExt4TReset[] = { szExt4TReset1, szExt4TReset2, szExt4
 
 
 
-void    key_SetExtended4TReset1(void)
+void    key_SetExt4TReset1(void)
 {
   if (bKey == bKEY_ENTER)
   {

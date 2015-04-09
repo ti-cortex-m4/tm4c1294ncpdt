@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_EXTENDED_4T_MONTHS.C
+KEY_EXT_4T_MONTHS.C
 
 
 ------------------------------------------------------------------------------*/
@@ -26,7 +26,7 @@ uchar           *code   pszExt4TMonths[] = { szExt4TMonths1, szExt4TMonths2, szE
 
 
 
-void    key_SetExtended4TMonths(void)
+void    key_SetExt4TMonths(void)
 {
   if (bKey == bKEY_ENTER)
   {

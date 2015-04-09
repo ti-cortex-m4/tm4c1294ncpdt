@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_EXTENDED_4.C
+KEY_EXT_4.C
 
 
 ------------------------------------------------------------------------------*/
@@ -23,7 +23,7 @@ uchar           *code   pszExt4Months[] = { szExt4Months, szExt4Load, szExt4Valu
 
 
 
-void    key_SetExtended4(void)
+void    key_SetExt4(void)
 {
   if (bKey == bKEY_ENTER)
   {
