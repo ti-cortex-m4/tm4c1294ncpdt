@@ -150,4 +150,38 @@ uchar   i;
 }
 */
 
+/*
+status4 ReadCntMonCanTariffC(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца                 
+{ 
+uchar   i,j;
+
+  Clear();
+  if (ReadKoeffDeviceC() == 0) return(ST4_BADDIGITAL);
+
+  if (QueryTimeC_Full() == 0) return(ST4_BADDIGITAL);  
+
+  j = (ibMonth + 0)%12;
+  if (QueryCounterMonTariffC_Full(-((12-1+tiAlt.bMonth-j)%12), ibTariff+1) == 0) return(ST4_BADDIGITAL);  
+
+  ShowPercent(60+ibTariff);
+  for (i=0; i<4; i++)
+  {
+    dwBuffC = *PGetCanLong(mpdwChannelsA, i);
+    SetCanLong(mpdwChannelsB, i);
+  }
+
+
+  reBuffB = reBuffB/reBuffA;
+
+  for (i=0; i<4; i++) 
+  {
+    reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB;
+
+    SetCanReal(mpreChannelsB, i);
+    mpboChannelsA[i] = boTrue;     
+  }
+
+  return(ST4_OK);
+}
+*/
 #endif

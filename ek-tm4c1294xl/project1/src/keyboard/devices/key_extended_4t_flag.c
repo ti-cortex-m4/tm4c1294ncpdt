@@ -54,4 +54,4 @@ void    key_SetExtended4TFlag(void)
   } 
   else Beep(); 
 }
-8/
+*/
