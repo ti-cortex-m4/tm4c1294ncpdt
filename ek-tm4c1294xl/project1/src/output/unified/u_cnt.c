@@ -75,7 +75,7 @@ void    PushCntCanMonTarUni(uchar  ibCanal, uchar  ibMonth, uchar  ibTariff)
   }
   else
   {
-    v6tBuff = mpCntMonCan4T[ibMonth][ibCanal]; 
+    v6tBuff = mpCntMonCan4T_[ibMonth][ibCanal]; 
     PushRealUni(v6tBuff.bSelf, &v6tBuff.mpreSelf[ibTariff]);
   }
 }

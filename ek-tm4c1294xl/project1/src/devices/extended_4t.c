@@ -25,6 +25,8 @@ message         code    szExtended4T    = "Опрос данных: 6 ";
 extern	message         code    szNoLink;
 
 
+// переменная
+value6t                 v6tBuff;
 
 void    InitExtended4T(void) 
 { 
@@ -39,26 +41,26 @@ void    ResetExtended4T(void)
   boExt4TFlag = boFalse;
   bExt4TMonths = 4;
 
-  memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
+  memset(&mpCntMonCan4T_, 0, sizeof(mpCntMonCan4T_));
 }
 
 
 void    ResetExtended4T1(void) 
 { 
-  memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
+  memset(&mpCntMonCan4T_, 0, sizeof(mpCntMonCan4T_));
 }
 
 
 void    ResetExtended4T2(uchar  ibMonth, uchar  ibCanal) 
 { 
-  memset(&mpCntMonCan4T[ibMonth][ibCanal], 0, sizeof(value6t));
+  memset(&mpCntMonCan4T_[ibMonth][ibCanal], 0, sizeof(value6t));
 }
 
 
 
 void    NextMonExtended4T(void) 
 {
-  memset(&mpCntMonCan4T[ibHardMon], 0, sizeof(value6t)*bCANALS);
+  memset(&mpCntMonCan4T_[ibHardMon], 0, sizeof(value6t)*bCANALS);
 }
 
 
@@ -77,13 +79,13 @@ bit     MakeSimple4T(uchar	ibTariff)
       LoadPrevDigital(ibCan);
       if (CompareCurrPrevLines() == 1)
       {
-        v6tBuff = mpCntMonCan4T[ibMon][ibCan];
+        v6tBuff = mpCntMonCan4T_[ibMon][ibCan];
 
         v6tBuff.bSelf = ibX;
         v6tBuff.mpreSelf[ibTariff] = 0;
 
         v6tBuff.tiSelf = *PGetCurrTimeDate();
-        mpCntMonCan4T[ibMon][ibCan] = v6tBuff;
+        mpCntMonCan4T_[ibMon][ibCan] = v6tBuff;
       }
     }
 
@@ -100,13 +102,13 @@ bit     MakeSimple4T(uchar	ibTariff)
       {
         if (mpboChannelsA[diPrev.ibLine] == boTrue)
         {
-          v6tBuff = mpCntMonCan4T[ibMon][ibCan];
+          v6tBuff = mpCntMonCan4T_[ibMon][ibCan];
 
           v6tBuff.bSelf = ST4_OK;
           v6tBuff.mpreSelf[ibTariff] = mpreChannelsB[diPrev.ibLine];
 
           v6tBuff.tiSelf = *PGetCurrTimeDate();
-          mpCntMonCan4T[ibMon][ibCan] = v6tBuff;
+          mpCntMonCan4T_[ibMon][ibCan] = v6tBuff;
         }
       }
     }
@@ -133,7 +135,7 @@ uchar   i,j;
 
       ibMon = (bMONTHS + ibHardMon - i) % bMONTHS;
 
-      v6tBuff = mpCntMonCan4T[ibMon][ibDig];
+      v6tBuff = mpCntMonCan4T_[ibMon][ibDig];
       if ((v6tBuff.bSelf == ST4_OK) || (v6tBuff.bSelf == ST4_NOTPRESENTED)) continue;
 
       for (j=0; j<bTARIFFS; j++)
@@ -166,7 +168,7 @@ void    PushData4T(uchar  ibCanal, uchar  ibMonth)
   }
   else
   {
-    v6tBuff = mpCntMonCan4T[ibMonth][ibCanal]; 
+    v6tBuff = mpCntMonCan4T_[ibMonth][ibCanal]; 
     PushChar(v6tBuff.bSelf);
     Push(&v6tBuff.mpreSelf, sizeof(real)*bTARIFFS);
     Push(&v6tBuff.tiSelf, sizeof(time));

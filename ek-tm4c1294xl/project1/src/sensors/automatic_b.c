@@ -169,7 +169,7 @@ uchar   i;
 }
 
 
-status4 ReadCntMonCanTariffB(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца                 
+status4 ReadCntMonCanTariffB(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
 { 
 uchar   i;
 
