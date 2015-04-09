@@ -13,6 +13,7 @@ AUTOMATIC_C.C
 #include        "../serial/ports_devices.h"
 #include        "../devices/devices.h"
 #include        "../digitals/digitals_messages.h"
+#include        "../engine.h"
 #include        "automatic1.h"
 #include        "device_c.h"
 
@@ -168,8 +169,7 @@ uchar   i,j;
   ShowPercent(60+ibTariff);
   for (i=0; i<4; i++)
   {
-    dwBuffC = *PGetCanLong(mpdwChannelsA, i);
-    SetCanLong(mpdwChannelsB, i);
+    mpdwChannelsB[i] = mpdwChannelsA[i];
   }
 
 
@@ -177,9 +177,7 @@ uchar   i,j;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB;
-
-    SetCanReal(mpreChannelsB, i);
+    mpreChannelsB[i] = mpdwChannelsB[i] * reBuffB;
     mpboChannelsA[i] = TRUE;     
   }
 
