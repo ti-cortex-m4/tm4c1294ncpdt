@@ -9,6 +9,7 @@ AUTOMATIC_C.C
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../time/delay.h"
+#include        "../time/timedate.h"
 #include        "../serial/ports_stack.h"
 #include        "../serial/ports_devices.h"
 #include        "../devices/devices.h"
