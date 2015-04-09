@@ -208,7 +208,10 @@ typedef enum
 
   FLS_EXT_5_FLAG        = FLS_SHORT_PROFILE_C + 1,
 
-  FLS_EXT_4T_FLAG       = FLS_EXT_5_FLAG + 1,
+  FLS_EXT_4_FLAG        = FLS_EXT_5_FLAG + 1,
+  FLS_EXT_4_MONTHS      = FLS_EXT_4_FLAG + 1,
+
+  FLS_EXT_4T_FLAG       = FLS_EXT_4_MONTHS + 1,
   FLS_EXT_4T_MONTHS     = FLS_EXT_4T_FLAG + 1,
   FLS_EXT_4T_VALUES     = FLS_EXT_4T_MONTHS + 1,
 
