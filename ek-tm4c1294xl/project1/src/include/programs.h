@@ -271,5 +271,10 @@ PROGRAMS.H
 
 #define wSET_MNT_ESC_S              500
 
+#define wSET_EXT4T_FLAG             516
+#define wSET_EXT4T_MONTHS           517
+#define wSET_EXT4T_RESET1           518
+#define wSET_EXT4T_RESET2           519
+
 
 #endif

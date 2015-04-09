@@ -3,7 +3,7 @@ _EXTENDED_4T_RESET1.C
 
 
 ------------------------------------------------------------------------------*/
-
+/*
 #include        "main.h"
 #include        "xdata.h"
 #include        "display.h"
@@ -70,3 +70,4 @@ void    key_SetExtended4TReset1(void)
   else Beep(); 
 }
 
+*/

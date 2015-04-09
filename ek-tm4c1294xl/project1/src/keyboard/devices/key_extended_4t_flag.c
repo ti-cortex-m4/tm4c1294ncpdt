@@ -3,7 +3,7 @@ _EXTENDED_4T_FLAG.CS
 
 
 ------------------------------------------------------------------------------*/
-
+/*
 #include        "main.h"
 #include        "xdata.h"
 #include        "display.h"
@@ -54,3 +54,4 @@ void    key_SetExtended4TFlag(void)
   } 
   else Beep(); 
 }
+8/

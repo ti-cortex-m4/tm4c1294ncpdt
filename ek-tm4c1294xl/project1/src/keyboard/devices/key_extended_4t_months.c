@@ -3,7 +3,7 @@ _EXTENDED_4T_MONTHS.C
 
 
 ------------------------------------------------------------------------------*/
-
+/*
 #include        "main.h"
 #include        "xdata.h"
 #include        "beep.h"
@@ -81,3 +81,4 @@ void    key_SetExtended4TMonths(void)
   else Beep();
 }
 
+*/
