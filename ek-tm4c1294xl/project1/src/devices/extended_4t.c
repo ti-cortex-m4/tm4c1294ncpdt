@@ -29,7 +29,7 @@ file const              flExt4TMonths = {FLS_EXT_4T_MONTHS, &bExt4TMonths, sizeo
 static char const       szExtended4T[]  = "Опрос данных: 6 ";
 
 
-static value6t          vaBuff;
+static value6t          vaT;
 
 
 
@@ -108,13 +108,13 @@ bool    MakeSimple4T(uchar  ibMon, uchar  ibTariff)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        vaBuff = mpCntMonCan4T_[ibMon][c];
+        vaT = mpCntMonCan4T[c];
 
-        vaBuff.bSelf = st;
-        vaBuff.mpreSelf[ibTariff] = 0;
+        vaT.bSelf = st;
+        vaT.mpreSelf[ibTariff] = 0;
+        vaT.tiSelf = *GetCurrTimeDate();
 
-        vaBuff.tiSelf = *GetCurrTimeDate();
-        mpCntMonCan4T_[ibMon][c] = vaBuff;
+        mpCntMonCan4T[c] = vaT;
       }
     }
 
@@ -133,13 +133,13 @@ bool    MakeSimple4T(uchar  ibMon, uchar  ibTariff)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          vaBuff = mpCntMonCan4T_[ibMon][c];
+          vaT = mpCntMonCan4T[c];
 
-          vaBuff.bSelf = ST4_OK;
-          vaBuff.mpreSelf[ibTariff] = mpreChannelsB[diPrev.ibLine];
+          vaT.bSelf = ST4_OK;
+          vaT.mpreSelf[ibTariff] = mpreChannelsB[diPrev.ibLine];
+          vaT.tiSelf = *GetCurrTimeDate();
 
-          vaBuff.tiSelf = *GetCurrTimeDate();
-          mpCntMonCan4T_[ibMon][c] = vaBuff;
+          mpCntMonCan4T[c] = vaT;
         }
       }
     }
@@ -166,8 +166,8 @@ void    MakeExtended4T(void)
       uchar ibMonth = (bMONTHS + ibHardMon - m) % bMONTHS;
       LoadExt4TValues(ibMonth);
 
-      vaBuff = mpCntMonCan4T[ibDig];
-      if ((vaBuff.bSelf == ST4_OK) || (vaBuff.bSelf == ST4_NOTPRESENTED)) continue;
+      vaT = mpCntMonCan4T[ibDig];
+      if ((vaT.bSelf == ST4_OK) || (vaT.bSelf == ST4_NOTPRESENTED)) continue;
 
       uchar t;
       for (t=0; t<bTARIFFS; t++)
@@ -176,6 +176,8 @@ void    MakeExtended4T(void)
         if (MakeSimple4T(ibMonth, t) == 0) break;
         ibMonthP = ibMonth;
       }
+
+      SaveExt4TValues(ibMonth);
     }
 
     ShowCanalNumber(ibDig);
