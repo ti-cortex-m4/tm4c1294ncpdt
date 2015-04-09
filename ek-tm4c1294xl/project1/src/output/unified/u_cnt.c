@@ -171,14 +171,14 @@ void    GetCntCanTarUni(void)
   { 
     InitPushUni();
 
-    uchar ibCan;
-    for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
       uchar i;
       for (i=bInBuffA; i<bInBuffA+bInBuffB; i++)
       {
-        PushTime(&mpvaValue51[ibCan-1].tiSelf);
-        PushFloat(mpvaValue51[ibCan-1].vaValue50.mpreSelf[i-1]);
+        PushTime(&mpvaValue51[c-1].tiSelf);
+        PushFloat(mpvaValue51[c-1].vaValue50.mpreSelf[i-1]);
       }
     }
 
