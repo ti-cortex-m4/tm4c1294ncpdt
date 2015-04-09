@@ -7,6 +7,7 @@ AUTOMATIC3.C
 #include        "../main.h"
 #include        "../digitals/digitals.h"
 #include        "../display/display.h"
+#include        "../serial/ports.h"
 #include        "automatic_b.h"
 #include        "automatic_c.h"
 

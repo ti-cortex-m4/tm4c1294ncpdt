@@ -5,7 +5,12 @@ EXTENDED_4T.C
 ------------------------------------------------------------------------------*/
 
 #include        "../console.h"
+#include        "../memory/mem_realtime.h"
+#include        "../memory/mem_profile.h"
+#include        "../serial/ports.h"
 #include        "../digitals/digitals.h"
+#include        "../digitals/digitals_display.h"
+#include        "../digitals/digitals_messages.h"
 #include        "../devices/devices.h"
 #include        "../sensors/automatic3.h"
 #include        "../time/rtc.h"
@@ -85,54 +90,54 @@ void    NextMonExtended4T(void)
 */
 
 
-bool    MakeSimple4T(uchar  ibTariff)
+bool    MakeSimple4T(uchar  ibMon, uchar  ibTariff)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
 
-  status4 ibX = ReadCntMonCanTariff(ibMon, ibDig, ibTariff);
+  status4 st = ReadCntMonCanTariff(ibMon, ibDig, ibTariff);
 
-  if ((ibX == ST4_BADDIGITAL) || (ibX == ST4_NOTSUPPORTED) || (ibX == ST4_NOTPRESENTED)) 
+  if ((st == ST4_BADDIGITAL) || (st == ST4_NOTSUPPORTED) || (st == ST4_NOTPRESENTED)) 
   { 
     LoadCurrDigital(ibDig);
 
-    uchar ibCan;
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+      LoadPrevDigital(c);
+      if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        vaBuff = mpCntMonCan4T_[ibMon][ibCan];
+        vaBuff = mpCntMonCan4T_[ibMon][c];
 
-        vaBuff.bSelf = ibX;
+        vaBuff.bSelf = st;
         vaBuff.mpreSelf[ibTariff] = 0;
 
         vaBuff.tiSelf = *GetCurrTimeDate();
-        mpCntMonCan4T_[ibMon][ibCan] = vaBuff;
+        mpCntMonCan4T_[ibMon][c] = vaBuff;
       }
     }
 
-    if (ibX == ST4_BADDIGITAL) { ShowLo(szNoLink); DelayInf(); }
+    if (st == ST4_BADDIGITAL) { ShowLo(szNoLink); DelayInf(); }
     return (0);
   }
   else
   { 
     LoadCurrDigital(ibDig);
 
-    uchar ibCan;
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+      LoadPrevDigital(c);
+      if (CompareCurrPrevLines(ibDig, c) == 1)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          vaBuff = mpCntMonCan4T_[ibMon][ibCan];
+          vaBuff = mpCntMonCan4T_[ibMon][c];
 
           vaBuff.bSelf = ST4_OK;
           vaBuff.mpreSelf[ibTariff] = mpreChannelsB[diPrev.ibLine];
 
           vaBuff.tiSelf = *GetCurrTimeDate();
-          mpCntMonCan4T_[ibMon][ibCan] = vaBuff;
+          mpCntMonCan4T_[ibMon][c] = vaBuff;
         }
       }
     }
@@ -148,54 +153,53 @@ void    MakeExtended4T(void)
   if ((boExt4TFlag == TRUE) && (mpEnblCan4[ibDig] == TRUE))
   {
     ShowHi(szExtended4T); 
-    Clear(); sprintf(szLo+3,"глубина: %bu", bExt4TMonths); DelayInf();
-    ibMinor = 0xFF;
+    Clear(); sprintf(szLo+3,"глубина: %u", bExt4TMonths); DelayInf();
+    ibMinor = 0xFF; // TODO ReadCntMonCanTariffP
 
-    uchar i;
-    for (i=0; i<bExt4TMonths; i++)
+    uchar m;
+    for (m=0; m<bExt4TMonths; m++)
     {
       if (fKey == 1) break;
 
-      ibMon = (bMONTHS + ibHardMon - i) % bMONTHS;
+      uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
 
       vaBuff = mpCntMonCan4T_[ibMon][ibDig];
       if ((vaBuff.bSelf == ST4_OK) || (vaBuff.bSelf == ST4_NOTPRESENTED)) continue;
 
-      uchar j;
-      for (j=0; j<bTARIFFS; j++)
+      uchar t;
+      for (t=0; t<bTARIFFS; t++)
       {
-        Clear(); sprintf(szLo+3,"мес€ц: %-2bu",ibMon+1); sprintf(szLo+14,"T%bu",j+1); DelayInf();
-        if (MakeSimple4T(j) == 0) break;
+        Clear(); sprintf(szLo+3,"мес€ц: %-2u",ibMon+1); sprintf(szLo+14,"T%u",t+1); DelayInf();
+        if (MakeSimple4T(ibMon, t) == 0) break;
         ibMinor = ibMon;
       }
     }
 
-    ShowDigitalHi(); Clear();
+    ShowCanalNumber(ibDig);
+    Clear();
   }
 }
 
 
-/*
-#ifndef MODBUS
 
 void    PushData4T(uchar  ibCanal, uchar  ibMonth)
 {
   if (IsCntMonCanTariff(ibCanal) == 0)
   {
     PushChar(ST4_NOTSUPPORTED);
-    reBuffA = 0; 
-    PushReal();
-    PushReal();
-    PushReal();
-    PushReal();
-    Push(&tiZero, sizeof(time));
+    real re = 0;
+    PushFloat(re);
+    PushFloat(re);
+    PushFloat(re);
+    PushFloat(re);
+    PushTime(&tiZero);
   }
   else
   {
     v6tBuff = mpCntMonCan4T_[ibMonth][ibCanal]; 
     PushChar(v6tBuff.bSelf);
     Push(&v6tBuff.mpreSelf, sizeof(real)*bTARIFFS);
-    Push(&v6tBuff.tiSelf, sizeof(time));
+    PushTime(&v6tBuff.tiSelf);
   }
 }
 
@@ -203,8 +207,6 @@ void    PushData4T(uchar  ibCanal, uchar  ibMonth)
 
 void    OutExtended40T(void)
 {
-uchar   i;
-
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
   else if (InBuff(6) >= bMONTHS)
@@ -214,20 +216,18 @@ uchar   i;
     InitPushPtr();            
     PushChar(boExt4TFlag);
     PushChar(bExt4TMonths);
-    wBuffD = 1+1;
+    uint wSize = 1+1;
 
-    for (i=0; i<bCANALS; i++)
+   uchar c;
+   for (c=0; c<bCANALS; c++)
     {
-      if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+      if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4T(i, InBuff(6));
-        wBuffD += (1+4*4+6);
+        PushData4T(c, InBuff(6));
+        wSize += (1+4*4+6);
       }
     }
 
-    OutptrOutBuff(wBuffD);
+    OutptrOutBuff(wSize);
   }
 }
-
-#endif
-*/

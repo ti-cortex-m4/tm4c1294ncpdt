@@ -181,8 +181,7 @@ uchar   i;
   ShowPercent(60+ibTariff);
   for (i=0; i<4; i++)
   {
-    dwBuffC = *PGetCanLong(mpdwChannelsA, i);
-    SetCanLong(mpdwChannelsB, i);
+    mpdwChannelsB[i] = mpdwChannelsA[i];
   }
 
 
@@ -190,9 +189,7 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB;
-
-    SetCanReal(mpreChannelsB, i);
+    mpreChannelsB[i] = mpdwChannelsB[i] * reBuffB;
     mpboChannelsA[i] = TRUE;
   }
 
