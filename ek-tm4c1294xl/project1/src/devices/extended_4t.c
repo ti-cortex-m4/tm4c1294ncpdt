@@ -6,14 +6,16 @@ EXTENDED_4T.C
 
 #include        "../console.h"
 #include        "../memory/mem_realtime.h"
-#include        "../memory/mem_profile.h"
+#include        "../memory/mem_extended_4.h"
 #include        "../serial/ports.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/digitals_display.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../devices/devices.h"
+#include        "../sensors/automatic_p.h"
 #include        "../sensors/automatic3.h"
 #include        "../time/rtc.h"
+#include        "../time/timedate.h"
 #include        "extended_4t.h"
 
 
@@ -154,24 +156,25 @@ void    MakeExtended4T(void)
   {
     ShowHi(szExtended4T); 
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4TMonths); DelayInf();
-    ibMinor = 0xFF; // TODO ReadCntMonCanTariffP
+    ibMonthP = 0xFF;
 
     uchar m;
     for (m=0; m<bExt4TMonths; m++)
     {
       if (fKey == 1) break;
 
-      uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
+      uchar ibMonth = (bMONTHS + ibHardMon - m) % bMONTHS;
+      LoadExt4TValues(ibMonth);
 
-      vaBuff = mpCntMonCan4T_[ibMon][ibDig];
+      vaBuff = mpCntMonCan4T[ibDig];
       if ((vaBuff.bSelf == ST4_OK) || (vaBuff.bSelf == ST4_NOTPRESENTED)) continue;
 
       uchar t;
       for (t=0; t<bTARIFFS; t++)
       {
-        Clear(); sprintf(szLo+3,"мес€ц: %-2u",ibMon+1); sprintf(szLo+14,"T%u",t+1); DelayInf();
-        if (MakeSimple4T(ibMon, t) == 0) break;
-        ibMinor = ibMon;
+        Clear(); sprintf(szLo+3,"мес€ц: %-2u",ibMonth+1); sprintf(szLo+14,"T%u",t+1); DelayInf();
+        if (MakeSimple4T(ibMonth, t) == 0) break;
+        ibMonthP = ibMonth;
       }
     }
 
@@ -182,24 +185,29 @@ void    MakeExtended4T(void)
 
 
 
-void    PushData4T(uchar  ibCanal, uchar  ibMonth)
+void    PushData4T(uchar  ibCanal)
 {
   if (IsCntMonCanTariff(ibCanal) == 0)
   {
     PushChar(ST4_NOTSUPPORTED);
-    real re = 0;
-    PushFloat(re);
-    PushFloat(re);
-    PushFloat(re);
-    PushFloat(re);
-    PushTime(&tiZero);
+
+    uchar t;
+    for (t=0; t<bTARIFFS; t++)
+      PushFloat(0);
+
+    PushTime((time *) &tiZero);
   }
   else
   {
-    v6tBuff = mpCntMonCan4T_[ibMonth][ibCanal]; 
-    PushChar(v6tBuff.bSelf);
-    Push(&v6tBuff.mpreSelf, sizeof(real)*bTARIFFS);
-    PushTime(&v6tBuff.tiSelf);
+    value6t va = mpCntMonCan4T[ibCanal];
+
+    PushChar(va.bSelf);
+
+    uchar t;
+    for (t=0; t<bTARIFFS; t++)
+      PushFloat(va.mpreSelf[t]);
+
+    PushTime(&va.tiSelf);
   }
 }
 
@@ -218,12 +226,14 @@ void    OutExtended40T(void)
     PushChar(bExt4TMonths);
     uint wSize = 1+1;
 
-   uchar c;
-   for (c=0; c<bCANALS; c++)
+    LoadExt4TValues(InBuff(6));
+
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4T(c, InBuff(6));
+        PushData4T(c);
         wSize += (1+4*4+6);
       }
     }
