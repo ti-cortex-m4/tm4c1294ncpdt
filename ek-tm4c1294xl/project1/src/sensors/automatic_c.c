@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC_CS.C
+AUTOMATIC_C.C
 
 
 ------------------------------------------------------------------------------*/
@@ -13,6 +13,7 @@ AUTOMATIC_CS.C
 #include        "../serial/ports_devices.h"
 #include        "../devices/devices.h"
 #include        "../digitals/digitals_messages.h"
+#include        "automatic1.h"
 #include        "device_c.h"
 
 
@@ -129,7 +130,8 @@ uchar   i;
   return(1);
 }
 
-/*
+
+
 bool    QueryCounterMonTariffC_Full(uchar  ibMonth, uchar  bTariff)
 {
 uchar   i;
@@ -148,10 +150,10 @@ uchar   i;
   ReadEnergyC();
   return(1);
 }
-*/
 
-/*
-status4 ReadCntMonCanTariffC(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца                 
+
+
+status4 ReadCntMonCanTariffC(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
 { 
 uchar   i,j;
 
@@ -178,10 +180,10 @@ uchar   i,j;
     reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB;
 
     SetCanReal(mpreChannelsB, i);
-    mpboChannelsA[i] = boTrue;     
+    mpboChannelsA[i] = TRUE;     
   }
 
   return(ST4_OK);
 }
-*/
+
 #endif

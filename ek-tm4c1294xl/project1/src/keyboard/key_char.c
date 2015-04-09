@@ -21,7 +21,7 @@ char                    szCharLimits[bDISPLAY + bMARGIN];
 
 void    key_SetChar(file const  *pflFile, char const  *pszSlide[], uchar const  bMin, uchar const  bMax)
 {
-  uchar *pbValue = (uchar *) pflFile->pbBuff;
+  uchar *pbVal = (uchar *) pflFile->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {
@@ -34,7 +34,7 @@ void    key_SetChar(file const  *pflFile, char const  *pszSlide[], uchar const  
       sprintf(szCharLimits+4, "%3u..%-3u", bMin, bMax);
 
       LoadSlide(pszSlide);
-      ShowChar(*pbValue);
+      ShowChar(*pbVal);
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
@@ -43,10 +43,10 @@ void    key_SetChar(file const  *pflFile, char const  *pszSlide[], uchar const  
       uchar b = GetCharLo(6,8);
       if ((b >= bMin) && (b <= bMax))
       {
-        *pbValue = b;
+        *pbVal = b;
         SaveFile(pflFile);
 
-        ShowChar(*pbValue);
+        ShowChar(*pbVal);
       }
       else
       {

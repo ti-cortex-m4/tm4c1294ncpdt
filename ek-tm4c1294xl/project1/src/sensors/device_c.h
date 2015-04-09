@@ -21,6 +21,7 @@ void    ReadVersionC(void);
 void    QueryEnergyAbsC(void);
 void    QueryEnergyMonC(uchar  ibMonth);
 void    QueryEnergyDayC(uchar  ibDay);
+void    QueryCounterMonTariffC(uchar  ibMonth, uchar  bTariff);
 void    ReadEnergyC(void);
 
 void    InitHeaderC_1(void);

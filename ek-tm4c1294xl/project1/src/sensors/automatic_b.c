@@ -13,6 +13,8 @@ AUTOMATIC_B.C
 #include        "../serial/ports_devices.h"
 #include        "../devices/devices.h"
 #include        "../digitals/digitals_messages.h"
+#include        "../engine.h"
+#include        "automatic1.h"
 #include        "device_b.h"
 
 
@@ -129,18 +131,16 @@ uchar   i;
 }
 
 
-/*
+
 void    QueryCounterMonTariffB(uchar  ibMonth, uchar  bTariff) // на начало мес€ца
 {
-uint    i;
-
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(6);
   PushChar(2);
 
-  i = 0x2BB + 0x55*ibMonth + 0x11*bTariff;
+  uint i = 0x2BB + 0x55*ibMonth + 0x11*bTariff;
   PushChar(i / 0x100);
   PushChar(i % 0x100);
   PushChar(16);
@@ -149,7 +149,7 @@ uint    i;
 }
 
 
-bit     QueryCounterMonTariffB_Full(uchar  ibMonth, uchar  bTariff)
+bool    QueryCounterMonTariffB_Full(uchar  ibMonth, uchar  bTariff)
 {
 uchar   i;
 
@@ -193,9 +193,8 @@ uchar   i;
     reBuffA = *PGetCanLong(mpdwChannelsB, i) * reBuffB;
 
     SetCanReal(mpreChannelsB, i);
-    mpboChannelsA[i] = boTrue;     
+    mpboChannelsA[i] = TRUE;
   }
 
   return(ST4_OK);
 }
-*/

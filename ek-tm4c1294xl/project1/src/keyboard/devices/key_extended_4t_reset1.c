@@ -31,7 +31,7 @@ void    key_SetExtended4TReset1(void)
   {
     if (enKeyboard == KBD_ENTER)  
     {
-      if (boExt4TFlag == boTrue)
+      if (boExt4TFlag == TRUE)
       {
         enKeyboard = KBD_INPUT1;
         Clear();
