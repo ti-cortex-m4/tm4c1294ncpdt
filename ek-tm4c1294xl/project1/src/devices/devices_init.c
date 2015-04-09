@@ -37,6 +37,7 @@ DEVICES_INIT.C
 #include        "../time/delay.h"
 #include        "extended_1.h"
 #include        "extended_5.h"
+#include        "extended_4t.h"
 #include        "devices_input.h"
 #include        "devices_postinput.h"
 #include        "devices_pause.h"
@@ -109,6 +110,7 @@ void    InitDevices(void)
   InitSchedule();
   InitExtended1();
   InitExtended5();
+  InitExtended4T();
 }
 
 
@@ -143,4 +145,5 @@ void    ResetDevices(void)
   ResetSchedule();
   ResetExtended1();
   ResetExtended5();
+  ResetExtended4T();
 }
