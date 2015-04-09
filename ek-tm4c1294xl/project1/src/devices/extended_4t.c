@@ -37,24 +37,33 @@ static boolean LoadExt4TValues(uchar  ibMonth)
 }
 
 
-/*
-void    InitExtended4T(void) 
-{ 
-  if ((bExt4TMonths <= 0) || (bExt4TMonths > 12))
-    bExt4TMonths = 4;
-}
 
+void    InitExtended4T(void) 
+{
+  LoadFileBoolean(&flExt4TFlag, FALSE);
+  LoadFileChar(&flExt4TMonths, 0, 12, 4);
+}
 
 
 void    ResetExtended4T(void) 
 { 
-  boExt4TFlag = boFalse;
-  bExt4TMonths = 4;
+  boExt4TFlag = FALSE;
+  SaveFile(&flExt4TFlag);
 
-  memset(&mpCntMonCan4T_, 0, sizeof(mpCntMonCan4T_));
+  bExt4TMonths = 4;
+  SaveFile(&flExt4TMonths);
+
+
+  memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
+
+  uchar m;
+  for (m=0; m<bMONTHS; m++)
+  {
+    SaveExt4TValues(m);
+  }
 }
 
-
+/*
 void    ResetExtended4T1(void) 
 { 
   memset(&mpCntMonCan4T_, 0, sizeof(mpCntMonCan4T_));
