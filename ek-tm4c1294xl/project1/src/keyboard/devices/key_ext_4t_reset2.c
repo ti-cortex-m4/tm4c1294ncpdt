@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_EXTENDED_4T_RESET2.C
+KEY_EXT_4T_RESET2.C
 
 
 ------------------------------------------------------------------------------*/
@@ -35,7 +35,7 @@ void    ShowAnswerReset2(void)
 
 
 
-void    key_SetExtended4TReset2(void)
+void    key_SetExt4TReset2(void)
 { 
   if (bKey == bKEY_ENTER)
   {                                           

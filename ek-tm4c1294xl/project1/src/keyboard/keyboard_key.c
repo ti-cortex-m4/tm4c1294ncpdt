@@ -245,14 +245,14 @@ void    Keyboard_Key(void)
 
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
 
-//      case wSET_EXT4_FLAG:      key_SetExtended4Flag();   break;
-//      case wSET_EXT4_MONTHS:    key_SetExtended4Months(); break;
-//      case wSET_EXT4_CANALS:    key_SetExtended4Canals(); break;
+//      case wSET_EXT4_FLAG:      key_SetExt4Flag();   break;
+//      case wSET_EXT4_MONTHS:    key_SetExt4Months(); break;
+//      case wSET_EXT4_CANALS:    key_SetExt4Canals(); break;
 
-//      case wSET_EXT4T_FLAG:     key_SetExtended4TFlag();  break;
-//      case wSET_EXT4T_MONTHS:   key_SetExtended4TMonths();break;
-//      case wSET_EXT4T_RESET1:   key_SetExtended4TReset1();break;
-//      case wSET_EXT4T_RESET2:   key_SetExtended4TReset2();break;
+//      case wSET_EXT4T_FLAG:     key_SetExt4TFlag();  break;
+//      case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();break;
+//      case wSET_EXT4T_RESET1:   key_SetExt4TReset1();break;
+//      case wSET_EXT4T_RESET2:   key_SetExt4TReset2();break;
 
       default:                  NoProgram();            break;
     }
@@ -475,12 +475,12 @@ void    Keyboard_Key(void)
 
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
 
-//      case wSET_EXT4_FLAG:      key_SetExtended4Flag();   break;
-//      case wSET_EXT4_MONTHS:    key_SetExtended4Months(); break;
-//      case wSET_EXT4_CANALS:    key_SetExtended4Canals(); break;
+//      case wSET_EXT4_FLAG:      key_SetExt4Flag();   break;
+//      case wSET_EXT4_MONTHS:    key_SetExt4Months(); break;
+//      case wSET_EXT4_CANALS:    key_SetExt4Canals(); break;
 
-//      case wSET_EXT4T_FLAG:     key_SetExtended4TFlag();  break;
-//      case wSET_EXT4T_MONTHS:   key_SetExtended4TMonths();break;
+//      case wSET_EXT4T_FLAG:     key_SetExt4TFlag();  break;
+//      case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();break;
 
       default:                  NoProgram();            break;
     }
@@ -622,14 +622,14 @@ void    Keyboard_Key(void)
 
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
 
-//      case wSET_EXT4_FLAG:      key_SetExtended4Flag();   break;
-//      case wSET_EXT4_MONTHS:    key_SetExtended4Months(); break;
-//      case wSET_EXT4_CANALS:    key_SetExtended4Canals(); break;
+//      case wSET_EXT4_FLAG:      key_SetExt4Flag();   break;
+//      case wSET_EXT4_MONTHS:    key_SetExt4Months(); break;
+//      case wSET_EXT4_CANALS:    key_SetExt4Canals(); break;
 
-//      case wSET_EXT4T_FLAG:     key_SetExtended4TFlag();  break;
-//      case wSET_EXT4T_MONTHS:   key_SetExtended4TMonths();break;
-//      case wSET_EXT4T_RESET1:   key_SetExtended4TReset1();break;
-//      case wSET_EXT4T_RESET2:   key_SetExtended4TReset2();break;
+//      case wSET_EXT4T_FLAG:     key_SetExt4TFlag();  break;
+//      case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();break;
+//      case wSET_EXT4T_RESET1:   key_SetExt4TReset1();break;
+//      case wSET_EXT4T_RESET2:   key_SetExt4TReset2();break;
 
       default:                  NoProgram();            break;
     }

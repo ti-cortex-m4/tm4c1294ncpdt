@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_EXTENDED_4T_FLAG.CS
+KEY_EXT_4T_FLAG.CS
 
 
 ------------------------------------------------------------------------------*/
@@ -23,7 +23,7 @@ uchar           *code   pszExt4TFlag[] = { szExt4TFlag1, szExt4TFlag2, szExt4TFl
 
 
 
-void    key_SetExtended4TFlag(void)
+void    key_SetExt4TFlag(void)
 {
   if (bKey == bKEY_ENTER)
   {
