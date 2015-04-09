@@ -1,10 +1,8 @@
 /*------------------------------------------------------------------------------
-CONSOLE.H
-
+AUTOMATIC3.H
+              
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "keyboard/keyboard.h"
-#include        "display/display.h"
-#include        "flash/files.h"
+bool    IsCntMonCanTariff(uchar  ibCanal);
+status4 ReadCntMonCanTariff(uchar  ibMonth, uchar  ibCanal, uchar  ibTariff);

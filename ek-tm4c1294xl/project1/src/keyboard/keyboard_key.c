@@ -245,6 +245,11 @@ void    Keyboard_Key(void)
 
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
 
+//      case wSET_EXT4T_FLAG:     key_SetExtended4TFlag();  break;
+//      case wSET_EXT4T_MONTHS:   key_SetExtended4TMonths();break;
+//      case wSET_EXT4T_RESET1:   key_SetExtended4TReset1();break;
+//      case wSET_EXT4T_RESET2:   key_SetExtended4TReset2();break;
+
       default:                  NoProgram();            break;
     }
   }
@@ -466,6 +471,9 @@ void    Keyboard_Key(void)
 
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
 
+//      case wSET_EXT4T_FLAG:     key_SetExtended4TFlag();  break;
+//      case wSET_EXT4T_MONTHS:   key_SetExtended4TMonths();break;
+
       default:                  NoProgram();            break;
     }
   }
@@ -605,6 +613,11 @@ void    Keyboard_Key(void)
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
 
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
+
+//      case wSET_EXT4T_FLAG:     key_SetExtended4TFlag();  break;
+//      case wSET_EXT4T_MONTHS:   key_SetExtended4TMonths();break;
+//      case wSET_EXT4T_RESET1:   key_SetExtended4TReset1();break;
+//      case wSET_EXT4T_RESET2:   key_SetExtended4TReset2();break;
 
       default:                  NoProgram();            break;
     }
