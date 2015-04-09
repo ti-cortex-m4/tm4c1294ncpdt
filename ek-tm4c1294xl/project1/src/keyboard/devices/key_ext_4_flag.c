@@ -20,7 +20,7 @@ static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3,
 
 
 
-void    key_SetExt4TFlag(void)
+void    key_SetExt4Flag(void)
 {
   key_SetFlag(&flExt4Flag, pszMessages);
 }
