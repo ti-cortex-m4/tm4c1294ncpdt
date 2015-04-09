@@ -214,9 +214,9 @@ void    GetParamUni1(void)
 
     InitPushUni();
 
-    uchar ibCan;
-    for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
-      PushParamsUni(12, ibCan);
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
+      PushParamsUni(12, c);
 
     time ti = GetTimeParamUni(iwTim);
     Output2_Code(wSize, ((boEnblAllParams == TRUE) ? bUNI_OK : bUNI_NOTREADY), &ti);

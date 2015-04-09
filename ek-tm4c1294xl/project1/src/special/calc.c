@@ -118,11 +118,11 @@ void    CalcDigCanals(void)
 
   LoadCurrDigital(ibDig);                           // обработка по каналам
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)                           
+  uchar c;
+  for (c=0; c<bCANALS; c++)                           
   {
-    LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == 1)
     {
       uint w;
       if (iwDigHou == iwHardHou)
@@ -131,27 +131,27 @@ void    CalcDigCanals(void)
       {
         w = mpwChannels[ diPrev.ibLine ];
 
-        if (IsWinterDouble(ibCan) && (GetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF))
+        if (IsWinterDouble(c) && (GetCanInt(mpwImpHouCanSpec, c) != 0xFFFF))
         {
-          w += GetCanInt(mpwImpHouCanSpec, ibCan);
-          mpbWinterCan[ibCan]++;
+          w += GetCanInt(mpwImpHouCanSpec, c);
+          mpbWinterCan[c]++;
 
-          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, ibCan, &tiAlt );
-          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec, ibCan, &tiAlt );
+          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, c, &tiAlt );
+          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec, c, &tiAlt );
         }
       }
 
-      SetCanInt(mpwImpHouCanSpec, ibCan, w);
-      mpwImpHouCanDef[ibCan] = w;
+      SetCanInt(mpwImpHouCanSpec, c, w);
+      mpwImpHouCanDef[c] = w;
 
-      mpboReadyCan[ibCan] = TRUE;
-      mpcwCalcDig[ibCan]++;
+      mpboReadyCan[c] = TRUE;
+      mpcwCalcDig[c]++;
 
-      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, ibCan, &tiAlt );
-      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, ibCan, &tiAlt );
+      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, &tiAlt );
+      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, &tiAlt );
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, ibCan, &tiAlt );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, ibCan, &tiAlt );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, &tiAlt );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, &tiAlt );
     }
   }
 
@@ -170,17 +170,17 @@ void    CalcAllCanals(bool  fUseImp)
       LoadImpHouSpec(iwDigHou,0);                   // обработка по получасам
     }
 
-    uchar ibCan;
-    for (ibCan=0; ibCan<bCANALS; ibCan++)           // обработка по каналам
+    uchar c;
+    for (c=0; c<bCANALS; c++)           // обработка по каналам
     { 
       // если канал не используется: пропустить
       //if (mpboUsedNodes[ibCan] == FALSE) continue;
      
-      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, ibCan, &tiAlt );
-      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, ibCan, &tiAlt );
+      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, &tiAlt );
+      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, &tiAlt );
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, ibCan, &tiAlt );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, ibCan, &tiAlt );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, &tiAlt );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, &tiAlt );
     }
   }
 }
