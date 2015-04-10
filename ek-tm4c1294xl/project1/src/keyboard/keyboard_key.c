@@ -96,7 +96,7 @@ KEYBOARD_KEY.C
 #include        "digitals/params/key_use_params_div.h"
 #include        "devices/key_ext_4_flag.h"
 #include        "devices/key_ext_4_months.h"
-#include        "devices/key_ext_4_canals.h"
+#include        "devices/key_ext_4_enbl_can.h"
 #include        "devices/key_ext_4t_flag.h"
 #include        "devices/key_ext_4t_months.h"
 #include        "devices/key_ext_4t_reset1.h"

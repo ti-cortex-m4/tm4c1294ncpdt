@@ -27,16 +27,16 @@ U_CNT.C
 
 
 
-void    PushCntCanMonAllUni(uchar  ibCanal, uchar  ibMonth)
+void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon)
 {
-  if (GetDigitalDevice(ibCanal) == 0)
+  if (GetDigitalDevice(ibCan) == 0)
   {
-    real re = mpreCntMonCan[ PrevSoftMon() ][ibCanal];
+    real re = mpreCntMonCan[ PrevSoftMon() ][ibCan];
     PushRealUni(ST4_OK, &re);
   }
   else
   {
-    v6Buff = mpCntMonCan4[ibMonth][ibCanal]; 
+    v6Buff = mpCntMonCan4[ibMon][ibCan]; 
     PushRealUni(v6Buff.bSelf, &v6Buff.reSelf);
   }
 }
@@ -54,37 +54,37 @@ void    GetCntCanMonAllUni(void)
     Result2(bUNI_BADDATA);
   else
   { 
-    ulong dwBuffC = DateToMonIndex(*GetCurrTimeDate());
-    dwBuffC -= bInBuffB;
-    time tiAlt = MonIndexToDate(dwBuffC);
+    ulong dw = DateToMonIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti = MonIndexToDate(dw);
 
     InitPushUni();
-    uchar i = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
-    LoadCntMon(i);
+    uchar ibMon = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
+    LoadCntMon(ibMon);
 
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushCntCanMonAllUni(c-1, i);
+      PushCntCanMonAllUni(c-1, ibMon);
     }
 
-    Output2_Code((uint)4*bInBuff9, ((boExt4Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
+    Output2_Code((uint)4*bInBuff9, ((boExt4Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &ti);
   }
 }
 
 
 
-void    PushCntCanMonTarUni(uchar  ibCanal, uchar  ibMonth, uchar  ibTariff)
+void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
 {
-  if (IsCntMonCanTariff(ibCanal) == 0)
+  if (IsCntMonCanTariff(ibCan) == 0)
   {
     real re = 0;
     PushRealUni(ST4_NOTSUPPORTED, &re);
   }
   else
   {
-    v6tBuff = mpCntMonCan4T_[ibMonth][ibCanal]; 
-    PushRealUni(v6tBuff.bSelf, &v6tBuff.mpreSelf[ibTariff]);
+    v6tBuff = mpCntMonCan4T_[ibMon][ibCan]; 
+    PushRealUni(v6tBuff.bSelf, &v6tBuff.mpreSelf[ibTar]);
   }
 }
 
@@ -105,9 +105,9 @@ void    GetCntCanMonTarUni(void)
     Result2(bUNI_BADDATA);
   else
   { 
-    ulong dwBuffC = DateToMonIndex(*GetCurrTimeDate());
-    dwBuffC -= bInBuffB;
-    time tiAlt = MonIndexToDate(dwBuffC);
+    ulong dw = DateToMonIndex(*GetCurrTimeDate());
+    dw -= bInBuffB;
+    time ti = MonIndexToDate(dw);
 
     InitPushUni();
 
@@ -117,11 +117,11 @@ void    GetCntCanMonTarUni(void)
       uchar t;
       for (t=bInBuffC; t<bInBuffC+bInBuffD; t++)
       {
-        PushCntCanMonTarUni(c-1, tiAlt.bMonth-1, t-1);
+        PushCntCanMonTarUni(c-1, ti.bMonth-1, t-1);
       }
     }
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((boExt4TFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((boExt4TFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &ti);
   }
 }
 
