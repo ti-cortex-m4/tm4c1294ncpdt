@@ -71,32 +71,35 @@ void    ResetExtended4T(void)
   }
 }
 
-/*
+
+
 void    ResetExtended4T1(void) 
 { 
-  memset(&mpCntMonCan4T_, 0, sizeof(mpCntMonCan4T_));
+//  memset(&mpCntMonCan4T_, 0, sizeof(mpCntMonCan4T_));
 }
 
 
 void    ResetExtended4T2(uchar  ibMonth, uchar  ibCanal) 
 { 
-  memset(&mpCntMonCan4T_[ibMonth][ibCanal], 0, sizeof(value6t));
+//  memset(&mpCntMonCan4T_[ibMonth][ibCanal], 0, sizeof(value6t));
 }
 
 
 
 void    NextMonExtended4T(void) 
 {
-  memset(&mpCntMonCan4T_[ibHardMon], 0, sizeof(value6t)*bCANALS);
+  memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
+
+  SaveExt4TValues(ibHardMon);
 }
-*/
 
 
-bool    MakeSimple4T(uchar  ibMon, uchar  ibTariff)
+
+static bool MakeSimple4T(uchar  ibMon, uchar  ibTar)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
 
-  status4 st = ReadCntMonCanTariff(ibMon, ibDig, ibTariff);
+  status4 st = ReadCntMonCanTariff(ibMon, ibDig, ibTar);
 
   if ((st == ST4_BADDIGITAL) || (st == ST4_NOTSUPPORTED) || (st == ST4_NOTPRESENTED)) 
   { 
@@ -111,7 +114,7 @@ bool    MakeSimple4T(uchar  ibMon, uchar  ibTariff)
         vaT = mpCntMonCan4T[c];
 
         vaT.bSelf = st;
-        vaT.mpreSelf[ibTariff] = 0;
+        vaT.mpreSelf[ibTar] = 0;
         vaT.tiSelf = *GetCurrTimeDate();
 
         mpCntMonCan4T[c] = vaT;
@@ -136,7 +139,7 @@ bool    MakeSimple4T(uchar  ibMon, uchar  ibTariff)
           vaT = mpCntMonCan4T[c];
 
           vaT.bSelf = ST4_OK;
-          vaT.mpreSelf[ibTariff] = mpreChannelsB[diPrev.ibLine];
+          vaT.mpreSelf[ibTar] = mpreChannelsB[diPrev.ibLine];
           vaT.tiSelf = *GetCurrTimeDate();
 
           mpCntMonCan4T[c] = vaT;
@@ -187,9 +190,9 @@ void    MakeExtended4T(void)
 
 
 
-void    PushData4T(uchar  ibCanal)
+void    PushData4T(uchar  ibCan)
 {
-  if (IsCntMonCanTariff(ibCanal) == 0)
+  if (IsCntMonCanTariff(ibCan) == 0)
   {
     PushChar(ST4_NOTSUPPORTED);
 
@@ -201,7 +204,7 @@ void    PushData4T(uchar  ibCanal)
   }
   else
   {
-    value6t va = mpCntMonCan4T[ibCanal];
+    value6t va = mpCntMonCan4T[ibCan];
 
     PushChar(va.bSelf);
 

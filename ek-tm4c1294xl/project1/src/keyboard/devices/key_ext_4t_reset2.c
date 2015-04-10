@@ -3,36 +3,31 @@ KEY_EXT_4T_RESET2.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "beep.h"
-#include        "delay.h"
-#include        "keyboard.h"
-#include        "keyboard2.h"
-#include        "programs2.h"
-#include        "extended_4t.h"
+
+#include        "../../console.h"
+#include        "../../devices/extended_4t.h"
 
 
 
-extern  uchar           code    szCanalsTitle[],
-                                szCanalFrom[],
-                                szCanalTo[];
+extern  char const                   szCanalsTitle[],
+                                     szCanalFrom[],
+                                     szCanalTo[];
 
-extern  uchar           *code   pszExt4TReset[];
+extern  char const                   *pszExt4TReset[];
 
 
 //                                         0123456789ABCDEF
-message          code   szMonthsTitle   = "Ìוסÿצû:         ";
+static char const       szMonths[] =      "Ìוסÿצû:         ";
+
+
+static uchar            ibXmin, ibXmax, ibYmin,ibYmax;
 
 
 
-void    ShowAnswerReset2(void)
+static void ShowAnswer(void)
 {
-  ShowBoolean(enKeyboard != KBD_INPUT5);
+  ShowBoolean(enKeyboard != KBD_INPUT5 ? TRUE : FALSE);
 }
-
 
 
 void    key_SetExt4TReset2(void)
@@ -53,7 +48,7 @@ void    key_SetExt4TReset2(void)
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ibXmin = GetChar(5,6) - 1;
+      ibXmin = GetCharLo(5,6) - 1;
       if (ibXmin < bCANALS)
       {
         enKeyboard = KBD_INPUT2;
@@ -63,11 +58,11 @@ void    key_SetExt4TReset2(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      ibXmax = GetChar(13,14) - 1;
+      ibXmax = GetCharLo(13,14) - 1;
       if ((ibXmax < bCANALS) && (ibXmax >= ibXmin))
       {
         enKeyboard = KBD_INPUT3;
-        ShowHi(szMonthsTitle); 
+        ShowHi(szMonths);
 
         Clear(); 
         strcpy(szLo+0,szCanalFrom);
@@ -76,7 +71,7 @@ void    key_SetExt4TReset2(void)
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      ibYmin = GetChar(5,6) - 1;
+      ibYmin = GetCharLo(5,6) - 1;
       if (ibYmin < 12)
       {
         enKeyboard = KBD_INPUT4;
@@ -86,7 +81,7 @@ void    key_SetExt4TReset2(void)
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
-      ibYmax = GetChar(13,14) - 1;
+      ibYmax = GetCharLo(13,14) - 1;
       if ((ibYmax < 12) && (ibYmax >= ibYmin))
       {
         enKeyboard = KBD_INPUT5;
@@ -94,7 +89,7 @@ void    key_SetExt4TReset2(void)
         LoadSlide(pszExt4TReset);
 
         Clear();
-        ShowAnswerReset2();
+        ShowAnswer();
       }
       else Beep();
     }
@@ -130,7 +125,7 @@ void    key_SetExt4TReset2(void)
         else
           enKeyboard = KBD_INPUT5;
 
-        ShowAnswerReset2();
+        ShowAnswer();
       }
       else Beep(); 
     }
@@ -167,4 +162,4 @@ void    key_SetExt4TReset2(void)
   }
   else Beep();
 }
-*/
+
