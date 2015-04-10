@@ -3,25 +3,19 @@ KEY_EXT_4T_RESET1.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "beep.h"
-#include        "keyboard.h"
-#include        "keyboard2.h"
-#include        "programs2.h"
-#include        "extended_4t.h"
+
+#include        "../../console.h"
+#include        "../../devices/extended_4t.h"
 
 
 
 //                                          0123456789ABCDEF
-message         code    szExt4TReset1    = "  —брос данных  ",
-                        szExt4TReset2    = "знач. счетчиков ",
-                        szExt4TReset3    = "на начало мес€ца",
-                        szExt4TReset4    = "  по тарифам    ";
+static char const       szMessage1[]     = "     —брос      ",
+                        szMessage2[]     = "знач. счетчиков ",
+                        szMessage3[]     = "на начало мес€ца",
+                        szMessage4[]     = "  по тарифам    ";
 
-uchar           *code   pszExt4TReset[] = { szExt4TReset1, szExt4TReset2, szExt4TReset3, szExt4TReset4,  "" };
+char const             *pszExt4TReset[]  = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
 
 
 
@@ -69,5 +63,3 @@ void    key_SetExt4TReset1(void)
   } 
   else Beep(); 
 }
-
-*/

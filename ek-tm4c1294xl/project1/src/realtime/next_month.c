@@ -13,6 +13,7 @@ NEXT_MONTH.C
 #include        "../energy2.h"
 #include        "../special/defects.h"
 #include        "../special/recalc_def.h"
+#include        "../devices/extended_4t.h"
 #include        "realtime_storage.h"
 
 
@@ -32,6 +33,10 @@ void    NextMonth(void)
   memset(&mpimMonCan[ibSoftMon],    0, sizeof(impulse)*bCANALS);
   memset(&mppoMonGrp[ibSoftMon],    0, sizeof(power)*bGROUPS);
   memset(&mpreCntMonCan[ibSoftMon], 0, sizeof(real)*bCANALS);
+
+//  NextMonExtended4();
+  NextMonExtended4T();
+//  NextMonExtended6();
 
   MakeCntMonCan();
 
