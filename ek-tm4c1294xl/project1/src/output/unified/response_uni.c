@@ -245,11 +245,8 @@ void    RunResponseUNI(void)
 
       case wUNI_GETPOWCANHOU48: GetPowCanHou48Uni(); break;
       case wUNI_GETPOWGRPHOU48: GetPowGrpHou48Uni(); break;
-/*
-      case wUNI_GETCNTCANMON:
-        GetCntCanMonUni(); 
-        break;
-*/
+
+      case wUNI_GETCNTCANMON: GetCntCanMonUni(); break;
       case wUNI_GETCNTCAN: GetCntCanUni(); break;
 
       case wUNI_GETMAXGRPDAY: GetMaxGrpDayUni(); break;

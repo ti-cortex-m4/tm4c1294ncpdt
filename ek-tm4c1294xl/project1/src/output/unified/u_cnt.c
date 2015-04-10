@@ -6,23 +6,33 @@ U_CNT.C
 
 #include        "../../main.h"
 #include        "../../memory/mem_ports.h"
+#include        "../../memory/mem_realtime.h"
+#include        "../../memory/mem_energy.h"
 #include        "../../memory/mem_extended_1.h"
+#include        "../../memory/mem_extended_4.h"
 #include        "../../memory/mem_extended_5.h"
+#include        "../../memory/mem_extended_4t.h"
 #include        "../../include/states.h"
 #include        "../../include/queries_uni.h"
+#include        "../../realtime/realtime.h"
 #include        "../../serial/ports.h"
+#include        "../../sensors/automatic3.h"
+#include        "../../digitals/digitals.h"
 #include        "../../time/rtc.h"
+#include        "../../time/calendar.h"
+#include        "../../energy2.h"
 #include        "response_uni.h"
+#include        "u_float.h"
 #include        "u_cnt.h"
 
 
-/*
+
 void    PushCntCanMonAllUni(uchar  ibCanal, uchar  ibMonth)
 {
   if (GetDigitalDevice(ibCanal) == 0)
   {
-    reBuffA = mpreCntMonCan[ PrevSoftMon() ][ibCanal]; 
-    PushRealUni(ST4_OK, &reBuffA);
+    real re = mpreCntMonCan[ PrevSoftMon() ][ibCanal];
+    PushRealUni(ST4_OK, &re);
   }
   else
   {
@@ -34,8 +44,6 @@ void    PushCntCanMonAllUni(uchar  ibCanal, uchar  ibMonth)
 
 void    GetCntCanMonAllUni(void) 
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -46,18 +54,18 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   { 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToMonIndex();
+    ulong dwBuffC = DateToMonIndex(*GetCurrTimeDate());
     dwBuffC -= bInBuffB;
-    MonIndexToDate(dwBuffC);
+    time tiAlt = MonIndexToDate(dwBuffC);
 
     InitPushUni();
-    i = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
+    uchar i = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
     LoadCntMon(i);
 
-    for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushCntCanMonAllUni(ibCan-1, i);
+      PushCntCanMonAllUni(c-1, i);
     }
 
     Output2_Code((uint)4*bInBuff9, ((boExt4Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
@@ -70,8 +78,8 @@ void    PushCntCanMonTarUni(uchar  ibCanal, uchar  ibMonth, uchar  ibTariff)
 {
   if (IsCntMonCanTariff(ibCanal) == 0)
   {
-    reBuffA = 0; 
-    PushRealUni(ST4_NOTSUPPORTED, &reBuffA);
+    real re = 0;
+    PushRealUni(ST4_NOTSUPPORTED, &re);
   }
   else
   {
@@ -83,8 +91,6 @@ void    PushCntCanMonTarUni(uchar  ibCanal, uchar  ibMonth, uchar  ibTariff)
 
 void    GetCntCanMonTarUni(void) 
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -99,25 +105,25 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   { 
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToMonIndex();
+    ulong dwBuffC = DateToMonIndex(*GetCurrTimeDate());
     dwBuffC -= bInBuffB;
-    MonIndexToDate(dwBuffC);
+    time tiAlt = MonIndexToDate(dwBuffC);
 
     InitPushUni();
 
-    for (ibCan=bInBuff7; ibCan<bInBuff7+bInBuff9; ibCan++)
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
+      uchar t;
+      for (t=bInBuffC; t<bInBuffC+bInBuffD; t++)
       {
-        PushCntCanMonTarUni(ibCan-1, tiAlt.bMonth-1, i-1);
+        PushCntCanMonTarUni(c-1, tiAlt.bMonth-1, t-1);
       }
     }
 
     Output2_Code((uint)4*bInBuff9*bInBuffD, ((boExt4TFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &tiAlt);
   }
 }
-
 
 
 void    GetCntCanMonUni(void) 
@@ -127,7 +133,7 @@ void    GetCntCanMonUni(void)
   else
     GetCntCanMonTarUni();
 }
-*/
+
 
 
 void    GetCntCanAllUni(void) 
@@ -154,7 +160,6 @@ void    GetCntCanAllUni(void)
 }
 
 
-
 void    GetCntCanTarUni(void) 
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
@@ -174,18 +179,17 @@ void    GetCntCanTarUni(void)
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      uchar i;
-      for (i=bInBuffA; i<bInBuffA+bInBuffB; i++)
+      uchar t;
+      for (t=bInBuffA; t<bInBuffA+bInBuffB; t++)
       {
         PushTime(&mpvaValue51[c-1].tiSelf);
-        PushFloat(mpvaValue51[c-1].vaValue50.mpreSelf[i-1]);
+        PushFloat(mpvaValue51[c-1].vaValue50.mpreSelf[t-1]);
       }
     }
 
     Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((boExt5Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), GetCurrTimeDate());
   }
 }
-
 
 
 void    GetCntCanUni(void) 
