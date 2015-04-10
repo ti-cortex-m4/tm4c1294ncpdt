@@ -273,7 +273,7 @@ PROGRAMS.H
 
 #define bSET_EXT4_FLAG              249
 #define bSET_EXT4_MONTHS            250
-#define bSET_EXT4_CANALS            252
+#define bSET_EXT4_ENBL_CAN          252
 #define bSET_EXT4_RESET             253
 #define bSET_EXT6_RESET             254
 
