@@ -12,10 +12,11 @@ KEY_EXT_4T_RESET1.C
 //                                          0123456789ABCDEF
 static char const       szMessage1[]     = "     —брос      ",
                         szMessage2[]     = "знач. счетчиков ",
-                        szMessage3[]     = "на начало мес€ца",
-                        szMessage4[]     = "  по тарифам    ";
+                        szMessage3[]     = "   на начало    ",
+                        szMessage4[]     = "    мес€цев     ",
+                        szMessage5[]     = "   по тарифам   ";
 
-char const             *pszExt4TReset[]  = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
+char const             *pszExt4TReset[]  = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, "" };
 
 
 
