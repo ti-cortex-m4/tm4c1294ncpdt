@@ -75,13 +75,31 @@ void    ResetExtended4T(void)
 
 void    ResetExtended4T1(void) 
 { 
-//  memset(&mpCntMonCan4T_, 0, sizeof(mpCntMonCan4T_));
+  memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
+
+  uchar m;
+  for (m=0; m<bMONTHS; m++)
+  {
+    SaveExt4TValues(m);
+  }
 }
 
 
-void    ResetExtended4T2(uchar  ibMonth, uchar  ibCanal) 
+void    ResetExtended4T2(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin, uchar  ibMonMax)
 { 
-//  memset(&mpCntMonCan4T_[ibMonth][ibCanal], 0, sizeof(value6t));
+  uchar m;
+  for (m=ibMonMin; m<=ibMonMax; m++)
+  {
+    LoadExt4TValues(m);
+
+    uchar c;
+    for (c=ibCanMin; c<=ibCanMax; c++)
+    {
+      memset(&mpCntMonCan4T[c], 0, sizeof(value6t));
+    }
+
+    SaveExt4TValues(m);
+  }
 }
 
 

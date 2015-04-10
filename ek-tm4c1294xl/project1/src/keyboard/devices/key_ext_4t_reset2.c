@@ -93,15 +93,7 @@ static uchar ibCanMin, ibCanMax, ibMonMin, ibMonMax;
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
-      uchar c;
-      for (c=ibCanMin; c<=ibCanMax; c++)
-      {
-        uchar m;
-        for (m=ibMonMin; m<=ibMonMax; m++)
-        {
-          ResetExtended4T2(m,c);
-        }
-      }
+      ResetExtended4T2(ibCanMin, ibCanMax, ibMonMin, ibMonMax);
 
       OK();
     }
