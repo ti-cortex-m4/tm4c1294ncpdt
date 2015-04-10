@@ -1,80 +1,27 @@
 /*------------------------------------------------------------------------------
-KEY_EXT_4.C
+KEY_EXT_4_MONTHS.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "programs.h"
+
+#include        "../../main.h"
+#include        "../../devices/extended_4.h"
+#include        "../key_char.h"
 
 
 
-//                                         0123456789ABCDEF
-message         code    szExt4Months    = " „исло мес€цев  ",
-                        szExt4Load      = "  дл€ загрузки  ",
-                        szExt4Values    = "знач. счетчиков ",
-                        szMaskExt4      = "      ___       ";
+//                                          0123456789ABCDEF
+static char const       szMessage1[]     = " „исло мес€цев  ",
+                        szMessage2[]     = "  дл€ загрузки  ",
+                        szMessage3[]     = "знач. счетчиков ",
+                        szMessage4[]     = "   на начало    ",
+                        szMessage5[]     = "   мес€цев ?    ";
 
-uchar           *code   pszExt4Months[] = { szExt4Months, szExt4Load, szExt4Values, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szCharLimits, "" };
 
 
 
-void    key_SetExt4(void)
+void    key_SetExt4Months(void)
 {
-  if (bKey == bKEY_ENTER)
-  {
-    if (enKeyboard == KBD_ENTER)
-    {
-      if (boExt4Flag == boTrue)
-      {
-        enKeyboard = KBD_POSTENTER;
-        Clear();
-
-        LoadSlide(pszExt4Months); 
-        ShowChar(bExt4Months); 
-      }
-      else BlockProgram(bSET_EXT4_FLAG);
-    } 
-    else if (enKeyboard == KBD_POSTINPUT1)
-    {
-      enKeyboard = KBD_POSTENTER;
-
-      ibX = GetChar(6,8);
-      if ((ibX != 0) && (ibX <= 12))
-      {
-        bExt4Months = ibX;
-        ShowChar(bExt4Months); 
-      }
-      else 
-      {
-        enKeyboard = KBD_INPUT1;
-        LongBeep();
-
-        ShowLo(szMaskExt4);        
-      }
-    }
-    else Beep();
-  }
-
-
-  else if (bKey < 10)
-  {
-    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
-    {
-      enKeyboard = KBD_INPUT1;
-      ShowLo(szMaskExt4);        
-    }
-
-    if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
-    {
-      enKeyboard = KBD_POSTINPUT1;
-      ShiftLo(6,8);
-    }
-  }
-  else Beep();
+  key_SetChar(&flExt4Months, pszMessages, 0, 12);
 }
-*/
