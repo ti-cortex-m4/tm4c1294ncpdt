@@ -17,7 +17,7 @@ void    InitExtended4T(void);
 void    ResetExtended4T(void);
 
 void    ResetExtended4T1(void); 
-void    ResetExtended4T2(uchar  ibMon, uchar  ibCan);
+void    ResetExtended4T2(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin, uchar  ibMonMax);
 
 void    NextMonExtended4T(void); 
 
