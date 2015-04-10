@@ -96,6 +96,7 @@ KEYBOARD_KEY.C
 #include        "digitals/params/key_use_params_div.h"
 #include        "devices/key_ext_4_flag.h"
 #include        "devices/key_ext_4_months.h"
+#include        "devices/key_ext_4_canals.h"
 #include        "devices/key_ext_4t_flag.h"
 #include        "devices/key_ext_4t_months.h"
 #include        "devices/key_ext_4t_reset1.h"
@@ -253,7 +254,7 @@ void    Keyboard_Key(void)
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
-//      case bSET_EXT4_CANALS:    key_SetExt4Canals(); break;
+      case bSET_EXT4_CANALS:    key_SetExt4Canals();    break;
 
       case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
@@ -483,7 +484,7 @@ void    Keyboard_Key(void)
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
-//      case bSET_EXT4_CANALS:    key_SetExt4Canals(); break;
+      case bSET_EXT4_CANALS:    key_SetExt4Canals();    break;
 
       case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
@@ -630,7 +631,7 @@ void    Keyboard_Key(void)
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
-//      case bSET_EXT4_CANALS:    key_SetExt4Canals(); break;
+      case bSET_EXT4_CANALS:    key_SetExt4Canals();    break;
 
       case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;

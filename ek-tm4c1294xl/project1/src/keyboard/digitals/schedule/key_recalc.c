@@ -17,7 +17,7 @@ static char const       szSetRecalc[]   = "Перерасчет      ";
                      
 
 
-void    ShowRecalc(void)
+static void Show(void)
 {
   Clear();
   sprintf(szLo+1,"%02u:%02u",ibX/2,(ibX%2)*30);
@@ -51,21 +51,21 @@ void    key_SetRecalc(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowRecalc();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((ibX = GetCharLo(10,11) - 1) < 48)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowRecalc();
+        Show();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++ibX >= 48) ibX = 0;
-      ShowRecalc();
+      Show();
     }
   }
 
@@ -75,7 +75,7 @@ void    key_SetRecalc(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       mpboRecalcHou[ibX] = InvertBoolean(mpboRecalcHou[ibX]);
-      ShowRecalc();
+      Show();
     }
     else Beep();
   }
@@ -86,7 +86,7 @@ void    key_SetRecalc(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       (ibX > 0) ? (ibX--) : (ibX = 48-1);
-      ShowRecalc();
+      Show();
     }
     else Beep();
   }

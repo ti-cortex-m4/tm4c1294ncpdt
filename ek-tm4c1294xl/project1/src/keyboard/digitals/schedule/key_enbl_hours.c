@@ -25,7 +25,7 @@ static char const       szGraphic[]     = " График опроса  ",
 static char const       *pszEnblHours[] = { szGraphic, szByHours, "" };
 
 
-static void ShowHours(void)
+static void Show(void)
 {
   Clear();
   sprintf(szLo+1,"%02u:%02u", ibY/2, (ibY%2)*30);
@@ -83,14 +83,14 @@ void    key_SetEnblHours(void)
       enKeyboard = KBD_POSTENTER;
 
       ibY = 0;
-      ShowHours();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
       if ((ibY = GetCharLo(10,11) - 1) < 48)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowHours();
+        Show();
       }
       else Beep();
     }
@@ -99,7 +99,7 @@ void    key_SetEnblHours(void)
       if (++ibY >= 48) 
         ibY = 0;
 
-      ShowHours();
+      Show();
     }
   }
 
@@ -113,7 +113,7 @@ void    key_SetEnblHours(void)
 
       SaveFile(&flEnblPrtHou);
 
-      ShowHours();
+      Show();
     }
     else Beep();
   }

@@ -1,35 +1,31 @@
 /*------------------------------------------------------------------------------
-KEY_EXT_41.C
+KEY_EXT_4_CANALS.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "programs.h"
+
+#include        "../../console.h"
+#include        "../../devices/extended_4.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szExtended410   = " —писок каналов ",
-                code    szExtended411   = "  дл€ загрузки  ",
-                code    szExtended412   = "знач. счетчиков ",
-                code    szExtended413   = "   по мес€цам   ";
+static char const       szMessage1[]    = "      аналы     ",
+                        szMessage2[]    = "  дл€ загрузки  ",
+                        szMessage3[]    = "знач. счетчиков ",
+                        szMessage4[]    = "   на начало    ",
+                        szMessage5[]    = "   мес€цев ?    ";
 
-uchar           *code   pszExtended41[] = { szExtended410, szExtended411, szExtended412, szExtended413, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, "" };
 
 
 
-void    ShowExtended41(void)
+static void Show(void)
 {
   Clear();
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 
-  if (mpEnblCan4[ibX] == boFalse) 
+  if (mpEnblCan4[ibX] == FALSE)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -40,16 +36,16 @@ void    ShowExtended41(void)
 
 
 
-void    key_SetExt41(void)
+void    key_SetExt4Canals(void)
 {
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boExt4Flag == boTrue)
+      if (boExt4Flag == TRUE)
       {
         enKeyboard = KBD_INPUT1;
-        LoadSlide(pszExtended41);
+        LoadSlide(pszMessages);
 
         Canal();
       }
@@ -60,14 +56,14 @@ void    key_SetExt41(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowExtended41();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowExtended41();
+        Show();
       }
       else Beep();
     }
@@ -75,7 +71,7 @@ void    key_SetExt41(void)
     {
       if (++ibX >= bCANALS) ibX = 0;
 
-      ShowExtended41();
+      Show();
     }
   }
 
@@ -86,8 +82,8 @@ void    key_SetExt41(void)
     {
       if (enKeyboard == KBD_POSTENTER)
       {
-        mpEnblCan4[ibX] = ~mpEnblCan4[ibX];      
-        ShowExtended41();
+        mpEnblCan4[ibX] = InvertBoolean(mpEnblCan4[ibX]);
+        Show();
       }
       else Beep();
     }
@@ -106,4 +102,3 @@ void    key_SetExt41(void)
   }
   else Beep();
 }
-*/
