@@ -8,4 +8,4 @@ extern  boolean                 boExt4Flag;
 
 extern  uchar                   bExt4Months;
 
-extern  boolean                 mpEnblCan4[bCANALS];
+extern  boolean                 mpExt4Canals[bCANALS];

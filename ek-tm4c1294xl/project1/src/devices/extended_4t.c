@@ -173,7 +173,7 @@ static bool MakeSimple4T(uchar  ibMon, uchar  ibTar)
 
 void    MakeExtended4T(void)
 {
-  if ((boExt4TFlag == TRUE) && (mpEnblCan4[ibDig] == TRUE))
+  if ((boExt4TFlag == TRUE) && (mpExt4Canals[ibDig] == TRUE))
   {
     ShowHi(szExtended4T); 
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4TMonths); DelayInf();

@@ -25,7 +25,7 @@ static void Show(void)
   Clear();
   sprintf(szLo+14,"%2u",ibX+1);
 
-  if (mpEnblCan4[ibX] == FALSE)
+  if (mpExt4Canals[ibX] == FALSE)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -82,7 +82,9 @@ void    key_SetExt4Canals(void)
     {
       if (enKeyboard == KBD_POSTENTER)
       {
-        mpEnblCan4[ibX] = InvertBoolean(mpEnblCan4[ibX]);
+        mpExt4Canals[ibX] = InvertBoolean(mpExt4Canals[ibX]);
+
+        SaveFile(&flExt4Canals);
         Show();
       }
       else Beep();

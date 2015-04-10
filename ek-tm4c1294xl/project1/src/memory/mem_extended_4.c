@@ -15,4 +15,4 @@ boolean                 boExt4Flag;
 uchar                   bExt4Months;
 
 // список разрешенных каналов
-boolean                 mpEnblCan4[bCANALS];
+boolean                 mpExt4Canals[bCANALS];
