@@ -20,7 +20,7 @@ static char const       *pszLimits[]   = { szFlag, szStartCan, "" };
 
 
 
-void    ShowLimits33(void)
+static void Show(void)
 {
   Clear();
   sprintf(szLo+14,"%2u",ibX+1);
@@ -52,14 +52,14 @@ void    key_SetLimits33(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowLimits33();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowLimits33();
+        Show();
       }
       else Beep();
     }
@@ -67,7 +67,7 @@ void    key_SetLimits33(void)
     {
       if (++ibX >= bCANALS) ibX = 0;
 
-      ShowLimits33();
+      Show();
     }
   }
 
@@ -77,7 +77,7 @@ void    key_SetLimits33(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       mpboStartCan[ibX] = InvertBoolean(mpboStartCan[ibX]);
-      ShowLimits33();
+      Show();
     }
     else Beep();
   }

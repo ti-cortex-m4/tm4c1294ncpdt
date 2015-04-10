@@ -22,7 +22,7 @@ static char const       *pszEnblCan[]   = { szGraphic, szByCanals, "" };
 
 
 
-void    ShowEnblCanals(void)
+static void Show(void)
 {
   Clear();
   sprintf(szLo+14,"%2u",ibX+1);
@@ -54,14 +54,14 @@ void    key_SetEnblCanals(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowEnblCanals();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowEnblCanals();
+        Show();
       }
       else Beep();
     }
@@ -69,7 +69,7 @@ void    key_SetEnblCanals(void)
     {
       if (++ibX >= bCANALS) ibX = 0;
 
-      ShowEnblCanals();
+      Show();
     }
   }
 
@@ -79,7 +79,7 @@ void    key_SetEnblCanals(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       mpboEnblCan[ibX] = InvertBoolean(mpboEnblCan[ibX]);
-      ShowEnblCanals();
+      Show();
       SaveFile(&flEnblCan);
     }
     else Beep();

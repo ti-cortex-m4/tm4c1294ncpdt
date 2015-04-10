@@ -19,7 +19,7 @@ static char const       szControl[]     = "График коррекции";
 
 
 
-static void ShowCtrlHours(void)
+static void Show(void)
 {
   Clear();
   sprintf(szLo+1,"%02u:%02u", ibX/2, (ibX%2)*30);
@@ -53,14 +53,14 @@ void    key_SetCtrlHours(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowCtrlHours();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((ibX = GetCharLo(10,11) - 1) < 48)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowCtrlHours();
+        Show();
       }
       else Beep();
     }
@@ -69,7 +69,7 @@ void    key_SetCtrlHours(void)
       if (++ibX >= 48) 
         ibX = 0;
 
-      ShowCtrlHours();
+      Show();
     }
   }
 
@@ -82,7 +82,7 @@ void    key_SetCtrlHours(void)
 
       SaveFile(&flCtrlHou);
 
-      ShowCtrlHours();
+      Show();
     }
     else Beep();
   }
