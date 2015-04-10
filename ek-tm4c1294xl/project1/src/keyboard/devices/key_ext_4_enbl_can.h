@@ -4,5 +4,5 @@ KEY_EXT_4_CANALS.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetExt4Canals(void);
+void    key_SetExt4EnblCan(void);
 

@@ -155,7 +155,7 @@ uchar   i;
 
 
 
-status4 ReadCntMonCanTariffC(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
+status ReadCntMonCanTariffC(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
 { 
 uchar   i,j;
 

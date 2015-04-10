@@ -18,7 +18,7 @@ static void PushFFFFFF(void)
 }
 
 
-void    PushRealUni(status4  status, real  *preT)
+void    PushRealUni(status  status, real  *preT)
 {
   if (boStrictUni == TRUE)
   {

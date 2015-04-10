@@ -8,7 +8,7 @@ MAIN_EXTENDED.H
 #define __MAIN_EXTENDED
 
 
-// тип 'статус типа 4'
+// тип 'статус опроса цифровых счетчиков'
 typedef enum
 {
   ST4_NONE              = 0,
@@ -19,13 +19,13 @@ typedef enum
   ST4_BADFLASH          = 0x81,
   ST4_BADPORT           = 0x82,
   ST4_BADENABLING       = 0x83
-} status4;
+} status;
 
 
 // тип 'данные типа 4'
 typedef struct
 {
-  status4       bSelf;
+  status       bSelf;
   uint          cwOK,cwError;
   real          reSelf;
   time          tiSelf;
@@ -52,7 +52,7 @@ typedef struct
 // тип 'данные типа 6'
 typedef struct
 {
-  status4       bSelf;
+  status       bSelf;
   real          reSelf;
   time          tiSelf;
 } value6;
@@ -61,7 +61,7 @@ typedef struct
 // тип 'данные типа 6 по тарифам'
 typedef struct
 {
-  status4       bSelf;
+  status       bSelf;
   real          mpreSelf[bTARIFFS];
   time          tiSelf;
 } value6t;
@@ -88,17 +88,6 @@ typedef struct
 #define bVALUE7_BLOCKS      3
 #define bVALUE7_USED_SIZE   (bVALUE7_BLOCKS*6) 
 #define bVALUE7_REAL_SIZE   ((bVALUE7_BLOCKS+1)*6) 
-
-
-typedef enum
-{
-  STA_NONE              = 0,
-  STA_DATAON            = 1,
-  STA_DATAOFF           = 2,
-  STA_USEDAY            = 3,
-  STA_USEMON            = 4,
-  STA_READY             = 5
-} status;
 
 
 #endif
