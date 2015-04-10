@@ -109,11 +109,11 @@ void    ShowDouble(double  db)
 }
 
 
-void    ShowBoolean(boolean  boT)
+void    ShowBool(bool  bo)
 {
-  if (boT == FALSE)
+  if (!bo)
     strcpy(szLo+1,szNo);
-  else         
+  else
     strcpy(szLo+1,szYes);
 
   if (enGlobal != GLB_WORK)
@@ -121,9 +121,15 @@ void    ShowBoolean(boolean  boT)
 }
 
 
+void    ShowBoolean(boolean  bo)
+{
+  ShowBool(bo == FALSE);
+}
+
+
 void    ShowAnswer(void)
 {
-  ShowBoolean(enKeyboard != KBD_INPUT1 ? TRUE : FALSE);
+  ShowBool(enKeyboard != KBD_INPUT1);
 }
 
 

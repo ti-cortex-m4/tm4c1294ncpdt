@@ -15,8 +15,9 @@ extern  file const              flExt4TMonths;
 
 void    InitExtended4T(void); 
 void    ResetExtended4T(void);
+
 void    ResetExtended4T1(void); 
-void    ResetExtended4T2(uchar  ibMonth, uchar  ibCanal);
+void    ResetExtended4T2(uchar  ibMon, uchar  ibCan);
 
 void    NextMonExtended4T(void); 
 

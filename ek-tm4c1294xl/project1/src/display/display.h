@@ -36,7 +36,8 @@ void    ShowLong(ulong  dwT);
 void    ShowFloat(float  fl);
 void    ShowDouble(double  db);
 
-void    ShowBoolean(boolean  boT);
+void    ShowBool(bool  bo);
+void    ShowBoolean(boolean  bo);
 void    ShowAnswer(void);
 void    ShowPercent(uchar  bT);
 void    ShowProgress(uchar  ibPos, uchar  bT);
