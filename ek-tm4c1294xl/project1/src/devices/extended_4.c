@@ -22,6 +22,7 @@ EXTENDED_4.C
 
 file const              flExt4Flag = {FLS_EXT_4_FLAG, &boExt4Flag, sizeof(boolean)};
 file const              flExt4Months = {FLS_EXT_4_MONTHS, &bExt4Months, sizeof(uchar)};
+file const              flExt4Canals = {FLS_EXT_4_MONTHS, &mpExt4Canals, sizeof(mpExt4Canals)};
 
 
 
@@ -29,6 +30,7 @@ void    InitExtended4(void)
 {
   LoadFileBoolean(&flExt4Flag, FALSE);
   LoadFileChar(&flExt4Months, 0, 12, 4);
+  LoadFile(&flExt4Canals);
 }
 
 
@@ -39,4 +41,13 @@ void    ResetExtended4(void)
 
   bExt4Months = 4;
   SaveFile(&flExt4Months);
+
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    mpExt4Canals[c] = TRUE;
+  }
+
+  SaveFile(&flExt4Canals);
 }
