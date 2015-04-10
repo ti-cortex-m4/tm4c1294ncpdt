@@ -10,7 +10,7 @@ EXTENDED_4.H
 
 extern  file const              flExt4Flag;
 extern  file const              flExt4Months;
-extern  file const              flExt4Canals;
+extern  file const              flExt4EnblCan;
 
 
 

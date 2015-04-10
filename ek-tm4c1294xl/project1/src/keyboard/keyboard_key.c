@@ -254,7 +254,7 @@ void    Keyboard_Key(void)
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
-      case bSET_EXT4_CANALS:    key_SetExt4Canals();    break;
+      case bSET_EXT4_ENBL_CAN:  key_SetExt4EnblCan();   break;
 
       case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
@@ -484,7 +484,7 @@ void    Keyboard_Key(void)
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
-      case bSET_EXT4_CANALS:    key_SetExt4Canals();    break;
+      case bSET_EXT4_ENBL_CAN:  key_SetExt4EnblCan();   break;
 
       case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
@@ -631,7 +631,7 @@ void    Keyboard_Key(void)
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
-      case bSET_EXT4_CANALS:    key_SetExt4Canals();    break;
+      case bSET_EXT4_ENBL_CAN:  key_SetExt4EnblCan();   break;
 
       case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
