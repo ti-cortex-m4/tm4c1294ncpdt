@@ -4,4 +4,4 @@ U_FLOAT.H
 
 ------------------------------------------------------------------------------*/
 
-void    PushRealUni(status4  status, real  *preT);
+void    PushRealUni(status  status, real  *preT);

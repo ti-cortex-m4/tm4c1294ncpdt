@@ -9,4 +9,4 @@ extern  uchar                   ibMonthP;
 
 
 bool    ReadCntMonCanP(uchar  ibMonth);
-status4 ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff);
+status ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff);

@@ -117,7 +117,7 @@ static bool MakeSimple4T(uchar  ibMon, uchar  ibTar)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
 
-  status4 st = ReadCntMonCanTariff(ibMon, ibDig, ibTar);
+  status st = ReadCntMonCanTariff(ibMon, ibDig, ibTar);
 
   if ((st == ST4_BADDIGITAL) || (st == ST4_NOTSUPPORTED) || (st == ST4_NOTPRESENTED)) 
   { 
