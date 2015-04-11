@@ -267,12 +267,12 @@ void    PushData4(uchar  ibCan, uchar  ibMon)
   }
   else
   {
-    v6Buff = mpCntMonCan4_[ibMon][ibCan];
-    PushChar(v6Buff.bSelf);
+  	value6 va = mpCntMonCan4_[ibMon][ibCan];
+    PushChar(va.bSelf);
     PushInt(0xFF);
     PushInt(0xFF);
-    PushFloat(v6Buff.reSelf);
-    PushTime(&v6Buff.tiSelf);
+    PushFloat(va.reSelf);
+    PushTime(&va.tiSelf);
   }
 }
 
@@ -287,6 +287,7 @@ void    OutExtended40(void)
   else
   {
     LoadCntMon(InBuff(6));
+    LoadExt4Values(InBuff(6));
 
     InitPushPtr();            
     uint wSize = 0;
@@ -316,6 +317,7 @@ void    OutExtended401(void)
   else
   {
     LoadCntMon(InBuff(6));
+    LoadExt4Values(InBuff(6));
 
     InitPushPtr();            
     PushChar(boExt4Flag);
@@ -324,8 +326,8 @@ void    OutExtended401(void)
     PushInt(cwMonCan6);
     uint wSize = 1+1+2+2;
 
-   uchar c;
-   for (c=0; c<bCANALS; c++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
@@ -349,6 +351,7 @@ void    OutExtended41(void)
   else
   {
     LoadCntMon(InBuff(6));
+    LoadExt4Values(InBuff(6));
 
     InitPushPtr();            
     PushData4(InBuff(7), InBuff(6));
