@@ -8,6 +8,7 @@ void    InitPush(uchar  ibPush);
 void    InitPushCRC(void);
 void    InitPushPtr(void);
 void    InitPushUni(void);
+void    InitPushPck(void);
 
 void    Push(void  *pbData, uint  wSize);
 void    PushChar(uchar  bT);

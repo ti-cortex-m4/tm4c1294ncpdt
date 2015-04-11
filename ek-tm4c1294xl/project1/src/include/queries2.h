@@ -39,6 +39,10 @@ QUERIES2.H
 
 #define bEXT_GETCURRENT                35
 
+#define bEXT_GETEXTENDED40             42
+#define bEXT_GETEXTENDED41             43
+#define bEXT_GETEXTENDED42             44
+
 #define bEXT_GETRELAXS                 45
 #define bEXT_SETRELAXS                 46
 

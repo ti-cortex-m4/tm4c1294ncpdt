@@ -44,6 +44,11 @@ void    InitPushUni(void) {
 }
 
 
+void    InitPushPck(void) {
+  InitPush(bPACKET_HEADER);
+}
+
+
 
 void    Push(void  *pbData, uint  wSize) {
   switch (ibPort) {
