@@ -272,23 +272,15 @@ void    key_GetValuesYear(item  it)
 }
 
 
-/*
-void    auto_GetFullyear(void)
-{
-  if (enKeyboard == KBD_POSTENTER)
-    ShowFullyear();
-}
-*/
-
 
 void    ShowCntCanMon6(void)
 {
-  if (GetDigitalDevice(ibX) == 6)
-    ShowLo(szExt4BadMode);
-  else
-    ShowCntMonCan6(ibX,ibY);
+//  if (GetDigitalDevice(ibX) == 6)
+//    ShowLo(szExt4BadMode);
+//  else
+//    ShowCntMonCan6(ibX,ibY);
 
-  sprintf(szLo+14,"%2bu",ibX+1);
+  sprintf(szLo+14,"%2u",ibX+1);
 }
 
 
@@ -319,7 +311,7 @@ void    key_GetCntCanYear6(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibY = GetChar(10,11)-1) < 12)
+      if ((ibY = GetCharLo(10,11)-1) < 12)
       {
         enKeyboard = KBD_INPUT2;
         Canal();
@@ -338,7 +330,7 @@ void    key_GetCntCanYear6(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((ibX = GetChar(10,11)-1) < bCANALS)
+      if ((ibX = GetCharLo(10,11)-1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
 
