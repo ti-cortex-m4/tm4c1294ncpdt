@@ -56,7 +56,7 @@ FLASH.H
 #endif
 
 
-#include        "flash_map.h"
+#include        "flash_enum.txt"
 
 
 #endif
