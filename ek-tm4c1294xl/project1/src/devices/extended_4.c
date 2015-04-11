@@ -8,6 +8,7 @@ EXTENDED_4.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../memory/mem_extended_4.h"
+#include        "../realtime/realtime.h"
 #include        "../serial/ports.h"
 #include        "../serial/ports_devices.h"
 #include        "../digitals/digitals.h"
@@ -15,6 +16,7 @@ EXTENDED_4.C
 #include        "../digitals/digitals_display.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../devices/devices.h"
+#include        "../sensors/device_f.h"
 #include        "../sensors/automatic_p.h"
 #include        "../sensors/automatic2.h"
 #include        "../time/rtc.h"
@@ -35,12 +37,12 @@ static char const       szExtended4[]   = "Опрос данных: 4 ",
                         szLinkOK[]      = "   ответ: есть  ",
                         szLinkError[]   = "   ответ: нет   ",
                         szDataOK[]      = "  данные: есть  ",
-                        szDataError[]   = "  данные: нет   ";
-//                        szNone[]        = "*    пусто      ",
-//                        szBadDigital[]  = "*   ошибка !    ",
-//                        szBadFlash[]    = "* flash error   ",
-//                        szBadPort[]     = "*    модем      ",
-//                        szBadEnabling[] = "*  запрещено    ",
+                        szDataError[]   = "  данные: нет   ",
+                        szNone[]        = "*    пусто      ",
+                        szBadDigital[]  = "*   ошибка !    ",
+                        szBadFlash[]    = "* flash error   ",
+                        szBadPort[]     = "*    модем      ",
+                        szBadEnabling[] = "*  запрещено    ";
 //                        szBadMode[]     = "*  нет данных   ";
 
 
@@ -258,8 +260,8 @@ void    PushData4(uchar  ibCan, uchar  ibMon)
     PushChar(ST4_OK);
     PushInt(0xFF);
     PushInt(0xFF);
-    PushFloat(GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan));
-    PushTime(&tiZero);
+    PushFloat(mpreCntMonCan[ PrevSoftMon() ][ibCan]);
+    PushTime((time *) &tiZero);
   }
   else
   {
@@ -362,19 +364,21 @@ void    OutExtended42(void)
     Result(bRES_BADADDRESS);
   else
   {
-  	uchar ibMon = InBuff(6);
+    uchar ibMon = InBuff(6);
     uchar ibCan = InBuff(7);
 
     memset(&vaT, 0, sizeof(vaT));
     vaT.tiSelf = *GetCurrTimeDate();
 
-    if (GetDigitalDevice(ibCan) == 0) {
-      if (LoadCntMon(ibMon) == 1) {  
+    if (GetDigitalDevice(ibCan) == 0)
+    {
+      if (LoadCntMon(ibMon) == 1)
+      {
         vaT.bSelf = ST4_OK;
-        reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
-        vaT.reSelf = reBuffA;
+        vaT.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
       }
-      else {  
+      else
+      {
         vaT.bSelf = ST4_BADFLASH;
         vaT.reSelf = 0;
       }
@@ -383,7 +387,8 @@ void    OutExtended42(void)
       Push(&vaT, sizeof(value4));
       OutptrOutBuff(sizeof(value4));
     }
-    else if (mpboEnblCan[ibCan] == FALSE) {
+    else if (mpboEnblCan[ibCan] == FALSE)
+    {
       vaT.bSelf = ST4_BADENABLING;
       vaT.reSelf = 0;
 
@@ -391,7 +396,8 @@ void    OutExtended42(void)
       Push(&vaT, sizeof(value4));
       OutptrOutBuff(sizeof(value4));
     }
-    else if (GetDigitalPhone(ibCan) != 0) {
+    else if (GetDigitalPhone(ibCan) != 0)
+    {
       vaT.bSelf = ST4_BADPORT;
       vaT.reSelf = 0;
 
@@ -399,7 +405,8 @@ void    OutExtended42(void)
       Push(&vaT, sizeof(value4));
       OutptrOutBuff(sizeof(value4));
     }
-    else {
+    else
+    {
       SaveDisplay();
 
       ShowHi(szClear); 
@@ -410,11 +417,13 @@ void    OutExtended42(void)
       bool fAlt = ReadCntMonCan(ibMon,ibCan);
       ibPort = p;
 
-      if (fAlt == 1) {
+      if (fAlt == 1)
+      {
         vaT.bSelf = ST4_OK;
         vaT.reSelf = reBuffA;
       }
-      else {
+      else
+      {
         vaT.bSelf = ST4_BADDIGITAL;
         vaT.reSelf = 0;
       }
@@ -424,7 +433,7 @@ void    OutExtended42(void)
       OutptrOutBuff(sizeof(value4));
 
       LoadDisplay();
-      NextPause();    // внимание !
+      NextPause(); // внимание !
     }     
   }
 }
@@ -565,7 +574,7 @@ void    ShowCntMonCanF2(void)
   switch (bSpeciesCod)
   {
     case ST4_NONE:         ShowLo(szNone);         break;
-    case ST4_OK:           (ibZ == 0) ? ShowFloat(&reBuffA) : ShowTimeDateF2(); break;
+    case ST4_OK:           (ibZ == 0) ? ShowFloat(reBuffA) : ShowTimeDateF2(); break;
     case ST4_BADDIGITAL:   ShowLo(szBadDigital);   break;
     case ST4_BADFLASH:     ShowLo(szBadFlash);     break;
     case ST4_BADPORT:      ShowLo(szBadPort);      break;
@@ -576,20 +585,20 @@ void    ShowCntMonCanF2(void)
 
 
 
-void    ShowExtended4(uchar  ibCanal, uchar  ibMonth)
+void    ShowExtended4(uchar  ibCan, uchar  ibMon)
 {
-  if (GetDigitalDevice(ibCanal) == 0)
+  if (GetDigitalDevice(ibCan) == 0)
   {
-    LoadCntMon(ibMonth);
+    LoadCntMon(ibMon);
 
     v6Buff.bSelf = ST4_OK; 
-    v6Buff.reSelf = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+    v6Buff.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
     v6Buff.tiSelf = tiZero;
     bSpeciesCod = ST4_OK;
   }
   else
   {
-    v6Buff = mpCntMonCan4_[ibMonth][ibCanal];
+    v6Buff = mpCntMonCan4_[ibMon][ibCan];
     bSpeciesCod = v6Buff.bSelf; 
   }
 
