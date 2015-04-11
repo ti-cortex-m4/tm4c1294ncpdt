@@ -36,8 +36,8 @@ void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon)
   }
   else
   {
-    v6Buff = mpCntMonCan4[ibMon][ibCan]; 
-    PushRealUni(v6Buff.bSelf, &v6Buff.reSelf);
+//    v6Buff = mpCntMonCan4[ibMon][ibCan];
+//    PushRealUni(v6Buff.bSelf, &v6Buff.reSelf);
   }
 }
 
@@ -83,8 +83,8 @@ void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
   }
   else
   {
-    v6tBuff = mpCntMonCan4T_[ibMon][ibCan]; 
-    PushRealUni(v6tBuff.bSelf, &v6tBuff.mpreSelf[ibTar]);
+//    v6tBuff = mpCntMonCan4T_[ibMon][ibCan];
+//    PushRealUni(v6tBuff.bSelf, &v6tBuff.mpreSelf[ibTar]);
   }
 }
 
