@@ -49,13 +49,13 @@ static uchar            bFlag4;
 
 
 
-static boolean SaveExt4Values(uchar  ibMon)
+boolean SaveExt4Values(uchar  ibMon)
 {
   return SaveBuff(FLS_EXT_4_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
 }
 
 
-static boolean LoadExt4Values(uchar  ibMon)
+boolean LoadExt4Values(uchar  ibMon)
 {
   return LoadBuff(FLS_EXT_4_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
 }
