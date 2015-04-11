@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_FULLYEAR.C
+KEY_VALUES_YEAR.C
 
  Просмотр канальных и групповых величин по месяцам года
 ------------------------------------------------------------------------------*/
@@ -57,7 +57,7 @@ void    ShowGrpFullYearEng(uchar  bMask)
 
 
 
-void    ShowFullYear(void)   
+void    ShowCntCanMon(void)   
 {
   switch (wProgram)
   {
@@ -147,7 +147,7 @@ void    ShowFullYear(void)
 
 
 
-void    key_GetFullYear(item  it)
+void    key_GetValuesYear(item  it)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -201,7 +201,7 @@ void    key_GetFullYear(item  it)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowFullYear();
+      ShowCntCanMon();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
@@ -209,7 +209,7 @@ void    key_GetFullYear(item  it)
       {
         enKeyboard = KBD_POSTENTER;
 
-        ShowFullYear();
+        ShowCntCanMon();
       }
       else Beep();
     }
@@ -218,7 +218,7 @@ void    key_GetFullYear(item  it)
       ibZ = 0;
       if (++ibX >= GetMaxItem(it)) ibX = 0;
 
-      ShowFullYear();
+      ShowCntCanMon();
     }
   }
 
@@ -240,7 +240,7 @@ void    key_GetFullYear(item  it)
     if ((enKeyboard == KBD_POSTENTER) && (bKey == 0))
     {
       ibZ = (ibZ + 1) % 2; 
-      ShowFullYear();
+      ShowCntCanMon();
     }
   }
 
@@ -253,7 +253,7 @@ void    key_GetFullYear(item  it)
       if (ibY > 0) ibY--; else ibY = 12-1;
 
       LoadBetaMonth(ibY);
-      ShowFullYear();
+      ShowCntCanMon();
       ShowSlide(szBeta);
     }
   }
@@ -266,7 +266,7 @@ void    key_GetFullYear(item  it)
       ibZ = 0;
       if (ibX > 0) ibX--; else ibX = GetMaxItem(it)-1;
 
-      ShowFullYear();
+      ShowCntCanMon();
     }
   }
 }
@@ -281,7 +281,7 @@ void    auto_GetFullyear(void)
 */
 
 
-void    ShowCntCanYear3(void)
+void    ShowCntCanMon6(void)
 {
   if (GetDigitalDevice(ibX) == 6)
     ShowLo(szExt4BadMode);
@@ -293,7 +293,7 @@ void    ShowCntCanYear3(void)
 
 
 
-void    key_GetCntCanYear3(void)
+void    key_GetCntCanYear6(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -334,7 +334,7 @@ void    key_GetCntCanYear3(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowCntCanYear3();
+      ShowCntCanMon6();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
@@ -342,7 +342,7 @@ void    key_GetCntCanYear3(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        ShowCntCanYear3();
+        ShowCntCanMon6();
       }
       else Beep();
     }
@@ -351,7 +351,7 @@ void    key_GetCntCanYear3(void)
       ibZ = 0;
       if (++ibX >= bCANALS) ibX = 0;
 
-      ShowCntCanYear3();
+      ShowCntCanMon6();
     }
   }
 
@@ -373,7 +373,7 @@ void    key_GetCntCanYear3(void)
     if ((enKeyboard == KBD_POSTENTER) && (bKey == 0))
     {
       ibZ = ++ibZ % 2;
-      ShowCntCanYear3();
+      ShowCntCanMon6();
     }
   }
 
@@ -386,7 +386,7 @@ void    key_GetCntCanYear3(void)
       if (ibY > 0) ibY--; else ibY = 12-1;
 
       LoadBetaMonth(ibY);
-      ShowCntCanYear3();
+      ShowCntCanMon6();
       ShowSlide(szBeta);
     }
   }
@@ -399,7 +399,7 @@ void    key_GetCntCanYear3(void)
       ibZ = 0;
       if (ibX > 0) ibX--; else ibX = bCANALS-1;
 
-      ShowCntCanYear3();
+      ShowCntCanMon6();
     }
   }
 }

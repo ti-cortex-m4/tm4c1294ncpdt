@@ -435,14 +435,14 @@ void    Keyboard_Key(void)
       case bGET_ENGGRPYEAR_ABCD:
       case bGET_ENGGRPYEAR_CD:
       case bGET_ENGGRPYEAR_B:
-      case bGET_ENGGRPYEAR_A:  key_GetFullYear(GROUPS); break;
+      case bGET_ENGGRPYEAR_A:  key_GetValuesYear(GROUPS); break;
 
       case bGET_CNTCANYEAR1:
       case bGET_CNTCANYEAR10:
       case bGET_CNTCANYEAR2:
-      case bGET_CNTCANYEAR20:  key_GetFullYear(CANALS); break;
+      case bGET_CNTCANYEAR20:  key_GetValuesYear(CANALS); break;
 
-      case wGET_CNTCANYEAR3:    key_GetCntCanYear3();   break;
+      case wGET_CNTCANYEAR6:    key_GetCntCanYear6();   break;
 
       case bRUN_PROFILE:        key_RunProfile();       break;
 
