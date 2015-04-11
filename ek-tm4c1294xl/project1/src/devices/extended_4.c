@@ -87,13 +87,13 @@ void    ResetExtended4(void)
   memset(&mpEnblCan4, boTrue, sizeof(mpEnblCan4));
   memset(&mpCntMonCan4, 0, sizeof(mpCntMonCan4));
 }
-
+*/
 
 
 void    NextDayExtended4(void)
 { 
   cwDayCan4++;
-  memset(&mpCntMonCan4[ibHardMon], 0, sizeof(value6)*bCANALS);
+//  memset(&mpCntMonCan4[ibHardMon], 0, sizeof(value6)*bCANALS);
 }
 
 
@@ -101,10 +101,10 @@ void    NextDayExtended4(void)
 void    NextMonExtended4(void) 
 {
   cwMonCan4++;
-  memset(&mpCntMonCan4[ibHardMon], 0, sizeof(value6)*bCANALS);
+//  memset(&mpCntMonCan4[ibHardMon], 0, sizeof(value6)*bCANALS);
 }
 
-
+/*
 void    MakeSimple4(void)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
