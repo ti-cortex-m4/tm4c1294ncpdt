@@ -6,8 +6,9 @@ uses
   SysUtils, Classes;
 
 var
-  SourceList: TStringList;
-  TargetList: TStringList;
+  Source: TStringList;
+  Target1: TStringList;
+  Target2: TStringList;
 
   i,j,b,e: word;
   s,z: string;
@@ -24,17 +25,18 @@ end;
 
 begin
   try
-    SourceList := TStringList.Create;
-    TargetList := TStringList.Create;
+    Source := TStringList.Create;
+    Target1 := TStringList.Create;
+    Target2 := TStringList.Create;
 
     try
-      if ParamCount < 2 then raise Exception.Create('stack.exe input_file output_file');
+      if ParamCount < 3 then raise Exception.Create('stack.exe input_file output_file1 output_file2');
       State := INIT;
 
-      SourceList.Loadfromfile(ParamStr(1));
+      Source.Loadfromfile(ParamStr(1));
 
-      for i := 1 to SourceList.Count do begin
-        s := SourceList.Strings[i-1];
+      for i := 1 to Source.Count do begin
+        s := Source.Strings[i-1];
 
         b := Pos('BEGIN(',s);
         e := LastDelimiter(')',s);
@@ -45,9 +47,10 @@ begin
             PrevName := Trim(Copy(z, 1, j-1));
             PrevAddr := Trim(Copy(z, j+1, Length(z)-j));
 
-            TargetList.Add('  ' + PackStrR(PrevName, 21) + ' = ' + PrevAddr + ',');
-            State := FIRST;
+            Target1.Add('  ' + PackStrR(PrevName, 21) + ' = ' + PrevAddr + ',');
+            Target2.Add('  PUSH_ENUM(' + PrevName + ')');
 
+            State := FIRST;
             continue;
           end;
         end;
@@ -63,10 +66,13 @@ begin
 
             if (State = FIRST) then begin
               State := NEXT;
-              TargetList.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ',');
+
+              Target1.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ',');
+              Target2.Add('  PUSH_ENUM(' + CurrName + ')');
             end
             else begin
-              TargetList.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ' + ' + PrevAddr + ',');
+              Target1.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ' + ' + PrevAddr + ',');
+              Target2.Add('  PUSH_ENUM(' + CurrName + ')');
             end;
 
             PrevName := CurrName;
@@ -82,22 +88,25 @@ begin
           z := Trim(Copy(s, b+4, e-b-4));
           CurrName := z;
 
-          TargetList.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ' + ' + PrevAddr);
-          State := LAST;
+          Target1.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ' + ' + PrevAddr);
+          Target2.Add('  PUSH_ENUM(' + CurrName + ')');
 
+          State := LAST;
           continue;
         end;
 
-        TargetList.Add(s);
+        Target1.Add(s);
       end;
 
-      TargetList.SaveToFile(ParamStr(2));
+      Target1.SaveToFile(ParamStr(2));
+      Target2.SaveToFile(ParamStr(3));
     except
       on E: Exception do Writeln(E.Message);
     end;
   finally
-    if (SourceList <> nil) then SourceList.Free;
-    if (TargetList <> nil) then TargetList.Free;
+    if (Source <> nil) then Source.Free;
+    if (Target1 <> nil) then Target1.Free;
+    if (Target2 <> nil) then Target2.Free;
   end;
 
 end.
