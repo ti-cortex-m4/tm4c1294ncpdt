@@ -68,10 +68,6 @@ void    ResetExtended4(void)
 
 
 /*
-
-
-
-
 void    InitExtended4(void) 
 { 
   if ((bExt4Months <= 0) || (bExt4Months > 12))
@@ -107,7 +103,8 @@ void    NextMonExtended4(void)
 //  memset(&mpCntMonCan4_[ibHardMon], 0, sizeof(value6)*bCANALS);
 }
 
-/*
+
+
 void    MakeSimple4(void)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
@@ -226,8 +223,6 @@ uchar   i;
 }
 
 
-
-#ifndef MODBUS
 
 void    PushData4(uchar  ibCanal, uchar  ibMonth)
 {
@@ -435,7 +430,7 @@ uchar   i;
 #endif
 
 
-bit     ReadCntMonCanFCurr(uchar  ibMonth, uchar  ibCanal)
+bool    ReadCntMonCanFCurr(uchar  ibMonth, uchar  ibCanal)
 {
 uchar   i;
 
@@ -482,7 +477,7 @@ uchar   i;
 }
 
 
-bit     ReadCntMonCanFBuff(uchar  ibMonth, uchar  ibCanal)
+bool    ReadCntMonCanFBuff(uchar  ibMonth, uchar  ibCanal)
 {
 uchar   i;
 
@@ -582,6 +577,3 @@ void    ShowExtended4(uchar  ibCanal, uchar  ibMonth)
   
   ShowCntMonCanF2();
 }
- 
-
-*/
