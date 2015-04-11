@@ -53,6 +53,9 @@ DEVICES.C
 #include        "devices_pause.h"
 #include        "devices_init.h"
 #include        "extended_1.h"
+#include        "extended_4.h"
+#include        "extended_5.h"
+#include        "extended_4t.h"
 #include        "devices.h"
 
 
