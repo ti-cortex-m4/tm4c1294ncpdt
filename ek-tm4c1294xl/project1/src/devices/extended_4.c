@@ -86,35 +86,29 @@ void    ResetExtended4(void)
   }
 
   SaveFile(&flExt4EnblCan);
-}
 
 
-/*
-void    InitExtended4(void) 
-{ 
-  if ((bExt4Months <= 0) || (bExt4Months > 12))
-    bExt4Months = 4;
-}
+  memset(&mpCntMonCan4, 0, sizeof(mpCntMonCan4));
+
+  uchar m;
+  for (m=0; m<bMONTHS; m++)
+  {
+    SaveExt4Values(m);
+  }
 
 
-
-void    ResetExtended4(void) 
-{ 
-  boExt4Flag = FALSE;
-  bExt4Months = 4;
   cwDayCan4 = 0;
   cwMonCan4 = 0;
-
-  memset(&mpboExt4EnblCan, TRUE, sizeof(mpboExt4EnblCan));
-  memset(&mpCntMonCan4_, 0, sizeof(mpCntMonCan4_));
 }
-*/
+
 
 
 void    NextDayExtended4(void)
 { 
   cwDayCan4++;
-//  memset(&mpCntMonCan4_[ibHardMon], 0, sizeof(value6)*bCANALS);
+
+  memset(&mpCntMonCan4, 0, sizeof(mpCntMonCan4));
+  SaveExt4Values(ibHardMon);
 }
 
 
@@ -122,12 +116,14 @@ void    NextDayExtended4(void)
 void    NextMonExtended4(void) 
 {
   cwMonCan4++;
-//  memset(&mpCntMonCan4_[ibHardMon], 0, sizeof(value6)*bCANALS);
+
+  memset(&mpCntMonCan4, 0, sizeof(mpCntMonCan4));
+  SaveExt4Values(ibHardMon);
 }
 
 
 
-static void MakeSimple4(uchar  ibMon)
+static void MakeDevices(uchar  ibMon)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
@@ -147,7 +143,7 @@ static void MakeSimple4(uchar  ibMon)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        vaT = mpCntMonCan4_[ibMon][c];
+        vaT = mpCntMonCan4[c];
 
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
@@ -164,14 +160,14 @@ static void MakeSimple4(uchar  ibMon)
         }
 
         vaT.tiSelf = *GetCurrTimeDate();
-        mpCntMonCan4_[ibMon][c] = vaT;
+        mpCntMonCan4[c] = vaT;
       }
     }
   }
 }
 
 
-static void MakeCustom4(uchar  ibMon)
+static void MakeDevice6(uchar  ibMon)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
@@ -191,7 +187,7 @@ static void MakeCustom4(uchar  ibMon)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        vaT = mpCntMonCan4_[ibMon][c];
+        vaT = mpCntMonCan4[c];
 
         InitPop(15 + 15*c);
         status st = (status) PopChar(); PopChar(); PopChar(); PopChar(); PopChar();
@@ -212,7 +208,7 @@ static void MakeCustom4(uchar  ibMon)
         }
 
         vaT.tiSelf = *GetCurrTimeDate();
-        mpCntMonCan4_[ibMon][c] = vaT;
+        mpCntMonCan4[c] = vaT;
       }
     }
   }
@@ -234,13 +230,16 @@ void    MakeExtended4(void)
       if (fKey == 1) break;
 
       uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
+      LoadExt4Values(ibMon);
 
-      vaT = mpCntMonCan4_[ibMon][ibDig];
+      vaT = mpCntMonCan4[ibDig];
       if (vaT.bSelf == ST4_OK) continue;
 
       Clear(); sprintf(szLo+3,"мес€ц: %-2u",ibMon+1); DelayInf();
 
-      (GetDigitalDevice(ibDig) != 6) ? MakeSimple4(ibMon) : MakeCustom4(ibMon);
+      (GetDigitalDevice(ibDig) != 6) ? MakeDevices(ibMon) : MakeDevice6(ibMon);
+
+      SaveExt4Values(ibMon);
     }
 
     Clear(); sprintf(szLo+3,"прин€то: %u", bFlag4); DelayInf();
