@@ -12,6 +12,7 @@ FLASH.H
 #include        "../memory/mem_params.h"
 #include        "../memory/mem_phones.h"
 #include        "../memory/mem_uni.h"
+#include        "../memory/mem_extended_4.h"
 #include        "../memory/mem_extended_4t.h"
 
 
@@ -38,6 +39,7 @@ FLASH.H
 #define bPOWER_GRP          (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
 #define REALCAN_PAGES       (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
 #define PARAMS_PAGES        (uchar)(sizeof(real)    * wPARAMS/wFREEPAGE_SIZE + 1)
+#define VALUE6_CAN_PAGES    (uchar)(sizeof(mpCntMonCan4)/wFREEPAGE_SIZE + 1)
 #define VALUE6T_CAN_PAGES   (uchar)(sizeof(mpCntMonCan4T)/wFREEPAGE_SIZE + 1)
 
 
@@ -211,8 +213,9 @@ typedef enum
   FLS_EXT_4_FLAG        = FLS_EXT_5_FLAG + 1,
   FLS_EXT_4_MONTHS      = FLS_EXT_4_FLAG + 1,
   FLS_EXT_4_ENBL_CAN    = FLS_EXT_4_MONTHS + 1,
+  FLS_EXT_4_VALUES      = FLS_EXT_4_ENBL_CAN + 1,
 
-  FLS_EXT_4T_FLAG       = FLS_EXT_4_ENBL_CAN + 1,
+  FLS_EXT_4T_FLAG       = FLS_EXT_4_VALUES + VALUE6_CAN_PAGES*bMONTHS,
   FLS_EXT_4T_MONTHS     = FLS_EXT_4T_FLAG + 1,
   FLS_EXT_4T_VALUES     = FLS_EXT_4T_MONTHS + 1,
 
