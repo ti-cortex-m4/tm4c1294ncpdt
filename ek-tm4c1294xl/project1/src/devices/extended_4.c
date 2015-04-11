@@ -267,7 +267,7 @@ void    PushData4(uchar  ibCan, uchar  ibMon)
   }
   else
   {
-  	value6 va = mpCntMonCan4_[ibMon][ibCan];
+  	value6 va = mpCntMonCan4[ibCan];
     PushChar(va.bSelf);
     PushInt(0xFF);
     PushInt(0xFF);
@@ -420,10 +420,10 @@ void    OutExtended42(void)
       Clear(); 
 
       uchar p = ibPort;
-      bool fAlt = ReadCntMonCan(ibMon,ibCan);
+      bool f = ReadCntMonCan(ibMon,ibCan);
       ibPort = p;
 
-      if (fAlt == 1)
+      if (f == 1)
       {
         va.bSelf = ST4_OK;
         va.reSelf = reBuffA;
@@ -593,24 +593,28 @@ void    ShowCntMonCanF2(void)
 
 void    ShowExtended4(uchar  ibCan, uchar  ibMon)
 {
+  value6 va;
+
   if (GetDigitalDevice(ibCan) == 0)
   {
     LoadCntMon(ibMon);
 
-    v6Buff.bSelf = ST4_OK; 
-    v6Buff.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
-    v6Buff.tiSelf = tiZero;
+    va.bSelf = ST4_OK; 
+    va.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+    va.tiSelf = tiZero;
     bStatus = ST4_OK;
   }
   else
   {
-    v6Buff = mpCntMonCan4_[ibMon][ibCan];
-    bStatus = v6Buff.bSelf;
+    LoadExt4Values(ibMon);
+
+    va = mpCntMonCan4[ibCan];
+    bStatus = va.bSelf;
   }
 
-  reBuffA = v6Buff.reSelf;
-  tiAlt = v6Buff.tiSelf;
-  
+  reBuffA = va.reSelf;
+  tiAlt = va.tiSelf;
+
   ShowCntMonCanF2();
 }
 
