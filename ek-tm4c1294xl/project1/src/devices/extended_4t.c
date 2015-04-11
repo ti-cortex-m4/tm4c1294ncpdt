@@ -106,13 +106,12 @@ void    ResetExtended4T2(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin, ucha
 void    NextMonExtended4T(void) 
 {
   memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
-
   SaveExt4TValues(ibHardMon);
 }
 
 
 
-static bool MakeSimple4T(uchar  ibMon, uchar  ibTar)
+static bool MakeDevices(uchar  ibMon, uchar  ibTar)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
 
@@ -193,7 +192,8 @@ void    MakeExtended4T(void)
       for (t=0; t<bTARIFFS; t++)
       {
         Clear(); sprintf(szLo+3,"мес€ц: %-2u",ibMon+1); sprintf(szLo+14,"T%u",t+1); DelayInf();
-        if (MakeSimple4T(ibMon, t) == 0) break;
+
+        if (MakeDevices(ibMon, t) == 0) break;
         ibMonthP = ibMon;
       }
 
