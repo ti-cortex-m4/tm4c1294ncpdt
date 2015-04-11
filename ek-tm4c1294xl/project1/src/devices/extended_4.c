@@ -25,6 +25,20 @@ file const              flExt4Months = {FLS_EXT_4_MONTHS, &bExt4Months, sizeof(u
 file const              flExt4EnblCan = {FLS_EXT_4_ENBL_CAN, &mpboExt4EnblCan, sizeof(mpboExt4EnblCan)};
 
 
+//                                         0123456789ABCDEF
+static char const       szExtended4[]   = "Опрос данных: 4 ",
+                        szLinkOK[]      = "   ответ: есть  ",
+                        szLinkError[]   = "   ответ: нет   ",
+                        szDataOK[]      = "  данные: есть  ",
+                        szDataError[]   = "  данные: нет   ",
+                        szNone[]        = "*    пусто      ",
+                        szBadDigital[]  = "*   ошибка !    ",
+                        szBadFlash[]    = "* flash error   ",
+                        szBadPort[]     = "*    модем      ",
+                        szBadEnabling[] = "*  запрещено    ",
+                        szBadMode[]     = "*  нет данных   ";
+
+
 
 void    InitExtended4(void)
 {
@@ -54,18 +68,7 @@ void    ResetExtended4(void)
 
 
 /*
-//                                         0123456789ABCDEF
-message         code    szExtended4       = "Опрос данных: 4 ",
-                code    szExt4LinkOK      = "   ответ: есть  ",
-                code    szExt4LinkError   = "   ответ: нет   ",
-                code    szExt4DataOK      = "  данные: есть  ",
-                code    szExt4DataError   = "  данные: нет   ",
-                code    szExt4None        = "*    пусто      ",
-                code    szExt4BadDigital  = "*   ошибка !    ",
-                code    szExt4BadFlash    = "* flash error   ",
-                code    szExt4BadPort     = "*    модем      ",
-                code    szExt4BadEnabling = "*  запрещено    ",
-                code    szExt4BadMode     = "*  нет данных   ";
+
 
 
 
@@ -110,11 +113,11 @@ void    MakeSimple4(void)
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
   if (ReadCntMonCan(ibMon, ibDig) == 0) 
   { 
-    ShowLo(szExt4LinkError); DelayInf();
+    ShowLo(szLinkError); DelayInf();
   }
   else
   { 
-    ShowLo(szExt4LinkOK); DelayInf();
+    ShowLo(szLinkOK); DelayInf();
 
     LoadCurrDigital(ibDig);      
     for (ibCan=0; ibCan<bCANALS; ibCan++)
@@ -128,14 +131,14 @@ void    MakeSimple4(void)
         {
           v6Buff.bSelf = ST4_OK;
           v6Buff.reSelf = mpreChannelsB[diPrev.ibLine];
-          ShowLo(szExt4DataOK); DelayInf();
+          ShowLo(szDataOK); DelayInf();
           if (ibCan == ibDig) bFlag4++;
         }
         else
         {
           v6Buff.bSelf = ST4_BADDIGITAL;
           v6Buff.reSelf = 0;
-          ShowLo(szExt4DataError); DelayInf();
+          ShowLo(szDataError); DelayInf();
         }
 
         v6Buff.tiSelf = *PGetCurrTimeDate();
@@ -153,11 +156,11 @@ uchar   i;
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
   if (ReadCntMonCanFBuff(ibMon, ibDig) == 0) 
   { 
-    ShowLo(szExt4LinkError); DelayInf();
+    ShowLo(szLinkError); DelayInf();
   }
   else
   { 
-    ShowLo(szExt4LinkOK); DelayInf();
+    ShowLo(szLinkOK); DelayInf();
 
     LoadCurrDigital(ibDig);      
     for (ibCan=0; ibCan<bCANALS; ibCan++)
@@ -174,14 +177,14 @@ uchar   i;
         {
           v6Buff.bSelf = i;
           v6Buff.reSelf = reBuffA;
-          ShowLo(szExt4DataOK); DelayInf();
+          ShowLo(szDataOK); DelayInf();
           if (ibCan == ibDig) bFlag4++;
         }
         else
         {
           v6Buff.bSelf = i;
           v6Buff.reSelf = 0;
-          ShowLo(szExt4DataError); DelayInf();
+          ShowLo(szDataError); DelayInf();
         }
 
         v6Buff.tiSelf = *PGetCurrTimeDate();
@@ -545,12 +548,12 @@ void    ShowCntMonCanF2(void)
 {
   switch (bSpeciesCod)
   {
-    case ST4_NONE:         ShowLo(szExt4None);         break;
+    case ST4_NONE:         ShowLo(szNone);         break;
     case ST4_OK:           (ibZ == 0) ? ShowReal(&reBuffA) : ShowTimeDateF2(); break;    
-    case ST4_BADDIGITAL:   ShowLo(szExt4BadDigital);   break;
-    case ST4_BADFLASH:     ShowLo(szExt4BadFlash);     break;
-    case ST4_BADPORT:      ShowLo(szExt4BadPort);      break;
-    case ST4_BADENABLING:  ShowLo(szExt4BadEnabling);  break;
+    case ST4_BADDIGITAL:   ShowLo(szBadDigital);   break;
+    case ST4_BADFLASH:     ShowLo(szBadFlash);     break;
+    case ST4_BADPORT:      ShowLo(szBadPort);      break;
+    case ST4_BADENABLING:  ShowLo(szBadEnabling);  break;
     default:               sprintf(szLo, "*  ошибка: %02bX", bSpeciesCod); break;
   }  
 }

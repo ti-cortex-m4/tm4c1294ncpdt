@@ -24,7 +24,6 @@ file const              flExt4TFlag = {FLS_EXT_4T_FLAG, &boExt4TFlag, sizeof(boo
 file const              flExt4TMonths = {FLS_EXT_4T_MONTHS, &bExt4TMonths, sizeof(uchar)};
 
 
-
 //                                         0123456789ABCDEF
 static char const       szExtended4T[]  = "Опрос данных: 6 ";
 
