@@ -85,7 +85,7 @@ void    ResetExtended4(void)
   cwMonCan4 = 0;
 
   memset(&mpEnblCan4, boTrue, sizeof(mpEnblCan4));
-  memset(&mpCntMonCan4, 0, sizeof(mpCntMonCan4));
+  memset(&mpCntMonCan4_, 0, sizeof(mpCntMonCan4_));
 }
 */
 
@@ -93,7 +93,7 @@ void    ResetExtended4(void)
 void    NextDayExtended4(void)
 { 
   cwDayCan4++;
-//  memset(&mpCntMonCan4[ibHardMon], 0, sizeof(value6)*bCANALS);
+//  memset(&mpCntMonCan4_[ibHardMon], 0, sizeof(value6)*bCANALS);
 }
 
 
@@ -101,7 +101,7 @@ void    NextDayExtended4(void)
 void    NextMonExtended4(void) 
 {
   cwMonCan4++;
-//  memset(&mpCntMonCan4[ibHardMon], 0, sizeof(value6)*bCANALS);
+//  memset(&mpCntMonCan4_[ibHardMon], 0, sizeof(value6)*bCANALS);
 }
 
 /*
@@ -122,7 +122,7 @@ void    MakeSimple4(void)
       LoadPrevDigital(ibCan);
       if (CompareCurrPrevLines() == 1)
       {
-        v6Buff = mpCntMonCan4[ibMon][ibCan];
+        v6Buff = mpCntMonCan4_[ibMon][ibCan];
 
         if (mpboChannelsA[diPrev.ibLine] == boTrue)
         {
@@ -139,7 +139,7 @@ void    MakeSimple4(void)
         }
 
         v6Buff.tiSelf = *PGetCurrTimeDate();
-        mpCntMonCan4[ibMon][ibCan] = v6Buff;
+        mpCntMonCan4_[ibMon][ibCan] = v6Buff;
       }
     }
   }
@@ -165,7 +165,7 @@ uchar   i;
       LoadPrevDigital(ibCan);
       if (CompareCurrPrevLines() == 1)
       {
-        v6Buff = mpCntMonCan4[ibMon][ibCan];
+        v6Buff = mpCntMonCan4_[ibMon][ibCan];
 
         InitPop(15 + 15*ibCan);
         i = PopChar(); PopChar(); PopChar(); PopChar(); PopChar();
@@ -185,7 +185,7 @@ uchar   i;
         }
 
         v6Buff.tiSelf = *PGetCurrTimeDate();
-        mpCntMonCan4[ibMon][ibCan] = v6Buff;
+        mpCntMonCan4_[ibMon][ibCan] = v6Buff;
       }
     }
   }
@@ -208,7 +208,7 @@ uchar   i;
 
       ibMon = (bMONTHS + ibHardMon - i) % bMONTHS;
 
-      v6Buff = mpCntMonCan4[ibMon][ibDig];
+      v6Buff = mpCntMonCan4_[ibMon][ibDig];
       if (v6Buff.bSelf == ST4_OK) continue;
 
       Clear(); sprintf(szLo+3,"мес€ц: %-2bu",ibMon+1); DelayInf();
@@ -238,7 +238,7 @@ void    PushData4(uchar  ibCanal, uchar  ibMonth)
   }
   else
   {
-    v6Buff = mpCntMonCan4[ibMonth][ibCanal]; 
+    v6Buff = mpCntMonCan4_[ibMonth][ibCanal]; 
     PushChar(v6Buff.bSelf);
     PushInt(0xFF);
     PushInt(0xFF);
@@ -570,7 +570,7 @@ void    ShowExtended4(uchar  ibCanal, uchar  ibMonth)
   }
   else
   {
-    v6Buff = mpCntMonCan4[ibMonth][ibCanal];
+    v6Buff = mpCntMonCan4_[ibMonth][ibCanal];
     bSpeciesCod = v6Buff.bSelf; 
   }
 
