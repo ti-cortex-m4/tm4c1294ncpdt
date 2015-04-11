@@ -246,10 +246,10 @@
       if (exExtended == EXT_PROFILE_30MIN)
       {
         MakeExtended1();
-//        MakeExtended4();
+        MakeExtended4();
         MakeExtended5();
 //        MakeExtended3();
-//        MakeExtended4T();
+        MakeExtended4T();
       }
 
       if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == FALSE))

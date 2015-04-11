@@ -18,6 +18,8 @@ U_CNT.C
 #include        "../../serial/ports.h"
 #include        "../../sensors/automatic3.h"
 #include        "../../digitals/digitals.h"
+#include        "../../devices/extended_4.h"
+#include        "../../devices/extended_4t.h"
 #include        "../../time/rtc.h"
 #include        "../../time/calendar.h"
 #include        "../../energy2.h"
@@ -36,8 +38,8 @@ void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon)
   }
   else
   {
-//    v6Buff = mpCntMonCan4[ibMon][ibCan];
-//    PushRealUni(v6Buff.bSelf, &v6Buff.reSelf);
+    value6 va = mpCntMonCan4[ibCan];
+    PushRealUni(va.bSelf, &va.reSelf);
   }
 }
 
@@ -59,8 +61,10 @@ void    GetCntCanMonAllUni(void)
     time ti = MonIndexToDate(dw);
 
     InitPushUni();
+
     uchar ibMon = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
     LoadCntMon(ibMon);
+    LoadExt4Values(ibMon);
 
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
@@ -83,8 +87,8 @@ void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
   }
   else
   {
-//    v6tBuff = mpCntMonCan4T_[ibMon][ibCan];
-//    PushRealUni(v6tBuff.bSelf, &v6tBuff.mpreSelf[ibTar]);
+    value6t va = mpCntMonCan4T[ibCan];
+    PushRealUni(va.bSelf, &va.mpreSelf[ibTar]);
   }
 }
 
@@ -110,6 +114,9 @@ void    GetCntCanMonTarUni(void)
     time ti = MonIndexToDate(dw);
 
     InitPushUni();
+
+    uchar ibMon = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
+    LoadExt4TValues(ibMon);
 
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)

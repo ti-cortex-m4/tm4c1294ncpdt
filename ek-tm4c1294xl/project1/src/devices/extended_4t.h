@@ -13,6 +13,8 @@ extern  file const              flExt4TMonths;
 
 
 
+boolean LoadExt4TValues(uchar  ibMon);
+
 void    InitExtended4T(void); 
 void    ResetExtended4T(void);
 
