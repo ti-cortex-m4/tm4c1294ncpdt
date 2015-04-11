@@ -179,6 +179,24 @@ serial  RevInput(void)
 
 
 
+void    PckQueryIO(uint  cwIn, uchar  cbOut)
+{
+  InitPush(0);
+  Push(szPacketA,bPACKET_HEADER);       // запись заголовка
+
+  MakeCRC16OutBuff(bPACKET_HEADER,cbOut-2);
+
+  InitPushPck();
+  Skip(cbOut-2);
+
+  PushChar(bCRCHi);                     // запись контрольной суммы
+  PushChar(bCRCLo);
+
+  Query(cwIn,bPACKET_HEADER+cbOut,1);
+}
+
+
+
 void    ChecksumError(void)
 {
   mpcwOutputC[ibDig]++;

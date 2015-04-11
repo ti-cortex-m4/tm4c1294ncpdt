@@ -260,7 +260,7 @@ uchar   i,j;
           for (i=0; i<4; i++) 
           {
             mpreChannelsB[i] = mpreChannelsEls[i];
-            mpboChannelsA[i] = boTrue;
+            mpboChannelsA[i] = TRUE;
           }
 
           QueryCloseP();
@@ -284,14 +284,14 @@ uchar   i,j;
 void    ClrValueP(uchar  ibLine)
 {
   mpreChannelsB[ibLine] = coEnergy.reBuff;
-  mpboChannelsA[ibLine] = boTrue;
+  mpboChannelsA[ibLine] = TRUE;
 }
 
 
 void    SetValueP(uchar  ibLine, uchar  i)
 {
   mpreChannelsB[ibLine] = mpreChannelsB[i];
-  mpboChannelsA[ibLine] = boTrue;
+  mpboChannelsA[ibLine] = TRUE;
 }
 
 

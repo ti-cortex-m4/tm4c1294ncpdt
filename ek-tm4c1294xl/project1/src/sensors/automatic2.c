@@ -17,6 +17,7 @@ AUTOMATIC2.C
 #include        "../serial/ports.h"
 #include        "../serial/ports_devices.h"
 #include        "../digitals/digitals.h"
+#include        "../sensors/automatic2.h"
 #include        "../time/delay.h"
 #include        "../engine.h"
 #include        "../energy.h"

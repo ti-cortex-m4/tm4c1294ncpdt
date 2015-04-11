@@ -13,5 +13,7 @@ void    RevQueryIO(uint  cwIn, uchar  cbOut);
 bool    RevLinkErrors(void);
 serial  RevInput(void);
 
+void    PckQueryIO(uint  cwIn, uchar  cbOut);
+
 void    ChecksumError(void);
 void    TestResult(uchar  bT);
