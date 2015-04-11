@@ -25,7 +25,7 @@ typedef enum
 // тип 'данные типа 4'
 typedef struct
 {
-  status       bSelf;
+  status        bSelf;
   uint          cwOK,cwError;
   real          reSelf;
   time          tiSelf;

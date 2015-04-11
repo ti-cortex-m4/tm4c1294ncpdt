@@ -8,6 +8,7 @@ EXTENDED_4.C
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_energy.h"
 #include        "../memory/mem_extended_4.h"
+#include        "../memory/mem_extended_6.h"
 #include        "../realtime/realtime.h"
 #include        "../serial/ports.h"
 #include        "../serial/ports_devices.h"
@@ -48,6 +49,7 @@ static char const       szExtended4[]   = "Опрос данных: 4 ",
 
 static value6           vaT;
 static uchar            bFlag4;
+static uchar            bStatus;
 
 
 
@@ -367,42 +369,43 @@ void    OutExtended42(void)
     uchar ibMon = InBuff(6);
     uchar ibCan = InBuff(7);
 
-    memset(&vaT, 0, sizeof(vaT));
-    vaT.tiSelf = *GetCurrTimeDate();
+    value4 va;
+    memset(&va, 0, sizeof(va));
+    va.tiSelf = *GetCurrTimeDate();
 
     if (GetDigitalDevice(ibCan) == 0)
     {
       if (LoadCntMon(ibMon) == 1)
       {
-        vaT.bSelf = ST4_OK;
-        vaT.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+        va.bSelf = ST4_OK;
+        va.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
       }
       else
       {
-        vaT.bSelf = ST4_BADFLASH;
-        vaT.reSelf = 0;
+        va.bSelf = ST4_BADFLASH;
+        va.reSelf = 0;
       }
 
       InitPushPtr();            
-      Push(&vaT, sizeof(value4));
+      Push(&va, sizeof(value4));
       OutptrOutBuff(sizeof(value4));
     }
     else if (mpboEnblCan[ibCan] == FALSE)
     {
-      vaT.bSelf = ST4_BADENABLING;
-      vaT.reSelf = 0;
+      va.bSelf = ST4_BADENABLING;
+      va.reSelf = 0;
 
       InitPushPtr();            
-      Push(&vaT, sizeof(value4));
+      Push(&va, sizeof(value4));
       OutptrOutBuff(sizeof(value4));
     }
     else if (GetDigitalPhone(ibCan) != 0)
     {
-      vaT.bSelf = ST4_BADPORT;
-      vaT.reSelf = 0;
+      va.bSelf = ST4_BADPORT;
+      va.reSelf = 0;
 
       InitPushPtr();            
-      Push(&vaT, sizeof(value4));
+      Push(&va, sizeof(value4));
       OutptrOutBuff(sizeof(value4));
     }
     else
@@ -419,17 +422,17 @@ void    OutExtended42(void)
 
       if (fAlt == 1)
       {
-        vaT.bSelf = ST4_OK;
-        vaT.reSelf = reBuffA;
+        va.bSelf = ST4_OK;
+        va.reSelf = reBuffA;
       }
       else
       {
-        vaT.bSelf = ST4_BADDIGITAL;
-        vaT.reSelf = 0;
+        va.bSelf = ST4_BADDIGITAL;
+        va.reSelf = 0;
       }
 
       InitPushPtr();            
-      Push(&vaT, sizeof(value4));
+      Push(&va, sizeof(value4));
       OutptrOutBuff(sizeof(value4));
 
       LoadDisplay();
@@ -498,7 +501,7 @@ uchar   i;
 
 
   InitPop(bHEADER);
-  bSpeciesCod = PopChar();
+  bStatus = PopChar();
   PopChar(); PopChar(); PopChar(); PopChar(); 
   PopReal(); 
   Pop(&tiAlt, sizeof(time));   
@@ -571,7 +574,7 @@ void    ShowTimeDateF2(void)
 
 void    ShowCntMonCanF2(void)
 {
-  switch (bSpeciesCod)
+  switch (bStatus)
   {
     case ST4_NONE:         ShowLo(szNone);         break;
     case ST4_OK:           (ibZ == 0) ? ShowFloat(reBuffA) : ShowTimeDateF2(); break;
@@ -579,7 +582,7 @@ void    ShowCntMonCanF2(void)
     case ST4_BADFLASH:     ShowLo(szBadFlash);     break;
     case ST4_BADPORT:      ShowLo(szBadPort);      break;
     case ST4_BADENABLING:  ShowLo(szBadEnabling);  break;
-    default:               sprintf(szLo, "*  ошибка: %02X", bSpeciesCod); break;
+    default:               sprintf(szLo, "*  ошибка: %02X", bStatus); break;
   }  
 }
 
@@ -594,12 +597,12 @@ void    ShowExtended4(uchar  ibCan, uchar  ibMon)
     v6Buff.bSelf = ST4_OK; 
     v6Buff.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
     v6Buff.tiSelf = tiZero;
-    bSpeciesCod = ST4_OK;
+    bStatus = ST4_OK;
   }
   else
   {
     v6Buff = mpCntMonCan4_[ibMon][ibCan];
-    bSpeciesCod = v6Buff.bSelf; 
+    bStatus = v6Buff.bSelf;
   }
 
   reBuffA = v6Buff.reSelf;
