@@ -32,15 +32,15 @@ static value6t          vaT;
 
 
 
-static boolean SaveExt4TValues(uchar  ibMonth)
+static boolean SaveExt4TValues(uchar  ibMon)
 {
-  return SaveBuff(FLS_EXT_4T_VALUES + ibMonth*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
+  return SaveBuff(FLS_EXT_4T_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
 }
 
 
-static boolean LoadExt4TValues(uchar  ibMonth)
+static boolean LoadExt4TValues(uchar  ibMon)
 {
-  return LoadBuff(FLS_EXT_4T_VALUES + ibMonth*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
+  return LoadBuff(FLS_EXT_4T_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
 }
 
 
@@ -183,8 +183,8 @@ void    MakeExtended4T(void)
     {
       if (fKey == 1) break;
 
-      uchar ibMonth = (bMONTHS + ibHardMon - m) % bMONTHS;
-      LoadExt4TValues(ibMonth);
+      uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
+      LoadExt4TValues(ibMon);
 
       vaT = mpCntMonCan4T[ibDig];
       if ((vaT.bSelf == ST4_OK) || (vaT.bSelf == ST4_NOTPRESENTED)) continue;
@@ -192,12 +192,12 @@ void    MakeExtended4T(void)
       uchar t;
       for (t=0; t<bTARIFFS; t++)
       {
-        Clear(); sprintf(szLo+3,"мес€ц: %-2u",ibMonth+1); sprintf(szLo+14,"T%u",t+1); DelayInf();
-        if (MakeSimple4T(ibMonth, t) == 0) break;
-        ibMonthP = ibMonth;
+        Clear(); sprintf(szLo+3,"мес€ц: %-2u",ibMon+1); sprintf(szLo+14,"T%u",t+1); DelayInf();
+        if (MakeSimple4T(ibMon, t) == 0) break;
+        ibMonthP = ibMon;
       }
 
-      SaveExt4TValues(ibMonth);
+      SaveExt4TValues(ibMon);
     }
 
     ShowCanalNumber(ibDig);

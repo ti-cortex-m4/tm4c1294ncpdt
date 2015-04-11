@@ -49,6 +49,19 @@ static uchar            bFlag4;
 
 
 
+static boolean SaveExt4Values(uchar  ibMon)
+{
+  return SaveBuff(FLS_EXT_4_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
+}
+
+
+static boolean LoadExt4Values(uchar  ibMon)
+{
+  return LoadBuff(FLS_EXT_4_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
+}
+
+
+
 void    InitExtended4(void)
 {
   LoadFileBoolean(&flExt4Flag, FALSE);
@@ -208,19 +221,19 @@ static void MakeCustom4(uchar  ibMon)
 
 void    MakeExtended4(void)
 {
-uchar   i;
-
   if ((boExt4Flag == TRUE) && (mpboExt4EnblCan[ibDig] == TRUE))
   {
     ShowHi(szExtended4); 
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4Months); DelayInf();
 
     bFlag4 = 0;
-    for (i=0; i<bExt4Months; i++)
+
+    uchar m;
+    for (m=0; m<bExt4Months; m++)
     {
       if (fKey == 1) break;
 
-      uchar ibMon = (bMONTHS + ibHardMon - i) % bMONTHS;
+      uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
 
       vaT = mpCntMonCan4_[ibMon][ibDig];
       if (vaT.bSelf == ST4_OK) continue;
