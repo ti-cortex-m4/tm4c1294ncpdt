@@ -1,1 +1,1 @@
-stack.exe flash_map.txt flash_map.h out_flash.h
+stack.exe flash_stack.txt flash_enum.txt out_flash.txt
