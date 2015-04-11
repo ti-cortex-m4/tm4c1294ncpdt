@@ -111,10 +111,10 @@ void    ShowDouble(double  db)
 
 void    ShowBool(bool  bo)
 {
-  if (!bo)
-    strcpy(szLo+1,szNo);
-  else
+  if (bo)
     strcpy(szLo+1,szYes);
+  else
+    strcpy(szLo+1,szNo);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';
@@ -123,7 +123,7 @@ void    ShowBool(bool  bo)
 
 void    ShowBoolean(boolean  bo)
 {
-  ShowBool(bo == FALSE);
+  ShowBool(bo == TRUE);
 }
 
 

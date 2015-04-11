@@ -28,7 +28,7 @@ void    OutExtended41(void);
 void    OutExtended42(void);
 void    OutExtended43(void);
 
-bit     ReadCntMonCanFCurr(uchar  ibMonth, uchar  ibCanal);
-bit     ReadCntMonCanFBuff(uchar  ibMonth, uchar  ibCanal);
+bool    ReadCntMonCanFCurr(uchar  ibMonth, uchar  ibCanal);
+bool    ReadCntMonCanFBuff(uchar  ibMonth, uchar  ibCanal);
 void    ShowCntMonCanF2(void);
 void    ShowExtended4(uchar  ibCanal, uchar  ibMonth);
