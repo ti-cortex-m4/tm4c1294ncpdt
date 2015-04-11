@@ -96,6 +96,7 @@ begin
         end;
 
         Target1.Add(s);
+        if (s = '') then Target2.Add(s);
       end;
 
       Target1.SaveToFile(ParamStr(2));
