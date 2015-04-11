@@ -140,7 +140,7 @@ PROGRAMS.H
 #define bGET_CNTCANYEAR10           49
 #define bGET_CNTCANYEAR2            78
 #define bGET_CNTCANYEAR20           48
-#define wGET_CNTCANYEAR3            279
+#define wGET_CNTCANYEAR6            279
 
 #define bGET_POWCANCURRMNT          120
 

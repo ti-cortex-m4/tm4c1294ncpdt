@@ -1,7 +1,8 @@
 /*------------------------------------------------------------------------------
-KEY_FULLYEAR.H
+KEY_VALUES_YEAR.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetFullYear(item  it);
+void    key_GetValuesYear(item  it);
+void    key_GetCntCanYear6(void);
