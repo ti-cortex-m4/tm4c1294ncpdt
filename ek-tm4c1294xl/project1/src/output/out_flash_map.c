@@ -12,7 +12,7 @@ OUT_FLASH_MAP.C
 
 
 
-#define PUSH_ENUM(value) PushString(#value); PushString("="); PushIntAsString(value); PushChar(0x0D); PushChar(0x0A);
+#define PUSH_ENUM(value) PushStringSkip(#value, 3); PushString("="); PushIntAsString(value); PushChar(0x0D); PushChar(0x0A);
 
 
 
