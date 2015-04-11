@@ -21,12 +21,7 @@ SERIAL3.C
 #include        "../time/delay.h"
 #include        "../kernel/crc-16.h"
 #include        "../uarts.h"
-
-
-
-static const uchar 		szPacketA[bPACKET_HEADER] = {0xCA, 0xE0, 0xEB, 0xFE, 0xEC, 0xED, 0xFB, 0x20};
-
-static const uchar 		szPacketB[1] = { 0x1A };
+#include        "serial.h"
 
 
 

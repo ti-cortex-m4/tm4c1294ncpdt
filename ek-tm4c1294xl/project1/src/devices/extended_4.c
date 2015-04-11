@@ -19,6 +19,7 @@ EXTENDED_4.C
 #include        "../sensors/automatic2.h"
 #include        "../time/rtc.h"
 #include        "../time/timedate.h"
+#include        "../engine.h"
 #include        "../energy2.h"
 #include        "extended_4.h"
 
@@ -34,15 +35,16 @@ static char const       szExtended4[]   = "Опрос данных: 4 ",
                         szLinkOK[]      = "   ответ: есть  ",
                         szLinkError[]   = "   ответ: нет   ",
                         szDataOK[]      = "  данные: есть  ",
-                        szDataError[]   = "  данные: нет   ",
-                        szNone[]        = "*    пусто      ",
-                        szBadDigital[]  = "*   ошибка !    ",
-                        szBadFlash[]    = "* flash error   ",
-                        szBadPort[]     = "*    модем      ",
-                        szBadEnabling[] = "*  запрещено    ",
-                        szBadMode[]     = "*  нет данных   ";
+                        szDataError[]   = "  данные: нет   ";
+//                        szNone[]        = "*    пусто      ",
+//                        szBadDigital[]  = "*   ошибка !    ",
+//                        szBadFlash[]    = "* flash error   ",
+//                        szBadPort[]     = "*    модем      ",
+//                        szBadEnabling[] = "*  запрещено    ",
+//                        szBadMode[]     = "*  нет данных   ";
 
 
+static value6           vaT;
 static uchar            bFlag4;
 
 
@@ -112,9 +114,10 @@ void    NextMonExtended4(void)
 
 
 
-void    MakeSimple4(uchar  ibMon)
+static void MakeSimple4(uchar  ibMon)
 {
-  memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
+  memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
+
   if (ReadCntMonCan(ibMon, ibDig) == 0) 
   { 
     ShowLo(szLinkError); DelayInf();
@@ -131,35 +134,34 @@ void    MakeSimple4(uchar  ibMon)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        v6Buff = mpCntMonCan4_[ibMon][c];
+        vaT = mpCntMonCan4_[ibMon][c];
 
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          v6Buff.bSelf = ST4_OK;
-          v6Buff.reSelf = mpreChannelsB[diPrev.ibLine];
+          vaT.bSelf = ST4_OK;
+          vaT.reSelf = mpreChannelsB[diPrev.ibLine];
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bFlag4++;
         }
         else
         {
-          v6Buff.bSelf = ST4_BADDIGITAL;
-          v6Buff.reSelf = 0;
+          vaT.bSelf = ST4_BADDIGITAL;
+          vaT.reSelf = 0;
           ShowLo(szDataError); DelayInf();
         }
 
-        v6Buff.tiSelf = *GetCurrTimeDate();
-        mpCntMonCan4_[ibMon][c] = v6Buff;
+        vaT.tiSelf = *GetCurrTimeDate();
+        mpCntMonCan4_[ibMon][c] = vaT;
       }
     }
   }
 }
 
 
-void    MakeCustom4(uchar  ibMon)
+static void MakeCustom4(uchar  ibMon)
 {
-uchar   i;
+  memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-  memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
   if (ReadCntMonCanFBuff(ibMon, ibDig) == 0) 
   { 
     ShowLo(szLinkError); DelayInf();
@@ -176,27 +178,28 @@ uchar   i;
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        v6Buff = mpCntMonCan4_[ibMon][c];
+        vaT = mpCntMonCan4_[ibMon][c];
 
         InitPop(15 + 15*c);
-        i = PopChar(); PopChar(); PopChar(); PopChar(); PopChar();
+        status st = (status) PopChar(); PopChar(); PopChar(); PopChar(); PopChar();
         PopReal();
-        if (i == ST4_OK)
+
+        if (st == ST4_OK)
         {
-          v6Buff.bSelf = i;
-          v6Buff.reSelf = reBuffA;
+          vaT.bSelf = st;
+          vaT.reSelf = reBuffA;
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bFlag4++;
         }
         else
         {
-          v6Buff.bSelf = i;
-          v6Buff.reSelf = 0;
+          vaT.bSelf = st;
+          vaT.reSelf = 0;
           ShowLo(szDataError); DelayInf();
         }
 
-        v6Buff.tiSelf = *GetCurrTimeDate();
-        mpCntMonCan4_[ibMon][c] = v6Buff;
+        vaT.tiSelf = *GetCurrTimeDate();
+        mpCntMonCan4_[ibMon][c] = vaT;
       }
     }
   }
@@ -219,8 +222,8 @@ uchar   i;
 
       uchar ibMon = (bMONTHS + ibHardMon - i) % bMONTHS;
 
-      v6Buff = mpCntMonCan4_[ibMon][ibDig];
-      if (v6Buff.bSelf == ST4_OK) continue;
+      vaT = mpCntMonCan4_[ibMon][ibDig];
+      if (vaT.bSelf == ST4_OK) continue;
 
       Clear(); sprintf(szLo+3,"месяц: %-2u",ibMon+1); DelayInf();
 
@@ -229,25 +232,26 @@ uchar   i;
 
     Clear(); sprintf(szLo+3,"принято: %u", bFlag4); DelayInf();
 
-    ShowDigitalHi(); Clear();
+    ShowCanalNumber(ibDig);
+    Clear();
   }
 }
 
 
-
-void    PushData4(uchar  ibCanal, uchar  ibMonth)
+/*
+void    PushData4(uchar  ibCan, uchar  ibMon)
 {
-  if (GetDigitalDevice(ibCanal) == 0)
+  if (GetDigitalDevice(ibCan) == 0)
   {
     PushChar(ST4_OK);
     PushInt(0xFF);
     PushInt(0xFF);
-    PushFloat(GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal));
+    PushFloat(GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan));
     PushTime(&tiZero);
   }
   else
   {
-    v6Buff = mpCntMonCan4_[ibMonth][ibCanal]; 
+    v6Buff = mpCntMonCan4_[ibMon][ibCan];
     PushChar(v6Buff.bSelf);
     PushInt(0xFF);
     PushInt(0xFF);
@@ -583,3 +587,4 @@ void    ShowExtended4(uchar  ibCanal, uchar  ibMonth)
   
   ShowCntMonCanF2();
 }
+*/
