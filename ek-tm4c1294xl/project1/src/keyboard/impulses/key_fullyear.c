@@ -15,6 +15,7 @@ KEY_FULLYEAR.C
 #include        "../../digitals/digitals.h"
 #include        "../../digitals/digitals_messages.h"
 #include        "../../serial/ports.h"
+#include        "../../devices/extended_4.h"
 #include        "../../serial/modems.h"
 #include        "../../engine.h"
 #include        "../../energy.h"
@@ -28,8 +29,8 @@ static char const       szCntCanOnBegin[] = "на начало месяца",
                         szCntCanOnEnd[]   = "на конец месяца ",
                         szCntCanNoData[]  = "  нет данных !  ",
                         szCntCanBuff[]    = "   из буфера    ",
-                        szCntCanType1[]   = "  с дозапросом  "/*,
-                        szCntCanType2[]   = " прямого опроса "*/;
+                        szCntCanType1[]   = "  с дозапросом  ",
+                        szCntCanType2[]   = " прямого опроса ";
 
 static char const       *pszEngFull[]    = { szEnergy, szBeta, szFull,   "" },
                         *pszEngTops[]    = { szEnergy, szBeta, szTops,   "" },
@@ -39,8 +40,8 @@ static char const       *pszEngFull[]    = { szEnergy, szBeta, szFull,   "" },
                         *pszCntCanYear1[]  = { szCountersB, szBeta, szCntCanOnEnd,   "" },
                         *pszCntCanYear10[] = { szCountersB, szBeta, szCntCanOnBegin, "" },
                         *pszCntCanYear2[]  = { szCountersB, szBeta, szCntCanOnEnd,   szCntCanBuff, szCntCanType1, "" },
-                        *pszCntCanYear20[] = { szCountersB, szBeta, szCntCanOnBegin, szCntCanBuff, szCntCanType1, "" }/*,
-                        *pszCntCanYear3[]  = { szCountersB, szBeta, szCntCanOnEnd,   szCntCanBuff, szCntCanType2, "" }*/;
+                        *pszCntCanYear20[] = { szCountersB, szBeta, szCntCanOnBegin, szCntCanBuff, szCntCanType1, "" },
+                        *pszCntCanYear3[]  = { szCountersB, szBeta, szCntCanOnEnd,   szCntCanBuff, szCntCanType2, "" };
 
 
 uchar   GetMaxItem(item  it);
@@ -85,10 +86,10 @@ void    ShowFullYear(void)
           ShowLo(szBlocking); 
         else 
         {
-//          if (GetDigitalDevice(ibX) != 6)
+          if (GetDigitalDevice(ibX) != 6)
             (ReadCntMonCan(ibY,ibX) == 1) ? ShowFloat(reBuffA) : Error();
-//          else
-//            (ReadCntMonCanFCurr(ibY,ibX) == 1) ? ShowCntMonCanF2() : Error();
+          else
+            (ReadCntMonCanFCurr(ibY,ibX) == 1) ? ShowCntMonCanF2() : Error();
         }
 
         SaveConnect();
@@ -118,10 +119,10 @@ void    ShowFullYear(void)
           ShowLo(szBlocking); 
         else 
         {
-//          if (GetDigitalDevice(ibX) != 6)
+          if (GetDigitalDevice(ibX) != 6)
             (ReadCntMonCan(ibZ,ibX) == 1) ? ShowFloat(reBuffA) : Error();
-//          else
-//            (ReadCntMonCanFCurr(ibZ,ibX) == 1) ? ShowCntMonCanF2() : Error();
+          else
+            (ReadCntMonCanFCurr(ibZ,ibX) == 1) ? ShowCntMonCanF2() : Error();
         }
 
         SaveConnect();
@@ -129,15 +130,15 @@ void    ShowFullYear(void)
       break;
 
     case bGET_CNTCANYEAR2:  
-//      ShowExtended4(ibX,ibY);
+      ShowExtended4(ibX,ibY);
       break;
 
     case bGET_CNTCANYEAR20:     
       ibZ = (12+ibY-1)%12;
       if (ibY == tiCurr.bMonth)
         ShowLo(szCntCanNoData);
-//      else
-//        ShowExtended4(ibX,ibY);
+      else
+        ShowExtended4(ibX,ibY);
       break;
   }
 
@@ -280,9 +281,126 @@ void    auto_GetFullyear(void)
 */
 
 
+void    ShowCntCanYear3(void)
+{
+  if (GetDigitalDevice(ibX) == 6)
+    ShowLo(szExt4BadMode);
+  else
+    ShowCntMonCan6(ibX,ibY);
+
+  sprintf(szLo+14,"%2bu",ibX+1);
+}
 
 
 
+void    key_GetCntCanYear3(void)
+{
+  if (bKey == bKEY_ENTER)
+  {
+    if (enKeyboard == KBD_ENTER)
+    {
+      enKeyboard = KBD_INPUT1;
+
+      Month();
+      strcpy(szBeta, szOn12Months);
+
+      ibZ = 0;
+      LoadSlide(pszCntCanYear3);
+    }
+    else if (enKeyboard == KBD_INPUT1)
+    {
+      enKeyboard = KBD_INPUT2;
+      Canal();
+
+      ibY = ibHardMon;
+
+      LoadBetaMonth(ibY);
+      ShowSlide(szBeta);
+    }
+    else if (enKeyboard == KBD_POSTINPUT1)
+    {
+      if ((ibY = GetChar(10,11)-1) < 12)
+      {
+        enKeyboard = KBD_INPUT2;
+        Canal();
+
+        LoadBetaMonth(ibY);
+        ShowSlide(szBeta);
+      }
+      else Beep();
+    }
+    else if (enKeyboard == KBD_INPUT2)
+    {
+      enKeyboard = KBD_POSTENTER;
+
+      ibX = 0;
+      ShowCntCanYear3();
+    }
+    else if (enKeyboard == KBD_POSTINPUT2)
+    {
+      if ((ibX = GetChar(10,11)-1) < bCANALS)
+      {
+        enKeyboard = KBD_POSTENTER;
+
+        ShowCntCanYear3();
+      }
+      else Beep();
+    }
+    else if (enKeyboard == KBD_POSTENTER)
+    {
+      ibZ = 0;
+      if (++ibX >= bCANALS) ibX = 0;
+
+      ShowCntCanYear3();
+    }
+  }
 
 
+  else if (bKey < 10)
+  {
+    if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
+    {
+      enKeyboard = KBD_POSTINPUT1;
+      ShiftLo(10,11);
+    }
+    else
+    if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
+    {
+      enKeyboard = KBD_POSTINPUT2;
+      ShiftLo(10,11);
+    }
+    else
+    if ((enKeyboard == KBD_POSTENTER) && (bKey == 0))
+    {
+      ibZ = ++ibZ % 2;
+      ShowCntCanYear3();
+    }
+  }
+
+
+  else if (bKey == bKEY_MINUS)
+  {
+    if (enKeyboard == KBD_POSTENTER)
+    {
+      ibZ = 0;
+      if (ibY > 0) ibY--; else ibY = 12-1;
+
+      LoadBetaMonth(ibY);
+      ShowCntCanYear3();
+      ShowSlide(szBeta);
+    }
+  }
+
+
+  else if (bKey == bKEY_POINT)
+  {
+    if (enKeyboard == KBD_POSTENTER)
+    {
+      ibZ = 0;
+      if (ibX > 0) ibX--; else ibX = bCANALS-1;
+
+      ShowCntCanYear3();
+    }
+  }
+}
 

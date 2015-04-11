@@ -250,7 +250,7 @@ void    MakeExtended4(void)
 }
 
 
-/*
+
 void    PushData4(uchar  ibCan, uchar  ibMon)
 {
   if (GetDigitalDevice(ibCan) == 0)
@@ -433,11 +433,10 @@ void    OutExtended42(void)
 
 void    OutExtended43(void)
 {
-uchar   i;
-
   InitPushPtr();
   uint wBuffD = 0;
 
+  uchar   i;
   for (i=0; i<bCANALS; i++)
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
@@ -599,4 +598,4 @@ void    ShowExtended4(uchar  ibCanal, uchar  ibMonth)
   
   ShowCntMonCanF2();
 }
-*/
+

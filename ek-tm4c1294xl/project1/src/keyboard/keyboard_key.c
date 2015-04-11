@@ -442,6 +442,8 @@ void    Keyboard_Key(void)
       case bGET_CNTCANYEAR2:
       case bGET_CNTCANYEAR20:  key_GetFullYear(CANALS); break;
 
+      case wGET_CNTCANYEAR3:    key_GetCntCanYear3();   break;
+
       case bRUN_PROFILE:        key_RunProfile();       break;
 
       case bGET_PROGRAM73:      key_GetOldProgram73();  break;

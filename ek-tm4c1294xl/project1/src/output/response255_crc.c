@@ -15,6 +15,7 @@ RESPONSE255_CRC.C
 #include        "../tariffs/gaps.h"
 #include        "../output/out_groups.h"
 #include        "../output/out_relaxs.h"
+#include        "../devices/extended_4.h"
 #include        "../devices/extended_5.h"
 #include        "../output/out_gaps.h"
 #include        "../output/out_decret.h"
@@ -177,6 +178,12 @@ void    Response255_CRC(void)
     case bEXT_GETRECALC: OutGetRecalcHou(); break;
     case bEXT_SETRECALC1: OutSetRecalcHou1(); break;
     case bEXT_SETRECALC2: OutSetRecalcHou2(); break;
+
+    case bEXT_GETEXTENDED40:  OutExtended40();  break;
+    case bEXT_GETEXTENDED401: OutExtended401(); break;
+    case bEXT_GETEXTENDED41:  OutExtended41();  break;
+    case bEXT_GETEXTENDED42:  OutExtended42();  break;
+    case bEXT_GETEXTENDED43:  OutExtended43();  break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;
