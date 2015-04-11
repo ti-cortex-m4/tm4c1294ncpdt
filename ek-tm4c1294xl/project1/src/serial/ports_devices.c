@@ -12,6 +12,7 @@ PORTS_DEVICES.H
 #include        "../digitals/wait_answer.h"
 #include        "../digitals/wait_query.h"
 #include        "../devices/devices.h"
+#include        "../isr/serial.h"
 #include        "../isr/serial0.h"
 #include        "../isr/serial1.h"
 #include        "../isr/serial2.h"
@@ -182,14 +183,14 @@ serial  RevInput(void)
 void    PckQueryIO(uint  cwIn, uchar  cbOut)
 {
   InitPush(0);
-  Push(szPacketA,bPACKET_HEADER);       // запись заголовка
+  Push((void *)szPacketA, bPACKET_HEADER);
 
   MakeCRC16OutBuff(bPACKET_HEADER,cbOut-2);
 
   InitPushPck();
   Skip(cbOut-2);
 
-  PushChar(bCRCHi);                     // запись контрольной суммы
+  PushChar(bCRCHi);
   PushChar(bCRCLo);
 
   Query(cwIn,bPACKET_HEADER+cbOut,1);
