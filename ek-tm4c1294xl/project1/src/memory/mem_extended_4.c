@@ -16,3 +16,9 @@ uchar                   bExt4Months;
 
 // список разрешенных каналов
 boolean                 mpboExt4EnblCan[bCANALS];
+
+// буфер значений счетчиков на начало 12 мес€цев
+value6                  mpCntMonCan4[bCANALS];
+
+// счетчик переходов через сутки и мес€ц
+uint                    cwDayCan4, cwMonCan4;

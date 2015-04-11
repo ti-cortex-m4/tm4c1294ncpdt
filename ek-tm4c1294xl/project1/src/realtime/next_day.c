@@ -14,6 +14,7 @@ NEXT_DAY.C
 #include        "../energy2.h"
 #include        "../energy3.h"
 #include        "../digitals/answer.h"
+#include        "../devices/extended_4.h"
 #include        "../devices/extended_5.h"
 #include        "../special/defects.h"
 #include        "../special/recalc_def.h"
@@ -25,7 +26,7 @@ void    NextDay(void)
 {
   cwDays++;
 
-//  NextDayExtended4();
+  NextDayExtended4();
   NextDayExtended5();
 //  NextDayExtended6();
 //  NextDayExtended7();
