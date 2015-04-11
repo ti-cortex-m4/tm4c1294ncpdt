@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE_F.C
 
-
+ —Ёћ+2 CRC
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -14,7 +14,7 @@ DEVICE_F.C
 /*
 #ifndef SKIP_F
 */
-// переход в ведомый режим дл€ сумматоров —Ёћ+2
+// переход в ведомый режим
 void    QueryBreakF(void)
 {
   InitPush(0);
@@ -26,15 +26,15 @@ void    QueryBreakF(void)
 
 
 /*
-// проверка сетевого адреса дл€ сумматоров —Ёћ+2
-bit     ReadAddressF(void)
+// проверка сетевого адреса
+bool    ReadAddressF(void)
 {
   return(InBuff(0) == diCurr.bAddress);
 }
 
 
-// проверка результата операции дл€ сумматоров —Ёћ+2
-bit     ReadResultF(void)
+// проверка результата операции
+bool    ReadResultF(void)
 {
   TestResult(InBuff(5));
   return(ReadAddressF() && (InBuff(5) == 0));
@@ -42,7 +42,7 @@ bit     ReadResultF(void)
 
 
 
-// запрос на времени/даты дл€ сумматоров —Ёћ+2
+// запрос на времени/даты
 void    QueryTimeF(void)
 {
   InitPushPck();
@@ -58,7 +58,7 @@ void    QueryTimeF(void)
 }
 
 
-// чтение времени/даты дл€ сумматоров —Ёћ+2
+// чтение времени/даты
 void    ReadTimeAltF(void)
 {
   InitPop(5);
@@ -88,7 +88,7 @@ void    QueryIdF(void)
 }
 
 
-bit     ReadIdF(void)
+bool    ReadIdF(void)
 {
   InitPop(0);
   if (PopChar() != diCurr.bAddress) return 0;
@@ -104,7 +104,7 @@ bit     ReadIdF(void)
 
 
 
-// запрос на чтение реальных показаний счЄтчиков дл€ сумматоров —Ёћ+2
+// запрос на чтение реальных показаний счЄтчиков
 void    QueryRealExtendedF(uchar  bQuery)
 {
 uchar   i;
@@ -126,7 +126,7 @@ uchar   i;
 }
 
 
-// чтение реальных показаний счЄтчиков дл€ сумматоров —Ёћ+2
+// чтение реальных показаний счЄтчиков
 void    ReadRealExtendedF(void)
 {
 uchar   i;
@@ -146,7 +146,7 @@ uchar   i;
 
 
 
-// запрос на чтение коэффициентов дл€ сумматоров —Ёћ+2
+// запрос на чтение коэффициентов
 void    QueryKoeffF(void)
 {
   InitPushPck();
@@ -163,7 +163,7 @@ void    QueryKoeffF(void)
 }
 
 
-// чтение коэффициентов дл€ сумматоров —Ёћ+2
+// чтение коэффициентов
 void    ReadKoeffF(void)
 {
   InitPop(5);
@@ -287,7 +287,7 @@ void    QueryEnergyF(void)
 }
 
 
-bit     ReadEnergyF(uchar  ibBlock)
+bool    ReadEnergyF(uchar  ibBlock)
 {
   NoShowTime(1);                                        // запрещаем автоматическое отображение времени
   

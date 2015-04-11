@@ -8,13 +8,13 @@ DEVICE_F.H
 
 void    QueryBreakF(void);
 
-//bit     ReadResultF(void);
+//bool    ReadResultF(void);
 //
 //void    QueryTimeF(void);
 //void    ReadTimeAltF(void);
 //
 //void    QueryIdF(void);
-//bit     ReadIdF(void);
+//bool    ReadIdF(void);
 //
 //void    QueryRealExtendedF(uchar  bQuery);
 //void    ReadRealExtendedF(void);
@@ -29,7 +29,7 @@ void    QueryBreakF(void);
 //
 //void    InitEnergyF(void);
 //void    QueryEnergyF(void);
-//bit     ReadEnergyF(uchar  ibBlock);
+//bool    ReadEnergyF(uchar  ibBlock);
 //
 //void    QueryCurrentF(void);
 //void    ReadCurrentF(void);
