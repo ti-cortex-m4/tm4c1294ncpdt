@@ -21,11 +21,11 @@ void    OutFlashMap(void)
   InitPushCRC();
 
   uint i;
-  for (i=0; i<2000; i++) PushChar(0);
+  for (i=0; i<3000; i++) PushChar(0);
 
   InitPushCRC();
 
   #include        "../include/out_flash.txt"
 
-  Output(2000);
+  Output(3000);
 }
