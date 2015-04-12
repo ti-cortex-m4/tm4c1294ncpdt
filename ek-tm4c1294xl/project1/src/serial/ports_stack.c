@@ -152,7 +152,8 @@ void    PushStringSkip(char  *psz, uchar  bSize)
   while (true)
   {
     if (!*psz) break;
-    if (++i > bSize) PushChar(*psz++);
+    uchar b = *psz++;
+    if (++i > bSize) PushChar(b);
   }
 }
 

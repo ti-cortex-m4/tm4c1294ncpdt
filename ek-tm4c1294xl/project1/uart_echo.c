@@ -94,12 +94,12 @@ int main(void) {
 	InitFlow();
 
 	InitSlide();
-	InitStorage();
 
   PrintStart();
 	InitRealtime();
   PrintStop();
 
+	InitStorage();
 	InitDisplay();
 
 //    InitCurrent();
