@@ -1,19 +1,19 @@
 ﻿[Modules]
 Module0=D:\Cortex\tm4c1294ncpdt\checksum\checksum.dproj
-Module1=c:\program files (x86)\embarcadero\rad studio\9.0\SOURCE\RTL\SYS\System.pas
-Module2=c:\program files (x86)\embarcadero\rad studio\9.0\source\rtl\common\System.IOUtils.pas
+Module1=c:\program files (x86)\embarcadero\rad studio\9.0\source\rtl\common\System.IOUtils.pas
+Module2=c:\program files (x86)\embarcadero\rad studio\9.0\SOURCE\RTL\SYS\System.pas
 Count=3
 EditWindowCount=1
 
 [D:\Cortex\tm4c1294ncpdt\checksum\checksum.dproj]
 ModuleType=TBaseProject
 
-[c:\program files (x86)\embarcadero\rad studio\9.0\SOURCE\RTL\SYS\System.pas]
+[c:\program files (x86)\embarcadero\rad studio\9.0\source\rtl\common\System.IOUtils.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[c:\program files (x86)\embarcadero\rad studio\9.0\source\rtl\common\System.IOUtils.pas]
+[c:\program files (x86)\embarcadero\rad studio\9.0\SOURCE\RTL\SYS\System.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
@@ -57,8 +57,8 @@ BottomMiddelPanelData=0000080001020100000009000000446F636B53697465309A1D00000000
 CustomEditViewType=TEditView
 Module=D:\Cortex\tm4c1294ncpdt\checksum\checksum.dpr
 CursorX=1
-CursorY=41
-TopLine=22
+CursorY=20
+TopLine=6
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -67,8 +67,8 @@ EditViewName=D:\Cortex\tm4c1294ncpdt\checksum\checksum.dpr
 [View1]
 CustomEditViewType=TEditView
 Module=c:\program files (x86)\embarcadero\rad studio\9.0\source\rtl\common\System.IOUtils.pas
-CursorX=1
-CursorY=457
+CursorX=58
+CursorY=452
 TopLine=434
 LeftCol=1
 Elisions=
@@ -79,26 +79,17 @@ EditViewName=c:\program files (x86)\embarcadero\rad studio\9.0\source\rtl\common
 CustomEditViewType=TEditView
 Module=c:\program files (x86)\embarcadero\rad studio\9.0\SOURCE\RTL\SYS\System.pas
 CursorX=1
-CursorY=24955
-TopLine=24937
+CursorY=319
+TopLine=308
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=c:\program files (x86)\embarcadero\rad studio\9.0\SOURCE\RTL\SYS\System.pas
 
 [Watches]
-Count=11
-Watch0='SourceList',256,0,18,1,0,'Watches',0
-Watch1='ParamStr(1)',256,0,18,1,0,'Watches',0
-Watch2='ParamCount',256,0,18,1,0,'Watches',0
-Watch3='s',256,0,18,1,0,'Watches',0
-Watch4='a',256,0,18,1,0,'Watches',0
-Watch5='b',256,0,18,1,0,'Watches',0
-Watch6='z',256,0,18,1,0,'Watches',0
-Watch7='PrevName',256,0,18,1,0,'Watches',0
-Watch8='PrevAddr',256,0,18,1,0,'Watches',0
-Watch9='CurrName',256,0,18,1,0,'Watches',0
-Watch10='CurrAddr',256,0,18,1,0,'Watches',0
+Count=2
+Watch0='b',256,0,18,1,0,'Watches',1
+Watch1='Length(b)',256,0,18,1,0,'Watches',1
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -122,10 +113,11 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=3
-Breakpoint0='D:\Cortex\tm4c1294ncpdt\checksum\checksum.dpr',36,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint1='D:\Cortex\tm4c1294ncpdt\checksum\checksum.dpr',41,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint2='D:\Cortex\tm4c1294ncpdt\checksum\checksum.dpr',35,'',0,1,'',1,0,0,'',1,'','','',0,''
+Count=4
+Breakpoint0='D:\Cortex\tm4c1294ncpdt\checksum\checksum.dpr',22,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint1='D:\Cortex\tm4c1294ncpdt\checksum\checksum.dpr',18,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint2='D:\Cortex\tm4c1294ncpdt\checksum\checksum.dpr',20,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint3='D:\Cortex\tm4c1294ncpdt\checksum\checksum.dpr',19,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin64Debugger_AddressBreakpoints]
 Count=0
