@@ -88,6 +88,8 @@ void    CloseSpecial(void)
 // TODO CloseSpecialBuff - add flags
 void    CloseSpecialBuff(void)
 {
+  SaveImpHouBuff();
+
   SaveImpDayBuff();
   SaveImpMonBuff();
 
