@@ -338,7 +338,7 @@ uchar   i;
   mpbPageOut[wFREEPAGE_SIZE+2] = wPageOut / 0x100;
   mpbPageOut[wFREEPAGE_SIZE+3] = wPageOut % 0x100;
 
-  memcpy(&mpbPageOut[wFREEPAGE_SIZE+4], &tiCurr,   sizeof(time));
+  memcpy(&mpbPageOut[wFREEPAGE_SIZE+4], &tiCurr, sizeof(time));
 
   MakeCRC16(mpbPageOut, wPAGE_SIZE-2);
 

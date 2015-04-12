@@ -12,7 +12,7 @@ RESPONSE252_CRC.C
 #include        "../output/response_crc.h"
 #include        "../output/out_delay.h"
 #include        "../output/out_realtime.h"
-#include        "../output/out_flash_map.h"
+#include        "../output/out_flash_stack.h"
 #include        "../output/out_health.h"
 
 
@@ -27,7 +27,7 @@ void    Response252_CRC(void)
 
     case 2: OutRealtime(); break;
 
-    case 3: OutFlashMap(); break;
+    case 3: OutFlashStack(); break;
 
     case 4: OutHealth(); break;
 

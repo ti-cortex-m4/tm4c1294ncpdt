@@ -14,6 +14,7 @@ STORAGE.C
 #include        "../energy3.h"
 #include        "../display/display.h"
 #include        "../time/delay.h"
+#include        "../time/calendar.h"
 
 
 
@@ -42,9 +43,19 @@ void    ShowFlashRead(void)
 
 
 
-void    InitStorage(void)
+void    InitStorage(void) // TODO InitStorage
 {
-  LoadImpHouBuff();
+  wPageIn = FLS_IMPHOUCAN_BUFF;
+  if (SafePageRead())
+  {
+    time ti;
+    memcpy(&ti, &mpbPageIn[wFREEPAGE_SIZE+4], sizeof(time));
+
+    ulong dw1 = DateToHouIndex(ti);
+    ulong dw2 = DateToHouIndex(tiCurr);
+
+    if (dw1 == dw2) LoadImpHouBuff();
+  }
 
   LoadImpDayBuff();
   LoadImpMonBuff();
