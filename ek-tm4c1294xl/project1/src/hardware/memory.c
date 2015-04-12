@@ -9,6 +9,10 @@ TODO MEMORY.C
 
 
 
+char const              szImageSize[] = "ImageSize    ";
+
+
+
 void    InitCODE(void)
 {
 }
@@ -17,7 +21,7 @@ void    InitCODE(void)
 
 ulong   GetCODESize(void)
 {
-  return 0;
+  return szImageSize[0];
 }
 
 
