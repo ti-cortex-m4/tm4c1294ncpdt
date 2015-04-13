@@ -17,6 +17,7 @@ RESPONSE255_CRC.C
 #include        "../output/out_relaxs.h"
 #include        "../devices/extended_4.h"
 #include        "../devices/extended_5.h"
+#include        "../devices/extended_7.h"
 #include        "../output/out_gaps.h"
 #include        "../output/out_decret.h"
 #include        "../output/out_digitals.h"

@@ -3,40 +3,37 @@ EXTENDED_7.C
 
  Сохранение значений счетчиков на начало суток
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "files.h"
-#include        "files_far.h"
-#include        "rtc.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "queries.h"
-#include        "ports.h"
-#include        "sensors.h"
+
+#include        "../main.h"
+//#include        "../memory/mem_digitals.h"
+//#include        "../memory/mem_realtime.h"
+//#include        "../memory/mem_profile.h"
+#include        "../memory/mem_extended_7.h"
+#include        "../digitals/digitals.h"
+//#include        "../digitals/digitals_display.h"
+#include        "../devices/devices.h"
+#include        "../serial/ports.h"
+//#include        "../time/rtc.h"
+#include        "extended_7.h"
 
 
 
-bit     SaveCntDayCan7(uchar  ibDayTo)
+bool    SaveCntDayCan7(uchar  ibDayTo)
 {
   OpenOut(wFLA_CNTDAYCAN7 + ibDayTo*bVALUE6);
 
-  if (Save_Far(mpCntDayCan7Curr, sizeof(value6)*bCANALS) == 0)
+  if (Save_Far(mpCntDayCan7, sizeof(value6)*bCANALS) == 0)
     return(0);
 
   return( CloseOut() );
 }
 
 
-#ifndef MODBUS
-
-bit     LoadCntDayCan7(uchar  ibDayFrom)
+bool    LoadCntDayCan7(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
-    memcpy(mpCntDayCan7Buff, mpCntDayCan7Curr, sizeof(value6)*bCANALS);
+    memcpy(mpCntDayCan7Buff, mpCntDayCan7, sizeof(value6)*bCANALS);
     return(1);
   }
   else
@@ -46,17 +43,15 @@ bit     LoadCntDayCan7(uchar  ibDayFrom)
   }
 }
 
-#endif
 
 
 void    ResetExtended7(void) 
 { 
-uchar   i;
-
   cwDayCan7 = 0;
 
-  memset(&mpCntDayCan7Curr, 0, sizeof(mpCntDayCan7Curr));
+  memset(&mpCntDayCan7, 0, sizeof(mpCntDayCan7));
 
+  uchar i;
   for (i=0; i<bDAYS; i++)
     SaveCntDayCan7(i);
 }
@@ -69,8 +64,9 @@ void    NextDayExtended7(void)
 
   SaveCntDayCan7(ibHardDay);
 
-  memset(&mpCntDayCan7Curr, 0, sizeof(mpCntDayCan7Curr));
+  memset(&mpCntDayCan7, 0, sizeof(mpCntDayCan7));
 
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     if (GetDigitalDevice(ibCan) == 0)
@@ -83,33 +79,29 @@ void    NextDayExtended7(void)
       v6Buff.reSelf = reBuffA;
       v6Buff.tiSelf = *PGetCurrTimeDate();
 
-      mpCntDayCan7Curr[ibCan] = v6Buff;
+      mpCntDayCan7[ibCan] = v6Buff;
     }
   }
 }
 
 
 
-void    MakeExtended7(uchar  ibCanal)
+void    MakeExtended7(uchar  ibCan)
 {
-  if (mpCntDayCan7Curr[ibCanal].bSelf == ST4_NONE)
+  if (mpCntDayCan7[ibCan].bSelf == ST4_NONE)
   {
     v6Buff.bSelf = ST4_OK; 
     v6Buff.reSelf = reBuffA;
     v6Buff.tiSelf = *PGetCurrTimeDate();
 
-    mpCntDayCan7Curr[ibCanal] = v6Buff;
+    mpCntDayCan7[ibCan] = v6Buff;
   }
 }
 
 
 
-#ifndef MODBUS
-
 void    OutExtended7(void)
 {
-uchar   i;
-
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
   else if (InBuff(6) >= bDAYS)
@@ -120,8 +112,9 @@ uchar   i;
 
     InitPushPtr();            
     PushInt(cwDayCan7);
-    wBuffD = 2;
+    uint wBuffD = 2;
 
+    uchar i;
     for (i=0; i<bCANALS; i++)
     {
       if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
@@ -134,6 +127,3 @@ uchar   i;
     OutptrOutBuff(wBuffD);
   }
 }
-
-#endif
-*/

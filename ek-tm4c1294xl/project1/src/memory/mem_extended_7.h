@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-MEM_EXTENDED_6.H
+MEM_EXTENDED_7.H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  value6                  mpCntDayCan7Curr[bCANALS], mpCntDayCan7Buff[bCANALS];
+extern  value6                  mpCntDayCan7[bCANALS], mpCntDayCan7Buff[bCANALS];
 
 extern  uint                    cwDayCan7;

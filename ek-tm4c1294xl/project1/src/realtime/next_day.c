@@ -16,6 +16,7 @@ NEXT_DAY.C
 #include        "../digitals/answer.h"
 #include        "../devices/extended_4.h"
 #include        "../devices/extended_5.h"
+#include        "../devices/extended_7.h"
 #include        "../special/defects.h"
 #include        "../special/recalc_def.h"
 #include        "realtime_storage.h"

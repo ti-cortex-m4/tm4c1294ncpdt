@@ -8,6 +8,7 @@ EXTENDED_1.Ñ
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_extended_1.h"
+#include        "../memory/mem_extended_7.h"
 #include        "../display/display.h"
 #include        "../keyboard/keyboard.h"
 #include        "../hardware/watchdog.h"
