@@ -4,11 +4,11 @@ RECALC_DEF.H
 
 ------------------------------------------------------------------------------*/
 
-bool    SaveDefDay(uchar  ibDayTo);
-bool    LoadDefDay(uchar  ibDayFrom);
+boolean SaveDefDay(uchar  ibDayTo);
+boolean LoadDefDay(uchar  ibDayFrom);
 
-bool    SaveDefMon(uchar  ibMonTo);
-bool    LoadDefMon(uchar  ibMonFrom);
+boolean SaveDefMon(uchar  ibMonTo);
+boolean LoadDefMon(uchar  ibMonFrom);
 
 void    InitDef(void);
 void    ResetDef(void);
