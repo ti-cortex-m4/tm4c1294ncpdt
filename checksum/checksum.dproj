@@ -3,7 +3,7 @@
 			<ProjectGuid>{DAE7741A-7963-4F55-902A-89A6242DF945}</ProjectGuid>
 			<MainSource>checksum.dpr</MainSource>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Config Condition="'$(Config)'==''">Release</Config>
 			<TargetedPlatforms>1</TargetedPlatforms>
 			<AppType>Console</AppType>
 			<FrameworkType>None</FrameworkType>
@@ -72,7 +72,9 @@
 			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-			<Debugger_RunParams>project1.bin project2.bin</Debugger_RunParams>
+			<Debugger_CWD>D:\Shared\Cortex\checksum</Debugger_CWD>
+			<Debugger_HostApplication>D:\Shared\Cortex\checksum\checksum.exe</Debugger_HostApplication>
+			<Debugger_RunParams>project1.bin</Debugger_RunParams>
 		</PropertyGroup>
 		<ItemGroup>
 			<DelphiCompile Include="$(MainSource)">

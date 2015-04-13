@@ -9,7 +9,7 @@ TODO MEMORY.C
 
 
 
-char const              szImageSize[] = "ImageSize    ";
+char const              szImageSize[] = "ImageSize    ImageSize";
 
 
 
