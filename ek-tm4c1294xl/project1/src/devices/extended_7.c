@@ -20,28 +20,22 @@ EXTENDED_7.C
 
 
 
-bool    SaveCntDayCan7(uchar  ibDayTo)
+boolean SaveCntDayCan7(uchar  ibDayTo)
 {
-  OpenOut(FLS_EXT_7_VALUES + ibDayTo*VALUE7_CAN_PAGES);
-
-  if (Save(mpCntDayCan7, sizeof(value6)*bCANALS) == 0)
-    return 0;
-
-  return CloseOut();
+  return SaveBuff(FLS_EXT_7_VALUES + ibDayTo*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
 }
 
 
-bool    LoadCntDayCan7(uchar  ibDayFrom)
+boolean LoadCntDayCan7(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
     memcpy(mpCntDayCan7Buff, mpCntDayCan7, sizeof(mpCntDayCan7));
-    return 1;
+    return TRUE;
   }
   else
   {
-    OpenIn(FLS_EXT_7_VALUES + ibDayFrom*VALUE7_CAN_PAGES);
-    return Load(mpCntDayCan7Buff, sizeof(mpCntDayCan7));
+    return LoadBuff(FLS_EXT_7_VALUES + ibDayFrom*VALUE7_CAN_PAGES, mpCntDayCan7Buff, sizeof(mpCntDayCan7Buff));
   }
 }
 

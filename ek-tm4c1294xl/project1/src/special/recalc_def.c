@@ -15,40 +15,28 @@ RECALC_DEF.C
 
 
 
-bool    SaveDefDay(uchar  ibDayTo)
+boolean SaveDefDay(uchar  ibDayTo)
 {
-  OpenOut(FLS_DEFDAYCAN + ibDayTo*bIMPULSE_CAN);
-
-  if (Save(mpdeDayCan, sizeof(impulse)*bCANALS) == 0)
-    return(0);
-
-  return( CloseOut() );
+  return SaveBuff(FLS_DEFDAYCAN + ibDayTo*bIMPULSE_CAN, mpdeDayCan, sizeof(mpdeDayCan));
 }
 
 
-bool    LoadDefDay(uchar  ibDayFrom)
+boolean LoadDefDay(uchar  ibDayFrom)
 {
-  OpenIn(FLS_DEFDAYCAN + ibDayFrom*bIMPULSE_CAN);
-  return( Load(mpdeDayCan, sizeof(impulse)*bCANALS) );
+  return LoadBuff(FLS_DEFDAYCAN + ibDayFrom*bIMPULSE_CAN, mpdeDayCan, sizeof(mpdeDayCan));
 }
 
 
 
-bool    SaveDefMon(uchar  ibMonTo)
+boolean SaveDefMon(uchar  ibMonTo)
 {
-  OpenOut(FLS_DEFMONCAN + ibMonTo*bIMPULSE_CAN);
-
-  if (Save(mpdeMonCan, sizeof(impulse)*bCANALS) == 0)
-    return(0);
-
-  return( CloseOut() );
+  return SaveBuff(FLS_DEFMONCAN + ibMonTo*bIMPULSE_CAN, mpdeMonCan, sizeof(mpdeMonCan));
 }
 
 
-bool    LoadDefMon(uchar  ibMonFrom)
+boolean LoadDefMon(uchar  ibMonFrom)
 {
-  OpenIn(FLS_DEFMONCAN + ibMonFrom*bIMPULSE_CAN);
-  return( Load(mpdeMonCan, sizeof(impulse)*bCANALS) );
+  return LoadBuff(FLS_DEFMONCAN + ibMonFrom*bIMPULSE_CAN, mpdeMonCan, sizeof(mpdeMonCan));
 }
 
 
