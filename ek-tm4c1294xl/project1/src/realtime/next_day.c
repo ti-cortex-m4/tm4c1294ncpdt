@@ -29,7 +29,7 @@ void    NextDay(void)
   NextDayExtended4();
   NextDayExtended5();
 //  NextDayExtended6();
-//  NextDayExtended7();
+  NextDayExtended7();
 
   MakeCntMonCan();
   MakeAllCurrTariffs();

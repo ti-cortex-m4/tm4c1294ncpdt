@@ -196,7 +196,7 @@ void    MakeExtended1(void)
           mptiEsc_S[c] = *GetCurrTimeDate();
 
 //          MakeExtended6(ibCan);
-//          MakeExtended7(ibCan);
+          MakeExtended7(ibCan);
 //          MakeDiagram(ibCan);
 
           mpboDefEscS[c] = TRUE;
