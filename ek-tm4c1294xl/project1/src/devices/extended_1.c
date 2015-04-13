@@ -197,7 +197,7 @@ void    MakeExtended1(void)
           mptiEsc_S[c] = *GetCurrTimeDate();
 
 //          MakeExtended6(c);
-          MakeExtended7(c);
+          MakeExtended7(c, reBuffA);
 //          MakeDiagram(c);
 
           mpboDefEscS[c] = TRUE;

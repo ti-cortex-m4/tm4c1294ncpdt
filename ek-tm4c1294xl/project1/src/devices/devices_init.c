@@ -39,6 +39,7 @@ DEVICES_INIT.C
 #include        "extended_4.h"
 #include        "extended_5.h"
 #include        "extended_4t.h"
+#include        "extended_7.h"
 #include        "devices_input.h"
 #include        "devices_postinput.h"
 #include        "devices_pause.h"
@@ -113,6 +114,7 @@ void    InitDevices(void)
   InitExtended4();
   InitExtended5();
   InitExtended4T();
+  InitExtended7();
 }
 
 
@@ -149,4 +151,5 @@ void    ResetDevices(void)
   ResetExtended4();
   ResetExtended5();
   ResetExtended4T();
+  ResetExtended7();
 }
