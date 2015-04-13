@@ -8,12 +8,14 @@ EXTENDED_7.C
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_realtime.h"
 #include        "../memory/mem_factors.h"
+#include        "../memory/mem_energy.h"
 #include        "../memory/mem_extended_7.h"
 #include        "../digitals/digitals.h"
 #include        "../devices/devices.h"
 #include        "../serial/ports.h"
 #include        "../time/rtc.h"
 #include        "../flash/files.h"
+#include        "../energy.h"
 #include        "extended_7.h"
 
 
@@ -45,15 +47,20 @@ bool    LoadCntDayCan7(uchar  ibDayFrom)
 
 
 
+void    InitExtended7(void)
+{
+}
+
+
 void    ResetExtended7(void) 
 { 
   cwDayCan7 = 0;
 
   memset(&mpCntDayCan7, 0, sizeof(mpCntDayCan7));
 
-  uchar i;
-  for (i=0; i<bDAYS; i++)
-    SaveCntDayCan7(i);
+  uchar d;
+  for (d=0; d<bDAYS; d++)
+    SaveCntDayCan7(d);
 }
 
 
@@ -71,32 +78,32 @@ void    NextDayExtended7(void)
   {
     if (GetDigitalDevice(c) == 0)
     {
-      real reBuffA  = *PGetCanImpAll(mpimAbsCan,c);
-      reBuffA *= *PGetCanReal(mpreValueCntHou,c);
-      reBuffA += *PGetCanReal(mpreCount,c);
+      real re  = *PGetCanImpAll(mpimAbsCan,c);
+      re *= mpreValueCntHou[c];
+      re += mpreCount[c];
 
-      value6 v6Buff;
-      v6Buff.bSelf = ST4_OK; 
-      v6Buff.reSelf = reBuffA;
-      v6Buff.tiSelf = *GetCurrTimeDate();
+      value6 va;
+      va.bSelf = ST4_OK; 
+      va.reSelf = re;
+      va.tiSelf = *GetCurrTimeDate();
 
-      mpCntDayCan7[c] = v6Buff;
+      mpCntDayCan7[c] = va;
     }
   }
 }
 
 
 
-void    MakeExtended7(uchar  ibCan, real  reBuffA)
+void    MakeExtended7(uchar  ibCan, real  re)
 {
   if (mpCntDayCan7[ibCan].bSelf == ST4_NONE)
   {
-    value6 v6Buff;
-    v6Buff.bSelf = ST4_OK; 
-    v6Buff.reSelf = reBuffA;
-    v6Buff.tiSelf = *GetCurrTimeDate();
+    value6 va;
+    va.bSelf = ST4_OK; 
+    va.reSelf = re;
+    va.tiSelf = *GetCurrTimeDate();
 
-    mpCntDayCan7[ibCan] = v6Buff;
+    mpCntDayCan7[ibCan] = va;
   }
 }
 
