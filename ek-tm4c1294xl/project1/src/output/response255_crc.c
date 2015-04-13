@@ -217,6 +217,8 @@ void    Response255_CRC(void)
     case bEXT_GETGAPS1: OutGaps1(); break;
     case bEXT_GETGAPS2: OutGaps2(); break;
 
+    case bEXT_GETEXTENDED7: OutExtended7(); break;
+
     case bEXT_GETSTOPAUXCAN: OutStopAuxCan(); break;
 
     case bEXT_GETDECRET: OutDecret(); break;
