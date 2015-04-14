@@ -25,12 +25,12 @@ static boolean SaveCntDayCan7(uchar  ibDayTo)
   return SaveBuff(FLS_EXT_7_VALUES + ibDayTo*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
 }
 
-/*
+
 static boolean LoadCntDayCan7(uchar  ibDayFrom)
 {
   return LoadBuff(FLS_EXT_7_VALUES + ibDayFrom*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
 }
-*/
+
 
 static boolean LoadCntDayCanBuff7(uchar  ibDayFrom)
 {
@@ -49,6 +49,7 @@ static boolean LoadCntDayCanBuff7(uchar  ibDayFrom)
 
 void    InitExtended7(void)
 {
+  LoadCntDayCan7(ibHardDay);
 }
 
 
