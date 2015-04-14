@@ -68,8 +68,7 @@ real    re;
 
 
     // подготовка информации для Esc U
-    moT.ti1 = tiCurr;
-    moT.ti2 = *GetCurrTimeDate();
-    mpmoEsc_U[ibCan] = moT;
+    mptiEsc_U1[ibCan] = tiCurr;
+    mptiEsc_U2[ibCan] = *GetCurrTimeDate();
   }
 }
