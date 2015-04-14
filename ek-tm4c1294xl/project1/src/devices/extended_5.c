@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 EXTENDED_5.C
 
-
+ Cчетчики (раздельно по тарифам) на начало текущих суток
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
@@ -26,6 +26,7 @@ static char const       szExtended5[]   = "Опрос данных: 5 ";
 
 
 file const              flExt5Flag = {FLS_EXT_5_FLAG, &boExt5Flag, sizeof(boolean)};
+file const              flExt5Values = {FLS_EXT_5_VALUES, &mpvaValue51, sizeof(mpvaValue51)};
 
 
 static value50          vaBuff[4];
@@ -35,6 +36,7 @@ static value50          vaBuff[4];
 void    InitExtended5(void)
 {
   LoadFile(&flExt5Flag);
+  LoadFile(&flExt5Values);
 }
 
 
@@ -42,6 +44,9 @@ void    ResetExtended5(void)
 {
   boExt5Flag = FALSE;
   SaveFile(&flExt5Flag);
+
+  memset(&mpvaValue51, 0, sizeof(mpvaValue51));
+  SaveFile(&flExt5Values);
 }
 
 
@@ -156,6 +161,14 @@ void    NextDayExtended5(void)
   {
     mpvaValue51[c].boSelf = FALSE;
   }
+
+  SaveFile(&flExt5Values);
+}
+
+
+void    CloseExtended5(void)
+{
+  SaveFile(&flExt5Values);
 }
 
 
