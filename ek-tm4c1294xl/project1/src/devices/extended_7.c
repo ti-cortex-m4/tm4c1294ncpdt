@@ -20,19 +20,19 @@ EXTENDED_7.C
 
 
 
-boolean SaveCntDayCan7(uchar  ibDayTo)
+static boolean SaveCntDayCan7(uchar  ibDayTo)
 {
   return SaveBuff(FLS_EXT_7_VALUES + ibDayTo*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
 }
 
-
-boolean LoadCntDayCan7(uchar  ibDayFrom)
+/*
+static boolean LoadCntDayCan7(uchar  ibDayFrom)
 {
   return LoadBuff(FLS_EXT_7_VALUES + ibDayFrom*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
 }
+*/
 
-
-boolean LoadCntDayCanBuff7(uchar  ibDayFrom)
+static boolean LoadCntDayCanBuff7(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
@@ -93,7 +93,7 @@ void    NextDayExtended7(void)
 }
 
 
-void    FlushExtended7(void)
+void    CloseExtended7(void)
 {
   SaveCntDayCan7(ibHardDay);
 }

@@ -47,7 +47,7 @@ void    NextDay(void)
   memset(&mpimDayCan[ibSoftDay], 0, sizeof(impulse)*bCANALS);
   memset(&mppoDayGrp[ibSoftDay], 0, sizeof(power)*bGROUPS);
 
-  FlushExtended7();
+  CloseExtended7();
 
   // обработка брака по суткам
   MakeDefectDay(0, &tiCurr);

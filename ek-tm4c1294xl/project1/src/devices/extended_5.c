@@ -78,7 +78,7 @@ bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 }
 
 
-bool    CoreExtended5(void)
+static bool MakeDevices(void)
 {
   memset(&vaBuff, 0, sizeof(vaBuff));  
 
@@ -108,7 +108,7 @@ void    MakeExtended5(void)
   {
     ShowHi(szExtended5); Clear();
    
-    if (CoreExtended5() == 1)
+    if (MakeDevices() == 1)
     {
       LoadCurrDigital(ibDig);
 
@@ -159,7 +159,6 @@ void    NextDayExtended5(void)
 }
 
 
-#ifndef MODBUS
 
 void    OutExtended50(void)
 {
@@ -212,5 +211,3 @@ void    OutExtended51(void)
     OutptrOutBuff(wSize);
   }
 }
-
-#endif
