@@ -28,6 +28,12 @@ boolean SaveCntDayCan7(uchar  ibDayTo)
 
 boolean LoadCntDayCan7(uchar  ibDayFrom)
 {
+  return LoadBuff(FLS_EXT_7_VALUES + ibDayFrom*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
+}
+
+
+boolean LoadCntDayCanBuff7(uchar  ibDayFrom)
+{
   if (ibDayFrom == ibHardDay)
   {
     memcpy(mpCntDayCan7Buff, mpCntDayCan7, sizeof(mpCntDayCan7));
@@ -59,7 +65,7 @@ void    ResetExtended7(void)
 
 
 
-void    NextDayExtended7(void) 
+void    NextDayExtended7(void)
 { 
   cwDayCan7++;
 
@@ -72,7 +78,7 @@ void    NextDayExtended7(void)
   {
     if (GetDigitalDevice(c) == 0)
     {
-      real re  = *PGetCanImpAll(mpimAbsCan,c);
+      real re = *PGetCanImpAll(mpimAbsCan,c);
       re *= mpreValueCntHou[c];
       re += mpreCount[c];
 
@@ -84,6 +90,12 @@ void    NextDayExtended7(void)
       mpCntDayCan7[c] = va;
     }
   }
+}
+
+
+void    FlushExtended7(void)
+{
+  SaveCntDayCan7(ibHardDay);
 }
 
 
@@ -111,7 +123,7 @@ void    OutExtended7(void)
     Result(bRES_BADADDRESS);
   else
   {
-    LoadCntDayCan7( (bDAYS+ibHardDay-InBuff(6)) % bDAYS );
+    LoadCntDayCanBuff7( (bDAYS+ibHardDay-InBuff(6)) % bDAYS );
 
     InitPushPtr();            
     PushInt(cwDayCan7);
