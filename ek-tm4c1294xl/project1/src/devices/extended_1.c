@@ -46,7 +46,8 @@ void    InitExtended1(void)
   memset(&mpreEsc_V, 0, sizeof(mpreEsc_V));
   memset(&mptiEsc_V, 0, sizeof(mptiEsc_V));
 
-  memset(&mpmoEsc_U, 0, sizeof(mpmoEsc_U));
+  memset(&mptiEsc_U1, 0, sizeof(mptiEsc_U1));
+  memset(&mptiEsc_U2, 0, sizeof(mptiEsc_U2));
 
   LoadFile(&flDsblEscU);
   LoadFile(&flDsblEscV);
@@ -111,18 +112,17 @@ void    MakeExtended1(void)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          moT.ti1 = tiChannelC;
+          mptiEsc_U1[c] = tiChannelC;
           mpcwEscU_OK[c]++;
 
-          moT.ti2 = *GetCurrTimeDate();
-          mpmoEsc_U[c] = moT;
+          mptiEsc_U2[c] = *GetCurrTimeDate();
 
           mpboDefEscU[c] = TRUE;
           //AddDigRecord(EVE_ESC_U_DATA);
         }
         else
         {
-          moT.ti1 = tiZero;
+          tiChannelC = tiZero;
           mpcwEscU_Error[c]++;
         }
       }

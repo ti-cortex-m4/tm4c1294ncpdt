@@ -87,6 +87,8 @@ real    re;
 void    OutSimpleEscUExt(void)
 {
 uint    wSize;
+time    ti1;
+time    ti2;
 
   SaveDisplay();
   sprintf(szHi,"Порт %u: CRC%03u ",ibPort+1,bInBuff5); Clear();
@@ -105,35 +107,41 @@ uint    wSize;
 
       if (GetDigitalDevice(c) == 0)
       {
-        moT.ti1 = *GetCurrTimeDate();
-        moT.ti2 = moT.ti1;
+        ti1 = *GetCurrTimeDate();
+        ti2 = ti1;
       }
       else if (mpboEnblCan[c] == FALSE)
       {
-        moT.ti1 = tiZero;
-        moT.ti2 = moT.ti1;
+        ti1 = tiZero;
+        ti2 = ti1;
       }
       else if ((boExtendedEscU == TRUE) || (GetDigitalPhone(c) != 0))
-        moT = mpmoEsc_U[c];
+      {
+        ti1 = mptiEsc_U1[c];
+        ti2 = mptiEsc_U2[c];
+      }
       else
       {
         LoadCurrDigital(c);
         if (mpboChannelsA[diCurr.ibLine] == TRUE)
-          moT.ti1 = tiChannelC;
+          ti1 = tiChannelC;
         else
         {
           uchar p = ibPort;
           bool f = ReadTimeCan(c);
           ibPort = p;
 
-          if (f == 0) moT.ti1 = tiZero; else moT.ti1 = tiAlt;
+          if (f == 0) ti1 = tiZero; else ti1 = tiAlt;
         }
 
-        moT.ti2 = *GetCurrTimeDate();
+        ti2 = *GetCurrTimeDate();
       }
 
-      Push(&moT, sizeof(moment));
-      wSize += sizeof(moment);
+      PushTime(&ti1);
+      wSize += sizeof(time);
+
+      PushTime(&ti2);
+      wSize += sizeof(time);
     }
   }
 

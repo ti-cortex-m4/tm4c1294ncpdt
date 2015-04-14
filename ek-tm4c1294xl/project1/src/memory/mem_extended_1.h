@@ -12,9 +12,9 @@ extern  real                    mpreEsc_V[bCANALS];
 
 extern  time                    mptiEsc_V[bCANALS];
 
-extern  moment                  moT;
+extern  time                    mptiEsc_U1[bCANALS];
 
-extern  moment                  mpmoEsc_U[bCANALS];
+extern  time                    mptiEsc_U2[bCANALS];
 
 
 

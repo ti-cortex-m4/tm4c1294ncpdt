@@ -50,14 +50,6 @@ typedef struct
 } time2;
 
 
-// тип 'двойное время/дата'
-typedef struct
-{
-  time          ti1;
-  time          ti2;
-} moment;
-
-
 // тип 'комбинированный 32 бита'
 typedef union
 {

@@ -21,10 +21,10 @@ real                    mpreEsc_V[bCANALS];
 time                    mptiEsc_V[bCANALS];
 
 //
-moment                  moT;
+time                    mptiEsc_U1[bCANALS];
 
 //
-moment                  mpmoEsc_U[bCANALS];
+time                    mptiEsc_U2[bCANALS];
 
 
 
