@@ -75,7 +75,7 @@ static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "
 
 uchar   GetMaxItem(item  it)
 {
-  if (it == GROUPS)
+  if (it == BY_GROUPS)
     return(bGROUPS);
   else
     return(bCANALS);
@@ -84,7 +84,7 @@ uchar   GetMaxItem(item  it)
 
 void    ShowItemName(item  it)
 {
-  if (it == GROUPS)
+  if (it == BY_GROUPS)
     Group();
   else
     Canal();
@@ -437,7 +437,7 @@ void    key_GetSingle(item  it)
 
   else if (bKey == bKEY_MINUS)
   {
-    if ((it == GROUPS) && (enKeyboard == KBD_POSTENTER))
+    if ((it == BY_GROUPS) && (enKeyboard == KBD_POSTENTER))
     {
       if (++ibY >= 3) 
         ibY = 0;

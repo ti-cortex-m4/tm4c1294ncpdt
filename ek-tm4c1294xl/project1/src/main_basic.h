@@ -71,8 +71,8 @@ typedef union
 // тип 'канал/группа'
 typedef enum
 {
-  CANALS,
-  GROUPS
+  BY_CANALS,
+  BY_GROUPS
 } item;
 
 
