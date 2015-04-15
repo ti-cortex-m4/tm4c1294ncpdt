@@ -21,11 +21,12 @@ void    CloseExtended6(void);
 
 void    MakeExtended6(uchar  ibCan, real  re);
 
-//void    OutExtended6(void);
-//void    ShowCntMonCan6(uchar  ibCan, uchar  ibMon);
+void    OutExtended6(void);
 
-//bool    CheckDirectCnt1(uchar  ibCan);
-//bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon);
-//void    ShowDirectCnt(uchar  ibCan);
-//void    LoadDirectCntReal(uchar  ibCan);
-//void    LoadDirectCntTime(uchar  ibCan);
+void    ShowCntMonCan6(uchar  ibCan, uchar  ibMon);
+bool    CheckDirectCnt1(uchar  ibCan);
+bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon);
+void    ShowDirectCnt(uchar  ibCan);
+
+void    LoadDirectCntReal(uchar  ibCan);
+void    LoadDirectCntTime(uchar  ibCan);

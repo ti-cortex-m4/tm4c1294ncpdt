@@ -55,8 +55,8 @@ void    ResetExtended6(void)
   cwDayCan6 = 0;
   cwMonCan6 = 0;
 
-  boExt4Flag = FALSE;
-  SaveFile(&flExt4Flag);
+  boExt6Flag = FALSE;
+  SaveFile(&flExt6Flag);
 
 
   memset(&mpCntMonCan6, 0, sizeof(mpCntMonCan6));
@@ -210,8 +210,8 @@ value6 va;
 
 bool    CheckDirectCnt1(uchar  ibCan)
 {
-  return (((boDirectCntD == TRUE) && (GetDigitalDevice(ibCan) == 4)) ||
-                                     (GetDigitalDevice(ibCan) == 21));
+  return (((boExt6Flag == TRUE) && (GetDigitalDevice(ibCan) == 4)) ||
+                                   (GetDigitalDevice(ibCan) == 21));
 }
 
 

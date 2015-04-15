@@ -17,6 +17,7 @@ RESPONSE255_CRC.C
 #include        "../output/out_relaxs.h"
 #include        "../devices/extended_4.h"
 #include        "../devices/extended_5.h"
+#include        "../devices/extended_6.h"
 #include        "../devices/extended_7.h"
 #include        "../output/out_gaps.h"
 #include        "../output/out_decret.h"
@@ -185,6 +186,8 @@ void    Response255_CRC(void)
     case bEXT_GETEXTENDED41:  OutExtended41();  break;
     case bEXT_GETEXTENDED42:  OutExtended42();  break;
     case bEXT_GETEXTENDED43:  OutExtended43();  break;
+
+    case bEXT_GETEXTENDED6:   OutExtended6();   break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;
