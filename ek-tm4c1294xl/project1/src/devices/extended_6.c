@@ -13,6 +13,7 @@ EXTENDED_6.C
 #include        "../realtime/realtime.h"
 #include        "../serial/ports.h"
 #include        "../time/rtc.h"
+#include        "../time/timedate.h"
 #include        "../console.h"
 #include        "../energy2.h"
 #include        "extended_6.h"
@@ -22,6 +23,11 @@ EXTENDED_6.C
 //                                         0123456789ABCDEF
 static char const       szNone[]        = "*    пусто      ";
 
+
+
+void    InitExtended6(void)
+{
+}
 
 
 void    ResetExtended6(void) 
@@ -47,11 +53,11 @@ void    NextMonExtended6(void)
 }
 
 
-void    MakeExtended6(uchar  ibCan)
+void    MakeExtended6(uchar  ibCan, real  re)
 {
   value6 va;
   va.bSelf = ST4_OK;
-  va.reSelf = reBuffA;
+  va.reSelf = re;
   va.tiSelf = *GetCurrTimeDate();
  
   mpCntMonCan6_[ibHardMon][ibCan] = va;

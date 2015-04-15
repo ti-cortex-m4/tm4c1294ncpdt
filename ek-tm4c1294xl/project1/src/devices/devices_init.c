@@ -114,6 +114,7 @@ void    InitDevices(void)
   InitExtended4();
   InitExtended5();
   InitExtended4T();
+  InitExtended6();
   InitExtended7();
 }
 
@@ -151,5 +152,6 @@ void    ResetDevices(void)
   ResetExtended4();
   ResetExtended5();
   ResetExtended4T();
+  ResetExtended6();
   ResetExtended7();
 }

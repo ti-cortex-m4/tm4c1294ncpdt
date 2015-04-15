@@ -4,7 +4,9 @@ EXTENDED_6.H
 
 ------------------------------------------------------------------------------*/
 
-//void    ResetExtended6(void);
+void    InitExtended6(void);
+void    ResetExtended6(void);
+
 //void    NextDayExtended6(void);
 //void    NextMonExtended6(void);
 //void    MakeExtended6(uchar  ibCan);
