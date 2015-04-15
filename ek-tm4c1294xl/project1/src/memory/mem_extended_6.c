@@ -12,7 +12,7 @@ MEM_EXTENDED_4.C
 uint                    cwDayCan6, cwMonCan6;
 
 // буфер значений счетчиков на конец 12 мес€цев
-value6                  mpCntMonCan6[bMONTHS][bCANALS];
+value6                  mpCntMonCan6[bCANALS];
 
 // буфер значений счетчиков на начало суток дл€ текущего мес€ца
 value6                  mpCntCan6[bCANALS];
