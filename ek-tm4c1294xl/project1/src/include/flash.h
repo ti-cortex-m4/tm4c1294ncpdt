@@ -40,7 +40,7 @@ FLASH.H
 #define bPOWER_GRP          (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
 #define REALCAN_PAGES       (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
 #define PARAMS_PAGES        (uchar)(sizeof(real)    * wPARAMS/wFREEPAGE_SIZE + 1)
-#define VALUE51_CAN_PAGES   (uchar)(sizeof(mpvaValue51)/wFREEPAGE_SIZE + 1)
+#define VALUE5_CAN_PAGES    (uchar)(sizeof(mpvaValue5)/wFREEPAGE_SIZE + 1)
 #define VALUE6_CAN_PAGES    (uchar)(sizeof(mpCntMonCan4)/wFREEPAGE_SIZE + 1)
 #define VALUE6T_CAN_PAGES   (uchar)(sizeof(mpCntMonCan4T)/wFREEPAGE_SIZE + 1)
 #define VALUE7_CAN_PAGES    (uchar)(sizeof(mpCntDayCan7)/wFREEPAGE_SIZE + 1)
