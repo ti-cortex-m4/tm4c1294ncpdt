@@ -24,15 +24,15 @@ param const             mppaParamMap[bPARAM_BLOCK] =
 };
 
 
-file const              flEnblAllParams = {FLS_ENBL_ALL_PARAMS, &boEnblAllParams, sizeof(boolean)};
-file const              flMntParams = {FLS_MNT_PARAMS, &boMntParams, sizeof(boolean)};
+file const              flEnblAllParams = {ENBL_ALL_PARAMS, &boEnblAllParams, sizeof(boolean)};
+file const              flMntParams = {MNT_PARAMS, &boMntParams, sizeof(boolean)};
 
-file const              flParams = {FLS_PARAMS, &mpdiParam, sizeof(mpdiParam)};
-file const              flParamsDiv = {FLS_PARAMS_DIV, &mpreParamDiv, sizeof(mpreParamDiv)};
-file const              flEnblParams = {FLS_ENBL_PARAMS, &mpboEnblPar, sizeof(mpboEnblPar)};
+file const              flParams = {PARAMS, &mpdiParam, sizeof(mpdiParam)};
+file const              flParamsDiv = {PARAMS_DIV, &mpreParamDiv, sizeof(mpreParamDiv)};
+file const              flEnblParams = {ENBL_PARAMS, &mpboEnblPar, sizeof(mpboEnblPar)};
 
-file const              flFixParamsBugs = {FLS_FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(boolean)};
-file const              flUseParamsDiv = {FLS_USE_PARAMS_DIV, &boUseParamsDiv, sizeof(boolean)};
+file const              flFixParamsBugs = {FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(boolean)};
+file const              flUseParamsDiv = {USE_PARAMS_DIV, &boUseParamsDiv, sizeof(boolean)};
 
 
 

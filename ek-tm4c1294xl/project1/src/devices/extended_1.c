@@ -26,15 +26,15 @@ EXTENDED_1.Ñ
 
 
 
-file const              flDsblEscU = {FLS_DSBL_ESC_U, &boDsblEscU, sizeof(boolean)};
-file const              flDsblEscV = {FLS_DSBL_ESC_V, &boDsblEscV, sizeof(boolean)};
-file const              flDsblEscS = {FLS_DSBL_ESC_S, &boDsblEscS, sizeof(boolean)};
+file const              flDsblEscU = {DSBL_ESC_U, &boDsblEscU, sizeof(boolean)};
+file const              flDsblEscV = {DSBL_ESC_V, &boDsblEscV, sizeof(boolean)};
+file const              flDsblEscS = {DSBL_ESC_S, &boDsblEscS, sizeof(boolean)};
 
-file const              flMntEscS = {FLS_MNT_ESC_S, &boMntEscS, sizeof(boolean)};
+file const              flMntEscS = {MNT_ESC_S, &boMntEscS, sizeof(boolean)};
 
-file const              flExtendedEscU = {FLS_EXTENDED_ESC_U, &boExtendedEscU, sizeof(boolean)};
-file const              flExtendedEscV = {FLS_EXTENDED_ESC_V, &boExtendedEscV, sizeof(boolean)};
-file const              flExtendedEscS = {FLS_EXTENDED_ESC_S, &boExtendedEscS, sizeof(boolean)};
+file const              flExtendedEscU = {EXTENDED_ESC_U, &boExtendedEscU, sizeof(boolean)};
+file const              flExtendedEscV = {EXTENDED_ESC_V, &boExtendedEscV, sizeof(boolean)};
+file const              flExtendedEscS = {EXTENDED_ESC_S, &boExtendedEscS, sizeof(boolean)};
 
 
 

@@ -38,14 +38,14 @@ void    ShowFlashErase(void)
 void    ShowFlashRead(void)
 {
   ResetWDT();
-  ShowPercent((ulong)100*(++wPage)/((FLS_END-FLS_BEGIN+1)/2));
+  ShowPercent((ulong)100*(++wPage)/((END-BEGIN+1)/2));
 }
 
 
 
 void    InitStorage(void) // TODO InitStorage
 {
-  wPageIn = FLS_IMPHOUCAN_BUFF;
+  wPageIn = IMPHOUCAN_BUFF;
   if (SafePageRead())
   {
     time ti;
@@ -88,14 +88,14 @@ uint    i;
   ibSoftDay = 0;
   ibSoftMon = 0; // TODO
 
-  for (wPageOut=FLS_IMPMNTCAN; wPageOut<(FLS_IMPMNTCAN+bMINUTES); wPageOut++)
+  for (wPageOut=IMPMNTCAN; wPageOut<(IMPMNTCAN+bMINUTES); wPageOut++)
   {
     if (SafePageErase() == FALSE) return FALSE;
     if (GetFlashStatus() != 0) return FALSE;
     ShowFlashErase();
   }
 
-  for (wPageOut=FLS_IMPHOUCAN; wPageOut<(FLS_IMPHOUCAN+IMPHOUCAN_PAGES); wPageOut++)
+  for (wPageOut=IMPHOUCAN; wPageOut<(IMPHOUCAN+IMPHOUCAN_PAGES); wPageOut++)
   {
     if (SafePageErase() == FALSE) return FALSE;
     if (GetFlashStatus() != 0) return FALSE;
@@ -142,7 +142,7 @@ uint    i;
     ShowFlashErase();
   }
 
-  for (wPageOut=FLS_PARAMS_VALUES; wPageOut<(FLS_PARAMS_VALUES+PARAMS_PAGES*wTIMES); wPageOut++)
+  for (wPageOut=PARAMS_VALUES; wPageOut<(PARAMS_VALUES+PARAMS_PAGES*wTIMES); wPageOut++)
   {
     if (SafePageErase() == FALSE) return FALSE;
     if (GetFlashStatus() != 0) return FALSE;
@@ -164,7 +164,7 @@ uint    i;
   ShowHi(szFlashRead);
   wPage = 0;
 
-  for (wPageIn=FLS_BEGIN; wPageIn<FLS_END; wPageIn += 2)
+  for (wPageIn=BEGIN; wPageIn<END; wPageIn += 2)
   {
     if (SafePageRead() == FALSE) return FALSE;
     if (GetFlashChecksum() == 0) return FALSE;

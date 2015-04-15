@@ -14,97 +14,97 @@ ENERGY3.C
 
 
 boolean SaveImpHouBuff(void) {
-  return SaveBuff(FLS_IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
+  return SaveBuff(IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
 }
 
 boolean CleanImpHouBuff(void) {
-  return CleanBuff(FLS_IMPHOUCAN_BUFF, sizeof(uint)*bCANALS);
+  return CleanBuff(IMPHOUCAN_BUFF, sizeof(uint)*bCANALS);
 }
 
 boolean LoadImpHouBuff(void) {
-  return LoadBuff(FLS_IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
+  return LoadBuff(IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
 }
 
 
 
 boolean SaveImpDayBuff(void) {
-  return SaveBuff(FLS_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
+  return SaveBuff(IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
 }
 
 boolean CleanImpDayBuff(void) {
-  return CleanBuff(FLS_IMPDAYCAN_BUFF, sizeof(impulse)*bCANALS);
+  return CleanBuff(IMPDAYCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 boolean LoadImpDayBuff(void) {
-  return LoadBuff(FLS_IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
+  return LoadBuff(IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
 }
 
 
 
 boolean SaveImpMonBuff(void) {
-  return SaveBuff(FLS_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
+  return SaveBuff(IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
 }
 
 boolean CleanImpMonBuff(void) {
-  return CleanBuff(FLS_IMPMONCAN_BUFF, sizeof(impulse)*bCANALS);
+  return CleanBuff(IMPMONCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 boolean LoadImpMonBuff(void) {
-  return LoadBuff(FLS_IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
+  return LoadBuff(IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
 }
 
 
 
 boolean SaveImpAbsBuff(void) {
-  return SaveBuff(FLS_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
+  return SaveBuff(IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
 }
 
 boolean CleanImpAbsBuff(void) {
-  return CleanBuff(FLS_IMPABSCAN_BUFF, sizeof(impulse)*bCANALS);
+  return CleanBuff(IMPABSCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 boolean LoadImpAbsBuff(void) {
-  return LoadBuff(FLS_IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
+  return LoadBuff(IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
 }
 
 
 
 boolean SavePowDayBuff(void) {
-  return SaveBuff(FLS_POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
+  return SaveBuff(POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
 }
 
 boolean CleanPowDayBuff(void) {
-  return CleanBuff(FLS_POWDAYGRP_BUFF, sizeof(power)*bGROUPS);
+  return CleanBuff(POWDAYGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
 boolean LoadPowDayBuff(void) {
-  return LoadBuff(FLS_POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
+  return LoadBuff(POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
 }
 
 
 
 boolean SavePowMonBuff(void) {
-  return SaveBuff(FLS_POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
+  return SaveBuff(POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
 }
 
 boolean CleanPowMonBuff(void) {
-  return CleanBuff(FLS_POWMONGRP_BUFF, sizeof(power)*bGROUPS);
+  return CleanBuff(POWMONGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
 boolean LoadPowMonBuff(void) {
-  return LoadBuff(FLS_POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
+  return LoadBuff(POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
 }
 
 
 
 boolean SaveCntMonBuff(void) {
-  return SaveBuff(FLS_CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
+  return SaveBuff(CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
 }
 
 boolean CleanCntMonBuff(void) {
-  return CleanBuff(FLS_CNTMONCAN_BUFF, sizeof(real)*bCANALS);
+  return CleanBuff(CNTMONCAN_BUFF, sizeof(real)*bCANALS);
 }
 
 boolean LoadCntMonBuff(void) {
-  return LoadBuff(FLS_CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
+  return LoadBuff(CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
 }

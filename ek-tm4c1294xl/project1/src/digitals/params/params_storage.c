@@ -14,7 +14,7 @@ PARAMS_STORAGE.C
 
 boolean SavePrmTim(uint  iwTimTo, uint  iwTimFrom)
 {
-  return SaveBuff(FLS_PARAMS_VALUES + iwTimTo*PARAMS_PAGES, mpreParBuff[ iwTimFrom ], sizeof(real)*wPARAMS);
+  return SaveBuff(PARAMS_VALUES + iwTimTo*PARAMS_PAGES, mpreParBuff[ iwTimFrom ], sizeof(real)*wPARAMS);
 }
 
 
@@ -27,6 +27,6 @@ boolean LoadPrmTim(uint  iwTimFrom)
   }
   else
   {
-    return LoadBuff(FLS_PARAMS_VALUES + iwTimFrom*PARAMS_PAGES, mpreParBuff[ PrevSoftTim() ], sizeof(real)*wPARAMS);
+    return LoadBuff(PARAMS_VALUES + iwTimFrom*PARAMS_PAGES, mpreParBuff[ PrevSoftTim() ], sizeof(real)*wPARAMS);
   }
 }

@@ -25,8 +25,8 @@ EXTENDED_5.C
 static char const       szExtended5[]   = "Опрос данных: 5 ";
 
 
-file const              flExt5Flag = {FLS_EXT_5_FLAG, &boExt5Flag, sizeof(boolean)};
-file const              flExt5Values = {FLS_EXT_5_VALUES, &mpvaValue5, sizeof(mpvaValue5)};
+file const              flExt5Flag = {EXT_5_FLAG, &boExt5Flag, sizeof(boolean)};
+file const              flExt5Values = {EXT_5_VALUES, &mpvaValue5, sizeof(mpvaValue5)};
 
 
 static buff5            vaBuff[4];

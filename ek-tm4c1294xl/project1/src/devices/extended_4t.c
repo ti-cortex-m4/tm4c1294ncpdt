@@ -20,8 +20,8 @@ EXTENDED_4T.C
 
 
 
-file const              flExt4TFlag = {FLS_EXT_4T_FLAG, &boExt4TFlag, sizeof(boolean)};
-file const              flExt4TMonths = {FLS_EXT_4T_MONTHS, &bExt4TMonths, sizeof(uchar)};
+file const              flExt4TFlag = {EXT_4T_FLAG, &boExt4TFlag, sizeof(boolean)};
+file const              flExt4TMonths = {EXT_4T_MONTHS, &bExt4TMonths, sizeof(uchar)};
 
 
 //                                         0123456789ABCDEF
@@ -34,13 +34,13 @@ static value6t          vaT;
 
 boolean SaveExt4TValues(uchar  ibMon)
 {
-  return SaveBuff(FLS_EXT_4T_MON_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
+  return SaveBuff(EXT_4T_MON_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
 }
 
 
 boolean LoadExt4TValues(uchar  ibMon)
 {
-  return LoadBuff(FLS_EXT_4T_MON_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
+  return LoadBuff(EXT_4T_MON_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
 }
 
 

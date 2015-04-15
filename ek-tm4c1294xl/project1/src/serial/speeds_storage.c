@@ -11,12 +11,12 @@ SPEEDS_STORAGE.C
 
 
 
-file const              flPorts = {FLS_PORTS, &mppoPorts, sizeof(mppoPorts)};
+file const              flPorts = {PORTS, &mppoPorts, sizeof(mppoPorts)};
 
-file const              flLocalDisable = {FLS_LOCAL_DISABLE, &mpboLocalDisable, sizeof(mpboLocalDisable)};
+file const              flLocalDisable = {LOCAL_DISABLE, &mpboLocalDisable, sizeof(mpboLocalDisable)};
 
-file const              flMajorInDelay = {FLS_MAJOR_IN_DELAY, &mpwMajorInDelay, sizeof(mpwMajorInDelay)};
-file const              flMinorInDelay = {FLS_MINOR_IN_DELAY, &mpwMinorInDelay, sizeof(mpwMinorInDelay)};
+file const              flMajorInDelay = {MAJOR_IN_DELAY, &mpwMajorInDelay, sizeof(mpwMajorInDelay)};
+file const              flMinorInDelay = {MINOR_IN_DELAY, &mpwMinorInDelay, sizeof(mpwMinorInDelay)};
 
 
 

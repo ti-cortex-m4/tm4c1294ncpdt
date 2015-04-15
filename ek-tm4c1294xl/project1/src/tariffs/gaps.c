@@ -16,8 +16,8 @@ GAPS.C
 static time const       tiGap0 = { 0, 0, 0, 14,  4, 0 };
 static time const       tiGap1 = { 1, 0, 0, 14, 10, 0 };
 
-file const              flGapsFlag = {FLS_GAPS_FLAG, &boGapsFlag, sizeof(boolean)};
-file const              flGaps = {FLS_GAPS, &gaGaps, sizeof(gaGaps)};
+file const              flGapsFlag = {GAPS_FLAG, &boGapsFlag, sizeof(boolean)};
+file const              flGaps = {GAPS, &gaGaps, sizeof(gaGaps)};
 
 
 

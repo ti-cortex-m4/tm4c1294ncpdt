@@ -12,7 +12,7 @@ MAX_REPEATS.C
 // количество повторов при ошибках обмена со счетчиками
 uchar                   bMaxRepeats;
 
-file const              flMaxRepeats = {FLS_MAX_REPEATS, &bMaxRepeats, sizeof(uchar)};
+file const              flMaxRepeats = {MAX_REPEATS, &bMaxRepeats, sizeof(uchar)};
 
 
 

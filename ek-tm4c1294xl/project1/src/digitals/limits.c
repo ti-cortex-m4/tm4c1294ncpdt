@@ -13,14 +13,14 @@ LIMITS.C
 
 
 
-file const              flUseBounds = {FLS_USE_BOUNDS, &boUseBounds, sizeof(boolean)};
+file const              flUseBounds = {USE_BOUNDS, &boUseBounds, sizeof(boolean)};
 
-file const              flStartRelCan = {FLS_START_REL_CAN, &mpcwStartRelCan, sizeof(mpcwStartRelCan)};
-file const              flStartAbs16Can = {FLS_START_ABS16_CAN, &mpcwStartAbs16Can, sizeof(mpcwStartAbs16Can)};
-file const              flStartAbs32Can = {FLS_START_ABS32_CAN, &mpcdwStartAbs32Can, sizeof(mpcdwStartAbs32Can)};
-file const              flStartCan = {FLS_START_CAN, &mpboStartCan, sizeof(mpboStartCan)};
-file const              flStopCan = {FLS_STOP_CAN, &mpcwStopCan, sizeof(mpcwStopCan)};
-file const              flStopAuxCan = {FLS_STOP_AUX_CAN, &mpcwStopAuxCan, sizeof(mpcwStopAuxCan)};
+file const              flStartRelCan = {START_REL_CAN, &mpcwStartRelCan, sizeof(mpcwStartRelCan)};
+file const              flStartAbs16Can = {START_ABS16_CAN, &mpcwStartAbs16Can, sizeof(mpcwStartAbs16Can)};
+file const              flStartAbs32Can = {START_ABS32_CAN, &mpcdwStartAbs32Can, sizeof(mpcdwStartAbs32Can)};
+file const              flStartCan = {START_CAN, &mpboStartCan, sizeof(mpboStartCan)};
+file const              flStopCan = {STOP_CAN, &mpcwStopCan, sizeof(mpcwStopCan)};
+file const              flStopAuxCan = {STOP_AUX_CAN, &mpcwStopAuxCan, sizeof(mpcwStopAuxCan)};
 
 
 

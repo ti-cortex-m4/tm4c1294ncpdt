@@ -54,7 +54,7 @@ zone const              zoDefault = {
 		}
 };
 
-file const              flZone = {FLS_DAY_ZONE, &zoKey, sizeof(zone)};
+file const              flZone = {DAY_ZONE, &zoKey, sizeof(zone)};
 
 
 

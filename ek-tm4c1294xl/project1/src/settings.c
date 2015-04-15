@@ -12,9 +12,9 @@ SETTINGS.C
 
 
 
-file const              flLogical = {FLS_LOGICAL, &bLogical, sizeof(uchar)};
+file const              flLogical = {LOGICAL, &bLogical, sizeof(uchar)};
 
-file const              flFirstReset = {FLS_FIRST_RESET, &boFirstReset, sizeof(boolean)};
+file const              flFirstReset = {FIRST_RESET, &boFirstReset, sizeof(boolean)};
 
 
 
@@ -54,21 +54,21 @@ void    ResetSettings(bool  fFullReset)
 
 
 boolean SavePrivate(void) {
-	return SaveBuff(FLS_PRIVATE, &wPrivate, sizeof(uint));
+	return SaveBuff(PRIVATE, &wPrivate, sizeof(uint));
 }
 
 
 boolean LoadPrivate(void) {
-  return LoadBuff(FLS_PRIVATE, &wPrivate, sizeof(uint));
+  return LoadBuff(PRIVATE, &wPrivate, sizeof(uint));
 }
 
 
 // TODO GlobalLabel
 boolean SaveGlobal(void) {
-	return SaveBuff(FLS_GLOBAL, &enGlobal, sizeof(global));
+	return SaveBuff(GLOBAL, &enGlobal, sizeof(global));
 }
 
 
 boolean LoadGlobal(void) {
-  return LoadBuff(FLS_GLOBAL, &enGlobal, sizeof(global));
+  return LoadBuff(GLOBAL, &enGlobal, sizeof(global));
 }

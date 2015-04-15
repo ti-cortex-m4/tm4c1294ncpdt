@@ -30,7 +30,7 @@ static uint             iwBmin, iwBmax;
 static uchar            bRefillWinter, mpbRefillWinter[10];
 
 
-file const              flDsblRefill = {FLS_DSBL_REFILL, &boDsblRefill, sizeof(boolean)};
+file const              flDsblRefill = {DSBL_REFILL, &boDsblRefill, sizeof(boolean)};
 
 
 
