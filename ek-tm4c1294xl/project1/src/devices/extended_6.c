@@ -15,6 +15,7 @@ EXTENDED_6.C
 #include        "../time/rtc.h"
 #include        "../time/timedate.h"
 #include        "../console.h"
+#include        "../engine.h"
 #include        "../energy2.h"
 #include        "extended_6.h"
 
@@ -24,9 +25,26 @@ EXTENDED_6.C
 static char const       szNone[]        = "*    пусто      ";
 
 
+file const              flCntCan6 = {EXT_6_VALUES, &mpCntCan6, sizeof(mpCntCan6)};
+
+
+
+static boolean SaveCntMonCan6(uchar  ibMonTo)
+{
+  return SaveBuff(EXT_6_MON_VALUES + ibMonTo*VALUE6_CAN_PAGES, mpCntMonCan6, sizeof(mpCntMonCan6));
+}
+
+
+static boolean LoadCntMonCan6(uchar  ibMonFrom)
+{
+  return LoadBuff(EXT_6_MON_VALUES + ibMonFrom*VALUE6_CAN_PAGES, mpCntMonCan6, sizeof(mpCntMonCan6));
+}
+
+
 
 void    InitExtended6(void)
 {
+  LoadFile(&flCntCan6);
 }
 
 
@@ -34,23 +52,46 @@ void    ResetExtended6(void)
 { 
   cwDayCan6 = 0;
   cwMonCan6 = 0;
-  memset(&mpCntMonCan6_, 0, sizeof(mpCntMonCan6_));
-  memset(&mpCntCan6_, 0, sizeof(mpCntCan6_));
+
+
+  memset(&mpCntMonCan6, 0, sizeof(mpCntMonCan6));
+
+  uchar m;
+  for (m=0; m<bMONTHS; m++)
+  {
+    SaveCntMonCan6(m);
+  }
+
+
+  memset(&mpCntCan6, 0, sizeof(mpCntCan6));
+  SaveFile(&flCntCan6);
 }
 
 
 void    NextDayExtended6(void)
 { 
   cwDayCan6++;
-  memset(&mpCntCan6_, 0, sizeof(mpCntCan6_));
+
+  memset(&mpCntCan6, 0, sizeof(mpCntCan6));
+  SaveFile(&flCntCan6);
 }
 
 
 void    NextMonExtended6(void) 
 { 
   cwMonCan6++;
-  memset(&mpCntMonCan6_[ibHardMon], 0, sizeof(value6)*bCANALS);
+
+  memset(&mpCntMonCan6, 0, sizeof(mpCntCan6));
+  SaveCntMonCan6(ibHardMon);
 }
+
+
+void    CloseExtended6(void)
+{
+  SaveFile(&flCntCan6);
+  SaveCntMonCan6(ibHardMon);
+}
+
 
 
 void    MakeExtended6(uchar  ibCan, real  re)
@@ -60,10 +101,12 @@ void    MakeExtended6(uchar  ibCan, real  re)
   va.reSelf = re;
   va.tiSelf = *GetCurrTimeDate();
  
-  mpCntMonCan6_[ibHardMon][ibCan] = va;
+  mpCntMonCan6[ibCan] = va;
 
-  if (mpCntCan6_[ibCan].bSelf == ST4_NONE)
-    mpCntCan6_[ibCan] = va;
+  if (mpCntCan6[ibCan].bSelf == ST4_NONE)
+  {
+    mpCntCan6[ibCan] = va;
+  }
 }
 
 
@@ -77,6 +120,7 @@ void    OutExtended6(void)
   else
   {
     LoadCntMon(InBuff(6));
+    LoadCntMonCan6(InBuff(6));
 
     InitPushPtr();            
     PushInt(cwDayCan6);
@@ -99,9 +143,9 @@ void    OutExtended6(void)
         else
         {
           if (InBuff(6) == (*GetCurrTimeDate()).bMonth - 1)
-            Push(&mpCntCan6_[c], sizeof(value6));
+            Push(&mpCntCan6[c], sizeof(value6));
           else 
-            Push(&mpCntMonCan6_[InBuff(6)][c], sizeof(value6));
+            Push(&mpCntMonCan6[c], sizeof(value6));
         }
 
         wSize += sizeof(value6);
@@ -117,11 +161,11 @@ void    OutExtended6(void)
 void    ShowTimeDate6(time  ti)
 {
   sprintf(szLo,"%02u:%02u %02u.%02u.%02u",
-                 ti.bHour,
-                 ti.bMinute,
-                 ti.bDay,
-                 ti.bMonth,
-                 ti.bYear);
+               ti.bHour,
+               ti.bMinute,
+               ti.bDay,
+               ti.bMonth,
+               ti.bYear);
 }
 
 
@@ -139,10 +183,12 @@ value6 va;
   }
   else
   {
+    LoadCntMonCan6(ibMon);
+
     if (ibMon == (*GetCurrTimeDate()).bMonth - 1)
-      va = mpCntCan6_[ibCan];
+      va = mpCntCan6[ibCan];
     else 
-      va = mpCntMonCan6_[ibMon][ibCan];
+      va = mpCntMonCan6[ibCan];
   }
 
   reBuffA = va.reSelf;
@@ -151,7 +197,7 @@ value6 va;
   switch (va.bSelf)
   {
     case ST4_NONE: ShowLo(szNone); break;
-    case ST4_OK:   (ibZ == 0) ? ShowFloat(&reBuffA) : ShowTimeDate6(tiAlt); break;
+    case ST4_OK:   (ibZ == 0) ? ShowFloat(reBuffA) : ShowTimeDate6(tiAlt); break;
     default:       Clear(); sprintf(szLo, "*  ошибка: %02X", va.bSelf); break;
   }  
 }
@@ -172,7 +218,7 @@ bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon)
 
 void    ShowDirectCnt(uchar  ibCan)
 {
-  value6 va = mpCntCan6_[ibCan];
+  value6 va = mpCntCan6[ibCan];
 
   reBuffA = va.reSelf;
   tiAlt = va.tiSelf;
@@ -180,7 +226,7 @@ void    ShowDirectCnt(uchar  ibCan)
   switch (va.bSelf)
   {
     case ST4_NONE: ShowLo(szNone); break;
-    case ST4_OK:   ShowFloat(&reBuffA); break;
+    case ST4_OK:   ShowFloat(reBuffA); break;
     default:       Clear(); sprintf(szLo, "*  ошибка: %02X", va.bSelf); break;
   }  
 }
@@ -188,13 +234,13 @@ void    ShowDirectCnt(uchar  ibCan)
 
 void    LoadDirectCntReal(uchar  ibCan)
 {
-  value6 va = mpCntCan6_[ibCan];
+  value6 va = mpCntCan6[ibCan];
   reBuffA = va.reSelf;
 }
 
 
 void    LoadDirectCntTime(uchar  ibCan)
 {
-  value6 va = mpCntCan6_[ibCan];
+  value6 va = mpCntCan6[ibCan];
   tiAlt = va.tiSelf;
 }

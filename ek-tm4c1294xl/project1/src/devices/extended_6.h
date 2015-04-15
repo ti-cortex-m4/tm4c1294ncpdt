@@ -7,9 +7,12 @@ EXTENDED_6.H
 void    InitExtended6(void);
 void    ResetExtended6(void);
 
-//void    NextDayExtended6(void);
-//void    NextMonExtended6(void);
-//void    MakeExtended6(uchar  ibCan);
+void    NextDayExtended6(void);
+void    NextMonExtended6(void);
+void    CloseExtended6(void);
+
+void    MakeExtended6(uchar  ibCan, real  re);
+
 //void    OutExtended6(void);
 //void    ShowCntMonCan6(uchar  ibCan, uchar  ibMon);
 

@@ -12,6 +12,7 @@ SPECIAL.C
 #include        "../impulses/energy_spec.h"
 #include        "../devices/devices.h"
 #include        "../devices/extended_5.h"
+#include        "../devices/extended_6.h"
 #include        "../devices/extended_7.h"
 #include        "../time/delay.h"
 #include        "../time/timedate.h"
@@ -99,5 +100,6 @@ void    CloseSpecialBuff(void)
   SavePowMonBuff();
 
   CloseExtended5();
+  CloseExtended6();
   CloseExtended7();
 }

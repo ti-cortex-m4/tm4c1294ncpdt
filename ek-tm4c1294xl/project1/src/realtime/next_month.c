@@ -15,6 +15,7 @@ NEXT_MONTH.C
 #include        "../special/recalc_def.h"
 #include        "../devices/extended_4.h"
 #include        "../devices/extended_4t.h"
+#include        "../devices/extended_6.h"
 #include        "realtime_storage.h"
 
 
@@ -25,7 +26,7 @@ void    NextMonth(void)
 
   NextMonExtended4();
   NextMonExtended4T();
-//  NextMonExtended6();
+  NextMonExtended6();
 
   SaveImpMon(0,ibHardMon,ibSoftMon);
   SavePowMon(0,ibHardMon,ibSoftMon);
