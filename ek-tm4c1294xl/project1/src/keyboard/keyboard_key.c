@@ -101,6 +101,7 @@ KEYBOARD_KEY.C
 #include        "devices/key_ext_4t_months.h"
 #include        "devices/key_ext_4t_reset1.h"
 #include        "devices/key_ext_4t_reset2.h"
+#include        "devices/key_ext_6_flag.h"
 
 
 
@@ -260,6 +261,8 @@ void    Keyboard_Key(void)
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
       case wSET_EXT4T_RESET1:   key_SetExt4TReset1();   break;
       case wSET_EXT4T_RESET2:   key_SetExt4TReset2();   break;
+
+      case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
 
       default:                  NoProgram();            break;
     }
@@ -491,6 +494,8 @@ void    Keyboard_Key(void)
       case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
 
+      case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
+
       default:                  NoProgram();            break;
     }
   }
@@ -639,6 +644,8 @@ void    Keyboard_Key(void)
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
       case wSET_EXT4T_RESET1:   key_SetExt4TReset1();   break;
       case wSET_EXT4T_RESET2:   key_SetExt4TReset2();   break;
+
+      case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
 
       default:                  NoProgram();            break;
     }
