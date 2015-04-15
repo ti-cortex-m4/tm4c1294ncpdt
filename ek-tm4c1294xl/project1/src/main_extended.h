@@ -32,21 +32,21 @@ typedef struct
 } value4;
 
 
-// тип 'данные типа 50'
+// тип 'буфер типа 5'
 typedef struct
 {
   real          mpreSelf[bTARIFFS];
-} value50;
+} buff5;
 
 
-// тип 'данные типа 51'
+// тип 'данные типа 5'
 typedef struct
 {
-  value50       vaValue50;
+  buff5         vaValue5;
   time          tiSelf;
   boolean       boSelf;
   uint          cwOK,cwError;
-} value51;
+} value5;
 
 
 // тип 'данные типа 6'
