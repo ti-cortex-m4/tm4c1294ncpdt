@@ -16,6 +16,7 @@ OUT_EXTENDED_1.C
 #include        "../digitals/digitals.h"
 #include        "../digitals/digitals_pause.h"
 #include        "../sensors/automatic2.h"
+#include        "../devices/extended_6.h"
 #include        "../time/timedate.h"
 #include        "../time/rtc.h"
 #include        "../energy.h"
@@ -183,9 +184,9 @@ real    re;
 
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
-//      else if (CheckDirectCnt1(c)) {
-//        LoadDirectCntReal(c);
-//      }
+      else if (CheckDirectCnt1(c)) {
+        LoadDirectCntReal(c);
+      }
       else if (mpboEnblCan[c] == FALSE)
       {
         re = 0;
@@ -252,11 +253,11 @@ void    OutTimeEscVExt(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-//      if (CheckDirectCnt1(c))
-//        LoadDirectCntTime(c);
-//      else
+      if (CheckDirectCnt1(c))
+        LoadDirectCntTime(c);
+      else
+        PushTime(&mptiEsc_V[c]);
 
-      PushTime(&mptiEsc_V[c]);
       wSize += sizeof(time);
     }
   }

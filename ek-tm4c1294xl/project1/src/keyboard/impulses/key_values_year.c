@@ -16,6 +16,7 @@ KEY_VALUES_YEAR.C
 #include        "../../digitals/digitals_messages.h"
 #include        "../../serial/ports.h"
 #include        "../../devices/extended_4.h"
+#include        "../../devices/extended_6.h"
 #include        "../../serial/modems.h"
 #include        "../../engine.h"
 #include        "../../energy.h"
@@ -30,7 +31,8 @@ static char const       szCntCanOnBegin[] = "на начало месяца",
                         szCntCanNoData[]  = "  нет данных !  ",
                         szCntCanBuff[]    = "   из буфера    ",
                         szCntCanType1[]   = "  с дозапросом  ",
-                        szCntCanType2[]   = " прямого опроса ";
+                        szCntCanType2[]   = " прямого опроса ",
+                        szBadMode[]       = "*  нет данных   ";
 
 static char const       *pszEngFull[]    = { szEnergy, szBeta, szFull,   "" },
                         *pszEngTops[]    = { szEnergy, szBeta, szTops,   "" },
@@ -69,9 +71,9 @@ void    ShowCntCanMon(void)
     case bGET_CNTCANYEAR1:     
       if (GetDigitalDevice(ibX) == 0)
         (ReadCntMonCan(ibY,ibX) == 1) ? ShowFloat(reBuffA) : Error();
-//      else if (CheckDirectCnt2(ibX,ibY)) {
-//        ShowDirectCnt(ibX);
-//      }
+      else if (CheckDirectCnt2(ibX,ibY)) {
+        ShowDirectCnt(ibX);
+      }
       else
       {
         LoadCurrDigital(ibX);
@@ -102,9 +104,9 @@ void    ShowCntCanMon(void)
         ShowLo(szCntCanNoData);
       else if (GetDigitalDevice(ibX) == 0)
         (ReadCntMonCan(ibZ,ibX) == 1) ? ShowFloat(reBuffA) : Error();
-//      else if (CheckDirectCnt2(ibX,ibY)) {
-//        ShowDirectCnt(ibX);
-//      }
+      else if (CheckDirectCnt2(ibX,ibY)) {
+        ShowDirectCnt(ibX);
+      }
       else
       {
         LoadCurrDigital(ibX);
@@ -275,10 +277,10 @@ void    key_GetValuesYear(item  it)
 
 void    ShowCntCanMon6(void)
 {
-//  if (GetDigitalDevice(ibX) == 6)
-//    ShowLo(szExt4BadMode);
-//  else
-//    ShowCntMonCan6(ibX,ibY);
+  if (GetDigitalDevice(ibX) == 6)
+    ShowLo(szBadMode);
+  else
+    ShowCntMonCan6(ibX,ibY);
 
   sprintf(szLo+14,"%2u",ibX+1);
 }
