@@ -15,6 +15,7 @@ EXTENDED_1.Ñ
 #include        "../digitals/digitals_display.h"
 #include        "../digitals/digitals_messages.h"
 #include        "../devices/devices.h"
+#include        "../devices/extended_6.h"
 #include        "../devices/extended_7.h"
 #include        "../sensors/automatic2.h"
 #include        "../time/timedate.h"
@@ -196,7 +197,7 @@ void    MakeExtended1(void)
           mpreEsc_S[c] = reBuffA;
           mptiEsc_S[c] = *GetCurrTimeDate();
 
-//          MakeExtended6(c, reBuffA);
+          MakeExtended6(c, reBuffA);
           MakeExtended7(c, reBuffA);
 //          MakeDiagram(c);
 
