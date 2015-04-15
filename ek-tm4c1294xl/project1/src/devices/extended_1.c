@@ -196,7 +196,7 @@ void    MakeExtended1(void)
           mpreEsc_S[c] = reBuffA;
           mptiEsc_S[c] = *GetCurrTimeDate();
 
-//          MakeExtended6(c);
+//          MakeExtended6(c, reBuffA);
           MakeExtended7(c, reBuffA);
 //          MakeDiagram(c);
 

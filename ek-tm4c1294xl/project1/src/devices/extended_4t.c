@@ -34,13 +34,13 @@ static value6t          vaT;
 
 boolean SaveExt4TValues(uchar  ibMon)
 {
-  return SaveBuff(FLS_EXT_4T_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
+  return SaveBuff(FLS_EXT_4T_MON_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
 }
 
 
 boolean LoadExt4TValues(uchar  ibMon)
 {
-  return LoadBuff(FLS_EXT_4T_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
+  return LoadBuff(FLS_EXT_4T_MON_VALUES + ibMon*VALUE6T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
 }
 
 

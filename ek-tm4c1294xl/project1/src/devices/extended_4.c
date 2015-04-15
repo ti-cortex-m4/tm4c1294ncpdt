@@ -55,13 +55,13 @@ static uchar            bStatus;
 
 boolean SaveExt4Values(uchar  ibMon)
 {
-  return SaveBuff(FLS_EXT_4_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
+  return SaveBuff(FLS_EXT_4_MON_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
 }
 
 
 boolean LoadExt4Values(uchar  ibMon)
 {
-  return LoadBuff(FLS_EXT_4_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
+  return LoadBuff(FLS_EXT_4_MON_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
 }
 
 
