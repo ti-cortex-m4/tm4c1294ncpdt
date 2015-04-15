@@ -7,16 +7,20 @@ EXTENDED_6.C
 #include        "../main.h"
 #include        "../memory/mem_digitals.h"
 #include        "../memory/mem_realtime.h"
-//#include        "../memory/mem_profile.h"
+#include        "../memory/mem_energy.h"
 #include        "../memory/mem_extended_6.h"
 #include        "../digitals/digitals.h"
-//#include        "../digitals/digitals_display.h"
-//#include        "../devices/devices.h"
+#include        "../realtime/realtime.h"
 #include        "../serial/ports.h"
 #include        "../time/rtc.h"
 #include        "../console.h"
 #include        "../energy2.h"
 #include        "extended_6.h"
+
+
+
+//                                         0123456789ABCDEF
+static char const       szNone[]        = "*    пусто      ";
 
 
 
@@ -45,14 +49,15 @@ void    NextMonExtended6(void)
 
 void    MakeExtended6(uchar  ibCan)
 {
-  v6Buff.bSelf = ST4_OK; 
-  v6Buff.reSelf = reBuffA;
-  v6Buff.tiSelf = *GetCurrTimeDate();
+  value6 va;
+  va.bSelf = ST4_OK;
+  va.reSelf = reBuffA;
+  va.tiSelf = *GetCurrTimeDate();
  
-  mpCntMonCan6_[ibHardMon][ibCan] = v6Buff;
+  mpCntMonCan6_[ibHardMon][ibCan] = va;
 
   if (mpCntCan6[ibCan].bSelf == ST4_NONE)
-    mpCntCan6[ibCan] = v6Buff;
+    mpCntCan6[ibCan] = va;
 }
 
 
@@ -70,75 +75,78 @@ void    OutExtended6(void)
     InitPushPtr();            
     PushInt(cwDayCan6);
     PushInt(cwMonCan6);
-    uint wBuffD = 2+2;
+    uint wSize = 2+2;
 
-    uchar i;
-    for (i=0; i<bCANALS; i++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+      if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        if (GetDigitalDevice(i) == 0)
+        if (GetDigitalDevice(c) == 0)
         {
-          v6Buff.bSelf = ST4_OK; 
-          v6Buff.reSelf = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], i);
-          v6Buff.tiSelf = tiZero;
-          Push(&v6Buff, sizeof(value6));
+          value6 va;
+          va.bSelf = ST4_OK;
+          va.reSelf = mpreCntMonCan[ PrevSoftMon() ][c];
+          va.tiSelf = tiZero;
+          Push(&va, sizeof(value6));
         }
         else
         {
           if (InBuff(6) == (*GetCurrTimeDate()).bMonth - 1)
-            Push(&mpCntCan6[i], sizeof(value6));
+            Push(&mpCntCan6[c], sizeof(value6));
           else 
-            Push(&mpCntMonCan6_[InBuff(6)][i], sizeof(value6));
+            Push(&mpCntMonCan6_[InBuff(6)][c], sizeof(value6));
         }
 
-        wBuffD += sizeof(value6);
+        wSize += sizeof(value6);
       }
     }
 
-    OutptrOutBuff(wBuffD);
+    OutptrOutBuff(wSize);
   }
 }
 
 
 
-void    ShowTimeDate6(void)
+void    ShowTimeDate6(time  ti)
 {
   sprintf(szLo,"%02u:%02u %02u.%02u.%02u",
-                 tiAlt.bHour,
-                 tiAlt.bMinute,
-                 tiAlt.bDay,   
-                 tiAlt.bMonth,
-                 tiAlt.bYear);
+                 ti.bHour,
+                 ti.bMinute,
+                 ti.bDay,
+                 ti.bMonth,
+                 ti.bYear);
 }
 
 
 void    ShowCntMonCan6(uchar  ibCan, uchar  ibMon)
 {
+value6 va;
+
   if (GetDigitalDevice(ibCan) == 0)
   {
     LoadCntMon(ibMon);
 
-    v6Buff.bSelf = ST4_OK; 
-    v6Buff.reSelf = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
-    v6Buff.tiSelf = tiZero;
+    va.bSelf = ST4_OK;
+    va.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+    va.tiSelf = tiZero;
   }
   else
   {
     if (ibMon == (*GetCurrTimeDate()).bMonth - 1)
-      v6Buff = mpCntCan6[ibCan];
+      va = mpCntCan6[ibCan];
     else 
-      v6Buff = mpCntMonCan6_[ibMon][ibCan];
+      va = mpCntMonCan6_[ibMon][ibCan];
   }
 
-  reBuffA = v6Buff.reSelf;
-  tiAlt = v6Buff.tiSelf;
+  reBuffA = va.reSelf;
+  tiAlt = va.tiSelf;
 
-  switch (v6Buff.bSelf)
+  switch (va.bSelf)
   {
-    case ST4_NONE: ShowLo(szExt4None); break;
-    case ST4_OK:   (ibZ == 0) ? ShowReal(&reBuffA) : ShowTimeDate6(); break;
-    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", v6Buff.bSelf); break;
+    case ST4_NONE: ShowLo(szNone); break;
+    case ST4_OK:   (ibZ == 0) ? ShowFloat(&reBuffA) : ShowTimeDate6(tiAlt); break;
+    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", va.bSelf); break;
   }  
 }
 
@@ -158,29 +166,29 @@ bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon)
 
 void    ShowDirectCnt(uchar  ibCan)
 {
-  v6Buff = mpCntCan6[ibCan];
+  value6 va = mpCntCan6[ibCan];
 
-  reBuffA = v6Buff.reSelf;
-  tiAlt = v6Buff.tiSelf;
+  reBuffA = va.reSelf;
+  tiAlt = va.tiSelf;
 
-  switch (v6Buff.bSelf)
+  switch (va.bSelf)
   {
-    case ST4_NONE: ShowLo(szExt4None); break;
-    case ST4_OK:   ShowReal(&reBuffA); break;    
-    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", v6Buff.bSelf); break;
+    case ST4_NONE: ShowLo(szNone); break;
+    case ST4_OK:   ShowFloat(&reBuffA); break;
+    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", va.bSelf); break;
   }  
 }
 
 
 void    LoadDirectCntReal(uchar  ibCan)
 {
-  v6Buff = mpCntCan6[ibCan];
-  reBuffA = v6Buff.reSelf;
+  value6 va = mpCntCan6[ibCan];
+  reBuffA = va.reSelf;
 }
 
 
 void    LoadDirectCntTime(uchar  ibCan)
 {
-  v6Buff = mpCntCan6[ibCan];
-  tiAlt = v6Buff.tiSelf;
+  value6 va = mpCntCan6[ibCan];
+  tiAlt = va.tiSelf;
 }
