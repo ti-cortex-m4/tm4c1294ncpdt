@@ -25,6 +25,7 @@ EXTENDED_6.C
 static char const       szNone[]        = "*    пусто      ";
 
 
+file const              flExt6Flag = {EXT_6_FLAG, &boExt6Flag, sizeof(boolean)};
 file const              flCntCan6 = {EXT_6_VALUES, &mpCntCan6, sizeof(mpCntCan6)};
 
 
@@ -44,6 +45,7 @@ static boolean LoadCntMonCan6(uchar  ibMonFrom)
 
 void    InitExtended6(void)
 {
+  LoadFileBoolean(&flExt6Flag, FALSE);
   LoadFile(&flCntCan6);
 }
 
@@ -52,6 +54,9 @@ void    ResetExtended6(void)
 { 
   cwDayCan6 = 0;
   cwMonCan6 = 0;
+
+  boExt4Flag = FALSE;
+  SaveFile(&flExt4Flag);
 
 
   memset(&mpCntMonCan6, 0, sizeof(mpCntMonCan6));

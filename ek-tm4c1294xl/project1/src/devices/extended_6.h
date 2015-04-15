@@ -4,6 +4,14 @@ EXTENDED_6.H
 
 ------------------------------------------------------------------------------*/
 
+#include        "../memory/mem_extended_6.h"
+
+
+
+extern  file const              flExt6Flag;
+
+
+
 void    InitExtended6(void);
 void    ResetExtended6(void);
 

@@ -283,5 +283,7 @@ PROGRAMS.H
 #define wSET_EXT4T_RESET1           518
 #define wSET_EXT4T_RESET2           519
 
+#define wSET_EXT6_FLAG              400
+
 
 #endif
