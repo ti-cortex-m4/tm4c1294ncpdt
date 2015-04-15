@@ -26,10 +26,10 @@ static char const       szExtended5[]   = "Опрос данных: 5 ";
 
 
 file const              flExt5Flag = {FLS_EXT_5_FLAG, &boExt5Flag, sizeof(boolean)};
-file const              flExt5Values = {FLS_EXT_5_VALUES, &mpvaValue51, sizeof(mpvaValue51)};
+file const              flExt5Values = {FLS_EXT_5_VALUES, &mpvaValue5, sizeof(mpvaValue5)};
 
 
-static value50          vaBuff[4];
+static buff5            vaBuff[4];
 
 
 
@@ -45,7 +45,7 @@ void    ResetExtended5(void)
   boExt5Flag = FALSE;
   SaveFile(&flExt5Flag);
 
-  memset(&mpvaValue51, 0, sizeof(mpvaValue51));
+  memset(&mpvaValue5, 0, sizeof(mpvaValue5));
   SaveFile(&flExt5Values);
 }
 
@@ -109,7 +109,7 @@ static bool MakeDevices(void)
 
 void    MakeExtended5(void)
 { 
-  if ((boExt5Flag == TRUE) && ((mpvaValue51[ibDig].boSelf == FALSE) || (boManualProfile == TRUE)))
+  if ((boExt5Flag == TRUE) && ((mpvaValue5[ibDig].boSelf == FALSE) || (boManualProfile == TRUE)))
   {
     ShowHi(szExtended5); Clear();
    
@@ -123,10 +123,10 @@ void    MakeExtended5(void)
         LoadPrevDigital(c);
         if (CompareCurrPrevLines(ibDig, c) == 1)
         {
-          mpvaValue51[c].cwOK++;
-          mpvaValue51[c].tiSelf = *GetCurrTimeDate();
-          mpvaValue51[c].vaValue50 = vaBuff[diPrev.ibLine];
-          mpvaValue51[c].boSelf = TRUE;
+          mpvaValue5[c].cwOK++;
+          mpvaValue5[c].tiSelf = *GetCurrTimeDate();
+          mpvaValue5[c].vaValue5 = vaBuff[diPrev.ibLine];
+          mpvaValue5[c].boSelf = TRUE;
         }
       }
     }
@@ -140,7 +140,7 @@ void    MakeExtended5(void)
         LoadPrevDigital(c);
         if (CompareCurrPrevLines(ibDig, c) == 1)
         {
-          mpvaValue51[c].cwError++;
+          mpvaValue5[c].cwError++;
         }
       }
 
@@ -159,7 +159,7 @@ void    NextDayExtended5(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpvaValue51[c].boSelf = FALSE;
+    mpvaValue5[c].boSelf = FALSE;
   }
 
   SaveFile(&flExt5Values);
@@ -188,8 +188,8 @@ void    OutExtended50(void)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        Push(&mpvaValue51[c], sizeof(value51));
-        wSize += sizeof(value51);
+        Push(&mpvaValue5[c], sizeof(value5));
+        wSize += sizeof(value5);
       }
     }
 
@@ -214,9 +214,9 @@ void    OutExtended51(void)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        Push(&mpvaValue51[c].vaValue50, sizeof(value50));
-        wSize += sizeof(value50);
-        Push(&mpvaValue51[c].tiSelf, sizeof(time));
+        Push(&mpvaValue5[c].vaValue5, sizeof(buff5));
+        wSize += sizeof(buff5);
+        Push(&mpvaValue5[c].tiSelf, sizeof(time));
         wSize += sizeof(time);
       }
     }

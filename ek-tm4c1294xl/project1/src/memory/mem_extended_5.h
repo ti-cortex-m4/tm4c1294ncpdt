@@ -6,4 +6,4 @@ MEM_EXTENDED_5.H
 
 extern  boolean                 boExt5Flag;
 
-extern  value51                 mpvaValue51[bCANALS];
+extern  value5                  mpvaValue5[bCANALS];
