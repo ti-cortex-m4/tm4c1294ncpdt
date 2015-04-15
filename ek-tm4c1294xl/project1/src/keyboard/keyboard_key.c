@@ -215,7 +215,7 @@ void    Keyboard_Key(void)
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
-      case bGET_READTIMEDATE2:  key_GetSingle(CANALS);  break;
+      case bGET_READTIMEDATE2:  key_GetSingle(BY_CANALS);  break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
@@ -364,7 +364,7 @@ void    Keyboard_Key(void)
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
       case bGET_READTIMEDATE2:
-      case bGET_IMPCANCURRMNT:  key_GetSingle(CANALS);  break;
+      case bGET_IMPCANCURRMNT:  key_GetSingle(BY_CANALS);  break;
 
       case bGET_POWGRPPREVHOU:
       case bGET_POWGRPCURRHOU:
@@ -405,7 +405,7 @@ void    Keyboard_Key(void)
       case bGET_ENGGRPMONCURR_B:
       case bGET_ENGGRPMONCURR_A:
 
-      case bGET_POWGRPCURRMNT:  key_GetSingle(GROUPS);  break;
+      case bGET_POWGRPCURRMNT:  key_GetSingle(BY_GROUPS);  break;
 
       case bGET_POWCANPREVHOU:
       case bGET_POWCANCURRHOU:
@@ -435,12 +435,12 @@ void    Keyboard_Key(void)
       case bGET_ENGGRPYEAR_ABCD:
       case bGET_ENGGRPYEAR_CD:
       case bGET_ENGGRPYEAR_B:
-      case bGET_ENGGRPYEAR_A:  key_GetValuesYear(GROUPS); break;
+      case bGET_ENGGRPYEAR_A:  key_GetValuesYear(BY_GROUPS); break;
 
       case bGET_CNTCANYEAR1:
       case bGET_CNTCANYEAR10:
       case bGET_CNTCANYEAR2:
-      case bGET_CNTCANYEAR20:  key_GetValuesYear(CANALS); break;
+      case bGET_CNTCANYEAR20:  key_GetValuesYear(BY_CANALS); break;
 
       case wGET_CNTCANYEAR6:    key_GetCntCanYear6();   break;
 
@@ -594,7 +594,7 @@ void    Keyboard_Key(void)
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
-      case bGET_READTIMEDATE2:  key_GetSingle(CANALS);  break;
+      case bGET_READTIMEDATE2:  key_GetSingle(BY_CANALS);  break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
