@@ -13,15 +13,15 @@ FACTORS.C
 #include        "factors.h"
 
 
-file const              flTransEng = {FLS_TRANS_ENG, &mpreTransEng, sizeof(real)*bCANALS};
-file const              flTransCnt = {FLS_TRANS_CNT, &mpreTransCnt, sizeof(real)*bCANALS};
+file const              flTransEng = {TRANS_ENG, &mpreTransEng, sizeof(real)*bCANALS};
+file const              flTransCnt = {TRANS_CNT, &mpreTransCnt, sizeof(real)*bCANALS};
 
-file const              flPulseHou = {FLS_PULSE_HOU, &mprePulseHou, sizeof(real)*bCANALS};
-file const              flPulseMnt = {FLS_PULSE_MNT, &mprePulseMnt, sizeof(real)*bCANALS};
+file const              flPulseHou = {PULSE_HOU, &mprePulseHou, sizeof(real)*bCANALS};
+file const              flPulseMnt = {PULSE_MNT, &mprePulseMnt, sizeof(real)*bCANALS};
 
-file const              flCount = {FLS_COUNT, &mpreCount, sizeof(real)*bCANALS};
-file const              flLosse = {FLS_LOSSE, &mpreLosse, sizeof(real)*bCANALS};
-file const              flLevelDiv = {FLS_LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS};
+file const              flCount = {COUNT, &mpreCount, sizeof(real)*bCANALS};
+file const              flLosse = {LOSSE, &mpreLosse, sizeof(real)*bCANALS};
+file const              flLevelDiv = {LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS};
 
 
 void    InitFactors(void)

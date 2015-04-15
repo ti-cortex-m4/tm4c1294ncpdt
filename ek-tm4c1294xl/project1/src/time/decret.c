@@ -16,7 +16,7 @@ DECRET.C // TODO: сохранять количество переходов отдельно + события
 
 static boolean SaveDecret(void)
 {
-  OpenOut(FLS_DECRET);
+  OpenOut(DECRET);
   ClearOut();
 
   if (Save(&deDecret, sizeof(uchar)) == FALSE) return FALSE;
@@ -30,7 +30,7 @@ static boolean SaveDecret(void)
 
 static boolean LoadDecret(void)
 {
-  OpenIn(FLS_DECRET);
+  OpenIn(DECRET);
 
   if (Load(&deDecret, sizeof(uchar)) == FALSE) return FALSE;
 

@@ -28,9 +28,9 @@ EXTENDED_4.C
 
 
 
-file const              flExt4Flag = {FLS_EXT_4_FLAG, &boExt4Flag, sizeof(boolean)};
-file const              flExt4Months = {FLS_EXT_4_MONTHS, &bExt4Months, sizeof(uchar)};
-file const              flExt4EnblCan = {FLS_EXT_4_ENBL_CAN, &mpboExt4EnblCan, sizeof(mpboExt4EnblCan)};
+file const              flExt4Flag = {EXT_4_FLAG, &boExt4Flag, sizeof(boolean)};
+file const              flExt4Months = {EXT_4_MONTHS, &bExt4Months, sizeof(uchar)};
+file const              flExt4EnblCan = {EXT_4_ENBL_CAN, &mpboExt4EnblCan, sizeof(mpboExt4EnblCan)};
 
 
 //                                         0123456789ABCDEF
@@ -55,13 +55,13 @@ static uchar            bStatus;
 
 boolean SaveExt4Values(uchar  ibMon)
 {
-  return SaveBuff(FLS_EXT_4_MON_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
+  return SaveBuff(EXT_4_MON_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
 }
 
 
 boolean LoadExt4Values(uchar  ibMon)
 {
-  return LoadBuff(FLS_EXT_4_MON_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
+  return LoadBuff(EXT_4_MON_VALUES + ibMon*VALUE6_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
 }
 
 

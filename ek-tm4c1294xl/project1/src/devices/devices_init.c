@@ -49,14 +49,14 @@ DEVICES_INIT.C
 
 
 
-file const              flSeparateCan = {FLS_SEPARATE_CAN, &boSeparateCan, sizeof(boolean)};
-file const              flShowMessages = {FLS_SHOW_MESSAGES, &boShowMessages, sizeof(boolean)};
-file const              flHideMessages = {FLS_HIDE_MESSAGES, &boHideMessages, sizeof(boolean)};
-file const              flControlTime = {FLS_CONTROL_TIME, &boControlTime, sizeof(boolean)};
-file const              flManageTime = {FLS_MANAGE_TIME, &boManageTime, sizeof(boolean)};
+file const              flSeparateCan = {SEPARATE_CAN, &boSeparateCan, sizeof(boolean)};
+file const              flShowMessages = {SHOW_MESSAGES, &boShowMessages, sizeof(boolean)};
+file const              flHideMessages = {HIDE_MESSAGES, &boHideMessages, sizeof(boolean)};
+file const              flControlTime = {CONTROL_TIME, &boControlTime, sizeof(boolean)};
+file const              flManageTime = {MANAGE_TIME, &boManageTime, sizeof(boolean)};
 
-file const              flKeysLevelB = {FLS_KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
-file const              flShortProfileC = {FLS_SHORT_PROFILE_C, &boShortProfileC, sizeof(boolean)};
+file const              flKeysLevelB = {KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
+file const              flShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, sizeof(boolean)};
 
 
 

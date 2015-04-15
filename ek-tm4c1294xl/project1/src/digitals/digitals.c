@@ -13,13 +13,13 @@ DIGITALS.C
 
 
 
-file const              flDigitals = {FLS_DIGITALS, &mpdiDigital, sizeof(mpdiDigital)};
+file const              flDigitals = {DIGITALS, &mpdiDigital, sizeof(mpdiDigital)};
 
-file const              flEnblKeys = {FLS_ENBL_KEYS, &boEnblKeys, sizeof(boolean)};
-file const              flKeys = {FLS_KEYS, &mpphKeys, sizeof(mpphKeys)};
+file const              flEnblKeys = {ENBL_KEYS, &boEnblKeys, sizeof(boolean)};
+file const              flKeys = {KEYS, &mpphKeys, sizeof(mpphKeys)};
 
-file const              flAddress1 = {FLS_ADDRESS1, &mpdwAddress1, sizeof(mpdwAddress1)};
-file const              flAddress2 = {FLS_ADDRESS2, &mpdwAddress2, sizeof(mpdwAddress2)};
+file const              flAddress1 = {ADDRESS1, &mpdwAddress1, sizeof(mpdwAddress1)};
+file const              flAddress2 = {ADDRESS2, &mpdwAddress2, sizeof(mpdwAddress2)};
 
 
 

@@ -12,7 +12,7 @@ REALTIME_STORAGE.C
 
 boolean SavePointersMnt(void)
 {
-  OpenOut(FLS_PTRMNT);
+  OpenOut(PTRMNT);
   ClearOut();
 
   if (Save(&ibSoftMnt, sizeof(uchar)) == FALSE)
@@ -27,7 +27,7 @@ boolean SavePointersMnt(void)
 
 boolean LoadPointersMnt(void)
 {
-  OpenIn(FLS_PTRMNT);
+  OpenIn(PTRMNT);
 
   if (Load(&ibSoftMnt, sizeof(uchar)) == FALSE)
     return FALSE;
@@ -39,7 +39,7 @@ boolean LoadPointersMnt(void)
 
 boolean SavePointersHou(void)
 {
-  OpenOut(FLS_PTRHOU);
+  OpenOut(PTRHOU);
   ClearOut();
 
   if (Save(&ibSoftHou, sizeof(uchar)) == FALSE)
@@ -54,7 +54,7 @@ boolean SavePointersHou(void)
 
 boolean LoadPointersHou(void)
 {
-  OpenIn(FLS_PTRHOU);
+  OpenIn(PTRHOU);
 
   if (Load(&ibSoftHou, sizeof(uchar)) == FALSE)
     return FALSE;
@@ -66,7 +66,7 @@ boolean LoadPointersHou(void)
 
 boolean SavePointersDay(void)
 {
-  OpenOut(FLS_PTRDAY);
+  OpenOut(PTRDAY);
   ClearOut();
 
   if (Save(&ibSoftDay, sizeof(uchar)) == FALSE)
@@ -81,7 +81,7 @@ boolean SavePointersDay(void)
 
 boolean LoadPointersDay(void)
 {
-  OpenIn(FLS_PTRDAY);
+  OpenIn(PTRDAY);
 
   if (Load(&ibSoftDay, sizeof(uchar)) == FALSE)
     return FALSE;
@@ -93,7 +93,7 @@ boolean LoadPointersDay(void)
 
 boolean SavePointersMon(void)
 {
-  OpenOut(FLS_PTRMON);
+  OpenOut(PTRMON);
   ClearOut();
 
   if (Save(&ibSoftMon, sizeof(uchar)) == FALSE)
@@ -108,7 +108,7 @@ boolean SavePointersMon(void)
 
 boolean LoadPointersMon(void)
 {
-  OpenIn(FLS_PTRMON);
+  OpenIn(PTRMON);
 
   if (Load(&ibSoftMon, sizeof(uchar)) == FALSE)
     return FALSE;
@@ -120,7 +120,7 @@ boolean LoadPointersMon(void)
 
 boolean SavePointersTim(void)
 {
-  OpenOut(FLS_PTRTIM);
+  OpenOut(PTRTIM);
   ClearOut();
 
   if (Save(&ibSoftTim, sizeof(uchar)) == FALSE)
@@ -135,7 +135,7 @@ boolean SavePointersTim(void)
 
 boolean LoadPointersTim(void)
 {
-  OpenIn(FLS_PTRTIM);
+  OpenIn(PTRTIM);
 
   if (Load(&ibSoftTim, sizeof(uchar)) == FALSE)
     return FALSE;
@@ -147,7 +147,7 @@ boolean LoadPointersTim(void)
 
 boolean SaveTimeCurr(void)
 {
-  OpenOut(FLS_REALTIME);
+  OpenOut(REALTIME);
   ClearOut();
 
   if (Save(&tiCurr, sizeof(time)) == FALSE) return FALSE;
@@ -168,7 +168,7 @@ boolean SaveTimeCurr(void)
 
 boolean LoadTimeCurr(void)
 {
-  OpenIn(FLS_REALTIME);
+  OpenIn(REALTIME);
 
   if (Load(&tiCurr, sizeof(time)) == FALSE) return FALSE;
   if (Load(&tiPrev, sizeof(time)) == FALSE) return FALSE;

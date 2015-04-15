@@ -11,13 +11,13 @@ PROFILE_CORE.C
 
 
 
-file const              flEnblCan = {FLS_ENBL_CAN, &mpboEnblCan, sizeof(mpboEnblCan)};
+file const              flEnblCan = {ENBL_CAN, &mpboEnblCan, sizeof(mpboEnblCan)};
 
-file const              flEnblCurrent = {FLS_ENBL_CURRENT, &boEnblCurrent, sizeof(boolean)};
-file const              flEnblProfile = {FLS_ENBL_PROFILE, &boEnblProfile, sizeof(boolean)};
+file const              flEnblCurrent = {ENBL_CURRENT, &boEnblCurrent, sizeof(boolean)};
+file const              flEnblProfile = {ENBL_PROFILE, &boEnblProfile, sizeof(boolean)};
 
-file const              flTimeoutCurrent = {FLS_TIMEOUT_CURRENT, &bTimeoutCurrent, sizeof(uchar)};
-file const              flTimeoutProfile = {FLS_TIMEOUT_PROFILE, &bTimeoutProfile, sizeof(uchar)};
+file const              flTimeoutCurrent = {TIMEOUT_CURRENT, &bTimeoutCurrent, sizeof(uchar)};
+file const              flTimeoutProfile = {TIMEOUT_PROFILE, &bTimeoutProfile, sizeof(uchar)};
 
 
 

@@ -64,3 +64,4 @@ extern  uchar                   bKeysLevelB;
 
 extern  boolean                 boShortProfileC;
 
+extern  boolean                 boDirectCntD;

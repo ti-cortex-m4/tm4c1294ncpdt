@@ -12,12 +12,12 @@ SCHEDULE.C
 
 
 
-file const              flEnblPrtHou = {FLS_ENBL_PRT_HOU, &mpboEnblPrtHou, sizeof(mpboEnblPrtHou)};
+file const              flEnblPrtHou = {ENBL_PRT_HOU, &mpboEnblPrtHou, sizeof(mpboEnblPrtHou)};
 
-file const              flCtrlHou = {FLS_CTRL_HOU, &mpboCtrlHou, sizeof(mpboCtrlHou)};
+file const              flCtrlHou = {CTRL_HOU, &mpboCtrlHou, sizeof(mpboCtrlHou)};
 
-file const              flRecalcHou = {FLS_RECALC_HOU, &mpboRecalcHou, sizeof(mpboRecalcHou)};
-file const              flRecalcAlways = {FLS_RECALC_ALWAYS, &boRecalcAlways, sizeof(boolean)};
+file const              flRecalcHou = {RECALC_HOU, &mpboRecalcHou, sizeof(mpboRecalcHou)};
+file const              flRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(boolean)};
 
 
 

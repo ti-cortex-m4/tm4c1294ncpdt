@@ -13,9 +13,9 @@ RELAXS.C
 
 
 
-file const              flRelaxsFlag = {FLS_RELAXS_FLAG, &boRelaxsFlag, sizeof(boolean)};
-file const              flRelaxsTariff = {FLS_RELAXS_TARIFF, &ibRelaxsTariff, sizeof(uchar)};
-file const              flRelaxs = {FLS_RELAXS_TARIFF, &reRelaxs, sizeof(relaxs)};
+file const              flRelaxsFlag = {RELAXS_FLAG, &boRelaxsFlag, sizeof(boolean)};
+file const              flRelaxsTariff = {RELAXS_TARIFF, &ibRelaxsTariff, sizeof(uchar)};
+file const              flRelaxs = {RELAXS_TARIFF, &reRelaxs, sizeof(relaxs)};
 
 
 

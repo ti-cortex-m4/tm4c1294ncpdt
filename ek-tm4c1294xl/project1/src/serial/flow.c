@@ -25,9 +25,9 @@ FLOW.C
 
 
 
-file const              flFlowPortFrom = {FLS_FLOW_PORT_FROM, &ibFlowPortFrom, sizeof(uchar)};
-file const              flMaxFlowDelay = {FLS_MAX_FLOW_DELAY, &cbMaxFlowDelay, sizeof(uchar)};
-file const              flFlowPortTo = {FLS_FLOW_PORT_TO, &ibFlowPortTo, sizeof(uchar)};
+file const              flFlowPortFrom = {FLOW_PORT_FROM, &ibFlowPortFrom, sizeof(uchar)};
+file const              flMaxFlowDelay = {MAX_FLOW_DELAY, &cbMaxFlowDelay, sizeof(uchar)};
+file const              flFlowPortTo = {FLOW_PORT_TO, &ibFlowPortTo, sizeof(uchar)};
 
 
 

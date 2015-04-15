@@ -16,14 +16,14 @@ UNI.C
 
 
 
-file const              flObjectName = {FLS_OBJECT_NAME, &szObjectName, sizeof(szObjectName)};
-file const              flCanalsName = {FLS_CANALS_NAME, &mpszCanalsName, sizeof(mpszCanalsName)};
-file const              flGroupsName = {FLS_GROUPS_NAME, &mpszGroupsName, sizeof(mpszGroupsName)};
+file const              flObjectName = {OBJECT_NAME, &szObjectName, sizeof(szObjectName)};
+file const              flCanalsName = {CANALS_NAME, &mpszCanalsName, sizeof(mpszCanalsName)};
+file const              flGroupsName = {GROUPS_NAME, &mpszGroupsName, sizeof(mpszGroupsName)};
 
-file const              flStrictUni = {FLS_STRICT_UNI, &boStrictUni, sizeof(boolean)};
-file const              flMaxDelayUni = {FLS_MAX_DELAY_UNI, &bMaxDelayUni, sizeof(uchar)};
-file const              flRepeatFlowUni = {FLS_REPEAT_FLOW_INI, &boRepeatFlowUni, sizeof(boolean)};
-file const              flDsblPasswordUni = {FLS_DSBL_PASSWORD_INI, &boDsblPasswordUni, sizeof(boolean)};
+file const              flStrictUni = {STRICT_UNI, &boStrictUni, sizeof(boolean)};
+file const              flMaxDelayUni = {MAX_DELAY_UNI, &bMaxDelayUni, sizeof(uchar)};
+file const              flRepeatFlowUni = {REPEAT_FLOW_INI, &boRepeatFlowUni, sizeof(boolean)};
+file const              flDsblPasswordUni = {DSBL_PASSWORD_INI, &boDsblPasswordUni, sizeof(boolean)};
 
 
 
