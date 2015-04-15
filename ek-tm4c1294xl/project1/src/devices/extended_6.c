@@ -29,14 +29,14 @@ void    ResetExtended6(void)
   cwDayCan6 = 0;
   cwMonCan6 = 0;
   memset(&mpCntMonCan6_, 0, sizeof(mpCntMonCan6_));
-  memset(&mpCntCan6, 0, sizeof(mpCntCan6));
+  memset(&mpCntCan6_, 0, sizeof(mpCntCan6_));
 }
 
 
 void    NextDayExtended6(void)
 { 
   cwDayCan6++;
-  memset(&mpCntCan6, 0, sizeof(mpCntCan6));
+  memset(&mpCntCan6_, 0, sizeof(mpCntCan6_));
 }
 
 
@@ -56,8 +56,8 @@ void    MakeExtended6(uchar  ibCan)
  
   mpCntMonCan6_[ibHardMon][ibCan] = va;
 
-  if (mpCntCan6[ibCan].bSelf == ST4_NONE)
-    mpCntCan6[ibCan] = va;
+  if (mpCntCan6_[ibCan].bSelf == ST4_NONE)
+    mpCntCan6_[ibCan] = va;
 }
 
 
@@ -93,7 +93,7 @@ void    OutExtended6(void)
         else
         {
           if (InBuff(6) == (*GetCurrTimeDate()).bMonth - 1)
-            Push(&mpCntCan6[c], sizeof(value6));
+            Push(&mpCntCan6_[c], sizeof(value6));
           else 
             Push(&mpCntMonCan6_[InBuff(6)][c], sizeof(value6));
         }
@@ -134,7 +134,7 @@ value6 va;
   else
   {
     if (ibMon == (*GetCurrTimeDate()).bMonth - 1)
-      va = mpCntCan6[ibCan];
+      va = mpCntCan6_[ibCan];
     else 
       va = mpCntMonCan6_[ibMon][ibCan];
   }
@@ -166,7 +166,7 @@ bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon)
 
 void    ShowDirectCnt(uchar  ibCan)
 {
-  value6 va = mpCntCan6[ibCan];
+  value6 va = mpCntCan6_[ibCan];
 
   reBuffA = va.reSelf;
   tiAlt = va.tiSelf;
@@ -182,13 +182,13 @@ void    ShowDirectCnt(uchar  ibCan)
 
 void    LoadDirectCntReal(uchar  ibCan)
 {
-  value6 va = mpCntCan6[ibCan];
+  value6 va = mpCntCan6_[ibCan];
   reBuffA = va.reSelf;
 }
 
 
 void    LoadDirectCntTime(uchar  ibCan)
 {
-  value6 va = mpCntCan6[ibCan];
+  value6 va = mpCntCan6_[ibCan];
   tiAlt = va.tiSelf;
 }
