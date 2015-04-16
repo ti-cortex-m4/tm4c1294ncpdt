@@ -49,7 +49,7 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = GetCanLong(mpdwChannelsA, i) * reBuffB;
+    reBuffA = mpdwChannelsA[i] * reBuffB;
     mpreChannelsB[i] = reBuffA;
 
     mpboChannelsA[i] = TRUE;     
@@ -81,7 +81,7 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = GetCanLong(mpdwChannelsA, i) * reBuffB * 2;
+    reBuffA = mpdwChannelsA[i] * reBuffB * 2;
     mpreChannelsB[i] = reBuffA;
 
     mpboChannelsA[i] = TRUE;
@@ -120,7 +120,7 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = GetCanLong(mpdwChannelsA, i) * reBuffB;
+    reBuffA = mpdwChannelsA[i] * reBuffB;
     mpreChannelsB[i] = reBuffA;
 
     mpboChannelsA[i] = TRUE;     
@@ -1108,14 +1108,14 @@ ulong   dw;
     if (QueryEnergyA_Full2(0x40,98) == 0) return(0);
     for (i=0; i<4; i++)
     {
-      dw = GetCanLong(mpdwChannelsA, i);
+      dw = mpdwChannelsA[i];
       SetCanLong(mpdwChannelsB, i, &dw);
     }
 
     if (QueryEnergyA_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dw  = GetCanLong(mpdwChannelsA, i);
+      dw  = mpdwChannelsA[i];
       dw -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i, &dw);
@@ -1132,7 +1132,7 @@ ulong   dw;
       if (QueryEnergyA_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return(0);             
       for (i=0; i<4; i++)
       {
-        dw  = GetCanLong(mpdwChannelsA, i);
+        dw  = mpdwChannelsA[i];
         dw += GetCanLong(mpdwChannelsB, i);
 
         SetCanLong(mpdwChannelsB, i, &dw);
@@ -1143,7 +1143,7 @@ ulong   dw;
     if (QueryEnergyA_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dw  = GetCanLong(mpdwChannelsA, i);
+      dw  = mpdwChannelsA[i];
       dw -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i, &dw);
@@ -1191,14 +1191,14 @@ ulong   dw;
     if (QueryEnergyB_Full2(0x40,98) == 0) return(0);                   
     for (i=0; i<4; i++)
     {
-      dw = GetCanLong(mpdwChannelsA, i);
+      dw = mpdwChannelsA[i];
       SetCanLong(mpdwChannelsB, i, &dw);
     }
 
     if (QueryEnergyB_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dw  = GetCanLong(mpdwChannelsA, i);
+      dw  = mpdwChannelsA[i];
       dw -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i, &dw);
@@ -1215,7 +1215,7 @@ ulong   dw;
       if (QueryEnergyB_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return(0);
       for (i=0; i<4; i++)
       {
-        dw  = GetCanLong(mpdwChannelsA, i);
+        dw  = mpdwChannelsA[i];
         dw += GetCanLong(mpdwChannelsB, i);
 
         SetCanLong(mpdwChannelsB, i, &dw);
@@ -1226,7 +1226,7 @@ ulong   dw;
     if (QueryEnergyB_Full2(0,99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      dw  = GetCanLong(mpdwChannelsA, i);
+      dw  = mpdwChannelsA[i];
       dw -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i, &dw);
@@ -1278,7 +1278,7 @@ uchar   i,j;
     if (QueryEnergyDayC_Full2(0, 98) == 0) return(0);
     for (i=0; i<4; i++)
     {
-      ulong dw = GetCanLong(mpdwChannelsA, i);
+      ulong dw = mpdwChannelsA[i];
       SetCanLong(mpdwChannelsB, i, &dw);
     }
 
@@ -1286,7 +1286,7 @@ uchar   i,j;
     if (QueryEnergyAbsC_Full2(99) == 0) return(0);
     for (i=0; i<4; i++)
     {
-      ulong dw  = GetCanLong(mpdwChannelsA, i);
+      ulong dw  = mpdwChannelsA[i];
       dw -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i, &dw);
@@ -1303,7 +1303,7 @@ uchar   i,j;
       if (QueryEnergyMonC_Full2(-((12-1+tiAlt.bMonth-j)%12), 76+j) == 0) return(0);
       for (i=0; i<4; i++)
       {
-        ulong dw = GetCanLong(mpdwChannelsA, i);
+        ulong dw = mpdwChannelsA[i];
         dw += GetCanLong(mpdwChannelsB, i);
 
         SetCanLong(mpdwChannelsB, i, &dw);
@@ -1315,7 +1315,7 @@ uchar   i,j;
     if (QueryEnergyAbsC_Full2(99) == 0) return(0);             
     for (i=0; i<4; i++)
     {
-      ulong dw = GetCanLong(mpdwChannelsA, i);
+      ulong dw = mpdwChannelsA[i];
       dw -= GetCanLong(mpdwChannelsB, i);
 
       SetCanLong(mpdwChannelsB, i, &dw);

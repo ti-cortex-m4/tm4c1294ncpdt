@@ -64,7 +64,7 @@ ulong   dw;
   ShowPercent(60+bTariff);
   for (i=0; i<4; i++)
   {
-    dw = GetCanLong(mpdwChannelsA, i);
+    dw = mpdwChannelsA[i];
     SetCanLong(mpdwChannelsB, i, &dw);
   }
 
@@ -72,7 +72,7 @@ ulong   dw;
   ShowPercent(80+bTariff);
   for (i=0; i<4; i++)
   {
-    dw  = GetCanLong(mpdwChannelsA, i);
+    dw  = mpdwChannelsA[i];
     dw -= GetCanLong(mpdwChannelsB, i);
 
     SetCanLong(mpdwChannelsB, i, &dw);

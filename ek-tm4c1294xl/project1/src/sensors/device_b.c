@@ -518,7 +518,7 @@ real    reBuffA;
 
   for (i=0; i<4; i++)
   {
-    dwBuffC = GetCanLong(mpdwChannelsA, i) * reBuffA;
+    dwBuffC = mpdwChannelsA[i] * reBuffA;
     SetCanLong(mpdwBaseDig, i, &dwBuffC);
   }
 
