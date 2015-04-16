@@ -2,7 +2,7 @@
 #ifndef SKIP_U
 
     case DEV_START_U2:
-      if ((boControlQ == boFalse) && (fCurrCtrlHou == 1))
+      if ((boControlQ == FALSE) && (fCurrCtrlHou == 1))
         MakePause(DEV_PREVCORRECT_U2);
       else 
 	  	MakePause(DEV_OPEN_U2);
@@ -87,7 +87,7 @@
     case DEV_PASSWORD_U2:                     
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if ((boControlQ != boFalse) && (fCurrCtrlHou == 1))
+        if ((boControlQ != FALSE) && (fCurrCtrlHou == 1))
           MakePause(DEV_POSTPASSWORD_U2);
         else
           MakePause(DEV_POSTCORRECT_U2);  
@@ -215,7 +215,7 @@
 
 
     case DEV_POSTCORRECT_U2:                  
-      if (boPlcUFlag == boFalse)
+      if (boPlcUFlag == FALSE)
         MakePause(DEV_PREVHEADER_U2);
       else
       {
