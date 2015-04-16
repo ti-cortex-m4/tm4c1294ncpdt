@@ -4,7 +4,7 @@
     case DEV_START_U3:                     
       Clear(); ShowPercent(50);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_U3);
       break;
@@ -29,7 +29,7 @@
     case DEV_POSTOPENCANAL_U3:                     
       Clear(); ShowPercent(51);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryOptionU();
       SetCurr(DEV_OPTION_U3);
       break;
@@ -61,7 +61,7 @@
         ibMinor++;
       }
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryEnergySpecU(ibMinor); 
       SetCurr(DEV_ENERGY_U3);
       break; 

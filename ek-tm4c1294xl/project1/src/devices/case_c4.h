@@ -4,7 +4,7 @@
     case DEV_START_C4:
       SetupCheckup();
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryOpenC();
       SetCurr(DEV_OPENCANAL_C4);             
       break;
@@ -41,7 +41,7 @@
 
         cbRepeat2 = 0;
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryEnergyDayC(-ibCheckupDay);                          
         SetCurr(DEV_ENERGY_DAY_C4);          
       }
@@ -71,7 +71,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR1_6_C4);
       }
@@ -116,7 +116,7 @@
 
         cbRepeat2 = 0;
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryEnergyDayC(-ibCheckupDay);                          
         SetCurr(DEV_ENERGY_DAY_C4);          
       }
@@ -142,7 +142,7 @@
 
         cbRepeat2 = 0;
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryEnergyMonC(-ibCheckupMon);
         SetCurr(DEV_ENERGY_MON_C4);          
       }
@@ -172,7 +172,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR3_6_C4);
       }
@@ -217,7 +217,7 @@
 
         cbRepeat2 = 0;
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryEnergyMonC(-ibCheckupMon);                          
         SetCurr(DEV_ENERGY_MON_C4);          
       }
@@ -262,7 +262,7 @@
 
       cbRepeat2 = 0;
 
-      cbRepeat = bMINORREPEATS;     
+      cbRepeat = GetMaxRepeats();     
       QueryHeaderC_6();
       SetCurr(DEV_HEADER_6_C4);
       break;
@@ -283,7 +283,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR2_6_C4);
       }
@@ -342,7 +342,7 @@
     case DEV_DATA_6_C4: 
       cbRepeat2 = 0;
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryHeaderC_6();
       SetCurr(DEV_HEADER_6_C4);
       break;

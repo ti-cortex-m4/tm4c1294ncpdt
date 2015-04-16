@@ -2,7 +2,7 @@
 #ifndef SKIP_A
 
     case DEV_START_A3:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
 
       QueryOpenA();
       SetCurr(DEV_OPENCANAL_A3);             
@@ -27,7 +27,7 @@
       break;
 
     case DEV_POSTOPENCANAL_A3:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryEnergyA(0);
       SetCurr(DEV_ENERGY_A3);
       break;

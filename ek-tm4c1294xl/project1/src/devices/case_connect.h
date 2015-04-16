@@ -24,7 +24,7 @@
       break;
 
     case DEV_MODEM_POSTSTART:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
 
       QueryModemBaud(1);
       MakeLongPause(DEV_MODEM_BAUD,1);
@@ -59,7 +59,7 @@
       break;
 
     case DEV_MODEM_POSTBAUD:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
 
       QueryModemCommon(1);
       MakeLongPause(DEV_MODEM_COMMON,1);
@@ -164,7 +164,7 @@
       break;
 
     case DEV_MODEM_NORMAL:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
 
       QueryModemCustom();
       MakeLongPause(DEV_MODEM_CUSTOM,1);
@@ -200,7 +200,7 @@
     case DEV_MODEM_POSTCUSTOM:
       InitWaitAnswer();
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
 
       fConnect = 1;
       QueryModemConnect();
@@ -277,7 +277,7 @@
       break;
 
     case DEV_MODEM_POSTSTOP:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
 
       QueryModemEscape();
       MakeLongPause(DEV_MODEM_ESCAPE,3);
@@ -339,7 +339,7 @@
       break;
 
     case DEV_MODEM_POSTESCAPE:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
 
       QueryModemHookOff();
       MakeLongPause(DEV_MODEM_HOOKOFF,1);

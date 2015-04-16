@@ -19,7 +19,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryTimeF();                          
       SetCurr(DEV_TIME_F2);          
       break;
@@ -75,7 +75,7 @@
         MakePause(DEV_POSTCORRECT_F2);
       else
       {
-        cbRepeat = bMINORREPEATS;                         
+        cbRepeat = GetMaxRepeats();                         
         QueryControlF();                          
         SetCurr(DEV_POSTCONTROL_F2);
       }
@@ -103,7 +103,7 @@
       cbRepeat2 = 0;              
       InitEnergyF();
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryEnergyF();                          
       SetCurr(DEV_ENERGY_F2);
       break;
@@ -134,7 +134,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdF();
         SetCurr(DEV_POSTERROR_F2);
       }
@@ -178,13 +178,13 @@
 
       if (i == bBLOCKS_F)
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryEnergyF();                          
         SetCurr(DEV_ENERGY_F2);
       }
       else
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderF();                          
         SetCurr(DEV_HEADER_F2);
       }

@@ -2,7 +2,7 @@
 #ifndef SKIP_C
 
     case DEV_START_C3:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
 
       QueryOpenC();
       SetCurr(DEV_OPENCANAL_C3);             
@@ -27,7 +27,7 @@
       break;
 
     case DEV_POSTOPENCANAL_C3:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryTimeC();                          
       SetCurr(DEV_TIME_C3);          
       break;
@@ -54,7 +54,7 @@
       ReadTimeAltC(); 
       tiOffs = tiAlt;          
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryEnergyAbsC();
       SetCurr(DEV_ENERGY_C3);
       break;

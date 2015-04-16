@@ -2,14 +2,14 @@
 #ifndef SKIP_F
 
     case DEV_START_F3:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
 
       QueryBreakF();
       MakePause(DEV_POSTOPENCANAL_F3);
       break;
 
     case DEV_POSTOPENCANAL_F3:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryCurrentF();
       SetCurr(DEV_CURRENT_F3);
       break;
