@@ -90,7 +90,7 @@ ulong   dw;
     else
       reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB * 2;
 
-    SetCanReal(mpreChannelsB, i, &reBuffA);
+    mpreChannelsB[i] = reBuffA;
     mpboChannelsA[i] = TRUE;     
   }
 
