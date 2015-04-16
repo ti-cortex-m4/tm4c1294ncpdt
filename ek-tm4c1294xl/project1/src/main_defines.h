@@ -8,7 +8,7 @@ MAIN_DEFINES.H
 #define __MAIN_DEFINES
 
 
-#define SKIP_A
+//#define SKIP_A
 //#define SKIP_B
 //#define SKIP_C
 #define SKIP_D

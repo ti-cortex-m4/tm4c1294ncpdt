@@ -13,6 +13,7 @@ PARAMS2.C
 #include    "../../digitals/digitals_display.h"
 #include    "../../digitals/digitals_messages.h"
 #include    "../../devices/devices.h"
+#include    "../../sensors/device_a.h"
 #include    "../../sensors/device_b.h"
 #include    "../../sensors/device_c.h"
 #include    "../../time/delay.h"
@@ -151,7 +152,7 @@ uchar   i;
     case PAR_F2 : i = 0x42; break;
     case PAR_F3 : i = 0x43; break;
 
-    default:     return(0); break;
+    default:     return(0);
   }
 
   DelayOff();
@@ -931,7 +932,7 @@ bool    ReadParam(uint  iwPrm)
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadParamA() );  break;
+    case 1:  return( ReadParamA() );
 #endif
 
 #ifndef SKIP_B

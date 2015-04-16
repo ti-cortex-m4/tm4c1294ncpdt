@@ -15,6 +15,7 @@ EXTENDED_5.C
 #include        "../serial/ports.h"
 #include        "../time/rtc.h"
 #include        "../console.h"
+#include        "extended_5_a.h"
 #include        "extended_5_b.h"
 #include        "extended_5_c.h"
 #include        "extended_5.h"
