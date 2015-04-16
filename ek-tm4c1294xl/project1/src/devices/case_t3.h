@@ -5,7 +5,7 @@
       InitCurrentT();
       iwMajor = 0;
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryEnergyAbsT(iwMajor);
       SetCurr(DEV_ENERGY_T3);
       break;
@@ -16,7 +16,7 @@
         AddCurrentT();
         if (++iwMajor < 4)
         {
-          cbRepeat = bMINORREPEATS;
+          cbRepeat = GetMaxRepeats();
           QueryEnergyAbsT(iwMajor);
           SetCurr(DEV_ENERGY_T3);
         }

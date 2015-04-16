@@ -26,7 +26,7 @@
     case DEV_OPEN_U2:
       Clear(); ShowPercent(50);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_U2);
       break;
@@ -54,7 +54,7 @@
     case DEV_POSTOPENCANAL_U2:                     
       Clear(); ShowPercent(51);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryOptionU();
       SetCurr(DEV_OPTION_U2);
       break;
@@ -79,7 +79,7 @@
     case DEV_POSTOPTION_U2:                     
       ShowPercent(52);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryPasswordK();
       SetCurr(DEV_PASSWORD_U2);
       break;
@@ -109,7 +109,7 @@
     case DEV_POSTPASSWORD_U2:
       ShowPercent(53);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryTimeSpecK();                          
       SetCurr(DEV_TIME_U2);          
       break;
@@ -138,7 +138,7 @@
     case DEV_POSTTIME_U2:                  
       ShowPercent(54);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryDateSpecK();                          
       SetCurr(DEV_DATE_U2);          
       break;
@@ -191,7 +191,7 @@
 
 
     case DEV_CONTROL_U2: 
-      cbRepeat = bMINORREPEATS;                         
+      cbRepeat = GetMaxRepeats();                         
       QueryControlK();                          
       SetCurr(DEV_POSTCONTROL_U2);
       break;
@@ -236,7 +236,7 @@
         ibMinor++;
       }
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryHeaderU();
       SetCurr(DEV_HEADER_U2);
       break;
@@ -297,7 +297,7 @@
     case DEV_POSTHEADER_U2:                   
       if (++ibMinor < ibMinorMax)
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderU();
         SetCurr(DEV_HEADER_U2);
       }
@@ -323,7 +323,7 @@
           ibMinor++;
         }
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderU();
         SetCurr(DEV_HEADER_U2);
       }

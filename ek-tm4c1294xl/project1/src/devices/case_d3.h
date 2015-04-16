@@ -28,7 +28,7 @@
     case DEV_POSTOPENCANAL_D3:
       ShowPercent(98);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryPasswordD();
       SetCurr(DEV_PASSWORD_D3);
       break;
@@ -53,7 +53,7 @@
     case DEV_POSTPASSWORD_D3:
       ShowPercent(99);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryEnergyD();
       SetCurr(DEV_ENERGY_D3);
       break;
@@ -81,7 +81,7 @@
       break;
 
     case DEV_POSTENERGY_D3:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryContinueD();
       SetCurr(DEV_CONTINUE_D3);
       break;
@@ -96,7 +96,7 @@
           MakePause(DEV_POSTCONTINUE_D3);  
         else
         {
-          cbRepeat = bMINORREPEATS;
+          cbRepeat = GetMaxRepeats();
           QueryStopD();
           SetCurr(DEV_QUADRANTS_D3);
         }
@@ -116,7 +116,7 @@
       break;
 
     case DEV_POSTCONTINUE_D3:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryContinueD();
       SetCurr(DEV_CONTINUE_D3);
       break;

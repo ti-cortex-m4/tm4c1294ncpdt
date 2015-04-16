@@ -4,7 +4,7 @@
     case DEV_START_C2:
       cbCorrects = 0;
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryOpenC();
       SetCurr(DEV_OPENCANAL_C2);
       break;
@@ -36,7 +36,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryTimeC();                          
       SetCurr(DEV_TIME_C2);          
       break;
@@ -102,7 +102,7 @@
         MakePause(DEV_POSTCORRECT_C2);
       else
       {
-        cbRepeat = bMINORREPEATS;                         
+        cbRepeat = GetMaxRepeats();                         
         QueryControlC();                          
         SetCurr(DEV_POSTCONTROL_C2);
       }
@@ -128,7 +128,7 @@
 
 
     case DEV_POSTCORRECT_C2:                  
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryVersionC();
       SetCurr(DEV_VERSION_C2);
       break;
@@ -158,7 +158,7 @@
       break;
 
     case DEV_POSTVERSION_C2:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryTimeC();                          
       SetCurr(DEV_VALUE_C2);          
       break;
@@ -198,7 +198,7 @@
       {             
         InitHeaderC_6();
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderC_6();
         SetCurr(DEV_HEADER_6_C2);
       }
@@ -206,7 +206,7 @@
       {
         InitHeaderC_1();
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderC_1();
         SetCurr(DEV_HEADER_1_C2);
       }
@@ -239,7 +239,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR_6_C2);
       }
@@ -283,7 +283,7 @@
       break;
 
     case DEV_DATA_6_C2:                   
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryHeaderC_6();
       SetCurr(DEV_HEADER_6_C2);
       break;
@@ -339,7 +339,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR_1_C2);
       }
@@ -386,7 +386,7 @@
         DoneProfile();
       else
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderC_1();
         SetCurr(DEV_HEADER_1_C2);
       }

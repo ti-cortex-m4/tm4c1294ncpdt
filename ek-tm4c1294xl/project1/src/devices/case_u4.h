@@ -12,7 +12,7 @@
         ibMinor++;
       }
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryHeaderU_Plc();
       SetCurr(DEV_HEADER_U4);
       break;
@@ -73,7 +73,7 @@
     case DEV_POSTHEADER_U4:                   
       if (++ibMinor < ibMinorMax)
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderU_Plc();
         SetCurr(DEV_HEADER_U4);
       }
@@ -99,7 +99,7 @@
           ibMinor++;
         }
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderU_Plc();
         SetCurr(DEV_HEADER_U4);
       }

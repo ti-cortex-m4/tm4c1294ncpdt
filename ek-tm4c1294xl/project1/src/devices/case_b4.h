@@ -4,7 +4,7 @@
     case DEV_START_B4:
       SetupCheckup();
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryOpenB();
       SetCurr(DEV_OPENCANAL_B4);             
       break;
@@ -33,7 +33,7 @@
 
 
     case DEV_PREVTOP1_B4:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryTopB();                          
       SetCurr(DEV_TOP1_B4);
       break;
@@ -67,7 +67,7 @@
     case DEV_PREVHEADER1_B4:
       cbRepeat2 = 0;
 
-      cbRepeat = bMINORREPEATS;     
+      cbRepeat = GetMaxRepeats();     
       QueryHeaderB();
       SetCurr(DEV_HEADER1_B4);
       break;
@@ -88,7 +88,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdB();
         SetCurr(DEV_POSTERROR4_B4);
       }
@@ -151,7 +151,7 @@
 
         cbRepeat2 = 0;
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryEnergyPrevDayB();                          
         SetCurr(DEV_ENERGY_DAY_B4);          
       }
@@ -173,7 +173,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdB();
         SetCurr(DEV_POSTERROR1_B4);
       }
@@ -241,7 +241,7 @@
 
         cbRepeat2 = 0;
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryEnergyPrevMonB(ibCheckupMon);
         SetCurr(DEV_ENERGY_MON_B4);          
       }
@@ -263,7 +263,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdB();
         SetCurr(DEV_POSTERROR3_B4);
       }
@@ -308,7 +308,7 @@
 
         cbRepeat2 = 0;
 
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryEnergyPrevMonB(ibCheckupMon);
         SetCurr(DEV_ENERGY_MON_B4);          
       }
@@ -350,7 +350,7 @@
 
 
     case DEV_PREVTOP2_B4:
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryTopB();                          
       SetCurr(DEV_TOP2_B4);
       break;
@@ -385,7 +385,7 @@
     case DEV_PREVHEADER2_B4:
       cbRepeat2 = 0;
 
-      cbRepeat = bMINORREPEATS;     
+      cbRepeat = GetMaxRepeats();     
       QueryHeaderB();
       SetCurr(DEV_HEADER2_B4);
       break;
@@ -406,7 +406,7 @@
       if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
       else 
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryIdB();
         SetCurr(DEV_POSTERROR2_B4);
       }

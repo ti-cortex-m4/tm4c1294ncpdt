@@ -28,7 +28,7 @@
     case DEV_POSTOPENCANAL_D2:
       ShowPercent(96);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryPasswordD();
       SetCurr(DEV_PASSWORD_D2);
       break;
@@ -58,7 +58,7 @@
     case DEV_POSTPASSWORD_D2:
       ShowPercent(97);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryCorrectD();
       SetCurr(DEV_CORRECT_D2);
       break;
@@ -83,7 +83,7 @@
     case DEV_POSTCORRECT_D2:
       ShowPercent(98);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryProfileD();
       SetCurr(DEV_PROFILE_D2);
       break;
@@ -111,7 +111,7 @@
     case DEV_POSTPROFILE_D2:
       ShowPercent(99);
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryPacketSizeD();
       SetCurr(DEV_PACKETSIZE_D2);
       break;
@@ -139,7 +139,7 @@
     case DEV_POSTPACKETSIZE_D2:
       ibMinor = 0;
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryDataD(5+6 + (uint)48*2*cbChannels + 2);
       SetCurr(DEV_DATA1_D2);
       break;
@@ -170,7 +170,7 @@
     case DEV_POSTDATA2_D2:
       ibMinor++;
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryDataD(5 + (uint)64*ibMinorMax + 2);
       SetCurr(DEV_DATA2_D2);
       break;

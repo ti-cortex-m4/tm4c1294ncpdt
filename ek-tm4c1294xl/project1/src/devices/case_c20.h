@@ -20,7 +20,7 @@
     case DEV_DATA_61_C2: // основной опрос                  
       //x_str("\n\n START MAIN QUERY");
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryHeaderC1_6();
       SetCurr(DEV_HEADER_61_C2);
       break;
@@ -63,7 +63,7 @@
     case DEV_DATA_62_C2: // проверочный опрос
       //x_str("\n START TEST QUERY: "); x_bytehex(ibHouCheck); x_bytehex(mpbHouCheck[ibDig]);
 
-      cbRepeat = bMINORREPEATS;   
+      cbRepeat = GetMaxRepeats();   
       QueryHeaderC2_6();
       SetCurr(DEV_HEADER_62_C2);
       break;
