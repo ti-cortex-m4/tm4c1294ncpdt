@@ -1133,7 +1133,7 @@ uchar   i;
 
   ReadEnergyN();
 
-  mpdwBase[ibDig] = GetCanLong(mpdwChannelsA, 0);
+  mpdwBase[ibDig] = mpdwChannelsA[0];
 
   return(1);
 }
