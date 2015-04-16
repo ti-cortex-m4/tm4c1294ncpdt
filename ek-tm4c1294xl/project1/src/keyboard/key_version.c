@@ -32,7 +32,7 @@ void    ShowVersion(void)
     case 1: 
       ShowHi(szQuantity); Clear();
       sprintf(szLo+0,"%02u.%02u.%03u.%05lu",
-              bCANALS, bGROUPS, (uchar)(wHOURS/48), GetCODESize());
+              bCANALS, bGROUPS, (uchar)(wHOURS/48), GetFileSize());
       break;
 
     case 2: 

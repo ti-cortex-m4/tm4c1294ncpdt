@@ -19,9 +19,15 @@ void    InitCODE(void)
 
 
 
-ulong   GetCODESize(void)
+ulong   GetFileSize(void)
 {
-  return szImageSize[0];
+  combo32 co;
+  co.mpbBuff[0] = szImageSize[9];
+  co.mpbBuff[1] = szImageSize[10];
+  co.mpbBuff[2] = szImageSize[11];
+  co.mpbBuff[3] = szImageSize[12];
+
+  return co.dwBuff;
 }
 
 
