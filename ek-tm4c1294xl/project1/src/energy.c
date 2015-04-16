@@ -20,19 +20,6 @@ ENERGY.C
 
 
 
-ulong   GetCanLong(ulong  *mpdwT, uchar  ibCan) {
-	ASSERT(ibCan < bCANALS);
-  return mpdwT[ibCan];
-}
-
-
-void    SetCanLong(ulong  *mpdwT, uchar  ibCan, ulong  *pdwT) {
-	ASSERT(ibCan < bCANALS);
-  mpdwT[ibCan] = *pdwT;
-}
-
-
-
 real    GetCanReal(real  *mpreT, uchar  ibCan) {
 	ASSERT(ibCan < bCANALS);
   return mpreT[ibCan];

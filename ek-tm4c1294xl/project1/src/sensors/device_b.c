@@ -194,7 +194,7 @@ uchar   i;
         (coEnergy.mpbBuff[2] == 0xFF) &&
         (coEnergy.mpbBuff[3] == 0xFF)) coEnergy.dwBuff = 0;
 
-    SetCanLong(mpdwChannelsA, i, &coEnergy.dwBuff);
+    mpdwChannelsA[i] = coEnergy.dwBuff;
   }
 
   coEnergy.dwBuff = mpdwChannelsA[diCurr.ibLine];
@@ -509,17 +509,13 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 
 void    ReadCurrentB(void)
 {
-uchar   i;
-ulong   dwBuffC;
-real    reBuffA;
-
   ReadEnergyB();
-  reBuffA = GetCanReal(mpreLevelDiv, ibDig);
+  real re = mpreLevelDiv[ibDig];
 
+  uchar i;
   for (i=0; i<4; i++)
   {
-    dwBuffC = mpdwChannelsA[i] * reBuffA;
-    SetCanLong(mpdwBaseDig, i, &dwBuffC);
+    mpdwBaseDig[i] = mpdwChannelsA[i] * re;
   }
 
   MakeCurrent();

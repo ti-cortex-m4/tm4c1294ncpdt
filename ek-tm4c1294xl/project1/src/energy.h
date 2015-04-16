@@ -4,9 +4,6 @@ ENERGY.H
 
 ------------------------------------------------------------------------------*/
 
-ulong   GetCanLong(ulong  *mpdwT, uchar  ibCan);
-void    SetCanLong(ulong  *mpdwT, uchar  ibCan, ulong  *pdwT);
-
 real    GetCanReal(real  *mpreT, uchar  ibCan);
 void    SetCanReal(real  *mpreT, uchar  ibCan, real  *preT);
 

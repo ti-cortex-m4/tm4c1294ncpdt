@@ -345,8 +345,7 @@ uchar   i;
 
   for (i=0; i<bCANALS; i++)
   {
-    dwBuffC = (ulong)(PopChar()*0x100 + PopChar());
-    SetCanLong(mpdwChannelsB, i);
+    mpdwChannelsB[i] = (ulong)(PopChar()*0x100 + PopChar());
   }
 
 
