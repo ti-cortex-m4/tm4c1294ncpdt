@@ -279,7 +279,7 @@ uchar   i;
     coEnergy.mpbBuff[2] = PopChar();
     coEnergy.mpbBuff[3] = PopChar();
 
-    SetCanLong(mpdwChannelsA, i, &coEnergy.dwBuff);
+    mpdwChannelsA[i] = coEnergy.dwBuff;
   }
 
   coEnergy.dwBuff = mpdwChannelsA[diCurr.ibLine];
