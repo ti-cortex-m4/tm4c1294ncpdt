@@ -31,7 +31,7 @@ void    ShowVersion(void)
 
     case 1: 
       ShowHi(szQuantity); Clear();
-      sprintf(szLo+0,"%02u.%02u.%03u.%05lu",
+      sprintf(szLo+0,"%02u.%02u.%03u.%lu",
               bCANALS, bGROUPS, (uchar)(wHOURS/48), GetFileSize());
       break;
 
