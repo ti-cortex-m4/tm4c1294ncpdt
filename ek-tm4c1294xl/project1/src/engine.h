@@ -4,4 +4,6 @@ ENGINE.H
 
 ------------------------------------------------------------------------------*/
 
+extern  uint                    iwHou;
+
 extern  real                    reBuffA, reBuffB;

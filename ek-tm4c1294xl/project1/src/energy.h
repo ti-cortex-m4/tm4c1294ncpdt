@@ -4,6 +4,9 @@ ENERGY.H
 
 ------------------------------------------------------------------------------*/
 
+uint    GetCanInt(uint  *mpwT, uchar  ibCan);
+void    SetCanInt(uint  *mpwT, uchar  ibCan, uint  wT);
+
 ulong   GetCanLong(ulong  *mpdwT, uchar  ibCan);
 void    SetCanLong(ulong  *mpdwT, uchar  ibCan, ulong  *pdwT);
 
