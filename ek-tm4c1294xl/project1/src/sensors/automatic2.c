@@ -1109,7 +1109,7 @@ ulong   dw;
     for (i=0; i<4; i++)
     {
       dw = mpdwChannelsA[i];
-      SetCanLong(mpdwChannelsB, i, &dw);
+      mpdwChannelsB[i] = dw;
     }
 
     if (QueryEnergyA_Full2(0,99) == 0) return(0);             
@@ -1118,13 +1118,13 @@ ulong   dw;
       dw  = mpdwChannelsA[i];
       dw -= mpdwChannelsB[i];
 
-      SetCanLong(mpdwChannelsB, i, &dw);
+      mpdwChannelsB[i] = dw;
     }
   }
   else
   {
     dw = 0;
-    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i, &dw);
+    for (i=0; i<4; i++) mpdwChannelsB[i] = dw;
 
     j = ibMonth + 2;
     do
@@ -1135,7 +1135,7 @@ ulong   dw;
         dw  = mpdwChannelsA[i];
         dw += mpdwChannelsB[i];
 
-        SetCanLong(mpdwChannelsB, i, &dw);
+        mpdwChannelsB[i] = dw;
       }
     }
     while ((bMONTHS + tiAlt.bMonth - j++) % bMONTHS != 0 );
@@ -1146,7 +1146,7 @@ ulong   dw;
       dw  = mpdwChannelsA[i];
       dw -= mpdwChannelsB[i];
 
-      SetCanLong(mpdwChannelsB, i, &dw);
+      mpdwChannelsB[i] = dw;
     }
   }
 
@@ -1192,7 +1192,7 @@ ulong   dw;
     for (i=0; i<4; i++)
     {
       dw = mpdwChannelsA[i];
-      SetCanLong(mpdwChannelsB, i, &dw);
+      mpdwChannelsB[i] = dw;
     }
 
     if (QueryEnergyB_Full2(0,99) == 0) return(0);             
@@ -1201,13 +1201,13 @@ ulong   dw;
       dw  = mpdwChannelsA[i];
       dw -= mpdwChannelsB[i];
 
-      SetCanLong(mpdwChannelsB, i, &dw);
+      mpdwChannelsB[i] = dw;
     }
   }
   else
   {
     dw = 0;
-    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i, &dw);
+    for (i=0; i<4; i++) mpdwChannelsB[i] = dw;
 
     j = ibMonth + 2;
     do
@@ -1218,7 +1218,7 @@ ulong   dw;
         dw  = mpdwChannelsA[i];
         dw += mpdwChannelsB[i];
 
-        SetCanLong(mpdwChannelsB, i, &dw);
+        mpdwChannelsB[i] = dw;
       }
     }
     while ((bMONTHS + tiAlt.bMonth - j++) % bMONTHS != 0 );
@@ -1229,7 +1229,7 @@ ulong   dw;
       dw  = mpdwChannelsA[i];
       dw -= mpdwChannelsB[i];
 
-      SetCanLong(mpdwChannelsB, i, &dw);
+      mpdwChannelsB[i] = dw;
     }
   }
 
@@ -1279,7 +1279,7 @@ uchar   i,j;
     for (i=0; i<4; i++)
     {
       ulong dw = mpdwChannelsA[i];
-      SetCanLong(mpdwChannelsB, i, &dw);
+      mpdwChannelsB[i] = dw;
     }
 
 
@@ -1289,13 +1289,13 @@ uchar   i,j;
       ulong dw  = mpdwChannelsA[i];
       dw -= mpdwChannelsB[i];
 
-      SetCanLong(mpdwChannelsB, i, &dw);
+      mpdwChannelsB[i] = dw;
     }
   }
   else
   {
     ulong dw = 0;
-    for (i=0; i<4; i++) SetCanLong(mpdwChannelsB, i, &dw);
+    for (i=0; i<4; i++) mpdwChannelsB[i] = dw;
 
     j = (ibMonth + 1)%12;
     do
@@ -1306,7 +1306,7 @@ uchar   i,j;
         ulong dw = mpdwChannelsA[i];
         dw += mpdwChannelsB[i];
 
-        SetCanLong(mpdwChannelsB, i, &dw);
+        mpdwChannelsB[i] = dw;
       }
     }
     while ((bMONTHS + tiAlt.bMonth - ++j) % bMONTHS != 0 );
@@ -1318,7 +1318,7 @@ uchar   i,j;
       ulong dw = mpdwChannelsA[i];
       dw -= mpdwChannelsB[i];
 
-      SetCanLong(mpdwChannelsB, i, &dw);
+      mpdwChannelsB[i] = dw;
     }
   }
 
