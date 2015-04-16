@@ -10,4 +10,6 @@ ENGINE.Ñ
 
 
 
+uint                    iwHou;
+
 real                    reBuffA, reBuffB;

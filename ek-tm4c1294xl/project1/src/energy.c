@@ -20,6 +20,19 @@ ENERGY.C
 
 
 
+uint    GetCanInt(uint  *mpwT, uchar  ibCan) {
+	ASSERT(ibCan < bCANALS);
+  return mpwT[ibCan];
+}
+
+
+void    SetCanInt(uint  *mpwT, uchar  ibCan, uint  wT) {
+	ASSERT(ibCan < bCANALS);
+  mpwT[ibCan] = wT;
+}
+
+
+
 ulong   GetCanLong(ulong  *mpdwT, uchar  ibCan) {
 	ASSERT(ibCan < bCANALS);
   return mpdwT[ibCan];
