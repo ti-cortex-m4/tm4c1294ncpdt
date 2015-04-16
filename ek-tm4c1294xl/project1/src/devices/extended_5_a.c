@@ -65,7 +65,7 @@ ulong   dw;
   for (i=0; i<4; i++)
   {
     dw = mpdwChannelsA[i];
-    SetCanLong(mpdwChannelsB, i, &dw);
+    mpdwChannelsB[i] = dw;
   }
 
   if (QueryEnergyTariffA_Full(0,bTariff) == 0) return(0);             
@@ -75,7 +75,7 @@ ulong   dw;
     dw  = mpdwChannelsA[i];
     dw -= mpdwChannelsB[i];
 
-    SetCanLong(mpdwChannelsB, i, &dw);
+    mpdwChannelsB[i] = dw;
   }
 
 
