@@ -74,7 +74,54 @@ void    Response1_CRC(void)
       case bINQ_GETCOUNT: OutReal(mpreCount, bCANALS); break;
       case bINQ_GETLOSSE: OutReal(mpreLosse, bCANALS); break;
       case bINQ_GETLEVEL: OutReal(mpreLevelDiv, bCANALS); break;
+/*
+      case bINQ_GETKOEFF:
+        if (bInBuff5 < bCANALS)
+        {
+          InitPushCRC();
 
+          reBuffA = *PGetCanReal(mpreTransEng, bInBuff5);
+          PushReal();
+          reBuffA = *PGetCanReal(mpreTransCnt, bInBuff5);
+          PushReal();
+          reBuffA = *PGetCanReal(mprePulseHou, bInBuff5);
+          PushReal();
+          reBuffA = *PGetCanReal(mprePulseMnt, bInBuff5);
+          PushReal();
+
+          Output(sizeof(real)*4);
+        }
+        else Result(bRES_BADADDRESS);
+        break;
+
+      case bINQ_GETVALUE_ENGHOU:
+        if (enGlobal != GLB_PROGRAM)
+          Common(mpreValueEngHou, sizeof(real)*bCANALS);
+        else
+          Result(bRES_NEEDWORK);
+        break;
+
+      case bINQ_GETVALUE_CNTHOU:
+        if (enGlobal != GLB_PROGRAM)
+          Common(mpreValueCntHou, sizeof(real)*bCANALS);
+        else
+          Result(bRES_NEEDWORK);
+        break;
+
+      case bINQ_GETVALUE_ENGMNT:
+        if (enGlobal != GLB_PROGRAM)
+          Common(mpreValueEngMnt, sizeof(real)*bCANALS);
+        else
+          Result(bRES_NEEDWORK);
+        break;
+
+      case bINQ_GETVALUE_CNTMNT:
+        if (enGlobal != GLB_PROGRAM)
+          Common(mpreValueCntMnt, sizeof(real)*bCANALS);
+        else
+          Result(bRES_NEEDWORK);
+        break;
+*/
       case bINQ_GETDIGITAL: OutGetDigital(); break;
       case bINQ_SETDIGITAL: OutSetDigital(); break;
 

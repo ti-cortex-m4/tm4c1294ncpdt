@@ -50,6 +50,7 @@ QUERIES.H
 #define bINQ_SETLOSSE                  41
 #define bINQ_GETLEVEL                  180
 #define bINQ_SETLEVEL                  181
+#define bINQ_GETKOEFF                  233
 
 #define bINQ_GETDIGITAL                42
 #define bINQ_SETDIGITAL                43
