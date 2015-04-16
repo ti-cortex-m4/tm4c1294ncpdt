@@ -113,7 +113,7 @@ ulong   dw;
   for (i=0; i<4; i++)
   {
     dw  = mpdwChannelsA[i];
-    dw -= GetCanLong(mpdwChannelsB, i);
+    dw -= mpdwChannelsB[i];
 
     SetCanLong(mpdwChannelsB, i, &dw);
   }
@@ -123,7 +123,7 @@ ulong   dw;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = GetCanLong(mpdwChannelsB, i) * reBuffB;
+    reBuffA = mpdwChannelsB[i] * reBuffB;
 
     mpreChannelsB[i] = reBuffA;
     mpboChannelsA[i] = TRUE;     
