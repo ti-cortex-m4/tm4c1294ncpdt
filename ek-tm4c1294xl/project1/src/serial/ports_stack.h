@@ -18,7 +18,6 @@ void    PushFloat(float  fl);
 void    PushDouble(double  db);
 void    PushTime(time  *pti);
 void    PushString(char  *psz);
-void    PushStringSkip(char  *psz, uchar  bSize);
 void    PushIntAsString(uint  wT);
 void    PushBuffInt(uint  *pwData, uint  wSize);
 void    PushBuffLong(ulong  *pdwData, uint  wSize);
