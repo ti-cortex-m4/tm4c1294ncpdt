@@ -12,7 +12,7 @@
       {
         ReadVersionS();
 
-        if (boHideMessages == boFalse)
+        if (boHideMessages == FALSE)
           MakeLongPause(DEV_POSTVERSION_S2, 1);
         else
           MakePause(DEV_POSTVERSION_S2);
