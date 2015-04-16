@@ -38,6 +38,7 @@ FLASH.H
 
 
 // количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
+#define UINTCAN_PAGES       (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
 #define bIMPULSE_CAN        (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
 #define bPOWER_GRP          (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
 #define REALCAN_PAGES       (uchar)(sizeof(real)    * bCANALS/wFREEPAGE_SIZE + 1)
@@ -57,7 +58,6 @@ FLASH.H
 #else
 
 #define IMPHOUCAN_PAGES     (uint)(wHOURS/1)
-#define UINTCAN_PAGES       (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
 
 #endif
 

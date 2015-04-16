@@ -146,18 +146,6 @@ void    PushString(char  *psz)
 }
 
 
-void    PushStringSkip(char  *psz, uchar  bSize)
-{
-  uchar i = 0;
-  while (true)
-  {
-    if (!*psz) break;
-    uchar b = *psz++;
-    if (++i > bSize) PushChar(b);
-  }
-}
-
-
 void    PushBuffInt(uint  *pwData, uint  wSize)
 {
   while (wSize-- > 0)
