@@ -4,7 +4,7 @@
     case DEV_START_B3:
       cbRepeat = GetMaxRepeats();
       QueryOpenB();
-      SetCurr(DEV_OPENCANAL_B3);
+      SetCurr(DEV_OPENCANAL_B3);             
       break;
 
     case DEV_OPENCANAL_B3:
@@ -34,19 +34,19 @@
     case DEV_ENERGY_B3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         ReadCurrentB();
-      else
+      else 
       {
         if (cbRepeat == 0)
-          ErrorCurrent();
+          ErrorCurrent(); 
         else
         {
           ErrorLink();
           cbRepeat--;
-
+          
           QueryEnergyB(0);
           SetCurr(DEV_ENERGY_B3);
         }
-      }
+      } 
       break;
 
 #endif
