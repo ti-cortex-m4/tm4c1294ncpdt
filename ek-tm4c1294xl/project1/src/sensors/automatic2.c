@@ -506,7 +506,7 @@ uchar   i;
   ReadEnergyN();
 
 
-  reBuffA = GetCanLong(mpdwChannelsA, 0) * *PGetCanReal(mpreValueCntHou,ibDig);
+  reBuffA = mpdwChannelsA[0] * *PGetCanReal(mpreValueCntHou,ibDig);
   reBuffA += *PGetCanReal(mpreCount,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
@@ -1163,7 +1163,7 @@ ulong   dw;
     mpboChannelsA[i] = TRUE;     
   }
 
-  reBuffA = GetCanLong(mpdwChannelsB, diCurr.ibLine) * reBuffB;
+  reBuffA = mpdwChannelsB[diCurr.ibLine] * reBuffB;
 
   return(1);
 }
@@ -1246,7 +1246,7 @@ ulong   dw;
     mpboChannelsA[i] = TRUE;
   }
 
-  reBuffA = GetCanLong(mpdwChannelsB, diCurr.ibLine) * reBuffB * 2;
+  reBuffA = mpdwChannelsB[diCurr.ibLine] * reBuffB * 2;
 
   return(1);
 }
@@ -1333,7 +1333,7 @@ uchar   i,j;
     mpboChannelsA[i] = TRUE;     
   }
 
-  reBuffA = GetCanLong(mpdwChannelsB, diCurr.ibLine) * reBuffB;
+  reBuffA = mpdwChannelsB[diCurr.ibLine] * reBuffB;
 
   return(1);
 }

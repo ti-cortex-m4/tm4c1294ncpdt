@@ -153,7 +153,7 @@ uchar   i;
     SetCanLong(mpdwChannelsA, i, &coEnergy.dwBuff);
   }
 
-  coEnergy.dwBuff = GetCanLong(mpdwChannelsA, diCurr.ibLine);
+  coEnergy.dwBuff = mpdwChannelsA[diCurr.ibLine];
 }
 
 
