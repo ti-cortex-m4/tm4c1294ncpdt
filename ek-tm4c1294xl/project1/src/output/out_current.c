@@ -40,7 +40,7 @@ uint    w;
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
     {
-    	PushFloat(mpreEsc_S[i]);
+      PushFloat(mpreEsc_S[i]);
       PushTime(&mptiEsc_S[i]);
       PushFloat(mpreLevelDiv[i]);
       PushFloat(mpreCount[i]);

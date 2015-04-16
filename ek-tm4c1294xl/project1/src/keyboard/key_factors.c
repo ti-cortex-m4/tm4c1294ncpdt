@@ -182,8 +182,8 @@ void    key_SetFactors(void)
             }
             else
             {
-              reBuffA -= GetCanInt(mpwImpMntCan[ibSoftMnt],ibX) * GetCanReal(mpreValueCntMnt,ibX);
-              reBuffA -= *PGetCanImpAll(mpimAbsCan,ibX)         * GetCanReal(mpreValueCntHou,ibX);
+              reBuffA -= mpwImpMntCan[ibSoftMnt][ibX] * GetCanReal(mpreValueCntMnt,ibX);
+              reBuffA -= *PGetCanImpAll(mpimAbsCan,ibX) * GetCanReal(mpreValueCntHou,ibX);
             }
 
             SetCanReal(mpreCount,ibX,&reBuffA);

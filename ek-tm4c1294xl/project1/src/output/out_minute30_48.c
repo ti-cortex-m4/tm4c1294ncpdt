@@ -135,7 +135,7 @@ real    re;
             PushFloat(re);
           }
           else
-          if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], c) == 0xFFFF)
+          if (mpwImpHouCan[ PrevSoftHou() ][c] == 0xFFFF)
           {
             PushChar(0xFF);
             PushChar(0xFF);

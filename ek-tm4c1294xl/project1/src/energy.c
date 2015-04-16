@@ -20,19 +20,6 @@ ENERGY.C
 
 
 
-uint    GetCanInt(uint  *mpwT, uchar  ibCan) {
-	ASSERT(ibCan < bCANALS);
-  return mpwT[ibCan];
-}
-
-
-void    SetCanInt(uint  *mpwT, uchar  ibCan, uint  wT) {
-	ASSERT(ibCan < bCANALS);
-  mpwT[ibCan] = wT;
-}
-
-
-
 ulong   GetCanLong(ulong  *mpdwT, uchar  ibCan) {
 	ASSERT(ibCan < bCANALS);
   return mpdwT[ibCan];
@@ -89,7 +76,7 @@ real    reA, reB;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
     j = GetGroupsNodeCanal(ibGrp,i);
-    reB = GetCanReal(mpreValueEngMnt,j) * GetCanInt(mpwT,j);
+    reB = GetCanReal(mpreValueEngMnt,j) * mpwT[j];
 
     if (GetGroupsNodeSign(ibGrp,i) == 0)
       reA += reB;
@@ -107,7 +94,7 @@ real    GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
 {
 real    re;
 
-  re = GetCanReal(mpreValueEngMnt,ibCan) * GetCanInt(mpwT,ibCan);
+  re = GetCanReal(mpreValueEngMnt,ibCan) * mpwT[ibCan];
 
   re *= bMul;
   return re;
@@ -126,10 +113,10 @@ real    reA, reB;
   {
     j = GetGroupsNodeCanal(ibGroup,i);
 
-    if (GetCanInt(mpwT,j) == 0xFFFF)
+    if (mpwT[j] == 0xFFFF)
       reB = 0;
     else
-      reB = GetCanReal(mpreValueEngHou,j) * GetCanInt(mpwT,j);
+      reB = GetCanReal(mpreValueEngHou,j) * mpwT[j];
 
     if (GetGroupsNodeSign(ibGroup,i) == 0)
       reA += reB;
@@ -143,14 +130,14 @@ real    reA, reB;
 
 
 // рассчитывает канальное значение на основе канального массива uint (получасовая мощность)
-real    GetCanHouInt2Real(uint  *mpwT, uchar  ibCanal, uchar  bMul)
+real    GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
 {
 real    re;
 
-  if (GetCanInt(mpwT,ibCanal) == 0xFFFF)
+  if (mpwT[ibCan] == 0xFFFF)
     re = 0;
   else
-    re = GetCanReal(mpreValueEngHou,ibCanal) * GetCanInt(mpwT,ibCanal);
+    re = GetCanReal(mpreValueEngHou,ibCan) * mpwT[ibCan];
 
   re *= bMul;
   return re;
@@ -277,8 +264,8 @@ void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  *pti)
   uchar t = mpibEngPrevTariff[i];
   ulong dw = *PGetCanImp(mpimT,ibCan,t);
 
-  if (GetCanInt(mpwImpHouCanSpec, ibCan) != 0xFFFF)
-    dw += GetCanInt(mpwImpHouCanSpec, ibCan);
+  if (mpwImpHouCanSpec[ibCan] != 0xFFFF)
+    dw += mpwImpHouCanSpec[ibCan];
 
   mpimT[ibCan].mpdwImp[t] = dw;
 }
@@ -291,7 +278,7 @@ void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  *pti)
   uchar t = mpibEngPrevTariff[i];
   ulong dw = *PGetCanImp(mpimT,ibCan,t);
 
-  dw -= GetCanInt(mpwImpHouCanSpec, ibCan);
+  dw -= mpwImpHouCanSpec[ibCan];
 
   mpimT[ibCan].mpdwImp[t] = dw;
 }
@@ -345,8 +332,8 @@ real    re;
   }
   else
   {
-    re  = GetCanInt(mpwImpMntCan[ibSoftMnt],ibCan) * GetCanReal(mpreValueCntMnt,ibCan);
-    re += *PGetCanImpAll(mpimAbsCan,ibCan)         * GetCanReal(mpreValueCntHou,ibCan);
+    re  = mpwImpMntCan[ibSoftMnt][ibCan] * GetCanReal(mpreValueCntMnt,ibCan);
+    re += *PGetCanImpAll(mpimAbsCan,ibCan) * GetCanReal(mpreValueCntHou,ibCan);
     re += GetCanReal(mpreCount,ibCan);
   }
 
@@ -366,7 +353,7 @@ uint   w;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-      w = GetCanInt(mpwImpMntCanCurr,ibCan);
+      w = mpwImpMntCanCurr[ibCan];
       mpwImpHouCan[ibSoftHou][ibCan] += w;
 
       AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, w);
@@ -388,7 +375,7 @@ uint   w;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-      w = GetCanInt(mpwImpMntCanCurr,ibCan);
+      w = mpwImpMntCanCurr[ibCan];
       mpwImpHouCan[ibSoftHou][ibCan] += w;
 
       AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, w);
