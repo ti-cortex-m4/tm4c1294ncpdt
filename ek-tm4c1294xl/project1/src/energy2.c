@@ -35,7 +35,6 @@ boolean SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom)
 
 boolean LoadImpMnt(uchar  ibMntFrom)
 {
-uchar   i;
 boolean bo;
 
   if (ibMntFrom == ibHardMnt)
@@ -49,10 +48,11 @@ boolean bo;
     bo = Load(mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS);
   }
 
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if (GetCanInt(mpwImpMntCan[ PrevSoftMnt() ], i) == 0xFFFF)
-      SetCanInt(mpwImpMntCan[ PrevSoftMnt() ], i, 0);
+    if (mpwImpMntCan[ PrevSoftMnt() ][c] == 0xFFFF)
+      mpwImpMntCan[ PrevSoftMnt() ][c] = 0;
   }
 
   return bo;
@@ -97,8 +97,8 @@ uchar   i;
 
   for (i=0; i<bCANALS; i++)
   {
-    if (*GetCanInt(mpwImpHouCan[ PrevSoftHou() ], i) == 0xFFFF)
-      SetCanInt(mpwImpHouCan[ PrevSoftHou() ], i, 0);
+    if (*mpwImpHouCan[ PrevSoftHou() ], i) == 0xFFFF)
+      mpwImpHouCan[ PrevSoftHou() ], i, 0);
   }
 
   return TRUE;
@@ -143,7 +143,6 @@ boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
 
 boolean LoadImpHou(uint  iwHouFrom)
 {
-uchar   i;
 boolean bo;
 
   if (iwHouFrom == iwHardHou)
@@ -157,10 +156,11 @@ boolean bo;
     bo = Load(mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS);
   }
 
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], i) == 0xFFFF)
-      SetCanInt(mpwImpHouCan[ PrevSoftHou() ], i, 0);
+    if (mpwImpHouCan[ PrevSoftHou() ][c] == 0xFFFF)
+      mpwImpHouCan[ PrevSoftHou() ][c] = 0;
   }
 
   return bo;

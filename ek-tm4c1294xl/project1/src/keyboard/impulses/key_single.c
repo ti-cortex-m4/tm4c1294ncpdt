@@ -224,7 +224,7 @@ void    ShowSingle(void)
       break;
 
     case bGET_IMPCANCURRMNT:
-      ShowInt(GetCanInt(mpwImpMntCan[ ibSoftMnt ],ibX));
+      ShowInt(mpwImpMntCan[ ibSoftMnt ][ibX]);
       break;
 
     case bGET_POWGRPPREVHOU:      

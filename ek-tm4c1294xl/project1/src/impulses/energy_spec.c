@@ -55,8 +55,8 @@ uchar   i;
     memcpy(mpwImpHouCanDef, mpwImpHouCanSpec, sizeof(uint)*bCANALS);
     for (i=0; i<bCANALS; i++)
     {
-      if (*PGetCanInt(mpwImpHouCanSpec, i) == 0xFFFF)
-        SetCanInt(mpwImpHouCanSpec, i, 0);  
+      if (mpwImpHouCanSpec[i] == 0xFFFF)
+        mpwImpHouCanSpec, i, 0);  
     }
   }
 
@@ -86,7 +86,6 @@ bool    SaveImpHouSpec(bool  fCurr, uint  iwHouTo)
 
 bool    LoadImpHouSpec(uint  iwHouFrom, bool  fFree) // TODO return boolean
 {
-uchar   i;
 bool    fAlt;
 
   if (iwHouFrom == iwHardHou)          
@@ -103,10 +102,11 @@ bool    fAlt;
   if (fFree == 0)
   {
     memcpy(mpwImpHouCanDef, mpwImpHouCanSpec, sizeof(uint)*bCANALS);
-    for (i=0; i<bCANALS; i++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      if (GetCanInt(mpwImpHouCanSpec, i) == 0xFFFF)
-        SetCanInt(mpwImpHouCanSpec, i, 0);  
+      if (mpwImpHouCanSpec[c] == 0xFFFF)
+        mpwImpHouCanSpec[c] = 0;
     }
   }
 

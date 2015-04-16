@@ -131,9 +131,9 @@ void    CalcDigCanals(void)
       {
         w = mpwChannels[ diPrev.ibLine ];
 
-        if (IsWinterDouble(c) && (GetCanInt(mpwImpHouCanSpec, c) != 0xFFFF))
+        if (IsWinterDouble(c) && (mpwImpHouCanSpec[c] != 0xFFFF))
         {
-          w += GetCanInt(mpwImpHouCanSpec, c);
+          w += mpwImpHouCanSpec[c];
           mpbWinterCan[c]++;
 
           if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, c, &tiAlt );
@@ -141,7 +141,7 @@ void    CalcDigCanals(void)
         }
       }
 
-      SetCanInt(mpwImpHouCanSpec, c, w);
+      mpwImpHouCanSpec[c] = w;
       mpwImpHouCanDef[c] = w;
 
       mpboReadyCan[c] = TRUE;

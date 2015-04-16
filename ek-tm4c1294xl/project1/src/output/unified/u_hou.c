@@ -56,7 +56,7 @@ uchar   i;
         fDef |= GetDefCan(c-1);
         InitPush((uint)(6 + 4*bInBuffD*(c-bInBuff7) + i*4));
 
-        if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], c-1) == 0xFFFF)
+        if (mpwImpHouCan[ PrevSoftHou() ][c-1] == 0xFFFF)
         {
           PushChar(0xFF);
           PushChar(0xFF);
@@ -168,7 +168,7 @@ uchar   i;
           PushChar(0xFF);
         }
         else 
-        if (GetCanInt(mpwImpHouCan[ PrevSoftHou() ], c-1) == 0xFFFF)
+        if (mpwImpHouCan[ PrevSoftHou() ][c-1] == 0xFFFF)
         {
           PushChar(0xFF);
           PushChar(0xFF);

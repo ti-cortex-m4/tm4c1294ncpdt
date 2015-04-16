@@ -33,7 +33,7 @@ static char const       szSpecialBegin[] = " подготовка...  ",
 bool    IsDefect(uchar  ibCan)
 {
   LoadImpHouSpec(iwDigHou,1);
-  return(GetCanInt(mpwImpHouCanSpec, ibCan) == 0xFFFF);
+  return mpwImpHouCanSpec[ibCan] == 0xFFFF;
 }
 
 

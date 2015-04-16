@@ -451,12 +451,12 @@ void    OutExtended43(void)
   InitPushPtr();
   uint wBuffD = 0;
 
-  uchar   i;
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0) 
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      Push(&mpboExt4EnblCan[i], sizeof(uchar));
+      Push(&mpboExt4EnblCan[c], sizeof(uchar));
       wBuffD += sizeof(uchar);
     }
   }

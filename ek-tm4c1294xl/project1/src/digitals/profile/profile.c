@@ -20,6 +20,6 @@ uchar   c;
   for (c=0; c<bCANALS; c++)
   {
     if ((GetDigitalDevice(c) != 0) && (IsSpecCurrent(GetDigitalDevice(c)) == 0))
-      SetCanInt(mpwImpHouCan[ibSoftHou], c, 0xFFFF);
+      mpwImpHouCan[ibSoftHou][c] = 0xFFFF;
   }
 }

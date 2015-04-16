@@ -56,17 +56,15 @@ digital  di;
 
 void    OutDigitalsExt(void)
 {
-uchar   i;
-uint		w;
-
   InitPushPtr();
-  w = 0;
+  uint w = 0;
 
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      Push(&mpdiDigital[i], sizeof(digital));
+      Push(&mpdiDigital[c], sizeof(digital));
       w += sizeof(digital);
     }
   }
