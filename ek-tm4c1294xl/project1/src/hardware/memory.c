@@ -5,6 +5,7 @@ TODO MEMORY.C
 ------------------------------------------------------------------------------*/
 
 #include        "../main.h"
+#include        "inc/hw_types.h"
 #include        "driverlib/sysctl.h"
 
 
@@ -15,6 +16,13 @@ char const              szImageSize[] = "ImageSize    ImageSize";
 
 void    InitCODE(void)
 {
+//  ulong i = 0;
+//  ulong dwSize = GetFileSize() + 2;
+//
+//  InitCRC();
+//  while (dwSize-- > 0) CalcCRC(HWREGB(i++));
+//
+//  if ((bCRCHi != 0) || (bCRCLo != 0)) TestError(szBadCODE);
 }
 
 
@@ -33,7 +41,7 @@ ulong   GetFileSize(void)
 
 uchar   GetCODE(uchar  i)
 {
-  return 0;
+  return HWREGB(GetFileSize() + i);
 }
 
 
@@ -45,7 +53,7 @@ uint    GetCODEChecksum(void)
 
 uint    GetBuildNumber(void)
 {
-  return 10; //GetCODE(2)*0x100 + GetCODE(3);
+  return GetCODE(2)*0x100 + GetCODE(3);
 }
 
 
