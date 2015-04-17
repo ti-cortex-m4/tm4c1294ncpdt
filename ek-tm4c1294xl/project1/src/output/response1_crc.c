@@ -80,13 +80,13 @@ void    Response1_CRC(void)
         {
           InitPushCRC();
 
-          reBuffA = *PGetCanReal(mpreTransEng, bInBuff5);
+          reBuffA = GetCanReal(mpreTransEng, bInBuff5);
           PushReal();
-          reBuffA = *PGetCanReal(mpreTransCnt, bInBuff5);
+          reBuffA = GetCanReal(mpreTransCnt, bInBuff5);
           PushReal();
-          reBuffA = *PGetCanReal(mprePulseHou, bInBuff5);
+          reBuffA = GetCanReal(mprePulseHou, bInBuff5);
           PushReal();
-          reBuffA = *PGetCanReal(mprePulseMnt, bInBuff5);
+          reBuffA = GetCanReal(mprePulseMnt, bInBuff5);
           PushReal();
 
           Output(sizeof(real)*4);

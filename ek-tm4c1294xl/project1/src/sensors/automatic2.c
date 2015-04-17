@@ -200,7 +200,7 @@ uchar   i;
   }
 
 
-  reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
+  reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
 
   return(1);
 }
@@ -266,7 +266,7 @@ uchar   i;
 
   ReadEnergyG();
 
-  reBuffB = *PGetCanReal(mpreTransCnt,ibDig);
+  reBuffB = GetCanReal(mpreTransCnt,ibDig);
   reBuffA *= reBuffB;
 
   return(1);
@@ -322,7 +322,7 @@ uchar   i,j;
   ShowPercent(100);
 
 
-  reBuffB = *PGetCanReal(mpreTransCnt,ibDig);
+  reBuffB = GetCanReal(mpreTransCnt,ibDig);
 
   for (i=0; i<1; i++) 
   {
@@ -332,7 +332,7 @@ uchar   i,j;
     mpboChannelsA[i] = TRUE;     
   }
 
-  reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
+  reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
 
   return(1);
 }
@@ -380,13 +380,13 @@ uchar   i,j;
   ShowPercent(100);
 
 
-  reBuffA = reBuffB * *PGetCanReal(mpreTransCnt,ibDig);
+  reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = TRUE;     
 
 
-  reBuffA = *PGetCanReal(mpreChannelsB, 0);
+  reBuffA = GetCanReal(mpreChannelsB, 0);
 
   return(1);
 }
@@ -425,17 +425,17 @@ uchar   i,j;
   QueryCloseK();
 
 
-  reBuffB = *PGetCanReal(mpreTransCnt,ibDig);
+  reBuffB = GetCanReal(mpreTransCnt,ibDig);
 
   for (i=0; i<bMaxLines; i++) 
   {
-    reBuffA = *PGetCanReal(mpreChannelsB, i) * reBuffB;
+    reBuffA = GetCanReal(mpreChannelsB, i) * reBuffB;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = TRUE;     
   }
 
-  reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
+  reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
 
   return(1);
 }
@@ -468,13 +468,13 @@ uchar   i;
 
 
 
-  reBuffA = *PGetCanReal(mpreChannelsB, 0) * *PGetCanReal(mpreTransCnt,ibDig);
+  reBuffA = GetCanReal(mpreChannelsB, 0) * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = TRUE;     
 
 
-  reBuffA = *PGetCanReal(mpreChannelsB, 0);
+  reBuffA = GetCanReal(mpreChannelsB, 0);
 
   return(1);
 }
@@ -506,14 +506,14 @@ uchar   i;
   ReadEnergyN();
 
 
-  reBuffA = mpdwChannelsA[0] * *PGetCanReal(mpreValueCntHou,ibDig);
-  reBuffA += *PGetCanReal(mpreCount,ibDig);
+  reBuffA = mpdwChannelsA[0] * GetCanReal(mpreValueCntHou,ibDig);
+  reBuffA += GetCanReal(mpreCount,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = TRUE;     
 
 
-  reBuffA = *PGetCanReal(mpreChannelsB, 0);
+  reBuffA = GetCanReal(mpreChannelsB, 0);
 
   return(1);
 }
@@ -561,13 +561,13 @@ uchar   i,j;
   ShowPercent(100);
 
 
-  reBuffA = reBuffB * *PGetCanReal(mpreTransCnt,ibDig);
+  reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = TRUE;     
 
 
-  reBuffA = *PGetCanReal(mpreChannelsB, 0);
+  reBuffA = GetCanReal(mpreChannelsB, 0);
 
   return(1);
 }
@@ -1564,13 +1564,13 @@ uchar   i;
   {
     mpreChannelsB[i] = mpreCodEng30[i*5+0] - mpreCodEng30[i*5+3];
 
-    reBuffA = *PGetCanReal(mpreChannelsB, i) * reBuffB;
+    reBuffA = GetCanReal(mpreChannelsB, i) * reBuffB;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = TRUE;     
   }
 
-  reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
+  reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
 
   return(1);
 }
@@ -1648,15 +1648,15 @@ uchar   i,j;
   if (LoadImpDay( ibHardDay ) == 0) return(0);
 
   reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibDig,0x0F);
-  reBuffA = reBuffA / *PGetCanReal(mpreTransEng,ibDig);
+  reBuffA = reBuffA / GetCanReal(mpreTransEng,ibDig);
 
-  reBuffA = mpreCodEng30[0] * *PGetCanReal(mpreTransCnt,ibDig) - reBuffA;
+  reBuffA = mpreCodEng30[0] * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = TRUE;     
 
 
-  reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
+  reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
 
   return(1);
 }
@@ -1718,15 +1718,15 @@ uchar   i,j;
   if (LoadImpDay( ibHardDay ) == 0) return(0);
 
   reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibDig,0x0F);
-  reBuffA = reBuffA / *PGetCanReal(mpreTransEng,ibDig);
+  reBuffA = reBuffA / GetCanReal(mpreTransEng,ibDig);
 
-  reBuffA = reBuffB * *PGetCanReal(mpreTransCnt,ibDig) - reBuffA;
+  reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = TRUE;     
 
 
-  reBuffA = *PGetCanReal(mpreChannelsB, 0);
+  reBuffA = GetCanReal(mpreChannelsB, 0);
 
   return(1);
 }
@@ -1756,16 +1756,16 @@ bool    ReadCntMonCanK(void)
        if (GetDigitalLine(ibCan) == ibMinor)
        {
          reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibCan,0x0F);
-         reBuffA = reBuffA / *PGetCanReal(mpreTransEng,ibCan);
+         reBuffA = reBuffA / GetCanReal(mpreTransEng,ibCan);
 
-         reBuffB = *PGetCanReal(mpreChannelsB, ibMinor);
-         reBuffA = reBuffB * *PGetCanReal(mpreTransCnt,ibCan) - reBuffA;
+         reBuffB = GetCanReal(mpreChannelsB, ibMinor);
+         reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibCan) - reBuffA;
          SetCanReal(mpreChannelsB, ibMinor);
        }  
     }
   }
 
-  reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
+  reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
 
   return(1);
 }
@@ -1813,11 +1813,11 @@ uchar   i,j;
       }
     }
 
-    reBuffA = reBuffB * *PGetCanReal(mpreTransCnt,ibDig);
+    reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig);
     SetCanReal(mpreChannelsB, 0);
  
     mpboChannelsA[0] = TRUE;     
-    reBuffA = *PGetCanReal(mpreChannelsB, 0);
+    reBuffA = GetCanReal(mpreChannelsB, 0);
   }
   else 
   {
@@ -1846,13 +1846,13 @@ uchar   i,j;
     if (LoadImpDay( ibHardDay ) == 0) return(0);
 
     reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibDig,0x0F);
-    reBuffA = reBuffA / *PGetCanReal(mpreTransEng,ibDig);
+    reBuffA = reBuffA / GetCanReal(mpreTransEng,ibDig);
 
-    reBuffA = reBuffB * *PGetCanReal(mpreTransCnt,ibDig) - reBuffA;
+    reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
     SetCanReal(mpreChannelsB, 0);
  
     mpboChannelsA[0] = TRUE;     
-    reBuffA = *PGetCanReal(mpreChannelsB, 0);
+    reBuffA = GetCanReal(mpreChannelsB, 0);
   }
 
   ShowPercent(100);
@@ -1998,19 +1998,19 @@ bool    ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
 #ifndef SKIP_L
     case 17:
     case 16: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
              return(1); break;
 #endif
 
 #ifndef SKIP_M
     case 18: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
              return(1); break;
 #endif
 
 #ifndef SKIP_N
     case 19: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
              return(1); break;
 #endif
 
@@ -2028,7 +2028,7 @@ bool    ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
 
 #ifndef SKIP_R
     case 23: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
              return(1); break;
 #endif
 
