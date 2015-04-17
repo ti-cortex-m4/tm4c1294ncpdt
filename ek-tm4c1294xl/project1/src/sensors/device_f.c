@@ -141,7 +141,7 @@ uchar   i;
     mpboChannelsA[i] = TRUE;
   }
 
-  reBuffA = *PGetCanReal(&mpreChannelsB, diCurr.ibLine);
+  reBuffA = GetCanReal(&mpreChannelsB, diCurr.ibLine);
 }
 
 

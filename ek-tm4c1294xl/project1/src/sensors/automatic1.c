@@ -446,7 +446,7 @@ void    SetCanalsAll(void)
 // сохранение показаний счётчиков
 void    SetEnergyAll(void)
 {
-  reBuffA  = *PGetCanReal(mpreTransCnt,ibDig) / *PGetCanReal(mprePulseHou,ibDig);
+  reBuffA  = GetCanReal(mpreTransCnt,ibDig) / GetCanReal(mprePulseHou,ibDig);
   reBuffA *= coEnergy.dwBuff;
 
   SetCanReal(mpreCount,ibDig);    
