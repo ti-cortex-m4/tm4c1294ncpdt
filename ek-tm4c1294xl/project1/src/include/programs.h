@@ -278,6 +278,8 @@ PROGRAMS.H
 #define bSET_EXT4_RESET             253
 #define bSET_EXT6_RESET             254
 
+#define bSET_EXT5_FLAG              251
+
 #define wSET_EXT4T_FLAG             516
 #define wSET_EXT4T_MONTHS           517
 #define wSET_EXT4T_RESET1           518
