@@ -43,7 +43,7 @@ void    ResetSettings(bool  fFullReset)
 
   if (fFullReset)
   {
-    bLogical = 0;
+    bLogical = 1;
     SaveFile(&flLogical);
   }
 

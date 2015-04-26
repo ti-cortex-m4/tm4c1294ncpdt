@@ -4,6 +4,10 @@ EXTENDED_5.H
 
 ------------------------------------------------------------------------------*/
 
+extern  file const              flExt5Flag;
+
+
+
 void    InitExtended5(void);
 void    ResetExtended5(void);
 
