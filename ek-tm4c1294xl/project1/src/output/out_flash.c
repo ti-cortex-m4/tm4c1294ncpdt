@@ -34,7 +34,7 @@ void    OutFlashPage(void) {
     PushInt(wPrivate);
     PushChar(bLogical);
 
-    OutptrOutBuff(wPAGE_SIZE);
+    OutptrOutBuff(1056);
   } else if (bInBuff5*0x100 + bInBuff6 <= END) {
     wPageIn = bInBuff5*0x100 + bInBuff6;
 

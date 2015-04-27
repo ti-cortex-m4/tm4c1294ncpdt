@@ -41,7 +41,8 @@ ulong   GetFileSize(void)
 
 uchar   GetCODE(uchar  i)
 {
-  return HWREGB(GetFileSize() + i);
+  ulong dwFileSize = GetFileSize();
+  return dwFileSize == 0x20202020 ? 0 : HWREGB(dwFileSize + i);
 }
 
 
