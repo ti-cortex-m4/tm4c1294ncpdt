@@ -15,5 +15,5 @@ void    InitLCD(void);
 void    LCD_Timer0();
 
 void    TestOK(void);
-void    TestError(const uchar  *szT);
+void    TestError(const char  *szT);
 

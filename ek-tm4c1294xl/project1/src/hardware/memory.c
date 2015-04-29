@@ -7,23 +7,13 @@ TODO MEMORY.C
 #include        "../main.h"
 #include        "inc/hw_types.h"
 #include        "driverlib/sysctl.h"
+#include        "../display/lcd.h"
+#include        "../display/messages.h"
+#include        "../kernel/crc-16.h"
 
 
 
 char const              szImageSize[] = "ImageSize    ImageSize";
-
-
-
-void    InitCODE(void)
-{
-//  ulong i = 0;
-//  ulong dwSize = GetFileSize() + 2;
-//
-//  InitCRC();
-//  while (dwSize-- > 0) CalcCRC(HWREGB(i++));
-//
-//  if ((bCRCHi != 0) || (bCRCLo != 0)) TestError(szBadCODE);
-}
 
 
 
@@ -70,4 +60,21 @@ uchar   GetBuildDate_Year(void)   { return GetCODE(9); }
 void    Restart(void)
 {
   SysCtlReset();
+}
+
+
+
+void    InitCODE(void)
+{
+  ulong dwFileSize = GetFileSize();
+  if (dwFileSize != 0x20202020)
+  {
+    ulong i = 0;
+    ulong dwSize = dwFileSize + 2;
+
+    InitCRC();
+    while (dwSize-- > 0) CalcCRC(HWREGB(i++));
+
+    if ((bCRCHi != 0) || (bCRCLo != 0)) TestError(szBadCODE);
+  }
 }
