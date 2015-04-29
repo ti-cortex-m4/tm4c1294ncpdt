@@ -75,11 +75,11 @@ void    ResetDecret(void)
 
 
 
-bool    IsWinter(time  *pti)
+bool    IsWinter(time  ti)
 {
-  return((pti->bDay   == tiWinter.bDay)   &&
-         (pti->bMonth == tiWinter.bMonth) &&
-         (pti->bHour  <= 3));
+  return((ti.bDay   == tiWinter.bDay)   &&
+         (ti.bMonth == tiWinter.bMonth) &&
+         (ti.bHour  <= 3));
 }
 
 

@@ -39,7 +39,7 @@ bool    IsDefect(uchar  ibCan)
 
 bool    IsWinterDouble(uchar  ibCan)
 {
-  return(IsWinter(&tiAlt) && (mpbWinterCan[ibCan] < 2));
+  return(IsWinter(tiAlt) && (mpbWinterCan[ibCan] < 2));
 }
 
 

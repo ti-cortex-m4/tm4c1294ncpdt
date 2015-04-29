@@ -56,7 +56,7 @@ bool    StartCheckup(uchar  ibCanal)
   if (ibDig >= bCANALS) return(0);
 
 
-  if (IsWinter(&tiCurr))
+  if (IsWinter(tiCurr))
   {
     ShowHi(szNewSeason);
     ShowLo(szIsWinter);

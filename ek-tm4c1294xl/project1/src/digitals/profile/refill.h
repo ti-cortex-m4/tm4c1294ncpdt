@@ -15,5 +15,5 @@ void    InitRefill(void);
 void    ResetRefill(void);
 
 void    StartRefill(void);
-void    MakeRefillWinter(time  *pti);
-void    MakeRefill(time  *pti);
+void    MakeRefillWinter(time  ti);
+void    MakeRefill(time  ti);

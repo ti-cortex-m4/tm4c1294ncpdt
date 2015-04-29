@@ -46,7 +46,7 @@ static time tiDig;
 
   if ((tiOldDay.bYear  != tiAlt.bYear)  ||          // обработка по дням
       (tiOldDay.bMonth != tiAlt.bMonth) ||
-      (tiOldDay.bDay   != tiAlt.bDay)) 
+      (tiOldDay.bDay   != tiAlt.bDay))
   {
     if (fLoadDay == 1)                                 
     {
@@ -60,7 +60,7 @@ static time tiDig;
     for (ibDay=0; ibDay<bDAYS; ibDay++)
     {
       tiDig = mpdeDay[ibDay];
-      if ((tiAlt.bYear  == tiDig.bYear)  &&            
+      if ((tiAlt.bYear  == tiDig.bYear)  &&
           (tiAlt.bMonth == tiDig.bMonth) &&
           (tiAlt.bDay   == tiDig.bDay)) break;
     }
@@ -93,7 +93,7 @@ static time tiDig;
     for (ibMon=0; ibMon<bMONTHS; ibMon++)
     {
       tiDig = mpdeMon[ibMon];
-      if ((tiAlt.bYear  == tiDig.bYear)  &&            
+      if ((tiAlt.bYear  == tiDig.bYear)  &&
           (tiAlt.bMonth == tiDig.bMonth)) break;
     }
   
@@ -136,8 +136,8 @@ void    CalcDigCanals(void)
           w += mpwImpHouCanSpec[c];
           mpbWinterCan[c]++;
 
-          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, c, &tiAlt );
-          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec, c, &tiAlt );
+          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, c, tiAlt );
+          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec, c, tiAlt );
         }
       }
 
@@ -147,11 +147,11 @@ void    CalcDigCanals(void)
       mpboReadyCan[c] = TRUE;
       mpcwCalcDig[c]++;
 
-      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, &tiAlt );
-      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, &tiAlt );
+      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, tiAlt );
+      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, tiAlt );
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, &tiAlt );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, &tiAlt );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, tiAlt );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, tiAlt );
     }
   }
 
@@ -176,11 +176,11 @@ void    CalcAllCanals(bool  fUseImp)
       // если канал не используется: пропустить
       //if (mpboUsedNodes[ibCan] == FALSE) continue;
      
-      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, &tiAlt );
-      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, &tiAlt );
+      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, tiAlt );
+      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, tiAlt );
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, &tiAlt );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, &tiAlt );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, tiAlt );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, tiAlt );
     }
   }
 }
@@ -202,8 +202,8 @@ void    CalcAllGroups(bool  fUsePow)
     {
       if (mpboUsedGroups[ibGrp] == FALSE) continue;
 
-      if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec, ibGrp, &tiAlt );
-      if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec, ibGrp, &tiAlt );
+      if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec, ibGrp, tiAlt );
+      if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec, ibGrp, tiAlt );
     }
   }
 }
