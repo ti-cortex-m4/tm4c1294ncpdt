@@ -137,7 +137,7 @@ uint    j;
       if (i == 0xFF)
       {
         reBuffA = 0; 
-        PushRealUni(ST4_NOTSUPPORTED, &reBuffA);
+        PushRealUni(ST4_NOTSUPPORTED, reBuffA);
       }
       else
       {
@@ -148,7 +148,7 @@ uint    j;
         if (j == 0xFFFF)
         {
           reBuffA = 0; 
-          PushRealUni(ST4_NOTPRESENTED, &reBuffA);
+          PushRealUni(ST4_NOTPRESENTED, reBuffA);
         }
         else
         {
@@ -161,10 +161,10 @@ uint    j;
           {
             FixParamsUni(diT);
 
-            PushRealUni(ST4_OK, &reBuffA);
+            PushRealUni(ST4_OK, reBuffA);
           }
           else
-            PushRealUni(ST4_BADDIGITAL, &reBuffA);
+            PushRealUni(ST4_BADDIGITAL, reBuffA);
         }
       }
     }

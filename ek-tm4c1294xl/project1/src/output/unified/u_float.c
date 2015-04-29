@@ -18,7 +18,7 @@ static void PushFFFFFF(void)
 }
 
 
-void    PushRealUni(status  status, real  *preT)
+void    PushRealUni(status  status, real  re)
 {
   if (boStrictUni == TRUE)
   {
@@ -31,7 +31,7 @@ void    PushRealUni(status  status, real  *preT)
       case ST4_BADFLASH:      PushFFFFFF(); PushChar(0xFF); break;
       case ST4_BADPORT:       PushFFFFFF(); PushChar(0xFE); break;
       case ST4_BADENABLING:   PushFFFFFF(); PushChar(0xFF); break;
-      default:                PushFloat(*preT); break;
+      default:                PushFloat(re); break;
     }
   }
   else
@@ -45,7 +45,7 @@ void    PushRealUni(status  status, real  *preT)
       case ST4_BADFLASH:      PushFFFFFF(); PushChar(0xE4); break;
       case ST4_BADPORT:       PushFFFFFF(); PushChar(0xE5); break;
       case ST4_BADENABLING:   PushFFFFFF(); PushChar(0xE6); break;
-      default:                PushFloat(*preT); break;
+      default:                PushFloat(re); break;
     }
   }
 }
