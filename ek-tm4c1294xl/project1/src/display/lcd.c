@@ -219,12 +219,12 @@ void    TestOK(void)
 
 
 // вывод сообщения о ошибке теста
-void    TestError(const uchar  *szT)
+void    TestError(const char  *szT)
 {
 	IntMasterDisable();
 
   ShowMsgLCD(0x80, (const uchar *)szAlarm);
-  ShowMsgLCD(0xC0, szT);
+  ShowMsgLCD(0xC0, (const uchar *)szT);
 
   while (1)
   {

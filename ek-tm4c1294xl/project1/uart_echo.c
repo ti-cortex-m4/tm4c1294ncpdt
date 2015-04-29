@@ -32,6 +32,7 @@ TODO .C
 #include "src/isr/serial1.h"
 #include "src/isr/serial2.h"
 #include "src/isr/serial3.h"
+#include "src/hardware/memory.h"
 #include "src/uarts.h"
 #include "src/serial/modems.h"
 #include "src/serial/print.h"
@@ -73,6 +74,7 @@ int main(void) {
 	InitLCD();
 	InitFlash();            Delay(100); TestOK();
 	InitRTC();
+	InitCODE();
 
 	InitSettings();         Delay(100); TestOK();
 	InitKey();
