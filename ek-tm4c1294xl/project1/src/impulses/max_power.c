@@ -79,19 +79,19 @@ value   va;
 }
 
 
-void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  *pti)
+void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  ti)
 {
 real   	re;
 value   va;
 
-  uchar i = pti->bHour*2 + pti->bMinute/30;
+  uchar i = ti.bHour*2 + ti.bMinute/30;
   uchar t = mpibPowPrevTariff[i];
 
   re = GetGrpHouInt2Real(mpwImpHouCanSpec,ibGrp,2);
   if (re >= GetGrpMaxPowReal(mppoT,ibGrp,t))
   {
     va.reSelf = re;
-    va.tiSelf = *pti;
+    va.tiSelf = ti;
     SetGrpMaxPow(mppoT,ibGrp,t,&va);
   }
 }

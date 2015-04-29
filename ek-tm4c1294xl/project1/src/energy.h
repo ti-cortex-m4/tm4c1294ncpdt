@@ -21,8 +21,8 @@ double  GetGrpImp2DoubleEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);
 float   GetCanImp2FloatEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
 double  GetCanImp2DoubleEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
 
-void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  *pti);
-void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  *pti);
+void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  ti);
+void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  ti);
 
 void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uchar  wImp);
 

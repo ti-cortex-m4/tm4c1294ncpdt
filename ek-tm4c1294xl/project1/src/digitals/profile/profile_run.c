@@ -81,7 +81,7 @@ bool    StartProfile(uchar  ibCanal)
 
 
 
-  if (IsWinter(&tiCurr))
+  if (IsWinter(tiCurr))
   {
     ShowHi(szNewSeason);
     ShowLo(szIsWinter);

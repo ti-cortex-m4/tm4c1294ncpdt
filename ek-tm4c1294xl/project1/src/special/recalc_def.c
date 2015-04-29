@@ -78,9 +78,9 @@ void    NextMonDef(void)
 
 
 
-void    MakeDefSpec(impulse  *mpimT, uchar  ibCan, time  *pti)
+void    MakeDefSpec(impulse  *mpimT, uchar  ibCan, time  ti)
 {
-  uchar i = pti->bHour*2 + pti->bMinute/30;
+  uchar i = ti.bHour*2 + ti.bMinute/30;
   uchar t = mpibEngPrevTariff[i];
   ulong dw = mpimT[ibCan].mpdwImp[t];
 

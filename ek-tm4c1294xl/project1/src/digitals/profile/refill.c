@@ -84,18 +84,18 @@ void    DoRefill(void)
 
 
 
-void    MakeRefillWinter(time  *pti)
+void    MakeRefillWinter(time  ti)
 {
-  if (IsWinter(pti)) {
-    bRefillWinter = ++mpbRefillWinter[pti->bHour*2 + pti->bMinute/30];
+  if (IsWinter(ti)) {
+    bRefillWinter = ++mpbRefillWinter[ti.bHour*2 + ti.bMinute/30];
   }
 }
 
 
 
-void    MakeRefill(time  *pti)
+void    MakeRefill(time  ti)
 {
-  if (IsWinter(pti) && (bRefillWinter > 1)) return;
+  if (IsWinter(ti) && (bRefillWinter > 1)) return;
 
   if ((iwBmin != 0xFFFF) && (iwBmin != iwDigHou))
   {

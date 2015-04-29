@@ -499,9 +499,9 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
     mpwChannels[c] = w;
   }
 
-  MakeRefillWinter(&tiAlt);
+  MakeRefillWinter(tiAlt);
   MakeSpecial();
-  if (boDsblRefill == FALSE) MakeRefill(&tiAlt);
+  if (boDsblRefill == FALSE) MakeRefill(tiAlt);
   return(MakeStopHou(0));  
 }
 

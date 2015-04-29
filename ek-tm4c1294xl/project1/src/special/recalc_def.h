@@ -16,4 +16,4 @@ void    ResetDef(void);
 void    NextDayDef(void);
 void    NextMonDef(void);
 
-void    MakeDefSpec(impulse  *mpimT, uchar  ibCan, time  *pti);
+void    MakeDefSpec(impulse  *mpimT, uchar  ibCan, time  ti);

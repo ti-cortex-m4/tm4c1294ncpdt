@@ -245,9 +245,9 @@ ulong   dw;
 
 
 // рассчитывает импульсы для выбранного интервала
-void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  *pti)
+void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  ti)
 {
-  uchar i = pti->bHour*2 + pti->bMinute/30;
+  uchar i = ti.bHour*2 + ti.bMinute/30;
   uchar t = mpibEngPrevTariff[i];
   ulong dw = *PGetCanImp(mpimT,ibCan,t);
 
@@ -259,9 +259,9 @@ void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  *pti)
 
 
 // рассчитывает импульсы для выбранного интервала: во избежание двойного сложения
-void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  *pti)
+void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  ti)
 {
-  uchar i = pti->bHour*2 + pti->bMinute/30;
+  uchar i = ti.bHour*2 + ti.bMinute/30;
   uchar t = mpibEngPrevTariff[i];
   ulong dw = *PGetCanImp(mpimT,ibCan,t);
 

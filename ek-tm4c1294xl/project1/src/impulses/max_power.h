@@ -11,5 +11,5 @@ time    GetGrpMaxPowTime(power  *mppoT, uchar  ibGrp, uchar  ibTar);
 uchar   GetGrpMaxPowIndex(power  *mppoT, uchar  ibGrp);
 
 void    MakeMaxPow(power  *mppoT);
-void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  *pti);
+void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  ti);
 void    MakeMaxPowAll(void);
