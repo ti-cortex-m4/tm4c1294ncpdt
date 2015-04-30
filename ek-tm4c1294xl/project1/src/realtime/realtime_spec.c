@@ -40,7 +40,7 @@ void    NexttimeMnt(void)
   // TODO if (GetLabelRTC() == 0) return;
 
   time tiT = *GetCurrTimeDate();
-  if (TrueCurrTimeDate(&tiT) == 0) return;
+  if (TrueCurrTimeDate(tiT) == 0) return;
 
   if (tiCurr.bSecond != tiT.bSecond)
   {
