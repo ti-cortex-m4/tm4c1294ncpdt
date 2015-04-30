@@ -15,13 +15,13 @@ void    InitGPIO_RTC();
 
 time    *GetCurrTimeDate(void);
 
-void    SetCurrTimeDate(time  *pti);
-void    SetCurrTime(time  *pti);
-void    SetCurrDate(time  *pti);
+void    SetCurrTimeDate(time  ti);
+void    SetCurrTime(time  ti);
+void    SetCurrDate(time  ti);
 
 void    SetLabelRTC(void);
 bool    GetLabelRTC(void);
 
-bool    TrueCurrTimeDate(time  *pti);
+bool    TrueCurrTimeDate(time  ti);
 
 void    InitRTC(void);

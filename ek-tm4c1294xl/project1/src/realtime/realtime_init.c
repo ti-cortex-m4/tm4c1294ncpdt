@@ -113,7 +113,7 @@ void    RealtimeSeason(void)
       }
     }
 
-    SetCurrTimeDate(&tiCurr);
+    SetCurrTimeDate(tiCurr);
   }
 
   if (fWinter == 1)
@@ -139,7 +139,7 @@ void    RealtimeSeason(void)
       }
     }
 
-    SetCurrTimeDate(&tiCurr);
+    SetCurrTimeDate(tiCurr);
   }
 }
 
@@ -194,7 +194,7 @@ void    InitRealtime(void)
 
 //  if (GetLabelRTC() == 0) TestError(szBadRTC1);
 
-  if (TrueCurrTimeDate(GetCurrTimeDate()) == false)
+  if (TrueCurrTimeDate(*GetCurrTimeDate()) == false)
   {
     ShowHi(szAlarm);
     ShowLo(szBadRTC2);
@@ -210,7 +210,7 @@ void    InitRealtime(void)
   {
     LoadRealtime();
 
-    if (TrueCurrTimeDate(&tiCurr) == false)
+    if (TrueCurrTimeDate(tiCurr) == false)
     {
       ShowHi(szAlarm);
       ShowLo(szBadRTC2); // TODO

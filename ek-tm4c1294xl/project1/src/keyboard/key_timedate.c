@@ -43,7 +43,7 @@ void    key_SetCurrTime(void)
         enKeyboard = KBD_POSTENTER;
         ibZ = 60;
 
-        SetCurrTime(&tiKey);
+        SetCurrTime(tiKey);
 
         boSetTime = TRUE;
       }
@@ -134,7 +134,7 @@ void    key_SetCurrDate(void)
         enKeyboard = KBD_POSTENTER;
         ibZ = 60;
 
-        SetCurrDate(&tiKey);
+        SetCurrDate(tiKey);
 
         boSetDate = TRUE;
         MakeDecret();

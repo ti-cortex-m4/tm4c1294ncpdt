@@ -188,7 +188,7 @@ void    ProcessTime(void)
       if (fActive == 1)
       {
         tiCurr.bHour = 3;
-        SetCurrTimeDate(&tiCurr);
+        SetCurrTimeDate(tiCurr);
       }
       else fSummer = 1;
 
@@ -208,7 +208,7 @@ void    ProcessTime(void)
       if (fActive == 1)
       {
         tiCurr.bHour = 2;
-        SetCurrTimeDate(&tiCurr);
+        SetCurrTimeDate(tiCurr);
       }
       else fWinter = 1;
 
@@ -267,7 +267,7 @@ time    tiT;
 //  boHealthLabelRTC = TRUE;
 
   tiT = *GetCurrTimeDate();
-  if (TrueCurrTimeDate(&tiT) == 0) {
+  if (TrueCurrTimeDate(tiT) == 0) {
     boHealthTimeRTC = FALSE;
 	return;
   }

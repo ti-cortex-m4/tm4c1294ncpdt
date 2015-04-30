@@ -128,44 +128,44 @@ static time ti;
 }
 
 
-void    SetCurrTimeDate(time  *pti)
+void    SetCurrTimeDate(time  ti)
 {
   EnableSPI();
   CharOutSPI(0x80);
 
-  CharOutSPI( ToBCD(pti->bSecond) );
-  CharOutSPI( ToBCD(pti->bMinute) );
-  CharOutSPI( ToBCD(pti->bHour)   );
+  CharOutSPI( ToBCD(ti.bSecond) );
+  CharOutSPI( ToBCD(ti.bMinute) );
+  CharOutSPI( ToBCD(ti.bHour)   );
   CharOutSPI( 0 ); // день недели
-  CharOutSPI( ToBCD(pti->bDay)    );
-  CharOutSPI( ToBCD(pti->bMonth)  );
-  CharOutSPI( ToBCD(pti->bYear)   );
+  CharOutSPI( ToBCD(ti.bDay)    );
+  CharOutSPI( ToBCD(ti.bMonth)  );
+  CharOutSPI( ToBCD(ti.bYear)   );
 
   DisableSPI();
 }
 
 
-void    SetCurrTime(time  *pti)
+void    SetCurrTime(time  ti)
 {
   EnableSPI();
   CharOutSPI(0x80);
 
-  CharOutSPI( ToBCD(pti->bSecond) );
-  CharOutSPI( ToBCD(pti->bMinute) );
-  CharOutSPI( ToBCD(pti->bHour)   );
+  CharOutSPI( ToBCD(ti.bSecond) );
+  CharOutSPI( ToBCD(ti.bMinute) );
+  CharOutSPI( ToBCD(ti.bHour)   );
 
   DisableSPI();
 }
 
 
-void    SetCurrDate(time  *pti)
+void    SetCurrDate(time  ti)
 {
   EnableSPI();
   CharOutSPI(0x84);
 
-  CharOutSPI( ToBCD(pti->bDay)   );
-  CharOutSPI( ToBCD(pti->bMonth) );
-  CharOutSPI( ToBCD(pti->bYear)  );
+  CharOutSPI( ToBCD(ti.bDay)   );
+  CharOutSPI( ToBCD(ti.bMonth) );
+  CharOutSPI( ToBCD(ti.bYear)  );
 
   DisableSPI();
 }
@@ -221,27 +221,27 @@ uchar   i;
 */
 
 
-bool    TrueCurrTimeDate(time  *pti)
+bool    TrueCurrTimeDate(time  ti)
 {
-  if (pti->bSecond == FromBCD(0xFF)) return(0);
-  if (pti->bMinute == FromBCD(0xFF)) return(0);
-  if (pti->bHour   == FromBCD(0xFF)) return(0);
-  if (pti->bDay    == FromBCD(0xFF)) return(0);
-  if (pti->bMonth  == FromBCD(0xFF)) return(0);
-  if (pti->bYear   == FromBCD(0xFF)) return(0);
+  if (ti.bSecond == FromBCD(0xFF)) return(0);
+  if (ti.bMinute == FromBCD(0xFF)) return(0);
+  if (ti.bHour   == FromBCD(0xFF)) return(0);
+  if (ti.bDay    == FromBCD(0xFF)) return(0);
+  if (ti.bMonth  == FromBCD(0xFF)) return(0);
+  if (ti.bYear   == FromBCD(0xFF)) return(0);
 
-  if (pti->bSecond > 59) return(0);
-  if (pti->bMinute > 59) return(0);
-  if (pti->bHour   > 23) return(0);
+  if (ti.bSecond > 59) return(0);
+  if (ti.bMinute > 59) return(0);
+  if (ti.bHour   > 23) return(0);
 
-  if ((pti->bDay == 0) ||
-      (pti->bDay > 31)) return(0);
+  if ((ti.bDay == 0) ||
+      (ti.bDay > 31)) return(0);
 
-  if ((pti->bMonth == 0) ||
-      (pti->bMonth > 12 )) return(0);
+  if ((ti.bMonth == 0) ||
+      (ti.bMonth > 12 )) return(0);
 
-  if ((pti->bYear < bMINYEAR) ||
-      (pti->bYear > bMAXYEAR)) return(0);
+  if ((ti.bYear < bMINYEAR) ||
+      (ti.bYear > bMAXYEAR)) return(0);
 
   return(1);
 }
@@ -256,7 +256,7 @@ time    ti;
   ti = *GetCurrTimeDate();
   Push(&ti, sizeof(time));
 
-  PushChar(TrueCurrTimeDate(&ti));
+  PushChar(TrueCurrTimeDate(ti));
 
   Output(sizeof(time)+sizeof(bool));
 }
