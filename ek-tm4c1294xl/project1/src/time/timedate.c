@@ -155,8 +155,8 @@ bool    TrueTimeDate(time  ti)
 
 
 // количество секунд с начала дня
-ulong   GetSecondIndex(time  *pti)
+ulong   GetSecondIndex(time  ti)
 {
-  return( (ulong)pti->bHour*3600 + pti->bMinute*60 + pti->bSecond );
+  return( (ulong)ti.bHour*3600 + ti.bMinute*60 + ti.bSecond );
 }
 

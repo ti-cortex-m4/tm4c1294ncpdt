@@ -14,24 +14,24 @@ DEFECTS.C
 
 
 
-void    MakeDefectDay(uchar  ibDay, time  *pti)
+void    MakeDefectDay(uchar  ibDay, time  ti)
 {
-  pti->bHour   = 0;
-  pti->bMinute = 0;
-  pti->bSecond = 0;
+  ti.bHour   = 0;
+  ti.bMinute = 0;
+  ti.bSecond = 0;
 
-  mpdeDay[ (bDAYS + ibHardDay - ibDay) % bDAYS ] = *pti;
+  mpdeDay[ (bDAYS + ibHardDay - ibDay) % bDAYS ] = ti;
 }
 
 
-void    MakeDefectMon(uchar  ibMon, time  *pti)
+void    MakeDefectMon(uchar  ibMon, time  ti)
 {
-  pti->bDay    = 1;
-  pti->bHour   = 0;
-  pti->bMinute = 0;
-  pti->bSecond = 0;
+  ti.bDay    = 1;
+  ti.bHour   = 0;
+  ti.bMinute = 0;
+  ti.bSecond = 0;
 
-  mpdeMon[ (bMONTHS + ibHardMon - ibMon) % bMONTHS ] = *pti;
+  mpdeMon[ (bMONTHS + ibHardMon - ibMon) % bMONTHS ] = ti;
 }
 
 
@@ -42,10 +42,10 @@ time    ti;
 
   ti = *GetCurrTimeDate();
 
-  uint d;
+  uchar d;
   for (d=0; d<bDAYS; d++)
   {
-    MakeDefectDay(d, &ti);
+    MakeDefectDay(d, ti);
 
     if (ti.bDay > 1)
       ti.bDay--;
@@ -67,7 +67,7 @@ time    ti;
   uchar m;
   for (m=0; m<bMONTHS; m++)
   {
-    MakeDefectMon(m, &ti);
+    MakeDefectMon(m, ti);
 
     if (ti.bMonth > 1)
       ti.bMonth--;

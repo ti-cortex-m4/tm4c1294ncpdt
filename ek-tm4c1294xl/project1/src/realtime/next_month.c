@@ -43,7 +43,7 @@ void    NextMonth(void)
   MakeCntMonCan();
 
   // обработка брака по месяцам
-  MakeDefectMon(0, &tiCurr);
+  MakeDefectMon(0, tiCurr);
 
   // обработка достоверности по месяцам
   NextMonDef();

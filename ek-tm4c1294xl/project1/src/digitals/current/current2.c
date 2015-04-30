@@ -160,8 +160,8 @@ void    MakeCurrent2(void)
         slong dwImp = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
         mpdwBase[ibCan] = mpdwBaseDig[ GetDigitalLine(ibCan) ];
 
-        dwSecond += GetSecondIndex(&tiDig);
-        dwSecond -= GetSecondIndex(&mptiBase[ibCan]);
+        dwSecond += GetSecondIndex(tiDig);
+        dwSecond -= GetSecondIndex(mptiBase[ibCan]);
 
         mptiBase[ibCan] = tiDig;
         mptiOffs[ibCan] = tiOffs;

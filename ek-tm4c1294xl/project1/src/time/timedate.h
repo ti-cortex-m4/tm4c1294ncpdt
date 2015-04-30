@@ -19,4 +19,4 @@ uint    GetDayIndexMD(uchar  bMonth, uchar  bDay);
 bool    TrueTimeDate(time  ti);
 
 
-ulong   GetSecondIndex(time  *pti);
+ulong   GetSecondIndex(time  ti);
