@@ -130,9 +130,9 @@ void    PushDouble(double  db)
 }
 
 
-void    PushTime(time  *pti)
+void    PushTime(time  ti)
 {
-  Push(pti, sizeof(time));
+  Push(&ti, sizeof(time));
 }
 
 

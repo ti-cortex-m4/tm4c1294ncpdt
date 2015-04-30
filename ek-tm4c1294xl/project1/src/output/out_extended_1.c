@@ -138,10 +138,10 @@ time    ti2;
         ti2 = *GetCurrTimeDate();
       }
 
-      PushTime(&ti1);
+      PushTime(ti1);
       wSize += sizeof(time);
 
-      PushTime(&ti2);
+      PushTime(ti2);
       wSize += sizeof(time);
     }
   }
@@ -234,7 +234,7 @@ void    OutTimeEscSExt(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushTime(&mptiEsc_S[c]);
+      PushTime(mptiEsc_S[c]);
       wSize += sizeof(time);
     }
   }
@@ -256,7 +256,7 @@ void    OutTimeEscVExt(void)
       if (CheckDirectCnt1(c))
         LoadDirectCntTime(c);
       else
-        PushTime(&mptiEsc_V[c]);
+        PushTime(mptiEsc_V[c]);
 
       wSize += sizeof(time);
     }
