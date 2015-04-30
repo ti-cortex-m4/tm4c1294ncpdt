@@ -55,7 +55,7 @@ void    ShowInfoUni(uchar  bInfo)
 
 #ifndef MODBUS
 
-void    Output2_Code(uint  wSize, uchar  bCode, time  *mptiCode)
+void    Output2_Code(uint  wSize, uchar  bCode, time  tiCode)
 {
   InitPush(0);
 
@@ -72,11 +72,11 @@ void    Output2_Code(uint  wSize, uchar  bCode, time  *mptiCode)
 
   PushChar(bCode);
 
-  PushChar((*mptiCode).bMinute);
-  PushChar((*mptiCode).bHour);
-  PushChar((*mptiCode).bDay);
-  PushChar((*mptiCode).bMonth);
-  PushChar((*mptiCode).bYear);
+  PushChar(tiCode.bMinute);
+  PushChar(tiCode.bHour);
+  PushChar(tiCode.bDay);
+  PushChar(tiCode.bMonth);
+  PushChar(tiCode.bYear);
 
   PushChar(InBuff(IndexInBuff() - 4));
   PushChar(InBuff(IndexInBuff() - 3));
@@ -91,20 +91,20 @@ void    Output2_Code(uint  wSize, uchar  bCode, time  *mptiCode)
 
 void    Output2(uint  wSize)
 {
-  Output2_Code(wSize, 0, GetCurrTimeDate());
+  Output2_Code(wSize, 0, *GetCurrTimeDate());
 }
 
 
 void    Result2(uchar  bT)
 {
-  Output2_Code(0, bT, GetCurrTimeDate());
+  Output2_Code(0, bT, *GetCurrTimeDate());
 }
 
 
 void    Result2_Info(uchar  bT, uchar  bInfo)
 {
   ShowInfoUni(bInfo);
-  Output2_Code(0, bT, GetCurrTimeDate());
+  Output2_Code(0, bT, *GetCurrTimeDate());
 }
 
 

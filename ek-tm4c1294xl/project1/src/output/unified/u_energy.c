@@ -172,7 +172,7 @@ void    GetEngCanDayUni(bool  x2)
     dw -= bInBuffB;
     time ti = DayIndexToDate(dw);
 
-    Output2_Code(wSize, ((CheckDefCanDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code(wSize, ((CheckDefCanDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
 
@@ -221,7 +221,7 @@ void    GetEngGrpDayUni(bool  x2)
     dw -= bInBuffB;
     time ti = DayIndexToDate(dw);
 
-    Output2_Code(wSize, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code(wSize, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
 
@@ -271,7 +271,7 @@ void    GetEngCanMonUni(bool  x2)
     dw -= bInBuffB;
     time ti = MonIndexToDate(dw);
 
-    Output2_Code(wSize, ((CheckDefCanMonUni(ti.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code(wSize, ((CheckDefCanMonUni(ti.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
 
@@ -320,7 +320,7 @@ void    GetEngGrpMonUni(bool  x2)
     dw -= bInBuffB;
     time ti = MonIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefGrpMonUni(ti.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefGrpMonUni(ti.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
 
@@ -362,7 +362,7 @@ void    GetMaxGrpDayUni(void)
     dw -= bInBuffB;
     time ti2 = DayIndexToDate(dw);
 
-    Output2_Code((uint)6*bInBuff9*bInBuffD, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), &ti2);
+    Output2_Code((uint)6*bInBuff9*bInBuffD, ((CheckDefGrpDayUni() == 0) ? bUNI_OK : bUNI_DEFECT), ti2);
   }
 }
 
@@ -403,6 +403,6 @@ void    GetMaxGrpMonUni(void)
     dw -= bInBuffB;
     time ti2 = MonIndexToDate(dw);
 
-    Output2_Code((uint)6*bInBuff9*bInBuffD, ((CheckDefGrpMonUni(ti2.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), &ti2);
+    Output2_Code((uint)6*bInBuff9*bInBuffD, ((CheckDefGrpMonUni(ti2.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), ti2);
   }
 }

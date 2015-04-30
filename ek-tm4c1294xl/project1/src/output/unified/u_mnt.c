@@ -52,7 +52,7 @@ uchar   i;
     dw -= bInBuffB;
     time ti = MntIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuffD*bInBuff9, 0, &ti);
+    Output2_Code((uint)4*bInBuffD*bInBuff9, 0, ti);
   }
 }
 
@@ -87,7 +87,7 @@ uchar   i;
     dw -= bInBuffB;
     time ti = MntIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuffD*bInBuff9, 0, &ti);
+    Output2_Code((uint)4*bInBuffD*bInBuff9, 0, ti);
   }
 }
 
