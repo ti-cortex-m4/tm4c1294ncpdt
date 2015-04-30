@@ -35,7 +35,7 @@ time    tiT;
     tiT = *GetCurrTimeDate();
     tiCurr.bSecond = tiT.bSecond;
 
-    PrintString("\n tiCurr="); PrintTime(&tiCurr); PrintString(" tiT="); PrintTime(&tiT);
+    PrintString("\n tiCurr="); PrintTime(tiCurr); PrintString(" tiT="); PrintTime(tiT);
 
     if ((tiCurr.bMinute == tiT.bMinute) &&
         (tiCurr.bHour   == tiT.bHour)   &&
@@ -161,8 +161,8 @@ void    LoadRealtime(void)
 
   LoadTimeCurr();
 
-  PrintString("\n tiCurr "); PrintTime(&tiCurr);
-  PrintString("\n tiPrev "); PrintTime(&tiPrev);
+  PrintString("\n tiCurr "); PrintTime(tiCurr);
+  PrintString("\n tiPrev "); PrintTime(tiPrev);
 }
 
 
