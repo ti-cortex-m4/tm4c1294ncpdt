@@ -49,16 +49,16 @@ void    PrintInt(uint  w) {
 }
 
 
-void    PrintTime(time  *pti) {
+void    PrintTime(time  ti) {
 #ifdef ENABLE_PRINT
 
   UARTprintf("%02u:%02u:%02u %02u.%02u.%02u",
-             pti->bHour,
-             pti->bMinute,
-             pti->bSecond,
-             pti->bDay,
-             pti->bMonth,
-             pti->bYear);
+             ti.bHour,
+             ti.bMinute,
+             ti.bSecond,
+             ti.bDay,
+             ti.bMonth,
+             ti.bYear);
 
 #endif
 }

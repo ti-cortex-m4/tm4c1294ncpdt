@@ -155,7 +155,7 @@ void    ProcessTime(void)
   if (tiCurr.bMinute != tiPrev.bMinute)
   {
   	PrintStart();
-  	PrintString("\n tiCurr="); PrintTime(&tiCurr); PrintString(" tiPrev="); PrintTime(&tiPrev);
+  	PrintString("\n tiCurr="); PrintTime(tiCurr); PrintString(" tiPrev="); PrintTime(tiPrev);
   	PrintString("\n next 1 min.");
     NextMinute1();
   }
