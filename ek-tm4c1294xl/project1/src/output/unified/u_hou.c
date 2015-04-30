@@ -79,7 +79,7 @@ uchar   i;
     dw -= bInBuffB;
     time ti = HouIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
 
@@ -126,7 +126,7 @@ uchar   i;
     dw -= bInBuffB;
     time ti = HouIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
 
@@ -191,7 +191,7 @@ uchar   i;
     dw -= bInBuffB;
     time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)4*48*bInBuff9, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code((uint)4*48*bInBuff9, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
 
@@ -248,7 +248,7 @@ uchar   i;
     dw -= bInBuffB;
     time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)4*48*bInBuff9, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), &ti);
+    Output2_Code((uint)4*48*bInBuff9, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
 

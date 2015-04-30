@@ -72,7 +72,7 @@ void    GetCntCanMonAllUni(void)
       PushCntCanMonAllUni(c-1, ibMon);
     }
 
-    Output2_Code((uint)4*bInBuff9, ((boExt4Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &ti);
+    Output2_Code((uint)4*bInBuff9, ((boExt4Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), ti);
   }
 }
 
@@ -128,7 +128,7 @@ void    GetCntCanMonTarUni(void)
       }
     }
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((boExt4TFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), &ti);
+    Output2_Code((uint)4*bInBuff9*bInBuffD, ((boExt4TFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), ti);
   }
 }
 
@@ -162,7 +162,7 @@ void    GetCntCanAllUni(void)
       PushFloat(mpreEsc_S[c-1]);
     }
 
-    Output2_Code((uint)(4+6)*bInBuff9, ((boDsblEscS != TRUE) ? bUNI_OK : bUNI_NOTREADY), GetCurrTimeDate());
+    Output2_Code((uint)(4+6)*bInBuff9, ((boDsblEscS != TRUE) ? bUNI_OK : bUNI_NOTREADY), *GetCurrTimeDate());
   }
 }
 
@@ -194,7 +194,7 @@ void    GetCntCanTarUni(void)
       }
     }
 
-    Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((boExt5Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), GetCurrTimeDate());
+    Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((boExt5Flag == TRUE) ? bUNI_OK : bUNI_NOTREADY), *GetCurrTimeDate());
   }
 }
 

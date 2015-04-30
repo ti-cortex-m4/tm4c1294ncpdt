@@ -76,7 +76,7 @@ uchar   i,j,k;
     dw -= bInBuffB;
     time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)k*bInBuffD, 0, &ti);
+    Output2_Code((uint)k*bInBuffD, 0, ti);
   }
 }
 
@@ -130,6 +130,6 @@ uchar   i,j,k;
     dw -= bInBuffB;
     time ti = DayIndexToDate(dw);
 
-    Output2_Code((uint)k*bInBuffD, 0, &ti);
+    Output2_Code((uint)k*bInBuffD, 0, ti);
   }
 }
