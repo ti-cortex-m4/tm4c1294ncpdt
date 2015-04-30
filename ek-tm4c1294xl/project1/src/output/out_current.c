@@ -29,8 +29,8 @@ uint    w;
       PushChar(mpboBase[i]);
       PushLong(mpdwBase[i]);
       PushFloat(mpreBase[i]);
-      PushTime(&mptiBase[i]);
-      PushTime(&mptiOffs[i]);
+      PushTime(mptiBase[i]);
+      PushTime(mptiOffs[i]);
 
       w += 21;
     }
@@ -41,7 +41,7 @@ uint    w;
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
     {
       PushFloat(mpreEsc_S[i]);
-      PushTime(&mptiEsc_S[i]);
+      PushTime(mptiEsc_S[i]);
       PushFloat(mpreLevelDiv[i]);
       PushFloat(mpreCount[i]);
 

@@ -18,9 +18,9 @@ void    OutRealtime(void)
 {
 	InitPushCRC();
 
-	PushTime(GetCurrTimeDate());
-	PushTime(&tiCurr);
-	PushTime(&tiPrev);
+	PushTime(*GetCurrTimeDate());
+	PushTime(tiCurr);
+	PushTime(tiPrev);
 
 	PushChar(fSeason);
 	PushChar(fSummer);

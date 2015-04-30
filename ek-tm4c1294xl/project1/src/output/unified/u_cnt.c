@@ -158,7 +158,7 @@ void    GetCntCanAllUni(void)
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushTime(&mptiEsc_S[c-1]);
+      PushTime(mptiEsc_S[c-1]);
       PushFloat(mpreEsc_S[c-1]);
     }
 
@@ -189,7 +189,7 @@ void    GetCntCanTarUni(void)
       uchar t;
       for (t=bInBuffA; t<bInBuffA+bInBuffB; t++)
       {
-        PushTime(&mpvaValue5[c-1].tiSelf);
+        PushTime(mpvaValue5[c-1].tiSelf);
         PushFloat(mpvaValue5[c-1].vaValue5.mpreSelf[t-1]);
       }
     }

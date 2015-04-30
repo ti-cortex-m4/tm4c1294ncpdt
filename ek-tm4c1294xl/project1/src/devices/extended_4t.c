@@ -217,7 +217,7 @@ void    PushData4T(uchar  ibCan)
     for (t=0; t<bTARIFFS; t++)
       PushFloat(0);
 
-    PushTime((time *) &tiZero);
+    PushTime(tiZero);
   }
   else
   {
@@ -229,7 +229,7 @@ void    PushData4T(uchar  ibCan)
     for (t=0; t<bTARIFFS; t++)
       PushFloat(va.mpreSelf[t]);
 
-    PushTime(&va.tiSelf);
+    PushTime(va.tiSelf);
   }
 }
 

@@ -263,7 +263,7 @@ void    PushData4(uchar  ibCan, uchar  ibMon)
     PushInt(0xFF);
     PushInt(0xFF);
     PushFloat(mpreCntMonCan[ PrevSoftMon() ][ibCan]);
-    PushTime((time *) &tiZero);
+    PushTime(tiZero);
   }
   else
   {
@@ -272,7 +272,7 @@ void    PushData4(uchar  ibCan, uchar  ibMon)
     PushInt(0xFF);
     PushInt(0xFF);
     PushFloat(va.reSelf);
-    PushTime(&va.tiSelf);
+    PushTime(va.tiSelf);
   }
 }
 
