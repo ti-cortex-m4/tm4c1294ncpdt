@@ -51,7 +51,7 @@ void    NextDay(void)
   CloseExtended7();
 
   // обработка брака по суткам
-  MakeDefectDay(0, &tiCurr);
+  MakeDefectDay(0, tiCurr);
 
   // обработка достоверности по суткам
   NextDayDef();

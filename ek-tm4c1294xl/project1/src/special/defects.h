@@ -4,8 +4,8 @@ DEFECTS.H
 
 ------------------------------------------------------------------------------*/
 
-void    MakeDefectDay(uchar  ibDay, time  *pti);
-void    MakeDefectMon(uchar  ibMon, time  *pti);
+void    MakeDefectDay(uchar  ibDay, time  ti);
+void    MakeDefectMon(uchar  ibMon, time  ti);
 
 void    InitDefects(void);
 void    ResetDefects(void);

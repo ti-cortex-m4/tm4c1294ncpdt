@@ -65,10 +65,10 @@
     case DEV_POSTTIME_B2:
     {
       uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);                    // количество дней с начала года ведомого счётчика
-      ulong dwSecond1 = GetSecondIndex(&tiAlt);                                 // количество секунд ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(tiAlt);                                 // количество секунд ведомого счётчика
 
       uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
-      ulong dwSecond2 = GetSecondIndex(&tiCurr);                                // количество секунд сумматора
+      ulong dwSecond2 = GetSecondIndex(tiCurr);                                // количество секунд сумматора
 
       if (iwDay1 != iwDay2)
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна

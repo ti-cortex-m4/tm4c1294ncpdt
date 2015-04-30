@@ -51,21 +51,21 @@ void    ShowDeltaTime(time  ti)
                  ti.bMinute,
                  ti.bSecond);
 
-  ulong dwSecond = GetSecondIndex(&ti);
+  ulong dwSecond = GetSecondIndex(ti);
   uint iwDay = GetDayIndexMD(ti.bMonth, ti.bDay);
 
   time ti2 = *GetCurrTimeDate();
 
   if (iwDay != GetDayIndexMD(ti2.bMonth, ti2.bDay))
     sprintf(szLo+9,"?");
-  else if (dwSecond > GetSecondIndex(&ti2))
+  else if (dwSecond > GetSecondIndex(ti2))
   {
-    dwSecond = dwSecond - GetSecondIndex(&ti2);
+    dwSecond = dwSecond - GetSecondIndex(ti2);
     sprintf(szLo+9,"-%lu", dwSecond);
   }
   else
   {
-    dwSecond = GetSecondIndex(&ti2) - dwSecond;
+    dwSecond = GetSecondIndex(ti2) - dwSecond;
     sprintf(szLo+9,"+%lu", dwSecond);
   }
 }
