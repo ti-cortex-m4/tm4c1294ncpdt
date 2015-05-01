@@ -8,7 +8,7 @@ MEMORY_PROGRAM.C
 
 
 
-// флаги задания соответствующих программ TODO: SaveFile
+// флаги задания соответствующих программ
 boolean                 boSetTime,
                         boSetDate,
                         boSetGroups,
