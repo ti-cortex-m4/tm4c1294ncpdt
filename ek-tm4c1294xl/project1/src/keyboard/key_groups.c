@@ -7,8 +7,8 @@ KEY_GROUPS.C
 #include        "../main.h"
 #include        "../memory/mem_groups.h"
 #include        "../memory/mem_program.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
+#include        "../settings.h"
+#include        "../console.h"
 #include        "../groups.h"
 
 
@@ -143,6 +143,7 @@ void    key_SetGroups(void)
       Group();
 
       boSetGroups = TRUE;
+      SaveFile(&flSetGroups);
     }
     else if (enKeyboard == KBD_INPUT2)  // номер группы не введён
     {                                   // начинаем с первой группы

@@ -9,7 +9,8 @@ OUT_GROUPS.C
 #include        "../memory/mem_groups.h"
 #include        "../memory/mem_program.h"
 #include        "../serial/ports.h"
-#include        "../keyboard/keyboard.h"
+#include        "../settings.h"
+#include        "../console.h"
 #include        "../groups.h"
 
 
@@ -44,9 +45,12 @@ uchar  i;
         Pop(&mpgrGroups[bInBuff5], sizeof(group));
 
         if (bInBuff5 == bGROUPS - 1)
+        {
           SaveGroups();
 
-        boSetGroups = TRUE;
+          boSetGroups = TRUE;
+          SaveFile(&flSetGroups);
+        }
 
         LongResult(bRES_OK);
       }

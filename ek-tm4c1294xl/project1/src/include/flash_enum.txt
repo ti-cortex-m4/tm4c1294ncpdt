@@ -169,5 +169,10 @@ typedef enum
 
   EXT_7_DAY_VALUES      = EXT_6_MON_VALUES + VALUE6_CAN_PAGES*bMONTHS,
 
-  END                   = EXT_7_DAY_VALUES + VALUE7_CAN_PAGES*bDAYS
+  SET_TIME              = EXT_7_DAY_VALUES + VALUE7_CAN_PAGES*bDAYS,
+  SET_DATE              = SET_TIME + 1,
+  SET_GROUPS            = SET_DATE + 1,
+  SET_PASSWORD          = SET_GROUPS + 1,
+
+  END                   = SET_PASSWORD + 1
 } flash;

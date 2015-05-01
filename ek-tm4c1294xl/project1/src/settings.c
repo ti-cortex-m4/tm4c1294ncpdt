@@ -16,6 +16,11 @@ file const              flLogical = {LOGICAL, &bLogical, sizeof(uchar)};
 
 file const              flFirstReset = {FIRST_RESET, &boFirstReset, sizeof(boolean)};
 
+file const              flSetTime = {SET_TIME, &boSetTime, sizeof(boolean)};
+file const              flSetDate = {SET_DATE, &boSetDate, sizeof(boolean)};
+file const              flSetGroups = {SET_GROUPS, &boSetGroups, sizeof(boolean)};
+file const              flSetPassword = {SET_PASSWORD, &boSetPassword, sizeof(boolean)};
+
 
 
 void    InitSettings(void)
@@ -33,6 +38,11 @@ void    InitSettings(void)
   LoadFile(&flLogical);
 
   LoadFile(&flFirstReset);
+
+  LoadFile(&flSetTime);
+  LoadFile(&flSetDate);
+  LoadFile(&flSetGroups);
+  LoadFile(&flSetPassword);
 }
 
 
@@ -49,6 +59,18 @@ void    ResetSettings(bool  fFullReset)
 
   boFirstReset = FALSE;
   SaveFile(&flFirstReset);
+
+  if (fFullReset)
+  {
+    boSetTime = FALSE;
+    SaveFile(&flSetTime);
+
+    boSetDate = FALSE;
+    SaveFile(&flSetDate);
+
+    boSetPassword = TRUE;
+    SaveFile(&flSetPassword);
+  }
 }
 
 

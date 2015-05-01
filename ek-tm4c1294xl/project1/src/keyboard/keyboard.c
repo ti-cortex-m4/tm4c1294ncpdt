@@ -65,9 +65,6 @@ void    InitKeyboard(void)
   fKey = 0;
 
   cbShowCurrentTime = 0;
-
-  boSetTime = FALSE;
-  boSetDate = FALSE;
 }
 
 
