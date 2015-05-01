@@ -98,22 +98,22 @@ void    key_Start(void)
     Clear();
 
 
-    if (boSetTime == false)
+    if (boSetTime == FALSE)
     {
       NeedProgram(bSET_CURRTIME);
       return;
     }
-    else if (boSetDate == false)
+    else if (boSetDate == FALSE)
     {
       NeedProgram(bSET_CURRDATE);
       return;
     }
-    else if (boSetGroups == false)
+    else if (boSetGroups == FALSE)
     {
       NeedProgram(bSET_GROUPS);
       return;
     }
-    else if (boSetPassword == false)
+    else if (boSetPassword == FALSE)
     {
       NeedProgram(bSET_PASSWORD);
       return;
