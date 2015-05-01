@@ -20,6 +20,7 @@ KEY_START.C
 #include        "../special/defects.h"
 #include        "../time/rtc.h"
 #include        "../factors.h"
+#include        "../flash/files.h"
 #include        "../flash/records.h"
 #include        "../serial/speeds_display.h"
 
@@ -220,12 +221,17 @@ void    key_Debug(void)
     Clear();
 
     boSetTime = TRUE;
+    SaveFile(&flSetTime);
+
     boSetDate = TRUE;
+    SaveFile(&flSetDate);
+
+    boSetGroups = TRUE;
+    SaveFile(&flSetGroups);
 
     ClearPassOne();
     boSetPassword = TRUE;
-
-    boSetGroups = TRUE;
+    SaveFile(&flSetPassword);
 
 // TODO key_Debug
 

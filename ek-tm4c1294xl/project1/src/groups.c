@@ -9,6 +9,8 @@ GROUPS.C
 #include        "memory/mem_program.h"
 #include        "engine.h"
 #include        "flash/files.h"
+#include        "settings.h"
+#include        "groups.h"
 
 
 
@@ -123,4 +125,5 @@ node    noT;
   MakeUsedNodes();
 
   boSetGroups = FALSE;
+  SaveFile(&flSetGroups);
 }

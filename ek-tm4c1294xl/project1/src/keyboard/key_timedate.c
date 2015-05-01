@@ -7,8 +7,8 @@ KEY_TIMEDATE.C
 #include        "../main.h"
 #include        "../memory/mem_program.h"
 #include        "../memory/mem_realtime.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
+#include        "../console.h"
+#include        "../settings.h"
 #include        "../time/rtc.h"
 #include        "../time/timedate.h"
 #include        "../time/timedate_display.h"
@@ -46,6 +46,7 @@ void    key_SetCurrTime(void)
         SetCurrTime(tiKey);
 
         boSetTime = TRUE;
+        SaveFile(&flSetTime);
       }
       else Beep();
     }
@@ -137,6 +138,8 @@ void    key_SetCurrDate(void)
         SetCurrDate(tiKey);
 
         boSetDate = TRUE;
+        SaveFile(&flSetDate);
+
         MakeDecret();
       }
       else

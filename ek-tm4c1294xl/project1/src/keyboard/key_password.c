@@ -7,8 +7,8 @@ KEY_PASSWORD.C
 #include        "../main.h"
 #include        "../memory/mem_settings.h"
 #include        "../memory/mem_program.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
+#include        "../settings.h"
+#include        "../console.h"
 #include        "../access.h"
 
 
@@ -35,6 +35,7 @@ void    key_SetPassword(void)
       ibX = 3;
 
       boSetPassword = FALSE;
+      SaveFile(&flSetPassword);
     }
     else if (enKeyboard == KBD_INPUT1)
     {
@@ -54,6 +55,7 @@ void    key_SetPassword(void)
         OK();
 
         boSetPassword = TRUE;
+        SaveFile(&flSetPassword);
       }
       else 
       {
@@ -113,6 +115,7 @@ void    key_GetPassword(void)
         OK();
 
         boSetPassword = TRUE;
+        SaveFile(&flSetPassword);
 
         enGlobal = GLB_REPROGRAM;
         Setting();
