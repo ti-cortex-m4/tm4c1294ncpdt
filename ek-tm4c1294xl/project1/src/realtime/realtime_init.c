@@ -208,7 +208,7 @@ void    InitRealtime(void)
 
   if (enGlobal == GLB_WORK)
   {
-    LoadRealtime();
+    //LoadRealtime();
 
     if (TrueCurrTimeDate(tiCurr) == false)
     {

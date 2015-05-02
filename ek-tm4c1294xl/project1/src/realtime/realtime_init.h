@@ -4,4 +4,5 @@ REALTIME_INIT.H
 
 ------------------------------------------------------------------------------*/
 
+void    LoadRealtime(void);
 void    InitRealtime(void);
