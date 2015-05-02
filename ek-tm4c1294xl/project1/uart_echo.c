@@ -98,10 +98,10 @@ int main(void) {
 	InitSlide();
 
   PrintStart();
+	InitStorage();
 	InitRealtime();
   PrintStop();
 
-	InitStorage();
 	InitDisplay();
 
 //    InitCurrent();

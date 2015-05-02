@@ -34,8 +34,9 @@ void    NextMinute30(void)
   SavePointersHou();
 
   memset(&mpwImpHouCan[ibSoftHou], 0, sizeof(uint)*bCANALS);
-
   MakeCurrHouCan();
+  SaveImpHouBuff();
+
   NextHouLimitsAux();
 
   if (boMntParams == FALSE) NextParamsTime();
