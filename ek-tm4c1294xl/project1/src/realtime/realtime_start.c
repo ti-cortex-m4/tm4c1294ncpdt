@@ -13,6 +13,7 @@ REALTIME_START.C
 #include        "../time/rtc.h"
 #include        "../impulses/impulses.h"
 #include        "../energy.h"
+#include        "../energy3.h"
 #include        "../digitals/digitals.h"
 #include        "../digitals/profile/profile.h"
 #include        "realtime_storage.h"
@@ -55,7 +56,9 @@ real     re;
   memset(&mpwImpMntCan[ibSoftMnt], 0, sizeof(uint)*bCANALS);
   EnableImpulses(); // TODO EnableImpulses
 
+  memset(&mpwImpHouCan[ibSoftHou], 0, sizeof(uint)*bCANALS);
   MakeCurrHouCan();
+  SaveImpHouBuff();
 
   for (c=0; c<bCANALS; c++)
   {
