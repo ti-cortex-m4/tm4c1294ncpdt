@@ -15,6 +15,7 @@ STORAGE.C
 #include        "../display/display.h"
 #include        "../time/delay.h"
 #include        "../time/calendar.h"
+#include        "../realtime/realtime_init.h"
 
 
 
@@ -45,6 +46,8 @@ void    ShowFlashRead(void)
 
 void    InitStorage(void) // TODO InitStorage
 {
+  LoadRealtime();
+
   wPageIn = IMPHOUCAN_BUFF;
   if (SafePageRead())
   {
@@ -54,7 +57,10 @@ void    InitStorage(void) // TODO InitStorage
     ulong dw1 = DateToHouIndex(ti);
     ulong dw2 = DateToHouIndex(tiCurr);
 
-    if (dw1 == dw2) LoadImpHouBuff();
+    if (dw1 == dw2)
+    {
+      LoadImpHouBuff();
+    }
   }
 
   LoadImpDayBuff();
