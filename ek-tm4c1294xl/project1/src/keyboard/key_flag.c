@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 KEY_FLAG.C
 
-
+TODO rename
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -12,7 +12,7 @@ KEY_FLAG.C
 
 
 
-void    key_SetFlag(file const  *pflFile, char const  *pszSlide[])
+void    key_SetBool(file const  *pflFile, char const  *pszSlide[])
 {
   boolean *pboVal = (boolean *) pflFile->pbBuff;
 

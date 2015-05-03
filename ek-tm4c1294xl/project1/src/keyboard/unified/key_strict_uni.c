@@ -20,5 +20,5 @@ static char const       *pszStrictUni[] = { szStrictUni1, szStrictUni2, "" };
 
 void    key_SetStrictUni(void)
 {
-  key_SetFlag(&flStrictUni, pszStrictUni);
+  key_SetBool(&flStrictUni, pszStrictUni);
 }

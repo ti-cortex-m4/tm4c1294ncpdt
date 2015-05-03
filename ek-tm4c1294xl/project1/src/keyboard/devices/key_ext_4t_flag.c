@@ -23,5 +23,5 @@ static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3,
 
 void    key_SetExt4TFlag(void)
 {
-  key_SetFlag(&flExt4TFlag, pszMessages);
+  key_SetBool(&flExt4TFlag, pszMessages);
 }

@@ -22,5 +22,5 @@ static char const       *pszRecalcAlways[] = { szRecalcAlways1, szRecalcAlways2,
 
 void    key_SetRecalcAlways(void)
 {
-  key_SetFlag(&flRecalcAlways, pszRecalcAlways);
+  key_SetBool(&flRecalcAlways, pszRecalcAlways);
 }

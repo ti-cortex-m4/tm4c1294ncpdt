@@ -20,5 +20,5 @@ static char const       *pszSeparateCan[] = { szSeparateCan, "" };
 
 void    key_SetSeparateCan(void)
 {
-  key_SetFlag(&flSeparateCan, pszSeparateCan);
+  key_SetBool(&flSeparateCan, pszSeparateCan);
 }

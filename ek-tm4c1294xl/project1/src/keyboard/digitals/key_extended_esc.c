@@ -25,17 +25,17 @@ static char const       *pszExtendedEscU[]    = { szLoad, szExtendedEscU, "" },
 
 void    key_SetExtendedEscU(void)
 {
-  key_SetFlag(&flExtendedEscU, pszExtendedEscU);
+  key_SetBool(&flExtendedEscU, pszExtendedEscU);
 }
 
 
 void    key_SetExtendedEscV(void)
 {
-  key_SetFlag(&flExtendedEscV, pszExtendedEscV);
+  key_SetBool(&flExtendedEscV, pszExtendedEscV);
 }
 
 
 void    key_SetExtendedEscS(void)
 {
-  key_SetFlag(&flExtendedEscS, pszExtendedEscS);
+  key_SetBool(&flExtendedEscS, pszExtendedEscS);
 }

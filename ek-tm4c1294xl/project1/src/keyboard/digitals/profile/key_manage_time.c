@@ -22,5 +22,5 @@ static char const       *pszManageTime[] = { szManage, szTime, "" };
 
 void    key_SetManageTime(void)
 {
-  key_SetFlag(&flManageTime, pszManageTime);
+  key_SetBool(&flManageTime, pszManageTime);
 }

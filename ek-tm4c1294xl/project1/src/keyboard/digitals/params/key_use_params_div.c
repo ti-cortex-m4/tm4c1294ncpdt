@@ -22,5 +22,5 @@ static char const       *pszUseParamsDiv[] = { szUseParamsDiv1, szUseParamsDiv2,
 
 void    key_SetUseParamsDiv(void)
 {
-  key_SetFlag(&flUseParamsDiv, pszUseParamsDiv);
+  key_SetBool(&flUseParamsDiv, pszUseParamsDiv);
 }

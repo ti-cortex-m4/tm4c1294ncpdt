@@ -21,5 +21,5 @@ static char const       *pszDsblRefill[] = { szDsblRefill1, szDsblRefill2, szDsb
 
 void    key_SetDsblRefill(void)
 {
-  key_SetFlag(&flDsblRefill, pszDsblRefill);
+  key_SetBool(&flDsblRefill, pszDsblRefill);
 }

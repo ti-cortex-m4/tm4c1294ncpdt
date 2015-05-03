@@ -24,6 +24,6 @@ static char const       *pszEnblCurrent2[]  = { szEnbl1, szEnbl2, szEnbl3, szEnb
 
 void    key_SetEnblCurrent2(void)
 {
-//  key_SetFlag(&flEnblCurrent2, pszEnblCurrent2);
+//  key_SetBool(&flEnblCurrent2, pszEnblCurrent2);
 }
 

@@ -21,5 +21,5 @@ static char const       *pszDsblPasswordUni[] = { szDsblPasswordUni1, szDsblPass
 
 void    key_SetDsblPasswordUni(void)
 {
-  key_SetFlag(&flDsblPasswordUni, pszDsblPasswordUni);
+  key_SetBool(&flDsblPasswordUni, pszDsblPasswordUni);
 }

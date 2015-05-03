@@ -21,5 +21,5 @@ static char const       *pszEnblProfile[] = { szEnbl, szProfile, "" };
 
 void    key_SetEnblProfile(void)
 {
-  key_SetFlag(&flEnblProfile, pszEnblProfile);
+  key_SetBool(&flEnblProfile, pszEnblProfile);
 }
