@@ -22,5 +22,5 @@ static char const       *pszRepeatFlowUni[]  = { szRepeatFlowUni1, szRepeatFlowU
 
 void    key_SetRepeatFlowUni(void)
 {
-  key_SetFlag(&flRepeatFlowUni, pszRepeatFlowUni);
+  key_SetBool(&flRepeatFlowUni, pszRepeatFlowUni);
 }

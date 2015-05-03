@@ -22,5 +22,5 @@ static char const       *pszFixParamsBugs[] = { szFixParamBugs1, szFixParamBugs2
 
 void    key_SetFixParamsBugs(void)
 {
-  key_SetFlag(&flFixParamsBugs, pszFixParamsBugs);
+  key_SetBool(&flFixParamsBugs, pszFixParamsBugs);
 }

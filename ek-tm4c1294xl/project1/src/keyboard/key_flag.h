@@ -4,4 +4,4 @@ KEY_FLAG.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetFlag(file const  *pflFile, char const  *pszSlide[]);
+void    key_SetBool(file const  *pflFile, char const  *pszSlide[]);

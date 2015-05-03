@@ -21,5 +21,5 @@ static char const       *pszHideMessages[] = { szHideMessages1, szHideMessages2,
 
 void    key_SetHideMessages(void)
 {
-  key_SetFlag(&flHideMessages, pszHideMessages);
+  key_SetBool(&flHideMessages, pszHideMessages);
 }

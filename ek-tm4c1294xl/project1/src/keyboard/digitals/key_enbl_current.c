@@ -21,5 +21,5 @@ static char const       *pszEnblCurrent[] = { szEnbl, szCurrent, "" };
 
 void    key_SetEnblCurrent(void)
 {
-  key_SetFlag(&flEnblCurrent, pszEnblCurrent);
+  key_SetBool(&flEnblCurrent, pszEnblCurrent);
 }

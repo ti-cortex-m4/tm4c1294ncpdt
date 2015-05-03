@@ -21,5 +21,5 @@ static char const       *pszControlTime[] = { szControl, szTime, "" };
 
 void    key_SetControlTime(void)
 {
-  key_SetFlag(&flControlTime, pszControlTime);
+  key_SetBool(&flControlTime, pszControlTime);
 }
