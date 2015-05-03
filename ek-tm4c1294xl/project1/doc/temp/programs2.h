@@ -16,7 +16,7 @@ PROGRAMS2.H
 
 #define wGET_CNTCANYEAR6      279
 
-#define wSET_DIRECT_CNT_D     400
++   #define wSET_DIRECT_CNT_D     400
 #define wSET_USE_SCALE_D      401
 #define wSET_CONTROL_Q        402
 #define wSET_CONTROL_K        403
@@ -50,7 +50,7 @@ PROGRAMS2.H
 #define wSET_CHECKUP_HOU      514
 #define wSET_CHECKUP_RESET    515
 
-#define wSET_EXT4T_FLAG       516
++   #define wSET_EXT4T_FLAG       516
 #define wSET_EXT4T_MONTHS     517
 #define wSET_EXT4T_RESET1     518
 #define wSET_EXT4T_RESET2     519

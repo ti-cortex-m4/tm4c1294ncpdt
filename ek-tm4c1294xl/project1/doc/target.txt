@@ -507,8 +507,8 @@ _devices.c
 _devices.h
 _digitals.c
 _digitals.h
-_direct_cnt_d.c
-_direct_cnt_d.h
++   _direct_cnt_d.c
++   _direct_cnt_d.h
 _disable_esc.c
 _disable_esc.h
 _divider.c
@@ -531,8 +531,8 @@ _extended_4.c
 _extended_4.h
 _extended_41.c
 _extended_41.h
-_extended_4t_flag.c
-_extended_4t_flag.h
++   _extended_4t_flag.c
++   _extended_4t_flag.h
 _extended_4t_months.c
 _extended_4t_months.h
 _extended_4t_reset1.c
