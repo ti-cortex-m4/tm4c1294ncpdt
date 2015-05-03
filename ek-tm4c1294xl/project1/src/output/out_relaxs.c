@@ -4,14 +4,14 @@ OUT_RELAXS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_tariffs.h"
-#include        "../serial/ports.h"
-#include        "../time/timedate.h"
-#include        "../keyboard/keyboard.h"
-#include        "../tariffs/relaxs.h"
-#include        "../flash/files.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_tariffs.h"
+#include "../serial/ports.h"
+#include "../time/timedate.h"
+#include "../keyboard/keyboard.h"
+#include "../tariffs/relaxs.h"
+#include "../flash/files.h"
 
 
 

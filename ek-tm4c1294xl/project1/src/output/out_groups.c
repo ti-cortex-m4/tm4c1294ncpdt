@@ -4,14 +4,14 @@ OUT_GROUPS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_groups.h"
-#include        "../memory/mem_program.h"
-#include        "../serial/ports.h"
-#include        "../settings.h"
-#include        "../console.h"
-#include        "../groups.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_groups.h"
+#include "../memory/mem_program.h"
+#include "../serial/ports.h"
+#include "../settings.h"
+#include "../console.h"
+#include "../groups.h"
 
 
 

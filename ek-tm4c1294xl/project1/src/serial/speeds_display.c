@@ -4,13 +4,13 @@ SPEEDS_DISPLAY.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../keyboard/keyboard.h"
-#include        "../display/display.h"
-#include        "../serial/ports.h"
-#include        "../include/programs.h"
-#include        "speeds.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../keyboard/keyboard.h"
+#include "../display/display.h"
+#include "../serial/ports.h"
+#include "../include/programs.h"
+#include "speeds.h"
 
 
 

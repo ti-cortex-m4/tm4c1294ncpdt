@@ -4,21 +4,21 @@ CHECKUP_B.C
 
 ------------------------------------------------------------------------------*/
 /*
-#include        "main.h"
-#include        "xdata.h"
-#include        "checkup.h"
-#include        "keyboard.h"
-#include        "display.h"
-#include        "delay.h"
-#include        "engine.h"
-#include        "essential.h"
-#include        "essential2.h"
-#include        "ports.h"        
-#include        "device_b.h"        
-#include        "digitals.h"        
-#include        "checkup.h"        
-#include        "timedate.h"
-#include        "_timedate.h"
+#include "main.h"
+#include "xdata.h"
+#include "checkup.h"
+#include "keyboard.h"
+#include "display.h"
+#include "delay.h"
+#include "engine.h"
+#include "essential.h"
+#include "essential2.h"
+#include "ports.h"        
+#include "device_b.h"        
+#include "digitals.h"        
+#include "checkup.h"        
+#include "timedate.h"
+#include "_timedate.h"
 
 
 

@@ -4,10 +4,10 @@ KEY_PARAMS_DIV.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../../main.h"
-#include        "../../../console.h"
-#include        "../../../digitals/params/params.h"
-#include        "../../../flash/files.h"
+#include "../../../main.h"
+#include "../../../console.h"
+#include "../../../digitals/params/params.h"
+#include "../../../flash/files.h"
 
 
 

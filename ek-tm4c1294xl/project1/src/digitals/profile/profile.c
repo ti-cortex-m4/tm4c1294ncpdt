@@ -4,12 +4,12 @@ PROFILE.C
  Чтение получасовых графиков с цифровых счетчиков
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_energy.h"
-#include        "../../memory/mem_realtime.h"
-#include        "../../energy.h"
-#include        "../current/current.h"
-#include        "../digitals.h"
+#include "../../main.h"
+#include "../../memory/mem_energy.h"
+#include "../../memory/mem_realtime.h"
+#include "../../energy.h"
+#include "../current/current.h"
+#include "../digitals.h"
 
 
 

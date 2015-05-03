@@ -4,13 +4,13 @@ GROUPS.C
  Группы
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "memory/mem_groups.h"
-#include        "memory/mem_program.h"
-#include        "engine.h"
-#include        "flash/files.h"
-#include        "settings.h"
-#include        "groups.h"
+#include "main.h"
+#include "memory/mem_groups.h"
+#include "memory/mem_program.h"
+#include "engine.h"
+#include "flash/files.h"
+#include "settings.h"
+#include "groups.h"
 
 
 

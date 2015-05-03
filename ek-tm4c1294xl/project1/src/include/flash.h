@@ -7,16 +7,16 @@ FLASH.H
 #ifndef __FLASH
 #define __FLASH
 
-#include        "../memory/mem_digitals0.h"
-#include        "../memory/mem_digitals.h"
-#include        "../memory/mem_params.h"
-#include        "../memory/mem_phones.h"
-#include        "../memory/mem_uni.h"
-#include        "../memory/mem_extended_4.h"
-#include        "../memory/mem_extended_4t.h"
-#include        "../memory/mem_extended_5.h"
-#include        "../memory/mem_extended_6.h"
-#include        "../memory/mem_extended_7.h"
+#include "../memory/mem_digitals0.h"
+#include "../memory/mem_digitals.h"
+#include "../memory/mem_params.h"
+#include "../memory/mem_phones.h"
+#include "../memory/mem_uni.h"
+#include "../memory/mem_extended_4.h"
+#include "../memory/mem_extended_4t.h"
+#include "../memory/mem_extended_5.h"
+#include "../memory/mem_extended_6.h"
+#include "../memory/mem_extended_7.h"
 
 
 
@@ -62,7 +62,7 @@ FLASH.H
 #endif
 
 
-#include        "flash_enum.txt"
+#include "flash_enum.txt"
 
 
 #endif

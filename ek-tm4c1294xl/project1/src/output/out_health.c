@@ -4,11 +4,11 @@ OUT_HEALTH.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_ports.h"
-#include        "../serial/ports.h"
-#include        "../health.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_ports.h"
+#include "../serial/ports.h"
+#include "../health.h"
 
 
 

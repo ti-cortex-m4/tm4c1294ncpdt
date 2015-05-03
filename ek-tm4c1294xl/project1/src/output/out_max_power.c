@@ -4,14 +4,14 @@ OUT_MAX_POWER.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_energy.h"
-#include        "../serial/ports.h"
-#include        "../realtime/realtime.h"
-#include        "../energy2.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_energy.h"
+#include "../serial/ports.h"
+#include "../realtime/realtime.h"
+#include "../energy2.h"
 
 
 

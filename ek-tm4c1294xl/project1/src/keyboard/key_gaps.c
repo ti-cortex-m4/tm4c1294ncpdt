@@ -4,13 +4,13 @@ KEY_GAPS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_tariffs.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
-#include        "../time/timedate.h"
-#include        "../tariffs/gaps.h"
-#include        "../flash/files.h"
+#include "../main.h"
+#include "../memory/mem_tariffs.h"
+#include "keyboard.h"
+#include "../display/display.h"
+#include "../time/timedate.h"
+#include "../tariffs/gaps.h"
+#include "../flash/files.h"
 
 
 

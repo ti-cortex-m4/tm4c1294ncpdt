@@ -4,9 +4,9 @@ CALENDAR.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "timedate.h"
-#include        "calendar.h"
+#include "../main.h"
+#include "timedate.h"
+#include "calendar.h"
 
 
 

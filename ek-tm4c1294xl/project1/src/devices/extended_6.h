@@ -4,7 +4,7 @@ EXTENDED_6.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "../memory/mem_extended_6.h"
+#include "../memory/mem_extended_6.h"
 
 
 

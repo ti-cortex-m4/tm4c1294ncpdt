@@ -4,18 +4,18 @@ CURRENT.C
  Расчет трехминутных графиков с цифровых счетчиков
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_realtime.h"
-#include        "../../memory/mem_factors.h"
-#include        "../../memory/mem_energy.h"
-#include        "../../memory/mem_current.h"
-#include        "../../memory/mem_extended_1.h"
-#include        "../../realtime/realtime.h"
-#include        "../../digitals/digitals.h"
-#include        "../../time/rtc.h"
-#include        "../../energy.h"
-#include        "../../energy2.h"
-#include        "current.h"
+#include "../../main.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_factors.h"
+#include "../../memory/mem_energy.h"
+#include "../../memory/mem_current.h"
+#include "../../memory/mem_extended_1.h"
+#include "../../realtime/realtime.h"
+#include "../../digitals/digitals.h"
+#include "../../time/rtc.h"
+#include "../../energy.h"
+#include "../../energy2.h"
+#include "current.h"
 
 
 

@@ -4,14 +4,14 @@ KEY_SPEEDS.C
  Задание и просмотр скоростей обмена
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
-#include        "../serial/speeds.h"
-#include        "../serial/speeds_display.h"
-#include        "../serial/speeds_storage.h"
-#include        "../digitals/correct_limit.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "keyboard.h"
+#include "../display/display.h"
+#include "../serial/speeds.h"
+#include "../serial/speeds_display.h"
+#include "../serial/speeds_storage.h"
+#include "../digitals/correct_limit.h"
 
 
 

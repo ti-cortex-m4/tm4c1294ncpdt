@@ -4,13 +4,13 @@ OUT_CURRENT.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_factors.h"
-#include        "../memory/mem_current.h"
-#include        "../memory/mem_extended_1.h"
-#include        "../memory/mem_ports.h"
-#include        "../digitals/sensors.h"
-#include        "../serial/ports.h"
+#include "../main.h"
+#include "../memory/mem_factors.h"
+#include "../memory/mem_current.h"
+#include "../memory/mem_extended_1.h"
+#include "../memory/mem_ports.h"
+#include "../digitals/sensors.h"
+#include "../serial/ports.h"
 
 
 

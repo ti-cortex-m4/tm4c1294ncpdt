@@ -4,15 +4,15 @@ KEY_RESPONSE.H
  
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_serial0.h"
-#include        "../../memory/mem_serial1.h"
-#include        "../../memory/mem_serial2.h"
-#include        "../../memory/mem_serial3.h"
-#include        "../../memory/mem_ports.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../serial/ports.h"
+#include "../../main.h"
+#include "../../memory/mem_serial0.h"
+#include "../../memory/mem_serial1.h"
+#include "../../memory/mem_serial2.h"
+#include "../../memory/mem_serial3.h"
+#include "../../memory/mem_ports.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../serial/ports.h"
 
 
 

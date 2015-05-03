@@ -4,17 +4,17 @@ KEY_OLDPROGRAM5.C
  Просмотр тарифных графиков за год (старый вариант)
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_tariffs.h"
-#include        "../../memory/mem_realtime.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../access.h"
-#include        "../../time/timedate.h"
-#include        "../../time/timedate_display.h"
-#include        "../../tariffs/zones.h"
-#include        "../../tariffs/tariffs.h"
-#include        "../../tariffs/oldtariffs.h"
+#include "../../main.h"
+#include "../../memory/mem_tariffs.h"
+#include "../../memory/mem_realtime.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../access.h"
+#include "../../time/timedate.h"
+#include "../../time/timedate_display.h"
+#include "../../tariffs/zones.h"
+#include "../../tariffs/tariffs.h"
+#include "../../tariffs/oldtariffs.h"
 
 
 

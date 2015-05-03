@@ -4,18 +4,18 @@ KEY_AUTOMATIC.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../serial/ports.h"
-#include        "../../serial/speeds_display.h"
-#include        "../../serial/modems.h"
-#include        "../../sensors/automatic1.h"
-#include        "../../digitals/digitals.h"
-#include        "../../digitals/digitals_messages.h"
-#include        "../../digitals/digitals_display.h"
-#include        "../../factors.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../serial/ports.h"
+#include "../../serial/speeds_display.h"
+#include "../../serial/modems.h"
+#include "../../sensors/automatic1.h"
+#include "../../digitals/digitals.h"
+#include "../../digitals/digitals_messages.h"
+#include "../../digitals/digitals_display.h"
+#include "../../factors.h"
 
 
 

@@ -4,16 +4,16 @@ KEY_TEST_DIRECT.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_realtime.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../digitals/digitals.h"
-#include        "../../digitals/digitals_messages.h"
-#include        "../../serial/ports.h"
-#include        "../../serial/modems.h"
-#include        "../../sensors/automatic2.h"
+#include "../../main.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_digitals.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../digitals/digitals.h"
+#include "../../digitals/digitals_messages.h"
+#include "../../serial/ports.h"
+#include "../../serial/modems.h"
+#include "../../sensors/automatic2.h"
 
 
 

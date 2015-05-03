@@ -4,18 +4,18 @@ RESPONSE_CRC.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_ports.h"
-#include        "../include/states.h"
-#include        "../access.h"
-#include        "../kernel/crc-16.h"
-#include        "../display/display.h"
-#include        "../keyboard/keyboard.h"
-#include        "../keyboard/key_timedate.h"
-#include        "../serial/ports.h"
-#include        "../serial/flow.h"
-#include        "response1_crc.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_ports.h"
+#include "../include/states.h"
+#include "../access.h"
+#include "../kernel/crc-16.h"
+#include "../display/display.h"
+#include "../keyboard/keyboard.h"
+#include "../keyboard/key_timedate.h"
+#include "../serial/ports.h"
+#include "../serial/flow.h"
+#include "response1_crc.h"
 
 
 

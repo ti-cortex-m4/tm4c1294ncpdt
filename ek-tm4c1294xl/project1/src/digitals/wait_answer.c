@@ -4,10 +4,10 @@ WAIT_ANSWER.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../display/display.h"
-#include        "../serial/ports.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../display/display.h"
+#include "../serial/ports.h"
 
 
 

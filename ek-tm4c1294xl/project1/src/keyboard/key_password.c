@@ -4,12 +4,12 @@ KEY_PASSWORD.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_program.h"
-#include        "../settings.h"
-#include        "../console.h"
-#include        "../access.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_program.h"
+#include "../settings.h"
+#include "../console.h"
+#include "../access.h"
 
 
 

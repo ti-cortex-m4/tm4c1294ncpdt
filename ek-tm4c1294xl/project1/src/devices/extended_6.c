@@ -4,20 +4,20 @@ EXTENDED_6.C
  —охранение значений счетчиков на конец(!) мес€ца чтением первого значени€ счетчиков текущих (также запрос 255 242)
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_digitals.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_energy.h"
-#include        "../memory/mem_extended_6.h"
-#include        "../digitals/digitals.h"
-#include        "../realtime/realtime.h"
-#include        "../serial/ports.h"
-#include        "../time/rtc.h"
-#include        "../time/timedate.h"
-#include        "../console.h"
-#include        "../engine.h"
-#include        "../energy2.h"
-#include        "extended_6.h"
+#include "../main.h"
+#include "../memory/mem_digitals.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_energy.h"
+#include "../memory/mem_extended_6.h"
+#include "../digitals/digitals.h"
+#include "../realtime/realtime.h"
+#include "../serial/ports.h"
+#include "../time/rtc.h"
+#include "../time/timedate.h"
+#include "../console.h"
+#include "../engine.h"
+#include "../energy2.h"
+#include "extended_6.h"
 
 
 

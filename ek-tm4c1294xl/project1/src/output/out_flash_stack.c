@@ -4,11 +4,11 @@ OUT_FLASH_STACK.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_ports.h"
-#include        "../serial/ports.h"
-#include        "../include/flash.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_ports.h"
+#include "../serial/ports.h"
+#include "../include/flash.h"
 
 
 
@@ -38,7 +38,7 @@ void    OutFlashStack(void)
   PUSH_ENUM(VALUE7_CAN_PAGES)
   PUSH_ENUM(VALUE7_CAN_PAGES)
 
-  #include        "../include/out_flash.txt"
+  #include "../include/out_flash.txt"
 
   Output(3000);
 }

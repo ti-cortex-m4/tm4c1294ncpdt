@@ -4,12 +4,12 @@ KEY_CUSTOM_MODEM.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_phones.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../digitals/phones.h"
-#include        "../../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_phones.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../digitals/phones.h"
+#include "../../flash/files.h"
 
 
 

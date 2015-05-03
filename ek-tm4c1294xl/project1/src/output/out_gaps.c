@@ -4,15 +4,15 @@
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_tariffs.h"
-#include        "../memory/mem_settings.h"
-#include        "../serial/ports.h"
-#include        "../time/timedate.h"
-#include        "../time/rtc.h"
-#include        "../flash/files.h"
-#include        "../tariffs/gaps.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_tariffs.h"
+#include "../memory/mem_settings.h"
+#include "../serial/ports.h"
+#include "../time/timedate.h"
+#include "../time/rtc.h"
+#include "../flash/files.h"
+#include "../tariffs/gaps.h"
 
 
 

@@ -4,14 +4,14 @@ KEY_OLDPROGRAM73.C
  Просмотр получасовой мощности за сутки по каналам
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_realtime.h"
-#include        "../../memory/mem_energy.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../realtime/realtime.h"
-#include        "../../energy.h"
-#include        "../../energy2.h"
+#include "../../main.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_energy.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../realtime/realtime.h"
+#include "../../energy.h"
+#include "../../energy2.h"
 
 
 

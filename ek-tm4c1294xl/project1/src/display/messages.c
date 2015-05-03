@@ -4,8 +4,8 @@ MESSAGES.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "display.h"
+#include "../main.h"
+#include "display.h"
 
 
 

@@ -4,7 +4,7 @@ MAIN_TARIFFS.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "main_basic.h"
+#include "main_basic.h"
 
 
 

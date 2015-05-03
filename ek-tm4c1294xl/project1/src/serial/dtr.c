@@ -4,8 +4,8 @@ DTR.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../digitals/wait_query.h"
+#include "../main.h"
+#include "../digitals/wait_query.h"
 
 
 

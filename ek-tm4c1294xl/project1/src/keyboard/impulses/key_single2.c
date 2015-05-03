@@ -4,15 +4,15 @@ KEY_SINGLE2.C
  Просмотр канальных и групповых величин (новый вариант)
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_realtime.h"
-#include        "../../memory/mem_energy.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../realtime/realtime.h"
-#include        "../../energy.h"
-#include        "../../energy2.h"
-#include        "../../energy4.h"
+#include "../../main.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_energy.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../realtime/realtime.h"
+#include "../../energy.h"
+#include "../../energy2.h"
+#include "../../energy4.h"
 
 
 

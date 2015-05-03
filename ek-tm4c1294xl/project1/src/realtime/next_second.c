@@ -4,15 +4,15 @@ NEXT_SECOND.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_digitals.h"
-#include        "../memory/mem_profile.h"
-#include        "../digitals/wait_query.h"
-#include        "../digitals/profile/profile_run.h"
-#include        "../digitals/schedule/ctrl_hours.h"
-#include        "realtime.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_digitals.h"
+#include "../memory/mem_profile.h"
+#include "../digitals/wait_query.h"
+#include "../digitals/profile/profile_run.h"
+#include "../digitals/schedule/ctrl_hours.h"
+#include "realtime.h"
 
 
 

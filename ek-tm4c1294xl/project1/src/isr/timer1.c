@@ -4,19 +4,19 @@ TIMER1.C
 TODO volatile
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "inc/hw_memmap.h"
-#include        "inc/hw_ints.h"
-#include        "driverlib/gpio.h"
-#include        "driverlib/interrupt.h"
-#include        "driverlib/sysctl.h"
-#include        "driverlib/timer.h"
-#include        "../display/slides.h"
-#include        "../impulses/impulses.h"
-#include        "../digitals/wait_answer.h"
-#include        "../digitals/wait_query.h"
-#include        "../output/unified/uni.h"
-#include        "../serial/flow.h"
+#include "../main.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_ints.h"
+#include "driverlib/gpio.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/timer.h"
+#include "../display/slides.h"
+#include "../impulses/impulses.h"
+#include "../digitals/wait_answer.h"
+#include "../digitals/wait_query.h"
+#include "../output/unified/uni.h"
+#include "../serial/flow.h"
 
 
 

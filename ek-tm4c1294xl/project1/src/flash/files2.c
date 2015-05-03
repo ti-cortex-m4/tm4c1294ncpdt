@@ -4,9 +4,9 @@ FILES2.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "files.h"
-#include        "files2.h"
+#include "../main.h"
+#include "files.h"
+#include "files2.h"
 
 
 

@@ -4,13 +4,13 @@ KEY_ADDRESSES.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../../display/display.h"
-#include        "../keyboard.h"
-#include        "../../digitals/digitals.h"
-#include        "../../flash/files.h"
-#include        "../../flash/records.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../display/display.h"
+#include "../keyboard.h"
+#include "../../digitals/digitals.h"
+#include "../../flash/files.h"
+#include "../../flash/records.h"
 
 
 

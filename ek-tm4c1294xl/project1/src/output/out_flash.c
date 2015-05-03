@@ -4,13 +4,13 @@ OUT_FLASH.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_flash.h"
-#include        "../memory/mem_settings.h"
-#include        "../serial/ports.h"
-#include        "../flash/at45.h"
-#include        "../hardware/memory.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_flash.h"
+#include "../memory/mem_settings.h"
+#include "../serial/ports.h"
+#include "../flash/at45.h"
+#include "../hardware/memory.h"
 
 
 

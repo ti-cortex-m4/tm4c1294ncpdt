@@ -4,15 +4,15 @@ KEY_OLDYEARZONE.С
  Задание и просмотр тарифных графиков за год (старый вариант)
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_tariffs.h"
-#include        "../../memory/mem_program.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../access.h"
-#include        "../../tariffs/zones.h"
-#include        "../../tariffs/tariffs.h"
-#include        "../../tariffs/oldtariffs.h"
+#include "../../main.h"
+#include "../../memory/mem_tariffs.h"
+#include "../../memory/mem_program.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../access.h"
+#include "../../tariffs/zones.h"
+#include "../../tariffs/tariffs.h"
+#include "../../tariffs/oldtariffs.h"
 
 
 

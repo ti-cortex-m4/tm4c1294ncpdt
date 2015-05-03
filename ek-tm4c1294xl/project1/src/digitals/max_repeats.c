@@ -4,8 +4,8 @@ MAX_REPEATS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../flash/files.h"
+#include "../main.h"
+#include "../flash/files.h"
 
 
 

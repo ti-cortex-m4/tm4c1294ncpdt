@@ -4,10 +4,10 @@ DEVICES_TIME.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_profile.h"
-#include        "../time/calendar.h"
+#include "../main.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_profile.h"
+#include "../time/calendar.h"
 
 
 

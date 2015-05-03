@@ -4,17 +4,17 @@ OUT_DEFECTS21.C
 
 ------------------------------------------------------------------------------*/
 /*
-#include        "xdata.h"
-#include        "queries.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "groups.h"
-#include        "energy.h"
-#include        "general.h"
-#include        "nexttime.h"
-#include        "keyboard.h"
-#include        "recalc_def.h"
-#include        "c_defects20.h"
+#include "xdata.h"
+#include "queries.h"
+#include "ports.h"
+#include "engine.h"
+#include "groups.h"
+#include "energy.h"
+#include "general.h"
+#include "nexttime.h"
+#include "keyboard.h"
+#include "recalc_def.h"
+#include "c_defects20.h"
 
 
 

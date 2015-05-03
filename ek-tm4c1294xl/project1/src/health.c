@@ -4,7 +4,7 @@ HEALTH.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
+#include "main.h"
 
 
 boolean                 boHealthLabelRTC = UNDEFINED;

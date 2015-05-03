@@ -4,10 +4,10 @@ KEY_TEST_UNI.H
  
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_uni.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
+#include "../../main.h"
+#include "../../memory/mem_uni.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
 
 
 

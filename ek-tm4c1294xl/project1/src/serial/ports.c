@@ -4,21 +4,21 @@ PORTS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_tariffs.h"
-#include        "../memory/mem_serial0.h"
-#include        "../memory/mem_serial1.h"
-#include        "../memory/mem_serial2.h"
-#include        "../memory/mem_serial3.h"
-#include        "../memory/mem_realtime.h"
-#include        "../include/queries.h"
-#include        "../digitals/wait_query.h"
-#include        "../realtime/realtime.h"
-#include        "../kernel/crc-16.h"
-#include        "ports_stack.h"
-#include        "ports_common.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_tariffs.h"
+#include "../memory/mem_serial0.h"
+#include "../memory/mem_serial1.h"
+#include "../memory/mem_serial2.h"
+#include "../memory/mem_serial3.h"
+#include "../memory/mem_realtime.h"
+#include "../include/queries.h"
+#include "../digitals/wait_query.h"
+#include "../realtime/realtime.h"
+#include "../kernel/crc-16.h"
+#include "ports_stack.h"
+#include "ports_common.h"
 
 
 

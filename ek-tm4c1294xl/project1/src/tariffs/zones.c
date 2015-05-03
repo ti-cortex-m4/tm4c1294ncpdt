@@ -4,11 +4,11 @@ ZONES.C
  Подпрограммы управления суточными тарифными графиками
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_tariffs.h"
-#include        "../keyboard/keyboard.h"
-#include        "../display/display.h"
-#include        "../flash/files.h"
+#include "../main.h"
+#include "../memory/mem_tariffs.h"
+#include "../keyboard/keyboard.h"
+#include "../display/display.h"
+#include "../flash/files.h"
 
 
 

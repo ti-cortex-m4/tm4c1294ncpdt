@@ -4,20 +4,20 @@ OUT_DEFECTS20.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../groups.h"
+#include "../main.h"
+#include "../groups.h"
 /*
-#include        "queries.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "general.h"
-#include        "groups.h"
-#include        "timedate.h"
-#include        "nexttime.h"
-#include        "keyboard.h"
-#include        "recalc_def.h"
-#include        "c_defects21.h"
+#include "queries.h"
+#include "ports.h"
+#include "engine.h"
+#include "energy.h"
+#include "general.h"
+#include "groups.h"
+#include "timedate.h"
+#include "nexttime.h"
+#include "keyboard.h"
+#include "recalc_def.h"
+#include "c_defects21.h"
 
 
 

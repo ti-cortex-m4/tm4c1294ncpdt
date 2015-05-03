@@ -4,13 +4,13 @@ FACTORS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "memory/mem_factors.h"
-#include        "include/flash.h"
-#include        "flash/files.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "factors.h"
+#include "main.h"
+#include "memory/mem_factors.h"
+#include "include/flash.h"
+#include "flash/files.h"
+#include "engine.h"
+#include "energy.h"
+#include "factors.h"
 
 
 file const              flTransEng = {TRANS_ENG, &mpreTransEng, sizeof(real)*bCANALS};

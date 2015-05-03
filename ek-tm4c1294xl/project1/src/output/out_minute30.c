@@ -4,16 +4,16 @@ OUT_MINUTE30.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_energy.h"
-#include        "../serial/ports.h"
-#include        "../realtime/realtime.h"
-#include        "../time/timedate.h"
-#include        "../time/calendar.h"
-#include        "../energy2.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_energy.h"
+#include "../serial/ports.h"
+#include "../realtime/realtime.h"
+#include "../time/timedate.h"
+#include "../time/calendar.h"
+#include "../energy2.h"
 
 
 

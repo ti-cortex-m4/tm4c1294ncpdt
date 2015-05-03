@@ -4,19 +4,19 @@ EXTENDED_5_H.C
 
 ------------------------------------------------------------------------------*/
 /*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "delay.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "general.h"
-#include        "nexttime.h"
-#include        "keyboard.h"
-#include        "digitals.h"
-#include        "device_h.h"
-#include        "_automatic1.h"
+#include "main.h"
+#include "xdata.h"
+#include "display.h"
+#include "delay.h"
+#include "ports.h"
+#include "engine.h"
+#include "energy.h"
+#include "general.h"
+#include "nexttime.h"
+#include "keyboard.h"
+#include "digitals.h"
+#include "device_h.h"
+#include "_automatic1.h"
 
 
 

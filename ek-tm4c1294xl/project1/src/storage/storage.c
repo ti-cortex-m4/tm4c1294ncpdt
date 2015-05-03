@@ -4,18 +4,18 @@ STORAGE.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_flash.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_energy.h"
-#include        "../hardware/watchdog.h"
-#include        "../flash/at45.h"
-#include        "../energy2.h"
-#include        "../energy3.h"
-#include        "../display/display.h"
-#include        "../time/delay.h"
-#include        "../time/calendar.h"
-#include        "../realtime/realtime_init.h"
+#include "../main.h"
+#include "../memory/mem_flash.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_energy.h"
+#include "../hardware/watchdog.h"
+#include "../flash/at45.h"
+#include "../energy2.h"
+#include "../energy3.h"
+#include "../display/display.h"
+#include "../time/delay.h"
+#include "../time/calendar.h"
+#include "../realtime/realtime_init.h"
 
 
 

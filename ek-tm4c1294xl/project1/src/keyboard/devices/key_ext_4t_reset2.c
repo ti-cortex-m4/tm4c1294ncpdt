@@ -4,8 +4,8 @@ KEY_EXT_4T_RESET2.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../console.h"
-#include        "../../devices/extended_4t.h"
+#include "../../console.h"
+#include "../../devices/extended_4t.h"
 
 
 

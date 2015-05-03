@@ -4,11 +4,11 @@ U_DEF.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_energy.h"
-#include        "../../realtime/realtime.h"
-#include        "../../groups.h"
-#include        "u_def.h"
+#include "../../main.h"
+#include "../../memory/mem_energy.h"
+#include "../../realtime/realtime.h"
+#include "../../groups.h"
+#include "u_def.h"
 
 
 

@@ -4,21 +4,21 @@ TIMER0.C
 TODO volatile
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "inc/hw_memmap.h"
-#include        "inc/hw_ints.h"
-#include        "driverlib/gpio.h"
-#include        "driverlib/interrupt.h"
-#include        "driverlib/sysctl.h"
-#include        "driverlib/timer.h"
-#include        "../keyboard/key.h"
-#include        "../display/lcd.h"
-#include        "../impulses/impulses.h"
-#include        "../digitals/digitals_pause.h"
-#include        "serial0.h"
-#include        "serial1.h"
-#include        "serial2.h"
-#include        "serial3.h"
+#include "../main.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_ints.h"
+#include "driverlib/gpio.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/timer.h"
+#include "../keyboard/key.h"
+#include "../display/lcd.h"
+#include "../impulses/impulses.h"
+#include "../digitals/digitals_pause.h"
+#include "serial0.h"
+#include "serial1.h"
+#include "serial2.h"
+#include "serial3.h"
 
 
 

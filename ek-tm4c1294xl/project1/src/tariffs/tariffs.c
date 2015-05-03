@@ -4,21 +4,21 @@ TARIFFS.C
  Новый вариант задания тарифов
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_tariffs.h"
-#include        "../memory/mem_program.h"
-#include        "../memory/mem_settings.h"
-#include        "../display/display.h"
-#include        "../flash/files.h"
-#include        "../access.h"
-#include        "../time/delay.h"
-#include        "../time/rtc.h"
-#include        "../time/timedate.h"
-#include        "zones.h"
-#include        "oldtariffs.h"
-#include        "relaxs.h"
-#include        "gaps.h"
-#include        "tariffs.h"
+#include "../main.h"
+#include "../memory/mem_tariffs.h"
+#include "../memory/mem_program.h"
+#include "../memory/mem_settings.h"
+#include "../display/display.h"
+#include "../flash/files.h"
+#include "../access.h"
+#include "../time/delay.h"
+#include "../time/rtc.h"
+#include "../time/timedate.h"
+#include "zones.h"
+#include "oldtariffs.h"
+#include "relaxs.h"
+#include "gaps.h"
+#include "tariffs.h"
 
 
 

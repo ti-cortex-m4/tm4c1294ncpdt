@@ -4,19 +4,19 @@ EXTENDED_4T.C
  Значения счетчиков по тарифам на НАЧАЛО месяца
 ------------------------------------------------------------------------------*/
 
-#include        "../console.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_extended_4.h"
-#include        "../serial/ports.h"
-#include        "../digitals/digitals.h"
-#include        "../digitals/digitals_display.h"
-#include        "../digitals/digitals_messages.h"
-#include        "../devices/devices.h"
-#include        "../sensors/automatic_p.h"
-#include        "../sensors/automatic3.h"
-#include        "../time/rtc.h"
-#include        "../time/timedate.h"
-#include        "extended_4t.h"
+#include "../console.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_extended_4.h"
+#include "../serial/ports.h"
+#include "../digitals/digitals.h"
+#include "../digitals/digitals_display.h"
+#include "../digitals/digitals_messages.h"
+#include "../devices/devices.h"
+#include "../sensors/automatic_p.h"
+#include "../sensors/automatic3.h"
+#include "../time/rtc.h"
+#include "../time/timedate.h"
+#include "extended_4t.h"
 
 
 

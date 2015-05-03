@@ -4,10 +4,10 @@ PROFILE_CORE.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../../flash/files.h"
-#include        "profile_core.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../flash/files.h"
+#include "profile_core.h"
 
 
 

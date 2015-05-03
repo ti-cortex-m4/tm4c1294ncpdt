@@ -4,17 +4,17 @@ KEY_PARAMS_ALL.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../../main.h"
-#include        "../../../console.h"
-#include        "../../../digitals/params/params.h"
-#include        "../../../digitals/params/params2.h"
-#include        "../../../digitals/params/params_storage.h"
-#include        "../../../digitals/digitals_messages.h"
-#include        "../../../realtime/realtime.h"
-#include        "../../../time/timedate_display.h"
-#include        "../../../serial/ports.h"
-#include        "../../../flash/files.h"
-#include        "../../../engine.h"
+#include "../../../main.h"
+#include "../../../console.h"
+#include "../../../digitals/params/params.h"
+#include "../../../digitals/params/params2.h"
+#include "../../../digitals/params/params_storage.h"
+#include "../../../digitals/digitals_messages.h"
+#include "../../../realtime/realtime.h"
+#include "../../../time/timedate_display.h"
+#include "../../../serial/ports.h"
+#include "../../../flash/files.h"
+#include "../../../engine.h"
 
 
 

@@ -4,17 +4,17 @@ RTC2.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../time/timedate.h"
-#include        "../display/lines.h"
+#include "../main.h"
+#include "../time/timedate.h"
+#include "../display/lines.h"
 #include 		"inc/hw_sysctl.h"
 #include 		"inc/hw_gpio.h"
 #include 		"inc/hw_memmap.h"
-#include        "inc/hw_ssi.h"
-#include        "inc/hw_types.h"
-#include        "../time/delay.h"
-#include        "rtc.h"
-#include        "rtc2.h"
+#include "inc/hw_ssi.h"
+#include "inc/hw_types.h"
+#include "../time/delay.h"
+#include "rtc.h"
+#include "rtc2.h"
 
 
 

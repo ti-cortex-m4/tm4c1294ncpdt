@@ -6,12 +6,12 @@ OLDTARIFFS.Ñ
 
 #include        <string.h>
 #include        <stdio.h>
-#include        "../main.h"
-#include        "../memory/mem_tariffs.h"
-#include        "../access.h"
-#include        "../flash/files.h"
-#include        "tariffs.h"
-#include        "zones.h"
+#include "../main.h"
+#include "../memory/mem_tariffs.h"
+#include "../access.h"
+#include "../flash/files.h"
+#include "tariffs.h"
+#include "zones.h"
 
 
 

@@ -4,14 +4,14 @@ RECALC_DEF.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_tariffs.h"
-#include        "../memory/mem_energy.h"
-#include        "../memory/mem_energy_spec.h"
-#include        "../realtime/realtime.h"
-#include        "../flash/files.h"
-#include        "recalc_def.h"
+#include "../main.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_tariffs.h"
+#include "../memory/mem_energy.h"
+#include "../memory/mem_energy_spec.h"
+#include "../realtime/realtime.h"
+#include "../flash/files.h"
+#include "recalc_def.h"
 
 
 

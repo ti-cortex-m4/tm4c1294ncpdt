@@ -4,16 +4,16 @@ SPEEDS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "driverlib/rom.h"
-#include        "driverlib/uart.h"
-#include        "inc/hw_memmap.h"
-#include        "../hardware/system_clock.h"
-#include        "../memory/mem_ports.h"
-#include        "../serial/ports.h"
-#include        "../digitals/correct_limit.h"
-#include        "speeds.h"
-#include        "speeds_storage.h"
+#include "../main.h"
+#include "driverlib/rom.h"
+#include "driverlib/uart.h"
+#include "inc/hw_memmap.h"
+#include "../hardware/system_clock.h"
+#include "../memory/mem_ports.h"
+#include "../serial/ports.h"
+#include "../digitals/correct_limit.h"
+#include "speeds.h"
+#include "speeds_storage.h"
 
 
 

@@ -4,11 +4,11 @@ DEVICES_POSTINPUT.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_digitals.h"
-#include        "../kernel/crc-16.h"
-#include        "../serial/ports.h"
-#include        "../serial/ports_devices.h"
+#include "../main.h"
+#include "../memory/mem_digitals.h"
+#include "../kernel/crc-16.h"
+#include "../serial/ports.h"
+#include "../serial/ports_devices.h"
 
 
 

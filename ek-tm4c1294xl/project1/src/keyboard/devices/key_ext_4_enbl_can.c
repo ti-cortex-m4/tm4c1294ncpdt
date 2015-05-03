@@ -4,8 +4,8 @@ KEY_EXT_4_CANALS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../console.h"
-#include        "../../devices/extended_4.h"
+#include "../../console.h"
+#include "../../devices/extended_4.h"
 
 
 

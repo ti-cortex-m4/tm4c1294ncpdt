@@ -4,12 +4,12 @@ DIGITALS.C
  Цифровые счетчики
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_digitals0.h"
-#include        "../memory/mem_digitals.h"
-#include        "../flash/files.h"
-#include        "digitals.h"
-#include        "sensors.h"
+#include "../main.h"
+#include "../memory/mem_digitals0.h"
+#include "../memory/mem_digitals.h"
+#include "../flash/files.h"
+#include "digitals.h"
+#include "sensors.h"
 
 
 

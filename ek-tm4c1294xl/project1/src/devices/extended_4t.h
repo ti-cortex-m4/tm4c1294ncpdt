@@ -4,7 +4,7 @@ EXTENDED_4T.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "../memory/mem_extended_4t.h"
+#include "../memory/mem_extended_4t.h"
 
 
 

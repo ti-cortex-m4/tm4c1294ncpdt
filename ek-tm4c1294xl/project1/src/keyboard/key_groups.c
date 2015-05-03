@@ -4,12 +4,12 @@ KEY_GROUPS.C
  Группы
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_groups.h"
-#include        "../memory/mem_program.h"
-#include        "../settings.h"
-#include        "../console.h"
-#include        "../groups.h"
+#include "../main.h"
+#include "../memory/mem_groups.h"
+#include "../memory/mem_program.h"
+#include "../settings.h"
+#include "../console.h"
+#include "../groups.h"
 
 
 

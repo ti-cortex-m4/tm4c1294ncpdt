@@ -4,10 +4,10 @@ U_QUERY_CRC.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../serial/ports.h"
-#include        "../../serial/ports2.h"
-#include        "u_query_crc.h"
+#include "../../main.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports2.h"
+#include "u_query_crc.h"
 
 
 

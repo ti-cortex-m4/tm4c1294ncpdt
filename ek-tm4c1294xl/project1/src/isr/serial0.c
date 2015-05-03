@@ -4,22 +4,22 @@ SERIAL0.C
 // TODO volatile
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "inc/hw_memmap.h"
-#include        "inc/hw_uart.h"
-#include        "inc/hw_types.h"
-#include        "inc/hw_ints.h"
-#include        "driverlib/interrupt.h"
-#include        "driverlib/uart.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_serial0.h"
-#include        "../memory/mem_uni.h"
-#include        "../serial/flow.h"
-#include        "../serial/ports.h"
-#include        "../serial/bulk.h"
-#include        "../kernel/crc-16.h"
-#include        "../uarts.h"
-#include        "serial.h"
+#include "../main.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_uart.h"
+#include "inc/hw_types.h"
+#include "inc/hw_ints.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/uart.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_serial0.h"
+#include "../memory/mem_uni.h"
+#include "../serial/flow.h"
+#include "../serial/ports.h"
+#include "../serial/bulk.h"
+#include "../kernel/crc-16.h"
+#include "../uarts.h"
+#include "serial.h"
 
 
 

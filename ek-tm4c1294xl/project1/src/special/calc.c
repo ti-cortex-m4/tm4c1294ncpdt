@@ -4,21 +4,21 @@ CALC.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_groups.h"
-#include        "../memory/mem_digitals.h"
-#include        "../memory/mem_profile.h"
-#include        "../memory/mem_energy_spec.h"
-#include        "../impulses/max_power.h"
-#include        "../impulses/energy_spec.h"
-#include        "../digitals/digitals.h"
-#include        "../devices/devices.h"
-#include        "../special/recalc_def.h"
-#include        "../time/timedate.h"
-#include        "../energy.h"
-#include        "special.h"
-#include        "calc.h"
+#include "../main.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_groups.h"
+#include "../memory/mem_digitals.h"
+#include "../memory/mem_profile.h"
+#include "../memory/mem_energy_spec.h"
+#include "../impulses/max_power.h"
+#include "../impulses/energy_spec.h"
+#include "../digitals/digitals.h"
+#include "../devices/devices.h"
+#include "../special/recalc_def.h"
+#include "../time/timedate.h"
+#include "../energy.h"
+#include "special.h"
+#include "calc.h"
 
 
 

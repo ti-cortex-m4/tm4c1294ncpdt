@@ -4,16 +4,16 @@ EXTENDED_5_B.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_digitals.h"
-#include        "../serial/ports.h"
-#include        "../serial/ports_devices.h"
-#include        "../console.h"
-#include        "../sensors/automatic1.h"
-#include        "../sensors/device_b.h"
-#include        "../energy.h"
-#include        "../engine.h"
-#include        "extended_5_b.h"
+#include "../main.h"
+#include "../memory/mem_digitals.h"
+#include "../serial/ports.h"
+#include "../serial/ports_devices.h"
+#include "../console.h"
+#include "../sensors/automatic1.h"
+#include "../sensors/device_b.h"
+#include "../energy.h"
+#include "../engine.h"
+#include "extended_5_b.h"
 
 
 

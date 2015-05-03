@@ -4,13 +4,13 @@ KEY_DELAYS.C
  
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
-#include        "../engine.h"
-#include        "../digitals/sensors.h"
-#include        "../serial/speeds_storage.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "keyboard.h"
+#include "../display/display.h"
+#include "../engine.h"
+#include "../digitals/sensors.h"
+#include "../serial/speeds_storage.h"
 
 
 

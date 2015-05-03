@@ -4,13 +4,13 @@ KEY_ENBL_CANALS.Ñ
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../../memory/mem_ports.h"
-#include        "../../display/display.h"
-#include        "../keyboard.h"
-#include        "../../flash/files.h"
-#include        "../../digitals/profile/profile_core.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_ports.h"
+#include "../../display/display.h"
+#include "../keyboard.h"
+#include "../../flash/files.h"
+#include "../../digitals/profile/profile_core.h"
 
 
 

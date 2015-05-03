@@ -4,8 +4,8 @@ TIMEDATE.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "timedate.h"
+#include "../main.h"
+#include "timedate.h"
 
 
 

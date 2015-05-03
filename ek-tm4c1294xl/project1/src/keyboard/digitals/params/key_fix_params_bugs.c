@@ -4,9 +4,9 @@ KEY_FIX_PARAMS_BUGS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../../main.h"
-#include        "../../../digitals/params/params.h"
-#include        "../../key_flag.h"
+#include "../../../main.h"
+#include "../../../digitals/params/params.h"
+#include "../../key_flag.h"
 
 
 

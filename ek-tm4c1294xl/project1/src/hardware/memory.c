@@ -4,12 +4,12 @@ TODO MEMORY.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "inc/hw_types.h"
-#include        "driverlib/sysctl.h"
-#include        "../display/lcd.h"
-#include        "../display/messages.h"
-#include        "../kernel/crc-16.h"
+#include "../main.h"
+#include "inc/hw_types.h"
+#include "driverlib/sysctl.h"
+#include "../display/lcd.h"
+#include "../display/messages.h"
+#include "../kernel/crc-16.h"
 
 
 
