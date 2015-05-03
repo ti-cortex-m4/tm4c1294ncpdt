@@ -4,11 +4,11 @@ CTRL_HOURS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_settings.h"
-#include        "../../memory/mem_realtime.h"
-#include        "../../memory/mem_schedule.h"
-#include        "../../realtime/realtime.h"
+#include "../../main.h"
+#include "../../memory/mem_settings.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_schedule.h"
+#include "../../realtime/realtime.h"
 
 
 

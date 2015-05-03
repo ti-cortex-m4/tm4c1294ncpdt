@@ -4,17 +4,17 @@ PORTS_COMMON.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_serial0.h"
-#include        "../memory/mem_serial1.h"
-#include        "../memory/mem_serial2.h"
-#include        "../memory/mem_serial3.h"
-#include        "../isr/serial0.h"
-#include        "../isr/serial1.h"
-#include        "../isr/serial2.h"
-#include        "../isr/serial3.h"
-#include        "../kernel/crc-16.h"
-#include        "ports.h"
+#include "../main.h"
+#include "../memory/mem_serial0.h"
+#include "../memory/mem_serial1.h"
+#include "../memory/mem_serial2.h"
+#include "../memory/mem_serial3.h"
+#include "../isr/serial0.h"
+#include "../isr/serial1.h"
+#include "../isr/serial2.h"
+#include "../isr/serial3.h"
+#include "../kernel/crc-16.h"
+#include "ports.h"
 
 
 

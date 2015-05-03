@@ -4,12 +4,12 @@ OUT_CONSOLE.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../serial/ports.h"
-#include        "../access.h"
-#include        "../display/display.h"
-#include        "../keyboard/keyboard.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../serial/ports.h"
+#include "../access.h"
+#include "../display/display.h"
+#include "../keyboard/keyboard.h"
 
 
 

@@ -4,11 +4,11 @@ PRINT.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "utils/uartstdio.h"
-#include        "inc/hw_ints.h"
-#include        "driverlib/interrupt.h"
-#include        "print.h"
+#include "../main.h"
+#include "utils/uartstdio.h"
+#include "inc/hw_ints.h"
+#include "driverlib/interrupt.h"
+#include "print.h"
 
 
 

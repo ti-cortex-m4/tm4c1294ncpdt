@@ -4,11 +4,11 @@ KEY_CHAR.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
-#include        "../flash/files.h"
-#include        "key_char.h"
+#include "../main.h"
+#include "keyboard.h"
+#include "../display/display.h"
+#include "../flash/files.h"
+#include "key_char.h"
 
 
 

@@ -4,12 +4,12 @@ AUTOMATIC3.C
  «начени€ счетчиков по тарифам на начало мес€ца
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../digitals/digitals.h"
-#include        "../display/display.h"
-#include        "../serial/ports.h"
-#include        "automatic_b.h"
-#include        "automatic_c.h"
+#include "../main.h"
+#include "../digitals/digitals.h"
+#include "../display/display.h"
+#include "../serial/ports.h"
+#include "automatic_b.h"
+#include "automatic_c.h"
 
 
 

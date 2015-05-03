@@ -4,15 +4,15 @@ KEY_TIMEDATE.C
  Установка и просмотр текущего времени и даты
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_program.h"
-#include        "../memory/mem_realtime.h"
-#include        "../console.h"
-#include        "../settings.h"
-#include        "../time/rtc.h"
-#include        "../time/timedate.h"
-#include        "../time/timedate_display.h"
-#include        "../time/decret.h"
+#include "../main.h"
+#include "../memory/mem_program.h"
+#include "../memory/mem_realtime.h"
+#include "../console.h"
+#include "../settings.h"
+#include "../time/rtc.h"
+#include "../time/timedate.h"
+#include "../time/timedate_display.h"
+#include "../time/decret.h"
 
 
 

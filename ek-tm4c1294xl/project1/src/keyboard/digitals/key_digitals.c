@@ -4,20 +4,20 @@ KEY_DIGITALS.C
  Цифровые счётчики
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../../memory/mem_ports.h"
-#include        "../../display/display.h"
-#include        "../keyboard.h"
-#include        "../../flash/files.h"
-#include        "../../flash/records.h"
-#include        "../../digitals/digitals.h"
-#include        "../../digitals/digitals_display.h"
-#include        "../../digitals/devices.h"
-#include        "../../digitals/correct_limit.h"
-#include        "../../serial/speeds.h"
-#include        "../../serial/speeds_display.h"
-#include        "../../serial/speeds_storage.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_ports.h"
+#include "../../display/display.h"
+#include "../keyboard.h"
+#include "../../flash/files.h"
+#include "../../flash/records.h"
+#include "../../digitals/digitals.h"
+#include "../../digitals/digitals_display.h"
+#include "../../digitals/devices.h"
+#include "../../digitals/correct_limit.h"
+#include "../../serial/speeds.h"
+#include "../../serial/speeds_display.h"
+#include "../../serial/speeds_storage.h"
 
 
 

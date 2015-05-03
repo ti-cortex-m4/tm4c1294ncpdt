@@ -4,9 +4,9 @@ KEY_TEST_IMPULSES.H
  
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
+#include "../../main.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
 #include       "inc/hw_gpio.h"
 #include       "inc/hw_memmap.h"
 #include       "inc/hw_sysctl.h"

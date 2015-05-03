@@ -4,10 +4,10 @@ OUT_LIMITS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_limits.h"
-#include        "../../serial/ports.h"
-#include        "../../digitals/limits.h"
+#include "../../main.h"
+#include "../../memory/mem_limits.h"
+#include "../../serial/ports.h"
+#include "../../digitals/limits.h"
 
 
 

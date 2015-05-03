@@ -4,13 +4,13 @@
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_params.h"
-#include        "../serial/ports.h"
-#include        "../realtime/realtime.h"
-#include        "../time/rtc.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_params.h"
+#include "../serial/ports.h"
+#include "../realtime/realtime.h"
+#include "../time/rtc.h"
 
 
 

@@ -4,19 +4,19 @@ REALTIME_START.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_params.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_factors.h"
-#include        "../memory/mem_energy.h"
-#include        "../time/rtc.h"
-#include        "../impulses/impulses.h"
-#include        "../energy.h"
-#include        "../energy3.h"
-#include        "../digitals/digitals.h"
-#include        "../digitals/profile/profile.h"
-#include        "realtime_storage.h"
+#include "../main.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_params.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_factors.h"
+#include "../memory/mem_energy.h"
+#include "../time/rtc.h"
+#include "../impulses/impulses.h"
+#include "../energy.h"
+#include "../energy3.h"
+#include "../digitals/digitals.h"
+#include "../digitals/profile/profile.h"
+#include "realtime_storage.h"
 
 
 

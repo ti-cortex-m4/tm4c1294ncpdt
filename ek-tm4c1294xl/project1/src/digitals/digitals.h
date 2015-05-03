@@ -4,7 +4,7 @@ DIGITALS.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "../memory/mem_digitals.h"
+#include "../memory/mem_digitals.h"
 
 
 

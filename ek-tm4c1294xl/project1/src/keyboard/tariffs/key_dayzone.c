@@ -4,13 +4,13 @@ KEY_DAYZONE.С
  Запись суточного тарифного графика
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_tariffs.h"
-#include        "../../display/display.h"
-#include        "../keyboard.h"
-#include        "../../tariffs/tariffs.h"
-#include        "../../tariffs/zones.h"
-#include        "../../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_tariffs.h"
+#include "../../display/display.h"
+#include "../keyboard.h"
+#include "../../tariffs/tariffs.h"
+#include "../../tariffs/zones.h"
+#include "../../flash/files.h"
 
 
 

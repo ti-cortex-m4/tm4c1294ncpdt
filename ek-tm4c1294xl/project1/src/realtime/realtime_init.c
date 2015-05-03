@@ -4,21 +4,21 @@ REALTIME_INIT.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_params.h"
-#include        "../memory/mem_settings.h"
-#include        "../flash/records.h"
-#include        "../time/timedate.h"
-#include        "../time/rtc.h"
-#include        "../time/delay.h"
-#include        "../display/display.h"
-#include        "../display/lcd.h"
-#include        "../hardware/watchdog.h"
-#include        "../hardware/beep.h"
-#include        "../serial/print.h"
-#include        "realtime.h"
-#include        "realtime_storage.h"
+#include "../main.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_params.h"
+#include "../memory/mem_settings.h"
+#include "../flash/records.h"
+#include "../time/timedate.h"
+#include "../time/rtc.h"
+#include "../time/delay.h"
+#include "../display/display.h"
+#include "../display/lcd.h"
+#include "../hardware/watchdog.h"
+#include "../hardware/beep.h"
+#include "../serial/print.h"
+#include "realtime.h"
+#include "realtime_storage.h"
 
 
 

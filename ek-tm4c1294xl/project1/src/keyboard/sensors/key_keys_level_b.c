@@ -4,11 +4,11 @@ KEY_KEYS_LEVEL_B.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../../console.h"
-#include        "../../devices/devices_init.h"
-#include        "../../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../console.h"
+#include "../../devices/devices_init.h"
+#include "../../flash/files.h"
 
 
 

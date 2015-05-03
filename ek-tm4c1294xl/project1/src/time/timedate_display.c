@@ -4,11 +4,11 @@ TIMEDATE_DISPLAY.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../display/display.h"
-#include        "rtc.h"
-#include        "timedate.h"
-#include        "timedate_display.h"
+#include "../main.h"
+#include "../display/display.h"
+#include "rtc.h"
+#include "timedate.h"
+#include "timedate_display.h"
 
 
 

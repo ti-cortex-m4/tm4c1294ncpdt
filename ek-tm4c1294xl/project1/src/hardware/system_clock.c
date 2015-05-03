@@ -4,9 +4,9 @@ SYSTEM_CLOCK.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "driverlib/rom_map.h"
-#include        "driverlib/sysctl.h"
+#include "../main.h"
+#include "driverlib/rom_map.h"
+#include "driverlib/sysctl.h"
 
 
 

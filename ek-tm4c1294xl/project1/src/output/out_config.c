@@ -4,9 +4,9 @@ OUT_CONFIG.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../serial/ports.h"
-#include        "../flash/at45.h"
+#include "../main.h"
+#include "../serial/ports.h"
+#include "../flash/at45.h"
 
 
 

@@ -4,8 +4,8 @@ MEM_FLASH.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../include/flash.h"
+#include "../main.h"
+#include "../include/flash.h"
 
 
 

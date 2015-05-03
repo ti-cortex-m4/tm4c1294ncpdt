@@ -4,9 +4,9 @@ KEY_MNT_PARAMS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../../console.h"
-#include        "../../../digitals/params/params.h"
-#include        "../../key_flag.h"
+#include "../../../console.h"
+#include "../../../digitals/params/params.h"
+#include "../../key_flag.h"
 
 
 

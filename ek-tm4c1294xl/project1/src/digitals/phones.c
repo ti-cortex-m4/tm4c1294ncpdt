@@ -4,9 +4,9 @@ PHONES.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_phones.h"
-#include        "../flash/files.h"
+#include "../main.h"
+#include "../memory/mem_phones.h"
+#include "../flash/files.h"
 
 
 

@@ -4,12 +4,12 @@ KEY_SEASON.C
  Установка и просмотр дат переходов на сезонное время
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
-#include        "../time/rtc.h"
-#include        "../time/timedate.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "keyboard.h"
+#include "../display/display.h"
+#include "../time/rtc.h"
+#include "../time/timedate.h"
 
 
 

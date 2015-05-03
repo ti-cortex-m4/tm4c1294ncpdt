@@ -4,12 +4,12 @@ KEY_ENBL_KEYS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../digitals/digitals.h"
-#include        "../../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../digitals/digitals.h"
+#include "../../flash/files.h"
 
 
 

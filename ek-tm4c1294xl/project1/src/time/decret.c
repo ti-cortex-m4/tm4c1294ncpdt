@@ -5,12 +5,12 @@ DECRET.C // TODO: сохранять количество переходов отдельно + события
 ------------------------------------------------------------------------------*/
 
 #include        <string.h>
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../flash/files.h"
-#include        "timedate.h"
-#include        "rtc.h"
-#include        "decret.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../flash/files.h"
+#include "timedate.h"
+#include "rtc.h"
+#include "decret.h"
 
 
 

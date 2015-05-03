@@ -4,12 +4,12 @@ _FLOW.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_flow.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../serial/flow.h"
-#include        "../../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_flow.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../serial/flow.h"
+#include "../../flash/files.h"
 
 
 

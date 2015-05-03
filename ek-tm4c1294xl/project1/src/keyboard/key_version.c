@@ -4,10 +4,10 @@ KEY_VERSION.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
-#include        "../hardware/memory.h"
+#include "../main.h"
+#include "keyboard.h"
+#include "../display/display.h"
+#include "../hardware/memory.h"
 
 
 

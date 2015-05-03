@@ -4,10 +4,10 @@ KEY_MAX_FLOW_DELAY.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_flow.h"
-#include        "../../serial/flow.h"
-#include        "../key_char.h"
+#include "../../main.h"
+#include "../../memory/mem_flow.h"
+#include "../../serial/flow.h"
+#include "../key_char.h"
 
 
 //                                          0123456789ABCDEF

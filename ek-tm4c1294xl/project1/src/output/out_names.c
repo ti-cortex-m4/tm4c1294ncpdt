@@ -4,14 +4,14 @@ OUT_NAMES.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_uni.h"
-#include        "../memory/mem_ports.h"
-#include        "../serial/ports.h"
-#include        "../flash/files.h"
-#include        "unified/uni.h"
-#include        "out_names.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_uni.h"
+#include "../memory/mem_ports.h"
+#include "../serial/ports.h"
+#include "../flash/files.h"
+#include "unified/uni.h"
+#include "out_names.h"
 
 
 

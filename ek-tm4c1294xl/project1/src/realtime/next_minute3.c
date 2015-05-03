@@ -4,16 +4,16 @@ NEXT_MINUTE3.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_energy.h"
-#include        "../memory/mem_params.h"
-#include        "../energy.h"
-#include        "../energy3.h"
-#include        "../impulses/impulses.h"
-#include        "next_params_time.h"
-#include        "realtime_storage.h"
-#include        "../energy2.h"
+#include "../main.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_energy.h"
+#include "../memory/mem_params.h"
+#include "../energy.h"
+#include "../energy3.h"
+#include "../impulses/impulses.h"
+#include "next_params_time.h"
+#include "realtime_storage.h"
+#include "../energy2.h"
 
 
 

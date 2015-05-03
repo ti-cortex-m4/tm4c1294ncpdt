@@ -4,8 +4,8 @@ SERIAL.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "serial.h"
+#include "../main.h"
+#include "serial.h"
 
 
 

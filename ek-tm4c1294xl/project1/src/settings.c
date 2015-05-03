@@ -4,11 +4,11 @@ SETTINGS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "memory/mem_settings.h"
-#include        "memory/mem_program.h"
-#include        "flash/files.h"
-#include        "settings.h"
+#include "main.h"
+#include "memory/mem_settings.h"
+#include "memory/mem_program.h"
+#include "flash/files.h"
+#include "settings.h"
 
 
 

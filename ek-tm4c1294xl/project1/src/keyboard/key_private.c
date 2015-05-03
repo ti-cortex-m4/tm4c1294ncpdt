@@ -4,12 +4,12 @@ KEY_PRIVATE.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "keyboard.h"
-#include        "../display/display.h"
-#include        "../access.h"
-#include        "../settings.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "keyboard.h"
+#include "../display/display.h"
+#include "../access.h"
+#include "../settings.h"
 
 
 //                                         0123456789ABCDEF

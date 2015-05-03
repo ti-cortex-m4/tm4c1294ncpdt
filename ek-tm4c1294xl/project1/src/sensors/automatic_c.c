@@ -4,19 +4,19 @@ AUTOMATIC_C.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_digitals.h"
-#include        "../display/display.h"
-#include        "../keyboard/keyboard.h"
-#include        "../time/delay.h"
-#include        "../time/timedate.h"
-#include        "../serial/ports_stack.h"
-#include        "../serial/ports_devices.h"
-#include        "../devices/devices.h"
-#include        "../digitals/digitals_messages.h"
-#include        "../engine.h"
-#include        "automatic1.h"
-#include        "device_c.h"
+#include "../main.h"
+#include "../memory/mem_digitals.h"
+#include "../display/display.h"
+#include "../keyboard/keyboard.h"
+#include "../time/delay.h"
+#include "../time/timedate.h"
+#include "../serial/ports_stack.h"
+#include "../serial/ports_devices.h"
+#include "../devices/devices.h"
+#include "../digitals/digitals_messages.h"
+#include "../engine.h"
+#include "automatic1.h"
+#include "device_c.h"
 
 
 

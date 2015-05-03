@@ -4,17 +4,17 @@ PORTS_MODEMS.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../keyboard/keyboard.h"
-#include        "../keyboard/key_timedate.h"
-#include        "../hardware/watchdog.h"
-#include        "../digitals/wait_answer.h"
-#include        "../digitals/wait_query.h"
-#include        "../digitals/digitals_pause.h"
-#include        "../digitals/digitals_status.h"
-#include        "ports_modems.h"
-#include        "modems.h"
-#include        "ports.h"
+#include "../main.h"
+#include "../keyboard/keyboard.h"
+#include "../keyboard/key_timedate.h"
+#include "../hardware/watchdog.h"
+#include "../digitals/wait_answer.h"
+#include "../digitals/wait_query.h"
+#include "../digitals/digitals_pause.h"
+#include "../digitals/digitals_status.h"
+#include "ports_modems.h"
+#include "modems.h"
+#include "ports.h"
 
 
 

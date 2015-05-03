@@ -4,11 +4,11 @@ KEY_SHORT_PROFILE_C.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../../console.h"
-#include        "../../devices/devices_init.h"
-#include        "../../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../console.h"
+#include "../../devices/devices_init.h"
+#include "../../flash/files.h"
 
 
 

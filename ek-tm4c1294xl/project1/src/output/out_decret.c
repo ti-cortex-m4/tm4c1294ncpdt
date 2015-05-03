@@ -4,9 +4,9 @@ OUT_DECRET.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../serial/ports.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../serial/ports.h"
 
 
 

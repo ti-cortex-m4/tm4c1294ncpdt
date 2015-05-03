@@ -4,10 +4,10 @@ KEY_TEST_FLOW.H
  
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_flow.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
+#include "../../main.h"
+#include "../../memory/mem_flow.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
 
 
 

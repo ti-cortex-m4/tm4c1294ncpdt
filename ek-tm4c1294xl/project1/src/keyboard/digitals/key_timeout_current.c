@@ -4,12 +4,12 @@ KEY_TIMEOUT_CURRENT.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../digitals/profile/profile_core.h"
-#include        "../../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../digitals/profile/profile_core.h"
+#include "../../flash/files.h"
 
 
 

@@ -4,13 +4,13 @@ DIGITALS_DISPLAY.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_digitals.h"
-#include        "../display/display.h"
-#include        "../time/delay.h"
-#include        "digitals.h"
-#include        "sensors.h"
-#include        "digitals_display.h"
+#include "../main.h"
+#include "../memory/mem_digitals.h"
+#include "../display/display.h"
+#include "../time/delay.h"
+#include "digitals.h"
+#include "sensors.h"
+#include "digitals_display.h"
 
 
 

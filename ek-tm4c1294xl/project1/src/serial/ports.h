@@ -4,11 +4,11 @@ PORTS.H
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../include/queries.h"
-#include        "../include/queries2.h"
-#include        "ports_stack.h"
-#include        "ports_common.h"
+#include "../main.h"
+#include "../include/queries.h"
+#include "../include/queries2.h"
+#include "ports_stack.h"
+#include "ports_common.h"
 
 
 

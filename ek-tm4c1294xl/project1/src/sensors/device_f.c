@@ -4,11 +4,11 @@ DEVICE_F.C
  ÑÝÌ+2 CRC
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../time/delay.h"
-#include        "../serial/ports_stack.h"
-#include        "../serial/ports_devices.h"
-#include        "device_f.h"
+#include "../main.h"
+#include "../time/delay.h"
+#include "../serial/ports_stack.h"
+#include "../serial/ports_devices.h"
+#include "device_f.h"
 
 
 /*

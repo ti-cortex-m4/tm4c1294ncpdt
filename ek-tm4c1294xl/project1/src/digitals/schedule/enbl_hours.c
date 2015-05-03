@@ -4,8 +4,8 @@ ENBL_HOURS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_schedule.h"
+#include "../../main.h"
+#include "../../memory/mem_schedule.h"
 
 
 

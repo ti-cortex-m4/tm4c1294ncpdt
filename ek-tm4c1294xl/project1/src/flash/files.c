@@ -5,10 +5,10 @@ FILES.C
 ------------------------------------------------------------------------------*/
 
 #include        <string.h>
-#include        "../main.h"
-#include        "../memory/mem_flash.h"
-#include        "at45.h"
-#include        "files.h"
+#include "../main.h"
+#include "../memory/mem_flash.h"
+#include "at45.h"
+#include "files.h"
 
 
 

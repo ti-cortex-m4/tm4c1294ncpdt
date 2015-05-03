@@ -4,12 +4,12 @@ OUT_DIGITALS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_digitals0.h"
-#include        "../digitals/digitals.h"
-#include        "../serial/ports.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_digitals0.h"
+#include "../digitals/digitals.h"
+#include "../serial/ports.h"
 
 
 

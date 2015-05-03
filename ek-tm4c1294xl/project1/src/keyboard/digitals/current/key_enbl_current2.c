@@ -4,10 +4,10 @@
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../../main.h"
-#include        "../../../memory/mem_current.h"
-#include        "../../../digitals/current/current.h"
-#include        "../../key_flag.h"
+#include "../../../main.h"
+#include "../../../memory/mem_current.h"
+#include "../../../digitals/current/current.h"
+#include "../../key_flag.h"
 
 
 /*

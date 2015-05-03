@@ -4,8 +4,8 @@ AUTOMATIC_P.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "automatic_p.h"
+#include "../main.h"
+#include "automatic_p.h"
 
 
 

@@ -4,9 +4,9 @@ KEY_ENBL_PARAMS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../../main.h"
-#include        "../../../digitals/params/params.h"
-#include        "../../key_flag.h"
+#include "../../../main.h"
+#include "../../../digitals/params/params.h"
+#include "../../key_flag.h"
 
 
 //                                         0123456789ABCDEF

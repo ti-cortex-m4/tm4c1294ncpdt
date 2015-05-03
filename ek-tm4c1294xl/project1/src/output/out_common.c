@@ -4,9 +4,9 @@ OUT_COMMON.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../serial/ports.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../serial/ports.h"
 
 
 

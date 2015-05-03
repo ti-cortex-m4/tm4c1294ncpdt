@@ -4,16 +4,16 @@ KEY_RELAXS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_tariffs.h"
-#include        "../../memory/mem_settings.h"
-#include        "../../memory/mem_realtime.h"
-#include        "../keyboard.h"
-#include        "../../display/display.h"
-#include        "../../time/timedate.h"
-#include        "../../time/rtc.h"
-#include        "../../tariffs/relaxs.h"
-#include        "../../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_tariffs.h"
+#include "../../memory/mem_settings.h"
+#include "../../memory/mem_realtime.h"
+#include "../keyboard.h"
+#include "../../display/display.h"
+#include "../../time/timedate.h"
+#include "../../time/rtc.h"
+#include "../../tariffs/relaxs.h"
+#include "../../flash/files.h"
 
 
 

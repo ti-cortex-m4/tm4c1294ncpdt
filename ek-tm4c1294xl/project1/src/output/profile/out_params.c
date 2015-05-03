@@ -4,21 +4,21 @@ OUT_PARAMS.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_ports.h"
-#include        "../../memory/mem_digitals0.h"
-#include        "../../memory/mem_realtime.h"
-#include        "../../serial/ports.h"
-#include        "../../realtime/realtime.h"
-#include        "../../devices/devices.h"
-#include        "../../digitals/digitals.h"
-#include        "../../digitals/digitals_pause.h"
-#include        "../../digitals/digitals_messages.h"
-#include        "../../digitals/params/params.h"
-#include        "../../digitals/params/params2.h"
-#include        "../../digitals/params/params_storage.h"
-#include        "../../engine.h"
-#include        "../../console.h"
+#include "../../main.h"
+#include "../../memory/mem_ports.h"
+#include "../../memory/mem_digitals0.h"
+#include "../../memory/mem_realtime.h"
+#include "../../serial/ports.h"
+#include "../../realtime/realtime.h"
+#include "../../devices/devices.h"
+#include "../../digitals/digitals.h"
+#include "../../digitals/digitals_pause.h"
+#include "../../digitals/digitals_messages.h"
+#include "../../digitals/params/params.h"
+#include "../../digitals/params/params2.h"
+#include "../../digitals/params/params_storage.h"
+#include "../../engine.h"
+#include "../../console.h"
 
 
 

@@ -4,12 +4,12 @@ RELAXS.C
  Праздники
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_tariffs.h"
-#include        "../flash/files.h"
-#include        "../time/timedate.h"
-#include        "tariffs.h"
-#include        "relaxs.h"
+#include "../main.h"
+#include "../memory/mem_tariffs.h"
+#include "../flash/files.h"
+#include "../time/timedate.h"
+#include "tariffs.h"
+#include "relaxs.h"
 
 
 

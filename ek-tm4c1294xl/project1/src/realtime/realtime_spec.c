@@ -4,15 +4,15 @@ REALTIME_SPEC.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_settings.h"
-#include        "../time/rtc.h"
-#include        "../hardware/watchdog.h"
-#include        "realtime.h"
-#include        "next_minute3.h"
-#include        "next_minute30.h"
-#include        "realtime_spec.h"
+#include "../main.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_settings.h"
+#include "../time/rtc.h"
+#include "../hardware/watchdog.h"
+#include "realtime.h"
+#include "next_minute3.h"
+#include "next_minute30.h"
+#include "realtime_spec.h"
 
 
 

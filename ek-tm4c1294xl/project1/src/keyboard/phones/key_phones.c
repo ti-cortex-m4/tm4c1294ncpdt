@@ -4,13 +4,13 @@ KEY_PHONES.C
  Задание и просмотр номеров телефонов
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_phones.h"
-#include        "../../memory/mem_ports.h"
-#include        "../../display/display.h"
-#include        "../keyboard.h"
-#include        "../../digitals/phones.h"
-#include        "../../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_phones.h"
+#include "../../memory/mem_ports.h"
+#include "../../display/display.h"
+#include "../keyboard.h"
+#include "../../digitals/phones.h"
+#include "../../flash/files.h"
 
 
 

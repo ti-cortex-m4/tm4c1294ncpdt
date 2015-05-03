@@ -4,11 +4,11 @@ KEY_RECALC.Ñ
  
 ------------------------------------------------------------------------------*/
 
-#include        "../../../main.h"
-#include        "../../../memory/mem_schedule.h"
-#include        "../../keyboard.h"
-#include        "../../../display/display.h"
-#include        "../../../flash/files.h"
+#include "../../../main.h"
+#include "../../../memory/mem_schedule.h"
+#include "../../keyboard.h"
+#include "../../../display/display.h"
+#include "../../../flash/files.h"
 
 
 

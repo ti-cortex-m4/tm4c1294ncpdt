@@ -4,15 +4,15 @@ OUT_TRANSIT.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_ports.h"
-#include        "../keyboard/keyboard.h"
-#include        "../digitals/wait_answer.h"
-#include        "../serial/ports.h"
-#include        "../serial/ports_devices.h"
-#include        "../serial/save_in_buff.h"
-#include        "../serial/speeds.h"
-#include        "../hardware/watchdog.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../keyboard/keyboard.h"
+#include "../digitals/wait_answer.h"
+#include "../serial/ports.h"
+#include "../serial/ports_devices.h"
+#include "../serial/save_in_buff.h"
+#include "../serial/speeds.h"
+#include "../hardware/watchdog.h"
 
 
 

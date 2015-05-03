@@ -4,8 +4,8 @@ DEVICES.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../display/display.h"
+#include "../main.h"
+#include "../display/display.h"
 
 
 

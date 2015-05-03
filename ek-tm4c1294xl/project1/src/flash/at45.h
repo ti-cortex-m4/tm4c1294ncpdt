@@ -4,7 +4,7 @@ AT45.H
  AT45DB321B, SPI Mode 0
 ------------------------------------------------------------------------------*/
 
-#include        "../include/flash.h"
+#include "../include/flash.h"
 
 
 

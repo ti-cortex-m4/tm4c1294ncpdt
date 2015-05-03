@@ -11,7 +11,7 @@ LCD1.C
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
-#include        "inc/hw_types.h"
+#include "inc/hw_types.h"
 #include "../main.h"
 #include "../display/display.h"
 #include "../time/delay.h"

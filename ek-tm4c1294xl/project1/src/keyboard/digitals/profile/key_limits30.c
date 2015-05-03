@@ -4,12 +4,12 @@ KEY_LIMITS30.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../../main.h"
-#include        "../../../memory/mem_limits.h"
-#include        "../../keyboard.h"
-#include        "../../../display/display.h"
-#include        "../../../digitals/limits.h"
-#include        "../../key_flag.h"
+#include "../../../main.h"
+#include "../../../memory/mem_limits.h"
+#include "../../keyboard.h"
+#include "../../../display/display.h"
+#include "../../../digitals/limits.h"
+#include "../../key_flag.h"
 
 
 

@@ -4,10 +4,10 @@ KEY_DSBL_PASSWORD_UNI.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../../main.h"
-#include        "../../memory/mem_digitals.h"
-#include        "../../output/unified/uni.h"
-#include        "../key_flag.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../output/unified/uni.h"
+#include "../key_flag.h"
 
 
 

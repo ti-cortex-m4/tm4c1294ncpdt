@@ -4,18 +4,18 @@ OUT_MINUTE30_48.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "../main.h"
-#include        "../memory/mem_settings.h"
-#include        "../memory/mem_ports.h"
-#include        "../memory/mem_realtime.h"
-#include        "../memory/mem_energy.h"
-#include        "../serial/ports.h"
-#include        "../realtime/realtime.h"
-#include        "../energy.h"
-#include        "../energy2.h"
-#include        "../digitals/digitals.h"
-#include        "../digitals/sensors.h"
-#include        "../digitals/current/current.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_energy.h"
+#include "../serial/ports.h"
+#include "../realtime/realtime.h"
+#include "../energy.h"
+#include "../energy2.h"
+#include "../digitals/digitals.h"
+#include "../digitals/sensors.h"
+#include "../digitals/current/current.h"
 
 
 
