@@ -133,13 +133,13 @@ PROGRAMS.H
 
 #define bSET_OLD_VERSION_D          141
 
-#define bSET_EXT4_FLAG              249
++   #define bSET_EXT4_FLAG              249
 #define bSET_EXT4_MONTHS            250
 #define bSET_EXT4_CANALS            252
 #define bSET_EXT4_RESET             253
 #define bSET_EXT6_RESET             254
 
-#define bSET_EXT5_FLAG              251
++   #define bSET_EXT5_FLAG              251
 
 #ifdef  DS80C400
 #define bGET_MODEMS                 179
