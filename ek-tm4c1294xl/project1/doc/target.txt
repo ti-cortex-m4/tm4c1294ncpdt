@@ -515,8 +515,8 @@ _divider.c
 _divider.h
 _door.c
 _door.h
-_double.c
-_double.h
+-   _double.c
+-   _double.h
 _dtr_reset.c
 _dtr_reset.h
 _dtr_test.c
