@@ -117,8 +117,8 @@ c_names.c
 c_names.h
 c_power.c
 c_power.h
-decompress_c.c
-decompress_c.h
++   decompress_c.c
++   decompress_c.h
 decompress_g.c
 decompress_g.h
 decompress_k.c
