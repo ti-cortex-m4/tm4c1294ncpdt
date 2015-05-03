@@ -90,6 +90,11 @@ void    PushChar(uchar  bT) {
 }
 
 
+void    PushBool(bool  bo) {
+  bo ? PushChar(0xFF) : PushChar(0x00);
+}
+
+
 void    PushInt(uint  wT) {
 	PushChar(wT / 0x100);
 	PushChar(wT % 0x100);
