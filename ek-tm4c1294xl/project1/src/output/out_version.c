@@ -23,7 +23,7 @@ uchar i;
   PushChar(0);
   PushChar(bMAXVERSION);
   PushChar(bMINVERSION);
-  PushInt(GetCODEChecksum());
+  PushInt(GetRomChecksum());
   PushInt(GetBuildNumber());
   PushChar(GetBuildDate_Second());
   PushChar(GetBuildDate_Minute());

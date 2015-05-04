@@ -36,7 +36,7 @@ uchar   GetCODE(uchar  i)
 }
 
 
-uint    GetCODEChecksum(void)
+uint    GetRomChecksum(void)
 {
   return GetCODE(0)*0x100 + GetCODE(1);
 }
