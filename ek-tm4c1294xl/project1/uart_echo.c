@@ -93,7 +93,7 @@ int main(void) {
 	InitProfile();
 	InitSpeeds();
 	InitUni();
-	InitFlow();
+	InitFlow();             Delay(100); TestOK();
 
 	InitSlide();
 
