@@ -699,8 +699,8 @@ _static.c
 _static.h
 _stream.c
 _stream.h
-_strict_uni.c
-_strict_uni.h
++   _strict_uni.c
++   _strict_uni.h
 _timedate.c
 _timedate.h
 _use_scale_d.c
