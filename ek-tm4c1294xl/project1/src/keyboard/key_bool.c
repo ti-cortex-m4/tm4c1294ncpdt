@@ -1,14 +1,14 @@
 /*------------------------------------------------------------------------------
-KEY_FLAG.C
+KEY_BOOL.C
 
-TODO rename
+
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "keyboard.h"
 #include "../display/display.h"
 #include "../flash/files.h"
-#include "key_flag.h"
+#include "key_bool.h"
 
 
 

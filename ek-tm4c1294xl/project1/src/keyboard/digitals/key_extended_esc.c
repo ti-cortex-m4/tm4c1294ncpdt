@@ -7,7 +7,7 @@ KEY_EXTENDED_ESC.C
 #include "../../main.h"
 #include "../../memory/mem_extended_1.h"
 #include "../../devices/extended_1.h"
-#include "../key_flag.h"
+#include "../key_bool.h"
 
 
 

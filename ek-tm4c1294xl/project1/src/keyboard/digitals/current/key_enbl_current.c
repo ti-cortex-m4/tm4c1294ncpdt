@@ -7,7 +7,7 @@ KEY_ENBL_CURRENT,C
 #include "../../../main.h"
 #include "../../../memory/mem_digitals.h"
 #include "../../../digitals/profile/profile_core.h"
-#include "../../key_flag.h"
+#include "../../key_bool.h"
 
 
 
