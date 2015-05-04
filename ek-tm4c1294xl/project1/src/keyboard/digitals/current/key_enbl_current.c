@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_ENBL_PROFILE,C
+KEY_ENBL_CURRENT,C
 
 
 ------------------------------------------------------------------------------*/
@@ -13,13 +13,13 @@ KEY_ENBL_PROFILE,C
 
 //                                          0123456789ABCDEF
 static char const       szMessage1[]     = "   Загружать    ",
-                        szMessage2[]     = "30-мин. данные ?";
+                        szMessage2[]     = " 3-мин. данные ?";
 
 static char const       *pszMessage[]    = { szMessage1, szMessage2, "" };
 
 
 
-void    key_SetEnblProfile(void)
+void    key_SetEnblCurrent(void)
 {
-  key_SetBool(&flEnblProfile, pszMessage);
+  key_SetBool(&flEnblCurrent, pszMessage);
 }
