@@ -1,13 +1,3 @@
-/*------------------------------------------------------------------------------
-PROGRAMS.H
-
- Номера клавиатурных программ
-------------------------------------------------------------------------------*/
-
-
-#ifndef __PROGRAMS
-#define __PROGRAMS
-
 
 // режим: программирование
 #define bSET_CURRTIME               9
@@ -321,8 +311,8 @@ PROGRAMS.H
 
 #define bGET_RUNDIGITALS            190
 
-#define bSET_ENABLELOADMNT          192
-#define bSET_ENABLELOADHOU          193
++   #define bSET_ENABLELOADMNT          192
++   #define bSET_ENABLELOADHOU          193
 #define bSET_TIMEOUT_HOU            194
 #define bSET_TIMEOUT_MNT            195
 #define bSET_CONTROLTIME            196
@@ -381,12 +371,4 @@ PROGRAMS.H
 #define bGET_ENGCANYEAR_CD          167
 #define bGET_ENGCANYEAR_B           168
 #define bGET_ENGCANYEAR_A           169
-
-
-#endif
-
-
-
-
-
 
