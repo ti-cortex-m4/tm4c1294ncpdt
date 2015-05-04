@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_DSBL_PASSWORD_UNI.C
+KEY_DSBL_PASSWORD_UNI,C
 
 
 ------------------------------------------------------------------------------*/
@@ -11,15 +11,15 @@ KEY_DSBL_PASSWORD_UNI.C
 
 
 
-//                                              0123456789ABCDEF
-static char const       szDsblPasswordUni1[] = "   Пароль для   ",
-                        szDsblPasswordUni2[] = "протокола УПИО ?";
+//                                        0123456789ABCDEF
+static char const       szMessage1[]   = "   Пароль для   ",
+                        szMessage2[]   = "протокола УПИО ?";
 
-static char const       *pszDsblPasswordUni[] = { szDsblPasswordUni1, szDsblPasswordUni2, "" };
+static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
 
 
 
 void    key_SetDsblPasswordUni(void)
 {
-  key_SetBool(&flDsblPasswordUni, pszDsblPasswordUni);
+  key_SetBool(&flDsblPasswordUni, pszMessages);
 }
