@@ -1,20 +1,18 @@
 /*------------------------------------------------------------------------------
-KEY_BOOL.C
+KEY_BOOL,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "keyboard.h"
-#include "../display/display.h"
-#include "../flash/files.h"
+#include "../console.h"
 #include "key_bool.h"
 
 
 
-void    key_SetBool(file const  *pflFile, char const  *pszSlide[])
+void    key_SetBool(file const  *pflFile, char const  *pszMessages[])
 {
-  boolean *pboVal = (boolean *) pflFile->pbBuff;
+  boolean *pboValue = (boolean *) pflFile->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {
@@ -23,8 +21,8 @@ void    key_SetBool(file const  *pflFile, char const  *pszSlide[])
       enKeyboard = KBD_INPUT1;
       Clear();
 
-      LoadSlide(pszSlide);
-      ShowBoolean(*pboVal);
+      LoadSlide(pszMessages);
+      ShowBoolean(*pboValue);
     }
     else Beep();
   }
@@ -36,10 +34,10 @@ void    key_SetBool(file const  *pflFile, char const  *pszSlide[])
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        *pboVal = InvertBoolean(*pboVal);
+        *pboValue = InvertBoolean(*pboValue);
         SaveFile(pflFile);
 
-        ShowBoolean(*pboVal);
+        ShowBoolean(*pboValue);
       }
       else Beep(); 
     }

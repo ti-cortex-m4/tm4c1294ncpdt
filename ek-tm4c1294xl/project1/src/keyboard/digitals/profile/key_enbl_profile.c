@@ -15,11 +15,11 @@ KEY_ENBL_PROFILE,C
 static char const       szMessage1[]     = "   Загружать    ",
                         szMessage2[]     = "30-мин. данные ?";
 
-static char const       *pszMessage[]    = { szMessage1, szMessage2, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, "" };
 
 
 
 void    key_SetEnblProfile(void)
 {
-  key_SetBool(&flEnblProfile, pszMessage);
+  key_SetBool(&flEnblProfile, pszMessages);
 }
