@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_STRICT_UNI.C
+KEY_STRICT_UNI,C
 
 
 ------------------------------------------------------------------------------*/
@@ -10,15 +10,16 @@ KEY_STRICT_UNI.C
 #include "../key_bool.h"
 
 
-//                                        0123456789ABCDEF
-static char const       szStrictUni1[] = "   Расширение   ",
-                        szStrictUni2[] = "протокола УПИО ?";
 
-static char const       *pszStrictUni[] = { szStrictUni1, szStrictUni2, "" };
+//                                        0123456789ABCDEF
+static char const       szMessage1[]   = "   Расширение   ",
+                        szMessage2[]   = "протокола УПИО ?";
+
+static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
 
 
 
 void    key_SetStrictUni(void)
 {
-  key_SetBool(&flStrictUni, pszStrictUni);
+  key_SetBool(&flStrictUni, pszMessages);
 }

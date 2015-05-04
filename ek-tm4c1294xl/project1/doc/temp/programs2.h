@@ -1,14 +1,3 @@
-/*------------------------------------------------------------------------------
-PROGRAMS2.H
-
-
-------------------------------------------------------------------------------*/
-
-
-#ifndef __PROGRAMS2
-#define __PROGRAMS2
-
-
 #define wSET_OUTPUT_DELAY     298
 
 #define wGET_READTRANS        354
@@ -33,7 +22,7 @@ PROGRAMS2.H
 #define wSET_CURRENT2_ENABLE  414
 #define wSET_RECORD_DISABLE   415
 #define wSET_IO_CONTROL       416
-#define wSET_STRICT_UNI       417
++   #define wSET_STRICT_UNI       417
 #define wSET_PASSWORD_UNI     418
 #define wSET_PLC_U_FLAG       419
 #define wSET_PLC_U_SIZE       420
@@ -66,12 +55,3 @@ PROGRAMS2.H
 
 #define wSET_SET_PROFILES1    990
 #define wSET_SET_PROFILES2    991
-
-
-#endif
-
-
-
-
-
-
