@@ -20,18 +20,18 @@ static char const       szVersion[]     = "Версия          ",
 
 static void Show(void)
 {
-  Clear();
-
   switch (ibX)
   {
     case 0: 
       ShowHi(szVersion);
+      Clear();
       sprintf(szLo+0,"%02u.%02u.%u.%04X",
               bMAXVERSION, bMINVERSION, GetBuildNumber(), GetRomChecksum());
       break;
 
     case 1: 
       ShowHi(szParameters);
+      Clear();
       sprintf(szLo+0,"%02u.%02u.%03u.%lu",
               bCANALS, bGROUPS, (uchar)(wHOURS/48), GetFileSize());
       break;
@@ -39,6 +39,7 @@ static void Show(void)
     case 2: 
       ShowHi(szBuild);
       sprintf(szHi+12,"%4u",GetBuildNumber());
+      Clear();
       sprintf(szLo+1,"%02u:%02u %02u.%02u.%02u",
                      GetBuildDate_Hour(),
                      GetBuildDate_Minute(),
@@ -49,6 +50,7 @@ static void Show(void)
 
     case 3: 
       ShowHi(szDevices);
+      Clear();
       sprintf(szLo+3,"типов: %u", bDEVICES);
       break;
   }
