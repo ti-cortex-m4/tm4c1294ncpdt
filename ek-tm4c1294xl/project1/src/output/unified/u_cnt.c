@@ -34,12 +34,12 @@ void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon)
   if (GetDigitalDevice(ibCan) == 0)
   {
     real re = mpreCntMonCan[ PrevSoftMon() ][ibCan];
-    PushRealUni(ST4_OK, re);
+    PushFloatUni(ST4_OK, re);
   }
   else
   {
     value6 va = mpCntMonCan4[ibCan];
-    PushRealUni(va.bSelf, va.reSelf);
+    PushFloatUni(va.bSelf, va.reSelf);
   }
 }
 
@@ -83,12 +83,12 @@ void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
   if (IsCntMonCanTariff(ibCan) == 0)
   {
     real re = 0;
-    PushRealUni(ST4_NOTSUPPORTED, re);
+    PushFloatUni(ST4_NOTSUPPORTED, re);
   }
   else
   {
     value6t va = mpCntMonCan4T[ibCan];
-    PushRealUni(va.bSelf, va.mpreSelf[ibTar]);
+    PushFloatUni(va.bSelf, va.mpreSelf[ibTar]);
   }
 }
 
