@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-U_FLOAT.C
+U_FLOAT,C
 
 
 ------------------------------------------------------------------------------*/
@@ -18,11 +18,11 @@ static void PushFFFFFF(void)
 }
 
 
-void    PushRealUni(status  status, real  re)
+void    PushFloatUni(status  st, float  fl)
 {
   if (boStrictUni == TRUE)
   {
-    switch (status)
+    switch (st)
     {
       case ST4_NONE:          PushFFFFFF(); PushChar(0xFF); break;
       case ST4_NOTSUPPORTED:  PushFFFFFF(); PushChar(0xFF); break;
@@ -31,12 +31,12 @@ void    PushRealUni(status  status, real  re)
       case ST4_BADFLASH:      PushFFFFFF(); PushChar(0xFF); break;
       case ST4_BADPORT:       PushFFFFFF(); PushChar(0xFE); break;
       case ST4_BADENABLING:   PushFFFFFF(); PushChar(0xFF); break;
-      default:                PushFloat(re); break;
+      default:                PushFloat(fl); break;
     }
   }
   else
   {
-    switch (status)
+    switch (st)
     {
       case ST4_NONE:          PushFFFFFF(); PushChar(0xE0); break;
       case ST4_NOTSUPPORTED:  PushFFFFFF(); PushChar(0xE1); break;
@@ -45,7 +45,7 @@ void    PushRealUni(status  status, real  re)
       case ST4_BADFLASH:      PushFFFFFF(); PushChar(0xE4); break;
       case ST4_BADPORT:       PushFFFFFF(); PushChar(0xE5); break;
       case ST4_BADENABLING:   PushFFFFFF(); PushChar(0xE6); break;
-      default:                PushFloat(re); break;
+      default:                PushFloat(fl); break;
     }
   }
 }
