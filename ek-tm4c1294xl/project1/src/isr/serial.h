@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-SERIAL.H
+SERIAL,H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  const uchar             szPacketA[bPACKET_HEADER];
+extern  const uchar             szPacketCRC[bPACKET_HEADER];
 
-extern  const uchar             szPacketB[1];
+extern  const uchar             szPacketCtrlZ[1];

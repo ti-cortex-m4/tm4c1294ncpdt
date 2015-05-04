@@ -76,9 +76,9 @@ uint32_t ui32Status;
 
       if (mpSerial[0] == SER_BEGIN)
       {
-        if (bT == szPacketB[ibPacket0])
+        if (bT == szPacketCtrlZ[ibPacket0])
         {
-          if (++ibPacket0 >= sizeof(szPacketB))
+          if (++ibPacket0 >= sizeof(szPacketCtrlZ))
           {
             ibPacket0 = 0;
             mpSerial[0] = SER_LOCAL;
@@ -249,7 +249,7 @@ uint32_t ui32Status;
       }
       else
       {
-        if (bT == szPacketA[ibPacket0])
+        if (bT == szPacketCRC[ibPacket0])
         {
           if (++ibPacket0 >= bPACKET_HEADER)
           {
@@ -258,7 +258,7 @@ uint32_t ui32Status;
             iwInBuff0 = 0;
           }
         }
-        else if (bT != szPacketA[0]) ibPacket0 = 0;
+        else if (bT != szPacketCRC[0]) ibPacket0 = 0;
 
         if (mpSerial[0] == SER_PACKET_BODY)
         {
