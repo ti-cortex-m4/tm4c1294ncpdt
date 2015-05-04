@@ -6,7 +6,7 @@ KEY_EXT_4_FLAG,C
 
 #include "../../main.h"
 #include "../../devices/extended_4.h"
-#include "../key_flag.h"
+#include "../key_bool.h"
 
 
 
