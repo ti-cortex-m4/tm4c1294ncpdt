@@ -23,7 +23,7 @@
 #define wSET_RECORD_DISABLE   415
 #define wSET_IO_CONTROL       416
 +   #define wSET_STRICT_UNI       417
-#define wSET_PASSWORD_UNI     418
++   #define wSET_PASSWORD_UNI     418
 #define wSET_PLC_U_FLAG       419
 #define wSET_PLC_U_SIZE       420
 #define wSET_PLC_U_SHUTDOWN   421
