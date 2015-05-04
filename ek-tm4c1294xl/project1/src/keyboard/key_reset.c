@@ -68,7 +68,7 @@ void    key_SetReset(void)
 //          ResetCustom();
 //
 //          ResetLimits();
-//          ResetDecret();
+          ResetDecret();
 //          ResetGaps();
 //          ResetExtended3();
 //          ResetExtended4();
@@ -99,7 +99,7 @@ void    key_SetReset(void)
           ResetSettings(true);
 //          ResetXDATA();
 //          ResetKeyboard();
-//          ResetDecret();
+          ResetDecret();
           ResetGroups();
           ResetFactors();
           ResetZones();
