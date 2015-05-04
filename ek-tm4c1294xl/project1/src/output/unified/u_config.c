@@ -266,7 +266,7 @@ void    GetConfigUni(void)
   PushInt(wPrivate / 0x10000);
   PushInt(wPrivate % 0x10000);
 
-  PushInt(GetCODEChecksum());
+  PushInt(GetRomChecksum());
   PushInt(GetUsedCanals());
   PushInt(GetUsedGroups());
   PushInt(bTARIFFS);

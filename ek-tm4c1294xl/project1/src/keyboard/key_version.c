@@ -1,42 +1,43 @@
 /*------------------------------------------------------------------------------
-KEY_VERSION.C
+KEY_VERSION,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "keyboard.h"
-#include "../display/display.h"
+#include "../console.h"
 #include "../hardware/memory.h"
 
 
 
 //                                         0123456789ABCDEF
 static char const       szVersion[]     = "Версия          ",
-                        szQuantity[]    = "Параметры       ",
+                        szParameters[]  = "Параметры       ",
                         szBuild[]       = "Сборка          ",
-                        szQuality[]     = "Счетчики        ";
+                        szDevices[]     = "Счетчики        ";
 
 
 
-void    ShowVersion(void)
+static void Show(void)
 {
+  Clear();
+
   switch (ibX)
   {
     case 0: 
-      ShowHi(szVersion); Clear();
+      ShowHi(szVersion);
       sprintf(szLo+0,"%02u.%02u.%u.%04X",
-              bMAXVERSION, bMINVERSION, GetBuildNumber(), GetCODEChecksum());
+              bMAXVERSION, bMINVERSION, GetBuildNumber(), GetRomChecksum());
       break;
 
     case 1: 
-      ShowHi(szQuantity); Clear();
+      ShowHi(szParameters);
       sprintf(szLo+0,"%02u.%02u.%03u.%lu",
               bCANALS, bGROUPS, (uchar)(wHOURS/48), GetFileSize());
       break;
 
     case 2: 
-      ShowHi(szBuild); Clear();
+      ShowHi(szBuild);
       sprintf(szHi+12,"%4u",GetBuildNumber());
       sprintf(szLo+1,"%02u:%02u %02u.%02u.%02u",
                      GetBuildDate_Hour(),
@@ -47,7 +48,7 @@ void    ShowVersion(void)
       break;
 
     case 3: 
-      ShowHi(szQuality); Clear();
+      ShowHi(szDevices);
       sprintf(szLo+3,"типов: %u", bDEVICES);
       break;
   }
@@ -64,12 +65,12 @@ void    key_GetVersion(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowVersion();
+      Show();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++ibX >= 4) ibX = 0;
-      ShowVersion();
+      Show();
     }
     else Beep();
   }

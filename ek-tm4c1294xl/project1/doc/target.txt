@@ -705,8 +705,8 @@ _timedate.c
 _timedate.h
 _use_scale_d.c
 _use_scale_d.h
-_version.c
-_version.h
++   _version.c
++   _version.h
 _yearzone.c
 _yearzone.h
 _yesno.c

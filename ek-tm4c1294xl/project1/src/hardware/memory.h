@@ -8,7 +8,7 @@ MEMORY.H
 void    InitCODE(void);
 
 ulong   GetFileSize(void);
-uint    GetCODEChecksum(void);
+uint    GetRomChecksum(void);
 uint    GetBuildNumber(void);
 uchar   GetBuildDate_Second(void);
 uchar   GetBuildDate_Minute(void);

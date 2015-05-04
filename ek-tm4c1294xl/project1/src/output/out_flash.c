@@ -30,7 +30,7 @@ void    OutFlashPage(void) {
 
     InitPush(65);
 
-    PushInt(GetCODEChecksum());
+    PushInt(GetRomChecksum());
     PushInt(wPrivate);
     PushChar(bLogical);
 
