@@ -1,17 +1,17 @@
 /*------------------------------------------------------------------------------
 OUT_DELAY.C
-                    
+
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_ports.h"
 #include "../serial/ports.h"
 #include "../time/delay.h"
 
 
 
-void    OutDelay(void) {
+void    OutDelay(void)
+{
   Delay(10000);
   LongResult(bRES_OK);
 }
