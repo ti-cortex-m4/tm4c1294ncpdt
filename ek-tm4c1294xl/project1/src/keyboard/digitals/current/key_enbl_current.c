@@ -15,11 +15,11 @@ KEY_ENBL_CURRENT,C
 static char const       szMessage1[]     = "   Загружать    ",
                         szMessage2[]     = " 3-мин. данные ?";
 
-static char const       *pszMessage[]    = { szMessage1, szMessage2, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, "" };
 
 
 
 void    key_SetEnblCurrent(void)
 {
-  key_SetBool(&flEnblCurrent, pszMessage);
+  key_SetBool(&flEnblCurrent, pszMessages);
 }
