@@ -183,7 +183,7 @@ serial  RevInput(void)
 void    PckQueryIO(uint  cwIn, uchar  cbOut)
 {
   InitPush(0);
-  Push((void *)szPacketA, bPACKET_HEADER);
+  Push((void *)szPacketCRC, bPACKET_HEADER);
 
   MakeCRC16OutBuff(bPACKET_HEADER,cbOut-2);
 
