@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-OUT_IMPULSE.C
+OUT_IMPULSE,C
                     
 
 ------------------------------------------------------------------------------*/
@@ -17,23 +17,17 @@ OUT_IMPULSE.C
 
 void    PushImpulse(impulse  *pim)
 {
-uchar   t;
-ulong   dw;
-
-	for (t=0; t<bTARIFFS; t++)
-	{
-    dw = (*pim).mpdwImp[t];
-    PushLong(dw);
-	}
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
+  {
+    PushLong((*pim).mpdwImp[t]);
+  }
 }
 
 
 
 void    OutImpDayCanExt(void)
 {
-uchar   c;
-uint    w;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bDAYS)
@@ -41,17 +35,18 @@ uint    w;
       if (LoadImpDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == TRUE)
       {
         InitPushPtr();
-        w = 0;
+        uint wSize = 0;
 
+        uchar c;
         for (c=0; c<bCANALS; c++)
         {
           if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
           {
           	PushImpulse(&mpimDayCan[ PrevSoftDay() ][ c ]);
-            w += sizeof(impulse);
+            wSize += sizeof(impulse);
           }
         }
-        OutptrOutBuff(w);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -63,9 +58,6 @@ uint    w;
 
 void    OutImpMonCanExt(void)
 {
-uchar   c;
-uint    w;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bMONTHS)
@@ -73,17 +65,18 @@ uint    w;
       if (LoadImpMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == TRUE)
       {
         InitPushPtr();
-        w = 0;
+        uint wSize = 0;
 
+        uchar c;
         for (c=0; c<bCANALS; c++)
         {
           if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
           {
           	PushImpulse(&mpimMonCan[ PrevSoftMon() ][ c ]);
-            w += sizeof(impulse);
+            wSize += sizeof(impulse);
           }
         }
-        OutptrOutBuff(w);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
