@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-OUT_VERSION.C
+OUT_VERSION,C
                     
 
 ------------------------------------------------------------------------------*/
@@ -14,12 +14,13 @@ OUT_VERSION.C
 
 void    OutVersion(void)
 {
-uchar i;
-
   InitPushCRC();
+
+  uchar i;
   for (i=0; i<100; i++) PushChar(0);
 
   InitPushCRC();
+
   PushChar(0);
   PushChar(bMAXVERSION);
   PushChar(bMINVERSION);
