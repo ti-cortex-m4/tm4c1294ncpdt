@@ -22,6 +22,16 @@ void    PrintStart(void) {
 }
 
 
+void    PrintStop(void) {
+#ifdef ENABLE_PRINT
+
+  IntEnable(INT_UART0);
+
+#endif
+}
+
+
+
 void    PrintString(const char  *psz) {
 #ifdef ENABLE_PRINT
 
@@ -49,6 +59,15 @@ void    PrintInt(uint  w) {
 }
 
 
+void    PrintLong(ulong  dw) {
+#ifdef ENABLE_PRINT
+
+  UARTprintf(" %u ", dw);
+
+#endif
+}
+
+
 void    PrintTime(time  ti) {
 #ifdef ENABLE_PRINT
 
@@ -59,15 +78,6 @@ void    PrintTime(time  ti) {
              ti.bDay,
              ti.bMonth,
              ti.bYear);
-
-#endif
-}
-
-
-void    PrintStop(void) {
-#ifdef ENABLE_PRINT
-
-	IntEnable(INT_UART0);
 
 #endif
 }
