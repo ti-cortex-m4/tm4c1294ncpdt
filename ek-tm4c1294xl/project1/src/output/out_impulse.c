@@ -26,6 +26,41 @@ void    PushImpulse(impulse  *pim)
 
 
 
+void    OutImpDayCan(void)
+{
+        if (enGlobal != GLB_PROGRAM)
+        {
+          if (bInBuff5 < bDAYS)
+          {
+            if (LoadImpDay( bInBuff5 ) == 1)
+              Outptr(&mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS);
+            else
+              Result(bRES_BADFLASH);
+          }
+          else Result(bRES_BADADDRESS);
+        }
+        else Result(bRES_NEEDWORK);
+}
+
+
+void    OutImpMonCan(void)
+{
+        if (enGlobal != GLB_PROGRAM)
+        {
+          if (bInBuff5 < bMONTHS)
+          {
+            if (LoadImpMon( bInBuff5 ) == 1)
+              Outptr(&mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS);
+            else
+              Result(bRES_BADFLASH);
+          }
+          else Result(bRES_BADADDRESS);
+        }
+        else Result(bRES_NEEDWORK);
+}
+
+
+
 void    OutImpDayCanExt(void)
 {
   if (enGlobal != GLB_PROGRAM)

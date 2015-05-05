@@ -15,6 +15,7 @@ RESPONSE1_CRC.C
 #include "out_groups.h"
 #include "out_tariffs.h"
 #include "out_digitals.h"
+#include "out_impulse.h"
 #include "out_flash.h"
 #include "out_transit.h"
 #include "out_console.h"
@@ -122,6 +123,9 @@ void    Response1_CRC(void)
           Result(bRES_NEEDWORK);
         break;
 */
+      case bINQ_GETIMPCANDAY_ALL: OutImpDayCan(); break;
+      case bINQ_GETIMPCANMON_ALL: OutImpMonCan(); break;
+
       case bINQ_GETDIGITAL: OutGetDigital(); break;
       case bINQ_SETDIGITAL: OutSetDigital(); break;
 
