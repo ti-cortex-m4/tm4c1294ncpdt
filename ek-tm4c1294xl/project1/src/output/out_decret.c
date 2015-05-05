@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
-OUT_DECRET.C
-                    
+OUT_DECRET,C
+
 
 ------------------------------------------------------------------------------*/
 
@@ -13,10 +13,14 @@ OUT_DECRET.C
 void    OutDecret(void)
 {
   InitPushCRC();
+
   PushChar(deDecret);
-  Push(&tiSummer, sizeof(time));
+
+  PushTime(tiSummer);
   PushChar(cbSummer);
-  Push(&tiWinter, sizeof(time));
+
+  PushTime(tiWinter);
   PushChar(cbWinter);
+
   Output(1+6+1+6+1);
 }

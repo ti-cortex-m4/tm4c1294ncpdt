@@ -357,7 +357,7 @@ QUERIES.H
 #define bEXT_OVERFLOW_HOU              103
 
 #define bEXT_GETSTOPAUXCAN             104
-#define bEXT_GETDECRET                 105
++   #define bEXT_GETDECRET                 105
 #define bEXT_GETSTART                  106
 #define bEXT_GETBULK                   107
 #define bEXT_GETMNTCURRENT2            108
