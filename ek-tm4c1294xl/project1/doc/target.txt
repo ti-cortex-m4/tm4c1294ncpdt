@@ -493,8 +493,8 @@ _current2_enable.c
 _current2_enable.h
 _dayzone.c
 _dayzone.h
-_decret.c
-_decret.h
++   _decret.c
++   _decret.h
 _defects.c
 _defects.h
 _delays.c
