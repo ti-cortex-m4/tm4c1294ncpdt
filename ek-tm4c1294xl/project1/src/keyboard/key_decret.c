@@ -1,35 +1,32 @@
 /*------------------------------------------------------------------------------
-KEY_DECRET.C
+KEY_DECRET,C
 
  Задание и просмотр правила перехода на сезонное время
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "../memory/mem_settings.h"
-#include "keyboard.h"
-#include "../display/display.h"
+#include "../console.h"
 #include "../time/decret.h"
-#include "../time/rtc.h"
 
 
 
 //                                         0123456789ABCDEF
 static char const       szDecret[]      = "Сезонное время  ",
-                        szDecNone[]     = " нет            ",
-                        szDecAuto[]     = " автоматическое ",
-                        szDecCustom[]   = " специальное    ";
+                        szNone[]        = " нет            ",
+                        szAuto[]        = " автоматическое ",
+                        szCustom[]      = " специальное    ";
 
 
 
-void    ShowDecret(void)
+static void Show(void)
 {
   if (deDecret == DEC_NONE) 
-    ShowLo(szDecNone);
-  else
-  if (deDecret == DEC_AUTO) 
-    ShowLo(szDecAuto);
+    ShowLo(szNone);
+  else if (deDecret == DEC_AUTO)
+    ShowLo(szAuto);
   else                      
-    ShowLo(szDecCustom);
+    ShowLo(szCustom);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';
@@ -44,10 +41,11 @@ void    key_SetDecret(void)
     if (enKeyboard == KBD_ENTER)  
     {
       enKeyboard = KBD_POSTENTER;
+
       ShowHi(szDecret);     
       Clear();
 
-      ShowDecret();
+      Show();
     } 
     else Beep();
   }
@@ -59,14 +57,13 @@ void    key_SetDecret(void)
     { 
       if (deDecret == DEC_NONE) 
         deDecret = DEC_AUTO; 
-      else
-      if (deDecret == DEC_AUTO) 
+      else if (deDecret == DEC_AUTO)
         deDecret = DEC_CUSTOM; 
       else                      
         deDecret = DEC_NONE; 
 
       MakeDecret();
-      ShowDecret();
+      Show();
     }
     else Beep();
   } 
