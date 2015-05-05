@@ -29,8 +29,10 @@ typedef enum
   GAPS                  = GAPS_FLAG + 1,
 
   DECRET                = GAPS + sizeof(gaps)/wFREEPAGE_SIZE + 1,
+  SUMMER                = DECRET + 1,
+  WINTER                = SUMMER + 1,
 
-  TRANS_ENG             = DECRET + 1,
+  TRANS_ENG             = WINTER + 1,
   TRANS_CNT             = TRANS_ENG + REALCAN_PAGES,
   PULSE_HOU             = TRANS_CNT + REALCAN_PAGES,
   PULSE_MNT             = PULSE_HOU + REALCAN_PAGES,

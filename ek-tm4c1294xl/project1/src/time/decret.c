@@ -14,31 +14,9 @@ DECRET.C // TODO: сохранять количество переходов отдельно + события
 
 
 
-static boolean SaveDecret(void)
-{
-  OpenOut(DECRET);
-  ClearOut();
-
-  if (Save(&deDecret, sizeof(uchar)) == FALSE) return FALSE;
-
-  if (Save(&tiSummer, sizeof(time)) == FALSE) return FALSE;
-  if (Save(&tiWinter, sizeof(time)) == FALSE) return FALSE;
-
-  return CloseOut();
-}
-
-
-static boolean LoadDecret(void)
-{
-  OpenIn(DECRET);
-
-  if (Load(&deDecret, sizeof(uchar)) == FALSE) return FALSE;
-
-  if (Load(&tiSummer, sizeof(time)) == FALSE) return FALSE;
-  if (Load(&tiWinter, sizeof(time)) == FALSE) return FALSE;
-
-  return TRUE;
-}
+file const              flDecret = {DECRET, &deDecret, sizeof(deDecret)};
+file const              flSummer = {SUMMER, &tiSummer, sizeof(time)};
+file const              flWinter = {WINTER, &tiWinter, sizeof(time)};
 
 
 
@@ -56,14 +34,18 @@ void    MakeDecret(void)
     tiWinter = *GetDecretDateYM(bYear, 10);
   }
 
-  SaveDecret();
+  SaveFile(&flDecret);
+  SaveFile(&flSummer);
+  SaveFile(&flWinter);
 }
 
 
 
 void    InitDecret(void)
 {
-	LoadDecret();
+  LoadFile(&flDecret);
+  LoadFile(&flSummer);
+  LoadFile(&flWinter);
 }
 
 

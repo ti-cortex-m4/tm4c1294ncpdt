@@ -4,6 +4,12 @@ DECRET.H
 
 ------------------------------------------------------------------------------*/
 
+extern  file const              flDecret;
+extern  file const              flSummer;
+extern  file const              flWinter;
+
+
+
 void    MakeDecret(void);
 
 void    InitDecret(void);
