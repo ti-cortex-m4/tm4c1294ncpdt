@@ -461,10 +461,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 
   if ((tiDig.bMinute % 30) != 0)                        // обрабатываем неполный получасовой блок
   {
-    tiDig.bMinute = (tiDig.bMinute / 30)*30;
-    if (SearchDefHouIndex(tiDig) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
-
-    iwDigHou = (wHOURS+iwDigHou+1)%wHOURS;   
+    tiDig = HouIndexToDate(DateToHouIndex(tiDig) + 1);
   }
 #ifdef  DAYS100
   else if (SearchDefHouIndex2(31*48) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); } 
@@ -472,7 +469,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   if ((wBasePrev > wBaseInit) && (wBaseCurr <= wBaseInit)) return 0;
   wBasePrev = wBaseCurr;
 #else
-  else if (SearchDefHouIndex(tiDig) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
+  if (SearchDefHouIndex(tiDig) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
 #endif
 
 
