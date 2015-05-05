@@ -298,7 +298,7 @@ QUERIES.H
 #define bEXT_GETEXTENDED51             50
 
 #define bEXT_GETSTARTCAN               52
-#define bEXT_GETVERSION                53
++   #define bEXT_GETVERSION                53
 
 #define bEXT_GETPHONES2                54
 #define bEXT_GETPORTS                  55
