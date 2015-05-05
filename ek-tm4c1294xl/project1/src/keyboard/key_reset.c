@@ -25,6 +25,7 @@ KEY_RESET.C
 #include "../settings.h"
 #include "../hardware/memory.h"
 #include "../storage/storage.h"
+#include "../time/decret.h"
 
 
 
