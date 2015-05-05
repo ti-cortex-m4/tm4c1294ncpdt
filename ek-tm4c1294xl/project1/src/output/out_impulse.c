@@ -28,35 +28,55 @@ void    PushImpulse(impulse  *pim)
 
 void    OutImpDayCan(void)
 {
-        if (enGlobal != GLB_PROGRAM)
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (bInBuff5 < bDAYS)
+    {
+      if (LoadImpDay( bInBuff5 ) == 1)
+      {
+        InitPushPtr();
+        uint wSize = 0;
+
+        uchar c;
+        for (c=0; c<bCANALS; c++)
         {
-          if (bInBuff5 < bDAYS)
-          {
-            if (LoadImpDay( bInBuff5 ) == 1)
-              Outptr(&mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS);
-            else
-              Result(bRES_BADFLASH);
-          }
-          else Result(bRES_BADADDRESS);
+          PushImpulse(&mpimDayCan[ PrevSoftDay() ][ c ]);
+          wSize += sizeof(impulse);
         }
-        else Result(bRES_NEEDWORK);
+        OutptrOutBuff(wSize);
+      }
+      else Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
 void    OutImpMonCan(void)
 {
-        if (enGlobal != GLB_PROGRAM)
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (bInBuff5 < bMONTHS)
+    {
+      if (LoadImpMon( bInBuff5 ) == 1)
+      {
+        InitPushPtr();
+        uint wSize = 0;
+
+        uchar c;
+        for (c=0; c<bCANALS; c++)
         {
-          if (bInBuff5 < bMONTHS)
-          {
-            if (LoadImpMon( bInBuff5 ) == 1)
-              Outptr(&mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS);
-            else
-              Result(bRES_BADFLASH);
-          }
-          else Result(bRES_BADADDRESS);
+          PushImpulse(&mpimMonCan[ PrevSoftMon() ][ c ]);
+          wSize += sizeof(impulse);
         }
-        else Result(bRES_NEEDWORK);
+        OutptrOutBuff(wSize);
+      }
+      else Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
@@ -77,7 +97,7 @@ void    OutImpDayCanExt(void)
         {
           if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
           {
-          	PushImpulse(&mpimDayCan[ PrevSoftDay() ][ c ]);
+            PushImpulse(&mpimDayCan[ PrevSoftDay() ][ c ]);
             wSize += sizeof(impulse);
           }
         }
@@ -107,7 +127,7 @@ void    OutImpMonCanExt(void)
         {
           if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
           {
-          	PushImpulse(&mpimMonCan[ PrevSoftMon() ][ c ]);
+            PushImpulse(&mpimMonCan[ PrevSoftMon() ][ c ]);
             wSize += sizeof(impulse);
           }
         }
