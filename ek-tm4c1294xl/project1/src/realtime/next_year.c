@@ -14,5 +14,5 @@ void    NextYear(void)
 {
   cwYears++;
 
-  MakeDecret(); // TODO persist MakeDecret
+  MakeDecret();
 }
