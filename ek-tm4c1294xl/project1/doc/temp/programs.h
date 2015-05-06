@@ -180,7 +180,7 @@
 #define bGET_SPEED                  14
 
 #define bGET_GROUPS                 4
-#define bGET_VERSION                15
++   #define bGET_VERSION                15
 
 #define bGET_PROGRAM18              18
 #define bGET_PROGRAM19              19
@@ -333,7 +333,7 @@
 #define bSET_SEPARATECAN            218
 #define bSET_ENABLEWATCHDOG         219
 
-#define bGET_ANALYSIS1              220
++   #define bGET_ANALYSIS1              220
 
 #ifdef  FLOW
 #define bGET_ANALYSIS2              221

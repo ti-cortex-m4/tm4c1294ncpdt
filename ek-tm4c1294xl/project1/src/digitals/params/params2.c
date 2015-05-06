@@ -1214,7 +1214,7 @@ void    MakeParamDiv(uint  iwPrm)
 
 void    MakeParamDivAll(void)
 {
-  uint  i;
+  uint i;
   for (i=0; i<wPARAMS; i++)
   {
     MakeParamDiv(i);
