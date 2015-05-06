@@ -32,4 +32,4 @@ void    InitPop(uint  i);
 
 void    Pop(void  *pbData, uint  wSize);
 uchar   PopChar(void);
-real    PopReal(void);
+float   PopFloat(void);

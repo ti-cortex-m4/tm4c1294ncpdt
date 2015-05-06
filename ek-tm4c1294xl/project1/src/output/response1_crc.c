@@ -10,6 +10,7 @@ RESPONSE1_CRC.C
 #include "../memory/mem_settings.h"
 #include "../include/states.h"
 #include "../serial/ports.h"
+#include "../factors.h"
 #include "out_common.h"
 #include "out_rtc.h"
 #include "out_groups.h"
@@ -77,13 +78,13 @@ void    Response1_CRC(void)
       case bINQ_GETLOSSE:     OutGetFloatCan(mpreLosse);    break;
       case bINQ_GETLEVEL:     OutGetFloatCan(mpreLevelDiv); break;
 
-      case bINQ_SETTRANS_ENG: OutSetFloatCan(mpreTransEng); break;
-      case bINQ_SETTRANS_CNT: OutSetFloatCan(mpreTransCnt); break;
-      case bINQ_SETPULSE_HOU: OutSetFloatCan(mprePulseHou); break;
-      case bINQ_SETPULSE_MNT: OutSetFloatCan(mprePulseMnt); break;
-      case bINQ_SETCOUNT:     OutSetFloatCan(mpreCount);    break;
-      case bINQ_SETLOSSE:     OutSetFloatCan(mpreLosse);    break;
-      case bINQ_SETLEVEL:     OutSetFloatCan(mpreLevelDiv); break;
+      case bINQ_SETTRANS_ENG: OutSetFloatCan(mpreTransEng, &flTransEng); break;
+      case bINQ_SETTRANS_CNT: OutSetFloatCan(mpreTransCnt, &flTransCnt); break;
+      case bINQ_SETPULSE_HOU: OutSetFloatCan(mprePulseHou, &flPulseHou); break;
+      case bINQ_SETPULSE_MNT: OutSetFloatCan(mprePulseMnt, &flPulseMnt); break;
+      case bINQ_SETCOUNT:     OutSetFloatCan(mpreCount,    &flCount);    break;
+      case bINQ_SETLOSSE:     OutSetFloatCan(mpreLosse,    &flLosse);    break;
+      case bINQ_SETLEVEL:     OutSetFloatCan(mpreLevelDiv, &flLevelDiv); break;
 
       case bINQ_GETKOEFF: OutAllFactors(); break;
 

@@ -8,6 +8,7 @@ OUT_COMMON,C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
+#include "../flash/files.h"
 
 
 
@@ -37,7 +38,7 @@ void    OutGetFloatCan_GlobalWork(float  *mfl)
 
 
 
-void    OutSetFloatCan(float  *mfl)
+void    OutSetFloatCan(float  *mfl, file const  *pfl)
 {
   if (enGlobal == GLB_PROGRAM)
   {
@@ -46,14 +47,11 @@ void    OutSetFloatCan(float  *mfl)
     uchar c;
     for (c=0; c<bCANALS; c++)
     {
-//      PopReal();
-//      SetCanReal(mpreT,c);
+      (*mfl++) = PopFloat();
     }
 
-    if (c == bCANALS)
-      LongResult(bRES_OK);
-    else
-      Result(bRES_BADADDRESS);
+    SaveFile(pfl);
+    LongResult(bRES_OK);
   }
   else Result(bRES_NEEDPROGRAM);
 }
