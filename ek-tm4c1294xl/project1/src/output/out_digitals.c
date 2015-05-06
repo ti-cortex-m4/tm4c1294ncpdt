@@ -10,6 +10,7 @@ OUT_DIGITALS,C
 #include "../memory/mem_digitals0.h"
 #include "../digitals/digitals.h"
 #include "../serial/ports.h"
+#include "../flash/files.h"
 
 
 
@@ -42,6 +43,12 @@ void    OutSetDigital(void)
       if (TrueDigital(&di))
       {
         SetDigital(bInBuff5, &di);
+
+        if (bInBuff5 == bCANALS - 1)
+        {
+          SaveFile(&flDigitals);
+        }
+
         LongResult(bRES_OK);
       }
       else Result(bRES_BADDATA);
