@@ -20,8 +20,8 @@ QUERIES.H
 #define bINQ_SETPRIVATE                6
 #define bINQ_GETPASSWORD               7
 #define bINQ_SETPASSWORD               8
-#define bINQ_GETGROUP                  9
-#define bINQ_SETGROUP                  10
++   #define bINQ_GETGROUP                  9
++   #define bINQ_SETGROUP                  10
 #define bINQ_CORRECT1                  11
 #define bINQ_CORRECT2                  12
 #define bINQ_CORRECT3                  13
@@ -239,7 +239,7 @@ QUERIES.H
 #define bEXT_GETTIME_ESC_S             5
 #define bEXT_GETTIME_ESC_V             6  
 
-#define bEXT_GETGROUPS                 7  
++   #define bEXT_GETGROUPS                 7
 +   #define bEXT_GETDIGITALS               8
 #define bEXT_GETPHONES                 9  
 

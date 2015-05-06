@@ -35,8 +35,8 @@
   +   with mpQuerysCRC[i] do begin actAction1 := acGetDigit;            cwOut := 1+1+6;             cwIn := 5+5+2;              bNumber := 42;    stName := ''; Inc(i); end;
   +   with mpQuerysCRC[i] do begin actAction1 := acSetDigit;            cwOut := 1+6+6;             cwIn := 5+2+2;              bNumber := 43;    stName := ''; Inc(i); end;
 
-  with mpQuerysCRC[i] do begin actAction1 := acGetGroups;           cwOut := 1+1+6;             cwIn := 5+1+bCANALS+2;      bNumber := 9;     stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetGroups;           cwOut := 1+2+bCANALS+6;     cwIn := 5+2+2;              bNumber := 10;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetGroups;           cwOut := 1+1+6;             cwIn := 5+1+bCANALS+2;      bNumber := 9;     stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetGroups;           cwOut := 1+2+bCANALS+6;     cwIn := 5+2+2;              bNumber := 10;    stName := ''; Inc(i); end;
 
   with mpQuerysCRC[i] do begin actAction1 := acGetPhones;           cwOut := 1+1+1+6;           cwIn := 5+NUMBERS+2;        bNumber := 255;   stName := ''; Inc(i); end;
   with mpQuerysCRC[i] do begin actAction1 := acSetPhones;           cwOut := 1+1+1+NUMBERS+6;   cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
