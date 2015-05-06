@@ -46,23 +46,23 @@ QUERIES.H
 #define bINQ_SETNEWPUBTARIFFS          29
 
 +   #define bINQ_GETTRANS_ENG              30
-#define bINQ_SETTRANS_ENG              31
++   #define bINQ_SETTRANS_ENG              31
 +   #define bINQ_GETTRANS_CNT              32
-#define bINQ_SETTRANS_CNT              33
++   #define bINQ_SETTRANS_CNT              33
 +   #define bINQ_GETPULSE_HOU              34
-#define bINQ_SETPULSE_HOU              35
++   #define bINQ_SETPULSE_HOU              35
 +   #define bINQ_GETPULSE_MNT              234
-#define bINQ_SETPULSE_MNT              235
-#define bINQ_GETVALUE_ENGHOU           36
-#define bINQ_GETVALUE_CNTHOU           37
-#define bINQ_GETVALUE_ENGMNT           236
-#define bINQ_GETVALUE_CNTMNT           237
-#define bINQ_GETCOUNT                  38
-#define bINQ_SETCOUNT                  39
-#define bINQ_GETLOSSE                  40
-#define bINQ_SETLOSSE                  41
-#define bINQ_GETLEVEL                  180
-#define bINQ_SETLEVEL                  181
++   #define bINQ_SETPULSE_MNT              235
++   #define bINQ_GETVALUE_ENGHOU           36
++   #define bINQ_GETVALUE_CNTHOU           37
++   #define bINQ_GETVALUE_ENGMNT           236
++   #define bINQ_GETVALUE_CNTMNT           237
++   #define bINQ_GETCOUNT                  38
++   #define bINQ_SETCOUNT                  39
++   #define bINQ_GETLOSSE                  40
++   #define bINQ_SETLOSSE                  41
++   #define bINQ_GETLEVEL                  180
++   #define bINQ_SETLEVEL                  181
 
 #define bINQ_GETDIGITAL                42
 #define bINQ_SETDIGITAL                43

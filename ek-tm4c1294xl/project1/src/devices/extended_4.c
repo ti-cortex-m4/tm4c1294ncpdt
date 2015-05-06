@@ -194,13 +194,14 @@ static void MakeDevice6(uchar  ibMon)
         vaT = mpCntMonCan4[c];
 
         InitPop(15 + 15*c);
-        status st = (status) PopChar(); PopChar(); PopChar(); PopChar(); PopChar();
-        PopReal();
+        status st = (status) PopChar();
+        PopChar(); PopChar(); PopChar(); PopChar();
+        real re = PopFloat();
 
         if (st == ST4_OK)
         {
           vaT.bSelf = st;
-          vaT.reSelf = reBuffA;
+          vaT.reSelf = re;
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bFlag4++;
         }
@@ -506,7 +507,7 @@ uchar   i;
   InitPop(bHEADER);
   bStatus = PopChar();
   PopChar(); PopChar(); PopChar(); PopChar(); 
-  PopReal(); 
+  PopFloat(); 
   Pop(&tiAlt, sizeof(time));   
 
   return(1);
