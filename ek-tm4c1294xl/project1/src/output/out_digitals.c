@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
-OUT_DIGITALS.C
-                    
+OUT_DIGITALS,C
+
 
 ------------------------------------------------------------------------------*/
 
@@ -18,8 +18,7 @@ void    OutGetDigital(void)
   if (bInBuff5 < bCANALS)
   {
     InitPushCRC();
-    Push(&mpdiDigital[ bInBuff5 ],sizeof(digital));
-
+    Push(&mpdiDigital[ bInBuff5 ], sizeof(digital));
     Output(sizeof(digital));
   }
   else Result(bRES_BADADDRESS);
@@ -28,21 +27,21 @@ void    OutGetDigital(void)
 
 void    OutSetDigital(void)
 {
-digital  di;
-
   if (enGlobal == GLB_PROGRAM)
   {
     if (bInBuff5 < bCANALS)
     {
-    	di.ibPort   = bInBuff6;
-    	di.ibPhone  = bInBuff7;
+      digital di;
+
+      di.ibPort   = bInBuff6;
+      di.ibPhone  = bInBuff7;
       di.bDevice  = bInBuff8;
       di.bAddress = bInBuff9;
       di.ibLine   = bInBuffA;
 
       if (TrueDigital(&di))
       {
-      	SetDigital(bInBuff5, &di);
+        SetDigital(bInBuff5, &di);
         LongResult(bRES_OK);
       }
       else Result(bRES_BADDATA);
@@ -54,10 +53,10 @@ digital  di;
 
 
 
-void    OutDigitalsExt(void)
+void    OutGetDigitalsExt(void)
 {
   InitPushPtr();
-  uint w = 0;
+  uint wSize = 0;
 
   uchar c;
   for (c=0; c<bCANALS; c++)
@@ -65,9 +64,9 @@ void    OutDigitalsExt(void)
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
       Push(&mpdiDigital[c], sizeof(digital));
-      w += sizeof(digital);
+      wSize += sizeof(digital);
     }
   }
 
-  OutptrOutBuff(w);
+  OutptrOutBuff(wSize);
 }
