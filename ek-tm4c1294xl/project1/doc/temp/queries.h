@@ -64,8 +64,8 @@ QUERIES.H
 +   #define bINQ_GETLEVEL                  180
 +   #define bINQ_SETLEVEL                  181
 
-#define bINQ_GETDIGITAL                42
-#define bINQ_SETDIGITAL                43
++   #define bINQ_GETDIGITAL                42
++   #define bINQ_SETDIGITAL                43
 
 #define bINQ_GETPARAM_100              53
 #define bINQ_GETPARAM                  44
@@ -240,7 +240,7 @@ QUERIES.H
 #define bEXT_GETTIME_ESC_V             6  
 
 #define bEXT_GETGROUPS                 7  
-#define bEXT_GETDIGITALS               8  
++   #define bEXT_GETDIGITALS               8
 #define bEXT_GETPHONES                 9  
 
 #define bEXT_CORRECT1                  10
