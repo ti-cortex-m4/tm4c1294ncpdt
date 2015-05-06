@@ -48,10 +48,10 @@
 
   with mpQuerysCRC[i] do begin actAction1 := acGetRecords;          cwOut := 1+1+2+6;         cwIn := 5+6+wFREEPAGE_SIZE+2; bNumber := 255;   stName := ''; Inc(i); end;
 
-  with mpQuerysCRC[i] do begin actAction1 := acGetDivid;            cwOut := 1+2+6;             cwIn := 5+bREAL+2;          bNumber := 46;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetDivid;            cwOut := 1+2+bREAL+6;       cwIn := 5+2+2;              bNumber := 47;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acGetParam;            cwOut := 1+2+6;             cwIn := 5+5+2;              bNumber := 44;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetParam;            cwOut := 1+7+6;             cwIn := 5+2+2;              bNumber := 45;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetDivid;            cwOut := 1+2+6;             cwIn := 5+bREAL+2;          bNumber := 46;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetDivid;            cwOut := 1+2+bREAL+6;       cwIn := 5+2+2;              bNumber := 47;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetParam;            cwOut := 1+2+6;             cwIn := 5+5+2;              bNumber := 44;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetParam;            cwOut := 1+7+6;             cwIn := 5+2+2;              bNumber := 45;    stName := ''; Inc(i); end;
   with mpQuerysCRC[i] do begin actAction1 := acResetDivid;          cwOut := 1+6;               cwIn := 5+1+2;              bNumber := 51;    stName := ''; Inc(i); end;
 
   +   with mpQuerysCRC[i] do begin actAction1 := crcSetKey;             cwOut := 1+1+6;             cwIn := 5+2+2;              bNumber := 246;   stName := ''; Inc(i); end;
