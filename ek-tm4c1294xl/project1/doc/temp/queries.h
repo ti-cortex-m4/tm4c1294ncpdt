@@ -209,8 +209,8 @@ QUERIES.H
 
 #define bINQ_GETDEFIMPCANHOU           239
 
-#define bINQ_SETKEY                    246
-#define bINQ_GETDISPLAY                247
++   #define bINQ_SETKEY                    246
++   #define bINQ_GETDISPLAY                247
 
 #define bINQ_GETCONFIG                 248
 #define bINQ_GETFLASHPAGE              249

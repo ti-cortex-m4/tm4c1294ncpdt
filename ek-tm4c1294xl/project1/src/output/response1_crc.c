@@ -114,13 +114,8 @@ void    Response1_CRC(void)
         OutFlashPage();
         break;
 
-      case bINQ_SETKEY:
-        OutSetKey();
-        break;
-
-      case bINQ_GETDISPLAY:
-        OutGetDisplay();
-        break;
+      case bINQ_SETKEY: OutSetKey(); break;
+      case bINQ_GETDISPLAY: OutGetDisplay(); break;
 
       case bINQ_GETCONFIG:
         OutGetConfig();
