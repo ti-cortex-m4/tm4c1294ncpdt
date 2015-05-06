@@ -5,6 +5,7 @@ OUT_COMMON,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_settings.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
 
@@ -23,4 +24,14 @@ void    OutFloatCan(float  *mfl)
   }
 
   Output(wSize);
+}
+
+
+
+void    OutFloatCan_GlobalWork(float  *mfl)
+{
+  if (enGlobal != GLB_PROGRAM)
+    OutFloatCan(mfl);
+  else
+    Result(bRES_NEEDWORK);
 }
