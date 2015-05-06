@@ -96,6 +96,7 @@ void    key_SetDigitals(void)
 
         AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
         SetDigital(ibX, &diT);
+        SaveFile(&flDigitals);
         AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
         MakeDigitalsMask();  
@@ -246,6 +247,7 @@ void    key_SetDigitals(void)
 
           AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
           SetDigital(ibX, &diT);
+          SaveFile(&flDigitals);
           AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
           MakeDigitalsMask();  
@@ -304,6 +306,7 @@ void    key_SetDigitals(void)
 
         AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
         SetDigital(ibX, &diT);
+        SaveFile(&flDigitals);
         AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
         MakeDigitalsMask();  
