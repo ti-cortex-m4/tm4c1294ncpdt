@@ -36,10 +36,11 @@ void    OutGetParams100(void)
 
 void    OutGetParams(void)
 {
-  if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
+  uint iwParam = bInBuff5*0x100 + bInBuff6;
+  if (iwParam < wPARAMS)
   {
     InitPushCRC();
-    Push(&mpdiParam[ bInBuff5*0x100 + bInBuff6 ],sizeof(digital));
+    Push(&mpdiParam[iwParam],sizeof(digital));
     Output(sizeof(digital));
   }
   else Result(bRES_BADADDRESS);
@@ -50,7 +51,8 @@ void    OutSetParam(void)
 {
   if (enGlobal != GLB_WORK)
   {
-    if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
+    uint iwParam = bInBuff5*0x100 + bInBuff6;
+    if (iwParam < wPARAMS)
     {
       digital di;
 
@@ -60,9 +62,15 @@ void    OutSetParam(void)
       di.bAddress = InBuff(10);
       di.ibLine   = InBuff(11);
 
-      if (TrueParam(&di) == 1)
+      if (TrueParam(&di) == true)
       {
-        mpdiParam[ bInBuff5*0x100 + bInBuff6 ] = di;
+        mpdiParam[iwParam] = di;
+
+        if (iwParam == wPARAMS - 1)
+        {
+          SaveFile(&flParams);
+        }
+
         LongResult(bRES_OK);
       }
       else Result(bRES_BADDATA);
@@ -76,10 +84,11 @@ void    OutSetParam(void)
 
 void    OutGetParamDiv(void)
 {
-  if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
+  uint iwParam = bInBuff5*0x100 + bInBuff6;
+  if (iwParam < wPARAMS)
   {
     InitPushCRC();
-    PushFloat(mpreParamDiv[bInBuff5*0x100 + bInBuff6]);
+    PushFloat(mpreParamDiv[iwParam]);
     Output(sizeof(real));
   }
   else Result(bRES_BADADDRESS);
@@ -90,10 +99,18 @@ void    OutSetParamDiv(void)
 {
   if (enGlobal != GLB_WORK)
   {
-    if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
+    uint iwParam = bInBuff5*0x100 + bInBuff6;
+    if (iwParam < wPARAMS)
     {
       InitPop(7);
-      mpreParamDiv[bInBuff5*0x100 + bInBuff6] = PopFloat();
+
+      mpreParamDiv[iwParam] = PopFloat();
+
+      if (iwParam == wPARAMS - 1)
+      {
+        SaveFile(&flParamsDiv);
+      }
+
       LongResult(bRES_OK);
     }
     else Result(bRES_BADADDRESS);
