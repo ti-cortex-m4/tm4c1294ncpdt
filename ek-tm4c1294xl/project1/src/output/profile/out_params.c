@@ -93,7 +93,7 @@ void    OutSetParamDiv(void)
     if (bInBuff5*0x100 + bInBuff6 < wPARAMS)
     {
       InitPop(7);
-      mpreParamDiv[bInBuff5*0x100 + bInBuff6] = PopReal();
+      mpreParamDiv[bInBuff5*0x100 + bInBuff6] = PopFloat();
       LongResult(bRES_OK);
     }
     else Result(bRES_BADADDRESS);

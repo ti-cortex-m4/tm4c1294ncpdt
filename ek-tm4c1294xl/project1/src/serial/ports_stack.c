@@ -249,9 +249,14 @@ uchar   PopChar(void) {
 }
 
 
-real    PopReal(void)
+float   PopFloat(void)
 {
-  real re;
-  Pop(&re, sizeof(real));
-  return re;
+  static combo32 co;
+
+  co.mpbBuff[3] = PopChar();
+  co.mpbBuff[2] = PopChar();
+  co.mpbBuff[1] = PopChar();
+  co.mpbBuff[0] = PopChar();
+
+  return co.reBuff;
 }
