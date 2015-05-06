@@ -13,14 +13,14 @@
   with mpQuerysCRC[i] do begin actAction1 := acSetOldPubTariff;     cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 23;    stName := ''; Inc(i); end;
   with mpQuerysCRC[i] do begin actAction1 := acSetAllOldPubTariffs; cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 23;    stName := ''; Inc(i); end;
 
-  with mpQuerysCRC[i] do begin actAction1 := acGetTransEng;         cwOut := 1+6;               cwIn := 5+bREAL*bCANALS+2;  bNumber := 30;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetTransEng;         cwOut := 1+6;               cwIn := 5+bREAL*bCANALS+2;  bNumber := 30;    stName := ''; Inc(i); end;
   with mpQuerysCRC[i] do begin actAction1 := acSetTransEng;         cwOut := 1+bREAL*bCANALS+6; cwIn := 5+2+2;              bNumber := 31;    stName := ''; Inc(i); end;
-  //with mpQuerysCRC[i] do begin actAction1 := acGetTransCnt;         cwOut := 1+6;               cwIn := 5+bREAL*bCANALS+2;  bNumber := 32;    stName := ''; Inc(i); end;
+  + //with mpQuerysCRC[i] do begin actAction1 := acGetTransCnt;         cwOut := 1+6;               cwIn := 5+bREAL*bCANALS+2;  bNumber := 32;    stName := ''; Inc(i); end;
   with mpQuerysCRC[i] do begin actAction1 := acSetTransCnt;         cwOut := 1+bREAL*bCANALS+6; cwIn := 5+2+2;              bNumber := 33;    stName := ''; Inc(i); end;
 
-  with mpQuerysCRC[i] do begin actAction1 := acGetPulseHou;          cwOut := 1+6;              cwIn := 5+bREAL*bCANALS+2;  bNumber := 34;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetPulseHou;          cwOut := 1+6;              cwIn := 5+bREAL*bCANALS+2;  bNumber := 34;    stName := ''; Inc(i); end;
   with mpQuerysCRC[i] do begin actAction1 := acSetPulseHou;         cwOut := 1+bREAL*bCANALS+6; cwIn := 5+2+2;              bNumber := 35;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acGetPulseMnt;         cwOut := 1+6;               cwIn := 5+bREAL*bCANALS+2;  bNumber := 234;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetPulseMnt;         cwOut := 1+6;               cwIn := 5+bREAL*bCANALS+2;  bNumber := 234;    stName := ''; Inc(i); end;
   with mpQuerysCRC[i] do begin actAction1 := acSetPulseMnt;         cwOut := 1+bREAL*bCANALS+6; cwIn := 5+2+2;              bNumber := 235;    stName := ''; Inc(i); end;
 
   with mpQuerysCRC[i] do begin actAction1 := acGetCount;            cwOut := 1+6;               cwIn := 5+bREAL*bCANALS+2;  bNumber := 38;    stName := ''; Inc(i); end;
