@@ -75,7 +75,7 @@ QUERIES.H
 #define bINQ_GETPARAMCURR              48
 #define bINQ_GETPARAMBUFF              49
 #define bINQ_GETPARAMFULL              50
-#define bINQ_RESETDIVIDERS             51
++   #define bINQ_RESETDIVIDERS             51
 #define bINQ_GETPARAMDIG               52
 
 #define bINQ_GETBLOCKING1              60
