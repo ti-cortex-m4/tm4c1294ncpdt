@@ -94,6 +94,20 @@ boolean LoadGroups(void)
 
 
 
+bool    TrueGroup(group  *pgr)
+{
+  uchar i;
+  for (i=0; i<pgr->bSize; i++)
+  {
+    if ((pgr->mpnoNodes[i].ibCanal & 0x7F) >= bCANALS)
+      return false;
+  }
+
+  return true;
+}
+
+
+
 void    InitGroups(void)
 {
   LoadGroups();
