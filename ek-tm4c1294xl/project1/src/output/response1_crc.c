@@ -94,35 +94,12 @@ void    Response1_CRC(void)
         }
         else Result(bRES_BADADDRESS);
         break;
-
-      case bINQ_GETVALUE_ENGHOU:
-        if (enGlobal != GLB_PROGRAM)
-          Common(mpreValueEngHou, sizeof(real)*bCANALS);
-        else
-          Result(bRES_NEEDWORK);
-        break;
-
-      case bINQ_GETVALUE_CNTHOU:
-        if (enGlobal != GLB_PROGRAM)
-          Common(mpreValueCntHou, sizeof(real)*bCANALS);
-        else
-          Result(bRES_NEEDWORK);
-        break;
-
-      case bINQ_GETVALUE_ENGMNT:
-        if (enGlobal != GLB_PROGRAM)
-          Common(mpreValueEngMnt, sizeof(real)*bCANALS);
-        else
-          Result(bRES_NEEDWORK);
-        break;
-
-      case bINQ_GETVALUE_CNTMNT:
-        if (enGlobal != GLB_PROGRAM)
-          Common(mpreValueCntMnt, sizeof(real)*bCANALS);
-        else
-          Result(bRES_NEEDWORK);
-        break;
 */
+      case bINQ_GETVALUE_ENGHOU: OutFloatCan_GlobalWork(mpreValueEngHou); break;
+      case bINQ_GETVALUE_CNTHOU: OutFloatCan_GlobalWork(mpreValueCntHou); break;
+      case bINQ_GETVALUE_ENGMNT: OutFloatCan_GlobalWork(mpreValueEngMnt); break;
+      case bINQ_GETVALUE_CNTMNT: OutFloatCan_GlobalWork(mpreValueCntMnt); break;
+
       case bINQ_GETIMPCANDAY_ALL: OutImpDayCan(); break;
       case bINQ_GETIMPCANMON_ALL: OutImpMonCan(); break;
 
