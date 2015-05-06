@@ -14,6 +14,7 @@ RESPONSE1_CRC.C
 #include "out_rtc.h"
 #include "out_groups.h"
 #include "out_tariffs.h"
+#include "out_factors.h"
 #include "out_digitals.h"
 #include "out_impulse.h"
 #include "out_flash.h"
@@ -75,26 +76,9 @@ void    Response1_CRC(void)
       case bINQ_GETCOUNT: OutFloatCan(mpreCount); break;
       case bINQ_GETLOSSE: OutFloatCan(mpreLosse); break;
       case bINQ_GETLEVEL: OutFloatCan(mpreLevelDiv); break;
-/*
-      case bINQ_GETKOEFF:
-        if (bInBuff5 < bCANALS)
-        {
-          InitPushCRC();
 
-          reBuffA = GetCanReal(mpreTransEng, bInBuff5);
-          PushReal();
-          reBuffA = GetCanReal(mpreTransCnt, bInBuff5);
-          PushReal();
-          reBuffA = GetCanReal(mprePulseHou, bInBuff5);
-          PushReal();
-          reBuffA = GetCanReal(mprePulseMnt, bInBuff5);
-          PushReal();
+      case bINQ_GETKOEFF: OutAllFactors(); break;
 
-          Output(sizeof(real)*4);
-        }
-        else Result(bRES_BADADDRESS);
-        break;
-*/
       case bINQ_GETVALUE_ENGHOU: OutFloatCan_GlobalWork(mpreValueEngHou); break;
       case bINQ_GETVALUE_CNTHOU: OutFloatCan_GlobalWork(mpreValueCntHou); break;
       case bINQ_GETVALUE_ENGMNT: OutFloatCan_GlobalWork(mpreValueEngMnt); break;
