@@ -41,13 +41,8 @@ void    Response1_CRC(void)
         OutGetCurrTimeDate();
         break;
 
-      case bINQ_GETGROUP:
-        OutGetGroup();
-        break;
-
-      case bINQ_SETGROUP:
-        OutSetGroup();
-        break;
+      case bINQ_GETGROUP: OutGetGroup(); break;
+      case bINQ_SETGROUP: OutSetGroup(); break;
 
       case bINQ_GETPUBLIC_TARIFFS: OutGetPublicTariffs(); break;
       case bINQ_SETPUBLIC_TARIFFS: OutSetPublicTariffs(); break;

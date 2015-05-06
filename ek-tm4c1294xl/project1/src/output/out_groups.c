@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
-OUT_GROUPS.C
-                    
+OUT_GROUPS,C
+
 
 ------------------------------------------------------------------------------*/
 
@@ -26,16 +26,14 @@ void    OutGetGroup(void)
 
 void    OutSetGroup(void)
 {
-uchar  i;
-
   if (bInBuff5 < bGROUPS)
   {
-    if ( (enGlobal == GLB_PROGRAM) ||
-        ((enGlobal == GLB_REPROGRAM) && (mpboUsedGroups[bInBuff5] == false)) )
+    if (enGlobal == GLB_PROGRAM)
     {
-      for (i=0; i<bInBuff6; i++)
+      uchar i;
+      for (i=0; i<bInBuff6; i++) // размер группы
       {
-        if ((InBuff(7+i) & 0x7F) >= bCANALS)
+        if ((InBuff(7+i) & 0x7F) >= bCANALS) // индекс канала без знака
           break;
       }
 
@@ -65,21 +63,19 @@ uchar  i;
 
 void    OutGetGroupsExt(void)
 {
-uchar   i;
-uchar   wT;
-
   InitPushPtr();
-  wT = 0;
+  uint wSize = 0;
 
-  for (i=0; i<bGROUPS; i++)
+  uchar g;
+  for (g=0; g<bGROUPS; g++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + g/8) & (0x80 >> g%8)) != 0)
     {
-      Push(&mpgrGroups[i], sizeof(group));
-      wT += sizeof(group);
+      Push(&mpgrGroups[g], sizeof(group));
+      wSize += sizeof(group);
     }
   }
 
-  OutptrOutBuff(wT);
+  OutptrOutBuff(wSize);
 }
 
