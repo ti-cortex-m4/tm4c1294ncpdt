@@ -42,7 +42,7 @@ void    OutSetDigital(void)
 
       if (TrueDigital(&di))
       {
-        SetDigital(bInBuff5, &di);
+      	mpdiDigital[bInBuff5] = di;
 
         if (bInBuff5 == bCANALS - 1)
         {
