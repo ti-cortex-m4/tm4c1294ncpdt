@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
-OUT_CONSOLE.C
-                    
+OUT_CONSOLE,C
+
 
 ------------------------------------------------------------------------------*/
 
@@ -15,10 +15,10 @@ OUT_CONSOLE.C
 
 void    OutSetKey(void)
 {
-  if (TrueKey(bInBuff5) == 1)
+  if (TrueKey(bInBuff5) == true)
   {
     bKey = mpbKeys[bInBuff5];
-    fKey = 1;
+    fKey = true;
 
     LongResult(bRES_OK);
   }
@@ -26,10 +26,13 @@ void    OutSetKey(void)
 }
 
 
+
 void    OutGetDisplay(void)
 {
   InitPushCRC();
-  Push(&szHi,bDISPLAY);
-  Push(&szLo,bDISPLAY);
+
+  Push(&szHi, bDISPLAY);
+  Push(&szLo, bDISPLAY);
+
   Output(2*bDISPLAY);
 }
