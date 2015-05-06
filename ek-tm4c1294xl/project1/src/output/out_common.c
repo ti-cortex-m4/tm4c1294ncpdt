@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
-OUT_COMMON.C
-                    
+OUT_COMMON,C
+
 
 ------------------------------------------------------------------------------*/
 
@@ -10,15 +10,16 @@ OUT_COMMON.C
 
 
 
-void    OutReal(real  *mpe, uchar  bCount)
+void    OutFloatCan(float  *mfl)
 {
   InitPushCRC();
   uint wSize = 0;
 
-  while (bCount-- > 0)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    PushFloat(*mpe++);
-    wSize += sizeof(real);
+    PushFloat(*mfl++);
+    wSize += sizeof(float);
   }
 
   Output(wSize);

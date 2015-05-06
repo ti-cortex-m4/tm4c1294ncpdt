@@ -68,13 +68,13 @@ void    Response1_CRC(void)
       case bINQ_GETNEWPUBTARIFFS: OutGetNewPubTariffs(); break;
       case bINQ_SETNEWPUBTARIFFS: OutSetNewPubTariffs(); break;
 
-      case bINQ_GETTRANS_ENG: OutReal(mpreTransEng, bCANALS); break;
-      case bINQ_GETTRANS_CNT: OutReal(mpreTransCnt, bCANALS); break;
-      case bINQ_GETPULSE_HOU: OutReal(mprePulseHou, bCANALS); break;
-      case bINQ_GETPULSE_MNT: OutReal(mprePulseMnt, bCANALS); break;
-      case bINQ_GETCOUNT: OutReal(mpreCount, bCANALS); break;
-      case bINQ_GETLOSSE: OutReal(mpreLosse, bCANALS); break;
-      case bINQ_GETLEVEL: OutReal(mpreLevelDiv, bCANALS); break;
+      case bINQ_GETTRANS_ENG: OutFloatCan(mpreTransEng); break;
+      case bINQ_GETTRANS_CNT: OutFloatCan(mpreTransCnt); break;
+      case bINQ_GETPULSE_HOU: OutFloatCan(mprePulseHou); break;
+      case bINQ_GETPULSE_MNT: OutFloatCan(mprePulseMnt); break;
+      case bINQ_GETCOUNT: OutFloatCan(mpreCount); break;
+      case bINQ_GETLOSSE: OutFloatCan(mpreLosse); break;
+      case bINQ_GETLEVEL: OutFloatCan(mpreLevelDiv); break;
 /*
       case bINQ_GETKOEFF:
         if (bInBuff5 < bCANALS)
