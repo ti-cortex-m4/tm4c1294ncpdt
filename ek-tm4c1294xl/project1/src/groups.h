@@ -18,5 +18,7 @@ void    MakeUsedNodes(void);
 boolean SaveGroups(void);
 boolean LoadGroups(void);
 
+bool    TrueGroup(group  *pgr);
+
 void    ResetGroups(void);
 void    InitGroups(void);

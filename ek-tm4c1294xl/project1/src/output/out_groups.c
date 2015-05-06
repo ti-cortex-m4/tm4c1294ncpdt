@@ -30,17 +30,14 @@ void    OutSetGroup(void)
   {
     if (enGlobal == GLB_PROGRAM)
     {
-      uchar i;
-      for (i=0; i<bInBuff6; i++) // размер группы
-      {
-        if ((InBuff(7+i) & 0x7F) >= bCANALS) // индекс канала без знака
-          break;
-      }
+      InitPop(6);
 
-      if (i == bInBuff6)
+      group gr;
+      Pop(&gr, sizeof(group));
+
+      if (TrueGroup(&gr))
       {
-        InitPop(6);
-        Pop(&mpgrGroups[bInBuff5], sizeof(group));
+        mpgrGroups[bInBuff5] = gr;
 
         if (bInBuff5 == bGROUPS - 1)
         {
