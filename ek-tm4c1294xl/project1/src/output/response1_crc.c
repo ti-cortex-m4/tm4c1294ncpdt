@@ -69,20 +69,28 @@ void    Response1_CRC(void)
       case bINQ_GETNEWPUBTARIFFS: OutGetNewPubTariffs(); break;
       case bINQ_SETNEWPUBTARIFFS: OutSetNewPubTariffs(); break;
 
-      case bINQ_GETTRANS_ENG: OutFloatCan(mpreTransEng); break;
-      case bINQ_GETTRANS_CNT: OutFloatCan(mpreTransCnt); break;
-      case bINQ_GETPULSE_HOU: OutFloatCan(mprePulseHou); break;
-      case bINQ_GETPULSE_MNT: OutFloatCan(mprePulseMnt); break;
-      case bINQ_GETCOUNT: OutFloatCan(mpreCount); break;
-      case bINQ_GETLOSSE: OutFloatCan(mpreLosse); break;
-      case bINQ_GETLEVEL: OutFloatCan(mpreLevelDiv); break;
+      case bINQ_GETTRANS_ENG: OutGetFloatCan(mpreTransEng); break;
+      case bINQ_GETTRANS_CNT: OutGetFloatCan(mpreTransCnt); break;
+      case bINQ_GETPULSE_HOU: OutGetFloatCan(mprePulseHou); break;
+      case bINQ_GETPULSE_MNT: OutGetFloatCan(mprePulseMnt); break;
+      case bINQ_GETCOUNT:     OutGetFloatCan(mpreCount);    break;
+      case bINQ_GETLOSSE:     OutGetFloatCan(mpreLosse);    break;
+      case bINQ_GETLEVEL:     OutGetFloatCan(mpreLevelDiv); break;
+
+      case bINQ_SETTRANS_ENG: OutSetFloatCan(mpreTransEng); break;
+      case bINQ_SETTRANS_CNT: OutSetFloatCan(mpreTransCnt); break;
+      case bINQ_SETPULSE_HOU: OutSetFloatCan(mprePulseHou); break;
+      case bINQ_SETPULSE_MNT: OutSetFloatCan(mprePulseMnt); break;
+      case bINQ_SETCOUNT:     OutSetFloatCan(mpreCount);    break;
+      case bINQ_SETLOSSE:     OutSetFloatCan(mpreLosse);    break;
+      case bINQ_SETLEVEL:     OutSetFloatCan(mpreLevelDiv); break;
 
       case bINQ_GETKOEFF: OutAllFactors(); break;
 
-      case bINQ_GETVALUE_ENGHOU: OutFloatCan_GlobalWork(mpreValueEngHou); break;
-      case bINQ_GETVALUE_CNTHOU: OutFloatCan_GlobalWork(mpreValueCntHou); break;
-      case bINQ_GETVALUE_ENGMNT: OutFloatCan_GlobalWork(mpreValueEngMnt); break;
-      case bINQ_GETVALUE_CNTMNT: OutFloatCan_GlobalWork(mpreValueCntMnt); break;
+      case bINQ_GETVALUE_ENGHOU: OutGetFloatCan_GlobalWork(mpreValueEngHou); break;
+      case bINQ_GETVALUE_CNTHOU: OutGetFloatCan_GlobalWork(mpreValueCntHou); break;
+      case bINQ_GETVALUE_ENGMNT: OutGetFloatCan_GlobalWork(mpreValueEngMnt); break;
+      case bINQ_GETVALUE_CNTMNT: OutGetFloatCan_GlobalWork(mpreValueCntMnt); break;
 
       case bINQ_GETIMPCANDAY_ALL: OutImpDayCan(); break;
       case bINQ_GETIMPCANMON_ALL: OutImpMonCan(); break;

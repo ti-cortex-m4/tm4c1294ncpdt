@@ -45,13 +45,13 @@ QUERIES.H
 #define bINQ_GETNEWPUBTARIFFS          28
 #define bINQ_SETNEWPUBTARIFFS          29
 
-#define bINQ_GETTRANS_ENG              30
++   #define bINQ_GETTRANS_ENG              30
 #define bINQ_SETTRANS_ENG              31
-#define bINQ_GETTRANS_CNT              32
++   #define bINQ_GETTRANS_CNT              32
 #define bINQ_SETTRANS_CNT              33
-#define bINQ_GETPULSE_HOU              34
++   #define bINQ_GETPULSE_HOU              34
 #define bINQ_SETPULSE_HOU              35
-#define bINQ_GETPULSE_MNT              234
++   #define bINQ_GETPULSE_MNT              234
 #define bINQ_SETPULSE_MNT              235
 #define bINQ_GETVALUE_ENGHOU           36
 #define bINQ_GETVALUE_CNTHOU           37

@@ -4,5 +4,7 @@ OUT_COMMON,H
 
 ------------------------------------------------------------------------------*/
 
-void    OutFloatCan(float  *mfl);
-void    OutFloatCan_GlobalWork(float  *mfl);
+void    OutGetFloatCan(float  *mfl);
+void    OutGetFloatCan_GlobalWork(float  *mfl);
+
+void    OutSetFloatCan(float  *mfl);
