@@ -49,3 +49,24 @@ void    OutSetAddresses(void)
   }
   else Result(bRES_NEEDPROGRAM);
 }
+
+
+
+void    OutGetAddressesExt(void)
+{
+  InitPushPtr();
+  uint wSize = 0;
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
+    {
+      PushLong(mpdwAddress1[c]);
+      PushLong(mpdwAddress2[c]);
+      wSize += sizeof(ulong)*2;
+    }
+  }
+
+  OutptrOutBuff(wSize);
+}
