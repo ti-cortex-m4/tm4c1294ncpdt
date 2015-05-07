@@ -9,13 +9,13 @@ MEM_UNI.S
 
 
 // имя объекта
-char                    szObjectName[bNAME];
+char                    szObjectName[bNAME_SIZE];
 
 // имена каналов
-char                    mpszCanalsName[bCANALS][bNAME];
+char                    mpszCanalsName[bCANALS][bNAME_SIZE];
 
 // имена групп
-char                    mpszGroupsName[bGROUPS][bNAME];
+char                    mpszGroupsName[bGROUPS][bNAME_SIZE];
 
 // устройства
 digital                 mpdiDevicesUni[bCANALS];

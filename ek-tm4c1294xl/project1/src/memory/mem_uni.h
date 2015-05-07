@@ -4,11 +4,11 @@ MEM_UNI.H
 
 ------------------------------------------------------------------------------*/
 
-extern  char                    szObjectName[bNAME];
+extern  char                    szObjectName[bNAME_SIZE];
 
-extern  char                    mpszCanalsName[bCANALS][bNAME];
+extern  char                    mpszCanalsName[bCANALS][bNAME_SIZE];
 
-extern  char                    mpszGroupsName[bGROUPS][bNAME];
+extern  char                    mpszGroupsName[bGROUPS][bNAME_SIZE];
 
 extern  digital                 mpdiDevicesUni[bCANALS];
 

@@ -454,7 +454,7 @@ uchar   i;
       }
       Push(mpbGroupMaskUni, sizeof(mpbGroupMaskUni));
 
-      Push(mpszGroupsName[g], bNAME);
+      Push(mpszGroupsName[g], bNAME_SIZE);
     }
 
     Output2((uint)(2+128+32)*bInBuff9);
