@@ -30,9 +30,7 @@ void    OutSetKey(void)
 void    OutGetDisplay(void)
 {
   InitPushCRC();
-
   Push(&szHi, bDISPLAY);
   Push(&szLo, bDISPLAY);
-
   Output(2*bDISPLAY);
 }
