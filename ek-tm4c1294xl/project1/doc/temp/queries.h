@@ -252,7 +252,7 @@ QUERIES.H
 #define bEXT_GETENBLPORTHOU            15
 
 #define bEXT_GETIMPCANHOU              16   
-#define bEXT_GETADDRESSES              17
++   #define bEXT_GETADDRESSES              17
 #define bEXT_GETIMPCANMNT              18
 #define bEXT_GETPOWCANMNT              27
 
@@ -269,8 +269,8 @@ QUERIES.H
 
 #define bEXT_GETENGGRPHOU_ALL          26
  
-#define bEXT_GETADDRESS                28
-#define bEXT_SETADDRESS                29
++   #define bEXT_GETADDRESS                28
++   #define bEXT_SETADDRESS                29
 
 #define bEXT_GETCORRECT_1              31
 #define bEXT_GETCORRECT_2              51
