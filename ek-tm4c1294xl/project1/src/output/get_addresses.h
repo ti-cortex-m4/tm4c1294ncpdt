@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-OUT_PHONES,H
+OUT_ADDRESSES,H
 
 
 ------------------------------------------------------------------------------*/
 
-void    OutGetPhonesExt(void);
-void    OutSetPhonesExt(void);
+void    OutGetAddressesExt(void);
+void    OutSetAddressesExt(void);

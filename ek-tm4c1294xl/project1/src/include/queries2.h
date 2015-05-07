@@ -44,6 +44,9 @@ QUERIES2.H
 #define bEXT_GETENG3MIN_DATA           24
 #define bEXT_GETENG3MIN_TIME           25
 
+#define bEXT_GETADDRESSES              28
+#define bEXT_SETADDRESSES              29
+
 #define bEXT_GETCURRENT                35
 
 #define bEXT_GETEXTENDED40             42

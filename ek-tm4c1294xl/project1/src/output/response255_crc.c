@@ -29,6 +29,7 @@ RESPONSE255_CRC.C
 #include "../output/out_minute3.h"
 #include "../output/out_minute30.h"
 #include "../output/out_minute30_48.h"
+#include "../output/out_addresses.h"
 #include "../output/out_current.h"
 #include "../output/out_version.h"
 #include "../output/out_ports.h"
@@ -128,8 +129,8 @@ void    Response255_CRC(void)
 {
   switch (bInBuff5)
   {
-    case bEXT_GETPHONES: OutGetPhones(); break;
-    case bEXT_SETPHONES: OutSetPhones(); break;
+    case bEXT_GETPHONES: OutGetPhonesExt(); break;
+    case bEXT_SETPHONES: OutSetPhonesExt(); break;
 
     case bINQ_GETTRANS_ENG: OutRealCanExt(mpreTransEng); break;
     case bINQ_GETTRANS_CNT: OutRealCanExt(mpreTransCnt); break;
@@ -168,6 +169,9 @@ void    Response255_CRC(void)
     case bEXT_GETIMPCANHOU:         OutImpCanHouExt();     break;
     case bEXT_GETIMPCANMNT:         OutImpCanMntExt();     break;
     case bEXT_GETPOWCANMNT:         OutPowCanMntExt();     break;
+
+    case bEXT_GETADDRESSES: OutGetAddressesExt(); break;
+    case bEXT_SETADDRESSES: OutSetAddressesExt(); break;
 
     case bEXT_GETCURRENT:           OutCurrentExt();       break;
 
