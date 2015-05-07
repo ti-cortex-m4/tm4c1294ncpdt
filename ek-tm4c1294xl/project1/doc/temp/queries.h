@@ -364,12 +364,12 @@ QUERIES.H
 #define bEXT_RECORD_DISABLE            109
 #define bEXT_GETENGFRACDIGCAN          110
 
-#define bEXT_GETOBJECTNAME             111
-#define bEXT_SETOBJECTNAME             112
-#define bEXT_GETCANALNAME              113
-#define bEXT_SETCANALNAME              114
-#define bEXT_GETGROUPNAME              115
-#define bEXT_SETGROUPNAME              116
++   #define bEXT_GETOBJECTNAME             111
++   #define bEXT_SETOBJECTNAME             112
++   #define bEXT_GETCANALNAME              113
++   #define bEXT_SETCANALNAME              114
++   #define bEXT_GETGROUPNAME              115
++   #define bEXT_SETGROUPNAME              116
 
 #define bEXT_GETEXTENDED40_T           119
 
