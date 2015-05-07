@@ -170,10 +170,9 @@ void    Response255_CRC(void)
     case bEXT_GETIMPCANMNT:         OutImpCanMntExt();     break;
     case bEXT_GETPOWCANMNT:         OutPowCanMntExt();     break;
 
-    case bEXT_GETADDRESSES: OutGetAddressesExt(); break;
-
     case bEXT_GETADDRESS: OutGetAddress(); break;
     case bEXT_SETADDRESS: OutSetAddress(); break;
+    case bEXT_GETADDRESSES: OutGetAddressesExt(); break;
 
     case bEXT_GETCURRENT:           OutCurrentExt();       break;
 
