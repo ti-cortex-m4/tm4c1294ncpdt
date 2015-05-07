@@ -14,7 +14,7 @@ OUT_PHONES,C
 
 
 
-void    OutGetPhonesExt(void)
+void    OutGetPhones(void)
 {
   if (bInBuff6 < bCANALS)
     Common(&mpphPhones[ bInBuff6 ], sizeof(phone));
@@ -23,7 +23,7 @@ void    OutGetPhonesExt(void)
 }
 
 
-void    OutSetPhonesExt(void)
+void    OutSetPhones(void)
 {
   if (enGlobal == GLB_PROGRAM)
   {
