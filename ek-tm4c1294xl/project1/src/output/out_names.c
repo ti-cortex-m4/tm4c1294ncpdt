@@ -36,11 +36,10 @@ void    GetObjectNameExt(void)
 
 void    SetObjectNameExt(void)
 {
-uchar   i;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
-    for (i=0; i<bNAME; i++) 
+    uchar i;
+    for (i=0; i<bNAME; i++)
       szObjectName[i] = InBuff(6+i);
 
     szObjectName[bNAME-1] = 0;
@@ -65,12 +64,11 @@ void    GetCanalsNameExt(void)
 
 void    SetCanalsNameExt(void)
 {
-uchar   i;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     if (bInBuff6 < bCANALS)
     {
+      uchar i;
       for (i=0; i<bNAME; i++)
         mpszCanalsName[bInBuff6][i] = InBuff(7+i);
 
@@ -99,12 +97,11 @@ void    GetGroupsNameExt(void)
 
 void    SetGroupsNameExt(void)
 {
-uchar   i;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     if (bInBuff6 < bGROUPS)
     {
+      uchar i;
       for (i=0; i<bNAME; i++)
         mpszGroupsName[bInBuff6][i] = InBuff(7+i);
 
