@@ -6,8 +6,7 @@ KEY_LIMITS.C
 
 #include "../../../main.h"
 #include "../../../memory/mem_limits.h"
-#include "../../keyboard.h"
-#include "../../../display/display.h"
+#include "../../../console.h"
 #include "../../../digitals/limits.h"
 
 
@@ -18,11 +17,10 @@ static char const       szLimits[]       = "Верхняя граница ",
 
 
 
-void    ShowLimits(void)
+static void Show(void)
 {
   Clear();
-  sprintf(szLo+4,"%04u:%02u",mpcwStopCan[ibX],(uchar)(mpcwStopCan[ibX]/48 + 1));
-
+  sprintf(szLo+4,"%04u:%02u", mpcwStopCan[ibX], (uchar)(mpcwStopCan[ibX]/48 + 1));
   sprintf(szLo+14,"%2u",ibX+1);
 }
 
@@ -44,21 +42,21 @@ void    key_SetLimits(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowLimits();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowLimits();
+        Show();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++ibX >= bCANALS) ibX = 0;
-      ShowLimits();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
@@ -68,7 +66,9 @@ void    key_SetLimits(void)
         enKeyboard = KBD_POSTENTER;
 
         mpcwStopCan[ibX] = w + 1;
-        ShowLimits();
+        SaveFile(&flStopCan);
+
+        Show();
       }
       else Beep();
     }
@@ -81,7 +81,7 @@ void    key_SetLimits(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       (ibX > 0) ? (ibX--) : (ibX = bCANALS - 1);
-      ShowLimits();
+      Show();
     }
     else Beep();
   }
