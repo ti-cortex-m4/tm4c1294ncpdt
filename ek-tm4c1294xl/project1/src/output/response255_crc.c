@@ -19,6 +19,7 @@ RESPONSE255_CRC.C
 #include "../devices/extended_5.h"
 #include "../devices/extended_6.h"
 #include "../devices/extended_7.h"
+#include "../output/out_phones.h"
 #include "../output/out_gaps.h"
 #include "../output/out_decret.h"
 #include "../output/out_digitals.h"
@@ -127,6 +128,9 @@ void    Response255_CRC(void)
 {
   switch (bInBuff5)
   {
+    case bEXT_GETPHONES: OutGetPhones(); break;
+    case bEXT_SETPHONES: OutSetPhones(); break;
+
     case bINQ_GETTRANS_ENG: OutRealCanExt(mpreTransEng); break;
     case bINQ_GETTRANS_CNT: OutRealCanExt(mpreTransCnt); break;
     case bINQ_GETPULSE_HOU: OutRealCanExt(mprePulseHou); break;
