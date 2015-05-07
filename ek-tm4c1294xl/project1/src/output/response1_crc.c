@@ -22,7 +22,7 @@ RESPONSE1_CRC.C
 #include "out_transit.h"
 #include "out_console.h"
 #include "out_config.h"
-#include "profile/out_params.h"
+#include "out_params.h"
 #include "response_crc.h"
 #include "response252_crc.h"
 #include "response255_crc.h"
