@@ -4,5 +4,5 @@ OUT_PHONES,H
 
 ------------------------------------------------------------------------------*/
 
-void    OutGetPhones(void);
-void    OutSetPhones(void);
+void    OutGetPhone(void);
+void    OutSetPhone(void);

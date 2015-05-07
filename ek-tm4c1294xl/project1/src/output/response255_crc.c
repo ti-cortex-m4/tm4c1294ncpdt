@@ -129,8 +129,8 @@ void    Response255_CRC(void)
 {
   switch (bInBuff5)
   {
-    case bEXT_GETPHONES: OutGetPhones(); break;
-    case bEXT_SETPHONES: OutSetPhones(); break;
+    case bEXT_GETPHONE: OutGetPhone(); break;
+    case bEXT_SETPHONE: OutSetPhone(); break;
 
     case bINQ_GETTRANS_ENG: OutRealCanExt(mpreTransEng); break;
     case bINQ_GETTRANS_CNT: OutRealCanExt(mpreTransCnt); break;
@@ -170,10 +170,10 @@ void    Response255_CRC(void)
     case bEXT_GETIMPCANMNT:         OutImpCanMntExt();     break;
     case bEXT_GETPOWCANMNT:         OutPowCanMntExt();     break;
 
-    case bEXT_GETADDRESSES2: OutGetAddressesExt(); break;
+    case bEXT_GETADDRESSES: OutGetAddressesExt(); break;
 
-    case bEXT_GETADDRESSES: OutGetAddresses(); break;
-    case bEXT_SETADDRESSES: OutSetAddresses(); break;
+    case bEXT_GETADDRESS: OutGetAddress(); break;
+    case bEXT_SETADDRESS: OutSetAddress(); break;
 
     case bEXT_GETCURRENT:           OutCurrentExt();       break;
 

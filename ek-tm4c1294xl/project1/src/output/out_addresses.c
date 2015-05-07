@@ -13,7 +13,7 @@ OUT_ADDRESSES,C
 
 
 
-void    OutGetAddresses(void)
+void    OutGetAddress(void)
 {
   if (bInBuff6 < bCANALS)
   {
@@ -26,7 +26,7 @@ void    OutGetAddresses(void)
 }
 
 
-void    OutSetAddresses(void)
+void    OutSetAddress(void)
 {
   if (enGlobal == GLB_PROGRAM)
   {
