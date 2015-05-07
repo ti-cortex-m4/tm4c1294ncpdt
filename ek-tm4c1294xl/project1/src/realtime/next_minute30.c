@@ -37,6 +37,7 @@ void    NextMinute30(void)
   MakeCurrHouCan();
   SaveImpHouBuff();
 
+  MakeLimits();
   NextHouLimitsAux();
 
   if (boMntParams == FALSE) NextParamsTime();
