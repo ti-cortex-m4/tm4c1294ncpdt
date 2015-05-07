@@ -1,16 +1,15 @@
 /*------------------------------------------------------------------------------
-OUT_PHONES.C
+OUT_PHONES,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
-#include "../memory/mem_tariffs.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_phones.h"
 #include "../serial/ports.h"
-#include "../time/timedate.h"
-#include "../keyboard/keyboard.h"
-#include "../tariffs/relaxs.h"
+#include "../digitals/phones.h"
 #include "../flash/files.h"
 
 
@@ -30,12 +29,21 @@ void    OutSetPhones(void)
   {
     if (bInBuff6 < bCANALS)
     {
-      for (i=0; i<bPHONENUMBER; i++)
-        phT.szNumber[i] = InBuff(7+i);
+      phone ph;
 
-      if (TruePhone() == 1)
+      uchar i;
+      for (i=0; i<bPHONENUMBER; i++)
       {
-        mpphPhones[ bInBuff6 ] = phT;
+        ph.szNumber[i] = InBuff(7+i);
+      }
+
+      if (TruePhone(&ph) == true)
+      {
+        mpphPhones[ bInBuff6 ] = ph;
+
+        if (bInBuff6 == bCANALS - 1)
+          SaveFile(&flPhones);
+
         LongResult(bRES_OK);
       }
       else Result(bRES_BADDATA);

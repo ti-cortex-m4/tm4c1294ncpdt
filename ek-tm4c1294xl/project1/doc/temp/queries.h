@@ -228,10 +228,10 @@ QUERIES.H
 #define bINQ_ANSWER_ENABLE             231
 
 
-#define bINQ_EXTENDED                  255
+-   #define bINQ_EXTENDED                  255
 
-#define bEXT_GETPHONE                  1  
-#define bEXT_SETPHONE                  2  
++   #define bEXT_GETPHONE                  1
++   #define bEXT_SETPHONE                  2
 
 #define bEXT_GETSIMPLE_ESC_U           3
 #define bEXT_GETSIMPLE_ESC_S           4

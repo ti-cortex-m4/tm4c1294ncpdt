@@ -48,9 +48,9 @@ void    ResetPhones(void)
 }
 
 
-#ifndef MODBUS
-bool    TruePhone(void)
+
+bool    TruePhone(phone  *pph)
 {
-  return(1);
+  return true;
 }
-#endif
+
