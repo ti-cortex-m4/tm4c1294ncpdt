@@ -69,12 +69,12 @@
   with mpQuerysCRC[i] do begin actAction1 := acSetGraphCorrect;     cwOut := 1+1+48+6;          cwIn := 5+1+2;              bNumber := 255;   stName := ''; Inc(i); end;
   with mpQuerysCRC[i] do begin actAction1 := acSetGraphRecalc;      cwOut := 1+2+48+6;          cwIn := 5+1+2;              bNumber := 255;   stName := ''; Inc(i); end;
 
-  with mpQuerysCRC[i] do begin actAction1 := acGetObjectName;       cwOut := 1+1+6;             cwIn := 5+NAMES+2;          bNumber := 255;   stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetObjectName;       cwOut := 1+1+NAMES+6;       cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acGetCanalsNames;      cwOut := 1+1+1+6;           cwIn := 5+NAMES+2;          bNumber := 255;   stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetCanalsNames;      cwOut := 1+1+1+NAMES+6;     cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acGetGroupsNames;      cwOut := 1+1+1+6;           cwIn := 5+NAMES+2;          bNumber := 255;   stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetGroupsNames;      cwOut := 1+1+1+NAMES+6;     cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetObjectName;       cwOut := 1+1+6;             cwIn := 5+NAMES+2;          bNumber := 255;   stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetObjectName;       cwOut := 1+1+NAMES+6;       cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetCanalsNames;      cwOut := 1+1+1+6;           cwIn := 5+NAMES+2;          bNumber := 255;   stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetCanalsNames;      cwOut := 1+1+1+NAMES+6;     cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetGroupsNames;      cwOut := 1+1+1+6;           cwIn := 5+NAMES+2;          bNumber := 255;   stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetGroupsNames;      cwOut := 1+1+1+NAMES+6;     cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
 
   with mpQuerysCRC[i] do begin actAction1 := acGetMemory0;          cwOut := 7;                 cwIn := 15+16+2;            bNumber := 248;   stName := ''; Inc(i); end;
   with mpQuerysCRC[i] do begin actAction1 := acGetMemory1;          cwOut := 7+2;               cwIn := 15+1056+2;          bNumber := 249;   stName := ''; Inc(i); end;
