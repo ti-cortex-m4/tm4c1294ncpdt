@@ -23,7 +23,7 @@ typedef struct
 // тип 'номер телефона'
 typedef struct
 {
-  char          szNumber[bPHONENUMBER+1];
+  char          szNumber[bPHONE_SIZE+1];
 } phone;
 
 

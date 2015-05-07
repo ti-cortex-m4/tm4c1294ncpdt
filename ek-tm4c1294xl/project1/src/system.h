@@ -126,7 +126,7 @@ SYSTEM.H
 
 
 // размер телефонного номера
-#define bPHONENUMBER    13
+#define bPHONE_SIZE     13
 
 // размер названия прибора, канала, группы
 #define bNAME_SIZE      32

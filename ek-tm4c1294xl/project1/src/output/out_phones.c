@@ -32,7 +32,7 @@ void    OutSetPhones(void)
       phone ph;
 
       uchar i;
-      for (i=0; i<bPHONENUMBER; i++)
+      for (i=0; i<bPHONE_SIZE; i++)
       {
         ph.szNumber[i] = InBuff(7+i);
       }

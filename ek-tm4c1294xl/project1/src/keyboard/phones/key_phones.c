@@ -141,7 +141,7 @@ void    key_SetPhones(void)
     {
       enKeyboard = KBD_POSTINPUT2;
 
-      if (ibY < bPHONENUMBER)
+      if (ibY < bPHONE_SIZE)
         szLo[ibY++] = szDigits[bKey];
       else Beep();
     }
