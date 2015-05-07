@@ -37,7 +37,7 @@ QUERIES2.H
 #define bEXT_GETEXTENDED42             44
 
 #define bEXT_GETIMPCANHOU              16
-#define bEXT_GETADDRESSES              17
+//#define bEXT_GETADDRESSES              17
 #define bEXT_GETIMPCANMNT              18
 #define bEXT_GETPOWCANMNT              27
 
