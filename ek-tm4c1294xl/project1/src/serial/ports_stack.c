@@ -249,6 +249,19 @@ uchar   PopChar(void) {
 }
 
 
+ulong   PopLong(void)
+{
+  static combo32 co;
+
+  co.mpbBuff[3] = PopChar();
+  co.mpbBuff[2] = PopChar();
+  co.mpbBuff[1] = PopChar();
+  co.mpbBuff[0] = PopChar();
+
+  return co.dwBuff;
+}
+
+
 float   PopFloat(void)
 {
   static combo32 co;

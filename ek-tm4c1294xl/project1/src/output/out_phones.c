@@ -29,7 +29,7 @@ void    OutSetPhonesExt(void)
   {
     if (bInBuff6 < bCANALS)
     {
-      phone ph;
+      static phone ph;
 
       uchar i;
       for (i=0; i<bPHONE_SIZE; i++)
