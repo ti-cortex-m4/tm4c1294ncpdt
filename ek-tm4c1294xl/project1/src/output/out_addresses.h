@@ -4,7 +4,7 @@ OUT_ADDRESSES,H
 
 ------------------------------------------------------------------------------*/
 
-void    OutGetAddresses(void);
-void    OutSetAddresses(void);
+void    OutGetAddress(void);
+void    OutSetAddress(void);
 
 void    OutGetAddressesExt(void);

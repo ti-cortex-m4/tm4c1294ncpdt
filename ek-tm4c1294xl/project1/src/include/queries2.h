@@ -9,8 +9,8 @@ QUERIES2.H
 #define __INQUIRYS2
 
 
-#define bEXT_GETPHONES                 1
-#define bEXT_SETPHONES                 2
+#define bEXT_GETPHONE                  1
+#define bEXT_SETPHONE                  2
 
 #define bEXT_GETSIMPLE_ESC_U           3
 #define bEXT_GETSIMPLE_ESC_S           4
@@ -37,15 +37,15 @@ QUERIES2.H
 #define bEXT_GETEXTENDED42             44
 
 #define bEXT_GETIMPCANHOU              16
-#define bEXT_GETADDRESSES2             17
+#define bEXT_GETADDRESSES              17
 #define bEXT_GETIMPCANMNT              18
 #define bEXT_GETPOWCANMNT              27
 
 #define bEXT_GETENG3MIN_DATA           24
 #define bEXT_GETENG3MIN_TIME           25
 
-#define bEXT_GETADDRESSES              28
-#define bEXT_SETADDRESSES              29
+#define bEXT_GETADDRESS                28
+#define bEXT_SETADDRESS                29
 
 #define bEXT_GETCURRENT                35
 
