@@ -196,7 +196,7 @@ uchar   i;
   Clear();
   strcpy(szLo, ph.szNumber);
 
-  for (i=0; i<bPHONENUMBER; i++)
+  for (i=0; i<bPHONE_SIZE; i++)
   {
     if ( ph.szNumber[i] == 0 ) break;
     PushChar( ph.szNumber[i] );
