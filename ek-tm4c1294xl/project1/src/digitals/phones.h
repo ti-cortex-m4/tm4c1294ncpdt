@@ -13,4 +13,4 @@ extern  file const              flCustomModem;
 void    InitPhones(void);
 void    ResetPhones(void);
 
-bool    TruePhone(void);
+bool    TruePhone(phone  *pph);
