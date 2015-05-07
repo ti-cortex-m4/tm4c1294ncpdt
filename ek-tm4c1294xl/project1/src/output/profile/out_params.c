@@ -67,9 +67,7 @@ void    OutSetParam(void)
         mpdiParam[iwParam] = di;
 
         if (iwParam == wPARAMS - 1)
-        {
           SaveFile(&flParams);
-        }
 
         LongResult(bRES_OK);
       }
@@ -107,9 +105,7 @@ void    OutSetParamDiv(void)
       mpreParamDiv[iwParam] = PopFloat();
 
       if (iwParam == wPARAMS - 1)
-      {
         SaveFile(&flParamsDiv);
-      }
 
       LongResult(bRES_OK);
     }

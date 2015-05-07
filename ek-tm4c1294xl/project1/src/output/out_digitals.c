@@ -45,9 +45,7 @@ void    OutSetDigital(void)
       	mpdiDigital[bInBuff5] = di;
 
         if (bInBuff5 == bCANALS - 1)
-        {
           SaveFile(&flDigitals);
-        }
 
         LongResult(bRES_OK);
       }

@@ -40,7 +40,9 @@ void    SetObjectNameExt(void)
   {
     uchar i;
     for (i=0; i<bNAME_SIZE; i++)
+    {
       szObjectName[i] = InBuff(6+i);
+    }
 
     szObjectName[bNAME_SIZE-1] = 0;
 
@@ -70,7 +72,9 @@ void    SetCanalsNameExt(void)
     {
       uchar i;
       for (i=0; i<bNAME_SIZE; i++)
+      {
         mpszCanalsName[bInBuff6][i] = InBuff(7+i);
+      }
 
       mpszCanalsName[bInBuff6][bNAME_SIZE-1] = 0;
 
@@ -103,7 +107,9 @@ void    SetGroupsNameExt(void)
     {
       uchar i;
       for (i=0; i<bNAME_SIZE; i++)
+      {
         mpszGroupsName[bInBuff6][i] = InBuff(7+i);
+      }
 
       mpszGroupsName[bInBuff6][bNAME_SIZE-1] = 0;
 
