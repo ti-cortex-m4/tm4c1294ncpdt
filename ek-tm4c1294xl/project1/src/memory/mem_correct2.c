@@ -15,7 +15,7 @@ boolean                 boCorrect2;
 uint                    mpcwCorrect2[15];
 
 // буфер пароля
-uchar                   mpbCorrect2[10];
+uchar                   mpbPassCorrect2[10];
 
 // счётчики
 ulong                   cdwCorrect20,
