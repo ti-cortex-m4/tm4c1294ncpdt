@@ -71,19 +71,18 @@ bit     Correct2Allow(void)
 }
 
 #endif
+*/
 
-
-void    Correct2(event  evCode)
+void    Correct2(event  ev)
 {
-uchar i;
-
-  if ((i = GetCorrectIndex(evCode)) == 0) return;
-
-  mpcwCorrect2[0]++;
-  mpcwCorrect2[i]++;
+//  uchar i;
+//  if ((i = GetCorrectIndex(ev)) == 0) return;
+//
+//  mpcwCorrect2[0]++;
+//  mpcwCorrect2[i]++;
 }
 
-
+/*
 #ifndef MODBUS
 
 void    OutCorrect21(void)

@@ -7,6 +7,7 @@ U_CONFIG.C
 
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
+#include "../../memory/mem_realtime.h"
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_digitals0.h"
@@ -20,6 +21,9 @@ U_CONFIG.C
 #include "../../digitals/digitals.h"
 #include "../../digitals/devices.h"
 #include "../../hardware/memory.h"
+#include "../../time/timedate.h"
+#include "../../time/rtc.h"
+#include "../../time/correct1.h"
 #include "../../access.h"
 #include "../../groups.h"
 #include "response_uni.h"
@@ -167,24 +171,26 @@ uchar   GetDeviceNumber(uchar  ibCan)
 }
 
 
-/*
+
 void    GetCorrectUni(void)
 {
   InitPop(6);
-  Pop(&tiAlt, sizeof(time));
 
-  if (ValidTimeDate() == 1)
+  time ti;
+  Pop(&ti, sizeof(time));
+
+  if (ValidTimeDate(ti) == 1)
   {
-    if ((tiCurr.bDay   != tiAlt.bDay)   ||
-        (tiCurr.bMonth != tiAlt.bMonth) ||
-        (tiCurr.bYear  != tiAlt.bYear))
+    if ((tiCurr.bDay   != ti.bDay)   ||
+        (tiCurr.bMonth != ti.bMonth) ||
+        (tiCurr.bYear  != ti.bYear))
       Result2(bUNI_BADTIME);
     else
-    if (GetCurrHouIndex() != (tiAlt.bHour*2 + tiAlt.bMinute/30))
+    if ((tiCurr.bHour*2 + tiCurr.bMinute/30) != (ti.bHour*2 + ti.bMinute/30))
       Result2(bUNI_BADTIME);
     else
     { 
-      CorrectTime_Full(EVE_UNI_CORRECT);
+      CorrectTime_Full(ti, EVE_UNI_CORRECT);
 
       Result2(bUNI_OK);
     }
@@ -193,7 +199,7 @@ void    GetCorrectUni(void)
 }
 
 
-
+/*
 void    GetCorrectionsUni(void)
 {
   InitPushUni();

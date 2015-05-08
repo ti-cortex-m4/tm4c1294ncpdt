@@ -193,14 +193,9 @@ void    RunResponseUNI(void)
 
     switch (bInBuff5 + bInBuff4*0x100)
     {
-      case wUNI_GETCURRTIME:
-        Common2(GetCurrTimeDate(), sizeof(time));
-        break;
+      case wUNI_GETCURRTIME: Common2(GetCurrTimeDate(), sizeof(time)); break;
+      case wUNI_GETCORRECTTIME: GetCorrectUni(); break;
 /*
-      case wUNI_GETCORRECTTIME: 
-        GetCorrectUni(); 
-        break;
-
       case wUNI_GETCORRECTIONS: 
         GetCorrectionsUni(); 
         break;

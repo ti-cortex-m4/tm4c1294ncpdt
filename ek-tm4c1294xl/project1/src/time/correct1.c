@@ -3,17 +3,15 @@ CORRECT1.C
 
 
 ------------------------------------------------------------------------------*/
+
+#include "../main.h"
+#include "../memory/mem_realtime.h"
+#include "../time/timedate.h"
+#include "../time/rtc.h"
+#include "correct1.h"
+
+
 /*
-#include        "main.h"
-#include        "xdata.h"
-#include        "timedate.h"
-#include        "engine.h"
-#include        "rtc.h"
-#include        "record.h"
-#include        "gps.h"
-
-
-
 uchar   GetCorrectIndex(event  evCode)
 {
   switch (evCode)
@@ -33,49 +31,43 @@ uchar   GetCorrectIndex(event  evCode)
 
 
 #ifndef MODBUS
-
-void    CorrectTime_Full(event  evCode)
-{
-uchar   i;
- 
-  if ((i = GetCorrectIndex(evCode)) == 0) return;
-
-  AddKeyRecord(evCode);
-  tiPrevCorrect = tiCurr;
-  tiPostCorrect = tiAlt;
-
-
-  tiSetRTC = tiAlt;
-  SetCurrTime();
-  tiPrev = tiAlt;
-
-  AddKeyRecord(EVE_TIME_OK);
-
-
-  tiAlt = tiPostCorrect;
-  dwBuffC = GetSecondIndex();
-
-  tiAlt = tiPrevCorrect;
-  if (dwBuffC > GetSecondIndex())
-  {
-    dwBuffC = dwBuffC - GetSecondIndex();
-
-    mpcwPosValueCurr[0] += (uint)dwBuffC;
-    mpcwPosValueCurr[i] += (uint)dwBuffC;
-    mpcwPosCountCurr[0]++;
-    mpcwPosCountCurr[i]++;
-  }
-  else
-  {
-    dwBuffC = GetSecondIndex() - dwBuffC;
-
-    mpcwNegValueCurr[0] += (uint)dwBuffC;
-    mpcwNegValueCurr[i] += (uint)dwBuffC;
-    mpcwNegCountCurr[0]++;
-    mpcwNegCountCurr[i]++;
-  }
-}
-
-#endif
-
 */
+void    CorrectTime_Full(time  ti, event  ev)
+{
+//  uchar i;
+//  if ((i = GetCorrectIndex(evCode)) == 0) return;
+//
+//  AddKeyRecord(evCode);
+//  tiPrevCorrect = tiCurr;
+//  tiPostCorrect = tiAlt;
+
+
+  SetCurrTime(ti);
+  tiPrev = ti;
+
+//  AddKeyRecord(EVE_TIME_OK);
+//
+//
+//  tiAlt = tiPostCorrect;
+//  dwBuffC = GetSecondIndex();
+//
+//  tiAlt = tiPrevCorrect;
+//  if (dwBuffC > GetSecondIndex())
+//  {
+//    dwBuffC = dwBuffC - GetSecondIndex();
+//
+//    mpcwPosValueCurr[0] += (uint)dwBuffC;
+//    mpcwPosValueCurr[i] += (uint)dwBuffC;
+//    mpcwPosCountCurr[0]++;
+//    mpcwPosCountCurr[i]++;
+//  }
+//  else
+//  {
+//    dwBuffC = GetSecondIndex() - dwBuffC;
+//
+//    mpcwNegValueCurr[0] += (uint)dwBuffC;
+//    mpcwNegValueCurr[i] += (uint)dwBuffC;
+//    mpcwNegCountCurr[0]++;
+//    mpcwNegCountCurr[i]++;
+//  }
+}
