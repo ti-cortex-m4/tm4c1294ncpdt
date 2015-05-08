@@ -3,46 +3,24 @@ RESPONSE_ESC.C
 
 
 ------------------------------------------------------------------------------*/
+
+#include "../../main.h"
+#include "../../memory/mem_settings.h"
+#include "../../memory/mem_ports.h"
+#include "../../memory/mem_esc.h"
+//#include "../../keyboard/keyboard.h"
+//#include "../../keyboard/key_timedate.h"
+//#include "../../display/display.h"
+#include "../../serial/ports.h"
+#include "../../serial/flow.h"
+//#include "../../include/states.h"
+//#include "../../include/queries_uni.h"
+//#include "../../time/rtc.h"
+//#include "../../kernel/crc-16.h"
+#include "esc.h"
+
+
 /*
-#include        <string.h>
-#include        <stdio.h>
-#include        "main.h"
-#include        "xdata.h"
-#include        "queries.h"
-#include        "display.h"
-#include        "engine.h"
-#include        "access.h"
-#include        "rtc.h"
-#include        "delay.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "postinput.h"
-#include        "nexttime.h"
-#include        "energy.h"
-#include        "power.h"
-#include        "beep.h"
-#include        "general.h"
-#include        "timedate.h"
-#include        "tariffs.h"
-#include        "zones.h"
-#include        "groups.h"
-#include        "relaxs.h"
-#include        "pause.h"
-#include        "ports.h"
-#include        "devices.h"
-#include        "flow.h"
-#include        "sensors.h"
-#include        "defects.h"
-#include        "memory.h"
-#include        "at45d081.h"
-#include        "gps2.h"
-#include        "correct2.h"
-#include        "correct3.h"
-#include        "_automatic2.h"
-#include        "_timedate.h"
-
-
-
 //                                         0123456789ABCDEF
 message         code    szCtrlZ         = "Ctrl Z          ";
 
@@ -50,8 +28,8 @@ message         code    szCtrlZ         = "Ctrl Z          ";
 
 void    InitEsc(void)
 {
-  if ((bEscMaxMachines == 0) || (bEscMaxMachines > bMACHINES)) 
-    bEscMaxMachines = bMACHINES;
+  if ((bMaxMachinesEsc == 0) || (bMaxMachinesEsc > bMACHINES)) 
+    bMaxMachinesEsc = bMACHINES;
 }
 
 
@@ -200,7 +178,7 @@ void    EscPtrReset(void)
 
 void    EscDisplay(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0x0D); PushChar(0x0A); Push(&szHi,bDISPLAY);
   PushChar(0x0D); PushChar(0x0A); Push(&szLo,bDISPLAY);
@@ -213,7 +191,7 @@ void    EscDisplay(void)
 
 void    EscError(uchar  chCode)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0x1B);
   PushChar(bQuery);
@@ -240,7 +218,7 @@ uchar   i;
 
 void    EscPowGrpMnt(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushPowGrpMnt( (bMINUTES+ibSoftMnt-1) % bMINUTES );
   PushPowGrpMnt( (bMINUTES+ibSoftMnt-2) % bMINUTES );
@@ -256,7 +234,7 @@ uchar   i;
 
   if (LoadImpDay(ibDay) == 1)
   {
-    InitPush();
+    InitPush(0);
     for (i=0; i<bFRAMES; i++)
     {
       PGetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], i+bFRAMES*ibActives, bMask);
@@ -275,7 +253,7 @@ uchar   i;
 
   if (LoadImpMon(ibMon) == 1)
   {
-    InitPush();
+    InitPush(0);
     for (i=0; i<bFRAMES; i++)
     {
       PGetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], i+bFRAMES*ibActives, bMask);
@@ -302,7 +280,7 @@ void    EscImpCanMnt(uchar  bSize)
 {
 uchar   i,j;
 
-  InitPush();
+  InitPush(0);
   for (i=0; i<bSize; i++)
   {
     for (j=0; j<16; j++)
@@ -324,7 +302,7 @@ uchar   i,j;
   for (i=0; i<mpbEsc_l[ ibActives ]; i++)
     wBuffD = (wHOURS+wBuffD-48) % wHOURS;
 
-  InitPush();
+  InitPush(0);
 
   for (i=0; i<48; i++)
   {
@@ -373,7 +351,7 @@ uchar   i;
 
   iwHou = PrevDayIndex(mpbEsc_l[ibActives]);
 
-  InitPush();
+  InitPush(0);
 
   for (i=0; i<48; i++)
   {
@@ -401,7 +379,7 @@ uint    j;
 
   iwHou = PrevDayIndex(mpbEsc_l[ibActives]);
 
-  InitPush();
+  InitPush(0);
 
   for (i=0; i<48; i++)
   {
@@ -430,7 +408,7 @@ uchar   i;
 
   iwHou = PrevDayIndex(mpbEsc_l[ibActives]);
 
-  InitPush();
+  InitPush(0);
 
   for (ibCan=0; ibCan<16; ibCan++)
     mpcbDefCan[ibCan] = 0;
@@ -457,7 +435,7 @@ void    EscImpCanMon(void)
 {
 uchar   i,j;
 
-  InitPush();
+  InitPush(0);
 
   for (i=0; i<2; i++)
   {
@@ -507,7 +485,7 @@ uchar   i,j;
   for (i=0; i<mpbEsc_l[ ibActives ]; i++)
     wBuffD = (wHOURS+wBuffD-48) % wHOURS;
 
-  InitPush();
+  InitPush(0);
 
   for (i=0; i<48; i++)
   {
@@ -551,7 +529,7 @@ void    EscEngGrpHou(void)
 {
 uchar   i,j;
 
-  InitPush();
+  InitPush(0);
 
   for (i=0; i<2; i++)
   {
@@ -622,7 +600,7 @@ uchar   i,j;
 
 void    EscMaxPowGrp6Day(uchar  ibDay)
 {
-  InitPush();
+  InitPush(0);
 
   if ((PushMaxPowGrpDayReal(ibDay,bFRAMES) == 1) &&
       (PushMaxPowGrpDayTime(ibDay,bFRAMES) == 1))  Esc(bFRAMES*4*(4+1));
@@ -634,7 +612,7 @@ void    EscMaxPowGrp6Day(uchar  ibDay)
 
 void    EscMaxPowGrp2Day(void)
 {
-  InitPush();
+  InitPush(0);
 
   if ((PushMaxPowGrpDayReal(ibHardDay,    2) == 1) &&
       (PushMaxPowGrpDayReal(PrevHardDay(),2) == 1) &&
@@ -693,7 +671,7 @@ uchar   i,j;
 
 void    EscMaxPowGrp6Mon(uchar  ibMon)
 {
-  InitPush();
+  InitPush(0);
 
   if ((PushMaxPowGrpMonReal(ibMon,bFRAMES) == 1) &&
       (PushMaxPowGrpMonTime(ibMon,bFRAMES) == 1))  Esc(bFRAMES*4*(4+2));
@@ -705,7 +683,7 @@ void    EscMaxPowGrp6Mon(uchar  ibMon)
 
 void    EscMaxPowGrp2Mon(void)
 {
-  InitPush();
+  InitPush(0);
 
   if ((PushMaxPowGrpMonReal(ibHardMon,    2) == 1) &&
       (PushMaxPowGrpMonReal(PrevHardMon(),2) == 1) &&
@@ -747,7 +725,7 @@ uchar   i,j;
 
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-  InitPush();
+  InitPush(0);
   for (i=0; i<16; i++)
   {
     sprintf(szHi+14,"%2bu",i+1);
@@ -806,7 +784,7 @@ uchar   i,j;
 
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-  InitPush();
+  InitPush(0);
   for (i=0; i<16; i++)
   {
     sprintf(szHi+14,"%2bu",i+1);
@@ -861,7 +839,7 @@ uchar   i,j;
 
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-  InitPush();
+  InitPush(0);
   for (i=0; i<16; i++)
   {
     sprintf(szHi+14,"%2bu",i+1);
@@ -916,43 +894,61 @@ uchar   i,j;
   LoadDisplay();
   NextPause();                                    // внимание !
 }
+*/
 
 
-
-void    ShowInfoEsc(uchar  code  *szT)
+void    ShowInfoEsc(uchar  *szT)
 {
-  if (bProgram == bGET_ANALYSIS1)
-  {
-    sprintf(szHi,"Порт %bu: %s",ibPort+1,szT);
-    Clear();
-    NoShowTime(0);
-  }
+//  if (bProgram == bGET_ANALYSIS1)
+//  {
+//    sprintf(szHi,"Порт %bu: %s",ibPort+1,szT);
+//    Clear();
+//    NoShowTime(0);
+//  }
 }
 
 
 void    ShowCommandEsc(void)
 {
-  if (bProgram == bGET_ANALYSIS1)
-  {
-    sprintf(szHi,"Порт %bu: Esc %c",ibPort+1,bQuery);
-    NoShowTime(0);
-  }
+//  if (bProgram == bGET_ANALYSIS1)
+//  {
+//    sprintf(szHi,"Порт %bu: Esc %c",ibPort+1,bQuery);
+//    NoShowTime(0);
+//  }
 }
 
 
 void    ShowNumberEsc(uchar  i)
 {
-  if (bProgram == bGET_ANALYSIS1)
-  {
-    sprintf(szHi+14,"%2bu",i);
-    NoShowTime(0);
-  }
+//  if (bProgram == bGET_ANALYSIS1)
+//  {
+//    sprintf(szHi+14,"%2bu",i);
+//    NoShowTime(0);
+//  }
 }
 
 
 
-// базовая программа обработки запросов
-void    EscSlave(void)
+void    Esc(uint  wSize)
+{
+  InitPush(0);
+
+  uchar bT = 0;
+
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+    bT += SkipChar();
+  }
+
+  PushChar(bT);
+
+  Answer(wSize+1, SER_OUTPUT_SLAVE);
+}
+
+
+
+void    RunResponseEsc(void)
 {
 uchar   i,j;
 
@@ -984,8 +980,6 @@ uchar   i,j;
       case 0x30:
         ibActives = 0xFF;
         mpibActives[ibPort] = ibActives;
-
-        EscInfo();
         return;
 
       case 0x31:
@@ -1004,18 +998,18 @@ uchar   i,j;
       case 0x3E:
       case 0x3F:
       case 0x40:
-        for (i=0; i<bEscMaxMachines; i++)
+        for (i=0; i<bMaxMachinesEsc; i++)
         {
           if ((bQuery - 0x31) == (bLogical + i - 1))
             break;
         }
 
-        if (i != bEscMaxMachines)
+        if (i != bMaxMachinesEsc)
         {
           ibActives = (bQuery - 0x31) - (bLogical - 1);
           mpibActives[ibPort] = ibActives;
 
-          InitPush();
+          InitPush(0);
           PushChar(bQuery);
           Esc(1);
 
@@ -1037,15 +1031,15 @@ uchar   i,j;
       return;
     }
 
-    if (ibActives >= bEscMaxMachines) return;
+    if (ibActives >= bMaxMachinesEsc) return;
 
     ShowCommandEsc();
 
-    if (boBlockingEsc == boTrue) 
+    if (boBlockingEsc == TRUE)
     {
       if (bQuery != 'R') 
       {
-        InitPush();
+        InitPush(0);
         Push("Disabled !",10);
         Esc(10);
         return;
@@ -1053,7 +1047,7 @@ uchar   i,j;
     }
 
     switch (bQuery)
-    {
+    {/*
       case 'B':  EscEngGrpDay(PrevHardDay(), 0x0F);  break;
       case 'C':  EscEngGrpDay(PrevHardDay(), 0x0C);  break;
       case 'D':  EscEngGrpDay(PrevHardDay(), 0x02);  break;
@@ -1108,7 +1102,7 @@ uchar   i,j;
 
         if (++i >= 6) i = 0;
 
-        InitPush();
+        InitPush(0);
         PushChar('j');
         PushChar(i);
         Esc(2);
@@ -1123,7 +1117,7 @@ uchar   i,j;
         { 
           Correct2(EVE_ESC_K);
 
-          InitPush();
+          InitPush(0);
           Push("Correction disabled !",21);
           Esc(21);
           break;
@@ -1133,7 +1127,7 @@ uchar   i,j;
         { 
           Correct3(EVE_ESC_K);
 
-          InitPush();
+          InitPush(0);
           Push("Correction blocked ! ",21);
           Esc(21);
           break;
@@ -1147,7 +1141,7 @@ uchar   i,j;
         { 
           Correct2(EVE_ESC_k);
 
-          InitPush();
+          InitPush(0);
           Push("Correction disabled !",21);
           Esc(21);
           break;
@@ -1157,13 +1151,13 @@ uchar   i,j;
         { 
           Correct3(EVE_ESC_k);
 
-          InitPush();
+          InitPush(0);
           Push("Correction blocked ! ",21);
           Esc(21);
           break;
         }
 
-        InitPush();
+        InitPush(0);
         PushChar('k');
 
         if (CorrectTime(EVE_ESC_k) == 1)
@@ -1181,7 +1175,7 @@ uchar   i,j;
 
         mpbEsc_l[ ibActives ] = i;
 
-        InitPush();
+        InitPush(0);
         PushChar('l');
         PushChar(i);
         Esc(2);
@@ -1196,7 +1190,7 @@ uchar   i,j;
 
         mpbEsc_v[ ibActives ] = i;
 
-        InitPush();
+        InitPush(0);
         PushChar('v');
         PushChar(i);
         Esc(2);
@@ -1205,7 +1199,7 @@ uchar   i,j;
         break;
 
       case '{':
-        InitPush();
+        InitPush(0);
         for (i=0; i<16; i++)
         {
           tiAlt = *PGetCanTime(mptiEsc_S, i+16*ibActives);    
@@ -1215,7 +1209,7 @@ uchar   i,j;
         break;
 
       case '}':
-        InitPush();
+        InitPush(0);
         for (i=0; i<16; i++)
         {
           tiAlt = *PGetCanTime(mptiEsc_V, i+16*ibActives);    
@@ -1225,7 +1219,7 @@ uchar   i,j;
         break;
 
       case 'T':
-        InitPush();
+        InitPush(0);
         PushChar( ToBCD(tiCurr.bSecond) );
         PushChar( ToBCD(tiCurr.bMinute) );
         PushChar( ToBCD(tiCurr.bHour  ) );
@@ -1236,7 +1230,7 @@ uchar   i,j;
         break;
 
       case 'W':
-        InitPush();
+        InitPush(0);
 
         if (GetFlashStatus() == 0)
           i = 0x07;                            // норма
@@ -1267,7 +1261,7 @@ uchar   i,j;
         break;
 
       case 'w':
-        InitPush();
+        InitPush(0);
 
         // первый байт состояния
         i = bOldMode;
@@ -1395,7 +1389,7 @@ uchar   i,j;
         break;
 
       case '*':
-        InitPush();
+        InitPush(0);
 
         ibMode = 0;
         for (ibMonth=0; ibMonth<12; ibMonth++)
@@ -1430,7 +1424,7 @@ uchar   i,j;
         break;
 
       case 'R':
-        InitPush();
+        InitPush(0);
         Push("CќЊ+2 V.06 10.10.08!",20);
         PushChar(0x31+ibActives);
         Esc(21);
@@ -1467,7 +1461,7 @@ uchar   i,j;
 
 #ifdef  FLOW
       case 0x1C:
-        InitPush();
+        InitPush(0);
 
         for (i=0; i<16; i++)
           PushChar(GetDigitalDevice(i+16*ibActives));
@@ -1484,7 +1478,7 @@ uchar   i,j;
       case 0x1F:
         if (cbWaitQuery != 0)
         {
-          InitPush();
+          InitPush(0);
           Push("Transit error: busy !",21);
           Esc(21);
         }
@@ -1492,7 +1486,7 @@ uchar   i,j;
         {
           RunFlow0();
 
-          InitPush();
+          InitPush(0);
           Push("Transit OK: 1 !",15);
           Esc(15);
         }
@@ -1500,7 +1494,7 @@ uchar   i,j;
         {
           RunFlow1();
 
-          InitPush();
+          InitPush(0);
           Push("Transit OK: 1 !",15);
           Esc(15);
         }
@@ -1508,7 +1502,7 @@ uchar   i,j;
 #endif
 
       case 'Щ':
-        InitPush();
+        InitPush(0);
         PushChar(bPortGPS);
         PushChar(bStatusGPS);
         PushChar(bVersionMaxGPS);
@@ -1532,7 +1526,7 @@ uchar   i,j;
         break;
 
       case 'Ъ':
-        InitPush();
+        InitPush(0);
         for (i=0; i<bCANALS; i++)
         {
           PushChar(mpboDefEscV[i]); PushInt(mpcwEscV_OK[i]); PushInt(mpcwEscV_Error[i]);
@@ -1543,7 +1537,7 @@ uchar   i,j;
         break;
 
       case 'Ь':
-        InitPush();
+        InitPush(0);
         for (i=0; i<bCANALS; i++)
         {
           PushInt(mpcwDigital_OK[i]);
@@ -1554,32 +1548,31 @@ uchar   i,j;
         break;
 
       case 'Ю':
-        InitPush();
+        InitPush(0);
         PushInt(GetCODEChecksum());
         PushInt(wPrivate);
         PushChar(bLogical);
         Esc(5);
         break;
-
+*/
       case 'Я':
-        InitPush();
+        InitPush(0);
         PushInt(wPrivate);
         Esc(2);
         break;
 
       default:
 //        EscPtrReset();
-        EscInfo();
         break;
     }
   }
 }
 
 
-
+/*
 void    EscAT(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar('A');
   PushChar('T');
@@ -1590,7 +1583,7 @@ void    EscAT(void)
 
   DelayMsg();
 
-  InitPush();
+  InitPush(0);
 
   PushChar('A');
   PushChar('T');

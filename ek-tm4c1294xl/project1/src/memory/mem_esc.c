@@ -9,4 +9,4 @@ MEM_ESC.C
 
 
 // текущее количество виртуальных приборов —Ёћ-1
-uchar                   bEscMaxMachines;
+uchar                   bMaxMachinesEsc;

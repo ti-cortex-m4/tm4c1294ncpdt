@@ -17,7 +17,7 @@ uchar                   ibMonthP;
 
 void    QueryHistoryP1(uchar  ibRecord)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
@@ -41,7 +41,7 @@ void    QueryHistoryP1(uchar  ibRecord)
 
 void    QueryHistoryP2(uchar  ibRecord)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
@@ -65,7 +65,7 @@ void    QueryHistoryP2(uchar  ibRecord)
 
 void    QueryHistoryP3(uchar  ibRecord)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('D');
