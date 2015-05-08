@@ -384,7 +384,7 @@ uchar   i;
       if (EscDefCanHou(i) == 1)
         PushChar(boTrue);
       else
-        PushChar(boFalse);
+        PushChar(FALSE);
     }
 
     if (++iwHou >= wHOURS) iwHou = 0;
@@ -759,7 +759,7 @@ uchar   i,j;
       tiAlt = *PGetCurrTimeDate();
       SetCanTime(mptiEsc_S, i+16*ibActives);   
     }
-    else if (mpboEnblCan[i+16*ibActives] == boFalse)
+    else if (mpboEnblCan[i+16*ibActives] == FALSE)
     {
       reBuffA = 0;
 
@@ -816,7 +816,7 @@ uchar   i,j;
       moAlt.tiAlfa = *PGetCurrTimeDate();
       moAlt.tiBeta = moAlt.tiAlfa;
     }
-    else if (mpboEnblCan[i+16*ibActives] == boFalse)
+    else if (mpboEnblCan[i+16*ibActives] == FALSE)
     {
       moAlt.tiAlfa = tiZero;
       moAlt.tiBeta = moAlt.tiAlfa;
@@ -876,7 +876,7 @@ uchar   i,j;
       tiAlt = *PGetCurrTimeDate();
       SetCanTime(mptiEsc_V, i+16*ibActives);   
     }
-    else if (mpboEnblCan[i+16*ibActives] == boFalse)
+    else if (mpboEnblCan[i+16*ibActives] == FALSE)
     {
       reBuffA = 0;
 
@@ -1416,12 +1416,12 @@ uchar   i,j;
         PushChar(0);
         PushChar(0);
 
-        if (boPublicCurr == boFalse)
+        if (boPublicCurr == FALSE)
           PushChar(1);
         else
           PushChar(0);
 
-        if (boPublicPrev == boFalse)
+        if (boPublicPrev == FALSE)
           PushChar(1);
         else
           PushChar(0);

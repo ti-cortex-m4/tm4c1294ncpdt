@@ -5,13 +5,14 @@ CORRECT2.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_correct2.h"
 #include "correct2.h"
 
 
-/*
+
 void    ResetCorrect2(void)
 {
-  boCorrect2 = boFalse;
+  boCorrect2 = FALSE;
 
   memset(&mpcwCorrect2, 0, sizeof(mpcwCorrect2));
   memset(&mpbCorrect2, 0, sizeof(mpbCorrect2));
@@ -22,17 +23,17 @@ void    ResetCorrect2(void)
   cdwCorrect23 = 0;
   cdwCorrect24 = 0;
 }
-*/
+
+
 
 bool    Correct2Disabled(void)
 {
-  return false; //(boCorrect2 == boTrue);
+  return boCorrect2 == TRUE;
 }
 
-/*
-#ifndef MODBUS
 
-bit     SuperUser2(void)
+
+bool    SuperUser2(void)
 {
   return( (mpbCorrect2[0] == 2) &&
           (mpbCorrect2[1] == 6) &&
@@ -45,7 +46,8 @@ bit     SuperUser2(void)
 }
 
 
-bit     Correct2Allow(void)
+
+bool    Correct2Allowed(void)
 {
   cdwCorrect20++;
 
@@ -61,7 +63,7 @@ bit     Correct2Allow(void)
   mpbCorrect2[8] ^= 0xE6;
   mpbCorrect2[9] ^= 0x47;
 
-  if (boCorrect2 == boFalse) { cdwCorrect21++; return 1; }
+  if (boCorrect2 == FALSE) { cdwCorrect21++; return 1; }
   if (SuperUser2()) { cdwCorrect22++; return 1; }
 
   if (memcmp(mpbPassOne, mpbCorrect2, 10) == 0)
@@ -70,8 +72,7 @@ bit     Correct2Allow(void)
     { cdwCorrect24++; return 0; }
 }
 
-#endif
-*/
+
 
 void    Correct2(event  ev)
 {
@@ -82,14 +83,13 @@ void    Correct2(event  ev)
 //  mpcwCorrect2[i]++;
 }
 
-/*
-#ifndef MODBUS
+
 
 void    OutCorrect21(void)
 {
-uchar i;
-
   InitPushCRC();
+
+  uchar i;
   for (i=0; i<100; i++) PushChar(0);
 
   InitPushCRC();
@@ -106,6 +106,3 @@ uchar i;
 
   Output(100);
 }
-
-#endif
-*/
