@@ -145,13 +145,13 @@ uchar   i;
       case 0x3E:
       case 0x3F:
       case 0x40:
-        for (i=0; i<bMaxMachineEsc; i++)
+        for (i=0; i<bMachineEsc; i++)
         {
           if ((bQuery - 0x31) == (bLogical + i - 1))
             break;
         }
 
-        if (i != bMaxMachineEsc)
+        if (i != bMachineEsc)
         {
           ibMachineEsc = (bQuery - 0x31) - (bLogical - 1);
           mpibMachineEsc[ibPort] = ibMachineEsc;
@@ -178,7 +178,7 @@ uchar   i;
       return;
     }
 
-    if (ibMachineEsc >= bMaxMachineEsc) return;
+    if (ibMachineEsc >= bMachineEsc) return;
 
     ShowCommand();
 

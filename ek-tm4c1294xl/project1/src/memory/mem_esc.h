@@ -4,7 +4,7 @@ MEM_ESC.H
 
 ------------------------------------------------------------------------------*/
 
-extern  uchar                   bMaxMachineEsc;
+extern  uchar                   bMachineEsc;
 
 extern  uchar                   mpibMachineEsc[bPORTS];
 

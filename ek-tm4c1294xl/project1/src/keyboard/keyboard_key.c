@@ -195,6 +195,8 @@ void    Keyboard_Key(void)
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
       case bSET_CONTROL_TIME:   key_SetControlTime();   break;
       case bSET_MANAGE_TIME:    key_SetManageTime();    break;
+
+      case bSET_MASHINES_ESC:   key_SetMashinesEsc();   break;
       case bSET_BLOCK_ESC:      key_SetBlockEsc();      break;
 
       case bSET_EXTENDED_ESC_S: key_SetExtendedEscS();  break;
@@ -347,6 +349,8 @@ void    Keyboard_Key(void)
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
       case bSET_CONTROL_TIME:   key_SetControlTime();   break;
       case bSET_MANAGE_TIME:    key_SetManageTime();    break;
+
+      case bSET_MASHINES_ESC:   key_SetMashinesEsc();   break;
       case bSET_BLOCK_ESC:      key_SetBlockEsc();      break;
 
       case bSET_EXTENDED_ESC_S: key_SetExtendedEscS();  break;
@@ -584,6 +588,8 @@ void    Keyboard_Key(void)
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
       case bSET_CONTROL_TIME:   key_SetControlTime();   break;
       case bSET_MANAGE_TIME:    key_SetManageTime();    break;
+
+      case bSET_MASHINES_ESC:   key_SetMashinesEsc();   break;
       case bSET_BLOCK_ESC:      key_SetBlockEsc();      break;
 
       case bSET_EXTENDED_ESC_S: key_SetExtendedEscS();  break;

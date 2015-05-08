@@ -1,13 +1,8 @@
 /*------------------------------------------------------------------------------
-ESC.H
+KEY_MACHINES_ESC.H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flMachinesEsc;
-extern  file const              flBlockEsc;
+void    key_SetMachinesEsc(void);
 
-
-
-void    InitEsc(void);
-void    ResetEsc(void);
