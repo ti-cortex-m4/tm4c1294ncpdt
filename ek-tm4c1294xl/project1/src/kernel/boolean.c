@@ -1,11 +1,18 @@
 /*------------------------------------------------------------------------------
-BOOLEAN.Ñ
+BOOLEAN,Ñ
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "boolean.h"
 
+
+
+bool    ValidBoolean(uchar  b)
+{
+  return (b == TRUE) || (b == FALSE);
+}
 
 
 boolean CharToBoolean(uchar  b)
