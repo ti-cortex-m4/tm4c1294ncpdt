@@ -1,12 +1,7 @@
 /*------------------------------------------------------------------------------
-ESC.H
+MEM_ESC.H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flEscMaxMachines;
-
-
-
-void    InitEsc(void);
-void    ResetEsc(void);
+extern  uchar                   bEscMaxMachines;

@@ -112,7 +112,9 @@ typedef enum
   CANALS_NAME           = OBJECT_NAME + 1,
   GROUPS_NAME           = CANALS_NAME + sizeof(mpszCanalsName)/wFREEPAGE_SIZE + 1,
 
-  STRICT_UNI            = GROUPS_NAME + sizeof(mpszGroupsName)/wFREEPAGE_SIZE + 1,
+  ESC_MAX_MASHINES      = GROUPS_NAME + sizeof(mpszGroupsName)/wFREEPAGE_SIZE + 1,
+
+  STRICT_UNI            = ESC_MAX_MASHINES + 1,
   MAX_DELAY_UNI         = STRICT_UNI + 1,
   REPEAT_FLOW_INI       = MAX_DELAY_UNI + 1,
   DSBL_PASSWORD_INI     = REPEAT_FLOW_INI + 1,

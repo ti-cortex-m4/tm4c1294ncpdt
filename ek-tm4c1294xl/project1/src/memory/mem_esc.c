@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
-ESC.H
+MEM_ESC.C
 
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flEscMaxMachines;
+#include "../main.h"
 
 
 
-void    InitEsc(void);
-void    ResetEsc(void);
+// текущее количество виртуальных приборов —Ёћ-1
+uchar                   bEscMaxMachines;

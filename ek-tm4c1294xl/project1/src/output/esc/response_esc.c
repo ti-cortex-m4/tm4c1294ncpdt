@@ -50,8 +50,8 @@ message         code    szCtrlZ         = "Ctrl Z          ";
 
 void    InitEsc(void)
 {
-  if ((bMaxMachines == 0) || (bMaxMachines > bMACHINES)) 
-    bMaxMachines = bMACHINES;
+  if ((bEscMaxMachines == 0) || (bEscMaxMachines > bMACHINES)) 
+    bEscMaxMachines = bMACHINES;
 }
 
 
@@ -1004,13 +1004,13 @@ uchar   i,j;
       case 0x3E:
       case 0x3F:
       case 0x40:
-        for (i=0; i<bMaxMachines; i++)
+        for (i=0; i<bEscMaxMachines; i++)
         {
           if ((bQuery - 0x31) == (bLogical + i - 1))
             break;
         }
 
-        if (i != bMaxMachines)
+        if (i != bEscMaxMachines)
         {
           ibActives = (bQuery - 0x31) - (bLogical - 1);
           mpibActives[ibPort] = ibActives;
@@ -1037,7 +1037,7 @@ uchar   i,j;
       return;
     }
 
-    if (ibActives >= bMaxMachines) return;
+    if (ibActives >= bEscMaxMachines) return;
 
     ShowCommandEsc();
 
