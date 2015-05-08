@@ -14,6 +14,7 @@ RESPONSE252_CRC.C
 #include "../output/out_realtime.h"
 #include "../output/out_flash_stack.h"
 #include "../output/out_health.h"
+#include "../output/out_tariffs.h"
 
 
 
@@ -30,6 +31,9 @@ void    Response252_CRC(void)
     case 3: OutFlashStack(); break;
 
     case 4: OutHealth(); break;
+
+    case 5: OutGetAllPowTariffs(); break;
+    case 6: OutGetAllEngTariffs(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);

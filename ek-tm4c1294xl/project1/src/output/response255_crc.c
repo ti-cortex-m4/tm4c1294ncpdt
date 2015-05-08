@@ -257,29 +257,12 @@ void    Response255_CRC(void)
       Output(1+1+4*1+2+4*2+4*1+4*1);
       break;
 */
-    case bEXT_GETOBJECTNAME: 
-      GetObjectNameExt();
-      break;
-
-    case bEXT_SETOBJECTNAME: 
-      SetObjectNameExt();
-      break;
-
-    case bEXT_GETCANALSNAME:
-      GetCanalsNameExt();
-      break;
-
-    case bEXT_SETCANALSNAME:
-      SetCanalsNameExt();
-      break;
-
-    case bEXT_GETGROUPSNAME:
-      GetGroupsNameExt();
-      break;
-
-    case bEXT_SETGROUPSNAME:
-      SetGroupsNameExt();
-      break;
+    case bEXT_GETOBJECTNAME: GetObjectNameExt(); break;
+    case bEXT_SETOBJECTNAME: SetObjectNameExt(); break;
+    case bEXT_GETCANALSNAME: GetCanalsNameExt(); break;
+    case bEXT_SETCANALSNAME: SetCanalsNameExt(); break;
+    case bEXT_GETGROUPSNAME: GetGroupsNameExt(); break;
+    case bEXT_SETGROUPSNAME: SetGroupsNameExt(); break;
 
     case bEXT_FLASH_CONTROL:
       OutFlashControl();
