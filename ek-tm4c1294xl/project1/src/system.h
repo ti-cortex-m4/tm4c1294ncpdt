@@ -101,7 +101,7 @@ SYSTEM.H
 
 
 // максимальное количество виртуальных приборов —Ёћ-1
-#define bMACHINES       bGROUPS/6 + 1
+#define bMAXMACHINEESC  (bGROUPS/6 + 1)
 
 
 // минимальный год

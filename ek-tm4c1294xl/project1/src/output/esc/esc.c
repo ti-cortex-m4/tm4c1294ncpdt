@@ -11,24 +11,24 @@ ESC.C
 
 
 
-file const              flMaxMachinesEsc = {MAX_MASHINES_ESC, &bMaxMachinesEsc, sizeof(uchar)};
+file const              flMaxMachineEsc = {MAX_MASHINE_ESC, &bMaxMachineEsc, sizeof(uchar)};
 
 
 
 void    InitEsc(void)
 {
-  LoadFile(&flMaxMachinesEsc);
+  LoadFile(&flMaxMachineEsc);
 
-  if ((bMaxMachinesEsc == 0) || (bMaxMachinesEsc > bMACHINES))
+  if ((bMaxMachineEsc == 0) || (bMaxMachineEsc > bMAXMACHINEESC))
   {
-    bMaxMachinesEsc = bMACHINES;
-    SaveFile(&flMaxMachinesEsc);
+    bMaxMachineEsc = bMAXMACHINEESC;
+    SaveFile(&flMaxMachineEsc);
   }
 }
 
 
 void    ResetEsc(void)
 {
-	bMaxMachinesEsc = bMACHINES;
-  SaveFile(&flMaxMachinesEsc);
+	bMaxMachineEsc = bMAXMACHINEESC;
+  SaveFile(&flMaxMachineEsc);
 }
