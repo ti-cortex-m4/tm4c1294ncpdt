@@ -4,7 +4,7 @@ ESC.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flEscMaxMachines;
+extern  file const              flMaxMachinesEsc;
 
 
 
