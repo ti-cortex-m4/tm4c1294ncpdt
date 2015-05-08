@@ -45,7 +45,7 @@ void    key_SetPrivate(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      if (SuperUser() == 1) 
+      if (SuperUser() == true) 
       {
         enKeyboard = KBD_INPUT1;
         ShowLo(szMaskPrivate);
