@@ -8,7 +8,7 @@ MEM_ESC.C
 
 
 
-// текущее количество виртуальных приборов —Ёћ-1
+// максимальное количество логических приборов —Ёћ-1
 uchar                   bMaxMachineEsc;
 
 // массив индексов активных логических приборов
@@ -18,4 +18,4 @@ uchar                   mpibMachineEsc[bPORTS];
 uchar                   ibMachineEsc;
 
 // флаг блокировани€ доступа
-boolean                 boBlockingEsc;
+boolean                 boDsblEsc;
