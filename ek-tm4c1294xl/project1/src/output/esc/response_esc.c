@@ -6,6 +6,7 @@ RESPONSE_ESC.C
 
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
+#include "../../memory/mem_realtime.h"
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_esc.h"
 #include "../../console.h"
@@ -114,7 +115,7 @@ uchar   i;
     if (enGlobal == GLB_PROGRAM)
       return;
 
-    if (boDsblEsc == TRUE)
+    if (boDsblEsc == (boolean)1)
       return;
 
     bQuery = InBuff(0);
@@ -252,12 +253,12 @@ uchar   i;
 */
       case 'T':
         InitPush(0);
-        PushChar( ToBCD(tiCurr.bSecond) );
-        PushChar( ToBCD(tiCurr.bMinute) );
-        PushChar( ToBCD(tiCurr.bHour  ) );
-        PushChar( ToBCD(tiCurr.bDay   ) );
-        PushChar( ToBCD(tiCurr.bMonth ) );
-        PushChar( ToBCD(tiCurr.bYear  ) );
+        PushChar(ToBCD(tiCurr.bSecond));
+        PushChar(ToBCD(tiCurr.bMinute));
+        PushChar(ToBCD(tiCurr.bHour  ));
+        PushChar(ToBCD(tiCurr.bDay   ));
+        PushChar(ToBCD(tiCurr.bMonth ));
+        PushChar(ToBCD(tiCurr.bYear  ));
         Esc(6);
         break;
 

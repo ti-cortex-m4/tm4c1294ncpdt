@@ -25,7 +25,7 @@ void    InitEsc(void)
     SaveFile(&flMaxMachineEsc);
   }
 
-  LoadFile(&flMaxMachineEsc);
+  LoadFile(&flDsblEsc);
 }
 
 
