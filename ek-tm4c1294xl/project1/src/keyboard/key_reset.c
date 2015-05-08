@@ -13,6 +13,7 @@ KEY_RESET.C
 #include "../tariffs/relaxs.h"
 #include "../tariffs/gaps.h"
 #include "../digitals/digitals.h"
+#include "../digitals/limits.h"
 #include "../digitals/params/params.h"
 #include "../digitals/profile/profile_core.h"
 #include "../digitals/phones.h"
@@ -68,8 +69,8 @@ void    key_SetReset(void)
           ResetSettings(false);
 //          ResetCustom();
 //
-//          ResetLimits();
           ResetDecret();
+          ResetLimits();
 //          ResetGaps();
 //          ResetExtended3();
 //          ResetExtended4();
@@ -108,6 +109,7 @@ void    key_SetReset(void)
           ResetRelaxs();
           ResetGaps();
           ResetDigitals();
+          ResetLimits();
           ResetParams();
           ResetPhones();
           ResetProfile();

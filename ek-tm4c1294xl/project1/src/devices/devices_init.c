@@ -29,7 +29,6 @@ DEVICES_INIT.C
 #include "../serial/modems.h"
 #include "../serial/speeds_display.h"
 #include "../digitals/answer.h"
-#include "../digitals/limits.h"
 #include "../digitals/profile/refill.h"
 #include "../digitals/schedule/schedule.h"
 #include "../flash/files.h"
@@ -108,7 +107,6 @@ void    InitDevices(void)
   InitMaxRepeats();
   InitDef();
   InitDefects();
-  InitLimits();
   InitRefill();
   InitSchedule();
   InitExtended1();
@@ -146,7 +144,6 @@ void    ResetDevices(void)
   ResetMaxRepeats();
   ResetDef();
   ResetDefects();
-  ResetLimits();
   ResetRefill();
   ResetSchedule();
   ResetExtended1();

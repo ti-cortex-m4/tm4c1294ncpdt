@@ -45,6 +45,7 @@ TODO .C
 #include "src/tariffs/relaxs.h"
 #include "src/tariffs/gaps.h"
 #include "src/digitals/digitals.h"
+#include "src/digitals/limits.h"
 #include "src/digitals/params/params.h"
 #include "src/digitals/profile/profile_core.h"
 #include "src/devices/devices_init.h"
@@ -88,6 +89,7 @@ int main(void) {
 	InitGaps();             Delay(100); TestOK();
 	InitDecret();
 	InitDigitals();         Delay(100); TestOK();
+	InitLimits();
 	InitParams();
 	InitPhones();
 	InitProfile();
