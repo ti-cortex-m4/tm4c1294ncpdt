@@ -11,10 +11,10 @@ CORRECT1.C
 #include "correct1.h"
 
 
-/*
-uchar   GetCorrectIndex(event  evCode)
+
+uchar   GetCorrectIndex(event  ev)
 {
-  switch (evCode)
+  switch (ev)
   {
     case EVE_PROGRAM_2:     return(2);
     case EVE_EXT_CORRECT2:  return(3);
@@ -30,13 +30,12 @@ uchar   GetCorrectIndex(event  evCode)
 }
 
 
-#ifndef MODBUS
-*/
+
 void    CorrectTime_Full(time  ti, event  ev)
 {
-//  uchar i;
-//  if ((i = GetCorrectIndex(evCode)) == 0) return;
-//
+  uchar i;
+  if ((i = GetCorrectIndex(evCode)) == 0) return;
+
 //  AddKeyRecord(evCode);
 //  tiPrevCorrect = tiCurr;
 //  tiPostCorrect = tiAlt;
