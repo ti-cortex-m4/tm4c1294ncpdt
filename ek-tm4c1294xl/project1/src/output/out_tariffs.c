@@ -27,7 +27,7 @@ void    OutSetPublicTariffs(void)
 {
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
-    if ((bInBuff5 == TRUE) || (bInBuff5 == FALSE))
+    if (ValidBoolean(bInBuff5))
     {
       fPublicTariffs = CharToBoolean(bInBuff5);
       SaveFile(&flPublicTariffs);
@@ -55,13 +55,13 @@ void    OutGetOldPowTariffs(void)
 
 void    OutSetOldPowTariffs(void)
 {
-zone  zo;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     if (bInBuff5 < 12)
     {
       InitPop(7);
+
+      zone zo;
       Pop(&zo, sizeof(zone));
 
       if (TrueZone(&zo))
@@ -93,13 +93,13 @@ void    OutGetOldEngTariffs(void)
 
 void    OutSetOldEngTariffs(void)
 {
-zone  zo;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     if (bInBuff5 < 12)
     {
       InitPop(7);
+
+      zone zo;
       Pop(&zo, sizeof(zone));
 
       if (TrueZone(&zo))
@@ -131,13 +131,13 @@ void    OutGetOldPubTariffs(void)
 
 void    OutSetOldPubTariffs(void)
 {
-zone  zo;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     if (bInBuff5 < 12)
     {
       InitPop(7);
+
+      zone zo;
       Pop(&zo, sizeof(zone));
 
       if (TrueZone(&zo))
@@ -170,13 +170,13 @@ void    OutGetNewPowTariffs(void)
 
 void    OutSetNewPowTariffs(void)
 {
-zone  zo;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
     {
       InitPop(7);
+
+      zone zo;
       Pop(&zo, sizeof(zone));
 
       if (TrueZone(&zo))
@@ -208,13 +208,13 @@ void    OutGetNewEngTariffs(void)
 
 void    OutSetNewEngTariffs(void)
 {
-zone  zo;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
     {
       InitPop(7);
+
+      zone zo;
       Pop(&zo, sizeof(zone));
 
       if (TrueZone(&zo))
@@ -246,13 +246,13 @@ void    OutGetNewPubTariffs(void)
 
 void    OutSetNewPubTariffs(void)
 {
-zone  zo;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
     {
       InitPop(7);
+
+      zone zo;
       Pop(&zo, sizeof(zone));
 
       if (TrueZone(&zo))
