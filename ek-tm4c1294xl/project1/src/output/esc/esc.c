@@ -12,7 +12,7 @@ ESC.C
 
 
 file const              flMaxMachineEsc = {MAX_MACHINE_ESC, &bMaxMachineEsc, sizeof(uchar)};
-file const              flDsblEsc = {DSBL_ESC, &boDsblEsc, sizeof(boolean)};
+file const              flBlockEsc = {BLOCK_ESC, &boBlockEsc, sizeof(boolean)};
 
 
 
@@ -25,7 +25,7 @@ void    InitEsc(void)
     SaveFile(&flMaxMachineEsc);
   }
 
-  LoadFile(&flDsblEsc);
+  LoadFile(&flBlockEsc);
 }
 
 
@@ -34,6 +34,6 @@ void    ResetEsc(void)
   bMaxMachineEsc = bMAXMACHINEESC;
   SaveFile(&flMaxMachineEsc);
 
-  boDsblEsc = FALSE;
-  SaveFile(&flDsblEsc);
+  boBlockEsc = FALSE;
+  SaveFile(&flBlockEsc);
 }
