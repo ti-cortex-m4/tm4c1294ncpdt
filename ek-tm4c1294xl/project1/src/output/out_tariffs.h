@@ -1,8 +1,11 @@
 /*------------------------------------------------------------------------------
-OUT_TARIFFS.H
+OUT_TARIFFS,H
 
 
 ------------------------------------------------------------------------------*/
+
+void    OutGetPublicTariffs(void);
+void    OutSetPublicTariffs(void);
 
 void    OutGetOldPowTariffs(void);
 void    OutSetOldPowTariffs(void);
@@ -12,9 +15,6 @@ void    OutSetOldEngTariffs(void);
 
 void    OutGetOldPubTariffs(void);
 void    OutSetOldPubTariffs(void);
-
-void    OutGetPublicTariffs(void);
-void    OutSetPublicTariffs(void);
 
 void    OutGetNewPowTariffs(void);
 void    OutSetNewPowTariffs(void);
