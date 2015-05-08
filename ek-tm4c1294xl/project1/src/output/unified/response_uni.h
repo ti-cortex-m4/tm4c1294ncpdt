@@ -4,7 +4,7 @@ RESPONSE_UNI.H
 
 ------------------------------------------------------------------------------*/
 
-void    RunResponseUNI_All(void);
+void    RunResponseUni_All(void);
 
 void    Output2(uint  wSize);
 void    Output2_Code(uint  wSize, uchar  bCode, time  tiCode);

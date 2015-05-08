@@ -127,7 +127,7 @@ void    SetDelayUni(void)
 
 
 
-void    RunResponseUNI(void)
+void    RunResponseUni(void)
 {
   if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE_UNI)
   {
@@ -275,19 +275,19 @@ void    RunResponseUNI(void)
 }
 
 
-void    RunResponseUNI_All(void)
+void    RunResponseUni_All(void)
 {
   ibPort = 0;
-  if (IsFlow0() == 0) RunResponseUNI();
+  if (IsFlow0() == 0) RunResponseUni();
 
   ibPort = 1;
-  if (IsFlow1() == 0) RunResponseUNI();
+  if (IsFlow1() == 0) RunResponseUni();
 
   ibPort = 2;
-  RunResponseUNI();
+  RunResponseUni();
 
   ibPort = 3;
-  RunResponseUNI();
+  RunResponseUni();
 }
 
 
