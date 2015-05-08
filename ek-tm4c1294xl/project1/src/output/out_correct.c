@@ -68,33 +68,34 @@ void    OutCorrect2(void)
 }
 
 
-/*
+
 void    OutCorrect20(void)
 {
-    if (Correct3Disable()) { Correct3(EVE_EXT_CORRECT2); Result(bRES_BADCORRECTION); break; }
+  if (Correct3Disabled()) { Correct3(EVE_EXT_CORRECT2); Result(bRES_BADCORRECTION); return; }
 
-    InitPop(6);
-    Pop(&tiAlt, sizeof(time));
+  InitPop(6);
 
-    if (ValidTimeDate() == 1)
+  time ti;
+  Pop(&ti, sizeof(time));
+
+  if (ValidTimeDate(ti) == true)
+  {
+    if ((tiCurr.bDay   != ti.bDay)   ||
+        (tiCurr.bMonth != ti.bMonth) ||
+        (tiCurr.bYear  != ti.bYear))
+      Result(bRES_BADMODE);
+    else
+    if ((tiCurr.bHour*2 + tiCurr.bMinute/30) != (ti.bHour*2 + ti.bMinute/30))
+      Result(bRES_BADMODE);
+    else
     {
-      if ((tiCurr.bDay   != tiAlt.bDay)   ||
-          (tiCurr.bMonth != tiAlt.bMonth) ||
-          (tiCurr.bYear  != tiAlt.bYear))
-        Result(bRES_BADMODE);
-      else
-      if (GetHouIndex() != (tiAlt.bHour*2 + tiAlt.bMinute/30))
-        Result(bRES_BADMODE);
-      else
+      if (Correct2Allowed())
       {
-        if (Correct2Allow())
-        {
-          CorrectTime_Full(EVE_EXT_CORRECT2);
-          Result(bRES_OK);
-        }
-        else Result(bRES_BADACCESS);
+        CorrectTime_Full(ti, EVE_EXT_CORRECT2);
+        Result(bRES_OK);
       }
+      else Result(bRES_BADACCESS);
     }
-    else Result(bRES_BADDATA);
+  }
+  else Result(bRES_BADDATA);
 }
-*/

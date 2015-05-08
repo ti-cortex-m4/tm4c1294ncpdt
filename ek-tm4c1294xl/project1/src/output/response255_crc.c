@@ -132,7 +132,7 @@ void    Response255_CRC(void)
   {
     case bEXT_CORRECT1: OutCorrect1(); break;
     case bEXT_CORRECT2: OutCorrect2(); break;
-//    case bEXT_CORRECT20: OutCorrect20(); break;
+    case bEXT_CORRECT20: OutCorrect20(); break;
 //    case bEXT_CORRECT21: OutCorrect21(); break;
 //    case bEXT_CORRECT3:  OutCorrect3();  break;
 

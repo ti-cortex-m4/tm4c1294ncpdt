@@ -11,7 +11,7 @@ CORRECT3.C
 /*
 void    ResetCorrect3(void)
 {
-  boCorrect3 = boFalse;
+  boCorrect3 = FALSE;
 
   bMaxCorrect3 = 3;
 
@@ -34,7 +34,7 @@ bit     Correct3Allow(void)
 bool    Correct3Disabled(void)
 {
 //  if ((bPortGPS == 0) || (bPortGPS > bPORTS)) return 0;
-//  if (boCorrect3 == boFalse) return 0;
+//  if (boCorrect3 == FALSE) return 0;
 //
 //  return !Correct3Allow();
   return false;
@@ -62,14 +62,14 @@ uchar i;
 
   InitPushCRC();
 
-  PushChar(((bPortGPS > 0) && (bPortGPS <= bPORTS)) ? boTrue : boFalse);
+  PushChar(((bPortGPS > 0) && (bPortGPS <= bPORTS)) ? boTrue : FALSE);
   PushChar(boCorrect3);
   PushLong(&cdwAbsCorrect3);
   PushLong(&cdwPosCorrect3);
   PushChar(bMaxCorrect3);
   Push(&tiPosCorrect3, sizeof(time));
   Push(&tiNegCorrect3, sizeof(time));
-  PushChar(Correct3Disable() ? boTrue : boFalse);
+  PushChar(Correct3Disable() ? boTrue : FALSE);
   Push(&mpcwCorrect3, sizeof(mpcwCorrect3));
 
   Output(100);
