@@ -53,6 +53,8 @@ TODO .C
 #include "src/digitals/phones.h"
 #include "src/serial/speeds.h"
 #include "src/serial/flow.h"
+#include "src/output/esc/esc.h"
+#include "src/output/esc/response_esc.h"
 #include "src/output/unified/uni.h"
 #include "src/output/unified/response_uni.h"
 #include "src/storage/storage.h"
@@ -131,7 +133,8 @@ int main(void) {
     	RunLocal();
 
     	RunResponseCRC_All();
-    	RunResponseUNI_All();
+    	RunResponseEsc_All();
+    	RunResponseUni_All();
     	RunResponseFlow_All();
     }
 }

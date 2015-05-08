@@ -4,8 +4,9 @@ ESC.C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../flash/files.h"
+#include "../../main.h"
+#include "../../memory/mem_esc.h"
+#include "../../flash/files.h"
 #include "esc.h"
 
 

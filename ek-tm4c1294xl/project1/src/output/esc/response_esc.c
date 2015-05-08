@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-ESC.C
+RESPONSE_ESC.C
 
 
 ------------------------------------------------------------------------------*/
@@ -1634,3 +1634,19 @@ void    SlaveModem(void)
   }
 }
 */
+
+
+void    RunResponseEsc_All(void)
+{
+  ibPort = 0;
+  if (IsFlow0() == 0) RunResponseEsc();
+
+  ibPort = 1;
+  if (IsFlow1() == 0) RunResponseEsc();
+
+  ibPort = 2;
+  RunResponseEsc();
+
+  ibPort = 3;
+  RunResponseEsc();
+}
