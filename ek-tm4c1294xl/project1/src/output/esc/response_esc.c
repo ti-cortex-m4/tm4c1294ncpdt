@@ -115,7 +115,7 @@ uchar   i;
     if (enGlobal == GLB_PROGRAM)
       return;
 
-    if (boBlockEsc == (boolean)1)
+    if (boBlockEsc == (boolean)0x55)
       return;
 
     bQuery = InBuff(0);

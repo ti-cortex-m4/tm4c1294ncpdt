@@ -59,11 +59,11 @@ void    key_SetBlockEsc(void)
         if (boBlockEsc == FALSE)
           boBlockEsc = TRUE;
         else if (boBlockEsc == TRUE)
-          boBlockEsc = (boolean)1;
+          boBlockEsc = (boolean)0x55;
         else
           boBlockEsc = FALSE;
 
-        SaveFile(flBlockEsc);
+        SaveFile(&flBlockEsc);
         Show();
       }
       else Beep();
