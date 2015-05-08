@@ -129,6 +129,88 @@ void    Response255_CRC(void)
 {
   switch (bInBuff5)
   {
+
+/*
+    case bEXT_CORRECT1:
+      if (Correct2Disable()) { Correct2(EVE_EXT_CORRECT2); Result(bRES_BADACCESS); break; }
+      if (Correct3Disable()) { Correct3(EVE_EXT_CORRECT2); Result(bRES_BADCORRECTION); break; }
+
+      InitPop(6);
+      Pop(&tiAlt, sizeof(time));
+
+      if (TrueTimeDate() == 1)
+      {
+        tiSetRTC = tiAlt;
+        SetCurrTimeDate();
+
+        Result(bRES_OK);
+      }
+      else Result(bRES_BADDATA);
+      break;
+
+    case bEXT_CORRECT2:
+      if (Correct2Disable()) { Correct2(EVE_EXT_CORRECT2); Result(bRES_BADACCESS); break; }
+      if (Correct3Disable()) { Correct3(EVE_EXT_CORRECT2); Result(bRES_BADCORRECTION); break; }
+
+      InitPop(6);
+      Pop(&tiAlt, sizeof(time));
+
+      if (TrueTimeDate() == 1)
+      {
+        if ((tiCurr.bDay   != tiAlt.bDay)   ||
+            (tiCurr.bMonth != tiAlt.bMonth) ||
+            (tiCurr.bYear  != tiAlt.bYear))
+          Result(bRES_BADMODE);
+        else
+        if (GetHouIndex() != (tiAlt.bHour*2 + tiAlt.bMinute/30))
+          Result(bRES_BADMODE);
+        else
+        { / *
+          tiSetRTC = tiAlt;
+          SetCurrTime();
+          tiPrev = tiAlt;
+          * /
+          CorrectTime_Full(EVE_EXT_CORRECT2);
+
+          Result(bRES_OK);
+        }
+      }
+      else Result(bRES_BADDATA);
+      break;
+
+
+    case bEXT_CORRECT20:
+      if (Correct3Disable()) { Correct3(EVE_EXT_CORRECT2); Result(bRES_BADCORRECTION); break; }
+
+      InitPop(6);
+      Pop(&tiAlt, sizeof(time));
+
+      if (TrueTimeDate() == 1)
+      {
+        if ((tiCurr.bDay   != tiAlt.bDay)   ||
+            (tiCurr.bMonth != tiAlt.bMonth) ||
+            (tiCurr.bYear  != tiAlt.bYear))
+          Result(bRES_BADMODE);
+        else
+        if (GetHouIndex() != (tiAlt.bHour*2 + tiAlt.bMinute/30))
+          Result(bRES_BADMODE);
+        else
+        {
+          if (Correct2Allow())
+          {
+            CorrectTime_Full(EVE_EXT_CORRECT2);
+            Result(bRES_OK);
+          }
+          else Result(bRES_BADACCESS);
+        }
+      }
+      else Result(bRES_BADDATA);
+      break;
+
+    case bEXT_CORRECT21: OutCorrect21(); break;
+    case bEXT_CORRECT3:  OutCorrect3();  break;
+ */
+
     case bEXT_GETPHONE: OutGetPhone(); break;
     case bEXT_SETPHONE: OutSetPhone(); break;
 

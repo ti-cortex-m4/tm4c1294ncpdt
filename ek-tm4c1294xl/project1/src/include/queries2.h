@@ -22,6 +22,12 @@ QUERIES2.H
 #define bEXT_GETDIGITALS               8
 #define bEXT_GETENBLCAN                13
 
+#define bEXT_CORRECT1                  10
+#define bEXT_CORRECT2                  11
+#define bEXT_CORRECT20                 56
+#define bEXT_CORRECT21                 57
+#define bEXT_CORRECT3                  59
+
 #define bEXT_GETCTRLHOU                14
 #define bEXT_SETCTRLHOU                72
 
