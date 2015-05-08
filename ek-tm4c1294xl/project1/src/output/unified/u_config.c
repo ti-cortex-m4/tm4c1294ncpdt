@@ -173,7 +173,7 @@ void    GetCorrectUni(void)
   InitPop(6);
   Pop(&tiAlt, sizeof(time));
 
-  if (TrueTimeDate() == 1)
+  if (ValidTimeDate() == 1)
   {
     if ((tiCurr.bDay   != tiAlt.bDay)   ||
         (tiCurr.bMonth != tiAlt.bMonth) ||

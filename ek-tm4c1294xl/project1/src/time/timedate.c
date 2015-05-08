@@ -131,7 +131,7 @@ uint    j;
 
 
 
-bool    TrueTimeDate(time  ti)
+bool    ValidTimeDate(time  ti)
 {
   if (ti.bSecond > 59) return false;
   if (ti.bMinute > 59) return false;

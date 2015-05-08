@@ -3,15 +3,12 @@ CORRECT3.C
 
 
 ------------------------------------------------------------------------------*/
+
+#include "../main.h"
+#include "correct3.h"
+
+
 /*
-#include      <string.h>
-#include      "main.h"
-#include      "xdata.h"
-#include      "ports.h"
-#include      "gps2.h"
-
-
-
 void    ResetCorrect3(void)
 {
   boCorrect3 = boFalse;
@@ -32,17 +29,18 @@ bit     Correct3Allow(void)
 {
   return (cdwPosCorrect3 < bMaxCorrect3);
 }
+*/
 
-
-bit     Correct3Disable(void)
+bool    Correct3Disabled(void)
 {
-  if ((bPortGPS == 0) || (bPortGPS > bPORTS)) return 0;
-  if (boCorrect3 == boFalse) return 0;
-
-  return !Correct3Allow();
+//  if ((bPortGPS == 0) || (bPortGPS > bPORTS)) return 0;
+//  if (boCorrect3 == boFalse) return 0;
+//
+//  return !Correct3Allow();
+  return false;
 }
 
-
+/*
 void    Correct3(event  evCode)
 {
 uchar i;
