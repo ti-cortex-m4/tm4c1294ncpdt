@@ -9,4 +9,10 @@ MEM_ESC.C
 
 
 // текущее количество виртуальных приборов —Ёћ-1
-uchar                   bMaxMachinesEsc;
+uchar                   bMaxMachineEsc;
+
+// массив индексов активных логических приборов
+uchar                   mpibMachineEsc[bPORTS];
+
+// индекс текущего активного логического прибора
+uchar                   ibMachineEsc;

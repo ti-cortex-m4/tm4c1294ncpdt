@@ -8,9 +8,7 @@ RESPONSE_ESC.C
 #include "../../memory/mem_settings.h"
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_esc.h"
-//#include "../../keyboard/keyboard.h"
-//#include "../../keyboard/key_timedate.h"
-//#include "../../display/display.h"
+#include "../../console.h"
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
 //#include "../../include/states.h"
@@ -28,8 +26,8 @@ message         code    szCtrlZ         = "Ctrl Z          ";
 
 void    InitEsc(void)
 {
-  if ((bMaxMachinesEsc == 0) || (bMaxMachinesEsc > bMACHINES)) 
-    bMaxMachinesEsc = bMACHINES;
+  if ((bMaxMachineEsc == 0) || (bMaxMachineEsc > bMAXMACHINEESC))
+    bMaxMachineEsc = bMAXMACHINEESC;
 }
 
 
@@ -208,7 +206,7 @@ uchar   i;
 
   for (i=0; i<bFRAMES; i++)
   {
-    PGetGrpMntInt2Real(mpwImpMntCan[ ibMnt ], i+bFRAMES*ibActives, 20);
+    PGetGrpMntInt2Real(mpwImpMntCan[ ibMnt ], i+bFRAMES*ibMachineEsc, 20);
     ToFloat();
     Push(&coFloat, sizeof(combo));
   }
@@ -237,7 +235,7 @@ uchar   i;
     InitPush(0);
     for (i=0; i<bFRAMES; i++)
     {
-      PGetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], i+bFRAMES*ibActives, bMask);
+      PGetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], i+bFRAMES*ibMachineEsc, bMask);
       ToFloat();
       Push(&coFloat, sizeof(combo));
     }
@@ -256,7 +254,7 @@ uchar   i;
     InitPush(0);
     for (i=0; i<bFRAMES; i++)
     {
-      PGetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], i+bFRAMES*ibActives, bMask);
+      PGetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], i+bFRAMES*ibMachineEsc, bMask);
       ToFloat();
       Push(&coFloat, sizeof(combo));
     }
@@ -268,10 +266,10 @@ uchar   i;
 
 void    EscEngGrpMonPrev(uchar  bMask)
 {
-  if ((mpbEsc_j[ ibActives ] & 0x80) == 0)
+  if ((mpbEsc_j[ ibMachineEsc ] & 0x80) == 0)
     EscEngGrpMon(PrevHardMon(), bMask);
   else
-    EscEngGrpMon((bMONTHS+ibHardMon-(mpbEsc_j[ ibActives ] & 0x7F)) % bMONTHS, bMask);
+    EscEngGrpMon((bMONTHS+ibHardMon-(mpbEsc_j[ ibMachineEsc ] & 0x7F)) % bMONTHS, bMask);
 }
 
 
@@ -284,7 +282,7 @@ uchar   i,j;
   for (i=0; i<bSize; i++)
   {
     for (j=0; j<16; j++)
-      PushIntSwap( *PGetCanInt(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], j+16*ibActives) );
+      PushIntSwap( *PGetCanInt(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], j+16*ibMachineEsc) );
   }
   Esc(32*bSize);
 }
@@ -299,7 +297,7 @@ uchar   i,j;
   wBuffD = (wHOURS+iwHardHou-GetHouIndex()) % wHOURS;
 
   // индекс на начало требуемых суток
-  for (i=0; i<mpbEsc_l[ ibActives ]; i++)
+  for (i=0; i<mpbEsc_l[ ibMachineEsc ]; i++)
     wBuffD = (wHOURS+wBuffD-48) % wHOURS;
 
   InitPush(0);
@@ -310,7 +308,7 @@ uchar   i,j;
       break;
     else
     {
-      if ((mpbEsc_l[ ibActives ] == 0) && (i > GetHouIndex()))
+      if ((mpbEsc_l[ ibMachineEsc ] == 0) && (i > GetHouIndex()))
       {
         for (j=0; j<16; j++)
           PushInt(0);
@@ -318,7 +316,7 @@ uchar   i,j;
       else
       {
         for (j=0; j<16; j++)
-          PushIntSwap( mpwImpHouCan[ PrevSoftHou() ][ j+16*ibActives ] );
+          PushIntSwap( mpwImpHouCan[ PrevSoftHou() ][ j+16*ibMachineEsc ] );
       }
 
       if (++wBuffD >= wHOURS)
@@ -336,12 +334,12 @@ uchar   i,j;
 
 bit     EscDefCanHou(uchar  i)
 {
-  if ((mpbEsc_l[ibActives] == 0) && (i > GetHouIndex()))
+  if ((mpbEsc_l[ibMachineEsc] == 0) && (i > GetHouIndex()))
     return(0);
-  else if (GetDigitalDevice(ibCan+16*ibActives) == 0)
+  else if (GetDigitalDevice(ibCan+16*ibMachineEsc) == 0)
     return(1);
   else
-    return(*PGetCanInt(mpwImpHouCan[ PrevSoftHou() ], ibCan+16*ibActives) != 0xFFFF);
+    return(*PGetCanInt(mpwImpHouCan[ PrevSoftHou() ], ibCan+16*ibMachineEsc) != 0xFFFF);
 }
 
 
@@ -349,7 +347,7 @@ void    EscDefCanHouSize768(void)
 {
 uchar   i;
 
-  iwHou = PrevDayIndex(mpbEsc_l[ibActives]);
+  iwHou = PrevDayIndex(mpbEsc_l[ibMachineEsc]);
 
   InitPush(0);
 
@@ -377,7 +375,7 @@ void    EscDefCanHouSize96(void)
 uchar   i;
 uint    j;
 
-  iwHou = PrevDayIndex(mpbEsc_l[ibActives]);
+  iwHou = PrevDayIndex(mpbEsc_l[ibMachineEsc]);
 
   InitPush(0);
 
@@ -406,7 +404,7 @@ void    EscDefCanHouSize16(void)
 {
 uchar   i;
 
-  iwHou = PrevDayIndex(mpbEsc_l[ibActives]);
+  iwHou = PrevDayIndex(mpbEsc_l[ibMachineEsc]);
 
   InitPush(0);
 
@@ -445,7 +443,7 @@ uchar   i,j;
     {
       for (j=0; j<16; j++)
       {
-        imAlt = mpimMonCan[ PrevSoftMon() ][ j+16*ibActives ];
+        imAlt = mpimMonCan[ PrevSoftMon() ][ j+16*ibMachineEsc ];
 
         dwBuffC = imAlt.mpdwImp[0];
         PushIntSwap( dwBuffC % 0x10000 );
@@ -482,7 +480,7 @@ uchar   i,j;
   wBuffD = (wHOURS+iwHardHou-GetHouIndex()) % wHOURS;
 
   // индекс на начало требуемых суток
-  for (i=0; i<mpbEsc_l[ ibActives ]; i++)
+  for (i=0; i<mpbEsc_l[ ibMachineEsc ]; i++)
     wBuffD = (wHOURS+wBuffD-48) % wHOURS;
 
   InitPush(0);
@@ -493,7 +491,7 @@ uchar   i,j;
       break;
     else
     {
-      if ((mpbEsc_l[ ibActives ] == 0) && (i > GetHouIndex()))
+      if ((mpbEsc_l[ ibMachineEsc ] == 0) && (i > GetHouIndex()))
       {
         for (j=0; j<bFRAMES; j++)
         {
@@ -506,7 +504,7 @@ uchar   i,j;
       {
         for (j=0; j<bFRAMES; j++)
         {
-          reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], j+bFRAMES*ibActives, 2);
+          reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], j+bFRAMES*ibMachineEsc, 2);
           ToFloat();
           Push(&coFloat, sizeof(combo));
         }
@@ -539,7 +537,7 @@ uchar   i,j;
     {
       for (j=0; j<bFRAMES; j++)
       {
-        reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], j+bFRAMES*ibActives, 2);
+        reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], j+bFRAMES*ibMachineEsc, 2);
         ToFloat();
         Push(&coFloat, sizeof(combo));
       }
@@ -566,7 +564,7 @@ uchar   i,j;
     {
       for (j=0; j<4; j++)
       {
-        reBuffA = *PGetGrpMaxPowReal(&mppoDayGrp[ PrevSoftDay() ], i+bFRAMES*ibActives, j);
+        reBuffA = *PGetGrpMaxPowReal(&mppoDayGrp[ PrevSoftDay() ], i+bFRAMES*ibMachineEsc, j);
         ToFloat();
         Push(&coFloat, sizeof(combo));
       }
@@ -588,7 +586,7 @@ uchar   i,j;
     {
       for (j=0; j<4; j++)
       {
-        tiAlt = *PGetGrpMaxPowTime(&mppoDayGrp[ PrevSoftDay() ], i+bFRAMES*ibActives, j);
+        tiAlt = *PGetGrpMaxPowTime(&mppoDayGrp[ PrevSoftDay() ], i+bFRAMES*ibMachineEsc, j);
         PushChar(tiAlt.bHour*2 + tiAlt.bMinute/30);
       }
     }
@@ -636,7 +634,7 @@ uchar   i,j;
     {
       for (j=0; j<4; j++)
       {
-        reBuffA = *PGetGrpMaxPowReal(&mppoMonGrp[ PrevSoftMon() ], i+bFRAMES*ibActives, j);
+        reBuffA = *PGetGrpMaxPowReal(&mppoMonGrp[ PrevSoftMon() ], i+bFRAMES*ibMachineEsc, j);
         ToFloat();
         Push(&coFloat, sizeof(combo));
       }
@@ -658,7 +656,7 @@ uchar   i,j;
     {
       for (j=0; j<4; j++)
       {
-        tiAlt = *PGetGrpMaxPowTime(&mppoMonGrp[ PrevSoftMon() ], i+bFRAMES*ibActives, j);
+        tiAlt = *PGetGrpMaxPowTime(&mppoMonGrp[ PrevSoftMon() ], i+bFRAMES*ibMachineEsc, j);
         PushChar( ToBCD(tiAlt.bDay) );
         PushChar(tiAlt.bHour*2 + tiAlt.bMinute/30);
       }
@@ -730,38 +728,38 @@ uchar   i,j;
   {
     sprintf(szHi+14,"%2bu",i+1);
 
-    if (GetDigitalDevice(i+16*ibActives) == 0)
+    if (GetDigitalDevice(i+16*ibMachineEsc) == 0)
     {
-      reBuffA = *PGetCounterOld(i+16*ibActives);
+      reBuffA = *PGetCounterOld(i+16*ibMachineEsc);
 
       tiAlt = *PGetCurrTimeDate();
-      SetCanTime(mptiEsc_S, i+16*ibActives);   
+      SetCanTime(mptiEsc_S, i+16*ibMachineEsc);
     }
-    else if (mpboEnblCan[i+16*ibActives] == FALSE)
+    else if (mpboEnblCan[i+16*ibMachineEsc] == FALSE)
     {
       reBuffA = 0;
 
       tiAlt = *PGetCurrTimeDate();
-      SetCanTime(mptiEsc_S, i+16*ibActives);   
+      SetCanTime(mptiEsc_S, i+16*ibMachineEsc);
     }
-    else if ((boExtendedEscS == boTrue) || (GetDigitalPhone(i+16*ibActives) != 0))
-      reBuffA = *PGetCanReal(mpreEsc_S, i+16*ibActives);
+    else if ((boExtendedEscS == boTrue) || (GetDigitalPhone(i+16*ibMachineEsc) != 0))
+      reBuffA = *PGetCanReal(mpreEsc_S, i+16*ibMachineEsc);
     else
     {
-      LoadCurrDigital(i+16*ibActives);
+      LoadCurrDigital(i+16*ibMachineEsc);
       if (mpboChannelsA[diCurr.ibLine] == boTrue)
         reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
       else
       {
         j = ibPort;
-        fAlt = ReadSensors(i+16*ibActives);
+        fAlt = ReadSensors(i+16*ibMachineEsc);
         ibPort = j;
 
         if (fAlt == 0) reBuffA = 0;
       }
 
       tiAlt = *PGetCurrTimeDate();
-      SetCanTime(mptiEsc_S, i+16*ibActives);   
+      SetCanTime(mptiEsc_S, i+16*ibMachineEsc);
     }
 
     ToFloat();
@@ -789,27 +787,27 @@ uchar   i,j;
   {
     sprintf(szHi+14,"%2bu",i+1);
 
-    if (GetDigitalDevice(i+16*ibActives) == 0)
+    if (GetDigitalDevice(i+16*ibMachineEsc) == 0)
     {
       moAlt.tiAlfa = *PGetCurrTimeDate();
       moAlt.tiBeta = moAlt.tiAlfa;
     }
-    else if (mpboEnblCan[i+16*ibActives] == FALSE)
+    else if (mpboEnblCan[i+16*ibMachineEsc] == FALSE)
     {
       moAlt.tiAlfa = tiZero;
       moAlt.tiBeta = moAlt.tiAlfa;
     }
-    else if ((boExtendedEscU == boTrue) || (GetDigitalPhone(i+16*ibActives) != 0))
-      moAlt = *PGetCanMoment(mpmoEsc_U, i+16*ibActives);
+    else if ((boExtendedEscU == boTrue) || (GetDigitalPhone(i+16*ibMachineEsc) != 0))
+      moAlt = *PGetCanMoment(mpmoEsc_U, i+16*ibMachineEsc);
     else
     {
-      LoadCurrDigital(i+16*ibActives);
+      LoadCurrDigital(i+16*ibMachineEsc);
       if (mpboChannelsA[diCurr.ibLine] == boTrue)
         moAlt.tiAlfa = tiChannelC;
       else
       {
         j = ibPort;
-        fAlt = ReadTimeDate(i+16*ibActives);
+        fAlt = ReadTimeDate(i+16*ibMachineEsc);
         ibPort = j;
 
         if (fAlt == 0) moAlt.tiAlfa = tiZero; else moAlt.tiAlfa = tiAlt;
@@ -835,7 +833,7 @@ uchar   i,j;
   SaveDisplay();
   sprintf(szHi,"Порт %bu: Esc V   ",ibPort+1); Clear();
 
-  ibMon = (bMONTHS+ibHardMon-mpbEsc_v[ ibActives ]) % bMONTHS;
+  ibMon = (bMONTHS+ibHardMon-mpbEsc_v[ ibMachineEsc ]) % bMONTHS;
 
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
@@ -844,46 +842,46 @@ uchar   i,j;
   {
     sprintf(szHi+14,"%2bu",i+1);
 
-    if (GetDigitalDevice(i+16*ibActives) == 0)
+    if (GetDigitalDevice(i+16*ibMachineEsc) == 0)
     {
       if (LoadCntMon(ibMon) == 1) 
-        reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], i+16*ibActives);
+        reBuffA = *PGetCanReal(mpreCntMonCan[ PrevSoftMon() ], i+16*ibMachineEsc);
       else
         reBuffA = 0;
 
       tiAlt = *PGetCurrTimeDate();
-      SetCanTime(mptiEsc_V, i+16*ibActives);   
+      SetCanTime(mptiEsc_V, i+16*ibMachineEsc);
     }
-    else if (mpboEnblCan[i+16*ibActives] == FALSE)
+    else if (mpboEnblCan[i+16*ibMachineEsc] == FALSE)
     {
       reBuffA = 0;
 
       tiAlt = *PGetCurrTimeDate();
-      SetCanTime(mptiEsc_V, i+16*ibActives);   
+      SetCanTime(mptiEsc_V, i+16*ibMachineEsc);
     }
-    else if ((boExtendedEscV == boTrue) || (GetDigitalPhone(i+16*ibActives) != 0))
+    else if ((boExtendedEscV == boTrue) || (GetDigitalPhone(i+16*ibMachineEsc) != 0))
     {
-      if (mpbEsc_v[ ibActives ] == 0)
-        reBuffA = *PGetCanReal(mpreEsc_V, i+16*ibActives);
+      if (mpbEsc_v[ ibMachineEsc ] == 0)
+        reBuffA = *PGetCanReal(mpreEsc_V, i+16*ibMachineEsc);
       else
         reBuffA = 0;
     }
     else
     {
-      LoadCurrDigital(i+16*ibActives);
+      LoadCurrDigital(i+16*ibMachineEsc);
       if (mpboChannelsA[diCurr.ibLine] == boTrue)
         reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
       else
       {
         j = ibPort;
-        fAlt = ReadCntMonCan(ibMon, i+16*ibActives);
+        fAlt = ReadCntMonCan(ibMon, i+16*ibMachineEsc);
         ibPort = j;
 
         if (fAlt == 0) reBuffA = 0;
       }
 
       tiAlt = *PGetCurrTimeDate();
-      SetCanTime(mptiEsc_V, i+16*ibActives);   
+      SetCanTime(mptiEsc_V, i+16*ibMachineEsc);
     }
 
     ToFloat();
@@ -967,19 +965,18 @@ uchar   i,j;
     if (enGlobal == GLB_PROGRAM)
       return;
 
-    if (boBlockingEsc == (boolean)1)
+    if (boBlockingEsc == TRUE)
       return;
 
-    // номер функции
     bQuery = InBuff(0);
 
-    ibActives = mpibActives[ibPort];
+    ibMachineEsc = mpibMachineEsc[ibPort];
 
     switch (bQuery)
     {
       case 0x30:
-        ibActives = 0xFF;
-        mpibActives[ibPort] = ibActives;
+        ibMachineEsc = 0xFF;
+        mpibMachineEsc[ibPort] = ibMachineEsc;
         return;
 
       case 0x31:
@@ -998,16 +995,16 @@ uchar   i,j;
       case 0x3E:
       case 0x3F:
       case 0x40:
-        for (i=0; i<bMaxMachinesEsc; i++)
+        for (i=0; i<bMaxMachineEsc; i++)
         {
           if ((bQuery - 0x31) == (bLogical + i - 1))
             break;
         }
 
-        if (i != bMaxMachinesEsc)
+        if (i != bMaxMachineEsc)
         {
-          ibActives = (bQuery - 0x31) - (bLogical - 1);
-          mpibActives[ibPort] = ibActives;
+          ibMachineEsc = (bQuery - 0x31) - (bLogical - 1);
+          mpibMachineEsc[ibPort] = ibMachineEsc;
 
           InitPush(0);
           PushChar(bQuery);
@@ -1017,8 +1014,8 @@ uchar   i,j;
         }
         else
         {
-          ibActives = 0xFF;
-          mpibActives[ibPort] = ibActives;
+          ibMachineEsc = 0xFF;
+          mpibMachineEsc[ibPort] = ibMachineEsc;
         }
 
         return;
@@ -1031,7 +1028,7 @@ uchar   i,j;
       return;
     }
 
-    if (ibActives >= bMaxMachinesEsc) return;
+    if (ibMachineEsc >= bMaxMachineEsc) return;
 
     ShowCommandEsc();
 
@@ -1098,7 +1095,7 @@ uchar   i,j;
       case 'V':  SimpleEscV();                       break;
 
       case 'j':
-        i = mpbEsc_j[ ibActives ] & 0x7F;
+        i = mpbEsc_j[ ibMachineEsc ] & 0x7F;
 
         if (++i >= 6) i = 0;
 
@@ -1107,9 +1104,9 @@ uchar   i,j;
         PushChar(i);
         Esc(2);
 
-        mpbEsc_j[ ibActives ] = i | 0x80;
+        mpbEsc_j[ ibMachineEsc ] = i | 0x80;
 
-        ShowNumberEsc( mpbEsc_j[ ibActives ] );
+        ShowNumberEsc( mpbEsc_j[ ibMachineEsc ] );
         break;
 
       case 'K':
@@ -1169,40 +1166,40 @@ uchar   i,j;
         break;
 
       case 'l':
-        i = mpbEsc_l[ ibActives ];
+        i = mpbEsc_l[ ibMachineEsc ];
 
         if (++i >= wHOURS/48) i = 0;
 
-        mpbEsc_l[ ibActives ] = i;
+        mpbEsc_l[ ibMachineEsc ] = i;
 
         InitPush(0);
         PushChar('l');
         PushChar(i);
         Esc(2);
 
-        ShowNumberEsc( mpbEsc_l[ ibActives ] );
+        ShowNumberEsc( mpbEsc_l[ ibMachineEsc ] );
         break;
 
       case 'v':
-        i = mpbEsc_v[ ibActives ];
+        i = mpbEsc_v[ ibMachineEsc ];
 
         if (++i >= 6) i = 0;
 
-        mpbEsc_v[ ibActives ] = i;
+        mpbEsc_v[ ibMachineEsc ] = i;
 
         InitPush(0);
         PushChar('v');
         PushChar(i);
         Esc(2);
 
-        ShowNumberEsc( mpbEsc_v[ ibActives ] );
+        ShowNumberEsc( mpbEsc_v[ ibMachineEsc ] );
         break;
 
       case '{':
         InitPush(0);
         for (i=0; i<16; i++)
         {
-          tiAlt = *PGetCanTime(mptiEsc_S, i+16*ibActives);    
+          tiAlt = *PGetCanTime(mptiEsc_S, i+16*ibMachineEsc);
           Push(&tiAlt, sizeof(time));
         }
         Esc(16*sizeof(time));
@@ -1212,7 +1209,7 @@ uchar   i,j;
         InitPush(0);
         for (i=0; i<16; i++)
         {
-          tiAlt = *PGetCanTime(mptiEsc_V, i+16*ibActives);    
+          tiAlt = *PGetCanTime(mptiEsc_V, i+16*ibMachineEsc);
           Push(&tiAlt, sizeof(time));
         }
         Esc(16*sizeof(time));
@@ -1321,7 +1318,7 @@ uchar   i,j;
         }
 
         // соcтав групп: все каналы
-        for (i=bFRAMES*ibActives; i<bFRAMES*(1+ibActives); i++)
+        for (i=bFRAMES*ibMachineEsc; i<bFRAMES*(1+ibMachineEsc); i++)
         {
           wBuffD = 0;
 
@@ -1336,7 +1333,7 @@ uchar   i,j;
         }
 
         // соcтав групп: каналы с отрицательным знаком
-        for (i=bFRAMES*ibActives; i<bFRAMES*(1+ibActives); i++)
+        for (i=bFRAMES*ibMachineEsc; i<bFRAMES*(1+ibMachineEsc); i++)
         {
           wBuffD = 0;
 
@@ -1354,14 +1351,14 @@ uchar   i,j;
         // коэффициенты трансформации
         for (i=0; i<16; i++)
         {
-          reBuffA = *PGetCanReal(mpreTransEng, i+16*ibActives);
+          reBuffA = *PGetCanReal(mpreTransEng, i+16*ibMachineEsc);
           PushRealBCD();
         }
 
         // коэффициенты преобразования
         for (i=0; i<16; i++)
         {
-          reBuffA = *PGetCanReal(mprePulseHou, i+16*ibActives);
+          reBuffA = *PGetCanReal(mprePulseHou, i+16*ibMachineEsc);
           PushRealBCD();
         }
 
@@ -1381,7 +1378,7 @@ uchar   i,j;
         // коэффициенты потерь
         for (i=0; i<16; i++)
         {
-          reBuffA = *PGetCanReal(mpreLosse, i+16*ibActives) * 1000000;
+          reBuffA = *PGetCanReal(mpreLosse, i+16*ibMachineEsc) * 1000000;
           PushRealBCD();
         }
 
@@ -1426,7 +1423,7 @@ uchar   i,j;
       case 'R':
         InitPush(0);
         Push("CќЊ+2 V.06 10.10.08!",20);
-        PushChar(0x31+ibActives);
+        PushChar(0x31+ibMachineEsc);
         Esc(21);
         break;
 
@@ -1464,12 +1461,12 @@ uchar   i,j;
         InitPush(0);
 
         for (i=0; i<16; i++)
-          PushChar(GetDigitalDevice(i+16*ibActives));
+          PushChar(GetDigitalDevice(i+16*ibMachineEsc));
 
         for (i=0; i<16; i++)
         {
-          PushChar(GetDigitalAddress(i+16*ibActives));
-          PushChar(GetDigitalLine(i+16*ibActives)+1);
+          PushChar(GetDigitalAddress(i+16*ibMachineEsc));
+          PushChar(GetDigitalLine(i+16*ibMachineEsc)+1);
         }
 
         Esc(16+32);
