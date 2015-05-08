@@ -26,3 +26,6 @@ void    OutGetNewPubTariffs(void);
 void    OutSetNewPubTariffs(void);
 
 void    OutGetTariffsDay(void);
+
+void    OutGetAllPowTariffs(void);
+void    OutGetAllEngTariffs(void);

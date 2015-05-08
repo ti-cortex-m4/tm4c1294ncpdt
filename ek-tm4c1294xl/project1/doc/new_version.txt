@@ -1,4 +1,1 @@
 wSET_DSBL_PASSWORD_UNI      418
-
-
-TODO чтение тарифов отдельно по modes

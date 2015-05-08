@@ -1,17 +1,17 @@
-  with mpQuerysCRC[i] do begin actAction1 := crcGetPublic;           cwOut := 1+6;       cwIn := 5+2+2;     bNumber := 14;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := crcSetPublic;           cwOut := 1+1+6;     cwIn := 5+1+2;     bNumber := 15;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := crcGetPublic;           cwOut := 1+6;       cwIn := 5+2+2;     bNumber := 14;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := crcSetPublic;           cwOut := 1+1+6;     cwIn := 5+1+2;     bNumber := 15;    stName := ''; Inc(i); end;
 
-  with mpQuerysCRC[i] do begin actAction1 := crcGetOldPowTariff;     cwOut := 3+6;       cwIn := 5+bZONE+2; bNumber := 18;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetOldPowTariff;     cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 19;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetAllOldPowTariffs; cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 19;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := crcGetOldPowTariff;     cwOut := 3+6;       cwIn := 5+bZONE+2; bNumber := 18;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetOldPowTariff;     cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 19;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetAllOldPowTariffs; cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 19;    stName := ''; Inc(i); end;
 
-  with mpQuerysCRC[i] do begin actAction1 := crcGetOldEngTariff;     cwOut := 3+6;       cwIn := 5+bZONE+2; bNumber := 20;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetOldEngTariff;     cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 21;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetAllOldEngTariffs; cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 21;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := crcGetOldEngTariff;     cwOut := 3+6;       cwIn := 5+bZONE+2; bNumber := 20;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetOldEngTariff;     cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 21;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetAllOldEngTariffs; cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 21;    stName := ''; Inc(i); end;
 
-  with mpQuerysCRC[i] do begin actAction1 := crcGetOldPubTariff;     cwOut := 3+6;       cwIn := 5+bZONE+2; bNumber := 22;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetOldPubTariff;     cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 23;    stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetAllOldPubTariffs; cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 23;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := crcGetOldPubTariff;     cwOut := 3+6;       cwIn := 5+bZONE+2; bNumber := 22;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetOldPubTariff;     cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 23;    stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetAllOldPubTariffs; cwOut := 3+bZONE+6; cwIn := 5+2+2;      bNumber := 23;    stName := ''; Inc(i); end;
 
   +   with mpQuerysCRC[i] do begin actAction1 := acGetTransEng;         cwOut := 1+6;               cwIn := 5+bREAL*bCANALS+2;  bNumber := 30;    stName := ''; Inc(i); end;
   +   with mpQuerysCRC[i] do begin actAction1 := acSetTransEng;         cwOut := 1+bREAL*bCANALS+6; cwIn := 5+2+2;              bNumber := 31;    stName := ''; Inc(i); end;

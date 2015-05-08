@@ -277,3 +277,17 @@ void    OutGetTariffsDay(void)
   Push(&mpibEngCurrTariff, 48);
   OutptrOutBuff(2 * 48);
 }
+
+
+
+void    OutGetAllPowTariffs(void)
+{
+  Common(&mpzoPowMonthMode, sizeof(mpzoPowMonthMode));
+}
+
+
+void    OutGetAllEngTariffs(void)
+{
+  Common(&mpzoEngMonthMode, sizeof(mpzoEngMonthMode));
+}
+
