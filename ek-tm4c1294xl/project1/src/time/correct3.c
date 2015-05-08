@@ -43,11 +43,11 @@ bool    Correct3Disabled(void)
 
 void    Correct3(event  ev)
 {
-//  uchar i;
-//  if ((i = GetCorrectIndex(ev)) == 0) return;
-//
-//  mpcwCorrect3[0]++;
-//  mpcwCorrect3[i]++;
+  uchar i;
+  if ((i = GetCorrectIndex(ev)) == 0) return;
+
+  mpcwCorrect3[0]++;
+  mpcwCorrect3[i]++;
 }
 
 /*

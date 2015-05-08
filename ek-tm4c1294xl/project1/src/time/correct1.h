@@ -4,5 +4,5 @@ CORRECT1.H
 
 ------------------------------------------------------------------------------*/
 
-//uchar   GetCorrectIndex(event  evCode);
+uchar   GetCorrectIndex(event  ev);
 void    CorrectTime_Full(time  ti, event  ev);

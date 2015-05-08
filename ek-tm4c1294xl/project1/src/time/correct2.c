@@ -36,7 +36,7 @@ void    ResetCorrect2(void)
 
 bool    Correct2Disabled(void)
 {
-  return boCorrect2 == TRUE;
+  return false; //boCorrect2 == TRUE;
 }
 
 
@@ -84,11 +84,11 @@ bool    Correct2Allowed(void)
 
 void    Correct2(event  ev)
 {
-//  uchar i;
-//  if ((i = GetCorrectIndex(ev)) == 0) return;
-//
-//  mpcwCorrect2[0]++;
-//  mpcwCorrect2[i]++;
+  uchar i;
+  if ((i = GetCorrectIndex(ev)) == 0) return;
+
+  mpcwCorrect2[0]++;
+  mpcwCorrect2[i]++;
 }
 
 
