@@ -27,27 +27,28 @@ void    OutGetRelaxs(void)
 
 void    OutSetRelaxs(void)
 {
-uchar  i;
-time   ti;
-
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     InitPop(6);
 
-    i = PopChar();
-    if (i <= bRELAXS)
+    uchar bSize = PopChar();
+    if (bSize <= bRELAXS)
     {
       memset(&reRelaxs, 0, sizeof(reRelaxs));
-      reRelaxs.bSize = i;
+      reRelaxs.bSize = bSize;
+
       if (reRelaxs.bSize > 0)
       {
+        uchar i;
         for (i=0; i<reRelaxs.bSize; i++)
         {
+          time ti;
           Pop(&ti, sizeof(time));
           reRelaxs.mptiDate[i] = ti;
         }
       }
-    	SaveFile(&flRelaxs);
+
+      SaveFile(&flRelaxs);
 
       LongResult(bRES_OK);
     }

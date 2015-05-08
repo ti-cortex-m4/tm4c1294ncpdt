@@ -43,8 +43,8 @@
   +   with mpQuerysCRC[i] do begin actAction1 := acGetAddresses;        cwOut := 1+1+1+6;           cwIn := 5+8+2;              bNumber := 255;   stName := ''; Inc(i); end;
   +   with mpQuerysCRC[i] do begin actAction1 := acSetAddresses;        cwOut := 1+1+1+8+6;         cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
 
-  with mpQuerysCRC[i] do begin actAction1 := acGetRelaxs;           cwOut := 2+6;               cwIn := 5+2+241+2;          bNumber := 255;   stName := ''; Inc(i); end;
-  with mpQuerysCRC[i] do begin actAction1 := acSetRelaxs;           cwOut := 2+241+6;           cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acGetRelaxs;           cwOut := 2+6;               cwIn := 5+2+241+2;          bNumber := 255;   stName := ''; Inc(i); end;
+  +   with mpQuerysCRC[i] do begin actAction1 := acSetRelaxs;           cwOut := 2+241+6;           cwIn := 5+2+2;              bNumber := 255;   stName := ''; Inc(i); end;
 
   with mpQuerysCRC[i] do begin actAction1 := acGetRecords;          cwOut := 1+1+2+6;         cwIn := 5+6+wFREEPAGE_SIZE+2; bNumber := 255;   stName := ''; Inc(i); end;
 
