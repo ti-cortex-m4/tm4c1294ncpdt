@@ -42,7 +42,7 @@ void    OutSetPublicTariffs(void)
 
 void    OutGetOldPowTariffs(void)
 {
-  if ((fPublicTariffs == FALSE) || (SuperUser() == 1))
+  if ((fPublicTariffs == FALSE) || (SuperUser() == true))
   {
     if (bInBuff5 < 12)
       Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zone));
@@ -80,7 +80,7 @@ void    OutSetOldPowTariffs(void)
 
 void    OutGetOldEngTariffs(void)
 {
-  if ((fPublicTariffs == FALSE) || (SuperUser() == 1))
+  if ((fPublicTariffs == FALSE) || (SuperUser() == true))
   {
     if (bInBuff5 < 12)
       Common(PGetZoneEngMonthMode(bInBuff5, 0), sizeof(zone));
@@ -118,7 +118,7 @@ void    OutSetOldEngTariffs(void)
 
 void    OutGetOldPubTariffs(void)
 {
-  if ((fPublicTariffs == TRUE) || (SuperUser() == 1))
+  if ((fPublicTariffs == TRUE) || (SuperUser() == true))
   {
     if (bInBuff5 < 12)
       Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zone));
