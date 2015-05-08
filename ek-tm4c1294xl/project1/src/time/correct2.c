@@ -5,9 +5,17 @@ CORRECT2.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_settings.h"
 #include "../memory/mem_correct2.h"
+#include "../serial/ports.h"
 #include "correct2.h"
 
+
+
+void    InitCorrect2(void)
+{
+
+}
 
 
 void    ResetCorrect2(void)
@@ -15,7 +23,7 @@ void    ResetCorrect2(void)
   boCorrect2 = FALSE;
 
   memset(&mpcwCorrect2, 0, sizeof(mpcwCorrect2));
-  memset(&mpbCorrect2, 0, sizeof(mpbCorrect2));
+  memset(&mpbPassCorrect2, 0, sizeof(mpbPassCorrect2));
 
   cdwCorrect20 = 0;
   cdwCorrect21 = 0;
@@ -33,16 +41,16 @@ bool    Correct2Disabled(void)
 
 
 
-bool    SuperUser2(void)
+bool    SuperUserCorrect2(void)
 {
-  return( (mpbCorrect2[0] == 2) &&
-          (mpbCorrect2[1] == 6) &&
-          (mpbCorrect2[2] == 1) &&
-          (mpbCorrect2[3] == 1) &&
-          (mpbCorrect2[4] == 3) &&
-          (mpbCorrect2[5] == 7) &&
-          (mpbCorrect2[6] == 9) &&
-          (mpbCorrect2[7] == 1) );
+  return( (mpbPassCorrect2[0] == 2) &&
+          (mpbPassCorrect2[1] == 6) &&
+          (mpbPassCorrect2[2] == 1) &&
+          (mpbPassCorrect2[3] == 1) &&
+          (mpbPassCorrect2[4] == 3) &&
+          (mpbPassCorrect2[5] == 7) &&
+          (mpbPassCorrect2[6] == 9) &&
+          (mpbPassCorrect2[7] == 1) );
 }
 
 
@@ -51,25 +59,25 @@ bool    Correct2Allowed(void)
 {
   cdwCorrect20++;
 
-  PopFar(mpbCorrect2, sizeof(mpbCorrect2));
-  mpbCorrect2[0] ^= 0x45;
-  mpbCorrect2[1] ^= 0xF6;
-  mpbCorrect2[2] ^= 0x57;
-  mpbCorrect2[3] ^= 0x27;
-  mpbCorrect2[4] ^= 0xE6;
-  mpbCorrect2[5] ^= 0x16;
-  mpbCorrect2[6] ^= 0xD6;
-  mpbCorrect2[7] ^= 0x56;
-  mpbCorrect2[8] ^= 0xE6;
-  mpbCorrect2[9] ^= 0x47;
+  Pop(mpbPassCorrect2, sizeof(mpbPassCorrect2));
+  mpbPassCorrect2[0] ^= 0x45;
+  mpbPassCorrect2[1] ^= 0xF6;
+  mpbPassCorrect2[2] ^= 0x57;
+  mpbPassCorrect2[3] ^= 0x27;
+  mpbPassCorrect2[4] ^= 0xE6;
+  mpbPassCorrect2[5] ^= 0x16;
+  mpbPassCorrect2[6] ^= 0xD6;
+  mpbPassCorrect2[7] ^= 0x56;
+  mpbPassCorrect2[8] ^= 0xE6;
+  mpbPassCorrect2[9] ^= 0x47;
 
-  if (boCorrect2 == FALSE) { cdwCorrect21++; return 1; }
-  if (SuperUser2()) { cdwCorrect22++; return 1; }
+  if (boCorrect2 == FALSE) { cdwCorrect21++; return true; }
+  if (SuperUserCorrect2()) { cdwCorrect22++; return true; }
 
-  if (memcmp(mpbPassOne, mpbCorrect2, 10) == 0)
-    { cdwCorrect23++; return 1; }
+  if (memcmp(mpbPassOne, mpbPassCorrect2, 10) == 0)
+    { cdwCorrect23++; return true; }
   else
-    { cdwCorrect24++; return 0; }
+    { cdwCorrect24++; return false; }
 }
 
 
@@ -95,14 +103,14 @@ void    OutCorrect21(void)
   InitPushCRC();
 
   PushChar(boCorrect2);
-  Push(&mpbCorrect2, sizeof(mpbCorrect2));
+  Push(&mpbPassCorrect2, sizeof(mpbPassCorrect2));
   Push(&mpcwCorrect2, sizeof(mpcwCorrect2));
 
-  PushLong(&cdwCorrect20);
-  PushLong(&cdwCorrect21);
-  PushLong(&cdwCorrect22);
-  PushLong(&cdwCorrect23);
-  PushLong(&cdwCorrect24);
+  PushLong(cdwCorrect20);
+  PushLong(cdwCorrect21);
+  PushLong(cdwCorrect22);
+  PushLong(cdwCorrect23);
+  PushLong(cdwCorrect24);
 
   Output(100);
 }
