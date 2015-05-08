@@ -3,15 +3,12 @@ CORRECT2.C
 
 
 ------------------------------------------------------------------------------*/
+
+#include "../main.h"
+#include "correct2.h"
+
+
 /*
-#include      <string.h>
-#include      "main.h"
-#include      "xdata.h"
-#include      "ports.h"
-#include      "gps2.h"
-
-
-
 void    ResetCorrect2(void)
 {
   boCorrect2 = boFalse;
@@ -25,14 +22,14 @@ void    ResetCorrect2(void)
   cdwCorrect23 = 0;
   cdwCorrect24 = 0;
 }
+*/
 
-
-bit     Correct2Disable(void)
+bool    Correct2Disabled(void)
 {
-  return (boCorrect2 == boTrue);
+  return false; //(boCorrect2 == boTrue);
 }
 
-
+/*
 #ifndef MODBUS
 
 bit     SuperUser2(void)
