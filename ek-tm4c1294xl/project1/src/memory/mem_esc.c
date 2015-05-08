@@ -18,4 +18,4 @@ uchar                   mpibMachineEsc[bPORTS];
 uchar                   ibMachineEsc;
 
 // флаг блокирования доступа
-boolean                 boDsblEsc;
+boolean                 boBlockEsc;

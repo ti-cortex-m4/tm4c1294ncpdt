@@ -5,7 +5,7 @@ ESC.H
 ------------------------------------------------------------------------------*/
 
 extern  file const              flMaxMachineEsc;
-extern  file const              flDsblEsc;
+extern  file const              flBlockEsc;
 
 
 

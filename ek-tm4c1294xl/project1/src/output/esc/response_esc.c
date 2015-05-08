@@ -115,7 +115,7 @@ uchar   i;
     if (enGlobal == GLB_PROGRAM)
       return;
 
-    if (boDsblEsc == (boolean)1)
+    if (boBlockEsc == (boolean)1)
       return;
 
     bQuery = InBuff(0);
@@ -182,7 +182,7 @@ uchar   i;
 
     ShowCommand();
 
-    if (boDsblEsc == TRUE)
+    if (boBlockEsc == TRUE)
     {
       if (bQuery != 'R') 
       {
@@ -386,7 +386,7 @@ void    EscAT(void)
 
 void    SlaveModem(void)
 {
-  if ((boSlaveModem == boTrue) && (mpanSendAT[ibPort] == ANS_ANSWER))
+  if ((boSlaveModem == TRUE) && (mpanSendAT[ibPort] == ANS_ANSWER))
   {
     mpanSendAT[ibPort] = ANS_BEGIN;
 

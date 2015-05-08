@@ -79,6 +79,7 @@ KEYBOARD_KEY.C
 #include "digitals/profile/key_dsbl_refill.h"
 #include "digitals/key_max_repeats.h"
 #include "digitals/key_dsbl_esc.h"
+#include "esc/key_block_esc.h"
 #include "unified/key_strict_uni.h"
 #include "unified/key_dsbl_password_uni.h"
 #include "unified/key_max_delay_uni.h"

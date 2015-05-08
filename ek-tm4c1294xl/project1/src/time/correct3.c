@@ -63,14 +63,14 @@ uchar i;
 
   InitPushCRC();
 
-  PushChar(((bPortGPS > 0) && (bPortGPS <= bPORTS)) ? boTrue : FALSE);
+  PushChar(((bPortGPS > 0) && (bPortGPS <= bPORTS)) ? TRUE : FALSE);
   PushChar(boCorrect3);
   PushLong(&cdwAbsCorrect3);
   PushLong(&cdwPosCorrect3);
   PushChar(bMaxCorrect3);
   Push(&tiPosCorrect3, sizeof(time));
   Push(&tiNegCorrect3, sizeof(time));
-  PushChar(Correct3Disable() ? boTrue : FALSE);
+  PushChar(Correct3Disable() ? TRUE : FALSE);
   Push(&mpcwCorrect3, sizeof(mpcwCorrect3));
 
   Output(100);
