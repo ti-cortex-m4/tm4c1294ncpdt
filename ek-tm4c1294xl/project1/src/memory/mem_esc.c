@@ -16,3 +16,6 @@ uchar                   mpibMachineEsc[bPORTS];
 
 // индекс текущего активного логического прибора
 uchar                   ibMachineEsc;
+
+// флаг блокирования доступа
+boolean                 boBlockingEsc;

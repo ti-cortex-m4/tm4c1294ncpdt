@@ -9,3 +9,5 @@ extern  uchar                   bMaxMachineEsc;
 extern  uchar                   mpibMachineEsc[bPORTS];
 
 extern  uchar                   ibMachineEsc;
+
+extern  boolean                 boBlockingEsc;
