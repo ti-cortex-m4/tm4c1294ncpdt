@@ -9,7 +9,7 @@ MEM_ESC.C
 
 
 // максимальное количество логических приборов —Ёћ-1
-uchar                   bMaxMachineEsc;
+uchar                   bMachineEsc;
 
 // массив индексов активных логических приборов
 uchar                   mpibMachineEsc[bPORTS];
