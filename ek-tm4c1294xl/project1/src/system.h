@@ -100,6 +100,10 @@ SYSTEM.H
 #define bCHANNELS       128
 
 
+// максимальное количество виртуальных приборов —Ёћ-1
+#define bMACHINES       bGROUPS/6 + 1
+
+
 // минимальный год
 #define bMINYEAR        15
 

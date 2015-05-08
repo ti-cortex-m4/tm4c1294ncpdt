@@ -114,6 +114,7 @@ void    key_SetReset(void)
           ResetPhones();
           ResetProfile();
           ResetSpeeds();
+          ResetEsc();
           ResetUni();
           ResetFlow();
 //          ResetCurrent();
