@@ -11,7 +11,7 @@ RESPONSE_ESC.C
 #include "../../console.h"
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
-//#include "../../include/states.h"
+#include "../../keyboard/key_timedate.h"
 //#include "../../include/queries_uni.h"
 //#include "../../time/rtc.h"
 //#include "../../kernel/crc-16.h"
@@ -163,17 +163,14 @@ uchar   i,j;
   memcpy(&reBuffA, &coFloat, sizeof(ulong));
 }
 #endif
-
+*/
 
 void    EscPtrReset(void)
 {
-  memset(&mpbEsc_j, '\0', sizeof(mpbEsc_j));
-  memset(&mpbEsc_l, '\0', sizeof(mpbEsc_l));
-  memset(&mpbEsc_v, '\0', sizeof(mpbEsc_v));
 }
 
 
-
+/*
 void    EscDisplay(void)
 {
   InitPush(0);
@@ -895,36 +892,36 @@ uchar   i,j;
 */
 
 
-void    ShowInfoEsc(uchar  *szT)
+static void ShowCtrlZ()
 {
-//  if (bProgram == bGET_ANALYSIS1)
-//  {
-//    sprintf(szHi,"项痱 %bu: %s",ibPort+1,szT);
-//    Clear();
-//    NoShowTime(0);
-//  }
+  if (wProgram == bTEST_RESPONSE)
+  {
+    sprintf(szHi,"项痱 %u: Ctrl Z",ibPort+1);
+    Clear();
+    HideCurrentTime(0);
+  }
 }
 
 
-void    ShowCommandEsc(void)
+static void ShowCommand(void)
 {
-//  if (bProgram == bGET_ANALYSIS1)
-//  {
-//    sprintf(szHi,"项痱 %bu: Esc %c",ibPort+1,bQuery);
-//    NoShowTime(0);
-//  }
+  if (wProgram == bTEST_RESPONSE)
+  {
+    sprintf(szHi,"项痱 %u: Esc %c",ibPort+1,bQuery);
+    HideCurrentTime(0);
+  }
 }
 
-
-void    ShowNumberEsc(uchar  i)
+/*
+static void ShowNumber(uchar  i)
 {
-//  if (bProgram == bGET_ANALYSIS1)
-//  {
-//    sprintf(szHi+14,"%2bu",i);
-//    NoShowTime(0);
-//  }
+  if (wProgram == bTEST_RESPONSE)
+  {
+    sprintf(szHi+14,"%2u",i);
+    HideCurrentTime(0);
+  }
 }
-
+*/
 
 
 void    Esc(uint  wSize)
@@ -948,14 +945,14 @@ void    Esc(uint  wSize)
 
 void    RunResponseEsc(void)
 {
-uchar   i,j;
+uchar   i;
 
   if (mpSerial[ibPort] == SER_CTRL_Z)
   {
     mpSerial[ibPort] = SER_BEGIN;
     EscPtrReset();
 
-    ShowInfoEsc(szCtrlZ);
+    ShowCtrlZ();
   }
   else
   if (mpSerial[ibPort] == SER_CHAR)
@@ -1010,7 +1007,7 @@ uchar   i,j;
           PushChar(bQuery);
           Esc(1);
 
-          ShowCommandEsc();
+          ShowCommand();
         }
         else
         {
@@ -1024,13 +1021,13 @@ uchar   i,j;
     if (bQuery == 'A')
     {
       Beep();
-      ShowCommandEsc();
+      ShowCommand();
       return;
     }
 
     if (ibMachineEsc >= bMaxMachineEsc) return;
 
-    ShowCommandEsc();
+    ShowCommand();
 
     if (boBlockingEsc == TRUE)
     {
