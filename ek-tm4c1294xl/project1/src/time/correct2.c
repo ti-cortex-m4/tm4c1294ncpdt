@@ -8,6 +8,7 @@ CORRECT2.C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_correct2.h"
 #include "../serial/ports.h"
+#include "correct1.h"
 #include "correct2.h"
 
 
