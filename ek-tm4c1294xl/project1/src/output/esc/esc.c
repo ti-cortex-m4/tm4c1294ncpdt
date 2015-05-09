@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-ESC.C
+ESC,C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,6 +7,7 @@ ESC.C
 #include "../../main.h"
 #include "../../memory/mem_esc.h"
 #include "../../flash/files.h"
+#include "../../flash/files2.h"
 #include "esc.h"
 
 
@@ -18,14 +19,8 @@ file const              flBlockEsc = {BLOCK_ESC, &boBlockEsc, sizeof(boolean)};
 
 void    InitEsc(void)
 {
-  LoadFile(&flMachinesEsc);
-  if ((bMachineEsc == 0) || (bMachineEsc > bMAXMACHINES))
-  {
-    bMachineEsc = bMAXMACHINES;
-    SaveFile(&flMachinesEsc);
-  }
-
-  LoadFile(&flBlockEsc);
+  LoadFileChar(&flMachinesEsc, 1, bMAXMACHINES, bMAXMACHINES);
+  LoadFileBoolean(&flBlockEsc, FALSE);
 }
 
 
