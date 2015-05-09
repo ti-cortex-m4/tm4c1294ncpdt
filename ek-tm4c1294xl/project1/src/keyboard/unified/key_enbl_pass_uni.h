@@ -4,4 +4,4 @@ KEY_ENBL_PASSW_UNI,H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetDsblPasswordUni(void);
+void    key_SetEnblPassUni(void);
