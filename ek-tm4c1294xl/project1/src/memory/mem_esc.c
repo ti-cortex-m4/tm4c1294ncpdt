@@ -12,10 +12,10 @@ MEM_ESC.C
 uchar                   bMachineEsc;
 
 // массив индексов активных логических приборов
-uchar                   mpibMachineEsc[bPORTS];
+uchar                   mpibActiveEsc[bPORTS];
 
 // индекс текущего активного логического прибора
-uchar                   ibMachineEsc;
+uchar                   ibActiveEsc;
 
 // флаг блокирования доступа
 boolean                 boBlockEsc;
