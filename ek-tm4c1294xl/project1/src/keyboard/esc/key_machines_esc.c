@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_MACHINES_ESC.C
+KEY_MACHINES_ESC,C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,9 +12,10 @@ KEY_MACHINES_ESC.C
 
 
 //                                          0123456789ABCDEF
-static char const       szMessage[]      = "Емкость: Esc    ";
+static char const       szMessage1[]     = "    Емкость     ",
+                        szMessage2[]     = "протокола Esc ? ";
 
-static char const       *pszMessages[]   = { szMessage, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szCharLimits, "" };
 
 
 
