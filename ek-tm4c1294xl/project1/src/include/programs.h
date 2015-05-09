@@ -269,7 +269,7 @@ PROGRAMS.H
 #define wSET_DSBL_ESC               410
 
 #define wSET_STRICT_UNI             417
-#define wSET_ENBL_PASS_UNI         418
+#define wSET_ENBL_PASS_UNI          418
 #define wSET_MAX_DELAY_UNI          422
 #define wSET_REPEAT_FLOW_UNI        288
 

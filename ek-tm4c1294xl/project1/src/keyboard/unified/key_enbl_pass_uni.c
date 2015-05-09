@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_DSBL_PASSWORD_UNI,C
+KEY_ENBL_PASSW_UNI,C
 
 
 ------------------------------------------------------------------------------*/
@@ -19,7 +19,7 @@ static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
 
 
 
-void    key_SetDsblPasswordUni(void)
+void    key_SetEnblPassUni(void)
 {
   key_SetBool(&flEnblPasswUni, pszMessages);
 }
