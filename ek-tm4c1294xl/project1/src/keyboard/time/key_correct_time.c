@@ -38,7 +38,7 @@ void    key_CorrectTime(void)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (CorrectTime(EVE_PROGRAM_2) == true)
+      if (CorrectTime_Full(EVE_PROGRAM_2) == true)
         enKeyboard = KBD_SHOW;
       else
         LongBeep();
