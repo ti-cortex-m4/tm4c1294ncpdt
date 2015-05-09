@@ -10,8 +10,27 @@ TODO persist
 #include "../memory/mem_correct1.h"
 #include "../time/timedate.h"
 #include "../time/rtc.h"
+#include "../flash/files.h"
 #include "../flash/records.h"
 #include "correct1.h"
+
+
+
+file const              flCorrect1 = {CORRECT1, &Correct1, sizeof(Correct1)};
+
+
+
+void    InitCorrect1(void)
+{
+  LoadFile(&flCorrect1);
+}
+
+
+void    ResetCorrect1(void)
+{
+  memset(&Correct1, 0, sizeof(Correct1));
+  SaveFile(&flCorrect1);
+}
 
 
 

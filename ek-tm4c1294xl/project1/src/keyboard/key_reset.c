@@ -28,6 +28,7 @@ KEY_RESET.C
 #include "../hardware/memory.h"
 #include "../storage/storage.h"
 #include "../time/decret.h"
+#include "../time/correct1.h"
 
 
 
@@ -71,14 +72,15 @@ void    key_SetReset(void)
 //          ResetCustom();
 //
           ResetDecret();
+          ResetCorrect1();
+//          ResetCorrect2();
+//          ResetCorrect3();
           ResetLimits();
 //          ResetGaps();
 //          ResetExtended3();
 //          ResetExtended4();
 //          ResetExtended4T();
 //          ResetExtended6();
-//          ResetCorrect2();
-//          ResetCorrect3();
           ResetDevices();
 //          ResetCurrent2();
 //          ResetCheckupCustom();
@@ -100,9 +102,10 @@ void    key_SetReset(void)
           Clear();
 
           ResetSettings(true);
-//          ResetXDATA();
-//          ResetKeyboard();
           ResetDecret();
+          ResetCorrect1();
+//          ResetCorrect2();
+//          ResetCorrect3();
           ResetGroups();
           ResetFactors();
           ResetZones();
@@ -130,8 +133,6 @@ void    key_SetReset(void)
 //          ResetExtended4();
 //          ResetExtended4T();
 //          ResetExtended6();
-//          ResetCorrect2();
-//          ResetCorrect3();
 //          ResetCurrent2();
 //          ResetBulk();
 //          ResetRecordDisable();

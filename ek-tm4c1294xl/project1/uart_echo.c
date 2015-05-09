@@ -97,6 +97,7 @@ int main(void) {
 	InitPhones();
 	InitProfile();
 	InitSpeeds();
+	InitCorrect1();
 	InitEsc();
 	InitUni();
 	InitFlow();             Delay(100); TestOK();
