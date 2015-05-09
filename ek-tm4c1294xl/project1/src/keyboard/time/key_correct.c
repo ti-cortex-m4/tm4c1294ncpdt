@@ -71,7 +71,9 @@ void    ShowCorrectCurr2(void)
     case 6: wPos = Correct1.mpwPosCountCurr[9]; wNeg = Correct1.mpwNegCountCurr[9]; break;
   }
 
-  Clear(); sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
+  Clear();
+  sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
+
   Delay(1000);
   ShowCorrectCurr1();
 }
@@ -167,7 +169,9 @@ void    ShowCorrectPrev2(void)
     case 6: wPos = Correct1.mpwPosCountPrev[9]; wNeg = Correct1.mpwNegCountPrev[9]; break;
   }
 
-  Clear(); sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
+  Clear();
+  sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
+
   Delay(1000);
   ShowCorrectPrev1();
 }

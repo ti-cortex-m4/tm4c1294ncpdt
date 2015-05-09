@@ -118,7 +118,7 @@ typedef enum
   STRICT_UNI            = BLOCK_ESC + 1,
   MAX_DELAY_UNI         = STRICT_UNI + 1,
   REPEAT_FLOW_INI       = MAX_DELAY_UNI + 1,
-  ENBL_PASS_INI     = REPEAT_FLOW_INI + 1,
+  ENBL_PASS_INI         = REPEAT_FLOW_INI + 1,
 
   USE_BOUNDS            = ENBL_PASS_INI + 1,
   START_REL_CAN         = USE_BOUNDS + 1,
@@ -179,5 +179,7 @@ typedef enum
   SET_GROUPS            = SET_DATE + 1,
   SET_PASSWORD          = SET_GROUPS + 1,
 
-  END                   = SET_PASSWORD + 1
+  CORRECT1              = SET_PASSWORD + 1,
+
+  END                   = CORRECT1 + sizeof(Correct1)/wFREEPAGE_SIZE + 1
 } flash;
