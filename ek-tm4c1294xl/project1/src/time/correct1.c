@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 CORRECT1.C
 
-TODO persist
+
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -91,6 +91,8 @@ void    CorrectTime_Full(time  ti, event  ev)
     Correct1.mpwNegCountCurr[0]++;
     Correct1.mpwNegCountCurr[i]++;
   }
+
+  SaveFile(&flCorrect1);
 }
 
 
@@ -148,6 +150,8 @@ bool    CorrectTime(event  ev)
       }
     }
   }
+
+  SaveFile(&flCorrect1);
 
   AddKeyRecord(ev);
   SetCurrTime(ti);

@@ -59,6 +59,7 @@ TODO .C
 #include "src/output/unified/response_uni.h"
 #include "src/storage/storage.h"
 #include "src/time/decret.h"
+#include "src/time/correct1.h"
 #include "src/realtime/realtime.h"
 #include "src/realtime/realtime_init.h"
 #include "src/output/response_crc.h"
@@ -90,6 +91,7 @@ int main(void) {
 	InitRelaxs();
 	InitGaps();             Delay(100); TestOK();
 	InitDecret();
+	InitCorrect1();
 	InitDigitals();         Delay(100); TestOK();
 	InitLimits();
   InitDevices1();
@@ -97,7 +99,6 @@ int main(void) {
 	InitPhones();
 	InitProfile();
 	InitSpeeds();
-	InitCorrect1();
 	InitEsc();
 	InitUni();
 	InitFlow();             Delay(100); TestOK();
