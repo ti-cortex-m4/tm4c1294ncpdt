@@ -28,3 +28,9 @@ uint                    mpcwGPSRun[20];
 
 // значения времени до/после последней коррекции
 time                    tiPrevCorrect, tiPostCorrect;
+
+// признак использования сезонного времени при расчете местного времени
+boolean                 boSeasonGPS;
+
+// буфер значения сезона
+uchar                   bSeasonCurr;

@@ -16,8 +16,3 @@ uint                    mpcwPosValueCurr[15], mpcwNegValueCurr[15],
 uint                    mpcwPosCountCurr[15], mpcwNegCountCurr[15],
                         mpcwPosCountPrev[15], mpcwNegCountPrev[15];
 
-// признак использования сезонного времени при расчете местного времени
-boolean                 boSeasonGPS;
-
-// буфер значения сезона
-uchar                   bSeasonCurr;
