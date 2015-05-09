@@ -51,7 +51,7 @@
 
 #define bSET_PASSWORD               11
 #define bSET_LOGICAL                13
-#define bSET_MACHINES               113
++   #define bSET_MACHINES               113
 #define bSET_START                  15
 #define bSET_STARTHOU               16
 #define bSET_PRIVATE                99
@@ -325,7 +325,7 @@
 #define bSET_CUSTOMMODEM            203
 #define bSET_POWERED_ESC            204
 #define bSET_BLOCKING_CRC           205
-#define bSET_BLOCKING_ESC           206
++   #define bSET_BLOCKING_ESC           206
 #define bGET_DOOR                   207
 
 #define bGET_STREAM                 216

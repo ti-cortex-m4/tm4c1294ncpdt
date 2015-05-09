@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_BLOCK_ESC.C
+KEY_BLOCK_ESC,C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,19 +12,23 @@ KEY_BLOCK_ESC.C
 
 
 //                                         0123456789ABCDEF
-static char const       szBlockEsc[]     = "Запрет для Esc ?",
-                        szNone[]         = " нет            ",
-                        szPartly[]       = " частичный      ",
-                        szFull[]         = " полный         ";
+static char const       szMessage1[]    = "     Запрет     ",
+                        szMessage2[]    = "протокола Esc ? ",
+                        szNo[]          = " нет            ",
+                        szPartial[]     = " частичный      ",
+                        szFull[]        = " полный         ";
+
+
+static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
 
 
 
 static void Show(void)
 {
   if (boBlockEsc == FALSE)
-    ShowLo(szNone);
+    ShowLo(szNo);
   else if (boBlockEsc == TRUE)
-    ShowLo(szPartly);
+    ShowLo(szPartial);
   else
     ShowLo(szFull);
 
@@ -43,7 +47,7 @@ void    key_SetBlockEsc(void)
       enKeyboard = KBD_INPUT1;
       Clear();
 
-      ShowHi(szBlockEsc);
+      LoadSlide(pszMessages);
       Show();
     }
     else Beep();
