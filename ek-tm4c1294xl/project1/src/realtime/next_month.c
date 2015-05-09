@@ -16,6 +16,7 @@ NEXT_MONTH.C
 #include "../devices/extended_4.h"
 #include "../devices/extended_4t.h"
 #include "../devices/extended_6.h"
+#include "../time/correct1.h"
 #include "realtime_storage.h"
 
 
@@ -47,4 +48,6 @@ void    NextMonth(void)
 
   // обработка достоверности по месяцам
   NextMonDef();
+
+  NextMonCorrect1();
 }

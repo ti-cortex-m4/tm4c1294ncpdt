@@ -34,6 +34,23 @@ void    ResetCorrect1(void)
 
 
 
+void    NextMonCorrect1(void)
+{
+  // сохранение данныех коррекции за предыдущий мес€ц
+  memcpy(&mpcwPosValuePrev, &mpcwPosValueCurr, sizeof(mpcwPosValuePrev));
+  memcpy(&mpcwNegValuePrev, &mpcwNegValueCurr, sizeof(mpcwNegValuePrev));
+  memcpy(&mpcwPosCountPrev, &mpcwPosCountCurr, sizeof(mpcwPosCountPrev));
+  memcpy(&mpcwNegCountPrev, &mpcwNegCountCurr, sizeof(mpcwNegCountPrev));
+
+  // обнуление данныех коррекции за текущий мес€ц
+  memset(&mpcwPosValueCurr, 0, sizeof(mpcwPosValueCurr));
+  memset(&mpcwNegValueCurr, 0, sizeof(mpcwNegValueCurr));
+  memset(&mpcwPosCountCurr, 0, sizeof(mpcwPosCountCurr));
+  memset(&mpcwNegCountCurr, 0, sizeof(mpcwNegCountCurr));
+}
+
+
+
 uchar   GetCorrectIndex(event  ev)
 {
   switch (ev)
