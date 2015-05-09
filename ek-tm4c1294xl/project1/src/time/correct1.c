@@ -34,6 +34,7 @@ uchar   GetCorrectIndex(event  ev)
 
 
 
+// установка текущего времени
 void    CorrectTime_Full(time  ti, event  ev)
 {
   uchar i;
@@ -64,7 +65,7 @@ void    CorrectTime_Full(time  ti, event  ev)
   }
   else
   {
-  	uint w = dw1 - dw2;
+    uint w = dw1 - dw2;
 
     mpcwNegValueCurr[0] += w;
     mpcwNegValueCurr[i] += w;
@@ -72,7 +73,6 @@ void    CorrectTime_Full(time  ti, event  ev)
     mpcwNegCountCurr[i]++;
   }
 }
-
 
 
 // коррекция секунд текущего времени
