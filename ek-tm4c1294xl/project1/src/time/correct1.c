@@ -58,19 +58,19 @@ void    CorrectTime_Full(time  ti, event  ev)
   {
     uint w = dw2 - dw1;
 
-    mpcwPosValueCurr[0] += w;
-    mpcwPosValueCurr[i] += w;
-    mpcwPosCountCurr[0]++;
-    mpcwPosCountCurr[i]++;
+    Correct1.mpwPosValueCurr[0] += w;
+    Correct1.mpwPosValueCurr[i] += w;
+    Correct1.mpwPosCountCurr[0]++;
+    Correct1.mpwPosCountCurr[i]++;
   }
   else
   {
     uint w = dw1 - dw2;
 
-    mpcwNegValueCurr[0] += w;
-    mpcwNegValueCurr[i] += w;
-    mpcwNegCountCurr[0]++;
-    mpcwNegCountCurr[i]++;
+    Correct1.mpwNegValueCurr[0] += w;
+    Correct1.mpwNegValueCurr[i] += w;
+    Correct1.mpwNegCountCurr[0]++;
+    Correct1.mpwNegCountCurr[i]++;
   }
 }
 
@@ -86,28 +86,28 @@ bool    CorrectTime(event  ev)
 
   if (ti.bSecond < 30)
   {
-    if (mpcwNegValueCurr[i] + ti.bSecond > wMAXCORRECT)
+    if (Correct1.mpwNegValueCurr[i] + ti.bSecond > wMAXCORRECT)
       return false;
     else
     {
-      mpcwNegValueCurr[0] += ti.bSecond;
-      mpcwNegValueCurr[i] += ti.bSecond;
-      mpcwNegCountCurr[0]++;
-      mpcwNegCountCurr[i]++;
+      Correct1.mpwNegValueCurr[0] += ti.bSecond;
+      Correct1.mpwNegValueCurr[i] += ti.bSecond;
+      Correct1.mpwNegCountCurr[0]++;
+      Correct1.mpwNegCountCurr[i]++;
 
       ti.bSecond = 0;
     }
   }
   else
   {
-    if (mpcwPosValueCurr[i] + ti.bSecond > wMAXCORRECT)
+    if (Correct1.mpwPosValueCurr[i] + ti.bSecond > wMAXCORRECT)
       return false;
     else
     {
-      mpcwPosValueCurr[0] += 60 - ti.bSecond;
-      mpcwPosValueCurr[i] += 60 - ti.bSecond;
-      mpcwPosCountCurr[0]++;
-      mpcwPosCountCurr[i]++;
+      Correct1.mpwPosValueCurr[0] += 60 - ti.bSecond;
+      Correct1.mpwPosValueCurr[i] += 60 - ti.bSecond;
+      Correct1.mpwPosCountCurr[0]++;
+      Correct1.mpwPosCountCurr[i]++;
 
       ti.bSecond = 0;
       if (++ti.bMinute >= 60)

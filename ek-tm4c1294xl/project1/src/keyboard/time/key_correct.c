@@ -35,14 +35,14 @@ void    ShowCorrectCurr1(void)
 
   switch (ibX)
   {
-    case 0: ShowLo(szCorrTotal);   wPos = mpcwPosValueCurr[0]; wNeg = mpcwNegValueCurr[0]; break;
-    case 1: ShowLo(szCorrGPS);     wPos = mpcwPosValueCurr[1]; wNeg = mpcwNegValueCurr[1]; break;
-    case 2: ShowLo(szCorrKey);     wPos = mpcwPosValueCurr[2]; wNeg = mpcwNegValueCurr[2]; break;
-    case 3: ShowLo(szCorrCRC);     wPos = mpcwPosValueCurr[3]; wNeg = mpcwNegValueCurr[3]; break;
-    case 4: ShowLo(szCorrEscK_hi); wPos = mpcwPosValueCurr[4]; wNeg = mpcwNegValueCurr[4]; break;
-    case 5: ShowLo(szCorrEscK_lo); wPos = mpcwPosValueCurr[5]; wNeg = mpcwNegValueCurr[5]; break;
+    case 0: ShowLo(szCorrTotal);   wPos = Correct1.mpwPosValueCurr[0]; wNeg = Correct1.mpwNegValueCurr[0]; break;
+    case 1: ShowLo(szCorrGPS);     wPos = Correct1.mpwPosValueCurr[1]; wNeg = Correct1.mpwNegValueCurr[1]; break;
+    case 2: ShowLo(szCorrKey);     wPos = Correct1.mpwPosValueCurr[2]; wNeg = Correct1.mpwNegValueCurr[2]; break;
+    case 3: ShowLo(szCorrCRC);     wPos = Correct1.mpwPosValueCurr[3]; wNeg = Correct1.mpwNegValueCurr[3]; break;
+    case 4: ShowLo(szCorrEscK_hi); wPos = Correct1.mpwPosValueCurr[4]; wNeg = Correct1.mpwNegValueCurr[4]; break;
+    case 5: ShowLo(szCorrEscK_lo); wPos = Correct1.mpwPosValueCurr[5]; wNeg = Correct1.mpwNegValueCurr[5]; break;
 
-    case 6: ShowLo(szCorrSMK);     wPos = mpcwPosValueCurr[9]; wNeg = mpcwNegValueCurr[9]; break;
+    case 6: ShowLo(szCorrSMK);     wPos = Correct1.mpwPosValueCurr[9]; wNeg = Correct1.mpwNegValueCurr[9]; break;
   }
 
   Delay(1000); Clear();
@@ -61,14 +61,14 @@ void    ShowCorrectCurr2(void)
 
   switch (ibX)
   {
-    case 0: wPos = mpcwPosCountCurr[0]; wNeg = mpcwNegCountCurr[0]; break;
-    case 1: wPos = mpcwPosCountCurr[1]; wNeg = mpcwNegCountCurr[1]; break;
-    case 2: wPos = mpcwPosCountCurr[2]; wNeg = mpcwNegCountCurr[2]; break;
-    case 3: wPos = mpcwPosCountCurr[3]; wNeg = mpcwNegCountCurr[3]; break;
-    case 4: wPos = mpcwPosCountCurr[4]; wNeg = mpcwNegCountCurr[4]; break;
-    case 5: wPos = mpcwPosCountCurr[5]; wNeg = mpcwNegCountCurr[5]; break;
+    case 0: wPos = Correct1.mpwPosCountCurr[0]; wNeg = Correct1.mpwNegCountCurr[0]; break;
+    case 1: wPos = Correct1.mpwPosCountCurr[1]; wNeg = Correct1.mpwNegCountCurr[1]; break;
+    case 2: wPos = Correct1.mpwPosCountCurr[2]; wNeg = Correct1.mpwNegCountCurr[2]; break;
+    case 3: wPos = Correct1.mpwPosCountCurr[3]; wNeg = Correct1.mpwNegCountCurr[3]; break;
+    case 4: wPos = Correct1.mpwPosCountCurr[4]; wNeg = Correct1.mpwNegCountCurr[4]; break;
+    case 5: wPos = Correct1.mpwPosCountCurr[5]; wNeg = Correct1.mpwNegCountCurr[5]; break;
 
-    case 6: wPos = mpcwPosCountCurr[9]; wNeg = mpcwNegCountCurr[9]; break;
+    case 6: wPos = Correct1.mpwPosCountCurr[9]; wNeg = Correct1.mpwNegCountCurr[9]; break;
   }
 
   Clear(); sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
@@ -131,14 +131,14 @@ void    ShowCorrectPrev1(void)
 
   switch (ibX)
   {
-    case 0: ShowLo(szCorrTotal);   wPos = mpcwPosValuePrev[0]; wNeg = mpcwNegValuePrev[0]; break;
-    case 1: ShowLo(szCorrGPS);     wPos = mpcwPosValuePrev[1]; wNeg = mpcwNegValuePrev[1]; break;
-    case 2: ShowLo(szCorrKey);     wPos = mpcwPosValuePrev[2]; wNeg = mpcwNegValuePrev[2]; break;
-    case 3: ShowLo(szCorrCRC);     wPos = mpcwPosValuePrev[3]; wNeg = mpcwNegValuePrev[3]; break;
-    case 4: ShowLo(szCorrEscK_hi); wPos = mpcwPosValuePrev[4]; wNeg = mpcwNegValuePrev[4]; break;
-    case 5: ShowLo(szCorrEscK_lo); wPos = mpcwPosValuePrev[5]; wNeg = mpcwNegValuePrev[5]; break;
+    case 0: ShowLo(szCorrTotal);   wPos = Correct1.mpwPosValuePrev[0]; wNeg = Correct1.mpwNegValuePrev[0]; break;
+    case 1: ShowLo(szCorrGPS);     wPos = Correct1.mpwPosValuePrev[1]; wNeg = Correct1.mpwNegValuePrev[1]; break;
+    case 2: ShowLo(szCorrKey);     wPos = Correct1.mpwPosValuePrev[2]; wNeg = Correct1.mpwNegValuePrev[2]; break;
+    case 3: ShowLo(szCorrCRC);     wPos = Correct1.mpwPosValuePrev[3]; wNeg = Correct1.mpwNegValuePrev[3]; break;
+    case 4: ShowLo(szCorrEscK_hi); wPos = Correct1.mpwPosValuePrev[4]; wNeg = Correct1.mpwNegValuePrev[4]; break;
+    case 5: ShowLo(szCorrEscK_lo); wPos = Correct1.mpwPosValuePrev[5]; wNeg = Correct1.mpwNegValuePrev[5]; break;
 
-    case 6: ShowLo(szCorrSMK);     wPos = mpcwPosValuePrev[9]; wNeg = mpcwNegValuePrev[9]; break;
+    case 6: ShowLo(szCorrSMK);     wPos = Correct1.mpwPosValuePrev[9]; wNeg = Correct1.mpwNegValuePrev[9]; break;
   }
 
   Delay(1000); Clear();
@@ -157,14 +157,14 @@ void    ShowCorrectPrev2(void)
 
   switch (ibX)
   {
-    case 0: wPos = mpcwPosCountPrev[0]; wNeg = mpcwNegCountPrev[0]; break;
-    case 1: wPos = mpcwPosCountPrev[1]; wNeg = mpcwNegCountPrev[1]; break;
-    case 2: wPos = mpcwPosCountPrev[2]; wNeg = mpcwNegCountPrev[2]; break;
-    case 3: wPos = mpcwPosCountPrev[3]; wNeg = mpcwNegCountPrev[3]; break;
-    case 4: wPos = mpcwPosCountPrev[4]; wNeg = mpcwNegCountPrev[4]; break;
-    case 5: wPos = mpcwPosCountPrev[5]; wNeg = mpcwNegCountPrev[5]; break;
+    case 0: wPos = Correct1.mpwPosCountPrev[0]; wNeg = Correct1.mpwNegCountPrev[0]; break;
+    case 1: wPos = Correct1.mpwPosCountPrev[1]; wNeg = Correct1.mpwNegCountPrev[1]; break;
+    case 2: wPos = Correct1.mpwPosCountPrev[2]; wNeg = Correct1.mpwNegCountPrev[2]; break;
+    case 3: wPos = Correct1.mpwPosCountPrev[3]; wNeg = Correct1.mpwNegCountPrev[3]; break;
+    case 4: wPos = Correct1.mpwPosCountPrev[4]; wNeg = Correct1.mpwNegCountPrev[4]; break;
+    case 5: wPos = Correct1.mpwPosCountPrev[5]; wNeg = Correct1.mpwNegCountPrev[5]; break;
 
-    case 6: wPos = mpcwPosCountPrev[9]; wNeg = mpcwNegCountPrev[9]; break;
+    case 6: wPos = Correct1.mpwPosCountPrev[9]; wNeg = Correct1.mpwNegCountPrev[9]; break;
   }
 
   Clear(); sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
