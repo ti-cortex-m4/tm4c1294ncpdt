@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 KEY_CORRECT.C
 
-
+ ѕросмотр статистики коррекции времени за текущий и предыдущий мес€цы
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -28,8 +28,7 @@ static char const       *pszCorrectCurr[] = { szCorrect, szCurrMonth, "" },
 
 
 
-// вывод статистики коррекции секунд за текущий мес€ц
-void    ShowCorrectCurr1(void)
+static void ShowCorrectValueCurr(void)
 {
   uint wPos, wNeg;
 
@@ -45,7 +44,9 @@ void    ShowCorrectCurr1(void)
     case 6: ShowLo(szCorrSMK);     wPos = Correct1.mpwPosValueCurr[9]; wNeg = Correct1.mpwNegValueCurr[9]; break;
   }
 
-  Delay(1000); Clear();
+  Delay(1000);
+
+  Clear();
   sprintf(szLo+1,"+%02u.%02u  -%02u.%02u",
                  (uchar)(wPos / 60),
                  (uchar)(wPos % 60),
@@ -54,8 +55,7 @@ void    ShowCorrectCurr1(void)
 }
 
 
-// вывод статистики коррекции секунд за текущий мес€ц
-void    ShowCorrectCurr2(void)
+static void ShowCorrectCountCurr(void)
 {
   uint wPos, wNeg;
 
@@ -72,14 +72,13 @@ void    ShowCorrectCurr2(void)
   }
 
   Clear();
-  sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
+  sprintf(szLo+3,"%5u  %-5u", wPos, wNeg);
 
   Delay(1000);
-  ShowCorrectCurr1();
+  ShowCorrectValueCurr();
 }
 
 
-// просмотр статистики коррекции секунд за текущий мес€ц
 void    key_GetCorrectCurr(void)
 {
   if (bKey == bKEY_ENTER)
@@ -92,12 +91,12 @@ void    key_GetCorrectCurr(void)
       Clear();
 
       ibX = 0;
-      ShowCorrectCurr1();
+      ShowCorrectValueCurr();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++ibX > 6) ibX = 0;
-      ShowCorrectCurr1();
+      ShowCorrectValueCurr();
     }
     else Beep();
   }
@@ -108,7 +107,7 @@ void    key_GetCorrectCurr(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       if (ibX > 0) ibX--; else ibX = 6;
-      ShowCorrectCurr1();
+      ShowCorrectValueCurr();
     }
     else Beep();
   }
@@ -117,7 +116,7 @@ void    key_GetCorrectCurr(void)
   else if (bKey == bKEY_MINUS)
   {
     if (enKeyboard == KBD_POSTENTER)
-      ShowCorrectCurr2();
+      ShowCorrectCountCurr();
     else
       Beep();
   }
@@ -126,8 +125,7 @@ void    key_GetCorrectCurr(void)
 
 
 
-// вывод статистики коррекции секунд за предыдущий мес€ц
-void    ShowCorrectPrev1(void)
+static void ShowCorrectValuePrev(void)
 {
   uint wPos, wNeg;
 
@@ -143,7 +141,9 @@ void    ShowCorrectPrev1(void)
     case 6: ShowLo(szCorrSMK);     wPos = Correct1.mpwPosValuePrev[9]; wNeg = Correct1.mpwNegValuePrev[9]; break;
   }
 
-  Delay(1000); Clear();
+  Delay(1000);
+
+  Clear();
   sprintf(szLo+1,"+%02u.%02u  -%02u.%02u",
                  (uchar)(wPos / 60),
                  (uchar)(wPos % 60),
@@ -152,8 +152,7 @@ void    ShowCorrectPrev1(void)
 }
 
 
-// вывод статистики коррекции секунд за предыдущий мес€ц
-void    ShowCorrectPrev2(void)
+static void ShowCorrectCountPrev(void)
 {
   uint wPos, wNeg;
 
@@ -170,14 +169,13 @@ void    ShowCorrectPrev2(void)
   }
 
   Clear();
-  sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
+  sprintf(szLo+3,"%5u  %-5u", wPos, wNeg);
 
   Delay(1000);
-  ShowCorrectPrev1();
+  ShowCorrectValuePrev();
 }
 
 
-// просмотр статистики коррекции секунд за предыдущий мес€ц
 void    key_GetCorrectPrev(void)
 {
   if (bKey == bKEY_ENTER)
@@ -190,12 +188,12 @@ void    key_GetCorrectPrev(void)
       Clear();
 
       ibX = 0;
-      ShowCorrectPrev1();
+      ShowCorrectValuePrev();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++ibX > 6) ibX = 0;
-      ShowCorrectPrev1();
+      ShowCorrectValuePrev();
     }
     else Beep();
   }
@@ -206,7 +204,7 @@ void    key_GetCorrectPrev(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       if (ibX > 0) ibX--; else ibX = 6;
-      ShowCorrectPrev1();
+      ShowCorrectValuePrev();
     }
     else Beep();
   }
@@ -215,7 +213,7 @@ void    key_GetCorrectPrev(void)
   else if (bKey == bKEY_MINUS)
   {
     if (enKeyboard == KBD_POSTENTER)
-      ShowCorrectPrev2();
+      ShowCorrectCountPrev();
     else
       Beep();
   }

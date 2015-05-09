@@ -15,6 +15,7 @@ U_CONFIG.C
 #include "../../memory/mem_phones.h"
 #include "../../memory/mem_params.h"
 #include "../../memory/mem_uni.h"
+#include "../../memory/mem_correct1.h"
 #include "../../include/states.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
@@ -207,9 +208,9 @@ void    GetCorrectionsUni(void)
   for (c=bInBuff6; c<bInBuff6+bInBuff7; c++)
   {
     if (c == 0)
-      PushInt((sint)(Correct1.mpcwPosValueCurr[0] - Correct1.mpcwNegValueCurr[0]));
+      PushInt((sint)(Correct1.mpwPosValueCurr[0] - Correct1.mpwNegValueCurr[0]));
     else if (c == 1)
-      PushInt((sint)(Correct1.mpcwPosValuePrev[0] - Correct1.mpcwNegValuePrev[0]));
+      PushInt((sint)(Correct1.mpwPosValuePrev[0] - Correct1.mpwNegValuePrev[0]));
     else
       PushInt(0);
   }

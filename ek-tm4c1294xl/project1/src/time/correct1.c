@@ -98,7 +98,7 @@ void    SetCurrTime_Full(time  ti, event  ev)
 
 
 // коррекция секунд текущего времени
-bool    CorrectTime(event  ev)
+bool    CorrectTime_Full(event  ev)
 {
   uchar i;
   if ((i = GetCorrectIndex(ev)) == 0) return(0);
