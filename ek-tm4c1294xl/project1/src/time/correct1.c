@@ -50,26 +50,25 @@ void    CorrectTime_Full(time  ti, event  ev)
   AddKeyRecord(EVE_TIME_OK);
 
 
-//  tiAlt = tiPostCorrect;
-//  dwBuffC = GetSecondIndex();
-//
-//  tiAlt = tiPrevCorrect;
-//  if (dwBuffC > GetSecondIndex())
-//  {
-//    dwBuffC = dwBuffC - GetSecondIndex();
-//
-//    mpcwPosValueCurr[0] += (uint)dwBuffC;
-//    mpcwPosValueCurr[i] += (uint)dwBuffC;
-//    mpcwPosCountCurr[0]++;
+  ulong dw1 = GetSecondIndex(tiPrevCorrect);
+  ulong dw2 = GetSecondIndex(tiPostCorrect);
+
+  if (dw2 > dw1)
+  {
+    uint w = dw2 - dw1;
+
+    mpcwPosValueCurr[0] += w;
+    mpcwPosValueCurr[i] += w;
+    mpcwPosCountCurr[0]++;
     mpcwPosCountCurr[i]++;
-//  }
-//  else
-//  {
-//    dwBuffC = GetSecondIndex() - dwBuffC;
-//
-//    mpcwNegValueCurr[0] += (uint)dwBuffC;
-//    mpcwNegValueCurr[i] += (uint)dwBuffC;
-//    mpcwNegCountCurr[0]++;
+  }
+  else
+  {
+  	uint w = dw1 - dw2;
+
+    mpcwNegValueCurr[0] += w;
+    mpcwNegValueCurr[i] += w;
+    mpcwNegCountCurr[0]++;
     mpcwNegCountCurr[i]++;
-//  }
+  }
 }
