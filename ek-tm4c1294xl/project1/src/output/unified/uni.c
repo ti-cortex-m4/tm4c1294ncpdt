@@ -23,7 +23,7 @@ file const              flGroupsName = {GROUPS_NAME, &mpszGroupsName, sizeof(mps
 file const              flStrictUni = {STRICT_UNI, &boStrictUni, sizeof(boolean)};
 file const              flMaxDelayUni = {MAX_DELAY_UNI, &bMaxDelayUni, sizeof(uchar)};
 file const              flRepeatFlowUni = {REPEAT_FLOW_INI, &boRepeatFlowUni, sizeof(boolean)};
-file const              flDsblPasswordUni = {DSBL_PASSWORD_INI, &boDsblPasswordUni, sizeof(boolean)};
+file const              flEnblPasswUni = {ENBL_PASS_INI, &boEnblPassUni, sizeof(boolean)};
 
 
 
@@ -44,7 +44,7 @@ void    InitUni(void)
 
   LoadFile(&flRepeatFlowUni);
 
-  LoadFile(&flDsblPasswordUni);
+  LoadFile(&flEnblPasswUni);
 
   uchar p;
   for (p=0; p<bPORTS; p++)
@@ -89,8 +89,8 @@ void    ResetUni(void)
   boRepeatFlowUni = FALSE;
   SaveFile(&flRepeatFlowUni);
 
-  boDsblPasswordUni = FALSE;
-  SaveFile(&flDsblPasswordUni);
+  boEnblPassUni = TRUE;
+  SaveFile(&flEnblPasswUni);
 }
 
 

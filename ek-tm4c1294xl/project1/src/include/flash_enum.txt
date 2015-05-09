@@ -118,9 +118,9 @@ typedef enum
   STRICT_UNI            = BLOCK_ESC + 1,
   MAX_DELAY_UNI         = STRICT_UNI + 1,
   REPEAT_FLOW_INI       = MAX_DELAY_UNI + 1,
-  DSBL_PASSWORD_INI     = REPEAT_FLOW_INI + 1,
+  ENBL_PASS_INI     = REPEAT_FLOW_INI + 1,
 
-  USE_BOUNDS            = DSBL_PASSWORD_INI + 1,
+  USE_BOUNDS            = ENBL_PASS_INI + 1,
   START_REL_CAN         = USE_BOUNDS + 1,
   START_ABS16_CAN       = START_REL_CAN + 1,
   START_ABS32_CAN       = START_ABS16_CAN + 1,

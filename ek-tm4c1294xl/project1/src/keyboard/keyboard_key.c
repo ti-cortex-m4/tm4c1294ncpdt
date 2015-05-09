@@ -253,7 +253,7 @@ void    Keyboard_Key(void)
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
-      case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
+      case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
 
@@ -492,7 +492,7 @@ void    Keyboard_Key(void)
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
-      case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
+      case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
 
@@ -646,7 +646,7 @@ void    Keyboard_Key(void)
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
-      case wSET_DSBL_PASSWORD_UNI:  key_SetDsblPasswordUni();  break;
+      case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
 

@@ -26,4 +26,4 @@ extern  uchar                   bMaxDelayUni;
 
 extern  boolean                 boRepeatFlowUni;
 
-extern  boolean                 boDsblPasswordUni;
+extern  boolean                 boEnblPassUni;
