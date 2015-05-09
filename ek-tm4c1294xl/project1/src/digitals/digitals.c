@@ -45,11 +45,17 @@ void    ResetDigitals(void)
   boEnblKeys = FALSE;
   SaveFile(&flEnblKeys);
 
+
+  memset(&mpphKeys, 0, sizeof(mpphKeys));
+
   uchar c;
   for (c=0; c<bCANALS; c++)
-    strcpy((char *)mpphKeys[c].szNumber, "0");
+  {
+    mpphKeys[c].szNumber[0] = 0x30;
+  }
 
   SaveFile(&flKeys);
+
 
   for (c=0; c<bCANALS; c++)
   {
