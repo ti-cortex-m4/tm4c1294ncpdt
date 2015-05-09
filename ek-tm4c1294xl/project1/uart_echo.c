@@ -92,6 +92,7 @@ int main(void) {
 	InitDecret();
 	InitDigitals();         Delay(100); TestOK();
 	InitLimits();
+  InitDevices1();
 	InitParams();
 	InitPhones();
 	InitProfile();
@@ -111,7 +112,7 @@ int main(void) {
 
 //    InitCurrent();
 //    InitProfiles();
-    InitDevices();
+    InitDevices2();
 
     InitSerial0();
     InitSerial1();

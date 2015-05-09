@@ -59,7 +59,7 @@ file const              flShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, si
 
 
 
-void    InitDevices(void)
+void    InitDevices1(void)
 {
   LoadFile(&flSeparateCan);
   LoadFile(&flShowMessages);
@@ -76,6 +76,22 @@ void    InitDevices(void)
 
   LoadFile(&flShortProfileC);
 
+  InitMaxRepeats();
+  InitDef();
+  InitDefects();
+  InitRefill();
+  InitSchedule();
+  InitExtended1();
+  InitExtended4();
+  InitExtended4T();
+  InitExtended5();
+  InitExtended6();
+  InitExtended7();
+}
+
+
+void    InitDevices2(void)
+{
 //uchar   i,j;
 //
 //  if (GetLabelXDATA() == 0)
@@ -103,18 +119,6 @@ void    InitDevices(void)
   ibPortPause = 0xFF;
 
   EnableAnswer();
-
-  InitMaxRepeats();
-  InitDef();
-  InitDefects();
-  InitRefill();
-  InitSchedule();
-  InitExtended1();
-  InitExtended4();
-  InitExtended4T();
-  InitExtended5();
-  InitExtended6();
-  InitExtended7();
 }
 
 
