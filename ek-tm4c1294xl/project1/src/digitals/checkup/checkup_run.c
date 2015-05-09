@@ -11,7 +11,7 @@ CHECKUP_RUN.C
 #include "../../memory/mem_checkup.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-#include "../../keyboard/key_timedate.h"
+#include "../../keyboard/time/key_timedate.h"
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
 #include "../../serial/dtr.h"

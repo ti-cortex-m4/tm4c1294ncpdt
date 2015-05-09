@@ -12,7 +12,7 @@ RESPONSE_CRC.C
 #include "../kernel/crc-16.h"
 #include "../display/display.h"
 #include "../keyboard/keyboard.h"
-#include "../keyboard/key_timedate.h"
+#include "../keyboard/time/key_timedate.h"
 #include "../serial/ports.h"
 #include "../serial/flow.h"
 #include "response1_crc.h"

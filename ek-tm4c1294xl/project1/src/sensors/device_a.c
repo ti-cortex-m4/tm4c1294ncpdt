@@ -15,7 +15,7 @@ DEVICE_A.C
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
 #include "../display/display.h"
-#include "../keyboard/key_timedate.h"
+#include "../keyboard/time/key_timedate.h"
 #include "../time/timedate.h"
 #include "../time/calendar.h"
 #include "../time/decret.h"
