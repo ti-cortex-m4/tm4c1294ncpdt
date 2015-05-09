@@ -34,11 +34,16 @@ void    InitPhones(void)
 
 void    ResetPhones(void)
 {
+  memset(&mpphPhones, 0, sizeof(mpphPhones));
+
   uchar c;
   for (c=0; c<bCANALS; c++)
-    strcpy((char *)mpphPhones[c].szNumber, "0");
+  {
+    mpphPhones[c].szNumber[0] = 0x30;
+  }
 
   SaveFile(&flPhones);
+
 
   bMaxConnect = 60;
   SaveFile(&flMaxConnect);
