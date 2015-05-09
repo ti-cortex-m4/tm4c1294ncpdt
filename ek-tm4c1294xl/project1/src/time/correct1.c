@@ -6,8 +6,11 @@ CORRECT1.C
 
 #include "../main.h"
 #include "../memory/mem_realtime.h"
+#include "../memory/mem_gps.h"
+#include "../memory/mem_correct1.h"
 #include "../time/timedate.h"
 #include "../time/rtc.h"
+#include "../flash/records.h"
 #include "correct1.h"
 
 
@@ -33,21 +36,20 @@ uchar   GetCorrectIndex(event  ev)
 
 void    CorrectTime_Full(time  ti, event  ev)
 {
-//  uchar   i;
-//  if ((i = GetCorrectIndex(evCode)) == 0) return;
-//
-//  AddKeyRecord(evCode);
-//  tiPrevCorrect = tiCurr;
-//  tiPostCorrect = tiAlt;
-//
-//
-//  tiSetRTC = tiAlt;
-//  SetCurrTime();
-//  tiPrev = tiAlt;
-//
-//  AddKeyRecord(EVE_TIME_OK);
-//
-//
+  uchar i;
+  if ((i = GetCorrectIndex(ev)) == 0) return;
+
+  AddKeyRecord(ev);
+  tiPrevCorrect = tiCurr;
+  tiPostCorrect = ti;
+
+
+  SetCurrTime(ti);
+  tiPrev = ti;
+
+  AddKeyRecord(EVE_TIME_OK);
+
+
 //  tiAlt = tiPostCorrect;
 //  dwBuffC = GetSecondIndex();
 //
@@ -59,7 +61,7 @@ void    CorrectTime_Full(time  ti, event  ev)
 //    mpcwPosValueCurr[0] += (uint)dwBuffC;
 //    mpcwPosValueCurr[i] += (uint)dwBuffC;
 //    mpcwPosCountCurr[0]++;
-//    mpcwPosCountCurr[i]++;
+    mpcwPosCountCurr[i]++;
 //  }
 //  else
 //  {
@@ -68,6 +70,6 @@ void    CorrectTime_Full(time  ti, event  ev)
 //    mpcwNegValueCurr[0] += (uint)dwBuffC;
 //    mpcwNegValueCurr[i] += (uint)dwBuffC;
 //    mpcwNegCountCurr[0]++;
-//    mpcwNegCountCurr[i]++;
+    mpcwNegCountCurr[i]++;
 //  }
 }
