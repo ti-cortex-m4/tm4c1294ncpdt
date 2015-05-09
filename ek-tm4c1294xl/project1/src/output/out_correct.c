@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-OUT_CORRECT.C
+OUT_CORRECT,C
 
 
 ------------------------------------------------------------------------------*/
@@ -30,7 +30,6 @@ void    OutCorrect1(void)
   if (ValidTimeDate(ti) == true)
   {
     SetCurrTimeDate(ti);
-
     Result(bRES_OK);
   }
   else Result(bRES_BADDATA);
@@ -54,17 +53,15 @@ void    OutCorrect2(void)
         (tiCurr.bMonth != ti.bMonth) ||
         (tiCurr.bYear  != ti.bYear))
       Result(bRES_BADMODE);
-    else
-    if ((tiCurr.bHour*2 + tiCurr.bMinute/30) != (ti.bHour*2 + ti.bMinute/30))
+    else if ((tiCurr.bHour*2 + tiCurr.bMinute/30) != (ti.bHour*2 + ti.bMinute/30))
       Result(bRES_BADMODE);
     else
     {
       CorrectTime_Full(ti, EVE_EXT_CORRECT2);
-
       Result(bRES_OK);
     }
   }
-    else Result(bRES_BADDATA);
+  else Result(bRES_BADDATA);
 }
 
 
@@ -84,8 +81,7 @@ void    OutCorrect20(void)
         (tiCurr.bMonth != ti.bMonth) ||
         (tiCurr.bYear  != ti.bYear))
       Result(bRES_BADMODE);
-    else
-    if ((tiCurr.bHour*2 + tiCurr.bMinute/30) != (ti.bHour*2 + ti.bMinute/30))
+    else if ((tiCurr.bHour*2 + tiCurr.bMinute/30) != (ti.bHour*2 + ti.bMinute/30))
       Result(bRES_BADMODE);
     else
     {
