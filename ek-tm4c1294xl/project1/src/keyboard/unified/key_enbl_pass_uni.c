@@ -21,5 +21,5 @@ static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
 
 void    key_SetDsblPasswordUni(void)
 {
-  key_SetBool(&flDsblPasswordUni, pszMessages);
+  key_SetBool(&flEnblPasswUni, pszMessages);
 }
