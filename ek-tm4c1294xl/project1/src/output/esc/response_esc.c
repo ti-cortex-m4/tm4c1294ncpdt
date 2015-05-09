@@ -120,13 +120,13 @@ uchar   i;
 
     bQuery = InBuff(0);
 
-    ibMachineEsc = mpibMachineEsc[ibPort];
+    ibActiveEsc = mpibActiveEsc[ibPort];
 
     switch (bQuery)
     {
       case 0x30:
-        ibMachineEsc = 0xFF;
-        mpibMachineEsc[ibPort] = ibMachineEsc;
+        ibActiveEsc = 0xFF;
+        mpibActiveEsc[ibPort] = ibActiveEsc;
         return;
 
       case 0x31:
@@ -153,8 +153,8 @@ uchar   i;
 
         if (i != bMachineEsc)
         {
-          ibMachineEsc = (bQuery - 0x31) - (bLogical - 1);
-          mpibMachineEsc[ibPort] = ibMachineEsc;
+          ibActiveEsc = (bQuery - 0x31) - (bLogical - 1);
+          mpibActiveEsc[ibPort] = ibActiveEsc;
 
           InitPush(0);
           PushChar(bQuery);
@@ -164,8 +164,8 @@ uchar   i;
         }
         else
         {
-          ibMachineEsc = 0xFF;
-          mpibMachineEsc[ibPort] = ibMachineEsc;
+          ibActiveEsc = 0xFF;
+          mpibActiveEsc[ibPort] = ibActiveEsc;
         }
 
         return;
@@ -178,7 +178,7 @@ uchar   i;
       return;
     }
 
-    if (ibMachineEsc >= bMachineEsc) return;
+    if (ibActiveEsc >= bMachineEsc) return;
 
     ShowCommand();
 
@@ -265,7 +265,7 @@ uchar   i;
       case 'R':
         InitPush(0);
         Push("Cùå+2 V.06 10.10.08!",20);
-        PushChar(0x31+ibMachineEsc);
+        PushChar(0x31+ibActiveEsc);
         Esc(21);
         break;
 
