@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-CORRECT1.C
+CORRECT1,C
 
 
 ------------------------------------------------------------------------------*/
@@ -54,15 +54,16 @@ uchar   GetCorrectIndex(event  ev)
 
 
 // установка текущего времени
-void    CorrectTime_Full(time  ti, event  ev)
+void    SetCurrTime_Full(time  ti, event  ev)
 {
   uchar i;
   if ((i = GetCorrectIndex(ev)) == 0) return;
 
+
   AddKeyRecord(ev);
+
   tiPrevCorrect = tiCurr;
   tiPostCorrect = ti;
-
 
   SetCurrTime(ti);
   tiPrev = ti;

@@ -190,8 +190,7 @@ void    GetCorrectUni(void)
       Result2(bUNI_BADTIME);
     else
     { 
-      CorrectTime_Full(ti, EVE_UNI_CORRECT);
-
+      SetCurrTime_Full(ti, EVE_UNI_CORRECT);
       Result2(bUNI_OK);
     }
   }
@@ -199,22 +198,25 @@ void    GetCorrectUni(void)
 }
 
 
-/*
+
 void    GetCorrectionsUni(void)
 {
   InitPushUni();
+
+  uchar c;
   for (c=bInBuff6; c<bInBuff6+bInBuff7; c++)
   {
     if (c == 0)
-      PushInt((sint)(mpcwPosValueCurr[0] - mpcwNegValueCurr[0]));
+      PushInt((sint)(Correct1.mpcwPosValueCurr[0] - Correct1.mpcwNegValueCurr[0]));
     else if (c == 1)
-      PushInt((sint)(mpcwPosValuePrev[0] - mpcwNegValuePrev[0]));
+      PushInt((sint)(Correct1.mpcwPosValuePrev[0] - Correct1.mpcwNegValuePrev[0]));
     else
       PushInt(0);
   }
+
   Output2(2*(bInBuff7-bInBuff6));
 }
-*/
+
 
 
 void    GetOpenUni(void) 
