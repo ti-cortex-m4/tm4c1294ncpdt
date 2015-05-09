@@ -73,7 +73,7 @@ void    OutCorrect3(void)
   Push(&tiPosCorrect3, sizeof(time));
   Push(&tiNegCorrect3, sizeof(time));
   PushChar(Correct3Disabled() ? TRUE : FALSE);
-  Push(&mpcwCorrect3, sizeof(mpcwCorrect3));
+  Push(&mpcwCorrect3, sizeof(mpcwCorrect3)); // TODO
 
   Output(100);
 }

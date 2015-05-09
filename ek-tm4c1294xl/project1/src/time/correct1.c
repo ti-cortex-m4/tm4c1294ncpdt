@@ -33,17 +33,18 @@ uchar   GetCorrectIndex(event  ev)
 
 void    CorrectTime_Full(time  ti, event  ev)
 {
-//  uchar i;
-//  if ((i = GetCorrectIndex(ev)) == 0) return;
-
+//  uchar   i;
+//  if ((i = GetCorrectIndex(evCode)) == 0) return;
+//
 //  AddKeyRecord(evCode);
 //  tiPrevCorrect = tiCurr;
 //  tiPostCorrect = tiAlt;
-
-
-  SetCurrTime(ti);
-  tiPrev = ti;
-
+//
+//
+//  tiSetRTC = tiAlt;
+//  SetCurrTime();
+//  tiPrev = tiAlt;
+//
 //  AddKeyRecord(EVE_TIME_OK);
 //
 //
