@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 OUT_SCHEDULE.C
-                    
+
 
 ------------------------------------------------------------------------------*/
 
@@ -30,14 +30,15 @@ void    OutSetEnblPrtHou(void)
 
     uchar i;
     for (i=0; i<48; i++)
+    {
       mpboEnblPrtHou[bInBuff6][i] = CharToBoolean(PopChar());
+    }
 
     SaveFile(&flEnblPrtHou);
 
     LongResult(bRES_OK);
   }
-  else
-    Result(bRES_BADADDRESS);
+  else Result(bRES_BADADDRESS);
 }
 
 
@@ -54,7 +55,9 @@ void    OutSetCtrlHou(void)
 
   uchar i;
   for (i=0; i<48; i++)
+  {
     mpboCtrlHou[i] = CharToBoolean(PopChar());
+  }
 
   SaveFile(&flCtrlHou);
 
@@ -81,7 +84,9 @@ void    OutSetRecalcHou1(void)
 
   uchar i;
   for (i=0; i<48; i++)
+  {
     mpboRecalcHou[i] = CharToBoolean(PopChar());
+  }
 
   SaveFile(&flRecalcHou);
 
@@ -97,7 +102,9 @@ void    OutSetRecalcHou2(void)
 
   uchar i;
   for (i=0; i<48; i++)
+  {
     mpboRecalcHou[i] = CharToBoolean(PopChar());
+  }
 
   SaveFile(&flRecalcHou);
 
