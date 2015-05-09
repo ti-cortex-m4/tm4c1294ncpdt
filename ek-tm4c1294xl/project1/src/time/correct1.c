@@ -72,3 +72,73 @@ void    CorrectTime_Full(time  ti, event  ev)
     mpcwNegCountCurr[i]++;
   }
 }
+
+
+
+// коррекция секунд текущего времени
+bool    CorrectTime(event  evCode)
+{
+  uchar i;
+  if ((i = GetCorrectIndex(evCode)) == 0) return(0);
+
+
+  time tiSetRTC = *PGetCurrTimeDate();
+
+  if (tiSetRTC.bSecond < 30)
+  {
+    if (mpcwNegValueCurr[i] + tiSetRTC.bSecond > wMAXCORRECT)
+      return(0);
+    else
+    {
+      mpcwNegValueCurr[0] += tiSetRTC.bSecond;
+      mpcwNegValueCurr[i] += tiSetRTC.bSecond;
+      mpcwNegCountCurr[0]++;
+      mpcwNegCountCurr[i]++;
+
+      tiSetRTC.bSecond = 0;
+    }
+  }
+  else
+  {
+    if (mpcwPosValueCurr[i] + tiSetRTC.bSecond > wMAXCORRECT)
+      return(0);
+    else
+    {
+      mpcwPosValueCurr[0] += 60 - tiSetRTC.bSecond;
+      mpcwPosValueCurr[i] += 60 - tiSetRTC.bSecond;
+      mpcwPosCountCurr[0]++;
+      mpcwPosCountCurr[i]++;
+
+      tiSetRTC.bSecond = 0;
+
+      if (++tiSetRTC.bMinute >= 60)
+      {
+        tiSetRTC.bMinute = 0;
+
+        if (++tiSetRTC.bHour >= 24)
+        {
+          tiSetRTC.bHour = 0;
+          memcpy(&tiAlt, &tiSetRTC, sizeof(time));
+
+          if (++tiSetRTC.bDay > DaysInMonth())
+          {
+            tiSetRTC.bDay = 1;
+
+            if (++tiSetRTC.bMonth > 12)
+            {
+              tiSetRTC.bMonth = 1;
+              tiSetRTC.bYear++;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  AddKeyRecord(evCode);
+  SetCurrTime();
+  AddKeyRecord(EVE_TIME_OK);
+
+  return(1);
+}
+

@@ -177,6 +177,11 @@ PROGRAMS.H
 
 // все режимы
 
+#define bSET_CORRECT2               75
+#define bSET_CORRECT30              76
+#define bSET_CORRECT31              77
+#define bSET_CORRECT32              86
+
 #define bSET_DIGITALS               90
 #define bSET_ENBL_HOURS             182
 #define bSET_CONTROL_HOURS          183
