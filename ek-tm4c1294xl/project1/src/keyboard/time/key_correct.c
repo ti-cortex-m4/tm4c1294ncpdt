@@ -23,55 +23,55 @@ static char const       szCorrect[]     = " оррекци€ секунд",
                         szCorrEscK_lo[] = "по системе Esc k",
                         szCorrSMK[]     = "   с —»ћЁ -48   ";
 
-static char const       *pszGetCorrectCurr[] = { szCorrect, szCurrMonth, "" },
-                        *pszGetCorrectPrev[] = { szCorrect, szPrevMonth, "" };
+static char const       *pszCorrectCurr[] = { szCorrect, szCurrMonth, "" },
+                        *pszCorrectPrev[] = { szCorrect, szPrevMonth, "" };
 
 
 
 // вывод статистики коррекции секунд за текущий мес€ц
 void    ShowCorrectCurr1(void)
 {
-  uint iwAmax, iwAmin;
+  uint wPos, wNeg;
 
   switch (ibX)
   {
-    case 0: ShowLo(szCorrTotal);   iwAmax = mpcwPosValueCurr[0]; iwAmin = mpcwNegValueCurr[0]; break;
-    case 1: ShowLo(szCorrGPS);     iwAmax = mpcwPosValueCurr[1]; iwAmin = mpcwNegValueCurr[1]; break;
-    case 2: ShowLo(szCorrKey);     iwAmax = mpcwPosValueCurr[2]; iwAmin = mpcwNegValueCurr[2]; break;
-    case 3: ShowLo(szCorrCRC);     iwAmax = mpcwPosValueCurr[3]; iwAmin = mpcwNegValueCurr[3]; break;
-    case 4: ShowLo(szCorrEscK_hi); iwAmax = mpcwPosValueCurr[4]; iwAmin = mpcwNegValueCurr[4]; break;
-    case 5: ShowLo(szCorrEscK_lo); iwAmax = mpcwPosValueCurr[5]; iwAmin = mpcwNegValueCurr[5]; break;
+    case 0: ShowLo(szCorrTotal);   wPos = mpcwPosValueCurr[0]; wNeg = mpcwNegValueCurr[0]; break;
+    case 1: ShowLo(szCorrGPS);     wPos = mpcwPosValueCurr[1]; wNeg = mpcwNegValueCurr[1]; break;
+    case 2: ShowLo(szCorrKey);     wPos = mpcwPosValueCurr[2]; wNeg = mpcwNegValueCurr[2]; break;
+    case 3: ShowLo(szCorrCRC);     wPos = mpcwPosValueCurr[3]; wNeg = mpcwNegValueCurr[3]; break;
+    case 4: ShowLo(szCorrEscK_hi); wPos = mpcwPosValueCurr[4]; wNeg = mpcwNegValueCurr[4]; break;
+    case 5: ShowLo(szCorrEscK_lo); wPos = mpcwPosValueCurr[5]; wNeg = mpcwNegValueCurr[5]; break;
 
-    case 6: ShowLo(szCorrSMK);     iwAmax = mpcwPosValueCurr[9]; iwAmin = mpcwNegValueCurr[9]; break;
+    case 6: ShowLo(szCorrSMK);     wPos = mpcwPosValueCurr[9]; wNeg = mpcwNegValueCurr[9]; break;
   }
 
   Delay(1000); Clear();
   sprintf(szLo+1,"+%02u.%02u  -%02u.%02u",
-                 (uchar)(iwAmax / 60),
-                 (uchar)(iwAmax % 60),
-                 (uchar)(iwAmin / 60),
-                 (uchar)(iwAmin % 60));
+                 (uchar)(wPos / 60),
+                 (uchar)(wPos % 60),
+                 (uchar)(wNeg / 60),
+                 (uchar)(wNeg % 60));
 }
 
 
 // вывод статистики коррекции секунд за текущий мес€ц
 void    ShowCorrectCurr2(void)
 {
-  uint iwAmax, iwAmin;
+  uint wPos, wNeg;
 
   switch (ibX)
   {
-    case 0: iwAmax = mpcwPosCountCurr[0]; iwAmin = mpcwNegCountCurr[0]; break;
-    case 1: iwAmax = mpcwPosCountCurr[1]; iwAmin = mpcwNegCountCurr[1]; break;
-    case 2: iwAmax = mpcwPosCountCurr[2]; iwAmin = mpcwNegCountCurr[2]; break;
-    case 3: iwAmax = mpcwPosCountCurr[3]; iwAmin = mpcwNegCountCurr[3]; break;
-    case 4: iwAmax = mpcwPosCountCurr[4]; iwAmin = mpcwNegCountCurr[4]; break;
-    case 5: iwAmax = mpcwPosCountCurr[5]; iwAmin = mpcwNegCountCurr[5]; break;
+    case 0: wPos = mpcwPosCountCurr[0]; wNeg = mpcwNegCountCurr[0]; break;
+    case 1: wPos = mpcwPosCountCurr[1]; wNeg = mpcwNegCountCurr[1]; break;
+    case 2: wPos = mpcwPosCountCurr[2]; wNeg = mpcwNegCountCurr[2]; break;
+    case 3: wPos = mpcwPosCountCurr[3]; wNeg = mpcwNegCountCurr[3]; break;
+    case 4: wPos = mpcwPosCountCurr[4]; wNeg = mpcwNegCountCurr[4]; break;
+    case 5: wPos = mpcwPosCountCurr[5]; wNeg = mpcwNegCountCurr[5]; break;
 
-    case 6: iwAmax = mpcwPosCountCurr[9]; iwAmin = mpcwNegCountCurr[9]; break;
+    case 6: wPos = mpcwPosCountCurr[9]; wNeg = mpcwNegCountCurr[9]; break;
   }
 
-  Clear(); sprintf(szLo+3,"%5u  %-5u",iwAmax,iwAmin);
+  Clear(); sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
   Delay(1000);
   ShowCorrectCurr1();
 }
@@ -86,7 +86,7 @@ void    key_GetCorrectCurr(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      LoadSlide(pszGetCorrectCurr);
+      LoadSlide(pszCorrectCurr);
       Clear();
 
       ibX = 0;
@@ -127,47 +127,47 @@ void    key_GetCorrectCurr(void)
 // вывод статистики коррекции секунд за предыдущий мес€ц
 void    ShowCorrectPrev1(void)
 {
-  uint iwAmax, iwAmin;
+  uint wPos, wNeg;
 
   switch (ibX)
   {
-    case 0: ShowLo(szCorrTotal);   iwAmax = mpcwPosValuePrev[0]; iwAmin = mpcwNegValuePrev[0]; break;
-    case 1: ShowLo(szCorrGPS);     iwAmax = mpcwPosValuePrev[1]; iwAmin = mpcwNegValuePrev[1]; break;
-    case 2: ShowLo(szCorrKey);     iwAmax = mpcwPosValuePrev[2]; iwAmin = mpcwNegValuePrev[2]; break;
-    case 3: ShowLo(szCorrCRC);     iwAmax = mpcwPosValuePrev[3]; iwAmin = mpcwNegValuePrev[3]; break;
-    case 4: ShowLo(szCorrEscK_hi); iwAmax = mpcwPosValuePrev[4]; iwAmin = mpcwNegValuePrev[4]; break;
-    case 5: ShowLo(szCorrEscK_lo); iwAmax = mpcwPosValuePrev[5]; iwAmin = mpcwNegValuePrev[5]; break;
+    case 0: ShowLo(szCorrTotal);   wPos = mpcwPosValuePrev[0]; wNeg = mpcwNegValuePrev[0]; break;
+    case 1: ShowLo(szCorrGPS);     wPos = mpcwPosValuePrev[1]; wNeg = mpcwNegValuePrev[1]; break;
+    case 2: ShowLo(szCorrKey);     wPos = mpcwPosValuePrev[2]; wNeg = mpcwNegValuePrev[2]; break;
+    case 3: ShowLo(szCorrCRC);     wPos = mpcwPosValuePrev[3]; wNeg = mpcwNegValuePrev[3]; break;
+    case 4: ShowLo(szCorrEscK_hi); wPos = mpcwPosValuePrev[4]; wNeg = mpcwNegValuePrev[4]; break;
+    case 5: ShowLo(szCorrEscK_lo); wPos = mpcwPosValuePrev[5]; wNeg = mpcwNegValuePrev[5]; break;
 
-    case 6: ShowLo(szCorrSMK);     iwAmax = mpcwPosValuePrev[9]; iwAmin = mpcwNegValuePrev[9]; break;
+    case 6: ShowLo(szCorrSMK);     wPos = mpcwPosValuePrev[9]; wNeg = mpcwNegValuePrev[9]; break;
   }
 
   Delay(1000); Clear();
   sprintf(szLo+1,"+%02u.%02u  -%02u.%02u",
-                 (uchar)(iwAmax / 60),
-                 (uchar)(iwAmax % 60),
-                 (uchar)(iwAmin / 60),
-                 (uchar)(iwAmin % 60));
+                 (uchar)(wPos / 60),
+                 (uchar)(wPos % 60),
+                 (uchar)(wNeg / 60),
+                 (uchar)(wNeg % 60));
 }
 
 
 // вывод статистики коррекции секунд за предыдущий мес€ц
 void    ShowCorrectPrev2(void)
 {
-  uint iwAmax, iwAmin;
+  uint wPos, wNeg;
 
   switch (ibX)
   {
-    case 0: iwAmax = mpcwPosCountPrev[0]; iwAmin = mpcwNegCountPrev[0]; break;
-    case 1: iwAmax = mpcwPosCountPrev[1]; iwAmin = mpcwNegCountPrev[1]; break;
-    case 2: iwAmax = mpcwPosCountPrev[2]; iwAmin = mpcwNegCountPrev[2]; break;
-    case 3: iwAmax = mpcwPosCountPrev[3]; iwAmin = mpcwNegCountPrev[3]; break;
-    case 4: iwAmax = mpcwPosCountPrev[4]; iwAmin = mpcwNegCountPrev[4]; break;
-    case 5: iwAmax = mpcwPosCountPrev[5]; iwAmin = mpcwNegCountPrev[5]; break;
+    case 0: wPos = mpcwPosCountPrev[0]; wNeg = mpcwNegCountPrev[0]; break;
+    case 1: wPos = mpcwPosCountPrev[1]; wNeg = mpcwNegCountPrev[1]; break;
+    case 2: wPos = mpcwPosCountPrev[2]; wNeg = mpcwNegCountPrev[2]; break;
+    case 3: wPos = mpcwPosCountPrev[3]; wNeg = mpcwNegCountPrev[3]; break;
+    case 4: wPos = mpcwPosCountPrev[4]; wNeg = mpcwNegCountPrev[4]; break;
+    case 5: wPos = mpcwPosCountPrev[5]; wNeg = mpcwNegCountPrev[5]; break;
 
-    case 6: iwAmax = mpcwPosCountPrev[9]; iwAmin = mpcwNegCountPrev[9]; break;
+    case 6: wPos = mpcwPosCountPrev[9]; wNeg = mpcwNegCountPrev[9]; break;
   }
 
-  Clear(); sprintf(szLo+3,"%5u  %-5u",iwAmax,iwAmin);
+  Clear(); sprintf(szLo+3,"%5u  %-5u",wPos,wNeg);
   Delay(1000);
   ShowCorrectPrev1();
 }
@@ -182,7 +182,7 @@ void    key_GetCorrectPrev(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      LoadSlide(pszGetCorrectPrev);
+      LoadSlide(pszCorrectPrev);
       Clear();
 
       ibX = 0;
