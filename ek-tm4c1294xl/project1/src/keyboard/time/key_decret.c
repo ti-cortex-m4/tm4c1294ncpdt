@@ -4,10 +4,10 @@ KEY_DECRET,C
  Задание и просмотр правила перехода на сезонное время
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_settings.h"
-#include "../console.h"
-#include "../time/decret.h"
+#include "../../main.h"
+#include "../../memory/mem_settings.h"
+#include "../../console.h"
+#include "../../time/decret.h"
 
 
 
