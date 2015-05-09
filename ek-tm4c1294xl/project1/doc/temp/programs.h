@@ -98,7 +98,7 @@
 #define bGET_DEVICESINT             144
 #define bGET_DEVICESREAL            145
 
-#define bSET_ENABLE_PARAM           101
++   #define bSET_ENABLE_PARAM           101
 #define bSET_QUICK_PARAM            102
 #define bSET_PARAMS                 103
 #define bSET_DIVIDER                104

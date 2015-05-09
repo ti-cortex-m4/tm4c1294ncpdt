@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-KEY_ENBL_PARAMS.C
+KEY_ENBL_PARAMS,C
 
-
+ Флаг разрешения опроса мгновенных параметров
 ------------------------------------------------------------------------------*/
 
 #include "../../../main.h"
@@ -10,13 +10,13 @@ KEY_ENBL_PARAMS.C
 
 
 //                                         0123456789ABCDEF
-static char const       szEnblParams[]  = "Параметры ?     ";
+static char const       szMessage[]     = "Параметры ?     ";
 
-static char const       *pszEnblParams[] = { szEnblParams, "" };
+static char const       *pszMessages[]  = { szMessage, "" };
 
 
 
 void    key_SetEnblParams(void)
 {
-  key_SetBool(&flEnblAllParams, pszEnblParams);
+  key_SetBool(&flEnblAllParams, pszMessages);
 }
