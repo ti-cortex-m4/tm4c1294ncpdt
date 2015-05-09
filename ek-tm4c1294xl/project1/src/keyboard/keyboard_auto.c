@@ -9,7 +9,7 @@ KEYBOARD_AUTO.C
 #include "../digitals/digitals.h"
 #include "../impulses/impulses.h"
 #include "keyboard.h"
-#include "key_timedate.h"
+#include "time/key_timedate.h"
 #include "impulses/key_single.h"
 #include "impulses/key_single2.h"
 #include "impulses/key_oldprogram73.h"
