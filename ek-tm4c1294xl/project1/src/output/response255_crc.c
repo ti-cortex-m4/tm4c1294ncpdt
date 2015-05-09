@@ -15,6 +15,7 @@ RESPONSE255_CRC.C
 #include "../tariffs/gaps.h"
 #include "../output/out_correct.h"
 #include "../time/correct2.h"
+#include "../time/correct3.h"
 #include "../output/out_groups.h"
 #include "../output/out_relaxs.h"
 #include "../devices/extended_4.h"
@@ -135,7 +136,7 @@ void    Response255_CRC(void)
     case bEXT_CORRECT2: OutCorrect2(); break;
     case bEXT_CORRECT20: OutCorrect20(); break;
     case bEXT_CORRECT21: OutCorrect21(); break;
-//    case bEXT_CORRECT3:  OutCorrect3();  break;
+    case bEXT_CORRECT3:  OutCorrect3();  break;
 
     case bEXT_GETPHONE: OutGetPhone(); break;
     case bEXT_SETPHONE: OutSetPhone(); break;
