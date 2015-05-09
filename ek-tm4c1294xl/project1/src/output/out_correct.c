@@ -57,7 +57,7 @@ void    OutCorrect2(void)
       Result(bRES_BADMODE);
     else
     {
-      CorrectTime_Full(ti, EVE_EXT_CORRECT2);
+      SetCurrTime_Full(ti, EVE_EXT_CORRECT2);
       Result(bRES_OK);
     }
   }
@@ -87,7 +87,7 @@ void    OutCorrect20(void)
     {
       if (Correct2Allowed())
       {
-        CorrectTime_Full(ti, EVE_EXT_CORRECT2);
+        SetCurrTime_Full(ti, EVE_EXT_CORRECT2);
         Result(bRES_OK);
       }
       else Result(bRES_BADACCESS);
