@@ -18,9 +18,9 @@ static char const       szCorrect[]     = "Коррекция секунд",
                         szTotal[]       = "      всего     ",
                         szGPS[]         = "   с часов GPS  ",
                         szKey[]         = "  с клавиатуры  ",
-                        szCRC[]         = " по системе CRC ",
+                        szCRC[]         = "по протоколу CRC",
                         szEsc_K[]       = "по запросу Esc K",
-                        szEsc_k[]       = "по системе Esc k",
+                        szEsc_k[]       = "по запросу Esc k",
                         szSMK[]         = "   с СИМЭК-48   ";
 
 static char const       *pszCorrectCurr[] = { szCorrect, szCurrMonth, "" },
