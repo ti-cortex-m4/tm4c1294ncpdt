@@ -5,9 +5,8 @@ KEY_CORRECT_TIME.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_settings.h"
 #include "../../console.h"
-//#include "../../time/rtc.h"
+#include "../../time/correct1.h"
 #include "../../time/correct3.h"
 
 
@@ -39,7 +38,7 @@ void    key_CorrectTime(void)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (CorrectTime(EVE_PROGRAM_2) == 1)
+      if (CorrectTime(EVE_PROGRAM_2) == true)
         enKeyboard = KBD_SHOW;
       else
         LongBeep();
