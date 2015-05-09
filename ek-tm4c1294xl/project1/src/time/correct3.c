@@ -5,6 +5,9 @@ CORRECT3.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_correct3.h"
+#include "../memory/mem_gps.h"
+#include "../serial/ports.h"
 #include "correct1.h"
 #include "correct3.h"
 
@@ -51,30 +54,26 @@ void    Correct3(event  ev)
 //  mpcwCorrect3[i]++;
 }
 
-/*
-#ifndef MODBUS
+
 
 void    OutCorrect3(void)
 {
-uchar i;
-
   InitPushCRC();
+
+  uchar i;
   for (i=0; i<100; i++) PushChar(0);
 
   InitPushCRC();
 
   PushChar(((bPortGPS > 0) && (bPortGPS <= bPORTS)) ? TRUE : FALSE);
   PushChar(boCorrect3);
-  PushLong(&cdwAbsCorrect3);
-  PushLong(&cdwPosCorrect3);
+  PushLong(cdwAbsCorrect3);
+  PushLong(cdwPosCorrect3);
   PushChar(bMaxCorrect3);
   Push(&tiPosCorrect3, sizeof(time));
   Push(&tiNegCorrect3, sizeof(time));
-  PushChar(Correct3Disable() ? TRUE : FALSE);
+  PushChar(Correct3Disabled() ? TRUE : FALSE);
   Push(&mpcwCorrect3, sizeof(mpcwCorrect3));
 
   Output(100);
 }
-
-#endif
-*/

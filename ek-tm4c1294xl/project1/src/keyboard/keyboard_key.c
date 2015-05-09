@@ -82,7 +82,7 @@ KEYBOARD_KEY.C
 #include "esc/key_machines_esc.h"
 #include "esc/key_block_esc.h"
 #include "unified/key_strict_uni.h"
-#include "unified/key_dsbl_password_uni.h"
+#include "unified/key_enbl_pass_uni.h"
 #include "unified/key_max_delay_uni.h"
 #include "unified/key_repeat_flow_uni.h"
 #include "digitals/key_mnt_esc_s.h"
