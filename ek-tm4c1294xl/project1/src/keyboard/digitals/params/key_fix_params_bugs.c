@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_FIX_PARAMS_BUGS.C
+KEY_FIX_PARAMS_BUGS,C
 
 
 ------------------------------------------------------------------------------*/
@@ -10,17 +10,17 @@ KEY_FIX_PARAMS_BUGS.C
 
 
 
-//                                           0123456789ABCDEF
-static char const       szFixParamBugs1[] = "   Исправлять   ",
-                        szFixParamBugs2[] = "   ошибки при   ",
-                        szFixParamBugs3[] = "     чтении     ",
-                        szFixParamBugs4[] = "  параметров ?  ";
+//                                         0123456789ABCDEF
+static char const       szMessage1[]    = "   Исправлять   ",
+                        szMessage2[]    = "   ошибки при   ",
+                        szMessage3[]    = "     чтении     ",
+                        szMessage4[]    = "  параметров ?  ";
 
-static char const       *pszFixParamsBugs[] = { szFixParamBugs1, szFixParamBugs2, szFixParamBugs3, szFixParamBugs4, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
 
 
 
 void    key_SetFixParamsBugs(void)
 {
-  key_SetBool(&flFixParamsBugs, pszFixParamsBugs);
+  key_SetBool(&flFixParamsBugs, pszMessages);
 }
