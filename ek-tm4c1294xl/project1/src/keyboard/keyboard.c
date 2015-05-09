@@ -27,7 +27,7 @@ KEYBOARD.C
 #include "../flash/records.h"
 #include "keyboard_auto.h"
 #include "keyboard_key.h"
-#include "key_timedate.h"
+#include "time/key_timedate.h"
 
 
 

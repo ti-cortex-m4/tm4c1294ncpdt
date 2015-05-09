@@ -9,7 +9,7 @@ DEVICES_INIT.C
 #include "../memory/mem_phones.h"
 #include "../display/display.h"
 #include "../keyboard/keyboard.h"
-#include "../keyboard/key_timedate.h"
+#include "../keyboard/time/key_timedate.h"
 #include "../digitals/digitals.h"
 #include "../digitals/digitals_status.h"
 #include "../digitals/digitals_pause.h"

@@ -50,6 +50,7 @@ void    Keyboard_Auto(void)
   {
     switch (wProgram)
     {
+      case bGET_CORRECT_TIME:
       case bGET_CURRTIME:       auto_GetCurrTime();     break;
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
 

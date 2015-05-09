@@ -10,7 +10,7 @@ MODEMS.C
 #include    "../memory/mem_phones.h"
 #include    "../display/display.h"
 #include    "../keyboard/keyboard.h"
-#include    "../keyboard/key_timedate.h"
+#include    "../keyboard/time/key_timedate.h"
 #include    "../time/delay.h"
 #include    "../flash/records.h"
 #include    "../digitals/digitals.h"

@@ -9,7 +9,7 @@ NEXT_PARAMS_TIME.C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_params.h"
 #include "realtime.h"
-#include "../keyboard/key_timedate.h"
+#include "../keyboard/time/key_timedate.h"
 #include "../digitals/params/params_storage.h"
 #include "realtime_storage.h"
 
