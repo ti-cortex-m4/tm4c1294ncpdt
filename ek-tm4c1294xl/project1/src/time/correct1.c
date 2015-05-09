@@ -76,58 +76,53 @@ void    CorrectTime_Full(time  ti, event  ev)
 
 
 // коррекция секунд текущего времени
-bool    CorrectTime(event  evCode)
+bool    CorrectTime(event  ev)
 {
   uchar i;
-  if ((i = GetCorrectIndex(evCode)) == 0) return(0);
+  if ((i = GetCorrectIndex(ev)) == 0) return(0);
 
 
-  time tiSetRTC = *PGetCurrTimeDate();
+  time ti = *GetCurrTimeDate();
 
-  if (tiSetRTC.bSecond < 30)
+  if (ti.bSecond < 30)
   {
-    if (mpcwNegValueCurr[i] + tiSetRTC.bSecond > wMAXCORRECT)
-      return(0);
+    if (mpcwNegValueCurr[i] + ti.bSecond > wMAXCORRECT)
+      return false;
     else
     {
-      mpcwNegValueCurr[0] += tiSetRTC.bSecond;
-      mpcwNegValueCurr[i] += tiSetRTC.bSecond;
+      mpcwNegValueCurr[0] += ti.bSecond;
+      mpcwNegValueCurr[i] += ti.bSecond;
       mpcwNegCountCurr[0]++;
       mpcwNegCountCurr[i]++;
 
-      tiSetRTC.bSecond = 0;
+      ti.bSecond = 0;
     }
   }
   else
   {
-    if (mpcwPosValueCurr[i] + tiSetRTC.bSecond > wMAXCORRECT)
-      return(0);
+    if (mpcwPosValueCurr[i] + ti.bSecond > wMAXCORRECT)
+      return false;
     else
     {
-      mpcwPosValueCurr[0] += 60 - tiSetRTC.bSecond;
-      mpcwPosValueCurr[i] += 60 - tiSetRTC.bSecond;
+      mpcwPosValueCurr[0] += 60 - ti.bSecond;
+      mpcwPosValueCurr[i] += 60 - ti.bSecond;
       mpcwPosCountCurr[0]++;
       mpcwPosCountCurr[i]++;
 
-      tiSetRTC.bSecond = 0;
-
-      if (++tiSetRTC.bMinute >= 60)
+      ti.bSecond = 0;
+      if (++ti.bMinute >= 60)
       {
-        tiSetRTC.bMinute = 0;
-
-        if (++tiSetRTC.bHour >= 24)
+        ti.bMinute = 0;
+        if (++ti.bHour >= 24)
         {
-          tiSetRTC.bHour = 0;
-          memcpy(&tiAlt, &tiSetRTC, sizeof(time));
-
-          if (++tiSetRTC.bDay > DaysInMonth())
+          ti.bHour = 0;
+          if (++ti.bDay > GetDaysInMonthYM(ti.bYear, ti.bMonth))
           {
-            tiSetRTC.bDay = 1;
-
-            if (++tiSetRTC.bMonth > 12)
+            ti.bDay = 1;
+            if (++ti.bMonth > 12)
             {
-              tiSetRTC.bMonth = 1;
-              tiSetRTC.bYear++;
+              ti.bMonth = 1;
+              ti.bYear++;
             }
           }
         }
@@ -135,10 +130,10 @@ bool    CorrectTime(event  evCode)
     }
   }
 
-  AddKeyRecord(evCode);
-  SetCurrTime();
+  AddKeyRecord(ev);
+  SetCurrTime(ti);
   AddKeyRecord(EVE_TIME_OK);
 
-  return(1);
+  return true;
 }
 

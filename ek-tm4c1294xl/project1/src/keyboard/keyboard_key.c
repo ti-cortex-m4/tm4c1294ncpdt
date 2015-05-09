@@ -8,8 +8,9 @@ KEYBOARD_KEY.C
 #include "../include/programs.h"
 #include "keyboard.h"
 #include "key_speeds.h"
-#include "time/key_correct_time.h"
 #include "time/key_timedate.h"
+#include "time/key_correct_time.h"
+#include "time/key_correct.h"
 #include "key_password.h"
 #include "key_logical.h"
 #include "key_private.h"
@@ -283,9 +284,12 @@ void    Keyboard_Key(void)
     {
       case bGET_SPEED:          key_SetSpeeds();        break;
 
-      case bGET_CORRECT_TIME:   key_CorrectTime();      break;
       case bGET_CURRTIME:       key_SetCurrTime();      break;
       case bGET_CURRDATE:       key_SetCurrDate();      break;
+
+      case bGET_CORRECT_TIME:   key_CorrectTime();      break;
+      case bGET_CORRECTCURR:    key_GetCorrectCurr();   break;
+      case bGET_CORRECTPREV:    key_GetCorrectPrev();   break;
 
       case bGET_GROUPS:         key_GetGroups();        break;
 
