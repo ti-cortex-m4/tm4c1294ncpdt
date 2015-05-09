@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_CORRECT.C
+KEY_CORRECT,C
 
  ѕросмотр статистики коррекции времени за текущий и предыдущий мес€цы
 ------------------------------------------------------------------------------*/
@@ -15,33 +15,33 @@ KEY_CORRECT.C
 static char const       szCorrect[]     = " оррекци€ секунд",
                         szCurrMonth[]   = "за текущий мес€ц",
                         szPrevMonth[]   = "за прошлый мес€ц",
-                        szCorrTotal[]   = "      всего     ",
-                        szCorrGPS[]     = "   с часов GPS  ",
-                        szCorrKey[]     = "  с клавиатуры  ",
-                        szCorrCRC[]     = " по системе CRC ",
-                        szCorrEscK_hi[] = "по запросу Esc K",
-                        szCorrEscK_lo[] = "по системе Esc k",
-                        szCorrSMK[]     = "   с —»ћЁ -48   ";
+                        szTotal[]       = "      всего     ",
+                        szGPS[]         = "   с часов GPS  ",
+                        szKey[]         = "  с клавиатуры  ",
+                        szCRC[]         = " по системе CRC ",
+                        szEsc_K[]       = "по запросу Esc K",
+                        szEsc_k[]       = "по системе Esc k",
+                        szSMK[]         = "   с —»ћЁ -48   ";
 
 static char const       *pszCorrectCurr[] = { szCorrect, szCurrMonth, "" },
                         *pszCorrectPrev[] = { szCorrect, szPrevMonth, "" };
 
 
 
-static void ShowCorrectValueCurr(void)
+static void ShowCorrectValueCurr(uchar  i)
 {
   uint wPos, wNeg;
 
-  switch (ibX)
+  switch (i)
   {
-    case 0: ShowLo(szCorrTotal);   wPos = Correct1.mpwPosValueCurr[0]; wNeg = Correct1.mpwNegValueCurr[0]; break;
-    case 1: ShowLo(szCorrGPS);     wPos = Correct1.mpwPosValueCurr[1]; wNeg = Correct1.mpwNegValueCurr[1]; break;
-    case 2: ShowLo(szCorrKey);     wPos = Correct1.mpwPosValueCurr[2]; wNeg = Correct1.mpwNegValueCurr[2]; break;
-    case 3: ShowLo(szCorrCRC);     wPos = Correct1.mpwPosValueCurr[3]; wNeg = Correct1.mpwNegValueCurr[3]; break;
-    case 4: ShowLo(szCorrEscK_hi); wPos = Correct1.mpwPosValueCurr[4]; wNeg = Correct1.mpwNegValueCurr[4]; break;
-    case 5: ShowLo(szCorrEscK_lo); wPos = Correct1.mpwPosValueCurr[5]; wNeg = Correct1.mpwNegValueCurr[5]; break;
+    case 0: ShowLo(szTotal); wPos = Correct1.mpwPosValueCurr[0]; wNeg = Correct1.mpwNegValueCurr[0]; break;
+    case 1: ShowLo(szGPS);   wPos = Correct1.mpwPosValueCurr[1]; wNeg = Correct1.mpwNegValueCurr[1]; break;
+    case 2: ShowLo(szKey);   wPos = Correct1.mpwPosValueCurr[2]; wNeg = Correct1.mpwNegValueCurr[2]; break;
+    case 3: ShowLo(szCRC);   wPos = Correct1.mpwPosValueCurr[3]; wNeg = Correct1.mpwNegValueCurr[3]; break;
+    case 4: ShowLo(szEsc_K); wPos = Correct1.mpwPosValueCurr[4]; wNeg = Correct1.mpwNegValueCurr[4]; break;
+    case 5: ShowLo(szEsc_k); wPos = Correct1.mpwPosValueCurr[5]; wNeg = Correct1.mpwNegValueCurr[5]; break;
 
-    case 6: ShowLo(szCorrSMK);     wPos = Correct1.mpwPosValueCurr[9]; wNeg = Correct1.mpwNegValueCurr[9]; break;
+    case 6: ShowLo(szSMK);   wPos = Correct1.mpwPosValueCurr[9]; wNeg = Correct1.mpwNegValueCurr[9]; break;
   }
 
   Delay(1000);
@@ -55,11 +55,11 @@ static void ShowCorrectValueCurr(void)
 }
 
 
-static void ShowCorrectCountCurr(void)
+static void ShowCorrectCountCurr(uchar  i)
 {
   uint wPos, wNeg;
 
-  switch (ibX)
+  switch (i)
   {
     case 0: wPos = Correct1.mpwPosCountCurr[0]; wNeg = Correct1.mpwNegCountCurr[0]; break;
     case 1: wPos = Correct1.mpwPosCountCurr[1]; wNeg = Correct1.mpwNegCountCurr[1]; break;
@@ -75,12 +75,14 @@ static void ShowCorrectCountCurr(void)
   sprintf(szLo+3,"%5u  %-5u", wPos, wNeg);
 
   Delay(1000);
-  ShowCorrectValueCurr();
+  ShowCorrectValueCurr(i);
 }
 
 
 void    key_GetCorrectCurr(void)
 {
+static uchar i;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -90,13 +92,13 @@ void    key_GetCorrectCurr(void)
       LoadSlide(pszCorrectCurr);
       Clear();
 
-      ibX = 0;
-      ShowCorrectValueCurr();
+      i = 0;
+      ShowCorrectValueCurr(i);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX > 6) ibX = 0;
-      ShowCorrectValueCurr();
+      if (++i > 6) i = 0;
+      ShowCorrectValueCurr(i);
     }
     else Beep();
   }
@@ -106,8 +108,8 @@ void    key_GetCorrectCurr(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibX > 0) ibX--; else ibX = 6;
-      ShowCorrectValueCurr();
+      if (i > 0) i--; else i = 6;
+      ShowCorrectValueCurr(i);
     }
     else Beep();
   }
@@ -116,7 +118,7 @@ void    key_GetCorrectCurr(void)
   else if (bKey == bKEY_MINUS)
   {
     if (enKeyboard == KBD_POSTENTER)
-      ShowCorrectCountCurr();
+      ShowCorrectCountCurr(i);
     else
       Beep();
   }
@@ -125,20 +127,20 @@ void    key_GetCorrectCurr(void)
 
 
 
-static void ShowCorrectValuePrev(void)
+static void ShowCorrectValuePrev(uchar  i)
 {
   uint wPos, wNeg;
 
-  switch (ibX)
+  switch (i)
   {
-    case 0: ShowLo(szCorrTotal);   wPos = Correct1.mpwPosValuePrev[0]; wNeg = Correct1.mpwNegValuePrev[0]; break;
-    case 1: ShowLo(szCorrGPS);     wPos = Correct1.mpwPosValuePrev[1]; wNeg = Correct1.mpwNegValuePrev[1]; break;
-    case 2: ShowLo(szCorrKey);     wPos = Correct1.mpwPosValuePrev[2]; wNeg = Correct1.mpwNegValuePrev[2]; break;
-    case 3: ShowLo(szCorrCRC);     wPos = Correct1.mpwPosValuePrev[3]; wNeg = Correct1.mpwNegValuePrev[3]; break;
-    case 4: ShowLo(szCorrEscK_hi); wPos = Correct1.mpwPosValuePrev[4]; wNeg = Correct1.mpwNegValuePrev[4]; break;
-    case 5: ShowLo(szCorrEscK_lo); wPos = Correct1.mpwPosValuePrev[5]; wNeg = Correct1.mpwNegValuePrev[5]; break;
+    case 0: ShowLo(szTotal); wPos = Correct1.mpwPosValuePrev[0]; wNeg = Correct1.mpwNegValuePrev[0]; break;
+    case 1: ShowLo(szGPS);   wPos = Correct1.mpwPosValuePrev[1]; wNeg = Correct1.mpwNegValuePrev[1]; break;
+    case 2: ShowLo(szKey);   wPos = Correct1.mpwPosValuePrev[2]; wNeg = Correct1.mpwNegValuePrev[2]; break;
+    case 3: ShowLo(szCRC);   wPos = Correct1.mpwPosValuePrev[3]; wNeg = Correct1.mpwNegValuePrev[3]; break;
+    case 4: ShowLo(szEsc_K); wPos = Correct1.mpwPosValuePrev[4]; wNeg = Correct1.mpwNegValuePrev[4]; break;
+    case 5: ShowLo(szEsc_k); wPos = Correct1.mpwPosValuePrev[5]; wNeg = Correct1.mpwNegValuePrev[5]; break;
 
-    case 6: ShowLo(szCorrSMK);     wPos = Correct1.mpwPosValuePrev[9]; wNeg = Correct1.mpwNegValuePrev[9]; break;
+    case 6: ShowLo(szSMK);   wPos = Correct1.mpwPosValuePrev[9]; wNeg = Correct1.mpwNegValuePrev[9]; break;
   }
 
   Delay(1000);
@@ -152,11 +154,11 @@ static void ShowCorrectValuePrev(void)
 }
 
 
-static void ShowCorrectCountPrev(void)
+static void ShowCorrectCountPrev(uchar  i)
 {
   uint wPos, wNeg;
 
-  switch (ibX)
+  switch (i)
   {
     case 0: wPos = Correct1.mpwPosCountPrev[0]; wNeg = Correct1.mpwNegCountPrev[0]; break;
     case 1: wPos = Correct1.mpwPosCountPrev[1]; wNeg = Correct1.mpwNegCountPrev[1]; break;
@@ -172,12 +174,14 @@ static void ShowCorrectCountPrev(void)
   sprintf(szLo+3,"%5u  %-5u", wPos, wNeg);
 
   Delay(1000);
-  ShowCorrectValuePrev();
+  ShowCorrectValuePrev(i);
 }
 
 
 void    key_GetCorrectPrev(void)
 {
+static uchar i;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -187,13 +191,13 @@ void    key_GetCorrectPrev(void)
       LoadSlide(pszCorrectPrev);
       Clear();
 
-      ibX = 0;
-      ShowCorrectValuePrev();
+      i = 0;
+      ShowCorrectValuePrev(i);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX > 6) ibX = 0;
-      ShowCorrectValuePrev();
+      if (++i > 6) i = 0;
+      ShowCorrectValuePrev(i);
     }
     else Beep();
   }
@@ -203,8 +207,8 @@ void    key_GetCorrectPrev(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibX > 0) ibX--; else ibX = 6;
-      ShowCorrectValuePrev();
+      if (i > 0) i--; else i = 6;
+      ShowCorrectValuePrev(i);
     }
     else Beep();
   }
@@ -213,7 +217,7 @@ void    key_GetCorrectPrev(void)
   else if (bKey == bKEY_MINUS)
   {
     if (enKeyboard == KBD_POSTENTER)
-      ShowCorrectCountPrev();
+      ShowCorrectCountPrev(i);
     else
       Beep();
   }
