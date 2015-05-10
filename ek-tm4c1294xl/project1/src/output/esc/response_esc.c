@@ -240,12 +240,8 @@ void    RunResponseEsc(void)
       case 0x3E:
       case 0x3F:
       case 0x40: EscNumber(); return;
-    }
 
-    if (bQuery == 'A')
-    {
-      EscA();
-      return;
+      case 'A': EscA(); return;
     }
 
     if (ibActiveEsc >= bMachineEsc) return;
