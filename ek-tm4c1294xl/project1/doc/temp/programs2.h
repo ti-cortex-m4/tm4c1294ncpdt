@@ -45,7 +45,7 @@
 #define wSET_EXT4T_RESET2     519
 
 #define wSET_HOU_CHECK        555
-#define wSET_HIDE_MESSAGES    299
++   #define wSET_HIDE_MESSAGES    299
 
 #define wSET_GAPS_FLAG        300
 #define wSET_GAPS             301
