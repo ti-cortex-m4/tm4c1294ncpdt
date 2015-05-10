@@ -147,7 +147,7 @@ typedef enum
   MNT_PARAMS            = ENBL_ALL_PARAMS + 1,
   PARAMS                = MNT_PARAMS + 1,
   PARAMS_DIV            = PARAMS + sizeof(mpdiParam)/wFREEPAGE_SIZE + 1,
-  ENBL_PARAMS           = PARAMS_DIV + 1,
+  ENBL_PARAMS           = PARAMS_DIV + sizeof(mpreParamDiv)/wFREEPAGE_SIZE + 1,
   FIX_PARAMS_BUGS       = ENBL_PARAMS + 1,
   USE_PARAMS_DIV        = FIX_PARAMS_BUGS + 1,
 
