@@ -1,15 +1,13 @@
 /*------------------------------------------------------------------------------
 KEY_DIGITALS.C
 
- Цифровые счётчики
+ Задание и просмотр цифровых счетчиков
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_ports.h"
-#include "../../display/display.h"
-#include "../keyboard.h"
-#include "../../flash/files.h"
 #include "../../flash/records.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_display.h"
@@ -29,22 +27,21 @@ static char const       szDigitals[]     = "Счетчики        ",
                         szAddress[]      = "Адрес...        ",
                         szLine[]         = "Вид ~нергии...  ",
                         szCanal[]        = "Номер канала... ",
-                        szMaskDigital[]  = "_ __ __ ___ __";
+                        szMask[]         = "_ __ __ ___ __";
 
 
-static digital          diT;
 
-
-                        
-void    MakeKeys(void)
+void    MakeKeys(uchar  ibDig, uchar  bDevice)
 {
-  switch (diT.bDevice)
+  memset(&mpphKeys[ibDig].szNumber, 0, sizeof(mpphKeys[ibDig].szNumber));
+
+  switch (bDevice)
   {
-    case 1:   strcpy((char *)&mpphKeys[ibX].szNumber, "000000");  break;
-    case 2:   strcpy((char *)&mpphKeys[ibX].szNumber, "222222");  break;
-    case 4:   strcpy((char *)&mpphKeys[ibX].szNumber, "00000000");  break;
-    case 21:  strcpy((char *)&mpphKeys[ibX].szNumber, "00000000");  break;
-    default:  strcpy((char *)&mpphKeys[ibX].szNumber, "0");       break;
+    case 1:   strcpy((char *)&mpphKeys[ibDig].szNumber, "000000");    break;
+    case 2:   strcpy((char *)&mpphKeys[ibDig].szNumber, "222222");    break;
+    case 4:   strcpy((char *)&mpphKeys[ibDig].szNumber, "00000000");  break;
+    case 21:  strcpy((char *)&mpphKeys[ibDig].szNumber, "00000000");  break;
+    default:  strcpy((char *)&mpphKeys[ibDig].szNumber, "0");         break;
   }
 
   SaveFile(&flKeys);
@@ -54,6 +51,9 @@ void    MakeKeys(void)
 
 void    key_SetDigitals(void)
 {
+static digital diT;
+static uchar ibDig;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -67,24 +67,23 @@ void    key_SetDigitals(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
-      ShowDigital(ibX);
+      ibDig = 0;
+      ShowDigital(ibDig);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
+      if ((ibDig = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowDigital(ibX);
+        ShowDigital(ibDig);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) 
-        ibX = 0;
+      if (++ibDig >= bCANALS) ibDig = 0;
 
-      ShowDigital(ibX);
+      ShowDigital(ibDig);
     }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
@@ -95,11 +94,11 @@ void    key_SetDigitals(void)
         ShowHi(szDigitals);
 
         AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
-        SetDigital(ibX, &diT);
+        SetDigital(ibDig, &diT);
         AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
         MakeDigitalsMask();  
-        MakeKeys();
+        MakeKeys(ibDig, diT.bDevice);
         MakeCorrectLimit();
 
         if (diT.bDevice != 0)
@@ -184,10 +183,9 @@ void    key_SetDigitals(void)
           SaveMinorInDelay();
         }
 
-        if (++ibX >= bCANALS) 
-          ibX = 0;
+        if (++ibDig >= bCANALS) ibDig = 0;
 
-        ShowDigital(ibX);
+        ShowDigital(ibDig);
       }
       else Beep();
     }
@@ -199,15 +197,15 @@ void    key_SetDigitals(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibX > 0) ibX--; else ibX = bCANALS-1;
+      if (ibDig > 0) ibDig--; else ibDig = bCANALS-1;
 
-      ShowDigital(ibX);
+      ShowDigital(ibDig);
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
       if ((diT.ibPort = GetCharLo(0,0) - 1) < bPORTS)
       {
-        if (StreamPortCan(diT.ibPort,ibX) == 1) 
+        if (StreamPortCan(diT.ibPort,ibDig) == 1)
         {
           enKeyboard = KBD_INPUT3;
           ShowHi(szPhone);
@@ -221,7 +219,7 @@ void    key_SetDigitals(void)
     {
       if ((diT.ibPhone = GetCharLo(2,3)) < bCANALS)
       { 
-        if (StreamPortPhoneCan(diT.ibPort,diT.ibPhone,ibX) == 1) 
+        if (StreamPortPhoneCan(diT.ibPort,diT.ibPhone,ibDig) == 1)
         {
           enKeyboard = KBD_INPUT4;
           ShowHi(szDevice);
@@ -245,14 +243,13 @@ void    key_SetDigitals(void)
           diT.ibLine = 0;
 
           AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
-          SetDigital(ibX, &diT);
+          SetDigital(ibDig, &diT);
           AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
           MakeDigitalsMask();  
-          MakeKeys();
-          // mpbAddLines[ibX] = diT.ibLine;
+          MakeKeys(ibDig, diT.bDevice);
 
-          ShowDigital(ibX);
+          ShowDigital(ibDig);
         }
         else
         {
@@ -303,13 +300,13 @@ void    key_SetDigitals(void)
         diT.ibLine = 0;
 
         AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
-        SetDigital(ibX, &diT);
+        SetDigital(ibDig, &diT);
         AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
         MakeDigitalsMask();  
-        MakeKeys();
+        MakeKeys(ibDig, diT.bDevice);
 
-        ShowDigital(ibX);
+        ShowDigital(ibDig);
         LongBeep();
       }
       else Beep();
@@ -325,7 +322,7 @@ void    key_SetDigitals(void)
       {
         enKeyboard = KBD_INPUT2;
         ShowHi(szPort);
-        ShowLo(szMaskDigital);
+        ShowLo(szMask);
       }
     }
 
