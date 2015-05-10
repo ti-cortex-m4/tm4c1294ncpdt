@@ -1,1 +1,2 @@
-key_params + power off + gamma
+key_SetDigitals MakeKeys
+key_SetDigitals MakeInDelays
