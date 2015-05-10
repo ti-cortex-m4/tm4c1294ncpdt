@@ -36,17 +36,17 @@ void    ResetCorrect1(void)
 
 void    NextMonCorrect1(void)
 {
-  // сохранение данныех коррекции за предыдущий мес€ц
-  memcpy(&mpcwPosValuePrev, &mpcwPosValueCurr, sizeof(mpcwPosValuePrev));
-  memcpy(&mpcwNegValuePrev, &mpcwNegValueCurr, sizeof(mpcwNegValuePrev));
-  memcpy(&mpcwPosCountPrev, &mpcwPosCountCurr, sizeof(mpcwPosCountPrev));
-  memcpy(&mpcwNegCountPrev, &mpcwNegCountCurr, sizeof(mpcwNegCountPrev));
+  memcpy(&Correct1.mpwPosValuePrev, &Correct1.mpwPosValueCurr, sizeof(Correct1.mpwPosValuePrev));
+  memcpy(&Correct1.mpwNegValuePrev, &Correct1.mpwNegValueCurr, sizeof(Correct1.mpwNegValuePrev));
+  memcpy(&Correct1.mpwPosCountPrev, &Correct1.mpwPosCountCurr, sizeof(Correct1.mpwPosCountPrev));
+  memcpy(&Correct1.mpwNegCountPrev, &Correct1.mpwNegCountCurr, sizeof(Correct1.mpwNegCountPrev));
 
-  // обнуление данныех коррекции за текущий мес€ц
-  memset(&mpcwPosValueCurr, 0, sizeof(mpcwPosValueCurr));
-  memset(&mpcwNegValueCurr, 0, sizeof(mpcwNegValueCurr));
-  memset(&mpcwPosCountCurr, 0, sizeof(mpcwPosCountCurr));
-  memset(&mpcwNegCountCurr, 0, sizeof(mpcwNegCountCurr));
+  memset(&Correct1.mpwPosValueCurr, 0, sizeof(Correct1.mpwPosValueCurr));
+  memset(&Correct1.mpwNegValueCurr, 0, sizeof(Correct1.mpwNegValueCurr));
+  memset(&Correct1.mpwPosCountCurr, 0, sizeof(Correct1.mpwPosCountCurr));
+  memset(&Correct1.mpwNegCountCurr, 0, sizeof(Correct1.mpwNegCountCurr));
+
+  SaveFile(&flCorrect1);
 }
 
 

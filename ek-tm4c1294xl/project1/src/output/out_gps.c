@@ -45,3 +45,4 @@ void    OutCorrect2(void)
   Push(&tiPostCorrect, sizeof(time));
   Output(101);
 }
+*/

@@ -259,8 +259,8 @@ general_far.c
 general_far.h
 gps.c
 gps.h
-gps2.c
-gps2.h
++   gps2.c
++   gps2.h
 groups.c
 groups.h
 hours.c
