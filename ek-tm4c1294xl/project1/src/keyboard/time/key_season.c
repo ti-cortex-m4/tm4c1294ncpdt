@@ -1,45 +1,37 @@
 /*------------------------------------------------------------------------------
-KEY_SEASON.C
+KEY_SEASON,C
 
  Установка и просмотр дат переходов на сезонное время
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
-#include "../keyboard.h"
-#include "../../display/display.h"
+#include "../../console.h"
 #include "../../time/rtc.h"
 #include "../../time/timedate.h"
+#include "../../time/decret.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szMaskSeason[]  = "     __ __      ",
-                        szWinter[]      = "Зимнее время    ",
-                        szSummer[]      = "Летнее время    ";
+static char const       szWinter[]      = "Зимнее время    ",
+                        szSummer[]      = "Летнее время    ",
+                        szMask[]        = "     __ __      ";
 
 
 
-void    ShowSummer(void)
+static void ShowDate(time  ti)
 {
   sprintf(szLo+5,"%02u.%02u",
-                 tiSummer.bDay,   
-                 tiSummer.bMonth);
+                 ti.bDay,
+                 ti.bMonth);
 }
-
-
-
-void    ShowWinter(void)
-{
-  sprintf(szLo+5,"%02u.%02u",
-                 tiWinter.bDay,   
-                 tiWinter.bMonth);
-}
-
 
 
 void    key_SetSeason(void)
 {
+static time tiT;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -49,17 +41,15 @@ void    key_SetSeason(void)
 
       switch (wProgram)
       {
-        case bSET_SUMMER:  ShowHi(szSummer); 
-                           ShowSummer();  break;
-        case bSET_WINTER:  ShowHi(szWinter); 
-                           ShowWinter();  break;
+        case bSET_SUMMER:  ShowHi(szSummer); ShowDate(tiSummer);  break;
+        case bSET_WINTER:  ShowHi(szWinter); ShowDate(tiWinter);  break;
       }
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      tiKey.bDay = GetCharLo(5,6);
+      tiT.bDay = GetCharLo(5,6);
 
-      if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
+      if ((tiT.bDay > 0) && (tiT.bDay <= 31))
       {
         enKeyboard = KBD_INPUT2;
         szLo[7] = '.';
@@ -68,21 +58,19 @@ void    key_SetSeason(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      tiKey.bMonth = GetCharLo(8,9);
-      tiKey.bYear  = GetCurrTimeDate()->bYear;
+      tiT.bMonth = GetCharLo(8,9);
+      tiT.bYear  = GetCurrTimeDate()->bYear;
 
-      if ((tiKey.bMonth >= 1) && (tiKey.bMonth <= 12))
+      if ((tiT.bMonth >= 1) && (tiT.bMonth <= 12))
       {
-        if (tiKey.bDay <= GetDaysInMonthYM(tiKey.bYear, tiKey.bMonth))
+        if (tiT.bDay <= GetDaysInMonthYM(tiT.bYear, tiT.bMonth))
         {
           enKeyboard = KBD_POSTENTER;
 
           switch (wProgram)
           {
-            case bSET_SUMMER:  tiSummer = tiKey;
-                               ShowSummer();  break;
-            case bSET_WINTER:  tiWinter = tiKey;
-                               ShowWinter();  break;
+            case bSET_SUMMER:  tiSummer = tiT; SaveFile(&flSummer); ShowDate(tiSummer);  break;
+            case bSET_WINTER:  tiWinter = tiT; SaveFile(&flWinter); ShowDate(tiWinter);  break;
           }
         }
         else
@@ -90,7 +78,7 @@ void    key_SetSeason(void)
           enKeyboard = KBD_INPUT1;
           LongBeep();
 
-          ShowLo(szMaskSeason);
+          ShowLo(szMask);
         }
       }
       else Beep();
@@ -109,7 +97,7 @@ void    key_SetSeason(void)
         else  
         {
           enKeyboard = KBD_INPUT1;
-          ShowLo(szMaskSeason);
+          ShowLo(szMask);
         }
       }
       else Beep();

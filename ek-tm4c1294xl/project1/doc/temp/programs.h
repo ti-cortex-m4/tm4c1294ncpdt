@@ -45,8 +45,8 @@
 */
 #ifdef  DS80C400
 +   #define bSET_DECRET                 123
-#define bSET_SUMMER                 124
-#define bSET_WINTER                 125
++   #define bSET_SUMMER                 124
++   #define bSET_WINTER                 125
 #endif
 
 #define bSET_PASSWORD               11
