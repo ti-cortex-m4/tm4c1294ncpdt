@@ -39,19 +39,6 @@ void    Esc(uint  wSize)
 }
 
 
-void    EscDisplay(void)
-{
-  InitPush(0);
-
-  PushChar(0x0D); PushChar(0x0A); Push(&szHi,bDISPLAY);
-  PushChar(0x0D); PushChar(0x0A); Push(&szLo,bDISPLAY);
-  PushChar(0x0D); PushChar(0x0A);
-
-  Esc(2*bDISPLAY+3*2);
-}
-
-
-
 void    EscError(uchar  bCode)
 {
   InitPush(0);
@@ -85,16 +72,80 @@ static void ShowCommand(void)
   }
 }
 
-/*
-static void ShowNumber(uchar  i)
+
+void    EscTime(void)
 {
-  if (wProgram == bTEST_RESPONSE)
+}
+
+
+void    EscVersion(void)
+{
+}
+
+
+void    EscKey(void)
+{
+  uchar i = bQuery-'à';
+  if (TrueKey(i) == true)
   {
-    sprintf(szHi+14,"%2u",i);
-    HideCurrentTime(0);
+    bKey = mpbKeys[i];
+    fKey = true;
+
+    EscDisplay();
+  }
+  else EscError(bESC_BADDATA);
+}
+
+
+void    EscDisplay(void)
+{
+  InitPush(0);
+
+  PushChar(0x0D); PushChar(0x0A); Push(&szHi,bDISPLAY);
+  PushChar(0x0D); PushChar(0x0A); Push(&szLo,bDISPLAY);
+  PushChar(0x0D); PushChar(0x0A);
+
+  Esc(2*bDISPLAY+3*2);
+}
+
+
+void    EscTransit(void)
+{
+  if (cbWaitQuery != 0)
+  {
+    InitPush(0);
+    Push("Transit error: busy !",21);
+    Esc(21);
+  }
+  else if (ibPort == 0)
+  {
+    RunFlow0();
+
+    InitPush(0);
+    Push("Transit OK: 1 !",15);
+    Esc(15);
+  }
+  else if (ibPort == 1)
+  {
+    RunFlow1();
+
+    InitPush(0);
+    Push("Transit OK: 1 !",15);
+    Esc(15);
   }
 }
-*/
+
+
+void    EscId(void)
+{
+  InitPush(0);
+  PushInt(GetCODEChecksum());
+  PushInt(wPrivate);
+  PushChar(bLogical);
+  Esc(5);
+}
+
+
 
 void    RunResponseEsc(void)
 {
@@ -107,8 +158,7 @@ uchar   i;
 
     ShowCtrlZ();
   }
-  else
-  if (mpSerial[ibPort] == SER_CHAR)
+  else if (mpSerial[ibPort] == SER_CHAR)
   {
     mpSerial[ibPort] = SER_BEGIN;
 
@@ -194,63 +244,7 @@ uchar   i;
     }
 
     switch (bQuery)
-    {/*
-      case 'K':
-        if (Correct2Disable()) 
-        { 
-          Correct2(EVE_ESC_K);
-
-          InitPush(0);
-          Push("Correction disabled !",21);
-          Esc(21);
-          break;
-        }
-
-        if (Correct3Disable()) 
-        { 
-          Correct3(EVE_ESC_K);
-
-          InitPush(0);
-          Push("Correction blocked ! ",21);
-          Esc(21);
-          break;
-        }
-
-        CorrectTime(EVE_ESC_K);
-        break;
-
-      case 'k':
-        if (Correct2Disable()) 
-        { 
-          Correct2(EVE_ESC_k);
-
-          InitPush(0);
-          Push("Correction disabled !",21);
-          Esc(21);
-          break;
-        }
-
-        if (Correct3Disable()) 
-        { 
-          Correct3(EVE_ESC_k);
-
-          InitPush(0);
-          Push("Correction blocked ! ",21);
-          Esc(21);
-          break;
-        }
-
-        InitPush(0);
-        PushChar('k');
-
-        if (CorrectTime(EVE_ESC_k) == 1)
-          PushChar(0x55);
-        else
-          PushChar(0x80);
-
-        Esc(2);
-        break;
-*/
+    {
       case 'T':
         InitPush(0);
         PushChar(ToBCD(tiCurr.bSecond));
@@ -282,64 +276,13 @@ uchar   i;
       case 'ê':
       case 'ë':
       case 'ì':
-      case 'í':
-        i = bQuery-'à';
-        if (TrueKey(i) == 1)
-        {
-          bKey = mpbKeys[i];
-          fKey = 1;
+      case 'í': EscKey(); break;
 
-          EscDisplay();
-        }
-        else EscError(bESC_BADDATA);
-        break;
+      case 'î': EscDisplay(); break;
 
-      case 'î':
-        EscDisplay();
-        break;
-/*
-      case 0x1F:
-        if (cbWaitQuery != 0)
-        {
-          InitPush(0);
-          Push("Transit error: busy !",21);
-          Esc(21);
-        }
-        else if (ibPort == 0) 
-        {
-          RunFlow0();
+      case 0x1F: EscTransit(); break;
 
-          InitPush(0);
-          Push("Transit OK: 1 !",15);
-          Esc(15);
-        }
-        else if (ibPort == 1)
-        {
-          RunFlow1();
-
-          InitPush(0);
-          Push("Transit OK: 1 !",15);
-          Esc(15);
-        }
-        break;
-
-      case 'Þ':
-        InitPush(0);
-        PushInt(GetCODEChecksum());
-        PushInt(wPrivate);
-        PushChar(bLogical);
-        Esc(5);
-        break;
-*/
-      case 'ß':
-        InitPush(0);
-        PushInt(wPrivate);
-        Esc(2);
-        break;
-
-      default:
-//        EscPtrReset();
-        break;
+      case 'Þ': EscId(); break;
     }
   }
 }
