@@ -180,6 +180,7 @@ typedef enum
   SET_PASSWORD          = SET_GROUPS + 1,
 
   CORRECT1              = SET_PASSWORD + 1,
+  CORRECT2_FLAG         = CORRECT1 + sizeof(Correct1)/wFREEPAGE_SIZE + 1,
 
-  END                   = CORRECT1 + sizeof(Correct1)/wFREEPAGE_SIZE + 1
+  END                   = CORRECT2_FLAG + 1
 } flash;

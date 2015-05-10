@@ -9,7 +9,7 @@ MEM_CORRECT2.C
 
 
 // флаг
-boolean                 boCorrect2;
+boolean                 boCorrect2Flag;
 
 // счетчики событий
 uint                    mpcwCorrect2[15];

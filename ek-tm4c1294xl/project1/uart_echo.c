@@ -60,6 +60,7 @@ TODO .C
 #include "src/storage/storage.h"
 #include "src/time/decret.h"
 #include "src/time/correct1.h"
+#include "src/time/correct2.h"
 #include "src/realtime/realtime.h"
 #include "src/realtime/realtime_init.h"
 #include "src/output/response_crc.h"
@@ -92,6 +93,7 @@ int main(void) {
 	InitGaps();             Delay(100); TestOK();
 	InitDecret();
 	InitCorrect1();
+	InitCorrect2();
 	InitDigitals();         Delay(100); TestOK();
 	InitLimits();
   InitDevices1();

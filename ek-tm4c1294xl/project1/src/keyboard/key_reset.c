@@ -29,6 +29,7 @@ KEY_RESET.C
 #include "../storage/storage.h"
 #include "../time/decret.h"
 #include "../time/correct1.h"
+#include "../time/correct2.h"
 
 
 
@@ -73,7 +74,7 @@ void    key_SetReset(void)
 //
           ResetDecret();
           ResetCorrect1();
-//          ResetCorrect2();
+          ResetCorrect2();
 //          ResetCorrect3();
           ResetLimits();
 //          ResetGaps();
@@ -104,7 +105,7 @@ void    key_SetReset(void)
           ResetSettings(true);
           ResetDecret();
           ResetCorrect1();
-//          ResetCorrect2();
+          ResetCorrect2();
 //          ResetCorrect3();
           ResetGroups();
           ResetFactors();
