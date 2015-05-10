@@ -11,7 +11,7 @@ PARAMS.C
 extern  param const             mppaParamMap[bPARAM_BLOCK];
 
 
-extern  file const              flEnblAllParams;
+extern  file const              flParamsFlag;
 extern  file const              flMntParams;
 
 extern  file const              flParams;

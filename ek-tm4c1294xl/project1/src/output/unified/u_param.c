@@ -219,7 +219,7 @@ void    GetParamUni1(void)
       PushParamsUni(12, c);
 
     time ti = GetTimeParamUni(iwTim);
-    Output2_Code(wSize, ((boEnblAllParams == TRUE) ? bUNI_OK : bUNI_NOTREADY), ti);
+    Output2_Code(wSize, ((boParamsFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), ti);
   }
 }
 
@@ -267,6 +267,6 @@ uint    i,j;
       ResetWDT();
     }
 
-    Output2_Code(wSize, ((boEnblAllParams == TRUE) ? bUNI_OK : bUNI_NOTREADY), ti);
+    Output2_Code(wSize, ((boParamsFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), ti);
   }
 }

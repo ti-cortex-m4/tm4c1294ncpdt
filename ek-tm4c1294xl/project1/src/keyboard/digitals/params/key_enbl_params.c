@@ -18,5 +18,5 @@ static char const       *pszMessages[]  = { szMessage, "" };
 
 void    key_SetEnblParams(void)
 {
-  key_SetBool(&flEnblAllParams, pszMessages);
+  key_SetBool(&flParamsFlag, pszMessages);
 }
