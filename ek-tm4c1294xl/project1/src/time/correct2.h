@@ -4,6 +4,10 @@ CORRECT2.H
 
 ------------------------------------------------------------------------------*/
 
+extern  file const              flCorrect2Flag;
+
+
+
 void    InitCorrect2(void);
 void    ResetCorrect2(void);
 

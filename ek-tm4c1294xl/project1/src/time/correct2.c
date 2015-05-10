@@ -8,20 +8,26 @@ CORRECT2.C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_correct2.h"
 #include "../serial/ports.h"
+#include "../flash/files.h"
 #include "correct1.h"
 #include "correct2.h"
 
 
 
+file const              flCorrect2Flag = {CORRECT2_FLAG, &boCorrect2Flag, sizeof(boolean)};
+
+
+
 void    InitCorrect2(void)
 {
-
+  LoadFile(&flCorrect2Flag);
 }
 
 
 void    ResetCorrect2(void)
 {
-  boCorrect2 = FALSE;
+  boCorrect2Flag = FALSE;
+  SaveFile(&flCorrect2Flag);
 
   memset(&mpcwCorrect2, 0, sizeof(mpcwCorrect2));
   memset(&mpbPassCorrect2, 0, sizeof(mpbPassCorrect2));
@@ -37,7 +43,7 @@ void    ResetCorrect2(void)
 
 bool    Correct2Disabled(void)
 {
-  return false; //boCorrect2 == TRUE;
+  return boCorrect2Flag == TRUE;
 }
 
 
@@ -72,7 +78,7 @@ bool    Correct2Allowed(void)
   mpbPassCorrect2[8] ^= 0xE6;
   mpbPassCorrect2[9] ^= 0x47;
 
-  if (boCorrect2 == FALSE) { cdwCorrect21++; return true; }
+  if (boCorrect2Flag == FALSE) { cdwCorrect21++; return true; }
   if (SuperUserCorrect2()) { cdwCorrect22++; return true; }
 
   if (memcmp(mpbPassOne, mpbPassCorrect2, 10) == 0)
@@ -103,7 +109,7 @@ void    OutCorrect21(void)
 
   InitPushCRC();
 
-  PushChar(boCorrect2);
+  PushChar(boCorrect2Flag);
   Push(&mpbPassCorrect2, sizeof(mpbPassCorrect2));
   Push(&mpcwCorrect2, sizeof(mpcwCorrect2)); // TODO
 
