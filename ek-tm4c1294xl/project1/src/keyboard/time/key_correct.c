@@ -81,7 +81,7 @@ static void ShowCorrectCountCurr(uchar  i)
 
 void    key_GetCorrectCurr(void)
 {
-static uchar i;
+static uchar ibT;
 
   if (bKey == bKEY_ENTER)
   {
@@ -92,13 +92,13 @@ static uchar i;
       LoadSlide(pszCorrectCurr);
       Clear();
 
-      i = 0;
-      ShowCorrectValueCurr(i);
+      ibT = 0;
+      ShowCorrectValueCurr(ibT);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++i > 6) i = 0;
-      ShowCorrectValueCurr(i);
+      if (++ibT > 6) ibT = 0;
+      ShowCorrectValueCurr(ibT);
     }
     else Beep();
   }
@@ -108,8 +108,8 @@ static uchar i;
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (i > 0) i--; else i = 6;
-      ShowCorrectValueCurr(i);
+      if (ibT > 0) ibT--; else ibT = 6;
+      ShowCorrectValueCurr(ibT);
     }
     else Beep();
   }
@@ -118,7 +118,7 @@ static uchar i;
   else if (bKey == bKEY_MINUS)
   {
     if (enKeyboard == KBD_POSTENTER)
-      ShowCorrectCountCurr(i);
+      ShowCorrectCountCurr(ibT);
     else
       Beep();
   }
