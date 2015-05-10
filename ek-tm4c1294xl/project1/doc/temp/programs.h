@@ -68,7 +68,7 @@
 #define bSET_CLEARCANALS_2          87
 #define bSET_FINDDEVICENUMBER       88
 #define bSET_FINDDEVICESPEED        89
-#define bSET_DIGITALS               90
++   #define bSET_DIGITALS               90
 #define bSET_AUTOMATIC              94
 #define bSET_AUTOMATIC2             149
 #define bSET_MAJORDELAYS            97
@@ -100,7 +100,7 @@
 
 +   #define bSET_ENABLE_PARAM           101
 #define bSET_QUICK_PARAM            102
-#define bSET_PARAMS                 103
++   #define bSET_PARAMS                 103
 #define bSET_DIVIDER                104
 #define bGET_PARAMCURR              105
 #define bGET_PARAMBUFF              106

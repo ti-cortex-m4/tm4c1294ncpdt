@@ -505,8 +505,8 @@ _device19.c
 _device19.h
 _devices.c
 _devices.h
-_digitals.c
-_digitals.h
++   _digitals.c
++   _digitals.h
 +   _direct_cnt_d.c
 +   _direct_cnt_d.h
 _disable_esc.c
@@ -621,8 +621,8 @@ _oldyearzone.c
 _oldyearzone.h
 _output_delay.c
 _output_delay.h
-_params.c
-_params.h
++   _params.c
++   _params.h
 _param_divider.c
 _param_divider.h
 _password.c
