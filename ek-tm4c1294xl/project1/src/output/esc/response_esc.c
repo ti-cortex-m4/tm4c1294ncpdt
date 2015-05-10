@@ -12,16 +12,12 @@ RESPONSE_ESC.C
 #include "../../console.h"
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
+#include "../../hardware/memory.h"
 #include "../../digitals/wait_query.h"
 #include "../../keyboard/time/key_timedate.h"
 #include "../../access.h"
 #include "esc.h"
 
-
-
-void    EscPtrReset(void)
-{
-}
 
 
 void    Esc(uint  wSize)
@@ -64,13 +60,55 @@ static void ShowCtrlZ()
 }
 
 
-static void ShowCommand(void)
+static void ShowEsc(void)
 {
   if (wProgram == bTEST_RESPONSE)
   {
     sprintf(szHi,"Порт %u: Esc %c",ibPort+1,bQuery);
     HideCurrentTime(0);
   }
+}
+
+
+void    Esc0(void)
+{
+  ibActiveEsc = 0xFF;
+  mpibActiveEsc[ibPort] = ibActiveEsc;
+}
+
+
+void    EscNumber(void)
+{
+  uchar i;
+  for (i=0; i<bMachineEsc; i++)
+  {
+    if ((bQuery - 0x31) == (bLogical + i - 1))
+      break;
+  }
+
+  if (i != bMachineEsc)
+  {
+    ibActiveEsc = (bQuery - 0x31) - (bLogical - 1);
+    mpibActiveEsc[ibPort] = ibActiveEsc;
+
+    InitPush(0);
+    PushChar(bQuery);
+    Esc(1);
+
+    ShowEsc();
+  }
+  else
+  {
+    ibActiveEsc = 0xFF;
+    mpibActiveEsc[ibPort] = ibActiveEsc;
+  }
+}
+
+
+void    EscA(void)
+{
+  Beep();
+  ShowEsc();
 }
 
 
@@ -162,12 +200,9 @@ void    EscId(void)
 
 void    RunResponseEsc(void)
 {
-uchar   i;
-
   if (mpSerial[ibPort] == SER_CTRL_Z)
   {
     mpSerial[ibPort] = SER_BEGIN;
-    EscPtrReset();
 
     ShowCtrlZ();
   }
@@ -187,10 +222,7 @@ uchar   i;
 
     switch (bQuery)
     {
-      case 0x30:
-        ibActiveEsc = 0xFF;
-        mpibActiveEsc[ibPort] = ibActiveEsc;
-        return;
+      case 0x30: Esc0(); return;
 
       case 0x31:
       case 0x32:
@@ -207,43 +239,18 @@ uchar   i;
       case 0x3D:
       case 0x3E:
       case 0x3F:
-      case 0x40:
-        for (i=0; i<bMachineEsc; i++)
-        {
-          if ((bQuery - 0x31) == (bLogical + i - 1))
-            break;
-        }
-
-        if (i != bMachineEsc)
-        {
-          ibActiveEsc = (bQuery - 0x31) - (bLogical - 1);
-          mpibActiveEsc[ibPort] = ibActiveEsc;
-
-          InitPush(0);
-          PushChar(bQuery);
-          Esc(1);
-
-          ShowCommand();
-        }
-        else
-        {
-          ibActiveEsc = 0xFF;
-          mpibActiveEsc[ibPort] = ibActiveEsc;
-        }
-
-        return;
+      case 0x40: EscNumber(); return;
     }
 
     if (bQuery == 'A')
     {
-      Beep();
-      ShowCommand();
+      EscA();
       return;
     }
 
     if (ibActiveEsc >= bMachineEsc) return;
 
-    ShowCommand();
+    ShowEsc();
 
     if (boBlockEsc == TRUE)
     {
