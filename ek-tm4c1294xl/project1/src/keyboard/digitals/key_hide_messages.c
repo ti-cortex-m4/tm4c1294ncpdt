@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_HIDE_MESSAGES.C
+KEY_HIDE_MESSAGES,C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,14 +12,14 @@ KEY_HIDE_MESSAGES.C
 
 
 //                                           0123456789ABCDEF
-static char const       szHideMessages1[] = "Ускоренный вывод",
-                        szHideMessages2[] = "  на индикацию  ";
+static char const       szMessage1[]      = "Ускоренный вывод",
+                        szMessage2[]      = "  на индикацию  ";
 
-static char const       *pszHideMessages[] = { szHideMessages1, szHideMessages2, "" };
+static char const       *pszMessages[]    = { szMessage1, szMessage2, "" };
 
 
 
 void    key_SetHideMessages(void)
 {
-  key_SetBool(&flHideMessages, pszHideMessages);
+  key_SetBool(&flHideMessages, pszMessages);
 }

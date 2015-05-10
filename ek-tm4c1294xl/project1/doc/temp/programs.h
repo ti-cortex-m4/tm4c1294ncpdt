@@ -318,7 +318,7 @@
 #define bSET_CONTROLTIME            196
 #define bSET_MANAGETIME             197
 #define bSET_SLAVEMODEM             198
-#define bSET_SHOWMESSAGES           199
++   #define bSET_SHOWMESSAGES           199
 #define bSET_EXTENDED_ESC_S         200
 #define bSET_EXTENDED_ESC_V         201
 #define bSET_EXTENDED_ESC_U         202

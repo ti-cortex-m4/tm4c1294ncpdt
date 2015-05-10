@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_SHOW_MESSAGES.C
+KEY_SHOW_MESSAGES,C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,13 +12,13 @@ KEY_SHOW_MESSAGES.C
 
 
 //                                          0123456789ABCDEF
-static char const       szShowMessages[] = "Полная индикация";
+static char const       szMessage[]      = "Полная индикация";
 
-static char const       *pszShowMessages[] = { szShowMessages, "" };
+static char const       *pszMessages[]   = { szMessage, "" };
 
 
 
 void    key_SetShowMessages(void)
 {
-  key_SetBool(&flShowMessages, pszShowMessages);
+  key_SetBool(&flShowMessages, pszMessages);
 }

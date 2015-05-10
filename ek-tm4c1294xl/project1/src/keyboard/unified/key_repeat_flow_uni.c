@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_REPEAT_FLOW_UNI.C
+KEY_REPEAT_FLOW_UNI,C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,15 +12,17 @@ KEY_REPEAT_FLOW_UNI.C
 
 
 //                                            0123456789ABCDEF
-static char const       szRepeatFlowUni1[] = "  Возобновлять  ",
-                        szRepeatFlowUni2[] = "транзит УПИО при",
-                        szRepeatFlowUni3[] = "каждом запросе ?";
+static char const       szMessage1[]       = "  Возобновлять  ",
+                        szMessage2[]       = "    транзит     ",
+                        szMessage3[]       = " протокола УПИО ",
+                        szMessage4[]       = "      при       ",
+                        szMessage5[]       = "каждом запросе ?";
 
-static char const       *pszRepeatFlowUni[]  = { szRepeatFlowUni1, szRepeatFlowUni2, szRepeatFlowUni3, "" };
+static char const       *pszMessages[]     = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, "" };
 
 
 
 void    key_SetRepeatFlowUni(void)
 {
-  key_SetBool(&flRepeatFlowUni, pszRepeatFlowUni);
+  key_SetBool(&flRepeatFlowUni, pszMessages);
 }
