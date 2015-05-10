@@ -31,7 +31,7 @@ static char const       szDigitals[]     = "—четчики        ",
 
 
 
-void    MakeKeys(uchar  ibDig, uchar  bDevice)
+static void MakeKeys(uchar  ibDig, uchar  bDevice)
 {
   memset(&mpphKeys[ibDig].szNumber, 0, sizeof(mpphKeys[ibDig].szNumber));
 
@@ -45,6 +45,88 @@ void    MakeKeys(uchar  ibDig, uchar  bDevice)
   }
 
   SaveFile(&flKeys);
+}
+
+
+static void MakeDelays(uchar  ibPort, uchar  ibPhone, uchar  bDevice)
+{
+  if (ibPhone == 0)
+  {
+    switch (bDevice)
+    {
+      case 1:
+      case 2:
+      case 12:
+      case 3:
+      case 4:
+      case 11:
+      case 20:
+      case 18:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*0.4);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*0.4); break;
+
+      case 6:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*1);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*1); break;
+
+      case 7:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*60);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*5); break;
+
+      case 15:
+      case 8:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*5);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*5); break;
+
+      case 21:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*3);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*3); break;
+
+      case 17:
+      case 16:
+      case 14:
+      case 13:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*2);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*2); break;
+
+      default:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*4);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*4); break;
+    }
+  }
+  else
+  {
+    switch (bDevice)
+    {
+      case 1:
+      case 2:
+      case 12:
+      case 3:
+      case 4:
+      case 6:
+      case 11:
+      case 20:
+      case 18:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*2);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*2); break;
+
+      case 7:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*60);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*10); break;
+
+      case 15:
+      case 8:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*10);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*10); break;
+
+      default:
+        mpwMajorInDelay[ibPort] = (uint)(wFREQUENCY_T0*8);
+        mpwMinorInDelay[ibPort] = (uint)(wFREQUENCY_T0*8); break;
+    }
+  }
+
+  SaveMajorInDelay();
+  SaveMinorInDelay();
 }
 
 
@@ -103,84 +185,7 @@ static uchar ibDig;
 
         if (diT.bDevice != 0)
         {
-          ibY = diT.ibPort;
-          if (diT.ibPhone == 0)
-          {
-            switch (diT.bDevice)
-            {
-              case 1:
-              case 2:
-              case 12:
-              case 3:
-              case 4:
-              case 11:
-              case 20:
-              case 18:
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*0.4);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*0.4); break;
-
-              case 6: 
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*1);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*1); break;
-
-              case 7: 
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*60);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*5); break;
-
-              case 15: 
-              case 8: 
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*5);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*5); break;
-
-              case 21: 
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*3);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*3); break;
-
-              case 17: 
-              case 16: 
-              case 14: 
-              case 13: 
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*2);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*2); break;
-
-              default:
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*4);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*4); break;
-            }
-          }
-          else
-          {
-            switch (diT.bDevice)
-            {
-              case 1:
-              case 2:
-              case 12:
-              case 3:
-              case 4:
-              case 6:
-              case 11:
-              case 20:
-              case 18:
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*2);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*2); break;
-
-              case 7: 
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*60);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*10); break;
-
-              case 15: 
-              case 8: 
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*10);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*10); break;
-
-              default:
-                mpwMajorInDelay[ibY] = (uint)(wFREQUENCY_T0*8);
-                mpwMinorInDelay[ibY] = (uint)(wFREQUENCY_T0*8); break;
-            }
-          }
-
-          SaveMajorInDelay();
-          SaveMinorInDelay();
+          MakeDelays(diT.ibPort, diT.ibPhone, diT.bDevice);
         }
 
         if (++ibDig >= bCANALS) ibDig = 0;
