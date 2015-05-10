@@ -12,6 +12,7 @@ RESPONSE_ESC.C
 #include "../../console.h"
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
+#include "../../digitals/wait_query.h"
 #include "../../keyboard/time/key_timedate.h"
 #include "../../access.h"
 #include "esc.h"
@@ -75,11 +76,35 @@ static void ShowCommand(void)
 
 void    EscTime(void)
 {
+  InitPush(0);
+  PushChar(ToBCD(tiCurr.bSecond));
+  PushChar(ToBCD(tiCurr.bMinute));
+  PushChar(ToBCD(tiCurr.bHour  ));
+  PushChar(ToBCD(tiCurr.bDay   ));
+  PushChar(ToBCD(tiCurr.bMonth ));
+  PushChar(ToBCD(tiCurr.bYear  ));
+  Esc(6);
 }
 
 
 void    EscVersion(void)
 {
+  InitPush(0);
+  Push("Cùå+2 V.06 10.10.08!",20);
+  PushChar(0x31+ibActiveEsc);
+  Esc(21);
+}
+
+
+void    EscDisplay(void)
+{
+  InitPush(0);
+
+  PushChar(0x0D); PushChar(0x0A); Push(&szHi,bDISPLAY);
+  PushChar(0x0D); PushChar(0x0A); Push(&szLo,bDISPLAY);
+  PushChar(0x0D); PushChar(0x0A);
+
+  Esc(2*bDISPLAY+3*2);
 }
 
 
@@ -94,18 +119,6 @@ void    EscKey(void)
     EscDisplay();
   }
   else EscError(bESC_BADDATA);
-}
-
-
-void    EscDisplay(void)
-{
-  InitPush(0);
-
-  PushChar(0x0D); PushChar(0x0A); Push(&szHi,bDISPLAY);
-  PushChar(0x0D); PushChar(0x0A); Push(&szLo,bDISPLAY);
-  PushChar(0x0D); PushChar(0x0A);
-
-  Esc(2*bDISPLAY+3*2);
 }
 
 
@@ -139,7 +152,7 @@ void    EscTransit(void)
 void    EscId(void)
 {
   InitPush(0);
-  PushInt(GetCODEChecksum());
+  PushInt(GetRomChecksum());
   PushInt(wPrivate);
   PushChar(bLogical);
   Esc(5);
@@ -245,23 +258,9 @@ uchar   i;
 
     switch (bQuery)
     {
-      case 'T':
-        InitPush(0);
-        PushChar(ToBCD(tiCurr.bSecond));
-        PushChar(ToBCD(tiCurr.bMinute));
-        PushChar(ToBCD(tiCurr.bHour  ));
-        PushChar(ToBCD(tiCurr.bDay   ));
-        PushChar(ToBCD(tiCurr.bMonth ));
-        PushChar(ToBCD(tiCurr.bYear  ));
-        Esc(6);
-        break;
+      case 'T': EscTime(); break;
 
-      case 'R':
-        InitPush(0);
-        Push("Cùå+2 V.06 10.10.08!",20);
-        PushChar(0x31+ibActiveEsc);
-        Esc(21);
-        break;
+      case 'R': EscVersion(); break;
 
       case '‡':
       case '·':
