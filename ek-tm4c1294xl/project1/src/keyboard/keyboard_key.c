@@ -107,6 +107,7 @@ KEYBOARD_KEY.C
 #include "devices/key_ext_4t_reset2.h"
 #include "devices/key_ext_5_flag.h"
 #include "devices/key_ext_6_flag.h"
+#include "time/key_correct2_flag.h"
 
 
 
@@ -165,6 +166,11 @@ void    Keyboard_Key(void)
 
       case bSET_MAJOR_DELAYS:
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
+
+      case bSET_CORRECT2:       key_SetCorrect2Flag();  break;
+//      case bSET_CORRECT30:      key_SetCorrect30();     break;
+//      case bSET_CORRECT31:      key_SetCorrect31();     break;
+//      case bSET_CORRECT32:      key_SetCorrect32();     break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
@@ -323,6 +329,11 @@ void    Keyboard_Key(void)
 
       case bSET_MAJOR_DELAYS:
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
+
+      case bSET_CORRECT2:       key_SetCorrect2Flag();  break;
+//      case bSET_CORRECT30:      key_SetCorrect30();     break;
+//      case bSET_CORRECT31:      key_SetCorrect31();     break;
+//      case bSET_CORRECT32:      key_SetCorrect32();     break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
@@ -562,6 +573,11 @@ void    Keyboard_Key(void)
 
       case bSET_MAJOR_DELAYS:
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
+
+      case bSET_CORRECT2:       key_SetCorrect2Flag();  break;
+//      case bSET_CORRECT30:      key_SetCorrect30();     break;
+//      case bSET_CORRECT31:      key_SetCorrect31();     break;
+//      case bSET_CORRECT32:      key_SetCorrect32();     break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
