@@ -24,7 +24,7 @@ param const             mppaParamMap[bPARAM_BLOCK] =
 };
 
 
-file const              flEnblAllParams = {ENBL_ALL_PARAMS, &boEnblAllParams, sizeof(boolean)};
+file const              flParamsFlag = {PARAMS_FLAG, &boParamsFlag, sizeof(boolean)};
 file const              flMntParams = {MNT_PARAMS, &boMntParams, sizeof(boolean)};
 
 file const              flParams = {PARAMS, &mpdiParam, sizeof(mpdiParam)};
@@ -38,7 +38,7 @@ file const              flUseParamsDiv = {USE_PARAMS_DIV, &boUseParamsDiv, sizeo
 
 void    InitParams(void)
 {
-  LoadFile(&flEnblAllParams);
+  LoadFile(&flParamsFlag);
   LoadFile(&flMntParams);
 
   LoadFile(&flParams);
@@ -52,8 +52,8 @@ void    InitParams(void)
 
 void    ResetParams(void)
 {
-  boEnblAllParams = FALSE;
-  SaveFile(&flEnblAllParams);
+  boParamsFlag = FALSE;
+  SaveFile(&flParamsFlag);
 
   boMntParams = FALSE;
   SaveFile(&flMntParams);

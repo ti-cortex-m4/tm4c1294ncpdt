@@ -973,7 +973,7 @@ bool    ReadParam(uint  iwPrm)
 
 void    MakeExtended2(void)
 {
-  if (boEnblAllParams == TRUE)
+  if (boParamsFlag == TRUE)
   {
     ShowHi(szDirectParam);
     Clear();

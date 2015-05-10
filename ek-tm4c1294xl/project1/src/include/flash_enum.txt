@@ -143,8 +143,8 @@ typedef enum
   MAX_FLOW_DELAY        = FLOW_PORT_FROM + 1,
   FLOW_PORT_TO          = MAX_FLOW_DELAY + 1,
 
-  ENBL_ALL_PARAMS       = FLOW_PORT_TO + 1,
-  MNT_PARAMS            = ENBL_ALL_PARAMS + 1,
+  PARAMS_FLAG       = FLOW_PORT_TO + 1,
+  MNT_PARAMS            = PARAMS_FLAG + 1,
   PARAMS                = MNT_PARAMS + 1,
   PARAMS_DIV            = PARAMS + sizeof(mpdiParam)/wFREEPAGE_SIZE + 1,
   ENBL_PARAMS           = PARAMS_DIV + sizeof(mpreParamDiv)/wFREEPAGE_SIZE + 1,
