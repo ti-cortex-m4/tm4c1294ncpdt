@@ -48,7 +48,7 @@ static void MakeKeys(uchar  ibDig, uchar  bDevice)
 }
 
 
-static void MakeDelays(uchar  ibPort, uchar  ibPhone, uchar  bDevice)
+static void MakeInDelays(uchar  ibPort, uchar  ibPhone, uchar  bDevice)
 {
   if (ibPhone == 0)
   {
@@ -185,7 +185,7 @@ static uchar ibDig;
 
         if (diT.bDevice != 0)
         {
-          MakeDelays(diT.ibPort, diT.ibPhone, diT.bDevice);
+          MakeInDelays(diT.ibPort, diT.ibPhone, diT.bDevice);
         }
 
         if (++ibDig >= bCANALS) ibDig = 0;
