@@ -63,7 +63,7 @@ static uint iwPrm;
     else if (enKeyboard == KBD_POSTINPUT6)
     {
       diT.ibLine = GetCharLo(12,13);
-      if (ValidParamLine(diT.ibLine) == 1)
+      if (ValidParamLine(diT.ibLine) == true)
       {
         enKeyboard = KBD_POSTENTER;
         ShowHi(szParams);
