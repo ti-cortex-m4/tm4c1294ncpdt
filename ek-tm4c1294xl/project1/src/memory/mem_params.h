@@ -10,7 +10,7 @@ extern  boolean                 boMntParams;
 
 extern  digital                 mpdiParam[wPARAMS];
 
-extern  real                    mpreParamDiv[wPARAMS];
+extern  real                    mpreParamsDiv[wPARAMS];
 
 extern  boolean                 mpboEnblParams[wPARAMS];
 

@@ -18,7 +18,7 @@ boolean                 boMntParams;
 digital                 mpdiParam[wPARAMS];
 
 // массив коэффициентов деления
-real                    mpreParamDiv[wPARAMS];
+real                    mpreParamsDiv[wPARAMS];
 
 // массив разрешения опроса по параметрам
 boolean                 mpboEnblParams[wPARAMS];

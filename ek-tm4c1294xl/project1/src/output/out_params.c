@@ -86,7 +86,7 @@ void    OutGetParamDiv(void)
   if (iwParam < wPARAMS)
   {
     InitPushCRC();
-    PushFloat(mpreParamDiv[iwParam]);
+    PushFloat(mpreParamsDiv[iwParam]);
     Output(sizeof(real));
   }
   else Result(bRES_BADADDRESS);
@@ -102,7 +102,7 @@ void    OutSetParamDiv(void)
     {
       InitPop(7);
 
-      mpreParamDiv[iwParam] = PopFloat();
+      mpreParamsDiv[iwParam] = PopFloat();
 
       if (iwParam == wPARAMS - 1)
         SaveFile(&flParamsDiv);
@@ -264,7 +264,7 @@ void    OutGetParamsAll(void)
         {
           uint iw = GetParamIndex(di);
           if (iw != 0xFFFF)
-            mpreParamDiv[wPARAMS-1] = mpreParamDiv[iw];
+            mpreParamsDiv[wPARAMS-1] = mpreParamsDiv[iw];
         }
 
         if (mpboEnblParams[wPARAMS-1] != TRUE)

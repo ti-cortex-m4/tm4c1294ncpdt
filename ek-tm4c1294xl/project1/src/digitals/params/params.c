@@ -29,7 +29,7 @@ file const              flParamsFlag = {PARAMS_FLAG, &boParamsFlag, sizeof(boole
 file const              flMntParams = {MNT_PARAMS, &boMntParams, sizeof(boolean)};
 
 file const              flParams = {PARAMS, &mpdiParam, sizeof(mpdiParam)};
-file const              flParamsDiv = {PARAMS_DIV, &mpreParamDiv, sizeof(mpreParamDiv)};
+file const              flParamsDiv = {PARAMS_DIV, &mpreParamsDiv, sizeof(mpreParamsDiv)};
 file const              flEnblParams = {ENBL_PARAMS, &mpboEnblParams, sizeof(mpboEnblParams)};
 
 file const              flFixParamsBugs = {FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(boolean)};
@@ -66,7 +66,7 @@ void    ResetParams(void)
   uint i;
   for (i=0; i<wPARAMS; i++)
   {
-    mpreParamDiv[i] = 1;
+    mpreParamsDiv[i] = 1;
     mpboEnblParams[i] = TRUE;
   }
 
