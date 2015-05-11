@@ -50,7 +50,7 @@
 #define wSET_GAPS_FLAG        300
 #define wSET_GAPS             301
 +   #define wSET_FIX_PARAM_BUGS   303
-#define wSET_PARAM_DIVIDER    304
++   #define wSET_PARAM_DIVIDER    304
 #define wSET_SETCALC_3        340
 
 #define wSET_SET_PROFILES1    990
