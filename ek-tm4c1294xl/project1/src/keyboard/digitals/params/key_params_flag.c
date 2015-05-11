@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_ENBL_PARAMS,C
+KEY_PARAMS_FLAG,C
 
  Флаг разрешения опроса мгновенных параметров
 ------------------------------------------------------------------------------*/
@@ -9,6 +9,7 @@ KEY_ENBL_PARAMS,C
 #include "../../key_bool.h"
 
 
+
 //                                         0123456789ABCDEF
 static char const       szMessage[]     = "Параметры ?     ";
 
@@ -16,7 +17,7 @@ static char const       *pszMessages[]  = { szMessage, "" };
 
 
 
-void    key_SetEnblParams(void)
+void    key_SetParamsFlag(void)
 {
   key_SetBool(&flParamsFlag, pszMessages);
 }
