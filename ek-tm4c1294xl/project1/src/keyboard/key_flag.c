@@ -10,7 +10,20 @@ KEY_FLAG.C
 
 
 
-void    key_SetFlag(file const  *pflFile, char const  *pszMessages[])
+static void ShowFlag(boolean const  bo, char const  szTrue[], char const  szFalse[])
+{
+  if (bo == TRUE)
+    strcpy(szLo+1, (char *)szTrue);
+  else
+    strcpy(szLo+1, (char *)szFalse);
+
+  if (enGlobal != GLB_WORK)
+    szLo[0] = '.';
+}
+
+
+
+void    key_SetFlag(file const  *pflFile, char const  *pszMessages[], char const  szTrue[], char const  szFalse[])
 {
   boolean *pboValue = (boolean *) pflFile->pbBuff;
 
@@ -22,7 +35,7 @@ void    key_SetFlag(file const  *pflFile, char const  *pszMessages[])
       Clear();
 
       LoadSlide(pszMessages);
-      ShowBoolean(*pboValue);
+      ShowFlag(*pboValue, szTrue, szFalse);
     }
     else Beep();
   }
@@ -37,7 +50,7 @@ void    key_SetFlag(file const  *pflFile, char const  *pszMessages[])
         *pboValue = InvertBoolean(*pboValue);
         SaveFile(pflFile);
 
-        ShowBoolean(*pboValue);
+        ShowFlag(*pboValue, szTrue, szFalse);
       }
       else Beep(); 
     }
