@@ -74,8 +74,8 @@
 #define bSET_MAJORDELAYS            97
 #define bSET_MINORDELAYS            98
 #define bSET_ADDRESSES              100
-#define bSET_ENABLE_KEYS            170
-#define bSET_KEYS                   171
++   #define bSET_ENABLE_KEYS            170
++   #define bSET_KEYS                   171
 #define bSET_ENABLE_LINES           172
 #define bSET_LINES                  173
 
