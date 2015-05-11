@@ -924,7 +924,7 @@ bool    ReadParam(uint  iwPrm)
   LoadCurrParam(iwPrm);
   ibPort = diCurr.ibPort;
 
-  reParamDiv = mpreParamDiv[iwPrm];
+  reParamDiv = mpreParamsDiv[iwPrm];
 
   switch (diCurr.bDevice)
   {
@@ -1208,7 +1208,7 @@ void    MakeParamDiv(uint  iwPrm)
     }
   }
 
-  mpreParamDiv[iwPrm] = re;
+  mpreParamsDiv[iwPrm] = re;
 }
 
 

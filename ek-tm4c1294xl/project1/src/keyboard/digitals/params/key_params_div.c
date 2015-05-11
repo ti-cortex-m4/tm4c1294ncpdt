@@ -12,8 +12,12 @@ KEY_PARAMS_DIV.C
 
 
 //                                         0123456789ABCDEF
-static char const       szParamDiv[]    = "К пропрорц.     ",
+static char const       szParamsDiv1[]  = " Коэфф. деления ",
+                        szParamsDiv2[]  = " для параметров ",
                         szMask[]        = "________ ___";
+
+static char const       *pszParamsDiv[] = { szParamsDiv1, szParamsDiv2, "" };
+
 
 
 static uint             iwPrm;
@@ -23,7 +27,7 @@ static uint             iwPrm;
 static void  Show(void)
 {
   Clear();
-  sprintf(szLo,"%12.3f", mpreParamDiv[iwPrm]);
+  sprintf(szLo,"%12.3f", mpreParamsDiv[iwPrm]);
   sprintf(szLo+13,"%3u",iwPrm+1);
 }
 
@@ -38,7 +42,7 @@ void    key_SetParamsDiv(void)
       enKeyboard = KBD_INPUT1;
       Param();
 
-      ShowHi(szParamDiv);
+      LoadSlide(pszParamsDiv);
     } 
     else if (enKeyboard == KBD_INPUT1)
     {
@@ -64,13 +68,12 @@ void    key_SetParamsDiv(void)
     }
     else if ((enKeyboard == KBD_POSTINPUT2) || (enKeyboard == KBD_POSTINPUT3))
     {      
-      real reBuffA = GetRealLo(0,7) + GetRealLo(9,11)/1000;
-
-      if (reBuffA >= 0)
+      float fl = (float)GetIntLo(0,7) + (float)GetIntLo(9,11)/1000;
+      if (fl >= 0)
       {
         enKeyboard = KBD_POSTENTER;
 
-        mpreParamDiv[iwPrm] = reBuffA;
+        mpreParamsDiv[iwPrm] = fl;
         SaveFile(&flParamsDiv);
       }
       else Beep();
