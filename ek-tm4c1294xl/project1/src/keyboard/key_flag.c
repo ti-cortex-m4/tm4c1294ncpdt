@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_FLAG.C
+KEY_FLAG,C
 
 
 ------------------------------------------------------------------------------*/
@@ -13,9 +13,9 @@ KEY_FLAG.C
 static void ShowFlag(boolean const  bo, char const  szTrue[], char const  szFalse[])
 {
   if (bo == TRUE)
-    strcpy(szLo+1, (char *)szTrue);
+    strcpy(szLo, (char *)szTrue);
   else
-    strcpy(szLo+1, (char *)szFalse);
+    strcpy(szLo, (char *)szFalse);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';
