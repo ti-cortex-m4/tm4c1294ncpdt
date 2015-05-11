@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_KEYS.C
+KEY_KEYS,C
 
 
 ------------------------------------------------------------------------------*/
@@ -19,7 +19,7 @@ static char const       szKeys[]        = "Пароли          ",
                         szMask[]        = "_____________";
 
 
-static uchar            ibX, ibY;
+static uchar            ibCan, ibPos;
 
 
 
@@ -28,11 +28,11 @@ static void Show(void)
   Clear();
 
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
-    strcpy(szLo, mpphKeys[ibX].szNumber);
+    strcpy(szLo, mpphKeys[ibCan].szNumber);
   else
     strcpy(szLo, "*************");
 
-  sprintf(szLo+14,"%2u",ibX+1);
+  sprintf(szLo+14,"%2u",ibCan+1);
 }
 
 
@@ -42,7 +42,7 @@ static void Mask(void)
   enKeyboard = KBD_INPUT2;
   ShowLo(szMask);
 
-  ibY = 0;
+  ibPos = 0;
 }
 
 
@@ -70,12 +70,12 @@ void    key_SetKeys(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
+      ibCan = 0;
       Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
+      if ((ibCan = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         Show();
@@ -84,22 +84,22 @@ void    key_SetKeys(void)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) ibX = 0;
+      if (++ibCan >= bCANALS) ibCan = 0;
 
       Show();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {      
-      if (ibY > 0)
+      if (ibPos > 0)
       {
         enKeyboard = KBD_POSTENTER;
 
-        szLo[ibY] = 0;
+        szLo[ibPos] = 0;
 
         AddSysRecordReprogram(EVE_EDIT_KEY10);
         AddSysRecordReprogram(EVE_EDIT_KEY11);
 
-        strcpy((char *)mpphKeys[ibX].szNumber, szLo);
+        strcpy((char *)mpphKeys[ibCan].szNumber, szLo);
         SaveFile(&flKeys);
 
         AddSysRecordReprogram(EVE_EDIT_KEY20);
@@ -108,7 +108,7 @@ void    key_SetKeys(void)
 
       if (enKeyboard == KBD_POSTENTER)
       {
-        if (++ibX >= bCANALS) ibX = 0;
+        if (++ibCan >= bCANALS) ibCan = 0;
 
         Show();
       }
@@ -135,7 +135,7 @@ void    key_SetKeys(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibX > 0) ibX--; else  ibX = bCANALS-1;
+      if (ibCan > 0) ibCan--; else  ibCan = bCANALS-1;
 
       Show();
     }
@@ -163,8 +163,8 @@ void    key_SetKeys(void)
     {
       enKeyboard = KBD_POSTINPUT2;
 
-      if (ibY < bPHONE_SIZE)
-        szLo[ibY++] = szDigits[bKey];
+      if (ibPos < bPHONE_SIZE)
+        szLo[ibPos++] = szDigits[bKey];
 
       else Beep();
     }

@@ -573,8 +573,8 @@ _inslines.c
 _inslines.h
 _io_control.c
 _io_control.h
-_keys.c
-_keys.h
++   _keys.c
++   _keys.h
 _limits.c
 _limits.h
 _limits2.c
