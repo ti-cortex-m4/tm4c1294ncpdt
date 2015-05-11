@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PARAMS.C
+PARAMS,C
 
  ћгновенные параметры
 ------------------------------------------------------------------------------*/
@@ -24,12 +24,13 @@ param const             mppaParamMap[bPARAM_BLOCK] =
 };
 
 
+
 file const              flParamsFlag = {PARAMS_FLAG, &boParamsFlag, sizeof(boolean)};
 file const              flMntParams = {MNT_PARAMS, &boMntParams, sizeof(boolean)};
 
 file const              flParams = {PARAMS, &mpdiParam, sizeof(mpdiParam)};
 file const              flParamsDiv = {PARAMS_DIV, &mpreParamDiv, sizeof(mpreParamDiv)};
-file const              flEnblParams = {ENBL_PARAMS, &mpboEnblPar, sizeof(mpboEnblPar)};
+file const              flEnblParams = {ENBL_PARAMS, &mpboEnblParams, sizeof(mpboEnblParams)};
 
 file const              flFixParamsBugs = {FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(boolean)};
 file const              flUseParamsDiv = {USE_PARAMS_DIV, &boUseParamsDiv, sizeof(boolean)};
@@ -61,15 +62,17 @@ void    ResetParams(void)
   memset(&mpdiParam, 0, sizeof(mpdiParam));
   SaveFile(&flParams);
 
+
   uint i;
   for (i=0; i<wPARAMS; i++)
   {
     mpreParamDiv[i] = 1;
-    mpboEnblPar[i] = TRUE;
+    mpboEnblParams[i] = TRUE;
   }
 
   SaveFile(&flParamsDiv);
   SaveFile(&flEnblParams);
+
 
   boFixParamsBugs = FALSE;
   SaveFile(&flFixParamsBugs);
@@ -82,18 +85,18 @@ void    ResetParams(void)
 
 void    LoadCurrParam(uint  iwPrm)
 {
-  diCurr = mpdiParam[ iwPrm ];
+  diCurr = mpdiParam[iwPrm];
 }
 
 
 
-bool    TrueParam(digital  *pdi)
+bool    ValidParam(digital  *pdi)
 {
   return true;
 }
 
 
-bool    TrueParamLine(uchar  ibLine)
+bool    ValidParamLine(uchar  ibLine)
 {
   switch (ibLine)
   {
@@ -130,9 +133,9 @@ bool    TrueParamLine(uchar  ibLine)
     case PAR_F  :
     case PAR_F1 :
     case PAR_F2 :
-    case PAR_F3 : return(1); 
+    case PAR_F3 : return true;
 
-    default:      return(0);
+    default:      return false;
    }
 }
 
@@ -148,31 +151,31 @@ void    SetParam(uint  iwPrm, digital  *pdi)
 
 uchar   GetParamPort(uint  iwPrm)
 {
-  return( mpdiParam[iwPrm].ibPort );
+  return mpdiParam[iwPrm].ibPort;
 }
 
 
 uchar   GetParamPhone(uint  iwPrm)
 {
-  return( mpdiParam[iwPrm].ibPhone );
+  return mpdiParam[iwPrm].ibPhone;
 }
 
 
 uchar   GetParamDevice(uint  iwPrm)
 {
-  return( mpdiParam[iwPrm].bDevice );
+  return mpdiParam[iwPrm].bDevice;
 }
 
 
 uchar   GetParamAddress(uint  iwPrm)
 {
-  return( mpdiParam[iwPrm].bAddress );
+  return mpdiParam[iwPrm].bAddress;
 }
 
 
 uchar   GetParamLine(uint  iwPrm)
 {
-  return( mpdiParam[iwPrm].ibLine );
+  return mpdiParam[iwPrm].ibLine;
 }
 
 
@@ -181,13 +184,14 @@ void    ShowParam(uint  iwPrm)
 {
   Clear();
   sprintf(szLo,"%1u.%02u.%02u.%03u.%02u",
-               GetParamPort(iwPrm)+1,
+               GetParamPort(iwPrm) + 1,
                GetParamPhone(iwPrm),
                GetParamDevice(iwPrm),
                GetParamAddress(iwPrm),
                GetParamLine(iwPrm));
 
   sprintf(szHi+13,"%03u",iwPrm+1);
-  (mpboEnblPar[iwPrm] == TRUE) ? (szHi[12] = '+') : (szHi[12] = '-');
+
+  (mpboEnblParams[iwPrm] == TRUE) ? (szHi[12] = '+') : (szHi[12] = '-');
 }
 

@@ -21,7 +21,7 @@ digital                 mpdiParam[wPARAMS];
 real                    mpreParamDiv[wPARAMS];
 
 // массив разрешения опроса по параметрам
-boolean                 mpboEnblPar[wPARAMS];
+boolean                 mpboEnblParams[wPARAMS];
 
 // промежуточный массив
 real                    mpreParBuff[2][wPARAMS];

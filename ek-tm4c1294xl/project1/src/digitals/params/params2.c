@@ -997,7 +997,7 @@ void    MakeExtended2(void)
       {
         sprintf(szHi+13,"%3u",j+1);
 
-        if (mpboEnblPar[j] == FALSE)
+        if (mpboEnblParams[j] == FALSE)
           reBuffA = 0;
         else
         {
@@ -1066,13 +1066,13 @@ void    MakeParamDiv(uint  iwPrm)
   {
     switch (GetParamLine(iwPrm))
     {
-      case PAR_I  : mpboEnblPar[iwPrm] = FALSE; break;
+      case PAR_I  : mpboEnblParams[iwPrm] = FALSE; break;
 
       case PAR_I1 : 
       case PAR_I2 : 
       case PAR_I3 : re = 1000; break;
 
-      case PAR_U  : mpboEnblPar[iwPrm] = FALSE; break;
+      case PAR_U  : mpboEnblParams[iwPrm] = FALSE; break;
 
       case PAR_C  :
       case PAR_C1 :
@@ -1097,7 +1097,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_F1 :
       case PAR_F2 :
-      case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
+      case PAR_F3 : mpboEnblParams[iwPrm] = FALSE; break;
 
       default:      re = 1;    break;
     }
@@ -1115,7 +1115,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_C  : 
 
-      case PAR_F  : mpboEnblPar[iwPrm] = FALSE; break;
+      case PAR_F  : mpboEnblParams[iwPrm] = FALSE; break;
 
       default:      re = 1;    break;
     }
@@ -1123,11 +1123,11 @@ void    MakeParamDiv(uint  iwPrm)
   else if (GetParamDevice(iwPrm) == 18)
   {
     if (GetParamLine(iwPrm) != PAR_P) 
-      mpboEnblPar[iwPrm] = FALSE;
+      mpboEnblParams[iwPrm] = FALSE;
     else
     {
       re = 1;
-      mpboEnblPar[iwPrm] = TRUE;
+      mpboEnblParams[iwPrm] = TRUE;
     }
   }
   else if (GetParamDevice(iwPrm) == 21)
@@ -1145,7 +1145,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_F1 : 
       case PAR_F2 : 
-      case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
+      case PAR_F3 : mpboEnblParams[iwPrm] = FALSE; break;
 
       default:      re = 1;    break;
     }
@@ -1170,7 +1170,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_F1 : 
       case PAR_F2 : 
-      case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
+      case PAR_F3 : mpboEnblParams[iwPrm] = FALSE; break;
 
       default:      re = 1;    break;
     }
@@ -1202,7 +1202,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_F1 : 
       case PAR_F2 : 
-      case PAR_F3 : mpboEnblPar[iwPrm] = FALSE; break;
+      case PAR_F3 : mpboEnblParams[iwPrm] = FALSE; break;
 
       default:      re = 1;    break;
     }

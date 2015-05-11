@@ -62,7 +62,7 @@ void    OutSetParam(void)
       di.bAddress = InBuff(10);
       di.ibLine   = InBuff(11);
 
-      if (TrueParam(&di) == true)
+      if (ValidParam(&di) == true)
       {
         mpdiParam[iwParam] = di;
 
@@ -135,7 +135,7 @@ void    OutGetParamCurr(void)
 
       if (f == 1)
       {
-        if (mpboEnblPar[(uint)10*bInBuff5+i] != TRUE)
+        if (mpboEnblParams[(uint)10*bInBuff5+i] != TRUE)
           reBuffA = 0;
         else
         {
@@ -257,7 +257,7 @@ void    OutGetParamsAll(void)
 
         mpdiParam[wPARAMS-1] = di;
 
-        mpboEnblPar[wPARAMS-1] = TRUE;
+        mpboEnblParams[wPARAMS-1] = TRUE;
         MakeParamDiv(wPARAMS-1);
 
         if (boUseParamsDiv == TRUE)
@@ -267,7 +267,7 @@ void    OutGetParamsAll(void)
             mpreParamDiv[wPARAMS-1] = mpreParamDiv[iw];
         }
 
-        if (mpboEnblPar[wPARAMS-1] != TRUE)
+        if (mpboEnblParams[wPARAMS-1] != TRUE)
           reBuffA = 0;
         else
         {
