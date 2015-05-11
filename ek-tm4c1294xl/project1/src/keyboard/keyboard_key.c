@@ -500,7 +500,7 @@ void    Keyboard_Key(void)
       case wSET_HIDE_MESSAGES:  key_SetHideMessages();  break;
 
       case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;
-      case wSET_GAPS:           key_SetGaps();          break;
+      case wSET_GAPS:           key_GetGaps();          break;
 
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
