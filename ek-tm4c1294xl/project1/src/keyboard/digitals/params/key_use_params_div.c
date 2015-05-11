@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_USE_PARAMS_DIV.C
+KEY_USE_PARAMS_DIV,C
 
 
 ------------------------------------------------------------------------------*/
@@ -11,16 +11,16 @@ KEY_USE_PARAMS_DIV.C
 
 
 //                                           0123456789ABCDEF
-static char const       szUseParamsDiv1[] = "  Использовать  ",
-                        szUseParamsDiv2[] = "коэффициент P104",
-                        szUseParamsDiv3[] = "  для запроса   ",
-                        szUseParamsDiv4[] = "    CRC52 ?     ";
+static char const       szMessage1[]      = "  Использовать  ",
+                        szMessage2[]      = "коэффициент P104",
+                        szMessage3[]      = "  для запроса   ",
+                        szMessage4[]      = "    CRC52 ?     ";
 
-static char const       *pszUseParamsDiv[] = { szUseParamsDiv1, szUseParamsDiv2, szUseParamsDiv3, szUseParamsDiv4, "" };
+static char const       *pszMessages[]    = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
 
 
 
 void    key_SetUseParamsDiv(void)
 {
-  key_SetBool(&flUseParamsDiv, pszUseParamsDiv);
+  key_SetBool(&flUseParamsDiv, pszMessages);
 }

@@ -539,8 +539,8 @@ _extended_4t_reset1.c
 _extended_4t_reset1.h
 _extended_4t_reset2.c
 _extended_4t_reset2.h
-_fix_param_bugs.c
-_fix_param_bugs.h
++   _fix_param_bugs.c
++   _fix_param_bugs.h
 _flow.c
 _flow.h
 _fullyear.c
@@ -623,8 +623,8 @@ _output_delay.c
 _output_delay.h
 +   _params.c
 +   _params.h
-_param_divider.c
-_param_divider.h
++   _param_divider.c
++   _param_divider.h
 _password.c
 _password.h
 +   _password_uni.c
