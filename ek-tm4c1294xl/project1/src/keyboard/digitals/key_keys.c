@@ -16,11 +16,14 @@ KEY_KEYS.C
 
 //                                         0123456789ABCDEF
 static char const       szKeys[]        = "Пароли          ",
-                        szMaskKeys[]    = "_____________";
-                      
+                        szMask[]        = "_____________";
 
 
-void    ShowKeys(void)
+static uchar            ibX, ibY;
+
+
+
+static void Show(void)
 {
   Clear();
 
@@ -34,10 +37,10 @@ void    ShowKeys(void)
 
 
 
-void    ShowMaskKeys(void)
+static void Mask(void)
 {
   enKeyboard = KBD_INPUT2;
-  ShowLo(szMaskKeys);
+  ShowLo(szMask);
 
   ibY = 0;
 }
@@ -51,7 +54,10 @@ void    key_SetKeys(void)
     if (enKeyboard == KBD_ENTER)
     {
       if (boEnblKeys != TRUE)
-      { BlockProgram(bSET_ENBL_KEYS); return; }
+      {
+        BlockProgram(bSET_ENBL_KEYS);
+        return;
+      }
       else
       {
         enKeyboard = KBD_INPUT1;
@@ -65,23 +71,22 @@ void    key_SetKeys(void)
       enKeyboard = KBD_POSTENTER;
 
       ibX = 0;
-      ShowKeys();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowKeys();
+        Show();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) 
-        ibX = 0;
+      if (++ibX >= bCANALS) ibX = 0;
 
-      ShowKeys();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {      
@@ -103,10 +108,9 @@ void    key_SetKeys(void)
 
       if (enKeyboard == KBD_POSTENTER)
       {
-        if (++ibX >= bCANALS) 
-          ibX = 0;
+        if (++ibX >= bCANALS) ibX = 0;
 
-        ShowKeys();
+        Show();
       }
       else Beep();
     }
@@ -119,7 +123,8 @@ void    key_SetKeys(void)
     if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_POSTINPUT2))
     {
       if (enGlobal != GLB_WORK)
-        ShowMaskKeys();
+        Mask();
+
       else Beep();
     }
     else Beep();
@@ -132,7 +137,7 @@ void    key_SetKeys(void)
     {
       if (ibX > 0) ibX--; else  ibX = bCANALS-1;
 
-      ShowKeys();
+      Show();
     }
     else Beep();
   }
@@ -143,7 +148,8 @@ void    key_SetKeys(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       if (enGlobal != GLB_WORK)
-        ShowMaskKeys();
+        Mask();
+
       else Beep();
     }
 
@@ -159,6 +165,7 @@ void    key_SetKeys(void)
 
       if (ibY < bPHONE_SIZE)
         szLo[ibY++] = szDigits[bKey];
+
       else Beep();
     }
     else Beep(); 
