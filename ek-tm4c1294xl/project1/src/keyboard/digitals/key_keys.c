@@ -1,15 +1,13 @@
 /*------------------------------------------------------------------------------
 KEY_KEYS,C
 
-
+ Задание и просмотр паролей счетчиков №1
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
 #include "../../memory/mem_digitals.h"
-#include "../keyboard.h"
-#include "../../display/display.h"
 #include "../../digitals/digitals.h"
-#include "../../flash/files.h"
 #include "../../flash/records.h"
 
 
@@ -124,8 +122,8 @@ void    key_SetKeys(void)
     {
       if (enGlobal != GLB_WORK)
         Mask();
-
-      else Beep();
+      else
+        Beep();
     }
     else Beep();
   }
@@ -149,8 +147,8 @@ void    key_SetKeys(void)
     {
       if (enGlobal != GLB_WORK)
         Mask();
-
-      else Beep();
+      else
+        Beep();
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
@@ -165,8 +163,8 @@ void    key_SetKeys(void)
 
       if (ibPos < bPHONE_SIZE)
         szLo[ibPos++] = szDigits[bKey];
-
-      else Beep();
+      else
+        Beep();
     }
     else Beep(); 
   }

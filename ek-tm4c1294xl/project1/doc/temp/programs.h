@@ -136,7 +136,7 @@
 #endif
 
 #define bGET_MODEMS_QUALITY         222
-#define bSET_PHONES                 180
++   #define bSET_PHONES                 180
 #define bSET_CONNECTTIME            181
 
 #define bSET_PHONES20               66
