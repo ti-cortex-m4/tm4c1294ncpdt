@@ -51,7 +51,7 @@ void    ResetDigitals(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpphKeys[c].szNumber[0] = 0x30;
+    mpphKeys[c].szNumber[0] = '0';
   }
 
   SaveFile(&flKeys);

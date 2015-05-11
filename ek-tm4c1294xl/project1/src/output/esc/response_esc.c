@@ -211,7 +211,8 @@ void    RunResponseEsc(void)
     mpSerial[ibPort] = SER_BEGIN;
 
     if (enGlobal == GLB_PROGRAM)
-      return;
+      if (!((InBuff(0) >= 'à') && (InBuff(0) <= 'î')))
+        return;
 
     if (boBlockEsc == (boolean)0x55)
       return;
