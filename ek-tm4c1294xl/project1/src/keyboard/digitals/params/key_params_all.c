@@ -39,7 +39,7 @@ static void ShowParamCurr(void)
     LoadCurrParam(iwPrm);
     ibPort = diCurr.ibPort;
 
-    if (mpboEnblPar[iwPrm] == FALSE)
+    if (mpboEnblParams[iwPrm] == FALSE)
       ShowLo(szBlocking); 
     else if (diCurr.ibPhone != 0)
       ShowLo(szEmpty);
@@ -57,7 +57,7 @@ static void ShowParamBuff(void)
     ShowLo(szEmpty);
   else
   {
-    if (mpboEnblPar[iwPrm] == FALSE)
+    if (mpboEnblParams[iwPrm] == FALSE)
       ShowLo(szBlocking); 
     else
     {
@@ -78,7 +78,7 @@ static void ShowParamFull(void)
     ShowLo(szEmpty);
   else
   {
-    if (mpboEnblPar[iwPrm] == FALSE)
+    if (mpboEnblParams[iwPrm] == FALSE)
       ShowLo(szBlocking); 
     else
     {

@@ -313,8 +313,8 @@ nexttime.c
 nexttime.h
 oldtariffs.c
 oldtariffs.h
-params.c
-params.h
++   params.c
++   params.h
 pause.c
 pause.h
 phones.c

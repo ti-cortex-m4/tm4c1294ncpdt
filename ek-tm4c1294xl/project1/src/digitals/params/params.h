@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PARAMS.C
+PARAMS,H
 
 
 ------------------------------------------------------------------------------*/
@@ -9,6 +9,7 @@ PARAMS.C
 
 
 extern  param const             mppaParamMap[bPARAM_BLOCK];
+
 
 
 extern  file const              flParamsFlag;
@@ -28,8 +29,8 @@ void    ResetParams(void);
 
 void    LoadCurrParam(uint  iwPrm);
 
-bool    TrueParam(digital  *pdi);
-bool    TrueParamLine(uchar  ibLine);
+bool    ValidParam(digital  *pdi);
+bool    ValidParamLine(uchar  ibLine);
 
 void    SetParam(uint  iwPrm, digital  *pdi);
 
