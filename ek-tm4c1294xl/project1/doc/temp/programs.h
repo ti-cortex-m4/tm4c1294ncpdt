@@ -101,7 +101,7 @@
 +   #define bSET_ENABLE_PARAM           101
 #define bSET_QUICK_PARAM            102
 +   #define bSET_PARAMS                 103
-#define bSET_DIVIDER                104
++   #define bSET_DIVIDER                104
 #define bGET_PARAMCURR              105
 #define bGET_PARAMBUFF              106
 #define bGET_PARAMFULL              107
