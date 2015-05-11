@@ -39,7 +39,7 @@ void    ResetPhones(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpphPhones[c].szNumber[0] = 0x30;
+    mpphPhones[c].szNumber[0] = '0';
   }
 
   SaveFile(&flPhones);

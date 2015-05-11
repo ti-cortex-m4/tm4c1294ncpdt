@@ -1,10 +1,6 @@
 key_SetDigitals MakeKeys
 key_SetDigitals MakeInDelays
 
-key_SetEnblKeys
-
-Esc console
 заданее телефона с большего на меньший
 
-#define wSET_FIX_PARAMS_BUGS        303
-#define wSET_USE_PARAMS_DIV         304
+Esc транзит
