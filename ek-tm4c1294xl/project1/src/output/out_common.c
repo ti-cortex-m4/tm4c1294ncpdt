@@ -37,7 +37,6 @@ void    OutGetFloatCan_GlobalWork(float  *mfl)
 }
 
 
-
 void    OutSetFloatCan(float  *mfl, file const  *pfl)
 {
   if (enGlobal == GLB_PROGRAM)
@@ -54,4 +53,89 @@ void    OutSetFloatCan(float  *mfl, file const  *pfl)
     LongResult(bRES_OK);
   }
   else Result(bRES_NEEDPROGRAM);
+}
+
+
+
+void    OutRealCanExt(real  *mpe)
+{
+uchar   i;
+uchar   w;
+
+  InitPushPtr();
+  w = 0;
+
+  for (i=0; i<bCANALS; i++)
+  {
+    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    {
+      PushFloat(mpe[i]);
+      w += sizeof(real);
+    }
+  }
+
+  OutptrOutBuff(w);
+}
+
+
+void    OutIntCanExt(uint  *mpw)
+{
+uchar   i;
+uchar   w;
+
+  InitPushPtr();
+  w = 0;
+
+  for (i=0; i<bCANALS; i++)
+  {
+    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    {
+      PushInt(mpw[i]);
+      w += sizeof(uint);
+    }
+  }
+
+  OutptrOutBuff(w);
+}
+
+
+void    OutCharCanExt(uchar  *mpb)
+{
+uchar   i;
+uchar   w;
+
+  InitPushPtr();
+  w = 0;
+
+  for (i=0; i<bCANALS; i++)
+  {
+    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    {
+      Push(&mpb[i], sizeof(uchar));
+      w += sizeof(uchar);
+    }
+  }
+
+  OutptrOutBuff(w);
+}
+
+
+void    OutBoolCanExt(boolean  *mpf)
+{
+uchar   i;
+uchar   w;
+
+  InitPushPtr();
+  w = 0;
+
+  for (i=0; i<bCANALS; i++)
+  {
+    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    {
+      Push(&mpf[i], sizeof(boolean));
+      w += sizeof(boolean);
+    }
+  }
+
+  OutptrOutBuff(w);
 }
