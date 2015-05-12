@@ -246,7 +246,7 @@ QUERIES.H
 #define bEXT_CORRECT1                  10
 #define bEXT_CORRECT2                  11
 
-#define bEXT_GETSTOPCAN                12
++   #define bEXT_GETSTOPCAN                12
 #define bEXT_GETENBLCAN                13
 #define bEXT_GETCTRLHOU                14
 #define bEXT_GETENBLPORTHOU            15
