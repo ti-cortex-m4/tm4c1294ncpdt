@@ -105,7 +105,7 @@ void    OutCharCanMap(uchar  *mpb)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      Push(&mpb[c], sizeof(uchar));
+      PushChar(mpb[c]);
       wSize += sizeof(uchar);
     }
   }
@@ -124,7 +124,7 @@ void    OutBoolCanMap(boolean  *mpf)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      Push(&mpf[c], sizeof(boolean));
+    	PushChar(mpf[c]);
       wSize += sizeof(boolean);
     }
   }
