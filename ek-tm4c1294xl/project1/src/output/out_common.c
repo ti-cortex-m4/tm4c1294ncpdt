@@ -57,77 +57,77 @@ void    OutSetFloatCan(float  *mfl, file const  *pfl)
 
 
 
-void    OutRealCanExt(real  *mpe)
+void    OutFloatCanMap(real  *mpe)
 {
   InitPushPtr();
-  uint w = 0;
+  uint wSize = 0;
 
-  uchar i;
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushFloat(mpe[i]);
-      w += sizeof(real);
+      PushFloat(mpe[c]);
+      wSize += sizeof(real);
     }
   }
 
-  OutptrOutBuff(w);
+  OutptrOutBuff(wSize);
 }
 
 
-void    OutIntCanExt(uint  *mpw)
+void    OutIntCanMap(uint  *mpw)
 {
   InitPushPtr();
-  uint w = 0;
+  uint wSize = 0;
 
-  uchar i;
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushInt(mpw[i]);
-      w += sizeof(uint);
+      PushInt(mpw[c]);
+      wSize += sizeof(uint);
     }
   }
 
-  OutptrOutBuff(w);
+  OutptrOutBuff(wSize);
 }
 
 
-void    OutCharCanExt(uchar  *mpb)
+void    OutCharCanMap(uchar  *mpb)
 {
   InitPushPtr();
-  uint w = 0;
+  uint wSize = 0;
 
-  uchar i;
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      Push(&mpb[i], sizeof(uchar));
-      w += sizeof(uchar);
+      Push(&mpb[c], sizeof(uchar));
+      wSize += sizeof(uchar);
     }
   }
 
-  OutptrOutBuff(w);
+  OutptrOutBuff(wSize);
 }
 
 
-void    OutBoolCanExt(boolean  *mpf)
+void    OutBoolCanMap(boolean  *mpf)
 {
   InitPushPtr();
-  uint w = 0;
+  uint wSize = 0;
 
-  uchar i;
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      Push(&mpf[i], sizeof(boolean));
-      w += sizeof(boolean);
+      Push(&mpf[c], sizeof(boolean));
+      wSize += sizeof(boolean);
     }
   }
 
-  OutptrOutBuff(w);
+  OutptrOutBuff(wSize);
 }
