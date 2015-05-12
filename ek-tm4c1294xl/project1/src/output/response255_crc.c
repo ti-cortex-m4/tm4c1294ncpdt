@@ -39,6 +39,7 @@ RESPONSE255_CRC.C
 #include "../output/out_version.h"
 #include "../output/out_ports.h"
 #include "../output/out_names.h"
+#include "../output/out_limits.h"
 #include "../output/profile/out_limits.h"
 #include "../output/profile/out_schedule.h"
 #include "../output/out_extended_1.h"
@@ -105,6 +106,8 @@ void    Response255_CRC(void)
     case bEXT_GETDIGITALS: OutGetDigitalsExt(); break;
 
     case bEXT_GETSTOPCAN: OutIntCanMap(mpcwStopCan); break;
+    case bEXT_GETSTOPCAN2: OutStopCan2(); break;
+
     case bEXT_GETENBLCAN: OutBoolCanMap(mpboEnblCan); break;
 
     case bEXT_GETCTRLHOU: OutGetCtrlHou(); break;

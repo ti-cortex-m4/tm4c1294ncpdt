@@ -314,7 +314,7 @@ QUERIES.H
 
 #define bEXT_GETENGCANDAY              65
 #define bEXT_GETENGCANMON              66
-#define bEXT_GETSTOPCAN2               67
++   #define bEXT_GETSTOPCAN2               67
 
 #define bEXT_GETOUTPUTDELAY            68
 #define bEXT_GETCORRECTLIMIT           69
