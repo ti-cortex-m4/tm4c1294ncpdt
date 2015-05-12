@@ -177,7 +177,7 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-      case bSET_ENBL_PARAMS:    key_SetParamsFlag();    break;
+      case bSET_PARAMS_FLAG:    key_SetParamsFlag();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
       case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
@@ -340,7 +340,7 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-      case bSET_ENBL_PARAMS:    key_SetParamsFlag();    break;
+      case bSET_PARAMS_FLAG:    key_SetParamsFlag();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
       case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
@@ -584,7 +584,7 @@ void    Keyboard_Key(void)
       case bSET_CONTROL_HOURS:  key_SetCtrlHours();     break;
       case bSET_ENBL_CANALS:    key_SetEnblCanals();    break;
 
-      case bSET_ENBL_PARAMS:    key_SetParamsFlag();    break;
+      case bSET_PARAMS_FLAG:    key_SetParamsFlag();    break;
       case bSET_MNT_PARAMS:     key_SetMntParams();     break;
       case bSET_PARAMS:         key_SetParams();        break;
       case bSET_PARAMS_DIV:     key_SetParamsDiv();     break;
