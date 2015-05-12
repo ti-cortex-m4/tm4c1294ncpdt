@@ -16,3 +16,9 @@ bool    IsNAN(float  fl)
 
   return co.dwBuff == 0xFFFFFFFF;
 }
+
+
+bool    ValidFloat(float  fl)
+{
+  return !IsNAN(fl);
+}

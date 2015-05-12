@@ -89,7 +89,7 @@ static void ShowParamFull(void)
 
          float fl = mpreParBuff[ PrevSoftTim() ][ iwPrm ];
 
-         if (!IsNAN(fl))
+         if (ValidFloat(fl))
            sprintf(szLo,"%12.3f", fl);
          else
            ShowLo(szEmpty);
