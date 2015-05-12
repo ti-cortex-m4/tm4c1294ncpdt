@@ -154,17 +154,16 @@ uint    j;
         {
           reBuffA = mpreParBuff[ PrevSoftTim() ][ j ];
 
-          combo32 co;
-          co.reBuff = reBuffA;
-
-          if (co.dwBuff != 0xFFFFFFFF)
+          if (ValidFloat(reBuffA))
           {
             FixParamsUni(diT);
 
             PushFloatUni(ST4_OK, reBuffA);
           }
           else
+          {
             PushFloatUni(ST4_BADDIGITAL, reBuffA);
+          }
         }
       }
     }
