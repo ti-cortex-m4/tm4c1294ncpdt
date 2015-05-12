@@ -24,7 +24,7 @@ static char const       szParamCurr[]  = "Значения        ",
                         szParamFull[]  = "Значения: массив";
 
 
-static uint             iwPrm, iwTime;
+static uint             iwPrm, iwTim, ibT;
 
 
 
@@ -61,7 +61,7 @@ static void ShowParamBuff(void)
       ShowLo(szBlocking); 
     else
     {
-      switch (ibY)
+      switch (ibT)
       {
         case 0:  sprintf(szLo,"%12.3f", mpreParBuff[ibSoftTim][iwPrm]); break;
         case 1:  ShowTime(mptiParBuff[iwPrm]);  break;
@@ -82,9 +82,9 @@ static void ShowParamFull(void)
       ShowLo(szBlocking); 
     else
     {
-       if (LoadPrmTim((wTIMES + iwHardTim - iwTime) % wTIMES) == TRUE)
+       if (LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES) == TRUE)
        {
-         sprintf(szHi+12,"-%03u",iwTime);
+         sprintf(szHi+12,"-%03u",iwTim);
 
          combo32 co;
          co.reBuff = mpreParBuff[ PrevSoftTim() ][ iwPrm ];
@@ -176,10 +176,11 @@ void    key_GetParamsAll(void)
       enKeyboard = KBD_POSTENTER;
       Clear();
 
-      ibY = 0;
-      iwTime = 0;
+      ibT = 0;
 
+      iwTim = 0;
       iwPrm = 0;
+
       ShowParams();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
@@ -197,8 +198,8 @@ void    key_GetParamsAll(void)
     {
       if (++iwPrm >= wPARAMS) iwPrm = 0;
 
-      ibY = 0; 
-      iwTime = 0;
+      ibT = 0; 
+      iwTim = 0;
 
       ShowParams();
     }
@@ -212,8 +213,8 @@ void    key_GetParamsAll(void)
     {
       if (iwPrm > 0) iwPrm--; else iwPrm = wPARAMS - 1;
 
-      ibY = 0; 
-      iwTime = 0;
+      ibT = 0; 
+      iwTim = 0;
 
       ShowParams();
     }
@@ -223,8 +224,8 @@ void    key_GetParamsAll(void)
 
   else if (bKey == bKEY_MINUS)
   {        
-    if (++ibY >= 3) ibY = 0;
-    if (++iwTime >= wTIMES) iwTime = 0;
+    if (++ibT >= 3) ibT = 0;
+    if (++iwTim >= wTIMES) iwTim = 0;
 
     ShowParams();
   }
