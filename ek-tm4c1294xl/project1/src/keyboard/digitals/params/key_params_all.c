@@ -14,6 +14,7 @@ KEY_PARAMS_ALL.C
 #include "../../../time/timedate_display.h"
 #include "../../../serial/ports.h"
 #include "../../../flash/files.h"
+#include "../../../kernel/float.h"
 #include "../../../engine.h"
 
 
@@ -24,7 +25,7 @@ static char const       szParamCurr[]  = "Значения        ",
                         szParamFull[]  = "Значения: массив";
 
 
-static uint             iwPrm, iwTim, ibT;
+static uint             iwPrm, iwTim, ibVal;
 
 
 
@@ -61,7 +62,7 @@ static void ShowParamBuff(void)
       ShowLo(szBlocking); 
     else
     {
-      switch (ibT)
+      switch (ibVal)
       {
         case 0:  sprintf(szLo,"%12.3f", mpreParBuff[ibSoftTim][iwPrm]); break;
         case 1:  ShowTime(mptiParBuff[iwPrm]);  break;
@@ -86,11 +87,10 @@ static void ShowParamFull(void)
        {
          sprintf(szHi+12,"-%03u",iwTim);
 
-         combo32 co;
-         co.reBuff = mpreParBuff[ PrevSoftTim() ][ iwPrm ];
+         float fl = mpreParBuff[ PrevSoftTim() ][ iwPrm ];
 
-         if (co.dwBuff != 0xFFFFFFFF)
-           sprintf(szLo,"%12.3f", co.reBuff);
+         if (!IsNAN(fl))
+           sprintf(szLo,"%12.3f", fl);
          else
            ShowLo(szEmpty);
        }
@@ -176,7 +176,7 @@ void    key_GetParamsAll(void)
       enKeyboard = KBD_POSTENTER;
       Clear();
 
-      ibT = 0;
+      ibVal = 0;
 
       iwTim = 0;
       iwPrm = 0;
@@ -198,7 +198,7 @@ void    key_GetParamsAll(void)
     {
       if (++iwPrm >= wPARAMS) iwPrm = 0;
 
-      ibT = 0; 
+      ibVal = 0; 
       iwTim = 0;
 
       ShowParams();
@@ -213,7 +213,7 @@ void    key_GetParamsAll(void)
     {
       if (iwPrm > 0) iwPrm--; else iwPrm = wPARAMS - 1;
 
-      ibT = 0; 
+      ibVal = 0; 
       iwTim = 0;
 
       ShowParams();
@@ -224,7 +224,7 @@ void    key_GetParamsAll(void)
 
   else if (bKey == bKEY_MINUS)
   {        
-    if (++ibT >= 3) ibT = 0;
+    if (++ibVal >= 3) ibVal = 0;
     if (++iwTim >= wTIMES) iwTim = 0;
 
     ShowParams();
