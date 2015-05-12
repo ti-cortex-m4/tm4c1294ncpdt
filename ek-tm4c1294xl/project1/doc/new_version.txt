@@ -4,3 +4,4 @@ key_SetDigitals MakeInDelays
 заданее телефона с большего на меньший
 
 Esc транзит
+Esc console
