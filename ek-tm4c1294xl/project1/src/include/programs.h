@@ -190,7 +190,7 @@ PROGRAMS.H
 #define bSET_CONTROL_HOURS          183
 #define bSET_ENBL_CANALS            185
 
-#define bSET_ENBL_PARAMS            101
+#define bSET_PARAMS_FLAG            101
 #define bSET_MNT_PARAMS             102
 #define bSET_PARAMS                 103
 #define bSET_PARAMS_DIV             104
