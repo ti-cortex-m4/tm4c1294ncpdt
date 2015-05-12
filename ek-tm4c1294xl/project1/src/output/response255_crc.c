@@ -58,12 +58,12 @@ void    Response255_CRC(void)
     case bEXT_GETPHONE: OutGetPhone(); break;
     case bEXT_SETPHONE: OutSetPhone(); break;
 
-    case bINQ_GETTRANS_ENG: OutRealCanExt(mpreTransEng); break;
-    case bINQ_GETTRANS_CNT: OutRealCanExt(mpreTransCnt); break;
-    case bINQ_GETPULSE_HOU: OutRealCanExt(mprePulseHou); break;
-    case bINQ_GETPULSE_MNT: OutRealCanExt(mprePulseMnt); break;
-    case bINQ_GETCOUNT:     OutRealCanExt(mpreCount);    break;
-    case bINQ_GETLOSSE:     OutRealCanExt(mpreLosse);    break;
+    case bINQ_GETTRANS_ENG: OutFloatCanMap(mpreTransEng); break;
+    case bINQ_GETTRANS_CNT: OutFloatCanMap(mpreTransCnt); break;
+    case bINQ_GETPULSE_HOU: OutFloatCanMap(mprePulseHou); break;
+    case bINQ_GETPULSE_MNT: OutFloatCanMap(mprePulseMnt); break;
+    case bINQ_GETCOUNT:     OutFloatCanMap(mpreCount);    break;
+    case bINQ_GETLOSSE:     OutFloatCanMap(mpreLosse);    break;
 
     case bINQ_GETCNTCANMONCURR_ALL: OutCntCanMonCurrExt(); break;
     case bEXT_GETSIMPLE_ESC_S:      OutSimpleEscSExt();    break;
@@ -104,8 +104,8 @@ void    Response255_CRC(void)
 
     case bEXT_GETDIGITALS: OutGetDigitalsExt(); break;
 
-    case bEXT_GETSTOPCAN: OutIntCanExt(mpcwStopCan); break;
-    case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnblCan); break;
+    case bEXT_GETSTOPCAN: OutIntCanMap(mpcwStopCan); break;
+    case bEXT_GETENBLCAN: OutBoolCanMap(mpboEnblCan); break;
 
     case bEXT_GETCTRLHOU: OutGetCtrlHou(); break;
     case bEXT_SETCTRLHOU: OutSetCtrlHou(); break;
