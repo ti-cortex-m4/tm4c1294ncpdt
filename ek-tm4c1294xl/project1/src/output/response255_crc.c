@@ -23,6 +23,7 @@ RESPONSE255_CRC.C
 #include "../devices/extended_5.h"
 #include "../devices/extended_6.h"
 #include "../devices/extended_7.h"
+#include "../output/out_common.h"
 #include "../output/out_phones.h"
 #include "../output/out_gaps.h"
 #include "../output/out_decret.h"

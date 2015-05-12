@@ -59,12 +59,10 @@ void    OutSetFloatCan(float  *mfl, file const  *pfl)
 
 void    OutRealCanExt(real  *mpe)
 {
-uchar   i;
-uchar   w;
-
   InitPushPtr();
-  w = 0;
+  uint w = 0;
 
+  uchar i;
   for (i=0; i<bCANALS; i++)
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
@@ -80,12 +78,10 @@ uchar   w;
 
 void    OutIntCanExt(uint  *mpw)
 {
-uchar   i;
-uchar   w;
-
   InitPushPtr();
-  w = 0;
+  uint w = 0;
 
+  uchar i;
   for (i=0; i<bCANALS; i++)
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
@@ -101,12 +97,10 @@ uchar   w;
 
 void    OutCharCanExt(uchar  *mpb)
 {
-uchar   i;
-uchar   w;
-
   InitPushPtr();
-  w = 0;
+  uint w = 0;
 
+  uchar i;
   for (i=0; i<bCANALS; i++)
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
@@ -122,12 +116,10 @@ uchar   w;
 
 void    OutBoolCanExt(boolean  *mpf)
 {
-uchar   i;
-uchar   w;
-
   InitPushPtr();
-  w = 0;
+  uint w = 0;
 
+  uchar i;
   for (i=0; i<bCANALS; i++)
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
