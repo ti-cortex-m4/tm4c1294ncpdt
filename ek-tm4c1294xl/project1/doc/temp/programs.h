@@ -50,7 +50,7 @@
 #endif
 
 #define bSET_PASSWORD               11
-#define bSET_LOGICAL                13
++   #define bSET_LOGICAL                13
 +   #define bSET_MACHINES               113
 #define bSET_START                  15
 #define bSET_STARTHOU               16

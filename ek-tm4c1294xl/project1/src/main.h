@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MAIN.H
+MAIN,H
 
 
 ------------------------------------------------------------------------------*/
@@ -8,9 +8,9 @@ MAIN.H
 #define __MAIN
 
 
-#include        <stdint.h>
-#include        <stdbool.h>
-#include        <string.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <string.h>
 #include "driverlib/debug.h"
 #include "system.h"
 #include "main_keyboard.h"
@@ -26,6 +26,7 @@ MAIN.H
 #include "main_params.h"
 #include "main_extended.h"
 #include "kernel/boolean.h"
+#include "kernel/float.h"
 
 
 // тип 'правило перехода на сезонное время'
