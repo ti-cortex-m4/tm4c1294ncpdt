@@ -1,33 +1,26 @@
 /*------------------------------------------------------------------------------
-ACCESS.C
+ACCESS,C
 
 
 ------------------------------------------------------------------------------*/
 
-#include        <string.h>
+#include  <string.h>
 #include "main.h"
 #include "keyboard/keyboard.h"
 #include "memory/mem_settings.h"
 
 
 
-void    InitAccess(void)
-{
-// TODO	InitAccess
-}
-
-
-
 bool    SuperUser(void)
 {
-  return( (mpbPassTwo[0] == 2) &&
+  return ((mpbPassTwo[0] == 2) &&
           (mpbPassTwo[1] == 6) &&
           (mpbPassTwo[2] == 1) &&
           (mpbPassTwo[3] == 1) &&
           (mpbPassTwo[4] == 3) &&
           (mpbPassTwo[5] == 7) &&
           (mpbPassTwo[6] == 9) &&
-          (mpbPassTwo[7] == 1) );
+          (mpbPassTwo[7] == 1));
 }
 
 
@@ -45,9 +38,10 @@ void    ClearPassTwo(void)
 
 
 
-bool    TrueKey(uchar  bKey)
+bool    ValidKey(uchar  bKey)
 {
-  if (bKey > 13) return false;
+  if (bKey > 13)
+    return false;
   else
   {
     if ((enGlobal == GLB_WORK) && (wProgram == bSET_PASSWORD))
