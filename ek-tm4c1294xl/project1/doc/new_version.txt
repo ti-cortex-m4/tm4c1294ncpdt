@@ -1,3 +1,7 @@
+удвоенная точность
+3 мин - 6 часов
+30 мин - 100 суток
+
 key_SetDigitals MakeKeys
 key_SetDigitals MakeInDelays
 

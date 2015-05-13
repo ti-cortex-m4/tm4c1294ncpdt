@@ -22,7 +22,8 @@ KEY_PARAMS_ALL.C
 //                                         0123456789ABCDEF
 static char const       szParamCurr[]  = "Значения        ",
                         szParamBuff[]  = "Значения: буфер ",
-                        szParamFull[]  = "Значения: массив";
+                        szParamFull[]  = "Значения: массив",
+                        szNoParam[]    = "   не задано    ";
 
 
 static uint             iwPrm, iwTim, ibVal;
@@ -32,7 +33,7 @@ static uint             iwPrm, iwTim, ibVal;
 static void ShowParamCurr(void)
 {
   if (GetParamDevice(iwPrm) == 0)
-    ShowLo(szEmpty);
+    ShowLo(szNoParam);
   else
   {
     boBeginParam = FALSE;
@@ -55,7 +56,7 @@ static void ShowParamCurr(void)
 static void ShowParamBuff(void)
 {
   if (GetParamDevice(iwPrm) == 0)
-    ShowLo(szEmpty);
+    ShowLo(szNoParam);
   else
   {
     if (mpboEnblParams[iwPrm] == FALSE)
@@ -76,7 +77,7 @@ static void ShowParamBuff(void)
 static void ShowParamFull(void)
 {
   if (GetParamDevice(iwPrm) == 0)
-    ShowLo(szEmpty);
+    ShowLo(szNoParam);
   else
   {
     if (mpboEnblParams[iwPrm] == FALSE)
