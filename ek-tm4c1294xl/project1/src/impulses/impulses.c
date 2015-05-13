@@ -115,12 +115,12 @@ void    InitImpulses(void) {
 #ifdef NATIVE_IMPULSES
 
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R9; // GPIO Port K Run Mode Clock Gating Control
-  RunClocking();
+  DelayGPIO();
   HWREG(GPIO_PORTK_BASE + GPIO_O_DIR) &= 0xFF00; // GPIO Direction
   HWREG(GPIO_PORTK_BASE + GPIO_O_DEN) |= 0x00FF; // GPIO Digital Enable
 
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R11; // GPIO Port M Run Mode Clock Gating Control
-  RunClocking();
+  DelayGPIO();
   HWREG(GPIO_PORTM_BASE + GPIO_O_DIR) &= 0xFF00; // GPIO Direction
   HWREG(GPIO_PORTM_BASE + GPIO_O_DEN) |= 0x00FF; // GPIO Digital Enable
 

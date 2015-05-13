@@ -13,7 +13,7 @@ void    Nop(void) {
 }
 
 
-void    RunClocking(void) {
+void    DelayGPIO(void) {
 __asm("   nop\n"
       "   nop\n"
       "   nop\n");
