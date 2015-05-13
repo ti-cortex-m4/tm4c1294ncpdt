@@ -204,13 +204,13 @@ uchar   i;
 
   InitPop(1);
 
-  coEnergy.mpbBuff[0] = 0;
+  coEnergy.mpbBuff[3] = 0;
 
   i = PopChar();
-  coEnergy.mpbBuff[1] = i & 0x3F;
+  coEnergy.mpbBuff[2] = i & 0x3F;
 
-  coEnergy.mpbBuff[3] = PopChar();
-  coEnergy.mpbBuff[2] = PopChar();
+  coEnergy.mpbBuff[0] = PopChar();
+  coEnergy.mpbBuff[1] = PopChar();
 
   reBuffA = (real)coEnergy.dwBuff / reParamDiv;
   return(i);
