@@ -105,42 +105,42 @@ static void ShowParams(void)
 {   
   switch (GetParamLine(iwPrm))
   {
-    case PAR_P  : ShowHi(szRecP);  break;
-    case PAR_P1 : ShowHi(szRecP1); break;
-    case PAR_P2 : ShowHi(szRecP2); break;
-    case PAR_P3 : ShowHi(szRecP3); break;
+    case PAR_P  : ShowHi(szParamP);  break;
+    case PAR_P1 : ShowHi(szParamP1); break;
+    case PAR_P2 : ShowHi(szParamP2); break;
+    case PAR_P3 : ShowHi(szParamP3); break;
 
-    case PAR_Q  : ShowHi(szRecQ);  break;
-    case PAR_Q1 : ShowHi(szRecQ1); break;
-    case PAR_Q2 : ShowHi(szRecQ2); break;
-    case PAR_Q3 : ShowHi(szRecQ3); break;
+    case PAR_Q  : ShowHi(szParamQ);  break;
+    case PAR_Q1 : ShowHi(szParamQ1); break;
+    case PAR_Q2 : ShowHi(szParamQ2); break;
+    case PAR_Q3 : ShowHi(szParamQ3); break;
 
-    case PAR_S  : ShowHi(szRecS);  break;
-    case PAR_S1 : ShowHi(szRecS1); break;
-    case PAR_S2 : ShowHi(szRecS2); break;
-    case PAR_S3 : ShowHi(szRecS3); break;
+    case PAR_S  : ShowHi(szParamS);  break;
+    case PAR_S1 : ShowHi(szParamS1); break;
+    case PAR_S2 : ShowHi(szParamS2); break;
+    case PAR_S3 : ShowHi(szParamS3); break;
 
-    case PAR_U  : ShowHi(szRecU);  break;
-    case PAR_U1 : ShowHi(szRecU1); break;
-    case PAR_U2 : ShowHi(szRecU2); break;
-    case PAR_U3 : ShowHi(szRecU3); break;
+    case PAR_U  : ShowHi(szParamU);  break;
+    case PAR_U1 : ShowHi(szParamU1); break;
+    case PAR_U2 : ShowHi(szParamU2); break;
+    case PAR_U3 : ShowHi(szParamU3); break;
 
-    case PAR_I  : ShowHi(szRecI);  break;
-    case PAR_I1 : ShowHi(szRecI1); break;
-    case PAR_I2 : ShowHi(szRecI2); break;
-    case PAR_I3 : ShowHi(szRecI3); break;
+    case PAR_I  : ShowHi(szParamI);  break;
+    case PAR_I1 : ShowHi(szParamI1); break;
+    case PAR_I2 : ShowHi(szParamI2); break;
+    case PAR_I3 : ShowHi(szParamI3); break;
 
-    case PAR_C  : ShowHi(szRecC);  break;
-    case PAR_C1 : ShowHi(szRecC1); break;
-    case PAR_C2 : ShowHi(szRecC2); break;
-    case PAR_C3 : ShowHi(szRecC3); break;
+    case PAR_C  : ShowHi(szParamC);  break;
+    case PAR_C1 : ShowHi(szParamC1); break;
+    case PAR_C2 : ShowHi(szParamC2); break;
+    case PAR_C3 : ShowHi(szParamC3); break;
 
-    case PAR_F  : ShowHi(szRecF);  break;
-    case PAR_F1 : ShowHi(szRecF1); break;
-    case PAR_F2 : ShowHi(szRecF2); break;
-    case PAR_F3 : ShowHi(szRecF3); break;
+    case PAR_F  : ShowHi(szParamF);  break;
+    case PAR_F1 : ShowHi(szParamF1); break;
+    case PAR_F2 : ShowHi(szParamF2); break;
+    case PAR_F3 : ShowHi(szParamF3); break;
 
-    default:      ShowHi(szRecNo); break;
+    default:      ShowHi(szParamNo); break;
   }
 
   switch (wProgram)
