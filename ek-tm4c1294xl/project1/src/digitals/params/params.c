@@ -11,7 +11,7 @@ PARAMS,C
 
 
 
-param const             mppaParamMap[bPARAM_BLOCK] =
+param const             mppaParamsMap[bPARAM_BLOCK] =
 {
   PAR_P , PAR_P1 , PAR_P2 , PAR_P3 ,
   PAR_Q , PAR_Q1 , PAR_Q2 , PAR_Q3 ,

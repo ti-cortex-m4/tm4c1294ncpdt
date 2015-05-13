@@ -253,7 +253,7 @@ void    OutGetParamsAll(void)
         di.ibPhone  = mpdiDigital[bInBuff5].ibPhone;
         di.bDevice  = mpdiDigital[bInBuff5].bDevice;
         di.bAddress = mpdiDigital[bInBuff5].bAddress;
-        di.ibLine   = mppaParamMap[i];
+        di.ibLine   = mppaParamsMap[i];
 
         mpdiParam[wPARAMS-1] = di;
 
