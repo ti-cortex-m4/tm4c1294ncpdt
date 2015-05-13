@@ -149,7 +149,7 @@ void    EscDisplay(void)
 void    EscKey(void)
 {
   uchar i = bQuery-'à';
-  if (TrueKey(i) == true)
+  if (ValidKey(i) == true)
   {
     bKey = mpbKeys[i];
     fKey = true;

@@ -15,7 +15,7 @@ OUT_CONSOLE,C
 
 void    OutSetKey(void)
 {
-  if (TrueKey(bInBuff5) == true)
+  if (ValidKey(bInBuff5) == true)
   {
     bKey = mpbKeys[bInBuff5];
     fKey = true;
