@@ -38,7 +38,7 @@ static void ShowTestDirect(void)
     Clear();
 
     if (mpboEnblCan[ibX] == FALSE)
-      ShowLo(szBlocking); 
+      ShowLo(szBlocked); 
     else 
     {
       uchar bA = 0;

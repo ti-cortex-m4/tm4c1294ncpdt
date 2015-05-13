@@ -72,7 +72,7 @@ uchar   i;
 
         if (mpboEnblCan[i] == FALSE)
         { 
-          ShowLo(szBlocking); 
+          ShowLo(szBlocked); 
           DelayMsg();
         }
         else switch (diCurr.bDevice)
