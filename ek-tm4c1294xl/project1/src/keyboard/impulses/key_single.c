@@ -163,7 +163,7 @@ void    ShowModemReadCntCurrCan(void)
     Clear();
 
     if (mpboEnblCan[ibX] == false)
-      ShowLo(szBlocking);
+      ShowLo(szBlocked);
     else
       (ReadCntCurrCan(ibX) == 1) ? ShowFloat(reBuffA) : Error();
 
@@ -189,7 +189,7 @@ void    ShowModemReadTimeCan(bool  fShowTimeDate)
     if (mpboEnblCan[ibX] == false)
     {
       sprintf(szHi+14,"%2u",ibX+1);
-      ShowLo(szBlocking);
+      ShowLo(szBlocked);
     }
     else
     if (ReadTimeCan(ibX) == 1)

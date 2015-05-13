@@ -85,7 +85,7 @@ void    ShowCntCanMon(void)
         LoadSlide(pszCntCanYear1);
 
         if (mpboEnblCan[ibX] == FALSE)
-          ShowLo(szBlocking); 
+          ShowLo(szBlocked); 
         else 
         {
           if (GetDigitalDevice(ibX) != 6)
@@ -118,7 +118,7 @@ void    ShowCntCanMon(void)
         LoadSlide(pszCntCanYear10);
 
         if (mpboEnblCan[ibX] == FALSE)
-          ShowLo(szBlocking); 
+          ShowLo(szBlocked); 
         else 
         {
           if (GetDigitalDevice(ibX) != 6)

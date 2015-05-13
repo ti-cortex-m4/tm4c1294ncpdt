@@ -41,7 +41,7 @@ static void ShowParamCurr(void)
     ibPort = diCurr.ibPort;
 
     if (mpboEnblParams[iwPrm] == FALSE)
-      ShowLo(szBlocking); 
+      ShowLo(szBlocked); 
     else if (diCurr.ibPhone != 0)
       ShowLo(szEmpty);
     else if (ReadParam(iwPrm) == 1)
@@ -59,7 +59,7 @@ static void ShowParamBuff(void)
   else
   {
     if (mpboEnblParams[iwPrm] == FALSE)
-      ShowLo(szBlocking); 
+      ShowLo(szBlocked); 
     else
     {
       switch (ibVal)
@@ -80,7 +80,7 @@ static void ShowParamFull(void)
   else
   {
     if (mpboEnblParams[iwPrm] == FALSE)
-      ShowLo(szBlocking); 
+      ShowLo(szBlocked); 
     else
     {
        if (LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES) == TRUE)
