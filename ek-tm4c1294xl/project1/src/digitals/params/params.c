@@ -190,7 +190,7 @@ void    ShowParam(uint  iwPrm)
                GetParamAddress(iwPrm),
                GetParamLine(iwPrm));
 
-  sprintf(szHi+13,"%03u",iwPrm+1);
+  sprintf(szHi+13,"%03u",iwPrm + 1);
 
   (mpboEnblParams[iwPrm] == TRUE) ? (szHi[12] = '+') : (szHi[12] = '-');
 }
