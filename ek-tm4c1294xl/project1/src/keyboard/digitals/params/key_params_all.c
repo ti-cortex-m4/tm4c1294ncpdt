@@ -23,7 +23,8 @@ KEY_PARAMS_ALL.C
 static char const       szParamCurr[]  = "Значения        ",
                         szParamBuff[]  = "Значения: буфер ",
                         szParamFull[]  = "Значения: массив",
-                        szNoParam[]    = "   не задано    ";
+                        szNoParam[]    = "   не задано    ",
+                        szModemLink[]  = "модемная связь !";
 
 
 static uint             iwPrm, iwTim, ibVal;
@@ -44,7 +45,7 @@ static void ShowParamCurr(void)
     if (mpboEnblParams[iwPrm] == FALSE)
       ShowLo(szBlocked); 
     else if (diCurr.ibPhone != 0)
-      ShowLo(szEmpty);
+      ShowLo(szModemLink);
     else if (ReadParam(iwPrm) == 1)
       sprintf(szLo,"%12.3f", reBuffA);
     else
