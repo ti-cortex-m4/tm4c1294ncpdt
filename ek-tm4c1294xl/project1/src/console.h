@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------
-CONSOLE.H
+CONSOLE,H
 
 
 ------------------------------------------------------------------------------*/
 
-#include "main.h"
 #include "keyboard/keyboard.h"
 #include "display/display.h"
 #include "flash/files.h"
