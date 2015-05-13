@@ -54,7 +54,7 @@ char const              szParamP[]  = "P, Вт           ",
                         szParamF1[] = "f1, Гц          ",
                         szParamF2[] = "f2, Гц          ",
                         szParamF3[] = "f3, Гц          ",
-                        szParamNo[] = "Нет параметра   ";
+                        szNoParam[] = "Нет параметра   ";
 
 
 boolean                 boBeginParam;
