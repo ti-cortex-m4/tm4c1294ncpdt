@@ -140,7 +140,7 @@ static void ShowParams(void)
     case PAR_F2 : ShowHi(szParamF2); break;
     case PAR_F3 : ShowHi(szParamF3); break;
 
-    default:      ShowHi(szNoParam); break;
+    default:      ShowHi(szBadParam); break;
   }
 
   switch (wProgram)
