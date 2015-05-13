@@ -1,20 +1,20 @@
 /*------------------------------------------------------------------------------
-KEY_PRIVATE.C
+KEY_PRIVATE,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "../memory/mem_settings.h"
-#include "keyboard.h"
-#include "../display/display.h"
-#include "../access.h"
+#include "../console.h"
 #include "../settings.h"
+#include "../access.h"
+
 
 
 //                                         0123456789ABCDEF
 static char const       szPrivate[]     = "Заводской номер ",
-                        szMaskPrivate[] = "    _____       ";
+                        szMask[]        = "    _____       ";
 
 
 
@@ -48,7 +48,7 @@ void    key_SetPrivate(void)
       if (SuperUser() == true) 
       {
         enKeyboard = KBD_INPUT1;
-        ShowLo(szMaskPrivate);
+        ShowLo(szMask);
       }
       else LongBeep();
     }

@@ -54,7 +54,7 @@
 +   #define bSET_MACHINES               113
 #define bSET_START                  15
 #define bSET_STARTHOU               16
-#define bSET_PRIVATE                99
++   #define bSET_PRIVATE                99
 +   #define bSET_VERSION                115
 
 #define bSET_PROGRAM79              79
