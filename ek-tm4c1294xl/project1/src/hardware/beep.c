@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-BEEP.C
+BEEP,C
 
 
 ------------------------------------------------------------------------------*/
@@ -14,8 +14,9 @@ BEEP.C
 
 
 
-void    SoundOn(void) {
-#ifdef NATIVE_BEEP
+void    SoundOn(void)
+{
+#ifdef ENABLE_BEEP
 
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DATA + 0x0010) = 0x0004;
 
@@ -23,8 +24,9 @@ void    SoundOn(void) {
 }
 
 
-void    SoundOff(void) {
-#ifdef NATIVE_BEEP
+void    SoundOff(void)
+{
+#ifdef ENABLE_BEEP
 
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DATA + 0x0010) = ~0x0004;
 
@@ -33,11 +35,12 @@ void    SoundOff(void) {
 
 
 
-void    InitBeep(void) {
-#ifdef NATIVE_BEEP
+void    InitBeep(void)
+{
+#ifdef ENABLE_BEEP
 
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R4; // GPIO Port E Run Mode Clock Gating Control
-  RunClocking();
+  DelayGPIO();
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DIR) |= 0x0004; // GPIO Direction
   HWREG(GPIO_PORTE_AHB_BASE + GPIO_O_DEN) |= 0x0004; // GPIO Digital Enable
 
@@ -48,13 +51,20 @@ void    InitBeep(void) {
 
 
 
-void    Beep(void) {
-  SoundOn();  Delay(50);
-  SoundOff(); Delay(50);
+void    Beep(void)
+{
+  SoundOn();
+  Delay(50);
+
+  SoundOff();
+  Delay(50);
 }
 
 
-void    LongBeep(void) {
-  Beep(); Beep(); Beep();
+void    LongBeep(void)
+{
+  Beep();
+  Beep();
+  Beep();
 }
 
