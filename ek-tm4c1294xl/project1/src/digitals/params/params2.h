@@ -32,7 +32,7 @@ extern  char const              szParamP[],
                                 szParamF1[],
                                 szParamF2[],
                                 szParamF3[],
-                                szNoParam[];
+                                szBadParam[];
 
 
 extern  boolean                 boBeginParam;
