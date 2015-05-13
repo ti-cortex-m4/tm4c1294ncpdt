@@ -182,7 +182,7 @@ void InitGPIO_LCD(void)
 
  HWREG(SYSCTL_RCGCGPIO) |= 0xFFFF;//Запуск генераторов портов
 
- RunClocking();
+ DelayGPIO();
  Wait();
 /*
  HWREG(GPIO_PORTK_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом

@@ -415,7 +415,7 @@ void    InDelay3_Timer0(void) {
 void    InitSerial3(void)
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R3; // GPIO Port D Run Mode Clock Gating Control
-  RunClocking();
+  DelayGPIO();
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) |= 0x0040; // GPIO Direction
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x0040; // GPIO Digital Enable
 
