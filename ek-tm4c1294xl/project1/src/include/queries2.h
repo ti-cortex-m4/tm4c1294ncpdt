@@ -93,6 +93,8 @@ QUERIES2.H
 #define bEXT_GETGROUPSNAME             115
 #define bEXT_SETGROUPSNAME             116
 
+#define bEXT_GETEXTENDED40_T           119
+
 #define bEXT_FLASH_CONTROL             250
 
 
