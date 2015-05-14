@@ -340,7 +340,7 @@
 #endif
 
 #define bGET_ANALYSIS3              237
-#define bGET_ANALYSIS4              238
++   #define bGET_ANALYSIS4              238
 
 #define bGET_POWCANCURRMNT          120 
 
