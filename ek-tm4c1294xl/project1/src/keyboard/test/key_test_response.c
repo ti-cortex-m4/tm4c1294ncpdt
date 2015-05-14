@@ -10,8 +10,7 @@ KEY_RESPONSE,H
 #include "../../memory/mem_serial2.h"
 #include "../../memory/mem_serial3.h"
 #include "../../memory/mem_ports.h"
-#include "../keyboard.h"
-#include "../../display/display.h"
+#include "../../console.h"
 #include "../../serial/ports.h"
 
 
@@ -34,7 +33,6 @@ void    key_TestResponse(void)
     }
   }
 }
-
 
 
 void    auto_TestResponse(void)
