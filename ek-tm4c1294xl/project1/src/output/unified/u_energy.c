@@ -320,7 +320,7 @@ void    GetEngGrpMonUni(bool  x2)
     dw -= bInBuffB;
     time ti = MonIndexToDate(dw);
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((CheckDefGrpMonUni(ti.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), ti);
+    Output2_Code(wSize, ((CheckDefGrpMonUni(ti.bMonth) == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
 
