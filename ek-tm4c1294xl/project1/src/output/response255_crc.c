@@ -20,6 +20,7 @@ RESPONSE255_CRC.C
 #include "../output/out_groups.h"
 #include "../output/out_relaxs.h"
 #include "../devices/extended_4.h"
+#include "../devices/extended_4t.h"
 #include "../devices/extended_5.h"
 #include "../devices/extended_6.h"
 #include "../devices/extended_7.h"
@@ -193,6 +194,8 @@ void    Response255_CRC(void)
     case bEXT_SETCANALSNAME: SetCanalsNameExt(); break;
     case bEXT_GETGROUPSNAME: GetGroupsNameExt(); break;
     case bEXT_SETGROUPSNAME: SetGroupsNameExt(); break;
+
+    case bEXT_GETEXTENDED40_T: OutExtended40T(); break;
 
     case bEXT_FLASH_CONTROL:
       OutFlashControl();
