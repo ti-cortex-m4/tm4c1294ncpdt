@@ -188,7 +188,7 @@ void    OutGetParamFull(void)
     {
       if (bInBuff7*0x100+bInBuff8 < wTIMES)
       {
-        if (LoadPrmTim((wTIMES + iwHardTim - (bInBuff7*0x100+bInBuff8)) % wTIMES) == 1)
+        if (LoadPrmTim((wTIMES + iwHardTim - (bInBuff7*0x100+bInBuff8)) % wTIMES) == TRUE)
         {
           InitPushCRC();
 
