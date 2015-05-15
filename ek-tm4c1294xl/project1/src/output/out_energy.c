@@ -90,16 +90,16 @@ void    OutEngDayGrpExt0(void)
       if (LoadImpDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == TRUE)
       {
         InitPushPtr();
-        uint w = 0;
+        uint wSize = 0;
 
         uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            w += PushEngDayGrp(g, false);
+            wSize += PushEngDayGrp(g, false);
         }
 
-        OutptrOutBuff(w);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -123,16 +123,16 @@ void    OutEngDayGrpExt1(void)
         for (i=0; i<3+bGROUPS/8; i++)
           PushChar(InBuff(4+i));
 
-        uint w = 0;
+        uint wSize = 0;
 
         uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            w += PushEngDayGrp(g, true);
+            wSize += PushEngDayGrp(g, true);
         }
 
-        OutptrOutBuff(3+bGROUPS/8+w);
+        OutptrOutBuff(3+bGROUPS/8+wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -153,16 +153,16 @@ void    OutEngMonGrpExt0(void)
       {
         InitPushPtr();
 
-        uint w = 0;
+        uint wSize = 0;
 
         uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            w += PushEngMonGrp(g, false);
+            wSize += PushEngMonGrp(g, false);
         }
 
-        OutptrOutBuff(w);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -186,16 +186,16 @@ void    OutEngMonGrpExt1(void)
         for (i=0; i<3+bGROUPS/8; i++)
           PushChar(InBuff(4+i));
 
-        uint w = 0;
+        uint wSize = 0;
 
         uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            w += PushEngMonGrp(g, true);
+            wSize += PushEngMonGrp(g, true);
         }
 
-        OutptrOutBuff(3+bGROUPS/8+w);
+        OutptrOutBuff(3+bGROUPS/8+wSize);
       }
       else Result(bRES_BADFLASH);
     }
