@@ -38,6 +38,8 @@ void    OutFlashStack(void)
   PUSH_ENUM(VALUE7_CAN_PAGES)
   PUSH_ENUM(VALUE7_CAN_PAGES)
 
+  PushChar(0x0D); PushChar(0x0A);
+
   #include "../include/out_flash.txt"
 
   Output(3000);

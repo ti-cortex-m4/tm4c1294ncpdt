@@ -186,20 +186,28 @@ void    OutGetParamFull(void)
   {
     if (((uint)10*bInBuff5 < wPARAMS) && ((uint)10*bInBuff6 <= wPARAMS))
     {
-      if (bInBuff7*0x100+bInBuff8 < wTIMES)
+      uint iwTim = bInBuff7*0x100+bInBuff8;
+      if (iwTim < wTIMES)
       {
-        if (LoadPrmTim((wTIMES + iwHardTim - (bInBuff7*0x100+bInBuff8)) % wTIMES) == TRUE)
+        if (LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES) == TRUE)
         {
           InitPushCRC();
 
           PushInt(iwHardTim);
           PushInt(wTIMES);
           PushChar(boMntParams);
-          Push(&tiCurr, sizeof(time));
+          PushTime(tiCurr);
 
-          Push(&mpreParBuff[ PrevSoftTim() ][ (uint)10*bInBuff5 ], (uint)10*bInBuff6*sizeof(real));
+          uint wSize = 2 + 2 + 1 + sizeof(time);
 
-          Output(5+sizeof(time)+(uint)10*bInBuff6*sizeof(real));
+          uint i;
+          for (i=(uint)10*bInBuff5; i<(uint)10*(bInBuff5+bInBuff6)-1; i++)
+          {
+            PushFloat(mpreParBuff[ PrevSoftTim() ][ i ]);
+            wSize += sizeof(float);
+          }
+
+          Output(wSize);
         }
         else Result(bRES_BADFLASH);
       }
