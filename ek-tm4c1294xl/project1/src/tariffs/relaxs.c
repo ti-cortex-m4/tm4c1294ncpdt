@@ -106,7 +106,7 @@ uchar   GetMode(time  ti)
 {
 uchar  i;
 
-  if (bTariffsMode == 0)                // без учёта выходных и праздничных дней
+  if (bOldTrfMode == 0)                // без учёта выходных и праздничных дней
     return(0);                          // будни
 
   for (i=0; i<GetRelaxSize(); i++)

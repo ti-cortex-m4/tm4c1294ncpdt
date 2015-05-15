@@ -67,7 +67,7 @@ void    MakeTariffsModeMonth(uchar  ibMonth, domain  doT)
 {
 uchar  ibMode;
 
-  switch (bTariffsMode)
+  switch (bOldTrfMode)
   {     
     case 0:         
     	ibMode = 1;                          // для суббот

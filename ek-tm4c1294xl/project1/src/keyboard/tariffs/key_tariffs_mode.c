@@ -37,7 +37,7 @@ void    key_SetTariffsMode(void)
 
       LoadSlide(pszTariffsMode);
       Clear();
-      ShowChar(bTariffsMode);
+      ShowChar(bOldTrfMode);
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
@@ -45,13 +45,13 @@ void    key_SetTariffsMode(void)
 
       if ((ibX = GetCharLo(6,8)) <= bTARIFFSMODES)
       {
-      	bTariffsMode = ibX;
+      	bOldTrfMode = ibX;
       	SaveFile(&flTariffsMode);
-        ShowChar(bTariffsMode);
+        ShowChar(bOldTrfMode);
 
         MakeTariffsMode();
 
-        if (bTariffsMode == 0)
+        if (bOldTrfMode == 0)
           ResetRelaxs();
         else
           DefaultRelaxs();
