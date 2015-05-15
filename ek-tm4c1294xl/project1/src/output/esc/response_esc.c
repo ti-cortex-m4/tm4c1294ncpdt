@@ -334,10 +334,10 @@ uchar   i;
 
 void    EscTariffs(void)
 {
-  InitPush();
+  InitPush(0);
 
- uchar m;
- for (m=0; m<12; m++)
+  uchar m;
+  for (m=0; m<12; m++)
   {
     zoAlt = *PGetZonePowMonthMode(m, 0);
     PushZone();
@@ -354,12 +354,12 @@ void    EscTariffs(void)
   PushChar(0);
   PushChar(0);
 
-  if (boPublicCurr == boFalse)
+  if (fPublicTariffs == FALSE)
     PushChar(1);
   else
     PushChar(0);
 
-  if (boPublicPrev == boFalse)
+  if (fPublicTariffsPrevMon == FALSE)
     PushChar(1);
   else
     PushChar(0);
