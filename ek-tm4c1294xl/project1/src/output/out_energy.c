@@ -13,10 +13,11 @@ OUT_ENERGY.C
 #include "../realtime/realtime.h"
 #include "../energy.h"
 #include "../energy2.h"
+#include "out_energy.h"
 
 
 
-uint    PushEngDayGrp(uchar  ibGrp, bool  fSum)
+static uint PushEngDayGrp(uchar  ibGrp, bool  fSum)
 {
 uchar  t;
 float  re;
@@ -47,7 +48,7 @@ float  re;
 }
 
 
-uint    PushEngMonGrp(uchar  ibGrp, bool  fSum)
+static uint PushEngMonGrp(uchar  ibGrp, bool  fSum)
 {
 uchar  t;
 float  re;
@@ -79,7 +80,7 @@ float  re;
 
 
 
-void    OutEngDayGrpExt0(void)
+void    OutEngDayGrpExt(bool  fDouble)
 {
   if (enGlobal != GLB_PROGRAM)
   {
@@ -141,7 +142,7 @@ void    OutEngDayGrpExt1(void)
 
 
 
-void    OutEngMonGrpExt0(void)
+void    OutEngMonGrpExt(bool  fDouble)
 {
   if (enGlobal != GLB_PROGRAM)
   {

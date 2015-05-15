@@ -18,8 +18,8 @@ void    Response253_CRC(void)
 {
   switch (bInBuff5)
   {
-    case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt0(true); break;
-    case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt0(true); break;
+    case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt(true); break;
+    case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt(true); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
