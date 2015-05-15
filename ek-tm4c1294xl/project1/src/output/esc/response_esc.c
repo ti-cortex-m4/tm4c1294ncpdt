@@ -106,14 +106,14 @@ void    EscNumber(void)
 }
 
 
-void    EscA(void)
+void    Esc_A(void)
 {
   Beep();
   ShowEsc();
 }
 
 
-void    EscTime(void)
+void    Esc_T(void)
 {
   InitPush(0);
   PushChar(ToBCD(tiCurr.bSecond));
@@ -126,7 +126,7 @@ void    EscTime(void)
 }
 
 
-void    EscVersion(void)
+void    Esc_R(void)
 {
   InitPush(0);
   Push("CŒ+2 V.06 10.10.08!",20);
@@ -278,7 +278,7 @@ void    RunResponseEsc(void)
       case 0x3F:
       case 0x40: EscNumber(); return;
 
-      case 'A': EscA(); return;
+      case 'A': Esc_A(); return;
     }
 
     if (ibActiveEsc >= bMachineEsc) return;
@@ -298,9 +298,9 @@ void    RunResponseEsc(void)
 
     switch (bQuery)
     {
-      case 'T': EscTime(); break;
+      case 'T': Esc_T(); break;
 
-      case 'R': EscVersion(); break;
+      case 'R': Esc_R(); break;
 
       case 'W': Esc_W(); break;
 
