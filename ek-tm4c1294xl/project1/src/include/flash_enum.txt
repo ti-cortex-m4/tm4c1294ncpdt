@@ -10,9 +10,9 @@ typedef enum
 
   GROUPS                = LOGICAL + 1,
 
-  PUBLIC_TARIFFS        = GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1,
-  PUBLIC_TARIFFS_PREV_MON = PUBLIC_TARIFFS + 1,
-  TARIFFS_MODE          = PUBLIC_TARIFFS_PREV_MON + 1,
+  PUBLIC_TRF            = GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1,
+  PUBLIC_TRF_PREV_MON   = PUBLIC_TRF + 1,
+  TARIFFS_MODE          = PUBLIC_TRF_PREV_MON + 1,
 
   DAY_ZONE              = TARIFFS_MODE + 1,
 
