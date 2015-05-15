@@ -6,3 +6,5 @@ FLOAT,H
 
 bool    IsNAN(float  fl);
 bool    ValidFloat(float  fl);
+
+float   DoubleToFloat(double  db);

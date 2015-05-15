@@ -22,3 +22,10 @@ bool    ValidFloat(float  fl)
 {
   return !IsNAN(fl);
 }
+
+
+
+float   DoubleToFloat(double  db)
+{
+  return (float)db;
+}
