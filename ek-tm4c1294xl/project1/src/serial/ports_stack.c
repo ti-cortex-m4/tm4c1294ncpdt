@@ -135,6 +135,21 @@ void    PushDouble(double  db)
 }
 
 
+uint    PushFloatOrDouble(double  db, bool  fDouble)
+{
+  if (fDouble)
+  {
+    PushDouble(db);
+    return sizeof(double);
+  }
+  else
+  {
+    PushFloat(DoubleToFloat(db));
+    return sizeof(float);
+  }
+}
+
+
 void    PushTime(time  ti)
 {
   Push(&ti, sizeof(time));
