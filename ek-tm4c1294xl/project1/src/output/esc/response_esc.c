@@ -25,6 +25,17 @@ RESPONSE_ESC.C
 
 
 
+static void PushFloatBCD(float  fl)
+{
+  ulong dw = (ulong)fl;
+
+  PushChar( ToBCD(dw % 100)           );
+  PushChar( ToBCD((dw % 10000) / 100) );
+  PushChar( ToBCD(dw / 10000)         );
+}
+
+
+
 void    Esc(uint  wSize)
 {
   InitPush(0);
