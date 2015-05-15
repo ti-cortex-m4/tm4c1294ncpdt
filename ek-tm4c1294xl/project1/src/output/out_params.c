@@ -201,7 +201,7 @@ void    OutGetParamFull(void)
           uint wSize = 2 + 2 + 1 + sizeof(time);
 
           uint i;
-          for (i=(uint)10*bInBuff5; i<(uint)10*(bInBuff5+bInBuff6)-1; i++)
+          for (i=(uint)10*bInBuff5; i<(uint)10*(bInBuff5+bInBuff6); i++)
           {
             PushFloat(mpreParBuff[ PrevSoftTim() ][ i ]);
             wSize += sizeof(float);
