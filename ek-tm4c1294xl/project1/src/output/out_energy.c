@@ -19,10 +19,9 @@ OUT_ENERGY.C
 uint    PushEngDayGrp(uchar  ibGrp, bool  fSum)
 {
 uchar  t;
-uint   w;
-real   re;
+float  re;
 
-  w = 0;
+  uint wSize = 0;
 
   if (fSum == 0)
   {
@@ -30,7 +29,7 @@ real   re;
     {
       re = GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
 
-      w += sizeof(real);
+      wSize += sizeof(float);
       PushFloat(re);
     }
   }
@@ -40,21 +39,20 @@ real   re;
     for (t=0; t<bTARIFFS; t++)
       re += GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
 
-    w += sizeof(real);
+    wSize += sizeof(float);
     PushFloat(re);
   }
 
-  return w;
+  return wSize;
 }
 
 
 uint    PushEngMonGrp(uchar  ibGrp, bool  fSum)
 {
 uchar  t;
-uint   w;
-real   re;
+float  re;
 
-  w = 0;
+  uint wSize = 0;
 
   if (fSum == 0)
   {
@@ -62,7 +60,7 @@ real   re;
     {
       re = GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
 
-      w += sizeof(real);
+      wSize += sizeof(float);
       PushFloat(re);
     }
   }
@@ -72,11 +70,11 @@ real   re;
     for (t=0; t<bTARIFFS; t++)
       re += GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
 
-    w += sizeof(real);
+    wSize += sizeof(float);
     PushFloat(re);
   }
 
-  return w;
+  return wSize;
 }
 
 
@@ -87,7 +85,7 @@ void    OutEngDayGrpExt0(void)
   {
     if (bInBuff6 < bDAYS)
     {
-      if (LoadImpDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == TRUE)
+      if (LoadImpDay((bDAYS+ibHardDay-bInBuff6) % bDAYS) == TRUE)
       {
         InitPushPtr();
         uint wSize = 0;
@@ -115,7 +113,7 @@ void    OutEngDayGrpExt1(void)
   {
     if (bInBuff6 < bDAYS)
     {
-      if (LoadImpDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == TRUE)
+      if (LoadImpDay((bDAYS+ibHardDay-bInBuff6) % bDAYS) == TRUE)
       {
         InitPushPtr();
 
@@ -149,7 +147,7 @@ void    OutEngMonGrpExt0(void)
   {
     if (bInBuff6 < bMONTHS)
     {
-      if (LoadImpMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == TRUE)
+      if (LoadImpMon((bMONTHS+ibHardMon-bInBuff6) % bMONTHS) == TRUE)
       {
         InitPushPtr();
 
@@ -178,7 +176,7 @@ void    OutEngMonGrpExt1(void)
   {
     if (bInBuff6 < bMONTHS)
     {
-      if (LoadImpMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == TRUE)
+      if (LoadImpMon((bMONTHS+ibHardMon-bInBuff6) % bMONTHS) == TRUE)
       {
         InitPushPtr();
 
