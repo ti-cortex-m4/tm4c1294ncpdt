@@ -24,7 +24,7 @@
 #define bSET_PROGRAM27              27
  
 #define bSET_PROGRAM18              18
-#define bSET_RELAXS_FLAG            117
++   #define bSET_RELAXS_FLAG            117
 #define bSET_RELAXS_TARIFF          118
 #define bSET_RELAXS                 119
 /*
