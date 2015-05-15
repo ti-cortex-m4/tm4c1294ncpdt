@@ -83,9 +83,6 @@ real   re;
 
 void    OutEngDayGrpExt0(void)
 {
-uchar   g;
-uint    w;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bDAYS)
@@ -93,13 +90,15 @@ uint    w;
       if (LoadImpDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == TRUE)
       {
         InitPushPtr();
-        w = 0;
+        uint w = 0;
 
+        uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            w += PushEngDayGrp(g, 0);
+            w += PushEngDayGrp(g, false);
         }
+
         OutptrOutBuff(w);
       }
       else Result(bRES_BADFLASH);
@@ -112,9 +111,6 @@ uint    w;
 
 void    OutEngDayGrpExt1(void)
 {
-uchar   i, g;
-uint    w;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bDAYS)
@@ -122,15 +118,20 @@ uint    w;
       if (LoadImpDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == TRUE)
       {
         InitPushPtr();
-        for (i=0; i<3+bGROUPS/8; i++) PushChar(InBuff(4+i));
 
-        w = 0;
+        uchar i;
+        for (i=0; i<3+bGROUPS/8; i++)
+          PushChar(InBuff(4+i));
 
+        uint w = 0;
+
+        uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-          	w += PushEngDayGrp(g, 1);
+            w += PushEngDayGrp(g, true);
         }
+
         OutptrOutBuff(3+bGROUPS/8+w);
       }
       else Result(bRES_BADFLASH);
@@ -144,9 +145,6 @@ uint    w;
 
 void    OutEngMonGrpExt0(void)
 {
-uchar   g;
-uint    w;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bMONTHS)
@@ -154,13 +152,16 @@ uint    w;
       if (LoadImpMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == TRUE)
       {
         InitPushPtr();
-        w = 0;
 
+        uint w = 0;
+
+        uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            w += PushEngMonGrp(g, 0);
+            w += PushEngMonGrp(g, false);
         }
+
         OutptrOutBuff(w);
       }
       else Result(bRES_BADFLASH);
@@ -173,9 +174,6 @@ uint    w;
 
 void    OutEngMonGrpExt1(void)
 {
-uchar   i, g;
-uint    w;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bMONTHS)
@@ -183,15 +181,20 @@ uint    w;
       if (LoadImpMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == TRUE)
       {
         InitPushPtr();
-        for (i=0; i<3+bGROUPS/8; i++) PushChar(InBuff(4+i));
 
-        w = 0;
+        uchar i;
+        for (i=0; i<3+bGROUPS/8; i++)
+          PushChar(InBuff(4+i));
 
+        uint w = 0;
+
+        uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            w += PushEngMonGrp(g, 1);
+            w += PushEngMonGrp(g, true);
         }
+
         OutptrOutBuff(3+bGROUPS/8+w);
       }
       else Result(bRES_BADFLASH);

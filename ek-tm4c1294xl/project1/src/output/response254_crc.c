@@ -9,6 +9,7 @@ RESPONSE254_CRC,C
 #include "../include/states.h"
 #include "../serial/ports.h"
 #include "../output/response_crc.h"
+#include "response254_crc.h"
 
 
 
