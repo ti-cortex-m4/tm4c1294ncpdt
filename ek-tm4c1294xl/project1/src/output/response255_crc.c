@@ -78,8 +78,8 @@ void    Response255_CRC(void)
     case bINQ_GETMAXPOWGRPDAY_ALL:  OutMaxPowDayGrpExt();  break;
     case bINQ_GETMAXPOWGRPMON_ALL:  OutMaxPowMonGrpExt();  break;
 
-    case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt0(false); break;
-    case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt0(false); break;
+    case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt(false); break;
+    case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt(false); break;
 
     case bINQ_GETENGGRPDAY_ALLSUM:  OutEngDayGrpExt1();    break;
     case bINQ_GETENGGRPMON_ALLSUM:  OutEngMonGrpExt1();    break;

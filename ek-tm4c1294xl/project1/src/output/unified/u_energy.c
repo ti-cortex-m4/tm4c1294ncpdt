@@ -128,7 +128,7 @@ bool    CheckDefGrpMonUni(uchar  bMonth)
 
 
 
-void    GetEngCanDayUni(bool  x2)
+void    GetEngCanDayUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -155,7 +155,7 @@ void    GetEngCanDayUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        if (x2)
+        if (fDouble)
         {
           PushDouble(GetCanImp2DoubleEng(mpimDayCan[ PrevSoftDay() ], c-1, 0x01 << (i-1)));
           wSize += sizeof(double);
@@ -177,7 +177,7 @@ void    GetEngCanDayUni(bool  x2)
 }
 
 
-void    GetEngGrpDayUni(bool  x2)
+void    GetEngGrpDayUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -204,7 +204,7 @@ void    GetEngGrpDayUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        if (x2)
+        if (fDouble)
         {
           PushDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ], g-1, 0x01 << (i-1)));
           wSize += sizeof(double);
@@ -227,7 +227,7 @@ void    GetEngGrpDayUni(bool  x2)
 
 
 
-void    GetEngCanMonUni(bool  x2)
+void    GetEngCanMonUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -254,7 +254,7 @@ void    GetEngCanMonUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        if (x2)
+        if (fDouble)
         {
           PushDouble(GetCanImp2DoubleEng(mpimMonCan[ PrevSoftMon() ], c-1, 0x01 << (i-1)));
           wSize += sizeof(double);
@@ -276,7 +276,7 @@ void    GetEngCanMonUni(bool  x2)
 }
 
 
-void    GetEngGrpMonUni(bool  x2)
+void    GetEngGrpMonUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -303,7 +303,7 @@ void    GetEngGrpMonUni(bool  x2)
       uchar i;
       for (i=bInBuffC; i<bInBuffC+bInBuffD; i++)
       {
-        if (x2)
+        if (fDouble)
         {
           PushDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ], g-1, 0x01 << (i-1)));
           wSize += sizeof(double);
