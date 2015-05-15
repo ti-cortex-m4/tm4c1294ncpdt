@@ -11,7 +11,8 @@ typedef enum
   GROUPS                = LOGICAL + 1,
 
   PUBLIC_TARIFFS        = GROUPS + sizeof(group)*bGROUPS/wFREEPAGE_SIZE + 1,
-  TARIFFS_MODE          = PUBLIC_TARIFFS + 1,
+  PUBLIC_TARIFFS_PREV_MON = PUBLIC_TARIFFS + 1,
+  TARIFFS_MODE          = PUBLIC_TARIFFS_PREV_MON + 1,
 
   DAY_ZONE              = TARIFFS_MODE + 1,
 
@@ -143,7 +144,7 @@ typedef enum
   MAX_FLOW_DELAY        = FLOW_PORT_FROM + 1,
   FLOW_PORT_TO          = MAX_FLOW_DELAY + 1,
 
-  PARAMS_FLAG       = FLOW_PORT_TO + 1,
+  PARAMS_FLAG           = FLOW_PORT_TO + 1,
   MNT_PARAMS            = PARAMS_FLAG + 1,
   PARAMS                = MNT_PARAMS + 1,
   PARAMS_DIV            = PARAMS + sizeof(mpdiParam)/wFREEPAGE_SIZE + 1,

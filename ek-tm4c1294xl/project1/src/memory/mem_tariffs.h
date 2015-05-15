@@ -23,7 +23,7 @@ extern  uchar                   mpibPowCurrTariff[48],
 extern  uchar                   mpibPowPrevTariff[48],
                                 mpibEngPrevTariff[48];
 
-extern  boolean                 fPublicTariffs;
+extern  boolean                 fPublicTariffs, fPublicTariffsPrevMon;
 
 extern  period                  mpeTariffPow[12],
                                 mpeTariffEng[12];

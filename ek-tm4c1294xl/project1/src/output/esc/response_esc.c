@@ -17,7 +17,10 @@ RESPONSE_ESC.C
 #include "../../hardware/memory.h"
 #include "../../digitals/wait_query.h"
 #include "../../keyboard/time/key_timedate.h"
+#include "../../tariffs/tariffs.h"
+#include "../../tariffs/zones.h"
 #include "../../tariffs/relaxs.h"
+#include "../../time/rtc.h"
 #include "../../flash/at45.h"
 #include "../../access.h"
 #include "../../groups.h"
@@ -32,6 +35,26 @@ static void PushFloatBCD(float  fl)
   PushChar( ToBCD(dw % 100)           );
   PushChar( ToBCD((dw % 10000) / 100) );
   PushChar( ToBCD(dw / 10000)         );
+}
+
+
+static void PushZone(void)
+{
+uchar   i;
+
+  for (i=0; i<GetZoneAltSize(); i++)
+  {
+    GetZoneAltBreak(i);
+
+    PushChar( ToBCD(brAlt.bMinute) );
+    PushChar( ToBCD(brAlt.bHour) | ((brAlt.ibTariff << 6) & 0xC0) );
+  }
+
+  for (i=GetZoneAltSize(); i<6; i++)
+  {
+    PushChar(0xAA);
+    PushChar(0xAA);
+  }
 }
 
 
@@ -159,7 +182,7 @@ uchar   i, j;
   // первый байт состо€ни€
   i = bOldTrfMode;
 
-  if (GetMode(*PGetCurrTimeDate()) != 0)
+  if (GetMode(*GetCurrTimeDate()) != 0)
     i |= 0x04;
 
   if (enGlobal == GLB_REPROGRAM)
@@ -182,18 +205,14 @@ uchar   i, j;
   PushChar( ToBCD(tiStart.bYear  ) );
 
   // тарифные зоны по кварталам
-  ibMode = 0;
-  for (ibMonth=12; ibMonth<16; ibMonth++)
-  {
-    zoAlt = *PGetZonePowMonthMode();
-    PushZone();
-  }
+  memset(&zoAlt, 0, sizeof(zoAlt));
+  PushZone();
+  PushZone();
+  PushZone();
+  PushZone();
 
   // тарифные зоны текущего мес€ца
-  ibMode  = 0;
-  ibMonth = tiCurr.bMonth - 1;
-
-  zoAlt = *PGetZonePowMonthMode();
+  zoAlt = *PGetZonePowMonthMode(tiCurr.bMonth - 1, 0);
   PushZone();
 
   // список праздников
@@ -310,6 +329,42 @@ uchar   i;
   PushChar(0);
 
   Esc(20);
+}
+
+
+void    EscTariffs(void)
+{
+  InitPush();
+
+ uchar m;
+ for (m=0; m<12; m++)
+  {
+    zoAlt = *PGetZonePowMonthMode(m, 0);
+    PushZone();
+  }
+
+  for (m=0; m<12; m++)
+  {
+    zoAlt = *PGetZoneEngMonthMode(m, 0);
+    PushZone();
+  }
+
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+
+  if (boPublicCurr == boFalse)
+    PushChar(1);
+  else
+    PushChar(0);
+
+  if (boPublicPrev == boFalse)
+    PushChar(1);
+  else
+    PushChar(0);
+
+  Esc(300);
 }
 
 
@@ -445,6 +500,8 @@ void    RunResponseEsc(void)
       case 'R': Esc_R(); break;
       case 'w': Esc_w(); break;
       case 'W': Esc_W(); break;
+
+      case '*': EscTariffs(); break;
 
       case 'а':
       case 'б':

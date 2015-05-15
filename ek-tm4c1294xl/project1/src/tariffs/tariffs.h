@@ -5,6 +5,7 @@ TARIFFS.H
 ------------------------------------------------------------------------------*/
 
 extern  file const              flPublicTariffs;
+extern  file const              flPublicTariffsPrevMon;
 extern  file const              flTariffsMode;
 
 extern  file const              flPeriodTariffPow;
@@ -18,6 +19,8 @@ boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode);
 
 void    InitTariffs(void);
 void    ResetTariffs(void);
+
+void    NextMonTariffs(void);
 
 void    SetZoneEngMonthMode(uchar ibMonth, uchar ibMode, zone *pzo);
 zone   *PGetZoneEngMonthMode(uchar ibMonth, uchar ibMode);
