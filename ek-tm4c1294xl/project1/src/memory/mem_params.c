@@ -14,9 +14,6 @@ boolean                 boParamsFlag;
 // флаг периода опроса мгновенных параметров (TRUE: каждые 3 минуты, FALSE: каждые 30 минут)
 boolean                 boMntParams;
 
-// массив мгновенных параметров
-digital                 mpdiParam[wPARAMS];
-
 // массив коэффициентов деления
 real                    mpreParamsDiv[wPARAMS];
 

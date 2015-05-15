@@ -8,8 +8,6 @@ extern  boolean                 boParamsFlag;
 
 extern  boolean                 boMntParams;
 
-extern  digital                 mpdiParam[wPARAMS];
-
 extern  real                    mpreParamsDiv[wPARAMS];
 
 extern  boolean                 mpboEnblParams[wPARAMS];

@@ -9,6 +9,7 @@ FLASH.H
 
 #include "../memory/mem_digitals0.h"
 #include "../memory/mem_digitals.h"
+#include "../memory/mem_params0.h"
 #include "../memory/mem_params.h"
 #include "../memory/mem_phones.h"
 #include "../memory/mem_uni.h"
