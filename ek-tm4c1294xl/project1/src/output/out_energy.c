@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 OUT_ENERGY.C
-                    
+
 
 ------------------------------------------------------------------------------*/
 
@@ -17,62 +17,62 @@ OUT_ENERGY.C
 
 
 
-static uint PushEngDayGrp(uchar  ibGrp, bool  fSum)
+static uint PushEngDayGrp(uchar  ibGrp, bool  fSum, bool  fDouble)
 {
 uchar  t;
-float  re;
+float  fl;
 
   uint wSize = 0;
 
-  if (fSum == 0)
+  if (fSum == false)
   {
     for (t=0; t<bTARIFFS; t++)
     {
-      re = GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
+      fl = GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
 
       wSize += sizeof(float);
-      PushFloat(re);
+      PushFloat(fl);
     }
   }
   else
   {
-    re = 0;
+    fl = 0;
     for (t=0; t<bTARIFFS; t++)
-      re += GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
+      fl += GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
 
     wSize += sizeof(float);
-    PushFloat(re);
+    PushFloat(fl);
   }
 
   return wSize;
 }
 
 
-static uint PushEngMonGrp(uchar  ibGrp, bool  fSum)
+static uint PushEngMonGrp(uchar  ibGrp, bool  fSum, bool  fDouble)
 {
 uchar  t;
-float  re;
+float  fl;
 
   uint wSize = 0;
 
-  if (fSum == 0)
+  if (fSum == false)
   {
     for (t=0; t<bTARIFFS; t++)
     {
-      re = GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
+      fl = GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
 
       wSize += sizeof(float);
-      PushFloat(re);
+      PushFloat(fl);
     }
   }
   else
   {
-    re = 0;
+    fl = 0;
     for (t=0; t<bTARIFFS; t++)
-      re += GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
+      fl += GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
 
     wSize += sizeof(float);
-    PushFloat(re);
+    PushFloat(fl);
   }
 
   return wSize;
@@ -95,7 +95,7 @@ void    OutEngDayGrpExt(bool  fDouble)
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            wSize += PushEngDayGrp(g, false);
+            wSize += PushEngDayGrp(g, false, fDouble);
         }
 
         OutptrOutBuff(wSize);
@@ -128,7 +128,7 @@ void    OutEngDayGrpSum(void)
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            wSize += PushEngDayGrp(g, true);
+            wSize += PushEngDayGrp(g, true, false);
         }
 
         OutptrOutBuff(3+bGROUPS/8+wSize);
@@ -158,7 +158,7 @@ void    OutEngMonGrpExt(bool  fDouble)
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            wSize += PushEngMonGrp(g, false);
+            wSize += PushEngMonGrp(g, false, fDouble);
         }
 
         OutptrOutBuff(wSize);
@@ -191,7 +191,7 @@ void    OutEngMonGrpSum(void)
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-            wSize += PushEngMonGrp(g, true);
+            wSize += PushEngMonGrp(g, true, false);
         }
 
         OutptrOutBuff(3+bGROUPS/8+wSize);
