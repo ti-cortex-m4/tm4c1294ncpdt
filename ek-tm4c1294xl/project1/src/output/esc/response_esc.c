@@ -15,6 +15,7 @@ RESPONSE_ESC.C
 #include "../../hardware/memory.h"
 #include "../../digitals/wait_query.h"
 #include "../../keyboard/time/key_timedate.h"
+#include "../../flash/at45.h"
 #include "../../access.h"
 #include "esc.h"
 
@@ -131,6 +132,41 @@ void    EscVersion(void)
   Push("CќЊ+2 V.06 10.10.08!",20);
   PushChar(0x31+ibActiveEsc);
   Esc(21);
+}
+
+
+void    Esc_W(void)
+{
+uchar   i;
+
+  InitPush(0);
+
+  if (GetFlashStatus() == 0)
+    i = 0x07;                            // норма
+  else
+    i = 0x01;                            // ошибка флэш-памяти
+
+  if (cbPowerOn == 0)
+    PushChar(i | 0x08);
+  else
+  if (cbPowerOn == 1)
+    PushChar(i | 0x10);
+  else
+    PushChar(i);
+
+  PushTime(tiPowerOff);                  // время последнего выключения питания
+  PushTime(tiPowerOn);                   // время последнего включения питания
+  PushChar(cbPowerOn);                   // количество выключений питания
+
+  PushChar(0);                           // время выключения за предыдущий месяц (дней, часов, минут)
+  PushChar(0);
+  PushChar(0);
+
+  PushChar(0);                           // время выключения за текущий месяц (дней, часов, минут)
+  PushChar(0);
+  PushChar(0);
+
+  Esc(20);
 }
 
 
@@ -265,6 +301,8 @@ void    RunResponseEsc(void)
       case 'T': EscTime(); break;
 
       case 'R': EscVersion(); break;
+
+      case 'W': Esc_W(); break;
 
       case 'а':
       case 'б':
