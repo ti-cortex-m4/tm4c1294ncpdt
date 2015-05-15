@@ -4,9 +4,9 @@ KEY_GAPS_FLAG,C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../tariffs/gaps.h"
-#include "key_bool.h"
+#include "../../main.h"
+#include "../../tariffs/gaps.h"
+#include "../key_bool.h"
 
 
 
