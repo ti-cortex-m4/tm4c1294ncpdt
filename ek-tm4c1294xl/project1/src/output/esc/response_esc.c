@@ -7,6 +7,8 @@ RESPONSE_ESC.C
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
 #include "../../memory/mem_realtime.h"
+#include "../../memory/mem_tariffs.h"
+#include "../../memory/mem_factors.h"
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_esc.h"
 #include "../../console.h"
@@ -18,6 +20,7 @@ RESPONSE_ESC.C
 #include "../../tariffs/relaxs.h"
 #include "../../flash/at45.h"
 #include "../../access.h"
+#include "../../groups.h"
 #include "esc.h"
 
 
@@ -143,9 +146,9 @@ uchar   i, j;
   InitPush(0);
 
   // первый байт состояния
-  i = bOldMode;
+  i = bTariffsMode;
 
-  if (GetModeAlt(*PGetCurrTimeDate()) != 0)
+  if (GetMode(*PGetCurrTimeDate()) != 0)
     i |= 0x04;
 
   if (enGlobal == GLB_REPROGRAM)
@@ -154,7 +157,7 @@ uchar   i, j;
   PushChar(i);
 
   // второй байт состояния
-  if (bOldMode == 4)
+  if (bTariffsMode == 4)
     PushChar(4);
   else
     PushChar(0);
@@ -199,7 +202,7 @@ uchar   i, j;
   }
 
   // соcтав групп: все каналы
-  for (i=bFRAMES*ibActives; i<bFRAMES*(1+ibActives); i++)
+  for (i=bFRAMES*ibActiveEsc; i<bFRAMES*(1+ibActiveEsc); i++)
   {
     uint w = 0;
 
@@ -214,7 +217,7 @@ uchar   i, j;
   }
 
   // соcтав групп: каналы с отрицательным знаком
-  for (i=bFRAMES*ibActives; i<bFRAMES*(1+ibActives); i++)
+  for (i=bFRAMES*ibActiveEsc; i<bFRAMES*(1+ibActiveEsc); i++)
   {
     uint w = 0;
 
@@ -232,13 +235,13 @@ uchar   i, j;
   // коэффициенты трансформации
   for (i=0; i<16; i++)
   {
-    PushFloatBCD(mpreTransEng[i+16*ibActives]);
+    PushFloatBCD(mpreTransEng[i+16*ibActiveEsc]);
   }
 
   // коэффициенты преобразования
   for (i=0; i<16; i++)
   {
-    PushFloatBCD(mprePulseHou[i+16*ibActives]);
+    PushFloatBCD(mprePulseHou[i+16*ibActiveEsc]);
   }
 
   // лимиты
@@ -257,7 +260,7 @@ uchar   i, j;
   // коэффициенты потерь
   for (i=0; i<16; i++)
   {
-    PushFloatBCD(mpreLosse[i+16*ibActives] * 1000000);
+    PushFloatBCD(mpreLosse[i+16*ibActiveEsc] * 1000000);
   }
 
   Esc(300);

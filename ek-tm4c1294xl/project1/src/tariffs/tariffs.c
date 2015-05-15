@@ -226,7 +226,7 @@ uchar  ibMonth, ibMode;
     ibMonth = mpbGaps[GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay)];
   } 
 
-  ibMode  = GetModeAlt();               
+  ibMode  = GetMode(tiAlt);
 
   zoAlt = *PGetZoneEngMonthMode(ibMonth,ibMode);
   MakeTariff(mpibEngCurrTariff);
@@ -267,7 +267,7 @@ uchar  ibMonth, ibMode;
     ibMonth = mpbGaps[GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay)];
   } 
 
-  ibMode  = GetModeAlt();               
+  ibMode  = GetMode(tiAlt);
 
   zoAlt = *PGetZoneEngMonthMode(ibMonth,ibMode);
   MakeTariff(mpibEngPrevTariff);

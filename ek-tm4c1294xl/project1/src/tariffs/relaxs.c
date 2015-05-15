@@ -102,7 +102,7 @@ void    SetRelaxDate(uchar  ibRelax)
 
 
 // определяет тип дня недели
-uchar   GetModeAlt(time  ti)
+uchar   GetMode(time  ti)
 {
 uchar  i;
 
