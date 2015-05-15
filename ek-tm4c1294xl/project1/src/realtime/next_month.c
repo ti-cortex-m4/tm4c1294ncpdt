@@ -25,6 +25,8 @@ void    NextMonth(void)
 {
   cwMonths++;
 
+  NextMonTariffs();
+
   NextMonExtended4();
   NextMonExtended4T();
   NextMonExtended6();

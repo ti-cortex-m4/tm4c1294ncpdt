@@ -23,6 +23,8 @@ TARIFFS.C
 
 
 file const              flPublicTariffs = {PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean)};
+file const              flPublicTariffsPrevMon = {PUBLIC_TARIFFS_PREV_MON, &fPublicTariffsPrevMon, sizeof(boolean)};
+
 file const              flTariffsMode = {TARIFFS_MODE, &bOldTrfMode, sizeof(uchar)};
 
 file const              flPeriodTariffPow = {PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow)};
@@ -55,6 +57,7 @@ void    InitTariffs(void)
 uchar  ibMonth, ibMode;
 
   LoadFile(&flPublicTariffs);
+  LoadFile(&flPublicTariffsPrevMon);
   LoadFile(&flTariffsMode);
 
   for (ibMonth=0; ibMonth<12; ibMonth++)
@@ -86,6 +89,9 @@ void    ResetTariffs(void)
   fPublicTariffs = FALSE;
   SaveFile(&flPublicTariffs);
 
+  fPublicTariffsPrevMon = FALSE;
+  SaveFile(&flPublicTariffsPrevMon);
+
   bOldTrfMode = 0;
   SaveFile(&flTariffsMode);
 
@@ -93,6 +99,14 @@ void    ResetTariffs(void)
 
   SaveFile(&flPeriodTariffPow);
   SaveFile(&flPeriodTariffEng);
+}
+
+
+
+void    NextMonTariffs(void)
+{
+  fPublicTariffsPrevMon = fPublicTariffs;
+  SaveFile(&flPublicTariffsPrevMon);
 }
 
 
