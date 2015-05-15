@@ -81,13 +81,13 @@ void    Esc0(void)
 void    EscNumber(void)
 {
   uchar i;
-  for (i=0; i<bMachineEsc; i++)
+  for (i=0; i<bMachinesEsc; i++)
   {
     if ((bQuery - 0x31) == (bLogical + i - 1))
       break;
   }
 
-  if (i != bMachineEsc)
+  if (i != bMachinesEsc)
   {
     ibActiveEsc = (bQuery - 0x31) - (bLogical - 1);
     mpibActiveEsc[ibPort] = ibActiveEsc;
@@ -145,7 +145,7 @@ uchar   i;
   i = bOldMode;
 
   tiAlt = *PGetCurrTimeDate();
-  if (GetModeAlt != 0)
+  if (GetModeAlt() != 0)
     i |= 0x04;
 
   if (enGlobal == GLB_REPROGRAM)
@@ -232,15 +232,13 @@ uchar   i;
   // коэффициенты трансформации
   for (i=0; i<16; i++)
   {
-    reBuffA = *PGetCanReal(mpreTransEng, i+16*ibActives);
-    PushFloatBCD();
+    PushFloatBCD(mpreTransEng[i+16*ibActives]);
   }
 
   // коэффициенты преобразования
   for (i=0; i<16; i++)
   {
-    reBuffA = *PGetCanReal(mprePulseHou, i+16*ibActives);
-    PushFloatBCD();
+    PushFloatBCD(mprePulseHou[i+16*ibActives]);
   }
 
   // лимиты
@@ -259,8 +257,7 @@ uchar   i;
   // коэффициенты потерь
   for (i=0; i<16; i++)
   {
-    reBuffA = *PGetCanReal(mpreLosse, i+16*ibActives) * 1000000;
-    PushFloatBCD();
+    PushFloatBCD(mpreLosse[i+16*ibActives] * 1000000);
   }
 
   Esc(300);
@@ -413,7 +410,7 @@ void    RunResponseEsc(void)
       case 'A': Esc_A(); return;
     }
 
-    if (ibActiveEsc >= bMachineEsc) return;
+    if (ibActiveEsc >= bMachinesEsc) return;
 
     ShowEsc();
 

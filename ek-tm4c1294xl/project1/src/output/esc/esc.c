@@ -12,7 +12,7 @@ ESC,C
 
 
 
-file const              flMachinesEsc = {MACHINES_ESC, &bMachineEsc, sizeof(uchar)};
+file const              flMachinesEsc = {MACHINES_ESC, &bMachinesEsc, sizeof(uchar)};
 file const              flBlockEsc = {BLOCK_ESC, &boBlockEsc, sizeof(boolean)};
 
 
@@ -26,7 +26,7 @@ void    InitEsc(void)
 
 void    ResetEsc(void)
 {
-  bMachineEsc = bMAXMACHINES;
+  bMachinesEsc = bMAXMACHINES;
   SaveFile(&flMachinesEsc);
 
   boBlockEsc = FALSE;
