@@ -25,6 +25,8 @@ RESPONSE1_CRC.C
 #include "out_params.h"
 #include "response_crc.h"
 #include "response252_crc.h"
+#include "response253_crc.h"
+#include "response254_crc.h"
 #include "response255_crc.h"
 
 
@@ -123,13 +125,10 @@ void    Response1_CRC(void)
 
       case bINQ_GETCONFIG: OutGetConfig(); break;
 
-      case bINQ_RESPONSE_252:
-      	Response252_CRC();
-        break;
-
-      case bINQ_RESPONSE_255:
-      	Response255_CRC();
-        break;
+      case bINQ_RESPONSE_252: Response252_CRC(); break;
+      case bINQ_RESPONSE_253: Response253_CRC(); break;
+      case bINQ_RESPONSE_254: Response254_CRC(); break;
+      case bINQ_RESPONSE_255: Response255_CRC(); break;
 
       default:
         ShowTestResponse(bSTA_BADCOMMAND);
