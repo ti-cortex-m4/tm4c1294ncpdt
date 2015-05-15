@@ -20,4 +20,4 @@ void    SetRelaxSize(uchar  bSize);
 void    GetRelaxDate(uchar  ibRelax);
 void    SetRelaxDate(uchar  ibRelax);
 
-uchar   GetModeAlt(time  ti);
+uchar   GetMode(time  ti);
