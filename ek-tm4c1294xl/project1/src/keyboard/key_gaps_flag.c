@@ -1,54 +1,23 @@
 /*------------------------------------------------------------------------------
-KEY_GAPS_FLAG.C
+KEY_GAPS_FLAG,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_tariffs.h"
-#include "keyboard.h"
-#include "../display/display.h"
 #include "../tariffs/gaps.h"
-#include "../flash/files.h"
+#include "key_bool.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const    szGapsFlag[]       = "Тарифные периоды";
+static char const       szMessage[]     = "Тарифные периоды";
+
+static char const       *pszMessages[]  = { szMessage, "" };
 
 
 
 void    key_SetGapsFlag(void)
 {
-  if (bKey == bKEY_ENTER)
-  {
-    if (enKeyboard == KBD_ENTER)  
-    {
-      enKeyboard = KBD_INPUT1;
-      Clear();
-      
-      ShowHi(szGapsFlag);    
-      ShowBoolean(boGapsFlag);  
-    } 
-    else Beep();
-  }
-  
-
-  else if (bKey == bKEY_POINT)
-  {
-    if (enGlobal != GLB_WORK)
-    {
-      if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
-      {           
-        boGapsFlag = InvertBoolean(boGapsFlag);
-        SaveFile(&flGapsFlag);
-
-        ShowBoolean(boGapsFlag);
-      }
-      else Beep(); 
-    }
-    else Beep(); 
-  } 
-  else Beep(); 
+  key_SetBool(&flGapsFlag, pszMessages);
 }
-
