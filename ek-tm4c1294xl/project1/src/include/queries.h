@@ -156,6 +156,8 @@ QUERIES.H
 #define bINQ_GETCONFIG                 248
 
 #define bINQ_RESPONSE_252              252
+#define bINQ_RESPONSE_253              253
+#define bINQ_RESPONSE_254              254
 #define bINQ_RESPONSE_255              255
 
 
