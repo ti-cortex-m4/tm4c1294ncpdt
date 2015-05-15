@@ -6,6 +6,7 @@ U_PARAM.C
 
 #include "../../main.h"
 #include "../../memory/mem_ports.h"
+#include "../../memory/mem_params0.h"
 #include "../../memory/mem_uni.h"
 #include "../../include/states.h"
 #include "../../include/queries_uni.h"
