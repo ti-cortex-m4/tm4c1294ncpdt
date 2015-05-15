@@ -20,7 +20,7 @@ OUT_ENERGY.C
 static uint PushEngDayGrp(uchar  ibGrp, bool  fSum, bool  fDouble)
 {
 uchar  t;
-float  fl;
+double db;
 
   uint wSize = 0;
 
@@ -28,20 +28,20 @@ float  fl;
   {
     for (t=0; t<bTARIFFS; t++)
     {
-      fl = GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
+      db = GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
 
-      wSize += sizeof(float);
-      PushFloat(fl);
+      wSize += PushFloatOrDouble(db, fDouble);
     }
   }
   else
   {
-    fl = 0;
+    db = 0;
     for (t=0; t<bTARIFFS; t++)
-      fl += GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
+    {
+      db += GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t);
+    }
 
-    wSize += sizeof(float);
-    PushFloat(fl);
+    wSize += PushFloatOrDouble(db, fDouble);
   }
 
   return wSize;
@@ -51,7 +51,7 @@ float  fl;
 static uint PushEngMonGrp(uchar  ibGrp, bool  fSum, bool  fDouble)
 {
 uchar  t;
-float  fl;
+double db;
 
   uint wSize = 0;
 
@@ -59,20 +59,20 @@ float  fl;
   {
     for (t=0; t<bTARIFFS; t++)
     {
-      fl = GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
+      db = GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
 
-      wSize += sizeof(float);
-      PushFloat(fl);
+      wSize += PushFloatOrDouble(db, fDouble);
     }
   }
   else
   {
-    fl = 0;
+    db = 0;
     for (t=0; t<bTARIFFS; t++)
-      fl += GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
+    {
+      db += GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t);
+    }
 
-    wSize += sizeof(float);
-    PushFloat(fl);
+    wSize += PushFloatOrDouble(db, fDouble);
   }
 
   return wSize;
