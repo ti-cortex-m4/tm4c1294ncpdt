@@ -108,7 +108,7 @@ void    OutEngDayGrpExt(bool  fDouble)
 }
 
 
-void    OutEngDayGrpExt1(void)
+void    OutEngDayGrpSum(void)
 {
   if (enGlobal != GLB_PROGRAM)
   {
@@ -171,7 +171,7 @@ void    OutEngMonGrpExt(bool  fDouble)
 }
 
 
-void    OutEngMonGrpExt1(void)
+void    OutEngMonGrpSum(void)
 {
   if (enGlobal != GLB_PROGRAM)
   {

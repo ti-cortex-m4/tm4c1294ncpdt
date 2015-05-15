@@ -81,8 +81,8 @@ void    Response255_CRC(void)
     case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt(false); break;
     case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt(false); break;
 
-    case bINQ_GETENGGRPDAY_ALLSUM:  OutEngDayGrpExt1();    break;
-    case bINQ_GETENGGRPMON_ALLSUM:  OutEngMonGrpExt1();    break;
+    case bINQ_GETENGGRPDAY_ALLSUM:  OutEngDayGrpSum();    break;
+    case bINQ_GETENGGRPMON_ALLSUM:  OutEngMonGrpSum();    break;
 
     case bINQ_GETIMPCANDAY_ALL:     OutImpDayCanExt();     break;
     case bINQ_GETIMPCANMON_ALL:     OutImpMonCanExt();     break;
