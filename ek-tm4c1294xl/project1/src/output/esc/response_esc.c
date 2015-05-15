@@ -135,6 +135,138 @@ void    Esc_R(void)
 }
 
 
+void    Esc_w(void)
+{
+uchar   i;
+
+  InitPush(0);
+
+  // первый байт состо€ни€
+  i = bOldMode;
+
+  tiAlt = *PGetCurrTimeDate();
+  if (GetModeAlt != 0)
+    i |= 0x04;
+
+  if (enGlobal == GLB_REPROGRAM)
+    i |= 0x20;
+
+  PushChar(i);
+
+  // второй байт состо€ни€
+  if (bOldMode == 4)
+    PushChar(4);
+  else
+    PushChar(0);
+
+  // дата/врем€ первого запуска
+  PushChar( ToBCD(tiStart.bSecond) );
+  PushChar( ToBCD(tiStart.bMinute) );
+  PushChar( ToBCD(tiStart.bHour  ) );
+  PushChar( ToBCD(tiStart.bDay   ) );
+  PushChar( ToBCD(tiStart.bMonth ) );
+  PushChar( ToBCD(tiStart.bYear  ) );
+
+  // тарифные зоны по кварталам
+  ibMode = 0;
+  for (ibMonth=12; ibMonth<16; ibMonth++)
+  {
+    zoAlt = *PGetZonePowMonthMode();
+    PushZone();
+  }
+
+  // тарифные зоны текущего мес€ца
+  ibMode  = 0;
+  ibMonth = tiCurr.bMonth - 1;
+
+  zoAlt = *PGetZonePowMonthMode();
+  PushZone();
+
+  // список праздников
+  for (i=0; i<GetRelaxSize(); i++)
+  {
+    if (i >= 20) break;
+
+    GetRelaxDate(i);
+    PushChar( ToBCD(tiRelax.bDay)   );
+    PushChar( ToBCD(tiRelax.bMonth) );
+  }
+
+  while (i++ < 20)
+  {
+    PushChar(0x55);
+    PushChar(0x55);
+  }
+
+  // соcтав групп: все каналы
+  for (i=bFRAMES*ibActives; i<bFRAMES*(1+ibActives); i++)
+  {
+    wBuffD = 0;
+
+    for (j=0; j<GetGroupsSize(i); j++)
+    {
+      if (j > 16) break;
+      wBuffD |= (uint)(0x01 << GetGroupsNodeCanal(i,j));
+    }
+
+    PushChar(wBuffD % 0x100);
+    PushChar(wBuffD / 0x100);
+  }
+
+  // соcтав групп: каналы с отрицательным знаком
+  for (i=bFRAMES*ibActives; i<bFRAMES*(1+ibActives); i++)
+  {
+    wBuffD = 0;
+
+    for (j=0; j<GetGroupsSize(i); j++)
+    {
+      if (j > 16) break;
+      if (GetGroupsNodeSign(i,j) == 1)
+        wBuffD |= (uint)(0x01 << GetGroupsNodeCanal(i,j));
+    }
+
+    PushChar(wBuffD % 0x100);
+    PushChar(wBuffD / 0x100);
+  }
+
+  // коэффициенты трансформации
+  for (i=0; i<16; i++)
+  {
+    reBuffA = *PGetCanReal(mpreTransEng, i+16*ibActives);
+    PushFloatBCD();
+  }
+
+  // коэффициенты преобразовани€
+  for (i=0; i<16; i++)
+  {
+    reBuffA = *PGetCanReal(mprePulseHou, i+16*ibActives);
+    PushFloatBCD();
+  }
+
+  // лимиты
+  for (i=0; i<18; i++)  PushChar(0);
+
+  // заводской номер
+  PushChar( ToBCD(wPrivate % 100)         );
+  PushChar( ToBCD((wPrivate % 10000)/100) );
+  PushChar( ToBCD(wPrivate / 10000)       );
+
+  // заводской номер
+  PushChar( ToBCD(wPrivate % 100)         );
+  PushChar( ToBCD((wPrivate % 10000)/100) );
+  PushChar( ToBCD(wPrivate / 10000)       );
+
+  // коэффициенты потерь
+  for (i=0; i<16; i++)
+  {
+    reBuffA = *PGetCanReal(mpreLosse, i+16*ibActives) * 1000000;
+    PushFloatBCD();
+  }
+
+  Esc(300);
+}
+
+
 void    Esc_W(void)
 {
 uchar   i;
@@ -299,9 +431,8 @@ void    RunResponseEsc(void)
     switch (bQuery)
     {
       case 'T': Esc_T(); break;
-
       case 'R': Esc_R(); break;
-
+      case 'w': Esc_w(); break;
       case 'W': Esc_W(); break;
 
       case 'а':

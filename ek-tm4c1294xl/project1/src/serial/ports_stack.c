@@ -150,6 +150,16 @@ uint    PushFloatOrDouble(double  db, bool  fDouble)
 }
 
 
+void    PushFloatBCD(float  fl)
+{
+  ulong dw = (ulong)fl;
+
+  PushChar( ToBCD(dw % 100)           );
+  PushChar( ToBCD((dw % 10000) / 100) );
+  PushChar( ToBCD(dw / 10000)         );
+}
+
+
 void    PushTime(time  ti)
 {
   Push(&ti, sizeof(time));
