@@ -102,7 +102,7 @@ void    SetRelaxDate(uchar  ibRelax)
 
 
 // определяет тип дня недели
-uchar   GetModeAlt(void)
+uchar   GetModeAlt(time  ti)
 {
 uchar  i;
 
@@ -113,16 +113,15 @@ uchar  i;
   {
     GetRelaxDate(i);
 
-    if ((tiRelax.bDay   == tiAlt.bDay) &&
-        (tiRelax.bMonth == tiAlt.bMonth)) 
+    if ((tiRelax.bDay   == ti.bDay) &&
+        (tiRelax.bMonth == ti.bMonth))
       return(tiRelax.bSecond);          // тип текущего дня определяется по списку праздников
   }
 
-  i = GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay);
+  i = GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay);
 
   if (i < 5)  return(0);                // будни
   else 
   if (i == 5) return(1);                // суббота
   else        return(2);                // воскресенье
 }
-// требует предварительной установки переменной tiAlt

@@ -15,6 +15,7 @@ RESPONSE_ESC.C
 #include "../../hardware/memory.h"
 #include "../../digitals/wait_query.h"
 #include "../../keyboard/time/key_timedate.h"
+#include "../../tariffs/relaxs.h"
 #include "../../flash/at45.h"
 #include "../../access.h"
 #include "esc.h"
@@ -137,15 +138,14 @@ void    Esc_R(void)
 
 void    Esc_w(void)
 {
-uchar   i;
+uchar   i, j;
 
   InitPush(0);
 
   // первый байт состояния
   i = bOldMode;
 
-  tiAlt = *PGetCurrTimeDate();
-  if (GetModeAlt() != 0)
+  if (GetModeAlt(*PGetCurrTimeDate()) != 0)
     i |= 0x04;
 
   if (enGlobal == GLB_REPROGRAM)
@@ -201,32 +201,32 @@ uchar   i;
   // соcтав групп: все каналы
   for (i=bFRAMES*ibActives; i<bFRAMES*(1+ibActives); i++)
   {
-    wBuffD = 0;
+    uint w = 0;
 
     for (j=0; j<GetGroupsSize(i); j++)
     {
       if (j > 16) break;
-      wBuffD |= (uint)(0x01 << GetGroupsNodeCanal(i,j));
+      w |= (uint)(0x01 << GetGroupsNodeCanal(i,j));
     }
 
-    PushChar(wBuffD % 0x100);
-    PushChar(wBuffD / 0x100);
+    PushChar(w % 0x100);
+    PushChar(w / 0x100);
   }
 
   // соcтав групп: каналы с отрицательным знаком
   for (i=bFRAMES*ibActives; i<bFRAMES*(1+ibActives); i++)
   {
-    wBuffD = 0;
+    uint w = 0;
 
     for (j=0; j<GetGroupsSize(i); j++)
     {
       if (j > 16) break;
       if (GetGroupsNodeSign(i,j) == 1)
-        wBuffD |= (uint)(0x01 << GetGroupsNodeCanal(i,j));
+        w |= (uint)(0x01 << GetGroupsNodeCanal(i,j));
     }
 
-    PushChar(wBuffD % 0x100);
-    PushChar(wBuffD / 0x100);
+    PushChar(w % 0x100);
+    PushChar(w / 0x100);
   }
 
   // коэффициенты трансформации
