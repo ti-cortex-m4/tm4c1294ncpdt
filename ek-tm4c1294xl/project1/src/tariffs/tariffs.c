@@ -22,8 +22,8 @@ TARIFFS.C
 
 
 
-file const              flPublicTariffs = {PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean)};
-file const              flPublicTariffsPrevMon = {PUBLIC_TARIFFS_PREV_MON, &fPublicTariffsPrevMon, sizeof(boolean)};
+file const              flPublicTariffs = {PUBLIC_TRF, &fPublicTariffs, sizeof(boolean)};
+file const              flPublicTariffsPrevMon = {PUBLIC_TRF_PREV_MON, &fPublicTariffsPrevMon, sizeof(boolean)};
 
 file const              flTariffsMode = {TARIFFS_MODE, &bOldTrfMode, sizeof(uchar)};
 

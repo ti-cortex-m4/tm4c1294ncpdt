@@ -205,7 +205,7 @@ uchar   i, j;
   PushChar( ToBCD(tiStart.bYear  ) );
 
   // тарифные зоны по кварталам
-  memset(&zoAlt, 0, sizeof(zoAlt));
+  memset(&zoAlt, 0xFF, sizeof(zoAlt));
   PushZone();
   PushZone();
   PushZone();
@@ -275,7 +275,8 @@ uchar   i, j;
   }
 
   // лимиты
-  for (i=0; i<18; i++)  PushChar(0);
+  for (i=0; i<18; i++)
+    PushChar(0);
 
   // заводской номер
   PushChar( ToBCD(wPrivate % 100)         );
