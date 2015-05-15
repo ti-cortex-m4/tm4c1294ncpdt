@@ -157,7 +157,7 @@ uchar   i, j;
   InitPush(0);
 
   // первый байт состояния
-  i = bTariffsMode;
+  i = bOldTrfMode;
 
   if (GetMode(*PGetCurrTimeDate()) != 0)
     i |= 0x04;
@@ -168,7 +168,7 @@ uchar   i, j;
   PushChar(i);
 
   // второй байт состояния
-  if (bTariffsMode == 4)
+  if (bOldTrfMode == 4)
     PushChar(4);
   else
     PushChar(0);

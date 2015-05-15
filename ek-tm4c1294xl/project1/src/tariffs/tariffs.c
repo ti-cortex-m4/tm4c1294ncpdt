@@ -23,7 +23,7 @@ TARIFFS.C
 
 
 file const              flPublicTariffs = {PUBLIC_TARIFFS, &fPublicTariffs, sizeof(boolean)};
-file const              flTariffsMode = {TARIFFS_MODE, &bTariffsMode, sizeof(uchar)};
+file const              flTariffsMode = {TARIFFS_MODE, &bOldTrfMode, sizeof(uchar)};
 
 file const              flPeriodTariffPow = {PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow)};
 file const              flPeriodTariffEng = {PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng)};
@@ -86,7 +86,7 @@ void    ResetTariffs(void)
   fPublicTariffs = FALSE;
   SaveFile(&flPublicTariffs);
 
-  bTariffsMode = 0;
+  bOldTrfMode = 0;
   SaveFile(&flTariffsMode);
 
   DefaultTariffs();

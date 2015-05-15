@@ -28,7 +28,7 @@ extern  boolean                 fPublicTariffs;
 extern  period                  mpeTariffPow[12],
                                 mpeTariffEng[12];
 
-extern  uchar                   bTariffsMode;
+extern  uchar                   bOldTrfMode;
 
 
 

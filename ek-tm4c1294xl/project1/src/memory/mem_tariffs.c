@@ -42,7 +42,7 @@ period                  mpeTariffPow[12],
                         mpeTariffEng[12];
 
 // правило обработки тарифов в выходные дни (старый вариант)
-uchar                   bTariffsMode;
+uchar                   bOldTrfMode;
 
 
 
