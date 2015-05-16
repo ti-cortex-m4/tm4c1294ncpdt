@@ -5,6 +5,6 @@ OUT_ENERGY.H
 ------------------------------------------------------------------------------*/
 
 void    OutEngDayGrpExt(bool  fDouble);
-void    OutEngDayGrpSum(void);
+void    OutEngDayGrpExtSum(void);
 void    OutEngMonGrpExt(bool  fDouble);
-void    OutEngMonGrpSum(void);
+void    OutEngMonGrpExtSum(void);
