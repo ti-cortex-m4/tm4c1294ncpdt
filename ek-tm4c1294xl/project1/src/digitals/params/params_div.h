@@ -1,15 +1,8 @@
 /*------------------------------------------------------------------------------
-PARAMS2.H
+PARAMS_DIV.H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 boBeginParam;
-
-
-
-bool    ReadParam(uint  iwPrm);
-
-void    MakeExtended2(void);
-
-uint    GetParamIndex(digital  di);
+void    MakeParamDiv(uint  iwPrm);
+void    MakeParamDivAll(void);

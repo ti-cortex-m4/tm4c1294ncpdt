@@ -9,6 +9,7 @@ KEY_PARAMS_ALL.C
 #include "../../../digitals/params/params.h"
 #include "../../../digitals/params/params2.h"
 #include "../../../digitals/params/params_storage.h"
+#include "../../../digitals/params/params_messages.h"
 #include "../../../digitals/digitals_messages.h"
 #include "../../../realtime/realtime.h"
 #include "../../../time/timedate_display.h"
