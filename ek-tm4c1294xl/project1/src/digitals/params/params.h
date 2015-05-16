@@ -8,7 +8,7 @@ PARAMS,H
 
 
 
-extern  param const             mppaParamsMap[bPARAM_BLOCK];
+extern  param const             mppaParamsLines[bPARAM_BLOCK];
 
 
 
