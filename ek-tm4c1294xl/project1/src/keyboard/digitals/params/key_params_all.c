@@ -47,10 +47,15 @@ static void ShowParamCurr(void)
       ShowLo(szBlocked); 
     else if (diCurr.ibPhone != 0)
       ShowLo(szModemLink);
-    else if (ReadParam(iwPrm) == 1)
-      sprintf(szLo,"%12.3f", reBuffA);
     else
-      Error();   
+    {
+      float2 fl2 = ReadParam(iwPrm);
+
+      if (fl2.fValid == true)
+        sprintf(szLo,"%12.3f", fl2.flValue);
+      else
+        Error();
+    }
   }
 }
 
