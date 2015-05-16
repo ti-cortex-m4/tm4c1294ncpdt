@@ -17,6 +17,7 @@ RESPONSE_UNI.C
 #include "../../include/queries_uni.h"
 #include "../../time/rtc.h"
 #include "../../kernel/crc-16.h"
+#include "uni_time.h"
 #include "u_config.h"
 #include "u_param.h"
 #include "u_transit.h"
@@ -193,7 +194,8 @@ void    RunResponseUni(void)
 
     switch (bInBuff5 + bInBuff4*0x100)
     {
-      case wUNI_GETCURRTIME: Common2(GetCurrTimeDate(), sizeof(time)); break;
+      case wUNI_GETCURRTIME: GetTimeUni(); break;
+
       case wUNI_GETCORRECTTIME: GetCorrectUni(); break;
       case wUNI_GETCORRECTIONS: GetCorrectionsUni(); break;
 
