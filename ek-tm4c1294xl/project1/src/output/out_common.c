@@ -57,7 +57,7 @@ void    OutSetFloatCan(float  *mfl, file const  *pfl)
 
 
 
-void    OutFloatCanMap(real  *mpe)
+void    OutFloatCanExt(real  *mpe)
 {
   InitPushPtr();
   uint wSize = 0;
