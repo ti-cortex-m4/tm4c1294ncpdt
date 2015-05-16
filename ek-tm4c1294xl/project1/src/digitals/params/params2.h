@@ -8,7 +8,7 @@ extern  boolean                 boBeginParam;
 
 
 
-bool    ReadParam(uint  iwPrm);
+float2  ReadParam(uint  iwPrm);
 
 void    MakeExtended2(void);
 
