@@ -225,7 +225,7 @@ void    OutGetParamDivs(void)
 {
   if (enGlobal != GLB_WORK)
   {
-    MakeParamDivAll();
+    MakeParamsDiv();
     Result(bRES_OK);
   }
   else Result(bRES_NEEDREPROGRAM);
