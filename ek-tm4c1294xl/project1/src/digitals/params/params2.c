@@ -938,6 +938,26 @@ float2  ReadParam(uint  iwPrm)
 }
 
 
+float2  ReadParamRepeat(uint  iwPrm)
+{
+  float2 fl2 = GetFloat2(0, false);
+
+  uchar i;
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    if (fKey == true) break;
+
+    fl2 = ReadParam(iwPrm);
+    if (fl2.flValue == true) break;
+  }
+
+  if (i == bMINORREPEATS)
+    return GetFloat2(0, false);
+  else
+    return fl2;
+}
+
+
 
 void    MakeExtended2(void)
 {
@@ -964,24 +984,9 @@ void    MakeExtended2(void)
       {
         sprintf(szHi+13,"%3u",p+1);
 
-        if (mpboEnblParams[p] == FALSE)
-          reBuffA = 0;
-        else
-        {
-          uchar i;
-          for (i=0; i<bMINORREPEATS; i++)
-          {
-            if (fKey == 1) break;
-            if (ReadParam(p) == 1) break;
-          }
+        float2 fl2 = (mpboEnblParams[p] == FALSE) ? GetFloat2(0, true) : ReadParamRepeat(p);
 
-          if (i == bMINORREPEATS) 
-          {
-            reBuffA = GetFloatNAN();
-          }
-        }
-
-        mpreParamsBuff[ibSoftTim][p] = reBuffA;
+        mpreParamsBuff[ibSoftTim][p] = (fl2.fValid == true) ? fl2.flValue : GetFloatNAN();
         mptiParamsBuff[p] = tiCurr;
       }
     }
