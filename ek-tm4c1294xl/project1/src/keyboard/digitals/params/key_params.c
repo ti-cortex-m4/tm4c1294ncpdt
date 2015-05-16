@@ -7,7 +7,7 @@ KEY_PARAMS,C
 #include "../../../main.h"
 #include "../../../console.h"
 #include "../../../digitals/params/params.h"
-#include "../../../digitals/params/params2.h"
+#include "../../../digitals/params/params_div.h"
 #include "../../../serial/speeds_display.h"
 #include "../../../flash/files.h"
 

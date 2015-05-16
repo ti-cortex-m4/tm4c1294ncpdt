@@ -17,6 +17,7 @@ OUT_PARAMS.C
 #include "../digitals/params/params.h"
 #include "../digitals/params/params2.h"
 #include "../digitals/params/params_storage.h"
+#include "../digitals/params/params_div.h"
 #include "../engine.h"
 #include "../console.h"
 
