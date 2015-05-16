@@ -4,7 +4,7 @@ QUERIES2.H
 
 ------------------------------------------------------------------------------*/
 
-#define wUNI_GETCURRTIME               0x0001
++   #define wUNI_GETCURRTIME               0x0001
 #define wUNI_GETCORRECTTIME            0x0002
 #define wUNI_GETCORRECTIONS            0x0003
 
