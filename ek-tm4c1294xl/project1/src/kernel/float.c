@@ -9,18 +9,25 @@ FLOAT,Ñ
 
 
 
-bool    IsNAN(float  fl)
+bool    IsFloatNAN(float  fl)
 {
   combo32 co;
   co.reBuff = fl;
-
   return co.dwBuff == 0xFFFFFFFF;
+}
+
+
+float   GetFloatNAN(void)
+{
+  combo32 co;
+  co.dwBuff = 0xFFFFFFFF;
+  return co.reBuff;
 }
 
 
 bool    ValidFloat(float  fl)
 {
-  return !IsNAN(fl);
+  return !IsFloatNAN(fl);
 }
 
 
