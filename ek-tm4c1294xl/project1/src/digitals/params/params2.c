@@ -18,7 +18,6 @@ PARAMS2.C
 #include    "../../sensors/device_c.h"
 #include    "../../time/delay.h"
 #include    "../../console.h"
-#include    "../../engine.h"
 #include    "../../flash/files.h"
 #include    "params.h"
 #include    "params2.h"
@@ -28,6 +27,8 @@ PARAMS2.C
 boolean                 boBeginParam;
 
 static real             reParamDiv;
+
+static real             reValue;
 
 
 
@@ -61,7 +62,7 @@ uchar   i;
   coEnergy.mpbBuff[2] = PopChar();
   coEnergy.mpbBuff[3] = PopChar();
 
-  reBuffA = (real)coEnergy.dwBuff / reParamDiv;
+  reValue = (real)coEnergy.dwBuff / reParamDiv;
   return(i);
 }
 
@@ -135,12 +136,12 @@ uchar   i;
     case PAR_P  : 
     case PAR_P1 : 
     case PAR_P2 : 
-    case PAR_P3 : if (ReadArrayA() & 0x80) reBuffA *= -1; break;
+    case PAR_P3 : if (ReadArrayA() & 0x80) reValue *= -1; break;
 
     case PAR_Q  : 
     case PAR_Q1 : 
     case PAR_Q2 : 
-    case PAR_Q3 : if (ReadArrayA() & 0x40) reBuffA *= -1; break;
+    case PAR_Q3 : if (ReadArrayA() & 0x40) reValue *= -1; break;
   }
 
   return(1);
@@ -180,7 +181,7 @@ uchar   i;
   coEnergy.mpbBuff[0] = PopChar();
   coEnergy.mpbBuff[1] = PopChar();
 
-  reBuffA = (real)coEnergy.dwBuff / reParamDiv;
+  reValue = (real)coEnergy.dwBuff / reParamDiv;
   return(i);
 }
 
@@ -254,16 +255,16 @@ uchar   i;
     case PAR_P  : 
     case PAR_P1 : 
     case PAR_P2 : 
-    case PAR_P3 : if (ReadArrayB() & 0x80) reBuffA *= -1; break;
+    case PAR_P3 : if (ReadArrayB() & 0x80) reValue *= -1; break;
 
     case PAR_Q  : 
     case PAR_Q1 : 
     case PAR_Q2 : 
-    case PAR_Q3 : if (ReadArrayB() & 0x40) reBuffA *= -1; break;
+    case PAR_Q3 : if (ReadArrayB() & 0x40) reValue *= -1; break;
 
     case PAR_I1 : 
     case PAR_I2 : 
-    case PAR_I3 : if (boFixParamsBugs != FALSE) reBuffA *= 1000; break;
+    case PAR_I3 : if (boFixParamsBugs != FALSE) reValue *= 1000; break;
   }
 
   return(1);
@@ -300,7 +301,7 @@ void    ReadArrayC(uchar  bT)
   coEnergy.mpbBuff[1] = PopChar();
   coEnergy.mpbBuff[0] = PopChar();
 
-  reBuffA = coEnergy.reBuff / reParamDiv;
+  reValue = coEnergy.reBuff / reParamDiv;
 }
 
 
@@ -393,12 +394,12 @@ bool    ReadParamC(void)
     case PAR_Q  :
     case PAR_Q1 :
     case PAR_Q2 :
-    case PAR_Q3 : if (boFixParamsBugs == FALSE) reBuffA /= 1000; break;
+    case PAR_Q3 : if (boFixParamsBugs == FALSE) reValue /= 1000; break;
 
     case PAR_I  :
     case PAR_I1 :
     case PAR_I2 :
-    case PAR_I3 : if (boFixParamsBugs != FALSE) reBuffA *= 1000; break;
+    case PAR_I3 : if (boFixParamsBugs != FALSE) reValue *= 1000; break;
   }
 
   return(1);
@@ -424,29 +425,29 @@ void    QueryArrayG(void)
 void    ReadRealG(void)
 {
   PopRealExt_G(); 
-  if (reBuffA == 2) reBuffA = 0;
+  if (reValue == 2) reValue = 0;
 }
 
 
 void    ReadIntG(void)
 {
-  reBuffA = PopIntExtG()/100;
+  reValue = PopIntExtG()/100;
 }
 
 
 void    CalsParS_G(uchar ibP, uchar ibQ)
 {
-  InitPop(ibP); ReadRealG(); reP = reBuffA;
-  InitPop(ibQ); ReadRealG(); reQ = reBuffA;
+  InitPop(ibP); ReadRealG(); reP = reValue;
+  InitPop(ibQ); ReadRealG(); reQ = reValue;
   reQ = sqrt(reP*reP + reQ*reQ);
-  reBuffA = reQ;
+  reValue = reQ;
 }
 
 
 void    CalsParC_G(uchar ibP, uchar ibQ)
 {
   CalsParS_G(ibP, ibQ);
-  reBuffA = (reQ == 0) ? 0 : reP/reQ;
+  reValue = (reQ == 0) ? 0 : reP/reQ;
 }
 
 
@@ -490,9 +491,9 @@ bool    ReadParamG(void)
     case PAR_U2 : InitPop(3+8*7);   ReadRealG(); break;
     case PAR_U3 : InitPop(3+8*8);   ReadRealG(); break;
 
-    case PAR_I1 : InitPop(3+8*9);   ReadRealG(); reBuffA *= 1000; break;
-    case PAR_I2 : InitPop(3+8*10);  ReadRealG(); reBuffA *= 1000; break;
-    case PAR_I3 : InitPop(3+8*11);  ReadRealG(); reBuffA *= 1000; break;
+    case PAR_I1 : InitPop(3+8*9);   ReadRealG(); reValue *= 1000; break;
+    case PAR_I2 : InitPop(3+8*10);  ReadRealG(); reValue *= 1000; break;
+    case PAR_I3 : InitPop(3+8*11);  ReadRealG(); reValue *= 1000; break;
 
     case PAR_F1 : InitPop(3+8*12+0);  ReadIntG(); break;
     case PAR_F2 : InitPop(3+8*12+2);  ReadIntG(); break;
@@ -526,7 +527,7 @@ void    QueryArrayM(void)
 void    ReadArrayM(void)
 {
   InitPop(5);  
-  reBuffA = 0.01*(FromBCD(PopChar())*100 + FromBCD(PopChar()));
+  reValue = 0.01*(FromBCD(PopChar())*100 + FromBCD(PopChar()));
 }
 
 
@@ -605,7 +606,7 @@ void    ReadArrayP(uchar  i)
   dwBuffC = PopChar4Els();
   dwBuffC <<= 16;
   dwBuffC |= PopChar4Els();
-  reBuffA = (slong)dwBuffC;
+  reValue = (slong)dwBuffC;
 }
 
 
@@ -614,7 +615,7 @@ void    ReadArray2P(uchar  i)
   InitPop(2 + i*4);
 
   dwBuffC = PopChar4Els();
-  reBuffA = (slong)dwBuffC;
+  reValue = (slong)dwBuffC;
 }
 
 
@@ -632,9 +633,9 @@ bool    ReadParamP(void)
 
     if (ElsInput(0) != SER_GOODCHECK) return(0); 
 
-    ReadArray2P(0); mpreParamP[0] = reBuffA/10;
-    ReadArray2P(1); mpreParamP[1] = reBuffA/10;
-    ReadArray2P(2); mpreParamP[2] = reBuffA/10;
+    ReadArray2P(0); mpreParamP[0] = reValue/10;
+    ReadArray2P(1); mpreParamP[1] = reValue/10;
+    ReadArray2P(2); mpreParamP[2] = reValue/10;
 
 
     DelayOff();
@@ -663,15 +664,15 @@ bool    ReadParamP(void)
     case PAR_S2 : ReadArrayP(10); break;
     case PAR_S3 : ReadArrayP(11); break;
 
-    case PAR_I1 : ReadArrayP(12); reBuffA *= 100; break;
-    case PAR_I2 : ReadArrayP(13); reBuffA *= 100; break;
-    case PAR_I3 : ReadArrayP(14); reBuffA *= 100; break;
+    case PAR_I1 : ReadArrayP(12); reValue *= 100; break;
+    case PAR_I2 : ReadArrayP(13); reValue *= 100; break;
+    case PAR_I3 : ReadArrayP(14); reValue *= 100; break;
 
-    case PAR_F  : ReadArrayP(15); reBuffA /= 10; break;
+    case PAR_F  : ReadArrayP(15); reValue /= 10; break;
 
-    case PAR_U1 : reBuffA = mpreParamP[0]; break;
-    case PAR_U2 : reBuffA = mpreParamP[1]; break;
-    case PAR_U3 : reBuffA = mpreParamP[2]; break;
+    case PAR_U1 : reValue = mpreParamP[0]; break;
+    case PAR_U2 : reValue = mpreParamP[1]; break;
+    case PAR_U3 : reValue = mpreParamP[2]; break;
 
     default: return(0); break;
   }
@@ -689,15 +690,15 @@ void    ReadParamT1(void)
 {
   InitPop(6);
 
-  PopParamT1(0); mpreParam[PAR_P]  = reBuffA;
-  PopParamT1(1); mpreParam[PAR_P1] = reBuffA;
-  PopParamT1(1); mpreParam[PAR_P2] = reBuffA;
-  PopParamT1(1); mpreParam[PAR_P3] = reBuffA;
+  PopParamT1(0); mpreParam[PAR_P]  = reValue;
+  PopParamT1(1); mpreParam[PAR_P1] = reValue;
+  PopParamT1(1); mpreParam[PAR_P2] = reValue;
+  PopParamT1(1); mpreParam[PAR_P3] = reValue;
 
-  PopParamT1(0); mpreParam[PAR_Q]  = reBuffA;
-  PopParamT1(1); mpreParam[PAR_Q1] = reBuffA;
-  PopParamT1(1); mpreParam[PAR_Q2] = reBuffA;
-  PopParamT1(1); mpreParam[PAR_Q3] = reBuffA;
+  PopParamT1(0); mpreParam[PAR_Q]  = reValue;
+  PopParamT1(1); mpreParam[PAR_Q1] = reValue;
+  PopParamT1(1); mpreParam[PAR_Q2] = reValue;
+  PopParamT1(1); mpreParam[PAR_Q3] = reValue;
 }
 
 
@@ -705,13 +706,13 @@ void    ReadParamT2(void)
 {
   InitPop(6);
 
-  PopParamT2(10); mpreParam[PAR_I1] = reBuffA;
-  PopParamT2(10); mpreParam[PAR_I2] = reBuffA;
-  PopParamT2(10); mpreParam[PAR_I3] = reBuffA;
+  PopParamT2(10); mpreParam[PAR_I1] = reValue;
+  PopParamT2(10); mpreParam[PAR_I2] = reValue;
+  PopParamT2(10); mpreParam[PAR_I3] = reValue;
 
-  PopParamT2(1000); mpreParam[PAR_U1] = reBuffA;
-  PopParamT2(1000); mpreParam[PAR_U2] = reBuffA;
-  PopParamT2(1000); mpreParam[PAR_U3] = reBuffA;
+  PopParamT2(1000); mpreParam[PAR_U1] = reValue;
+  PopParamT2(1000); mpreParam[PAR_U2] = reValue;
+  PopParamT2(1000); mpreParam[PAR_U3] = reValue;
 }
 
 
@@ -719,7 +720,7 @@ void    ReadParamT3(void)
 {
   InitPop(6);
 
-  PopParamT3(); mpreParam[PAR_F] = reBuffA;
+  PopParamT3(); mpreParam[PAR_F] = reValue;
 }
 
 
@@ -752,25 +753,25 @@ bool    ReadParamT(void)
 
   switch (diCurr.ibLine)
   {
-    case PAR_P  : reBuffA = mpreParam[PAR_P];   break;
-    case PAR_P1 : reBuffA = mpreParam[PAR_P1];  break;
-    case PAR_P2 : reBuffA = mpreParam[PAR_P2];  break;
-    case PAR_P3 : reBuffA = mpreParam[PAR_P3];  break;
+    case PAR_P  : reValue = mpreParam[PAR_P];   break;
+    case PAR_P1 : reValue = mpreParam[PAR_P1];  break;
+    case PAR_P2 : reValue = mpreParam[PAR_P2];  break;
+    case PAR_P3 : reValue = mpreParam[PAR_P3];  break;
                                                  
-    case PAR_Q  : reBuffA = mpreParam[PAR_Q];   break;
-    case PAR_Q1 : reBuffA = mpreParam[PAR_Q1];  break;
-    case PAR_Q2 : reBuffA = mpreParam[PAR_Q2];  break;
-    case PAR_Q3 : reBuffA = mpreParam[PAR_Q3];  break;
+    case PAR_Q  : reValue = mpreParam[PAR_Q];   break;
+    case PAR_Q1 : reValue = mpreParam[PAR_Q1];  break;
+    case PAR_Q2 : reValue = mpreParam[PAR_Q2];  break;
+    case PAR_Q3 : reValue = mpreParam[PAR_Q3];  break;
 
-    case PAR_I1 : reBuffA = mpreParam[PAR_I1];  break;
-    case PAR_I2 : reBuffA = mpreParam[PAR_I2];  break;
-    case PAR_I3 : reBuffA = mpreParam[PAR_I3];  break;
+    case PAR_I1 : reValue = mpreParam[PAR_I1];  break;
+    case PAR_I2 : reValue = mpreParam[PAR_I2];  break;
+    case PAR_I3 : reValue = mpreParam[PAR_I3];  break;
 
-    case PAR_U1 : reBuffA = mpreParam[PAR_U1];  break;
-    case PAR_U2 : reBuffA = mpreParam[PAR_U2];  break;
-    case PAR_U3 : reBuffA = mpreParam[PAR_U3];  break;
+    case PAR_U1 : reValue = mpreParam[PAR_U1];  break;
+    case PAR_U2 : reValue = mpreParam[PAR_U2];  break;
+    case PAR_U3 : reValue = mpreParam[PAR_U3];  break;
 
-    case PAR_F  : reBuffA = mpreParam[PAR_F];   break;
+    case PAR_F  : reValue = mpreParam[PAR_F];   break;
 
     default: return(0); break;
   }
@@ -788,9 +789,9 @@ void    ReadParamU1(void)
 {
   InitPop(1);
 
-  PopRealQ(); mpreParam[PAR_I1] = reBuffA*1000;
-  PopRealQ(); mpreParam[PAR_I2] = reBuffA*1000;
-  PopRealQ(); mpreParam[PAR_I3] = reBuffA*1000;
+  PopRealQ(); mpreParam[PAR_I1] = reValue*1000;
+  PopRealQ(); mpreParam[PAR_I2] = reValue*1000;
+  PopRealQ(); mpreParam[PAR_I3] = reValue*1000;
 }
 
 
@@ -798,9 +799,9 @@ void    ReadParamU2(void)
 {
   InitPop(1);
 
-  PopRealQ(); mpreParam[PAR_U1] = reBuffA;
-  PopRealQ(); mpreParam[PAR_U2] = reBuffA;
-  PopRealQ(); mpreParam[PAR_U3] = reBuffA;
+  PopRealQ(); mpreParam[PAR_U1] = reValue;
+  PopRealQ(); mpreParam[PAR_U2] = reValue;
+  PopRealQ(); mpreParam[PAR_U3] = reValue;
 }
 
 
@@ -808,9 +809,9 @@ void    ReadParamU3(void)
 {
   InitPop(1);
 
-  PopRealQ(); mpreParam[PAR_P1] = reBuffA*1000;
-  PopRealQ(); mpreParam[PAR_P2] = reBuffA*1000;
-  PopRealQ(); mpreParam[PAR_P3] = reBuffA*1000;
+  PopRealQ(); mpreParam[PAR_P1] = reValue*1000;
+  PopRealQ(); mpreParam[PAR_P2] = reValue*1000;
+  PopRealQ(); mpreParam[PAR_P3] = reValue*1000;
 }
 
 
@@ -818,7 +819,7 @@ void    ReadParamU4(void)
 {
   InitPop(1);
 
-  PopRealQ(); mpreParam[PAR_F] = reBuffA;
+  PopRealQ(); mpreParam[PAR_F] = reValue;
 }
 
 
@@ -861,19 +862,19 @@ bool    ReadParamU(void)
 
   switch (diCurr.ibLine)
   {
-    case PAR_P1 : reBuffA = mpreParam[PAR_P1];  break;
-    case PAR_P2 : reBuffA = mpreParam[PAR_P2];  break;
-    case PAR_P3 : reBuffA = mpreParam[PAR_P3];  break;
+    case PAR_P1 : reValue = mpreParam[PAR_P1];  break;
+    case PAR_P2 : reValue = mpreParam[PAR_P2];  break;
+    case PAR_P3 : reValue = mpreParam[PAR_P3];  break;
 
-    case PAR_I1 : reBuffA = mpreParam[PAR_I1];  break;
-    case PAR_I2 : reBuffA = mpreParam[PAR_I2];  break;
-    case PAR_I3 : reBuffA = mpreParam[PAR_I3];  break;
+    case PAR_I1 : reValue = mpreParam[PAR_I1];  break;
+    case PAR_I2 : reValue = mpreParam[PAR_I2];  break;
+    case PAR_I3 : reValue = mpreParam[PAR_I3];  break;
 
-    case PAR_U1 : reBuffA = mpreParam[PAR_U1];  break;
-    case PAR_U2 : reBuffA = mpreParam[PAR_U2];  break;
-    case PAR_U3 : reBuffA = mpreParam[PAR_U3];  break;
+    case PAR_U1 : reValue = mpreParam[PAR_U1];  break;
+    case PAR_U2 : reValue = mpreParam[PAR_U2];  break;
+    case PAR_U3 : reValue = mpreParam[PAR_U3];  break;
 
-    case PAR_F  : reBuffA = mpreParam[PAR_F];   break;
+    case PAR_F  : reValue = mpreParam[PAR_F];   break;
 
     default: return(0); break;
   }
@@ -900,17 +901,17 @@ float2  ReadParam(uint  iwPrm)
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return GetFloat2(reBuffA, ReadParamA());
+    case 1:  return GetFloat2(reValue, ReadParamA());
 #endif
 
 #ifndef SKIP_B
     case 12:
     case 8:
-    case 2:  return GetFloat2(reBuffA, ReadParamB());
+    case 2:  return GetFloat2(reValue, ReadParamB());
 #endif
 
 #ifndef SKIP_C
-    case 3:  return GetFloat2(reBuffA, ReadParamC());
+    case 3:  return GetFloat2(reValue, ReadParamC());
 #endif
 
 #ifndef SKIP_G
