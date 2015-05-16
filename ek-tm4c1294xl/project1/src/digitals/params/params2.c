@@ -944,8 +944,7 @@ void    MakeExtended2(void)
   if (boParamsFlag == TRUE)
   {
     ShowHi(szDirectParam);
-    Clear();
-    sprintf(szLo+14,"%2u",ibDig+1);
+    Clear(); sprintf(szLo+14,"%2u",ibDig+1);
     DelayInf();
 
     boBeginParam = FALSE;
@@ -978,9 +977,7 @@ void    MakeExtended2(void)
 
           if (i == bMINORREPEATS) 
           {
-            combo32 co;
-            co.dwBuff = 0xFFFFFFFF; 
-            reBuffA = co.reBuff;
+            reBuffA = GetFloatNAN();
           }
         }
 

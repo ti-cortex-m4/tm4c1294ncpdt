@@ -4,7 +4,8 @@ FLOAT,H
 
 ------------------------------------------------------------------------------*/
 
-bool    IsNAN(float  fl);
+bool    IsFloatNAN(float  fl);
+float   GetFloatNAN(void)
 bool    ValidFloat(float  fl);
 
 float   DoubleToFloat(double  db);
