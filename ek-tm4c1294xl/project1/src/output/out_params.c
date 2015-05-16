@@ -141,7 +141,11 @@ void    OutGetParamCurr(void)
         else
         {
           uchar p = ibPort;
-          f = ReadParam((uint)10*bInBuff5+i);
+          float2 fl2 = ReadParam((uint)10*bInBuff5+i);
+
+          f = fl2.fValid;
+          reBuffA = fl2.flValue;
+
           ibPort = p;
         }
       }
@@ -283,7 +287,11 @@ void    OutGetParamsAll(void)
           ibDig = bInBuff5;
 
           uchar p = ibPort;
-          f = ReadParam(wPARAMS-1);
+          float2 fl2 = ReadParam(wPARAMS-1);
+
+          f = fl2.fValid;
+          reBuffA = fl2.flValue;
+
           ibPort = p;
         }
       }
