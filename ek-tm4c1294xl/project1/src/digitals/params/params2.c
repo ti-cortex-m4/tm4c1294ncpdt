@@ -1016,8 +1016,8 @@ void    MakeExtended2(void)
           }
         }
 
-        mpreParBuff[ibSoftTim][j] = reBuffA;
-        mptiParBuff[j] = tiCurr;
+        mpreParamsBuff[ibSoftTim][j] = reBuffA;
+        mptiParamsBuff[j] = tiCurr;
       }
     }
   }

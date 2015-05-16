@@ -12,9 +12,9 @@ extern  real                    mpreParamsDiv[wPARAMS];
 
 extern  boolean                 mpboEnblParams[wPARAMS];
 
-extern  real                    mpreParBuff[2][wPARAMS];
+extern  real                    mpreParamsBuff[2][wPARAMS];
 
-extern  time                    mptiParBuff[wPARAMS];
+extern  time                    mptiParamsBuff[wPARAMS];
 
 extern  uchar                   ibSoftTim;
 

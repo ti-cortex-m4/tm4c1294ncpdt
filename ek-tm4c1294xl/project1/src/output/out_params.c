@@ -171,8 +171,8 @@ void    OutGetParamBuff(void)
   {
     InitPushCRC();
 
-    Push(&mptiParBuff[ (uint)10*bInBuff5 ],              (uint)10*bInBuff6*sizeof(time));
-    Push(&mpreParBuff[ ibSoftTim ][ (uint)10*bInBuff5 ], (uint)10*bInBuff6*sizeof(real));
+    Push(&mptiParamsBuff[ (uint)10*bInBuff5 ],              (uint)10*bInBuff6*sizeof(time));
+    Push(&mpreParamsBuff[ ibSoftTim ][ (uint)10*bInBuff5 ], (uint)10*bInBuff6*sizeof(real));
 
     Output((uint)10*bInBuff6*(sizeof(time)+sizeof(real)));
   }
@@ -189,7 +189,7 @@ void    OutGetParamFull(void)
       uint iwTim = bInBuff7*0x100+bInBuff8;
       if (iwTim < wTIMES)
       {
-        if (LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES) == TRUE)
+        if (LoadParamsTim((wTIMES + iwHardTim - iwTim) % wTIMES) == TRUE)
         {
           InitPushCRC();
 
@@ -203,7 +203,7 @@ void    OutGetParamFull(void)
           uint i;
           for (i=(uint)10*bInBuff5; i<(uint)10*(bInBuff5+bInBuff6); i++)
           {
-            PushFloat(mpreParBuff[ PrevSoftTim() ][ i ]);
+            PushFloat(mpreParamsBuff[ PrevSoftTim() ][ i ]);
             wSize += sizeof(float);
           }
 
