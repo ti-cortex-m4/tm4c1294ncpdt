@@ -941,21 +941,16 @@ float2  ReadParam(uint  iwPrm)
 
 float2  ReadParamRepeat(uint  iwPrm)
 {
-  float2 fl2 = GetFloat2(0, false);
-
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
-    if (fKey == true) break;
+    if (fKey == true) return GetFloat2(0, false);
 
-    fl2 = ReadParam(iwPrm);
-    if (fl2.flValue == true) break;
+    float2 fl2 = ReadParam(iwPrm);
+    if (fl2.flValue == true) return fl2;
   }
 
-  if (i == bMINORREPEATS)
-    return GetFloat2(0, false);
-  else
-    return fl2;
+  return GetFloat2(0, false);
 }
 
 
