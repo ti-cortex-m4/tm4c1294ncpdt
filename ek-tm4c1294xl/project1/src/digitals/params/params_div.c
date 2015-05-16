@@ -208,12 +208,12 @@ void    MakeParamDiv(uint  iwPrm)
 }
 
 
-void    MakeParamDivAll(void)
+void    MakeParamsDiv(void)
 {
-  uint i;
-  for (i=0; i<wPARAMS; i++)
+  uint p;
+  for (p=0; p<wPARAMS; p++)
   {
-    MakeParamDiv(i);
+    MakeParamDiv(p);
   }
 
   SaveFile(&flParamsDiv);

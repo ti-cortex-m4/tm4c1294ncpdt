@@ -5,4 +5,4 @@ PARAMS_DIV.H
 ------------------------------------------------------------------------------*/
 
 void    MakeParamDiv(uint  iwPrm);
-void    MakeParamDivAll(void);
+void    MakeParamsDiv(void);
