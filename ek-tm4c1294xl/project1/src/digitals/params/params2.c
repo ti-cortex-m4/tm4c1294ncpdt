@@ -952,20 +952,20 @@ void    MakeExtended2(void)
 
     LoadPrevDigital(ibDig);
 
-    uint j;
-    for (j=0; j<wPARAMS; j++)
+    uint p;
+    for (p=0; p<wPARAMS; p++)
     {
       if (fKey == 1) break;
 
-      LoadCurrParam(j);
+      LoadCurrParam(p);
       if ( (diPrev.ibPort   == diCurr.ibPort)   &&
            (diPrev.ibPhone  == diCurr.ibPhone)  &&
            (diPrev.bDevice  == diCurr.bDevice)  &&
            (diPrev.bAddress == diCurr.bAddress) )
       {
-        sprintf(szHi+13,"%3u",j+1);
+        sprintf(szHi+13,"%3u",p+1);
 
-        if (mpboEnblParams[j] == FALSE)
+        if (mpboEnblParams[p] == FALSE)
           reBuffA = 0;
         else
         {
@@ -973,7 +973,7 @@ void    MakeExtended2(void)
           for (i=0; i<bMINORREPEATS; i++)
           {
             if (fKey == 1) break;
-            if (ReadParam(j) == 1) break;
+            if (ReadParam(p) == 1) break;
           }
 
           if (i == bMINORREPEATS) 
@@ -984,8 +984,8 @@ void    MakeExtended2(void)
           }
         }
 
-        mpreParamsBuff[ibSoftTim][j] = reBuffA;
-        mptiParamsBuff[j] = tiCurr;
+        mpreParamsBuff[ibSoftTim][p] = reBuffA;
+        mptiParamsBuff[p] = tiCurr;
       }
     }
   }
