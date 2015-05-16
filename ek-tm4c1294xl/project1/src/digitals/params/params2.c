@@ -885,7 +885,7 @@ bool    ReadParamU(void)
 
 
 
-bool    ReadParam(uint  iwPrm)
+float2  ReadParam(uint  iwPrm)
 {
   Clear();
 
@@ -896,21 +896,21 @@ bool    ReadParam(uint  iwPrm)
 
   switch (diCurr.bDevice)
   {
-    case 0:  reBuffA = 0; return(1);
+    case 0:  return GetFloat2(0, true);
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadParamA() );
+    case 1:  return GetFloat2(reBuffA, ReadParamA());
 #endif
 
 #ifndef SKIP_B
     case 12:
     case 8:
-    case 2:  return( ReadParamB() );
+    case 2:  return GetFloat2(reBuffA, ReadParamB());
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadParamC() );
+    case 3:  return GetFloat2(reBuffA, ReadParamC());
 #endif
 
 #ifndef SKIP_G
@@ -933,7 +933,7 @@ bool    ReadParam(uint  iwPrm)
     case 26: return( ReadParamU() );  break;
 #endif
 
-    default: reBuffA = 0; return(0);
+    default: return GetFloat2(0, false);
   }
 }
 

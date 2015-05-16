@@ -20,6 +20,14 @@ typedef int32_t         slong;
 typedef float           real;
 
 
+// тип 'значение float и флаг достоверности'
+typedef struct
+{
+  float         flValue;
+  bool          fValid;
+} float2;
+
+
 // тип 'логический'
 typedef enum
 {
