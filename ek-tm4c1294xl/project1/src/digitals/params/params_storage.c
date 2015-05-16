@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PARAMS_STORAGE.C
+PARAMS_STORAGE,C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,21 +12,21 @@ PARAMS_STORAGE.C
 
 
 
-boolean SavePrmTim(uint  iwTimTo, uint  iwTimFrom)
+boolean SaveParamsTim(uint  iwTimTo, uint  iwTimFrom)
 {
-  return SaveBuff(PARAMS_VALUES + iwTimTo*PARAMS_PAGES, mpreParBuff[ iwTimFrom ], sizeof(real)*wPARAMS);
+  return SaveBuff(PARAMS_VALUES + iwTimTo*PARAMS_PAGES, mpreParamsBuff[ iwTimFrom ], sizeof(float)*wPARAMS);
 }
 
 
-boolean LoadPrmTim(uint  iwTimFrom)
+boolean LoadParamsTim(uint  iwTimFrom)
 {
   if (iwTimFrom == iwHardTim)
   { 
-    memcpy(mpreParBuff[ PrevSoftTim() ], mpreParBuff[ ibSoftTim ], sizeof(real)*wPARAMS);
+    memcpy(mpreParamsBuff[ PrevSoftTim() ], mpreParamsBuff[ ibSoftTim ], sizeof(float)*wPARAMS);
     return TRUE;
   }
   else
   {
-    return LoadBuff(PARAMS_VALUES + iwTimFrom*PARAMS_PAGES, mpreParBuff[ PrevSoftTim() ], sizeof(real)*wPARAMS);
+    return LoadBuff(PARAMS_VALUES + iwTimFrom*PARAMS_PAGES, mpreParamsBuff[ PrevSoftTim() ], sizeof(float)*wPARAMS);
   }
 }

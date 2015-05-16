@@ -21,10 +21,10 @@ real                    mpreParamsDiv[wPARAMS];
 boolean                 mpboEnblParams[wPARAMS];
 
 // промежуточный массив
-real                    mpreParBuff[2][wPARAMS];
+real                    mpreParamsBuff[2][wPARAMS];
 
 // промежуточный массив
-time                    mptiParBuff[wPARAMS];
+time                    mptiParamsBuff[wPARAMS];
 
 // индекс по кольцевому буферу
 uchar                   ibSoftTim;

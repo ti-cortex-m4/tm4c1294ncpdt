@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-PARAMS_STORAGE.H
+PARAMS_STORAGE,H
 
 
 ------------------------------------------------------------------------------*/
 
-boolean SavePrmTim(uint  iwTimTo, uint  iwTimFrom);
-boolean LoadPrmTim(uint  iwTimFrom);
+boolean SaveParamsTim(uint  iwTimTo, uint  iwTimFrom);
+boolean LoadParamsTim(uint  iwTimFrom);

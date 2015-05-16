@@ -17,13 +17,13 @@ NEXT_PARAMS_TIME.C
 
 void    NextParamsTime(void)
 {
-  SavePrmTim(iwHardTim,ibSoftTim);
+  SaveParamsTim(iwHardTim,ibSoftTim);
 
   if (++iwHardTim >= wTIMES) iwHardTim = 0;
   if (++ibSoftTim >= 2)      ibSoftTim = 0;
   SavePointersTim();
 
-  memset(&mpreParBuff[ibSoftTim], 0xFF, sizeof(real)*wPARAMS);
+  memset(&mpreParamsBuff[ibSoftTim], 0xFF, sizeof(real)*wPARAMS);
 
   if (cwParamTim < wTIMES-1) cwParamTim++;
 }

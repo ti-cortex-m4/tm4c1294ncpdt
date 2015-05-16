@@ -153,7 +153,7 @@ uint    j;
         }
         else
         {
-          reBuffA = mpreParBuff[ PrevSoftTim() ][ j ];
+          reBuffA = mpreParamsBuff[ PrevSoftTim() ][ j ];
 
           if (ValidFloat(reBuffA))
           {
@@ -208,7 +208,7 @@ void    GetParamUni1(void)
   else
   {
     uint iwTim = bInBuffA*0x100+bInBuffB;
-    LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES);
+    LoadParamsTim((wTIMES + iwHardTim - iwTim) % wTIMES);
 
     uint wSize = 0;
 
@@ -253,7 +253,7 @@ uint    i,j;
       uint iwTim = (i-1) / cbDevicesUni;
       i++;
 
-      LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES);
+      LoadParamsTim((wTIMES + iwHardTim - iwTim) % wTIMES);
 
       ti = GetTimeParamUni(iwTim);
 

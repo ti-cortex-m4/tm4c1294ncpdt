@@ -66,9 +66,9 @@ static void ShowParamBuff(void)
     {
       switch (ibVal)
       {
-        case 0:  sprintf(szLo,"%12.3f", mpreParBuff[ibSoftTim][iwPrm]); break;
-        case 1:  ShowTime(mptiParBuff[iwPrm]);  break;
-        case 2:  ShowDate(mptiParBuff[iwPrm]);  break;
+        case 0:  sprintf(szLo,"%12.3f", mpreParamsBuff[ibSoftTim][iwPrm]); break;
+        case 1:  ShowTime(mptiParamsBuff[iwPrm]);  break;
+        case 2:  ShowDate(mptiParamsBuff[iwPrm]);  break;
       }
     }
   }
@@ -85,11 +85,11 @@ static void ShowParamFull(void)
       ShowLo(szBlocked); 
     else
     {
-       if (LoadPrmTim((wTIMES + iwHardTim - iwTim) % wTIMES) == TRUE)
+       if (LoadParamsTim((wTIMES + iwHardTim - iwTim) % wTIMES) == TRUE)
        {
          sprintf(szHi+12,"-%03u",iwTim);
 
-         float fl = mpreParBuff[ PrevSoftTim() ][ iwPrm ];
+         float fl = mpreParamsBuff[ PrevSoftTim() ][ iwPrm ];
 
          if (ValidFloat(fl))
            sprintf(szLo,"%12.3f", fl);
