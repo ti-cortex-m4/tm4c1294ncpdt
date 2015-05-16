@@ -997,16 +997,16 @@ void    MakeExtended2(void)
 
 
 
-uint    GetParamIndex(digital  diT)
+uint    GetParamIndex(digital  di)
 {
-  uint i;
-  for (i=0; i<wPARAMS; i++)
+  uint p;
+  for (p=0; p<wPARAMS; p++)
   {
-    if ((mpdiParam[i].ibPort   == diT.ibPort) &&
-        (mpdiParam[i].ibPhone  == diT.ibPhone) &&
-        (mpdiParam[i].bDevice  == diT.bDevice) &&
-        (mpdiParam[i].bAddress == diT.bAddress) &&
-        (mpdiParam[i].ibLine   == diT.ibLine)) return i;
+    if ((mpdiParam[p].ibPort   == di.ibPort) &&
+        (mpdiParam[p].ibPhone  == di.ibPhone) &&
+        (mpdiParam[p].bDevice  == di.bDevice) &&
+        (mpdiParam[p].bAddress == di.bAddress) &&
+        (mpdiParam[p].ibLine   == di.ibLine)) return p;
   }
 
   return 0xFFFF;
