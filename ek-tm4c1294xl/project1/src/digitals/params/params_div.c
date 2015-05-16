@@ -1,27 +1,13 @@
 /*------------------------------------------------------------------------------
-PARAMS_DIV.C
+PARAMS_DIV,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include    "../../main.h"
-#include    "../../memory/mem_digitals.h"
-#include    "../../memory/mem_realtime.h"
-#include    "../../serial/ports.h"
-#include    "../../serial/ports_devices.h"
-#include    "../../digitals/digitals.h"
-#include    "../../digitals/digitals_display.h"
-#include    "../../digitals/digitals_messages.h"
-#include    "../../devices/devices.h"
-#include    "../../sensors/device_a.h"
-#include    "../../sensors/device_b.h"
-#include    "../../sensors/device_c.h"
-#include    "../../time/delay.h"
-#include    "../../console.h"
-#include    "../../engine.h"
 #include    "../../flash/files.h"
 #include    "params.h"
-#include    "params2.h"
+#include    "params_div.h"
 
 
 
