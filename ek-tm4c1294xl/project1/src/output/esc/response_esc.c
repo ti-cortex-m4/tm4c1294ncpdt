@@ -205,7 +205,7 @@ uchar   i, j;
   PushChar( ToBCD(tiStart.bYear  ) );
 
   // тарифные зоны по кварталам
-  memset(&zoAlt, 0xFF, sizeof(zoAlt));
+  memset(&zoAlt, 0, sizeof(zoAlt));
   PushZone();
   PushZone();
   PushZone();
