@@ -195,7 +195,7 @@ void    Response255_CRC(void)
     case bEXT_GETGROUPSNAME: GetGroupsNameExt(); break;
     case bEXT_SETGROUPSNAME: SetGroupsNameExt(); break;
 
-    case bEXT_GET_EXTENDED_4T: OutExtended4T(); break;
+    case bEXT_GET_EXTENDED_4T: OutExtended4T(false); break;
 
     case bEXT_FLASH_CONTROL:
       OutFlashControl();

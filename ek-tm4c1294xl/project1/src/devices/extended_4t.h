@@ -25,4 +25,4 @@ void    NextMonExtended4T(void);
 
 void    MakeExtended4T(void);
 
-void    OutExtended4T(void);
+void    OutExtended4T(bool  fDouble);
