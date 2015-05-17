@@ -4,4 +4,4 @@ KEY_EXT_4T_RESET1.H
  
 ------------------------------------------------------------------------------*/
 
-void    key_SetExt4TReset1(void);
+void    key_SetExt4TResetFull(void);

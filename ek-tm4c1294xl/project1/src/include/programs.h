@@ -293,8 +293,8 @@ PROGRAMS.H
 
 #define wSET_EXT4T_FLAG             516
 #define wSET_EXT4T_MONTHS           517
-#define wSET_EXT4T_RESET1           518
-#define wSET_EXT4T_RESET2           519
+#define wSET_EXT4T_RESET_FULL       518
+#define wSET_EXT4T_RESET_CUSTOM     519
 
 #define wSET_EXT6_FLAG              400
 

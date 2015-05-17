@@ -103,8 +103,8 @@ KEYBOARD_KEY.C
 #include "devices/key_ext_4_enbl_can.h"
 #include "devices/key_ext_4t_flag.h"
 #include "devices/key_ext_4t_months.h"
-#include "devices/key_ext_4t_reset1.h"
-#include "devices/key_ext_4t_reset2.h"
+#include "devices/key_ext_4t_reset_full.h"
+#include "devices/key_ext_4t_reset_custom.h"
 #include "devices/key_ext_5_flag.h"
 #include "devices/key_ext_6_flag.h"
 #include "time/key_correct2_flag.h"
@@ -273,10 +273,10 @@ void    Keyboard_Key(void)
 
       case bSET_EXT5_FLAG:      key_SetExt5Flag();      break;
 
-      case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
-      case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
-      case wSET_EXT4T_RESET1:   key_SetExt4TReset1();   break;
-      case wSET_EXT4T_RESET2:   key_SetExt4TReset2();   break;
+      case wSET_EXT4T_FLAG:         key_SetExt4TFlag();        break;
+      case wSET_EXT4T_MONTHS:       key_SetExt4TMonths();      break;
+      case wSET_EXT4T_RESET_FULL:   key_SetExt4TResetFull();   break;
+      case wSET_EXT4T_RESET_CUSTOM: key_SetExt4TResetCustom(); break;
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
 
@@ -680,10 +680,10 @@ void    Keyboard_Key(void)
 
       case bSET_EXT5_FLAG:      key_SetExt5Flag();      break;
 
-      case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
-      case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
-      case wSET_EXT4T_RESET1:   key_SetExt4TReset1();   break;
-      case wSET_EXT4T_RESET2:   key_SetExt4TReset2();   break;
+      case wSET_EXT4T_FLAG:         key_SetExt4TFlag();        break;
+      case wSET_EXT4T_MONTHS:       key_SetExt4TMonths();      break;
+      case wSET_EXT4T_RESET_FULL:   key_SetExt4TResetFull();   break;
+      case wSET_EXT4T_RESET_CUSTOM: key_SetExt4TResetCustom(); break;
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
 
