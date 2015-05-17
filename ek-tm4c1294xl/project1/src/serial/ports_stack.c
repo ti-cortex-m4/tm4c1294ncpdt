@@ -97,15 +97,19 @@ void    PushBool(bool  bo) {
 }
 
 
-void    PushInt(uint  wT) {
-	PushChar(wT / 0x100);
-	PushChar(wT % 0x100);
+uchar   PushInt(uint  w)
+{
+  PushChar(w / 0x100);
+  PushChar(w % 0x100);
+  return sizeof(uint);
 }
 
 
-void    PushLong(ulong  dwT) {
-	PushInt(dwT / 0x10000);
-	PushInt(dwT % 0x10000);
+uchar   PushLong(ulong  dw)
+{
+  PushInt(dw / 0x10000);
+  PushInt(dw % 0x10000);
+  return sizeof(ulong);
 }
 
 

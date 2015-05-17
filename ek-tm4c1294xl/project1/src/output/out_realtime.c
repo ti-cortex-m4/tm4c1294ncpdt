@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
- OUT_REALTIME.C
+ OUT_REALTIME,C
 
 
 ------------------------------------------------------------------------------*/
@@ -11,41 +11,44 @@
 #include "../serial/ports.h"
 #include "../realtime/realtime.h"
 #include "../time/rtc.h"
+#include "out_realtime.h"
 
 
 
 void    OutRealtime(void)
 {
-	InitPushCRC();
+  InitPushCRC();
 
-	PushTime(*GetCurrTimeDate());
-	PushTime(tiCurr);
-	PushTime(tiPrev);
+  uint wSize = 0;
 
-	PushChar(fSeason);
-	PushChar(fSummer);
-	PushChar(fWinter);
+  wSize += PushTime(*GetCurrTimeDate());
+  wSize += PushTime(tiCurr);
+  wSize += PushTime(tiPrev);
 
-	PushChar(fActive);
+  wSize += PushChar(fSeason);
+  wSize += PushChar(fSummer);
+  wSize += PushChar(fWinter);
 
-	PushInt(ibSoftMnt);
-	PushInt(ibHardMnt);
-	PushInt(ibSoftHou);
-	PushInt(iwHardHou);
-	PushInt(ibSoftDay);
-	PushInt(ibHardDay);
-	PushInt(ibSoftMon);
-	PushInt(ibHardMon);
-	PushInt(ibSoftTim);
-	PushInt(iwHardTim);
+  wSize += PushChar(fActive);
 
-	PushLong(cdwSeconds);
-	PushLong(cdwMinutes1);
-	PushLong(cdwMinutes3);
-	PushLong(cdwMinutes30);
-	PushInt(cwDays);
-	PushInt(cwMonths);
-	PushInt(cwYears);
+  wSize += PushInt(ibSoftMnt);
+  wSize += PushInt(ibHardMnt);
+  wSize += PushInt(ibSoftHou);
+  wSize += PushInt(iwHardHou);
+  wSize += PushInt(ibSoftDay);
+  wSize += PushInt(ibHardDay);
+  wSize += PushInt(ibSoftMon);
+  wSize += PushInt(ibHardMon);
+  wSize += PushInt(ibSoftTim);
+  wSize += PushInt(iwHardTim);
 
-	Output((6 + 6 + 6) + (1 + 1 + 1) + 1 + ((2 + 2) + (2 + 2) + (2 + 2) + (2 + 2) + (2 + 2)) + (4 + 4 + 4 + 4 + 2 + 2 + 2));
+  wSize += PushLong(cdwSeconds);
+  wSize += PushLong(cdwMinutes1);
+  wSize += PushLong(cdwMinutes3);
+  wSize += PushLong(cdwMinutes30);
+  wSize += PushInt(cwDays);
+  wSize += PushInt(cwMonths);
+  wSize += PushInt(cwYears);
+
+  Output(wSize);
 }
