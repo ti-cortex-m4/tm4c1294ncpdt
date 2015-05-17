@@ -85,8 +85,10 @@ void    Push(void  *pbData, uint  wSize) {
 }
 
 
-void    PushChar(uchar  bT) {
+uchar   PushChar(uchar  bT)
+{
   Push(&bT, sizeof(uchar));
+  return sizeof(uchar);
 }
 
 
@@ -135,7 +137,7 @@ void    PushDouble(double  db)
 }
 
 
-uint    PushFloatOrDouble(double  db, bool  fDouble)
+uchar   PushFloatOrDouble(double  db, bool  fDouble)
 {
   if (fDouble)
   {
@@ -150,9 +152,10 @@ uint    PushFloatOrDouble(double  db, bool  fDouble)
 }
 
 
-void    PushTime(time  ti)
+uchar   PushTime(time  ti)
 {
   Push(&ti, sizeof(time));
+  return sizeof(time);
 }
 
 

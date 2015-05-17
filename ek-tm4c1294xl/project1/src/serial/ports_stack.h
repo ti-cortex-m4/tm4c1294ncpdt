@@ -11,14 +11,14 @@ void    InitPushUni(void);
 void    InitPushPck(void);
 
 void    Push(void  *pbData, uint  wSize);
-void    PushChar(uchar  bT);
+uchar   PushChar(uchar  bT);
 void    PushBool(bool  bo);
 void    PushInt(uint  wT);
 void    PushLong(ulong  dwT);
 void    PushFloat(float  fl);
 void    PushDouble(double  db);
-uint    PushFloatOrDouble(double  db, bool  fDouble);
-void    PushTime(time  ti);
+uchar   PushFloatOrDouble(double  db, bool  fDouble);
+uchar   PushTime(time  ti);
 void    PushString(char  *psz);
 void    PushIntAsString(uint  wT);
 void    PushBuffInt(uint  *pwData, uint  wSize);
