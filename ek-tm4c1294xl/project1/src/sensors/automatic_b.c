@@ -149,7 +149,7 @@ static void QueryCntMonTariffB(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 }
 
 
-static bool QueryCounterMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало мес€ца
+static bool QueryCntMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
@@ -175,7 +175,7 @@ uchar   i;
   Clear();
   if (ReadKoeffDeviceB() == 0) return(ST4_BADDIGITAL);
 
-  if (QueryCounterMonTariffB_Full(ibMon, ibTrf) == 0) return(ST4_BADDIGITAL);  
+  if (QueryCntMonTariffB_Full(ibMon, ibTrf) == 0) return(ST4_BADDIGITAL);  
 
   ShowPercent(60+ibTrf);
   for (i=0; i<4; i++)
