@@ -235,7 +235,7 @@ void    PushData4T(uchar  ibCan)
 
 
 
-void    OutExtended40T(void)
+void    OutExtended4T(void)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
