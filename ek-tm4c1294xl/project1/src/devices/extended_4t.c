@@ -208,29 +208,41 @@ void    MakeExtended4T(void)
 
 
 
-void    PushData4T(uchar  ibCan, bool  fDouble)
+uint    PushData4T(uchar  ibCan, bool  fDouble)
 {
   if (SupportedCntMonCanTariff(ibCan) == false)
   {
-    PushChar(ST4_NOTSUPPORTED);
+    uint wSize = 0;
+
+    wSize += PushChar(ST4_NOTSUPPORTED);
 
     uchar t;
     for (t=0; t<bTARIFFS; t++)
-      PushFloat(0);
+    {
+      wSize += PushFloatOrDouble(0, fDouble);
+    }
 
-    PushTime(tiZero);
+    wSize += PushTime(tiZero);
+
+    return wSize;
   }
   else
   {
     value6t va = mpCntMonCan4T[ibCan];
 
-    PushChar(va.bStatus);
+    uint wSize = 0;
+
+    wSize += PushChar(va.bStatus);
 
     uchar t;
     for (t=0; t<bTARIFFS; t++)
-      PushFloat(va.mpdbValues[t]);
+    {
+    	wSize += PushFloatOrDouble(va.mpdbValues[t], fDouble);
+    }
 
-    PushTime(va.tiUpdate);
+    wSize += PushTime(va.tiUpdate);
+
+    return wSize;
   }
 }
 
@@ -256,8 +268,7 @@ void    OutExtended4T(bool  fDouble)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4T(c, fDouble);
-        wSize += (1+4*4+6);
+        wSize += PushData4T(c, fDouble);
       }
     }
 
