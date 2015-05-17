@@ -6,7 +6,7 @@ KEY_EXT_4T_MONTHS,C
 
 #include "../../main.h"
 #include "../../devices/extended_4t.h"
-#include "../key_char.h"
+#include "../key_char_blocked.h"
 
 
 
@@ -24,5 +24,5 @@ static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3,
 
 void    key_SetExt4TMonths(void)
 {
-  key_SetChar(&flExt4TMonths, pszMessages, 1, 12);
+	key_SetCharBlocked(&flExt4TMonths, pszMessages, 1, 12, boExt4TFlag, wSET_EXT4T_FLAG);
 }
