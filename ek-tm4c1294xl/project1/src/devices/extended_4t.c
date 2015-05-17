@@ -72,7 +72,7 @@ void    ResetExtended4T(void)
 
 
 
-void    ResetExtended4T1(void) 
+void    ResetExtended4T_Full(void) 
 { 
   memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
 
@@ -84,7 +84,7 @@ void    ResetExtended4T1(void)
 }
 
 
-void    ResetExtended4T2(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin, uchar  ibMonMax)
+void    ResetExtended4T_Custom(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin, uchar  ibMonMax)
 { 
   uchar m;
   for (m=ibMonMin; m<=ibMonMax; m++)

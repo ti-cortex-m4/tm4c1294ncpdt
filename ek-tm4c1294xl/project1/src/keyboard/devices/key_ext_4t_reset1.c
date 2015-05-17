@@ -38,7 +38,7 @@ void    key_SetExt4TReset1(void)
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ResetExtended4T1();
+      ResetExtended4T_Full();
       OK();
     }
     else Beep();

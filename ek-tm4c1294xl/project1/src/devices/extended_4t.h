@@ -18,8 +18,8 @@ boolean LoadExt4TValues(uchar  ibMon);
 void    InitExtended4T(void); 
 void    ResetExtended4T(void);
 
-void    ResetExtended4T1(void); 
-void    ResetExtended4T2(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin, uchar  ibMonMax);
+void    ResetExtended4T_Full(void); 
+void    ResetExtended4T_Custom(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin, uchar  ibMonMax);
 
 void    NextMonExtended4T(void); 
 
