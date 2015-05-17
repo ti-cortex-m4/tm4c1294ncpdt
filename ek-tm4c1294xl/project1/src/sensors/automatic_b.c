@@ -170,24 +170,21 @@ static bool QueryCntMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало меся
 
 status ReadCntMonCanTariffB(uchar  ibMon, uchar  ibTrf) // на начало месяца
 { 
-uchar   i;
-
   Clear();
   if (ReadKoeffDeviceB() == 0) return ST4_BADDIGITAL;
+
+  float flK = reKtrans/reKpulse;
 
 
   if (QueryCntMonTariffB_Full(ibMon, ibTrf) == 0) return ST4_BADDIGITAL;
 
   ShowPercent(60+ibTrf);
-  for (i=0; i<4; i++)
-  {
-    mpdwChannelsB[i] = mpdwChannelsA[i];
-  }
 
 
+  uchar i;
   for (i=0; i<4; i++) 
   {
-    mpdbChannelsC[i] = mpdwChannelsB[i] * (reKtrans/reKpulse);
+    mpdbChannelsC[i] = mpdwChannelsA[i] * flK;
     mpboChannelsA[i] = TRUE;
   }
 
