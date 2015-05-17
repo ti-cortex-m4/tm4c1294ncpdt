@@ -28,10 +28,6 @@ void    NextMonth(void)
 
   NextMonTariffs();
 
-  NextMonExtended4();
-  NextMonExtended4T();
-  NextMonExtended6();
-
   SaveImpMon(0,ibHardMon,ibSoftMon);
   SavePowMon(0,ibHardMon,ibSoftMon);
   SaveCntMon(0,ibHardMon,ibSoftMon);
@@ -43,6 +39,10 @@ void    NextMonth(void)
   memset(&mpimMonCan[ibSoftMon],    0, sizeof(impulse)*bCANALS);
   memset(&mppoMonGrp[ibSoftMon],    0, sizeof(power)*bGROUPS);
   memset(&mpreCntMonCan[ibSoftMon], 0, sizeof(real)*bCANALS);
+
+  NextMonExtended4();
+  NextMonExtended4T();
+  NextMonExtended6();
 
   MakeCntMonCan();
 
