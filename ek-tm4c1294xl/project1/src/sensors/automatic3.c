@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC3.C
-              
- Значения счетчиков по тарифам на начало месяца
+AUTOMATIC3,C
+
+ Значения счетчиков на НАЧАЛО месяцев (по тарифам)
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -10,45 +10,46 @@ AUTOMATIC3.C
 #include "../serial/ports.h"
 #include "automatic_b.h"
 #include "automatic_c.h"
+#include "automatic3.h"
 
 
 
-bool    IsCntMonCanTariff(uchar  ibCanal)
+bool    SupportedCntMonCanTariff(uchar  ibCan)
 {
-  LoadCurrDigital(ibCanal);
+  LoadCurrDigital(ibCan);
 
   switch (diCurr.bDevice)
   {
-    case 2:  return(1);
+    case 2:  return true;
 
-    case 3:  return(1);
+    case 3:  return true;
 
-    case 13: return(1);
+    case 13: return true;
 
-    case 21: return(1);
+    case 21: return true;
 
-    default: return(0);
+    default: return false;
   }
 }
 
 
-status ReadCntMonCanTariff(uchar  ibMonth, uchar  ibCanal, uchar  ibTariff)
+status  ReadCntMonCanTariff(uchar  ibMon, uchar  ibCan, uchar  ibTrf)
 {
   Clear();
 
-  LoadCurrDigital(ibCanal);
+  LoadCurrDigital(ibCan);
   ibPort = diCurr.ibPort;
 
   switch (diCurr.bDevice)
   {
-    case 2:  return( ReadCntMonCanTariffB(ibMonth,ibTariff) );
+    case 2:  return ReadCntMonCanTariffB(ibMon, ibTrf);
 
-    case 3:  return( ReadCntMonCanTariffC(ibMonth,ibTariff) );
+    case 3:  return ReadCntMonCanTariffC(ibMon, ibTrf);
 
-//    case 13: return( ReadCntMonCanTariffK(ibMonth,ibTariff) );
+//    case 13: return ReadCntMonCanTariffK(ibMon, ibTrf);
 
-//    case 21: return( ReadCntMonCanTariffP(ibMonth,ibTariff) );
+//    case 21: return ReadCntMonCanTariffP(ibMon, ibTrf);
 
-    default: return(ST4_NOTSUPPORTED);
+    default: return ST4_NOTSUPPORTED;
   }
 }

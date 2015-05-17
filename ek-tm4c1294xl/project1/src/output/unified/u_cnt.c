@@ -80,7 +80,7 @@ void    GetCntCanMonAllUni(void)
 
 void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
 {
-  if (IsCntMonCanTariff(ibCan) == 0)
+  if (SupportedCntMonCanTariff(ibCan) == false)
   {
     real re = 0;
     PushFloatUni(ST4_NOTSUPPORTED, re);

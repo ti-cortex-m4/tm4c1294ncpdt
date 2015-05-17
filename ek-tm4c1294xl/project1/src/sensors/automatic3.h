@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC3.H
-              
+AUTOMATIC3,H
+
 
 ------------------------------------------------------------------------------*/
 
-bool    IsCntMonCanTariff(uchar  ibCanal);
-status ReadCntMonCanTariff(uchar  ibMonth, uchar  ibCanal, uchar  ibTariff);
+bool    SupportedCntMonCanTariff(uchar  ibCan);
+status  ReadCntMonCanTariff(uchar  ibMon, uchar  ibCan, uchar  ibTrf);
