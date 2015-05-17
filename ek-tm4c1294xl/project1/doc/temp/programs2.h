@@ -40,7 +40,7 @@
 #define wSET_CHECKUP_RESET    515
 
 +   #define wSET_EXT4T_FLAG       516
-#define wSET_EXT4T_MONTHS     517
++   #define wSET_EXT4T_MONTHS     517
 #define wSET_EXT4T_RESET1     518
 #define wSET_EXT4T_RESET2     519
 

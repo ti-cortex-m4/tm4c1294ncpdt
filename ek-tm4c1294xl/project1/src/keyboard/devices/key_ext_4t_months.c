@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_EXT_4T_MONTHS.C
+KEY_EXT_4T_MONTHS,C
 
 
 ------------------------------------------------------------------------------*/
@@ -24,5 +24,5 @@ static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3,
 
 void    key_SetExt4TMonths(void)
 {
-  key_SetChar(&flExt4TMonths, pszMessages, 0, 12);
+  key_SetChar(&flExt4TMonths, pszMessages, 1, 12);
 }
