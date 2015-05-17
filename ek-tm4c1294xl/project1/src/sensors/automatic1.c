@@ -52,7 +52,7 @@ uchar   i;
   ShowPercent(50);
 
 
-  // K трансформации
+ // K трансформации
   reKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
 
 
@@ -121,7 +121,7 @@ uchar   i;
   ShowPercent(50);
 
 
-  // K трансформации
+ // K трансформации
   reKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
 
 
@@ -197,7 +197,7 @@ uchar   i;
   ShowPercent(50);
 
 
-  // K трансформации
+ // K трансформации
   reKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
 
   // K преобразования
@@ -267,7 +267,7 @@ uchar   i;
   co.mpbBuff[2] = InBuff(10);
   co.mpbBuff[3] = InBuff(11);
 
-  reKtrans *= co.dwBuff;             // K трансформации
+  reKtrans *= co.dwBuff;            // K трансформации
 
 
   for (i=0; i<bMINORREPEATS; i++)
@@ -352,7 +352,7 @@ uchar   i;
   reKtrans = reBuffA;
 
   if (ExtVersionCod()) PopRealExt_G(); else PopRealBCD_G();  
-  reKtrans *= reBuffA;                   // K трансформации
+  reKtrans *= reBuffA;                  // K трансформации
   
   reBuffA = 10000;                      // K преобразования
 
@@ -382,7 +382,7 @@ uchar   i;
   if (ReadOpenH() == 0) return(0);
 
 
-  reKtrans = 1;                          // K трансформации
+  reKtrans = 1;                         // K трансформации
 
   if (bVersionCod == 43)
     reBuffA = 1000;                     // K преобразования
@@ -854,7 +854,7 @@ uchar   i;
   ShowPercent(75);
 
 
-  InitPop((uint)132 + diCurr.ibLine*3); // K трансформации
+  InitPop((uint)132 + diCurr.ibLine*3);// K трансформации
   PopRealBCD();
 
   reKtrans = reBuffA;                    
@@ -996,7 +996,7 @@ uchar   i;
   if (i == bMINORREPEATS) return(0);
   ReadOpenI();
 
-  reKtrans = 1;                          // K трансформации
+  reKtrans = 1;                         // K трансформации
   reBuffA = 5000;                       // K преобразования
 
   ShowPercent(100);
@@ -1035,7 +1035,7 @@ uchar   i,bT;
   QueryCloseK();
 
 
-  reKtrans = 1;                          // K трансформации
+  reKtrans = 1;                         // K трансформации
   reBuffA = 5000;                       // K преобразования
 
   Delay(1000);
@@ -1065,7 +1065,7 @@ uchar   i;
 
   if (i == bMINORREPEATS) return(0);
 
-  reKtrans = 1;                          // K трансформации
+  reKtrans = 1;                         // K трансформации
   reBuffA = 100;                        // K преобразования
 
   ShowPercent(100);
@@ -1159,7 +1159,7 @@ uchar   i;
   if (i == bMINORREPEATS) return(0);
   ReadOpenO();
 
-  reKtrans = 1;                          // K трансформации
+  reKtrans = 1;                         // K трансформации
   reBuffA = 5000;                       // K преобразования
 
   ShowPercent(100);
@@ -1192,7 +1192,7 @@ uchar   i;
 
   Delay(1000); Clear();
 
-  reKtrans = 1;                          // K трансформации
+  reKtrans = 1;                         // K трансформации
   reBuffA = 5000;                       // K преобразования
 
   ShowPercent(100);
@@ -1227,7 +1227,7 @@ uchar   i;
   if (i == bMINORREPEATS) return(0);
   ShowPercent(50);
 
-  ReadTransP();                         // K трансформации
+  ReadTransP();                        // K трансформации
   QueryCloseP();
 
 
@@ -1250,7 +1250,7 @@ bool    AutomaticR(void)
   if (ReadCntCurrR() == 0) return(0);
 
   reBuffA = 1;                          // K преобразования
-  reKtrans = 1;                          // K трансформации
+  reKtrans = 1;                         // K трансформации
   SetCanalsAll();                       // сохранение К преобразования и К трансформации
 
   return(1);
@@ -1269,7 +1269,7 @@ bool    AutomaticS(void)
   if (QueryConfigS_Full(50) == 0) return(0);
 
   reBuffA = wDividerS;                  // K преобразования
-  reKtrans = 1;                          // K трансформации
+  reKtrans = 1;                         // K трансформации
   SetCanalsAll();                       // сохранение К преобразования и К трансформации
 
   return(1);
