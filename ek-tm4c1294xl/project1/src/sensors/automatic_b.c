@@ -173,9 +173,10 @@ status ReadCntMonCanTariffB(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceB() == 0) return(ST4_BADDIGITAL);
+  if (ReadKoeffDeviceB() == 0) return ST4_BADDIGITAL;
 
-  if (QueryCntMonTariffB_Full(ibMon, ibTrf) == 0) return(ST4_BADDIGITAL);  
+
+  if (QueryCntMonTariffB_Full(ibMon, ibTrf) == 0) return ST4_BADDIGITAL;
 
   ShowPercent(60+ibTrf);
   for (i=0; i<4; i++)
@@ -184,13 +185,11 @@ uchar   i;
   }
 
 
-  reKtrans = reKtrans/reBuffA;
-
   for (i=0; i<4; i++) 
   {
-    mpreChannelsB[i] = mpdwChannelsB[i] * reKtrans;
+    mpdbChannelsC[i] = mpdwChannelsB[i] * (reKtrans/reKpulse);
     mpboChannelsA[i] = TRUE;
   }
 
-  return(ST4_OK);
+  return ST4_OK;
 }

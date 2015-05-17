@@ -61,9 +61,9 @@ typedef struct
 // тип 'данные типа 6 по тарифам'
 typedef struct
 {
-  status        bSelf;
-  real          mpreSelf[bTARIFFS];
-  time          tiSelf;
+  status        bStatus;
+  double        mpdbValues[bTARIFFS];
+  time          tiUpdate;
 } value6t;
 
 
