@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_EXT_4T_RESET1.C
+KEY_EXT_4T_RESET_FULL,C
 
 
 ------------------------------------------------------------------------------*/
@@ -20,6 +20,12 @@ char const             *pszExt4TReset[]  = { szMessage1, szMessage2, szMessage3,
 
 
 
+static void Show(void)
+{
+  ShowBool(enKeyboard != KBD_INPUT1);
+}
+
+
 void    key_SetExt4TResetFull(void)
 {
   if (bKey == bKEY_ENTER)
@@ -31,8 +37,8 @@ void    key_SetExt4TResetFull(void)
         enKeyboard = KBD_INPUT1;
         Clear();
       
-        LoadSlide(pszExt4TReset);   
-        ShowAnswer();
+        LoadSlide(pszExt4TReset);
+        Show();
       }
       else BlockProgram2(wSET_EXT4T_FLAG, 0);
     } 
@@ -56,7 +62,7 @@ void    key_SetExt4TResetFull(void)
         else
           enKeyboard = KBD_INPUT1;
 
-        ShowAnswer();
+        Show();
       }
       else Beep(); 
     }

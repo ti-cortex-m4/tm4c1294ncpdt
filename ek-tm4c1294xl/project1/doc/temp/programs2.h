@@ -41,8 +41,8 @@
 
 +   #define wSET_EXT4T_FLAG       516
 +   #define wSET_EXT4T_MONTHS     517
-#define wSET_EXT4T_RESET1     518
-#define wSET_EXT4T_RESET2     519
++   #define wSET_EXT4T_RESET1     518
++   #define wSET_EXT4T_RESET2     519
 
 #define wSET_HOU_CHECK        555
 +   #define wSET_HIDE_MESSAGES    299
