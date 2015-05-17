@@ -31,14 +31,14 @@ bool    QueryIdC_Full(void)
     QueryIdC();
 
     if ((RevInput() == SER_GOODCHECK) && (ReadIdC() == 1)) break;
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
 
     ShowLo(szFailure20); Delay(1000);
     mpcwFailure2[ibDig]++;
   }
 
   Clear();
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
 
   return(1);
 }
@@ -54,12 +54,12 @@ uchar   i;
     QueryEnergyDayC(bTime);
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
 
-    if (QueryIdC_Full() == 0) return(0);
+    if (QueryIdC_Full() == 0) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
   ShowPercent(bPercent);
 
   ReadEnergyC();
@@ -77,12 +77,12 @@ uchar   i;
     QueryEnergyMonC(bTime);
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
 
-    if (QueryIdC_Full() == 0) return(0);
+    if (QueryIdC_Full() == 0) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
   ShowPercent(bPercent);
 
   ReadEnergyC();
@@ -100,12 +100,12 @@ uchar   i;
     QueryEnergyAbsC();
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
 
-    if (QueryIdC_Full() == 0) return(0);
+    if (QueryIdC_Full() == 0) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
   ShowPercent(bPercent);
 
   ReadEnergyC();
@@ -123,10 +123,10 @@ uchar   i;
     QueryTimeC();
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
 
   ReadTimeAltC();
   return(1);
@@ -134,7 +134,7 @@ uchar   i;
 
 
 
-void    QueryCounterMonTariffC(uchar  ibMonth, uchar  bTariff) // на начало мес€ца
+static void QueryCntMonTariffC(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
   InitPush(0);
 
@@ -142,33 +142,31 @@ void    QueryCounterMonTariffC(uchar  ibMonth, uchar  bTariff) // на начало мес€
   PushChar(3);
   PushChar(43);
 
-  PushChar(ibMonth);
-  PushChar(bTariff);
+  PushChar(ibMon);
+  PushChar(bTrf);
   PushChar(0);
 
   RevQueryIO(4+16+2, 3+3+2);
 }
 
 
-bool    QueryCounterMonTariffC_Full(uchar  ibMonth, uchar  bTariff)
+static bool QueryCntMonTariffC_Full(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryCounterMonTariffC(ibMonth, bTariff);
+    QueryCntMonTariffC(ibMon, bTrf);
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
 
   ReadEnergyC();
-  return(1);
+  return true;
 }
-
 
 
 status ReadCntMonCanTariffC(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
@@ -178,10 +176,11 @@ uchar   i,j;
   Clear();
   if (ReadKoeffDeviceC() == 0) return(ST4_BADDIGITAL);
 
+
   if (QueryTimeC_Full() == 0) return(ST4_BADDIGITAL);  
 
   j = (ibMonth + 0)%12;
-  if (QueryCounterMonTariffC_Full(-((12-1+tiAlt.bMonth-j)%12), ibTariff+1) == 0) return(ST4_BADDIGITAL);  
+  if (QueryCntMonTariffC_Full(-((12-1+tiAlt.bMonth-j)%12), ibTariff+1) == 0) return(ST4_BADDIGITAL);  
 
   ShowPercent(60+ibTariff);
   for (i=0; i<4; i++)
