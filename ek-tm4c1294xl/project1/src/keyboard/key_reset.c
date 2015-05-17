@@ -80,9 +80,8 @@ void    key_SetReset(void)
 //          ResetGaps();
 //          ResetExtended3();
 //          ResetExtended4();
-//          ResetExtended4T();
 //          ResetExtended6();
-          ResetDevices();
+          ResetDevices(false);
 //          ResetCurrent2();
 //          ResetCheckupCustom();
 
@@ -124,7 +123,7 @@ void    key_SetReset(void)
           ResetFlow();
 //          ResetCurrent();
 //          ResetProfiles();
-          ResetDevices();
+          ResetDevices(true);
 //          ResetSendAT();
 //          ResetPhones2();
 //          ResetParams();
@@ -132,7 +131,6 @@ void    key_SetReset(void)
 //          ResetSMK();
 //          ResetExtended3();
 //          ResetExtended4();
-//          ResetExtended4T();
 //          ResetExtended6();
 //          ResetCurrent2();
 //          ResetBulk();

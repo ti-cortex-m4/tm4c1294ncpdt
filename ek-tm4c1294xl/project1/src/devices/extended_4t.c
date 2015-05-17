@@ -52,7 +52,7 @@ void    InitExtended4T(void)
 }
 
 
-void    ResetExtended4T(void) 
+void    ResetExtended4T(bool  fFull)
 { 
   boExt4TFlag = FALSE;
   SaveFile(&flExt4TFlag);

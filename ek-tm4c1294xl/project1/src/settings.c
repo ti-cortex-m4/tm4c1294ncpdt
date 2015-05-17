@@ -46,12 +46,12 @@ void    InitSettings(void)
 }
 
 
-void    ResetSettings(bool  fFullReset)
+void    ResetSettings(bool  fFull)
 {
   enGlobal = GLB_PROGRAM;
   SaveGlobal();
 
-  if (fFullReset)
+  if (fFull)
   {
     bLogical = 1;
     SaveFile(&flLogical);
@@ -60,7 +60,7 @@ void    ResetSettings(bool  fFullReset)
   boFirstReset = FALSE;
   SaveFile(&flFirstReset);
 
-  if (fFullReset)
+  if (fFull)
   {
     boSetTime = FALSE;
     SaveFile(&flSetTime);

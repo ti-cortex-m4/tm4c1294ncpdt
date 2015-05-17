@@ -122,7 +122,7 @@ void    InitDevices2(void)
 }
 
 
-void    ResetDevices(void)
+void    ResetDevices(bool  fFull)
 {
   boSeparateCan = FALSE;
   SaveFile(&flSeparateCan);
@@ -152,7 +152,7 @@ void    ResetDevices(void)
   ResetSchedule();
   ResetExtended1();
   ResetExtended4();
-  ResetExtended4T();
+  ResetExtended4T(fFull);
   ResetExtended5();
   ResetExtended6();
   ResetExtended7();
