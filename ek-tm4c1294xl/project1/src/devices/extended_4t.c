@@ -1,12 +1,11 @@
 /*------------------------------------------------------------------------------
 EXTENDED_4T.C
 
- Значения счетчиков по тарифам на НАЧАЛО месяца
+ Значения счетчиков на НАЧАЛО месяца (по тарифам)
 ------------------------------------------------------------------------------*/
 
 #include "../console.h"
 #include "../memory/mem_realtime.h"
-#include "../memory/mem_extended_4.h"
 #include "../serial/ports.h"
 #include "../digitals/digitals.h"
 #include "../digitals/digitals_display.h"
