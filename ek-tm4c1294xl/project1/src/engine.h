@@ -4,4 +4,4 @@ ENGINE.H
 
 ------------------------------------------------------------------------------*/
 
-extern  real                    reBuffA, reBuffB;
+extern  real                    reBuffA, reKtrans;

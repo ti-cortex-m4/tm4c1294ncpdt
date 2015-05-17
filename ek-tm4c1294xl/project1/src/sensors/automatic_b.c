@@ -185,11 +185,11 @@ uchar   i;
   }
 
 
-  reBuffB = reBuffB/reBuffA;
+  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
-    mpreChannelsB[i] = mpdwChannelsB[i] * reBuffB;
+    mpreChannelsB[i] = mpdwChannelsB[i] * reKtrans;
     mpboChannelsA[i] = TRUE;
   }
 
