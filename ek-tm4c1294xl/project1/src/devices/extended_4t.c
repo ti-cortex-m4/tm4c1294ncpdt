@@ -208,7 +208,7 @@ void    MakeExtended4T(void)
 
 void    PushData4T(uchar  ibCan)
 {
-  if (IsCntMonCanTariff(ibCan) == 0)
+  if (SupportedCntMonCanTariff(ibCan) == false)
   {
     PushChar(ST4_NOTSUPPORTED);
 

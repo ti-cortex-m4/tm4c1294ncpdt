@@ -8,8 +8,8 @@ answer_flag.c
 answer_flag.h
 at45d081.c
 at45d081.h
-automatic3.c
-automatic3.h
++   automatic3.c
++   automatic3.h
 automatic_b.c
 automatic_b.h
 automatic_c.c
