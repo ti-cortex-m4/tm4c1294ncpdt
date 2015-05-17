@@ -111,11 +111,11 @@ void    NextMonExtended4T(void)
 
 
 
-static bool MakeDevices(uchar  ibMon, uchar  ibTar)
+static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
 
-  status st = ReadCntMonCanTariff(ibMon, ibDig, ibTar);
+  status st = ReadCntMonCanTariff(ibMon, ibDig, ibTrf);
 
   if ((st == ST4_BADDIGITAL) || (st == ST4_NOTSUPPORTED) || (st == ST4_NOTPRESENTED)) 
   { 
@@ -130,7 +130,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTar)
         vaT = mpCntMonCan4T[c];
 
         vaT.bSelf = st;
-        vaT.mpreSelf[ibTar] = 0;
+        vaT.mpreSelf[ibTrf] = 0;
         vaT.tiSelf = *GetCurrTimeDate();
 
         mpCntMonCan4T[c] = vaT;
@@ -155,7 +155,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTar)
           vaT = mpCntMonCan4T[c];
 
           vaT.bSelf = ST4_OK;
-          vaT.mpreSelf[ibTar] = mpreChannelsB[diPrev.ibLine];
+          vaT.mpreSelf[ibTrf] = mpreChannelsB[diPrev.ibLine];
           vaT.tiSelf = *GetCurrTimeDate();
 
           mpCntMonCan4T[c] = vaT;
