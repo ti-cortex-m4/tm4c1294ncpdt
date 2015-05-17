@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_EXT_4T_RESET2.C
+KEY_EXT_4T_RESET_CUSTOM.C
 
 
 ------------------------------------------------------------------------------*/
@@ -9,9 +9,6 @@ KEY_EXT_4T_RESET2.C
 
 
 
-extern  char const                   *pszExt4TReset[];
-
-
 //                                         0123456789ABCDEF
 static char const       szMonths[]      = "ћес€цы:         ",
                         szCanals[]      = " аналы:         ",
@@ -19,8 +16,11 @@ static char const       szMonths[]      = "ћес€цы:         ",
                         szCanalTo[]     = " до: __";
 
 
+extern  char const                   *pszExt4TReset[];
 
-static void ShowAnswer(void)
+
+
+static void Show(void)
 {
   ShowBool(enKeyboard != KBD_INPUT5);
 }
@@ -28,7 +28,8 @@ static void ShowAnswer(void)
 
 void    key_SetExt4TResetCustom(void)
 {
-static uchar ibCanMin, ibCanMax, ibMonMin, ibMonMax;
+static uchar ibCanMin, ibCanMax;
+static uchar ibMonMin, ibMonMax;
 
   if (bKey == bKEY_ENTER)
   {                                           
@@ -39,7 +40,7 @@ static uchar ibCanMin, ibCanMax, ibMonMin, ibMonMax;
         enKeyboard = KBD_SHOW;
         Clear(); 
       
-        LoadSlide(pszExt4TReset); 
+        LoadSlide(pszExt4TReset);
         szLo[0] = '.';
       }
       else BlockProgram2(wSET_EXT4T_FLAG, 0);
@@ -84,10 +85,10 @@ static uchar ibCanMin, ibCanMax, ibMonMin, ibMonMax;
       {
         enKeyboard = KBD_INPUT5;
 
-        LoadSlide(pszExt4TReset);
+        LoadSlide(pszMessages);
 
         Clear();
-        ShowAnswer();
+        Show();
       }
       else Beep();
     }
@@ -121,7 +122,7 @@ static uchar ibCanMin, ibCanMax, ibMonMin, ibMonMax;
         else
           enKeyboard = KBD_INPUT5;
 
-        ShowAnswer();
+        Show();
       }
       else Beep(); 
     }
