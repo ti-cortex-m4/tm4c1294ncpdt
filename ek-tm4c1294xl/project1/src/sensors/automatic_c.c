@@ -134,6 +134,22 @@ uchar   i;
 
 
 
+void    QueryCounterMonTariffC(uchar  ibMonth, uchar  bTariff) // на начало мес€ца
+{
+  InitPush(0);
+
+  PushChar(diCurr.bAddress);
+  PushChar(3);
+  PushChar(43);
+
+  PushChar(ibMonth);
+  PushChar(bTariff);
+  PushChar(0);
+
+  RevQueryIO(4+16+2, 3+3+2);
+}
+
+
 bool    QueryCounterMonTariffC_Full(uchar  ibMonth, uchar  bTariff)
 {
 uchar   i;
