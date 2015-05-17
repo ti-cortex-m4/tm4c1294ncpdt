@@ -29,16 +29,16 @@ uchar   i;
     QueryIdB();
 
     if ((Input() == SER_GOODCHECK) && (ReadIdB() == 1)) break;
-    if (fKey == 1) return(0);
+    if (fKey == 1) return false;
 
     ShowLo(szFailure20); Delay(1000);
     mpcwFailure2[ibDig]++;
   }
 
   Clear();
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
 
-  return(1);
+  return true;
 }
 
 
@@ -53,13 +53,13 @@ uchar   i;
     QueryOpenB();
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == 1) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
   ShowPercent(bPercent);
 
-  return(1);
+  return true;
 }
 
 
@@ -74,14 +74,14 @@ uchar   i;
     QueryTimeB();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == 1) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
   ShowPercent(bPercent);
 
   ReadTimeAltB();
-  return(1);
+  return true;
 }
 
 
@@ -96,14 +96,14 @@ uchar   i;
     QueryEnergyB(bTime);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == 1) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
   ShowPercent(bPercent);
 
   ReadEnergyB();
-  return(1);
+  return true;
 }
 
 
@@ -118,21 +118,21 @@ uchar   i;
     QueryEnergyB(bTime);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == 1) return false;
 
-    if (QueryIdB_Full() == 0) return(0);
+    if (QueryIdB_Full() == 0) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
   ShowPercent(bPercent);
 
   ReadEnergyB();
-  return(1);
+  return true;
 }
 
 
 
-void    QueryCounterMonTariffB(uchar  ibMon, uchar  bTrf) // на начало мес€ца
+static void QueryCntMonTariffB(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
   InitPush(0);
 
@@ -149,23 +149,22 @@ void    QueryCounterMonTariffB(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 }
 
 
-bool    QueryCounterMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало мес€ца
+static bool QueryCounterMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryCounterMonTariffB(ibMon, bTrf);
+    QueryCntMonTariffB(ibMon, bTrf);
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == 1) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
 
   ReadEnergyB();
-  return(1);
+  return true;
 }
 
 
