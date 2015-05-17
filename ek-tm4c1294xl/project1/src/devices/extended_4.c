@@ -69,7 +69,7 @@ boolean LoadExt4Values(uchar  ibMon)
 void    InitExtended4(void)
 {
   LoadFileBoolean(&flExt4Flag, FALSE);
-  LoadFileChar(&flExt4Months, 0, 12, 4);
+  LoadFileChar(&flExt4Months, 1, 12, 4);
   LoadFile(&flExt4EnblCan);
 }
 
