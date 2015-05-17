@@ -29,7 +29,7 @@ uchar   i;
     QueryOpenA();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -49,7 +49,7 @@ uchar   i;
     QueryTimeA();
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -70,7 +70,7 @@ uchar   i;
     QueryEnergyA(bTime);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -92,7 +92,7 @@ uchar  x;
     QueryIdA();
 
     if ((Input() == SER_GOODCHECK) && (ReadIdA() == 1)) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     ShowLo(szFailure20); Delay(1000);
     mpcwFailure2[ibDig]++;
@@ -115,7 +115,7 @@ uchar   i;
     QueryEnergyA(bTime);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     if (QueryIdA_Full() == 0) return(0);
   }

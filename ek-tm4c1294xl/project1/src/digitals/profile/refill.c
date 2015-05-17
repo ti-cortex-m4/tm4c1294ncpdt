@@ -61,7 +61,7 @@ void    DoRefill(void)
   uint iwHou = iwBmin;
   
   while (iwHou != iwBmax) {
-    if (fKey == 1) { fKey = 0; Beep(); }
+    if (fKey == true) { fKey = 0; Beep(); }
     if ((iwHou % 0x10) == 0) NexttimeMnt();
 
     Clear();

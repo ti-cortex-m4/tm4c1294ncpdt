@@ -181,7 +181,7 @@ void    MakeExtended4T(void)
     uchar m;
     for (m=0; m<bExt4TMonths; m++)
     {
-      if (fKey == 1) break;
+      if (fKey == true) break;
 
       uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
       LoadExt4TValues(ibMon);

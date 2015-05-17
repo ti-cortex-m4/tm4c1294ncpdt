@@ -31,7 +31,7 @@ bool    QueryIdC_Full(void)
     QueryIdC();
 
     if ((RevInput() == SER_GOODCHECK) && (ReadIdC() == 1)) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     ShowLo(szFailure20); Delay(1000);
     mpcwFailure2[ibDig]++;
@@ -54,7 +54,7 @@ uchar   i;
     QueryEnergyDayC(bTime);
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     if (QueryIdC_Full() == 0) return(0);
   }
@@ -77,7 +77,7 @@ uchar   i;
     QueryEnergyMonC(bTime);
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     if (QueryIdC_Full() == 0) return(0);
   }
@@ -100,7 +100,7 @@ uchar   i;
     QueryEnergyAbsC();
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     if (QueryIdC_Full() == 0) return(0);
   }
@@ -123,7 +123,7 @@ uchar   i;
     QueryTimeC();
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -144,7 +144,7 @@ uchar   i;
     QueryCounterMonTariffC(ibMonth, bTariff);
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);

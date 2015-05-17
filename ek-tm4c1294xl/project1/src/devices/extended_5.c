@@ -91,7 +91,7 @@ static bool MakeDevices(void)
   uchar t;
   for (t=0; t<bTARIFFS; t++)
   {
-    if (fKey == 1) return (0);
+    if (fKey == true) return (0);
     Clear();
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  

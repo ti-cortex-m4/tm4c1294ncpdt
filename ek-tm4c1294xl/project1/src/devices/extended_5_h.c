@@ -60,7 +60,7 @@ uchar   i;
     QueryOpenH();
 
     if (CodInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -81,7 +81,7 @@ uchar   i;
     QueryEnergyAbsH(bTariff-1);
 
     if (CodInput() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);

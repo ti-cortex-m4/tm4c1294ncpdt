@@ -345,7 +345,7 @@ uchar   i;
     QueryModemBaud(1);
 
     if (ModInputOK(1) == 1) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) ;
@@ -361,7 +361,7 @@ uchar   i;
     QueryModemCommon(1);
 
     if (ModInputOK(1) == 1) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     if (i > 0)                          // переход из состояния hook on
     {
@@ -369,13 +369,13 @@ uchar   i;
       QueryModemEscape();
 
       if (ModInputOK(3) == 1) ;
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
 
       DelayOff();
       QueryModemHookOff();
 
       if (ModInputOK(1) == 1) ;
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
   }
 
@@ -393,7 +393,7 @@ uchar   i;
       QueryModemCustom();
 
       if (ModInputOK(1) == 1) break;
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
 
     if (i == bMINORREPEATS) return(0);
@@ -411,7 +411,7 @@ uchar   i;
     QueryModemConnect();
 
     if ((ModInput(bMaxConnect,1) == SER_POSTANSWER_MODEM) && (ShowModemConnect() == 1)) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -465,7 +465,7 @@ bool    fResult;
     QueryModemEscape();
 
     if (ModInputOK(3) == 1) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     // переход из состояния hook off
 //    QueResult(bRES_MODEMHOOKOFF, i);
@@ -474,7 +474,7 @@ bool    fResult;
     QueryModemHookOff();
 
     if (ModInputOK(1) == 1) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) ;
@@ -490,7 +490,7 @@ bool    fResult;
     QueryModemHookOff();
 
     if (ModInputOK(1) == 1) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) ;

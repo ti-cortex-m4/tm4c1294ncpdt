@@ -45,7 +45,7 @@ uchar   i;
     QueryIO(1+10+2, 2+1+2);
 
     if (Input() == SER_GOODCHECK) break; 
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -67,7 +67,7 @@ uchar   i;
     QueryIO(1+3+2, 2+1+2);
 
     if (Input() == SER_GOODCHECK) break; 
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -114,7 +114,7 @@ uchar   i;
     QueryIO(1+4+2, 2+1+2);
 
     if (Input() == SER_GOODCHECK) break; 
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -137,7 +137,7 @@ uchar   i;
     QueryIO(1+3+2, 2+1+2);
 
     if (Input() == SER_GOODCHECK) break; 
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
                                         
     // второй вариант: ответ 6 байт
     InitPush(0);
@@ -149,7 +149,7 @@ uchar   i;
     QueryIO(1+6+2, 2+1+2);
 
     if (Input() == SER_GOODCHECK) break; 
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -190,7 +190,7 @@ uchar   i;
     QueryIO(1+4+2, 2+1+2);
 
     if (Input() == SER_GOODCHECK) break; 
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -223,7 +223,7 @@ uchar   i;
     QueryOpenC();                       // открытие канала связи
 
     if (RevInput() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -246,7 +246,7 @@ uchar   i;
     RevQueryIO(4+18+2, 3+3+2);
 
     if (RevInput() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -286,7 +286,7 @@ uchar   i;
     RevQueryIO(4+8+2, 3+3+2);
 
     if (RevInput() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -314,7 +314,7 @@ uchar   i;
     QueryOpenG();
 
     if (CodInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -338,7 +338,7 @@ uchar   i;
     CodQueryIO(3+25+1, 3+3+1);
 
     if (CodInput() == SER_GOODCHECK) break; 
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -374,7 +374,7 @@ uchar   i;
     QueryOpenH();
 
     if (CodInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -550,7 +550,7 @@ uchar   i;
     QueryOpenD();
 
     if (ExtInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMAJORREPEATS) return(0);
@@ -563,7 +563,7 @@ uchar   i;
     QueryPasswordD();
 
     if (ExtInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -600,7 +600,7 @@ uchar   i;
       Query(1+1, 2, 1);
 
       if (EscInput() == SER_GOODCHECK) break;
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
     else return(0);
   }
@@ -627,7 +627,7 @@ uchar   i;
     QueryOpenG();
 
     if (CodInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -654,7 +654,7 @@ uchar   i;
     QueryOpenH();
 
     if (CodInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -682,7 +682,7 @@ uchar   i;
     QueryEnergyD();
 
     if (ExtInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -700,7 +700,7 @@ uchar   i;
       QueryContinueD();
 
       if (ExtInput() == SER_GOODCHECK) break;
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
 
     if (i == bMINORREPEATS) return(0);
@@ -716,7 +716,7 @@ uchar   i;
     QueryStopD();
 
     if (ExtInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -744,7 +744,7 @@ uchar   i;
     QueryOpenP();
 
     if (ElsInput(1) == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -757,7 +757,7 @@ uchar   i;
     QueryModeP();
 
     if (ElsInput(0) == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -770,7 +770,7 @@ uchar   i;
     QueryPasswordP();
 
     if (ElsInput(2) == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -800,7 +800,7 @@ uchar   i;
     QueryConfigD();
 
     if (ExtInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -847,7 +847,7 @@ uchar   i;
     Query(300+1, 2, 1);  
 
     if (EscInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -877,7 +877,7 @@ uchar   i;
     Query(64+1, 2, 1);  
 
     if (EscInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -915,7 +915,7 @@ uchar   i;
     QueryKoeffF();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -929,7 +929,7 @@ uchar   i;
     QueryRealExtendedF(bEXT_GETSIMPLE_ESC_S);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -990,7 +990,7 @@ uchar   i;
     QueryOpenI();
 
     if (TxtInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -1022,7 +1022,7 @@ uchar   i,bT;
     QueryOpenK();
 
     if (BccInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     bT = InBuff(IndexInBuff() - 1) & 0x7F;
     if ((bT == '\r') || (bT == '\n')) 
@@ -1060,7 +1060,7 @@ uchar   i;
     QueryEnergyAbsM();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -1105,7 +1105,7 @@ uchar   i;
     QueryIO(5+8, 5+8);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -1125,7 +1125,7 @@ uchar   i;
     QueryEnergyAbsN();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -1153,7 +1153,7 @@ uchar   i;
     QueryOpenO();
 
     if (TxtInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -1184,7 +1184,7 @@ uchar   i;
     QueryVersionT();
 
     if (TxtInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);

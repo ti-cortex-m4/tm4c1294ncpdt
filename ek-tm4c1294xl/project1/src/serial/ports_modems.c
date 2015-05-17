@@ -25,7 +25,7 @@ serial  ModInput(uchar  bSecond, bool  fShow)
 
   while (1)
   {
-    if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
+    if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     ResetWDT();
     ShowWaitAnswer(fShow);
