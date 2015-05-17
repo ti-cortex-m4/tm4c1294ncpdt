@@ -162,7 +162,7 @@
 #define bSET_LIMITS2                148
 
 #ifdef  DS80C400
-#define bSET_ENBLSENSORS            185
++   #define bSET_ENBLSENSORS            185
 #endif
 
 #define bSET_RECALCFULL             240

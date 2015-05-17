@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_ENBL_CANALS.С
+KEY_ENBL_CANALS,С
 
 
 ------------------------------------------------------------------------------*/
@@ -7,27 +7,25 @@ KEY_ENBL_CANALS.С
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_ports.h"
-#include "../../display/display.h"
-#include "../keyboard.h"
-#include "../../flash/files.h"
+#include "../../console.h"
 #include "../../digitals/profile/profile_core.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szGraphic[]     = " График опроса  ",
-                        szByCanals[]    = "   по каналам   ";
-                     
-static char const       *pszEnblCan[]   = { szGraphic, szByCanals, "" };
+static char const       szMessage1[]    = " График опроса  ",
+                        szMessage2[]    = "   по каналам   ";
+
+static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 
-static void Show(void)
+static void Show(uchar  ibCan)
 {
   Clear();
-  sprintf(szLo+14,"%2u",ibX+1);
+  sprintf(szLo+14,"%2u",ibCan+1);
 
-  if (mpboEnblCan[ibX] == FALSE)
+  if (mpboEnblCan[ibCan] == FALSE)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -40,12 +38,14 @@ static void Show(void)
 
 void    key_SetEnblCanals(void)
 {
+static uchar ibCan;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
-      LoadSlide(pszEnblCan);
+      LoadSlide(pszMessages);
 
       Canal();
     } 
@@ -53,23 +53,23 @@ void    key_SetEnblCanals(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
-      Show();
+      ibCan = 0;
+      Show(ibCan);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
+      if ((ibCan = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        Show();
+        Show(ibCan);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) ibX = 0;
+      if (++ibCan >= bCANALS) ibCan = 0;
 
-      Show();
+      Show(ibCan);
     }
   }
 
@@ -78,9 +78,11 @@ void    key_SetEnblCanals(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      mpboEnblCan[ibX] = InvertBoolean(mpboEnblCan[ibX]);
-      Show();
+      mpboEnblCan[ibCan] = InvertBoolean(mpboEnblCan[ibCan]);
+
       SaveFile(&flEnblCan);
+
+      Show(ibCan);
     }
     else Beep();
   }

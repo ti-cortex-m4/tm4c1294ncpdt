@@ -671,8 +671,8 @@ _search.c
 _search.h
 +   _season.c
 +   _season.h
-_sensors.c
-_sensors.h
++   _sensors.c
++   _sensors.h
 _set_profiles.c
 _set_profiles.h
 _single.c
