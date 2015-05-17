@@ -213,7 +213,6 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
   if (SupportedCntMonCanTariff(ibCan) == false)
   {
     uint wSize = 0;
-
     wSize += PushChar(ST4_NOTSUPPORTED);
 
     uchar t;
@@ -223,7 +222,6 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
     }
 
     wSize += PushTime(tiZero);
-
     return wSize;
   }
   else
@@ -231,7 +229,6 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
     value6t va = mpCntMonCan4T[ibCan];
 
     uint wSize = 0;
-
     wSize += PushChar(va.bStatus);
 
     uchar t;
@@ -241,7 +238,6 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
     }
 
     wSize += PushTime(va.tiUpdate);
-
     return wSize;
   }
 }
@@ -256,7 +252,7 @@ void    OutExtended4T(bool  fDouble)
     Result(bRES_BADADDRESS);
   else
   {
-    InitPushPtr();            
+    InitPushPtr();
     PushChar(boExt4TFlag);
     PushChar(bExt4TMonths);
     uint wSize = 1+1;
