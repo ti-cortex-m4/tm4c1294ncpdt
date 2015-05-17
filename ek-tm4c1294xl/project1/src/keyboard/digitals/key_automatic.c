@@ -169,7 +169,7 @@ uchar   i;
           Error(); Beep(); DelayMsg();
         }
 
-        if (fKey == 1) ibZ = 0xFF;
+        if (fKey == true) ibZ = 0xFF;
         fKey = 0;
 
         if (ibZ == 0xFF) break;

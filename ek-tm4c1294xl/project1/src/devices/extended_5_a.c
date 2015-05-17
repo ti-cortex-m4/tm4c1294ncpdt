@@ -41,7 +41,7 @@ uchar   i;
     QueryEnergyTariffA(bTime,bTariff);
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);

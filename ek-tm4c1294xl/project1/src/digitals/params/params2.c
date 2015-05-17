@@ -970,7 +970,7 @@ void    MakeExtended2(void)
     uint p;
     for (p=0; p<wPARAMS; p++)
     {
-      if (fKey == 1) break;
+      if (fKey == true) break;
 
       LoadCurrParam(p);
       if ( (diPrev.ibPort   == diCurr.ibPort)   &&

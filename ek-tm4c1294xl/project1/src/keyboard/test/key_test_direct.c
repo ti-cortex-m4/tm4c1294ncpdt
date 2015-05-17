@@ -51,15 +51,15 @@ static void ShowTestDirect(void)
  
         ShowHi(szDirectEscU); DelayInf();
         if (ReadTimeCan(ibX) == 1) bC++;
-        if (fKey == 1) break;
+        if (fKey == true) break;
 
         ShowHi(szDirectEscV); DelayInf();
         if (ReadCntMonCan(tiCurr.bMonth-1, ibX) == 1) bA++;
-        if (fKey == 1) break;
+        if (fKey == true) break;
 
         ShowHi(szDirectEscS); DelayInf();
         if (ReadCntCurrCan(ibX) == 1) bB++;
-        if (fKey == 1) break;
+        if (fKey == true) break;
 
         ShowHi(szTestDirect); sprintf(szHi+14,"%2u",ibX+1);
 

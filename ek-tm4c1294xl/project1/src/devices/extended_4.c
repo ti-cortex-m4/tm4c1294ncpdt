@@ -233,7 +233,7 @@ void    MakeExtended4(void)
     uchar m;
     for (m=0; m<bExt4Months; m++)
     {
-      if (fKey == 1) break;
+      if (fKey == true) break;
 
       uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
       LoadExt4Values(ibMon);
@@ -498,7 +498,7 @@ uchar   i;
     PckQueryIO(bHEADER+sizeof(value4)+2, 5+3+2);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -553,7 +553,7 @@ uchar   i;
     PckQueryIO(bHEADER+sizeof(value4)*bCANALS+2, 5+10+2);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);

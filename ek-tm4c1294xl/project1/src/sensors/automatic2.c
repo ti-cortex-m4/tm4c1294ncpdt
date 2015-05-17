@@ -177,7 +177,7 @@ uchar   i;
     Query(64+1, 2, 1);  
 
     if (EscInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -222,7 +222,7 @@ uchar   i;
     QueryRealExtendedF(bEXT_GETSIMPLE_ESC_S);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -291,7 +291,7 @@ uchar   i,j;
 
   for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 8)
   {
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
@@ -354,7 +354,7 @@ uchar   i,j;
 
   for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 4)
   {
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
@@ -412,7 +412,7 @@ uchar   i,j;
       QueryEnergyAbsK(j);
 
       if (BccInput() == SER_GOODCHECK) break;
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
 
     if (i == bMINORREPEATS) return(0);
@@ -458,7 +458,7 @@ uchar   i;
     QueryEnergyAbsM();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -497,7 +497,7 @@ uchar   i;
     QueryEnergyAbsN();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -535,7 +535,7 @@ uchar   i,j;
 
   for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 4)
   {
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
@@ -722,7 +722,7 @@ uchar   i;
     QueryTimeD();
 
     if (ExtInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -762,7 +762,7 @@ uchar   i;
     Query(6+1, 2, 1);  
 
     if (EscInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -795,7 +795,7 @@ uchar   i;
     QueryTimeF();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -1268,7 +1268,7 @@ uchar   i,j;
   DelayOff();
   QueryTimeC();                   
 
-  if (RevInput() != SER_GOODCHECK) return(0);  if (fKey == 1) return(0);
+  if (RevInput() != SER_GOODCHECK) return(0);  if (fKey == true) return(0);
   ShowPercent(76);
 
   ReadTimeAltC();                        
@@ -1476,7 +1476,7 @@ uchar   i;
     QueryTimeF();                   
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -1492,7 +1492,7 @@ uchar   i;
     QueryRealExtendedF(bINQ_GETCNTCANMONCURR_ALL);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -1523,7 +1523,7 @@ uchar   i;
   DelayOff();
   QueryTimeG();                   
 
-  if (CodInput() != SER_GOODCHECK) return(0);  if (fKey == 1) return(0);
+  if (CodInput() != SER_GOODCHECK) return(0);  if (fKey == true) return(0);
   ShowPercent(55);
 
   ReadTimeAltG();                        
@@ -1594,7 +1594,7 @@ uchar   i,j;
   DelayOff();
   QueryTimeH();                   
 
-  if (CodInput() != SER_GOODCHECK) return(0);  if (fKey == 1) return(0);
+  if (CodInput() != SER_GOODCHECK) return(0);  if (fKey == true) return(0);
   ShowPercent(55);
 
   ReadTimeAltH();                        
@@ -1613,7 +1613,7 @@ uchar   i,j;
 
   for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 8)
   {
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
@@ -1688,7 +1688,7 @@ uchar   i,j;
 
   for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 4)
   {
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
@@ -1795,7 +1795,7 @@ uchar   i,j;
     reKtrans = 0;
     for (j=0; j<bTARIFFS; j++) 
     {
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
       for (i=0; i<bMINORREPEATS; i++)
       {
         DelayOff();
@@ -1824,7 +1824,7 @@ uchar   i,j;
     reKtrans = 0;
     for (j=0; j<bTARIFFS; j++) 
     {
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
       for (i=0; i<bMINORREPEATS; i++)
       {
         DelayOff();

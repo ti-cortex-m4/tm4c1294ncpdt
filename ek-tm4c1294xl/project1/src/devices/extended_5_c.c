@@ -61,7 +61,7 @@ uchar   i;
     QueryEnergyDayTariffC(bTariff);
 
     if (RevInput() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -81,7 +81,7 @@ uchar   i;
     QueryEnergyAbsTariffC(bTariff);
 
     if (RevInput() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);

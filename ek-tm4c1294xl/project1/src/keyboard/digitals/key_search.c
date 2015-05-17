@@ -186,7 +186,7 @@ uchar   i;
       return(1);
     }
 
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   return(0);
@@ -354,7 +354,7 @@ void    key_SearchBySpeed(void)
             default:  Error();  return; 
           }            
 
-          if (fKey == 1) { fKey = 0; ibZ = 0xFF; }          
+          if (fKey == true) { fKey = 0; ibZ = 0xFF; }          
 
           if (ibZ != 0) break;
         }
@@ -667,7 +667,7 @@ void    key_SearchByNumber(void)
           LongBeep(); DelayMsg();
         }
 
-        if (fKey == 1) { fKey = 0; ibZ = 0xFF; }        
+        if (fKey == true) { fKey = 0; ibZ = 0xFF; }        
 
         if (ibZ == 0xFF) break;
       }

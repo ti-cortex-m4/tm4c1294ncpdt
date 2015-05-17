@@ -29,7 +29,7 @@ uchar   i;
     QueryIdB();
 
     if ((Input() == SER_GOODCHECK) && (ReadIdB() == 1)) break;
-    if (fKey == 1) return false;
+    if (fKey == true) return false;
 
     ShowLo(szFailure20); Delay(1000);
     mpcwFailure2[ibDig]++;
@@ -53,7 +53,7 @@ uchar   i;
     QueryOpenB();
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return false;
+    if (fKey == true) return false;
   }
 
   if (i == bMINORREPEATS) return false;
@@ -74,7 +74,7 @@ uchar   i;
     QueryTimeB();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return false;
+    if (fKey == true) return false;
   }
 
   if (i == bMINORREPEATS) return false;
@@ -96,7 +96,7 @@ uchar   i;
     QueryEnergyB(bTime);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return false;
+    if (fKey == true) return false;
   }
 
   if (i == bMINORREPEATS) return false;
@@ -118,7 +118,7 @@ uchar   i;
     QueryEnergyB(bTime);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return false;
+    if (fKey == true) return false;
 
     if (QueryIdB_Full() == 0) return false;
   }
@@ -158,7 +158,7 @@ static bool QueryCounterMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало 
     QueryCntMonTariffB(ibMon, bTrf);
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == 1) return false;
+    if (fKey == true) return false;
   }
 
   if (i == bMINORREPEATS) return false;
