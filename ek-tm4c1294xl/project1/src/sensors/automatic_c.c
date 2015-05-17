@@ -169,35 +169,30 @@ static bool QueryCntMonTariffC_Full(uchar  ibMon, uchar  bTrf) // на начало мес€
 }
 
 
-status ReadCntMonCanTariffC(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
+status ReadCntMonCanTariffC(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 { 
-uchar   i,j;
-
   Clear();
-  if (ReadKoeffDeviceC() == 0) return(ST4_BADDIGITAL);
+  if (ReadKoeffDeviceC() == 0) return ST4_BADDIGITAL;
+
+  float flK = reKtrans/reKpulse;
 
 
-  if (QueryTimeC_Full() == 0) return(ST4_BADDIGITAL);  
+  if (QueryTimeC_Full() == 0) return ST4_BADDIGITAL;
 
-  j = (ibMonth + 0)%12;
-  if (QueryCntMonTariffC_Full(-((12-1+tiAlt.bMonth-j)%12), ibTariff+1) == 0) return(ST4_BADDIGITAL);  
+  uchar m = (ibMon + 0)%12;
+  if (QueryCntMonTariffC_Full(-((12-1+tiAlt.bMonth-m)%12), ibTrf+1) == 0) return ST4_BADDIGITAL;
 
-  ShowPercent(60+ibTariff);
-  for (i=0; i<4; i++)
-  {
-    mpdwChannelsB[i] = mpdwChannelsA[i];
-  }
+  ShowPercent(60+ibTrf);
 
 
-  reKtrans = reKtrans/reBuffA;
-
+  uchar i;
   for (i=0; i<4; i++) 
   {
-    mpreChannelsB[i] = mpdwChannelsB[i] * reKtrans;
+  	mpdbChannelsC[i] = mpdwChannelsA[i] * flK;
     mpboChannelsA[i] = TRUE;     
   }
 
-  return(ST4_OK);
+  return ST4_OK;
 }
 
 #endif

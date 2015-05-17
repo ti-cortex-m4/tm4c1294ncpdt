@@ -298,6 +298,7 @@ uchar   i;
 
   reBuffA = InBuff(8) + InBuff(9)*0x100;
   reBuffA = 1000000/reBuffA;            // K преобразования
+  reKpulse = reBuffA;
 
   return(1);
 }
