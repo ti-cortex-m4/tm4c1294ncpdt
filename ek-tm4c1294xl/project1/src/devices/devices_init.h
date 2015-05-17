@@ -17,4 +17,4 @@ extern  file const              flShortProfileC;
 
 void    InitDevices1(void);
 void    InitDevices2(void);
-void    ResetDevices(void);
+void    ResetDevices(bool  fFull);
