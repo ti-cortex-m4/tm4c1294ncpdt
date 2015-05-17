@@ -173,7 +173,9 @@ void    MakeExtended4T(void)
   if ((boExt4TFlag == TRUE) && (mpboExt4EnblCan[ibDig] == TRUE))
   {
     ShowHi(szExtended4T); 
-    Clear(); sprintf(szLo+3,"глубина: %u", bExt4TMonths); DelayInf();
+    Clear(); sprintf(szLo+3,"глубина: %u", bExt4TMonths);
+    DelayInf();
+
     ibMonthP = 0xFF;
 
     uchar m;

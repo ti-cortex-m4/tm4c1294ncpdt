@@ -225,7 +225,8 @@ void    MakeExtended4(void)
   if ((boExt4Flag == TRUE) && (mpboExt4EnblCan[ibDig] == TRUE))
   {
     ShowHi(szExtended4); 
-    Clear(); sprintf(szLo+3,"глубина: %u", bExt4Months); DelayInf();
+    Clear(); sprintf(szLo+3,"глубина: %u", bExt4Months);
+    DelayInf();
 
     bFlag4 = 0;
 
