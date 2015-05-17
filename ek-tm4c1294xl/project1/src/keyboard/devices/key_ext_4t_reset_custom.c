@@ -13,7 +13,8 @@ KEY_EXT_4T_RESET_CUSTOM.C
 static char const       szMonths[]      = "Месяцы:         ",
                         szCanals[]      = "Каналы:         ",
                         szCanalFrom[]   = " от: __",
-                        szCanalTo[]     = " до: __";
+                        szCanalTo[]     = " до: __",
+                        szNo[]          = ".нет";
 
 
 extern  char const                   *pszExt4TReset[];
@@ -41,7 +42,7 @@ static uchar ibMonMin, ibMonMax;
         Clear(); 
       
         LoadSlide(pszExt4TReset);
-        szLo[0] = '.';
+        ShowLo(szNo);
       }
       else BlockProgram2(wSET_EXT4T_FLAG, 0);
     } 
@@ -85,7 +86,7 @@ static uchar ibMonMin, ibMonMax;
       {
         enKeyboard = KBD_INPUT5;
 
-        LoadSlide(pszMessages);
+        LoadSlide(pszExt4TReset);
 
         Clear();
         Show();
