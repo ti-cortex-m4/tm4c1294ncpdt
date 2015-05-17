@@ -137,7 +137,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
     }
 
     if (st == ST4_BADDIGITAL) { ShowLo(szNoLink); DelayInf(); }
-    return (0);
+    return false;
   }
   else
   { 
@@ -162,7 +162,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       }
     }
 
-    return (1);
+    return true;
   }
 }
 
@@ -208,7 +208,7 @@ void    MakeExtended4T(void)
 
 
 
-void    PushData4T(uchar  ibCan)
+void    PushData4T(uchar  ibCan, bool  fDouble)
 {
   if (SupportedCntMonCanTariff(ibCan) == false)
   {
@@ -236,7 +236,7 @@ void    PushData4T(uchar  ibCan)
 
 
 
-void    OutExtended4T(void)
+void    OutExtended4T(bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -256,7 +256,7 @@ void    OutExtended4T(void)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4T(c);
+        PushData4T(c, fDouble);
         wSize += (1+4*4+6);
       }
     }
