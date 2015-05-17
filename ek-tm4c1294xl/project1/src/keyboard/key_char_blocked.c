@@ -5,21 +5,20 @@ KEY_CHAR_BLOCKED,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "keyboard.h"
-#include "../display/display.h"
-#include "../flash/files.h"
-#include "key_char.h"
+#include "../console.h"
+#include "key_char_blocked.h"
 
 
 
 //                                            0123456789ABCDEF
-static char const       szMaskChar[]       = "      ___       ";
+static char const       szMaskChar[]       = "      ___       ",
+                        szBlocked[]        = "Запрещено:      ";
 
-char                    szCharLimits[bDISPLAY + bMARGIN];
+extern  char                    szCharLimits[bDISPLAY + bMARGIN];
 
 
 
-void    key_SetCharBlocked(file const  *pflFile, char const  *pszSlide[], uchar const  bMin, uchar const  bMax)
+void    key_SetCharBlocked(file const  *pflFile, char const  *pszSlide[], uchar  bMin, uchar  bMax, boolean  fBlocked, uint  wProgram)
 {
   uchar *pbVal = (uchar *) pflFile->pbBuff;
 
@@ -27,14 +26,23 @@ void    key_SetCharBlocked(file const  *pflFile, char const  *pszSlide[], uchar 
   {
     if (enKeyboard == KBD_ENTER)
     {
-      enKeyboard = KBD_POSTENTER;
-      Clear();
+      if (fBlocked == TRUE)
+      {
+        enKeyboard = KBD_POSTENTER;
+        Clear();
 
-      strcpy(szCharLimits, szClear);
-      sprintf(szCharLimits+4, "%3u..%-3u", bMin, bMax);
+        strcpy(szCharLimits, szClear);
+        sprintf(szCharLimits+4, "%3u..%-3u", bMin, bMax);
 
-      LoadSlide(pszSlide);
-      ShowChar(*pbVal);
+        LoadSlide(pszSlide);
+        ShowChar(*pbVal);
+      }
+      else
+      {
+        ShowHi(szBlocked);
+        Clear();
+        sprintf(szLo+1,"программой %u",wProgram);
+      }
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
