@@ -132,31 +132,31 @@ uchar   i;
 
 
 
-void    QueryCounterMonTariffB(uchar  ibMonth, uchar  bTariff) // на начало мес€ца
+void    QueryCounterMonTariffB(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
+  PushChar(diCurr.bAddress);
   PushChar(6);
   PushChar(2);
 
-  uint i = 0x2BB + 0x55*ibMonth + 0x11*bTariff;
-  PushChar(i / 0x100);
-  PushChar(i % 0x100);
+  uint w = 0x2BB + 0x55*ibMon + 0x11*bTrf;
+  PushChar(w / 0x100);
+  PushChar(w % 0x100);
   PushChar(16);
 
   QueryIO(1+16+2, 3+3+2);
 }
 
 
-bool    QueryCounterMonTariffB_Full(uchar  ibMonth, uchar  bTariff)
+bool    QueryCounterMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
 uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryCounterMonTariffB(ibMonth, bTariff);
+    QueryCounterMonTariffB(ibMon, bTrf);
 
     if (Input() == SER_GOODCHECK) break;  
     if (fKey == 1) return(0);
@@ -169,16 +169,16 @@ uchar   i;
 }
 
 
-status ReadCntMonCanTariffB(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
+status ReadCntMonCanTariffB(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 { 
 uchar   i;
 
   Clear();
   if (ReadKoeffDeviceB() == 0) return(ST4_BADDIGITAL);
 
-  if (QueryCounterMonTariffB_Full(ibMonth, ibTariff) == 0) return(ST4_BADDIGITAL);  
+  if (QueryCounterMonTariffB_Full(ibMon, ibTrf) == 0) return(ST4_BADDIGITAL);  
 
-  ShowPercent(60+ibTariff);
+  ShowPercent(60+ibTrf);
   for (i=0; i<4; i++)
   {
     mpdwChannelsB[i] = mpdwChannelsA[i];
