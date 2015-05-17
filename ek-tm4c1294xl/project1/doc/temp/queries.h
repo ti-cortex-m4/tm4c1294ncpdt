@@ -371,7 +371,7 @@ QUERIES.H
 +   #define bEXT_GETGROUPNAME              115
 +   #define bEXT_SETGROUPNAME              116
 
-#define bEXT_GETEXTENDED40_T           119
++   #define bEXT_GETEXTENDED40_T           119
 
 #define bEXT_CHECKUP                   120
 #define bEXT_CHECKUP_EVENT_DAY         121

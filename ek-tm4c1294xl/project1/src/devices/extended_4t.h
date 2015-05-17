@@ -25,5 +25,4 @@ void    NextMonExtended4T(void);
 
 void    MakeExtended4T(void);
 
-void    OutExtended40T(void);
-void    OutExtended401T(void);
+void    OutExtended4T(void);
