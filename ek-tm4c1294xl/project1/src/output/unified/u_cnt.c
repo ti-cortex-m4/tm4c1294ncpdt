@@ -88,7 +88,7 @@ void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
   else
   {
     value6t va = mpCntMonCan4T[ibCan];
-    PushFloatUni(va.bSelf, va.mpreSelf[ibTar]);
+    PushFloatUni(va.bStatus, va.mpdbValues[ibTar]);
   }
 }
 

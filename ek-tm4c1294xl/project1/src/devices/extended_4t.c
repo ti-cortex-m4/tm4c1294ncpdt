@@ -128,9 +128,9 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       {
         vaT = mpCntMonCan4T[c];
 
-        vaT.bSelf = st;
-        vaT.mpreSelf[ibTrf] = 0;
-        vaT.tiSelf = *GetCurrTimeDate();
+        vaT.bStatus = st;
+        vaT.mpdbValues[ibTrf] = 0;
+        vaT.tiUpdate = *GetCurrTimeDate();
 
         mpCntMonCan4T[c] = vaT;
       }
@@ -153,9 +153,9 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
         {
           vaT = mpCntMonCan4T[c];
 
-          vaT.bSelf = ST4_OK;
-          vaT.mpreSelf[ibTrf] = mpreChannelsB[diPrev.ibLine];
-          vaT.tiSelf = *GetCurrTimeDate();
+          vaT.bStatus = ST4_OK;
+          vaT.mpdbValues[ibTrf] = mpdbChannelsC[diPrev.ibLine];
+          vaT.tiUpdate = *GetCurrTimeDate();
 
           mpCntMonCan4T[c] = vaT;
         }
@@ -187,7 +187,7 @@ void    MakeExtended4T(void)
       LoadExt4TValues(ibMon);
 
       vaT = mpCntMonCan4T[ibDig];
-      if ((vaT.bSelf == ST4_OK) || (vaT.bSelf == ST4_NOTPRESENTED)) continue;
+      if ((vaT.bStatus == ST4_OK) || (vaT.bStatus == ST4_NOTPRESENTED)) continue;
 
       uchar t;
       for (t=0; t<bTARIFFS; t++)
@@ -224,13 +224,13 @@ void    PushData4T(uchar  ibCan)
   {
     value6t va = mpCntMonCan4T[ibCan];
 
-    PushChar(va.bSelf);
+    PushChar(va.bStatus);
 
     uchar t;
     for (t=0; t<bTARIFFS; t++)
-      PushFloat(va.mpreSelf[t]);
+      PushFloat(va.mpdbValues[t]);
 
-    PushTime(va.tiSelf);
+    PushTime(va.tiUpdate);
   }
 }
 

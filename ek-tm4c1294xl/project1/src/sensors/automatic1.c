@@ -165,6 +165,8 @@ uchar   i;
     default: return(0);  
   }
 
+  reKpulse = reBuffA;
+
   mpreLevelDiv[ibDig] = reBuffA / 1000;
 
   return(1);
@@ -202,6 +204,7 @@ uchar   i;
 
   // K преобразования
   reBuffA = 2000;
+  reKpulse = reBuffA;
 
   return(1);
 }

@@ -33,6 +33,8 @@ extern  ulong                   mpdwChannelsA[bCHANNELS],
 extern  real                    mpreChannelsA[bCHANNELS],
                                 mpreChannelsB[bCHANNELS];
 
+extern  double                  mpdbChannelsC[bCHANNELS];
+
 extern  time                    tiChannelC;
 
 
