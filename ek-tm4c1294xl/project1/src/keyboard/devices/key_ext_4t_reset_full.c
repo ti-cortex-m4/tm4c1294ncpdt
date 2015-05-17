@@ -20,7 +20,7 @@ char const             *pszExt4TReset[]  = { szMessage1, szMessage2, szMessage3,
 
 
 
-void    key_SetExt4TReset1(void)
+void    key_SetExt4TResetFull(void)
 {
   if (bKey == bKEY_ENTER)
   {

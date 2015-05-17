@@ -26,7 +26,7 @@ static void ShowAnswer(void)
 }
 
 
-void    key_SetExt4TReset2(void)
+void    key_SetExt4TResetCustom(void)
 {
 static uchar ibCanMin, ibCanMax, ibMonMin, ibMonMax;
 
