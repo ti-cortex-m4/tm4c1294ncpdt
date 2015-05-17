@@ -243,10 +243,10 @@ uchar   i,j;
           if (QueryHistoryP2_Full(i*8+1+1) == 0) return(0);
           ReadEngAbsP(1);
        
-          reBuffB = mpreTransCnt[ibDig];
+          reKtrans = mpreTransCnt[ibDig];
           for (i=0; i<16; i++) 
           {
-            mpreChannelsB[i] *= reBuffB;
+            mpreChannelsB[i] *= reKtrans;
           }
 
           for (i=0; i<4; i++) 
@@ -379,10 +379,10 @@ uchar   i,j;
           if (QueryHistoryP3_Full(i*2+1) == 0) return(ST4_BADDIGITAL);
           ReadEngAbsP_RD();
 
-          reBuffB = mpreTransCnt[ibDig];
+          reKtrans = mpreTransCnt[ibDig];
           for (i=0; i<22; i++) 
           {
-            mpreChannelsB[i] *= reBuffB;
+            mpreChannelsB[i] *= reKtrans;
           }
 
           GetTariffP(ibTariff);

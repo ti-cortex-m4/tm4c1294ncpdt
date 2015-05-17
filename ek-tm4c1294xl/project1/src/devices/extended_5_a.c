@@ -79,14 +79,14 @@ ulong   dw;
   }
 
 
-  reBuffB = reBuffB/reBuffA;
+  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
     if (mpdwChannelsB[i] > 0xF0000000)
       reBuffA = 0;
     else
-      reBuffA = mpdwChannelsB[i] * reBuffB;
+      reBuffA = mpdwChannelsB[i] * reKtrans;
 
     mpreChannelsB[i] = reBuffA;
     mpboChannelsA[i] = TRUE;     

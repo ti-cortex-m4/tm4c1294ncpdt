@@ -53,7 +53,7 @@ uchar   i;
 
 
   // K трансформации
-  reBuffB = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
+  reKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
 
 
   for (i=0; i<bMINORREPEATS; i++)
@@ -122,7 +122,7 @@ uchar   i;
 
 
   // K трансформации
-  reBuffB = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
+  reKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
 
 
   for (i=0; i<bMINORREPEATS; i++)
@@ -198,7 +198,7 @@ uchar   i;
 
 
   // K трансформации
-  reBuffB = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
+  reKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
 
   // K преобразования
   reBuffA = 2000;
@@ -260,14 +260,14 @@ uchar   i;
   co.mpbBuff[2] = InBuff(6);
   co.mpbBuff[3] = InBuff(7);
 
-  reBuffB = co.dwBuff;
+  reKtrans = co.dwBuff;
 
   co.mpbBuff[0] = InBuff(8);
   co.mpbBuff[1] = InBuff(9);
   co.mpbBuff[2] = InBuff(10);
   co.mpbBuff[3] = InBuff(11);
 
-  reBuffB *= co.dwBuff;             // K трансформации
+  reKtrans *= co.dwBuff;             // K трансформации
 
 
   for (i=0; i<bMINORREPEATS; i++)
@@ -349,10 +349,10 @@ uchar   i;
   for (i=0; i<9; i++) PopChar();
 
   if (ExtVersionCod()) PopRealExt_G(); else PopRealBCD_G();
-  reBuffB = reBuffA;
+  reKtrans = reBuffA;
 
   if (ExtVersionCod()) PopRealExt_G(); else PopRealBCD_G();  
-  reBuffB *= reBuffA;                   // K трансформации
+  reKtrans *= reBuffA;                   // K трансформации
   
   reBuffA = 10000;                      // K преобразования
 
@@ -382,7 +382,7 @@ uchar   i;
   if (ReadOpenH() == 0) return(0);
 
 
-  reBuffB = 1;                          // K трансформации
+  reKtrans = 1;                          // K трансформации
 
   if (bVersionCod == 43)
     reBuffA = 1000;                     // K преобразования
@@ -430,7 +430,7 @@ void    SetCanalsAll(void)
 {
   SetCanReal(mprePulseHou,ibDig,&reBuffA);
   SetCanReal(mprePulseMnt,ibDig,&reBuffA);
-  reBuffA = reBuffB;
+  reBuffA = reKtrans;
 
   SetCanReal(mpreTransEng,ibDig,&reBuffA);
   SetCanReal(mpreTransCnt,ibDig,&reBuffA);
@@ -857,7 +857,7 @@ uchar   i;
   InitPop((uint)132 + diCurr.ibLine*3); // K трансформации
   PopRealBCD();
 
-  reBuffB = reBuffA;                    
+  reKtrans = reBuffA;                    
 
 
   InitPop((uint)180 + diCurr.ibLine*3); // K преобразования
@@ -996,7 +996,7 @@ uchar   i;
   if (i == bMINORREPEATS) return(0);
   ReadOpenI();
 
-  reBuffB = 1;                          // K трансформации
+  reKtrans = 1;                          // K трансформации
   reBuffA = 5000;                       // K преобразования
 
   ShowPercent(100);
@@ -1035,7 +1035,7 @@ uchar   i,bT;
   QueryCloseK();
 
 
-  reBuffB = 1;                          // K трансформации
+  reKtrans = 1;                          // K трансформации
   reBuffA = 5000;                       // K преобразования
 
   Delay(1000);
@@ -1065,7 +1065,7 @@ uchar   i;
 
   if (i == bMINORREPEATS) return(0);
 
-  reBuffB = 1;                          // K трансформации
+  reKtrans = 1;                          // K трансформации
   reBuffA = 100;                        // K преобразования
 
   ShowPercent(100);
@@ -1159,7 +1159,7 @@ uchar   i;
   if (i == bMINORREPEATS) return(0);
   ReadOpenO();
 
-  reBuffB = 1;                          // K трансформации
+  reKtrans = 1;                          // K трансформации
   reBuffA = 5000;                       // K преобразования
 
   ShowPercent(100);
@@ -1192,7 +1192,7 @@ uchar   i;
 
   Delay(1000); Clear();
 
-  reBuffB = 1;                          // K трансформации
+  reKtrans = 1;                          // K трансформации
   reBuffA = 5000;                       // K преобразования
 
   ShowPercent(100);
@@ -1250,7 +1250,7 @@ bool    AutomaticR(void)
   if (ReadCntCurrR() == 0) return(0);
 
   reBuffA = 1;                          // K преобразования
-  reBuffB = 1;                          // K трансформации
+  reKtrans = 1;                          // K трансформации
   SetCanalsAll();                       // сохранение К преобразования и К трансформации
 
   return(1);
@@ -1269,7 +1269,7 @@ bool    AutomaticS(void)
   if (QueryConfigS_Full(50) == 0) return(0);
 
   reBuffA = wDividerS;                  // K преобразования
-  reBuffB = 1;                          // K трансформации
+  reKtrans = 1;                          // K трансформации
   SetCanalsAll();                       // сохранение К преобразования и К трансформации
 
   return(1);

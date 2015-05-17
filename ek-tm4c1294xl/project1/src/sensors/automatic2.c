@@ -45,17 +45,17 @@ uchar   i;
 
   if (QueryEnergyA_Full(0,100) == 0) return(0);
 
-  reBuffB = reBuffB/reBuffA;
+  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = mpdwChannelsA[i] * reBuffB;
+    reBuffA = mpdwChannelsA[i] * reKtrans;
     mpreChannelsB[i] = reBuffA;
 
     mpboChannelsA[i] = TRUE;     
   }
 
-  reBuffA = reBuffB*coEnergy.dwBuff;
+  reBuffA = reKtrans*coEnergy.dwBuff;
 
   return(1);
 }
@@ -77,17 +77,17 @@ uchar   i;
 
   if (QueryEnergyB_Full(0,100) == 0) return(0);
 
-  reBuffB = reBuffB/reBuffA;
+  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = mpdwChannelsA[i] * reBuffB * 2;
+    reBuffA = mpdwChannelsA[i] * reKtrans * 2;
     mpreChannelsB[i] = reBuffA;
 
     mpboChannelsA[i] = TRUE;
   }
 
-  reBuffA = reBuffB*coEnergy.dwBuff * 2;
+  reBuffA = reKtrans*coEnergy.dwBuff * 2;
 
   return(1);
 }
@@ -116,17 +116,17 @@ uchar   i;
   ReadEnergyC();
 
 
-  reBuffB = reBuffB/reBuffA;
+  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = mpdwChannelsA[i] * reBuffB;
+    reBuffA = mpdwChannelsA[i] * reKtrans;
     mpreChannelsB[i] = reBuffA;
 
     mpboChannelsA[i] = TRUE;     
   }
 
-  reBuffA = reBuffB*coEnergy.dwBuff;
+  reBuffA = reKtrans*coEnergy.dwBuff;
 
   return(1);
 }
@@ -266,8 +266,8 @@ uchar   i;
 
   ReadEnergyG();
 
-  reBuffB = GetCanReal(mpreTransCnt,ibDig);
-  reBuffA *= reBuffB;
+  reKtrans = GetCanReal(mpreTransCnt,ibDig);
+  reBuffA *= reKtrans;
 
   return(1);
 }
@@ -322,11 +322,11 @@ uchar   i,j;
   ShowPercent(100);
 
 
-  reBuffB = GetCanReal(mpreTransCnt,ibDig);
+  reKtrans = GetCanReal(mpreTransCnt,ibDig);
 
   for (i=0; i<1; i++) 
   {
-    reBuffA = mpreCodEng30[0] * reBuffB;
+    reBuffA = mpreCodEng30[0] * reKtrans;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = TRUE;     
@@ -350,7 +350,7 @@ uchar   i,j;
 
   Clear();
 
-  reBuffB = 0;
+  reKtrans = 0;
 
   for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счЄтчике: 4)
   {
@@ -373,14 +373,14 @@ uchar   i,j;
     else 
     {
       ReadEnergyI();
-      reBuffB += reBuffA;
+      reKtrans += reBuffA;
     }
   }
 
   ShowPercent(100);
 
 
-  reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig);
+  reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = TRUE;     
@@ -425,11 +425,11 @@ uchar   i,j;
   QueryCloseK();
 
 
-  reBuffB = GetCanReal(mpreTransCnt,ibDig);
+  reKtrans = GetCanReal(mpreTransCnt,ibDig);
 
   for (i=0; i<bMaxLines; i++) 
   {
-    reBuffA = GetCanReal(mpreChannelsB, i) * reBuffB;
+    reBuffA = GetCanReal(mpreChannelsB, i) * reKtrans;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = TRUE;     
@@ -531,7 +531,7 @@ uchar   i,j;
 
   Clear();
 
-  reBuffB = 0;
+  reKtrans = 0;
 
   for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счЄтчике: 4)
   {
@@ -554,14 +554,14 @@ uchar   i,j;
     else 
     {
       ReadEnergyO();
-      reBuffB += reBuffA;
+      reKtrans += reBuffA;
     }
   }
 
   ShowPercent(100);
 
 
-  reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig);
+  reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = TRUE;     
@@ -594,10 +594,10 @@ uchar   i;
   QueryCloseP();
 
 
-  reBuffB = mpreTransCnt[ibDig];
+  reKtrans = mpreTransCnt[ibDig];
   for (i=0; i<16; i++) 
   {
-    mpreChannelsB[i] *= reBuffB;
+    mpreChannelsB[i] *= reKtrans;
   }
 
   for (i=0; i<4; i++) 
@@ -1151,19 +1151,19 @@ ulong   dw;
   }
 
 
-  reBuffB = reBuffB/reBuffA;
+  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
 
-    reBuffA = mpdwChannelsB[i] * reBuffB;
+    reBuffA = mpdwChannelsB[i] * reKtrans;
     mpreChannelsB[i] = reBuffA;
 
     mpboChannelsA[i] = TRUE;     
   }
 
-  reBuffA = mpdwChannelsB[diCurr.ibLine] * reBuffB;
+  reBuffA = mpdwChannelsB[diCurr.ibLine] * reKtrans;
 
   return(1);
 }
@@ -1234,19 +1234,19 @@ ulong   dw;
   }
 
 
-  reBuffB = reBuffB/reBuffA;
+  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
 
-    reBuffA = mpdwChannelsB[i] * reBuffB * 2;
+    reBuffA = mpdwChannelsB[i] * reKtrans * 2;
     mpreChannelsB[i] = reBuffA;
 
     mpboChannelsA[i] = TRUE;
   }
 
-  reBuffA = mpdwChannelsB[diCurr.ibLine] * reBuffB * 2;
+  reBuffA = mpdwChannelsB[diCurr.ibLine] * reKtrans * 2;
 
   return(1);
 }
@@ -1323,17 +1323,17 @@ uchar   i,j;
   }
 
 
-  reBuffB = reBuffB/reBuffA;
+  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = mpdwChannelsB[i] * reBuffB;
+    reBuffA = mpdwChannelsB[i] * reKtrans;
     mpreChannelsB[i] = reBuffA;
 
     mpboChannelsA[i] = TRUE;     
   }
 
-  reBuffA = mpdwChannelsB[diCurr.ibLine] * reBuffB;
+  reBuffA = mpdwChannelsB[diCurr.ibLine] * reKtrans;
 
   return(1);
 }
@@ -1517,7 +1517,7 @@ uchar   i;
 
   Clear();
   if (ReadKoeffDeviceG() == 0) return(0);
-  reBuffX = reBuffB;
+  reBuffX = reKtrans;
 
 
   DelayOff();
@@ -1564,7 +1564,7 @@ uchar   i;
   {
     mpreChannelsB[i] = mpreCodEng30[i*5+0] - mpreCodEng30[i*5+3];
 
-    reBuffA = GetCanReal(mpreChannelsB, i) * reBuffB;
+    reBuffA = GetCanReal(mpreChannelsB, i) * reKtrans;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = TRUE;     
@@ -1588,7 +1588,7 @@ uchar   i,j;
 
   Clear();
   if (ReadKoeffDeviceH() == 0) return(0);
-  reBuffX = reBuffB;
+  reBuffX = reKtrans;
 
 
   DelayOff();
@@ -1684,7 +1684,7 @@ uchar   i,j;
   if (tiAlt.bMonth != ibMonth+1) return(0);     // значени€е счЄтчиков на начало текущего мес€ца
 
 
-  reBuffB = 0;
+  reKtrans = 0;
 
   for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счЄтчике: 4)
   {
@@ -1707,7 +1707,7 @@ uchar   i,j;
     else 
     {
       ReadEnergyI();
-      reBuffB += reBuffA;
+      reKtrans += reBuffA;
     }
   }
 
@@ -1720,7 +1720,7 @@ uchar   i,j;
   reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibDig,0x0F);
   reBuffA = reBuffA / GetCanReal(mpreTransEng,ibDig);
 
-  reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
+  reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = TRUE;     
@@ -1758,8 +1758,8 @@ bool    ReadCntMonCanK(void)
          reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibCan,0x0F);
          reBuffA = reBuffA / GetCanReal(mpreTransEng,ibCan);
 
-         reBuffB = GetCanReal(mpreChannelsB, ibMinor);
-         reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibCan) - reBuffA;
+         reKtrans = GetCanReal(mpreChannelsB, ibMinor);
+         reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibCan) - reBuffA;
          SetCanReal(mpreChannelsB, ibMinor);
        }  
     }
@@ -1792,7 +1792,7 @@ uchar   i,j;
 
   if (tiAlt.bMonth != ibMonth+1) 
   {
-    reBuffB = 0;
+    reKtrans = 0;
     for (j=0; j<bTARIFFS; j++) 
     {
       if (fKey == 1) return(0);
@@ -1809,11 +1809,11 @@ uchar   i,j;
       else 
       {
         ReadEnergyO();
-        reBuffB += reBuffA;
+        reKtrans += reBuffA;
       }
     }
 
-    reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig);
+    reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig);
     SetCanReal(mpreChannelsB, 0);
  
     mpboChannelsA[0] = TRUE;     
@@ -1821,7 +1821,7 @@ uchar   i,j;
   }
   else 
   {
-    reBuffB = 0;
+    reKtrans = 0;
     for (j=0; j<bTARIFFS; j++) 
     {
       if (fKey == 1) return(0);
@@ -1838,7 +1838,7 @@ uchar   i,j;
       else 
       {
         ReadEnergyO();
-        reBuffB += reBuffA;
+        reKtrans += reBuffA;
       }
     }
 
@@ -1848,7 +1848,7 @@ uchar   i,j;
     reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibDig,0x0F);
     reBuffA = reBuffA / GetCanReal(mpreTransEng,ibDig);
 
-    reBuffA = reBuffB * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
+    reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
     SetCanReal(mpreChannelsB, 0);
  
     mpboChannelsA[0] = TRUE;     
