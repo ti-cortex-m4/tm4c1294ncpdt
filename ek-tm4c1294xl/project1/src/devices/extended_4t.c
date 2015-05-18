@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 EXTENDED_4T.C
 
- Значения счетчиков на НАЧАЛО месяцев (по тарифам)
+ Значения счетчиков на начало месяцев по тарифам (oтчет №86с от 07.04.2013)
 ------------------------------------------------------------------------------*/
 
 #include "../console.h"
@@ -53,11 +53,14 @@ void    InitExtended4T(void)
 
 void    ResetExtended4T(bool  fFull)
 { 
-  boExt4TFlag = FALSE;
-  SaveFile(&flExt4TFlag);
+  if (fFull)
+  {
+    boExt4TFlag = FALSE;
+    SaveFile(&flExt4TFlag);
 
-  bExt4TMonths = 4;
-  SaveFile(&flExt4TMonths);
+    bExt4TMonths = 4;
+    SaveFile(&flExt4TMonths);
+  }
 
 
   memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
