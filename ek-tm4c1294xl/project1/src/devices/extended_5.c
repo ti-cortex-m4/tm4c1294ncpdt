@@ -174,9 +174,25 @@ void    CloseExtended5(void)
 
 
 
-uint    PushData5(uchar  ibCan, bool  fDouble)
+uint    PushData5(uchar  ibCan)
 {
+  uint wSize = 0;
+
   value5 va = mpCntDayCan5[ibCan];
+
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
+  {
+    wSize += PushFloat(va.vaValue5.mpreSelf[t]);
+  }
+
+  wSize += PushTime(va.tiSelf);
+  wSize += PushChar(va.boSelf);
+
+  wSize += PushInt(va.cwOK);
+  wSize += PushInt(va.cwError);
+
+  return wSize;
 }
 
 
