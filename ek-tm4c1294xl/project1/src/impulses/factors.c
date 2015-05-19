@@ -10,15 +10,15 @@ FACTORS,C
 
 
 
-file const              flTransEng = {TRANS_ENG, &mpreTransEng, sizeof(real)*bCANALS};
-file const              flTransCnt = {TRANS_CNT, &mpreTransCnt, sizeof(real)*bCANALS};
+file const              flTransEng = {TRANS_ENG, &mpreTransEng, sizeof(float)*bCANALS};
+file const              flTransCnt = {TRANS_CNT, &mpreTransCnt, sizeof(float)*bCANALS};
 
-file const              flPulseHou = {PULSE_HOU, &mprePulseHou, sizeof(real)*bCANALS};
-file const              flPulseMnt = {PULSE_MNT, &mprePulseMnt, sizeof(real)*bCANALS};
+file const              flPulseHou = {PULSE_HOU, &mprePulseHou, sizeof(float)*bCANALS};
+file const              flPulseMnt = {PULSE_MNT, &mprePulseMnt, sizeof(float)*bCANALS};
 
-file const              flCount = {COUNT, &mpreCount, sizeof(real)*bCANALS};
-file const              flLosse = {LOSSE, &mpreLosse, sizeof(real)*bCANALS};
-file const              flLevelDiv = {LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS};
+file const              flCount = {COUNT, &mpreCount, sizeof(float)*bCANALS};
+file const              flLosse = {LOSSE, &mpreLosse, sizeof(float)*bCANALS};
+file const              flLevel = {LEVEL, &mpreLevel, sizeof(float)*bCANALS};
 
 
 
@@ -32,7 +32,7 @@ void    InitFactors(void)
 
   LoadFile(&flCount);
   LoadFile(&flLosse);
-  LoadFile(&flLevelDiv);
+  LoadFile(&flLevel);
 
   StartFactors();
 }
@@ -54,7 +54,7 @@ uchar   c;
   for (c=0; c<bCANALS; c++)
   {
     mprePulseMnt[c] = mprePulseHou[c];
-    mpreLevelDiv[c] = 1;
+    mpreLevel[c] = 1;
 
     mpreTransCnt[c] = 1; // в нормальном режиме равен 1
   }
@@ -67,7 +67,7 @@ uchar   c;
 
   SaveFile(&flCount);
   SaveFile(&flLosse);
-  SaveFile(&flLevelDiv);
+  SaveFile(&flLevel);
 }
 
 
@@ -82,14 +82,14 @@ void    SaveFactors(void)
 
   SaveFile(&flCount);
   SaveFile(&flLosse);
-  SaveFile(&flLevelDiv);
+  SaveFile(&flLevel);
 }
 
 
 
-real    AddLosse(uchar  c)
+static float GetLosse(uchar  ibCan)
 {
-  return 1 + mpreLosse[c];
+  return 1 + mpreLosse[ibCan];
 }
 
 
@@ -98,9 +98,9 @@ void    StartFactors(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpreValueEngHou[c] = (mpreTransEng[c] / mprePulseHou[c]) * AddLosse(c);
-    mpreValueCntHou[c] = (mpreTransCnt[c] / mprePulseHou[c]) * AddLosse(c);
-    mpreValueEngMnt[c] = (mpreTransEng[c] / mprePulseMnt[c]) * AddLosse(c);
-    mpreValueCntMnt[c] = (mpreTransCnt[c] / mprePulseMnt[c]) * AddLosse(c);
+    mpreValueEngHou[c] = (mpreTransEng[c] / mprePulseHou[c]) * GetLosse(c);
+    mpreValueCntHou[c] = (mpreTransCnt[c] / mprePulseHou[c]) * GetLosse(c);
+    mpreValueEngMnt[c] = (mpreTransEng[c] / mprePulseMnt[c]) * GetLosse(c);
+    mpreValueCntMnt[c] = (mpreTransCnt[c] / mprePulseMnt[c]) * GetLosse(c);
   }
 }

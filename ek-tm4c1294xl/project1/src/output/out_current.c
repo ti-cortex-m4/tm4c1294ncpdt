@@ -42,7 +42,7 @@ uint    w;
     {
       PushFloat(mpreEsc_S[i]);
       PushTime(mptiEsc_S[i]);
-      PushFloat(mpreLevelDiv[i]);
+      PushFloat(mpreLevel[i]);
       PushFloat(mpreCount[i]);
 
       w += 18;
