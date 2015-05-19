@@ -27,9 +27,6 @@ file const              flExt4TMonths = {EXT_4T_MONTHS, &bExt4TMonths, sizeof(uc
 static char const       szExtended4T[]  = "Опрос данных: 6 ";
 
 
-static value6t          vaT;
-
-
 
 boolean SaveExt4TValues(uchar  ibMon)
 {
@@ -129,13 +126,13 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        vaT = mpCntMonCan4T[c];
+        value6t va = mpCntMonCan4T[c];
 
-        vaT.bStatus = st;
-        vaT.mpdbValues[ibTrf] = 0;
-        vaT.tiUpdate = *GetCurrTimeDate();
+        va.bStatus = st;
+        va.mpdbValues[ibTrf] = 0;
+        va.tiUpdate = *GetCurrTimeDate();
 
-        mpCntMonCan4T[c] = vaT;
+        mpCntMonCan4T[c] = va;
       }
     }
 
@@ -154,13 +151,13 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          vaT = mpCntMonCan4T[c];
+          value6t va = mpCntMonCan4T[c];
 
-          vaT.bStatus = ST4_OK;
-          vaT.mpdbValues[ibTrf] = mpdbChannelsC[diPrev.ibLine];
-          vaT.tiUpdate = *GetCurrTimeDate();
+          va.bStatus = ST4_OK;
+          va.mpdbValues[ibTrf] = mpdbChannelsC[diPrev.ibLine];
+          va.tiUpdate = *GetCurrTimeDate();
 
-          mpCntMonCan4T[c] = vaT;
+          mpCntMonCan4T[c] = va;
         }
       }
     }
@@ -189,8 +186,8 @@ void    MakeExtended4T(void)
       uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
       LoadExt4TValues(ibMon);
 
-      vaT = mpCntMonCan4T[ibDig];
-      if ((vaT.bStatus == ST4_OK) || (vaT.bStatus == ST4_NOTPRESENTED)) continue;
+      status bStatus = mpCntMonCan4T[ibDig].bStatus;
+      if ((bStatus == ST4_OK) || (bStatus == ST4_NOTPRESENTED)) continue;
 
       uchar t;
       for (t=0; t<bTARIFFS; t++)
@@ -237,7 +234,7 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
     uchar t;
     for (t=0; t<bTARIFFS; t++)
     {
-    	wSize += PushFloatOrDouble(va.mpdbValues[t], fDouble);
+      wSize += PushFloatOrDouble(va.mpdbValues[t], fDouble);
     }
 
     wSize += PushTime(va.tiUpdate);
