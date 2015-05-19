@@ -12,9 +12,9 @@ EXTENDED_4T,C
 #include "../digitals/digitals_messages.h"
 #include "../devices/devices.h"
 #include "../sensors/automatic_p.h"
-#include "../sensors/automatic3.h"
 #include "../time/rtc.h"
 #include "../time/timedate.h"
+#include "automatic3.h"
 #include "extended_4t.h"
 
 
