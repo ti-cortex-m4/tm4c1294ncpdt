@@ -35,7 +35,7 @@ typedef struct
 // тип 'буфер типа 5'
 typedef struct
 {
-  real          mpreSelf[bTARIFFS];
+  double        mpdbValues[bTARIFFS];
 } buff5;
 
 
@@ -44,8 +44,8 @@ typedef struct
 {
   buff5         vaValue5;
   time          tiUpdate;
-  boolean       boSelf;
-  uint          cwOK,cwError;
+  boolean       boSuccess;
+  uint          cwSuccess,cwError;
 } value5;
 
 
