@@ -101,6 +101,7 @@ uchar   PushInt(uint  w)
 {
   PushChar(w / 0x100);
   PushChar(w % 0x100);
+
   return sizeof(uint);
 }
 
@@ -109,11 +110,12 @@ uchar   PushLong(ulong  dw)
 {
   PushInt(dw / 0x10000);
   PushInt(dw % 0x10000);
+
   return sizeof(ulong);
 }
 
 
-void    PushFloat(float  fl)
+uchar    PushFloat(float  fl)
 {
   static combo32 co;
   co.reBuff = fl;
@@ -122,10 +124,12 @@ void    PushFloat(float  fl)
   PushChar(co.mpbBuff[2]);
   PushChar(co.mpbBuff[1]);
   PushChar(co.mpbBuff[0]);
+
+  return sizeof(float);
 }
 
 
-void    PushDouble(double  db)
+uchar   PushDouble(double  db)
 {
   static combo64 co;
   co.dbBuff = db;
@@ -138,6 +142,8 @@ void    PushDouble(double  db)
   PushChar(co.mpbBuff[2]);
   PushChar(co.mpbBuff[1]);
   PushChar(co.mpbBuff[0]);
+
+  return sizeof(double);
 }
 
 
@@ -159,6 +165,7 @@ uchar   PushFloatOrDouble(double  db, bool  fDouble)
 uchar   PushTime(time  ti)
 {
   Push(&ti, sizeof(time));
+
   return sizeof(time);
 }
 
