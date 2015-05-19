@@ -129,7 +129,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
         value4t va = mpCntMonCan4T[c];
 
         va.bStatus = bStatus;
-        va.mpdbValues[ibTrf] = 0;
+        va.mpdbValuesT[ibTrf] = 0;
         va.tiUpdate = *GetCurrTimeDate();
 
         mpCntMonCan4T[c] = va;
@@ -154,7 +154,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
           value4t va = mpCntMonCan4T[c];
 
           va.bStatus = ST4_OK;
-          va.mpdbValues[ibTrf] = mpdbChannelsC[diPrev.ibLine];
+          va.mpdbValuesT[ibTrf] = mpdbChannelsC[diPrev.ibLine];
           va.tiUpdate = *GetCurrTimeDate();
 
           mpCntMonCan4T[c] = va;
@@ -235,7 +235,7 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
     uchar t;
     for (t=0; t<bTARIFFS; t++)
     {
-      wSize += PushFloatOrDouble(va.mpdbValues[t], fDouble);
+      wSize += PushFloatOrDouble(va.mpdbValuesT[t], fDouble);
     }
 
     wSize += PushTime(va.tiUpdate);

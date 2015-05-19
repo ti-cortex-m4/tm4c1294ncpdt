@@ -35,7 +35,7 @@ typedef struct
 // тип 'буфер типа 5'
 typedef struct
 {
-  double        mpdbValues[bTARIFFS];
+  double        mpdbValuesT[bTARIFFS];
 } buff5;
 
 
@@ -62,7 +62,7 @@ typedef struct
 typedef struct
 {
   status        bStatus;
-  double        mpdbValues[bTARIFFS];
+  double        mpdbValuesT[bTARIFFS];
   time          tiUpdate;
 } value4t;
 

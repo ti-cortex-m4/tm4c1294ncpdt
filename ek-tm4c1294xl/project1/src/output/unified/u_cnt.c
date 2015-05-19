@@ -88,7 +88,7 @@ void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
   else
   {
     value4t va = mpCntMonCan4T[ibCan];
-    PushFloatUni(va.bStatus, va.mpdbValues[ibTar]);
+    PushFloatUni(va.bStatus, va.mpdbValuesT[ibTar]);
   }
 }
 
@@ -190,7 +190,7 @@ void    GetCntCanTarUni(void)
       for (t=bInBuffA; t<bInBuffA+bInBuffB; t++)
       {
         PushTime(mpCntDayCan5[c-1].tiUpdate);
-        PushFloat(mpCntDayCan5[c-1].vaValue5.mpdbValues[t-1]);
+        PushFloat(mpCntDayCan5[c-1].vaValue5.mpdbValuesT[t-1]);
       }
     }
 

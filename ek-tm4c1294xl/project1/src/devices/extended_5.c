@@ -100,7 +100,7 @@ static bool MakeDevices(void)
     uchar i;
     for (i=0; i<4; i++)
     {
-      vaBuff[i].mpdbValues[t] = mpreChannelsB[i];
+      vaBuff[i].mpdbValuesT[t] = mpreChannelsB[i];
     }
   }
 
@@ -196,7 +196,7 @@ void    OutExtended50(void)
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloat(va.vaValue5.mpdbValues[t]);
+          wSize += PushFloat(va.vaValue5.mpdbValuesT[t]);
         }
 
         wSize += PushTime(va.tiUpdate);
@@ -236,7 +236,7 @@ void    OutExtended51(void)
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloat(va.vaValue5.mpdbValues[t]);
+          wSize += PushFloat(va.vaValue5.mpdbValuesT[t]);
         }
 
         wSize += PushTime(va.tiUpdate);
