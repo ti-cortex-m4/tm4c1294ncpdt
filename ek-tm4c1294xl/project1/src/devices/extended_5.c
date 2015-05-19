@@ -30,7 +30,7 @@ static char const       szExtended5[]   = "Опрос данных: 5 ";
 
 
 
-static buff5            vaBuff[4];
+static value5a          stBuff[4];
 
 
 
@@ -99,7 +99,7 @@ bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 
 static bool MakeDevices(void)
 {
-  memset(&vaBuff, 0, sizeof(vaBuff));  
+  memset(&stBuff, 0, sizeof(stBuff));  
 
   uchar t;
   for (t=0; t<bTARIFFS; t++)
@@ -114,7 +114,7 @@ static bool MakeDevices(void)
     uchar i;
     for (i=0; i<4; i++)
     {
-      vaBuff[i].mpdbValuesT[t] = mpreChannelsB[i];
+      stBuff[i].mpdbValuesT[t] = mpreChannelsB[i];
     }
   }
 
@@ -140,7 +140,7 @@ void    MakeExtended5(void)
         {
           mpCntDayCan5[c].cwSuccess++;
           mpCntDayCan5[c].tiUpdate = *GetCurrTimeDate();
-          mpCntDayCan5[c].vaValue5 = vaBuff[diPrev.ibLine];
+          mpCntDayCan5[c].stValue = stBuff[diPrev.ibLine];
           mpCntDayCan5[c].boSuccess = TRUE;
         }
       }
@@ -188,12 +188,12 @@ void    OutExtended50(void)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        value5 va = mpCntDayCan5[c];
+        value5b va = mpCntDayCan5[c];
 
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloat(va.vaValue5.mpdbValuesT[t]);
+          wSize += PushFloat(va.stValue.mpdbValuesT[t]);
         }
 
         wSize += PushTime(va.tiUpdate);
@@ -228,12 +228,12 @@ void    OutExtended51(void)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        value5 va = mpCntDayCan5[c];
+        value5b va = mpCntDayCan5[c];
 
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloat(va.vaValue5.mpdbValuesT[t]);
+          wSize += PushFloat(va.stValue.mpdbValuesT[t]);
         }
 
         wSize += PushTime(va.tiUpdate);

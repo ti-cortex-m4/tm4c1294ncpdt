@@ -36,17 +36,17 @@ typedef struct
 typedef struct
 {
   double        mpdbValuesT[bTARIFFS];
-} buff5;
+} value5a;
 
 
 // тип 'данные типа 5'
 typedef struct
 {
-  buff5         vaValue5;
+  value5a       stValue;
   time          tiUpdate;
   boolean       boSuccess;
   uint          cwSuccess,cwError;
-} value5;
+} value5b;
 
 
 // тип 'данные типа 6'
