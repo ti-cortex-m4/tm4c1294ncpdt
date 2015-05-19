@@ -174,45 +174,35 @@ void    CloseExtended5(void)
 
 
 
-uint    PushData5(uchar  ibCan)
-{
-  uint wSize = 0;
-
-  value5 va = mpCntDayCan5[ibCan];
-
-  uchar t;
-  for (t=0; t<bTARIFFS; t++)
-  {
-    wSize += PushFloat(va.vaValue5.mpreSelf[t]);
-  }
-
-  wSize += PushTime(va.tiSelf);
-  wSize += PushChar(va.boSelf);
-
-  wSize += PushInt(va.cwOK);
-  wSize += PushInt(va.cwError);
-
-  return wSize;
-}
-
-
 void    OutExtended50(void)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
   else
   {
-    InitPushPtr();            
-    PushChar(boExt5Flag);
-    uint wSize = 1;
+    InitPushPtr();
+
+    uint wSize = 0;
+    wSize += PushChar(boExt5Flag);
 
     uchar c;
     for (c=0; c<bCANALS; c++)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        Push(&mpCntDayCan5[c], sizeof(value5));
-        wSize += sizeof(value5);
+        value5 va = mpCntDayCan5[c];
+
+        uchar t;
+        for (t=0; t<bTARIFFS; t++)
+        {
+          wSize += PushFloat(va.vaValue5.mpreSelf[t]);
+        }
+
+        wSize += PushTime(va.tiSelf);
+        wSize += PushChar(va.boSelf);
+
+        wSize += PushInt(va.cwOK);
+        wSize += PushInt(va.cwError);
       }
     }
 
@@ -228,19 +218,25 @@ void    OutExtended51(void)
     Result(bRES_NEEDWORK);
   else
   {
-    InitPushPtr();            
-    PushChar(boExt5Flag);
-    uint wSize = 1;
+    InitPushPtr();
+
+    uint wSize = 0;
+    wSize += PushChar(boExt5Flag);
 
     uchar c;
     for (c=0; c<bCANALS; c++)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        Push(&mpCntDayCan5[c].vaValue5, sizeof(buff5));
-        wSize += sizeof(buff5);
-        Push(&mpCntDayCan5[c].tiSelf, sizeof(time));
-        wSize += sizeof(time);
+        value5 va = mpCntDayCan5[ibCan];
+
+        uchar t;
+        for (t=0; t<bTARIFFS; t++)
+        {
+          wSize += PushFloat(va.vaValue5.mpreSelf[t]);
+        }
+
+        wSize += PushTime(va.tiSelf);
       }
     }
 
