@@ -52,6 +52,19 @@ void    ResetExtended5(void)
 
 
 
+void    NextDayExtended5(void)
+{
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    mpCntDayCan5[c].boSuccess = FALSE;
+  }
+
+  SaveFile(&flExt5Values);
+}
+
+
+
 bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 {
   Clear();
@@ -91,10 +104,11 @@ static bool MakeDevices(void)
   uchar t;
   for (t=0; t<bTARIFFS; t++)
   {
-    if (fKey == true) return (0);
+    if (fKey == true) return false;
     Clear();
 
-    memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
+    memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
+
     if (ReadCntAbsTariff(ibDig,t+1) == 0) return (0);
 
     uchar i;
@@ -104,7 +118,7 @@ static bool MakeDevices(void)
     }
   }
 
-  return (1);
+  return true;
 }
 
 
@@ -114,7 +128,7 @@ void    MakeExtended5(void)
   {
     ShowHi(szExtended5); Clear();
    
-    if (MakeDevices() == 1)
+    if (MakeDevices() == true)
     {
       LoadCurrDigital(ibDig);
 
@@ -145,31 +159,14 @@ void    MakeExtended5(void)
         }
       }
 
-      Error();
-      DelayInf();
-    }  
+      Error(); DelayInf();
+    }
+
+    SaveFile(&flExt5Values);
 
     ShowCanalNumber(ibDig);
     Clear();
   }
-}
-
-
-void    NextDayExtended5(void)
-{
-  uchar c;
-  for (c=0; c<bCANALS; c++)
-  {
-    mpCntDayCan5[c].boSuccess = FALSE;
-  }
-
-  SaveFile(&flExt5Values);
-}
-
-
-void    CloseExtended5(void)
-{
-  SaveFile(&flExt5Values);
 }
 
 
