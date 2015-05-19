@@ -100,7 +100,7 @@ static bool MakeDevices(void)
     uchar i;
     for (i=0; i<4; i++)
     {
-      vaBuff[i].mpreSelf[t] = mpreChannelsB[i];
+      vaBuff[i].mpdbValues[t] = mpreChannelsB[i];
     }
   }
 
@@ -110,7 +110,7 @@ static bool MakeDevices(void)
 
 void    MakeExtended5(void)
 { 
-  if ((boExt5Flag == TRUE) && ((mpCntDayCan5[ibDig].boSelf == FALSE) || (boManualProfile == TRUE)))
+  if ((boExt5Flag == TRUE) && ((mpCntDayCan5[ibDig].boSuccess == FALSE) || (boManualProfile == TRUE)))
   {
     ShowHi(szExtended5); Clear();
    
@@ -124,10 +124,10 @@ void    MakeExtended5(void)
         LoadPrevDigital(c);
         if (CompareCurrPrevLines(ibDig, c) == 1)
         {
-          mpCntDayCan5[c].cwOK++;
+          mpCntDayCan5[c].cwSuccess++;
           mpCntDayCan5[c].tiUpdate = *GetCurrTimeDate();
           mpCntDayCan5[c].vaValue5 = vaBuff[diPrev.ibLine];
-          mpCntDayCan5[c].boSelf = TRUE;
+          mpCntDayCan5[c].boSuccess = TRUE;
         }
       }
     }
@@ -160,7 +160,7 @@ void    NextDayExtended5(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpCntDayCan5[c].boSelf = FALSE;
+    mpCntDayCan5[c].boSuccess = FALSE;
   }
 
   SaveFile(&flExt5Values);
@@ -196,13 +196,14 @@ void    OutExtended50(void)
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloat(va.vaValue5.mpreSelf[t]);
+          wSize += PushFloat(va.vaValue5.mpdbValues[t]);
         }
 
         wSize += PushTime(va.tiUpdate);
-        wSize += PushChar(va.boSelf);
 
-        wSize += PushInt(va.cwOK);
+        wSize += PushChar(va.boSuccess);
+
+        wSize += PushInt(va.cwSuccess);
         wSize += PushInt(va.cwError);
       }
     }
@@ -235,7 +236,7 @@ void    OutExtended51(void)
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloat(va.vaValue5.mpreSelf[t]);
+          wSize += PushFloat(va.vaValue5.mpdbValues[t]);
         }
 
         wSize += PushTime(va.tiUpdate);
