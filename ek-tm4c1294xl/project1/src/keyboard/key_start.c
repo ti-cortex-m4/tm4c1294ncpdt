@@ -19,7 +19,7 @@ KEY_START.C
 #include "../digitals/digitals.h"
 #include "../special/defects.h"
 #include "../time/rtc.h"
-#include "../factors.h"
+#include "../impulses/factors.h"
 #include "../flash/files.h"
 #include "../flash/records.h"
 #include "../serial/speeds_display.h"
