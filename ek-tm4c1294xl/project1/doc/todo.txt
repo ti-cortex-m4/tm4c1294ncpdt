@@ -19,7 +19,6 @@ ext4t dev C
 ext5 загрузка при старте
 ext5 push value5
 value5a value5b
-rename mpvaValue5 -> mpCntDayCurrCan5
 
 P90  + '-' задание всех каналов одного счетчика
 

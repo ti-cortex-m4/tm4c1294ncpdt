@@ -22,7 +22,7 @@ EXTENDED_5.C
 
 
 file const              flExt5Flag = {EXT_5_FLAG, &boExt5Flag, sizeof(boolean)};
-file const              flExt5Values = {EXT_5_VALUES, &mpvaValue5, sizeof(mpvaValue5)};
+file const              flExt5Values = {EXT_5_VALUES, &mpCntDayCan5, sizeof(mpCntDayCan5)};
 
 
 //                                         0123456789ABCDEF
@@ -46,7 +46,7 @@ void    ResetExtended5(void)
   boExt5Flag = FALSE;
   SaveFile(&flExt5Flag);
 
-  memset(&mpvaValue5, 0, sizeof(mpvaValue5));
+  memset(&mpCntDayCan5, 0, sizeof(mpCntDayCan5));
   SaveFile(&flExt5Values);
 }
 
@@ -110,7 +110,7 @@ static bool MakeDevices(void)
 
 void    MakeExtended5(void)
 { 
-  if ((boExt5Flag == TRUE) && ((mpvaValue5[ibDig].boSelf == FALSE) || (boManualProfile == TRUE)))
+  if ((boExt5Flag == TRUE) && ((mpCntDayCan5[ibDig].boSelf == FALSE) || (boManualProfile == TRUE)))
   {
     ShowHi(szExtended5); Clear();
    
@@ -124,10 +124,10 @@ void    MakeExtended5(void)
         LoadPrevDigital(c);
         if (CompareCurrPrevLines(ibDig, c) == 1)
         {
-          mpvaValue5[c].cwOK++;
-          mpvaValue5[c].tiSelf = *GetCurrTimeDate();
-          mpvaValue5[c].vaValue5 = vaBuff[diPrev.ibLine];
-          mpvaValue5[c].boSelf = TRUE;
+          mpCntDayCan5[c].cwOK++;
+          mpCntDayCan5[c].tiSelf = *GetCurrTimeDate();
+          mpCntDayCan5[c].vaValue5 = vaBuff[diPrev.ibLine];
+          mpCntDayCan5[c].boSelf = TRUE;
         }
       }
     }
@@ -141,7 +141,7 @@ void    MakeExtended5(void)
         LoadPrevDigital(c);
         if (CompareCurrPrevLines(ibDig, c) == 1)
         {
-          mpvaValue5[c].cwError++;
+          mpCntDayCan5[c].cwError++;
         }
       }
 
@@ -160,7 +160,7 @@ void    NextDayExtended5(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpvaValue5[c].boSelf = FALSE;
+    mpCntDayCan5[c].boSelf = FALSE;
   }
 
   SaveFile(&flExt5Values);
@@ -172,6 +172,12 @@ void    CloseExtended5(void)
   SaveFile(&flExt5Values);
 }
 
+
+
+uint    PushData5(uchar  ibCan, bool  fDouble)
+{
+  value5 va = mpCntDayCan5[ibCan];
+}
 
 
 void    OutExtended50(void)
@@ -189,7 +195,7 @@ void    OutExtended50(void)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        Push(&mpvaValue5[c], sizeof(value5));
+        Push(&mpCntDayCan5[c], sizeof(value5));
         wSize += sizeof(value5);
       }
     }
@@ -215,9 +221,9 @@ void    OutExtended51(void)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        Push(&mpvaValue5[c].vaValue5, sizeof(buff5));
+        Push(&mpCntDayCan5[c].vaValue5, sizeof(buff5));
         wSize += sizeof(buff5);
-        Push(&mpvaValue5[c].tiSelf, sizeof(time));
+        Push(&mpCntDayCan5[c].tiSelf, sizeof(time));
         wSize += sizeof(time);
       }
     }
