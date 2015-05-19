@@ -1,14 +1,11 @@
 /*------------------------------------------------------------------------------
-FACTORS.C
+FACTORS,C
 
  Коэффициенты по каналам
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../include/flash.h"
 #include "../flash/files.h"
-#include "../engine.h"
-#include "../energy.h"
 #include "factors.h"
 
 
@@ -59,7 +56,7 @@ uchar   c;
     mprePulseMnt[c] = mprePulseHou[c];
     mpreLevelDiv[c] = 1;
 
-    mpreTransCnt[c] = 1;                      // в нормальном режиме: 1
+    mpreTransCnt[c] = 1; // в нормальном режиме равен 1
   }
 
   SaveFile(&flTransEng);
@@ -98,21 +95,12 @@ real    AddLosse(uchar  c)
 
 void    StartFactors(void)
 {
-  real  re;
-
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    re = mpreTransEng[c] / mprePulseHou[c];
-    mpreValueEngHou[c] = re * AddLosse(c);
-
-    re = mpreTransCnt[c] / mprePulseHou[c];
-    mpreValueCntHou[c] = re * AddLosse(c);
-
-    re = mpreTransEng[c] / mprePulseMnt[c];
-    mpreValueEngMnt[c] = re * AddLosse(c);
-
-    re = mpreTransCnt[c] / mprePulseMnt[c];
-    mpreValueCntMnt[c] = re * AddLosse(c);
+    mpreValueEngHou[c] = (mpreTransEng[c] / mprePulseHou[c]) * AddLosse(c);
+    mpreValueCntHou[c] = (mpreTransCnt[c] / mprePulseHou[c]) * AddLosse(c);
+    mpreValueEngMnt[c] = (mpreTransEng[c] / mprePulseMnt[c]) * AddLosse(c);
+    mpreValueCntMnt[c] = (mpreTransCnt[c] / mprePulseMnt[c]) * AddLosse(c);
   }
 }
