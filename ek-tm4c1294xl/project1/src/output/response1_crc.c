@@ -10,7 +10,7 @@ RESPONSE1_CRC.C
 #include "../memory/mem_settings.h"
 #include "../include/states.h"
 #include "../serial/ports.h"
-#include "../factors.h"
+#include "../impulses/factors.h"
 #include "out_common.h"
 #include "out_rtc.h"
 #include "out_groups.h"

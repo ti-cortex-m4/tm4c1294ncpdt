@@ -23,7 +23,7 @@ KEY_RESET.C
 #include "../output/esc/esc.h"
 #include "../output/unified/uni.h"
 #include "../engine.h"
-#include "../factors.h"
+#include "../impulses/factors.h"
 #include "../settings.h"
 #include "../hardware/memory.h"
 #include "../storage/storage.h"

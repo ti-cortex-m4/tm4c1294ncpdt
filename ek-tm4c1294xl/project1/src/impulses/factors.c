@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------
 FACTORS.C
 
-
+ Коэффициенты по каналам
 ------------------------------------------------------------------------------*/
 
-#include "main.h"
-#include "memory/mem_factors.h"
-#include "include/flash.h"
-#include "flash/files.h"
-#include "engine.h"
-#include "energy.h"
+#include "../main.h"
+#include "../include/flash.h"
+#include "../flash/files.h"
+#include "../engine.h"
+#include "../energy.h"
 #include "factors.h"
+
 
 
 file const              flTransEng = {TRANS_ENG, &mpreTransEng, sizeof(real)*bCANALS};
@@ -22,6 +22,7 @@ file const              flPulseMnt = {PULSE_MNT, &mprePulseMnt, sizeof(real)*bCA
 file const              flCount = {COUNT, &mpreCount, sizeof(real)*bCANALS};
 file const              flLosse = {LOSSE, &mpreLosse, sizeof(real)*bCANALS};
 file const              flLevelDiv = {LEVEL, &mpreLevelDiv, sizeof(real)*bCANALS};
+
 
 
 void    InitFactors(void)
@@ -71,6 +72,7 @@ uchar   c;
   SaveFile(&flLosse);
   SaveFile(&flLevelDiv);
 }
+
 
 
 void    SaveFactors(void)

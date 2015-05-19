@@ -15,7 +15,7 @@ KEY_AUTOMATIC.C
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../digitals/digitals_display.h"
-#include "../../factors.h"
+#include "../../impulses/factors.h"
 
 
 
