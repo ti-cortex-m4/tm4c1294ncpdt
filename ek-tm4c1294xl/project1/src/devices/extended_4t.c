@@ -93,7 +93,7 @@ void    ResetExtended4T_Custom(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin
     uchar c;
     for (c=ibCanMin; c<=ibCanMax; c++)
     {
-      memset(&mpCntMonCan4T[c], 0, sizeof(value6t));
+      memset(&mpCntMonCan4T[c], 0, sizeof(value4t));
     }
 
     SaveExt4TValues(m);
@@ -126,7 +126,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        value6t va = mpCntMonCan4T[c];
+        value4t va = mpCntMonCan4T[c];
 
         va.bStatus = bStatus;
         va.mpdbValues[ibTrf] = 0;
@@ -151,7 +151,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          value6t va = mpCntMonCan4T[c];
+          value4t va = mpCntMonCan4T[c];
 
           va.bStatus = ST4_OK;
           va.mpdbValues[ibTrf] = mpdbChannelsC[diPrev.ibLine];
@@ -226,7 +226,7 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
   }
   else
   {
-    value6t va = mpCntMonCan4T[ibCan];
+    value4t va = mpCntMonCan4T[ibCan];
 
     uint wSize = 0;
     wSize += PushChar(va.bStatus);

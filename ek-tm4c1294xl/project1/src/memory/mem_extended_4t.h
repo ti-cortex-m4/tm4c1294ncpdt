@@ -8,4 +8,4 @@ extern  boolean                 boExt4TFlag;
 
 extern  uchar                   bExt4TMonths;
 
-extern  value6t                 mpCntMonCan4T[bCANALS];
+extern  value4t                 mpCntMonCan4T[bCANALS];

@@ -15,4 +15,4 @@ boolean                 boExt4TFlag;
 uchar                   bExt4TMonths;
 
 // буфер значений счетчиков на начало мес€цев по тарифам
-value6t                 mpCntMonCan4T[bCANALS];
+value4t                 mpCntMonCan4T[bCANALS];

@@ -64,7 +64,7 @@ typedef struct
   status        bStatus;
   double        mpdbValues[bTARIFFS];
   time          tiUpdate;
-} value6t;
+} value4t;
 
 
 // тип 'данные типа 7'
