@@ -16,6 +16,12 @@ ext4, ext4t, ext6 - next month
 ext4 ? ext4Е MakeDevices - rename
 ext4t dev C
 ext4t final check
+rename value6t -> value4t
+
+ext5 загрузка при старте
+ext5 push value5
+value5a value5b
+rename mpvaValue5 -> mpCntDayCurrCan5
 
 P90  + '-' задание всех каналов одного счетчика
 
