@@ -167,7 +167,7 @@ uchar   i;
 
   reKpulse = reBuffA;
 
-  mpreLevelDiv[ibDig] = reBuffA / 1000;
+  mpreLevel[ibDig] = reBuffA / 1000;
 
   return(1);
 }
@@ -499,7 +499,7 @@ bool    AutomaticB(void)
 bool    AutomaticJ(void)
 {
   if (ReadKoeffDeviceB_Special() == 0) return(0);
-  mpreLevelDiv[ibDig] = reBuffA / 1000;
+  mpreLevel[ibDig] = reBuffA / 1000;
 
 
   SetCanalsAll();                        // сохранение К преобразования и К трасформации

@@ -73,7 +73,7 @@ void    Response1_CRC(void)
       case bINQ_GETPULSE_MNT: OutGetFloatCan(mprePulseMnt); break;
       case bINQ_GETCOUNT:     OutGetFloatCan(mpreCount);    break;
       case bINQ_GETLOSSE:     OutGetFloatCan(mpreLosse);    break;
-      case bINQ_GETLEVEL:     OutGetFloatCan(mpreLevelDiv); break;
+      case bINQ_GETLEVEL:     OutGetFloatCan(mpreLevel); break;
 
       case bINQ_SETTRANS_ENG: OutSetFloatCan(mpreTransEng, &flTransEng); break;
       case bINQ_SETTRANS_CNT: OutSetFloatCan(mpreTransCnt, &flTransCnt); break;
@@ -81,7 +81,7 @@ void    Response1_CRC(void)
       case bINQ_SETPULSE_MNT: OutSetFloatCan(mprePulseMnt, &flPulseMnt); break;
       case bINQ_SETCOUNT:     OutSetFloatCan(mpreCount,    &flCount);    break;
       case bINQ_SETLOSSE:     OutSetFloatCan(mpreLosse,    &flLosse);    break;
-      case bINQ_SETLEVEL:     OutSetFloatCan(mpreLevelDiv, &flLevelDiv); break;
+      case bINQ_SETLEVEL:     OutSetFloatCan(mpreLevel, &flLevel); break;
 
       case bINQ_GETKOEFF: OutAllFactors(); break;
 

@@ -48,7 +48,7 @@ void    ShowFactors(void)
 
       case bSET_LOSSE:         ShowFloat( GetCanReal(mpreLosse, ibX)*100 );    break;
 
-      case bSET_LEVEL:         ShowFloat( GetCanReal(mpreLevelDiv,    ibX) );  break;
+      case bSET_LEVEL:         ShowFloat( GetCanReal(mpreLevel,    ibX) );  break;
     }
   }
   else
@@ -62,7 +62,7 @@ void    ShowFactors(void)
 
       case bGET_LOSSE:         ShowFloat( GetCanReal(mpreLosse, ibX)*100 );    break;
 
-      case bSET_LEVEL:         ShowFloat( GetCanReal(mpreLevelDiv,    ibX) );  break;
+      case bSET_LEVEL:         ShowFloat( GetCanReal(mpreLevel,    ibX) );  break;
     }
   }
 
@@ -209,8 +209,8 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            SetCanReal(mpreLevelDiv,ibX,&reBuffA);
-            SaveFile(&flLevelDiv);
+            SetCanReal(mpreLevel,ibX,&reBuffA);
+            SaveFile(&flLevel);
           }
           else Beep();
           break;

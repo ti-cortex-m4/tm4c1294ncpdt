@@ -29,4 +29,4 @@ real                    mpreCount[bCANALS];
 real                    mpreLosse[bCANALS];
 
 // массив отношений К преобразования
-real                    mpreLevelDiv[bCANALS];
+real                    mpreLevel[bCANALS];

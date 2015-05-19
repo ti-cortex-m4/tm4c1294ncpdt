@@ -19,4 +19,4 @@ extern  real                    mpreCount[bCANALS];
 
 extern  real                    mpreLosse[bCANALS];
 
-extern  real                    mpreLevelDiv[bCANALS];
+extern  real                    mpreLevel[bCANALS];
