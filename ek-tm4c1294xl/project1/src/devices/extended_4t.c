@@ -114,9 +114,9 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
 
-  status st = ReadCntMonCanTariff(ibMon, ibDig, ibTrf);
+  status bStatus = ReadCntMonCanTariff(ibMon, ibDig, ibTrf);
 
-  if ((st == ST4_BADDIGITAL) || (st == ST4_NOTSUPPORTED) || (st == ST4_NOTPRESENTED)) 
+  if ((bStatus == ST4_BADDIGITAL) || (bStatus == ST4_NOTSUPPORTED) || (bStatus == ST4_NOTPRESENTED)) 
   { 
     LoadCurrDigital(ibDig);
 
@@ -128,7 +128,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       {
         value6t va = mpCntMonCan4T[c];
 
-        va.bStatus = st;
+        va.bStatus = bStatus;
         va.mpdbValues[ibTrf] = 0;
         va.tiUpdate = *GetCurrTimeDate();
 
@@ -136,7 +136,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       }
     }
 
-    if (st == ST4_BADDIGITAL) { ShowLo(szNoLink); DelayInf(); }
+    if (bStatus == ST4_BADDIGITAL) { ShowLo(szNoLink); DelayInf(); }
     return false;
   }
   else
