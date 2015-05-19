@@ -229,6 +229,7 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
     value4t va = mpCntMonCan4T[ibCan];
 
     uint wSize = 0;
+
     wSize += PushChar(va.bStatus);
 
     uchar t;
