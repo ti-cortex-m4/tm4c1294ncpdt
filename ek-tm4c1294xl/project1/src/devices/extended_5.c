@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 EXTENDED_5.C
 
- Cчетчики (раздельно по тарифам) на начало текущих суток
+ Значения счетчиков на начало текущих суток по тарифам
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -22,12 +22,13 @@ EXTENDED_5.C
 
 
 
+file const              flExt5Flag = {EXT_5_FLAG, &boExt5Flag, sizeof(boolean)};
+file const              flExt5Values = {EXT_5_VALUES, &mpvaValue5, sizeof(mpvaValue5)};
+
+
 //                                         0123456789ABCDEF
 static char const       szExtended5[]   = "Опрос данных: 5 ";
 
-
-file const              flExt5Flag = {EXT_5_FLAG, &boExt5Flag, sizeof(boolean)};
-file const              flExt5Values = {EXT_5_VALUES, &mpvaValue5, sizeof(mpvaValue5)};
 
 
 static buff5            vaBuff[4];

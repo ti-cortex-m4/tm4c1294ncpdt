@@ -4,6 +4,10 @@ EXTENDED_5.H
 
 ------------------------------------------------------------------------------*/
 
+#include "../memory/mem_extended_5.h"
+
+
+
 extern  file const              flExt5Flag;
 
 
