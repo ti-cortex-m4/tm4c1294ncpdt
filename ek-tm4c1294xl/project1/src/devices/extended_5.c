@@ -125,7 +125,7 @@ void    MakeExtended5(void)
         if (CompareCurrPrevLines(ibDig, c) == 1)
         {
           mpCntDayCan5[c].cwOK++;
-          mpCntDayCan5[c].tiSelf = *GetCurrTimeDate();
+          mpCntDayCan5[c].tiUpdate = *GetCurrTimeDate();
           mpCntDayCan5[c].vaValue5 = vaBuff[diPrev.ibLine];
           mpCntDayCan5[c].boSelf = TRUE;
         }
@@ -183,6 +183,7 @@ void    OutExtended50(void)
     InitPushPtr();
 
     uint wSize = 0;
+
     wSize += PushChar(boExt5Flag);
 
     uchar c;
@@ -198,7 +199,7 @@ void    OutExtended50(void)
           wSize += PushFloat(va.vaValue5.mpreSelf[t]);
         }
 
-        wSize += PushTime(va.tiSelf);
+        wSize += PushTime(va.tiUpdate);
         wSize += PushChar(va.boSelf);
 
         wSize += PushInt(va.cwOK);
@@ -221,6 +222,7 @@ void    OutExtended51(void)
     InitPushPtr();
 
     uint wSize = 0;
+
     wSize += PushChar(boExt5Flag);
 
     uchar c;
@@ -228,7 +230,7 @@ void    OutExtended51(void)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        value5 va = mpCntDayCan5[ibCan];
+        value5 va = mpCntDayCan5[c];
 
         uchar t;
         for (t=0; t<bTARIFFS; t++)
@@ -236,7 +238,7 @@ void    OutExtended51(void)
           wSize += PushFloat(va.vaValue5.mpreSelf[t]);
         }
 
-        wSize += PushTime(va.tiSelf);
+        wSize += PushTime(va.tiUpdate);
       }
     }
 

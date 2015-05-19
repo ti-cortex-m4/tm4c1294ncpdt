@@ -189,7 +189,7 @@ void    GetCntCanTarUni(void)
       uchar t;
       for (t=bInBuffA; t<bInBuffA+bInBuffB; t++)
       {
-        PushTime(mpCntDayCan5[c-1].tiSelf);
+        PushTime(mpCntDayCan5[c-1].tiUpdate);
         PushFloat(mpCntDayCan5[c-1].vaValue5.mpreSelf[t-1]);
       }
     }

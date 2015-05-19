@@ -43,7 +43,7 @@ typedef struct
 typedef struct
 {
   buff5         vaValue5;
-  time          tiSelf;
+  time          tiUpdate;
   boolean       boSelf;
   uint          cwOK,cwError;
 } value5;
