@@ -12,4 +12,4 @@ MEM_EXTENDED_5.C
 boolean                 boExt5Flag;
 
 // буфер значений счетчиков на начало текущих суток по тарифам
-value5                  mpCntDayCan5[bCANALS];
+value5b                 mpCntDayCan5[bCANALS];
