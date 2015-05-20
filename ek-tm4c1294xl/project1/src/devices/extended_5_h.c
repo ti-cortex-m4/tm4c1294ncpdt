@@ -97,7 +97,7 @@ uchar   i;
 }
 
 
-bit     ReadCntAbsTariffH(uchar  bTariff)
+bit     ReadCntDayTariffH(uchar  bTariff)
 { 
 uchar   i;
 

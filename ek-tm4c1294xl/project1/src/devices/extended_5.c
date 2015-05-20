@@ -65,7 +65,7 @@ void    NextDayExtended5(void)
 
 
 
-bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
+bool    ReadCntDayTariff(uchar  ibCanal, uchar  bTariff)
 {
   Clear();
 
@@ -76,7 +76,7 @@ bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
   {
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadCntAbsTariffA(bTariff) );
+    case 1:  return( ReadCntDayTariffA(bTariff) );
 #endif
 
 #ifndef SKIP_B
@@ -85,11 +85,11 @@ bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadCntAbsTariffC(bTariff) );
+    case 3:  return( ReadCntDayTariffC(bTariff) );
 #endif
 
 #ifndef SKIP_H
-    case 10: return( ReadCntAbsTariffH(bTariff) );
+    case 10: return( ReadCntDayTariffH(bTariff) );
 #endif
 
     default: return 0;
@@ -109,7 +109,7 @@ static bool MakeDevices(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadCntAbsTariff(ibDig,t+1) == 0) return (0);
+    if (ReadCntDayTariff(ibDig,t+1) == 0) return (0);
 
     uchar i;
     for (i=0; i<4; i++)

@@ -51,7 +51,7 @@ uchar   i;
 }
 
 
-bool    ReadCntAbsTariffA(uchar  bTariff)
+bool    ReadCntDayTariffA(uchar  bTariff)
 { 
 uchar   i;
 ulong   dw;

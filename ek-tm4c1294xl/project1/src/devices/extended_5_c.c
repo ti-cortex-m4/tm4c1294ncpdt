@@ -19,7 +19,7 @@ EXTENDED_5_C.C
 
 #ifndef SKIP_C
 
-void    QueryEnergyDayTariffC(uchar  bTrf)
+static void QueryEnergyDayTariffC(uchar  bTrf)
 {
   InitPush(0);
 
@@ -35,7 +35,7 @@ void    QueryEnergyDayTariffC(uchar  bTrf)
 }
 
 
-void    QueryEnergyAbsTariffC(uchar  bTrf)
+static void QueryEnergyAbsTariffC(uchar  bTrf)
 {
   InitPush(0);
 
@@ -51,7 +51,7 @@ void    QueryEnergyAbsTariffC(uchar  bTrf)
 }
 
 
-bool    QueryEnergyDayTariffC_Full(uchar  bTrf)
+static bool QueryEnergyDayTariffC_Full(uchar  bTrf)
 {
 uchar   i;
 
@@ -71,7 +71,7 @@ uchar   i;
 }
 
 
-bool    QueryEnergyAbsTariffC_Full(uchar  bTrf)
+static bool QueryEnergyAbsTariffC_Full(uchar  bTrf)
 {
 uchar   i;
 
@@ -91,7 +91,7 @@ uchar   i;
 }
 
 
-bool    ReadCntAbsTariffC(uchar  bTrf)
+bool    ReadCntDayTariffC(uchar  bTrf)
 { 
 uchar   i;
 ulong   dw;
