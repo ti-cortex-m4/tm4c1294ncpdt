@@ -13,4 +13,4 @@ void    auto_GetCurrDate(void);
 void    key_CorrectTime(void);
 
 void    ShowCurrTime(void);
-void    HideCurrentTime(bool  fClearProgram);
+void    HideCurrTime(bool  fClearProgram);
