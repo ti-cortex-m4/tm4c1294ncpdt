@@ -19,5 +19,5 @@ void    NextDayExtended5(void);
 
 void    MakeExtended5(void);
 
-void    OutExtended50(void);
-void    OutExtended51(void);
+void    OutExtended50(bool  fDouble);
+void    OutExtended51(bool  fDouble);

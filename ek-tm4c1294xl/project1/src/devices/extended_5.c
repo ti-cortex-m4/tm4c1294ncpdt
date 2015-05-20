@@ -139,7 +139,7 @@ void    MakeExtended5(void)
 
 
 
-void    OutExtended50(void)
+void    OutExtended50(bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -161,7 +161,7 @@ void    OutExtended50(void)
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloat(va.stValue.mpdbValuesT[t]);
+          wSize += PushFloatOrDouble(va.stValue.mpdbValuesT[t], fDouble);
         }
 
         wSize += PushTime(va.tiUpdate);
@@ -178,7 +178,7 @@ void    OutExtended50(void)
 }
 
 
-void    OutExtended51(void)
+void    OutExtended51(bool  fDouble)
 {
 
   if (enGlobal == GLB_PROGRAM)
@@ -201,7 +201,7 @@ void    OutExtended51(void)
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloat(va.stValue.mpdbValuesT[t]);
+          wSize += PushFloatOrDouble(va.stValue.mpdbValuesT[t], fDouble);
         }
 
         wSize += PushTime(va.tiUpdate);
