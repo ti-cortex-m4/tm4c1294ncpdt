@@ -14,7 +14,7 @@ EXTENDED_4T,C
 #include "../sensors/automatic_p.h"
 #include "../time/rtc.h"
 #include "../time/timedate.h"
-#include "automatic3.h"
+#include "automatic_4t.h"
 #include "extended_4t.h"
 
 
