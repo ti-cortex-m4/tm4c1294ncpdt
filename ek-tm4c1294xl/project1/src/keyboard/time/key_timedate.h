@@ -6,6 +6,8 @@ KEY_TIMEDATE.H
 
 void    key_SetCurrTime(void);
 void    key_SetCurrDate(void);
+void    key_CorrectTime(void);
+
 void    auto_GetCurrTime(void);   
 void    auto_GetCurrDate(void); 
 
