@@ -19,7 +19,7 @@ EXTENDED_5_C.C
 
 #ifndef SKIP_C
 
-static void QueryEnergyDayTariffC(uchar  bTrf)
+static void QueryEngDayTariffC(uchar  bTrf)
 {
   InitPush(0);
 
@@ -35,7 +35,7 @@ static void QueryEnergyDayTariffC(uchar  bTrf)
 }
 
 
-static void QueryEnergyAbsTariffC(uchar  bTrf)
+static void QueryEngAbsTariffC(uchar  bTrf)
 {
   InitPush(0);
 
@@ -51,14 +51,14 @@ static void QueryEnergyAbsTariffC(uchar  bTrf)
 }
 
 
-static bool QueryEnergyDayTariffC_Full(uchar  bTrf)
+static bool QueryEngDayTariffC_Full(uchar  bTrf)
 {
 uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryEnergyDayTariffC(bTrf);
+    QueryEngDayTariffC(bTrf);
 
     if (RevInput() == SER_GOODCHECK) break;  
     if (fKey == true) return false;
@@ -71,13 +71,13 @@ uchar   i;
 }
 
 
-static bool QueryEnergyAbsTariffC_Full(uchar  bTrf)
+static bool QueryEngAbsTariffC_Full(uchar  bTrf)
 {
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryEnergyAbsTariffC(bTrf);
+    QueryEngAbsTariffC(bTrf);
 
     if (RevInput() == SER_GOODCHECK) break;  
     if (fKey == true) return false;
@@ -100,7 +100,7 @@ uchar   i;
   float flK = reKtrans/reKpulse;
 
 
-  if (QueryEnergyDayTariffC_Full(bTrf) == 0) return false; // энергия за текущие сутки
+  if (QueryEngDayTariffC_Full(bTrf) == 0) return false; // энергия за текущие сутки
   ShowPercent(60+bTrf);
 
   for (i=0; i<4; i++)
@@ -109,7 +109,7 @@ uchar   i;
   }
 
 
-  if (QueryEnergyAbsTariffC_Full(bTrf) == 0) return false; // энергия всего
+  if (QueryEngAbsTariffC_Full(bTrf) == 0) return false; // энергия всего
   ShowPercent(80+bTrf);
 
   for (i=0; i<4; i++)
