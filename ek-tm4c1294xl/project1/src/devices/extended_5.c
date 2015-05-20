@@ -38,10 +38,13 @@ void    InitExtended5(void)
 }
 
 
-void    ResetExtended5(void)
+void    ResetExtended5(bool  fFull)
 {
-  boExt5Flag = FALSE;
-  SaveFile(&flExt5Flag);
+  if (fFull)
+  {
+    boExt5Flag = FALSE;
+    SaveFile(&flExt5Flag);
+  }
 
   memset(&mpCntDayCan5, 0, sizeof(mpCntDayCan5));
   SaveFile(&flExt5Values);
