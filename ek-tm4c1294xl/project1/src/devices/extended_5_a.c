@@ -17,7 +17,7 @@ EXTENDED_5_A.C
 
 
 
-void    QueryEnergyTariffA(uchar  bTime, uchar  bTrf)
+static void QueryEngTariffA(uchar  bTime, uchar  bTrf)
 {
   InitPush(0);
 
@@ -31,14 +31,14 @@ void    QueryEnergyTariffA(uchar  bTime, uchar  bTrf)
 }
 
 
-bool    QueryEnergyTariffA_Full(uchar  bTime, uchar  bTrf)
+static bool QueryEngTariffA_Full(uchar  bTime, uchar  bTrf)
 {
 uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryEnergyTariffA(bTime,bTrf);
+    QueryEngTariffA(bTime,bTrf);
 
     if (Input() == SER_GOODCHECK) break;  
     if (fKey == true) return false;
@@ -54,44 +54,34 @@ uchar   i;
 bool    ReadCntDayTariffA(uchar  bTrf)
 { 
 uchar   i;
-ulong   dw;
 
   Clear();
   if (ReadKoeffDeviceA() == 0) return false;
 
+  float flK = reKtrans/reKpulse;
 
-  if (QueryEnergyTariffA_Full(0x40,bTrf) == 0) return false;
+
+  if (QueryEngTariffA_Full(0x40,bTrf) == 0) return false; // энергия за текущие сутки
 
   ShowPercent(60+bTrf);
   for (i=0; i<4; i++)
   {
-    dw = mpdwChannelsA[i];
-    mpdwChannelsB[i] = dw;
+    mpdwChannelsB[i] = mpdwChannelsA[i];
   }
 
 
-  if (QueryEnergyTariffA_Full(0,bTrf) == 0) return false;
+  if (QueryEngTariffA_Full(0,bTrf) == 0) return false; // энергия всего
 
   ShowPercent(80+bTrf);
   for (i=0; i<4; i++)
   {
-    dw  = mpdwChannelsA[i];
-    dw -= mpdwChannelsB[i];
-
-    mpdwChannelsB[i] = dw;
+    mpdwChannelsB[i] = mpdwChannelsA[i] - mpdwChannelsB[i]; // энергия всего минус энергия за текущие сутки равно значению счетчика на начало текущих суток
   }
 
 
-  reKtrans = reKtrans/reBuffA;
-
   for (i=0; i<4; i++) 
   {
-    if (mpdwChannelsB[i] > 0xF0000000)
-      reBuffA = 0;
-    else
-      reBuffA = mpdwChannelsB[i] * reKtrans;
-
-    mpreChannelsB[i] = reBuffA;
+    mpdbChannelsC[i] = (mpdwChannelsB[i] > 0xF0000000) ? 0 : mpdwChannelsB[i] * flK;
     mpboChannelsA[i] = TRUE;     
   }
 

@@ -86,6 +86,8 @@ uchar   i;
     default: return(0);  
   }
 
+  reKpulse = reBuffA;
+
   return(1);
 }
 
