@@ -61,34 +61,32 @@ ulong   dw;
   Clear();
   if (ReadKoeffDeviceB_Special() == 0) return(0);
 
+  float flK = reKtrans/reKpulse;
 
-  if (QueryEnergyTariffB_Full(0x40,bTariff) == 0) return(0);  
+
+  if (QueryEnergyTariffB_Full(0x40,bTariff) == 0) return(0); // энергия за текущие сутки
   ShowPercent(60+bTariff);
+
   for (i=0; i<4; i++)
   {
-    dw = mpdwChannelsA[i];
-    mpdwChannelsB[i] = dw;
+    mpdwChannelsB[i] = mpdwChannelsA[i];
   }
 
-  if (QueryEnergyTariffB_Full(0,bTariff) == 0) return(0);             
+  if (QueryEnergyTariffB_Full(0,bTariff) == 0) return(0); // энергия всего
   ShowPercent(80+bTariff);
+
   for (i=0; i<4; i++)
   {
-    dw  = mpdwChannelsA[i];
-    dw -= mpdwChannelsB[i];
-
-    mpdwChannelsB[i] = dw;
+    mpdwChannelsB[i] = mpdwChannelsA[i] - mpdwChannelsB[i]; // энергия всего минус энергия за текущие сутки равно значению счетчика на начало текущих суток
   }
 
-
-  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
     if (mpdwChannelsB[i] > 0xF0000000)
       reBuffA = 0;
     else
-      reBuffA = mpdwChannelsB[i] * reKtrans * 2;
+      reBuffA = mpdwChannelsB[i] * flK * 2;
 
     mpreChannelsB[i] = reBuffA;
     mpboChannelsA[i] = TRUE;     
