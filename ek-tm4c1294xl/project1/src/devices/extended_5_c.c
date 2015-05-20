@@ -19,7 +19,7 @@ EXTENDED_5_C.C
 
 #ifndef SKIP_C
 
-void    QueryEnergyDayTariffC(uchar  bTariff)
+void    QueryEnergyDayTariffC(uchar  bTrf)
 {
   InitPush(0);
 
@@ -28,14 +28,14 @@ void    QueryEnergyDayTariffC(uchar  bTariff)
   PushChar(2);
 
   PushChar(0);
-  PushChar(bTariff);
+  PushChar(bTrf);
   PushChar(0);
 
   RevQueryIO(4+16+2, 3+3+2);
 }
 
 
-void    QueryEnergyAbsTariffC(uchar  bTariff)
+void    QueryEnergyAbsTariffC(uchar  bTrf)
 {
   InitPush(0);
 
@@ -44,21 +44,21 @@ void    QueryEnergyAbsTariffC(uchar  bTariff)
   PushChar(1);
 
   PushChar(0);
-  PushChar(bTariff);
+  PushChar(bTrf);
   PushChar(0);
 
   RevQueryIO(4+16+2, 3+3+2);
 }
 
 
-bool    QueryEnergyDayTariffC_Full(uchar  bTariff)
+bool    QueryEnergyDayTariffC_Full(uchar  bTrf)
 {
 uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryEnergyDayTariffC(bTariff);
+    QueryEnergyDayTariffC(bTrf);
 
     if (RevInput() == SER_GOODCHECK) break;  
     if (fKey == true) return(0);
@@ -71,14 +71,14 @@ uchar   i;
 }
 
 
-bool    QueryEnergyAbsTariffC_Full(uchar  bTariff)
+bool    QueryEnergyAbsTariffC_Full(uchar  bTrf)
 {
 uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryEnergyAbsTariffC(bTariff);
+    QueryEnergyAbsTariffC(bTrf);
 
     if (RevInput() == SER_GOODCHECK) break;  
     if (fKey == true) return(0);
@@ -91,7 +91,7 @@ uchar   i;
 }
 
 
-bool    ReadCntAbsTariffC(uchar  bTariff)
+bool    ReadCntAbsTariffC(uchar  bTrf)
 { 
 uchar   i;
 ulong   dw;
@@ -100,16 +100,19 @@ ulong   dw;
   if (ReadKoeffDeviceC() == 0) return(0);
 
 
-  if (QueryEnergyDayTariffC_Full(bTariff) == 0) return(0);  
-  ShowPercent(60+bTariff);
+  if (QueryEnergyDayTariffC_Full(bTrf) == 0) return(0);
+  ShowPercent(60+bTrf);
+
   for (i=0; i<4; i++)
   {
     dw = mpdwChannelsA[i];
     mpdwChannelsB[i] = dw;
   }
 
-  if (QueryEnergyAbsTariffC_Full(bTariff) == 0) return(0);             
-  ShowPercent(80+bTariff);
+
+  if (QueryEnergyAbsTariffC_Full(bTrf) == 0) return(0);
+  ShowPercent(80+bTrf);
+
   for (i=0; i<4; i++)
   {
     dw  = mpdwChannelsA[i];
