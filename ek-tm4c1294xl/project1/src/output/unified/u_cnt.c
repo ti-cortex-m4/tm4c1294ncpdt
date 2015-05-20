@@ -17,7 +17,7 @@ U_CNT.C
 #include "../../realtime/realtime.h"
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
-#include "../../devices/automatic3.h"
+#include "../../devices/automatic_4t.h"
 #include "../../devices/extended_4.h"
 #include "../../devices/extended_4t.h"
 #include "../../time/rtc.h"

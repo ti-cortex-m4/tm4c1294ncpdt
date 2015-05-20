@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC3,C
+AUTOMATIC_4T,C
 
  «начени€ счетчиков на начало мес€цев по тарифам
 ------------------------------------------------------------------------------*/
@@ -10,7 +10,7 @@ AUTOMATIC3,C
 #include "../serial/ports.h"
 #include "extended_4t_b.h"
 #include "../sensors/automatic_c.h"
-#include "automatic3.h"
+#include "automatic_4t.h"
 
 
 
