@@ -99,7 +99,7 @@ void    BlockProgramExt(uchar  bA)
 {
   ShowHi(szBlock);
   sprintf(szLo," ןנמדנאללמי %u  ",bA);
-  HideCurrentTime(1);
+  HideCurrTime(1);
 }
 
 

@@ -71,7 +71,7 @@ bool    StartCurrent(uchar  ibCanal)
   if (ibDig >= bCANALS) return(0);
 
 
-  HideCurrentTime(1);
+  HideCurrTime(1);
   ShowCanalNumber(ibDig);
   Clear();
 

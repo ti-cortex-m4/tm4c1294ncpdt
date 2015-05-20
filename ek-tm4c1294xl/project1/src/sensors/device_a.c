@@ -406,7 +406,7 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
 
 bool    ReadDataA(void)
 {
-  HideCurrentTime(1);                                   // запрещаем автоматическое отображение времени
+  HideCurrTime(1);                                   // запрещаем автоматическое отображение времени
     
   tiDig.bHour  = FromBCD( mpbInBuffSave[1] );           // время/дата часового блока
   tiDig.bDay   = FromBCD( mpbInBuffSave[2] );
@@ -454,7 +454,7 @@ bool    TestDataA_Plus(uchar  ibBlock)
 
 bool    ReadDataA_Plus(uchar  ibBlock)
 {
-  HideCurrentTime(1);                                   // запрещаем автоматическое отображение времени
+  HideCurrTime(1);                                   // запрещаем автоматическое отображение времени
   DelayOff();
         
   tiDig.bHour  = FromBCD( InBuff((uint)1+ibBlock*30) ); // время/дата часового блока

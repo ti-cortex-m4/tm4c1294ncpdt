@@ -417,7 +417,7 @@ bool    TestHeaderB(uchar  ibBlock)
 // чтение заголовка часового блока
 bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 {
-  HideCurrentTime(1);                                   // запрещаем автоматическое отображение времени
+  HideCurrTime(1);                                   // запрещаем автоматическое отображение времени
   
   tiDig.bHour   = FromBCD( InBuff((uint)2+ibBlock*18) );// время/дата часового блока
   tiDig.bMinute = FromBCD( InBuff((uint)3+ibBlock*18) );

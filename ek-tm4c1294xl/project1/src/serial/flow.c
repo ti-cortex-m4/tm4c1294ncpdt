@@ -83,7 +83,7 @@ void    RunFlow(void)
     sprintf(szHi,"Порт %u: лимит",ibFlowPortFrom+1);
 
     Clear();
-    HideCurrentTime(0);
+    HideCurrTime(0);
   }
 
   cbFlowDelay = cbMaxFlowDelay;

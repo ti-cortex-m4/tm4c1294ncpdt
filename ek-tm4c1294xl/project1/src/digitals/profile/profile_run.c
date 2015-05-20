@@ -114,7 +114,7 @@ bool    StartProfile(uchar  ibCanal)
   }
 
 
-  HideCurrentTime(1);
+  HideCurrTime(1);
   ShowCanalNumber(ibDig);
   Clear();
 

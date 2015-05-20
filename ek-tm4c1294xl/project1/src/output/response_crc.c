@@ -34,7 +34,7 @@ void    ShowTestResponse(uchar  bState) {
 #endif
 
     ibPortActive = ibPort;
-    HideCurrentTime(0);
+    HideCurrTime(0);
   }
 }
 
