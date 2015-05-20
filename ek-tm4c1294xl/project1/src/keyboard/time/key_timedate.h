@@ -12,5 +12,5 @@ void    auto_GetCurrDate(void);
 
 void    key_CorrectTime(void);
 
-void    ShowCurrentTime(void);
+void    ShowCurrTime(void);
 void    HideCurrentTime(bool  fClearProgram);

@@ -39,7 +39,7 @@ void    ShowCommandUni(uchar  i)
     sprintf(szLo+14,"%02u",mpbDelayUni[ibPort]);
 
     ibPortActive = ibPort;
-    HideCurrentTime(0);
+    HideCurrTime(0);
   }
 }
 

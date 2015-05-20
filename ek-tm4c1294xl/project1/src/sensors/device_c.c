@@ -318,7 +318,7 @@ uchar i;
 
 void    QueryHeaderC_1(void)
 {
-  HideCurrentTime(1);
+  HideCurrTime(1);
 
   ulong dw = DateToHouIndex(tiDigPrev);
   dw -= wBaseCurr;
@@ -341,7 +341,7 @@ void    QueryHeaderC_1(void)
 
 void    QueryHeaderC_6(void)
 {
-  HideCurrentTime(1);
+  HideCurrTime(1);
 
   ulong dw = DateToHouIndex(tiDigPrev);
   dw -= wBaseCurr;

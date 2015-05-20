@@ -71,7 +71,7 @@ bool    StartCheckup(uchar  ibCanal)
   AddDigRecord(EVE_CHECKUP_START);
   //if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILE);
 
-  HideCurrentTime(1);
+  HideCurrTime(1);
   ShowCanalNumber(ibDig);
   Clear();
 

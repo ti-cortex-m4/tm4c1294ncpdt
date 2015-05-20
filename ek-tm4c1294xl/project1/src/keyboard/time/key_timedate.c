@@ -301,7 +301,7 @@ void    key_CorrectTime(void)
 
 
 // включение просмотра текущего времени при бездействии пользователя
-void    ShowCurrentTime(void)
+void    ShowCurrTime(void)
 {
   wProgram = bGET_CURRTIME;
   fSlide = 0;
@@ -315,7 +315,7 @@ void    ShowCurrentTime(void)
 
 
 // выключение просмотра текущего времени
-void    HideCurrentTime(bool  fClearProgram)
+void    HideCurrTime(bool  fClearProgram)
 {
   cbShowCurrentTime = 0;
   fSlide = false;

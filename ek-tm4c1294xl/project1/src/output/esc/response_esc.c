@@ -94,7 +94,7 @@ static void ShowCtrlZ()
   {
     sprintf(szHi,"Порт %u: Ctrl Z",ibPort+1);
     Clear();
-    HideCurrentTime(0);
+    HideCurrTime(0);
   }
 }
 
@@ -104,7 +104,7 @@ static void ShowEsc(void)
   if (wProgram == bTEST_RESPONSE)
   {
     sprintf(szHi,"Порт %u: Esc %c",ibPort+1,bQuery);
-    HideCurrentTime(0);
+    HideCurrTime(0);
   }
 }
 

@@ -182,7 +182,7 @@ void    QueryModemConnect(void)
 {
 uchar   i;
 
-  HideCurrentTime(0);
+  HideCurrTime(0);
 
   InitPush(0);
 
