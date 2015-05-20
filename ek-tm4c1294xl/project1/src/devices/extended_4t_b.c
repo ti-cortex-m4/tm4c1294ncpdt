@@ -6,9 +6,7 @@ EXTENDED_4T_B,C
 
 #include "../main.h"
 #include "../memory/mem_digitals.h"
-#include "../display/display.h"
-#include "../keyboard/keyboard.h"
-#include "../time/delay.h"
+#include "../console.h"
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
 #include "../sensors/device_b.h"
