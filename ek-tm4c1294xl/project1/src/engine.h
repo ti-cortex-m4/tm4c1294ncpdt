@@ -4,4 +4,4 @@ ENGINE.H
 
 ------------------------------------------------------------------------------*/
 
-extern  real                    reBuffA, reKtrans, reKpulse;
+extern  real                    reBuffA;

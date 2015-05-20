@@ -24,6 +24,10 @@ AUTOMATIC1.C
 
 
 
+real                    reKtrans, reKpulse;
+
+
+
 #ifndef SKIP_A
 
 // чтение коэффициентов для счётчика СЭТ-4ТМ
