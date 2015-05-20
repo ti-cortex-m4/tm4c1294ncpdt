@@ -5,18 +5,13 @@ AUTOMATIC_5.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../memory/mem_digitals.h"
-//#include "../memory/mem_realtime.h"
-//#include "../memory/mem_profile.h"
-//#include "../digitals/digitals.h"
-//#include "../digitals/digitals_display.h"
-//#include "../devices/devices.h"
-//#include "../serial/ports.h"
-//#include "../time/rtc.h"
-//#include "../console.h"
-//#include "extended_5_a.h"
-//#include "extended_5_b.h"
-//#include "extended_5_c.h"
+#include "../memory/mem_digitals.h"
+#include "../digitals/digitals.h"
+#include "../serial/ports.h"
+#include "../console.h"
+#include "extended_5_a.h"
+#include "extended_5_b.h"
+#include "extended_5_c.h"
 #include "extended_5.h"
 
 
