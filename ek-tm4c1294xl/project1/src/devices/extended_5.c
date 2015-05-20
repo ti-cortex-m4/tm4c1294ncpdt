@@ -6,7 +6,7 @@ EXTENDED_5.C
 
 #include "../main.h"
 #include "../memory/mem_digitals.h"
-#include "../memory/mem_realtime.h"
+//#include "../memory/mem_realtime.h"
 #include "../memory/mem_profile.h"
 #include "../digitals/digitals.h"
 #include "../digitals/digitals_display.h"
@@ -14,9 +14,7 @@ EXTENDED_5.C
 #include "../serial/ports.h"
 #include "../time/rtc.h"
 #include "../console.h"
-#include "extended_5_a.h"
-#include "extended_5_b.h"
-#include "extended_5_c.h"
+#include "automatic_5.h"
 #include "extended_5.h"
 
 
@@ -63,38 +61,6 @@ void    NextDayExtended5(void)
   SaveFile(&flExt5Values);
 }
 
-
-
-bool    ReadCntDayTariff(uchar  ibCanal, uchar  bTariff)
-{
-  Clear();
-
-  LoadCurrDigital(ibCanal);
-  ibPort = diCurr.ibPort;
-
-  switch (diCurr.bDevice)
-  {
-#ifndef SKIP_A
-    case 15:
-    case 1:  return( ReadCntDayTariffA(bTariff) );
-#endif
-
-#ifndef SKIP_B
-    case 8:
-    case 2:  return( ReadCntDayTariffB(bTariff) );
-#endif
-
-#ifndef SKIP_C
-    case 3:  return( ReadCntDayTariffC(bTariff) );
-#endif
-
-#ifndef SKIP_H
-    case 10: return( ReadCntDayTariffH(bTariff) );
-#endif
-
-    default: return 0;
-  }
-}
 
 
 static bool MakeDevices(void)
