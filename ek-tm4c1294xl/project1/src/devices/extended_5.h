@@ -13,7 +13,7 @@ extern  file const              flExt5Flag;
 
 
 void    InitExtended5(void);
-void    ResetExtended5(void);
+void    ResetExtended5(bool  fFull);
 
 void    NextDayExtended5(void);
 
