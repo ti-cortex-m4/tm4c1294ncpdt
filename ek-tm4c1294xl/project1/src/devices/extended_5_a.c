@@ -17,7 +17,7 @@ EXTENDED_5_A.C
 
 
 
-void    QueryEnergyTariffA(uchar  bTime, uchar  bTariff)
+void    QueryEnergyTariffA(uchar  bTime, uchar  bTrf)
 {
   InitPush(0);
 
@@ -25,51 +25,54 @@ void    QueryEnergyTariffA(uchar  bTime, uchar  bTariff)
   PushChar(5);
 
   PushChar(bTime);
-  PushChar(bTariff);
+  PushChar(bTrf);
 
   QueryIO(1+16+2, 2+2+2);
 }
 
 
-bool    QueryEnergyTariffA_Full(uchar  bTime, uchar  bTariff)
+bool    QueryEnergyTariffA_Full(uchar  bTime, uchar  bTrf)
 {
 uchar   i;
 
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryEnergyTariffA(bTime,bTariff);
+    QueryEnergyTariffA(bTime,bTrf);
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
 
   ReadEnergyA();
-  return(1);
+  return true;
 }
 
 
-bool    ReadCntDayTariffA(uchar  bTariff)
+bool    ReadCntDayTariffA(uchar  bTrf)
 { 
 uchar   i;
 ulong   dw;
 
   Clear();
-  if (ReadKoeffDeviceA() == 0) return(0);
+  if (ReadKoeffDeviceA() == 0) return false;
 
 
-  if (QueryEnergyTariffA_Full(0x40,bTariff) == 0) return(0);  
-  ShowPercent(60+bTariff);
+  if (QueryEnergyTariffA_Full(0x40,bTrf) == 0) return false;
+
+  ShowPercent(60+bTrf);
   for (i=0; i<4; i++)
   {
     dw = mpdwChannelsA[i];
     mpdwChannelsB[i] = dw;
   }
 
-  if (QueryEnergyTariffA_Full(0,bTariff) == 0) return(0);             
-  ShowPercent(80+bTariff);
+
+  if (QueryEnergyTariffA_Full(0,bTrf) == 0) return false;
+
+  ShowPercent(80+bTrf);
   for (i=0; i<4; i++)
   {
     dw  = mpdwChannelsA[i];
@@ -92,6 +95,6 @@ ulong   dw;
     mpboChannelsA[i] = TRUE;     
   }
 
-  return(1);
+  return true;
 }
 

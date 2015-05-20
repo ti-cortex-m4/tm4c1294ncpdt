@@ -43,6 +43,6 @@ bool    ReadCntDayTariff(uchar  ibCan, uchar  bTrf)
     case 10: return ReadCntDayTariffH(bTrf);
 #endif
 
-    default: return 0;
+    default: return false;
   }
 }
