@@ -32,6 +32,8 @@ static char             bSecond;
 
 void    key_SetCurrTime(void)
 {
+static time tiT;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -44,12 +46,12 @@ void    key_SetCurrTime(void)
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      if ((tiKey.bSecond = GetCharLo(10,11)) < 60)
+      if ((tiT.bSecond = GetCharLo(10,11)) < 60)
       {
         enKeyboard = KBD_POSTENTER;
         bSecond = 60;
 
-        SetCurrTime(tiKey);
+        SetCurrTime(tiT);
 
         boSetTime = TRUE;
         SaveFile(&flSetTime);
@@ -64,7 +66,7 @@ void    key_SetCurrTime(void)
   {
     if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((tiKey.bHour = GetCharLo(4,5)) < 24)
+      if ((tiT.bHour = GetCharLo(4,5)) < 24)
       {
         enKeyboard = KBD_INPUT2;
         szLo[6] = ':';
@@ -73,7 +75,7 @@ void    key_SetCurrTime(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((tiKey.bMinute = GetCharLo(7,8)) < 60)
+      if ((tiT.bMinute = GetCharLo(7,8)) < 60)
       {
         enKeyboard = KBD_INPUT3;
         szLo[9] = ':';
@@ -119,6 +121,8 @@ void    key_SetCurrTime(void)
 
 void    key_SetCurrDate(void)
 {
+static time tiT;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -131,16 +135,16 @@ void    key_SetCurrDate(void)
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      tiKey.bYear = GetCharLo(10,11);
+      tiT.bYear = GetCharLo(10,11);
 
-      if ((tiKey.bYear >= bMINYEAR) &&
-          (tiKey.bYear <= bMAXYEAR) &&
-          (tiKey.bDay <= GetDaysInMonthYM(tiKey.bYear, tiKey.bMonth)))
+      if ((tiT.bYear >= bMINYEAR) &&
+          (tiT.bYear <= bMAXYEAR) &&
+          (tiT.bDay <= GetDaysInMonthYM(tiT.bYear, tiT.bMonth)))
       {
         enKeyboard = KBD_POSTENTER;
         bSecond = 60;
 
-        SetCurrDate(tiKey);
+        SetCurrDate(tiT);
 
         boSetDate = TRUE;
         SaveFile(&flSetDate);
@@ -163,9 +167,9 @@ void    key_SetCurrDate(void)
   {
     if (enKeyboard == KBD_POSTINPUT1)
     {
-      tiKey.bDay = GetCharLo(4,5);
+      tiT.bDay = GetCharLo(4,5);
 
-      if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
+      if ((tiT.bDay > 0) && (tiT.bDay <= 31))
       {
         enKeyboard = KBD_INPUT2;
         szLo[6] = '.';
@@ -174,9 +178,9 @@ void    key_SetCurrDate(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      tiKey.bMonth = GetCharLo(7,8);
+      tiT.bMonth = GetCharLo(7,8);
 
-      if ((tiKey.bMonth >= 1) && (tiKey.bMonth <= 12))
+      if ((tiT.bMonth >= 1) && (tiT.bMonth <= 12))
       {
         enKeyboard = KBD_INPUT3;
         szLo[9] = '.';
