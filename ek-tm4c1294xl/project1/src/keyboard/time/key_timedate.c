@@ -19,11 +19,14 @@ KEY_TIMEDATE.C
 
 
 //                                         0123456789ABCDEF
-static char const       szMaskTime[]    = "    __ __ __    ",
-                        szMaskDate[]    = "    __ __ __    ",
-                        szTime[]        = "Текущее время   ",
+static char const       szTime[]        = "Текущее время   ",
                         szDate[]        = "Текущая дата    ",
-                        szCorrectTime[] = "Коррекция секунд";
+                        szCorrectTime[] = "Коррекция секунд",
+                        szMaskTime[]    = "    __ __ __    ",
+                        szMaskDate[]    = "    __ __ __    ";
+
+
+static char             bSecond;
 
 
 
@@ -34,7 +37,7 @@ void    key_SetCurrTime(void)
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_POSTENTER;
-      ibZ = 60;
+      bSecond = 60;
 
       ShowHi(szTime);
       Clear();
@@ -44,7 +47,7 @@ void    key_SetCurrTime(void)
       if ((tiKey.bSecond = GetCharLo(10,11)) < 60)
       {
         enKeyboard = KBD_POSTENTER;
-        ibZ = 60;
+        bSecond = 60;
 
         SetCurrTime(tiKey);
 
@@ -121,7 +124,7 @@ void    key_SetCurrDate(void)
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_POSTENTER;
-      ibZ = 60;
+      bSecond = 60;
 
       ShowHi(szDate);
       Clear();
@@ -135,7 +138,7 @@ void    key_SetCurrDate(void)
           (tiKey.bDay <= GetDaysInMonthYM(tiKey.bYear, tiKey.bMonth)))
       {
         enKeyboard = KBD_POSTENTER;
-        ibZ = 60;
+        bSecond = 60;
 
         SetCurrDate(tiKey);
 
@@ -231,7 +234,7 @@ void    key_CorrectTime(void)
       else
       {
         enKeyboard = KBD_POSTENTER;
-        ibZ = 60;
+        bSecond = 60;
 
         ShowHi(szCorrectTime);
         Clear();
@@ -255,10 +258,10 @@ void   auto_GetCurrTime(void)
 {
   if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
   {
-    ibY = GetCurrTimeDate()->bSecond;
-    if (ibY != ibZ)
+    uchar bT = GetCurrTimeDate()->bSecond;
+    if (bT != bSecond)
     {
-      ibZ = ibY;
+      bSecond = bT;
       ShowTime(*GetCurrTimeDate());
     }
   }
@@ -269,10 +272,10 @@ void   auto_GetCurrDate(void)
 {
   if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
   {
-    ibY = GetCurrTimeDate()->bSecond;
-    if (ibY != ibZ)
+    uchar bT = GetCurrTimeDate()->bSecond;
+    if (bT != bSecond)
     {
-      ibZ = ibY;
+      bSecond = bT;
       ShowDate(*GetCurrTimeDate());
     }
   }
@@ -287,7 +290,7 @@ void    ShowCurrentTime(void)
   fSlide = 0;
 
   enKeyboard = KBD_POSTENTER;
-  ibZ = 60;
+  bSecond = 60;
 
   ShowHi(szTime);
   Clear();
