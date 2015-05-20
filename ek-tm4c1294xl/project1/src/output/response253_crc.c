@@ -9,6 +9,7 @@ RESPONSE253_CRC,C
 #include "../include/states.h"
 #include "../serial/ports.h"
 #include "../devices/extended_4t.h"
+#include "../devices/extended_5.h"
 #include "response_crc.h"
 #include "out_energy.h"
 #include "response253_crc.h"
@@ -23,6 +24,9 @@ void    Response253_CRC(void)
     case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt(true); break;
 
     case bEXT_GET_EXTENDED_4T: OutExtended4T(true); break;
+
+    case bEXT_GETEXTENDED50: OutExtended50(true); break;
+    case bEXT_GETEXTENDED51: OutExtended51(true); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
