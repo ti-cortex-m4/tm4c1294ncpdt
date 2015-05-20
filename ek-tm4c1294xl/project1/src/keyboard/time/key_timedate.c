@@ -119,6 +119,21 @@ static time tiT;
 }
 
 
+void   auto_GetCurrTime(void)
+{
+  if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
+  {
+    uchar bT = GetCurrTimeDate()->bSecond;
+    if (bT != bSecond)
+    {
+      bSecond = bT;
+      ShowTime(*GetCurrTimeDate());
+    }
+  }
+}
+
+
+
 void    key_SetCurrDate(void)
 {
 static time tiT;
@@ -224,6 +239,21 @@ static time tiT;
 }
 
 
+void   auto_GetCurrDate(void)
+{
+  if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
+  {
+    uchar bT = GetCurrTimeDate()->bSecond;
+    if (bT != bSecond)
+    {
+      bSecond = bT;
+      ShowDate(*GetCurrTimeDate());
+    }
+  }
+}
+
+
+
 void    key_CorrectTime(void)
 {
   if (bKey == bKEY_ENTER)
@@ -254,35 +284,6 @@ void    key_CorrectTime(void)
     else Beep();
   }
   else Beep();
-}
-
-
-
-void   auto_GetCurrTime(void)
-{
-  if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
-  {
-    uchar bT = GetCurrTimeDate()->bSecond;
-    if (bT != bSecond)
-    {
-      bSecond = bT;
-      ShowTime(*GetCurrTimeDate());
-    }
-  }
-}
-
-
-void   auto_GetCurrDate(void)
-{
-  if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
-  {
-    uchar bT = GetCurrTimeDate()->bSecond;
-    if (bT != bSecond)
-    {
-      bSecond = bT;
-      ShowDate(*GetCurrTimeDate());
-    }
-  }
 }
 
 
