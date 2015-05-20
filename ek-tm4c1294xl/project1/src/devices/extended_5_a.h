@@ -4,4 +4,4 @@ EXTENDED_5_A.H
 
 ------------------------------------------------------------------------------*/
 
-bool    ReadCntAbsTariffA(uchar  bTariff);
+bool    ReadCntDayTariffA(uchar  bTariff);
