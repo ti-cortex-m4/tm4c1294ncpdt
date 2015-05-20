@@ -10,4 +10,4 @@ ENGINE.Ñ
 
 
 
-real                    reBuffA, reKtrans, reKpulse;
+real                    reBuffA;

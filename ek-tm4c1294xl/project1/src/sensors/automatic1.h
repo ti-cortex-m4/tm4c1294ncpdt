@@ -4,6 +4,10 @@ _AUTOMATIC1.H
 
 ------------------------------------------------------------------------------*/
 
+extern  real                    reKtrans, reKpulse;
+
+
+
 bool    ReadKoeffDeviceA(void);
 bool    ReadKoeffDeviceB(void);
 bool    ReadKoeffDeviceB_Special(void);

@@ -12,7 +12,6 @@ EXTENDED_5_C.C
 #include "../sensors/automatic1.h"
 #include "../sensors/device_c.h"
 #include "../energy.h"
-#include "../engine.h"
 #include "extended_5_c.h"
 
 
@@ -115,12 +114,7 @@ uchar   i;
   for (i=0; i<4; i++)
   {
     mpdwChannelsB[i] = mpdwChannelsA[i] - mpdwChannelsB[i]; // энергия всего минус энергия за текущие сутки равно значению счетчика на начало текущих суток
-  }
-
-
-  for (i=0; i<4; i++) 
-  {
-  	mpdbChannelsC[i] = mpdwChannelsB[i] * flK;
+    mpdbChannelsC[i] = mpdwChannelsB[i] * flK;
     mpboChannelsA[i] = TRUE;
   }
 
