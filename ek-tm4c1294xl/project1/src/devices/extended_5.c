@@ -81,7 +81,7 @@ bool    ReadCntAbsTariff(uchar  ibCanal, uchar  bTariff)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadCntAbsTariffB(bTariff) );
+    case 2:  return( ReadCntDayTariffB(bTariff) );
 #endif
 
 #ifndef SKIP_C
