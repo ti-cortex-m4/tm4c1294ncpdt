@@ -19,7 +19,7 @@ EXTENDED_5_B.C
 
 #ifndef SKIP_B
 
-void    QueryEnergyTariffB(uchar  bTime, uchar  bTrf)
+static void QueryEnergyTariffB(uchar  bTime, uchar  bTrf)
 {
   InitPush(0);
 
@@ -33,7 +33,7 @@ void    QueryEnergyTariffB(uchar  bTime, uchar  bTrf)
 }
 
 
-bool    QueryEnergyTariffB_Full(uchar  bTime, uchar  bTrf)
+static bool QueryEnergyTariffB_Full(uchar  bTime, uchar  bTrf)
 {
 uchar   i;
 
@@ -43,28 +43,27 @@ uchar   i;
     QueryEnergyTariffB(bTime,bTrf);
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
 
   ReadEnergyB();
-  return(1);
+  return true;
 }
 
 
 bool    ReadCntAbsTariffB(uchar  bTrf)
 { 
 uchar   i;
-ulong   dw;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return(0);
+  if (ReadKoeffDeviceB_Special() == 0) return false;
 
   float flK = reKtrans/reKpulse;
 
 
-  if (QueryEnergyTariffB_Full(0x40,bTrf) == 0) return(0); // энергия за текущие сутки
+  if (QueryEnergyTariffB_Full(0x40,bTrf) == 0) return false; // энергия за текущие сутки
   ShowPercent(60+bTrf);
 
   for (i=0; i<4; i++)
@@ -72,7 +71,7 @@ ulong   dw;
     mpdwChannelsB[i] = mpdwChannelsA[i];
   }
 
-  if (QueryEnergyTariffB_Full(0,bTrf) == 0) return(0); // энергия всего
+  if (QueryEnergyTariffB_Full(0,bTrf) == 0) return false; // энергия всего
   ShowPercent(80+bTrf);
 
   for (i=0; i<4; i++)
@@ -92,7 +91,7 @@ ulong   dw;
     mpboChannelsA[i] = TRUE;     
   }
 
-  return(1);
+  return true;
 }
 
 #endif
