@@ -70,6 +70,7 @@ uchar   i;
     mpdwChannelsB[i] = mpdwChannelsA[i];
   }
 
+
   if (QueryEngTariffB_Full(0,bTrf) == 0) return false; // энергия всего
   ShowPercent(80+bTrf);
 
@@ -81,13 +82,8 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    if (mpdwChannelsB[i] > 0xF0000000)
-      reBuffA = 0;
-    else
-      reBuffA = mpdwChannelsB[i] * flK * 2;
-
-    mpreChannelsB[i] = reBuffA;
-    mpboChannelsA[i] = TRUE;     
+    mpreChannelsC[i] = (mpdwChannelsB[i] > 0xF0000000) ? 0 : mpdwChannelsB[i] * flK * 2;
+    mpboChannelsA[i] = TRUE;
   }
 
   return true;
