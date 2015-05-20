@@ -9,7 +9,6 @@ KEYBOARD_KEY.C
 #include "keyboard.h"
 #include "key_speeds.h"
 #include "time/key_timedate.h"
-#include "time/key_correct_time.h"
 #include "time/key_correct.h"
 #include "key_password.h"
 #include "key_logical.h"
