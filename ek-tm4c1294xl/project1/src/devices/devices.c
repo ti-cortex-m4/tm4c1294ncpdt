@@ -30,6 +30,10 @@ DEVICES.C
 #include "../digitals/params/params2.h"
 #include "../digitals/max_repeats.h"
 #include "../digitals/correct_limit.h"
+#include "../digitals/extended/extended_1.h"
+#include "../digitals/extended/extended_4.h"
+#include "../digitals/extended/extended_4t.h"
+#include "../digitals/extended/extended_5.h"
 #include "../special/recalc_def.h"
 #include "../special/defects.h"
 #include "../sensors/device_a.h"
@@ -53,10 +57,6 @@ DEVICES.C
 #include "devices_postinput.h"
 #include "devices_pause.h"
 #include "devices_init.h"
-#include "extended_1.h"
-#include "extended_4.h"
-#include "extended_5.h"
-#include "extended_4t.h"
 #include "devices.h"
 
 

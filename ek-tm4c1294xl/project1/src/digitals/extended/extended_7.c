@@ -4,18 +4,17 @@ EXTENDED_7.C
  Cчетчики (суммарно по тарифам) на начало текущих суток
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_settings.h"
-#include "../memory/mem_realtime.h"
-#include "../memory/mem_factors.h"
-#include "../memory/mem_energy.h"
-#include "../memory/mem_extended_7.h"
-#include "../digitals/digitals.h"
-#include "../devices/devices.h"
-#include "../serial/ports.h"
-#include "../time/rtc.h"
-#include "../flash/files.h"
-#include "../energy.h"
+#include "../../main.h"
+#include "../../memory/mem_settings.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_factors.h"
+#include "../../memory/mem_energy.h"
+#include "../../digitals/digitals.h"
+#include "../../devices/devices.h"
+#include "../../serial/ports.h"
+#include "../../time/rtc.h"
+#include "../../flash/files.h"
+#include "../../energy.h"
 #include "extended_7.h"
 
 

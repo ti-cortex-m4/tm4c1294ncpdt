@@ -5,7 +5,7 @@ KEY_EXT_4T_RESET_FULL,C
 ------------------------------------------------------------------------------*/
 
 #include "../../console.h"
-#include "../../devices/extended_4t.h"
+#include "../../digitals/extended/extended_4t.h"
 
 
 

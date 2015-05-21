@@ -6,7 +6,7 @@ KEY_DSBL_ESC.C
 
 #include "../../main.h"
 #include "../../memory/mem_extended_1.h"
-#include "../../devices/extended_1.h"
+#include "../../digitals/extended/extended_1.h"
 #include "../keyboard.h"
 #include "../../display/display.h"
 #include "../../flash/files.h"

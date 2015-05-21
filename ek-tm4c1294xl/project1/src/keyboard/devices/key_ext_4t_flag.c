@@ -5,7 +5,7 @@ KEY_EXT_4T_FLAG,C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../devices/extended_4t.h"
+#include "../../digitals/extended/extended_4t.h"
 #include "../key_bool.h"
 
 

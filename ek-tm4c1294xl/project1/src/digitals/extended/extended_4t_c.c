@@ -4,16 +4,16 @@ EXTENDED_4T_C.C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_digitals.h"
-#include "../console.h"
-#include "../serial/ports_stack.h"
-#include "../serial/ports_devices.h"
-#include "../sensors/device_c.h"
-#include "../engine.h"
-#include "../time/timedate.h"
-#include "../sensors/automatic1.h"
-#include "../sensors/automatic_c.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../console.h"
+#include "../../serial/ports_stack.h"
+#include "../../serial/ports_devices.h"
+#include "../../sensors/device_c.h"
+#include "../../engine.h"
+#include "../../time/timedate.h"
+#include "../../sensors/automatic1.h"
+#include "../../sensors/automatic_c.h"
 #include "extended_4t_c.h"
 
 
