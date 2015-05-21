@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_DSBL_REFILL.C
+KEY_DSBL_REFILL,C
 
 
 ------------------------------------------------------------------------------*/
@@ -11,11 +11,11 @@ KEY_DSBL_REFILL.C
 
 
 //                                          0123456789ABCDEF
-static char const       szDsblRefill1[]  = " Запрет очистки ",
-                        szDsblRefill2[]  = "пустых профилей ",
-                        szDsblRefill3[]  = "для Меркурий-230";
+static char const       szMessage1[]     = " Запрет очистки ",
+                        szMessage2[]     = "пустых профилей ",
+                        szMessage3[]     = "для Меркурий-230";
 
-static char const       *pszDsblRefill[] = { szDsblRefill1, szDsblRefill2, szDsblRefill3, "" };
+static char const       *pszDsblRefill[] = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
