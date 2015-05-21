@@ -77,12 +77,12 @@ static bool MakeDevices(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadCntDayTariff(ibDig,t+1) == 0) return (0);
+    if (ReadCntDayTariff(ibDig,t+1) == 0) return false;
 
     uchar i;
     for (i=0; i<4; i++)
     {
-      stBuff[i].mpdbValuesT[t] = mpreChannelsB[i];
+      stBuff[i].mpdbValuesT[t] = mpdbChannelsC[i];
     }
   }
 

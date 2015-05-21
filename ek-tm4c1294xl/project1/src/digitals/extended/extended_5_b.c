@@ -76,7 +76,7 @@ uchar   i;
   for (i=0; i<4; i++)
   {
     mpdwChannelsB[i] = mpdwChannelsA[i] - mpdwChannelsB[i]; // энергия всего минус энергия за текущие сутки равно значению счетчика на начало текущих суток
-    mpdbChannelsC[i] = (mpdwChannelsB[i] > 0xF0000000) ? 0 : mpdwChannelsB[i] * flK * 2;
+    mpdbChannelsC[i] = (mpdwChannelsB[i] > 0xF0000000 ? 0 : mpdwChannelsB[i]) * flK * 2;
     mpboChannelsA[i] = TRUE;
   }
 
