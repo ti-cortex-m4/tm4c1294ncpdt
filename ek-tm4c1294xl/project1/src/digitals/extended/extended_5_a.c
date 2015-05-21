@@ -4,14 +4,14 @@ EXTENDED_5_A.C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_digitals.h"
-#include "../serial/ports.h"
-#include "../serial/ports_devices.h"
-#include "../console.h"
-#include "../sensors/automatic1.h"
-#include "../sensors/device_a.h"
-#include "../energy.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
+#include "../../console.h"
+#include "../../sensors/automatic1.h"
+#include "../../sensors/device_a.h"
+#include "../../energy.h"
 #include "extended_5_a.h"
 
 

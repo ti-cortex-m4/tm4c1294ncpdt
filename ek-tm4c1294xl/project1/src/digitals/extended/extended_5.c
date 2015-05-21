@@ -4,15 +4,15 @@ EXTENDED_5.C
  Значения счетчиков на начало текущих суток по тарифам (отчет № 18a от 01.02.2008)
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_digitals.h"
-#include "../memory/mem_profile.h"
-#include "../digitals/digitals.h"
-#include "../digitals/digitals_display.h"
-#include "../devices/devices.h"
-#include "../serial/ports.h"
-#include "../time/rtc.h"
-#include "../console.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_profile.h"
+#include "../../digitals/digitals.h"
+#include "../../digitals/digitals_display.h"
+#include "../../devices/devices.h"
+#include "../../serial/ports.h"
+#include "../../time/rtc.h"
+#include "../../console.h"
 #include "automatic_5.h"
 #include "extended_5.h"
 

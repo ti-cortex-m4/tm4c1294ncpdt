@@ -8,7 +8,7 @@ KEY_MNT_ESC_S.C
 #include "../../memory/mem_extended_1.h"
 #include "../../display/display.h"
 #include "../keyboard.h"
-#include "../../devices/extended_1.h"
+#include "../../digitals/extended/extended_1.h"
 
 
 

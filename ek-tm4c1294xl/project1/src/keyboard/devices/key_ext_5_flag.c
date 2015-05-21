@@ -5,7 +5,7 @@ KEY_EXT_5_FLAG,C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../devices/extended_5.h"
+#include "../../digitals/extended/extended_5.h"
 #include "../key_bool.h"
 
 

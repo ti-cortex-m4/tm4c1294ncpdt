@@ -16,7 +16,7 @@ OUT_EXTENDED_1.C
 #include "../digitals/digitals.h"
 #include "../digitals/digitals_pause.h"
 #include "../sensors/automatic2.h"
-#include "../devices/extended_6.h"
+#include "../digitals/extended/extended_6.h"
 #include "../time/timedate.h"
 #include "../time/rtc.h"
 #include "../energy.h"
