@@ -44,6 +44,22 @@ static time tiT;
       ShowHi(szTime);
       Clear();
     }
+    else if (enKeyboard == KBD_POSTINPUT2)
+    {
+      if ((tiT.bMinute = GetCharLo(7,8)) < 60)
+      {
+        tiT.bSecond = 0;
+
+        enKeyboard = KBD_POSTENTER;
+        bSecondPrev = 60;
+
+        SetCurrTime(tiT);
+
+        boSetTime = TRUE;
+        SaveFile(&flSetTime);
+      }
+      else Beep();
+    }
     else if (enKeyboard == KBD_INPUT3)
     {
       tiT.bSecond = 0;
