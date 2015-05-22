@@ -256,7 +256,7 @@ void    MakeExtended4(void)
 
 
 
-void    PushData4(uchar  ibCan, uchar  ibMon)
+void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
 {
   if (GetDigitalDevice(ibCan) == 0)
   {
