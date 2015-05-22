@@ -44,10 +44,9 @@ static char const       szExtended4[]   = "ќпрос данных: 4 ",
                         szBadFlash[]    = "* flash error   ",
                         szBadPort[]     = "*    модем      ",
                         szBadEnabling[] = "*  запрещено    ";
-//                        szBadMode[]     = "*  нет данных   ";
 
 
-static value6           vaT;
+
 static uchar            bFlag4;
 static uchar            bStatus;
 
@@ -147,24 +146,24 @@ static void MakeDevices(uchar  ibMon)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        vaT = mpCntMonCan4[c];
+        value6 vl = mpCntMonCan4[c];
 
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          vaT.bSelf = ST4_OK;
-          vaT.reSelf = mpreChannelsB[diPrev.ibLine];
+          vl.bSelf = ST4_OK;
+          vl.reSelf = mpreChannelsB[diPrev.ibLine];
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bFlag4++;
         }
         else
         {
-          vaT.bSelf = ST4_BADDIGITAL;
-          vaT.reSelf = 0;
+          vl.bSelf = ST4_BADDIGITAL;
+          vl.reSelf = 0;
           ShowLo(szDataError); DelayInf();
         }
 
-        vaT.tiSelf = *GetCurrTimeDate();
-        mpCntMonCan4[c] = vaT;
+        vl.tiSelf = *GetCurrTimeDate();
+        mpCntMonCan4[c] = vl;
       }
     }
   }
@@ -191,7 +190,7 @@ static void MakeDevice6(uchar  ibMon)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        vaT = mpCntMonCan4[c];
+      	value6 vl = mpCntMonCan4[c];
 
         InitPop(15 + 15*c);
         status st = (status) PopChar();
@@ -200,20 +199,20 @@ static void MakeDevice6(uchar  ibMon)
 
         if (st == ST4_OK)
         {
-          vaT.bSelf = st;
-          vaT.reSelf = re;
+          vl.bSelf = st;
+          vl.reSelf = re;
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bFlag4++;
         }
         else
         {
-          vaT.bSelf = st;
-          vaT.reSelf = 0;
+          vl.bSelf = st;
+          vl.reSelf = 0;
           ShowLo(szDataError); DelayInf();
         }
 
-        vaT.tiSelf = *GetCurrTimeDate();
-        mpCntMonCan4[c] = vaT;
+        vl.tiSelf = *GetCurrTimeDate();
+        mpCntMonCan4[c] = vl;
       }
     }
   }
@@ -238,8 +237,8 @@ void    MakeExtended4(void)
       uchar ibMon = (bMONTHS + ibHardMon - m) % bMONTHS;
       LoadExt4Values(ibMon);
 
-      vaT = mpCntMonCan4[ibDig];
-      if (vaT.bSelf == ST4_OK) continue;
+      value6 vl = mpCntMonCan4[ibDig];
+      if (vl.bSelf == ST4_OK) continue;
 
       Clear(); sprintf(szLo+3,"мес€ц: %-2u",ibMon+1); DelayInf();
 

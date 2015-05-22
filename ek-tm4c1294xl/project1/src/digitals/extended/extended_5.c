@@ -72,6 +72,8 @@ static bool MakeDevices(void)
   uchar t;
   for (t=0; t<bTARIFFS; t++)
   {
+    sprintf(szLo+14,"T%u",t+1);
+
     if (fKey == true) return false;
     Clear();
 
