@@ -174,7 +174,7 @@ static void MakeDevice6(uchar  ibMon)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-  if (ReadCntMonCanFBuff(ibMon, ibDig) == 0) 
+  if (ReadCntMonCanF_Buff(ibMon, ibDig) == 0) 
   { 
     ShowLo(szLinkError); DelayInf();
   }
@@ -467,7 +467,7 @@ void    OutExtended43(void)
 
 
 
-bool    ReadCntMonCanFCurr(uchar  ibMon, uchar  ibCan)
+bool    ReadCntMonCanF_Curr(uchar  ibMon, uchar  ibCan)
 {
 uchar   i;
 
@@ -514,7 +514,7 @@ uchar   i;
 }
 
 
-bool    ReadCntMonCanFBuff(uchar  ibMon, uchar  ibCan)
+bool    ReadCntMonCanF_Buff(uchar  ibMon, uchar  ibCan)
 {
 uchar   i;
 
