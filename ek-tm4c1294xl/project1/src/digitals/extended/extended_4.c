@@ -162,7 +162,7 @@ static void MakeDevices(uchar  ibMon)
           ShowLo(szDataError); DelayInf();
         }
 
-        vl.tiSelf = *GetCurrTimeDate();
+        vl.tiUpdate = *GetCurrTimeDate();
         mpCntMonCan4[c] = vl;
       }
     }
@@ -211,7 +211,7 @@ static void MakeDevice6(uchar  ibMon)
           ShowLo(szDataError); DelayInf();
         }
 
-        vl.tiSelf = *GetCurrTimeDate();
+        vl.tiUpdate = *GetCurrTimeDate();
         mpCntMonCan4[c] = vl;
       }
     }
@@ -273,7 +273,7 @@ void    PushData4(uchar  ibCan, uchar  ibMon)
     PushInt(0xFF);
     PushInt(0xFF);
     PushFloat(va.reSelf);
-    PushTime(va.tiSelf);
+    PushTime(va.tiUpdate);
   }
 }
 
@@ -602,7 +602,7 @@ void    ShowExtended4(uchar  ibCan, uchar  ibMon)
 
     va.bSelf = ST4_OK; 
     va.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
-    va.tiSelf = tiZero;
+    va.tiUpdate = tiZero;
     bStatus = ST4_OK;
   }
   else
@@ -614,7 +614,7 @@ void    ShowExtended4(uchar  ibCan, uchar  ibMon)
   }
 
   reBuffA = va.reSelf;
-  tiAlt = va.tiSelf;
+  tiAlt = va.tiUpdate;
 
   ShowCntMonCanF2();
 }

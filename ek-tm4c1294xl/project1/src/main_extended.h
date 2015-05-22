@@ -54,7 +54,7 @@ typedef struct
 {
   status        bSelf;
   real          reSelf;
-  time          tiSelf;
+  time          tiUpdate;
 } value6;
 
 
