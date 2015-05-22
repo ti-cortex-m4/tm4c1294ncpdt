@@ -41,13 +41,13 @@ static char const       szExtended4[]   = "Опрос данных: 4 ",
                         szDataError[]   = "  данные: нет   ",
                         szNone[]        = "*    пусто      ",
                         szBadDigital[]  = "*   ошибка !    ",
-                        szBadFlash[]    = "* flash error   ",
-                        szBadPort[]     = "*    модем      ",
-                        szBadEnabling[] = "*  запрещено    ";
+                        szBadFlash[]    = "* ошибка памяти ",
+                        szModemLink[]   = "*    модем      ",
+                        szDisabled[]    = "*  запрещено    ";
 
 
 
-static uchar            bFlag4;
+static uchar            bCount;
 static uchar            bStatus;
 
 
@@ -153,7 +153,7 @@ static void MakeDevices(uchar  ibMon)
           vl.bSelf = ST4_OK;
           vl.reSelf = mpreChannelsB[diPrev.ibLine];
           ShowLo(szDataOK); DelayInf();
-          if (c == ibDig) bFlag4++;
+          if (c == ibDig) bCount++;
         }
         else
         {
@@ -202,7 +202,7 @@ static void MakeDevice6(uchar  ibMon)
           vl.bSelf = st;
           vl.reSelf = re;
           ShowLo(szDataOK); DelayInf();
-          if (c == ibDig) bFlag4++;
+          if (c == ibDig) bCount++;
         }
         else
         {
@@ -227,7 +227,7 @@ void    MakeExtended4(void)
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4Months);
     DelayInf();
 
-    bFlag4 = 0;
+    bCount = 0;
 
     uchar m;
     for (m=0; m<bExt4Months; m++)
@@ -247,7 +247,7 @@ void    MakeExtended4(void)
       SaveExt4Values(ibMon);
     }
 
-    Clear(); sprintf(szLo+3,"принято: %u", bFlag4); DelayInf();
+    Clear(); sprintf(szLo+3,"принято: %u", bCount); DelayInf();
 
     ShowCanalNumber(ibDig);
     Clear();
@@ -584,8 +584,8 @@ void    ShowCntMonCanF2(void)
     case ST4_OK:           (ibZ == 0) ? ShowFloat(reBuffA) : ShowTimeDateF2(); break;
     case ST4_BADDIGITAL:   ShowLo(szBadDigital);   break;
     case ST4_BADFLASH:     ShowLo(szBadFlash);     break;
-    case ST4_BADPORT:      ShowLo(szBadPort);      break;
-    case ST4_BADENABLING:  ShowLo(szBadEnabling);  break;
+    case ST4_BADPORT:      ShowLo(szModemLink);      break;
+    case ST4_BADENABLING:  ShowLo(szDisabled);  break;
     default:               sprintf(szLo, "*  ошибка: %02X", bStatus); break;
   }  
 }
