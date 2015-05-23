@@ -16,3 +16,6 @@ boolean                 boSetTime,
 
 // TODO: SaveFile
 boolean                 boFirstReset;
+
+// режим работы прибора
+global                  enGlobal;

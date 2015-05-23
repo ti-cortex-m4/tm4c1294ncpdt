@@ -24,37 +24,12 @@ TODO .C
 #include "src/time/rtc.h"
 #include "src/keyboard/key.h"
 #include "src/keyboard/keyboard.h"
-#include "src/flash/at45.h"
 #include "src/display/display.h"
 #include "src/isr/timer0.h"
 #include "src/isr/timer1.h"
-#include "src/isr/serial0.h"
-#include "src/isr/serial1.h"
-#include "src/isr/serial2.h"
-#include "src/isr/serial3.h"
 #include "src/hardware/memory.h"
 #include "src/uarts.h"
-#include "src/serial/modems.h"
 #include "src/serial/print.h"
-#include "src/settings.h"
-#include "src/groups.h"
-#include "src/tariffs/zones.h"
-#include "src/tariffs/tariffs.h"
-#include "src/tariffs/relaxs.h"
-#include "src/tariffs/gaps.h"
-#include "src/serial/speeds.h"
-#include "src/serial/flow.h"
-#include "src/output/esc/esc.h"
-#include "src/output/esc/response_esc.h"
-#include "src/output/unified/uni.h"
-#include "src/output/unified/response_uni.h"
-#include "src/storage/storage.h"
-#include "src/time/decret.h"
-#include "src/time/correct1.h"
-#include "src/time/correct2.h"
-#include "src/realtime/realtime.h"
-#include "src/realtime/realtime_init.h"
-#include "src/output/response_crc.h"
 
 
 
@@ -68,33 +43,11 @@ int main(void) {
 
 	InitBeep();
 	InitLCD();
-	InitFlash();            Delay(100); TestOK();
 	InitRTC();
 	InitCODE();
 
-	InitSettings();         Delay(100); TestOK();
 	InitKey();
 	InitKeyboard();         Delay(100); TestOK();
-	InitImpulses();
-	InitFactors();
-	InitGroups();           Delay(100); TestOK();
-	InitZones();
-	InitTariffs();          Delay(100); TestOK();
-	InitRelaxs();
-	InitGaps();             Delay(100); TestOK();
-	InitDecret();
-	InitCorrect1();
-	InitCorrect2();
-	InitDigitals();         Delay(100); TestOK();
-	InitLimits();
-  InitDevices1();
-	InitParams();
-	InitPhones();
-	InitProfile();
-	InitSpeeds();
-	InitEsc();
-	InitUni();
-	InitFlow();             Delay(100); TestOK();
 
 	InitSlide();
 

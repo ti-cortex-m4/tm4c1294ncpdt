@@ -10,3 +10,5 @@ extern boolean                 boSetTime,
                                boSetPassword;
 
 extern boolean                 boFirstReset;
+
+extern global                  enGlobal;

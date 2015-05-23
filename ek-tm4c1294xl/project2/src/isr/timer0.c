@@ -37,14 +37,6 @@ void InitTimer0(uint32_t ui32SysClock) {
 void Timer0IntHandler(void) {
 	TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
 
-	InDelay0_Timer0();
-	InDelay1_Timer0();
-	InDelay2_Timer0();
-	InDelay3_Timer0();
-
-	Pause();
-
-	Impulses_Timer0();
 	LCD_Timer0();
 	Key_Timer0();
 }

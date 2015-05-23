@@ -5,26 +5,12 @@ KEYBOARD.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_settings.h"
 #include "../memory/mem_program.h"
-#include "../memory/mem_realtime.h"
-#include "../memory/mem_energy_spec.h"
 #include "../display/display.h"
 #include "../hardware/beep.h"
-#include "../realtime/realtime.h"
 #include "../time/delay.h"
 #include "../serial/print.h"
-#include "../serial/modems.h"
-#include "../digitals/answer.h"
 #include "../include/programs.h"
-#include "../impulses/impulses.h"
-#include "../digitals/digitals_status.h"
-#include "../devices/devices.h"
-#include "../digitals/wait_query.h"
-#include "../special/special.h"
-#include "../settings.h"
-#include "../flash/files.h"
-#include "../flash/records.h"
 #include "keyboard_auto.h"
 #include "keyboard_key.h"
 #include "time/key_timedate.h"
@@ -63,8 +49,6 @@ void    InitKeyboard(void)
 
   bKey = 0;
   fKey = 0;
-
-  cbShowCurrentTime = 0;
 }
 
 
@@ -163,54 +147,6 @@ uchar   i;
       
   if (i < sizeof(mpbKeys)) bKey = i; else return;
 
-
-  // обновляем показания на дисплее
-  fOnImpulse = 1;
-  fOnSecond = 1;
-
-  // обнуляем счётчик вызова программы по умолчанию
-  cbShowCurrentTime = 0;
-
-  // разрешаем оставаться в режиме connect на следующие паузу bMAXWAITONLINE
-  cbWaitOnline = 0;
-
-  // останавливаем опрос цифровых счётчиков
-  if ((fConnect == 1) || (GetCurr() != DEV_BEGIN))
-  {
-//    if (bKey != bKEY_PROGRAM) return;
-
-    if (((wProgram != bGET_READTIMEDATE1) &&
-         (wProgram != bGET_READTIMEDATE2) &&
-         (wProgram != wGET_READTRANS)     &&
-         (wProgram != wGET_READPULSE)     &&
-         (wProgram != bTEST_DIRECT)       &&
-         (wProgram != bGET_CNTCANYEAR1)   &&
-         (wProgram != bGET_CNTCANYEAR10)  &&
-//         (wProgram != bGET_CNTCANYEAR2)   &&
-//         (wProgram != bGET_CNTCANYEAR20)  &&
-         (wProgram != bGET_CNTCURR_10)    &&
-         (wProgram != bGET_CNTCURR_110))  || (bKey == bKEY_PROGRAM))
-    {
-      SetCurr(DEV_BEGIN);
-      SetPause(DEV_BEGIN);
-
-      if (IsOpenSpecial()) { CloseSpecial(); Stop(); }
-      CloseSpecialBuff();
-
-      AddDigRecord(EVE_SPECIALCLOSE);
-
-      KeyBreakConnect();
-      EnableAnswer();
-      return;
-    }
-  }
-
-  // останавливаем опрос цифровых счётчиков
-  if (fCurrent == 1)
-  {
-    SetCurr(DEV_BEGIN);
-    if (cbWaitQuery == 0) cbWaitQuery = bMAXWAITQUERY;
-  }
 
   // перед вызовом программы необходимо нажать кнопку 'Программа'
   if ((enKeyboard == KBD_BEGIN) && (bKey != bKEY_PROGRAM))
