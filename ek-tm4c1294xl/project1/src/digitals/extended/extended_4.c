@@ -298,7 +298,7 @@ void    OutExtended40(void)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4(c, InBuff(6));
+        PushData4(c, InBuff(6), false);
         wSize += (1+2+2+4+6);
       }
     }
@@ -332,7 +332,7 @@ void    OutExtended401(void)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4(c, InBuff(6));
+        PushData4(c, InBuff(6), false);
         wSize += (1+2+2+4+6);
       }
     }
@@ -355,7 +355,7 @@ void    OutExtended41(void)
     LoadExt4Values(InBuff(6));
 
     InitPushPtr();            
-    PushData4(InBuff(7), InBuff(6));
+    PushData4(InBuff(7), InBuff(6), false);
     OutptrOutBuff(1+2+2+4+6);
   }
 }
