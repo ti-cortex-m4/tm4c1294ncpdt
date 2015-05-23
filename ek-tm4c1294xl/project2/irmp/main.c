@@ -217,34 +217,38 @@ main (void)
  */
 #elif defined(STELLARIS_ARM_CORTEX_M4)
 
+#define TIMER_CFG_32_BIT_PER    0x00000002  // 32-bit periodic timer
+
 void
 timer1_init (void)
 {
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
-    TimerConfigure(TIMER1_BASE, TIMER_CFG_32_BIT_PER);
-
-    TimerLoadSet(TIMER1_BASE, TIMER_A, (F_CPU / F_INTERRUPTS) -1);
-    IntEnable(INT_TIMER1A);
-    TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
-    TimerEnable(TIMER1_BASE, TIMER_A);
+//    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
+//    TimerConfigure(TIMER1_BASE, TIMER_CFG_32_BIT_PER);
+//
+//    TimerLoadSet(TIMER1_BASE, TIMER_A, (F_CPU / F_INTERRUPTS) -1);
+//    IntEnable(INT_TIMER1A);
+//    TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+//    TimerEnable(TIMER1_BASE, TIMER_A);
     // Important: Timer1IntHandler has to be configured in startup_ccs.c !
 }
 
 void
 Timer1IntHandler(void)                                                      // Timer1 Interrupt Handler
 {
+  TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
   (void) irmp_ISR();                                                        // call irmp ISR
   // call other timer interrupt routines...
 }
 
-int
-main (void)
+extern void    PrintChar(unsigned char  b);
+
+int main2 (void)
 {
     IRMP_DATA irmp_data;
 
-    ROM_FPUEnable();
-    ROM_FPUStackingEnable();
-    ROM_SysCtlClockSet(SYSCTL_SYSDIV_5|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);
+//    FPUEnable();
+//    FPUStackingEnable();
+//    SysCtlClockSet(SYSCTL_SYSDIV_5|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);
 
     irmp_init();                                                            // initialize irmp
     timer1_init();                                                          // initialize timer1
@@ -254,6 +258,9 @@ main (void)
     {
         if (irmp_get_data (&irmp_data))
         {
+        	PrintChar('\n');
+        	unsigned char a = (irmp_data).command;
+        	PrintChar('0'+a);
             // ir signal decoded, do something here...
             // irmp_data.protocol is the protocol, see irmp.h
             // irmp_data.address is the address/manufacturer code of ir sender

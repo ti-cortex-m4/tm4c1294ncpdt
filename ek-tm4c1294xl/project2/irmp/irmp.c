@@ -614,70 +614,8 @@ irmp_protocol_names[IRMP_N_PROTOCOLS + 1] PROGMEM =
  *  Logging
  *---------------------------------------------------------------------------------------------------------------------------------------------------
  */
-#if IRMP_LOGGING == 1                                                   // logging via UART
 
-#if defined(ARM_STM32F4XX)
-#  define  STM32_GPIO_CLOCK   RCC_AHB1Periph_GPIOA                      // UART2 on PA2
-#  define  STM32_UART_CLOCK   RCC_APB1Periph_USART2
-#  define  STM32_GPIO_PORT    GPIOA
-#  define  STM32_GPIO_PIN     GPIO_Pin_2
-#  define  STM32_GPIO_SOURCE  GPIO_PinSource2
-#  define  STM32_UART_AF      GPIO_AF_USART2
-#  define  STM32_UART_COM     USART2
-#  define  STM32_UART_BAUD    115200                                    // 115200 Baud
-#  include "stm32f4xx_usart.h"
-#elif defined(ARM_STM32F10X)
-#  define  STM32_UART_COM     USART3                                    // UART3 on PB10
-#else
-#  if IRMP_EXT_LOGGING == 1                                             // use external logging
-#    include "irmpextlog.h"
-#  else                                                                 // normal UART log (IRMP_EXT_LOGGING == 0)
-#    define BAUD                                    9600L
-#  ifndef UNIX_OR_WINDOWS
-#    include <util/setbaud.h>
-#  endif
 
-#ifdef UBRR0H
-
-#define UART0_UBRRH                             UBRR0H
-#define UART0_UBRRL                             UBRR0L
-#define UART0_UCSRA                             UCSR0A
-#define UART0_UCSRB                             UCSR0B
-#define UART0_UCSRC                             UCSR0C
-#define UART0_UDRE_BIT_VALUE                    (1<<UDRE0)
-#define UART0_UCSZ1_BIT_VALUE                   (1<<UCSZ01)
-#define UART0_UCSZ0_BIT_VALUE                   (1<<UCSZ00)
-#ifdef URSEL0
-#define UART0_URSEL_BIT_VALUE                   (1<<URSEL0)
-#else
-#define UART0_URSEL_BIT_VALUE                   (0)
-#endif
-#define UART0_TXEN_BIT_VALUE                    (1<<TXEN0)
-#define UART0_UDR                               UDR0
-#define UART0_U2X                               U2X0
-
-#else
-
-#define UART0_UBRRH                             UBRRH
-#define UART0_UBRRL                             UBRRL
-#define UART0_UCSRA                             UCSRA
-#define UART0_UCSRB                             UCSRB
-#define UART0_UCSRC                             UCSRC
-#define UART0_UDRE_BIT_VALUE                    (1<<UDRE)
-#define UART0_UCSZ1_BIT_VALUE                   (1<<UCSZ1)
-#define UART0_UCSZ0_BIT_VALUE                   (1<<UCSZ0)
-#ifdef URSEL
-#define UART0_URSEL_BIT_VALUE                   (1<<URSEL)
-#else
-#define UART0_URSEL_BIT_VALUE                   (0)
-#endif
-#define UART0_TXEN_BIT_VALUE                    (1<<TXEN)
-#define UART0_UDR                               UDR
-#define UART0_U2X                               U2X
-
-#endif //UBRR0H
-#endif //IRMP_EXT_LOGGING
-#endif //ARM_STM32F4XX
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------
  *  Initialize  UART
@@ -687,96 +625,6 @@ irmp_protocol_names[IRMP_N_PROTOCOLS + 1] PROGMEM =
 void
 irmp_uart_init (void)
 {
-#ifndef UNIX_OR_WINDOWS
-#if defined(ARM_STM32F4XX)
-    GPIO_InitTypeDef GPIO_InitStructure;
-    USART_InitTypeDef USART_InitStructure;
-
-    // Clock enable vom TX Pin
-    RCC_AHB1PeriphClockCmd(STM32_GPIO_CLOCK, ENABLE);
-
-    // Clock enable der UART
-    RCC_APB1PeriphClockCmd(STM32_UART_CLOCK, ENABLE);
-
-    // UART Alternative-Funktion mit dem IO-Pin verbinden
-    GPIO_PinAFConfig(STM32_GPIO_PORT,STM32_GPIO_SOURCE,STM32_UART_AF);
-
-    // UART als Alternative-Funktion mit PushPull
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-
-    // TX-Pin
-    GPIO_InitStructure.GPIO_Pin = STM32_GPIO_PIN;
-    GPIO_Init(STM32_GPIO_PORT, &GPIO_InitStructure);
-
-    // Oversampling
-    USART_OverSampling8Cmd(STM32_UART_COM, ENABLE);
-
-    // init mit Baudrate, 8Databits, 1Stopbit, keine Parität, kein RTS+CTS
-    USART_InitStructure.USART_BaudRate = STM32_UART_BAUD;
-    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-    USART_InitStructure.USART_StopBits = USART_StopBits_1;
-    USART_InitStructure.USART_Parity = USART_Parity_No;
-    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    USART_InitStructure.USART_Mode = USART_Mode_Tx;
-    USART_Init(STM32_UART_COM, &USART_InitStructure);
-
-    // UART enable
-    USART_Cmd(STM32_UART_COM, ENABLE);
-
-#elif defined(ARM_STM32F10X)
-    GPIO_InitTypeDef GPIO_InitStructure;
-    USART_InitTypeDef USART_InitStructure;
-
-    // Clock enable vom TX Pin
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // UART3 an PB10
-
-    // Clock enable der UART
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
-
-    // UART als Alternative-Funktion mit PushPull
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-
-    // TX-Pin
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-    // Oversampling
-    USART_OverSampling8Cmd(STM32_UART_COM, ENABLE);
-
-    // init mit Baudrate, 8Databits, 1Stopbit, keine Parität, kein RTS+CTS
-    USART_InitStructure.USART_BaudRate = 115200;
-    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-    USART_InitStructure.USART_StopBits = USART_StopBits_1;
-    USART_InitStructure.USART_Parity = USART_Parity_No;
-    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    USART_InitStructure.USART_Mode = USART_Mode_Tx;
-    USART_Init(STM32_UART_COM, &USART_InitStructure);
-
-    // UART enable
-    USART_Cmd(STM32_UART_COM, ENABLE);
-#else
-
-#if (IRMP_EXT_LOGGING == 0)                                                                         // use UART
-    UART0_UBRRH = UBRRH_VALUE;                                                                      // set baud rate
-    UART0_UBRRL = UBRRL_VALUE;
-
-#if USE_2X
-    UART0_UCSRA |= (1<<UART0_U2X);
-#else
-    UART0_UCSRA &= ~(1<<UART0_U2X);
-#endif
-
-    UART0_UCSRC = UART0_UCSZ1_BIT_VALUE | UART0_UCSZ0_BIT_VALUE | UART0_URSEL_BIT_VALUE;
-    UART0_UCSRB |= UART0_TXEN_BIT_VALUE;                                                            // enable UART TX
-#else                                                                                               // other log method
-    initextlog();
-#endif //IRMP_EXT_LOGGING
-#endif //ARM_STM32F4XX
-#endif // UNIX_OR_WINDOWS
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -785,44 +633,13 @@ irmp_uart_init (void)
  *  @param    ch character to be transmitted
  *---------------------------------------------------------------------------------------------------------------------------------------------------
  */
+
+extern void    PrintChar(unsigned  b);
+
 void
 irmp_uart_putc (unsigned char ch)
 {
-#ifndef UNIX_OR_WINDOWS
-#if defined(ARM_STM32F4XX) || defined(ARM_STM32F10X)
-    // warten bis altes Byte gesendet wurde
-    while (USART_GetFlagStatus(STM32_UART_COM, USART_FLAG_TXE) == RESET)
-    {
-        ;
-    }
-
-    USART_SendData(STM32_UART_COM, ch);
-
-    if (ch == '\n')
-    {
-        while (USART_GetFlagStatus(STM32_UART_COM, USART_FLAG_TXE) == RESET);
-        USART_SendData(STM32_UART_COM, '\r');
-    }
-
-#else
-#if (IRMP_EXT_LOGGING == 0)
-
-    while (!(UART0_UCSRA & UART0_UDRE_BIT_VALUE))
-    {
-        ;
-    }
-
-    UART0_UDR = ch;
-
-#else
-
-    sendextlog(ch);                                                         // use external log
-
-#endif //IRMP_EXT_LOGGING
-#endif //ARM_STM32F4XX
-#else
-    fputc (ch, stderr);
-#endif // UNIX_OR_WINDOWS
+//	PrintChar(ch);
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -922,9 +739,9 @@ irmp_log (uint_fast8_t val)
     }
 }
 
-#else
-#define irmp_log(val)
-#endif //IRMP_LOGGING
+//#else
+//#define irmp_log(val)
+//#endif //IRMP_LOGGING
 
 typedef struct
 {
@@ -1803,6 +1620,9 @@ static uint_fast8_t                              radio;
  *---------------------------------------------------------------------------------------------------------------------------------------------------
  */
 #ifndef ANALYZE
+
+#include "rom.h"
+
 void
 irmp_init (void)
 {
@@ -1833,11 +1653,11 @@ irmp_init (void)
    GPIO_Init(IRMP_PORT, &GPIO_InitStructure);
 #elif defined(STELLARIS_ARM_CORTEX_M4)
      // Enable the GPIO port
-     ROM_SysCtlPeripheralEnable(IRMP_PORT_PERIPH);
+     SysCtlPeripheralEnable(IRMP_PORT_PERIPH);
 
      // Set as an input
-     ROM_GPIODirModeSet(IRMP_PORT_BASE, IRMP_PORT_PIN, GPIO_DIR_MODE_IN);
-     ROM_GPIOPadConfigSet(IRMP_PORT_BASE, IRMP_PORT_PIN,
+     GPIODirModeSet(IRMP_PORT_BASE, IRMP_PORT_PIN, GPIO_DIR_MODE_IN);
+     GPIOPadConfigSet(IRMP_PORT_BASE, IRMP_PORT_PIN,
                           GPIO_STRENGTH_2MA,
                           GPIO_PIN_TYPE_STD_WPU);
 #else                                                                   // AVR

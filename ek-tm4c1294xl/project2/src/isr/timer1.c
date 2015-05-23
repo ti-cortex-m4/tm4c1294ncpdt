@@ -33,8 +33,8 @@ void InitTimer1(uint32_t ui32SysClock) {
 
 
 
-void Timer1IntHandler(void) {
-	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
-
-  Slides_1Hz();
-}
+//void Timer1IntHandler(void) {
+//	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+//
+//  Slides_1Hz();
+//}

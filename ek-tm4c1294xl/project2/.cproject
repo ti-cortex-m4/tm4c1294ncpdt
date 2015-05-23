@@ -48,6 +48,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.GCC.1804478131" name="Enable support for GCC extensions (--gcc)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.GCC" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.DEFINE.862508151" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.DEFINE" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="ccs=&quot;ccs&quot;"/>
+									<listOptionValue builtIn="false" value="TARGET_IS_BLIZZARD_RA2"/>
 									<listOptionValue builtIn="false" value="PART_TM4C1294NCPDT"/>
 									<listOptionValue builtIn="false" value="TARGET_IS_TM4C129_RA0"/>
 								</option>
@@ -61,6 +62,7 @@
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.PRINTF_SUPPORT.496134219" name="Level of printf support required (--printf_support)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.PRINTF_SUPPORT" value="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.PRINTF_SUPPORT.full" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.GEN_AUX_USER_INFO.1033331730" name="Generate user information file (--gen_aux_user_info, -b)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.GEN_AUX_USER_INFO" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.SMALL_ENUM.1392317339" name="Enums may be char/short, instead of int (--small_enum, --small-enum)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.SMALL_ENUM" value="true" valueType="boolean"/>
+								<option id="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.ASM_LISTING.1929842909" superClass="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compilerID.ASM_LISTING" value="true" valueType="boolean"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compiler.inputType__C_SRCS.265003954" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compiler.inputType__C_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compiler.inputType__CPP_SRCS.111316197" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compiler.inputType__CPP_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compiler.inputType__ASM_SRCS.1935085380" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.TMS470_5.0.compiler.inputType__ASM_SRCS"/>
