@@ -64,15 +64,6 @@ void    InitDisplay(void)
   {
     ShowHi(szSetting);
     Delay(1000);
-
-    if (boFirstReset == TRUE)
-    {
-      enKeyboard = KBD_ENTER;
-      bKey = bKEY_ENTER;
-
-      wProgram = bSET_RESETFULL;
-      key_SetReset();
-    }
   }
 }
 
