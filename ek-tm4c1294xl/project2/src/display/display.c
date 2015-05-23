@@ -114,9 +114,6 @@ void    ShowBool(bool  bo)
     strcpy(szLo+1,szYes);
   else
     strcpy(szLo+1,szNo);
-
-  if (enGlobal != GLB_WORK)
-    szLo[0] = '.';
 }
 
 

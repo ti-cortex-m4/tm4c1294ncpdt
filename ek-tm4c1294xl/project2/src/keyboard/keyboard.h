@@ -5,7 +5,7 @@ KEYBOARD.H
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_settings.h"
+#include "../memory/mem_program.h"
 #include "../include/programs.h"
 #include "../time/delay.h"
 #include "../hardware/beep.h"

@@ -6,22 +6,16 @@ KEY_TIMEDATE.C
 
 #include "../../main.h"
 #include "../../memory/mem_program.h"
-#include "../../memory/mem_realtime.h"
 #include "../../console.h"
-#include "../../settings.h"
 #include "../../time/rtc.h"
 #include "../../time/timedate.h"
 #include "../../time/timedate_display.h"
-#include "../../time/decret.h"
-#include "../../time/correct1.h"
-#include "../../time/correct3.h"
 
 
 
 //                                         0123456789ABCDEF
 static char const       szTime[]        = "Текущее время   ",
                         szDate[]        = "Текущая дата    ",
-                        szCorrectTime[] = "Коррекция секунд",
                         szMaskTime[]    = "    __ __ __    ",
                         szMaskDate[]    = "    __ __ __    ";
 
@@ -54,9 +48,6 @@ static time tiT;
         bSecondPrev = 60;
 
         SetCurrTime(tiT);
-
-        boSetTime = TRUE;
-        SaveFile(&flSetTime);
       }
       else Beep();
     }
@@ -68,9 +59,6 @@ static time tiT;
       bSecondPrev = 60;
 
       SetCurrTime(tiT);
-
-      boSetTime = TRUE;
-      SaveFile(&flSetTime);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
@@ -80,9 +68,6 @@ static time tiT;
         bSecondPrev = 60;
 
         SetCurrTime(tiT);
-
-        boSetTime = TRUE;
-        SaveFile(&flSetTime);
       }
       else Beep();
     }
@@ -190,9 +175,6 @@ static time tiT;
         SetCurrDate(tiT);
 
         boSetDate = TRUE;
-        SaveFile(&flSetDate);
-
-        MakeDecret();
       }
       else
       {  
@@ -277,68 +259,5 @@ void   auto_GetCurrDate(void)
       bSecondPrev = bSecond;
       ShowDate(*GetCurrTimeDate());
     }
-  }
-}
-
-
-
-void    key_CorrectTime(void)
-{
-  if (bKey == bKEY_ENTER)
-  {
-    if (enKeyboard == KBD_ENTER)
-    {
-      if (Correct3Disabled())
-      {
-        Correct3(EVE_PROGRAM_2);
-        BlockPrograms(bSET_CORRECT30, bSET_CORRECT32);
-      }
-      else
-      {
-        enKeyboard = KBD_POSTENTER;
-        bSecondPrev = 60;
-
-        ShowHi(szCorrectTime);
-        Clear();
-      }
-    }
-    else if (enKeyboard == KBD_POSTENTER)
-    {
-      if (CorrectTime_Full(EVE_PROGRAM_2) == true)
-        enKeyboard = KBD_SHOW;
-      else
-        LongBeep();
-    }
-    else Beep();
-  }
-  else Beep();
-}
-
-
-
-// включение просмотра текущего времени при бездействии пользователя
-void    ShowCurrTime(void)
-{
-  wProgram = bGET_CURRTIME;
-  fSlide = 0;
-
-  enKeyboard = KBD_POSTENTER;
-  bSecondPrev = 60;
-
-  ShowHi(szTime);
-  Clear();
-}
-
-
-// выключение просмотра текущего времени
-void    HideCurrTime(bool  fClearProgram)
-{
-  cbShowCurrentTime = 0;
-  fSlide = false;
-
-  if (fClearProgram == true)
-  {
-    enKeyboard = KBD_BEGIN;
-    wProgram = 0;
   }
 }

@@ -30,18 +30,6 @@ void    Keyboard_Auto(void)
       case bGET_CURRTIME:       auto_GetCurrTime();     break;
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
     }
-
-    // обновление показаний с каждым импульсом
-    if (fOnImpulse == 1)
-    {
-      fOnImpulse = 0;
-    }
-
-    // обновление показаний с частотой 1 √ц
-    if (fOnSecond == 1)
-    {
-      fOnSecond = 0;
-    }
   }
 
   else if (enGlobal == GLB_REPROGRAM)
