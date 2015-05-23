@@ -1,0 +1,1288 @@
+/*------------------------------------------------------------------------------
+AUTOMATIC1.C
+
+
+------------------------------------------------------------------------------*/
+
+#include "../main.h"
+#include "../memory/mem_factors.h"
+#include "../memory/mem_digitals.h"
+#include "../keyboard/keyboard.h"
+#include "../display/display.h"
+#include "../serial/ports_stack.h"
+#include "../serial/ports_devices.h"
+#include "../serial/ports_common.h"
+#include "../devices/devices.h"
+#include "../engine.h"
+#include "../energy.h"
+#include "device_a.h"
+#include "device_b.h"
+#include "device_c.h"
+#include "automatic_a.h"
+#include "automatic_b.h"
+#include "automatic_c.h"
+
+
+
+real                    reKtrans, reKpulse;
+
+
+
+#ifndef SKIP_A
+
+// чтение коэффициентов для счётчика СЭТ-4ТМ
+bool    ReadKoeffDeviceA(void)
+{
+uchar   i;
+
+  if (QueryOpenA_Full(25) == 0) return(0);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    InitPush(0);
+    PushChar(diCurr.bAddress);           
+    PushChar(8);           
+    PushChar(2);                        // чтение коэффициентов
+
+    DelayOff();
+    QueryIO(1+10+2, 2+1+2);
+
+    if (Input() == SER_GOODCHECK) break; 
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+
+ // K трансформации
+  reKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    InitPush(0);
+    PushChar(diCurr.bAddress);           
+    PushChar(8);           
+    PushChar(0x12);                     // чтение постоянной счётчика
+
+    DelayOff();
+    QueryIO(1+3+2, 2+1+2);
+
+    if (Input() == SER_GOODCHECK) break; 
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(75);
+
+
+  switch (InBuff(2) & 0x0F)             // K преобразования
+  {
+    case 0:  reBuffA = 10000;  break;
+    case 1:  reBuffA = 50000;  break;
+    case 2:  reBuffA =  2500;  break;
+    case 3:  reBuffA =  1000;  break;   // 12500
+    case 4:  reBuffA =  2000;  break;   // ?
+    case 5:  reBuffA =   500;  break;   // ?
+
+    default: return(0);  
+  }
+
+  reKpulse = reBuffA;
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_B
+
+// чтение коэффициентов для счётчика Меркурий-230
+bool    ReadKoeffDeviceB(void)
+{
+uchar   i;
+
+  if (QueryOpenB_Full(25) == 0) return(0);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    InitPush(0);
+    PushChar(diCurr.bAddress);           
+    PushChar(8);           
+    PushChar(2);                        // чтение коэффициентов
+
+    DelayOff();
+    QueryIO(1+4+2, 2+1+2);
+
+    if (Input() == SER_GOODCHECK) break; 
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+
+ // K трансформации
+  reKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    // первый вариант: ответ 3 байта
+    InitPush(0);
+    PushChar(diCurr.bAddress);           
+    PushChar(8);           
+    PushChar(0x12);                     // чтение постоянной счётчика
+
+    DelayOff();
+    QueryIO(1+3+2, 2+1+2);
+
+    if (Input() == SER_GOODCHECK) break; 
+    if (fKey == true) return(0);
+                                        
+    // второй вариант: ответ 6 байт
+    InitPush(0);
+    PushChar(diCurr.bAddress);           
+    PushChar(8);           
+    PushChar(0x12);                     // чтение постоянной счётчика
+
+    DelayOff();
+    QueryIO(1+6+2, 2+1+2);
+
+    if (Input() == SER_GOODCHECK) break; 
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(75);
+
+  switch (InBuff(3) & 0x0F)             // K преобразования
+  {
+    case 1:  reBuffA = 10000;  break;
+    case 2:  reBuffA =  2000;  break;
+    case 3:  reBuffA =  1000;  break;
+    case 4:  reBuffA =  2000;  break;
+
+    default: return(0);  
+  }
+
+  reKpulse = reBuffA;
+
+  mpreLevel[ibDig] = reBuffA / 1000;
+
+  return(1);
+}
+
+
+// чтение коэффициентов для счётчика Меркурий-230
+bool    ReadKoeffDeviceB_Special(void)
+{
+uchar   i;
+
+  if (QueryOpenB_Full(25) == 0) return(0);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    InitPush(0);
+    PushChar(diCurr.bAddress);           
+    PushChar(8);           
+    PushChar(2);                        // чтение коэффициентов
+
+    DelayOff();
+    QueryIO(1+4+2, 2+1+2);
+
+    if (Input() == SER_GOODCHECK) break; 
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+
+ // K трансформации
+  reKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
+
+  // K преобразования
+  reBuffA = 2000;
+  reKpulse = reBuffA;
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_C
+
+// чтение коэффициентов для счётчика СС-301
+bool    ReadKoeffDeviceC(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryOpenC();                       // открытие канала связи
+
+    if (RevInput() == SER_GOODCHECK) break;  
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(25);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+
+    InitPush(0);
+    PushChar(diCurr.bAddress);           
+    PushChar(3);
+    PushChar(34);
+
+    PushChar(0);
+    PushChar(0);
+    PushChar(0);
+
+    RevQueryIO(4+18+2, 3+3+2);
+
+    if (RevInput() == SER_GOODCHECK) break;  
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+
+  combo32 co;
+
+  co.mpbBuff[0] = InBuff(4);
+  co.mpbBuff[1] = InBuff(5);
+  co.mpbBuff[2] = InBuff(6);
+  co.mpbBuff[3] = InBuff(7);
+
+  reKtrans = co.dwBuff;
+
+  co.mpbBuff[0] = InBuff(8);
+  co.mpbBuff[1] = InBuff(9);
+  co.mpbBuff[2] = InBuff(10);
+  co.mpbBuff[3] = InBuff(11);
+
+  reKtrans *= co.dwBuff;            // K трансформации
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+
+    InitPush(0);
+    PushChar(diCurr.bAddress);
+    PushChar(3);
+    PushChar(24);
+
+    PushChar(0);
+    PushChar(0);
+    PushChar(0);
+
+    RevQueryIO(4+8+2, 3+3+2);
+
+    if (RevInput() == SER_GOODCHECK) break;  
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(60);
+
+
+  reBuffA = InBuff(8) + InBuff(9)*0x100;
+  reBuffA = 1000000/reBuffA;            // K преобразования
+  reKpulse = reBuffA;
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_G
+
+bool    ReadKoeffDeviceG(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryOpenG();
+
+    if (CodInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+
+  if (ReadOpenG() == 0) return(0);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    InitPushCod();
+
+    PushChar(0x7E);
+    PushChar(0x03);
+    PushChar(0x06);
+
+    PushCharCod(0x03);
+    PushCharCod(0x00);
+    PushCharCod(0x00);
+
+    CodQueryIO(3+25+1, 3+3+1);
+
+    if (CodInput() == SER_GOODCHECK) break; 
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+
+  InitPop(3);
+  for (i=0; i<9; i++) PopChar();
+
+  if (ExtVersionCod()) PopRealExt_G(); else PopRealBCD_G();
+  reKtrans = reBuffA;
+
+  if (ExtVersionCod()) PopRealExt_G(); else PopRealBCD_G();  
+  reKtrans *= reBuffA;                  // K трансформации
+  
+  reBuffA = 10000;                      // K преобразования
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_H
+
+bool    ReadKoeffDeviceH(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryOpenH();
+
+    if (CodInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+
+  if (ReadOpenH() == 0) return(0);
+
+
+  reKtrans = 1;                         // K трансформации
+
+  if (bVersionCod == 43)
+    reBuffA = 1000;                     // K преобразования
+  else
+    reBuffA = 10000;
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_P
+
+bool    ReadKoeffDeviceP(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryRegisterP();
+
+    if (ElsInput(0) != SER_GOODCHECK) continue; else break;
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(60);
+
+  ReadRegisterP();
+
+  return(1);
+}
+
+#endif
+
+
+
+#if (defined SKIP_A && defined SKIP_B && defined SKIP_C && defined SKIP_E)
+#else
+
+// сохранение К преобразования и К трасформации
+void    SetCanalsAll(void)
+{
+  SetCanReal(mprePulseHou,ibDig,&reBuffA);
+  SetCanReal(mprePulseMnt,ibDig,&reBuffA);
+  reBuffA = reKtrans;
+
+  SetCanReal(mpreTransEng,ibDig,&reBuffA);
+  SetCanReal(mpreTransCnt,ibDig,&reBuffA);
+}
+
+#endif
+
+
+/*
+#if (defined SKIP_A && defined SKIP_B && defined SKIP_C)
+#else
+
+// сохранение показаний счётчиков
+void    SetEnergyAll(void)
+{
+  reBuffA  = GetCanReal(mpreTransCnt,ibDig) / GetCanReal(mprePulseHou,ibDig);
+  reBuffA *= coEnergy.dwBuff;
+
+  SetCanReal(mpreCount,ibDig);    
+}
+
+#endif
+*/
+
+
+#ifndef SKIP_A
+
+// задание параметров для счётчиков СЭТ-4ТМ
+bool    AutomaticA(void)
+{
+  if (ReadKoeffDeviceA() == 0) return(0);
+
+
+  SetCanalsAll();                        // сохранение К преобразования и К трасформации
+
+  if (QueryEnergyA_Full(0,100) == 0) return(0);
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_B
+
+// задание параметров для счётчиков Меркурий-230
+bool    AutomaticB(void)
+{
+  if (ReadKoeffDeviceB() == 0) return(0);
+
+
+  SetCanalsAll();                        // сохранение К преобразования и К трасформации
+
+  if (QueryEnergyB_Full(0,100) == 0) return(0);
+
+  return(1);
+}
+
+
+// задание параметров для счётчиков Меркурий-230
+bool    AutomaticJ(void)
+{
+  if (ReadKoeffDeviceB_Special() == 0) return(0);
+  mpreLevel[ibDig] = reBuffA / 1000;
+
+
+  SetCanalsAll();                        // сохранение К преобразования и К трасформации
+
+  if (QueryEnergyB_Full(0,100) == 0) return(0);
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_C
+
+// задание параметров для счётчиков СС-301
+bool    AutomaticC(void)
+{
+  if (ReadKoeffDeviceC() == 0) return(0);
+
+
+  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+
+  DelayOff();
+  QueryEnergyAbsC();                    // чтение накопленной энергии
+
+  if (RevInput() != SER_GOODCHECK) return(0);
+  ShowPercent(100);
+/*
+  ReadEnergyC();
+  SetEnergyAll();                       // сохранение показаний счётчиков
+*/
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_D
+
+// открытие канала для счётчиков ABB Альфа
+bool    OpenDeviceD(void)
+{
+uchar   i;
+
+  for (i=0; i<bMAJORREPEATS; i++)
+  {
+    ShowPercent(i);
+
+    DelayOff();
+    QueryOpenD();
+
+    if (ExtInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMAJORREPEATS) return(0);
+  ShowPercent(48);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryPasswordD();
+
+    if (ExtInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(49);
+
+  if (InBuff(2) != 0) return(0);
+  ShowPercent(50);
+
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_E
+
+// открытие канала для сумматоров СЭМ-2
+bool    OpenDeviceE(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    if (diCurr.bAddress <= 16)
+    {   
+      QueryBreakE();
+
+      InitPush(0);
+      PushChar(0x1B);          
+      PushChar('0'+diCurr.bAddress);            
+
+      Query(1+1, 2, 1);
+
+      if (EscInput() == SER_GOODCHECK) break;
+      if (fKey == true) return(0);
+    }
+    else return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_G
+
+// открытие канала для счётчиков Энергия-9 a
+bool    OpenDeviceG(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryOpenG();
+
+    if (CodInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+
+
+  if (ReadOpenG() == 0) return(0);
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_H
+
+// открытие канала для счётчиков Энергия-9 a
+bool    OpenDeviceH(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryOpenH();
+
+    if (CodInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+
+
+  if (ReadOpenH() == 0) return(0);
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_D
+
+// чтение вснй накопленной энергии для счётчиков ABB Альфа
+bool    ReadAllEnergyD(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryEnergyD();
+
+    if (ExtInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(75);
+
+  ibMinor = 0;
+  ReadEnergyD();
+
+
+  while (ibMinor < GetEnergyBlocksD())
+  {
+    for (i=0; i<bMINORREPEATS; i++)
+    {
+      DelayOff();
+      QueryContinueD();
+
+      if (ExtInput() == SER_GOODCHECK) break;
+      if (fKey == true) return(0);
+    }
+
+    if (i == bMINORREPEATS) return(0);
+    ShowPercent(76 + ibMinor);
+
+    ReadEnergyD();
+  }
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryStopD();
+
+    if (ExtInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(100);
+
+  ReadQuadrantsD();
+
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_P
+
+// открытие канала для счётчиков Elster A1140
+bool    OpenDeviceP(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryOpenP();
+
+    if (ElsInput(1) == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(20);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryModeP();
+
+    if (ElsInput(0) == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(30);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryPasswordP();
+
+    if (ElsInput(2) == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(40);
+
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_D
+
+// задание параметров для счётчиков ABB Альфа
+bool    AutomaticD(void)
+{
+uchar   i;
+
+  if (OpenDeviceD() == 0) return(0);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryConfigD();
+
+    if (ExtInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(51);
+
+  if (InBuff(2) != 0) return(0);
+  ShowPercent(52);
+  
+  ReadConfigD();
+
+
+  if (ReadAllEnergyD() == 0) return(0);
+
+  QueryCloseD(0);
+
+
+  MakeEnergyD();
+
+  SetCanReal(mpreCount,ibDig);    
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_E
+
+// задание параметров для сумматора СЭМ-2
+bool    AutomaticE(void)
+{
+uchar   i;
+
+  if (OpenDeviceE() == 0) return(0);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    InitPush(0);
+    PushChar(0x1B);          
+    PushChar('w');            
+
+    Query(300+1, 2, 1);  
+
+    if (EscInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(75);
+
+
+  InitPop((uint)132 + diCurr.ibLine*3);// K трансформации
+  PopRealBCD();
+
+  reKtrans = reBuffA;                    
+
+
+  InitPop((uint)180 + diCurr.ibLine*3); // K преобразования
+  PopRealBCD();
+
+  SetCanalsAll();                        // сохранение К преобразования и К трасформации
+
+
+  DelayOff();
+
+  for (i=0; i<bMINORREPEATS; i++)       // чтение накопленной энергии
+  {
+    InitPush(0);
+    PushChar(0x1B);          
+    PushChar('S');            
+
+    Query(64+1, 2, 1);  
+
+    if (EscInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(100);
+
+
+  InitPop(diCurr.ibLine*4); 
+
+  coFloat.mpbBuff[0] = PopChar();
+  coFloat.mpbBuff[1] = PopChar();
+  coFloat.mpbBuff[2] = PopChar();
+  coFloat.mpbBuff[3] = PopChar();
+
+  ToReal();
+  SetCanReal(mpreCount,ibDig);            // сохранение показаний счётчиков
+
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_F
+
+// задание параметров для сумматора СЭМ+2
+bool    AutomaticF(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryBreakF();
+    QueryKoeffF();
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+  ReadKoeffF();
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryRealExtendedF(bEXT_GETSIMPLE_ESC_S);
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(100);
+
+  ReadRealExtendedF();
+
+  SetCanReal(mpreCount,ibDig);  
+
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_G
+
+bool    AutomaticG(void)
+{
+  if (ReadKoeffDeviceG() == 0) return(0);
+  ShowPercent(100);
+
+  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_H
+
+bool    AutomaticH(void)
+{
+  if (ReadKoeffDeviceH() == 0) return(0);
+  ShowPercent(100);
+
+  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_I
+
+bool    AutomaticI(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryOpenI();
+
+    if (TxtInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ReadOpenI();
+
+  reKtrans = 1;                         // K трансформации
+  reBuffA = 5000;                       // K преобразования
+
+  ShowPercent(100);
+
+  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_K
+
+bool    AutomaticK(void)
+{
+uchar   i,bT;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryCloseK();
+    QueryOpenK();
+
+    if (BccInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+
+    bT = InBuff(IndexInBuff() - 1) & 0x7F;
+    if ((bT == '\r') || (bT == '\n')) 
+      break;
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ReadOpenK();
+
+  QueryCloseK();
+
+
+  reKtrans = 1;                         // K трансформации
+  reBuffA = 5000;                       // K преобразования
+
+  Delay(1000);
+
+  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_M
+
+bool    AutomaticM(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryEnergyAbsM();
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+
+  reKtrans = 1;                         // K трансформации
+  reBuffA = 100;                        // K преобразования
+
+  ShowPercent(100);
+
+  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_N
+
+bool    AutomaticN(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    InitPush(0);
+    PushChar(0);   
+    PushChar(diCurr.bAddress);
+
+    PushChar(8);
+
+    PushChar(0);
+    PushChar(0);
+    PushChar(0);
+    PushChar(0);
+    PushChar(0);
+    PushChar(0);
+    PushChar(0);
+    PushChar(0);
+
+    QueryIO(5+8, 5+8);
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+
+  sprintf(szLo+1,"версия:");
+  szLo[ 9] = InBuff(3); 
+  szLo[10] = InBuff(4); 
+  szLo[11] = InBuff(5); 
+  szLo[12] = InBuff(6); 
+  szLo[13] = InBuff(7); 
+
+  DelayInf(); Clear();
+  
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryEnergyAbsN();
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+  ReadEnergyN();
+
+  mpdwBase[ibDig] = mpdwChannelsA[0];
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_O
+
+bool    AutomaticO(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryOpenO();
+
+    if (TxtInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ReadOpenO();
+
+  reKtrans = 1;                         // K трансформации
+  reBuffA = 5000;                       // K преобразования
+
+  ShowPercent(100);
+
+  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_T
+
+bool    AutomaticT(void)
+{
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryVersionT();
+
+    if (TxtInput() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ReadVersionT();
+
+  Delay(1000); Clear();
+
+  reKtrans = 1;                         // K трансформации
+  reBuffA = 5000;                       // K преобразования
+
+  ShowPercent(100);
+
+  SetCanalsAll();
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_P
+
+bool    AutomaticP(void)
+{
+uchar   i;
+
+  Clear();
+  if (OpenDeviceP() == 0) return(0);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryTransP();
+
+    if (ElsInput(0) != SER_GOODCHECK) continue; else break;
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(50);
+
+  ReadTransP();                        // K трансформации
+  QueryCloseP();
+
+
+  reBuffA = 5000;                       // K преобразования
+  SetCanalsAll();                       // сохранение К преобразования и К трансформации
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_R
+
+bool    AutomaticR(void)
+{
+  Clear();
+
+  if (ReadCntCurrR() == 0) return(0);
+
+  reBuffA = 1;                          // K преобразования
+  reKtrans = 1;                         // K трансформации
+  SetCanalsAll();                       // сохранение К преобразования и К трансформации
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_S
+
+bool    AutomaticS(void)
+{
+  Clear();
+
+  if (QueryConfigS_Full(50) == 0) return(0);
+
+  reBuffA = wDividerS;                  // K преобразования
+  reKtrans = 1;                         // K трансформации
+  SetCanalsAll();                       // сохранение К преобразования и К трансформации
+
+  return(1);
+}
+
+#endif
