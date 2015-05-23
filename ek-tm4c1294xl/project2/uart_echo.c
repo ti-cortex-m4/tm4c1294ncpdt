@@ -37,20 +37,11 @@ TODO .C
 #include "src/serial/modems.h"
 #include "src/serial/print.h"
 #include "src/settings.h"
-#include "src/impulses/impulses.h"
-#include "src/impulses/factors.h"
 #include "src/groups.h"
 #include "src/tariffs/zones.h"
 #include "src/tariffs/tariffs.h"
 #include "src/tariffs/relaxs.h"
 #include "src/tariffs/gaps.h"
-#include "src/digitals/digitals.h"
-#include "src/digitals/limits.h"
-#include "src/digitals/params/params.h"
-#include "src/digitals/profile/profile_core.h"
-#include "src/devices/devices_init.h"
-#include "src/devices/devices.h"
-#include "src/digitals/phones.h"
 #include "src/serial/speeds.h"
 #include "src/serial/flow.h"
 #include "src/output/esc/esc.h"
@@ -107,22 +98,6 @@ int main(void) {
 
 	InitSlide();
 
-  PrintStart();
-	InitStorage();
-	InitRealtime();
-  PrintStop();
-
-	InitDisplay();
-
-//    InitCurrent();
-//    InitProfiles();
-    InitDevices2();
-
-    InitSerial0();
-    InitSerial1();
-    InitSerial2();
-    InitSerial3();
-
     InitTimer0(ui32SysClock);
     InitTimer1(ui32SysClock);
 
@@ -131,15 +106,6 @@ int main(void) {
 
     while (1) {
     	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM));
-
-    	RunRealtime();
-    	RunDevices();
     	RunKeyboard();
-    	RunLocal();
-
-    	RunResponseCRC_All();
-    	RunResponseEsc_All();
-    	RunResponseUni_All();
-    	RunResponseFlow_All();
     }
 }
