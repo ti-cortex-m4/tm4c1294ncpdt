@@ -33,13 +33,16 @@ TODO .C
 
 
 
+extern int main2 (void);
+
+
 int main(void) {
   ui32SysClock = GetSystemClockFrequency();
 
-  InitUart0(ui32SysClock);
-  InitUart2(ui32SysClock);
-  InitUart3(ui32SysClock);
-  InitUart4(ui32SysClock);
+//  InitUart0(ui32SysClock);
+//  InitUart2(ui32SysClock);
+//  InitUart3(ui32SysClock);
+//  InitUart4(ui32SysClock);
 
 	InitBeep();
 	InitLCD();
@@ -53,6 +56,9 @@ int main(void) {
 
     InitTimer0(ui32SysClock);
     InitTimer1(ui32SysClock);
+    PrintStart();
+
+    main2();
 
     IntMasterEnable();
     LongBeep();

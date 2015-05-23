@@ -16,7 +16,7 @@ void    PrintStart(void) {
 #ifdef ENABLE_PRINT
 
   IntDisable(INT_UART0);
-  UARTStdioConfig(0, 9600, 120000000);
+  UARTStdioConfig(0, 115200, 120000000);
 
 #endif
 }
@@ -44,7 +44,7 @@ void    PrintString(const char  *psz) {
 void    PrintChar(uchar  b) {
 #ifdef ENABLE_PRINT
 
-  UARTprintf(" %u ", b);
+  UARTprintf("%c", b);
 
 #endif
 }

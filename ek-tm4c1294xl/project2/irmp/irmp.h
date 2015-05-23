@@ -15,6 +15,11 @@
 #ifndef _IRMP_H_
 #define _IRMP_H_
 
+#include <stdint.h>
+#include <stdbool.h>
+#include "../tm4c1294xl/driverlib/gpio.h"
+#include "inc/hw_ints.h"
+
 #include "irmpsystem.h"
 
 #ifndef IRMP_USE_AS_LIB

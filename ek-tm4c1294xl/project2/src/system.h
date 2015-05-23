@@ -12,7 +12,7 @@ SYSTEM.H
 #define wFREQUENCY_T0   350
 
 // частота прерывани€ Timer1, √ц
-#define wFREQUENCY_T1   1
+#define wFREQUENCY_T1   20000
 
 
 // длина заголовка пакета
