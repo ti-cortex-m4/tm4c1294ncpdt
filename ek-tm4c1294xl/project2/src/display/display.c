@@ -10,7 +10,6 @@ DISPLAY.C
 #include "../main.h"
 #include "../memory/mem_program.h"
 #include "../keyboard/keyboard.h"
-#include "../keyboard/key_reset.h"
 #include "../hardware/watchdog.h"
 #include "messages.h"
 #include "slides.h"
