@@ -26,10 +26,6 @@
 	</natures>
 	<variableList>
 		<variable>
-			<name>ORIGINAL_PROJECT_ROOT</name>
-			<value>file:/D:/TI/SW-EK-TM4C1294XL-2.1.0.12573/examples/boards/ek-tm4c1294xl/uart_echo/ccs/</value>
-		</variable>
-		<variable>
 			<name>SW_ROOT</name>
 			<value>$%7BPARENT-5-ORIGINAL_PROJECT_ROOT%7D</value>
 		</variable>
