@@ -28,6 +28,7 @@ TODO .C
 #include "src/display/display.h"
 #include "src/isr/timer0.h"
 #include "src/isr/timer1.h"
+#include "src/isr/timer2.h"
 #include "src/isr/serial0.h"
 #include "src/isr/serial1.h"
 #include "src/isr/serial2.h"
@@ -125,6 +126,7 @@ int main(void) {
 
     InitTimer0(ui32SysClock);
     InitTimer1(ui32SysClock);
+    InitTimer2(ui32SysClock);
 
     IntMasterEnable();
     LongBeep();
