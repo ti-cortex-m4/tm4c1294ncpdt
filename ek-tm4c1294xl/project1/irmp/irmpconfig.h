@@ -133,8 +133,8 @@
  *---------------------------------------------------------------------------------------------------------------------------------------------------
  */
 #elif defined (STELLARIS_ARM_CORTEX_M4)                                 // use B4 as IR input on Stellaris LM4F
-#  define IRMP_PORT_LETTER                      B
-#  define IRMP_BIT_NUMBER                       4
+#  define IRMP_PORT_LETTER                      P
+#  define IRMP_BIT_NUMBER                       0
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------
  * Handling of unknown target system: DON'T CHANGE
