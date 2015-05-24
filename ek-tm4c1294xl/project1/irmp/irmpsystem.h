@@ -91,6 +91,8 @@ typedef unsigned short                  uint16_t;
 
 #elif defined(STELLARIS_ARM_CORTEX_M4)
 
+#  include <stdint.h>
+#  include <stdbool.h>
 #  include "inc/hw_ints.h"
 #  include "inc/hw_memmap.h"
 #  include "inc/hw_types.h"
@@ -123,7 +125,7 @@ typedef unsigned short                  uint16_t;
 
 #endif
 
-#if defined(PIC_CCS) || defined(PIC_C18) || defined(ARM_STM32) || defined(STELLARIS_ARM_CORTEX_M4)
+#if defined(PIC_CCS) || defined(PIC_C18) || defined(ARM_STM32)
 typedef unsigned char                   uint8_t;
 typedef unsigned short                  uint16_t;
 #endif
