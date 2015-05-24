@@ -84,6 +84,7 @@ int main(void) {
 	InitCODE();
 
 	InitSettings();         Delay(100); TestOK();
+	InitIR();
 	InitKey();
 	InitKeyboard();         Delay(100); TestOK();
 	InitImpulses();
