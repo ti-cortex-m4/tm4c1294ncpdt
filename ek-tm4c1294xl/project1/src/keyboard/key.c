@@ -69,7 +69,7 @@ uint  i = 0;
 }
 
 
-uchar   ConvertKey(uint  i)
+static uchar ConvertKey(uint  i)
 {
   switch (i)
   {

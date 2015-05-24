@@ -26,13 +26,41 @@ void    InitIR(void)
 
 
 
+static uchar ConvertKey(uint  i)
+{
+  switch (i)
+  {
+    case 0: return 0x2B;
+    case 1: return 0x0E;
+    case 2: return 0x1E;
+    case 3: return 0x2E;
+    case 4: return 0x3E;
+    case 5: return 0x0D;
+    case 6: return 0x1D;
+    case 7: return 0x2D;
+    case 8: return 0x3D;
+    case 9: return 0x0B;
+    case 12: return 0x07;
+    case 59: return 0x17;
+    default: return 0xFF;
+  }
+}
+
+
 void    RunIR(void)
 {
   static IRMP_DATA irmp_data;
 
   if (irmp_get_data (&irmp_data))
   {
-    bKey = (irmp_data).command;
-    fKey = true;
+    if (!(irmp_data.flags & IRMP_FLAG_REPETITION))
+    {
+      uchar i = ConvertKey((irmp_data).command);
+      if (i != 0xFF)
+      {
+        bKey = i;
+        fKey = true;
+      }
+    }
   }
 }
