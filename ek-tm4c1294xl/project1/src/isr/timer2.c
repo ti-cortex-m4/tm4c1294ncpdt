@@ -4,7 +4,18 @@ TIMER2.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_ints.h"
+#include "driverlib/gpio.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/timer.h"
+#include "../../irmp/irmp.h"
 #include "timer2.h"
+
+
+
+extern uint_fast8_t irmp_ISR (void);
 
 
 
@@ -30,4 +41,6 @@ void InitTimer2(uint32_t ui32SysClock)
 void Timer2IntHandler(void)
 {
   TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+
+  irmp_ISR();
 }

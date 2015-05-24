@@ -34,3 +34,5 @@ mpdwChannelsB[i] > 0xF0000000) dev_a dev_b
 remove tiKey
 
 optimise SetTime
+
+test int program cnt на вызов (timer + serial) + частота timer
