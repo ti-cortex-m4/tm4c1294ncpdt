@@ -11,6 +11,7 @@ IR.C
 #include "inc/hw_types.h"
 #include "keyboard.h"
 #include "../time/delay.h"
+#include "../access.h"
 #include "../../irmp/irmp.h"
 #include "ir.h"
 
@@ -51,15 +52,24 @@ void    RunIR(void)
 {
   static IRMP_DATA irmp_data;
 
-  if (irmp_get_data (&irmp_data))
+  if (irmp_get_data(&irmp_data))
   {
     if (!(irmp_data.flags & IRMP_FLAG_REPETITION))
     {
-      uchar i = ConvertKey((irmp_data).command);
+      uchar i = ConvertKey(irmp_data.command);
       if (i != 0xFF)
       {
         bKey = i;
         fKey = true;
+      }
+
+      if ((enGlobal == GLB_WORK) && (wProgram == bSET_PASSWORD))
+      {
+        if ((bKey == mpbKeys[13]) && (SuperUser() == false))
+        {
+          fKey = false;
+          Beep();
+        }
       }
     }
   }
