@@ -17,7 +17,7 @@ extern  file const              flExt4EnblCan;
 boolean LoadExt4Values(uchar  ibMon);
 
 void    InitExtended4(void);
-void    ResetExtended4(void);
+void    ResetExtended4(bool  fFull);
 
 void    NextDayExtended4(void);
 void    NextMonExtended4(void);

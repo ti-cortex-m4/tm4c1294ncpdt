@@ -73,7 +73,7 @@ void    InitExtended4(void)
 }
 
 
-void    ResetExtended4(void)
+void    ResetExtended4(bool  fFull)
 { 
   boExt4Flag = FALSE;
   SaveFile(&flExt4Flag);
