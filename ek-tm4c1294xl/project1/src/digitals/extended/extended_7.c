@@ -84,7 +84,7 @@ void    NextDayExtended7(void)
 
       value6 va;
       va.bStatus = ST4_OK;
-      va.reSelf = re;
+      va.dbValue = re;
       va.tiUpdate = *GetCurrTimeDate();
 
       mpCntDayCan7[c] = va;
@@ -106,7 +106,7 @@ void    MakeExtended7(uchar  ibCan, real  re)
   {
     value6 va;
     va.bStatus = ST4_OK;
-    va.reSelf = re;
+    va.dbValue = re;
     va.tiUpdate = *GetCurrTimeDate();
 
     mpCntDayCan7[ibCan] = va;

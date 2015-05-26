@@ -74,7 +74,7 @@ void    ShowExtended4(uchar  ibCan, uchar  ibMon)
     LoadCntMon(ibMon);
 
     vl.bStatus = ST4_OK;
-    vl.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+    vl.dbValue = mpreCntMonCan[ PrevSoftMon() ][ibCan];
     vl.tiUpdate = tiZero;
     bStatus = ST4_OK;
   }
@@ -86,7 +86,7 @@ void    ShowExtended4(uchar  ibCan, uchar  ibMon)
     bStatus = vl.bStatus;
   }
 
-  reBuffA = vl.reSelf;
+  reBuffA = vl.dbValue;
   tiAlt = vl.tiUpdate;
 
   ShowCntMonCanF2();

@@ -44,7 +44,7 @@ void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
     PushChar(vl.bStatus);
     PushInt(0xFF);
     PushInt(0xFF);
-    PushFloat(vl.reSelf);
+    PushFloat(vl.dbValue);
     PushTime(vl.tiUpdate);
   }
 }
