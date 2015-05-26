@@ -125,7 +125,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
     for (c=0; c<bCANALS; c++)
     {
       LoadPrevDigital(c);
-      if (CompareCurrPrevLines(ibDig, c) == 1)
+      if (CompareCurrPrevLines(ibDig, c) == true)
       {
         value4t vl = mpCntMonCan4T[c];
 
@@ -148,7 +148,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
     for (c=0; c<bCANALS; c++)
     {
       LoadPrevDigital(c);
-      if (CompareCurrPrevLines(ibDig, c) == 1)
+      if (CompareCurrPrevLines(ibDig, c) == true)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
