@@ -26,24 +26,28 @@ uchar    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
 {
   if (GetDigitalDevice(ibCan) == 0)
   {
-    PushChar(ST4_OK);
-    PushInt(0xFFFF);
-    PushInt(0xFFFF);
-    PushFloat(mpreCntMonCan[ PrevSoftMon() ][ibCan]);
-    PushTime(tiZero);
+    uchar bSize = 0;
 
-    return 1+2+2+4+6;
+    bSize += PushChar(ST4_OK);
+    bSize += PushInt(0xFFFF);
+    bSize += PushInt(0xFFFF);
+    bSize += PushFloatOrDouble(mpreCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
+    bSize += PushTime(tiZero);
+
+    return bSize;
   }
   else
   {
-    value6 vl = mpCntMonCan4[ibCan];
-    PushChar(vl.bStatus);
-    PushInt(0xFFFF);
-    PushInt(0xFFFF);
-    PushFloat(vl.dbValue);
-    PushTime(vl.tiUpdate);
+    uchar bSize = 0;
 
-    return 1+2+2+4+6;
+    value6 vl = mpCntMonCan4[ibCan];
+    bSize += PushChar(vl.bStatus);
+    bSize += PushInt(0xFFFF);
+    bSize += PushInt(0xFFFF);
+    bSize += PushFloatOrDouble(vl.dbValue, fDouble);
+    bSize += PushTime(vl.tiUpdate);
+
+    return bSize;
   }
 }
 
