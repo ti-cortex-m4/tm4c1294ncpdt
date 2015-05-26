@@ -23,14 +23,3 @@ void    NextDayExtended4(void);
 void    NextMonExtended4(void);
 
 void    MakeExtended4(void);
-
-void    OutExtended40(void);
-void    OutExtended401(void);
-void    OutExtended41(void);
-void    OutExtended42(void);
-void    OutExtended43(void);
-
-bool    ReadCntMonCanF_Curr(uchar  ibMon, uchar  ibCan);
-bool    ReadCntMonCanF_Buff(uchar  ibMon, uchar  ibCan);
-void    ShowCntMonCanF2(void);
-void    ShowExtended4(uchar  ibCan, uchar  ibMon);

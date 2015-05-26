@@ -7,23 +7,13 @@ EXTENDED_4.C
 #include "../../main.h"
 #include "../../console.h"
 #include "../../memory/mem_realtime.h"
-#include "../../memory/mem_energy.h"
-#include "../../memory/mem_extended_6.h"
-#include "../../realtime/realtime.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports_devices.h"
 #include "../../digitals/digitals.h"
-#include "../../digitals/digitals_pause.h"
 #include "../../digitals/digitals_display.h"
-#include "../../digitals/digitals_messages.h"
 #include "../../devices/devices.h"
-#include "../../sensors/device_f.h"
-#include "../../sensors/automatic_p.h"
 #include "../../sensors/automatic2.h"
 #include "../../time/rtc.h"
-#include "../../time/timedate.h"
-#include "../../engine.h"
-#include "../../energy2.h"
+#include "extended_4_in.h"
 #include "extended_4.h"
 
 
@@ -69,11 +59,14 @@ void    InitExtended4(void)
 
 void    ResetExtended4(bool  fFull)
 { 
-  boExt4Flag = FALSE;
-  SaveFile(&flExt4Flag);
+  if (fFull)
+  {
+    boExt4Flag = FALSE;
+    SaveFile(&flExt4Flag);
 
-  bExt4Months = 4;
-  SaveFile(&flExt4Months);
+    bExt4Months = 4;
+    SaveFile(&flExt4Months);
+  }
 
 
   uchar c;
