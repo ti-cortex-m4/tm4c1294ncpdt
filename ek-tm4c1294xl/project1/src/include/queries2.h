@@ -62,7 +62,7 @@ QUERIES2.H
 #define bEXT_GETEXTENDED40             42
 #define bEXT_GETEXTENDED41             43
 #define bEXT_GETEXTENDED42             44
-#define bEXT_GETEXTENDED44            60
+#define bEXT_GETEXTENDED44             60
 #define bEXT_GETEXTENDED43             61
 #define bEXT_GETEXTENDED6              62
 

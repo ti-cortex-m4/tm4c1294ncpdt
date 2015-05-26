@@ -24,9 +24,10 @@ void    Response253_CRC(void)
     case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt(true); break;
     case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt(true); break;
 
-    case bEXT_GETEXTENDED40:  OutExtended40(true);  break;
+    case bEXT_GETEXTENDED40: OutExtended40(true); break;
     case bEXT_GETEXTENDED44: OutExtended44(true); break;
-    case bEXT_GETEXTENDED41:  OutExtended41(true);  break;
+    case bEXT_GETEXTENDED41: OutExtended41(true); break;
+    case bEXT_GETEXTENDED42: OutExtended42(true); break;
 
     case bEXT_GET_EXTENDED_4T: OutExtended4T(true); break;
 
