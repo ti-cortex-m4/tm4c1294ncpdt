@@ -48,7 +48,6 @@ static char const       szExtended4[]   = "Опрос данных: 4 ",
 
 
 static uchar            bCount;
-static uchar            bStatus;
 
 
 
