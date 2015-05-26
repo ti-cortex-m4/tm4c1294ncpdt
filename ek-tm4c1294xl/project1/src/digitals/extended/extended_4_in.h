@@ -1,10 +1,13 @@
 /*------------------------------------------------------------------------------
-EXTENDED_4_OUTPUT.H
+EXTENDED_4_OUT.H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  uchar                   bStatus;
+extern  uchar                   bStatus4;
+extern  double                  dbValue4;
+extern  time                    tiUpdate4;
+
 
 
 bool    ReadCntMonCanF_Curr(uchar  ibMon, uchar  ibCan);
