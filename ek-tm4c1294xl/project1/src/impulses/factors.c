@@ -98,9 +98,9 @@ void    StartFactors(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpreValueEngHou[c] = (mpreTransEng[c] / mprePulseHou[c]) * GetLosse(c);
-    mpreValueCntHou[c] = (mpreTransCnt[c] / mprePulseHou[c]) * GetLosse(c);
-    mpreValueEngMnt[c] = (mpreTransEng[c] / mprePulseMnt[c]) * GetLosse(c);
-    mpreValueCntMnt[c] = (mpreTransCnt[c] / mprePulseMnt[c]) * GetLosse(c);
+    mpdbValueEngHou[c] = (mpreTransEng[c] / mprePulseHou[c]) * GetLosse(c);
+    mpdbValueCntHou[c] = (mpreTransCnt[c] / mprePulseHou[c]) * GetLosse(c);
+    mpdbValueEngMnt[c] = (mpreTransEng[c] / mprePulseMnt[c]) * GetLosse(c);
+    mpdbValueCntMnt[c] = (mpreTransCnt[c] / mprePulseMnt[c]) * GetLosse(c);
   }
 }

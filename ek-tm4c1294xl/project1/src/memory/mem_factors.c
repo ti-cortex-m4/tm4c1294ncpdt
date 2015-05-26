@@ -17,10 +17,10 @@ real                    mprePulseHou[bCANALS],
                         mprePulseMnt[bCANALS];
 
 // массив К эквивалентов
-real                    mpreValueEngHou[bCANALS],
-                        mpreValueCntHou[bCANALS],
-                        mpreValueEngMnt[bCANALS],
-                        mpreValueCntMnt[bCANALS];
+double                  mpdbValueEngHou[bCANALS],
+                        mpdbValueCntHou[bCANALS],
+                        mpdbValueEngMnt[bCANALS],
+                        mpdbValueCntMnt[bCANALS];
 
 // массив показаний счётчиков
 real                    mpreCount[bCANALS];

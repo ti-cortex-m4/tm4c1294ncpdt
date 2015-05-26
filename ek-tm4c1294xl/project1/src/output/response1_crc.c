@@ -85,10 +85,10 @@ void    Response1_CRC(void)
 
       case bINQ_GETKOEFF: OutAllFactors(); break;
 
-      case bINQ_GETVALUE_ENGHOU: OutGetFloatCan_GlobalWork(mpreValueEngHou); break;
-      case bINQ_GETVALUE_CNTHOU: OutGetFloatCan_GlobalWork(mpreValueCntHou); break;
-      case bINQ_GETVALUE_ENGMNT: OutGetFloatCan_GlobalWork(mpreValueEngMnt); break;
-      case bINQ_GETVALUE_CNTMNT: OutGetFloatCan_GlobalWork(mpreValueCntMnt); break;
+      case bINQ_GETVALUE_ENGHOU: OutGetFloatCan_GlobalWork(mpdbValueEngHou); break;
+      case bINQ_GETVALUE_CNTHOU: OutGetFloatCan_GlobalWork(mpdbValueCntHou); break;
+      case bINQ_GETVALUE_ENGMNT: OutGetFloatCan_GlobalWork(mpdbValueEngMnt); break;
+      case bINQ_GETVALUE_CNTMNT: OutGetFloatCan_GlobalWork(mpdbValueCntMnt); break;
 
       case bINQ_GETIMPCANDAY_ALL: OutImpDayCan(); break;
       case bINQ_GETIMPCANMON_ALL: OutImpMonCan(); break;
