@@ -121,11 +121,11 @@ void    Response255_CRC(void)
     case bEXT_SETRECALC1: OutSetRecalcHou1(); break;
     case bEXT_SETRECALC2: OutSetRecalcHou2(); break;
 
-    case bEXT_GETEXTENDED40:  OutExtended40(false);  break;
-    case bEXT_GETEXTENDED401: OutExtended401(false); break;
-    case bEXT_GETEXTENDED41:  OutExtended41(false);  break;
-    case bEXT_GETEXTENDED42:  OutExtended42();  break;
-    case bEXT_GETEXTENDED43:  OutExtended43();  break;
+    case bEXT_GETEXTENDED40:  OutExtended40(false); break;
+    case bEXT_GETEXTENDED44:  OutExtended44(false); break;
+    case bEXT_GETEXTENDED41:  OutExtended41(false); break;
+    case bEXT_GETEXTENDED42:  OutExtended42(); break;
+    case bEXT_GETEXTENDED43:  OutExtended43(); break;
 
     case bEXT_GETEXTENDED6:   OutExtended6();   break;
 
