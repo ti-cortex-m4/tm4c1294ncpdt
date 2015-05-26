@@ -174,11 +174,11 @@ void    OutExtended42(bool  fDouble)
     }
     else if (mpboEnblCan[ibCan] == FALSE)
     {
-      OutData4(ST4_BADENABLING, 0, fDouble);
+      OutData4(ST4_DISABLED, 0, fDouble);
     }
     else if (GetDigitalPhone(ibCan) != 0)
     {
-      OutData4(ST4_BADPORT, 0, fDouble);
+      OutData4(ST4_MODEM_LINK, 0, fDouble);
     }
     else
     {
