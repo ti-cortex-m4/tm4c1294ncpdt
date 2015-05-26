@@ -10,10 +10,10 @@ extern  real                    mpreTransEng[bCANALS],
 extern  real                    mprePulseHou[bCANALS],
                                 mprePulseMnt[bCANALS];
 
-extern  real                    mpreValueEngHou[bCANALS],
-                                mpreValueCntHou[bCANALS],
-                                mpreValueEngMnt[bCANALS],
-                                mpreValueCntMnt[bCANALS];
+extern  double                  mpdbValueEngHou[bCANALS],
+                                mpdbValueCntHou[bCANALS],
+                                mpdbValueEngMnt[bCANALS],
+                                mpdbValueCntMnt[bCANALS];
 
 extern  real                    mpreCount[bCANALS];
 

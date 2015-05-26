@@ -79,7 +79,7 @@ void    NextDayExtended7(void)
     if (GetDigitalDevice(c) == 0)
     {
       real re = *PGetCanImpAll(mpimAbsCan,c);
-      re *= mpreValueCntHou[c];
+      re *= mpdbValueCntHou[c];
       re += mpreCount[c];
 
       value6 va;

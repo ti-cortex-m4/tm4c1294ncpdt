@@ -257,7 +257,7 @@ uchar   ibCan;
     {
       if (boMntEscS == TRUE)
       {
-        mpreEsc_S[ibCan] = mpreValueCntHou[ibCan] * mpdwBase[ibCan];
+        mpreEsc_S[ibCan] = mpdbValueCntHou[ibCan] * mpdwBase[ibCan];
         mptiEsc_S[ibCan] = *GetCurrTimeDate();
       }
 
