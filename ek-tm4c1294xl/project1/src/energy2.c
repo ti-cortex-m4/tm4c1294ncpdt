@@ -292,7 +292,7 @@ boolean SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
     return TRUE;
   }
   else
-    return SaveBuff(CNTMONCAN + ibMonTo*REALCAN_PAGES, mpreCntMonCan[ ibMonFrom ], sizeof(real)*bCANALS);
+    return SaveBuff(CNTMONCAN + ibMonTo*FLOAT_CAN_PAGES, mpreCntMonCan[ ibMonFrom ], sizeof(real)*bCANALS);
 }
 
 
@@ -304,5 +304,5 @@ boolean LoadCntMon(uchar  ibMonFrom)
     return TRUE;
   }
   else
-    return LoadBuff(CNTMONCAN + ibMonFrom*REALCAN_PAGES, mpreCntMonCan[ PrevSoftMon() ], sizeof(real)*bCANALS);
+    return LoadBuff(CNTMONCAN + ibMonFrom*FLOAT_CAN_PAGES, mpreCntMonCan[ PrevSoftMon() ], sizeof(real)*bCANALS);
 }

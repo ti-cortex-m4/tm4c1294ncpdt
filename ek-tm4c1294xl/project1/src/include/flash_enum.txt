@@ -34,15 +34,15 @@ typedef enum
   WINTER                = SUMMER + 1,
 
   TRANS_ENG             = WINTER + 1,
-  TRANS_CNT             = TRANS_ENG + REALCAN_PAGES,
-  PULSE_HOU             = TRANS_CNT + REALCAN_PAGES,
-  PULSE_MNT             = PULSE_HOU + REALCAN_PAGES,
+  TRANS_CNT             = TRANS_ENG + FLOAT_CAN_PAGES,
+  PULSE_HOU             = TRANS_CNT + FLOAT_CAN_PAGES,
+  PULSE_MNT             = PULSE_HOU + FLOAT_CAN_PAGES,
 
-  COUNT                 = PULSE_MNT + REALCAN_PAGES,
-  LOSSE                 = COUNT + REALCAN_PAGES,
-  LEVEL                 = LOSSE + REALCAN_PAGES,
+  COUNT                 = PULSE_MNT + FLOAT_CAN_PAGES,
+  LOSSE                 = COUNT + FLOAT_CAN_PAGES,
+  LEVEL                 = LOSSE + FLOAT_CAN_PAGES,
 
-  IMPMNTCAN             = LEVEL + REALCAN_PAGES,
+  IMPMNTCAN             = LEVEL + FLOAT_CAN_PAGES,
   IMPHOUCAN             = IMPMNTCAN + bMINUTES,
 
   IMPDAYCAN             = IMPHOUCAN + IMPHOUCAN_PAGES,
@@ -51,7 +51,7 @@ typedef enum
   POWMONGRP             = POWDAYGRP + bPOWER_GRP*bDAYS,
   CNTMONCAN             = POWMONGRP + bPOWER_GRP*bMONTHS,
 
-  DEFDAYCAN             = CNTMONCAN + REALCAN_PAGES*bMONTHS,
+  DEFDAYCAN             = CNTMONCAN + FLOAT_CAN_PAGES*bMONTHS,
   DEFMONCAN             = DEFDAYCAN + bIMPULSE_CAN*bDAYS,
 
   IMPHOUCAN_BUFF        = DEFMONCAN + bIMPULSE_CAN*bMONTHS,
@@ -62,7 +62,7 @@ typedef enum
   POWMONGRP_BUFF        = POWDAYGRP_BUFF + bPOWER_GRP,
   CNTMONCAN_BUFF        = POWMONGRP_BUFF + bPOWER_GRP,
 
-  PTRMNT                = CNTMONCAN_BUFF + REALCAN_PAGES,
+  PTRMNT                = CNTMONCAN_BUFF + FLOAT_CAN_PAGES,
   PTRHOU                = PTRMNT + 1,
   PTRDAY                = PTRHOU + 1,
   PTRMON                = PTRDAY + 1,
