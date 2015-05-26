@@ -8,6 +8,7 @@ RESPONSE253_CRC,C
 #include "../memory/mem_ports.h"
 #include "../include/states.h"
 #include "../serial/ports.h"
+#include "../digitals/extended/extended_4_out.h"
 #include "../digitals/extended/extended_4t.h"
 #include "../digitals/extended/extended_5.h"
 #include "response_crc.h"
@@ -22,6 +23,10 @@ void    Response253_CRC(void)
   {
     case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt(true); break;
     case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt(true); break;
+
+    case bEXT_GETEXTENDED40:  OutExtended40(true);  break;
+    case bEXT_GETEXTENDED401: OutExtended401(true); break;
+    case bEXT_GETEXTENDED41:  OutExtended41(true);  break;
 
     case bEXT_GET_EXTENDED_4T: OutExtended4T(true); break;
 
