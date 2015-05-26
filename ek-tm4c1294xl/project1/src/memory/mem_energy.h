@@ -16,7 +16,7 @@ extern  impulse                 mpimDayCan[2][bCANALS],
 
 extern  impulse                 imAlt;
 
-extern  real                    mpreCntMonCan[2][bCANALS];
+extern  double                  mpdbCntMonCan[2][bCANALS];
 
 extern  power                   mppoDayGrp[2][bGROUPS],
                                 mppoMonGrp[2][bGROUPS];
