@@ -28,7 +28,7 @@ EXTENDED_4_OUT.C
 
 
 
-void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
+uchar    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
 {
   if (GetDigitalDevice(ibCan) == 0)
   {
@@ -37,6 +37,8 @@ void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
     PushInt(0xFFFF);
     PushFloat(mpreCntMonCan[ PrevSoftMon() ][ibCan]);
     PushTime(tiZero);
+
+    return 1+2+2+4+6;
   }
   else
   {
@@ -46,6 +48,8 @@ void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
     PushInt(0xFFFF);
     PushFloat(vl.dbValue);
     PushTime(vl.tiUpdate);
+
+    return 1+2+2+4+6;
   }
 }
 
@@ -70,8 +74,7 @@ void    OutExtended40(bool  fDouble)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4(c, InBuff(6), fDouble);
-        wSize += (1+2+2+4+6);
+        wSize += PushData4(c, InBuff(6), fDouble);
       }
     }
 
@@ -104,8 +107,7 @@ void    OutExtended401(bool  fDouble)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4(c, InBuff(6), fDouble);
-        wSize += (1+2+2+4+6);
+        wSize += PushData4(c, InBuff(6), fDouble);
       }
     }
 
@@ -127,8 +129,8 @@ void    OutExtended41(bool  fDouble)
     LoadExt4Values(InBuff(6));
 
     InitPushPtr();            
-    PushData4(InBuff(7), InBuff(6), fDouble);
-    OutptrOutBuff(1+2+2+4+6);
+    uint wSize = PushData4(InBuff(7), InBuff(6), fDouble);
+    OutptrOutBuff(wSize);
   }
 }
 
@@ -222,6 +224,7 @@ void    OutExtended42(void)
 void    OutExtended43(void)
 {
   InitPushPtr();
+
   uint wSize = 0;
 
   uchar c;
@@ -229,8 +232,7 @@ void    OutExtended43(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      Push(&mpboExt4EnblCan[c], sizeof(uchar));
-      wSize += sizeof(uchar);
+      wSize += PushChar(mpboExt4EnblCan[c]);
     }
   }
 
