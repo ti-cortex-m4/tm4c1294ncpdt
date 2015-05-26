@@ -1851,16 +1851,16 @@ uchar   i,j;
 
 
 // прочитать показани€ счЄтчиков текущие с цифровых счЄтчиков
-bool    ReadCntCurrCan(uchar  ibCanal)
+double2 ReadCntCurrCan(uchar  ibCan)
 {
   Clear();
 
-  LoadCurrDigital(ibCanal);
+  LoadCurrDigital(ibCan);
   ibPort = diCurr.ibPort;
 
   switch (diCurr.bDevice)
   {
-    case 0:  reBuffA = GetCntCurrImp(ibCanal);
+    case 0:  reBuffA = GetCntCurrImp(ibCan);
              return(1);
 
 #ifndef SKIP_A
@@ -1872,7 +1872,7 @@ bool    ReadCntCurrCan(uchar  ibCanal)
     case 8:
     case 2:  return( ReadCntCurrB() );
 
-    case 12: reBuffA = mpdwBase[ibCanal] * mpdbValueCntHou[ibCanal];
+    case 12: reBuffA = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
              return(1);
 #endif
 
@@ -1918,116 +1918,116 @@ bool    ReadTimeCan(uchar  ibCan)
 
 
 // прочитать показани€ счЄтчиков по мес€цам с цифровых счЄтчиков
-bool    ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
+double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 {
   Clear();
 
-  LoadCurrDigital(ibCanal);
+  LoadCurrDigital(ibCan);
   ibPort = diCurr.ibPort;
 
   switch (diCurr.bDevice)
   {
-    case 0:  if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = mpdbCntMonCan[ PrevSoftMon() ][ibCanal];
+    case 0:  if (LoadCntMon(ibMon) == 0) return(0);
+             reBuffA = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
              return(1);
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadCntMonCanA(ibMonth) );
+    case 1:  return( ReadCntMonCanA(ibMon) );
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadCntMonCanB(ibMonth) );
+    case 2:  return( ReadCntMonCanB(ibMon) );
 
-    case 12: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = mpdbCntMonCan[ PrevSoftMon() ][ibCanal];
+    case 12: if (LoadCntMon(ibMon) == 0) return(0);
+             reBuffA = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
              return(1);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadCntMonCanC(ibMonth) );
+    case 3:  return( ReadCntMonCanC(ibMon) );
 #endif
 
 #ifndef SKIP_D
-    case 4:  return( ReadCntMonCanD(ibMonth) ); break;
+    case 4:  return( ReadCntMonCanD(ibMon) ); break;
 #endif
 
 #ifndef SKIP_E
     case 7:  
-    case 5:  return( ReadCntMonCanE(ibMonth) ); break;
+    case 5:  return( ReadCntMonCanE(ibMon) ); break;
 #endif
 
 #ifndef SKIP_F
-    case 6:  return( ReadCntMonCanF(ibMonth) ); break;
+    case 6:  return( ReadCntMonCanF(ibMon) ); break;
 #endif
 
 #ifndef SKIP_G
-    case 9:  return( ReadCntMonCanG(ibMonth) ); break;
+    case 9:  return( ReadCntMonCanG(ibMon) ); break;
 #endif
 
 #ifndef SKIP_H
-    case 10: return( ReadCntMonCanH(ibMonth) ); break;
+    case 10: return( ReadCntMonCanH(ibMon) ); break;
 #endif
 
 #ifndef SKIP_I
-    case 11: return( ReadCntMonCanI(ibMonth) ); break;
+    case 11: return( ReadCntMonCanI(ibMon) ); break;
 #endif
 
 #ifndef SKIP_K
-    case 13: return( ReadCntMonCanK2(ibMonth) ); break;
+    case 13: return( ReadCntMonCanK2(ibMon) ); break;
 
-    case 14: ibMon = ibMonth; ibMinorMax = 1;
+    case 14: ibMon = ibMon; ibMinorMax = 1;
              return( ReadCntMonCanK() ); break;
 #endif
 
 #ifndef SKIP_L
     case 17:
-    case 16: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+    case 16: if (LoadCntMon(ibMon) == 0) return(0);
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
              return(1); break;
 #endif
 
 #ifndef SKIP_M
-    case 18: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+    case 18: if (LoadCntMon(ibMon) == 0) return(0);
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
              return(1); break;
 #endif
 
 #ifndef SKIP_N
-    case 19: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+    case 19: if (LoadCntMon(ibMon) == 0) return(0);
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
              return(1); break;
 #endif
 
 #ifndef SKIP_O
-    case 20: return( ReadCntMonCanO(ibMonth) ); break;
+    case 20: return( ReadCntMonCanO(ibMon) ); break;
 #endif
 
 #ifndef SKIP_P
-    case 21: return( ReadCntMonCanP(ibMonth) ); break;
+    case 21: return( ReadCntMonCanP(ibMon) ); break;
 #endif
 
 #ifndef SKIP_Q
-    case 22: return( ReadCntMonCanQ(ibMonth) ); break;
+    case 22: return( ReadCntMonCanQ(ibMon) ); break;
 #endif
 
 #ifndef SKIP_R
-    case 23: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+    case 23: if (LoadCntMon(ibMon) == 0) return(0);
+             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
              return(1); break;
 #endif
 
 #ifndef SKIP_S
-    case 24: return( ReadCntMonCanS(ibMonth) ); break;
+    case 24: return( ReadCntMonCanS(ibMon) ); break;
 #endif
 
 #ifndef SKIP_T
-    case 25: return( ReadCntMonCanT(ibMonth) ); break;
+    case 25: return( ReadCntMonCanT(ibMon) ); break;
 #endif
 
 #ifndef SKIP_U
-    case 26: return( ReadCntMonCanU(ibMonth) ); break;
+    case 26: return( ReadCntMonCanU(ibMon) ); break;
 #endif
 
 #ifndef SKIP_Z

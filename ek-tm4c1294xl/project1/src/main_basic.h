@@ -28,6 +28,14 @@ typedef struct
 } float2;
 
 
+// тип 'значение double и флаг достоверности'
+typedef struct
+{
+  double        dbValue;
+  bool          fValid;
+} double2;
+
+
 // тип 'логический'
 typedef enum
 {

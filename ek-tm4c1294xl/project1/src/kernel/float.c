@@ -48,3 +48,14 @@ float2  GetFloat2(float  flValue, bool  fValid)
 
   return fl2;
 }
+
+
+double2 GetDouble2(double  dbValue, bool  fValid)
+{
+  double2 db2;
+
+  db2.dbValue = dbValue;
+  db2.fValid = fValid;
+
+  return db2;
+}
