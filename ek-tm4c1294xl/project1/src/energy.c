@@ -63,8 +63,8 @@ real    reA, reB;
   uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    uchar j = GetGroupsNodeCanal(ibGrp,i);
-    reB = mpdbValueEngMnt[j] * mpwT[j];
+    uchar c = GetGroupsNodeCanal(ibGrp,i);
+    reB = mpdbValueEngMnt[c] * mpwT[c];
 
     if (GetGroupsNodeSign(ibGrp,i) == 0)
       reA += reB;
@@ -100,12 +100,12 @@ real    reA, reB;
   uchar i;
   for (i=0; i<GetGroupsSize(ibGroup); i++)
   {
-    uchar j = GetGroupsNodeCanal(ibGroup,i);
+    uchar c = GetGroupsNodeCanal(ibGroup,i);
 
-    if (mpwT[j] == 0xFFFF)
+    if (mpwT[c] == 0xFFFF)
       reB = 0;
     else
-      reB = mpdbValueEngHou[j] * mpwT[j];
+      reB = mpdbValueEngHou[c] * mpwT[c];
 
     if (GetGroupsNodeSign(ibGroup,i) == 0)
       reA += reB;
@@ -144,20 +144,20 @@ ulong   dw;
   uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    uchar j = GetGroupsNodeCanal(ibGrp,i);
+    uchar c = GetGroupsNodeCanal(ibGrp,i);
 
     dw = 0;
 
     if ((bMask & 0x01) != 0)
-      dw += *PGetCanImp(mpimT,j,0);
+      dw += *PGetCanImp(mpimT,c,0);
     if ((bMask & 0x02) != 0)
-      dw += *PGetCanImp(mpimT,j,1);
+      dw += *PGetCanImp(mpimT,c,1);
     if ((bMask & 0x04) != 0)
-      dw += *PGetCanImp(mpimT,j,2);
+      dw += *PGetCanImp(mpimT,c,2);
     if ((bMask & 0x08) != 0)
-      dw += *PGetCanImp(mpimT,j,3);
+      dw += *PGetCanImp(mpimT,c,3);
 
-    flB = (float)mpdbValueEngHou[j] * dw;
+    flB = (float)mpdbValueEngHou[c] * dw;
 
     if (GetGroupsNodeSign(ibGrp,i) == 0)
       flA += flB;
@@ -179,20 +179,20 @@ ulong   dw;
   uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    uchar j = GetGroupsNodeCanal(ibGrp,i);
+    uchar c = GetGroupsNodeCanal(ibGrp,i);
 
     dw = 0;
 
     if ((bMask & 0x01) != 0)
-      dw += *PGetCanImp(mpimT,j,0);
+      dw += *PGetCanImp(mpimT,c,0);
     if ((bMask & 0x02) != 0)
-      dw += *PGetCanImp(mpimT,j,1);
+      dw += *PGetCanImp(mpimT,c,1);
     if ((bMask & 0x04) != 0)
-      dw += *PGetCanImp(mpimT,j,2);
+      dw += *PGetCanImp(mpimT,c,2);
     if ((bMask & 0x08) != 0)
-      dw += *PGetCanImp(mpimT,j,3);
+      dw += *PGetCanImp(mpimT,c,3);
 
-    dbB = (double)mpdbValueEngHou[j] * dw;
+    dbB = (double)mpdbValueEngHou[c] * dw;
 
     if (GetGroupsNodeSign(ibGrp,i) == 0)
       dbA += dbB;
