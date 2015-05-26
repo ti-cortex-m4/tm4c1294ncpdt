@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-EXTENDED_4_OUTPUT.C
+EXTENDED_4_IN.C
 
- «начени€ счетчиков на конец мес€цев из буфера с дозапросом (oтчет є52 от 21.11.2009)
+
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -64,10 +64,10 @@ uchar   i;
     PckQueryIO(bHEADER+(1+2+2+4+6)+2, 5+3+2);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
   ShowPercent(100);
 
 
@@ -78,7 +78,7 @@ uchar   i;
   dbValue4 = PopFloat();
   Pop(&tiUpdate4, sizeof(time));
 
-  return(1);
+  return true;
 }
 
 
@@ -120,12 +120,12 @@ uchar   i;
     PckQueryIO(bHEADER+(1+2+2+4+6)*bCANALS+2, 5+10+2);
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
+    if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return false;
   ShowPercent(100);
 
 
-  return(1);
+  return true;
 }

@@ -72,7 +72,10 @@ void    ShowCntCanMon(void)
 
     case bGET_CNTCANYEAR1:     
       if (GetDigitalDevice(ibX) == 0)
-        (ReadCntMonCan(ibY,ibX) == 1) ? ShowFloat(reBuffA) : Error();
+      {
+        double2 db2 = ReadCntMonCan(ibY,ibX);
+        (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
+      }
       else if (CheckDirectCnt2(ibX,ibY)) {
         ShowDirectCnt(ibX);
       }
@@ -91,9 +94,14 @@ void    ShowCntCanMon(void)
         else 
         {
           if (GetDigitalDevice(ibX) != 6)
-            (ReadCntMonCan(ibY,ibX) == 1) ? ShowFloat(reBuffA) : Error();
+          {
+            double2 db2 = ReadCntMonCan(ibY,ibX);
+            (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
+          }
           else
-            (ReadCntMonCanF_Curr(ibY,ibX) == 1) ? ShowCntMonCanF() : Error();
+          {
+            (ReadCntMonCanF_Curr(ibY,ibX) == true) ? ShowCntMonCanF() : Error();
+          }
         }
 
         SaveConnect();
@@ -105,7 +113,10 @@ void    ShowCntCanMon(void)
       if (ibY == tiCurr.bMonth)
         ShowLo(szCntCanNoData);
       else if (GetDigitalDevice(ibX) == 0)
-        (ReadCntMonCan(ibZ,ibX) == 1) ? ShowFloat(reBuffA) : Error();
+      {
+        double2 db2 = ReadCntMonCan(ibZ,ibX);
+        (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
+      }
       else if (CheckDirectCnt2(ibX,ibY)) {
         ShowDirectCnt(ibX);
       }
@@ -124,9 +135,12 @@ void    ShowCntCanMon(void)
         else 
         {
           if (GetDigitalDevice(ibX) != 6)
-            (ReadCntMonCan(ibZ,ibX) == 1) ? ShowFloat(reBuffA) : Error();
+          {
+            double2 db2 = ReadCntMonCan(ibZ,ibX);
+            (db2.fValue) ? ShowDouble(db2.dbValue) : Error();
+          }
           else
-            (ReadCntMonCanF_Curr(ibZ,ibX) == 1) ? ShowCntMonCanF() : Error();
+            (ReadCntMonCanF_Curr(ibZ,ibX) == true) ? ShowCntMonCanF() : Error();
         }
 
         SaveConnect();
