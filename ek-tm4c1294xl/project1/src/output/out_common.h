@@ -5,7 +5,7 @@ OUT_COMMON,H
 ------------------------------------------------------------------------------*/
 
 void    OutGetFloatCan(float  *mfl);
-void    OutGetFloatCan_GlobalWork(float  *mfl);
+void    OutGetFloatOrDoubleCan_GlobalWork(double  *mdb, bool  fDouble);
 
 void    OutSetFloatCan(float  *mfl, file const  *pfl);
 

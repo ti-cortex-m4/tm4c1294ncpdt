@@ -81,14 +81,14 @@ void    Response1_CRC(void)
       case bINQ_SETPULSE_MNT: OutSetFloatCan(mprePulseMnt, &flPulseMnt); break;
       case bINQ_SETCOUNT:     OutSetFloatCan(mpreCount,    &flCount);    break;
       case bINQ_SETLOSSE:     OutSetFloatCan(mpreLosse,    &flLosse);    break;
-      case bINQ_SETLEVEL:     OutSetFloatCan(mpreLevel, &flLevel); break;
+      case bINQ_SETLEVEL:     OutSetFloatCan(mpreLevel,    &flLevel);    break;
 
       case bINQ_GETKOEFF: OutAllFactors(); break;
 
-      case bINQ_GETVALUE_ENGHOU: OutGetFloatCan_GlobalWork(mpdbValueEngHou); break;
-      case bINQ_GETVALUE_CNTHOU: OutGetFloatCan_GlobalWork(mpdbValueCntHou); break;
-      case bINQ_GETVALUE_ENGMNT: OutGetFloatCan_GlobalWork(mpdbValueEngMnt); break;
-      case bINQ_GETVALUE_CNTMNT: OutGetFloatCan_GlobalWork(mpdbValueCntMnt); break;
+      case bINQ_GETVALUE_ENGHOU: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueEngHou, false); break;
+      case bINQ_GETVALUE_CNTHOU: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueCntHou, false); break;
+      case bINQ_GETVALUE_ENGMNT: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueEngMnt, false); break;
+      case bINQ_GETVALUE_CNTMNT: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueCntMnt, false); break;
 
       case bINQ_GETIMPCANDAY_ALL: OutImpDayCan(); break;
       case bINQ_GETIMPCANMON_ALL: OutImpMonCan(); break;

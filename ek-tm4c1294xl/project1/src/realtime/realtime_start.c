@@ -22,9 +22,6 @@ REALTIME_START.C
 
 void    StartRealtime(void)
 {
-uchar    c;
-real     re;
-
   ibSoftMnt = 0;
   ibHardMnt = 0;
   SavePointersMnt();
@@ -60,6 +57,7 @@ real     re;
   MakeCurrHouCan();
   SaveImpHouBuff();
 
+  uchar c;
   for (c=0; c<bCANALS; c++)
   {
     if (GetDigitalDevice(c) == 0)
