@@ -74,7 +74,7 @@ void    OutSetFloatCan(float  *mfl, file const  *pfl)
 
 
 
-void    OutFloatCanExt(real  *mpe)
+void    OutFloatCanMap(real  *mpe)
 {
   InitPushPtr();
   uint wSize = 0;
@@ -84,8 +84,7 @@ void    OutFloatCanExt(real  *mpe)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushFloat(mpe[c]);
-      wSize += sizeof(real);
+      wSize += PushFloat(mpe[c]);
     }
   }
 
@@ -103,8 +102,7 @@ void    OutIntCanMap(uint  *mpw)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushInt(mpw[c]);
-      wSize += sizeof(uint);
+      wSize += PushInt(mpw[c]);
     }
   }
 
@@ -122,8 +120,7 @@ void    OutCharCanMap(uchar  *mpb)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushChar(mpb[c]);
-      wSize += sizeof(uchar);
+      wSize += PushChar(mpb[c]);
     }
   }
 
@@ -141,8 +138,7 @@ void    OutBoolCanMap(boolean  *mpf)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-    	PushChar(mpf[c]);
-      wSize += sizeof(boolean);
+      wSize += PushChar(mpf[c]);
     }
   }
 
