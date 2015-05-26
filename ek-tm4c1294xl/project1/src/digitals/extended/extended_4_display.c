@@ -46,8 +46,8 @@ void    ShowCntMonCanF(void)
     case ST4_OK:           (ibZ == 0) ? ShowDouble(dbValue4) : ShowTimeDate(tiUpdate4); break;
     case ST4_BADDIGITAL:   ShowLo(szBadDigital);   break;
     case ST4_BADFLASH:     ShowLo(szBadFlash);     break;
-    case ST4_BADPORT:      ShowLo(szModemLink);    break;
-    case ST4_BADENABLING:  ShowLo(szDisabled);     break;
+    case ST4_MODEM_LINK:   ShowLo(szModemLink);    break;
+    case ST4_DISABLED:     ShowLo(szDisabled);     break;
     default:               sprintf(szLo, "*  ошибка: %02X", bStatus4); break;
   }  
 }

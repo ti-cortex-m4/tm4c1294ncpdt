@@ -29,8 +29,8 @@ void    PushFloatUni(status  st, float  fl)
       case ST4_NOTPRESENTED:  PushFFFFFF(); PushChar(0xFF); break;
       case ST4_BADDIGITAL:    PushFFFFFF(); PushChar(0xFE); break;
       case ST4_BADFLASH:      PushFFFFFF(); PushChar(0xFF); break;
-      case ST4_BADPORT:       PushFFFFFF(); PushChar(0xFE); break;
-      case ST4_BADENABLING:   PushFFFFFF(); PushChar(0xFF); break;
+      case ST4_MODEM_LINK:    PushFFFFFF(); PushChar(0xFE); break;
+      case ST4_DISABLED:      PushFFFFFF(); PushChar(0xFF); break;
       default:                PushFloat(fl); break;
     }
   }
@@ -43,8 +43,8 @@ void    PushFloatUni(status  st, float  fl)
       case ST4_NOTPRESENTED:  PushFFFFFF(); PushChar(0xE2); break;
       case ST4_BADDIGITAL:    PushFFFFFF(); PushChar(0xE3); break;
       case ST4_BADFLASH:      PushFFFFFF(); PushChar(0xE4); break;
-      case ST4_BADPORT:       PushFFFFFF(); PushChar(0xE5); break;
-      case ST4_BADENABLING:   PushFFFFFF(); PushChar(0xE6); break;
+      case ST4_MODEM_LINK:    PushFFFFFF(); PushChar(0xE5); break;
+      case ST4_DISABLED:      PushFFFFFF(); PushChar(0xE6); break;
       default:                PushFloat(fl); break;
     }
   }
