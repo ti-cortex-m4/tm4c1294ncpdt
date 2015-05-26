@@ -38,12 +38,7 @@ static char const       szExtended4[]   = "Опрос данных: 4 ",
                         szLinkOK[]      = "   ответ: есть  ",
                         szLinkError[]   = "   ответ: нет   ",
                         szDataOK[]      = "  данные: есть  ",
-                        szDataError[]   = "  данные: нет   ",
-                        szNone[]        = "*    пусто      ",
-                        szBadDigital[]  = "*   ошибка !    ",
-                        szBadFlash[]    = "* ошибка памяти ",
-                        szModemLink[]   = "*    модем      ",
-                        szDisabled[]    = "*  запрещено    ";
+                        szDataError[]   = "  данные: нет   ";
 
 
 

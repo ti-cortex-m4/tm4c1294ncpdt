@@ -151,7 +151,7 @@ void    ResetDevices(bool  fFull)
   ResetRefill();
   ResetSchedule();
   ResetExtended1();
-  ResetExtended4();
+  ResetExtended4(fFull);
   ResetExtended4T(fFull);
   ResetExtended5(fFull);
   ResetExtended6();
