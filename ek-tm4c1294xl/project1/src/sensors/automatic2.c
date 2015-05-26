@@ -1928,7 +1928,7 @@ bool    ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
   switch (diCurr.bDevice)
   {
     case 0:  if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+             reBuffA = mpdbCntMonCan[ PrevSoftMon() ][ibCanal];
              return(1);
 
 #ifndef SKIP_A
@@ -1941,7 +1941,7 @@ bool    ReadCntMonCan(uchar  ibMonth, uchar  ibCanal)
     case 2:  return( ReadCntMonCanB(ibMonth) );
 
     case 12: if (LoadCntMon(ibMonth) == 0) return(0);
-             reBuffA = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCanal);
+             reBuffA = mpdbCntMonCan[ PrevSoftMon() ][ibCanal];
              return(1);
 #endif
 

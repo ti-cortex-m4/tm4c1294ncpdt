@@ -289,24 +289,24 @@ void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uchar  wImp)
 // расчитывает значени€ счЄтчиков дл€ текущего мес€ца
 void    MakeCntMonCan(void)
 {
-uchar  c;
-real   re;
+  double db = 0;
 
+  uchar c;
   for (c=0; c<bCANALS; c++)
   {
     if (GetDigitalDevice(c) == 0)
     {
-      re  = *PGetCanImpAll(mpimAbsCan,c);
-      re *= mpdbValueCntHou[c];
-      re += GetCanReal(mpreCount,c);
+      db  = *PGetCanImpAll(mpimAbsCan,c);
+      db *= mpdbValueCntHou[c];
+      db += GetCanReal(mpreCount,c);
     }
     else
     {
-      re = mpdwBase[c] * mpdbValueCntHou[c];
-      if (GetDigitalDevice(c) == 19) re += GetCanReal(mpreCount,c);
+      db = mpdwBase[c] * mpdbValueCntHou[c];
+      if (GetDigitalDevice(c) == 19) db += GetCanReal(mpreCount,c);
     }
 
-    SetCanReal(mpreCntMonCan[ ibSoftMon ],c, &re);
+    mpdbCntMonCan[ibSoftMon][c] = db;
   }
 }
 

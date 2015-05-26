@@ -38,7 +38,7 @@ void    NextMonth(void)
 
   memset(&mpimMonCan[ibSoftMon],    0, sizeof(impulse)*bCANALS);
   memset(&mppoMonGrp[ibSoftMon],    0, sizeof(power)*bGROUPS);
-  memset(&mpreCntMonCan[ibSoftMon], 0, sizeof(real)*bCANALS);
+  memset(&mpdbCntMonCan[ibSoftMon], 0, sizeof(double)*bCANALS);
 
   NextMonExtended4();
   NextMonExtended4T();

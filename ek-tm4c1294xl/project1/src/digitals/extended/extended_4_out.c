@@ -31,7 +31,7 @@ uchar    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
     bSize += PushChar(ST4_OK);
     bSize += PushInt(0xFFFF);
     bSize += PushInt(0xFFFF);
-    bSize += PushFloatOrDouble(mpreCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
+    bSize += PushFloatOrDouble(mpdbCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
     bSize += PushTime(tiZero);
 
     return bSize;
@@ -157,7 +157,7 @@ void    OutExtended42(void)
       if (LoadCntMon(ibMon) == 1)
       {
         va.bSelf = ST4_OK;
-        va.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+        va.reSelf = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
       }
       else
       {

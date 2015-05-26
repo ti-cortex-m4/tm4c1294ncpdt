@@ -288,11 +288,11 @@ boolean SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 {
   if ((fCurr == 1) && (ibMonTo == ibHardMon))
   {
-    memcpy(mpreCntMonCan[ ibSoftMon ], mpreCntMonCan[ PrevSoftMon() ], sizeof(real)*bCANALS);
+    memcpy(mpdbCntMonCan[ ibSoftMon ], mpdbCntMonCan[ PrevSoftMon() ], sizeof(double)*bCANALS);
     return TRUE;
   }
   else
-    return SaveBuff(CNTMONCAN + ibMonTo*DOUBLE_CAN_PAGES, mpreCntMonCan[ ibMonFrom ], sizeof(double)*bCANALS);
+    return SaveBuff(CNTMONCAN + ibMonTo*DOUBLE_CAN_PAGES, mpdbCntMonCan[ ibMonFrom ], sizeof(double)*bCANALS);
 }
 
 
@@ -300,9 +300,9 @@ boolean LoadCntMon(uchar  ibMonFrom)
 {
   if (ibMonFrom == ibHardMon)
   {
-    memcpy(mpreCntMonCan[ PrevSoftMon() ], mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
+    memcpy(mpdbCntMonCan[ PrevSoftMon() ], mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
     return TRUE;
   }
   else
-    return LoadBuff(CNTMONCAN + ibMonFrom*DOUBLE_CAN_PAGES, mpreCntMonCan[ PrevSoftMon() ], sizeof(double)*bCANALS);
+    return LoadBuff(CNTMONCAN + ibMonFrom*DOUBLE_CAN_PAGES, mpdbCntMonCan[ PrevSoftMon() ], sizeof(double)*bCANALS);
 }
