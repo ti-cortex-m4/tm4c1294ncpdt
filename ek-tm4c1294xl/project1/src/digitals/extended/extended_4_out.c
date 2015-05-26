@@ -82,7 +82,7 @@ void    OutExtended40(bool  fDouble)
 
 
 
-void    OutExtended401(bool  fDouble)
+void    OutExtended44(bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
