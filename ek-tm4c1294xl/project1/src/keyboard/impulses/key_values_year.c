@@ -52,11 +52,14 @@ uchar   GetMaxItem(item  it);
 void    ShowItemName(item  it);
 
 
+static uchar            ibCan, ibMon, ibZ;
+
+
 
 void    ShowGrpFullYearEng(uchar  bMask)
 {
-  LoadImpMon( ibY );
-  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  LoadImpMon( ibMon );
+  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibCan,bMask));
 }
 
 
@@ -71,36 +74,36 @@ void    ShowCntCanMon(void)
     case bGET_ENGGRPYEAR_A:     ShowGrpFullYearEng(0x01);  break;
 
     case bGET_CNTCANYEAR1:     
-      if (GetDigitalDevice(ibX) == 0)
+      if (GetDigitalDevice(ibCan) == 0)
       {
-        double2 db2 = ReadCntMonCan(ibY,ibX);
+        double2 db2 = ReadCntMonCan(ibMon,ibCan);
         (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
       }
-      else if (CheckDirectCnt2(ibX,ibY)) {
-        ShowDirectCnt(ibX);
+      else if (CheckDirectCnt2(ibCan,ibMon)) {
+        ShowDirectCnt(ibCan);
       }
       else
       {
-        LoadCurrDigital(ibX);
+        LoadCurrDigital(ibCan);
         ibPort = diCurr.ibPort;
 
-        if (LoadConnect(ibX) == 0) break;
+        if (LoadConnect(ibCan) == 0) break;
         Clear();
 
         LoadSlide(pszCntCanYear1);
 
-        if (mpboEnblCan[ibX] == FALSE)
+        if (mpboEnblCan[ibCan] == FALSE)
           ShowLo(szBlocked); 
         else 
         {
-          if (GetDigitalDevice(ibX) != 6)
+          if (GetDigitalDevice(ibCan) != 6)
           {
-            double2 db2 = ReadCntMonCan(ibY,ibX);
+            double2 db2 = ReadCntMonCan(ibMon,ibCan);
             (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
           }
           else
           {
-            (ReadCntMonCanF_Curr(ibY,ibX) == true) ? ShowCntMonCanF() : Error();
+            (ReadCntMonCanF_Curr(ibMon,ibCan) == true) ? ShowCntMonCanF() : Error();
           }
         }
 
@@ -109,38 +112,38 @@ void    ShowCntCanMon(void)
       break;
 
     case bGET_CNTCANYEAR10:     
-      ibZ = (12+ibY-1)%12;
-      if (ibY == tiCurr.bMonth)
+      ibZ = (12+ibMon-1)%12;
+      if (ibMon == tiCurr.bMonth)
         ShowLo(szCntCanNoData);
-      else if (GetDigitalDevice(ibX) == 0)
+      else if (GetDigitalDevice(ibCan) == 0)
       {
-        double2 db2 = ReadCntMonCan(ibZ,ibX);
+        double2 db2 = ReadCntMonCan(ibZ,ibCan);
         (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
       }
-      else if (CheckDirectCnt2(ibX,ibY)) {
-        ShowDirectCnt(ibX);
+      else if (CheckDirectCnt2(ibCan,ibMon)) {
+        ShowDirectCnt(ibCan);
       }
       else
       {
-        LoadCurrDigital(ibX);
+        LoadCurrDigital(ibCan);
         ibPort = diCurr.ibPort;
 
-        if (LoadConnect(ibX) == 0) break;
+        if (LoadConnect(ibCan) == 0) break;
         Clear();
 
         LoadSlide(pszCntCanYear10);
 
-        if (mpboEnblCan[ibX] == FALSE)
+        if (mpboEnblCan[ibCan] == FALSE)
           ShowLo(szBlocked); 
         else 
         {
-          if (GetDigitalDevice(ibX) != 6)
+          if (GetDigitalDevice(ibCan) != 6)
           {
-            double2 db2 = ReadCntMonCan(ibZ,ibX);
+            double2 db2 = ReadCntMonCan(ibZ,ibCan);
             (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
           }
           else
-            (ReadCntMonCanF_Curr(ibZ,ibX) == true) ? ShowCntMonCanF() : Error();
+            (ReadCntMonCanF_Curr(ibZ,ibCan) == true) ? ShowCntMonCanF() : Error();
         }
 
         SaveConnect();
@@ -148,19 +151,19 @@ void    ShowCntCanMon(void)
       break;
 
     case bGET_CNTCANYEAR2:  
-      ShowExtended4(ibX,ibY);
+      ShowExtended4(ibCan,ibMon);
       break;
 
     case bGET_CNTCANYEAR20:     
-      ibZ = (12+ibY-1)%12;
-      if (ibY == tiCurr.bMonth)
+      ibZ = (12+ibMon-1)%12;
+      if (ibMon == tiCurr.bMonth)
         ShowLo(szCntCanNoData);
       else
-        ShowExtended4(ibX,ibY);
+        ShowExtended4(ibCan,ibMon);
       break;
   }
 
-  sprintf(szLo+14,"%2u",ibX+1);
+  sprintf(szLo+14,"%2u",ibCan+1);
 }
 
 
@@ -197,19 +200,19 @@ void    key_GetValuesYear(item  it)
       enKeyboard = KBD_INPUT2;
       ShowItemName(it);
 
-      ibY = ibHardMon;
+      ibMon = ibHardMon;
 
-      LoadBetaMonth(ibY);
+      LoadBetaMonth(ibMon);
       ShowSlide(szBeta);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibY = GetCharLo(10,11)-1) < 12)
+      if ((ibMon = GetCharLo(10,11)-1) < 12)
       {
         enKeyboard = KBD_INPUT2;
         ShowItemName(it);
 
-        LoadBetaMonth(ibY);
+        LoadBetaMonth(ibMon);
         ShowSlide(szBeta);
       }
       else Beep();
@@ -218,12 +221,12 @@ void    key_GetValuesYear(item  it)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
+      ibCan = 0;
       ShowCntCanMon();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((ibX = GetCharLo(10,11)-1) < GetMaxItem(it))
+      if ((ibCan = GetCharLo(10,11)-1) < GetMaxItem(it))
       {
         enKeyboard = KBD_POSTENTER;
 
@@ -234,7 +237,7 @@ void    key_GetValuesYear(item  it)
     else if (enKeyboard == KBD_POSTENTER)
     {
       ibZ = 0;
-      if (++ibX >= GetMaxItem(it)) ibX = 0;
+      if (++ibCan >= GetMaxItem(it)) ibCan = 0;
 
       ShowCntCanMon();
     }
@@ -268,9 +271,9 @@ void    key_GetValuesYear(item  it)
     if (enKeyboard == KBD_POSTENTER)  
     {
       ibZ = 0;
-      if (ibY > 0) ibY--; else ibY = 12-1;
+      if (ibMon > 0) ibMon--; else ibMon = 12-1;
 
-      LoadBetaMonth(ibY);
+      LoadBetaMonth(ibMon);
       ShowCntCanMon();
       ShowSlide(szBeta);
     }
@@ -282,7 +285,7 @@ void    key_GetValuesYear(item  it)
     if (enKeyboard == KBD_POSTENTER)  
     {
       ibZ = 0;
-      if (ibX > 0) ibX--; else ibX = GetMaxItem(it)-1;
+      if (ibCan > 0) ibCan--; else ibCan = GetMaxItem(it)-1;
 
       ShowCntCanMon();
     }
@@ -293,12 +296,12 @@ void    key_GetValuesYear(item  it)
 
 void    ShowCntCanMon6(void)
 {
-  if (GetDigitalDevice(ibX) == 6)
+  if (GetDigitalDevice(ibCan) == 6)
     ShowLo(szBadMode);
   else
-    ShowCntMonCan6(ibX,ibY);
+    ShowCntMonCan6(ibCan,ibMon);
 
-  sprintf(szLo+14,"%2u",ibX+1);
+  sprintf(szLo+14,"%2u",ibCan+1);
 }
 
 
@@ -322,19 +325,19 @@ void    key_GetCntCanYear6(void)
       enKeyboard = KBD_INPUT2;
       Canal();
 
-      ibY = ibHardMon;
+      ibMon = ibHardMon;
 
-      LoadBetaMonth(ibY);
+      LoadBetaMonth(ibMon);
       ShowSlide(szBeta);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibY = GetCharLo(10,11)-1) < 12)
+      if ((ibMon = GetCharLo(10,11)-1) < 12)
       {
         enKeyboard = KBD_INPUT2;
         Canal();
 
-        LoadBetaMonth(ibY);
+        LoadBetaMonth(ibMon);
         ShowSlide(szBeta);
       }
       else Beep();
@@ -343,12 +346,12 @@ void    key_GetCntCanYear6(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
+      ibCan = 0;
       ShowCntCanMon6();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((ibX = GetCharLo(10,11)-1) < bCANALS)
+      if ((ibCan = GetCharLo(10,11)-1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
 
@@ -359,7 +362,7 @@ void    key_GetCntCanYear6(void)
     else if (enKeyboard == KBD_POSTENTER)
     {
       ibZ = 0;
-      if (++ibX >= bCANALS) ibX = 0;
+      if (++ibCan >= bCANALS) ibCan = 0;
 
       ShowCntCanMon6();
     }
@@ -393,9 +396,9 @@ void    key_GetCntCanYear6(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       ibZ = 0;
-      if (ibY > 0) ibY--; else ibY = 12-1;
+      if (ibMon > 0) ibMon--; else ibMon = 12-1;
 
-      LoadBetaMonth(ibY);
+      LoadBetaMonth(ibMon);
       ShowCntCanMon6();
       ShowSlide(szBeta);
     }
@@ -407,7 +410,7 @@ void    key_GetCntCanYear6(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       ibZ = 0;
-      if (ibX > 0) ibX--; else ibX = bCANALS-1;
+      if (ibCan > 0) ibCan--; else ibCan = bCANALS-1;
 
       ShowCntCanMon6();
     }
