@@ -178,12 +178,12 @@ void    key_SetFactors(void)
 
             if (GetDigitalDevice(ibX) == 19)
             {
-              reBuffA -= mpdwBase[ibX] * GetCanReal(mpdbValueCntHou,ibX);
+              reBuffA -= mpdwBase[ibX] * mpdbValueCntHou[ibX];
             }
             else
             {
-              reBuffA -= mpwImpMntCan[ibSoftMnt][ibX] * GetCanReal(mpdbValueCntMnt,ibX);
-              reBuffA -= *PGetCanImpAll(mpimAbsCan,ibX) * GetCanReal(mpdbValueCntHou,ibX);
+              reBuffA -= mpwImpMntCan[ibSoftMnt][ibX] * mpdbValueCntMnt[ibX];
+              reBuffA -= *PGetCanImpAll(mpimAbsCan,ibX) * mpdbValueCntHou[ibX];
             }
 
             SetCanReal(mpreCount,ibX,&reBuffA);

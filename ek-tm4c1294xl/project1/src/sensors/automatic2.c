@@ -1872,7 +1872,7 @@ bool    ReadCntCurrCan(uchar  ibCanal)
     case 8:
     case 2:  return( ReadCntCurrB() );
 
-    case 12: reBuffA = mpdwBase[ibCanal] * GetCanReal(mpdbValueCntHou,ibCanal);
+    case 12: reBuffA = mpdwBase[ibCanal] * mpdbValueCntHou[ibCanal];
              return(1);
 #endif
 
