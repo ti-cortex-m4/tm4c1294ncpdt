@@ -26,7 +26,7 @@ impulse                 mpimDayCan[2][bCANALS],
 impulse                 imAlt;
 
 // массив показаний счЄтчиков на конец мес€ца
-real                    mpreCntMonCan[2][bCANALS];
+double                  mpdbCntMonCan[2][bCANALS];
 
 // массивы максимумов мощности по тарифам (по суткам и мес€цам)
 power                   mppoDayGrp[2][bGROUPS],
