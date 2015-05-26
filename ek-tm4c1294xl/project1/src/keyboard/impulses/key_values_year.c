@@ -137,7 +137,7 @@ void    ShowCntCanMon(void)
           if (GetDigitalDevice(ibX) != 6)
           {
             double2 db2 = ReadCntMonCan(ibZ,ibX);
-            (db2.fValue) ? ShowDouble(db2.dbValue) : Error();
+            (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
           }
           else
             (ReadCntMonCanF_Curr(ibZ,ibX) == true) ? ShowCntMonCanF() : Error();
