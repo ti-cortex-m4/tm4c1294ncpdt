@@ -178,7 +178,7 @@ real    re;
       if (GetDigitalDevice(c) == 0)
       {
         if (LoadCntMon(ibMon) == 1) 
-          re = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], c);
+          re = mpdbCntMonCan[ PrevSoftMon() ][c];
         else
           re = 0;
 
