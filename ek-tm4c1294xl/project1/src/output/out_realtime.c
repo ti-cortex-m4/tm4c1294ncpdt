@@ -18,7 +18,6 @@
 void    OutRealtime(void)
 {
   InitPushCRC();
-
   uint wSize = 0;
 
   wSize += PushTime(*GetCurrTimeDate());

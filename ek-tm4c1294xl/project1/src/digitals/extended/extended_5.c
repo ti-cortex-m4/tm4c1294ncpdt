@@ -148,7 +148,6 @@ void    OutExtended50(bool  fDouble)
   else
   {
     InitPushPtr();
-
     uint wSize = 0;
 
     wSize += PushChar(boExt5Flag);
@@ -188,7 +187,6 @@ void    OutExtended51(bool  fDouble)
   else
   {
     InitPushPtr();
-
     uint wSize = 0;
 
     wSize += PushChar(boExt5Flag);

@@ -65,7 +65,6 @@ void    OutExtended40(bool  fDouble)
     LoadExt4Values(InBuff(6));
 
     InitPushPtr();
-
     uint wSize = 0;
 
     uchar c;
@@ -95,7 +94,6 @@ void    OutExtended401(bool  fDouble)
     LoadExt4Values(InBuff(6));
 
     InitPushPtr();
-
     uint wSize = 0;
 
     wSize += PushChar(boExt4Flag);
@@ -225,7 +223,6 @@ void    OutExtended42(void)
 void    OutExtended43(void)
 {
   InitPushPtr();
-
   uint wSize = 0;
 
   uchar c;
