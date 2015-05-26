@@ -101,13 +101,13 @@ void    CloseExtended6(void)
 void    MakeExtended6(uchar  ibCan, real  re)
 {
   value6 va;
-  va.bSelf = ST4_OK;
+  va.bStatus = ST4_OK;
   va.reSelf = re;
   va.tiUpdate = *GetCurrTimeDate();
  
   mpCntMonCan6[ibCan] = va;
 
-  if (mpCntCan6[ibCan].bSelf == ST4_NONE)
+  if (mpCntCan6[ibCan].bStatus == ST4_NONE)
   {
     mpCntCan6[ibCan] = va;
   }
@@ -139,7 +139,7 @@ void    OutExtended6(void)
         if (GetDigitalDevice(c) == 0)
         {
           value6 va;
-          va.bSelf = ST4_OK;
+          va.bStatus = ST4_OK;
           va.reSelf = mpreCntMonCan[ PrevSoftMon() ][c];
           va.tiUpdate = tiZero;
           Push(&va, sizeof(value6));
@@ -181,7 +181,7 @@ value6 vl;
   {
     LoadCntMon(ibMon);
 
-    vl.bSelf = ST4_OK;
+    vl.bStatus = ST4_OK;
     vl.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
     vl.tiUpdate = tiZero;
   }
@@ -198,11 +198,11 @@ value6 vl;
   reBuffA = vl.reSelf;
   tiAlt = vl.tiUpdate;
 
-  switch (vl.bSelf)
+  switch (vl.bStatus)
   {
     case ST4_NONE: ShowLo(szNone); break;
     case ST4_OK:   (ibZ == 0) ? ShowFloat(reBuffA) : ShowTimeDate6(tiAlt); break;
-    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bSelf); break;
+    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bStatus); break;
   }  
 }
 
@@ -227,11 +227,11 @@ void    ShowDirectCnt(uchar  ibCan)
   reBuffA = vl.reSelf;
   tiAlt = vl.tiUpdate;
 
-  switch (vl.bSelf)
+  switch (vl.bStatus)
   {
     case ST4_NONE: ShowLo(szNone); break;
     case ST4_OK:   ShowFloat(reBuffA); break;
-    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bSelf); break;
+    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bStatus); break;
   }  
 }
 

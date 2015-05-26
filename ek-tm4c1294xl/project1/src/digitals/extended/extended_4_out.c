@@ -41,7 +41,7 @@ void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
   else
   {
   	value6 vl = mpCntMonCan4[ibCan];
-    PushChar(vl.bSelf);
+    PushChar(vl.bStatus);
     PushInt(0xFF);
     PushInt(0xFF);
     PushFloat(vl.reSelf);
