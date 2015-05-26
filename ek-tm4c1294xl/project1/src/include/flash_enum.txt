@@ -51,7 +51,7 @@ typedef enum
   POWMONGRP             = POWDAYGRP + bPOWER_GRP*bDAYS,
   CNTMONCAN             = POWMONGRP + bPOWER_GRP*bMONTHS,
 
-  DEFDAYCAN             = CNTMONCAN + FLOAT_CAN_PAGES*bMONTHS,
+  DEFDAYCAN             = CNTMONCAN + DOUBLE_CAN_PAGES*bMONTHS,
   DEFMONCAN             = DEFDAYCAN + bIMPULSE_CAN*bDAYS,
 
   IMPHOUCAN_BUFF        = DEFMONCAN + bIMPULSE_CAN*bMONTHS,
@@ -62,7 +62,7 @@ typedef enum
   POWMONGRP_BUFF        = POWDAYGRP_BUFF + bPOWER_GRP,
   CNTMONCAN_BUFF        = POWMONGRP_BUFF + bPOWER_GRP,
 
-  PTRMNT                = CNTMONCAN_BUFF + FLOAT_CAN_PAGES,
+  PTRMNT                = CNTMONCAN_BUFF + DOUBLE_CAN_PAGES,
   PTRHOU                = PTRMNT + 1,
   PTRDAY                = PTRHOU + 1,
   PTRMON                = PTRDAY + 1,

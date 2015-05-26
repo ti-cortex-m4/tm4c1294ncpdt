@@ -98,13 +98,13 @@ boolean LoadPowMonBuff(void) {
 
 
 boolean SaveCntMonBuff(void) {
-  return SaveBuff(CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
+  return SaveBuff(CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
 }
 
 boolean CleanCntMonBuff(void) {
-  return CleanBuff(CNTMONCAN_BUFF, sizeof(real)*bCANALS);
+  return CleanBuff(CNTMONCAN_BUFF, sizeof(double)*bCANALS);
 }
 
 boolean LoadCntMonBuff(void) {
-  return LoadBuff(CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(real)*bCANALS);
+  return LoadBuff(CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
 }
