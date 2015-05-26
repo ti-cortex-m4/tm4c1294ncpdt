@@ -140,7 +140,7 @@ void    OutExtended6(void)
         {
           value6 va;
           va.bStatus = ST4_OK;
-          va.dbValue = mpreCntMonCan[ PrevSoftMon() ][c];
+          va.dbValue = mpdbCntMonCan[ PrevSoftMon() ][c];
           va.tiUpdate = tiZero;
           Push(&va, sizeof(value6));
         }
@@ -182,7 +182,7 @@ value6 vl;
     LoadCntMon(ibMon);
 
     vl.bStatus = ST4_OK;
-    vl.dbValue = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+    vl.dbValue = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
     vl.tiUpdate = tiZero;
   }
   else

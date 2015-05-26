@@ -140,7 +140,7 @@ uint    i;
     ShowFlashErase();
   }
 
-  memset(&mpreCntMonCan, 0, sizeof(mpreCntMonCan));
+  memset(&mpdbCntMonCan, 0, sizeof(mpdbCntMonCan));
   for (i=0; i<bMONTHS; i++) 
   {
     if (SaveCntMon(0,i,ibSoftMon) == FALSE) return FALSE;

@@ -74,7 +74,7 @@ void    ShowExtended4(uchar  ibCan, uchar  ibMon)
     LoadCntMon(ibMon);
 
     vl.bStatus = ST4_OK;
-    vl.dbValue = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+    vl.dbValue = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
     vl.tiUpdate = tiZero;
     bStatus = ST4_OK;
   }

@@ -52,7 +52,7 @@ real    re;
     if (LoadCntMon(tiCurr.bMonth-1) == 0)
       re = 0;
     else
-      re = GetCanReal(mpreCntMonCan[ PrevSoftMon() ], ibCan);
+      re = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
 
     mpreEsc_V[ibCan] = re;
     mptiEsc_V[ibCan] = *GetCurrTimeDate();
