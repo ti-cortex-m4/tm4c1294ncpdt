@@ -75,8 +75,8 @@ uchar   i;
   bStatus4 = PopChar();
   PopChar(); PopChar();
   PopChar(); PopChar();
-  PopFloat(); 
-  Pop(&tiAlt, sizeof(time));   
+  dbValue4 = PopFloat();
+  Pop(&tiUpdate4, sizeof(time));
 
   return(1);
 }

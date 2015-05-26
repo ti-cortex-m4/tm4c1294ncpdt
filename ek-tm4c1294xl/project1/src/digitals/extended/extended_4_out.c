@@ -164,13 +164,9 @@ void    OutExtended42(bool  fDouble)
     if (GetDigitalDevice(ibCan) == 0)
     {
       if (LoadCntMon(ibMon) == true)
-      {
         OutData4(ST4_OK, mpdbCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
-      }
       else
-      {
         OutData4(ST4_BADFLASH, 0, fDouble);
-      }
     }
     else if (mpboEnblCan[ibCan] == FALSE)
     {
@@ -193,13 +189,9 @@ void    OutExtended42(bool  fDouble)
       ibPort = p;
 
       if (f == true)
-      {
         OutData4(ST4_OK, reBuffA, fDouble);
-      }
       else
-      {
         OutData4(ST4_BADDIGITAL, 0, fDouble);
-      }
 
       LoadDisplay();
       NextPause(); // внимание !
