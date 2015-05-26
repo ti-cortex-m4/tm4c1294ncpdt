@@ -49,9 +49,7 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = mpdwChannelsA[i] * reKtrans;
-    mpreChannelsB[i] = reBuffA;
-
+    mpdbChannelsC[i] = mpdwChannelsA[i] * reKtrans;
     mpboChannelsA[i] = TRUE;     
   }
 
@@ -81,9 +79,7 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = mpdwChannelsA[i] * reKtrans * 2;
-    mpreChannelsB[i] = reBuffA;
-
+    mpdbChannelsC[i] = mpdwChannelsA[i] * reKtrans * 2;
     mpboChannelsA[i] = TRUE;
   }
 
@@ -120,9 +116,7 @@ uchar   i;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = mpdwChannelsA[i] * reKtrans;
-    mpreChannelsB[i] = reBuffA;
-
+    mpdbChannelsC[i] = mpdwChannelsA[i] * reKtrans;
     mpboChannelsA[i] = TRUE;     
   }
 
@@ -1156,10 +1150,7 @@ ulong   dw;
   for (i=0; i<4; i++) 
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
-
-    reBuffA = mpdwChannelsB[i] * reKtrans;
-    mpreChannelsB[i] = reBuffA;
-
+    mpdbChannelsC[i] = mpdwChannelsB[i] * reKtrans;
     mpboChannelsA[i] = TRUE;     
   }
 
@@ -1239,10 +1230,7 @@ ulong   dw;
   for (i=0; i<4; i++) 
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
-
-    reBuffA = mpdwChannelsB[i] * reKtrans * 2;
-    mpreChannelsB[i] = reBuffA;
-
+    mpdbChannelsC[i] = mpdwChannelsB[i] * reKtrans * 2;
     mpboChannelsA[i] = TRUE;
   }
 
@@ -1327,9 +1315,7 @@ uchar   i,j;
 
   for (i=0; i<4; i++) 
   {
-    reBuffA = mpdwChannelsB[i] * reKtrans;
-    mpreChannelsB[i] = reBuffA;
-
+    mpdbChannelsC[i] = mpdwChannelsB[i] * reKtrans;
     mpboChannelsA[i] = TRUE;     
   }
 

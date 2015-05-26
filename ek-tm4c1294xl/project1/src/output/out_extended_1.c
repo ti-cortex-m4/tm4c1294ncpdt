@@ -60,7 +60,7 @@ real    re;
       {
         LoadCurrDigital(c);
         if (mpboChannelsA[diCurr.ibLine] == TRUE)
-          re = GetCanReal(mpreChannelsB, diCurr.ibLine);
+          re = DoubleToFloat(mpdbChannelsC[diCurr.ibLine]);
         else
         {
           uchar p = ibPort;
@@ -198,7 +198,7 @@ real    re;
       {
         LoadCurrDigital(c);
         if (mpboChannelsA[diCurr.ibLine] == TRUE)
-          re = GetCanReal(mpreChannelsB, diCurr.ibLine);
+          re = DoubleToFloat(mpdbChannelsC[diCurr.ibLine]);
         else
         {
           uchar p = ibPort;
