@@ -106,7 +106,7 @@ void    MakeExtended5(void)
       for (c=0; c<bCANALS; c++)
       {
         LoadPrevDigital(c);
-        if (CompareCurrPrevLines(ibDig, c) == 1)
+        if (CompareCurrPrevLines(ibDig, c) == true)
         {
           mpCntDayCan5[c].cwSuccess++;
           mpCntDayCan5[c].tiUpdate = *GetCurrTimeDate();
@@ -123,7 +123,7 @@ void    MakeExtended5(void)
       for (c=0; c<bCANALS; c++)
       {
         LoadPrevDigital(c);
-        if (CompareCurrPrevLines(ibDig, c) == 1)
+        if (CompareCurrPrevLines(ibDig, c) == true)
         {
           mpCntDayCan5[c].cwError++;
         }

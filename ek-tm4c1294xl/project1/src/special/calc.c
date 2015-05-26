@@ -122,7 +122,7 @@ void    CalcDigCanals(void)
   for (c=0; c<bCANALS; c++)                           
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == 1)
+    if (CompareCurrPrevLines(ibDig, c) == true)
     {
       uint w;
       if (iwDigHou == iwHardHou)

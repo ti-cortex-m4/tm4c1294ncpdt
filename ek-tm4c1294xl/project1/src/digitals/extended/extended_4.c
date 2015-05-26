@@ -131,7 +131,7 @@ static void MakeDevices(uchar  ibMon)
     for (c=0; c<bCANALS; c++)
     {
       LoadPrevDigital(c);
-      if (CompareCurrPrevLines(ibDig, c) == 1)
+      if (CompareCurrPrevLines(ibDig, c) == true)
       {
         value6 vl = mpCntMonCan4[c];
 
@@ -175,7 +175,7 @@ static void MakeDevice6(uchar  ibMon)
     for (c=0; c<bCANALS; c++)
     {
       LoadPrevDigital(c);
-      if (CompareCurrPrevLines(ibDig, c) == 1)
+      if (CompareCurrPrevLines(ibDig, c) == true)
       {
       	value6 vl = mpCntMonCan4[c];
 

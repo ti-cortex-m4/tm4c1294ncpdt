@@ -89,7 +89,7 @@ void    NewBoundsRel(uint  wRel)
   for (c=0; c<bCANALS; c++)
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == 1)
+    if (CompareCurrPrevLines(ibDig, c) == true)
     {
       mpcwStartRelCan[c] = wRel;
     }
@@ -107,7 +107,7 @@ void    NewBoundsAbs16(uint  wAbs)
   for (c=0; c<bCANALS; c++)
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == 1)
+    if (CompareCurrPrevLines(ibDig, c) == true)
     { 
       mpboStartCan[c] = TRUE;
       mpcwStartAbs16Can[c] = wAbs;
@@ -127,7 +127,7 @@ void    NewBoundsAbs32(ulong  dwAbs)
   for (c=0; c<bCANALS; c++)
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == 1)
+    if (CompareCurrPrevLines(ibDig, c) == true)
     { 
       mpboStartCan[c] = TRUE;
       mpcdwStartAbs32Can[c] = dwAbs;
@@ -147,7 +147,7 @@ void    NewLimits(void)
   for (c=0; c<bCANALS; c++)
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == 1)
+    if (CompareCurrPrevLines(ibDig, c) == true)
     {
       mpcwStartRelCan[c] = 0;
       mpcwStartAbs16Can[c] = 0;
@@ -197,7 +197,7 @@ void    ResetLimitsAux(uchar  ibDig)
   for (c=0; c<bCANALS; c++)
   {
     LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == 1)
+    if (CompareCurrPrevLines(ibDig, c) == true)
     {
       mpcwStopAuxCan[c] = 0;
     }
