@@ -22,7 +22,7 @@ EXTENDED_4_OUT.C
 
 
 
-uchar    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
+static uchar PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
 {
   if (GetDigitalDevice(ibCan) == 0)
   {
@@ -135,7 +135,22 @@ void    OutExtended41(bool  fDouble)
 
 
 
-void    OutExtended42(void)
+static void OutData4(uchar  bStatus, double  dbValue, bool  fDouble)
+{
+  InitPushPtr();
+  uchar bSize = 0;
+
+  bSize += PushChar(bStatus);
+  bSize += PushInt(0xFFFF);
+  bSize += PushInt(0xFFFF);
+  bSize += PushFloatOrDouble(dbValue, fDouble);
+  bSize += PushTime(*GetCurrTimeDate());
+
+  OutptrOutBuff(bSize);
+}
+
+
+void    OutExtended42(bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -146,44 +161,24 @@ void    OutExtended42(void)
     uchar ibMon = InBuff(6);
     uchar ibCan = InBuff(7);
 
-    value4 va;
-    memset(&va, 0, sizeof(va));
-    va.tiSelf = *GetCurrTimeDate();
-
     if (GetDigitalDevice(ibCan) == 0)
     {
-      if (LoadCntMon(ibMon) == 1)
+      if (LoadCntMon(ibMon) == true)
       {
-        va.bSelf = ST4_OK;
-        va.reSelf = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
+        OutData4(ST4_OK, mpdbCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
       }
       else
       {
-        va.bSelf = ST4_BADFLASH;
-        va.reSelf = 0;
+        OutData4(ST4_BADFLASH, 0, fDouble);
       }
-
-      InitPushPtr();            
-      Push(&va, sizeof(value4));
-      OutptrOutBuff(sizeof(value4));
     }
     else if (mpboEnblCan[ibCan] == FALSE)
     {
-      va.bSelf = ST4_BADENABLING;
-      va.reSelf = 0;
-
-      InitPushPtr();            
-      Push(&va, sizeof(value4));
-      OutptrOutBuff(sizeof(value4));
+      OutData4(ST4_BADENABLING, 0, fDouble);
     }
     else if (GetDigitalPhone(ibCan) != 0)
     {
-      va.bSelf = ST4_BADPORT;
-      va.reSelf = 0;
-
-      InitPushPtr();            
-      Push(&va, sizeof(value4));
-      OutptrOutBuff(sizeof(value4));
+      OutData4(ST4_BADPORT, 0, fDouble);
     }
     else
     {
@@ -197,20 +192,14 @@ void    OutExtended42(void)
       bool f = ReadCntMonCan(ibMon,ibCan);
       ibPort = p;
 
-      if (f == 1)
+      if (f == true)
       {
-        va.bSelf = ST4_OK;
-        va.reSelf = reBuffA;
+        OutData4(ST4_OK, reBuffA, fDouble);
       }
       else
       {
-        va.bSelf = ST4_BADDIGITAL;
-        va.reSelf = 0;
+        OutData4(ST4_BADDIGITAL, 0, fDouble);
       }
-
-      InitPushPtr();            
-      Push(&va, sizeof(value4));
-      OutptrOutBuff(sizeof(value4));
 
       LoadDisplay();
       NextPause(); // внимание !
