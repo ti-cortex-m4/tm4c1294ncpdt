@@ -255,7 +255,6 @@ void    OutExtended4T(bool  fDouble)
   else
   {
     InitPushPtr();
-
     uint wSize = 0;
 
     wSize += PushChar(boExt4TFlag);
