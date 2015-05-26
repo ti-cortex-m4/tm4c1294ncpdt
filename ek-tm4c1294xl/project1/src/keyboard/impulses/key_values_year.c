@@ -93,7 +93,7 @@ void    ShowCntCanMon(void)
           if (GetDigitalDevice(ibX) != 6)
             (ReadCntMonCan(ibY,ibX) == 1) ? ShowFloat(reBuffA) : Error();
           else
-            (ReadCntMonCanF_Curr(ibY,ibX) == 1) ? ShowCntMonCanF2() : Error();
+            (ReadCntMonCanF_Curr(ibY,ibX) == 1) ? ShowCntMonCanF() : Error();
         }
 
         SaveConnect();
@@ -126,7 +126,7 @@ void    ShowCntCanMon(void)
           if (GetDigitalDevice(ibX) != 6)
             (ReadCntMonCan(ibZ,ibX) == 1) ? ShowFloat(reBuffA) : Error();
           else
-            (ReadCntMonCanF_Curr(ibZ,ibX) == 1) ? ShowCntMonCanF2() : Error();
+            (ReadCntMonCanF_Curr(ibZ,ibX) == 1) ? ShowCntMonCanF() : Error();
         }
 
         SaveConnect();

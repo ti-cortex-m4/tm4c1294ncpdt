@@ -28,7 +28,9 @@ EXTENDED_4_OUTPUT.C
 
 
 
-uchar                   bStatus;
+uchar                   bStatus4;
+double                  dbValue4;
+time                    tiUpdate4;
 
 
 
@@ -70,8 +72,9 @@ uchar   i;
 
 
   InitPop(bHEADER);
-  bStatus = PopChar();
-  PopChar(); PopChar(); PopChar(); PopChar(); 
+  bStatus4 = PopChar();
+  PopChar(); PopChar();
+  PopChar(); PopChar();
   PopFloat(); 
   Pop(&tiAlt, sizeof(time));   
 

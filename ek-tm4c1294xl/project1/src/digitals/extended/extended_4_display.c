@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 EXTENDED_4_DISPLAY.C
 
- «начени€ счетчиков на конец мес€цев из буфера с дозапросом (oтчет є52 от 21.11.2009)
+
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -37,29 +37,18 @@ static char const       szNone[]        = "*    пусто      ",
                         szDisabled[]    = "*  запрещено    ";
 
 
-void    ShowTimeDateF2(void)
+
+void    ShowCntMonCanF(void)
 {
-  sprintf(szLo,"%02u:%02u %02u.%02u.%02u",
-                 tiAlt.bHour,
-                 tiAlt.bMinute,
-                 tiAlt.bDay,   
-                 tiAlt.bMonth,
-                 tiAlt.bYear);
-}
-
-
-
-void    ShowCntMonCanF2(void)
-{
-  switch (bStatus)
+  switch (bStatus4)
   {
     case ST4_NONE:         ShowLo(szNone);         break;
-    case ST4_OK:           (ibZ == 0) ? ShowFloat(reBuffA) : ShowTimeDateF2(); break;
+    case ST4_OK:           (ibZ == 0) ? ShowDouble(dbValue4) : ShowTimeDate(tiUpdate4); break;
     case ST4_BADDIGITAL:   ShowLo(szBadDigital);   break;
     case ST4_BADFLASH:     ShowLo(szBadFlash);     break;
-    case ST4_BADPORT:      ShowLo(szModemLink);      break;
-    case ST4_BADENABLING:  ShowLo(szDisabled);  break;
-    default:               sprintf(szLo, "*  ошибка: %02X", bStatus); break;
+    case ST4_BADPORT:      ShowLo(szModemLink);    break;
+    case ST4_BADENABLING:  ShowLo(szDisabled);     break;
+    default:               sprintf(szLo, "*  ошибка: %02X", bStatus4); break;
   }  
 }
 
@@ -76,19 +65,17 @@ void    ShowExtended4(uchar  ibCan, uchar  ibMon)
     vl.bStatus = ST4_OK;
     vl.dbValue = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
     vl.tiUpdate = tiZero;
-    bStatus = ST4_OK;
   }
   else
   {
     LoadExt4Values(ibMon);
 
     vl = mpCntMonCan4[ibCan];
-    bStatus = vl.bStatus;
   }
 
-  reBuffA = vl.dbValue;
-  tiAlt = vl.tiUpdate;
+  bStatus4 = vl.bStatus;
+  dbValue4 = vl.dbValue;
+  tiUpdate4 = vl.tiUpdate;
 
-  ShowCntMonCanF2();
+  ShowCntMonCanF();
 }
-

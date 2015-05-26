@@ -4,5 +4,5 @@ EXTENDED_4_DISPLAY.H
 
 ------------------------------------------------------------------------------*/
 
-void    ShowCntMonCanF2(void);
+void    ShowCntMonCanF(void);
 void    ShowExtended4(uchar  ibCan, uchar  ibMon);
