@@ -42,10 +42,6 @@ QUERIES2.H
 #define bEXT_SETRECALC1                74
 #define bEXT_SETRECALC2                75
 
-#define bEXT_GETEXTENDED40             42
-#define bEXT_GETEXTENDED41             43
-#define bEXT_GETEXTENDED42             44
-
 #define bEXT_GETIMPCANHOU              16
 #define bEXT_GETIMPCANMNT              18
 #define bEXT_GETPOWCANMNT              27
@@ -64,6 +60,7 @@ QUERIES2.H
 #define bEXT_GETEXTENDED42             44
 #define bEXT_GETEXTENDED44             60
 #define bEXT_GETEXTENDED43             61
+
 #define bEXT_GETEXTENDED6              62
 
 #define bEXT_GETRELAXS                 45
