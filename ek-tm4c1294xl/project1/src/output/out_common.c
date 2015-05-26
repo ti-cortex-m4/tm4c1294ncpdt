@@ -28,10 +28,27 @@ void    OutGetFloatCan(float  *mfl)
 }
 
 
-void    OutGetFloatCan_GlobalWork(float  *mfl)
+
+void    OutGetFloatOrDoubleCan(double  *mdb, bool  fDouble)
+{
+  InitPushCRC();
+  uint wSize = 0;
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    wSize += PushFloatOrDouble(*mdb++, fDouble);
+  }
+
+  Output(wSize);
+}
+
+
+
+void    OutGetFloatOrDoubleCan_GlobalWork(double  *mdb, bool  fDouble)
 {
   if (enGlobal != GLB_PROGRAM)
-    OutGetFloatCan(mfl);
+    OutGetFloatOrDoubleCan(mdb, fDouble);
   else
     Result(bRES_NEEDWORK);
 }
