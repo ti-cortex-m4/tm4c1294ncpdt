@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-EXTENDED_4_OUTPUT.H
+EXTENDED_4_OUT.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    OutExtended40(void);
-void    OutExtended401(void);
-void    OutExtended41(void);
+void    OutExtended40(bool  fDouble);
+void    OutExtended401(bool  fDouble);
+void    OutExtended41(bool  fDouble);
 void    OutExtended42(void);
 void    OutExtended43(void);

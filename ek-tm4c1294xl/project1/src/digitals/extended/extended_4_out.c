@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-EXTENDED_4_OUTPUT.C
+EXTENDED_4_OUT.C
 
- «начени€ счетчиков на конец мес€цев из буфера с дозапросом (oтчет є52 от 21.11.2009)
+
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -40,7 +40,7 @@ void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
   }
   else
   {
-  	value6 vl = mpCntMonCan4[ibCan];
+    value6 vl = mpCntMonCan4[ibCan];
     PushChar(vl.bStatus);
     PushInt(0xFFFF);
     PushInt(0xFFFF);
@@ -51,7 +51,7 @@ void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
 
 
 
-void    OutExtended40(void)
+void    OutExtended40(bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -70,7 +70,7 @@ void    OutExtended40(void)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4(c, InBuff(6), false);
+        PushData4(c, InBuff(6), fDouble);
         wSize += (1+2+2+4+6);
       }
     }
@@ -81,7 +81,7 @@ void    OutExtended40(void)
 
 
 
-void    OutExtended401(void)
+void    OutExtended401(bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -104,7 +104,7 @@ void    OutExtended401(void)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        PushData4(c, InBuff(6), false);
+        PushData4(c, InBuff(6), fDouble);
         wSize += (1+2+2+4+6);
       }
     }
@@ -115,7 +115,7 @@ void    OutExtended401(void)
 
 
 
-void    OutExtended41(void)
+void    OutExtended41(bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -127,7 +127,7 @@ void    OutExtended41(void)
     LoadExt4Values(InBuff(6));
 
     InitPushPtr();            
-    PushData4(InBuff(7), InBuff(6), false);
+    PushData4(InBuff(7), InBuff(6), fDouble);
     OutptrOutBuff(1+2+2+4+6);
   }
 }
