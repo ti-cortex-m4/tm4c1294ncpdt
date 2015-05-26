@@ -23,6 +23,7 @@ file const              flExt4Months = {EXT_4_MONTHS, &bExt4Months, sizeof(uchar
 file const              flExt4EnblCan = {EXT_4_ENBL_CAN, &mpboExt4EnblCan, sizeof(mpboExt4EnblCan)};
 
 
+
 //                                         0123456789ABCDEF
 static char const       szExtended4[]   = "Опрос данных: 4 ",
                         szLinkOK[]      = "   ответ: есть  ",
@@ -117,7 +118,7 @@ static void MakeDevices(uchar  ibMon)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-  if (ReadCntMonCan(ibMon, ibDig) == 0) 
+  if (ReadCntMonCan(ibMon, ibDig) == false)
   { 
     ShowLo(szLinkError); DelayInf();
   }
@@ -139,6 +140,7 @@ static void MakeDevices(uchar  ibMon)
         {
           vl.bSelf = ST4_OK;
           vl.reSelf = mpreChannelsB[diPrev.ibLine];
+
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bCount++;
         }
@@ -146,6 +148,7 @@ static void MakeDevices(uchar  ibMon)
         {
           vl.bSelf = ST4_BADDIGITAL;
           vl.reSelf = 0;
+
           ShowLo(szDataError); DelayInf();
         }
 
@@ -161,7 +164,7 @@ static void MakeDevice6(uchar  ibMon)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-  if (ReadCntMonCanF_Buff(ibMon, ibDig) == 0) 
+  if (ReadCntMonCanF_Buff(ibMon, ibDig) == false)
   { 
     ShowLo(szLinkError); DelayInf();
   }
@@ -177,7 +180,7 @@ static void MakeDevice6(uchar  ibMon)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == true)
       {
-      	value6 vl = mpCntMonCan4[c];
+        value6 vl = mpCntMonCan4[c];
 
         InitPop(15 + 15*c);
         status st = (status) PopChar();
@@ -188,6 +191,7 @@ static void MakeDevice6(uchar  ibMon)
         {
           vl.bSelf = st;
           vl.reSelf = re;
+
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bCount++;
         }
@@ -195,6 +199,7 @@ static void MakeDevice6(uchar  ibMon)
         {
           vl.bSelf = st;
           vl.reSelf = 0;
+
           ShowLo(szDataError); DelayInf();
         }
 
