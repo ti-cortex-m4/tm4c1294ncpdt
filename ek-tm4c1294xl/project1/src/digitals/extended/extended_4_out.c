@@ -188,7 +188,7 @@ void    OutExtended42(bool  fDouble)
       double2 db2 = ReadCntMonCan(ibMon,ibCan);
       ibPort = p;
 
-      if (f == true)
+      if (db2.fValid)
         OutData4(ST4_OK, reBuffA, fDouble);
       else
         OutData4(ST4_BADDIGITAL, 0, fDouble);

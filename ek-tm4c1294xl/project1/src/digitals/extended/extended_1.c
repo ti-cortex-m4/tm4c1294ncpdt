@@ -140,7 +140,8 @@ void    MakeExtended1(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadCntMonCan(tiCurr.bMonth-1, ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_V_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_V_ERROR);*/ }
+    double2 db2 = ReadCntMonCan(tiCurr.bMonth-1, ibDig);
+    if (db2.fValid) { OK(); /*AddDigRecord(EVE_ESC_V_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_V_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
     uchar c;
@@ -179,7 +180,8 @@ void    MakeExtended1(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadCntCurrCan(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_S_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_S_ERROR);*/ }
+    double2 db2 = ReadCntCurrCan(ibDig);
+    if (db2.fValid) { OK(); /*AddDigRecord(EVE_ESC_S_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_S_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
     uchar c;

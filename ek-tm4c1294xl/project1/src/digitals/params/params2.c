@@ -982,7 +982,7 @@ void    MakeExtended2(void)
 
         float2 fl2 = (mpboEnblParams[p] == FALSE) ? GetFloat2(0, true) : ReadParamRepeat(p);
 
-        mpreParamsBuff[ibSoftTim][p] = (fl2.fValid == true) ? fl2.flValue : GetFloatNAN();
+        mpreParamsBuff[ibSoftTim][p] = (fl2.fValid) ? fl2.flValue : GetFloatNAN();
         mptiParamsBuff[p] = tiCurr;
       }
     }
