@@ -33,7 +33,7 @@ static char const       szExtended4[]   = "Опрос данных: 4 ",
 
 
 
-static uchar            bCount;
+static uchar            cbMonths;
 
 
 
@@ -142,7 +142,7 @@ static void MakeDevices(uchar  ibMon)
           vl.dbValue = mpdbChannelsC[diPrev.ibLine];
 
           ShowLo(szDataOK); DelayInf();
-          if (c == ibDig) bCount++;
+          if (c == ibDig) cbMonths++;
         }
         else
         {
@@ -194,7 +194,7 @@ static void MakeDevice6(uchar  ibMon)
           vl.dbValue = fl;
 
           ShowLo(szDataOK); DelayInf();
-          if (c == ibDig) bCount++;
+          if (c == ibDig) cbMonths++;
         }
         else
         {
@@ -220,7 +220,7 @@ void    MakeExtended4(void)
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4Months);
     DelayInf();
 
-    bCount = 0;
+    cbMonths = 0;
 
     uchar m;
     for (m=0; m<bExt4Months; m++)
@@ -240,7 +240,7 @@ void    MakeExtended4(void)
       SaveExt4Values(ibMon);
     }
 
-    Clear(); sprintf(szLo+3,"принято: %u", bCount); DelayInf();
+    Clear(); sprintf(szLo+3,"принято: %u", cbMonths); DelayInf();
 
     ShowCanalNumber(ibDig);
     Clear();
