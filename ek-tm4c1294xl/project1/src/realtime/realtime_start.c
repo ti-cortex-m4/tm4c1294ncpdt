@@ -64,8 +64,7 @@ real     re;
   {
     if (GetDigitalDevice(c) == 0)
     {
-      re = GetCanReal(mpreCount,c);
-      SetCanReal(mpreCntMonCan[ ibSoftMon ], c, &re);
+      mpdbCntMonCan[ibSoftMon][c] = mpreCount[c];
     }
   }
 }

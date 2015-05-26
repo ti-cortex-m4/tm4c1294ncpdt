@@ -33,8 +33,8 @@ void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon)
 {
   if (GetDigitalDevice(ibCan) == 0)
   {
-    real re = mpreCntMonCan[ PrevSoftMon() ][ibCan];
-    PushFloatUni(ST4_OK, re);
+    double db = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
+    PushFloatUni(ST4_OK, db);
   }
   else
   {

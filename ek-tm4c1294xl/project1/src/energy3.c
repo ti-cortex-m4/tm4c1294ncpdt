@@ -98,7 +98,7 @@ boolean LoadPowMonBuff(void) {
 
 
 boolean SaveCntMonBuff(void) {
-  return SaveBuff(CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
+  return SaveBuff(CNTMONCAN_BUFF, mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
 }
 
 boolean CleanCntMonBuff(void) {
@@ -106,5 +106,5 @@ boolean CleanCntMonBuff(void) {
 }
 
 boolean LoadCntMonBuff(void) {
-  return LoadBuff(CNTMONCAN_BUFF, mpreCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
+  return LoadBuff(CNTMONCAN_BUFF, mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
 }
