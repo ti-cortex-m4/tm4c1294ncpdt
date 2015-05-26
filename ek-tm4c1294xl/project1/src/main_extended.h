@@ -53,7 +53,7 @@ typedef struct
 typedef struct
 {
   status        bStatus;
-  real          reSelf;
+  double        dbValue;
   time          tiUpdate;
 } value6;
 
@@ -79,7 +79,7 @@ typedef struct
 // тип 'диаграмма'
 typedef struct
 {
-  real          reSelf;
+  real          dbValue;
   time2         tmSelf;
 } diagram;
 

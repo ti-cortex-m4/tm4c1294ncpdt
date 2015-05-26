@@ -102,7 +102,7 @@ void    MakeExtended6(uchar  ibCan, real  re)
 {
   value6 va;
   va.bStatus = ST4_OK;
-  va.reSelf = re;
+  va.dbValue = re;
   va.tiUpdate = *GetCurrTimeDate();
  
   mpCntMonCan6[ibCan] = va;
@@ -140,7 +140,7 @@ void    OutExtended6(void)
         {
           value6 va;
           va.bStatus = ST4_OK;
-          va.reSelf = mpreCntMonCan[ PrevSoftMon() ][c];
+          va.dbValue = mpreCntMonCan[ PrevSoftMon() ][c];
           va.tiUpdate = tiZero;
           Push(&va, sizeof(value6));
         }
@@ -182,7 +182,7 @@ value6 vl;
     LoadCntMon(ibMon);
 
     vl.bStatus = ST4_OK;
-    vl.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+    vl.dbValue = mpreCntMonCan[ PrevSoftMon() ][ibCan];
     vl.tiUpdate = tiZero;
   }
   else
@@ -195,7 +195,7 @@ value6 vl;
       vl = mpCntMonCan6[ibCan];
   }
 
-  reBuffA = vl.reSelf;
+  reBuffA = vl.dbValue;
   tiAlt = vl.tiUpdate;
 
   switch (vl.bStatus)
@@ -224,7 +224,7 @@ void    ShowDirectCnt(uchar  ibCan)
 {
   value6 vl = mpCntCan6[ibCan];
 
-  reBuffA = vl.reSelf;
+  reBuffA = vl.dbValue;
   tiAlt = vl.tiUpdate;
 
   switch (vl.bStatus)
@@ -239,7 +239,7 @@ void    ShowDirectCnt(uchar  ibCan)
 void    LoadDirectCntReal(uchar  ibCan)
 {
   value6 vl = mpCntCan6[ibCan];
-  reBuffA = vl.reSelf;
+  reBuffA = vl.dbValue;
 }
 
 
