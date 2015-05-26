@@ -56,13 +56,14 @@ static ulong   dw;
 // рассчитывает групповое значение на основе канального массива uint (трёхминутная мощность)
 real    GetGrpMntInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul)
 {
-uchar   i, j;
 real    reA, reB;
 
   reA = 0;
+
+  uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    j = GetGroupsNodeCanal(ibGrp,i);
+    uchar j = GetGroupsNodeCanal(ibGrp,i);
     reB = mpdbValueEngMnt[j] * mpwT[j];
 
     if (GetGroupsNodeSign(ibGrp,i) == 0)
@@ -92,13 +93,14 @@ real    re;
 // рассчитывает групповое значение на основе канального массива uint (получасовая мощность)
 real     GetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul)
 {
-uchar   i, j;
 real    reA, reB;
 
   reA = 0;
+
+  uchar i;
   for (i=0; i<GetGroupsSize(ibGroup); i++)
   {
-    j = GetGroupsNodeCanal(ibGroup,i);
+    uchar j = GetGroupsNodeCanal(ibGroup,i);
 
     if (mpwT[j] == 0xFFFF)
       reB = 0;
@@ -134,14 +136,15 @@ real    re;
 
 float   GetGrpImp2FloatEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask)
 {
-uchar   i, j;
 float   flA, flB;
 ulong   dw;
 
   flA = 0;
+
+  uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    j = GetGroupsNodeCanal(ibGrp,i);
+    uchar j = GetGroupsNodeCanal(ibGrp,i);
 
     dw = 0;
 
@@ -168,14 +171,15 @@ ulong   dw;
 
 double  GetGrpImp2DoubleEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask)
 {
-uchar   i, j;
 double  dbA, dbB;
 ulong   dw;
 
   dbA = 0;
+
+  uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    j = GetGroupsNodeCanal(ibGrp,i);
+    uchar j = GetGroupsNodeCanal(ibGrp,i);
 
     dw = 0;
 
