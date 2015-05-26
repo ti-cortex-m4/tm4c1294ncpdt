@@ -6,25 +6,19 @@ EXTENDED_4_OUT.C
 
 #include "../../main.h"
 #include "../../console.h"
-#include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy.h"
 #include "../../memory/mem_extended_6.h"
 #include "../../realtime/realtime.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports_devices.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_pause.h"
-#include "../../digitals/digitals_display.h"
-#include "../../digitals/digitals_messages.h"
-#include "../../devices/devices.h"
-#include "../../sensors/device_f.h"
-#include "../../sensors/automatic_p.h"
 #include "../../sensors/automatic2.h"
 #include "../../time/rtc.h"
 #include "../../time/timedate.h"
 #include "../../engine.h"
 #include "../../energy2.h"
 #include "extended_4.h"
+#include "extended_4_out.h"
 
 
 
@@ -66,7 +60,8 @@ void    OutExtended40(bool  fDouble)
     LoadCntMon(InBuff(6));
     LoadExt4Values(InBuff(6));
 
-    InitPushPtr();            
+    InitPushPtr();
+
     uint wSize = 0;
 
     uchar c;
@@ -95,12 +90,14 @@ void    OutExtended401(bool  fDouble)
     LoadCntMon(InBuff(6));
     LoadExt4Values(InBuff(6));
 
-    InitPushPtr();            
-    PushChar(boExt4Flag);
-    PushChar(bExt4Months);
-    PushInt(cwDayCan6);
-    PushInt(cwMonCan6);
-    uint wSize = 1+1+2+2;
+    InitPushPtr();
+
+    uint wSize = 0;
+
+    wSize += PushChar(boExt4Flag);
+    wSize += PushChar(bExt4Months);
+    wSize += PushInt(cwDayCan6);
+    wSize += PushInt(cwMonCan6);
 
     uchar c;
     for (c=0; c<bCANALS; c++)
