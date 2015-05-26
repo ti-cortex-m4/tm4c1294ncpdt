@@ -83,7 +83,7 @@ void    NextDayExtended7(void)
       re += mpreCount[c];
 
       value6 va;
-      va.bSelf = ST4_OK; 
+      va.bStatus = ST4_OK;
       va.reSelf = re;
       va.tiUpdate = *GetCurrTimeDate();
 
@@ -102,10 +102,10 @@ void    CloseExtended7(void)
 
 void    MakeExtended7(uchar  ibCan, real  re)
 {
-  if (mpCntDayCan7[ibCan].bSelf == ST4_NONE)
+  if (mpCntDayCan7[ibCan].bStatus == ST4_NONE)
   {
     value6 va;
-    va.bSelf = ST4_OK; 
+    va.bStatus = ST4_OK;
     va.reSelf = re;
     va.tiUpdate = *GetCurrTimeDate();
 

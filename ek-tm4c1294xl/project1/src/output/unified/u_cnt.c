@@ -39,7 +39,7 @@ void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon)
   else
   {
     value6 vl = mpCntMonCan4[ibCan];
-    PushFloatUni(vl.bSelf, vl.reSelf);
+    PushFloatUni(vl.bStatus, vl.reSelf);
   }
 }
 

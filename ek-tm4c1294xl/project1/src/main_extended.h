@@ -52,7 +52,7 @@ typedef struct
 // тип 'данные типа 6'
 typedef struct
 {
-  status        bSelf;
+  status        bStatus;
   real          reSelf;
   time          tiUpdate;
 } value6;
