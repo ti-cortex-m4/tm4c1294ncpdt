@@ -61,7 +61,7 @@ uchar   i;
     PushChar(ibMon);         
     PushChar(ibCan);         
 
-    PckQueryIO(bHEADER+sizeof(value4)+2, 5+3+2);
+    PckQueryIO(bHEADER+(1+2+2+4+6)+2, 5+3+2);
 
     if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
@@ -117,7 +117,7 @@ uchar   i;
     PushChar(0xFF);
     PushChar(0xFF);
 
-    PckQueryIO(bHEADER+sizeof(value4)*bCANALS+2, 5+10+2);
+    PckQueryIO(bHEADER+(1+2+2+4+6)*bCANALS+2, 5+10+2);
 
     if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);

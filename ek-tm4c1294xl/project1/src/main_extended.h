@@ -17,19 +17,9 @@ typedef enum
   ST4_NOTPRESENTED      = 3,
   ST4_BADDIGITAL        = 0x80,
   ST4_BADFLASH          = 0x81,
-  ST4_MODEM_LINK           = 0x82,
-  ST4_DISABLED       = 0x83
+  ST4_MODEM_LINK        = 0x82,
+  ST4_DISABLED          = 0x83
 } status;
-
-
-// тип 'данные типа 4'
-typedef struct
-{
-  status        bSelf;
-  uint          cwOK,cwError;
-  real          reSelf;
-  time          tiSelf;
-} value4;
 
 
 // тип 'буфер типа 5'
