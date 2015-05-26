@@ -139,7 +139,7 @@ static void MakeDevices(uchar  ibMon)
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           vl.bStatus = ST4_OK;
-          vl.dbValue = DoubleToFloat(mpdbChannelsC[diPrev.ibLine]);
+          vl.dbValue = mpdbChannelsC[diPrev.ibLine];
 
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bCount++;
@@ -183,21 +183,22 @@ static void MakeDevice6(uchar  ibMon)
         value6 vl = mpCntMonCan4[c];
 
         InitPop(15 + 15*c);
-        status st = (status) PopChar();
-        PopChar(); PopChar(); PopChar(); PopChar();
-        real re = PopFloat();
+        status bStatus = (status) PopChar();
+        PopChar(); PopChar();
+        PopChar(); PopChar();
+        float fl = PopFloat();
 
-        if (st == ST4_OK)
+        if (bStatus == ST4_OK)
         {
-          vl.bStatus = st;
-          vl.dbValue = re;
+          vl.bStatus = bStatus;
+          vl.dbValue = fl;
 
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bCount++;
         }
         else
         {
-          vl.bStatus = st;
+          vl.bStatus = bStatus;
           vl.dbValue = 0;
 
           ShowLo(szDataError); DelayInf();
