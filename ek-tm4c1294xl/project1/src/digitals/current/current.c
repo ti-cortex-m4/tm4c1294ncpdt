@@ -59,7 +59,7 @@ real    re;
 
 
     // подготовка информации для Esc S
-    re  = mpdwBase[ibCan] * GetCanReal(mpdbValueCntHou,ibCan);
+    re  = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
     if (GetDigitalDevice(ibCan) == 19)
       re += GetCanReal(mpreCount,ibCan);
 

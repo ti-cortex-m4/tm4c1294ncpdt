@@ -63,7 +63,7 @@ real    reA, reB;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
     j = GetGroupsNodeCanal(ibGrp,i);
-    reB = GetCanReal(mpdbValueEngMnt,j) * mpwT[j];
+    reB = mpdbValueEngMnt[j] * mpwT[j];
 
     if (GetGroupsNodeSign(ibGrp,i) == 0)
       reA += reB;
@@ -81,7 +81,7 @@ real    GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
 {
 real    re;
 
-  re = GetCanReal(mpdbValueEngMnt,ibCan) * mpwT[ibCan];
+  re = mpdbValueEngMnt[ibCan] * mpwT[ibCan];
 
   re *= bMul;
   return re;
@@ -103,7 +103,7 @@ real    reA, reB;
     if (mpwT[j] == 0xFFFF)
       reB = 0;
     else
-      reB = GetCanReal(mpdbValueEngHou,j) * mpwT[j];
+      reB = mpdbValueEngHou[j] * mpwT[j];
 
     if (GetGroupsNodeSign(ibGroup,i) == 0)
       reA += reB;
@@ -124,7 +124,7 @@ real    re;
   if (mpwT[ibCan] == 0xFFFF)
     re = 0;
   else
-    re = GetCanReal(mpdbValueEngHou,ibCan) * mpwT[ibCan];
+    re = mpdbValueEngHou[ibCan] * mpwT[ibCan];
 
   re *= bMul;
   return re;
@@ -293,12 +293,12 @@ real   re;
     if (GetDigitalDevice(c) == 0)
     {
       re  = *PGetCanImpAll(mpimAbsCan,c);
-      re *= GetCanReal(mpdbValueCntHou,c);
+      re *= mpdbValueCntHou[c];
       re += GetCanReal(mpreCount,c);
     }
     else
     {
-      re = mpdwBase[c] * GetCanReal(mpdbValueCntHou,c);
+      re = mpdwBase[c] * mpdbValueCntHou[c];
       if (GetDigitalDevice(c) == 19) re += GetCanReal(mpreCount,c);
     }
 
@@ -314,13 +314,13 @@ real    re;
 
   if (GetDigitalDevice(ibCan) == 19)
   {
-    re = mpdwBase[ibCan] * GetCanReal(mpdbValueCntHou,ibCan);
+    re = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
     re += GetCanReal(mpreCount,ibCan);
   }
   else
   {
-    re  = mpwImpMntCan[ibSoftMnt][ibCan] * GetCanReal(mpdbValueCntMnt,ibCan);
-    re += *PGetCanImpAll(mpimAbsCan,ibCan) * GetCanReal(mpdbValueCntHou,ibCan);
+    re  = mpwImpMntCan[ibSoftMnt][ibCan] * mpdbValueCntMnt[ibCan];
+    re += *PGetCanImpAll(mpimAbsCan,ibCan) * mpdbValueCntHou[ibCan];
     re += GetCanReal(mpreCount,ibCan);
   }
 
