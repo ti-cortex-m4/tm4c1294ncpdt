@@ -1,7 +1,8 @@
 /*------------------------------------------------------------------------------
 EXTENDED_6.C
 
- «начени€ счетчиков на конец мес€цев из буфера при€мого опроса (oтчет є52 от 21.11.2009)
+ «начени€ счетчиков на начало текущих суток (дл€ текущего мес€ца) или на конец мес€ца (дл€ остальных мес€цев, кроме текущего)
+ из буфера при€мого опроса (oтчет є52 от 21.11.2009)
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -25,7 +26,7 @@ static char const       szNone[]        = "*    пусто      ";
 
 
 file const              flExt6Flag = {EXT_6_FLAG, &boExt6Flag, sizeof(boolean)};
-file const              flCntCan6 = {EXT_6_VALUES, &mpCntCan6, sizeof(mpCntCan6)};
+file const              flCntDayCan6 = {EXT_6_VALUES, &mpCntDayCan6, sizeof(mpCntDayCan6)};
 
 
 
@@ -45,7 +46,7 @@ static boolean LoadCntMonCan6(uchar  ibMonFrom)
 void    InitExtended6(void)
 {
   LoadFileBoolean(&flExt6Flag, FALSE);
-  LoadFile(&flCntCan6);
+  LoadFile(&flCntDayCan6);
 }
 
 
@@ -67,8 +68,8 @@ void    ResetExtended6(void)
   }
 
 
-  memset(&mpCntCan6, 0, sizeof(mpCntCan6));
-  SaveFile(&flCntCan6);
+  memset(&mpCntDayCan6, 0, sizeof(mpCntDayCan6));
+  SaveFile(&flCntDayCan6);
 }
 
 
@@ -76,8 +77,8 @@ void    NextDayExtended6(void)
 { 
   cwDayCan6++;
 
-  memset(&mpCntCan6, 0, sizeof(mpCntCan6));
-  SaveFile(&flCntCan6);
+  memset(&mpCntDayCan6, 0, sizeof(mpCntDayCan6));
+  SaveFile(&flCntDayCan6);
 }
 
 
@@ -85,14 +86,14 @@ void    NextMonExtended6(void)
 { 
   cwMonCan6++;
 
-  memset(&mpCntMonCan6, 0, sizeof(mpCntCan6));
+  memset(&mpCntMonCan6, 0, sizeof(mpCntDayCan6));
   SaveCntMonCan6(ibHardMon);
 }
 
 
 void    CloseExtended6(void)
 {
-  SaveFile(&flCntCan6);
+  SaveFile(&flCntDayCan6);
   SaveCntMonCan6(ibHardMon);
 }
 
@@ -101,15 +102,16 @@ void    CloseExtended6(void)
 void    MakeExtended6(uchar  ibCan, real  re)
 {
   value6 va;
+
   va.bStatus = ST4_OK;
   va.dbValue = re;
   va.tiUpdate = *GetCurrTimeDate();
  
   mpCntMonCan6[ibCan] = va;
 
-  if (mpCntCan6[ibCan].bStatus == ST4_NONE)
+  if (mpCntDayCan6[ibCan].bStatus == ST4_NONE)
   {
-    mpCntCan6[ibCan] = va;
+    mpCntDayCan6[ibCan] = va;
   }
 }
 
@@ -147,7 +149,7 @@ void    OutExtended6(void)
         else
         {
           if (InBuff(6) == (*GetCurrTimeDate()).bMonth - 1)
-            Push(&mpCntCan6[c], sizeof(value6));
+            Push(&mpCntDayCan6[c], sizeof(value6));
           else 
             Push(&mpCntMonCan6[c], sizeof(value6));
         }
@@ -190,7 +192,7 @@ value6 vl;
     LoadCntMonCan6(ibMon);
 
     if (ibMon == (*GetCurrTimeDate()).bMonth - 1)
-      vl = mpCntCan6[ibCan];
+      vl = mpCntDayCan6[ibCan];
     else 
       vl = mpCntMonCan6[ibCan];
   }
@@ -222,7 +224,7 @@ bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon)
 
 void    ShowDirectCnt(uchar  ibCan)
 {
-  value6 vl = mpCntCan6[ibCan];
+  value6 vl = mpCntDayCan6[ibCan];
 
   reBuffA = vl.dbValue;
   tiAlt = vl.tiUpdate;
@@ -238,13 +240,13 @@ void    ShowDirectCnt(uchar  ibCan)
 
 void    LoadDirectCntReal(uchar  ibCan)
 {
-  value6 vl = mpCntCan6[ibCan];
+  value6 vl = mpCntDayCan6[ibCan];
   reBuffA = vl.dbValue;
 }
 
 
 void    LoadDirectCntTime(uchar  ibCan)
 {
-  value6 vl = mpCntCan6[ibCan];
+  value6 vl = mpCntDayCan6[ibCan];
   tiAlt = vl.tiUpdate;
 }
