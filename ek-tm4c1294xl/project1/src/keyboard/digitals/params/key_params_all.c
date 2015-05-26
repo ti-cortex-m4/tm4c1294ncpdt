@@ -51,7 +51,7 @@ static void ShowParamCurr(void)
     {
       float2 fl2 = ReadParam(iwPrm);
 
-      if (fl2.fValid == true)
+      if (fl2.fValid)
         sprintf(szLo,"%12.3f", fl2.flValue);
       else
         Error();

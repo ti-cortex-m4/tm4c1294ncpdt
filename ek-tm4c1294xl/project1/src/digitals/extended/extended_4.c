@@ -118,7 +118,9 @@ static void MakeDevices(uchar  ibMon)
 {
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-  if (ReadCntMonCan(ibMon, ibDig) == false)
+  double2 db2 = ReadCntMonCan(ibMon, ibDig);
+
+  if (!db2.fValid)
   { 
     ShowLo(szLinkError); DelayInf();
   }

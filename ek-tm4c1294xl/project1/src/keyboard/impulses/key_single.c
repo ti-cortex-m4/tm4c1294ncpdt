@@ -167,7 +167,7 @@ void    ShowModemReadCntCurrCan(void)
     else
     {
       double2 db2 = ReadCntCurrCan(ibX);
-      (db2.fValid == true) ? ShowFloat(reBuffA) : Error();
+      (db2.fValid) ? ShowFloat(reBuffA) : Error();
     }
 
     SaveConnect();

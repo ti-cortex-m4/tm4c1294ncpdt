@@ -64,10 +64,10 @@ real    re;
         else
         {
           uchar p = ibPort;
-          bool f = ReadCntCurrCan(c);
+          double2 db2 = ReadCntCurrCan(c);
           ibPort = p;
 
-          if (f == 0) re = 0;
+          if (!db2.fValid) re = 0;
         }
 
         mptiEsc_S[c] = *GetCurrTimeDate();
@@ -202,10 +202,10 @@ real    re;
         else
         {
           uchar p = ibPort;
-          bool f = ReadCntMonCan(ibMon, c);
+          double2 db2 = ReadCntMonCan(ibMon, c);
           ibPort = p;
 
-          if (f == 0) re = 0;
+          if (!db2.fValid) re = 0;
         }
 
         mptiEsc_V[c] = *GetCurrTimeDate();
