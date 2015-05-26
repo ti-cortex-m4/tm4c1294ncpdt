@@ -27,7 +27,7 @@ void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  ti);
 void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uchar  wImp);
 
 void    MakeCntMonCan(void);
-real    GetCntCurrImp(uchar  ibCan);
+double  GetCntCurrImp(uchar  ibCan);
 
 void    MakeImpulse(void);
 void    MakeImpulseSpec(void);

@@ -185,7 +185,7 @@ void    OutExtended42(bool  fDouble)
       Clear(); 
 
       uchar p = ibPort;
-      bool f = ReadCntMonCan(ibMon,ibCan);
+      double2 db2 = ReadCntMonCan(ibMon,ibCan);
       ibPort = p;
 
       if (f == true)

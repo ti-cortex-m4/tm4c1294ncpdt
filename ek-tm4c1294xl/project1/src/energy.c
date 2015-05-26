@@ -312,23 +312,23 @@ void    MakeCntMonCan(void)
 
 
 // рассчитывает показания счётчиков по приращению импульсов
-real    GetCntCurrImp(uchar  ibCan)
+double GetCntCurrImp(uchar  ibCan)
 {
-real    re;
+  double db = 0;
 
   if (GetDigitalDevice(ibCan) == 19)
   {
-    re = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
-    re += GetCanReal(mpreCount,ibCan);
+    db = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
+    db += GetCanReal(mpreCount,ibCan);
   }
   else
   {
-    re  = mpwImpMntCan[ibSoftMnt][ibCan] * mpdbValueCntMnt[ibCan];
-    re += *PGetCanImpAll(mpimAbsCan,ibCan) * mpdbValueCntHou[ibCan];
-    re += GetCanReal(mpreCount,ibCan);
+    db  = mpwImpMntCan[ibSoftMnt][ibCan] * mpdbValueCntMnt[ibCan];
+    db += *PGetCanImpAll(mpimAbsCan,ibCan) * mpdbValueCntHou[ibCan];
+    db += GetCanReal(mpreCount,ibCan);
   }
 
-  return re;
+  return db;
 }
 
 
