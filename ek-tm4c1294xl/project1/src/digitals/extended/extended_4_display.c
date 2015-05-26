@@ -22,6 +22,7 @@ EXTENDED_4_DISPLAY.C
 #include "../../sensors/automatic2.h"
 #include "../../time/rtc.h"
 #include "../../time/timedate.h"
+#include "../../time/timedate_display.h"
 #include "../../engine.h"
 #include "../../energy2.h"
 #include "extended_4_in.h"

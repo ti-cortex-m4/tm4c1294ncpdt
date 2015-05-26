@@ -1860,27 +1860,25 @@ double2 ReadCntCurrCan(uchar  ibCan)
 
   switch (diCurr.bDevice)
   {
-    case 0:  reBuffA = GetCntCurrImp(ibCan);
-             return(1);
+    case 0:  return GetDouble2(GetCntCurrImp(ibCan), true);
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadCntCurrA() );
+    case 1:  return GetDouble2(reBuffA, ReadCntCurrA());
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadCntCurrB() );
+    case 2:  return GetDouble2(reBuffA, ReadCntCurrB());
 
-    case 12: reBuffA = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
-             return(1);
+    case 12: return GetDouble2(mpdwBase[ibCan] * mpdbValueCntHou[ibCan], true);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadCntCurrC() );
+    case 3:  return GetDouble2(reBuffA, ReadCntCurrC());
 #endif
 
-    default: reBuffA = 0; return(0);
+    default: return GetDouble2(0, false);
   }
 }
 
@@ -1927,26 +1925,28 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
   switch (diCurr.bDevice)
   {
-    case 0:  if (LoadCntMon(ibMon) == 0) return(0);
-             reBuffA = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
-             return(1);
+    case 0:  if (LoadCntMon(ibMon) == false)
+               return GetDouble2(0, false);
+             else
+               return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadCntMonCanA(ibMon) );
+    case 1:  return GetDouble2(reBuffA, ReadCntMonCanA(ibMon));
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadCntMonCanB(ibMon) );
+    case 2:  return GetDouble2(reBuffA, ReadCntMonCanB(ibMon));
 
-    case 12: if (LoadCntMon(ibMon) == 0) return(0);
-             reBuffA = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
-             return(1);
+    case 12: if (LoadCntMon(ibMon) == false)
+               return GetDouble2(0, false);
+             else
+               return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadCntMonCanC(ibMon) );
+    case 3:  return GetDouble2(reBuffA, ReadCntMonCanC(ibMon));
 #endif
 
 #ifndef SKIP_D
@@ -2034,7 +2034,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
     case 99: reBuffA = 0; return(1);            break;
 #endif
 
-    default: reBuffA = 0; return(0);
+    default: return GetDouble2(0, false);
   }
 }
 

@@ -165,7 +165,10 @@ void    ShowModemReadCntCurrCan(void)
     if (mpboEnblCan[ibX] == false)
       ShowLo(szBlocked);
     else
-      (ReadCntCurrCan(ibX) == 1) ? ShowFloat(reBuffA) : Error();
+    {
+      double2 db2 = ReadCntCurrCan(ibX);
+      (db2.fValid == true) ? ShowFloat(reBuffA) : Error();
+    }
 
     SaveConnect();
   }
