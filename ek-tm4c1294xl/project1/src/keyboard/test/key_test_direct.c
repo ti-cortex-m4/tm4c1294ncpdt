@@ -54,11 +54,13 @@ static void ShowTestDirect(void)
         if (fKey == true) break;
 
         ShowHi(szDirectEscV); DelayInf();
-        if (ReadCntMonCan(tiCurr.bMonth-1, ibX) == 1) bA++;
+        double2 db2 = ReadCntMonCan(tiCurr.bMonth-1, ibX);
+        if (db2.fValid) bA++;
         if (fKey == true) break;
 
         ShowHi(szDirectEscS); DelayInf();
-        if (ReadCntCurrCan(ibX) == 1) bB++;
+        db2 = ReadCntCurrCan(ibX);
+        if (db2.fValid) bB++;
         if (fKey == true) break;
 
         ShowHi(szTestDirect); sprintf(szHi+14,"%2u",ibX+1);
