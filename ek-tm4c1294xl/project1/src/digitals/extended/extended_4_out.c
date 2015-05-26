@@ -33,8 +33,8 @@ void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
   if (GetDigitalDevice(ibCan) == 0)
   {
     PushChar(ST4_OK);
-    PushInt(0xFF);
-    PushInt(0xFF);
+    PushInt(0xFFFF);
+    PushInt(0xFFFF);
     PushFloat(mpreCntMonCan[ PrevSoftMon() ][ibCan]);
     PushTime(tiZero);
   }
@@ -42,8 +42,8 @@ void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
   {
   	value6 vl = mpCntMonCan4[ibCan];
     PushChar(vl.bStatus);
-    PushInt(0xFF);
-    PushInt(0xFF);
+    PushInt(0xFFFF);
+    PushInt(0xFFFF);
     PushFloat(vl.dbValue);
     PushTime(vl.tiUpdate);
   }
