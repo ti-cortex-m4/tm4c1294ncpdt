@@ -127,13 +127,13 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        value4t va = mpCntMonCan4T[c];
+        value4t vl = mpCntMonCan4T[c];
 
-        va.bStatus = bStatus;
-        va.mpdbValuesT[ibTrf] = 0;
-        va.tiUpdate = *GetCurrTimeDate();
+        vl.bStatus = bStatus;
+        vl.mpdbValuesT[ibTrf] = 0;
+        vl.tiUpdate = *GetCurrTimeDate();
 
-        mpCntMonCan4T[c] = va;
+        mpCntMonCan4T[c] = vl;
       }
     }
 
@@ -152,13 +152,13 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          value4t va = mpCntMonCan4T[c];
+          value4t vl = mpCntMonCan4T[c];
 
-          va.bStatus = ST4_OK;
-          va.mpdbValuesT[ibTrf] = mpdbChannelsC[diPrev.ibLine];
-          va.tiUpdate = *GetCurrTimeDate();
+          vl.bStatus = ST4_OK;
+          vl.mpdbValuesT[ibTrf] = mpdbChannelsC[diPrev.ibLine];
+          vl.tiUpdate = *GetCurrTimeDate();
 
-          mpCntMonCan4T[c] = va;
+          mpCntMonCan4T[c] = vl;
         }
       }
     }
@@ -227,19 +227,19 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
   }
   else
   {
-    value4t va = mpCntMonCan4T[ibCan];
+    value4t vl = mpCntMonCan4T[ibCan];
 
     uint wSize = 0;
 
-    wSize += PushChar(va.bStatus);
+    wSize += PushChar(vl.bStatus);
 
     uchar t;
     for (t=0; t<bTARIFFS; t++)
     {
-      wSize += PushFloatOrDouble(va.mpdbValuesT[t], fDouble);
+      wSize += PushFloatOrDouble(vl.mpdbValuesT[t], fDouble);
     }
 
-    wSize += PushTime(va.tiUpdate);
+    wSize += PushTime(vl.tiUpdate);
     return wSize;
   }
 }

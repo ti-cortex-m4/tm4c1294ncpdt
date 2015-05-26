@@ -158,20 +158,20 @@ void    OutExtended50(bool  fDouble)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        value5b va = mpCntDayCan5[c];
+        value5b vl = mpCntDayCan5[c];
 
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloatOrDouble(va.stValue.mpdbValuesT[t], fDouble);
+          wSize += PushFloatOrDouble(vl.stValue.mpdbValuesT[t], fDouble);
         }
 
-        wSize += PushTime(va.tiUpdate);
+        wSize += PushTime(vl.tiUpdate);
 
-        wSize += PushChar(va.boSuccess);
+        wSize += PushChar(vl.boSuccess);
 
-        wSize += PushInt(va.cwSuccess);
-        wSize += PushInt(va.cwError);
+        wSize += PushInt(vl.cwSuccess);
+        wSize += PushInt(vl.cwError);
       }
     }
 
@@ -198,15 +198,15 @@ void    OutExtended51(bool  fDouble)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        value5b va = mpCntDayCan5[c];
+        value5b vl = mpCntDayCan5[c];
 
         uchar t;
         for (t=0; t<bTARIFFS; t++)
         {
-          wSize += PushFloatOrDouble(va.stValue.mpdbValuesT[t], fDouble);
+          wSize += PushFloatOrDouble(vl.stValue.mpdbValuesT[t], fDouble);
         }
 
-        wSize += PushTime(va.tiUpdate);
+        wSize += PushTime(vl.tiUpdate);
       }
     }
 

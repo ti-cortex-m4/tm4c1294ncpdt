@@ -38,8 +38,8 @@ void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon)
   }
   else
   {
-    value6 va = mpCntMonCan4[ibCan];
-    PushFloatUni(va.bSelf, va.reSelf);
+    value6 vl = mpCntMonCan4[ibCan];
+    PushFloatUni(vl.bSelf, vl.reSelf);
   }
 }
 
@@ -87,8 +87,8 @@ void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
   }
   else
   {
-    value4t va = mpCntMonCan4T[ibCan];
-    PushFloatUni(va.bStatus, va.mpdbValuesT[ibTar]);
+    value4t vl = mpCntMonCan4T[ibCan];
+    PushFloatUni(vl.bStatus, vl.mpdbValuesT[ibTar]);
   }
 }
 

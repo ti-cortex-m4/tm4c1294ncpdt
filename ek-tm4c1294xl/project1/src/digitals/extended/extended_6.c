@@ -175,34 +175,34 @@ void    ShowTimeDate6(time  ti)
 
 void    ShowCntMonCan6(uchar  ibCan, uchar  ibMon)
 {
-value6 va;
+value6 vl;
 
   if (GetDigitalDevice(ibCan) == 0)
   {
     LoadCntMon(ibMon);
 
-    va.bSelf = ST4_OK;
-    va.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
-    va.tiUpdate = tiZero;
+    vl.bSelf = ST4_OK;
+    vl.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+    vl.tiUpdate = tiZero;
   }
   else
   {
     LoadCntMonCan6(ibMon);
 
     if (ibMon == (*GetCurrTimeDate()).bMonth - 1)
-      va = mpCntCan6[ibCan];
+      vl = mpCntCan6[ibCan];
     else 
-      va = mpCntMonCan6[ibCan];
+      vl = mpCntMonCan6[ibCan];
   }
 
-  reBuffA = va.reSelf;
-  tiAlt = va.tiUpdate;
+  reBuffA = vl.reSelf;
+  tiAlt = vl.tiUpdate;
 
-  switch (va.bSelf)
+  switch (vl.bSelf)
   {
     case ST4_NONE: ShowLo(szNone); break;
     case ST4_OK:   (ibZ == 0) ? ShowFloat(reBuffA) : ShowTimeDate6(tiAlt); break;
-    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", va.bSelf); break;
+    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bSelf); break;
   }  
 }
 
@@ -222,29 +222,29 @@ bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon)
 
 void    ShowDirectCnt(uchar  ibCan)
 {
-  value6 va = mpCntCan6[ibCan];
+  value6 vl = mpCntCan6[ibCan];
 
-  reBuffA = va.reSelf;
-  tiAlt = va.tiUpdate;
+  reBuffA = vl.reSelf;
+  tiAlt = vl.tiUpdate;
 
-  switch (va.bSelf)
+  switch (vl.bSelf)
   {
     case ST4_NONE: ShowLo(szNone); break;
     case ST4_OK:   ShowFloat(reBuffA); break;
-    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", va.bSelf); break;
+    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bSelf); break;
   }  
 }
 
 
 void    LoadDirectCntReal(uchar  ibCan)
 {
-  value6 va = mpCntCan6[ibCan];
-  reBuffA = va.reSelf;
+  value6 vl = mpCntCan6[ibCan];
+  reBuffA = vl.reSelf;
 }
 
 
 void    LoadDirectCntTime(uchar  ibCan)
 {
-  value6 va = mpCntCan6[ibCan];
-  tiAlt = va.tiUpdate;
+  value6 vl = mpCntCan6[ibCan];
+  tiAlt = vl.tiUpdate;
 }
