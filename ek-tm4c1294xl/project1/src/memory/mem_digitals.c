@@ -43,10 +43,6 @@ boolean                 mpboChannelsA[bCHANNELS];
 ulong                   mpdwChannelsA[bCHANNELS],
                         mpdwChannelsB[bCHANNELS];
 
-// промежуточные массивы
-real                    mpreChannelsA[bCHANNELS],
-                        mpreChannelsB[bCHANNELS];
-
 // промежуточный массив
 double                  mpdbChannelsC[bCHANNELS];
 

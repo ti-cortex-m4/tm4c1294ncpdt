@@ -139,7 +139,7 @@ static void MakeDevices(uchar  ibMon)
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           vl.bSelf = ST4_OK;
-          vl.reSelf = mpreChannelsB[diPrev.ibLine];
+          vl.reSelf = DoubleToFloat(mpdbChannelsC[diPrev.ibLine]);
 
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) bCount++;

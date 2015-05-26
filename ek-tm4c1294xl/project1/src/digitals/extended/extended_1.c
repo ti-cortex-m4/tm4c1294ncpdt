@@ -151,7 +151,7 @@ void    MakeExtended1(void)
       {
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
-          reBuffA = GetCanReal(mpreChannelsB, diPrev.ibLine);
+          reBuffA = DoubleToFloat(mpdbChannelsC[diPrev.ibLine]);
           mpcwEscV_OK[c]++;
 
           mpreEsc_V[c] = reBuffA;
@@ -191,7 +191,7 @@ void    MakeExtended1(void)
         if (mpboChannelsA[diPrev.ibLine] == TRUE)
         {
           ResetWDT();
-          reBuffA = GetCanReal(mpreChannelsB, diPrev.ibLine);
+          reBuffA = DoubleToFloat(mpdbChannelsC[diPrev.ibLine]);
           mpcwEscS_OK[c]++;
 
           mpreEsc_S[c] = reBuffA;
