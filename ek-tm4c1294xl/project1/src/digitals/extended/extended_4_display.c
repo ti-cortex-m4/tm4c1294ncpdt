@@ -67,27 +67,27 @@ void    ShowCntMonCanF2(void)
 
 void    ShowExtended4(uchar  ibCan, uchar  ibMon)
 {
-  value6 va;
+  value6 vl;
 
   if (GetDigitalDevice(ibCan) == 0)
   {
     LoadCntMon(ibMon);
 
-    va.bSelf = ST4_OK; 
-    va.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
-    va.tiUpdate = tiZero;
+    vl.bSelf = ST4_OK; 
+    vl.reSelf = mpreCntMonCan[ PrevSoftMon() ][ibCan];
+    vl.tiUpdate = tiZero;
     bStatus = ST4_OK;
   }
   else
   {
     LoadExt4Values(ibMon);
 
-    va = mpCntMonCan4[ibCan];
-    bStatus = va.bSelf;
+    vl = mpCntMonCan4[ibCan];
+    bStatus = vl.bSelf;
   }
 
-  reBuffA = va.reSelf;
-  tiAlt = va.tiUpdate;
+  reBuffA = vl.reSelf;
+  tiAlt = vl.tiUpdate;
 
   ShowCntMonCanF2();
 }

@@ -40,12 +40,12 @@ void    PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
   }
   else
   {
-  	value6 va = mpCntMonCan4[ibCan];
-    PushChar(va.bSelf);
+  	value6 vl = mpCntMonCan4[ibCan];
+    PushChar(vl.bSelf);
     PushInt(0xFF);
     PushInt(0xFF);
-    PushFloat(va.reSelf);
-    PushTime(va.tiUpdate);
+    PushFloat(vl.reSelf);
+    PushTime(vl.tiUpdate);
   }
 }
 
