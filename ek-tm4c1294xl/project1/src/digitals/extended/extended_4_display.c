@@ -24,8 +24,17 @@ EXTENDED_4_DISPLAY.C
 #include "../../time/timedate.h"
 #include "../../engine.h"
 #include "../../energy2.h"
+#include "extended_4_in.h"
 #include "extended_4.h"
 
+
+
+//                                         0123456789ABCDEF
+static char const       szNone[]        = "*    пусто      ",
+                        szBadDigital[]  = "*   ошибка !    ",
+                        szBadFlash[]    = "* ошибка памяти ",
+                        szModemLink[]   = "*    модем      ",
+                        szDisabled[]    = "*  запрещено    ";
 
 
 void    ShowTimeDateF2(void)
