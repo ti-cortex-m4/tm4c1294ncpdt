@@ -103,7 +103,7 @@ void    ShowCntCanMon(void)
           }
           else
           {
-            (ReadCntMonCanF_Curr(ibMon,ibCan) == true) ? ShowCntMonCanF() : Error();
+            (ReadCntMonCanF_Curr(ibMon,ibCan) == true) ? ShowCntMonCanF(ibZ == 0) : Error();
           }
         }
 
@@ -143,7 +143,7 @@ void    ShowCntCanMon(void)
             (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
           }
           else
-            (ReadCntMonCanF_Curr(ibZ,ibCan) == true) ? ShowCntMonCanF() : Error();
+            (ReadCntMonCanF_Curr(ibZ,ibCan) == true) ? ShowCntMonCanF(ibZ == 0) : Error();
         }
 
         SaveConnect();
@@ -151,7 +151,7 @@ void    ShowCntCanMon(void)
       break;
 
     case bGET_CNTCANYEAR2:  
-      ShowExtended4(ibCan,ibMon);
+      ShowExtended4(ibCan,ibMon,ibZ == 0);
       break;
 
     case bGET_CNTCANYEAR20:     
@@ -159,7 +159,7 @@ void    ShowCntCanMon(void)
       if (ibMon == tiCurr.bMonth)
         ShowLo(szCntCanNoData);
       else
-        ShowExtended4(ibCan,ibMon);
+        ShowExtended4(ibCan,ibMon,ibZ == 0);
       break;
   }
 
