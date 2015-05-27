@@ -7,7 +7,6 @@ EXTENDED_4T,C
 #include "../../main.h"
 #include "../../console.h"
 #include "../../memory/mem_realtime.h"
-#include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_display.h"
 #include "../../digitals/digitals_messages.h"
