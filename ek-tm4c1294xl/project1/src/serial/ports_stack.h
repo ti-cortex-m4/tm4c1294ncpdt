@@ -35,3 +35,4 @@ void    Pop(void  *pbData, uint  wSize);
 uchar   PopChar(void);
 ulong   PopLong(void);
 float   PopFloat(void);
+double  PopDouble(void);

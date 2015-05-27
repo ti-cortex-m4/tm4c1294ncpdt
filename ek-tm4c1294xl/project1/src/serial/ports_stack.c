@@ -302,3 +302,20 @@ float   PopFloat(void)
 
   return co.reBuff;
 }
+
+
+double  PopDouble(void)
+{
+  static combo64 co;
+
+  co.mpbBuff[7] = PopChar();
+  co.mpbBuff[6] = PopChar();
+  co.mpbBuff[5] = PopChar();
+  co.mpbBuff[4] = PopChar();
+  co.mpbBuff[3] = PopChar();
+  co.mpbBuff[2] = PopChar();
+  co.mpbBuff[1] = PopChar();
+  co.mpbBuff[0] = PopChar();
+
+  return co.dbBuff;
+}
