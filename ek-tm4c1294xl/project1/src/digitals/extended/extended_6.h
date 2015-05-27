@@ -20,7 +20,7 @@ void    NextDayExtended6(void);
 void    NextMonExtended6(void);
 void    CloseExtended6(void);
 
-void    MakeExtended6(uchar  ibCan, real  re);
+void    MakeExtended6(uchar  ibCan, double  db);
 
 bool    SupportedExtended6(uchar  ibCan);
 bool    SupportedExtended6_CurrMon(uchar  ibCan, uchar  ibMon);

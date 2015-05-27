@@ -96,19 +96,19 @@ void    CloseExtended6(void)
 
 
 
-void    MakeExtended6(uchar  ibCan, real  re)
+void    MakeExtended6(uchar  ibCan, double  db)
 {
-  value6 va;
+  value6 vl;
 
-  va.bStatus = ST4_OK;
-  va.dbValue = re;
-  va.tiUpdate = *GetCurrTimeDate();
+  vl.bStatus = ST4_OK;
+  vl.dbValue = db;
+  vl.tiUpdate = *GetCurrTimeDate();
  
-  mpCntMonCan6[ibCan] = va;
+  mpCntMonCan6[ibCan] = vl;
 
   if (mpCntDayCan6[ibCan].bStatus == ST4_NONE)
   {
-    mpCntDayCan6[ibCan] = va;
+    mpCntDayCan6[ibCan] = vl;
   }
 }
 
