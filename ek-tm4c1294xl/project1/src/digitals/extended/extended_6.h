@@ -23,4 +23,4 @@ void    CloseExtended6(void);
 void    MakeExtended6(uchar  ibCan, real  re);
 
 bool    SupportedExtended6(uchar  ibCan);
-bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon);
+bool    SupportedExtended6_CurrMon(uchar  ibCan, uchar  ibMon);

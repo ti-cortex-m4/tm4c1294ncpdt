@@ -80,7 +80,7 @@ void    ShowCntCanMon(void)
         double2 db2 = ReadCntMonCan(ibMon,ibCan);
         (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
       }
-      else if (CheckDirectCnt2(ibCan,ibMon)) {
+      else if (SupportedExtended6_CurrMon(ibCan,ibMon)) {
         ShowDirectCnt(ibCan);
       }
       else
@@ -121,7 +121,7 @@ void    ShowCntCanMon(void)
         double2 db2 = ReadCntMonCan(ibZ,ibCan);
         (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
       }
-      else if (CheckDirectCnt2(ibCan,ibMon)) {
+      else if (SupportedExtended6_CurrMon(ibCan,ibMon)) {
         ShowDirectCnt(ibCan);
       }
       else
