@@ -29,6 +29,8 @@ static char const       szNone[]        = "*    пусто      ",
 
 void    ShowCntMonCanF(bool  fShowValue)
 {
+  Clear();
+
   switch (bStatus4)
   {
     case ST4_NONE:         ShowLo(szNone);         break;
