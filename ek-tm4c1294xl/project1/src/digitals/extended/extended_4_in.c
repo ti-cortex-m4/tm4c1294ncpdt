@@ -104,7 +104,7 @@ uchar   i;
     PushChar((5+10+2) % 0x100);
     PushChar((5+10+2) / 0x100);
 
-    PushChar(0xFF);
+    PushChar(0xFD);
     PushChar(bEXT_GETEXTENDED40);         
     PushChar(ibMon);         
 
@@ -117,7 +117,7 @@ uchar   i;
     PushChar(0xFF);
     PushChar(0xFF);
 
-    PckQueryIO(bHEADER+(1+2+2+4+6)*bCANALS+2, 5+10+2);
+    PckQueryIO(bHEADER+(1+2+2+8+6)*bCANALS+2, 5+10+2);
 
     if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return false;
