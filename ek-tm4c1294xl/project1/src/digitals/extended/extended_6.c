@@ -115,14 +115,13 @@ void    MakeExtended6(uchar  ibCan, real  re)
 
 
 
-bool    CheckDirectCnt1(uchar  ibCan)
+bool    SupportedExtended6(uchar  ibCan)
 {
-  return (((boExt6Flag == TRUE) && (GetDigitalDevice(ibCan) == 4)) ||
-                                   (GetDigitalDevice(ibCan) == 21));
+  return ((boExt6Flag == TRUE) && ((GetDigitalDevice(ibCan) == 4) || (GetDigitalDevice(ibCan) == 21)));
 }
 
 
 bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon)
 {
-  return (CheckDirectCnt1(ibCan) && (ibMon == (*GetCurrTimeDate()).bMonth - 1));
+  return (SupportedExtended6(ibCan) && (ibMon == (*GetCurrTimeDate()).bMonth - 1));
 }
