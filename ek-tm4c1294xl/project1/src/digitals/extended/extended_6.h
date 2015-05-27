@@ -24,6 +24,3 @@ void    MakeExtended6(uchar  ibCan, real  re);
 
 bool    CheckDirectCnt1(uchar  ibCan);
 bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon);
-
-void    LoadDirectCntReal(uchar  ibCan);
-void    LoadDirectCntTime(uchar  ibCan);

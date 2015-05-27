@@ -126,18 +126,3 @@ bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon)
 {
   return (CheckDirectCnt1(ibCan) && (ibMon == (*GetCurrTimeDate()).bMonth - 1));
 }
-
-
-
-void    LoadDirectCntReal(uchar  ibCan)
-{
-  value6 vl = mpCntDayCan6[ibCan];
-  reBuffA = vl.dbValue;
-}
-
-
-void    LoadDirectCntTime(uchar  ibCan)
-{
-  value6 vl = mpCntDayCan6[ibCan];
-  tiAlt = vl.tiUpdate;
-}
