@@ -21,7 +21,7 @@ RESPONSE255_CRC.C
 #include "../output/out_relaxs.h"
 #include "../digitals/extended/extended_4_out.h"
 #include "../digitals/extended/extended_4t.h"
-#include "../digitals/extended/extended_5.h"
+#include "../digitals/extended/extended_5_out.h"
 #include "../digitals/extended/extended_6_out.h"
 #include "../digitals/extended/extended_7.h"
 #include "../output/out_common.h"

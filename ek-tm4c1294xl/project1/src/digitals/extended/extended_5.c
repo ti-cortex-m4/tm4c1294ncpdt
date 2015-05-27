@@ -10,7 +10,6 @@ EXTENDED_5.C
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_display.h"
 #include "../../devices/devices.h"
-#include "../../serial/ports.h"
 #include "../../time/rtc.h"
 #include "../../console.h"
 #include "automatic_5.h"
