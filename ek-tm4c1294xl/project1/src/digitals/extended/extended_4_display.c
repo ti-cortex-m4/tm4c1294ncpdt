@@ -27,12 +27,12 @@ static char const       szNone[]        = "*    пусто      ",
 
 
 
-void    ShowCntMonCanF(void)
+void    ShowCntMonCanF(bool  fShowValue)
 {
   switch (bStatus4)
   {
     case ST4_NONE:         ShowLo(szNone);         break;
-    case ST4_OK:           (ibZ == 0) ? ShowDouble(dbValue4) : ShowTimeDate(tiUpdate4); break;
+    case ST4_OK:           (fShowValue) ? ShowDouble(dbValue4) : ShowTimeDate(tiUpdate4); break;
     case ST4_BADDIGITAL:   ShowLo(szBadDigital);   break;
     case ST4_BADFLASH:     ShowLo(szBadFlash);     break;
     case ST4_MODEM_LINK:   ShowLo(szModemLink);    break;
@@ -43,28 +43,26 @@ void    ShowCntMonCanF(void)
 
 
 
-void    ShowExtended4(uchar  ibCan, uchar  ibMon)
+void    ShowExtended4(uchar  ibCan, uchar  ibMon, bool  fShowValue)
 {
-  value6 vl;
-
   if (GetDigitalDevice(ibCan) == 0)
   {
     LoadCntMon(ibMon);
 
-    vl.bStatus = ST4_OK;
-    vl.dbValue = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
-    vl.tiUpdate = tiZero;
+    bStatus4 = ST4_OK;
+    dbValue4 = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
+    tiUpdate4 = tiZero;
   }
   else
   {
     LoadExt4Values(ibMon);
 
-    vl = mpCntMonCan4[ibCan];
+    value6 vl = mpCntMonCan4[ibCan];
+
+    bStatus4 = vl.bStatus;
+    dbValue4 = vl.dbValue;
+    tiUpdate4 = vl.tiUpdate;
   }
 
-  bStatus4 = vl.bStatus;
-  dbValue4 = vl.dbValue;
-  tiUpdate4 = vl.tiUpdate;
-
-  ShowCntMonCanF();
+  ShowCntMonCanF(fShowValue);
 }
