@@ -24,5 +24,3 @@ void    ResetExtended4T_Custom(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin
 void    NextMonExtended4T(void); 
 
 void    MakeExtended4T(void);
-
-void    OutExtended4T(bool  fDouble);
