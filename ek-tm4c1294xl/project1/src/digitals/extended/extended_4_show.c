@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-EXTENDED_4_DISPLAY.C
+EXTENDED_4_SHOW.C
 
 
 ------------------------------------------------------------------------------*/
@@ -14,7 +14,7 @@ EXTENDED_4_DISPLAY.C
 #include "../../energy2.h"
 #include "extended_4.h"
 #include "extended_4_in.h"
-#include "extended_4_display.h"
+#include "extended_4_show.h"
 
 
 
