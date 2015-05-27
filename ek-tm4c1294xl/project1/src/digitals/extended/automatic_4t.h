@@ -4,5 +4,5 @@ AUTOMATIC_4T,H
 
 ------------------------------------------------------------------------------*/
 
-bool    SupportedCntMonCanTariff(uchar  ibCan);
+bool    SupportedExtended4T(uchar  ibCan);
 status  ReadCntMonCanTariff(uchar  ibMon, uchar  ibCan, uchar  ibTrf);

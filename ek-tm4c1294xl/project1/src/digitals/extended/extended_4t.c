@@ -211,7 +211,7 @@ void    MakeExtended4T(void)
 
 uint    PushData4T(uchar  ibCan, bool  fDouble)
 {
-  if (SupportedCntMonCanTariff(ibCan) == false)
+  if (SupportedExtended4T(ibCan) == false)
   {
     uint wSize = 0;
     wSize += PushChar(ST4_NOTSUPPORTED);
