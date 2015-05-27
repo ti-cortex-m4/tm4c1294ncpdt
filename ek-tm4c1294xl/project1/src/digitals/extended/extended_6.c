@@ -22,22 +22,18 @@ EXTENDED_6.C
 
 
 
-//                                         0123456789ABCDEF
-static char const       szNone[]        = "*    пусто      ";
-
-
 file const              flExt6Flag = {EXT_6_FLAG, &boExt6Flag, sizeof(boolean)};
 file const              flCntDayCan6 = {EXT_6_VALUES, &mpCntDayCan6, sizeof(mpCntDayCan6)};
 
 
 
-static boolean SaveCntMonCan6(uchar  ibMonTo)
+boolean SaveCntMonCan6(uchar  ibMonTo)
 {
   return SaveBuff(EXT_6_MON_VALUES + ibMonTo*VALUE6_CAN_PAGES, mpCntMonCan6, sizeof(mpCntMonCan6));
 }
 
 
-static boolean LoadCntMonCan6(uchar  ibMonFrom)
+boolean LoadCntMonCan6(uchar  ibMonFrom)
 {
   return LoadBuff(EXT_6_MON_VALUES + ibMonFrom*VALUE6_CAN_PAGES, mpCntMonCan6, sizeof(mpCntMonCan6));
 }
@@ -118,97 +114,6 @@ void    MakeExtended6(uchar  ibCan, real  re)
 
 
 
-void    OutExtended6(void)
-{
-  if (enGlobal == GLB_PROGRAM)
-    Result(bRES_NEEDWORK);
-  else if (InBuff(6) >= bMONTHS)
-    Result(bRES_BADADDRESS);
-  else
-  {
-    LoadCntMon(InBuff(6));
-    LoadCntMonCan6(InBuff(6));
-
-    InitPushPtr();            
-    PushInt(cwDayCan6);
-    PushInt(cwMonCan6);
-    uint wSize = 2+2;
-
-    uchar c;
-    for (c=0; c<bCANALS; c++)
-    {
-      if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
-      {
-        if (GetDigitalDevice(c) == 0)
-        {
-          value6 va;
-          va.bStatus = ST4_OK;
-          va.dbValue = mpdbCntMonCan[ PrevSoftMon() ][c];
-          va.tiUpdate = tiZero;
-          Push(&va, sizeof(value6));
-        }
-        else
-        {
-          if (InBuff(6) == (*GetCurrTimeDate()).bMonth - 1)
-            Push(&mpCntDayCan6[c], sizeof(value6));
-          else 
-            Push(&mpCntMonCan6[c], sizeof(value6));
-        }
-
-        wSize += sizeof(value6);
-      }
-    }
-
-    OutptrOutBuff(wSize);
-  }
-}
-
-
-
-void    ShowTimeDate6(time  ti)
-{
-  sprintf(szLo,"%02u:%02u %02u.%02u.%02u",
-               ti.bHour,
-               ti.bMinute,
-               ti.bDay,
-               ti.bMonth,
-               ti.bYear);
-}
-
-
-void    ShowCntMonCan6(uchar  ibCan, uchar  ibMon)
-{
-value6 vl;
-
-  if (GetDigitalDevice(ibCan) == 0)
-  {
-    LoadCntMon(ibMon);
-
-    vl.bStatus = ST4_OK;
-    vl.dbValue = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
-    vl.tiUpdate = tiZero;
-  }
-  else
-  {
-    LoadCntMonCan6(ibMon);
-
-    if (ibMon == (*GetCurrTimeDate()).bMonth - 1)
-      vl = mpCntDayCan6[ibCan];
-    else 
-      vl = mpCntMonCan6[ibCan];
-  }
-
-  reBuffA = vl.dbValue;
-  tiAlt = vl.tiUpdate;
-
-  switch (vl.bStatus)
-  {
-    case ST4_NONE: ShowLo(szNone); break;
-    case ST4_OK:   (ibZ == 0) ? ShowFloat(reBuffA) : ShowTimeDate6(tiAlt); break;
-    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bStatus); break;
-  }  
-}
-
 
 bool    CheckDirectCnt1(uchar  ibCan)
 {
@@ -222,23 +127,6 @@ bool    CheckDirectCnt2(uchar  ibCan, uchar  ibMon)
   return (CheckDirectCnt1(ibCan) && (ibMon == (*GetCurrTimeDate()).bMonth - 1));
 }
 
-
-void    ShowDirectCnt(uchar  ibCan)
-{
-  value6 vl = mpCntDayCan6[ibCan];
-
-  reBuffA = vl.dbValue;
-  tiAlt = vl.tiUpdate;
-
-  Clear();
-
-  switch (vl.bStatus)
-  {
-    case ST4_NONE: ShowLo(szNone); break;
-    case ST4_OK:   ShowFloat(reBuffA); break;
-    default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bStatus); break;
-  }  
-}
 
 
 void    LoadDirectCntReal(uchar  ibCan)
