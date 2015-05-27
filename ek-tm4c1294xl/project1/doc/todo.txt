@@ -27,8 +27,6 @@ P90  + '-' задание всех каналов одного счетчика
 
 Delphi hex to float
 
-TODO refactor extended_5_*
-
 mpdwChannelsB[i] > 0xF0000000) dev_a dev_b 
 
 remove tiKey

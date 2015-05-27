@@ -190,12 +190,12 @@ static void MakeDevice6(uchar  ibMon)
         status bStatus = (status) PopChar();
         PopChar(); PopChar();
         PopChar(); PopChar();
-        double db = PopDouble();
+        double dbValue = PopDouble();
 
         if (bStatus == ST4_OK)
         {
           vl.bStatus = bStatus;
-          vl.dbValue = db;
+          vl.dbValue = dbValue;
 
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) cbMonths++;
