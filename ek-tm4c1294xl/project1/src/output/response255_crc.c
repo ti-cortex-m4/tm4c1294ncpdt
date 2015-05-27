@@ -201,6 +201,68 @@ void    Response255_CRC(void)
       OutFlashControl();
       break;
 
+#if false
+      case bINQ_QUICKMNT:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = (tiSetRTC.bMinute/3)*3 + 2;
+
+        SetCurrTimeDate();
+        Common(PGetCurrTimeDate(), sizeof(time));
+        break;
+
+      case bINQ_QUICKMIN15:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = (tiSetRTC.bMinute/15)*15 + 14;
+
+        SetCurrTimeDate();
+        Common(PGetCurrTimeDate(), sizeof(time));
+        break;
+
+      case bINQ_QUICKHOU:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = (tiSetRTC.bMinute/30)*30 + 29;
+
+        SetCurrTimeDate();
+        Common(PGetCurrTimeDate(), sizeof(time));
+        break;
+
+      case bINQ_QUICKDAY:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = 59;
+        tiSetRTC.bHour   = 23;
+
+        SetCurrTimeDate();
+        Common(PGetCurrTimeDate(), sizeof(time));
+        break;
+
+      case bINQ_QUICKMON:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = 59;
+        tiSetRTC.bHour   = 23;
+        tiSetRTC.bDay    = DaysInMonth();
+
+        SetCurrTimeDate();
+        Common(PGetCurrTimeDate(), sizeof(time));
+        break;
+
+      case bINQ_QUICKYEA:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = 59;
+        tiSetRTC.bHour   = 23;
+        tiSetRTC.bDay    = 31;
+        tiSetRTC.bMonth  = 12;
+
+        SetCurrTimeDate();
+        Common(PGetCurrTimeDate(), sizeof(time));
+        break;
+#endif
+
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
       Result(bRES_BADCOMMAND);
