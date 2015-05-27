@@ -17,7 +17,7 @@ KEY_VALUES_YEAR.C
 #include "../../serial/ports.h"
 #include "../../digitals/extended/extended_4.h"
 #include "../../digitals/extended/extended_4_in.h"
-#include "../../digitals/extended/extended_4_display.h"
+#include "../../digitals/extended/extended_4_show.h"
 #include "../../digitals/extended/extended_6.h"
 #include "../../serial/modems.h"
 #include "../../engine.h"
