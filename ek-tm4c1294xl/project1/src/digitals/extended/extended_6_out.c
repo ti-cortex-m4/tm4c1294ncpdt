@@ -30,7 +30,7 @@ static uchar PushData6(value6  vl, bool  fDouble)
 
 
 
-void    OutExtended6(void)
+void    OutExtended6(bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -55,20 +55,20 @@ void    OutExtended6(void)
         if (GetDigitalDevice(c) == 0)
         {
           value6 va;
+
           va.bStatus = ST4_OK;
           va.dbValue = mpdbCntMonCan[ PrevSoftMon() ][c];
           va.tiUpdate = tiZero;
-          Push(&va, sizeof(value6));
+
+          wSize += PushData6(va, fDouble);
         }
         else
         {
           if (InBuff(6) == (*GetCurrTimeDate()).bMonth - 1)
-            Push(&mpCntDayCan6[c], sizeof(value6));
+            wSize += PushData6(mpCntDayCan6[c], fDouble);
           else 
-            Push(&mpCntMonCan6[c], sizeof(value6));
+            wSize += PushData6(mpCntMonCan6[c], fDouble);
         }
-
-        wSize += sizeof(value6);
       }
     }
 

@@ -4,4 +4,4 @@ EXTENDED_6_OUT.H
 
 ------------------------------------------------------------------------------*/
 
-void    OutExtended6(void);
+void    OutExtended6(bool  fDouble);
