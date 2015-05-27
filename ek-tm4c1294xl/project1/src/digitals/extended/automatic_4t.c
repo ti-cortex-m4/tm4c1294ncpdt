@@ -15,7 +15,7 @@ AUTOMATIC_4T,C
 
 
 
-bool    SupportedCntMonCanTariff(uchar  ibCan)
+bool    SupportedExtended4T(uchar  ibCan)
 {
   LoadCurrDigital(ibCan);
 
