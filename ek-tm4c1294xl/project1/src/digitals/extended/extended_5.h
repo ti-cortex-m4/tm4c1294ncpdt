@@ -18,6 +18,3 @@ void    ResetExtended5(bool  fFull);
 void    NextDayExtended5(void);
 
 void    MakeExtended5(void);
-
-void    OutExtended50(bool  fDouble);
-void    OutExtended51(bool  fDouble);
