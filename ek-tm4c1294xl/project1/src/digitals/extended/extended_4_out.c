@@ -41,6 +41,7 @@ static uchar PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
     uchar bSize = 0;
 
     value6 vl = mpCntMonCan4[ibCan];
+
     bSize += PushChar(vl.bStatus);
     bSize += PushInt(0xFFFF);
     bSize += PushInt(0xFFFF);
@@ -189,7 +190,7 @@ void    OutExtended42(bool  fDouble)
       ibPort = p;
 
       if (db2.fValid)
-        OutData4(ST4_OK, reBuffA, fDouble);
+        OutData4(ST4_OK, db2.dbValue, fDouble);
       else
         OutData4(ST4_BADDIGITAL, 0, fDouble);
 
