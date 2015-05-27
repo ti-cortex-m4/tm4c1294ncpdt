@@ -22,7 +22,7 @@ RESPONSE255_CRC.C
 #include "../digitals/extended/extended_4_out.h"
 #include "../digitals/extended/extended_4t.h"
 #include "../digitals/extended/extended_5.h"
-#include "../digitals/extended/extended_6.h"
+#include "../digitals/extended/extended_6_out.h"
 #include "../digitals/extended/extended_7.h"
 #include "../output/out_common.h"
 #include "../output/out_phones.h"
@@ -127,13 +127,17 @@ void    Response255_CRC(void)
     case bEXT_GETEXTENDED42: OutExtended42(false); break;
     case bEXT_GETEXTENDED43: OutExtended43(); break;
 
-    case bEXT_GETEXTENDED6: OutExtended6(false); break;
-
-    case bEXT_GETRELAXS: OutGetRelaxs(); break;
-    case bEXT_SETRELAXS: OutSetRelaxs(); break;
+    case bEXT_GET_EXTENDED_4T: OutExtended4T(false); break;
 
     case bEXT_GETEXTENDED50: OutExtended50(false); break;
     case bEXT_GETEXTENDED51: OutExtended51(false); break;
+
+    case bEXT_GETEXTENDED6: OutExtended6(false); break;
+
+    case bEXT_GETEXTENDED7: OutExtended7(); break;
+
+    case bEXT_GETRELAXS: OutGetRelaxs(); break;
+    case bEXT_SETRELAXS: OutSetRelaxs(); break;
 
     case bEXT_GETSTARTCAN: OutStartCan(); break;
 
@@ -160,8 +164,6 @@ void    Response255_CRC(void)
 */
     case bEXT_GETGAPS1: OutGaps1(); break;
     case bEXT_GETGAPS2: OutGaps2(); break;
-
-    case bEXT_GETEXTENDED7: OutExtended7(); break;
 
     case bEXT_GETSTOPAUXCAN: OutStopAuxCan(); break;
 
@@ -194,8 +196,6 @@ void    Response255_CRC(void)
     case bEXT_SETCANALSNAME: SetCanalsNameExt(); break;
     case bEXT_GETGROUPSNAME: GetGroupsNameExt(); break;
     case bEXT_SETGROUPSNAME: SetGroupsNameExt(); break;
-
-    case bEXT_GET_EXTENDED_4T: OutExtended4T(false); break;
 
     case bEXT_FLASH_CONTROL:
       OutFlashControl();

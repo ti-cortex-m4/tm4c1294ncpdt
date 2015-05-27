@@ -11,7 +11,7 @@ RESPONSE253_CRC,C
 #include "../digitals/extended/extended_4_out.h"
 #include "../digitals/extended/extended_4t.h"
 #include "../digitals/extended/extended_5.h"
-#include "../digitals/extended/extended_6.h"
+#include "../digitals/extended/extended_6_out.h"
 #include "response_crc.h"
 #include "out_energy.h"
 #include "response253_crc.h"
