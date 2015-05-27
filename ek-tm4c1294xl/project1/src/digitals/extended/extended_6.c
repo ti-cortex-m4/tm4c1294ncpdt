@@ -230,6 +230,8 @@ void    ShowDirectCnt(uchar  ibCan)
   reBuffA = vl.dbValue;
   tiAlt = vl.tiUpdate;
 
+  Clear();
+
   switch (vl.bStatus)
   {
     case ST4_NONE: ShowLo(szNone); break;
