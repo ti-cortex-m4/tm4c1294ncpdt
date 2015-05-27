@@ -184,7 +184,7 @@ real    re;
 
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
-      else if (CheckDirectCnt1(c))
+      else if (SupportedExtended6(c))
       {
         value6 vl = mpCntDayCan6[c];
         re = vl.dbValue;
@@ -255,7 +255,7 @@ void    OutTimeEscVExt(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      if (CheckDirectCnt1(c))
+      if (SupportedExtended6(c))
       {
         value6 vl = mpCntDayCan6[c];
         PushTime(vl.tiUpdate);
