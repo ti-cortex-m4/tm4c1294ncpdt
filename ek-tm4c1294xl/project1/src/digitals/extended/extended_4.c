@@ -186,7 +186,7 @@ static void MakeDevice6(uchar  ibMon)
       {
         value6 vl = mpCntMonCan4[c];
 
-        InitPop(15 + (1+2+2+8+6)*c);
+        InitPop(bHEADER+(1+2+2+8+6)*c);
         status bStatus = (status) PopChar();
         PopChar(); PopChar();
         PopChar(); PopChar();
