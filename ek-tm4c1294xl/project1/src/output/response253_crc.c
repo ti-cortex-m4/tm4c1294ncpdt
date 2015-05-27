@@ -10,7 +10,7 @@ RESPONSE253_CRC,C
 #include "../serial/ports.h"
 #include "../digitals/extended/extended_4_out.h"
 #include "../digitals/extended/extended_4t.h"
-#include "../digitals/extended/extended_5.h"
+#include "../digitals/extended/extended_5_out.h"
 #include "../digitals/extended/extended_6_out.h"
 #include "response_crc.h"
 #include "out_energy.h"
