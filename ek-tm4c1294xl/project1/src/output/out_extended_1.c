@@ -184,8 +184,10 @@ real    re;
 
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
-      else if (CheckDirectCnt1(c)) {
-        LoadDirectCntReal(c);
+      else if (CheckDirectCnt1(c))
+      {
+        value6 vl = mpCntDayCan6[c];
+        re = vl.dbValue;
       }
       else if (mpboEnblCan[c] == FALSE)
       {
@@ -254,9 +256,14 @@ void    OutTimeEscVExt(void)
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
       if (CheckDirectCnt1(c))
-        LoadDirectCntTime(c);
+      {
+        value6 vl = mpCntDayCan6[c];
+        PushTime(vl.tiUpdate);
+      }
       else
+      {
         PushTime(mptiEsc_V[c]);
+      }
 
       wSize += sizeof(time);
     }
