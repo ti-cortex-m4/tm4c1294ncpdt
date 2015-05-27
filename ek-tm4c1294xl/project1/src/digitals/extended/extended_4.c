@@ -186,16 +186,16 @@ static void MakeDevice6(uchar  ibMon)
       {
         value6 vl = mpCntMonCan4[c];
 
-        InitPop(15 + 15*c);
+        InitPop(15 + (1+2+2+8+6)*c);
         status bStatus = (status) PopChar();
         PopChar(); PopChar();
         PopChar(); PopChar();
-        float fl = PopFloat();
+        double db = PopDouble();
 
         if (bStatus == ST4_OK)
         {
           vl.bStatus = bStatus;
-          vl.dbValue = fl;
+          vl.dbValue = db;
 
           ShowLo(szDataOK); DelayInf();
           if (c == ibDig) cbMonths++;
