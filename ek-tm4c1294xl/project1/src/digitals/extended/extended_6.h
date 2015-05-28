@@ -11,6 +11,7 @@ EXTENDED_6.H
 extern  file const              flExt6Flag;
 
 
+
 bool    LoadCntMonCan6(uchar  ibMonFrom);
 
 void    InitExtended6(void);
