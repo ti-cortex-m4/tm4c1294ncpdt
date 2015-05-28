@@ -80,8 +80,9 @@ void    ShowCntCanMon(void)
         double2 db2 = ReadCntMonCan(ibMon,ibCan);
         (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
       }
-      else if (SupportedExtended6_CurrMon(ibCan,ibMon)) {
-        ShowDirectCnt(ibCan);
+      else if (SupportedExtended6_CurrMon(ibCan,ibMon))
+      {
+        ShowExtended6(ibCan);
       }
       else
       {
@@ -121,8 +122,9 @@ void    ShowCntCanMon(void)
         double2 db2 = ReadCntMonCan(ibZ,ibCan);
         (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
       }
-      else if (SupportedExtended6_CurrMon(ibCan,ibMon)) {
-        ShowDirectCnt(ibCan);
+      else if (SupportedExtended6_CurrMon(ibCan,ibMon))
+      {
+        ShowExtended6(ibCan);
       }
       else
       {
@@ -300,7 +302,7 @@ void    ShowCntCanMon6(void)
   if (GetDigitalDevice(ibCan) == 6)
     ShowLo(szBadMode);
   else
-    ShowCntMonCan6(ibCan,ibMon);
+    ShowCntMonCan6(ibCan,ibMon,ibZ == 0);
 
   sprintf(szLo+14,"%2u",ibCan+1);
 }
