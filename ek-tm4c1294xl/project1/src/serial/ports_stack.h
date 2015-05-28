@@ -11,8 +11,8 @@ void    InitPushUni(void);
 void    InitPushPck(void);
 
 void    Push(void  *pbData, uint  wSize);
-uchar   PushChar(uchar  bT);
-void    PushBool(bool  bo);
+uchar   PushChar(uchar  b);
+uchar   PushBool(bool  f);
 uchar   PushInt(uint  w);
 uchar   PushLong(ulong  dw);
 uchar   PushFloat(float  fl);

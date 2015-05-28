@@ -26,7 +26,7 @@ uint    w;
   {
     if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
     {
-      PushChar(mpboBase[i]);
+      PushBool(mpboBase[i]);
       PushLong(mpdwBase[i]);
       PushFloat(mpreBase[i]);
       PushTime(mptiBase[i]);

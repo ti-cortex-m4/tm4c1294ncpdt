@@ -106,10 +106,10 @@ void    Response255_CRC(void)
 
     case bEXT_GETDIGITALS: OutGetDigitalsExt(); break;
 
-    case bEXT_GETSTOPCAN: OutIntCanMap(mpcwStopCan); break;
+    case bEXT_GETSTOPCAN: OutIntCanExt(mpcwStopCan); break;
     case bEXT_GETSTOPCAN2: OutStopCan2(); break;
 
-    case bEXT_GETENBLCAN: OutBoolCanMap(mpboEnblCan); break;
+    case bEXT_GETENBLCAN: OutBoolCanExt(mpboEnblCan); break;
 
     case bEXT_GETCTRLHOU: OutGetCtrlHou(); break;
     case bEXT_SETCTRLHOU: OutSetCtrlHou(); break;

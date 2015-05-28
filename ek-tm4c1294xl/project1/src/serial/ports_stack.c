@@ -85,15 +85,17 @@ void    Push(void  *pbData, uint  wSize) {
 }
 
 
-uchar   PushChar(uchar  bT)
+uchar   PushChar(uchar  b)
 {
-  Push(&bT, sizeof(uchar));
+  Push(&b, sizeof(uchar));
   return sizeof(uchar);
 }
 
 
-void    PushBool(bool  bo) {
-  bo ? PushChar(0xFF) : PushChar(0x00);
+uchar   PushBool(bool  f)
+{
+  f ? PushChar(0xFF) : PushChar(0x00);
+  return sizeof(uchar);
 }
 
 
