@@ -70,12 +70,16 @@ uchar   i,j;
   }
 
   for (i=0; i<bCANALS; i++)
+  {
     mpfUsedNodes[i] = false;
+  }
 
   for (i=0; i<bGROUPS; i++)
   {
     for (j=0; j<GetGroupsSize(i); j++)
+    {
       mpfUsedNodes[ GetGroupsNodeCanal(i,j) ] = true;
+    }
   }
 }
 

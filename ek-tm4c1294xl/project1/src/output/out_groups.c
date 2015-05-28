@@ -35,7 +35,7 @@ void    OutSetGroup(void)
       group gr;
       Pop(&gr, sizeof(group));
 
-      if (TrueGroup(&gr))
+      if (ValidGroup(&gr))
       {
         mpgrGroups[bInBuff5] = gr;
 
