@@ -340,7 +340,7 @@ uint   w;
 
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
-    if (mpboUsedNodes[ibCan] == false) continue;
+    if (mpfUsedNodes[ibCan] == false) continue;
 
     if (GetDigitalDevice(ibCan) == 0)
     {
@@ -362,7 +362,7 @@ uint   w;
 
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
-    if (mpboUsedNodes[ibCan] == false) continue;
+    if (mpfUsedNodes[ibCan] == false) continue;
 
     if (GetDigitalDevice(ibCan) == 0)
     {

@@ -200,7 +200,7 @@ void    CalcAllGroups(bool  fUsePow)
     uchar ibGrp;
     for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)           // обработка по группам
     {
-      if (mpboUsedGroups[ibGrp] == false) continue;
+      if (mpfUsedGroups[ibGrp] == false) continue;
 
       if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec, ibGrp, tiAlt );
       if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec, ibGrp, tiAlt );

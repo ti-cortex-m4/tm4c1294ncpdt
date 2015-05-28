@@ -197,7 +197,7 @@ void    key_SetGroups(void)
     if (enKeyboard == KBD_POSTINPUT3)
     {
       // при перепрограммировании разрешается редактировать незаданные группы
-      if ((enGlobal == GLB_REPROGRAM) && (mpboUsedGroups[ibX] == true))
+      if ((enGlobal == GLB_REPROGRAM) && (mpfUsedGroups[ibX] == true))
       {
         Error();
         LongBeep();
