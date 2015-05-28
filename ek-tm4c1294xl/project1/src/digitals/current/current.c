@@ -49,7 +49,7 @@ real    re;
 
 
     // подготовка информации для Esc V
-    if (LoadCntMon(tiCurr.bMonth-1) == 0)
+    if (LoadCntMon(tiCurr.bMonth-1) == FALSE)
       re = 0;
     else
       re = mpdbCntMonCan[ PrevSoftMon() ][ibCan];

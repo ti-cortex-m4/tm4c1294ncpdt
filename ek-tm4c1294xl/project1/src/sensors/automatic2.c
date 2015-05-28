@@ -1925,7 +1925,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
   switch (diCurr.bDevice)
   {
-    case 0:  if (LoadCntMon(ibMon) == false)
+    case 0:  if (LoadCntMon(ibMon) == FALSE)
                return GetDouble2(0, false);
              else
                return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);
@@ -1939,7 +1939,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
     case 8:
     case 2:  return GetDouble2(reBuffA, ReadCntMonCanB(ibMon));
 
-    case 12: if (LoadCntMon(ibMon) == false)
+    case 12: if (LoadCntMon(ibMon) == FALSE)
                return GetDouble2(0, false);
              else
                return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);
