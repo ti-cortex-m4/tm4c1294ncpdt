@@ -37,7 +37,7 @@ uint    w;
   {
     if (bInBuff6 < bDAYS)
     {
-      if (LoadPowDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == TRUE)
+      if (LoadPowDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == true)
       {
         InitPushPtr();
         w = 0;
@@ -70,7 +70,7 @@ uint    w;
   {
     if (bInBuff6 < bMONTHS)
     {
-      if (LoadPowMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == TRUE)
+      if (LoadPowMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == true)
       {
         InitPushPtr();
         w = 0;

@@ -360,10 +360,10 @@ uchar   i,j;
       PushChar(0);
 
       i = 0;
-      if (boEnblCurrent == TRUE) i |= 0x01;
+      if (boEnblCurrent == true) i |= 0x01;
       i |= 0x02;
-      if (boEnblProfile == TRUE) i |= 0x04;
-      if (boParamsFlag == TRUE) i |= 0x08;
+      if (boEnblProfile == true) i |= 0x04;
+      if (boParamsFlag == true) i |= 0x08;
       PushChar(i);
 
       j = mpdiDevicesUni[c-1].bDevice - 1;
@@ -415,7 +415,7 @@ void    GetCanalsUni(void)
       PushChar(GetDigitalLine(c-1));
 
       uchar g = 0;
-      if (mpboEnblCan[c-1] != TRUE) g |= 0x01;
+      if (mpboEnblCan[c-1] != true) g |= 0x01;
       PushChar(g);
 
       Push(mpszCanalsName[c-1], 32);

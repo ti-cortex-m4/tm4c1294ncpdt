@@ -12,12 +12,12 @@ MEM_DIGITALS.C
 uint                    wDigitalsMask;
 
 // массив разрешенных каналов
-boolean                 mpboEnblCan[bCANALS];
+bool                 mpboEnblCan[bCANALS];
 
 
 
 // флаг использования паролей счётчиков
-boolean                 boEnblKeys;
+bool                 boEnblKeys;
 
 // массив паролей счётчиков
 phone                   mpphKeys[bCANALS];
@@ -37,7 +37,7 @@ digital                 diPrev, diCurr, diNext, diLast;
 combo32                 coEnergy;
 
 // массив признаков для исключения повторного опроса
-boolean                 mpboChannelsA[bCHANNELS];
+bool                 mpboChannelsA[bCHANNELS];
 
 // промежуточные массивы
 ulong                   mpdwChannelsA[bCHANNELS],
@@ -52,25 +52,25 @@ time                    tiChannelC;
 
 
 // флаги разрешения опроса трехминутных и получасовых графиков
-boolean                 boEnblCurrent, boEnblProfile;
+bool                 boEnblCurrent, boEnblProfile;
 
 // таймайты начала опроса трехминутных и получасовых графиков
 uchar                   bTimeoutCurrent, bTimeoutProfile;
 
 // флаг раздельного опроса нескольких каналов одного цифрового счётчика
-boolean                 boSeparateCan;
+bool                 boSeparateCan;
 
 // флаг выдачи информации для пользователя/администратора
-boolean                 boShowMessages;
+bool                 boShowMessages;
 
 // флаг сокращенного вывода сообщений
-boolean                 boHideMessages;
+bool                 boHideMessages;
 
 // флаг коррекции времени цифровых счётчиков
-boolean                 boControlTime;
+bool                 boControlTime;
 
 // флаг установки времени цифоровых счётчиков
-boolean                 boManageTime;
+bool                 boManageTime;
 
 
 
@@ -88,4 +88,4 @@ uint                    mpcwFailure2[bCANALS];
 uchar                   bKeysLevelB;
 
 // флаг чтения профилей счетчика СС-301 (x6 - false, x1 - true)
-boolean                 boShortProfileC;
+bool                 boShortProfileC;

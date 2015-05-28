@@ -9,7 +9,7 @@ MEM_CHECKUP.C
 
 
 // режим проверки или исправления
-boolean                 boCheckupReadOnly;
+bool                 boCheckupReadOnly;
 
 // буфер прочитанных со счетчика суточных значений
 ulong                   mpdwChannelsCheckup[(wHOURS/48)+1][4];

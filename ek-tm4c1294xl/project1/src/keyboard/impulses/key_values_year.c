@@ -93,7 +93,7 @@ void    ShowCntCanMon(void)
 
         LoadSlide(pszCntCanYear1);
 
-        if (mpboEnblCan[ibCan] == FALSE)
+        if (mpboEnblCan[ibCan] == false)
           ShowLo(szBlocked); 
         else 
         {
@@ -134,7 +134,7 @@ void    ShowCntCanMon(void)
 
         LoadSlide(pszCntCanYear10);
 
-        if (mpboEnblCan[ibCan] == FALSE)
+        if (mpboEnblCan[ibCan] == false)
           ShowLo(szBlocked); 
         else 
         {

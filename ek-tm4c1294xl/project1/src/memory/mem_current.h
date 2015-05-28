@@ -10,7 +10,7 @@ extern  real                    mpreBase[bCANALS];
 
 extern  time                    mptiBase[bCANALS];
 
-extern  boolean                 mpboBase[bCANALS];
+extern  bool                 mpboBase[bCANALS];
 
 extern  ulong                   mpdwBaseDig[bCHANNELS];
 
@@ -35,13 +35,13 @@ extern  time                    mptiBaseOK[bCANALS],
 
 
 
-extern  boolean                 boCurrent2;
+extern  bool                 boCurrent2;
 
 extern  uchar                   mpbCurrent2Curr[8],
                                 mpbCurrent2Prev[8],
                                 mpbCurrent2Buff[8];
 
-extern  boolean                 boCurrent2Enable;
+extern  bool                 boCurrent2Enable;
 
 extern  uint                    mpwCurrent2Mnt[bCANALS];
 

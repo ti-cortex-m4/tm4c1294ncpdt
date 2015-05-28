@@ -22,18 +22,18 @@ EXTENDED_6.C
 
 
 
-file const              flExt6Flag = {EXT_6_FLAG, &boExt6Flag, sizeof(boolean)};
+file const              flExt6Flag = {EXT_6_FLAG, &boExt6Flag, sizeof(bool)};
 file const              flCntDayCan6 = {EXT_6_VALUES, &mpCntDayCan6, sizeof(mpCntDayCan6)};
 
 
 
-boolean SaveCntMonCan6(uchar  ibMonTo)
+bool SaveCntMonCan6(uchar  ibMonTo)
 {
   return SaveBuff(EXT_6_MON_VALUES + ibMonTo*VALUE6_CAN_PAGES, mpCntMonCan6, sizeof(mpCntMonCan6));
 }
 
 
-boolean LoadCntMonCan6(uchar  ibMonFrom)
+bool LoadCntMonCan6(uchar  ibMonFrom)
 {
   return LoadBuff(EXT_6_MON_VALUES + ibMonFrom*VALUE6_CAN_PAGES, mpCntMonCan6, sizeof(mpCntMonCan6));
 }
@@ -42,7 +42,7 @@ boolean LoadCntMonCan6(uchar  ibMonFrom)
 
 void    InitExtended6(void)
 {
-  LoadFileBoolean(&flExt6Flag, FALSE);
+  LoadFileBoolean(&flExt6Flag, false);
   LoadFile(&flCntDayCan6);
 }
 
@@ -52,7 +52,7 @@ void    ResetExtended6(void)
   cwDayCan6 = 0;
   cwMonCan6 = 0;
 
-  boExt6Flag = FALSE;
+  boExt6Flag = false;
   SaveFile(&flExt6Flag);
 
 
@@ -117,7 +117,7 @@ void    MakeExtended6(uchar  ibCan, double  db)
 
 bool    SupportedExtended6(uchar  ibCan)
 {
-  return ((boExt6Flag == TRUE) && ((GetDigitalDevice(ibCan) == 4) || (GetDigitalDevice(ibCan) == 21)));
+  return ((boExt6Flag == true) && ((GetDigitalDevice(ibCan) == 4) || (GetDigitalDevice(ibCan) == 21)));
 }
 
 

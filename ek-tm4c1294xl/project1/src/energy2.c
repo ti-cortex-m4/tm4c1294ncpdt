@@ -14,33 +14,33 @@ ENERGY2.C
 
 
 
-boolean SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom)
+bool SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom)
 {
   if ((fCurr == 1) && (ibMntTo == ibHardMnt))
   {
     memcpy(mpwImpMntCan[ ibSoftMnt ], mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
   {
     OpenOut(IMPMNTCAN + ibMntTo*UINTCAN_PAGES);
 
-    if (Save(mpwImpMntCan[ ibMntFrom ], sizeof(uint)*bCANALS) == FALSE)
-      return FALSE;
+    if (Save(mpwImpMntCan[ ibMntFrom ], sizeof(uint)*bCANALS) == false)
+      return false;
 
     return( CloseOut() );
   }
 }
 
 
-boolean LoadImpMnt(uchar  ibMntFrom)
+bool LoadImpMnt(uchar  ibMntFrom)
 {
-boolean bo;
+bool bo;
 
   if (ibMntFrom == ibHardMnt)
   {
     memcpy(mpwImpMntCan[ PrevSoftMnt() ], mpwImpMntCan[ ibSoftMnt ], sizeof(uint)*bCANALS);
-    bo = TRUE;
+    bo = true;
   }
   else
   {
@@ -62,12 +62,12 @@ boolean bo;
 
 #ifdef  DAYS100
 
-boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
+bool SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
 {
   if ((fCurr == 1) && (iwHouTo == iwHardHou))
   {
     memcpy(mpwImpHouCan[ ibSoftHou ], mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
   {
@@ -81,7 +81,7 @@ boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
 }
 
 
-boolean LoadImpHou(uint  iwHouFrom)
+bool LoadImpHou(uint  iwHouFrom)
 {
 uchar   i;
 
@@ -101,54 +101,54 @@ uchar   i;
       mpwImpHouCan[ PrevSoftHou() ], i, 0);
   }
 
-  return TRUE;
+  return true;
 }
 
 
-boolean LoadImpHouFree(uint  iwHouFrom)
+bool LoadImpHouFree(uint  iwHouFrom)
 {
   if (iwHouFrom == iwHardHou)
   {
     memcpy(mpwImpHouCan[ PrevSoftHou() ], mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
   {
     OpenIn(IMPHOUCAN + iwHouFrom/4);
     memcpy(mpwImpHouCan[ PrevSoftHou() ], mpbPageIn + (iwHouFrom%4)*wPROFILE_LENGTH, wPROFILE_LENGTH);
-    return TRUE;
+    return true;
   }
 }
 
 #else
 
-boolean SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
+bool SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
 {
   if ((fCurr == 1) && (iwHouTo == iwHardHou))
   {
     memcpy(mpwImpHouCan[ ibSoftHou ], mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
   {
     OpenOut(IMPHOUCAN + iwHouTo*UINTCAN_PAGES);
 
-    if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS) == FALSE)
-      return FALSE;
+    if (Save(mpwImpHouCan[ iwHouFrom ], sizeof(uint)*bCANALS) == false)
+      return false;
 
     return( CloseOut() );
   }
 }
 
 
-boolean LoadImpHou(uint  iwHouFrom)
+bool LoadImpHou(uint  iwHouFrom)
 {
-boolean bo;
+bool bo;
 
   if (iwHouFrom == iwHardHou)
   {
     memcpy(mpwImpHouCan[ PrevSoftHou() ], mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
-    bo = TRUE;
+    bo = true;
   }
   else
   {
@@ -167,12 +167,12 @@ boolean bo;
 }
 
 
-boolean LoadImpHouFree(uint  iwHouFrom)
+bool LoadImpHouFree(uint  iwHouFrom)
 {
   if (iwHouFrom == iwHardHou)
   {
     memcpy(mpwImpHouCan[ PrevSoftHou() ], mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
   {
@@ -184,24 +184,24 @@ boolean LoadImpHouFree(uint  iwHouFrom)
 #endif
 
 
-boolean SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
+bool SaveImpDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
 {
   if ((fCurr == 1) && (ibDayTo == ibHardDay))
   {
     memcpy(mpimDayCan[ ibSoftDay ], mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
     return SaveBuff(IMPDAYCAN + ibDayTo*bIMPULSE_CAN, mpimDayCan[ ibDayFrom ], sizeof(impulse)*bCANALS);
 }
 
 
-boolean LoadImpDay(uchar  ibDayFrom)
+bool LoadImpDay(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
     memcpy(mpimDayCan[ PrevSoftDay() ], mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
     return LoadBuff(IMPDAYCAN + ibDayFrom*bIMPULSE_CAN, mpimDayCan[ PrevSoftDay() ], sizeof(impulse)*bCANALS);
@@ -209,24 +209,24 @@ boolean LoadImpDay(uchar  ibDayFrom)
 
 
 
-boolean SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
+bool SaveImpMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 {
   if ((fCurr == 1) && (ibMonTo == ibHardMon))
   {
     memcpy(mpimMonCan[ ibSoftMon ], mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
   	return SaveBuff(IMPMONCAN + ibMonTo*bIMPULSE_CAN, mpimMonCan[ ibMonFrom ], sizeof(impulse)*bCANALS);
 }
 
 
-boolean LoadImpMon(uchar  ibMonFrom)
+bool LoadImpMon(uchar  ibMonFrom)
 {
   if (ibMonFrom == ibHardMon)
   {
     memcpy(mpimMonCan[ PrevSoftMon() ], mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
     return LoadBuff(IMPMONCAN + ibMonFrom*bIMPULSE_CAN, mpimMonCan[ PrevSoftMon() ], sizeof(impulse)*bCANALS);
@@ -234,24 +234,24 @@ boolean LoadImpMon(uchar  ibMonFrom)
 
 
 
-boolean SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
+bool SavePowDay(bool fCurr, uchar  ibDayTo, uchar  ibDayFrom)
 {
   if ((fCurr == 1) && (ibDayTo == ibHardDay))
   {
     memcpy(mppoDayGrp[ ibSoftDay ], mppoDayGrp[ PrevSoftDay() ], sizeof(power)*bGROUPS);
-    return TRUE;
+    return true;
   }
   else
     return SaveBuff(POWDAYGRP + ibDayTo*bPOWER_GRP, mppoDayGrp[ ibDayFrom ], sizeof(power)*bGROUPS);
 }
 
 
-boolean LoadPowDay(uchar  ibDayFrom)
+bool LoadPowDay(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
     memcpy(mppoDayGrp[ PrevSoftDay() ], mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
-    return TRUE;
+    return true;
   }
   else
     return LoadBuff(POWDAYGRP + ibDayFrom*bPOWER_GRP, mppoDayGrp[ PrevSoftDay() ], sizeof(power)*bGROUPS);
@@ -259,24 +259,24 @@ boolean LoadPowDay(uchar  ibDayFrom)
 
 
 
-boolean SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
+bool SavePowMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 {
   if ((fCurr == 1) && (ibMonTo == ibHardMon))
   {
     memcpy(mppoMonGrp[ ibSoftMon ], mppoMonGrp[ PrevSoftMon() ], sizeof(power)*bGROUPS);
-    return TRUE;
+    return true;
   }
   else
   	return SaveBuff(POWMONGRP + ibMonTo*bPOWER_GRP, mppoMonGrp[ ibMonFrom ], sizeof(power)*bGROUPS);
 }
 
 
-boolean LoadPowMon(uchar  ibMonFrom)
+bool LoadPowMon(uchar  ibMonFrom)
 {
   if (ibMonFrom == ibHardMon)
   {
     memcpy(mppoMonGrp[ PrevSoftMon() ], mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
-    return TRUE;
+    return true;
   }
   else
     return LoadBuff(POWMONGRP + ibMonFrom*bPOWER_GRP, mppoMonGrp[ PrevSoftMon() ], sizeof(power)*bGROUPS);
@@ -284,24 +284,24 @@ boolean LoadPowMon(uchar  ibMonFrom)
 
 
 
-boolean SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
+bool SaveCntMon(bool fCurr, uchar  ibMonTo, uchar  ibMonFrom)
 {
   if ((fCurr == 1) && (ibMonTo == ibHardMon))
   {
     memcpy(mpdbCntMonCan[ ibSoftMon ], mpdbCntMonCan[ PrevSoftMon() ], sizeof(double)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
     return SaveBuff(CNTMONCAN + ibMonTo*DOUBLE_CAN_PAGES, mpdbCntMonCan[ ibMonFrom ], sizeof(double)*bCANALS);
 }
 
 
-boolean LoadCntMon(uchar  ibMonFrom)
+bool LoadCntMon(uchar  ibMonFrom)
 {
   if (ibMonFrom == ibHardMon)
   {
     memcpy(mpdbCntMonCan[ PrevSoftMon() ], mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
-    return TRUE;
+    return true;
   }
   else
     return LoadBuff(CNTMONCAN + ibMonFrom*DOUBLE_CAN_PAGES, mpdbCntMonCan[ PrevSoftMon() ], sizeof(double)*bCANALS);

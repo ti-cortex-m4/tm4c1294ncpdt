@@ -25,7 +25,7 @@ static void Show(void)
   Clear();
   sprintf(szLo+14,"%2u",ibX+1);
 
-  if (mpboStartCan[ibX] == FALSE)
+  if (mpboStartCan[ibX] == false)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);

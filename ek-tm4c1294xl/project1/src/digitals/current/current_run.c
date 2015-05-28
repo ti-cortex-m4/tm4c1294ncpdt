@@ -54,12 +54,12 @@ bool    StartCurrent(uchar  ibCanal)
         (diCurr.bDevice == 23) ||
         (diCurr.bDevice == 24))
     {
-      if (mpboReadyCan[ibDig] == FALSE)
+      if (mpboReadyCan[ibDig] == false)
       {
-        if (mpboEnblCan[ibDig] == FALSE)
+        if (mpboEnblCan[ibDig] == false)
         {
           ShowCanalNumber(ibDig);
-          ShowLo(szDisabledCan); if (boHideMessages == FALSE) Delay(300);
+          ShowLo(szDisabledCan); if (boHideMessages == false) Delay(300);
         }
         else break;
       }
@@ -169,7 +169,7 @@ bool    StartCurrent(uchar  ibCanal)
 
 void    RunCurrent(void)
 {
-  if (boEnblCurrent == TRUE)
+  if (boEnblCurrent == true)
   {
     CloseFlow();
 
@@ -255,18 +255,18 @@ uchar   ibCan;
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
-      if (boMntEscS == TRUE)
+      if (boMntEscS == true)
       {
         mpreEsc_S[ibCan] = mpdbValueCntHou[ibCan] * mpdwBase[ibCan];
         mptiEsc_S[ibCan] = *GetCurrTimeDate();
       }
 
-      mpboReadyCan[ibCan] = TRUE;
+      mpboReadyCan[ibCan] = true;
 
       mpwTrue[ibCan]++;
-      if (mpboBase[ibCan] == FALSE)
+      if (mpboBase[ibCan] == false)
       {
-        mpboBase[ibCan] = TRUE;
+        mpboBase[ibCan] = true;
 
         mpdwBase[ibCan] = mpdwBaseDig[ diPrev.ibLine ];
         mpreBase[ibCan] = 0;
@@ -352,7 +352,7 @@ uchar   ibCan;
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
-      mpboReadyCan[ibCan] = TRUE;
+      mpboReadyCan[ibCan] = true;
 
       mptiBaseError[ibCan] = *GetCurrTimeDate();
       mpwFalse[ibCan]++;

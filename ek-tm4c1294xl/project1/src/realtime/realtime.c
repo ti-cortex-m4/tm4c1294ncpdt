@@ -261,17 +261,17 @@ void    RunRealtime(void)
 time    tiT;
 
 //  if (GetLabelRTC() == 0) {
-//	boHealthLabelRTC = FALSE;
+//	boHealthLabelRTC = false;
 //    return;
 //  }
-//  boHealthLabelRTC = TRUE;
+//  boHealthLabelRTC = true;
 
   tiT = *GetCurrTimeDate();
   if (TrueCurrTimeDate(tiT) == 0) {
-    boHealthTimeRTC = FALSE;
+    boHealthTimeRTC = false;
 	return;
   }
-  boHealthTimeRTC = TRUE;
+  boHealthTimeRTC = true;
 
   if (tiCurr.bSecond != tiT.bSecond)
   {

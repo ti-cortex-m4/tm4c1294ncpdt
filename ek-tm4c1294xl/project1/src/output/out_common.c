@@ -128,7 +128,7 @@ void    OutCharCanMap(uchar  *mpb)
 }
 
 
-void    OutBoolCanMap(boolean  *mpf)
+void    OutBoolCanMap(bool  *mpf)
 {
   InitPushPtr();
   uint wSize = 0;

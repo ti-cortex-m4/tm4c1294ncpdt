@@ -14,9 +14,9 @@ AT45.H
 void    Init_SPIhandAT45DB321(void);
 void    InitFlash(void);
 
-boolean SafePageErase(void);
-boolean SafePageRead(void);
-boolean SafePageWrite(void);
+bool SafePageErase(void);
+bool SafePageRead(void);
+bool SafePageWrite(void);
 
 uint    GetFlashStatus(void);
-boolean GetFlashChecksum(void);
+bool GetFlashChecksum(void);

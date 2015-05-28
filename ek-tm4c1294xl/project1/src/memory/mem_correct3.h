@@ -4,7 +4,7 @@ MEM_CORRECT3.H
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 boCorrect3;
+extern  bool                 boCorrect3;
 
 extern  uchar                   bMaxCorrect3;
 

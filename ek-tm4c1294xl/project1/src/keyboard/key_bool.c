@@ -12,7 +12,7 @@ KEY_BOOL,C
 
 void    key_SetBool(file const  *pflFile, char const  *pszMessages[])
 {
-  boolean *pboValue = (boolean *) pflFile->pbBuff;
+  bool *pboValue = (bool *) pflFile->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {

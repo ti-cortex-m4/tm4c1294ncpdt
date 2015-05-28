@@ -10,12 +10,12 @@ FILES2.C
 
 
 
-void    LoadFileBoolean(file const  *pfl, boolean  boDef)
+void    LoadFileBoolean(file const  *pfl, bool  boDef)
 {
   LoadFile(pfl);
-  boolean *pboVal = (boolean *) pfl->pbBuff;
+  bool *pboVal = (bool *) pfl->pbBuff;
 
-  if (!((*pboVal == TRUE) || (*pboVal == FALSE)))
+  if (!((*pboVal == true) || (*pboVal == false)))
   {
     *pboVal = boDef;
     SaveFile(pfl);

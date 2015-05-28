@@ -355,12 +355,12 @@ void    EscTariffs(void)
   PushChar(0);
   PushChar(0);
 
-  if (fPublicTariffs == FALSE)
+  if (fPublicTariffs == false)
     PushChar(1);
   else
     PushChar(0);
 
-  if (fPublicTariffsPrevMon == FALSE)
+  if (fPublicTariffsPrevMon == false)
     PushChar(1);
   else
     PushChar(0);
@@ -449,7 +449,7 @@ void    RunResponseEsc(void)
       if (!((InBuff(0) >= 'à') && (InBuff(0) <= 'î')))
         return;
 
-    if (boBlockEsc == (boolean)0x55)
+    if (boBlockEsc == (bool)0x55)
       return;
 
     bQuery = InBuff(0);
@@ -484,7 +484,7 @@ void    RunResponseEsc(void)
 
     ShowEsc();
 
-    if (boBlockEsc == TRUE)
+    if (boBlockEsc == true)
     {
       if (bQuery != 'R') 
       {

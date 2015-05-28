@@ -24,7 +24,7 @@ PARAMS2.C
 
 
 
-boolean                 boBeginParam;
+bool                 boBeginParam;
 
 static real             reParamDiv;
 
@@ -73,13 +73,13 @@ uchar   i;
 
   Clear();
 
-  if (boBeginParam == FALSE)
+  if (boBeginParam == false)
   {
     DelayOff();
     QueryOpenA();
 
     if (Input() != SER_GOODCHECK) return(0);
-    boBeginParam = TRUE;
+    boBeginParam = true;
   }
 
   ShowPercent(100);
@@ -192,13 +192,13 @@ uchar   i;
 
   Clear();
 
-  if (boBeginParam == FALSE)
+  if (boBeginParam == false)
   {
     DelayOff();
     QueryOpenB();
 
     if (Input() != SER_GOODCHECK) return(0);
-    boBeginParam = TRUE;
+    boBeginParam = true;
   }
 
   ShowPercent(100);
@@ -264,7 +264,7 @@ uchar   i;
 
     case PAR_I1 : 
     case PAR_I2 : 
-    case PAR_I3 : if (boFixParamsBugs != FALSE) reValue *= 1000; break;
+    case PAR_I3 : if (boFixParamsBugs != false) reValue *= 1000; break;
   }
 
   return(1);
@@ -309,13 +309,13 @@ bool    ReadParamC(void)
 {
   Clear();
 
-  if (boBeginParam == FALSE)
+  if (boBeginParam == false)
   {
     DelayOff();
     QueryOpenC();
 
     if (RevInput() != SER_GOODCHECK) return(0);
-    boBeginParam = TRUE;
+    boBeginParam = true;
   }
 
   ShowPercent(100);
@@ -394,12 +394,12 @@ bool    ReadParamC(void)
     case PAR_Q  :
     case PAR_Q1 :
     case PAR_Q2 :
-    case PAR_Q3 : if (boFixParamsBugs == FALSE) reValue /= 1000; break;
+    case PAR_Q3 : if (boFixParamsBugs == false) reValue /= 1000; break;
 
     case PAR_I  :
     case PAR_I1 :
     case PAR_I2 :
-    case PAR_I3 : if (boFixParamsBugs != FALSE) reValue *= 1000; break;
+    case PAR_I3 : if (boFixParamsBugs != false) reValue *= 1000; break;
   }
 
   return(1);
@@ -455,7 +455,7 @@ bool    ReadParamG(void)
 {
   Clear();
 
-  if (boBeginParam == FALSE)
+  if (boBeginParam == false)
   {
     DelayOff();
     QueryOpenG();
@@ -470,7 +470,7 @@ bool    ReadParamG(void)
 
     if (CodInput() != SER_GOODCHECK) return(0);
 
-    boBeginParam = TRUE;
+    boBeginParam = true;
   }
 
   switch (diCurr.ibLine)
@@ -623,7 +623,7 @@ bool    ReadParamP(void)
 {
   Clear();
 
-  if (boBeginParam == FALSE)
+  if (boBeginParam == false)
   {
     if (OpenDeviceP() == 0) return(0);
 
@@ -644,7 +644,7 @@ bool    ReadParamP(void)
     if (ElsInput(0) != SER_GOODCHECK) return(0); 
 
     QueryCloseP();
-    boBeginParam = TRUE;
+    boBeginParam = true;
   }
 
   switch (diCurr.ibLine)
@@ -728,7 +728,7 @@ bool    ReadParamT(void)
 {
   Clear();
 
-  if (boBeginParam == FALSE)
+  if (boBeginParam == false)
   {
     DelayOff();
     QueryParamT1();
@@ -748,7 +748,7 @@ bool    ReadParamT(void)
     if (TxtInput() != SER_GOODCHECK) return(0);
     ReadParamT3();
 
-    boBeginParam = TRUE;
+    boBeginParam = true;
   }
 
   switch (diCurr.ibLine)
@@ -827,7 +827,7 @@ bool    ReadParamU(void)
 {
   Clear();
 
-  if (boBeginParam == FALSE)
+  if (boBeginParam == false)
   {
     QueryCloseU();
     QueryParamU1();
@@ -857,7 +857,7 @@ bool    ReadParamU(void)
     ReadParamU4();
 
 
-    boBeginParam = TRUE;
+    boBeginParam = true;
   }
 
   switch (diCurr.ibLine)
@@ -957,13 +957,13 @@ float2  ReadParamRepeat(uint  iwPrm)
 
 void    MakeExtended2(void)
 {
-  if (boParamsFlag == TRUE)
+  if (boParamsFlag == true)
   {
     ShowHi(szDirectParam);
     Clear(); sprintf(szLo+14,"%2u",ibDig+1);
     DelayInf();
 
-    boBeginParam = FALSE;
+    boBeginParam = false;
 
     LoadPrevDigital(ibDig);
 
@@ -980,7 +980,7 @@ void    MakeExtended2(void)
       {
         sprintf(szHi+13,"%3u",p+1);
 
-        float2 fl2 = (mpboEnblParams[p] == FALSE) ? GetFloat2(0, true) : ReadParamRepeat(p);
+        float2 fl2 = (mpboEnblParams[p] == false) ? GetFloat2(0, true) : ReadParamRepeat(p);
 
         mpreParamsBuff[ibSoftTim][p] = (fl2.fValid) ? fl2.flValue : GetFloatNAN();
         mptiParamsBuff[p] = tiCurr;

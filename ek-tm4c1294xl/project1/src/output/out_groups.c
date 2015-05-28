@@ -43,7 +43,7 @@ void    OutSetGroup(void)
         {
           SaveGroups();
 
-          boSetGroups = TRUE;
+          boSetGroups = true;
           SaveFile(&flSetGroups);
         }
 

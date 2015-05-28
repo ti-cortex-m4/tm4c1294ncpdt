@@ -77,7 +77,7 @@ void    ShowDeltaTimePositive(uchar  ibCan, ulong  dwSecond)
 {
   ShowCanalNumber(ibCan);
   Clear();
-  sprintf(szLo+1,"сдвиг: +%lu с", dwSecond); (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
+  sprintf(szLo+1,"сдвиг: +%lu с", dwSecond); (boShowMessages == true) ? DelayMsg() : DelayInf();
 }
 
 
@@ -85,5 +85,5 @@ void    ShowDeltaTimeNegative(uchar  ibCan, ulong  dwSecond)
 {
   ShowCanalNumber(ibCan);
   Clear();
-  sprintf(szLo+1,"сдвиг: -%lu с", dwSecond); (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
+  sprintf(szLo+1,"сдвиг: -%lu с", dwSecond); (boShowMessages == true) ? DelayMsg() : DelayInf();
 }

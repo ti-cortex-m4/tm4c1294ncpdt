@@ -11,17 +11,17 @@ BOOLEAN,Ñ
 
 bool    ValidBoolean(uchar  b)
 {
-  return (b == TRUE) || (b == FALSE);
+  return (b == true) || (b == false);
 }
 
 
-boolean CharToBoolean(uchar  b)
+bool    CharToBoolean(uchar  b)
 {
-  return (b == TRUE ? TRUE : FALSE);
+  return (b == true ? true : false);
 }
 
 
-boolean InvertBoolean(boolean  bo)
+bool    InvertBoolean(bool  bo)
 {
-  return (bo == TRUE ? FALSE : TRUE);
+  return (bo == true ? false : true);
 }

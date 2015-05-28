@@ -182,7 +182,7 @@ void    RunResponseUni(void)
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETOPEN) &&
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETQUERY_CRC))
     {
-      if (boEnblPassUni == TRUE)
+      if (boEnblPassUni == true)
       {
         Result2(bUNI_BADACCESS);
         return;

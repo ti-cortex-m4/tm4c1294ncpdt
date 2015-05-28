@@ -4,14 +4,14 @@ MEM_SCHEDULE.H
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 mpboEnblPrtHou[bPORTS][48];
+extern  bool                 mpboEnblPrtHou[bPORTS][48];
 
-extern  boolean                 mpboCtrlHou[48];
+extern  bool                 mpboCtrlHou[48];
 
 
 
-extern  boolean                 mpboRecalcHou[48];
+extern  bool                 mpboRecalcHou[48];
 
-extern  boolean                 boRecalcAlways;
+extern  bool                 boRecalcAlways;
 
-extern  boolean                 boRecalcCurr;
+extern  bool                 boRecalcCurr;

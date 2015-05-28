@@ -75,7 +75,7 @@ void    InitStorage(void) // TODO InitStorage
 
 
 
-boolean ResetFlash(void)
+bool ResetFlash(void)
 {
 uint    i;
 
@@ -96,75 +96,75 @@ uint    i;
 
   for (wPageOut=IMPMNTCAN; wPageOut<(IMPMNTCAN+bMINUTES); wPageOut++)
   {
-    if (SafePageErase() == FALSE) return FALSE;
-    if (GetFlashStatus() != 0) return FALSE;
+    if (SafePageErase() == false) return false;
+    if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
 
   for (wPageOut=IMPHOUCAN; wPageOut<(IMPHOUCAN+IMPHOUCAN_PAGES); wPageOut++)
   {
-    if (SafePageErase() == FALSE) return FALSE;
-    if (GetFlashStatus() != 0) return FALSE;
+    if (SafePageErase() == false) return false;
+    if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
 
   memset(&mpimDayCan, 0, sizeof(mpimDayCan));
   for (i=0; i<bDAYS; i++) 
   {
-    if (SaveImpDay(0,i,ibSoftDay) == FALSE) return FALSE;
-    if (GetFlashStatus() != 0) return FALSE;
+    if (SaveImpDay(0,i,ibSoftDay) == false) return false;
+    if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
 
   memset(&mpimMonCan, 0, sizeof(mpimMonCan));
   for (i=0; i<bMONTHS; i++) 
   {
-    if (SaveImpMon(0,i,ibSoftMon) == FALSE) return FALSE;
-    if (GetFlashStatus() != 0) return FALSE;
+    if (SaveImpMon(0,i,ibSoftMon) == false) return false;
+    if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
 
   memset(&mppoDayGrp, 0, sizeof(mppoDayGrp));
   for (i=0; i<bDAYS; i++) 
   {
-    if (SavePowDay(0,i,ibSoftDay) == FALSE) return FALSE;
-    if (GetFlashStatus() != 0) return FALSE;
+    if (SavePowDay(0,i,ibSoftDay) == false) return false;
+    if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
 
   memset(&mppoMonGrp, 0, sizeof(mppoMonGrp));
   for (i=0; i<bMONTHS; i++) 
   {
-    if (SavePowMon(0,i,ibSoftMon) == FALSE) return FALSE;
-    if (GetFlashStatus() != 0) return FALSE;
+    if (SavePowMon(0,i,ibSoftMon) == false) return false;
+    if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
 
   memset(&mpdbCntMonCan, 0, sizeof(mpdbCntMonCan));
   for (i=0; i<bMONTHS; i++) 
   {
-    if (SaveCntMon(0,i,ibSoftMon) == FALSE) return FALSE;
-    if (GetFlashStatus() != 0) return FALSE;
+    if (SaveCntMon(0,i,ibSoftMon) == false) return false;
+    if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
 
   for (wPageOut=PARAMS_VALUES; wPageOut<(PARAMS_VALUES+PARAMS_PAGES*wTIMES); wPageOut++)
   {
-    if (SafePageErase() == FALSE) return FALSE;
-    if (GetFlashStatus() != 0) return FALSE;
+    if (SafePageErase() == false) return false;
+    if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
 
-  if (CleanImpHouBuff() == FALSE) return FALSE;
+  if (CleanImpHouBuff() == false) return false;
 
-  if (CleanImpDayBuff() == FALSE) return FALSE;
-  if (CleanImpMonBuff() == FALSE) return FALSE;
-  if (CleanImpAbsBuff() == FALSE) return FALSE;
+  if (CleanImpDayBuff() == false) return false;
+  if (CleanImpMonBuff() == false) return false;
+  if (CleanImpAbsBuff() == false) return false;
 
-  if (CleanPowDayBuff() == FALSE) return FALSE;
-  if (CleanPowMonBuff() == FALSE) return FALSE;
+  if (CleanPowDayBuff() == false) return false;
+  if (CleanPowMonBuff() == false) return false;
 
-  if (CleanCntMonBuff() == FALSE) return FALSE;
+  if (CleanCntMonBuff() == false) return false;
 
 
   ShowHi(szFlashRead);
@@ -172,12 +172,12 @@ uint    i;
 
   for (wPageIn=BEGIN; wPageIn<END; wPageIn += 2)
   {
-    if (SafePageRead() == FALSE) return FALSE;
-    if (GetFlashChecksum() == 0) return FALSE;
+    if (SafePageRead() == false) return false;
+    if (GetFlashChecksum() == 0) return false;
     ShowFlashRead();
   }
 
   DelayMsg(); 
 
-  return TRUE;
+  return true;
 }

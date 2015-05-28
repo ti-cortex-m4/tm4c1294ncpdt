@@ -19,7 +19,7 @@ EXTENDED_4T,C
 
 
 
-file const              flExt4TFlag = {EXT_4T_FLAG, &boExt4TFlag, sizeof(boolean)};
+file const              flExt4TFlag = {EXT_4T_FLAG, &boExt4TFlag, sizeof(bool)};
 file const              flExt4TMonths = {EXT_4T_MONTHS, &bExt4TMonths, sizeof(uchar)};
 
 
@@ -28,13 +28,13 @@ static char const       szExtended4T[]  = "Опрос данных: 6 ";
 
 
 
-boolean SaveExt4TValues(uchar  ibMon)
+bool SaveExt4TValues(uchar  ibMon)
 {
   return SaveBuff(EXT_4T_MON_VALUES + ibMon*VALUE4T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
 }
 
 
-boolean LoadExt4TValues(uchar  ibMon)
+bool LoadExt4TValues(uchar  ibMon)
 {
   return LoadBuff(EXT_4T_MON_VALUES + ibMon*VALUE4T_CAN_PAGES, &mpCntMonCan4T, sizeof(mpCntMonCan4T));
 }
@@ -43,7 +43,7 @@ boolean LoadExt4TValues(uchar  ibMon)
 
 void    InitExtended4T(void) 
 {
-  LoadFileBoolean(&flExt4TFlag, FALSE);
+  LoadFileBoolean(&flExt4TFlag, false);
   LoadFileChar(&flExt4TMonths, 1, 12, 4);
 }
 
@@ -52,7 +52,7 @@ void    ResetExtended4T(bool  fFull)
 { 
   if (fFull)
   {
-    boExt4TFlag = FALSE;
+    boExt4TFlag = false;
     SaveFile(&flExt4TFlag);
 
     bExt4TMonths = 4;
@@ -149,7 +149,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == true)
       {
-        if (mpboChannelsA[diPrev.ibLine] == TRUE)
+        if (mpboChannelsA[diPrev.ibLine] == true)
         {
           value4t vl = mpCntMonCan4T[c];
 
@@ -170,7 +170,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
 
 void    MakeExtended4T(void)
 {
-  if ((boExt4TFlag == TRUE) && (mpboExt4EnblCan[ibDig] == TRUE))
+  if ((boExt4TFlag == true) && (mpboExt4EnblCan[ibDig] == true))
   {
     ShowHi(szExtended4T); 
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4TMonths);

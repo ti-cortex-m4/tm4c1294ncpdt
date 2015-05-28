@@ -407,7 +407,7 @@
         Log(LOG_END_ENERGY_E);
 
         DefaultDefectE();
-        if (boPoweredEsc == TRUE)
+        if (boPoweredEsc == true)
           MakePause(DEV_POSTENERGY_E2);
         else
           MakePause(DEV_POSTDEFECT_E2);

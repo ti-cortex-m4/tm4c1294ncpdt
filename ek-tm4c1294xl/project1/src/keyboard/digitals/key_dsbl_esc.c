@@ -26,9 +26,9 @@ void    ShowDsblEsc(void)
 {
   Clear();
 
-  (boDsblEscU == TRUE) ? strcpy(szLo+1,szNo)  : strcpy(szLo+1,szYes);
-  (boDsblEscV == TRUE) ? strcpy(szLo+6,szNo)  : strcpy(szLo+6,szYes);
-  (boDsblEscS == TRUE) ? strcpy(szLo+11,szNo) : strcpy(szLo+11,szYes);
+  (boDsblEscU == true) ? strcpy(szLo+1,szNo)  : strcpy(szLo+1,szYes);
+  (boDsblEscV == true) ? strcpy(szLo+6,szNo)  : strcpy(szLo+6,szYes);
+  (boDsblEscS == true) ? strcpy(szLo+11,szNo) : strcpy(szLo+11,szYes);
 }
 
 

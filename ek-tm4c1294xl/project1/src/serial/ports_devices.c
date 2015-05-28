@@ -30,7 +30,7 @@ void    Query(uint  cwIn, uchar  cbOut, bool  fMinor)
 //  DebugOut(cwIn, cbOut);
 
   // при передаче порт переключается в ведущий режим из временного ведомого
-  mpboLocal[ibPort] = FALSE;
+  mpboLocal[ibPort] = false;
 
   // включаем защитный интервал обращения к счётчикам (кроме переключения в временный ведомый режим из ведущего)
   if (cwIn != SERIAL_LOCAL) cbWaitQuery = bMAXWAITQUERY;

@@ -21,7 +21,7 @@ time                    tiGPS;
 uchar                   bGMT;
 
 // график коррекции времени
-boolean                 mpboGPSRun[48];
+bool                 mpboGPSRun[48];
 
 // счётчики событий
 uint                    mpcwGPSRun[20];
@@ -30,7 +30,7 @@ uint                    mpcwGPSRun[20];
 time                    tiPrevCorrect, tiPostCorrect;
 
 // признак использования сезонного времени при расчете местного времени
-boolean                 boSeasonGPS;
+bool                 boSeasonGPS;
 
 // буфер значения сезона
 uchar                   bSeasonCurr;

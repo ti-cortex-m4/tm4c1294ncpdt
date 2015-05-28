@@ -36,15 +36,6 @@ typedef struct
 } double2;
 
 
-// тип 'логический'
-typedef enum
-{
-  UNDEFINED           = 0x55,
-  FALSE               = 0x00,
-  TRUE                = 0xFF
-} boolean;
-
-
 // тип 'время и дата'
 typedef struct
 {

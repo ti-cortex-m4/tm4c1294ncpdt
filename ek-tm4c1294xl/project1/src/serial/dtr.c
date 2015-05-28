@@ -29,8 +29,8 @@ void    DTROff_All(void)
 
 void    RunDTR(void)
 {
-//  if (boDTREnable != TRUE) return;
-//  if (mpboDTRResetHou[ GetCurrHouIndex() ] != TRUE) return;
+//  if (boDTREnable != true) return;
+//  if (mpboDTRResetHou[ GetCurrHouIndex() ] != true) return;
 
   if (cbWaitQuery == 0) DTROff_All();
 }
@@ -39,7 +39,7 @@ void    RunDTR(void)
 
 void    ResetDTR(void)
 {
-//  if (boDTREnable != TRUE) return;
+//  if (boDTREnable != true) return;
 //  if (SuperUser() == 0) return;
 //  if (enGlobal == GLB_WORK) return;
 //

@@ -5,4 +5,4 @@ STORAGE.H
 ------------------------------------------------------------------------------*/
 
 void    InitStorage(void);
-boolean ResetFlash(void);
+bool ResetFlash(void);

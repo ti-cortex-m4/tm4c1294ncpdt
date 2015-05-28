@@ -22,7 +22,7 @@ REALTIME_INIT.C
 
 
 
-boolean RealtimeOffline(void)
+bool RealtimeOffline(void)
 {
 uchar   cbDays;
 time    tiT;
@@ -43,9 +43,9 @@ time    tiT;
         (tiCurr.bMonth  == tiT.bMonth)  &&
         (tiCurr.bYear   == tiT.bYear))
     {
-    	PrintString("\n Finish TRUE");
+    	PrintString("\n Finish true");
     	tiPrev = tiCurr;
-      return TRUE;
+      return true;
     }
 
     // перевод время в интервалом в минуту
@@ -56,7 +56,7 @@ time    tiT;
       {
         tiCurr.bHour = 0;
 
-        if (++cbDays > bMAXDAYS_OFF) return FALSE;
+        if (++cbDays > bMAXDAYS_OFF) return false;
 
         if (++tiCurr.bDay > GetDaysInMonthYM(tiCurr.bYear, tiCurr.bMonth))
         {
@@ -231,7 +231,7 @@ void    InitRealtime(void)
     tiPowerOff = tiCurr;
 
     AddSysRecord(EVE_PREVNEXTTIME2);
-    if (RealtimeOffline() == TRUE)
+    if (RealtimeOffline() == true)
     {
     }
     else

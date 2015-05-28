@@ -34,7 +34,7 @@ typedef struct
 {
   value5a       stValue;
   time          tiUpdate;
-  boolean       boSuccess;
+  bool       boSuccess;
   uint          cwSuccess,cwError;
 } value5b;
 

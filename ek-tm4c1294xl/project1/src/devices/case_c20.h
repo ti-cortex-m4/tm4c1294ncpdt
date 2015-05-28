@@ -2,7 +2,7 @@
 #ifndef SKIP_C
 
     case DEV_INIT_61_C2: // опрос начат  
-      if (boShortProfileC == FALSE)
+      if (boShortProfileC == false)
       { 
         InitHeaderC_6();
 

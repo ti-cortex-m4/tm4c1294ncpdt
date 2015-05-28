@@ -138,7 +138,7 @@
       {
         ReadVersionC();
 
-        if (boHideMessages == FALSE)
+        if (boHideMessages == false)
           MakeLongPause(DEV_POSTVERSION_C2, 1);
         else
           MakePause(DEV_POSTVERSION_C2);
@@ -194,7 +194,7 @@
       }
       else*/ 
       cbRepeat2 = 0;
-      if (boShortProfileC == FALSE)
+      if (boShortProfileC == false)
       {             
         InitHeaderC_6();
 

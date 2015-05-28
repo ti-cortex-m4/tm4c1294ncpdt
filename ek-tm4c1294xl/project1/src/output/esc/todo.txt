@@ -39,7 +39,7 @@ void    EscAT(void)
 
 void    SlaveModem(void)
 {
-  if ((boSlaveModem == TRUE) && (mpanSendAT[ibPort] == ANS_ANSWER))
+  if ((boSlaveModem == true) && (mpanSendAT[ibPort] == ANS_ANSWER))
   {
     mpanSendAT[ibPort] = ANS_BEGIN;
 

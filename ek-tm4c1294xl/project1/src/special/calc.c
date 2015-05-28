@@ -35,7 +35,7 @@ void    OpenCalc(void)
   fLoadDay = 0;
   fLoadMon = 0;
 
-  boOpenCalc = TRUE;
+  boOpenCalc = true;
 }
 
 
@@ -144,7 +144,7 @@ void    CalcDigCanals(void)
       mpwImpHouCanSpec[c] = w;
       mpwImpHouCanDef[c] = w;
 
-      mpboReadyCan[c] = TRUE;
+      mpboReadyCan[c] = true;
       mpcwCalcDig[c]++;
 
       if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, tiAlt );
@@ -174,7 +174,7 @@ void    CalcAllCanals(bool  fUseImp)
     for (c=0; c<bCANALS; c++)           // обработка по каналам
     { 
       // если канал не используется: пропустить
-      //if (mpboUsedNodes[ibCan] == FALSE) continue;
+      //if (mpboUsedNodes[ibCan] == false) continue;
      
       if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, tiAlt );
       if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, tiAlt );
@@ -200,7 +200,7 @@ void    CalcAllGroups(bool  fUsePow)
     uchar ibGrp;
     for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)           // обработка по группам
     {
-      if (mpboUsedGroups[ibGrp] == FALSE) continue;
+      if (mpboUsedGroups[ibGrp] == false) continue;
 
       if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec, ibGrp, tiAlt );
       if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec, ibGrp, tiAlt );
@@ -228,6 +228,6 @@ void    CloseCalc(bool  fUseImp, bool  fUsePow)
     if (fUseImp == 1) SaveDefMon(ibOldMon);
   }
 
-  boOpenCalc = FALSE;
+  boOpenCalc = false;
 }
 

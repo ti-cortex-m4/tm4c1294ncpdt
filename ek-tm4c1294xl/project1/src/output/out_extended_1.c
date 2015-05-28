@@ -49,17 +49,17 @@ real    re;
         re = GetCntCurrImp(c);
         mptiEsc_S[c] = *GetCurrTimeDate();
       }
-      else if (mpboEnblCan[c] == FALSE)
+      else if (mpboEnblCan[c] == false)
       {
         re = 0;
         mptiEsc_S[c] = *GetCurrTimeDate();
       }
-      else if ((boExtendedEscS == TRUE) || (GetDigitalPhone(c) != 0))
+      else if ((boExtendedEscS == true) || (GetDigitalPhone(c) != 0))
         re = GetCanReal(mpreEsc_S, c);
       else
       {
         LoadCurrDigital(c);
-        if (mpboChannelsA[diCurr.ibLine] == TRUE)
+        if (mpboChannelsA[diCurr.ibLine] == true)
           re = DoubleToFloat(mpdbChannelsC[diCurr.ibLine]);
         else
         {
@@ -111,12 +111,12 @@ time    ti2;
         ti1 = *GetCurrTimeDate();
         ti2 = ti1;
       }
-      else if (mpboEnblCan[c] == FALSE)
+      else if (mpboEnblCan[c] == false)
       {
         ti1 = tiZero;
         ti2 = ti1;
       }
-      else if ((boExtendedEscU == TRUE) || (GetDigitalPhone(c) != 0))
+      else if ((boExtendedEscU == true) || (GetDigitalPhone(c) != 0))
       {
         ti1 = mptiEsc_U1[c];
         ti2 = mptiEsc_U2[c];
@@ -124,7 +124,7 @@ time    ti2;
       else
       {
         LoadCurrDigital(c);
-        if (mpboChannelsA[diCurr.ibLine] == TRUE)
+        if (mpboChannelsA[diCurr.ibLine] == true)
           ti1 = tiChannelC;
         else
         {
@@ -177,7 +177,7 @@ real    re;
 
       if (GetDigitalDevice(c) == 0)
       {
-        if (LoadCntMon(ibMon) == TRUE)
+        if (LoadCntMon(ibMon) == true)
           re = mpdbCntMonCan[ PrevSoftMon() ][c];
         else
           re = 0;
@@ -189,17 +189,17 @@ real    re;
         value6 vl = mpCntDayCan6[c];
         re = vl.dbValue;
       }
-      else if (mpboEnblCan[c] == FALSE)
+      else if (mpboEnblCan[c] == false)
       {
         re = 0;
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
-      else if ((boExtendedEscV == TRUE) || (GetDigitalPhone(c) != 0))
+      else if ((boExtendedEscV == true) || (GetDigitalPhone(c) != 0))
         re = GetCanReal(mpreEsc_V, c);
       else
       {
         LoadCurrDigital(c);
-        if (mpboChannelsA[diCurr.ibLine] == TRUE)
+        if (mpboChannelsA[diCurr.ibLine] == true)
           re = DoubleToFloat(mpdbChannelsC[diCurr.ibLine]);
         else
         {

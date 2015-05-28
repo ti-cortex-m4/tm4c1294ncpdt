@@ -12,4 +12,4 @@ void    OutSetFloatCan(float  *mfl, file const  *pfl);
 void    OutFloatCanMap(real  *mpe);
 void    OutIntCanMap(uint  *mpw);
 void    OutCharCanMap(uchar  *mpb);
-void    OutBoolCanMap(boolean  *mpf);
+void    OutBoolCanMap(bool  *mpf);

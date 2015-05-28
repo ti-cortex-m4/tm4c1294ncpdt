@@ -20,37 +20,37 @@ file const              flMinorInDelay = {MINOR_IN_DELAY, &mpwMinorInDelay, size
 
 
 
-boolean SavePorts(void) {
+bool SavePorts(void) {
   return SaveFile(&flPorts);
 }
 
-boolean LoadPorts(void) {
+bool LoadPorts(void) {
   return LoadFile(&flPorts);
 }
 
 
-boolean SaveLocalDisable(void) {
+bool SaveLocalDisable(void) {
   return SaveFile(&flLocalDisable);
 }
 
-boolean LoadLocalDisable(void) {
+bool LoadLocalDisable(void) {
   return LoadFile(&flLocalDisable);
 }
 
 
-boolean SaveMajorInDelay(void) {
+bool SaveMajorInDelay(void) {
   return SaveFile(&flMajorInDelay);
 }
 
-boolean LoadMajorInDelay(void) {
+bool LoadMajorInDelay(void) {
   return LoadFile(&flMajorInDelay);
 }
 
 
-boolean SaveMinorInDelay(void) {
+bool SaveMinorInDelay(void) {
   return SaveFile(&flMinorInDelay);
 }
 
-boolean LoadMinorInDelay(void) {
+bool LoadMinorInDelay(void) {
   return LoadFile(&flMinorInDelay);
 }

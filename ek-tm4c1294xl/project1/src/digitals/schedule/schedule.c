@@ -17,7 +17,7 @@ file const              flEnblPrtHou = {ENBL_PRT_HOU, &mpboEnblPrtHou, sizeof(mp
 file const              flCtrlHou = {CTRL_HOU, &mpboCtrlHou, sizeof(mpboCtrlHou)};
 
 file const              flRecalcHou = {RECALC_HOU, &mpboRecalcHou, sizeof(mpboRecalcHou)};
-file const              flRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(boolean)};
+file const              flRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(bool)};
 
 
 
@@ -38,27 +38,27 @@ void    ResetSchedule(void)
   uchar h;
   for (p=0; p<bPORTS; p++)
     for (h=0; h<48; h++)
-      SetEnblPrtHou(p, h, TRUE);
+      SetEnblPrtHou(p, h, true);
 
   SaveFile(&flEnblPrtHou);
 
 
   for (h=0; h<48; h++)
-    mpboCtrlHou[h] = FALSE;
+    mpboCtrlHou[h] = false;
 
-   mpboCtrlHou[42] = TRUE;
+   mpboCtrlHou[42] = true;
 
    SaveFile(&flCtrlHou);
 
 
    for (h=0; h<48; h++)
-      mpboRecalcHou[h] = FALSE;
+      mpboRecalcHou[h] = false;
 
-   mpboRecalcHou[1] = TRUE;
+   mpboRecalcHou[1] = true;
 
    SaveFile(&flRecalcHou);
 
 
-   boRecalcAlways = TRUE;
+   boRecalcAlways = true;
    SaveFile(&flRecalcAlways);
 }

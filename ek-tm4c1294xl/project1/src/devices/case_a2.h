@@ -93,7 +93,7 @@
           { ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_A2); }
           else
           {
-            if (boManageTime == TRUE)
+            if (boManageTime == true)
             { ShowLo(szManageYes); DelayInf();  MakePause(DEV_MANAGE_A2); }
             else
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
@@ -101,7 +101,7 @@
         }
         else if (dwDelta < wLIMITCORRECT_A)                                     // сложная коррекция
         {
-          if (boManageTime == TRUE)
+          if (boManageTime == true)
           { ShowLo(szManageYes); DelayInf();  MakePause(DEV_MANAGE_A2); }
           else
           { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }

@@ -192,7 +192,7 @@ uchar   p;
     mppoPorts[p].ibParity = 0;
 
     SetDefaultDelay(p);
-    mpboLocalDisable[p] = FALSE;
+    mpboLocalDisable[p] = false;
     SetCorrectLimit(p);
   }
 

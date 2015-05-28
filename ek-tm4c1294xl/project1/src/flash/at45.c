@@ -148,7 +148,7 @@ uchar   ReadStatus(void)
 }
 
 
-boolean SafeReadStatus(void)
+bool SafeReadStatus(void)
 {
 uint    i;
 
@@ -158,23 +158,23 @@ uint    i;
     if (++i > wREAD_STATUS)
     {
       cwWrnBusy++;
-      return FALSE;
+      return false;
     }
   }
 
-  return TRUE;
+  return true;
 }
 
 
 
-boolean PageErase(void)
+bool PageErase(void)
 {
 uint    i;
 
   IncFlashControl();
 
-  if (SafeReadStatus() == FALSE)
-    return FALSE;
+  if (SafeReadStatus() == false)
+    return false;
   else
   {
     EnableFlash();
@@ -187,12 +187,12 @@ uint    i;
     CharOut(0);
 
     DisableFlash();
-    return TRUE;
+    return true;
   }
 }
 
 
-boolean SafePageErase(void)
+bool SafePageErase(void)
 {
 uchar   i;
 
@@ -211,19 +211,19 @@ uchar   i;
   if (i == bMAXREPEAT)
   {
     cwErrPageErase++;
-    return FALSE;
+    return false;
   }
-  else return TRUE;
+  else return true;
 }
 
 
 
-boolean PageRead(void)
+bool PageRead(void)
 {
 uint    i;
 
-  if (SafeReadStatus() == FALSE)
-    return FALSE;
+  if (SafeReadStatus() == false)
+    return false;
   else
   {
     EnableFlash();
@@ -240,12 +240,12 @@ uint    i;
     for (i=0; i<wPAGE_SIZE; i++) mpbPageIn[i] = CharIn();
 
     DisableFlash();
-    return TRUE;
+    return true;
   }
 }
 
 
-boolean SafePageRead(void)
+bool SafePageRead(void)
 {
 uchar   i;
 
@@ -264,21 +264,21 @@ uchar   i;
   if (i == bMAXREPEAT)
   {
     cwErrPageRead++;
-    return FALSE;
+    return false;
   }
-  else return TRUE;
+  else return true;
 }
 
 
 
-boolean PageWrite(void)
+bool PageWrite(void)
 {
 uint    i;
 
   IncFlashControl();
 
-  if (SafeReadStatus() == FALSE)
-    return FALSE;
+  if (SafeReadStatus() == false)
+    return false;
   else                                  // запись
   {
     EnableFlash();
@@ -295,8 +295,8 @@ uint    i;
     DisableFlash();
   }
 
-  if (SafeReadStatus() == FALSE)
-    return FALSE;
+  if (SafeReadStatus() == false)
+    return false;
   else                                  // проверка записи
   {
     EnableFlash();
@@ -311,24 +311,24 @@ uint    i;
     DisableFlash();
   }
 
-  if (SafeReadStatus() == FALSE)
+  if (SafeReadStatus() == false)
   {
     cwErrCompare++;
-    return FALSE;
+    return false;
   }
   else
   {
     if ((bStatusFlash & 0x40) != 0)
     {
       cwWrnCompare++;
-      return FALSE;
+      return false;
     }
-    else return TRUE;
+    else return true;
   }
 }
 
 
-boolean SafePageWrite(void)
+bool SafePageWrite(void)
 {
 uchar   i;
 
@@ -360,9 +360,9 @@ uchar   i;
   if (i == bMAXREPEAT)
   {
     cwErrPageWrite++;
-    return FALSE;
+    return false;
   }
-  else return TRUE;
+  else return true;
 }
 
 
@@ -371,7 +371,7 @@ void    InitFlash(void)
   Init_SPIhandAT45DB321();
   DisableFlash();
 
-// TODO if (SafeReadStatus() == FALSE) TestError(szBadFlash);
+// TODO if (SafeReadStatus() == false) TestError(szBadFlash);
 }
 
 
@@ -391,17 +391,17 @@ uint    i;
 }
 
 
-boolean GetFlashChecksum(void)
+bool GetFlashChecksum(void)
 {
   MakeCRC16(mpbPageIn, wPAGE_SIZE);
 
   if ((bCRCHi != 0x00) && (bCRCLo != 0x00))
   {
     if ((bCRCHi != 0x0F) && (bCRCLo != 0x74))
-      return FALSE;
+      return false;
   }
 
-  return TRUE;
+  return true;
 }
 
 

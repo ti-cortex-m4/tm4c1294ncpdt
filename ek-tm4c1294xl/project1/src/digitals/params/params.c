@@ -25,15 +25,15 @@ param const             mppaParamsLines[bPARAM_BLOCK] =
 
 
 
-file const              flParamsFlag = {PARAMS_FLAG, &boParamsFlag, sizeof(boolean)};
-file const              flMntParams = {MNT_PARAMS, &boMntParams, sizeof(boolean)};
+file const              flParamsFlag = {PARAMS_FLAG, &boParamsFlag, sizeof(bool)};
+file const              flMntParams = {MNT_PARAMS, &boMntParams, sizeof(bool)};
 
 file const              flParams = {PARAMS, &mpdiParam, sizeof(mpdiParam)};
 file const              flParamsDiv = {PARAMS_DIV, &mpreParamsDiv, sizeof(mpreParamsDiv)};
 file const              flEnblParams = {ENBL_PARAMS, &mpboEnblParams, sizeof(mpboEnblParams)};
 
-file const              flFixParamsBugs = {FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(boolean)};
-file const              flUseParamsDiv = {USE_PARAMS_DIV, &boUseParamsDiv, sizeof(boolean)};
+file const              flFixParamsBugs = {FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(bool)};
+file const              flUseParamsDiv = {USE_PARAMS_DIV, &boUseParamsDiv, sizeof(bool)};
 
 
 
@@ -53,10 +53,10 @@ void    InitParams(void)
 
 void    ResetParams(void)
 {
-  boParamsFlag = FALSE;
+  boParamsFlag = false;
   SaveFile(&flParamsFlag);
 
-  boMntParams = FALSE;
+  boMntParams = false;
   SaveFile(&flMntParams);
 
   memset(&mpdiParam, 0, sizeof(mpdiParam));
@@ -67,17 +67,17 @@ void    ResetParams(void)
   for (i=0; i<wPARAMS; i++)
   {
     mpreParamsDiv[i] = 1;
-    mpboEnblParams[i] = TRUE;
+    mpboEnblParams[i] = true;
   }
 
   SaveFile(&flParamsDiv);
   SaveFile(&flEnblParams);
 
 
-  boFixParamsBugs = FALSE;
+  boFixParamsBugs = false;
   SaveFile(&flFixParamsBugs);
 
-  boUseParamsDiv = FALSE;
+  boUseParamsDiv = false;
   SaveFile(&flUseParamsDiv);
 }
 
@@ -192,6 +192,6 @@ void    ShowParam(uint  iwPrm)
 
   sprintf(szHi+13,"%03u",iwPrm + 1);
 
-  (mpboEnblParams[iwPrm] == TRUE) ? (szHi[12] = '+') : (szHi[12] = '-');
+  (mpboEnblParams[iwPrm] == true) ? (szHi[12] = '+') : (szHi[12] = '-');
 }
 

@@ -10,7 +10,7 @@ CHECKUP.C
 
 void    ClearCheckup(void)
 {
-//  boCheckupRecalc = FALSE;
+//  boCheckupRecalc = false;
 //
 //  cbCheckupDays = 0;
 //  memset(&mpCheckupDays, 0, sizeof(mpCheckupDays));
@@ -22,7 +22,7 @@ void    ClearCheckup(void)
 /*
 void    ResetCheckupCustom(void)
 {
-  boCheckupRecalc = FALSE;
+  boCheckupRecalc = false;
 
   cbCheckupEventDay = 0;
   memset(&mpCheckupEventDay, 0, sizeof(mpCheckupEventDay));
@@ -52,7 +52,7 @@ uchar   i;
 
   ResetCheckupCustom();
 
-  boCheckupEnable = FALSE;
+  boCheckupEnable = false;
 
   for (i=0; i<bCANALS; i++)
   {
@@ -60,11 +60,11 @@ uchar   i;
     mpbCheckupLimitM[i] = 0;
   }
 
-  for (i=0; i<48; i++) mpboCheckupHou[i] = FALSE;
-  mpboCheckupHou[2] = TRUE;
-  mpboCheckupHou[3] = TRUE;
-  mpboCheckupHou[4] = TRUE;
-  mpboCheckupHou[5] = TRUE;
+  for (i=0; i<48; i++) mpboCheckupHou[i] = false;
+  mpboCheckupHou[2] = true;
+  mpboCheckupHou[3] = true;
+  mpboCheckupHou[4] = true;
+  mpboCheckupHou[5] = true;
 }
 
 
@@ -330,7 +330,7 @@ uchar   i;
         daAlt.bYear  = tiAlt.bYear;
 
         cbCheckupErrorDay++;
-        if (boCheckupReadonly == TRUE)
+        if (boCheckupReadonly == true)
         {
           AddDigRecord(EVE_CHECKUP_DAY);
         }
@@ -412,7 +412,7 @@ uchar   i;
         daAlt.bYear  = tiAlt.bYear;
 
         cbCheckupErrorMon++;
-        if (boCheckupReadonly == TRUE)
+        if (boCheckupReadonly == true)
         {
           AddDigRecord(EVE_CHECKUP_MON);
         }
@@ -469,7 +469,7 @@ void    CheckupClearCanals(void)
 {
 uchar   i;
 
-  boCheckupRecalc = TRUE;
+  boCheckupRecalc = true;
   memset(&mpboReadyCheckup, 0, sizeof(mpboReadyCheckup));
 
   for (i=ibXmin; i<=ibXmax; i++)
@@ -480,7 +480,7 @@ uchar   i;
       LoadPrevDigital(ibCan);
 
       if (CompareCurrPrevLines() == 1)
-        mpboReadyCheckup[ibCan] = TRUE;
+        mpboReadyCheckup[ibCan] = true;
     } 
   }
 
@@ -502,7 +502,7 @@ uchar   i;
     
       for (ibCan=0; ibCan<bCANALS; ibCan++)         // обработка по каналам
       {
-        if (mpboReadyCheckup[ibCan] == TRUE) 
+        if (mpboReadyCheckup[ibCan] == true) 
         { 
           SetCanInt(mpwImpHouCanSpec, ibCan, 0xFFFF); 
         }

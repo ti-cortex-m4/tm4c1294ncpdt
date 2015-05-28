@@ -48,13 +48,13 @@ void    MakeParamDiv(uint  iwPrm)
   {
     switch (GetParamLine(iwPrm))
     {
-      case PAR_I  : mpboEnblParams[iwPrm] = FALSE; break;
+      case PAR_I  : mpboEnblParams[iwPrm] = false; break;
 
       case PAR_I1 : 
       case PAR_I2 : 
       case PAR_I3 : fl = 1000; break;
 
-      case PAR_U  : mpboEnblParams[iwPrm] = FALSE; break;
+      case PAR_U  : mpboEnblParams[iwPrm] = false; break;
 
       case PAR_C  :
       case PAR_C1 :
@@ -79,7 +79,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_F1 :
       case PAR_F2 :
-      case PAR_F3 : mpboEnblParams[iwPrm] = FALSE; break;
+      case PAR_F3 : mpboEnblParams[iwPrm] = false; break;
 
       default: fl = 1; break;
     }
@@ -97,7 +97,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_C  : 
 
-      case PAR_F  : mpboEnblParams[iwPrm] = FALSE; break;
+      case PAR_F  : mpboEnblParams[iwPrm] = false; break;
 
       default: fl = 1; break;
     }
@@ -105,11 +105,11 @@ void    MakeParamDiv(uint  iwPrm)
   else if (GetParamDevice(iwPrm) == 18)
   {
     if (GetParamLine(iwPrm) != PAR_P) 
-      mpboEnblParams[iwPrm] = FALSE;
+      mpboEnblParams[iwPrm] = false;
     else
     {
       fl = 1;
-      mpboEnblParams[iwPrm] = TRUE;
+      mpboEnblParams[iwPrm] = true;
     }
   }
   else if (GetParamDevice(iwPrm) == 21)
@@ -127,7 +127,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_F1 : 
       case PAR_F2 : 
-      case PAR_F3 : mpboEnblParams[iwPrm] = FALSE; break;
+      case PAR_F3 : mpboEnblParams[iwPrm] = false; break;
 
       default: fl = 1; break;
     }
@@ -152,7 +152,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_F1 : 
       case PAR_F2 : 
-      case PAR_F3 : mpboEnblParams[iwPrm] = FALSE; break;
+      case PAR_F3 : mpboEnblParams[iwPrm] = false; break;
 
       default: fl = 1; break;
     }
@@ -184,7 +184,7 @@ void    MakeParamDiv(uint  iwPrm)
 
       case PAR_F1 : 
       case PAR_F2 : 
-      case PAR_F3 : mpboEnblParams[iwPrm] = FALSE; break;
+      case PAR_F3 : mpboEnblParams[iwPrm] = false; break;
 
       default: fl = 1; break;
     }

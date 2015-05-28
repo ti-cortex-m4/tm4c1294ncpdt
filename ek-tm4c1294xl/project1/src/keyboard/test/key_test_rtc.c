@@ -37,12 +37,12 @@ void    key_TestRTC(void)
 
 
 
-static uchar ShowRTC(boolean  bo)
+static uchar ShowRTC(bool  bo)
 {
   switch (bo)
   {
-    case TRUE:      return '+';
-    case FALSE:     return '-';
+    case true:      return '+';
+    case false:     return '-';
     case UNDEFINED: return '?';
     default:        return ' ';
   }

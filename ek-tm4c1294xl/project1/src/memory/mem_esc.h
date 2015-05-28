@@ -10,4 +10,4 @@ extern  uchar                   mpibActiveEsc[bPORTS];
 
 extern  uchar                   ibActiveEsc;
 
-extern  boolean                 boBlockEsc;
+extern  bool                 boBlockEsc;

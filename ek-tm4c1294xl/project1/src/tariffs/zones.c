@@ -171,7 +171,7 @@ void    ShowZoneKeyBreak(uchar  ibBreak)
 
 
 
-boolean TrueZone(zone  *pzo)
+bool TrueZone(zone  *pzo)
 {
-  return TRUE;
+  return true;
 }

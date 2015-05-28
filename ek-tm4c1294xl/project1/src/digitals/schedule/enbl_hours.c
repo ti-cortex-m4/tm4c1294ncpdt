@@ -9,13 +9,13 @@ ENBL_HOURS.C
 
 
 
-void    SetEnblPrtHou(uchar  ibPrt, uchar  ibHou, boolean  bo)
+void    SetEnblPrtHou(uchar  ibPrt, uchar  ibHou, bool  bo)
 {
   mpboEnblPrtHou[ibPrt][ibHou] = bo;
 }
 
 
-boolean GetEnblPrtHou(uchar  ibPrt, uchar  ibHou)
+bool GetEnblPrtHou(uchar  ibPrt, uchar  ibHou)
 {
   return mpboEnblPrtHou[ibPrt][ibHou];
 }

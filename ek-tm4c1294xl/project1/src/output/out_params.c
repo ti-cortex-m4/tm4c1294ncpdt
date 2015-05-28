@@ -126,7 +126,7 @@ void    OutGetParamCurr(void)
     InitPushCRC();
     Push(&tiCurr, sizeof(time));
 
-    boBeginParam = FALSE;
+    boBeginParam = false;
 
     bool f = 1;
     uchar i;
@@ -136,7 +136,7 @@ void    OutGetParamCurr(void)
 
       if (f == 1)
       {
-        if (mpboEnblParams[(uint)10*bInBuff5+i] != TRUE)
+        if (mpboEnblParams[(uint)10*bInBuff5+i] != true)
           reBuffA = 0;
         else
         {
@@ -194,7 +194,7 @@ void    OutGetParamFull(void)
       uint iwTim = bInBuff7*0x100+bInBuff8;
       if (iwTim < wTIMES)
       {
-        if (LoadParamsTim((wTIMES + iwHardTim - iwTim) % wTIMES) == TRUE)
+        if (LoadParamsTim((wTIMES + iwHardTim - iwTim) % wTIMES) == true)
         {
           InitPushCRC();
 
@@ -251,7 +251,7 @@ void    OutGetParamsAll(void)
     InitPushCRC();
     Push(&tiCurr, sizeof(time));
 
-    boBeginParam = FALSE;
+    boBeginParam = false;
 
     bool f = 1;
     uchar i;
@@ -270,17 +270,17 @@ void    OutGetParamsAll(void)
 
         mpdiParam[wPARAMS-1] = di;
 
-        mpboEnblParams[wPARAMS-1] = TRUE;
+        mpboEnblParams[wPARAMS-1] = true;
         MakeParamDiv(wPARAMS-1);
 
-        if (boUseParamsDiv == TRUE)
+        if (boUseParamsDiv == true)
         {
           uint iw = GetParamIndex(di);
           if (iw != 0xFFFF)
             mpreParamsDiv[wPARAMS-1] = mpreParamsDiv[iw];
         }
 
-        if (mpboEnblParams[wPARAMS-1] != TRUE)
+        if (mpboEnblParams[wPARAMS-1] != true)
           reBuffA = 0;
         else
         {

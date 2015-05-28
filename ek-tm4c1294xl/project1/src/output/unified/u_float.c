@@ -20,7 +20,7 @@ static void PushFFFFFF(void)
 
 void    PushFloatUni(status  st, float  fl)
 {
-  if (boStrictUni == TRUE)
+  if (boStrictUni == true)
   {
     switch (st)
     {

@@ -50,7 +50,7 @@ uchar   i;
   for (i=0; i<4; i++) 
   {
     mpdbChannelsC[i] = mpdwChannelsA[i] * reKtrans;
-    mpboChannelsA[i] = TRUE;     
+    mpboChannelsA[i] = true;     
   }
 
   reBuffA = reKtrans*coEnergy.dwBuff;
@@ -80,7 +80,7 @@ uchar   i;
   for (i=0; i<4; i++) 
   {
     mpdbChannelsC[i] = mpdwChannelsA[i] * reKtrans * 2;
-    mpboChannelsA[i] = TRUE;
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = reKtrans*coEnergy.dwBuff * 2;
@@ -117,7 +117,7 @@ uchar   i;
   for (i=0; i<4; i++) 
   {
     mpdbChannelsC[i] = mpdwChannelsA[i] * reKtrans;
-    mpboChannelsA[i] = TRUE;     
+    mpboChannelsA[i] = true;     
   }
 
   reBuffA = reKtrans*coEnergy.dwBuff;
@@ -190,7 +190,7 @@ uchar   i;
     ToReal();
     SetCanReal(mpreChannelsB, i);
 
-    mpboChannelsA[i] = TRUE;                          
+    mpboChannelsA[i] = true;                          
   }
 
 
@@ -323,7 +323,7 @@ uchar   i,j;
     reBuffA = mpreCodEng30[0] * reKtrans;
     SetCanReal(mpreChannelsB, i);
 
-    mpboChannelsA[i] = TRUE;     
+    mpboChannelsA[i] = true;     
   }
 
   reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
@@ -377,7 +377,7 @@ uchar   i,j;
   reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = TRUE;     
+  mpboChannelsA[0] = true;     
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -426,7 +426,7 @@ uchar   i,j;
     reBuffA = GetCanReal(mpreChannelsB, i) * reKtrans;
     SetCanReal(mpreChannelsB, i);
 
-    mpboChannelsA[i] = TRUE;     
+    mpboChannelsA[i] = true;     
   }
 
   reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
@@ -465,7 +465,7 @@ uchar   i;
   reBuffA = GetCanReal(mpreChannelsB, 0) * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = TRUE;     
+  mpboChannelsA[0] = true;     
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -504,7 +504,7 @@ uchar   i;
   reBuffA += GetCanReal(mpreCount,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = TRUE;     
+  mpboChannelsA[0] = true;     
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -558,7 +558,7 @@ uchar   i,j;
   reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = TRUE;     
+  mpboChannelsA[0] = true;     
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -605,7 +605,7 @@ uchar   i;
   for (i=0; i<4; i++) 
   {
     mpreChannelsB[i] = mpreChannelsEls[i];
-    mpboChannelsA[i] = TRUE;
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];
@@ -631,7 +631,7 @@ uchar   i;
   if (QueryTimeAltA_Full(75) == 0) return(0);
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = TRUE;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
   return(1);
 }
@@ -654,7 +654,7 @@ uchar   i;
   if (QueryTimeAltB_Full(75) == 0) return(0);
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = TRUE;
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
   return(1);
 }
@@ -690,7 +690,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = TRUE;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
   return(1);
 }
@@ -728,7 +728,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = TRUE;       
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;       
 
   return(1);
 }
@@ -767,7 +767,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<16; i++) mpboChannelsA[i] = TRUE;     
+  for (i=0; i<16; i++) mpboChannelsA[i] = true;     
 
   return(1);
 }
@@ -800,7 +800,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<bCANALS; i++) mpboChannelsA[i] = TRUE;       
+  for (i=0; i<bCANALS; i++) mpboChannelsA[i] = true;       
 
   return(1);
 }
@@ -838,7 +838,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<6; i++) mpboChannelsA[i] = TRUE;     
+  for (i=0; i<6; i++) mpboChannelsA[i] = true;     
 
   return(1);
 }
@@ -876,7 +876,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<6; i++) mpboChannelsA[i] = TRUE;     
+  for (i=0; i<6; i++) mpboChannelsA[i] = true;     
 
   return(1);
 }
@@ -912,7 +912,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = TRUE;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
   return(1);
 }
@@ -968,7 +968,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = TRUE;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
   return(1);
 }
@@ -1004,7 +1004,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = TRUE;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
   return(1);
 }
@@ -1039,7 +1039,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = TRUE;       
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;       
 
   return(1);
 }
@@ -1074,7 +1074,7 @@ uchar   i;
   ReadTimeAltZ();
 
   tiChannelC = tiAlt;
-  mpboChannelsA[0] = TRUE;     
+  mpboChannelsA[0] = true;     
 
   return(1);
 }
@@ -1151,7 +1151,7 @@ ulong   dw;
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
     mpdbChannelsC[i] = mpdwChannelsB[i] * reKtrans;
-    mpboChannelsA[i] = TRUE;     
+    mpboChannelsA[i] = true;     
   }
 
   reBuffA = mpdwChannelsB[diCurr.ibLine] * reKtrans;
@@ -1231,7 +1231,7 @@ ulong   dw;
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
     mpdbChannelsC[i] = mpdwChannelsB[i] * reKtrans * 2;
-    mpboChannelsA[i] = TRUE;
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = mpdwChannelsB[diCurr.ibLine] * reKtrans * 2;
@@ -1316,7 +1316,7 @@ uchar   i,j;
   for (i=0; i<4; i++) 
   {
     mpdbChannelsC[i] = mpdwChannelsB[i] * reKtrans;
-    mpboChannelsA[i] = TRUE;     
+    mpboChannelsA[i] = true;     
   }
 
   reBuffA = mpdwChannelsB[diCurr.ibLine] * reKtrans;
@@ -1553,7 +1553,7 @@ uchar   i;
     reBuffA = GetCanReal(mpreChannelsB, i) * reKtrans;
     SetCanReal(mpreChannelsB, i);
 
-    mpboChannelsA[i] = TRUE;     
+    mpboChannelsA[i] = true;     
   }
 
   reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
@@ -1639,7 +1639,7 @@ uchar   i,j;
   reBuffA = mpreCodEng30[0] * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = TRUE;     
+  mpboChannelsA[0] = true;     
 
 
   reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
@@ -1709,7 +1709,7 @@ uchar   i,j;
   reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = TRUE;     
+  mpboChannelsA[0] = true;     
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -1802,7 +1802,7 @@ uchar   i,j;
     reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig);
     SetCanReal(mpreChannelsB, 0);
  
-    mpboChannelsA[0] = TRUE;     
+    mpboChannelsA[0] = true;     
     reBuffA = GetCanReal(mpreChannelsB, 0);
   }
   else 
@@ -1837,7 +1837,7 @@ uchar   i,j;
     reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
     SetCanReal(mpreChannelsB, 0);
  
-    mpboChannelsA[0] = TRUE;     
+    mpboChannelsA[0] = true;     
     reBuffA = GetCanReal(mpreChannelsB, 0);
   }
 
@@ -1925,7 +1925,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
   switch (diCurr.bDevice)
   {
-    case 0:  if (LoadCntMon(ibMon) == FALSE)
+    case 0:  if (LoadCntMon(ibMon) == false)
                return GetDouble2(0, false);
              else
                return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);
@@ -1939,7 +1939,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
     case 8:
     case 2:  return GetDouble2(reBuffA, ReadCntMonCanB(ibMon));
 
-    case 12: if (LoadCntMon(ibMon) == FALSE)
+    case 12: if (LoadCntMon(ibMon) == false)
                return GetDouble2(0, false);
              else
                return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);

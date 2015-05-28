@@ -364,7 +364,7 @@ void    RunDevices(void)
       break;
 
     case DEV_MODEM_POSTCOMMON:
-      if (boCustomModem == TRUE)
+      if (boCustomModem == true)
         MakePause(DEV_MODEM_NORMAL);
       else
         MakePause(DEV_MODEM_POSTCUSTOM);
@@ -459,10 +459,10 @@ void    RunDevices(void)
         MakeExtended4T();
       }
 
-      if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == FALSE))
+      if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == false))
         MakeExtended2();
 
-      if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == TRUE))
+      if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == true))
         MakeExtended2();
 
       HideCurrTime(1);
@@ -707,7 +707,7 @@ void    RunDevices(void)
           { ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_A2); }
           else
           {
-            if (boManageTime == TRUE)
+            if (boManageTime == true)
             { ShowLo(szManageYes); DelayInf();  MakePause(DEV_MANAGE_A2); }
             else
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
@@ -715,7 +715,7 @@ void    RunDevices(void)
         }
         else if (dwDelta < wLIMITCORRECT_A)                                     // сложная коррекция
         {
-          if (boManageTime == TRUE)
+          if (boManageTime == true)
           { ShowLo(szManageYes); DelayInf();  MakePause(DEV_MANAGE_A2); }
           else
           { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
@@ -1178,7 +1178,7 @@ void    RunDevices(void)
           if (cbCorrects == 0)
           {
             bDeltaOld = (uchar)dwDelta;
-            (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
+            (boShowMessages == true) ? DelayMsg() : DelayInf();
             ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_B2);
           }
           else
@@ -1755,7 +1755,7 @@ void    RunDevices(void)
       {
         ReadVersionC();
 
-        if (boHideMessages == FALSE)
+        if (boHideMessages == false)
           MakeLongPause(DEV_POSTVERSION_C2, 1);
         else
           MakePause(DEV_POSTVERSION_C2);
@@ -1811,7 +1811,7 @@ void    RunDevices(void)
       }
       else*/ 
       cbRepeat2 = 0;
-      if (boShortProfileC == FALSE)
+      if (boShortProfileC == false)
       {             
         InitHeaderC_6();
 

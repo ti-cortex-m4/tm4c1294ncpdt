@@ -59,7 +59,7 @@ void    ShowSpeeds(uchar  ibPrt, bool  fShowLocalDisable)
   if (fShowLocalDisable)
   {
     if (IsMaster(ibPrt))
-      (mpboLocalDisable[ibPrt] == TRUE) ? (szLo[13] = '-') : (szLo[13] = '+');
+      (mpboLocalDisable[ibPrt] == true) ? (szLo[13] = '-') : (szLo[13] = '+');
     else
       szLo[13] = ' ';
   }

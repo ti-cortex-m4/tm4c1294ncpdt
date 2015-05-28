@@ -51,7 +51,7 @@ void    key_SetKeys(void)
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boEnblKeys != TRUE)
+      if (boEnblKeys != true)
       {
         BlockProgram(bSET_ENBL_KEYS);
         return;

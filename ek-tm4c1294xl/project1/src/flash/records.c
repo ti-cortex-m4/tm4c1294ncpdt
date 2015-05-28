@@ -8,31 +8,31 @@ RECORDS.C
 
 
 
-boolean AddKeyRecord(event  ev) {
-	return FALSE;
+bool AddKeyRecord(event  ev) {
+	return false;
 }
 
 
-boolean AddSysRecord(event  ev) {
-	return FALSE;
+bool AddSysRecord(event  ev) {
+	return false;
 }
 
 
-boolean AddSysRecordReprogram(event  ev) {
-	return FALSE;
+bool AddSysRecordReprogram(event  ev) {
+	return false;
 }
 
 
-boolean AddDigRecord(event  ev) {
-	return FALSE;
+bool AddDigRecord(event  ev) {
+	return false;
 }
 
 
-boolean AddImpRecord(event  ev) {
-	return FALSE;
+bool AddImpRecord(event  ev) {
+	return false;
 }
 
 
-boolean AddModRecord(event  ev) {
-	return FALSE;
+bool AddModRecord(event  ev) {
+	return false;
 }

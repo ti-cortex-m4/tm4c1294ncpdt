@@ -24,9 +24,9 @@ static char const       *pszMntEscS[]  = { szMntEscS1, szMntEscS2, szMntEscS3, s
 
 
 
-void    ShowMntEscS(boolean  bo)
+void    ShowMntEscS(bool  bo)
 {
-  if (bo == FALSE)
+  if (bo == false)
     strcpy(szLo,szMinute30);
   else
     strcpy(szLo,szMinute3);

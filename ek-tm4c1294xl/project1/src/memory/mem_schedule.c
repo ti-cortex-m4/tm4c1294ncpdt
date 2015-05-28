@@ -9,18 +9,18 @@ MEM_SCHEDULE.C
 
 
 //  график опроса цифровых счётчиков по портам и получасам
-boolean                 mpboEnblPrtHou[bPORTS][48];
+bool                 mpboEnblPrtHou[bPORTS][48];
 
 //  график коррекции времени цифровых счётчиков по получасам
-boolean                 mpboCtrlHou[48];
+bool                 mpboCtrlHou[48];
 
 
 
 // график перерасчёта
-boolean                 mpboRecalcHou[48];
+bool                 mpboRecalcHou[48];
 
 // признак
-boolean                 boRecalcAlways;
+bool                 boRecalcAlways;
 
 // глобальная переменная
-boolean                 boRecalcCurr;
+bool                 boRecalcCurr;

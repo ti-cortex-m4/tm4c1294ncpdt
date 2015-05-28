@@ -4,20 +4,20 @@ REALTIME_STORAGE.H
 
 ------------------------------------------------------------------------------*/
 
-boolean SavePointersMnt(void);
-boolean LoadPointersMnt(void);
+bool SavePointersMnt(void);
+bool LoadPointersMnt(void);
 
-boolean SavePointersHou(void);
-boolean LoadPointersHou(void);
+bool SavePointersHou(void);
+bool LoadPointersHou(void);
 
-boolean SavePointersDay(void);
-boolean LoadPointersDay(void);
+bool SavePointersDay(void);
+bool LoadPointersDay(void);
 
-boolean SavePointersMon(void);
-boolean LoadPointersMon(void);
+bool SavePointersMon(void);
+bool LoadPointersMon(void);
 
-boolean SavePointersTim(void);
-boolean LoadPointersTim(void);
+bool SavePointersTim(void);
+bool LoadPointersTim(void);
 
-boolean SaveTimeCurr(void);
-boolean LoadTimeCurr(void);
+bool SaveTimeCurr(void);
+bool LoadTimeCurr(void);

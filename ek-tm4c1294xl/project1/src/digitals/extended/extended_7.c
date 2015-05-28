@@ -19,24 +19,24 @@ EXTENDED_7.C
 
 
 
-static boolean SaveCntDayCan7(uchar  ibDayTo)
+static bool SaveCntDayCan7(uchar  ibDayTo)
 {
   return SaveBuff(EXT_7_DAY_VALUES + ibDayTo*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
 }
 
 
-static boolean LoadCntDayCan7(uchar  ibDayFrom)
+static bool LoadCntDayCan7(uchar  ibDayFrom)
 {
   return LoadBuff(EXT_7_DAY_VALUES + ibDayFrom*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
 }
 
 
-static boolean LoadCntDayCanBuff7(uchar  ibDayFrom)
+static bool LoadCntDayCanBuff7(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
     memcpy(mpCntDayCan7Buff, mpCntDayCan7, sizeof(mpCntDayCan7));
-    return TRUE;
+    return true;
   }
   else
   {

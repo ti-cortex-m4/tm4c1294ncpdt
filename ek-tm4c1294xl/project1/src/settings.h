@@ -18,8 +18,8 @@ extern  file const              flSetPassword;
 void    InitSettings(void);
 void    ResetSettings(bool  fFullReset);
 
-boolean SavePrivate(void);
-boolean LoadPrivate(void);
+bool SavePrivate(void);
+bool LoadPrivate(void);
 
-boolean SaveGlobal(void);
-boolean LoadGlobal(void);
+bool SaveGlobal(void);
+bool LoadGlobal(void);

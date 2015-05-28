@@ -13,98 +13,98 @@ ENERGY3.C
 
 
 
-boolean SaveImpHouBuff(void) {
+bool SaveImpHouBuff(void) {
   return SaveBuff(IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
 }
 
-boolean CleanImpHouBuff(void) {
+bool CleanImpHouBuff(void) {
   return CleanBuff(IMPHOUCAN_BUFF, sizeof(uint)*bCANALS);
 }
 
-boolean LoadImpHouBuff(void) {
+bool LoadImpHouBuff(void) {
   return LoadBuff(IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
 }
 
 
 
-boolean SaveImpDayBuff(void) {
+bool SaveImpDayBuff(void) {
   return SaveBuff(IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
 }
 
-boolean CleanImpDayBuff(void) {
+bool CleanImpDayBuff(void) {
   return CleanBuff(IMPDAYCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
-boolean LoadImpDayBuff(void) {
+bool LoadImpDayBuff(void) {
   return LoadBuff(IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
 }
 
 
 
-boolean SaveImpMonBuff(void) {
+bool SaveImpMonBuff(void) {
   return SaveBuff(IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
 }
 
-boolean CleanImpMonBuff(void) {
+bool CleanImpMonBuff(void) {
   return CleanBuff(IMPMONCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
-boolean LoadImpMonBuff(void) {
+bool LoadImpMonBuff(void) {
   return LoadBuff(IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
 }
 
 
 
-boolean SaveImpAbsBuff(void) {
+bool SaveImpAbsBuff(void) {
   return SaveBuff(IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
 }
 
-boolean CleanImpAbsBuff(void) {
+bool CleanImpAbsBuff(void) {
   return CleanBuff(IMPABSCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
-boolean LoadImpAbsBuff(void) {
+bool LoadImpAbsBuff(void) {
   return LoadBuff(IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
 }
 
 
 
-boolean SavePowDayBuff(void) {
+bool SavePowDayBuff(void) {
   return SaveBuff(POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
 }
 
-boolean CleanPowDayBuff(void) {
+bool CleanPowDayBuff(void) {
   return CleanBuff(POWDAYGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
-boolean LoadPowDayBuff(void) {
+bool LoadPowDayBuff(void) {
   return LoadBuff(POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
 }
 
 
 
-boolean SavePowMonBuff(void) {
+bool SavePowMonBuff(void) {
   return SaveBuff(POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
 }
 
-boolean CleanPowMonBuff(void) {
+bool CleanPowMonBuff(void) {
   return CleanBuff(POWMONGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
-boolean LoadPowMonBuff(void) {
+bool LoadPowMonBuff(void) {
   return LoadBuff(POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
 }
 
 
 
-boolean SaveCntMonBuff(void) {
+bool SaveCntMonBuff(void) {
   return SaveBuff(CNTMONCAN_BUFF, mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
 }
 
-boolean CleanCntMonBuff(void) {
+bool CleanCntMonBuff(void) {
   return CleanBuff(CNTMONCAN_BUFF, sizeof(double)*bCANALS);
 }
 
-boolean LoadCntMonBuff(void) {
+bool LoadCntMonBuff(void) {
   return LoadBuff(CNTMONCAN_BUFF, mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
 }

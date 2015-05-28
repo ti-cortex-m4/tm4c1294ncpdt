@@ -20,10 +20,10 @@ file const              flObjectName = {OBJECT_NAME, &szObjectName, sizeof(szObj
 file const              flCanalsName = {CANALS_NAME, &mpszCanalsName, sizeof(mpszCanalsName)};
 file const              flGroupsName = {GROUPS_NAME, &mpszGroupsName, sizeof(mpszGroupsName)};
 
-file const              flStrictUni = {STRICT_UNI, &boStrictUni, sizeof(boolean)};
+file const              flStrictUni = {STRICT_UNI, &boStrictUni, sizeof(bool)};
 file const              flMaxDelayUni = {MAX_DELAY_UNI, &bMaxDelayUni, sizeof(uchar)};
-file const              flRepeatFlowUni = {REPEAT_FLOW_INI, &boRepeatFlowUni, sizeof(boolean)};
-file const              flEnblPasswUni = {ENBL_PASS_INI, &boEnblPassUni, sizeof(boolean)};
+file const              flRepeatFlowUni = {REPEAT_FLOW_INI, &boRepeatFlowUni, sizeof(bool)};
+file const              flEnblPasswUni = {ENBL_PASS_INI, &boEnblPassUni, sizeof(bool)};
 
 
 
@@ -80,16 +80,16 @@ void    ResetUni(void)
   SaveFile(&flGroupsName);
 
 
-  boStrictUni = TRUE;
+  boStrictUni = true;
   SaveFile(&flStrictUni);
 
   bMaxDelayUni = 60;
   SaveFile(&flMaxDelayUni);
 
-  boRepeatFlowUni = FALSE;
+  boRepeatFlowUni = false;
   SaveFile(&flRepeatFlowUni);
 
-  boEnblPassUni = TRUE;
+  boEnblPassUni = true;
   SaveFile(&flEnblPasswUni);
 }
 

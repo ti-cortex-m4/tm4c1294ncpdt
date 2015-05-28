@@ -37,4 +37,4 @@ uchar   GetBreakKeyIndex(uchar  ibBreak);
 void    ShowZoneAltBreak(uchar  ibBreak);
 void    ShowZoneKeyBreak(uchar  ibBreak);
 
-boolean TrueZone(zone  *pzo);
+bool TrueZone(zone  *pzo);
