@@ -29,8 +29,6 @@ static char const       szNone[]        = "*    пусто      ",
 
 void    ShowCntMonCanF(bool  fShowValue)
 {
-  Clear();
-
   switch (bStatus4)
   {
     case ST4_NONE:         ShowLo(szNone);         break;
@@ -39,7 +37,7 @@ void    ShowCntMonCanF(bool  fShowValue)
     case ST4_BADFLASH:     ShowLo(szBadFlash);     break;
     case ST4_MODEM_LINK:   ShowLo(szModemLink);    break;
     case ST4_DISABLED:     ShowLo(szDisabled);     break;
-    default:               sprintf(szLo, "*  ошибка: %02X", bStatus4); break;
+    default:               Clear(); sprintf(szLo, "*  ошибка: %02X", bStatus4); break;
   }  
 }
 
