@@ -130,6 +130,68 @@ void    Response1_CRC(void)
       case bINQ_RESPONSE_254: Response254_CRC(); break;
       case bINQ_RESPONSE_255: Response255_CRC(); break;
 
+#if false
+      case 250:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = (tiSetRTC.bMinute/3)*3 + 2;
+
+        SetCurrTimeDate();
+        Common(GetCurrTimeDate(), sizeof(time));
+        break;
+
+      case 230:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = (tiSetRTC.bMinute/15)*15 + 14;
+
+        SetCurrTimeDate();
+        Common(GetCurrTimeDate(), sizeof(time));
+        break;
+
+      case 251:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = (tiSetRTC.bMinute/30)*30 + 29;
+
+        SetCurrTimeDate();
+        Common(GetCurrTimeDate(), sizeof(time));
+        break;
+
+      case 252:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = 59;
+        tiSetRTC.bHour   = 23;
+
+        SetCurrTimeDate();
+        Common(GetCurrTimeDate(), sizeof(time));
+        break;
+
+      case 253:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = 59;
+        tiSetRTC.bHour   = 23;
+        tiSetRTC.bDay    = DaysInMonth();
+
+        SetCurrTimeDate();
+        Common(GetCurrTimeDate(), sizeof(time));
+        break;
+
+      case 254:
+        tiSetRTC = *PGetCurrTimeDate();
+        tiSetRTC.bSecond = 58;
+        tiSetRTC.bMinute = 59;
+        tiSetRTC.bHour   = 23;
+        tiSetRTC.bDay    = 31;
+        tiSetRTC.bMonth  = 12;
+
+        SetCurrTimeDate();
+        Common(GetCurrTimeDate(), sizeof(time));
+        break;
+#endif
+
       default:
         ShowTestResponse(bSTA_BADCOMMAND);
         Result(bRES_BADCOMMAND);
