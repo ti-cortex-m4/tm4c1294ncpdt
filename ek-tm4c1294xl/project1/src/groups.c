@@ -85,20 +85,20 @@ uchar   i,j;
 
 
 
-bool SaveGroups(void)
+bool    SaveGroups(void)
 {
   return SaveFile(&flGroups);
 }
 
 
-bool LoadGroups(void)
+bool    LoadGroups(void)
 {
   return LoadFile(&flGroups);
 }
 
 
 
-bool    TrueGroup(group  *pgr)
+bool    ValidGroup(group  *pgr)
 {
   uchar i;
   for (i=0; i<pgr->bSize; i++)
