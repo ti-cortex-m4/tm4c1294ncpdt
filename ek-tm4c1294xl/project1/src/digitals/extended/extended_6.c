@@ -88,7 +88,7 @@ void    NextMonExtended6(void)
 { 
   cwMonCan6++;
 
-  memset(&mpCntMonCan6, 0, sizeof(mpCntDayCan6));
+  memset(&mpCntMonCan6, 0, sizeof(mpCntMonCan6));
   SaveCntMonCan6(ibHardMon);
 }
 
