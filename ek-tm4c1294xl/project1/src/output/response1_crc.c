@@ -28,6 +28,8 @@ RESPONSE1_CRC.C
 #include "response253_crc.h"
 #include "response254_crc.h"
 #include "response255_crc.h"
+#include "../time/rtc.h"
+#include "../time/calendat.h"
 
 
 
@@ -125,70 +127,82 @@ void    Response1_CRC(void)
 
       case bINQ_GETCONFIG: OutGetConfig(); break;
 
-      case bINQ_RESPONSE_252: Response252_CRC(); break;
-      case bINQ_RESPONSE_253: Response253_CRC(); break;
-      case bINQ_RESPONSE_254: Response254_CRC(); break;
+//      case bINQ_RESPONSE_252: Response252_CRC(); break;
+//      case bINQ_RESPONSE_253: Response253_CRC(); break;
+//      case bINQ_RESPONSE_254: Response254_CRC(); break;
       case bINQ_RESPONSE_255: Response255_CRC(); break;
 
-#if false
+#if true
       case 250:
-        tiSetRTC = *PGetCurrTimeDate();
-        tiSetRTC.bSecond = 58;
-        tiSetRTC.bMinute = (tiSetRTC.bMinute/3)*3 + 2;
+        {
+          time ti = *GetCurrTimeDate();
+          ti.bSecond = 58;
+          ti.bMinute = (ti.bMinute/3)*3 + 2;
 
-        SetCurrTimeDate();
-        Common(GetCurrTimeDate(), sizeof(time));
+          SetCurrTimeDate(ti);
+          Common(GetCurrTimeDate(), sizeof(time));
+        }
         break;
 
       case 230:
-        tiSetRTC = *PGetCurrTimeDate();
-        tiSetRTC.bSecond = 58;
-        tiSetRTC.bMinute = (tiSetRTC.bMinute/15)*15 + 14;
+        {
+          time ti = *GetCurrTimeDate();
+          ti.bSecond = 58;
+          ti.bMinute = (ti.bMinute/15)*15 + 14;
 
-        SetCurrTimeDate();
-        Common(GetCurrTimeDate(), sizeof(time));
+          SetCurrTimeDate(ti);
+          Common(GetCurrTimeDate(), sizeof(time));
+        }
         break;
 
       case 251:
-        tiSetRTC = *PGetCurrTimeDate();
-        tiSetRTC.bSecond = 58;
-        tiSetRTC.bMinute = (tiSetRTC.bMinute/30)*30 + 29;
+        {
+          time ti = *GetCurrTimeDate();
+          ti.bSecond = 58;
+          ti.bMinute = (ti.bMinute/30)*30 + 29;
 
-        SetCurrTimeDate();
-        Common(GetCurrTimeDate(), sizeof(time));
+          SetCurrTimeDate(ti);
+          Common(GetCurrTimeDate(), sizeof(time));
+        }
         break;
 
       case 252:
-        tiSetRTC = *PGetCurrTimeDate();
-        tiSetRTC.bSecond = 58;
-        tiSetRTC.bMinute = 59;
-        tiSetRTC.bHour   = 23;
+        {
+          time ti = *GetCurrTimeDate();
+          ti.bSecond = 58;
+          ti.bMinute = 59;
+          ti.bHour   = 23;
 
-        SetCurrTimeDate();
-        Common(GetCurrTimeDate(), sizeof(time));
+          SetCurrTimeDate(ti);
+          Common(GetCurrTimeDate(), sizeof(time));
+        }
         break;
 
       case 253:
-        tiSetRTC = *PGetCurrTimeDate();
-        tiSetRTC.bSecond = 58;
-        tiSetRTC.bMinute = 59;
-        tiSetRTC.bHour   = 23;
-        tiSetRTC.bDay    = DaysInMonth();
+        {
+          time ti = *GetCurrTimeDate();
+          ti.bSecond = 58;
+          ti.bMinute = 59;
+          ti.bHour   = 23;
+          ti.bDay    = DaysInMonth();
 
-        SetCurrTimeDate();
-        Common(GetCurrTimeDate(), sizeof(time));
+          SetCurrTimeDate(ti);
+          Common(GetCurrTimeDate(), sizeof(time));
+        }
         break;
 
       case 254:
-        tiSetRTC = *PGetCurrTimeDate();
-        tiSetRTC.bSecond = 58;
-        tiSetRTC.bMinute = 59;
-        tiSetRTC.bHour   = 23;
-        tiSetRTC.bDay    = 31;
-        tiSetRTC.bMonth  = 12;
+        {
+          time ti = *GetCurrTimeDate();
+          ti.bSecond = 58;
+          ti.bMinute = 59;
+          ti.bHour   = 23;
+          ti.bDay    = 31;
+          ti.bMonth  = 12;
 
-        SetCurrTimeDate();
-        Common(GetCurrTimeDate(), sizeof(time));
+          SetCurrTimeDate(ti);
+          Common(GetCurrTimeDate(), sizeof(time));
+        }
         break;
 #endif
 
