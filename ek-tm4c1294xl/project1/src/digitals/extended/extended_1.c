@@ -194,14 +194,13 @@ void    MakeExtended1(void)
         {
           ResetWDT();
           double db = mpdbChannelsC[diPrev.ibLine];
-          reBuffA = DoubleToFloat(db);
           mpcwEscS_OK[c]++;
 
-          mpreEsc_S[c] = reBuffA;
+          mpreEsc_S[c] = DoubleToFloat(db);
           mptiEsc_S[c] = *GetCurrTimeDate();
 
           MakeExtended6(c, db);
-          MakeExtended7(c, reBuffA);
+          MakeExtended7(c, db);
 //          MakeDiagram(c);
 
           mpboDefEscS[c] = true;

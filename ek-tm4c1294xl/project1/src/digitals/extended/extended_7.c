@@ -100,13 +100,13 @@ void    CloseExtended7(void)
 
 
 
-void    MakeExtended7(uchar  ibCan, real  re)
+void    MakeExtended7(uchar  ibCan, double  db)
 {
   if (mpCntDayCan7[ibCan].bStatus == ST4_NONE)
   {
     value6 va;
     va.bStatus = ST4_OK;
-    va.dbValue = re;
+    va.dbValue = db;
     va.tiUpdate = *GetCurrTimeDate();
 
     mpCntDayCan7[ibCan] = va;
