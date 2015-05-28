@@ -212,7 +212,7 @@ void    OutExtended43(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      wSize += PushChar(mpboExt4EnblCan[c]);
+      wSize += PushBool(mpboExt4EnblCan[c]);
     }
   }
 

@@ -24,7 +24,7 @@ void    OutStartCan(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushChar(mpboStartCan[c]);
+      PushBool(mpboStartCan[c]);
       PushInt(mpcwStopCan[c]);
       PushInt(mpcwStartRelCan[c]);
       PushInt(mpcwStartAbs16Can[c]);

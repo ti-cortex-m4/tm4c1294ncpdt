@@ -92,7 +92,7 @@ void    OutFloatCanMap(real  *mpe)
 }
 
 
-void    OutIntCanMap(uint  *mpw)
+void    OutIntCanExt(uint  *mpw)
 {
   InitPushPtr();
   uint wSize = 0;
@@ -128,7 +128,7 @@ void    OutCharCanMap(uchar  *mpb)
 }
 
 
-void    OutBoolCanMap(bool  *mpf)
+void    OutBoolCanExt(bool  *mpf)
 {
   InitPushPtr();
   uint wSize = 0;
@@ -138,7 +138,7 @@ void    OutBoolCanMap(bool  *mpf)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      wSize += PushChar(mpf[c]);
+      wSize += PushBool(mpf[c]);
     }
   }
 

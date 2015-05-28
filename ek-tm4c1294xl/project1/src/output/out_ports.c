@@ -39,10 +39,10 @@ uchar i;
     PushChar(mpSerial[i]);
 
   for (i=0; i<bPORTS; i++)
-    PushChar(mpboLocal[i]);
+    PushBool(mpboLocal[i]);
 
   for (i=0; i<bPORTS; i++)
-    PushChar(mpboLocalDisable[i]);
+    PushBool(mpboLocalDisable[i]);
 
   PushInt(GetCurr());
   PushInt(GetPause());
