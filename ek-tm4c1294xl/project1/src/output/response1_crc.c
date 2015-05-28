@@ -29,7 +29,7 @@ RESPONSE1_CRC.C
 #include "response254_crc.h"
 #include "response255_crc.h"
 #include "../time/rtc.h"
-#include "../time/calendat.h"
+#include "../time/timedate.h"
 
 
 
@@ -127,9 +127,9 @@ void    Response1_CRC(void)
 
       case bINQ_GETCONFIG: OutGetConfig(); break;
 
-//      case bINQ_RESPONSE_252: Response252_CRC(); break;
-//      case bINQ_RESPONSE_253: Response253_CRC(); break;
-//      case bINQ_RESPONSE_254: Response254_CRC(); break;
+      case bINQ_RESPONSE_252: Response252_CRC(); break;
+      case bINQ_RESPONSE_253: Response253_CRC(); break;
+      case bINQ_RESPONSE_254: Response254_CRC(); break;
       case bINQ_RESPONSE_255: Response255_CRC(); break;
 
 #if true
@@ -184,7 +184,7 @@ void    Response1_CRC(void)
           ti.bSecond = 58;
           ti.bMinute = 59;
           ti.bHour   = 23;
-          ti.bDay    = DaysInMonth();
+          ti.bDay    = GetDaysInMonthYM(ti.bYear, ti.bMonth);
 
           SetCurrTimeDate(ti);
           Common(GetCurrTimeDate(), sizeof(time));
