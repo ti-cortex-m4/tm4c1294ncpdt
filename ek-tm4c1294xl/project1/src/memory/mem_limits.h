@@ -4,7 +4,7 @@ MEM_LIMITS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 boUseBounds;
+extern  bool                 boUseBounds;
 
 extern  uint                    mpcwStartRelCan[bCANALS];
 
@@ -12,7 +12,7 @@ extern  uint                    mpcwStartAbs16Can[bCANALS];
 
 extern  ulong                   mpcdwStartAbs32Can[bCANALS];
 
-extern  boolean                 mpboStartCan[bCANALS];
+extern  bool                 mpboStartCan[bCANALS];
 
 extern  uint                    mpcwStopCan[bCANALS];
 

@@ -27,9 +27,9 @@ void    NextSecond(void)
     {
       if ((tiCurr.bMinute % 30)*60 + tiCurr.bSecond >= bTimeoutProfile)
       {
-        boManualProfile = FALSE;
+        boManualProfile = false;
         fProfile = 0;
-        RunProfile((boControlTime == TRUE) && (ControlTime() == 1));
+        RunProfile((boControlTime == true) && (ControlTime() == 1));
       }
     }
   }

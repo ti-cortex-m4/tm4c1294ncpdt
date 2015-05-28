@@ -25,7 +25,7 @@ static void Show(uchar  ibCan)
   Clear();
   sprintf(szLo+14,"%2u",ibCan+1);
 
-  if (mpboEnblCan[ibCan] == FALSE)
+  if (mpboEnblCan[ibCan] == false)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);

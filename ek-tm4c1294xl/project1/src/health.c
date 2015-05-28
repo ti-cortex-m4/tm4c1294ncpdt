@@ -7,5 +7,5 @@ HEALTH.C
 #include "main.h"
 
 
-boolean                 boHealthLabelRTC = UNDEFINED;
-boolean                 boHealthTimeRTC = UNDEFINED;
+bool                 boHealthLabelRTC = UNDEFINED;
+bool                 boHealthTimeRTC = UNDEFINED;

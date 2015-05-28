@@ -44,7 +44,7 @@ time    ti;
       Push(&ti, sizeof(time));
       w += sizeof(time);
 
-      if (LoadImpHouFree((wHOURS+iwHardHou-iwHou) % wHOURS) == FALSE) break; // TODO
+      if (LoadImpHouFree((wHOURS+iwHardHou-iwHou) % wHOURS) == false) break; // TODO
       else
       {
         for (c=0; c<bCANALS; c++)

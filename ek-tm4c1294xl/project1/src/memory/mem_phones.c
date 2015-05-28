@@ -15,7 +15,7 @@ phone                   mpphPhones[bCANALS];
 uchar                   bMaxConnect;
 
 // флаг управления модемом: настройки 2
-boolean                 boCustomModem;
+bool                 boCustomModem;
 
 // счётчики для контроля работы модемной связи
 uint                    mpcwBaud[bPORTS],

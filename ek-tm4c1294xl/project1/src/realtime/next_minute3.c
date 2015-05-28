@@ -48,7 +48,7 @@ void    NextMinute3(void)
 
   SaveTimeCurr(); // TODO another place
 
-  if (boMntParams == TRUE) NextParamsTime();
+  if (boMntParams == true) NextParamsTime();
 }
 
 

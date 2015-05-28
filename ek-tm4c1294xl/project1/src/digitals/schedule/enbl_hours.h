@@ -4,6 +4,6 @@ ENBL_HOURS.H
 
 ------------------------------------------------------------------------------*/
 
-void    SetEnblPrtHou(uchar  ibPrt, uchar  ibHou, boolean  bo);
-boolean GetEnblPrtHou(uchar  ibPrt, uchar  ibHou);
+void    SetEnblPrtHou(uchar  ibPrt, uchar  ibHou, bool  bo);
+bool GetEnblPrtHou(uchar  ibPrt, uchar  ibHou);
 

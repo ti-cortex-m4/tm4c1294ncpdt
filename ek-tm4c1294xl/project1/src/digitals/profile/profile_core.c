@@ -13,8 +13,8 @@ PROFILE_CORE.C
 
 file const              flEnblCan = {ENBL_CAN, &mpboEnblCan, sizeof(mpboEnblCan)};
 
-file const              flEnblCurrent = {ENBL_CURRENT, &boEnblCurrent, sizeof(boolean)};
-file const              flEnblProfile = {ENBL_PROFILE, &boEnblProfile, sizeof(boolean)};
+file const              flEnblCurrent = {ENBL_CURRENT, &boEnblCurrent, sizeof(bool)};
+file const              flEnblProfile = {ENBL_PROFILE, &boEnblProfile, sizeof(bool)};
 
 file const              flTimeoutCurrent = {TIMEOUT_CURRENT, &bTimeoutCurrent, sizeof(uchar)};
 file const              flTimeoutProfile = {TIMEOUT_PROFILE, &bTimeoutProfile, sizeof(uchar)};
@@ -38,14 +38,14 @@ void    ResetProfile(void)
 {
   uchar c;
   for (c=0; c<bCANALS; c++)
-    mpboEnblCan[c] = TRUE;
+    mpboEnblCan[c] = true;
 
   SaveFile(&flEnblCan);
 
-  boEnblCurrent = FALSE;
+  boEnblCurrent = false;
   SaveFile(&flEnblCurrent);
 
-  boEnblProfile = TRUE;
+  boEnblProfile = true;
   SaveFile(&flEnblProfile);
 
   bTimeoutCurrent = 2;

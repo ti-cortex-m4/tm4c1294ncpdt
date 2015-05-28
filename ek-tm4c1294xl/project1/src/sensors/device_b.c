@@ -68,7 +68,7 @@ void    QueryOpenB(void)
 
   PushChar(bKeysLevelB);
 
-  if (boEnblKeys != TRUE)
+  if (boEnblKeys != true)
   {
     PushChar(2);
     PushChar(2);
@@ -122,7 +122,7 @@ void    ReadVersionB(void)
   
   Clear();
   sprintf(szLo+1, "версия %u.%u.%u", bVersionB1, bVersionB2, bVersionB3);
-  (boShowMessages == TRUE) ? DelayMsg() : DelayInf();
+  (boShowMessages == true) ? DelayMsg() : DelayInf();
 }
 
 
@@ -320,20 +320,20 @@ void    ReadTopBOld(void)
   }
   else 
   {
-    if (mpboStartCan[ibDig] == FALSE) 
+    if (mpboStartCan[ibDig] == false) 
     {
       wBaseCurr = InBuff(1)*0x100 + InBuff(2);
-      if (boShowMessages == TRUE) sprintf(szLo,"  начало %04X * ",wBaseCurr);
+      if (boShowMessages == true) sprintf(szLo,"  начало %04X * ",wBaseCurr);
       ResetLimitsAux(ibDig);
     }
     else 
     {
       wBaseCurr = mpcwStartAbs16Can[ibDig];
-      if (boShowMessages == TRUE) sprintf(szLo,"  начало %04X   ",wBaseCurr);
+      if (boShowMessages == true) sprintf(szLo,"  начало %04X   ",wBaseCurr);
       iwMajor = wBaseCurr; AddDigRecord(EVE_PREVIOUS_TOP);
     }
 
-    if (boShowMessages == TRUE) DelayMsg();
+    if (boShowMessages == true) DelayMsg();
   }
 
   // индекс по получасовому массиву
@@ -498,7 +498,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 
   MakeRefillWinter(tiAlt);
   MakeSpecial();
-  if (boDsblRefill == FALSE) MakeRefill(tiAlt);
+  if (boDsblRefill == false) MakeRefill(tiAlt);
   return(MakeStopHou(0));  
 }
 

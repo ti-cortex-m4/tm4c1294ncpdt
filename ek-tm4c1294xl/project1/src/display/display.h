@@ -37,7 +37,7 @@ void    ShowFloat(float  fl);
 void    ShowDouble(double  db);
 
 void    ShowBool(bool  bo);
-void    ShowBoolean(boolean  bo);
+void    ShowBoolean(bool  bo);
 void    ShowAnswer(void);
 void    ShowPercent(uchar  bT);
 void    ShowProgress(uchar  ibPos, uchar  bT);

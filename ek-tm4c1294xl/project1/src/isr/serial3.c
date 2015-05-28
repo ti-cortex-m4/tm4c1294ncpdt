@@ -150,7 +150,7 @@ uint32_t ui32Status;
             InputMode3();                       // передача с ответом
             mpSerial[3] = SER_BEGIN;            // начинаем приём
 
-            mpboLocal[3] = TRUE;
+            mpboLocal[3] = true;
           }
           else
           if (cwInBuff3 == SERIAL_MODEM)
@@ -419,7 +419,7 @@ void    InitSerial3(void)
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) |= 0x0040; // GPIO Direction
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x0040; // GPIO Digital Enable
 
-  mpboLocal[3] = FALSE;
+  mpboLocal[3] = false;
 
   InputMode3();
   DTROff3();

@@ -13,7 +13,7 @@ LIMITS.C
 
 
 
-file const              flUseBounds = {USE_BOUNDS, &boUseBounds, sizeof(boolean)};
+file const              flUseBounds = {USE_BOUNDS, &boUseBounds, sizeof(bool)};
 
 file const              flStartRelCan = {START_REL_CAN, &mpcwStartRelCan, sizeof(mpcwStartRelCan)};
 file const              flStartAbs16Can = {START_ABS16_CAN, &mpcwStartAbs16Can, sizeof(mpcwStartAbs16Can)};
@@ -40,7 +40,7 @@ void    InitLimits(void)
 void    ResetLimits(void)
 {
 
-	boUseBounds = TRUE;
+	boUseBounds = true;
   SaveFile(&flUseBounds);
 
   uchar c;
@@ -49,7 +49,7 @@ void    ResetLimits(void)
     mpcwStartRelCan[c] = 0;
     mpcwStartAbs16Can[c] = 0;
     mpcdwStartAbs32Can[c] = 0;
-    mpboStartCan[c] = FALSE;
+    mpboStartCan[c] = false;
     mpcwStopCan[c] = wHOURS_62-1; // самый старый получас
     mpcwStopAuxCan[c] = 0;
   }
@@ -66,7 +66,7 @@ void    ResetLimits(void)
 
 bool    UseBounds(void)
 {
-  return boUseBounds == TRUE;
+  return boUseBounds == true;
 }
 
 
@@ -109,7 +109,7 @@ void    NewBoundsAbs16(uint  wAbs)
     LoadPrevDigital(c);
     if (CompareCurrPrevLines(ibDig, c) == true)
     { 
-      mpboStartCan[c] = TRUE;
+      mpboStartCan[c] = true;
       mpcwStartAbs16Can[c] = wAbs;
     } 
   }
@@ -129,7 +129,7 @@ void    NewBoundsAbs32(ulong  dwAbs)
     LoadPrevDigital(c);
     if (CompareCurrPrevLines(ibDig, c) == true)
     { 
-      mpboStartCan[c] = TRUE;
+      mpboStartCan[c] = true;
       mpcdwStartAbs32Can[c] = dwAbs;
     } 
   }
@@ -152,7 +152,7 @@ void    NewLimits(void)
       mpcwStartRelCan[c] = 0;
       mpcwStartAbs16Can[c] = 0;
       mpcdwStartAbs32Can[c] = 0;
-      mpboStartCan[c] = FALSE;
+      mpboStartCan[c] = false;
 
       if (UseBounds() && IsLimitsAux(GetDigitalDevice(c)))
       {

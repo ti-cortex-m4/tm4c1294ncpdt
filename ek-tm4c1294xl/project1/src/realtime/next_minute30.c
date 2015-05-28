@@ -40,5 +40,5 @@ void    NextMinute30(void)
   MakeLimits();
   NextHouLimitsAux();
 
-  if (boMntParams == FALSE) NextParamsTime();
+  if (boMntParams == false) NextParamsTime();
 }

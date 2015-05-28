@@ -4,7 +4,7 @@ MEM_PROFILE.H
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 boManualProfile;
+extern  bool                 boManualProfile;
 
 extern  uint                    cwHouRead;
 

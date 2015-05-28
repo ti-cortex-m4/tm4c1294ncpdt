@@ -38,7 +38,7 @@ void    OutFlashPage(void) {
   } else if (bInBuff5*0x100 + bInBuff6 <= END) {
     wPageIn = bInBuff5*0x100 + bInBuff6;
 
-    if (SafePageRead() == TRUE)
+    if (SafePageRead() == true)
       Outptr(&mpbPageIn, wPAGE_SIZE);
     else
       Result(bRES_BADFLASH);

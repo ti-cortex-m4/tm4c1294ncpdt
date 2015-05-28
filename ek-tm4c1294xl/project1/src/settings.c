@@ -14,18 +14,18 @@ SETTINGS.C
 
 file const              flLogical = {LOGICAL, &bLogical, sizeof(uchar)};
 
-file const              flFirstReset = {FIRST_RESET, &boFirstReset, sizeof(boolean)};
+file const              flFirstReset = {FIRST_RESET, &boFirstReset, sizeof(bool)};
 
-file const              flSetTime = {SET_TIME, &boSetTime, sizeof(boolean)};
-file const              flSetDate = {SET_DATE, &boSetDate, sizeof(boolean)};
-file const              flSetGroups = {SET_GROUPS, &boSetGroups, sizeof(boolean)};
-file const              flSetPassword = {SET_PASSWORD, &boSetPassword, sizeof(boolean)};
+file const              flSetTime = {SET_TIME, &boSetTime, sizeof(bool)};
+file const              flSetDate = {SET_DATE, &boSetDate, sizeof(bool)};
+file const              flSetGroups = {SET_GROUPS, &boSetGroups, sizeof(bool)};
+file const              flSetPassword = {SET_PASSWORD, &boSetPassword, sizeof(bool)};
 
 
 
 void    InitSettings(void)
 {
-  if (LoadPrivate() == FALSE)
+  if (LoadPrivate() == false)
   {
     wPrivate = 1;
     SavePrivate();
@@ -57,40 +57,40 @@ void    ResetSettings(bool  fFull)
     SaveFile(&flLogical);
   }
 
-  boFirstReset = FALSE;
+  boFirstReset = false;
   SaveFile(&flFirstReset);
 
   if (fFull)
   {
-    boSetTime = FALSE;
+    boSetTime = false;
     SaveFile(&flSetTime);
 
-    boSetDate = FALSE;
+    boSetDate = false;
     SaveFile(&flSetDate);
 
-    boSetPassword = TRUE;
+    boSetPassword = true;
     SaveFile(&flSetPassword);
   }
 }
 
 
 
-boolean SavePrivate(void) {
+bool SavePrivate(void) {
 	return SaveBuff(PRIVATE, &wPrivate, sizeof(uint));
 }
 
 
-boolean LoadPrivate(void) {
+bool LoadPrivate(void) {
   return LoadBuff(PRIVATE, &wPrivate, sizeof(uint));
 }
 
 
 // TODO GlobalLabel
-boolean SaveGlobal(void) {
+bool SaveGlobal(void) {
 	return SaveBuff(GLOBAL, &enGlobal, sizeof(global));
 }
 
 
-boolean LoadGlobal(void) {
+bool LoadGlobal(void) {
   return LoadBuff(GLOBAL, &enGlobal, sizeof(global));
 }

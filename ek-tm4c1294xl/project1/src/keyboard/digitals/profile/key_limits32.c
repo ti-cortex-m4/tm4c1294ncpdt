@@ -29,7 +29,7 @@ void    key_SetLimits32(void)
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boUseBounds == TRUE)
+      if (boUseBounds == true)
       {
         enKeyboard = KBD_INPUT1;
 

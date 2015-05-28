@@ -11,17 +11,17 @@ FILES.H
 
 void    OpenOut(uint  wPage);
 void    ClearOut(void);
-boolean Save(void  *pbBase, uint  wSize);
-boolean Clean(uint  wSize);
-boolean CloseOut(void);
+bool Save(void  *pbBase, uint  wSize);
+bool Clean(uint  wSize);
+bool CloseOut(void);
 
-boolean OpenIn(uint  wPage);
+bool OpenIn(uint  wPage);
 void    ClearIn(void);
-boolean Load(void  *pbBase, uint  wSize);
+bool Load(void  *pbBase, uint  wSize);
 
-boolean SaveBuff(uint wPage, void *pbBuff, uint wSize);
-boolean CleanBuff(uint wPage, uint wSize);
-boolean LoadBuff(uint wPage, void *pbBuff, uint wSize);
+bool SaveBuff(uint wPage, void *pbBuff, uint wSize);
+bool CleanBuff(uint wPage, uint wSize);
+bool LoadBuff(uint wPage, void *pbBuff, uint wSize);
 
-boolean SaveFile(file const *pfl);
-boolean LoadFile(file const *pfl);
+bool SaveFile(file const *pfl);
+bool LoadFile(file const *pfl);

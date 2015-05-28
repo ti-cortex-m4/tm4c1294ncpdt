@@ -21,7 +21,7 @@ REFILL.C
 
 
 // запрет очистки неинициализованных получасовых графиков
-boolean                 boDsblRefill;
+bool                 boDsblRefill;
 
 // переменные для заполнения пропущенных получасов
 static uint             iwBmin, iwBmax;
@@ -30,7 +30,7 @@ static uint             iwBmin, iwBmax;
 static uchar            bRefillWinter, mpbRefillWinter[10];
 
 
-file const              flDsblRefill = {DSBL_REFILL, &boDsblRefill, sizeof(boolean)};
+file const              flDsblRefill = {DSBL_REFILL, &boDsblRefill, sizeof(bool)};
 
 
 
@@ -42,7 +42,7 @@ void    InitRefill(void)
 
 void    ResetRefill(void)
 {
-	boDsblRefill = FALSE;
+	boDsblRefill = false;
   SaveFile(&flDsblRefill);
 }
 

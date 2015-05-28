@@ -38,12 +38,12 @@ static void ShowParamCurr(void)
     ShowLo(szNoParam);
   else
   {
-    boBeginParam = FALSE;
+    boBeginParam = false;
 
     LoadCurrParam(iwPrm);
     ibPort = diCurr.ibPort;
 
-    if (mpboEnblParams[iwPrm] == FALSE)
+    if (mpboEnblParams[iwPrm] == false)
       ShowLo(szBlocked); 
     else if (diCurr.ibPhone != 0)
       ShowLo(szModemLink);
@@ -66,7 +66,7 @@ static void ShowParamBuff(void)
     ShowLo(szNoParam);
   else
   {
-    if (mpboEnblParams[iwPrm] == FALSE)
+    if (mpboEnblParams[iwPrm] == false)
       ShowLo(szBlocked); 
     else
     {
@@ -87,11 +87,11 @@ static void ShowParamFull(void)
     ShowLo(szNoParam);
   else
   {
-    if (mpboEnblParams[iwPrm] == FALSE)
+    if (mpboEnblParams[iwPrm] == false)
       ShowLo(szBlocked); 
     else
     {
-       if (LoadParamsTim((wTIMES + iwHardTim - iwTim) % wTIMES) == TRUE)
+       if (LoadParamsTim((wTIMES + iwHardTim - iwTim) % wTIMES) == true)
        {
          sprintf(szHi+12,"-%03u",iwTim);
 

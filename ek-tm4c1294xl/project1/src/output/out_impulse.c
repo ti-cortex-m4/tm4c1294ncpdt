@@ -87,7 +87,7 @@ void    OutImpDayCanExt(void)
   {
     if (bInBuff6 < bDAYS)
     {
-      if (LoadImpDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == TRUE)
+      if (LoadImpDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == true)
       {
         InitPushPtr();
         uint wSize = 0;
@@ -117,7 +117,7 @@ void    OutImpMonCanExt(void)
   {
     if (bInBuff6 < bMONTHS)
     {
-      if (LoadImpMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == TRUE)
+      if (LoadImpMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == true)
       {
         InitPushPtr();
         uint wSize = 0;

@@ -27,15 +27,15 @@ EXTENDED_1.Ñ
 
 
 
-file const              flDsblEscU = {DSBL_ESC_U, &boDsblEscU, sizeof(boolean)};
-file const              flDsblEscV = {DSBL_ESC_V, &boDsblEscV, sizeof(boolean)};
-file const              flDsblEscS = {DSBL_ESC_S, &boDsblEscS, sizeof(boolean)};
+file const              flDsblEscU = {DSBL_ESC_U, &boDsblEscU, sizeof(bool)};
+file const              flDsblEscV = {DSBL_ESC_V, &boDsblEscV, sizeof(bool)};
+file const              flDsblEscS = {DSBL_ESC_S, &boDsblEscS, sizeof(bool)};
 
-file const              flMntEscS = {MNT_ESC_S, &boMntEscS, sizeof(boolean)};
+file const              flMntEscS = {MNT_ESC_S, &boMntEscS, sizeof(bool)};
 
-file const              flExtendedEscU = {EXTENDED_ESC_U, &boExtendedEscU, sizeof(boolean)};
-file const              flExtendedEscV = {EXTENDED_ESC_V, &boExtendedEscV, sizeof(boolean)};
-file const              flExtendedEscS = {EXTENDED_ESC_S, &boExtendedEscS, sizeof(boolean)};
+file const              flExtendedEscU = {EXTENDED_ESC_U, &boExtendedEscU, sizeof(bool)};
+file const              flExtendedEscV = {EXTENDED_ESC_V, &boExtendedEscV, sizeof(bool)};
+file const              flExtendedEscS = {EXTENDED_ESC_S, &boExtendedEscS, sizeof(bool)};
 
 
 
@@ -64,27 +64,27 @@ void    InitExtended1(void)
 
 void    ResetExtended1(void)
 {
-  boDsblEscU = FALSE;
+  boDsblEscU = false;
   SaveFile(&flDsblEscU);
 
-  boDsblEscV = FALSE;
+  boDsblEscV = false;
   SaveFile(&flDsblEscV);
 
-  boDsblEscS = FALSE;
+  boDsblEscS = false;
   SaveFile(&flDsblEscS);
 
 
-  boMntEscS = FALSE;
+  boMntEscS = false;
   SaveFile(&flMntEscS);
 
 
-  boExtendedEscU = TRUE;
+  boExtendedEscU = true;
   SaveFile(&flExtendedEscU);
 
-  boExtendedEscV = TRUE;
+  boExtendedEscV = true;
   SaveFile(&flExtendedEscV);
 
-  boExtendedEscS = TRUE;
+  boExtendedEscS = true;
   SaveFile(&flExtendedEscS);
 }
 
@@ -92,10 +92,10 @@ void    ResetExtended1(void)
 
 void    MakeExtended1(void)
 {
-  if (boDsblEscU == TRUE) {
+  if (boDsblEscU == true) {
     BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
   }
-  else if (mpboDefEscU[ibDig] == FALSE)
+  else if (mpboDefEscU[ibDig] == false)
   {
     ShowHi(szDirectEscU); Clear();
     sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
@@ -111,14 +111,14 @@ void    MakeExtended1(void)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == true)
       {
-        if (mpboChannelsA[diPrev.ibLine] == TRUE)
+        if (mpboChannelsA[diPrev.ibLine] == true)
         {
           mptiEsc_U1[c] = tiChannelC;
           mpcwEscU_OK[c]++;
 
           mptiEsc_U2[c] = *GetCurrTimeDate();
 
-          mpboDefEscU[c] = TRUE;
+          mpboDefEscU[c] = true;
           //AddDigRecord(EVE_ESC_U_DATA);
         }
         else
@@ -130,10 +130,10 @@ void    MakeExtended1(void)
     }
   }
 
-  if (boDsblEscV == TRUE) {
+  if (boDsblEscV == true) {
     BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
   }
-  else if (mpboDefEscV[ibDig] == FALSE)
+  else if (mpboDefEscV[ibDig] == false)
   {
     ShowHi(szDirectEscV); Clear();
     sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
@@ -150,7 +150,7 @@ void    MakeExtended1(void)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == true)
       {
-        if (mpboChannelsA[diPrev.ibLine] == TRUE)
+        if (mpboChannelsA[diPrev.ibLine] == true)
         {
           reBuffA = DoubleToFloat(mpdbChannelsC[diPrev.ibLine]);
           mpcwEscV_OK[c]++;
@@ -158,7 +158,7 @@ void    MakeExtended1(void)
           mpreEsc_V[c] = reBuffA;
           mptiEsc_V[c] = *GetCurrTimeDate();
 
-          mpboDefEscV[c] = TRUE;
+          mpboDefEscV[c] = true;
           //AddDigRecord(EVE_ESC_V_DATA);
         }
         else
@@ -170,10 +170,10 @@ void    MakeExtended1(void)
     }
   }
 
-  if (boDsblEscS == TRUE) {
+  if (boDsblEscS == true) {
     BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
   }
-  else if (mpboDefEscS[ibDig] == FALSE)
+  else if (mpboDefEscS[ibDig] == false)
   {
     ShowHi(szDirectEscS); Clear();
     sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
@@ -190,7 +190,7 @@ void    MakeExtended1(void)
       LoadPrevDigital(c);
       if (CompareCurrPrevLines(ibDig, c) == true)
       {
-        if (mpboChannelsA[diPrev.ibLine] == TRUE)
+        if (mpboChannelsA[diPrev.ibLine] == true)
         {
           ResetWDT();
           double db = mpdbChannelsC[diPrev.ibLine];
@@ -204,7 +204,7 @@ void    MakeExtended1(void)
           MakeExtended7(c, reBuffA);
 //          MakeDiagram(c);
 
-          mpboDefEscS[c] = TRUE;
+          mpboDefEscS[c] = true;
           //AddDigRecord(EVE_ESC_S_DATA);
         }
         else

@@ -6,6 +6,6 @@ MEM_GROUPS,H
 
 extern  group                   mpgrGroups[bGROUPS];
 
-extern  boolean                 mpboUsedGroups[bGROUPS];
+extern  bool                 mpboUsedGroups[bGROUPS];
 
-extern  boolean                 mpboUsedNodes[bCANALS];
+extern  bool                 mpboUsedNodes[bCANALS];

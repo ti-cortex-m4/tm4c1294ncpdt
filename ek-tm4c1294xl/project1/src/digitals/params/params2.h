@@ -4,7 +4,7 @@ PARAMS2.H
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 boBeginParam;
+extern  bool                 boBeginParam;
 
 
 

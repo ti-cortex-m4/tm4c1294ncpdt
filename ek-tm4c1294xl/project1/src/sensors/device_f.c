@@ -138,7 +138,7 @@ uchar   i;
     PopReal();
 
     SetCanReal(mpreChannelsB, i);
-    mpboChannelsA[i] = TRUE;
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = GetCanReal(&mpreChannelsB, diCurr.ibLine);
@@ -357,7 +357,7 @@ uchar   i;
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines() == 1)
     {
-      mpboReadyCan[ibCan] = TRUE;
+      mpboReadyCan[ibCan] = true;
 
       dwBuffC = mpdwChannelsB[ diPrev.ibLine ];
       mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dwBuffC;

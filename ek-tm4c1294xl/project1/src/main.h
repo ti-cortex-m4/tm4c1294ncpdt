@@ -29,6 +29,10 @@ MAIN,H
 #include "kernel/float.h"
 
 
+
+#define UNDEFINED       0x55
+
+
 // тип 'правило перехода на сезонное время'
 typedef enum
 {

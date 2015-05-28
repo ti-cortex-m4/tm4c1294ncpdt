@@ -9,7 +9,7 @@ MEM_TARIFFS.S
 
 
 // признак использовани€ праздников
-boolean                 boRelaxsFlag;
+bool                 boRelaxsFlag;
 
 // тариф при использовании праздников
 uchar                   ibRelaxsTariff;
@@ -35,7 +35,7 @@ uchar                   mpibPowPrevTariff[48],
                         mpibEngPrevTariff[48];
 
 // признак совмещЄнных/раздельных суточных тарифных графиков за текущий и предыдущий мес€цы
-boolean                 fPublicTariffs, fPublicTariffsPrevMon;
+bool                 fPublicTariffs, fPublicTariffsPrevMon;
 
 // массив символов задани€ тарифных зон по блока и мес€цам (старый вариант)
 period                  mpeTariffPow[12],
@@ -55,7 +55,7 @@ br3ak                   brAlt, brKey;
 
 
 // флаг использовани€ тарифных периодов
-boolean                 boGapsFlag;
+bool                 boGapsFlag;
 
 // массив изломов тарифных периодов
 gaps                    gaGaps;

@@ -9,13 +9,13 @@ MEM_EXTENDED_4.C
 
 
 // глобальная переменная
-boolean                 boExt4Flag;
+bool                 boExt4Flag;
 
 // глобальная переменная
 uchar                   bExt4Months;
 
 // список разрешенных каналов
-boolean                 mpboExt4EnblCan[bCANALS];
+bool                 mpboExt4EnblCan[bCANALS];
 
 // буфер значений счетчиков на начало 12 месяцев
 value6                  mpCntMonCan4[bCANALS];

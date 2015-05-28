@@ -287,7 +287,7 @@ void    Local(void)
 {
   if (mpSerial[ibPort] == SER_LOCAL)
   {
-    if (mpboLocalDisable[ibPort] == TRUE)
+    if (mpboLocalDisable[ibPort] == true)
       mpSerial[ibPort] = SER_BEGIN;
     else
     {
@@ -332,7 +332,7 @@ uchar   i;
   if (StreamPort(diCurr.ibPort) == 0) return(0);
   if (diCurr.ibPhone == 0) return(1); 
 
-  if (mpboEnblCan[ibDig] == FALSE) { ShowLo(szBlockingAll); DelayInf(); return(1); }
+  if (mpboEnblCan[ibDig] == false) { ShowLo(szBlockingAll); DelayInf(); return(1); }
 
   ShowPort(diCurr.ibPort);
   ShowLo(szConnect); DelayInf();
@@ -383,7 +383,7 @@ uchar   i;
   ShowLo(szCommonOK); DelayInf(); mpcwCommon[diCurr.ibPort]++;
 
 
-  if (boCustomModem == TRUE)
+  if (boCustomModem == true)
   {
     for (i=0; i<bMINORREPEATS; i++)
     {

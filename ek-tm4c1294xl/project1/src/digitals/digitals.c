@@ -15,7 +15,7 @@ DIGITALS.C
 
 file const              flDigitals = {DIGITALS, &mpdiDigital, sizeof(mpdiDigital)};
 
-file const              flEnblKeys = {ENBL_KEYS, &boEnblKeys, sizeof(boolean)};
+file const              flEnblKeys = {ENBL_KEYS, &boEnblKeys, sizeof(bool)};
 file const              flKeys = {KEYS, &mpphKeys, sizeof(mpphKeys)};
 
 file const              flAddress1 = {ADDRESS1, &mpdwAddress1, sizeof(mpdwAddress1)};
@@ -42,7 +42,7 @@ void    ResetDigitals(void)
   memset(&mpdiDigital, 0, sizeof(mpdiDigital));
   SaveFile(&flDigitals);
 
-  boEnblKeys = FALSE;
+  boEnblKeys = false;
   SaveFile(&flEnblKeys);
 
 
@@ -87,7 +87,7 @@ bool    CompareCurrPrevLines(uchar  ibDig, uchar  ibCan)
           (diPrev.ibPhone  == diCurr.ibPhone)  &&
           (diPrev.bDevice  == diCurr.bDevice)  &&
           (diPrev.bAddress == diCurr.bAddress) &&
-          ((ibDig == ibCan) || (boSeparateCan == FALSE)) );
+          ((ibDig == ibCan) || (boSeparateCan == false)) );
 }
 
 
@@ -97,7 +97,7 @@ bool    CompareLines(uchar  ibDig, uchar  ibCan)
           (GetDigitalPhone(ibDig)   == GetDigitalPhone(ibCan))  &&
           (GetDigitalDevice(ibDig)  == GetDigitalDevice(ibCan))  &&
           (GetDigitalAddress(ibDig) == GetDigitalAddress(ibCan)) &&
-          ((ibDig == ibCan) || (boSeparateCan == FALSE)) );
+          ((ibDig == ibCan) || (boSeparateCan == false)) );
 }
 
 

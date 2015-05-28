@@ -11,11 +11,11 @@ extern  file const              flTariffsMode;
 extern  file const              flPeriodTariffPow;
 extern  file const              flPeriodTariffEng;
 
-boolean SaveZonesPow(uchar  ibMonth, uchar  ibMode);
-boolean LoadZonesPow(uchar  ibMonth, uchar  ibMode);
+bool SaveZonesPow(uchar  ibMonth, uchar  ibMode);
+bool LoadZonesPow(uchar  ibMonth, uchar  ibMode);
 
-boolean SaveZonesEng(uchar  ibMonth, uchar  ibMode);
-boolean LoadZonesEng(uchar  ibMonth, uchar  ibMode);
+bool SaveZonesEng(uchar  ibMonth, uchar  ibMode);
+bool LoadZonesEng(uchar  ibMonth, uchar  ibMode);
 
 void    InitTariffs(void);
 void    ResetTariffs(void);

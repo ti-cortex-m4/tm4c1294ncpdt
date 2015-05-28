@@ -34,17 +34,17 @@ uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
                         mpcwEscU_OK[bCANALS], mpcwEscU_Error[bCANALS];
 
 // признаки брака непосредственных показаний
-boolean                 mpboDefEscV[bCANALS],
+bool                 mpboDefEscV[bCANALS],
                         mpboDefEscS[bCANALS],
                         mpboDefEscU[bCANALS];
 
 
 
 // флаги запрета опроса показаний
-boolean                 boDsblEscU, boDsblEscV, boDsblEscS;
+bool                 boDsblEscU, boDsblEscV, boDsblEscS;
 
 // флаг
-boolean                 boMntEscS;
+bool                 boMntEscS;
 
 // флаг специальной подготовки данных для Esc-запросов
-boolean                 boExtendedEscU, boExtendedEscV, boExtendedEscS;
+bool                 boExtendedEscU, boExtendedEscV, boExtendedEscS;

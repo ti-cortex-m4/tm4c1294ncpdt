@@ -30,7 +30,7 @@ static void Show(void)
   Clear();
   sprintf(szLo+1,"%02u:%02u", ibY/2, (ibY%2)*30);
 
-  if (GetEnblPrtHou(ibX,ibY) == FALSE)
+  if (GetEnblPrtHou(ibX,ibY) == false)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -108,7 +108,7 @@ void    key_SetEnblHours(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      boolean bo = InvertBoolean(GetEnblPrtHou(ibX,ibY));
+      bool bo = InvertBoolean(GetEnblPrtHou(ibX,ibY));
       SetEnblPrtHou(ibX,ibY,bo);
 
       SaveFile(&flEnblPrtHou);

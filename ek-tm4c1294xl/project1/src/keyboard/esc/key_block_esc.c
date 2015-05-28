@@ -25,9 +25,9 @@ static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
 
 static void Show(void)
 {
-  if (boBlockEsc == FALSE)
+  if (boBlockEsc == false)
     ShowLo(szNo);
-  else if (boBlockEsc == TRUE)
+  else if (boBlockEsc == true)
     ShowLo(szPartial);
   else
     ShowLo(szFull);
@@ -60,12 +60,12 @@ void    key_SetBlockEsc(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {
-        if (boBlockEsc == FALSE)
-          boBlockEsc = TRUE;
-        else if (boBlockEsc == TRUE)
-          boBlockEsc = (boolean)0x55;
+        if (boBlockEsc == false)
+          boBlockEsc = true;
+        else if (boBlockEsc == true)
+          boBlockEsc = (bool)0x55;
         else
-          boBlockEsc = FALSE;
+          boBlockEsc = false;
 
         SaveFile(&flBlockEsc);
         Show();

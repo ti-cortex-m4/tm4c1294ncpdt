@@ -23,9 +23,9 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 
 
-static void Show(boolean  boT)
+static void Show(bool  boT)
 {
-  if (boT == FALSE)
+  if (boT == false)
     strcpy(szLo,szFalse);
   else         
     strcpy(szLo,szTrue);

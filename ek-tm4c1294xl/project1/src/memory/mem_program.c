@@ -9,10 +9,10 @@ MEMORY_PROGRAM.C
 
 
 // флаги задания соответствующих программ
-boolean                 boSetTime,
+bool                 boSetTime,
                         boSetDate,
                         boSetGroups,
                         boSetPassword;
 
 // TODO: SaveFile
-boolean                 boFirstReset;
+bool                 boFirstReset;

@@ -36,7 +36,7 @@ static uchar ibMonMin, ibMonMax;
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boExt4TFlag == TRUE)
+      if (boExt4TFlag == true)
       {
         enKeyboard = KBD_SHOW;
         Clear(); 

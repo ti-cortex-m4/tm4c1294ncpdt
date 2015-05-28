@@ -70,7 +70,7 @@ uchar   i;
         if (LoadConnect(i) == 0) break;
         Clear();
 
-        if (mpboEnblCan[i] == FALSE)
+        if (mpboEnblCan[i] == false)
         { 
           ShowLo(szBlocked); 
           DelayMsg();

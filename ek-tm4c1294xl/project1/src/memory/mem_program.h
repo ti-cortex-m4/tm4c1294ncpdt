@@ -4,9 +4,9 @@ MEMORY_PROGRAM.H
 
 ------------------------------------------------------------------------------*/
 
-extern boolean                 boSetTime,
+extern bool                 boSetTime,
                                boSetDate,
                                boSetGroups,
                                boSetPassword;
 
-extern boolean                 boFirstReset;
+extern bool                 boFirstReset;

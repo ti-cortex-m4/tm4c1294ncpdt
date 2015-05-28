@@ -21,7 +21,7 @@ void    key_RunProfile(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      boManualProfile = TRUE;
+      boManualProfile = true;
       fProfile = 0;
       RunProfile(1);
     }

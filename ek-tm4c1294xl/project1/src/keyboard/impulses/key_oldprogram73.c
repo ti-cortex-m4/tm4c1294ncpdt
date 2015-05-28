@@ -21,7 +21,7 @@ static char const      *pszPowCanAlfa[] = { szPower, szAlfa, szBeta, ""};
 
 static void ShowPowCanHou(void)
 {
-  if (LoadImpHou( (GetDayHouIndex(ibY)+ibZ)%wHOURS ) == TRUE)
+  if (LoadImpHou( (GetDayHouIndex(ibY)+ibZ)%wHOURS ) == true)
   {
     if ((ibY == 0) && (ibZ > GetCurrHouIndex()))
       sprintf(szLo,"         -    ");

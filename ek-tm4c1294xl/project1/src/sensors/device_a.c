@@ -65,7 +65,7 @@ void    QueryOpenA(void)
   PushChar(diCurr.bAddress);         
   PushChar(1);      
 
-  if (boEnblKeys != TRUE)
+  if (boEnblKeys != true)
   {
     PushChar('0');                        
     PushChar('0');         
@@ -261,12 +261,12 @@ void    ReadTopA(void)
   }
   else 
   {
-    if (mpboStartCan[ibDig] == FALSE)
+    if (mpboStartCan[ibDig] == false)
     {
       iwMajor = (InBuff(6)*0x100 + InBuff(7)) / 24;
 
       Clear();
-      if (boShowMessages == TRUE) sprintf(szLo+2,"начало %04X *",iwMajor);
+      if (boShowMessages == true) sprintf(szLo+2,"начало %04X *",iwMajor);
 
       ResetLimitsAux(ibDig);
     }
@@ -275,12 +275,12 @@ void    ReadTopA(void)
       iwMajor = mpcwStartAbs16Can[ibDig];
 
       Clear();
-      if (boShowMessages == TRUE) sprintf(szLo+2,"начало %04X",iwMajor);
+      if (boShowMessages == true) sprintf(szLo+2,"начало %04X",iwMajor);
 
       AddDigRecord(EVE_PREVIOUS_TOP);
     }
 
-    if (boShowMessages == TRUE) DelayMsg();
+    if (boShowMessages == true) DelayMsg();
   }
 
   // адрес заголовка текущего блока

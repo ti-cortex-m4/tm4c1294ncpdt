@@ -69,7 +69,7 @@ status ReadCntMonCanTariffB(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
   for (i=0; i<4; i++) 
   {
     mpdbChannelsC[i] = mpdwChannelsA[i] * flK;
-    mpboChannelsA[i] = TRUE;
+    mpboChannelsA[i] = true;
   }
 
   return ST4_OK;

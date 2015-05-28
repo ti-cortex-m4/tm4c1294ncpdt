@@ -48,7 +48,7 @@ void    ResetPhones(void)
   bMaxConnect = 60;
   SaveFile(&flMaxConnect);
 
-  boCustomModem = FALSE;
+  boCustomModem = false;
   SaveFile(&flCustomModem);
 }
 

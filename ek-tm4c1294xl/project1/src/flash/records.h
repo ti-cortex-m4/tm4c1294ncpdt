@@ -4,9 +4,9 @@ RECORDS.H
 
 ------------------------------------------------------------------------------*/
 
-boolean AddKeyRecord(event  ev);
-boolean AddSysRecord(event  ev);
-boolean AddSysRecordReprogram(event  ev);
-boolean AddDigRecord(event  ev);
-boolean AddImpRecord(event  ev);
-boolean AddModRecord(event  ev);
+bool AddKeyRecord(event  ev);
+bool AddSysRecord(event  ev);
+bool AddSysRecordReprogram(event  ev);
+bool AddDigRecord(event  ev);
+bool AddImpRecord(event  ev);
+bool AddModRecord(event  ev);

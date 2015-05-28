@@ -4,7 +4,7 @@ MEM_TARIFFS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 boRelaxsFlag;
+extern  bool                 boRelaxsFlag;
 
 extern  uchar                   ibRelaxsTariff;
 
@@ -23,7 +23,7 @@ extern  uchar                   mpibPowCurrTariff[48],
 extern  uchar                   mpibPowPrevTariff[48],
                                 mpibEngPrevTariff[48];
 
-extern  boolean                 fPublicTariffs, fPublicTariffsPrevMon;
+extern  bool                 fPublicTariffs, fPublicTariffsPrevMon;
 
 extern  period                  mpeTariffPow[12],
                                 mpeTariffEng[12];
@@ -38,7 +38,7 @@ extern  br3ak                   brAlt, brKey;
 
 
 
-extern  boolean                 boGapsFlag;
+extern  bool                 boGapsFlag;
 
 extern  gaps                    gaGaps;
 

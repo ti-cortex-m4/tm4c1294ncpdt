@@ -22,15 +22,15 @@ extern  uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
                                 mpcwEscS_OK[bCANALS], mpcwEscS_Error[bCANALS],
                                 mpcwEscU_OK[bCANALS], mpcwEscU_Error[bCANALS];
 
-extern  boolean                 mpboDefEscV[bCANALS],
+extern  bool                 mpboDefEscV[bCANALS],
                                 mpboDefEscS[bCANALS],
                                 mpboDefEscU[bCANALS];
 
 
 
-extern  boolean                 boDsblEscU, boDsblEscV, boDsblEscS;
+extern  bool                 boDsblEscU, boDsblEscV, boDsblEscS;
 
-extern  boolean                 boMntEscS;
+extern  bool                 boMntEscS;
 
-extern  boolean                 boExtendedEscU, boExtendedEscV, boExtendedEscS;
+extern  bool                 boExtendedEscU, boExtendedEscV, boExtendedEscS;
 

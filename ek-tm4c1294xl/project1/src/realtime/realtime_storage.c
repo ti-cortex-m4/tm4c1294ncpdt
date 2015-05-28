@@ -10,177 +10,177 @@ REALTIME_STORAGE.C
 
 
 
-boolean SavePointersMnt(void)
+bool SavePointersMnt(void)
 {
   OpenOut(PTRMNT);
   ClearOut();
 
-  if (Save(&ibSoftMnt, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Save(&ibSoftMnt, sizeof(uchar)) == false)
+    return false;
 
-  if (Save(&ibHardMnt, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Save(&ibHardMnt, sizeof(uchar)) == false)
+    return false;
 
   return CloseOut();
 }
 
 
-boolean LoadPointersMnt(void)
+bool LoadPointersMnt(void)
 {
   OpenIn(PTRMNT);
 
-  if (Load(&ibSoftMnt, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Load(&ibSoftMnt, sizeof(uchar)) == false)
+    return false;
 
   return Load(&ibHardMnt, sizeof(uchar));
 }
 
 
 
-boolean SavePointersHou(void)
+bool SavePointersHou(void)
 {
   OpenOut(PTRHOU);
   ClearOut();
 
-  if (Save(&ibSoftHou, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Save(&ibSoftHou, sizeof(uchar)) == false)
+    return false;
 
-  if (Save(&iwHardHou, sizeof(uint)) == FALSE)
-    return FALSE;
+  if (Save(&iwHardHou, sizeof(uint)) == false)
+    return false;
 
   return CloseOut();
 }
 
 
-boolean LoadPointersHou(void)
+bool LoadPointersHou(void)
 {
   OpenIn(PTRHOU);
 
-  if (Load(&ibSoftHou, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Load(&ibSoftHou, sizeof(uchar)) == false)
+    return false;
 
   return Load(&iwHardHou, sizeof(uint));
 }
 
 
 
-boolean SavePointersDay(void)
+bool SavePointersDay(void)
 {
   OpenOut(PTRDAY);
   ClearOut();
 
-  if (Save(&ibSoftDay, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Save(&ibSoftDay, sizeof(uchar)) == false)
+    return false;
 
-  if (Save(&ibHardDay, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Save(&ibHardDay, sizeof(uchar)) == false)
+    return false;
 
   return CloseOut();
 }
 
 
-boolean LoadPointersDay(void)
+bool LoadPointersDay(void)
 {
   OpenIn(PTRDAY);
 
-  if (Load(&ibSoftDay, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Load(&ibSoftDay, sizeof(uchar)) == false)
+    return false;
 
   return Load(&ibHardDay, sizeof(uchar));
 }
 
 
 
-boolean SavePointersMon(void)
+bool SavePointersMon(void)
 {
   OpenOut(PTRMON);
   ClearOut();
 
-  if (Save(&ibSoftMon, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Save(&ibSoftMon, sizeof(uchar)) == false)
+    return false;
 
-  if (Save(&ibHardMon, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Save(&ibHardMon, sizeof(uchar)) == false)
+    return false;
 
   return CloseOut();
 }
 
 
-boolean LoadPointersMon(void)
+bool LoadPointersMon(void)
 {
   OpenIn(PTRMON);
 
-  if (Load(&ibSoftMon, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Load(&ibSoftMon, sizeof(uchar)) == false)
+    return false;
 
   return Load(&ibHardMon, sizeof(uchar));
 }
 
 
 
-boolean SavePointersTim(void)
+bool SavePointersTim(void)
 {
   OpenOut(PTRTIM);
   ClearOut();
 
-  if (Save(&ibSoftTim, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Save(&ibSoftTim, sizeof(uchar)) == false)
+    return false;
 
-  if (Save(&iwHardTim, sizeof(uint)) == FALSE)
-    return FALSE;
+  if (Save(&iwHardTim, sizeof(uint)) == false)
+    return false;
 
   return CloseOut();
 }
 
 
-boolean LoadPointersTim(void)
+bool LoadPointersTim(void)
 {
   OpenIn(PTRTIM);
 
-  if (Load(&ibSoftTim, sizeof(uchar)) == FALSE)
-    return FALSE;
+  if (Load(&ibSoftTim, sizeof(uchar)) == false)
+    return false;
 
   return Load(&iwHardTim, sizeof(uint));
 }
 
 
 
-boolean SaveTimeCurr(void)
+bool SaveTimeCurr(void)
 {
   OpenOut(REALTIME);
   ClearOut();
 
-  if (Save(&tiCurr, sizeof(time)) == FALSE) return FALSE;
-  if (Save(&tiPrev, sizeof(time)) == FALSE) return FALSE;
+  if (Save(&tiCurr, sizeof(time)) == false) return false;
+  if (Save(&tiPrev, sizeof(time)) == false) return false;
 
-  if (Save(&cdwSeconds, sizeof(ulong)) == FALSE) return FALSE;
-  if (Save(&cdwMinutes1, sizeof(ulong)) == FALSE) return FALSE;
-  if (Save(&cdwMinutes3, sizeof(ulong)) == FALSE) return FALSE;
-  if (Save(&cdwMinutes30, sizeof(ulong)) == FALSE) return FALSE;
+  if (Save(&cdwSeconds, sizeof(ulong)) == false) return false;
+  if (Save(&cdwMinutes1, sizeof(ulong)) == false) return false;
+  if (Save(&cdwMinutes3, sizeof(ulong)) == false) return false;
+  if (Save(&cdwMinutes30, sizeof(ulong)) == false) return false;
 
-  if (Save(&cwDays, sizeof(uint)) == FALSE) return FALSE;
-  if (Save(&cwMonths, sizeof(uint)) == FALSE) return FALSE;
-  if (Save(&cwYears, sizeof(uint)) == FALSE) return FALSE;
+  if (Save(&cwDays, sizeof(uint)) == false) return false;
+  if (Save(&cwMonths, sizeof(uint)) == false) return false;
+  if (Save(&cwYears, sizeof(uint)) == false) return false;
 
   return CloseOut();
 }
 
 
-boolean LoadTimeCurr(void)
+bool LoadTimeCurr(void)
 {
   OpenIn(REALTIME);
 
-  if (Load(&tiCurr, sizeof(time)) == FALSE) return FALSE;
-  if (Load(&tiPrev, sizeof(time)) == FALSE) return FALSE;
+  if (Load(&tiCurr, sizeof(time)) == false) return false;
+  if (Load(&tiPrev, sizeof(time)) == false) return false;
 
-  if (Load(&cdwSeconds, sizeof(ulong)) == FALSE) return FALSE;
-  if (Load(&cdwMinutes1, sizeof(ulong)) == FALSE) return FALSE;
-  if (Load(&cdwMinutes3, sizeof(ulong)) == FALSE) return FALSE;
-  if (Load(&cdwMinutes30, sizeof(ulong)) == FALSE) return FALSE;
+  if (Load(&cdwSeconds, sizeof(ulong)) == false) return false;
+  if (Load(&cdwMinutes1, sizeof(ulong)) == false) return false;
+  if (Load(&cdwMinutes3, sizeof(ulong)) == false) return false;
+  if (Load(&cdwMinutes30, sizeof(ulong)) == false) return false;
 
-  if (Load(&cwDays, sizeof(uint)) == FALSE) return FALSE;
-  if (Load(&cwMonths, sizeof(uint)) == FALSE) return FALSE;
-  if (Load(&cwYears, sizeof(uint)) == FALSE) return FALSE;
+  if (Load(&cwDays, sizeof(uint)) == false) return false;
+  if (Load(&cwMonths, sizeof(uint)) == false) return false;
+  if (Load(&cwYears, sizeof(uint)) == false) return false;
 
-  return TRUE;
+  return true;
 }

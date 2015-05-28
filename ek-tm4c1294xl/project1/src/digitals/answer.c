@@ -10,20 +10,20 @@ ANSWER.C
 
 void    EnableAnswer(void) 
 {
-//  boAnswerFlag = TRUE;
+//  boAnswerFlag = true;
 //  cdwAnswerEnable++; tiAnswerEnable = tiCurr;
 }
 
 
 void    DisableAnswer(void) 
 {
-//  boAnswerFlag = FALSE;
+//  boAnswerFlag = false;
 //  cdwAnswerDisable++; tiAnswerDisable = tiCurr;
 }
 
 
 bool   AnswerDisabled(void)
 {
-  return 0; // boAnswerFlag != TRUE;
+  return 0; // boAnswerFlag != true;
 }
 

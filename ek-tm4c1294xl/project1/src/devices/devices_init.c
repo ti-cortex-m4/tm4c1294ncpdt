@@ -48,14 +48,14 @@ DEVICES_INIT.C
 
 
 
-file const              flSeparateCan = {SEPARATE_CAN, &boSeparateCan, sizeof(boolean)};
-file const              flShowMessages = {SHOW_MESSAGES, &boShowMessages, sizeof(boolean)};
-file const              flHideMessages = {HIDE_MESSAGES, &boHideMessages, sizeof(boolean)};
-file const              flControlTime = {CONTROL_TIME, &boControlTime, sizeof(boolean)};
-file const              flManageTime = {MANAGE_TIME, &boManageTime, sizeof(boolean)};
+file const              flSeparateCan = {SEPARATE_CAN, &boSeparateCan, sizeof(bool)};
+file const              flShowMessages = {SHOW_MESSAGES, &boShowMessages, sizeof(bool)};
+file const              flHideMessages = {HIDE_MESSAGES, &boHideMessages, sizeof(bool)};
+file const              flControlTime = {CONTROL_TIME, &boControlTime, sizeof(bool)};
+file const              flManageTime = {MANAGE_TIME, &boManageTime, sizeof(bool)};
 
 file const              flKeysLevelB = {KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
-file const              flShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, sizeof(boolean)};
+file const              flShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, sizeof(bool)};
 
 
 
@@ -98,7 +98,7 @@ void    InitDevices2(void)
 //  {
 //    MakeDigitals();
 //
-//    for (i=0; i<bCANALS; i++) mpboBase[i] = FALSE;
+//    for (i=0; i<bCANALS; i++) mpboBase[i] = false;
 //
 //    for (i=0; i<bCANALS; i++) mpreEngFrac[i] = 0;
 //
@@ -124,25 +124,25 @@ void    InitDevices2(void)
 
 void    ResetDevices(bool  fFull)
 {
-  boSeparateCan = FALSE;
+  boSeparateCan = false;
   SaveFile(&flSeparateCan);
 
-  boShowMessages = FALSE;
+  boShowMessages = false;
   SaveFile(&flShowMessages);
 
-  boHideMessages = FALSE;
+  boHideMessages = false;
   SaveFile(&flHideMessages);
 
-  boControlTime = TRUE;
+  boControlTime = true;
   SaveFile(&flControlTime);
 
-  boManageTime = TRUE;
+  boManageTime = true;
   SaveFile(&flManageTime);
 
   bKeysLevelB = 2;
   SaveFile(&flKeysLevelB);
 
-  boShortProfileC = FALSE;
+  boShortProfileC = false;
   SaveFile(&flShortProfileC);
 
   ResetMaxRepeats();

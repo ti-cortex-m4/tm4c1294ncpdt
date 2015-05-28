@@ -38,12 +38,12 @@ bool    StartCheckup(uchar  ibCanal)
 
     if ((diCurr.bDevice == 2) || (diCurr.bDevice == 3))
     {
-      if (mpboReadyCan[ibDig] == FALSE)
+      if (mpboReadyCan[ibDig] == false)
       {
-        if (mpboEnblCan[ibDig] == FALSE)
+        if (mpboEnblCan[ibDig] == false)
         {
           ShowCanalNumber(ibDig);
-          ShowLo(szDisabledCan); if (boHideMessages == FALSE) DelayInf();
+          ShowLo(szDisabledCan); if (boHideMessages == false) DelayInf();
           AddDigRecord(EVE_CANAL_DISABLED);
         }
         else break;
@@ -107,10 +107,10 @@ void    RunCheckup(bool  _fCheckupReadOnly)
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
   cwHouLength = 0;
 
-  boCheckupReadOnly = (_fCheckupReadOnly == 1) ? TRUE : FALSE;
+  boCheckupReadOnly = (_fCheckupReadOnly == 1) ? true : false;
   ClearCheckup();
 
-//  if (boDTREnable == TRUE) DTROff_All();
+//  if (boDTREnable == true) DTROff_All();
 
   if (StartCheckup(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
 }
@@ -119,7 +119,7 @@ void    RunCheckup(bool  _fCheckupReadOnly)
 /*
 void    NexttimeCheckup(void)
 {
-  if (boCheckupEnable == TRUE)
+  if (boCheckupEnable == true)
     RunCheckup(0);
 }
 */
@@ -127,7 +127,7 @@ void    NexttimeCheckup(void)
 
 void    NextCheckup(void)
 {/*
-  if (boHideMessages == FALSE)
+  if (boHideMessages == false)
   {
     sprintf(szLo," принято: %04u  ",cwHouRead);
     DelayMsg();
@@ -151,10 +151,10 @@ void    NextCheckup(void)
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = TRUE;
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = true;
     }
 
-    //ShowLo(szNoData); if (boHideMessages == FALSE) DelayMsg();
+    //ShowLo(szNoData); if (boHideMessages == false) DelayMsg();
   }
 
   Clear();
@@ -163,16 +163,16 @@ void    NextCheckup(void)
   if (StartCheckup(ibDig+1) == 0)
   {
     ShowHi(szWorkDone);
-    sprintf(szLo+4,"за %u:%02bu", (uint)(cwHouLength / 60), (uchar)(cwHouLength % 60)); if (boHideMessages == FALSE) DelayMsg();
+    sprintf(szLo+4,"за %u:%02bu", (uint)(cwHouLength / 60), (uchar)(cwHouLength % 60)); if (boHideMessages == false) DelayMsg();
 
     SetCurr(DEV_BEGIN);
 
     OnHours();
     //AddDigRecord(EVE_PROFILECLOSE2);
 
-    if (boDTREnable == TRUE) DTROff_All();
+    if (boDTREnable == true) DTROff_All();
 
-    if (boCheckupRecalc == TRUE)
+    if (boCheckupRecalc == true)
     {
       AddDigRecord(EVE_RECALC20);
       Recalc(1,1);
@@ -221,7 +221,7 @@ uchar   ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = TRUE;
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = true;
   }
 
   fKeyOn = 0;

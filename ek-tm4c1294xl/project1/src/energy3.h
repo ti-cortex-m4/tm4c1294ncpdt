@@ -4,30 +4,30 @@ ENERGY3.H
 
 ------------------------------------------------------------------------------*/
 
-boolean SaveImpHouBuff(void);
-boolean CleanImpHouBuff(void);
-boolean LoadImpHouBuff(void);
+bool SaveImpHouBuff(void);
+bool CleanImpHouBuff(void);
+bool LoadImpHouBuff(void);
 
-boolean SaveImpDayBuff(void);
-boolean CleanImpDayBuff(void);
-boolean LoadImpDayBuff(void);
+bool SaveImpDayBuff(void);
+bool CleanImpDayBuff(void);
+bool LoadImpDayBuff(void);
 
-boolean SaveImpMonBuff(void);
-boolean CleanImpMonBuff(void);
-boolean LoadImpMonBuff(void);
+bool SaveImpMonBuff(void);
+bool CleanImpMonBuff(void);
+bool LoadImpMonBuff(void);
 
-boolean SaveImpAbsBuff(void);
-boolean CleanImpAbsBuff(void);
-boolean LoadImpAbsBuff(void);
+bool SaveImpAbsBuff(void);
+bool CleanImpAbsBuff(void);
+bool LoadImpAbsBuff(void);
 
-boolean SavePowDayBuff(void);
-boolean CleanPowDayBuff(void);
-boolean LoadPowDayBuff(void);
+bool SavePowDayBuff(void);
+bool CleanPowDayBuff(void);
+bool LoadPowDayBuff(void);
 
-boolean SavePowMonBuff(void);
-boolean CleanPowMonBuff(void);
-boolean LoadPowMonBuff(void);
+bool SavePowMonBuff(void);
+bool CleanPowMonBuff(void);
+bool LoadPowMonBuff(void);
 
-boolean SaveCntMonBuff(void);
-boolean CleanCntMonBuff(void);
-boolean LoadCntMonBuff(void);
+bool SaveCntMonBuff(void);
+bool CleanCntMonBuff(void);
+bool LoadCntMonBuff(void);

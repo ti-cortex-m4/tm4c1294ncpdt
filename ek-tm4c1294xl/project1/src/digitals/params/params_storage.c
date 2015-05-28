@@ -12,18 +12,18 @@ PARAMS_STORAGE,C
 
 
 
-boolean SaveParamsTim(uint  iwTimTo, uint  iwTimFrom)
+bool SaveParamsTim(uint  iwTimTo, uint  iwTimFrom)
 {
   return SaveBuff(PARAMS_VALUES + iwTimTo*PARAMS_PAGES, mpreParamsBuff[ iwTimFrom ], sizeof(float)*wPARAMS);
 }
 
 
-boolean LoadParamsTim(uint  iwTimFrom)
+bool LoadParamsTim(uint  iwTimFrom)
 {
   if (iwTimFrom == iwHardTim)
   { 
     memcpy(mpreParamsBuff[ PrevSoftTim() ], mpreParamsBuff[ ibSoftTim ], sizeof(float)*wPARAMS);
-    return TRUE;
+    return true;
   }
   else
   {

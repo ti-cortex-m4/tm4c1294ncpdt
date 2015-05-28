@@ -32,7 +32,7 @@ void    key_SetExt4TResetFull(void)
   {
     if (enKeyboard == KBD_ENTER)  
     {
-      if (boExt4TFlag == TRUE)
+      if (boExt4TFlag == true)
       {
         enKeyboard = KBD_INPUT1;
         Clear();

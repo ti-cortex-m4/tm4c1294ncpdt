@@ -24,7 +24,7 @@ static void Show(void)
   Clear();
   sprintf(szLo+1,"%02u:%02u", ibX/2, (ibX%2)*30);
 
-  if (mpboCtrlHou[ibX] == FALSE)
+  if (mpboCtrlHou[ibX] == false)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);

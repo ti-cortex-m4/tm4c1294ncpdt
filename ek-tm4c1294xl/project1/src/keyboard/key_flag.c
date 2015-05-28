@@ -10,9 +10,9 @@ KEY_FLAG,C
 
 
 
-static void ShowFlag(boolean const  bo, char const  szTrue[], char const  szFalse[])
+static void ShowFlag(bool const  bo, char const  szTrue[], char const  szFalse[])
 {
-  if (bo == TRUE)
+  if (bo == true)
     strcpy(szLo, (char *)szTrue);
   else
     strcpy(szLo, (char *)szFalse);
@@ -25,7 +25,7 @@ static void ShowFlag(boolean const  bo, char const  szTrue[], char const  szFals
 
 void    key_SetFlag(file const  *pflFile, char const  *pszMessages[], char const  szTrue[], char const  szFalse[])
 {
-  boolean *pboValue = (boolean *) pflFile->pbBuff;
+  bool *pboValue = (bool *) pflFile->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {

@@ -142,7 +142,7 @@ void    key_SetGroups(void)
       ShowHi(szGroups); 
       Group();
 
-      boSetGroups = TRUE;
+      boSetGroups = true;
       SaveFile(&flSetGroups);
     }
     else if (enKeyboard == KBD_INPUT2)  // номер группы не введён

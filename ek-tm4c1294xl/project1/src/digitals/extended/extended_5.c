@@ -17,7 +17,7 @@ EXTENDED_5.C
 
 
 
-file const              flExt5Flag = {EXT_5_FLAG, &boExt5Flag, sizeof(boolean)};
+file const              flExt5Flag = {EXT_5_FLAG, &boExt5Flag, sizeof(bool)};
 file const              flExt5Values = {EXT_5_VALUES, &mpCntDayCan5, sizeof(mpCntDayCan5)};
 
 
@@ -41,7 +41,7 @@ void    ResetExtended5(bool  fFull)
 {
   if (fFull)
   {
-    boExt5Flag = FALSE;
+    boExt5Flag = false;
     SaveFile(&flExt5Flag);
   }
 
@@ -56,7 +56,7 @@ void    NextDayExtended5(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpCntDayCan5[c].boSuccess = FALSE;
+    mpCntDayCan5[c].boSuccess = false;
   }
 
   SaveFile(&flExt5Values);
@@ -93,7 +93,7 @@ static bool MakeDevices(void)
 
 void    MakeExtended5(void)
 { 
-  if ((boExt5Flag == TRUE) && ((mpCntDayCan5[ibDig].boSuccess == FALSE) || (boManualProfile == TRUE)))
+  if ((boExt5Flag == true) && ((mpCntDayCan5[ibDig].boSuccess == false) || (boManualProfile == true)))
   {
     ShowHi(szExtended5); Clear();
    
@@ -110,7 +110,7 @@ void    MakeExtended5(void)
           mpCntDayCan5[c].cwSuccess++;
           mpCntDayCan5[c].tiUpdate = *GetCurrTimeDate();
           mpCntDayCan5[c].stValue = stBuff[diPrev.ibLine];
-          mpCntDayCan5[c].boSuccess = TRUE;
+          mpCntDayCan5[c].boSuccess = true;
         }
       }
     }

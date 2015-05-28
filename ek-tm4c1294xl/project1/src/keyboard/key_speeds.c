@@ -110,12 +110,12 @@ void    key_SetSpeeds(void)
     {
       if (IsMaster(ibX) == 1) 
       {
-        if (mpboLocalDisable[ibX] == TRUE)
-          mpboLocalDisable[ibX] = FALSE;
+        if (mpboLocalDisable[ibX] == true)
+          mpboLocalDisable[ibX] = false;
         else 
         { 
-          mpboLocalDisable[ibX] = TRUE;
-          mpboLocal[ibX] = FALSE;
+          mpboLocalDisable[ibX] = true;
+          mpboLocal[ibX] = false;
         }
         SaveLocalDisable();
 

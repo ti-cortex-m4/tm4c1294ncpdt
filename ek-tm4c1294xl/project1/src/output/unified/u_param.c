@@ -89,7 +89,7 @@ void    FixParamsUni(digital  diT)
 {
   if ((diT.ibLine == PAR_P) || (diT.ibLine == PAR_P1) || (diT.ibLine == PAR_P2) || (diT.ibLine == PAR_P3))
   {
-    if ((diT.bDevice == 3) && (boFixParamsBugs == FALSE))
+    if ((diT.bDevice == 3) && (boFixParamsBugs == false))
     {
       reBuffA *= 1000;
     }
@@ -97,7 +97,7 @@ void    FixParamsUni(digital  diT)
 
   if ((diT.ibLine == PAR_Q) || (diT.ibLine == PAR_Q1) || (diT.ibLine == PAR_Q2) || (diT.ibLine == PAR_Q3))
   {
-    if ((diT.bDevice == 3) && (boFixParamsBugs == FALSE))
+    if ((diT.bDevice == 3) && (boFixParamsBugs == false))
     {
       reBuffA *= 1000;
     }
@@ -105,10 +105,10 @@ void    FixParamsUni(digital  diT)
 
   if ((diT.ibLine == PAR_I) || (diT.ibLine == PAR_I1) || (diT.ibLine == PAR_I2) || (diT.ibLine == PAR_I3))
   {
-    if (((diT.bDevice == 2) || (diT.bDevice == 8) || (diT.bDevice == 12)) && (boFixParamsBugs == FALSE))
+    if (((diT.bDevice == 2) || (diT.bDevice == 8) || (diT.bDevice == 12)) && (boFixParamsBugs == false))
     { 
     }
-    else if ((diT.bDevice == 3) && (boFixParamsBugs == FALSE))
+    else if ((diT.bDevice == 3) && (boFixParamsBugs == false))
     { 
     }
     else
@@ -177,7 +177,7 @@ uint    j;
 
 time    GetTimeParamUni(int  i)
 {
-  if (boMntParams == TRUE)
+  if (boMntParams == true)
   {
     ulong dw = DateToMntIndex(*GetCurrTimeDate());
     dw -= i;
@@ -219,7 +219,7 @@ void    GetParamUni1(void)
       PushParamsUni(12, c);
 
     time ti = GetTimeParamUni(iwTim);
-    Output2_Code(wSize, ((boParamsFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), ti);
+    Output2_Code(wSize, ((boParamsFlag == true) ? bUNI_OK : bUNI_NOTREADY), ti);
   }
 }
 
@@ -267,6 +267,6 @@ uint    i,j;
       ResetWDT();
     }
 
-    Output2_Code(wSize, ((boParamsFlag == TRUE) ? bUNI_OK : bUNI_NOTREADY), ti);
+    Output2_Code(wSize, ((boParamsFlag == true) ? bUNI_OK : bUNI_NOTREADY), ti);
   }
 }

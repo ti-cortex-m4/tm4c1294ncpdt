@@ -20,7 +20,7 @@ EXTENDED_4.C
 
 
 
-file const              flExt4Flag = {EXT_4_FLAG, &boExt4Flag, sizeof(boolean)};
+file const              flExt4Flag = {EXT_4_FLAG, &boExt4Flag, sizeof(bool)};
 file const              flExt4Months = {EXT_4_MONTHS, &bExt4Months, sizeof(uchar)};
 file const              flExt4EnblCan = {EXT_4_ENBL_CAN, &mpboExt4EnblCan, sizeof(mpboExt4EnblCan)};
 
@@ -39,13 +39,13 @@ static uchar            cbMonths;
 
 
 
-boolean SaveExt4Values(uchar  ibMon)
+bool SaveExt4Values(uchar  ibMon)
 {
   return SaveBuff(EXT_4_MON_VALUES + ibMon*VALUE4_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
 }
 
 
-boolean LoadExt4Values(uchar  ibMon)
+bool LoadExt4Values(uchar  ibMon)
 {
   return LoadBuff(EXT_4_MON_VALUES + ibMon*VALUE4_CAN_PAGES, &mpCntMonCan4, sizeof(mpCntMonCan4));
 }
@@ -54,7 +54,7 @@ boolean LoadExt4Values(uchar  ibMon)
 
 void    InitExtended4(void)
 {
-  LoadFileBoolean(&flExt4Flag, FALSE);
+  LoadFileBoolean(&flExt4Flag, false);
   LoadFileChar(&flExt4Months, 1, 12, 4);
   LoadFile(&flExt4EnblCan);
 }
@@ -64,7 +64,7 @@ void    ResetExtended4(bool  fFull)
 { 
   if (fFull)
   {
-    boExt4Flag = FALSE;
+    boExt4Flag = false;
     SaveFile(&flExt4Flag);
 
     bExt4Months = 4;
@@ -75,7 +75,7 @@ void    ResetExtended4(bool  fFull)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpboExt4EnblCan[c] = TRUE;
+    mpboExt4EnblCan[c] = true;
   }
 
   SaveFile(&flExt4EnblCan);
@@ -140,7 +140,7 @@ static void MakeDevices(uchar  ibMon)
       {
         value6 vl = mpCntMonCan4[c];
 
-        if (mpboChannelsA[diPrev.ibLine] == TRUE)
+        if (mpboChannelsA[diPrev.ibLine] == true)
         {
           vl.bStatus = ST4_OK;
           vl.dbValue = mpdbChannelsC[diPrev.ibLine];
@@ -218,7 +218,7 @@ static void MakeDevice6(uchar  ibMon)
 
 void    MakeExtended4(void)
 {
-  if ((boExt4Flag == TRUE) && (mpboExt4EnblCan[ibDig] == TRUE))
+  if ((boExt4Flag == true) && (mpboExt4EnblCan[ibDig] == true))
   {
     ShowHi(szExtended4); 
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4Months);

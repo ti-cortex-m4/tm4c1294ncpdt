@@ -16,7 +16,7 @@ GAPS.C
 static time const       tiGap0 = { 0, 0, 0, 14,  4, 0 };
 static time const       tiGap1 = { 1, 0, 0, 14, 10, 0 };
 
-file const              flGapsFlag = {GAPS_FLAG, &boGapsFlag, sizeof(boolean)};
+file const              flGapsFlag = {GAPS_FLAG, &boGapsFlag, sizeof(bool)};
 file const              flGaps = {GAPS, &gaGaps, sizeof(gaGaps)};
 
 
@@ -30,7 +30,7 @@ void    InitGaps(void)
 
 void    ResetGaps(void)
 {
-  boGapsFlag = FALSE;
+  boGapsFlag = false;
   SaveFile(&flGapsFlag);
 
   memset(&gaGaps, 0, sizeof(gaGaps));

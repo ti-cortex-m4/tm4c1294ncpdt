@@ -283,7 +283,7 @@ uchar   i;
       }
       else
       {
-        boFirstReset = TRUE;
+        boFirstReset = true;
         //SaveFile(&flFirstReset);
       }
     }

@@ -55,7 +55,7 @@ static time tiT;
 
         SetCurrTime(tiT);
 
-        boSetTime = TRUE;
+        boSetTime = true;
         SaveFile(&flSetTime);
       }
       else Beep();
@@ -69,7 +69,7 @@ static time tiT;
 
       SetCurrTime(tiT);
 
-      boSetTime = TRUE;
+      boSetTime = true;
       SaveFile(&flSetTime);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
@@ -81,7 +81,7 @@ static time tiT;
 
         SetCurrTime(tiT);
 
-        boSetTime = TRUE;
+        boSetTime = true;
         SaveFile(&flSetTime);
       }
       else Beep();
@@ -189,7 +189,7 @@ static time tiT;
 
         SetCurrDate(tiT);
 
-        boSetDate = TRUE;
+        boSetDate = true;
         SaveFile(&flSetDate);
 
         MakeDecret();

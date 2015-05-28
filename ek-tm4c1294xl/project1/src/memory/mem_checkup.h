@@ -4,7 +4,7 @@ MEM_CHECKUP.H
 
 ------------------------------------------------------------------------------*/
 
-extern  boolean                 boCheckupReadOnly;
+extern  bool                 boCheckupReadOnly;
 
 extern  ulong                   mpdwChannelsCheckup[(wHOURS/48)+1][4];
 

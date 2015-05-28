@@ -55,19 +55,19 @@ bool    StartProfile(uchar  ibCanal)
         (diCurr.bDevice == 24) ||
         (diCurr.bDevice == 99))
     {
-      if (mpboReadyCan[ibDig] == FALSE)
+      if (mpboReadyCan[ibDig] == false)
       {
-        if (mpboEnblCan[ibDig] == FALSE)
+        if (mpboEnblCan[ibDig] == false)
         {
           ShowCanalNumber(ibDig);
-          ShowLo(szDisabledCan); if (boHideMessages == FALSE) DelayInf();
+          ShowLo(szDisabledCan); if (boHideMessages == false) DelayInf();
           AddDigRecord(EVE_CANAL_DISABLED);
         }
-        else if ((GetEnblPrtHou(diCurr.ibPort, GetCurrHouIndex()) == FALSE) && (boManualProfile == FALSE))
+        else if ((GetEnblPrtHou(diCurr.ibPort, GetCurrHouIndex()) == false) && (boManualProfile == false))
         {
           ShowCanalNumber(ibDig);
           sprintf(szHi+14,"%02u",GetCurrHouIndex());
-          ShowLo(szDisabledHou); if (boHideMessages == FALSE) DelayMsg();
+          ShowLo(szDisabledHou); if (boHideMessages == false) DelayMsg();
           AddDigRecord(EVE_PROFILE_DISABLED);
         }
         else break;
@@ -98,11 +98,11 @@ bool    StartProfile(uchar  ibCanal)
   AddDigRecord(EVE_PROFILE2);
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILE);
 
-  mpboDefEscV[ibDig] = FALSE;
-  mpboDefEscS[ibDig] = FALSE;
-  mpboDefEscU[ibDig] = FALSE;
+  mpboDefEscV[ibDig] = false;
+  mpboDefEscS[ibDig] = false;
+  mpboDefEscU[ibDig] = false;
 
-  if (boManualProfile == FALSE)
+  if (boManualProfile == false)
   {
     AddDigRecord(EVE_PROFILEOPEN);
     if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILEOPEN);
@@ -212,7 +212,7 @@ bool    StartProfile(uchar  ibCanal)
 
 void    RunProfile(bool  _fCtrlHou)
 {
-  if (boEnblProfile == TRUE)
+  if (boEnblProfile == true)
   {
 #ifdef  FLOW
     CloseFlow();
@@ -222,7 +222,7 @@ void    RunProfile(bool  _fCtrlHou)
     memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
     cwHouLength = 0;
 
-//    if (boDTREnable == TRUE) DTROff_All();
+//    if (boDTREnable == true) DTROff_All();
 
     if (StartProfile(0) == 1) { OpenSpecial(); DisableAnswer(); } else { Work(); OK(); }
   }
@@ -233,7 +233,7 @@ void    RunProfile(bool  _fCtrlHou)
 
 void    NextProfile(void)
 {
-  if (boHideMessages == FALSE)
+  if (boHideMessages == false)
   {
     Clear();
     sprintf(szLo+1,"принято: %04u",cwHouRead);
@@ -259,10 +259,10 @@ void    NextProfile(void)
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = TRUE;
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = true;
     }
 
-    ShowLo(szNoData); if (boHideMessages == FALSE) DelayMsg();
+    ShowLo(szNoData); if (boHideMessages == false) DelayMsg();
   }
 
   Clear();
@@ -298,7 +298,7 @@ void    NextProfile(void)
   if (StartProfile(ibDig+1) == 0) // опрос завершён
   {
     ShowHi(szWorkDone);
-    sprintf(szLo+4,"за %u:%02u", (uint)(cwHouLength / 60), (uchar)(cwHouLength % 60)); if (boHideMessages == FALSE) DelayMsg();
+    sprintf(szLo+4,"за %u:%02u", (uint)(cwHouLength / 60), (uchar)(cwHouLength % 60)); if (boHideMessages == false) DelayMsg();
 
     SetCurr(DEV_BEGIN);
 
@@ -307,20 +307,20 @@ void    NextProfile(void)
 
     AddDigRecord(EVE_PROFILECLOSE2);
 
-//    if (boDTREnable == TRUE) DTROff_All();
+//    if (boDTREnable == true) DTROff_All();
 
     // TODO: recalc
 
     Work();
     OK();
 
-    boManualProfile = FALSE;
+    boManualProfile = false;
 
     ibPortPause = 0xFF;
 
     EnableAnswer();
 
-//    if (mpboCheckupHou[GetCurrHouIndex()] == TRUE) cbCheckupRun = 10;
+//    if (mpboCheckupHou[GetCurrHouIndex()] == true) cbCheckupRun = 10;
   }
 
   mpSerial[diCurr.ibPort] = SER_BEGIN;
@@ -359,7 +359,7 @@ uchar   ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = TRUE;
+    if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = true;
   }
 
   fKeyOn = 0;

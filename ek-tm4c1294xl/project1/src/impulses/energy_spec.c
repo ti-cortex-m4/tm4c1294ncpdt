@@ -36,7 +36,7 @@ bool    SaveImpHouSpec(bool  fCurr, uint  iwHouTo)
 }
 
 
-bool    LoadImpHouSpec(uint  iwHouFrom, bool  fFree) // TODO return boolean
+bool    LoadImpHouSpec(uint  iwHouFrom, bool  fFree) // TODO return bool
 {
 uchar   i;
    
@@ -84,7 +84,7 @@ bool    SaveImpHouSpec(bool  fCurr, uint  iwHouTo)
 }
 
 
-bool    LoadImpHouSpec(uint  iwHouFrom, bool  fFree) // TODO return boolean
+bool    LoadImpHouSpec(uint  iwHouFrom, bool  fFree) // TODO return bool
 {
 bool    fAlt;
 
@@ -136,7 +136,7 @@ bool    SaveImpDaySpec(bool  fCurr, uchar  ibDayTo)
 }
 
 
-bool    LoadImpDaySpec(uchar  ibDayFrom) // TODO return boolean
+bool    LoadImpDaySpec(uchar  ibDayFrom) // TODO return bool
 {
   if (ibDayFrom == ibHardDay)
   {
@@ -171,7 +171,7 @@ bool    SaveImpMonSpec(bool  fCurr, uchar  ibMonTo)
 }
 
 
-bool    LoadImpMonSpec(uchar  ibMonFrom) // TODO return boolean
+bool    LoadImpMonSpec(uchar  ibMonFrom) // TODO return bool
 {
   if (ibMonFrom == ibHardMon)
   {
@@ -206,7 +206,7 @@ bool    SavePowDaySpec(bool  fCurr, uchar  ibDayTo)
 }
 
 
-bool    LoadPowDaySpec(uchar  ibDayFrom) // TODO return boolean
+bool    LoadPowDaySpec(uchar  ibDayFrom) // TODO return bool
 {
   if (ibDayFrom == ibHardDay)
   {
@@ -241,7 +241,7 @@ bool    SavePowMonSpec(bool  fCurr, uchar  ibMonTo)
 }
 
 
-bool    LoadPowMonSpec(uchar  ibMonFrom) // TODO return boolean
+bool    LoadPowMonSpec(uchar  ibMonFrom) // TODO return bool
 {
   if (ibMonFrom == ibHardMon)
   {

@@ -157,7 +157,7 @@
       break;
 
     case DEV_MODEM_POSTCOMMON:
-      if (boCustomModem == TRUE)
+      if (boCustomModem == true)
         MakePause(DEV_MODEM_NORMAL);
       else
         MakePause(DEV_MODEM_POSTCUSTOM);
@@ -252,10 +252,10 @@
         MakeExtended4T();
       }
 
-      if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == FALSE))
+      if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == false))
         MakeExtended2();
 
-      if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == TRUE))
+      if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == true))
         MakeExtended2();
 
       HideCurrentTime(1);

@@ -144,7 +144,7 @@ uint32_t ui32Status;
             InputMode1();                       // передача с ответом
             mpSerial[1] = SER_BEGIN;            // начинаем приём
 
-            mpboLocal[1] = TRUE;
+            mpboLocal[1] = true;
           }
           else
           if (cwInBuff1 == SERIAL_MODEM)
@@ -177,7 +177,7 @@ uint32_t ui32Status;
 
       if ((mppoPorts[1].enStream == STR_SLAVECRC) || (IsFlow1() == 1))
       {
-        if ((mppoPorts[1].enStream != STR_SLAVEUNI) || (boRepeatFlowUni == TRUE))
+        if ((mppoPorts[1].enStream != STR_SLAVEUNI) || (boRepeatFlowUni == true))
           RepeatFlow();
 
         if (mpSerial[1] == SER_BEGIN)           // приём первого байта в запросе
@@ -408,7 +408,7 @@ void    InDelay1_Timer0(void) {
 
 void    InitSerial1(void)
 {
-  mpboLocal[1] = FALSE;
+  mpboLocal[1] = false;
 
   InputMode1();
   DTROff1();

@@ -14,7 +14,7 @@ CORRECT2.C
 
 
 
-file const              flCorrect2Flag = {CORRECT2_FLAG, &boCorrect2Flag, sizeof(boolean)};
+file const              flCorrect2Flag = {CORRECT2_FLAG, &boCorrect2Flag, sizeof(bool)};
 
 
 
@@ -26,7 +26,7 @@ void    InitCorrect2(void)
 
 void    ResetCorrect2(void)
 {
-  boCorrect2Flag = FALSE;
+  boCorrect2Flag = false;
   SaveFile(&flCorrect2Flag);
 
   memset(&mpcwCorrect2, 0, sizeof(mpcwCorrect2));
@@ -43,7 +43,7 @@ void    ResetCorrect2(void)
 
 bool    Correct2Disabled(void)
 {
-  return boCorrect2Flag == TRUE;
+  return boCorrect2Flag == true;
 }
 
 
@@ -78,7 +78,7 @@ bool    Correct2Allowed(void)
   mpbPassCorrect2[8] ^= 0xE6;
   mpbPassCorrect2[9] ^= 0x47;
 
-  if (boCorrect2Flag == FALSE) { cdwCorrect21++; return true; }
+  if (boCorrect2Flag == false) { cdwCorrect21++; return true; }
   if (SuperUserCorrect2()) { cdwCorrect22++; return true; }
 
   if (memcmp(mpbPassOne, mpbPassCorrect2, 10) == 0)

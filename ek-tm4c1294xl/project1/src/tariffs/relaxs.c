@@ -13,7 +13,7 @@ RELAXS.C
 
 
 
-file const              flRelaxsFlag = {RELAXS_FLAG, &boRelaxsFlag, sizeof(boolean)};
+file const              flRelaxsFlag = {RELAXS_FLAG, &boRelaxsFlag, sizeof(bool)};
 file const              flRelaxsTariff = {RELAXS_TARIFF, &ibRelaxsTariff, sizeof(uchar)};
 file const              flRelaxs = {RELAXS_TARIFF, &reRelaxs, sizeof(relaxs)};
 
@@ -29,7 +29,7 @@ void    InitRelaxs(void)
 
 void    ResetRelaxs(void)
 {
-  boRelaxsFlag = FALSE;
+  boRelaxsFlag = false;
   SaveFile(&flRelaxsFlag);
 
   ibRelaxsTariff = 1;

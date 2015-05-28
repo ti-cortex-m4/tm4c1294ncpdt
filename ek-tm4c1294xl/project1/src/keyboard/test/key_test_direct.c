@@ -37,7 +37,7 @@ static void ShowTestDirect(void)
     if (LoadConnect(ibX) == 0) return;
     Clear();
 
-    if (mpboEnblCan[ibX] == FALSE)
+    if (mpboEnblCan[ibX] == false)
       ShowLo(szBlocked); 
     else 
     {

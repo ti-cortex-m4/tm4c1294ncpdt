@@ -4,14 +4,14 @@ SPEEDS_STORAGE.H
 
 ------------------------------------------------------------------------------*/
 
-boolean SavePorts(void);
-boolean LoadPorts(void);
+bool SavePorts(void);
+bool LoadPorts(void);
 
-boolean SaveLocalDisable(void);
-boolean LoadLocalDisable(void);
+bool SaveLocalDisable(void);
+bool LoadLocalDisable(void);
 
-boolean SaveMajorInDelay(void);
-boolean LoadMajorInDelay(void);
+bool SaveMajorInDelay(void);
+bool LoadMajorInDelay(void);
 
-boolean SaveMinorInDelay(void);
-boolean LoadMinorInDelay(void);
+bool SaveMinorInDelay(void);
+bool LoadMinorInDelay(void);

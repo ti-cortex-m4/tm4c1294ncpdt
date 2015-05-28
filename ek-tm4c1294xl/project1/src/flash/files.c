@@ -25,7 +25,7 @@ void ClearOut(void)
 }
 
 
-boolean Save(void  *pbBase, uint  wSize)
+bool Save(void  *pbBase, uint  wSize)
 {
 uint    wFree;
 uint    i;
@@ -38,7 +38,7 @@ uint    i;
     {                                           // заполняем всё свободное место
       memcpy(mpbPageOut + wByteOut, pbBase, wFree);                                
 
-      if (SafePageWrite() == FALSE) return FALSE; // записываем буфер
+      if (SafePageWrite() == false) return false; // записываем буфер
 
       OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
@@ -51,13 +51,13 @@ uint    i;
       memcpy(mpbPageOut + wByteOut, pbBase, wSize);                                  
       wByteOut += wSize;                        // увеличиваем счётчик заполнения буфера
 
-      return TRUE;
+      return true;
     }
   }
 }  
 
 
-boolean Clean(uint  wSize)
+bool Clean(uint  wSize)
 {
 uint    wFree;
 
@@ -69,7 +69,7 @@ uint    wFree;
     {                                           // заполняем всё свободное место
       memset(mpbPageOut + wByteOut, 0, wFree);
 
-      if (SafePageWrite() == FALSE) return FALSE; // записываем буфер
+      if (SafePageWrite() == false) return false; // записываем буфер
 
       OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
@@ -80,20 +80,20 @@ uint    wFree;
     	memset(mpbPageOut + wByteOut, 0, wSize);
       wByteOut += wSize;                        // увеличиваем счётчик заполнения буфера
 
-      return TRUE;
+      return true;
     }
   }
 }
 
 
-boolean CloseOut(void)
+bool CloseOut(void)
 {
   return SafePageWrite();
 }
 
 
 
-boolean OpenIn(uint  wPage)
+bool OpenIn(uint  wPage)
 {
   wPageIn = wPage;
   wByteIn = 0;
@@ -108,7 +108,7 @@ void ClearIn(void)
 }
 
 
-boolean Load(void  *pbBase, uint  wSize)
+bool Load(void  *pbBase, uint  wSize)
 {     
 uint    wFree;
 uint    i;
@@ -121,7 +121,7 @@ uint    i;
     {                                           // читаем данные из буфера
       memcpy(pbBase, mpbPageIn + wByteIn, wFree);
 
-      if (OpenIn(wPageIn + 1) == 0) return FALSE;  // читаем в буфер следующую страницу
+      if (OpenIn(wPageIn + 1) == 0) return false;  // читаем в буфер следующую страницу
 
       for (i=0; i<wFree; i++)
     	  pbBase = (char *)pbBase + 1;                          // TODO переходим на следующую позицию источника данных
@@ -132,36 +132,36 @@ uint    i;
       memcpy(pbBase, mpbPageIn + wByteIn, wSize);
       wByteIn += wSize;                         // увеличиваем счётчик заполнения буфера
 
-      return TRUE;
+      return true;
     }
   }
 }
 
 
 
-boolean SaveBuff(uint wPage, void *pbBuff, uint wSize)
+bool SaveBuff(uint wPage, void *pbBuff, uint wSize)
 {
   OpenOut(wPage);
 
-  if (Save(pbBuff, wSize) == FALSE)
-    return FALSE;
+  if (Save(pbBuff, wSize) == false)
+    return false;
 
   return CloseOut();
 }
 
 
-boolean CleanBuff(uint wPage, uint wSize)
+bool CleanBuff(uint wPage, uint wSize)
 {
   OpenOut(wPage);
 
-  if (Clean(wSize) == FALSE)
-    return FALSE;
+  if (Clean(wSize) == false)
+    return false;
 
   return CloseOut();
 }
 
 
-boolean LoadBuff(uint wPage, void *pbBuff, uint wSize)
+bool LoadBuff(uint wPage, void *pbBuff, uint wSize)
 {
   OpenIn(wPage);
   return Load(pbBuff, wSize);
@@ -169,13 +169,13 @@ boolean LoadBuff(uint wPage, void *pbBuff, uint wSize)
 
 
 
-boolean SaveFile(file const *pfl)
+bool SaveFile(file const *pfl)
 {
   return SaveBuff(pfl->wPage, pfl->pbBuff, pfl->wSize);
 }
 
 
-boolean LoadFile(file const *pfl)
+bool LoadFile(file const *pfl)
 {
   return LoadBuff(pfl->wPage, pfl->pbBuff, pfl->wSize);
 }
