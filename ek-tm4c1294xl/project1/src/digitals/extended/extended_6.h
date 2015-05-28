@@ -11,14 +11,13 @@ EXTENDED_6.H
 extern  file const              flExt6Flag;
 
 
-bool LoadCntMonCan6(uchar  ibMonFrom);
+bool    LoadCntMonCan6(uchar  ibMonFrom);
 
 void    InitExtended6(void);
-void    ResetExtended6(void);
+void    ResetExtended6(bool  fFull);
 
 void    NextDayExtended6(void);
 void    NextMonExtended6(void);
-void    CloseExtended6(void);
 
 void    MakeExtended6(uchar  ibCan, double  db);
 

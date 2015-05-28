@@ -98,6 +98,5 @@ void    CloseSpecialBuff(void)
   SavePowDayBuff();
   SavePowMonBuff();
 
-  CloseExtended6();
   CloseExtended7();
 }

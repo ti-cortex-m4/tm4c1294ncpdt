@@ -27,13 +27,13 @@ file const              flCntDayCan6 = {EXT_6_VALUES, &mpCntDayCan6, sizeof(mpCn
 
 
 
-bool SaveCntMonCan6(uchar  ibMonTo)
+bool    SaveCntMonCan6(uchar  ibMonTo)
 {
   return SaveBuff(EXT_6_MON_VALUES + ibMonTo*VALUE6_CAN_PAGES, mpCntMonCan6, sizeof(mpCntMonCan6));
 }
 
 
-bool LoadCntMonCan6(uchar  ibMonFrom)
+bool    LoadCntMonCan6(uchar  ibMonFrom)
 {
   return LoadBuff(EXT_6_MON_VALUES + ibMonFrom*VALUE6_CAN_PAGES, mpCntMonCan6, sizeof(mpCntMonCan6));
 }
@@ -47,13 +47,13 @@ void    InitExtended6(void)
 }
 
 
-void    ResetExtended6(void) 
+void    ResetExtended6(bool  fFull)
 { 
-  cwDayCan6 = 0;
-  cwMonCan6 = 0;
-
-  fExt6Flag = false;
-  SaveFile(&flExt6Flag);
+  if (fFull)
+  {
+    fExt6Flag = false;
+    SaveFile(&flExt6Flag);
+  }
 
 
   memset(&mpCntMonCan6, 0, sizeof(mpCntMonCan6));
@@ -67,7 +67,12 @@ void    ResetExtended6(void)
 
   memset(&mpCntDayCan6, 0, sizeof(mpCntDayCan6));
   SaveFile(&flCntDayCan6);
+
+
+  cwDayCan6 = 0;
+  cwMonCan6 = 0;
 }
+
 
 
 void    NextDayExtended6(void)
@@ -88,13 +93,6 @@ void    NextMonExtended6(void)
 }
 
 
-void    CloseExtended6(void)
-{
-  SaveFile(&flCntDayCan6);
-  SaveCntMonCan6(ibHardMon);
-}
-
-
 
 void    MakeExtended6(uchar  ibCan, double  db)
 {
@@ -105,10 +103,12 @@ void    MakeExtended6(uchar  ibCan, double  db)
   vl.tiUpdate = *GetCurrTimeDate();
  
   mpCntMonCan6[ibCan] = vl;
+  SaveCntMonCan6(ibHardMon);
 
   if (mpCntDayCan6[ibCan].bStatus == ST4_NONE)
   {
     mpCntDayCan6[ibCan] = vl;
+    SaveFile(&flCntDayCan6);
   }
 }
 

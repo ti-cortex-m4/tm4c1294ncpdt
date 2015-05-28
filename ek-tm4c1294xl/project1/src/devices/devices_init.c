@@ -154,6 +154,6 @@ void    ResetDevices(bool  fFull)
   ResetExtended4(fFull);
   ResetExtended4T(fFull);
   ResetExtended5(fFull);
-  ResetExtended6();
+  ResetExtended6(fFull);
   ResetExtended7();
 }
