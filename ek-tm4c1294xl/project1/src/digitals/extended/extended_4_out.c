@@ -142,8 +142,8 @@ static void OutData4(uchar  bStatus, double  dbValue, bool  fDouble)
   uchar bSize = 0;
 
   bSize += PushChar(bStatus);
-  bSize += PushInt(0xFFFF);
-  bSize += PushInt(0xFFFF);
+  bSize += PushInt(0);
+  bSize += PushInt(0);
   bSize += PushFloatOrDouble(dbValue, fDouble);
   bSize += PushTime(*GetCurrTimeDate());
 
@@ -164,7 +164,7 @@ void    OutExtended42(bool  fDouble)
 
     if (GetDigitalDevice(ibCan) == 0)
     {
-      if (LoadCntMon(ibMon) == true)
+      if (LoadCntMon(ibMon) == TRUE)
         OutData4(ST4_OK, mpdbCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
       else
         OutData4(ST4_BADFLASH, 0, fDouble);
