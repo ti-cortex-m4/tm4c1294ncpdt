@@ -47,8 +47,6 @@ value6 vl;
       vl = mpCntMonCan6[ibCan];
   }
 
-  Clear();
-
   switch (vl.bStatus)
   {
     case ST4_NONE: ShowLo(szNone); break;
@@ -63,15 +61,10 @@ void    ShowExtended6(uchar  ibCan)
 {
   value6 vl = mpCntDayCan6[ibCan];
 
-  reBuffA = vl.dbValue;
-  tiAlt = vl.tiUpdate;
-
-  Clear();
-
   switch (vl.bStatus)
   {
     case ST4_NONE: ShowLo(szNone); break;
-    case ST4_OK:   ShowFloat(reBuffA); break;
+    case ST4_OK:   ShowDouble(vl.dbValue); break;
     default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bStatus); break;
   }  
 }
