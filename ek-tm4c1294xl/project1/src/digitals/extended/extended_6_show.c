@@ -16,6 +16,7 @@ EXTENDED_6_SHOW.C
 #include "../../engine.h"
 #include "../../energy2.h"
 #include "extended_6.h"
+#include "extended_6_show.h"
 
 
 
@@ -24,18 +25,7 @@ static char const       szNone[]        = "*    пусто      ";
 
 
 
-void    ShowTimeDate6(time  ti)
-{
-  sprintf(szLo,"%02u:%02u %02u.%02u.%02u",
-               ti.bHour,
-               ti.bMinute,
-               ti.bDay,
-               ti.bMonth,
-               ti.bYear);
-}
-
-
-void    ShowCntMonCan6(uchar  ibCan, uchar  ibMon)
+void    ShowCntMonCan6(uchar  ibCan, uchar  ibMon, bool  fShowValue)
 {
 value6 vl;
 
@@ -57,20 +47,19 @@ value6 vl;
       vl = mpCntMonCan6[ibCan];
   }
 
-  reBuffA = vl.dbValue;
-  tiAlt = vl.tiUpdate;
+  Clear();
 
   switch (vl.bStatus)
   {
     case ST4_NONE: ShowLo(szNone); break;
-    case ST4_OK:   (ibZ == 0) ? ShowFloat(reBuffA) : ShowTimeDate6(tiAlt); break;
+    case ST4_OK:   (fShowValue) ? ShowDouble(vl.dbValue) : ShowTimeDate(vl.tiUpdate); break;
     default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bStatus); break;
   }  
 }
 
 
 
-void    ShowDirectCnt(uchar  ibCan)
+void    ShowExtended6(uchar  ibCan)
 {
   value6 vl = mpCntDayCan6[ibCan];
 
