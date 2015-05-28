@@ -4,7 +4,7 @@ MEM_EXTENDED_6.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                 boExt6Flag;
+extern  bool                    fExt6Flag;
 
 extern  uint                    cwDayCan6, cwMonCan6;
 

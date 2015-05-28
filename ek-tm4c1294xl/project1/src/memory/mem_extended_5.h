@@ -4,6 +4,6 @@ MEM_EXTENDED_5.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                 boExt5Flag;
+extern  bool                    fExt5Flag;
 
 extern  value5b                 mpCntDayCan5[bCANALS];

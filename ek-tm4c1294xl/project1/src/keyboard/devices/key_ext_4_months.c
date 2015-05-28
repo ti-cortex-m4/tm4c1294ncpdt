@@ -23,5 +23,5 @@ static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3,
 
 void    key_SetExt4Months(void)
 {
-	key_SetCharBlocked(&flExt4Months, pszMessages, 1, 12, boExt4Flag, bSET_EXT4_FLAG);
+	key_SetCharBlocked(&flExt4Months, pszMessages, 1, 12, fExt4Flag, bSET_EXT4_FLAG);
 }

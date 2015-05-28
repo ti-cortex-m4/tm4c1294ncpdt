@@ -19,7 +19,7 @@ EXTENDED_4T,C
 
 
 
-file const              flExt4TFlag = {EXT_4T_FLAG, &boExt4TFlag, sizeof(bool)};
+file const              flExt4TFlag = {EXT_4T_FLAG, &fExt4TFlag, sizeof(bool)};
 file const              flExt4TMonths = {EXT_4T_MONTHS, &bExt4TMonths, sizeof(uchar)};
 
 
@@ -52,7 +52,7 @@ void    ResetExtended4T(bool  fFull)
 { 
   if (fFull)
   {
-    boExt4TFlag = false;
+    fExt4TFlag = false;
     SaveFile(&flExt4TFlag);
 
     bExt4TMonths = 4;
@@ -170,7 +170,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
 
 void    MakeExtended4T(void)
 {
-  if ((boExt4TFlag == true) && (mpboExt4EnblCan[ibDig] == true))
+  if ((fExt4TFlag == true) && (mpfExt4EnblCan[ibDig] == true))
   {
     ShowHi(szExtended4T); 
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4TMonths);

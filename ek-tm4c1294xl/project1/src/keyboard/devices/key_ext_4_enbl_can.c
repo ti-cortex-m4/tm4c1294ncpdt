@@ -25,7 +25,7 @@ static void Show(void)
   Clear();
   sprintf(szLo+14,"%2u",ibX+1);
 
-  if (mpboExt4EnblCan[ibX] == false)
+  if (mpfExt4EnblCan[ibX] == false)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -42,7 +42,7 @@ void    key_SetExt4EnblCan(void)
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boExt4Flag == true)
+      if (fExt4Flag == true)
       {
         enKeyboard = KBD_INPUT1;
         LoadSlide(pszMessages);
@@ -82,7 +82,7 @@ void    key_SetExt4EnblCan(void)
     {
       if (enKeyboard == KBD_POSTENTER)
       {
-        mpboExt4EnblCan[ibX] = InvertBoolean(mpboExt4EnblCan[ibX]);
+        mpfExt4EnblCan[ibX] = InvertBoolean(mpfExt4EnblCan[ibX]);
 
         SaveFile(&flExt4EnblCan);
         Show();
