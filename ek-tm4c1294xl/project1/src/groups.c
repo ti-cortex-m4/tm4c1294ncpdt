@@ -64,18 +64,18 @@ uchar   i,j;
   for (i=0; i<bGROUPS; i++)
   {
     if (GetGroupsSize(i) != 0) 
-      mpboUsedGroups[i] = true;
+      mpfUsedGroups[i] = true;
     else
-      mpboUsedGroups[i] = false;
+      mpfUsedGroups[i] = false;
   }
 
   for (i=0; i<bCANALS; i++)
-    mpboUsedNodes[i] = false;
+    mpfUsedNodes[i] = false;
 
   for (i=0; i<bGROUPS; i++)
   {
     for (j=0; j<GetGroupsSize(i); j++)
-      mpboUsedNodes[ GetGroupsNodeCanal(i,j) ] = true;
+      mpfUsedNodes[ GetGroupsNodeCanal(i,j) ] = true;
   }
 }
 

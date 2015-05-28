@@ -12,7 +12,7 @@ MEM_GROUPS,S
 group                   mpgrGroups[bGROUPS];
 
 // массив признаков используемых групп
-bool                 mpboUsedGroups[bGROUPS];
+bool                    mpfUsedGroups[bGROUPS];
 
 // массив признаков используемых узлов
-bool                 mpboUsedNodes[bCANALS];
+bool                    mpfUsedNodes[bCANALS];
