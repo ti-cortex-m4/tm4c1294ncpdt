@@ -22,7 +22,7 @@ EXTENDED_6.C
 
 
 
-file const              flExt6Flag = {EXT_6_FLAG, &boExt6Flag, sizeof(bool)};
+file const              flExt6Flag = {EXT_6_FLAG, &fExt6Flag, sizeof(bool)};
 file const              flCntDayCan6 = {EXT_6_VALUES, &mpCntDayCan6, sizeof(mpCntDayCan6)};
 
 
@@ -52,7 +52,7 @@ void    ResetExtended6(void)
   cwDayCan6 = 0;
   cwMonCan6 = 0;
 
-  boExt6Flag = false;
+  fExt6Flag = false;
   SaveFile(&flExt6Flag);
 
 
@@ -117,7 +117,7 @@ void    MakeExtended6(uchar  ibCan, double  db)
 
 bool    SupportedExtended6(uchar  ibCan)
 {
-  return ((boExt6Flag == true) && ((GetDigitalDevice(ibCan) == 4) || (GetDigitalDevice(ibCan) == 21)));
+  return ((fExt6Flag == true) && ((GetDigitalDevice(ibCan) == 4) || (GetDigitalDevice(ibCan) == 21)));
 }
 
 

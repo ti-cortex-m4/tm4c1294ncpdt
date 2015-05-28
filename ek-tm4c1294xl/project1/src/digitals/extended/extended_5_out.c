@@ -21,7 +21,7 @@ void    OutExtended50(bool  fDouble)
     InitPushPtr();
     uint wSize = 0;
 
-    wSize += PushChar(boExt5Flag);
+    wSize += PushChar(fExt5Flag);
 
     uchar c;
     for (c=0; c<bCANALS; c++)
@@ -60,7 +60,7 @@ void    OutExtended51(bool  fDouble)
     InitPushPtr();
     uint wSize = 0;
 
-    wSize += PushChar(boExt5Flag);
+    wSize += PushChar(fExt5Flag);
 
     uchar c;
     for (c=0; c<bCANALS; c++)

@@ -97,7 +97,7 @@ void    OutExtended44(bool  fDouble)
     InitPushPtr();
     uint wSize = 0;
 
-    wSize += PushChar(boExt4Flag);
+    wSize += PushChar(fExt4Flag);
     wSize += PushChar(bExt4Months);
     wSize += PushInt(cwDayCan6);
     wSize += PushInt(cwMonCan6);
@@ -212,7 +212,7 @@ void    OutExtended43(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      wSize += PushBool(mpboExt4EnblCan[c]);
+      wSize += PushBool(mpfExt4EnblCan[c]);
     }
   }
 

@@ -20,9 +20,9 @@ EXTENDED_4.C
 
 
 
-file const              flExt4Flag = {EXT_4_FLAG, &boExt4Flag, sizeof(bool)};
+file const              flExt4Flag = {EXT_4_FLAG, &fExt4Flag, sizeof(bool)};
 file const              flExt4Months = {EXT_4_MONTHS, &bExt4Months, sizeof(uchar)};
-file const              flExt4EnblCan = {EXT_4_ENBL_CAN, &mpboExt4EnblCan, sizeof(mpboExt4EnblCan)};
+file const              flExt4EnblCan = {EXT_4_ENBL_CAN, &mpfExt4EnblCan, sizeof(mpfExt4EnblCan)};
 
 
 
@@ -64,7 +64,7 @@ void    ResetExtended4(bool  fFull)
 { 
   if (fFull)
   {
-    boExt4Flag = false;
+    fExt4Flag = false;
     SaveFile(&flExt4Flag);
 
     bExt4Months = 4;
@@ -75,7 +75,7 @@ void    ResetExtended4(bool  fFull)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpboExt4EnblCan[c] = true;
+    mpfExt4EnblCan[c] = true;
   }
 
   SaveFile(&flExt4EnblCan);
@@ -218,7 +218,7 @@ static void MakeDevice6(uchar  ibMon)
 
 void    MakeExtended4(void)
 {
-  if ((boExt4Flag == true) && (mpboExt4EnblCan[ibDig] == true))
+  if ((fExt4Flag == true) && (mpfExt4EnblCan[ibDig] == true))
   {
     ShowHi(szExtended4); 
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4Months);

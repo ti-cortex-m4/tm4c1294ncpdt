@@ -9,7 +9,7 @@ MEM_EXTENDED_4T,C
 
 
 // флаг разрешени€ опроса
-bool                 boExt4TFlag;
+bool                    fExt4TFlag;
 
 // глубина опроса в мес€цах
 uchar                   bExt4TMonths;

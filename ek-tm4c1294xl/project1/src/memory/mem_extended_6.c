@@ -8,8 +8,8 @@ MEM_EXTENDED_6.C
 
 
 
-// глобальна€ переменна€
-bool                 boExt6Flag;
+// флаг разрешени€ опроса
+bool                    fExt6Flag;
 
 // счетчик переходов через сутки и мес€ц
 uint                    cwDayCan6, cwMonCan6;

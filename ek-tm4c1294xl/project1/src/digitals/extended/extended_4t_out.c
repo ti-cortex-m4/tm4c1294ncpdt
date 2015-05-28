@@ -62,7 +62,7 @@ void    OutExtended4T(bool  fDouble)
     InitPushPtr();
     uint wSize = 0;
 
-    wSize += PushChar(boExt4TFlag);
+    wSize += PushChar(fExt4TFlag);
     wSize += PushChar(bExt4TMonths);
 
     LoadExt4TValues(InBuff(6));

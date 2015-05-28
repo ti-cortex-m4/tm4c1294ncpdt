@@ -17,7 +17,7 @@ EXTENDED_5.C
 
 
 
-file const              flExt5Flag = {EXT_5_FLAG, &boExt5Flag, sizeof(bool)};
+file const              flExt5Flag = {EXT_5_FLAG, &fExt5Flag, sizeof(bool)};
 file const              flExt5Values = {EXT_5_VALUES, &mpCntDayCan5, sizeof(mpCntDayCan5)};
 
 
@@ -41,7 +41,7 @@ void    ResetExtended5(bool  fFull)
 {
   if (fFull)
   {
-    boExt5Flag = false;
+    fExt5Flag = false;
     SaveFile(&flExt5Flag);
   }
 
@@ -93,7 +93,7 @@ static bool MakeDevices(void)
 
 void    MakeExtended5(void)
 { 
-  if ((boExt5Flag == true) && ((mpCntDayCan5[ibDig].boSuccess == false) || (boManualProfile == true)))
+  if ((fExt5Flag == true) && ((mpCntDayCan5[ibDig].boSuccess == false) || (boManualProfile == true)))
   {
     ShowHi(szExtended5); Clear();
    
