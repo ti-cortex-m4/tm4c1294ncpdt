@@ -12,6 +12,7 @@ EXTENDED_6_SHOW.C
 #include "../../serial/ports.h"
 #include "../../time/rtc.h"
 #include "../../time/timedate.h"
+#include "../../time/timedate_display.h"
 #include "../../console.h"
 #include "../../engine.h"
 #include "../../energy2.h"
