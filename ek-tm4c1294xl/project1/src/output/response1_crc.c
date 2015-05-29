@@ -23,13 +23,12 @@ RESPONSE1_CRC.C
 #include "out_console.h"
 #include "out_config.h"
 #include "out_params.h"
+#include "out_test_time.h"
 #include "response_crc.h"
 #include "response252_crc.h"
 #include "response253_crc.h"
 #include "response254_crc.h"
 #include "response255_crc.h"
-#include "../time/rtc.h"
-#include "../time/timedate.h"
 
 
 
@@ -132,79 +131,12 @@ void    Response1_CRC(void)
       case bINQ_RESPONSE_254: Response254_CRC(); break;
       case bINQ_RESPONSE_255: Response255_CRC(); break;
 
-#if false
-      case 250:
-        {
-          time ti = *GetCurrTimeDate();
-          ti.bSecond = 58;
-          ti.bMinute = (ti.bMinute/3)*3 + 2;
-
-          SetCurrTimeDate(ti);
-          Common(GetCurrTimeDate(), sizeof(time));
-        }
-        break;
-
-      case 230:
-        {
-          time ti = *GetCurrTimeDate();
-          ti.bSecond = 58;
-          ti.bMinute = (ti.bMinute/15)*15 + 14;
-
-          SetCurrTimeDate(ti);
-          Common(GetCurrTimeDate(), sizeof(time));
-        }
-        break;
-
-      case 251:
-        {
-          time ti = *GetCurrTimeDate();
-          ti.bSecond = 58;
-          ti.bMinute = (ti.bMinute/30)*30 + 29;
-
-          SetCurrTimeDate(ti);
-          Common(GetCurrTimeDate(), sizeof(time));
-        }
-        break;
-
-      case 252:
-        {
-          time ti = *GetCurrTimeDate();
-          ti.bSecond = 58;
-          ti.bMinute = 59;
-          ti.bHour   = 23;
-
-          SetCurrTimeDate(ti);
-          Common(GetCurrTimeDate(), sizeof(time));
-        }
-        break;
-
-      case 253:
-        {
-          time ti = *GetCurrTimeDate();
-          ti.bSecond = 58;
-          ti.bMinute = 59;
-          ti.bHour   = 23;
-          ti.bDay    = GetDaysInMonthYM(ti.bYear, ti.bMonth);
-
-          SetCurrTimeDate(ti);
-          Common(GetCurrTimeDate(), sizeof(time));
-        }
-        break;
-
-      case 254:
-        {
-          time ti = *GetCurrTimeDate();
-          ti.bSecond = 58;
-          ti.bMinute = 59;
-          ti.bHour   = 23;
-          ti.bDay    = 31;
-          ti.bMonth  = 12;
-
-          SetCurrTimeDate(ti);
-          Common(GetCurrTimeDate(), sizeof(time));
-        }
-        break;
-#endif
+//      case 250: OutTestMinute3(); break;
+//      case 230: OutTestMinute15(); break;
+//      case 251: OutTestMinute30(); break;
+//      case 252: OutTestDay(); break;
+//      case 253: OutTestMonth(); break;
+//      case 254: OutTestYear(); break;
 
       default:
         ShowTestResponse(bSTA_BADCOMMAND);
