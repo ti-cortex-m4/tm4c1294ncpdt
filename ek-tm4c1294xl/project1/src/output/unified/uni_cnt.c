@@ -24,12 +24,12 @@ UNI_CNT.C
 #include "../../time/calendar.h"
 #include "../../energy2.h"
 #include "response_uni.h"
-#include "u_float.h"
+#include "uni_float.h"
 #include "uni_cnt.h"
 
 
 
-void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon)
+void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon, bool  fDouble)
 {
   if (GetDigitalDevice(ibCan) == 0)
   {
@@ -69,7 +69,7 @@ void    GetCntCanMonAllUni(bool  fDouble)
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushCntCanMonAllUni(c-1, ibMon);
+      PushCntCanMonAllUni(c-1, ibMon, fDouble);
     }
 
     Output2_Code((uint)4*bInBuff9, ((fExt4Flag == true) ? bUNI_OK : bUNI_NOTREADY), ti);
@@ -78,7 +78,7 @@ void    GetCntCanMonAllUni(bool  fDouble)
 
 
 
-void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
+void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTrf, bool  fDouble)
 {
   if (SupportedExtended4T(ibCan) == false)
   {
@@ -88,12 +88,12 @@ void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
   else
   {
     value4t vl = mpCntMonCan4T[ibCan];
-    PushFloatUni(vl.bStatus, vl.mpdbValuesT[ibTar]);
+    PushFloatUni(vl.bStatus, vl.mpdbValuesT[ibTrf]);
   }
 }
 
 
-void    GetCntCanMonTarUni(bool  fDouble)
+void    GetCntCanMonTrfUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -124,7 +124,7 @@ void    GetCntCanMonTarUni(bool  fDouble)
       uchar t;
       for (t=bInBuffC; t<bInBuffC+bInBuffD; t++)
       {
-        PushCntCanMonTarUni(c-1, ti.bMonth-1, t-1);
+        PushCntCanMonTarUni(c-1, ti.bMonth-1, t-1, fDouble);
       }
     }
 
@@ -138,7 +138,7 @@ void    GetCntCanMonUni(bool  fDouble)
   if (bInBuffC == 0)
     GetCntCanMonAllUni(fDouble);
   else
-    GetCntCanMonTarUni(fDouble);
+    GetCntCanMonTrfUni(fDouble);
 }
 
 
@@ -159,7 +159,7 @@ void    GetCntCanAllUni(bool  fDouble)
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
       PushTime(mptiEsc_S[c-1]);
-      PushFloat(mpdbEsc_S[c-1]);
+      PushFloatOrDouble(mpdbEsc_S[c-1], fDouble);
     }
 
     Output2_Code((uint)(4+6)*bInBuff9, ((boDsblEscS != true) ? bUNI_OK : bUNI_NOTREADY), *GetCurrTimeDate());
@@ -167,7 +167,7 @@ void    GetCntCanAllUni(bool  fDouble)
 }
 
 
-void    GetCntCanTarUni(bool  fDouble)
+void    GetCntCanTrfUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
     Result2(bUNI_BADDATA);
@@ -190,7 +190,7 @@ void    GetCntCanTarUni(bool  fDouble)
       for (t=bInBuffA; t<bInBuffA+bInBuffB; t++)
       {
         PushTime(mpCntDayCan5[c-1].tiUpdate);
-        PushFloat(mpCntDayCan5[c-1].stValue.mpdbValuesT[t-1]);
+        PushFloatOrDouble(mpCntDayCan5[c-1].stValue.mpdbValuesT[t-1], fDouble);
       }
     }
 
@@ -204,5 +204,5 @@ void    GetCntCanUni(bool  fDouble)
   if (bInBuffA == 0)
     GetCntCanAllUni(fDouble);
   else
-    GetCntCanTarUni(fDouble);
+    GetCntCanTrfUni(fDouble);
 }
