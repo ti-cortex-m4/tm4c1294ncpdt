@@ -1166,27 +1166,29 @@ ulong   dw;
 #ifndef SKIP_B
 
 // чтение реальных показаний счЄтчиков по мес€цам дл€ счЄтчика ћеркурий-230
-bool    ReadCntMonCanB(uchar  ibMonth)
+double2 ReadCntMonCanB(uchar  ibMonth)
 { 
 uchar   i,j;
 ulong   dw;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return(0);
+  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2(0, false);
+
+  double dbK = reKtrans/reKpulse;
 
 
-  if (QueryTimeAltB_Full(76) == 0) return(0);
+  if (QueryTimeAltB_Full(76) == 0) return GetDouble2(0, false);
 
   if (tiAlt.bMonth == ibMonth+1)        // значени€е счЄтчиков на начало текущего мес€ца
   {
-    if (QueryEnergyB_Full2(0x40,98) == 0) return(0);                   
+    if (QueryEnergyB_Full2(0x40,98) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
     {
       dw = mpdwChannelsA[i];
       mpdwChannelsB[i] = dw;
     }
 
-    if (QueryEnergyB_Full2(0,99) == 0) return(0);             
+    if (QueryEnergyB_Full2(0,99) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
     {
       dw  = mpdwChannelsA[i];
@@ -1203,7 +1205,7 @@ ulong   dw;
     j = ibMonth + 2;
     do
     {
-      if (QueryEnergyB_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return(0);
+      if (QueryEnergyB_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return GetDouble2(0, false);
       for (i=0; i<4; i++)
       {
         dw  = mpdwChannelsA[i];
@@ -1214,7 +1216,7 @@ ulong   dw;
     }
     while ((bMONTHS + tiAlt.bMonth - j++) % bMONTHS != 0 );
 
-    if (QueryEnergyB_Full2(0,99) == 0) return(0);             
+    if (QueryEnergyB_Full2(0,99) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
     {
       dw  = mpdwChannelsA[i];
@@ -1225,18 +1227,16 @@ ulong   dw;
   }
 
 
-  reKtrans = reKtrans/reBuffA;
-
   for (i=0; i<4; i++) 
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
-    mpdbChannelsC[i] = mpdwChannelsB[i] * reKtrans * 2;
+    mpdbChannelsC[i] = mpdwChannelsB[i] * dbK * 2;
     mpboChannelsA[i] = true;
   }
 
-  reBuffA = mpdwChannelsB[diCurr.ibLine] * reKtrans * 2;
+  double db = mpdwChannelsB[diCurr.ibLine] * dbK * 2;
 
-  return(1);
+  return GetDouble2(db, true);
 }
 
 #endif
@@ -1937,7 +1937,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return GetDouble2(reBuffA, ReadCntMonCanB(ibMon));
+    case 2:  return ReadCntMonCanB(ibMon);
 
     case 12: if (LoadCntMon(ibMon) == false)
                return GetDouble2(0, false);
