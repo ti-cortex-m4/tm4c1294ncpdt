@@ -1085,7 +1085,6 @@ uchar   i;
 
 #ifndef SKIP_A
 
-// чтение реальных показаний счЄтчиков по мес€цам дл€ счЄтчика —Ё“-4“ћ
 double2 ReadCntMonCanA(uchar  ibMonth)
 { 
 uchar   i,j;
@@ -1098,6 +1097,7 @@ ulong   dw;
 
 
   if (QueryTimeAltA_Full(76) == 0) return GetDouble2(0, false);
+
 
   if (tiAlt.bMonth == ibMonth+1)        // значени€е счЄтчиков на начало текущего мес€ца
   {
@@ -1163,7 +1163,6 @@ ulong   dw;
 
 #ifndef SKIP_B
 
-// чтение реальных показаний счЄтчиков по мес€цам дл€ счЄтчика ћеркурий-230
 double2 ReadCntMonCanB(uchar  ibMonth)
 { 
 uchar   i,j;
@@ -1176,6 +1175,7 @@ ulong   dw;
 
 
   if (QueryTimeAltB_Full(76) == 0) return GetDouble2(0, false);
+
 
   if (tiAlt.bMonth == ibMonth+1)        // значени€е счЄтчиков на начало текущего мес€ца
   {
@@ -1241,25 +1241,30 @@ ulong   dw;
 
 #ifndef SKIP_C
 
-bool    ReadCntMonCanC(uchar  ibMonth)
+double2 ReadCntMonCanC(uchar  ibMonth)
 { 
 uchar   i,j;
 
   Clear();
-  if (ReadKoeffDeviceC() == 0) return(0);
+  if (ReadKoeffDeviceC() == 0) return GetDouble2(0, false);
+
+  double dbK = reKtrans/reKpulse;
 
 
   DelayOff();
   QueryTimeC();                   
 
-  if (RevInput() != SER_GOODCHECK) return(0);  if (fKey == true) return(0);
+  if (RevInput() != SER_GOODCHECK) return GetDouble2(0, false);
+  if (fKey == true) return GetDouble2(0, false);
+
   ShowPercent(76);
 
   ReadTimeAltC();                        
 
+
   if (tiAlt.bMonth == ibMonth+1)        // значени€е счЄтчиков на начало текущего мес€ца
   {
-    if (QueryEnergyDayC_Full2(0, 98) == 0) return(0);
+    if (QueryEnergyDayC_Full2(0, 98) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
     {
       ulong dw = mpdwChannelsA[i];
@@ -1267,7 +1272,7 @@ uchar   i,j;
     }
 
 
-    if (QueryEnergyAbsC_Full2(99) == 0) return(0);
+    if (QueryEnergyAbsC_Full2(99) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
     {
       ulong dw  = mpdwChannelsA[i];
@@ -1284,7 +1289,7 @@ uchar   i,j;
     j = (ibMonth + 1)%12;
     do
     {
-      if (QueryEnergyMonC_Full2(-((12-1+tiAlt.bMonth-j)%12), 76+j) == 0) return(0);
+      if (QueryEnergyMonC_Full2(-((12-1+tiAlt.bMonth-j)%12), 76+j) == 0) return GetDouble2(0, false);
       for (i=0; i<4; i++)
       {
         ulong dw = mpdwChannelsA[i];
@@ -1296,7 +1301,7 @@ uchar   i,j;
     while ((bMONTHS + tiAlt.bMonth - ++j) % bMONTHS != 0 );
 
 
-    if (QueryEnergyAbsC_Full2(99) == 0) return(0);             
+    if (QueryEnergyAbsC_Full2(99) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
     {
       ulong dw = mpdwChannelsA[i];
@@ -1307,17 +1312,13 @@ uchar   i,j;
   }
 
 
-  reKtrans = reKtrans/reBuffA;
-
   for (i=0; i<4; i++) 
   {
-    mpdbChannelsC[i] = mpdwChannelsB[i] * reKtrans;
+    mpdbChannelsC[i] = mpdwChannelsB[i] * dbK;
     mpboChannelsA[i] = true;     
   }
 
-  reBuffA = mpdwChannelsB[diCurr.ibLine] * reKtrans;
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
@@ -1942,7 +1943,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_C
-    case 3:  return GetDouble2(reBuffA, ReadCntMonCanC(ibMon));
+    case 3:  return ReadCntMonCanC(ibMon);
 #endif
 
 #ifndef SKIP_D
