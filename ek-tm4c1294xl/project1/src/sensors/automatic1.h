@@ -4,7 +4,7 @@ _AUTOMATIC1.H
 
 ------------------------------------------------------------------------------*/
 
-extern  real                    reKtrans, reKpulse;
+extern  double                  dbKtrans, dbKpulse;
 
 
 

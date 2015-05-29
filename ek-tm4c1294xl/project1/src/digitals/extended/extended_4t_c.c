@@ -60,7 +60,7 @@ status ReadCntMonCanTariffC(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
   Clear();
   if (ReadKoeffDeviceC() == 0) return ST4_BADDIGITAL;
 
-  float flK = reKtrans/reKpulse;
+  double dbK = dbKtrans/dbKpulse;
 
 
   if (QueryTimeC_Full() == 0) return ST4_BADDIGITAL;
@@ -74,7 +74,7 @@ status ReadCntMonCanTariffC(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
   uchar i;
   for (i=0; i<4; i++) 
   {
-  	mpdbChannelsC[i] = mpdwChannelsA[i] * flK;
+  	mpdbChannelsC[i] = mpdwChannelsA[i] * dbK;
     mpboChannelsA[i] = true;     
   }
 

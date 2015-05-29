@@ -41,7 +41,7 @@ uchar   i;
   Clear();
   if (ReadKoeffDeviceA() == 0) return GetDouble2(0, false);
 
-  double dbK = reKtrans/reKpulse;
+  double dbK = dbKtrans/dbKpulse;
 
 
   if (QueryEnergyA_Full(0,100) == 0) return GetDouble2(0, false);
@@ -69,7 +69,7 @@ uchar   i;
   Clear();
   if (ReadKoeffDeviceB_Special() == 0) return GetDouble2(0, false);
 
-  double dbK = reKtrans/reKpulse;
+  double dbK = dbKtrans/dbKpulse;
 
 
   if (QueryEnergyB_Full(0,100) == 0) return GetDouble2(0, false);
@@ -97,7 +97,7 @@ uchar   i;
   Clear();
   if (ReadKoeffDeviceC() == 0) return GetDouble2(0, false);
 
-  double dbK = reKtrans/reKpulse;
+  double dbK = dbKtrans/dbKpulse;
 
 
   DelayOff();
@@ -1086,7 +1086,7 @@ ulong   dw;
   Clear();
   if (ReadKoeffDeviceA() == 0) return GetDouble2(0, false);
 
-  double dbK = reKtrans/reKpulse;
+  double dbK = dbKtrans/dbKpulse;
 
 
   if (QueryTimeAltA_Full(76) == 0) return GetDouble2(0, false);
@@ -1164,7 +1164,7 @@ ulong   dw;
   Clear();
   if (ReadKoeffDeviceB_Special() == 0) return GetDouble2(0, false);
 
-  double dbK = reKtrans/reKpulse;
+  double dbK = dbKtrans/dbKpulse;
 
 
   if (QueryTimeAltB_Full(76) == 0) return GetDouble2(0, false);
@@ -1241,7 +1241,7 @@ uchar   i,j;
   Clear();
   if (ReadKoeffDeviceC() == 0) return GetDouble2(0, false);
 
-  double dbK = reKtrans/reKpulse;
+  double dbK = dbKtrans/dbKpulse;
 
 
   DelayOff();
@@ -1493,7 +1493,7 @@ uchar   i;
 
   Clear();
   if (ReadKoeffDeviceG() == 0) return(0);
-  reBuffX = reKtrans;
+  reBuffX = dbKtrans;
 
 
   DelayOff();
@@ -1540,7 +1540,7 @@ uchar   i;
   {
     mpreChannelsB[i] = mpreCodEng30[i*5+0] - mpreCodEng30[i*5+3];
 
-    reBuffA = GetCanReal(mpreChannelsB, i) * reKtrans;
+    reBuffA = GetCanReal(mpreChannelsB, i) * dbKtrans;
     SetCanReal(mpreChannelsB, i);
 
     mpboChannelsA[i] = true;     
@@ -1564,7 +1564,7 @@ uchar   i,j;
 
   Clear();
   if (ReadKoeffDeviceH() == 0) return(0);
-  reBuffX = reKtrans;
+  reBuffX = dbKtrans;
 
 
   DelayOff();
@@ -1660,7 +1660,7 @@ uchar   i,j;
   if (tiAlt.bMonth != ibMonth+1) return(0);     // значени€е счЄтчиков на начало текущего мес€ца
 
 
-  reKtrans = 0;
+  dbKtrans = 0;
 
   for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счЄтчике: 4)
   {
@@ -1683,7 +1683,7 @@ uchar   i,j;
     else 
     {
       ReadEnergyI();
-      reKtrans += reBuffA;
+      dbKtrans += reBuffA;
     }
   }
 
@@ -1696,7 +1696,7 @@ uchar   i,j;
   reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibDig,0x0F);
   reBuffA = reBuffA / GetCanReal(mpreTransEng,ibDig);
 
-  reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
+  reBuffA = dbKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
   SetCanReal(mpreChannelsB, 0);
 
   mpboChannelsA[0] = true;     
@@ -1734,8 +1734,8 @@ bool    ReadCntMonCanK(void)
          reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibCan,0x0F);
          reBuffA = reBuffA / GetCanReal(mpreTransEng,ibCan);
 
-         reKtrans = GetCanReal(mpreChannelsB, ibMinor);
-         reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibCan) - reBuffA;
+         dbKtrans = GetCanReal(mpreChannelsB, ibMinor);
+         reBuffA = dbKtrans * GetCanReal(mpreTransCnt,ibCan) - reBuffA;
          SetCanReal(mpreChannelsB, ibMinor);
        }  
     }
@@ -1768,7 +1768,7 @@ uchar   i,j;
 
   if (tiAlt.bMonth != ibMonth+1) 
   {
-    reKtrans = 0;
+    dbKtrans = 0;
     for (j=0; j<bTARIFFS; j++) 
     {
       if (fKey == true) return(0);
@@ -1785,11 +1785,11 @@ uchar   i,j;
       else 
       {
         ReadEnergyO();
-        reKtrans += reBuffA;
+        dbKtrans += reBuffA;
       }
     }
 
-    reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig);
+    reBuffA = dbKtrans * GetCanReal(mpreTransCnt,ibDig);
     SetCanReal(mpreChannelsB, 0);
  
     mpboChannelsA[0] = true;     
@@ -1797,7 +1797,7 @@ uchar   i,j;
   }
   else 
   {
-    reKtrans = 0;
+    dbKtrans = 0;
     for (j=0; j<bTARIFFS; j++) 
     {
       if (fKey == true) return(0);
@@ -1814,7 +1814,7 @@ uchar   i,j;
       else 
       {
         ReadEnergyO();
-        reKtrans += reBuffA;
+        dbKtrans += reBuffA;
       }
     }
 
@@ -1824,7 +1824,7 @@ uchar   i,j;
     reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibDig,0x0F);
     reBuffA = reBuffA / GetCanReal(mpreTransEng,ibDig);
 
-    reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
+    reBuffA = dbKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
     SetCanReal(mpreChannelsB, 0);
  
     mpboChannelsA[0] = true;     
