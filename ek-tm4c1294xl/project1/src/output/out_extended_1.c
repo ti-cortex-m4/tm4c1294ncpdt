@@ -55,7 +55,7 @@ real    re;
         mptiEsc_S[c] = *GetCurrTimeDate();
       }
       else if ((boExtendedEscS == true) || (GetDigitalPhone(c) != 0))
-        re = GetCanReal(mpreEsc_S, c);
+        re = mpdbEsc_S[c];
       else
       {
         LoadCurrDigital(c);
@@ -195,7 +195,7 @@ real    re;
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
       else if ((boExtendedEscV == true) || (GetDigitalPhone(c) != 0))
-        re = GetCanReal(mpreEsc_V, c);
+        re = mpdbEsc_V[c];
       else
       {
         LoadCurrDigital(c);

@@ -44,7 +44,7 @@ void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon)
 }
 
 
-void    GetCntCanMonAllUni(void) 
+void    GetCntCanMonAllUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -93,7 +93,7 @@ void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTar)
 }
 
 
-void    GetCntCanMonTarUni(void) 
+void    GetCntCanMonTarUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -133,17 +133,17 @@ void    GetCntCanMonTarUni(void)
 }
 
 
-void    GetCntCanMonUni(void) 
+void    GetCntCanMonUni(bool  fDouble)
 {
   if (bInBuffC == 0)
-    GetCntCanMonAllUni();
+    GetCntCanMonAllUni(fDouble);
   else
-    GetCntCanMonTarUni();
+    GetCntCanMonTarUni(fDouble);
 }
 
 
 
-void    GetCntCanAllUni(void) 
+void    GetCntCanAllUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
     Result2(bUNI_BADDATA);
@@ -159,7 +159,7 @@ void    GetCntCanAllUni(void)
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
       PushTime(mptiEsc_S[c-1]);
-      PushFloat(mpreEsc_S[c-1]);
+      PushFloat(mpdbEsc_S[c-1]);
     }
 
     Output2_Code((uint)(4+6)*bInBuff9, ((boDsblEscS != true) ? bUNI_OK : bUNI_NOTREADY), *GetCurrTimeDate());
@@ -167,7 +167,7 @@ void    GetCntCanAllUni(void)
 }
 
 
-void    GetCntCanTarUni(void) 
+void    GetCntCanTarUni(bool  fDouble)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
     Result2(bUNI_BADDATA);
@@ -199,10 +199,10 @@ void    GetCntCanTarUni(void)
 }
 
 
-void    GetCntCanUni(void) 
+void    GetCntCanUni(bool  fDouble)
 {
   if (bInBuffA == 0)
-    GetCntCanAllUni();
+    GetCntCanAllUni(fDouble);
   else
-    GetCntCanTarUni();
+    GetCntCanTarUni(fDouble);
 }

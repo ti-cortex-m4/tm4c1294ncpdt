@@ -54,7 +54,7 @@ real    re;
     else
       re = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
 
-    mpreEsc_V[ibCan] = re;
+    mpdbEsc_V[ibCan] = re;
     mptiEsc_V[ibCan] = *GetCurrTimeDate();
 
 
@@ -63,7 +63,7 @@ real    re;
     if (GetDigitalDevice(ibCan) == 19)
       re += GetCanReal(mpreCount,ibCan);
 
-    mpreEsc_S[ibCan] = re;
+    mpdbEsc_S[ibCan] = re;
     mptiEsc_S[ibCan] = *GetCurrTimeDate();
 
 
