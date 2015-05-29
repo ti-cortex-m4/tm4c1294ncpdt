@@ -34,12 +34,12 @@ void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon, bool  fDouble)
   if (GetDigitalDevice(ibCan) == 0)
   {
     double db = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
-    PushFloatUni(ST4_OK, db);
+    PushFloatOrDoubleUni(ST4_OK, db, fDouble);
   }
   else
   {
     value6 vl = mpCntMonCan4[ibCan];
-    PushFloatUni(vl.bStatus, vl.dbValue);
+    PushFloatOrDoubleUni(vl.bStatus, vl.dbValue, fDouble);
   }
 }
 
@@ -82,13 +82,12 @@ void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTrf, bool  fDou
 {
   if (SupportedExtended4T(ibCan) == false)
   {
-    real re = 0;
-    PushFloatUni(ST4_NOTSUPPORTED, re);
+    PushFloatOrDoubleUni(ST4_NOTSUPPORTED, 0, fDouble);
   }
   else
   {
     value4t vl = mpCntMonCan4T[ibCan];
-    PushFloatUni(vl.bStatus, vl.mpdbValuesT[ibTrf]);
+    PushFloatOrDoubleUni(vl.bStatus, vl.mpdbValuesT[ibTrf], fDouble);
   }
 }
 
