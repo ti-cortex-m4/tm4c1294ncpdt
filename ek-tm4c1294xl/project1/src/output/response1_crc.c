@@ -132,7 +132,7 @@ void    Response1_CRC(void)
       case bINQ_RESPONSE_254: Response254_CRC(); break;
       case bINQ_RESPONSE_255: Response255_CRC(); break;
 
-#if true
+#if false
       case 250:
         {
           time ti = *GetCurrTimeDate();
