@@ -58,7 +58,7 @@ uchar   i;
   Clear();
   if (ReadKoeffDeviceB_Special() == 0) return false;
 
-  float flK = reKtrans/reKpulse;
+  double dbK = dbKtrans/dbKpulse;
 
 
   if (QueryEngTariffB_Full(0x40,bTrf) == 0) return false; // энергия за текущие сутки
@@ -76,7 +76,7 @@ uchar   i;
   for (i=0; i<4; i++)
   {
     mpdwChannelsB[i] = mpdwChannelsA[i] - mpdwChannelsB[i]; // энергия всего минус энергия за текущие сутки равно значению счетчика на начало текущих суток
-    mpdbChannelsC[i] = (mpdwChannelsB[i] > 0xF0000000 ? 0 : mpdwChannelsB[i]) * flK * 2;
+    mpdbChannelsC[i] = (mpdwChannelsB[i] > 0xF0000000 ? 0 : mpdwChannelsB[i]) * dbK * 2;
     mpboChannelsA[i] = true;
   }
 
