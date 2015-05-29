@@ -34,28 +34,26 @@ AUTOMATIC2.C
 
 #ifndef SKIP_A
 
-// чтение реальных показаний счётчиков для счётчиков СЭТ-4ТМ
-bool    ReadCntCurrA(void)
+double2 ReadCntCurrA(void)
 {
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceA() == 0) return(0);
+  if (ReadKoeffDeviceA() == 0) return GetDouble2(0, false);
+
+  double dbK = reKtrans/reKpulse;
 
 
-  if (QueryEnergyA_Full(0,100) == 0) return(0);
+  if (QueryEnergyA_Full(0,100) == 0) return GetDouble2(0, false);
 
-  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
-    mpdbChannelsC[i] = mpdwChannelsA[i] * reKtrans;
+    mpdbChannelsC[i] = mpdwChannelsA[i] * dbK;
     mpboChannelsA[i] = true;     
   }
 
-  reBuffA = reKtrans*coEnergy.dwBuff;
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
@@ -64,28 +62,26 @@ uchar   i;
 
 #ifndef SKIP_B
 
-// чтение реальных показаний счётчиков для счётчиков Меркурий-230
-bool    ReadCntCurrB(void)
+double2 ReadCntCurrB(void)
 {
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return(0);
+  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2(0, false);
+
+  double dbK = reKtrans/reKpulse;
 
 
-  if (QueryEnergyB_Full(0,100) == 0) return(0);
+  if (QueryEnergyB_Full(0,100) == 0) return GetDouble2(0, false);
 
-  reKtrans = reKtrans/reBuffA;
 
   for (i=0; i<4; i++) 
   {
-    mpdbChannelsC[i] = mpdwChannelsA[i] * reKtrans * 2;
+    mpdbChannelsC[i] = mpdwChannelsA[i] * dbK * 2;
     mpboChannelsA[i] = true;
   }
 
-  reBuffA = reKtrans*coEnergy.dwBuff * 2;
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
@@ -94,35 +90,32 @@ uchar   i;
 
 #ifndef SKIP_C
 
-// чтение реальных показаний счётчиков для счётчиков СС-301
-bool    ReadCntCurrC(void)
+double2 ReadCntCurrC(void)
 {
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceC() == 0) return(0);
+  if (ReadKoeffDeviceC() == 0) return GetDouble2(0, false);
+
+  double dbK = reKtrans/reKpulse;
 
 
   DelayOff();
   QueryEnergyAbsC();
 
-  if (RevInput() != SER_GOODCHECK) return(0);
+  if (RevInput() != SER_GOODCHECK) return GetDouble2(0, false);
   ShowPercent(100);
 
   ReadEnergyC();
 
 
-  reKtrans = reKtrans/reBuffA;
-
   for (i=0; i<4; i++) 
   {
-    mpdbChannelsC[i] = mpdwChannelsA[i] * reKtrans;
+    mpdbChannelsC[i] = mpdwChannelsA[i] * dbK;
     mpboChannelsA[i] = true;     
   }
 
-  reBuffA = reKtrans*coEnergy.dwBuff;
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
@@ -1861,18 +1854,18 @@ double2 ReadCntCurrCan(uchar  ibCan)
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return GetDouble2(reBuffA, ReadCntCurrA());
+    case 1:  return ReadCntCurrA();
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return GetDouble2(reBuffA, ReadCntCurrB());
+    case 2:  return ReadCntCurrB();
 
     case 12: return GetDouble2(mpdwBase[ibCan] * mpdbValueCntHou[ibCan], true);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return GetDouble2(reBuffA, ReadCntCurrC());
+    case 3:  return ReadCntCurrC();
 #endif
 
     default: return GetDouble2(0, false);
