@@ -29,6 +29,9 @@ QUERIES2.H
 #define wUNI_GETCNTCANMON              0x0080
 #define wUNI_GETCNTCAN                 0x0085
 
+#define wUNI_GETCNTCANMON_X2           0x1080
+#define wUNI_GETCNTCAN_X2              0x1085
+
 #define wUNI_GETMAXGRPDAY              0x00A1
 #define wUNI_GETMAXGRPMON              0x00A3
 

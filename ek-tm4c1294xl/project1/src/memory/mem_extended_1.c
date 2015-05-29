@@ -9,13 +9,13 @@ MEM_EXTENDED_1.C
 
 
 //
-real                    mpreEsc_S[bCANALS];
+double                  mpdbEsc_S[bCANALS];
 
 //
 time                    mptiEsc_S[bCANALS];
 
 //
-real                    mpreEsc_V[bCANALS];
+double                  mpdbEsc_V[bCANALS];
 
 //
 time                    mptiEsc_V[bCANALS];
@@ -34,17 +34,17 @@ uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
                         mpcwEscU_OK[bCANALS], mpcwEscU_Error[bCANALS];
 
 // признаки брака непосредственных показаний
-bool                 mpboDefEscV[bCANALS],
+bool                    mpboDefEscV[bCANALS],
                         mpboDefEscS[bCANALS],
                         mpboDefEscU[bCANALS];
 
 
 
 // флаги запрета опроса показаний
-bool                 boDsblEscU, boDsblEscV, boDsblEscS;
+bool                    boDsblEscU, boDsblEscV, boDsblEscS;
 
 // флаг
-bool                 boMntEscS;
+bool                    boMntEscS;
 
 // флаг специальной подготовки данных для Esc-запросов
-bool                 boExtendedEscU, boExtendedEscV, boExtendedEscS;
+bool                    boExtendedEscU, boExtendedEscV, boExtendedEscS;

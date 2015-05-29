@@ -41,10 +41,10 @@ file const              flExtendedEscS = {EXTENDED_ESC_S, &boExtendedEscS, sizeo
 
 void    InitExtended1(void)
 {
-  memset(&mpreEsc_S, 0, sizeof(mpreEsc_S));
+  memset(&mpdbEsc_S, 0, sizeof(mpdbEsc_S));
   memset(&mptiEsc_S, 0, sizeof(mptiEsc_S));
 
-  memset(&mpreEsc_V, 0, sizeof(mpreEsc_V));
+  memset(&mpdbEsc_V, 0, sizeof(mpdbEsc_V));
   memset(&mptiEsc_V, 0, sizeof(mptiEsc_V));
 
   memset(&mptiEsc_U1, 0, sizeof(mptiEsc_U1));
@@ -152,10 +152,10 @@ void    MakeExtended1(void)
       {
         if (mpboChannelsA[diPrev.ibLine] == true)
         {
-          reBuffA = DoubleToFloat(mpdbChannelsC[diPrev.ibLine]);
+          double db = DoubleToFloat(mpdbChannelsC[diPrev.ibLine]);
           mpcwEscV_OK[c]++;
 
-          mpreEsc_V[c] = reBuffA;
+          mpdbEsc_V[c] = db;
           mptiEsc_V[c] = *GetCurrTimeDate();
 
           mpboDefEscV[c] = true;
@@ -196,7 +196,7 @@ void    MakeExtended1(void)
           double db = mpdbChannelsC[diPrev.ibLine];
           mpcwEscS_OK[c]++;
 
-          mpreEsc_S[c] = DoubleToFloat(db);
+          mpdbEsc_S[c] = db;
           mptiEsc_S[c] = *GetCurrTimeDate();
 
           MakeExtended6(c, db);

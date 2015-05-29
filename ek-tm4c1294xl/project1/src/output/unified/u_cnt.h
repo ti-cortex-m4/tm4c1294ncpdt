@@ -4,5 +4,5 @@ U_CNT.H
 
 ------------------------------------------------------------------------------*/
 
-void    GetCntCanMonUni(void); 
-void    GetCntCanUni(void); 
+void    GetCntCanMonUni(bool  fDouble);
+void    GetCntCanUni(bool  fDouble);
