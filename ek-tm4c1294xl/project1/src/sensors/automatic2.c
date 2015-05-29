@@ -1086,27 +1086,29 @@ uchar   i;
 #ifndef SKIP_A
 
 // чтение реальных показаний счЄтчиков по мес€цам дл€ счЄтчика —Ё“-4“ћ
-bool    ReadCntMonCanA(uchar  ibMonth)
+double2 ReadCntMonCanA(uchar  ibMonth)
 { 
 uchar   i,j;
 ulong   dw;
 
   Clear();
-  if (ReadKoeffDeviceA() == 0) return(0);
+  if (ReadKoeffDeviceA() == 0) return GetDouble2(0, false);
+
+  double dbK = reKtrans/reKpulse;
 
 
-  if (QueryTimeAltA_Full(76) == 0) return(0);
+  if (QueryTimeAltA_Full(76) == 0) return GetDouble2(0, false);
 
   if (tiAlt.bMonth == ibMonth+1)        // значени€е счЄтчиков на начало текущего мес€ца
   {
-    if (QueryEnergyA_Full2(0x40,98) == 0) return(0);
+    if (QueryEnergyA_Full2(0x40,98) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
     {
       dw = mpdwChannelsA[i];
       mpdwChannelsB[i] = dw;
     }
 
-    if (QueryEnergyA_Full2(0,99) == 0) return(0);             
+    if (QueryEnergyA_Full2(0,99) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
     {
       dw  = mpdwChannelsA[i];
@@ -1123,7 +1125,7 @@ ulong   dw;
     j = ibMonth + 2;
     do
     {
-      if (QueryEnergyA_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return(0);             
+      if (QueryEnergyA_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return GetDouble2(0, false);
       for (i=0; i<4; i++)
       {
         dw  = mpdwChannelsA[i];
@@ -1134,7 +1136,7 @@ ulong   dw;
     }
     while ((bMONTHS + tiAlt.bMonth - j++) % bMONTHS != 0 );
 
-    if (QueryEnergyA_Full2(0,99) == 0) return(0);             
+    if (QueryEnergyA_Full2(0,99) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
     {
       dw  = mpdwChannelsA[i];
@@ -1145,18 +1147,14 @@ ulong   dw;
   }
 
 
-  reKtrans = reKtrans/reBuffA;
-
   for (i=0; i<4; i++) 
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
-    mpdbChannelsC[i] = mpdwChannelsB[i] * reKtrans;
+    mpdbChannelsC[i] = mpdwChannelsB[i] * dbK;
     mpboChannelsA[i] = true;     
   }
 
-  reBuffA = mpdwChannelsB[diCurr.ibLine] * reKtrans;
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
@@ -1234,9 +1232,7 @@ ulong   dw;
     mpboChannelsA[i] = true;
   }
 
-  double db = mpdwChannelsB[diCurr.ibLine] * dbK * 2;
-
-  return GetDouble2(db, true);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
@@ -1932,7 +1928,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return GetDouble2(reBuffA, ReadCntMonCanA(ibMon));
+    case 1:  return ReadCntMonCanA(ibMon);
 #endif
 
 #ifndef SKIP_B
