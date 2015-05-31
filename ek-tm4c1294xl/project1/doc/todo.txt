@@ -38,3 +38,5 @@ test int program cnt на вызов (timer + serial) + частота timer
 несовместимость старого и нового проборов по ext4
 
 чтение из RAM ROM DF NVRAM
+
+reset all buffers remotely
