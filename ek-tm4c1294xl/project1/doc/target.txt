@@ -238,8 +238,8 @@ extended_3.h
 +   extended_5_c.h
 extended_5_h.c
 extended_5_h.h
-extended_6.c
-extended_6.h
++   extended_6.c
++   extended_6.h
 extended_7.c
 extended_7.h
 files.c
