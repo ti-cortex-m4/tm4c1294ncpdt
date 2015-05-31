@@ -24,11 +24,11 @@ void    OutRealtime(void)
   wSize += PushTime(tiCurr);
   wSize += PushTime(tiPrev);
 
-  wSize += PushChar(fSeason);
-  wSize += PushChar(fSummer);
-  wSize += PushChar(fWinter);
+  wSize += PushBool(fSeason);
+  wSize += PushBool(fSummer);
+  wSize += PushBool(fWinter);
 
-  wSize += PushChar(fActive);
+  wSize += PushBool(fActive);
 
   wSize += PushInt(ibSoftMnt);
   wSize += PushInt(ibHardMnt);
