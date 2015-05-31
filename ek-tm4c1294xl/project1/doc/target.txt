@@ -224,8 +224,8 @@ extended.c
 extended.h
 extended_3.c
 extended_3.h
-extended_4.c
-extended_4.h
++   extended_4.c
++   extended_4.h
 +   extended_4t.c
 +   extended_4t.h
 +   extended_5.c

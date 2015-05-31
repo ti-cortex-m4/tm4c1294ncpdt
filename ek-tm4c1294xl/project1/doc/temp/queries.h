@@ -284,9 +284,9 @@ QUERIES.H
 
 #define bEXT_GETRECALC                 41
 
-#define bEXT_GETEXTENDED40             42
-#define bEXT_GETEXTENDED41             43
-#define bEXT_GETEXTENDED42             44
++   #define bEXT_GETEXTENDED40             42
++   #define bEXT_GETEXTENDED41             43
++   #define bEXT_GETEXTENDED42             44
 
 +   #define bEXT_GETRELAXS                 45
 +   #define bEXT_SETRELAXS                 46
@@ -308,8 +308,8 @@ QUERIES.H
 #define bEXT_GETACE                    58
 #define bEXT_CORRECT3                  59
 
-#define bEXT_GETEXTENDED401            60
-#define bEXT_GETEXTENDED43             61
++   #define bEXT_GETEXTENDED401            60
++   #define bEXT_GETEXTENDED43             61
 #define bEXT_GETEXTENDED6              62
 
 #define bEXT_GETENGCANDAY              65
