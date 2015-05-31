@@ -310,7 +310,7 @@ QUERIES.H
 
 +   #define bEXT_GETEXTENDED401            60
 +   #define bEXT_GETEXTENDED43             61
-#define bEXT_GETEXTENDED6              62
++   #define bEXT_GETEXTENDED6              62
 
 #define bEXT_GETENGCANDAY              65
 #define bEXT_GETENGCANMON              66
