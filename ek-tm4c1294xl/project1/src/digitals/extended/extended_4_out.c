@@ -97,7 +97,7 @@ void    OutExtended44(bool  fDouble)
     InitPushPtr();
     uint wSize = 0;
 
-    wSize += PushChar(fExt4Flag);
+    wSize += PushBool(fExt4Flag);
     wSize += PushChar(bExt4Months);
     wSize += PushInt(cwDayCan6);
     wSize += PushInt(cwMonCan6);
