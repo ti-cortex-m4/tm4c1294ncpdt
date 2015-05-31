@@ -37,4 +37,4 @@ test int program cnt на вызов (timer + serial) + частота timer
 
 несовместимость старого и нового проборов по ext4
 
-dbKtrans dbKpulse
+чтение из RAM ROM DF NVRAM
