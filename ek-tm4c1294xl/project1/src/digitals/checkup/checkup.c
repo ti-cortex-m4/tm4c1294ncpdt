@@ -520,7 +520,7 @@ uchar   i;
 void    OutCheckup(void)
 {
   InitPushCRC();
-  PushChar(boCheckupEnable);
+  PushBoolBool(boCheckupEnable);
   Push(&mpbCheckupLimitD, sizeof(mpbCheckupLimitD));
   Push(&mpbCheckupLimitM, sizeof(mpbCheckupLimitM));
   Output(1+sizeof(mpbCheckupLimitD)+sizeof(mpbCheckupLimitD));

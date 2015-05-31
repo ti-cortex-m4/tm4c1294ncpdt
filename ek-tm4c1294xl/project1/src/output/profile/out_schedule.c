@@ -69,7 +69,7 @@ void    OutSetCtrlHou(void)
 void    OutGetRecalcHou(void)
 {
   InitPushCRC();
-  PushChar(boRecalcAlways);
+  PushBool(boRecalcAlways);
   Push(&mpboRecalcHou, sizeof(mpboRecalcHou));
   Output(1+48);
 }

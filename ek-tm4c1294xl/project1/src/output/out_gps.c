@@ -29,7 +29,7 @@ void    OutCorrect1(void)
   Push(&mpcwPosCountPrev, sizeof(mpcwPosCountPrev));
   Push(&mpcwNegCountPrev, sizeof(mpcwNegCountPrev));
   PushChar(SeasonCurr());
-  PushChar(boSeasonGPS);
+  PushBool(boSeasonGPS);
   Output(345+2);
 }
 

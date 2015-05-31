@@ -180,7 +180,7 @@ void    Response255_CRC(void)
 
     case bEXT_GETBULK:
       InitPushCRC();
-      PushChar(boEnableBulk);
+      PushBool(boEnableBulk);
       PushChar(bMaxBulk);
       Push(&cbBulk, sizeof(cbBulk));
       PushInt(wMaxBulkDelay);
