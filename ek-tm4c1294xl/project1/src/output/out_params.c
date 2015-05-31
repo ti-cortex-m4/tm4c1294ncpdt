@@ -200,7 +200,7 @@ void    OutGetParamFull(void)
 
           PushInt(iwHardTim);
           PushInt(wTIMES);
-          PushChar(boMntParams);
+          PushBool(boMntParams);
           PushTime(tiCurr);
 
           uint wSize = 2 + 2 + 1 + sizeof(time);

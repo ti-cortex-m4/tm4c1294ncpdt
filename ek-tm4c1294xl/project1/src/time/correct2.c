@@ -109,7 +109,7 @@ void    OutCorrect21(void)
 
   InitPushCRC();
 
-  PushChar(boCorrect2Flag);
+  PushBool(boCorrect2Flag);
   Push(&mpbPassCorrect2, sizeof(mpbPassCorrect2));
   Push(&mpcwCorrect2, sizeof(mpcwCorrect2)); // TODO
 

@@ -19,7 +19,7 @@
 void    OutGaps1(void)
 {
   InitPushCRC();
-  PushChar(boGapsFlag);
+  PushBool(boGapsFlag);
   Push(&gaGaps, sizeof(gaGaps));
   Output(1+sizeof(gaGaps));
 }
@@ -33,7 +33,7 @@ time  ti;
   	MakeGaps();
 
   InitPushCRC();
-  PushChar(boGapsFlag);
+  PushBool(boGapsFlag);
   ti = *GetCurrTimeDate();
   Push(&ti, sizeof(time));
   PushChar(mpbGaps[GetDayIndexMD(ti.bMonth, ti.bDay)]);
