@@ -186,7 +186,7 @@ real    re;
       }
       else if (SupportedExtended6(c))
       {
-        value6 vl = mpCntDayCan6[c];
+        value6 vl = mpCntBoxCan6[c];
         re = vl.dbValue;
       }
       else if (mpboEnblCan[c] == false)
@@ -257,7 +257,7 @@ void    OutTimeEscVExt(void)
     {
       if (SupportedExtended6(c))
       {
-        value6 vl = mpCntDayCan6[c];
+        value6 vl = mpCntBoxCan6[c];
         PushTime(vl.tiUpdate);
       }
       else

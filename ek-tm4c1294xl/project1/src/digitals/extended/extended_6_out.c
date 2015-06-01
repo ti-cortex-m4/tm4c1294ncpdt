@@ -65,7 +65,7 @@ void    OutExtended6(bool  fDouble)
         else
         {
           if (InBuff(6) == (*GetCurrTimeDate()).bMonth - 1)
-            wSize += PushData6(mpCntDayCan6[c], fDouble);
+            wSize += PushData6(mpCntBoxCan6[c], fDouble);
           else 
             wSize += PushData6(mpCntMonCan6[c], fDouble);
         }

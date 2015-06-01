@@ -18,4 +18,4 @@ uint                    cwDayCan6, cwMonCan6;
 value6                  mpCntMonCan6[bCANALS];
 
 // буфер значений счетчиков на начало суток дл€ текущего мес€ца
-value6                  mpCntDayCan6[bCANALS];
+value6                  mpCntBoxCan6[bCANALS];
