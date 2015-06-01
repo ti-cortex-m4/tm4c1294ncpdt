@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-EXTENDED_7.H
+EXTENDED_7_OUT.H
 
 
 ------------------------------------------------------------------------------*/
@@ -11,3 +11,5 @@ void    NextDayExtended7(void);
 void    CloseExtended7(void);
 
 void    MakeExtended7(uchar  ibCan, double  db);
+
+void    OutExtended7(void);
