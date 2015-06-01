@@ -6,14 +6,7 @@ EXTENDED_7_OUT.C
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
 #include "../../memory/mem_realtime.h"
-#include "../../memory/mem_factors.h"
-#include "../../memory/mem_energy.h"
-#include "../../digitals/digitals.h"
-#include "../../devices/devices.h"
 #include "../../serial/ports.h"
-#include "../../time/rtc.h"
-#include "../../flash/files.h"
-#include "../../energy.h"
 #include "extended_7.h"
 #include "extended_7_out.h"
 
@@ -27,7 +20,7 @@ void    OutExtended7(void)
     Result(bRES_BADADDRESS);
   else
   {
-    LoadCntDayCanBuff7( (bDAYS+ibHardDay-InBuff(6)) % bDAYS );
+    LoadCntBoxCan7( (bDAYS+ibHardDay-InBuff(6)) % bDAYS );
 
     InitPushPtr();            
     PushInt(cwDayCan7);

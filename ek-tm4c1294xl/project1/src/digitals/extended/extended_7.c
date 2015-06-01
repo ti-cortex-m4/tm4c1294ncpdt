@@ -7,13 +7,10 @@ EXTENDED_7.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_settings.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_energy.h"
 #include "../../digitals/digitals.h"
-#include "../../devices/devices.h"
-#include "../../serial/ports.h"
 #include "../../time/rtc.h"
 #include "../../flash/files.h"
 #include "../../energy.h"
@@ -33,7 +30,8 @@ static bool LoadCntDayCan7(uchar  ibDayFrom)
 }
 
 
-static bool LoadCntDayCanBuff7(uchar  ibDayFrom)
+
+bool    LoadCntBoxCan7(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
