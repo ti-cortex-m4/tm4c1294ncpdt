@@ -12,6 +12,7 @@ RESPONSE253_CRC,C
 #include "../digitals/extended/extended_4t_out.h"
 #include "../digitals/extended/extended_5_out.h"
 #include "../digitals/extended/extended_6_out.h"
+#include "../digitals/extended/extended_7_out.h"
 #include "response_crc.h"
 #include "out_energy.h"
 #include "response253_crc.h"
@@ -36,6 +37,8 @@ void    Response253_CRC(void)
     case bEXT_GETEXTENDED51: OutExtended51(true); break;
 
     case bEXT_GETEXTENDED6: OutExtended6(true); break;
+
+    case bEXT_GETEXTENDED7: OutExtended7(true); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
