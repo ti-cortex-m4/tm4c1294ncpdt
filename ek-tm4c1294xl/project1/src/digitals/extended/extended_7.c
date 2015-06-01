@@ -111,5 +111,7 @@ void    MakeExtended7(uchar  ibCan, double  db)
     vl.tiUpdate = *GetCurrTimeDate();
 
     mpCntDayCan7[ibCan] = vl;
+
+    SaveCntDayCan7(ibHardDay);
   }
 }

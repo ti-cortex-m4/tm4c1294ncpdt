@@ -11,8 +11,6 @@ SPECIAL.C
 #include "../tariffs/tariffs.h"
 #include "../impulses/energy_spec.h"
 #include "../devices/devices.h"
-#include "../digitals/extended/extended_6.h"
-#include "../digitals/extended/extended_7.h"
 #include "../time/delay.h"
 #include "../time/timedate.h"
 #include "../time/decret.h"
@@ -97,6 +95,4 @@ void    CloseSpecialBuff(void)
 
   SavePowDayBuff();
   SavePowMonBuff();
-
-  CloseExtended7();
 }
