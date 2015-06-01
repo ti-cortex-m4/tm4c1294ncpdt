@@ -84,12 +84,12 @@ void    NextDayExtended7(void)
       re *= mpdbValueCntHou[c];
       re += mpreCount[c];
 
-      value6 va;
-      va.bStatus = ST4_OK;
-      va.dbValue = re;
-      va.tiUpdate = *GetCurrTimeDate();
+      value6 vl;
+      vl.bStatus = ST4_OK;
+      vl.dbValue = re;
+      vl.tiUpdate = *GetCurrTimeDate();
 
-      mpCntDayCan7[c] = va;
+      mpCntDayCan7[c] = vl;
     }
   }
 }
@@ -106,12 +106,12 @@ void    MakeExtended7(uchar  ibCan, double  db)
 {
   if (mpCntDayCan7[ibCan].bStatus == ST4_NONE)
   {
-    value6 va;
-    va.bStatus = ST4_OK;
-    va.dbValue = db;
-    va.tiUpdate = *GetCurrTimeDate();
+    value6 vl;
+    vl.bStatus = ST4_OK;
+    vl.dbValue = db;
+    vl.tiUpdate = *GetCurrTimeDate();
 
-    mpCntDayCan7[ibCan] = va;
+    mpCntDayCan7[ibCan] = vl;
   }
 }
 

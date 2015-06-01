@@ -54,13 +54,12 @@ void    OutExtended6(bool  fDouble)
       {
         if (GetDigitalDevice(c) == 0)
         {
-          value6 va;
+          value6 vl;
+          vl.bStatus = ST4_OK;
+          vl.dbValue = mpdbCntMonCan[ PrevSoftMon() ][c];
+          vl.tiUpdate = tiZero;
 
-          va.bStatus = ST4_OK;
-          va.dbValue = mpdbCntMonCan[ PrevSoftMon() ][c];
-          va.tiUpdate = tiZero;
-
-          wSize += PushData6(va, fDouble);
+          wSize += PushData6(vl, fDouble);
         }
         else
         {
