@@ -35,12 +35,12 @@ static bool LoadCntDayCanBuff7(uchar  ibDayFrom)
 {
   if (ibDayFrom == ibHardDay)
   {
-    memcpy(mpCntDayCan7Buff, mpCntDayCan7, sizeof(mpCntDayCan7));
+    memcpy(mpCntBoxCan7, mpCntDayCan7, sizeof(mpCntDayCan7));
     return true;
   }
   else
   {
-    return LoadBuff(EXT_7_DAY_VALUES + ibDayFrom*VALUE7_CAN_PAGES, mpCntDayCan7Buff, sizeof(mpCntDayCan7Buff));
+    return LoadBuff(EXT_7_DAY_VALUES + ibDayFrom*VALUE7_CAN_PAGES, mpCntBoxCan7, sizeof(mpCntBoxCan7));
   }
 }
 
@@ -134,7 +134,7 @@ void    OutExtended7(void)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
       {
-        Push(&mpCntDayCan7Buff[c], sizeof(value6));
+        Push(&mpCntBoxCan7[c], sizeof(value6));
         wSize += sizeof(value6);
       }
     }

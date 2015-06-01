@@ -9,7 +9,7 @@ MEM_EXTENDED_7.C
 
 
 // буфера значений счетчиков на начало суток
-value6                  mpCntDayCan7[bCANALS], mpCntDayCan7Buff[bCANALS];
+value6                  mpCntDayCan7[bCANALS], mpCntBoxCan7[bCANALS];
 
 // счетчик переходов через сутки
 uint                    cwDayCan7;
