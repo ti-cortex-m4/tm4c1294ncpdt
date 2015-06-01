@@ -53,14 +53,15 @@ void    InitExtended7(void)
 
 
 void    ResetExtended7(void) 
-{ 
-  cwDayCan7 = 0;
-
+{
   memset(&mpCntDayCan7, 0, sizeof(mpCntDayCan7));
 
   uchar d;
   for (d=0; d<bDAYS; d++)
     SaveCntDayCan7(d);
+
+
+  cwDayCan7 = 0;
 }
 
 
