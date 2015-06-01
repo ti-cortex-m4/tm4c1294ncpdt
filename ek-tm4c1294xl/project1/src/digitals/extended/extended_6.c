@@ -23,7 +23,7 @@ EXTENDED_6,C
 
 
 file const              flExt6Flag = {EXT_6_FLAG, &fExt6Flag, sizeof(bool)};
-file const              flCntDayCan6 = {EXT_6_VALUES, &mpCntDayCan6, sizeof(mpCntDayCan6)};
+file const              flCntBoxCan6 = {EXT_6_BOX_VALUES, &mpCntBoxCan6, sizeof(mpCntBoxCan6)};
 
 
 
@@ -43,7 +43,7 @@ bool    LoadCntMonCan6(uchar  ibMonFrom)
 void    InitExtended6(void)
 {
   LoadFileBoolean(&flExt6Flag, false);
-  LoadFile(&flCntDayCan6);
+  LoadFile(&flCntBoxCan6);
 }
 
 
@@ -65,8 +65,8 @@ void    ResetExtended6(bool  fFull)
   }
 
 
-  memset(&mpCntDayCan6, 0, sizeof(mpCntDayCan6));
-  SaveFile(&flCntDayCan6);
+  memset(&mpCntBoxCan6, 0, sizeof(mpCntBoxCan6));
+  SaveFile(&flCntBoxCan6);
 
 
   cwDayCan6 = 0;
@@ -79,8 +79,8 @@ void    NextDayExtended6(void)
 { 
   cwDayCan6++;
 
-  memset(&mpCntDayCan6, 0, sizeof(mpCntDayCan6));
-  SaveFile(&flCntDayCan6);
+  memset(&mpCntBoxCan6, 0, sizeof(mpCntBoxCan6));
+  SaveFile(&flCntBoxCan6);
 }
 
 
@@ -105,10 +105,10 @@ void    MakeExtended6(uchar  ibCan, double  db)
   mpCntMonCan6[ibCan] = vl;
   SaveCntMonCan6(ibHardMon);
 
-  if (mpCntDayCan6[ibCan].bStatus == ST4_NONE)
+  if (mpCntBoxCan6[ibCan].bStatus == ST4_NONE)
   {
-    mpCntDayCan6[ibCan] = vl;
-    SaveFile(&flCntDayCan6);
+    mpCntBoxCan6[ibCan] = vl;
+    SaveFile(&flCntBoxCan6);
   }
 }
 

@@ -43,7 +43,7 @@ value6 vl;
     LoadCntMonCan6(ibMon);
 
     if (ibMon == (*GetCurrTimeDate()).bMonth - 1)
-      vl = mpCntDayCan6[ibCan];
+      vl = mpCntBoxCan6[ibCan];
     else 
       vl = mpCntMonCan6[ibCan];
   }
@@ -60,7 +60,7 @@ value6 vl;
 
 void    ShowExtended6(uchar  ibCan)
 {
-  value6 vl = mpCntDayCan6[ibCan];
+  value6 vl = mpCntBoxCan6[ibCan];
 
   switch (vl.bStatus)
   {
