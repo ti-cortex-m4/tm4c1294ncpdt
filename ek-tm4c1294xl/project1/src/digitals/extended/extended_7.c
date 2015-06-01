@@ -80,13 +80,13 @@ void    NextDayExtended7(void)
   {
     if (GetDigitalDevice(c) == 0)
     {
-      real re = *PGetCanImpAll(mpimAbsCan,c);
-      re *= mpdbValueCntHou[c];
-      re += mpreCount[c];
+      double db = *PGetCanImpAll(mpimAbsCan,c);
+      db *= mpdbValueCntHou[c];
+      db += mpreCount[c];
 
       value6 vl;
       vl.bStatus = ST4_OK;
-      vl.dbValue = re;
+      vl.dbValue = db;
       vl.tiUpdate = *GetCurrTimeDate();
 
       mpCntDayCan7[c] = vl;
