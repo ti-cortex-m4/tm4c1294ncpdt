@@ -97,7 +97,6 @@ void    NextMonExtended6(void)
 void    MakeExtended6(uchar  ibCan, double  db)
 {
   value6 vl;
-
   vl.bStatus = ST4_OK;
   vl.dbValue = db;
   vl.tiUpdate = *GetCurrTimeDate();
