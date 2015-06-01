@@ -4,6 +4,12 @@ EXTENDED_7.H
 
 ------------------------------------------------------------------------------*/
 
+#include "../../memory/mem_extended_7.h"
+
+
+
+bool    LoadCntBoxCan7(uchar  ibDayFrom);
+
 void    InitExtended7(void);
 void    ResetExtended7(void);
 
