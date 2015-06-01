@@ -4,12 +4,4 @@ EXTENDED_7_OUT.H
 
 ------------------------------------------------------------------------------*/
 
-void    InitExtended7(void);
-void    ResetExtended7(void);
-
-void    NextDayExtended7(void);
-void    CloseExtended7(void);
-
-void    MakeExtended7(uchar  ibCan, double  db);
-
-void    OutExtended7(void);
+void    OutExtended7(bool  fDouble);

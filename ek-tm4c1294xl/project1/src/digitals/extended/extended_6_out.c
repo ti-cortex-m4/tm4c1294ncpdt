@@ -17,7 +17,7 @@ EXTENDED_6_OUT,C
 
 
 
-static uchar PushData6(value6  vl, bool  fDouble)
+uchar   PushData6(value6  vl, bool  fDouble)
 {
   uchar bSize = 0;
 

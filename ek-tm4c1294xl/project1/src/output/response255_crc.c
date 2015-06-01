@@ -134,7 +134,7 @@ void    Response255_CRC(void)
 
     case bEXT_GETEXTENDED6: OutExtended6(false); break;
 
-    case bEXT_GETEXTENDED7: OutExtended7(); break;
+    case bEXT_GETEXTENDED7: OutExtended7(false); break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;

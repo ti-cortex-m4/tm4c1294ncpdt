@@ -8,11 +8,12 @@ EXTENDED_7_OUT.C
 #include "../../memory/mem_realtime.h"
 #include "../../serial/ports.h"
 #include "extended_7.h"
+#include "extended_6_out.h"
 #include "extended_7_out.h"
 
 
 
-void    OutExtended7(void)
+void    OutExtended7(bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -22,17 +23,17 @@ void    OutExtended7(void)
   {
     LoadCntBoxCan7( (bDAYS+ibHardDay-InBuff(6)) % bDAYS );
 
-    InitPushPtr();            
-    PushInt(cwDayCan7);
-    uint wSize = 2;
+    InitPushPtr();
+    uint wSize = 0;
+
+    wSize += PushInt(cwDayCan7);
 
     uchar c;
     for (c=0; c<bCANALS; c++)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
       {
-        Push(&mpCntBoxCan7[c], sizeof(value6));
-        wSize += sizeof(value6);
+        wSize += PushData6(mpCntBoxCan7[c], fDouble);
       }
     }
 
