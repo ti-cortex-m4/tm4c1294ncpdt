@@ -4,6 +4,10 @@ EXTENDED_1.H
 
 ------------------------------------------------------------------------------*/
 
+#include "../../memory/mem_extended_1.h"
+
+
+
 extern  file const              flDsblEscU;
 extern  file const              flDsblEscV;
 extern  file const              flDsblEscS;

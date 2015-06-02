@@ -15,7 +15,7 @@
 #define wSET_CONTROL_R        407
 //#define wSET_LONG_PROFILE_B2  408
 #define wSET_MAX_REPEATS      409
-#define wSET_DISABLE_ESC      410
++   #define wSET_DISABLE_ESC      410
 #define wSET_ENABLE_BULK      411
 #define wSET_SIZE_BULK        412
 #define wSET_DELAY_BULK       413
