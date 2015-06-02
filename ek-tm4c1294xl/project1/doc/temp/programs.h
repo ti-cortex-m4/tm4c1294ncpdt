@@ -319,9 +319,9 @@
 #define bSET_MANAGETIME             197
 #define bSET_SLAVEMODEM             198
 +   #define bSET_SHOWMESSAGES           199
-#define bSET_EXTENDED_ESC_S         200
-#define bSET_EXTENDED_ESC_V         201
-#define bSET_EXTENDED_ESC_U         202
++   #define bSET_EXTENDED_ESC_S         200
++   #define bSET_EXTENDED_ESC_V         201
++   #define bSET_EXTENDED_ESC_U         202
 #define bSET_CUSTOMMODEM            203
 #define bSET_POWERED_ESC            204
 #define bSET_BLOCKING_CRC           205
