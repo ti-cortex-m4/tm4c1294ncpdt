@@ -1,13 +1,13 @@
 /*------------------------------------------------------------------------------
-KEY_EXTENDED_ESC.C
+KEY_EXTENDED_ESC,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_extended_1.h"
 #include "../../digitals/extended/extended_1.h"
 #include "../key_bool.h"
+#include "key_extended_esc.h"
 
 
 
@@ -17,9 +17,9 @@ static char const       szLoad[]         = "   Загружать    ",
                         szExtendedEscV[] = "по модему: Esc V",
                         szExtendedEscS[] = "по модему: Esc S";
 
-static char const       *pszExtendedEscU[]    = { szLoad, szExtendedEscU, "" },
-                        *pszExtendedEscV[]    = { szLoad, szExtendedEscV, "" },
-                        *pszExtendedEscS[]    = { szLoad, szExtendedEscS, "" };
+static char const       *pszExtendedEscU[] = { szLoad, szExtendedEscU, "" },
+                        *pszExtendedEscV[] = { szLoad, szExtendedEscV, "" },
+                        *pszExtendedEscS[] = { szLoad, szExtendedEscS, "" };
 
 
 
