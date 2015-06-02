@@ -33,3 +33,8 @@ test int program cnt на вызов (timer + serial) + частота timer
 reset all buffers remotely
 
 импульсные 110 не сохран€ютс€ при выключениии
+
+ext1
+ext7
+UNI cnt
+P79 и другие
