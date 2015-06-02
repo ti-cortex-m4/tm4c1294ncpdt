@@ -31,3 +31,5 @@ test int program cnt на вызов (timer + serial) + частота timer
 чтение из RAM ROM DF NVRAM
 
 reset all buffers remotely
+
+импульсные 110 не сохран€ютс€ при выключениии
