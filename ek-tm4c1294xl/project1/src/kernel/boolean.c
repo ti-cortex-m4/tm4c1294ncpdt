@@ -17,7 +17,7 @@ bool    ValidBoolean(uchar  b)
 
 bool    CharToBoolean(uchar  b)
 {
-  return (b == true ? true : false);
+  return (b == 0xFF ? true : false);
 }
 
 
