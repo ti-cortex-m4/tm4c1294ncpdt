@@ -1,28 +1,26 @@
 /*------------------------------------------------------------------------------
-KEY_DSBL_ESC.C
+KEY_DSBL_ESC,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_extended_1.h"
+#include "../../console.h"
 #include "../../digitals/extended/extended_1.h"
-#include "../keyboard.h"
-#include "../../display/display.h"
-#include "../../flash/files.h"
+#include "key_dsbl_esc.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szDisableEsc1[] = "   Разрешение   ",
-                        szDisableEsc2[] = " опроса базовых ",
-                        szDisableEsc3[] = "  данных 1,2,3  ";
+static char const       szMessage1[]    = "   Разрешение   ",
+                        szMessage2[]    = " опроса базовых ",
+                        szMessage3[]    = "  данных 1,2,3  ";
                         
-static char const       *pszDisableEsc[] = { szDisableEsc1, szDisableEsc2, szDisableEsc3, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
-void    ShowDsblEsc(void)
+static void Show(void)
 {
   Clear();
 
@@ -41,8 +39,8 @@ void    key_SetDsblEsc(void)
       enKeyboard = KBD_POSTENTER;
       Clear();
 
-      LoadSlide(pszDisableEsc); 
-      ShowDsblEsc();
+      LoadSlide(pszMessages); 
+      Show();
     } 
     else Beep();
   }
@@ -53,21 +51,21 @@ void    key_SetDsblEsc(void)
     boDsblEscU = InvertBoolean(boDsblEscU);
 
     SaveFile(&flDsblEscU);
-    ShowDsblEsc();
+    Show();
   }
   else if ((bKey == 2) && (enGlobal != GLB_WORK))
   {
     boDsblEscV = InvertBoolean(boDsblEscV);
     SaveFile(&flDsblEscV);
 
-    ShowDsblEsc();
+    Show();
   }
   else if ((bKey == 3) && (enGlobal != GLB_WORK))
   {
     boDsblEscS = InvertBoolean(boDsblEscS);
     SaveFile(&flDsblEscS);
 
-    ShowDsblEsc();
+    Show();
   }
   else Beep();
 }
