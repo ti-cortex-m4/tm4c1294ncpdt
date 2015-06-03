@@ -26,16 +26,13 @@ EXTENDED_1_OUT.C
 
 void    OutEscS_Value(bool  fDouble)
 {
-uint    wSize;
-real    re;
-
   SaveDisplay();
-  sprintf(szHi,"项痱 %u: CRC%03u ",ibPort+1,bInBuff5); Clear();
+  ShowHi(szClear); sprintf(szHi,"项痱 %u: CRC%03u",ibPort+1,bInBuff5); Clear();
 
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
   InitPushPtr();
-  wSize = 0;
+  uint wSize = 0;
 
   uchar c;
   for (c=0; c<bCANALS; c++)
@@ -44,37 +41,37 @@ real    re;
     {
       sprintf(szHi+14,"%2u",c+1);
 
+      double db;
       if (GetDigitalDevice(c) == 0)
       {
-        re = GetCntCurrImp(c);
+        db = GetCntCurrImp(c);
         mptiEsc_S[c] = *GetCurrTimeDate();
       }
       else if (mpboEnblCan[c] == false)
       {
-        re = 0;
+        db = 0;
         mptiEsc_S[c] = *GetCurrTimeDate();
       }
       else if ((boExtendedEscS == true) || (GetDigitalPhone(c) != 0))
-        re = mpdbEsc_S[c];
+        db = mpdbEsc_S[c];
       else
       {
         LoadCurrDigital(c);
         if (mpboChannelsA[diCurr.ibLine] == true)
-          re = DoubleToFloat(mpdbChannelsC[diCurr.ibLine]);
+          db = mpdbChannelsC[diCurr.ibLine];
         else
         {
           uchar p = ibPort;
           double2 db2 = ReadCntCurrCan(c);
           ibPort = p;
 
-          if (!db2.fValid) re = 0;
+          if (!db2.fValid) db = 0;
         }
 
         mptiEsc_S[c] = *GetCurrTimeDate();
       }
 
-      PushFloat(re);
-      wSize += sizeof(real);
+      wSize += PushFloatOrDouble(db, fDouble);
     }
   }
 
@@ -87,17 +84,13 @@ real    re;
 
 void    OutEscU_Value(void)
 {
-uint    wSize;
-time    ti1;
-time    ti2;
-
   SaveDisplay();
-  sprintf(szHi,"项痱 %u: CRC%03u ",ibPort+1,bInBuff5); Clear();
+  ShowHi(szClear); sprintf(szHi,"项痱 %u: CRC%03u",ibPort+1,bInBuff5); Clear();
 
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
   InitPushPtr();
-  wSize = 0;
+  uint wSize = 0;
 
   uchar c;
   for (c=0; c<bCANALS; c++)
@@ -106,6 +99,7 @@ time    ti2;
     {
       sprintf(szHi+14,"%2u",c+1);
 
+      time ti1, ti2;
       if (GetDigitalDevice(c) == 0)
       {
         ti1 = *GetCurrTimeDate();
@@ -138,11 +132,8 @@ time    ti2;
         ti2 = *GetCurrTimeDate();
       }
 
-      PushTime(ti1);
-      wSize += sizeof(time);
-
-      PushTime(ti2);
-      wSize += sizeof(time);
+      wSize += PushTime(ti1);
+      wSize += PushTime(ti2);
     }
   }
 
@@ -155,18 +146,15 @@ time    ti2;
 
 void    OutEscV_Value(bool  fDouble)
 {
-uint    wSize;
-real    re;
-
   SaveDisplay();
-  sprintf(szHi,"项痱 %u: CRC%03u ",ibPort+1,bInBuff5); Clear();
+  ShowHi(szClear); sprintf(szHi,"项痱 %u: CRC%03u",ibPort+1,bInBuff5); Clear();
 
   uchar ibMon = ibHardMon;
 
   memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
   InitPushPtr();
-  wSize = 0;
+  uint wSize = 0;
 
   uchar c;
   for (c=0; c<bCANALS; c++)
@@ -175,46 +163,46 @@ real    re;
     {
       sprintf(szHi+14,"%2u",c+1);
 
+      double db;
       if (GetDigitalDevice(c) == 0)
       {
         if (LoadCntMon(ibMon) == true)
-          re = mpdbCntMonCan[ PrevSoftMon() ][c];
+          db = mpdbCntMonCan[ PrevSoftMon() ][c];
         else
-          re = 0;
+          db = 0;
 
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
       else if (SupportedExtended6(c))
       {
         value6 vl = mpCntBoxCan6[c];
-        re = vl.dbValue;
+        db = vl.dbValue;
       }
       else if (mpboEnblCan[c] == false)
       {
-        re = 0;
+        db = 0;
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
       else if ((boExtendedEscV == true) || (GetDigitalPhone(c) != 0))
-        re = mpdbEsc_V[c];
+        db = mpdbEsc_V[c];
       else
       {
         LoadCurrDigital(c);
         if (mpboChannelsA[diCurr.ibLine] == true)
-          re = DoubleToFloat(mpdbChannelsC[diCurr.ibLine]);
+          db = mpdbChannelsC[diCurr.ibLine];
         else
         {
           uchar p = ibPort;
           double2 db2 = ReadCntMonCan(ibMon, c);
           ibPort = p;
 
-          if (!db2.fValid) re = 0;
+          if (!db2.fValid) db = 0;
         }
 
         mptiEsc_V[c] = *GetCurrTimeDate();
       }
 
-      PushFloat(re);
-      wSize += sizeof(real);
+      wSize += PushFloatOrDouble(db, fDouble);
     }
   }
 
