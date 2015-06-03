@@ -158,7 +158,7 @@ uchar   PushFloatOrDouble(double  db, bool  fDouble)
   }
   else
   {
-    PushFloat(DoubleToFloat(db));
+    PushFloat((float)db);
     return sizeof(float);
   }
 }

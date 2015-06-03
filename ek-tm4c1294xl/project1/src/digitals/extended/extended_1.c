@@ -152,7 +152,7 @@ void    MakeExtended1(void)
       {
         if (mpboChannelsA[diPrev.ibLine] == true)
         {
-          double db = DoubleToFloat(mpdbChannelsC[diPrev.ibLine]);
+          double db = mpdbChannelsC[diPrev.ibLine];
           mpcwEscV_OK[c]++;
 
           mpdbEsc_V[c] = db;

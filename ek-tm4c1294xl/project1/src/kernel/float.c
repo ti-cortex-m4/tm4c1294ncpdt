@@ -32,13 +32,6 @@ bool    ValidFloat(float  fl)
 
 
 
-float   DoubleToFloat(double  db)
-{
-  return (float)db;
-}
-
-
-
 float2  GetFloat2(float  flValue, bool  fValid)
 {
   float2 fl2;
