@@ -24,8 +24,8 @@ void    Response253_CRC(void)
 {
   switch (bInBuff5)
   {
-    case bEXT_GET_ESC_S_VALUE: OutSimpleEscSExt(true); break;
-    case bEXT_GET_ESC_V_VALUE: OutSimpleEscVExt(true); break;
+    case bEXT_GET_ESC_S_VALUE: OutEscS_Value(true); break;
+    case bEXT_GET_ESC_V_VALUE: OutEscV_Value(true); break;
 
     case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt(true); break;
     case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt(true); break;
