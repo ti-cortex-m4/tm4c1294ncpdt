@@ -12,11 +12,12 @@ QUERIES2.H
 #define bEXT_GETPHONE                  1
 #define bEXT_SETPHONE                  2
 
-#define bEXT_GETSIMPLE_ESC_U           3
-#define bEXT_GETSIMPLE_ESC_S           4
+#define bEXT_GET_ESC_U_VALUE           3
+#define bEXT_GET_ESC_S_VALUE           4
+#define bEXT_GET_ESC_V_VALUE           242
 
-#define bEXT_GETTIME_ESC_S             5
-#define bEXT_GETTIME_ESC_V             6
+#define bEXT_GET_ESC_S_TIME             5
+#define bEXT_GET_ESC_V_TIME             6
 
 #define bEXT_GETGROUPS                 7
 #define bEXT_GETDIGITALS               8

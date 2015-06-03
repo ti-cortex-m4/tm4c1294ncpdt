@@ -206,7 +206,7 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     QueryBreakF();
-    QueryRealExtendedF(bEXT_GETSIMPLE_ESC_S);
+    QueryRealExtendedF(bEXT_GET_ESC_S_VALUE);
 
     if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);

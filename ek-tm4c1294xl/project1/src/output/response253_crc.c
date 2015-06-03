@@ -8,6 +8,7 @@ RESPONSE253_CRC,C
 #include "../memory/mem_ports.h"
 #include "../include/states.h"
 #include "../serial/ports.h"
+#include "../digitals/extended/extended_1_out.h"
 #include "../digitals/extended/extended_4_out.h"
 #include "../digitals/extended/extended_4t_out.h"
 #include "../digitals/extended/extended_5_out.h"
@@ -23,6 +24,9 @@ void    Response253_CRC(void)
 {
   switch (bInBuff5)
   {
+    case bEXT_GET_ESC_S_VALUE: OutSimpleEscSExt(true); break;
+    case bEXT_GET_ESC_V_VALUE: OutSimpleEscVExt(true); break;
+
     case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt(true); break;
     case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt(true); break;
 

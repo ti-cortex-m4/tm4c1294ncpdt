@@ -24,7 +24,7 @@ EXTENDED_1_OUT.C
 
 
 
-void    OutSimpleEscSExt(void)
+void    OutSimpleEscSExt(bool  fDouble)
 {
 uint    wSize;
 real    re;
@@ -153,7 +153,7 @@ time    ti2;
 }
 
 
-void    OutCntCanMonCurrExt(void)
+void    OutSimpleEscVExt(bool  fDouble)
 {
 uint    wSize;
 real    re;
