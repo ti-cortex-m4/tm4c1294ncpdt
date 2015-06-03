@@ -8,8 +8,6 @@ EXTENDED_1_OUT.C
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy.h"
-#include "../../memory/mem_digitals.h"
-#include "../../memory/mem_extended_1.h"
 #include "../../display/display.h"
 #include "../../serial/ports.h"
 #include "../../realtime/realtime.h"
@@ -21,6 +19,8 @@ EXTENDED_1_OUT.C
 #include "../../time/rtc.h"
 #include "../../energy.h"
 #include "../../energy2.h"
+#include "extended_1.h"
+#include "extended_1_out.h"
 
 
 
@@ -81,7 +81,7 @@ real    re;
   OutptrOutBuff(wSize);      
 
   LoadDisplay();
-  NextPause();                                    // внимание !
+  NextPause(); // внимание !
 }
 
 
@@ -149,7 +149,7 @@ time    ti2;
   OutptrOutBuff(wSize);      
 
   LoadDisplay();
-  NextPause();                                    // внимание !
+  NextPause(); // внимание !
 }
 
 
@@ -221,7 +221,7 @@ real    re;
   OutptrOutBuff(wSize);      
 
   LoadDisplay();
-  NextPause();                                    // внимание !
+  NextPause(); // внимание !
 }
 
 
@@ -236,8 +236,7 @@ void    OutEscS_Time(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushTime(mptiEsc_S[c]);
-      wSize += sizeof(time);
+      wSize += PushTime(mptiEsc_S[c]);
     }
   }
 
@@ -257,15 +256,12 @@ void    OutEscV_Time(void)
     {
       if (SupportedExtended6(c))
       {
-        value6 vl = mpCntBoxCan6[c];
-        PushTime(vl.tiUpdate);
+        wSize += PushTime(mpCntBoxCan6[c].tiUpdate);
       }
       else
       {
-        PushTime(mptiEsc_V[c]);
+        wSize += PushTime(mptiEsc_V[c]);
       }
-
-      wSize += sizeof(time);
     }
   }
 
