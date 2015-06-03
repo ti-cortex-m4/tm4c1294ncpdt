@@ -16,8 +16,8 @@ QUERIES2.H
 #define bEXT_GET_ESC_S_VALUE           4
 #define bEXT_GET_ESC_V_VALUE           242
 
-#define bEXT_GET_ESC_S_TIME             5
-#define bEXT_GET_ESC_V_TIME             6
+#define bEXT_GET_ESC_S_TIME            5
+#define bEXT_GET_ESC_V_TIME            6
 
 #define bEXT_GETGROUPS                 7
 #define bEXT_GETDIGITALS               8
