@@ -24,7 +24,7 @@ EXTENDED_1_OUT.C
 
 
 
-void    OutSimpleEscSExt(bool  fDouble)
+void    OutEscS_Value(bool  fDouble)
 {
 uint    wSize;
 real    re;
@@ -85,7 +85,7 @@ real    re;
 }
 
 
-void    OutSimpleEscUExt(void)
+void    OutEscU_Value(void)
 {
 uint    wSize;
 time    ti1;
@@ -153,7 +153,7 @@ time    ti2;
 }
 
 
-void    OutSimpleEscVExt(bool  fDouble)
+void    OutEscV_Value(bool  fDouble)
 {
 uint    wSize;
 real    re;
@@ -226,7 +226,7 @@ real    re;
 
 
 
-void    OutTimeEscSExt(void)
+void    OutEscS_Time(void)
 {
   InitPushPtr();
   uint wSize = 0;
@@ -245,7 +245,7 @@ void    OutTimeEscSExt(void)
 }
 
 
-void    OutTimeEscVExt(void)
+void    OutEscV_Time(void)
 {
   InitPushPtr();
   uint wSize = 0;

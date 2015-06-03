@@ -67,11 +67,11 @@ void    Response255_CRC(void)
     case bINQ_GETCOUNT:     OutFloatCanMap(mpreCount);    break;
     case bINQ_GETLOSSE:     OutFloatCanMap(mpreLosse);    break;
 
-    case bEXT_GET_ESC_S_VALUE: OutSimpleEscSExt(false); break;
-    case bEXT_GET_ESC_U_VALUE: OutSimpleEscUExt();      break;
-    case bEXT_GET_ESC_V_VALUE: OutSimpleEscVExt(false); break;
-    case bEXT_GET_ESC_S_TIME:  OutTimeEscSExt();        break;
-    case bEXT_GET_ESC_V_TIME:  OutTimeEscVExt();        break;
+    case bEXT_GET_ESC_S_VALUE: OutEscS_Value(false); break;
+    case bEXT_GET_ESC_U_VALUE: OutEscU_Value();      break;
+    case bEXT_GET_ESC_V_VALUE: OutEscV_Value(false); break;
+    case bEXT_GET_ESC_S_TIME:  OutEscS_Time();       break;
+    case bEXT_GET_ESC_V_TIME:  OutEscV_Time();       break;
 
     case bEXT_GETGROUPS: OutGetGroupsExt(); break;
 

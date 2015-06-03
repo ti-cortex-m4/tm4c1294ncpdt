@@ -4,9 +4,9 @@ EXTENDED_1_OUT.H
 
 ------------------------------------------------------------------------------*/
 
-void    OutSimpleEscSExt(bool  fDouble);
-void    OutSimpleEscUExt(void);
-void    OutSimpleEscVExt(bool  fDouble);
+void    OutEscS_Value(bool  fDouble);
+void    OutEscU_Value(void);
+void    OutEscV_Value(bool  fDouble);
 
-void    OutTimeEscSExt(void);
-void    OutTimeEscVExt(void);
+void    OutEscS_Time(void);
+void    OutEscV_Time(void);
