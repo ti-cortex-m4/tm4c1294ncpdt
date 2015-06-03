@@ -38,3 +38,5 @@ ext1
 ext7
 UNI cnt
 P79 и другие
+
+Esc SUV - прочитать CRC мгновенно
