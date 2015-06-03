@@ -19,6 +19,7 @@ RESPONSE255_CRC.C
 #include "../time/correct3.h"
 #include "../output/out_groups.h"
 #include "../output/out_relaxs.h"
+#include "../digitals/extended/extended_1_out.h"
 #include "../digitals/extended/extended_4_out.h"
 #include "../digitals/extended/extended_4t_out.h"
 #include "../digitals/extended/extended_5_out.h"
@@ -43,7 +44,6 @@ RESPONSE255_CRC.C
 #include "../output/out_limits.h"
 #include "../output/profile/out_limits.h"
 #include "../output/profile/out_schedule.h"
-#include "../output/out_extended_1.h"
 
 
 
