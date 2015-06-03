@@ -1,26 +1,26 @@
 /*------------------------------------------------------------------------------
-OUT_EXTENDED_1.C
+EXTENDED_1_OUT.C
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_ports.h"
-#include "../memory/mem_realtime.h"
-#include "../memory/mem_energy.h"
-#include "../memory/mem_digitals.h"
-#include "../memory/mem_extended_1.h"
-#include "../display/display.h"
-#include "../serial/ports.h"
-#include "../realtime/realtime.h"
-#include "../digitals/digitals.h"
-#include "../digitals/digitals_pause.h"
-#include "../sensors/automatic2.h"
-#include "../digitals/extended/extended_6.h"
-#include "../time/timedate.h"
-#include "../time/rtc.h"
-#include "../energy.h"
-#include "../energy2.h"
+#include "../../main.h"
+#include "../../memory/mem_ports.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_energy.h"
+#include "../../memory/mem_digitals.h"
+#include "../../memory/mem_extended_1.h"
+#include "../../display/display.h"
+#include "../../serial/ports.h"
+#include "../../realtime/realtime.h"
+#include "../../digitals/digitals.h"
+#include "../../digitals/digitals_pause.h"
+#include "../../sensors/automatic2.h"
+#include "../../digitals/extended/extended_6.h"
+#include "../../time/timedate.h"
+#include "../../time/rtc.h"
+#include "../../energy.h"
+#include "../../energy2.h"
 
 
 
