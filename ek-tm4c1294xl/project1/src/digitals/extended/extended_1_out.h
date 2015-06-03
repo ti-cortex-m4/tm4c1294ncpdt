@@ -4,9 +4,9 @@ EXTENDED_1_OUT.H
 
 ------------------------------------------------------------------------------*/
 
-void    OutSimpleEscSExt(void);
+void    OutSimpleEscSExt(bool  fDouble);
 void    OutSimpleEscUExt(void);
-void    OutCntCanMonCurrExt(void);
+void    OutSimpleEscVExt(bool  fDouble);
 
 void    OutTimeEscSExt(void);
 void    OutTimeEscVExt(void);
