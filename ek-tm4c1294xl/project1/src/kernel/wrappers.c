@@ -29,3 +29,14 @@ double2 GetDouble2(double  dbValue, bool  fValid)
 
   return db2;
 }
+
+
+time2   GetTime2(time  tiValue, bool  fValid)
+{
+  time2 ti2;
+
+  ti2.tiValue = tiValue;
+  ti2.fValid = fValid;
+
+  return ti2;
+}

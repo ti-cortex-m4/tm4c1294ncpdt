@@ -102,7 +102,8 @@ void    MakeExtended1(void)
 
     memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-    if (ReadTimeCan(ibDig) == 1) { OK(); /*AddDigRecord(EVE_ESC_U_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_U_ERROR);*/ }
+    time2 ti2 = ReadTimeCan(ibDig);
+    if (ti2.fValid) { OK(); /*AddDigRecord(EVE_ESC_U_OK);*/ } else { Error(); /*AddDigRecord(EVE_ESC_U_ERROR);*/ }
 
     LoadCurrDigital(ibDig);
     uchar c;

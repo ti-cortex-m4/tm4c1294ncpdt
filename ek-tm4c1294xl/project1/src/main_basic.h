@@ -32,15 +32,6 @@ typedef struct
 } time;
 
 
-// тип 'время'
-typedef struct
-{
-  uchar         bSecond;
-  uchar         bMinute;
-  uchar         bHour;
-} time2;
-
-
 // тип 'комбинированный 32 бита'
 typedef union
 {

@@ -612,21 +612,20 @@ uchar   i;
 
 #ifndef SKIP_A
 
-//  чтение значение времени/даты дл€ счЄтчиков —Ё“-4“ћ
-bool    ReadTimeCanA(void)
+time2   ReadTimeCanA(void)
 {
 uchar   i;
 
   Clear();
 
-  if (QueryOpenA_Full(25) == 0) return(0);
+  if (QueryOpenA_Full(25) == 0) return GetTime2(tiZero, false);
 
-  if (QueryTimeAltA_Full(75) == 0) return(0);
+  if (QueryTimeAltA_Full(75) == 0) return GetTime2(tiZero, false);
 
   tiChannelC = tiAlt;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
-  return(1);
+  return GetTime2(tiAlt, true);
 }
 
 #endif
@@ -635,21 +634,20 @@ uchar   i;
 
 #ifndef SKIP_B
 
-//  чтение значение времени/даты дл€ счЄтчиков ћеркурий-230
-bool    ReadTimeCanB(void)
+time2   ReadTimeCanB(void)
 {
 uchar   i;
 
   Clear();
 
-  if (QueryOpenB_Full(25) == 0) return(0);
+  if (QueryOpenB_Full(25) == 0) return GetTime2(tiZero, false);
 
-  if (QueryTimeAltB_Full(75) == 0) return(0);
+  if (QueryTimeAltB_Full(75) == 0) return GetTime2(tiZero, false);
 
   tiChannelC = tiAlt;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
-  return(1);
+  return GetTime2(tiAlt, true);
 }
 
 #endif
@@ -658,8 +656,7 @@ uchar   i;
 
 #ifndef SKIP_C
 
-//  чтение значение времени/даты дл€ счЄтчиков CC-301
-bool    ReadTimeCanC(void)
+time2   ReadTimeCanC(void)
 {
 uchar   i;
 
@@ -676,7 +673,7 @@ uchar   i;
       break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
   ShowPercent(75);
 
   ReadTimeAltC();
@@ -685,7 +682,7 @@ uchar   i;
   tiChannelC = tiAlt;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
-  return(1);
+  return GetTime2(tiAlt, true);
 }
 
 #endif
@@ -1840,7 +1837,7 @@ uchar   i,j;
 
 
 
-// прочитать показани€ счЄтчиков текущие с цифровых счЄтчиков
+// прочитать текущие значени€ счЄтчиков
 double2 ReadCntCurrCan(uchar  ibCan)
 {
   Clear();
@@ -1873,8 +1870,8 @@ double2 ReadCntCurrCan(uchar  ibCan)
 }
 
 
-// прочитать значение времени/даты с цифровых счЄтчиков
-bool    ReadTimeCan(uchar  ibCan)
+// прочитать врем€ и дату
+time2   ReadTimeCan(uchar  ibCan)
 {
   Clear();
 
@@ -1885,27 +1882,27 @@ bool    ReadTimeCan(uchar  ibCan)
   {
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadTimeCanA() );
+    case 1:  return ReadTimeCanA();
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadTimeCanB() );
+    case 2:  return ReadTimeCanB();
 
-    case 12: tiAlt = tiCurr; return(1);
+    case 12: return GetTime2(tiCurr, true);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadTimeCanC() );
+    case 3:  return ReadTimeCanC();
 #endif
 
-    default: tiAlt = tiZero; return(0);
+    default: return GetTime2(tiZero, false);
   }
 }
 
 
 
-// прочитать показани€ счЄтчиков по мес€цам с цифровых счЄтчиков
+// прочитать значени€ счетчиков на начало текущих суток (дл€ текущего мес€ца) или на конец мес€ца (дл€ остальных мес€цев)
 double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 {
   Clear();
