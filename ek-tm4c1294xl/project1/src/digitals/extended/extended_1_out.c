@@ -169,7 +169,7 @@ void    OutEscV_Value(bool  fDouble)
         if (LoadCntMon(ibMon) == true)
           db = mpdbCntMonCan[ PrevSoftMon() ][c];
         else
-          db = 0;
+          db = GetDoubleNAN();
 
         mptiEsc_V[c] = *GetCurrTimeDate();
       }

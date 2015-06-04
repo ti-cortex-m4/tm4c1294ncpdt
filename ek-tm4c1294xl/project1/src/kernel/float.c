@@ -29,3 +29,12 @@ bool    ValidFloat(float  fl)
 {
   return !IsFloatNAN(fl);
 }
+
+
+
+double  GetDoubleNAN(void)
+{
+  combo64 co;
+  co.qwBuff = 0xFFFFFFFFFFFFFFFF;
+  return co.dbBuff;
+}
