@@ -175,8 +175,7 @@ void    OutEscV_Value(bool  fDouble)
       }
       else if (SupportedExtended6(c))
       {
-        value6 vl = mpCntBoxCan6[c];
-        db = vl.dbValue;
+        db = mpCntBoxCan6[c].dbValue;
       }
       else if (mpboEnblCan[c] == false)
       {

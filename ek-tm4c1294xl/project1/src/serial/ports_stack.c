@@ -120,7 +120,7 @@ uchar   PushLong(ulong  dw)
 uchar    PushFloat(float  fl)
 {
   static combo32 co;
-  co.reBuff = fl;
+  co.flBuff = fl;
 
   PushChar(co.mpbBuff[3]);
   PushChar(co.mpbBuff[2]);
@@ -302,7 +302,7 @@ float   PopFloat(void)
   co.mpbBuff[1] = PopChar();
   co.mpbBuff[0] = PopChar();
 
-  return co.reBuff;
+  return co.flBuff;
 }
 
 
