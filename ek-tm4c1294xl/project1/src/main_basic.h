@@ -46,7 +46,7 @@ typedef union
 {
   uchar         mpbBuff[4];
   ulong         dwBuff;
-  float         reBuff;
+  float         flBuff;
 } combo32;
 
 

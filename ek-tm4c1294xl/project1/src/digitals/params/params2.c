@@ -301,7 +301,7 @@ void    ReadArrayC(uchar  bT)
   coEnergy.mpbBuff[1] = PopChar();
   coEnergy.mpbBuff[0] = PopChar();
 
-  reValue = coEnergy.reBuff / reParamDiv;
+  reValue = coEnergy.flBuff / reParamDiv;
 }
 
 

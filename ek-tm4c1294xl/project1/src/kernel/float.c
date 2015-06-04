@@ -12,7 +12,7 @@ FLOAT,Ñ
 bool    IsFloatNAN(float  fl)
 {
   combo32 co;
-  co.reBuff = fl;
+  co.flBuff = fl;
   return co.dwBuff == 0xFFFFFFFF;
 }
 
@@ -21,7 +21,7 @@ float   GetFloatNAN(void)
 {
   combo32 co;
   co.dwBuff = 0xFFFFFFFF;
-  return co.reBuff;
+  return co.flBuff;
 }
 
 
