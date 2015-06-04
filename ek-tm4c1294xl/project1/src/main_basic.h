@@ -20,22 +20,6 @@ typedef int32_t         slong;
 typedef float           real;
 
 
-// тип 'значение float и флаг достоверности'
-typedef struct
-{
-  float         flValue;
-  bool          fValid;
-} float2;
-
-
-// тип 'значение double и флаг достоверности'
-typedef struct
-{
-  double        dbValue;
-  bool          fValid;
-} double2;
-
-
 // тип 'время и дата'
 typedef struct
 {

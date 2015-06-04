@@ -27,6 +27,7 @@ MAIN,H
 #include "main_extended.h"
 #include "kernel/boolean.h"
 #include "kernel/float.h"
+#include "kernel/wrappers.h"
 
 
 
