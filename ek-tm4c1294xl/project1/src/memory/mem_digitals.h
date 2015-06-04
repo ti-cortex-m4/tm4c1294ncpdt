@@ -6,11 +6,11 @@ MEM_DIGITALS.H
 
 extern  uint                    wDigitalsMask;
 
-extern  bool                 mpboEnblCan[bCANALS];
+extern  bool                    mpboEnblCan[bCANALS];
 
 
 
-extern  bool                 boEnblKeys;
+extern  bool                    boEnblKeys;
 
 extern  phone                   mpphKeys[bCANALS];
 
@@ -25,7 +25,7 @@ extern  digital                 diPrev, diCurr, diNext, diLast;
 
 extern  combo32                 coEnergy;
 
-extern  bool                 mpboChannelsA[bCHANNELS];
+extern  bool                    mpboChannelsA[bCHANNELS];
 
 extern  ulong                   mpdwChannelsA[bCHANNELS],
                                 mpdwChannelsB[bCHANNELS];
@@ -36,19 +36,19 @@ extern  time                    tiChannelC;
 
 
 
-extern  bool                 boEnblCurrent, boEnblProfile;
+extern  bool                    boEnblCurrent, boEnblProfile;
 
 extern  uchar                   bTimeoutCurrent, bTimeoutProfile;
 
-extern  bool                 boSeparateCan;
+extern  bool                    boSeparateCan;
 
-extern  bool                 boShowMessages;
+extern  bool                    boShowMessages;
 
-extern  bool                 boHideMessages;
+extern  bool                    boHideMessages;
 
-extern  bool                 boControlTime;
+extern  bool                    boControlTime;
 
-extern  bool                 boManageTime;
+extern  bool                    boManageTime;
 
 
 
@@ -61,4 +61,4 @@ extern  uint                    mpcwFailure2[bCANALS];
 
 extern  uchar                   bKeysLevelB;
 
-extern  bool                 boShortProfileC;
+extern  bool                    boShortProfileC;

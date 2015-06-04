@@ -65,7 +65,7 @@ void    OutEscS_Value(bool  fDouble)
           double2 db2 = ReadCntCurrCan(c);
           ibPort = p;
 
-          if (!db2.fValid) db = 0;
+          if (!db2.fValid) db = 0; else db = db2.dbValue;
         }
 
         mptiEsc_S[c] = *GetCurrTimeDate();
@@ -123,10 +123,10 @@ void    OutEscU_Value(void)
         else
         {
           uchar p = ibPort;
-          bool f = ReadTimeCan(c);
+          time2 ti2 = ReadTimeCan(c);
           ibPort = p;
 
-          if (f == 0) ti1 = tiZero; else ti1 = tiAlt;
+          if (!ti2.fValid) ti1 = tiZero; else ti1 = ti2.tiValue;
         }
 
         ti2 = *GetCurrTimeDate();
@@ -195,7 +195,7 @@ void    OutEscV_Value(bool  fDouble)
           double2 db2 = ReadCntMonCan(ibMon, c);
           ibPort = p;
 
-          if (!db2.fValid) db = 0;
+          if (!db2.fValid) db = 0; else db = db2.dbValue;
         }
 
         mptiEsc_V[c] = *GetCurrTimeDate();

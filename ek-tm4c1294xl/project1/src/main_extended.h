@@ -57,23 +57,6 @@ typedef struct
 } value4t;
 
 
-// тип 'данные типа 7'
-typedef struct
-{
-  uchar         bSelf;
-  uint          mpwSelf[4];
-  time          tiSelf;
-} value7;
-
-
-// тип 'диаграмма'
-typedef struct
-{
-  real          dbValue;
-  time2         tmSelf;
-} diagram;
-
-
 // константы
 #define bVALUE7_BLOCKS      3
 #define bVALUE7_USED_SIZE   (bVALUE7_BLOCKS*6) 

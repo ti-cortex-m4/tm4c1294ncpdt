@@ -195,13 +195,16 @@ void    ShowModemReadTimeCan(bool  fShowTimeDate)
       ShowLo(szBlocked);
     }
     else
-    if (ReadTimeCan(ibX) == 1)
     {
-      sprintf(szHi+14,"%2u",ibX+1);
-      Clear();
-      (fShowTimeDate) ? ShowTimeDate(tiAlt) : ShowDeltaTime(tiAlt);
+      time2 ti2 = ReadTimeCan(ibX);
+      if (ti2.fValid)
+      {
+        sprintf(szHi+14,"%2u",ibX+1);
+        Clear();
+        (fShowTimeDate) ? ShowTimeDate(tiAlt) : ShowDeltaTime(tiAlt);
+      }
+      else Error();
     }
-    else Error();
 
     SaveConnect();
   }
