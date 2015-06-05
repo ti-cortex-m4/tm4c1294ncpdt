@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
-OUT_FLASH_STACK.C
-                    
+OUT_FLASH_STACK,C
+
 
 ------------------------------------------------------------------------------*/
 
@@ -9,6 +9,7 @@ OUT_FLASH_STACK.C
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
 #include "../include/flash.h"
+#include "out_flash_stack.h"
 
 
 
@@ -36,7 +37,6 @@ void    OutFlashStack(void)
   PUSH_ENUM(VALUE4T_CAN_PAGES)
   PUSH_ENUM(VALUE5_CAN_PAGES)
   PUSH_ENUM(VALUE6_CAN_PAGES)
-  PUSH_ENUM(VALUE7_CAN_PAGES)
   PUSH_ENUM(VALUE7_CAN_PAGES)
 
   PushChar(0x0D); PushChar(0x0A);
