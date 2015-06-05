@@ -18,7 +18,7 @@ real                    mpreBase[bCANALS];
 time                    mptiBase[bCANALS];
 
 // массив флагов установки базовых величин
-bool                 mpboBase[bCANALS];
+bool                    mpboBase[bCANALS];
 
 // массив для хранения базовых значений всех каналов одного счетчика
 ulong                   mpdwBaseDig[bCHANNELS];

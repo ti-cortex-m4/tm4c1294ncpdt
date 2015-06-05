@@ -12,7 +12,7 @@ extern  uint                    mpcwStartAbs16Can[bCANALS];
 
 extern  ulong                   mpcdwStartAbs32Can[bCANALS];
 
-extern  bool                 mpboStartCan[bCANALS];
+extern  bool                    mpboStartCan[bCANALS];
 
 extern  uint                    mpcwStopCan[bCANALS];
 

@@ -21,7 +21,7 @@ time                    tiGPS;
 uchar                   bGMT;
 
 // график коррекции времени
-bool                 mpboGPSRun[48];
+bool                    mpboGPSRun[48];
 
 // счётчики событий
 uint                    mpcwGPSRun[20];

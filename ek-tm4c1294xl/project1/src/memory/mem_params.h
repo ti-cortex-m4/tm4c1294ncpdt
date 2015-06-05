@@ -10,7 +10,7 @@ extern  bool                 boMntParams;
 
 extern  real                    mpreParamsDiv[wPARAMS];
 
-extern  bool                 mpboEnblParams[wPARAMS];
+extern  bool                    mpboEnblParams[wPARAMS];
 
 extern  real                    mpreParamsBuff[2][wPARAMS];
 

@@ -21,7 +21,7 @@ uint                    mpcwStartAbs16Can[bCANALS];
 ulong                   mpcdwStartAbs32Can[bCANALS];
 
 // массив признаков начала опроса
-bool                 mpboStartCan[bCANALS];
+bool                    mpboStartCan[bCANALS];
 
 // массив индексов дальней границы опроса
 uint                    mpcwStopCan[bCANALS];
