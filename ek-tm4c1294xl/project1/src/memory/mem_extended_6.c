@@ -11,11 +11,11 @@ MEM_EXTENDED_6.C
 // флаг разрешени€ опроса
 bool                    fExt6Flag;
 
-// счетчик переходов через сутки и мес€ц
-uint                    cwDayCan6, cwMonCan6;
-
 // буфер значений счетчиков на конец 12 мес€цев
 value6                  mpCntMonCan6[bCANALS];
 
 // буфер значений счетчиков на начало суток дл€ текущего мес€ца
 value6                  mpCntBoxCan6[bCANALS];
+
+// счетчик переходов через сутки и мес€ц
+uint                    cwDayCan6, cwMonCan6;

@@ -10,7 +10,7 @@ extern  real                    mpreBase[bCANALS];
 
 extern  time                    mptiBase[bCANALS];
 
-extern  bool                 mpboBase[bCANALS];
+extern  bool                    mpboBase[bCANALS];
 
 extern  ulong                   mpdwBaseDig[bCHANNELS];
 

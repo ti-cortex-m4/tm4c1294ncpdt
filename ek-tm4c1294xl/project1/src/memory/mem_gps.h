@@ -12,7 +12,7 @@ extern  time                    tiGPS;
 
 extern  uchar                   bGMT;
 
-extern  bool                 mpboGPSRun[48];
+extern  bool                    mpboGPSRun[48];
 
 extern  uint                    mpcwGPSRun[20];
 

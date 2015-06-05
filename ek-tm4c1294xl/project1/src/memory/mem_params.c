@@ -18,7 +18,7 @@ bool                 boMntParams;
 real                    mpreParamsDiv[wPARAMS];
 
 // массив разрешения опроса по параметрам
-bool                 mpboEnblParams[wPARAMS];
+bool                    mpboEnblParams[wPARAMS];
 
 // промежуточный массив
 real                    mpreParamsBuff[2][wPARAMS];
