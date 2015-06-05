@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
-OUT_CURRENT.C
-                    
+OUT_CURRENT,C
+
 
 ------------------------------------------------------------------------------*/
 
@@ -11,71 +11,70 @@ OUT_CURRENT.C
 #include "../memory/mem_ports.h"
 #include "../digitals/sensors.h"
 #include "../serial/ports.h"
+#include "out_current.h"
 
 
 
 void    OutCurrentExt(void)
 {
-uchar   i;
-uint    w;
-
   InitPushPtr();
-  w = 0;
+  uint wSize = 0;
 
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushBool(mpboBase[i]);
-      PushLong(mpdwBase[i]);
-      PushFloat(mpreBase[i]);
-      PushTime(mptiBase[i]);
-      PushTime(mptiOffs[i]);
+      PushBool(mpboBase[c]);
+      PushLong(mpdwBase[c]);
+      PushFloat(mpreBase[c]);
+      PushTime(mptiBase[c]);
+      PushTime(mptiOffs[c]);
 
-      w += 21;
+      wSize += 21;
     }
   }
 
-  for (i=0; i<bCANALS; i++)
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushFloat(mpdbEsc_S[i]);
-      PushTime(mptiEsc_S[i]);
-      PushFloat(mpreLevel[i]);
-      PushFloat(mpreCount[i]);
+      PushFloat(mpdbEsc_S[c]);
+      PushTime(mptiEsc_S[c]);
+      PushFloat(mpreLevel[c]);
+      PushFloat(mpreCount[c]);
 
-      w += 18;
+      wSize += 18;
     }
   }
 
-  for (i=0; i<bCANALS; i++)
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushInt(mpwTrue[i]);
-      PushInt(mpwFalse[i]);
-      PushInt(mpwMore100[i]);
-      PushInt(mpwMore1000[i]);
-      PushInt(mpwMore10000[i]);
-      PushInt(mpwOverflow[i]);
-      PushInt(mpwUnderflow[i]);
-      PushInt(mpwRepeat[i]);
+      PushInt(mpwTrue[c]);
+      PushInt(mpwFalse[c]);
+      PushInt(mpwMore100[c]);
+      PushInt(mpwMore1000[c]);
+      PushInt(mpwMore10000[c]);
+      PushInt(mpwOverflow[c]);
+      PushInt(mpwUnderflow[c]);
+      PushInt(mpwRepeat[c]);
 
-      w += 16;
+      wSize += 16;
     }
   }
 
-  for (i=0; i<bCANALS; i++)
+  for (c=0; c<bCANALS; c++)
   {
-    if ((InBuff(6 + i/8) & (0x80 >> i%8)) != 0)
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      Push(&mptiBaseOK[i], sizeof(time));
-      Push(&mptiBaseError[i], sizeof(time));
+      Push(&mptiBaseOK[c], sizeof(time));
+      Push(&mptiBaseError[c], sizeof(time));
 
-      w += 12;
+      wSize += 12;
     }
   }
 
-  OutptrOutBuff(w);
+  OutptrOutBuff(wSize);
 }

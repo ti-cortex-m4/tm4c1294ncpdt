@@ -102,7 +102,7 @@ void    Response255_CRC(void)
     case bEXT_SETADDRESS: OutSetAddress(); break;
     case bEXT_GETADDRESSES: OutGetAddressesExt(); break;
 
-    case bEXT_GETCURRENT:           OutCurrentExt();       break;
+    case bEXT_GETCURRENT: OutCurrentExt(); break;
 
     case bEXT_GETDIGITALS: OutGetDigitalsExt(); break;
 
