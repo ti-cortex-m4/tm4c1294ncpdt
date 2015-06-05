@@ -9,7 +9,7 @@ void    OutGetFloatOrDoubleCan_GlobalWork(double  *mdb, bool  fDouble);
 
 void    OutSetFloatCan(float  *mfl, file const  *pfl);
 
-void    OutFloatCanMap(real  *mpe);
+void    OutFloatCanExt(float  *mpfl);
 void    OutIntCanExt(uint  *mpw);
-void    OutCharCanMap(uchar  *mpb);
+void    OutCharCanExt(uchar  *mpb);
 void    OutBoolCanExt(bool  *mpf);
