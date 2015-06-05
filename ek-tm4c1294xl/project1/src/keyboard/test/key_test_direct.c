@@ -50,7 +50,7 @@ static void ShowTestDirect(void)
         Clear();
  
         ShowHi(szDirectEscU); DelayInf();
-        time2 ti2 = ReadTimeCan(ibX)
+        time2 ti2 = ReadTimeCan(ibX);
         if (ti2.fValid) bC++;
         if (fKey == true) break;
 

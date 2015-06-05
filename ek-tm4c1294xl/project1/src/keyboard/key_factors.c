@@ -39,30 +39,30 @@ void    ShowFactors(void)
   {
     switch (wProgram)
     {
-      case bSET_TRANS_ENG:     ShowFloat( GetCanReal(mpreTransEng,    ibX) );  break;
-      case bSET_TRANS_CNT:     ShowFloat( GetCanReal(mpreTransCnt,    ibX) );  break;
-      case bSET_PULSE_HOU:     ShowFloat( GetCanReal(mprePulseHou,    ibX) );  break;
-      case bSET_PULSE_MNT:     ShowFloat( GetCanReal(mprePulseMnt,    ibX) );  break;
+      case bSET_TRANS_ENG:     ShowFloat( mpreTransEng[ibX] );  break;
+      case bSET_TRANS_CNT:     ShowFloat( mpreTransCnt[ibX] );  break;
+      case bSET_PULSE_HOU:     ShowFloat( mprePulseHou[ibX] );  break;
+      case bSET_PULSE_MNT:     ShowFloat( mprePulseMnt[ibX] );  break;
 
-      case bSET_COUNT:         ShowFloat( GetCntCurrImp(ibX) );                break;
+      case bSET_COUNT:         ShowFloat( GetCntCurrImp(ibX) ); break;
 
-      case bSET_LOSSE:         ShowFloat( GetCanReal(mpreLosse, ibX)*100 );    break;
+      case bSET_LOSSE:         ShowFloat( mpreLosse[ibX]*100 ); break;
 
-      case bSET_LEVEL:         ShowFloat( GetCanReal(mpreLevel,    ibX) );  break;
+      case bSET_LEVEL:         ShowFloat( mpreLevel[ibX] );     break;
     }
   }
   else
   {
     switch (wProgram)
     {
-      case bGET_TRANS_ENG:     ShowFloat( GetCanReal(mpreTransEng,    ibX) );  break;
-      case bGET_TRANS_CNT:     ShowFloat( GetCanReal(mpreTransCnt,    ibX) );  break;
-      case bGET_PULSE_HOU:     ShowFloat( GetCanReal(mprePulseHou,    ibX) );  break;
-      case bGET_PULSE_MNT:     ShowFloat( GetCanReal(mprePulseMnt,    ibX) );  break;
+      case bGET_TRANS_ENG:     ShowFloat( mpreTransEng[ibX] );  break;
+      case bGET_TRANS_CNT:     ShowFloat( mpreTransCnt[ibX] );  break;
+      case bGET_PULSE_HOU:     ShowFloat( mprePulseHou[ibX] );  break;
+      case bGET_PULSE_MNT:     ShowFloat( mprePulseMnt[ibX] );  break;
 
-      case bGET_LOSSE:         ShowFloat( GetCanReal(mpreLosse, ibX)*100 );    break;
+      case bGET_LOSSE:         ShowFloat( mpreLosse[ibX]*100 ); break;
 
-      case bSET_LEVEL:         ShowFloat( GetCanReal(mpreLevel,    ibX) );  break;
+      case bSET_LEVEL:         ShowFloat( mpreLevel[ibX] );     break;
     }
   }
 
@@ -116,100 +116,99 @@ void    key_SetFactors(void)
     }
     else if ((enKeyboard == KBD_POSTINPUT2) || (enKeyboard == KBD_POSTINPUT3))
     {      
-      reBuffA = GetRealLo(0,8) + GetRealLo(10,12)/1000;
+      float fl = GetRealLo(0,8) + GetRealLo(10,12)/1000;
 
       switch (wProgram)
       {
         case bSET_TRANS_ENG:   
-          if (reBuffA > 0)
+          if (fl > 0)
           {
             enKeyboard = KBD_POSTENTER;
 
-            SetCanReal(mpreTransEng,ibX,&reBuffA);
+            mpreTransEng[ibX] = fl;
             SaveFile(&flTransEng);
 
-            reBuffA = 1;
-            SetCanReal(mpreTransCnt,ibX,&reBuffA);
+            fl = 1;
+            mpreTransCnt[ibX] = fl;
             SaveFile(&flTransCnt);
           }
           else Beep();
           break;
 
         case bSET_TRANS_CNT:   
-          if (reBuffA > 0)
+          if (fl > 0)
           {
             enKeyboard = KBD_POSTENTER;
 
-            SetCanReal(mpreTransCnt,ibX,&reBuffA);
+            mpreTransCnt[ibX] = fl;
             SaveFile(&flTransCnt);
           }
           else Beep();
           break;
 
         case bSET_PULSE_HOU:  
-          if (reBuffA > 0)
+          if (fl > 0)
           {
             enKeyboard = KBD_POSTENTER;
 
-            SetCanReal(mprePulseHou,ibX,&reBuffA);
+            mprePulseHou[ibX] = fl;
             SaveFile(&flPulseHou);
 
-            SetCanReal(mprePulseMnt,ibX,&reBuffA);
+            mprePulseMnt[ibX] = fl;
             SaveFile(&flPulseMnt);
           }
           else Beep();
           break;
 
         case bSET_PULSE_MNT:  
-          if (reBuffA > 0)
+          if (fl > 0)
           {
             enKeyboard = KBD_POSTENTER;
 
-            SetCanReal(mprePulseMnt,ibX,&reBuffA);
+            mprePulseMnt[ibX] = fl;
             SaveFile(&flPulseMnt);
           }
           else Beep();
           break;
 
         case bSET_COUNT:    
-          if (reBuffA >= 0)
+          if (fl >= 0)
           {
             enKeyboard = KBD_POSTENTER;
 
             if (GetDigitalDevice(ibX) == 19)
             {
-              reBuffA -= mpdwBase[ibX] * mpdbValueCntHou[ibX];
+              fl -= mpdwBase[ibX] * mpdbValueCntHou[ibX];
             }
             else
             {
-              reBuffA -= mpwImpMntCan[ibSoftMnt][ibX] * mpdbValueCntMnt[ibX];
-              reBuffA -= *PGetCanImpAll(mpimAbsCan,ibX) * mpdbValueCntHou[ibX];
+              fl -= mpwImpMntCan[ibSoftMnt][ibX] * mpdbValueCntMnt[ibX];
+              fl -= *PGetCanImpAll(mpimAbsCan,ibX) * mpdbValueCntHou[ibX];
             }
 
-            SetCanReal(mpreCount,ibX,&reBuffA);
+            mpreCount[ibX] = fl;
             SaveFile(&flCount);
           }
           else Beep();
           break;
 
         case bSET_LOSSE:   
-          if (reBuffA < 100)
+          if (fl < 100)
           {
             enKeyboard = KBD_POSTENTER;
 
-            reBuffA /= 100;
-            SetCanReal(mpreLosse,ibX,&reBuffA);
+            mpreLosse[ibX] = fl/100;
             SaveFile(&flLosse);
           }   
           else Beep();
           break;
 
         case bSET_LEVEL:  
-          if (reBuffA > 0)
+          if (fl > 0)
           {
             enKeyboard = KBD_POSTENTER;
 
-            SetCanReal(mpreLevel,ibX,&reBuffA);
+            mpreLevel[ibX] = fl;
             SaveFile(&flLevel);
           }
           else Beep();
