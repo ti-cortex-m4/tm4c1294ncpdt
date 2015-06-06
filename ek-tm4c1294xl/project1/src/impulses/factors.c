@@ -10,15 +10,15 @@ FACTORS,C
 
 
 
-file const              flTransEng = {TRANS_ENG, &mpdbTransEng, sizeof(float)*bCANALS};
-file const              flTransCnt = {TRANS_CNT, &mpdbTransCnt, sizeof(float)*bCANALS};
+file const              flTransEng = {TRANS_ENG, &mpdbTransEng, sizeof(double)*bCANALS};
+file const              flTransCnt = {TRANS_CNT, &mpdbTransCnt, sizeof(double)*bCANALS};
 
-file const              flPulseHou = {PULSE_HOU, &mpdbPulseHou, sizeof(float)*bCANALS};
-file const              flPulseMnt = {PULSE_MNT, &mpdbPulseMnt, sizeof(float)*bCANALS};
+file const              flPulseHou = {PULSE_HOU, &mpdbPulseHou, sizeof(double)*bCANALS};
+file const              flPulseMnt = {PULSE_MNT, &mpdbPulseMnt, sizeof(double)*bCANALS};
 
-file const              flCount = {COUNT, &mpdbCount, sizeof(float)*bCANALS};
-file const              flLosse = {LOSSE, &mpdbLosse, sizeof(float)*bCANALS};
-file const              flLevel = {LEVEL, &mpdbLevel, sizeof(float)*bCANALS};
+file const              flCount = {COUNT, &mpdbCount, sizeof(double)*bCANALS};
+file const              flLosse = {LOSSE, &mpdbLosse, sizeof(double)*bCANALS};
+file const              flLevel = {LEVEL, &mpdbLevel, sizeof(double)*bCANALS};
 
 
 
@@ -40,8 +40,7 @@ void    InitFactors(void)
 
 void    ResetFactors(void)
 {
-uchar   c;
-
+  uchar c;
   for (c=0; c<bCANALS; c++)
   {
     mpdbTransEng[c] = 1;
@@ -56,7 +55,7 @@ uchar   c;
     mpdbPulseMnt[c] = mpdbPulseHou[c];
     mpdbLevel[c] = 1;
 
-    mpdbTransCnt[c] = 1; // в нормальном режиме равен 1
+    mpdbTransCnt[c] = 1;
   }
 
   SaveFile(&flTransEng);
@@ -87,7 +86,7 @@ void    SaveFactors(void)
 
 
 
-static float GetLosse(uchar  ibCan)
+static double GetLosse(uchar  ibCan)
 {
   return 1 + mpdbLosse[ibCan];
 }

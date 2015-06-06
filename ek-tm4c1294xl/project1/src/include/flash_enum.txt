@@ -34,15 +34,15 @@ typedef enum
   WINTER                = SUMMER + 1,
 
   TRANS_ENG             = WINTER + 1,
-  TRANS_CNT             = TRANS_ENG + FLOAT_CAN_PAGES,
-  PULSE_HOU             = TRANS_CNT + FLOAT_CAN_PAGES,
-  PULSE_MNT             = PULSE_HOU + FLOAT_CAN_PAGES,
+  TRANS_CNT             = TRANS_ENG + DOUBLE_CAN_PAGES,
+  PULSE_HOU             = TRANS_CNT + DOUBLE_CAN_PAGES,
+  PULSE_MNT             = PULSE_HOU + DOUBLE_CAN_PAGES,
 
-  COUNT                 = PULSE_MNT + FLOAT_CAN_PAGES,
-  LOSSE                 = COUNT + FLOAT_CAN_PAGES,
-  LEVEL                 = LOSSE + FLOAT_CAN_PAGES,
+  COUNT                 = PULSE_MNT + DOUBLE_CAN_PAGES,
+  LOSSE                 = COUNT + DOUBLE_CAN_PAGES,
+  LEVEL                 = LOSSE + DOUBLE_CAN_PAGES,
 
-  IMPMNTCAN             = LEVEL + FLOAT_CAN_PAGES,
+  IMPMNTCAN             = LEVEL + DOUBLE_CAN_PAGES,
   IMPHOUCAN             = IMPMNTCAN + bMINUTES,
 
   IMPDAYCAN             = IMPHOUCAN + IMPHOUCAN_PAGES,
@@ -170,7 +170,7 @@ typedef enum
   EXT_5_VALUES          = EXT_5_FLAG + 1,
 
   EXT_6_FLAG            = EXT_5_VALUES + VALUE5_CAN_PAGES,
-  EXT_6_BOX_VALUES          = EXT_6_FLAG + 1,
+  EXT_6_BOX_VALUES      = EXT_6_FLAG + 1,
   EXT_6_MON_VALUES      = EXT_6_BOX_VALUES + VALUE6_CAN_PAGES,
 
   EXT_7_DAY_VALUES      = EXT_6_MON_VALUES + VALUE6_CAN_PAGES*bMONTHS,
