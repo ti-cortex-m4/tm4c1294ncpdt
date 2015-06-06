@@ -7,13 +7,13 @@
 #define bSET_GROUPS                 2
 //#define bSET_NODES                  102 
 
-#define bSET_TRANS_ENG              4
-#define bSET_TRANS_CNT              244
-#define bSET_PULSE_HOU              5
-#define bSET_PULSE_MNT              245
-#define bSET_COUNT                  6
-#define bSET_LOSSE                  3
-#define bSET_LEVEL                  108
++   #define bSET_TRANS_ENG              4
++   #define bSET_TRANS_CNT              244
++   #define bSET_PULSE_HOU              5
++   #define bSET_PULSE_MNT              245
++   #define bSET_COUNT                  6
++   #define bSET_LOSSE                  3
++   #define bSET_LEVEL                  108
 
 #define bSET_DAYZONE                7 
 #define bSET_PUBLIC                 26
@@ -189,10 +189,10 @@
 #define bGET_PROGRAM84              84
 #define bGET_PROGRAM85              85
 
-#define bGET_TRANS_ENG              6
-#define bGET_TRANS_CNT              246
-#define bGET_PULSE_HOU              7
-#define bGET_PULSE_MNT              247
++   #define bGET_TRANS_ENG              6
++   #define bGET_TRANS_CNT              246
++   #define bGET_PULSE_HOU              7
++   #define bGET_PULSE_MNT              247
 #define bGET_COUNTNEW               10
 #define bGET_COUNTOLD               110
 #define bGET_READTIMEDATE1          111
@@ -201,7 +201,7 @@
 //#define bGET_READTRANS              254
 //#define bGET_READPULSE              255
 //#define bGET_READSENSORS            113
-#define bGET_LOSSE                  37
++   #define bGET_LOSSE                  37
 /*
 #define bGET_VALUE_ENGHOU           201
 #define bGET_VALUE_CNTHOU           202
