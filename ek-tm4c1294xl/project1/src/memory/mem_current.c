@@ -50,7 +50,7 @@ time                    mptiBaseOK[bCANALS],
 
 
 // флаг первого запуска
-bool                 boCurrent2;
+bool                    boCurrent2;
 
 // битовые маски каналов
 uchar                   mpbCurrent2Curr[8],
@@ -58,7 +58,7 @@ uchar                   mpbCurrent2Curr[8],
                         mpbCurrent2Buff[8];
 
 // разрешения перерасчета
-bool                 boEnblCurrent2;
+bool                    boEnblCurrent2;
 
 // счетчики интервалов перерасчета
 uint                    mpwCurrent2Mnt[bCANALS];

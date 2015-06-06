@@ -4,7 +4,7 @@ MEM_TARIFFS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                 boRelaxsFlag;
+extern  bool                    boRelaxsFlag;
 
 extern  uchar                   ibRelaxsTariff;
 
@@ -38,7 +38,7 @@ extern  br3ak                   brAlt, brKey;
 
 
 
-extern  bool                 boGapsFlag;
+extern  bool                    boGapsFlag;
 
 extern  gaps                    gaGaps;
 

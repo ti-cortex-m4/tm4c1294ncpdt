@@ -35,13 +35,13 @@ extern  time                    mptiBaseOK[bCANALS],
 
 
 
-extern  bool                 boCurrent2;
+extern  bool                    boCurrent2;
 
 extern  uchar                   mpbCurrent2Curr[8],
                                 mpbCurrent2Prev[8],
                                 mpbCurrent2Buff[8];
 
-extern  bool                 boCurrent2Enable;
+extern  bool                    boCurrent2Enable;
 
 extern  uint                    mpwCurrent2Mnt[bCANALS];
 

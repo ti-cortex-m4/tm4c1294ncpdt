@@ -33,13 +33,13 @@ uchar                   mpbGroupMaskUni[16];
 uchar                   mpbDefUni[64];
 
 // признак строгого соблюдения протокола
-bool                 boStrictUni;
+bool                    boStrictUni;
 
 // максимальный счетчик
 uchar                   bMaxDelayUni;
 
 // флаг
-bool                 boRepeatFlowUni;
+bool                    boRepeatFlowUni;
 
 // флаг
-bool                 boEnblPassUni;
+bool                    boEnblPassUni;

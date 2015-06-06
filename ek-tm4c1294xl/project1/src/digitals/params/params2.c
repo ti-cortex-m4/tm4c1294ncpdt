@@ -24,7 +24,7 @@ PARAMS2.C
 
 
 
-bool                 boBeginParam;
+bool                    boBeginParam;
 
 static real             reParamDiv;
 

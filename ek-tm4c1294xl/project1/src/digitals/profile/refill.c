@@ -21,7 +21,7 @@ REFILL.C
 
 
 // запрет очистки неинициализованных получасовых графиков
-bool                 boDsblRefill;
+bool                    boDsblRefill;
 
 // переменные для заполнения пропущенных получасов
 static uint             iwBmin, iwBmax;

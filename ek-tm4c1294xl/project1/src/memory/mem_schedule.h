@@ -12,6 +12,6 @@ extern  bool                    mpboCtrlHou[48];
 
 extern  bool                    mpboRecalcHou[48];
 
-extern  bool                 boRecalcAlways;
+extern  bool                    boRecalcAlways;
 
-extern  bool                 boRecalcCurr;
+extern  bool                    boRecalcCurr;

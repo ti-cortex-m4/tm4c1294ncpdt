@@ -4,7 +4,7 @@ MEM_CORRECT2.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                 boCorrect2Flag;
+extern  bool                    boCorrect2Flag;
 
 extern  uint                    mpcwCorrect2[15];
 

@@ -20,10 +20,10 @@ extern  uchar                   mpbGroupMaskUni[16];
 
 extern  uchar                   mpbDefUni[64];
 
-extern  bool                 boStrictUni;
+extern  bool                    boStrictUni;
 
 extern  uchar                   bMaxDelayUni;
 
-extern  bool                 boRepeatFlowUni;
+extern  bool                    boRepeatFlowUni;
 
-extern  bool                 boEnblPassUni;
+extern  bool                    boEnblPassUni;

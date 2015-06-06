@@ -9,7 +9,7 @@ MEM_PROFILE.C
 
 
 // флаг начала опроса 30-минутных графиков в ручном режиме
-bool                 boManualProfile;
+bool                    boManualProfile;
 
 // счётчик принятых получасов
 uint                    cwHouRead;

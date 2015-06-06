@@ -9,10 +9,10 @@ MEM_PARAMS.C
 
 
 // флаг разрешения опроса мгновенных параметров
-bool                 boParamsFlag;
+bool                    boParamsFlag;
 
 // флаг периода опроса мгновенных параметров (true: каждые 3 минуты, false: каждые 30 минут)
-bool                 boMntParams;
+bool                    boMntParams;
 
 // массив коэффициентов деления
 real                    mpreParamsDiv[wPARAMS];
@@ -36,7 +36,7 @@ uint                    iwHardTim;
 uint                    cwParamTim;
 
 // признак
-bool                 boFixParamsBugs;
+bool                    boFixParamsBugs;
 
 // признак
-bool                 boUseParamsDiv;
+bool                    boUseParamsDiv;

@@ -9,7 +9,7 @@ MEM_TARIFFS.S
 
 
 // признак использования праздников
-bool                 boRelaxsFlag;
+bool                    boRelaxsFlag;
 
 // тариф при использовании праздников
 uchar                   ibRelaxsTariff;
@@ -55,7 +55,7 @@ br3ak                   brAlt, brKey;
 
 
 // флаг использования тарифных периодов
-bool                 boGapsFlag;
+bool                    boGapsFlag;
 
 // массив изломов тарифных периодов
 gaps                    gaGaps;

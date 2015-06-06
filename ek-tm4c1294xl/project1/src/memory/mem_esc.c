@@ -18,4 +18,4 @@ uchar                   mpibActiveEsc[bPORTS];
 uchar                   ibActiveEsc;
 
 // флаг блокирования Esc протокола
-bool                 boBlockEsc;
+bool                    boBlockEsc;
