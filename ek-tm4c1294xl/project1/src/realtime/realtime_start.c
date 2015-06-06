@@ -62,7 +62,7 @@ void    StartRealtime(void)
   {
     if (GetDigitalDevice(c) == 0)
     {
-      mpdbCntMonCan[ibSoftMon][c] = mpreCount[c];
+      mpdbCntMonCan[ibSoftMon][c] = mpdbCount[c];
     }
   }
 }

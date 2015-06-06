@@ -21,7 +21,7 @@ uchar   i;
 real    reBuffA;
 
   ReadEnergyB();
-  reBuffA = mpreLevel[ibDig];
+  reBuffA = mpdbLevel[ibDig];
 
   for (i=0; i<4; i++)
   {

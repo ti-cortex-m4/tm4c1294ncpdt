@@ -37,27 +37,27 @@ static void Show(void)
   {
     switch (wProgram)
     {
-      case bSET_TRANS_ENG:  ShowFloat( mpreTransEng[ibX] );  break;
-      case bSET_TRANS_CNT:  ShowFloat( mpreTransCnt[ibX] );  break;
-      case bSET_PULSE_HOU:  ShowFloat( mprePulseHou[ibX] );  break;
-      case bSET_PULSE_MNT:  ShowFloat( mprePulseMnt[ibX] );  break;
+      case bSET_TRANS_ENG:  ShowFloat( mpdbTransEng[ibX] );  break;
+      case bSET_TRANS_CNT:  ShowFloat( mpdbTransCnt[ibX] );  break;
+      case bSET_PULSE_HOU:  ShowFloat( mpdbPulseHou[ibX] );  break;
+      case bSET_PULSE_MNT:  ShowFloat( mpdbPulseMnt[ibX] );  break;
 
       case bSET_COUNT:      ShowFloat( GetCntCurrImp(ibX) ); break;
-      case bSET_LOSSE:      ShowFloat( mpreLosse[ibX]*100 ); break;
-      case bSET_LEVEL:      ShowFloat( mpreLevel[ibX] );     break;
+      case bSET_LOSSE:      ShowFloat( mpdbLosse[ibX]*100 ); break;
+      case bSET_LEVEL:      ShowFloat( mpdbLevel[ibX] );     break;
     }
   }
   else
   {
     switch (wProgram)
     {
-      case bGET_TRANS_ENG:  ShowFloat( mpreTransEng[ibX] );  break;
-      case bGET_TRANS_CNT:  ShowFloat( mpreTransCnt[ibX] );  break;
-      case bGET_PULSE_HOU:  ShowFloat( mprePulseHou[ibX] );  break;
-      case bGET_PULSE_MNT:  ShowFloat( mprePulseMnt[ibX] );  break;
+      case bGET_TRANS_ENG:  ShowFloat( mpdbTransEng[ibX] );  break;
+      case bGET_TRANS_CNT:  ShowFloat( mpdbTransCnt[ibX] );  break;
+      case bGET_PULSE_HOU:  ShowFloat( mpdbPulseHou[ibX] );  break;
+      case bGET_PULSE_MNT:  ShowFloat( mpdbPulseMnt[ibX] );  break;
 
-      case bGET_LOSSE:      ShowFloat( mpreLosse[ibX]*100 ); break;
-      case bSET_LEVEL:      ShowFloat( mpreLevel[ibX] );     break;
+      case bGET_LOSSE:      ShowFloat( mpdbLosse[ibX]*100 ); break;
+      case bSET_LEVEL:      ShowFloat( mpdbLevel[ibX] );     break;
     }
   }
 
@@ -119,10 +119,10 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpreTransEng[ibX] = fl;
+            mpdbTransEng[ibX] = fl;
             SaveFile(&flTransEng);
 
-            mpreTransCnt[ibX] = 1;
+            mpdbTransCnt[ibX] = 1;
             SaveFile(&flTransCnt);
           }
           else Beep();
@@ -133,7 +133,7 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpreTransCnt[ibX] = fl;
+            mpdbTransCnt[ibX] = fl;
             SaveFile(&flTransCnt);
           }
           else Beep();
@@ -144,10 +144,10 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mprePulseHou[ibX] = fl;
+            mpdbPulseHou[ibX] = fl;
             SaveFile(&flPulseHou);
 
-            mprePulseMnt[ibX] = fl;
+            mpdbPulseMnt[ibX] = fl;
             SaveFile(&flPulseMnt);
           }
           else Beep();
@@ -158,7 +158,7 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mprePulseMnt[ibX] = fl;
+            mpdbPulseMnt[ibX] = fl;
             SaveFile(&flPulseMnt);
           }
           else Beep();
@@ -179,7 +179,7 @@ void    key_SetFactors(void)
               fl -= *PGetCanImpAll(mpimAbsCan,ibX) * mpdbValueCntHou[ibX];
             }
 
-            mpreCount[ibX] = fl;
+            mpdbCount[ibX] = fl;
             SaveFile(&flCount);
           }
           else Beep();
@@ -190,7 +190,7 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpreLosse[ibX] = fl/100;
+            mpdbLosse[ibX] = fl/100;
             SaveFile(&flLosse);
           }   
           else Beep();
@@ -201,7 +201,7 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpreLevel[ibX] = fl;
+            mpdbLevel[ibX] = fl;
             SaveFile(&flLevel);
           }
           else Beep();

@@ -10,15 +10,15 @@ FACTORS,C
 
 
 
-file const              flTransEng = {TRANS_ENG, &mpreTransEng, sizeof(float)*bCANALS};
-file const              flTransCnt = {TRANS_CNT, &mpreTransCnt, sizeof(float)*bCANALS};
+file const              flTransEng = {TRANS_ENG, &mpdbTransEng, sizeof(float)*bCANALS};
+file const              flTransCnt = {TRANS_CNT, &mpdbTransCnt, sizeof(float)*bCANALS};
 
-file const              flPulseHou = {PULSE_HOU, &mprePulseHou, sizeof(float)*bCANALS};
-file const              flPulseMnt = {PULSE_MNT, &mprePulseMnt, sizeof(float)*bCANALS};
+file const              flPulseHou = {PULSE_HOU, &mpdbPulseHou, sizeof(float)*bCANALS};
+file const              flPulseMnt = {PULSE_MNT, &mpdbPulseMnt, sizeof(float)*bCANALS};
 
-file const              flCount = {COUNT, &mpreCount, sizeof(float)*bCANALS};
-file const              flLosse = {LOSSE, &mpreLosse, sizeof(float)*bCANALS};
-file const              flLevel = {LEVEL, &mpreLevel, sizeof(float)*bCANALS};
+file const              flCount = {COUNT, &mpdbCount, sizeof(float)*bCANALS};
+file const              flLosse = {LOSSE, &mpdbLosse, sizeof(float)*bCANALS};
+file const              flLevel = {LEVEL, &mpdbLevel, sizeof(float)*bCANALS};
 
 
 
@@ -44,19 +44,19 @@ uchar   c;
 
   for (c=0; c<bCANALS; c++)
   {
-    mpreTransEng[c] = 1;
-    mprePulseHou[c] = 500;
+    mpdbTransEng[c] = 1;
+    mpdbPulseHou[c] = 500;
 
-    mpreCount[c] = 0;
-    mpreLosse[c] = 0;
+    mpdbCount[c] = 0;
+    mpdbLosse[c] = 0;
   }
 
   for (c=0; c<bCANALS; c++)
   {
-    mprePulseMnt[c] = mprePulseHou[c];
-    mpreLevel[c] = 1;
+    mpdbPulseMnt[c] = mpdbPulseHou[c];
+    mpdbLevel[c] = 1;
 
-    mpreTransCnt[c] = 1; // в нормальном режиме равен 1
+    mpdbTransCnt[c] = 1; // в нормальном режиме равен 1
   }
 
   SaveFile(&flTransEng);
@@ -89,7 +89,7 @@ void    SaveFactors(void)
 
 static float GetLosse(uchar  ibCan)
 {
-  return 1 + mpreLosse[ibCan];
+  return 1 + mpdbLosse[ibCan];
 }
 
 
@@ -98,9 +98,9 @@ void    StartFactors(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpdbValueEngHou[c] = (mpreTransEng[c] / mprePulseHou[c]) * GetLosse(c);
-    mpdbValueCntHou[c] = (mpreTransCnt[c] / mprePulseHou[c]) * GetLosse(c);
-    mpdbValueEngMnt[c] = (mpreTransEng[c] / mprePulseMnt[c]) * GetLosse(c);
-    mpdbValueCntMnt[c] = (mpreTransCnt[c] / mprePulseMnt[c]) * GetLosse(c);
+    mpdbValueEngHou[c] = (mpdbTransEng[c] / mpdbPulseHou[c]) * GetLosse(c);
+    mpdbValueCntHou[c] = (mpdbTransCnt[c] / mpdbPulseHou[c]) * GetLosse(c);
+    mpdbValueEngMnt[c] = (mpdbTransEng[c] / mpdbPulseMnt[c]) * GetLosse(c);
+    mpdbValueCntMnt[c] = (mpdbTransCnt[c] / mpdbPulseMnt[c]) * GetLosse(c);
   }
 }

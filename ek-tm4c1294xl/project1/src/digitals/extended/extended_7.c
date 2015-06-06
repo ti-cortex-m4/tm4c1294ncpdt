@@ -81,7 +81,7 @@ void    NextDayExtended7(void)
     {
       double db = *PGetCanImpAll(mpimAbsCan,c);
       db *= mpdbValueCntHou[c];
-      db += mpreCount[c];
+      db += mpdbCount[c];
 
       value6 vl;
       vl.bStatus = ST4_OK;

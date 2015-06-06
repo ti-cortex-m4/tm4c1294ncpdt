@@ -173,7 +173,7 @@ uchar   i;
 
   dbKpulse = reBuffA;
 
-  mpreLevel[ibDig] = reBuffA / 1000;
+  mpdbLevel[ibDig] = reBuffA / 1000;
 
   return(1);
 }
@@ -438,12 +438,12 @@ uchar   i;
 // сохранение К преобразования и К трасформации
 void    SetCanalsAll(void)
 {
-  SetCanReal(mprePulseHou,ibDig,&reBuffA);
-  SetCanReal(mprePulseMnt,ibDig,&reBuffA);
+  SetCanReal(mpdbPulseHou,ibDig,&reBuffA);
+  SetCanReal(mpdbPulseMnt,ibDig,&reBuffA);
   reBuffA = dbKtrans;
 
-  SetCanReal(mpreTransEng,ibDig,&reBuffA);
-  SetCanReal(mpreTransCnt,ibDig,&reBuffA);
+  SetCanReal(mpdbTransEng,ibDig,&reBuffA);
+  SetCanReal(mpdbTransCnt,ibDig,&reBuffA);
 }
 
 #endif
@@ -505,7 +505,7 @@ bool    AutomaticB(void)
 bool    AutomaticJ(void)
 {
   if (ReadKoeffDeviceB_Special() == 0) return(0);
-  mpreLevel[ibDig] = reBuffA / 1000;
+  mpdbLevel[ibDig] = reBuffA / 1000;
 
 
   SetCanalsAll();                        // сохранение К преобразования и К трасформации

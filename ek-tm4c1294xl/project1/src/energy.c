@@ -298,12 +298,12 @@ void    MakeCntMonCan(void)
     {
       db  = *PGetCanImpAll(mpimAbsCan,c);
       db *= mpdbValueCntHou[c];
-      db += GetCanReal(mpreCount,c);
+      db += GetCanReal(mpdbCount,c);
     }
     else
     {
       db = mpdwBase[c] * mpdbValueCntHou[c];
-      if (GetDigitalDevice(c) == 19) db += GetCanReal(mpreCount,c);
+      if (GetDigitalDevice(c) == 19) db += GetCanReal(mpdbCount,c);
     }
 
     mpdbCntMonCan[ibSoftMon][c] = db;
@@ -319,13 +319,13 @@ double GetCntCurrImp(uchar  ibCan)
   if (GetDigitalDevice(ibCan) == 19)
   {
     db = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
-    db += GetCanReal(mpreCount,ibCan);
+    db += GetCanReal(mpdbCount,ibCan);
   }
   else
   {
     db  = mpwImpMntCan[ibSoftMnt][ibCan] * mpdbValueCntMnt[ibCan];
     db += *PGetCanImpAll(mpimAbsCan,ibCan) * mpdbValueCntHou[ibCan];
-    db += GetCanReal(mpreCount,ibCan);
+    db += GetCanReal(mpdbCount,ibCan);
   }
 
   return db;

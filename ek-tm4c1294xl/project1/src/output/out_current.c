@@ -41,8 +41,8 @@ void    OutCurrentExt(void)
     {
       PushFloat(mpdbEsc_S[c]);
       PushTime(mptiEsc_S[c]);
-      PushFloat(mpreLevel[c]);
-      PushFloat(mpreCount[c]);
+      PushFloat(mpdbLevel[c]);
+      PushFloat(mpdbCount[c]);
 
       wSize += 18;
     }

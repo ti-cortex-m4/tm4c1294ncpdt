@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_FACTORS.C
+MEM_FACTORS,C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,13 +8,13 @@ MEM_FACTORS.C
 
 
 
-// массив К трансформации (для энергии/мощности и показаний счётчиков)
-real                    mpreTransEng[bCANALS],
-                        mpreTransCnt[bCANALS];
+// массив К трансформации (для энергии/мощности и значений счётчиков)
+double                  mpdbTransEng[bCANALS],
+                        mpdbTransCnt[bCANALS];
 
 // массив К преобразования (для получасовых и трёхминутных интервалов)
-real                    mprePulseHou[bCANALS],
-                        mprePulseMnt[bCANALS];
+double                  mpdbPulseHou[bCANALS],
+                        mpdbPulseMnt[bCANALS];
 
 // массив К эквивалентов
 double                  mpdbValueEngHou[bCANALS],
@@ -22,11 +22,11 @@ double                  mpdbValueEngHou[bCANALS],
                         mpdbValueEngMnt[bCANALS],
                         mpdbValueCntMnt[bCANALS];
 
-// массив показаний счётчиков
-real                    mpreCount[bCANALS];
+// массив начальных значений счётчиков
+double                  mpdbCount[bCANALS];
 
 // массив К потерь
-real                    mpreLosse[bCANALS];
+double                  mpdbLosse[bCANALS];
 
 // массив отношений К преобразования
-real                    mpreLevel[bCANALS];
+double                  mpdbLevel[bCANALS];
