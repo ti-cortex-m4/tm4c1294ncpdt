@@ -437,8 +437,8 @@ _automatic3.h
 +   _blocking_esc.h
 _calc3.c
 _calc3.h
-_canals.c
-_canals.h
++   _canals.c
++   _canals.h
 _checkup_enable.c
 _checkup_enable.h
 _checkup_hou.c
