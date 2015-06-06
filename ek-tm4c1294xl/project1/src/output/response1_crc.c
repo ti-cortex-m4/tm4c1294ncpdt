@@ -68,21 +68,21 @@ void    Response1_CRC(void)
       case bINQ_GETNEWPUBTARIFFS: OutGetNewPubTariffs(); break;
       case bINQ_SETNEWPUBTARIFFS: OutSetNewPubTariffs(); break;
 
-      case bINQ_GETTRANS_ENG: OutGetFloatCan(mpreTransEng); break;
-      case bINQ_GETTRANS_CNT: OutGetFloatCan(mpreTransCnt); break;
-      case bINQ_GETPULSE_HOU: OutGetFloatCan(mprePulseHou); break;
-      case bINQ_GETPULSE_MNT: OutGetFloatCan(mprePulseMnt); break;
-      case bINQ_GETCOUNT:     OutGetFloatCan(mpreCount);    break;
-      case bINQ_GETLOSSE:     OutGetFloatCan(mpreLosse);    break;
-      case bINQ_GETLEVEL:     OutGetFloatCan(mpreLevel); break;
+      case bINQ_GETTRANS_ENG: OutGetFloatCan(mpdbTransEng); break;
+      case bINQ_GETTRANS_CNT: OutGetFloatCan(mpdbTransCnt); break;
+      case bINQ_GETPULSE_HOU: OutGetFloatCan(mpdbPulseHou); break;
+      case bINQ_GETPULSE_MNT: OutGetFloatCan(mpdbPulseMnt); break;
+      case bINQ_GETCOUNT:     OutGetFloatCan(mpdbCount);    break;
+      case bINQ_GETLOSSE:     OutGetFloatCan(mpdbLosse);    break;
+      case bINQ_GETLEVEL:     OutGetFloatCan(mpdbLevel); break;
 
-      case bINQ_SETTRANS_ENG: OutSetFloatCan(mpreTransEng, &flTransEng); break;
-      case bINQ_SETTRANS_CNT: OutSetFloatCan(mpreTransCnt, &flTransCnt); break;
-      case bINQ_SETPULSE_HOU: OutSetFloatCan(mprePulseHou, &flPulseHou); break;
-      case bINQ_SETPULSE_MNT: OutSetFloatCan(mprePulseMnt, &flPulseMnt); break;
-      case bINQ_SETCOUNT:     OutSetFloatCan(mpreCount,    &flCount);    break;
-      case bINQ_SETLOSSE:     OutSetFloatCan(mpreLosse,    &flLosse);    break;
-      case bINQ_SETLEVEL:     OutSetFloatCan(mpreLevel,    &flLevel);    break;
+      case bINQ_SETTRANS_ENG: OutSetFloatCan(mpdbTransEng, &flTransEng); break;
+      case bINQ_SETTRANS_CNT: OutSetFloatCan(mpdbTransCnt, &flTransCnt); break;
+      case bINQ_SETPULSE_HOU: OutSetFloatCan(mpdbPulseHou, &flPulseHou); break;
+      case bINQ_SETPULSE_MNT: OutSetFloatCan(mpdbPulseMnt, &flPulseMnt); break;
+      case bINQ_SETCOUNT:     OutSetFloatCan(mpdbCount,    &flCount);    break;
+      case bINQ_SETLOSSE:     OutSetFloatCan(mpdbLosse,    &flLosse);    break;
+      case bINQ_SETLEVEL:     OutSetFloatCan(mpdbLevel,    &flLevel);    break;
 
       case bINQ_GETKOEFF: OutAllFactors(); break;
 

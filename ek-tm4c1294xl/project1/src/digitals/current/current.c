@@ -61,7 +61,7 @@ real    re;
     // подготовка информации для Esc S
     re  = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
     if (GetDigitalDevice(ibCan) == 19)
-      re += GetCanReal(mpreCount,ibCan);
+      re += GetCanReal(mpdbCount,ibCan);
 
     mpdbEsc_S[ibCan] = re;
     mptiEsc_S[ibCan] = *GetCurrTimeDate();

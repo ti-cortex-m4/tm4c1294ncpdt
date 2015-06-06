@@ -1,22 +1,22 @@
 /*------------------------------------------------------------------------------
-MEM_FACTORS.H
+MEM_FACTORS,H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  real                    mpreTransEng[bCANALS],
-                                mpreTransCnt[bCANALS];
+extern  double                  mpdbTransEng[bCANALS],
+                                mpdbTransCnt[bCANALS];
 
-extern  real                    mprePulseHou[bCANALS],
-                                mprePulseMnt[bCANALS];
+extern  double                  mpdbPulseHou[bCANALS],
+                                mpdbPulseMnt[bCANALS];
 
 extern  double                  mpdbValueEngHou[bCANALS],
                                 mpdbValueCntHou[bCANALS],
                                 mpdbValueEngMnt[bCANALS],
                                 mpdbValueCntMnt[bCANALS];
 
-extern  real                    mpreCount[bCANALS];
+extern  double                  mpdbCount[bCANALS];
 
-extern  real                    mpreLosse[bCANALS];
+extern  double                  mpdbLosse[bCANALS];
 
-extern  real                    mpreLevel[bCANALS];
+extern  double                  mpdbLevel[bCANALS];

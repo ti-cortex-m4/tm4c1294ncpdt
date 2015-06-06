@@ -17,10 +17,10 @@ void    OutAllFactors(void)
   {
     InitPushCRC();
 
-    PushFloat(mpreTransEng[bInBuff5]);
-    PushFloat(mpreTransCnt[bInBuff5]);
-    PushFloat(mprePulseHou[bInBuff5]);
-    PushFloat(mprePulseMnt[bInBuff5]);
+    PushFloat(mpdbTransEng[bInBuff5]);
+    PushFloat(mpdbTransCnt[bInBuff5]);
+    PushFloat(mpdbPulseHou[bInBuff5]);
+    PushFloat(mpdbPulseMnt[bInBuff5]);
 
     Output(sizeof(float)*4);
   }

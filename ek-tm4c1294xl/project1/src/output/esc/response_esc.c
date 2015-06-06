@@ -265,13 +265,13 @@ uchar   i, j;
   // коэффициенты трансформации
   for (i=0; i<16; i++)
   {
-    PushFloatBCD(mpreTransEng[i+16*ibActiveEsc]);
+    PushFloatBCD(mpdbTransEng[i+16*ibActiveEsc]);
   }
 
   // коэффициенты преобразования
   for (i=0; i<16; i++)
   {
-    PushFloatBCD(mprePulseHou[i+16*ibActiveEsc]);
+    PushFloatBCD(mpdbPulseHou[i+16*ibActiveEsc]);
   }
 
   // лимиты
@@ -291,7 +291,7 @@ uchar   i, j;
   // коэффициенты потерь
   for (i=0; i<16; i++)
   {
-    PushFloatBCD(mpreLosse[i+16*ibActiveEsc] * 1000000);
+    PushFloatBCD(mpdbLosse[i+16*ibActiveEsc] * 1000000);
   }
 
   Esc(300);
