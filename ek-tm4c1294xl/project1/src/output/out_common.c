@@ -47,7 +47,7 @@ void    OutSetFloatOrDoubleCan(double  *mpdb, file const  *pfl, bool  fDouble)
     uchar c;
     for (c=0; c<bCANALS; c++)
     {
-      (*mpdb++) = PopFloat();
+      (*mpdb++) = fDouble ? PopDouble() : PopFloat();
     }
 
     SaveFile(pfl);
