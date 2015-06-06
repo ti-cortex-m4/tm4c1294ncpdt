@@ -22,7 +22,7 @@ TODO .C
 #include "src/hardware/beep.h"
 #include "src/display/lcd.h"
 #include "src/time/rtc.h"
-#include "src/keyboard/ir.h"
+#include "src/keyboard/infrared.h"
 #include "src/keyboard/key.h"
 #include "src/keyboard/keyboard.h"
 #include "src/flash/at45.h"
@@ -84,7 +84,7 @@ int main(void) {
 	InitCODE();
 
 	InitSettings();         Delay(100); TestOK();
-	InitIR();
+	InitInfrared();
 	InitKey();
 	InitKeyboard();         Delay(100); TestOK();
 	InitImpulses();
@@ -138,7 +138,7 @@ int main(void) {
 
     	RunRealtime();
     	RunDevices();
-    	RunIR();
+    	RunInfrared();
     	RunKeyboard();
     	RunLocal();
 

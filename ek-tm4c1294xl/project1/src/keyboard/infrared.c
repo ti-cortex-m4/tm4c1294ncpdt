@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-IR.C
+INFRARED,C
 
 
 ------------------------------------------------------------------------------*/
@@ -13,11 +13,11 @@ IR.C
 #include "../time/delay.h"
 #include "../access.h"
 #include "../../irmp/irmp.h"
-#include "ir.h"
+#include "infrared.h"
 
 
 
-void    InitIR(void)
+void    InitInfrared(void)
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R13; // GPIO Port P Run Mode Clock Gating Control
   DelayGPIO();
@@ -48,7 +48,7 @@ static uchar ConvertKey(uint  i)
 }
 
 
-void    RunIR(void)
+void    RunInfrared(void)
 {
   static IRMP_DATA irmp_data;
 
