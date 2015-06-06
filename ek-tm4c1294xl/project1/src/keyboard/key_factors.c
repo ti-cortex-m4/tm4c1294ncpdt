@@ -31,43 +31,45 @@ static char const      *pszTransCnt[]   = { szTransEng, szSpecial, "" },
 
 
 
-static void Show(void)
+static void Show(uchar  ibCan)
 {
   if (enGlobal != GLB_WORK)
   {
     switch (wProgram)
     {
-      case bSET_TRANS_ENG:  ShowFloat( mpdbTransEng[ibX] );  break;
-      case bSET_TRANS_CNT:  ShowFloat( mpdbTransCnt[ibX] );  break;
-      case bSET_PULSE_HOU:  ShowFloat( mpdbPulseHou[ibX] );  break;
-      case bSET_PULSE_MNT:  ShowFloat( mpdbPulseMnt[ibX] );  break;
+      case bSET_TRANS_ENG:  ShowFloat( mpdbTransEng[ibCan] );  break;
+      case bSET_TRANS_CNT:  ShowFloat( mpdbTransCnt[ibCan] );  break;
+      case bSET_PULSE_HOU:  ShowFloat( mpdbPulseHou[ibCan] );  break;
+      case bSET_PULSE_MNT:  ShowFloat( mpdbPulseMnt[ibCan] );  break;
 
-      case bSET_COUNT:      ShowFloat( GetCntCurrImp(ibX) ); break;
-      case bSET_LOSSE:      ShowFloat( mpdbLosse[ibX]*100 ); break;
-      case bSET_LEVEL:      ShowFloat( mpdbLevel[ibX] );     break;
+      case bSET_COUNT:      ShowFloat( GetCntCurrImp(ibCan) ); break;
+      case bSET_LOSSE:      ShowFloat( mpdbLosse[ibCan]*100 ); break;
+      case bSET_LEVEL:      ShowFloat( mpdbLevel[ibCan] );     break;
     }
   }
   else
   {
     switch (wProgram)
     {
-      case bGET_TRANS_ENG:  ShowFloat( mpdbTransEng[ibX] );  break;
-      case bGET_TRANS_CNT:  ShowFloat( mpdbTransCnt[ibX] );  break;
-      case bGET_PULSE_HOU:  ShowFloat( mpdbPulseHou[ibX] );  break;
-      case bGET_PULSE_MNT:  ShowFloat( mpdbPulseMnt[ibX] );  break;
+      case bGET_TRANS_ENG:  ShowFloat( mpdbTransEng[ibCan] );  break;
+      case bGET_TRANS_CNT:  ShowFloat( mpdbTransCnt[ibCan] );  break;
+      case bGET_PULSE_HOU:  ShowFloat( mpdbPulseHou[ibCan] );  break;
+      case bGET_PULSE_MNT:  ShowFloat( mpdbPulseMnt[ibCan] );  break;
 
-      case bGET_LOSSE:      ShowFloat( mpdbLosse[ibX]*100 ); break;
-      case bSET_LEVEL:      ShowFloat( mpdbLevel[ibX] );     break;
+      case bGET_LOSSE:      ShowFloat( mpdbLosse[ibCan]*100 ); break;
+      case bSET_LEVEL:      ShowFloat( mpdbLevel[ibCan] );     break;
     }
   }
 
-  sprintf(szLo+14,"%2u",ibX+1);
+  sprintf(szLo+14,"%2u",ibCan+1);
 }
 
 
 
 void    key_SetFactors(void)
 {
+static uchar ibCan;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
@@ -90,23 +92,23 @@ void    key_SetFactors(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
-      Show();
+      ibCan = 0;
+      Show(ibCan);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
+      if ((ibCan = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        Show();
+        Show(ibCan);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) ibX = 0;
+      if (++ibCan >= bCANALS) ibCan = 0;
 
-      Show();
+      Show(ibCan);
     }
     else if ((enKeyboard == KBD_POSTINPUT2) || (enKeyboard == KBD_POSTINPUT3))
     {      
@@ -119,10 +121,10 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpdbTransEng[ibX] = fl;
+            mpdbTransEng[ibCan] = fl;
             SaveFile(&flTransEng);
 
-            mpdbTransCnt[ibX] = 1;
+            mpdbTransCnt[ibCan] = 1;
             SaveFile(&flTransCnt);
           }
           else Beep();
@@ -133,7 +135,7 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpdbTransCnt[ibX] = fl;
+            mpdbTransCnt[ibCan] = fl;
             SaveFile(&flTransCnt);
           }
           else Beep();
@@ -144,10 +146,10 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpdbPulseHou[ibX] = fl;
+            mpdbPulseHou[ibCan] = fl;
             SaveFile(&flPulseHou);
 
-            mpdbPulseMnt[ibX] = fl;
+            mpdbPulseMnt[ibCan] = fl;
             SaveFile(&flPulseMnt);
           }
           else Beep();
@@ -158,7 +160,7 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpdbPulseMnt[ibX] = fl;
+            mpdbPulseMnt[ibCan] = fl;
             SaveFile(&flPulseMnt);
           }
           else Beep();
@@ -169,17 +171,17 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            if (GetDigitalDevice(ibX) == 19)
+            if (GetDigitalDevice(ibCan) == 19)
             {
-              fl -= mpdwBase[ibX] * mpdbValueCntHou[ibX];
+              fl -= mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
             }
             else
             {
-              fl -= mpwImpMntCan[ibSoftMnt][ibX] * mpdbValueCntMnt[ibX];
-              fl -= *PGetCanImpAll(mpimAbsCan,ibX) * mpdbValueCntHou[ibX];
+              fl -= mpwImpMntCan[ibSoftMnt][ibCan] * mpdbValueCntMnt[ibCan];
+              fl -= *PGetCanImpAll(mpimAbsCan,ibCan) * mpdbValueCntHou[ibCan];
             }
 
-            mpdbCount[ibX] = fl;
+            mpdbCount[ibCan] = fl;
             SaveFile(&flCount);
           }
           else Beep();
@@ -190,7 +192,7 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpdbLosse[ibX] = fl/100;
+            mpdbLosse[ibCan] = fl/100;
             SaveFile(&flLosse);
           }   
           else Beep();
@@ -201,7 +203,7 @@ void    key_SetFactors(void)
           {
             enKeyboard = KBD_POSTENTER;
 
-            mpdbLevel[ibX] = fl;
+            mpdbLevel[ibCan] = fl;
             SaveFile(&flLevel);
           }
           else Beep();
@@ -210,9 +212,9 @@ void    key_SetFactors(void)
 
       if (enKeyboard == KBD_POSTENTER)
       {
-        if (++ibX >= bCANALS) ibX = 0;
+        if (++ibCan >= bCANALS) ibCan = 0;
 
-        Show();
+        Show(ibCan);
       }
       else 
       {
@@ -269,6 +271,8 @@ void    key_SetFactors(void)
 
 void    key_GetFactors(void)
 {
+static uchar ibCan;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -290,23 +294,23 @@ void    key_GetFactors(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
-      Show();
+      ibCan = 0;
+      Show(ibCan);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
+      if ((ibCan = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        Show();
+        Show(ibCan);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) ibX = 0;
+      if (++ibCan >= bCANALS) ibCan = 0;
 
-      Show();
+      Show(ibCan);
     }
   }
 

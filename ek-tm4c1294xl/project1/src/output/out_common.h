@@ -4,12 +4,12 @@ OUT_COMMON,H
 
 ------------------------------------------------------------------------------*/
 
-void    OutGetFloatCan(float  *mfl);
-void    OutGetFloatOrDoubleCan_GlobalWork(double  *mdb, bool  fDouble);
+void    OutGetFloatOrDoubleCan(double  *mpdb, bool  fDouble);
+void    OutGetFloatOrDoubleCan_GlobalWork(double  *mpdb, bool  fDouble);
 
-void    OutSetFloatCan(float  *mfl, file const  *pfl);
+void    OutSetFloatOrDoubleCan(double  *mpdb, file const  *pfl, bool  fDouble);
 
-void    OutFloatCanExt(float  *mpfl);
+void    OutFloatOrDoubleCanExt(double  *mpdb, bool  fDouble);
 void    OutIntCanExt(uint  *mpw);
 void    OutCharCanExt(uchar  *mpb);
 void    OutBoolCanExt(bool  *mpf);
