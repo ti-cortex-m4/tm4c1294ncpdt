@@ -30,7 +30,7 @@ uint                    mpcwGPSRun[20];
 time                    tiPrevCorrect, tiPostCorrect;
 
 // признак использования сезонного времени при расчете местного времени
-bool                 boSeasonGPS;
+bool                    boSeasonGPS;
 
 // буфер значения сезона
 uchar                   bSeasonCurr;

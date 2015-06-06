@@ -9,7 +9,7 @@ MEM_CORRECT3.C
 
 
 // флаг
-bool                 boCorrect3;
+bool                    boCorrect3;
 
 // переменные
 uchar                   bMaxCorrect3;

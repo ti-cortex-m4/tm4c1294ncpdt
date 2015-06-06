@@ -20,7 +20,7 @@ bool                    mpboCtrlHou[48];
 bool                    mpboRecalcHou[48];
 
 // признак
-bool                 boRecalcAlways;
+bool                    boRecalcAlways;
 
 // глобальная переменная
-bool                 boRecalcCurr;
+bool                    boRecalcCurr;

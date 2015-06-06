@@ -8,7 +8,7 @@ extern  phone                   mpphPhones[bCANALS];
 
 extern  uchar                   bMaxConnect;
 
-extern  bool                 boCustomModem;
+extern  bool                    boCustomModem;
 
 extern  uint                    mpcwBaud[bPORTS],
                                 mpcwCommon[bPORTS],

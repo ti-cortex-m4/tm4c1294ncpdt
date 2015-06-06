@@ -4,9 +4,9 @@ MEM_PARAMS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                 boParamsFlag;
+extern  bool                    boParamsFlag;
 
-extern  bool                 boMntParams;
+extern  bool                    boMntParams;
 
 extern  real                    mpreParamsDiv[wPARAMS];
 
@@ -22,6 +22,6 @@ extern  uint                    iwHardTim;
 
 extern  uint                    cwParamTim;
 
-extern  bool                 boFixParamsBugs;
+extern  bool                    boFixParamsBugs;
 
-extern  bool                 boUseParamsDiv;
+extern  bool                    boUseParamsDiv;

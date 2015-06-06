@@ -9,7 +9,7 @@ MEM_LIMITS.C
 
 
 // флаг использования ближней границы опроса
-bool                 boUseBounds;
+bool                    boUseBounds;
 
 // массив индексов ближней границы опроса
 uint                    mpcwStartRelCan[bCANALS];

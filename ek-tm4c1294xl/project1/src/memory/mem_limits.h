@@ -4,7 +4,7 @@ MEM_LIMITS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                 boUseBounds;
+extern  bool                    boUseBounds;
 
 extern  uint                    mpcwStartRelCan[bCANALS];
 

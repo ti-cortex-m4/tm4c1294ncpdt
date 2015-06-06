@@ -4,7 +4,7 @@ REFILL.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                 boDsblRefill;
+extern  bool                    boDsblRefill;
 
 
 extern  file const              flDsblRefill;

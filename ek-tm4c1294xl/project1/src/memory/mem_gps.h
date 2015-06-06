@@ -18,6 +18,6 @@ extern  uint                    mpcwGPSRun[20];
 
 extern  time                    tiPrevCorrect, tiPostCorrect;
 
-extern  bool                 boSeasonGPS;
+extern  bool                    boSeasonGPS;
 
 extern  uchar                   bSeasonCurr;

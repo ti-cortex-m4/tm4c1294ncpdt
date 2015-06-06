@@ -4,5 +4,5 @@ HEALTH.H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                 boHealthLabelRTC;
-extern  bool                 boHealthTimeRTC;
+extern  bool                    boHealthLabelRTC;
+extern  bool                    boHealthTimeRTC;
