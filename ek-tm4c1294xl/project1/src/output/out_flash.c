@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
-OUT_FLASH.C
-                    
+OUT_FLASH,C
+
 
 ------------------------------------------------------------------------------*/
 
@@ -11,11 +11,16 @@ OUT_FLASH.C
 #include "../serial/ports.h"
 #include "../flash/at45.h"
 #include "../hardware/memory.h"
+#include "out_flash.h"
 
 
 
-void    OutFlashPage(void) {
-  if ((bInBuff5 == 0xFF) && (bInBuff6 == 0xFF)) {
+void    OutFlashPage(void)
+{
+  uint w = bInBuff5*0x100 + bInBuff6;
+
+  if (w == 0xFFFF)
+  {
     InitPushPtr();
 
     PushInt(cwWrnBusy);
@@ -35,8 +40,10 @@ void    OutFlashPage(void) {
     PushChar(bLogical);
 
     OutptrOutBuff(1056);
-  } else if (bInBuff5*0x100 + bInBuff6 <= END) {
-    wPageIn = bInBuff5*0x100 + bInBuff6;
+  }
+  else if (w <= END)
+  {
+    wPageIn = w;
 
     if (SafePageRead() == true)
       Outptr(&mpbPageIn, wPAGE_SIZE);
