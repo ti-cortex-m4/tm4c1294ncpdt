@@ -6,7 +6,6 @@ RESPONSE1_CRC.C
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
-#include "../memory/mem_factors.h"
 #include "../memory/mem_settings.h"
 #include "../include/states.h"
 #include "../serial/ports.h"
@@ -68,23 +67,23 @@ void    Response1_CRC(void)
       case bINQ_GETNEWPUBTARIFFS: OutGetNewPubTariffs(); break;
       case bINQ_SETNEWPUBTARIFFS: OutSetNewPubTariffs(); break;
 
-      case bINQ_GETTRANS_ENG: OutGetFloatCan(mpdbTransEng); break;
-      case bINQ_GETTRANS_CNT: OutGetFloatCan(mpdbTransCnt); break;
-      case bINQ_GETPULSE_HOU: OutGetFloatCan(mpdbPulseHou); break;
-      case bINQ_GETPULSE_MNT: OutGetFloatCan(mpdbPulseMnt); break;
-      case bINQ_GETCOUNT:     OutGetFloatCan(mpdbCount);    break;
-      case bINQ_GETLOSSE:     OutGetFloatCan(mpdbLosse);    break;
-      case bINQ_GETLEVEL:     OutGetFloatCan(mpdbLevel); break;
+      case bINQ_GETTRANS_ENG: OutGetFloatOrDoubleCan(mpdbTransEng, false); break;
+      case bINQ_GETTRANS_CNT: OutGetFloatOrDoubleCan(mpdbTransCnt, false); break;
+      case bINQ_GETPULSE_HOU: OutGetFloatOrDoubleCan(mpdbPulseHou, false); break;
+      case bINQ_GETPULSE_MNT: OutGetFloatOrDoubleCan(mpdbPulseMnt, false); break;
+      case bINQ_GETCOUNT:     OutGetFloatOrDoubleCan(mpdbCount, false);    break;
+      case bINQ_GETLOSSE:     OutGetFloatOrDoubleCan(mpdbLosse, false);    break;
+      case bINQ_GETLEVEL:     OutGetFloatOrDoubleCan(mpdbLevel, false);    break;
 
-      case bINQ_SETTRANS_ENG: OutSetFloatCan(mpdbTransEng, &flTransEng); break;
-      case bINQ_SETTRANS_CNT: OutSetFloatCan(mpdbTransCnt, &flTransCnt); break;
-      case bINQ_SETPULSE_HOU: OutSetFloatCan(mpdbPulseHou, &flPulseHou); break;
-      case bINQ_SETPULSE_MNT: OutSetFloatCan(mpdbPulseMnt, &flPulseMnt); break;
-      case bINQ_SETCOUNT:     OutSetFloatCan(mpdbCount,    &flCount);    break;
-      case bINQ_SETLOSSE:     OutSetFloatCan(mpdbLosse,    &flLosse);    break;
-      case bINQ_SETLEVEL:     OutSetFloatCan(mpdbLevel,    &flLevel);    break;
+      case bINQ_SETTRANS_ENG: OutSetFloatOrDoubleCan(mpdbTransEng, &flTransEng, false); break;
+      case bINQ_SETTRANS_CNT: OutSetFloatOrDoubleCan(mpdbTransCnt, &flTransCnt, false); break;
+      case bINQ_SETPULSE_HOU: OutSetFloatOrDoubleCan(mpdbPulseHou, &flPulseHou, false); break;
+      case bINQ_SETPULSE_MNT: OutSetFloatOrDoubleCan(mpdbPulseMnt, &flPulseMnt, false); break;
+      case bINQ_SETCOUNT:     OutSetFloatOrDoubleCan(mpdbCount,    &flCount, false);    break;
+      case bINQ_SETLOSSE:     OutSetFloatOrDoubleCan(mpdbLosse,    &flLosse, false);    break;
+      case bINQ_SETLEVEL:     OutSetFloatOrDoubleCan(mpdbLevel,    &flLevel, false);    break;
 
-      case bINQ_GETKOEFF: OutAllFactors(); break;
+      case bINQ_GETKOEFF: OutAllFactors(false); break;
 
       case bINQ_GETVALUE_ENGHOU: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueEngHou, false); break;
       case bINQ_GETVALUE_CNTHOU: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueCntHou, false); break;

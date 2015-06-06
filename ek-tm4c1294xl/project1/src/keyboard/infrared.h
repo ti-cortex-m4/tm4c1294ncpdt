@@ -4,6 +4,6 @@ INFRARED,H
 
 ------------------------------------------------------------------------------*/
 
-void    InitIR(void);
+void    InitInfrared(void);
 
-void    RunIR(void);
+void    RunInfrared(void);

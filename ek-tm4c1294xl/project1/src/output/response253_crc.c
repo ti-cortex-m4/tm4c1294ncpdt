@@ -6,6 +6,7 @@ RESPONSE253_CRC,C
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_factors.h"
 #include "../include/states.h"
 #include "../serial/ports.h"
 #include "../digitals/extended/extended_1_out.h"
@@ -16,6 +17,7 @@ RESPONSE253_CRC,C
 #include "../digitals/extended/extended_7_out.h"
 #include "response_crc.h"
 #include "out_energy.h"
+#include "out_common.h"
 #include "response253_crc.h"
 
 
@@ -24,6 +26,13 @@ void    Response253_CRC(void)
 {
   switch (bInBuff5)
   {
+    case bINQ_GETTRANS_ENG: OutFloatOrDoubleCanExt(mpdbTransEng, true); break;
+    case bINQ_GETTRANS_CNT: OutFloatOrDoubleCanExt(mpdbTransCnt, true); break;
+    case bINQ_GETPULSE_HOU: OutFloatOrDoubleCanExt(mpdbPulseHou, true); break;
+    case bINQ_GETPULSE_MNT: OutFloatOrDoubleCanExt(mpdbPulseMnt, true); break;
+    case bINQ_GETCOUNT:     OutFloatOrDoubleCanExt(mpdbCount, true);    break;
+    case bINQ_GETLOSSE:     OutFloatOrDoubleCanExt(mpdbLosse, true);    break;
+
     case bEXT_GET_ESC_S_VALUE: OutEscS_Value(true); break;
     case bEXT_GET_ESC_V_VALUE: OutEscV_Value(true); break;
 

@@ -36,7 +36,7 @@ bool    IsSpecCurrent(uchar  i)
 
 void    MakeSpecCurrent(uchar  ibCan, uint  wImp)
 {
-real    re;
+  double db = 0;
 
   if (IsSpecCurrent(GetDigitalDevice(ibCan)) == 1)
   {
@@ -50,20 +50,20 @@ real    re;
 
     // подготовка информации для Esc V
     if (LoadCntMon(tiCurr.bMonth-1) == false)
-      re = 0;
+      db = 0;
     else
-      re = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
+      db = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
 
-    mpdbEsc_V[ibCan] = re;
+    mpdbEsc_V[ibCan] = db;
     mptiEsc_V[ibCan] = *GetCurrTimeDate();
 
 
     // подготовка информации для Esc S
-    re  = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
+    db  = mpdwBase[ibCan] * mpdbValueCntHou[ibCan];
     if (GetDigitalDevice(ibCan) == 19)
-      re += GetCanReal(mpdbCount,ibCan);
+      db += mpdbCount[ibCan];
 
-    mpdbEsc_S[ibCan] = re;
+    mpdbEsc_S[ibCan] = db;
     mptiEsc_S[ibCan] = *GetCurrTimeDate();
 
 

@@ -438,12 +438,12 @@ uchar   i;
 // сохранение К преобразования и К трасформации
 void    SetCanalsAll(void)
 {
-  SetCanReal(mpdbPulseHou,ibDig,&reBuffA);
-  SetCanReal(mpdbPulseMnt,ibDig,&reBuffA);
+  mpdbPulseHou[ibDig] = reBuffA;
+  mpdbPulseMnt[ibDig] = reBuffA;
   reBuffA = dbKtrans;
 
-  SetCanReal(mpdbTransEng,ibDig,&reBuffA);
-  SetCanReal(mpdbTransCnt,ibDig,&reBuffA);
+  mpdbTransEng[ibDig] = reBuffA;
+  mpdbTransCnt[ibDig] = reBuffA;
 }
 
 #endif

@@ -60,12 +60,12 @@ void    Response255_CRC(void)
     case bEXT_GETPHONE: OutGetPhone(); break;
     case bEXT_SETPHONE: OutSetPhone(); break;
 
-    case bINQ_GETTRANS_ENG: OutFloatCanExt(mpdbTransEng); break;
-    case bINQ_GETTRANS_CNT: OutFloatCanExt(mpdbTransCnt); break;
-    case bINQ_GETPULSE_HOU: OutFloatCanExt(mpdbPulseHou); break;
-    case bINQ_GETPULSE_MNT: OutFloatCanExt(mpdbPulseMnt); break;
-    case bINQ_GETCOUNT:     OutFloatCanExt(mpdbCount);    break;
-    case bINQ_GETLOSSE:     OutFloatCanExt(mpdbLosse);    break;
+    case bINQ_GETTRANS_ENG: OutFloatOrDoubleCanExt(mpdbTransEng, false); break;
+    case bINQ_GETTRANS_CNT: OutFloatOrDoubleCanExt(mpdbTransCnt, false); break;
+    case bINQ_GETPULSE_HOU: OutFloatOrDoubleCanExt(mpdbPulseHou, false); break;
+    case bINQ_GETPULSE_MNT: OutFloatOrDoubleCanExt(mpdbPulseMnt, false); break;
+    case bINQ_GETCOUNT:     OutFloatOrDoubleCanExt(mpdbCount, false);    break;
+    case bINQ_GETLOSSE:     OutFloatOrDoubleCanExt(mpdbLosse, false);    break;
 
     case bEXT_GET_ESC_S_VALUE: OutEscS_Value(false); break;
     case bEXT_GET_ESC_U_VALUE: OutEscU_Value();      break;

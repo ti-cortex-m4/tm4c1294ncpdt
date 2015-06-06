@@ -4,4 +4,4 @@ OUT_FACTORS,H
 
 ------------------------------------------------------------------------------*/
 
-void    OutAllFactors(void);
+void    OutAllFactors(bool  fDouble);

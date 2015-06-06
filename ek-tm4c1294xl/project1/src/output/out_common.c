@@ -9,10 +9,11 @@ OUT_COMMON,C
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
 #include "../flash/files.h"
+#include "out_common.h"
 
 
 
-void    OutGetFloatCan(float  *mfl)
+void    OutGetFloatOrDoubleCan(double  *mpdb, bool  fDouble)
 {
   InitPushCRC();
   uint wSize = 0;
@@ -20,8 +21,7 @@ void    OutGetFloatCan(float  *mfl)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    PushFloat(*mfl++);
-    wSize += sizeof(float);
+    wSize += PushFloatOrDouble(*mpdb++, fDouble);
   }
 
   Output(wSize);
@@ -29,32 +29,16 @@ void    OutGetFloatCan(float  *mfl)
 
 
 
-void    OutGetFloatOrDoubleCan(double  *mdb, bool  fDouble)
-{
-  InitPushCRC();
-  uint wSize = 0;
-
-  uchar c;
-  for (c=0; c<bCANALS; c++)
-  {
-    wSize += PushFloatOrDouble(*mdb++, fDouble);
-  }
-
-  Output(wSize);
-}
-
-
-
-void    OutGetFloatOrDoubleCan_GlobalWork(double  *mdb, bool  fDouble)
+void    OutGetFloatOrDoubleCan_GlobalWork(double  *mpdb, bool  fDouble)
 {
   if (enGlobal != GLB_PROGRAM)
-    OutGetFloatOrDoubleCan(mdb, fDouble);
+    OutGetFloatOrDoubleCan(mpdb, fDouble);
   else
     Result(bRES_NEEDWORK);
 }
 
 
-void    OutSetFloatCan(float  *mfl, file const  *pfl)
+void    OutSetFloatOrDoubleCan(double  *mpdb, file const  *pfl, bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
   {
@@ -63,7 +47,7 @@ void    OutSetFloatCan(float  *mfl, file const  *pfl)
     uchar c;
     for (c=0; c<bCANALS; c++)
     {
-      (*mfl++) = PopFloat();
+      (*mpdb++) = PopFloat();
     }
 
     SaveFile(pfl);
@@ -74,7 +58,7 @@ void    OutSetFloatCan(float  *mfl, file const  *pfl)
 
 
 
-void    OutFloatCanExt(float  *mpfl)
+void    OutFloatOrDoubleCanExt(double  *mpdb, bool  fDouble)
 {
   InitPushPtr();
   uint wSize = 0;
@@ -84,7 +68,7 @@ void    OutFloatCanExt(float  *mpfl)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      wSize += PushFloat(mpfl[c]);
+      wSize += PushFloatOrDouble(mpdb[c], fDouble);
     }
   }
 
