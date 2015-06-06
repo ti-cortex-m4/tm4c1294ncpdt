@@ -9,6 +9,8 @@ OUT_VERSION,C
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
 #include "../hardware/memory.h"
+#include "../include/flash.h"
+#include "out_version.h"
 
 
 
@@ -41,6 +43,12 @@ void    OutVersion(void)
   PushInt(wHOURS);
   PushInt(bDAYS);
   PushInt(bMONTHS);
+
+  PushInt(wPAGE_SIZE);
+  PushInt(wFREEPAGE_SIZE);
+  PushInt(wPAGES);
+  PushInt(BEGIN);
+  PushInt(END);
 
   Output(100);
 }
