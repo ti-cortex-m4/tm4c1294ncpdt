@@ -18,12 +18,13 @@ static char const       szHex[0x10]  = "0123456789ABCDEF";
 
 
 
-void    InitPush(uchar  ibPush) {
+void    InitPush(uint  iwPush)
+{
   switch (ibPort) {
-    case 0: iwPush0 = ibPush; break;
-    case 1: iwPush1 = ibPush; break;
-    case 2: iwPush2 = ibPush; break;
-    case 3: iwPush3 = ibPush; break;
+    case 0: iwPush0 = iwPush; break;
+    case 1: iwPush1 = iwPush; break;
+    case 2: iwPush2 = iwPush; break;
+    case 3: iwPush3 = iwPush; break;
     default: ASSERT(false);
   }
 }
