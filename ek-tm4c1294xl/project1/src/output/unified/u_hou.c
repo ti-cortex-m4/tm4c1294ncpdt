@@ -54,7 +54,7 @@ uchar   i;
       for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
       {      
         fDef |= GetDefCan(c-1);
-        InitPush((uint)(6 + 4*bInBuffD*(c-bInBuff7) + i*4));
+        InitPush(6 + 4*bInBuffD*(c-bInBuff7) + i*4);
 
         if (mpwImpHouCan[ PrevSoftHou() ][c-1] == 0xFFFF)
         {
@@ -111,7 +111,7 @@ uchar   i;
       for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
       {      
         fDef |= GetDefCan(g-1);
-        InitPush((uint)(6 + 4*bInBuffD*(g-bInBuff7) + i*4));
+        InitPush(6 + 4*bInBuffD*(g-bInBuff7) + i*4);
 
         PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g-1, 2));
 
@@ -158,7 +158,7 @@ uchar   i;
       for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
       {      
         fDef |= GetDefCan(c-1);
-        InitPush((uint)(6 + 4*48*(c-bInBuff7) + i*4));
+        InitPush(6 + 4*48*(c-bInBuff7) + i*4);
 
         if ((bInBuffB == 0) && (i > GetCurrHouIndex()))
         {
@@ -223,7 +223,7 @@ uchar   i;
       for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
       {      
         fDef |= GetDefCan(g-1);
-        InitPush((uint)(6 + 4*48*(g-bInBuff7) + i*4));
+        InitPush(6 + 4*48*(g-bInBuff7) + i*4);
 
         if ((bInBuffB == 0) && (i > GetCurrHouIndex()))
         {
