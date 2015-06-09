@@ -1,8 +1,11 @@
 /*------------------------------------------------------------------------------
-U_MNT.H
+UNI_HHR.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    GetPowCanMntUni(void); 
-void    GetPowGrpMntUni(void); 
+void    GetPowCanHouUni(void); 
+void    GetPowGrpHouUni(void); 
+
+void    GetPowCanHou48Uni(void); 
+void    GetPowGrpHou48Uni(void); 
