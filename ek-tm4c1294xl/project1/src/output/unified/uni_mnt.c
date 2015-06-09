@@ -16,17 +16,14 @@ UNI_MNT.C
 #include "../../time/timedate.h"
 #include "../../time/calendar.h"
 #include "../../energy.h"
+#include "../../energy2.h"
 #include "response_uni.h"
 #include "uni_mnt.h"
 
 
 
-#ifndef MODBUS
-
 void    GetPowCanMntUni(void) 
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0) || (bInBuffC != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -37,15 +34,27 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   {
-    InitPushUni();
+    uint wSize = 0;
 
-    uchar c;
-    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
+    uchar ibMnt = (bMINUTES+ibHardMnt-bInBuffB) % bMINUTES;
+
+    uchar i;
+    for (i=0; i<bInBuffD; i++)
     {
-      for (i=bInBuffB; i<bInBuffB+bInBuffD; i++)
+      LoadImpMnt(ibMnt);
+
+      uchar c;
+      for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
       {
-        PushFloat(GetCanMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], c-1, 20));
+        InitPush(6 + 4*bInBuffD*(c-bInBuff7) + i*4);
+
+        PushFloat(GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], c-1, 20));
+
+        wSize += sizeof(float);
+        if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
+
+      if (ibMnt > 0) ibMnt--; else ibMnt = bMINUTES-1;
     }
 
     ulong dw = DateToMntIndex(*GetCurrTimeDate());
@@ -60,8 +69,6 @@ uchar   i;
 
 void    GetPowGrpMntUni(void) 
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0) || (bInBuffC != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bGROUPS)
@@ -72,15 +79,27 @@ uchar   i;
     Result2(bUNI_BADDATA);
   else
   {
-    InitPushUni();
+    uint wSize = 0;
 
-    uchar g;
-    for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
+    uchar ibMnt = (bMINUTES+ibHardMnt-bInBuffB) % bMINUTES;
+
+    uchar i;
+    for (i=0; i<bInBuffD; i++)
     {
-      for (i=bInBuffB; i<bInBuffB+bInBuffD; i++)
+      LoadImpMnt(ibMnt);
+
+      uchar g;
+      for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
       {
-        PushFloat(GetGrpMntInt2Real(mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ], g-1, 20));
+        InitPush(6 + 4*bInBuffD*(g-bInBuff7) + i*4);
+
+        PushFloat(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], g-1, 20));
+
+        wSize += sizeof(float);
+        if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
+
+      if (ibMnt > 0) ibMnt--; else ibMnt = bMINUTES-1;
     }
 
     ulong dw = DateToMntIndex(*GetCurrTimeDate());
@@ -90,5 +109,3 @@ uchar   i;
     Output2_Code((uint)4*bInBuffD*bInBuff9, 0, ti);
   }
 }
-
-#endif
