@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-UNI_HHR.C
+UNI_HHR,C
 
 
 ------------------------------------------------------------------------------*/
@@ -26,12 +26,8 @@ UNI_HHR.C
 
 
 
-#ifndef MODBUS
-
 void    GetPowCanHouUni(void)
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0) || (bInBuffC != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -46,6 +42,8 @@ uchar   i;
     uint wSize = 0;
 
     uint iwHou = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
+
+    uchar i;
     for (i=0; i<bInBuffD; i++)
     {
       LoadImpHouFree(iwHou);
@@ -68,7 +66,7 @@ uchar   i;
           PushFloat(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c-1, 2));
         }
 
-        wSize += sizeof(real);
+        wSize += sizeof(float);
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
 
@@ -87,8 +85,6 @@ uchar   i;
 
 void    GetPowGrpHouUni(void)
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0) || (bInBuffC != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -103,6 +99,8 @@ uchar   i;
     uint wSize = 0;
 
     uint iwHou = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
+
+    uchar i;
     for (i=0; i<bInBuffD; i++)
     {
       LoadImpHouFree(iwHou);
@@ -115,7 +113,7 @@ uchar   i;
 
         PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g-1, 2));
 
-        wSize += sizeof(real);
+        wSize += sizeof(float);
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
 
@@ -134,8 +132,6 @@ uchar   i;
 
 void    GetPowCanHou48Uni(void) 
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bCANALS)
@@ -150,6 +146,8 @@ uchar   i;
     uint wSize = 0;
 
     uint iwHou = GetDayHouIndex(bInBuffB);
+
+    uchar i;
     for (i=0; i<48; i++)
     {
       LoadImpHouFree(iwHou);
@@ -167,8 +165,7 @@ uchar   i;
           PushChar(0xFF);
           PushChar(0xFF);
         }
-        else 
-        if (mpwImpHouCan[ PrevSoftHou() ][c-1] == 0xFFFF)
+        else if (mpwImpHouCan[ PrevSoftHou() ][c-1] == 0xFFFF)
         {
           PushChar(0xFF);
           PushChar(0xFF);
@@ -180,7 +177,7 @@ uchar   i;
           PushFloat(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c-1, 2));
         }
 
-        wSize += sizeof(real);
+        wSize += sizeof(float);
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
 
@@ -199,8 +196,6 @@ uchar   i;
 
 void    GetPowGrpHou48Uni(void) 
 {
-uchar   i;
-
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
   else if (bInBuff7 > bGROUPS)
@@ -215,6 +210,8 @@ uchar   i;
     uint wSize = 0;
 
     uint iwHou = GetDayHouIndex(bInBuffB);
+
+    uchar i;
     for (i=0; i<48; i++)
     {
       LoadImpHouFree(iwHou);
@@ -237,7 +234,7 @@ uchar   i;
           PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g-1, 2));
         }
 
-        wSize += sizeof(real);
+        wSize += sizeof(float);
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
 
@@ -251,5 +248,3 @@ uchar   i;
     Output2_Code((uint)4*48*bInBuff9, ((fDef == 0) ? bUNI_OK : bUNI_DEFECT), ti);
   }
 }
-
-#endif

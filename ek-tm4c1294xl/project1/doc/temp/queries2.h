@@ -16,10 +16,10 @@ QUERIES2.H
 #define wUNI_GETPOWCANMNT              0x0050
 #define wUNI_GETPOWGRPMNT              0x0051
 
-#define wUNI_GETPOWCANHOU              0x0052
-#define wUNI_GETPOWGRPHOU              0x0053
-#define wUNI_GETPOWCANHOU48            0x0054
-#define wUNI_GETPOWGRPHOU48            0x0055
++   #define wUNI_GETPOWCANHOU              0x0052
++   #define wUNI_GETPOWGRPHOU              0x0053
++   #define wUNI_GETPOWCANHOU48            0x0054
++   #define wUNI_GETPOWGRPHOU48            0x0055
 
 #define wUNI_GETCNTCANMON              0x0080
 #define wUNI_GETCNTCAN                 0x0085
