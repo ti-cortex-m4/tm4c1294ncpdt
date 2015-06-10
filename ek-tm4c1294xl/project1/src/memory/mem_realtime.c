@@ -12,13 +12,14 @@ MEM_REALTIME.S
 time                    tiCurr, tiPrev;
 
 // индексы по кольцевым буферам
-uchar                   ibSoftMnt, ibHardMnt,
+uchar                   ibSoftMnt,
                         ibSoftHou,
                         ibSoftDay, ibHardDay,
                         ibSoftMon, ibHardMon;
 
 // индексы по кольцевому буферу
-uint                    iwHardHou;
+uint                    iwHardMnt,
+                        iwHardHou;
 
 // сечетчик включения отображения текущего времени
 uchar                   cbShowCurrentTime;

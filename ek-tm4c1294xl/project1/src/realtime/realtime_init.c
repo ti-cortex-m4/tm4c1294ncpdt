@@ -153,7 +153,7 @@ void    LoadRealtime(void)
   LoadPointersMon();
   LoadPointersTim();
 
-  PrintString("\n 3min.   "); PrintInt(ibSoftMnt); PrintInt(ibHardMnt);
+  PrintString("\n 3min.   "); PrintInt(ibSoftMnt); PrintInt(iwHardMnt);
   PrintString("\n 30 min. "); PrintInt(ibSoftHou); PrintInt(iwHardHou);
   PrintString("\n day     "); PrintInt(ibSoftDay); PrintInt(ibHardDay);
   PrintString("\n month   "); PrintInt(ibSoftMon); PrintInt(ibHardMon);
@@ -169,7 +169,7 @@ void    LoadRealtime(void)
 void    DefaultRealtime(void)
 {
   ibSoftMnt = 0;
-  ibHardMnt = 0;
+  iwHardMnt = 0;
 
   ibSoftHou = 0;
   iwHardHou = 0;

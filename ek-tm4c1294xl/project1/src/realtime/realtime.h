@@ -18,7 +18,7 @@ uchar   GetCurrHouIndex(void);
 uint    GetDayHouIndex(uchar  bDay);
 
 uchar   PrevSoftMnt(void);
-uchar   PrevHardMnt(void);
+uint    PrevHardMnt(void);
 uchar   PrevSoftHou(void);
 uint    PrevHardHou(void);
 uchar   PrevSoftDay(void);

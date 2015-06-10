@@ -35,7 +35,7 @@ real    reA, reB;
   reB = 0;
   for (i=1; i<=j; i++)
   {
-  	LoadImpMnt((bMINUTES+ibHardMnt-i) % bMINUTES); // TODO check result
+  	LoadImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES); // TODO check result
     reB += GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], ibGroup, bMul);
   }
 
@@ -56,7 +56,7 @@ real    reA, reB;
   reB = 0;
   for (i=1; i<=j; i++)
   {
-  	LoadImpMnt((bMINUTES+ibHardMnt-i) % bMINUTES); // TODO check result
+  	LoadImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES); // TODO check result
     reB += GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], ibCan, bMul);
   }
 

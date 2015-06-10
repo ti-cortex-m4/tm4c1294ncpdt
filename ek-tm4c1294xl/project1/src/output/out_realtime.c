@@ -31,7 +31,7 @@ void    OutRealtime(void)
   wSize += PushBool(fActive);
 
   wSize += PushInt(ibSoftMnt);
-  wSize += PushInt(ibHardMnt);
+  wSize += PushInt(iwHardMnt);
   wSize += PushInt(ibSoftHou);
   wSize += PushInt(iwHardHou);
   wSize += PushInt(ibSoftDay);

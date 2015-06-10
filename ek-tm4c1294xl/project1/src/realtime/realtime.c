@@ -72,9 +72,9 @@ uchar   PrevSoftMnt(void)
 }
 
 
-uchar   PrevHardMnt(void)
+uint    PrevHardMnt(void)
 {
-  if (ibHardMnt > 0) return(ibHardMnt - 1);
+  if (iwHardMnt > 0) return(iwHardMnt - 1);
   else               return(bMINUTES-1);
 }
 
@@ -166,7 +166,7 @@ void    ProcessTime(void)
   {
     PrintString("\n next 3 min.");
     NextMinute3();
-    PrintInt(ibSoftMnt); PrintInt(ibHardMnt);
+    PrintInt(ibSoftMnt); PrintInt(iwHardMnt);
 
     if (fActive == 1) fCurrent = 1;
   }

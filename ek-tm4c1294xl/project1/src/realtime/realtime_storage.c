@@ -18,7 +18,7 @@ bool SavePointersMnt(void)
   if (Save(&ibSoftMnt, sizeof(uchar)) == false)
     return false;
 
-  if (Save(&ibHardMnt, sizeof(uchar)) == false)
+  if (Save(&iwHardMnt, sizeof(uint)) == false)
     return false;
 
   return CloseOut();
@@ -32,7 +32,7 @@ bool LoadPointersMnt(void)
   if (Load(&ibSoftMnt, sizeof(uchar)) == false)
     return false;
 
-  return Load(&ibHardMnt, sizeof(uchar));
+  return Load(&iwHardMnt, sizeof(uint));
 }
 
 

@@ -4,8 +4,8 @@ ENERGY2.H
 
 ------------------------------------------------------------------------------*/
 
-bool SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom);
-bool LoadImpMnt(uchar  ibMntFrom);
+bool SaveImpMnt(bool fCurr, uint  iwMntTo, uint  iwMntFrom);
+bool LoadImpMnt(uint  iwMntFrom);
 
 bool SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom);
 bool LoadImpHou(uint  iwHouFrom);
