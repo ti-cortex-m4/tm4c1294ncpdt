@@ -47,8 +47,8 @@ void    OutVersion(void)
   PushInt(wPAGE_SIZE);
   PushInt(wFREEPAGE_SIZE);
   PushInt(wPAGES);
-  PushInt(BEGIN);
-  PushInt(END);
+  PushInt(FLASH_BEGIN);
+  PushInt(FLASH_END);
 
   Output(100);
 }
