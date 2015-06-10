@@ -6,12 +6,13 @@ MEM_REALTIME.H
 
 extern  time                    tiCurr, tiPrev;
 
-extern  uchar                   ibSoftMnt, ibHardMnt,
+extern  uchar                   ibSoftMnt,
                                 ibSoftHou,
                                 ibSoftDay, ibHardDay,
                                 ibSoftMon, ibHardMon;
 
-extern  uint                    iwHardHou;
+extern  uint                    iwHardMnt,
+                                iwHardHou;
 
 extern  uchar                   cbShowCurrentTime;
 

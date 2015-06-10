@@ -23,7 +23,7 @@ REALTIME_START.C
 void    StartRealtime(void)
 {
   ibSoftMnt = 0;
-  ibHardMnt = 0;
+  iwHardMnt = 0;
   SavePointersMnt();
 
   ibSoftHou = 0;

@@ -14,18 +14,18 @@ ENERGY2.C
 
 
 
-bool SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom)
+bool SaveImpMnt(bool fCurr, uint  iwMntTo, uint  iwMntFrom)
 {
-  if ((fCurr == 1) && (ibMntTo == ibHardMnt))
+  if ((fCurr == 1) && (iwMntTo == iwHardMnt))
   {
     memcpy(mpwImpMntCan[ ibSoftMnt ], mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS);
     return true;
   }
   else
   {
-    OpenOut(IMPMNTCAN + ibMntTo*UINTCAN_PAGES);
+    OpenOut(IMPMNTCAN + iwMntTo*UINTCAN_PAGES);
 
-    if (Save(mpwImpMntCan[ ibMntFrom ], sizeof(uint)*bCANALS) == false)
+    if (Save(mpwImpMntCan[ iwMntFrom ], sizeof(uint)*bCANALS) == false)
       return false;
 
     return( CloseOut() );
@@ -33,18 +33,18 @@ bool SaveImpMnt(bool fCurr, uchar  ibMntTo, uchar  ibMntFrom)
 }
 
 
-bool LoadImpMnt(uchar  ibMntFrom)
+bool LoadImpMnt(uint  iwMntFrom)
 {
 bool bo;
 
-  if (ibMntFrom == ibHardMnt)
+  if (iwMntFrom == iwHardMnt)
   {
     memcpy(mpwImpMntCan[ PrevSoftMnt() ], mpwImpMntCan[ ibSoftMnt ], sizeof(uint)*bCANALS);
     bo = true;
   }
   else
   {
-    OpenIn(IMPMNTCAN + ibMntFrom*UINTCAN_PAGES);
+    OpenIn(IMPMNTCAN + iwMntFrom*UINTCAN_PAGES);
     bo = Load(mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS);
   }
 

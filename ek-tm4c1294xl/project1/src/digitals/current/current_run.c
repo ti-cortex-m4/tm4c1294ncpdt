@@ -315,9 +315,9 @@ uchar   ibCan;
           mpwUnderflow[ibCan]++;
         else
         {
-          LoadImpMnt((bMINUTES+ibHardMnt-1) % bMINUTES);
+          LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES);
           mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImp; // TODO bufferize
-          SaveImpMnt(0, (bMINUTES+ibHardMnt-1) % bMINUTES, PrevSoftMnt());
+          SaveImpMnt(0, (bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
 
           MakeSpecCurrent(ibCan, (uint)dwImp);
         }

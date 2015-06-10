@@ -36,7 +36,7 @@ void    GetPowCanMntUni(void)
   {
     uint wSize = 0;
 
-    uchar ibMnt = (bMINUTES+ibHardMnt-bInBuffB) % bMINUTES;
+    uchar ibMnt = (bMINUTES+iwHardMnt-bInBuffB) % bMINUTES;
 
     uchar i;
     for (i=0; i<bInBuffD; i++)
@@ -81,7 +81,7 @@ void    GetPowGrpMntUni(void)
   {
     uint wSize = 0;
 
-    uchar ibMnt = (bMINUTES+ibHardMnt-bInBuffB) % bMINUTES;
+    uchar ibMnt = (bMINUTES+iwHardMnt-bInBuffB) % bMINUTES;
 
     uchar i;
     for (i=0; i<bInBuffD; i++)
