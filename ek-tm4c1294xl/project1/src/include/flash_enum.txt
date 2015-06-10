@@ -1,10 +1,10 @@
 
-// адреса блоков данных
+// адреса страниц DataFlash
 typedef enum
 {
-  BEGIN                 = 0,
+  FLASH_BEGIN           = 0,
 
-  PRIVATE               = BEGIN,
+  PRIVATE               = FLASH_BEGIN,
   GLOBAL                = PRIVATE + 1,
   LOGICAL               = GLOBAL + 1,
 
@@ -183,5 +183,5 @@ typedef enum
   CORRECT1              = SET_PASSWORD + 1,
   CORRECT2_FLAG         = CORRECT1 + sizeof(Correct1)/wFREEPAGE_SIZE + 1,
 
-  END                   = CORRECT2_FLAG + 1
+  FLASH_END             = CORRECT2_FLAG + 1
 } flash;

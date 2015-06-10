@@ -1,8 +1,8 @@
 
-// адреса блоков данных
+// адреса страниц DataFlash
 typedef enum
 {
-BEGIN(BEGIN, 0)
+BEGIN(FLASH_BEGIN, 0)
 
 RESERVE(PRIVATE, 1)
 RESERVE(GLOBAL, 1)
@@ -183,5 +183,5 @@ RESERVE(SET_PASSWORD, 1)
 RESERVE(CORRECT1, sizeof(Correct1)/wFREEPAGE_SIZE + 1)
 RESERVE(CORRECT2_FLAG, 1)
 
-END(END)
+END(FLASH_END)
 } flash;

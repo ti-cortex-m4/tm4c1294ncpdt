@@ -1,0 +1,10 @@
+
+// адреса страниц Non-volatile RAM
+typedef enum
+{
+BEGIN(NVRAM_BEGIN, 0)
+
+RESERVE(TEST, 1)
+
+END(NVRAM__END)
+} nvram;

@@ -41,7 +41,7 @@ void    OutFlashPage(void)
 
     OutptrOutBuff(1056);
   }
-  else if (w <= END)
+  else if (w <= FLASH_END)
   {
     wPageIn = w;
 
