@@ -13,10 +13,6 @@ OUT_FLASH_STACK,C
 
 
 
-#define PUSH_ENUM(value) PushString(#value); PushString("="); PushIntAsString(value); PushChar(0x0D); PushChar(0x0A);
-
-
-
 void    OutFlashStack(void)
 {
   InitPushCRC();
