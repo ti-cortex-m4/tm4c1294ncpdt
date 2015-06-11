@@ -9,6 +9,7 @@
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
 #include "inc/hw_types.h"
+#include "../time/delay.h"
 #include "23x1024.h"
 
 
@@ -32,16 +33,16 @@
 
  #define DELAY_NEW_STAT_PIN 1
 
-void Delay(unsigned long ulgTime)
+static void Delay_1(ulong ulgTime)
 {
  while(ulgTime--);
 }
 
 //Передача одного байта
 //Биты читаются микросхемой ЭОЗУ по переднему фронту
-void  CharOut_1(unsigned char bI)
+static void  CharOut(uchar bI)
 {
- unsigned char bK;
+ uchar bK;
 
  for(bK=0; bK<8; bK++)
  {
@@ -54,9 +55,9 @@ void  CharOut_1(unsigned char bI)
 
 //Прием одного байта
 //Биты фиксируются микросхемой ЭОЗУ в течении активности импульса (высокий уровень на SCK)
-unsigned char  CharIn_1(void)
+static uchar  CharIn(void)
 {
- unsigned char bRez, bK;
+ uchar bRez, bK;
 
  bRez = 0;
  for(bK=0; bK<8; bK++)
@@ -67,29 +68,29 @@ unsigned char  CharIn_1(void)
  }
  return(bRez);
 }//end CharIn
-
+/*
 //Один синхроимпульс
-void  OnePulse_1(void)
+static void  OnePulse_1(void)
 {
  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
 }//end OnePulse
-
+*/
 //Подготовка к началу работы по SPI
-void Start_1(void)
+static void Start(void)
 {
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
  HWREG(GPIO_DATABIT_CS)  = ~SPI_BIT_CS;
- Delay(DELAY_NEW_STAT_PIN);
+ Delay_1(DELAY_NEW_STAT_PIN);
 }
 
 //Окончание работы по SPI
-void Stop_1(void)
+static void Stop(void)
 {
  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
- Delay(DELAY_NEW_STAT_PIN);
+ Delay_1(DELAY_NEW_STAT_PIN);
  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
 }
 
@@ -100,42 +101,42 @@ void Init_EOZU(void)
  //Включение периферии
  HWREG(SYSCTL_RCGCGPIO) |= 0x00000020;//Запуск "F"
 
- RunClocking();
+ DelayGPIO();
 
  //Для порта "F" (SPI+CE)
  HWREG(GPIO_PORTF_BASE + GPIO_O_DIR)   |= 0x000E;//пины на передачу (PF0 на прием)
  HWREG(GPIO_PORTF_BASE + GPIO_O_DEN)   |= 0x000F;//цифровой сигнал
 
- Stop_1();
+ Stop();
 }
 
 //Чтение в буфер *ptrMas, начиная с байта lgAddr количества байт lgSize
-void LoadBytes_EOZU(unsigned char *ptrMass, unsigned long lgAddr, unsigned long lgSize)
+void LoadBytes_EOZU(uchar *ptrMass, ulong lgAddr, ulong lgSize)
 {
  if(((lgAddr + lgSize) > MAX_SIZE_23LC1024) || (lgSize == 0)) return;//превышение допустимых границ SRAM
 
- Start_1();
- CharOut_1(0x03);//чтение
- CharOut_1(*((unsigned char*)(&lgAddr)+2)); //24-х битный адрес
- CharOut_1(*((unsigned char*)(&lgAddr)+1));
- CharOut_1(*((unsigned char*)(&lgAddr)+0));
+ Start();
+ CharOut(0x03);//чтение
+ CharOut(*((uchar*)(&lgAddr)+2)); //24-х битный адрес
+ CharOut(*((uchar*)(&lgAddr)+1));
+ CharOut(*((uchar*)(&lgAddr)+0));
 
  while(lgSize--)
  {
-  *(ptrMass++) = CharIn_1();
+  *(ptrMass++) = CharIn();
  }
 
- Stop_1();
+ Stop();
 }
 
 
 //Запись из буфера *ptrMas, начиная с байта lgAddr количества байт lgSize
 //=1 - ошибка записи
 //=0 - запись успешно завершена
-unsigned char SaveBytes_EOZU(unsigned char *ptrMass, unsigned long lgAddr, unsigned long lgSize)
+uchar SaveBytes_EOZU(uchar *ptrMass, ulong lgAddr, ulong lgSize)
 {
- unsigned long lgSaveSize;
- unsigned char bi;
+ ulong lgSaveSize;
+ uchar bi;
 
  if(((lgAddr + lgSize) > MAX_SIZE_23LC1024) || (lgSize == 0)) return(1);//превышение допустимых границ SRAM
 
@@ -146,33 +147,33 @@ unsigned char SaveBytes_EOZU(unsigned char *ptrMass, unsigned long lgAddr, unsig
   lgSize = lgSaveSize;
 
   //Запись массива
-  Start_1();
-  CharOut_1(0x02);//запись
-  CharOut_1(*((unsigned char*)(&lgAddr)+2)); //24-х битный адрес
-  CharOut_1(*((unsigned char*)(&lgAddr)+1));
-  CharOut_1(*((unsigned char*)(&lgAddr)+0));
+  Start();
+  CharOut(0x02);//запись
+  CharOut(*((uchar*)(&lgAddr)+2)); //24-х битный адрес
+  CharOut(*((uchar*)(&lgAddr)+1));
+  CharOut(*((uchar*)(&lgAddr)+0));
 
   while(lgSize--)
   {
-   CharOut_1(*(ptrMass++));
+   CharOut(*(ptrMass++));
   }
-  Stop_1();
+  Stop();
 
   //Проверка записанных данных
   lgSize = lgSaveSize;
   ptrMass -= lgSize;
 
-  Start_1();
-  CharOut_1(0x03);//чтение
-  CharOut_1(*((unsigned char*)(&lgAddr)+2)); //24-х битный адрес
-  CharOut_1(*((unsigned char*)(&lgAddr)+1));
-  CharOut_1(*((unsigned char*)(&lgAddr)+0));
+  Start();
+  CharOut(0x03);//чтение
+  CharOut(*((uchar*)(&lgAddr)+2)); //24-х битный адрес
+  CharOut(*((uchar*)(&lgAddr)+1));
+  CharOut(*((uchar*)(&lgAddr)+0));
 
   while(lgSize--)
   {
-   if(*(ptrMass++) != CharIn_1()) break;
+   if(*(ptrMass++) != CharIn()) break;
   }
-  Stop_1();
+  Stop();
 
   if((++lgSize) == 0) break;//все верно - выходим
   else
@@ -188,14 +189,14 @@ unsigned char SaveBytes_EOZU(unsigned char *ptrMass, unsigned long lgAddr, unsig
 }
 
 //чтение регистра режима работы ЭОЗУ
-unsigned char ReadModeReg_EOZU(void)
+uchar ReadModeReg_EOZU(void)
 {
- unsigned char bRez;
+ uchar bRez;
 
- Start_1();
- CharOut_1(0x05);
- bRez = CharIn_1();
- Stop_1();
+ Start();
+ CharOut(0x05);
+ bRez = CharIn();
+ Stop();
 
  return(bRez);
 }
