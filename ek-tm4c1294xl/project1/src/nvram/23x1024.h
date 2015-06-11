@@ -5,6 +5,6 @@
 ------------------------------------------------------------------------------*/
 
 void Init_EOZU(void);
-void LoadBytes_EOZU(unsigned char *ptrMass, unsigned long lgAddr, unsigned long lgSize);
-unsigned char SaveBytes_EOZU(unsigned char *ptrMass, unsigned long lgAddr, unsigned long lgSize);
-unsigned char ReadModeReg_EOZU(void);
+void LoadBytes_EOZU(uchar *ptrMass, ulong lgAddr, ulong lgSize);
+uchar SaveBytes_EOZU(uchar *ptrMass, ulong lgAddr, ulong lgSize);
+uchar ReadModeReg_EOZU(void);
