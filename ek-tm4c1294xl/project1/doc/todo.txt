@@ -46,3 +46,5 @@ doc различие старой и новой версии
 out FLASH BEGIN END MAX_PAGES
 
 u_hhr u_mnt wSize
+
+add label in nvram

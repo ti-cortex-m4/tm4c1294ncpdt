@@ -35,7 +35,7 @@ LCD2.C
 #define LCD_BIT_DIR  0x10 //PF4
 #define LCD_BIT_RS   0x01 //PG0
 #define LCD_BIT_WR   0x02 //PG1
-#define LCD_BIT_E    0x08 //PC4
+#define LCD_BIT_E    0x08 //PQ4
 
 
 static void Wait(void) // TODO
@@ -54,7 +54,7 @@ void SetCtrlBit_LCD(unsigned int wSetBit)
  if(wSetBit & LCD_BIT_WR)
   HWREG(GPIO_PORTG_AHB_BASE + GPIO_O_DATA + 0x000008) = 0x0002;
  else
-  HWREG(GPIO_PORTC_AHB_BASE + GPIO_O_DATA + 0x000040) = 0x0010;
+  HWREG(GPIO_PORTQ_BASE + GPIO_O_DATA + 0x000040) = 0x0010;
 
   Wait();
 /*
@@ -81,7 +81,7 @@ void ClearCtrlBit_LCD(unsigned int wSetBit)
 	 if(wSetBit & LCD_BIT_WR)
 	  HWREG(GPIO_PORTG_AHB_BASE + GPIO_O_DATA + 0x000008) = ~0x0002;
 	 else
-	  HWREG(GPIO_PORTC_AHB_BASE + GPIO_O_DATA + 0x000040) = ~0x0010;
+	  HWREG(GPIO_PORTQ_BASE + GPIO_O_DATA + 0x000040) = ~0x0010;
 
 	  Wait();
 
@@ -194,7 +194,7 @@ void InitGPIO_LCD(void)
  Wait();
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом
  Wait();
- HWREG(GPIO_PORTC_AHB_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом
+ HWREG(GPIO_PORTQ_BASE + GPIO_O_DEN) |= 0xFF;//работа с цифровым сигналом
  Wait();
 
  SetPortK_Out();//Пины порта "К" на передачу данных
@@ -202,7 +202,7 @@ void InitGPIO_LCD(void)
  Wait();
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0xFF;//
  Wait();
- HWREG(GPIO_PORTC_AHB_BASE + GPIO_O_DIR) |= 0xFF;//
+ HWREG(GPIO_PORTQ_BASE + GPIO_O_DIR) |= 0xFF;//
  Wait();
 /*
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0x0F;//младшие пины Порта "F" на передачу (управляющие всегда на передаче)

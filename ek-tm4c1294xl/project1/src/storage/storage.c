@@ -5,6 +5,7 @@ STORAGE.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_settings.h"
 #include "../memory/mem_flash.h"
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_energy.h"
@@ -46,6 +47,9 @@ void    ShowFlashRead(void)
 
 void    InitStorage(void) // TODO InitStorage
 {
+if (enGlobal == GLB_WORK)
+{
+
   LoadRealtime();
 
   wPageIn = IMPHOUCAN_BUFF;
@@ -71,6 +75,7 @@ void    InitStorage(void) // TODO InitStorage
   LoadPowMonBuff();
 
   LoadCntMonBuff();
+}
 }
 
 
