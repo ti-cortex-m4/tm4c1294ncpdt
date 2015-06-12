@@ -94,7 +94,7 @@ void    InitDevices2(void)
 {
 //uchar   i,j;
 //
-//  if (GetLabelXDATA() == 0)
+//  if (GetLabel() == 0)
 //  {
 //    MakeDigitals();
 //

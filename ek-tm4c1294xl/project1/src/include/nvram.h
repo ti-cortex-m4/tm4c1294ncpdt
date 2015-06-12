@@ -12,6 +12,10 @@ NVRAM.H
 #define dwNVRAM_BYTES   (ulong)(128*1024)
 
 
+// количество байтов служебной информации для каждой записи
+#define bNVRAM_FOOTER   2
+
+
 #include "nvram_enum.txt"
 
 
