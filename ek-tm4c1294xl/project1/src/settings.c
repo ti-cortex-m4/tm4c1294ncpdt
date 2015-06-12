@@ -8,6 +8,7 @@ SETTINGS.C
 #include "memory/mem_settings.h"
 #include "memory/mem_program.h"
 #include "flash/files.h"
+#include "label.h"
 #include "settings.h"
 
 
@@ -31,9 +32,11 @@ void    InitSettings(void)
     SavePrivate();
   }
 
-  LoadGlobal();
-  if ((enGlobal != GLB_PROGRAM) && (enGlobal != GLB_WORK)) // TODO LoadGlobal
-    enGlobal = GLB_PROGRAM;
+//  LoadGlobal();
+//  if ((enGlobal != GLB_PROGRAM) && (enGlobal != GLB_WORK)) // TODO LoadGlobal
+//    enGlobal = GLB_PROGRAM;
+
+  if (GetLabel())  enGlobal = GLB_WORK; else enGlobal = GLB_PROGRAM;
 
   LoadFile(&flLogical);
 
@@ -48,8 +51,8 @@ void    InitSettings(void)
 
 void    ResetSettings(bool  fFull)
 {
-  enGlobal = GLB_PROGRAM;
-  SaveGlobal();
+//  enGlobal = GLB_PROGRAM;
+//  SaveGlobal();
 
   if (fFull)
   {
@@ -86,6 +89,7 @@ bool LoadPrivate(void) {
 
 
 // TODO GlobalLabel
+/*
 bool SaveGlobal(void) {
 	return SaveBuff(GLOBAL, &enGlobal, sizeof(global));
 }
@@ -94,3 +98,4 @@ bool SaveGlobal(void) {
 bool LoadGlobal(void) {
   return LoadBuff(GLOBAL, &enGlobal, sizeof(global));
 }
+*/
