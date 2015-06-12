@@ -5,17 +5,18 @@ CACHE.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "23x1024.h"
 #include "cache.h"
 
 
 
-bool    SaveCache(file const  *pfl)
+bool    SaveCache(cache const  *pch)
 {
-  return false;
+  return WriteNvramBuff(pch->wPage, pch->pbBuff, pch->wSize);
 }
 
 
-bool    LoadCache(file const  *pfl)
+bool    LoadCache(cache const  *pch)
 {
-  return false;
+  return ReadNvramBuff(pch->wPage, pch->pbBuff, pch->wSize);
 }
