@@ -25,6 +25,7 @@ TODO .C
 #include "src/keyboard/infrared.h"
 #include "src/keyboard/key.h"
 #include "src/keyboard/keyboard.h"
+#include "src/nvram/23x1024.h"
 #include "src/flash/at45.h"
 #include "src/display/display.h"
 #include "src/isr/timer0.h"
@@ -79,6 +80,7 @@ int main(void) {
 
 	InitBeep();
 	InitLCD();
+	InitNvram();
 	InitFlash();            Delay(100); TestOK();
 	InitRTC();
 	InitCODE();

@@ -94,9 +94,8 @@ static void Stop(void)
  HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
 }
 
-//Первичная инициализация SPI
-//По умолчанию режим: Sequential mode (режим непрерывного чтения/записи по всему объему ЭОЗУ)
-void Init_EOZU(void)
+
+void    InitNvram(void)
 {
  //Включение периферии
  HWREG(SYSCTL_RCGCGPIO) |= 0x00000020;//Запуск "F"
@@ -110,93 +109,76 @@ void Init_EOZU(void)
  Stop();
 }
 
-//Чтение в буфер *ptrMas, начиная с байта lgAddr количества байт lgSize
-void LoadBytes_EOZU(uchar *ptrMass, ulong lgAddr, ulong lgSize)
+
+
+void    ReadNvramBuff(uchar  *pbBuff, ulong  dwAddr, uint  wSize)
 {
- if(((lgAddr + lgSize) > MAX_SIZE_23LC1024) || (lgSize == 0)) return;//превышение допустимых границ SRAM
+  Start();
 
- Start();
- CharOut(0x03);//чтение
- CharOut(*((uchar*)(&lgAddr)+2)); //24-х битный адрес
- CharOut(*((uchar*)(&lgAddr)+1));
- CharOut(*((uchar*)(&lgAddr)+0));
+  CharOut(0x03); // чтение
+  CharOut(*((uchar*)(&dwAddr)+2));
+  CharOut(*((uchar*)(&dwAddr)+1));
+  CharOut(*((uchar*)(&dwAddr)+0));
 
- while(lgSize--)
- {
-  *(ptrMass++) = CharIn();
- }
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+   *(pbBuff++) = CharIn();
+  }
 
- Stop();
+  Stop();
 }
 
 
-//Запись из буфера *ptrMas, начиная с байта lgAddr количества байт lgSize
-//=1 - ошибка записи
-//=0 - запись успешно завершена
-uchar SaveBytes_EOZU(uchar *ptrMass, ulong lgAddr, ulong lgSize)
+bool    WriteNvramBuff(uchar  *pbBuff, ulong  dwAddr, uint  wSize)
 {
- ulong lgSaveSize;
- uchar bi;
-
- if(((lgAddr + lgSize) > MAX_SIZE_23LC1024) || (lgSize == 0)) return(1);//превышение допустимых границ SRAM
-
- lgSaveSize = lgSize;
-
- for(bi=0; bi<MAXREPEATS_23LC1024; bi++)
- {
-  lgSize = lgSaveSize;
-
-  //Запись массива
   Start();
-  CharOut(0x02);//запись
-  CharOut(*((uchar*)(&lgAddr)+2)); //24-х битный адрес
-  CharOut(*((uchar*)(&lgAddr)+1));
-  CharOut(*((uchar*)(&lgAddr)+0));
 
-  while(lgSize--)
+  CharOut(0x02); // запись
+  CharOut(*((uchar*)(&dwAddr)+2));
+  CharOut(*((uchar*)(&dwAddr)+1));
+  CharOut(*((uchar*)(&dwAddr)+0));
+
+  uint i;
+  for (i=0; i<wSize; i++)
   {
-   CharOut(*(ptrMass++));
+   CharOut(*(pbBuff++));
   }
+
   Stop();
 
-  //Проверка записанных данных
-  lgSize = lgSaveSize;
-  ptrMass -= lgSize;
+  pbBuff -= wSize;
 
   Start();
-  CharOut(0x03);//чтение
-  CharOut(*((uchar*)(&lgAddr)+2)); //24-х битный адрес
-  CharOut(*((uchar*)(&lgAddr)+1));
-  CharOut(*((uchar*)(&lgAddr)+0));
 
-  while(lgSize--)
+  CharOut(0x03); // чтение
+  CharOut(*((uchar*)(&dwAddr)+2));
+  CharOut(*((uchar*)(&dwAddr)+1));
+  CharOut(*((uchar*)(&dwAddr)+0));
+
+  bool f = true;
+  for (i=0; i<wSize; i++)
   {
-   if(*(ptrMass++) != CharIn()) break;
+    if (*(pbBuff++) != CharIn())
+    {
+      f = false;
+      break;
+    }
   }
+
   Stop();
 
-  if((++lgSize) == 0) break;//все верно - выходим
-  else
-  {//иначе повторяем запись, начиная с неверного байта
-   lgAddr += (lgSaveSize-lgSize);
-   ptrMass--;
-   lgSaveSize = lgSize;
-  }
- }//for(bi=0; bi<MAXREPEATS_23LC1024; bi++)
-
- if(bi == MAXREPEATS_23LC1024) return(1);
- else return(0);
+  return f;
 }
 
-//чтение регистра режима работы ЭОЗУ
-uchar ReadModeReg_EOZU(void)
+
+
+uchar   ReadNvramStatus(void)
 {
- uchar bRez;
+  Start();
+  CharOut(0x05);
+  uchar b = CharIn();
+  Stop();
 
- Start();
- CharOut(0x05);
- bRez = CharIn();
- Stop();
-
- return(bRez);
+  return b;
 }

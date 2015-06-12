@@ -4,7 +4,7 @@ typedef enum
 {
 BEGIN(NVRAM_BEGIN, 0)
 
-RESERVE(TEST, 1)
+RESERVE(LABEL, sizeof(mpbLabel) + bNVRAM_FOOTER)
 
 END(NVRAM_END)
 } nvram;
