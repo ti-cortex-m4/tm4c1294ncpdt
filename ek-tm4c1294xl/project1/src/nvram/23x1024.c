@@ -144,8 +144,10 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   uint i;
   for (i=0; i<wSize; i++)
   {
-   CharOut(*(pbBuff++));
+    CharOut(*(pbBuff++));
   }
+
+  // TODO add address + date + CRC, счетчики, внешние повторы
 
   Stop();
 
