@@ -24,6 +24,7 @@ KEY_RESET.C
 #include "../output/unified/uni.h"
 #include "../engine.h"
 #include "../impulses/factors.h"
+#include "../label.h"
 #include "../settings.h"
 #include "../hardware/memory.h"
 #include "../storage/storage.h"
@@ -69,6 +70,7 @@ void    key_SetReset(void)
           LongBeep();
           Clear();
 
+          BreakLabel();
           ResetSettings(false);
 //          ResetCustom();
 //
@@ -101,6 +103,7 @@ void    key_SetReset(void)
           LongBeep();
           Clear();
 
+          BreakLabel();
           ResetSettings(true);
           ResetDecret();
           ResetCorrect1();

@@ -12,6 +12,7 @@ KEY_START.C
 #include "../display/display.h"
 #include "../tariffs/tariffs.h"
 #include "../access.h"
+#include "../label.h"
 #include "../settings.h"
 #include "../groups.h"
 #include "../realtime/realtime_start.h"
@@ -157,6 +158,8 @@ void    key_Start(void)
 
     enGlobal = GLB_WORK;  
     SaveGlobal();
+
+    SetLabel();
 
     AddSysRecord(EVE_START);
 
