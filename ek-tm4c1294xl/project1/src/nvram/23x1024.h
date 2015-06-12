@@ -4,7 +4,9 @@
 
 ------------------------------------------------------------------------------*/
 
-void Init_EOZU(void);
-void LoadBytes_EOZU(uchar *ptrMass, ulong lgAddr, ulong lgSize);
-uchar SaveBytes_EOZU(uchar *ptrMass, ulong lgAddr, ulong lgSize);
-uchar ReadModeReg_EOZU(void);
+void    InitNvram(void);
+
+void    ReadNvramBuff(uchar  *pbBuff, ulong  dwAddr, uint  wSize);
+bool    WriteNvramBuff(uchar  *pbBuff, ulong  dwAddr, uint  wSize);
+
+uchar   ReadNvramStatus(void);

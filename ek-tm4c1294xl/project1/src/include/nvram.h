@@ -8,6 +8,9 @@ NVRAM.H
 #define __NVRAM
 
 
+#include "../label.h"
+
+
 // количество байтов
 #define dwNVRAM_BYTES   (ulong)(128*1024)
 
