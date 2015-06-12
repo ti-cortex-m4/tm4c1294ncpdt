@@ -32,6 +32,8 @@ void    SetLabel(void)
 
 bool    GetLabel(void)
 {
+  LoadCache(&chLabel);
+
   uchar i;
   for (i=0; i<sizeof(mpbLabel); i++)
   {

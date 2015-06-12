@@ -156,8 +156,8 @@ void    key_Start(void)
 
     LongBeep();
 
-    enGlobal = GLB_WORK;  
-    SaveGlobal();
+//    enGlobal = GLB_WORK;
+//    SaveGlobal();
 
     SetLabel();
 
