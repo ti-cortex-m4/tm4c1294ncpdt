@@ -111,7 +111,7 @@ void    InitNvram(void)
 
 
 
-void    ReadNvramBuff(uchar  *pbBuff, ulong  dwAddr, uint  wSize)
+bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 {
   Start();
 
@@ -127,10 +127,12 @@ void    ReadNvramBuff(uchar  *pbBuff, ulong  dwAddr, uint  wSize)
   }
 
   Stop();
+
+  return true;
 }
 
 
-bool    WriteNvramBuff(uchar  *pbBuff, ulong  dwAddr, uint  wSize)
+bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 {
   Start();
 

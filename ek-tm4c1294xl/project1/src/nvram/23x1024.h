@@ -6,7 +6,7 @@
 
 void    InitNvram(void);
 
-void    ReadNvramBuff(uchar  *pbBuff, ulong  dwAddr, uint  wSize);
-bool    WriteNvramBuff(uchar  *pbBuff, ulong  dwAddr, uint  wSize);
+bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize);
+bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize);
 
 uchar   ReadNvramStatus(void);

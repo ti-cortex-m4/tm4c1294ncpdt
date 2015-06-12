@@ -17,4 +17,13 @@ typedef struct
 } file;
 
 
+// тип 'сохраняемый массив памяти"
+typedef struct
+{
+  uint          wPage;
+  void         *pbBuff;
+  uint          wSize;
+} cache;
+
+
 #endif

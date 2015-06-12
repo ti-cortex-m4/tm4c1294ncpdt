@@ -4,5 +4,9 @@ CACHE.H
 
 ------------------------------------------------------------------------------*/
 
-bool    SaveCache(file const  *pfl);
-bool    LoadCache(file const  *pfl);
+#include "../include/nvram.h"
+
+
+
+bool    SaveCache(cache const  *pfl);
+bool    LoadCache(cache const  *pfl);

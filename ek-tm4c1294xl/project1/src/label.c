@@ -5,19 +5,27 @@ LABEL.C
 ------------------------------------------------------------------------------*/
 
 #include        "main.h"
+#include        "nvram/cache.h"
 #include        "label.h"
 
 
 
-uchar                   mpbLabel[0x20];
+static uchar            mpbLabel[0x20];
+
+
+cache const             chLabel = {LABEL, &mpbLabel, sizeof(mpbLabel)};
 
 
 
 void    SetLabel(void)
 {
   uchar i;
-  for (i=0; i<sizeof(mpbLabel); i++)  
+  for (i=0; i<sizeof(mpbLabel); i++)
+  {
     mpbLabel[i] = i;
+  }
+
+  SaveCache(&chLabel);
 }
 
 
@@ -39,5 +47,6 @@ bool    GetLabel(void)
 void    BreakLabel(void)
 {
   mpbLabel[0] = 0xFF;
-}
 
+  SaveCache(&chLabel);
+}
