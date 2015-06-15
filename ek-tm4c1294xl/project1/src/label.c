@@ -10,8 +10,7 @@ LABEL.C
 
 
 
-static uchar            mpbLabel[0x20];
-
+uchar                   mpbLabel[0x20];
 
 cache const             chLabel = {LABEL, &mpbLabel, sizeof(mpbLabel)};
 
