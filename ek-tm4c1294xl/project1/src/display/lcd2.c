@@ -200,9 +200,9 @@ void InitGPIO_LCD(void)
  SetPortK_Out();//Пины порта "К" на передачу данных
  HWREG(GPIO_PORTG_AHB_BASE + GPIO_O_DIR) |= 0xFF;//
  Wait();
- HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0xFF;//
+ HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0xFE;// !!используется в ОЗУ
  Wait();
- HWREG(GPIO_PORTQ_BASE + GPIO_O_DIR) |= 0xFF;//
+ HWREG(GPIO_PORTQ_BASE + GPIO_O_DIR) |= 0x10;//
  Wait();
 /*
  HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0x0F;//младшие пины Порта "F" на передачу (управляющие всегда на передаче)
