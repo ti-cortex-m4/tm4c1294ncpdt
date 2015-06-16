@@ -7,7 +7,6 @@ FLASH.H
 #ifndef __FLASH
 #define __FLASH
 
-#include "../memory/mem_digitals0.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_params0.h"
 #include "../memory/mem_params.h"
