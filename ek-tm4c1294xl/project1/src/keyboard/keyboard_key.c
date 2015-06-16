@@ -148,7 +148,7 @@ void    Keyboard_Key(void)
       case bSET_LOGICAL:        key_SetLogical();       break;
       case bSET_PRIVATE:        key_SetPrivate();       break;
 
-      case bSET_STARTHOU:
+      case bSET_START_MINUTES30:
       case bSET_START:          key_Start();            break;
       case bSET_DEBUG:          key_Debug();            break;
 

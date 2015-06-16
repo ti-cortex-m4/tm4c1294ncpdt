@@ -156,10 +156,8 @@ void    key_Start(void)
 
     LongBeep();
 
-//    enGlobal = GLB_WORK;
-//    SaveGlobal();
-
-    SetLabel();
+    SetLabelGlobal();
+    enGlobal = GLB_WORK;
 
     AddSysRecord(EVE_START);
 

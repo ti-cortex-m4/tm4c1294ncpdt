@@ -4,9 +4,9 @@ typedef enum
 {
   NVRAM_BEGIN           = 0,
 
-  LABEL                 = NVRAM_BEGIN,
+  LABEL_GLOBAL          = NVRAM_BEGIN,
 
-  DIGITALS              = LABEL + sizeof(mpbLabel) + bNVRAM_FOOTER,
+  DIGITALS              = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_FOOTER,
 
   ESC_S_VALUE           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
   ESC_S_TIME            = ESC_S_VALUE + sizeof(mpdbEsc_S) + bNVRAM_FOOTER,

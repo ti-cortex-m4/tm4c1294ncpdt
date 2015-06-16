@@ -40,7 +40,7 @@ PROGRAMS.H
 #define bSET_VERSION                115
 
 #define bSET_START                  15
-#define bSET_STARTHOU               16
+#define bSET_START_MINUTES30        16
 
 #define bSET_RESETCUSTOM            80
 #define bSET_RESETFULL              81

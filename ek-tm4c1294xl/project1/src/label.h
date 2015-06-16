@@ -4,12 +4,12 @@ LABEL.H
 
 ------------------------------------------------------------------------------*/
 
-extern  uchar                   mpbLabel[0x20];
+extern  uchar                   mpbLabelGlobal[0x20];
 
-extern  cache const             chLabel;
+extern  cache const             chLabelGlobal;
 
 
 
-void    SetLabel(void);
-bool    GetLabel(void);
-void    BreakLabel(void);
+void    SetLabelGlobal(void);
+bool    GetLabelGlobal(void);
+void    BreakLabelGlobal(void);

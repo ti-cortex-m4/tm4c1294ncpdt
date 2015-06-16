@@ -36,7 +36,7 @@ void    InitSettings(void)
 //  if ((enGlobal != GLB_PROGRAM) && (enGlobal != GLB_WORK)) // TODO LoadGlobal
 //    enGlobal = GLB_PROGRAM;
 
-  if (GetLabel())  enGlobal = GLB_WORK; else enGlobal = GLB_PROGRAM;
+  if (GetLabelGlobal())  enGlobal = GLB_WORK; else enGlobal = GLB_PROGRAM;
 
   LoadFile(&flLogical);
 
