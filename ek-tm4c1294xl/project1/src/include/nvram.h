@@ -9,6 +9,7 @@ NVRAM.H
 
 
 #include "../label.h"
+#include "../memory/mem_digitals0.h"
 
 
 // количество байтов
