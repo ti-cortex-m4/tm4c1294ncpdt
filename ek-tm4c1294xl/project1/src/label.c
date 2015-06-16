@@ -10,33 +10,33 @@ LABEL.C
 
 
 
-uchar                   mpbLabel[0x20];
+uchar                   mpbLabelGlobal[0x20];
 
-cache const             chLabel = {LABEL, &mpbLabel, sizeof(mpbLabel)};
+cache const             chLabelGlobal = {LABEL_GLOBAL, &mpbLabelGlobal, sizeof(mpbLabelGlobal)};
 
 
 
-void    SetLabel(void)
+void    SetLabelGlobal(void)
 {
   uchar i;
-  for (i=0; i<sizeof(mpbLabel); i++)
+  for (i=0; i<sizeof(mpbLabelGlobal); i++)
   {
-    mpbLabel[i] = i;
+    mpbLabelGlobal[i] = i;
   }
 
-  SaveCache(&chLabel);
+  SaveCache(&chLabelGlobal);
 }
 
 
 
-bool    GetLabel(void)
+bool    GetLabelGlobal(void)
 {
-  LoadCache(&chLabel);
+  LoadCache(&chLabelGlobal);
 
   uchar i;
-  for (i=0; i<sizeof(mpbLabel); i++)
+  for (i=0; i<sizeof(mpbLabelGlobal); i++)
   {
-    if (mpbLabel[i] != i)
+    if (mpbLabelGlobal[i] != i)
       return false;
   }
 
@@ -45,9 +45,9 @@ bool    GetLabel(void)
 
 
 
-void    BreakLabel(void)
+void    BreakLabelGlobal(void)
 {
-  mpbLabel[0] = 0xFF;
+  mpbLabelGlobal[0] = 0xFF;
 
-  SaveCache(&chLabel);
+  SaveCache(&chLabelGlobal);
 }

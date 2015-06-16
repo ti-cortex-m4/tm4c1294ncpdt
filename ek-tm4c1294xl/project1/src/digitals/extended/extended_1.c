@@ -142,11 +142,10 @@ void    MakeExtended1(void)
       {
         if (mpboChannelsA[diPrev.ibLine] == true)
         {
-          mpcwEscU_OK[c]++;
-
           mptiEsc_U1[c] = tiChannelC;
           mptiEsc_U2[c] = *GetCurrTimeDate();
 
+          mpcwEscU_OK[c]++;
           /*AddDigRecord(EVE_ESC_U_DATA);*/
         }
         else
@@ -184,11 +183,11 @@ void    MakeExtended1(void)
         if (mpboChannelsA[diPrev.ibLine] == true)
         {
           double db = mpdbChannelsC[diPrev.ibLine];
-          mpcwEscV_OK[c]++;
 
           mpdbEsc_V[c] = db;
           mptiEsc_V[c] = *GetCurrTimeDate();
 
+          mpcwEscV_OK[c]++;
           /*AddDigRecord(EVE_ESC_V_DATA);*/
         }
         else
@@ -226,7 +225,6 @@ void    MakeExtended1(void)
         if (mpboChannelsA[diPrev.ibLine] == true)
         {
           double db = mpdbChannelsC[diPrev.ibLine];
-          mpcwEscS_OK[c]++;
 
           mpdbEsc_S[c] = db;
           mptiEsc_S[c] = *GetCurrTimeDate();
@@ -235,6 +233,7 @@ void    MakeExtended1(void)
           MakeExtended7(c, db);
           //MakeDiagram(c);
 
+          mpcwEscS_OK[c]++;
           /*AddDigRecord(EVE_ESC_S_DATA);*/
         }
         else

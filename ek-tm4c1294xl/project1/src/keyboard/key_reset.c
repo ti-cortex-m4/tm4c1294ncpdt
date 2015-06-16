@@ -70,7 +70,7 @@ void    key_SetReset(void)
           LongBeep();
           Clear();
 
-          BreakLabel();
+          BreakLabelGlobal();
           ResetSettings(false);
 //          ResetCustom();
 //
@@ -103,7 +103,7 @@ void    key_SetReset(void)
           LongBeep();
           Clear();
 
-          BreakLabel();
+          BreakLabelGlobal();
           ResetSettings(true);
           ResetDecret();
           ResetCorrect1();
