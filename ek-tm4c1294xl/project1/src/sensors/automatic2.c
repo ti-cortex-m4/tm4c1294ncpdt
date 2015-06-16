@@ -10,6 +10,7 @@ AUTOMATIC2.C
 #include "../memory/mem_energy.h"
 #include "../memory/mem_current.h"
 #include "../memory/mem_realtime.h"
+#include "../hardware/watchdog.h"
 #include "../display/display.h"
 #include "../keyboard/keyboard.h"
 #include "../realtime/realtime.h"
@@ -1840,6 +1841,7 @@ uchar   i,j;
 // прочитать текущие значени€ счЄтчиков
 double2 ReadCntCurrCan(uchar  ibCan)
 {
+  ResetWDT();
   Clear();
 
   LoadCurrDigital(ibCan);
@@ -1873,6 +1875,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 // прочитать врем€ и дату
 time2   ReadTimeCan(uchar  ibCan)
 {
+  ResetWDT();
   Clear();
 
   LoadCurrDigital(ibCan);
@@ -1905,6 +1908,7 @@ time2   ReadTimeCan(uchar  ibCan)
 // прочитать значени€ счетчиков на начало текущих суток (дл€ текущего мес€ца) или на конец мес€ца (дл€ остальных мес€цев)
 double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 {
+  ResetWDT();
   Clear();
 
   LoadCurrDigital(ibCan);

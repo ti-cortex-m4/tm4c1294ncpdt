@@ -9,7 +9,6 @@ EXTENDED_1.Ñ
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_extended_1.h"
-#include "../../hardware/watchdog.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_display.h"
 #include "../../digitals/digitals_messages.h"
@@ -72,24 +71,24 @@ void    InitExtended1(void)
 void    ResetExtended1(void)
 {
   memset(&mpdbEsc_S, 0, sizeof(mpdbEsc_S));
-  LoadCache(&chEscS_Value);
+  SaveCache(&chEscS_Value);
 
   memset(&mptiEsc_S, 0, sizeof(mptiEsc_S));
-  LoadCache(&chEscS_Time);
+  SaveCache(&chEscS_Time);
 
 
   memset(&mpdbEsc_V, 0, sizeof(mpdbEsc_V));
-  LoadCache(&chEscV_Value);
+  SaveCache(&chEscV_Value);
 
   memset(&mptiEsc_V, 0, sizeof(mptiEsc_V));
-  LoadCache(&chEscV_Time);
+  SaveCache(&chEscV_Time);
 
 
   memset(&mptiEsc_U1, 0, sizeof(mptiEsc_U1));
-  LoadCache(&chEscU_Value);
+  SaveCache(&chEscU_Value);
 
   memset(&mptiEsc_U2, 0, sizeof(mptiEsc_U2));
-  LoadCache(&chEscU_Time);
+  SaveCache(&chEscU_Time);
 
 
   boDsblEscU = false;
@@ -143,12 +142,12 @@ void    MakeExtended1(void)
       {
         if (mpboChannelsA[diPrev.ibLine] == true)
         {
-          mptiEsc_U1[c] = tiChannelC;
           mpcwEscU_OK[c]++;
 
+          mptiEsc_U1[c] = tiChannelC;
           mptiEsc_U2[c] = *GetCurrTimeDate();
 
-          //AddDigRecord(EVE_ESC_U_DATA);
+          /*AddDigRecord(EVE_ESC_U_DATA);*/
         }
         else
         {
@@ -156,6 +155,9 @@ void    MakeExtended1(void)
         }
       }
     }
+
+    SaveCache(&chEscU_Value);
+    SaveCache(&chEscU_Time);
   }
 
   if (boDsblEscV == true)
@@ -187,7 +189,7 @@ void    MakeExtended1(void)
           mpdbEsc_V[c] = db;
           mptiEsc_V[c] = *GetCurrTimeDate();
 
-          //AddDigRecord(EVE_ESC_V_DATA);
+          /*AddDigRecord(EVE_ESC_V_DATA);*/
         }
         else
         {
@@ -195,6 +197,9 @@ void    MakeExtended1(void)
         }
       }
     }
+
+    SaveCache(&chEscV_Value);
+    SaveCache(&chEscV_Time);
   }
 
   if (boDsblEscS == true)
@@ -220,7 +225,6 @@ void    MakeExtended1(void)
       {
         if (mpboChannelsA[diPrev.ibLine] == true)
         {
-          ResetWDT();
           double db = mpdbChannelsC[diPrev.ibLine];
           mpcwEscS_OK[c]++;
 
@@ -231,7 +235,7 @@ void    MakeExtended1(void)
           MakeExtended7(c, db);
           //MakeDiagram(c);
 
-          //AddDigRecord(EVE_ESC_S_DATA);
+          /*AddDigRecord(EVE_ESC_S_DATA);*/
         }
         else
         {
@@ -239,9 +243,11 @@ void    MakeExtended1(void)
         }
       }
     }
+
+    SaveCache(&chEscS_Value);
+    SaveCache(&chEscS_Time);
   }
 
   ShowCanalNumber(ibDig);
   Clear();
 }
-
