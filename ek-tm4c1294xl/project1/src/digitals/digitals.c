@@ -8,12 +8,13 @@ DIGITALS.C
 #include "../memory/mem_digitals0.h"
 #include "../memory/mem_digitals.h"
 #include "../flash/files.h"
-#include "digitals.h"
+#include "../nvram/cache.h"
 #include "sensors.h"
+#include "digitals.h"
 
 
 
-file const              flDigitals = {DIGITALS, &mpdiDigital, sizeof(mpdiDigital)};
+cache const             chDigitals = {DIGITALS, &mpdiDigital, sizeof(mpdiDigital)};
 
 file const              flEnblKeys = {ENBL_KEYS, &boEnblKeys, sizeof(bool)};
 file const              flKeys = {KEYS, &mpphKeys, sizeof(mpphKeys)};
@@ -25,7 +26,7 @@ file const              flAddress2 = {ADDRESS2, &mpdwAddress2, sizeof(mpdwAddres
 
 void    InitDigitals(void)
 {
-  LoadFile(&flDigitals);
+  LoadCache(&chDigitals);
   MakeDigitalsMask();
 
   LoadFile(&flEnblKeys);
@@ -40,7 +41,7 @@ void    InitDigitals(void)
 void    ResetDigitals(void)
 {
   memset(&mpdiDigital, 0, sizeof(mpdiDigital));
-  SaveFile(&flDigitals);
+  SaveCache(&chDigitals);
 
   boEnblKeys = false;
   SaveFile(&flEnblKeys);
@@ -137,7 +138,7 @@ bool    TrueDigital(digital  *pdi)
 void    SetDigital(uchar  ibCan, digital  *pdi)
 {
   mpdiDigital[ibCan] = *pdi;
-  SaveFile(&flDigitals);
+  SaveCache(&chDigitals);
 }
 
 

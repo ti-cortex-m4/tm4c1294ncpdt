@@ -8,7 +8,7 @@ DIGITALS.H
 
 
 
-extern  file const              flDigitals;
+extern  cache const             chDigitals;
 
 extern  file const              flEnblKeys;
 extern  file const              flKeys;

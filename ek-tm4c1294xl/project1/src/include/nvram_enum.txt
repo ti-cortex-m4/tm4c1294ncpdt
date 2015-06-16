@@ -6,5 +6,7 @@ typedef enum
 
   LABEL                 = NVRAM_BEGIN,
 
-  NVRAM_END             = LABEL + sizeof(mpbLabel) + bNVRAM_FOOTER
+  DIGITALS              = LABEL + sizeof(mpbLabel) + bNVRAM_FOOTER,
+
+  NVRAM_END             = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER
 } nvram;
