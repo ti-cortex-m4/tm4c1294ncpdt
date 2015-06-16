@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_EXTENDED_1.C
+MEM_EXTENDED_1,C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,43 +8,48 @@ MEM_EXTENDED_1.C
 
 
 
-//
+// значения счетчиков текущие (на момент последнего получасового опроса)
 double                  mpdbEsc_S[bCANALS];
 
-//
+// время обновления значений mpdbEsc_S
 time                    mptiEsc_S[bCANALS];
 
-//
+// значения счетчиков на начало текущих суток (на момент последнего получасового опроса)
 double                  mpdbEsc_V[bCANALS];
 
-//
+// время обновления значений mpdbEsc_V
 time                    mptiEsc_V[bCANALS];
 
-//
+// время цифровых счетчиков (на момент последнего получасового опроса)
 time                    mptiEsc_U1[bCANALS];
 
-//
+// время обновления значений mpdbEsc_U1
 time                    mptiEsc_U2[bCANALS];
 
 
 
-// счётчики событий
-uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
-                        mpcwEscS_OK[bCANALS], mpcwEscS_Error[bCANALS],
-                        mpcwEscU_OK[bCANALS], mpcwEscU_Error[bCANALS];
+// счётчики успешных опросов
+uint                    mpcwEscV_OK[bCANALS],
+                        mpcwEscS_OK[bCANALS],
+                        mpcwEscU_OK[bCANALS];
 
-// признаки брака непосредственных показаний
+// счётчики ошибочных опросов
+uint                    mpcwEscV_Error[bCANALS],
+                        mpcwEscS_Error[bCANALS],
+                        mpcwEscU_Error[bCANALS];
+
+// признаки ошибочных опросов
 bool                    mpboDefEscV[bCANALS],
                         mpboDefEscS[bCANALS],
                         mpboDefEscU[bCANALS];
 
 
 
-// флаги запрета опроса показаний
+// флаги запрета опросов
 bool                    boDsblEscU, boDsblEscV, boDsblEscS;
 
-// флаг
+//
 bool                    boMntEscS;
 
-// флаг специальной подготовки данных для Esc-запросов
+//
 bool                    boExtendedEscU, boExtendedEscV, boExtendedEscS;
