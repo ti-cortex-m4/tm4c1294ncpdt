@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_EXTENDED_1.H
+MEM_EXTENDED_1,H
 
 
 ------------------------------------------------------------------------------*/
@@ -18,9 +18,13 @@ extern  time                    mptiEsc_U2[bCANALS];
 
 
 
-extern  uint                    mpcwEscV_OK[bCANALS], mpcwEscV_Error[bCANALS],
-                                mpcwEscS_OK[bCANALS], mpcwEscS_Error[bCANALS],
-                                mpcwEscU_OK[bCANALS], mpcwEscU_Error[bCANALS];
+extern  uint                    mpcwEscV_OK[bCANALS],
+                                mpcwEscS_OK[bCANALS],
+                                mpcwEscU_OK[bCANALS];
+
+extern  uint                    mpcwEscV_Error[bCANALS],
+                                mpcwEscS_Error[bCANALS],
+                                mpcwEscU_Error[bCANALS];
 
 extern  bool                    mpboDefEscV[bCANALS],
                                 mpboDefEscS[bCANALS],
