@@ -11,6 +11,8 @@ OUT_DIGITALS,C
 #include "../digitals/digitals.h"
 #include "../serial/ports.h"
 #include "../flash/files.h"
+#include "../nvram/cache.h"
+#include "out_digitals.h"
 
 
 
@@ -42,10 +44,10 @@ void    OutSetDigital(void)
 
       if (TrueDigital(&di))
       {
-      	mpdiDigital[bInBuff5] = di;
+        mpdiDigital[bInBuff5] = di;
 
         if (bInBuff5 == bCANALS - 1)
-          SaveFile(&flDigitals);
+          SaveCache(&chDigitals);
 
         LongResult(bRES_OK);
       }

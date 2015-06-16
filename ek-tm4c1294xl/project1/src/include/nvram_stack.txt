@@ -6,5 +6,7 @@ BEGIN(NVRAM_BEGIN, 0)
 
 RESERVE(LABEL, sizeof(mpbLabel) + bNVRAM_FOOTER)
 
+RESERVE(DIGITALS, sizeof(mpdiDigital) + bNVRAM_FOOTER)
+
 END(NVRAM_END)
 } nvram;

@@ -8,3 +8,4 @@ CONSOLE,H
 #include "display/display.h"
 #include "flash/files.h"
 #include "flash/files2.h"
+#include "nvram/cache.h"
