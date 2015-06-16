@@ -8,5 +8,14 @@ RESERVE(LABEL, sizeof(mpbLabel) + bNVRAM_FOOTER)
 
 RESERVE(DIGITALS, sizeof(mpdiDigital) + bNVRAM_FOOTER)
 
+RESERVE(ESC_S_VALUE, sizeof(mpdbEsc_S) + bNVRAM_FOOTER)
+RESERVE(ESC_S_TIME, sizeof(mptiEsc_S) + bNVRAM_FOOTER)
+
+RESERVE(ESC_V_VALUE, sizeof(mpdbEsc_V) + bNVRAM_FOOTER)
+RESERVE(ESC_V_TIME, sizeof(mptiEsc_V) + bNVRAM_FOOTER)
+
+RESERVE(ESC_U_VALUE, sizeof(mptiEsc_U1) + bNVRAM_FOOTER)
+RESERVE(ESC_U_TIME, sizeof(mptiEsc_U2) + bNVRAM_FOOTER)
+
 END(NVRAM_END)
 } nvram;

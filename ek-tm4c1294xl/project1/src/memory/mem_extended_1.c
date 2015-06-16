@@ -38,11 +38,6 @@ uint                    mpcwEscV_Error[bCANALS],
                         mpcwEscS_Error[bCANALS],
                         mpcwEscU_Error[bCANALS];
 
-// признаки ошибочных опросов
-bool                    mpboDefEscV[bCANALS],
-                        mpboDefEscS[bCANALS],
-                        mpboDefEscU[bCANALS];
-
 
 
 // флаги запрета опросов

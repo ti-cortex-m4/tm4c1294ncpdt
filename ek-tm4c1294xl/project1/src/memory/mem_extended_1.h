@@ -26,10 +26,6 @@ extern  uint                    mpcwEscV_Error[bCANALS],
                                 mpcwEscS_Error[bCANALS],
                                 mpcwEscU_Error[bCANALS];
 
-extern  bool                    mpboDefEscV[bCANALS],
-                                mpboDefEscS[bCANALS],
-                                mpboDefEscU[bCANALS];
-
 
 
 extern  bool                    boDsblEscU, boDsblEscV, boDsblEscS;

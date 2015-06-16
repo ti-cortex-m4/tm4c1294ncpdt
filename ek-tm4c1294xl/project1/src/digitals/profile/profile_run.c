@@ -98,10 +98,6 @@ bool    StartProfile(uchar  ibCanal)
   AddDigRecord(EVE_PROFILE2);
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILE);
 
-  mpboDefEscV[ibDig] = false;
-  mpboDefEscS[ibDig] = false;
-  mpboDefEscU[ibDig] = false;
-
   if (boManualProfile == false)
   {
     AddDigRecord(EVE_PROFILEOPEN);
