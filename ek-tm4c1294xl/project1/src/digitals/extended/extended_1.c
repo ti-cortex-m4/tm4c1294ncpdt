@@ -5,11 +5,10 @@ EXTENDED_1.Ñ
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_extended_1.h"
-#include "../../display/display.h"
-#include "../../keyboard/keyboard.h"
 #include "../../hardware/watchdog.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_display.h"
@@ -22,10 +21,18 @@ EXTENDED_1.Ñ
 #include "../../time/rtc.h"
 #include "../../engine.h"
 #include "../../energy.h"
-#include "../../flash/files.h"
 #include "extended_1.h"
 
 
+
+cache const             chEscS_Value = {ESC_S_VALUE, &mpdbEsc_S, sizeof(mpdbEsc_S)};
+cache const             chEscS_Time = {ESC_S_TIME, &mptiEsc_S, sizeof(mptiEsc_S)};
+
+cache const             chEscV_Value = {ESC_V_VALUE, &mpdbEsc_V, sizeof(mpdbEsc_V)};
+cache const             chEscV_Time = {ESC_V_TIME, &mptiEsc_V, sizeof(mptiEsc_V)};
+
+cache const             chEscU_Value = {ESC_U_VALUE, &mptiEsc_U1, sizeof(mptiEsc_U1)};
+cache const             chEscU_Time = {ESC_U_TIME, &mptiEsc_U2, sizeof(mptiEsc_U2)};
 
 file const              flDsblEscU = {DSBL_ESC_U, &boDsblEscU, sizeof(bool)};
 file const              flDsblEscV = {DSBL_ESC_V, &boDsblEscV, sizeof(bool)};
@@ -41,14 +48,14 @@ file const              flExtendedEscS = {EXTENDED_ESC_S, &boExtendedEscS, sizeo
 
 void    InitExtended1(void)
 {
-  memset(&mpdbEsc_S, 0, sizeof(mpdbEsc_S));
-  memset(&mptiEsc_S, 0, sizeof(mptiEsc_S));
+  LoadCache(&chEscS_Value);
+  LoadCache(&chEscS_Time);
 
-  memset(&mpdbEsc_V, 0, sizeof(mpdbEsc_V));
-  memset(&mptiEsc_V, 0, sizeof(mptiEsc_V));
+  LoadCache(&chEscV_Value);
+  LoadCache(&chEscV_Time);
 
-  memset(&mptiEsc_U1, 0, sizeof(mptiEsc_U1));
-  memset(&mptiEsc_U2, 0, sizeof(mptiEsc_U2));
+  LoadCache(&chEscU_Value);
+  LoadCache(&chEscU_Time);
 
   LoadFile(&flDsblEscU);
   LoadFile(&flDsblEscV);
@@ -64,6 +71,27 @@ void    InitExtended1(void)
 
 void    ResetExtended1(void)
 {
+  memset(&mpdbEsc_S, 0, sizeof(mpdbEsc_S));
+  LoadCache(&chEscS_Value);
+
+  memset(&mptiEsc_S, 0, sizeof(mptiEsc_S));
+  LoadCache(&chEscS_Time);
+
+
+  memset(&mpdbEsc_V, 0, sizeof(mpdbEsc_V));
+  LoadCache(&chEscV_Value);
+
+  memset(&mptiEsc_V, 0, sizeof(mptiEsc_V));
+  LoadCache(&chEscV_Time);
+
+
+  memset(&mptiEsc_U1, 0, sizeof(mptiEsc_U1));
+  LoadCache(&chEscU_Value);
+
+  memset(&mptiEsc_U2, 0, sizeof(mptiEsc_U2));
+  LoadCache(&chEscU_Time);
+
+
   boDsblEscU = false;
   SaveFile(&flDsblEscU);
 
@@ -92,10 +120,11 @@ void    ResetExtended1(void)
 
 void    MakeExtended1(void)
 {
-  if (boDsblEscU == true) {
+  if (boDsblEscU == true)
+  {
     BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
   }
-  else if (mpboDefEscU[ibDig] == false)
+  else
   {
     ShowHi(szDirectEscU); Clear();
     sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
@@ -119,22 +148,21 @@ void    MakeExtended1(void)
 
           mptiEsc_U2[c] = *GetCurrTimeDate();
 
-          mpboDefEscU[c] = true;
           //AddDigRecord(EVE_ESC_U_DATA);
         }
         else
         {
-          tiChannelC = tiZero;
           mpcwEscU_Error[c]++;
         }
       }
     }
   }
 
-  if (boDsblEscV == true) {
+  if (boDsblEscV == true)
+  {
     BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
   }
-  else if (mpboDefEscV[ibDig] == false)
+  else
   {
     ShowHi(szDirectEscV); Clear();
     sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
@@ -159,22 +187,21 @@ void    MakeExtended1(void)
           mpdbEsc_V[c] = db;
           mptiEsc_V[c] = *GetCurrTimeDate();
 
-          mpboDefEscV[c] = true;
           //AddDigRecord(EVE_ESC_V_DATA);
         }
         else
         {
-          reBuffA = 0;
           mpcwEscV_Error[c]++;
         }
       }
     }
   }
 
-  if (boDsblEscS == true) {
+  if (boDsblEscS == true)
+  {
     BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
   }
-  else if (mpboDefEscS[ibDig] == false)
+  else
   {
     ShowHi(szDirectEscS); Clear();
     sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
@@ -202,14 +229,12 @@ void    MakeExtended1(void)
 
           MakeExtended6(c, db);
           MakeExtended7(c, db);
-//          MakeDiagram(c);
+          //MakeDiagram(c);
 
-          mpboDefEscS[c] = true;
           //AddDigRecord(EVE_ESC_S_DATA);
         }
         else
         {
-          reBuffA = 0;
           mpcwEscS_Error[c]++;
         }
       }

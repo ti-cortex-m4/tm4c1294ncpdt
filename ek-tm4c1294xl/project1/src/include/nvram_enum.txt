@@ -8,5 +8,14 @@ typedef enum
 
   DIGITALS              = LABEL + sizeof(mpbLabel) + bNVRAM_FOOTER,
 
-  NVRAM_END             = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER
+  ESC_S_VALUE           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+  ESC_S_TIME            = ESC_S_VALUE + sizeof(mpdbEsc_S) + bNVRAM_FOOTER,
+
+  ESC_V_VALUE           = ESC_S_TIME + sizeof(mptiEsc_S) + bNVRAM_FOOTER,
+  ESC_V_TIME            = ESC_V_VALUE + sizeof(mpdbEsc_V) + bNVRAM_FOOTER,
+
+  ESC_U_VALUE           = ESC_V_TIME + sizeof(mptiEsc_V) + bNVRAM_FOOTER,
+  ESC_U_TIME            = ESC_U_VALUE + sizeof(mptiEsc_U1) + bNVRAM_FOOTER,
+
+  NVRAM_END             = ESC_U_TIME + sizeof(mptiEsc_U2) + bNVRAM_FOOTER
 } nvram;
