@@ -8,12 +8,11 @@ EXTENDED_7.H
 
 
 
-bool    LoadCntBoxCan7(uchar  ibDayFrom);
+bool    LoadCntDayCan7(uchar  ibDayFrom);
 
 void    InitExtended7(void);
 void    ResetExtended7(void);
 
 void    NextDayExtended7(void);
-void    CloseExtended7(void);
 
 void    MakeExtended7(uchar  ibCan, double  db);
