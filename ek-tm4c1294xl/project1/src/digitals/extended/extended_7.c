@@ -18,37 +18,26 @@ EXTENDED_7.C
 
 
 
-static bool SaveCntDayCan7(uchar  ibDayTo)
+file const              flCntBoxCan7 = {EXT_7_BOX_VALUES, &mpCntBoxCan7, sizeof(mpCntBoxCan7)};
+
+
+
+bool    SaveCntDayCan7(uchar  ibDayTo)
 {
   return SaveBuff(EXT_7_DAY_VALUES + ibDayTo*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
 }
 
 
-static bool LoadCntDayCan7(uchar  ibDayFrom)
+bool    LoadCntDayCan7(uchar  ibDayFrom)
 {
   return LoadBuff(EXT_7_DAY_VALUES + ibDayFrom*VALUE7_CAN_PAGES, mpCntDayCan7, sizeof(mpCntDayCan7));
 }
 
 
 
-bool    LoadCntBoxCan7(uchar  ibDayFrom)
-{
-  if (ibDayFrom == ibHardDay)
-  {
-    memcpy(mpCntBoxCan7, mpCntDayCan7, sizeof(mpCntDayCan7));
-    return true;
-  }
-  else
-  {
-    return LoadBuff(EXT_7_DAY_VALUES + ibDayFrom*VALUE7_CAN_PAGES, mpCntBoxCan7, sizeof(mpCntBoxCan7));
-  }
-}
-
-
-
 void    InitExtended7(void)
 {
-  LoadCntDayCan7(ibHardDay);
+  LoadFile(&flCntBoxCan7);
 }
 
 
@@ -58,7 +47,13 @@ void    ResetExtended7(void)
 
   uchar d;
   for (d=0; d<bDAYS; d++)
+  {
     SaveCntDayCan7(d);
+  }
+
+
+  memset(&mpCntBoxCan7, 0, sizeof(mpCntBoxCan7));
+  SaveFile(&flCntBoxCan7);
 
 
   cwDayCan7 = 0;
@@ -94,12 +89,6 @@ void    NextDayExtended7(void)
 }
 
 
-void    CloseExtended7(void)
-{
-  SaveCntDayCan7(ibHardDay);
-}
-
-
 
 void    MakeExtended7(uchar  ibCan, double  db)
 {
@@ -111,7 +100,6 @@ void    MakeExtended7(uchar  ibCan, double  db)
     vl.tiUpdate = *GetCurrTimeDate();
 
     mpCntDayCan7[ibCan] = vl;
-
-    SaveCntDayCan7(ibHardDay);
+    SaveFile(&flCntBoxCan7);
   }
 }
