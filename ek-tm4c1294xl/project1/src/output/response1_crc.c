@@ -125,7 +125,7 @@ void    Response1_CRC(void)
 
       case bINQ_GETCONFIG: OutGetConfig(); break;
 
-      case bINQ_RESPONSE_252: Response252_CRC(); break;
+//      case bINQ_RESPONSE_252: Response252_CRC(); break;
       case bINQ_RESPONSE_253: Response253_CRC(); break;
       case bINQ_RESPONSE_254: Response254_CRC(); break;
       case bINQ_RESPONSE_255: Response255_CRC(); break;
@@ -133,7 +133,7 @@ void    Response1_CRC(void)
 //      case 250: OutTestMinute3(); break;
 //      case 230: OutTestMinute15(); break;
 //      case 251: OutTestMinute30(); break;
-//      case 252: OutTestDay(); break;
+      case 252: OutTestDay(); break;
 //      case 253: OutTestMonth(); break;
 //      case 254: OutTestYear(); break;
 

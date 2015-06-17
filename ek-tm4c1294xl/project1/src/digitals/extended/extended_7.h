@@ -8,9 +8,8 @@ EXTENDED_7.H
 
 
 
-bool    LoadCntDayCan7(uchar  ibDayFrom);
+bool    LoadCntDay7(uchar  ibDayFrom);
 
-void    InitExtended7(void);
 void    ResetExtended7(void);
 
 void    NextDayExtended7(void);

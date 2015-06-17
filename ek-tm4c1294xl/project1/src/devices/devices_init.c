@@ -86,7 +86,6 @@ void    InitDevices1(void)
   InitExtended4T();
   InitExtended5();
   InitExtended6();
-  InitExtended7();
 }
 
 

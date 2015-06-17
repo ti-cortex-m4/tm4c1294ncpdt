@@ -20,7 +20,7 @@ typedef struct
 // тип 'сохраняемый массив памяти"
 typedef struct
 {
-  uint          wPage;
+  ulong         dwAddr;
   void         *pbBuff;
   uint          wSize;
 } cache;

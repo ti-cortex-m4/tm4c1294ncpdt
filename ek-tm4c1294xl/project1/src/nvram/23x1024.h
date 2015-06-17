@@ -4,6 +4,10 @@
 
 ------------------------------------------------------------------------------*/
 
+#include "../include/nvram.h"
+
+
+
 void    InitNvram(void);
 
 bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize);

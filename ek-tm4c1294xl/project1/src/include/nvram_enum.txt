@@ -17,5 +17,7 @@ typedef enum
   ESC_U_VALUE           = ESC_V_TIME + sizeof(mptiEsc_V) + bNVRAM_FOOTER,
   ESC_U_TIME            = ESC_U_VALUE + sizeof(mptiEsc_U1) + bNVRAM_FOOTER,
 
-  NVRAM_END             = ESC_U_TIME + sizeof(mptiEsc_U2) + bNVRAM_FOOTER
+  EXT_7_DAY_VALUES      = ESC_U_TIME + sizeof(mptiEsc_U2) + bNVRAM_FOOTER,
+
+  NVRAM_END             = EXT_7_DAY_VALUES + (sizeof(mpCntDayCan7) + bNVRAM_FOOTER)*bDAYS
 } nvram;
