@@ -100,15 +100,12 @@ void    MakeExtended7(uchar  ibCan, double  db)
   vl.dbValue = db;
   vl.tiUpdate = *GetCurrTimeDate();
 
-  if (mpCntDayCan7[ibCan].bStatus == ST4_NONE)
-  {
-    mpCntDayCan7[ibCan] = vl;
-    SaveCntDayCan7(ibHardDay);
-  }
-
   if (mpCntBoxCan7[ibCan].bStatus == ST4_NONE)
   {
     mpCntBoxCan7[ibCan] = vl;
     SaveFile(&flCntBoxCan7);
+
+    mpCntDayCan7[ibCan] = vl;
+    SaveCntDayCan7(ibHardDay);
   }
 }
