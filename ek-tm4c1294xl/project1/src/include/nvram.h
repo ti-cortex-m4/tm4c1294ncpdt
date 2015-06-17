@@ -11,6 +11,7 @@ NVRAM.H
 #include "../label.h"
 #include "../memory/mem_digitals0.h"
 #include "../memory/mem_extended_1.h"
+#include "../memory/mem_extended_7.h"
 
 
 // количество байтов

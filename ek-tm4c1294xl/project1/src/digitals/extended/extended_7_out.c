@@ -21,7 +21,7 @@ void    OutExtended7(bool  fDouble)
     Result(bRES_BADADDRESS);
   else
   {
-    LoadCntDayCan7((bDAYS+ibHardDay-InBuff(6)) % bDAYS);
+    LoadCntDay7((bDAYS+ibHardDay-InBuff(6)) % bDAYS);
 
     InitPushPtr();
     uint wSize = 0;
@@ -33,10 +33,7 @@ void    OutExtended7(bool  fDouble)
     {
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
       {
-        if (InBuff(6) == 0)
-          wSize += PushData6(mpCntBoxCan7[c], fDouble);
-        else
-          wSize += PushData6(mpCntDayCan7[c], fDouble);
+        wSize += PushData6(mpCntDayCan7[c], fDouble);
       }
     }
 

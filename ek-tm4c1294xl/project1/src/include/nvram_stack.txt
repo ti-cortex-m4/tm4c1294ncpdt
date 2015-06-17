@@ -17,5 +17,7 @@ RESERVE(ESC_V_TIME, sizeof(mptiEsc_V) + bNVRAM_FOOTER)
 RESERVE(ESC_U_VALUE, sizeof(mptiEsc_U1) + bNVRAM_FOOTER)
 RESERVE(ESC_U_TIME, sizeof(mptiEsc_U2) + bNVRAM_FOOTER)
 
+RESERVE(EXT_7_DAY_VALUES, (sizeof(mpCntDayCan7) + bNVRAM_FOOTER)*bDAYS)
+
 END(NVRAM_END)
 } nvram;

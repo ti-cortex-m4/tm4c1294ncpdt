@@ -12,11 +12,11 @@ CACHE.C
 
 bool    SaveCache(cache const  *pch)
 {
-  return WriteNvramBuff(pch->wPage, pch->pbBuff, pch->wSize);
+  return WriteNvramBuff(pch->dwAddr, pch->pbBuff, pch->wSize);
 }
 
 
 bool    LoadCache(cache const  *pch)
 {
-  return ReadNvramBuff(pch->wPage, pch->pbBuff, pch->wSize);
+  return ReadNvramBuff(pch->dwAddr, pch->pbBuff, pch->wSize);
 }
