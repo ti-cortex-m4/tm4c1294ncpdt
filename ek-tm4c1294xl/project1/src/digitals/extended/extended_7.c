@@ -65,9 +65,8 @@ void    NextDayExtended7(void)
 { 
   cwDayCan7++;
 
-  SaveCntDayCan7(ibHardDay);
-
   memset(&mpCntDayCan7, 0, sizeof(mpCntDayCan7));
+  memset(&mpCntBoxCan7, 0, sizeof(mpCntBoxCan7));
 
   uchar c;
   for (c=0; c<bCANALS; c++)
@@ -84,22 +83,32 @@ void    NextDayExtended7(void)
       vl.tiUpdate = *GetCurrTimeDate();
 
       mpCntDayCan7[c] = vl;
+      mpCntBoxCan7[c] = vl;
     }
   }
+
+  SaveCntDayCan7(ibHardDay);
+  SaveFile(&flCntBoxCan7);
 }
 
 
 
 void    MakeExtended7(uchar  ibCan, double  db)
 {
+  value6 vl;
+  vl.bStatus = ST4_OK;
+  vl.dbValue = db;
+  vl.tiUpdate = *GetCurrTimeDate();
+
   if (mpCntDayCan7[ibCan].bStatus == ST4_NONE)
   {
-    value6 vl;
-    vl.bStatus = ST4_OK;
-    vl.dbValue = db;
-    vl.tiUpdate = *GetCurrTimeDate();
-
     mpCntDayCan7[ibCan] = vl;
+    SaveCntDayCan7(ibHardDay);
+  }
+
+  if (mpCntBoxCan7[ibCan].bStatus == ST4_NONE)
+  {
+    mpCntBoxCan7[ibCan] = vl;
     SaveFile(&flCntBoxCan7);
   }
 }

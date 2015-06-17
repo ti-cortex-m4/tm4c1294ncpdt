@@ -31,7 +31,6 @@ void    NextDay(void)
   NextDayExtended4();
   NextDayExtended5();
   NextDayExtended6();
-  NextDayExtended7();
 
   MakeCntMonCan();
   MakeAllCurrTariffs();
@@ -47,6 +46,8 @@ void    NextDay(void)
 
   memset(&mpimDayCan[ibSoftDay], 0, sizeof(impulse)*bCANALS);
   memset(&mppoDayGrp[ibSoftDay], 0, sizeof(power)*bGROUPS);
+
+  NextDayExtended7();
 
   // обработка брака по суткам
   MakeDefectDay(0, tiCurr);
