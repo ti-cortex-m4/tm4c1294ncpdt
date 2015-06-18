@@ -169,7 +169,7 @@ static void AddAllDigitals(uchar  ibDig, digital  *pdi)
     MakeKeys(ibDig, pdi->bDevice);
 
     ShowDigital(ibDig);
-    DelayMsg();
+    DelayInf();
 
     if (++ibDig >= bCANALS) break;
   }
@@ -179,6 +179,7 @@ static void AddAllDigitals(uchar  ibDig, digital  *pdi)
   if (pdi->bDevice != 0) MakeInDelays(pdi->ibPort, pdi->ibPhone, pdi->bDevice);
 
   ShowDigital(ibDig);
+  Beep();
 }
 
 
