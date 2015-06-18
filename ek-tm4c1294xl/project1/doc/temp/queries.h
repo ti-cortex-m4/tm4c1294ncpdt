@@ -351,7 +351,7 @@ QUERIES.H
 #define bINQ_FAILURE2                  98
 
 #define bEXT_GETRECORDSBLOCK2          99
-#define bEXT_GETEXTENDED7              100
++   #define bEXT_GETEXTENDED7              100
 #define bEXT_ANSWER_DISABLE            101
 #define bEXT_CONTROL_R                 102
 #define bEXT_OVERFLOW_HOU              103
