@@ -131,6 +131,58 @@ static void MakeInDelays(uchar  ibPort, uchar  ibPhone, uchar  bDevice)
 
 
 
+static void AddDigital(uchar  ibDig, digital  *pdi)
+{
+  enKeyboard = KBD_POSTENTER;
+  ShowHi(szDigitals);
+
+  AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
+  SetDigital(ibDig, pdi);
+  AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
+
+  MakeKeys(ibDig, pdi->bDevice);
+
+  MakeDigitalsMask();
+  MakeCorrectLimit();
+  if (pdi->bDevice != 0) MakeInDelays(pdi->ibPort, pdi->ibPhone, pdi->bDevice);
+
+  if (++ibDig >= bCANALS) ibDig = 0;
+
+  ShowDigital(ibDig);
+}
+
+
+static void AddAllDigitals(uchar  ibDig, digital  *pdi)
+{
+  enKeyboard = KBD_POSTENTER;
+  ShowHi(szDigitals);
+
+  uchar i;
+  for (i=0; i<mpbMaxLines[ pdi->bDevice ]; i++)
+  {
+    pdi->ibLine = i;
+
+    AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
+    SetDigital(ibDig, pdi);
+    AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
+
+    MakeKeys(ibDig, pdi->bDevice);
+
+    ShowDigital(ibDig);
+    DelayMsg();
+
+    if (++ibDig >= bCANALS) break;
+  }
+
+  MakeDigitalsMask();
+  MakeCorrectLimit();
+  if (pdi->bDevice != 0) MakeInDelays(pdi->ibPort, pdi->ibPhone, pdi->bDevice);
+
+  ShowDigital(ibDig);
+}
+
+
+
 void    key_SetDigitals(void)
 {
 static digital diT;
@@ -167,30 +219,23 @@ static uchar ibDig;
 
       ShowDigital(ibDig);
     }
+    else if (enKeyboard == KBD_POSTINPUT5)
+    {
+      if ((diT.bAddress = GetCharLo(8,10)) < 255)
+        AddAllDigitals(ibDig, &diT);
+      else
+        Beep();
+    }
+    else if (enKeyboard == KBD_INPUT6)
+    {
+      AddAllDigitals(ibDig, &diT);
+    }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
       diT.ibLine = GetCharLo(12,13) - 1;
       if (diT.ibLine < mpbMaxLines[ diT.bDevice ])
       {
-        enKeyboard = KBD_POSTENTER;
-        ShowHi(szDigitals);
-
-        AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
-        SetDigital(ibDig, &diT);
-        AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
-
-        MakeDigitalsMask();  
-        MakeKeys(ibDig, diT.bDevice);
-        MakeCorrectLimit();
-
-        if (diT.bDevice != 0)
-        {
-          MakeInDelays(diT.ibPort, diT.ibPhone, diT.bDevice);
-        }
-
-        if (++ibDig >= bCANALS) ibDig = 0;
-
-        ShowDigital(ibDig);
+        AddDigital(ibDig, &diT);
       }
       else Beep();
     }
