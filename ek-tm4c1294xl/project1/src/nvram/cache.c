@@ -20,3 +20,29 @@ bool    LoadCache(cache const  *pch)
 {
   return ReadNvramBuff(pch->dwAddr, pch->pbBuff, pch->wSize);
 }
+
+
+
+bool    SaveArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX, void  *pBuff)
+{
+  return WriteNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX, (uchar *)pBuff, wSizeX);
+}
+
+
+bool    LoadArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX, void  *pBuff)
+{
+  return ReadNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX, (uchar *)pBuff, wSizeX);
+}
+
+
+
+bool    SaveArrayXY(ulong  dwAddr, uint  wSizeX, uchar  ibX, uint  wSizeY, uchar  ibY, void  *pBuff)
+{
+  return WriteNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX + wSizeY*ibY, (uchar *)pBuff, wSizeY);
+}
+
+
+bool    LoadArrayXY(ulong  dwAddr, uint  wSizeX, uchar  ibX, uint  wSizeY, uchar  ibY, void  *pBuff)
+{
+  return ReadNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX + wSizeY*ibY, (uchar *)pBuff, wSizeY);
+}
