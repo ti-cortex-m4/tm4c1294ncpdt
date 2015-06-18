@@ -37,11 +37,9 @@ bool    SaveCntDayCan7(uchar  ibDayTo, uchar  ibCan, value6  *pvl)
 }
 
 
-value6  LoadCntDayCan7(uchar  ibDayFrom, uchar  ibCan)
+bool    LoadCntDayCan7(uchar  ibDayFrom, uchar  ibCan, value6  *pvl)
 {
-  static value6 vl;
-  LoadArrayXY(EXT_7_DAY_VALUES, sizeof(mpCntDayCan7), ibDayFrom, sizeof(value6), ibCan, &vl);
-  return vl;
+  return LoadArrayXY(EXT_7_DAY_VALUES, sizeof(mpCntDayCan7), ibDayFrom, sizeof(value6), ibCan, pvl);
 }
 
 
@@ -93,7 +91,8 @@ void    NextDayExtended7(void)
 
 void    MakeExtended7(uchar  ibCan, double  db)
 {
-  value6 vl1 = LoadCntDayCan7(ibHardDay, ibCan);
+  value6 vl1;
+  LoadCntDayCan7(ibHardDay, ibCan, &vl1);
 
   if (vl1.bStatus == ST4_NONE)
   {
