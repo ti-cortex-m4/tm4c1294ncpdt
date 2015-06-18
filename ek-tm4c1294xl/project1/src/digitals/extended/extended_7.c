@@ -12,7 +12,7 @@ EXTENDED_7.C
 #include "../../memory/mem_energy.h"
 #include "../../digitals/digitals.h"
 #include "../../time/rtc.h"
-#include "../../nvram/23x1024.h"
+#include "../../nvram/cache.h"
 #include "../../energy.h"
 #include "extended_7.h"
 
@@ -20,29 +20,30 @@ EXTENDED_7.C
 
 bool    SaveCntDay7(uchar  ibDayTo)
 {
-  return WriteNvramBuff((ulong)EXT_7_DAY_VALUES + (sizeof(mpCntDayCan7) + bNVRAM_FOOTER)*ibDayTo, (uchar *)&mpCntDayCan7, sizeof(mpCntDayCan7));
+  return SaveArrayX(EXT_7_DAY_VALUES, sizeof(mpCntDayCan7), ibDayTo, &mpCntDayCan7);
 }
 
 
 bool    LoadCntDay7(uchar  ibDayFrom)
 {
-  return ReadNvramBuff((ulong)EXT_7_DAY_VALUES + (sizeof(mpCntDayCan7) + bNVRAM_FOOTER)*ibDayFrom, (uchar *)&mpCntDayCan7, sizeof(mpCntDayCan7));
+  return LoadArrayX(EXT_7_DAY_VALUES, sizeof(mpCntDayCan7), ibDayFrom, &mpCntDayCan7);
 }
 
 
 
-void    SaveCntDayCan7(uchar  ibDayTo, uchar  ibCan, value6  vl)
+bool    SaveCntDayCan7(uchar  ibDayTo, uchar  ibCan, value6  *pvl)
 {
-	WriteNvramBuff((ulong)EXT_7_DAY_VALUES + (sizeof(mpCntDayCan7) + bNVRAM_FOOTER)*ibDayTo + sizeof(value6)*ibCan, (uchar *)&vl, sizeof(value6));
+  return SaveArrayXY(EXT_7_DAY_VALUES, sizeof(mpCntDayCan7), ibDayTo, sizeof(value6), ibCan, pvl);
 }
 
 
 value6  LoadCntDayCan7(uchar  ibDayFrom, uchar  ibCan)
 {
   static value6 vl;
-  ReadNvramBuff((ulong)EXT_7_DAY_VALUES + (sizeof(mpCntDayCan7) + bNVRAM_FOOTER)*ibDayFrom + sizeof(value6)*ibCan, (uchar *)&vl, sizeof(value6));
+  LoadArrayXY(EXT_7_DAY_VALUES, sizeof(mpCntDayCan7), ibDayFrom, sizeof(value6), ibCan, &vl);
   return vl;
 }
+
 
 
 void    ResetExtended7(void) 
@@ -101,6 +102,6 @@ void    MakeExtended7(uchar  ibCan, double  db)
     vl2.dbValue = db;
     vl2.tiUpdate = *GetCurrTimeDate();
 
-    SaveCntDayCan7(ibHardDay, ibCan, vl2);
+    SaveCntDayCan7(ibHardDay, ibCan, &vl2);
   }
 }
