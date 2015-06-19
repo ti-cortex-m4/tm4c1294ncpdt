@@ -3,7 +3,7 @@
 #define wGET_READTRANS        354
 #define wGET_READPULSE        355
 
-#define wGET_CNTCANYEAR6      279
+#define wGET_CNTCANYEAR3      279
 
 +   #define wSET_DIRECT_CNT_D     400
 #define wSET_USE_SCALE_D      401

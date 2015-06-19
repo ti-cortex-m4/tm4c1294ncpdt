@@ -23,26 +23,27 @@ KEY_CNT_YEAR.C
 
 
 //                                           0123456789ABCDEF
-static char const       szCntCanOnBegin[] = "на начало мес€ца",
-                        szCntCanOnEnd[]   = "на конец мес€ца ",
-                        szCntCanNoData[]  = "  нет данных !  ",
-                        szCntCanBuff[]    = "   из буфера    ",
-                        szCntCanType1[]   = "  с дозапросом  ",
-                        szCntCanType2[]   = " пр€мого опроса ",
-                        szBadMode[]       = "*  нет данных   ";
+static char const       szCounters[]      = "    —четчики    ",
+                        szOnBegin[]       = "на начало мес€ца",
+                        szOnEnd[]         = "на конец мес€ца ",
+                        szNoData[]        = "  нет данных !  ",
+                        szBadMode[]       = "*  нет данных   ",
+                        szBuff[]          = "   из буфера    ",
+                        szType1[]         = "  с дозапросом  ",
+                        szType2[]         = " пр€мого опроса ";
 
-static char const       *pszCntCanYear1[]  = { szCountersB, szBeta, szCntCanOnEnd,   "" },
-                        *pszCntCanYear10[] = { szCountersB, szBeta, szCntCanOnBegin, "" },
-                        *pszCntCanYear2[]  = { szCountersB, szBeta, szCntCanOnEnd,   szCntCanBuff, szCntCanType1, "" },
-                        *pszCntCanYear20[] = { szCountersB, szBeta, szCntCanOnBegin, szCntCanBuff, szCntCanType1, "" },
-                        *pszCntCanYear3[]  = { szCountersB, szBeta, szCntCanOnEnd,   szCntCanBuff, szCntCanType2, "" };
-
-
-static uchar            ibCan, ibMon, ibZ;
+static char const       *pszCntCanYear1[]  = { szCounters, szBeta, szOnEnd,   "" },
+                        *pszCntCanYear10[] = { szCounters, szBeta, szOnBegin, "" },
+                        *pszCntCanYear2[]  = { szCounters, szBeta, szOnEnd,   szBuff, szType1, "" },
+                        *pszCntCanYear20[] = { szCounters, szBeta, szOnBegin, szBuff, szType1, "" },
+                        *pszCntCanYear3[]  = { szCounters, szBeta, szOnEnd,   szBuff, szType2, "" };
 
 
+static uchar            ibCan, ibMon, ibVal;
 
-static void ShowCntCanMon(void)
+
+
+static void Show(void)
 {
   switch (wProgram)
   {
@@ -77,7 +78,7 @@ static void ShowCntCanMon(void)
           }
           else
           {
-            (ReadCntMonCanF_Curr(ibMon,ibCan) == true) ? ShowCntMonCanF(ibZ == 0) : Error();
+            (ReadCntMonCanF_Curr(ibMon,ibCan) == true) ? ShowCntMonCanF(ibVal == 0) : Error();
           }
         }
 
@@ -86,12 +87,12 @@ static void ShowCntCanMon(void)
       break;
 
     case bGET_CNTCANYEAR10:     
-      ibZ = (12+ibMon-1)%12;
+      ibVal = (12+ibMon-1)%12;
       if (ibMon == tiCurr.bMonth)
-        ShowLo(szCntCanNoData);
+        ShowLo(szNoData);
       else if (GetDigitalDevice(ibCan) == 0)
       {
-        double2 db2 = ReadCntMonCan(ibZ,ibCan);
+        double2 db2 = ReadCntMonCan(ibVal,ibCan);
         (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
       }
       else if (SupportedExtended6_CurrMon(ibCan,ibMon))
@@ -114,11 +115,11 @@ static void ShowCntCanMon(void)
         {
           if (GetDigitalDevice(ibCan) != 6)
           {
-            double2 db2 = ReadCntMonCan(ibZ,ibCan);
+            double2 db2 = ReadCntMonCan(ibVal,ibCan);
             (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
           }
           else
-            (ReadCntMonCanF_Curr(ibZ,ibCan) == true) ? ShowCntMonCanF(ibZ == 0) : Error();
+            (ReadCntMonCanF_Curr(ibVal,ibCan) == true) ? ShowCntMonCanF(ibVal == 0) : Error();
         }
 
         SaveConnect();
@@ -126,22 +127,22 @@ static void ShowCntCanMon(void)
       break;
 
     case bGET_CNTCANYEAR2:  
-      ShowExtended4(ibCan,ibMon,ibZ == 0);
+      ShowExtended4(ibCan,ibMon,ibVal == 0);
       break;
 
     case bGET_CNTCANYEAR20:     
-      ibZ = (12+ibMon-1)%12;
+      ibVal = (12+ibMon-1)%12;
       if (ibMon == tiCurr.bMonth)
-        ShowLo(szCntCanNoData);
+        ShowLo(szNoData);
       else
-        ShowExtended4(ibCan,ibMon,ibZ == 0);
+        ShowExtended4(ibCan,ibMon,ibVal == 0);
       break;
 
-    case wGET_CNTCANYEAR6:
+    case wGET_CNTCANYEAR3:
       if (GetDigitalDevice(ibCan) == 6)
         ShowLo(szBadMode);
       else
-        ShowCntMonCan6(ibCan,ibMon,ibZ == 0);
+        ShowCntMonCan6(ibCan,ibMon,ibVal == 0);
       break;
   }
 
@@ -162,7 +163,7 @@ void    key_GetCntYear(void)
       strcpy(szBeta, szOn12Months); 
 
       InitConnectKey();
-      ibZ = 0;
+      ibVal = 0;
 
       switch (wProgram)
       {
@@ -170,7 +171,7 @@ void    key_GetCntYear(void)
         case bGET_CNTCANYEAR10: LoadSlide(pszCntCanYear10); break;
         case bGET_CNTCANYEAR2:  LoadSlide(pszCntCanYear2);  break;
         case bGET_CNTCANYEAR20: LoadSlide(pszCntCanYear20); break;
-        case wGET_CNTCANYEAR6:  LoadSlide(pszCntCanYear3);  break;
+        case wGET_CNTCANYEAR3:  LoadSlide(pszCntCanYear3);  break;
       }
     }
     else if (enKeyboard == KBD_INPUT1)
@@ -200,7 +201,7 @@ void    key_GetCntYear(void)
       enKeyboard = KBD_POSTENTER;
 
       ibCan = 0;
-      ShowCntCanMon();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
@@ -208,16 +209,16 @@ void    key_GetCntYear(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        ShowCntCanMon();
+        Show();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      ibZ = 0;
+      ibVal = 0;
       if (++ibCan >= bCANALS) ibCan = 0;
 
-      ShowCntCanMon();
+      Show();
     }
   }
 
@@ -238,8 +239,8 @@ void    key_GetCntYear(void)
     else 
     if ((enKeyboard == KBD_POSTENTER) && (bKey == 0))
     {
-      ibZ = (ibZ + 1) % 2; 
-      ShowCntCanMon();
+      ibVal = (ibVal + 1) % 2;
+      Show();
     }
   }
 
@@ -248,11 +249,11 @@ void    key_GetCntYear(void)
   {
     if (enKeyboard == KBD_POSTENTER)  
     {
-      ibZ = 0;
+      ibVal = 0;
       if (ibMon > 0) ibMon--; else ibMon = 12-1;
 
       LoadBetaMonth(ibMon);
-      ShowCntCanMon();
+      Show();
       ShowSlide(szBeta);
     }
   }
@@ -262,10 +263,10 @@ void    key_GetCntYear(void)
   {
     if (enKeyboard == KBD_POSTENTER)  
     {
-      ibZ = 0;
+      ibVal = 0;
       if (ibCan > 0) ibCan--; else ibCan = bCANALS-1;
 
-      ShowCntCanMon();
+      Show();
     }
   }
 }

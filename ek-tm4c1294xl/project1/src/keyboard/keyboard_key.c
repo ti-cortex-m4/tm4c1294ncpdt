@@ -472,7 +472,7 @@ void    Keyboard_Key(void)
       case bGET_CNTCANYEAR10:
       case bGET_CNTCANYEAR2:
       case bGET_CNTCANYEAR20:
-      case wGET_CNTCANYEAR6:    key_GetCntYear(); break;
+      case wGET_CNTCANYEAR3:    key_GetCntYear(); break;
 
       case bRUN_PROFILE:        key_RunProfile();       break;
 
