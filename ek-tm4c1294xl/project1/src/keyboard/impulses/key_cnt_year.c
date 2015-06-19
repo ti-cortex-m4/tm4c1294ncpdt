@@ -5,12 +5,8 @@ KEY_CNT_YEAR.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
 #include "../../memory/mem_realtime.h"
-#include "../../memory/mem_digitals.h"
-#include "../../memory/mem_energy.h"
-#include "../keyboard.h"
-#include "../../display/display.h"
-#include "../../realtime/realtime.h"
 #include "../../sensors/automatic2.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
@@ -21,9 +17,6 @@ KEY_CNT_YEAR.C
 #include "../../digitals/extended/extended_6.h"
 #include "../../digitals/extended/extended_6_show.h"
 #include "../../serial/modems.h"
-#include "../../engine.h"
-#include "../../energy.h"
-#include "../../energy2.h"
 #include "../../time/timedate_display.h"
 #include "key_cnt_year.h"
 
@@ -38,12 +31,7 @@ static char const       szCntCanOnBegin[] = "на начало месяца",
                         szCntCanType2[]   = " прямого опроса ",
                         szBadMode[]       = "*  нет данных   ";
 
-static char const       *pszEngFull[]    = { szEnergy, szBeta, szFull,   "" },
-                        *pszEngTops[]    = { szEnergy, szBeta, szTops,   "" },
-                        *pszEngMid[]     = { szEnergy, szBeta, szMid,    "" },
-                        *pszEngBottom[]  = { szEnergy, szBeta, szBottom, "" },
-
-                        *pszCntCanYear1[]  = { szCountersB, szBeta, szCntCanOnEnd,   "" },
+static char const       *pszCntCanYear1[]  = { szCountersB, szBeta, szCntCanOnEnd,   "" },
                         *pszCntCanYear10[] = { szCountersB, szBeta, szCntCanOnBegin, "" },
                         *pszCntCanYear2[]  = { szCountersB, szBeta, szCntCanOnEnd,   szCntCanBuff, szCntCanType1, "" },
                         *pszCntCanYear20[] = { szCountersB, szBeta, szCntCanOnBegin, szCntCanBuff, szCntCanType1, "" },
@@ -51,14 +39,6 @@ static char const       *pszEngFull[]    = { szEnergy, szBeta, szFull,   "" },
 
 
 static uchar            ibCan, ibMon, ibZ;
-
-
-
-static void ShowGrpFullYearEng(uchar  bMask)
-{
-  LoadImpMon( ibMon );
-  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibCan,bMask));
-}
 
 
 
@@ -188,7 +168,7 @@ void    key_GetCntYear(void)
     else if (enKeyboard == KBD_INPUT1)
     {
       enKeyboard = KBD_INPUT2;
-      ShowItemName(it);
+      Canal();
 
       ibMon = ibHardMon;
 
@@ -200,7 +180,7 @@ void    key_GetCntYear(void)
       if ((ibMon = GetCharLo(10,11)-1) < 12)
       {
         enKeyboard = KBD_INPUT2;
-        ShowItemName(it);
+        Canal();
 
         LoadBetaMonth(ibMon);
         ShowSlide(szBeta);
@@ -216,7 +196,7 @@ void    key_GetCntYear(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((ibCan = GetCharLo(10,11)-1) < GetMaxItem(it))
+      if ((ibCan = GetCharLo(10,11)-1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
 
@@ -227,7 +207,7 @@ void    key_GetCntYear(void)
     else if (enKeyboard == KBD_POSTENTER)
     {
       ibZ = 0;
-      if (++ibCan >= GetMaxItem(it)) ibCan = 0;
+      if (++ibCan >= bCANALS) ibCan = 0;
 
       ShowCntCanMon();
     }
@@ -275,7 +255,7 @@ void    key_GetCntYear(void)
     if (enKeyboard == KBD_POSTENTER)  
     {
       ibZ = 0;
-      if (ibCan > 0) ibCan--; else ibCan = GetMaxItem(it)-1;
+      if (ibCan > 0) ibCan--; else ibCan = bCANALS-1;
 
       ShowCntCanMon();
     }
