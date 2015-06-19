@@ -136,6 +136,13 @@ static void ShowCntCanMon(void)
       else
         ShowExtended4(ibCan,ibMon,ibZ == 0);
       break;
+
+    case wGET_CNTCANYEAR6:
+      if (GetDigitalDevice(ibCan) == 6)
+        ShowLo(szBadMode);
+      else
+        ShowCntMonCan6(ibCan,ibMon,ibZ == 0);
+      break;
   }
 
   sprintf(szLo+14,"%2u",ibCan+1);
@@ -159,10 +166,11 @@ void    key_GetCntYear(void)
 
       switch (wProgram)
       {
-        case bGET_CNTCANYEAR1:      LoadSlide(pszCntCanYear1);  break;
-        case bGET_CNTCANYEAR10:     LoadSlide(pszCntCanYear10); break;
-        case bGET_CNTCANYEAR2:      LoadSlide(pszCntCanYear2);  break;
-        case bGET_CNTCANYEAR20:     LoadSlide(pszCntCanYear20); break;
+        case bGET_CNTCANYEAR1:  LoadSlide(pszCntCanYear1);  break;
+        case bGET_CNTCANYEAR10: LoadSlide(pszCntCanYear10); break;
+        case bGET_CNTCANYEAR2:  LoadSlide(pszCntCanYear2);  break;
+        case bGET_CNTCANYEAR20: LoadSlide(pszCntCanYear20); break;
+        case wGET_CNTCANYEAR6:  LoadSlide(pszCntCanYear3);  break;
       }
     }
     else if (enKeyboard == KBD_INPUT1)
@@ -261,128 +269,3 @@ void    key_GetCntYear(void)
     }
   }
 }
-
-
-
-static void ShowCntCanMon6(void)
-{
-  if (GetDigitalDevice(ibCan) == 6)
-    ShowLo(szBadMode);
-  else
-    ShowCntMonCan6(ibCan,ibMon,ibZ == 0);
-
-  sprintf(szLo+14,"%2u",ibCan+1);
-}
-
-
-void    key_GetCntYear6(void)
-{
-  if (bKey == bKEY_ENTER)
-  {
-    if (enKeyboard == KBD_ENTER)
-    {
-      enKeyboard = KBD_INPUT1;
-
-      Month();
-      strcpy(szBeta, szOn12Months);
-
-      ibZ = 0;
-      LoadSlide(pszCntCanYear3);
-    }
-    else if (enKeyboard == KBD_INPUT1)
-    {
-      enKeyboard = KBD_INPUT2;
-      Canal();
-
-      ibMon = ibHardMon;
-
-      LoadBetaMonth(ibMon);
-      ShowSlide(szBeta);
-    }
-    else if (enKeyboard == KBD_POSTINPUT1)
-    {
-      if ((ibMon = GetCharLo(10,11)-1) < 12)
-      {
-        enKeyboard = KBD_INPUT2;
-        Canal();
-
-        LoadBetaMonth(ibMon);
-        ShowSlide(szBeta);
-      }
-      else Beep();
-    }
-    else if (enKeyboard == KBD_INPUT2)
-    {
-      enKeyboard = KBD_POSTENTER;
-
-      ibCan = 0;
-      ShowCntCanMon6();
-    }
-    else if (enKeyboard == KBD_POSTINPUT2)
-    {
-      if ((ibCan = GetCharLo(10,11)-1) < bCANALS)
-      {
-        enKeyboard = KBD_POSTENTER;
-
-        ShowCntCanMon6();
-      }
-      else Beep();
-    }
-    else if (enKeyboard == KBD_POSTENTER)
-    {
-      ibZ = 0;
-      if (++ibCan >= bCANALS) ibCan = 0;
-
-      ShowCntCanMon6();
-    }
-  }
-
-
-  else if (bKey < 10)
-  {
-    if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
-    {
-      enKeyboard = KBD_POSTINPUT1;
-      ShiftLo(10,11);
-    }
-    else
-    if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
-    {
-      enKeyboard = KBD_POSTINPUT2;
-      ShiftLo(10,11);
-    }
-    else
-    if ((enKeyboard == KBD_POSTENTER) && (bKey == 0))
-    {
-      ibZ = ++ibZ % 2;
-      ShowCntCanMon6();
-    }
-  }
-
-
-  else if (bKey == bKEY_MINUS)
-  {
-    if (enKeyboard == KBD_POSTENTER)
-    {
-      ibZ = 0;
-      if (ibMon > 0) ibMon--; else ibMon = 12-1;
-
-      LoadBetaMonth(ibMon);
-      ShowCntCanMon6();
-      ShowSlide(szBeta);
-    }
-  }
-
-
-  else if (bKey == bKEY_POINT)
-  {
-    if (enKeyboard == KBD_POSTENTER)
-    {
-      ibZ = 0;
-      if (ibCan > 0) ibCan--; else ibCan = bCANALS-1;
-
-      ShowCntCanMon6();
-    }
-  }
-}
-

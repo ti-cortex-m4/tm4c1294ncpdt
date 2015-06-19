@@ -5,4 +5,3 @@ KEY_CNT_YEAR.H
 ------------------------------------------------------------------------------*/
 
 void    key_GetCntYear(void);
-void    key_GetCntYear6(void);
