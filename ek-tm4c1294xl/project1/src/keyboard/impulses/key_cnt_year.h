@@ -4,5 +4,5 @@ KEY_CNT_YEAR.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetValuesYear(item  it);
-void    key_GetCntCanYear6(void);
+void    key_GetCntYear(void);
+void    key_GetCntYear6(void);

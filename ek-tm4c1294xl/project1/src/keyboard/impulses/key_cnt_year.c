@@ -25,6 +25,7 @@ KEY_CNT_YEAR.C
 #include "../../energy.h"
 #include "../../energy2.h"
 #include "../../time/timedate_display.h"
+#include "key_cnt_year.h"
 
 
 
@@ -49,15 +50,11 @@ static char const       *pszEngFull[]    = { szEnergy, szBeta, szFull,   "" },
                         *pszCntCanYear3[]  = { szCountersB, szBeta, szCntCanOnEnd,   szCntCanBuff, szCntCanType2, "" };
 
 
-uchar   GetMaxItem(item  it);
-void    ShowItemName(item  it);
-
-
 static uchar            ibCan, ibMon, ibZ;
 
 
 
-void    ShowGrpFullYearEng(uchar  bMask)
+static void ShowGrpFullYearEng(uchar  bMask)
 {
   LoadImpMon( ibMon );
   ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibCan,bMask));
@@ -65,15 +62,10 @@ void    ShowGrpFullYearEng(uchar  bMask)
 
 
 
-void    ShowCntCanMon(void)   
+static void ShowCntCanMon(void)
 {
   switch (wProgram)
   {
-    case bGET_ENGGRPYEAR_ABCD:  ShowGrpFullYearEng(0x0F);  break;
-    case bGET_ENGGRPYEAR_CD:    ShowGrpFullYearEng(0x0C);  break;
-    case bGET_ENGGRPYEAR_B:     ShowGrpFullYearEng(0x02);  break;
-    case bGET_ENGGRPYEAR_A:     ShowGrpFullYearEng(0x01);  break;
-
     case bGET_CNTCANYEAR1:     
       if (GetDigitalDevice(ibCan) == 0)
       {
@@ -171,7 +163,7 @@ void    ShowCntCanMon(void)
 
 
 
-void    key_GetValuesYear(item  it)
+void    key_GetCntYear(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -187,11 +179,6 @@ void    key_GetValuesYear(item  it)
 
       switch (wProgram)
       {
-        case bGET_ENGGRPYEAR_ABCD:  LoadSlide(pszEngFull);    break;
-        case bGET_ENGGRPYEAR_CD:    LoadSlide(pszEngTops);    break;
-        case bGET_ENGGRPYEAR_B:     LoadSlide(pszEngMid);     break;
-        case bGET_ENGGRPYEAR_A:     LoadSlide(pszEngBottom);  break;
-
         case bGET_CNTCANYEAR1:      LoadSlide(pszCntCanYear1);  break;
         case bGET_CNTCANYEAR10:     LoadSlide(pszCntCanYear10); break;
         case bGET_CNTCANYEAR2:      LoadSlide(pszCntCanYear2);  break;
@@ -297,7 +284,7 @@ void    key_GetValuesYear(item  it)
 
 
 
-void    ShowCntCanMon6(void)
+static void ShowCntCanMon6(void)
 {
   if (GetDigitalDevice(ibCan) == 6)
     ShowLo(szBadMode);
@@ -308,8 +295,7 @@ void    ShowCntCanMon6(void)
 }
 
 
-
-void    key_GetCntCanYear6(void)
+void    key_GetCntYear6(void)
 {
   if (bKey == bKEY_ENTER)
   {
