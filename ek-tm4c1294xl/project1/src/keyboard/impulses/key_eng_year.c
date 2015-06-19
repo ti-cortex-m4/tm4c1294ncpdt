@@ -22,25 +22,25 @@ static char const       *pszEngFull[]    = { szEnergy, szBeta, szFull,   "" },
                         *pszEngBottom[]  = { szEnergy, szBeta, szBottom, "" };
 
 
-static uchar            ibGrp, ibMon, ibZ;
+static uchar            ibGrp, ibMon;
 
 
 
-static void ShowGrpFullYearEng(uchar  bMask)
+static void ShowEngYear(uchar  bMask)
 {
-  LoadImpMon( ibMon );
+  LoadImpMon(ibMon);
   ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibGrp,bMask));
 }
 
 
-static void ShowCntCanMon(void)
+static void Show(void)
 {
   switch (wProgram)
   {
-    case bGET_ENGGRPYEAR_ABCD:  ShowGrpFullYearEng(0x0F);  break;
-    case bGET_ENGGRPYEAR_CD:    ShowGrpFullYearEng(0x0C);  break;
-    case bGET_ENGGRPYEAR_B:     ShowGrpFullYearEng(0x02);  break;
-    case bGET_ENGGRPYEAR_A:     ShowGrpFullYearEng(0x01);  break;
+    case bGET_ENGGRPYEAR_ABCD:  ShowEngYear(0x0F);  break;
+    case bGET_ENGGRPYEAR_CD:    ShowEngYear(0x0C);  break;
+    case bGET_ENGGRPYEAR_B:     ShowEngYear(0x02);  break;
+    case bGET_ENGGRPYEAR_A:     ShowEngYear(0x01);  break;
   }
 
   sprintf(szLo+14,"%2u",ibGrp+1);
@@ -57,8 +57,6 @@ void    key_GetEngYear(void)
 
       Month();
       strcpy(szBeta, szOn12Months); 
-
-      ibZ = 0;
 
       switch (wProgram)
       {
@@ -95,7 +93,7 @@ void    key_GetEngYear(void)
       enKeyboard = KBD_POSTENTER;
 
       ibGrp = 0;
-      ShowCntCanMon();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
@@ -103,16 +101,15 @@ void    key_GetEngYear(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        ShowCntCanMon();
+        Show();
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      ibZ = 0;
       if (++ibGrp >= bGROUPS) ibGrp = 0;
 
-      ShowCntCanMon();
+      Show();
     }
   }
 
@@ -130,12 +127,7 @@ void    key_GetEngYear(void)
       enKeyboard = KBD_POSTINPUT2;
       ShiftLo(10,11);
     }
-    else 
-    if ((enKeyboard == KBD_POSTENTER) && (bKey == 0))
-    {
-      ibZ = (ibZ + 1) % 2; 
-      ShowCntCanMon();
-    }
+    else Beep();
   }
 
 
@@ -143,11 +135,10 @@ void    key_GetEngYear(void)
   {
     if (enKeyboard == KBD_POSTENTER)  
     {
-      ibZ = 0;
       if (ibMon > 0) ibMon--; else ibMon = 12-1;
 
       LoadBetaMonth(ibMon);
-      ShowCntCanMon();
+      Show();
       ShowSlide(szBeta);
     }
   }
@@ -157,10 +148,9 @@ void    key_GetEngYear(void)
   {
     if (enKeyboard == KBD_POSTENTER)  
     {
-      ibZ = 0;
       if (ibGrp > 0) ibGrp--; else ibGrp = bGROUPS-1;
 
-      ShowCntCanMon();
+      Show();
     }
   }
 }
