@@ -24,19 +24,19 @@ KEY_CNT_YEAR.C
 
 //                                           0123456789ABCDEF
 static char const       szCounters[]      = "    —четчики    ",
-                        szOnBegin[]       = "на начало мес€ца",
-                        szOnEnd[]         = "на конец мес€ца ",
+                        szAtBegin[]       = "на начало мес€ца",
+                        szAtEnd[]         = "на конец мес€ца ",
                         szNoData[]        = "  нет данных !  ",
-                        szBadMode[]       = "*  нет данных   ",
-                        szBuff[]          = "   из буфера    ",
+                        szNotSupported[]  = "*  нет данных   ",
+                        szBuffer[]        = "   из буфера    ",
                         szType1[]         = "  с дозапросом  ",
                         szType2[]         = " пр€мого опроса ";
 
-static char const       *pszCntCanYear1[]  = { szCounters, szBeta, szOnEnd,   "" },
-                        *pszCntCanYear10[] = { szCounters, szBeta, szOnBegin, "" },
-                        *pszCntCanYear2[]  = { szCounters, szBeta, szOnEnd,   szBuff, szType1, "" },
-                        *pszCntCanYear20[] = { szCounters, szBeta, szOnBegin, szBuff, szType1, "" },
-                        *pszCntCanYear3[]  = { szCounters, szBeta, szOnEnd,   szBuff, szType2, "" };
+static char const       *pszCntCanYear1[]  = { szCounters, szBeta, szAtEnd,   "" },
+                        *pszCntCanYear10[] = { szCounters, szBeta, szAtBegin, "" },
+                        *pszCntCanYear2[]  = { szCounters, szBeta, szAtEnd,   szBuffer, szType1, "" },
+                        *pszCntCanYear20[] = { szCounters, szBeta, szAtBegin, szBuffer, szType1, "" },
+                        *pszCntCanYear3[]  = { szCounters, szBeta, szAtEnd,   szBuffer, szType2, "" };
 
 
 static uchar            ibCan, ibMon, ibVal;
@@ -87,42 +87,46 @@ static void Show(void)
       break;
 
     case bGET_CNTCANYEAR10:     
-      ibVal = (12+ibMon-1)%12;
       if (ibMon == tiCurr.bMonth)
         ShowLo(szNoData);
-      else if (GetDigitalDevice(ibCan) == 0)
-      {
-        double2 db2 = ReadCntMonCan(ibVal,ibCan);
-        (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
-      }
-      else if (SupportedExtended6_CurrMon(ibCan,ibMon))
-      {
-        ShowExtended6(ibCan);
-      }
       else
       {
-        LoadCurrDigital(ibCan);
-        ibPort = diCurr.ibPort;
+        ibMon = (12+ibMon-1)%12;
 
-        if (LoadConnect(ibCan) == 0) break;
-        Clear();
-
-        LoadSlide(pszCntCanYear10);
-
-        if (mpboEnblCan[ibCan] == false)
-          ShowLo(szBlocked); 
-        else 
+        if (GetDigitalDevice(ibCan) == 0)
         {
-          if (GetDigitalDevice(ibCan) != 6)
-          {
-            double2 db2 = ReadCntMonCan(ibVal,ibCan);
-            (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
-          }
-          else
-            (ReadCntMonCanF_Curr(ibVal,ibCan) == true) ? ShowCntMonCanF(ibVal == 0) : Error();
+          double2 db2 = ReadCntMonCan(ibVal,ibCan);
+          (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
         }
+        else if (SupportedExtended6_CurrMon(ibCan,ibMon))
+        {
+          ShowExtended6(ibCan);
+        }
+        else
+        {
+          LoadCurrDigital(ibCan);
+          ibPort = diCurr.ibPort;
 
-        SaveConnect();
+          if (LoadConnect(ibCan) == 0) break;
+          Clear();
+
+          LoadSlide(pszCntCanYear10);
+
+          if (mpboEnblCan[ibCan] == false)
+            ShowLo(szBlocked);
+          else
+          {
+            if (GetDigitalDevice(ibCan) != 6)
+            {
+              double2 db2 = ReadCntMonCan(ibMon,ibCan);
+              (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
+            }
+            else
+              (ReadCntMonCanF_Curr(ibMon,ibCan) == true) ? ShowCntMonCanF(ibVal == 0) : Error();
+          }
+
+          SaveConnect();
+        }
       }
       break;
 
@@ -131,16 +135,18 @@ static void Show(void)
       break;
 
     case bGET_CNTCANYEAR20:     
-      ibVal = (12+ibMon-1)%12;
       if (ibMon == tiCurr.bMonth)
         ShowLo(szNoData);
       else
+      {
+        ibMon = (12+ibMon-1)%12;
         ShowExtended4(ibCan,ibMon,ibVal == 0);
+      }
       break;
 
     case wGET_CNTCANYEAR3:
       if (GetDigitalDevice(ibCan) == 6)
-        ShowLo(szBadMode);
+        ShowLo(szNotSupported);
       else
         ShowCntMonCan6(ibCan,ibMon,ibVal == 0);
       break;
