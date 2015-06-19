@@ -60,7 +60,8 @@ KEYBOARD_KEY.C
 #include "key_delays.h"
 #include "impulses/key_single.h"
 #include "impulses/key_single2.h"
-#include "impulses/key_values_year.h"
+#include "impulses/key_eng_year.h"
+#include "impulses/key_cnt_year.h"
 #include "impulses/key_oldprogram73.h"
 #include "impulses/key_oldprogram74.h"
 #include "key_reset.h"
@@ -465,14 +466,14 @@ void    Keyboard_Key(void)
       case bGET_ENGGRPYEAR_ABCD:
       case bGET_ENGGRPYEAR_CD:
       case bGET_ENGGRPYEAR_B:
-      case bGET_ENGGRPYEAR_A:  key_GetValuesYear(BY_GROUPS); break;
+      case bGET_ENGGRPYEAR_A:   key_GetEngYear(); break;
 
       case bGET_CNTCANYEAR1:
       case bGET_CNTCANYEAR10:
       case bGET_CNTCANYEAR2:
-      case bGET_CNTCANYEAR20:  key_GetValuesYear(BY_CANALS); break;
+      case bGET_CNTCANYEAR20:   key_GetCntYear(); break;
 
-      case wGET_CNTCANYEAR6:    key_GetCntCanYear6();   break;
+      case wGET_CNTCANYEAR6:    key_GetCntYear6(); break;
 
       case bRUN_PROFILE:        key_RunProfile();       break;
 
