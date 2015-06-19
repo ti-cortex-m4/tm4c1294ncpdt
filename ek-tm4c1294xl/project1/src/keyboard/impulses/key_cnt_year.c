@@ -95,7 +95,7 @@ static void Show(void)
 
         if (GetDigitalDevice(ibCan) == 0)
         {
-          double2 db2 = ReadCntMonCan(ibVal,ibCan);
+          double2 db2 = ReadCntMonCan(ibMon,ibCan);
           (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
         }
         else if (SupportedExtended6_CurrMon(ibCan,ibMon))
@@ -122,7 +122,9 @@ static void Show(void)
               (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
             }
             else
+            {
               (ReadCntMonCanF_Curr(ibMon,ibCan) == true) ? ShowCntMonCanF(ibVal == 0) : Error();
+            }
           }
 
           SaveConnect();
