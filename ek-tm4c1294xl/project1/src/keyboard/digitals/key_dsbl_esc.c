@@ -50,20 +50,20 @@ void    key_SetDsblEsc(void)
   {
     boDsblEscU = InvertBoolean(boDsblEscU);
 
-    SaveFile(&flDsblEscU);
+    SaveCache(&chDsblEscU);
     Show();
   }
   else if ((bKey == 2) && (enGlobal != GLB_WORK))
   {
     boDsblEscV = InvertBoolean(boDsblEscV);
-    SaveFile(&flDsblEscV);
+    SaveCache(&chDsblEscV);
 
     Show();
   }
   else if ((bKey == 3) && (enGlobal != GLB_WORK))
   {
     boDsblEscS = InvertBoolean(boDsblEscS);
-    SaveFile(&flDsblEscS);
+    SaveCache(&chDsblEscS);
 
     Show();
   }

@@ -21,5 +21,5 @@ static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
 
 void    key_SetStrictUni(void)
 {
-  key_SetBool(&flStrictUni, pszMessages);
+  key_SetBool(&chStrictUni, pszMessages);
 }

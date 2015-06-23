@@ -4,8 +4,8 @@ ESC,H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flMachinesEsc;
-extern  file const              flBlockEsc;
+extern  cache const             chMachinesEsc;
+extern  cache const             chBlockEsc;
 
 
 

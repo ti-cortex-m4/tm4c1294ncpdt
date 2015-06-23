@@ -8,4 +8,4 @@ extern  char                    szCharLimits[bDISPLAY + bMARGIN];
 
 
 
-void    key_SetChar(file const  *pflFile, char const  *pszSlide[], uchar  bMin, uchar  bMax);
+void    key_SetChar(cache const  *pchFile, char const  *pszSlide[], uchar  bMin, uchar  bMax);

@@ -6,7 +6,7 @@ SETTINGS.H
 
 extern  file const              flLogical;
 
-extern  file const              flFirstReset;
+extern  cache const             chFirstReset;
 
 extern  file const              flSetTime;
 extern  file const              flSetDate;

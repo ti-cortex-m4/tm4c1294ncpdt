@@ -70,14 +70,7 @@ typedef enum
 
   REALTIME              = PTRTIM + 1,
 
-  SEPARATE_CAN          = REALTIME + 1,
-  SHOW_MESSAGES         = SEPARATE_CAN + 1,
-  HIDE_MESSAGES         = SHOW_MESSAGES + 1,
-  CONTROL_TIME          = HIDE_MESSAGES + 1,
-  MANAGE_TIME           = CONTROL_TIME + 1,
-  FIRST_RESET           = MANAGE_TIME + 1,
-
-  PORTS                 = FIRST_RESET + 1,
+  PORTS                 = REALTIME + 1,
   LOCAL_DISABLE         = PORTS + 1,
 
   MAJOR_IN_DELAY        = LOCAL_DISABLE + 1,
@@ -110,15 +103,7 @@ typedef enum
   CANALS_NAME           = OBJECT_NAME + 1,
   GROUPS_NAME           = CANALS_NAME + sizeof(mpszCanalsName)/wFREEPAGE_SIZE + 1,
 
-  MACHINES_ESC          = GROUPS_NAME + sizeof(mpszGroupsName)/wFREEPAGE_SIZE + 1,
-  BLOCK_ESC             = MACHINES_ESC + 1,
-
-  STRICT_UNI            = BLOCK_ESC + 1,
-  MAX_DELAY_UNI         = STRICT_UNI + 1,
-  REPEAT_FLOW_INI       = MAX_DELAY_UNI + 1,
-  ENBL_PASS_INI         = REPEAT_FLOW_INI + 1,
-
-  USE_BOUNDS            = ENBL_PASS_INI + 1,
+  USE_BOUNDS            = GROUPS_NAME + sizeof(mpszGroupsName)/wFREEPAGE_SIZE + 1,
   START_REL_CAN         = USE_BOUNDS + 1,
   START_ABS16_CAN       = START_REL_CAN + 1,
   START_ABS32_CAN       = START_ABS16_CAN + 1,
@@ -129,15 +114,7 @@ typedef enum
   DSBL_REFILL           = STOP_AUX_CAN + 1,
   ENBL_CURRENT2         = DSBL_REFILL + 1,
 
-  DSBL_ESC_U            = ENBL_CURRENT2 + 1,
-  DSBL_ESC_V            = DSBL_ESC_U + 1,
-  DSBL_ESC_S            = DSBL_ESC_V + 1,
-  MNT_ESC_S             = DSBL_ESC_S + 1,
-  EXTENDED_ESC_U        = MNT_ESC_S + 1,
-  EXTENDED_ESC_V        = EXTENDED_ESC_U + 1,
-  EXTENDED_ESC_S        = EXTENDED_ESC_V + 1,
-
-  FLOW_PORT_FROM        = EXTENDED_ESC_S + 1,
+  FLOW_PORT_FROM        = ENBL_CURRENT2 + 1,
   MAX_FLOW_DELAY        = FLOW_PORT_FROM + 1,
   FLOW_PORT_TO          = MAX_FLOW_DELAY + 1,
 
@@ -154,20 +131,14 @@ typedef enum
   KEYS_LEVEL_B          = PARAMS_VALUES + PARAMS_PAGES*wTIMES,
   SHORT_PROFILE_C       = KEYS_LEVEL_B + 1,
 
-  EXT_4_FLAG            = SHORT_PROFILE_C + 1,
-  EXT_4_MONTHS          = EXT_4_FLAG + 1,
-  EXT_4_ENBL_CAN        = EXT_4_MONTHS + 1,
+  EXT_4_ENBL_CAN        = SHORT_PROFILE_C + 1,
   EXT_4_MON_VALUES      = EXT_4_ENBL_CAN + 1,
 
-  EXT_4T_FLAG           = EXT_4_MON_VALUES + VALUE4_CAN_PAGES*bMONTHS,
-  EXT_4T_MONTHS         = EXT_4T_FLAG + 1,
-  EXT_4T_MON_VALUES     = EXT_4T_MONTHS + 1,
+  EXT_4T_MON_VALUES     = EXT_4_MON_VALUES + VALUE4_CAN_PAGES*bMONTHS,
 
-  EXT_5_FLAG            = EXT_4T_MON_VALUES + VALUE4T_CAN_PAGES*bMONTHS,
-  EXT_5_VALUES          = EXT_5_FLAG + 1,
+  EXT_5_VALUES          = EXT_4T_MON_VALUES + VALUE4T_CAN_PAGES*bMONTHS,
 
-  EXT_6_FLAG            = EXT_5_VALUES + VALUE5_CAN_PAGES,
-  EXT_6_BOX_VALUES      = EXT_6_FLAG + 1,
+  EXT_6_BOX_VALUES      = EXT_5_VALUES + VALUE5_CAN_PAGES,
   EXT_6_MON_VALUES      = EXT_6_BOX_VALUES + VALUE6_CAN_PAGES,
 
   SET_TIME              = EXT_6_MON_VALUES + VALUE6_CAN_PAGES*bMONTHS,

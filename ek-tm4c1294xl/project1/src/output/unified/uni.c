@@ -13,6 +13,8 @@ UNI.C
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
 #include "../../flash/files.h"
+#include "../../nvram/cache.h"
+#include "uni.h"
 
 
 
@@ -20,10 +22,10 @@ file const              flObjectName = {OBJECT_NAME, &szObjectName, sizeof(szObj
 file const              flCanalsName = {CANALS_NAME, &mpszCanalsName, sizeof(mpszCanalsName)};
 file const              flGroupsName = {GROUPS_NAME, &mpszGroupsName, sizeof(mpszGroupsName)};
 
-file const              flStrictUni = {STRICT_UNI, &boStrictUni, sizeof(bool)};
-file const              flMaxDelayUni = {MAX_DELAY_UNI, &bMaxDelayUni, sizeof(uchar)};
-file const              flRepeatFlowUni = {REPEAT_FLOW_INI, &boRepeatFlowUni, sizeof(bool)};
-file const              flEnblPasswUni = {ENBL_PASS_INI, &boEnblPassUni, sizeof(bool)};
+cache const             chStrictUni = {STRICT_UNI, &boStrictUni, sizeof(bool)};
+cache const             chMaxDelayUni = {MAX_DELAY_UNI, &bMaxDelayUni, sizeof(uchar)};
+cache const             chRepeatFlowUni = {REPEAT_FLOW_INI, &boRepeatFlowUni, sizeof(bool)};
+cache const             chEnblPasswUni = {ENBL_PASS_INI, &boEnblPassUni, sizeof(bool)};
 
 
 
@@ -33,18 +35,18 @@ void    InitUni(void)
   LoadFile(&flCanalsName);
   LoadFile(&flGroupsName);
 
-  LoadFile(&flStrictUni);
+  LoadCache(&chStrictUni);
 
-  LoadFile(&flMaxDelayUni);
+  LoadCache(&chMaxDelayUni);
   if ((bMaxDelayUni < 10) || (bMaxDelayUni > 250))
   {
     bMaxDelayUni = 60;
-    SaveFile(&flMaxDelayUni);
+    SaveCache(&chMaxDelayUni);
   }
 
-  LoadFile(&flRepeatFlowUni);
+  LoadCache(&chRepeatFlowUni);
 
-  LoadFile(&flEnblPasswUni);
+  LoadCache(&chEnblPasswUni);
 
   uchar p;
   for (p=0; p<bPORTS; p++)
@@ -81,16 +83,16 @@ void    ResetUni(void)
 
 
   boStrictUni = true;
-  SaveFile(&flStrictUni);
+  SaveCache(&chStrictUni);
 
   bMaxDelayUni = 60;
-  SaveFile(&flMaxDelayUni);
+  SaveCache(&chMaxDelayUni);
 
   boRepeatFlowUni = false;
-  SaveFile(&flRepeatFlowUni);
+  SaveCache(&chRepeatFlowUni);
 
   boEnblPassUni = true;
-  SaveFile(&flEnblPasswUni);
+  SaveCache(&chEnblPasswUni);
 }
 
 

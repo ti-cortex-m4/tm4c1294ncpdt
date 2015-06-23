@@ -4,11 +4,11 @@ DEVICES_INIT.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flSeparateCan;
-extern  file const              flShowMessages;
-extern  file const              flHideMessages;
-extern  file const              flControlTime;
-extern  file const              flManageTime;
+extern  cache const             chSeparateCan;
+extern  cache const             chShowMessages;
+extern  cache const             chHideMessages;
+extern  cache const             chControlTime;
+extern  cache const             chManageTime;
 
 extern  file const              flKeysLevelB;
 extern  file const              flShortProfileC;

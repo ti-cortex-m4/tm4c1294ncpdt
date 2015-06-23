@@ -5,10 +5,9 @@ DEVICES_INIT.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../console.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_phones.h"
-#include "../display/display.h"
-#include "../keyboard/keyboard.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../digitals/digitals.h"
 #include "../digitals/digitals_status.h"
@@ -31,7 +30,6 @@ DEVICES_INIT.C
 #include "../digitals/answer.h"
 #include "../digitals/profile/refill.h"
 #include "../digitals/schedule/schedule.h"
-#include "../flash/files.h"
 #include "../flash/records.h"
 #include "../time/delay.h"
 #include "../digitals/extended/extended_1.h"
@@ -48,11 +46,11 @@ DEVICES_INIT.C
 
 
 
-file const              flSeparateCan = {SEPARATE_CAN, &boSeparateCan, sizeof(bool)};
-file const              flShowMessages = {SHOW_MESSAGES, &boShowMessages, sizeof(bool)};
-file const              flHideMessages = {HIDE_MESSAGES, &boHideMessages, sizeof(bool)};
-file const              flControlTime = {CONTROL_TIME, &boControlTime, sizeof(bool)};
-file const              flManageTime = {MANAGE_TIME, &boManageTime, sizeof(bool)};
+cache const             chSeparateCan = {SEPARATE_CAN, &boSeparateCan, sizeof(bool)};
+cache const             chShowMessages = {SHOW_MESSAGES, &boShowMessages, sizeof(bool)};
+cache const             chHideMessages = {HIDE_MESSAGES, &boHideMessages, sizeof(bool)};
+cache const             chControlTime = {CONTROL_TIME, &boControlTime, sizeof(bool)};
+cache const             chManageTime = {MANAGE_TIME, &boManageTime, sizeof(bool)};
 
 file const              flKeysLevelB = {KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
 file const              flShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, sizeof(bool)};
@@ -61,11 +59,11 @@ file const              flShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, si
 
 void    InitDevices1(void)
 {
-  LoadFile(&flSeparateCan);
-  LoadFile(&flShowMessages);
-  LoadFile(&flHideMessages);
-  LoadFile(&flControlTime);
-  LoadFile(&flManageTime);
+  LoadCache(&chSeparateCan);
+  LoadCache(&chShowMessages);
+  LoadCache(&chHideMessages);
+  LoadCache(&chControlTime);
+  LoadCache(&chManageTime);
 
   LoadFile(&flKeysLevelB);
   if ((bKeysLevelB < 1) || (bKeysLevelB > 2))
@@ -124,19 +122,19 @@ void    InitDevices2(void)
 void    ResetDevices(bool  fFull)
 {
   boSeparateCan = false;
-  SaveFile(&flSeparateCan);
+  SaveCache(&chSeparateCan);
 
   boShowMessages = false;
-  SaveFile(&flShowMessages);
+  SaveCache(&chShowMessages);
 
   boHideMessages = false;
-  SaveFile(&flHideMessages);
+  SaveCache(&chHideMessages);
 
   boControlTime = true;
-  SaveFile(&flControlTime);
+  SaveCache(&chControlTime);
 
   boManageTime = true;
-  SaveFile(&flManageTime);
+  SaveCache(&chManageTime);
 
   bKeysLevelB = 2;
   SaveFile(&flKeysLevelB);

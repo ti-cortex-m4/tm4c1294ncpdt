@@ -33,15 +33,15 @@ cache const             chEscV_Time = {ESC_V_TIME, &mptiEsc_V, sizeof(mptiEsc_V)
 cache const             chEscU_Value = {ESC_U_VALUE, &mptiEsc_U1, sizeof(mptiEsc_U1)};
 cache const             chEscU_Time = {ESC_U_TIME, &mptiEsc_U2, sizeof(mptiEsc_U2)};
 
-file const              flDsblEscU = {DSBL_ESC_U, &boDsblEscU, sizeof(bool)};
-file const              flDsblEscV = {DSBL_ESC_V, &boDsblEscV, sizeof(bool)};
-file const              flDsblEscS = {DSBL_ESC_S, &boDsblEscS, sizeof(bool)};
+cache const             chDsblEscU = {DSBL_ESC_U, &boDsblEscU, sizeof(bool)};
+cache const             chDsblEscV = {DSBL_ESC_V, &boDsblEscV, sizeof(bool)};
+cache const             chDsblEscS = {DSBL_ESC_S, &boDsblEscS, sizeof(bool)};
 
-file const              flMntEscS = {MNT_ESC_S, &boMntEscS, sizeof(bool)};
+cache const             chMntEscS = {MNT_ESC_S, &boMntEscS, sizeof(bool)};
 
-file const              flExtendedEscU = {EXTENDED_ESC_U, &boExtendedEscU, sizeof(bool)};
-file const              flExtendedEscV = {EXTENDED_ESC_V, &boExtendedEscV, sizeof(bool)};
-file const              flExtendedEscS = {EXTENDED_ESC_S, &boExtendedEscS, sizeof(bool)};
+cache const             chExtendedEscU = {EXTENDED_ESC_U, &boExtendedEscU, sizeof(bool)};
+cache const             chExtendedEscV = {EXTENDED_ESC_V, &boExtendedEscV, sizeof(bool)};
+cache const             chExtendedEscS = {EXTENDED_ESC_S, &boExtendedEscS, sizeof(bool)};
 
 
 
@@ -56,15 +56,15 @@ void    InitExtended1(void)
   LoadCache(&chEscU_Value);
   LoadCache(&chEscU_Time);
 
-  LoadFile(&flDsblEscU);
-  LoadFile(&flDsblEscV);
-  LoadFile(&flDsblEscS);
+  LoadCache(&chDsblEscU);
+  LoadCache(&chDsblEscV);
+  LoadCache(&chDsblEscS);
 
-  LoadFile(&flMntEscS);
+  LoadCache(&chMntEscS);
 
-  LoadFile(&flExtendedEscU);
-  LoadFile(&flExtendedEscV);
-  LoadFile(&flExtendedEscS);
+  LoadCache(&chExtendedEscU);
+  LoadCache(&chExtendedEscV);
+  LoadCache(&chExtendedEscS);
 }
 
 
@@ -92,27 +92,27 @@ void    ResetExtended1(void)
 
 
   boDsblEscU = false;
-  SaveFile(&flDsblEscU);
+  SaveCache(&chDsblEscU);
 
   boDsblEscV = false;
-  SaveFile(&flDsblEscV);
+  SaveCache(&chDsblEscV);
 
   boDsblEscS = false;
-  SaveFile(&flDsblEscS);
+  SaveCache(&chDsblEscS);
 
 
   boMntEscS = false;
-  SaveFile(&flMntEscS);
+  SaveCache(&chMntEscS);
 
 
   boExtendedEscU = true;
-  SaveFile(&flExtendedEscU);
+  SaveCache(&chExtendedEscU);
 
   boExtendedEscV = true;
-  SaveFile(&flExtendedEscV);
+  SaveCache(&chExtendedEscV);
 
   boExtendedEscS = true;
-  SaveFile(&flExtendedEscS);
+  SaveCache(&chExtendedEscS);
 }
 
 

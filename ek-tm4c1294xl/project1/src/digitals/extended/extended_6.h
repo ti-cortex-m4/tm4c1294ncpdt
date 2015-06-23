@@ -8,7 +8,7 @@ EXTENDED_6,H
 
 
 
-extern  file const              flExt6Flag;
+extern  cache const             chExt6Flag;
 
 
 

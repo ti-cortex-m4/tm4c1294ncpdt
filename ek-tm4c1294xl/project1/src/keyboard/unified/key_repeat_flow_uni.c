@@ -24,5 +24,5 @@ static char const       *pszMessages[]     = { szMessage1, szMessage2, szMessage
 
 void    key_SetRepeatFlowUni(void)
 {
-  key_SetBool(&flRepeatFlowUni, pszMessages);
+  key_SetBool(&chRepeatFlowUni, pszMessages);
 }

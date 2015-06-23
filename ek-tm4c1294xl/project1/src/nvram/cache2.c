@@ -1,36 +1,36 @@
 /*------------------------------------------------------------------------------
-FILES2.C
+CACHE2.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "files.h"
-#include "files2.h"
+#include "cache.h"
+#include "cache2.h"
 
 
 
-void    LoadFileBoolean(file const  *pfl, bool  boDef)
+void    LoadCacheBoolean(cache const  *pch, bool  boDef)
 {
-  LoadFile(pfl);
-  bool *pboVal = (bool *) pfl->pbBuff;
+  LoadCache(pch);
+  bool *pboVal = (bool *) pch->pbBuff;
 
   if (!((*pboVal == true) || (*pboVal == false)))
   {
     *pboVal = boDef;
-    SaveFile(pfl);
+    SaveCache(pch);
   }
 }
 
 
-void    LoadFileChar(file const  *pfl, uchar  bMin, uchar  bMax, uchar  bDef)
+void    LoadCacheChar(cache const  *pch, uchar  bMin, uchar  bMax, uchar  bDef)
 {
-  LoadFile(pfl);
-  uchar *pbVal = (uchar *) pfl->pbBuff;
+  LoadCache(pch);
+  uchar *pbVal = (uchar *) pch->pbBuff;
 
   if (!((*pbVal >= bMin) && (*pbVal <= bMax)))
   {
     *pbVal = bDef;
-    SaveFile(pfl);
+    SaveCache(pch);
   }
 }

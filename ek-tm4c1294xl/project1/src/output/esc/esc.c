@@ -6,29 +6,29 @@ ESC,C
 
 #include "../../main.h"
 #include "../../memory/mem_esc.h"
-#include "../../flash/files.h"
-#include "../../flash/files2.h"
+#include "../../nvram/cache.h"
+#include "../../nvram/cache2.h"
 #include "esc.h"
 
 
 
-file const              flMachinesEsc = {MACHINES_ESC, &bMachinesEsc, sizeof(uchar)};
-file const              flBlockEsc = {BLOCK_ESC, &boBlockEsc, sizeof(bool)};
+cache const             chMachinesEsc = {MACHINES_ESC, &bMachinesEsc, sizeof(uchar)};
+cache const             chBlockEsc = {BLOCK_ESC, &boBlockEsc, sizeof(bool)};
 
 
 
 void    InitEsc(void)
 {
-  LoadFileChar(&flMachinesEsc, 1, bMAXMACHINES, bMAXMACHINES);
-  LoadFileBoolean(&flBlockEsc, false);
+  LoadCacheChar(&chMachinesEsc, 1, bMAXMACHINES, bMAXMACHINES);
+  LoadCacheBoolean(&chBlockEsc, false);
 }
 
 
 void    ResetEsc(void)
 {
   bMachinesEsc = bMAXMACHINES;
-  SaveFile(&flMachinesEsc);
+  SaveCache(&chMachinesEsc);
 
   boBlockEsc = false;
-  SaveFile(&flBlockEsc);
+  SaveCache(&chBlockEsc);
 }

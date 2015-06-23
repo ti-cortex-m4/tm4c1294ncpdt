@@ -21,8 +21,8 @@ EXTENDED_4T,C
 
 
 
-file const              flExt4TFlag = {EXT_4T_FLAG, &fExt4TFlag, sizeof(bool)};
-file const              flExt4TMonths = {EXT_4T_MONTHS, &bExt4TMonths, sizeof(uchar)};
+cache const             chExt4TFlag = {EXT_4T_FLAG, &fExt4TFlag, sizeof(bool)};
+cache const             chExt4TMonths = {EXT_4T_MONTHS, &bExt4TMonths, sizeof(uchar)};
 
 
 //                                         0123456789ABCDEF
@@ -45,8 +45,8 @@ bool LoadExt4TValues(uchar  ibMon)
 
 void    InitExtended4T(void) 
 {
-  LoadFileBoolean(&flExt4TFlag, false);
-  LoadFileChar(&flExt4TMonths, 1, 12, 4);
+  LoadCacheBoolean(&chExt4TFlag, false);
+  LoadCacheChar(&chExt4TMonths, 1, 12, 4);
 }
 
 
@@ -55,10 +55,10 @@ void    ResetExtended4T(bool  fFull)
   if (fFull)
   {
     fExt4TFlag = false;
-    SaveFile(&flExt4TFlag);
+    SaveCache(&chExt4TFlag);
 
     bExt4TMonths = 4;
-    SaveFile(&flExt4TMonths);
+    SaveCache(&chExt4TMonths);
   }
 
 

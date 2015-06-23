@@ -8,8 +8,8 @@ EXTENDED_4,H
 
 
 
-extern  file const              flExt4Flag;
-extern  file const              flExt4Months;
+extern  cache const             chExt4Flag;
+extern  cache const             chExt4Months;
 extern  file const              flExt4EnblCan;
 
 
