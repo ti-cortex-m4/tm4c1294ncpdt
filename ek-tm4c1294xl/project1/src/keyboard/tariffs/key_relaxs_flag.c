@@ -19,5 +19,5 @@ static char const       *pszMessages[]  = { szMessage, "" };
 
 void    key_SetRelaxsFlag(void)
 {
-  key_SetBool(&flRelaxsFlag, pszMessages);
+  key_SetBool(&chRelaxsFlag, pszMessages);
 }

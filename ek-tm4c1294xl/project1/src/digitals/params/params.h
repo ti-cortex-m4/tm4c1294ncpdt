@@ -19,8 +19,8 @@ extern  file const              flParams;
 extern  file const              flParamsDiv;
 extern  file const              flEnblParams;
 
-extern  file const              flFixParamsBugs;
-extern  file const              flUseParamsDiv;
+extern  cache const             chFixParamsBugs;
+extern  cache const             chUseParamsDiv;
 
 
 

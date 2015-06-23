@@ -6,9 +6,15 @@ typedef enum
 
   LABEL_GLOBAL          = NVRAM_BEGIN,
 
-  DIGITALS              = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_FOOTER,
+  ENBL_KEYS             = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_FOOTER,
 
-  SEPARATE_CAN          = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+  DIGITALS              = ENBL_KEYS + sizeof(bool) + bNVRAM_FOOTER,
+
+  RELAXS_FLAG           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+
+  GAPS_FLAG             = RELAXS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+
+  SEPARATE_CAN          = GAPS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
   SHOW_MESSAGES         = SEPARATE_CAN + sizeof(bool) + bNVRAM_FOOTER,
   HIDE_MESSAGES         = SHOW_MESSAGES + sizeof(bool) + bNVRAM_FOOTER,
   CONTROL_TIME          = HIDE_MESSAGES + sizeof(bool) + bNVRAM_FOOTER,
@@ -62,7 +68,10 @@ typedef enum
   PARAMS_FLAG           = FLOW_PORT_TO + sizeof(bool) + bNVRAM_FOOTER,
   MNT_PARAMS            = PARAMS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
 
-  CORRECT2_FLAG         = MNT_PARAMS + sizeof(bool) + bNVRAM_FOOTER,
+  FIX_PARAMS_BUGS       = MNT_PARAMS + sizeof(bool) + bNVRAM_FOOTER,
+  USE_PARAMS_DIV        = FIX_PARAMS_BUGS + sizeof(bool) + bNVRAM_FOOTER,
+
+  CORRECT2_FLAG         = USE_PARAMS_DIV + sizeof(bool) + bNVRAM_FOOTER,
 
   NVRAM_END             = CORRECT2_FLAG + sizeof(bool) + bNVRAM_FOOTER
 } nvram;

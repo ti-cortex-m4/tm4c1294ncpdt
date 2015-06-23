@@ -4,7 +4,7 @@ RELAXS.H
  Праздники
 ------------------------------------------------------------------------------*/
 
-extern  file const              flRelaxsFlag;
+extern  cache const             chRelaxsFlag;
 extern  file const              flRelaxsTariff;
 extern  file const              flRelaxs;
 

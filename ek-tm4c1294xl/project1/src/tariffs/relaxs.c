@@ -7,13 +7,14 @@ RELAXS.C
 #include "../main.h"
 #include "../memory/mem_tariffs.h"
 #include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "../time/timedate.h"
 #include "tariffs.h"
 #include "relaxs.h"
 
 
 
-file const              flRelaxsFlag = {RELAXS_FLAG, &boRelaxsFlag, sizeof(bool)};
+cache const             chRelaxsFlag = {RELAXS_FLAG, &boRelaxsFlag, sizeof(bool)};
 file const              flRelaxsTariff = {RELAXS_TARIFF, &ibRelaxsTariff, sizeof(uchar)};
 file const              flRelaxs = {RELAXS_TARIFF, &reRelaxs, sizeof(relaxs)};
 
@@ -21,22 +22,22 @@ file const              flRelaxs = {RELAXS_TARIFF, &reRelaxs, sizeof(relaxs)};
 
 void    InitRelaxs(void)
 {
-	LoadFile(&flRelaxsFlag);
-	LoadFile(&flRelaxsTariff);
-	LoadFile(&flRelaxs);
+  LoadCache(&chRelaxsFlag);
+  LoadFile(&flRelaxsTariff);
+  LoadFile(&flRelaxs);
 }
 
 
 void    ResetRelaxs(void)
 {
   boRelaxsFlag = false;
-  SaveFile(&flRelaxsFlag);
+  SaveCache(&chRelaxsFlag);
 
   ibRelaxsTariff = 1;
   SaveFile(&flRelaxsTariff);
 
   memset(&reRelaxs, 0, sizeof(relaxs));
-	SaveFile(&flRelaxs);
+  SaveFile(&flRelaxs);
 }
 
 
