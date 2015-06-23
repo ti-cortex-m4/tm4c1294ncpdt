@@ -67,7 +67,7 @@ void    key_SetBlockEsc(void)
         else
           boBlockEsc = false;
 
-        SaveFile(&flBlockEsc);
+        SaveCache(&chBlockEsc);
         Show();
       }
       else Beep();

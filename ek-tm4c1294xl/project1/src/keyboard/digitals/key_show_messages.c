@@ -20,5 +20,5 @@ static char const       *pszMessages[]   = { szMessage, "" };
 
 void    key_SetShowMessages(void)
 {
-  key_SetBool(&flShowMessages, pszMessages);
+  key_SetBool(&chShowMessages, pszMessages);
 }

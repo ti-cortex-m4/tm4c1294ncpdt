@@ -22,7 +22,7 @@ EXTENDED_6,C
 
 
 
-file const              flExt6Flag = {EXT_6_FLAG, &fExt6Flag, sizeof(bool)};
+cache const             chExt6Flag = {EXT_6_FLAG, &fExt6Flag, sizeof(bool)};
 file const              flCntBoxCan6 = {EXT_6_BOX_VALUES, &mpCntBoxCan6, sizeof(mpCntBoxCan6)};
 
 
@@ -42,7 +42,7 @@ bool    LoadCntMonCan6(uchar  ibMonFrom)
 
 void    InitExtended6(void)
 {
-  LoadFileBoolean(&flExt6Flag, false);
+  LoadCacheBoolean(&chExt6Flag, false);
   LoadFile(&flCntBoxCan6);
 }
 
@@ -52,7 +52,7 @@ void    ResetExtended6(bool  fFull)
   if (fFull)
   {
     fExt6Flag = false;
-    SaveFile(&flExt6Flag);
+    SaveCache(&chExt6Flag);
   }
 
 

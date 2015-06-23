@@ -10,9 +10,9 @@ KEY_BOOL,C
 
 
 
-void    key_SetBool(file const  *pflFile, char const  *pszMessages[])
+void    key_SetBool(cache const  *pch, char const  *pszMessages[])
 {
-  bool *pboValue = (bool *) pflFile->pbBuff;
+  bool *pboValue = (bool *) pch->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {
@@ -35,7 +35,7 @@ void    key_SetBool(file const  *pflFile, char const  *pszMessages[])
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
         *pboValue = InvertBoolean(*pboValue);
-        SaveFile(pflFile);
+        SaveCache(pch);
 
         ShowBoolean(*pboValue);
       }

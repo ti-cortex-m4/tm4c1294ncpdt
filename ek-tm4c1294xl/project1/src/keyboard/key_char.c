@@ -17,9 +17,9 @@ char                    szCharLimits[bDISPLAY + bMARGIN];
 
 
 
-void    key_SetChar(file const  *pflFile, char const  *pszSlide[], uchar  bMin, uchar  bMax)
+void    key_SetChar(cache const  *pch, char const  *pszSlide[], uchar  bMin, uchar  bMax)
 {
-  uchar *pbVal = (uchar *) pflFile->pbBuff;
+  uchar *pbVal = (uchar *) pch->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {
@@ -42,7 +42,7 @@ void    key_SetChar(file const  *pflFile, char const  *pszSlide[], uchar  bMin, 
       if ((b >= bMin) && (b <= bMax))
       {
         *pbVal = b;
-        SaveFile(pflFile);
+        SaveCache(pch);
 
         ShowChar(*pbVal);
       }

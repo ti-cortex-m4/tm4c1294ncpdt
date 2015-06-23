@@ -8,10 +8,10 @@ extern  file const              flObjectName;
 extern  file const              flCanalsName;
 extern  file const              flGroupsName;
 
-extern  file const              flStrictUni;
-extern  file const              flMaxDelayUni;
-extern  file const              flRepeatFlowUni;
-extern  file const              flEnblPasswUni;
+extern  cache const             chStrictUni;
+extern  cache const             chMaxDelayUni;
+extern  cache const             chRepeatFlowUni;
+extern  cache const             chEnblPasswUni;
 
 
 

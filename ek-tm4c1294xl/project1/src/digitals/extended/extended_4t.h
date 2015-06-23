@@ -8,8 +8,8 @@ EXTENDED_4T,H
 
 
 
-extern  file const              flExt4TFlag;
-extern  file const              flExt4TMonths;
+extern  cache const             chExt4TFlag;
+extern  cache const             chExt4TMonths;
 
 
 

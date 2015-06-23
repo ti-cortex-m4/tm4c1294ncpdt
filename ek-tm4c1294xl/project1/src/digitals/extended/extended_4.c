@@ -20,8 +20,8 @@ EXTENDED_4,C
 
 
 
-file const              flExt4Flag = {EXT_4_FLAG, &fExt4Flag, sizeof(bool)};
-file const              flExt4Months = {EXT_4_MONTHS, &bExt4Months, sizeof(uchar)};
+cache const             chExt4Flag = {EXT_4_FLAG, &fExt4Flag, sizeof(bool)};
+cache const             chExt4Months = {EXT_4_MONTHS, &bExt4Months, sizeof(uchar)};
 file const              flExt4EnblCan = {EXT_4_ENBL_CAN, &mpfExt4EnblCan, sizeof(mpfExt4EnblCan)};
 
 
@@ -54,8 +54,8 @@ bool LoadExt4Values(uchar  ibMon)
 
 void    InitExtended4(void)
 {
-  LoadFileBoolean(&flExt4Flag, false);
-  LoadFileChar(&flExt4Months, 1, 12, 4);
+  LoadCacheBoolean(&chExt4Flag, false);
+  LoadCacheChar(&chExt4Months, 1, 12, 4);
   LoadFile(&flExt4EnblCan);
 }
 
@@ -65,10 +65,10 @@ void    ResetExtended4(bool  fFull)
   if (fFull)
   {
     fExt4Flag = false;
-    SaveFile(&flExt4Flag);
+    SaveCache(&chExt4Flag);
 
     bExt4Months = 4;
-    SaveFile(&flExt4Months);
+    SaveCache(&chExt4Months);
   }
 
 

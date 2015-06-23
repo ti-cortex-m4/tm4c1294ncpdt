@@ -8,15 +8,15 @@ EXTENDED_1.H
 
 
 
-extern  file const              flDsblEscU;
-extern  file const              flDsblEscV;
-extern  file const              flDsblEscS;
+extern  cache const             chDsblEscU;
+extern  cache const             chDsblEscV;
+extern  cache const             chDsblEscS;
 
-extern  file const              flMntEscS;
+extern  cache const             chMntEscS;
 
-extern  file const              flExtendedEscU;
-extern  file const              flExtendedEscV;
-extern  file const              flExtendedEscS;
+extern  cache const             chExtendedEscU;
+extern  cache const             chExtendedEscV;
+extern  cache const             chExtendedEscS;
 
 
 

@@ -8,16 +8,45 @@ typedef enum
 
   DIGITALS              = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_FOOTER,
 
-  ESC_S_VALUE           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
-  ESC_S_TIME            = ESC_S_VALUE + sizeof(mpdbEsc_S) + bNVRAM_FOOTER,
+  SEPARATE_CAN          = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+  SHOW_MESSAGES         = SEPARATE_CAN + sizeof(bool) + bNVRAM_FOOTER,
+  HIDE_MESSAGES         = SHOW_MESSAGES + sizeof(bool) + bNVRAM_FOOTER,
+  CONTROL_TIME          = HIDE_MESSAGES + sizeof(bool) + bNVRAM_FOOTER,
+  MANAGE_TIME           = CONTROL_TIME + sizeof(bool) + bNVRAM_FOOTER,
 
+  FIRST_RESET           = MANAGE_TIME + sizeof(bool) + bNVRAM_FOOTER,
+
+  EXT_4_FLAG            = FIRST_RESET + sizeof(bool) + bNVRAM_FOOTER,
+  EXT_4_MONTHS          = EXT_4_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  EXT_4T_FLAG           = EXT_4_MONTHS + sizeof(bool) + bNVRAM_FOOTER,
+  EXT_4T_MONTHS         = EXT_4T_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  EXT_5_FLAG            = EXT_4T_MONTHS + sizeof(bool) + bNVRAM_FOOTER,
+  EXT_6_FLAG            = EXT_5_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+
+  DSBL_ESC_U            = EXT_6_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  DSBL_ESC_V            = DSBL_ESC_U + sizeof(bool) + bNVRAM_FOOTER,
+  DSBL_ESC_S            = DSBL_ESC_V + sizeof(bool) + bNVRAM_FOOTER,
+  MNT_ESC_S             = DSBL_ESC_S + sizeof(bool) + bNVRAM_FOOTER,
+  EXTENDED_ESC_U        = MNT_ESC_S + sizeof(bool) + bNVRAM_FOOTER,
+  EXTENDED_ESC_V        = EXTENDED_ESC_U + sizeof(bool) + bNVRAM_FOOTER,
+  EXTENDED_ESC_S        = EXTENDED_ESC_V + sizeof(bool) + bNVRAM_FOOTER,
+
+  ESC_S_VALUE           = EXTENDED_ESC_S + sizeof(bool) + bNVRAM_FOOTER,
+  ESC_S_TIME            = ESC_S_VALUE + sizeof(mpdbEsc_S) + bNVRAM_FOOTER,
   ESC_V_VALUE           = ESC_S_TIME + sizeof(mptiEsc_S) + bNVRAM_FOOTER,
   ESC_V_TIME            = ESC_V_VALUE + sizeof(mpdbEsc_V) + bNVRAM_FOOTER,
-
   ESC_U_VALUE           = ESC_V_TIME + sizeof(mptiEsc_V) + bNVRAM_FOOTER,
   ESC_U_TIME            = ESC_U_VALUE + sizeof(mptiEsc_U1) + bNVRAM_FOOTER,
 
   EXT_7_DAY_VALUES      = ESC_U_TIME + sizeof(mptiEsc_U2) + bNVRAM_FOOTER,
 
-  NVRAM_END             = EXT_7_DAY_VALUES + (sizeof(mpCntDayCan7) + bNVRAM_FOOTER)*bDAYS
+  MACHINES_ESC          = EXT_7_DAY_VALUES + (sizeof(mpCntDayCan7) + bNVRAM_FOOTER)*bDAYS,
+  BLOCK_ESC             = MACHINES_ESC + sizeof(bool) + bNVRAM_FOOTER,
+
+  STRICT_UNI            = BLOCK_ESC + sizeof(bool) + bNVRAM_FOOTER,
+  MAX_DELAY_UNI         = STRICT_UNI + sizeof(bool) + bNVRAM_FOOTER,
+  REPEAT_FLOW_INI       = MAX_DELAY_UNI + sizeof(bool) + bNVRAM_FOOTER,
+  ENBL_PASS_INI         = REPEAT_FLOW_INI + sizeof(bool) + bNVRAM_FOOTER,
+
+  NVRAM_END             = ENBL_PASS_INI + sizeof(bool) + bNVRAM_FOOTER
 } nvram;

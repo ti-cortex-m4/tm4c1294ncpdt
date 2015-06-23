@@ -8,7 +8,7 @@ EXTENDED_5.H
 
 
 
-extern  file const              flExt5Flag;
+extern  cache const             chExt5Flag;
 
 
 

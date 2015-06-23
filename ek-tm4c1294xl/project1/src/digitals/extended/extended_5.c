@@ -19,7 +19,7 @@ EXTENDED_5.C
 
 
 
-file const              flExt5Flag = {EXT_5_FLAG, &fExt5Flag, sizeof(bool)};
+cache const             chExt5Flag = {EXT_5_FLAG, &fExt5Flag, sizeof(bool)};
 file const              flExt5Values = {EXT_5_VALUES, &mpCntDayCan5, sizeof(mpCntDayCan5)};
 
 
@@ -34,7 +34,7 @@ static value5a          stBuff[4];
 
 void    InitExtended5(void)
 {
-  LoadFile(&flExt5Flag);
+  LoadCache(&chExt5Flag);
   LoadFile(&flExt5Values);
 }
 
@@ -44,7 +44,7 @@ void    ResetExtended5(bool  fFull)
   if (fFull)
   {
     fExt5Flag = false;
-    SaveFile(&flExt5Flag);
+    SaveCache(&chExt5Flag);
   }
 
   memset(&mpCntDayCan5, 0, sizeof(mpCntDayCan5));

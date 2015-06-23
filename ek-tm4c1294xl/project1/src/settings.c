@@ -8,6 +8,7 @@ SETTINGS.C
 #include "memory/mem_settings.h"
 #include "memory/mem_program.h"
 #include "flash/files.h"
+#include "nvram/cache.h"
 #include "label.h"
 #include "settings.h"
 
@@ -15,7 +16,7 @@ SETTINGS.C
 
 file const              flLogical = {LOGICAL, &bLogical, sizeof(uchar)};
 
-file const              flFirstReset = {FIRST_RESET, &boFirstReset, sizeof(bool)};
+cache const             chFirstReset = {FIRST_RESET, &boFirstReset, sizeof(bool)};
 
 file const              flSetTime = {SET_TIME, &boSetTime, sizeof(bool)};
 file const              flSetDate = {SET_DATE, &boSetDate, sizeof(bool)};
@@ -40,7 +41,7 @@ void    InitSettings(void)
 
   LoadFile(&flLogical);
 
-  LoadFile(&flFirstReset);
+  LoadCache(&chFirstReset);
 
   LoadFile(&flSetTime);
   LoadFile(&flSetDate);
@@ -61,7 +62,7 @@ void    ResetSettings(bool  fFull)
   }
 
   boFirstReset = false;
-  SaveFile(&flFirstReset);
+  SaveCache(&chFirstReset);
 
   if (fFull)
   {

@@ -21,5 +21,5 @@ static char const       *pszMessages[]   = { szMessage1, szMessage2, szCharLimit
 
 void    key_SetMachinesEsc(void)
 {
-  key_SetChar(&flMachinesEsc, pszMessages, 1, bMAXMACHINES);
+  key_SetChar(&chMachinesEsc, pszMessages, 1, bMAXMACHINES);
 }

@@ -19,5 +19,5 @@ static char const       *pszMaxDelayUni[] = { szMaxDelayUni, szCharLimits, "" };
 
 void    key_SetMaxDelayUni(void)
 {
-  key_SetChar(&flMaxDelayUni, pszMaxDelayUni, 10, 250);
+  key_SetChar(&chMaxDelayUni, pszMaxDelayUni, 10, 250);
 }

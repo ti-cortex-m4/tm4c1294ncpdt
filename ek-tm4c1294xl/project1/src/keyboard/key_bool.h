@@ -4,4 +4,4 @@ KEY_BOOL,H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetBool(file const  *pflFile, char const  *pszMessages[]);
+void    key_SetBool(cache const  *pch, char const  *pszMessages[]);
