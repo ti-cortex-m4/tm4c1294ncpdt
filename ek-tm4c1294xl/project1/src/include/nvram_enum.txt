@@ -48,5 +48,21 @@ typedef enum
   REPEAT_FLOW_INI       = MAX_DELAY_UNI + sizeof(bool) + bNVRAM_FOOTER,
   ENBL_PASS_INI         = REPEAT_FLOW_INI + sizeof(bool) + bNVRAM_FOOTER,
 
-  NVRAM_END             = ENBL_PASS_INI + sizeof(bool) + bNVRAM_FOOTER
+  ENBL_CURRENT          = ENBL_PASS_INI + sizeof(bool) + bNVRAM_FOOTER,
+  ENBL_PROFILE          = ENBL_CURRENT + sizeof(bool) + bNVRAM_FOOTER,
+  TIMEOUT_CURRENT       = ENBL_PROFILE + sizeof(bool) + bNVRAM_FOOTER,
+  TIMEOUT_PROFILE       = TIMEOUT_CURRENT + sizeof(bool) + bNVRAM_FOOTER,
+
+  DSBL_REFILL           = TIMEOUT_PROFILE + sizeof(bool) + bNVRAM_FOOTER,
+
+  FLOW_PORT_FROM        = DSBL_REFILL + sizeof(bool) + bNVRAM_FOOTER,
+  MAX_FLOW_DELAY        = FLOW_PORT_FROM + sizeof(bool) + bNVRAM_FOOTER,
+  FLOW_PORT_TO          = MAX_FLOW_DELAY + sizeof(bool) + bNVRAM_FOOTER,
+
+  PARAMS_FLAG           = FLOW_PORT_TO + sizeof(bool) + bNVRAM_FOOTER,
+  MNT_PARAMS            = PARAMS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+
+  CORRECT2_FLAG         = MNT_PARAMS + sizeof(bool) + bNVRAM_FOOTER,
+
+  NVRAM_END             = CORRECT2_FLAG + sizeof(bool) + bNVRAM_FOOTER
 } nvram;

@@ -82,12 +82,7 @@ typedef enum
   RECALC_HOU            = CTRL_HOU + 1,
   RECALC_ALWAYS         = RECALC_HOU + 1,
 
-  ENBL_CURRENT          = RECALC_ALWAYS + 1,
-  ENBL_PROFILE          = ENBL_CURRENT + 1,
-  TIMEOUT_CURRENT       = ENBL_PROFILE + 1,
-  TIMEOUT_PROFILE       = TIMEOUT_CURRENT + 1,
-
-  PHONES                = TIMEOUT_PROFILE + 1,
+  PHONES                = RECALC_ALWAYS + 1,
   MAX_CONNECT           = PHONES + sizeof(mpphPhones)/wFREEPAGE_SIZE + 1,
   CUSTOM_MODEM          = MAX_CONNECT + 1,
 
@@ -111,16 +106,7 @@ typedef enum
   STOP_CAN              = START_CAN + 1,
   STOP_AUX_CAN          = STOP_CAN + 1,
 
-  DSBL_REFILL           = STOP_AUX_CAN + 1,
-  ENBL_CURRENT2         = DSBL_REFILL + 1,
-
-  FLOW_PORT_FROM        = ENBL_CURRENT2 + 1,
-  MAX_FLOW_DELAY        = FLOW_PORT_FROM + 1,
-  FLOW_PORT_TO          = MAX_FLOW_DELAY + 1,
-
-  PARAMS_FLAG           = FLOW_PORT_TO + 1,
-  MNT_PARAMS            = PARAMS_FLAG + 1,
-  PARAMS                = MNT_PARAMS + 1,
+  PARAMS                = STOP_AUX_CAN + 1,
   PARAMS_DIV            = PARAMS + sizeof(mpdiParam)/wFREEPAGE_SIZE + 1,
   ENBL_PARAMS           = PARAMS_DIV + sizeof(mpreParamsDiv)/wFREEPAGE_SIZE + 1,
   FIX_PARAMS_BUGS       = ENBL_PARAMS + 1,
@@ -147,7 +133,6 @@ typedef enum
   SET_PASSWORD          = SET_GROUPS + 1,
 
   CORRECT1              = SET_PASSWORD + 1,
-  CORRECT2_FLAG         = CORRECT1 + sizeof(Correct1)/wFREEPAGE_SIZE + 1,
 
-  FLASH_END             = CORRECT2_FLAG + 1
+  FLASH_END             = CORRECT1 + sizeof(Correct1)/wFREEPAGE_SIZE + 1
 } flash;

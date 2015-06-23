@@ -19,5 +19,5 @@ static char const       *pszMessages[]  = { szMessage, "" };
 
 void    key_SetParamsFlag(void)
 {
-  key_SetBool(&flParamsFlag, pszMessages);
+  key_SetBool(&chParamsFlag, pszMessages);
 }

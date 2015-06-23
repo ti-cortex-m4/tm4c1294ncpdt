@@ -19,5 +19,5 @@ static char const       *pszMaxFlowDelay[] = { szMaxFlowDelay, szCharLimits, "" 
 
 void    key_SetMaxFlowDelay(void)
 {
-  key_SetChar(&flMaxFlowDelay, pszMaxFlowDelay, 1, 255);
+  key_SetChar(&chMaxFlowDelay, pszMaxFlowDelay, 1, 255);
 }

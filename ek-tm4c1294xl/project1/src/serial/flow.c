@@ -20,14 +20,14 @@ FLOW.C
 #include "../keyboard/keyboard.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../digitals/digitals_pause.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "flow.h"
 
 
 
-file const              flFlowPortFrom = {FLOW_PORT_FROM, &ibFlowPortFrom, sizeof(uchar)};
-file const              flMaxFlowDelay = {MAX_FLOW_DELAY, &cbMaxFlowDelay, sizeof(uchar)};
-file const              flFlowPortTo = {FLOW_PORT_TO, &ibFlowPortTo, sizeof(uchar)};
+cache const             chFlowPortFrom = {FLOW_PORT_FROM, &ibFlowPortFrom, sizeof(uchar)};
+cache const             chMaxFlowDelay = {MAX_FLOW_DELAY, &cbMaxFlowDelay, sizeof(uchar)};
+cache const             chFlowPortTo = {FLOW_PORT_TO, &ibFlowPortTo, sizeof(uchar)};
 
 
 
@@ -36,20 +36,20 @@ void    InitFlow(void)
   fFlow = 0;
   cbFlowDelay = 0;
 
-  LoadFile(&flFlowPortFrom);
+  LoadCache(&chFlowPortFrom);
   if ((ibFlowPortFrom != 0) && (ibFlowPortFrom != 1))
   {
   	ibFlowPortFrom = 0;
-    SaveFile(&flFlowPortFrom);
+    SaveCache(&chFlowPortFrom);
   }
 
-  LoadFile(&flMaxFlowDelay);
+  LoadCache(&chMaxFlowDelay);
 
-  LoadFile(&flFlowPortTo);
+  LoadCache(&chFlowPortTo);
   if ((ibFlowPortTo != 2+1) && (ibFlowPortTo != 3+1))
   {
     ibFlowPortTo = 2+1;
-    SaveFile(&flFlowPortTo);
+    SaveCache(&chFlowPortTo);
   }
 }
 
@@ -57,13 +57,13 @@ void    InitFlow(void)
 void    ResetFlow(void)
 {
   ibFlowPortFrom = 0;
-  SaveFile(&flFlowPortFrom);
+  SaveCache(&chFlowPortFrom);
 
   cbMaxFlowDelay = 10;
-  SaveFile(&flMaxFlowDelay);
+  SaveCache(&chMaxFlowDelay);
 
   ibFlowPortTo = 2+1;
-  SaveFile(&flFlowPortTo);
+  SaveCache(&chFlowPortTo);
 }
 
 

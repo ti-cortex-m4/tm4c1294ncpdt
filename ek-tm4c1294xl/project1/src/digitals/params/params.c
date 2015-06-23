@@ -7,6 +7,7 @@ PARAMS,C
 #include    "../../main.h"
 #include    "../../display/display.h"
 #include    "../../flash/files.h"
+#include    "../../nvram/cache.h"
 #include    "params.h"
 
 
@@ -25,8 +26,8 @@ param const             mppaParamsLines[bPARAM_BLOCK] =
 
 
 
-file const              flParamsFlag = {PARAMS_FLAG, &boParamsFlag, sizeof(bool)};
-file const              flMntParams = {MNT_PARAMS, &boMntParams, sizeof(bool)};
+cache const             chParamsFlag = {PARAMS_FLAG, &boParamsFlag, sizeof(bool)};
+cache const             chMntParams = {MNT_PARAMS, &boMntParams, sizeof(bool)};
 
 file const              flParams = {PARAMS, &mpdiParam, sizeof(mpdiParam)};
 file const              flParamsDiv = {PARAMS_DIV, &mpreParamsDiv, sizeof(mpreParamsDiv)};
@@ -39,8 +40,8 @@ file const              flUseParamsDiv = {USE_PARAMS_DIV, &boUseParamsDiv, sizeo
 
 void    InitParams(void)
 {
-  LoadFile(&flParamsFlag);
-  LoadFile(&flMntParams);
+  LoadCache(&chParamsFlag);
+  LoadCache(&chMntParams);
 
   LoadFile(&flParams);
   LoadFile(&flParamsDiv);
@@ -54,10 +55,10 @@ void    InitParams(void)
 void    ResetParams(void)
 {
   boParamsFlag = false;
-  SaveFile(&flParamsFlag);
+  SaveCache(&chParamsFlag);
 
   boMntParams = false;
-  SaveFile(&flMntParams);
+  SaveCache(&chMntParams);
 
   memset(&mpdiParam, 0, sizeof(mpdiParam));
   SaveFile(&flParams);

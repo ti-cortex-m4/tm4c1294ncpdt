@@ -4,9 +4,9 @@ FLOW.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flFlowPortFrom;
-extern  file const              flMaxFlowDelay;
-extern  file const              flFlowPortTo;
+extern  cache const             chFlowPortFrom;
+extern  cache const             chMaxFlowDelay;
+extern  cache const             chFlowPortTo;
 
 
 

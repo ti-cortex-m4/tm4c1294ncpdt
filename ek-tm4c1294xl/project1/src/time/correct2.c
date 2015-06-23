@@ -8,26 +8,26 @@ CORRECT2.C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_correct2.h"
 #include "../serial/ports.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "correct1.h"
 #include "correct2.h"
 
 
 
-file const              flCorrect2Flag = {CORRECT2_FLAG, &boCorrect2Flag, sizeof(bool)};
+cache const             chCorrect2Flag = {CORRECT2_FLAG, &boCorrect2Flag, sizeof(bool)};
 
 
 
 void    InitCorrect2(void)
 {
-  LoadFile(&flCorrect2Flag);
+  LoadCache(&chCorrect2Flag);
 }
 
 
 void    ResetCorrect2(void)
 {
   boCorrect2Flag = false;
-  SaveFile(&flCorrect2Flag);
+  SaveCache(&chCorrect2Flag);
 
   memset(&mpcwCorrect2, 0, sizeof(mpcwCorrect2));
   memset(&mpbPassCorrect2, 0, sizeof(mpbPassCorrect2));

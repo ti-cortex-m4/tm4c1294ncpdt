@@ -6,11 +6,11 @@ PROFILE_CORE.H
 
 extern  file const              flEnblCan;
 
-extern  file const              flEnblCurrent;
-extern  file const              flEnblProfile;
+extern  cache const             chEnblCurrent;
+extern  cache const             chEnblProfile;
 
-extern  file const              flTimeoutCurrent;
-extern  file const              flTimeoutProfile;
+extern  cache const             chTimeoutCurrent;
+extern  cache const             chTimeoutProfile;
 
 
 

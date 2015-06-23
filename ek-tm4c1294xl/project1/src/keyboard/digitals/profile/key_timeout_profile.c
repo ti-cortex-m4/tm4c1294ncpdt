@@ -36,7 +36,7 @@ void    key_SetTimeoutProfile(void)
       enKeyboard = KBD_POSTENTER;
 
       bTimeoutProfile = GetCharLo(6,8);
-      SaveFile(&flTimeoutProfile);
+      SaveFile(&chTimeoutProfile);
 
       ShowChar(bTimeoutProfile);
     }

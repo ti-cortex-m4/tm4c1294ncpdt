@@ -13,11 +13,11 @@ PROFILE_CORE.C
 
 file const              flEnblCan = {ENBL_CAN, &mpboEnblCan, sizeof(mpboEnblCan)};
 
-file const              flEnblCurrent = {ENBL_CURRENT, &boEnblCurrent, sizeof(bool)};
-file const              flEnblProfile = {ENBL_PROFILE, &boEnblProfile, sizeof(bool)};
+cache const             chEnblCurrent = {ENBL_CURRENT, &boEnblCurrent, sizeof(bool)};
+cache const             chEnblProfile = {ENBL_PROFILE, &boEnblProfile, sizeof(bool)};
 
-file const              flTimeoutCurrent = {TIMEOUT_CURRENT, &bTimeoutCurrent, sizeof(uchar)};
-file const              flTimeoutProfile = {TIMEOUT_PROFILE, &bTimeoutProfile, sizeof(uchar)};
+cache const             chTimeoutCurrent = {TIMEOUT_CURRENT, &bTimeoutCurrent, sizeof(uchar)};
+cache const             chTimeoutProfile = {TIMEOUT_PROFILE, &bTimeoutProfile, sizeof(uchar)};
 
 
 
@@ -25,11 +25,11 @@ void    InitProfile(void)
 {
   LoadFile(&flEnblCan);
 
-  LoadFile(&flEnblCurrent);
-  LoadFile(&flEnblProfile);
+  LoadCache(&chEnblCurrent);
+  LoadCache(&chEnblProfile);
 
-  LoadFile(&flTimeoutCurrent);
-  LoadFile(&flTimeoutProfile);
+  LoadCache(&chTimeoutCurrent);
+  LoadCache(&chTimeoutProfile);
 }
 
 
@@ -43,14 +43,14 @@ void    ResetProfile(void)
   SaveFile(&flEnblCan);
 
   boEnblCurrent = false;
-  SaveFile(&flEnblCurrent);
+  SaveCache(&chEnblCurrent);
 
   boEnblProfile = true;
-  SaveFile(&flEnblProfile);
+  SaveCache(&chEnblProfile);
 
   bTimeoutCurrent = 2;
-  SaveFile(&flTimeoutCurrent);
+  SaveCache(&chTimeoutCurrent);
 
   bTimeoutProfile = 60;
-  SaveFile(&flTimeoutProfile);
+  SaveCache(&chTimeoutProfile);
 }

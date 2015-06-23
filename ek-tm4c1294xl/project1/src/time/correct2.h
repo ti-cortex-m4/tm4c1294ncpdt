@@ -4,7 +4,7 @@ CORRECT2.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flCorrect2Flag;
+extern  cache const             chCorrect2Flag;
 
 
 

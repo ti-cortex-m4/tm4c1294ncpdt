@@ -23,9 +23,9 @@ static void ShowFlag(bool const  bo, char const  szTrue[], char const  szFalse[]
 
 
 
-void    key_SetFlag(file const  *pflFile, char const  *pszMessages[], char const  szTrue[], char const  szFalse[])
+void    key_SetFlag(cache const  *pch, char const  *pszMessages[], char const  szTrue[], char const  szFalse[])
 {
-  bool *pboValue = (bool *) pflFile->pbBuff;
+  bool *pboValue = (bool *) pch->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {
@@ -48,7 +48,7 @@ void    key_SetFlag(file const  *pflFile, char const  *pszMessages[], char const
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
         *pboValue = InvertBoolean(*pboValue);
-        SaveFile(pflFile);
+        SaveCache(pch);
 
         ShowFlag(*pboValue, szTrue, szFalse);
       }
