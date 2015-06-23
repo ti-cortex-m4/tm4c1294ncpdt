@@ -9,7 +9,7 @@ _FLOW.C
 #include "../keyboard.h"
 #include "../../display/display.h"
 #include "../../serial/flow.h"
-#include "../../flash/files.h"
+#include "../../nvram/cache.h"
 
 
 
@@ -84,7 +84,7 @@ void    key_FlowPortTo(void)
       {
         ibFlowPortTo = ibX;
 
-        SaveFile(&flFlowPortTo);
+        SaveCache(&chFlowPortTo);
         ShowChar(ibFlowPortTo);  
       }
       else 

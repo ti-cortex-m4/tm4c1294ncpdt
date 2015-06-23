@@ -36,7 +36,7 @@ void    key_SetTimeoutCurrent(void)
       enKeyboard = KBD_POSTENTER;
 
       bTimeoutCurrent = GetCharLo(6,8);
-      SaveFile(&flTimeoutCurrent);
+      SaveFile(&chTimeoutCurrent);
 
       ShowChar(bTimeoutCurrent);
     }

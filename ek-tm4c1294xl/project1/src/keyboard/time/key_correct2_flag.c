@@ -22,5 +22,5 @@ static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3,
 
 void    key_SetCorrect2Flag(void)
 {
-  key_SetBool(&flCorrect2Flag, pszMessages);
+  key_SetBool(&chCorrect2Flag, pszMessages);
 }

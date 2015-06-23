@@ -7,7 +7,7 @@ REFILL.H
 extern  bool                    boDsblRefill;
 
 
-extern  file const              flDsblRefill;
+extern  cache const             chDsblRefill;
 
 
 

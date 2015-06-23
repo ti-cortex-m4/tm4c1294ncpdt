@@ -12,8 +12,8 @@ extern  param const             mppaParamsLines[bPARAM_BLOCK];
 
 
 
-extern  file const              flParamsFlag;
-extern  file const              flMntParams;
+extern  cache const             chParamsFlag;
+extern  cache const             chMntParams;
 
 extern  file const              flParams;
 extern  file const              flParamsDiv;

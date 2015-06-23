@@ -15,7 +15,7 @@ REFILL.C
 #include "../../impulses/energy_spec.h"
 #include "../../time/decret.h"
 #include "../../flash/records.h"
-#include "../../flash/files.h"
+#include "../../nvram/cache.h"
 #include "refill.h"
 
 
@@ -30,20 +30,20 @@ static uint             iwBmin, iwBmax;
 static uchar            bRefillWinter, mpbRefillWinter[10];
 
 
-file const              flDsblRefill = {DSBL_REFILL, &boDsblRefill, sizeof(bool)};
+cache const             chDsblRefill = {DSBL_REFILL, &boDsblRefill, sizeof(bool)};
 
 
 
 void    InitRefill(void)
 {
-  LoadFile(&flDsblRefill);
+  LoadCache(&chDsblRefill);
 }
 
 
 void    ResetRefill(void)
 {
-	boDsblRefill = false;
-  SaveFile(&flDsblRefill);
+  boDsblRefill = false;
+  SaveCache(&chDsblRefill);
 }
 
 

@@ -22,5 +22,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 void    key_SetMntParams(void)
 {
-  key_SetFlag(&flMntParams, pszMessages, szTrue, szFalse);
+  key_SetFlag(&chMntParams, pszMessages, szTrue, szFalse);
 }
