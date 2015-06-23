@@ -23,7 +23,7 @@ KEYBOARD_KEY.C
 #include "digitals/key_enbl_canals.h"
 #include "digitals/current/key_enbl_current.h"
 #include "digitals/profile/key_enbl_profile.h"
-#include "digitals/key_timeout_current.h"
+#include "digitals/current/key_timeout_current.h"
 #include "digitals/profile/key_timeout_profile.h"
 #include "digitals/key_addresses.h"
 #include "digitals/key_enbl_keys.h"
