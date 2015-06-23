@@ -9,7 +9,7 @@ extern  file const              flEnblPrtHou;
 extern  file const              flCtrlHou;
 
 extern  file const              flRecalcHou;
-extern  file const              flRecalcAlways;
+extern  cache const             chRecalcAlways;
 
 
 

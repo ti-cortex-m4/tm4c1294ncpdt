@@ -21,5 +21,5 @@ static char const       *pszMaxRepeats[]   = { szMaxRepeats1, szMaxRepeats2, szC
 
 void    key_SetMaxRepeats(void)
 {
-  key_SetChar(&flMaxRepeats, pszMaxRepeats, 1, 20);
+  key_SetChar(&chMaxRepeats, pszMaxRepeats, 1, 20);
 }
