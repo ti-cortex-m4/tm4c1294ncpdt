@@ -22,5 +22,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 void    key_SetFixParamsBugs(void)
 {
-  key_SetBool(&flFixParamsBugs, pszMessages);
+  key_SetBool(&chFixParamsBugs, pszMessages);
 }

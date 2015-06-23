@@ -9,7 +9,7 @@ KEY_TIMEOUT_PROFILE.C
 #include "../../keyboard.h"
 #include "../../../display/display.h"
 #include "../../../digitals/profile/profile_core.h"
-#include "../../../flash/files.h"
+#include "../../../nvram/cache.h"
 
 
 
@@ -36,7 +36,7 @@ void    key_SetTimeoutProfile(void)
       enKeyboard = KBD_POSTENTER;
 
       bTimeoutProfile = GetCharLo(6,8);
-      SaveFile(&chTimeoutProfile);
+      SaveCache(&chTimeoutProfile);
 
       ShowChar(bTimeoutProfile);
     }

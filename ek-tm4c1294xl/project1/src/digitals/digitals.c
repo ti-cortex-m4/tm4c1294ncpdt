@@ -16,7 +16,7 @@ DIGITALS.C
 
 cache const             chDigitals = {DIGITALS, &mpdiDigital, sizeof(mpdiDigital)};
 
-file const              flEnblKeys = {ENBL_KEYS, &boEnblKeys, sizeof(bool)};
+cache const             chEnblKeys = {ENBL_KEYS, &boEnblKeys, sizeof(bool)};
 file const              flKeys = {KEYS, &mpphKeys, sizeof(mpphKeys)};
 
 file const              flAddress1 = {ADDRESS1, &mpdwAddress1, sizeof(mpdwAddress1)};
@@ -29,7 +29,7 @@ void    InitDigitals(void)
   LoadCache(&chDigitals);
   MakeDigitalsMask();
 
-  LoadFile(&flEnblKeys);
+  LoadCache(&chEnblKeys);
 
   LoadFile(&flKeys);
 
@@ -44,7 +44,7 @@ void    ResetDigitals(void)
   SaveCache(&chDigitals);
 
   boEnblKeys = false;
-  SaveFile(&flEnblKeys);
+  SaveCache(&chEnblKeys);
 
 
   memset(&mpphKeys, 0, sizeof(mpphKeys));

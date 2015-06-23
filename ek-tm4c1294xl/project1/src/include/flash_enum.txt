@@ -22,12 +22,10 @@ typedef enum
   PERIOD_POW            = ZONES_ENG + 12*bMODES,
   PERIOD_ENG            = PERIOD_POW + 1,
 
-  RELAXS_FLAG           = PERIOD_ENG + 1,
-  RELAXS_TARIFF         = RELAXS_FLAG + 1,
+  RELAXS_TARIFF         = PERIOD_ENG + 1,
   RELAXS                = RELAXS_TARIFF + 1,
 
-  GAPS_FLAG             = RELAXS + sizeof(relaxs)/wFREEPAGE_SIZE + 1,
-  GAPS                  = GAPS_FLAG + 1,
+  GAPS                  = RELAXS + sizeof(relaxs)/wFREEPAGE_SIZE + 1,
 
   DECRET                = GAPS + sizeof(gaps)/wFREEPAGE_SIZE + 1,
   SUMMER                = DECRET + 1,
@@ -86,8 +84,7 @@ typedef enum
   MAX_CONNECT           = PHONES + sizeof(mpphPhones)/wFREEPAGE_SIZE + 1,
   CUSTOM_MODEM          = MAX_CONNECT + 1,
 
-  ENBL_KEYS             = CUSTOM_MODEM + 1,
-  KEYS                  = ENBL_KEYS + 1,
+  KEYS                  = CUSTOM_MODEM + 1,
 
   ADDRESS1              = KEYS + sizeof(mpphKeys)/wFREEPAGE_SIZE + 1,
   ADDRESS2              = ADDRESS1 + sizeof(mpdwAddress1)/wFREEPAGE_SIZE + 1,
@@ -109,10 +106,8 @@ typedef enum
   PARAMS                = STOP_AUX_CAN + 1,
   PARAMS_DIV            = PARAMS + sizeof(mpdiParam)/wFREEPAGE_SIZE + 1,
   ENBL_PARAMS           = PARAMS_DIV + sizeof(mpreParamsDiv)/wFREEPAGE_SIZE + 1,
-  FIX_PARAMS_BUGS       = ENBL_PARAMS + 1,
-  USE_PARAMS_DIV        = FIX_PARAMS_BUGS + 1,
 
-  PARAMS_VALUES         = USE_PARAMS_DIV + 1,
+  PARAMS_VALUES         = ENBL_PARAMS + 1,
 
   KEYS_LEVEL_B          = PARAMS_VALUES + PARAMS_PAGES*wTIMES,
   SHORT_PROFILE_C       = KEYS_LEVEL_B + 1,

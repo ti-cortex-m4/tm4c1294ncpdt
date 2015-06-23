@@ -22,5 +22,5 @@ static char const       *pszMessages[]    = { szMessage1, szMessage2, szMessage3
 
 void    key_SetUseParamsDiv(void)
 {
-  key_SetBool(&flUseParamsDiv, pszMessages);
+  key_SetBool(&chUseParamsDiv, pszMessages);
 }

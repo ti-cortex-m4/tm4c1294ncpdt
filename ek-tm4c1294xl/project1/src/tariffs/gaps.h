@@ -4,7 +4,7 @@ GAPS.H
  Тарифные периоды: Отчет №66 от 17_08_2010
 ------------------------------------------------------------------------------*/
 
-extern  file const              flGapsFlag;
+extern  cache const             chGapsFlag;
 extern  file const              flGaps;
 
 

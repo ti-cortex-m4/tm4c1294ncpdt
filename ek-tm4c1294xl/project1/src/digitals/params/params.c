@@ -33,8 +33,8 @@ file const              flParams = {PARAMS, &mpdiParam, sizeof(mpdiParam)};
 file const              flParamsDiv = {PARAMS_DIV, &mpreParamsDiv, sizeof(mpreParamsDiv)};
 file const              flEnblParams = {ENBL_PARAMS, &mpboEnblParams, sizeof(mpboEnblParams)};
 
-file const              flFixParamsBugs = {FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(bool)};
-file const              flUseParamsDiv = {USE_PARAMS_DIV, &boUseParamsDiv, sizeof(bool)};
+cache const             chFixParamsBugs = {FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(bool)};
+cache const             chUseParamsDiv = {USE_PARAMS_DIV, &boUseParamsDiv, sizeof(bool)};
 
 
 
@@ -47,8 +47,8 @@ void    InitParams(void)
   LoadFile(&flParamsDiv);
   LoadFile(&flEnblParams);
 
-  LoadFile(&flFixParamsBugs);
-  LoadFile(&flUseParamsDiv);
+  LoadCache(&chFixParamsBugs);
+  LoadCache(&chUseParamsDiv);
 }
 
 
@@ -76,10 +76,10 @@ void    ResetParams(void)
 
 
   boFixParamsBugs = false;
-  SaveFile(&flFixParamsBugs);
+  SaveCache(&chFixParamsBugs);
 
   boUseParamsDiv = false;
-  SaveFile(&flUseParamsDiv);
+  SaveCache(&chUseParamsDiv);
 }
 
 
