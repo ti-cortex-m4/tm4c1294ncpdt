@@ -5,25 +5,25 @@ MAX_REPEATS.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
+#include "max_repeats.h"
 
 
 
 // количество повторов при ошибках обмена со счетчиками
 uchar                   bMaxRepeats;
 
-file const              flMaxRepeats = {MAX_REPEATS, &bMaxRepeats, sizeof(uchar)};
+cache const             chMaxRepeats = {MAX_REPEATS, &bMaxRepeats, sizeof(uchar)};
 
 
 
 void    InitMaxRepeats(void) 
 {
-  LoadFile(&flMaxRepeats);
-
+  LoadCache(&chMaxRepeats);
   if ((bMaxRepeats <= 0) || (bMaxRepeats > 20))
   {
     bMaxRepeats = bMINORREPEATS;
-    SaveFile(&flMaxRepeats);
+    SaveCache(&chMaxRepeats);
   }
 }
 
@@ -31,7 +31,7 @@ void    InitMaxRepeats(void)
 void    ResetMaxRepeats(void)
 {
   bMaxRepeats = bMINORREPEATS;
-  SaveFile(&flMaxRepeats);
+  SaveCache(&chMaxRepeats);
 }
 
 

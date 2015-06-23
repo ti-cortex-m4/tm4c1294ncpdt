@@ -78,9 +78,8 @@ typedef enum
   ENBL_PRT_HOU          = ENBL_CAN + 1,
   CTRL_HOU              = ENBL_PRT_HOU + 1,
   RECALC_HOU            = CTRL_HOU + 1,
-  RECALC_ALWAYS         = RECALC_HOU + 1,
 
-  PHONES                = RECALC_ALWAYS + 1,
+  PHONES                = RECALC_HOU + 1,
   MAX_CONNECT           = PHONES + sizeof(mpphPhones)/wFREEPAGE_SIZE + 1,
   CUSTOM_MODEM          = MAX_CONNECT + 1,
 
@@ -89,14 +88,11 @@ typedef enum
   ADDRESS1              = KEYS + sizeof(mpphKeys)/wFREEPAGE_SIZE + 1,
   ADDRESS2              = ADDRESS1 + sizeof(mpdwAddress1)/wFREEPAGE_SIZE + 1,
 
-  MAX_REPEATS           = ADDRESS2 + sizeof(mpdwAddress2)/wFREEPAGE_SIZE + 1,
-
-  OBJECT_NAME           = MAX_REPEATS + 1,
+  OBJECT_NAME           = ADDRESS2 + sizeof(mpdwAddress2)/wFREEPAGE_SIZE + 1,
   CANALS_NAME           = OBJECT_NAME + 1,
   GROUPS_NAME           = CANALS_NAME + sizeof(mpszCanalsName)/wFREEPAGE_SIZE + 1,
 
-  USE_BOUNDS            = GROUPS_NAME + sizeof(mpszGroupsName)/wFREEPAGE_SIZE + 1,
-  START_REL_CAN         = USE_BOUNDS + 1,
+  START_REL_CAN         = GROUPS_NAME + sizeof(mpszGroupsName)/wFREEPAGE_SIZE + 1,
   START_ABS16_CAN       = START_REL_CAN + 1,
   START_ABS32_CAN       = START_ABS16_CAN + 1,
   START_CAN             = START_ABS32_CAN + 1,
