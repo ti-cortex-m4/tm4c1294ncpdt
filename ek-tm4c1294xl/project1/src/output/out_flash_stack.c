@@ -26,7 +26,7 @@ void    OutFlashStack(void)
   PUSH_ENUM(FLASH_END)
   PUSH_ENUM(wPAGES)
   PUSH_ENUM(wPAGE_BYTES)
-  PUSH_ENUM(wFREE_BYTES)
+  PUSH_ENUM(wLEAF_BYTES)
 
   PushChar(0x0D); PushChar(0x0A);
 
