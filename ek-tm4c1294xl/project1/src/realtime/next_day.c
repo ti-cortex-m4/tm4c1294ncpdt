@@ -12,7 +12,7 @@ NEXT_DAY.C
 #include "../tariffs/tariffs.h"
 #include "../energy.h"
 #include "../energy2.h"
-#include "../energy3.h"
+#include "../kernel/arrays_buff.h"
 #include "../digitals/answer.h"
 #include "../digitals/extended/extended_4.h"
 #include "../digitals/extended/extended_5.h"

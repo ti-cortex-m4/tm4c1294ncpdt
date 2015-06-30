@@ -12,7 +12,7 @@ NEXT_MINUTE30.C
 #include "../digitals/profile/profile.h"
 #include "../digitals/limits.h"
 #include "../energy2.h"
-#include "../energy3.h"
+#include "../kernel/arrays_buff.h"
 #include "next_params_time.h"
 #include "realtime_storage.h"
 
