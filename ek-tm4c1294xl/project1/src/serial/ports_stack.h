@@ -20,7 +20,7 @@ uchar   PushDouble(double  db);
 uchar   PushFloatOrDouble(double  db, bool  fDouble);
 uchar   PushTime(time  ti);
 void    PushString(char  *psz);
-void    PushIntAsString(uint  wT);
+void    PushLongAsString(ulong  dw);
 void    PushBuffInt(uint  *pwData, uint  wSize);
 void    PushBuffLong(ulong  *pdwData, uint  wSize);
 void    PushCharHex2Txt(uchar  bT);

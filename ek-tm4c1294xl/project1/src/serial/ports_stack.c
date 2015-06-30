@@ -198,13 +198,14 @@ void    PushBuffLong(ulong  *pdwData, uint  wSize)
 
 
 
-void    PushIntAsString(uint  wT)
+void    PushLongAsString(ulong  dw)
 {
-	PushChar(szHex[(wT % 100000) / 10000]);
-	PushChar(szHex[(wT % 10000) / 1000]);
-	PushChar(szHex[(wT % 1000) / 100]);
-	PushChar(szHex[(wT % 100) / 10]);
-	PushChar(szHex[wT % 10]);
+  PushChar(szHex[(dw % 1000000) / 100000]);
+  PushChar(szHex[(dw % 100000) / 10000]);
+  PushChar(szHex[(dw % 10000) / 1000]);
+  PushChar(szHex[(dw % 1000) / 100]);
+  PushChar(szHex[(dw % 100) / 10]);
+  PushChar(szHex[dw % 10]);
 }
 
 
