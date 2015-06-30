@@ -9,9 +9,9 @@ TUPLE,C
 
 
 
-tuple2  GetTuple2(uint  w1,  uint  w2)
+tuple2uint  GetTuple2(uint  w1,  uint  w2)
 {
-  tuple2 tp2;
+  tuple2uint tp2;
   tp2.w1 = w1;
   tp2.w2 = w2;
   return tp2;

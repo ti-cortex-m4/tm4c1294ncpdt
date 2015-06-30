@@ -4,4 +4,4 @@ TUPLE,H
 
 ------------------------------------------------------------------------------*/
 
-tuple2  GetTuple2(uint  w1,  uint  w2);
+tuple2uint  GetTuple2(uint  w1,  uint  w2);

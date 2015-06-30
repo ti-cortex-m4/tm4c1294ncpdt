@@ -74,7 +74,15 @@ typedef struct
 {
   uint          w1;
   uint          w2;
-} tuple2;
+} tuple2uint;
+
+
+//
+typedef struct
+{
+  time          ti1;
+  time          ti2;
+} tuple2time;
 
 
 #endif

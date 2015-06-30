@@ -13,17 +13,17 @@ REALTIME_STORAGE.C
 
 bool    SavePointersMnt(void)
 {
-  tuple2 tp2 = GetTuple2(ibSoftMnt, iwHardMnt);
-  return WriteNvramBuff(PTR_MNT, (uchar *) &tp2, sizeof(tuple2));
+  tuple2uint tp = GetTuple2(ibSoftMnt, iwHardMnt);
+  return WriteNvramBuff(PTR_MNT, (uchar *) &tp, sizeof(tuple2uint));
 }
 
 
 bool    LoadPointersMnt(void)
 {
-  tuple2 tp2;
-  bool f = ReadNvramBuff(PTR_MNT, (uchar *) &tp2, sizeof(tuple2));
-  ibSoftMnt = tp2.w1;
-  iwHardMnt = tp2.w2;
+  tuple2uint tp;
+  bool f = ReadNvramBuff(PTR_MNT, (uchar *) &tp, sizeof(tuple2uint));
+  ibSoftMnt = tp.w1;
+  iwHardMnt = tp.w2;
   return f;
 }
 
@@ -31,17 +31,17 @@ bool    LoadPointersMnt(void)
 
 bool    SavePointersHou(void)
 {
-  tuple2 tp2 = GetTuple2(ibSoftHou, iwHardHou);
-  return WriteNvramBuff(PTR_HHR, (uchar *) &tp2, sizeof(tuple2));
+  tuple2uint tp = GetTuple2(ibSoftHou, iwHardHou);
+  return WriteNvramBuff(PTR_HHR, (uchar *) &tp, sizeof(tuple2uint));
 }
 
 
 bool    LoadPointersHou(void)
 {
-  tuple2 tp2;
-  bool f = ReadNvramBuff(PTR_HHR, (uchar *) &tp2, sizeof(tuple2));
-  ibSoftHou = tp2.w1;
-  iwHardHou = tp2.w2;
+  tuple2uint tp;
+  bool f = ReadNvramBuff(PTR_HHR, (uchar *) &tp, sizeof(tuple2uint));
+  ibSoftHou = tp.w1;
+  iwHardHou = tp.w2;
   return f;
 }
 
@@ -49,17 +49,17 @@ bool    LoadPointersHou(void)
 
 bool    SavePointersDay(void)
 {
-  tuple2 tp2 = GetTuple2(ibSoftDay, ibHardDay);
-  return WriteNvramBuff(PTR_DAY, (uchar *) &tp2, sizeof(tuple2));
+  tuple2uint tp = GetTuple2(ibSoftDay, ibHardDay);
+  return WriteNvramBuff(PTR_DAY, (uchar *) &tp, sizeof(tuple2uint));
 }
 
 
 bool    LoadPointersDay(void)
 {
-  tuple2 tp2;
-  bool f = ReadNvramBuff(PTR_DAY, (uchar *) &tp2, sizeof(tuple2));
-  ibSoftDay = tp2.w1;
-  ibHardDay = tp2.w2;
+  tuple2uint tp;
+  bool f = ReadNvramBuff(PTR_DAY, (uchar *) &tp, sizeof(tuple2uint));
+  ibSoftDay = tp.w1;
+  ibHardDay = tp.w2;
   return f;
 }
 
@@ -67,17 +67,17 @@ bool    LoadPointersDay(void)
 
 bool    SavePointersMon(void)
 {
-  tuple2 tp2 = GetTuple2(ibSoftMon, ibHardMon);
-  return WriteNvramBuff(PTR_MON, (uchar *) &tp2, sizeof(tuple2));
+  tuple2uint tp = GetTuple2(ibSoftMon, ibHardMon);
+  return WriteNvramBuff(PTR_MON, (uchar *) &tp, sizeof(tuple2uint));
 }
 
 
 bool    LoadPointersMon(void)
 {
-  tuple2 tp2;
-  bool f = ReadNvramBuff(PTR_MON, (uchar *) &tp2, sizeof(tuple2));
-  ibSoftMon = tp2.w1;
-  ibHardMon = tp2.w2;
+  tuple2uint tp;
+  bool f = ReadNvramBuff(PTR_MON, (uchar *) &tp, sizeof(tuple2uint));
+  ibSoftMon = tp.w1;
+  ibHardMon = tp.w2;
   return f;
 }
 
@@ -85,17 +85,17 @@ bool    LoadPointersMon(void)
 
 bool    SavePointersTim(void)
 {
-  tuple2 tp2 = GetTuple2(ibSoftTim, iwHardTim);
-  return WriteNvramBuff(PTR_TIM, (uchar *) &tp2, sizeof(tuple2));
+  tuple2uint tp = GetTuple2(ibSoftTim, iwHardTim);
+  return WriteNvramBuff(PTR_TIM, (uchar *) &tp, sizeof(tuple2uint));
 }
 
 
 bool    LoadPointersTim(void)
 {
-  tuple2 tp2;
-  bool f = ReadNvramBuff(PTR_TIM, (uchar *) &tp2, sizeof(tuple2));
-  ibSoftTim = tp2.w1;
-  iwHardTim = tp2.w2;
+  tuple2uint tp;
+  bool f = ReadNvramBuff(PTR_TIM, (uchar *) &tp, sizeof(tuple2uint));
+  ibSoftTim = tp.w1;
+  iwHardTim = tp.w2;
   return f;
 }
 
