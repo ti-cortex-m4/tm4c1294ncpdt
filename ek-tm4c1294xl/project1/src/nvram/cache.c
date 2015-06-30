@@ -29,6 +29,12 @@ bool    SaveArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX, void  *pBuff)
 }
 
 
+bool    FreeArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX)
+{
+  return FreeNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX, wSizeX);
+}
+
+
 bool    LoadArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX, void  *pBuff)
 {
   return ReadNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX, (uchar *)pBuff, wSizeX);

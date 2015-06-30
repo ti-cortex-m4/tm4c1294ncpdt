@@ -18,7 +18,7 @@ bool    SaveImpHouBuff(void) {
 }
 
 bool    CleanImpHouBuff(void) {
-  return CleanNvramBuff(IMPHOUCAN_BUFF, sizeof(uint)*bCANALS);
+  return FreeNvramBuff(IMPHOUCAN_BUFF, sizeof(uint)*bCANALS);
 }
 
 bool    LoadImpHouBuff(void) {
@@ -32,7 +32,7 @@ bool    SaveImpDayBuff(void) {
 }
 
 bool    CleanImpDayBuff(void) {
-  return CleanNvramBuff(IMPDAYCAN_BUFF, sizeof(impulse)*bCANALS);
+  return FreeNvramBuff(IMPDAYCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 bool    LoadImpDayBuff(void) {
@@ -46,7 +46,7 @@ bool    SaveImpMonBuff(void) {
 }
 
 bool    CleanImpMonBuff(void) {
-  return CleanNvramBuff(IMPMONCAN_BUFF, sizeof(impulse)*bCANALS);
+  return FreeNvramBuff(IMPMONCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 bool    LoadImpMonBuff(void) {
@@ -60,7 +60,7 @@ bool    SaveImpAbsBuff(void) {
 }
 
 bool    CleanImpAbsBuff(void) {
-  return CleanNvramBuff(IMPABSCAN_BUFF, sizeof(impulse)*bCANALS);
+  return FreeNvramBuff(IMPABSCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 bool    LoadImpAbsBuff(void) {
@@ -74,7 +74,7 @@ bool    SavePowDayBuff(void) {
 }
 
 bool    CleanPowDayBuff(void) {
-  return CleanNvramBuff(POWDAYGRP_BUFF, sizeof(power)*bGROUPS);
+  return FreeNvramBuff(POWDAYGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
 bool    LoadPowDayBuff(void) {
@@ -88,7 +88,7 @@ bool    SavePowMonBuff(void) {
 }
 
 bool    CleanPowMonBuff(void) {
-  return CleanNvramBuff(POWMONGRP_BUFF, sizeof(power)*bGROUPS);
+  return FreeNvramBuff(POWMONGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
 bool    LoadPowMonBuff(void) {
@@ -102,7 +102,7 @@ bool    SaveCntMonBuff(void) {
 }
 
 bool    CleanCntMonBuff(void) {
-  return CleanNvramBuff(CNTMONCAN_BUFF, sizeof(double)*bCANALS);
+  return FreeNvramBuff(CNTMONCAN_BUFF, sizeof(double)*bCANALS);
 }
 
 bool    LoadCntMonBuff(void) {

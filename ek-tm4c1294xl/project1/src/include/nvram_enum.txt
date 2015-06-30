@@ -12,7 +12,9 @@ typedef enum
   PTR_MON               = PTR_DAY + sizeof(tuple2) + bNVRAM_FOOTER,
   PTR_TIM               = PTR_MON + sizeof(tuple2) + bNVRAM_FOOTER,
 
-  IMPHOUCAN_BUFF        = PTR_TIM + sizeof(tuple2) + bNVRAM_FOOTER,
+  IMPMNTCAN             = PTR_TIM + sizeof(tuple2) + bNVRAM_FOOTER,
+
+  IMPHOUCAN_BUFF        = IMPMNTCAN + (sizeof(uint)*bCANALS + bNVRAM_FOOTER)*bMINUTES,
   IMPDAYCAN_BUFF        = IMPHOUCAN_BUFF + sizeof(uint)*bCANALS + bNVRAM_FOOTER,
   IMPMONCAN_BUFF        = IMPDAYCAN_BUFF + sizeof(impulse)*bCANALS + bNVRAM_FOOTER,
   IMPABSCAN_BUFF        = IMPMONCAN_BUFF + sizeof(impulse)*bCANALS + bNVRAM_FOOTER,

@@ -20,7 +20,7 @@ NEXT_MINUTE3.C
 static void PrepareImpulses(void)
 {
   memcpy(&mpwImpMntCanCurr, &mpwImpMntCan[ibSoftMnt], sizeof(uint)*bCANALS);
-  SaveImpMnt(0,iwHardMnt,ibSoftMnt);
+  SaveImpMnt(iwHardMnt,ibSoftMnt);
 
   if (++iwHardMnt >= bMINUTES) iwHardMnt = 0;
   if (++ibSoftMnt >= 2)        ibSoftMnt = 0;

@@ -176,7 +176,7 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 }
 
 
-bool    CleanNvramBuff(ulong  dwAddr, uint  wSize)
+bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
 {
   Start();
 
