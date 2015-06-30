@@ -24,7 +24,7 @@ NEXT_MONTH.C
 
 void    NextMonth(void)
 {
-  cwMonths++;
+  Realtime1.cwMonths++;
 
   NextMonTariffs();
 

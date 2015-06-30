@@ -12,7 +12,7 @@ NEXT_YEAR.C
 
 void    NextYear(void)
 {
-  cwYears++;
+  Realtime1.cwYears++;
 
   MakeDecret();
 }

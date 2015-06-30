@@ -18,7 +18,7 @@ NEXT_SECOND.C
 
 void    NextSecond(void)
 {
-  cdwSeconds++;
+  Realtime1.cdwSeconds++;
 
   if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
   {

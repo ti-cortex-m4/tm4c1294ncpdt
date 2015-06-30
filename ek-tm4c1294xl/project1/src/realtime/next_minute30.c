@@ -20,7 +20,7 @@ NEXT_MINUTE30.C
 
 void    NextMinute30(void)
 {
-  cdwMinutes30++;
+  Realtime1.cdwMinutes30++;
 
   MakeMaxPowAll();
 

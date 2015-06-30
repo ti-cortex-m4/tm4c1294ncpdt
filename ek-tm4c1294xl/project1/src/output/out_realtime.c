@@ -41,13 +41,13 @@ void    OutRealtime(void)
   wSize += PushInt(ibSoftTim);
   wSize += PushInt(iwHardTim);
 
-  wSize += PushLong(cdwSeconds);
-  wSize += PushLong(cdwMinutes1);
-  wSize += PushLong(cdwMinutes3);
-  wSize += PushLong(cdwMinutes30);
-  wSize += PushInt(cwDays);
-  wSize += PushInt(cwMonths);
-  wSize += PushInt(cwYears);
+  wSize += PushLong(Realtime1.cdwSeconds);
+  wSize += PushLong(Realtime1.cdwMinutes1);
+  wSize += PushLong(Realtime1.cdwMinutes3);
+  wSize += PushLong(Realtime1.cdwMinutes30);
+  wSize += PushInt(Realtime1.cwDays);
+  wSize += PushInt(Realtime1.cwMonths);
+  wSize += PushInt(Realtime1.cwYears);
 
   Output(wSize);
 }

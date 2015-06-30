@@ -4,6 +4,23 @@ MEM_REALTIME.H
 
 ------------------------------------------------------------------------------*/
 
+#ifndef __MEM_REALTIME
+#define __MEM_REALTIME
+
+
+// счётчики отработанных временных интервалов
+typedef struct
+{
+  ulong         cdwSeconds;
+  ulong         cdwMinutes1;
+  ulong         cdwMinutes3;
+  ulong         cdwMinutes30;
+  uint          cwDays;
+  uint          cwMonths;
+  uint          cwYears;
+} realtime1;
+
+
 extern  time                    tiCurr, tiPrev;
 
 extern  uchar                   ibSoftMnt,
@@ -18,10 +35,12 @@ extern  uchar                   cbShowCurrentTime;
 
 
 
-extern  ulong                   cdwSeconds, cdwMinutes1, cdwMinutes3, cdwMinutes30;
-
-extern  uint                    cwDays, cwMonths, cwYears;
+extern  realtime1               Realtime1;
 
 
 
 extern  uchar                   bHouInc;
+
+
+#endif
+

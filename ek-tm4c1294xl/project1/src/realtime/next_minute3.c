@@ -33,7 +33,7 @@ static void PrepareImpulses(void)
 
 void    NextMinute3(void)
 {
-  cdwMinutes3++;
+  Realtime1.cdwMinutes3++;
 
   DisableImpulses();
   PrepareImpulses();
@@ -54,7 +54,7 @@ void    NextMinute3(void)
 
 void    NextMinute3Spec(void)
 {
-  cdwMinutes3++;
+  Realtime1.cdwMinutes3++;
 
   DisableImpulses();
   PrepareImpulses();
