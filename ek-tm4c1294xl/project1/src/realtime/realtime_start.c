@@ -13,7 +13,7 @@ REALTIME_START.C
 #include "../time/rtc.h"
 #include "../impulses/impulses.h"
 #include "../energy.h"
-#include "../energy3.h"
+#include "../kernel/arrays_buff.h"
 #include "../digitals/digitals.h"
 #include "../digitals/profile/profile.h"
 #include "realtime_storage.h"

@@ -9,7 +9,7 @@ NEXT_MINUTE3.C
 #include "../memory/mem_energy.h"
 #include "../memory/mem_params.h"
 #include "../energy.h"
-#include "../energy3.h"
+#include "../kernel/arrays_buff.h"
 #include "../impulses/impulses.h"
 #include "next_params_time.h"
 #include "realtime_storage.h"

@@ -12,7 +12,7 @@ STORAGE.C
 #include "../hardware/watchdog.h"
 #include "../flash/at45.h"
 #include "../energy2.h"
-#include "../energy3.h"
+#include "../kernel/arrays_buff.h"
 #include "../display/display.h"
 #include "../time/delay.h"
 #include "../time/calendar.h"
