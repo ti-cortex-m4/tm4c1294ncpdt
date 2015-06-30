@@ -10,6 +10,7 @@ OUT_SCHEDULE.C
 #include "../../serial/ports.h"
 #include "../../digitals/schedule/schedule.h"
 #include "../../flash/files.h"
+#include "../../nvram/cache.h"
 
 
 
@@ -80,7 +81,7 @@ void    OutSetRecalcHou1(void)
   InitPop(6);
 
   boRecalcAlways = CharToBoolean(PopChar());
-  SaveFile(&flRecalcAlways);
+  SaveCache(&chRecalcAlways);
 
   uchar i;
   for (i=0; i<48; i++)

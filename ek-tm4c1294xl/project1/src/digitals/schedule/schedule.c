@@ -7,6 +7,7 @@ SCHEDULE.C
 #include    "../../main.h"
 #include    "../../memory/mem_schedule.h"
 #include    "../../flash/files.h"
+#include    "../../nvram/cache.h"
 #include    "enbl_hours.h"
 #include    "schedule.h"
 
@@ -17,7 +18,7 @@ file const              flEnblPrtHou = {ENBL_PRT_HOU, &mpboEnblPrtHou, sizeof(mp
 file const              flCtrlHou = {CTRL_HOU, &mpboCtrlHou, sizeof(mpboCtrlHou)};
 
 file const              flRecalcHou = {RECALC_HOU, &mpboRecalcHou, sizeof(mpboRecalcHou)};
-file const              flRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(bool)};
+cache const             chRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(bool)};
 
 
 
@@ -28,7 +29,7 @@ void    InitSchedule(void)
   LoadFile(&flCtrlHou);
 
   LoadFile(&flRecalcHou);
-  LoadFile(&flRecalcAlways);
+  LoadCache(&chRecalcAlways);
 }
 
 
@@ -60,5 +61,5 @@ void    ResetSchedule(void)
 
 
    boRecalcAlways = true;
-   SaveFile(&flRecalcAlways);
+   SaveCache(&chRecalcAlways);
 }
