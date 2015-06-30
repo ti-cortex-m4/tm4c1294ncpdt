@@ -34,6 +34,6 @@ void    Common(void  *pbData, uint  wSize);
 #ifndef __PORTS
 #define __PORTS
 
-#define PUSH_ENUM(value) PushString(#value); PushString("="); PushIntAsString(value); PushChar(0x0D); PushChar(0x0A);
+#define PUSH_ENUM(value) PushString(#value); PushString("="); PushLongAsString(value); PushChar(0x0D); PushChar(0x0A);
 
 #endif
