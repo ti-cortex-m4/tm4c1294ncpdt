@@ -17,8 +17,8 @@ uint                    wPageIn, wPageOut,
 uchar                   bStatusFlash;
 
 // буфера читаемых/записываемых страниц флэш-памяти
-uchar                   mpbPageIn[wPAGE_SIZE],
-                        mpbPageOut[wPAGE_SIZE];
+uchar                   mpbPageIn[wPAGE_BYTES],
+                        mpbPageOut[wPAGE_BYTES];
 
 // счётчики для контроля состояния флэш-памяти
 uint                    cwWrnBusy,

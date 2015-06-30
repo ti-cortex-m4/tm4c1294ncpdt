@@ -27,7 +27,7 @@ bool SaveImpHou(bool fCurr, uint  iwHouTo, uint  iwHouFrom)
   {
     OpenOut(IMPHOUCAN + iwHouTo/4);
 
-    memcpy(mpbPageOut, mpbPageIn, wFREEPAGE_SIZE);
+    memcpy(mpbPageOut, mpbPageIn, wFREE_BYTES);
     memcpy(mpbPageOut + (iwHouTo%4)*wPROFILE_LENGTH, mpwImpHouCan[ iwHouFrom ], wPROFILE_LENGTH);
 
     return( CloseOut() );

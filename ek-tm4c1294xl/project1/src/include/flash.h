@@ -21,10 +21,10 @@ FLASH.H
 
 
 // размер страницы
-#define wPAGE_SIZE      528
+#define wPAGE_BYTES     528
 
 // размер страницы, доступный для записи данных пользователя
-#define wFREEPAGE_SIZE  512
+#define wFREE_BYTES     512
 
 // количество страниц
 #define wPAGES          8192
@@ -38,17 +38,17 @@ FLASH.H
 
 
 // количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
-#define UINTCAN_PAGES       (uchar)(sizeof(uint)    * bCANALS/wFREEPAGE_SIZE + 1)
-#define bIMPULSE_CAN        (uchar)(sizeof(impulse) * bCANALS/wFREEPAGE_SIZE + 1)
-#define bPOWER_GRP          (uchar)(sizeof(power)   * bGROUPS/wFREEPAGE_SIZE + 1)
-#define FLOAT_CAN_PAGES     (uchar)(sizeof(float)   * bCANALS/wFREEPAGE_SIZE + 1)
-#define DOUBLE_CAN_PAGES    (uchar)(sizeof(double)  * bCANALS/wFREEPAGE_SIZE + 1)
-#define PARAMS_PAGES        (uchar)(sizeof(real)    * wPARAMS/wFREEPAGE_SIZE + 1)
-#define VALUE4_CAN_PAGES    (uchar)(sizeof(mpCntMonCan4)/wFREEPAGE_SIZE + 1)
-#define VALUE4T_CAN_PAGES   (uchar)(sizeof(mpCntMonCan4T)/wFREEPAGE_SIZE + 1)
-#define VALUE5_CAN_PAGES    (uchar)(sizeof(mpCntDayCan5)/wFREEPAGE_SIZE + 1)
-#define VALUE6_CAN_PAGES    (uchar)(sizeof(mpCntMonCan6)/wFREEPAGE_SIZE + 1)
-#define VALUE7_CAN_PAGES    (uchar)(sizeof(mpCntDayCan7)/wFREEPAGE_SIZE + 1)
+#define UINTCAN_PAGES       (uchar)(sizeof(uint)    * bCANALS/wFREE_BYTES + 1)
+#define bIMPULSE_CAN        (uchar)(sizeof(impulse) * bCANALS/wFREE_BYTES + 1)
+#define bPOWER_GRP          (uchar)(sizeof(power)   * bGROUPS/wFREE_BYTES + 1)
+#define FLOAT_CAN_PAGES     (uchar)(sizeof(float)   * bCANALS/wFREE_BYTES + 1)
+#define DOUBLE_CAN_PAGES    (uchar)(sizeof(double)  * bCANALS/wFREE_BYTES + 1)
+#define PARAMS_PAGES        (uchar)(sizeof(real)    * wPARAMS/wFREE_BYTES + 1)
+#define VALUE4_CAN_PAGES    (uchar)(sizeof(mpCntMonCan4)/wFREE_BYTES + 1)
+#define VALUE4T_CAN_PAGES   (uchar)(sizeof(mpCntMonCan4T)/wFREE_BYTES + 1)
+#define VALUE5_CAN_PAGES    (uchar)(sizeof(mpCntDayCan5)/wFREE_BYTES + 1)
+#define VALUE6_CAN_PAGES    (uchar)(sizeof(mpCntMonCan6)/wFREE_BYTES + 1)
+#define VALUE7_CAN_PAGES    (uchar)(sizeof(mpCntDayCan7)/wFREE_BYTES + 1)
 
 
 // количество страниц для графика профилей по получасам

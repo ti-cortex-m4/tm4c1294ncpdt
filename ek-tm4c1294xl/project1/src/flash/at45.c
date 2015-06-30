@@ -237,7 +237,7 @@ uint    i;
 
     for (i=0; i<4; i++) CharOut(0);
 
-    for (i=0; i<wPAGE_SIZE; i++) mpbPageIn[i] = CharIn();
+    for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn();
 
     DisableFlash();
     return true;
@@ -290,7 +290,7 @@ uint    i;
     CharOut(i % 0x100);
     CharOut(0);
 
-    for (i=0; i<wPAGE_SIZE; i++) CharOut(mpbPageOut[i]);
+    for (i=0; i<wPAGE_BYTES; i++) CharOut(mpbPageOut[i]);
 
     DisableFlash();
   }
@@ -332,18 +332,18 @@ bool SafePageWrite(void)
 {
 uchar   i;
 
-  mpbPageOut[wFREEPAGE_SIZE+0] = 0;
-  mpbPageOut[wFREEPAGE_SIZE+1] = 0;
+  mpbPageOut[wFREE_BYTES+0] = 0;
+  mpbPageOut[wFREE_BYTES+1] = 0;
 
-  mpbPageOut[wFREEPAGE_SIZE+2] = wPageOut / 0x100;
-  mpbPageOut[wFREEPAGE_SIZE+3] = wPageOut % 0x100;
+  mpbPageOut[wFREE_BYTES+2] = wPageOut / 0x100;
+  mpbPageOut[wFREE_BYTES+3] = wPageOut % 0x100;
 
-  memcpy(&mpbPageOut[wFREEPAGE_SIZE+4], &tiCurr, sizeof(time));
+  memcpy(&mpbPageOut[wFREE_BYTES+4], &tiCurr, sizeof(time));
 
-  MakeCRC16(mpbPageOut, wPAGE_SIZE-2);
+  MakeCRC16(mpbPageOut, wPAGE_BYTES-2);
 
-  mpbPageOut[wPAGE_SIZE-2] = bCRCHi;
-  mpbPageOut[wPAGE_SIZE-1] = bCRCLo;
+  mpbPageOut[wPAGE_BYTES-2] = bCRCHi;
+  mpbPageOut[wPAGE_BYTES-1] = bCRCLo;
 
   cwPageWrite++;
 
@@ -393,7 +393,7 @@ uint    i;
 
 bool GetFlashChecksum(void)
 {
-  MakeCRC16(mpbPageIn, wPAGE_SIZE);
+  MakeCRC16(mpbPageIn, wPAGE_BYTES);
 
   if ((bCRCHi != 0x00) && (bCRCLo != 0x00))
   {
