@@ -6,6 +6,12 @@ BEGIN(NVRAM_BEGIN, 0)
 
 RESERVE(LABEL_GLOBAL, sizeof(mpbLabelGlobal) + bNVRAM_FOOTER)
 
+RESERVE(PTR_MNT, sizeof(tuple2) + bNVRAM_FOOTER)
+RESERVE(PTR_HHR, sizeof(tuple2) + bNVRAM_FOOTER)
+RESERVE(PTR_DAY, sizeof(tuple2) + bNVRAM_FOOTER)
+RESERVE(PTR_MON, sizeof(tuple2) + bNVRAM_FOOTER)
+RESERVE(PTR_TIM, sizeof(tuple2) + bNVRAM_FOOTER)
+
 RESERVE(ENBL_KEYS, sizeof(bool) + bNVRAM_FOOTER)
 
 RESERVE(DIGITALS, sizeof(mpdiDigital) + bNVRAM_FOOTER)

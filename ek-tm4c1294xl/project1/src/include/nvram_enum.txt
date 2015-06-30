@@ -6,7 +6,13 @@ typedef enum
 
   LABEL_GLOBAL          = NVRAM_BEGIN,
 
-  ENBL_KEYS             = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_FOOTER,
+  PTR_MNT               = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_FOOTER,
+  PTR_HHR               = PTR_MNT + sizeof(tuple2) + bNVRAM_FOOTER,
+  PTR_DAY               = PTR_HHR + sizeof(tuple2) + bNVRAM_FOOTER,
+  PTR_MON               = PTR_DAY + sizeof(tuple2) + bNVRAM_FOOTER,
+  PTR_TIM               = PTR_MON + sizeof(tuple2) + bNVRAM_FOOTER,
+
+  ENBL_KEYS             = PTR_TIM + sizeof(tuple2) + bNVRAM_FOOTER,
 
   DIGITALS              = ENBL_KEYS + sizeof(bool) + bNVRAM_FOOTER,
 

@@ -7,140 +7,96 @@ REALTIME_STORAGE.C
 #include "../main.h"
 #include "../memory/mem_realtime.h"
 #include "../flash/files.h"
+#include "../nvram/23x1024.h"
 
 
 
-bool SavePointersMnt(void)
+bool    SavePointersMnt(void)
 {
-  OpenOut(PTRMNT);
-  ClearOut();
-
-  if (Save(&ibSoftMnt, sizeof(uchar)) == false)
-    return false;
-
-  if (Save(&iwHardMnt, sizeof(uint)) == false)
-    return false;
-
-  return CloseOut();
+  tuple2 tp2 = GetTuple2(ibSoftMnt, iwHardMnt);
+  return WriteNvramBuff(PTR_MNT, (uchar *) &tp2, sizeof(tuple2));
 }
 
 
-bool LoadPointersMnt(void)
+bool    LoadPointersMnt(void)
 {
-  OpenIn(PTRMNT);
-
-  if (Load(&ibSoftMnt, sizeof(uchar)) == false)
-    return false;
-
-  return Load(&iwHardMnt, sizeof(uint));
+  tuple2 tp2;
+  bool f = ReadNvramBuff(PTR_MNT, (uchar *) &tp2, sizeof(tuple2));
+  ibSoftMnt = tp2.w1;
+  iwHardMnt = tp2.w2;
+  return f;
 }
 
 
 
-bool SavePointersHou(void)
+bool    SavePointersHou(void)
 {
-  OpenOut(PTRHOU);
-  ClearOut();
-
-  if (Save(&ibSoftHou, sizeof(uchar)) == false)
-    return false;
-
-  if (Save(&iwHardHou, sizeof(uint)) == false)
-    return false;
-
-  return CloseOut();
+  tuple2 tp2 = GetTuple2(ibSoftHou, iwHardHou);
+  return WriteNvramBuff(PTR_HHR, (uchar *) &tp2, sizeof(tuple2));
 }
 
 
-bool LoadPointersHou(void)
+bool    LoadPointersHou(void)
 {
-  OpenIn(PTRHOU);
-
-  if (Load(&ibSoftHou, sizeof(uchar)) == false)
-    return false;
-
-  return Load(&iwHardHou, sizeof(uint));
+  tuple2 tp2;
+  bool f = ReadNvramBuff(PTR_HHR, (uchar *) &tp2, sizeof(tuple2));
+  ibSoftHou = tp2.w1;
+  iwHardHou = tp2.w2;
+  return f;
 }
 
 
 
-bool SavePointersDay(void)
+bool    SavePointersDay(void)
 {
-  OpenOut(PTRDAY);
-  ClearOut();
-
-  if (Save(&ibSoftDay, sizeof(uchar)) == false)
-    return false;
-
-  if (Save(&ibHardDay, sizeof(uchar)) == false)
-    return false;
-
-  return CloseOut();
+  tuple2 tp2 = GetTuple2(ibSoftDay, ibHardDay);
+  return WriteNvramBuff(PTR_DAY, (uchar *) &tp2, sizeof(tuple2));
 }
 
 
-bool LoadPointersDay(void)
+bool    LoadPointersDay(void)
 {
-  OpenIn(PTRDAY);
-
-  if (Load(&ibSoftDay, sizeof(uchar)) == false)
-    return false;
-
-  return Load(&ibHardDay, sizeof(uchar));
+  tuple2 tp2;
+  bool f = ReadNvramBuff(PTR_DAY, (uchar *) &tp2, sizeof(tuple2));
+  ibSoftDay = tp2.w1;
+  ibHardDay = tp2.w2;
+  return f;
 }
 
 
 
-bool SavePointersMon(void)
+bool    SavePointersMon(void)
 {
-  OpenOut(PTRMON);
-  ClearOut();
-
-  if (Save(&ibSoftMon, sizeof(uchar)) == false)
-    return false;
-
-  if (Save(&ibHardMon, sizeof(uchar)) == false)
-    return false;
-
-  return CloseOut();
+  tuple2 tp2 = GetTuple2(ibSoftMon, ibHardMon);
+  return WriteNvramBuff(PTR_MON, (uchar *) &tp2, sizeof(tuple2));
 }
 
 
-bool LoadPointersMon(void)
+bool    LoadPointersMon(void)
 {
-  OpenIn(PTRMON);
-
-  if (Load(&ibSoftMon, sizeof(uchar)) == false)
-    return false;
-
-  return Load(&ibHardMon, sizeof(uchar));
+  tuple2 tp2;
+  bool f = ReadNvramBuff(PTR_MON, (uchar *) &tp2, sizeof(tuple2));
+  ibSoftMon = tp2.w1;
+  ibHardMon = tp2.w2;
+  return f;
 }
 
 
 
-bool SavePointersTim(void)
+bool    SavePointersTim(void)
 {
-  OpenOut(PTRTIM);
-  ClearOut();
-
-  if (Save(&ibSoftTim, sizeof(uchar)) == false)
-    return false;
-
-  if (Save(&iwHardTim, sizeof(uint)) == false)
-    return false;
-
-  return CloseOut();
+  tuple2 tp2 = GetTuple2(ibSoftTim, iwHardTim);
+  return WriteNvramBuff(PTR_TIM, (uchar *) &tp2, sizeof(tuple2));
 }
 
 
-bool LoadPointersTim(void)
+bool    LoadPointersTim(void)
 {
-  OpenIn(PTRTIM);
-
-  if (Load(&ibSoftTim, sizeof(uchar)) == false)
-    return false;
-
-  return Load(&iwHardTim, sizeof(uint));
+  tuple2 tp2;
+  bool f = ReadNvramBuff(PTR_TIM, (uchar *) &tp2, sizeof(tuple2));
+  ibSoftTim = tp2.w1;
+  iwHardTim = tp2.w2;
+  return f;
 }
 
 
