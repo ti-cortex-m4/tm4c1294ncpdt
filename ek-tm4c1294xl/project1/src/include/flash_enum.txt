@@ -51,9 +51,7 @@ typedef enum
   DEFDAYCAN             = CNTMONCAN + DOUBLE_CAN_PAGES*bMONTHS,
   DEFMONCAN             = DEFDAYCAN + bIMPULSE_CAN*bDAYS,
 
-  REALTIME              = DEFMONCAN + bIMPULSE_CAN*bMONTHS,
-
-  PORTS                 = REALTIME + 1,
+  PORTS                 = DEFMONCAN + bIMPULSE_CAN*bMONTHS,
   LOCAL_DISABLE         = PORTS + 1,
 
   MAJOR_IN_DELAY        = LOCAL_DISABLE + 1,
