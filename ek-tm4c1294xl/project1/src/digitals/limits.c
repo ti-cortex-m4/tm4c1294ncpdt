@@ -9,11 +9,12 @@ LIMITS.C
 #include    "../digitals/digitals.h"
 #include    "../devices/devices.h"
 #include    "../flash/files.h"
+#include    "../nvram/cache.h"
 #include    "limits.h"
 
 
 
-file const              flUseBounds = {USE_BOUNDS, &boUseBounds, sizeof(bool)};
+cache const             chUseBounds = {USE_BOUNDS, &boUseBounds, sizeof(bool)};
 
 file const              flStartRelCan = {START_REL_CAN, &mpcwStartRelCan, sizeof(mpcwStartRelCan)};
 file const              flStartAbs16Can = {START_ABS16_CAN, &mpcwStartAbs16Can, sizeof(mpcwStartAbs16Can)};
@@ -26,7 +27,7 @@ file const              flStopAuxCan = {STOP_AUX_CAN, &mpcwStopAuxCan, sizeof(mp
 
 void    InitLimits(void)
 {
-  LoadFile(&flUseBounds);
+  LoadCache(&chUseBounds);
 
   LoadFile(&flStartRelCan);
   LoadFile(&flStartAbs16Can);
@@ -41,7 +42,7 @@ void    ResetLimits(void)
 {
 
 	boUseBounds = true;
-  SaveFile(&flUseBounds);
+  SaveCache(&chUseBounds);
 
   uchar c;
   for (c=0; c<bCANALS; c++)

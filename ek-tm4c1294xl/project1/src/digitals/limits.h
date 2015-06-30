@@ -4,7 +4,7 @@ LIMITS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flUseBounds;
+extern  cache const             chUseBounds;
 
 extern  file const              flStartRelCan;
 extern  file const              flStartAbs16Can;

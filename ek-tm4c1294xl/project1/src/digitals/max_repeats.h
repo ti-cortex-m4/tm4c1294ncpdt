@@ -6,7 +6,7 @@ MAX_REPEATS.H
 
 extern  uchar                   bMaxRepeats;
 
-extern  file const              flMaxRepeats;
+extern  cache const             chMaxRepeats;
 
 
 

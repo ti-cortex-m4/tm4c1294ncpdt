@@ -24,5 +24,5 @@ static char const      *pszUseBounds[]   = { szUse, szUseBounds, "" };
 
 void    key_SetLimits30(void)
 {
-  key_SetBool(&flUseBounds, pszUseBounds);
+  key_SetBool(&chUseBounds, pszUseBounds);
 }

@@ -66,8 +66,11 @@ typedef enum
   TIMEOUT_PROFILE       = TIMEOUT_CURRENT + sizeof(bool) + bNVRAM_FOOTER,
 
   DSBL_REFILL           = TIMEOUT_PROFILE + sizeof(bool) + bNVRAM_FOOTER,
+  USE_BOUNDS            = DSBL_REFILL + sizeof(bool) + bNVRAM_FOOTER,
+  MAX_REPEATS           = USE_BOUNDS + sizeof(bool) + bNVRAM_FOOTER,
+  RECALC_ALWAYS         = MAX_REPEATS + sizeof(bool) + bNVRAM_FOOTER,
 
-  FLOW_PORT_FROM        = DSBL_REFILL + sizeof(bool) + bNVRAM_FOOTER,
+  FLOW_PORT_FROM        = RECALC_ALWAYS + sizeof(bool) + bNVRAM_FOOTER,
   MAX_FLOW_DELAY        = FLOW_PORT_FROM + sizeof(bool) + bNVRAM_FOOTER,
   FLOW_PORT_TO          = MAX_FLOW_DELAY + sizeof(bool) + bNVRAM_FOOTER,
 
