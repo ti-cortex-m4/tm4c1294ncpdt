@@ -44,8 +44,8 @@ void    OutVersion(void)
   PushInt(bDAYS);
   PushInt(bMONTHS);
 
-  PushInt(wPAGE_SIZE);
-  PushInt(wFREEPAGE_SIZE);
+  PushInt(wPAGE_BYTES);
+  PushInt(wFREE_BYTES);
   PushInt(wPAGES);
   PushInt(FLASH_BEGIN);
   PushInt(FLASH_END);

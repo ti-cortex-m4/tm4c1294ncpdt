@@ -13,8 +13,8 @@ extern  uint                    wPageIn, wPageOut,
 
 extern  uchar                   bStatusFlash;
 
-extern  uchar                   mpbPageIn[wPAGE_SIZE],
-                                mpbPageOut[wPAGE_SIZE];
+extern  uchar                   mpbPageIn[wPAGE_BYTES],
+                                mpbPageOut[wPAGE_BYTES];
 
 extern  uint                    cwWrnBusy,
                                 cwWrnCompare,

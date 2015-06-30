@@ -71,7 +71,7 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
     GetRecordsBlock(CLA_IMPULSE, iwPage);
 / *
   x_str("\n");
-  for (i=0; i<wFREEPAGE_SIZE; i++)
+  for (i=0; i<wFREE_BYTES; i++)
   {
     if (i % sizeof(record) == 0) { x_str("\n"); x_bytedec(i / sizeof(record)); }
     x_bytehex(mpbPageIn[i]);

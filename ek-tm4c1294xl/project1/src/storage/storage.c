@@ -57,7 +57,7 @@ if (enGlobal == GLB_WORK)
 //  if (SafePageRead())
 //  {
 //    time ti;
-//    memcpy(&ti, &mpbPageIn[wFREEPAGE_SIZE+4], sizeof(time));
+//    memcpy(&ti, &mpbPageIn[wFREE_BYTES+4], sizeof(time));
 //
 //    ulong dw1 = DateToHouIndex(ti);
 //    ulong dw2 = DateToHouIndex(tiCurr);
