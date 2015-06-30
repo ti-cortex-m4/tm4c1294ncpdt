@@ -13,15 +13,15 @@ REALTIME_STORAGE.C
 
 bool    SavePointersMnt(void)
 {
-  tuple2uint tp = GetTuple2(ibSoftMnt, iwHardMnt);
-  return WriteNvramBuff(PTR_MNT, (uchar *) &tp, sizeof(tuple2uint));
+  tuple2uint tp = GetTuple2Uint(ibSoftMnt, iwHardMnt);
+  return WriteNvramBuff(PTR_MNT, (uchar *) &tp, sizeof(tp));
 }
 
 
 bool    LoadPointersMnt(void)
 {
   tuple2uint tp;
-  bool f = ReadNvramBuff(PTR_MNT, (uchar *) &tp, sizeof(tuple2uint));
+  bool f = ReadNvramBuff(PTR_MNT, (uchar *) &tp, sizeof(tp));
   ibSoftMnt = tp.w1;
   iwHardMnt = tp.w2;
   return f;
@@ -31,15 +31,15 @@ bool    LoadPointersMnt(void)
 
 bool    SavePointersHou(void)
 {
-  tuple2uint tp = GetTuple2(ibSoftHou, iwHardHou);
-  return WriteNvramBuff(PTR_HHR, (uchar *) &tp, sizeof(tuple2uint));
+  tuple2uint tp = GetTuple2Uint(ibSoftHou, iwHardHou);
+  return WriteNvramBuff(PTR_HHR, (uchar *) &tp, sizeof(tp));
 }
 
 
 bool    LoadPointersHou(void)
 {
   tuple2uint tp;
-  bool f = ReadNvramBuff(PTR_HHR, (uchar *) &tp, sizeof(tuple2uint));
+  bool f = ReadNvramBuff(PTR_HHR, (uchar *) &tp, sizeof(tp));
   ibSoftHou = tp.w1;
   iwHardHou = tp.w2;
   return f;
@@ -49,15 +49,15 @@ bool    LoadPointersHou(void)
 
 bool    SavePointersDay(void)
 {
-  tuple2uint tp = GetTuple2(ibSoftDay, ibHardDay);
-  return WriteNvramBuff(PTR_DAY, (uchar *) &tp, sizeof(tuple2uint));
+  tuple2uint tp = GetTuple2Uint(ibSoftDay, ibHardDay);
+  return WriteNvramBuff(PTR_DAY, (uchar *) &tp, sizeof(tp));
 }
 
 
 bool    LoadPointersDay(void)
 {
   tuple2uint tp;
-  bool f = ReadNvramBuff(PTR_DAY, (uchar *) &tp, sizeof(tuple2uint));
+  bool f = ReadNvramBuff(PTR_DAY, (uchar *) &tp, sizeof(tp));
   ibSoftDay = tp.w1;
   ibHardDay = tp.w2;
   return f;
@@ -67,15 +67,15 @@ bool    LoadPointersDay(void)
 
 bool    SavePointersMon(void)
 {
-  tuple2uint tp = GetTuple2(ibSoftMon, ibHardMon);
-  return WriteNvramBuff(PTR_MON, (uchar *) &tp, sizeof(tuple2uint));
+  tuple2uint tp = GetTuple2Uint(ibSoftMon, ibHardMon);
+  return WriteNvramBuff(PTR_MON, (uchar *) &tp, sizeof(tp));
 }
 
 
 bool    LoadPointersMon(void)
 {
   tuple2uint tp;
-  bool f = ReadNvramBuff(PTR_MON, (uchar *) &tp, sizeof(tuple2uint));
+  bool f = ReadNvramBuff(PTR_MON, (uchar *) &tp, sizeof(tp));
   ibSoftMon = tp.w1;
   ibHardMon = tp.w2;
   return f;
@@ -85,15 +85,15 @@ bool    LoadPointersMon(void)
 
 bool    SavePointersTim(void)
 {
-  tuple2uint tp = GetTuple2(ibSoftTim, iwHardTim);
-  return WriteNvramBuff(PTR_TIM, (uchar *) &tp, sizeof(tuple2uint));
+  tuple2uint tp = GetTuple2Uint(ibSoftTim, iwHardTim);
+  return WriteNvramBuff(PTR_TIM, (uchar *) &tp, sizeof(tp));
 }
 
 
 bool    LoadPointersTim(void)
 {
   tuple2uint tp;
-  bool f = ReadNvramBuff(PTR_TIM, (uchar *) &tp, sizeof(tuple2uint));
+  bool f = ReadNvramBuff(PTR_TIM, (uchar *) &tp, sizeof(tp));
   ibSoftTim = tp.w1;
   iwHardTim = tp.w2;
   return f;
@@ -101,42 +101,18 @@ bool    LoadPointersTim(void)
 
 
 
-bool SaveTimeCurr(void)
+bool    SaveTimeCurr(void)
 {
-  OpenOut(REALTIME);
-  ClearOut();
-
-  if (Save(&tiCurr, sizeof(time)) == false) return false;
-  if (Save(&tiPrev, sizeof(time)) == false) return false;
-
-  if (Save(&cdwSeconds, sizeof(ulong)) == false) return false;
-  if (Save(&cdwMinutes1, sizeof(ulong)) == false) return false;
-  if (Save(&cdwMinutes3, sizeof(ulong)) == false) return false;
-  if (Save(&cdwMinutes30, sizeof(ulong)) == false) return false;
-
-  if (Save(&cwDays, sizeof(uint)) == false) return false;
-  if (Save(&cwMonths, sizeof(uint)) == false) return false;
-  if (Save(&cwYears, sizeof(uint)) == false) return false;
-
-  return CloseOut();
+  tuple2time tp = GetTuple2Time(tiCurr, tiPrev);
+  return WriteNvramBuff(REALTIME, (uchar *) &tp, sizeof(tp));
 }
 
 
-bool LoadTimeCurr(void)
+bool    LoadTimeCurr(void)
 {
-  OpenIn(REALTIME);
-
-  if (Load(&tiCurr, sizeof(time)) == false) return false;
-  if (Load(&tiPrev, sizeof(time)) == false) return false;
-
-  if (Load(&cdwSeconds, sizeof(ulong)) == false) return false;
-  if (Load(&cdwMinutes1, sizeof(ulong)) == false) return false;
-  if (Load(&cdwMinutes3, sizeof(ulong)) == false) return false;
-  if (Load(&cdwMinutes30, sizeof(ulong)) == false) return false;
-
-  if (Load(&cwDays, sizeof(uint)) == false) return false;
-  if (Load(&cwMonths, sizeof(uint)) == false) return false;
-  if (Load(&cwYears, sizeof(uint)) == false) return false;
-
-  return true;
+	tuple2time tp;
+  bool f = ReadNvramBuff(REALTIME, (uchar *) &tp, sizeof(tp));
+  tiCurr = tp.ti1;
+  tiPrev = tp.ti2;
+  return f;
 }

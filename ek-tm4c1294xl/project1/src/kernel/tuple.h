@@ -4,4 +4,5 @@ TUPLE,H
 
 ------------------------------------------------------------------------------*/
 
-tuple2uint  GetTuple2(uint  w1,  uint  w2);
+tuple2uint  GetTuple2Uint(uint  w1,  uint  w2);
+tuple2time  GetTuple2Time(time  ti1,  time  ti2);
