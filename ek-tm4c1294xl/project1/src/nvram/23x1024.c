@@ -176,6 +176,48 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 }
 
 
+bool    CleanNvramBuff(ulong  dwAddr, uint  wSize)
+{
+  Start();
+
+  CharOut(0x02); // запись
+  CharOut(*((uchar*)(&dwAddr)+2));
+  CharOut(*((uchar*)(&dwAddr)+1));
+  CharOut(*((uchar*)(&dwAddr)+0));
+
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+    CharOut(0);
+  }
+
+  // TODO add address + date + CRC, счетчики, внешние повторы
+
+  Stop();
+
+  Start();
+
+  CharOut(0x03); // чтение
+  CharOut(*((uchar*)(&dwAddr)+2));
+  CharOut(*((uchar*)(&dwAddr)+1));
+  CharOut(*((uchar*)(&dwAddr)+0));
+
+  bool f = true;
+  for (i=0; i<wSize; i++)
+  {
+    if (0 != CharIn())
+    {
+      f = false;
+      break;
+    }
+  }
+
+  Stop();
+
+  return f;
+}
+
+
 
 uchar   ReadNvramStatus(void)
 {
