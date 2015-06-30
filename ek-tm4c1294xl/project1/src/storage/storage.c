@@ -12,6 +12,7 @@ STORAGE.C
 #include "../hardware/watchdog.h"
 #include "../flash/at45.h"
 #include "../energy2.h"
+#include "../kernel/array_mnt.h"
 #include "../kernel/arrays_buff.h"
 #include "../display/display.h"
 #include "../time/delay.h"
@@ -99,10 +100,10 @@ uint    i;
   ibSoftDay = 0;
   ibSoftMon = 0; // TODO
 
-  for (wPageOut=IMPMNTCAN; wPageOut<(IMPMNTCAN+bMINUTES); wPageOut++)
+  uint m;
+  for (m=0; m<bMINUTES; m++)
   {
-    if (SafePageErase() == false) return false;
-    if (GetFlashStatus() != 0) return false;
+    if (FreeImpMnt(m) == false) return false;
     ShowFlashErase();
   }
 

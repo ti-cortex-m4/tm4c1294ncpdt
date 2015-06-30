@@ -1,8 +1,9 @@
 /*------------------------------------------------------------------------------
-ARRAY_MNT.H
+ARRAY_MNT,H
 
 
 ------------------------------------------------------------------------------*/
 
-bool    SaveImpMnt(bool fCurr, uint  iwMntTo, uint  iwMntFrom);
+bool    SaveImpMnt(uint  iwMntTo, uchar  ibMntFrom);
+bool    FreeImpMnt(uint  iwMntTo);
 bool    LoadImpMnt(uint  iwMntFrom);

@@ -317,7 +317,7 @@ uchar   ibCan;
         {
           LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES);
           mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImp; // TODO bufferize
-          SaveImpMnt(0, (bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
+          SaveImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
 
           MakeSpecCurrent(ibCan, (uint)dwImp);
         }

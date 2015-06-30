@@ -40,8 +40,7 @@ typedef enum
   LOSSE                 = COUNT + DOUBLE_CAN_PAGES,
   LEVEL                 = LOSSE + DOUBLE_CAN_PAGES,
 
-  IMPMNTCAN             = LEVEL + DOUBLE_CAN_PAGES,
-  IMPHOUCAN             = IMPMNTCAN + bMINUTES,
+  IMPHOUCAN             = LEVEL + DOUBLE_CAN_PAGES,
 
   IMPDAYCAN             = IMPHOUCAN + IMPHOUCAN_PAGES,
   IMPMONCAN             = IMPDAYCAN + bIMPULSE_CAN*bDAYS,
