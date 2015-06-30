@@ -5,6 +5,7 @@ MEM_REALTIME.S
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "mem_realtime.h"
 
 
 
@@ -26,11 +27,8 @@ uchar                   cbShowCurrentTime;
 
 
 
-// счётчики отработанного времени
-ulong                   cdwSeconds, cdwMinutes1, cdwMinutes3, cdwMinutes30;
-
-// счётчики отработанного времени
-uint                    cwDays, cwMonths, cwYears;
+// счётчики отработанных временных интервалов
+realtime1               Realtime1;
 
 
 

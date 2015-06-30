@@ -14,7 +14,7 @@ NEXT_MINUTE1.C
 
 void    NextMinute1(void)
 {
-  cdwMinutes1++;
+  Realtime1.cdwMinutes1++;
 
   if ((fActive == 1) && (enGlobal == GLB_WORK))
   {

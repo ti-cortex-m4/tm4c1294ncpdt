@@ -26,7 +26,7 @@ NEXT_DAY.C
 
 void    NextDay(void)
 {
-  cwDays++;
+  Realtime1.cwDays++;
 
   NextDayExtended4();
   NextDayExtended5();
