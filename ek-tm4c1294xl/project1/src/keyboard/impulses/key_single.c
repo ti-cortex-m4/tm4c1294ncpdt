@@ -15,6 +15,7 @@ KEY_SINGLE.C
 #include "../../digitals/digitals_messages.h"
 #include "../../serial/ports.h"
 #include "../../serial/modems.h"
+#include "../../kernel/array_mnt.h"
 #include "../../engine.h"
 #include "../../energy.h"
 #include "../../energy2.h"

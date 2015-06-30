@@ -26,7 +26,7 @@ CURRENT_RUN.C
 #include "../../digitals/current/current.h"
 #include "../../time/timedate.h"
 #include "../../time/rtc.h"
-#include "../../energy2.h"
+#include "../../kernel/array_mnt.h"
 
 
 
