@@ -69,4 +69,12 @@ typedef enum
 typedef char const      message[bDISPLAY+1];
 
 
+//
+typedef struct
+{
+  uint          w1;
+  uint          w2;
+} tuple2;
+
+
 #endif

@@ -28,6 +28,7 @@ MAIN,H
 #include "kernel/boolean.h"
 #include "kernel/float.h"
 #include "kernel/wrappers.h"
+#include "kernel/tuple.h"
 
 
 

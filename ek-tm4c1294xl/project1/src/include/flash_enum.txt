@@ -60,13 +60,7 @@ typedef enum
   POWMONGRP_BUFF        = POWDAYGRP_BUFF + bPOWER_GRP,
   CNTMONCAN_BUFF        = POWMONGRP_BUFF + bPOWER_GRP,
 
-  PTRMNT                = CNTMONCAN_BUFF + DOUBLE_CAN_PAGES,
-  PTRHOU                = PTRMNT + 1,
-  PTRDAY                = PTRHOU + 1,
-  PTRMON                = PTRDAY + 1,
-  PTRTIM                = PTRMON + 1,
-
-  REALTIME              = PTRTIM + 1,
+  REALTIME              = CNTMONCAN_BUFF + DOUBLE_CAN_PAGES,
 
   PORTS                 = REALTIME + 1,
   LOCAL_DISABLE         = PORTS + 1,
