@@ -9,102 +9,102 @@ ENERGY3.C
 #include "memory/mem_realtime.h"
 #include "energy.h"
 #include "realtime/realtime.h"
-#include "flash/files.h"
+#include "nvram/23x1024.h"
 
 
 
 bool SaveImpHouBuff(void) {
-  return SaveBuff(IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
+  return WriteNvramBuff(IMPHOUCAN_BUFF, (uchar *) &mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
 }
 
 bool CleanImpHouBuff(void) {
-  return CleanBuff(IMPHOUCAN_BUFF, sizeof(uint)*bCANALS);
+  return CleanNvramBuff(IMPHOUCAN_BUFF, sizeof(uint)*bCANALS);
 }
 
 bool LoadImpHouBuff(void) {
-  return LoadBuff(IMPHOUCAN_BUFF, mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
+  return ReadNvramBuff(IMPHOUCAN_BUFF, (uchar *) &mpwImpHouCan[ ibSoftHou ], sizeof(uint)*bCANALS);
 }
 
 
 
 bool SaveImpDayBuff(void) {
-  return SaveBuff(IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
+  return WriteNvramBuff(IMPDAYCAN_BUFF, (uchar *) &mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
 }
 
 bool CleanImpDayBuff(void) {
-  return CleanBuff(IMPDAYCAN_BUFF, sizeof(impulse)*bCANALS);
+  return CleanNvramBuff(IMPDAYCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 bool LoadImpDayBuff(void) {
-  return LoadBuff(IMPDAYCAN_BUFF, mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
+  return ReadNvramBuff(IMPDAYCAN_BUFF, (uchar *) &mpimDayCan[ ibSoftDay ], sizeof(impulse)*bCANALS);
 }
 
 
 
 bool SaveImpMonBuff(void) {
-  return SaveBuff(IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
+  return WriteNvramBuff(IMPMONCAN_BUFF, (uchar *) &mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
 }
 
 bool CleanImpMonBuff(void) {
-  return CleanBuff(IMPMONCAN_BUFF, sizeof(impulse)*bCANALS);
+  return CleanNvramBuff(IMPMONCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 bool LoadImpMonBuff(void) {
-  return LoadBuff(IMPMONCAN_BUFF, mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
+  return ReadNvramBuff(IMPMONCAN_BUFF, (uchar *) &mpimMonCan[ ibSoftMon ], sizeof(impulse)*bCANALS);
 }
 
 
 
 bool SaveImpAbsBuff(void) {
-  return SaveBuff(IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
+  return WriteNvramBuff(IMPABSCAN_BUFF, (uchar *) &mpimAbsCan, sizeof(impulse)*bCANALS);
 }
 
 bool CleanImpAbsBuff(void) {
-  return CleanBuff(IMPABSCAN_BUFF, sizeof(impulse)*bCANALS);
+  return CleanNvramBuff(IMPABSCAN_BUFF, sizeof(impulse)*bCANALS);
 }
 
 bool LoadImpAbsBuff(void) {
-  return LoadBuff(IMPABSCAN_BUFF, mpimAbsCan, sizeof(impulse)*bCANALS);
+  return ReadNvramBuff(IMPABSCAN_BUFF, (uchar *) &mpimAbsCan, sizeof(impulse)*bCANALS);
 }
 
 
 
 bool SavePowDayBuff(void) {
-  return SaveBuff(POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
+  return WriteNvramBuff(POWDAYGRP_BUFF, (uchar *) &mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
 }
 
 bool CleanPowDayBuff(void) {
-  return CleanBuff(POWDAYGRP_BUFF, sizeof(power)*bGROUPS);
+  return CleanNvramBuff(POWDAYGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
 bool LoadPowDayBuff(void) {
-  return LoadBuff(POWDAYGRP_BUFF, mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
+  return ReadNvramBuff(POWDAYGRP_BUFF, (uchar *) &mppoDayGrp[ ibSoftDay ], sizeof(power)*bGROUPS);
 }
 
 
 
 bool SavePowMonBuff(void) {
-  return SaveBuff(POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
+  return WriteNvramBuff(POWMONGRP_BUFF, (uchar *) &mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
 }
 
 bool CleanPowMonBuff(void) {
-  return CleanBuff(POWMONGRP_BUFF, sizeof(power)*bGROUPS);
+  return CleanNvramBuff(POWMONGRP_BUFF, sizeof(power)*bGROUPS);
 }
 
 bool LoadPowMonBuff(void) {
-  return LoadBuff(POWMONGRP_BUFF, mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
+  return ReadNvramBuff(POWMONGRP_BUFF, (uchar *) &mppoMonGrp[ ibSoftMon ], sizeof(power)*bGROUPS);
 }
 
 
 
 bool SaveCntMonBuff(void) {
-  return SaveBuff(CNTMONCAN_BUFF, mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
+  return WriteNvramBuff(CNTMONCAN_BUFF, (uchar *) &mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
 }
 
 bool CleanCntMonBuff(void) {
-  return CleanBuff(CNTMONCAN_BUFF, sizeof(double)*bCANALS);
+  return CleanNvramBuff(CNTMONCAN_BUFF, sizeof(double)*bCANALS);
 }
 
 bool LoadCntMonBuff(void) {
-  return LoadBuff(CNTMONCAN_BUFF, mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
+  return ReadNvramBuff(CNTMONCAN_BUFF, (uchar *) &mpdbCntMonCan[ ibSoftMon ], sizeof(double)*bCANALS);
 }

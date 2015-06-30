@@ -12,5 +12,6 @@ void    InitNvram(void);
 
 bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize);
 bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize);
+bool    CleanNvramBuff(ulong  dwAddr, uint  wSize);
 
 uchar   ReadNvramStatus(void);

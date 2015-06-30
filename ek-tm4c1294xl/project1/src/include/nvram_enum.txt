@@ -12,8 +12,15 @@ typedef enum
   PTR_MON               = PTR_DAY + sizeof(tuple2) + bNVRAM_FOOTER,
   PTR_TIM               = PTR_MON + sizeof(tuple2) + bNVRAM_FOOTER,
 
-  ENBL_KEYS             = PTR_TIM + sizeof(tuple2) + bNVRAM_FOOTER,
+  IMPHOUCAN_BUFF        = PTR_TIM + sizeof(tuple2) + bNVRAM_FOOTER,
+  IMPDAYCAN_BUFF        = IMPHOUCAN_BUFF + sizeof(uint)*bCANALS + bNVRAM_FOOTER,
+  IMPMONCAN_BUFF        = IMPDAYCAN_BUFF + sizeof(impulse)*bCANALS + bNVRAM_FOOTER,
+  IMPABSCAN_BUFF        = IMPMONCAN_BUFF + sizeof(impulse)*bCANALS + bNVRAM_FOOTER,
+  POWDAYGRP_BUFF        = IMPABSCAN_BUFF + sizeof(impulse)*bCANALS + bNVRAM_FOOTER,
+  POWMONGRP_BUFF        = POWDAYGRP_BUFF + sizeof(power)*bGROUPS + bNVRAM_FOOTER,
+  CNTMONCAN_BUFF        = POWMONGRP_BUFF + sizeof(power)*bGROUPS + bNVRAM_FOOTER,
 
+  ENBL_KEYS             = CNTMONCAN_BUFF + sizeof(double)*bCANALS + bNVRAM_FOOTER,
   DIGITALS              = ENBL_KEYS + sizeof(bool) + bNVRAM_FOOTER,
 
   RELAXS_FLAG           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,

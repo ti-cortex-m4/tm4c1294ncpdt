@@ -52,20 +52,20 @@ if (enGlobal == GLB_WORK)
 
   LoadRealtime();
 
-  wPageIn = IMPHOUCAN_BUFF;
-  if (SafePageRead())
-  {
-    time ti;
-    memcpy(&ti, &mpbPageIn[wFREEPAGE_SIZE+4], sizeof(time));
-
-    ulong dw1 = DateToHouIndex(ti);
-    ulong dw2 = DateToHouIndex(tiCurr);
-
-    if (dw1 == dw2)
-    {
+//  wPageIn = IMPHOUCAN_BUFF;
+//  if (SafePageRead())
+//  {
+//    time ti;
+//    memcpy(&ti, &mpbPageIn[wFREEPAGE_SIZE+4], sizeof(time));
+//
+//    ulong dw1 = DateToHouIndex(ti);
+//    ulong dw2 = DateToHouIndex(tiCurr);
+//
+//    if (dw1 == dw2)
+//    {
       LoadImpHouBuff();
-    }
-  }
+//    }
+//  }
 
   LoadImpDayBuff();
   LoadImpMonBuff();

@@ -56,7 +56,7 @@ uint    i;
   }
 }  
 
-
+/*
 bool Clean(uint  wSize)
 {
 uint    wFree;
@@ -84,7 +84,7 @@ uint    wFree;
     }
   }
 }
-
+*/
 
 bool CloseOut(void)
 {
@@ -149,7 +149,7 @@ bool SaveBuff(uint wPage, void *pbBuff, uint wSize)
   return CloseOut();
 }
 
-
+/*
 bool CleanBuff(uint wPage, uint wSize)
 {
   OpenOut(wPage);
@@ -159,7 +159,7 @@ bool CleanBuff(uint wPage, uint wSize)
 
   return CloseOut();
 }
-
+*/
 
 bool LoadBuff(uint wPage, void *pbBuff, uint wSize)
 {
