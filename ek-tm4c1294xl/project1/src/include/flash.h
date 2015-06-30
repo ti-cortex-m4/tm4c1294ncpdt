@@ -24,7 +24,7 @@ FLASH.H
 #define wPAGE_BYTES     528
 
 // размер страницы, доступный для записи данных пользователя
-#define wFREE_BYTES     512
+#define wLEAF_BYTES     512
 
 // количество страниц
 #define wPAGES          8192
@@ -38,17 +38,17 @@ FLASH.H
 
 
 // количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
-#define UINTCAN_PAGES       (uchar)(sizeof(uint)    * bCANALS/wFREE_BYTES + 1)
-#define bIMPULSE_CAN        (uchar)(sizeof(impulse) * bCANALS/wFREE_BYTES + 1)
-#define bPOWER_GRP          (uchar)(sizeof(power)   * bGROUPS/wFREE_BYTES + 1)
-#define FLOAT_CAN_PAGES     (uchar)(sizeof(float)   * bCANALS/wFREE_BYTES + 1)
-#define DOUBLE_CAN_PAGES    (uchar)(sizeof(double)  * bCANALS/wFREE_BYTES + 1)
-#define PARAMS_PAGES        (uchar)(sizeof(real)    * wPARAMS/wFREE_BYTES + 1)
-#define VALUE4_CAN_PAGES    (uchar)(sizeof(mpCntMonCan4)/wFREE_BYTES + 1)
-#define VALUE4T_CAN_PAGES   (uchar)(sizeof(mpCntMonCan4T)/wFREE_BYTES + 1)
-#define VALUE5_CAN_PAGES    (uchar)(sizeof(mpCntDayCan5)/wFREE_BYTES + 1)
-#define VALUE6_CAN_PAGES    (uchar)(sizeof(mpCntMonCan6)/wFREE_BYTES + 1)
-#define VALUE7_CAN_PAGES    (uchar)(sizeof(mpCntDayCan7)/wFREE_BYTES + 1)
+#define UINTCAN_PAGES       (uchar)(sizeof(uint)    * bCANALS/wLEAF_BYTES + 1)
+#define bIMPULSE_CAN        (uchar)(sizeof(impulse) * bCANALS/wLEAF_BYTES + 1)
+#define bPOWER_GRP          (uchar)(sizeof(power)   * bGROUPS/wLEAF_BYTES + 1)
+#define FLOAT_CAN_PAGES     (uchar)(sizeof(float)   * bCANALS/wLEAF_BYTES + 1)
+#define DOUBLE_CAN_PAGES    (uchar)(sizeof(double)  * bCANALS/wLEAF_BYTES + 1)
+#define PARAMS_PAGES        (uchar)(sizeof(real)    * wPARAMS/wLEAF_BYTES + 1)
+#define VALUE4_CAN_PAGES    (uchar)(sizeof(mpCntMonCan4)/wLEAF_BYTES + 1)
+#define VALUE4T_CAN_PAGES   (uchar)(sizeof(mpCntMonCan4T)/wLEAF_BYTES + 1)
+#define VALUE5_CAN_PAGES    (uchar)(sizeof(mpCntDayCan5)/wLEAF_BYTES + 1)
+#define VALUE6_CAN_PAGES    (uchar)(sizeof(mpCntMonCan6)/wLEAF_BYTES + 1)
+#define VALUE7_CAN_PAGES    (uchar)(sizeof(mpCntDayCan7)/wLEAF_BYTES + 1)
 
 
 // количество страниц для графика профилей по получасам

@@ -28,7 +28,7 @@ bool    SaveImpHouSpec(bool  fCurr, uint  iwHouTo)
     OpenIn(IMPHOUCAN + iwHouTo/4);
     OpenOut(IMPHOUCAN + iwHouTo/4);
 
-    memcpy(mpbPageOut, mpbPageIn, wFREE_BYTES);
+    memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
     memcpy(mpbPageOut + (iwHouTo%4)*wPROFILE_LENGTH, mpwImpHouCanSpec, wPROFILE_LENGTH);
 
     return( CloseOut() );

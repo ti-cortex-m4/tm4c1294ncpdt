@@ -332,13 +332,13 @@ bool SafePageWrite(void)
 {
 uchar   i;
 
-  mpbPageOut[wFREE_BYTES+0] = 0;
-  mpbPageOut[wFREE_BYTES+1] = 0;
+  mpbPageOut[wLEAF_BYTES+0] = 0;
+  mpbPageOut[wLEAF_BYTES+1] = 0;
 
-  mpbPageOut[wFREE_BYTES+2] = wPageOut / 0x100;
-  mpbPageOut[wFREE_BYTES+3] = wPageOut % 0x100;
+  mpbPageOut[wLEAF_BYTES+2] = wPageOut / 0x100;
+  mpbPageOut[wLEAF_BYTES+3] = wPageOut % 0x100;
 
-  memcpy(&mpbPageOut[wFREE_BYTES+4], &tiCurr, sizeof(time));
+  memcpy(&mpbPageOut[wLEAF_BYTES+4], &tiCurr, sizeof(time));
 
   MakeCRC16(mpbPageOut, wPAGE_BYTES-2);
 

@@ -32,7 +32,7 @@ uint    i;
 
   while (wSize > 0)
   {
-    wFree = wFREE_BYTES - wByteOut;          // размер свободной части буфера
+    wFree = wLEAF_BYTES - wByteOut;          // размер свободной части буфера
 
     if (wSize > wFree)                          // блок данных больше размера свободной части буфера
     {                                           // заполняем всё свободное место
@@ -63,7 +63,7 @@ uint    wFree;
 
   while (wSize > 0)
   {
-    wFree = wFREE_BYTES - wByteOut;          // размер свободной части буфера
+    wFree = wLEAF_BYTES - wByteOut;          // размер свободной части буфера
 
     if (wSize > wFree)                          // блок данных больше размера свободной части буфера
     {                                           // заполняем всё свободное место
@@ -115,7 +115,7 @@ uint    i;
 
   while (wSize > 0)
   {
-    wFree = wFREE_BYTES - wByteIn;           // размер непрочитанной части буфера
+    wFree = wLEAF_BYTES - wByteIn;           // размер непрочитанной части буфера
 
     if (wSize > wFree)                          // блок данных больше размера непрочитанной части буфера
     {                                           // читаем данные из буфера
