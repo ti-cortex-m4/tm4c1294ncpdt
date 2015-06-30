@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 OUT_MINUTE3.C
-                    
+
 
 ------------------------------------------------------------------------------*/
 
@@ -12,7 +12,8 @@ OUT_MINUTE3.C
 #include "../serial/ports.h"
 #include "../realtime/realtime.h"
 #include "../energy.h"
-#include "../energy2.h"
+#include "../kernel/array_mnt.h"
+#include "out_minute3.h"
 
 
 

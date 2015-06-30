@@ -7,7 +7,6 @@ ARRAYS_BUFF,C
 #include "../main.h"
 #include "../memory/mem_energy.h"
 #include "../memory/mem_realtime.h"
-#include "../energy.h"
 #include "../realtime/realtime.h"
 #include "../nvram/23x1024.h"
 #include "arrays_buff.h"

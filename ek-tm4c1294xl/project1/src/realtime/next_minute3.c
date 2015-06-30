@@ -13,7 +13,7 @@ NEXT_MINUTE3.C
 #include "../impulses/impulses.h"
 #include "next_params_time.h"
 #include "realtime_storage.h"
-#include "../energy2.h"
+#include "../kernel/array_mnt.h"
 
 
 

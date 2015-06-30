@@ -10,6 +10,7 @@ KEY_SINGLE2.C
 #include "../keyboard.h"
 #include "../../display/display.h"
 #include "../../realtime/realtime.h"
+#include "../../kernel/array_mnt.h"
 #include "../../energy.h"
 #include "../../energy2.h"
 #include "../../energy4.h"

@@ -19,7 +19,7 @@ ENERGY4.C
 #include "realtime/realtime.h"
 #include "groups.h"
 #include "energy.h"
-#include "energy2.h"
+#include "kernel/array_mnt.h"
 #include "energy4.h"
 
 
