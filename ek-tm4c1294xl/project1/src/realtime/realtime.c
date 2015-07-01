@@ -11,6 +11,7 @@ TODO атомарные операции
 #include "../memory/mem_params.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/wait_query.h"
+#include "../hardware/power_off.h"
 #include "../time/rtc.h"
 #include "../health.h"
 #include "../serial/dtr.h"
@@ -272,6 +273,12 @@ time    tiT;
 	return;
   }
   boHealthTimeRTC = true;
+
+  if (IsPowerOff())
+  {
+    ShowLo("   power off    ");
+    return;
+  }
 
   if (tiCurr.bSecond != tiT.bSecond)
   {
