@@ -98,6 +98,7 @@ bool    GetRecord(class  clT, uint  iwRecord)
     case CLA_IMPULSE:  wPage = IMP_RECORD; break;
     case CLA_MODEM:    wPage = MOD_RECORD; break;
     case CLA_PHONES2:  wPage = PH2_RECORD; break;
+    default: ASSERT(false);
   }
 
   uint i = (iwRecord % wRECORDS);
@@ -119,6 +120,7 @@ ulong   GetRecordCount(class  clT)
     case CLA_IMPULSE:  return(cdwImpRecord);
     case CLA_MODEM:    return(cdwModRecord);
     case CLA_PHONES2:  return(cdwPh2Record);
+    default: ASSERT(false); return 0;
   }
 }
 
@@ -126,7 +128,7 @@ ulong   GetRecordCount(class  clT)
 bool    GetRecordsBlock(class  clT, uchar  ibBlock)
 {
   uint i = GetRecordCount(clT) % wRECORDS;
-  ibBlock = (bRECORD_SIZE + i/bRECORD_BLOCK - ibBlock) % bRECORD_PAGES;
+  ibBlock = (bRECORD_PAGES + i/bRECORD_BLOCK - ibBlock) % bRECORD_PAGES;
 
   switch (clT)
   {
@@ -136,6 +138,7 @@ bool    GetRecordsBlock(class  clT, uchar  ibBlock)
     case CLA_IMPULSE:  return(OpenIn(IMP_RECORD + ibBlock));
     case CLA_MODEM:    return(OpenIn(MOD_RECORD + ibBlock));
     case CLA_PHONES2:  return(OpenIn(PH2_RECORD + ibBlock));
+    default: ASSERT(false); return 0;
   }
 }
 

@@ -54,6 +54,10 @@ QUERIES2.H
 #define bEXT_SETADDRESS                29
 #define bEXT_GETADDRESSES              17
 
+#define bEXT_GETRECORD                 19
+#define bEXT_GETRECORDSBLOCK           20
+#define bEXT_GETRECORDSBLOCK2          99
+
 #define bEXT_GETCURRENT                35
 
 #define bEXT_GETEXTENDED40             42
