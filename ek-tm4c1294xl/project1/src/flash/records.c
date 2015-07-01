@@ -26,9 +26,9 @@ bool    AddKeyRecord(event  ev)
 
   memset(&reCurr, 0, sizeof(record));
 
-  reCurr.ti     = *GetCurrTimeDate();
+  reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwKeyRecord++;
-  reCurr.ev    = ev;
+  reCurr.ev = ev;
 /*
   switch (ev)
   {
@@ -58,7 +58,7 @@ bool    AddKeyRecord(event  ev)
   OpenOut(KEY_RECORD + i / bRECORD_BLOCK);
   memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
 
-  return( CloseOut() );
+  return CloseOut();
 }
 
 
@@ -122,7 +122,7 @@ bool    AddSysRecord(event  ev)
   OpenOut(SYS_RECORD + i / bRECORD_BLOCK);
   memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
 
-  return( CloseOut() );
+  return CloseOut();
 }
 
 
@@ -132,13 +132,13 @@ bool    AddSysRecordReprogram(event  ev)
 }
 
 
-bool AddDigRecord(event  ev)
+bool    AddDigRecord(event  ev)
 {
   return false;
 }
 
 
-bool AddImpRecord(event  ev)
+bool    AddImpRecord(event  ev)
 {
   if (IsRecordDisabled(ev)) return(1);
 
@@ -175,11 +175,11 @@ bool AddImpRecord(event  ev)
   OpenOut(IMP_RECORD + i / bRECORD_BLOCK);
   memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
 
-  return( CloseOut() );
+  return CloseOut();
 }
 
 
-bool AddModRecord(event  ev)
+bool    AddModRecord(event  ev)
 {
   if (IsRecordDisabled(ev)) return(1);
 
@@ -213,5 +213,5 @@ bool AddModRecord(event  ev)
   OpenOut(MOD_RECORD + i / bRECORD_BLOCK);
   memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
 
-  return( CloseOut() );
+  return CloseOut();
 }
