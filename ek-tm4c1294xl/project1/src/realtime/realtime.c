@@ -274,11 +274,8 @@ time    tiT;
   }
   boHealthTimeRTC = true;
 
-  if (IsPowerOff())
-  {
-    ShowLo("   power off    ");
+  if (RunPowerOff())
     return;
-  }
 
   if (tiCurr.bSecond != tiT.bSecond)
   {
