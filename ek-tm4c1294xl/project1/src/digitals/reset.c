@@ -5,10 +5,13 @@ RESET.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../console.h"
+#include "../memory/mem_energy.h"
+#include "../memory/mem_profile.h"
 #include "reset.h"
 
 
-/*
+
 bool    Recalc(bool  fUseImp, bool  fUsePow)
 {
 uchar   i;
@@ -94,7 +97,7 @@ uchar   i;
 }
 
 
-
+/*
 bool    ClearCanals(bool  fStopCan)
 {
   ShowHi(szProcess); Clear();
