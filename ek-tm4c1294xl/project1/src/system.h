@@ -80,6 +80,15 @@ SYSTEM.H
 #define wTIMES          (uint)(10*48)
 
 
+// количество записей в журнале событий
+#define wRECORDS        500
+#define wRECORDS2       20000
+
+// количество классов событий
+#define bEVENTS         6
+#define bEVENTS2        1
+
+
 // мажорная версия прибора
 #define bMAXVERSION     4
 

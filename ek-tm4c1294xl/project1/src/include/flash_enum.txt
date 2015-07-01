@@ -108,5 +108,12 @@ typedef enum
 
   CORRECT1              = SET_PASSWORD + 1,
 
-  FLASH_END             = CORRECT1 + sizeof(Correct1)/wLEAF_BYTES + 1
+  KEY_RECORD            = CORRECT1 + sizeof(Correct1)/wLEAF_BYTES + 1,
+  SYS_RECORD            = KEY_RECORD + bRECORD_SIZE,
+  DIG_RECORD            = SYS_RECORD + bRECORD_SIZE,
+  IMP_RECORD            = DIG_RECORD + bRECORD_SIZE,
+  MOD_RECORD            = IMP_RECORD + bRECORD_SIZE,
+  AUX_RECORD            = MOD_RECORD + bRECORD_SIZE,
+
+  FLASH_END             = AUX_RECORD + bRECORD2_SIZE
 } flash;
