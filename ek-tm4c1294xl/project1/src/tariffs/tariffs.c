@@ -74,7 +74,7 @@ uchar  ibMonth, ibMode;
 
   if (enGlobal == GLB_WORK)
   {
-  	MakeAllCurrTariffs();
+  	MakeAllCurrTariffs(*GetCurrTimeDate());
   }
   else
   {
@@ -204,7 +204,7 @@ uchar   i,j;
 
 
 // возвращает тип текущих суток относительнос приска праздников
-uchar   RelaxIndex(void)
+uchar   RelaxIndex(time  tiAlt)
 {
 uchar i;
 
@@ -218,12 +218,11 @@ uchar i;
 
   return 0;
 }
-// требует предварительной установки переменных tiAlt
 
 
 
 // рассчитывает массив индексов тарифов для каждого получаса текущих суток (для мощности и энергии)
-void    MakeAllCurrTariffs(void)
+void    MakeAllCurrTariffs(time  tiAlt)
 {
 uchar  i, j;
 uchar  ibMonth, ibMode;
@@ -250,13 +249,14 @@ uchar  ibMonth, ibMode;
 
   if (boRelaxsFlag == true)
   {
-    j = RelaxIndex();
+    j = RelaxIndex(tiAlt);
     i = GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay);
 
     if ((j != 2) && ((i == 5) || (i == 6) || (j == 1)))
     {
       i = ibRelaxsTariff; 
       if (i >= bTARIFFS) i = 0;
+
       // memset(&mpibEngCurrTariff, i, sizeof(mpibEngCurrTariff));
       memset(&mpibPowCurrTariff, i, sizeof(mpibPowCurrTariff));
     }
@@ -264,7 +264,7 @@ uchar  ibMonth, ibMode;
 }
 
 
-void    MakeAllPrevTariffs(void)
+void    MakeAllPrevTariffs(time  tiAlt)
 {
 uchar  i, j;
 uchar  ibMonth, ibMode;
@@ -291,16 +291,16 @@ uchar  ibMonth, ibMode;
 
   if (boRelaxsFlag == true)
   {
-    j = RelaxIndex();
+    j = RelaxIndex(tiAlt);
     i = GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay);
 
     if ((j != 2) && ((i == 5) || (i == 6) || (j == 1)))
     {
       i = ibRelaxsTariff; 
       if (i >= bTARIFFS) i = 0;
+
       // memset(&mpibEngPrevTariff, i, sizeof(mpibEngPrevTariff));
       memset(&mpibPowPrevTariff, i, sizeof(mpibPowPrevTariff));
     }
   }
 }
-// требует предварительной установки переменной tiAlt

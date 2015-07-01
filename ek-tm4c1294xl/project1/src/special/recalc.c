@@ -130,7 +130,7 @@ uchar   i;
     CalcTimeDate(fUseImp,fUsePow);
 
 
-    MakeAllPrevTariffs();
+    MakeAllPrevTariffs(tiAlt);
 
     fLoadMem = 0;
     CalcAllCanals(fUseImp);

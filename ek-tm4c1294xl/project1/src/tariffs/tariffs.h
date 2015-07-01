@@ -35,5 +35,5 @@ void    MakeTariff(uchar  mpTariff[48]);
 
 void    DefaultTariffs(void);
 
-void    MakeAllCurrTariffs(void);
-void    MakeAllPrevTariffs(void);
+void    MakeAllCurrTariffs(time  ti);
+void    MakeAllPrevTariffs(time  ti);

@@ -66,7 +66,7 @@ void    MakeSpecial(void)
     CalcTimeDate(1,1);
 
 
-    MakeAllPrevTariffs();
+    MakeAllPrevTariffs(tiAlt);
 
     CalcDigCanals();
 

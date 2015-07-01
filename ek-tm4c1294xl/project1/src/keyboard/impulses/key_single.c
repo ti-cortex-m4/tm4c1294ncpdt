@@ -202,7 +202,7 @@ void    ShowModemReadTimeCan(bool  fShowTimeDate)
       {
         sprintf(szHi+14,"%2u",ibX+1);
         Clear();
-        (fShowTimeDate) ? ShowTimeDate(tiAlt) : ShowDeltaTime(tiAlt);
+        (fShowTimeDate) ? ShowTimeDate(ti2.tiValue) : ShowDeltaTime(ti2.tiValue);
       }
       else Error();
     }
