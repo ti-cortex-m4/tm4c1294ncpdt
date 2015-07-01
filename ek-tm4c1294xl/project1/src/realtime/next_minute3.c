@@ -13,6 +13,7 @@ NEXT_MINUTE3.C
 #include "../impulses/impulses.h"
 #include "next_params_time.h"
 #include "realtime_storage.h"
+#include "../nvram/cache.h"
 #include "../kernel/array_mnt.h"
 
 
@@ -47,6 +48,7 @@ void    NextMinute3(void)
   SaveImpAbsBuff();
 
   SaveRealtimeTimes(); // TODO another place
+  SaveCache(&chRealtimeValues);
 
   if (boMntParams == true) NextParamsTime();
 }

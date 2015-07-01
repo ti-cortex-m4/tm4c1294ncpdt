@@ -8,8 +8,9 @@ CACHE.H
 
 
 
-bool    SaveCache(cache const  *pfl);
-bool    LoadCache(cache const  *pfl);
+bool    SaveCache(cache const  *pch);
+bool    FreeCache(cache const  *pch);
+bool    LoadCache(cache const  *pch);
 
 bool    SaveArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX, void  *pBuff);
 bool    FreeArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX);

@@ -16,6 +16,12 @@ bool    SaveCache(cache const  *pch)
 }
 
 
+bool    FreeCache(cache const  *pch)
+{
+  return FreeNvramBuff(pch->dwAddr, pch->wSize);
+}
+
+
 bool    LoadCache(cache const  *pch)
 {
   return ReadNvramBuff(pch->dwAddr, pch->pbBuff, pch->wSize);

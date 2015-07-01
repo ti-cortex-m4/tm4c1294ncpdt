@@ -17,6 +17,7 @@ REALTIME_INIT.C
 #include "../hardware/watchdog.h"
 #include "../hardware/beep.h"
 #include "../serial/print.h"
+#include "../nvram/cache.h"
 #include "realtime.h"
 #include "realtime_storage.h"
 
@@ -160,6 +161,7 @@ void    LoadRealtime(void)
   PrintString("\n time    "); PrintInt(ibSoftTim); PrintInt(iwHardTim);
 
   LoadRealtimeTimes();
+  LoadCache(&chRealtimeValues);
 
   PrintString("\n tiCurr "); PrintTime(tiCurr);
   PrintString("\n tiPrev "); PrintTime(tiPrev);
