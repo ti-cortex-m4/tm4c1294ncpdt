@@ -18,6 +18,7 @@ RESPONSE253_CRC,C
 #include "response_crc.h"
 #include "out_energy.h"
 #include "out_common.h"
+#include "out_records.h"
 #include "response253_crc.h"
 
 
@@ -55,7 +56,7 @@ void    Response253_CRC(void)
 
     case bEXT_GETRECORD:        OutRecordExt();        break;
     case bEXT_GETRECORDSBLOCK:  OutRecordsBlockExt();  break;
-    case bEXT_GETRECORDSBLOCK2: OutRecordsBlockExt2(); break;
+//    case bEXT_GETRECORDSBLOCK2: OutRecordsBlockExt2(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
