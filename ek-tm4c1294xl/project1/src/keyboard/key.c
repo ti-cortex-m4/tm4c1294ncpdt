@@ -48,22 +48,22 @@ uint    GetKey(void)
 {
 uint  i = 0;
 
-  if (HWREG((GPIO_PORTN_BASE + GPIO_O_DATA + 0x0004)) == 0) i |= 0x0001; // 0
-  if (HWREG((GPIO_PORTN_BASE + GPIO_O_DATA + 0x0008)) == 0) i |= 0x0002; // 1
-  if (HWREG((GPIO_PORTN_BASE + GPIO_O_DATA + 0x0010)) == 0) i |= 0x0004; // 2
-  if (HWREG((GPIO_PORTN_BASE + GPIO_O_DATA + 0x0020)) == 0) i |= 0x0008; // 3
-  if (HWREG((GPIO_PORTN_BASE + GPIO_O_DATA + 0x0040)) == 0) i |= 0x0010; // 4
-  if (HWREG((GPIO_PORTN_BASE + GPIO_O_DATA + 0x0080)) == 0) i |= 0x0020; // 5
+  if (HWREG(GPIO_PORTN_BASE + GPIO_O_DATA + 0x0004) == 0) i |= 0x0001; // 0
+  if (HWREG(GPIO_PORTN_BASE + GPIO_O_DATA + 0x0008) == 0) i |= 0x0002; // 1
+  if (HWREG(GPIO_PORTN_BASE + GPIO_O_DATA + 0x0010) == 0) i |= 0x0004; // 2
+  if (HWREG(GPIO_PORTN_BASE + GPIO_O_DATA + 0x0020) == 0) i |= 0x0008; // 3
+  if (HWREG(GPIO_PORTN_BASE + GPIO_O_DATA + 0x0040) == 0) i |= 0x0010; // 4
+  if (HWREG(GPIO_PORTN_BASE + GPIO_O_DATA + 0x0080) == 0) i |= 0x0020; // 5
 
-  if (HWREG((GPIO_PORTH_AHB_BASE + GPIO_O_DATA + 0x0004)) == 0) i |= 0x0040; // 6
-  if (HWREG((GPIO_PORTH_AHB_BASE + GPIO_O_DATA + 0x0008)) == 0) i |= 0x0080; // 7
-  if (HWREG((GPIO_PORTH_AHB_BASE + GPIO_O_DATA + 0x0010)) == 0) i |= 0x0100; // 8
-  if (HWREG((GPIO_PORTH_AHB_BASE + GPIO_O_DATA + 0x0020)) == 0) i |= 0x0200; // 9
+  if (HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DATA + 0x0004) == 0) i |= 0x0040; // 6
+  if (HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DATA + 0x0008) == 0) i |= 0x0080; // 7
+  if (HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DATA + 0x0010) == 0) i |= 0x0100; // 8
+  if (HWREG(GPIO_PORTH_AHB_BASE + GPIO_O_DATA + 0x0020) == 0) i |= 0x0200; // 9
 
-  if (HWREG((GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0004)) == 0) i |= 0x0400; // .
-  if (HWREG((GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0008)) == 0) i |= 0x0800; // -
-  if (HWREG((GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0010)) == 0) i |= 0x1000; // P
-  if (HWREG((GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0020)) == 0) i |= 0x2000; // E
+  if (HWREG(GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0004) == 0) i |= 0x0400; // .
+  if (HWREG(GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0008) == 0) i |= 0x0800; // -
+  if (HWREG(GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0010) == 0) i |= 0x1000; // P
+  if (HWREG(GPIO_PORTQ_BASE + GPIO_O_DATA + 0x0020) == 0) i |= 0x2000; // E
 
   return i;
 }

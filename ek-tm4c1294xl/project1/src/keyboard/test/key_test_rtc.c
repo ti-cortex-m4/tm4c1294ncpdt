@@ -7,6 +7,7 @@ KEY_TEST_RTC.H
 #include "../../main.h"
 #include "../keyboard.h"
 #include "../../display/display.h"
+#include "../../hardware/power_off.h"
 #include "../../health.h"
 #include       "inc/hw_gpio.h"
 #include       "inc/hw_memmap.h"
@@ -56,5 +57,6 @@ void    auto_TestRTC(void)
   { 
     szLo[6]  = ShowRTC(boHealthLabelRTC);
     szLo[15] = ShowRTC(boHealthTimeRTC);
+    szHi[15] = IsPowerOff() ? '+' : '-';
   }
 }
