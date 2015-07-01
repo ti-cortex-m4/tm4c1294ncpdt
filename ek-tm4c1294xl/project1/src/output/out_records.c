@@ -6,7 +6,11 @@ OUT_RECORDS.C
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_records.h"
 #include "../serial/ports.h"
+#include "../include/flash.h"
+#include "../flash/records.h"
+#include "out_records.h"
 
 
 
@@ -40,8 +44,8 @@ void    OutRecordsBlockExt(void)
     PushLong( PGetRecordCount(InBuff(6)) );
     PushInt(wRECORDS);
 
-    Push(&mpbPageIn, wFREEPAGE_SIZE);
-    Output(6+wFREEPAGE_SIZE);
+    Push(&mpbPageIn, wLEAF_SIZE);
+    Output(6+wLEAF_SIZE);
   }
 }
 
@@ -58,7 +62,7 @@ void    OutRecordsBlockExt2(void)
     PushLong( PGetRecordCount2(InBuff(6)) );
     PushInt(wRECORDS2);
 
-    Push(&mpbPageIn, wFREEPAGE_SIZE);
-    Output(6+wFREEPAGE_SIZE);
+    Push(&mpbPageIn, wLEAF_SIZE);
+    Output(6+wLEAF_SIZE);
   }
 }
