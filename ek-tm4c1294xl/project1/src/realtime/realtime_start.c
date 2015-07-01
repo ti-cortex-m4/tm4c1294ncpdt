@@ -16,6 +16,7 @@ REALTIME_START.C
 #include "../kernel/arrays_buff.h"
 #include "../digitals/digitals.h"
 #include "../digitals/profile/profile.h"
+#include "../nvram/cache.h"
 #include "realtime_storage.h"
 
 
@@ -45,6 +46,8 @@ void    StartRealtime(void)
   tiCurr = *GetCurrTimeDate();
   tiPrev = tiCurr;
   SaveRealtimeTimes();
+
+  FreeCache(&chRealtimeValues);
 
   cbSummer = 0;
   cbWinter = 0;
