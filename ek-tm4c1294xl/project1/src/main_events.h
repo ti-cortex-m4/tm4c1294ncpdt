@@ -193,9 +193,9 @@ typedef enum
 // тип 'событие'
 typedef struct
 {
-  time          tiNow;
+  time          ti;
   ulong         cdwRecord;
-  event         evCode;
+  event         ev;
   uchar         mpbBuff[8];
 } record;
 
