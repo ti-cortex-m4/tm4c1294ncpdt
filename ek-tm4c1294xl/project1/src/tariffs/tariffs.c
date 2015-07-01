@@ -74,7 +74,7 @@ uchar  ibMonth, ibMode;
 
   if (enGlobal == GLB_WORK)
   {
-  	MakeAllCurrTariffs(*GetCurrTimeDate());
+  	MakeAllCurrTariffs();
   }
   else
   {
@@ -203,16 +203,16 @@ uchar   i,j;
 
 
 
-// возвращает тип текущих суток относительнос приска праздников
-uchar   RelaxIndex(time  tiAlt)
+// возвращает тип текущих суток относительно списка праздников
+uchar   RelaxIndex(time  ti)
 {
 uchar i;
 
   for (i=0; i<GetRelaxSize(); i++)
   {
     GetRelaxDate(i);
-    if ((tiRelax.bDay   == tiAlt.bDay) &&
-        (tiRelax.bMonth == tiAlt.bMonth)) 
+    if ((tiRelax.bDay   == ti.bDay) &&
+        (tiRelax.bMonth == ti.bMonth)) 
       return tiRelax.bSecond;   
   }
 
@@ -221,25 +221,24 @@ uchar i;
 
 
 
-// рассчитывает массив индексов тарифов для каждого получаса текущих суток (для мощности и энергии)
-void    MakeAllCurrTariffs(time  tiAlt)
+void    MakeAllCurrTariffs(void)
 {
 uchar  i, j;
 uchar  ibMonth, ibMode;
 
-  tiAlt = *GetCurrTimeDate();
+  time ti = *GetCurrTimeDate();
 
   if (boGapsFlag == false) 
   {
-    ibMonth = tiAlt.bMonth - 1;
+    ibMonth = ti.bMonth - 1;
   }
   else
   {
     MakeGaps();
-    ibMonth = mpbGaps[GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay)];
+    ibMonth = mpbGaps[GetDayIndexMD(ti.bMonth, ti.bDay)];
   } 
 
-  ibMode  = GetMode(tiAlt);
+  ibMode  = GetMode(ti);
 
   zoAlt = *PGetZoneEngMonthMode(ibMonth,ibMode);
   MakeTariff(mpibEngCurrTariff);
@@ -249,8 +248,8 @@ uchar  ibMonth, ibMode;
 
   if (boRelaxsFlag == true)
   {
-    j = RelaxIndex(tiAlt);
-    i = GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay);
+    j = RelaxIndex(ti);
+    i = GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay);
 
     if ((j != 2) && ((i == 5) || (i == 6) || (j == 1)))
     {
@@ -264,24 +263,24 @@ uchar  ibMonth, ibMode;
 }
 
 
-void    MakeAllPrevTariffs(time  tiAlt)
+void    MakeAllPrevTariffs(time  ti)
 {
 uchar  i, j;
 uchar  ibMonth, ibMode;
 
-  ibMonth = tiAlt.bMonth - 1;                   
+  ibMonth = ti.bMonth - 1;                   
 
   if (boGapsFlag == false) 
   {
-    ibMonth = tiAlt.bMonth - 1;
+    ibMonth = ti.bMonth - 1;
   }
   else
   {
     MakeGaps();
-    ibMonth = mpbGaps[GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay)];
+    ibMonth = mpbGaps[GetDayIndexMD(ti.bMonth, ti.bDay)];
   } 
 
-  ibMode  = GetMode(tiAlt);
+  ibMode  = GetMode(ti);
 
   zoAlt = *PGetZoneEngMonthMode(ibMonth,ibMode);
   MakeTariff(mpibEngPrevTariff);
@@ -291,8 +290,8 @@ uchar  ibMonth, ibMode;
 
   if (boRelaxsFlag == true)
   {
-    j = RelaxIndex(tiAlt);
-    i = GetWeekdayYMD(tiAlt.bYear, tiAlt.bMonth, tiAlt.bDay);
+    j = RelaxIndex(ti);
+    i = GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay);
 
     if ((j != 2) && ((i == 5) || (i == 6) || (j == 1)))
     {

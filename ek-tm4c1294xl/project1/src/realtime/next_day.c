@@ -20,7 +20,6 @@ NEXT_DAY.C
 #include "../digitals/extended/extended_7.h"
 #include "../special/defects.h"
 #include "../special/recalc_def.h"
-#include "../time/rtc.h"
 #include "realtime_storage.h"
 
 
@@ -34,7 +33,7 @@ void    NextDay(void)
   NextDayExtended6();
 
   MakeCntMonCan();
-  MakeAllCurrTariffs(*GetCurrTimeDate());
+  MakeAllCurrTariffs();
 
   SaveCntMonBuff();
 
