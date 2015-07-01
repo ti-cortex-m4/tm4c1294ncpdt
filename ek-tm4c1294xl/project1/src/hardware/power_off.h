@@ -7,3 +7,4 @@ POWER_OFF.H
 void    InitPowerOff(void);
 
 bool    IsPowerOff(void);
+bool    RunPowerOff(void);

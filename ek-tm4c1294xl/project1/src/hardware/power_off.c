@@ -9,13 +9,14 @@ POWER_OFF.C
 #include "inc/hw_memmap.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_types.h"
+#include "../display/display.h"
 #include "../time/delay.h"
 #include "power_off.h"
 
 
 
 //                                           0123456789ABCDEF
-static char const       szPowerOff[]      = "   power off    ";
+static char const       szPowerOff[]      = "малое напряжение";
 
 
 
@@ -49,7 +50,7 @@ static bool fPowerOff = false;
 
   if (fPowerOff == true)
   {
-    fPowerOff == false;
+    fPowerOff = false;
     Clear();
   }
 
