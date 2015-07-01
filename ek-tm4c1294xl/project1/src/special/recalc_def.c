@@ -17,26 +17,26 @@ RECALC_DEF.C
 
 bool SaveDefDay(uchar  ibDayTo)
 {
-  return SaveBuff(DEFDAYCAN + ibDayTo*bIMPULSE_CAN, mpdeDayCan, sizeof(mpdeDayCan));
+  return SaveBuff(DEFDAYCAN + ibDayTo*IMP_CAN_PAGES, mpdeDayCan, sizeof(mpdeDayCan));
 }
 
 
 bool LoadDefDay(uchar  ibDayFrom)
 {
-  return LoadBuff(DEFDAYCAN + ibDayFrom*bIMPULSE_CAN, mpdeDayCan, sizeof(mpdeDayCan));
+  return LoadBuff(DEFDAYCAN + ibDayFrom*IMP_CAN_PAGES, mpdeDayCan, sizeof(mpdeDayCan));
 }
 
 
 
 bool SaveDefMon(uchar  ibMonTo)
 {
-  return SaveBuff(DEFMONCAN + ibMonTo*bIMPULSE_CAN, mpdeMonCan, sizeof(mpdeMonCan));
+  return SaveBuff(DEFMONCAN + ibMonTo*IMP_CAN_PAGES, mpdeMonCan, sizeof(mpdeMonCan));
 }
 
 
 bool LoadDefMon(uchar  ibMonFrom)
 {
-  return LoadBuff(DEFMONCAN + ibMonFrom*bIMPULSE_CAN, mpdeMonCan, sizeof(mpdeMonCan));
+  return LoadBuff(DEFMONCAN + ibMonFrom*IMP_CAN_PAGES, mpdeMonCan, sizeof(mpdeMonCan));
 }
 
 

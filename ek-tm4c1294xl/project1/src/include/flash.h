@@ -38,9 +38,9 @@ FLASH.H
 
 
 // количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
-#define UINTCAN_PAGES       (uchar)(sizeof(uint)    * bCANALS/wLEAF_BYTES + 1)
-#define bIMPULSE_CAN        (uchar)(sizeof(impulse) * bCANALS/wLEAF_BYTES + 1)
-#define bPOWER_GRP          (uchar)(sizeof(power)   * bGROUPS/wLEAF_BYTES + 1)
+#define UINT_CAN_PAGES      (uchar)(sizeof(uint)    * bCANALS/wLEAF_BYTES + 1)
+#define IMP_CAN_PAGES       (uchar)(sizeof(impulse) * bCANALS/wLEAF_BYTES + 1)
+#define MAXPOW_GRP_PAGES    (uchar)(sizeof(power)   * bGROUPS/wLEAF_BYTES + 1)
 #define FLOAT_CAN_PAGES     (uchar)(sizeof(float)   * bCANALS/wLEAF_BYTES + 1)
 #define DOUBLE_CAN_PAGES    (uchar)(sizeof(double)  * bCANALS/wLEAF_BYTES + 1)
 #define PARAMS_PAGES        (uchar)(sizeof(real)    * wPARAMS/wLEAF_BYTES + 1)
@@ -55,8 +55,8 @@ FLASH.H
 #define bRECORD_BLOCK   (uchar)(wLEAF_BYTES/sizeof(record))
 
 // количество страниц на журнал событий
-#define bRECORD_SIZE    (uchar)(wRECORDS/bRECORD_BLOCK + 1)
-#define wRECORD2_SIZE   (uint)(wRECORDS2/bRECORD_BLOCK + 1)
+#define bRECORD_PAGES   (uchar)(wRECORDS/bRECORD_BLOCK + 1)
+#define wRECORD2_PAGES  (uint)(wRECORDS2/bRECORD_BLOCK + 1)
 
 
 // количество страниц для графика профилей по получасам

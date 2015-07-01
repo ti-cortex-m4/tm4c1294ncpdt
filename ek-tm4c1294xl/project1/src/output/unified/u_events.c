@@ -26,11 +26,11 @@ U_EVENTS.C
 uint    GetPagesCount(uchar  ibClass)
 {
   if (ibClass == 1)
-    return bRECORD_SIZE;
+    return bRECORD_PAGES;
   else if (ibClass == 2) 
-    return wRECORD2_SIZE;
+    return wRECORD2_PAGES;
   else
-    return bRECORD_SIZE;
+    return bRECORD_PAGES;
 }
 
 
