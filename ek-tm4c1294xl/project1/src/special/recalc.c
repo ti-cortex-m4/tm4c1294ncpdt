@@ -9,10 +9,12 @@ RECALC.C
 #include "../memory/mem_energy.h"
 #include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
+#include "../memory/mem_settings.h"
 #include "../realtime/realtime_spec.h"
 #include "../time/timedate.h"
 #include "../time/calendar.h"
 #include "../tariffs/tariffs.h"
+#include "../flash/records.h"
 #include "../energy2.h"
 #include "calc.h"
 #include "recalc_def.h"
@@ -22,7 +24,35 @@ RECALC.C
 
 //                                         0123456789ABCDEF
 static char const       szRecalc1[]     = "Очистка данных  ",
-                        szRecalc2[]     = "Расчет данных   ";
+                        szRecalc2[]     = "Расчет данных   ",
+                        szOpenCalc1[]   = "Выключение сети ",
+                        szOpenCalc2[]   = "во время расчета";
+
+
+cache const             chOpenCalc = {OPEN_CALC, &boOpenCalc, sizeof(bool)};
+
+
+
+void    InitRecalc(void)
+{
+  LoadCache(&chOpenCalc);
+
+  if (boOpenCalc == true)
+  {
+    if (enGlobal == GLB_WORK)
+    {
+      AddSysRecord(EVE_OPENCALC1);
+      Recalc(1,1);
+      AddSysRecord(EVE_OPENCALC2);
+
+      boOpenCalc = false;
+      SaveCache(&chOpenCalc);
+
+      ShowHi(szOpenCalc1);
+      ShowLo(szOpenCalc2);
+    }
+  }
+}
 
 
 
@@ -34,6 +64,7 @@ uchar   i;
   uchar cbPercent = 0;
 
   boOpenCalc = true;
+  SaveCache(&chOpenCalc);
 
   if (fUseImp == 1)                                 // обнуление импульсов (энергии)
   {

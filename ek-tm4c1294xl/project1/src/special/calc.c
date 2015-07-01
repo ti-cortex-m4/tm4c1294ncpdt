@@ -16,8 +16,10 @@ CALC.C
 #include "../devices/devices.h"
 #include "../special/recalc_def.h"
 #include "../time/timedate.h"
+#include "../nvram/cache.h"
 #include "../energy.h"
 #include "special.h"
+#include "recalc.h"
 #include "calc.h"
 
 
@@ -36,6 +38,7 @@ void    OpenCalc(void)
   fLoadMon = 0;
 
   boOpenCalc = true;
+  SaveCache(&chOpenCalc);
 }
 
 
@@ -229,5 +232,6 @@ void    CloseCalc(bool  fUseImp, bool  fUsePow)
   }
 
   boOpenCalc = false;
+  SaveCache(&chOpenCalc);
 }
 

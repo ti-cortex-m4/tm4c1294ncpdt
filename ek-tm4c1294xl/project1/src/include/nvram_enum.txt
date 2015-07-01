@@ -82,7 +82,9 @@ typedef enum
   MAX_REPEATS           = USE_BOUNDS + sizeof(bool) + bNVRAM_FOOTER,
   RECALC_ALWAYS         = MAX_REPEATS + sizeof(bool) + bNVRAM_FOOTER,
 
-  FLOW_PORT_FROM        = RECALC_ALWAYS + sizeof(bool) + bNVRAM_FOOTER,
+  OPEN_CALC             = RECALC_ALWAYS + sizeof(bool) + bNVRAM_FOOTER,
+
+  FLOW_PORT_FROM        = OPEN_CALC + sizeof(bool) + bNVRAM_FOOTER,
   MAX_FLOW_DELAY        = FLOW_PORT_FROM + sizeof(bool) + bNVRAM_FOOTER,
   FLOW_PORT_TO          = MAX_FLOW_DELAY + sizeof(bool) + bNVRAM_FOOTER,
 
