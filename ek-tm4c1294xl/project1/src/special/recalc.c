@@ -124,17 +124,17 @@ uchar   i;
     iwDigHou = (wHOURS + iwHardHou - iwHou - bHouInc) % wHOURS;
 
 
-    tiAlt = HouIndexToDate(dwHouIndex);
+    time ti = HouIndexToDate(dwHouIndex);
     dwHouIndex--;                                   // индекс обрабатываемого получаса
 
-    CalcTimeDate(fUseImp,fUsePow);
+    CalcTimeDate(fUseImp, fUsePow, ti);
 
 
-    MakeAllPrevTariffs(tiAlt);
+    MakeAllPrevTariffs(ti);
 
     fLoadMem = 0;
-    CalcAllCanals(fUseImp);
-    CalcAllGroups(fUsePow);
+    CalcAllCanals(fUseImp, ti);
+    CalcAllGroups(fUsePow, ti);
   }
 
   CloseCalc(fUseImp,fUsePow);                       // заканчиваем обработку
