@@ -14,6 +14,11 @@ POWER_OFF.C
 
 
 
+//                                           0123456789ABCDEF
+static char const       szPowerOff[]      = "   power off    ";
+
+
+
 void    InitPowerOff(void)
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R13; // GPIO Port P Run Mode Clock Gating Control
@@ -27,4 +32,26 @@ void    InitPowerOff(void)
 bool    IsPowerOff(void)
 {
   return (HWREG(GPIO_PORTP_BASE + GPIO_O_DATA + 0x0008) == 0);
+}
+
+
+
+bool    RunPowerOff(void)
+{
+static bool fPowerOff = false;
+
+  if (IsPowerOff())
+  {
+    ShowLo(szPowerOff);
+    fPowerOff = true;
+    return true;
+  }
+
+  if (fPowerOff == true)
+  {
+    fPowerOff == false;
+    Clear();
+  }
+
+  return false;
 }
