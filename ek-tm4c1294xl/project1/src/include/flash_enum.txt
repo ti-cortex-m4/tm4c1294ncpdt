@@ -113,7 +113,8 @@ typedef enum
   DIG_RECORD            = SYS_RECORD + bRECORD_PAGES,
   IMP_RECORD            = DIG_RECORD + bRECORD_PAGES,
   MOD_RECORD            = IMP_RECORD + bRECORD_PAGES,
-  AUX_RECORD            = MOD_RECORD + bRECORD_PAGES,
+  PH2_RECORD            = MOD_RECORD + bRECORD_PAGES,
+  AUX_RECORD            = PH2_RECORD + bRECORD_PAGES,
 
-  FLASH_END             = AUX_RECORD + bRECORD2_SIZE
+  FLASH_END             = AUX_RECORD + wRECORD2_PAGES
 } flash;
