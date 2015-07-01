@@ -36,6 +36,7 @@ TODO .C
 #include "src/isr/serial2.h"
 #include "src/isr/serial3.h"
 #include "src/hardware/memory.h"
+#include "src/hardware/power_off.h"
 #include "src/uarts.h"
 #include "src/serial/modems.h"
 #include "src/serial/print.h"
@@ -110,6 +111,7 @@ int main(void) {
 	InitEsc();
 	InitUni();
 	InitFlow();             Delay(100); TestOK();
+	InitPowerOff();
 
 	InitSlide();
 
