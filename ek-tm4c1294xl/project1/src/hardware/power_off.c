@@ -9,6 +9,7 @@ POWER_OFF.C
 #include "inc/hw_memmap.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_types.h"
+#include "../time/delay.h"
 #include "power_off.h"
 
 
