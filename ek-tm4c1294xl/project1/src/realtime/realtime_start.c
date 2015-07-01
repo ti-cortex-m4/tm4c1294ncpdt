@@ -44,7 +44,7 @@ void    StartRealtime(void)
 
   tiCurr = *GetCurrTimeDate();
   tiPrev = tiCurr;
-  SaveTimeCurr();
+  SaveRealtimeTimes();
 
   cbSummer = 0;
   cbWinter = 0;

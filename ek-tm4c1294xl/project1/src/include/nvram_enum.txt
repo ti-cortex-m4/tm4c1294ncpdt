@@ -6,9 +6,10 @@ typedef enum
 
   LABEL_GLOBAL          = NVRAM_BEGIN,
 
-  REALTIME              = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_FOOTER,
+  REALTIME_TIMES        = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_FOOTER,
+  REALTIME_VALUES       = REALTIME_TIMES + sizeof(tuple2time) + bNVRAM_FOOTER,
 
-  PTR_MNT               = REALTIME + sizeof(tuple2time) + bNVRAM_FOOTER,
+  PTR_MNT               = REALTIME_VALUES + sizeof(realtime1) + bNVRAM_FOOTER,
   PTR_HHR               = PTR_MNT + sizeof(tuple2uint) + bNVRAM_FOOTER,
   PTR_DAY               = PTR_HHR + sizeof(tuple2uint) + bNVRAM_FOOTER,
   PTR_MON               = PTR_DAY + sizeof(tuple2uint) + bNVRAM_FOOTER,
