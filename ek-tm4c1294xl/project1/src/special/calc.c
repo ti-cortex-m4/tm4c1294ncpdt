@@ -43,13 +43,13 @@ void    OpenCalc(void)
 
 
 
-void    CalcTimeDate(bool  fUseImp, bool  fUsePow, time  tiAlt)
+void    CalcTimeDate(bool  fUseImp, bool  fUsePow, time  ti)
 {
 static time tiDig;
 
-  if ((tiOldDay.bYear  != tiAlt.bYear)  ||          // обработка по дням
-      (tiOldDay.bMonth != tiAlt.bMonth) ||
-      (tiOldDay.bDay   != tiAlt.bDay))
+  if ((tiOldDay.bYear  != ti.bYear)  ||          // обработка по дням
+      (tiOldDay.bMonth != ti.bMonth) ||
+      (tiOldDay.bDay   != ti.bDay))
   {
     if (fLoadDay == 1)                                 
     {
@@ -63,9 +63,9 @@ static time tiDig;
     for (ibDay=0; ibDay<bDAYS; ibDay++)
     {
       tiDig = mpdeDay[ibDay];
-      if ((tiAlt.bYear  == tiDig.bYear)  &&
-          (tiAlt.bMonth == tiDig.bMonth) &&
-          (tiAlt.bDay   == tiDig.bDay)) break;
+      if ((ti.bYear  == tiDig.bYear)  &&
+          (ti.bMonth == tiDig.bMonth) &&
+          (ti.bDay   == tiDig.bDay)) break;
     }
   
     if (ibDay < bDAYS)
@@ -81,8 +81,8 @@ static time tiDig;
   }
 
 
-  if ((tiOldMon.bYear  != tiAlt.bYear)  ||          // обработка по месяцам
-      (tiOldMon.bMonth != tiAlt.bMonth))
+  if ((tiOldMon.bYear  != ti.bYear)  ||          // обработка по месяцам
+      (tiOldMon.bMonth != ti.bMonth))
   {
     if (fLoadMon == 1)
     {
@@ -96,8 +96,8 @@ static time tiDig;
     for (ibMon=0; ibMon<bMONTHS; ibMon++)
     {
       tiDig = mpdeMon[ibMon];
-      if ((tiAlt.bYear  == tiDig.bYear)  &&
-          (tiAlt.bMonth == tiDig.bMonth)) break;
+      if ((ti.bYear  == tiDig.bYear)  &&
+          (ti.bMonth == tiDig.bMonth)) break;
     }
   
     if (ibMon < bMONTHS)
@@ -115,7 +115,7 @@ static time tiDig;
 
 
 
-void    CalcDigCanals(time  tiAlt)
+void    CalcDigCanals(time  ti)
 {
   LoadImpHouSpec(iwDigHou,1);                       // обработка по получасам
 
@@ -134,13 +134,13 @@ void    CalcDigCanals(time  tiAlt)
       {
         w = mpwChannels[ diPrev.ibLine ];
 
-        if (IsWinterDouble(c, tiAlt) && (mpwImpHouCanSpec[c] != 0xFFFF))
+        if (IsWinterDouble(c, ti) && (mpwImpHouCanSpec[c] != 0xFFFF))
         {
           w += mpwImpHouCanSpec[c];
           mpbWinterCan[c]++;
 
-          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, c, tiAlt );
-          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec, c, tiAlt );
+          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, c, ti );
+          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec, c, ti );
         }
       }
 
@@ -150,11 +150,11 @@ void    CalcDigCanals(time  tiAlt)
       mpboReadyCan[c] = true;
       mpcwCalcDig[c]++;
 
-      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, tiAlt );
-      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, tiAlt );
+      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, ti );
+      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, ti );
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, tiAlt );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, tiAlt );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, ti );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, ti );
     }
   }
 
@@ -163,7 +163,7 @@ void    CalcDigCanals(time  tiAlt)
 
 
 
-void    CalcAllCanals(bool  fUseImp, time  tiAlt)
+void    CalcAllCanals(bool  fUseImp, time  ti)
 {
   if (fUseImp == 1)
   {
@@ -179,18 +179,18 @@ void    CalcAllCanals(bool  fUseImp, time  tiAlt)
       // если канал не используется: пропустить
       //if (mpboUsedNodes[ibCan] == false) continue;
      
-      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, tiAlt );
-      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, tiAlt );
+      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, ti );
+      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, ti );
 
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, tiAlt );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, tiAlt );
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, ti );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, ti );
     }
   }
 }
 
 
 
-void    CalcAllGroups(bool  fUsePow, time  tiAlt)
+void    CalcAllGroups(bool  fUsePow, time  ti)
 {
   if (fUsePow == 1)
   {
@@ -205,8 +205,8 @@ void    CalcAllGroups(bool  fUsePow, time  tiAlt)
     {
       if (mpfUsedGroups[ibGrp] == false) continue;
 
-      if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec, ibGrp, tiAlt );
-      if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec, ibGrp, tiAlt );
+      if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec, ibGrp, ti );
+      if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec, ibGrp, ti );
     }
   }
 }
