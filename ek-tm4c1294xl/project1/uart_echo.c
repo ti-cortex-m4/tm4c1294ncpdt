@@ -64,6 +64,7 @@ TODO .C
 #include "src/time/decret.h"
 #include "src/time/correct1.h"
 #include "src/time/correct2.h"
+#include "src/special/recalc.h"
 #include "src/realtime/realtime.h"
 #include "src/realtime/realtime_init.h"
 #include "src/output/response_crc.h"
@@ -133,6 +134,8 @@ int main(void) {
     InitTimer2(ui32SysClock);
 
     IntMasterEnable();
+
+    InitRecalc();
     LongBeep();
 
     while (1) {
