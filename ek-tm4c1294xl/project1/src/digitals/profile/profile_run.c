@@ -8,6 +8,7 @@ PROFILE_RUN.C
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_profile.h"
+#include "../../memory/mem_schedule.h"
 #include "../../memory/mem_extended_1.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
@@ -25,6 +26,7 @@ PROFILE_RUN.C
 #include "../../digitals/answer.h"
 #include "../../digitals/schedule/enbl_hours.h"
 #include "../../special/special.h"
+#include "../../special/recalc.h"
 #include "../../time/decret.h"
 #include "../../flash/records.h"
 #include "../limits.h"
@@ -93,7 +95,7 @@ bool    StartProfile(uchar  ibCanal)
   }
 
 
-  // TODO boRecalcCurr = mpboRecalcHou[GetCurrHouIndex()];
+  boRecalcCurr = mpboRecalcHou[GetCurrHouIndex()];
 
   AddDigRecord(EVE_PROFILE2);
   if (diCurr.ibPhone != 0) AddModRecord(EVE_MODEM_PROFILE);
@@ -305,12 +307,12 @@ void    NextProfile(void)
 
 //    if (boDTREnable == true) DTROff_All();
 
-//    if (boRecalcCurr == true)
-//    {
-//      AddDigRecord(EVE_RECALC20);
-//      Recalc(1,1);
-//      AddDigRecord(EVE_RECALC21);
-//    }
+    if (boRecalcCurr == true)
+    {
+      AddDigRecord(EVE_RECALC20);
+      Recalc(1,1);
+      AddDigRecord(EVE_RECALC21);
+    }
 //    else if (boRecalcMaxPowCurrDay == true)
 //    {
 //      Recalc_MaxPowCurrDay();
