@@ -136,7 +136,7 @@ void    key_Start(void)
 // TODO key_Start
 
     // рассчитываем массивы индексов тарифов для каждого получаса текущих суток (для мощности и энергии)
-    MakeAllCurrTariffs(*GetCurrTimeDate());
+    MakeAllCurrTariffs();
 
     StartFactors();
     StartRealtime();
@@ -187,7 +187,7 @@ void    key_Restart(void)
 // TODO key_Restart
 
     // рассчитываем массивы индексов тарифов для каждого получаса текущих суток (для мощности и энергии)
-    MakeAllCurrTariffs(*GetCurrTimeDate());
+    MakeAllCurrTariffs();
 
     // рассчитываем массив К эквивалентов
     StartFactors();
