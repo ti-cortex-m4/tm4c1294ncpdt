@@ -43,7 +43,7 @@ void    OpenCalc(void)
 
 
 
-void    CalcTimeDate(bool  fUseImp, bool  fUsePow)
+void    CalcTimeDate(bool  fUseImp, bool  fUsePow, time  tiAlt)
 {
 static time tiDig;
 
@@ -115,7 +115,7 @@ static time tiDig;
 
 
 
-void    CalcDigCanals(void)
+void    CalcDigCanals(time  tiAlt)
 {
   LoadImpHouSpec(iwDigHou,1);                       // обработка по получасам
 
@@ -134,7 +134,7 @@ void    CalcDigCanals(void)
       {
         w = mpwChannels[ diPrev.ibLine ];
 
-        if (IsWinterDouble(c) && (mpwImpHouCanSpec[c] != 0xFFFF))
+        if (IsWinterDouble(c, tiAlt) && (mpwImpHouCanSpec[c] != 0xFFFF))
         {
           w += mpwImpHouCanSpec[c];
           mpbWinterCan[c]++;
@@ -163,7 +163,7 @@ void    CalcDigCanals(void)
 
 
 
-void    CalcAllCanals(bool  fUseImp)
+void    CalcAllCanals(bool  fUseImp, time  tiAlt)
 {
   if (fUseImp == 1)
   {
@@ -190,7 +190,7 @@ void    CalcAllCanals(bool  fUseImp)
 
 
 
-void    CalcAllGroups(bool  fUsePow)
+void    CalcAllGroups(bool  fUsePow, time  tiAlt)
 {
   if (fUsePow == 1)
   {

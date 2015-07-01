@@ -399,7 +399,7 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
   for (c=0; c<4; c++)        
     mpwChannels[c] = (PopChar()*0x100 + PopChar()) & 0x7FFF;
 
-  MakeSpecial();
+  MakeSpecial(tiAlt);
   return(MakeStopHou(0));  
 }
 

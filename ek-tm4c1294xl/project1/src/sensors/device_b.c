@@ -497,7 +497,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   }
 
   MakeRefillWinter(tiAlt);
-  MakeSpecial();
+  MakeSpecial(tiAlt);
   if (boDsblRefill == false) MakeRefill(tiAlt);
   return(MakeStopHou(0));  
 }

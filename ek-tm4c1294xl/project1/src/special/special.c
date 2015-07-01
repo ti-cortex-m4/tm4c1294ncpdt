@@ -34,7 +34,7 @@ bool    IsDefect(uchar  ibCan)
 }
 
 
-bool    IsWinterDouble(uchar  ibCan)
+bool    IsWinterDouble(uchar  ibCan, time  tiAlt)
 {
   return(IsWinter(tiAlt) && (mpbWinterCan[ibCan] < 2));
 }
@@ -56,22 +56,22 @@ void    OpenSpecial(void)
 }
 
 
-void    MakeSpecial(void)
+void    MakeSpecial(time  tiAlt)
 {
-  if (IsDefect(ibDig) || IsWinterDouble(ibDig))
+  if (IsDefect(ibDig) || IsWinterDouble(ibDig, tiAlt))
   {
     cwHouRead++;
     sprintf(szLo," %02u:%02u",tiAlt.bHour,tiAlt.bMinute);
 
-    CalcTimeDate(1,1);
+    CalcTimeDate(1, 1, tiAlt);
 
 
     MakeAllPrevTariffs(tiAlt);
 
-    CalcDigCanals();
+    CalcDigCanals(tiAlt);
 
     fLoadMem = 0;
-    CalcAllGroups(1);
+    CalcAllGroups(1, tiAlt);
   }
 }
 

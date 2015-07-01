@@ -166,7 +166,7 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
     mpwChannels[c] = w;
   }
 
-  MakeSpecial();
+  MakeSpecial(tiAlt);
   return(MakeStopHou(0));
 }
 

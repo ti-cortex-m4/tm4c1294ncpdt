@@ -382,7 +382,7 @@ bool    ReadHeaderC(uchar  i)
   }
 
   tiAlt = tiDig;
-  if (IsDefect(ibDig)) MakeSpecial();
+  if (IsDefect(ibDig)) MakeSpecial(tiAlt);
   return(MakeStopHou(0));  
 }
 

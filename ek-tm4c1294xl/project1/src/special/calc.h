@@ -11,9 +11,9 @@ extern  bool                    fLoadHou, fLoadDay, fLoadMon,
 
 void    OpenCalc(void);
 
-void    CalcTimeDate(bool  fUseImp, bool  fUsePow);
-void    CalcDigCanals(void);
-void    CalcAllCanals(bool  fUseImp);
-void    CalcAllGroups(bool  fUsePow);
+void    CalcTimeDate(bool  fUseImp, bool  fUsePow, time  ti);
+void    CalcDigCanals(time  ti);
+void    CalcAllCanals(bool  fUseImp, time  ti);
+void    CalcAllGroups(bool  fUsePow, time  ti);
 
 void    CloseCalc(bool  fUseImp, bool  fUsePow);
