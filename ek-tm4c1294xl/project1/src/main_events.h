@@ -188,3 +188,32 @@ typedef enum
   EVE_PH2_FINISH         = 101,
   EVE_PH2_DEBUG          = 102,
 } event;
+
+
+// тип 'событие'
+typedef struct
+{
+  time          tiNow;
+  ulong         cdwRecord;
+  event         evCode;
+  uchar         mpbBuff[8];
+} record;
+
+
+// тип 'класс событий'
+typedef enum
+{
+  CLA_KEYBOARD          = 0,
+  CLA_SYSTEM            = 1,
+  CLA_DIGITAL           = 2,
+  CLA_IMPULSE           = 3,
+  CLA_MODEM             = 4,
+  CLA_PHONES2           = 5
+} class;
+
+
+// тип 'класс событий'
+typedef enum
+{
+  CLA_AUXILIARY         = 0,
+} class2;

@@ -44,6 +44,12 @@ void    OutFlashStack(void)
 
   PushChar(0x0D); PushChar(0x0A);
 
+  PUSH_ENUM(bRECORD_BLOCK)
+  PUSH_ENUM(bRECORD_SIZE)
+  PUSH_ENUM(wRECORD2_SIZE)
+
+  PushChar(0x0D); PushChar(0x0A);
+
   #include "../include/out_flash.txt"
 
   Output(3000);
