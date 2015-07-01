@@ -25,7 +25,7 @@ RECALC.C
 //                                         0123456789ABCDEF
 static char const       szRecalc1[]     = "Очистка данных  ",
                         szRecalc2[]     = "Расчет данных   ",
-                        szOpenCalc1[]   = "Выключение сети ",
+                        szOpenCalc1[]   = "   Выключение   ",
                         szOpenCalc2[]   = "во время расчета";
 
 
@@ -161,7 +161,7 @@ bool    ClearCanals(bool  fStopCan)
 
       if (CompareCurrPrevLines() == 1)
       {
-        mpboReadyCan[ibCan] = boTrue;
+        mpboReadyCan[ibCan] = true;
         if (fStopCan == 1) mpcwStopCan[ibCan] = wBuffD;
       }
     }
@@ -191,7 +191,7 @@ bool    ClearCanals(bool  fStopCan)
         // если канал не используется: пропустить
         //if (mpboUsedNodes[ibCan] == boFalse) continue;
 
-        if (mpboReadyCan[ibCan] == boTrue)
+        if (mpboReadyCan[ibCan] == true)
         {
           if (fStopCan == 1) wBuffD = 0xFFFF; else wBuffD = 0;
           SetCanInt(mpwImpHouCanSpec, ibCan, wBuffD);
