@@ -12,4 +12,4 @@ MEM_RECORDS.C
 record                  reCurr;
 
 // счётчики записей
-ulong                   cdwKeyRecord, cdwSysRecord, cdwDigRecord, cdwImpRecord;
+ulong                   cdwKeyRecord, cdwSysRecord, cdwDigRecord, cdwImpRecord, cdwModRecord, cdwPh2Record;
