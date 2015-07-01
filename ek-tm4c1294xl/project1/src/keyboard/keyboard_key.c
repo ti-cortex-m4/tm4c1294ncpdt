@@ -18,8 +18,9 @@ KEYBOARD_KEY.C
 #include "digitals/key_digitals.h"
 #include "digitals/schedule/key_enbl_hours.h"
 #include "digitals/schedule/key_ctrl_hours.h"
-#include "digitals/schedule/key_recalc.h"
+#include "digitals/schedule/key_recalc_time.h"
 #include "digitals/schedule/key_recalc_always.h"
+#include "digitals/schedule/key_recalc.h"
 #include "digitals/key_enbl_canals.h"
 #include "digitals/current/key_enbl_current.h"
 #include "digitals/profile/key_enbl_profile.h"
@@ -225,7 +226,7 @@ void    Keyboard_Key(void)
 
       case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
 
-      case bSET_RECALC:         key_SetRecalc();        break;
+      case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
 
       case bGET_CNTCURR_110:
@@ -388,7 +389,7 @@ void    Keyboard_Key(void)
 
       case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
 
-      case bSET_RECALC:         key_SetRecalc();        break;
+      case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
 
       case bGET_CNTCURR_10:
@@ -631,8 +632,13 @@ void    Keyboard_Key(void)
 
       case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
 
-      case bSET_RECALC:         key_SetRecalc();        break;
+      case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
+
+      case bSET_RECALC_FULL:
+      case bSET_RECALC_MAXPOW:
+      case bSET_RECALC_ENG:     key_SetRecalc();        break;
+
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:

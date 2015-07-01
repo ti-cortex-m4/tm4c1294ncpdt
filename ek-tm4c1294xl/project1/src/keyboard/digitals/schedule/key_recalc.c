@@ -1,106 +1,67 @@
 /*------------------------------------------------------------------------------
-KEY_RECALC.С
+KEY_RECALC.C
 
- 
+
 ------------------------------------------------------------------------------*/
 
 #include "../../../main.h"
-#include "../../../memory/mem_schedule.h"
-#include "../../keyboard.h"
-#include "../../../display/display.h"
-#include "../../../flash/files.h"
+#include "../../../console.h"
+#include "../../../special/recalc.h"
 
 
 
-//                                         0123456789ABCDEF
-static char const       szSetRecalc[]   = "Перерасчет      ";
-                     
-
-
-static void Show(void)
-{
-  Clear();
-  sprintf(szLo+1,"%02u:%02u",ibX/2,(ibX%2)*30);
-
-  if (mpboRecalcHou[ibX] == false)
-    strcpy(szLo+8,szNo);
-  else         
-    strcpy(szLo+8,szYes);
-
-  if (enGlobal != GLB_WORK)
-    szLo[7] = '.';
-
-  sprintf(szLo+14,"%2u",ibX+1);
-}
+//                                          0123456789ABCDEF
+static char const       szRecalcFull[]   = "Расчет полный   ",
+                        szRecalcMaxPow[] = "Расчет мощности ",
+                        szRecalcEng[]    = "Расчет ~нергии  ";
 
 
 
 void    key_SetRecalc(void)
 {
   if (bKey == bKEY_ENTER)
-  {                                           
-    if (enKeyboard == KBD_ENTER)
+  {
+    if (enKeyboard == KBD_ENTER)  
     {
       enKeyboard = KBD_INPUT1;
-      ShowHi(szSetRecalc);
-
-      Hour();
+      Clear();
+      
+      switch (wProgram)
+      { 
+        case bSET_RECALC_FULL:   ShowHi(szRecalcFull);   ShowAnswer(); break;
+        case bSET_RECALC_MAXPOW: ShowHi(szRecalcMaxPow); ShowAnswer(); break;
+        case bSET_RECALC_ENG:    ShowHi(szRecalcEng);    ShowAnswer(); break;
+      }
     } 
-    else if (enKeyboard == KBD_INPUT1)
-    {
-      enKeyboard = KBD_POSTENTER;
-
-      ibX = 0;
-      Show();
-    }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < 48)
+      switch (wProgram)
       {
-        enKeyboard = KBD_POSTENTER;
-        Show();
+        case bSET_RECALC_FULL:   if (Recalc(1,1) == 1) OK(); else Error(); break;
+        case bSET_RECALC_MAXPOW: if (Recalc(0,1) == 1) OK(); else Error(); break;
+        case bSET_RECALC_ENG:    if (Recalc(1,0) == 1) OK(); else Error(); break;
       }
-      else Beep();
     }
-    else if (enKeyboard == KBD_POSTENTER)
-    {
-      if (++ibX >= 48) ibX = 0;
-      Show();
-    }
+    else Beep();
   }
-
+  
 
   else if (bKey == bKEY_POINT)
   {
-    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
+    if (enGlobal != GLB_WORK)
     {
-      mpboRecalcHou[ibX] = InvertBoolean(mpboRecalcHou[ibX]);
-      Show();
-    }
-    else Beep();
-  }
+      if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
+      {           
+        if (enKeyboard == KBD_INPUT1)
+          enKeyboard = KBD_POSTINPUT1;
+        else
+          enKeyboard = KBD_INPUT1;
 
-
-  else if (bKey == bKEY_MINUS)
-  {
-    if (enKeyboard == KBD_POSTENTER)
-    {
-      (ibX > 0) ? (ibX--) : (ibX = 48-1);
-      Show();
-    }
-    else Beep();
-  }
-
-
-  else if (bKey < 10)
-  {        
-    if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
-    {
-      enKeyboard = KBD_POSTINPUT1;
-      ShiftLo(10,11);
+        ShowAnswer();
+      }
+      else Beep(); 
     }
     else Beep(); 
-  }
-  else Beep();
+  } 
+  else Beep(); 
 }
-

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-RESET.C
+RECALC.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,8 +7,22 @@ RESET.C
 #include "../main.h"
 #include "../console.h"
 #include "../memory/mem_energy.h"
+#include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
-#include "reset.h"
+#include "../realtime/realtime_spec.h"
+#include "../time/timedate.h"
+#include "../time/calendar.h"
+#include "../tariffs/tariffs.h"
+#include "../energy2.h"
+#include "calc.h"
+#include "recalc_def.h"
+#include "recalc.h"
+
+
+
+//                                         0123456789ABCDEF
+static char const       szRecalc1[]     = "ќчистка данных  ",
+                        szRecalc2[]     = "–асчет данных   ";
 
 
 
@@ -16,10 +30,10 @@ bool    Recalc(bool  fUseImp, bool  fUsePow)
 {
 uchar   i;
 
-  ShowHi(szRecalcA); Clear();
+  ShowHi(szRecalc1); Clear();
+  uchar cbPercent = 0;
 
-  boOpenCalc = boTrue;
-  cbPercent = 0;
+  boOpenCalc = true;
 
   if (fUseImp == 1)                                 // обнуление импульсов (энергии)
   {
@@ -38,7 +52,7 @@ uchar   i;
       ShowPercent(cbPercent++);
     }
 
-    ResetFlashDef();
+    ResetDef();
   }
 
   if (fUsePow == 1)                                 // обнуление максимумов мощности
@@ -60,15 +74,16 @@ uchar   i;
   }
 
 
-  ShowHi(szRecalcB); Clear();
+  ShowHi(szRecalc2); Clear();
 
-  tiAlt = tiCurr;                                   // индекс текущего получаса
-  dwHouIndex = DateToHouIndex();
+  ulong dwHouIndex = DateToHouIndex(tiCurr);        // индекс текущего получаса
 
   OpenCalc();                                       // начинаем обработку
 
 
   bHouInc = 0;
+
+  uint iwHou;
   for (iwHou=0; iwHou<wHOURS; iwHou++)
   {
     if (fKey == 1) { fKey = 0; Beep(); }
@@ -78,7 +93,7 @@ uchar   i;
     iwDigHou = (wHOURS + iwHardHou - iwHou - bHouInc) % wHOURS;
 
 
-    HouIndexToDate(dwHouIndex);
+    tiAlt = HouIndexToDate(dwHouIndex);
     dwHouIndex--;                                   // индекс обрабатываемого получаса
 
     CalcTimeDate(fUseImp,fUsePow);

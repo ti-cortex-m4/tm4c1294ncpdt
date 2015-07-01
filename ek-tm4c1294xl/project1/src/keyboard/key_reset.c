@@ -164,16 +164,12 @@ void    key_SetReset(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        switch (wProgram)
-        {                        
-          case bSET_RESETCUSTOM:   
-          case bSET_RESETFULL:
-            if (enKeyboard == KBD_INPUT1)
-              enKeyboard = KBD_POSTINPUT1;
-            else
-              enKeyboard = KBD_INPUT1;
-            ShowAnswer();  break;
-        }
+        if (enKeyboard == KBD_INPUT1)
+          enKeyboard = KBD_POSTINPUT1;
+        else
+          enKeyboard = KBD_INPUT1;
+
+        ShowAnswer();
       }
       else Beep(); 
     }

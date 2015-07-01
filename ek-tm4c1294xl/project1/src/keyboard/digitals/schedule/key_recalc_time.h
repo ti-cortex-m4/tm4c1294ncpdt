@@ -1,8 +1,7 @@
 /*------------------------------------------------------------------------------
-RESET.H
+KEY_RECALC_TIME.H
 
 
 ------------------------------------------------------------------------------*/
 
-bool    Recalc(bool  fUseImp, bool  fUsePow);
-bool    ClearCanals(bool  fStopCan);
+void    key_SetRecalcTime(void);
