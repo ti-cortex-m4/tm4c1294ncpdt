@@ -8,6 +8,11 @@ REALTIME_STORAGE.C
 #include "../memory/mem_realtime.h"
 #include "../flash/files.h"
 #include "../nvram/23x1024.h"
+#include "realtime_storage.h"
+
+
+
+cache const             chRealtimeValues = {REALTIME_VALUES, &Realtime1, sizeof(Realtime1)};
 
 
 
@@ -101,17 +106,17 @@ bool    LoadPointersTim(void)
 
 
 
-bool    SaveTimeCurr(void)
+bool    SaveRealtimeTimes(void)
 {
   tuple2time tp = GetTuple2Time(tiCurr, tiPrev);
-  return WriteNvramBuff(REALTIME, (uchar *) &tp, sizeof(tp));
+  return WriteNvramBuff(REALTIME_TIMES, (uchar *) &tp, sizeof(tp));
 }
 
 
-bool    LoadTimeCurr(void)
+bool    LoadRealtimeTimes(void)
 {
 	tuple2time tp;
-  bool f = ReadNvramBuff(REALTIME, (uchar *) &tp, sizeof(tp));
+  bool f = ReadNvramBuff(REALTIME_TIMES, (uchar *) &tp, sizeof(tp));
   tiCurr = tp.ti1;
   tiPrev = tp.ti2;
   return f;

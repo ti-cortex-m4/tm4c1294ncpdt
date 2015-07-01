@@ -6,7 +6,8 @@ BEGIN(NVRAM_BEGIN, 0)
 
 RESERVE(LABEL_GLOBAL, sizeof(mpbLabelGlobal) + bNVRAM_FOOTER)
 
-RESERVE(REALTIME, sizeof(tuple2time) + bNVRAM_FOOTER)
+RESERVE(REALTIME_TIMES, sizeof(tuple2time) + bNVRAM_FOOTER)
+RESERVE(REALTIME_VALUES, sizeof(realtime1) + bNVRAM_FOOTER)
 
 RESERVE(PTR_MNT, sizeof(tuple2uint) + bNVRAM_FOOTER)
 RESERVE(PTR_HHR, sizeof(tuple2uint) + bNVRAM_FOOTER)

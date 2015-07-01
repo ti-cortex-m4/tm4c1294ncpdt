@@ -159,7 +159,7 @@ void    LoadRealtime(void)
   PrintString("\n month   "); PrintInt(ibSoftMon); PrintInt(ibHardMon);
   PrintString("\n time    "); PrintInt(ibSoftTim); PrintInt(iwHardTim);
 
-  LoadTimeCurr();
+  LoadRealtimeTimes();
 
   PrintString("\n tiCurr "); PrintTime(tiCurr);
   PrintString("\n tiPrev "); PrintTime(tiPrev);

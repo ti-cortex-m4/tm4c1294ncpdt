@@ -46,7 +46,7 @@ void    NextMinute3(void)
   SaveImpMonBuff();
   SaveImpAbsBuff();
 
-  SaveTimeCurr(); // TODO another place
+  SaveRealtimeTimes(); // TODO another place
 
   if (boMntParams == true) NextParamsTime();
 }
