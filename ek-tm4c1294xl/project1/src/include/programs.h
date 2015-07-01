@@ -246,8 +246,12 @@ PROGRAMS.H
 
 #define bSET_SEPARATE_CAN           218
 
-#define bSET_RECALC                 230
+#define bSET_RECALC_TIME            230
 #define bSET_RECALC_ALWAYS          231
+
+#define bSET_RECALC_FULL            240
+#define bSET_RECALC_MAXPOW          241
+#define bSET_RECALC_ENG             242
 
 #define bTEST_DIRECT                216
 
