@@ -73,7 +73,7 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
   x_str("\n");
   for (i=0; i<wLEAF_BYTES; i++)
   {
-    if (i % sizeof(record) == 0) { x_str("\n"); x_bytedec(i / sizeof(record)); }
+    if (i % SIZEOF_RECORD == 0) { x_str("\n"); x_bytedec(i / SIZEOF_RECORD); }
     x_bytehex(mpbPageIn[i]);
   }
   x_str("\n");
@@ -83,7 +83,7 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
 
 void    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
 {
-  memcpy(&reCurr, &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*sizeof(record), sizeof(record));
+  memcpy(&reCurr, &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD, SIZEOF_RECORD);
   tiAlt = reCurr.tiNow;
 
   //x_str("\n block"); x_bytedec(ibBlock-1); 

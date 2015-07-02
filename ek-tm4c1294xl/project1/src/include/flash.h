@@ -51,8 +51,11 @@ FLASH.H
 #define VALUE7_CAN_PAGES    (uchar)(sizeof(mpCntDayCan7)/wLEAF_BYTES + 1)
 
 
+// размер блока данных
+#define SIZEOF_RECORD   (uchar)(6+4+1+8)
+
 // количество блоков данных на страницу
-#define bRECORD_BLOCK   (uchar)(wLEAF_BYTES/sizeof(record))
+#define bRECORD_BLOCK   (uchar)(wLEAF_BYTES/SIZEOF_RECORD)
 
 // количество страниц на журнал событий
 #define bRECORD_PAGES   (uchar)(wRECORDS/bRECORD_BLOCK + 1)

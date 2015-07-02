@@ -32,7 +32,7 @@ static bool GetRecord(class  cl, uint  iwRecord)
   uint i = (iwRecord % wRECORDS);
 
   OpenIn(wPage + i / bRECORD_BLOCK);
-  memcpy(&reCurr, &mpbPageIn + (i % bRECORD_BLOCK)*sizeof(record), sizeof(record));
+  memcpy(&reCurr, &mpbPageIn + (i % bRECORD_BLOCK)*SIZEOF_RECORD, SIZEOF_RECORD);
 
   return(1);
 }
@@ -84,8 +84,8 @@ void    OutRecordExt(void)
     PushLong( GetRecordCount((class) InBuff(6)) );
     PushInt(wRECORDS);
 
-    Push(&reCurr, sizeof(record));
-    Output(6+sizeof(record));
+    Push(&reCurr, SIZEOF_RECORD);
+    Output(6+SIZEOF_RECORD);
   }
 }
 
