@@ -81,7 +81,7 @@ static void CloseRecord(uint  wPage, uint  i)
 
 bool    AddKeyRecord(event  ev)
 {
-  if (IsRecordDisabled(ev)) return(1);
+  if (IsRecordDisabled(ev)) return true;
 
   uint i = (cdwKeyRecord % wRECORDS);
 
@@ -128,7 +128,7 @@ bool    AddKeyRecord(event  ev)
 
 bool    AddSysRecord(event  ev)
 {
-//  if (IsRecordDisabled(ev)) return(1);
+//  if (IsRecordDisabled(ev)) return true;
 
   uint i = (cdwSysRecord % wRECORDS);
 
@@ -193,7 +193,7 @@ bool    AddSysRecord(event  ev)
 
 bool    AddSysRecordReprogram(event  ev)
 {
-  return (enGlobal == GLB_REPROGRAM) ? AddSysRecord(ev) : 1;
+  return (enGlobal == GLB_REPROGRAM) ? AddSysRecord(ev) : true;
 }
 
 
@@ -201,7 +201,7 @@ bool    AddDigRecord(event  ev)
 {
 uint    i;
 
-  if (IsRecordDisabled(ev)) return(1);
+  if (IsRecordDisabled(ev)) return true;
 
   i = (cdwAuxRecord % wRECORDS2);
 
@@ -295,7 +295,7 @@ uint    i;
 
 bool    AddImpRecord(event  ev)
 {
-  if (IsRecordDisabled(ev)) return(1);
+  if (IsRecordDisabled(ev)) return true;
 
   uint i = (cdwImpRecord % wRECORDS);
 
@@ -336,7 +336,7 @@ bool    AddImpRecord(event  ev)
 
 bool    AddModRecord(event  ev)
 {
-  if (IsRecordDisabled(ev)) return(1);
+  if (IsRecordDisabled(ev)) return true;
 
   uint i = (cdwModRecord % wRECORDS);
 
