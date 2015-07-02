@@ -71,16 +71,25 @@ static void CloseRecord(uint  wPage, uint  i)
 
   uchar* pBuff = (uchar *) &mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD;
 
+  memcpy(pBuff + 0,  &reCurr.ti, 6);
+
   static combo32 co;
   co.dwBuff = reCurr.cdwRecord;
-
-  memcpy(pBuff + 0,  &reCurr.ti, 6);
   memcpy(pBuff + 6,  &co.mpbBuff[3], 1);
   memcpy(pBuff + 7,  &co.mpbBuff[2], 1);
   memcpy(pBuff + 8,  &co.mpbBuff[1], 1);
   memcpy(pBuff + 9,  &co.mpbBuff[0], 1);
+
   memcpy(pBuff + 10, &reCurr.ev, 1);
-  memcpy(pBuff + 11, &reCurr.mpbBuff, 8);
+
+  memcpy(pBuff + 11, &reCurr.mpbBuff[0], 1);
+  memcpy(pBuff + 12, &reCurr.mpbBuff[1], 1);
+  memcpy(pBuff + 13, &reCurr.mpbBuff[2], 1);
+  memcpy(pBuff + 14, &reCurr.mpbBuff[3], 1);
+  memcpy(pBuff + 15, &reCurr.mpbBuff[4], 1);
+  memcpy(pBuff + 16, &reCurr.mpbBuff[5], 1);
+  memcpy(pBuff + 17, &reCurr.mpbBuff[6], 1);
+  memcpy(pBuff + 18, &reCurr.mpbBuff[7], 1);
 }
 
 
@@ -211,7 +220,7 @@ uint    i;
   OpenIn(AUX_RECORD + i / bRECORD_BLOCK);
   memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
-  memset(&reCurr.mpbBuff, 0, sizeof(reCurr.mpbBuff));
+  memset(&reCurr, 0, sizeof(reCurr));
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwAuxRecord++; SaveCache(&chAuxRecord);
@@ -304,7 +313,7 @@ bool    AddImpRecord(event  ev)
   OpenIn(IMP_RECORD + i / bRECORD_BLOCK);
   memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
-  memset(&reCurr.mpbBuff, 0, sizeof(reCurr.mpbBuff));
+  memset(&reCurr, 0, sizeof(reCurr));
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwImpRecord++; SaveCache(&chImpRecord);
