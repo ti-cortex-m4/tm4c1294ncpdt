@@ -71,8 +71,14 @@ static void CloseRecord(uint  wPage, uint  i)
 
   uchar* pBuff = (uchar *) &mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD;
 
+  static combo32 co;
+  co.dwBuff = reCurr.cdwRecord;
+
   memcpy(pBuff + 0,  &reCurr.ti, 6);
-  memcpy(pBuff + 6,  &reCurr.cdwRecord, 4);
+  memcpy(pBuff + 6,  &co.mpbBuff[3], 1);
+  memcpy(pBuff + 7,  &co.mpbBuff[2], 1);
+  memcpy(pBuff + 8,  &co.mpbBuff[1], 1);
+  memcpy(pBuff + 9,  &co.mpbBuff[0], 1);
   memcpy(pBuff + 10, &reCurr.ev, 1);
   memcpy(pBuff + 11, &reCurr.mpbBuff, 8);
 }
@@ -119,8 +125,7 @@ bool    AddKeyRecord(event  ev)
     case EVE_SMK_GOODSMK_1: memcpy(&reCurr.mpbBuff+0, &tiAlt, sizeof(time)); break;
   }
 */
-  OpenOut(KEY_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
+  CloseRecord(KEY_RECORD, i);
 
   return CloseOut();
 }
@@ -128,7 +133,7 @@ bool    AddKeyRecord(event  ev)
 
 bool    AddSysRecord(event  ev)
 {
-//  if (IsRecordDisabled(ev)) return true;
+  if (IsRecordDisabled(ev)) return true;
 
   uint i = (cdwSysRecord % wRECORDS);
 
@@ -183,8 +188,6 @@ bool    AddSysRecord(event  ev)
                               memcpy(&reCurr.mpbBuff+1, &mpdwAddress2[ibX], sizeof(ulong)); break;
   }
 */
-//  OpenOut(SYS_RECORD + i / bRECORD_BLOCK);
-//  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
   CloseRecord(SYS_RECORD, i);
 
   return CloseOut();
@@ -286,10 +289,9 @@ uint    i;
                                memcpy(&reCurr.mpbBuff+1, &bExt0Counter, sizeof(uchar)); break;
   }
 */
-  OpenOut(AUX_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
+  CloseRecord(AUX_RECORD, i);
 
-  return( CloseOut() );
+  return CloseOut();
 }
 
 
@@ -327,8 +329,7 @@ bool    AddImpRecord(event  ev)
                               break;
   }
 */
-  OpenOut(IMP_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
+  CloseRecord(IMP_RECORD, i);
 
   return CloseOut();
 }
@@ -365,8 +366,7 @@ bool    AddModRecord(event  ev)
                                  memcpy(&reCurr.mpbBuff+3, &mpSerial[ibPort], sizeof(uchar)); break;
   }
 */
-  OpenOut(MOD_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
+  CloseRecord(MOD_RECORD, i);
 
   return CloseOut();
 }
