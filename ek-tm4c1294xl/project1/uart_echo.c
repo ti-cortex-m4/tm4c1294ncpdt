@@ -142,6 +142,8 @@ int main(void) {
     InitRecalc();
     LongBeep();
 
+    if (boEnableWDT == boTrue) EnableWDT();
+
     while (1) {
     	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM));
 

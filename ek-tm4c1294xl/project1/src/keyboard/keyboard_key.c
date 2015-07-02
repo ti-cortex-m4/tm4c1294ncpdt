@@ -225,6 +225,7 @@ void    Keyboard_Key(void)
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
       case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
+      case bSET_ENBL_WDT:       key_SetEnblWDT();       break;
 
       case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
@@ -388,6 +389,7 @@ void    Keyboard_Key(void)
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
       case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
+      case bSET_ENBL_WDT:       key_SetEnblWDT();       break;
 
       case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;
@@ -631,6 +633,7 @@ void    Keyboard_Key(void)
       case bSET_SHOW_MESSAGES:  key_SetShowMessages();  break;
 
       case bSET_SEPARATE_CAN:   key_SetSeparateCan();   break;
+      case bSET_ENBL_WDT:       key_SetEnblWDT();       break;
 
       case bSET_RECALC_TIME:    key_SetRecalcTime();    break;
       case bSET_RECALC_ALWAYS:  key_SetRecalcAlways();  break;

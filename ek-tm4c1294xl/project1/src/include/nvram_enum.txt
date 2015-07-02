@@ -39,8 +39,9 @@ typedef enum
   MANAGE_TIME           = CONTROL_TIME + sizeof(bool) + bNVRAM_FOOTER,
 
   FIRST_RESET           = MANAGE_TIME + sizeof(bool) + bNVRAM_FOOTER,
+  ENBL_WDT              = FIRST_RESET + sizeof(bool) + bNVRAM_FOOTER,
 
-  EXT_4_FLAG            = FIRST_RESET + sizeof(bool) + bNVRAM_FOOTER,
+  EXT_4_FLAG            = ENBL_WDT + sizeof(bool) + bNVRAM_FOOTER,
   EXT_4_MONTHS          = EXT_4_FLAG + sizeof(bool) + bNVRAM_FOOTER,
   EXT_4T_FLAG           = EXT_4_MONTHS + sizeof(bool) + bNVRAM_FOOTER,
   EXT_4T_MONTHS         = EXT_4T_FLAG + sizeof(bool) + bNVRAM_FOOTER,
