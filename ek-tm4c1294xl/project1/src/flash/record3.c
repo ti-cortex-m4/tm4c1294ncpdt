@@ -20,7 +20,7 @@ void    ResetRecordDisable(void)
 
 bool    IsRecordDisabled(uchar  ibCode)
 {
-  return true; //mpboRecordDisable[ibCode] != boFalse;
+  return false; //mpboRecordDisable[ibCode] != boFalse;
 }
 
 
