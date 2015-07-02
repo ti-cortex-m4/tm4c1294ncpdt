@@ -136,12 +136,12 @@ void    OutRecordsBlockExt2(void)
 {
   if ((InBuff(6) >= bEVENTS2) || (InBuff(7)*0x100+InBuff(8) >= wRECORD2_PAGES))
     Result(bRES_BADADDRESS);
-  else if (GetRecordsBlock2((class) InBuff(6), InBuff(7)*0x100+InBuff(8)) == 0)
+  else if (GetRecordsBlock2((class2) InBuff(6), InBuff(7)*0x100+InBuff(8)) == 0)
     Result(bRES_BADFLASH);
   else
   {
     InitPushCRC();
-    PushLong( GetRecordCount2((class) InBuff(6)) );
+    PushLong( GetRecordCount2((class2) InBuff(6)) );
     PushInt(wRECORDS2);
 
     Push(&mpbPageIn, wLEAF_BYTES);
