@@ -143,7 +143,7 @@ void    key_SetGroups(void)
       Group();
 
       boSetGroups = true;
-      SaveFile(&flSetGroups);
+      SaveCache(&chSetGroups);
     }
     else if (enKeyboard == KBD_INPUT2)  // номер группы не введён
     {                                   // начинаем с первой группы

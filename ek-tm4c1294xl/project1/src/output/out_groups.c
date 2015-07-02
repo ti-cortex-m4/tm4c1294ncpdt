@@ -44,7 +44,7 @@ void    OutSetGroup(void)
           SaveGroups();
 
           boSetGroups = true;
-          SaveFile(&flSetGroups);
+          SaveCache(&chSetGroups);
         }
 
         LongResult(bRES_OK);

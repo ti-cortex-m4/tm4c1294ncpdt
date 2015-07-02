@@ -23,6 +23,7 @@ KEY_START.C
 #include "../impulses/factors.h"
 #include "../flash/files.h"
 #include "../flash/records.h"
+#include "../nvram/cache.h"
 #include "../serial/speeds_display.h"
 
 
@@ -222,17 +223,17 @@ void    key_Debug(void)
     Clear();
 
     boSetTime = true;
-    SaveFile(&flSetTime);
+    SaveCache(&chSetTime);
 
     boSetDate = true;
-    SaveFile(&flSetDate);
+    SaveCache(&chSetDate);
 
     boSetGroups = true;
-    SaveFile(&flSetGroups);
+    SaveCache(&chSetGroups);
 
     ClearPassOne();
     boSetPassword = true;
-    SaveFile(&flSetPassword);
+    SaveCache(&chSetPassword);
 
 // TODO key_Debug
 

@@ -35,7 +35,7 @@ void    key_SetPassword(void)
       ibX = 3;
 
       boSetPassword = false;
-      SaveFile(&flSetPassword);
+      SaveCache(&chSetPassword);
     }
     else if (enKeyboard == KBD_INPUT1)
     {
@@ -55,7 +55,7 @@ void    key_SetPassword(void)
         OK();
 
         boSetPassword = true;
-        SaveFile(&flSetPassword);
+        SaveCache(&chSetPassword);
       }
       else 
       {
@@ -115,7 +115,7 @@ void    key_GetPassword(void)
         OK();
 
         boSetPassword = true;
-        SaveFile(&flSetPassword);
+        SaveCache(&chSetPassword);
 
         enGlobal = GLB_REPROGRAM;
         Setting();

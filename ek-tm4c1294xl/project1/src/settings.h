@@ -9,10 +9,10 @@ extern  file const              flLogical;
 extern  cache const             chFirstReset;
 extern  cache const             chEnblWDT;
 
-extern  file const              flSetTime;
-extern  file const              flSetDate;
-extern  file const              flSetGroups;
-extern  file const              flSetPassword;
+extern  cache const             chSetTime;
+extern  cache const             chSetDate;
+extern  cache const             chSetGroups;
+extern  cache const             chSetPassword;
 
 
 

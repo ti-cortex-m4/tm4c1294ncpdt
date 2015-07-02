@@ -9,6 +9,7 @@ GROUPS.C
 #include "memory/mem_program.h"
 #include "engine.h"
 #include "flash/files.h"
+#include "nvram/cache.h"
 #include "settings.h"
 #include "groups.h"
 
@@ -143,5 +144,5 @@ node    noT;
   MakeUsedNodes();
 
   boSetGroups = false;
-  SaveFile(&flSetGroups);
+  SaveCache(&chSetGroups);
 }
