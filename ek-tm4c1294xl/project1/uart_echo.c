@@ -40,6 +40,7 @@ TODO .C
 #include "src/uarts.h"
 #include "src/serial/modems.h"
 #include "src/serial/print.h"
+#include "src/flash/records.h"
 #include "src/settings.h"
 #include "src/impulses/impulses.h"
 #include "src/impulses/factors.h"
@@ -87,6 +88,7 @@ int main(void) {
 	InitRTC();
 	InitCODE();
 
+	InitRecords();
 	InitSettings();         Delay(100); TestOK();
 	InitInfrared();
 	InitKey();

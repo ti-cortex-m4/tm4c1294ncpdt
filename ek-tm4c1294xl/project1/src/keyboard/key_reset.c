@@ -25,6 +25,7 @@ KEY_RESET.C
 #include "../engine.h"
 #include "../impulses/factors.h"
 #include "../label.h"
+#include "../flash/records.h"
 #include "../settings.h"
 #include "../hardware/memory.h"
 #include "../storage/storage.h"
@@ -71,6 +72,7 @@ void    key_SetReset(void)
           Clear();
 
           BreakLabelGlobal();
+          ResetRecords();
           ResetSettings(false);
 //          ResetCustom();
 //
@@ -104,6 +106,7 @@ void    key_SetReset(void)
           Clear();
 
           BreakLabelGlobal();
+          ResetRecords();
           ResetSettings(true);
           ResetDecret();
           ResetCorrect1();

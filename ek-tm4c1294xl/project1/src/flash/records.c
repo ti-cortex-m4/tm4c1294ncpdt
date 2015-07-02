@@ -9,9 +9,58 @@ RECORDS.C
 #include "../memory/mem_records.h"
 #include "../memory/mem_settings.h"
 #include "../time/rtc.h"
+#include "../nvram/cache.h"
 #include "files.h"
 #include "record3.h"
 #include "records.h"
+
+
+
+cache const             chKeyRecord = {KEY_INDEX, &cdwKeyRecord, sizeof(ulong)};
+cache const             chSysRecord = {SYS_INDEX, &cdwSysRecord, sizeof(ulong)};
+cache const             chDigRecord = {DIG_INDEX, &cdwDigRecord, sizeof(ulong)};
+cache const             chImpRecord = {IMP_INDEX, &cdwImpRecord, sizeof(ulong)};
+cache const             chModRecord = {MOD_INDEX, &cdwModRecord, sizeof(ulong)};
+cache const             chPh2Record = {PH2_INDEX, &cdwPh2Record, sizeof(ulong)};
+cache const             chAuxRecord = {AUX_INDEX, &cdwAuxRecord, sizeof(ulong)};
+
+
+
+void    InitRecords(void)
+{
+  LoadCache(&chKeyRecord);
+  LoadCache(&chSysRecord);
+  LoadCache(&chDigRecord);
+  LoadCache(&chImpRecord);
+  LoadCache(&chModRecord);
+  LoadCache(&chPh2Record);
+  LoadCache(&chAuxRecord);
+}
+
+
+void    ResetRecords(void)
+{
+  cdwKeyRecord = 0;
+  SaveCache(&chKeyRecord);
+
+  cdwSysRecord = 0;
+  SaveCache(&chSysRecord);
+
+  cdwDigRecord = 0;
+  SaveCache(&chDigRecord);
+
+  cdwImpRecord = 0;
+  SaveCache(&chImpRecord);
+
+  cdwModRecord = 0;
+  SaveCache(&chModRecord);
+
+  cdwPh2Record = 0;
+  SaveCache(&chPh2Record);
+
+  cdwAuxRecord = 0;
+  SaveCache(&chAuxRecord);
+}
 
 
 

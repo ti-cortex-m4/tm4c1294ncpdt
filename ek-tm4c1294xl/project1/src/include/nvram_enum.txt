@@ -96,5 +96,13 @@ typedef enum
 
   CORRECT2_FLAG         = USE_PARAMS_DIV + sizeof(bool) + bNVRAM_FOOTER,
 
-  NVRAM_END             = CORRECT2_FLAG + sizeof(bool) + bNVRAM_FOOTER
+  KEY_INDEX             = CORRECT2_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  SYS_INDEX             = KEY_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
+  DIG_INDEX             = SYS_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
+  IMP_INDEX             = DIG_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
+  MOD_INDEX             = IMP_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
+  PH2_INDEX             = MOD_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
+  AUX_INDEX             = PH2_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
+
+  NVRAM_END             = AUX_INDEX + sizeof(ulong) + bNVRAM_FOOTER
 } nvram;
