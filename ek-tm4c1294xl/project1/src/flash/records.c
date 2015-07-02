@@ -8,6 +8,7 @@ RECORDS.C
 #include "../memory/mem_flash.h"
 #include "../memory/mem_records.h"
 #include "../memory/mem_settings.h"
+#include "../devices/devices.h"
 #include "../time/rtc.h"
 #include "../nvram/cache.h"
 #include "files.h"
@@ -73,7 +74,7 @@ bool    AddKeyRecord(event  ev)
   OpenIn(KEY_RECORD + i / bRECORD_BLOCK);
   memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
-  memset(&reCurr, 0, SIZEOF_RECORD);
+  memset(&reCurr, 0, sizeof(reCurr));
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwKeyRecord++; SaveCache(&chKeyRecord);
@@ -120,7 +121,7 @@ bool    AddSysRecord(event  ev)
   OpenIn(SYS_RECORD + i / bRECORD_BLOCK);
   memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
-  memset(&reCurr, 0, SIZEOF_RECORD);
+  memset(&reCurr, 0, sizeof(reCurr));
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwSysRecord++; SaveCache(&chSysRecord);
@@ -197,8 +198,9 @@ uint    i;
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwAuxRecord++; SaveCache(&chAuxRecord);
   reCurr.ev = ev;
-/*
+
   memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
+/*
   switch (ev)
   {
     case EVE_PROFILEOPEN:
@@ -290,9 +292,9 @@ bool    AddImpRecord(event  ev)
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwImpRecord++; SaveCache(&chImpRecord);
   reCurr.ev = ev;
-/*
-  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
 
+  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
+/*
   switch (ev)
   {
     case EVE_EVENTS_BADLINK:  memcpy(&reCurr.mpbBuff+1, &mpSerial[ibPort], sizeof(uchar));
@@ -326,14 +328,14 @@ bool    AddModRecord(event  ev)
   OpenIn(MOD_RECORD + i / bRECORD_BLOCK);
   memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
-  memset(&reCurr, 0, SIZEOF_RECORD);
+  memset(&reCurr, 0, sizeof(reCurr));
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwModRecord++; SaveCache(&chModRecord);
   reCurr.ev = ev;
-/*
-  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
 
+  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
+/*
   switch (ev)
   {
     case EVE_MODEM_PROFILEOPEN:
