@@ -73,10 +73,10 @@ bool    AddKeyRecord(event  ev)
   OpenIn(KEY_RECORD + i / bRECORD_BLOCK);
   memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
-  memset(&reCurr, 0, sizeof(record));
+  memset(&reCurr, 0, SIZEOF_RECORD);
 
   reCurr.ti = *GetCurrTimeDate();
-  reCurr.cdwRecord = cdwKeyRecord++;
+  reCurr.cdwRecord = cdwKeyRecord++; SaveCache(&chKeyRecord);
   reCurr.ev = ev;
 /*
   switch (ev)
@@ -105,7 +105,7 @@ bool    AddKeyRecord(event  ev)
   }
 */
   OpenOut(KEY_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
+  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
 
   return CloseOut();
 }
@@ -120,10 +120,10 @@ bool    AddSysRecord(event  ev)
   OpenIn(SYS_RECORD + i / bRECORD_BLOCK);
   memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
-  memset(&reCurr, 0, sizeof(record));
+  memset(&reCurr, 0, SIZEOF_RECORD);
 
   reCurr.ti = *GetCurrTimeDate();
-  reCurr.cdwRecord = cdwSysRecord++;
+  reCurr.cdwRecord = cdwSysRecord++; SaveCache(&chSysRecord);
   reCurr.ev = ev;
 /*
   switch (ev)
@@ -169,7 +169,7 @@ bool    AddSysRecord(event  ev)
   }
 */
   OpenOut(SYS_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
+  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
 
   return CloseOut();
 }
@@ -195,7 +195,7 @@ uint    i;
   memset(&reCurr.mpbBuff, 0, sizeof(reCurr.mpbBuff));
 
   reCurr.ti = *GetCurrTimeDate();
-  reCurr.cdwRecord = cdwAuxRecord++;
+  reCurr.cdwRecord = cdwAuxRecord++; SaveCache(&chAuxRecord);
   reCurr.ev = ev;
 /*
   memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
@@ -270,7 +270,7 @@ uint    i;
   }
 */
   OpenOut(AUX_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
+  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
 
   return( CloseOut() );
 }
@@ -288,7 +288,7 @@ bool    AddImpRecord(event  ev)
   memset(&reCurr.mpbBuff, 0, sizeof(reCurr.mpbBuff));
 
   reCurr.ti = *GetCurrTimeDate();
-  reCurr.cdwRecord = cdwImpRecord++;
+  reCurr.cdwRecord = cdwImpRecord++; SaveCache(&chImpRecord);
   reCurr.ev = ev;
 /*
   memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
@@ -311,7 +311,7 @@ bool    AddImpRecord(event  ev)
   }
 */
   OpenOut(IMP_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
+  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
 
   return CloseOut();
 }
@@ -326,10 +326,10 @@ bool    AddModRecord(event  ev)
   OpenIn(MOD_RECORD + i / bRECORD_BLOCK);
   memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
-  memset(&reCurr, 0, sizeof(record));
+  memset(&reCurr, 0, SIZEOF_RECORD);
 
   reCurr.ti = *GetCurrTimeDate();
-  reCurr.cdwRecord = cdwModRecord++;
+  reCurr.cdwRecord = cdwModRecord++; SaveCache(&chModRecord);
   reCurr.ev = ev;
 /*
   memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
@@ -349,7 +349,7 @@ bool    AddModRecord(event  ev)
   }
 */
   OpenOut(MOD_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
+  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
 
   return CloseOut();
 }
