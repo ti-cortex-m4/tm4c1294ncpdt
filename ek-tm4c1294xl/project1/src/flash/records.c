@@ -64,6 +64,13 @@ void    ResetRecords(void)
 }
 
 
+/*static*/ void CloseRecord(uint  wPage, uint  i)
+{
+  OpenOut(wPage + i / bRECORD_BLOCK);
+  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
+}
+
+
 
 bool    AddKeyRecord(event  ev)
 {

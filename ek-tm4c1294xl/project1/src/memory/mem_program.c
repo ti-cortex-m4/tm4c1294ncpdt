@@ -16,3 +16,6 @@ bool                    boSetTime,
 
 // TODO: SaveFile
 bool                    boFirstReset;
+
+//
+bool                    boEnblWDT;

@@ -5,22 +5,51 @@ WATCHDOG.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "driverlib/watchdog.h"
+#include "../memory/mem_program.h"
+#include "watchdog.h"
 
 
 
-void    EnableWDT(void) {
+void    InitWDT(void)
+{
+  if (boEnblWDT == true)
+    EnableWDT();
 }
 
 
-void    DisableWDT(void) {
+void    EnableWDT(void)
+{
+#ifdef ENABLE_WATCHDOG
+
+
+
+#endif
 }
 
 
-void    ResetWDT(void) {
+void    DisableWDT(void)
+{
+#ifdef ENABLE_WATCHDOG
+
+
+
+#endif
 }
 
 
-bool    IsResetWDT(void) {
+void    ResetWDT(void)
+{
+#ifdef ENABLE_WATCHDOG
+
+
+
+#endif
+}
+
+
+bool    IsResetWDT(void)
+{
   return false;
 }
 

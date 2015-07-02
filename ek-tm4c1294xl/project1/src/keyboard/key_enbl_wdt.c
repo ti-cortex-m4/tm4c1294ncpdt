@@ -1,13 +1,13 @@
 /*------------------------------------------------------------------------------
-KEY_ENBL_KEYS,C
+KEY_ENBL_WDT,C
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../../main.h"
-#include "../../memory/mem_digitals.h"
-#include "../../digitals/digitals.h"
-#include "../key_bool.h"
+#include "../main.h"
+#include "../memory/mem_program.h"
+#include "../settings.h"
+#include "key_bool.h"
 
 
 
