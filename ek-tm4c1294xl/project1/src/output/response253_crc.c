@@ -56,7 +56,7 @@ void    Response253_CRC(void)
 
     case bEXT_GETRECORD:        OutRecordExt();        break;
     case bEXT_GETRECORDSBLOCK:  OutRecordsBlockExt();  break;
-//    case bEXT_GETRECORDSBLOCK2: OutRecordsBlockExt2(); break;
+    case bEXT_GETRECORDSBLOCK2: OutRecordsBlockExt2(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);

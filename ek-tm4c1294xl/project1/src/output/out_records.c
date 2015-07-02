@@ -72,6 +72,30 @@ static bool GetRecordsBlock(class  cl, uchar  ibBlock)
 
 
 
+static ulong GetRecordCount2(class2  cl)
+{
+  switch (cl)
+  {
+    case CLA_AUXILIARY: return(cdwAuxRecord);
+    default: ASSERT(false); return 0;
+  }
+}
+
+
+static bool GetRecordsBlock2(class2  cl, uint  iwBlock)
+{
+  uint i = GetRecordCount2(cl) % wRECORDS2;
+  iwBlock = (wRECORD2_PAGES + i/bRECORD_BLOCK - iwBlock) % wRECORD2_PAGES;
+
+  switch (cl)
+  {
+    case CLA_AUXILIARY: return(OpenIn(AUX_RECORD + iwBlock));
+    default: ASSERT(false); return 0;
+  }
+}
+
+
+
 void    OutRecordExt(void)
 {
   if (InBuff(7)*0x100 + InBuff(8) >= wRECORDS)
@@ -107,21 +131,21 @@ void    OutRecordsBlockExt(void)
   }
 }
 
-/*
+
 void    OutRecordsBlockExt2(void)
 {
   if ((InBuff(6) >= bEVENTS2) || (InBuff(7)*0x100+InBuff(8) >= wRECORD2_PAGES))
     Result(bRES_BADADDRESS);
-  else if (GetRecordsBlock2(InBuff(6),InBuff(7)*0x100+InBuff(8)) == 0)
+  else if (GetRecordsBlock2((class) InBuff(6), InBuff(7)*0x100+InBuff(8)) == 0)
     Result(bRES_BADFLASH);
   else
   {
     InitPushCRC();
-    PushLong( PGetRecordCount2(InBuff(6)) );
+    PushLong( GetRecordCount2((class) InBuff(6)) );
     PushInt(wRECORDS2);
 
-    Push(&mpbPageIn, wLEAF_SIZE);
-    Output(6+wLEAF_SIZE);
+    Push(&mpbPageIn, wLEAF_BYTES);
+    Output(6+wLEAF_BYTES);
   }
 }
-*/
+
