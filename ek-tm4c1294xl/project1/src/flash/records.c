@@ -64,10 +64,17 @@ void    ResetRecords(void)
 }
 
 
-/*static*/ void CloseRecord(uint  wPage, uint  i)
+
+static void CloseRecord(uint  wPage, uint  i)
 {
   OpenOut(wPage + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
+
+  uchar* pBuff = (uchar *) &mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD;
+
+  memcpy(pBuff + 0,  &reCurr.ti, 6);
+  memcpy(pBuff + 6,  &reCurr.cdwRecord, 4);
+  memcpy(pBuff + 10, &reCurr.ev, 1);
+  memcpy(pBuff + 11, &reCurr.mpbBuff, 8);
 }
 
 
@@ -121,7 +128,7 @@ bool    AddKeyRecord(event  ev)
 
 bool    AddSysRecord(event  ev)
 {
-  if (IsRecordDisabled(ev)) return(1);
+//  if (IsRecordDisabled(ev)) return(1);
 
   uint i = (cdwSysRecord % wRECORDS);
 
@@ -176,8 +183,9 @@ bool    AddSysRecord(event  ev)
                               memcpy(&reCurr.mpbBuff+1, &mpdwAddress2[ibX], sizeof(ulong)); break;
   }
 */
-  OpenOut(SYS_RECORD + i / bRECORD_BLOCK);
-  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
+//  OpenOut(SYS_RECORD + i / bRECORD_BLOCK);
+//  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD, &reCurr, SIZEOF_RECORD);
+  CloseRecord(SYS_RECORD, i);
 
   return CloseOut();
 }
