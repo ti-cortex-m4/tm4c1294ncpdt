@@ -226,8 +226,8 @@ uint    i;
   reCurr.cdwRecord = cdwAuxRecord++; SaveCache(&chAuxRecord);
   reCurr.ev = ev;
 
-  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
-
+//  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
+/*
   switch (ev)
   {
     case EVE_PROFILEOPEN:
@@ -297,7 +297,7 @@ uint    i;
 //    case EVE_EXTENDED_0_ERROR: memcpy(&reCurr.mpbBuff+0, &x, sizeof(uchar));
 //                               memcpy(&reCurr.mpbBuff+1, &bExt0Counter, sizeof(uchar)); break;
   }
-
+*/
   CloseRecord(AUX_RECORD, i);
 
   return CloseOut();
@@ -319,7 +319,7 @@ bool    AddImpRecord(event  ev)
   reCurr.cdwRecord = cdwImpRecord++; SaveCache(&chImpRecord);
   reCurr.ev = ev;
 
-  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
+//  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
 /*
   switch (ev)
   {
@@ -359,7 +359,7 @@ bool    AddModRecord(event  ev)
   reCurr.cdwRecord = cdwModRecord++; SaveCache(&chModRecord);
   reCurr.ev = ev;
 
-  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
+//  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
 /*
   switch (ev)
   {

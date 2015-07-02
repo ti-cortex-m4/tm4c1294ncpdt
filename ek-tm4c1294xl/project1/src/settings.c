@@ -19,10 +19,10 @@ file const              flLogical = {LOGICAL, &bLogical, sizeof(uchar)};
 cache const             chFirstReset = {FIRST_RESET, &boFirstReset, sizeof(bool)};
 cache const             chEnblWDT = {ENBL_WDT, &boEnblWDT, sizeof(bool)};
 
-file const              flSetTime = {SET_TIME, &boSetTime, sizeof(bool)};
-file const              flSetDate = {SET_DATE, &boSetDate, sizeof(bool)};
-file const              flSetGroups = {SET_GROUPS, &boSetGroups, sizeof(bool)};
-file const              flSetPassword = {SET_PASSWORD, &boSetPassword, sizeof(bool)};
+cache const             chSetTime = {SET_TIME, &boSetTime, sizeof(bool)};
+cache const             chSetDate = {SET_DATE, &boSetDate, sizeof(bool)};
+cache const             chSetGroups = {SET_GROUPS, &boSetGroups, sizeof(bool)};
+cache const             chSetPassword = {SET_PASSWORD, &boSetPassword, sizeof(bool)};
 
 
 
@@ -45,10 +45,10 @@ void    InitSettings(void)
   LoadCache(&chFirstReset);
   LoadCache(&chEnblWDT);
 
-  LoadFile(&flSetTime);
-  LoadFile(&flSetDate);
-  LoadFile(&flSetGroups);
-  LoadFile(&flSetPassword);
+  LoadCache(&chSetTime);
+  LoadCache(&chSetDate);
+  LoadCache(&chSetGroups);
+  LoadCache(&chSetPassword);
 }
 
 
@@ -72,13 +72,13 @@ void    ResetSettings(bool  fFull)
     SaveCache(&chEnblWDT);
 
     boSetTime = false;
-    SaveFile(&flSetTime);
+    SaveCache(&chSetTime);
 
     boSetDate = false;
-    SaveFile(&flSetDate);
+    SaveCache(&chSetDate);
 
     boSetPassword = true;
-    SaveFile(&flSetPassword);
+    SaveCache(&chSetPassword);
   }
 }
 

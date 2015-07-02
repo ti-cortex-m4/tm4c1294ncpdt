@@ -41,7 +41,12 @@ typedef enum
   FIRST_RESET           = MANAGE_TIME + sizeof(bool) + bNVRAM_FOOTER,
   ENBL_WDT              = FIRST_RESET + sizeof(bool) + bNVRAM_FOOTER,
 
-  EXT_4_FLAG            = ENBL_WDT + sizeof(bool) + bNVRAM_FOOTER,
+  SET_TIME              = ENBL_WDT + sizeof(bool) + bNVRAM_FOOTER,
+  SET_DATE              = SET_TIME + sizeof(bool) + bNVRAM_FOOTER,
+  SET_GROUPS            = SET_DATE + sizeof(bool) + bNVRAM_FOOTER,
+  SET_PASSWORD          = SET_GROUPS + sizeof(bool) + bNVRAM_FOOTER,
+
+  EXT_4_FLAG            = SET_PASSWORD + sizeof(bool) + bNVRAM_FOOTER,
   EXT_4_MONTHS          = EXT_4_FLAG + sizeof(bool) + bNVRAM_FOOTER,
   EXT_4T_FLAG           = EXT_4_MONTHS + sizeof(bool) + bNVRAM_FOOTER,
   EXT_4T_MONTHS         = EXT_4T_FLAG + sizeof(bool) + bNVRAM_FOOTER,
