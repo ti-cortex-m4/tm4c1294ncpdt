@@ -245,6 +245,7 @@ PROGRAMS.H
 #define bSET_SHOW_MESSAGES          199
 
 #define bSET_SEPARATE_CAN           218
+#define bSET_ENBL_WDT               219
 
 #define bSET_RECALC_TIME            230
 #define bSET_RECALC_ALWAYS          231
