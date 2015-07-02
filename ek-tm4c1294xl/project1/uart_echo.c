@@ -18,6 +18,7 @@ TODO .C
 #include "driverlib/timer.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
+#include "src/hardware/watchdog.h"
 #include "src/hardware/system_clock.h"
 #include "src/hardware/beep.h"
 #include "src/display/lcd.h"
@@ -142,7 +143,7 @@ int main(void) {
     InitRecalc();
     LongBeep();
 
-    if (boEnableWDT == boTrue) EnableWDT();
+    InitWDT();
 
     while (1) {
     	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM));

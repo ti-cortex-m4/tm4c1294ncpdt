@@ -35,6 +35,7 @@ KEYBOARD_KEY.C
 #include "digitals/profile/key_run_profile.h"
 #include "digitals/key_show_messages.h"
 #include "digitals/key_separate_can.h"
+#include "key_enbl_wdt.h"
 #include "digitals/profile/key_control_time.h"
 #include "digitals/profile/key_manage_time.h"
 #include "digitals/profile/key_limits.h"
