@@ -134,7 +134,96 @@ bool    AddSysRecordReprogram(event  ev)
 
 bool    AddDigRecord(event  ev)
 {
-  return false;
+uint    i;
+
+  if (IsRecordDisabled(ev)) return(1);
+
+  i = (cdwAuxRecord % wRECORDS2);
+
+  OpenIn(AUX_RECORD + i / bRECORD_BLOCK);
+  memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
+
+  memset(&reCurr.mpbBuff, 0, sizeof(reCurr.mpbBuff));
+
+  reCurr.ti = *GetCurrTimeDate();
+  reCurr.cdwRecord = cdwAuxRecord++;
+  reCurr.ev = ev;
+/*
+  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
+  switch (ev)
+  {
+    case EVE_PROFILEOPEN:
+    case EVE_SPECIALOPEN:   memcpy(&reCurr.mpbBuff+1, &mpdiDigital[ibDig], sizeof(digital)); break;
+
+//    case EVE_ESC_V_DATA:    memcpy(&reCurr.mpbBuff+1, &reBuffA, sizeof(real)); break;
+//    case EVE_ESC_S_DATA:    memcpy(&reCurr.mpbBuff+1, &reBuffA, sizeof(real)); break;
+//    case EVE_ESC_U_DATA:    memcpy(&reCurr.mpbBuff+1, &moAlt.tiAlfa, sizeof(time)); break;
+
+//    case EVE_PROFILE:       memcpy(&reCurr.mpbBuff+1, &mpcwStopCan[ibDig], sizeof(uint)); break;
+
+    case EVE_PROFILE2:      memcpy(&reCurr.mpbBuff+0, &mpcwStopCan[ibDig], sizeof(uint));
+                            memcpy(&reCurr.mpbBuff+2, &mpcwStopAuxCan[ibDig], sizeof(uint)); break;
+
+//    case EVE_PROFILE_OK:    memcpy(&reCurr.mpbBuff+1, &cwHouRead, sizeof(uint));
+//                            memcpy(&reCurr.mpbBuff+3, &mpcwStopCan[ibDig], sizeof(uint)); break;
+
+    case EVE_PROFILE_OK2:   memcpy(&reCurr.mpbBuff+0, &cwHouRead, sizeof(uint));
+                            memcpy(&reCurr.mpbBuff+2, &mpcwStopCan[ibDig], sizeof(uint));
+                            memcpy(&reCurr.mpbBuff+4, &mpcwStopAuxCan[ibDig], sizeof(uint)); break;
+
+    case EVE_PROFILE_ERROR2:memcpy(&reCurr.mpbBuff+1, &wCurr, sizeof(uint));
+                            memcpy(&reCurr.mpbBuff+3, &mpSerial[ibPort], sizeof(uchar)); break;
+
+    case EVE_PROFILECLOSE2: memcpy(&reCurr.mpbBuff+1, &cwHouLength, sizeof(uint)); break;
+
+    case EVE_REFILL1:       memcpy(&reCurr.mpbBuff+1, &iwHardHou, sizeof(uint));
+                            memcpy(&reCurr.mpbBuff+3, &iwBmin, sizeof(uint));
+                            memcpy(&reCurr.mpbBuff+5, &iwBmax, sizeof(uint)); break;
+
+    case EVE_PREVIOUS_TOP:  memcpy(&reCurr.mpbBuff+0, &iwMajor, sizeof(uint)); break;
+
+    case EVE_CURRENT2_CANALS: memcpy(&reCurr.mpbBuff+0, &mpbCurrent2Buff, 8); break;
+
+    case EVE_CURRENT2_VALUE:  memcpy(&reCurr.mpbBuff+1, &dwUpdate, sizeof(ulong));
+                              memcpy(&reCurr.mpbBuff+5, &mpwCurrent2Mnt[ibCan], sizeof(uint)); break;
+
+    case EVE_CHECKUP_START: memcpy(&reCurr.mpbBuff+0, &boCheckupReadonly, sizeof(uchar));
+                            memcpy(&reCurr.mpbBuff+1, &mpbCheckupLimitD[ibDig], sizeof(uchar));
+                            memcpy(&reCurr.mpbBuff+2, &mpbCheckupLimitM[ibDig], sizeof(uchar)); break;
+
+    case EVE_CHECKUP_NEXT:  memcpy(&reCurr.mpbBuff+0, &cwHouRead, sizeof(uint)); break;
+
+    case EVE_CHECKUP_VALUE: memcpy(&reCurr.mpbBuff+0, &dwBuffC, sizeof(ulong));
+                            memcpy(&reCurr.mpbBuff+4, &mpdwChannelsA[diPrev.ibLine], sizeof(ulong)); break;
+
+    case EVE_CHECKUP_DAY_SKIP:
+    case EVE_CHECKUP_MON_SKIP:
+    case EVE_CHECKUP_DAY_FAIL:
+    case EVE_CHECKUP_MON_FAIL:
+    case EVE_CHECKUP_DAY:
+    case EVE_CHECKUP_MON:   memcpy(&reCurr.mpbBuff+0, &daAlt, sizeof(date)); break;
+
+    case EVE_CHECKUP_CANAL: memcpy(&reCurr.mpbBuff+0, &ibCan, sizeof(uchar));
+                            memcpy(&reCurr.mpbBuff+1, &diPrev, sizeof(digital)); break;
+
+    case EVE_CHECKUP_DAY_NEXT:
+    case EVE_CHECKUP_MON_NEXT: memcpy(&reCurr.mpbBuff+0, &daAlt, sizeof(date));
+                               memcpy(&reCurr.mpbBuff+6, &ibGrp, sizeof(uchar)); break;
+
+    case EVE_CHECKUP_INFO:  memcpy(&reCurr.mpbBuff+0, &cbCheckupDays, sizeof(uchar));
+                            memcpy(&reCurr.mpbBuff+1, &cbCheckupErrorDay, sizeof(uchar));
+                            memcpy(&reCurr.mpbBuff+2, &cbCheckupErrorMon, sizeof(uchar)); break;
+
+    case EVE_DEVICE_P_DEFECT: memcpy(&reCurr.mpbBuff+0, &tiDig, sizeof(time)); break;
+
+    case EVE_EXTENDED_0_ERROR: memcpy(&reCurr.mpbBuff+0, &x, sizeof(uchar));
+                               memcpy(&reCurr.mpbBuff+1, &bExt0Counter, sizeof(uchar)); break;
+  }
+*/
+  OpenOut(AUX_RECORD + i / bRECORD_BLOCK);
+  memcpy(&mpbPageOut + (i % bRECORD_BLOCK)*sizeof(record), &reCurr, sizeof(record));
+
+  return( CloseOut() );
 }
 
 
