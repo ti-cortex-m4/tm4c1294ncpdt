@@ -16,7 +16,8 @@ POWER_OFF.C
 
 
 //                                           0123456789ABCDEF
-static char const       szPowerOff[]      = "малое напряжение";
+static char const       szPowerOff1[]     = "    Низкое      ",
+                        szPowerOff2[]     = "  напряжение !  ";
 
 
 
@@ -43,15 +44,23 @@ static bool fPowerOff = false;
 
   if (IsPowerOff())
   {
-    ShowLo(szPowerOff);
+    if (fPowerOff == false)
+    {
+      SaveDisplay();
+
+      ShowHi(szPowerOff1);
+      ShowLo(szPowerOff2);
+    }
+
     fPowerOff = true;
     return true;
   }
 
   if (fPowerOff == true)
   {
+    LoadDisplay();
+
     fPowerOff = false;
-    Clear();
   }
 
   return false;
