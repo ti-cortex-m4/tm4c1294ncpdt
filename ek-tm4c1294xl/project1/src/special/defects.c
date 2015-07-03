@@ -95,11 +95,6 @@ void    InitDefects(void)
 }
 
 
-void    ResetDefects(void)
-{
-}
-
-
 void    StartDefects(void)
 {
   MakeAllDefects();

@@ -142,7 +142,6 @@ void    ResetDevices(bool  fFull)
 
   ResetMaxRepeats();
   ResetDef();
-  ResetDefects();
   ResetRefill();
   ResetSchedule();
   ResetExtended1();
