@@ -17,6 +17,7 @@ RECALC.C
 #include "../flash/records.h"
 #include "../energy2.h"
 #include "calc.h"
+#include "special.h"
 #include "recalc_def.h"
 #include "recalc.h"
 
@@ -138,6 +139,8 @@ uchar   i;
   }
 
   CloseCalc(fUseImp,fUsePow);                       // заканчиваем обработку
+
+  CloseSpecialBuff();
 
   return(1);
 }
