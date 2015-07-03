@@ -6,6 +6,7 @@ RESPONSE252_CRC,C
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_energy_spec.h"
 #include "../include/states.h"
 #include "../hardware/beep.h"
 #include "../serial/ports.h"
@@ -16,6 +17,7 @@ RESPONSE252_CRC,C
 #include "../output/out_nvram_stack.h"
 #include "../output/out_health.h"
 #include "../output/out_tariffs.h"
+#include "../output/out_defects.h"
 
 
 
@@ -36,6 +38,9 @@ void    Response252_CRC(void)
 
     case 5: OutGetAllPowTariffs(); break;
     case 6: OutGetAllEngTariffs(); break;
+
+    case 8: OutDefectsDay(); break;
+    case 9: OutDefectsMon(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
