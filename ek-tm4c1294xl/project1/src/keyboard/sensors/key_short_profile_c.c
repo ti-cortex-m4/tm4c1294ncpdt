@@ -59,7 +59,7 @@ void    key_SetShortProfileC(void)
       {           
         boShortProfileC = InvertBoolean(boShortProfileC);
 
-        SaveFile(&flShortProfileC);
+        SaveFile(&chShortProfileC);
         Show(boShortProfileC);
       }
       else Beep(); 
