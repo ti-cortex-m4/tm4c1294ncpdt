@@ -21,7 +21,6 @@ DEVICES_INIT.C
 #include "../digitals/checkup/checkup_run.h"
 #include "../digitals/max_repeats.h"
 #include "../special/recalc_def.h"
-#include "../special/defects.h"
 #include "../sensors/device_b.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
@@ -76,7 +75,6 @@ void    InitDevices1(void)
 
   InitMaxRepeats();
   InitDef();
-  InitDefects();
   InitRefill();
   InitSchedule();
   InitExtended1();
