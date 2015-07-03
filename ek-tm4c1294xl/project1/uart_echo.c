@@ -58,6 +58,7 @@ TODO .C
 #include "src/devices/devices_init.h"
 #include "src/devices/devices.h"
 #include "src/digitals/phones.h"
+#include "src/special/defects.h"
 #include "src/serial/speeds.h"
 #include "src/serial/flow.h"
 #include "src/output/esc/esc.h"
@@ -120,6 +121,7 @@ int main(void) {
 
   PrintStart();
 	InitStorage();
+  InitDefects();
 	InitRealtime();
   PrintStop();
 
