@@ -100,7 +100,10 @@ typedef enum
   FIX_PARAMS_BUGS       = MNT_PARAMS + sizeof(bool) + bNVRAM_FOOTER,
   USE_PARAMS_DIV        = FIX_PARAMS_BUGS + sizeof(bool) + bNVRAM_FOOTER,
 
-  CORRECT2_FLAG         = USE_PARAMS_DIV + sizeof(bool) + bNVRAM_FOOTER,
+  KEYS_LEVEL_B          = USE_PARAMS_DIV + sizeof(bool) + bNVRAM_FOOTER,
+  SHORT_PROFILE_C       = KEYS_LEVEL_B + sizeof(uchar) + bNVRAM_FOOTER,
+
+  CORRECT2_FLAG         = SHORT_PROFILE_C + sizeof(bool) + bNVRAM_FOOTER,
 
   KEY_INDEX             = CORRECT2_FLAG + sizeof(bool) + bNVRAM_FOOTER,
   SYS_INDEX             = KEY_INDEX + sizeof(ulong) + bNVRAM_FOOTER,

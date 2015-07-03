@@ -10,8 +10,8 @@ extern  cache const             chHideMessages;
 extern  cache const             chControlTime;
 extern  cache const             chManageTime;
 
-extern  file const              flKeysLevelB;
-extern  file const              flShortProfileC;
+extern  cache const             chKeysLevelB;
+extern  cache const             chShortProfileC;
 
 
 

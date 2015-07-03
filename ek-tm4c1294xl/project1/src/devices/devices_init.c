@@ -52,8 +52,8 @@ cache const             chHideMessages = {HIDE_MESSAGES, &boHideMessages, sizeof
 cache const             chControlTime = {CONTROL_TIME, &boControlTime, sizeof(bool)};
 cache const             chManageTime = {MANAGE_TIME, &boManageTime, sizeof(bool)};
 
-file const              flKeysLevelB = {KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
-file const              flShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, sizeof(bool)};
+cache const             chKeysLevelB = {KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
+cache const             chShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, sizeof(bool)};
 
 
 
@@ -65,14 +65,14 @@ void    InitDevices1(void)
   LoadCache(&chControlTime);
   LoadCache(&chManageTime);
 
-  LoadFile(&flKeysLevelB);
+  LoadCache(&chKeysLevelB);
   if ((bKeysLevelB < 1) || (bKeysLevelB > 2))
   {
     bKeysLevelB = 2;
-    SaveFile(&flKeysLevelB);
+    SaveCache(&chKeysLevelB);
   }
 
-  LoadFile(&flShortProfileC);
+  LoadCache(&chShortProfileC);
 
   InitMaxRepeats();
   InitDef();
@@ -137,10 +137,10 @@ void    ResetDevices(bool  fFull)
   SaveCache(&chManageTime);
 
   bKeysLevelB = 2;
-  SaveFile(&flKeysLevelB);
+  SaveCache(&chKeysLevelB);
 
   boShortProfileC = false;
-  SaveFile(&flShortProfileC);
+  SaveCache(&chShortProfileC);
 
   ResetMaxRepeats();
   ResetDef();
