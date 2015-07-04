@@ -44,7 +44,7 @@ PROGRAMS.H
 
 #define bSET_RESETCUSTOM            80
 #define bSET_RESETFULL              81
-#define bSET_RESETWATCHDOG          82
+#define bSET_RESET_WDT              82
 #define bSET_DEBUG                  83
 
 #define bSEARCH_BY_NUMBER           88

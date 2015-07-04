@@ -8,7 +8,7 @@ WATCHDOG.H
 
 
 
-//#define ENABLE_WATCHDOG
+#define ENABLE_WATCHDOG
 
 
 void    InitWDT(void);

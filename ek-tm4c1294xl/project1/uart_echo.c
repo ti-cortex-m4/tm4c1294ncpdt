@@ -83,6 +83,8 @@ int main(void) {
   InitUart3(ui32SysClock);
   InitUart4(ui32SysClock);
 
+  DisableWDT();
+
 	InitBeep();
 	InitLCD();
 	InitNvram();
@@ -149,6 +151,8 @@ int main(void) {
 
     while (1) {
     	ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM));
+
+    	ResetWDT();
 
     	RunRealtime();
     	RunDevices();

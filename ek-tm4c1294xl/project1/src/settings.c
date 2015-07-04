@@ -68,7 +68,7 @@ void    ResetSettings(bool  fFull)
 
   if (fFull)
   {
-    boEnblWDT = false;
+    boEnblWDT = true;
     SaveCache(&chEnblWDT);
 
     boSetTime = false;
