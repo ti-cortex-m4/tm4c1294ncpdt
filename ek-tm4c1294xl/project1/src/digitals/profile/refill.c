@@ -24,7 +24,7 @@ REFILL.C
 bool                    boDsblRefill;
 
 // переменные для заполнения пропущенных получасов
-static uint             iwBmin, iwBmax;
+uint                    iwBmin, iwBmax;
 
 // переменные для обработки перехода на зимнее время
 static uchar            bRefillWinter, mpbRefillWinter[10];
