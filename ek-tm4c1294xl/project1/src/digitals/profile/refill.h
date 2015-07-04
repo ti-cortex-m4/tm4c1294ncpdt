@@ -6,6 +6,7 @@ REFILL.H
 
 extern  bool                    boDsblRefill;
 
+extern  uint                    iwBmin, iwBmax;
 
 extern  cache const             chDsblRefill;
 

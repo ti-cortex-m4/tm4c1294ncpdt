@@ -13,6 +13,7 @@ RECORDS.C
 #include "../serial/ports.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_status.h"
+#include "../digitals/profile/refill.h"
 #include "../time/rtc.h"
 #include "../nvram/cache.h"
 #include "files.h"
@@ -281,9 +282,9 @@ uint    i;
 
     case EVE_PROFILECLOSE2: PutInt(1, cwHouLength); break;
 
-//    case EVE_REFILL1:       PutInt(1, iwHardHou);
-//                            PutInt(3, iwBmin);
-//                            PutInt(5, iwBmax); break;
+    case EVE_REFILL1:       PutInt(1, iwHardHou);
+                            PutInt(3, iwBmin);
+                            PutInt(5, iwBmax); break;
 
 //    case EVE_PREVIOUS_TOP:  memcpy(&reCurr.mpbBuff+0, &iwMajor, sizeof(uint)); break;
 //
