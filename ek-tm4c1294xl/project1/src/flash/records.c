@@ -8,7 +8,11 @@ RECORDS.C
 #include "../memory/mem_flash.h"
 #include "../memory/mem_records.h"
 #include "../memory/mem_settings.h"
+#include "../memory/mem_profile.h"
+#include "../memory/mem_limits.h"
+#include "../serial/ports.h"
 #include "../devices/devices.h"
+#include "../digitals/digitals_status.h"
 #include "../time/rtc.h"
 #include "../nvram/cache.h"
 #include "files.h"
@@ -90,6 +94,29 @@ static void CloseRecord(uint  wPage, uint  i)
   memcpy(pBuff + 16, &reCurr.mpbBuff[5], 1);
   memcpy(pBuff + 17, &reCurr.mpbBuff[6], 1);
   memcpy(pBuff + 18, &reCurr.mpbBuff[7], 1);
+}
+
+
+static void PutChar(uchar  i, uchar  b)
+{
+  reCurr.mpbBuff[i]  = b;
+}
+
+
+static void PutInt(uchar  i, uint  w)
+{
+  PutChar(i + 0, w / 0x100);
+  PutChar(i + 1, w % 0x100);
+}
+
+
+static void Put(uchar  i, uchar  *pbBuff,  uint  wSize)
+{
+  uchar j;
+  for (j=0; j<wSize; j++)
+  {
+    PutChar(i++, *(pbBuff++));
+  }
 }
 
 
@@ -226,37 +253,37 @@ uint    i;
   reCurr.cdwRecord = cdwAuxRecord++; SaveCache(&chAuxRecord);
   reCurr.ev = ev;
 
-//  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
-/*
+  PutChar(0, ibDig);
+
   switch (ev)
   {
     case EVE_PROFILEOPEN:
-    case EVE_SPECIALOPEN:   memcpy(&reCurr.mpbBuff+1, &mpdiDigital[ibDig], sizeof(digital)); break;
+    case EVE_SPECIALOPEN:   Put(1, (uchar *)&mpdiDigital[ibDig], sizeof(digital)); break;
 
 ////    case EVE_ESC_V_DATA:    memcpy(&reCurr.mpbBuff+1, &reBuffA, sizeof(real)); break;
 ////    case EVE_ESC_S_DATA:    memcpy(&reCurr.mpbBuff+1, &reBuffA, sizeof(real)); break;
 ////    case EVE_ESC_U_DATA:    memcpy(&reCurr.mpbBuff+1, &moAlt.tiAlfa, sizeof(time)); break;
-//
+
 ////    case EVE_PROFILE:       memcpy(&reCurr.mpbBuff+1, &mpcwStopCan[ibDig], sizeof(uint)); break;
 
-    case EVE_PROFILE2:      memcpy(&reCurr.mpbBuff+0, &mpcwStopCan[ibDig], sizeof(uint));
-                            memcpy(&reCurr.mpbBuff+2, &mpcwStopAuxCan[ibDig], sizeof(uint)); break;
+    case EVE_PROFILE2:      PutInt(0, mpcwStopCan[ibDig]);
+                            PutInt(2, mpcwStopAuxCan[ibDig]); break;
 
 ////    case EVE_PROFILE_OK:    memcpy(&reCurr.mpbBuff+1, &cwHouRead, sizeof(uint));
 ////                            memcpy(&reCurr.mpbBuff+3, &mpcwStopCan[ibDig], sizeof(uint)); break;
 
-    case EVE_PROFILE_OK2:   memcpy(&reCurr.mpbBuff+0, &cwHouRead, sizeof(uint));
-                            memcpy(&reCurr.mpbBuff+2, &mpcwStopCan[ibDig], sizeof(uint));
-                            memcpy(&reCurr.mpbBuff+4, &mpcwStopAuxCan[ibDig], sizeof(uint)); break;
+    case EVE_PROFILE_OK2:   PutInt(0, cwHouRead);
+                            PutInt(2, mpcwStopCan[ibDig]);
+                            PutInt(4, mpcwStopAuxCan[ibDig]); break;
 
-    case EVE_PROFILE_ERROR2:memcpy(&reCurr.mpbBuff+1, &wCurr, sizeof(uint));
-                            memcpy(&reCurr.mpbBuff+3, &mpSerial[ibPort], sizeof(uchar)); break;
+    case EVE_PROFILE_ERROR2:PutInt(1, GetCurr());
+                            PutInt(3, mpSerial[ibPort]); break;
 
-    case EVE_PROFILECLOSE2: memcpy(&reCurr.mpbBuff+1, &cwHouLength, sizeof(uint)); break;
+    case EVE_PROFILECLOSE2: PutInt(1, cwHouLength); break;
 
-    case EVE_REFILL1:       memcpy(&reCurr.mpbBuff+1, &iwHardHou, sizeof(uint));
-                            memcpy(&reCurr.mpbBuff+3, &iwBmin, sizeof(uint));
-                            memcpy(&reCurr.mpbBuff+5, &iwBmax, sizeof(uint)); break;
+//    case EVE_REFILL1:       PutInt(1, iwHardHou);
+//                            PutInt(3, iwBmin);
+//                            PutInt(5, iwBmax); break;
 
 //    case EVE_PREVIOUS_TOP:  memcpy(&reCurr.mpbBuff+0, &iwMajor, sizeof(uint)); break;
 //
@@ -297,7 +324,7 @@ uint    i;
 //    case EVE_EXTENDED_0_ERROR: memcpy(&reCurr.mpbBuff+0, &x, sizeof(uchar));
 //                               memcpy(&reCurr.mpbBuff+1, &bExt0Counter, sizeof(uchar)); break;
   }
-*/
+
   CloseRecord(AUX_RECORD, i);
 
   return CloseOut();
