@@ -25,7 +25,7 @@ LCD.C
 
 
 static uchar const      szName[]        = "    ÑÝÌ-2.01    ",
-                        szTest[]        = "   [        ]   ";
+                        szTest[]        = "                ";
 
 
 static uchar const      mpbUserFonts[64] =
