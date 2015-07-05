@@ -6,6 +6,8 @@ KEY_RESET_WDT.C
 
 #include "../main.h"
 #include "../console.h"
+#include "driverlib/watchdog.h"
+#include "inc/hw_memmap.h"
 #include "key_reset_wdt.h"
 
 
@@ -32,7 +34,12 @@ void    key_ResetWDT(void)
     {
       Waiting();
       LongBeep();
-      while (1);
+      Clear();
+
+      while (1)
+      {
+        sprintf(szLo+4,"%8lX", WatchdogValueGet(WATCHDOG0_BASE));
+      }
     }
     else Beep();
   }
