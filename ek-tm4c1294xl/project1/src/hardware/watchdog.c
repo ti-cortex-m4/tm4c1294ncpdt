@@ -8,7 +8,9 @@ WATCHDOG.C
 #include "inc/hw_types.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_sysctl.h"
+#include "inc/hw_ints.h"
 #include "driverlib/watchdog.h"
+#include "driverlib/interrupt.h"
 #include "../memory/mem_program.h"
 #include "watchdog.h"
 
@@ -35,6 +37,7 @@ void    EnableWDT(void)
 
   WatchdogEnable(WATCHDOG0_BASE);
   WatchdogResetEnable(WATCHDOG0_BASE);
+//  IntEnable(INT_WATCHDOG_TM4C123);
   WatchdogStallEnable(WATCHDOG0_BASE);
 
 #endif
@@ -51,6 +54,7 @@ void    DisableWDT(void)
 
 //  WatchdogDisable(WATCHDOG0_BASE);
   WatchdogResetDisable(WATCHDOG0_BASE);
+//  IntDisable(INT_WATCHDOG_TM4C123);
 //  WatchdogStallEnable(WATCHDOG0_BASE);
 
 #endif
@@ -70,4 +74,10 @@ void    ResetWDT(void)
 bool    IsResetWDT(void)
 {
   return false;
+}
+
+
+
+void    WatchdogIntHandler(void)
+{
 }
