@@ -88,26 +88,26 @@ int main(void) {
 	InitBeep();
 	InitLCD();
 	InitNvram();
-	InitFlash();            Delay(100); TestOK();
+	InitFlash();            //Delay(100); TestOK();
 	InitRTC();
 	InitCODE();
 
 	InitRecords();
-	InitSettings();         Delay(100); TestOK();
+	InitSettings();         //Delay(100); TestOK();
 	InitInfrared();
 	InitKey();
-	InitKeyboard();         Delay(100); TestOK();
+	InitKeyboard();         //Delay(100); TestOK();
 	InitImpulses();
 	InitFactors();
-	InitGroups();           Delay(100); TestOK();
+	InitGroups();           //Delay(100); TestOK();
 	InitZones();
-	InitTariffs();          Delay(100); TestOK();
+	InitTariffs();          //Delay(100); TestOK();
 	InitRelaxs();
-	InitGaps();             Delay(100); TestOK();
+	InitGaps();             //Delay(100); TestOK();
 	InitDecret();
 	InitCorrect1();
 	InitCorrect2();
-	InitDigitals();         Delay(100); TestOK();
+	InitDigitals();         //Delay(100); TestOK();
 	InitLimits();
   InitDevices1();
 	InitParams();
@@ -116,7 +116,7 @@ int main(void) {
 	InitSpeeds();
 	InitEsc();
 	InitUni();
-	InitFlow();             Delay(100); TestOK();
+	InitFlow();             //Delay(100); TestOK();
 	InitPowerOff();
 
 	InitSlide();

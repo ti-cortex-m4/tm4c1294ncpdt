@@ -14,7 +14,7 @@ WATCHDOG.C
 
 
 
-#define WATCHDOG_LOAD   (ulong)(0x10000000)
+#define WATCHDOG_LOAD   (ulong)(0x20000000)
 
 
 
@@ -49,9 +49,9 @@ void    DisableWDT(void)
 
   WatchdogReloadSet(WATCHDOG0_BASE, WATCHDOG_LOAD);
 
-  WatchdogEnable(WATCHDOG0_BASE);
+//  WatchdogDisable(WATCHDOG0_BASE);
   WatchdogResetDisable(WATCHDOG0_BASE);
-  WatchdogStallEnable(WATCHDOG0_BASE);
+//  WatchdogStallEnable(WATCHDOG0_BASE);
 
 #endif
 }
