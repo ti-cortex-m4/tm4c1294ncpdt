@@ -8,6 +8,7 @@ CORRECT1,C
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_gps.h"
 #include "../memory/mem_correct1.h"
+#include "../memory/mem_records.h"
 #include "../time/timedate.h"
 #include "../time/rtc.h"
 #include "../flash/files.h"
@@ -77,6 +78,7 @@ void    SetCurrTime_Full(time  ti, event  ev)
   if ((i = GetCorrectIndex(ev)) == 0) return;
 
 
+  tiRecordSetCurrTime = ti;
   AddKeyRecord(ev);
 
   tiPrevCorrect = tiCurr;
@@ -171,6 +173,7 @@ bool    CorrectTime_Full(event  ev)
 
   SaveFile(&flCorrect1);
 
+  tiRecordSetCurrTime = ti;
   AddKeyRecord(ev);
   SetCurrTime(ti);
   AddKeyRecord(EVE_TIME_OK);
