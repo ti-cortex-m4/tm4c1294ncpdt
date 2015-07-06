@@ -26,6 +26,7 @@ RESPONSE_UNI.C
 #include "u_day.h"
 #include "u_energy.h"
 #include "uni_cnt.h"
+#include "u_events.h"
 #include "u_query_crc.h"
 #include "uni.h"
 
@@ -251,19 +252,11 @@ void    RunResponseUni(void)
 
       case wUNI_GETDEFCANDAY: GetDefCanDayUni(); break;
       case wUNI_GETDEFGRPDAY: GetDefGrpDayUni(); break;
-/*
-      case wUNI_GETEVENTS_COUNTS:
-        GetEventsCountsUni(); 
-        break;
 
-      case wUNI_GETEVENTS:
-        GetEventsUni(); 
-        break;
+      case wUNI_GETEVENTS_COUNTS: GetEventsCountsUni(); break;
+      case wUNI_GETEVENTS: GetEventsUni(); break;
+      case wUNI_GETEVENTS_MESSAGES: GetEventsMessagesUni(); break;
 
-      case wUNI_GETEVENTS_MESSAGES:
-        GetEventsMessagesUni(); 
-        break;
-*/
       case wUNI_GETQUERY_CRC:
         GetQueryCRCUni(); 
         break;

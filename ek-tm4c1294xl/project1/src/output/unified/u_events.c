@@ -21,6 +21,10 @@ U_EVENTS.C
 
 
 
+static time             tiT;
+
+
+
 uint    GetPagesCount(uchar  ibClass)
 {
   if (ibClass == 1)
@@ -82,7 +86,7 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
 void    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
 {
   memcpy(&reCurr, &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD, SIZEOF_RECORD);
-  tiAlt = reCurr.ti;
+  tiT = reCurr.ti;
 
   //x_str("\n block"); x_bytedec(ibBlock-1); 
   //x_intdec(reCurr.cdwRecord);
@@ -113,8 +117,8 @@ uchar   ibBlock;
   //x_str("\n day index "); x_intdec(0x100*bInBuff8+bInBuff9);
   //x_str("\n days count "); x_intdec(0x100*bInBuffA+bInBuffB);
 
-  tiAlt = *GetCurrTimeDate();
-  ulong dw1 = DateToDayIndex();
+  tiT = *GetCurrTimeDate();
+  ulong dw1 = DateToDayIndex(tiT);
 
   bool f = 0;
 
@@ -134,7 +138,7 @@ uchar   ibBlock;
       }
       else
       {
-        ulong dw2 = DateToDayIndex();
+        ulong dw2 = DateToDayIndex(tiT);
         //x_str(" delta "); x_longdec(dw1); x_str("-"); x_longdec(dw2); x_str("="); x_longdec(dw1 - dw2);
 
         if ((f == 0) && (dw1 >= dw2))
@@ -181,17 +185,16 @@ uint    i;
     PushInt(GetMaxRecordsCount(bInBuff7));
     PushInt(GetRecordsCount(bInBuff7));
     
-    tiAlt = *GetCurrTimeDate();
-    dwBuffC = DateToDayIndex();
+    tiT = *GetCurrTimeDate();
+    ulong dw = DateToDayIndex(tiT);
 
     for (i=0; i<0x100*bInBuffA+bInBuffB; i++)
     {
       PushInt(0);
-      PushChar(tiAlt.bDay);
-      PushChar(tiAlt.bMonth);
+      PushChar(tiT.bDay);
+      PushChar(tiT.bMonth);
 
-      dwBuffC--;
-      DayIndexToDate(dwBuffC);
+      tiT = DayIndexToDate(--dw);
     }
 
     //x_init();
@@ -285,19 +288,20 @@ void    PushEventParams(void)
     case EVE_INQ_CORRECT1: 
     case EVE_INQ_CORRECT2: 
     case EVE_INQ_CORRECT4: 
-      tiAlt.bSecond = reCurr.mpbBuff[0];
-      tiAlt.bMinute = reCurr.mpbBuff[1];
-      tiAlt.bHour   = reCurr.mpbBuff[2];
-      tiAlt.bDay    = reCurr.mpbBuff[3];
-      tiAlt.bMonth  = reCurr.mpbBuff[4];
-      tiAlt.bYear   = reCurr.mpbBuff[5];
+      tiT.bSecond = reCurr.mpbBuff[0];
+      tiT.bMinute = reCurr.mpbBuff[1];
+      tiT.bHour   = reCurr.mpbBuff[2];
+      tiT.bDay    = reCurr.mpbBuff[3];
+      tiT.bMonth  = reCurr.mpbBuff[4];
+      tiT.bYear   = reCurr.mpbBuff[5];
 
-      coFloat.dwBuff = DateToSecIndex();
+      combo32 co;
+      co.dwBuff = DateToSecIndex(tiT);
 
-      PushChar(coFloat.mpbBuff[0]);
-      PushChar(coFloat.mpbBuff[1]);
-      PushChar(coFloat.mpbBuff[2]);
-      PushChar(coFloat.mpbBuff[3]);
+      PushChar(co.mpbBuff[0]);
+      PushChar(co.mpbBuff[1]);
+      PushChar(co.mpbBuff[2]);
+      PushChar(co.mpbBuff[3]);
       break;
 
     case 64: 
@@ -345,7 +349,7 @@ void    PushEventParams(void)
     default: PushChar(0); PushChar(0); PushChar(0); PushChar(0); break;  
   }
 
-  tiAlt = reCurr.ti;
+  tiT = reCurr.ti;
 }
 
 
@@ -370,17 +374,17 @@ uchar   i,j;
     //x_str(" index "); x_bytedec(i); 
     if (i+1 >= bInBuffA)
     { 
-      if ((tiAlt.bDay == bInBuff7) && (tiAlt.bMonth == bInBuff8) && (tiAlt.bYear == bInBuff9))
+      if ((tiT.bDay == bInBuff7) && (tiT.bMonth == bInBuff8) && (tiT.bYear == bInBuff9))
       {
         //x_str(" push ");
         PushChar(reCurr.ev);
         PushEventParams();
 
-        PushChar(tiAlt.bMinute); 
-        PushChar(tiAlt.bHour); 
-        PushChar(tiAlt.bDay); 
-        PushChar(tiAlt.bMonth); 
-        PushChar(tiAlt.bYear); 
+        PushChar(tiT.bMinute);
+        PushChar(tiT.bHour);
+        PushChar(tiT.bDay);
+        PushChar(tiT.bMonth);
+        PushChar(tiT.bYear);
 
         if (++j >= bInBuffB)
         {
@@ -435,7 +439,7 @@ uchar   ibBlock,j,bTotal;
     { 
       ReadEventBlock(ibBlock);
 
-      if ((tiAlt.bDay == bInBuff7) && (tiAlt.bMonth == bInBuff8) && (tiAlt.bYear == bInBuff9))
+      if ((tiT.bDay == bInBuff7) && (tiT.bMonth == bInBuff8) && (tiT.bYear == bInBuff9))
       { 
         //x_str(" calc ");
 
