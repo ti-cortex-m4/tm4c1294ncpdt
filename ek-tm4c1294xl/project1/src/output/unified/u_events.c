@@ -12,6 +12,7 @@ U_EVENTS.C
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
+#include "../../flash/records.h"
 #include "../../flash/records2.h"
 #include "../../time/timedate.h"
 #include "../../time/calendar.h"
@@ -83,15 +84,17 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
 }
 
 
-void    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
+time   ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
 {
-  memcpy(&reCurr, &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD, SIZEOF_RECORD);
-  tiT = reCurr.ti;
+  uchar* pBuff = (uchar *) &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD;
+  BuffToRecord(pBuff);
+
+  return reCurr.ti;
 
   //x_str("\n block"); x_bytedec(ibBlock-1); 
   //x_intdec(reCurr.cdwRecord);
   //x_bytedec(reCurr.evCode); 
-  //if (reCurr.evCode != 0xFF) x_time(&reCurr.tiNow); 
+  //if (reCurr.evCode != 0xFF) x_time(&reCurr.ti);
 }
 
 
@@ -128,7 +131,7 @@ uchar   ibBlock;
 
     for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--) 
     { 
-      ReadEventBlock(ibBlock);
+    	tiT = ReadEventBlock(ibBlock);
 
       //x_str(" countdown "); x_intdec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); x_intdec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
       if (bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock) > GetRecordsCount(bInBuff7) + bRECORD_BLOCK)
@@ -185,16 +188,16 @@ uint    i;
     PushInt(GetMaxRecordsCount(bInBuff7));
     PushInt(GetRecordsCount(bInBuff7));
     
-    tiT = *GetCurrTimeDate();
-    ulong dw = DateToDayIndex(tiT);
+    time ti = *GetCurrTimeDate();
+    ulong dw = DateToDayIndex(ti);
 
     for (i=0; i<0x100*bInBuffA+bInBuffB; i++)
     {
       PushInt(0);
-      PushChar(tiT.bDay);
-      PushChar(tiT.bMonth);
+      PushChar(ti.bDay);
+      PushChar(ti.bMonth);
 
-      tiT = DayIndexToDate(--dw);
+      ti = DayIndexToDate(--dw);
     }
 
     //x_init();
@@ -369,7 +372,7 @@ uchar   i,j;
 
   for (i=0; i<bTotal; i++) 
   {
-    ReadEventBlock(ibBlock);
+  	tiT = ReadEventBlock(ibBlock);
 
     //x_str(" index "); x_bytedec(i); 
     if (i+1 >= bInBuffA)
@@ -437,7 +440,7 @@ uchar   ibBlock,j,bTotal;
 
     for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--) 
     { 
-      ReadEventBlock(ibBlock);
+    	tiT = ReadEventBlock(ibBlock);
 
       if ((tiT.bDay == bInBuff7) && (tiT.bMonth == bInBuff8) && (tiT.bYear == bInBuff9))
       { 
