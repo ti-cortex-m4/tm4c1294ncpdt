@@ -7,6 +7,9 @@ RECORDS.H
 void    InitRecords(void);
 void    ResetRecords(void);
 
+void    RecordToBuff(uchar*  pBuff);
+void    BuffToRecord(uchar*  pBuff);
+
 bool    AddKeyRecord(event  ev);
 bool    AddSysRecord(event  ev);
 bool    AddSysRecordReprogram(event  ev);
