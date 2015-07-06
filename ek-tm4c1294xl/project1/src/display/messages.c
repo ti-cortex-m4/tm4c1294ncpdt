@@ -68,6 +68,7 @@ char const              szClear[]       = "                ",
                         szBadXDATA[]    = "сегмента XDATA !",
                         szBadRTC1[]     = "доступа к RTC ! ",
                         szBadRTC2[]     = "показаний RTC ! ",
+                        szIsResetWDT[]  = "  сброс по WDT  ",
                         szEmpty[]       = "      нет       ",
                         szYes[]         = "да ",
                         szNo[]          = "нет";

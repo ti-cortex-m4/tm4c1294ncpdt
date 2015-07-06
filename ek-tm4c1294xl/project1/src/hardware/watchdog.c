@@ -70,5 +70,7 @@ void    ResetWDT(void)
 
 bool    IsResetWDT(void)
 {
-  return (SysCtlResetCauseGet() & SYSCTL_CAUSE_WDOG);
+  bool f = (SysCtlResetCauseGet() & SYSCTL_CAUSE_WDOG0);
+  SysCtlResetCauseClear(SYSCTL_CAUSE_WDOG0);
+  return f;
 }
