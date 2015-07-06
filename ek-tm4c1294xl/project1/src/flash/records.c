@@ -17,7 +17,7 @@ RECORDS.C
 #include "../time/rtc.h"
 #include "../nvram/cache.h"
 #include "files.h"
-#include "record3.h"
+#include "records3.h"
 #include "records.h"
 
 

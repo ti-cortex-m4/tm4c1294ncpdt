@@ -3,25 +3,23 @@ U_EVENTS.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        <string.h>
-#include "main.h"
-#include "xdata.h"
-#include "rtc.h"
-#include "timedate.h"
-#include "engine.h"
-#include "flash.h"
-#include "record.h"
-#include "record2.h"
-#include "ports.h"
-#include "ports2.h"
-#include "queries2.h"
-#include "postinput2.h"
-#include "watchdog.h"
+
+#include "../../main.h"
+#include "../../memory/mem_ports.h"
+#include "../../memory/mem_records.h"
+#include "../../memory/mem_flash.h"
+#include "../../include/flash.h"
+#include "../../include/queries_uni.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports2.h"
+#include "../../flash/records2.h"
+#include "../../time/timedate.h"
+#include "../../time/calendar.h"
+#include "../../time/rtc.h"
+#include "../../hardware/watchdog.h"
+#include "response_uni.h"
 
 
-
-#ifndef MODBUS
 
 uint    GetPagesCount(uchar  ibClass)
 {
@@ -69,7 +67,7 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
     GetRecordsBlock2(CLA_AUXILIARY, iwPage);
   else
     GetRecordsBlock(CLA_IMPULSE, iwPage);
-/ *
+/*
   x_str("\n");
   for (i=0; i<wLEAF_BYTES; i++)
   {
@@ -77,14 +75,14 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
     x_bytehex(mpbPageIn[i]);
   }
   x_str("\n");
-* /
+*/
 }
 
 
 void    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
 {
   memcpy(&reCurr, &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD, SIZEOF_RECORD);
-  tiAlt = reCurr.tiNow;
+  tiAlt = reCurr.ti;
 
   //x_str("\n block"); x_bytedec(ibBlock-1); 
   //x_intdec(reCurr.cdwRecord);
@@ -116,9 +114,9 @@ uchar   ibBlock;
   //x_str("\n days count "); x_intdec(0x100*bInBuffA+bInBuffB);
 
   tiAlt = *GetCurrTimeDate();
-  dwBuffY = DateToDayIndex();
+  ulong dw1 = DateToDayIndex();
 
-  fAlt = 0;
+  bool f = 0;
 
   for (iwPage=0; iwPage<GetPagesCount(bInBuff7); iwPage++)
   { 
@@ -136,24 +134,24 @@ uchar   ibBlock;
       }
       else
       {
-        dwBuffC = DateToDayIndex();
-        //x_str(" delta "); x_longdec(dwBuffY); x_str("-"); x_longdec(dwBuffC); x_str("="); x_longdec(dwBuffY - dwBuffC);
+        ulong dw2 = DateToDayIndex();
+        //x_str(" delta "); x_longdec(dw1); x_str("-"); x_longdec(dw2); x_str("="); x_longdec(dw1 - dw2);
 
-        if ((fAlt == 0) && (dwBuffY >= dwBuffC))
+        if ((f == 0) && (dw1 >= dw2))
         {
-          if (dwBuffY - dwBuffC >= 0x100*bInBuff8+bInBuff9) 
+          if (dw1 - dw2 >= 0x100*bInBuff8+bInBuff9)
           {
             //x_str(" start ");
-            fAlt = 1;
+            f = 1;
           }
         }
 
-        if (fAlt == 1)
+        if (f == 1)
         {
           //x_str(" add ");
-          IncEventsCount(dwBuffY - dwBuffC);
+          IncEventsCount(dw1 - dw2);
 
-          if (dwBuffY - dwBuffC >= (0x100*bInBuff8+bInBuff9) + (0x100*bInBuffA+bInBuffB))
+          if (dw1 - dw2 >= (0x100*bInBuff8+bInBuff9) + (0x100*bInBuffA+bInBuffB))
           {
             //x_str(" stop ");
             return;
@@ -206,15 +204,15 @@ uint    i;
 
 
 
-void    PushEventText(uchar  code  *szT)
+void    PushEventText(uchar  *szT)
 {
 uchar   i;
 
-  fAlt = 1;
+  bool f = 1;
   for (i=0; i<63-1; i++)
   {
-    if (!*szT) fAlt = 0;
-    if (fAlt == 1) PushChar(*szT++); else PushChar(0);
+    if (!*szT) f = 0;
+    if (f == 1) PushChar(*szT++); else PushChar(0);
   }
 
   PushChar(0);
@@ -276,7 +274,7 @@ void    PushEventsMessage(uchar  bCode)
 
 void    PushEventParams(void)
 {
-  switch (reCurr.evCode)
+  switch (reCurr.ev)
   {
     case EVE_PREVNEXTTIME2: 
 
@@ -347,7 +345,7 @@ void    PushEventParams(void)
     default: PushChar(0); PushChar(0); PushChar(0); PushChar(0); break;  
   }
 
-  tiAlt = reCurr.tiNow;
+  tiAlt = reCurr.ti;
 }
 
 
@@ -375,7 +373,7 @@ uchar   i,j;
       if ((tiAlt.bDay == bInBuff7) && (tiAlt.bMonth == bInBuff8) && (tiAlt.bYear == bInBuff9))
       {
         //x_str(" push ");
-        PushChar(reCurr.evCode); 
+        PushChar(reCurr.ev);
         PushEventParams();
 
         PushChar(tiAlt.bMinute); 
@@ -424,7 +422,7 @@ uchar   ibBlock,j,bTotal;
   //x_bytedec(bInBuff7); x_str("."); x_bytedec(bInBuff8); x_str("."); x_bytedec(bInBuff9);
   //x_str(" index "); x_bytedec(bInBuffA); x_str(" count "); x_bytedec(bInBuffB);
 
-  fAlt = 0;
+  bool f = 0;
   bTotal = 0;
   i = 0;
   j = 0;
@@ -441,14 +439,14 @@ uchar   ibBlock,j,bTotal;
       { 
         //x_str(" calc ");
 
-        fAlt = 1;
+        f = 1;
         bTotal++;
         i = iwPage;
         j = ibBlock;
       }
       else
       {
-        if (fAlt == 1)
+        if (f == 1)
         { 
           //x_str("\n success"); 
           PushEvents2(i, j, bTotal);
@@ -513,6 +511,3 @@ uchar   i;
     Output2(2+bInBuff9*64);
   }
 }
-
-#endif
-*/
