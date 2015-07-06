@@ -70,12 +70,8 @@ void    ResetRecords(void)
 
 
 
-static void CloseRecord(uint  wPage, uint  i)
+void    RecordToBuff(uchar*  pBuff)
 {
-  OpenOut(wPage + i / bRECORD_BLOCK);
-
-  uchar* pBuff = (uchar *) &mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD;
-
   memcpy(pBuff + 0,  &reCurr.ti, 6);
 
   static combo32 co;
@@ -95,6 +91,40 @@ static void CloseRecord(uint  wPage, uint  i)
   memcpy(pBuff + 16, &reCurr.mpbBuff[5], 1);
   memcpy(pBuff + 17, &reCurr.mpbBuff[6], 1);
   memcpy(pBuff + 18, &reCurr.mpbBuff[7], 1);
+}
+
+
+void    BuffToRecord(uchar*  pBuff)
+{
+  memcpy(&reCurr.ti, pBuff + 0, 6);
+
+  static combo32 co;
+  co.dwBuff = reCurr.cdwRecord;
+  memcpy(&co.mpbBuff[3], pBuff + 6, 1);
+  memcpy(&co.mpbBuff[2], pBuff + 7, 1);
+  memcpy(&co.mpbBuff[1], pBuff + 8, 1);
+  memcpy(&co.mpbBuff[0], pBuff + 9, 1);
+
+  memcpy(&reCurr.ev, pBuff + 10, 1);
+
+  memcpy(&reCurr.mpbBuff[0], pBuff + 11, 1);
+  memcpy(&reCurr.mpbBuff[1], pBuff + 12, 1);
+  memcpy(&reCurr.mpbBuff[2], pBuff + 13, 1);
+  memcpy(&reCurr.mpbBuff[3], pBuff + 14, 1);
+  memcpy(&reCurr.mpbBuff[4], pBuff + 15, 1);
+  memcpy(&reCurr.mpbBuff[5], pBuff + 16, 1);
+  memcpy(&reCurr.mpbBuff[6], pBuff + 17, 1);
+  memcpy(&reCurr.mpbBuff[7], pBuff + 18, 1);
+}
+
+
+
+static void CloseRecord(uint  wPage, uint  i)
+{
+  OpenOut(wPage + i / bRECORD_BLOCK);
+
+  uchar* pBuff = (uchar *) &mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD;
+  RecordToBuff(pBuff);
 }
 
 
