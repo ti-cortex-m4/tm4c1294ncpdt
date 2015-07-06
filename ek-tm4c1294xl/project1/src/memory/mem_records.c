@@ -13,3 +13,6 @@ record                  reCurr;
 
 // счётчики записей
 ulong                   cdwKeyRecord, cdwSysRecord, cdwDigRecord, cdwImpRecord, cdwModRecord, cdwPh2Record, cdwAuxRecord;
+
+//
+time                    tiRecordSetCurrTime;

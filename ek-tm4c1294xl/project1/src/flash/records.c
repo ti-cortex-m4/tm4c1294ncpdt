@@ -136,32 +136,28 @@ bool    AddKeyRecord(event  ev)
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwKeyRecord++; SaveCache(&chKeyRecord);
   reCurr.ev = ev;
-/*
+
   switch (ev)
   {
-    case EVE_GPS_GOODLINK:  memcpy(&reCurr.mpbBuff+0, &tiGPS, sizeof(time)); break;
+//    case EVE_GPS_GOODLINK:  memcpy(&reCurr.mpbBuff+0, &tiGPS, sizeof(time)); break;
 
-    case EVE_GPS_BADGPS:    memcpy(&reCurr.mpbBuff+0, &bStatusGPS, sizeof(uchar)); break;
+//    case EVE_GPS_BADGPS:    memcpy(&reCurr.mpbBuff+0, &bStatusGPS, sizeof(uchar)); break;
 
-    case EVE_GPS_GOODGPS_1: memcpy(&reCurr.mpbBuff+0, &tiAlt, sizeof(time));
-                            memcpy(&reCurr.mpbBuff+6, &bGMT, sizeof(uchar)); break;
+//    case EVE_GPS_GOODGPS_1: memcpy(&reCurr.mpbBuff+0, &tiAlt, sizeof(time));
+//                            memcpy(&reCurr.mpbBuff+6, &bGMT, sizeof(uchar)); break;
 
-    case EVE_GPS_GOODGPS_2: memcpy(&reCurr.mpbBuff+0, &bSeasonCurr, sizeof(uchar));
-                            memcpy(&reCurr.mpbBuff+1, &boSeasonGPS, sizeof(uchar)); break;
+//    case EVE_GPS_GOODGPS_2: memcpy(&reCurr.mpbBuff+0, &bSeasonCurr, sizeof(uchar));
+//                            memcpy(&reCurr.mpbBuff+1, &boSeasonGPS, sizeof(uchar)); break;
 
-    case EVE_EXT_CORRECT2:  memcpy(&reCurr.mpbBuff+0, &tiAlt, sizeof(time)); break;
-
+    case EVE_EXT_CORRECT2:
     case EVE_ESC_K:
     case EVE_ESC_k:
     case EVE_INQ_CORRECT1:
     case EVE_INQ_CORRECT2:
     case EVE_INQ_CORRECT4:
-    case EVE_PROGRAM_2:     memcpy(&reCurr.mpbBuff+0, &tiSetRTC, sizeof(time));
-
-    case EVE_SMK_GOODLINK:  memcpy(&reCurr.mpbBuff+0, &tiSMK, sizeof(time)); break;
-    case EVE_SMK_GOODSMK_1: memcpy(&reCurr.mpbBuff+0, &tiAlt, sizeof(time)); break;
+    case EVE_PROGRAM_2:     Put(0, (uchar *) &tiRecordSetCurrTime, sizeof(time));
   }
-*/
+
   CloseRecord(KEY_RECORD, i);
 
   return CloseOut();
