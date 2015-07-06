@@ -12,6 +12,7 @@ U_EVENTS.C
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
+#include "../../serial/print2.h"
 #include "../../flash/records.h"
 #include "../../flash/records2.h"
 #include "../../time/timedate.h"
@@ -61,9 +62,7 @@ uint    GetRecordsCount(uchar  ibClass)
 
 void    LoadEventsPage(uchar  ibClass, uint  iwPage)
 {
-//uint    i;
-
-  //x_str("\n\n page"); x_intdec(iwPage); 
+  x_str("\n\n page"); x_intdec(iwPage);
   ResetWDT();
 
   if (ibClass == 1)
@@ -72,15 +71,15 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
     GetRecordsBlock2(CLA_AUXILIARY, iwPage);
   else
     GetRecordsBlock(CLA_IMPULSE, iwPage);
-/*
+
   x_str("\n");
+  uint i;
   for (i=0; i<wLEAF_BYTES; i++)
   {
     if (i % SIZEOF_RECORD == 0) { x_str("\n"); x_bytedec(i / SIZEOF_RECORD); }
     x_bytehex(mpbPageIn[i]);
   }
   x_str("\n");
-*/
 }
 
 
@@ -89,12 +88,12 @@ time   ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
   uchar* pBuff = (uchar *) &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD;
   BuffToRecord(pBuff);
 
-  return reCurr.ti;
+  x_str("\n block"); x_bytedec(ibBlock-1);
+  x_intdec(reCurr.cdwRecord);
+  x_bytedec(reCurr.ev);
+  if (reCurr.ev != 0xFF) x_time(reCurr.ti);
 
-  //x_str("\n block"); x_bytedec(ibBlock-1); 
-  //x_intdec(reCurr.cdwRecord);
-  //x_bytedec(reCurr.evCode); 
-  //if (reCurr.evCode != 0xFF) x_time(&reCurr.ti);
+  return reCurr.ti;
 }
 
 
@@ -116,9 +115,9 @@ void    PushEventsCounts(void)
 uint    iwPage;
 uchar   ibBlock;
 
-  //x_str("\n\n get events table ");
-  //x_str("\n day index "); x_intdec(0x100*bInBuff8+bInBuff9);
-  //x_str("\n days count "); x_intdec(0x100*bInBuffA+bInBuffB);
+  x_str("\n\n get events table ");
+  x_str("\n day index "); x_intdec(0x100*bInBuff8+bInBuff9);
+  x_str("\n days count "); x_intdec(0x100*bInBuffA+bInBuffB);
 
   tiT = *GetCurrTimeDate();
   ulong dw1 = DateToDayIndex(tiT);
@@ -133,34 +132,34 @@ uchar   ibBlock;
     { 
     	tiT = ReadEventBlock(ibBlock);
 
-      //x_str(" countdown "); x_intdec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); x_intdec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
+      x_str(" countdown "); x_intdec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); x_intdec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
       if (bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock) > GetRecordsCount(bInBuff7) + bRECORD_BLOCK)
       {
-        //x_str(" exit ");
+        x_str(" exit ");
         return;
       }
       else
       {
         ulong dw2 = DateToDayIndex(tiT);
-        //x_str(" delta "); x_longdec(dw1); x_str("-"); x_longdec(dw2); x_str("="); x_longdec(dw1 - dw2);
+        x_str(" delta "); x_longdec(dw1); x_str("-"); x_longdec(dw2); x_str("="); x_longdec(dw1 - dw2);
 
         if ((f == 0) && (dw1 >= dw2))
         {
           if (dw1 - dw2 >= 0x100*bInBuff8+bInBuff9)
           {
-            //x_str(" start ");
+            x_str(" start ");
             f = 1;
           }
         }
 
         if (f == 1)
         {
-          //x_str(" add ");
+          x_str(" add ");
           IncEventsCount(dw1 - dw2);
 
           if (dw1 - dw2 >= (0x100*bInBuff8+bInBuff9) + (0x100*bInBuffA+bInBuffB))
           {
-            //x_str(" stop ");
+            x_str(" stop ");
             return;
           }
         }
@@ -200,9 +199,9 @@ uint    i;
       ti = DayIndexToDate(--dw);
     }
 
-    //x_init();
+    x_init();
     PushEventsCounts();
-    //x_done();
+    x_done();
 
     Output2(1+2+2+(0x100*bInBuffA+bInBuffB)*4);
   }
@@ -361,9 +360,9 @@ void    PushEvents2(uint  iwPage, uchar  ibBlock, uchar  bTotal)
 {
 uchar   i,j;
 
-  //x_str("\n\n push events \n");
-  //x_str("\n page "); x_intdec(iwPage); x_str(" block "); x_bytedec(ibBlock-1); x_str(" total "); x_bytedec(bTotal);
-  //x_str(" index "); x_bytedec(bInBuffA); x_str(" count "); x_bytedec(bInBuffB);
+  x_str("\n\n push events \n");
+  x_str("\n page "); x_intdec(iwPage); x_str(" block "); x_bytedec(ibBlock-1); x_str(" total "); x_bytedec(bTotal);
+  x_str(" index "); x_bytedec(bInBuffA); x_str(" count "); x_bytedec(bInBuffB);
 
   InitPushUni();
 
@@ -374,12 +373,12 @@ uchar   i,j;
   {
   	tiT = ReadEventBlock(ibBlock);
 
-    //x_str(" index "); x_bytedec(i); 
+    x_str(" index "); x_bytedec(i);
     if (i+1 >= bInBuffA)
     { 
       if ((tiT.bDay == bInBuff7) && (tiT.bMonth == bInBuff8) && (tiT.bYear == bInBuff9))
       {
-        //x_str(" push ");
+        x_str(" push ");
         PushChar(reCurr.ev);
         PushEventParams();
 
@@ -391,7 +390,7 @@ uchar   i,j;
 
         if (++j >= bInBuffB)
         {
-          //x_str("\n success"); 
+          x_str("\n success");
           Output2(bInBuffB*10);
           return;
         }
@@ -408,15 +407,15 @@ uchar   i,j;
       }
       else
       {
-        //x_str("\n underflow"); 
+        x_str("\n underflow");
         Result2_Info(bUNI_BADDATA,7);
         return;
       }
     }
   }
 
-   //x_str("\n failure"); 
-   Result2_Info(bUNI_BADDATA,8);
+  x_str("\n failure");
+  Result2_Info(bUNI_BADDATA,8);
 }
 
 
@@ -425,9 +424,9 @@ void    PushEvents1(void)
 uint    iwPage,i;
 uchar   ibBlock,j,bTotal;
 
-  //x_str("\n\n get events \n"); 
-  //x_bytedec(bInBuff7); x_str("."); x_bytedec(bInBuff8); x_str("."); x_bytedec(bInBuff9);
-  //x_str(" index "); x_bytedec(bInBuffA); x_str(" count "); x_bytedec(bInBuffB);
+  x_str("\n\n get events \n");
+  x_bytedec(bInBuff7); x_str("."); x_bytedec(bInBuff8); x_str("."); x_bytedec(bInBuff9);
+  x_str(" index "); x_bytedec(bInBuffA); x_str(" count "); x_bytedec(bInBuffB);
 
   bool f = 0;
   bTotal = 0;
@@ -444,7 +443,7 @@ uchar   ibBlock,j,bTotal;
 
       if ((tiT.bDay == bInBuff7) && (tiT.bMonth == bInBuff8) && (tiT.bYear == bInBuff9))
       { 
-        //x_str(" calc ");
+        x_str(" calc ");
 
         f = 1;
         bTotal++;
@@ -455,7 +454,7 @@ uchar   ibBlock,j,bTotal;
       {
         if (f == 1)
         { 
-          //x_str("\n success"); 
+          x_str("\n success");
           PushEvents2(i, j, bTotal);
           return;
         }
@@ -463,7 +462,7 @@ uchar   ibBlock,j,bTotal;
     }
   }
 
-  //x_str("\n failure"); 
+  x_str("\n failure");
   Result2_Info(bUNI_BADDATA,6);
 }
 
@@ -482,10 +481,10 @@ void    GetEventsUni(void)
     Result2_Info(bUNI_BADDATA,5);
   else
   {
-    //x_init();
+    x_init();
     SetDelayUni();
     PushEvents1();
-    //x_done();
+    x_done();
   }
 }
 
