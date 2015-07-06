@@ -343,7 +343,7 @@ bool    AddImpRecord(event  ev)
   reCurr.cdwRecord = cdwImpRecord++; SaveCache(&chImpRecord);
   reCurr.ev = ev;
 
-//  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
+  PutChar(0, ibDig);
 /*
   switch (ev)
   {
@@ -383,22 +383,22 @@ bool    AddModRecord(event  ev)
   reCurr.cdwRecord = cdwModRecord++; SaveCache(&chModRecord);
   reCurr.ev = ev;
 
-//  memcpy(&reCurr.mpbBuff, &ibDig, sizeof(uchar));
-/*
+  PutChar(0, ibDig);
+
   switch (ev)
   {
     case EVE_MODEM_PROFILEOPEN:
-    case EVE_MODEM_SPECIALOPEN:  memcpy(&reCurr.mpbBuff+1, &mpdiDigital[ibDig], sizeof(digital)); break;
+    case EVE_MODEM_SPECIALOPEN:  Put(1, (uchar *) &mpdiDigital[ibDig], sizeof(digital)); break;
 
-    case EVE_MODEM_PROFILE:      memcpy(&reCurr.mpbBuff+1, &mpcwStopCan[ibDig], sizeof(uint)); break;
+    case EVE_MODEM_PROFILE:      PutInt(1, mpcwStopCan[ibDig]); break;
 
-    case EVE_MODEM_PROFILEOK:    memcpy(&reCurr.mpbBuff+1, &cwHouRead, sizeof(uint));
-                                 memcpy(&reCurr.mpbBuff+3, &mpcwStopCan[ibDig], sizeof(uint)); break;
+    case EVE_MODEM_PROFILEOK:    PutInt(1, cwHouRead);
+                                 PutInt(3, mpcwStopCan[ibDig]); break;
 
-    case EVE_MODEM_PROFILEERROR2:memcpy(&reCurr.mpbBuff+1, &wCurr, sizeof(uint));
-                                 memcpy(&reCurr.mpbBuff+3, &mpSerial[ibPort], sizeof(uchar)); break;
+    case EVE_MODEM_PROFILEERROR2:PutInt(1, GetCurr());
+                                 PutChar(3, mpSerial[ibPort]); break;
   }
-*/
+
   CloseRecord(MOD_RECORD, i);
 
   return CloseOut();
