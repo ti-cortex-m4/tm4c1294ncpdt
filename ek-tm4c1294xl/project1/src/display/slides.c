@@ -22,7 +22,7 @@ int                     cwSlide;
 
 void    InitSlide(void)
 {
-  Delay(1000);
+  Delay(500);
   fSlide = false;
 
   ShowHiDirect(szRun);

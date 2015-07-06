@@ -8,6 +8,7 @@ OUT_FLASH,C
 #include "../memory/mem_ports.h"
 #include "../memory/mem_flash.h"
 #include "../memory/mem_settings.h"
+#include "../memory/mem_program.h"
 #include "../serial/ports.h"
 #include "../flash/at45.h"
 #include "../hardware/memory.h"
@@ -33,7 +34,9 @@ void    OutFlashPage(void)
     PushInt(cwErrPageRead);
     PushInt(cwErrPageWrite);
 
-    InitPush(65);
+    InitPush(63);
+
+    PushInt(cwWrnResetWDT);
 
     PushInt(GetRomChecksum());
     PushInt(wPrivate);

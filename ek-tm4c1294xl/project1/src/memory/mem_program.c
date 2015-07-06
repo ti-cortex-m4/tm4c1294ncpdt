@@ -19,3 +19,6 @@ bool                    boFirstReset;
 
 //
 bool                    boEnblWDT;
+
+//
+uint                    cwWrnResetWDT;

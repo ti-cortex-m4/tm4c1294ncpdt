@@ -11,5 +11,6 @@ extern  bool                    boSetTime,
 
 extern  bool                    boFirstReset;
 
-
 extern  bool                    boEnblWDT;
+
+extern  uint                    cwWrnResetWDT;

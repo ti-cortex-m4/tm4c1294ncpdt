@@ -4,14 +4,15 @@ DISPLAY.C
 
 ------------------------------------------------------------------------------*/
 
-#include        <string.h>
-#include        <stdio.h>
-#include        <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "../main.h"
 #include "../memory/mem_program.h"
 #include "../keyboard/keyboard.h"
 #include "../keyboard/key_reset.h"
 #include "../hardware/watchdog.h"
+#include "../flash/records.h"
 #include "messages.h"
 #include "slides.h"
 #include "lcd.h"
@@ -56,15 +57,23 @@ void    ShowLoDirect(char const  *szT)
 
 void    InitDisplay(void)
 {
-  Delay(1000);
-  Clear();
+  Delay(500);
+
+  if (IsResetWDT() == true)
+  {
+    ShowLo(szIsResetWDT);
+    cwWrnResetWDT++;
+
+    AddSysRecord(EVE_WATCHDOG);
+  }
+  else Clear();
 
   if (enGlobal == GLB_WORK)
     ShowHi(szWork);
   else 
   {
     ShowHi(szSetting);
-    Delay(1000);
+    Delay(500);
 
     if (boFirstReset == true)
     {
