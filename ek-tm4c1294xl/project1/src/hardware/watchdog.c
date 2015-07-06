@@ -9,6 +9,7 @@ WATCHDOG.C
 #include "inc/hw_memmap.h"
 #include "inc/hw_sysctl.h"
 #include "driverlib/watchdog.h"
+#include "driverlib/sysctl.h"
 #include "../memory/mem_program.h"
 #include "watchdog.h"
 
@@ -69,5 +70,5 @@ void    ResetWDT(void)
 
 bool    IsResetWDT(void)
 {
-  return false;
+  return (SysCtlResetCauseGet() & SYSCTL_CAUSE_WDOG);
 }
