@@ -99,11 +99,11 @@ void    BuffToRecord(uchar*  pBuff)
   memcpy(&reCurr.ti, pBuff + 0, 6);
 
   static combo32 co;
-  co.dwBuff = reCurr.cdwRecord;
   memcpy(&co.mpbBuff[3], pBuff + 6, 1);
   memcpy(&co.mpbBuff[2], pBuff + 7, 1);
   memcpy(&co.mpbBuff[1], pBuff + 8, 1);
   memcpy(&co.mpbBuff[0], pBuff + 9, 1);
+  reCurr.cdwRecord = co.dwBuff;
 
   memcpy(&reCurr.ev, pBuff + 10, 1);
 
