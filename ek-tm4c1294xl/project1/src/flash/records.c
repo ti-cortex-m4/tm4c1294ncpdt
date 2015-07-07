@@ -228,8 +228,8 @@ bool    AddSysRecord(event  ev)
 //    case EVE_CONTACTSMODE:
 //    case EVE_CONTACTS1:
 //    case EVE_CONTACTS2: memcpy(&reCurr.mpbBuff+0, &bContactRec, sizeof(uchar)); break;
-//
-//    case EVE_PREVNEXTTIME2:   memcpy(&reCurr.mpbBuff+0, &tiCurr, sizeof(time)); break;
+
+    case EVE_PREVNEXTTIME2:   Put(0, (uchar *) &tiCurr, sizeof(time)); break;
 
     case EVE_EDIT_DIGITAL1:
     case EVE_EDIT_DIGITAL2:   PutChar(0, ibRecordCan);
