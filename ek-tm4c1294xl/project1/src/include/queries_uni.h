@@ -40,6 +40,7 @@ QUERIES2.H
 
 #define wUNI_GETEVENTS_COUNTS          0x00C2
 #define wUNI_GETEVENTS                 0x00C0
+#define wUNI_GETEVENTS_FIX             0x10C0
 #define wUNI_GETEVENTS_MESSAGES        0x00C1
 
 #define wUNI_GETCONFIG                 0x00D0

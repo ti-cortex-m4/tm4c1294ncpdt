@@ -255,6 +255,7 @@ void    RunResponseUni(void)
 
       case wUNI_GETEVENTS_COUNTS: GetEventsCountsUni(); break;
       case wUNI_GETEVENTS: GetEventsUni(); break;
+      case wUNI_GETEVENTS_FIX: GetEventsUni_Fix(); break;
       case wUNI_GETEVENTS_MESSAGES: GetEventsMessagesUni(); break;
 
       case wUNI_GETQUERY_CRC:
