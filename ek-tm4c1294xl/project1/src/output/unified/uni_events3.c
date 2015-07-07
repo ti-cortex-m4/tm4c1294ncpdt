@@ -31,7 +31,7 @@ static void PushEventText(uchar const  *sz)
 }
 
 
-static void PushEventsMessage(uchar  bCode)
+static void PushEventMessage(uchar  bCode)
 {
   PushChar(bCode);
 
@@ -84,92 +84,6 @@ static void PushEventsMessage(uchar  bCode)
 }
 
 
-time    PushEventParams(void)
-{
-  switch (reCurr.ev)
-  {
-    case EVE_PREVNEXTTIME2: 
-
-    case EVE_PROGRAM_2: 
-    case EVE_EXT_CORRECT2: 
-    case EVE_ESC_K: 
-    case EVE_ESC_k: 
-    case EVE_INQ_CORRECT1: 
-    case EVE_INQ_CORRECT2: 
-    case EVE_INQ_CORRECT4: 
-      {
-        time  ti;
-        ti.bSecond = reCurr.mpbBuff[0];
-        ti.bMinute = reCurr.mpbBuff[1];
-        ti.bHour   = reCurr.mpbBuff[2];
-        ti.bDay    = reCurr.mpbBuff[3];
-        ti.bMonth  = reCurr.mpbBuff[4];
-        ti.bYear   = reCurr.mpbBuff[5];
-
-        combo32 co;
-        co.dwBuff = DateToSecIndex(ti);
-
-        PushChar(co.mpbBuff[0]);
-        PushChar(co.mpbBuff[1]);
-        PushChar(co.mpbBuff[2]);
-        PushChar(co.mpbBuff[3]);
-      }
-      break;
-
-    case 64: 
-    case 65: 
-      PushChar(reCurr.mpbBuff[0]+1);
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
-      break;
-
-    case 93: 
-      PushChar(reCurr.mpbBuff[1]);
-      PushChar(reCurr.mpbBuff[2]);
-      PushChar(reCurr.mpbBuff[3]);
-      PushChar(0);
-      break;
-
-    case 94: 
-      PushChar(reCurr.mpbBuff[1]);
-      PushChar(reCurr.mpbBuff[2]);
-      PushChar(0);
-      PushChar(0);
-      break;
-
-    case 98: 
-      PushChar(reCurr.mpbBuff[0]);
-      PushChar(reCurr.mpbBuff[1]);
-      PushChar(0);
-      PushChar(0);
-
-    case 97: 
-      PushChar(reCurr.mpbBuff[2]);
-      PushChar(reCurr.mpbBuff[3]);
-      PushChar(reCurr.mpbBuff[4]);
-      PushChar(reCurr.mpbBuff[5]);
-      break;
-
-    case 99: 
-      PushChar(reCurr.mpbBuff[0]);
-      PushChar(reCurr.mpbBuff[1]);
-      PushChar(reCurr.mpbBuff[2]);
-      PushChar(reCurr.mpbBuff[3]);
-      break;
-
-    default:
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
-      break;
-  }
-
-  return reCurr.ti;
-}
-
-
 
 void    GetEventsMessagesUni(void) 
 {
@@ -193,7 +107,7 @@ void    GetEventsMessagesUni(void)
     uchar i;
     for (i=0; i<bInBuff9; i++)
     {
-      PushEventsMessage(bInBuff8 + i);
+      PushEventMessage(bInBuff8 + i);
     }
 
     Output2(2+bInBuff9*64);
