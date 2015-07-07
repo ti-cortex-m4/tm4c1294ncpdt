@@ -7,40 +7,31 @@ UNI_EVENTS3.C
 #include "../../main.h"
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_records.h"
-#include "../../memory/mem_flash.h"
-#include "../../include/flash.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports2.h"
-#include "../../serial/print2.h"
-#include "../../flash/records.h"
-#include "../../flash/records2.h"
-#include "../../time/timedate.h"
 #include "../../time/calendar.h"
-#include "../../time/rtc.h"
-#include "../../hardware/watchdog.h"
 #include "response_uni.h"
 #include "uni_events0.h"
 #include "uni_events3.h"
 
 
 
-void    PushEventText(uchar  *szT)
+static void PushEventText(uchar const  *sz)
 {
-uchar   i;
-
   bool f = 1;
+
+  uchar i;
   for (i=0; i<63-1; i++)
   {
-    if (!*szT) f = 0;
-    if (f == 1) PushChar(*szT++); else PushChar(0);
+    if (!*sz) f = 0;
+    if (f == 1) PushChar(*sz++); else PushChar(0);
   }
 
   PushChar(0);
 }
 
 
-void    PushEventsMessage(uchar  bCode)
+static void PushEventsMessage(uchar  bCode)
 {
   PushChar(bCode);
 
@@ -167,7 +158,12 @@ time    PushEventParams(void)
       PushChar(reCurr.mpbBuff[3]);
       break;
 
-    default: PushChar(0); PushChar(0); PushChar(0); PushChar(0); break;  
+    default:
+      PushChar(0);
+      PushChar(0);
+      PushChar(0);
+      PushChar(0);
+      break;
   }
 
   return reCurr.ti;
