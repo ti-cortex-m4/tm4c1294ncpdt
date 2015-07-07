@@ -130,7 +130,7 @@ uchar   ibBlock;
 
     for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--) 
     { 
-    	tiT = ReadEventBlock(ibBlock);
+      tiT = ReadEventBlock(ibBlock);
 
       x_str(" countdown "); x_intdec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); x_intdec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
       if (bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock) > GetRecordsCount(bInBuff7) + bRECORD_BLOCK)
@@ -371,7 +371,7 @@ uchar   i,j;
 
   for (i=0; i<bTotal; i++) 
   {
-  	tiT = ReadEventBlock(ibBlock);
+    tiT = ReadEventBlock(ibBlock);
 
     x_str(" index "); x_bytedec(i);
     if (i+1 >= bInBuffA)
@@ -439,7 +439,7 @@ uchar   ibBlock,j,bTotal;
 
     for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--) 
     { 
-    	tiT = ReadEventBlock(ibBlock);
+      tiT = ReadEventBlock(ibBlock);
 
       if ((tiT.bDay == bInBuff7) && (tiT.bMonth == bInBuff8) && (tiT.bYear == bInBuff9))
       { 
