@@ -22,28 +22,30 @@ static char const       szAddresses[]     = "Адреса          ",
                       
 
 
-void    ShowAddresses(void)
+static void Show(uchar  ibCan)
 {
   Clear();
 
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
-    sprintf(szHi+8,"%8lu",mpdwAddress1[ibX]);
-    sprintf(szLo+8,"%8lu",mpdwAddress2[ibX]);
+    sprintf(szHi+8,"%8lu",mpdwAddress1[ibCan]);
+    sprintf(szLo+8,"%8lu",mpdwAddress2[ibCan]);
   }
   else
   {
-    sprintf(szHi+8,"%8lu",mpdwAddress1[ibX]);
+    sprintf(szHi+8,"%8lu",mpdwAddress1[ibCan]);
     sprintf(szLo+8,"********");
   }
 
-  sprintf(szLo,"%2u",ibX+1);
+  sprintf(szLo,"%2u",ibCan+1);
 }
 
 
 
 void    key_SetAddresses(void)
 {
+static uchar ibCan;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
@@ -57,22 +59,22 @@ void    key_SetAddresses(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = 0;
-      ShowAddresses();
+      ibCan = 0;
+      Show(ibCan);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
+      if ((ibCan = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowAddresses();
+        Show(ibCan);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS) ibX = 0;
-      ShowAddresses();
+      if (++ibCan >= bCANALS) ibCan = 0;
+      Show(ibCan);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
@@ -81,14 +83,14 @@ void    key_SetAddresses(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        ibRecordCan = ibX;
+        ibRecordCan = ibCan;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS20);
-        mpdwAddress2[ibX] = dw;
+        mpdwAddress2[ibCan] = dw;
         SaveFile(&flAddress2);
         AddSysRecordReprogram(EVE_EDIT_ADDRESS21);
 
-        if (++ibX >= bCANALS) ibX = 0;
-        ShowAddresses();
+        if (++ibCan >= bCANALS) ibCan = 0;
+        Show(ibCan);
       }
       else Beep();
     }
@@ -100,12 +102,9 @@ void    key_SetAddresses(void)
   {        
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibX > 0) 
-        ibX--; 
-      else 
-        ibX = bCANALS-1;
+      if (ibCan > 0) ibCan--; else ibCan = bCANALS-1;
 
-      ShowAddresses();
+      Show(ibCan);
     } 
     else if (enKeyboard == KBD_POSTINPUT2)
     {
@@ -115,9 +114,9 @@ void    key_SetAddresses(void)
         enKeyboard = KBD_INPUT3;
         sprintf(szLo+8,szMaskAddresses);
 
-        ibRecordCan = ibX;
+        ibRecordCan = ibCan;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS10);
-        mpdwAddress1[ibX] = dw;
+        mpdwAddress1[ibCan] = dw;
         SaveFile(&flAddress1);
         AddSysRecordReprogram(EVE_EDIT_ADDRESS11);
       }
