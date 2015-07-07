@@ -16,3 +16,6 @@ ulong                   cdwKeyRecord, cdwSysRecord, cdwDigRecord, cdwImpRecord, 
 
 //
 time                    tiRecordSetCurrTime;
+
+//
+uchar                   ibRecordCan;

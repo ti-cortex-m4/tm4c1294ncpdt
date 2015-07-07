@@ -7,6 +7,7 @@ KEY_KEYS,C
 #include "../../main.h"
 #include "../../console.h"
 #include "../../memory/mem_digitals.h"
+#include "../../memory/mem_records.h"
 #include "../../digitals/digitals.h"
 #include "../../flash/records.h"
 
@@ -94,6 +95,7 @@ void    key_SetKeys(void)
 
         szLo[ibPos] = 0;
 
+        ibRecordCan = ibCan;
         AddSysRecordReprogram(EVE_EDIT_KEY10);
         AddSysRecordReprogram(EVE_EDIT_KEY11);
 
