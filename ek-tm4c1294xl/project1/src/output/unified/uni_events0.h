@@ -1,10 +1,11 @@
 /*------------------------------------------------------------------------------
-U_EVENTS.H
+UNI_EVENTS0.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    GetEventsCountsUni(void); 
-void    GetEventsUni(void); 
-void    GetEventsUni_Fix(void);
-void    GetEventsMessagesUni(void); 
+uint    GetPagesCount(uchar  ibClass);
+uint    GetMaxRecordsCount(uchar  ibClass);
+uint    GetRecordsCount(uchar  ibClass);
+void    LoadEventsPage(uchar  ibClass, uint  iwPage);
+time    ReadEventBlock(uchar  ibBlock);
