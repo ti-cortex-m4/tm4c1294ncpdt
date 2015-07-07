@@ -171,8 +171,6 @@ uchar   ibBlock;
 
 void    GetEventsCountsUni(void)
 {
-uint    i;
-
   if (bInBuff6 != 0)
     Result2_Info(bUNI_BADDATA,1);
   else if ((bInBuff7 < 1) || (bInBuff7 > 3))
@@ -190,6 +188,7 @@ uint    i;
     time ti = *GetCurrTimeDate();
     ulong dw = DateToDayIndex(ti);
 
+    uint i;
     for (i=0; i<0x100*bInBuffA+bInBuffB; i++)
     {
       PushInt(0);
@@ -356,12 +355,12 @@ void    PushEventParams(void)
 
 
 
-void    PushEvents2(uint  iwPage, uchar  ibBlock, uchar  bTotal)
+void    PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal)
 {
-uchar   i,j;
+uchar   j;
 
   x_str("\n\n push events \n");
-  x_str("\n page "); x_intdec(iwPage); x_str(" block "); x_bytedec(ibBlock-1); x_str(" total "); x_bytedec(bTotal);
+  x_str("\n page "); x_intdec(iwPage); x_str(" block "); x_bytedec(ibBlock-1); x_str(" total "); x_intdec(wTotal);
   x_str(" index "); x_bytedec(bInBuffA); x_str(" count "); x_bytedec(bInBuffB);
 
   InitPushUni();
@@ -369,11 +368,12 @@ uchar   i,j;
   j = 0;
   LoadEventsPage(bInBuff6, iwPage);
 
-  for (i=0; i<bTotal; i++) 
+  uint i;
+  for (i=0; i<wTotal; i++)
   {
     tiT = ReadEventBlock(ibBlock);
 
-    x_str(" index "); x_bytedec(i);
+    x_str(" index "); x_intdec(i);
     if (i+1 >= bInBuffA)
     { 
       if ((tiT.bDay == bInBuff7) && (tiT.bMonth == bInBuff8) && (tiT.bYear == bInBuff9))
@@ -421,17 +421,17 @@ uchar   i,j;
 
 void    PushEvents1(void)
 {
-uint    iwPage,i;
-uchar   ibBlock,j,bTotal;
+uint    iwPage,i,wTotal;
+uchar   ibBlock,j;
 
   x_str("\n\n get events \n");
   x_bytedec(bInBuff7); x_str("."); x_bytedec(bInBuff8); x_str("."); x_bytedec(bInBuff9);
   x_str(" index "); x_bytedec(bInBuffA); x_str(" count "); x_bytedec(bInBuffB);
 
   bool f = 0;
-  bTotal = 0;
   i = 0;
   j = 0;
+  wTotal = 0;
 
   for (iwPage=0; iwPage<GetPagesCount(bInBuff6); iwPage++)
   {
@@ -446,16 +446,16 @@ uchar   ibBlock,j,bTotal;
         x_str(" calc ");
 
         f = 1;
-        bTotal++;
         i = iwPage;
         j = ibBlock;
+        wTotal++;
       }
       else
       {
         if (f == 1)
         { 
           x_str("\n success");
-          PushEvents2(i, j, bTotal);
+          PushEvents2(i, j, wTotal);
           return;
         }
       }
@@ -492,8 +492,6 @@ void    GetEventsUni(void)
 
 void    GetEventsMessagesUni(void) 
 {
-uchar   i;
-
   if (bInBuff6 != 0)
     Result2_Info(bUNI_BADDATA,1);
   else if ((bInBuff7 < 1) || (bInBuff7 > 3))
@@ -511,8 +509,11 @@ uchar   i;
     PushChar(bInBuff7);
     PushChar(0xFF);
 
+    uchar i;
     for (i=0; i<bInBuff9; i++)
+    {
       PushEventsMessage(bInBuff8 + i);
+    }
 
     Output2(2+bInBuff9*64);
   }
