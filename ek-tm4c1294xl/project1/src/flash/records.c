@@ -242,13 +242,13 @@ bool    AddSysRecord(event  ev)
     case EVE_EDIT_KEY11:
     case EVE_EDIT_KEY21:      Put(0, (uchar *) &mpphKeys[ibRecordCan].szNumber+7, 6); break;
 
-//    case EVE_EDIT_ADDRESS10:
-//    case EVE_EDIT_ADDRESS11:  memcpy(&reCurr.mpbBuff+0, &ibX, sizeof(uchar));
-//                              memcpy(&reCurr.mpbBuff+1, &mpdwAddress1[ibX], sizeof(ulong)); break;
-//
-//    case EVE_EDIT_ADDRESS20:
-//    case EVE_EDIT_ADDRESS21:  memcpy(&reCurr.mpbBuff+0, &ibX, sizeof(uchar));
-//                              memcpy(&reCurr.mpbBuff+1, &mpdwAddress2[ibX], sizeof(ulong)); break;
+    case EVE_EDIT_ADDRESS10:
+    case EVE_EDIT_ADDRESS11:  PutChar(0, ibRecordCan);
+                              Put(1, (uchar *) &mpdwAddress1[ibRecordCan], sizeof(ulong)); break;
+
+    case EVE_EDIT_ADDRESS20:
+    case EVE_EDIT_ADDRESS21:  PutChar(0, ibRecordCan);
+                              Put(1, (uchar *) &mpdwAddress2[ibRecordCan], sizeof(ulong)); break;
   }
 
   CloseRecord(SYS_RECORD, i);

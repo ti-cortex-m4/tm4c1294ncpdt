@@ -6,6 +6,7 @@ KEY_ADDRESSES.C
 
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
+#include "../../memory/mem_records.h"
 #include "../../display/display.h"
 #include "../keyboard.h"
 #include "../../digitals/digitals.h"
@@ -80,6 +81,7 @@ void    key_SetAddresses(void)
       {
         enKeyboard = KBD_POSTENTER;
 
+        ibRecordCan = ibX;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS20);
         mpdwAddress2[ibX] = dw;
         SaveFile(&flAddress2);
@@ -113,6 +115,7 @@ void    key_SetAddresses(void)
         enKeyboard = KBD_INPUT3;
         sprintf(szLo+8,szMaskAddresses);
 
+        ibRecordCan = ibX;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS10);
         mpdwAddress1[ibX] = dw;
         SaveFile(&flAddress1);
