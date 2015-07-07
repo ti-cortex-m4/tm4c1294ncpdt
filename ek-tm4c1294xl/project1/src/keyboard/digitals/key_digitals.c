@@ -1,13 +1,14 @@
 /*------------------------------------------------------------------------------
 KEY_DIGITALS,C
 
- Задание и просмотр цифровых счетчиков
+ Цифровые счетчики
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_ports.h"
+#include "../../memory/mem_records.h"
 #include "../../flash/records.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_display.h"
@@ -136,6 +137,7 @@ static void AddDigital(uchar  ibDig, digital  *pdi)
   enKeyboard = KBD_POSTENTER;
   ShowHi(szDigitals);
 
+  ibRecordCan = ibDig;
   AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
   SetDigital(ibDig, pdi);
   AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
@@ -162,6 +164,7 @@ static void AddAllDigitals(uchar  ibDig, digital  *pdi)
   {
     pdi->ibLine = i;
 
+    ibRecordCan = ibDig;
     AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
     SetDigital(ibDig, pdi);
     AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
@@ -293,6 +296,7 @@ static uchar ibDig;
           diT.bAddress = 0;
           diT.ibLine = 0;
 
+          ibRecordCan = ibDig;
           AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
           SetDigital(ibDig, &diT);
           AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
@@ -350,6 +354,7 @@ static uchar ibDig;
         diT.bAddress = 0;
         diT.ibLine = 0;
 
+        ibRecordCan = ibDig;
         AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
         SetDigital(ibDig, &diT);
         AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
