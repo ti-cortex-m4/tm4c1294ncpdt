@@ -58,7 +58,7 @@ void    x_bytehex(uchar  b)
 {
 #ifdef ENABLE_PRINT2
 
-  UARTprintf(" %X ", b);
+  UARTprintf(" %02X ", b);
 
 #endif
 }
