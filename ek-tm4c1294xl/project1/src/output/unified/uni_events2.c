@@ -25,14 +25,97 @@ UNI_EVENTS2.C
 
 
 
-time    PushEventParams(void);
-
-
 static time             tiT;
 
 
 
-void    PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex, uint  wCount)
+static time PushEventParams(void)
+{
+  switch (reCurr.ev)
+  {
+    case EVE_PREVNEXTTIME2:
+
+    case EVE_PROGRAM_2:
+    case EVE_EXT_CORRECT2:
+    case EVE_ESC_K:
+    case EVE_ESC_k:
+    case EVE_INQ_CORRECT1:
+    case EVE_INQ_CORRECT2:
+    case EVE_INQ_CORRECT4:
+      {
+        time  ti;
+        ti.bSecond = reCurr.mpbBuff[0];
+        ti.bMinute = reCurr.mpbBuff[1];
+        ti.bHour   = reCurr.mpbBuff[2];
+        ti.bDay    = reCurr.mpbBuff[3];
+        ti.bMonth  = reCurr.mpbBuff[4];
+        ti.bYear   = reCurr.mpbBuff[5];
+
+        combo32 co;
+        co.dwBuff = DateToSecIndex(ti);
+
+        PushChar(co.mpbBuff[0]);
+        PushChar(co.mpbBuff[1]);
+        PushChar(co.mpbBuff[2]);
+        PushChar(co.mpbBuff[3]);
+      }
+      break;
+
+    case 64:
+    case 65:
+      PushChar(reCurr.mpbBuff[0]+1);
+      PushChar(0);
+      PushChar(0);
+      PushChar(0);
+      break;
+
+    case 93:
+      PushChar(reCurr.mpbBuff[1]);
+      PushChar(reCurr.mpbBuff[2]);
+      PushChar(reCurr.mpbBuff[3]);
+      PushChar(0);
+      break;
+
+    case 94:
+      PushChar(reCurr.mpbBuff[1]);
+      PushChar(reCurr.mpbBuff[2]);
+      PushChar(0);
+      PushChar(0);
+      break;
+
+    case 98:
+      PushChar(reCurr.mpbBuff[0]);
+      PushChar(reCurr.mpbBuff[1]);
+      PushChar(0);
+      PushChar(0);
+
+    case 97:
+      PushChar(reCurr.mpbBuff[2]);
+      PushChar(reCurr.mpbBuff[3]);
+      PushChar(reCurr.mpbBuff[4]);
+      PushChar(reCurr.mpbBuff[5]);
+      break;
+
+    case 99:
+      PushChar(reCurr.mpbBuff[0]);
+      PushChar(reCurr.mpbBuff[1]);
+      PushChar(reCurr.mpbBuff[2]);
+      PushChar(reCurr.mpbBuff[3]);
+      break;
+
+    default:
+      PushChar(0);
+      PushChar(0);
+      PushChar(0);
+      PushChar(0);
+      break;
+  }
+
+  return reCurr.ti;
+}
+
+
+static void PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex, uint  wCount)
 {
   x_str("\n\n push events \n");
   x_str("\n page "); x_intdec(iwPage); x_str(" block "); x_bytedec(ibBlock-1); x_str(" total "); x_intdec(wTotal);
@@ -94,7 +177,7 @@ void    PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex, ui
 }
 
 
-void    PushEvents1(uint  wIndex, uint  wCount)
+static void PushEvents1(uint  wIndex, uint  wCount)
 {
 uint    iwPage,p;
 uchar   ibBlock,b;
