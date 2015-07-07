@@ -26,7 +26,9 @@ RESPONSE_UNI.C
 #include "u_day.h"
 #include "u_energy.h"
 #include "uni_cnt.h"
-#include "u_events.h"
+#include "uni_events1.h"
+#include "uni_events2.h"
+#include "uni_events3.h"
 #include "u_query_crc.h"
 #include "uni.h"
 

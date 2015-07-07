@@ -1,10 +1,7 @@
 /*------------------------------------------------------------------------------
-U_EVENTS.H
+UNI_EVENTS3.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    GetEventsCountsUni(void); 
-void    GetEventsUni(void); 
-void    GetEventsUni_Fix(void);
 void    GetEventsMessagesUni(void); 
