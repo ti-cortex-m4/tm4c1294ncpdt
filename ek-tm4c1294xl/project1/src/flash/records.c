@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-RECORDS.C
+RECORDS,C
 
 
 ------------------------------------------------------------------------------*/
@@ -293,17 +293,13 @@ bool    AddDigRecord(event  ev)
     case EVE_PROFILEOPEN:
     case EVE_SPECIALOPEN:   Put(1, (uchar *)&mpdiDigital[ibDig], sizeof(digital)); break;
 
-////    case EVE_ESC_V_DATA:    memcpy(&reCurr.mpbBuff+1, &reBuffA, sizeof(real)); break;
-////    case EVE_ESC_S_DATA:    memcpy(&reCurr.mpbBuff+1, &reBuffA, sizeof(real)); break;
-////    case EVE_ESC_U_DATA:    memcpy(&reCurr.mpbBuff+1, &moAlt.tiAlfa, sizeof(time)); break;
-
-////    case EVE_PROFILE:       memcpy(&reCurr.mpbBuff+1, &mpcwStopCan[ibDig], sizeof(uint)); break;
+//    case EVE_PROFILE:       memcpy(&reCurr.mpbBuff+1, &mpcwStopCan[ibDig], sizeof(uint)); break;
 
     case EVE_PROFILE2:      PutInt(0, mpcwStopCan[ibDig]);
                             PutInt(2, mpcwStopAuxCan[ibDig]); break;
 
-////    case EVE_PROFILE_OK:    memcpy(&reCurr.mpbBuff+1, &cwHouRead, sizeof(uint));
-////                            memcpy(&reCurr.mpbBuff+3, &mpcwStopCan[ibDig], sizeof(uint)); break;
+//    case EVE_PROFILE_OK:    memcpy(&reCurr.mpbBuff+1, &cwHouRead, sizeof(uint));
+//                            memcpy(&reCurr.mpbBuff+3, &mpcwStopCan[ibDig], sizeof(uint)); break;
 
     case EVE_PROFILE_OK2:   PutInt(0, cwHouRead);
                             PutInt(2, mpcwStopCan[ibDig]);
@@ -318,8 +314,8 @@ bool    AddDigRecord(event  ev)
                             PutInt(3, iwBmin);
                             PutInt(5, iwBmax); break;
 
-//    case EVE_PREVIOUS_TOP:  memcpy(&reCurr.mpbBuff+0, &iwMajor, sizeof(uint)); break;
-//
+    case EVE_PREVIOUS_TOP:  PutInt(0, iwMajor); break;
+
 //    case EVE_CURRENT2_CANALS: memcpy(&reCurr.mpbBuff+0, &mpbCurrent2Buff, 8); break;
 //
 //    case EVE_CURRENT2_VALUE:  memcpy(&reCurr.mpbBuff+1, &dwUpdate, sizeof(ulong));
