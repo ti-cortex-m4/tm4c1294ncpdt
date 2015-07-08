@@ -5,7 +5,6 @@ KEY_ENBL_KEYS,C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_digitals.h"
 #include "../../digitals/digitals.h"
 #include "../key_bool.h"
 

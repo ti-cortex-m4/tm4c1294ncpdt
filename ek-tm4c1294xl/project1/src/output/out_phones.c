@@ -37,7 +37,7 @@ void    OutSetPhone(void)
         ph.szNumber[i] = InBuff(7+i);
       }
 
-      if (TruePhone(&ph) == true)
+      if (IsValidPhone(&ph) == true)
       {
         mpphPhones[ bInBuff6 ] = ph;
 

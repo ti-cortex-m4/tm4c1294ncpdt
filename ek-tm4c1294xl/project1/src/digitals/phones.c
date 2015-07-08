@@ -7,12 +7,15 @@ PHONES.C
 #include "../main.h"
 #include "../memory/mem_phones.h"
 #include "../flash/files.h"
+#include "../nvram/cache.h"
+#include "../nvram/cache2.h"
+#include "phones.h"
 
 
 
 file const              flPhones = {PHONES, &mpphPhones, sizeof(mpphPhones)};
-file const              flMaxConnect = {MAX_CONNECT, &bMaxConnect, sizeof(uchar)};
-file const              flCustomModem = {CUSTOM_MODEM, &boCustomModem, sizeof(bool)};
+cache const             chMaxConnect = {MAX_CONNECT, &bMaxConnect, sizeof(uchar)};
+cache const             chCustomModem = {CUSTOM_MODEM, &boCustomModem, sizeof(bool)};
 
 
 
@@ -20,14 +23,8 @@ void    InitPhones(void)
 {
   LoadFile(&flPhones);
 
-  LoadFile(&flMaxConnect);
-  if ((bMaxConnect == 0) || (bMaxConnect > 180))
-  {
-  	bMaxConnect = 60;
-    SaveFile(&flMaxConnect);
-  }
-
-  LoadFile(&flCustomModem);
+  LoadCacheChar(&chMaxConnect, 1, 180, 60);
+  LoadCacheBoolean(&chCustomModem, false);
 }
 
 
@@ -46,15 +43,15 @@ void    ResetPhones(void)
 
 
   bMaxConnect = 60;
-  SaveFile(&flMaxConnect);
+  SaveCache(&chMaxConnect);
 
   boCustomModem = false;
-  SaveFile(&flCustomModem);
+  SaveCache(&chCustomModem);
 }
 
 
 
-bool    TruePhone(phone  *pph)
+bool    IsValidPhone(phone  *pph)
 {
   return true;
 }

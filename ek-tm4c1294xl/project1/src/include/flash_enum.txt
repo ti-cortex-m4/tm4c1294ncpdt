@@ -63,10 +63,8 @@ typedef enum
   RECALC_HOU            = CTRL_HOU + 1,
 
   PHONES                = RECALC_HOU + 1,
-  MAX_CONNECT           = PHONES + sizeof(mpphPhones)/wLEAF_BYTES + 1,
-  CUSTOM_MODEM          = MAX_CONNECT + 1,
 
-  KEYS                  = CUSTOM_MODEM + 1,
+  KEYS                  = PHONES + sizeof(mpphPhones)/wLEAF_BYTES + 1,
 
   ADDRESS1              = KEYS + sizeof(mpphKeys)/wLEAF_BYTES + 1,
   ADDRESS2              = ADDRESS1 + sizeof(mpdwAddress1)/wLEAF_BYTES + 1,
