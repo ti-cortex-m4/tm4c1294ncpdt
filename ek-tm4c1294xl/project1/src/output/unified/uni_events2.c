@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-UNI_EVENTS2.C
+UNI_EVENTS2,C
 
 
 ------------------------------------------------------------------------------*/
@@ -11,21 +11,11 @@ UNI_EVENTS2.C
 #include "../../include/flash.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports2.h"
 #include "../../serial/print2.h"
-#include "../../flash/records.h"
-#include "../../flash/records2.h"
-#include "../../time/timedate.h"
 #include "../../time/calendar.h"
-#include "../../time/rtc.h"
-#include "../../hardware/watchdog.h"
 #include "response_uni.h"
 #include "uni_events0.h"
 #include "uni_events2.h"
-
-
-
-static time             tiT;
 
 
 
@@ -129,22 +119,22 @@ static void PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex
   uint i;
   for (i=0; i<wTotal; i++)
   {
-    tiT = ReadEventBlock(ibBlock);
+    time ti = ReadEventBlock(ibBlock);
 
     x_str(" index "); x_intdec(i);
     if (i+1 >= wIndex)
     { 
-      if ((tiT.bDay == bInBuff7) && (tiT.bMonth == bInBuff8) && (tiT.bYear == bInBuff9))
+      if ((ti.bDay == bInBuff7) && (ti.bMonth == bInBuff8) && (ti.bYear == bInBuff9))
       {
         x_str(" push ");
         PushChar(reCurr.ev);
-        tiT = PushEventParams();
+        ti = PushEventParams();
 
-        PushChar(tiT.bMinute);
-        PushChar(tiT.bHour);
-        PushChar(tiT.bDay);
-        PushChar(tiT.bMonth);
-        PushChar(tiT.bYear);
+        PushChar(ti.bMinute);
+        PushChar(ti.bHour);
+        PushChar(ti.bDay);
+        PushChar(ti.bMonth);
+        PushChar(ti.bYear);
 
         if (++c >= wCount)
         {
@@ -198,9 +188,8 @@ uint    wTotal;
 
     for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--) 
     { 
-      tiT = ReadEventBlock(ibBlock);
-
-      if ((tiT.bDay == bInBuff7) && (tiT.bMonth == bInBuff8) && (tiT.bYear == bInBuff9))
+      time ti = ReadEventBlock(ibBlock);
+      if ((ti.bDay == bInBuff7) && (ti.bMonth == bInBuff8) && (ti.bYear == bInBuff9))
       { 
         x_str(" calc ");
 

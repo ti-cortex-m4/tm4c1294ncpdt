@@ -16,7 +16,7 @@ UNI_EVENTS3,C
 
 
 
-static void PushEventText(uchar const  *sz)
+static void PushEventText(char const  *sz)
 {
   bool f = 1;
 

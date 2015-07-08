@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-RECORDS2.C
+RECORDS2,C
 
 
 ------------------------------------------------------------------------------*/
@@ -32,7 +32,7 @@ bool    GetRecord(class  cl, uint  iwRecord)
   uint i = (iwRecord % wRECORDS);
 
   OpenIn(wPage + i / bRECORD_BLOCK);
-  memcpy(&reCurr, &mpbPageIn + (i % bRECORD_BLOCK)*SIZEOF_RECORD, SIZEOF_RECORD);
+  BuffToRecord((uchar *) &mpbPageIn + (i % bRECORD_BLOCK)*SIZEOF_RECORD);
 
   return(1);
 }
