@@ -4,12 +4,12 @@ TARIFFS.H
  Новый вариант задания тарифов
 ------------------------------------------------------------------------------*/
 
-extern  file const              flPublicTariffs;
-extern  file const              flPublicTariffsPrevMon;
-extern  file const              flTariffsMode;
+extern  cache const             chPublicTrf;
+extern  cache const             chPublicTrfPrevMon;
+extern  cache const             chOldTrfMode;
 
-extern  file const              flPeriodTariffPow;
-extern  file const              flPeriodTariffEng;
+extern  cache const             chPeriodTrfPow;
+extern  cache const             chPeriodTrfEng;
 
 bool SaveZonesPow(uchar  ibMonth, uchar  ibMode);
 bool LoadZonesPow(uchar  ibMonth, uchar  ibMode);

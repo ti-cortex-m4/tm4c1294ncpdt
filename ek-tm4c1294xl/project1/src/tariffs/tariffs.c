@@ -9,7 +9,7 @@ TARIFFS.C
 #include "../memory/mem_program.h"
 #include "../memory/mem_settings.h"
 #include "../display/display.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "../access.h"
 #include "../time/delay.h"
 #include "../time/rtc.h"
@@ -22,32 +22,32 @@ TARIFFS.C
 
 
 
-file const              flPublicTariffs = {PUBLIC_TRF, &fPublicTariffs, sizeof(bool)};
-file const              flPublicTariffsPrevMon = {PUBLIC_TRF_PREV_MON, &fPublicTariffsPrevMon, sizeof(bool)};
+cache const             chPublicTrf = {PUBLIC_TRF, &fPublicTrf, sizeof(bool)};
+cache const             chPublicTrfPrevMon = {PUBLIC_TRF_PREV_MON, &fPublicTrfPrevMon, sizeof(bool)};
 
-file const              flTariffsMode = {TARIFFS_MODE, &bOldTrfMode, sizeof(uchar)};
+cache const             chOldTrfMode = {OLD_TRF_MODE, &bOldTrfMode, sizeof(uchar)};
 
-file const              flPeriodTariffPow = {PERIOD_POW, &mpeTariffPow, sizeof(mpeTariffPow)};
-file const              flPeriodTariffEng = {PERIOD_ENG, &mpeTariffEng, sizeof(mpeTariffEng)};
+cache const             chPeriodTrfPow = {PERIOD_TRF_POW, &mpePeriodTrfPow, sizeof(mpePeriodTrfPow)};
+cache const             chPeriodTrfEng = {PERIOD_TRF_ENG, &mpePeriodTrfEng, sizeof(mpePeriodTrfEng)};
 
 
 
 bool SaveZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
+  return SaveArrayX(ZONES_POW, sizeof(zone), ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode]);
 }
 
 bool LoadZonesPow(uchar  ibMonth, uchar  ibMode) {
-	return LoadBuff(ZONES_POW + ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode], sizeof(zone));
+  return LoadArrayX(ZONES_POW, sizeof(zone), ibMonth*bMODES + ibMode, &mpzoPowMonthMode[ibMonth][ibMode]);
 }
 
 
 
 bool SaveZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return SaveBuff(ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
+  return SaveArrayX(ZONES_ENG, sizeof(zone), ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode]);
 }
 
 bool LoadZonesEng(uchar  ibMonth, uchar  ibMode) {
-	return LoadBuff(ZONES_ENG + ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode], sizeof(zone));
+  return LoadArrayX(ZONES_ENG, sizeof(zone), ibMonth*bMODES + ibMode, &mpzoEngMonthMode[ibMonth][ibMode]);
 }
 
 
@@ -56,9 +56,10 @@ void    InitTariffs(void)
 {
 uchar  ibMonth, ibMode;
 
-  LoadFile(&flPublicTariffs);
-  LoadFile(&flPublicTariffsPrevMon);
-  LoadFile(&flTariffsMode);
+  LoadCache(&chPublicTrf);
+  LoadCache(&chPublicTrfPrevMon);
+
+  LoadCache(&chOldTrfMode);
 
   for (ibMonth=0; ibMonth<12; ibMonth++)
   {
@@ -69,8 +70,8 @@ uchar  ibMonth, ibMode;
     }
   }
 
-  LoadFile(&flPeriodTariffPow);
-  LoadFile(&flPeriodTariffEng);
+  LoadCache(&chPeriodTrfPow);
+  LoadCache(&chPeriodTrfEng);
 
   if (enGlobal == GLB_WORK)
   {
@@ -86,27 +87,27 @@ uchar  ibMonth, ibMode;
 
 void    ResetTariffs(void)
 {
-  fPublicTariffs = false;
-  SaveFile(&flPublicTariffs);
+  fPublicTrf = false;
+  SaveCache(&chPublicTrf);
 
-  fPublicTariffsPrevMon = false;
-  SaveFile(&flPublicTariffsPrevMon);
+  fPublicTrfPrevMon = false;
+  SaveCache(&chPublicTrfPrevMon);
 
   bOldTrfMode = 0;
-  SaveFile(&flTariffsMode);
+  SaveCache(&chOldTrfMode);
 
   DefaultTariffs();
 
-  SaveFile(&flPeriodTariffPow);
-  SaveFile(&flPeriodTariffEng);
+  SaveCache(&chPeriodTrfPow);
+  SaveCache(&chPeriodTrfEng);
 }
 
 
 
 void    NextMonTariffs(void)
 {
-  fPublicTariffsPrevMon = fPublicTariffs;
-  SaveFile(&flPublicTariffsPrevMon);
+  fPublicTrfPrevMon = fPublicTrf;
+  SaveCache(&chPublicTrfPrevMon);
 }
 
 
@@ -166,7 +167,7 @@ uchar  ibMonth;
 
 void    DefaultTariffs(void)
 {
-  if (fPublicTariffs == true)
+  if (fPublicTrf == true)
   {
     SetPeriodTariffsEng(0,11,(zone *)&zoDefaultPow,YEAR);
     SetPeriodTariffsPow(0,11,(zone *)&zoDefaultPow,YEAR);

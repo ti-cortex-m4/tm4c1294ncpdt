@@ -23,10 +23,10 @@ extern  uchar                   mpibPowCurrTariff[48],
 extern  uchar                   mpibPowPrevTariff[48],
                                 mpibEngPrevTariff[48];
 
-extern  bool                 fPublicTariffs, fPublicTariffsPrevMon;
+extern  bool                 fPublicTrf, fPublicTrfPrevMon;
 
-extern  period                  mpeTariffPow[12],
-                                mpeTariffEng[12];
+extern  period                  mpePeriodTrfPow[12],
+                                mpePeriodTrfEng[12];
 
 extern  uchar                   bOldTrfMode;
 

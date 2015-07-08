@@ -355,12 +355,12 @@ void    EscTariffs(void)
   PushChar(0);
   PushChar(0);
 
-  if (fPublicTariffs == false)
+  if (fPublicTrf == false)
     PushChar(1);
   else
     PushChar(0);
 
-  if (fPublicTariffsPrevMon == false)
+  if (fPublicTrfPrevMon == false)
     PushChar(1);
   else
     PushChar(0);

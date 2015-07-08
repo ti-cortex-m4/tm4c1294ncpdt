@@ -35,11 +35,11 @@ uchar                   mpibPowPrevTariff[48],
                         mpibEngPrevTariff[48];
 
 // признак совмещЄнных/раздельных суточных тарифных графиков за текущий и предыдущий мес€цы
-bool                 fPublicTariffs, fPublicTariffsPrevMon;
+bool                    fPublicTrf, fPublicTrfPrevMon;
 
 // массив символов задани€ тарифных зон по блока и мес€цам (старый вариант)
-period                  mpeTariffPow[12],
-                        mpeTariffEng[12];
+period                  mpePeriodTrfPow[12],
+                        mpePeriodTrfEng[12];
 
 // правило обработки тарифов в выходные дни (старый вариант)
 uchar                   bOldTrfMode;

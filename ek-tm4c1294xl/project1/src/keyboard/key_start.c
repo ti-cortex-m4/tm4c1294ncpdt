@@ -53,7 +53,7 @@ uchar  ibMonth;
   for (ibMonth=0; ibMonth<12; ibMonth++)
   {
     // тарифные графики совмещённые или раздельные для мощности
-    if (mpeTariffPow[ibMonth] == NONE)
+    if (mpePeriodTrfPow[ibMonth] == NONE)
     {
     	ShowNoTariffs(ibMonth);
       NeedPrograms(bSET_PROGRAM10, bSET_PROGRAM17);
@@ -61,7 +61,7 @@ uchar  ibMonth;
     }
 
     // тарифные графики раздельные для энергии
-    if (mpeTariffEng[ibMonth] == NONE)
+    if (mpePeriodTrfEng[ibMonth] == NONE)
     {
     	ShowNoTariffs(ibMonth);
       NeedPrograms(bSET_PROGRAM20, bSET_PROGRAM27);

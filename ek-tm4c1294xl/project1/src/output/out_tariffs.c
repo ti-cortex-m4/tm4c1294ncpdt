@@ -10,7 +10,7 @@
 #include "../keyboard/keyboard.h"
 #include "../serial/ports.h"
 #include "../access.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "../tariffs/tariffs.h"
 #include "../tariffs/oldtariffs.h"
 #include "../tariffs/zones.h"
@@ -19,7 +19,7 @@
 
 void    OutGetPublicTariffs(void)
 {
-  LongResult(fPublicTariffs);
+  LongResult(fPublicTrf);
 }
 
 
@@ -29,8 +29,8 @@ void    OutSetPublicTariffs(void)
   {
     if (ValidBoolean(bInBuff5))
     {
-      fPublicTariffs = CharToBoolean(bInBuff5);
-      SaveFile(&flPublicTariffs);
+      fPublicTrf = CharToBoolean(bInBuff5);
+      SaveCache(&chPublicTrf);
       Result(bRES_OK);
     }
     else Result(bRES_BADDATA);
@@ -42,7 +42,7 @@ void    OutSetPublicTariffs(void)
 
 void    OutGetOldPowTariffs(void)
 {
-  if ((fPublicTariffs == false) || (SuperUser() == true))
+  if ((fPublicTrf == false) || (SuperUser() == true))
   {
     if (bInBuff5 < 12)
       Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zone));
@@ -80,7 +80,7 @@ void    OutSetOldPowTariffs(void)
 
 void    OutGetOldEngTariffs(void)
 {
-  if ((fPublicTariffs == false) || (SuperUser() == true))
+  if ((fPublicTrf == false) || (SuperUser() == true))
   {
     if (bInBuff5 < 12)
       Common(PGetZoneEngMonthMode(bInBuff5, 0), sizeof(zone));
@@ -118,7 +118,7 @@ void    OutSetOldEngTariffs(void)
 
 void    OutGetOldPubTariffs(void)
 {
-  if ((fPublicTariffs == true) || (SuperUser() == true))
+  if ((fPublicTrf == true) || (SuperUser() == true))
   {
     if (bInBuff5 < 12)
       Common(PGetZonePowMonthMode(bInBuff5, 0), sizeof(zone));
@@ -157,7 +157,7 @@ void    OutSetOldPubTariffs(void)
 
 void    OutGetNewPowTariffs(void)
 {
-  if (fPublicTariffs == false)
+  if (fPublicTrf == false)
   {
     if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
       Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zone));
@@ -195,7 +195,7 @@ void    OutSetNewPowTariffs(void)
 
 void    OutGetNewEngTariffs(void)
 {
-  if (fPublicTariffs == false)
+  if (fPublicTrf == false)
   {
     if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
       Common(PGetZoneEngMonthMode(bInBuff5, bInBuff6), sizeof(zone));
@@ -233,7 +233,7 @@ void    OutSetNewEngTariffs(void)
 
 void    OutGetNewPubTariffs(void)
 {
-  if (fPublicTariffs == true)
+  if (fPublicTrf == true)
   {
     if ((bInBuff5 < 12) && (bInBuff6 < bMODES))
       Common(PGetZonePowMonthMode(bInBuff5, bInBuff6), sizeof(zone));
