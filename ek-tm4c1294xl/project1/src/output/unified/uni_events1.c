@@ -1,43 +1,31 @@
 /*------------------------------------------------------------------------------
-UNI_EVENTS1.C
+UNI_EVENTS1,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "../../memory/mem_ports.h"
-#include "../../memory/mem_records.h"
-#include "../../memory/mem_flash.h"
 #include "../../include/flash.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
 #include "../../serial/print2.h"
-#include "../../flash/records.h"
-#include "../../flash/records2.h"
-#include "../../time/timedate.h"
 #include "../../time/calendar.h"
 #include "../../time/rtc.h"
-#include "../../hardware/watchdog.h"
 #include "response_uni.h"
 #include "uni_events0.h"
 #include "uni_events1.h"
 
 
 
-static time             tiT;
-
-
-
 void    IncEventsCount(uint  i)
 {
-uint    j;
-
   i = 6+1+2+2+i*4;
-  j = 0x100*GetOutBuff(i+0)+GetOutBuff(i+1);
-  j++;
-  SetOutBuff(i+0, j / 0x100);
-  SetOutBuff(i+1, j % 0x100);
+  uint w = 0x100*GetOutBuff(i+0)+GetOutBuff(i+1);
+  w++;
+  SetOutBuff(i+0, w / 0x100);
+  SetOutBuff(i+1, w % 0x100);
 }
 
 
@@ -47,11 +35,10 @@ uint    iwPage;
 uchar   ibBlock;
 
   x_str("\n\n get events table ");
-  x_str("\n day index "); x_intdec(0x100*bInBuff8+bInBuff9);
-  x_str("\n days count "); x_intdec(0x100*bInBuffA+bInBuffB);
+  x_str(" index "); x_intdec(0x100*bInBuff8+bInBuff9); x_str(" count "); x_intdec(0x100*bInBuffA+bInBuffB);
 
-  tiT = *GetCurrTimeDate();
-  ulong dw1 = DateToDayIndex(tiT);
+  time ti = *GetCurrTimeDate();
+  ulong dw1 = DateToDayIndex(ti);
 
   bool f = 0;
 
@@ -61,7 +48,7 @@ uchar   ibBlock;
 
     for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--) 
     { 
-      tiT = ReadEventBlock(ibBlock);
+      ti = ReadEventBlock(ibBlock);
 
       x_str(" countdown "); x_intdec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); x_intdec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
       if (bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock) > GetRecordsCount(bInBuff7) + bRECORD_BLOCK)
@@ -71,7 +58,7 @@ uchar   ibBlock;
       }
       else
       {
-        ulong dw2 = DateToDayIndex(tiT);
+        ulong dw2 = DateToDayIndex(ti);
         x_str(" delta "); x_longdec(dw1); x_str("-"); x_longdec(dw2); x_str("="); x_longdec(dw1 - dw2);
 
         if ((f == 0) && (dw1 >= dw2))
@@ -97,6 +84,8 @@ uchar   ibBlock;
       }
     }
   }
+
+  x_str("\n failure");
 }
 
 
