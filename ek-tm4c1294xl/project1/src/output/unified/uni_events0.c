@@ -1,31 +1,24 @@
 /*------------------------------------------------------------------------------
-UNI_EVENTS0.C
+UNI_EVENTS0,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_ports.h"
 #include "../../memory/mem_records.h"
 #include "../../memory/mem_flash.h"
-#include "../../include/flash.h"
-#include "../../include/queries_uni.h"
-#include "../../serial/ports.h"
-#include "../../serial/ports2.h"
 #include "../../serial/print2.h"
 #include "../../flash/records.h"
 #include "../../flash/records2.h"
-#include "../../time/timedate.h"
-#include "../../time/calendar.h"
-#include "../../time/rtc.h"
 #include "../../hardware/watchdog.h"
-#include "response_uni.h"
 #include "uni_events0.h"
 
 
 
 uint    GetPagesCount(uchar  ibClass)
 {
+  ASSERT((ibClass >= 1) && (ibClass <= 3));
+
   if (ibClass == 1)
     return bRECORD_PAGES;
   else if (ibClass == 2) 
@@ -37,6 +30,8 @@ uint    GetPagesCount(uchar  ibClass)
 
 uint    GetMaxRecordsCount(uchar  ibClass)
 {
+  ASSERT((ibClass >= 1) && (ibClass <= 3));
+
   if (ibClass == 1)
     return wRECORDS;
   else if (ibClass == 2) 
@@ -48,6 +43,8 @@ uint    GetMaxRecordsCount(uchar  ibClass)
 
 uint    GetRecordsCount(uchar  ibClass)
 {
+  ASSERT((ibClass >= 1) && (ibClass <= 3));
+
   if (ibClass == 1)
     return (cdwSysRecord < wRECORDS) ? cdwSysRecord : wRECORDS;
   else if (ibClass == 2) 
@@ -59,7 +56,10 @@ uint    GetRecordsCount(uchar  ibClass)
 
 void    LoadEventsPage(uchar  ibClass, uint  iwPage)
 {
+  ASSERT((ibClass >= 1) && (ibClass <= 3));
+
   x_str("\n\n page"); x_intdec(iwPage);
+
   ResetWDT();
 
   if (ibClass == 1)
