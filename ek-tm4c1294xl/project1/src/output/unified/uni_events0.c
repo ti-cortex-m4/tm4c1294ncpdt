@@ -82,8 +82,7 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
 
 time    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
 {
-  uchar* pBuff = (uchar *) &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD;
-  BuffToRecord(pBuff);
+  BuffToRecord((uchar *) &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD);
 
   x_str("\n block"); x_bytedec(ibBlock-1);
   x_intdec(reCurr.cdwRecord);
