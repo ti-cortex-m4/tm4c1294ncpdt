@@ -5,12 +5,12 @@ PHONES.H
 ------------------------------------------------------------------------------*/
 
 extern  file const              flPhones;
-extern  file const              flMaxConnect;
-extern  file const              flCustomModem;
+extern  cache const             chMaxConnect;
+extern  cache const             chCustomModem;
 
 
 
 void    InitPhones(void);
 void    ResetPhones(void);
 
-bool    TruePhone(phone  *pph);
+bool    IsValidPhone(phone  *pph);

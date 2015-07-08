@@ -10,7 +10,7 @@ KEY_DAYZONE.С
 #include "../keyboard.h"
 #include "../../tariffs/tariffs.h"
 #include "../../tariffs/zones.h"
-#include "../../flash/files.h"
+#include "../../nvram/cache.h"
 
 
 
@@ -37,12 +37,12 @@ uchar   i,j;
       GetZoneKeyBreak(ibX);
       SetZoneKeyBreak(i);
 
-      SaveFile(&flZone);
+      SaveCache(&chZone);
       return(0);
     }
   }
 
-  // сортировка      
+  // сортировка
   for(i=0; i<=GetZoneKeySize(); i++)
   {
     for(j=0; j<=GetZoneKeySize(); j++)
@@ -64,7 +64,7 @@ uchar   i,j;
   // увеличиваем размер суточного тарифного графика
   SetZoneKeySize(GetZoneKeySize() + 1);
 
-  SaveFile(&flZone);
+  SaveCache(&chZone);
   return(1);
 }
 
@@ -78,7 +78,7 @@ uchar   i;
   // если это не последний излом
   if (ibX < GetZoneKeySize() - 1)      
   {                                 
-    // сдвигаем последующие изломы вверх 
+    // сдвигаем последующие изломы вверх
     for (i=ibX; i<GetZoneKeySize() - 1; i++)
     {
       GetZoneKeyBreak(i + 1);
@@ -89,7 +89,7 @@ uchar   i;
   else if (ibX != 0)
     ibX--;            
 
-  // уменьшаем количество изломов 
+  // уменьшаем количество изломов
   if (GetZoneKeySize() != 0)
     SetZoneKeySize(GetZoneKeySize() - 1);
 
@@ -100,7 +100,7 @@ uchar   i;
     SetZoneKeyBreak(GetZoneKeySize());
   }
 
-  SaveFile(&flZone);
+  SaveCache(&chZone);
 }
 
 
@@ -158,7 +158,7 @@ void    key_SetDayZone(void)
     {
       ibX++;                            // переходим на следующий излом
 
-      if (ibX == GetZoneKeySize())      // дошли до конца суточного графика 
+      if (ibX == GetZoneKeySize())      // дошли до конца суточного графика
       {                                 
         if (ibX == bBREAKS)
           ibX = 0;                      // если суточный график заполнен - продолжаем просмотр с начала
@@ -179,7 +179,7 @@ void    key_SetDayZone(void)
     }
 
 
-    if (enKeyboard == KBD_POSTENTER)    // режим ввода            
+    if (enKeyboard == KBD_POSTENTER)    // режим ввода
     { 
       enKeyboard = KBD_INPUT1;          // подготовка к вводу излома
       ShowLo(szMaskBreak);               

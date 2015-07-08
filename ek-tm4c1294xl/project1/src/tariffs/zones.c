@@ -8,7 +8,8 @@ ZONES.C
 #include "../memory/mem_tariffs.h"
 #include "../keyboard/keyboard.h"
 #include "../display/display.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
+#include "zones.h"
 
 
 
@@ -54,21 +55,21 @@ zone const              zoDefault = {
 		}
 };
 
-file const              flZone = {DAY_ZONE, &zoKey, sizeof(zone)};
+cache const             chZone = {ZONE_DAY, &zoKey, sizeof(zone)};
 
 
 
 void    InitZones(void)
 {
-  LoadFile(&flZone);
+  LoadCache(&chZone);
 }
 
 
 
 void    ResetZones(void)
 {
-	zoKey = zoDefault;
-  SaveFile(&flZone);
+  zoKey = zoDefault;
+  SaveCache(&chZone);
 }
 
 

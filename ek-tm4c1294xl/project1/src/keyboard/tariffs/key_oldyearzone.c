@@ -45,13 +45,13 @@ uchar   i;
     case bSET_PROGRAM10:  
     case bSET_PROGRAM17:
       for (i=0; i<12; i++)
-        szLo[i+2] = mpeTariffPow[i];
+        szLo[i+2] = mpePeriodTrfPow[i];
       break; 
 
     case bSET_PROGRAM20:  
     case bSET_PROGRAM27:  
       for (i=0; i<12; i++)
-        szLo[i+2] = mpeTariffEng[i];
+        szLo[i+2] = mpePeriodTrfEng[i];
       break;
   }
 }
@@ -70,7 +70,7 @@ void    key_SetOldYearZone(void)
         return;
       }      
 
-      if (fPublicTariffs == true)
+      if (fPublicTrf == true)
       {
         switch (wProgram)
         {
@@ -147,7 +147,7 @@ void    key_SetOldYearZone(void)
 
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (fPublicTariffs == true)
+      if (fPublicTrf == true)
       {
         switch (wProgram)
         {

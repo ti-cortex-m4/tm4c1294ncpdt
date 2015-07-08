@@ -4,12 +4,13 @@ OLDTARIFFS.С
  Управления тарифами (старый вариант)
 ------------------------------------------------------------------------------*/
 
-#include        <string.h>
-#include        <stdio.h>
+#include <string.h>
+#include <stdio.h>
 #include "../main.h"
 #include "../memory/mem_tariffs.h"
 #include "../access.h"
 #include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "tariffs.h"
 #include "zones.h"
 
@@ -171,10 +172,10 @@ uchar  ibMonth;
   	SaveZonesEng(ibMonth, 1);
   	SaveZonesEng(ibMonth, 2);
 
-  	mpeTariffEng[ibMonth] = pe;
+  	mpePeriodTrfEng[ibMonth] = pe;
   }
 
-  SaveFile(&flPeriodTariffEng);
+  SaveCache(&chPeriodTrfEng);
 }
 
 
@@ -191,8 +192,8 @@ uchar  ibMonth;
   	SaveZonesPow(ibMonth, 1);
   	SaveZonesPow(ibMonth, 2);
 
-  	mpeTariffPow[ibMonth] = pe;
+  	mpePeriodTrfPow[ibMonth] = pe;
   }
 
-  SaveFile(&flPeriodTariffPow);
+  SaveCache(&chPeriodTrfPow);
 }

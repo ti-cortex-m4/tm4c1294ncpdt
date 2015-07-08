@@ -14,13 +14,13 @@ KEY_TARIFFS_MODE.С
 #include "../../tariffs/tariffs.h"
 #include "../../tariffs/oldtariffs.h"
 #include "../../tariffs/relaxs.h"
-#include "../../flash/files.h"
+#include "../../nvram/cache.h"
 
 
 
 //                                         0123456789ABCDEF
 static char const       szWorkMode[]    = "  Режим работы  ",
-                        szHolidays[]    = " по праздникам  ",   
+                        szHolidays[]    = " по праздникам  ",
                         szMaskOldMode[] = "      ___       ";
 
 static char const      *pszTariffsMode[]= { szWorkMode, szHolidays, "" };
@@ -45,8 +45,9 @@ void    key_SetTariffsMode(void)
 
       if ((ibX = GetCharLo(6,8)) <= bTARIFFSMODES)
       {
-      	bOldTrfMode = ibX;
-      	SaveFile(&flTariffsMode);
+        bOldTrfMode = ibX;
+
+        SaveCache(&chOldTrfMode);
         ShowChar(bOldTrfMode);
 
         MakeTariffsMode();

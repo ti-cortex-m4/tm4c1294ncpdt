@@ -15,7 +15,19 @@ typedef enum
   PTR_MON               = PTR_DAY + sizeof(tuple2uint) + bNVRAM_FOOTER,
   PTR_TIM               = PTR_MON + sizeof(tuple2uint) + bNVRAM_FOOTER,
 
-  IMPMNTCAN             = PTR_TIM + sizeof(tuple2uint) + bNVRAM_FOOTER,
+  PUBLIC_TRF            = PTR_TIM + sizeof(tuple2uint) + bNVRAM_FOOTER,
+  PUBLIC_TRF_PREV_MON   = PUBLIC_TRF + sizeof(bool) + bNVRAM_FOOTER,
+  OLD_TRF_MODE          = PUBLIC_TRF_PREV_MON + sizeof(bool) + bNVRAM_FOOTER,
+
+  ZONES_POW             = OLD_TRF_MODE + sizeof(uchar) + bNVRAM_FOOTER,
+  ZONES_ENG             = ZONES_POW + (sizeof(zone) + bNVRAM_FOOTER)*12*bMODES,
+
+  ZONE_DAY              = ZONES_ENG + (sizeof(zone) + bNVRAM_FOOTER)*12*bMODES,
+
+  PERIOD_TRF_POW        = ZONE_DAY + sizeof(zone) + bNVRAM_FOOTER,
+  PERIOD_TRF_ENG        = PERIOD_TRF_POW + sizeof(mpePeriodTrfPow) + bNVRAM_FOOTER,
+
+  IMPMNTCAN             = PERIOD_TRF_ENG + sizeof(mpePeriodTrfEng) + bNVRAM_FOOTER,
 
   IMPHOUCAN_BUFF        = IMPMNTCAN + (sizeof(uint)*bCANALS + bNVRAM_FOOTER)*bMINUTES,
   IMPDAYCAN_BUFF        = IMPHOUCAN_BUFF + sizeof(uint)*bCANALS + bNVRAM_FOOTER,
@@ -28,7 +40,10 @@ typedef enum
   ENBL_KEYS             = CNTMONCAN_BUFF + sizeof(double)*bCANALS + bNVRAM_FOOTER,
   DIGITALS              = ENBL_KEYS + sizeof(bool) + bNVRAM_FOOTER,
 
-  RELAXS_FLAG           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+  MAX_CONNECT           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+  CUSTOM_MODEM          = MAX_CONNECT + sizeof(uchar) + bNVRAM_FOOTER,
+
+  RELAXS_FLAG           = CUSTOM_MODEM + sizeof(bool) + bNVRAM_FOOTER,
 
   GAPS_FLAG             = RELAXS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
 

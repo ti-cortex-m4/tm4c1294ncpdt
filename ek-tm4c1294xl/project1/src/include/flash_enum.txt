@@ -10,19 +10,7 @@ typedef enum
 
   GROUPS                = LOGICAL + 1,
 
-  PUBLIC_TRF            = GROUPS + sizeof(group)*bGROUPS/wLEAF_BYTES + 1,
-  PUBLIC_TRF_PREV_MON   = PUBLIC_TRF + 1,
-  TARIFFS_MODE          = PUBLIC_TRF_PREV_MON + 1,
-
-  DAY_ZONE              = TARIFFS_MODE + 1,
-
-  ZONES_POW             = DAY_ZONE + 1,
-  ZONES_ENG             = ZONES_POW + 12*bMODES,
-
-  PERIOD_POW            = ZONES_ENG + 12*bMODES,
-  PERIOD_ENG            = PERIOD_POW + 1,
-
-  RELAXS_TARIFF         = PERIOD_ENG + 1,
+  RELAXS_TARIFF         = GROUPS + sizeof(group)*bGROUPS/wLEAF_BYTES + 1,
   RELAXS                = RELAXS_TARIFF + 1,
 
   GAPS                  = RELAXS + sizeof(relaxs)/wLEAF_BYTES + 1,
@@ -63,10 +51,8 @@ typedef enum
   RECALC_HOU            = CTRL_HOU + 1,
 
   PHONES                = RECALC_HOU + 1,
-  MAX_CONNECT           = PHONES + sizeof(mpphPhones)/wLEAF_BYTES + 1,
-  CUSTOM_MODEM          = MAX_CONNECT + 1,
 
-  KEYS                  = CUSTOM_MODEM + 1,
+  KEYS                  = PHONES + sizeof(mpphPhones)/wLEAF_BYTES + 1,
 
   ADDRESS1              = KEYS + sizeof(mpphKeys)/wLEAF_BYTES + 1,
   ADDRESS2              = ADDRESS1 + sizeof(mpdwAddress1)/wLEAF_BYTES + 1,

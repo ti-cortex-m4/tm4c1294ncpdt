@@ -13,7 +13,7 @@ extern  br3ak const             brZero;
 extern  zone const              zoDefaultPow;
 extern  zone const              zoDefaultEng;
 
-extern  file const              flZone;
+extern  cache const             chZone;
 
 
 void    InitZones(void);

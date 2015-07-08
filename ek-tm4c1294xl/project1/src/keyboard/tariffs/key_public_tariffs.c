@@ -5,26 +5,25 @@ KEY_PUBLIC_TARIFFS.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
 #include "../../memory/mem_tariffs.h"
-#include "../keyboard.h"
-#include "../../display/display.h"
 #include "../../tariffs/tariffs.h"
-#include "../../flash/files.h"
+#include "../../nvram/cache.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szTariffs[]     = "Тарифы ?        ",
-                        szPublic[]      = " совмещенные    ",
-                        szPrivate[]     = " раздельные     ";
+static char const       szPublicTrf[]     = "Тарифы ?        ",
+                        szTrue[]          = " совмещенные    ",
+                        szFalse[]         = " раздельные     ";
 
 
-void    ShowPublicTariffs(void)
+static void Show(void)
 {
-  if (fPublicTariffs == false) 
-    ShowLo(szPrivate);
+  if (fPublicTrf == false) 
+    ShowLo(szFalse);
   else 
-    ShowLo(szPublic);
+    ShowLo(szTrue);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';
@@ -40,8 +39,8 @@ void    key_SetPublicTariffs(void)
       enKeyboard = KBD_INPUT1;
       Clear();
       
-      ShowHi(szTariffs);
-      ShowPublicTariffs();
+      ShowHi(szPublicTrf);
+      Show();
     } 
     else Beep();
   }
@@ -53,9 +52,9 @@ void    key_SetPublicTariffs(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        fPublicTariffs = InvertBoolean(fPublicTariffs);
-        SaveFile(&flPublicTariffs);
-        ShowPublicTariffs();
+        fPublicTrf = InvertBoolean(fPublicTrf);
+        SaveCache(&chPublicTrf);
+        Show();
 
         DefaultTariffs();
       }
