@@ -5,8 +5,7 @@ typedef enum
   FLASH_BEGIN           = 0,
 
   PRIVATE               = FLASH_BEGIN,
-  GLOBAL                = PRIVATE + 1,
-  LOGICAL               = GLOBAL + 1,
+  LOGICAL               = PRIVATE + 1,
 
   GROUPS                = LOGICAL + 1,
 
