@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
 RELAXS.H
 
- Праздники
+
 ------------------------------------------------------------------------------*/
 
 extern  cache const             chRelaxsFlag;
-extern  file const              flRelaxsTariff;
-extern  file const              flRelaxs;
+extern  cache const             chRelaxsTariff;
+extern  cache const             chRelaxs;
 
 
 

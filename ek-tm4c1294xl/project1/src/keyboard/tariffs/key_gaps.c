@@ -9,7 +9,7 @@ KEY_GAPS.C
 #include "../../console.h"
 #include "../../time/timedate.h"
 #include "../../tariffs/gaps.h"
-#include "../../flash/files.h"
+#include "../../nvram/cache.h"
 
 
 
@@ -60,7 +60,7 @@ uint    k;
       // заменяем тип излома, не добавляя его в список
       SetGapDate(i);
 
-      SaveFile(&flGaps);
+      SaveCache(&chGaps);
       return(0);
     }
   }
@@ -95,7 +95,7 @@ uint    k;
   // увеличиваем размер списка
   SetGapSize(GetGapSize() + 1);
 
-  SaveFile(&flGaps);
+  SaveCache(&chGaps);
   return(1);
 }
 
@@ -124,7 +124,7 @@ uchar  i;
   if (GetGapSize() != 0)
     SetGapSize(GetGapSize() - 1);
 
-  SaveFile(&flGaps);
+  SaveCache(&chGaps);
 }
 
 
