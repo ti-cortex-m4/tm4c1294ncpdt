@@ -11,7 +11,7 @@ OUT_RELAXS.C
 #include "../time/timedate.h"
 #include "../keyboard/keyboard.h"
 #include "../tariffs/relaxs.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 
 
 
@@ -48,7 +48,7 @@ void    OutSetRelaxs(void)
         }
       }
 
-      SaveFile(&flRelaxs);
+      SaveCache(&chRelaxs);
 
       LongResult(bRES_OK);
     }

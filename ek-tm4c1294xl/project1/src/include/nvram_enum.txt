@@ -27,7 +27,14 @@ typedef enum
   PERIOD_TRF_POW        = ZONE_DAY + sizeof(zone) + bNVRAM_FOOTER,
   PERIOD_TRF_ENG        = PERIOD_TRF_POW + sizeof(mpePeriodTrfPow) + bNVRAM_FOOTER,
 
-  IMPMNTCAN             = PERIOD_TRF_ENG + sizeof(mpePeriodTrfEng) + bNVRAM_FOOTER,
+  RELAXS_FLAG           = PERIOD_TRF_ENG + sizeof(mpePeriodTrfEng) + bNVRAM_FOOTER,
+  RELAXS_TARIFF         = RELAXS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  RELAXS                = RELAXS_TARIFF + sizeof(uchar) + bNVRAM_FOOTER,
+
+  GAPS_FLAG             = RELAXS + sizeof(relaxs) + bNVRAM_FOOTER,
+  GAPS                  = GAPS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+
+  IMPMNTCAN             = GAPS + sizeof(gaps) + bNVRAM_FOOTER,
 
   IMPHOUCAN_BUFF        = IMPMNTCAN + (sizeof(uint)*bCANALS + bNVRAM_FOOTER)*bMINUTES,
   IMPDAYCAN_BUFF        = IMPHOUCAN_BUFF + sizeof(uint)*bCANALS + bNVRAM_FOOTER,
@@ -43,11 +50,7 @@ typedef enum
   MAX_CONNECT           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
   CUSTOM_MODEM          = MAX_CONNECT + sizeof(uchar) + bNVRAM_FOOTER,
 
-  RELAXS_FLAG           = CUSTOM_MODEM + sizeof(bool) + bNVRAM_FOOTER,
-
-  GAPS_FLAG             = RELAXS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
-
-  SEPARATE_CAN          = GAPS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  SEPARATE_CAN          = CUSTOM_MODEM + sizeof(bool) + bNVRAM_FOOTER,
   SHOW_MESSAGES         = SEPARATE_CAN + sizeof(bool) + bNVRAM_FOOTER,
   HIDE_MESSAGES         = SHOW_MESSAGES + sizeof(bool) + bNVRAM_FOOTER,
   CONTROL_TIME          = HIDE_MESSAGES + sizeof(bool) + bNVRAM_FOOTER,

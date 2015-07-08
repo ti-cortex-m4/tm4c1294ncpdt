@@ -151,7 +151,7 @@ void    key_Start(void)
     // запоминаем время/дату первого запуска
     tiStart = *GetCurrTimeDate();
 
-    Delay(1000);
+//    Delay(1000);
     Work();
     OK();
 
@@ -196,7 +196,7 @@ void    key_Restart(void)
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
 
-    Delay(1000);
+//    Delay(1000);
     Work();
     OK();
 

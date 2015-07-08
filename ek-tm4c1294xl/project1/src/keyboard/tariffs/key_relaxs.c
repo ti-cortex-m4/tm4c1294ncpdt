@@ -13,7 +13,7 @@ KEY_RELAXS.C
 #include "../../time/timedate.h"
 #include "../../time/rtc.h"
 #include "../../tariffs/relaxs.h"
-#include "../../flash/files.h"
+#include "../../nvram/cache.h"
 
 
 
@@ -68,7 +68,7 @@ uint    k;
       // заменяем тип праздника, не добавляя его в список
       SetRelaxDate(i);
 
-    	SaveFile(&flRelaxs);
+    	SaveCache(&chRelaxs);
       return(0);
     }
   }
@@ -103,7 +103,7 @@ uint    k;
   // увеличиваем размер списка
   SetRelaxSize(GetRelaxSize() + 1);
 
-	SaveFile(&flRelaxs);
+	SaveCache(&chRelaxs);
   return(1);
 }
 
@@ -132,7 +132,7 @@ uchar  i;
   if (GetRelaxSize() != 0)
     SetRelaxSize(GetRelaxSize() - 1);
 
-	SaveFile(&flRelaxs);
+	SaveCache(&chRelaxs);
 }
 
 

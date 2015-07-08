@@ -10,12 +10,7 @@ typedef enum
 
   GROUPS                = LOGICAL + 1,
 
-  RELAXS_TARIFF         = GROUPS + sizeof(group)*bGROUPS/wLEAF_BYTES + 1,
-  RELAXS                = RELAXS_TARIFF + 1,
-
-  GAPS                  = RELAXS + sizeof(relaxs)/wLEAF_BYTES + 1,
-
-  DECRET                = GAPS + sizeof(gaps)/wLEAF_BYTES + 1,
+  DECRET                = GROUPS + sizeof(group)*bGROUPS/wLEAF_BYTES + 1,
   SUMMER                = DECRET + 1,
   WINTER                = SUMMER + 1,
 

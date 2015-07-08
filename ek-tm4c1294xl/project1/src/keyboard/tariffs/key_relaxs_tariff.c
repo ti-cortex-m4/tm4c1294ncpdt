@@ -11,7 +11,7 @@ KEY_RELAXS_TARIFF.C
 #include "../../tariffs/tariffs.h"
 #include "../../tariffs/zones.h"
 #include "../../tariffs/relaxs.h"
-#include "../../flash/files.h"
+#include "../../nvram/cache.h"
 
 
 
@@ -49,7 +49,7 @@ void    key_SetRelaxsTariff(void)
       if ((ibX > 0) && (ibX <= bTARIFFS))
       {
         ibRelaxsTariff = ibX-1;
-        SaveFile(&flRelaxsTariff);
+        SaveCache(&chRelaxsTariff);
 
         ShowChar(ibRelaxsTariff+1); 
       }

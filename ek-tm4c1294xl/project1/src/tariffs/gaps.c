@@ -6,7 +6,6 @@ GAPS.C
 
 #include "../main.h"
 #include "../memory/mem_tariffs.h"
-#include "../flash/files.h"
 #include "../nvram/cache.h"
 #include "../time/timedate.h"
 #include "tariffs.h"
@@ -18,14 +17,14 @@ static time const       tiGap0 = { 0, 0, 0, 14,  4, 0 };
 static time const       tiGap1 = { 1, 0, 0, 14, 10, 0 };
 
 cache const             chGapsFlag = {GAPS_FLAG, &boGapsFlag, sizeof(bool)};
-file const              flGaps = {GAPS, &gaGaps, sizeof(gaGaps)};
+cache const             chGaps = {GAPS, &gaGaps, sizeof(gaGaps)};
 
 
 
 void    InitGaps(void)
 {
   LoadCache(&chGapsFlag);
-  LoadFile(&flGaps);
+  LoadCache(&chGaps);
 }
 
 
@@ -33,6 +32,7 @@ void    ResetGaps(void)
 {
   boGapsFlag = false;
   SaveCache(&chGapsFlag);
+
 
   memset(&gaGaps, 0, sizeof(gaGaps));
 
@@ -43,7 +43,7 @@ void    ResetGaps(void)
   SetGapDate(1);
 
   SetGapSize(2);
-  SaveFile(&flGaps);
+  SaveCache(&chGaps);
 }
 
 
