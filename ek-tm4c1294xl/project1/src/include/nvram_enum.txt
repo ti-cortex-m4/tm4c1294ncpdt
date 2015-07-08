@@ -28,7 +28,10 @@ typedef enum
   ENBL_KEYS             = CNTMONCAN_BUFF + sizeof(double)*bCANALS + bNVRAM_FOOTER,
   DIGITALS              = ENBL_KEYS + sizeof(bool) + bNVRAM_FOOTER,
 
-  RELAXS_FLAG           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+  MAX_CONNECT           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+  CUSTOM_MODEM          = MAX_CONNECT + sizeof(uchar) + bNVRAM_FOOTER,
+
+  RELAXS_FLAG           = CUSTOM_MODEM + sizeof(bool) + bNVRAM_FOOTER,
 
   GAPS_FLAG             = RELAXS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
 
