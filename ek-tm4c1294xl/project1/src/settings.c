@@ -54,9 +54,6 @@ void    InitSettings(void)
 
 void    ResetSettings(bool  fFull)
 {
-//  enGlobal = GLB_PROGRAM;
-//  SaveGlobal();
-
   if (fFull)
   {
     bLogical = 1;
@@ -92,16 +89,3 @@ bool SavePrivate(void) {
 bool LoadPrivate(void) {
   return LoadBuff(PRIVATE, &wPrivate, sizeof(uint));
 }
-
-
-// TODO GlobalLabel
-/*
-bool SaveGlobal(void) {
-	return SaveBuff(GLOBAL, &enGlobal, sizeof(global));
-}
-
-
-bool LoadGlobal(void) {
-  return LoadBuff(GLOBAL, &enGlobal, sizeof(global));
-}
-*/
