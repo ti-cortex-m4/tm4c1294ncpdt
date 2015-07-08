@@ -119,13 +119,36 @@ void    BuffToRecord(uchar*  pBuff)
 
 
 
+static uint OpenRecord(uint  wPage, ulong  cdwRecord)
+{
+  uint i = (cdwRecord % wRECORDS);
+
+  OpenIn(wPage + i / bRECORD_BLOCK);
+  memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
+
+  memset(&reCurr, 0, sizeof(reCurr));
+  return i;
+}
+
+
+static uint OpenRecord2(uint  wPage, ulong  cdwRecord)
+{
+  uint i = (cdwRecord % wRECORDS2);
+
+  OpenIn(wPage + i / bRECORD_BLOCK);
+  memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
+
+  memset(&reCurr, 0, sizeof(reCurr));
+  return i;
+}
+
+
 static void CloseRecord(uint  wPage, uint  i)
 {
   OpenOut(wPage + i / bRECORD_BLOCK);
-
-  uchar* pBuff = (uchar *) &mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD;
-  RecordToBuff(pBuff);
+  RecordToBuff((uchar *) &mpbPageOut + (i % bRECORD_BLOCK)*SIZEOF_RECORD);
 }
+
 
 
 static void PutChar(uchar  i, uchar  b)
@@ -156,12 +179,7 @@ bool    AddKeyRecord(event  ev)
 {
   if (IsRecordDisabled(ev)) return true;
 
-  uint i = (cdwKeyRecord % wRECORDS);
-
-  OpenIn(KEY_RECORD + i / bRECORD_BLOCK);
-  memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
-
-  memset(&reCurr, 0, sizeof(reCurr));
+  uint i = OpenRecord(KEY_RECORD, cdwKeyRecord);
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwKeyRecord++; SaveCache(&chKeyRecord);
@@ -198,12 +216,7 @@ bool    AddSysRecord(event  ev)
 {
   if (IsRecordDisabled(ev)) return true;
 
-  uint i = (cdwSysRecord % wRECORDS);
-
-  OpenIn(SYS_RECORD + i / bRECORD_BLOCK);
-  memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
-
-  memset(&reCurr, 0, sizeof(reCurr));
+  uint i = OpenRecord(SYS_RECORD, cdwSysRecord);
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwSysRecord++; SaveCache(&chSysRecord);
@@ -265,16 +278,9 @@ bool    AddSysRecordReprogram(event  ev)
 
 bool    AddDigRecord(event  ev)
 {
-uint    i;
-
   if (IsRecordDisabled(ev)) return true;
 
-  i = (cdwAuxRecord % wRECORDS2);
-
-  OpenIn(AUX_RECORD + i / bRECORD_BLOCK);
-  memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
-
-  memset(&reCurr, 0, sizeof(reCurr));
+  uint i = OpenRecord2(AUX_RECORD, cdwAuxRecord);
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwAuxRecord++; SaveCache(&chAuxRecord);
@@ -362,12 +368,7 @@ bool    AddImpRecord(event  ev)
 {
   if (IsRecordDisabled(ev)) return true;
 
-  uint i = (cdwImpRecord % wRECORDS);
-
-  OpenIn(IMP_RECORD + i / bRECORD_BLOCK);
-  memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
-
-  memset(&reCurr, 0, sizeof(reCurr));
+  uint i = OpenRecord(IMP_RECORD, cdwImpRecord);
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwImpRecord++; SaveCache(&chImpRecord);
@@ -402,12 +403,7 @@ bool    AddModRecord(event  ev)
 {
   if (IsRecordDisabled(ev)) return true;
 
-  uint i = (cdwModRecord % wRECORDS);
-
-  OpenIn(MOD_RECORD + i / bRECORD_BLOCK);
-  memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
-
-  memset(&reCurr, 0, sizeof(reCurr));
+  uint i = OpenRecord(MOD_RECORD, cdwModRecord);
 
   reCurr.ti = *GetCurrTimeDate();
   reCurr.cdwRecord = cdwModRecord++; SaveCache(&chModRecord);
