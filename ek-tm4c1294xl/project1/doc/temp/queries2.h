@@ -30,9 +30,9 @@ QUERIES2.H
 #define wUNI_GETDEFCANDAY              0x00B0
 #define wUNI_GETDEFGRPDAY              0x00B1
 
-#define wUNI_GETEVENTS_COUNTS          0x00C2
-#define wUNI_GETEVENTS                 0x00C0
-#define wUNI_GETEVENTS_MESSAGES        0x00C1
++   #define wUNI_GETEVENTS_COUNTS          0x00C2
++   #define wUNI_GETEVENTS                 0x00C0
++   #define wUNI_GETEVENTS_MESSAGES        0x00C1
 
 #define wUNI_GETCONFIG                 0x00D0
 #define wUNI_GETSENSORS                0x00D1

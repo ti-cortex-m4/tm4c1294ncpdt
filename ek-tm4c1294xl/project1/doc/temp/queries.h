@@ -256,8 +256,8 @@ QUERIES.H
 #define bEXT_GETIMPCANMNT              18
 #define bEXT_GETPOWCANMNT              27
 
-#define bEXT_GETRECORD                 19
-#define bEXT_GETRECORDSBLOCK           20
++   #define bEXT_GETRECORD                 19
++   #define bEXT_GETRECORDSBLOCK           20
 
 //#define bEXT_BLOCKING1                 21
 //#define bEXT_BLOCKING2                 22
@@ -350,7 +350,7 @@ QUERIES.H
 
 #define bINQ_FAILURE2                  98
 
-#define bEXT_GETRECORDSBLOCK2          99
++   #define bEXT_GETRECORDSBLOCK2          99
 +   #define bEXT_GETEXTENDED7              100
 #define bEXT_ANSWER_DISABLE            101
 #define bEXT_CONTROL_R                 102
