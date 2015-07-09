@@ -44,6 +44,10 @@ DEVICES.C
 #include "../digitals/answer.h"
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
+#include "../digitals/extended/extended_1.h"
+#include "../digitals/extended/extended_4.h"
+#include "../digitals/extended/extended_4t.h"
+#include "../digitals/extended/extended_5.h"
 #include "../flash/files.h"
 #include "../flash/records.h"
 #include "../time/timedate.h"
@@ -53,10 +57,6 @@ DEVICES.C
 #include "devices_postinput.h"
 #include "devices_pause.h"
 #include "devices_init.h"
-#include "extended_1.h"
-#include "extended_4.h"
-#include "extended_5.h"
-#include "extended_4t.h"
 #include "devices.h"
 
 
