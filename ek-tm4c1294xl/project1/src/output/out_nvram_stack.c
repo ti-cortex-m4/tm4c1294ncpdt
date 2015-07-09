@@ -28,6 +28,11 @@ void    OutNvramStack(void)
 
   PushChar(0x0D); PushChar(0x0A);
 
+  PushLongAsString((ulong)100*(NVRAM_END-NVRAM_BEGIN)/(dwNVRAM_BYTES-NVRAM_BEGIN));
+  PushString("%");
+
+  PushChar(0x0D); PushChar(0x0A);
+
   #include "../include/out_nvram.txt"
 
   Output(3000);
