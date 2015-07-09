@@ -30,6 +30,11 @@ void    OutFlashStack(void)
 
   PushChar(0x0D); PushChar(0x0A);
 
+  PushLongAsString((ulong)100*(FLASH_END-FLASH_BEGIN)/(wPAGES-FLASH_BEGIN));
+  PushString("%");
+
+  PushChar(0x0D); PushChar(0x0A);
+
   PUSH_ENUM(UINT_CAN_PAGES)
   PUSH_ENUM(IMPHOUCAN_PAGES)
   PUSH_ENUM(IMP_CAN_PAGES)
