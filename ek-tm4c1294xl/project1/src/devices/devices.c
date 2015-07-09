@@ -1128,7 +1128,7 @@ void    RunDevices(void)
     case DEV_TIME_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltB();
+        ReadTimeB();
         ReadTimeDigB();
         MakePause(DEV_POSTTIME_B2);
       }
@@ -1661,7 +1661,7 @@ void    RunDevices(void)
     case DEV_TIME_C2:                      
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltC();                  
+        ReadTimeC();                  
         MakePause(DEV_POSTTIME_C2);
       }
       else                                    
@@ -1783,7 +1783,7 @@ void    RunDevices(void)
     case DEV_VALUE_C2:                      
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltC();                  
+        ReadTimeC();                  
         tiValueC = tiAlt;  
         dwValueC = DateToHouIndex(tiAlt);
         MakePause(DEV_POSTVALUE_C2);
@@ -2063,7 +2063,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTTIME_C3:
-      ReadTimeAltC(); 
+      ReadTimeC(); 
       tiOffs = tiAlt;          
 
       cbRepeat = GetMaxRepeats();

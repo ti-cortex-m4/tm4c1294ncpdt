@@ -621,12 +621,13 @@ uchar   i;
 
   if (QueryOpenA_Full(25) == 0) return GetTime2(tiZero, false);
 
-  if (QueryTimeAltA_Full(75) == 0) return GetTime2(tiZero, false);
+  time2 ti2 = QueryTimeA_Full(75);
+  if (ti2.fValid == false) return GetTime2(tiZero, false);
 
-  tiChannelC = tiAlt;
+  tiChannelC = ti2.tiValue;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
-  return GetTime2(tiAlt, true);
+  return GetTime2(ti2.tiValue, true);
 }
 
 #endif
@@ -643,12 +644,13 @@ uchar   i;
 
   if (QueryOpenB_Full(25) == 0) return GetTime2(tiZero, false);
 
-  if (QueryTimeAltB_Full(75) == 0) return GetTime2(tiZero, false);
+  time2 ti2 = QueryTimeB_Full(75);
+  if (ti2.fValid == false) return GetTime2(tiZero, false);
 
-  tiChannelC = tiAlt;
+  tiChannelC = ti2.tiValue;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
-  return GetTime2(tiAlt, true);
+  return GetTime2(ti2.tiValue, true);
 }
 
 #endif
@@ -659,31 +661,28 @@ uchar   i;
 
 time2   ReadTimeCanC(void)
 {
-uchar   i;
-
   Clear();
 
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
     QueryTimeC();
 
-    if (RevInput() != SER_GOODCHECK) 
-      continue;
-    else 
-      break;
+    if (RevInput() == SER_GOODCHECK) break;
+    if (fKey == true) return GetTime2(tiZero, false);
   }
 
   if (i == bMINORREPEATS) return GetTime2(tiZero, false);
   ShowPercent(75);
 
-  ReadTimeAltC();
+  time ti = ReadTimeC();
 
 
-  tiChannelC = tiAlt;
+  tiChannelC = ti;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
-  return GetTime2(tiAlt, true);
+  return GetTime2(ti, true);
 }
 
 #endif
@@ -1087,10 +1086,11 @@ ulong   dw;
   double dbK = dbKtrans/dbKpulse;
 
 
-  if (QueryTimeAltA_Full(76) == 0) return GetDouble2(0, false);
+  time2 ti2 = QueryTimeA_Full(76);
+  if (ti2.fValid == false) return GetDouble2(0, false);
 
 
-  if (tiAlt.bMonth == ibMonth+1)        // значени€е счЄтчиков на начало текущего мес€ца
+  if (ti2.tiValue.bMonth == ibMonth+1)  // значени€е счЄтчиков на начало текущего мес€ца
   {
     if (QueryEnergyA_Full2(0x40,98) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
@@ -1125,7 +1125,7 @@ ulong   dw;
         mpdwChannelsB[i] = dw;
       }
     }
-    while ((bMONTHS + tiAlt.bMonth - j++) % bMONTHS != 0 );
+    while ((bMONTHS + ti2.tiValue.bMonth - j++) % bMONTHS != 0 );
 
     if (QueryEnergyA_Full2(0,99) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
@@ -1165,10 +1165,11 @@ ulong   dw;
   double dbK = dbKtrans/dbKpulse;
 
 
-  if (QueryTimeAltB_Full(76) == 0) return GetDouble2(0, false);
+  time2 ti2 = QueryTimeB_Full(76);
+  if (ti2.fValue == false) return GetDouble2(0, false);
 
 
-  if (tiAlt.bMonth == ibMonth+1)        // значени€е счЄтчиков на начало текущего мес€ца
+  if (ti2.tiValue.bMonth == ibMonth+1)  // значени€е счЄтчиков на начало текущего мес€ца
   {
     if (QueryEnergyB_Full2(0x40,98) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
@@ -1203,7 +1204,7 @@ ulong   dw;
         mpdwChannelsB[i] = dw;
       }
     }
-    while ((bMONTHS + tiAlt.bMonth - j++) % bMONTHS != 0 );
+    while ((bMONTHS + ti2.tiValue.bMonth - j++) % bMONTHS != 0 );
 
     if (QueryEnergyB_Full2(0,99) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
@@ -1250,10 +1251,10 @@ uchar   i,j;
 
   ShowPercent(76);
 
-  ReadTimeAltC();                        
+  time ti = ReadTimeC();
 
 
-  if (tiAlt.bMonth == ibMonth+1)        // значени€е счЄтчиков на начало текущего мес€ца
+  if (ti.bMonth == ibMonth+1)           // значени€е счЄтчиков на начало текущего мес€ца
   {
     if (QueryEnergyDayC_Full2(0, 98) == 0) return GetDouble2(0, false);
     for (i=0; i<4; i++)
@@ -1280,7 +1281,7 @@ uchar   i,j;
     j = (ibMonth + 1)%12;
     do
     {
-      if (QueryEnergyMonC_Full2(-((12-1+tiAlt.bMonth-j)%12), 76+j) == 0) return GetDouble2(0, false);
+      if (QueryEnergyMonC_Full2(-((12-1+ti.bMonth-j)%12), 76+j) == 0) return GetDouble2(0, false);
       for (i=0; i<4; i++)
       {
         ulong dw = mpdwChannelsA[i];
@@ -1289,7 +1290,7 @@ uchar   i,j;
         mpdwChannelsB[i] = dw;
       }
     }
-    while ((bMONTHS + tiAlt.bMonth - ++j) % bMONTHS != 0 );
+    while ((bMONTHS + ti.bMonth - ++j) % bMONTHS != 0 );
 
 
     if (QueryEnergyAbsC_Full2(99) == 0) return GetDouble2(0, false);

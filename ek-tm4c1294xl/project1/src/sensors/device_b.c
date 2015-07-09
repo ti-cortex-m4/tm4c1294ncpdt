@@ -262,36 +262,23 @@ void    QueryTimeB(void)
 
 
 // чтение времени/даты
-void    ReadTimeAltB(void)
+time    ReadTimeB(void)
 {
+time  ti;
+
   InitPop(1);
 
-  tiAlt.bSecond = FromBCD( PopChar() );
-  tiAlt.bMinute = FromBCD( PopChar() );
-  tiAlt.bHour   = FromBCD( PopChar() );
+  ti.bSecond = FromBCD( PopChar() );
+  ti.bMinute = FromBCD( PopChar() );
+  ti.bHour   = FromBCD( PopChar() );
 
   PopChar();
 
-  tiAlt.bDay    = FromBCD( PopChar() );
-  tiAlt.bMonth  = FromBCD( PopChar() );
-  tiAlt.bYear   = FromBCD( PopChar() );
-}
+  ti.bDay    = FromBCD( PopChar() );
+  ti.bMonth  = FromBCD( PopChar() );
+  ti.bYear   = FromBCD( PopChar() );
 
-
-// чтение времени/даты
-void    ReadTimeDigB(void)
-{
-  InitPop(1);
-
-  tiDig.bSecond = FromBCD( PopChar() );
-  tiDig.bMinute = FromBCD( PopChar() );
-  tiDig.bHour   = FromBCD( PopChar() );
-
-  PopChar();
-
-  tiDig.bDay    = FromBCD( PopChar() );
-  tiDig.bMonth  = FromBCD( PopChar() );
-  tiDig.bYear   = FromBCD( PopChar() );
+  return ti;
 }
 
 

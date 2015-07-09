@@ -57,7 +57,7 @@ bool    ReadResultA(void)
 
 
 
-// посылка запроса на открытие канала связи для счётчика СЭТ-4ТМ
+// посылка запроса на открытие канала связи
 void    QueryOpenA(void)
 {
   InitPush(0);
@@ -95,7 +95,7 @@ void    QueryOpenA(void)
  
 
 
-// посылка запроса на чтение логического номера для счётчика СЭТ-4ТМ
+// посылка запроса на чтение логического номера
 void    QueryIdA(void)
 {
   InitPush(0);
@@ -108,7 +108,7 @@ void    QueryIdA(void)
 }
 
 
-// чтение логического номера для счётчика СЭТ-4ТМ
+// чтение логического номера
 bool    ReadIdA(void)
 {
   InitPop(0);
@@ -136,7 +136,7 @@ void    QueryEnergyA(uchar  bTime)
 }
 
 
-// чтение энергии для счётчика СЭТ-4ТМ
+// чтение энергии
 void    ReadEnergyA(void)
 {
 uchar   i;
@@ -158,7 +158,7 @@ uchar   i;
 
 
 
-// посылка запроса на коррекцию времени для счётчика СЭТ-4ТМ
+// посылка запроса на коррекцию времени
 void    QueryControlA(void)
 {
   InitPush(0);
@@ -176,7 +176,7 @@ void    QueryControlA(void)
 
 
 
-// посылка запроса на установку времени для счётчика СЭТ-4ТМ
+// посылка запроса на установку времени
 void    QueryManageA(void)
 {
   InitPush(0);
@@ -202,7 +202,7 @@ void    QueryManageA(void)
 
 
 
-// посылка запроса на чтене времени/даты для счётчика СЭТ-4ТМ
+// посылка запроса на чтене времени/даты
 void    QueryTimeA(void)
 {
   InitPush(0);
@@ -215,25 +215,29 @@ void    QueryTimeA(void)
 }
 
 
-// чтение времени/даты для счётчика СЭТ-4ТМ
-void    ReadTimeAltA(void)
+// чтение времени/даты
+time    ReadTimeA(void)
 {
+time  ti;
+
   InitPop(1);
 
-  tiAlt.bSecond = FromBCD( PopChar() );
-  tiAlt.bMinute = FromBCD( PopChar() );
-  tiAlt.bHour   = FromBCD( PopChar() );
+  ti.bSecond = FromBCD( PopChar() );
+  ti.bMinute = FromBCD( PopChar() );
+  ti.bHour   = FromBCD( PopChar() );
 
   PopChar();
 
-  tiAlt.bDay    = FromBCD( PopChar() );
-  tiAlt.bMonth  = FromBCD( PopChar() );
-  tiAlt.bYear   = FromBCD( PopChar() );
+  ti.bDay    = FromBCD( PopChar() );
+  ti.bMonth  = FromBCD( PopChar() );
+  ti.bYear   = FromBCD( PopChar() );
+
+  return ti;
 }
 
 
 
-// посылка запроса на чтение вершины массива для счётчика СЭТ-4ТМ
+// посылка запроса на чтение вершины массива
 void    QueryTopA(void)
 {
   InitPush(0);
@@ -246,7 +250,7 @@ void    QueryTopA(void)
 }
 
 
-// чтение вершины массива для счётчика СЭТ-4ТМ
+// чтение вершины массива
 void    ReadTopA(void)
 {
   // индекс текущего получаса

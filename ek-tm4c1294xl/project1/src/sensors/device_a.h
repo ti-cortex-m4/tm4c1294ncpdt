@@ -21,7 +21,7 @@ void    QueryControlA(void);
 void    QueryManageA(void);
 
 void    QueryTimeA(void);
-void    ReadTimeAltA(void);
+time    ReadTimeA(void);
 
 void    QueryTopA(void);
 void    ReadTopA(void);

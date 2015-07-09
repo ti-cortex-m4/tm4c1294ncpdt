@@ -53,7 +53,7 @@ bool    ReadResultC(void)
 
 
 
-// посылка запроса на открытие канала связи для счётчика CC-301
+// посылка запроса на открытие канала связи
 void    QueryOpenC(void)
 { /*
   InitPush(0);
@@ -89,7 +89,7 @@ void    QueryOpenC(void)
 
 
 
-// посылка запроса на чтение логического номера для счётчика CC-301
+// посылка запроса на чтение логического номера
 void    QueryIdC(void)
 {
   InitPush(0);
@@ -106,7 +106,7 @@ void    QueryIdC(void)
 }
 
 
-// чтение логического номера для счётчика CC-301
+// чтение логического номера
 bool    ReadIdC(void)
 {
   InitPop(0);
@@ -121,7 +121,7 @@ bool    ReadIdC(void)
 
 
 
-// посылка запроса на чтене времени/даты для счётчика CC-301
+// посылка запроса на чтене времени/даты
 void    QueryTimeC(void)
 {
   InitPush(0);
@@ -138,17 +138,21 @@ void    QueryTimeC(void)
 }
 
 
-// чтение времени/даты для счётчика CC-301
-void    ReadTimeAltC(void)
+// чтение времени/даты
+time    ReadTimeC(void)
 {
+time  ti;
+
   InitPop(4);
 
-  tiAlt.bSecond = PopChar();
-  tiAlt.bMinute = PopChar();
-  tiAlt.bHour   = PopChar();
-  tiAlt.bDay    = PopChar();
-  tiAlt.bMonth  = PopChar();
-  tiAlt.bYear   = PopChar();
+  ti.bSecond = PopChar();
+  ti.bMinute = PopChar();
+  ti.bHour   = PopChar();
+  ti.bDay    = PopChar();
+  ti.bMonth  = PopChar();
+  ti.bYear   = PopChar();
+
+  return ti;
 }
 
 
@@ -249,7 +253,7 @@ void    QueryEnergyDayC(uchar  ibDay)
 }
 
 
-// чтение энергии для счётчика CC-301
+// чтение энергии
 void    ReadEnergyC(void)
 {
 uchar   i;
