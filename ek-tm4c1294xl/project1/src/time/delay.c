@@ -5,6 +5,7 @@ DELAY.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../hardware/watchdog.h"
 
 
 
@@ -61,6 +62,7 @@ void    DelayMilly(uint  wMillySec) {
 
 
 void    Delay(uint  wMillySec) {
+  ResetWDT();
   DelayMilly(wMillySec);
 }
 
