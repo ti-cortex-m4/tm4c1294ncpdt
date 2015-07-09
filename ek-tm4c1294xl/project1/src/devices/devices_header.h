@@ -164,13 +164,13 @@ void    RunDevices(void)
 
     case DEV_MODEM_CONNECT:
       cbWaitQuery = bMAXWAITQUERY;
-      sprintf(szLo+13,"%3u",cbWaitAnswer); HideCurrentTime(1);
+      sprintf(szLo+13,"%3u",cbWaitAnswer); HideCurrTime(1);
       break;
 
 #ifndef SKIP_E
     case DEV_ENERGY_E2:
       cbWaitQuery = bMAXWAITQUERY;
-      sprintf(szLo+13,"%3bu",cbWaitAnswer); HideCurrentTime(1);
+      sprintf(szLo+13,"%3bu",cbWaitAnswer); HideCurrTime(1);
       if (IndexInBuff() > 0) sprintf(szLo," прием: %-4u ",IndexInBuff());
       break;
 #endif

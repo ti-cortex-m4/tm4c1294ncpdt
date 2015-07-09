@@ -164,13 +164,13 @@ void    RunDevices(void)
 
     case DEV_MODEM_CONNECT:
       cbWaitQuery = bMAXWAITQUERY;
-      sprintf(szLo+13,"%3u",cbWaitAnswer); HideCurrentTime(1);
+      sprintf(szLo+13,"%3u",cbWaitAnswer); HideCurrTime(1);
       break;
 
 #ifndef SKIP_E
     case DEV_ENERGY_E2:
       cbWaitQuery = bMAXWAITQUERY;
-      sprintf(szLo+13,"%3bu",cbWaitAnswer); HideCurrentTime(1);
+      sprintf(szLo+13,"%3bu",cbWaitAnswer); HideCurrTime(1);
       if (IndexInBuff() > 0) sprintf(szLo," прием: %-4u ",IndexInBuff());
       break;
 #endif
@@ -465,7 +465,7 @@ void    RunDevices(void)
       if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == true))
         MakeExtended2();
 
-      HideCurrentTime(1);
+      HideCurrTime(1);
       MakePause(GetNext());
       break;
 
@@ -1706,7 +1706,7 @@ void    RunDevices(void)
 
         if (dwDelta < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_C2); }     
-        else if (GetCurrHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))       // простая коррекция
+        else if (GetCurrHouIndex() == (tiValueC.bHour*2 + tiValueC.bMinute/30)) // простая коррекция
         { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_C2);  } 
         else                                                                    
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
@@ -2062,8 +2062,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTTIME_C3:
-      ReadTimeAltC(); 
-      tiOffs = tiAlt;          
+      tiOffs = ReadTimeC();
 
       cbRepeat = GetMaxRepeats();
       QueryEnergyAbsC();

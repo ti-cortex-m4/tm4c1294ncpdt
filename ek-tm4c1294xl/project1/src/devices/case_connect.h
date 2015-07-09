@@ -258,7 +258,7 @@
       if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == true))
         MakeExtended2();
 
-      HideCurrentTime(1);
+      HideCurrTime(1);
       MakePause(GetNext());
       break;
 
