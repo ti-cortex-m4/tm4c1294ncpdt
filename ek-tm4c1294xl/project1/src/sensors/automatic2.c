@@ -1166,7 +1166,7 @@ ulong   dw;
 
 
   time2 ti2 = QueryTimeB_Full(76);
-  if (ti2.fValue == false) return GetDouble2(0, false);
+  if (ti2.fValid == false) return GetDouble2(0, false);
 
 
   if (ti2.tiValue.bMonth == ibMonth+1)  // значени€е счЄтчиков на начало текущего мес€ца

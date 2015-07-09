@@ -64,7 +64,7 @@ status ReadCntMonCanTariffC(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 
 
   time2 ti2 = QueryTimeC_Full();
-  if (ti2.fValue == false) return ST4_BADDIGITAL;
+  if (ti2.fValid == false) return ST4_BADDIGITAL;
 
   uchar m = (ibMon + 0)%12;
   if (QueryCntMonTariffC_Full(-((12-1+ti2.tiValue.bMonth-m)%12), ibTrf+1) == 0) return ST4_BADDIGITAL;
