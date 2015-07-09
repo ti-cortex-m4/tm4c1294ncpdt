@@ -113,23 +113,21 @@ uchar   i;
 }
 
 
-bool    QueryTimeC_Full(void)
+time2   QueryTimeC_Full(void)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
     QueryTimeC();
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return false;
+    if (fKey == true) return GetTime2(tiZero, false);
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
 
-  ReadTimeAltC();
-  return(1);
+  return GetTime2(ReadTimeC(), true);
 }
 
 #endif

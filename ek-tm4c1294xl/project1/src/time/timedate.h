@@ -5,7 +5,7 @@ TIMEDATE.H
 ------------------------------------------------------------------------------*/
 
 extern  time const              tiZero;
-extern  time                    tiAlt;
+
 
 
 uchar   GetDaysInMonthM(uchar  bMonth);

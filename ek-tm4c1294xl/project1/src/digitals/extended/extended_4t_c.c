@@ -63,10 +63,11 @@ status ReadCntMonCanTariffC(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
   double dbK = dbKtrans/dbKpulse;
 
 
-  if (QueryTimeC_Full() == 0) return ST4_BADDIGITAL;
+  time2 ti2 = QueryTimeC_Full();
+  if (ti2.fValue == false) return ST4_BADDIGITAL;
 
   uchar m = (ibMon + 0)%12;
-  if (QueryCntMonTariffC_Full(-((12-1+tiAlt.bMonth-m)%12), ibTrf+1) == 0) return ST4_BADDIGITAL;
+  if (QueryCntMonTariffC_Full(-((12-1+ti2.tiValue.bMonth-m)%12), ibTrf+1) == 0) return ST4_BADDIGITAL;
 
   ShowPercent(60+ibTrf);
 

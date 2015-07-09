@@ -9,8 +9,6 @@ TIMEDATE.H
 
 
 
-time                    tiAlt; //TODO: tiAlt
-
 time const              tiZero = { 0, 0, 0, 0, 0, 0 };
 
 static uchar const      mpbDaysInMonth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
