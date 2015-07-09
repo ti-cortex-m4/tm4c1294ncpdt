@@ -89,7 +89,7 @@
 
         if (dwDelta < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_C2); }     
-        else if (GetCurrHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))       // простая коррекция
+        else if (GetCurrHouIndex() == (tiValueC.bHour*2 + tiValueC.bMinute/30)) // простая коррекция
         { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_C2);  } 
         else                                                                    
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
