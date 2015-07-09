@@ -151,11 +151,10 @@ void    key_Start(void)
     // запоминаем время/дату первого запуска
     tiStart = *GetCurrTimeDate();
 
-//    Delay(1000);
     Work();
     OK();
 
-    LongBeep();
+    Beep();
 
     SetLabelGlobal();
     enGlobal = GLB_WORK;
@@ -196,11 +195,11 @@ void    key_Restart(void)
     // устанавливаем признаки используемых каналов и групп
     MakeUsedNodes();
 
-//    Delay(1000);
     Work();
     OK();
 
-    LongBeep();
+    Beep();
+
     enGlobal = GLB_WORK;  
 
     AddSysRecord(EVE_RESTART);
