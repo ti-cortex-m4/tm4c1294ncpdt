@@ -49,16 +49,17 @@ static void Delay_1(ulong ulgTime)
 //Ѕиты читаютс€ микросхемой Ёќ«” по переднему фронту
 static void  CharOut(uchar bI)
 {
- uchar bK;
+  cdwNvramWriteBytes++;
 
- for(bK=0; bK<8; bK++)
+ uchar i;
+ for(i=0; i<8; i++)
  {
-  if(bI & (0x80 >> bK )) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
+  if(bI & (0x80 >> i )) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
   else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
   HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
   HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
  }
-}//end CharOut
+}
 
 
 static void CharOutCRC(uchar  b)
@@ -72,17 +73,22 @@ static void CharOutCRC(uchar  b)
 //Ѕиты фиксируютс€ микросхемой Ёќ«” в течении активности импульса (высокий уровень на SCK)
 static uchar  CharIn(void)
 {
- uchar bRez, bK;
+  cdwNvramReadBytes++;
 
- bRez = 0;
- for(bK=0; bK<8; bK++)
+ uchar b = 0;
+
+ uchar i;
+ for(i=0; i<8; i++)
  {
   HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
-  if(HWREG(GPIO_DATABIT_SO)) bRez |= 0x80 >> bK;
+  if(HWREG(GPIO_DATABIT_SO)) b |= 0x80 >> i;
   HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
  }
- return(bRez);
-}//end CharIn
+
+ return(b);
+}
+
+
 /*
 //ќдин синхроимпульс
 static void  OnePulse_1(void)
