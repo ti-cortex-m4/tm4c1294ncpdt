@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
-MEM_NVRAM.H
+MEM_NVRAM,H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  ulong                   cdwNvramRead,
-                                cdwNvramWrite,
-                                cdwNvramFree;
+extern  ulong                   cdwNvramReadBuffs,
+                                cdwNvramWriteBuffs,
+                                cdwNvramFreeBuffs;
 
 extern  ulong                   cdwNvramReadBytes,
                                 cdwNvramWriteBytes;

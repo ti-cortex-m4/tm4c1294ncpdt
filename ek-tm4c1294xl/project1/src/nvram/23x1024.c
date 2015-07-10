@@ -334,7 +334,7 @@ uchar   ReadNvramStatus(void)
 
 bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 {
-  cdwNvramRead++;
+  cdwNvramReadBuffs++;
 
   uchar i;
   for (i=0; i<bNVRAM_REPEATS; i++) {
@@ -353,7 +353,7 @@ bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 
 bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 {
-  cdwNvramWrite++;
+  cdwNvramWriteBuffs++;
 
   uchar i;
   for (i=0; i<bNVRAM_REPEATS; i++) {
@@ -372,7 +372,7 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 
 bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
 {
-  cdwNvramFree++;
+  cdwNvramFreeBuffs++;
 
   uchar i;
   for (i=0; i<bNVRAM_REPEATS; i++) {
