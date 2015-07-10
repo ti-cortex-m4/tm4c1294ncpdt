@@ -4,9 +4,13 @@ MEM_NVRAM.H
 
 ------------------------------------------------------------------------------*/
 
-extern  uint                    cwWrnReadNvram,
-                                cwErrReadNvram,
-                                cwWrnWriteNvram,
-                                cwErrWriteNvram,
-                                cwWrnFreeNvram,
-                                cwErrFreeNvram;
+extern  ulong                   cdwNvramRead,
+                                cdwNvramWrite,
+                                cdwNvramFree;
+
+extern  uint                    cwWrnNvramRead,
+                                cwErrNvramRead,
+                                cwWrnNvramWrite,
+                                cwErrNvramWrite,
+                                cwWrnNvramFree,
+                                cwErrNvramFree;

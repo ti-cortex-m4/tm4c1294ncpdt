@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_NVRAM.C
+MEM_NVRAM,C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,10 +8,15 @@ MEM_NVRAM.C
 
 
 
-// счетчики
-uint                    cwWrnReadNvram,
-                        cwErrReadNvram,
-                        cwWrnWriteNvram,
-                        cwErrWriteNvram,
-                        cwWrnFreeNvram,
-                        cwErrFreeNvram;
+// счетчики количества операций
+ulong                   cdwNvramRead,
+                        cdwNvramWrite,
+                        cdwNvramFree;
+
+// счетчики количества ошибок
+uint                    cwWrnNvramRead,
+                        cwErrNvramRead,
+                        cwWrnNvramWrite,
+                        cwErrNvramWrite,
+                        cwWrnNvramFree,
+                        cwErrNvramFree;

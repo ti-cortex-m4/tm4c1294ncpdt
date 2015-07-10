@@ -6,6 +6,7 @@ OUT_NVRAM,C
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_nvram.h"
 #include "../serial/ports.h"
 #include "../nvram/23x1024.h"
 #include "out_nvram.h"
@@ -31,4 +32,25 @@ void    OutNvram(void)
     else
       Result(bRES_BADFLASH);
   }
+}
+
+
+
+void    OutNvramCounters(void)
+{
+  InitPush();
+  uint wSize = 0;
+
+  wSize += PushLong(cdwNvramRead);
+  wSize += PushLong(cdwNvramWrite);
+  wSize += PushLong(cdwNvramFree);
+
+  wSize += PushInt(cwWrnNvramRead);
+  wSize += PushInt(cwErrNvramRead);
+  wSize += PushInt(cwWrnNvramWrite);
+  wSize += PushInt(cwErrNvramWrite);
+  wSize += PushInt(cwWrnNvramFree);
+  wSize += PushInt(cwErrNvramFree);
+
+  Output(wSize);
 }

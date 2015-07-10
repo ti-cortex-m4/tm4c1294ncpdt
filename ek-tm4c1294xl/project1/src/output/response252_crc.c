@@ -44,6 +44,7 @@ void    Response252_CRC(void)
     case 9: OutDefectsMon(); break;
 
     case 10: OutNvram(); break;
+    case 11: OutNvramCounters(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
