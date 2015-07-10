@@ -66,7 +66,7 @@ void    key_SetLimits(void)
         enKeyboard = KBD_POSTENTER;
 
         mpcwStopCan[ibX] = w + 1;
-        SaveFile(&flStopCan);
+        SaveCache(&chStopCan);
 
         Show();
       }
