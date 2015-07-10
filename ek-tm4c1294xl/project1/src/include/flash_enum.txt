@@ -51,14 +51,7 @@ typedef enum
   CANALS_NAME           = OBJECT_NAME + 1,
   GROUPS_NAME           = CANALS_NAME + sizeof(mpszCanalsName)/wLEAF_BYTES + 1,
 
-  START_REL_CAN         = GROUPS_NAME + sizeof(mpszGroupsName)/wLEAF_BYTES + 1,
-  START_ABS16_CAN       = START_REL_CAN + 1,
-  START_ABS32_CAN       = START_ABS16_CAN + 1,
-  START_CAN             = START_ABS32_CAN + 1,
-  STOP_CAN              = START_CAN + 1,
-  STOP_AUX_CAN          = STOP_CAN + 1,
-
-  PARAMS                = STOP_AUX_CAN + 1,
+  PARAMS                = GROUPS_NAME + sizeof(mpszGroupsName)/wLEAF_BYTES + 1,
   PARAMS_DIV            = PARAMS + sizeof(mpdiParam)/wLEAF_BYTES + 1,
   ENBL_PARAMS           = PARAMS_DIV + sizeof(mpreParamsDiv)/wLEAF_BYTES + 1,
 
