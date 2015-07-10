@@ -129,6 +129,13 @@ bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   CharOut(*((uchar*)(&dwAddr)+1));
   CharOut(*((uchar*)(&dwAddr)+0));
 
+  CharIn();
+  CharIn();
+  CharIn();
+
+  CharIn();
+  CharIn();
+
   uint i;
   for (i=0; i<wSize; i++)
   {
@@ -175,6 +182,13 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 
   InitCRC();
 
+  CharOutCRC(*((uchar*)(&dwAddr)+2));
+  CharOutCRC(*((uchar*)(&dwAddr)+1));
+  CharOutCRC(*((uchar*)(&dwAddr)+0));
+
+  CharOutCRC(wSize / 0x100);
+  CharOutCRC(wSize % 0x100);
+
   uint i;
   for (i=0; i<wSize; i++)
   {
@@ -191,7 +205,7 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   CharOut(bCRCHi);
   CharOut(bCRCLo);
 
-  // TODO add address, счетчики, внешние повторы
+  // TODO счетчики, внешние повторы
 
   Stop();
 
@@ -203,6 +217,13 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   CharOut(*((uchar*)(&dwAddr)+2));
   CharOut(*((uchar*)(&dwAddr)+1));
   CharOut(*((uchar*)(&dwAddr)+0));
+
+  CharIn();
+  CharIn();
+  CharIn();
+
+  CharIn();
+  CharIn();
 
   bool f = true;
   for (i=0; i<wSize; i++)
@@ -231,6 +252,13 @@ bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
 
   InitCRC();
 
+  CharOutCRC(*((uchar*)(&dwAddr)+2));
+  CharOutCRC(*((uchar*)(&dwAddr)+1));
+  CharOutCRC(*((uchar*)(&dwAddr)+0));
+
+  CharOutCRC(wSize / 0x100);
+  CharOutCRC(wSize % 0x100);
+
   uint i;
   for (i=0; i<wSize; i++)
   {
@@ -257,6 +285,13 @@ bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
   CharOut(*((uchar*)(&dwAddr)+2));
   CharOut(*((uchar*)(&dwAddr)+1));
   CharOut(*((uchar*)(&dwAddr)+0));
+
+  CharIn();
+  CharIn();
+  CharIn();
+
+  CharIn();
+  CharIn();
 
   bool f = true;
   for (i=0; i<wSize; i++)
