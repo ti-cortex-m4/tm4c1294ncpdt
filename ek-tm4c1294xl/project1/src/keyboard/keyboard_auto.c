@@ -38,7 +38,6 @@ void    Keyboard_Auto(void)
       case bTEST_FLOW:          auto_TestFlow();        break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
       case bTEST_UNI:           auto_TestUni();         break;
-      case bTEST_FLASH:         auto_TestFlash();       break;
 
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
@@ -58,7 +57,6 @@ void    Keyboard_Auto(void)
       case bTEST_FLOW:          auto_TestFlow();        break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
       case bTEST_UNI:           auto_TestUni();         break;
-      case bTEST_FLASH:         auto_TestFlash();       break;
 
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
@@ -112,7 +110,6 @@ void    Keyboard_Auto(void)
       case bTEST_FLOW:          auto_TestFlow();        break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
       case bTEST_UNI:           auto_TestUni();         break;
-      case bTEST_FLASH:         auto_TestFlash();       break;
 
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
