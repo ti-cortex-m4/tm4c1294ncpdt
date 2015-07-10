@@ -4,9 +4,9 @@ DECRET.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flDecret;
-extern  file const              flSummer;
-extern  file const              flWinter;
+extern  cache const             chDecret;
+extern  cache const             chSummer;
+extern  cache const             chWinter;
 
 
 

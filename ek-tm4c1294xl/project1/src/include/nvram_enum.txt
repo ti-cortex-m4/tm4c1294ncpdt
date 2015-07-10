@@ -34,7 +34,11 @@ typedef enum
   GAPS_FLAG             = RELAXS + sizeof(relaxs) + bNVRAM_FOOTER,
   GAPS                  = GAPS_FLAG + sizeof(bool) + bNVRAM_FOOTER,
 
-  IMPMNTCAN             = GAPS + sizeof(gaps) + bNVRAM_FOOTER,
+  DECRET                = GAPS + sizeof(gaps) + bNVRAM_FOOTER,
+  SUMMER                = DECRET + sizeof(decret) + bNVRAM_FOOTER,
+  WINTER                = SUMMER + sizeof(time) + bNVRAM_FOOTER,
+
+  IMPMNTCAN             = WINTER + sizeof(time) + bNVRAM_FOOTER,
 
   IMPHOUCAN_BUFF        = IMPMNTCAN + (sizeof(uint)*bCANALS + bNVRAM_FOOTER)*bMINUTES,
   IMPDAYCAN_BUFF        = IMPHOUCAN_BUFF + sizeof(uint)*bCANALS + bNVRAM_FOOTER,

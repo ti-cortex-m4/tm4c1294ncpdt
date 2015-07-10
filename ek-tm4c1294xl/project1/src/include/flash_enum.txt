@@ -9,11 +9,7 @@ typedef enum
 
   GROUPS                = LOGICAL + 1,
 
-  DECRET                = GROUPS + sizeof(group)*bGROUPS/wLEAF_BYTES + 1,
-  SUMMER                = DECRET + 1,
-  WINTER                = SUMMER + 1,
-
-  TRANS_ENG             = WINTER + 1,
+  TRANS_ENG             = GROUPS + sizeof(group)*bGROUPS/wLEAF_BYTES + 1,
   TRANS_CNT             = TRANS_ENG + DOUBLE_CAN_PAGES,
   PULSE_HOU             = TRANS_CNT + DOUBLE_CAN_PAGES,
   PULSE_MNT             = PULSE_HOU + DOUBLE_CAN_PAGES,
