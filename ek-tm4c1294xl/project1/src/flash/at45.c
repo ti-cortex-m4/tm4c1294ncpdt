@@ -41,6 +41,8 @@ void    DisableFlash(void)
 
 void    CharOut(uchar  bT)
 {
+  cdwFlashWriteBytes++;
+
   if (bT & 0x80) HWREG(GPIO_DATAbTT_SI) = SPI_bTT_SI;
   else HWREG(GPIO_DATAbTT_SI) = ~SPI_bTT_SI;
   HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;
@@ -85,6 +87,8 @@ void    CharOut(uchar  bT)
 
 uchar   CharIn(void)
 {
+  cdwFlashReadBytes++;
+
 	 unsigned char bRez;
 	 bRez = 0;
 	/*
