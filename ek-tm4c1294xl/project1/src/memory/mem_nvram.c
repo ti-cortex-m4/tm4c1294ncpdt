@@ -9,9 +9,9 @@ MEM_NVRAM,C
 
 
 // счетчики количества операций
-ulong                   cdwNvramRead,
-                        cdwNvramWrite,
-                        cdwNvramFree;
+ulong                   cdwNvramReadBuffs,
+                        cdwNvramWriteBuffs,
+                        cdwNvramFreeBuffs;
 
 // счетчики количества байтов
 ulong                   cdwNvramReadBytes,
