@@ -4,24 +4,23 @@ LIMITS.C
 
 ------------------------------------------------------------------------------*/
 
-#include    "../main.h"
-#include    "../memory/mem_limits.h"
-#include    "../digitals/digitals.h"
-#include    "../devices/devices.h"
-#include    "../flash/files.h"
-#include    "../nvram/cache.h"
-#include    "limits.h"
+#include "../main.h"
+#include "../memory/mem_limits.h"
+#include "../digitals/digitals.h"
+#include "../devices/devices.h"
+#include "../nvram/cache.h"
+#include "limits.h"
 
 
 
 cache const             chUseBounds = {USE_BOUNDS, &boUseBounds, sizeof(bool)};
 
-file const              flStartRelCan = {START_REL_CAN, &mpcwStartRelCan, sizeof(mpcwStartRelCan)};
-file const              flStartAbs16Can = {START_ABS16_CAN, &mpcwStartAbs16Can, sizeof(mpcwStartAbs16Can)};
-file const              flStartAbs32Can = {START_ABS32_CAN, &mpcdwStartAbs32Can, sizeof(mpcdwStartAbs32Can)};
-file const              flStartCan = {START_CAN, &mpboStartCan, sizeof(mpboStartCan)};
-file const              flStopCan = {STOP_CAN, &mpcwStopCan, sizeof(mpcwStopCan)};
-file const              flStopAuxCan = {STOP_AUX_CAN, &mpcwStopAuxCan, sizeof(mpcwStopAuxCan)};
+cache const             chStartRelCan = {START_REL_CAN, &mpcwStartRelCan, sizeof(mpcwStartRelCan)};
+cache const             chStartAbs16Can = {START_ABS16_CAN, &mpcwStartAbs16Can, sizeof(mpcwStartAbs16Can)};
+cache const             chStartAbs32Can = {START_ABS32_CAN, &mpcdwStartAbs32Can, sizeof(mpcdwStartAbs32Can)};
+cache const             chStartCan = {START_CAN, &mpboStartCan, sizeof(mpboStartCan)};
+cache const             chStopCan = {STOP_CAN, &mpcwStopCan, sizeof(mpcwStopCan)};
+cache const             chStopAuxCan = {STOP_AUX_CAN, &mpcwStopAuxCan, sizeof(mpcwStopAuxCan)};
 
 
 
@@ -29,19 +28,18 @@ void    InitLimits(void)
 {
   LoadCache(&chUseBounds);
 
-  LoadFile(&flStartRelCan);
-  LoadFile(&flStartAbs16Can);
-  LoadFile(&flStartAbs32Can);
-  LoadFile(&flStartCan);
-  LoadFile(&flStopCan);
-  LoadFile(&flStopAuxCan);
+  LoadCache(&chStartRelCan);
+  LoadCache(&chStartAbs16Can);
+  LoadCache(&chStartAbs32Can);
+  LoadCache(&chStartCan);
+  LoadCache(&chStopCan);
+  LoadCache(&chStopAuxCan);
 }
 
 
 void    ResetLimits(void)
 {
-
-	boUseBounds = true;
+  boUseBounds = true;
   SaveCache(&chUseBounds);
 
   uchar c;
@@ -55,12 +53,12 @@ void    ResetLimits(void)
     mpcwStopAuxCan[c] = 0;
   }
 
-  SaveFile(&flStartRelCan);
-  SaveFile(&flStartAbs16Can);
-  SaveFile(&flStartAbs32Can);
-  SaveFile(&flStartCan);
-  SaveFile(&flStopCan);
-  SaveFile(&flStopAuxCan);
+  SaveCache(&chStartRelCan);
+  SaveCache(&chStartAbs16Can);
+  SaveCache(&chStartAbs32Can);
+  SaveCache(&chStartCan);
+  SaveCache(&chStopCan);
+  SaveCache(&chStopAuxCan);
 }
 
 
@@ -96,7 +94,7 @@ void    NewBoundsRel(uint  wRel)
     }
   }
 
-  SaveFile(&flStartRelCan);
+  SaveCache(&chStartRelCan);
 }
 
 
@@ -115,8 +113,8 @@ void    NewBoundsAbs16(uint  wAbs)
     } 
   }
 
-  SaveFile(&flStartCan);
-  SaveFile(&flStartAbs16Can);
+  SaveCache(&chStartCan);
+  SaveCache(&chStartAbs16Can);
 }
 
 
@@ -135,8 +133,8 @@ void    NewBoundsAbs32(ulong  dwAbs)
     } 
   }
 
-  SaveFile(&flStartCan);
-  SaveFile(&flStartAbs32Can);
+  SaveCache(&chStartCan);
+  SaveCache(&chStartAbs32Can);
 }
 
 
@@ -167,11 +165,11 @@ void    NewLimits(void)
     }
   }
 
-  SaveFile(&flStartRelCan);
-  SaveFile(&flStartAbs16Can);
-  SaveFile(&flStartAbs32Can);
-  SaveFile(&flStartCan);
-  SaveFile(&flStopCan);
+  SaveCache(&chStartRelCan);
+  SaveCache(&chStartAbs16Can);
+  SaveCache(&chStartAbs32Can);
+  SaveCache(&chStartCan);
+  SaveCache(&chStopCan);
 }
 
 
@@ -185,7 +183,7 @@ void    MakeLimits(void)
       mpcwStopCan[c]++;
   }
 
-  SaveFile(&flStopCan);
+  SaveCache(&chStopCan);
 }
 
 
@@ -204,7 +202,7 @@ void    ResetLimitsAux(uchar  ibDig)
     }
   }
 
-  SaveFile(&flStopAuxCan);
+  SaveCache(&chStopAuxCan);
 }
 
 
@@ -221,6 +219,6 @@ void    NextHouLimitsAux(void)
       }
     }
 
-    SaveFile(&flStopAuxCan);
+    SaveCache(&chStopAuxCan);
   }
 }
