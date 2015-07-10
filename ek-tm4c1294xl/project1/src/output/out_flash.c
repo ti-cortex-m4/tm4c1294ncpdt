@@ -82,3 +82,29 @@ void    OutFlashCounters(void)
 
   Output(wSize);
 }
+
+
+void    ResetFlashCounters(void)
+{
+  InitPushCRC();
+  uint wSize = 0;
+
+  wSize += PushLong(cdwPageErase);
+  wSize += PushLong(cdwPageRead);
+  wSize += PushLong(cdwPageWrite);
+
+  wSize += PushLong(cdwFlashReadBytes);
+  wSize += PushLong(cdwFlashWriteBytes);
+
+  wSize += PushInt(cwWrnBusy);
+  wSize += PushInt(cwWrnCompare);
+  wSize += PushInt(cwWrnPageErase);
+  wSize += PushInt(cwWrnPageRead);
+  wSize += PushInt(cwWrnPageWrite);
+  wSize += PushInt(cwErrCompare);
+  wSize += PushInt(cwErrPageErase);
+  wSize += PushInt(cwErrPageRead);
+  wSize += PushInt(cwErrPageWrite);
+
+  Output(wSize);
+}
