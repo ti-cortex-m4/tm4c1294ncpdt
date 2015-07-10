@@ -69,8 +69,8 @@ static time tiT;
 
           switch (wProgram)
           {
-            case bSET_SUMMER:  tiSummer = tiT; SaveFile(&flSummer); ShowDate(tiSummer);  break;
-            case bSET_WINTER:  tiWinter = tiT; SaveFile(&flWinter); ShowDate(tiWinter);  break;
+            case bSET_SUMMER:  tiSummer = tiT; SaveCache(&chSummer); ShowDate(tiSummer);  break;
+            case bSET_WINTER:  tiWinter = tiT; SaveCache(&chWinter); ShowDate(tiWinter);  break;
           }
         }
         else

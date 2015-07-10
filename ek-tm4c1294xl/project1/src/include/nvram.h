@@ -10,6 +10,7 @@ NVRAM.H
 
 #include "../label.h"
 #include "../memory/mem_digitals0.h"
+#include "../memory/mem_settings.h"
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_tariffs.h"
 #include "../memory/mem_extended_1.h"

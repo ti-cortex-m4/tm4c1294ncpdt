@@ -7,16 +7,16 @@ DECRET.C // TODO: сохранять количество переходов отдельно + события
 #include        <string.h>
 #include "../main.h"
 #include "../memory/mem_settings.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "timedate.h"
 #include "rtc.h"
 #include "decret.h"
 
 
 
-file const              flDecret = {DECRET, &deDecret, sizeof(deDecret)};
-file const              flSummer = {SUMMER, &tiSummer, sizeof(time)};
-file const              flWinter = {WINTER, &tiWinter, sizeof(time)};
+cache const             chDecret = {DECRET, &deDecret, sizeof(decret)};
+cache const             chSummer = {SUMMER, &tiSummer, sizeof(time)};
+cache const             chWinter = {WINTER, &tiWinter, sizeof(time)};
 
 
 
@@ -34,18 +34,20 @@ void    MakeDecret(void)
     tiWinter = *GetDecretDateYM(bYear, 10);
   }
 
-  SaveFile(&flDecret);
-  SaveFile(&flSummer);
-  SaveFile(&flWinter);
+  SaveCache(&chDecret);
+
+  SaveCache(&chSummer);
+  SaveCache(&chWinter);
 }
 
 
 
 void    InitDecret(void)
 {
-  LoadFile(&flDecret);
-  LoadFile(&flSummer);
-  LoadFile(&flWinter);
+  LoadCache(&chDecret);
+
+  LoadCache(&chSummer);
+  LoadCache(&chWinter);
 }
 
 
