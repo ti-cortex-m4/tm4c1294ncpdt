@@ -44,4 +44,3 @@ u_hhr u_mnt wSize
 1) sem2reader nvram info
 2) ti_alt branch
 3) test NVRAM
-4) reset flash/nvram buffs
