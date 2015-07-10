@@ -51,6 +51,8 @@ void    OutNvramCounters(void)
   wSize += PushInt(cwErrNvramWrite);
   wSize += PushInt(cwWrnNvramFree);
   wSize += PushInt(cwErrNvramFree);
+  wSize += PushInt(cwWrnNvramCompare);
+  wSize += PushInt(cwErrNvramCompare);
 
   Output(wSize);
 }
