@@ -1128,8 +1128,7 @@ void    RunDevices(void)
     case DEV_TIME_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltB();
-        ReadTimeDigB();
+        tiValueB = ReadTimeB();
         MakePause(DEV_POSTTIME_B2);
       }
       else
@@ -1190,7 +1189,7 @@ void    RunDevices(void)
               cbCorrects++;
               MakePause(DEV_POSTOPENCANAL_B2);
             }
-            else if (GetCurrHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))
+            else if (GetCurrHouIndex() == (tiValueB.bHour*2 + tiValueB.bMinute/30))
             { ShowLo(szCorrectNext); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
             else
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
