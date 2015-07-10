@@ -5,7 +5,7 @@ KEY_TEST_FLOW.H
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_flash.h"
+#include "../memory/mem_flash.h"
 #include "../keyboard.h"
 #include "../../display/display.h"
 

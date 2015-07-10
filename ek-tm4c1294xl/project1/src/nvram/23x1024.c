@@ -9,9 +9,15 @@
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
 #include "inc/hw_types.h"
+#include "../memory/mem_nvram.h"
 #include "../kernel/crc-16.h"
 #include "../time/delay.h"
 #include "23x1024.h"
+
+
+
+// количество повторов
+#define bNVRAM_REPEATS  8
 
 
 
@@ -327,12 +333,12 @@ bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   cdwReadNvram++;
 
   uchar i;
-  for (i=0; i<bMAXREPEAT; i++) {
+  for (i=0; i<bNVRAM_REPEATS; i++) {
     if (ReadNvramBuff_Raw(dwAddr, pbBuff, wSize) == true) break;
     cwWrnReadNvram++;
   }
 
-  if (i == bMAXREPEAT) {
+  if (i == bNVRAM_REPEATS) {
     cwErrReadNvram++;
     return false;
   } else {
@@ -346,12 +352,12 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   cdwWriteNvram++;
 
   uchar i;
-  for (i=0; i<bMAXREPEAT; i++) {
+  for (i=0; i<bNVRAM_REPEATS; i++) {
     if (WriteNvramBuff_Raw(dwAddr, pbBuff, wSize) == true) break;
     cwWrnWriteNvram++;
   }
 
-  if (i == bMAXREPEAT) {
+  if (i == bNVRAM_REPEATS) {
     cwErrWriteNvram++;
     return false;
   } else {
@@ -365,12 +371,12 @@ bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
   cdwFreeNvram++;
 
   uchar i;
-  for (i=0; i<bMAXREPEAT; i++) {
+  for (i=0; i<bNVRAM_REPEATS; i++) {
     if (FreeNvramBuff_Raw(dwAddr, wSize) == true) break;
     cwWrnFreeNvram++;
   }
 
-  if (i == bMAXREPEAT) {
+  if (i == bNVRAM_REPEATS) {
     cwErrFreeNvram++;
     return false;
   } else {
