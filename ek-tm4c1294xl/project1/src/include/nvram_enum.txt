@@ -51,7 +51,14 @@ typedef enum
   ENBL_KEYS             = CNTMONCAN_BUFF + sizeof(double)*bCANALS + bNVRAM_FOOTER,
   DIGITALS              = ENBL_KEYS + sizeof(bool) + bNVRAM_FOOTER,
 
-  MAX_CONNECT           = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+  START_REL_CAN         = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
+  START_ABS16_CAN       = START_REL_CAN + sizeof(mpcwStartRelCan) + bNVRAM_FOOTER,
+  START_ABS32_CAN       = START_ABS16_CAN + sizeof(mpcwStartAbs16Can) + bNVRAM_FOOTER,
+  START_CAN             = START_ABS32_CAN + sizeof(mpcdwStartAbs32Can) + bNVRAM_FOOTER,
+  STOP_CAN              = START_CAN + sizeof(mpboStartCan) + bNVRAM_FOOTER,
+  STOP_AUX_CAN          = STOP_CAN + sizeof(mpcwStopCan) + bNVRAM_FOOTER,
+
+  MAX_CONNECT           = STOP_AUX_CAN + sizeof(STOP_AUX_CAN) + bNVRAM_FOOTER,
   CUSTOM_MODEM          = MAX_CONNECT + sizeof(uchar) + bNVRAM_FOOTER,
 
   SEPARATE_CAN          = CUSTOM_MODEM + sizeof(bool) + bNVRAM_FOOTER,

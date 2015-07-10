@@ -6,11 +6,11 @@ LIMITS.H
 
 extern  cache const             chUseBounds;
 
-extern  file const              flStartRelCan;
-extern  file const              flStartAbs16Can;
-extern  file const              flStartAbs32Can;
-extern  file const              flStartCan;
-extern  file const              flStopCan;
+extern  cache const             chStartRelCan;
+extern  cache const             chStartAbs16Can;
+extern  cache const             chStartAbs32Can;
+extern  cache const             chStartCan;
+extern  cache const             chStopCan;
 
 
 
