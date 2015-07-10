@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MAIN_KEYBOARD.H
+MAIN_KEYBOARD,H
 
 
 ------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ MAIN_KEYBOARD.H
 
 
 
-// тип 'состояния клавиатуры'
+// код состояния клавиатуры
 typedef enum
 {
   KBD_BEGIN,
@@ -34,15 +34,6 @@ typedef enum
 
 
 // коды кнопок
-#define bARR_UP         8
-#define bARR_DOWN       2
-#define bARR_LEFT       4
-#define bARR_RIGHT      6
-#define bARR_PGUP       9
-#define bARR_PGDN       3
-#define bARR_HOME       7
-#define bARR_END        1
-
 #define bKEY_MINUS      10
 #define bKEY_POINT      11
 #define bKEY_PROGRAM    12
