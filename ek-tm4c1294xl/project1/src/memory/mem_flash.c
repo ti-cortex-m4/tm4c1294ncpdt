@@ -35,6 +35,6 @@ uint                    cwWrnBusy,
 uint                    mpcwFlashControl[wPAGES];
 
 // счётчики для контроля количества операций
-uint                    cwPageErase,
-                        cwPageRead,
-                        cwPageWrite;
+ulong                   cdwPageErase,
+                        cdwPageRead,
+                        cdwPageWrite;

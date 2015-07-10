@@ -38,7 +38,7 @@ void    OutNvram(void)
 
 void    OutNvramCounters(void)
 {
-  InitPush();
+  InitPushCRC();
   uint wSize = 0;
 
   wSize += PushLong(cdwNvramRead);

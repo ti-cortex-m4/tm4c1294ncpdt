@@ -36,15 +36,15 @@ void    auto_TestFlash(void)
   if (enKeyboard == KBD_POSTENTER)
   {
   	szHi[11] = 'E';
-    Hi(12, cwPageErase / 0x100);
-    Hi(14, cwPageErase % 0x100);
+    Hi(12, cdwPageErase / 0x100);
+    Hi(14, cdwPageErase % 0x100);
 
     szLo[5] = 'R';
-    Lo(6,  cwPageRead / 0x100);
-    Lo(8,  cwPageRead % 0x100);
+    Lo(6,  cdwPageRead / 0x100);
+    Lo(8,  cdwPageRead % 0x100);
 
     szLo[11] = 'W';
-    Lo(12, cwPageWrite / 0x100);
-    Lo(14, cwPageWrite % 0x100);
+    Lo(12, cdwPageWrite / 0x100);
+    Lo(14, cdwPageWrite % 0x100);
   }
 }

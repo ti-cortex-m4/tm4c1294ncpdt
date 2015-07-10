@@ -19,6 +19,7 @@ RESPONSE252_CRC,C
 #include "../output/out_tariffs.h"
 #include "../output/out_defects.h"
 #include "../output/out_nvram.h"
+#include "../output/out_flash.h"
 
 
 
@@ -45,6 +46,7 @@ void    Response252_CRC(void)
 
     case 10: OutNvram(); break;
     case 11: OutNvramCounters(); break;
+    case 12: OutFlashCounters(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
