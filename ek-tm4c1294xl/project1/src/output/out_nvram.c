@@ -45,6 +45,9 @@ void    OutNvramCounters(void)
   wSize += PushLong(cdwNvramWrite);
   wSize += PushLong(cdwNvramFree);
 
+  wSize += PushLong(cdwNvramReadBytes);
+  wSize += PushLong(cdwNvramWriteBytes);
+
   wSize += PushInt(cwWrnNvramRead);
   wSize += PushInt(cwErrNvramRead);
   wSize += PushInt(cwWrnNvramWrite);
