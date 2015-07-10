@@ -126,6 +126,29 @@ void    InitNvram(void)
 
 
 
+uchar   PushChar(uchar  b);
+
+bool    PushNvramBuff(ulong  dwAddr, uint  wSize)
+{
+  Start();
+
+  CharOut(0x03); // чтение
+  CharOut(*((uchar*)(&dwAddr)+2));
+  CharOut(*((uchar*)(&dwAddr)+1));
+  CharOut(*((uchar*)(&dwAddr)+0));
+
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+    PushChar(CharIn());
+  }
+
+  Stop();
+
+  return true;
+}
+
+
 bool    ReadNvramBuff_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 {
   Start();
@@ -146,29 +169,6 @@ bool    ReadNvramBuff_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   for (i=0; i<wSize; i++)
   {
    *(pbBuff++) = CharIn();
-  }
-
-  Stop();
-
-  return true;
-}
-
-
-uchar   PushChar(uchar  b);
-
-bool    PushNvramBuff(ulong  dwAddr, uint  wSize)
-{
-  Start();
-
-  CharOut(0x03); // чтение
-  CharOut(*((uchar*)(&dwAddr)+2));
-  CharOut(*((uchar*)(&dwAddr)+1));
-  CharOut(*((uchar*)(&dwAddr)+0));
-
-  uint i;
-  for (i=0; i<wSize; i++)
-  {
-    PushChar(CharIn());
   }
 
   Stop();
