@@ -40,7 +40,7 @@ void    key_SetLimits31(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (boUseBounds == true)
+      if (fUseBounds == true)
       {
         enKeyboard = KBD_INPUT1;
         ShowHi(szLimits);

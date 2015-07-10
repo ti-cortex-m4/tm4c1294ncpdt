@@ -43,8 +43,8 @@ uint                    mpcwEscV_Error[bCANALS],
 // флаги запрета опросов
 bool                    boDsblEscU, boDsblEscV, boDsblEscS;
 
-//
+// флаг обновления значений mpdbEsc_S во время трехминутного опроса
 bool                    boMntEscS;
 
-//
+// флаги
 bool                    boExtendedEscU, boExtendedEscV, boExtendedEscS;

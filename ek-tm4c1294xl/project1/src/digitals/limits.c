@@ -13,7 +13,7 @@ LIMITS.C
 
 
 
-cache const             chUseBounds = {USE_BOUNDS, &boUseBounds, sizeof(bool)};
+cache const             chUseBounds = {USE_BOUNDS, &fUseBounds, sizeof(bool)};
 
 cache const             chStartRelCan = {START_REL_CAN, &mpcwStartRelCan, sizeof(mpcwStartRelCan)};
 cache const             chStartAbs16Can = {START_ABS16_CAN, &mpcwStartAbs16Can, sizeof(mpcwStartAbs16Can)};
@@ -39,7 +39,7 @@ void    InitLimits(void)
 
 void    ResetLimits(void)
 {
-  boUseBounds = true;
+  fUseBounds = true;
   SaveCache(&chUseBounds);
 
   uchar c;
@@ -65,7 +65,7 @@ void    ResetLimits(void)
 
 bool    UseBounds(void)
 {
-  return boUseBounds == true;
+  return fUseBounds == true;
 }
 
 
