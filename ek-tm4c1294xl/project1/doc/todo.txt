@@ -43,3 +43,4 @@ u_hhr u_mnt wSize
 
 1) sem2reader nvram info
 2) ti_alt branch
+3) add nvram/flash bytes r/w count
