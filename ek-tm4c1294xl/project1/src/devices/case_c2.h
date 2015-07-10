@@ -44,7 +44,7 @@
     case DEV_TIME_C2:                      
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltC();                  
+        tiValueC = ReadTimeC();
         MakePause(DEV_POSTTIME_C2);
       }
       else                                    

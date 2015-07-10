@@ -627,7 +627,7 @@ uchar   i;
   tiChannelC = ti2.tiValue;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;     
 
-  return GetTime2(ti2.tiValue, true);
+  return ti2;
 }
 
 #endif
@@ -650,7 +650,7 @@ uchar   i;
   tiChannelC = ti2.tiValue;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
-  return GetTime2(ti2.tiValue, true);
+  return ti2;
 }
 
 #endif

@@ -388,7 +388,7 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
   else ibMinor = 0;
 
 
-  tiAlt = tiDig;
+  time ti = tiDig;
 
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
@@ -397,13 +397,16 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
   if ((wBaseCurr == wBaseLast) && (GetCurrHouIndex() != bCurrHouIndex))
     return(1);                                          // выход: часовой блок не готов
 
-  InitPop(bOffset+ibRecord*8+ibBlock*30);               // читаем количество импульсов по каналам: A+,A-,R+,R-
+
+  InitPop(bOffset+ibRecord*8+ibBlock*30);
 
   uchar c;
-  for (c=0; c<4; c++)        
+  for (c=0; c<4; c++)
+  {
     mpwChannels[c] = (PopChar()*0x100 + PopChar()) & 0x7FFF;
+  }
 
-  MakeSpecial(tiAlt);
+  MakeSpecial(ti);
   return(MakeStopHou(0));  
 }
 

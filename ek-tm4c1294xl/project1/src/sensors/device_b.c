@@ -472,7 +472,8 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 
   ShowProgressDigHou();      
   if (fDelay == 1) DelayOff();
-  
+
+
   uchar c;
   for (c=0; c<4; c++)        
   {
