@@ -21,7 +21,7 @@ NVRAM.H
 
 
 // количество байтов служебной информации для каждой записи
-#define bNVRAM_FOOTER   2
+#define bNVRAM_FOOTER   (uchar)(6+2)
 
 
 #include "nvram_enum.txt"

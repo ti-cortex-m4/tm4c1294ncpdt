@@ -9,6 +9,7 @@
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
 #include "inc/hw_types.h"
+#include "../kernel/crc-16.h"
 #include "../time/delay.h"
 #include "23x1024.h"
 
@@ -52,6 +53,14 @@ static void  CharOut(uchar bI)
   HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
  }
 }//end CharOut
+
+
+static void CharOutCRC(uchar  b)
+{
+  CharOut(b);
+  CalcCRC(b);
+}
+
 
 //Прием одного байта
 //Биты фиксируются микросхемой ЭОЗУ в течении активности импульса (высокий уровень на SCK)
@@ -164,13 +173,25 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   CharOut(*((uchar*)(&dwAddr)+1));
   CharOut(*((uchar*)(&dwAddr)+0));
 
+  InitCRC();
+
   uint i;
   for (i=0; i<wSize; i++)
   {
-    CharOut(*(pbBuff++));
+    CharOutCRC(*(pbBuff++));
   }
 
-  // TODO add address + date + CRC, счетчики, внешние повторы
+  CharOutCRC(tiCurr.bSecond);
+  CharOutCRC(tiCurr.bMinute);
+  CharOutCRC(tiCurr.bHour);
+  CharOutCRC(tiCurr.bDay);
+  CharOutCRC(tiCurr.bMonth);
+  CharOutCRC(tiCurr.bYear);
+
+  CharOut(bCRCHi);
+  CharOut(bCRCLo);
+
+  // TODO add address, счетчики, внешние повторы
 
   Stop();
 
@@ -208,13 +229,25 @@ bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
   CharOut(*((uchar*)(&dwAddr)+1));
   CharOut(*((uchar*)(&dwAddr)+0));
 
+  InitCRC();
+
   uint i;
   for (i=0; i<wSize; i++)
   {
-    CharOut(0);
+    CharOutCRC(0);
   }
 
-  // TODO add address + date + CRC, счетчики, внешние повторы
+  CharOutCRC(tiCurr.bSecond);
+  CharOutCRC(tiCurr.bMinute);
+  CharOutCRC(tiCurr.bHour);
+  CharOutCRC(tiCurr.bDay);
+  CharOutCRC(tiCurr.bMonth);
+  CharOutCRC(tiCurr.bYear);
+
+  CharOut(bCRCHi);
+  CharOut(bCRCLo);
+
+  // TODO add address, счетчики, внешние повторы
 
   Stop();
 
