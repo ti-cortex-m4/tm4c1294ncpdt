@@ -18,6 +18,7 @@ RESPONSE252_CRC,C
 #include "../output/out_health.h"
 #include "../output/out_tariffs.h"
 #include "../output/out_defects.h"
+#include "../output/out_nvram.h"
 
 
 
@@ -41,6 +42,8 @@ void    Response252_CRC(void)
 
     case 8: OutDefectsDay(); break;
     case 9: OutDefectsMon(); break;
+
+    case 10: OutNvram(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
