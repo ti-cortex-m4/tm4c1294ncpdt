@@ -19,4 +19,6 @@ uint                    cwWrnNvramRead,
                         cwWrnNvramWrite,
                         cwErrNvramWrite,
                         cwWrnNvramFree,
-                        cwErrNvramFree;
+                        cwErrNvramFree,
+                        cwWrnNvramCompare,
+                        cwErrNvramCompare;
