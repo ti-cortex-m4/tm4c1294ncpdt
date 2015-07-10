@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_UNI.H
+MEM_UNI,H
 
 
 ------------------------------------------------------------------------------*/
@@ -14,15 +14,15 @@ extern  digital                 mpdiDevicesUni[bCANALS];
 
 extern  uchar                   cbDevicesUni;
 
-extern  uchar                   mpbDelayUni[bPORTS], mpbMaxDelayUni[bPORTS];
+extern  uchar                   mpbDelayUni[bPORTS];
+
+extern  uchar                   bMaxDelayUni;
 
 extern  uchar                   mpbGroupMaskUni[16];
 
 extern  uchar                   mpbDefUni[64];
 
 extern  bool                    boStrictUni;
-
-extern  uchar                   bMaxDelayUni;
 
 extern  bool                    boRepeatFlowUni;
 
