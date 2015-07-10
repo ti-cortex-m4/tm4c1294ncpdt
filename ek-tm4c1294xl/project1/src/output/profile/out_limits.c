@@ -16,7 +16,7 @@ void    OutStartCan(void)
   InitPushPtr();
   uint wSize = 0;
 
-  PushBool(boUseBounds);
+  PushBool(fUseBounds);
   wSize++;
 
   uchar c;

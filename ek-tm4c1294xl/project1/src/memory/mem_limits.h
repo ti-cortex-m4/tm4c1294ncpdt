@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
-MEM_LIMITS.H
+MEM_LIMITS,H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                    boUseBounds;
+extern  bool                    fUseBounds;
 
 extern  uint                    mpcwStartRelCan[bCANALS];
 

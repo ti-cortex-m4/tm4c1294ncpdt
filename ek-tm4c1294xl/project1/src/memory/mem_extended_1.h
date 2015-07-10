@@ -28,9 +28,13 @@ extern  uint                    mpcwEscV_Error[bCANALS],
 
 
 
-extern  bool                    boDsblEscU, boDsblEscV, boDsblEscS;
+extern  bool                    boDsblEscU,
+                                boDsblEscV,
+                                boDsblEscS;
 
 extern  bool                    boMntEscS;
 
-extern  bool                    boExtendedEscU, boExtendedEscV, boExtendedEscS;
+extern  bool                    boExtendedEscU,
+                                boExtendedEscV,
+                                boExtendedEscS;
 
