@@ -275,7 +275,7 @@ bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
   CharOut(bCRCHi);
   CharOut(bCRCLo);
 
-  // TODO add address, счетчики, внешние повторы
+  // TODO счетчики, внешние повторы
 
   Stop();
 
