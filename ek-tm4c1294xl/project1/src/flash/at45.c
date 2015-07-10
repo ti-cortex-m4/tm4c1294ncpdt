@@ -198,7 +198,7 @@ uchar   i;
 
   cwPageErase++;
 
-  for (i=0; i<bMAXREPEAT; i++)
+  for (i=0; i<bFLASH_REPEATS; i++)
   {
     if (PageErase() == 0)
     {
@@ -208,7 +208,7 @@ uchar   i;
     else break;
   }
 
-  if (i == bMAXREPEAT)
+  if (i == bFLASH_REPEATS)
   {
     cwErrPageErase++;
     return false;
@@ -251,7 +251,7 @@ uchar   i;
 
   cwPageRead++;
 
-  for (i=0; i<bMAXREPEAT; i++)
+  for (i=0; i<bFLASH_REPEATS; i++)
   {
     if (PageRead() == 0)
     {
@@ -261,7 +261,7 @@ uchar   i;
     else break;
   }
 
-  if (i == bMAXREPEAT)
+  if (i == bFLASH_REPEATS)
   {
     cwErrPageRead++;
     return false;
@@ -347,7 +347,7 @@ uchar   i;
 
   cwPageWrite++;
 
-  for (i=0; i<bMAXREPEAT; i++)
+  for (i=0; i<bFLASH_REPEATS; i++)
   {
     if (PageWrite() == 0)
     {
@@ -357,7 +357,7 @@ uchar   i;
     else break;
   }
 
-  if (i == bMAXREPEAT)
+  if (i == bFLASH_REPEATS)
   {
     cwErrPageWrite++;
     return false;
