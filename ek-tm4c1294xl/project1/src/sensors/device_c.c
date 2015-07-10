@@ -376,6 +376,7 @@ bool    ReadHeaderC(uchar  i)
   ShowProgressDigHou();      
 
   InitPop(4+i*8);
+
   uchar c;
   for (c=0; c<4; c++)        
   {
@@ -385,8 +386,7 @@ bool    ReadHeaderC(uchar  i)
     mpwChannels[c] = w;
   }
 
-  tiAlt = tiDig;
-  if (IsDefect(ibDig)) MakeSpecial(tiAlt);
+  if (IsDefect(ibDig)) MakeSpecial(tiDig);
   return(MakeStopHou(0));  
 }
 
