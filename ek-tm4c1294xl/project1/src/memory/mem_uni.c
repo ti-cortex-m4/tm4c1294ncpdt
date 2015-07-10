@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_UNI.S
+MEM_UNI,S
 
 
 ------------------------------------------------------------------------------*/
@@ -8,23 +8,26 @@ MEM_UNI.S
 
 
 
-// имя объекта
+// название объекта
 char                    szObjectName[bNAME_SIZE];
 
-// имена каналов
+// названия каналов
 char                    mpszCanalsName[bCANALS][bNAME_SIZE];
 
-// имена групп
+// названия групп
 char                    mpszGroupsName[bGROUPS][bNAME_SIZE];
 
-// устройства
+// массив устройств
 digital                 mpdiDevicesUni[bCANALS];
 
 // количество устройств
 uchar                   cbDevicesUni;
 
-// счетчик доступа к портам
-uchar                   mpbDelayUni[bPORTS], mpbMaxDelayUni[bPORTS];
+// счетчики доступа к портам
+uchar                   mpbDelayUni[bPORTS];
+
+// максимальный счетчик доступа к портам
+uchar                   bMaxDelayUni;
 
 // маска групп
 uchar                   mpbGroupMaskUni[16];
@@ -35,11 +38,8 @@ uchar                   mpbDefUni[64];
 // признак строгого соблюдения протокола
 bool                    boStrictUni;
 
-// максимальный счетчик
-uchar                   bMaxDelayUni;
-
-// флаг
+// признак возобновления счетчика транзита после приема каждого байта
 bool                    boRepeatFlowUni;
 
-// флаг
+// признак необходимости использования пароля
 bool                    boEnblPassUni;

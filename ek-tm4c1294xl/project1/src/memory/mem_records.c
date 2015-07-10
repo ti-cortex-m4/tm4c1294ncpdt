@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MEM_RECORDS.C
+MEM_RECORDS,C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,10 +12,16 @@ MEM_RECORDS.C
 record                  reCurr;
 
 // счётчики записей
-ulong                   cdwKeyRecord, cdwSysRecord, cdwDigRecord, cdwImpRecord, cdwModRecord, cdwPh2Record, cdwAuxRecord;
+ulong                   cdwKeyRecord,
+                        cdwSysRecord,
+                        cdwDigRecord,
+                        cdwImpRecord,
+                        cdwModRecord,
+                        cdwPh2Record,
+                        cdwAuxRecord;
 
-//
+// глобальная переменная - время
 time                    tiRecordSetCurrTime;
 
-//
+// глобальная переменная - канал
 uchar                   ibRecordCan;
