@@ -148,7 +148,7 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
 
   ulong dwBuffC = DateToHouIndex(tiCurr);
   dwBuffC -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
-  tiAlt = HouIndexToDate(dwBuffC);
+  time ti = HouIndexToDate(dwBuffC);
 
 
   ShowProgressDigHou();      
@@ -166,7 +166,7 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
     mpwChannels[c] = w;
   }
 
-  MakeSpecial(tiAlt);
+  MakeSpecial(ti);
   return(MakeStopHou(0));
 }
 

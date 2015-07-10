@@ -467,7 +467,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 
   ulong dwBuffC = DateToHouIndex(tiCurr);
   dwBuffC -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
-  tiAlt = HouIndexToDate(dwBuffC);
+  time ti = HouIndexToDate(dwBuffC);
 
 
   ShowProgressDigHou();      
@@ -484,9 +484,9 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
     mpwChannels[c] = w;
   }
 
-  MakeRefillWinter(tiAlt);
-  MakeSpecial(tiAlt);
-  if (boDsblRefill == false) MakeRefill(tiAlt);
+  MakeRefillWinter(ti);
+  MakeSpecial(ti);
+  if (boDsblRefill == false) MakeRefill(ti);
   return(MakeStopHou(0));  
 }
 
