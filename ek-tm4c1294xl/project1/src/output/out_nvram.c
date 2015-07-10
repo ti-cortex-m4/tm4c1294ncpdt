@@ -24,9 +24,10 @@ void    OutNvram(void)
   else
   {
     InitPushCRC();
+    PushChar(ReadNvramStatus());
 
     if (PushNvramBuff(dwAddr, wSize))
-      Output(wSize);
+      Output(1+wSize);
     else
       Result(bRES_BADFLASH);
   }
