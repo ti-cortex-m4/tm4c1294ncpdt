@@ -67,6 +67,9 @@ void    OutFlashCounters(void)
   wSize += PushLong(cdwPageRead);
   wSize += PushLong(cdwPageWrite);
 
+  wSize += PushLong(cdwFlashReadBytes);
+  wSize += PushLong(cdwFlashWriteBytes);
+
   wSize += PushInt(cwWrnBusy);
   wSize += PushInt(cwWrnCompare);
   wSize += PushInt(cwWrnPageErase);

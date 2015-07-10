@@ -73,7 +73,6 @@ KEYBOARD_KEY.C
 #include "test/key_test_flow.h"
 #include "test/key_test_ports_io.h"
 #include "test/key_test_uni.h"
-#include "test/key_test_flash.h"
 #include "test/key_test_impulses.h"
 #include "test/key_test_keys.h"
 #include "test/key_test_rtc.h"

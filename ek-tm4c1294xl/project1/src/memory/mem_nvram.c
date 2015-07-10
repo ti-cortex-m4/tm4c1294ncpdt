@@ -13,6 +13,10 @@ ulong                   cdwNvramRead,
                         cdwNvramWrite,
                         cdwNvramFree;
 
+// счетчики количества байтов
+ulong                   cdwNvramReadBytes,
+                        cdwNvramWriteBytes;
+
 // счетчики количества ошибок
 uint                    cwWrnNvramRead,
                         cwErrNvramRead,

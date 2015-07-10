@@ -31,3 +31,6 @@ extern  uint                    mpcwFlashControl[wPAGES];
 extern  ulong                   cdwPageErase,
                                 cdwPageRead,
                                 cdwPageWrite;
+
+extern  ulong                   cdwFlashReadBytes,
+                                cdwFlashWriteBytes;
