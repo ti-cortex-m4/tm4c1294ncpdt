@@ -120,7 +120,7 @@ void    InitNvram(void)
 
 
 
-bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
+bool    ReadNvramBuff_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 {
   Start();
 
@@ -171,7 +171,7 @@ bool    PushNvramBuff(ulong  dwAddr, uint  wSize)
 }
 
 
-bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
+bool    WriteNvramBuff_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 {
   Start();
 
@@ -241,7 +241,7 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 }
 
 
-bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
+bool    FreeNvramBuff_Raw(ulong  dwAddr, uint  wSize)
 {
   Start();
 
@@ -318,4 +318,62 @@ uchar   ReadNvramStatus(void)
   Stop();
 
   return b;
+}
+
+
+
+bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
+{
+  cdwReadNvram++;
+
+  uchar i;
+  for (i=0; i<bMAXREPEAT; i++) {
+    if (ReadNvramBuff_Raw(dwAddr, pbBuff, wSize) == true) break;
+    cwWrnReadNvram++;
+  }
+
+  if (i == bMAXREPEAT) {
+    cwErrReadNvram++;
+    return false;
+  } else {
+    return true;
+  }
+}
+
+
+bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
+{
+  cdwWriteNvram++;
+
+  uchar i;
+  for (i=0; i<bMAXREPEAT; i++) {
+    if (WriteNvramBuff_Raw(dwAddr, pbBuff, wSize) == true) break;
+    cwWrnWriteNvram++;
+  }
+
+  if (i == bMAXREPEAT) {
+    cwErrWriteNvram++;
+    return false;
+  } else {
+    return true;
+  }
+}
+
+
+bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
+{
+  cdwFreeNvram++;
+
+  uchar i;
+  for (i=0; i<bMAXREPEAT; i++) {
+    if (FreeNvramBuff_Raw(dwAddr, wSize) == true) break;
+    cwWrnFreeNvram++;
+  }
+
+  if (i == bMAXREPEAT) {
+    cwErrFreeNvram++;
+    return false;
+  } else {
+    return true;
+  }
 }
