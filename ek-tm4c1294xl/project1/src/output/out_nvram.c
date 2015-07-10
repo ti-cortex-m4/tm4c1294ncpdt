@@ -59,3 +59,28 @@ void    OutNvramCounters(void)
 
   Output(wSize);
 }
+
+
+void    ResetNvramCounters(void)
+{
+  InitPushCRC();
+  uint wSize = 0;
+
+  wSize += PushLong(cdwNvramReadBuffs);
+  wSize += PushLong(cdwNvramWriteBuffs);
+  wSize += PushLong(cdwNvramFreeBuffs);
+
+  wSize += PushLong(cdwNvramReadBytes);
+  wSize += PushLong(cdwNvramWriteBytes);
+
+  wSize += PushInt(cwWrnNvramRead);
+  wSize += PushInt(cwErrNvramRead);
+  wSize += PushInt(cwWrnNvramWrite);
+  wSize += PushInt(cwErrNvramWrite);
+  wSize += PushInt(cwWrnNvramFree);
+  wSize += PushInt(cwErrNvramFree);
+  wSize += PushInt(cwWrnNvramCompare);
+  wSize += PushInt(cwErrNvramCompare);
+
+  Output(wSize);
+}
