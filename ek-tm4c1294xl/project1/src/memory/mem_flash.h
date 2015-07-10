@@ -28,6 +28,6 @@ extern  uint                    cwWrnBusy,
 
 extern  uint                    mpcwFlashControl[wPAGES];
 
-extern  uint                    cwPageErase,
-                                cwPageRead,
-                                cwPageWrite;
+extern  ulong                   cdwPageErase,
+                                cdwPageRead,
+                                cdwPageWrite;

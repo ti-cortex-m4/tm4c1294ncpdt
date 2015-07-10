@@ -196,7 +196,7 @@ bool SafePageErase(void)
 {
 uchar   i;
 
-  cwPageErase++;
+  cdwPageErase++;
 
   for (i=0; i<bFLASH_REPEATS; i++)
   {
@@ -249,7 +249,7 @@ bool SafePageRead(void)
 {
 uchar   i;
 
-  cwPageRead++;
+  cdwPageRead++;
 
   for (i=0; i<bFLASH_REPEATS; i++)
   {
@@ -345,7 +345,7 @@ uchar   i;
   mpbPageOut[wPAGE_BYTES-2] = bCRCHi;
   mpbPageOut[wPAGE_BYTES-1] = bCRCLo;
 
-  cwPageWrite++;
+  cdwPageWrite++;
 
   for (i=0; i<bFLASH_REPEATS; i++)
   {

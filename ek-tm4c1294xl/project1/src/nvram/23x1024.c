@@ -211,7 +211,6 @@ bool    WriteNvramBuff_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   CharOut(bCRCHi);
   CharOut(bCRCLo);
 
-  // TODO счетчики, внешние повторы
 
   Stop();
 
@@ -281,7 +280,6 @@ bool    FreeNvramBuff_Raw(ulong  dwAddr, uint  wSize)
   CharOut(bCRCHi);
   CharOut(bCRCLo);
 
-  // TODO счетчики, внешние повторы
 
   Stop();
 
