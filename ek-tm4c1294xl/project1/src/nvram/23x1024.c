@@ -12,6 +12,7 @@
 #include "../memory/mem_nvram.h"
 #include "../kernel/crc-16.h"
 #include "../time/delay.h"
+#include "nvram.h"
 #include "23x1024.h"
 
 
@@ -21,98 +22,10 @@
 
 
 
-//Общий объем памяти
-#define MAX_SIZE_23LC1024 (128 * 1024) //128кб
-//Количество повторов при операциях записи в ЭОЗУ
-#define MAXREPEATS_23LC1024    10
-
-  //Биты управления SPI
-  #define SPI_BIT_SO    0x0001 //PF0
-  #define SPI_BIT_SI    0x0002 //PF1
-  #define SPI_BIT_CS    0x0004 //PF2
-  #define SPI_BIT_SCK   0x0008 //PF3
-
-  //Адреса пинов управления SPI
-  #define GPIO_DATABIT_SO  (GPIO_PORTF_BASE + GPIO_O_DATA + 0x0004)//PF0
-  #define GPIO_DATABIT_SI  (GPIO_PORTF_BASE + GPIO_O_DATA + 0x0008)//PF1
-  #define GPIO_DATABIT_CS  (GPIO_PORTF_BASE + GPIO_O_DATA + 0x0010)//PF2
-  #define GPIO_DATABIT_SCK (GPIO_PORTF_BASE + GPIO_O_DATA + 0x0020)//PF3
-
- #define DELAY_NEW_STAT_PIN 1
-
-static void Delay_1(ulong ulgTime)
+void NvramCharOutCRC(uchar  b)
 {
- while(ulgTime--);
-}
-
-//Передача одного байта
-//Биты читаются микросхемой ЭОЗУ по переднему фронту
-static void  CharOut(uchar bI)
-{
-  cdwNvramWriteBytes++;
-
- uchar i;
- for(i=0; i<8; i++)
- {
-  if(bI & (0x80 >> i )) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
-  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
-  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
-  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
- }
-}
-
-
-static void CharOutCRC(uchar  b)
-{
-  CharOut(b);
+  NvramCharOut(b);
   CalcCRC(b);
-}
-
-
-//Прием одного байта
-//Биты фиксируются микросхемой ЭОЗУ в течении активности импульса (высокий уровень на SCK)
-static uchar  CharIn(void)
-{
-  cdwNvramReadBytes++;
-
- uchar b = 0;
-
- uchar i;
- for(i=0; i<8; i++)
- {
-  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
-  if(HWREG(GPIO_DATABIT_SO)) b |= 0x80 >> i;
-  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
- }
-
- return(b);
-}
-
-
-/*
-//Один синхроимпульс
-static void  OnePulse_1(void)
-{
- HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
- HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
-}//end OnePulse
-*/
-//Подготовка к началу работы по SPI
-static void Start(void)
-{
- HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
- HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
- HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
- HWREG(GPIO_DATABIT_CS)  = ~SPI_BIT_CS;
- Delay_1(DELAY_NEW_STAT_PIN);
-}
-
-//Окончание работы по SPI
-static void Stop(void)
-{
- HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
- Delay_1(DELAY_NEW_STAT_PIN);
- HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
 }
 
 
@@ -127,7 +40,7 @@ void    InitNvram(void)
  HWREG(GPIO_PORTF_BASE + GPIO_O_DIR)   |= 0x000E;//пины на передачу (PF0 на прием)
  HWREG(GPIO_PORTF_BASE + GPIO_O_DEN)   |= 0x000F;//цифровой сигнал
 
- Stop();
+ NvramStop();
 }
 
 
@@ -136,20 +49,20 @@ uchar   PushChar(uchar  b);
 
 bool    PushNvramBuff(ulong  dwAddr, uint  wSize)
 {
-  Start();
+  NvramStart();
 
-  CharOut(0x03); // чтение
-  CharOut(*((uchar*)(&dwAddr)+2));
-  CharOut(*((uchar*)(&dwAddr)+1));
-  CharOut(*((uchar*)(&dwAddr)+0));
+  NvramCharOut(0x03); // чтение
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
 
   uint i;
   for (i=0; i<wSize; i++)
   {
-    PushChar(CharIn());
+    PushChar(NvramCharIn());
   }
 
-  Stop();
+  NvramStop();
 
   return true;
 }
@@ -157,27 +70,27 @@ bool    PushNvramBuff(ulong  dwAddr, uint  wSize)
 
 bool    ReadNvramBuff_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 {
-  Start();
+  NvramStart();
 
-  CharOut(0x03); // чтение
-  CharOut(*((uchar*)(&dwAddr)+2));
-  CharOut(*((uchar*)(&dwAddr)+1));
-  CharOut(*((uchar*)(&dwAddr)+0));
+  NvramCharOut(0x03); // чтение
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
 
-  CharIn();
-  CharIn();
-  CharIn();
+  NvramCharIn();
+  NvramCharIn();
+  NvramCharIn();
 
-  CharIn();
-  CharIn();
+  NvramCharIn();
+  NvramCharIn();
 
   uint i;
   for (i=0; i<wSize; i++)
   {
-   *(pbBuff++) = CharIn();
+   *(pbBuff++) = NvramCharIn();
   }
 
-  Stop();
+  NvramStop();
 
   return true;
 }
@@ -185,68 +98,68 @@ bool    ReadNvramBuff_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 
 bool    WriteNvramBuff_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 {
-  Start();
+  NvramStart();
 
-  CharOut(0x02); // запись
-  CharOut(*((uchar*)(&dwAddr)+2));
-  CharOut(*((uchar*)(&dwAddr)+1));
-  CharOut(*((uchar*)(&dwAddr)+0));
+  NvramCharOut(0x02); // запись
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
 
   InitCRC();
 
-  CharOutCRC(*((uchar*)(&dwAddr)+2));
-  CharOutCRC(*((uchar*)(&dwAddr)+1));
-  CharOutCRC(*((uchar*)(&dwAddr)+0));
+  NvramCharOutCRC(*((uchar*)(&dwAddr)+2));
+  NvramCharOutCRC(*((uchar*)(&dwAddr)+1));
+  NvramCharOutCRC(*((uchar*)(&dwAddr)+0));
 
-  CharOutCRC(wSize / 0x100);
-  CharOutCRC(wSize % 0x100);
+  NvramCharOutCRC(wSize / 0x100);
+  NvramCharOutCRC(wSize % 0x100);
 
   uint i;
   for (i=0; i<wSize; i++)
   {
-    CharOutCRC(*(pbBuff++));
+    NvramCharOutCRC(*(pbBuff++));
   }
 
-  CharOutCRC(tiCurr.bSecond);
-  CharOutCRC(tiCurr.bMinute);
-  CharOutCRC(tiCurr.bHour);
-  CharOutCRC(tiCurr.bDay);
-  CharOutCRC(tiCurr.bMonth);
-  CharOutCRC(tiCurr.bYear);
+  NvramCharOutCRC(tiCurr.bSecond);
+  NvramCharOutCRC(tiCurr.bMinute);
+  NvramCharOutCRC(tiCurr.bHour);
+  NvramCharOutCRC(tiCurr.bDay);
+  NvramCharOutCRC(tiCurr.bMonth);
+  NvramCharOutCRC(tiCurr.bYear);
 
-  CharOut(bCRCHi);
-  CharOut(bCRCLo);
+  NvramCharOut(bCRCHi);
+  NvramCharOut(bCRCLo);
 
 
-  Stop();
+  NvramStop();
 
   pbBuff -= wSize;
 
-  Start();
+  NvramStart();
 
-  CharOut(0x03); // чтение
-  CharOut(*((uchar*)(&dwAddr)+2));
-  CharOut(*((uchar*)(&dwAddr)+1));
-  CharOut(*((uchar*)(&dwAddr)+0));
+  NvramCharOut(0x03); // чтение
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
 
-  CharIn();
-  CharIn();
-  CharIn();
+  NvramCharIn();
+  NvramCharIn();
+  NvramCharIn();
 
-  CharIn();
-  CharIn();
+  NvramCharIn();
+  NvramCharIn();
 
   bool f = true;
   for (i=0; i<wSize; i++)
   {
-    if (*(pbBuff++) != CharIn())
+    if (*(pbBuff++) != NvramCharIn())
     {
       f = false;
       break;
     }
   }
 
-  Stop();
+  NvramStop();
 
   return f;
 }
@@ -254,66 +167,66 @@ bool    WriteNvramBuff_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
 
 bool    FreeNvramBuff_Raw(ulong  dwAddr, uint  wSize)
 {
-  Start();
+  NvramStart();
 
-  CharOut(0x02); // запись
-  CharOut(*((uchar*)(&dwAddr)+2));
-  CharOut(*((uchar*)(&dwAddr)+1));
-  CharOut(*((uchar*)(&dwAddr)+0));
+  NvramCharOut(0x02); // запись
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
 
   InitCRC();
 
-  CharOutCRC(*((uchar*)(&dwAddr)+2));
-  CharOutCRC(*((uchar*)(&dwAddr)+1));
-  CharOutCRC(*((uchar*)(&dwAddr)+0));
+  NvramCharOutCRC(*((uchar*)(&dwAddr)+2));
+  NvramCharOutCRC(*((uchar*)(&dwAddr)+1));
+  NvramCharOutCRC(*((uchar*)(&dwAddr)+0));
 
-  CharOutCRC(wSize / 0x100);
-  CharOutCRC(wSize % 0x100);
+  NvramCharOutCRC(wSize / 0x100);
+  NvramCharOutCRC(wSize % 0x100);
 
   uint i;
   for (i=0; i<wSize; i++)
   {
-    CharOutCRC(0);
+    NvramCharOutCRC(0);
   }
 
-  CharOutCRC(tiCurr.bSecond);
-  CharOutCRC(tiCurr.bMinute);
-  CharOutCRC(tiCurr.bHour);
-  CharOutCRC(tiCurr.bDay);
-  CharOutCRC(tiCurr.bMonth);
-  CharOutCRC(tiCurr.bYear);
+  NvramCharOutCRC(tiCurr.bSecond);
+  NvramCharOutCRC(tiCurr.bMinute);
+  NvramCharOutCRC(tiCurr.bHour);
+  NvramCharOutCRC(tiCurr.bDay);
+  NvramCharOutCRC(tiCurr.bMonth);
+  NvramCharOutCRC(tiCurr.bYear);
 
-  CharOut(bCRCHi);
-  CharOut(bCRCLo);
+  NvramCharOut(bCRCHi);
+  NvramCharOut(bCRCLo);
 
 
-  Stop();
+  NvramStop();
 
-  Start();
+  NvramStart();
 
-  CharOut(0x03); // чтение
-  CharOut(*((uchar*)(&dwAddr)+2));
-  CharOut(*((uchar*)(&dwAddr)+1));
-  CharOut(*((uchar*)(&dwAddr)+0));
+  NvramCharOut(0x03); // чтение
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
 
-  CharIn();
-  CharIn();
-  CharIn();
+  NvramCharIn();
+  NvramCharIn();
+  NvramCharIn();
 
-  CharIn();
-  CharIn();
+  NvramCharIn();
+  NvramCharIn();
 
   bool f = true;
   for (i=0; i<wSize; i++)
   {
-    if (0 != CharIn())
+    if (0 != NvramCharIn())
     {
       f = false;
       break;
     }
   }
 
-  Stop();
+  NvramStop();
 
   return f;
 }
@@ -322,10 +235,10 @@ bool    FreeNvramBuff_Raw(ulong  dwAddr, uint  wSize)
 
 uchar   ReadNvramStatus(void)
 {
-  Start();
-  CharOut(0x05);
-  uchar b = CharIn();
-  Stop();
+  NvramStart();
+  NvramCharOut(0x05);
+  uchar b = NvramCharIn();
+  NvramStop();
 
   return b;
 }
