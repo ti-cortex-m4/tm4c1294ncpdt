@@ -14,7 +14,7 @@ AUTOMATIC_C.C
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_messages.h"
-#include "../engine.h"
+
 #include "automatic1.h"
 #include "device_c.h"
 
