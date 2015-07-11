@@ -16,3 +16,6 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize);
 bool    FreeNvramBuff(ulong  dwAddr, uint  wSize);
 
 uchar   ReadNvramStatus(void);
+
+bool    TestWriteNvramBuff(ulong  dwAddr, uint  wSize);
+bool    TestReadNvramBuff(ulong  dwAddr, uint  wSize);
