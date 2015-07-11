@@ -32,8 +32,8 @@ void    key_ResetWDT(void)
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      Waiting();
-      LongBeep();
+//      Waiting();
+//      LongBeep();
       Clear();
 
       while (1)
