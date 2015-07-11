@@ -303,7 +303,7 @@ bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
 
 
 
-bool    TestWriteNvramBuff(ulong  dwAddr, uint  wSize)
+bool    Test1WriteNvramBuff(ulong  dwAddr, uint  wSize)
 {
   NvramStart();
 
@@ -324,7 +324,7 @@ bool    TestWriteNvramBuff(ulong  dwAddr, uint  wSize)
 }
 
 
-bool    TestReadNvramBuff(ulong  dwAddr, uint  wSize)
+bool    Test1ReadNvramBuff(ulong  dwAddr, uint  wSize)
 {
   NvramStart();
 
@@ -339,6 +339,55 @@ bool    TestReadNvramBuff(ulong  dwAddr, uint  wSize)
   for (i=0; i<wSize; i++)
   {
     if ((wSize % 0x100) != NvramCharIn())
+    {
+      f = false;
+      break;
+    }
+  }
+
+  NvramStop();
+
+  return f;
+}
+
+
+
+bool    Test2WriteNvramBuff(ulong  dwAddr, uint  wSize, uchar  b)
+{
+  NvramStart();
+
+  NvramCharOut(0x02); // запись
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
+
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+    NvramCharOutCRC(b);
+  }
+
+  NvramStop();
+
+  return true;
+}
+
+
+bool    Test2ReadNvramBuff(ulong  dwAddr, uint  wSize, uchar  b)
+{
+  NvramStart();
+
+  NvramCharOut(0x03); // чтение
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
+
+  bool f = true;
+
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+    if (b != NvramCharIn())
     {
       f = false;
       break;

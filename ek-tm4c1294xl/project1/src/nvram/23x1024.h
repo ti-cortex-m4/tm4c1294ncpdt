@@ -17,5 +17,7 @@ bool    FreeNvramBuff(ulong  dwAddr, uint  wSize);
 
 uchar   ReadNvramStatus(void);
 
-bool    TestWriteNvramBuff(ulong  dwAddr, uint  wSize);
-bool    TestReadNvramBuff(ulong  dwAddr, uint  wSize);
+bool    Test1WriteNvramBuff(ulong  dwAddr, uint  wSize);
+bool    Test1ReadNvramBuff(ulong  dwAddr, uint  wSize);
+bool    Test2WriteNvramBuff(ulong  dwAddr, uint  wSize, uchar  b);
+bool    Test2ReadNvramBuff(ulong  dwAddr, uint  wSize, uchar  b);
