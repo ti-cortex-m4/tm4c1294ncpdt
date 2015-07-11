@@ -67,8 +67,8 @@ void    key_SetReset(void)
       switch (wProgram)
       {
         case bSET_RESETCUSTOM:
-          Waiting();
-          LongBeep();
+//          Waiting();
+//          LongBeep();
           Clear();
 
           BreakLabelGlobal();
@@ -101,8 +101,8 @@ void    key_SetReset(void)
           break;
 
         case bSET_RESETFULL:  
-          Waiting();
-          LongBeep();
+//          Waiting();
+//          LongBeep();
           Clear();
 
           BreakLabelGlobal();
