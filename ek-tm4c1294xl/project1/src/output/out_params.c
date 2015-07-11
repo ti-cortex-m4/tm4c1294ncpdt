@@ -18,7 +18,7 @@ OUT_PARAMS.C
 #include "../digitals/params/params2.h"
 #include "../digitals/params/params_storage.h"
 #include "../digitals/params/params_div.h"
-#include "../engine.h"
+
 #include "../console.h"
 
 
@@ -134,24 +134,25 @@ void    OutGetParamCurr(void)
     {
       sprintf(szHi+13,"%03u",(uint)10*bInBuff5+i+1);
 
+      float fl = 0;
       if (f == 1)
       {
         if (mpboEnblParams[(uint)10*bInBuff5+i] != true)
-          reBuffA = 0;
+          fl = 0;
         else
         {
           uchar p = ibPort;
           float2 fl2 = ReadParam((uint)10*bInBuff5+i);
 
           f = fl2.fValid;
-          reBuffA = fl2.flValue;
+          fl = fl2.flValue;
 
           ibPort = p;
         }
       }
 
       if (f == 1)
-        PushFloat(reBuffA);
+        PushFloat(fl);
       else
       {
         PushChar(0xFF);
@@ -259,6 +260,7 @@ void    OutGetParamsAll(void)
     {
       sprintf(szHi+14,"%2u",i+1);
 
+      float fl = 0;
       if (f == 1)
       {
         digital di;
@@ -281,7 +283,7 @@ void    OutGetParamsAll(void)
         }
 
         if (mpboEnblParams[wPARAMS-1] != true)
-          reBuffA = 0;
+          fl = 0;
         else
         {
           ibDig = bInBuff5;
@@ -290,14 +292,14 @@ void    OutGetParamsAll(void)
           float2 fl2 = ReadParam(wPARAMS-1);
 
           f = fl2.fValid;
-          reBuffA = fl2.flValue;
+          fl = fl2.flValue;
 
           ibPort = p;
         }
       }
 
       if (f == 1)
-        PushFloat(reBuffA);
+        PushFloat(fl);
       else
       {
         PushChar(0xFF);

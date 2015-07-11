@@ -20,7 +20,7 @@ AUTOMATIC2.C
 #include "../digitals/digitals.h"
 #include "../sensors/automatic2.h"
 #include "../time/delay.h"
-#include "../engine.h"
+
 #include "../energy.h"
 #include "../energy2.h"
 #include "automatic1.h"

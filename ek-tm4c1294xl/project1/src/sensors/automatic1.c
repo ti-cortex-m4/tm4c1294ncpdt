@@ -13,7 +13,7 @@ AUTOMATIC1.C
 #include "../serial/ports_devices.h"
 #include "../serial/ports_common.h"
 #include "../devices/devices.h"
-#include "../engine.h"
+
 #include "../energy.h"
 #include "device_a.h"
 #include "device_b.h"
@@ -80,17 +80,15 @@ uchar   i;
 
   switch (InBuff(2) & 0x0F)             // K преобразования
   {
-    case 0:  reBuffA = 10000;  break;
-    case 1:  reBuffA = 50000;  break;
-    case 2:  reBuffA =  2500;  break;
-    case 3:  reBuffA =  1000;  break;   // 12500
-    case 4:  reBuffA =  2000;  break;   // ?
-    case 5:  reBuffA =   500;  break;   // ?
+    case 0:  dbKpulse = 10000;  break;
+    case 1:  dbKpulse = 50000;  break;
+    case 2:  dbKpulse =  2500;  break;
+    case 3:  dbKpulse =  1000;  break;   // 12500
+    case 4:  dbKpulse =  2000;  break;   // ?
+    case 5:  dbKpulse =   500;  break;   // ?
 
     default: return(0);  
   }
-
-  dbKpulse = reBuffA;
 
   return(1);
 }
@@ -163,17 +161,15 @@ uchar   i;
 
   switch (InBuff(3) & 0x0F)             // K преобразования
   {
-    case 1:  reBuffA = 10000;  break;
-    case 2:  reBuffA =  2000;  break;
-    case 3:  reBuffA =  1000;  break;
-    case 4:  reBuffA =  2000;  break;
+    case 1:  dbKpulse = 10000;  break;
+    case 2:  dbKpulse =  2000;  break;
+    case 3:  dbKpulse =  1000;  break;
+    case 4:  dbKpulse =  2000;  break;
 
     default: return(0);  
   }
 
-  dbKpulse = reBuffA;
-
-  mpdbLevel[ibDig] = reBuffA / 1000;
+  mpdbLevel[ibDig] = dbKpulse / 1000;
 
   return(1);
 }
@@ -209,8 +205,7 @@ uchar   i;
   dbKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
 
   // K преобразования
-  reBuffA = 2000;
-  dbKpulse = reBuffA;
+  dbKpulse = 2000;
 
   return(1);
 }
@@ -302,9 +297,8 @@ uchar   i;
   ShowPercent(60);
 
 
-  reBuffA = InBuff(8) + InBuff(9)*0x100;
-  reBuffA = 1000000/reBuffA;            // K преобразования
-  dbKpulse = reBuffA;
+  dbKpulse = InBuff(8) + InBuff(9)*0x100;
+  dbKpulse = 1000000/dbKpulse;      // K преобразования
 
   return(1);
 }
@@ -438,12 +432,11 @@ uchar   i;
 // сохранение К преобразования и К трасформации
 void    SetCanalsAll(void)
 {
-  mpdbPulseHou[ibDig] = reBuffA;
-  mpdbPulseMnt[ibDig] = reBuffA;
-  reBuffA = dbKtrans;
+  mpdbPulseHou[ibDig] = dbKpulse;
+  mpdbPulseMnt[ibDig] = dbKpulse;
 
-  mpdbTransEng[ibDig] = reBuffA;
-  mpdbTransCnt[ibDig] = reBuffA;
+  mpdbTransEng[ibDig] = dbKtrans;
+  mpdbTransCnt[ibDig] = dbKtrans;
 }
 
 #endif
@@ -505,7 +498,7 @@ bool    AutomaticB(void)
 bool    AutomaticJ(void)
 {
   if (ReadKoeffDeviceB_Special() == 0) return(0);
-  mpdbLevel[ibDig] = reBuffA / 1000;
+  mpdbLevel[ibDig] = dbKpulse / 1000;
 
 
   SetCanalsAll();                        // сохранение К преобразования и К трасформации

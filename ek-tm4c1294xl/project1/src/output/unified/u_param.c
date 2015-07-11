@@ -19,7 +19,7 @@ U_PARAM.C
 #include "../../digitals/params/params.h"
 #include "../../digitals/params/params2.h"
 #include "../../digitals/params/params_storage.h"
-#include "../../engine.h"
+
 #include "response_uni.h"
 #include "u_config.h"
 #include "uni_float.h"
@@ -85,13 +85,13 @@ uint    i;
 
 
 
-void    FixParamsUni(digital  diT)
+float   FixParamsUni(digital  diT, float  fl)
 {
   if ((diT.ibLine == PAR_P) || (diT.ibLine == PAR_P1) || (diT.ibLine == PAR_P2) || (diT.ibLine == PAR_P3))
   {
     if ((diT.bDevice == 3) && (boFixParamsBugs == false))
     {
-      reBuffA *= 1000;
+    	fl *= 1000;
     }
   }
 
@@ -99,7 +99,7 @@ void    FixParamsUni(digital  diT)
   {
     if ((diT.bDevice == 3) && (boFixParamsBugs == false))
     {
-      reBuffA *= 1000;
+    	fl *= 1000;
     }
   }
 
@@ -113,9 +113,11 @@ void    FixParamsUni(digital  diT)
     }
     else
     {    
-      reBuffA /= 1000;
+    	fl /= 1000;
     }
   }
+
+  return fl;
 }
 
 
@@ -134,11 +136,12 @@ uint    j;
     {
       wSize += sizeof(real);
 
+      float fl = 0;
+
       i = GetParamLineUni(p);
       if (i == 0xFF)
       {
-        reBuffA = 0; 
-        PushFloatUni(ST4_NOTSUPPORTED, reBuffA);
+        PushFloatUni(ST4_NOTSUPPORTED, 0);
       }
       else
       {
@@ -148,22 +151,18 @@ uint    j;
         j = GetParamIndexUni(diT);
         if (j == 0xFFFF)
         {
-          reBuffA = 0; 
-          PushFloatUni(ST4_NOTPRESENTED, reBuffA);
+          PushFloatUni(ST4_NOTPRESENTED, 0);
         }
         else
         {
-          reBuffA = mpreParamsBuff[ PrevSoftTim() ][ j ];
-
-          if (ValidFloat(reBuffA))
+          fl = mpreParamsBuff[ PrevSoftTim() ][ j ];
+          if (ValidFloat(fl))
           {
-            FixParamsUni(diT);
-
-            PushFloatUni(ST4_OK, reBuffA);
+            PushFloatUni(ST4_OK, FixParamsUni(diT, fl));
           }
           else
           {
-            PushFloatUni(ST4_BADDIGITAL, reBuffA);
+            PushFloatUni(ST4_BADDIGITAL, fl);
           }
         }
       }

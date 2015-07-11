@@ -14,7 +14,7 @@ EXTENDED_6_SHOW.C
 #include "../../time/timedate.h"
 #include "../../time/timedate_display.h"
 #include "../../console.h"
-#include "../../engine.h"
+
 #include "../../energy2.h"
 #include "extended_6.h"
 #include "extended_6_show.h"

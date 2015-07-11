@@ -7,7 +7,6 @@ GROUPS.C
 #include "main.h"
 #include "memory/mem_groups.h"
 #include "memory/mem_program.h"
-#include "engine.h"
 #include "flash/files.h"
 #include "nvram/cache.h"
 #include "settings.h"

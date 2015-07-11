@@ -5,7 +5,6 @@ ENERGY.C
 ------------------------------------------------------------------------------*/
 
 #include "main.h"
-#include "engine.h"
 #include "memory/mem_factors.h"
 #include "memory/mem_energy.h"
 #include "memory/mem_energy_spec.h"

@@ -14,7 +14,7 @@ AUTOMATIC_B.C
 #include "../time/timedate.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_messages.h"
-#include "../engine.h"
+
 #include "automatic1.h"
 #include "device_b.h"
 

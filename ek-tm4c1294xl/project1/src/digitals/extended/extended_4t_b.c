@@ -10,7 +10,7 @@ EXTENDED_4T_B,C
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
 #include "../../sensors/device_b.h"
-#include "../../engine.h"
+
 #include "../../sensors/automatic1.h"
 #include "extended_4t_b.h"
 
