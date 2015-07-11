@@ -43,7 +43,7 @@
     case DEV_TIME_A2:                      
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltA();                  
+        tiValueA = ReadTimeA();
         MakePause(DEV_POSTTIME_A2);
       }
       else                                    
@@ -63,11 +63,11 @@
 
     case DEV_POSTTIME_A2:
     {
-      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);                    // количество дней с начала года ведомого счётчика
-      ulong dwSecond1 = GetSecondIndex(tiAlt);                                 // количество секунд ведомого счётчика
+      uint iwDay1 = GetDayIndexMD(tiValueA.bMonth, tiValueA.bDay);              // количество дней с начала года ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(tiValueA);                               // количество секунд ведомого счётчика
 
       uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
-      ulong dwSecond2 = GetSecondIndex(tiCurr);                                // количество секунд сумматора
+      ulong dwSecond2 = GetSecondIndex(tiCurr);                                 // количество секунд сумматора
 
       if (iwDay1 != iwDay2)
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна

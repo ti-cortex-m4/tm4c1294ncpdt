@@ -43,8 +43,7 @@
     case DEV_TIME_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltB();
-        ReadTimeDigB();
+        tiValueB = ReadTimeB();
         MakePause(DEV_POSTTIME_B2);
       }
       else
@@ -64,11 +63,11 @@
 
     case DEV_POSTTIME_B2:
     {
-      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);                    // количество дней с начала года ведомого счётчика
-      ulong dwSecond1 = GetSecondIndex(tiAlt);                                 // количество секунд ведомого счётчика
+      uint iwDay1 = GetDayIndexMD(tiValueB.bMonth, tiValueB.bDay);              // количество дней с начала года ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(tiValueB);                               // количество секунд ведомого счётчика
 
       uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
-      ulong dwSecond2 = GetSecondIndex(tiCurr);                                // количество секунд сумматора
+      ulong dwSecond2 = GetSecondIndex(tiCurr);                                 // количество секунд сумматора
 
       if (iwDay1 != iwDay2)
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
@@ -105,7 +104,7 @@
               cbCorrects++;
               MakePause(DEV_POSTOPENCANAL_B2);
             }
-            else if (GetCurrHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))
+            else if (GetCurrHouIndex() == (tiValueB.bHour*2 + tiValueB.bMinute/30))
             { ShowLo(szCorrectNext); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
             else
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
