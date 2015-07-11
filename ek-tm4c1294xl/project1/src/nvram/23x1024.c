@@ -300,3 +300,52 @@ bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
     return true;
   }
 }
+
+
+
+bool    TestWriteNvramBuff(ulong  dwAddr, uint  wSize)
+{
+  NvramStart();
+
+  NvramCharOut(0x02); // запись
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
+
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+    NvramCharOutCRC(wSize % 0x100);
+  }
+
+  NvramStop();
+
+  return true;
+}
+
+
+bool    TestReadNvramBuff(ulong  dwAddr, uint  wSize)
+{
+  NvramStart();
+
+  NvramCharOut(0x03); // чтение
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
+
+  bool f = true;
+
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+    if ((wSize % 0x100) != NvramCharIn())
+    {
+      f = false;
+      break;
+    }
+  }
+
+  NvramStop();
+
+  return f;
+}

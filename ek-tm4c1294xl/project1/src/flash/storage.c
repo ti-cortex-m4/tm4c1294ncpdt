@@ -11,9 +11,11 @@ STORAGE.C
 #include "../memory/mem_energy.h"
 #include "../hardware/watchdog.h"
 #include "../flash/at45.h"
+#include "../nvram/23x1024.h"
 #include "../energy2.h"
 #include "../kernel/array_mnt.h"
 #include "../kernel/arrays_buff.h"
+#include "../display/lcd.h"
 #include "../display/display.h"
 #include "../time/delay.h"
 #include "../time/calendar.h"
@@ -86,11 +88,14 @@ bool ResetFlash(void)
 uint    i;
 
   ShowHi(szMemoryTest1);
-  for (i=0; i<=100; i++)
+  for (i=0; i<=120; i++)
   {
     ResetWDT();
+
+    if (TestWriteNvramBuff(i*1000, 1000) == false) TestError(szBadNVRAM);
+    if (TestReadNvramBuff(i*1000, 1000) == false) TestError(szBadNVRAM);
+
     ShowPercent(i);
-    Delay(20);
   }
 
 
