@@ -71,6 +71,14 @@ void    key_SetReset(void)
 //          LongBeep();
           Clear();
 
+          if (ResetFlash() == false)
+          {
+            ShowHi(szAlarm);
+            ShowLo(szBadFlash);
+            LongBeep();
+            DelayMsg();
+          }
+
           BreakLabelGlobal();
           ResetRecords();
           ResetSettings(false);
@@ -89,6 +97,14 @@ void    key_SetReset(void)
 //          ResetCurrent2();
 //          ResetCheckupCustom();
 
+          Restart();
+          break;
+
+        case bSET_RESETFULL:
+//          Waiting();
+//          LongBeep();
+          Clear();
+
           if (ResetFlash() == false)
           {
             ShowHi(szAlarm);
@@ -96,14 +112,6 @@ void    key_SetReset(void)
             LongBeep();
             DelayMsg();
           }
-
-          Restart();
-          break;
-
-        case bSET_RESETFULL:  
-//          Waiting();
-//          LongBeep();
-          Clear();
 
           BreakLabelGlobal();
           ResetRecords();
@@ -144,14 +152,6 @@ void    key_SetReset(void)
 //          ResetCheckupFull();
 //
 //          ResetLimits();
-
-          if (ResetFlash() == false)
-          {
-            ShowHi(szAlarm);
-            ShowLo(szBadFlash);
-            LongBeep();
-            DelayMsg();
-          }
 
           Restart();
           break;

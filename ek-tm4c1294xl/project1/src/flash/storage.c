@@ -226,7 +226,7 @@ uint    i;
     ShowFlashRead();
   }
 
-  DelayMsg(); 
+//  DelayMsg();
 
   return true;
 }
