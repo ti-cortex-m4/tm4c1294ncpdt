@@ -29,8 +29,7 @@ void    QueryControlB(void);
 //void    QueryManageB(void);
 
 void    QueryTimeB(void);
-void    ReadTimeAltB(void);
-void    ReadTimeDigB(void);
+time    ReadTimeB(void);
 
 void    QueryTopB(void);
 void    ReadTopBOld(void);

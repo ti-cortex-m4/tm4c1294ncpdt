@@ -11,6 +11,7 @@ AUTOMATIC_A.C
 #include "../time/delay.h"
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
+#include "../time/timedate.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_messages.h"
 #include "device_a.h"
@@ -39,24 +40,22 @@ uchar   i;
 }
 
 
-bool    QueryTimeAltA_Full(uchar  bPercent)
+time2   QueryTimeA_Full(uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
     QueryTimeA();
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == true) return(0);
+    if (fKey == true) return GetTime2(tiZero, false);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
   ShowPercent(bPercent);
 
-  ReadTimeAltA();
-  return(1);
+  return GetTime2(ReadTimeA(), true);
 }
 
 

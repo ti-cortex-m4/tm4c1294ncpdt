@@ -262,36 +262,23 @@ void    QueryTimeB(void)
 
 
 // чтение времени/даты
-void    ReadTimeAltB(void)
+time    ReadTimeB(void)
 {
+time  ti;
+
   InitPop(1);
 
-  tiAlt.bSecond = FromBCD( PopChar() );
-  tiAlt.bMinute = FromBCD( PopChar() );
-  tiAlt.bHour   = FromBCD( PopChar() );
+  ti.bSecond = FromBCD( PopChar() );
+  ti.bMinute = FromBCD( PopChar() );
+  ti.bHour   = FromBCD( PopChar() );
 
   PopChar();
 
-  tiAlt.bDay    = FromBCD( PopChar() );
-  tiAlt.bMonth  = FromBCD( PopChar() );
-  tiAlt.bYear   = FromBCD( PopChar() );
-}
+  ti.bDay    = FromBCD( PopChar() );
+  ti.bMonth  = FromBCD( PopChar() );
+  ti.bYear   = FromBCD( PopChar() );
 
-
-// чтение времени/даты
-void    ReadTimeDigB(void)
-{
-  InitPop(1);
-
-  tiDig.bSecond = FromBCD( PopChar() );
-  tiDig.bMinute = FromBCD( PopChar() );
-  tiDig.bHour   = FromBCD( PopChar() );
-
-  PopChar();
-
-  tiDig.bDay    = FromBCD( PopChar() );
-  tiDig.bMonth  = FromBCD( PopChar() );
-  tiDig.bYear   = FromBCD( PopChar() );
+  return ti;
 }
 
 
@@ -478,14 +465,15 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 
   iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;                // время записи должно соответсвовать началу получасового блока
 
-  ulong dwBuffC = DateToHouIndex(tiCurr);
-  dwBuffC -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
-  tiAlt = HouIndexToDate(dwBuffC);
+  ulong dw = DateToHouIndex(tiCurr);
+  dw -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
+  time ti = HouIndexToDate(dw);
 
 
   ShowProgressDigHou();      
   if (fDelay == 1) DelayOff();
-  
+
+
   uchar c;
   for (c=0; c<4; c++)        
   {
@@ -496,9 +484,9 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
     mpwChannels[c] = w;
   }
 
-  MakeRefillWinter(tiAlt);
-  MakeSpecial(tiAlt);
-  if (boDsblRefill == false) MakeRefill(tiAlt);
+  MakeRefillWinter(ti);
+  MakeSpecial(ti);
+  if (boDsblRefill == false) MakeRefill(ti);
   return(MakeStopHou(0));  
 }
 

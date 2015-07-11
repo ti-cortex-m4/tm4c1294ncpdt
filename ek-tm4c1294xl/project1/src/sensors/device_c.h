@@ -11,7 +11,7 @@ void    QueryIdC(void);
 bool    ReadIdC(void);
 
 void    QueryTimeC(void);
-void    ReadTimeAltC(void);
+time    ReadTimeC(void);
 
 void    QueryControlC(void);
 

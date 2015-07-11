@@ -51,8 +51,7 @@
       break;
 
     case DEV_POSTTIME_C3:
-      ReadTimeAltC(); 
-      tiOffs = tiAlt;          
+      tiOffs = ReadTimeC();
 
       cbRepeat = GetMaxRepeats();
       QueryEnergyAbsC();

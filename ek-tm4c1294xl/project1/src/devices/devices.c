@@ -30,10 +30,6 @@ DEVICES.C
 #include "../digitals/params/params2.h"
 #include "../digitals/max_repeats.h"
 #include "../digitals/correct_limit.h"
-#include "../digitals/extended/extended_1.h"
-#include "../digitals/extended/extended_4.h"
-#include "../digitals/extended/extended_4t.h"
-#include "../digitals/extended/extended_5.h"
 #include "../special/recalc_def.h"
 #include "../special/defects.h"
 #include "../sensors/device_a.h"
@@ -48,6 +44,10 @@ DEVICES.C
 #include "../digitals/answer.h"
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
+#include "../digitals/extended/extended_1.h"
+#include "../digitals/extended/extended_4.h"
+#include "../digitals/extended/extended_4t.h"
+#include "../digitals/extended/extended_5.h"
 #include "../flash/files.h"
 #include "../flash/records.h"
 #include "../time/timedate.h"
@@ -657,7 +657,7 @@ void    RunDevices(void)
     case DEV_TIME_A2:                      
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltA();                  
+        tiValueA = ReadTimeA();
         MakePause(DEV_POSTTIME_A2);
       }
       else                                    
@@ -677,11 +677,11 @@ void    RunDevices(void)
 
     case DEV_POSTTIME_A2:
     {
-      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);                    // количество дней с начала года ведомого счётчика
-      ulong dwSecond1 = GetSecondIndex(tiAlt);                                 // количество секунд ведомого счётчика
+      uint iwDay1 = GetDayIndexMD(tiValueA.bMonth, tiValueA.bDay);              // количество дней с начала года ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(tiValueA);                               // количество секунд ведомого счётчика
 
       uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
-      ulong dwSecond2 = GetSecondIndex(tiCurr);                                // количество секунд сумматора
+      ulong dwSecond2 = GetSecondIndex(tiCurr);                                 // количество секунд сумматора
 
       if (iwDay1 != iwDay2)
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
@@ -1128,8 +1128,7 @@ void    RunDevices(void)
     case DEV_TIME_B2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltB();
-        ReadTimeDigB();
+        tiValueB = ReadTimeB();
         MakePause(DEV_POSTTIME_B2);
       }
       else
@@ -1149,11 +1148,11 @@ void    RunDevices(void)
 
     case DEV_POSTTIME_B2:
     {
-      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);                    // количество дней с начала года ведомого счётчика
-      ulong dwSecond1 = GetSecondIndex(tiAlt);                                 // количество секунд ведомого счётчика
+      uint iwDay1 = GetDayIndexMD(tiValueB.bMonth, tiValueB.bDay);              // количество дней с начала года ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(tiValueB);                               // количество секунд ведомого счётчика
 
       uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
-      ulong dwSecond2 = GetSecondIndex(tiCurr);                                // количество секунд сумматора
+      ulong dwSecond2 = GetSecondIndex(tiCurr);                                 // количество секунд сумматора
 
       if (iwDay1 != iwDay2)
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
@@ -1190,7 +1189,7 @@ void    RunDevices(void)
               cbCorrects++;
               MakePause(DEV_POSTOPENCANAL_B2);
             }
-            else if (GetCurrHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))
+            else if (GetCurrHouIndex() == (tiValueB.bHour*2 + tiValueB.bMinute/30))
             { ShowLo(szCorrectNext); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
             else
             { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
@@ -1517,7 +1516,7 @@ void    RunDevices(void)
     case DEV_START_B3:
       cbRepeat = GetMaxRepeats();
       QueryOpenB();
-      SetCurr(DEV_OPENCANAL_B3);
+      SetCurr(DEV_OPENCANAL_B3);             
       break;
 
     case DEV_OPENCANAL_B3:
@@ -1547,19 +1546,19 @@ void    RunDevices(void)
     case DEV_ENERGY_B3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         ReadCurrentB();
-      else
+      else 
       {
         if (cbRepeat == 0)
-          ErrorCurrent();
+          ErrorCurrent(); 
         else
         {
           ErrorLink();
           cbRepeat--;
-
+          
           QueryEnergyB(0);
           SetCurr(DEV_ENERGY_B3);
         }
-      }
+      } 
       break;
 
 #endif
@@ -1661,7 +1660,7 @@ void    RunDevices(void)
     case DEV_TIME_C2:                      
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltC();                  
+        tiValueC = ReadTimeC();
         MakePause(DEV_POSTTIME_C2);
       }
       else                                    
@@ -1682,11 +1681,11 @@ void    RunDevices(void)
 
     case DEV_POSTTIME_C2:
     {
-      uint iwDay1 = GetDayIndexMD(tiAlt.bMonth, tiAlt.bDay);                    // количество дней с начала года ведомого счётчика
-      ulong dwSecond1 = GetSecondIndex(tiAlt);                                 // количество секунд ведомого счётчика
+      uint iwDay1 = GetDayIndexMD(tiValueC.bMonth, tiValueC.bDay);              // количество дней с начала года ведомого счётчика
+      ulong dwSecond1 = GetSecondIndex(tiValueC);                               // количество секунд ведомого счётчика
 
       uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
-      ulong dwSecond2 = GetSecondIndex(tiCurr);                                // количество секунд сумматора
+      ulong dwSecond2 = GetSecondIndex(tiCurr);                                 // количество секунд сумматора
 
       if (iwDay1 != iwDay2)
       { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
@@ -1706,7 +1705,7 @@ void    RunDevices(void)
 
         if (dwDelta < MinorCorrect())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_C2); }     
-        else if (GetCurrHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))       // простая коррекция
+        else if (GetCurrHouIndex() == (tiValueC.bHour*2 + tiValueC.bMinute/30)) // простая коррекция
         { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_C2);  } 
         else                                                                    
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
@@ -1783,9 +1782,8 @@ void    RunDevices(void)
     case DEV_VALUE_C2:                      
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltC();                  
-        tiValueC = tiAlt;  
-        dwValueC = DateToHouIndex(tiAlt);
+        tiValueC = ReadTimeC();
+        dwValueC = DateToHouIndex(tiValueC);
         MakePause(DEV_POSTVALUE_C2);
       }
       else                                    
@@ -2063,8 +2061,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTTIME_C3:
-      ReadTimeAltC(); 
-      tiOffs = tiAlt;          
+      tiOffs = ReadTimeC();
 
       cbRepeat = GetMaxRepeats();
       QueryEnergyAbsC();

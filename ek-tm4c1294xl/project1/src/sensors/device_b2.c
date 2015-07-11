@@ -146,9 +146,9 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
 
   iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;                // время записи должно соответсвовать началу получасового блока
 
-  ulong dwBuffC = DateToHouIndex(tiCurr);
-  dwBuffC -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
-  tiAlt = HouIndexToDate(dwBuffC);
+  ulong dw = DateToHouIndex(tiCurr);
+  dw -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
+  time ti = HouIndexToDate(dw);
 
 
   ShowProgressDigHou();      
@@ -166,7 +166,7 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
     mpwChannels[c] = w;
   }
 
-  MakeSpecial(tiAlt);
+  MakeSpecial(ti);
   return(MakeStopHou(0));
 }
 
