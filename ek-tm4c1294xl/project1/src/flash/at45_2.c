@@ -16,7 +16,7 @@ AT45_2.C
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
 #include "inc/hw_types.h"
-#include "at45.h"
+#include "at45_2.h"
 #include "flash1.h"
 //#include "flash2.h"
 
