@@ -17,8 +17,7 @@ AT45_2.C
 #include "inc/hw_ssi.h"
 #include "inc/hw_types.h"
 #include "at45_2.h"
-#include "flash1.h"
-//#include "flash2.h"
+#include "flash_define2.h"
 
 
 
