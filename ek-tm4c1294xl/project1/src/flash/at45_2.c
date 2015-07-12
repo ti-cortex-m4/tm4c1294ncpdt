@@ -39,7 +39,7 @@ void    DisableFlash2(void)
 
 
 
-static void CharOut2(uchar  bT)
+static void CharOut(uchar  bT)
 {
   cdwFlashWriteBytes++;
 
@@ -85,7 +85,7 @@ static void CharOut2(uchar  bT)
 }
 
 
-uchar   CharIn2(void)
+static uchar CharIn(void)
 {
   cdwFlashReadBytes++;
 
@@ -144,8 +144,8 @@ uchar   ReadStatus2(void)
 {
   EnableFlash2();
 
-  CharOut2(0x57);
-  bStatusFlash = CharIn2();
+  CharOut(0x57);
+  bStatusFlash = CharIn();
 
   DisableFlash2();
   return(bStatusFlash);
@@ -183,12 +183,12 @@ uint    i;
   {
     EnableFlash2();
 
-    CharOut2(0x81);
+    CharOut(0x81);
 
     i = (wPageOut << 2) & 0xFFFC;
-    CharOut2(i / 0x100);
-    CharOut2(i % 0x100);
-    CharOut2(0);
+    CharOut(i / 0x100);
+    CharOut(i % 0x100);
+    CharOut(0);
 
     DisableFlash2();
     return true;
@@ -207,16 +207,16 @@ uint    i;
   {
     EnableFlash2();
 
-    CharOut2(0x52);
+    CharOut(0x52);
 
     i = (wPageIn << 2) & 0xFFFC;
-    CharOut2(i / 0x100);
-    CharOut2(i % 0x100);
-    CharOut2(0);
+    CharOut(i / 0x100);
+    CharOut(i % 0x100);
+    CharOut(0);
 
-    for (i=0; i<4; i++) CharOut2(0);
+    for (i=0; i<4; i++) CharOut(0);
 
-    for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn2();
+    for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn();
 
     DisableFlash2();
     return true;
@@ -237,14 +237,14 @@ uint    i;
   {
     EnableFlash2();
 
-    CharOut2(0x82);
+    CharOut(0x82);
 
     i = (wPageOut << 2) & 0xFFFC;
-    CharOut2(i / 0x100);
-    CharOut2(i % 0x100);
-    CharOut2(0);
+    CharOut(i / 0x100);
+    CharOut(i % 0x100);
+    CharOut(0);
 
-    for (i=0; i<wPAGE_BYTES; i++) CharOut2(mpbPageOut[i]);
+    for (i=0; i<wPAGE_BYTES; i++) CharOut(mpbPageOut[i]);
 
     DisableFlash2();
   }
@@ -255,12 +255,12 @@ uint    i;
   {
     EnableFlash2();
 
-    CharOut2(0x60);
+    CharOut(0x60);
 
     i = (wPageOut << 2) & 0xFFFC;
-    CharOut2(i / 0x100);
-    CharOut2(i % 0x100);
-    CharOut2(0);
+    CharOut(i / 0x100);
+    CharOut(i % 0x100);
+    CharOut(0);
 
     DisableFlash2();
   }
@@ -285,8 +285,8 @@ uint    i;
 
 void    InitFlash2(void)
 {
-//  Init_SPIhandAT45DB321();
-//  DisableFlash2();
+  InitAT45_2();
+  DisableFlash2();
 
 // TODO if (SafeReadStatus2() == false) TestError(szBadFlash);
 }

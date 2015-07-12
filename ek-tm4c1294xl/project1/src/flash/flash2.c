@@ -17,7 +17,7 @@ FLASH2.C
 
 #ifdef NATIVE_FLASH
 
-void Init_SPIhandAT45DB321(void)
+void InitAT45(void)
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R3; // GPIO Port D Run Mode Clock Gating Control
 
@@ -27,6 +27,19 @@ void Init_SPIhandAT45DB321(void)
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) &= 0xFFFE;
 
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x000F; // GPIO Digital Enable
+}
+
+void InitAT45_2(void)
+{/*
+  HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R3; // GPIO Port D Run Mode Clock Gating Control
+
+  DelayGPIO();
+
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) |= 0x000E; // GPIO Direction
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) &= 0xFFFE;
+
+  HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x000F; // GPIO Digital Enable
+*/
 }
 
 #endif
