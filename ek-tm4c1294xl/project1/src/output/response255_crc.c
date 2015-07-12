@@ -197,9 +197,7 @@ void    Response255_CRC(void)
     case bEXT_GETGROUPSNAME: GetGroupsNameExt(); break;
     case bEXT_SETGROUPSNAME: SetGroupsNameExt(); break;
 
-    case bEXT_FLASH_CONTROL:
-      OutFlashControl();
-      break;
+    case bEXT_FLASH_CONTROL: OutFlashControl(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);

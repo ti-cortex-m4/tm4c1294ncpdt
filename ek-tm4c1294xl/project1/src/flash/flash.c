@@ -57,6 +57,8 @@ bool    SafePageRead(void)
 
 bool    SafePageWrite(void)
 {
+  cdwPageWrite++;
+
   mpbPageOut[wLEAF_BYTES+0] = 0;
   mpbPageOut[wLEAF_BYTES+1] = 0;
 
@@ -69,8 +71,6 @@ bool    SafePageWrite(void)
 
   mpbPageOut[wPAGE_BYTES-2] = bCRCHi;
   mpbPageOut[wPAGE_BYTES-1] = bCRCLo;
-
-  cdwPageWrite++;
 
   uchar i;
   for (i=0; i<bFLASH_REPEATS; i++)
