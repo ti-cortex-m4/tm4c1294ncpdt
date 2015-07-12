@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-AT45.C
+AT45_2.C
 
  AT45DB321B, SPI Mode 0
 ------------------------------------------------------------------------------*/
@@ -18,74 +18,74 @@ AT45.C
 #include "inc/hw_types.h"
 #include "at45.h"
 #include "flash1.h"
-#include "flash2.h"
+//#include "flash2.h"
 
 
 
-void    EnableFlash()
+void    EnableFlash2()
 {
-	 HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	 HWREG(GPIO_DATAbTT_CS)  = SPI_bTT_CS;//PH0
-	 HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	 HWREG(GPIO_DATAbTT_CS)  = ~SPI_bTT_CS;//PH0
+	 HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	 HWREG(GPIO_DATAbTT2_CS)  = SPI_bTT2_CS;//PH0
+	 HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	 HWREG(GPIO_DATAbTT2_CS)  = ~SPI_bTT2_CS;//PH0
 }
 
 
-void    DisableFlash(void)
+void    DisableFlash2(void)
 {
-	 HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	 HWREG(GPIO_DATAbTT_CS)  = SPI_bTT_CS;//PH0
+	 HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	 HWREG(GPIO_DATAbTT2_CS)  = SPI_bTT2_CS;//PH0
 }
 
 
 
-void    CharOut(uchar  bT)
+static void CharOut2(uchar  bT)
 {
   cdwFlashWriteBytes++;
 
-  if (bT & 0x80) HWREG(GPIO_DATAbTT_SI) = SPI_bTT_SI;
-  else HWREG(GPIO_DATAbTT_SI) = ~SPI_bTT_SI;
-  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;
-  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;
+  if (bT & 0x80) HWREG(GPIO_DATAbTT2_SI) = SPI_bTT2_SI;
+  else HWREG(GPIO_DATAbTT2_SI) = ~SPI_bTT2_SI;
+  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;
+  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;
 
-  if (bT & 0x40) HWREG(GPIO_DATAbTT_SI) = SPI_bTT_SI;
-  else HWREG(GPIO_DATAbTT_SI) = ~SPI_bTT_SI;
-  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;
-  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;
+  if (bT & 0x40) HWREG(GPIO_DATAbTT2_SI) = SPI_bTT2_SI;
+  else HWREG(GPIO_DATAbTT2_SI) = ~SPI_bTT2_SI;
+  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;
+  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;
 
-  if (bT & 0x20) HWREG(GPIO_DATAbTT_SI) = SPI_bTT_SI;
-  else HWREG(GPIO_DATAbTT_SI) = ~SPI_bTT_SI;
-  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;
-  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;
+  if (bT & 0x20) HWREG(GPIO_DATAbTT2_SI) = SPI_bTT2_SI;
+  else HWREG(GPIO_DATAbTT2_SI) = ~SPI_bTT2_SI;
+  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;
+  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;
 
-  if (bT & 0x10) HWREG(GPIO_DATAbTT_SI) = SPI_bTT_SI;
-  else HWREG(GPIO_DATAbTT_SI) = ~SPI_bTT_SI;
-  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;
-  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;
+  if (bT & 0x10) HWREG(GPIO_DATAbTT2_SI) = SPI_bTT2_SI;
+  else HWREG(GPIO_DATAbTT2_SI) = ~SPI_bTT2_SI;
+  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;
+  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;
 
-  if (bT & 0x08) HWREG(GPIO_DATAbTT_SI) = SPI_bTT_SI;
-  else HWREG(GPIO_DATAbTT_SI) = ~SPI_bTT_SI;
-  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;
-  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;
+  if (bT & 0x08) HWREG(GPIO_DATAbTT2_SI) = SPI_bTT2_SI;
+  else HWREG(GPIO_DATAbTT2_SI) = ~SPI_bTT2_SI;
+  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;
+  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;
 
-  if (bT & 0x04) HWREG(GPIO_DATAbTT_SI) = SPI_bTT_SI;
-  else HWREG(GPIO_DATAbTT_SI) = ~SPI_bTT_SI;
-  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;
-  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;
+  if (bT & 0x04) HWREG(GPIO_DATAbTT2_SI) = SPI_bTT2_SI;
+  else HWREG(GPIO_DATAbTT2_SI) = ~SPI_bTT2_SI;
+  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;
+  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;
 
-  if (bT & 0x02) HWREG(GPIO_DATAbTT_SI) = SPI_bTT_SI;
-  else HWREG(GPIO_DATAbTT_SI) = ~SPI_bTT_SI;
-  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;
-  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;
+  if (bT & 0x02) HWREG(GPIO_DATAbTT2_SI) = SPI_bTT2_SI;
+  else HWREG(GPIO_DATAbTT2_SI) = ~SPI_bTT2_SI;
+  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;
+  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;
 
-  if (bT & 0x01) HWREG(GPIO_DATAbTT_SI) = SPI_bTT_SI;
-  else HWREG(GPIO_DATAbTT_SI) = ~SPI_bTT_SI;
-  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;
-  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;
+  if (bT & 0x01) HWREG(GPIO_DATAbTT2_SI) = SPI_bTT2_SI;
+  else HWREG(GPIO_DATAbTT2_SI) = ~SPI_bTT2_SI;
+  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;
+  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;
 }
 
 
-uchar   CharIn(void)
+uchar   CharIn2(void)
 {
   cdwFlashReadBytes++;
 
@@ -103,61 +103,61 @@ uchar   CharIn(void)
 	 }
 	*/
 	  //bTt 7
-	  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;//PQ0
-	  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	  if(HWREG(GPIO_DATAbTT_SO)) bRez |= 0x80;//PQ3
+	  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;//PQ0
+	  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	  if(HWREG(GPIO_DATAbTT2_SO)) bRez |= 0x80;//PQ3
 	  //bTt 6
-	  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;//PQ0
-	  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	  if(HWREG(GPIO_DATAbTT_SO)) bRez |= 0x40;//PQ3
+	  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;//PQ0
+	  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	  if(HWREG(GPIO_DATAbTT2_SO)) bRez |= 0x40;//PQ3
 	  //bTt 5
-	  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;//PQ0
-	  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	  if(HWREG(GPIO_DATAbTT_SO)) bRez |= 0x20;//PQ3
+	  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;//PQ0
+	  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	  if(HWREG(GPIO_DATAbTT2_SO)) bRez |= 0x20;//PQ3
 	  //bTt 4
-	  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;//PQ0
-	  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	  if(HWREG(GPIO_DATAbTT_SO)) bRez |= 0x10;//PQ3
+	  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;//PQ0
+	  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	  if(HWREG(GPIO_DATAbTT2_SO)) bRez |= 0x10;//PQ3
 	  //bTt 3
-	  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;//PQ0
-	  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	  if(HWREG(GPIO_DATAbTT_SO)) bRez |= 0x08;//PQ3
+	  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;//PQ0
+	  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	  if(HWREG(GPIO_DATAbTT2_SO)) bRez |= 0x08;//PQ3
 	  //bTt 2
-	  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;//PQ0
-	  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	  if(HWREG(GPIO_DATAbTT_SO)) bRez |= 0x04;//PQ3
+	  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;//PQ0
+	  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	  if(HWREG(GPIO_DATAbTT2_SO)) bRez |= 0x04;//PQ3
 	  //bTt 1
-	  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;//PQ0
-	  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	  if(HWREG(GPIO_DATAbTT_SO)) bRez |= 0x02;//PQ3
+	  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;//PQ0
+	  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	  if(HWREG(GPIO_DATAbTT2_SO)) bRez |= 0x02;//PQ3
 	  //bTt 0
-	  HWREG(GPIO_DATAbTT_SCK) =  SPI_bTT_SCK;//PQ0
-	  HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
-	  if(HWREG(GPIO_DATAbTT_SO)) bRez |= 0x01;//PQ3
+	  HWREG(GPIO_DATAbTT2_SCK) =  SPI_bTT2_SCK;//PQ0
+	  HWREG(GPIO_DATAbTT2_SCK) = ~SPI_bTT2_SCK;//PQ0
+	  if(HWREG(GPIO_DATAbTT2_SO)) bRez |= 0x01;//PQ3
 
 	 return(bRez);
 }
 
 
 
-uchar   ReadStatus(void)
+uchar   ReadStatus2(void)
 {
-  EnableFlash();
+  EnableFlash2();
 
-  CharOut(0x57);
-  bStatusFlash = CharIn();
+  CharOut2(0x57);
+  bStatusFlash = CharIn2();
 
-  DisableFlash();
+  DisableFlash2();
   return(bStatusFlash);
 }
 
 
-bool SafeReadStatus(void)
+bool SafeReadStatus2(void)
 {
 uint    i;
 
   i = 0;
-  while ((ReadStatus() & 0x80) == 0)
+  while ((ReadStatus2() & 0x80) == 0)
   {
     if (++i > wREAD_STATUS)
     {
@@ -171,151 +171,101 @@ uint    i;
 
 
 
-bool PageErase(void)
+bool PageErase2(void)
 {
 uint    i;
 
   IncFlashControl();
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus2() == false)
     return false;
   else
   {
-    EnableFlash();
+    EnableFlash2();
 
-    CharOut(0x81);
+    CharOut2(0x81);
 
     i = (wPageOut << 2) & 0xFFFC;
-    CharOut(i / 0x100);
-    CharOut(i % 0x100);
-    CharOut(0);
+    CharOut2(i / 0x100);
+    CharOut2(i % 0x100);
+    CharOut2(0);
 
-    DisableFlash();
+    DisableFlash2();
     return true;
   }
 }
 
 
-bool SafePageErase(void)
-{
-uchar   i;
 
-  cdwPageErase++;
-
-  for (i=0; i<bFLASH_REPEATS; i++)
-  {
-    if (PageErase() == 0)
-    {
-      cwWrnPageErase++;
-      continue;
-    }
-    else break;
-  }
-
-  if (i == bFLASH_REPEATS)
-  {
-    cwErrPageErase++;
-    return false;
-  }
-  else return true;
-}
-
-
-
-bool PageRead(void)
+bool PageRead2(void)
 {
 uint    i;
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus2() == false)
     return false;
   else
   {
-    EnableFlash();
+    EnableFlash2();
 
-    CharOut(0x52);
+    CharOut2(0x52);
 
     i = (wPageIn << 2) & 0xFFFC;
-    CharOut(i / 0x100);
-    CharOut(i % 0x100);
-    CharOut(0);
+    CharOut2(i / 0x100);
+    CharOut2(i % 0x100);
+    CharOut2(0);
 
-    for (i=0; i<4; i++) CharOut(0);
+    for (i=0; i<4; i++) CharOut2(0);
 
-    for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn();
+    for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn2();
 
-    DisableFlash();
+    DisableFlash2();
     return true;
   }
 }
 
 
-bool SafePageRead(void)
-{
-uchar   i;
 
-  cdwPageRead++;
-
-  for (i=0; i<bFLASH_REPEATS; i++)
-  {
-    if (PageRead() == 0)
-    {
-      cwWrnPageRead++;
-      continue;
-    }
-    else break;
-  }
-
-  if (i == bFLASH_REPEATS)
-  {
-    cwErrPageRead++;
-    return false;
-  }
-  else return true;
-}
-
-
-
-bool PageWrite(void)
+bool PageWrite2(void)
 {
 uint    i;
 
   IncFlashControl();
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus2() == false)
     return false;
   else                                  // запись
   {
-    EnableFlash();
+    EnableFlash2();
 
-    CharOut(0x82);
+    CharOut2(0x82);
 
     i = (wPageOut << 2) & 0xFFFC;
-    CharOut(i / 0x100);
-    CharOut(i % 0x100);
-    CharOut(0);
+    CharOut2(i / 0x100);
+    CharOut2(i % 0x100);
+    CharOut2(0);
 
-    for (i=0; i<wPAGE_BYTES; i++) CharOut(mpbPageOut[i]);
+    for (i=0; i<wPAGE_BYTES; i++) CharOut2(mpbPageOut[i]);
 
-    DisableFlash();
+    DisableFlash2();
   }
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus2() == false)
     return false;
   else                                  // проверка записи
   {
-    EnableFlash();
+    EnableFlash2();
 
-    CharOut(0x60);
+    CharOut2(0x60);
 
     i = (wPageOut << 2) & 0xFFFC;
-    CharOut(i / 0x100);
-    CharOut(i % 0x100);
-    CharOut(0);
+    CharOut2(i / 0x100);
+    CharOut2(i % 0x100);
+    CharOut2(0);
 
-    DisableFlash();
+    DisableFlash2();
   }
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus2() == false)
   {
     cwErrCompare++;
     return false;
@@ -332,92 +282,11 @@ uint    i;
 }
 
 
-bool SafePageWrite(void)
+
+void    InitFlash2(void)
 {
-uchar   i;
+//  Init_SPIhandAT45DB321();
+//  DisableFlash2();
 
-  mpbPageOut[wLEAF_BYTES+0] = 0;
-  mpbPageOut[wLEAF_BYTES+1] = 0;
-
-  mpbPageOut[wLEAF_BYTES+2] = wPageOut / 0x100;
-  mpbPageOut[wLEAF_BYTES+3] = wPageOut % 0x100;
-
-  memcpy(&mpbPageOut[wLEAF_BYTES+4], &tiCurr, sizeof(time));
-
-  MakeCRC16(mpbPageOut, wPAGE_BYTES-2);
-
-  mpbPageOut[wPAGE_BYTES-2] = bCRCHi;
-  mpbPageOut[wPAGE_BYTES-1] = bCRCLo;
-
-  cdwPageWrite++;
-
-  for (i=0; i<bFLASH_REPEATS; i++)
-  {
-    if (PageWrite() == 0)
-    {
-      cwWrnPageWrite++;
-      continue;
-    }
-    else break;
-  }
-
-  if (i == bFLASH_REPEATS)
-  {
-    cwErrPageWrite++;
-    return false;
-  }
-  else return true;
+// TODO if (SafeReadStatus2() == false) TestError(szBadFlash);
 }
-
-
-void    InitFlash(void)
-{
-  Init_SPIhandAT45DB321();
-  DisableFlash();
-
-// TODO if (SafeReadStatus() == false) TestError(szBadFlash);
-}
-
-
-
-uint    GetFlashStatus(void)
-{
-uint    i;
-
-  i = 0;
-
-  if (cwErrCompare   != 0) i |= 0x0001;
-  if (cwErrPageErase != 0) i |= 0x0002;
-  if (cwErrPageRead  != 0) i |= 0x0004;
-  if (cwErrPageWrite != 0) i |= 0x0008;
-
-  return(i);
-}
-
-
-bool GetFlashChecksum(void)
-{
-  MakeCRC16(mpbPageIn, wPAGE_BYTES);
-
-  if ((bCRCHi != 0x00) && (bCRCLo != 0x00))
-  {
-    if ((bCRCHi != 0x0F) && (bCRCLo != 0x74))
-      return false;
-  }
-
-  return true;
-}
-
-
-/*
-void    TODO OutFlashReadStatus(void) { + add (++i > wREAD_STATUS) + add cwWrnBusy etc
-  InitPushCRC();
-
-  ReadStatus();
-  PushChar(bStatusFlash);
-
-  PushChar(ReadStatus());
-
-  Output(sizeof(char)+sizeof(char));
-}
-*/
