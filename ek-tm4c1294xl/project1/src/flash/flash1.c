@@ -1,40 +1,39 @@
 /*------------------------------------------------------------------------------
-AT45.C
+FLASH1.C
 
- AT45DB321B, SPI Mode 0
+
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_flash.h"
-#include "../memory/mem_settings.h"
-#include "../memory/mem_realtime.h"
-#include "../include/flash.h"
-#include "flash_control.h"
-#include "../kernel/crc-16.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
 #include "inc/hw_types.h"
-#include "flash1.h"
+#include "../memory/mem_flash.h"
 #include "../time/delay.h"
+#include "flash_control.h"
 #include "flash_define1.h"
+#include "flash1.h"
+
+#include "../kernel/crc-16.h"
+#include "../memory/mem_realtime.h"
 
 
 
-void    EnableFlash1()
+static void EnableFlash(void)
 {
-	 HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;//PQ0
-	 HWREG(GPIO_FLASH1_CS)  = MASK_FLASH1_CS;//PH0
-	 HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;//PQ0
-	 HWREG(GPIO_FLASH1_CS)  = ~MASK_FLASH1_CS;//PH0
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_CS)  = MASK_FLASH1_CS;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_CS)  = ~MASK_FLASH1_CS;
 }
 
 
-void    DisableFlash1(void)
+static void DisableFlash(void)
 {
-	 HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;//PQ0
-	 HWREG(GPIO_FLASH1_CS)  = MASK_FLASH1_CS;//PH0
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_CS)  = MASK_FLASH1_CS;
 }
 
 
@@ -142,12 +141,12 @@ static uchar CharIn(void)
 
 uchar   ReadStatus1(void)
 {
-  EnableFlash1();
+  EnableFlash();
 
   CharOut(0x57);
   bStatusFlash = CharIn();
 
-  DisableFlash1();
+  DisableFlash();
   return(bStatusFlash);
 }
 
@@ -181,7 +180,7 @@ uint    i;
     return false;
   else
   {
-    EnableFlash1();
+    EnableFlash();
 
     CharOut(0x81);
 
@@ -190,7 +189,7 @@ uint    i;
     CharOut(i % 0x100);
     CharOut(0);
 
-    DisableFlash1();
+    DisableFlash();
     return true;
   }
 }
@@ -230,7 +229,7 @@ uint    i;
     return false;
   else
   {
-    EnableFlash1();
+    EnableFlash();
 
     CharOut(0x52);
 
@@ -243,7 +242,7 @@ uint    i;
 
     for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn();
 
-    DisableFlash1();
+    DisableFlash();
     return true;
   }
 }
@@ -285,7 +284,7 @@ uint    i;
     return false;
   else                                  // запись
   {
-    EnableFlash1();
+    EnableFlash();
 
     CharOut(0x82);
 
@@ -296,14 +295,14 @@ uint    i;
 
     for (i=0; i<wPAGE_BYTES; i++) CharOut(mpbPageOut[i]);
 
-    DisableFlash1();
+    DisableFlash();
   }
 
   if (SafeReadStatus1() == false)
     return false;
   else                                  // проверка записи
   {
-    EnableFlash1();
+    EnableFlash();
 
     CharOut(0x60);
 
@@ -312,7 +311,7 @@ uint    i;
     CharOut(i % 0x100);
     CharOut(0);
 
-    DisableFlash1();
+    DisableFlash();
   }
 
   if (SafeReadStatus1() == false)
@@ -385,7 +384,7 @@ void    InitGPIO_Flash1(void)
 void    InitFlash1(void)
 {
   InitGPIO_Flash1();
-  DisableFlash1();
+  DisableFlash();
 
 // TODO if (SafeReadStatus() == false) TestError(szBadFlash);
 }
