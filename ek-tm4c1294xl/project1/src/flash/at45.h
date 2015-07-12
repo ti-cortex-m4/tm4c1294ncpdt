@@ -11,7 +11,7 @@ AT45.H
 #define NATIVE_FLASH
 
 
-void    Init_SPIhandAT45DB321(void);
+void    InitAT45(void);
 void    InitFlash(void);
 
 bool SafePageErase(void);

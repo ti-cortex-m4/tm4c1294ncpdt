@@ -39,7 +39,7 @@ void    DisableFlash(void)
 
 
 
-void    CharOut(uchar  bT)
+static void CharOut(uchar  bT)
 {
   cdwFlashWriteBytes++;
 
@@ -85,7 +85,7 @@ void    CharOut(uchar  bT)
 }
 
 
-uchar   CharIn(void)
+static uchar CharIn(void)
 {
   cdwFlashReadBytes++;
 
@@ -372,7 +372,7 @@ uchar   i;
 
 void    InitFlash(void)
 {
-  Init_SPIhandAT45DB321();
+  InitAT45();
   DisableFlash();
 
 // TODO if (SafeReadStatus() == false) TestError(szBadFlash);
