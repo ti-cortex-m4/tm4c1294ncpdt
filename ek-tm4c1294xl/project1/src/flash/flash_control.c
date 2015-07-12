@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------
-FLASH_CONTROL.C
+FLASH_CONTROL,C
 
 
 ------------------------------------------------------------------------------*/
 
-#include        <string.h>
 #include "../main.h"
 #include "../memory/mem_flash.h"
 #include "../memory/mem_ports.h"
