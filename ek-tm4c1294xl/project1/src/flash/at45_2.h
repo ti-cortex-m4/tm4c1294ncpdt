@@ -8,5 +8,5 @@ AT45_2.H
 
 
 
-void    InitAT45_2(void);
+void    InitGPIO_Flash2(void);
 void    InitFlash2(void);

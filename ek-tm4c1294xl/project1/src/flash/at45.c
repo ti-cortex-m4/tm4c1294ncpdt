@@ -371,7 +371,7 @@ uchar   i;
 
 void    InitFlash(void)
 {
-  InitAT45();
+  InitGPIO_Flash1();
   DisableFlash1();
 
 // TODO if (SafeReadStatus() == false) TestError(szBadFlash);

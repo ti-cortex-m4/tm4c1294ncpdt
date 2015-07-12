@@ -11,7 +11,7 @@ AT45.H
 #define NATIVE_FLASH
 
 
-void    InitAT45(void);
+void    InitGPIO_Flash1(void);
 void    InitFlash(void);
 
 bool SafePageErase(void);
