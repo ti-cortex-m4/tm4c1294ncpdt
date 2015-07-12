@@ -27,7 +27,7 @@ TODO .C
 #include "src/keyboard/key.h"
 #include "src/keyboard/keyboard.h"
 #include "src/nvram/23x1024.h"
-#include "src/flash/at45.h"
+#include "src/flash/flash.h"
 #include "src/display/display.h"
 #include "src/isr/timer0.h"
 #include "src/isr/timer1.h"
@@ -41,6 +41,7 @@ TODO .C
 #include "src/uarts.h"
 #include "src/serial/modems.h"
 #include "src/serial/print.h"
+#include "src/flash/flash1.h"
 #include "src/flash/storage.h"
 #include "src/flash/records.h"
 #include "src/settings.h"
@@ -88,7 +89,7 @@ int main(void) {
 	InitBeep();
 	InitLCD();
 	InitNvram();
-	InitFlash();            //Delay(100); TestOK();
+	InitFlash1();            //Delay(100); TestOK();
 	InitRTC();
 	InitCODE();
 

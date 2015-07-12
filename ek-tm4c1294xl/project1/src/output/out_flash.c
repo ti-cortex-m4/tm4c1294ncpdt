@@ -10,7 +10,7 @@ OUT_FLASH,C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_program.h"
 #include "../serial/ports.h"
-#include "../flash/at45.h"
+#include "../flash/flash.h"
 #include "../hardware/memory.h"
 #include "out_flash.h"
 

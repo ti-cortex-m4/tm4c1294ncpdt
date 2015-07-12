@@ -10,7 +10,7 @@ STORAGE.C
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_energy.h"
 #include "../hardware/watchdog.h"
-#include "../flash/at45.h"
+#include "../flash/flash.h"
 #include "../nvram/23x1024.h"
 #include "../energy2.h"
 #include "../kernel/array_mnt.h"
