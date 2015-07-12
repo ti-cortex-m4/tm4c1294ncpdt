@@ -21,7 +21,7 @@ RESPONSE_ESC.C
 #include "../../tariffs/zones.h"
 #include "../../tariffs/relaxs.h"
 #include "../../time/rtc.h"
-#include "../../flash/at45.h"
+#include "../../flash/flash.h"
 #include "../../access.h"
 #include "../../groups.h"
 #include "esc.h"
