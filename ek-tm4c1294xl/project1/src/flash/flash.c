@@ -20,12 +20,8 @@ bool    SafePageErase(void)
   uchar i;
   for (i=0; i<bFLASH_REPEATS; i++)
   {
-    if (PageErase1() == 0)
-    {
-      cwWrnPageErase++;
-      continue;
-    }
-    else break;
+    if (PageErase1() == true) break;
+    cwWrnPageErase++;
   }
 
   if (i == bFLASH_REPEATS)
@@ -45,12 +41,8 @@ bool    SafePageRead(void)
   uchar i;
   for (i=0; i<bFLASH_REPEATS; i++)
   {
-    if (PageRead1() == 0)
-    {
-      cwWrnPageRead++;
-      continue;
-    }
-    else break;
+    if (PageRead1() == true) break;
+    cwWrnPageRead++;
   }
 
   if (i == bFLASH_REPEATS)
@@ -83,12 +75,8 @@ bool    SafePageWrite(void)
   uchar i;
   for (i=0; i<bFLASH_REPEATS; i++)
   {
-    if (PageWrite1() == 0)
-    {
-      cwWrnPageWrite++;
-      continue;
-    }
-    else break;
+    if (PageWrite1() == true) break;
+    cwWrnPageWrite++;
   }
 
   if (i == bFLASH_REPEATS)

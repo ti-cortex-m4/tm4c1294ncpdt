@@ -54,6 +54,8 @@ uint    i;
       return true;
     }
   }
+
+  return true;
 }  
 
 /*
@@ -135,6 +137,8 @@ uint    i;
       return true;
     }
   }
+
+  return true;
 }
 
 
