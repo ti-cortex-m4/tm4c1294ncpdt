@@ -5,3 +5,7 @@ FLASH2,H
 ------------------------------------------------------------------------------*/
 
 void    InitFlash2(void);
+
+bool    PageErase2(void);
+bool    PageRead2(void);
+bool    PageWrite2(void);

@@ -16,9 +16,6 @@ FLASH1.C
 #include "flash_define1.h"
 #include "flash1.h"
 
-#include "../kernel/crc-16.h"
-#include "../memory/mem_realtime.h"
-
 
 
 static void EnableFlash(void)
@@ -183,31 +180,6 @@ uint    i;
 }
 
 
-bool SafePageErase(void)
-{
-uchar   i;
-
-  cdwPageErase++;
-
-  for (i=0; i<bFLASH_REPEATS; i++)
-  {
-    if (PageErase1() == 0)
-    {
-      cwWrnPageErase++;
-      continue;
-    }
-    else break;
-  }
-
-  if (i == bFLASH_REPEATS)
-  {
-    cwErrPageErase++;
-    return false;
-  }
-  else return true;
-}
-
-
 
 bool PageRead1(void)
 {
@@ -233,31 +205,6 @@ uint    i;
     DisableFlash();
     return true;
   }
-}
-
-
-bool SafePageRead(void)
-{
-uchar   i;
-
-  cdwPageRead++;
-
-  for (i=0; i<bFLASH_REPEATS; i++)
-  {
-    if (PageRead1() == 0)
-    {
-      cwWrnPageRead++;
-      continue;
-    }
-    else break;
-  }
-
-  if (i == bFLASH_REPEATS)
-  {
-    cwErrPageRead++;
-    return false;
-  }
-  else return true;
 }
 
 
@@ -319,42 +266,6 @@ uint    i;
 }
 
 
-bool SafePageWrite(void)
-{
-uchar   i;
-
-  mpbPageOut[wLEAF_BYTES+0] = 0;
-  mpbPageOut[wLEAF_BYTES+1] = 0;
-
-  mpbPageOut[wLEAF_BYTES+2] = wPageOut / 0x100;
-  mpbPageOut[wLEAF_BYTES+3] = wPageOut % 0x100;
-
-  memcpy(&mpbPageOut[wLEAF_BYTES+4], &tiCurr, sizeof(time));
-
-  MakeCRC16(mpbPageOut, wPAGE_BYTES-2);
-
-  mpbPageOut[wPAGE_BYTES-2] = bCRCHi;
-  mpbPageOut[wPAGE_BYTES-1] = bCRCLo;
-
-  cdwPageWrite++;
-
-  for (i=0; i<bFLASH_REPEATS; i++)
-  {
-    if (PageWrite1() == 0)
-    {
-      cwWrnPageWrite++;
-      continue;
-    }
-    else break;
-  }
-
-  if (i == bFLASH_REPEATS)
-  {
-    cwErrPageWrite++;
-    return false;
-  }
-  else return true;
-}
 
 void    InitGPIO_Flash1(void)
 {
