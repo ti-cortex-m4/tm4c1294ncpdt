@@ -284,7 +284,7 @@ uint    i;
 
 void    InitFlash2(void)
 {
-  InitAT45_2();
+  InitGPIO_Flash2();
   DisableFlash2();
 
 // TODO if (SafeReadStatus2() == false) TestError(szBadFlash);
