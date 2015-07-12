@@ -21,7 +21,7 @@ AT45.C
 
 
 
-void    EnableFlash()
+void    EnableFlash1()
 {
 	 HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
 	 HWREG(GPIO_DATAbTT_CS)  = SPI_bTT_CS;//PH0
@@ -30,7 +30,7 @@ void    EnableFlash()
 }
 
 
-void    DisableFlash(void)
+void    DisableFlash1(void)
 {
 	 HWREG(GPIO_DATAbTT_SCK) = ~SPI_bTT_SCK;//PQ0
 	 HWREG(GPIO_DATAbTT_CS)  = SPI_bTT_CS;//PH0
@@ -139,24 +139,24 @@ static uchar CharIn(void)
 
 
 
-uchar   ReadStatus(void)
+uchar   ReadStatus1(void)
 {
-  EnableFlash();
+  EnableFlash1();
 
   CharOut(0x57);
   bStatusFlash = CharIn();
 
-  DisableFlash();
+  DisableFlash1();
   return(bStatusFlash);
 }
 
 
-bool SafeReadStatus(void)
+bool SafeReadStatus1(void)
 {
 uint    i;
 
   i = 0;
-  while ((ReadStatus() & 0x80) == 0)
+  while ((ReadStatus1() & 0x80) == 0)
   {
     if (++i > wREAD_STATUS)
     {
@@ -170,17 +170,17 @@ uint    i;
 
 
 
-bool PageErase(void)
+bool PageErase1(void)
 {
 uint    i;
 
   IncFlashControl();
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus1() == false)
     return false;
   else
   {
-    EnableFlash();
+    EnableFlash1();
 
     CharOut(0x81);
 
@@ -189,7 +189,7 @@ uint    i;
     CharOut(i % 0x100);
     CharOut(0);
 
-    DisableFlash();
+    DisableFlash1();
     return true;
   }
 }
@@ -203,7 +203,7 @@ uchar   i;
 
   for (i=0; i<bFLASH_REPEATS; i++)
   {
-    if (PageErase() == 0)
+    if (PageErase1() == 0)
     {
       cwWrnPageErase++;
       continue;
@@ -221,15 +221,15 @@ uchar   i;
 
 
 
-bool PageRead(void)
+bool PageRead1(void)
 {
 uint    i;
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus1() == false)
     return false;
   else
   {
-    EnableFlash();
+    EnableFlash1();
 
     CharOut(0x52);
 
@@ -242,7 +242,7 @@ uint    i;
 
     for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn();
 
-    DisableFlash();
+    DisableFlash1();
     return true;
   }
 }
@@ -256,7 +256,7 @@ uchar   i;
 
   for (i=0; i<bFLASH_REPEATS; i++)
   {
-    if (PageRead() == 0)
+    if (PageRead1() == 0)
     {
       cwWrnPageRead++;
       continue;
@@ -274,17 +274,17 @@ uchar   i;
 
 
 
-bool PageWrite(void)
+bool PageWrite1(void)
 {
 uint    i;
 
   IncFlashControl();
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus1() == false)
     return false;
   else                                  // запись
   {
-    EnableFlash();
+    EnableFlash1();
 
     CharOut(0x82);
 
@@ -295,14 +295,14 @@ uint    i;
 
     for (i=0; i<wPAGE_BYTES; i++) CharOut(mpbPageOut[i]);
 
-    DisableFlash();
+    DisableFlash1();
   }
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus1() == false)
     return false;
   else                                  // проверка записи
   {
-    EnableFlash();
+    EnableFlash1();
 
     CharOut(0x60);
 
@@ -311,10 +311,10 @@ uint    i;
     CharOut(i % 0x100);
     CharOut(0);
 
-    DisableFlash();
+    DisableFlash1();
   }
 
-  if (SafeReadStatus() == false)
+  if (SafeReadStatus1() == false)
   {
     cwErrCompare++;
     return false;
@@ -352,7 +352,7 @@ uchar   i;
 
   for (i=0; i<bFLASH_REPEATS; i++)
   {
-    if (PageWrite() == 0)
+    if (PageWrite1() == 0)
     {
       cwWrnPageWrite++;
       continue;
@@ -372,7 +372,7 @@ uchar   i;
 void    InitFlash(void)
 {
   InitAT45();
-  DisableFlash();
+  DisableFlash1();
 
 // TODO if (SafeReadStatus() == false) TestError(szBadFlash);
 }
