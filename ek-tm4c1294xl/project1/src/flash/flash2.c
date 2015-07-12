@@ -5,23 +5,20 @@ FLASH2.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_flash.h"
-#include "../memory/mem_settings.h"
-#include "../memory/mem_realtime.h"
-#include "../include/flash.h"
-#include "flash_control.h"
-#include "../kernel/crc-16.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
 #include "inc/hw_types.h"
+#include "../memory/mem_flash.h"
 #include "../time/delay.h"
+#include "flash_control.h"
 #include "flash_define2.h"
+#include "flash2.h"
 
 
 
-void    EnableFlash2()
+static void EnableFlash(void)
 {
   HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
   HWREG(GPIO_FLASH2_CS)  = MASK_FLASH2_CS;
@@ -30,7 +27,7 @@ void    EnableFlash2()
 }
 
 
-void    DisableFlash2(void)
+static void DisableFlash(void)
 {
   HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
   HWREG(GPIO_FLASH2_CS)  = MASK_FLASH2_CS;
@@ -141,12 +138,12 @@ static uchar CharIn(void)
 
 uchar   ReadStatus2(void)
 {
-  EnableFlash2();
+  EnableFlash();
 
   CharOut(0x57);
   bStatusFlash = CharIn();
 
-  DisableFlash2();
+  DisableFlash();
   return(bStatusFlash);
 }
 
@@ -180,7 +177,7 @@ uint    i;
     return false;
   else
   {
-    EnableFlash2();
+    EnableFlash();
 
     CharOut(0x81);
 
@@ -189,7 +186,7 @@ uint    i;
     CharOut(i % 0x100);
     CharOut(0);
 
-    DisableFlash2();
+    DisableFlash();
     return true;
   }
 }
@@ -204,7 +201,7 @@ uint    i;
     return false;
   else
   {
-    EnableFlash2();
+    EnableFlash();
 
     CharOut(0x52);
 
@@ -217,7 +214,7 @@ uint    i;
 
     for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn();
 
-    DisableFlash2();
+    DisableFlash();
     return true;
   }
 }
@@ -234,7 +231,7 @@ uint    i;
     return false;
   else                                  // запись
   {
-    EnableFlash2();
+    EnableFlash();
 
     CharOut(0x82);
 
@@ -245,14 +242,14 @@ uint    i;
 
     for (i=0; i<wPAGE_BYTES; i++) CharOut(mpbPageOut[i]);
 
-    DisableFlash2();
+    DisableFlash();
   }
 
   if (SafeReadStatus2() == false)
     return false;
   else                                  // проверка записи
   {
-    EnableFlash2();
+    EnableFlash();
 
     CharOut(0x60);
 
@@ -261,7 +258,7 @@ uint    i;
     CharOut(i % 0x100);
     CharOut(0);
 
-    DisableFlash2();
+    DisableFlash();
   }
 
   if (SafeReadStatus2() == false)
@@ -307,7 +304,7 @@ void    InitGPIO_Flash2(void)
 void    InitFlash2(void)
 {
   InitGPIO_Flash2();
-  DisableFlash2();
+  DisableFlash();
 
 // TODO if (SafeReadStatus2() == false) TestError(szBadFlash);
 }
