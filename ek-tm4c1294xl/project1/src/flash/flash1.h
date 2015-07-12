@@ -8,7 +8,7 @@ FLASH1.C
 
 
 
-#ifndef NATIVE_FLASH
+#if true
 
 //Биты управления SPI
 #define SPI_bTT2_SCK   0x0020 //PB5
