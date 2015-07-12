@@ -1,32 +1,19 @@
 /*------------------------------------------------------------------------------
 FLASH.C
 
- AT45DB321B, SPI Mode 0
+
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "../memory/mem_flash.h"
-#include "../memory/mem_settings.h"
-#include "../memory/mem_realtime.h"
-#include "../include/flash.h"
-#include "flash_control.h"
 #include "../kernel/crc-16.h"
-#include "inc/hw_sysctl.h"
-#include "inc/hw_gpio.h"
-#include "inc/hw_memmap.h"
-#include "inc/hw_ssi.h"
-#include "inc/hw_types.h"
-#include "flash1.h"
-#include "../time/delay.h"
-#include "flash_define1.h"
+#include "flash.h"
 
 
 
 uint    GetFlashStatus(void)
 {
-uint    i;
-
-  i = 0;
+  uint i = 0;
 
   if (cwErrCompare   != 0) i |= 0x0001;
   if (cwErrPageErase != 0) i |= 0x0002;
@@ -37,7 +24,7 @@ uint    i;
 }
 
 
-bool GetFlashChecksum(void)
+bool    GetFlashChecksum(void)
 {
   MakeCRC16(mpbPageIn, wPAGE_BYTES);
 
