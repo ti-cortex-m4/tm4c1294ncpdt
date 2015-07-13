@@ -74,6 +74,10 @@ static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "
 
 
 
+static uchar            ibX, ibY, ibZ;
+
+
+
 uchar   GetMaxItem(item  it)
 {
   if (it == BY_GROUPS)
