@@ -155,7 +155,7 @@ uint    i;
 
 
 
-bool    PageErase1(uint const  wPage)
+bool    PageErase1(uint const  wPageOut)
 {
   IncFlashControl();
 
@@ -179,7 +179,7 @@ bool    PageErase1(uint const  wPage)
 
 
 
-bool    PageRead1(uint const  wPage)
+bool    PageRead1(uint const  wPageIn)
 {
   if (SafeReadStatus1() == false)
     return false;
@@ -205,7 +205,7 @@ bool    PageRead1(uint const  wPage)
 
 
 
-bool    PageWrite1(uint const  wPage)
+bool    PageWrite1(uint const  wPageOut)
 {
   IncFlashControl();
 

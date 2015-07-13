@@ -18,14 +18,14 @@ FLASH.C
 
 
 
-bool    SafePageErase(uint const  wPage)
+bool    SafePageErase(uint const  wPageOut)
 {
   cdwPageErase++;
 
   uchar i;
   for (i=0; i<FLASH_REPEATS; i++)
   {
-    if (PageErase1() == true) break;
+    if (PageErase1(wPageOut) == true) break;
     cwWrnPageErase++;
   }
 
@@ -39,14 +39,14 @@ bool    SafePageErase(uint const  wPage)
 
 
 
-bool    SafePageRead(uint const  wPage)
+bool    SafePageRead(uint const  wPageIn)
 {
   cdwPageRead++;
 
   uchar i;
   for (i=0; i<FLASH_REPEATS; i++)
   {
-    if (PageRead1() == true) break;
+    if (PageRead1(wPageIn) == true) break;
     cwWrnPageRead++;
   }
 
@@ -60,7 +60,7 @@ bool    SafePageRead(uint const  wPage)
 
 
 
-bool    SafePageWrite(uint const  wPage)
+bool    SafePageWrite(uint const  wPageOut)
 {
   cdwPageWrite++;
 
@@ -80,7 +80,7 @@ bool    SafePageWrite(uint const  wPage)
   uchar i;
   for (i=0; i<FLASH_REPEATS; i++)
   {
-    if (PageWrite1() == true) break;
+    if (PageWrite1(wPageOut) == true) break;
     cwWrnPageWrite++;
   }
 

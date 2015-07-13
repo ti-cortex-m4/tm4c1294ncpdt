@@ -48,7 +48,7 @@ void    OutFlashPage(void)
   {
     wPageIn = w;
 
-    if (SafePageRead() == true)
+    if (SafePageRead(wPageIn) == true)
       Outptr(&mpbPageIn, wPAGE_BYTES);
     else
       Result(bRES_BADFLASH);

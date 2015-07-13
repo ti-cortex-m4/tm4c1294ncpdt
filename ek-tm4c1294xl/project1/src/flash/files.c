@@ -38,7 +38,7 @@ uint    i;
     {                                           // заполняем всё свободное место
       memcpy(mpbPageOut + wByteOut, pbBase, wFree);                                
 
-      if (SafePageWrite() == false) return false; // записываем буфер
+      if (SafePageWrite(wPageOut) == false) return false; // записываем буфер
 
       OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
@@ -90,7 +90,7 @@ uint    wFree;
 
 bool CloseOut(void)
 {
-  return SafePageWrite();
+  return SafePageWrite(wPageOut);
 }
 
 
@@ -100,7 +100,7 @@ bool OpenIn(uint  wPage)
   wPageIn = wPage;
   wByteIn = 0;
 
-  return( SafePageRead() );
+  return( SafePageRead(wPageIn) );
 }
 
 

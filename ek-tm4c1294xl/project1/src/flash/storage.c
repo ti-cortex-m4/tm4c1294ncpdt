@@ -145,7 +145,7 @@ uint    i;
 
   for (wPageOut=IMPHOUCAN; wPageOut<(IMPHOUCAN+IMPHOUCAN_PAGES); wPageOut++)
   {
-    if (SafePageErase() == false) return false;
+    if (SafePageErase(wPageOut) == false) return false;
     if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
@@ -192,14 +192,14 @@ uint    i;
 
   for (wPageOut=PARAMS_VALUES; wPageOut<(PARAMS_VALUES+PARAMS_PAGES*wTIMES); wPageOut++)
   {
-    if (SafePageErase() == false) return false;
+    if (SafePageErase(wPageOut) == false) return false;
     if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
 
   for (wPageOut=KEY_RECORD; wPageOut<(KEY_RECORD+bRECORD_PAGES*6+wRECORD2_PAGES*1); wPageOut++)
   {
-    if (SafePageErase() == false) return false;
+    if (SafePageErase(wPageOut) == false) return false;
     if (GetFlashStatus() != 0) return false;
     ShowFlashErase();
   }
@@ -221,7 +221,7 @@ uint    i;
 
   for (wPageIn=FLASH_BEGIN; wPageIn<FLASH_END; wPageIn += 2)
   {
-    if (SafePageRead() == false) return false;
+    if (SafePageRead(wPageIn) == false) return false;
     if (GetFlashChecksum() == 0) return false;
     ShowFlashRead();
   }
