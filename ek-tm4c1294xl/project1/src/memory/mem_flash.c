@@ -9,9 +9,6 @@ MEM_FLASH.C
 
 
 
-// количество прочитанных/записанных байтов
-uint                    wByteIn, wByteOut;
-
 // слово состояния флэш-памяти
 uchar                   bFlashStatus;
 
