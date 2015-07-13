@@ -9,12 +9,11 @@ MEM_FLASH.C
 
 
 
-// номера читаемых/записываемых страниц и количества прочитанных/записанных байтов
-uint                    wPageIn, wPageOut,
-                        wByteIn, wByteOut;
+// количество прочитанных/записанных байтов
+uint                    wByteIn, wByteOut;
 
 // слово состояния флэш-памяти
-uchar                   bStatusFlash;
+uchar                   bFlashStatus;
 
 // буфера читаемых/записываемых страниц флэш-памяти
 uchar                   mpbPageIn[wPAGE_BYTES],

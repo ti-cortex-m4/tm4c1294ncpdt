@@ -4,5 +4,5 @@ FLASH_CONTROL,H
 
 ------------------------------------------------------------------------------*/
 
-void    IncFlashControl(void);
+void    IncFlashControl(uint const  wPageOut);
 void    OutFlashControl(void); 

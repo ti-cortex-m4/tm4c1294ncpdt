@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 FILES.H
 
- Функции чтения/записи данных по указателю
+
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -9,14 +9,14 @@ FILES.H
 
 
 
-void    OpenOut(uint  wPage);
-void    ClearOut(void);
+void OpenOut(uint  wPage);
+void ClearOut(void);
 bool Save(void  *pbBase, uint  wSize);
 bool Clean(uint  wSize);
 bool CloseOut(void);
 
 bool OpenIn(uint  wPage);
-void    ClearIn(void);
+void ClearIn(void);
 bool Load(void  *pbBase, uint  wSize);
 
 bool SaveBuff(uint wPage, void *pbBuff, uint wSize);

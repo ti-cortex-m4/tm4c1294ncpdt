@@ -12,9 +12,13 @@ FILES.C
 
 
 
+uint    wPageOut_, wPageIn_;
+
+
+
 void    OpenOut(uint  wPage)
 {
-  wPageOut = wPage;
+  wPageOut_ = wPage;
   wByteOut = 0;
 }
 
@@ -38,9 +42,9 @@ uint    i;
     {                                           // заполняем всё свободное место
       memcpy(mpbPageOut + wByteOut, pbBase, wFree);                                
 
-      if (SafePageWrite(wPageOut) == false) return false; // записываем буфер
+      if (SafePageWrite(wPageOut_) == false) return false; // записываем буфер
 
-      OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
+      OpenOut(wPageOut_ + 1);                    // подготавливаемся к записи следующей страницы
 
       for (i=0; i<wFree; i++)
     	  pbBase = (char *)pbBase + 1;                          // TODO переходим на следующую позицию источника данных
@@ -90,17 +94,17 @@ uint    wFree;
 
 bool CloseOut(void)
 {
-  return SafePageWrite(wPageOut);
+  return SafePageWrite(wPageOut_);
 }
 
 
 
-bool OpenIn(uint  wPage)
+bool    OpenIn(uint  wPage)
 {
-  wPageIn = wPage;
+  wPageIn_ = wPage;
   wByteIn = 0;
 
-  return( SafePageRead(wPageIn) );
+  return( SafePageRead(wPageIn_) );
 }
 
 
@@ -123,7 +127,7 @@ uint    i;
     {                                           // читаем данные из буфера
       memcpy(pbBase, mpbPageIn + wByteIn, wFree);
 
-      if (OpenIn(wPageIn + 1) == 0) return false;  // читаем в буфер следующую страницу
+      if (OpenIn(wPageIn_ + 1) == 0) return false;  // читаем в буфер следующую страницу
 
       for (i=0; i<wFree; i++)
     	  pbBase = (char *)pbBase + 1;                          // TODO переходим на следующую позицию источника данных
