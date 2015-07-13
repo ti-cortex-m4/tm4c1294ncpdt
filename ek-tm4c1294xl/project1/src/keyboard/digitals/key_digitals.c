@@ -132,7 +132,7 @@ static void MakeInDelays(uchar  ibPort, uchar  ibPhone, uchar  bDevice)
 
 
 
-static void AddDigital(uchar  ibCan, digital  *pdi)
+static uchar AddDigital(uchar  ibCan, digital  *pdi)
 {
   enKeyboard = KBD_POSTENTER;
   ShowHi(szDigitals);
@@ -151,10 +151,12 @@ static void AddDigital(uchar  ibCan, digital  *pdi)
   if (++ibCan >= bCANALS) ibCan = 0;
 
   ShowDigital(ibCan);
+
+  return ibCan;
 }
 
 
-static void AddAllDigitals(uchar  ibCan, digital  *pdi)
+static uchar AddAllDigitals(uchar  ibCan, digital  *pdi)
 {
   enKeyboard = KBD_POSTENTER;
   ShowHi(szDigitals);
@@ -183,6 +185,8 @@ static void AddAllDigitals(uchar  ibCan, digital  *pdi)
 
   ShowDigital(ibCan);
   Beep();
+
+  return ibCan;
 }
 
 
@@ -226,20 +230,20 @@ static uchar ibCan;
     else if (enKeyboard == KBD_POSTINPUT5)
     {
       if ((diT.bAddress = GetCharLo(8,10)) < 255)
-        AddAllDigitals(ibCan, &diT);
+        ibCan = AddAllDigitals(ibCan, &diT);
       else
         Beep();
     }
     else if (enKeyboard == KBD_INPUT6)
     {
-      AddAllDigitals(ibCan, &diT);
+      ibCan = AddAllDigitals(ibCan, &diT);
     }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
       diT.ibLine = GetCharLo(12,13) - 1;
       if (diT.ibLine < mpbMaxLines[ diT.bDevice ])
       {
-        AddDigital(ibCan, &diT);
+        ibCan = AddDigital(ibCan, &diT);
       }
       else Beep();
     }
