@@ -24,12 +24,12 @@ void    OpenOut(uint const  wPage)
   wByteOut = 0;
 }
 
-
+/*
 void ClearOut(void)
 {
   memset(&mpbPageOut, 0, sizeof(mpbPageOut));
 }
-
+*/
 
 bool Save(uchar  *pbBase, uint  wSize)
 {

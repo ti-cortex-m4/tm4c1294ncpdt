@@ -63,4 +63,21 @@ typedef struct
 #define bVALUE7_REAL_SIZE   ((bVALUE7_BLOCKS+1)*6) 
 
 
+// тип 'время'
+typedef struct
+{
+  uchar         bSecond;
+  uchar         bMinute;
+  uchar         bHour;
+} time3;
+
+
+// тип 'диаграмма'
+typedef struct
+{
+  real          reSelf;
+  time3         tmSelf;
+} diagram;
+
+
 #endif
