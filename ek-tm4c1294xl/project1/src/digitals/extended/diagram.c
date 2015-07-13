@@ -8,7 +8,7 @@ DIAGRAM.C
 
 
 
-/*static*/ diagram          mpdgDiagramCan[bCANALS], dgBuff;
+/*static*/ diagram          mpdgDiagram[bCANALS], dgBuff;
 
 
 
@@ -16,7 +16,7 @@ DIAGRAM.C
 void    LoadDiaHou(uint  iwHouFrom)
 {
   OpenIn(wFLA_DIAGRAM + iwHouFrom/2);
-  memcpy(mpdgDiagramCan, mpbPageIn + (iwHouFrom%2)*wDIAGRAM_LENGTH, wDIAGRAM_LENGTH);
+  memcpy(mpdgDiagram, mpbPageIn + (iwHouFrom%2)*wDIAGRAM_LENGTH, wDIAGRAM_LENGTH);
 }
 
 
@@ -24,7 +24,7 @@ void    SaveDiaHou(uint  iwHouTo)
 {
   OpenOut(wFLA_DIAGRAM + iwHouTo/2);
   memcpy(mpbPageOut, mpbPageIn, wFREEPAGE_SIZE);
-  memcpy(mpbPageOut + (iwHouTo%2)*wDIAGRAM_LENGTH, mpdgDiagramCan, wDIAGRAM_LENGTH);
+  memcpy(mpbPageOut + (iwHouTo%2)*wDIAGRAM_LENGTH, mpdgDiagram, wDIAGRAM_LENGTH);
   CloseOut();
 }
 
@@ -34,7 +34,7 @@ void    NextHouDiagram(void)
 {
   LoadDiaHou(iwHardHou);
 
-  memset(&mpdgDiagramCan, 0xFF, sizeof(mpdgDiagramCan));
+  memset(&mpdgDiagram, 0xFF, sizeof(mpdgDiagram));
 
   for (ibCan=0; ibCan<16; ibCan++)
   {
@@ -44,14 +44,14 @@ void    NextHouDiagram(void)
       reBuffA *= *PGetCanReal(mpreValueCntHou,ibCan);
       reBuffA += *PGetCanReal(mpreCount,ibCan);
 
-      dgBuff.reSelf = reBuffA;
+      dgBuff.dbValue = reBuffA;
 
       tiAlt = *PGetCurrTimeDate();
-      dgBuff.tmSelf.bSecond = tiAlt.bSecond;
-      dgBuff.tmSelf.bMinute = tiAlt.bMinute;
-      dgBuff.tmSelf.bHour   = tiAlt.bHour;
+      dgBuff.stValuef.bSecond = tiAlt.bSecond;
+      dgBuff.stValuef.bMinute = tiAlt.bMinute;
+      dgBuff.stValuef.bHour   = tiAlt.bHour;
 
-      mpdgDiagramCan[ibCan] = dgBuff;
+      mpdgDiagram[ibCan] = dgBuff;
     }
   }
 
@@ -63,14 +63,14 @@ void    MakeDiagram(uchar  ibCanal)
 {
   LoadDiaHou(iwHardHou);
 
-  dgBuff.reSelf = reBuffA;
+  dgBuff.dbValue = reBuffA;
 
   tiAlt = *PGetCurrTimeDate();
-  dgBuff.tmSelf.bSecond = tiAlt.bSecond;
-  dgBuff.tmSelf.bMinute = tiAlt.bMinute;
-  dgBuff.tmSelf.bHour   = tiAlt.bHour;
+  dgBuff.stValuef.bSecond = tiAlt.bSecond;
+  dgBuff.stValuef.bMinute = tiAlt.bMinute;
+  dgBuff.stValuef.bHour   = tiAlt.bHour;
 
-  mpdgDiagramCan[ibCanal] = dgBuff;
+  mpdgDiagram[ibCanal] = dgBuff;
 
   SaveDiaHou(iwHardHou);
 }                        
@@ -101,7 +101,7 @@ uchar   i,j;
         }
         else
         {
-          Push(&mpdgDiagramCan[ i ], sizeof(diagram) );
+          Push(&mpdgDiagram[ i ], sizeof(diagram) );
         }
 
         wBuffD += sizeof(diagram);

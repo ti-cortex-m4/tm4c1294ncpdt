@@ -105,12 +105,12 @@ bool    OpenIn(uint const  wPage)
   return SafePageRead(wPageIn);
 }
 
-
+/*
 void ClearIn(void)
 {
   memset(&mpbPageIn, 0, sizeof(mpbPageIn));
 }
-
+*/
 
 bool Load(uchar  *pbBase, uint  wSize)
 {     

@@ -32,17 +32,17 @@ static char const       szDigitals[]     = "—четчики        ",
 
 
 
-static void MakeKeys(uchar  ibDig, uchar  bDevice)
+static void MakeKeys(uchar  ibCan, uchar  bDevice)
 {
-  memset(&mpphKeys[ibDig].szNumber, 0, sizeof(mpphKeys[ibDig].szNumber));
+  memset(&mpphKeys[ibCan].szNumber, 0, sizeof(mpphKeys[ibCan].szNumber));
 
   switch (bDevice)
   {
-    case 1:   strcpy((char *)&mpphKeys[ibDig].szNumber, "000000");    break;
-    case 2:   strcpy((char *)&mpphKeys[ibDig].szNumber, "222222");    break;
-    case 4:   strcpy((char *)&mpphKeys[ibDig].szNumber, "00000000");  break;
-    case 21:  strcpy((char *)&mpphKeys[ibDig].szNumber, "00000000");  break;
-    default:  strcpy((char *)&mpphKeys[ibDig].szNumber, "0");         break;
+    case 1:   strcpy((char *)&mpphKeys[ibCan].szNumber, "000000");    break;
+    case 2:   strcpy((char *)&mpphKeys[ibCan].szNumber, "222222");    break;
+    case 4:   strcpy((char *)&mpphKeys[ibCan].szNumber, "00000000");  break;
+    case 21:  strcpy((char *)&mpphKeys[ibCan].szNumber, "00000000");  break;
+    default:  strcpy((char *)&mpphKeys[ibCan].szNumber, "0");         break;
   }
 
   SaveFile(&flKeys);
@@ -132,29 +132,29 @@ static void MakeInDelays(uchar  ibPort, uchar  ibPhone, uchar  bDevice)
 
 
 
-static void AddDigital(uchar  ibDig, digital  *pdi)
+static void AddDigital(uchar  ibCan, digital  *pdi)
 {
   enKeyboard = KBD_POSTENTER;
   ShowHi(szDigitals);
 
-  ibRecordCan = ibDig;
+  ibRecordCan = ibCan;
   AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
-  SetDigital(ibDig, pdi);
+  SetDigital(ibCan, pdi);
   AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
-  MakeKeys(ibDig, pdi->bDevice);
+  MakeKeys(ibCan, pdi->bDevice);
 
   MakeDigitalsMask();
   MakeCorrectLimit();
   if (pdi->bDevice != 0) MakeInDelays(pdi->ibPort, pdi->ibPhone, pdi->bDevice);
 
-  if (++ibDig >= bCANALS) ibDig = 0;
+  if (++ibCan >= bCANALS) ibCan = 0;
 
-  ShowDigital(ibDig);
+  ShowDigital(ibCan);
 }
 
 
-static void AddAllDigitals(uchar  ibDig, digital  *pdi)
+static void AddAllDigitals(uchar  ibCan, digital  *pdi)
 {
   enKeyboard = KBD_POSTENTER;
   ShowHi(szDigitals);
@@ -164,24 +164,24 @@ static void AddAllDigitals(uchar  ibDig, digital  *pdi)
   {
     pdi->ibLine = i;
 
-    ibRecordCan = ibDig;
+    ibRecordCan = ibCan;
     AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
-    SetDigital(ibDig, pdi);
+    SetDigital(ibCan, pdi);
     AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
-    MakeKeys(ibDig, pdi->bDevice);
+    MakeKeys(ibCan, pdi->bDevice);
 
-    ShowDigital(ibDig);
+    ShowDigital(ibCan);
     DelayInf();
 
-    if (++ibDig >= bCANALS) break;
+    if (++ibCan >= bCANALS) break;
   }
 
   MakeDigitalsMask();
   MakeCorrectLimit();
   if (pdi->bDevice != 0) MakeInDelays(pdi->ibPort, pdi->ibPhone, pdi->bDevice);
 
-  ShowDigital(ibDig);
+  ShowDigital(ibCan);
   Beep();
 }
 
@@ -190,7 +190,7 @@ static void AddAllDigitals(uchar  ibDig, digital  *pdi)
 void    key_SetDigitals(void)
 {
 static digital diT;
-static uchar ibDig;
+static uchar ibCan;
 
   if (bKey == bKEY_ENTER)
   {
@@ -205,41 +205,41 @@ static uchar ibDig;
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibDig = 0;
-      ShowDigital(ibDig);
+      ibCan = 0;
+      ShowDigital(ibCan);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibDig = GetCharLo(10,11) - 1) < bCANALS)
+      if ((ibCan = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        ShowDigital(ibDig);
+        ShowDigital(ibCan);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibDig >= bCANALS) ibDig = 0;
+      if (++ibCan >= bCANALS) ibCan = 0;
 
-      ShowDigital(ibDig);
+      ShowDigital(ibCan);
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
       if ((diT.bAddress = GetCharLo(8,10)) < 255)
-        AddAllDigitals(ibDig, &diT);
+        AddAllDigitals(ibCan, &diT);
       else
         Beep();
     }
     else if (enKeyboard == KBD_INPUT6)
     {
-      AddAllDigitals(ibDig, &diT);
+      AddAllDigitals(ibCan, &diT);
     }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
       diT.ibLine = GetCharLo(12,13) - 1;
       if (diT.ibLine < mpbMaxLines[ diT.bDevice ])
       {
-        AddDigital(ibDig, &diT);
+        AddDigital(ibCan, &diT);
       }
       else Beep();
     }
@@ -251,15 +251,15 @@ static uchar ibDig;
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibDig > 0) ibDig--; else ibDig = bCANALS-1;
+      if (ibCan > 0) ibCan--; else ibCan = bCANALS-1;
 
-      ShowDigital(ibDig);
+      ShowDigital(ibCan);
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
       if ((diT.ibPort = GetCharLo(0,0) - 1) < bPORTS)
       {
-        if (StreamPortCan(diT.ibPort,ibDig) == 1)
+        if (StreamPortCan(diT.ibPort,ibCan) == 1)
         {
           enKeyboard = KBD_INPUT3;
           ShowHi(szPhone);
@@ -273,7 +273,7 @@ static uchar ibDig;
     {
       if ((diT.ibPhone = GetCharLo(2,3)) < bCANALS)
       { 
-        if (StreamPortPhoneCan(diT.ibPort,diT.ibPhone,ibDig) == 1)
+        if (StreamPortPhoneCan(diT.ibPort,diT.ibPhone,ibCan) == 1)
         {
           enKeyboard = KBD_INPUT4;
           ShowHi(szDevice);
@@ -296,15 +296,15 @@ static uchar ibDig;
           diT.bAddress = 0;
           diT.ibLine = 0;
 
-          ibRecordCan = ibDig;
+          ibRecordCan = ibCan;
           AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
-          SetDigital(ibDig, &diT);
+          SetDigital(ibCan, &diT);
           AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
           MakeDigitalsMask();  
-          MakeKeys(ibDig, diT.bDevice);
+          MakeKeys(ibCan, diT.bDevice);
 
-          ShowDigital(ibDig);
+          ShowDigital(ibCan);
         }
         else
         {
@@ -354,15 +354,15 @@ static uchar ibDig;
         diT.bAddress = 0;
         diT.ibLine = 0;
 
-        ibRecordCan = ibDig;
+        ibRecordCan = ibCan;
         AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
-        SetDigital(ibDig, &diT);
+        SetDigital(ibCan, &diT);
         AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
         MakeDigitalsMask();  
-        MakeKeys(ibDig, diT.bDevice);
+        MakeKeys(ibCan, diT.bDevice);
 
-        ShowDigital(ibDig);
+        ShowDigital(ibCan);
         LongBeep();
       }
       else Beep();
