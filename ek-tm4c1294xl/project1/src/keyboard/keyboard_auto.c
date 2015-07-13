@@ -79,7 +79,7 @@ void    Keyboard_Auto(void)
     // обновление показаний с частотой 1 Гц
     if (fOnSecond == 1)
     {
-      fOnSecond = 0;
+      fOnSecond = 0;/*
       switch (wProgram)
       {
         case bGET_POWGRPPREVHOU:
@@ -94,7 +94,7 @@ void    Keyboard_Auto(void)
 
         case bGET_PROGRAM73:   auto_GetOldProgram73();  break;
         case bGET_PROGRAM74:   auto_GetOldProgram74();  break;
-      }
+      }*/
     }
   }
 
