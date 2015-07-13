@@ -72,7 +72,7 @@ static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "
 
 
 
-static uchar            ibX, ibY, ibZ;
+static uchar            ibGrp, ibY, ibTrf;
 
 
 
@@ -80,11 +80,11 @@ static void ShowGrpDayMaxPow(void)
 {
 time  ti;
 
-  ti = GetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ);
+  ti = GetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ],ibGrp,ibTrf);
 
   switch (ibY)
   {
-    case 0:  ShowFloat(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ));  break;
+    case 0:  ShowFloat(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ],ibGrp,ibTrf));  break;
     case 1:  ShowTime(ti);  break;
     case 2:  ShowDate(ti);  break;
   }
@@ -95,11 +95,11 @@ static void ShowGrpMonMaxPow(void)
 {
 time  ti;
 
-  ti = GetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ);
+  ti = GetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ],ibGrp,ibTrf);
 
   switch (ibY)
   {
-    case 0:  ShowFloat(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ));  break;
+    case 0:  ShowFloat(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ],ibGrp,ibTrf));  break;
     case 1:  ShowTime(ti);  break;
     case 2:  ShowDate(ti);  break;
   }
@@ -110,28 +110,28 @@ time  ti;
 static void ShowGrpDayPrevEng(uchar  bMask)
 {
   LoadImpDay( PrevHardDay() );
-  ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibGrp,bMask));
 }
 
 
 static void ShowGrpDayCurrEng(uchar  bMask)
 {
   LoadImpDay( ibHardDay );
-  ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
+  ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibGrp,bMask));
 }
 
 
 static void ShowGrpMonPrevEng(uchar  bMask)
 {
   LoadImpMon( PrevHardMon() );
-  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibGrp,bMask));
 }
 
 
 static void ShowGrpMonCurrEng(uchar  bMask)
 {
   LoadImpMon( ibHardMon );
-  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
+  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibGrp,bMask));
 }
 
 
@@ -142,91 +142,91 @@ static void Show(void)
   {
     case bGET_POWGRPCURRMNT:
       LoadImpMnt( PrevHardMnt() );
-      ShowFloat(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
+      ShowFloat(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibGrp,20));
       break;
 
     case bGET_IMPCANCURRMNT:
-      ShowInt(mpwImpMntCan[ ibSoftMnt ][ibX]);
+      ShowInt(mpwImpMntCan[ ibSoftMnt ][ibGrp]);
       break;
 
     case bGET_POWGRPPREVHOU:      
       LoadImpHou( PrevHardHou() );
-      ShowFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
+      ShowFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibGrp,2));
       break;
 
     case bGET_POWGRPCURRHOU:
-      ShowFloat(GetPowGrpHouCurr(ibX,2));
+      ShowFloat(GetPowGrpHouCurr(ibGrp,2));
       break;
 
     case bGET_POWGRPDAYPREV_ABCD:  
       LoadPowDay( PrevHardDay() );
-      ibZ = GetGrpMaxPowIndex(mppoDayGrp[ PrevSoftDay() ],ibX);
+      ibTrf = GetGrpMaxPowIndex(mppoDayGrp[ PrevSoftDay() ],ibGrp);
       ShowGrpDayMaxPow();
       break;
 
     case bGET_POWGRPDAYPREV_C:     
       LoadPowDay( PrevHardDay() );   
-      ibZ = 2;        
+      ibTrf = 2;        
       ShowGrpDayMaxPow();
       break;
 
     case bGET_POWGRPDAYPREV_D:     
       LoadPowDay( PrevHardDay() );
-      ibZ = 3;  
+      ibTrf = 3;  
       ShowGrpDayMaxPow();
       break;
 
     case bGET_POWGRPDAYCURR_ABCD:
       LoadPowDay(ibHardDay);
-      ibZ = GetGrpMaxPowIndex(mppoDayGrp[ PrevSoftDay() ],ibX);
+      ibTrf = GetGrpMaxPowIndex(mppoDayGrp[ PrevSoftDay() ],ibGrp);
       ShowGrpDayMaxPow();
       break;
 
     case bGET_POWGRPDAYCURR_C:     
       LoadPowDay(ibHardDay);
-      ibZ = 2;
+      ibTrf = 2;
       ShowGrpDayMaxPow();
       break;
 
     case bGET_POWGRPDAYCURR_D:     
       LoadPowDay(ibHardDay);
-      ibZ = 3;
+      ibTrf = 3;
       ShowGrpDayMaxPow();
       break;
 
     case bGET_POWGRPMONPREV_ABCD: 
       LoadPowMon( PrevHardMon() ); 
-      ibZ = GetGrpMaxPowIndex(mppoMonGrp[ PrevSoftMon() ],ibX);  
+      ibTrf = GetGrpMaxPowIndex(mppoMonGrp[ PrevSoftMon() ],ibGrp);  
       ShowGrpMonMaxPow();
       break;
 
     case bGET_POWGRPMONPREV_C:     
       LoadPowMon( PrevHardMon() ); 
-      ibZ = 2;
+      ibTrf = 2;
       ShowGrpMonMaxPow();
       break;
 
     case bGET_POWGRPMONPREV_D:     
       LoadPowMon( PrevHardMon() ); 
-      ibZ = 3;
+      ibTrf = 3;
       ShowGrpMonMaxPow();
       break;
 
     case bGET_POWGRPMONCURR_ABCD: 
       LoadPowMon(ibHardMon);  
-      ibZ = GetGrpMaxPowIndex(mppoMonGrp[ PrevSoftMon() ],ibX);  
+      ibTrf = GetGrpMaxPowIndex(mppoMonGrp[ PrevSoftMon() ],ibGrp);  
       ShowGrpMonMaxPow();
       break;
 
     case bGET_POWGRPMONCURR_C:   
       LoadPowMon(ibHardMon);
-      ibZ = 2;
+      ibTrf = 2;
       ShowGrpMonMaxPow();
       break;
 
     case bGET_POWGRPMONCURR_D: 
       LoadPowMon(ibHardMon);
-      ibZ = 3;
+      ibTrf = 3;
       ShowGrpMonMaxPow();
       break;
 
@@ -251,7 +251,7 @@ static void Show(void)
     case bGET_ENGGRPMONCURR_A:     ShowGrpMonCurrEng(0x01);  break; 
   }      
 
-  sprintf(szLo+14,"%2u",ibX+1);
+  sprintf(szLo+14,"%2u",ibGrp+1);
 }
 
 
@@ -323,13 +323,13 @@ void    key_GetSingleGrp(void)
       enKeyboard = KBD_POSTENTER;
       Clear();
 
-      ibX = 0;
+      ibGrp = 0;
       ibY = 0;
       Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < bGROUPS)
+      if ((ibGrp = GetCharLo(10,11) - 1) < bGROUPS)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
@@ -341,8 +341,8 @@ void    key_GetSingleGrp(void)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bGROUPS)
-        ibX = 0;
+      if (++ibGrp >= bGROUPS)
+        ibGrp = 0;
 
       ibY = 0;
       Show();
@@ -368,10 +368,10 @@ void    key_GetSingleGrp(void)
   {        
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibX > 0) 
-        ibX--;
+      if (ibGrp > 0) 
+        ibGrp--;
       else         
-        ibX = bGROUPS - 1;
+        ibGrp = bGROUPS - 1;
 
       ibY = 0;
       Show();

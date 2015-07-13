@@ -73,27 +73,27 @@ static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "
 
 
 
-static uchar            ibX;
+static uchar            ibCan;
 
 
 
 static void ShowModemReadCntCurrCan(void)
 {
-  if (GetDigitalDevice(ibX) == 0)
-    ShowFloat(GetCntCurrImp(ibX));
+  if (GetDigitalDevice(ibCan) == 0)
+    ShowFloat(GetCntCurrImp(ibCan));
   else
   {
-    LoadCurrDigital(ibX);
+    LoadCurrDigital(ibCan);
     ibPort = diCurr.ibPort;
 
-    if (LoadConnect(ibX) == 0) return;
+    if (LoadConnect(ibCan) == 0) return;
     Clear();
 
-    if (mpboEnblCan[ibX] == false)
+    if (mpboEnblCan[ibCan] == false)
       ShowLo(szBlocked);
     else
     {
-      double2 db2 = ReadCntCurrCan(ibX);
+      double2 db2 = ReadCntCurrCan(ibCan);
       (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
     }
 
@@ -106,27 +106,27 @@ static void ShowModemReadTimeCan(bool  fShowTimeDate)
 {
   ShowHi(szTimeDate);
 
-  if (GetDigitalDevice(ibX) == 0)
+  if (GetDigitalDevice(ibCan) == 0)
     ShowLo(szNone);
   else
   {
-    LoadCurrDigital(ibX);
+    LoadCurrDigital(ibCan);
     ibPort = diCurr.ibPort;
 
-    if (LoadConnect(ibX) == 0) return;
+    if (LoadConnect(ibCan) == 0) return;
     Clear();
 
-    if (mpboEnblCan[ibX] == false)
+    if (mpboEnblCan[ibCan] == false)
     {
-      sprintf(szHi+14,"%2u",ibX+1);
+      sprintf(szHi+14,"%2u",ibCan+1);
       ShowLo(szBlocked);
     }
     else
     {
-      time2 ti2 = ReadTimeCan(ibX);
+      time2 ti2 = ReadTimeCan(ibCan);
       if (ti2.fValid)
       {
-        sprintf(szHi+14,"%2u",ibX+1);
+        sprintf(szHi+14,"%2u",ibCan+1);
         Clear();
         (fShowTimeDate) ? ShowTimeDate(ti2.tiValue) : ShowDeltaTime(ti2.tiValue);
       }
@@ -152,11 +152,11 @@ static void Show(void)
       break;
 
     case bGET_IMPCANCURRMNT:
-      ShowInt(mpwImpMntCan[ ibSoftMnt ][ibX]);
+      ShowInt(mpwImpMntCan[ ibSoftMnt ][ibCan]);
       break;
   }      
 
-  sprintf(szLo+14,"%2u",ibX+1);
+  sprintf(szLo+14,"%2u",ibCan+1);
 
   switch (wProgram)
   {
@@ -234,13 +234,13 @@ void    key_GetSingleCan(void)
       enKeyboard = KBD_POSTENTER;
       Clear();
 
-      ibX = 0;
+      ibCan = 0;
       ibY = 0;
       Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
+      if ((ibCan = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
@@ -252,8 +252,8 @@ void    key_GetSingleCan(void)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bCANALS)
-        ibX = 0;
+      if (++ibCan >= bCANALS)
+        ibCan = 0;
 
       ibY = 0;
       Show();
@@ -266,10 +266,10 @@ void    key_GetSingleCan(void)
   {        
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibX > 0) 
-        ibX--;
+      if (ibCan > 0) 
+        ibCan--;
       else         
-        ibX = bCANALS - 1;
+        ibCan = bCANALS - 1;
 
       ibY = 0;
       Show();
