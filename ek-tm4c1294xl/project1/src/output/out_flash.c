@@ -18,9 +18,9 @@ OUT_FLASH,C
 
 void    OutFlashPage(void)
 {
-  uint w = bInBuff5*0x100 + bInBuff6;
+  uint wPageIn = bInBuff5*0x100 + bInBuff6;
 
-  if (w == 0xFFFF)
+  if (wPageIn == 0xFFFF)
   {
     InitPushPtr();
 
@@ -44,10 +44,8 @@ void    OutFlashPage(void)
 
     OutptrOutBuff(1056);
   }
-  else if (w <= FLASH_END)
+  else if (wPageIn <= FLASH_END)
   {
-    wPageIn = w;
-
     if (SafePageRead(wPageIn) == true)
       Outptr(&mpbPageIn, wPAGE_BYTES);
     else

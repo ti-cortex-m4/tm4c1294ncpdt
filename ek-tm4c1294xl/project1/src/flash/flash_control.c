@@ -8,10 +8,11 @@ FLASH_CONTROL,C
 #include "../memory/mem_flash.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
+#include "flash_control.h"
 
 
 
-void    IncFlashControl(void) 
+void    IncFlashControl(uint const  wPageOut)
 {
   mpcwFlashControl[wPageOut]++;
 }

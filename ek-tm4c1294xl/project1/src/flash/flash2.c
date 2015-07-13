@@ -129,18 +129,16 @@ uchar   ReadStatus2(void)
   EnableFlash();
 
   CharOut(0x57);
-  bStatusFlash = CharIn();
+  bFlashStatus = CharIn();
 
   DisableFlash();
-  return(bStatusFlash);
+  return bFlashStatus;
 }
 
 
-bool SafeReadStatus2(void)
+bool    SafeReadStatus2(void)
 {
-uint    i;
-
-  i = 0;
+  uint i = 0;
   while ((ReadStatus2() & 0x80) == 0)
   {
     if (++i > wREAD_STATUS)
@@ -155,11 +153,9 @@ uint    i;
 
 
 
-bool PageErase2(void)
+bool    PageErase2(uint const  wPageOut)
 {
-uint    i;
-
-  IncFlashControl();
+  IncFlashControl(wPageOut);
 
   if (SafeReadStatus2() == false)
     return false;
@@ -169,7 +165,7 @@ uint    i;
 
     CharOut(0x81);
 
-    i = (wPageOut << 2) & 0xFFFC;
+    uint i = (wPageOut << 2) & 0xFFFC;
     CharOut(i / 0x100);
     CharOut(i % 0x100);
     CharOut(0);
@@ -181,10 +177,8 @@ uint    i;
 
 
 
-bool PageRead2(void)
+bool    PageRead2(uint const  wPageIn)
 {
-uint    i;
-
   if (SafeReadStatus2() == false)
     return false;
   else
@@ -193,7 +187,7 @@ uint    i;
 
     CharOut(0x52);
 
-    i = (wPageIn << 2) & 0xFFFC;
+    uint i = (wPageIn << 2) & 0xFFFC;
     CharOut(i / 0x100);
     CharOut(i % 0x100);
     CharOut(0);
@@ -209,11 +203,9 @@ uint    i;
 
 
 
-bool PageWrite2(void)
+bool    PageWrite2(uint const  wPageOut)
 {
-uint    i;
-
-  IncFlashControl();
+  IncFlashControl(wPageOut);
 
   if (SafeReadStatus2() == false)
     return false;
@@ -223,7 +215,7 @@ uint    i;
 
     CharOut(0x82);
 
-    i = (wPageOut << 2) & 0xFFFC;
+    uint i = (wPageOut << 2) & 0xFFFC;
     CharOut(i / 0x100);
     CharOut(i % 0x100);
     CharOut(0);
@@ -241,7 +233,7 @@ uint    i;
 
     CharOut(0x60);
 
-    i = (wPageOut << 2) & 0xFFFC;
+    uint i = (wPageOut << 2) & 0xFFFC;
     CharOut(i / 0x100);
     CharOut(i % 0x100);
     CharOut(0);
@@ -256,7 +248,7 @@ uint    i;
   }
   else
   {
-    if ((bStatusFlash & 0x40) != 0)
+    if ((bFlashStatus & 0x40) != 0)
     {
       cwWrnCompare++;
       return false;

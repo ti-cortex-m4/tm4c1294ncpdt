@@ -143,6 +143,7 @@ uint    i;
     ShowFlashErase();
   }
 
+  uint wPageOut;
   for (wPageOut=IMPHOUCAN; wPageOut<(IMPHOUCAN+IMPHOUCAN_PAGES); wPageOut++)
   {
     if (SafePageErase(wPageOut) == false) return false;
@@ -219,6 +220,7 @@ uint    i;
   ShowHi(szFlashRead);
   wPage = 0;
 
+  uint wPageIn;
   for (wPageIn=FLASH_BEGIN; wPageIn<FLASH_END; wPageIn += 2)
   {
     if (SafePageRead(wPageIn) == false) return false;
