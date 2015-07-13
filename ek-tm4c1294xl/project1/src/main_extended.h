@@ -69,14 +69,14 @@ typedef struct
   uchar         bSecond;
   uchar         bMinute;
   uchar         bHour;
-} time3;
+} stamp;
 
 
 // тип 'диаграмма'
 typedef struct
 {
-  real          reSelf;
-  time3         tmSelf;
+  double        dbValue;
+  stamp         stValue;
 } diagram;
 
 
