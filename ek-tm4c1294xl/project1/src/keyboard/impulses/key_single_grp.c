@@ -77,7 +77,7 @@ static uchar            ibX, ibY, ibZ;
 
 
 
-void    ShowGrpDayMaxPow(void)
+static void ShowGrpDayMaxPow(void)
 {
 time  ti;
 
@@ -92,7 +92,7 @@ time  ti;
 }
 
 
-void    ShowGrpMonMaxPow(void)
+static void ShowGrpMonMaxPow(void)
 {
 time  ti;
 
@@ -108,35 +108,35 @@ time  ti;
 
 
 
-void    ShowGrpDayPrevEng(uchar  bMask)
+static void ShowGrpDayPrevEng(uchar  bMask)
 {
   LoadImpDay( PrevHardDay() );
   ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
-void    ShowGrpDayCurrEng(uchar  bMask)
+static void ShowGrpDayCurrEng(uchar  bMask)
 {
   LoadImpDay( ibHardDay );
   ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
 }
 
 
-void    ShowGrpMonPrevEng(uchar  bMask)
+static void ShowGrpMonPrevEng(uchar  bMask)
 {
   LoadImpMon( PrevHardMon() );
   ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
-void    ShowGrpMonCurrEng(uchar  bMask)
+static void ShowGrpMonCurrEng(uchar  bMask)
 {
   LoadImpMon( ibHardMon );
   ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
 }
 
 
-void    ShowModemReadCntCurrCan(void)
+static void ShowModemReadCntCurrCan(void)
 {
   if (GetDigitalDevice(ibX) == 0)
     ShowFloat(GetCntCurrImp(ibX));
@@ -161,7 +161,7 @@ void    ShowModemReadCntCurrCan(void)
 }
 
 
-void    ShowModemReadTimeCan(bool  fShowTimeDate)
+static void ShowModemReadTimeCan(bool  fShowTimeDate)
 {
   ShowHi(szTimeDate);
 
@@ -198,7 +198,7 @@ void    ShowModemReadTimeCan(bool  fShowTimeDate)
 
 
 
-void    ShowSingle(void)
+static void Show(void)
 {
   switch (wProgram)
   {
@@ -401,7 +401,7 @@ void    key_GetSingleGrp(void)
 
       ibX = 0;
       ibY = 0;
-      ShowSingle();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
@@ -411,7 +411,7 @@ void    key_GetSingleGrp(void)
         Clear();
 
         ibY = 0;
-        ShowSingle();
+        Show();
       }
       else Beep();
     }
@@ -421,7 +421,7 @@ void    key_GetSingleGrp(void)
         ibX = 0;
 
       ibY = 0;
-      ShowSingle();
+      Show();
     }
     else Beep();
   }
@@ -434,7 +434,7 @@ void    key_GetSingleGrp(void)
       if (++ibY >= 3) 
         ibY = 0;
 
-      ShowSingle();
+      Show();
     }
     else Beep();
   }
@@ -450,7 +450,7 @@ void    key_GetSingleGrp(void)
         ibX = bGROUPS - 1;
 
       ibY = 0;
-      ShowSingle();
+      Show();
     }
     else Beep();
   }
@@ -473,5 +473,5 @@ void    key_GetSingleGrp(void)
 void    auto_GetSingleGrp(void)
 {
   if (enKeyboard == KBD_POSTENTER)
-    ShowSingle();
+    Show();
 }
