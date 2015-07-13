@@ -18,7 +18,7 @@ FLASH.C
 
 
 
-bool    SafePageErase(void)
+bool    SafePageErase(uint const  wPage)
 {
   cdwPageErase++;
 
@@ -39,7 +39,7 @@ bool    SafePageErase(void)
 
 
 
-bool    SafePageRead(void)
+bool    SafePageRead(uint const  wPage)
 {
   cdwPageRead++;
 
@@ -60,7 +60,7 @@ bool    SafePageRead(void)
 
 
 
-bool    SafePageWrite(void)
+bool    SafePageWrite(uint const  wPage)
 {
   cdwPageWrite++;
 
