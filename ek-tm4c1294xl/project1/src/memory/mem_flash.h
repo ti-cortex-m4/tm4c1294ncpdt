@@ -8,8 +8,6 @@ MEM_FLASH.H
 
 
 
-extern  uint                    wByteIn, wByteOut;
-
 extern  uchar                   bFlashStatus;
 
 extern  uchar                   mpbPageIn[wPAGE_BYTES],

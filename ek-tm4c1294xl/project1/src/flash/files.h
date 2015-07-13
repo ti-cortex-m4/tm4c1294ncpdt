@@ -9,13 +9,13 @@ FILES.H
 
 
 
-void OpenOut(uint  wPage);
+void OpenOut(uint const  wPage);
 void ClearOut(void);
 bool Save(void  *pbBase, uint  wSize);
 bool Clean(uint  wSize);
 bool CloseOut(void);
 
-bool OpenIn(uint  wPage);
+bool OpenIn(uint const  wPage);
 void ClearIn(void);
 bool Load(void  *pbBase, uint  wSize);
 

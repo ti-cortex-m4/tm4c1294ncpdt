@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
 FILES.C
 
- Функции чтения/записи данных по указателю
+
 ------------------------------------------------------------------------------*/
 
-#include        <string.h>
+#include <string.h>
 #include "../main.h"
 #include "../memory/mem_flash.h"
 #include "flash.h"
@@ -12,13 +12,15 @@ FILES.C
 
 
 
-uint    wPageOut_, wPageIn_;
+uint                    wPageOut, wPageIn;
+
+uint                    wByteIn, wByteOut;
 
 
 
-void    OpenOut(uint  wPage)
+void    OpenOut(uint const  wPage)
 {
-  wPageOut_ = wPage;
+  wPageOut = wPage;
   wByteOut = 0;
 }
 
@@ -42,9 +44,9 @@ uint    i;
     {                                           // заполняем всё свободное место
       memcpy(mpbPageOut + wByteOut, pbBase, wFree);                                
 
-      if (SafePageWrite(wPageOut_) == false) return false; // записываем буфер
+      if (SafePageWrite(wPageOut) == false) return false; // записываем буфер
 
-      OpenOut(wPageOut_ + 1);                    // подготавливаемся к записи следующей страницы
+      OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
       for (i=0; i<wFree; i++)
     	  pbBase = (char *)pbBase + 1;                          // TODO переходим на следующую позицию источника данных
@@ -94,17 +96,17 @@ uint    wFree;
 
 bool CloseOut(void)
 {
-  return SafePageWrite(wPageOut_);
+  return SafePageWrite(wPageOut);
 }
 
 
 
-bool    OpenIn(uint  wPage)
+bool    OpenIn(uint const  wPage)
 {
-  wPageIn_ = wPage;
+  wPageIn = wPage;
   wByteIn = 0;
 
-  return( SafePageRead(wPageIn_) );
+  return SafePageRead(wPageIn);
 }
 
 
@@ -127,7 +129,7 @@ uint    i;
     {                                           // читаем данные из буфера
       memcpy(pbBase, mpbPageIn + wByteIn, wFree);
 
-      if (OpenIn(wPageIn_ + 1) == 0) return false;  // читаем в буфер следующую страницу
+      if (OpenIn(wPageIn + 1) == 0) return false;  // читаем в буфер следующую страницу
 
       for (i=0; i<wFree; i++)
     	  pbBase = (char *)pbBase + 1;                          // TODO переходим на следующую позицию источника данных
