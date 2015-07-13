@@ -70,9 +70,9 @@ void    Keyboard_Auto(void)
       {
         case bGET_CNTCURR_10:
         case bGET_CNTCURR_110:      if (GetDigitalDevice(ibX) == 0)
-                                    auto_GetSingle();   break;
+                                    auto_GetSingleCan();   break;
 
-        case bGET_IMPCANCURRMNT:    auto_GetSingle();   break;
+        case bGET_IMPCANCURRMNT:    auto_GetSingleCan();   break;
       }
     }
 

@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-KEY_SINGLE.H
+KEY_SINGLE_GRP.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetSingle(item  it);
-void    auto_GetSingle(void);
+void    key_GetSingleGrp(void);
+void    auto_GetSingleGrp(void);

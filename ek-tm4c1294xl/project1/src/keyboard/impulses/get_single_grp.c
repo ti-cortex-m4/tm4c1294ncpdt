@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_SINGLE.C
+KEY_SINGLE_GRP.C
 
  Просмотр канальных и групповых величин (старый вариант)
 ------------------------------------------------------------------------------*/
@@ -16,7 +16,6 @@ KEY_SINGLE.C
 #include "../../serial/ports.h"
 #include "../../serial/modems.h"
 #include "../../kernel/array_mnt.h"
-
 #include "../../energy.h"
 #include "../../energy2.h"
 #include "../../energy4.h"
@@ -351,7 +350,7 @@ void    ShowSingle(void)
 
 
 
-void    key_GetSingle(item  it)
+void    key_GetSingle(void)
 {
   if (bKey == bKEY_ENTER)
   {

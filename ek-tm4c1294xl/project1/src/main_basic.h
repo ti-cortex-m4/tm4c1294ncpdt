@@ -50,14 +50,6 @@ typedef union
 } combo64;
 
 
-// тип 'канал/группа'
-typedef enum
-{
-  BY_CANALS,
-  BY_GROUPS
-} item;
-
-
 // тип 'мощность/энергия'
 typedef enum
 {

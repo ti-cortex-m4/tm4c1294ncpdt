@@ -235,7 +235,7 @@ void    Keyboard_Key(void)
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
-      case bGET_READTIMEDATE2:  key_GetSingle(BY_CANALS);  break;
+      case bGET_READTIMEDATE2:  key_GetSingleCan();     break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
@@ -400,7 +400,7 @@ void    Keyboard_Key(void)
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
       case bGET_READTIMEDATE2:
-      case bGET_IMPCANCURRMNT:  key_GetSingle(BY_CANALS);  break;
+      case bGET_IMPCANCURRMNT:  key_GetSingleCan();     break;
 
       case bGET_POWGRPPREVHOU:
       case bGET_POWGRPCURRHOU:
@@ -441,7 +441,7 @@ void    Keyboard_Key(void)
       case bGET_ENGGRPMONCURR_B:
       case bGET_ENGGRPMONCURR_A:
 
-      case bGET_POWGRPCURRMNT:  key_GetSingle(BY_GROUPS);  break;
+      case bGET_POWGRPCURRMNT:  key_GetSingleGrp();     break;
 
       case bGET_POWCANPREVHOU:
       case bGET_POWCANCURRHOU:
@@ -648,7 +648,7 @@ void    Keyboard_Key(void)
 
       case bGET_CNTCURR_110:
       case bGET_READTIMEDATE1:
-      case bGET_READTIMEDATE2:  key_GetSingle(BY_CANALS);  break;
+      case bGET_READTIMEDATE2:  key_GetSingleCan();     break;
 
       case bSET_DECRET:         key_SetDecret();        break;
       case bSET_WINTER:
