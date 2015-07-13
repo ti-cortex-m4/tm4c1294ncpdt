@@ -10,7 +10,7 @@ KEYBOARD_AUTO.C
 #include "../impulses/impulses.h"
 #include "keyboard.h"
 #include "time/key_timedate.h"
-#include "impulses/key_single.h"
+#include "impulses/key_single_can.h"
 #include "impulses/key_single2.h"
 #include "impulses/key_oldprogram73.h"
 #include "impulses/key_oldprogram74.h"

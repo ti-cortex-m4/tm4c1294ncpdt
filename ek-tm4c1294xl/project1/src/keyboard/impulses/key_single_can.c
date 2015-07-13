@@ -77,24 +77,6 @@ static uchar            ibX, ibY, ibZ;
 
 
 
-uchar   GetMaxItem(item  it)
-{
-  if (it == BY_GROUPS)
-    return(bGROUPS);
-  else
-    return(bCANALS);
-}
-
-
-void    ShowItemName(item  it)
-{
-  if (it == BY_GROUPS)
-    Group();
-  else
-    Canal();
-}
-
-
 void    ShowGrpDayMaxPow(void)
 {
 time  ti;
@@ -357,7 +339,7 @@ void    key_GetSingle(void)
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
-      ShowItemName(it);
+      Canal();
 
       InitConnectKey();
 
@@ -423,7 +405,7 @@ void    key_GetSingle(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11) - 1) < GetMaxItem(it))
+      if ((ibX = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
@@ -435,23 +417,10 @@ void    key_GetSingle(void)
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= GetMaxItem(it))
+      if (++ibX >= bCANALS)
         ibX = 0;
 
       ibY = 0;
-      ShowSingle();
-    }
-    else Beep();
-  }
-
-
-  else if (bKey == bKEY_MINUS)
-  {
-    if ((it == BY_GROUPS) && (enKeyboard == KBD_POSTENTER))
-    {
-      if (++ibY >= 3) 
-        ibY = 0;
-
       ShowSingle();
     }
     else Beep();
@@ -465,7 +434,7 @@ void    key_GetSingle(void)
       if (ibX > 0) 
         ibX--;
       else         
-        ibX = GetMaxItem(it) - 1;
+        ibX = bCANALS - 1;
 
       ibY = 0;
       ShowSingle();
