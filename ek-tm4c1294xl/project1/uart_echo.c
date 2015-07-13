@@ -42,6 +42,7 @@ TODO .C
 #include "src/serial/modems.h"
 #include "src/serial/print.h"
 #include "src/flash/flash1.h"
+#include "src/flash/flash2.h"
 #include "src/flash/storage.h"
 #include "src/flash/records.h"
 #include "src/settings.h"
@@ -89,7 +90,8 @@ int main(void) {
 	InitBeep();
 	InitLCD();
 	InitNvram();
-	InitFlash1();            //Delay(100); TestOK();
+	InitFlash1();
+//	InitFlash2();
 	InitRTC();
 	InitCODE();
 
