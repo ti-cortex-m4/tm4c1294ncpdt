@@ -18,7 +18,7 @@
 
 
 // количество повторов
-#define bNVRAM_REPEATS  8
+#define NVRAM_REPEATS   8
 
 
 
@@ -250,12 +250,12 @@ bool    ReadNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   cdwNvramReadBuffs++;
 
   uchar i;
-  for (i=0; i<bNVRAM_REPEATS; i++) {
+  for (i=0; i<NVRAM_REPEATS; i++) {
     if (ReadNvramBuff_Raw(dwAddr, pbBuff, wSize) == true) break;
     cwWrnNvramRead++;
   }
 
-  if (i == bNVRAM_REPEATS) {
+  if (i == NVRAM_REPEATS) {
     cwErrNvramRead++;
     return false;
   } else {
@@ -269,12 +269,12 @@ bool    WriteNvramBuff(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   cdwNvramWriteBuffs++;
 
   uchar i;
-  for (i=0; i<bNVRAM_REPEATS; i++) {
+  for (i=0; i<NVRAM_REPEATS; i++) {
     if (WriteNvramBuff_Raw(dwAddr, pbBuff, wSize) == true) break;
     cwWrnNvramWrite++;
   }
 
-  if (i == bNVRAM_REPEATS) {
+  if (i == NVRAM_REPEATS) {
     cwErrNvramWrite++;
     return false;
   } else {
@@ -288,12 +288,12 @@ bool    FreeNvramBuff(ulong  dwAddr, uint  wSize)
   cdwNvramFreeBuffs++;
 
   uchar i;
-  for (i=0; i<bNVRAM_REPEATS; i++) {
+  for (i=0; i<NVRAM_REPEATS; i++) {
     if (FreeNvramBuff_Raw(dwAddr, wSize) == true) break;
     cwWrnNvramFree++;
   }
 
-  if (i == bNVRAM_REPEATS) {
+  if (i == NVRAM_REPEATS) {
     cwErrNvramFree++;
     return false;
   } else {
