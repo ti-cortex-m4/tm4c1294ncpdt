@@ -73,67 +73,8 @@ static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "
 
 
 
-static uchar            ibX, ibY, ibZ;
+static uchar            ibX;
 
-
-
-static void ShowGrpDayMaxPow(void)
-{
-time  ti;
-
-  ti = GetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ);
-
-  switch (ibY)
-  {
-    case 0:  ShowFloat(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ],ibX,ibZ));  break;
-    case 1:  ShowTime(ti);  break;
-    case 2:  ShowDate(ti);  break;
-  }
-}
-
-
-static void ShowGrpMonMaxPow(void)
-{
-time  ti;
-
-  ti = GetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ);
-
-  switch (ibY)
-  {
-    case 0:  ShowFloat(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ],ibX,ibZ));  break;
-    case 1:  ShowTime(ti);  break;
-    case 2:  ShowDate(ti);  break;
-  }
-}
-
-
-
-static void ShowGrpDayPrevEng(uchar  bMask)
-{
-  LoadImpDay( PrevHardDay() );
-  ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
-}
-
-
-static void ShowGrpDayCurrEng(uchar  bMask)
-{
-  LoadImpDay( ibHardDay );
-  ShowDouble(GetGrpImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],ibX,bMask));
-}
-
-
-static void ShowGrpMonPrevEng(uchar  bMask)
-{
-  LoadImpMon( PrevHardMon() );
-  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
-}
-
-
-static void ShowGrpMonCurrEng(uchar  bMask)
-{
-  LoadImpMon( ibHardMon );
-  ShowDouble(GetGrpImp2DoubleEng(mpimMonCan[ PrevSoftMon() ],ibX,bMask));
-}
 
 
 static void ShowModemReadCntCurrCan(void)
@@ -210,115 +151,9 @@ static void Show(void)
       ShowModemReadCntCurrCan(); 
       break;
 
-    case bGET_POWGRPCURRMNT:
-    	LoadImpMnt( PrevHardMnt() );
-      ShowFloat(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
-      break;
-
     case bGET_IMPCANCURRMNT:
       ShowInt(mpwImpMntCan[ ibSoftMnt ][ibX]);
       break;
-
-    case bGET_POWGRPPREVHOU:      
-      LoadImpHou( PrevHardHou() );
-      ShowFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ],ibX,2));
-      break;
-
-    case bGET_POWGRPCURRHOU:
-      ShowFloat(GetPowGrpHouCurr(ibX,2));
-      break;
-
-    case bGET_POWGRPDAYPREV_ABCD:  
-      LoadPowDay( PrevHardDay() );
-      ibZ = GetGrpMaxPowIndex(mppoDayGrp[ PrevSoftDay() ],ibX);
-      ShowGrpDayMaxPow();
-      break;
-
-    case bGET_POWGRPDAYPREV_C:     
-      LoadPowDay( PrevHardDay() );   
-      ibZ = 2;        
-      ShowGrpDayMaxPow();
-      break;
-
-    case bGET_POWGRPDAYPREV_D:     
-      LoadPowDay( PrevHardDay() );
-      ibZ = 3;  
-      ShowGrpDayMaxPow();
-      break;
-
-    case bGET_POWGRPDAYCURR_ABCD:
-      LoadPowDay(ibHardDay);
-      ibZ = GetGrpMaxPowIndex(mppoDayGrp[ PrevSoftDay() ],ibX);
-      ShowGrpDayMaxPow();
-      break;
-
-    case bGET_POWGRPDAYCURR_C:     
-      LoadPowDay(ibHardDay);
-      ibZ = 2;
-      ShowGrpDayMaxPow();
-      break;
-
-    case bGET_POWGRPDAYCURR_D:     
-      LoadPowDay(ibHardDay);
-      ibZ = 3;
-      ShowGrpDayMaxPow();
-      break;
-
-    case bGET_POWGRPMONPREV_ABCD: 
-      LoadPowMon( PrevHardMon() ); 
-      ibZ = GetGrpMaxPowIndex(mppoMonGrp[ PrevSoftMon() ],ibX);  
-      ShowGrpMonMaxPow();
-      break;
-
-    case bGET_POWGRPMONPREV_C:     
-      LoadPowMon( PrevHardMon() ); 
-      ibZ = 2;
-      ShowGrpMonMaxPow();
-      break;
-
-    case bGET_POWGRPMONPREV_D:     
-      LoadPowMon( PrevHardMon() ); 
-      ibZ = 3;
-      ShowGrpMonMaxPow();
-      break;
-
-    case bGET_POWGRPMONCURR_ABCD: 
-      LoadPowMon(ibHardMon);  
-      ibZ = GetGrpMaxPowIndex(mppoMonGrp[ PrevSoftMon() ],ibX);  
-      ShowGrpMonMaxPow();
-      break;
-
-    case bGET_POWGRPMONCURR_C:   
-      LoadPowMon(ibHardMon);
-      ibZ = 2;
-      ShowGrpMonMaxPow();
-      break;
-
-    case bGET_POWGRPMONCURR_D: 
-      LoadPowMon(ibHardMon);
-      ibZ = 3;
-      ShowGrpMonMaxPow();
-      break;
-
-    case bGET_ENGGRPDAYPREV_ABCD:  ShowGrpDayPrevEng(0x0F);  break;
-    case bGET_ENGGRPDAYPREV_CD:    ShowGrpDayPrevEng(0x0C);  break;
-    case bGET_ENGGRPDAYPREV_B:     ShowGrpDayPrevEng(0x02);  break;
-    case bGET_ENGGRPDAYPREV_A:     ShowGrpDayPrevEng(0x01);  break;
-
-    case bGET_ENGGRPDAYCURR_ABCD:  ShowGrpDayCurrEng(0x0F);  break;
-    case bGET_ENGGRPDAYCURR_CD:    ShowGrpDayCurrEng(0x0C);  break;
-    case bGET_ENGGRPDAYCURR_B:     ShowGrpDayCurrEng(0x02);  break;
-    case bGET_ENGGRPDAYCURR_A:     ShowGrpDayCurrEng(0x01);  break;
-
-    case bGET_ENGGRPMONPREV_ABCD:  ShowGrpMonPrevEng(0x0F);  break;
-    case bGET_ENGGRPMONPREV_CD:    ShowGrpMonPrevEng(0x0C);  break;
-    case bGET_ENGGRPMONPREV_B:     ShowGrpMonPrevEng(0x02);  break;
-    case bGET_ENGGRPMONPREV_A:     ShowGrpMonPrevEng(0x01);  break;
-
-    case bGET_ENGGRPMONCURR_ABCD:  ShowGrpMonCurrEng(0x0F);  break;
-    case bGET_ENGGRPMONCURR_CD:    ShowGrpMonCurrEng(0x0C);  break;
-    case bGET_ENGGRPMONCURR_B:     ShowGrpMonCurrEng(0x02);  break;
-    case bGET_ENGGRPMONCURR_A:     ShowGrpMonCurrEng(0x01);  break; 
   }      
 
   sprintf(szLo+14,"%2u",ibX+1);

@@ -26,8 +26,7 @@ KEY_SINGLE_GRP.C
 
 
 //                                             0123456789ABCDEF
-static char const       szTimeDate[]        = "Время и дата    ",
-                        szNone[]            = "      нет    ";
+static char const       szTimeDate[]        = "Время и дата    ";
 
 static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "" },
                        *pszCountersB[]      = { szCounters, szForDigital, "" },
@@ -136,82 +135,13 @@ static void ShowGrpMonCurrEng(uchar  bMask)
 }
 
 
-static void ShowModemReadCntCurrCan(void)
-{
-  if (GetDigitalDevice(ibX) == 0)
-    ShowFloat(GetCntCurrImp(ibX));
-  else
-  {
-    LoadCurrDigital(ibX);
-    ibPort = diCurr.ibPort;
-
-    if (LoadConnect(ibX) == 0) return;
-    Clear();
-
-    if (mpboEnblCan[ibX] == false)
-      ShowLo(szBlocked);
-    else
-    {
-      double2 db2 = ReadCntCurrCan(ibX);
-      (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
-    }
-
-    SaveConnect();
-  }
-}
-
-
-static void ShowModemReadTimeCan(bool  fShowTimeDate)
-{
-  ShowHi(szTimeDate);
-
-  if (GetDigitalDevice(ibX) == 0)
-    ShowLo(szNone);
-  else
-  {
-    LoadCurrDigital(ibX);
-    ibPort = diCurr.ibPort;
-
-    if (LoadConnect(ibX) == 0) return;
-    Clear();
-
-    if (mpboEnblCan[ibX] == false)
-    {
-      sprintf(szHi+14,"%2u",ibX+1);
-      ShowLo(szBlocked);
-    }
-    else
-    {
-      time2 ti2 = ReadTimeCan(ibX);
-      if (ti2.fValid)
-      {
-        sprintf(szHi+14,"%2u",ibX+1);
-        Clear();
-        (fShowTimeDate) ? ShowTimeDate(ti2.tiValue) : ShowDeltaTime(ti2.tiValue);
-      }
-      else Error();
-    }
-
-    SaveConnect();
-  }
-}
-
-
 
 static void Show(void)
 {
   switch (wProgram)
   {
-    case bGET_CNTCURR_10:
-      ShowModemReadCntCurrCan(); 
-      break;
-
-    case bGET_CNTCURR_110:
-      ShowModemReadCntCurrCan(); 
-      break;
-
     case bGET_POWGRPCURRMNT:
-    	LoadImpMnt( PrevHardMnt() );
+      LoadImpMnt( PrevHardMnt() );
       ShowFloat(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibX,20));
       break;
 
@@ -322,12 +252,6 @@ static void Show(void)
   }      
 
   sprintf(szLo+14,"%2u",ibX+1);
-
-  switch (wProgram)
-  {
-    case bGET_READTIMEDATE1:  ShowModemReadTimeCan(true);  break;
-    case bGET_READTIMEDATE2:  ShowModemReadTimeCan(false);  break;
-  }
 }
 
 
