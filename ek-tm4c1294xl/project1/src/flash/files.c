@@ -31,14 +31,11 @@ void ClearOut(void)
 }
 
 
-bool Save(void  *pbBase, uint  wSize)
+bool Save(uchar  *pbBase, uint  wSize)
 {
-uint    wFree;
-uint    i;
-
   while (wSize > 0)
   {
-    wFree = wLEAF_BYTES - wByteOut;          // размер свободной части буфера
+    uint wFree = wLEAF_BYTES - wByteOut;        // размер свободной части буфера
 
     if (wSize > wFree)                          // блок данных больше размера свободной части буфера
     {                                           // заполняем всё свободное место
@@ -48,8 +45,7 @@ uint    i;
 
       OpenOut(wPageOut + 1);                    // подготавливаемся к записи следующей страницы
 
-      for (i=0; i<wFree; i++)
-    	  pbBase = (char *)pbBase + 1;                          // TODO переходим на следующую позицию источника данных
+      pbBase += wFree;                          // переходим на следующую позицию источника данных
       wSize  -= wFree;                          // уменьшаем размер блока данных
     }
     else
@@ -116,14 +112,11 @@ void ClearIn(void)
 }
 
 
-bool Load(void  *pbBase, uint  wSize)
+bool Load(uchar  *pbBase, uint  wSize)
 {     
-uint    wFree;
-uint    i;
-
   while (wSize > 0)
   {
-    wFree = wLEAF_BYTES - wByteIn;           // размер непрочитанной части буфера
+    uint wFree = wLEAF_BYTES - wByteIn;         // размер непрочитанной части буфера
 
     if (wSize > wFree)                          // блок данных больше размера непрочитанной части буфера
     {                                           // читаем данные из буфера
@@ -131,8 +124,7 @@ uint    i;
 
       if (OpenIn(wPageIn + 1) == 0) return false;  // читаем в буфер следующую страницу
 
-      for (i=0; i<wFree; i++)
-    	  pbBase = (char *)pbBase + 1;                          // TODO переходим на следующую позицию источника данных
+      pbBase += wFree;                          // переходим на следующую позицию источника данных
       wSize  -= wFree;                          // уменьшаем размер блока данных
     }
     else

@@ -11,13 +11,13 @@ FILES.H
 
 void OpenOut(uint const  wPage);
 void ClearOut(void);
-bool Save(void  *pbBase, uint  wSize);
+bool Save(uchar  *pbBase, uint  wSize);
 bool Clean(uint  wSize);
 bool CloseOut(void);
 
 bool OpenIn(uint const  wPage);
 void ClearIn(void);
-bool Load(void  *pbBase, uint  wSize);
+bool Load(uchar  *pbBase, uint  wSize);
 
 bool SaveBuff(uint wPage, void *pbBuff, uint wSize);
 bool CleanBuff(uint wPage, uint wSize);
