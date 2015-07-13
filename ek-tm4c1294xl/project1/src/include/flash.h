@@ -33,9 +33,6 @@ FLASH.H
 // количество повторов при чтении регистра состояния (TODO: use milliseconds)
 #define wREAD_STATUS    50000
 
-// количество повторов
-#define bFLASH_REPEATS  8
-
 
 // количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
 #define UINT_CAN_PAGES      (uchar)(sizeof(uint)    * bCANALS/wLEAF_BYTES + 1)

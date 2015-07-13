@@ -13,18 +13,23 @@ FLASH.C
 
 
 
+// количество повторов
+#define FLASH_REPEATS   8
+
+
+
 bool    SafePageErase(void)
 {
   cdwPageErase++;
 
   uchar i;
-  for (i=0; i<bFLASH_REPEATS; i++)
+  for (i=0; i<FLASH_REPEATS; i++)
   {
     if (PageErase1() == true) break;
     cwWrnPageErase++;
   }
 
-  if (i == bFLASH_REPEATS)
+  if (i == FLASH_REPEATS)
   {
     cwErrPageErase++;
     return false;
@@ -39,13 +44,13 @@ bool    SafePageRead(void)
   cdwPageRead++;
 
   uchar i;
-  for (i=0; i<bFLASH_REPEATS; i++)
+  for (i=0; i<FLASH_REPEATS; i++)
   {
     if (PageRead1() == true) break;
     cwWrnPageRead++;
   }
 
-  if (i == bFLASH_REPEATS)
+  if (i == FLASH_REPEATS)
   {
     cwErrPageRead++;
     return false;
@@ -73,13 +78,13 @@ bool    SafePageWrite(void)
   mpbPageOut[wPAGE_BYTES-1] = bCRCLo;
 
   uchar i;
-  for (i=0; i<bFLASH_REPEATS; i++)
+  for (i=0; i<FLASH_REPEATS; i++)
   {
     if (PageWrite1() == true) break;
     cwWrnPageWrite++;
   }
 
-  if (i == bFLASH_REPEATS)
+  if (i == FLASH_REPEATS)
   {
     cwErrPageWrite++;
     return false;
