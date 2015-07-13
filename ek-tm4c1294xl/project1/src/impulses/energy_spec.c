@@ -76,7 +76,7 @@ bool    SaveImpHouSpec(bool  fCurr, uint  iwHouTo)
   {
     OpenOut(IMPHOUCAN + iwHouTo*UINT_CAN_PAGES);
 
-    if (Save(mpwImpHouCanSpec, sizeof(uint)*bCANALS) == 0)
+    if (Save((uchar *) &mpwImpHouCanSpec, sizeof(uint)*bCANALS) == 0)
       return(0);
 
     return( CloseOut() );
@@ -96,7 +96,7 @@ bool    fAlt;
   else                              
   {
     OpenIn(IMPHOUCAN + iwHouFrom*UINT_CAN_PAGES);
-    fAlt = Load(mpwImpHouCanSpec, sizeof(uint)*bCANALS);
+    fAlt = Load((uchar *) &mpwImpHouCanSpec, sizeof(uint)*bCANALS);
   }
 
   if (fFree == 0)
@@ -128,7 +128,7 @@ bool    SaveImpDaySpec(bool  fCurr, uchar  ibDayTo)
   {
     OpenOut(IMPDAYCAN + ibDayTo*IMP_CAN_PAGES);
 
-    if (Save(mpimDayCanSpec, sizeof(impulse)*bCANALS) == 0)
+    if (Save((uchar *) &mpimDayCanSpec, sizeof(impulse)*bCANALS) == 0)
       return(0);
 
     return( CloseOut() );
@@ -146,7 +146,7 @@ bool    LoadImpDaySpec(uchar  ibDayFrom)
   else
   {
     OpenIn(IMPDAYCAN + ibDayFrom*IMP_CAN_PAGES);
-    return( Load(mpimDayCanSpec, sizeof(impulse)*bCANALS) );
+    return( Load((uchar *) &mpimDayCanSpec, sizeof(impulse)*bCANALS) );
   }
 }
 
@@ -163,7 +163,7 @@ bool    SaveImpMonSpec(bool  fCurr, uchar  ibMonTo)
   {
     OpenOut(IMPMONCAN + ibMonTo*IMP_CAN_PAGES);
 
-    if (Save(mpimMonCanSpec, sizeof(impulse)*bCANALS) == 0)
+    if (Save((uchar *) &mpimMonCanSpec, sizeof(impulse)*bCANALS) == 0)
       return(0);
 
     return( CloseOut() );
@@ -181,7 +181,7 @@ bool    LoadImpMonSpec(uchar  ibMonFrom)
   else
   {
     OpenIn(IMPMONCAN + ibMonFrom*IMP_CAN_PAGES);
-    return( Load(mpimMonCanSpec, sizeof(impulse)*bCANALS) );
+    return( Load((uchar *) &mpimMonCanSpec, sizeof(impulse)*bCANALS) );
   }
 }
 
@@ -198,7 +198,7 @@ bool    SavePowDaySpec(bool  fCurr, uchar  ibDayTo)
   {
     OpenOut(POWDAYGRP + ibDayTo*MAXPOW_GRP_PAGES);
 
-    if (Save(mppoDayGrpSpec, sizeof(power)*bGROUPS) == 0)
+    if (Save((uchar *) &mppoDayGrpSpec, sizeof(power)*bGROUPS) == 0)
       return(0);
 
     return( CloseOut() );
@@ -216,7 +216,7 @@ bool    LoadPowDaySpec(uchar  ibDayFrom)
   else
   {
     OpenIn(POWDAYGRP + ibDayFrom*MAXPOW_GRP_PAGES);
-    return( Load(mppoDayGrpSpec, sizeof(power)*bGROUPS) );
+    return( Load((uchar *) &mppoDayGrpSpec, sizeof(power)*bGROUPS) );
   }
 }
 
@@ -233,7 +233,7 @@ bool    SavePowMonSpec(bool  fCurr, uchar  ibMonTo)
   {
     OpenOut(POWMONGRP + ibMonTo*MAXPOW_GRP_PAGES);
 
-    if (Save(mppoMonGrpSpec, sizeof(power)*bGROUPS) == 0)
+    if (Save((uchar *) &mppoMonGrpSpec, sizeof(power)*bGROUPS) == 0)
       return(0);
 
     return( CloseOut() );
@@ -251,7 +251,7 @@ bool    LoadPowMonSpec(uchar  ibMonFrom)
   else
   {
     OpenIn(POWMONGRP + ibMonFrom*MAXPOW_GRP_PAGES);
-    return( Load(mppoMonGrpSpec, sizeof(power)*bGROUPS) );
+    return( Load((uchar *) &mppoMonGrpSpec, sizeof(power)*bGROUPS) );
   }
 }
 
