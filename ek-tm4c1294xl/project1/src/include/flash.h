@@ -16,6 +16,7 @@ FLASH.H
 #include "../memory/mem_extended_4t.h"
 #include "../memory/mem_extended_5.h"
 #include "../memory/mem_extended_6.h"
+#include "../memory/mem_diagram.h"
 #include "../memory/mem_correct1.h"
 
 
@@ -46,6 +47,7 @@ FLASH.H
 #define VALUE5_CAN_PAGES    (uchar)(sizeof(mpCntDayCan5)/wLEAF_BYTES + 1)
 #define VALUE6_CAN_PAGES    (uchar)(sizeof(mpCntMonCan6)/wLEAF_BYTES + 1)
 #define VALUE7_CAN_PAGES    (uchar)(sizeof(mpCntDayCan7)/wLEAF_BYTES + 1)
+#define DIAGRAM_CAN_PAGES   (uchar)(sizeof(mpDiagram)/wLEAF_BYTES + 1)
 
 
 // размер блока данных

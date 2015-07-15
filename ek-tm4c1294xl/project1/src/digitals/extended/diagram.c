@@ -8,7 +8,7 @@ DIAGRAM.C
 
 
 
-/*static*/ diagram          mpdgDiagram[bCANALS], dgBuff;
+/*static*/ diagram          mpDiagram[bCANALS], dgBuff;
 
 
 
@@ -16,7 +16,7 @@ DIAGRAM.C
 void    LoadDiaHou(uint  iwHouFrom)
 {
   OpenIn(wFLA_DIAGRAM + iwHouFrom/2);
-  memcpy(mpdgDiagram, mpbPageIn + (iwHouFrom%2)*wDIAGRAM_LENGTH, wDIAGRAM_LENGTH);
+  memcpy(mpDiagram, mpbPageIn + (iwHouFrom%2)*wDIAGRAM_LENGTH, wDIAGRAM_LENGTH);
 }
 
 
@@ -24,7 +24,7 @@ void    SaveDiaHou(uint  iwHouTo)
 {
   OpenOut(wFLA_DIAGRAM + iwHouTo/2);
   memcpy(mpbPageOut, mpbPageIn, wFREEPAGE_SIZE);
-  memcpy(mpbPageOut + (iwHouTo%2)*wDIAGRAM_LENGTH, mpdgDiagram, wDIAGRAM_LENGTH);
+  memcpy(mpbPageOut + (iwHouTo%2)*wDIAGRAM_LENGTH, mpDiagram, wDIAGRAM_LENGTH);
   CloseOut();
 }
 
@@ -34,7 +34,7 @@ void    NextHouDiagram(void)
 {
   LoadDiaHou(iwHardHou);
 
-  memset(&mpdgDiagram, 0xFF, sizeof(mpdgDiagram));
+  memset(&mpDiagram, 0xFF, sizeof(mpDiagram));
 
   for (ibCan=0; ibCan<16; ibCan++)
   {
@@ -51,7 +51,7 @@ void    NextHouDiagram(void)
       dgBuff.stValuef.bMinute = tiAlt.bMinute;
       dgBuff.stValuef.bHour   = tiAlt.bHour;
 
-      mpdgDiagram[ibCan] = dgBuff;
+      mpDiagram[ibCan] = dgBuff;
     }
   }
 
@@ -70,7 +70,7 @@ void    MakeDiagram(uchar  ibCanal)
   dgBuff.stValuef.bMinute = tiAlt.bMinute;
   dgBuff.stValuef.bHour   = tiAlt.bHour;
 
-  mpdgDiagram[ibCanal] = dgBuff;
+  mpDiagram[ibCanal] = dgBuff;
 
   SaveDiaHou(iwHardHou);
 }                        
@@ -101,7 +101,7 @@ uchar   i,j;
         }
         else
         {
-          Push(&mpdgDiagram[ i ], sizeof(diagram) );
+          Push(&mpDiagram[ i ], sizeof(diagram) );
         }
 
         wBuffD += sizeof(diagram);
