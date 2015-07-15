@@ -20,6 +20,7 @@ TODO .C
 #include "utils/uartstdio.h"
 #include "src/hardware/watchdog.h"
 #include "src/hardware/system_clock.h"
+#include "src/hardware/sys_tick.h"
 #include "src/hardware/beep.h"
 #include "src/display/lcd.h"
 #include "src/time/rtc.h"
@@ -80,6 +81,7 @@ TODO .C
 int main(void) {
   ui32SysClock = GetSystemClockFrequency();
 
+  InitSysTick(ui32SysClock);
   InitUart0(ui32SysClock);
   InitUart2(ui32SysClock);
   InitUart3(ui32SysClock);
