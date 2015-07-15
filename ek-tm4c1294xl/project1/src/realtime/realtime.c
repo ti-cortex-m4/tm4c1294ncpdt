@@ -68,8 +68,8 @@ uint    j;
 
 uchar   PrevSoftMnt(void)
 {
-  if (ibSoftMnt > 0) return(ibSoftMnt - 1);
-  else               return(bMINUTES-1);
+  if (ibSoftMnt > 0) return(0);
+  else               return(1);
 }
 
 
