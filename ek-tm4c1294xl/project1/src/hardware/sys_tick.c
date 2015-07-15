@@ -14,9 +14,8 @@ SYS_TICK.C
 
 void    InitSysTick(uint32_t  ui32SysClock)
 {
-  SysTickPeriodSet((ui32SysClock / 1000) - 1); // 1 ms
+  SysTickPeriodSet(ui32SysClock / 1000); // 1 ms
   HWREG(NVIC_ST_CURRENT) = 0;
-  SysTickDisable();
 }
 
 
