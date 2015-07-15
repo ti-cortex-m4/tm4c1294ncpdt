@@ -6,17 +6,17 @@ DIAGRAM.C
 
 #include "../../main.h"
 #include "../../memory/mem_diagram.h"
+#include "../../memory/mem_factors.h"
+#include "../../memory/mem_energy.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_ports.h"
+#include "../../digitals/digitals.h"
 #include "../../realtime/realtime.h"
+#include "../../energy.h"
 #include "../../flash/files.h"
 #include "../../time/rtc.h"
 #include "../../serial/ports.h"
 #include "diagram.h"
-
-
-
-/*static*/ diagram          dgBuff;
 
 
 
@@ -32,35 +32,37 @@ bool    LoadDgrHou(uchar  ibHouFrom)
 }
 
 
-/*
+
 void    NextHouDiagram(void)
 {
   LoadDgrHou(iwHardHou);
 
   memset(&mpDiagram, 0xFF, sizeof(mpDiagram));
 
-  for (ibCan=0; ibCan<16; ibCan++)
+  uchar c;
+  for (c=0; c<16; c++)
   {
-    if (GetDigitalDevice(ibCan) == 0)
+    if (GetDigitalDevice(c) == 0)
     {
-      reBuffA  = *PGetCanImpAll(mpimAbsCan,ibCan);
-      reBuffA *= *PGetCanReal(mpreValueCntHou,ibCan);
-      reBuffA += *PGetCanReal(mpreCount,ibCan);
+      double db = *PGetCanImpAll(mpimAbsCan,c);
+      db *= mpdbValueCntHou[c];
+      db += mpdbCount[c];
 
-      dgBuff.dbValue = reBuffA;
+      diagram vl;
+      vl.dbValue = db;
 
-      tiAlt = *PGetCurrTimeDate();
-      dgBuff.stValuef.bSecond = tiAlt.bSecond;
-      dgBuff.stValuef.bMinute = tiAlt.bMinute;
-      dgBuff.stValuef.bHour   = tiAlt.bHour;
+      time ti = *GetCurrTimeDate();
+      vl.stValue.bSecond = ti.bSecond;
+      vl.stValue.bMinute = ti.bMinute;
+      vl.stValue.bHour   = ti.bHour;
 
-      mpDiagram[ibCan] = dgBuff;
+      mpDiagram[c] = vl;
     }
   }
 
   SaveDgrHou(iwHardHou);
 }
-*/
+
 
 void    MakeDiagram(uchar  ibCan, double  db)
 {
@@ -102,21 +104,13 @@ void    OutDiagram(bool  fDouble)
         {
           if (fDouble)
           {
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
+            uchar i;
+            for (i=0; i<8; i++) wSize += PushChar(0xFF);
           }
           else
           {
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
+            uchar i;
+            for (i=0; i<4; i++) wSize += PushChar(0xFF);
           }
 
           wSize += PushChar(0xFF);
