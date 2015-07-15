@@ -5,34 +5,37 @@ DIAGRAM.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_diagram.h"
+#include "../../memory/mem_realtime.h"
+#include "../../memory/mem_ports.h"
+#include "../../realtime/realtime.h"
+#include "../../flash/files.h"
+#include "../../time/rtc.h"
+#include "../../serial/ports.h"
+#include "diagram.h"
 
 
 
-/*static*/ diagram          mpDiagram[bCANALS], dgBuff;
+/*static*/ diagram          dgBuff;
 
+
+
+bool    SaveDgrHou(uchar  ibHouTo)
+{
+  return SaveBuff(DIAGRAM_HHR_VALUES + ibHouTo*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
+}
+
+
+bool    LoadDgrHou(uchar  ibHouFrom)
+{
+  return LoadBuff(DIAGRAM_HHR_VALUES + ibHouFrom*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
+}
 
 
 /*
-void    LoadDiaHou(uint  iwHouFrom)
-{
-  OpenIn(wFLA_DIAGRAM + iwHouFrom/2);
-  memcpy(mpDiagram, mpbPageIn + (iwHouFrom%2)*wDIAGRAM_LENGTH, wDIAGRAM_LENGTH);
-}
-
-
-void    SaveDiaHou(uint  iwHouTo)
-{
-  OpenOut(wFLA_DIAGRAM + iwHouTo/2);
-  memcpy(mpbPageOut, mpbPageIn, wFREEPAGE_SIZE);
-  memcpy(mpbPageOut + (iwHouTo%2)*wDIAGRAM_LENGTH, mpDiagram, wDIAGRAM_LENGTH);
-  CloseOut();
-}
-
-
-
 void    NextHouDiagram(void)
 {
-  LoadDiaHou(iwHardHou);
+  LoadDgrHou(iwHardHou);
 
   memset(&mpDiagram, 0xFF, sizeof(mpDiagram));
 
@@ -55,63 +58,89 @@ void    NextHouDiagram(void)
     }
   }
 
-  SaveDiaHou(iwHardHou);
+  SaveDgrHou(iwHardHou);
+}
+*/
+
+void    MakeDiagram(uchar  ibCan, double  db)
+{
+  LoadDgrHou(iwHardHou);
+
+  diagram vl;
+  vl.dbValue = db;
+
+  time ti = *GetCurrTimeDate();
+  vl.stValue.bSecond = ti.bSecond;
+  vl.stValue.bMinute = ti.bMinute;
+  vl.stValue.bHour   = ti.bHour;
+
+  mpDiagram[ibCan] = vl;
+
+  SaveDgrHou(iwHardHou);
 }
 
 
-void    MakeDiagram(uchar  ibCanal) 
+
+void    OutDiagram(bool  fDouble)
 {
-  LoadDiaHou(iwHardHou);
+  uint iwHou = GetDayHouIndex(bInBuff6);
 
-  dgBuff.dbValue = reBuffA;
-
-  tiAlt = *PGetCurrTimeDate();
-  dgBuff.stValuef.bSecond = tiAlt.bSecond;
-  dgBuff.stValuef.bMinute = tiAlt.bMinute;
-  dgBuff.stValuef.bHour   = tiAlt.bHour;
-
-  mpDiagram[ibCanal] = dgBuff;
-
-  SaveDiaHou(iwHardHou);
-}                        
-
-
-
-void    OutDiagram(void)
-{
-uchar   i,j;
-
-  iwHou = PrevDayIndex(bInBuff6);
-            
   InitPushPtr();
-  wBuffD = 0;
+  uint wSize = 0;
 
-  for (j=0; j<48; j++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
-    LoadDiaHou(iwHou);
+    if (LoadDgrHou(iwHou) == false) { Result(bRES_BADFLASH); return; }
 
-    for (i=0; i<bCANALS; i++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+      if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
       {
-        if ((bInBuff6 == 0) && (j > GetHouIndex())) 
+        if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
         {
-          PushChar(0xFF); PushChar(0xFF); PushChar(0xFF); PushChar(0xFF);
-          PushChar(0xFF); PushChar(0xFF); PushChar(0xFF);
+          if (fDouble)
+          {
+            PushChar(0xFF);
+            PushChar(0xFF);
+            PushChar(0xFF);
+            PushChar(0xFF);
+            PushChar(0xFF);
+            PushChar(0xFF);
+            PushChar(0xFF);
+            PushChar(0xFF);
+          }
+          else
+          {
+            PushChar(0xFF);
+            PushChar(0xFF);
+            PushChar(0xFF);
+            PushChar(0xFF);
+          }
+
+          wSize += PushChar(0xFF);
+          wSize += PushChar(0xFF);
+          wSize += PushChar(0xFF);
         }
         else
         {
-          Push(&mpDiagram[ i ], sizeof(diagram) );
+          diagram vl = mpDiagram[c];
+
+          wSize += PushFloatOrDouble(vl.dbValue, fDouble);
+
+          wSize += PushChar(vl.stValue.bHour);
+          wSize += PushChar(vl.stValue.bMinute);
+          wSize += PushChar(vl.stValue.bSecond);
         }
 
-        wBuffD += sizeof(diagram);
-        if (wBuffD >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
+        if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
       } 
     }
           
     if (++iwHou >= wHOURS) iwHou = 0;
   }      
 
-  OutptrOutBuff(wBuffD);
+  OutptrOutBuff(wSize);
 }
-*/
+

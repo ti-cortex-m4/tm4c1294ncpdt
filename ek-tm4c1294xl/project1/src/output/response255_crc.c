@@ -25,6 +25,7 @@ RESPONSE255_CRC.C
 #include "../digitals/extended/extended_5_out.h"
 #include "../digitals/extended/extended_6_out.h"
 #include "../digitals/extended/extended_7_out.h"
+#include "../digitals/extended/diagram.h"
 #include "../output/out_common.h"
 #include "../output/out_phones.h"
 #include "../output/out_gaps.h"
@@ -135,6 +136,8 @@ void    Response255_CRC(void)
     case bEXT_GETEXTENDED6: OutExtended6(false); break;
 
     case bEXT_GETEXTENDED7: OutExtended7(false); break;
+
+    case bEXT_GETDIAGRAM: OutDiagram(false); break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;

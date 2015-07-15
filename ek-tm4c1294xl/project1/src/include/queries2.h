@@ -68,6 +68,10 @@ QUERIES2.H
 
 #define bEXT_GETEXTENDED6              62
 
+#define bEXT_GETEXTENDED7              100
+
+#define bEXT_GETDIAGRAM                95
+
 #define bEXT_GETRELAXS                 45
 #define bEXT_SETRELAXS                 46
 
@@ -81,8 +85,6 @@ QUERIES2.H
 
 #define bEXT_GETGAPS1                  96
 #define bEXT_GETGAPS2                  97
-
-#define bEXT_GETEXTENDED7              100
 
 #define bEXT_GETSTOPAUXCAN             104
 
