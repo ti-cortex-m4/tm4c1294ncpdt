@@ -24,6 +24,9 @@ KEY_SINGLE_GRP.C
 #include "../../time/timedate.h"
 #include "../../time/timedate_display.h"
 
+#include "../../hardware/sys_tick.h"
+
+
 
 static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "" },
 
@@ -131,8 +134,16 @@ static void Show(void)
   switch (wProgram)
   {
     case bGET_POWGRPCURRMNT:
+    {
+      StartSysTick();
       LoadImpMnt( PrevHardMnt() );
-      ShowFloat(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibGrp,20));
+      ulong dw = StopSysTick();
+      Hi(0, ibSoftMnt);
+      Hi(2, dw / 0x10000);
+      Hi(4, (dw % 0x10000) / 0x100);
+      Hi(6, (dw % 0x10000) % 0x100);
+      ShowFloat(1/*GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibGrp,20)*/);
+    }
       break;
 
     case bGET_POWGRPPREVHOU:      
