@@ -25,11 +25,7 @@ KEY_SINGLE_GRP.C
 #include "../../time/timedate_display.h"
 
 
-//                                             0123456789ABCDEF
-static char const       szTimeDate[]        = "Время и дата    ";
-
 static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "" },
-                       *pszCountersB[]      = { szCounters, szForDigital, "" },
 
                        *pszPowPrevHou[]     = { szPower, szMiddle, szPrevHou, "" },
                        *pszPowCurrHou[]     = { szPower, szMiddle, szCurrHou, "" },
@@ -72,17 +68,14 @@ static char const      *pszEngCurrMin[]     = { szPower, szMiddle, szCurrMnt,  "
 
 
 
-static uchar            ibGrp, ibY, ibTrf;
+static uchar            ibGrp, ibVar, ibTrf;
 
 
 
 static void ShowGrpDayMaxPow(void)
 {
-time  ti;
-
-  ti = GetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ],ibGrp,ibTrf);
-
-  switch (ibY)
+  time ti = GetGrpMaxPowTime(mppoDayGrp[ PrevSoftDay() ],ibGrp,ibTrf);
+  switch (ibVar)
   {
     case 0:  ShowFloat(GetGrpMaxPowReal(mppoDayGrp[ PrevSoftDay() ],ibGrp,ibTrf));  break;
     case 1:  ShowTime(ti);  break;
@@ -93,11 +86,8 @@ time  ti;
 
 static void ShowGrpMonMaxPow(void)
 {
-time  ti;
-
-  ti = GetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ],ibGrp,ibTrf);
-
-  switch (ibY)
+  time ti = GetGrpMaxPowTime(mppoMonGrp[ PrevSoftMon() ],ibGrp,ibTrf);
+  switch (ibVar)
   {
     case 0:  ShowFloat(GetGrpMaxPowReal(mppoMonGrp[ PrevSoftMon() ],ibGrp,ibTrf));  break;
     case 1:  ShowTime(ti);  break;
@@ -143,10 +133,6 @@ static void Show(void)
     case bGET_POWGRPCURRMNT:
       LoadImpMnt( PrevHardMnt() );
       ShowFloat(GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibGrp,20));
-      break;
-
-    case bGET_IMPCANCURRMNT:
-      ShowInt(mpwImpMntCan[ ibSoftMnt ][ibGrp]);
       break;
 
     case bGET_POWGRPPREVHOU:      
@@ -269,14 +255,7 @@ void    key_GetSingleGrp(void)
 
       switch (wProgram)
       {
-        case bGET_IMPCANCURRMNT:       ShowHi(szImpulseA);            break;
         case bGET_POWGRPCURRMNT:       LoadSlide(pszEngCurrMin);      break;
-
-        case bGET_CNTCURR_10:          ShowHi(szCounters);            break;
-        case bGET_CNTCURR_110:         LoadSlide(pszCountersB);       break;
-
-        case bGET_READTIMEDATE1:     
-        case bGET_READTIMEDATE2:       ShowHi(szTimeDate);            break;
 
         case bGET_POWGRPPREVHOU:       LoadSlide(pszPowPrevHou);      break;
         case bGET_POWGRPCURRHOU:       LoadSlide(pszPowCurrHou);      break;
@@ -324,7 +303,7 @@ void    key_GetSingleGrp(void)
       Clear();
 
       ibGrp = 0;
-      ibY = 0;
+      ibVar = 0;
       Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
@@ -334,7 +313,7 @@ void    key_GetSingleGrp(void)
         enKeyboard = KBD_POSTENTER;
         Clear();
 
-        ibY = 0;
+        ibVar = 0;
         Show();
       }
       else Beep();
@@ -344,7 +323,7 @@ void    key_GetSingleGrp(void)
       if (++ibGrp >= bGROUPS)
         ibGrp = 0;
 
-      ibY = 0;
+      ibVar = 0;
       Show();
     }
     else Beep();
@@ -355,8 +334,8 @@ void    key_GetSingleGrp(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibY >= 3) 
-        ibY = 0;
+      if (++ibVar >= 3)
+        ibVar = 0;
 
       Show();
     }
@@ -373,7 +352,7 @@ void    key_GetSingleGrp(void)
       else         
         ibGrp = bGROUPS - 1;
 
-      ibY = 0;
+      ibVar = 0;
       Show();
     }
     else Beep();
