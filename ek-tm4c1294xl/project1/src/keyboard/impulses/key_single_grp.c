@@ -134,7 +134,7 @@ static void Show(void)
   switch (wProgram)
   {
     case bGET_POWGRPCURRMNT:
-    {
+      {
       StartSysTick();
       LoadImpMnt( PrevHardMnt() );
       ulong dw = StopSysTick();
@@ -143,7 +143,7 @@ static void Show(void)
       Hi(4, (dw % 0x10000) / 0x100);
       Hi(6, (dw % 0x10000) % 0x100);
       ShowFloat(1/*GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ],ibGrp,20)*/);
-    }
+      }
       break;
 
     case bGET_POWGRPPREVHOU:      
