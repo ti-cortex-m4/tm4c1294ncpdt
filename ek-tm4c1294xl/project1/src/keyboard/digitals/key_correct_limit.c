@@ -11,55 +11,58 @@ KEY_CORRECT_LIMIT.C
 
 
 //                                          0123456789ABCDEF
-static char const       szCorrectLimit1[]  = "  Максимальная  ",
-                        szCorrectLimit2[]  = "разница времени ",
-                        szCorrectLimit3[]  = "   счетчиков    ",
-                        szCorrectLimit4[]  = "  и сумматора   ",
-                        szCorrectLimit5[]  = " без коррекции  ",
-                        szCorrectLimitM[]  = "1..20   __ с  ";
+static char const       szMessage1[]     = "  Максимальная  ",
+                        szMessage2[]     = "разница времени ",
+                        szMessage3[]     = "   счетчиков    ",
+                        szMessage4[]     = "  и сумматора   ",
+                        szMessage5[]     = " без коррекции  ",
+                        szMessage6[]     = "     1..20      ",
+                        szMask[]         = "       __       ";
                       
-static char const      *pszCorrectLimit[] = { szCorrectLimit1, szCorrectLimit2, szCorrectLimit3, szCorrectLimit4, szCorrectLimit5, "" };
+static char const      *pszMessages[]    = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szMessage6, "" };
 
 
 
-void    ShowCorrectLimit(void)
+static void Show(uchar  ibPrt)
 {
   Clear();
-  sprintf(szLo+8,"%2bu c",mpbCorrectLimit[ibX]);
-  sprintf(szLo+15,"%1bu",ibX+1);
+  sprintf(szLo+8,"%2u c",mpbCorrectLimit[ibPrt]);
+  sprintf(szLo+15,"%1u",ibPrt+1);
 }
 
 
 void    key_SetCorrectLimit(void)
 {
+static uchar ibPrt;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_POSTENTER;
-      LoadSlide(pszCorrectLimit);    
+      LoadSlide(pszMessages);
 
-      ibX = 0;
-      ShowCorrectLimit();
+      ibPrt = 0;
+      Show(ibPrt);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {            
-      wBuffD = GetInt(8,9);
+      uchar b = GetCharLo(7,8);
 
-      if ((wBuffD >= bCORRECT_MINIMUM) && (wBuffD <= bCORRECT_MAXIMUM))
+      if ((b >= bCORRECT_MINIMUM) && (b <= bCORRECT_MAXIMUM))
       {
         enKeyboard = KBD_POSTENTER;
-        mpbCorrectLimit[ibX] = wBuffD;
+        mpbCorrectLimit[ibPrt] = b;
 
-        if (++ibX >= bPORTS) ibX = 0;
-        ShowCorrectLimit();
+        if (++ibPrt >= bPORTS) ibPrt = 0;
+        Show(ibPrt);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= bPORTS) ibX = 0;
-      ShowCorrectLimit();
+      if (++ibPrt >= bPORTS) ibPrt = 0;
+      Show(ibPrt);
     }
     else Beep();
   }
@@ -72,7 +75,7 @@ void    key_SetCorrectLimit(void)
       if (enGlobal != GLB_WORK)
       {
         enKeyboard = KBD_INPUT1;
-        ShowLo(szCorrectLimitM);
+        ShowLo(szMask);
       }
       else Beep();
     }
@@ -80,7 +83,7 @@ void    key_SetCorrectLimit(void)
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
     {
       enKeyboard = KBD_POSTINPUT1;
-      ShiftLo(8,9);
+      ShiftLo(7,8);
     }
     else Beep(); 
   }
