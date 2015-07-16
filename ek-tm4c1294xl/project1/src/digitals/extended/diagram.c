@@ -20,15 +20,17 @@ DIAGRAM.C
 
 
 
-bool    SaveDgrHou(uchar  ibHouTo)
+bool    SaveDgrHou(uint  iwHouTo)
 {
-  return SaveBuff(DIAGRAM_HHR_VALUES + ibHouTo*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
+  ASSERT(iwHouTo < wHOURS);
+  return SaveBuff(DIAGRAM_HHR_VALUES + iwHouTo*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
 }
 
 
-bool    LoadDgrHou(uchar  ibHouFrom)
+bool    LoadDgrHou(uint  iwHouFrom)
 {
-  return LoadBuff(DIAGRAM_HHR_VALUES + ibHouFrom*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
+  ASSERT(iwHouFrom < wHOURS);
+  return LoadBuff(DIAGRAM_HHR_VALUES + iwHouFrom*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
 }
 
 
