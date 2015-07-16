@@ -30,9 +30,6 @@ uchar   t;
 
 void    OutMaxPowDayGrpExt(void)
 {
-uchar   g;
-uint    w;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bDAYS)
@@ -40,18 +37,19 @@ uint    w;
       if (LoadPowDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == true)
       {
         InitPushPtr();
-        w = 0;
+        uint wSize = 0;
 
+        uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
           	PushMaxPow(&mppoDayGrp[ PrevSoftDay() ][ g ]);
-            w += (sizeof(time) + sizeof(real))*bTARIFFS;
+            wSize += (sizeof(time) + sizeof(real))*bTARIFFS;
           }
         }
 
-        OutptrOutBuff(w);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -63,9 +61,6 @@ uint    w;
 
 void    OutMaxPowMonGrpExt(void)
 {
-uchar   g;
-uint    w;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bMONTHS)
@@ -73,18 +68,19 @@ uint    w;
       if (LoadPowMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == true)
       {
         InitPushPtr();
-        w = 0;
+        uint wSize = 0;
 
+        uchar g;
         for (g=0; g<bGROUPS; g++)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
           	PushMaxPow(&mppoMonGrp[ PrevSoftMon() ][ g ]);
-            w += (sizeof(time) + sizeof(real))*bTARIFFS;
+            wSize += (sizeof(time) + sizeof(real))*bTARIFFS;
           }
         }
 
-        OutptrOutBuff(w);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
