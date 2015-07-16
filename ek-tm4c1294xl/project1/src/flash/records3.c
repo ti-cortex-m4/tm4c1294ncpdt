@@ -5,22 +5,27 @@ RECORD3.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_records.h"
+
+
+
+cache const             chRecordDsbl = {RECORDS_DSBL, &mpboRecordDsbl, sizeof(mpboRecordDsbl)};
 
 
 
 void    ResetRecordDisable(void)
 {
-//  memset(&mpboRecordDisable, 0, sizeof(mpboRecordDisable));
+//  memset(&mpboRecordDsbl, 0, sizeof(mpboRecordDsbl));
 //
-//  mpboRecordDisable[EVE_PROFILEOPEN] = boTrue;
-//  mpboRecordDisable[EVE_PROFILE_OK2] = boTrue;
-//  mpboRecordDisable[EVE_PROFILE2] = boTrue;
+//  mpboRecordDsbl[EVE_PROFILEOPEN] = boTrue;
+//  mpboRecordDsbl[EVE_PROFILE_OK2] = boTrue;
+//  mpboRecordDsbl[EVE_PROFILE2] = boTrue;
 }
 
 
 bool    IsRecordDisabled(uchar  ibCode)
 {
-  return false; //mpboRecordDisable[ibCode] != boFalse;
+  return false; //mpboRecordDsbl[ibCode] != boFalse;
 }
 
 
@@ -28,6 +33,6 @@ bool    IsRecordDisabled(uchar  ibCode)
 void    OutRecordDisable(void)
 {
 //  InitPushCRC();
-//  Push(&mpboRecordDisable, sizeof(mpboRecordDisable));
-//  Output(sizeof(mpboRecordDisable));
+//  Push(&mpboRecordDsbl, sizeof(mpboRecordDsbl));
+//  Output(sizeof(mpboRecordDsbl));
 }

@@ -142,5 +142,7 @@ typedef enum
   PH2_INDEX             = MOD_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
   AUX_INDEX             = PH2_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
 
-  NVRAM_END             = AUX_INDEX + sizeof(ulong) + bNVRAM_FOOTER
+  RECORDS_DSBL          = AUX_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
+
+  NVRAM_END             = RECORDS_DSBL + sizeof(mpboRecordDsbl) + bNVRAM_FOOTER
 } nvram;
