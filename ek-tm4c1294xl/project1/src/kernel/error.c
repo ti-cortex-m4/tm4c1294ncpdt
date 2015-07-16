@@ -6,11 +6,8 @@ ERROR.C
 
 #include <stdint.h>
 #include "../hardware/beep.h"
-#include "error.h"
 
 
-
-#ifdef DEBUG
 
 void __error__(char *pcFilename, uint32_t ui32Line)
 {
@@ -21,5 +18,3 @@ void __error__(char *pcFilename, uint32_t ui32Line)
   {
   }
 }
-
-#endif
