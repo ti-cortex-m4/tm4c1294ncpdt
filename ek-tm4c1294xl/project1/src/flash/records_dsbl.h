@@ -4,6 +4,10 @@ RECORDS_DSBL.H
 
 ------------------------------------------------------------------------------*/
 
+extern  cache const             chRecordDsbl;
+
+
+
 void    InitRecordsDsbl(void);
 void    ResetRecordsDsbl(void);
 

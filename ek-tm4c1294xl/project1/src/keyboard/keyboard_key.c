@@ -84,6 +84,7 @@ KEYBOARD_KEY.C
 #include "digitals/profile/key_dsbl_refill.h"
 #include "digitals/key_max_repeats.h"
 #include "digitals/key_dsbl_esc.h"
+#include "key_records_dsbl.h"
 #include "esc/key_machines_esc.h"
 #include "esc/key_block_esc.h"
 #include "unified/key_strict_uni.h"
@@ -264,6 +265,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
+
+      case wSET_RECORDS_DSBL:   key_SetRecordsDsbl();   break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
@@ -512,6 +515,8 @@ void    Keyboard_Key(void)
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
+      case wSET_RECORDS_DSBL:   key_SetRecordsDsbl();   break;
+
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
@@ -677,6 +682,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
+
+      case wSET_RECORDS_DSBL:   key_SetRecordsDsbl();   break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
