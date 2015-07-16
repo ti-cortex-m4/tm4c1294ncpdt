@@ -10,11 +10,13 @@ extern  uint                mpwInDelay[bPORTS];
 
 extern  uint                mpwMinorInDelay[bPORTS], mpwMajorInDelay[bPORTS];
 
-extern  bool             mpboLocal[bPORTS];
+extern  bool                mpboLocal[bPORTS];
 
-extern  bool             mpboLocalDisable[bPORTS];
+extern  bool                mpboLocalDisable[bPORTS];
 
-extern	uchar               bInBuff0,
+extern  uchar               mpbCorrectLimit[bPORTS];
+
+extern  uchar               bInBuff0,
                             bInBuff1,
                             bInBuff2,
                             bInBuff3,
@@ -33,14 +35,14 @@ extern	uchar               bInBuff0,
 
 extern	uchar               bQuery;
 
-extern	uchar              ibPortActive;
+extern	uchar               ibPortActive;
 
 
 
-extern  uint                    iwPopSave;
+extern  uint                iwPopSave;
 
-extern  uint                    iwInBuffSave;
+extern  uint                iwInBuffSave;
 
-extern  uint                    cwInBuffSave;
+extern  uint                cwInBuffSave;
 
-extern  uchar                   mpbInBuffSave[wINBUFF_SIZE];
+extern  uchar               mpbInBuffSave[wINBUFF_SIZE];

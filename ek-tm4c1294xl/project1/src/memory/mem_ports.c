@@ -23,6 +23,9 @@ bool                    mpboLocal[bPORTS];
 // флаги запрещения временной смены режима
 bool                    mpboLocalDisable[bPORTS];
 
+// минимальные лимиты коррекции времени
+uchar                   mpbCorrectLimit[bPORTS];
+
 // переменные
 uchar                   bInBuff0,
                         bInBuff1,
