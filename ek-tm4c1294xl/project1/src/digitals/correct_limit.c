@@ -5,6 +5,7 @@ CORRECT_LIMIT.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_digitals.h"
 #include "../nvram/cache.h"
 #include "correct_limit.h"
 
@@ -16,35 +17,51 @@ cache const             chCorrectLimit = {CORRECT_LIMIT, &mpbCorrectLimit, sizeo
 
 void    InitCorrectLimit(void)
 {
+  LoadCache(&chCorrectLimit);
 }
 
 
 void    ResetCorrectLimit(void)
 {
+  SaveCache(&chCorrectLimit);
 }
 
 
 
 void    SetCorrectLimit(uchar  ibPrt)
 {
-//  mpbCorrectLimit[ibPrt] = (mppoPorts[ibPrt].enStream == STR_MASTERMODEM) ? bCORRECT_MODEM : bCORRECT_DIRECT;
+  mpbCorrectLimit[ibPrt] = (mppoPorts[ibPrt].enStream == STR_MASTERMODEM) ? bCORRECT_MODEM : bCORRECT_DIRECT;
+  SaveCache(&chCorrectLimit);
 }
 
 
 void    CheckCorrectLimit(uchar  ibPrt)
 {
-//  if (mpbCorrectLimit[ibPrt] < bCORRECT_MINIMUM) SetCorrectLimit(ibPrt);
-//  if (mpbCorrectLimit[ibPrt] > bCORRECT_MAXIMUM) mpbCorrectLimit[ibPrt] = bCORRECT_MAXIMUM;
+  if (mpbCorrectLimit[ibPrt] < bCORRECT_MINIMUM)
+  {
+    SetCorrectLimit(ibPrt);
+  }
+
+  if (mpbCorrectLimit[ibPrt] > bCORRECT_MAXIMUM)
+  {
+    mpbCorrectLimit[ibPrt] = bCORRECT_MAXIMUM;
+    SaveCache(&chCorrectLimit);
+  }
 }
 
 
-void    MakeCorrectLimit(void)
+void    MakeCorrectLimit(uchar  ibPort, uchar  bDevice)
 {
-//  if (diT.bDevice == 24) mpbCorrectLimit[diT.ibPort] = bCORRECT_DEVICE_S;
+  if (bDevice == 24)
+  {
+    mpbCorrectLimit[ibPort] = bCORRECT_DEVICE_S;
+  }
+
+  SaveCache(&chCorrectLimit);
 }
 
 
-uchar   MinorCorrect(void)
+uchar   GetCorrectLimit(void)
 {
-  return 5; //mpbCorrectLimit[diCurr.ibPort];
+  return mpbCorrectLimit[diCurr.ibPort];
 }

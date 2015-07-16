@@ -288,6 +288,7 @@ PROGRAMS.H
 #define wSET_REPEAT_FLOW_UNI        288
 
 #define wSET_MNT_ESC_S              500
+#define wSET_CORRECT_LIMIT          501
 
 #define bSET_EXT4_FLAG              249
 #define bSET_EXT4_MONTHS            250

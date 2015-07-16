@@ -85,7 +85,7 @@
           ShowDeltaTimePositive(ibDig, dwDelta);
         }
 
-        if (dwDelta < MinorCorrect())                                           // без коррекции
+        if (dwDelta < GetCorrectLimit())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_A2); }     
         else if (dwDelta < bMAJORCORRECT_A)                                     // простая коррекция
         {

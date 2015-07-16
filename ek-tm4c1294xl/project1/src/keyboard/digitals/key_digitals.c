@@ -145,7 +145,7 @@ static uchar AddDigital(uchar  ibCan, digital  *pdi)
   MakeKeys(ibCan, pdi->bDevice);
 
   MakeDigitalsMask();
-  MakeCorrectLimit();
+  MakeCorrectLimit(pdi->ibPort, pdi->bDevice);
   if (pdi->bDevice != 0) MakeInDelays(pdi->ibPort, pdi->ibPhone, pdi->bDevice);
 
   if (++ibCan >= bCANALS) ibCan = 0;
@@ -180,7 +180,7 @@ static uchar AddAllDigitals(uchar  ibCan, digital  *pdi)
   }
 
   MakeDigitalsMask();
-  MakeCorrectLimit();
+  MakeCorrectLimit(pdi->ibPort, pdi->bDevice);
   if (pdi->bDevice != 0) MakeInDelays(pdi->ibPort, pdi->ibPhone, pdi->bDevice);
 
   ShowDigital(ibCan);
