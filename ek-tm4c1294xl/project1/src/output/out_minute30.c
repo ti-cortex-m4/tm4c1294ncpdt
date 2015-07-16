@@ -20,12 +20,12 @@ OUT_MINUTE30.C
 void    OutImpCanHouExt(void)
 {
 uchar   c, j;
-uint    w, iwHou;
+uint    wSize, iwHou;
 ulong   dw;
 time    ti;
 
   InitPushPtr();
-  w = 0;
+  wSize = 0;
 
   iwHou = bInBuff6*0x100 + bInBuff7;
 
@@ -42,9 +42,9 @@ time    ti;
       ti = HouIndexToDate(dw);
 
       Push(&ti, sizeof(time));
-      w += sizeof(time);
+      wSize += sizeof(time);
 
-      if (LoadImpHouFree((wHOURS+iwHardHou-iwHou) % wHOURS) == false) break; // TODO
+      if (LoadImpHouFree((wHOURS+iwHardHou-iwHou) % wHOURS) == false) { Result(bRES_BADFLASH); return; }
       else
       {
         for (c=0; c<bCANALS; c++)
@@ -54,16 +54,13 @@ time    ti;
           else
             PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
 
-          w += sizeof(uint);
+          wSize += sizeof(uint);
         }
       }
 
       iwHou++;
     }
 
-    if (j == bInBuff8)
-      OutptrOutBuff(w);
-    else
-      Result(bRES_BADFLASH);
+    OutptrOutBuff(wSize);
   }
 }
