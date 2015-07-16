@@ -13,6 +13,7 @@ RESPONSE255_CRC.C
 #include "../serial/ports.h"
 #include "../output/response_crc.h"
 #include "../flash/flash_control.h"
+#include "../flash/records_dsbl.h"
 #include "../tariffs/gaps.h"
 #include "../output/out_correct.h"
 #include "../time/correct2.h"
@@ -169,6 +170,8 @@ void    Response255_CRC(void)
     case bEXT_GETGAPS2: OutGaps2(); break;
 
     case bEXT_GETSTOPAUXCAN: OutStopAuxCan(); break;
+
+    case bEXT_RECORDS_DSBL: OutRecordsDsbl(); break;
 
     case bEXT_GETDECRET: OutDecret(); break;
 /*

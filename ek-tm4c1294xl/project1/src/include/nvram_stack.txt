@@ -142,7 +142,7 @@ RESERVE(MOD_INDEX, sizeof(ulong) + bNVRAM_FOOTER)
 RESERVE(PH2_INDEX, sizeof(ulong) + bNVRAM_FOOTER)
 RESERVE(AUX_INDEX, sizeof(ulong) + bNVRAM_FOOTER)
 
-RESERVE(RECORDS_DSBL, sizeof(mpboRecordDsbl) + bNVRAM_FOOTER)
+RESERVE(RECORDS_DSBL, sizeof(mpfRecordDsbl) + bNVRAM_FOOTER)
 
 END(NVRAM_END)
 } nvram;

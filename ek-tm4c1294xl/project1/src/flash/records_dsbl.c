@@ -6,35 +6,44 @@ RECORDS_DSBL.C
 
 #include "../main.h"
 #include "../memory/mem_records.h"
+#include "../serial/ports.h"
 #include "../nvram/cache.h"
 #include "records_dsbl.h"
 
 
 
-cache const             chRecordDsbl = {RECORDS_DSBL, &mpboRecordDsbl, sizeof(mpboRecordDsbl)};
+cache const             chRecordDsbl = {RECORDS_DSBL, &mpfRecordDsbl, sizeof(mpfRecordDsbl)};
 
-InitRecordsDsbl();
 
-void    ResetRecordsDsbl(void)
+
+void    InitRecordsDsbl(void)
 {
-//  memset(&mpboRecordDsbl, 0, sizeof(mpboRecordDsbl));
-//
-//  mpboRecordDsbl[EVE_PROFILEOPEN] = boTrue;
-//  mpboRecordDsbl[EVE_PROFILE_OK2] = boTrue;
-//  mpboRecordDsbl[EVE_PROFILE2] = boTrue;
+  LoadCache(&chRecordDsbl);
 }
 
 
-bool    IsRecordsDsbld(uchar  ibCode)
+void    ResetRecordsDsbl(void)
 {
-  return false; //mpboRecordDsbl[ibCode] != boFalse;
+  memset(&mpfRecordDsbl, 0, sizeof(mpfRecordDsbl));
+
+  mpfRecordDsbl[EVE_PROFILEOPEN] = true;
+  mpfRecordDsbl[EVE_PROFILE_OK2] = true;
+  mpfRecordDsbl[EVE_PROFILE2] = true;
+
+  SaveCache(&chRecordDsbl);
+}
+
+
+bool    IsRecordDisabled(uchar  ibCode)
+{
+  return mpfRecordDsbl[ibCode] != false;
 }
 
 
 
 void    OutRecordsDsbl(void)
 {
-//  InitPushCRC();
-//  Push(&mpboRecordDsbl, sizeof(mpboRecordDsbl));
-//  Output(sizeof(mpboRecordDsbl));
+  InitPushCRC();
+  Push(&mpfRecordDsbl, sizeof(mpfRecordDsbl));
+  Output(sizeof(mpfRecordDsbl));
 }

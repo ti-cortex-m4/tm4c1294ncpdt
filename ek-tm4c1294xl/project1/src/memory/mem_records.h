@@ -14,7 +14,7 @@ extern  ulong                   cdwKeyRecord,
                                 cdwPh2Record,
                                 cdwAuxRecord;
 
-extern  uchar                   mpboRecordDsbl[256];
+extern  uchar                   mpfRecordDsbl[256];
 
 extern  time                    tiRecordSetCurrTime;
 

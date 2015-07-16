@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-RECORDS_DSBL.H
+ERROR.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    InitRecordsDsbl(void);
-void    ResetRecordsDsbl(void);
+#ifdef DEBUG
 
-bool    IsRecordDisabled(uchar  ibCode);
-void    OutRecordsDsbl(void);
+void __error__(char *pcFilename, uint32_t ui32Line);
+
+#endif

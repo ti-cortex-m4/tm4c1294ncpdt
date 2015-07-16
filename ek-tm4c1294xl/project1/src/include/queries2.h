@@ -57,6 +57,7 @@ QUERIES2.H
 #define bEXT_GETRECORD                 19
 #define bEXT_GETRECORDSBLOCK           20
 #define bEXT_GETRECORDSBLOCK2          99
+#define bEXT_RECORDS_DSBL              109
 
 #define bEXT_GETCURRENT                35
 
