@@ -699,7 +699,7 @@ void    RunDevices(void)
           ShowDeltaTimePositive(ibDig, dwDelta);
         }
 
-        if (dwDelta < MinorCorrect())                                           // без коррекции
+        if (dwDelta < GetCorrectLimit())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_A2); }     
         else if (dwDelta < bMAJORCORRECT_A)                                     // простая коррекция
         {
@@ -1170,7 +1170,7 @@ void    RunDevices(void)
           ShowDeltaTimePositive(ibDig, dwDelta);
         }
 
-        if (dwDelta < MinorCorrect())                                           // без коррекции
+        if (dwDelta < GetCorrectLimit())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
         else if (dwDelta < bMAJORCORRECT_B)                                     // простая коррекция
         {
@@ -1703,7 +1703,7 @@ void    RunDevices(void)
           ShowDeltaTimePositive(ibDig, dwDelta);
         }
 
-        if (dwDelta < MinorCorrect())                                           // без коррекции
+        if (dwDelta < GetCorrectLimit())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_C2); }     
         else if (GetCurrHouIndex() == (tiValueC.bHour*2 + tiValueC.bMinute/30)) // простая коррекция
         { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_C2);  } 

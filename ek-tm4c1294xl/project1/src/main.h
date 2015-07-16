@@ -25,6 +25,7 @@ MAIN,H
 #include "main_devices.h"
 #include "main_params.h"
 #include "main_extended.h"
+#include "main_correct.h"
 #include "kernel/boolean.h"
 #include "kernel/float.h"
 #include "kernel/wrappers.h"

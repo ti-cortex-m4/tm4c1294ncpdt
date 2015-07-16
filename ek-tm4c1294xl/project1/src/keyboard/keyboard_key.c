@@ -92,6 +92,7 @@ KEYBOARD_KEY.C
 #include "unified/key_max_delay_uni.h"
 #include "unified/key_repeat_flow_uni.h"
 #include "digitals/key_mnt_esc_s.h"
+#include "digitals/key_correct_limit.h"
 #include "digitals/key_extended_esc.h"
 #include "serial/key_flow.h"
 #include "serial/key_max_flow_delay.h"
@@ -274,6 +275,7 @@ void    Keyboard_Key(void)
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
 
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
+      case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
@@ -523,6 +525,7 @@ void    Keyboard_Key(void)
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
 
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
+      case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
@@ -691,6 +694,7 @@ void    Keyboard_Key(void)
       case wSET_REPEAT_FLOW_UNI:    key_SetRepeatFlowUni();    break;
 
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
+      case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;

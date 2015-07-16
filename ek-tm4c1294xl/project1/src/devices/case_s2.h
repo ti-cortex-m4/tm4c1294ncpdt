@@ -86,7 +86,7 @@
         else
           ShowDeltaPos();
 
-        if (dwBuffC < MinorCorrect())                                           // без коррекции
+        if (dwBuffC < GetCorrectLimit())                                           // без коррекции
         { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_S2); }     
         else if (GetHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))           // простая коррекция 
         { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_S2); } 

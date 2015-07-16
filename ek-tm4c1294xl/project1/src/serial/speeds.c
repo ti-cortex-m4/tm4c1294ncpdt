@@ -11,6 +11,7 @@ SPEEDS.C
 #include "../hardware/system_clock.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
+#include "../nvram/cache.h"
 #include "../digitals/correct_limit.h"
 #include "speeds.h"
 #include "speeds_storage.h"
@@ -155,6 +156,7 @@ uchar   p;
   LoadLocalDisable();
   LoadMajorInDelay();
   LoadMinorInDelay();
+  LoadCache(&chCorrectLimit);
 
   for (p=0; p<bPORTS; p++)
   {
@@ -200,4 +202,5 @@ uchar   p;
   SaveLocalDisable();
   SaveMajorInDelay();
   SaveMinorInDelay();
+  SaveCache(&chCorrectLimit);
 }

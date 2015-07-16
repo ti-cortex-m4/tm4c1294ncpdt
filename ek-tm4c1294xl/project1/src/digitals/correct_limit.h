@@ -4,10 +4,11 @@ CORRECT_LIMIT.H
 
 ------------------------------------------------------------------------------*/
 
-void    InitCorrectLimit(void);
-void    ResetCorrectLimit(void);
+extern  cache const             chCorrectLimit;
+
+
 
 void    SetCorrectLimit(uchar  ibPrt);
 void    CheckCorrectLimit(uchar  ibPrt);
-void    MakeCorrectLimit(void);
-uchar   MinorCorrect(void);
+void    MakeCorrectLimit(uchar  ibPort, uchar  bDevice);
+uchar   GetCorrectLimit(void);
