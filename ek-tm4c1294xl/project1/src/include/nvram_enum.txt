@@ -144,5 +144,5 @@ typedef enum
 
   RECORDS_DSBL          = AUX_INDEX + sizeof(ulong) + bNVRAM_FOOTER,
 
-  NVRAM_END             = RECORDS_DSBL + sizeof(mpboRecordDsbl) + bNVRAM_FOOTER
+  NVRAM_END             = RECORDS_DSBL + sizeof(mpfRecordDsbl) + bNVRAM_FOOTER
 } nvram;
