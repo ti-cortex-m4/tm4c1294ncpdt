@@ -20,6 +20,9 @@ ulong                   cdwKeyRecord,
                         cdwPh2Record,
                         cdwAuxRecord;
 
+// флаги разрешения событий
+uchar                   mpboRecordDsbl[256];
+
 // глобальная переменная - время
 time                    tiRecordSetCurrTime;
 
