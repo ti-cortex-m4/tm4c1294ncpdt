@@ -1,19 +1,21 @@
 /*------------------------------------------------------------------------------
-RECORD3.C
+RECORDS_DSBL.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "../memory/mem_records.h"
+#include "../nvram/cache.h"
+#include "records_dsbl.h"
 
 
 
 cache const             chRecordDsbl = {RECORDS_DSBL, &mpboRecordDsbl, sizeof(mpboRecordDsbl)};
 
+InitRecordsDsbl();
 
-
-void    ResetRecordDisable(void)
+void    ResetRecordsDsbl(void)
 {
 //  memset(&mpboRecordDsbl, 0, sizeof(mpboRecordDsbl));
 //
@@ -23,14 +25,14 @@ void    ResetRecordDisable(void)
 }
 
 
-bool    IsRecordDisabled(uchar  ibCode)
+bool    IsRecordsDsbld(uchar  ibCode)
 {
   return false; //mpboRecordDsbl[ibCode] != boFalse;
 }
 
 
 
-void    OutRecordDisable(void)
+void    OutRecordsDsbl(void)
 {
 //  InitPushCRC();
 //  Push(&mpboRecordDsbl, sizeof(mpboRecordDsbl));
