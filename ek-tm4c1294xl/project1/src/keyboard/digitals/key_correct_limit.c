@@ -7,6 +7,7 @@ KEY_CORRECT_LIMIT.C
 #include "../../main.h"
 #include "../../console.h"
 #include "../../memory/mem_ports.h"
+#include "../../digitals/correct_limit.h"
 
 
 
@@ -52,7 +53,9 @@ static uchar ibPrt;
       if ((b >= bCORRECT_MINIMUM) && (b <= bCORRECT_MAXIMUM))
       {
         enKeyboard = KBD_POSTENTER;
+
         mpbCorrectLimit[ibPrt] = b;
+        SaveCache(&chCorrectLimit);
 
         if (++ibPrt >= bPORTS) ibPrt = 0;
         Show(ibPrt);

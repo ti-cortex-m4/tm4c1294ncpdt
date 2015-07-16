@@ -15,23 +15,9 @@ cache const             chCorrectLimit = {CORRECT_LIMIT, &mpbCorrectLimit, sizeo
 
 
 
-void    InitCorrectLimit(void)
-{
-  LoadCache(&chCorrectLimit);
-}
-
-
-void    ResetCorrectLimit(void)
-{
-  SaveCache(&chCorrectLimit);
-}
-
-
-
 void    SetCorrectLimit(uchar  ibPrt)
 {
   mpbCorrectLimit[ibPrt] = (mppoPorts[ibPrt].enStream == STR_MASTERMODEM) ? bCORRECT_MODEM : bCORRECT_DIRECT;
-  SaveCache(&chCorrectLimit);
 }
 
 
@@ -40,6 +26,7 @@ void    CheckCorrectLimit(uchar  ibPrt)
   if (mpbCorrectLimit[ibPrt] < bCORRECT_MINIMUM)
   {
     SetCorrectLimit(ibPrt);
+    SaveCache(&chCorrectLimit);
   }
 
   if (mpbCorrectLimit[ibPrt] > bCORRECT_MAXIMUM)
@@ -55,9 +42,8 @@ void    MakeCorrectLimit(uchar  ibPort, uchar  bDevice)
   if (bDevice == 24)
   {
     mpbCorrectLimit[ibPort] = bCORRECT_DEVICE_S;
+    SaveCache(&chCorrectLimit);
   }
-
-  SaveCache(&chCorrectLimit);
 }
 
 
