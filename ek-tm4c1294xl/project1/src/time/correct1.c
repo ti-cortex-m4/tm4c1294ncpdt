@@ -112,7 +112,7 @@ void    SetCurrTime_Full(time  ti, event  ev)
     Correct1.mpwNegCountCurr[i]++;
   }
 
-  SaveFile(&chCorrect1);
+  SaveCache(&chCorrect1);
 }
 
 
@@ -171,7 +171,7 @@ bool    CorrectTime_Full(event  ev)
     }
   }
 
-  SaveFile(&chCorrect1);
+  SaveCache(&chCorrect1);
 
   tiRecordSetCurrTime = ti;
   AddKeyRecord(ev);
