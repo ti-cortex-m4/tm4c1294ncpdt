@@ -148,7 +148,7 @@ void    key_SetReset(void)
 //          ResetExtended6();
 //          ResetCurrent2();
 //          ResetBulk();
-//          ResetRecordDisable();
+//          ResetRecordsDsbl();
 //          ResetCheckupFull();
 //
 //          ResetLimits();

@@ -17,7 +17,7 @@ RECORDS,C
 #include "../time/rtc.h"
 #include "../nvram/cache.h"
 #include "files.h"
-#include "records3.h"
+#include "records_dsbl.h"
 #include "records.h"
 
 
@@ -41,6 +41,8 @@ void    InitRecords(void)
   LoadCache(&chModRecord);
   LoadCache(&chPh2Record);
   LoadCache(&chAuxRecord);
+
+  InitRecordsDsbl();
 }
 
 
@@ -66,6 +68,8 @@ void    ResetRecords(void)
 
   cdwAuxRecord = 0;
   SaveCache(&chAuxRecord);
+
+  ResetRecordsDsbl();
 }
 
 
@@ -177,7 +181,7 @@ static void Put(uchar  i, uchar  *pbBuff,  uint  wSize)
 
 bool    AddKeyRecord(event  ev)
 {
-  if (IsRecordDisabled(ev)) return true;
+  if (IsRecordsDsbld(ev)) return true;
 
   uint i = OpenRecord(KEY_RECORD, cdwKeyRecord);
 
@@ -214,7 +218,7 @@ bool    AddKeyRecord(event  ev)
 
 bool    AddSysRecord(event  ev)
 {
-  if (IsRecordDisabled(ev)) return true;
+  if (IsRecordsDsbld(ev)) return true;
 
   uint i = OpenRecord(SYS_RECORD, cdwSysRecord);
 
@@ -278,7 +282,7 @@ bool    AddSysRecordReprogram(event  ev)
 
 bool    AddDigRecord(event  ev)
 {
-  if (IsRecordDisabled(ev)) return true;
+  if (IsRecordsDsbld(ev)) return true;
 
   uint i = OpenRecord2(AUX_RECORD, cdwAuxRecord);
 
@@ -362,7 +366,7 @@ bool    AddDigRecord(event  ev)
 
 bool    AddImpRecord(event  ev)
 {
-  if (IsRecordDisabled(ev)) return true;
+  if (IsRecordsDsbld(ev)) return true;
 
   uint i = OpenRecord(IMP_RECORD, cdwImpRecord);
 
@@ -397,7 +401,7 @@ bool    AddImpRecord(event  ev)
 
 bool    AddModRecord(event  ev)
 {
-  if (IsRecordDisabled(ev)) return true;
+  if (IsRecordsDsbld(ev)) return true;
 
   uint i = OpenRecord(MOD_RECORD, cdwModRecord);
 

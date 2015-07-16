@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-RECORD3.H
+RECORDS_DSBL.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    ResetRecordDisable(void);
-bool    IsRecordDisabled(uchar  ibCode);
-void    OutRecordDisable(void);
+void    ResetRecordsDsbl(void);
+bool    IsRecordsDsbld(uchar  ibCode);
+void    OutRecordsDsbl(void);

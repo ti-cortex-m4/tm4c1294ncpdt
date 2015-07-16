@@ -21,20 +21,20 @@ OUT_MINUTE30_48.C
 
 void    OutPowGrpHou48Ext(void)
 {
-uchar   g, h;
-uint    w, iwHou;
 real    re;
 
-  iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
-  w = 0;
+  uint wSize = 0;
 
+  uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHou(iwHou) == false) break; // TODO
+    if (LoadImpHou(iwHou) == false) { Result(bRES_BADFLASH); return; }
     else
     {
+      uchar g;
       for (g=0; g<bGROUPS; g++)
       {
         if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
@@ -46,8 +46,8 @@ real    re;
 
           PushFloat(re);
 
-          w += sizeof(real);
-          if (w >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
+          wSize += sizeof(real);
+          if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
         }
       }
     }
@@ -55,10 +55,7 @@ real    re;
     if (++iwHou >= wHOURS) iwHou = 0;
   }
 
-  if (h == 48)
-    OutptrOutBuff(w);
-  else
-    Result(bRES_BADFLASH);
+  OutptrOutBuff(wSize);
 }
 
 
@@ -71,19 +68,18 @@ void    PushImpHouCan(uint  wT, uchar  ibCan)
 
 void    OutImpCanHou48Ext(void)
 {
-uchar   c, h;
-uint    w, iwHou;
-
-  iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
-  w = 0;
+  uint wSize = 0;
 
+  uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == false) break; // TODO
+    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
     else
     {
+      uchar c;
       for (c=0; c<bCANALS; c++)
       {
         if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
@@ -93,8 +89,8 @@ uint    w, iwHou;
           else
             PushImpHouCan( mpwImpHouCan[ PrevSoftHou() ][ c ], c );
 
-          w += sizeof(uint);
-          if (w >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
+          wSize += sizeof(uint);
+          if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
         }
       }
     }
@@ -102,29 +98,26 @@ uint    w, iwHou;
     if (++iwHou >= wHOURS) iwHou = 0;
   }
 
-  if (h == 48)
-    OutptrOutBuff(w);
-  else
-    Result(bRES_BADFLASH);
+  OutptrOutBuff(wSize);
 }
 
 
 void    OutPowCanHou48Ext(void)
 {
-uchar   c, h;
-uint    w, iwHou;
 real    re;
 
-  iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
-  w = 0;
+  uint wSize = 0;
 
+  uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == false) break; // TODO
+    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
     else
     {
+      uchar c;
       for (c=0; c<bCANALS; c++)
       {
         if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
@@ -148,8 +141,8 @@ real    re;
             PushFloat(re);
           }
 
-          w += sizeof(real);
-          if (w >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
+          wSize += sizeof(real);
+          if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
         }
       }
     }
@@ -157,8 +150,5 @@ real    re;
     if (++iwHou >= wHOURS) iwHou = 0;
   }
 
-  if (h == 48)
-    OutptrOutBuff(w);
-  else
-    Result(bRES_BADFLASH);
+  OutptrOutBuff(wSize);
 }

@@ -19,29 +19,28 @@ OUT_MINUTE3.C
 
 void    OutImpMntCanExt(void)
 {
-uchar   c, i;
-uint    w;
-
   if (enGlobal != GLB_PROGRAM)
   {
     InitPushPtr();
-    w = 0;
+    uint wSize = 0;
 
+    uchar i;
     for (i=0; i<bMINUTES; i++)
     {
       if (LoadImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES) == false) { Result(bRES_BADFLASH); return; }
 
+      uchar c;
       for (c=0; c<bCANALS; c++)
       {
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
           PushInt(mpwImpMntCan[ PrevSoftMnt() ][ c ]);
-          w += sizeof(uint);
+          wSize += sizeof(uint);
         }
       }
     }
 
-    OutptrOutBuff(w);
+    OutptrOutBuff(wSize);
   }
   else Result(bRES_NEEDWORK);
 }
@@ -49,32 +48,27 @@ uint    w;
 
 void    OutPowMntCanExt(void)
 {
-uchar   c, i;
-uint    w;
-real    re;
-
   if (enGlobal != GLB_PROGRAM)
   {
     InitPushPtr();
-    w = 0;
+    uint wSize = 0;
 
+    uchar i;
     for (i=0; i<bMINUTES; i++)
     {
       if (LoadImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES) == false) { Result(bRES_BADFLASH); return; }
 
+      uchar c;
       for (c=0; c<bCANALS; c++)
       {
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
-          re = GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], c, 20);
-          PushFloat(re);
-
-          w += sizeof(real);
+          wSize += PushFloat(GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], c, 20));
         }
       }
     }
 
-    OutptrOutBuff(w);
+    OutptrOutBuff(wSize);
   }
   else Result(bRES_NEEDWORK);
 }
@@ -99,12 +93,8 @@ void    OutImpCanMntExt(void)
 
 void    OutPowCanMntExt(void)
 {
-uchar   c;
-uint    w;
-real    re;
-
   InitPushPtr();
-  w = 0;
+  uint wSize = 0;
 
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
@@ -112,18 +102,16 @@ real    re;
   {
     if (LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES) == false) { Result(bRES_BADFLASH); return; }
 
+    uchar c;
     for (c=0; c<bCANALS; c++)
     {
       if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
       {
-        re = GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], c, 20);
-        PushFloat(re);
-
-        w += sizeof(real);
+        wSize += PushFloat(GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], c, 20));
       }
     }
 
-    OutptrOutBuff(w);
+    OutptrOutBuff(wSize);
   }
 }
 
