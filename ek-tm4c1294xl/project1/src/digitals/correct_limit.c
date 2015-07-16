@@ -5,6 +5,23 @@ CORRECT_LIMIT.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../nvram/cache.h"
+#include "correct_limit.h"
+
+
+
+cache const             chCorrectLimit = {CORRECT_LIMIT, &mpbCorrectLimit, sizeof(mpbCorrectLimit)};
+
+
+
+void    InitCorrectLimit(void)
+{
+}
+
+
+void    ResetCorrectLimit(void)
+{
+}
 
 
 

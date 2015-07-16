@@ -29,13 +29,7 @@ typedef enum
   DEFDAYCAN             = CNTMONCAN + DOUBLE_CAN_PAGES*bMONTHS,
   DEFMONCAN             = DEFDAYCAN + IMP_CAN_PAGES*bDAYS,
 
-  PORTS                 = DEFMONCAN + IMP_CAN_PAGES*bMONTHS,
-  LOCAL_DISABLE         = PORTS + 1,
-
-  MAJOR_IN_DELAY        = LOCAL_DISABLE + 1,
-  MINOR_IN_DELAY        = MAJOR_IN_DELAY + 1,
-
-  ENBL_CAN              = MINOR_IN_DELAY + 1,
+  ENBL_CAN              = DEFMONCAN + IMP_CAN_PAGES*bMONTHS,
   ENBL_PRT_HOU          = ENBL_CAN + 1,
   CTRL_HOU              = ENBL_PRT_HOU + 1,
   RECALC_HOU            = CTRL_HOU + 1,

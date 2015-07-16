@@ -75,7 +75,13 @@ typedef enum
   SET_GROUPS            = SET_DATE + sizeof(bool) + bNVRAM_FOOTER,
   SET_PASSWORD          = SET_GROUPS + sizeof(bool) + bNVRAM_FOOTER,
 
-  EXT_4_FLAG            = SET_PASSWORD + sizeof(bool) + bNVRAM_FOOTER,
+  PORTS                 = SET_PASSWORD + sizeof(bool) + bNVRAM_FOOTER,
+  LOCAL_DISABLE         = PORTS + sizeof(mppoPorts) + bNVRAM_FOOTER,
+  MAJOR_IN_DELAY        = LOCAL_DISABLE + sizeof(mpboLocalDisable) + bNVRAM_FOOTER,
+  MINOR_IN_DELAY        = MAJOR_IN_DELAY + sizeof(mpwMajorInDelay) + bNVRAM_FOOTER,
+  CORRECT_LIMIT         = MINOR_IN_DELAY + sizeof(mpwMinorInDelay) + bNVRAM_FOOTER,
+
+  EXT_4_FLAG            = CORRECT_LIMIT + sizeof(mpbCorrectLimit) + bNVRAM_FOOTER,
   EXT_4_MONTHS          = EXT_4_FLAG + sizeof(bool) + bNVRAM_FOOTER,
   EXT_4T_FLAG           = EXT_4_MONTHS + sizeof(bool) + bNVRAM_FOOTER,
   EXT_4T_MONTHS         = EXT_4T_FLAG + sizeof(bool) + bNVRAM_FOOTER,
