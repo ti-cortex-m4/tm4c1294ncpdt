@@ -11,26 +11,26 @@ CORRECT1,C
 #include "../memory/mem_records.h"
 #include "../time/timedate.h"
 #include "../time/rtc.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "../flash/records.h"
 #include "correct1.h"
 
 
 
-file const              flCorrect1 = {CORRECT1, &Correct1, sizeof(Correct1)};
+cache const             chCorrect1 = {CORRECT1, &Correct1, sizeof(Correct1)};
 
 
 
 void    InitCorrect1(void)
 {
-  LoadFile(&flCorrect1);
+  LoadCache(&chCorrect1);
 }
 
 
 void    ResetCorrect1(void)
 {
   memset(&Correct1, 0, sizeof(Correct1));
-  SaveFile(&flCorrect1);
+  SaveCache(&chCorrect1);
 }
 
 
@@ -47,7 +47,7 @@ void    NextMonCorrect1(void)
   memset(&Correct1.mpwPosCountCurr, 0, sizeof(Correct1.mpwPosCountCurr));
   memset(&Correct1.mpwNegCountCurr, 0, sizeof(Correct1.mpwNegCountCurr));
 
-  SaveFile(&flCorrect1);
+  SaveCache(&chCorrect1);
 }
 
 
@@ -112,7 +112,7 @@ void    SetCurrTime_Full(time  ti, event  ev)
     Correct1.mpwNegCountCurr[i]++;
   }
 
-  SaveFile(&flCorrect1);
+  SaveFile(&chCorrect1);
 }
 
 
@@ -171,7 +171,7 @@ bool    CorrectTime_Full(event  ev)
     }
   }
 
-  SaveFile(&flCorrect1);
+  SaveFile(&chCorrect1);
 
   tiRecordSetCurrTime = ti;
   AddKeyRecord(ev);
