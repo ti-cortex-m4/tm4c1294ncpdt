@@ -99,10 +99,10 @@ bool    LoadGroups(void)
 
 bool    IsValidGroup(group  *pgr)
 {
-  uchar g;
-  for (g=0; g<pgr->bSize; g++)
+  uchar c;
+  for (c=0; c<pgr->bSize; c++)
   {
-    if (GetGroupsNodeCanal(g) >= bCANALS)
+    if ((pgr->mpnoNodes[c].ibCanal & 0x7F) >= bCANALS)
       return false;
   }
 
