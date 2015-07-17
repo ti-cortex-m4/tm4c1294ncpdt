@@ -53,7 +53,7 @@ uchar   i;
       {
         if (GetDigitalDevice(i) == 0) continue;
 
-        ibZ = 0;
+        uchar ibZ = 0;
 
         LoadCurrDigital(i);
         ibPort = diCurr.ibPort;
