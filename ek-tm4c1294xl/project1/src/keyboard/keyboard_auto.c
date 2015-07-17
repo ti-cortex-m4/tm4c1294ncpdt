@@ -11,6 +11,7 @@ KEYBOARD_AUTO.C
 #include "keyboard.h"
 #include "time/key_timedate.h"
 #include "impulses/key_single_can.h"
+#include "impulses/key_single_grp.h"
 #include "impulses/key_single2.h"
 #include "impulses/key_oldprogram73.h"
 #include "impulses/key_oldprogram74.h"
@@ -79,13 +80,13 @@ void    Keyboard_Auto(void)
     // обновление показаний с частотой 1 Гц
     if (fOnSecond == 1)
     {
-      fOnSecond = 0;/*
+      fOnSecond = 0;
       switch (wProgram)
       {
         case bGET_POWGRPPREVHOU:
         case bGET_POWGRPCURRHOU:
 
-        case bGET_POWGRPCURRMNT:    auto_GetSingle();   break;
+        case bGET_POWGRPCURRMNT:    auto_GetSingleGrp();   break;
 
         case bGET_POWCANPREVHOU:
         case bGET_POWCANCURRHOU:
@@ -94,7 +95,7 @@ void    Keyboard_Auto(void)
 
         case bGET_PROGRAM73:   auto_GetOldProgram73();  break;
         case bGET_PROGRAM74:   auto_GetOldProgram74();  break;
-      }*/
+      }
     }
   }
 
