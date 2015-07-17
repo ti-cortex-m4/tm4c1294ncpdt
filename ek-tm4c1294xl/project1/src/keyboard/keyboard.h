@@ -23,7 +23,7 @@ extern  uint                    wProgram;
 
 extern  time                    tiKey;
 
-extern  uchar                   ibX, ibY, ibZ;
+extern  uchar                   ibX, ibY;
 
 
 

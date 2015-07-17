@@ -53,7 +53,7 @@ uint                    wProgram;
 
 time                    tiKey;
 
-uchar                   ibX, ibY, ibZ;
+uchar                   ibX, ibY;
 
 
 

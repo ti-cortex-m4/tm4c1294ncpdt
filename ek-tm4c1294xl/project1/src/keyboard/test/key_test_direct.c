@@ -45,7 +45,8 @@ static void ShowTestDirect(void)
       uchar bB = 0;
       uchar bC = 0;
 
-      for (ibZ=0; ibZ<100; ibZ++)
+      uchar i;
+      for (i=0; i<100; i++)
       {
         Clear();
  
@@ -67,7 +68,7 @@ static void ShowTestDirect(void)
         ShowHi(szTestDirect); sprintf(szHi+14,"%2u",ibX+1);
 
         Clear();
-        sprintf(szLo,"%02u   %02u-%02u-%02u",ibZ+1,bA,bB,bC);
+        sprintf(szLo,"%02u   %02u-%02u-%02u",i+1,bA,bB,bC);
 
         Delay(1000); 
       }
