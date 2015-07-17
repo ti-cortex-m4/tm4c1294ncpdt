@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICES_INPUT.C
+DEVICES_INPUT,C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,6 +8,7 @@ DEVICES_INPUT.C
 #include "../memory/mem_digitals.h"
 #include "../digitals/digitals_status.h"
 #include "../devices/decompress_c.h"
+#include "devices_input.h"
 
 
 

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICES_POSTINPUT.C
+DEVICES_POSTINPUT,C
 
 
 ------------------------------------------------------------------------------*/
@@ -9,6 +9,7 @@ DEVICES_POSTINPUT.C
 #include "../kernel/crc-16.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
+#include "devices_postinput.h"
 
 
 
@@ -178,16 +179,6 @@ void    DevicesPostInput(void)
     else if (diCurr.bDevice == 26)
     {
       if ( MakeBccInBuff() )
-        mpSerial[ibPort] = SER_GOODCHECK;
-      else
-        mpSerial[ibPort] = SER_BADCHECK;
-    }
-#endif
-
-#ifndef SKIP_Z
-    else if (diCurr.bDevice == 99)
-    {
-      if ( MakeZetInBuff() )
         mpSerial[ibPort] = SER_GOODCHECK;
       else
         mpSerial[ibPort] = SER_BADCHECK;
