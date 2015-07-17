@@ -7,9 +7,7 @@ typedef enum
   PRIVATE               = FLASH_BEGIN,
   LOGICAL               = PRIVATE + 1,
 
-  GROUPS                = LOGICAL + 1,
-
-  TRANS_ENG             = GROUPS + sizeof(group)*bGROUPS/wLEAF_BYTES + 1,
+  TRANS_ENG             = LOGICAL + 1,
   TRANS_CNT             = TRANS_ENG + DOUBLE_CAN_PAGES,
   PULSE_HOU             = TRANS_CNT + DOUBLE_CAN_PAGES,
   PULSE_MNT             = PULSE_HOU + DOUBLE_CAN_PAGES,

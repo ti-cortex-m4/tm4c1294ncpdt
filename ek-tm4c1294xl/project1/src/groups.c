@@ -7,14 +7,13 @@ GROUPS.C
 #include "main.h"
 #include "memory/mem_groups.h"
 #include "memory/mem_program.h"
-#include "flash/files.h"
 #include "nvram/cache.h"
 #include "settings.h"
 #include "groups.h"
 
 
 
-file const              flGroups = {GROUPS, &mpgrGroups, sizeof(group)*bGROUPS};
+cache const             chGroups = {GROUPS, &mpgrGroups, sizeof(mpgrGroups)};
 
 
 
@@ -87,13 +86,13 @@ uchar   i,j;
 
 bool    SaveGroups(void)
 {
-  return SaveFile(&flGroups);
+  return SaveCache(&chGroups);
 }
 
 
 bool    LoadGroups(void)
 {
-  return LoadFile(&flGroups);
+  return LoadCache(&chGroups);
 }
 
 
@@ -138,7 +137,7 @@ node    noT;
     else SetGroupsSize(i,0);
   }
 
-  SaveFile(&flGroups);
+  SaveFile(&chGroups);
 
   MakeUsedNodes();
 
