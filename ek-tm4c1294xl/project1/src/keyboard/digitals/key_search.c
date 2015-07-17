@@ -308,7 +308,7 @@ void    key_SearchBySpeed(void)
       diCurr.ibPort = ibX;
       ShowPortDelayHi(ibPort);
 
-      ibZ = 0;                                  // результат операции
+      uchar ibZ = 0;                                  // результат операции
       for (ibYmin=bBAUDS; ibYmin>0; ibYmin--)
       {
         mppoPorts[ibX].ibBaud = ibYmin-1;
@@ -627,7 +627,7 @@ void    key_SearchByNumber(void)
       {
         sprintf(szLo+8,"%03u", ibY);
 
-        ibZ = 0;                                // результат операции
+        uchar ibZ = 0;                                // результат операции
 
         switch (ibXmax)
         {
