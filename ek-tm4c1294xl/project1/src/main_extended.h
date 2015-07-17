@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MAIN_EXTENDED.H
+MAIN_EXTENDED,H
 
 
 ------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ MAIN_EXTENDED.H
 #define __MAIN_EXTENDED
 
 
-// тип 'статус опроса цифровых счетчиков'
+// статус опроса счетчиков
 typedef enum
 {
   ST4_NONE              = 0,
@@ -22,24 +22,24 @@ typedef enum
 } status;
 
 
-// тип 'буфер типа 5'
+// значение счетчика по тарифам
 typedef struct
 {
   double        mpdbValuesT[bTARIFFS];
 } value5a;
 
 
-// тип 'данные типа 5'
+// значение счетчика по тарифам (прямой опрос)
 typedef struct
 {
   value5a       stValue;
   time          tiUpdate;
-  bool       boSuccess;
+  bool          boSuccess;
   uint          cwSuccess,cwError;
 } value5b;
 
 
-// тип 'данные типа 6'
+//
 typedef struct
 {
   status        bStatus;
@@ -48,7 +48,7 @@ typedef struct
 } value6;
 
 
-// тип 'данные типа 6 по тарифам'
+//
 typedef struct
 {
   status        bStatus;
@@ -57,13 +57,7 @@ typedef struct
 } value4t;
 
 
-// константы
-#define bVALUE7_BLOCKS      3
-#define bVALUE7_USED_SIZE   (bVALUE7_BLOCKS*6) 
-#define bVALUE7_REAL_SIZE   ((bVALUE7_BLOCKS+1)*6) 
-
-
-// тип 'время'
+// время
 typedef struct
 {
   uchar         bSecond;
@@ -72,7 +66,7 @@ typedef struct
 } stamp;
 
 
-// тип 'диаграмма'
+// значение счетчика на момент времени
 typedef struct
 {
   double        dbValue;
