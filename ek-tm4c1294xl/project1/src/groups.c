@@ -17,67 +17,67 @@ cache const             chGroups = {GROUPS, &mpgrGroups, sizeof(mpgrGroups)};
 
 
 
-uchar   GetGroupsSize(uchar  ibGroup)
+uchar   GetGroupsSize(uchar  ibGrp)
 {
-  return( mpgrGroups[ibGroup].bSize );
+  return mpgrGroups[ibGrp].bSize;
 }
 
 
-void    SetGroupsSize(uchar  ibGroup, uchar  bSize)
+void    SetGroupsSize(uchar  ibGrp, uchar  bSize)
 {
-  mpgrGroups[ibGroup].bSize = bSize;
-}
-
-
-
-node    GetGroupsNode(uchar  ibGroup, uchar  ibNode)
-{
-  return( mpgrGroups[ibGroup].mpnoNodes[ibNode] );
-}
-
-
-void    SetGroupsNode(uchar  ibGroup, uchar  ibNode, node  noT)
-{
-  mpgrGroups[ibGroup].mpnoNodes[ibNode] = noT;
+  mpgrGroups[ibGrp].bSize = bSize;
 }
 
 
 
-bool    GetGroupsNodeSign(uchar  ibGroup, uchar  ibNode)
+node    GetGroupsNode(uchar  ibGrp, uchar  ibNode)
 {
-  return GetGroupsNode(ibGroup,ibNode).ibCanal & 0x80;
+  return mpgrGroups[ibGrp].mpnoNodes[ibNode];
 }
 
 
-uchar   GetGroupsNodeCanal(uchar  ibGroup, uchar  ibNode)
+void    SetGroupsNode(uchar  ibGrp, uchar  ibNode, node  nd)
 {
-  return GetGroupsNode(ibGroup,ibNode).ibCanal & 0x7F;
+  mpgrGroups[ibGrp].mpnoNodes[ibNode] = nd;
+}
+
+
+
+bool    GetGroupsNodeSign(uchar  ibGrp, uchar  ibNode)
+{
+  return GetGroupsNode(ibGrp,ibNode).ibCanal & 0x80;
+}
+
+
+uchar   GetGroupsNodeCanal(uchar  ibGrp, uchar  ibNode)
+{
+  return GetGroupsNode(ibGrp,ibNode).ibCanal & 0x7F;
 }
 
 
 
 void    MakeUsedNodes(void)
 {
-uchar   i,j;
-
-  for (i=0; i<bGROUPS; i++)
+  uchar g;
+  for (g=0; g<bGROUPS; g++)
   {
-    if (GetGroupsSize(i) != 0) 
-      mpfUsedGroups[i] = true;
+    if (GetGroupsSize(g) != 0) 
+      mpfUsedGroups[g] = true;
     else
-      mpfUsedGroups[i] = false;
+      mpfUsedGroups[g] = false;
   }
 
-  for (i=0; i<bCANALS; i++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    mpfUsedNodes[i] = false;
+    mpfUsedNodes[c] = false;
   }
 
-  for (i=0; i<bGROUPS; i++)
+  for (g=0; g<bGROUPS; g++)
   {
-    for (j=0; j<GetGroupsSize(i); j++)
+    for (c=0; c<GetGroupsSize(g); c++)
     {
-      mpfUsedNodes[ GetGroupsNodeCanal(i,j) ] = true;
+      mpfUsedNodes[ GetGroupsNodeCanal(g,c) ] = true;
     }
   }
 }
@@ -99,10 +99,10 @@ bool    LoadGroups(void)
 
 bool    IsValidGroup(group  *pgr)
 {
-  uchar i;
-  for (i=0; i<pgr->bSize; i++)
+  uchar g;
+  for (g=0; g<pgr->bSize; g++)
   {
-    if ((pgr->mpnoNodes[i].ibCanal & 0x7F) >= bCANALS)
+    if (GetGroupsNodeCanal(g) >= bCANALS)
       return false;
   }
 
@@ -120,26 +120,24 @@ void    InitGroups(void)
 
 void    ResetGroups(void)
 {
-uchar   i;
-node    noT;
-
   memset(&mpgrGroups, 0, sizeof(mpgrGroups));
 
-  for (i=0; i<bGROUPS; i++)
+  uchar g;
+  for (g=0; g<bGROUPS; g++)
   {
-    if ((i < 16) && (i < bCANALS))
+    if (g < 16)
     {
-      SetGroupsSize(i,1);
+      SetGroupsSize(g,1);
 
-      noT.ibCanal = i;
-      SetGroupsNode(i,0, noT);
+      node nd;
+      nd.ibCanal = g;
+
+      SetGroupsNode(g,0,nd);
     }
-    else SetGroupsSize(i,0);
+    else SetGroupsSize(g,0);
   }
 
   SaveCache(&chGroups);
-
-  MakeUsedNodes();
 
   boSetGroups = false;
   SaveCache(&chSetGroups);

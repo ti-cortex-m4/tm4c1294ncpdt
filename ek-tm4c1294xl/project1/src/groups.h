@@ -4,14 +4,14 @@ GROUPS.H
 
 ------------------------------------------------------------------------------*/
 
-uchar   GetGroupsSize(uchar  ibGroup);
-void    SetGroupsSize(uchar  ibGroup, uchar  bSize);
+uchar   GetGroupsSize(uchar  ibGrp);
+void    SetGroupsSize(uchar  ibGrp, uchar  bSize);
 
-node    GetGroupsNode(uchar  ibGroup, uchar  ibNode);
-void    SetGroupsNode(uchar  ibGroup, uchar  ibNode, node  noT);
+node    GetGroupsNode(uchar  ibGrp, uchar  ibNode);
+void    SetGroupsNode(uchar  ibGrp, uchar  ibNode, node  nd);
 
-bool    GetGroupsNodeSign(uchar  ibGroup, uchar  ibNode);
-uchar   GetGroupsNodeCanal(uchar  ibGroup, uchar  ibNode);
+bool    GetGroupsNodeSign(uchar  ibGrp, uchar  ibNode);
+uchar   GetGroupsNodeCanal(uchar  ibGrp, uchar  ibNode);
 
 void    MakeUsedNodes(void);
 
