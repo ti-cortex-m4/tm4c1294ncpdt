@@ -19,12 +19,15 @@ KEY_OLDPROGRAM74.C
 static char const      *pszPowGrpAlfa[] = { szPower, szAlfa, szBeta, ""};
 
 
+static uchar            ibH;
+
+
 
 static void ShowPowGrpHou(void)
 {
-  if (LoadImpHou( (GetDayHouIndex(ibY)+ibZ)%wHOURS ) == true)
+  if (LoadImpHou( (GetDayHouIndex(ibY)+ibH)%wHOURS ) == true)
   {
-    if ((ibY == 0) && (ibZ > GetCurrHouIndex()))
+    if ((ibY == 0) && (ibH > GetCurrHouIndex()))
       sprintf(szLo,"         -    ");
     else
     {
@@ -33,7 +36,7 @@ static void ShowPowGrpHou(void)
   }
   else Error();
 
-  sprintf(szLo+14, "%2u", ibZ);
+  sprintf(szLo+14, "%2u", ibH);
 }
 
 
@@ -93,7 +96,7 @@ void    key_GetOldProgram74(void)
       ibY = 0;                          // день
       LoadAlfaDay();
 
-      ibZ = 0;                          // получас
+      ibH = 0;                          // получас
       ShowPowGrpHou(); 
     }
     else if (enKeyboard == KBD_POSTINPUT2)
@@ -105,15 +108,15 @@ void    key_GetOldProgram74(void)
 
         LoadAlfaDay();
 
-        ibZ = 0;                        // получас
+        ibH = 0;                        // получас
         ShowPowGrpHou(); 
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibZ >= 48)         
-        ibZ = 0;
+      if (++ibH >= 48)         
+        ibH = 0;
      
       ShowPowGrpHou();
     }
@@ -124,10 +127,10 @@ void    key_GetOldProgram74(void)
   {
     if (enKeyboard == KBD_POSTENTER)  
     {
-      if (ibZ > 0)
-        ibZ--;
+      if (ibH > 0)
+        ibH--;
       else 
-        ibZ = 48-1; 
+        ibH = 48-1; 
 
       ShowPowGrpHou();
     }
