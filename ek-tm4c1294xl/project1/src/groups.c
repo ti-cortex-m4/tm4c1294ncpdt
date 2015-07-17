@@ -97,7 +97,7 @@ bool    LoadGroups(void)
 
 
 
-bool    ValidGroup(group  *pgr)
+bool    IsValidGroup(group  *pgr)
 {
   uchar i;
   for (i=0; i<pgr->bSize; i++)
@@ -137,7 +137,7 @@ node    noT;
     else SetGroupsSize(i,0);
   }
 
-  SaveFile(&chGroups);
+  SaveCache(&chGroups);
 
   MakeUsedNodes();
 
