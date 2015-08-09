@@ -39,6 +39,7 @@ TODO .C
 #include "src/isr/serial3.h"
 #include "src/hardware/memory.h"
 #include "src/hardware/power_off.h"
+#include "src/hardware/uart_loader.h"
 #include "src/uarts.h"
 #include "src/serial/modems.h"
 #include "src/serial/print.h"
@@ -150,6 +151,7 @@ int main(void) {
     IntMasterEnable();
 
     InitRecalc();
+    InitUartLoader();
     LongBeep();
 
     InitWDT();
