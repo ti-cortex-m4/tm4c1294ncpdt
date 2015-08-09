@@ -5,8 +5,13 @@ UART_LOADER.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "inc/hw_gpio.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_sysctl.h"
+#include "inc/hw_types.h"
 #include "inc/hw_types.h"
 #include "inc/hw_flash.h"
+#include "../time/delay.h"
 #include "uart_loader.h"
 
 
@@ -38,6 +43,11 @@ void    BOOTCFG_Write(uchar bNumPort, uchar bNumPin, uchar bPolarity, uchar bEna
 
 void    InitUartLoader(void)
 {
+  HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R2; // GPIO Port C Run Mode Clock Gating Control
+  DelayGPIO();
+  HWREG(GPIO_PORTP_BASE + GPIO_O_DIR) &= 0xFFEF; // GPIO Direction
+  HWREG(GPIO_PORTP_BASE + GPIO_O_DEN) |= 0x0010; // GPIO Digital Enable
+
   if (HWREG(FLASH_BOOTCFG) == 0xFFFFFFFE)
   {
     BOOTCFG_Write(2, 4, 0, 0);
