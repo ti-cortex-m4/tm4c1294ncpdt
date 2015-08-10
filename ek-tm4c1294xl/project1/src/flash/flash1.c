@@ -157,6 +157,7 @@ bool    SafeReadStatus1(void)
 
 bool    PageErase1(uint const  wPageOut)
 {
+  ASSERT(wPageOut < wPAGES);
   IncFlashControl(wPageOut);
 
   if (SafeReadStatus1() == false)
@@ -181,6 +182,8 @@ bool    PageErase1(uint const  wPageOut)
 
 bool    PageRead1(uint const  wPageIn)
 {
+  ASSERT(wPageIn < wPAGES);
+
   if (SafeReadStatus1() == false)
     return false;
   else
@@ -207,6 +210,7 @@ bool    PageRead1(uint const  wPageIn)
 
 bool    PageWrite1(uint const  wPageOut)
 {
+  ASSERT(wPageOut < wPAGES);
   IncFlashControl(wPageOut);
 
   if (SafeReadStatus1() == false)
