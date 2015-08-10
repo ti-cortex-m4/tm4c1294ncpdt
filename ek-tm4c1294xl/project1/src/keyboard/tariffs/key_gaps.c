@@ -20,6 +20,9 @@ static char const       szGaps[]        = "Периоды         ",
                         szError[]       = " ошибка !";
 
 
+static time             tiT;
+
+
 
 void    ShowGapName(uchar  i)
 {
@@ -55,7 +58,7 @@ uint    k;
   for (i=0; i<GetGapSize(); i++)
   {
     GetGapDate(i);
-    if ((tiGap.bMonth == tiKey.bMonth) && (tiGap.bDay == tiKey.bDay))
+    if ((tiGap.bMonth == tiT.bMonth) && (tiGap.bDay == tiT.bDay))
     {
       // заменяем тип излома, не добавляя его в список
       SetGapDate(i);
@@ -67,7 +70,7 @@ uint    k;
 
 
   // записываем излом в конец списка
-  tiGap = tiKey; SetGapDate(ibX);
+  tiGap = tiT; SetGapDate(ibX);
 
   // сортировка
   for(i=0; i<=GetGapSize(); i++)
@@ -146,8 +149,8 @@ void    key_SetGaps(void)
     }     
     else if (enKeyboard == KBD_POSTINPUT2)              
     {                                   
-      tiKey.bDay = GetCharLo(0,1);
-      if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
+      tiT.bDay = GetCharLo(0,1);
+      if ((tiT.bDay > 0) && (tiT.bDay <= 31))
       {
         enKeyboard = KBD_INPUT3;
         szLo[2] = '.';
@@ -156,12 +159,12 @@ void    key_SetGaps(void)
     }      
     else if (enKeyboard == KBD_POSTINPUT3)              
     {                                  
-      tiKey.bMonth = GetCharLo(3,4);
-      tiKey.bYear  = 0;
+      tiT.bMonth = GetCharLo(3,4);
+      tiT.bYear  = 0;
 
-      if ((tiKey.bMonth == 0) || (tiKey.bMonth > 12))
+      if ((tiT.bMonth == 0) || (tiT.bMonth > 12))
         Beep();
-      else if (tiKey.bDay > GetDaysInMonthM(tiKey.bMonth))
+      else if (tiT.bDay > GetDaysInMonthM(tiT.bMonth))
       {
         enKeyboard = KBD_INPUT2; 
         LongBeep();
@@ -171,9 +174,9 @@ void    key_SetGaps(void)
       else
       {
         enKeyboard = KBD_INPUT4;
-        tiKey.bSecond = 0;              // тип излома (режим работы)
+        tiT.bSecond = 0;              // тип излома (режим работы)
 
-        ShowGapName(tiKey.bSecond);
+        ShowGapName(tiT.bSecond);
         szLo[6] = '.';
       }
     }
@@ -264,8 +267,8 @@ void    key_SetGaps(void)
   {    
     if (enKeyboard == KBD_POSTINPUT2)              
     {                                   
-      tiKey.bDay = GetCharLo(0,1);
-      if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
+      tiT.bDay = GetCharLo(0,1);
+      if ((tiT.bDay > 0) && (tiT.bDay <= 31))
       {
         enKeyboard = KBD_INPUT3;
         szLo[2] = '.';
@@ -274,9 +277,9 @@ void    key_SetGaps(void)
     }      
     else if (enKeyboard == KBD_INPUT4)   
     {
-      if (++tiKey.bSecond >= 12) tiKey.bSecond = 0;
+      if (++tiT.bSecond >= 12) tiT.bSecond = 0;
 
-      ShowGapName(tiKey.bSecond);
+      ShowGapName(tiT.bSecond);
       szLo[6] = '.';
     }
     else Beep();

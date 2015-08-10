@@ -51,8 +51,6 @@ key                     enKeyboard;
 
 uint                    wProgram;
 
-time                    tiKey;
-
 uchar                   ibX, ibY;
 
 
