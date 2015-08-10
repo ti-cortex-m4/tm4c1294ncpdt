@@ -24,15 +24,15 @@ void    OutFlashPage(void)
   {
     InitPushPtr();
 
-    PushInt(cwWrnBusy);
-    PushInt(cwWrnCompare);
-    PushInt(cwWrnPageErase);
-    PushInt(cwWrnPageRead);
-    PushInt(cwWrnPageWrite);
-    PushInt(cwErrCompare);
-    PushInt(cwErrPageErase);
-    PushInt(cwErrPageRead);
-    PushInt(cwErrPageWrite);
+    PushInt(cwFlashBusyWrn);
+    PushInt(cwFlashCompareWrn);
+    PushInt(cwFlashEraseWrn);
+    PushInt(cwFlashReadWrn);
+    PushInt(cwFlashWriteWrn);
+    PushInt(cwFlashCompareErr);
+    PushInt(cwFlashEraseErr);
+    PushInt(cwFlashReadErr);
+    PushInt(cwFlashWriteErr);
 
     InitPush(63);
 
@@ -61,22 +61,22 @@ void    OutFlashCounters(void)
   InitPushCRC();
   uint wSize = 0;
 
-  wSize += PushLong(cdwPageErase);
-  wSize += PushLong(cdwPageRead);
-  wSize += PushLong(cdwPageWrite);
+  wSize += PushLong(cdwFlashErasePage);
+  wSize += PushLong(cdwFlashReadPage);
+  wSize += PushLong(cdwFlashWritePage);
 
-  wSize += PushLong(cdwFlashReadBytes);
-  wSize += PushLong(cdwFlashWriteBytes);
+  wSize += PushLong(cdwFlashReadByte);
+  wSize += PushLong(cdwFlashWriteByte);
 
-  wSize += PushInt(cwWrnBusy);
-  wSize += PushInt(cwWrnCompare);
-  wSize += PushInt(cwWrnPageErase);
-  wSize += PushInt(cwWrnPageRead);
-  wSize += PushInt(cwWrnPageWrite);
-  wSize += PushInt(cwErrCompare);
-  wSize += PushInt(cwErrPageErase);
-  wSize += PushInt(cwErrPageRead);
-  wSize += PushInt(cwErrPageWrite);
+  wSize += PushInt(cwFlashBusyWrn);
+  wSize += PushInt(cwFlashCompareWrn);
+  wSize += PushInt(cwFlashEraseWrn);
+  wSize += PushInt(cwFlashReadWrn);
+  wSize += PushInt(cwFlashWriteWrn);
+  wSize += PushInt(cwFlashCompareErr);
+  wSize += PushInt(cwFlashEraseErr);
+  wSize += PushInt(cwFlashReadErr);
+  wSize += PushInt(cwFlashWriteErr);
 
   Output(wSize);
 }
@@ -84,22 +84,22 @@ void    OutFlashCounters(void)
 
 void    ResetFlashCounters(void)
 {
-  cdwPageErase = 0;
-  cdwPageRead = 0;
-  cdwPageWrite = 0;
+  cdwFlashErasePage = 0;
+  cdwFlashReadPage = 0;
+  cdwFlashWritePage = 0;
 
-  cdwFlashReadBytes = 0;
-  cdwFlashWriteBytes = 0;
+  cdwFlashReadByte = 0;
+  cdwFlashWriteByte = 0;
 
-  cwWrnBusy = 0;
-  cwWrnCompare = 0;
-  cwWrnPageErase = 0;
-  cwWrnPageRead = 0;
-  cwWrnPageWrite = 0;
-  cwErrCompare = 0;
-  cwErrPageErase = 0;
-  cwErrPageRead = 0;
-  cwErrPageWrite = 0;
+  cwFlashBusyWrn = 0;
+  cwFlashCompareWrn = 0;
+  cwFlashEraseWrn = 0;
+  cwFlashReadWrn = 0;
+  cwFlashWriteWrn = 0;
+  cwFlashCompareErr = 0;
+  cwFlashEraseErr = 0;
+  cwFlashReadErr = 0;
+  cwFlashWriteErr = 0;
 
   Result(bRES_OK);
 }

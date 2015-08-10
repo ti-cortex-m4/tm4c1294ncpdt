@@ -46,18 +46,18 @@ static bool PageWrite(uint const  wPageOut)
 
 bool    SafePageErase(uint const  wPageOut)
 {
-  cdwPageErase++;
+  cdwFlashErasePage++;
 
   uchar i;
   for (i=0; i<FLASH_REPEATS; i++)
   {
     if (PageErase(wPageOut) == true) break;
-    cwWrnPageErase++;
+    cwFlashEraseWrn++;
   }
 
   if (i == FLASH_REPEATS)
   {
-    cwErrPageErase++;
+    cwFlashEraseErr++;
     return false;
   }
   else return true;
@@ -67,18 +67,18 @@ bool    SafePageErase(uint const  wPageOut)
 
 bool    SafePageRead(uint const  wPageIn)
 {
-  cdwPageRead++;
+  cdwFlashReadPage++;
 
   uchar i;
   for (i=0; i<FLASH_REPEATS; i++)
   {
     if (PageRead(wPageIn) == true) break;
-    cwWrnPageRead++;
+    cwFlashReadWrn++;
   }
 
   if (i == FLASH_REPEATS)
   {
-    cwErrPageRead++;
+    cwFlashReadErr++;
     return false;
   }
   else return true;
@@ -88,7 +88,7 @@ bool    SafePageRead(uint const  wPageIn)
 
 bool    SafePageWrite(uint const  wPageOut)
 {
-  cdwPageWrite++;
+  cdwFlashWritePage++;
 
   mpbPageOut[wLEAF_BYTES+0] = 0;
   mpbPageOut[wLEAF_BYTES+1] = 0;
@@ -107,12 +107,12 @@ bool    SafePageWrite(uint const  wPageOut)
   for (i=0; i<FLASH_REPEATS; i++)
   {
     if (PageWrite(wPageOut) == true) break;
-    cwWrnPageWrite++;
+    cwFlashWriteWrn++;
   }
 
   if (i == FLASH_REPEATS)
   {
-    cwErrPageWrite++;
+    cwFlashWriteErr++;
     return false;
   }
   else return true;
@@ -124,10 +124,10 @@ uint    GetFlashStatus(void)
 {
   uint i = 0;
 
-  if (cwErrCompare   != 0) i |= 0x0001;
-  if (cwErrPageErase != 0) i |= 0x0002;
-  if (cwErrPageRead  != 0) i |= 0x0004;
-  if (cwErrPageWrite != 0) i |= 0x0008;
+  if (cwFlashCompareErr   != 0) i |= 0x0001;
+  if (cwFlashEraseErr != 0) i |= 0x0002;
+  if (cwFlashReadErr  != 0) i |= 0x0004;
+  if (cwFlashWriteErr != 0) i |= 0x0008;
 
   return(i);
 }
@@ -148,7 +148,7 @@ bool    GetFlashChecksum(void)
 
 
 /*
-void    TODO OutFlashReadStatus(void) { + add (++i > STATUS_REPEATS) + add cwWrnBusy etc
+void    TODO OutFlashReadStatus(void) { + add (++i > STATUS_REPEATS) + add cwFlashBusyWrn etc
   InitPushCRC();
 
   ReadStatus();
