@@ -21,21 +21,21 @@ FLASH.C
 
 static bool PageErase(uint const  wPageOut)
 {
-  return PageErase2(wPageOut);
+  return PageErase1(wPageOut);
 //  return (wPageOut < wPAGES) ? PageErase1(wPageOut) : PageErase2(wPageOut);
 }
 
 
 static bool PageRead(uint const  wPageIn)
 {
-  return PageRead2(wPageIn);
+  return PageRead1(wPageIn);
 //  return (wPageIn < wPAGES) ? PageRead1(wPageIn) : PageRead2(wPageIn);
 }
 
 
 static bool PageWrite(uint const  wPageOut)
 {
-  return PageWrite2(wPageOut);
+  return PageWrite1(wPageOut);
 //  return (wPageOut < wPAGES) ? PageWrite1(wPageOut) : PageWrite2(wPageOut);
 }
 
