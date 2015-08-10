@@ -28,7 +28,7 @@ uint                    cwWrnBusy,
                         cwErrPageWrite;
 
 // счетчик количества записей страниц флэш-памяти
-uint                    mpcwFlashControl[wPAGES];
+uint                    mpcwFlashControl[wPAGES_TOTAL];
 
 // счётчики количества операций
 ulong                   cdwPageErase,

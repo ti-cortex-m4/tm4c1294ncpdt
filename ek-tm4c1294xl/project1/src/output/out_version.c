@@ -46,7 +46,7 @@ void    OutVersion(void)
 
   PushInt(wPAGE_BYTES);
   PushInt(wLEAF_BYTES);
-  PushInt(wPAGES);
+  PushInt(wPAGES_TOTAL);
   PushInt(FLASH_BEGIN);
   PushInt(FLASH_END);
 
