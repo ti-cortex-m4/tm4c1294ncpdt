@@ -144,7 +144,7 @@ bool    SafeReadStatus1(void)
   uint i = 0;
   while ((ReadStatus1() & 0x80) == 0)
   {
-    if (++i > wREAD_STATUS)
+    if (++i > STATUS_REPEATS)
     {
       cwWrnBusy++;
       return false;

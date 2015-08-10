@@ -36,7 +36,7 @@ FLASH.H
 
 
 // количество повторов при чтении регистра состояния (TODO: use milliseconds)
-#define wREAD_STATUS    50000
+#define STATUS_REPEATS  50000
 
 
 // количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
