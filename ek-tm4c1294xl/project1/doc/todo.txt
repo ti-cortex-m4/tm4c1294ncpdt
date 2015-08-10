@@ -14,7 +14,7 @@ Delphi hex to float
 
 mpdwChannelsB[i] > 0xF0000000) dev_a dev_b 
 
-optimise SetTime
+optimise SetTime & SetDigitals
 
 test int program cnt на вызов (timer + serial) + частота timer
 
@@ -41,3 +41,5 @@ error.c - add errors buffer
 error.c - why without WDT reset ?
 
 ibZ
+
+UART FIFO + sem2reader time
