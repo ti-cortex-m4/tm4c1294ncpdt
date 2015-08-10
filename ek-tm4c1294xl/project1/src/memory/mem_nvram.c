@@ -9,20 +9,20 @@ MEM_NVRAM,C
 
 
 // счетчики количества операций
-ulong                   cdwNvramReadBuffs,
-                        cdwNvramWriteBuffs,
-                        cdwNvramFreeBuffs;
+ulong                   cdwNvramReadBuff,
+                        cdwNvramWriteBuff,
+                        cdwNvramFreeBuff;
 
 // счетчики количества байтов
-ulong                   cdwNvramReadBytes,
-                        cdwNvramWriteBytes;
+ulong                   cdwNvramReadByte,
+                        cdwNvramWriteByte;
 
 // счетчики количества ошибок
-uint                    cwWrnNvramRead,
-                        cwErrNvramRead,
-                        cwWrnNvramWrite,
-                        cwErrNvramWrite,
-                        cwWrnNvramFree,
-                        cwErrNvramFree,
-                        cwWrnNvramCompare,
-                        cwErrNvramCompare;
+uint                    cwNvramReadWrn,
+                        cwNvramReadErr,
+                        cwNvramWriteWrn,
+                        cwNvramWriteErr,
+                        cwNvramFreeWrn,
+                        cwNvramFreeErr,
+                        cwNvramCompareWrn,
+                        cwNvramCompareErr;

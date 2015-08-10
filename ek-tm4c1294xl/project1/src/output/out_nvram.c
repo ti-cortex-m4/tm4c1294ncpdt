@@ -41,21 +41,21 @@ void    OutNvramCounters(void)
   InitPushCRC();
   uint wSize = 0;
 
-  wSize += PushLong(cdwNvramReadBuffs);
-  wSize += PushLong(cdwNvramWriteBuffs);
-  wSize += PushLong(cdwNvramFreeBuffs);
+  wSize += PushLong(cdwNvramReadBuff);
+  wSize += PushLong(cdwNvramWriteBuff);
+  wSize += PushLong(cdwNvramFreeBuff);
 
-  wSize += PushLong(cdwNvramReadBytes);
-  wSize += PushLong(cdwNvramWriteBytes);
+  wSize += PushLong(cdwNvramReadByte);
+  wSize += PushLong(cdwNvramWriteByte);
 
-  wSize += PushInt(cwWrnNvramRead);
-  wSize += PushInt(cwErrNvramRead);
-  wSize += PushInt(cwWrnNvramWrite);
-  wSize += PushInt(cwErrNvramWrite);
-  wSize += PushInt(cwWrnNvramFree);
-  wSize += PushInt(cwErrNvramFree);
-  wSize += PushInt(cwWrnNvramCompare);
-  wSize += PushInt(cwErrNvramCompare);
+  wSize += PushInt(cwNvramReadWrn);
+  wSize += PushInt(cwNvramReadErr);
+  wSize += PushInt(cwNvramWriteWrn);
+  wSize += PushInt(cwNvramWriteErr);
+  wSize += PushInt(cwNvramFreeWrn);
+  wSize += PushInt(cwNvramFreeErr);
+  wSize += PushInt(cwNvramCompareWrn);
+  wSize += PushInt(cwNvramCompareErr);
 
   Output(wSize);
 }
@@ -63,21 +63,21 @@ void    OutNvramCounters(void)
 
 void    ResetNvramCounters(void)
 {
-  cdwNvramReadBuffs = 0;
-  cdwNvramWriteBuffs = 0;
-  cdwNvramFreeBuffs = 0;
+  cdwNvramReadBuff = 0;
+  cdwNvramWriteBuff = 0;
+  cdwNvramFreeBuff = 0;
 
-  cdwNvramReadBytes = 0;
-  cdwNvramWriteBytes = 0;
+  cdwNvramReadByte = 0;
+  cdwNvramWriteByte = 0;
 
-  cwWrnNvramRead = 0;
-  cwErrNvramRead = 0;
-  cwWrnNvramWrite = 0;
-  cwErrNvramWrite = 0;
-  cwWrnNvramFree = 0;
-  cwErrNvramFree = 0;
-  cwWrnNvramCompare = 0;
-  cwErrNvramCompare = 0;
+  cwNvramReadWrn = 0;
+  cwNvramReadErr = 0;
+  cwNvramWriteWrn = 0;
+  cwNvramWriteErr = 0;
+  cwNvramFreeWrn = 0;
+  cwNvramFreeErr = 0;
+  cwNvramCompareWrn = 0;
+  cwNvramCompareErr = 0;
 
   Result(bRES_OK);
 }

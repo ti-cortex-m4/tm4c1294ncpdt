@@ -44,7 +44,7 @@ static void NvramDelay(ulong ulgTime)
 //Ѕиты читаютс€ микросхемой Ёќ«” по переднему фронту
  void  NvramCharOut(uchar bI)
 {
-  cdwNvramWriteBytes++;
+  cdwNvramWriteByte++;
 
  uchar i;
  for(i=0; i<8; i++)
@@ -62,7 +62,7 @@ static void NvramDelay(ulong ulgTime)
 //Ѕиты фиксируютс€ микросхемой Ёќ«” в течении активности импульса (высокий уровень на SCK)
 uchar  NvramCharIn(void)
 {
-  cdwNvramReadBytes++;
+  cdwNvramReadByte++;
 
  uchar b = 0;
 
