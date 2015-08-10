@@ -24,7 +24,7 @@ void    OutFlashPage(void)
   {
     InitPushPtr();
 
-    PushInt(cwFlashBusyWrn);
+    PushInt(cwFlashBusyErr);
     PushInt(cwFlashCompareWrn);
     PushInt(cwFlashEraseWrn);
     PushInt(cwFlashReadWrn);
@@ -68,14 +68,15 @@ void    OutFlashCounters(void)
   wSize += PushLong(cdwFlashReadByte);
   wSize += PushLong(cdwFlashWriteByte);
 
-  wSize += PushInt(cwFlashBusyWrn);
+  wSize += PushInt(cwFlashBusyCnt);
+  wSize += PushInt(cwFlashBusyErr);
   wSize += PushInt(cwFlashCompareWrn);
-  wSize += PushInt(cwFlashEraseWrn);
-  wSize += PushInt(cwFlashReadWrn);
-  wSize += PushInt(cwFlashWriteWrn);
   wSize += PushInt(cwFlashCompareErr);
+  wSize += PushInt(cwFlashEraseWrn);
   wSize += PushInt(cwFlashEraseErr);
+  wSize += PushInt(cwFlashReadWrn);
   wSize += PushInt(cwFlashReadErr);
+  wSize += PushInt(cwFlashWriteWrn);
   wSize += PushInt(cwFlashWriteErr);
 
   Output(wSize);
@@ -91,7 +92,8 @@ void    ResetFlashCounters(void)
   cdwFlashReadByte = 0;
   cdwFlashWriteByte = 0;
 
-  cwFlashBusyWrn = 0;
+  cwFlashBusyCnt = 0;
+  cwFlashBusyErr = 0;
   cwFlashCompareWrn = 0;
   cwFlashEraseWrn = 0;
   cwFlashReadWrn = 0;
