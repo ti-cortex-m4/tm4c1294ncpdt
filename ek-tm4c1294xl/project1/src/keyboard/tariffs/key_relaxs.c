@@ -26,6 +26,9 @@ static char const       szRelaxs[]      = "Праздники       ",
                         szError[]       = " ошибка !";
 
 
+static time             tiT;
+
+
 
 void    ShowRelaxName(uchar  i)
 {
@@ -63,7 +66,7 @@ uint    k;
   for (i=0; i<GetRelaxSize(); i++)
   {
     GetRelaxDate(i);
-    if ((tiRelax.bMonth == tiKey.bMonth) && (tiRelax.bDay == tiKey.bDay))
+    if ((tiRelax.bMonth == tiT.bMonth) && (tiRelax.bDay == tiT.bDay))
     {
       // заменяем тип праздника, не добавляя его в список
       SetRelaxDate(i);
@@ -75,7 +78,7 @@ uint    k;
 
 
   // записываем праздник в конец списка
-  tiRelax = tiKey; SetRelaxDate(ibX);
+  tiRelax = tiT; SetRelaxDate(ibX);
 
   // сортировка
   for(i=0; i<=GetRelaxSize(); i++)
@@ -153,8 +156,8 @@ void    key_SetRelaxs(void)
     }     
     else if (enKeyboard == KBD_POSTINPUT2)              
     {                                   
-      tiKey.bDay = GetCharLo(1,2);
-      if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
+      tiT.bDay = GetCharLo(1,2);
+      if ((tiT.bDay > 0) && (tiT.bDay <= 31))
       {
         enKeyboard = KBD_INPUT3;
         szLo[3] = '.';
@@ -163,12 +166,12 @@ void    key_SetRelaxs(void)
     }      
     else if (enKeyboard == KBD_POSTINPUT3)              
     {                                  
-      tiKey.bMonth = GetCharLo(4,5);
-      tiKey.bYear  = GetCurrTimeDate()->bYear;
+      tiT.bMonth = GetCharLo(4,5);
+      tiT.bYear  = GetCurrTimeDate()->bYear;
 
-      if ((tiKey.bMonth == 0) || (tiKey.bMonth > 12))
+      if ((tiT.bMonth == 0) || (tiT.bMonth > 12))
         Beep();
-      else if (tiKey.bDay > GetDaysInMonthYM(tiKey.bYear, tiKey.bMonth))
+      else if (tiT.bDay > GetDaysInMonthYM(tiT.bYear, tiT.bMonth))
       {
         enKeyboard = KBD_INPUT2; 
         LongBeep();
@@ -178,9 +181,9 @@ void    key_SetRelaxs(void)
       else
       {
         enKeyboard = KBD_INPUT4;
-        tiKey.bSecond = 1;              // тип праздника (режим работы)
+        tiT.bSecond = 1;              // тип праздника (режим работы)
 
-        ShowRelaxName(tiKey.bSecond);
+        ShowRelaxName(tiT.bSecond);
         szLo[7] = '.';
       }
     }
@@ -271,8 +274,8 @@ void    key_SetRelaxs(void)
   {    
     if (enKeyboard == KBD_POSTINPUT2)              
     {                                   
-      tiKey.bDay = GetCharLo(1,2);
-      if ((tiKey.bDay > 0) && (tiKey.bDay <= 31))
+      tiT.bDay = GetCharLo(1,2);
+      if ((tiT.bDay > 0) && (tiT.bDay <= 31))
       {
         enKeyboard = KBD_INPUT3;
         szLo[3] = '.';
@@ -281,9 +284,9 @@ void    key_SetRelaxs(void)
     }      
     else if (enKeyboard == KBD_INPUT4)   
     {
-      if (++tiKey.bSecond > 2) tiKey.bSecond = 1;
+      if (++tiT.bSecond > 2) tiT.bSecond = 1;
 
-      ShowRelaxName(tiKey.bSecond);
+      ShowRelaxName(tiT.bSecond);
       szLo[7] = '.';
     }
     else Beep();
