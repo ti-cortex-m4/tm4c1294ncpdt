@@ -18,7 +18,8 @@ optimise SetTime
 
 test int program cnt на вызов (timer + serial) + частота timer
 
-несовместимость старого и нового проборов по ext4
+doc различие старой и новой версии
+doc несовместимость старого и нового проборов по ext4
 
 чтение из RAM ROM DF NVRAM
 
@@ -30,7 +31,6 @@ UNI cnt
 P79 и другие
 
 Esc SUV - прочитать CRC мгновенно
-doc различие старой и новой версии
 быстрое чтение счетчиков и мгнов парам.
 гамма - быстрое задание каналов и параметров
 
@@ -38,3 +38,6 @@ u_hhr u_mnt wSize
 x
 
 error.c - add errors buffer
+error.c - why without WDT reset ?
+
+ibZ
