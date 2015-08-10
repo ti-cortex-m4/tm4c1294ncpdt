@@ -40,7 +40,7 @@ static void Disable(void)
 
 static void CharOut(uchar  b)
 {
-  cdwFlashWriteBytes++;
+  cdwFlashWriteByte++;
 
   if (b & 0x80) HWREG(GPIO_FLASH1_SI) = MASK_FLASH1_SI;
   else HWREG(GPIO_FLASH1_SI) = ~MASK_FLASH1_SI;
@@ -86,7 +86,7 @@ static void CharOut(uchar  b)
 
 static uchar CharIn(void)
 {
-  cdwFlashReadBytes++;
+  cdwFlashReadByte++;
 
   uchar b = 0;
 
@@ -146,7 +146,7 @@ bool    SafeReadStatus1(void)
   {
     if (++i > STATUS_REPEATS)
     {
-      cwWrnBusy++;
+      cwFlashBusyWrn++;
       return false;
     }
   }
@@ -250,14 +250,14 @@ bool    PageWrite1(uint const  wPageOut)
 
   if (SafeReadStatus1() == false)
   {
-    cwErrCompare++;
+    cwFlashCompareErr++;
     return false;
   }
   else
   {
     if ((bFlashStatus & 0x40) != 0)
     {
-      cwWrnCompare++;
+      cwFlashCompareWrn++;
       return false;
     }
     else return true;

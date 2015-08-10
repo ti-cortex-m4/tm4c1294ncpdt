@@ -16,25 +16,25 @@ uchar                   bFlashStatus;
 uchar                   mpbPageIn[wPAGE_BYTES],
                         mpbPageOut[wPAGE_BYTES];
 
-// счётчики для контроля состояния флэш-памяти
-uint                    cwWrnBusy,
-                        cwWrnCompare,
-                        cwWrnPageErase,
-                        cwWrnPageRead,
-                        cwWrnPageWrite,
-                        cwErrCompare,
-                        cwErrPageErase,
-                        cwErrPageRead,
-                        cwErrPageWrite;
-
 // счетчик количества записей страниц флэш-памяти
 uint                    mpcwFlashControl[wPAGES_TOTAL];
 
 // счётчики количества операций
-ulong                   cdwPageErase,
-                        cdwPageRead,
-                        cdwPageWrite;
+ulong                   cdwFlashErasePage,
+                        cdwFlashReadPage,
+                        cdwFlashWritePage;
 
 // счетчики количества байтов
-ulong                   cdwFlashReadBytes,
-                        cdwFlashWriteBytes;
+ulong                   cdwFlashReadByte,
+                        cdwFlashWriteByte;
+
+// счетчики количества ошибок
+uint                    cwFlashBusyWrn,
+                        cwFlashCompareWrn,
+                        cwFlashEraseWrn,
+                        cwFlashReadWrn,
+                        cwFlashWriteWrn,
+                        cwFlashCompareErr,
+                        cwFlashEraseErr,
+                        cwFlashReadErr,
+                        cwFlashWriteErr;
