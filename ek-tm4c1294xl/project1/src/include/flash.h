@@ -80,4 +80,12 @@ FLASH.H
 #include "flash_enum.txt"
 
 
+#if (LOCAL_END >= wPAGES)
+#error "FLASH1 overflow"
+#endif
+
+#if (FLASH_END >= wPAGES_TOTAL)
+#error "FLASH2 overflow"
+#endif
+
 #endif

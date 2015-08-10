@@ -23,6 +23,8 @@ void    OutFlashStack(void)
   InitPushCRC();
 
   PUSH_ENUM(FLASH_BEGIN)
+  PUSH_ENUM(LOCAL_END)
+  PUSH_ENUM(LOCAL_BEGIN)
   PUSH_ENUM(FLASH_END)
   PUSH_ENUM(wPAGES)
   PUSH_ENUM(wPAGES_TOTAL)
@@ -31,9 +33,15 @@ void    OutFlashStack(void)
 
   PushChar(0x0D); PushChar(0x0A);
 
-  PushLongAsString((ulong)100*(FLASH_END-FLASH_BEGIN)/(wPAGES_TOTAL-FLASH_BEGIN));
+  PushLongAsString((ulong)100*(LOCAL_END-FLASH_BEGIN)/wPAGES);
   PushString("%");
 
+  PushChar(0x0D); PushChar(0x0A);
+
+  PushLongAsString((ulong)100*(FLASH_END-LOCAL_BEGIN)/wPAGES);
+  PushString("%");
+
+  PushChar(0x0D); PushChar(0x0A);
   PushChar(0x0D); PushChar(0x0A);
 
   PUSH_ENUM(UINT_CAN_PAGES)
