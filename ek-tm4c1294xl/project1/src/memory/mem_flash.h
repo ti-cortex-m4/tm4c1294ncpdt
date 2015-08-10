@@ -22,12 +22,13 @@ extern  ulong                   cdwFlashErasePage,
 extern  ulong                   cdwFlashReadByte,
                                 cdwFlashWriteByte;
 
-extern  uint                    cwFlashBusyWrn,
+extern  uint                    cwFlashBusyCnt,
+                                cwFlashBusyErr,
                                 cwFlashCompareWrn,
-                                cwFlashEraseWrn,
-                                cwFlashReadWrn,
-                                cwFlashWriteWrn,
                                 cwFlashCompareErr,
+                                cwFlashEraseWrn,
                                 cwFlashEraseErr,
+                                cwFlashReadWrn,
                                 cwFlashReadErr,
+                                cwFlashWriteWrn,
                                 cwFlashWriteErr;

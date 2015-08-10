@@ -29,12 +29,13 @@ ulong                   cdwFlashReadByte,
                         cdwFlashWriteByte;
 
 // счетчики количества ошибок
-uint                    cwFlashBusyWrn,
+uint                    cwFlashBusyCnt,
+                        cwFlashBusyErr,
                         cwFlashCompareWrn,
-                        cwFlashEraseWrn,
-                        cwFlashReadWrn,
-                        cwFlashWriteWrn,
                         cwFlashCompareErr,
+                        cwFlashEraseWrn,
                         cwFlashEraseErr,
+                        cwFlashReadWrn,
                         cwFlashReadErr,
+                        cwFlashWriteWrn,
                         cwFlashWriteErr;

@@ -146,11 +146,12 @@ bool    SafeReadStatus2(void)
   {
     if (++i > STATUS_REPEATS)
     {
-      cwFlashBusyWrn++;
+      cwFlashBusyErr++;
       return false;
     }
   }
 
+  cwFlashBusyCnt = i;
   return true;
 }
 
