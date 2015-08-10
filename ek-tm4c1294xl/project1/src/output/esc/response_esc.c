@@ -40,8 +40,7 @@ static void PushFloatBCD(float  fl)
 
 static void PushZone(void)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<GetZoneAltSize(); i++)
   {
     GetZoneAltBreak(i);
@@ -59,23 +58,23 @@ uchar   i;
 
 
 
-void    Esc(uint  wSize)
+static void Esc(uint  wSize)
 {
   InitPush(0);
-  uchar bT = 0;
+  uchar b = 0;
 
   uint i;
   for (i=0; i<wSize; i++)
   {
-    bT += SkipChar();
+    b += SkipChar();
   }
 
-  PushChar(bT);
+  PushChar(b);
   Answer(wSize+1, SER_OUTPUT_SLAVE);
 }
 
 
-void    EscError(uchar  bCode)
+static void EscError(uchar  bCode)
 {
   InitPush(0);
 
@@ -109,14 +108,14 @@ static void ShowEsc(void)
 }
 
 
-void    Esc0(void)
+static void Esc0(void)
 {
   ibActiveEsc = 0xFF;
   mpibActiveEsc[ibPort] = ibActiveEsc;
 }
 
 
-void    EscNumber(void)
+static void EscNumber(void)
 {
   uchar i;
   for (i=0; i<bMachinesEsc; i++)
@@ -144,14 +143,14 @@ void    EscNumber(void)
 }
 
 
-void    Esc_A(void)
+static void Esc_A(void)
 {
   Beep();
   ShowEsc();
 }
 
 
-void    Esc_T(void)
+static void Esc_T(void)
 {
   InitPush(0);
   PushChar(ToBCD(tiCurr.bSecond));
@@ -164,7 +163,7 @@ void    Esc_T(void)
 }
 
 
-void    Esc_R(void)
+static void Esc_R(void)
 {
   InitPush(0);
   Push("CŒ+2 V.06 10.10.08!",20);
@@ -173,7 +172,7 @@ void    Esc_R(void)
 }
 
 
-void    Esc_w(void)
+static void Esc_w(void)
 {
 uchar   i, j;
 
@@ -298,7 +297,7 @@ uchar   i, j;
 }
 
 
-void    Esc_W(void)
+static void Esc_W(void)
 {
 uchar   i;
 
@@ -333,7 +332,7 @@ uchar   i;
 }
 
 
-void    EscTariffs(void)
+static void EscTariffs(void)
 {
   InitPush(0);
 
@@ -369,7 +368,7 @@ void    EscTariffs(void)
 }
 
 
-void    EscDisplay(void)
+static void EscDisplay(void)
 {
   InitPush(0);
 
@@ -381,7 +380,7 @@ void    EscDisplay(void)
 }
 
 
-void    EscKey(void)
+static void EscKey(void)
 {
   uchar i = bQuery-'à';
   if (ValidKey(i) == true)
@@ -395,7 +394,7 @@ void    EscKey(void)
 }
 
 
-void    EscTransit(void)
+static void EscTransit(void)
 {
   if (cbWaitQuery != 0)
   {
@@ -422,7 +421,7 @@ void    EscTransit(void)
 }
 
 
-void    EscId(void)
+static void EscId(void)
 {
   InitPush(0);
   PushInt(GetRomChecksum());
@@ -446,7 +445,6 @@ void    RunResponseEsc(void)
     mpSerial[ibPort] = SER_BEGIN;
 
     if (enGlobal == GLB_PROGRAM)
-      if (!((InBuff(0) >= 'à') && (InBuff(0) <= 'î')))
         return;
 
     if (boBlockEsc == (bool)0x55)
