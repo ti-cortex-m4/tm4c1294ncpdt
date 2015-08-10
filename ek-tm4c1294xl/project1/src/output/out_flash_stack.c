@@ -25,12 +25,13 @@ void    OutFlashStack(void)
   PUSH_ENUM(FLASH_BEGIN)
   PUSH_ENUM(FLASH_END)
   PUSH_ENUM(wPAGES)
+  PUSH_ENUM(wPAGES_TOTAL)
   PUSH_ENUM(wPAGE_BYTES)
   PUSH_ENUM(wLEAF_BYTES)
 
   PushChar(0x0D); PushChar(0x0A);
 
-  PushLongAsString((ulong)100*(FLASH_END-FLASH_BEGIN)/(wPAGES-FLASH_BEGIN));
+  PushLongAsString((ulong)100*(FLASH_END-FLASH_BEGIN)/(wPAGES_TOTAL-FLASH_BEGIN));
   PushString("%");
 
   PushChar(0x0D); PushChar(0x0A);

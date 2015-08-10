@@ -20,7 +20,7 @@ void    IncFlashControl(uint const  wPageOut)
 
 void    OutFlashControl(void) 
 {
-  if (500*(bInBuff6+1) < wPAGES)
+  if (500*(bInBuff6+1) < wPAGES_TOTAL)
   {
     InitPushCRC();
     PushBuffInt(&mpcwFlashControl[500*bInBuff6], 500);
@@ -29,10 +29,10 @@ void    OutFlashControl(void)
   else 
   {
     InitPushCRC();
-    PushBuffInt(&mpcwFlashControl[500*bInBuff6], wPAGES-500*bInBuff6);
+    PushBuffInt(&mpcwFlashControl[500*bInBuff6], wPAGES_TOTAL-500*bInBuff6);
 
     uint i;
-    for (i=0; i<500*(bInBuff6+1)-wPAGES; i++) PushInt(0xFFFF);
+    for (i=0; i<500*(bInBuff6+1)-wPAGES_TOTAL; i++) PushInt(0xFFFF);
 
     Output(sizeof(uint)*500);
   }

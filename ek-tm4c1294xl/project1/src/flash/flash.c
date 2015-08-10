@@ -9,12 +9,35 @@ FLASH.C
 #include "../memory/mem_realtime.h"
 #include "../kernel/crc-16.h"
 #include "flash1.h"
+#include "flash2.h"
 #include "flash.h"
 
 
 
 // количество повторов
 #define FLASH_REPEATS   8
+
+
+
+static bool PageErase(uint const  wPageOut)
+{
+  return PageErase2(wPageOut);
+//  return (wPageOut < wPAGES) ? PageErase1(wPageOut) : PageErase2(wPageOut);
+}
+
+
+static bool PageRead(uint const  wPageIn)
+{
+  return PageRead2(wPageIn);
+//  return (wPageIn < wPAGES) ? PageRead1(wPageIn) : PageRead2(wPageIn);
+}
+
+
+static bool PageWrite(uint const  wPageOut)
+{
+  return PageWrite2(wPageOut);
+//  return (wPageOut < wPAGES) ? PageWrite1(wPageOut) : PageWrite2(wPageOut);
+}
 
 
 
@@ -25,7 +48,7 @@ bool    SafePageErase(uint const  wPageOut)
   uchar i;
   for (i=0; i<FLASH_REPEATS; i++)
   {
-    if (PageErase1(wPageOut) == true) break;
+    if (PageErase(wPageOut) == true) break;
     cwWrnPageErase++;
   }
 
@@ -46,7 +69,7 @@ bool    SafePageRead(uint const  wPageIn)
   uchar i;
   for (i=0; i<FLASH_REPEATS; i++)
   {
-    if (PageRead1(wPageIn) == true) break;
+    if (PageRead(wPageIn) == true) break;
     cwWrnPageRead++;
   }
 
@@ -80,7 +103,7 @@ bool    SafePageWrite(uint const  wPageOut)
   uchar i;
   for (i=0; i<FLASH_REPEATS; i++)
   {
-    if (PageWrite1(wPageOut) == true) break;
+    if (PageWrite(wPageOut) == true) break;
     cwWrnPageWrite++;
   }
 
