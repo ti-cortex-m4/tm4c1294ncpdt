@@ -14,6 +14,7 @@ FLASH_CONTROL,C
 
 void    IncFlashControl(uint const  wPageOut)
 {
+  ASSERT(wPageOut < wPAGES_TOTAL);
   mpcwFlashControl[wPageOut]++;
 }
 
