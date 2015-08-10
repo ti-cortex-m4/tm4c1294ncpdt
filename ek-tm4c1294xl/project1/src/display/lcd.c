@@ -19,6 +19,7 @@ LCD.C
 #include "../hardware/beep.h"
 #include "../hardware/watchdog.h"
 #include "cp1251.h"
+#include "lcd.h"
 
 #define LCD_FLAG_COMM    0x00 // передать команду
 #define LCD_FLAG_DATA    0x01 // передать данные

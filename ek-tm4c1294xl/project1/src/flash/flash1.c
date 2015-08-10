@@ -12,6 +12,8 @@ FLASH1.C
 #include "inc/hw_types.h"
 #include "../memory/mem_flash.h"
 #include "../time/delay.h"
+#include "../display/lcd.h"
+#include "../display/messages.h"
 #include "flash_control.h"
 #include "flash_define1.h"
 #include "flash1.h"
@@ -277,5 +279,5 @@ void    InitFlash1(void)
   InitGPIO_Flash1();
   DisableFlash();
 
-// TODO if (SafeReadStatus() == false) TestError(szBadFlash);
+  if (SafeReadStatus1() == false) TestError(szBadFlash1);
 }

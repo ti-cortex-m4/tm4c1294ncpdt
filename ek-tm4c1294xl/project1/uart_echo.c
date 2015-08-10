@@ -94,7 +94,7 @@ int main(void) {
 	InitLCD();
 	InitNvram();
 	InitFlash1();
-//	InitFlash2();
+	InitFlash2();
 	InitRTC();
 	InitCODE();
 
