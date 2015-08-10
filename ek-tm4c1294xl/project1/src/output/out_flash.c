@@ -95,12 +95,12 @@ void    ResetFlashCounters(void)
   cwFlashBusyCnt = 0;
   cwFlashBusyErr = 0;
   cwFlashCompareWrn = 0;
-  cwFlashEraseWrn = 0;
-  cwFlashReadWrn = 0;
-  cwFlashWriteWrn = 0;
   cwFlashCompareErr = 0;
+  cwFlashEraseWrn = 0;
   cwFlashEraseErr = 0;
+  cwFlashReadWrn = 0;
   cwFlashReadErr = 0;
+  cwFlashWriteWrn = 0;
   cwFlashWriteErr = 0;
 
   Result(bRES_OK);
