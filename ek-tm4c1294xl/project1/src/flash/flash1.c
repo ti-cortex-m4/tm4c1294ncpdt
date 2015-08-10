@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-FLASH1.C
+FLASH1,C
 
 
 ------------------------------------------------------------------------------*/
@@ -284,6 +284,5 @@ void    InitFlash1(void)
   InitGPIO();
   Disable();
 
-  if (SafeReadStatus1() == false)
-    TestError(szBadFlash1);
+  if (SafeReadStatus1() == false) TestError(szBadFlash1);
 }
