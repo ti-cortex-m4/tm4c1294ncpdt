@@ -20,19 +20,20 @@ FLASH2.C
 
 
 
-static void EnableFlash(void)
+static void Enable(void)
 {
   HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_CS)  = MASK_FLASH2_CS;
+  HWREG(GPIO_FLASH2_CS)  =  MASK_FLASH2_CS;
+
   HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
   HWREG(GPIO_FLASH2_CS)  = ~MASK_FLASH2_CS;
 }
 
 
-static void DisableFlash(void)
+static void Disable(void)
 {
   HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_CS)  = MASK_FLASH2_CS;
+  HWREG(GPIO_FLASH2_CS)  =  MASK_FLASH2_CS;
 }
 
 
@@ -128,12 +129,12 @@ static uchar CharIn(void)
 
 uchar   ReadStatus2(void)
 {
-  EnableFlash();
+  Enable();
 
   CharOut(0x57);
   bFlashStatus = CharIn();
 
-  DisableFlash();
+  Disable();
   return bFlashStatus;
 }
 
@@ -164,7 +165,7 @@ bool    PageErase2(uint const  wPageOut)
     return false;
   else
   {
-    EnableFlash();
+    Enable();
 
     CharOut(0x81);
 
@@ -173,7 +174,7 @@ bool    PageErase2(uint const  wPageOut)
     CharOut(i % 0x100);
     CharOut(0);
 
-    DisableFlash();
+    Disable();
     return true;
   }
 }
@@ -188,7 +189,7 @@ bool    PageRead2(uint const  wPageIn)
     return false;
   else
   {
-    EnableFlash();
+    Enable();
 
     CharOut(0x52);
 
@@ -201,7 +202,7 @@ bool    PageRead2(uint const  wPageIn)
 
     for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn();
 
-    DisableFlash();
+    Disable();
     return true;
   }
 }
@@ -217,7 +218,7 @@ bool    PageWrite2(uint const  wPageOut)
     return false;
   else                                  // запись
   {
-    EnableFlash();
+    Enable();
 
     CharOut(0x82);
 
@@ -228,14 +229,14 @@ bool    PageWrite2(uint const  wPageOut)
 
     for (i=0; i<wPAGE_BYTES; i++) CharOut(mpbPageOut[i]);
 
-    DisableFlash();
+    Disable();
   }
 
   if (SafeReadStatus2() == false)
     return false;
   else                                  // проверка записи
   {
-    EnableFlash();
+    Enable();
 
     CharOut(0x60);
 
@@ -244,7 +245,7 @@ bool    PageWrite2(uint const  wPageOut)
     CharOut(i % 0x100);
     CharOut(0);
 
-    DisableFlash();
+    Disable();
   }
 
   if (SafeReadStatus2() == false)
@@ -265,7 +266,7 @@ bool    PageWrite2(uint const  wPageOut)
 
 
 
-void    InitGPIO_Flash2(void)
+static void InitGPIO(void)
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R1; // GPIO Port B Run Mode Clock Gating Control
   DelayGPIO();
@@ -282,8 +283,9 @@ void    InitGPIO_Flash2(void)
 
 void    InitFlash2(void)
 {
-  InitGPIO_Flash2();
-  DisableFlash();
+  InitGPIO();
+  Disable();
 
-  if (SafeReadStatus2() == false) TestError(szBadFlash2);
+  if (SafeReadStatus2() == false)
+    TestError(szBadFlash2);
 }
