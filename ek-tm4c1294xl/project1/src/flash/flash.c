@@ -148,7 +148,7 @@ bool    GetFlashChecksum(void)
 
 
 /*
-void    TODO OutFlashReadStatus(void) { + add (++i > wREAD_STATUS) + add cwWrnBusy etc
+void    TODO OutFlashReadStatus(void) { + add (++i > STATUS_REPEATS) + add cwWrnBusy etc
   InitPushCRC();
 
   ReadStatus();
