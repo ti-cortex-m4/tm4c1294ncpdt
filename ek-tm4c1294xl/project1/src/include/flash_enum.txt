@@ -4,8 +4,7 @@ typedef enum
 {
   FLASH_BEGIN           = 0,
 
-  PRIVATE               = FLASH_BEGIN,
-  LOGICAL               = PRIVATE + 1,
+  LOGICAL               = FLASH_BEGIN,
 
   TRANS_ENG             = LOGICAL + 1,
   TRANS_CNT             = TRANS_ENG + DOUBLE_CAN_PAGES,
@@ -69,5 +68,10 @@ typedef enum
 
   DIAGRAM_HHR_VALUES    = AUX_RECORD + wRECORD2_PAGES,
 
-  FLASH_END             = DIAGRAM_HHR_VALUES + DIAGRAM_CAN_PAGES*1
+  LOCAL_END             = DIAGRAM_HHR_VALUES + DIAGRAM_CAN_PAGES*1,
+  LOCAL_BEGIN           = wPAGES,
+
+  PRIVATE               = LOCAL_BEGIN,
+
+  FLASH_END             = PRIVATE + 1
 } flash;
