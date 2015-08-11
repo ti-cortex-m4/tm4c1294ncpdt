@@ -36,7 +36,7 @@ FLASH.H
 #define STATUS_REPEATS  50000
 
 
-// количество страниц на блок данных определённого типа (TODO rename IMPCAN_PAGES etc.)
+// количество страниц на блок данных
 #define UINT_CAN_PAGES      (uchar)(sizeof(uint)    * bCANALS/wLEAF_BYTES + 1)
 #define IMP_CAN_PAGES       (uchar)(sizeof(impulse) * bCANALS/wLEAF_BYTES + 1)
 #define MAXPOW_GRP_PAGES    (uchar)(sizeof(power)   * bGROUPS/wLEAF_BYTES + 1)
