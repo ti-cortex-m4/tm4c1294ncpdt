@@ -26,9 +26,9 @@ PARAMS2.C
 
 bool                    boBeginParam;
 
-static real             reParamDiv;
+static float            reParamDiv;
 
-static real             reValue;
+static float            reValue;
 
 
 

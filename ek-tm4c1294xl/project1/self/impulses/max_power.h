@@ -5,7 +5,7 @@ MAX_POWER.H
 ------------------------------------------------------------------------------*/
 
 void    SetGrpMaxPow(power  *mppoT, uchar  ibGrp, uchar  ibTar, value  *pva);
-real    GetGrpMaxPowReal(power  *mppoT, uchar  ibGrp, uchar  ibTar);
+float   GetGrpMaxPowReal(power  *mppoT, uchar  ibGrp, uchar  ibTar);
 time    GetGrpMaxPowTime(power  *mppoT, uchar  ibGrp, uchar  ibTar);
 
 uchar   GetGrpMaxPowIndex(power  *mppoT, uchar  ibGrp);

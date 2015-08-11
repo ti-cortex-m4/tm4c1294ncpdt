@@ -12,7 +12,7 @@ MEM_CURRENT.C
 ulong                   mpdwBase[bCANALS];
 
 // массив базовых величин (в плавающем формате)
-real                    mpreBase[bCANALS];
+float                   mpreBase[bCANALS];
 
 // массив времени/даты обновления базовых величин
 time                    mptiBase[bCANALS];

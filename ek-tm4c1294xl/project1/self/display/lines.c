@@ -103,9 +103,9 @@ uint  w;
 }            
 
 
-real    GetRealLo(uchar  ibBeg, uchar  ibEnd)
+float   GetRealLo(uchar  ibBeg, uchar  ibEnd)
 {
-real re;
+floatre;
 
   re = 0;
 

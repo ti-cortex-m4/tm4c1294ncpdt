@@ -21,7 +21,7 @@ OUT_MINUTE30_48.C
 
 void    OutPowGrpHou48Ext(void)
 {
-real    re;
+float   re;
 
   uint iwHou = GetDayHouIndex(bInBuff6);
 
@@ -104,7 +104,7 @@ void    OutImpCanHou48Ext(void)
 
 void    OutPowCanHou48Ext(void)
 {
-real    re;
+float   re;
 
   uint iwHou = GetDayHouIndex(bInBuff6);
 

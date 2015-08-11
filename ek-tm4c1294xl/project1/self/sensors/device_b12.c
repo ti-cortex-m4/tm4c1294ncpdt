@@ -18,7 +18,7 @@ DEVICE_B12.C
 void    ReadCurrentB12(void)
 {
 uchar   i;
-real    reBuffA;
+float   reBuffA;
 
   ReadEnergyB();
   reBuffA = mpdbLevel[ibDig];

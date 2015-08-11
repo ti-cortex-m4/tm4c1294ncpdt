@@ -22,7 +22,7 @@ void    SetGrpMaxPow(power  *mppoT, uchar  ibGrp, uchar  ibTar, value  *pva)
 }
 
 
-real    GetGrpMaxPowReal(power  *mppoT, uchar  ibGrp, uchar  ibTar)
+float   GetGrpMaxPowReal(power  *mppoT, uchar  ibGrp, uchar  ibTar)
 {
   ASSERT(ibGrp < bGROUPS);
   ASSERT(ibTar < bTARIFFS);
@@ -60,7 +60,7 @@ uchar  i,j;
 void    MakeMaxPow(power  *mppoT)
 {
 uchar   g;
-real   	re;
+float  	re;
 value   va;
 
   uchar i = tiPrev.bHour*2 + tiPrev.bMinute/30;
@@ -81,7 +81,7 @@ value   va;
 
 void    MakeMaxPowSpec(power  *mppoT, uchar  ibGrp, time  ti)
 {
-real   	re;
+float  	re;
 value   va;
 
   uchar i = ti.bHour*2 + ti.bMinute/30;

@@ -19,13 +19,13 @@ ENERGY.C
 
 
 
-real    GetCanReal(real  *mpreT, uchar  ibCan) {
+float   GetCanReal(float *mpreT, uchar  ibCan) {
 	ASSERT(ibCan < bCANALS);
   return mpreT[ibCan];
 }
 
 
-void    SetCanReal(real  *mpreT, uchar  ibCan, real  *preT) {
+void    SetCanReal(float *mpreT, uchar  ibCan, float *preT) {
 	ASSERT(ibCan < bCANALS);
   mpreT[ibCan] = *preT;
 }
@@ -53,9 +53,9 @@ static ulong   dw;
 
 
 // рассчитывает групповое значение на основе канального массива uint (трёхминутная мощность)
-real    GetGrpMntInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul)
+float   GetGrpMntInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul)
 {
-real    reA, reB;
+float   reA, reB;
 
   reA = 0;
 
@@ -77,9 +77,9 @@ real    reA, reB;
 
 
 // рассчитывает групповое значение на основе канального массива uint (трёхминутная мощность)
-real    GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
+float   GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
 {
-real    re;
+float   re;
 
   re = mpdbValueEngMnt[ibCan] * mpwT[ibCan];
 
@@ -90,9 +90,9 @@ real    re;
 
 
 // рассчитывает групповое значение на основе канального массива uint (получасовая мощность)
-real     GetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul)
+float    GetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul)
 {
-real    reA, reB;
+float   reA, reB;
 
   reA = 0;
 
@@ -118,9 +118,9 @@ real    reA, reB;
 
 
 // рассчитывает канальное значение на основе канального массива uint (получасовая мощность)
-real    GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
+float   GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
 {
-real    re;
+float   re;
 
   if (mpwT[ibCan] == 0xFFFF)
     re = 0;
