@@ -53,7 +53,7 @@ uchar   i;
       {
         if (GetDigitalDevice(i) == 0) continue;
 
-        uchar ibZ = 0;
+        uchar bRes = 0;
 
         LoadCurrDigital(i);
         ibPort = diCurr.ibPort;
@@ -61,7 +61,7 @@ uchar   i;
         if (GetDigitalDevice(i) != 0)
         {
           if (StreamPortCan(GetDigitalPort(i),i) == 0) 
-          { ibZ = 0xEE; break; }
+          { bRes = 0xEE; break; }
         }
 
         ShowCanalNumber(i);
@@ -79,100 +79,100 @@ uchar   i;
         {
 #ifndef SKIP_A
           case 15:
-          case 1:  if (AutomaticA() != 1) ibZ = 0xEE; break;
+          case 1:  if (AutomaticA() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_B
-          case 12: if (AutomaticJ() != 1) ibZ = 0xEE; break;                
+          case 12: if (AutomaticJ() != 1) bRes = 0xEE; break;
 
           case 8:
-          case 2:  if (AutomaticB() != 1) ibZ = 0xEE; break;                
+          case 2:  if (AutomaticB() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_C
-          case 3:  if (AutomaticC() != 1) ibZ = 0xEE; break;
+          case 3:  if (AutomaticC() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_D
-          case 4:  if (AutomaticD() != 1) ibZ = 0xEE; break;
+          case 4:  if (AutomaticD() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_E
           case 7: 
-          case 5:  if (AutomaticE() != 1) ibZ = 0xEE; break;
+          case 5:  if (AutomaticE() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_F
-          case 6:  if (AutomaticF() != 1) ibZ = 0xEE; break;
+          case 6:  if (AutomaticF() != 1) bRes = 0xEE; break;
 #endif             
 
 #ifndef SKIP_G
-          case 9:  if (AutomaticG() != 1) ibZ = 0xEE; break;
+          case 9:  if (AutomaticG() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_H
-          case 10: if (AutomaticH() != 1) ibZ = 0xEE; break;
+          case 10: if (AutomaticH() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_I
-          case 11: if (AutomaticI() != 1) ibZ = 0xEE; break;
+          case 11: if (AutomaticI() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_K
           case 14:
-          case 13: if (AutomaticK() != 1) ibZ = 0xEE; break;
+          case 13: if (AutomaticK() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_L
           case 17:
-          case 16: if (AutomaticK() != 1) ibZ = 0xEE; break;
+          case 16: if (AutomaticK() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_M
-          case 18: if (AutomaticM() != 1) ibZ = 0xEE; break;
+          case 18: if (AutomaticM() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_N
-          case 19: if (AutomaticN() != 1) ibZ = 0xEE; break;
+          case 19: if (AutomaticN() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_O
-          case 20: if (AutomaticO() != 1) ibZ = 0xEE; break;
+          case 20: if (AutomaticO() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_P
-          case 21: if (AutomaticP() != 1) ibZ = 0xEE; break;
+          case 21: if (AutomaticP() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_Q
-          case 22: if (AutomaticK() != 1) ibZ = 0xEE; break;
+          case 22: if (AutomaticK() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_R
-          case 23: if (AutomaticR() != 1) ibZ = 0xEE; break;
+          case 23: if (AutomaticR() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_S
-          case 24: if (AutomaticS() != 1) ibZ = 0xEE; break;
+          case 24: if (AutomaticS() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_T
-          case 25: if (AutomaticT() != 1) ibZ = 0xEE; break;
+          case 25: if (AutomaticT() != 1) bRes = 0xEE; break;
 #endif
         }            
 
         SaveConnect();
 
-        if (ibZ == 0xEE) 
+        if (bRes == 0xEE)
         {
           ibX++;
           Error(); Beep(); DelayMsg();
         }
 
-        if (fKey == true) ibZ = 0xFF;
+        if (fKey == true) bRes = 0xFF;
         fKey = 0;
 
-        if (ibZ == 0xFF) break;
+        if (bRes == 0xFF) break;
       }
 
       ShowHi(szAutomatic);

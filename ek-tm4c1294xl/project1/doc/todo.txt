@@ -40,8 +40,6 @@ x
 error.c - add errors buffer
 error.c - why without WDT reset ?
 
-ibZ
-
 UART FIFO + sem2reader time
 
 SaveFile(&flPrivate) ? ShowInt(wPrivate) : Error();

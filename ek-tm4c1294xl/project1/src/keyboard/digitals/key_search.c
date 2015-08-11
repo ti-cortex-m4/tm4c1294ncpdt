@@ -308,7 +308,7 @@ void    key_SearchBySpeed(void)
       diCurr.ibPort = ibX;
       ShowPortDelayHi(ibPort);
 
-      uchar ibZ = 0;                                  // результат операции
+      uchar bRes = 0;                                  // результат операции
       for (ibYmin=bBAUDS; ibYmin>0; ibYmin--)
       {
         mppoPorts[ibX].ibBaud = ibYmin-1;
@@ -322,51 +322,51 @@ void    key_SearchBySpeed(void)
 
           switch (ibXmax)
           {
-            case 0:   if (ChangeSpeedModem() == 1) ibZ = 0xEE;  break;
+            case 0:   if (ChangeSpeedModem() == 1) bRes = 0xEE;  break;
 
 #ifndef SKIP_A
             case 15:
-            case 1:   if (ChangeSpeedA() == 1) ibZ = 0xEE;  break;
+            case 1:   if (ChangeSpeedA() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_B
             case 12:
             case 8:
-            case 2:   if (ChangeSpeedB() == 1) ibZ = 0xEE;  break;                
+            case 2:   if (ChangeSpeedB() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_C
-            case 3:   if (ChangeSpeedC() == 1) ibZ = 0xEE;  break;                
+            case 3:   if (ChangeSpeedC() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_E
             case 7:
-            case 5:   if (ChangeSpeedE() == 1) ibZ = 0xEE;  break;                
+            case 5:   if (ChangeSpeedE() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_F
-            case 6:   if (ChangeSpeedF() == 1) ibZ = 0xEE;  break;                
+            case 6:   if (ChangeSpeedF() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_N
-            case 19:  if (ChangeSpeedN() == 1) ibZ = 0xEE;  break;                
+            case 19:  if (ChangeSpeedN() == 1) bRes = 0xEE;  break;
 #endif
             default:  Error();  return; 
           }            
 
-          if (fKey == true) { fKey = 0; ibZ = 0xFF; }          
+          if (fKey == true) { fKey = 0; bRes = 0xFF; }
 
-          if (ibZ != 0) break;
+          if (bRes != 0) break;
         }
 
-        if (ibZ != 0) break;
+        if (bRes != 0) break;
       }
 
       ShowHi(szSearch);
 
-      if (ibZ == 0xFF) 
+      if (bRes == 0xFF)
         Stop();
-      else if (ibZ == 0) 
+      else if (bRes == 0)
         Error();
     } 
   }
@@ -493,7 +493,7 @@ bool    ChangeNumberE(void)
   }
   else 
   {
-    ibZ = 0xFF;                      // досрочное прекращение цикла
+    bRes = 0xFF;                      // досрочное прекращение цикла
     return(0);
   }
 }
@@ -627,49 +627,49 @@ void    key_SearchByNumber(void)
       {
         sprintf(szLo+8,"%03u", ibY);
 
-        uchar ibZ = 0;                                // результат операции
+        uchar bRes = 0;                                // результат операции
 
         switch (ibXmax)
         {
 #ifndef SKIP_A
           case 15:
-          case 1:   if (ChangeNumberA() == 1) ibZ = 0xEE;  break;              
+          case 1:   if (ChangeNumberA() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_B
           case 12:
           case 8:
-          case 2:   if (ChangeNumberB() == 1) ibZ = 0xEE;  break;              
+          case 2:   if (ChangeNumberB() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_C
-          case 3:   if (ChangeNumberC() == 1) ibZ = 0xEE;  break;              
+          case 3:   if (ChangeNumberC() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_E
           case 7:
-          case 5:   if (ChangeNumberE() == 1) ibZ = 0xEE;  break;              
+          case 5:   if (ChangeNumberE() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_F
-          case 6:   if (ChangeNumberF() == 1) ibZ = 0xEE;  break;              
+          case 6:   if (ChangeNumberF() == 1) bRes = 0xEE;  break;
 #endif
 
 #ifndef SKIP_N
-          case 19:  if (ChangeNumberN() == 1) ibZ = 0xEE;  break;              
+          case 19:  if (ChangeNumberN() == 1) bRes = 0xEE;  break;
 #endif
         default:  Error();  return; 
         }            
 
-        if (ibZ == 0xEE)
+        if (bRes == 0xEE)
         {
           sprintf(szLo,"%03u:%-3u", ibY,++ibYmin);
           LongBeep(); DelayMsg();
         }
 
-        if (fKey == true) { fKey = 0; ibZ = 0xFF; }        
+        if (fKey == true) { fKey = 0; bRes = 0xFF; }
 
-        if (ibZ == 0xFF) break;
+        if (bRes == 0xFF) break;
       }
 
       ShowHi(szSearch); OK();
