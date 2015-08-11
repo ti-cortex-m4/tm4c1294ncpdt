@@ -12,7 +12,7 @@ MAIN_ENERGY.H
 typedef struct
 {
   time          tiSelf;                 // время/дата
-  real          reSelf;                 // значение
+  float         reSelf;                 // значение
 } value;
 
 

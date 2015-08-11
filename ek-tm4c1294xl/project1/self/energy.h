@@ -4,17 +4,17 @@ ENERGY.H
 
 ------------------------------------------------------------------------------*/
 
-real    GetCanReal(real  *mpreT, uchar  ibCan);
-void    SetCanReal(real  *mpreT, uchar  ibCan, real  *preT);
+float   GetCanReal(float *mpreT, uchar  ibCan);
+void    SetCanReal(float *mpreT, uchar  ibCan, float *preT);
 
 ulong   *PGetCanImp(impulse  *mpimT, uchar  ibCan, uchar  ibTariff);
 ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCan);
 
-real    GetGrpMntInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul);
-real    GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
+float   GetGrpMntInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul);
+float   GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
 
-real    GetGrpHouInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul);
-real    GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
+float   GetGrpHouInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul);
+float   GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul);
 
 float   GetGrpImp2FloatEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);
 double  GetGrpImp2DoubleEng(impulse  *mpimT, uchar  ibGrp, uchar  bMask);

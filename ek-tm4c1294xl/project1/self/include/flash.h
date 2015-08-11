@@ -40,7 +40,7 @@ FLASH.H
 #define MAXPOW_GRP_PAGES    (uchar)(sizeof(power)   * bGROUPS/wLEAF_BYTES + 1)
 #define FLOAT_CAN_PAGES     (uchar)(sizeof(float)   * bCANALS/wLEAF_BYTES + 1)
 #define DOUBLE_CAN_PAGES    (uchar)(sizeof(double)  * bCANALS/wLEAF_BYTES + 1)
-#define PARAMS_PAGES        (uchar)(sizeof(real)    * wPARAMS/wLEAF_BYTES + 1)
+#define PARAMS_PAGES        (uchar)(sizeof(float)   * wPARAMS/wLEAF_BYTES + 1)
 #define VALUE4_CAN_PAGES    (uchar)(sizeof(mpCntMonCan4)/wLEAF_BYTES + 1)
 #define VALUE4T_CAN_PAGES   (uchar)(sizeof(mpCntMonCan4T)/wLEAF_BYTES + 1)
 #define VALUE5_CAN_PAGES    (uchar)(sizeof(mpCntDayCan5)/wLEAF_BYTES + 1)

@@ -24,10 +24,10 @@ ENERGY4.C
 
 
 
-real    GetPowGrpHouCurr(uchar  ibGroup, uchar  bMul)
+float   GetPowGrpHouCurr(uchar  ibGroup, uchar  bMul)
 {
 uchar   i, j;
-real    reA, reB; 
+float   reA, reB; 
 
   j = (tiCurr.bMinute % 30) / 3;
   if (j == 0) j = 10;
@@ -45,10 +45,10 @@ real    reA, reB;
 }
 
 
-real    GetPowCanHouCurr(uchar  ibCan, uchar  bMul)
+float   GetPowCanHouCurr(uchar  ibCan, uchar  bMul)
 {
 uchar   i,j;
-real    reA, reB;
+float   reA, reB;
 
   j = (tiCurr.bMinute % 30) / 3;
   if (j == 0) j = 10;

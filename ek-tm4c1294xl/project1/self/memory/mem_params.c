@@ -15,13 +15,13 @@ bool                    boParamsFlag;
 bool                    boMntParams;
 
 // массив коэффициентов деления
-real                    mpreParamsDiv[wPARAMS];
+float                   mpreParamsDiv[wPARAMS];
 
 // массив разрешения опроса по параметрам
 bool                    mpboEnblParams[wPARAMS];
 
 // промежуточный массив
-real                    mpreParamsBuff[2][wPARAMS];
+float                   mpreParamsBuff[2][wPARAMS];
 
 // промежуточный массив
 time                    mptiParamsBuff[wPARAMS];

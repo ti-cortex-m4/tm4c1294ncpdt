@@ -8,11 +8,11 @@ extern  bool                    boParamsFlag;
 
 extern  bool                    boMntParams;
 
-extern  real                    mpreParamsDiv[wPARAMS];
+extern  float                   mpreParamsDiv[wPARAMS];
 
 extern  bool                    mpboEnblParams[wPARAMS];
 
-extern  real                    mpreParamsBuff[2][wPARAMS];
+extern  float                   mpreParamsBuff[2][wPARAMS];
 
 extern  time                    mptiParamsBuff[wPARAMS];
 

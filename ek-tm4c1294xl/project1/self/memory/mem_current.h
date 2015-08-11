@@ -6,7 +6,7 @@ MEM_CURRENT.H
 
 extern  ulong                   mpdwBase[bCANALS];
 
-extern  real                    mpreBase[bCANALS];
+extern  float                   mpreBase[bCANALS];
 
 extern  time                    mptiBase[bCANALS];
 
