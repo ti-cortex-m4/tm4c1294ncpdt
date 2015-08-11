@@ -495,7 +495,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 void    ReadCurrentB(void)
 {
   ReadEnergyB();
-  floatre = mpdbLevel[ibDig];
+  float re = mpdbLevel[ibDig];
 
   uchar i;
   for (i=0; i<4; i++)
