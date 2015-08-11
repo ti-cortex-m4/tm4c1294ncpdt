@@ -14,7 +14,8 @@ SETTINGS.C
 
 
 
-file const              flLogical = {LOGICAL, &bLogical, sizeof(uchar)};
+file const              flPrivate = {PRIVATE, &wPrivate, sizeof(uint)};
+cache const             chLogical = {LOGICAL, &bLogical, sizeof(uchar)};
 
 cache const             chFirstReset = {FIRST_RESET, &boFirstReset, sizeof(bool)};
 cache const             chEnblWDT = {ENBL_WDT, &boEnblWDT, sizeof(bool)};
@@ -28,10 +29,10 @@ cache const             chSetPassword = {SET_PASSWORD, &boSetPassword, sizeof(bo
 
 void    InitSettings(void)
 {
-  if (LoadPrivate() == false)
+  if (LoadFile(&flPrivate) == false)
   {
     wPrivate = 1;
-    SavePrivate();
+    SaveFile(&flPrivate);
   }
 
 //  LoadGlobal();
@@ -40,7 +41,7 @@ void    InitSettings(void)
 
   if (GetLabelGlobal())  enGlobal = GLB_WORK; else enGlobal = GLB_PROGRAM;
 
-  LoadFile(&flLogical);
+  LoadCache(&chLogical);
 
   LoadCache(&chFirstReset);
   LoadCache(&chEnblWDT);
@@ -57,7 +58,7 @@ void    ResetSettings(bool  fFull)
   if (fFull)
   {
     bLogical = 1;
-    SaveFile(&flLogical);
+    SaveCache(&chLogical);
   }
 
   boFirstReset = false;
@@ -77,15 +78,4 @@ void    ResetSettings(bool  fFull)
     boSetPassword = true;
     SaveCache(&chSetPassword);
   }
-}
-
-
-
-bool SavePrivate(void) {
-	return SaveBuff(PRIVATE, &wPrivate, sizeof(uint));
-}
-
-
-bool LoadPrivate(void) {
-  return LoadBuff(PRIVATE, &wPrivate, sizeof(uint));
 }

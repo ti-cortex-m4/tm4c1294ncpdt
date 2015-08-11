@@ -4,9 +4,7 @@ typedef enum
 {
   FLASH_BEGIN           = 0,
 
-  LOGICAL               = FLASH_BEGIN,
-
-  TRANS_ENG             = LOGICAL + 1,
+  TRANS_ENG             = FLASH_BEGIN,
   TRANS_CNT             = TRANS_ENG + DOUBLE_CAN_PAGES,
   PULSE_HOU             = TRANS_CNT + DOUBLE_CAN_PAGES,
   PULSE_MNT             = PULSE_HOU + DOUBLE_CAN_PAGES,

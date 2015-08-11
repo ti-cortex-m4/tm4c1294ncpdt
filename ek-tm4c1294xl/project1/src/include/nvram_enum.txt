@@ -79,7 +79,9 @@ typedef enum
   CONTROL_TIME          = HIDE_MESSAGES + sizeof(bool) + bNVRAM_FOOTER,
   MANAGE_TIME           = CONTROL_TIME + sizeof(bool) + bNVRAM_FOOTER,
 
-  FIRST_RESET           = MANAGE_TIME + sizeof(bool) + bNVRAM_FOOTER,
+  LOGICAL               = MANAGE_TIME + sizeof(bool) + bNVRAM_FOOTER,
+
+  FIRST_RESET           = LOGICAL + sizeof(uchar) + bNVRAM_FOOTER,
   ENBL_WDT              = FIRST_RESET + sizeof(bool) + bNVRAM_FOOTER,
 
   SET_TIME              = ENBL_WDT + sizeof(bool) + bNVRAM_FOOTER,
