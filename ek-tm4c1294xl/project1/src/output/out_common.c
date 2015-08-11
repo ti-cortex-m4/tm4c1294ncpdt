@@ -8,7 +8,7 @@ OUT_COMMON,C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "out_common.h"
 
 
@@ -38,7 +38,7 @@ void    OutGetFloatOrDoubleCan_GlobalWork(double  *mpdb, bool  fDouble)
 }
 
 
-void    OutSetFloatOrDoubleCan(double  *mpdb, file const  *pfl, bool  fDouble)
+void    OutSetFloatOrDoubleCan(double  *mpdb, cache const  *pch, bool  fDouble)
 {
   if (enGlobal == GLB_PROGRAM)
   {
@@ -50,7 +50,7 @@ void    OutSetFloatOrDoubleCan(double  *mpdb, file const  *pfl, bool  fDouble)
       (*mpdb++) = fDouble ? PopDouble() : PopFloat();
     }
 
-    SaveFile(pfl);
+    SaveCache(pch);
     LongResult(bRES_OK);
   }
   else Result(bRES_NEEDPROGRAM);

@@ -8,15 +8,15 @@ FACTORS,H
 
 
 
-extern  file const              flTransEng;
-extern  file const              flTransCnt;
+extern  cache const             chTransEng;
+extern  cache const             chTransCnt;
 
-extern  file const              flPulseHou;
-extern  file const              flPulseMnt;
+extern  cache const             chPulseHou;
+extern  cache const             chPulseMnt;
 
-extern  file const              flCount;
-extern  file const              flLosse;
-extern  file const              flLevel;
+extern  cache const             chCount;
+extern  cache const             chLosse;
+extern  cache const             chLevel;
 
 
 

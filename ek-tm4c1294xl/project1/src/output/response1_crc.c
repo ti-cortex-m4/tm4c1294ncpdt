@@ -75,13 +75,13 @@ void    Response1_CRC(void)
       case bINQ_GETLOSSE:     OutGetFloatOrDoubleCan(mpdbLosse, false);    break;
       case bINQ_GETLEVEL:     OutGetFloatOrDoubleCan(mpdbLevel, false);    break;
 
-      case bINQ_SETTRANS_ENG: OutSetFloatOrDoubleCan(mpdbTransEng, &flTransEng, false); break;
-      case bINQ_SETTRANS_CNT: OutSetFloatOrDoubleCan(mpdbTransCnt, &flTransCnt, false); break;
-      case bINQ_SETPULSE_HOU: OutSetFloatOrDoubleCan(mpdbPulseHou, &flPulseHou, false); break;
-      case bINQ_SETPULSE_MNT: OutSetFloatOrDoubleCan(mpdbPulseMnt, &flPulseMnt, false); break;
-      case bINQ_SETCOUNT:     OutSetFloatOrDoubleCan(mpdbCount,    &flCount, false);    break;
-      case bINQ_SETLOSSE:     OutSetFloatOrDoubleCan(mpdbLosse,    &flLosse, false);    break;
-      case bINQ_SETLEVEL:     OutSetFloatOrDoubleCan(mpdbLevel,    &flLevel, false);    break;
+      case bINQ_SETTRANS_ENG: OutSetFloatOrDoubleCan(mpdbTransEng, &chTransEng, false); break;
+      case bINQ_SETTRANS_CNT: OutSetFloatOrDoubleCan(mpdbTransCnt, &chTransCnt, false); break;
+      case bINQ_SETPULSE_HOU: OutSetFloatOrDoubleCan(mpdbPulseHou, &chPulseHou, false); break;
+      case bINQ_SETPULSE_MNT: OutSetFloatOrDoubleCan(mpdbPulseMnt, &chPulseMnt, false); break;
+      case bINQ_SETCOUNT:     OutSetFloatOrDoubleCan(mpdbCount,    &chCount, false);    break;
+      case bINQ_SETLOSSE:     OutSetFloatOrDoubleCan(mpdbLosse,    &chLosse, false);    break;
+      case bINQ_SETLEVEL:     OutSetFloatOrDoubleCan(mpdbLevel,    &chLevel, false);    break;
 
       case bINQ_GETKOEFF: OutAllFactors(false); break;
 
