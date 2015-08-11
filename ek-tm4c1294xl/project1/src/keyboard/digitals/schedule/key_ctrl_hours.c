@@ -5,9 +5,8 @@ KEY_CTRL_HOURS.Ñ
 ------------------------------------------------------------------------------*/
 
 #include "../../../main.h"
+#include "../../../console.h"
 #include "../../../memory/mem_schedule.h"
-#include "../../keyboard.h"
-#include "../../../display/display.h"
 #include "../../../digitals/digitals.h"
 #include "../../../digitals/schedule/schedule.h"
 #include "../../../flash/files.h"
@@ -80,7 +79,7 @@ void    key_SetCtrlHours(void)
     {
       mpboCtrlHou[ibX] = InvertBoolean(mpboCtrlHou[ibX]);
 
-      SaveFile(&flCtrlHou);
+      SaveCache(&chCtrlHou);
 
       Show();
     }

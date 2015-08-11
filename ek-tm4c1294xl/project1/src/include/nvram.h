@@ -17,6 +17,7 @@ NVRAM.H
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_tariffs.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_schedule.h"
 #include "../memory/mem_limits.h"
 #include "../memory/mem_uni.h"
 #include "../memory/mem_extended_1.h"

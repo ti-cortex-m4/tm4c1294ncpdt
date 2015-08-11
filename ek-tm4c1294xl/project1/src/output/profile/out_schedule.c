@@ -9,7 +9,6 @@ OUT_SCHEDULE.C
 #include "../../memory/mem_schedule.h"
 #include "../../serial/ports.h"
 #include "../../digitals/schedule/schedule.h"
-#include "../../flash/files.h"
 #include "../../nvram/cache.h"
 
 
@@ -35,7 +34,7 @@ void    OutSetEnblPrtHou(void)
       mpboEnblPrtHou[bInBuff6][i] = CharToBoolean(PopChar());
     }
 
-    SaveFile(&flEnblPrtHou);
+    SaveCache(&chEnblPrtHou);
 
     LongResult(bRES_OK);
   }
@@ -60,7 +59,7 @@ void    OutSetCtrlHou(void)
     mpboCtrlHou[i] = CharToBoolean(PopChar());
   }
 
-  SaveFile(&flCtrlHou);
+  SaveCache(&chCtrlHou);
 
   Result(bRES_OK);
 }
@@ -89,7 +88,7 @@ void    OutSetRecalcHou1(void)
     mpboRecalcHou[i] = CharToBoolean(PopChar());
   }
 
-  SaveFile(&flRecalcHou);
+  SaveCache(&chRecalcHou);
 
   Result(bRES_OK);
 }
@@ -107,7 +106,7 @@ void    OutSetRecalcHou2(void)
     mpboRecalcHou[i] = CharToBoolean(PopChar());
   }
 
-  SaveFile(&flRecalcHou);
+  SaveCache(&chRecalcHou);
 
   Result(bRES_OK);
 }

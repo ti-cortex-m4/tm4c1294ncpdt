@@ -5,9 +5,9 @@ KEY_ENBL_CANALS,C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_ports.h"
-#include "../../console.h"
 #include "../../digitals/profile/profile_core.h"
 
 
@@ -80,7 +80,7 @@ static uchar ibCan;
     {
       mpboEnblCan[ibCan] = InvertBoolean(mpboEnblCan[ibCan]);
 
-      SaveFile(&flEnblCan);
+      SaveCache(&chEnblCan);
 
       Show(ibCan);
     }
