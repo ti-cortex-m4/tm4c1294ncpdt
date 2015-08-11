@@ -4,7 +4,7 @@ PHONES.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flPhones;
+extern  cache const             chPhones;
 extern  cache const             chMaxConnect;
 extern  cache const             chCustomModem;
 

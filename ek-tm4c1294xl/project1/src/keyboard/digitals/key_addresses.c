@@ -10,7 +10,7 @@ KEY_ADDRESSES.C
 #include "../../display/display.h"
 #include "../keyboard.h"
 #include "../../digitals/digitals.h"
-#include "../../flash/files.h"
+#include "../../nvram/cache.h"
 #include "../../flash/records.h"
 
 
@@ -86,7 +86,7 @@ static uchar ibCan;
         ibRecordCan = ibCan;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS20);
         mpdwAddress2[ibCan] = dw;
-        SaveFile(&flAddress2);
+        SaveCache(&chAddress2);
         AddSysRecordReprogram(EVE_EDIT_ADDRESS21);
 
         if (++ibCan >= bCANALS) ibCan = 0;
@@ -117,7 +117,7 @@ static uchar ibCan;
         ibRecordCan = ibCan;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS10);
         mpdwAddress1[ibCan] = dw;
-        SaveFile(&flAddress1);
+        SaveCache(&chAddress1);
         AddSysRecordReprogram(EVE_EDIT_ADDRESS11);
       }
       else Beep();

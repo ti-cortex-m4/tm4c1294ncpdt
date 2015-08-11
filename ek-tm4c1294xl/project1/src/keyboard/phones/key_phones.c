@@ -82,7 +82,7 @@ void    key_SetPhones(void)
         szLo[ibPos] = 0;
 
         strcpy((char *)mpphPhones[ibCan].szNumber, szLo);
-        SaveFile(&flPhones);
+        SaveCache(&chPhones);
       }
 
       if (enKeyboard == KBD_POSTENTER)

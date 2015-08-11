@@ -100,7 +100,7 @@ void    key_SetKeys(void)
         AddSysRecordReprogram(EVE_EDIT_KEY11);
 
         strcpy((char *)mpphKeys[ibCan].szNumber, szLo);
-        SaveFile(&flKeys);
+        SaveCache(&chKeys);
 
         AddSysRecordReprogram(EVE_EDIT_KEY20);
         AddSysRecordReprogram(EVE_EDIT_KEY21);

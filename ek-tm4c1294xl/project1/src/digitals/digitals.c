@@ -7,7 +7,6 @@ DIGITALS.C
 #include "../main.h"
 #include "../memory/mem_digitals0.h"
 #include "../memory/mem_digitals.h"
-#include "../flash/files.h"
 #include "../nvram/cache.h"
 #include "sensors.h"
 #include "digitals.h"
@@ -17,10 +16,10 @@ DIGITALS.C
 cache const             chDigitals = {DIGITALS, &mpdiDigital, sizeof(mpdiDigital)};
 
 cache const             chEnblKeys = {ENBL_KEYS, &boEnblKeys, sizeof(bool)};
-file const              flKeys = {KEYS, &mpphKeys, sizeof(mpphKeys)};
+cache const             chKeys = {KEYS, &mpphKeys, sizeof(mpphKeys)};
 
-file const              flAddress1 = {ADDRESS1, &mpdwAddress1, sizeof(mpdwAddress1)};
-file const              flAddress2 = {ADDRESS2, &mpdwAddress2, sizeof(mpdwAddress2)};
+cache const             chAddress1 = {ADDRESS1, &mpdwAddress1, sizeof(mpdwAddress1)};
+cache const             chAddress2 = {ADDRESS2, &mpdwAddress2, sizeof(mpdwAddress2)};
 
 
 
@@ -31,10 +30,10 @@ void    InitDigitals(void)
 
   LoadCache(&chEnblKeys);
 
-  LoadFile(&flKeys);
+  LoadCache(&chKeys);
 
-  LoadFile(&flAddress1);
-  LoadFile(&flAddress2);
+  LoadCache(&chAddress1);
+  LoadCache(&chAddress2);
 }
 
 
@@ -55,7 +54,7 @@ void    ResetDigitals(void)
     mpphKeys[c].szNumber[0] = '0';
   }
 
-  SaveFile(&flKeys);
+  SaveCache(&chKeys);
 
 
   for (c=0; c<bCANALS; c++)
@@ -64,8 +63,8 @@ void    ResetDigitals(void)
     mpdwAddress2[c] = 0;
   }
 
-  SaveFile(&flAddress1);
-  SaveFile(&flAddress2);
+  SaveCache(&chAddress1);
+  SaveCache(&chAddress2);
 }
 
 

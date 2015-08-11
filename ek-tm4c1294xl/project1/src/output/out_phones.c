@@ -10,7 +10,7 @@ OUT_PHONES,C
 #include "../memory/mem_phones.h"
 #include "../serial/ports.h"
 #include "../digitals/phones.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 
 
 
@@ -42,7 +42,7 @@ void    OutSetPhone(void)
         mpphPhones[ bInBuff6 ] = ph;
 
         if (bInBuff6 == bCANALS - 1)
-          SaveFile(&flPhones);
+          SaveCache(&chPhones);
 
         LongResult(bRES_OK);
       }
