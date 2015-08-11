@@ -62,7 +62,7 @@ uchar   i;
   coEnergy.mpbBuff[2] = PopChar();
   coEnergy.mpbBuff[3] = PopChar();
 
-  reValue = (real)coEnergy.dwBuff / reParamDiv;
+  reValue = (float)coEnergy.dwBuff / reParamDiv;
   return(i);
 }
 
@@ -181,7 +181,7 @@ uchar   i;
   coEnergy.mpbBuff[0] = PopChar();
   coEnergy.mpbBuff[1] = PopChar();
 
-  reValue = (real)coEnergy.dwBuff / reParamDiv;
+  reValue = (float)coEnergy.dwBuff / reParamDiv;
   return(i);
 }
 

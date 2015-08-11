@@ -91,7 +91,7 @@ uchar   i;
 
   InitPop(3);
   PopLongH();
-  mpreChannelsB[0] = (real)dwBuffC/1000;
+  mpreChannelsB[0] = (float)dwBuffC/1000;
 
   return(1);
 }

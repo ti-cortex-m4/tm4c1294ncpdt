@@ -17,8 +17,6 @@ typedef int16_t         sint;
 typedef uint32_t        ulong;
 typedef int32_t         slong;
 
-typedef float           real;
-
 
 // тип 'время и дата'
 typedef struct

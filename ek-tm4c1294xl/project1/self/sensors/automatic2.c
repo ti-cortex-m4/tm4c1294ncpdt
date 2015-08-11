@@ -300,7 +300,7 @@ uchar   i,j;
       for (i=0; i<3; i++)
       {
         PopLongH();
-        reBuffA = (real)dwBuffC/1000;
+        reBuffA = (float)dwBuffC/1000;
 
         mpreCodEng30[i] += reBuffA;
       }
@@ -1609,7 +1609,7 @@ uchar   i,j;
       for (i=0; i<3; i++)
       {
         PopLongH();
-        reBuffA = (real)dwBuffC/1000;
+        reBuffA = (float)dwBuffC/1000;
 
         mpreCodEng30[i] += reBuffA;
       }

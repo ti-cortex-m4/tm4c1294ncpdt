@@ -23,7 +23,7 @@ void    NextParamsTime(void)
   if (++ibSoftTim >= 2)      ibSoftTim = 0;
   SavePointersTim();
 
-  memset(&mpreParamsBuff[ibSoftTim], 0xFF, sizeof(real)*wPARAMS);
+  memset(&mpreParamsBuff[ibSoftTim], 0xFF, sizeof(float)*wPARAMS);
 
   if (cwParamTim < wTIMES-1) cwParamTim++;
 }

@@ -88,7 +88,7 @@ void    OutGetParamDiv(void)
   {
     InitPushCRC();
     PushFloat(mpreParamsDiv[iwParam]);
-    Output(sizeof(real));
+    Output(sizeof(float));
   }
   else Result(bRES_BADADDRESS);
 }
@@ -162,7 +162,7 @@ void    OutGetParamCurr(void)
       }
     }
 
-    Output(sizeof(time)+(uint)10*sizeof(real));
+    Output(sizeof(time)+(uint)10*sizeof(float));
     NextPause();                                      // внимание !
 
     LoadDisplay();
@@ -178,9 +178,9 @@ void    OutGetParamBuff(void)
     InitPushCRC();
 
     Push(&mptiParamsBuff[ (uint)10*bInBuff5 ],              (uint)10*bInBuff6*sizeof(time));
-    Push(&mpreParamsBuff[ ibSoftTim ][ (uint)10*bInBuff5 ], (uint)10*bInBuff6*sizeof(real));
+    Push(&mpreParamsBuff[ ibSoftTim ][ (uint)10*bInBuff5 ], (uint)10*bInBuff6*sizeof(float));
 
-    Output((uint)10*bInBuff6*(sizeof(time)+sizeof(real)));
+    Output((uint)10*bInBuff6*(sizeof(time)+sizeof(float)));
   }
   else Result(bRES_BADADDRESS);
 }
@@ -309,7 +309,7 @@ void    OutGetParamsAll(void)
       }
     }
 
-    Output(sizeof(time)+bPARAM_BLOCK*sizeof(real));
+    Output(sizeof(time)+bPARAM_BLOCK*sizeof(float));
     NextPause();                                      // внимание !
 
     LoadDisplay();
