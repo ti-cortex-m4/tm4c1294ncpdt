@@ -105,9 +105,7 @@ uint  w;
 
 float   GetRealLo(uchar  ibBeg, uchar  ibEnd)
 {
-floatre;
-
-  re = 0;
+  float re = 0;
 
   while (ibBeg <= ibEnd)
     re = re*10 + ToChar( szLo[ibBeg++] );
