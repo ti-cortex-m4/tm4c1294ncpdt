@@ -54,8 +54,14 @@ RESERVE(OBJECT_NAME, sizeof(szObjectName) + bNVRAM_FOOTER)
 RESERVE(CANALS_NAME, sizeof(mpszCanalsName) + bNVRAM_FOOTER)
 RESERVE(GROUPS_NAME, sizeof(mpszGroupsName) + bNVRAM_FOOTER)
 
-RESERVE(ENBL_KEYS, sizeof(bool) + bNVRAM_FOOTER)
 RESERVE(DIGITALS, sizeof(mpdiDigital) + bNVRAM_FOOTER)
+RESERVE(PHONES, sizeof(mpphPhones) + bNVRAM_FOOTER)
+
+RESERVE(ENBL_KEYS, sizeof(bool) + bNVRAM_FOOTER)
+RESERVE(KEYS, sizeof(mpphKeys) + bNVRAM_FOOTER)
+
+RESERVE(ADDRESS1, sizeof(mpdwAddress1) + bNVRAM_FOOTER)
+RESERVE(ADDRESS2, sizeof(mpdwAddress2) + bNVRAM_FOOTER)
 
 RESERVE(START_REL_CAN, sizeof(mpcwStartRelCan) + bNVRAM_FOOTER)
 RESERVE(START_ABS16_CAN, sizeof(mpcwStartAbs16Can) + bNVRAM_FOOTER)

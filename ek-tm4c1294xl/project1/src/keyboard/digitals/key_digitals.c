@@ -45,7 +45,7 @@ static void MakeKeys(uchar  ibCan, uchar  bDevice)
     default:  strcpy((char *)&mpphKeys[ibCan].szNumber, "0");         break;
   }
 
-  SaveFile(&flKeys);
+  SaveCache(&chKeys);
 }
 
 

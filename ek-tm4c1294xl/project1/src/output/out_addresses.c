@@ -9,7 +9,7 @@ OUT_ADDRESSES,C
 #include "../memory/mem_settings.h"
 #include "../serial/ports.h"
 #include "../digitals/digitals.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 
 
 
@@ -39,8 +39,8 @@ void    OutSetAddress(void)
 
       if (bInBuff6 == bCANALS - 1)
       {
-        SaveFile(&flAddress1);
-        SaveFile(&flAddress2);
+        SaveCache(&chAddress1);
+        SaveCache(&chAddress2);
       }
 
       LongResult(bRES_OK);

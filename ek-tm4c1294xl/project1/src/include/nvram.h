@@ -11,6 +11,8 @@ NVRAM.H
 #include "../label.h"
 #include "../memory/mem_groups.h"
 #include "../memory/mem_digitals0.h"
+#include "../memory/mem_digitals.h"
+#include "../memory/mem_phones.h"
 #include "../memory/mem_settings.h"
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_tariffs.h"

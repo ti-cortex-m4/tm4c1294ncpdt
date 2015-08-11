@@ -6,14 +6,13 @@ PHONES.C
 
 #include "../main.h"
 #include "../memory/mem_phones.h"
-#include "../flash/files.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
 #include "phones.h"
 
 
 
-file const              flPhones = {PHONES, &mpphPhones, sizeof(mpphPhones)};
+cache const             chPhones = {PHONES, &mpphPhones, sizeof(mpphPhones)};
 cache const             chMaxConnect = {MAX_CONNECT, &bMaxConnect, sizeof(uchar)};
 cache const             chCustomModem = {CUSTOM_MODEM, &boCustomModem, sizeof(bool)};
 
@@ -21,7 +20,7 @@ cache const             chCustomModem = {CUSTOM_MODEM, &boCustomModem, sizeof(bo
 
 void    InitPhones(void)
 {
-  LoadFile(&flPhones);
+  LoadCache(&chPhones);
 
   LoadCacheChar(&chMaxConnect, 1, 180, 60);
   LoadCacheBoolean(&chCustomModem, false);
@@ -39,7 +38,7 @@ void    ResetPhones(void)
     mpphPhones[c].szNumber[0] = '0';
   }
 
-  SaveFile(&flPhones);
+  SaveCache(&chPhones);
 
 
   bMaxConnect = 60;

@@ -31,14 +31,7 @@ typedef enum
   CTRL_HOU              = ENBL_PRT_HOU + 1,
   RECALC_HOU            = CTRL_HOU + 1,
 
-  PHONES                = RECALC_HOU + 1,
-
-  KEYS                  = PHONES + sizeof(mpphPhones)/wLEAF_BYTES + 1,
-
-  ADDRESS1              = KEYS + sizeof(mpphKeys)/wLEAF_BYTES + 1,
-  ADDRESS2              = ADDRESS1 + sizeof(mpdwAddress1)/wLEAF_BYTES + 1,
-
-  PARAMS                = ADDRESS2 + sizeof(mpdwAddress2)/wLEAF_BYTES + 1,
+  PARAMS                = RECALC_HOU + 1,
   PARAMS_DIV            = PARAMS + sizeof(mpdiParam)/wLEAF_BYTES + 1,
   ENBL_PARAMS           = PARAMS_DIV + sizeof(mpreParamsDiv)/wLEAF_BYTES + 1,
 

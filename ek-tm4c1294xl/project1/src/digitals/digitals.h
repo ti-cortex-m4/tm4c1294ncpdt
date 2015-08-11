@@ -11,10 +11,10 @@ DIGITALS.H
 extern  cache const             chDigitals;
 
 extern  cache const             chEnblKeys;
-extern  file const              flKeys;
+extern  cache const             chKeys;
 
-extern  file const              flAddress1;
-extern  file const              flAddress2;
+extern  cache const             chAddress1;
+extern  cache const             chAddress2;
 
 
 
