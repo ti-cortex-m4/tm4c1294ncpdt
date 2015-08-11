@@ -6,6 +6,7 @@ PARAMS_STORAGE,C
 
 #include "../../main.h"
 #include "../../memory/mem_realtime.h"
+#include "../../memory/mem_params.h"
 #include "../../realtime/realtime.h"
 #include "../../flash/files.h"
 #include "params_storage.h"
