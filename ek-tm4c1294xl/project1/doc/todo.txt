@@ -14,8 +14,6 @@ mpdwChannelsB[i] > 0xF0000000) dev_a dev_b
 
 optimise SetTime & SetDigitals
 
-test int program cnt на вызов (timer + serial) + частота timer
-
 doc различие старой и новой версии
 doc несовместимость старого и нового проборов по ext4
 
