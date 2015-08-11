@@ -4,9 +4,9 @@ UNI.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flObjectName;
-extern  file const              flCanalsName;
-extern  file const              flGroupsName;
+extern  cache const             chObjectName;
+extern  cache const             chCanalsName;
+extern  cache const             chGroupsName;
 
 extern  cache const             chStrictUni;
 extern  cache const             chMaxDelayUni;

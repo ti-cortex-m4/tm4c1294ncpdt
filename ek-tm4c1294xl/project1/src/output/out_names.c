@@ -9,7 +9,7 @@ OUT_NAMES,C
 #include "../memory/mem_uni.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "unified/uni.h"
 #include "out_names.h"
 
@@ -46,7 +46,7 @@ void    SetObjectNameExt(void)
 
     szObjectName[bNAME_SIZE-1] = 0;
 
-    SaveFile(&flObjectName);
+    SaveCache(&chObjectName);
 
     LongResult(bRES_OK);
   }
@@ -79,7 +79,7 @@ void    SetCanalsNameExt(void)
       mpszCanalsName[bInBuff6][bNAME_SIZE-1] = 0;
 
       if (bInBuff6 == bCANALS - 1)
-        SaveFile(&flCanalsName);
+        SaveCache(&chCanalsName);
 
       LongResult(bRES_OK);
     }
@@ -114,7 +114,7 @@ void    SetGroupsNameExt(void)
       mpszGroupsName[bInBuff6][bNAME_SIZE-1] = 0;
 
       if (bInBuff6 == bGROUPS - 1)
-        SaveFile(&flGroupsName);
+        SaveCache(&chGroupsName);
 
       LongResult(bRES_OK);
     }

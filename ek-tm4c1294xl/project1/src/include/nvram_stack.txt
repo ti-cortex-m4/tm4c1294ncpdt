@@ -50,6 +50,10 @@ RESERVE(CNTMONCAN_BUFF, sizeof(double)*bCANALS + bNVRAM_FOOTER)
 
 RESERVE(GROUPS, sizeof(mpgrGroups) + bNVRAM_FOOTER)
 
+RESERVE(OBJECT_NAME, sizeof(szObjectName) + bNVRAM_FOOTER)
+RESERVE(CANALS_NAME, sizeof(mpszCanalsName) + bNVRAM_FOOTER)
+RESERVE(GROUPS_NAME, sizeof(mpszGroupsName) + bNVRAM_FOOTER)
+
 RESERVE(ENBL_KEYS, sizeof(bool) + bNVRAM_FOOTER)
 RESERVE(DIGITALS, sizeof(mpdiDigital) + bNVRAM_FOOTER)
 

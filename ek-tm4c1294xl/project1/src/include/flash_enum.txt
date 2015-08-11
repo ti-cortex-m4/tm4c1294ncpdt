@@ -38,11 +38,7 @@ typedef enum
   ADDRESS1              = KEYS + sizeof(mpphKeys)/wLEAF_BYTES + 1,
   ADDRESS2              = ADDRESS1 + sizeof(mpdwAddress1)/wLEAF_BYTES + 1,
 
-  OBJECT_NAME           = ADDRESS2 + sizeof(mpdwAddress2)/wLEAF_BYTES + 1,
-  CANALS_NAME           = OBJECT_NAME + 1,
-  GROUPS_NAME           = CANALS_NAME + sizeof(mpszCanalsName)/wLEAF_BYTES + 1,
-
-  PARAMS                = GROUPS_NAME + sizeof(mpszGroupsName)/wLEAF_BYTES + 1,
+  PARAMS                = ADDRESS2 + sizeof(mpdwAddress2)/wLEAF_BYTES + 1,
   PARAMS_DIV            = PARAMS + sizeof(mpdiParam)/wLEAF_BYTES + 1,
   ENBL_PARAMS           = PARAMS_DIV + sizeof(mpreParamsDiv)/wLEAF_BYTES + 1,
 
