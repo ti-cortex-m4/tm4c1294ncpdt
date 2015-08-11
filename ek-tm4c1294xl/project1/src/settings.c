@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-SETTINGS.C
+SETTINGS,C
 
 
 ------------------------------------------------------------------------------*/
@@ -29,17 +29,13 @@ cache const             chSetPassword = {SET_PASSWORD, &boSetPassword, sizeof(bo
 
 void    InitSettings(void)
 {
+  enGlobal = GetLabelGlobal() ? GLB_WORK : GLB_PROGRAM;
+
   if (LoadFile(&flPrivate) == false)
   {
     wPrivate = 1;
     SaveFile(&flPrivate);
   }
-
-//  LoadGlobal();
-//  if ((enGlobal != GLB_PROGRAM) && (enGlobal != GLB_WORK)) // TODO LoadGlobal
-//    enGlobal = GLB_PROGRAM;
-
-  if (GetLabelGlobal())  enGlobal = GLB_WORK; else enGlobal = GLB_PROGRAM;
 
   LoadCache(&chLogical);
 
