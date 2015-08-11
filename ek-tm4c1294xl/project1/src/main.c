@@ -79,15 +79,16 @@ MAIN,C
 
 
 
-int main(void)
+int     main(void)
 {
-  ui32SysClock = GetSystemClockFrequency();
+  MakeSystemClockFrequency();
+  const uint32_t ui32SysClockFreq = GetSystemClockFrequency();
 
-  InitSysTick(ui32SysClock);
-  InitUart0(ui32SysClock);
-  InitUart2(ui32SysClock);
-  InitUart3(ui32SysClock);
-  InitUart4(ui32SysClock);
+  InitSysTick(ui32SysClockFreq);
+  InitUart0(ui32SysClockFreq);
+  InitUart2(ui32SysClockFreq);
+  InitUart3(ui32SysClockFreq);
+  InitUart4(ui32SysClockFreq);
 
   DisableWDT();
 
@@ -145,9 +146,9 @@ int main(void)
   InitSerial2();
   InitSerial3();
 
-  InitTimer0(ui32SysClock);
-  InitTimer1(ui32SysClock);
-  InitTimer2(ui32SysClock);
+  InitTimer0(ui32SysClockFreq);
+  InitTimer1(ui32SysClockFreq);
+  InitTimer2(ui32SysClockFreq);
 
   IntMasterEnable();
 

@@ -1,11 +1,8 @@
 /*------------------------------------------------------------------------------
-SYSTEM_CLOCK.H
+SYSTEM_CLOCK,H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  uint32_t                ui32SysClock;
-
-
-
+void MakeSystemClockFrequency(void);
 uint32_t GetSystemClockFrequency(void);
