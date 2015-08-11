@@ -15,16 +15,7 @@ typedef enum
   DEFDAYCAN             = CNTMONCAN + DOUBLE_CAN_PAGES*bMONTHS,
   DEFMONCAN             = DEFDAYCAN + IMP_CAN_PAGES*bDAYS,
 
-  ENBL_CAN              = DEFMONCAN + IMP_CAN_PAGES*bMONTHS,
-  ENBL_PRT_HOU          = ENBL_CAN + 1,
-  CTRL_HOU              = ENBL_PRT_HOU + 1,
-  RECALC_HOU            = CTRL_HOU + 1,
-
-  PARAMS                = RECALC_HOU + 1,
-  PARAMS_DIV            = PARAMS + sizeof(mpdiParam)/wLEAF_BYTES + 1,
-  ENBL_PARAMS           = PARAMS_DIV + sizeof(mpreParamsDiv)/wLEAF_BYTES + 1,
-
-  PARAMS_VALUES         = ENBL_PARAMS + 1,
+  PARAMS_VALUES         = DEFMONCAN + IMP_CAN_PAGES*bMONTHS,
 
   EXT_4_ENBL_CAN        = PARAMS_VALUES + PARAMS_PAGES*wTIMES,
   EXT_4_MON_VALUES      = EXT_4_ENBL_CAN + 1,

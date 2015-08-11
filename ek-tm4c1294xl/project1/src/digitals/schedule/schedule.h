@@ -4,11 +4,11 @@ SCHEDULE.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flEnblPrtHou;
+extern  cache const             chEnblPrtHou;
 
-extern  file const              flCtrlHou;
+extern  cache const             chCtrlHou;
 
-extern  file const              flRecalcHou;
+extern  cache const             chRecalcHou;
 extern  cache const             chRecalcAlways;
 
 

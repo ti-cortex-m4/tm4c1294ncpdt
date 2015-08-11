@@ -6,29 +6,28 @@ SCHEDULE.C
 
 #include    "../../main.h"
 #include    "../../memory/mem_schedule.h"
-#include    "../../flash/files.h"
 #include    "../../nvram/cache.h"
 #include    "enbl_hours.h"
 #include    "schedule.h"
 
 
 
-file const              flEnblPrtHou = {ENBL_PRT_HOU, &mpboEnblPrtHou, sizeof(mpboEnblPrtHou)};
+cache const             chEnblPrtHou = {ENBL_PRT_HOU, &mpboEnblPrtHou, sizeof(mpboEnblPrtHou)};
 
-file const              flCtrlHou = {CTRL_HOU, &mpboCtrlHou, sizeof(mpboCtrlHou)};
+cache const             chCtrlHou = {CTRL_HOU, &mpboCtrlHou, sizeof(mpboCtrlHou)};
 
-file const              flRecalcHou = {RECALC_HOU, &mpboRecalcHou, sizeof(mpboRecalcHou)};
+cache const             chRecalcHou = {RECALC_HOU, &mpboRecalcHou, sizeof(mpboRecalcHou)};
 cache const             chRecalcAlways = {RECALC_ALWAYS, &boRecalcAlways, sizeof(bool)};
 
 
 
 void    InitSchedule(void)
 {
-  LoadFile(&flEnblPrtHou);
+  LoadCache(&chEnblPrtHou);
 
-  LoadFile(&flCtrlHou);
+  LoadCache(&chCtrlHou);
 
-  LoadFile(&flRecalcHou);
+  LoadCache(&chRecalcHou);
   LoadCache(&chRecalcAlways);
 }
 
@@ -41,7 +40,7 @@ void    ResetSchedule(void)
     for (h=0; h<48; h++)
       SetEnblPrtHou(p, h, true);
 
-  SaveFile(&flEnblPrtHou);
+  SaveCache(&chEnblPrtHou);
 
 
   for (h=0; h<48; h++)
@@ -49,7 +48,7 @@ void    ResetSchedule(void)
 
    mpboCtrlHou[42] = true;
 
-   SaveFile(&flCtrlHou);
+   SaveCache(&chCtrlHou);
 
 
    for (h=0; h<48; h++)
@@ -57,7 +56,7 @@ void    ResetSchedule(void)
 
    mpboRecalcHou[1] = true;
 
-   SaveFile(&flRecalcHou);
+   SaveCache(&chRecalcHou);
 
 
    boRecalcAlways = true;

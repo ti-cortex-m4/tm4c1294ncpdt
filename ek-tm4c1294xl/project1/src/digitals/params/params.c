@@ -6,7 +6,6 @@ PARAMS,C
 
 #include    "../../main.h"
 #include    "../../display/display.h"
-#include    "../../flash/files.h"
 #include    "../../nvram/cache.h"
 #include    "params.h"
 
@@ -29,9 +28,9 @@ param const             mppaParamsLines[bPARAM_BLOCK] =
 cache const             chParamsFlag = {PARAMS_FLAG, &boParamsFlag, sizeof(bool)};
 cache const             chMntParams = {MNT_PARAMS, &boMntParams, sizeof(bool)};
 
-file const              flParams = {PARAMS, &mpdiParam, sizeof(mpdiParam)};
-file const              flParamsDiv = {PARAMS_DIV, &mpreParamsDiv, sizeof(mpreParamsDiv)};
-file const              flEnblParams = {ENBL_PARAMS, &mpboEnblParams, sizeof(mpboEnblParams)};
+cache const             flParams = {PARAMS, &mpdiParam, sizeof(mpdiParam)};
+cache const             flParamsDiv = {PARAMS_DIV, &mpreParamsDiv, sizeof(mpreParamsDiv)};
+cache const             flEnblParams = {ENBL_PARAMS, &mpboEnblParams, sizeof(mpboEnblParams)};
 
 cache const             chFixParamsBugs = {FIX_PARAMS_BUGS, &boFixParamsBugs, sizeof(bool)};
 cache const             chUseParamsDiv = {USE_PARAMS_DIV, &boUseParamsDiv, sizeof(bool)};
@@ -43,9 +42,9 @@ void    InitParams(void)
   LoadCache(&chParamsFlag);
   LoadCache(&chMntParams);
 
-  LoadFile(&flParams);
-  LoadFile(&flParamsDiv);
-  LoadFile(&flEnblParams);
+  LoadCache(&flParams);
+  LoadCache(&flParamsDiv);
+  LoadCache(&flEnblParams);
 
   LoadCache(&chFixParamsBugs);
   LoadCache(&chUseParamsDiv);
@@ -61,7 +60,7 @@ void    ResetParams(void)
   SaveCache(&chMntParams);
 
   memset(&mpdiParam, 0, sizeof(mpdiParam));
-  SaveFile(&flParams);
+  SaveCache(&flParams);
 
 
   uint i;
@@ -71,8 +70,8 @@ void    ResetParams(void)
     mpboEnblParams[i] = true;
   }
 
-  SaveFile(&flParamsDiv);
-  SaveFile(&flEnblParams);
+  SaveCache(&flParamsDiv);
+  SaveCache(&flEnblParams);
 
 
   boFixParamsBugs = false;
