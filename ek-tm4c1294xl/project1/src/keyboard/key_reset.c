@@ -24,7 +24,7 @@ KEY_RESET.C
 #include "../output/unified/uni.h"
 
 #include "../impulses/factors.h"
-#include "../label.h"
+#include "../label_global.h"
 #include "../flash/records.h"
 #include "../flash/storage.h"
 #include "../settings.h"

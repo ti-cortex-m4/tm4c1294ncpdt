@@ -8,7 +8,7 @@ NVRAM.H
 #define __NVRAM
 
 
-#include "../label.h"
+#include "../label_global.h"
 #include "../memory/mem_groups.h"
 #include "../memory/mem_digitals0.h"
 #include "../memory/mem_digitals.h"
