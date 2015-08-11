@@ -317,8 +317,8 @@ oldtariffs.h
 +   params.h
 pause.c
 pause.h
-phones.c
-phones.h
++   phones.c
++   phones.h
 phones2.c
 phones2.h
 phones21.c
