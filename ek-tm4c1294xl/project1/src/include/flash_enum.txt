@@ -4,16 +4,7 @@ typedef enum
 {
   FLASH_BEGIN           = 0,
 
-  TRANS_ENG             = FLASH_BEGIN,
-  TRANS_CNT             = TRANS_ENG + DOUBLE_CAN_PAGES,
-  PULSE_HOU             = TRANS_CNT + DOUBLE_CAN_PAGES,
-  PULSE_MNT             = PULSE_HOU + DOUBLE_CAN_PAGES,
-
-  COUNT                 = PULSE_MNT + DOUBLE_CAN_PAGES,
-  LOSSE                 = COUNT + DOUBLE_CAN_PAGES,
-  LEVEL                 = LOSSE + DOUBLE_CAN_PAGES,
-
-  IMPHOUCAN             = LEVEL + DOUBLE_CAN_PAGES,
+  IMPHOUCAN             = FLASH_BEGIN,
 
   IMPDAYCAN             = IMPHOUCAN + IMPHOUCAN_PAGES,
   IMPMONCAN             = IMPDAYCAN + IMP_CAN_PAGES*bDAYS,

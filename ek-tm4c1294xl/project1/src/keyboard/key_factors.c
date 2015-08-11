@@ -122,10 +122,10 @@ static uchar ibCan;
             enKeyboard = KBD_POSTENTER;
 
             mpdbTransEng[ibCan] = fl;
-            SaveFile(&flTransEng);
+            SaveCache(&chTransEng);
 
             mpdbTransCnt[ibCan] = 1;
-            SaveFile(&flTransCnt);
+            SaveCache(&chTransCnt);
           }
           else Beep();
           break;
@@ -136,7 +136,7 @@ static uchar ibCan;
             enKeyboard = KBD_POSTENTER;
 
             mpdbTransCnt[ibCan] = fl;
-            SaveFile(&flTransCnt);
+            SaveCache(&chTransCnt);
           }
           else Beep();
           break;
@@ -147,10 +147,10 @@ static uchar ibCan;
             enKeyboard = KBD_POSTENTER;
 
             mpdbPulseHou[ibCan] = fl;
-            SaveFile(&flPulseHou);
+            SaveCache(&chPulseHou);
 
             mpdbPulseMnt[ibCan] = fl;
-            SaveFile(&flPulseMnt);
+            SaveCache(&chPulseMnt);
           }
           else Beep();
           break;
@@ -161,7 +161,7 @@ static uchar ibCan;
             enKeyboard = KBD_POSTENTER;
 
             mpdbPulseMnt[ibCan] = fl;
-            SaveFile(&flPulseMnt);
+            SaveCache(&chPulseMnt);
           }
           else Beep();
           break;
@@ -182,7 +182,7 @@ static uchar ibCan;
             }
 
             mpdbCount[ibCan] = fl;
-            SaveFile(&flCount);
+            SaveCache(&chCount);
           }
           else Beep();
           break;
@@ -193,7 +193,7 @@ static uchar ibCan;
             enKeyboard = KBD_POSTENTER;
 
             mpdbLosse[ibCan] = fl/100;
-            SaveFile(&flLosse);
+            SaveCache(&chLosse);
           }   
           else Beep();
           break;
@@ -204,7 +204,7 @@ static uchar ibCan;
             enKeyboard = KBD_POSTENTER;
 
             mpdbLevel[ibCan] = fl;
-            SaveFile(&flLevel);
+            SaveCache(&chLevel);
           }
           else Beep();
           break;

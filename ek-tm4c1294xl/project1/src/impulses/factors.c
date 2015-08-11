@@ -5,34 +5,34 @@ FACTORS,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../flash/files.h"
+#include "../nvram/cache.h"
 #include "factors.h"
 
 
 
-file const              flTransEng = {TRANS_ENG, &mpdbTransEng, sizeof(double)*bCANALS};
-file const              flTransCnt = {TRANS_CNT, &mpdbTransCnt, sizeof(double)*bCANALS};
+cache const             chTransEng = {TRANS_ENG, &mpdbTransEng, sizeof(double)*bCANALS};
+cache const             chTransCnt = {TRANS_CNT, &mpdbTransCnt, sizeof(double)*bCANALS};
 
-file const              flPulseHou = {PULSE_HOU, &mpdbPulseHou, sizeof(double)*bCANALS};
-file const              flPulseMnt = {PULSE_MNT, &mpdbPulseMnt, sizeof(double)*bCANALS};
+cache const             chPulseHou = {PULSE_HOU, &mpdbPulseHou, sizeof(double)*bCANALS};
+cache const             chPulseMnt = {PULSE_MNT, &mpdbPulseMnt, sizeof(double)*bCANALS};
 
-file const              flCount = {COUNT, &mpdbCount, sizeof(double)*bCANALS};
-file const              flLosse = {LOSSE, &mpdbLosse, sizeof(double)*bCANALS};
-file const              flLevel = {LEVEL, &mpdbLevel, sizeof(double)*bCANALS};
+cache const             chCount = {COUNT, &mpdbCount, sizeof(double)*bCANALS};
+cache const             chLosse = {LOSSE, &mpdbLosse, sizeof(double)*bCANALS};
+cache const             chLevel = {LEVEL, &mpdbLevel, sizeof(double)*bCANALS};
 
 
 
 void    InitFactors(void)
 {
-  LoadFile(&flTransEng);
-  LoadFile(&flTransCnt);
+  LoadCache(&chTransEng);
+  LoadCache(&chTransCnt);
 
-  LoadFile(&flPulseHou);
-  LoadFile(&flPulseMnt);
+  LoadCache(&chPulseHou);
+  LoadCache(&chPulseMnt);
 
-  LoadFile(&flCount);
-  LoadFile(&flLosse);
-  LoadFile(&flLevel);
+  LoadCache(&chCount);
+  LoadCache(&chLosse);
+  LoadCache(&chLevel);
 
   StartFactors();
 }
@@ -58,30 +58,30 @@ void    ResetFactors(void)
     mpdbTransCnt[c] = 1;
   }
 
-  SaveFile(&flTransEng);
-  SaveFile(&flTransCnt);
+  SaveCache(&chTransEng);
+  SaveCache(&chTransCnt);
 
-  SaveFile(&flPulseHou);
-  SaveFile(&flPulseMnt);
+  SaveCache(&chPulseHou);
+  SaveCache(&chPulseMnt);
 
-  SaveFile(&flCount);
-  SaveFile(&flLosse);
-  SaveFile(&flLevel);
+  SaveCache(&chCount);
+  SaveCache(&chLosse);
+  SaveCache(&chLevel);
 }
 
 
 
 void    SaveFactors(void)
 {
-  SaveFile(&flTransEng);
-  SaveFile(&flTransCnt);
+  SaveCache(&chTransEng);
+  SaveCache(&chTransCnt);
 
-  SaveFile(&flPulseHou);
-  SaveFile(&flPulseMnt);
+  SaveCache(&chPulseHou);
+  SaveCache(&chPulseMnt);
 
-  SaveFile(&flCount);
-  SaveFile(&flLosse);
-  SaveFile(&flLevel);
+  SaveCache(&chCount);
+  SaveCache(&chLosse);
+  SaveCache(&chLevel);
 }
 
 

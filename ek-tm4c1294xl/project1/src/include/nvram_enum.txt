@@ -50,7 +50,16 @@ typedef enum
 
   GROUPS                = CNTMONCAN_BUFF + sizeof(double)*bCANALS + bNVRAM_FOOTER,
 
-  OBJECT_NAME           = GROUPS + sizeof(mpgrGroups) + bNVRAM_FOOTER,
+  TRANS_ENG             = GROUPS + sizeof(mpgrGroups) + bNVRAM_FOOTER,
+  TRANS_CNT             = TRANS_ENG + sizeof(double)*bCANALS + bNVRAM_FOOTER,
+  PULSE_HOU             = TRANS_CNT + sizeof(double)*bCANALS + bNVRAM_FOOTER,
+  PULSE_MNT             = PULSE_HOU + sizeof(double)*bCANALS + bNVRAM_FOOTER,
+
+  COUNT                 = PULSE_MNT + sizeof(double)*bCANALS + bNVRAM_FOOTER,
+  LOSSE                 = COUNT + sizeof(double)*bCANALS + bNVRAM_FOOTER,
+  LEVEL                 = LOSSE + sizeof(double)*bCANALS + bNVRAM_FOOTER,
+
+  OBJECT_NAME           = LEVEL + sizeof(double)*bCANALS + bNVRAM_FOOTER,
   CANALS_NAME           = OBJECT_NAME + sizeof(szObjectName) + bNVRAM_FOOTER,
   GROUPS_NAME           = CANALS_NAME + sizeof(mpszCanalsName) + bNVRAM_FOOTER,
 
