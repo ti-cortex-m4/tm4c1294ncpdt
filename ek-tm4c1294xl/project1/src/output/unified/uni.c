@@ -12,15 +12,14 @@ UNI.C
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
-#include "../../flash/files.h"
 #include "../../nvram/cache.h"
 #include "uni.h"
 
 
 
-file const              flObjectName = {OBJECT_NAME, &szObjectName, sizeof(szObjectName)};
-file const              flCanalsName = {CANALS_NAME, &mpszCanalsName, sizeof(mpszCanalsName)};
-file const              flGroupsName = {GROUPS_NAME, &mpszGroupsName, sizeof(mpszGroupsName)};
+cache const             chObjectName = {OBJECT_NAME, &szObjectName, sizeof(szObjectName)};
+cache const             chCanalsName = {CANALS_NAME, &mpszCanalsName, sizeof(mpszCanalsName)};
+cache const             chGroupsName = {GROUPS_NAME, &mpszGroupsName, sizeof(mpszGroupsName)};
 
 cache const             chStrictUni = {STRICT_UNI, &boStrictUni, sizeof(bool)};
 cache const             chMaxDelayUni = {MAX_DELAY_UNI, &bMaxDelayUni, sizeof(uchar)};
@@ -31,9 +30,9 @@ cache const             chEnblPasswUni = {ENBL_PASS_INI, &boEnblPassUni, sizeof(
 
 void    InitUni(void)
 {
-  LoadFile(&flObjectName);
-  LoadFile(&flCanalsName);
-  LoadFile(&flGroupsName);
+	LoadCache(&chObjectName);
+  LoadCache(&chCanalsName);
+  LoadCache(&chGroupsName);
 
   LoadCache(&chStrictUni);
 
@@ -61,7 +60,7 @@ void    ResetUni(void)
 
   sprintf(szObjectName, "object %u", wPrivate);
 
-  SaveFile(&flObjectName);
+  SaveCache(&chObjectName);
 
 
   memset(&mpszCanalsName, 0, sizeof(mpszCanalsName));
@@ -70,7 +69,7 @@ void    ResetUni(void)
   for (c=0; c<bCANALS; c++)
     sprintf(mpszCanalsName[c], "canal %u", c+1);
 
-  SaveFile(&flCanalsName);
+  SaveCache(&chCanalsName);
 
 
   memset(&mpszGroupsName, 0, sizeof(mpszGroupsName));
@@ -79,7 +78,7 @@ void    ResetUni(void)
   for (g=0; g<bGROUPS; g++)
     sprintf(mpszGroupsName[g], "group %u", g+1);
 
-  SaveFile(&flGroupsName);
+  SaveCache(&chGroupsName);
 
 
   boStrictUni = true;

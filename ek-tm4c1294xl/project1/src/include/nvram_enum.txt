@@ -50,7 +50,11 @@ typedef enum
 
   GROUPS                = CNTMONCAN_BUFF + sizeof(double)*bCANALS + bNVRAM_FOOTER,
 
-  ENBL_KEYS             = GROUPS + sizeof(mpgrGroups) + bNVRAM_FOOTER,
+  OBJECT_NAME           = GROUPS + sizeof(mpgrGroups) + bNVRAM_FOOTER,
+  CANALS_NAME           = OBJECT_NAME + sizeof(szObjectName) + bNVRAM_FOOTER,
+  GROUPS_NAME           = CANALS_NAME + sizeof(mpszCanalsName) + bNVRAM_FOOTER,
+
+  ENBL_KEYS             = GROUPS_NAME + sizeof(mpszGroupsName) + bNVRAM_FOOTER,
   DIGITALS              = ENBL_KEYS + sizeof(bool) + bNVRAM_FOOTER,
 
   START_REL_CAN         = DIGITALS + sizeof(mpdiDigital) + bNVRAM_FOOTER,
