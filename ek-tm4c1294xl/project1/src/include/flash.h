@@ -76,11 +76,11 @@ FLASH.H
 
 
 #if (LOCAL_END >= wPAGES)
-#error "FLASH1 overflow"
+#error "FLASH1 pages layout overflow"
 #endif
 
 #if (FLASH_END >= wPAGES_TOTAL)
-#error "FLASH2 overflow"
+#error "FLASH2 pages layout overflow"
 #endif
 
 #endif
