@@ -71,7 +71,7 @@ static uint iwPrm;
         SetParam(iwPrm, &diT);
 
         MakeParamDiv(iwPrm);
-        SaveFile(&flParamsDiv);
+        SaveCache(&flParamsDiv);
 
         if (++iwPrm >= wPARAMS) iwPrm = 0;
 
@@ -91,7 +91,7 @@ static uint iwPrm;
       { 
         mpboEnblParams[iwPrm] = InvertBoolean(mpboEnblParams[iwPrm]);
 
-        SaveFile(&flEnblParams);
+        SaveCache(&flEnblParams);
         ShowParam(iwPrm);
       } 
       else Beep();

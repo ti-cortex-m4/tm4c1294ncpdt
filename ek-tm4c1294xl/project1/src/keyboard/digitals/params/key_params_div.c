@@ -74,7 +74,7 @@ void    key_SetParamsDiv(void)
         enKeyboard = KBD_POSTENTER;
 
         mpreParamsDiv[iwPrm] = fl;
-        SaveFile(&flParamsDiv);
+        SaveCache(&flParamsDiv);
       }
       else Beep();
 

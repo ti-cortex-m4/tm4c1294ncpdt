@@ -144,7 +144,7 @@ bool    ValidParamLine(uchar  ibLine)
 void    SetParam(uint  iwPrm, digital  *pdi)
 {
   mpdiParam[iwPrm] = *pdi;
-  SaveFile(&flParams);
+  SaveCache(&flParams);
 }
 
 
