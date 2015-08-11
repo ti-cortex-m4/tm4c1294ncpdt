@@ -79,9 +79,9 @@ void    key_SetPhones(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        szLo[ibPos] = 0;
+        memset((char *)mpphPhones[ibCan].szNumber, 0, bPHONE_SIZE+1);
+        strncpy((char *)mpphPhones[ibCan].szNumber, szLo, ibPos);
 
-        strcpy((char *)mpphPhones[ibCan].szNumber, szLo);
         SaveCache(&chPhones);
       }
 

@@ -93,13 +93,13 @@ void    key_SetKeys(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        szLo[ibPos] = 0;
-
         ibRecordCan = ibCan;
         AddSysRecordReprogram(EVE_EDIT_KEY10);
         AddSysRecordReprogram(EVE_EDIT_KEY11);
 
-        strcpy((char *)mpphKeys[ibCan].szNumber, szLo);
+        memset((char *)mpphKeys[ibCan].szNumber, 0, bPHONE_SIZE+1);
+        strncpy((char *)mpphKeys[ibCan].szNumber, szLo, ibPos);
+
         SaveCache(&chKeys);
 
         AddSysRecordReprogram(EVE_EDIT_KEY20);
