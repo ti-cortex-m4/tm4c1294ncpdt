@@ -5,7 +5,7 @@ PARAMS_DIV,C
 ------------------------------------------------------------------------------*/
 
 #include    "../../main.h"
-#include    "../../flash/files.h"
+#include    "../../nvram/cache.h"
 #include    "params.h"
 #include    "params_div.h"
 
@@ -202,5 +202,5 @@ void    MakeParamsDiv(void)
     MakeParamDiv(p);
   }
 
-  SaveFile(&flParamsDiv);
+  SaveCache(&flParamsDiv);
 }

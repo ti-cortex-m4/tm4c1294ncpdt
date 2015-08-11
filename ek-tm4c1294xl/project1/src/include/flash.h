@@ -7,8 +7,6 @@ FLASH.H
 #ifndef __FLASH
 #define __FLASH
 
-#include "../memory/mem_params0.h"
-#include "../memory/mem_params.h"
 #include "../memory/mem_extended_4.h"
 #include "../memory/mem_extended_4t.h"
 #include "../memory/mem_extended_5.h"
