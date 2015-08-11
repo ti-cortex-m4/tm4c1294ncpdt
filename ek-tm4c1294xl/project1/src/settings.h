@@ -4,7 +4,8 @@ SETTINGS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  file const              flLogical;
+extern  file const              flPrivate;
+extern  cache const             chLogical;
 
 extern  cache const             chFirstReset;
 extern  cache const             chEnblWDT;
@@ -18,6 +19,3 @@ extern  cache const             chSetPassword;
 
 void    InitSettings(void);
 void    ResetSettings(bool  fFullReset);
-
-bool SavePrivate(void);
-bool LoadPrivate(void);

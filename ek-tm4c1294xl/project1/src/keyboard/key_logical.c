@@ -5,58 +5,19 @@ KEY_LOGICAL,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_settings.h"
-#include "../console.h"
-#include "../access.h"
-#include "../flash/files.h"
 #include "../settings.h"
+#include "key_char.h"
 
 
 
-//                                         0123456789ABCDEF
-static char const       szLogical[]     = "Логический номер",
-                        szMask[]        = "      ___       ";
+//                                          0123456789ABCDEF
+static char const       szMessage[]      = "Логический номер";
+
+static char const       *pszMessages[]   = { szMessage, szCharLimits, "" };
 
 
 
 void    key_SetLogical(void)
 {
-  if (bKey == bKEY_ENTER)
-  {
-    if (enKeyboard == KBD_ENTER)
-    {
-      enKeyboard = KBD_POSTENTER;
-      Clear();
-
-      ShowHi(szLogical);
-      ShowChar(bLogical);
-    } 
-    else if (enKeyboard == KBD_POSTINPUT1)
-    {
-      enKeyboard = KBD_POSTENTER;
-
-      bLogical = GetCharLo(6,8);
-      SaveFile(&flLogical);
-
-      ShowChar(bLogical);
-    }
-    else Beep();
-  }
-
-
-  else if (bKey < 10)
-  {
-    if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
-    {
-      enKeyboard = KBD_INPUT1;
-      ShowLo(szMask);
-    }
-
-    if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
-    {
-      enKeyboard = KBD_POSTINPUT1;
-      ShiftLo(6,8);
-    }
-  }
-  else Beep();
+  key_SetChar(&chLogical, pszMessages, 1, 255);
 }
