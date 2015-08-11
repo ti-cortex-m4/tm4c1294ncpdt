@@ -19,5 +19,5 @@ static char const       *pszMessages[]   = { szMessage, szCharLimits, "" };
 
 void    key_SetLogical(void)
 {
-  key_SetChar(&chLogical, pszMessages, 1, 255);
+  key_SetChar(&chLogical, pszMessages, 0, 255);
 }
