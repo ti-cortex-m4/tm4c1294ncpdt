@@ -122,7 +122,7 @@ uchar   i;
   for (i=0; i<bCANALS/8; i++) 
     PushChar(0xFF);
 
-  PckQueryIO(bHEADER+sizeof(real)*bCANALS+2, 1+bCANALS/8+7);
+  PckQueryIO(bHEADER+sizeof(float)*bCANALS+2, 1+bCANALS/8+7);
 }
 
 
@@ -159,7 +159,7 @@ void    QueryKoeffF(void)
   PushChar(bINQ_GETKOEFF);         
   PushChar(diCurr.ibLine);          
 
-  PckQueryIO(sizeof(real)*4+7, 1+7);
+  PckQueryIO(sizeof(float)*4+7, 1+7);
 }
 
 

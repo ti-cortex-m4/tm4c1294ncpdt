@@ -46,7 +46,7 @@ float   re;
 
           PushFloat(re);
 
-          wSize += sizeof(real);
+          wSize += sizeof(float);
           if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
         }
       }
@@ -141,7 +141,7 @@ float   re;
             PushFloat(re);
           }
 
-          wSize += sizeof(real);
+          wSize += sizeof(float);
           if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
         }
       }

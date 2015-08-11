@@ -299,7 +299,7 @@ uchar   ibCan;
         mptiBaseOK[ibCan] = *GetCurrTimeDate();
 
         if ((dwSecond > 0) && (dwSecond < 1800))
-          mpreBase[ibCan] += (real)180*dwImp/dwSecond;
+          mpreBase[ibCan] += (float)180*dwImp/dwSecond;
 
         dwImp = mpreBase[ibCan];
         mpreBase[ibCan] -= dwImp;

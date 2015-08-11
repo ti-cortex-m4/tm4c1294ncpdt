@@ -92,7 +92,7 @@ uchar   i,j;
               PushRealDef();
           }
 
-          wBuffD += sizeof(real);
+          wBuffD += sizeof(float);
           if (wBuffD >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
         } 
       }

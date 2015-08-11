@@ -65,7 +65,7 @@ uchar  i;
     else
       PushRealDef();
 
-    wBuffD += sizeof(real);
+    wBuffD += sizeof(float);
   }
 }
 
@@ -88,7 +88,7 @@ uchar  i;
     else
       PushRealDef();
 
-    wBuffD += sizeof(real);
+    wBuffD += sizeof(float);
   }
 }
 
@@ -257,7 +257,7 @@ void    PushPowHouGrpDef(uchar  bMul)
   else
     PushRealDef();
 
-  wBuffD += sizeof(real);
+  wBuffD += sizeof(float);
 }
 
 

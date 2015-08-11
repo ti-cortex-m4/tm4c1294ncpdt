@@ -45,7 +45,7 @@ void    OutMaxPowDayGrpExt(void)
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
           	PushMaxPow(&mppoDayGrp[ PrevSoftDay() ][ g ]);
-            wSize += (sizeof(time) + sizeof(real))*bTARIFFS;
+            wSize += (sizeof(time) + sizeof(float))*bTARIFFS;
           }
         }
 
@@ -76,7 +76,7 @@ void    OutMaxPowMonGrpExt(void)
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
           	PushMaxPow(&mppoMonGrp[ PrevSoftMon() ][ g ]);
-            wSize += (sizeof(time) + sizeof(real))*bTARIFFS;
+            wSize += (sizeof(time) + sizeof(float))*bTARIFFS;
           }
         }
 

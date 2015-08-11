@@ -134,7 +134,7 @@ uint    j;
   {
     if ((InBuff(ibPtr + 7 - p/8) & (0x01 << p%8)) != 0) 
     {
-      wSize += sizeof(real);
+      wSize += sizeof(float);
 
       float fl = 0;
 

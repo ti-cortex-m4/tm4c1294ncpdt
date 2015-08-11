@@ -232,15 +232,15 @@ bool    AddSysRecord(event  ev)
 //    case EVE_CONTACTS3_COUNTER: memcpy(&reCurr.mpbBuff+0, &cbContact, sizeof(uchar));
 //                                memcpy(&reCurr.mpbBuff+1, &cbContactMax, sizeof(uchar)); break;
 //
-//    case EVE_VALUE3_DOWN:     memcpy(&reCurr.mpbBuff+0, &reContactDown, sizeof(real)); break;
-//    case EVE_VALUE3_UP:       memcpy(&reCurr.mpbBuff+0, &reContactUp, sizeof(real)); break;
+//    case EVE_VALUE3_DOWN:     memcpy(&reCurr.mpbBuff+0, &reContactDown, sizeof(float)); break;
+//    case EVE_VALUE3_UP:       memcpy(&reCurr.mpbBuff+0, &reContactUp, sizeof(float)); break;
 //    case EVE_VALUE3_COUNTER:  memcpy(&reCurr.mpbBuff+0, &cbContactMax, sizeof(uchar)); break;
 //
-//    case EVE_CONTACTS3_0_ON:  memcpy(&reCurr.mpbBuff+0, &reContactRec, sizeof(real));
-//                              memcpy(&reCurr.mpbBuff+4, &reContactUp, sizeof(real)); break;
+//    case EVE_CONTACTS3_0_ON:  memcpy(&reCurr.mpbBuff+0, &reContactRec, sizeof(float));
+//                              memcpy(&reCurr.mpbBuff+4, &reContactUp, sizeof(float)); break;
 //
-//    case EVE_CONTACTS3_0_OFF: memcpy(&reCurr.mpbBuff+0, &reContactRec, sizeof(real));
-//                              memcpy(&reCurr.mpbBuff+4, &reContactDown, sizeof(real)); break;
+//    case EVE_CONTACTS3_0_OFF: memcpy(&reCurr.mpbBuff+0, &reContactRec, sizeof(float));
+//                              memcpy(&reCurr.mpbBuff+4, &reContactDown, sizeof(float)); break;
 //
 //    case EVE_CONTACTSMODE:
 //    case EVE_CONTACTS1:
