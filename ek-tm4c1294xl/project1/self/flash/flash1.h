@@ -4,8 +4,8 @@ FLASH1,H
 
 ------------------------------------------------------------------------------*/
 
-void    InitFlash1(void);
+void    InitFlash2(void);
 
-bool    PageErase1(uint const  wPageOut);
-bool    PageRead1(uint const  wPageIn);
-bool    PageWrite1(uint const  wPageOut);
+bool    PageErase2(uint const  wPageOut);
+bool    PageRead2(uint const  wPageIn);
+bool    PageWrite2(uint const  wPageOut);
