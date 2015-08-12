@@ -142,7 +142,7 @@ uchar   ReadStatus2(void)
 bool    SafeReadStatus2(void)
 {
   uint i = 0;
-  while ((ReadStatus1() & 0x80) == 0)
+  while ((ReadStatus2() & 0x80) == 0)
   {
     if (++i > STATUS_REPEATS)
     {
