@@ -21,14 +21,11 @@ doc несовместимость старого и нового проборов по ext4
 
 reset all buffers remotely
 
-ext1
-ext7
-UNI cnt
 P79 и другие
 
 Esc SUV - прочитать CRC мгновенно
 быстрое чтение счетчиков и мгнов парам.
-гамма - быстрое задание каналов и параметров
+gamma - быстрое задание каналов и параметров
 
 u_hhr u_mnt wSize
 x
@@ -39,5 +36,4 @@ error.c - why without WDT reset ?
 UART FIFO + sem2reader time
 
 tiKey
-sem3reader
 params
