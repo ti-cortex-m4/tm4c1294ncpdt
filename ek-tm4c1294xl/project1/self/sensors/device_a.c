@@ -76,15 +76,15 @@ void    QueryOpenA(void)
   }
   else
   {
-    phone ph = mpphKeys[ibDig];
+    line ph = mpphKeys[ibDig];
     bool f = 0;
     uchar i;
     for (i=0; i<6; i++)
     {
-      if (ph.szNumber[i] == 0) f = 1;
+      if (ph.szLine[i] == 0) f = 1;
 
       if (f == 0)
-        PushChar(ph.szNumber[i]);
+        PushChar(ph.szLine[i]);
       else  
         PushChar(0);
     }

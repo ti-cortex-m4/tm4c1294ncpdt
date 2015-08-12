@@ -376,7 +376,7 @@ uchar   i,j;
       }
       else
       { 
-        Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szNumber, 13);
+        Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szLine, 13);
         for (i=0; i<32-13; i++) PushChar(0);
       }    
     }

@@ -13,4 +13,4 @@ extern  cache const             chCustomModem;
 void    InitPhones(void);
 void    ResetPhones(void);
 
-bool    IsValidPhone(phone  *pph);
+bool    IsValidPhone(line  *pph);

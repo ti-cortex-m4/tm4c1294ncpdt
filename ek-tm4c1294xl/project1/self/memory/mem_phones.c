@@ -9,7 +9,7 @@ MEM_PHONES.C
 
 
 // массив номеров телефонов
-phone                   mpphPhones[bCANALS];
+line                    mpphPhones[bCANALS];
 
 // максимальное время ожидания сигнала Connect
 uchar                   bMaxConnect;

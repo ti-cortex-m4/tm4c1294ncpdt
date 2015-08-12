@@ -34,15 +34,15 @@ static char const       szDigitals[]     = "—четчики        ",
 
 static void MakeKeys(uchar  ibCan, uchar  bDevice)
 {
-  memset(&mpphKeys[ibCan].szNumber, 0, sizeof(mpphKeys[ibCan].szNumber));
+  memset(&mpphKeys[ibCan].szLine, 0, sizeof(line));
 
   switch (bDevice)
   {
-    case 1:   strcpy((char *)&mpphKeys[ibCan].szNumber, "000000");    break;
-    case 2:   strcpy((char *)&mpphKeys[ibCan].szNumber, "222222");    break;
-    case 4:   strcpy((char *)&mpphKeys[ibCan].szNumber, "00000000");  break;
-    case 21:  strcpy((char *)&mpphKeys[ibCan].szNumber, "00000000");  break;
-    default:  strcpy((char *)&mpphKeys[ibCan].szNumber, "0");         break;
+    case 1:   strcpy((char *)&mpphKeys[ibCan].szLine, "000000");    break;
+    case 2:   strcpy((char *)&mpphKeys[ibCan].szLine, "222222");    break;
+    case 4:   strcpy((char *)&mpphKeys[ibCan].szLine, "00000000");  break;
+    case 21:  strcpy((char *)&mpphKeys[ibCan].szLine, "00000000");  break;
+    default:  strcpy((char *)&mpphKeys[ibCan].szLine, "0");         break;
   }
 
   SaveCache(&chKeys);

@@ -27,7 +27,7 @@ static void Show(void)
   Clear();
 
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
-    strcpy(szLo, mpphKeys[ibCan].szNumber);
+    strcpy(szLo, mpphKeys[ibCan].szLine);
   else
     strcpy(szLo, "*************");
 
@@ -97,8 +97,8 @@ void    key_SetKeys(void)
         AddSysRecordReprogram(EVE_EDIT_KEY10);
         AddSysRecordReprogram(EVE_EDIT_KEY11);
 
-        memset((char *)mpphKeys[ibCan].szNumber, 0, bPHONE_SIZE+1);
-        strncpy((char *)mpphKeys[ibCan].szNumber, szLo, ibPos);
+        memset((char *)mpphKeys[ibCan].szLine, 0, sizeof(line));
+        strncpy((char *)mpphKeys[ibCan].szLine, szLo, ibPos);
 
         SaveCache(&chKeys);
 
@@ -163,7 +163,7 @@ void    key_SetKeys(void)
     {
       enKeyboard = KBD_POSTINPUT2;
 
-      if (ibPos < bPHONE_SIZE)
+      if (ibPos < bLINE_SIZE)
         szLo[ibPos++] = szDigits[bKey];
       else
         Beep();

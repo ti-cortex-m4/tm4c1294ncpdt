@@ -254,10 +254,10 @@ bool    AddSysRecord(event  ev)
 
     case EVE_EDIT_KEY10:
     case EVE_EDIT_KEY20:      PutChar(0, ibRecordCan);
-                              Put(1, (uchar *) &mpphKeys[ibRecordCan].szNumber+0, 7); break;
+                              Put(1, (uchar *) &mpphKeys[ibRecordCan].szLine+0, 7); break;
 
     case EVE_EDIT_KEY11:
-    case EVE_EDIT_KEY21:      Put(0, (uchar *) &mpphKeys[ibRecordCan].szNumber+7, 6); break;
+    case EVE_EDIT_KEY21:      Put(0, (uchar *) &mpphKeys[ibRecordCan].szLine+7, 6); break;
 
     case EVE_EDIT_ADDRESS10:
     case EVE_EDIT_ADDRESS11:  PutChar(0, ibRecordCan);
