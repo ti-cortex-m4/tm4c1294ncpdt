@@ -12,7 +12,7 @@ UNI_FLOAT,C
 
 
 
-static void PushDump(uchar  bCode, bool  fDouble)
+static uchar PushDump(uchar  bCode, bool  fDouble)
 {
   if (fDouble)
   {
@@ -24,6 +24,7 @@ static void PushDump(uchar  bCode, bool  fDouble)
     PushChar(0xFF);
     PushChar(0xFF);
     PushChar(bCode);
+    return 8;
   }
   else
   {
@@ -31,38 +32,39 @@ static void PushDump(uchar  bCode, bool  fDouble)
     PushChar(0xFF);
     PushChar(0xFF);
     PushChar(bCode);
+    return 4;
   }
 }
 
 
-void    PushFloatOrDoubleUni(status  bStatus, double  db, bool  fDouble)
+uchar   PushFloatOrDoubleUni(status  bStatus, double  db, bool  fDouble)
 {
   if (boStrictUni == true)
   {
     switch (bStatus)
     {
-      case ST4_NONE:          PushDump(0xFF, fDouble); break;
-      case ST4_NOTSUPPORTED:  PushDump(0xFF, fDouble); break;
-      case ST4_NOTPRESENTED:  PushDump(0xFF, fDouble); break;
-      case ST4_BADDIGITAL:    PushDump(0xFE, fDouble); break;
-      case ST4_BADFLASH:      PushDump(0xFF, fDouble); break;
-      case ST4_MODEM_LINK:    PushDump(0xFE, fDouble); break;
-      case ST4_DISABLED:      PushDump(0xFF, fDouble); break;
-      default:                PushFloatOrDouble(db, fDouble); break;
+      case ST4_NONE:          return PushDump(0xFF, fDouble);
+      case ST4_NOTSUPPORTED:  return PushDump(0xFF, fDouble);
+      case ST4_NOTPRESENTED:  return PushDump(0xFF, fDouble);
+      case ST4_BADDIGITAL:    return PushDump(0xFE, fDouble);
+      case ST4_BADFLASH:      return PushDump(0xFF, fDouble);
+      case ST4_MODEM_LINK:    return PushDump(0xFE, fDouble);
+      case ST4_DISABLED:      return PushDump(0xFF, fDouble);
+      default:                return PushFloatOrDouble(db, fDouble);
     }
   }
   else
   {
     switch (bStatus)
     {
-      case ST4_NONE:          PushDump(0xE0, fDouble); break;
-      case ST4_NOTSUPPORTED:  PushDump(0xE1, fDouble); break;
-      case ST4_NOTPRESENTED:  PushDump(0xE2, fDouble); break;
-      case ST4_BADDIGITAL:    PushDump(0xE3, fDouble); break;
-      case ST4_BADFLASH:      PushDump(0xE4, fDouble); break;
-      case ST4_MODEM_LINK:    PushDump(0xE5, fDouble); break;
-      case ST4_DISABLED:      PushDump(0xE6, fDouble); break;
-      default:                PushFloatOrDouble(db, fDouble); break;
+      case ST4_NONE:          return PushDump(0xE0, fDouble);
+      case ST4_NOTSUPPORTED:  return PushDump(0xE1, fDouble);
+      case ST4_NOTPRESENTED:  return PushDump(0xE2, fDouble);
+      case ST4_BADDIGITAL:    return PushDump(0xE3, fDouble);
+      case ST4_BADFLASH:      return PushDump(0xE4, fDouble);
+      case ST4_MODEM_LINK:    return PushDump(0xE5, fDouble);
+      case ST4_DISABLED:      return PushDump(0xE6, fDouble);
+      default:                return PushFloatOrDouble(db, fDouble);
     }
   }
 }

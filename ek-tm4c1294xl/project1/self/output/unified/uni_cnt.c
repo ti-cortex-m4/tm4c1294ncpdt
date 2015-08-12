@@ -29,17 +29,17 @@ UNI_CNT.C
 
 
 
-void    PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon, bool  fDouble)
+uchar   PushCntCanMonAllUni(uchar  ibCan, uchar  ibMon, bool  fDouble)
 {
   if (GetDigitalDevice(ibCan) == 0)
   {
     double db = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
-    PushFloatOrDoubleUni(ST4_OK, db, fDouble);
+    return PushFloatOrDoubleUni(ST4_OK, db, fDouble);
   }
   else
   {
     value6 vl = mpCntMonCan4[ibCan];
-    PushFloatOrDoubleUni(vl.bStatus, vl.dbValue, fDouble);
+    return PushFloatOrDoubleUni(vl.bStatus, vl.dbValue, fDouble);
   }
 }
 
@@ -61,6 +61,7 @@ void    GetCntCanMonAllUni(bool  fDouble)
     time ti = MonIndexToDate(dw);
 
     InitPushUni();
+    uint wSize = 0;
 
     uchar ibMon = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
     LoadCntMon(ibMon);
@@ -69,25 +70,25 @@ void    GetCntCanMonAllUni(bool  fDouble)
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushCntCanMonAllUni(c-1, ibMon, fDouble);
+      wSize += PushCntCanMonAllUni(c-1, ibMon, fDouble);
     }
 
-    Output2_Code((uint)4*bInBuff9, ((fExt4Flag == true) ? bUNI_OK : bUNI_NOTREADY), ti);
+    Output2_Code(wSize, ((fExt4Flag == true) ? bUNI_OK : bUNI_NOTREADY), ti);
   }
 }
 
 
 
-void    PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTrf, bool  fDouble)
+uchar   PushCntCanMonTarUni(uchar  ibCan, uchar  ibMon, uchar  ibTrf, bool  fDouble)
 {
   if (SupportedExtended4T(ibCan) == false)
   {
-    PushFloatOrDoubleUni(ST4_NOTSUPPORTED, 0, fDouble);
+    return PushFloatOrDoubleUni(ST4_NOTSUPPORTED, 0, fDouble);
   }
   else
   {
     value4t vl = mpCntMonCan4T[ibCan];
-    PushFloatOrDoubleUni(vl.bStatus, vl.mpdbValuesT[ibTrf], fDouble);
+    return PushFloatOrDoubleUni(vl.bStatus, vl.mpdbValuesT[ibTrf], fDouble);
   }
 }
 
@@ -113,6 +114,7 @@ void    GetCntCanMonTrfUni(bool  fDouble)
     time ti = MonIndexToDate(dw);
 
     InitPushUni();
+    uint wSize = 0;
 
     uchar ibMon = (bMONTHS+ibHardMon-bInBuffB-1) % bMONTHS;
     LoadExt4TValues(ibMon);
@@ -123,11 +125,11 @@ void    GetCntCanMonTrfUni(bool  fDouble)
       uchar t;
       for (t=bInBuffC; t<bInBuffC+bInBuffD; t++)
       {
-        PushCntCanMonTarUni(c-1, ti.bMonth-1, t-1, fDouble);
+        wSize += PushCntCanMonTarUni(c-1, ti.bMonth-1, t-1, fDouble);
       }
     }
 
-    Output2_Code((uint)4*bInBuff9*bInBuffD, ((fExt4TFlag == true) ? bUNI_OK : bUNI_NOTREADY), ti);
+    Output2_Code(wSize, ((fExt4TFlag == true) ? bUNI_OK : bUNI_NOTREADY), ti);
   }
 }
 
@@ -153,15 +155,16 @@ void    GetCntCanAllUni(bool  fDouble)
   else
   { 
     InitPushUni();
+    uint wSize = 0;
 
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushTime(mptiEsc_S[c-1]);
-      PushFloatOrDouble(mpdbEsc_S[c-1], fDouble);
+      wSize += PushTime(mptiEsc_S[c-1]);
+      wSize += PushFloatOrDouble(mpdbEsc_S[c-1], fDouble);
     }
 
-    Output2_Code((uint)(4+6)*bInBuff9, ((boDsblEscS != true) ? bUNI_OK : bUNI_NOTREADY), *GetCurrTimeDate());
+    Output2_Code(wSize, ((boDsblEscS != true) ? bUNI_OK : bUNI_NOTREADY), *GetCurrTimeDate());
   }
 }
 
@@ -181,6 +184,7 @@ void    GetCntCanTrfUni(bool  fDouble)
   else
   { 
     InitPushUni();
+    uint wSize = 0;
 
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
@@ -188,12 +192,12 @@ void    GetCntCanTrfUni(bool  fDouble)
       uchar t;
       for (t=bInBuffA; t<bInBuffA+bInBuffB; t++)
       {
-        PushTime(mpCntDayCan5[c-1].tiUpdate);
-        PushFloatOrDouble(mpCntDayCan5[c-1].stValue.mpdbValuesT[t-1], fDouble);
+        wSize += PushTime(mpCntDayCan5[c-1].tiUpdate);
+        wSize += PushFloatOrDouble(mpCntDayCan5[c-1].stValue.mpdbValuesT[t-1], fDouble);
       }
     }
 
-    Output2_Code((uint)(4+6)*bInBuff9*bInBuffB, ((fExt5Flag == true) ? bUNI_OK : bUNI_NOTREADY), *GetCurrTimeDate());
+    Output2_Code(wSize, ((fExt5Flag == true) ? bUNI_OK : bUNI_NOTREADY), *GetCurrTimeDate());
   }
 }
 
