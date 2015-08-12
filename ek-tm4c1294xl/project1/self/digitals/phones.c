@@ -35,7 +35,7 @@ void    ResetPhones(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpphPhones[c].szNumber[0] = '0';
+    mpphPhones[c].szLine[0] = '0';
   }
 
   SaveCache(&chPhones);
@@ -50,7 +50,7 @@ void    ResetPhones(void)
 
 
 
-bool    IsValidPhone(phone  *pph)
+bool    IsValidPhone(line  *pph)
 {
   return true;
 }

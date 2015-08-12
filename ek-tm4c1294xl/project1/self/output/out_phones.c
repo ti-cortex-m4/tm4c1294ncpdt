@@ -17,7 +17,7 @@ OUT_PHONES,C
 void    OutGetPhone(void)
 {
   if (bInBuff6 < bCANALS)
-    Common(&mpphPhones[ bInBuff6 ], sizeof(phone));
+    Common(&mpphPhones[ bInBuff6 ], sizeof(line));
   else
     Result(bRES_BADADDRESS);
 }
@@ -29,12 +29,12 @@ void    OutSetPhone(void)
   {
     if (bInBuff6 < bCANALS)
     {
-      static phone ph;
+      static line ph;
 
       uchar i;
-      for (i=0; i<bPHONE_SIZE; i++)
+      for (i=0; i<bLINE_SIZE; i++)
       {
-        ph.szNumber[i] = InBuff(7+i);
+        ph.szLine[i] = InBuff(7+i);
       }
 
       if (IsValidPhone(&ph) == true)

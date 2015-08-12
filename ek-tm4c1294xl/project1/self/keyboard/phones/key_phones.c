@@ -24,7 +24,7 @@ static uchar            ibCan, ibPos;
 static void Show(void)
 {
   Clear();
-  strcpy(szLo, mpphPhones[ibCan].szNumber);
+  strcpy(szLo, mpphPhones[ibCan].szLine);
   sprintf(szLo+14,"%2u",ibCan+1);
 }
 
@@ -79,8 +79,8 @@ void    key_SetPhones(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        memset((char *)mpphPhones[ibCan].szNumber, 0, bPHONE_SIZE+1);
-        strncpy((char *)mpphPhones[ibCan].szNumber, szLo, ibPos);
+        memset((char *)mpphPhones[ibCan].szLine, 0, sizeof(line));
+        strncpy((char *)mpphPhones[ibCan].szLine, szLo, ibPos);
 
         SaveCache(&chPhones);
       }
@@ -143,7 +143,7 @@ void    key_SetPhones(void)
     {
       enKeyboard = KBD_POSTINPUT2;
 
-      if (ibPos < bPHONE_SIZE)
+      if (ibPos < bLINE_SIZE)
         szLo[ibPos++] = szDigits[bKey];
       else
         Beep();

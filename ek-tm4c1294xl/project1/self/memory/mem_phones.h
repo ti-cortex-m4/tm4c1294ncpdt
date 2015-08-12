@@ -4,7 +4,7 @@ MEM_PHONES.H
 
 ------------------------------------------------------------------------------*/
 
-extern  phone                   mpphPhones[bCANALS];
+extern  line                    mpphPhones[bCANALS];
 
 extern  uchar                   bMaxConnect;
 

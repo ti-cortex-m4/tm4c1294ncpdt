@@ -20,7 +20,7 @@ bool                    mpboEnblCan[bCANALS];
 bool                    boEnblKeys;
 
 // массив паролей счётчиков
-phone                   mpphKeys[bCANALS];
+line                    mpphKeys[bCANALS];
 
 // дополнительные параметры цифровых счётчиков
 ulong                   mpdwAddress1[bCANALS],

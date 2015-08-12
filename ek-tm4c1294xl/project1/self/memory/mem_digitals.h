@@ -12,7 +12,7 @@ extern  bool                    mpboEnblCan[bCANALS];
 
 extern  bool                    boEnblKeys;
 
-extern  phone                   mpphKeys[bCANALS];
+extern  line                    mpphKeys[bCANALS];
 
 extern  ulong                   mpdwAddress1[bCANALS],
                                 mpdwAddress2[bCANALS];

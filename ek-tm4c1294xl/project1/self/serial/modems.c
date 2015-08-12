@@ -191,15 +191,15 @@ uchar   i;
   PushChar('D');
   PushChar('P');
 
-  phone ph = mpphPhones[diCurr.ibPhone - 1];
+  line ph = mpphPhones[diCurr.ibPhone - 1];
 
   Clear();
-  strcpy(szLo, ph.szNumber);
+  strcpy(szLo, ph.szLine);
 
-  for (i=0; i<bPHONE_SIZE; i++)
+  for (i=0; i<bLINE_SIZE; i++)
   {
-    if ( ph.szNumber[i] == 0 ) break;
-    PushChar( ph.szNumber[i] );
+    if ( ph.szLine[i] == 0 ) break;
+    PushChar( ph.szLine[i] );
   }
 
   PushChar('\r');

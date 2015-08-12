@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MAIN_DIGITALS.H
+MAIN_DIGITALS,H
 
 
 ------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ MAIN_DIGITALS.H
 
 
 
-// тип 'цифровой счётчик'
+// цифровой счётчик
 typedef struct
 {
   uchar         ibPort;                 // индекс порта
@@ -20,26 +20,18 @@ typedef struct
 
 
 
-// тип 'номер телефона'
+// строка текста
 typedef struct
 {
-  char          szNumber[bPHONE_SIZE+1];
-} phone;
+  char          szLine[bLINE_SIZE+1];
+} line;
 
 
 
-// тип 'вид опроса счётчиков'
+// вид опроса счётчиков
 typedef enum
 {
   EXT_PROFILE_30MIN,
   EXT_CURRENT_3MIN,
   EXT_PROFILE_CHECKUP
 } extended;
-
-
-
-// тип 'брак связи'
-typedef struct
-{
-  time          tiNow;
-} defects;
