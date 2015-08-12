@@ -15,25 +15,25 @@ FLASH1,C
 #include "../display/lcd.h"
 #include "../display/messages.h"
 #include "flash_control.h"
-#include "flash_define2.h"
-#include "flash2.h"
+#include "flash_define1.h"
+#include "flash1.h"
 
 
 
 static void Enable(void)
 {
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_CS)  =  MASK_FLASH2_CS;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_CS)  =  MASK_FLASH1_CS;
 
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_CS)  = ~MASK_FLASH2_CS;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_CS)  = ~MASK_FLASH1_CS;
 }
 
 
 static void Disable(void)
 {
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_CS)  =  MASK_FLASH2_CS;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_CS)  =  MASK_FLASH1_CS;
 }
 
 
@@ -42,45 +42,45 @@ static void CharOut(uchar  b)
 {
   cdwFlashWriteByte++;
 
-  if (b & 0x80) HWREG(GPIO_FLASH2_SI) = MASK_FLASH2_SI;
-  else HWREG(GPIO_FLASH2_SI) = ~MASK_FLASH2_SI;
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
+  if (b & 0x80) HWREG(GPIO_FLASH1_SI) = MASK_FLASH1_SI;
+  else HWREG(GPIO_FLASH1_SI) = ~MASK_FLASH1_SI;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
 
-  if (b & 0x40) HWREG(GPIO_FLASH2_SI) = MASK_FLASH2_SI;
-  else HWREG(GPIO_FLASH2_SI) = ~MASK_FLASH2_SI;
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
+  if (b & 0x40) HWREG(GPIO_FLASH1_SI) = MASK_FLASH1_SI;
+  else HWREG(GPIO_FLASH1_SI) = ~MASK_FLASH1_SI;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
 
-  if (b & 0x20) HWREG(GPIO_FLASH2_SI) = MASK_FLASH2_SI;
-  else HWREG(GPIO_FLASH2_SI) = ~MASK_FLASH2_SI;
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
+  if (b & 0x20) HWREG(GPIO_FLASH1_SI) = MASK_FLASH1_SI;
+  else HWREG(GPIO_FLASH1_SI) = ~MASK_FLASH1_SI;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
 
-  if (b & 0x10) HWREG(GPIO_FLASH2_SI) = MASK_FLASH2_SI;
-  else HWREG(GPIO_FLASH2_SI) = ~MASK_FLASH2_SI;
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
+  if (b & 0x10) HWREG(GPIO_FLASH1_SI) = MASK_FLASH1_SI;
+  else HWREG(GPIO_FLASH1_SI) = ~MASK_FLASH1_SI;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
 
-  if (b & 0x08) HWREG(GPIO_FLASH2_SI) = MASK_FLASH2_SI;
-  else HWREG(GPIO_FLASH2_SI) = ~MASK_FLASH2_SI;
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
+  if (b & 0x08) HWREG(GPIO_FLASH1_SI) = MASK_FLASH1_SI;
+  else HWREG(GPIO_FLASH1_SI) = ~MASK_FLASH1_SI;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
 
-  if (b & 0x04) HWREG(GPIO_FLASH2_SI) = MASK_FLASH2_SI;
-  else HWREG(GPIO_FLASH2_SI) = ~MASK_FLASH2_SI;
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
+  if (b & 0x04) HWREG(GPIO_FLASH1_SI) = MASK_FLASH1_SI;
+  else HWREG(GPIO_FLASH1_SI) = ~MASK_FLASH1_SI;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
 
-  if (b & 0x02) HWREG(GPIO_FLASH2_SI) = MASK_FLASH2_SI;
-  else HWREG(GPIO_FLASH2_SI) = ~MASK_FLASH2_SI;
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
+  if (b & 0x02) HWREG(GPIO_FLASH1_SI) = MASK_FLASH1_SI;
+  else HWREG(GPIO_FLASH1_SI) = ~MASK_FLASH1_SI;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
 
-  if (b & 0x01) HWREG(GPIO_FLASH2_SI) = MASK_FLASH2_SI;
-  else HWREG(GPIO_FLASH2_SI) = ~MASK_FLASH2_SI;
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
+  if (b & 0x01) HWREG(GPIO_FLASH1_SI) = MASK_FLASH1_SI;
+  else HWREG(GPIO_FLASH1_SI) = ~MASK_FLASH1_SI;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
 }
 
 
@@ -90,44 +90,44 @@ static uchar CharIn(void)
 
   uchar b = 0;
 
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  if(HWREG(GPIO_FLASH2_SO)) b |= 0x80;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  if(HWREG(GPIO_FLASH1_SO)) b |= 0x80;
 
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  if(HWREG(GPIO_FLASH2_SO)) b |= 0x40;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  if(HWREG(GPIO_FLASH1_SO)) b |= 0x40;
 
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  if(HWREG(GPIO_FLASH2_SO)) b |= 0x20;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  if(HWREG(GPIO_FLASH1_SO)) b |= 0x20;
 
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  if(HWREG(GPIO_FLASH2_SO)) b |= 0x10;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  if(HWREG(GPIO_FLASH1_SO)) b |= 0x10;
 
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  if(HWREG(GPIO_FLASH2_SO)) b |= 0x08;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  if(HWREG(GPIO_FLASH1_SO)) b |= 0x08;
 
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  if(HWREG(GPIO_FLASH2_SO)) b |= 0x04;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  if(HWREG(GPIO_FLASH1_SO)) b |= 0x04;
 
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  if(HWREG(GPIO_FLASH2_SO)) b |= 0x02;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  if(HWREG(GPIO_FLASH1_SO)) b |= 0x02;
 
-  HWREG(GPIO_FLASH2_SCK) =  MASK_FLASH2_SCK;
-  HWREG(GPIO_FLASH2_SCK) = ~MASK_FLASH2_SCK;
-  if(HWREG(GPIO_FLASH2_SO)) b |= 0x01;
+  HWREG(GPIO_FLASH1_SCK) =  MASK_FLASH1_SCK;
+  HWREG(GPIO_FLASH1_SCK) = ~MASK_FLASH1_SCK;
+  if(HWREG(GPIO_FLASH1_SO)) b |= 0x01;
 
   return b;
 }
 
 
 
-uchar   ReadStatus2(void)
+uchar   ReadStatus1(void)
 {
   Enable();
 
@@ -139,10 +139,10 @@ uchar   ReadStatus2(void)
 }
 
 
-bool    SafeReadStatus2(void)
+bool    SafeReadStatus1(void)
 {
   uint i = 0;
-  while ((ReadStatus2() & 0x80) == 0)
+  while ((ReadStatus1() & 0x80) == 0)
   {
     if (++i > STATUS_REPEATS)
     {
@@ -157,12 +157,12 @@ bool    SafeReadStatus2(void)
 
 
 
-bool    PageErase2(uint const  wPageOut)
+bool    PageErase1(uint const  wPageOut)
 {
   ASSERT(wPageOut < wPAGES);
   IncFlashControl(wPageOut);
 
-  if (SafeReadStatus2() == false)
+  if (SafeReadStatus1() == false)
     return false;
   else
   {
@@ -182,11 +182,11 @@ bool    PageErase2(uint const  wPageOut)
 
 
 
-bool    PageRead2(uint const  wPageIn)
+bool    PageRead1(uint const  wPageIn)
 {
   ASSERT(wPageIn < wPAGES);
 
-  if (SafeReadStatus2() == false)
+  if (SafeReadStatus1() == false)
     return false;
   else
   {
@@ -210,12 +210,12 @@ bool    PageRead2(uint const  wPageIn)
 
 
 
-bool    PageWrite2(uint const  wPageOut)
+bool    PageWrite1(uint const  wPageOut)
 {
   ASSERT(wPageOut < wPAGES);
   IncFlashControl(wPageOut);
 
-  if (SafeReadStatus2() == false)
+  if (SafeReadStatus1() == false)
     return false;
   else                                  // запись
   {
@@ -233,7 +233,7 @@ bool    PageWrite2(uint const  wPageOut)
     Disable();
   }
 
-  if (SafeReadStatus2() == false)
+  if (SafeReadStatus1() == false)
     return false;
   else                                  // проверка записи
   {
@@ -249,7 +249,7 @@ bool    PageWrite2(uint const  wPageOut)
     Disable();
   }
 
-  if (SafeReadStatus2() == false)
+  if (SafeReadStatus1() == false)
   {
     cwFlashCompareErr++;
     return false;
@@ -282,10 +282,10 @@ static void InitGPIO(void)
 }
 
 
-void    InitFlash2(void)
+void    InitFlash1(void)
 {
   InitGPIO();
   Disable();
 
-  if (SafeReadStatus2() == false) TestError(szBadFlash2);
+  if (SafeReadStatus1() == false) TestError(szBadFlash1);
 }
