@@ -14,11 +14,12 @@ message                 mpszDevices[bDEVICES+1] = {
                                           ".модем          ",
                                           ".СЭТ-4ТМ        ",
                                           ".Меркурий-230   ",
-                                          ".CC-301         "
+                                          ".CC-301         ",
+                                          ".CE301          "
                                       };
 
 uchar const             mpbMaxLines[bDEVICES+1] =
-{ 1, 4, 4, 4 };
+{ 1, 4, 4, 4, 2 };
 
 
 
@@ -41,6 +42,10 @@ bool    IsDevice(uchar  ibDevice)
 
 #ifndef SKIP_C
     case 3:  return(1);
+#endif
+
+#ifndef SKIP_U
+    case 26: return(1);
 #endif
 
     default: return(0);

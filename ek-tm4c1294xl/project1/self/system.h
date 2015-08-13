@@ -103,7 +103,7 @@ SYSTEM.H
 #define bGROUPS         32
 
 // количество типов цифровых счётчиков
-#define bDEVICES        3
+#define bDEVICES        4
 
 // максимальное количество линий учёта в цифровом счётчике
 #define bCHANNELS       128
