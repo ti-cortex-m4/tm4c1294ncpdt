@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-ASSERTS.C
+ASSERTS,C
 
 
 ------------------------------------------------------------------------------*/
@@ -13,7 +13,7 @@ ASSERTS.C
 
 
 ulong                   dwAssertsIdx;
-assert                  mpAsserts[16];
+assert                  mpAsserts[ASSERTS_SIZE];
 
 cache const             chAssertsIdx = {ASSERTS_IDX, &dwAssertsIdx, sizeof(ulong)};
 cache const             chAsserts = {ASSERTS, &mpAsserts, sizeof(mpAsserts)};
@@ -40,7 +40,7 @@ void    ResetAsserts(void)
 
 void    AddAssert(char  *pcFileName, ulong  dwLine)
 {
-  uchar i = dwAssertsIdx % 16;
+  uchar i = dwAssertsIdx % ASSERTS_SIZE;
 
   dwAssertsIdx++;
   SaveCache(&chAssertsIdx);
@@ -49,8 +49,8 @@ void    AddAssert(char  *pcFileName, ulong  dwLine)
   mpAsserts[i].tiEvent = *GetCurrTimeDate();
   mpAsserts[i].dwLine = dwLine;
 
-  memset(&mpAsserts[i].szFileName, 0, 128);
-  strncpy(mpAsserts[i].szFileName, pcFileName, 128);
+  memset(&mpAsserts[i].szFileName, 0, FILE_NAME_SIZE);
+  strncpy(mpAsserts[i].szFileName, pcFileName, FILE_NAME_SIZE);
 
   SaveCache(&chAsserts);
 }
@@ -64,12 +64,12 @@ void    OutAsserts(void)
   PushLong(dwAssertsIdx);
 
   uchar i;
-  for (i=0; i<16; i++)
+  for (i=0; i<ASSERTS_SIZE; i++)
   {
     PushInt(mpAsserts[i].iwEvent);
     PushTime(mpAsserts[i].tiEvent);
     PushLong(mpAsserts[i].dwLine);
-    Push(mpAsserts[i].szFileName, 128);
+    Push(mpAsserts[i].szFileName, FILE_NAME_SIZE);
   }
 
   Output(4+sizeof(mpAsserts));
