@@ -20,6 +20,7 @@ RESPONSE252_CRC,C
 #include "../output/out_defects.h"
 #include "../output/out_nvram.h"
 #include "../output/out_flash.h"
+#include "../kernel/asserts.h"
 
 
 
@@ -52,6 +53,8 @@ void    Response252_CRC(void)
 
     case 14: OutFlashCounters(); break;
     case 15: ResetFlashCounters(); break;
+
+    case 16: OutAsserts(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
