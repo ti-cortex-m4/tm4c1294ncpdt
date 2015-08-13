@@ -12,10 +12,10 @@ ASSERTS.C
 
 
 
-ulong                   dwAsserts;
+ulong                   dwAssertsIdx;
 assert                  mpAsserts[16];
 
-cache const             chAssertsIdx = {ASSERTS_IDX, &dwAsserts, sizeof(ulong)};
+cache const             chAssertsIdx = {ASSERTS_IDX, &dwAssertsIdx, sizeof(ulong)};
 cache const             chAsserts = {ASSERTS, &mpAsserts, sizeof(mpAsserts)};
 
 
@@ -29,7 +29,7 @@ void    InitAsserts(void)
 
 void    ResetAsserts(void)
 {
-	dwAsserts = 0;
+	dwAssertsIdx = 0;
   SaveCache(&chAssertsIdx);
 
   memset(&mpAsserts, 0, sizeof(mpAsserts));
@@ -40,9 +40,9 @@ void    ResetAsserts(void)
 
 void    AddAssert(char  *pcFileName, ulong  dwLine)
 {
-  uchar i = dwAsserts % 16;
+  uchar i = dwAssertsIdx % 16;
 
-  dwAsserts++;
+  dwAssertsIdx++;
   SaveCache(&chAssertsIdx);
 
   mpAsserts[i].iwEvent = i;
@@ -61,7 +61,7 @@ void    OutAsserts(void)
 {
   InitPushCRC();
 
-  PushLong(dwAsserts);
+  PushLong(dwAssertsIdx);
 
   uchar i;
   for (i=0; i<16; i++)
