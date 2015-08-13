@@ -43,7 +43,7 @@ DEVICE_U.C
 //#include        "limits.h"
 //#include        "digitals.h"
 #include "device_k.h"
-//#include        "device_q.h"
+#include "device_q.h"
 //#include        "essential.h"
 //#include        "_timedate.h"
 
