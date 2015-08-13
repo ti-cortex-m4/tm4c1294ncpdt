@@ -29,9 +29,6 @@ gamma - быстрое задание каналов и параметров
 u_hhr u_mnt wSize
 x
 
-error.c - add errors buffer
-error.c - why without WDT reset ?
-
 UART FIFO + sem2reader time
 
 tiKey

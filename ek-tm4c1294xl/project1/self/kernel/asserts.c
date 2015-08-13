@@ -36,7 +36,7 @@ void    AddAssert(char  *pcFileName, ulong  dwLine)
 {
   uchar i = 0;
 
-  mpAsserts[i].iwEvent = ++i;
+  mpAsserts[i].iwEvent = i;
   mpAsserts[i].tiEvent = *GetCurrTimeDate();
   mpAsserts[i].dwLine = dwLine;
 
@@ -51,6 +51,15 @@ void    AddAssert(char  *pcFileName, ulong  dwLine)
 void    OutAsserts(void)
 {
   InitPushCRC();
-  Push(mpAsserts, sizeof(mpAsserts));
+
+  uchar i;
+  for (i=0; i<16; i++)
+  {
+    PushInt(mpAsserts[i].iwEvent);
+    PushTime(mpAsserts[i].tiEvent);
+    PushLong(mpAsserts[i].dwLine);
+    Push(mpAsserts[i].szFileName, 128);
+  }
+
   Output(sizeof(mpAsserts));
 }

@@ -22,9 +22,9 @@ KEY_RESET.C
 #include "../serial/flow.h"
 #include "../output/esc/esc.h"
 #include "../output/unified/uni.h"
-
 #include "../impulses/factors.h"
 #include "../label_global.h"
+#include "../kernel/asserts.h"
 #include "../flash/records.h"
 #include "../flash/storage.h"
 #include "../settings.h"
@@ -80,6 +80,7 @@ void    key_SetReset(void)
           }
 
           BreakLabelGlobal();
+          ResetAsserts();
           ResetRecords();
           ResetSettings(false);
 //          ResetCustom();
@@ -114,6 +115,7 @@ void    key_SetReset(void)
           }
 
           BreakLabelGlobal();
+          ResetAsserts();
           ResetRecords();
           ResetSettings(true);
           ResetDecret();
