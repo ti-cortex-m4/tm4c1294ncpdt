@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE_Q.C
+DEVICE_Q.H
 
 
 ------------------------------------------------------------------------------*/
@@ -20,7 +20,7 @@ void    ReadEnergyQ(void);
 void    InitHeaderQ(void);
 void    QueryHeaderQ(void);
 void    ReadHeaderQ(void);
-bit     ReadDataQ(void);
+bool    ReadDataQ(void);
 
 void    ReadCurrentQ(void);
 

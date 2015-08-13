@@ -4,7 +4,7 @@ DEVICE_Q.C
 
 ------------------------------------------------------------------------------*/
 
-//#include        "main.h"
+#include "../main.h"
 //#include        "xdata.h"
 //#include        "timer0.h"
 //#include        "delay.h"
