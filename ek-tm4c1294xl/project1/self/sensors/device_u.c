@@ -4,7 +4,9 @@ DEVICE_U.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h" 
+#include "../main.h"
+#include "../serial/ports_stack.h"
+#include "../serial/ports_devices.h"
 //#include        "xdata.h"
 //#include        "delay.h"
 //#include        "display.h"

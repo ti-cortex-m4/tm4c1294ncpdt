@@ -225,6 +225,58 @@ void	PushCharDec2Txt(uchar  bT)
 
 
 
+void	PushChar1Bcc(uchar  bT)
+{
+  bT &= 0x7F;
+
+  ACC = bT;
+  if (P == 1) bT |= 0x80;
+
+  PushChar(bT);
+}
+
+
+void	PushChar2Bcc(uchar  bT)
+{
+  PushChar1Bcc(szDigits[ bT / 10 ]);
+  PushChar1Bcc(szDigits[ bT % 10 ]);
+}
+
+
+
+uchar	PopChar0Bcc(void)
+{
+  return(PopChar() & 0x7F);
+}
+
+
+uchar	PopChar1Bcc(void)
+{
+  switch (PopChar0Bcc())
+  {
+	case '0': return(0);
+	case '1': return(1);
+	case '2': return(2);
+	case '3': return(3);
+	case '4': return(4);
+	case '5': return(5);
+	case '6': return(6);
+	case '7': return(7);
+	case '8': return(8);
+	case '9': return(9);
+
+	default:  return(0);
+  }
+}
+
+
+uchar	PopChar2Bcc(void)
+{
+  return(PopChar1Bcc()*10 + PopChar1Bcc());
+}
+
+
+
 uchar   SkipChar(void) {
   switch (ibPort) {
     case 0: return mpbOutBuff0[ iwPush0++ ];

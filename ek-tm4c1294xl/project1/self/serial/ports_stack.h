@@ -26,6 +26,12 @@ void    PushBuffLong(ulong  *pdwData, uint  wSize);
 void    PushCharHex2Txt(uchar  bT);
 void    PushCharDec2Txt(uchar  bT);
 
+void    PushChar1Bcc(uchar  bT);
+void    PushChar2Bcc(uchar  bT);
+uchar   PopChar0Bcc(void);
+uchar   PopChar1Bcc(void);
+uchar   PopChar2Bcc(void);
+
 uchar   SkipChar(void);
 void    Skip(uint  wSize);
 

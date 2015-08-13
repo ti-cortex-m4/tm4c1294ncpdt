@@ -16,6 +16,7 @@ PARAMS2.C
 #include    "../../sensors/device_a.h"
 #include    "../../sensors/device_b.h"
 #include    "../../sensors/device_c.h"
+#include    "../../sensors/device_u.h"
 #include    "../../time/delay.h"
 #include    "../../console.h"
 #include    "../../flash/files.h"
