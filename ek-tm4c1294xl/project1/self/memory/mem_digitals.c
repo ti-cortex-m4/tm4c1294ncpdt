@@ -44,7 +44,8 @@ ulong                   mpdwChannelsA[bCHANNELS],
                         mpdwChannelsB[bCHANNELS];
 
 // промежуточный массив
-double                  mpdbChannelsC[bCHANNELS];
+double                  mpdbChannelsB[bCHANNELS],
+                        mpdbChannelsC[bCHANNELS];
 
 // промежуточная переменная
 time                    tiChannelC;
