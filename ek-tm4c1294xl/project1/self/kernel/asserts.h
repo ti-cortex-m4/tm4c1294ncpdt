@@ -17,7 +17,7 @@ typedef struct
   uint          iwEvent;
   time          tiEvent;
   char          szFileName[128];
-  ulong         wLine;
+  ulong         dwLine;
 } assert;
 
 

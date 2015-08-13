@@ -184,5 +184,7 @@ RESERVE(AUX_INDEX, sizeof(ulong) + bNVRAM_FOOTER)
 
 RESERVE(RECORDS_DSBL, sizeof(mpfRecordDsbl) + bNVRAM_FOOTER)
 
+RESERVE(ASSERTS, sizeof(mpAsserts) + bNVRAM_FOOTER)
+
 END(NVRAM_END)
 } nvram;
