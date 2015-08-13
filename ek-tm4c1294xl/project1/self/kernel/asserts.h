@@ -16,12 +16,16 @@ typedef struct
 {
   uint          iwEvent;
   time          tiEvent;
-  char          szFileName[128];
   ulong         dwLine;
+  char          szFileName[128];
 } assert;
 
 
 #endif
+
+
+extern  assert                  mpAsserts[16];
+
 
 
 void    InitAsserts(void);

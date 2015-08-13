@@ -18,6 +18,7 @@ MAIN,C
 #include "driverlib/timer.h"
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
+#include "kernel/asserts.h"
 #include "hardware/watchdog.h"
 #include "hardware/system_clock.h"
 #include "hardware/sys_tick.h"
@@ -100,6 +101,7 @@ int     main(void)
   InitRTC();
   InitCODE();
 
+  InitAsserts();
   InitRecords();
   InitSettings();
   InitInfrared();
