@@ -12,6 +12,7 @@ PORTS_DEVICES.H
 #include "../digitals/wait_answer.h"
 #include "../digitals/wait_query.h"
 #include "../devices/devices.h"
+#include "../devices/decompress_k.h"
 #include "../isr/serial.h"
 #include "../isr/serial0.h"
 #include "../isr/serial1.h"

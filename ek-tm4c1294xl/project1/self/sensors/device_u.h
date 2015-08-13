@@ -19,7 +19,7 @@ void    QueryHeaderU(void);
 void    ReadHeaderU(void);
 void    ReadHeaderU_SkipLine(uchar  ibLine);
 void    MakeDataU(uchar  ibHou);
-bit     ReadDataU(void);
+bool    ReadDataU(void);
 
 void    ReadCurrentU(void);
 

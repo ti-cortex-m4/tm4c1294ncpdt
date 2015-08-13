@@ -932,7 +932,7 @@ float2  ReadParam(uint  iwPrm)
 #endif
 
 #ifndef SKIP_U
-    case 26: return( ReadParamU() );  break;
+    case 26: return GetFloat2(reValue, ReadParamU());
 #endif
 
     default: return GetFloat2(0, false);
