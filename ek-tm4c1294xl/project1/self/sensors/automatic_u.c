@@ -10,9 +10,9 @@ AUTOMATIC_U.C
 #include "../keyboard/keyboard.h"
 #include "../time/delay.h"
 #include "../time/timedate.h"
-#include "../serial/ports_stack.h"
+#include "../serial/ports.h"
 #include "../serial/ports_devices.h"
-//#include "../devices/devices.h"
+#include "../devices/devices.h"
 //#include "../digitals/digitals_messages.h"
 #include "automatic1.h"
 #include "device_u.h"
@@ -59,13 +59,13 @@ uchar   i;
   QueryCloseU();
 
 
-  reBuffB = mpreTransCnt[ibDig];
+  reBuffB = mpdbTransCnt[ibDig];
 
   for (i=0; i<2; i++) 
   {
     reBuffA = mpreChannelsB[i] * reBuffB;
     mpreChannelsB[i] = reBuffA;
-    mpboChannelsA[i] = boTrue;     
+    mpboChannelsA[i] = true;     
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];
@@ -157,13 +157,13 @@ uchar   i;
   }
 
 
-  reBuffB = mpreTransCnt[ibDig];
+  reBuffB = mpdbTransCnt[ibDig];
 
   for (i=0; i<2; i++) 
   {
     reBuffA = mpreChannelsB[i] * reBuffB;
     mpreChannelsB[i] = reBuffA;
-    mpboChannelsA[i] = boTrue;     
+    mpboChannelsA[i] = true;     
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];

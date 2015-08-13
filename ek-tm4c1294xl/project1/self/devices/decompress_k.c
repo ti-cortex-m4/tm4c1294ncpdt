@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-
+DECOMPRESS_K.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,12 +7,14 @@
 #include "../main.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
+#include "../display/display.h"
+#include "decompress_k.h"
 
 
 
 //#ifndef SKIP_K
 
-void    DecompressK(bit  fShow)
+void    DecompressK(bool  fShow)
 {
 uint    i;
 uchar   j;
@@ -48,7 +50,7 @@ uchar   j;
 }
 
 
-void    DecompressK2(bit  fShow, uchar  bOffset)
+void    DecompressK2(bool  fShow, uchar  bOffset)
 {
 uint    i;
 uchar   j;

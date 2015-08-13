@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-
+DECOMPRESS_K.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    DecompressK(bit  fShow);
-void    DecompressK2(bit  fShow, uchar  bOffset);
+void    DecompressK(bool  fShow);
+void    DecompressK2(bool  fShow, uchar  bOffset);

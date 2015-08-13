@@ -7,6 +7,31 @@ DEVICE_U.C
 #include "../main.h"
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_digitals.h"
+#include "../memory/mem_current.h"
+#include "../memory/mem_factors.h"
+#include "../memory/mem_realtime.h"
+//#include "../memory/mem_energy_spec.h"
+#include "../memory/mem_profile.h"
+#include "../memory/mem_limits.h"
+#include "../display/display.h"
+#include "../keyboard/time/key_timedate.h"
+#include "../time/timedate.h"
+#include "../time/calendar.h"
+#include "../time/delay.h"
+#include "../serial/ports_stack.h"
+#include "../serial/ports_devices.h"
+#include "../serial/ports_common.h"
+#include "../devices/devices.h"
+#include "../devices/devices_time.h"
+//#include "../digitals/current/current_run.h"
+//#include "../digitals/digitals_messages.h"
+//#include "../digitals/limits.h"
+//#include "../digitals/profile/refill.h"
+//#include "../special/special.h"
+//#include "../flash/records.h"
+//#include "../energy.h"
 //#include        "xdata.h"
 //#include        "delay.h"
 //#include        "display.h"
@@ -281,7 +306,7 @@ uchar   j;
 void    MakeDataU(uchar  ibHou)
 {
   ShowProgressDigHou();      
-  reBuffB = mprePulseHou[ibDig];
+  reBuffB = mpdbPulseHou[ibDig];
 
   for (ibCan=0; ibCan<ibMinorMax; ibCan++)        
   {
@@ -291,12 +316,12 @@ void    MakeDataU(uchar  ibHou)
     wBuffD = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
     mpwChannels[ibCan] = wBuffD;
 
-    mpreEngFracDigCan[ibDig][ibCan] -= (real)wBuffD/reBuffB;
+    mpreEngFracDigCan[ibDig][ibCan] -= (float)wBuffD/reBuffB;
   }
 }
 
 
-bit     ReadDataU(void)
+bool    ReadDataU(void)
 {
 uchar   i,j;
        
@@ -343,7 +368,7 @@ void    ReadCurrentU(void)
 {
 uchar   i;
 
-  reBuffB = mprePulseHou[ibDig];
+  reBuffB = mpdbPulseHou[ibDig];
 
   for (i=0; i<2; i++)
   {

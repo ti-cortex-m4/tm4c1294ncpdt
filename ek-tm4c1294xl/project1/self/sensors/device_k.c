@@ -65,7 +65,7 @@ uchar	i,a,b,bT;
 
   reBuffA = 0;
 }
-
+*/
 
 
 // запись адреса
@@ -93,7 +93,7 @@ uint    i;
 
   PushChar1Bcc('!');
 }
-*/
+
 
 // запись адреса
 void    PushAddress2Bcc(void)
@@ -222,7 +222,7 @@ void    ReadEnergyK(uchar  ibLine)
   PopRealK();
 
   SetCanReal(mpreChannelsB, ibLine);
-  mpboChannelsA[ibLine] = boTrue;
+  mpboChannelsA[ibLine] = true;
 
   reBuffA = *PGetCanReal(&mpreChannelsB, ibLine);
 }
