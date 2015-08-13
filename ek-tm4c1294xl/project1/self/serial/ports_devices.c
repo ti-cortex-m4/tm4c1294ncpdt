@@ -199,7 +199,6 @@ void    PckQueryIO(uint  cwIn, uchar  cbOut)
 
 
 
-// передача запроса по прерыванию (из выходного буфера)
 void    BccQueryIO1(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
 {
 uchar	i,bT;
@@ -207,7 +206,7 @@ uchar	i,bT;
   cbHeaderBcc = cbMaxHeader;
   cwInBuffBcc = 0;
 
-  InitPush();
+  InitPush(0);
   SkipChar();
 
   bT = 0;
@@ -218,7 +217,6 @@ uchar	i,bT;
 }
 
 
-// передача запроса по прерыванию (из выходного буфера)
 void    BccQueryIO2(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
 {
 uchar	i,bT;
@@ -226,7 +224,7 @@ uchar	i,bT;
   cbHeaderBcc = cbMaxHeader;
   cwInBuffBcc = 0;
 
-  InitPush();
+  InitPush(0);
   for (i=0; i<12; i++) SkipChar();
 
   bT = 0;
@@ -237,7 +235,7 @@ uchar	i,bT;
 }
 
 
-bit     MakeBccInBuff(void)
+bool    MakeBccInBuff(void)
 {
 uchar   bT;
 uint    i;

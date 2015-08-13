@@ -5,6 +5,8 @@ TODO / *else* /
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../serial/ports.h"
+#include "../digitals/digitals_status.h"
 #include "devices_pause.h"
 
 

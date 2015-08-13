@@ -73,7 +73,7 @@ void    PushAddress1Bcc(void)
 {
 uint    i;
 
-  InitPush();
+  InitPush(0);
   PushChar1Bcc('/');
   PushChar1Bcc('?');
 

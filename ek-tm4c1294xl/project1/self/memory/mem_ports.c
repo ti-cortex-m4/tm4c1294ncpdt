@@ -63,3 +63,11 @@ uint                    cwInBuffSave;
 
 // промежуточный буфер
 uchar                   mpbInBuffSave[wINBUFF_SIZE];
+
+
+
+// счётчик служебных символов
+uchar                   cbHeaderBcc;
+
+// счётчик принятых байт
+uint                    cwInBuffBcc;

@@ -6,6 +6,7 @@ AUTOMATIC_U.C
 
 #include "../main.h"
 #include "../memory/mem_digitals.h"
+#include "../memory/mem_factors.h"
 #include "../display/display.h"
 #include "../keyboard/keyboard.h"
 #include "../time/delay.h"
