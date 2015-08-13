@@ -10,7 +10,7 @@
 
 
 
-#ifndef SKIP_K
+//#ifndef SKIP_K
 
 void    DecompressK(bit  fShow)
 {
@@ -83,5 +83,4 @@ uchar   j;
   }
 }
 
-#endif
-
+//#endif

@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE_U.C
 
-
+ Энергомера СЕ301
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -16,7 +16,7 @@ DEVICE_U.C
 //#include        "ports.h"
 //#include        "limits.h"
 //#include        "digitals.h"
-//#include        "device_k.h"
+#include "device_k.h"
 //#include        "device_q.h"
 //#include        "essential.h"
 //#include        "_timedate.h"
@@ -36,7 +36,7 @@ void    QueryOptionU(void)
 {
 uchar   i;
 
-  InitPush();
+  InitPush(0);
   PushChar1Bcc(0x06);
 
   switch (mppoPorts[ diCurr.ibPort ].ibSpeed)
@@ -64,7 +64,7 @@ uchar   i;
 
 void    QueryCorrectU(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc('/');
   PushChar1Bcc('?');
@@ -147,7 +147,7 @@ void    QueryEnergyMonU(uchar  ibLine)
 
 void    QueryEnergySpecU(uchar  ibLine)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
@@ -200,7 +200,7 @@ void    InitHeaderU(void)
 
 void    QueryHeaderU_26(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
