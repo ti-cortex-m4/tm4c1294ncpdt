@@ -37,12 +37,13 @@ void    AddAssert(char  *pcFileName, ulong  dwLine)
   uchar i = 0;
 
   mpAsserts[i].iwEvent = ++i;
-  mpAsserts[i].tiEvent = *GetCurrTimeDate;
+  mpAsserts[i].tiEvent = *GetCurrTimeDate();
+  mpAsserts[i].dwLine = dwLine;
 
-  memset(&mpAsserts, 0, sizeof(mpAsserts));
+  memset(&mpAsserts[i].szFileName, 0, 128);
   strncpy(mpAsserts[i].szFileName, pcFileName, 128);
 
-  mpAsserts[i].dwLine = dwLine;
+  SaveCache(&chAsserts);
 }
 
 
@@ -50,8 +51,6 @@ void    AddAssert(char  *pcFileName, ulong  dwLine)
 void    OutAsserts(void)
 {
   InitPushCRC();
-
   Push(mpAsserts, sizeof(mpAsserts));
-
   Output(sizeof(mpAsserts));
 }
