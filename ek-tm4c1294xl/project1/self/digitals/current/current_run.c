@@ -255,6 +255,8 @@ uchar   ibCan;
     LoadPrevDigital(ibCan);
     if (CompareCurrPrevLines(ibDig, ibCan) == 1)
     {
+      mpbCurrent2Curr[ibCan/8] |= (0x80 >> ibCan%8);
+
       if (boMntEscS == true)
       {
         mpdbEsc_S[ibCan] = mpdbValueCntHou[ibCan] * mpdwBase[ibCan];
@@ -316,7 +318,7 @@ uchar   ibCan;
         else
         {
           LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES);
-          mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImp; // TODO bufferize
+          mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImp;
           SaveImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
 
           MakeSpecCurrent(ibCan, (uint)dwImp);
