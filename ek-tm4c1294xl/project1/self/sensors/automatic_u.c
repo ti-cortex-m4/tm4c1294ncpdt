@@ -22,17 +22,17 @@ AUTOMATIC_U.C
 
 #ifndef SKIP_U
 
-bit     ReadTimeDateK(void);
+bool    ReadTimeDateK(void);
 
 
 
-bit     ReadTimeDateU(void)
+bool    ReadTimeDateU(void)
 {
   return ReadTimeDateK();
 }
 
 
-bit     ReadSensorU(void)
+bool    ReadSensorU(void)
 {
 uchar   i;
 
@@ -75,7 +75,7 @@ uchar   i;
 
 
 
-bit     ReadCntMonCanU(uchar  ibMonth)
+bool    ReadCntMonCanU(uchar  ibMonth)
 {
 uchar   i;
 
