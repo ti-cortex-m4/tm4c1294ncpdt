@@ -5,6 +5,7 @@ DEVICE_K.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_digitals.h"
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
 //#include        "xdata.h"
