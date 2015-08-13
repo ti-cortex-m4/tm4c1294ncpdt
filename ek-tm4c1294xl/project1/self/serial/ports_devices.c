@@ -198,6 +198,92 @@ void    PckQueryIO(uint  cwIn, uchar  cbOut)
 
 
 
+// передача запроса по прерыванию (из выходного буфера)
+void    BccQueryIO1(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
+{
+uchar	i,bT;
+
+  cbHeaderBcc = cbMaxHeader;
+  cwInBuffBcc = 0;
+
+  InitPush();
+  SkipChar();
+
+  bT = 0;
+  for (i=0; i<cbOut-2; i++) bT += SkipChar();
+  PushChar1Bcc(bT);
+
+  Query(cwIn,cbOut,1);
+}
+
+
+// передача запроса по прерыванию (из выходного буфера)
+void    BccQueryIO2(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
+{
+uchar	i,bT;
+
+  cbHeaderBcc = cbMaxHeader;
+  cwInBuffBcc = 0;
+
+  InitPush();
+  for (i=0; i<12; i++) SkipChar();
+
+  bT = 0;
+  for (i=0; i<cbOut-13; i++) bT += SkipChar();
+  PushChar1Bcc(bT);
+
+  Query(cwIn,cbOut,1);
+}
+
+
+bit     MakeBccInBuff(void)
+{
+uchar   bT;
+uint    i;
+
+  InitPop(1);
+
+  bT = 0;
+  for (i=0; i<CountInBuff()-2; i++) bT += PopChar0Bcc();
+
+  return((bT & 0x7F) == PopChar0Bcc());
+}
+
+
+serial  BccInput(void)
+{
+  InitWaitAnswer();
+
+  while (1)
+  {
+    if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
+
+    ResetWDT();
+    ShowWaitAnswer(1);
+    if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
+
+    if (mpSerial[ibPort] == SER_INPUT_MASTER)
+      DecompressK(0);
+
+    if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
+    {
+      if ( MakeBccInBuff() )
+        mpSerial[ibPort] = SER_GOODCHECK;
+      else
+        mpSerial[ibPort] = SER_BADCHECK;
+
+      break;
+    }
+    else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
+             (mpSerial[ibPort] == SER_BADLINK)) break;
+  }
+
+
+  return( mpSerial[ibPort] );
+}
+
+
+
 void    ChecksumError(void)
 {
   mpcwOutputC[ibDig]++;
