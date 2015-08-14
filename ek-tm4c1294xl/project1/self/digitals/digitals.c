@@ -101,6 +101,22 @@ bool    CompareLines(uchar  ibDig, uchar  ibCan)
 }
 
 
+bool    SkipLine(uchar  ibDig, uchar  ibLine)
+{
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    if( (GetDigitalPort(ibDig)    == GetDigitalPort(c))    &&
+        (GetDigitalPhone(ibDig)   == GetDigitalPhone(c))   &&
+        (GetDigitalDevice(ibDig)  == GetDigitalDevice(c))  &&
+        (GetDigitalAddress(ibDig) == GetDigitalAddress(c)) &&
+        (ibLine                   == GetDigitalLine(c))) return false;
+  }
+
+  return true;
+}
+
+
 
 uchar   GetDigitalPort(uchar  ibCan) {
   return mpdiDigital[ibCan].ibPort;

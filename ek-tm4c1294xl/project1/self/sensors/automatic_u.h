@@ -4,6 +4,6 @@ AUTOMATIC_U.H
 
 ------------------------------------------------------------------------------*/
 
-bool    ReadTimeDateU(void);
-bool    ReadSensorU(void);
-bool    ReadCntMonCanU(uchar  ibMonth);
+time2   ReadTimeCanU(void);
+double2 ReadCntCurrU(void);
+double2 ReadCntMonCanU(uchar  ibMonth);

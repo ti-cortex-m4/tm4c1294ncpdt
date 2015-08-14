@@ -16,5 +16,54 @@ AUTOMATIC_K.C
 #include "../devices/devices.h"
 //#include "../digitals/digitals_messages.h"
 //#include "automatic1.h"
-//#include "device_u.h"
+#include "device_k.h"
 #include "automatic_k.h"
+
+
+
+time2   ReadTimeCanK(void)
+{
+uchar   i;
+
+  Clear();
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryCloseK();
+    QueryTimeK();
+
+    if (BccInput() != SER_GOODCHECK) break;
+  }
+
+  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  ShowPercent(25);
+
+  time ti1 = ReadTimeK();
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryCloseK();
+    QueryDateK();
+
+    if (BccInput() == SER_GOODCHECK) break;
+  }
+
+  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  ShowPercent(50);
+
+  time ti2 = ReadDateK();
+
+
+  QueryCloseK();
+
+  ti2.bHour   = ti1.bHour;
+  ti2.bMinute = ti1.bMinute;
+  ti2.bSecond = ti1.bSecond;
+
+
+  tiChannelC = ti2;
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
+
+  return GetTime2(ti2, true);
+}

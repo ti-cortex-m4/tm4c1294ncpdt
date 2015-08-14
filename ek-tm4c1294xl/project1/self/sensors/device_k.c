@@ -291,10 +291,10 @@ uint    i;
 
   BccQueryIO1(1+1, 4+9+1, 0);
 }
+*/
 
 
 
-// посылка запроса на чтение времени
 void    QueryTimeK(void)
 {
   PushAddress2Bcc();
@@ -311,7 +311,7 @@ void    QueryTimeK(void)
   BccQueryIO2(1+17+2, 15+8+1, 0);
 }
 
-
+/*
 // посылка запроса на чтение времени
 void    QueryTimeSpecK(void)
 {
@@ -333,21 +333,23 @@ void    QueryTimeSpecK(void)
 
   BccQueryIO1(1+17+2, 4+8+1, 0);
 }
+*/
 
 
-// чтение времени
-void    ReadTimeAltK(void)
+time    ReadTimeK(void)
 {
   InitPop(7);
 
-  tiAlt.bHour   = PopChar2Bcc(); PopChar();
-  tiAlt.bMinute = PopChar2Bcc(); PopChar();
-  tiAlt.bSecond = PopChar2Bcc(); PopChar();
+  time ti;
+  ti.bHour   = PopChar2Bcc(); PopChar();
+  ti.bMinute = PopChar2Bcc(); PopChar();
+  ti.bSecond = PopChar2Bcc(); PopChar();
+
+  return ti;
 }
 
 
 
-// посылка запроса на чтене даты
 void    QueryDateK(void)
 {
   PushAddress2Bcc();
@@ -364,7 +366,7 @@ void    QueryDateK(void)
   BccQueryIO2(1+20+2, 15+8+1, 0);
 }
 
-
+/*
 // посылка запроса на чтене даты
 void    QueryDateSpecK(void)
 {
@@ -386,19 +388,22 @@ void    QueryDateSpecK(void)
 
   BccQueryIO1(1+20+2, 4+8+1, 0);
 }
+*/
 
 
-// чтение даты
-void    ReadDateAltK(void)
+void    ReadDateK(void)
 {
   InitPop(7+3);
 
-  tiAlt.bDay   = PopChar2Bcc(); PopChar();
-  tiAlt.bMonth = PopChar2Bcc(); PopChar();
-  tiAlt.bYear  = PopChar2Bcc(); PopChar();
+  time ti;
+  ti.bDay   = PopChar2Bcc(); PopChar();
+  ti.bMonth = PopChar2Bcc(); PopChar();
+  ti.bYear  = PopChar2Bcc(); PopChar();
+
+  return ti;
 }
 
-
+/*
 void    QueryCorrectK(void)
 {
   InitPush();
