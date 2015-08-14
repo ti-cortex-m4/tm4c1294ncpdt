@@ -93,7 +93,7 @@ uchar   i, j;
         ti.bYear--;
       }
 
-      ti.bDay = GetDaysInMonthYM();
+      ti.bDay = GetDaysInMonthYM(ti.bYear, ti.bMonth);
     } 
 
     for (j=0; j<2; j++)

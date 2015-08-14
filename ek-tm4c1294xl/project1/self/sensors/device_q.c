@@ -25,7 +25,7 @@ DEVICE_Q.C
 
 #ifndef SKIP_Q
 
-void    PopRealQ(void)
+void    PopFloatQ(void)
 {
 uchar	i,a,b,bT;
 
@@ -228,7 +228,7 @@ uchar   i;
 
   for (i=0; i<Q_LINES; i++) 
   {
-    PopRealQ();
+    PopFloatQ();
     mpreChannelsB[i] = reBuffA;
   }
 }
@@ -327,7 +327,7 @@ uchar   j;
 
   for (j=0; j<48; j++)
   {
-    PopRealQ();
+    PopFloatQ();
     mpreBuffCanHou[ibMinor][j] = reBuffA/2;
   }
 }

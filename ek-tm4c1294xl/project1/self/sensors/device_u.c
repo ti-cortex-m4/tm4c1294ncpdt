@@ -184,7 +184,7 @@ void    QueryEnergySpecU(uchar  ibLine)
 void    ReadEnergyU(uchar  ibLine)
 {
   InitPop(1);
-  mpdbChannelsB[ibLine] = PopRealQ();
+  mpdbChannelsB[ibLine] = PopFloatQ();
 }
 
 
@@ -272,7 +272,7 @@ void    ReadHeaderU(void)
   uchar i;
   for (i=0; i<48; i++)
   {
-    PopRealQ();
+    PopFloatQ();
     mpreBuffCanHou[ibMinor][i] = reBuffA/2;
   }
 }

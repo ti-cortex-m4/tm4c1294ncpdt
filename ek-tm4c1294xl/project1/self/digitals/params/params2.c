@@ -792,9 +792,9 @@ void    ReadParamU1(void)
 {
   InitPop(1);
 
-  PopRealQ(); mpreParam[PAR_I1] = reValue*1000;
-  PopRealQ(); mpreParam[PAR_I2] = reValue*1000;
-  PopRealQ(); mpreParam[PAR_I3] = reValue*1000;
+  PopFloatQ(); mpreParam[PAR_I1] = reValue*1000;
+  PopFloatQ(); mpreParam[PAR_I2] = reValue*1000;
+  PopFloatQ(); mpreParam[PAR_I3] = reValue*1000;
 }
 
 
@@ -802,9 +802,9 @@ void    ReadParamU2(void)
 {
   InitPop(1);
 
-  PopRealQ(); mpreParam[PAR_U1] = reValue;
-  PopRealQ(); mpreParam[PAR_U2] = reValue;
-  PopRealQ(); mpreParam[PAR_U3] = reValue;
+  PopFloatQ(); mpreParam[PAR_U1] = reValue;
+  PopFloatQ(); mpreParam[PAR_U2] = reValue;
+  PopFloatQ(); mpreParam[PAR_U3] = reValue;
 }
 
 
@@ -812,9 +812,9 @@ void    ReadParamU3(void)
 {
   InitPop(1);
 
-  PopRealQ(); mpreParam[PAR_P1] = reValue*1000;
-  PopRealQ(); mpreParam[PAR_P2] = reValue*1000;
-  PopRealQ(); mpreParam[PAR_P3] = reValue*1000;
+  PopFloatQ(); mpreParam[PAR_P1] = reValue*1000;
+  PopFloatQ(); mpreParam[PAR_P2] = reValue*1000;
+  PopFloatQ(); mpreParam[PAR_P3] = reValue*1000;
 }
 
 
@@ -822,7 +822,7 @@ void    ReadParamU4(void)
 {
   InitPop(1);
 
-  PopRealQ(); mpreParam[PAR_F] = reValue;
+  PopFloatQ(); mpreParam[PAR_F] = reValue;
 }
 
 
