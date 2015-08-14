@@ -80,6 +80,7 @@ KEYBOARD_KEY.C
 #include "tariffs/key_gaps_flag.h"
 #include "tariffs/key_gaps.h"
 #include "digitals/key_hide_messages.h"
+#include "sensors/key_control_q.h"
 #include "sensors/key_short_profile_c.h"
 #include "digitals/profile/key_dsbl_refill.h"
 #include "digitals/key_max_repeats.h"
@@ -261,6 +262,7 @@ void    Keyboard_Key(void)
       case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;
       case wSET_GAPS:           key_SetGaps();          break;
 
+      case wSET_CONTROL_Q:      key_SetControlQ();      break;
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
@@ -511,6 +513,7 @@ void    Keyboard_Key(void)
       case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;
       case wSET_GAPS:           key_GetGaps();          break;
 
+      case wSET_CONTROL_Q:      key_SetControlQ();      break;
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
@@ -680,6 +683,7 @@ void    Keyboard_Key(void)
       case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;
       case wSET_GAPS:           key_SetGaps();          break;
 
+      case wSET_CONTROL_Q:      key_SetControlQ();      break;
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;

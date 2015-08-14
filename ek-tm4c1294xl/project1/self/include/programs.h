@@ -274,6 +274,8 @@ PROGRAMS.H
 #define wGET_READTRANS              354
 #define wGET_READPULSE              355
 
+#define wSET_CONTROL_Q              402
+#define wSET_CONTROL_K              403
 #define wSET_SHORT_PROFILE_C        404
 #define wSET_DSBL_REFILL            405
 #define wSET_MAX_REPEATS            409
