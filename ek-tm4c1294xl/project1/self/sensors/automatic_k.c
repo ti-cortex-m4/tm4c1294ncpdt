@@ -32,7 +32,7 @@ uchar   i;
     QueryCloseK();
     QueryTimeK();
 
-    if (BccInput() != SER_GOODCHECK) break;
+    if (BccInput() == SER_GOODCHECK) break;
   }
 
   if (i == bMINORREPEATS) return GetTime2(tiZero, false);
