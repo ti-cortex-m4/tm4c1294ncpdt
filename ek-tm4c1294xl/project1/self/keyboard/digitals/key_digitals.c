@@ -290,7 +290,7 @@ static uchar ibCan;
     else if (enKeyboard == KBD_POSTINPUT4)
     {
       diT.bDevice = GetCharLo(5,6);
-      if (diT.bDevice <= bDEVICES)
+      if (IsDevice(diT.bDevice))
       {
         if (diT.bDevice == 0)
         {
