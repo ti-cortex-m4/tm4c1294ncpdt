@@ -6,6 +6,7 @@ TODO / *else* /
 
 #include "../main.h"
 #include "../memory/mem_digitals.h"
+#include "../memory/mem_flow.h"
 #include "../serial/ports.h"
 #include "../digitals/digitals_status.h"
 #include "devices_pause.h"

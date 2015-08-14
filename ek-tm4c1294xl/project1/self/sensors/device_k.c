@@ -8,6 +8,7 @@ DEVICE_K.C
 #include "../memory/mem_digitals.h"
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
+#include "../display/display.h"
 //#include        "xdata.h"
 //#include        "ports.h"
 //#include        "digitals.h"
