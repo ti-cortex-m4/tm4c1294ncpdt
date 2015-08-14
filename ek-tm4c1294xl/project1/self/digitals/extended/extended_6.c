@@ -42,7 +42,7 @@ bool    LoadCntMonCan6(uchar  ibMonFrom)
 
 void    InitExtended6(void)
 {
-  LoadCacheBoolean(&chExt6Flag, false);
+  LoadCacheBool(&chExt6Flag, false);
   LoadFile(&flCntBoxCan6);
 }
 

@@ -54,7 +54,7 @@ bool LoadExt4Values(uchar  ibMon)
 
 void    InitExtended4(void)
 {
-  LoadCacheBoolean(&chExt4Flag, false);
+  LoadCacheBool(&chExt4Flag, false);
   LoadCacheChar(&chExt4Months, 1, 12, 4);
   LoadFile(&flExt4EnblCan);
 }

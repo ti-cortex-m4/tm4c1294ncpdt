@@ -20,7 +20,7 @@ cache const             chBlockEsc = {BLOCK_ESC, &boBlockEsc, sizeof(bool)};
 void    InitEsc(void)
 {
   LoadCacheChar(&chMachinesEsc, 1, bMAXMACHINES, bMAXMACHINES);
-  LoadCacheBoolean(&chBlockEsc, false);
+  LoadCacheBool(&chBlockEsc, false);
 }
 
 
