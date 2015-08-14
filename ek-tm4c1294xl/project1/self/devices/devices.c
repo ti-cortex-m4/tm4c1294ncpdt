@@ -37,6 +37,7 @@ DEVICES.C
 #include "../sensors/device_b2.h"
 #include "../sensors/device_b12.h"
 #include "../sensors/device_c.h"
+#include "../sensors/device_e.h"
 #include "../sensors/device_k.h"
 #include "../sensors/device_u.h"
 #include "../serial/ports.h"
