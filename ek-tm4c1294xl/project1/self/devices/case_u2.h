@@ -117,8 +117,7 @@
     case DEV_TIME_U2:                      
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltK();                  
-        tiDig = tiAlt;                  
+        tiDig = ReadTimeK();
         MakePause(DEV_POSTTIME_U2);
       }
       else                                    
@@ -146,8 +145,7 @@
     case DEV_DATE_U2:                      
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadDateAltK();                  
-        tiDig = tiAlt;                  
+        tiDig = ReadDateK(tiDig);
         MakePause(DEV_POSTDATE_U2);
       }
       else                                    
@@ -220,7 +218,7 @@
       else
       {
         Clear();
-        sprintf(szLo+4, "блок: %bu", bPlcUSize);
+        sprintf(szLo+4, "блок: %u", bPlcUSize);
         MakeLongPause(DEV_PREVHEADER_U4, 1);
       }
       break;

@@ -38,7 +38,7 @@ uchar   i;
   if (i == bMINORREPEATS) return GetTime2(tiZero, false);
   ShowPercent(25);
 
-  time ti1 = ReadTimeK();
+  time ti = ReadTimeK();
 
 
   for (i=0; i<bMINORREPEATS; i++)
@@ -52,14 +52,10 @@ uchar   i;
   if (i == bMINORREPEATS) return GetTime2(tiZero, false);
   ShowPercent(50);
 
-  time ti2 = ReadDateK();
+  ti = ReadDateK(ti);
 
 
   QueryCloseK();
-
-  ti2.bHour   = ti1.bHour;
-  ti2.bMinute = ti1.bMinute;
-  ti2.bSecond = ti1.bSecond;
 
 
   tiChannelC = ti2;

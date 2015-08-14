@@ -29,7 +29,7 @@ time    ReadTimeK(void);
 
 void    QueryDateK(void);
 void    QueryDateSpecK(void);
-time    ReadDateK(void);
+time    ReadDateK(time  ti);
 
 void    QueryCorrectK(void);
 void    QueryControlK(void);
