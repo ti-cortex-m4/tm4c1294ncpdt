@@ -9,6 +9,7 @@ PORTS_STACK.H
 #include "../memory/mem_serial1.h"
 #include "../memory/mem_serial2.h"
 #include "../memory/mem_serial3.h"
+#include "../kernel/parity.h"
 #include "../display/lines.h"
 #include "ports.h"
 
@@ -229,8 +230,7 @@ void	PushChar1Bcc(uchar  bT)
 {
   bT &= 0x7F;
 
-  ACC = bT;
-  if (P == 1) bT |= 0x80;
+  if (EvenParity(bT)) bT |= 0x80;
 
   PushChar(bT);
 }

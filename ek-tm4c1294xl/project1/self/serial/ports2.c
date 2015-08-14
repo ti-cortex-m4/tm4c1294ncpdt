@@ -9,6 +9,10 @@ PORTS2.C
 #include "../memory/mem_serial1.h"
 #include "../memory/mem_serial2.h"
 #include "../memory/mem_serial3.h"
+#include "../isr/serial0.h"
+#include "../isr/serial1.h"
+#include "../isr/serial2.h"
+#include "../isr/serial3.h"
 #include "ports.h"
 
 
@@ -91,7 +95,7 @@ void    SetCountInBuff(uint  wT)
   }
 }
 
-/*
+
 void    InputMode(void)
 {
   switch (ibPort)
@@ -103,4 +107,3 @@ void    InputMode(void)
     default: ASSERT(false);
   }
 }
-*/

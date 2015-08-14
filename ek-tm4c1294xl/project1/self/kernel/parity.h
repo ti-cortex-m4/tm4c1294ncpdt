@@ -4,5 +4,5 @@ PARITY,H
 
 ------------------------------------------------------------------------------*/
 
-char    calc_even_parity(uchar  b);
-char    calc_odd_parity(uchar  b);
+bool    EvenParity(uchar  b);
+bool    OddParity(uchar  b);

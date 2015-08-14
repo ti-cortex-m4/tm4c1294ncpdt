@@ -5,6 +5,7 @@ DEVICE_Q.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../serial/ports.h"
 //#include        "xdata.h"
 //#include        "timer0.h"
 //#include        "delay.h"
@@ -23,11 +24,12 @@ DEVICE_Q.C
 
 
 
-#ifndef SKIP_Q
+//#ifndef SKIP_Q
 
-void    PopFloatQ(void)
+float   PopFloatQ(void)
 {
 uchar	i,a,b,bT;
+float reBuffA, reBuffB;
 
   a = 0;
   b = 0;
@@ -50,7 +52,7 @@ uchar	i,a,b,bT;
       if ((bT == ')') || (bT == ','))
       {
         for (i=a; i<b; i++) reBuffA *= 10;
-        return;
+        return reBuffA;
       }
 
       if ((bT >= '0') && (bT <= '9'))
@@ -63,10 +65,10 @@ uchar	i,a,b,bT;
     }
   }
 
-  reBuffA = 0;
+  return 0;
 }
 
-
+/*
 void    QueryCloseQ(void)
 {
   QueryCloseK();
@@ -413,6 +415,6 @@ uchar   i;
 
   MakeCurrent();
 }
-
-#endif
+*/
+//#endif
 
