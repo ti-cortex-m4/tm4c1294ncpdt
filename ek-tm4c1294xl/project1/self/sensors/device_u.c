@@ -272,8 +272,7 @@ void    ReadHeaderU(void)
   uchar i;
   for (i=0; i<48; i++)
   {
-    PopFloatQ();
-    mpreBuffCanHou[ibMinor][i] = reBuffA/2;
+    mpflBuffCanHou[ibMinor][i] = PopFloatQ()/2;
   }
 }
 
@@ -282,7 +281,9 @@ void    ReadHeaderU_SkipLine(uchar  ibLine)
 {
   uchar i;
   for (i=0; i<48; i++)
-    mpreBuffCanHou[ibLine][i] = 0;
+  {
+    mpflBuffCanHou[ibLine][i] = 0;
+  }
 }
 
 
@@ -296,13 +297,13 @@ void    MakeDataU(uchar  ibHou)
   uchar i;
   for (i=0; i<ibMinorMax; i++)
   {
-    reBuffA = mpreBuffCanHou[i][ibHou];
-    mpreEngFracDigCan[ibDig][i] += reBuffA;
+    float fl = mpflBuffCanHou[i][ibHou];
+    mpflEngFracDigCan[ibDig][i] += fl;
 
-    uint wT = (uint)(mpreEngFracDigCan[ibDig][i]*dbPulseHou);
-    mpwChannels[i] = wT;
+    uint w = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulseHou);
+    mpwChannels[i] = w;
 
-    mpreEngFracDigCan[ibDig][i] -= (float)wT/dbPulseHou;
+    mpflEngFracDigCan[ibDig][i] -= (float)w/dbPulseHou;
   }
 }
 

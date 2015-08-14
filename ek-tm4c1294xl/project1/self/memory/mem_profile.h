@@ -61,6 +61,6 @@ extern  ulong                   dwValueC;
 
 
 
-extern  float                   mpreBuffCanHou[4][48];
+extern  float                   mpflBuffCanHou[4][48];
 
-extern  float                   mpreEngFracDigCan[bCANALS][6];
+extern  float                   mpflEngFracDigCan[bCANALS][6];
