@@ -76,7 +76,7 @@ double2 ReadCntMonCanU(uchar  ibMonth)
 uchar   i, j;
 
   time2 ti2 = ReadTimeCanK();
-  if (ti2.fValid == false) return(0);
+  if (ti2.fValid == false) return GetDouble2(0, false);
 
   time ti = ti2.tiValue;
   if (ti.bMonth == ibMonth+1)
@@ -93,7 +93,7 @@ uchar   i, j;
         ti.bYear--;
       }
 
-      ti.bDay = DaysInMonth();
+      ti.bDay = GetDaysInMonthYM();
     } 
 
     for (j=0; j<2; j++)
