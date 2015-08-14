@@ -172,8 +172,11 @@ typedef enum
   SHORT_PROFILE_C       = KEYS_LEVEL_B + sizeof(uchar) + bNVRAM_FOOTER,
   CONTROL_Q             = SHORT_PROFILE_C + sizeof(bool) + bNVRAM_FOOTER,
   CONTROL_K             = CONTROL_Q + sizeof(bool) + bNVRAM_FOOTER,
+  PLC_U_FLAG            = CONTROL_K + sizeof(bool) + bNVRAM_FOOTER,
+  PLC_U_SIZE            = PLC_U_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  PLC_U_SHUTDOWN        = PLC_U_SIZE + sizeof(uchar) + bNVRAM_FOOTER,
 
-  CORRECT1              = CONTROL_K + sizeof(bool) + bNVRAM_FOOTER,
+  CORRECT1              = PLC_U_SHUTDOWN + sizeof(uint) + bNVRAM_FOOTER,
   CORRECT2_FLAG         = CORRECT1 + sizeof(Correct1) + bNVRAM_FOOTER,
 
   KEY_INDEX             = CORRECT2_FLAG + sizeof(bool) + bNVRAM_FOOTER,

@@ -92,3 +92,12 @@ bool                    boShortProfileC;
 
 // флаг коррекции времени счетчиков Энергомера CE304
 bool                    boControlQ;
+
+// признак
+bool                    boPlcUFlag;
+
+// размер
+uchar                   bPlcUSize;
+
+// размер
+uint                    wPlcUShutdown;

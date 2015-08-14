@@ -45,7 +45,7 @@ bool LoadExt4TValues(uchar  ibMon)
 
 void    InitExtended4T(void) 
 {
-  LoadCacheBoolean(&chExt4TFlag, false);
+  LoadCacheBool(&chExt4TFlag, false);
   LoadCacheChar(&chExt4TMonths, 1, 12, 4);
 }
 

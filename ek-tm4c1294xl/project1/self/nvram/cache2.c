@@ -10,7 +10,7 @@ CACHE2.C
 
 
 
-void    LoadCacheBoolean(cache const  *pch, bool  boDef)
+void    LoadCacheBool(cache const  *pch, bool  boDef)
 {
   LoadCache(pch);
   bool *pboVal = (bool *) pch->pbBuff;
@@ -31,6 +31,19 @@ void    LoadCacheChar(cache const  *pch, uchar  bMin, uchar  bMax, uchar  bDef)
   if (!((*pbVal >= bMin) && (*pbVal <= bMax)))
   {
     *pbVal = bDef;
+    SaveCache(pch);
+  }
+}
+
+
+void    LoadCacheInt(cache const  *pch, uint  wMin, uint  wMax, uint  wDef)
+{
+  LoadCache(pch);
+  uint *pwVal = (uint *) pch->pbBuff;
+
+  if (!((*pwVal >= wMin) && (*pwVal <= wMax)))
+  {
+    *pwVal = wDef;
     SaveCache(pch);
   }
 }

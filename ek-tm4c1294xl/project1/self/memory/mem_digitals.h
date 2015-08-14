@@ -64,3 +64,9 @@ extern  uchar                   bKeysLevelB;
 extern  bool                    boShortProfileC;
 
 extern  bool                    boControlQ;
+
+extern  bool                    boPlcUFlag;
+
+extern  uchar                   bPlcUSize;
+
+extern  uint                    wPlcUShutdown;

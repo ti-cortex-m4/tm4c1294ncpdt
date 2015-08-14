@@ -23,7 +23,7 @@ void    InitPhones(void)
   LoadCache(&chPhones);
 
   LoadCacheChar(&chMaxConnect, 1, 180, 60);
-  LoadCacheBoolean(&chCustomModem, false);
+  LoadCacheBool(&chCustomModem, false);
 }
 
 
