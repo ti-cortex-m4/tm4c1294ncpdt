@@ -35,13 +35,13 @@ time2   ReadTimeCanU(void)
 
 double2 ReadCntCurrU(void)
 {
-uchar   i, j;
+uchar   i,j;
 
   Clear();
 
   for (j=0; j<2; j++)
   {
-    if (SkipLine(ibDig, j) == 1) { mpdbChannelsB[j] = 0; continue; }
+    if (SkipLine(ibDig, j) == 1) { mpdbChannelsC[j] = 0; continue; }
 
     for (i=0; i<bMINORREPEATS; i++)
     {
@@ -62,7 +62,7 @@ uchar   i, j;
 
   for (i=0; i<2; i++) 
   {
-    mpdbChannelsC[i] = mpdbChannelsB[i] * mpdbTransCnt[ibDig];
+    mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;     
   }
 
@@ -73,7 +73,7 @@ uchar   i, j;
 
 double2 ReadCntMonCanU(uchar  ibMonth)
 {
-uchar   i, j;
+uchar   i,j;
 
   time2 ti2 = ReadTimeCanK();
   if (ti2.fValid == false) return GetDouble2(0, false);
@@ -98,7 +98,7 @@ uchar   i, j;
 
     for (j=0; j<2; j++)
     {
-      if (SkipLine(ibDig, j) == 1) { mpdbChannelsB[j] = 0; continue; }
+      if (SkipLine(ibDig, j) == 1) { mpdbChannelsC[j] = 0; continue; }
 
       for (i=0; i<bMINORREPEATS; i++)
       {
@@ -129,7 +129,7 @@ uchar   i, j;
 
     for (j=0; j<2; j++)
     {
-      if (SkipLine(ibDig, j) == 1) { mpdbChannelsB[j] = 0; continue; }
+      if (SkipLine(ibDig, j) == 1) { mpdbChannelsC[j] = 0; continue; }
 
       for (i=0; i<bMINORREPEATS; i++)
       {
@@ -157,7 +157,7 @@ uchar   i, j;
 
   for (i=0; i<2; i++) 
   {
-    mpdbChannelsC[i] = mpdbChannelsB[i] * mpdbTransCnt[ibDig];
+    mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;     
   }
 
