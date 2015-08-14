@@ -185,7 +185,7 @@ void    ReadEnergyU(uchar  ibLine)
 {
   InitPop(1);
 
-  mpdbChannelsC[ibLine] = PopFloatQ();
+  mpdbChannelsC[ibLine] = PopDoubleQ();
 }
 
 
@@ -273,7 +273,7 @@ void    ReadHeaderU(void)
   uchar i;
   for (i=0; i<48; i++)
   {
-    mpflBuffCanHou[ibMinor][i] = PopFloatQ()/2;
+    mpflBuffCanHou[ibMinor][i] = PopDoubleQ()/2;
   }
 }
 

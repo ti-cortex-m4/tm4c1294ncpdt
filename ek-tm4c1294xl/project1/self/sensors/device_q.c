@@ -26,25 +26,24 @@ DEVICE_Q.C
 
 //#ifndef SKIP_Q
 
-float   PopFloatQ(void)
+double  PopDoubleQ(void)
 {
-uchar a,b,bT;
-float flA,flB;
+double  dbA,dbB;
 
-  a = 0;
-  b = 0;
+  uchar a = 0;
+  uchar b = 0;
 
   uchar i;
   for (i=0; i<40; i++)
   {
-    bT = PopChar() & 0x7F;
+    uchar bT = PopChar() & 0x7F;
 
     if (a == 0)
     { 
       if (bT == '(') a = i+1;
 
-      flA = 0;
-      flB = 1;
+      dbA = 0;
+      dbB = 1;
     }
     else
     {
@@ -52,8 +51,8 @@ float flA,flB;
 
       if ((bT == ')') || (bT == ','))
       {
-        for (i=a; i<b; i++) flA *= 10;
-        return flA;
+        for (i=a; i<b; i++) dbA *= 10;
+        return dbA;
       }
 
       if ((bT >= '0') && (bT <= '9'))
@@ -61,8 +60,8 @@ float flA,flB;
       else 
         break;
 
-      flA += flB*bT;
-      flB /= 10;
+      dbA += dbB*bT;
+      dbB /= 10;
     }
   }
 

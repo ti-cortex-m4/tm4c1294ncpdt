@@ -35,5 +35,4 @@ tiKey
 params
 
 вывод дампа обмена со счетчиком
-ReadFloatQ double
 P15 просмотр счетчиков
