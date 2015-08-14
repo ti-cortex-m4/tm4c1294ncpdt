@@ -30,8 +30,7 @@ extern  bool                    mpboChannelsA[bCHANNELS];
 extern  ulong                   mpdwChannelsA[bCHANNELS],
                                 mpdwChannelsB[bCHANNELS];
 
-extern  double                  mpdbChannelsB[bCHANNELS],
-                                mpdbChannelsC[bCHANNELS];
+extern  double                  mpdbChannelsC[bCHANNELS];
 
 extern  time                    tiChannelC;
 

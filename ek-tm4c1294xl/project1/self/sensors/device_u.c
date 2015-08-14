@@ -184,13 +184,14 @@ void    QueryEnergySpecU(uchar  ibLine)
 void    ReadEnergyU(uchar  ibLine)
 {
   InitPop(1);
-  mpdbChannelsB[ibLine] = PopFloatQ();
+
+  mpdbChannelsC[ibLine] = PopFloatQ();
 }
 
 
 void    ReadEnergyU_SkipLine(uchar  ibLine)
 {
-  mpdbChannelsB[ibLine] = 0;
+  mpdbChannelsC[ibLine] = 0;
 }
 
 
@@ -351,7 +352,7 @@ void    ReadCurrentU(void)
   uchar i;
   for (i=0; i<2; i++)
   {
-    mpdwBaseDig[i] = mpdbChannelsB[i] * mpdbPulseHou[ibDig];
+    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseHou[ibDig];
   }
 
   MakeCurrent();
