@@ -28,12 +28,13 @@ DEVICE_Q.C
 
 float   PopFloatQ(void)
 {
-uchar	i,a,b,bT;
-float reBuffA, reBuffB;
+uchar a,b,bT;
+float flA,flB;
 
   a = 0;
   b = 0;
 
+  uchar i;
   for (i=0; i<40; i++)
   {
     bT = PopChar() & 0x7F;
@@ -42,8 +43,8 @@ float reBuffA, reBuffB;
     { 
       if (bT == '(') a = i+1;
 
-      reBuffA = 0;
-      reBuffB = 1;
+      flA = 0;
+      flB = 1;
     }
     else
     {
@@ -51,8 +52,8 @@ float reBuffA, reBuffB;
 
       if ((bT == ')') || (bT == ','))
       {
-        for (i=a; i<b; i++) reBuffA *= 10;
-        return reBuffA;
+        for (i=a; i<b; i++) flA *= 10;
+        return flA;
       }
 
       if ((bT >= '0') && (bT <= '9'))
@@ -60,8 +61,8 @@ float reBuffA, reBuffB;
       else 
         break;
 
-      reBuffA += reBuffB*bT;
-      reBuffB /= 10;
+      flA += flB*bT;
+      flB /= 10;
     }
   }
 
