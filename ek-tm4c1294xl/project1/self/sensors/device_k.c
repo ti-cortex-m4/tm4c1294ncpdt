@@ -366,11 +366,11 @@ void    QueryDateK(void)
   BccQueryIO2(1+20+2, 15+8+1, 0);
 }
 
-/*
-// посылка запроса на чтене даты
+
+
 void    QueryDateSpecK(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
@@ -388,14 +388,13 @@ void    QueryDateSpecK(void)
 
   BccQueryIO1(1+20+2, 4+8+1, 0);
 }
-*/
 
 
-time    ReadDateK(void)
+
+time    ReadDateK(time  ti)
 {
   InitPop(7+3);
 
-  time ti;
   ti.bDay   = PopChar2Bcc(); PopChar();
   ti.bMonth = PopChar2Bcc(); PopChar();
   ti.bYear  = PopChar2Bcc(); PopChar();
