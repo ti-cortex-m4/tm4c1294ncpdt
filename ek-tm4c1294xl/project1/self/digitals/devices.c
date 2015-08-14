@@ -18,14 +18,14 @@ message                 mpszDevices[bDEVICES+1] = {
                                           ".CE301          "
                                       };
 
-uchar const             mpbMaxLines[bDEVICES+1] =
-{ 1, 4, 4, 4, 2 };
+uchar const             mpbMaxLines[bMAXDEVICES+1] =
+{ 1, 4, 4, 4, 4, 16, 64, 16, 4, 6, 1, 1, 4, 4, 1, 4, 4, 1, 1, 1, 1, 4, 4, 4, 1, 2, 2 };
 
 
 
-bool    IsDevice(uchar  ibDevice)
+bool    IsDevice(uchar  bDevice)
 {
-  switch (ibDevice)
+  switch (bDevice)
   {
     case 0:  return(1);
 
