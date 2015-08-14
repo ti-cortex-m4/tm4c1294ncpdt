@@ -386,7 +386,7 @@ void    key_SearchBySpeed(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibXmax >= bDEVICES+1) ibXmax = 0;
+      if (++ibXmax >= bMAXDEVICES+1) ibXmax = 0;
       ShowDeviceName(ibXmax);
     } 
     else Beep();
@@ -397,7 +397,7 @@ void    key_SearchBySpeed(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibXmax > 0) ibXmax--; else ibXmax = bDEVICES;
+      if (ibXmax > 0) ibXmax--; else ibXmax = bMAXDEVICES;
       ShowDeviceName(ibXmax);
     } 
     else Beep();
@@ -698,7 +698,7 @@ void    key_SearchByNumber(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibXmax >= bDEVICES+1) ibXmax = 1;
+      if (++ibXmax >= bMAXDEVICES+1) ibXmax = 1;
       ShowDeviceName(ibXmax);
     } 
     else Beep();
@@ -709,7 +709,7 @@ void    key_SearchByNumber(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibXmax > 1) ibXmax--; else ibXmax = bDEVICES;
+      if (ibXmax > 1) ibXmax--; else ibXmax = bMAXDEVICES;
       ShowDeviceName(ibXmax);
     } 
     else Beep();
