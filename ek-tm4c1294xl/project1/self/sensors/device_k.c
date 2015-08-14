@@ -5,7 +5,9 @@ DEVICE_K.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_ports.h"
 #include "../memory/mem_digitals.h"
+#include "../memory/mem_realtime.h"
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
 #include "../display/display.h"
@@ -139,8 +141,6 @@ void    QueryCloseK(void)
 }
 
 
-/*
-// посылка запроса на начало обмена
 void    QueryOpenK(void)
 {
   QueryCloseK();
@@ -154,7 +154,6 @@ void    QueryOpenK(void)
 }
 
 
-// чтение текстовой строки
 void    ReadOpenK(void)
 {
 uchar   i,bT;
@@ -172,7 +171,7 @@ uchar   i,bT;
 }
 
 
-
+/*
 // посылка запроса на чтение энергии
 void    QueryEnergySpecK(uchar  ibLine)
 {
@@ -228,18 +227,17 @@ void    ReadEnergyK(uchar  ibLine)
 
   reBuffA = *PGetCanReal(&mpreChannelsB, ibLine);
 }
+*/
 
 
-
-// посылка запроса с параметрами доступа
 void    QueryOptionK(void)
 {
 uchar   i;
 
-  InitPush();
+  InitPush(0);
   PushChar1Bcc(0x06);
 
-  switch (mppoPorts[ diCurr.ibPort ].ibSpeed)
+  switch (mppoPorts[ diCurr.ibPort ].ibBaud)
   {
     case 0:  i = '2'; break;
     case 1:  i = '3'; break;
@@ -266,7 +264,7 @@ void    QueryPasswordK(void)
 { 
 uint    i;
 
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('P');
@@ -291,7 +289,7 @@ uint    i;
 
   BccQueryIO1(1+1, 4+9+1, 0);
 }
-*/
+
 
 
 
@@ -311,11 +309,11 @@ void    QueryTimeK(void)
   BccQueryIO2(1+17+2, 15+8+1, 0);
 }
 
-/*
+
 // посылка запроса на чтение времени
 void    QueryTimeSpecK(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
@@ -333,7 +331,7 @@ void    QueryTimeSpecK(void)
 
   BccQueryIO1(1+17+2, 4+8+1, 0);
 }
-*/
+
 
 
 time    ReadTimeK(void)
@@ -422,12 +420,12 @@ void    QueryCorrectK(void)
 
   Query(1000, 2+6+2, 1);
 }
-
+*/
 
 // посылка запроса на коррекцию времени
 void    QueryControlK(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('W');
@@ -454,7 +452,7 @@ void    QueryControlK(void)
 }
 
 
-
+/*
 void    QueryHeaderK_13(void)
 {
   InitPush();

@@ -2104,7 +2104,7 @@ void    RunDevices(void)
       if (tiCurr.bSecond < 3) {
         MakePause(DEV_CORRECT_U2);
       } else {
-        ShowTimeOneE();
+        ShowTimeOneE(ibDig);
         MakePause(DEV_PREVCORRECT_U2);
       }
       break;
