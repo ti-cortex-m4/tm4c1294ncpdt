@@ -6,7 +6,7 @@ DEVICE_Q.H
 
 #define Q_LINES   4
 
-float   PopFloatQ(void);
+double  PopDoubleQ(void);
 
 void    QueryCloseQ(void);
 void    QueryOptionQ(void);
