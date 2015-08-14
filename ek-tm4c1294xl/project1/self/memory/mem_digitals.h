@@ -62,3 +62,5 @@ extern  uint                    mpcwFailure2[bCANALS];
 extern  uchar                   bKeysLevelB;
 
 extern  bool                    boShortProfileC;
+
+extern  bool                    boControlQ;

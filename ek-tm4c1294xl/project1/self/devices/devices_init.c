@@ -53,6 +53,7 @@ cache const             chManageTime = {MANAGE_TIME, &boManageTime, sizeof(bool)
 
 cache const             chKeysLevelB = {KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
 cache const             chShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, sizeof(bool)};
+cache const             chControlQ = {CONTROL_Q, &boControlQ, sizeof(bool)};
 
 
 
@@ -64,14 +65,9 @@ void    InitDevices1(void)
   LoadCache(&chControlTime);
   LoadCache(&chManageTime);
 
-  LoadCache(&chKeysLevelB);
-  if ((bKeysLevelB < 1) || (bKeysLevelB > 2))
-  {
-    bKeysLevelB = 2;
-    SaveCache(&chKeysLevelB);
-  }
-
+  LoadCache(&chKeysLevelB, 1, 2, 2);
   LoadCache(&chShortProfileC);
+  LoadCache(&chControlQ);
 
   InitMaxRepeats();
   InitDef();
@@ -139,6 +135,9 @@ void    ResetDevices(bool  fFull)
 
   boShortProfileC = false;
   SaveCache(&chShortProfileC);
+
+  boControlQ = false;
+  SaveCache(&chControlQ);
 
   ResetMaxRepeats();
   ResetDef();
