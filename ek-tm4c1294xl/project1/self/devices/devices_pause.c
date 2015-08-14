@@ -15,6 +15,8 @@ TODO / *else* /
 
 void    DevicesPause(void)
 {
+uchar   bT;
+
 #ifndef SKIP_G
     if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10))
     {

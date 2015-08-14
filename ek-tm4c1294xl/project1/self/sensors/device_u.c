@@ -31,6 +31,7 @@ DEVICE_U.C
 #include "../digitals/limits.h"
 //#include "../digitals/profile/refill.h"
 //#include "../special/special.h"
+#include "../hardware/watchdog.h"
 //#include "../flash/records.h"
 //#include "../energy.h"
 //#include        "xdata.h"
@@ -127,7 +128,7 @@ void    QueryEnergyAbsU(uchar  ibLine)
 }
 
 
-void    QueryEnergyDayU(uchar  ibLine)
+void    QueryEnergyDayU(uchar  ibLine, time  ti)
 {
   PushAddress2Bcc();
 
@@ -138,11 +139,11 @@ void    QueryEnergyDayU(uchar  ibLine)
   PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
 
   PushChar1Bcc('(');
-  PushChar2Bcc(tiAlt.bDay);
+  PushChar2Bcc(ti.bDay);
   PushChar1Bcc('.');
-  PushChar2Bcc(tiAlt.bMonth);
+  PushChar2Bcc(ti.bMonth);
   PushChar1Bcc('.');
-  PushChar2Bcc(tiAlt.bYear);
+  PushChar2Bcc(ti.bYear);
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
@@ -150,7 +151,7 @@ void    QueryEnergyDayU(uchar  ibLine)
 }
 
 
-void    QueryEnergyMonU(uchar  ibLine)
+void    QueryEnergyMonU(uchar  ibLine, time  ti)
 {
   PushAddress2Bcc();
 
@@ -161,9 +162,9 @@ void    QueryEnergyMonU(uchar  ibLine)
   PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
 
   PushChar1Bcc('(');
-  PushChar2Bcc(tiAlt.bMonth);
+  PushChar2Bcc(ti.bMonth);
   PushChar1Bcc('.');
-  PushChar2Bcc(tiAlt.bYear);
+  PushChar2Bcc(ti.bYear);
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
@@ -197,15 +198,13 @@ void    QueryEnergySpecU(uchar  ibLine)
 void    ReadEnergyU(uchar  ibLine)
 {
   InitPop(1);
-
-  PopRealQ();
-  mpreChannelsB[ibLine] = reBuffA;
+  mpdbChannelsB[ibLine] = PopRealQ();
 }
 
 
 void    ReadEnergyU_SkipLine(uchar  ibLine)
 {
-  mpreChannelsB[ibLine] = 0;
+  mpdbChannelsB[ibLine] = 0;
 }
 
 
@@ -215,7 +214,7 @@ void    InitHeaderU(void)
     wBaseCurr = 0;  // счетчик суток
   else 
   {
-    wBaseCurr = mpcwStartAbsCan[ibDig];
+    wBaseCurr = mpcwStartAbs16Can[ibDig];
     sprintf(szLo,"   начало %2bu    ",wBaseCurr);
     DelayMsg();
   }
@@ -255,19 +254,16 @@ void    QueryHeaderU_26(void)
 
 void    QueryHeaderU(void)
 {
-  NoShowTime(1);
+	HideCurrTime(1);
 
   if (wBaseCurr == 0) 
     tiDig = tiDigPrev;
   else
   {
-    tiAlt = tiDigPrev;
-    dwBuffC = DateToDayIndex();
-       
-    dwBuffC -= wBaseCurr;   
-     
-    DayIndexToDate(dwBuffC);
-    tiDig = tiAlt;
+    ulong dw = DateToDayIndex(tiDigPrev);
+    dw -= wBaseCurr;
+    tiDig = DayIndexToDate(dw);
+
     tiDig.bHour   = 23;
     tiDig.bMinute = 30;
   }           
@@ -282,32 +278,31 @@ void    QueryHeaderU(void)
 
 void    ReadHeaderU(void)
 {
-uchar   j;
-
   InitPop(1);
 
-  for (j=0; j<48; j++)
+  uchar i;
+  for (i=0; i<48; i++)
   {
     PopRealQ();
-    mpreBuffCanHou[ibMinor][j] = reBuffA/2;
+    mpreBuffCanHou[ibMinor][i] = reBuffA/2;
   }
 }
 
 
 void    ReadHeaderU_SkipLine(uchar  ibLine)
 {
-uchar   j;
-
-  for (j=0; j<48; j++)
-    mpreBuffCanHou[ibLine][j] = 0;
+  uchar i;
+  for (i=0; i<48; i++)
+    mpreBuffCanHou[ibLine][i] = 0;
 }
 
 
 
 void    MakeDataU(uchar  ibHou)
 {
-  ShowProgressDigHou();      
-  reBuffB = mpdbPulseHou[ibDig];
+  ShowProgressDigHou();
+
+  double dbPulseHou = mpdbPulseHou[ibDig];
 
   uchar i;
   for (i=0; i<ibMinorMax; i++)
@@ -315,10 +310,10 @@ void    MakeDataU(uchar  ibHou)
     reBuffA = mpreBuffCanHou[i][ibHou];
     mpreEngFracDigCan[ibDig][i] += reBuffA;
 
-    wBuffD = (uint)(mpreEngFracDigCan[ibDig][i]*reBuffB);
-    mpwChannels[i] = wBuffD;
+    uint wT = (uint)(mpreEngFracDigCan[ibDig][i]*dbPulseHou);
+    mpwChannels[i] = wT;
 
-    mpreEngFracDigCan[ibDig][i] -= (float)wBuffD/reBuffB;
+    mpreEngFracDigCan[ibDig][i] -= (float)wT/dbPulseHou;
   }
 }
 
@@ -327,11 +322,9 @@ bool    ReadDataU(void)
 {
 uchar   i,j;
        
-  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",           // показываем время/дату часового блока
-          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
        
-  tiAlt = tiDig;
-  if (SearchDefHouIndex() == 0) return(1);             
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
        
   if ((tiDig.bDay   == tiCurr.bDay)   &&
       (tiDig.bMonth == tiCurr.bMonth) &&
@@ -340,22 +333,19 @@ uchar   i,j;
   else
     j = 0;
       
-  tiAlt = tiDig;
-  dwHouIndex = DateToHouIndex();
+  ulong dwHouIndex = DateToHouIndex(tiDig);
 
   for (i=j; i<48; i++) 
   {           
     ResetWDT();
     MakeDataU(47-i);
       
-    tiAlt = tiDig;
-    MakePrevHou();
+    MakeSpecial(tiDig);
     if (MakeStopHou(0) == 0) return(0);
                 
     dwHouIndex--;
        
-    HouIndexToDate(dwHouIndex);
-    tiDig = tiAlt;
+    tiDig = HouIndexToDate(dwHouIndex);
       
     iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;      
   }
@@ -368,14 +358,10 @@ uchar   i,j;
 
 void    ReadCurrentU(void)
 {
-uchar   i;
-
-  reBuffB = mpdbPulseHou[ibDig];
-
+  uchar i;
   for (i=0; i<2; i++)
   {
-    dwBuffC = mpreChannelsB[i] * reBuffB;
-    mpdwBaseDig[i] = dwBuffC;
+    mpdwBaseDig[i] = mpdbChannelsB[i] * mpdbPulseHou[ibDig];
   }
 
   MakeCurrent();
