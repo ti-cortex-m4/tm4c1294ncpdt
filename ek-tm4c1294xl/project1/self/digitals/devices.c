@@ -25,41 +25,41 @@ uchar const             mpbMaxLines[bMAXDEVICES+1] =
 
 bool    IsDevice(uchar  bDevice)
 {
+  ASSERT(bDevice <= bMAXDEVICES);
+
   switch (bDevice)
   {
-    case 0:  return(1);
+    case 0:  return true;
 
 #ifndef SKIP_A
     case 15:
-    case 1:  return(1);
+    case 1:  return true;
 #endif
 
 #ifndef SKIP_B
     case 12:
     case 8:
-    case 2:  return(1);
+    case 2:  return true;
 #endif
 
 #ifndef SKIP_C
-    case 3:  return(1);
+    case 3:  return true;
 #endif
 
 #ifndef SKIP_U
-    case 26: return(1);
+    case 26: return true;
 #endif
 
-    default: return(0);
+    default: return false;
   }
 }
 
 
 
-void    ShowDeviceName(uchar  ibDevice)
+void    ShowDeviceName(uchar  bDevice)
 {
-  if (ibDevice < bDEVICES+1)
-  {
-    ShowLo( mpszDevices[ibDevice] );  
-    (IsDevice(ibDevice) == 1) ? (szLo[15] = '+') : (szLo[15] = '-');
-  }
-  else Error();          
+  ASSERT(bDevice <= bMAXDEVICES);
+
+  ShowLo( mpszDevices[bDevice] );
+  (IsDevice(bDevice)) ? (szLo[15] = '+') : (szLo[15] = '-');
 }
