@@ -35,7 +35,7 @@ bool    ReadTimeDateU(void)
 
 bool    ReadSensorU(void)
 {
-uchar   i;
+uchar   i,ibZmin;
 
   Clear();
 
@@ -75,7 +75,7 @@ uchar   i;
 
 bool    ReadCntMonCanU(uchar  ibMonth)
 {
-uchar   i;
+uchar   i,ibZmin;
 
   if (ReadTimeDateK() == 0) return(0);
 
