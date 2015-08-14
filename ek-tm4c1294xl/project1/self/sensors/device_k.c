@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE_K.C
 
- ЦЭ6850М
+ Энергомера ЦЭ6850М
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -9,6 +9,7 @@ DEVICE_K.C
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
 #include "../display/display.h"
+#include "../time/delay.h"
 //#include        "xdata.h"
 //#include        "ports.h"
 //#include        "digitals.h"
@@ -121,13 +122,12 @@ void    PushLineBcc(uchar  ibLine)
     default: PushChar1Bcc('Q'); PushChar1Bcc('I'); break;
   }
 }
+*/
 
 
-
-// посылка запроса на окончание обмена
 void    QueryCloseK(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('B');
@@ -139,7 +139,7 @@ void    QueryCloseK(void)
 }
 
 
-
+/*
 // посылка запроса на начало обмена
 void    QueryOpenK(void)
 {
@@ -391,7 +391,7 @@ void    QueryDateSpecK(void)
 */
 
 
-void    ReadDateK(void)
+time    ReadDateK(void)
 {
   InitPop(7+3);
 

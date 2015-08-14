@@ -9,7 +9,7 @@ PARITY,C
 
 
 
-static char const       nibble_parity[16] = {
+static char const       mpbNibbleParity[16] = {
                           0, 1, 1, 0,
                           1, 0, 0, 1,
                           1, 0, 0, 1,
@@ -17,13 +17,13 @@ static char const       nibble_parity[16] = {
 
 
 
-char    calc_even_parity(uchar  b)
+bool    EvenParity(uchar  b)
 {
-  return nibble_parity[b & 0xf] ^ nibble_parity[(b >> 4) & 0xf];
+  return mpbNibbleParity[b & 0xf] ^ mpbNibbleParity[(b >> 4) & 0xf];
 }
 
 
-char    calc_odd_parity(uchar  b)
+bool    OddParity(uchar  b)
 {
-  return !calc_even_parity(b);
+  return !EvenParity(b);
 }
