@@ -58,3 +58,7 @@ extern  uint                    mpcwOutputZ[bCANALS],
 extern  time                    tiValueA, tiValueB, tiValueC;
 
 extern  ulong                   dwValueC;
+
+
+
+extern  float                    mpreBuffCanHou[4][48];

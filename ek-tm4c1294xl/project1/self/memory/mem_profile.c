@@ -77,3 +77,8 @@ time                    tiValueA, tiValueB, tiValueC;
 
 // глобальная переменная
 ulong                   dwValueC;
+
+
+
+// промежуточный массив
+float                mpreBuffCanHou[4][48];

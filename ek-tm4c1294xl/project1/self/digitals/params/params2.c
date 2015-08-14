@@ -879,7 +879,7 @@ bool    ReadParamU(void)
 
     case PAR_F  : reValue = mpreParam[PAR_F];   break;
 
-    default: return(0); break;
+    default: return(0);
   }
 
   return(1);

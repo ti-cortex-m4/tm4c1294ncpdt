@@ -60,12 +60,9 @@ uchar   i;
   QueryCloseU();
 
 
-  reBuffB = mpdbTransCnt[ibDig];
-
   for (i=0; i<2; i++) 
   {
-    reBuffA = mpreChannelsB[i] * reBuffB;
-    mpreChannelsB[i] = reBuffA;
+    mpreChannelsB[i] = mpreChannelsB[i] * mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;     
   }
 
