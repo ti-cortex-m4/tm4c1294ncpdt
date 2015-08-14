@@ -58,8 +58,8 @@ uchar   i;
   QueryCloseK();
 
 
-  tiChannelC = ti2;
+  tiChannelC = ti;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
-  return GetTime2(ti2, true);
+  return GetTime2(ti, true);
 }
