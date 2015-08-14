@@ -151,7 +151,7 @@ void    ResetDevices(bool  fFull)
   bPlcUSize = 6;
   SaveCache(&chPlcUSize);
 
-  bPlcUShutdown = 100;
+  wPlcUShutdown = 100;
   SaveCache(&chPlcUShutdown);
 
   ResetMaxRepeats();
