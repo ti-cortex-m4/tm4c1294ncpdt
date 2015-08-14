@@ -62,11 +62,11 @@ uchar   i,ibZmin;
 
   for (i=0; i<2; i++) 
   {
-    mpreChannelsB[i] = mpreChannelsB[i] * mpdbTransCnt[ibDig];
+    mpdbChannelsB[i] = mpdbChannelsB[i] * mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;     
   }
 
-  reBuffA = mpreChannelsB[diCurr.ibLine];
+  reBuffA = mpdbChannelsB[diCurr.ibLine];
 
   return(1);
 }
@@ -157,11 +157,11 @@ uchar   i,ibZmin;
 
   for (i=0; i<2; i++) 
   {
-    mpreChannelsB[i] = mpreChannelsB[i] * mpdbTransCnt[ibDig];
+    mpreChannelsB[i] = mpdbChannelsB[i] * mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;     
   }
 
-  reBuffA = mpreChannelsB[diCurr.ibLine];
+  reBuffA = mpdbChannelsB[diCurr.ibLine];
 
   return(1);
 }
