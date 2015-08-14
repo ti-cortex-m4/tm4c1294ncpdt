@@ -14,7 +14,7 @@ AUTOMATIC_U.C
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
-//#include "../digitals/digitals_messages.h"
+#include "../digitals/digitals.h"
 #include "automatic1.h"
 #include "device_u.h"
 #include "automatic_u.h"
@@ -23,38 +23,38 @@ AUTOMATIC_U.C
 
 #ifndef SKIP_U
 
-bool    ReadTimeDateK(void);
+time2   ReadTimeCanK(void);
 
 
 
-bool    ReadTimeDateU(void)
+time2   ReadTimeCanU(void)
 {
-  return ReadTimeDateK();
+  return ReadTimeCanK();
 }
 
 
-bool    ReadSensorU(void)
+double2 ReadCntCurrU(void)
 {
-uchar   i,ibZmin;
+uchar   i, j;
 
   Clear();
 
-  for (ibZmin=0; ibZmin<2; ibZmin++)
+  for (j=0; j<2; j++)
   {
-    if (SkipLine(ibDig, ibZmin) == 1) { mpreChannelsB[ibZmin] = 0; continue; }
+    if (SkipLine(ibDig, j) == 1) { mpdbChannelsB[j] = 0; continue; }
 
     for (i=0; i<bMINORREPEATS; i++)
     {
-      ShowPercent(50 + ibZmin);
+      ShowPercent(50 + j);
       QueryCloseU();
-      QueryEnergyAbsU(ibZmin);
+      QueryEnergyAbsU(j);
 
       if (BccInput() == SER_GOODCHECK) break;
-      if (fKey == 1) return(0);
+      if (fKey == 1) return GetDouble2(0, false);
     }
 
-    if (i == bMINORREPEATS) return(0);
-    ReadEnergyU(ibZmin);
+    if (i == bMINORREPEATS) return GetDouble2(0, false);
+    ReadEnergyU(j);
   }
 
   QueryCloseU();
@@ -62,93 +62,93 @@ uchar   i,ibZmin;
 
   for (i=0; i<2; i++) 
   {
-    mpdbChannelsB[i] = mpdbChannelsB[i] * mpdbTransCnt[ibDig];
+    mpdbChannelsC[i] = mpdbChannelsB[i] * mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;     
   }
 
-  reBuffA = mpdbChannelsB[diCurr.ibLine];
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 
 
-bool    ReadCntMonCanU(uchar  ibMonth)
+double2 ReadCntMonCanU(uchar  ibMonth)
 {
-uchar   i,ibZmin;
+uchar   i, j;
 
-  if (ReadTimeDateK() == 0) return(0);
+  time2 ti2 = ReadTimeCanK();
+  if (ti2.fValid == false) return(0);
 
-  if (tiAlt.bMonth == ibMonth+1)
+  time ti = ti2.tiValue;
+  if (ti.bMonth == ibMonth+1)
   {
-    if (tiAlt.bDay > 1)
-      tiAlt.bDay--;
+    if (ti.bDay > 1)
+      ti.bDay--;
     else
     {
-      if (tiAlt.bMonth > 1)
-        tiAlt.bMonth--;
+      if (ti.bMonth > 1)
+        ti.bMonth--;
       else
       {
-        tiAlt.bMonth = 12;  
-        tiAlt.bYear--; 
+        ti.bMonth = 12;
+        ti.bYear--;
       }
 
-      tiAlt.bDay = DaysInMonth();             
+      ti.bDay = DaysInMonth();
     } 
 
-    for (ibZmin=0; ibZmin<2; ibZmin++)
+    for (j=0; j<2; j++)
     {
-      if (SkipLine(ibDig, ibZmin) == 1) { mpreChannelsB[ibZmin] = 0; continue; }
+      if (SkipLine(ibDig, j) == 1) { mpdbChannelsB[j] = 0; continue; }
 
       for (i=0; i<bMINORREPEATS; i++)
       {
-        ShowPercent(50 + ibZmin);
+        ShowPercent(50 + j);
         QueryCloseU();
-        QueryEnergyDayU(ibZmin);
+        QueryEnergyDayU(j, ti);
 
         if (BccInput() == SER_GOODCHECK) break;
         if (IndexInBuff() == 10) 
         { 
-          sprintf(szLo, "сутки %02bu.%02bu.%02bu ?",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear); 
+          sprintf(szLo, "сутки %02u.%02u.%02u ?",ti.bDay,ti.bMonth,ti.bYear);
           Delay(1000); 
-          return(0); 
+          return GetDouble2(0, false);
         }
-        if (fKey == 1) return(0);
+        if (fKey == 1) return GetDouble2(0, false);
       }
 
-      if (i == bMINORREPEATS) return(0);
-      ReadEnergyU(ibZmin);
+      if (i == bMINORREPEATS) return GetDouble2(0, false);
+      ReadEnergyU(j);
     }
 
     QueryCloseU();
   }
   else
   {
-    tiAlt.bYear = (ibMonth+1 > tiAlt.bMonth) ? tiAlt.bYear-1 : tiAlt.bYear;
-    tiAlt.bMonth = ibMonth+1;
+    ti.bYear = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    ti.bMonth = ibMonth+1;
 
-    for (ibZmin=0; ibZmin<2; ibZmin++)
+    for (j=0; j<2; j++)
     {
-      if (SkipLine(ibDig, ibZmin) == 1) { mpreChannelsB[ibZmin] = 0; continue; }
+      if (SkipLine(ibDig, j) == 1) { mpdbChannelsB[j] = 0; continue; }
 
       for (i=0; i<bMINORREPEATS; i++)
       {
-        ShowPercent(50 + ibZmin);
+        ShowPercent(50 + j);
         QueryCloseU();
-        QueryEnergyMonU(ibZmin);
+        QueryEnergyMonU(j, ti);
 
         if (BccInput() == SER_GOODCHECK) break;
         if (IndexInBuff() == 10) 
         { 
-          sprintf(szLo, " мес€ц %02bu.%02bu ?  ",tiAlt.bMonth,tiAlt.bYear); 
+          sprintf(szLo, " мес€ц %02u.%02u ?  ",ti.bMonth,ti.bYear);
           Delay(1000); 
-          return(0); 
+          return GetDouble2(0, false);
         }
-        if (fKey == 1) return(0);
+        if (fKey == 1) return GetDouble2(0, false);
       }
 
-      if (i == bMINORREPEATS) return(0);
-      ReadEnergyU(ibZmin);
+      if (i == bMINORREPEATS) return GetDouble2(0, false);
+      ReadEnergyU(j);
     }
 
     QueryCloseU();
@@ -157,13 +157,11 @@ uchar   i,ibZmin;
 
   for (i=0; i<2; i++) 
   {
-    mpreChannelsB[i] = mpdbChannelsB[i] * mpdbTransCnt[ibDig];
+    mpdbChannelsC[i] = mpdbChannelsB[i] * mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;     
   }
 
-  reBuffA = mpdbChannelsB[diCurr.ibLine];
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif

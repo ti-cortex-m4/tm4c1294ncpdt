@@ -912,62 +912,6 @@ uchar   i;
 
 
 
-#ifndef SKIP_K
-
-//  чтение значение времени/даты для счётчиков ЦЭ6850М
-bool    ReadTimeCanK(void)
-{
-uchar   i;
-
-  Clear();
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    QueryCloseK();
-    QueryTimeK();
-
-    if (BccInput() != SER_GOODCHECK) 
-      continue;
-    else 
-      break;
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(25);
-
-  ReadTimeAltK();
-
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    QueryCloseK();
-    QueryDateK();
-
-    if (BccInput() != SER_GOODCHECK) 
-      continue;
-    else 
-      break;
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(50);
-
-  ReadDateAltK();
-
-
-  QueryCloseK();
-
-
-  tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
-
-  return(1);
-}
-
-#endif
-
-
-
 #ifndef SKIP_O
 
 //  чтение значение времени/даты для счётчиков ПСЧ-4ТА.04
@@ -1869,6 +1813,10 @@ double2 ReadCntCurrCan(uchar  ibCan)
     case 3:  return ReadCntCurrC();
 #endif
 
+#ifndef SKIP_U
+    case 26: return ReadCntCurrU();
+#endif
+
     default: return GetDouble2(0, false);
   }
 }
@@ -1899,6 +1847,10 @@ time2   ReadTimeCan(uchar  ibCan)
 
 #ifndef SKIP_C
     case 3:  return ReadTimeCanC();
+#endif
+
+#ifndef SKIP_U
+    case 26: return ReadTimeCanU();
 #endif
 
     default: return GetTime2(tiZero, false);

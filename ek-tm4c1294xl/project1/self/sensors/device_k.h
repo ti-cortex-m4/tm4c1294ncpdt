@@ -25,11 +25,11 @@ void    QueryPasswordK(void);
 
 void    QueryTimeK(void);
 void    QueryTimeSpecK(void);
-void    ReadTimeAltK(void);
+time    ReadTimeK(void);
 
 void    QueryDateK(void);
 void    QueryDateSpecK(void);
-void    ReadDateAltK(void);
+time    ReadDateK(void);
 
 void    QueryCorrectK(void);
 void    QueryControlK(void);
