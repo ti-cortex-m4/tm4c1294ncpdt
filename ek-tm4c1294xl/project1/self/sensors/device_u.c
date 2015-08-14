@@ -13,7 +13,7 @@ DEVICE_U.C
 #include "../memory/mem_current.h"
 #include "../memory/mem_factors.h"
 #include "../memory/mem_realtime.h"
-//#include "../memory/mem_energy_spec.h"
+#include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
 #include "../display/display.h"
@@ -65,7 +65,7 @@ uchar   i;
   InitPush(0);
   PushChar1Bcc(0x06);
 
-  switch (mppoPorts[ diCurr.ibPort ].ibSpeed)
+  switch (mppoPorts[ diCurr.ibPort ].ibBaud)
   {
     case 0:  i = '2'; break;
     case 1:  i = '3'; break;
@@ -309,15 +309,16 @@ void    MakeDataU(uchar  ibHou)
   ShowProgressDigHou();      
   reBuffB = mpdbPulseHou[ibDig];
 
-  for (ibCan=0; ibCan<ibMinorMax; ibCan++)        
+  uchar i;
+  for (i=0; i<ibMinorMax; i++)
   {
-    reBuffA = mpreBuffCanHou[ibCan][ibHou];   
-    mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
+    reBuffA = mpreBuffCanHou[i][ibHou];
+    mpreEngFracDigCan[ibDig][i] += reBuffA;
 
-    wBuffD = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
-    mpwChannels[ibCan] = wBuffD;
+    wBuffD = (uint)(mpreEngFracDigCan[ibDig][i]*reBuffB);
+    mpwChannels[i] = wBuffD;
 
-    mpreEngFracDigCan[ibDig][ibCan] -= (float)wBuffD/reBuffB;
+    mpreEngFracDigCan[ibDig][i] -= (float)wBuffD/reBuffB;
   }
 }
 

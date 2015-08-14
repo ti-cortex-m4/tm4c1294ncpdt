@@ -26,6 +26,9 @@ float                   mpreParamsBuff[2][wPARAMS];
 // промежуточный массив
 time                    mptiParamsBuff[wPARAMS];
 
+// промежуточный массив
+float                   mpreParam[wPARAMS];
+
 // индекс по кольцевому буферу
 uchar                   ibSoftTim;
 

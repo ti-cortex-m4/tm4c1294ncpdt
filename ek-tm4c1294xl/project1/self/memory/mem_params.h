@@ -16,6 +16,8 @@ extern  float                   mpreParamsBuff[2][wPARAMS];
 
 extern  time                    mptiParamsBuff[wPARAMS];
 
+extern  float                   mpreParam[wPARAMS];
+
 extern  uchar                   ibSoftTim;
 
 extern  uint                    iwHardTim;
