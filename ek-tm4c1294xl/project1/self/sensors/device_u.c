@@ -27,26 +27,12 @@ DEVICE_U.C
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
-//#include "../digitals/digitals_messages.h"
 #include "../digitals/limits.h"
-//#include "../digitals/profile/refill.h"
-//#include "../special/special.h"
+#include "../special/special.h"
 #include "../hardware/watchdog.h"
-//#include "../flash/records.h"
-//#include "../energy.h"
-//#include        "xdata.h"
-//#include        "delay.h"
-//#include        "display.h"
-//#include        "engine.h"
-//#include        "watchdog.h"
-//#include        "timedate.h"
-//#include        "ports.h"
-//#include        "limits.h"
-//#include        "digitals.h"
 #include "device_k.h"
 #include "device_q.h"
-//#include        "essential.h"
-//#include        "_timedate.h"
+#include "device_u.h"
 
 
 
@@ -215,8 +201,11 @@ void    InitHeaderU(void)
   else 
   {
     wBaseCurr = mpcwStartAbs16Can[ibDig];
-    sprintf(szLo,"   начало %2bu    ",wBaseCurr);
-    DelayMsg();
+
+    Clear();
+    sprintf(szLo+3,"начало %2u",wBaseCurr);
+
+    if (boShowMessages == true) DelayMsg();
   }
       
   tiDigPrev = tiCurr;   
@@ -350,7 +339,7 @@ uchar   i,j;
     iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;      
   }
        
-  NewBoundsAbs(++wBaseCurr);
+  NewBoundsAbs16(++wBaseCurr);
   return(1);
 }
 
