@@ -8,7 +8,7 @@ KEY_ENBL_CANALS,C
 #include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_ports.h"
-#include "../../digitals/profile/profile_core.h"
+#include "../../digitals/digitals.h"
 
 
 

@@ -4,8 +4,6 @@ PROFILE_CORE.H
 
 ------------------------------------------------------------------------------*/
 
-extern  cache const             chEnblCan;
-
 extern  cache const             chEnblCurrent;
 extern  cache const             chEnblProfile;
 

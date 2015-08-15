@@ -9,6 +9,7 @@ DIGITALS.H
 
 
 extern  cache const             chDigitals;
+extern  cache const             chEnblCan;
 
 extern  cache const             chEnblKeys;
 extern  cache const             chKeys;

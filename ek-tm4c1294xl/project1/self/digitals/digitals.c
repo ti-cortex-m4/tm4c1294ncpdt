@@ -14,6 +14,7 @@ DIGITALS.C
 
 
 cache const             chDigitals = {DIGITALS, &mpdiDigital, sizeof(mpdiDigital)};
+cache const             chEnblCan = {ENBL_CAN, &mpboEnblCan, sizeof(mpboEnblCan)};
 
 cache const             chEnblKeys = {ENBL_KEYS, &boEnblKeys, sizeof(bool)};
 cache const             chKeys = {KEYS, &mpphKeys, sizeof(mpphKeys)};
@@ -28,8 +29,9 @@ void    InitDigitals(void)
   LoadCache(&chDigitals);
   MakeDigitalsMask();
 
-  LoadCache(&chEnblKeys);
+  LoadCache(&chEnblCan);
 
+  LoadCache(&chEnblKeys);
   LoadCache(&chKeys);
 
   LoadCache(&chAddress1);
@@ -42,17 +44,22 @@ void    ResetDigitals(void)
   memset(&mpdiDigital, 0, sizeof(mpdiDigital));
   SaveCache(&chDigitals);
 
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+    mpboEnblCan[c] = true;
+
+  SaveCache(&chEnblCan);
+
+
   boEnblKeys = false;
   SaveCache(&chEnblKeys);
 
 
   memset(&mpphKeys, 0, sizeof(mpphKeys));
 
-  uchar c;
   for (c=0; c<bCANALS; c++)
-  {
     mpphKeys[c].szLine[0] = '0';
-  }
 
   SaveCache(&chKeys);
 
