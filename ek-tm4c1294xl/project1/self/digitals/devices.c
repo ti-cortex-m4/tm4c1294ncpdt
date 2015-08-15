@@ -45,7 +45,7 @@ uchar const             mpbMaxLines[bMAXDEVICES+1] =
 
 
 
-bool    IsDevice(uchar  bDevice)
+bool    IsValidDevice(uchar  bDevice)
 {
   ASSERT(bDevice <= bMAXDEVICES);
 
@@ -83,5 +83,5 @@ void    ShowDeviceName(uchar  bDevice)
   ASSERT(bDevice <= bMAXDEVICES);
 
   ShowLo( mpszDevices[bDevice] );
-  (IsDevice(bDevice)) ? (szLo[15] = '+') : (szLo[15] = '-');
+  (IsValidDevice(bDevice)) ? (szLo[15] = '+') : (szLo[15] = '-');
 }
