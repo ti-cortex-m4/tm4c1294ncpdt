@@ -5,4 +5,6 @@ STORAGE.H
 ------------------------------------------------------------------------------*/
 
 void    InitStorage(void);
-bool ResetFlash(void);
+
+bool    ResetNvram(void);
+bool    ResetFlash(void);

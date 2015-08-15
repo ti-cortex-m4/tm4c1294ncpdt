@@ -83,7 +83,7 @@ if (enGlobal == GLB_WORK)
 
 
 
-bool ResetFlash(void)
+bool    ResetNvram(void)
 {
 uint    i;
 
@@ -92,43 +92,51 @@ uint    i;
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
     ResetWDT();
-    if (Test1WriteNvramBuff(i*1000, 1000) == false) TestError(szBadNVRAM);
-    if (Test1ReadNvramBuff(i*1000, 1000) == false) TestError(szBadNVRAM);
+    if (Test1WriteNvramBuff(i*1000, 1000) == false) return false;
+    if (Test1ReadNvramBuff(i*1000, 1000) == false) return false;
     ShowPercent(0 + (uint)20*i/(dwNVRAM_BYTES/1000));
   }
 
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
     ResetWDT();
-    if (Test2WriteNvramBuff(i*1000, 1000, 0x55) == false) TestError(szBadNVRAM);
-    if (Test2ReadNvramBuff(i*1000, 1000, 0x55) == false) TestError(szBadNVRAM);
+    if (Test2WriteNvramBuff(i*1000, 1000, 0x55) == false) return false;
+    if (Test2ReadNvramBuff(i*1000, 1000, 0x55) == false) return false;
     ShowPercent(20 + (uint)20*i/(dwNVRAM_BYTES/1000));
   }
 
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
     ResetWDT();
-    if (Test2WriteNvramBuff(i*1000, 1000, 0xAA) == false) TestError(szBadNVRAM);
-    if (Test2ReadNvramBuff(i*1000, 1000, 0xAA) == false) TestError(szBadNVRAM);
+    if (Test2WriteNvramBuff(i*1000, 1000, 0xAA) == false) return false;
+    if (Test2ReadNvramBuff(i*1000, 1000, 0xAA) == false) return false;
     ShowPercent(40 + (uint)20*i/(dwNVRAM_BYTES/1000));
   }
 
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
     ResetWDT();
-    if (Test2WriteNvramBuff(i*1000, 1000, 0xFF) == false) TestError(szBadNVRAM);
-    if (Test2ReadNvramBuff(i*1000, 1000, 0xFF) == false) TestError(szBadNVRAM);
+    if (Test2WriteNvramBuff(i*1000, 1000, 0xFF) == false) return false;
+    if (Test2ReadNvramBuff(i*1000, 1000, 0xFF) == false) return false;
     ShowPercent(60 + (uint)20*i/(dwNVRAM_BYTES/1000));
   }
 
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
     ResetWDT();
-    if (Test2WriteNvramBuff(i*1000, 1000, 0x00) == false) TestError(szBadNVRAM);
-    if (Test2ReadNvramBuff(i*1000, 1000, 0x00) == false) TestError(szBadNVRAM);
+    if (Test2WriteNvramBuff(i*1000, 1000, 0x00) == false) return false;
+    if (Test2ReadNvramBuff(i*1000, 1000, 0x00) == false) return false;
     ShowPercent(80 + (uint)20*i/(dwNVRAM_BYTES/1000));
   }
 
+  return true;
+}
+
+
+
+bool    ResetFlash(void)
+{
+uint    i;
 
   ShowHi(szFlashErase);
   wPage = 0;
