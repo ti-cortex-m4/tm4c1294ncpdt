@@ -12,8 +12,6 @@ PROFILE_CORE.C
 
 
 
-cache const             chEnblCan = {ENBL_CAN, &mpboEnblCan, sizeof(mpboEnblCan)};
-
 cache const             chEnblCurrent = {ENBL_CURRENT, &boEnblCurrent, sizeof(bool)};
 cache const             chEnblProfile = {ENBL_PROFILE, &boEnblProfile, sizeof(bool)};
 
@@ -24,8 +22,6 @@ cache const             chTimeoutProfile = {TIMEOUT_PROFILE, &bTimeoutProfile, s
 
 void    InitProfile(void)
 {
-	LoadCache(&chEnblCan);
-
   LoadCache(&chEnblCurrent);
   LoadCache(&chEnblProfile);
 
@@ -37,12 +33,6 @@ void    InitProfile(void)
 
 void    ResetProfile(void)
 {
-  uchar c;
-  for (c=0; c<bCANALS; c++)
-    mpboEnblCan[c] = true;
-
-  SaveCache(&chEnblCan);
-
   boEnblCurrent = false;
   SaveCache(&chEnblCurrent);
 
