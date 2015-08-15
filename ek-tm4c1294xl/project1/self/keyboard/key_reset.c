@@ -106,6 +106,14 @@ void    key_SetReset(void)
 //          LongBeep();
           Clear();
 
+          if (ResetNvram() == false)
+          {
+            ShowHi(szAlarm);
+            ShowLo(szBadNvram);
+            LongBeep();
+            DelayMsg();
+          }
+
           if (ResetFlash() == false)
           {
             ShowHi(szAlarm);
