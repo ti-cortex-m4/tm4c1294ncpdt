@@ -279,7 +279,7 @@ void    GetConfigUni(void)
   PushInt(GetUsedCanals());
   PushInt(GetUsedGroups());
   PushInt(bTARIFFS);
-  PushInt(bDEVICES);
+  PushInt(bMAXDEVICES);
   PushInt(cbDevicesUni);
   PushInt(wOUTBUFF_SIZE);
 
@@ -292,9 +292,9 @@ void    GetSensorsUni(void)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
     Result2(bUNI_BADDATA);
-  else if (bInBuff7 > bDEVICES)
+  else if (bInBuff7 > bMAXDEVICES)
     Result2(bUNI_BADDATA);
-  else if (bInBuff7+bInBuff9 > bDEVICES + 1)
+  else if (bInBuff7+bInBuff9 > bMAXDEVICES + 1)
     Result2(bUNI_BADDATA);
   else
   {
