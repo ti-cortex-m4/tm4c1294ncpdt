@@ -35,9 +35,9 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".устройство 21  ",
                                           ".устройство 22  ",
                                           ".устройство 23  ",
-                                          ".устройство 24  ",
+                                          ".СЕ102          ",
                                           ".устройство 25  ",
-                                          ".CE301          "
+                                          ".СЕ301          "
                                       };
 
 uchar const             mpbMaxLines[bMAXDEVICES+1] =
@@ -66,6 +66,10 @@ bool    IsValidDevice(uchar  bDevice)
 
 #ifndef SKIP_C
     case 3:  return true;
+#endif
+
+#ifndef SKIP_S
+    case 24: return true;
 #endif
 
 #ifndef SKIP_U
