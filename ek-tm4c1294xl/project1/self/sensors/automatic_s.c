@@ -11,11 +11,14 @@ AUTOMATIC_S.C
 #include "../keyboard/keyboard.h"
 #include "../time/delay.h"
 #include "../time/timedate.h"
+#include "../hardware/watchdog.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
+#include "../devices/decompress_s.h"
 #include "../digitals/digitals.h"
+#include "../digitals/wait_answer.h"
 #include "automatic1.h"
 #include "device_s.h"
 #include "automatic_s.h"
@@ -86,7 +89,7 @@ serial  InputS(void)
   {
     if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-    ResetWDT();
+    ResetWatchdog();
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
@@ -200,7 +203,7 @@ time2   ReadTimeDateS(void)
 {
   Clear();
 
-  if (QueryTimeAltS_Full(50) == 0) return(0);
+  if (QueryTimeAltS_Full(50) == 0) return GetTime2(0, false);
 
   tiChannelC = tiAlt;
   mpboChannelsA[0] = true;     
@@ -213,9 +216,9 @@ double2 ReadSensorS(void)
 {
   Clear();
 
-  if (QueryConfigS_Full(50) == 0) return(0);
+  if (QueryConfigS_Full(50) == 0) return GetDouble2(0, false);
 
-  if (QueryEngMonS_Full(0, 75) == 0) return(0);
+  if (QueryEngMonS_Full(0, 75) == 0) return GetDouble2(0, false);
 
   reBuffA = (float)mpdwChannelsA[0] / wDividerS;
   mpreChannelsB[0] = reBuffA;
@@ -229,17 +232,17 @@ double2 ReadCntMonCanS(uchar  ibMonth)
 { 
   Clear();
 
-  if (QueryConfigS_Full(25) == 0) return(0);
+  if (QueryConfigS_Full(25) == 0) return GetDouble2(0, false);
 
-  if (QueryTimeAltS_Full(50) == 0) return(0);
+  if (QueryTimeAltS_Full(50) == 0) return GetDouble2(0, false);
 
   if (tiAlt.bMonth != ibMonth+1) 
   {
-    if (QueryEngMonS_Full((bMONTHS+tiAlt.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return(0);
+    if (QueryEngMonS_Full((bMONTHS+tiAlt.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2(0, false);
   }
   else 
   {
-    if (QueryEngDayS_Full(1, 75) == 0) return(0);
+    if (QueryEngDayS_Full(1, 75) == 0) return GetDouble2(0, false);
   }
 
   reBuffA = (float)mpdwChannelsA[0] / wDividerS;
