@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 ERROR.C
 
- The error routine that is called if the driver library encounters an error.
+ Функция вызывается из макроса ASSERT в driverlib/debug.h
 ------------------------------------------------------------------------------*/
 
 #include <stdint.h>
