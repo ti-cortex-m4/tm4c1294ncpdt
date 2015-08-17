@@ -567,7 +567,7 @@ void    MakeDataK(uchar  ibHou)
     wBuffD = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
     mpwChannels[ibCan] = wBuffD;
 
-    mpreEngFracDigCan[ibDig][ibCan] -= (real)wBuffD/reBuffB;
+    mpreEngFracDigCan[ibDig][ibCan] -= (float)wBuffD/reBuffB;
   }
 
   wBaseCurr++;

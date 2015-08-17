@@ -111,7 +111,7 @@ uchar   i;
   i = CheckS();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+1,"код ошибки: %bu",i); 
+    Clear(); sprintf(szLo+1,"код ошибки: %u",i);
     Delay(500);
   }
 

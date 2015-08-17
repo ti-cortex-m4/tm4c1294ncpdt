@@ -70,3 +70,7 @@ extern  bool                    boPlcUFlag;
 extern  uchar                   bPlcUSize;
 
 extern  uint                    wPlcUShutdown;
+
+
+
+extern  uint                    wDividerS;

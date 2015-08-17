@@ -187,7 +187,7 @@ void    ReadVersionS(void)
   InitPop(9);
   
   Clear();
-  sprintf(szLo+1, "версия %bu.%bu.%bu", PopChar(), PopChar(), PopChar());
+  sprintf(szLo+1, "версия %u.%u.%u", PopChar(), PopChar(), PopChar());
 }
 
 
@@ -321,7 +321,7 @@ bool    ReadDataS(uchar  i)
   if (dwBuffC != 0xFFFFFF)
   {
     reBuffB = mpdbPulseHou[ibDig];
-    reBuffA = (real)dwBuffC/wDividerS;
+    reBuffA = (float)dwBuffC/wDividerS;
     mpreEngFrac[ibDig] += reBuffA;
 
     if ((ulong)(mpreEngFrac[ibDig]*reBuffB) < 0xFFFF)
@@ -330,7 +330,7 @@ bool    ReadDataS(uchar  i)
     { wBuffD = 0xFFFF; mpcwOverflowHou[ibDig]++; }
 
     mpwChannels[0] = wBuffD;
-    mpreEngFrac[ibDig] -= (real)wBuffD/reBuffB;
+    mpreEngFrac[ibDig] -= (float)wBuffD/reBuffB;
 
     tiAlt = tiDig;
     MakePrevHou();  
