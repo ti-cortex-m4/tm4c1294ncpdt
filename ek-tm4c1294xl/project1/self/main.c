@@ -86,6 +86,7 @@ int     main(void)
   const uint32_t ui32SysClockFreq = GetSystemClockFrequency();
 
   InitSysTick(ui32SysClockFreq);
+
   InitUart0(ui32SysClockFreq);
   InitUart2(ui32SysClockFreq);
   InitUart3(ui32SysClockFreq);
