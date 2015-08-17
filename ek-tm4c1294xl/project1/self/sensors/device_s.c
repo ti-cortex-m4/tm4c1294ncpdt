@@ -72,7 +72,7 @@ uint	i;
 
 void    QueryTimeS(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0xC0);
   PushChar(0x48);
@@ -106,7 +106,7 @@ void    ReadTimeAltS(void)
 
 void    QueryControlS(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0xC0);
   PushChar(0x48);
@@ -135,7 +135,7 @@ void    QueryControlS(void)
 
 void    QueryConfigS(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0xC0);
   PushChar(0x48);
@@ -167,7 +167,7 @@ void    ReadConfigS(void)
 
 void    QueryVersionS(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0xC0);
   PushChar(0x48);
@@ -194,7 +194,7 @@ void    ReadVersionS(void)
 
 void    QueryEngDayS(uchar  bDay)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0xC0);
   PushChar(0x48);
@@ -212,7 +212,7 @@ void    QueryEngDayS(uchar  bDay)
 
 void    QueryEngMonS(uchar  bMonth)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0xC0);
   PushChar(0x48);
@@ -280,7 +280,7 @@ void    QueryHeaderS(void)
   tiDig = tiAlt;
 
 
-  InitPush();
+  InitPush(0);
 
   PushChar(0xC0);
   PushChar(0x48);

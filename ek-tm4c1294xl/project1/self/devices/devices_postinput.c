@@ -9,6 +9,7 @@ DEVICES_POSTINPUT,C
 #include "../kernel/crc-16.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
+#include "../devices/decompress_k.h"
 #include "devices_postinput.h"
 
 

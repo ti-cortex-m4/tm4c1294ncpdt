@@ -13,7 +13,6 @@ AUTOMATIC1.C
 #include "../serial/ports_devices.h"
 #include "../serial/ports_common.h"
 #include "../devices/devices.h"
-
 #include "../energy.h"
 #include "device_a.h"
 #include "device_b.h"
@@ -21,6 +20,7 @@ AUTOMATIC1.C
 #include "automatic_a.h"
 #include "automatic_b.h"
 #include "automatic_c.h"
+#include "automatic_s.h"
 
 
 

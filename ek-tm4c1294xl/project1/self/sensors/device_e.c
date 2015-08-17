@@ -33,7 +33,7 @@ DEVICE_E.C
 /*
 void    QueryBreakE(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x1A);          
   Query(0, 1, 1);
 
@@ -45,7 +45,7 @@ void    QueryBreakE(void)
 // посылка запроса на открытие канала св€зи дл€ сумматоров —Ёћ-2
 void    QueryOpenE(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x1B);          
   PushChar('0'+diCurr.bAddress);            
 
@@ -62,7 +62,7 @@ bit     ReadOpenE(void)
 
 void    QueryTimeE(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x1B);          
   PushChar('T');            
 
@@ -101,7 +101,7 @@ void    ReadTimeDigE(void)
 
 void    QueryCorrectE(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x1B);          
   PushChar('k');            
 
@@ -118,7 +118,7 @@ bit     ReadCorrectE(void)
 
 void    QueryDefectE(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x1B);          
   PushChar('^');            
 
@@ -148,7 +148,7 @@ uint    i;
 
 void    QueryEnergyE(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x1B);          
   PushChar('L');            
 
@@ -176,7 +176,7 @@ uint    i;
 
 void    QueryIndexE(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x1B);          
   PushChar('l');            
 
@@ -325,7 +325,7 @@ uchar   i,j;
       ResetWatchdog();
       if (fKey == 1) { fKey = 0; Beep(); }
 
-      InitPush();
+      InitPush(0);
       PushChar(0x1B);          
       PushChar(chEsc);            
 

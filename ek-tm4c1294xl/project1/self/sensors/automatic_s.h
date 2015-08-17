@@ -7,8 +7,8 @@ AUTOMATIC_S.C
 void    QueryS_IO(uchar  cbIn, uchar  cbOut);
 serial  InputS(void);
 
-bit     QueryConfigS_Full(uchar  bPercent);
+bool    QueryConfigS_Full(uchar  bPercent);
 
-bit     ReadTimeDateS(void);
-bit     ReadSensorS(void);
-bit     ReadCntMonCanS(uchar  ibMonth);
+time2   ReadTimeDateS(void);
+double2 ReadSensorS(void);
+double2 ReadCntMonCanS(uchar  ibMonth);
