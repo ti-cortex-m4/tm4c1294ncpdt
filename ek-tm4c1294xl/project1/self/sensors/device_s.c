@@ -269,7 +269,7 @@ uchar i;
 
 void    QueryHeaderS(void)
 {
-  NoShowTime(1);
+  HideCurrTime(1);
 
 
   tiAlt = tiDigPrev;

@@ -1,14 +1,15 @@
 /*------------------------------------------------------------------------------
-CRC-9.C
+CRC-S.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "crc-s.h"
 
 
 
-const uchar             mpbCRC8_B5[0x100] = {
+static const uchar      mpbCrcS[0x100] = {
 0x00, 0xb5, 0xdf, 0x6a, 0x0b, 0xbe, 0xd4, 0x61, 0x16, 0xa3, 0xc9, 0x7c, 0x1d, 0xa8, 
 0xc2, 0x77, 0x2c, 0x99, 0xf3, 0x46, 0x27, 0x92, 0xf8, 0x4d, 0x3a, 0x8f, 0xe5, 0x50, 
 0x31, 0x84, 0xee, 0x5b, 0x58, 0xed, 0x87, 0x32, 0x53, 0xe6, 0x8c, 0x39, 0x4e, 0xfb, 
@@ -31,9 +32,14 @@ const uchar             mpbCRC8_B5[0x100] = {
 };
 
 
+uchar                   bCrcS;
 
-void    MakeCRC8_B5(uchar  *pbData, uint  wSize)
+
+
+void    MakeCrcS(uchar  *pbData, uint  wSize)
 {
-  bCRC = 0;
-  while (wSize-- > 0) bCRC = mpbCRC8_B5[bCRC ^ *(pbData++)];
+  bCrcS = 0;
+
+  while (wSize-- > 0)
+    bCrcS = mpbCrcS[bCrcS ^ *(pbData++)];
 }

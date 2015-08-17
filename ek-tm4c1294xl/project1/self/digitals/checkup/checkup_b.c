@@ -89,7 +89,7 @@ uint    i;
 
 bit    ReadHeaderB_Checkup1(void)
 {
-  NoShowTime(1);
+  HideCurrTime(1);
 
   InitPop(2);  
   tiDig.bHour   = FromBCD( PopChar() );
@@ -228,7 +228,7 @@ uint    i;
 
 bit    ReadHeaderB_Checkup2(void)
 {
-  NoShowTime(1);
+  HideCurrTime(1);
 
   InitPop(2);  
   tiDig.bHour   = FromBCD( PopChar() );

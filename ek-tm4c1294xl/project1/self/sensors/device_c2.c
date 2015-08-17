@@ -39,7 +39,7 @@ void    ResetDataC2(void)
 
 void    QueryHeaderC0_6(uint  wT)
 {
-  NoShowTime(1);
+  HideCurrTime(1);
 
   tiAlt = tiDigPrev;
   dwBuffC = DateToHouIndex();

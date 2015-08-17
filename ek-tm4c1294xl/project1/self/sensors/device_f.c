@@ -289,7 +289,7 @@ void    QueryEnergyF(void)
 
 bool    ReadEnergyF(uchar  ibBlock)
 {
-  NoShowTime(1);                                        // запрещаем автоматическое отображение времени
+  HideCurrTime(1);                                        
   
 
   InitPop(bHEADER+ibBlock*(sizeof(time)+sizeof(uint)*bCANALS));

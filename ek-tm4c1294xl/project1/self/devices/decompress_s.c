@@ -98,7 +98,7 @@ uint    i;
   if (GetInBuff(2) != (i % 0x100)) return 6;
   if (GetInBuff(3) != (i / 0x100)) return 7;
 
-  MakeCRC9InBuff(1, IndexInBuff()-2); if (bCRC != 0) return 8;
+  MakeCrcSInBuff(1, IndexInBuff()-2); if (bCRC != 0) return 8;
 
   return 0;
 }

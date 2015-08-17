@@ -1,7 +1,11 @@
 /*------------------------------------------------------------------------------
-CRC-9.H
+CRC-S.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    MakeCRC8_B5(uchar  *pbData, uint  wSize);
+extern  uchar                   bCrcS;
+
+
+
+uchar   MakeCrcS(uchar  *pbData, uint  wSize);
