@@ -1814,6 +1814,10 @@ double2 ReadCntCurrCan(uchar  ibCan)
     case 3:  return ReadCntCurrC();
 #endif
 
+#ifndef SKIP_S
+    case 24: return ReadCntCurrS();
+#endif
+
 #ifndef SKIP_U
     case 26: return ReadCntCurrU();
 #endif
@@ -1848,6 +1852,10 @@ time2   ReadTimeCan(uchar  ibCan)
 
 #ifndef SKIP_C
     case 3:  return ReadTimeCanC();
+#endif
+
+#ifndef SKIP_S
+    case 24: return ReadTimeCanS();
 #endif
 
 #ifndef SKIP_U

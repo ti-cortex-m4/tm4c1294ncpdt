@@ -1272,7 +1272,7 @@ bool    AutomaticS(void)
 
   if (QueryConfigS_Full(50) == 0) return(0);
 
-  reBuffA = wDividerS;                  // K преобразования
+  dbKpulse = wDividerS;                 // K преобразования
   dbKtrans = 1;                         // K трансформации
   SetCanalsAll();                       // сохранение К преобразования и К трансформации
 

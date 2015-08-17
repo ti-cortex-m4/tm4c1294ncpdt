@@ -9,6 +9,6 @@ serial  InputS(void);
 
 bool    QueryConfigS_Full(uchar  bPercent);
 
-time2   ReadTimeDateS(void);
-double2 ReadSensorS(void);
+time2   ReadTimeCanS(void);
+double2 ReadCntCurrS(void);
 double2 ReadCntMonCanS(uchar  ibMonth);

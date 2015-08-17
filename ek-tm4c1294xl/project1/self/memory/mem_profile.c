@@ -84,7 +84,7 @@ ulong                   dwValueC;
 float                   mpflBuffCanHou[4][48];
 
 // промежуточный массив
-float                   mpreEngFrac[bCANALS];
+float                   mpflEngFrac[bCANALS];
 
 // промежуточный массив
 float                   mpflEngFracDigCan[bCANALS][6];

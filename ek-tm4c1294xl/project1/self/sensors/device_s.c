@@ -322,17 +322,17 @@ bool    ReadDataS(uchar  i)
   {
     double dbPulse = mpdbPulseHou[ibDig];
 
-    reBuffA = (float)dw/wDividerS;
-    mpreEngFrac[ibDig] += reBuffA;
+    float fl = (float)dw/wDividerS;
+    mpflEngFrac[ibDig] += fl;
 
     uint w;
-    if ((ulong)(mpreEngFrac[ibDig]*dbPulse) < 0xFFFF)
-    { w = (uint)(mpreEngFrac[ibDig]*dbPulse); }
+    if ((ulong)(mpflEngFrac[ibDig]*dbPulse) < 0xFFFF)
+    { w = (uint)(mpflEngFrac[ibDig]*dbPulse); }
     else
     { w = 0xFFFF; mpcwOverflowHou[ibDig]++; }
 
     mpwChannels[0] = w;
-    mpreEngFrac[ibDig] -= (float)w/dbPulse;
+    mpflEngFrac[ibDig] -= (float)w/dbPulse;
 
     MakeSpecial(tiDig);
     return(MakeStopHou(0));  

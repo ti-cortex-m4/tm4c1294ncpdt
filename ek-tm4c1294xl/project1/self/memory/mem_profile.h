@@ -63,7 +63,7 @@ extern  ulong                   dwValueC;
 
 extern  float                   mpflBuffCanHou[4][48];
 
-extern  float                   mpreEngFrac[bCANALS];
+extern  float                   mpflEngFrac[bCANALS];
 
 extern  float                   mpflEngFracDigCan[bCANALS][6];
 
