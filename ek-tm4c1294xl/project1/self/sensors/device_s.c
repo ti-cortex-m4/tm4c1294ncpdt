@@ -88,24 +88,28 @@ void    QueryTimeS(void)
 }
 
 
-void    ReadTimeAltS(void)
+time    ReadTimeS(void)
 {
   InitPop(9);
 
-  tiAlt.bSecond = FromBCD(PopChar());
-  tiAlt.bMinute = FromBCD(PopChar());
-  tiAlt.bHour   = FromBCD(PopChar());
+  time ti;
+
+  ti.bSecond = FromBCD(PopChar());
+  ti.bMinute = FromBCD(PopChar());
+  ti.bHour   = FromBCD(PopChar());
 
   PopChar();
 
-  tiAlt.bDay    = FromBCD(PopChar());
-  tiAlt.bMonth  = FromBCD(PopChar());
-  tiAlt.bYear   = FromBCD(PopChar());
+  ti.bDay    = FromBCD(PopChar());
+  ti.bMonth  = FromBCD(PopChar());
+  ti.bYear   = FromBCD(PopChar());
+
+  return ti;
 }
 
 
 
-void    QueryControlS(void)
+void    QueryControlS(time  ti)
 {
   InitPush(0);
 
@@ -122,8 +126,7 @@ void    QueryControlS(void)
   PushChar(ToBCD(tiCurr.bMinute));
   PushChar(ToBCD(tiCurr.bHour));
 
-  tiAlt = tiCurr;
-  PushChar((Weekday() + 1) % 7);
+  PushChar((GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) + 1) % 7);
 
   PushChar(ToBCD(tiCurr.bDay));
   PushChar(ToBCD(tiCurr.bMonth));
@@ -304,8 +307,7 @@ bool    ReadDataS(uchar  i)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
-  tiAlt = tiDig;
-  if (SearchDefHouIndex() == 0) return(1); 
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
   ShowProgressDigHou();      
@@ -322,13 +324,14 @@ bool    ReadDataS(uchar  i)
     reBuffA = (float)dw/wDividerS;
     mpreEngFrac[ibDig] += reBuffA;
 
+    uint w;
     if ((ulong)(mpreEngFrac[ibDig]*reBuffB) < 0xFFFF)
-    { wBuffD = (uint)(mpreEngFrac[ibDig]*reBuffB); }
+    { w = (uint)(mpreEngFrac[ibDig]*reBuffB); }
     else
-    { wBuffD = 0xFFFF; mpcwOverflowHou[ibDig]++; }
+    { w = 0xFFFF; mpcwOverflowHou[ibDig]++; }
 
-    mpwChannels[0] = wBuffD;
-    mpreEngFrac[ibDig] -= (float)wBuffD/reBuffB;
+    mpwChannels[0] = w;
+    mpreEngFrac[ibDig] -= (float)w/reBuffB;
 
     MakeSpecial(tiDig);
     return(MakeStopHou(0));  

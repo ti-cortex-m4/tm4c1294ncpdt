@@ -7,6 +7,7 @@ AUTOMATIC1.C
 #include "../main.h"
 #include "../memory/mem_factors.h"
 #include "../memory/mem_digitals.h"
+#include "../memory/mem_profile.h"
 #include "../keyboard/keyboard.h"
 #include "../display/display.h"
 #include "../serial/ports_stack.h"

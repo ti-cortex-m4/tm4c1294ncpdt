@@ -5,7 +5,7 @@ AUTOMATIC_S.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_digitals.h"
+#include "../memory/mem_profile.h"
 #include "../memory/mem_factors.h"
 #include "../display/display.h"
 #include "../keyboard/keyboard.h"
@@ -136,7 +136,7 @@ uchar   i;
 }
 
 
-bool    QueryTimeAltS_Full(uchar  bPercent)
+time2   QueryTimeS_Full(uchar  bPercent)
 {
 uchar   i;
 
@@ -146,14 +146,13 @@ uchar   i;
     QueryTimeS();
 
     if (InputS() == SER_GOODCHECK) break;  
-    if (fKey == 1) return(0);
+    if (fKey == 1) return GetTime2(tiZero, false);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
   ShowPercent(bPercent);
 
-  ReadTimeAltS();
-  return(1);
+  return GetTime2(ReadTimeS(), true);
 }
 
 
@@ -204,7 +203,7 @@ time2   ReadTimeDateS(void)
 {
   Clear();
 
-  if (QueryTimeAltS_Full(50) == 0) return GetTime2(0, false);
+  if (QueryTimeS_Full(50) == 0) return GetTime2(tiZero, false);
 
   tiChannelC = tiAlt;
   mpboChannelsA[0] = true;     
@@ -235,7 +234,7 @@ double2 ReadCntMonCanS(uchar  ibMonth)
 
   if (QueryConfigS_Full(25) == 0) return GetDouble2(0, false);
 
-  if (QueryTimeAltS_Full(50) == 0) return GetDouble2(0, false);
+  if (QueryTimeS_Full(50) == 0) return GetDouble2(0, false);
 
   if (tiAlt.bMonth != ibMonth+1) 
   {

@@ -8,6 +8,7 @@ DECOMPRESS_S.C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_ports.h"
 #include "../memory/mem_digitals.h"
+#include "../memory/mem_profile.h"
 #include "../kernel/crc-s.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"

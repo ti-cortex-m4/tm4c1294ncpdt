@@ -84,4 +84,20 @@ ulong                   dwValueC;
 float                   mpflBuffCanHou[4][48];
 
 // промежуточный массив
+float                   mpreEngFrac[bCANALS];
+
+// промежуточный массив
 float                   mpflEngFracDigCan[bCANALS][6];
+
+// счетчики переполнений получасовых графиков
+uint                    mpcwOverflowHou[bCANALS];
+
+// счетчики ошибок связи
+uint                    mpcwErrorLink[bCANALS];
+
+// промежуточный буфер
+uchar                   mpbOutBuffSave[1024];
+
+// делитель для энергии счетчика СЕ102
+uint                    wDividerS;
+
