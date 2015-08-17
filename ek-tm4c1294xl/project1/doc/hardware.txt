@@ -6,8 +6,8 @@ memory.h
 +   power_off.h
 system_clock.c
 system_clock.h
-sys_tick.c
-sys_tick.h
++   sys_tick.c
++   sys_tick.h
 uart_loader.c
 uart_loader.h
 +   watchdog.c

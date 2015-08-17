@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 SYS_TICK.C
 
-
+ SysTick timer
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -12,11 +12,12 @@ SYS_TICK.C
 
 
 
-void    InitSysTick(uint32_t  ui32SysClock)
+void    InitSysTick(uint32_t  ui32SysClockFreq)
 {
-  SysTickPeriodSet(ui32SysClock / 1000); // 1 ms
+  SysTickPeriodSet(ui32SysClockFreq / 1000); // 1 ms
   HWREG(NVIC_ST_CURRENT) = 0;
 }
+
 
 
 void    StartSysTick(void)
