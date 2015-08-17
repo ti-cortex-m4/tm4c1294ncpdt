@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 WATCHDOG.C
 
-
+ Watchdog timer
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -15,7 +15,7 @@ WATCHDOG.C
 
 
 
-#define WATCHDOG_LOAD   (ulong)(0x20000000)
+#define WATCHDOG_VALUE  0x20000000
 
 
 
@@ -32,7 +32,7 @@ void    EnableWDT(void)
 
   HWREG(SYSCTL_RCGCWD) |= SYSCTL_RCGCWD_R0;
 
-  WatchdogReloadSet(WATCHDOG0_BASE, WATCHDOG_LOAD);
+  WatchdogReloadSet(WATCHDOG0_BASE, WATCHDOG_VALUE);
 
   WatchdogEnable(WATCHDOG0_BASE);
   WatchdogResetEnable(WATCHDOG0_BASE);
@@ -48,11 +48,8 @@ void    DisableWDT(void)
 
   HWREG(SYSCTL_RCGCWD) |= SYSCTL_RCGCWD_R0;
 
-  WatchdogReloadSet(WATCHDOG0_BASE, WATCHDOG_LOAD);
-
-//  WatchdogDisable(WATCHDOG0_BASE);
+  WatchdogReloadSet(WATCHDOG0_BASE, WATCHDOG_VALUE);
   WatchdogResetDisable(WATCHDOG0_BASE);
-//  WatchdogStallEnable(WATCHDOG0_BASE);
 
 #endif
 }
@@ -62,7 +59,7 @@ void    ResetWDT(void)
 {
 #ifdef ENABLE_WATCHDOG
 
-  WatchdogReloadSet(WATCHDOG0_BASE, WATCHDOG_LOAD);
+  WatchdogReloadSet(WATCHDOG0_BASE, WATCHDOG_VALUE);
 
 #endif
 }
