@@ -320,18 +320,19 @@ bool    ReadDataS(uchar  i)
 
   if (dw != 0xFFFFFF)
   {
-    reBuffB = mpdbPulseHou[ibDig];
+    double dbPulse = mpdbPulseHou[ibDig];
+
     reBuffA = (float)dw/wDividerS;
     mpreEngFrac[ibDig] += reBuffA;
 
     uint w;
-    if ((ulong)(mpreEngFrac[ibDig]*reBuffB) < 0xFFFF)
-    { w = (uint)(mpreEngFrac[ibDig]*reBuffB); }
+    if ((ulong)(mpreEngFrac[ibDig]*dbPulse) < 0xFFFF)
+    { w = (uint)(mpreEngFrac[ibDig]*dbPulse); }
     else
     { w = 0xFFFF; mpcwOverflowHou[ibDig]++; }
 
     mpwChannels[0] = w;
-    mpreEngFrac[ibDig] -= (float)w/reBuffB;
+    mpreEngFrac[ibDig] -= (float)w/dbPulse;
 
     MakeSpecial(tiDig);
     return(MakeStopHou(0));  

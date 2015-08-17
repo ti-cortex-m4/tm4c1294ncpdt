@@ -203,12 +203,13 @@ time2   ReadTimeDateS(void)
 {
   Clear();
 
-  if (QueryTimeS_Full(50) == 0) return GetTime2(tiZero, false);
+  time2 ti2 = QueryTimeS_Full(50);
+  if (ti2.fValid == false) return GetTime2(tiZero, false);
 
-  tiChannelC = tiAlt;
+  tiChannelC = ti2.tiValue;
   mpboChannelsA[0] = true;     
 
-  return(1);
+  return GetTime2(ti2.tiValue, true);
 }
 
 
@@ -234,11 +235,13 @@ double2 ReadCntMonCanS(uchar  ibMonth)
 
   if (QueryConfigS_Full(25) == 0) return GetDouble2(0, false);
 
-  if (QueryTimeS_Full(50) == 0) return GetDouble2(0, false);
+  time2 ti2 = QueryTimeS_Full(50);
+  if (ti2.fValid == false) return GetDouble2(0, false);
+  time ti = ti2.tiValue;
 
-  if (tiAlt.bMonth != ibMonth+1) 
+  if (ti.bMonth != ibMonth+1)
   {
-    if (QueryEngMonS_Full((bMONTHS+tiAlt.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2(0, false);
+    if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2(0, false);
   }
   else 
   {
