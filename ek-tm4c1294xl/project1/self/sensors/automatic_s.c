@@ -4,7 +4,6 @@ AUTOMATIC_S.C
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
 #include "../main.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_factors.h"
@@ -203,7 +202,7 @@ time2   ReadTimeDateS(void)
   if (QueryTimeAltS_Full(50) == 0) return(0);
 
   tiChannelC = tiAlt;
-  mpboChannelsA[0] = boTrue;     
+  mpboChannelsA[0] = true;     
 
   return(1);
 }
@@ -219,7 +218,7 @@ double2 ReadSensorS(void)
 
   reBuffA = (real)mpdwChannelsA[0] / wDividerS;
   mpreChannelsB[0] = reBuffA;
-  mpboChannelsA[0] = boTrue;
+  mpboChannelsA[0] = true;
 
   return(1);
 }
@@ -244,7 +243,7 @@ double2 ReadCntMonCanS(uchar  ibMonth)
 
   reBuffA = (real)mpdwChannelsA[0] / wDividerS;
   mpreChannelsB[0] = reBuffA;
-  mpboChannelsA[0] = boTrue;
+  mpboChannelsA[0] = true;
 
   return(1);
 }

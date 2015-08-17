@@ -238,7 +238,7 @@ void    ReadEnergyS(void)
   coEnergy.mpbBuff[0] = PopChar();
 
   mpdwChannelsA[0] = coEnergy.dwBuff;
-  mpboChannelsA[0] = boTrue;
+  mpboChannelsA[0] = true;
 }
 
 
@@ -253,7 +253,7 @@ uchar i;
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
     sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-    if (boShowMessages == boTrue) DelayMsg();
+    if (boShowMessages == true) DelayMsg();
   }
 
   tiDigPrev = tiCurr;
@@ -320,7 +320,7 @@ bool    ReadDataS(uchar  i)
 
   if (dwBuffC != 0xFFFFFF)
   {
-    reBuffB = mprePulseHou[ibDig];
+    reBuffB = mpdbPulseHou[ibDig];
     reBuffA = (real)dwBuffC/wDividerS;
     mpreEngFrac[ibDig] += reBuffA;
 
@@ -374,7 +374,7 @@ uchar i;
 void    ReadCurrentS(void)
 {
   ReadEnergyS();
-  mpdwBaseDig[0] = coEnergy.dwBuff*mprePulseMnt[ibDig]/wDividerS;
+  mpdwBaseDig[0] = coEnergy.dwBuff*mpdbPulseMnt[ibDig]/wDividerS;
 
   MakeCurrent();
 }
