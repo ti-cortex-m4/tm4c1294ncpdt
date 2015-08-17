@@ -4,9 +4,9 @@ FLOAT,H
 
 ------------------------------------------------------------------------------*/
 
-bool    IsFloatNAN(float  fl);
 float   GetFloatNAN(void);
-bool    ValidFloat(float  fl);
+bool    IsFloatNAN(float  fl);
+bool    IsValidFloat(float  fl);
 
 double  GetDoubleNAN(void);
 

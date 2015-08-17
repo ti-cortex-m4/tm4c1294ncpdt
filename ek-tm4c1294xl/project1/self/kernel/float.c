@@ -9,14 +9,6 @@ FLOAT,C
 
 
 
-bool    IsFloatNAN(float  fl)
-{
-  combo32 co;
-  co.flBuff = fl;
-  return co.dwBuff == 0xFFFFFFFF;
-}
-
-
 float   GetFloatNAN(void)
 {
   combo32 co;
@@ -25,7 +17,15 @@ float   GetFloatNAN(void)
 }
 
 
-bool    ValidFloat(float  fl)
+bool    IsFloatNAN(float  fl)
+{
+  combo32 co;
+  co.flBuff = fl;
+  return co.dwBuff == 0xFFFFFFFF;
+}
+
+
+bool    IsValidFloat(float  fl)
 {
   return !IsFloatNAN(fl);
 }

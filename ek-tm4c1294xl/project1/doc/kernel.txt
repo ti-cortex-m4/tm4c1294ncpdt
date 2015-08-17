@@ -9,8 +9,8 @@ boolean.h
 crc-16.c
 crc-16.h
 error.c
-float.c
-float.h
++  float.c
++  float.h
 kernel.txt
 parity.c
 parity.h
