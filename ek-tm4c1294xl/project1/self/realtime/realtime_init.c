@@ -31,7 +31,7 @@ time    tiT;
   cbDays = 0;
   while (1)
   {
-    ResetWDT();
+    ResetWatchdog();
 
     tiT = *GetCurrTimeDate();
     tiCurr.bSecond = tiT.bSecond;

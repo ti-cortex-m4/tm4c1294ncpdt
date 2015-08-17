@@ -595,7 +595,7 @@ uchar   i,j;
 
   for (i=j; i<48; i++) 
   {
-    ResetWDT();
+    ResetWatchdog();
     MakeDataK(47-i);
 
     tiAlt = tiDig;

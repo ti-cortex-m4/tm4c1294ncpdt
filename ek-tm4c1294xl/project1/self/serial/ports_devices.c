@@ -72,7 +72,7 @@ serial  Input(void)
   {
     if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-    ResetWDT();
+    ResetWatchdog();
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
@@ -147,7 +147,7 @@ serial  RevInput(void)
   {
     if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-    ResetWDT();
+    ResetWatchdog();
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
@@ -257,7 +257,7 @@ serial  BccInput(void)
   {
     if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-    ResetWDT();
+    ResetWatchdog();
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 

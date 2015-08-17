@@ -59,7 +59,7 @@ void    InitDisplay(void)
 {
   Delay(500);
 
-  if (IsResetWDT() == true)
+  if (IsResetWatchdog() == true)
   {
     ShowLo(szIsResetWDT);
     cwWrnResetWDT++;
@@ -144,7 +144,7 @@ void    ShowAnswer(void)
 
 void    ShowPercent(uchar  bT)
 {
-  sprintf(szLo+5,"%3u%c",bT,'%'); ResetWDT();
+  sprintf(szLo+5,"%3u%c",bT,'%'); ResetWatchdog();
 }
 
 

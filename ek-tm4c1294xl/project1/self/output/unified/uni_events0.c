@@ -60,7 +60,7 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
 
   x_str("\n\n page"); x_intdec(iwPage);
 
-  ResetWDT();
+  ResetWatchdog();
 
   if (ibClass == 1)
     GetRecordsBlock(CLA_SYSTEM, iwPage);

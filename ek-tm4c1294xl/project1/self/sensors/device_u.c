@@ -328,7 +328,7 @@ uchar   i,j;
 
   for (i=j; i<48; i++) 
   {           
-    ResetWDT();
+    ResetWatchdog();
     MakeDataU(47-i);
       
     MakeSpecial(tiDig);

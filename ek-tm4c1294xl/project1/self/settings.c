@@ -18,7 +18,7 @@ file const              flPrivate = {PRIVATE, &wPrivate, sizeof(uint)};
 cache const             chLogical = {LOGICAL, &bLogical, sizeof(uchar)};
 
 cache const             chFirstReset = {FIRST_RESET, &boFirstReset, sizeof(bool)};
-cache const             chEnblWDT = {ENBL_WDT, &boEnblWDT, sizeof(bool)};
+cache const             chEnblWDT = {ENBL_WDT, &boEnblWatchdog, sizeof(bool)};
 
 cache const             chSetTime = {SET_TIME, &boSetTime, sizeof(bool)};
 cache const             chSetDate = {SET_DATE, &boSetDate, sizeof(bool)};
@@ -62,7 +62,7 @@ void    ResetSettings(bool  fFull)
 
   if (fFull)
   {
-    boEnblWDT = true;
+    boEnblWatchdog = true;
     SaveCache(&chEnblWDT);
 
     boSetTime = false;

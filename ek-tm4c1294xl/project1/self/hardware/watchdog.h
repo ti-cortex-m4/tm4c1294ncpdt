@@ -7,9 +7,9 @@ WATCHDOG.H
 #define ENABLE_WATCHDOG
 
 
-void    InitWDT(void);
+void    InitWatchdog(void);
 
-void    EnableWDT(void);
-void    DisableWDT(void);
-void    ResetWDT(void);
-bool    IsResetWDT(void);
+void    EnableWatchdog(void);
+void    DisableWatchdog(void);
+void    ResetWatchdog(void);
+bool    IsResetWatchdog(void);

@@ -19,14 +19,14 @@ WATCHDOG.C
 
 
 
-void    InitWDT(void)
+void    InitWatchdog(void)
 {
-  if (boEnblWDT == true)
-    EnableWDT();
+  if (boEnblWatchdog == true)
+    EnableWatchdog();
 }
 
 
-void    EnableWDT(void)
+void    EnableWatchdog(void)
 {
 #ifdef ENABLE_WATCHDOG
 
@@ -42,7 +42,7 @@ void    EnableWDT(void)
 }
 
 
-void    DisableWDT(void)
+void    DisableWatchdog(void)
 {
 #ifdef ENABLE_WATCHDOG
 
@@ -55,7 +55,7 @@ void    DisableWDT(void)
 }
 
 
-void    ResetWDT(void)
+void    ResetWatchdog(void)
 {
 #ifdef ENABLE_WATCHDOG
 
@@ -65,7 +65,7 @@ void    ResetWDT(void)
 }
 
 
-bool    IsResetWDT(void)
+bool    IsResetWatchdog(void)
 {
   bool f = ((SysCtlResetCauseGet() & SYSCTL_CAUSE_WDOG0) != 0);
   SysCtlResetCauseClear(SYSCTL_CAUSE_WDOG0);

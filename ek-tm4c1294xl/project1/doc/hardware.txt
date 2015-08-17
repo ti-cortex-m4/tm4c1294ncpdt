@@ -10,5 +10,5 @@ sys_tick.c
 sys_tick.h
 uart_loader.c
 uart_loader.h
-watchdog.c
-watchdog.h
++   watchdog.c
++   watchdog.h

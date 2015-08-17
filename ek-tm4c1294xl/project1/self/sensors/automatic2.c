@@ -1787,7 +1787,7 @@ uchar   i,j;
 // прочитать текущие значени€ счЄтчиков
 double2 ReadCntCurrCan(uchar  ibCan)
 {
-  ResetWDT();
+  ResetWatchdog();
   Clear();
 
   LoadCurrDigital(ibCan);
@@ -1825,7 +1825,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 // прочитать врем€ и дату
 time2   ReadTimeCan(uchar  ibCan)
 {
-  ResetWDT();
+  ResetWatchdog();
   Clear();
 
   LoadCurrDigital(ibCan);
@@ -1862,7 +1862,7 @@ time2   ReadTimeCan(uchar  ibCan)
 // прочитать значени€ счетчиков на начало текущих суток (дл€ текущего мес€ца) или на конец мес€ца (дл€ остальных мес€цев)
 double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 {
-  ResetWDT();
+  ResetWatchdog();
   Clear();
 
   LoadCurrDigital(ibCan);

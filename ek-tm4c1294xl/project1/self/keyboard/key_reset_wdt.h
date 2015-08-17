@@ -4,4 +4,4 @@ KEY_RESET_WDT.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_ResetWDT(void);
+void    key_ResetWatchdog(void);

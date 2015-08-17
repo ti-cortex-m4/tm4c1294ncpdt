@@ -18,7 +18,7 @@ bool                    boSetTime,
 bool                    boFirstReset;
 
 //
-bool                    boEnblWDT;
+bool                    boEnblWatchdog;
 
 //
 uint                    cwWrnResetWDT;
