@@ -358,7 +358,7 @@ uchar i;
 
     tiDig = HouIndexToDate(dw);
 
-    if (dw < dwValueC)
+    if (dw < dwValueS)
       if (ReadDataS(4-1-i) == 0) return(0);
   }
   
