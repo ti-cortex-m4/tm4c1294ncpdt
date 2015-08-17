@@ -12,6 +12,7 @@ AUTOMATIC_S.C
 #include "../time/delay.h"
 #include "../time/timedate.h"
 #include "../serial/ports.h"
+#include "../serial/ports2.h"
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals.h"
@@ -110,7 +111,7 @@ serial  InputS(void)
 
 
 
-bit     QueryConfigS_Full(uchar  bPercent)
+bool    QueryConfigS_Full(uchar  bPercent)
 {
 uchar   i;
 
@@ -131,7 +132,7 @@ uchar   i;
 }
 
 
-bit     QueryTimeAltS_Full(uchar  bPercent)
+bool    QueryTimeAltS_Full(uchar  bPercent)
 {
 uchar   i;
 
@@ -152,7 +153,7 @@ uchar   i;
 }
 
 
-bit     QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
+bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
 {
 uchar   i;
 
@@ -216,7 +217,7 @@ double2 ReadSensorS(void)
 
   if (QueryEngMonS_Full(0, 75) == 0) return(0);
 
-  reBuffA = (real)mpdwChannelsA[0] / wDividerS;
+  reBuffA = (float)mpdwChannelsA[0] / wDividerS;
   mpreChannelsB[0] = reBuffA;
   mpboChannelsA[0] = true;
 
@@ -241,7 +242,7 @@ double2 ReadCntMonCanS(uchar  ibMonth)
     if (QueryEngDayS_Full(1, 75) == 0) return(0);
   }
 
-  reBuffA = (real)mpdwChannelsA[0] / wDividerS;
+  reBuffA = (float)mpdwChannelsA[0] / wDividerS;
   mpreChannelsB[0] = reBuffA;
   mpboChannelsA[0] = true;
 
