@@ -292,7 +292,7 @@ void    MakeDataU(uchar  ibHou)
 {
   ShowProgressDigHou();
 
-  double dbPulseHou = mpdbPulseHou[ibDig];
+  double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
   for (i=0; i<ibMinorMax; i++)
@@ -300,10 +300,10 @@ void    MakeDataU(uchar  ibHou)
     float fl = mpflBuffCanHou[i][ibHou];
     mpflEngFracDigCan[ibDig][i] += fl;
 
-    uint w = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulseHou);
+    uint w = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulse);
     mpwChannels[i] = w;
 
-    mpflEngFracDigCan[ibDig][i] -= (float)w/dbPulseHou;
+    mpflEngFracDigCan[ibDig][i] -= (float)w/dbPulse;
   }
 }
 
