@@ -13,5 +13,5 @@ uint    IndexInBuff(void);
 void    MakeCRC16OutBuff(uchar  bOffset, uint  wSize);
 void    MakeCRC16InBuff(uchar  bOffset, uint  wSize);
 
-void    MakeCRC9OutBuff(uchar  bOffset, uint  wSize);
-void    MakeCRC9InBuff(uchar  bOffset, uint  wSize);
+void    MakeCrcSOutBuff(uchar  bOffset, uint  wSize);
+void    MakeCrcSInBuff(uchar  bOffset, uint  wSize);

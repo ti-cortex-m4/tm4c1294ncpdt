@@ -301,7 +301,7 @@ void    QueryHeaderQ_22(void)
 
 void    QueryHeaderQ(void)
 {
-  NoShowTime(1);
+  HideCurrTime(1);
 
 
   tiAlt = tiDigPrev;

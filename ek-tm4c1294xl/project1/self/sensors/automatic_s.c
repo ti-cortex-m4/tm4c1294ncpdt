@@ -44,7 +44,7 @@ void    QueryS_IO(uchar  cbIn, uchar  cbOut)
 {
 uchar	i,j;
 
-  MakeCRC9OutBuff(1, cbOut-3);
+  MakeCrcSOutBuff(1, cbOut-3);
 
   InitPush(0);
   PushChar(0xC0);

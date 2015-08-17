@@ -160,7 +160,7 @@ void    ReadEnergyE(void)
 {
 uint    i;
 
-  NoShowTime(1);                                // запрещаем автоматическое отображение времени
+  HideCurrTime(1);                                
 
   InitPop(0);
   for (i=0; i<48*16; i++) 

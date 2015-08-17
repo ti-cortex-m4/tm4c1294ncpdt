@@ -512,7 +512,7 @@ void    QueryHeaderK_14(void)
 
 void    QueryHeaderK(void)
 {
-  NoShowTime(1);
+  HideCurrTime(1);
 
 
   tiAlt = tiDigPrev;

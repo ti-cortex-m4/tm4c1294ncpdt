@@ -13,7 +13,7 @@ PORTS_COMMON.C
 #include "../isr/serial1.h"
 #include "../isr/serial2.h"
 #include "../isr/serial3.h"
-#include "../kernel/crc-9.h"
+#include "../kernel/crc-s.h"
 #include "../kernel/crc-16.h"
 #include "ports.h"
 
@@ -102,27 +102,27 @@ void    MakeCRC16InBuff(uchar  bOffset, uint  wSize)
 
 #ifndef SKIP_S
 
-void    MakeCRC9OutBuff(uchar  bOffset, uint  wSize)
+void    MakeCrcSOutBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
-    case 0:  MakeCRC8_B5(mpbOutBuff0 + bOffset, wSize);  break;
-    case 1:  MakeCRC8_B5(mpbOutBuff1 + bOffset, wSize);  break;
-    case 2:  MakeCRC8_B5(mpbOutBuff2 + bOffset, wSize);  break;
-    case 3:  MakeCRC8_B5(mpbOutBuff3 + bOffset, wSize);  break;
+    case 0:  MakeCrcS(mpbOutBuff0 + bOffset, wSize);  break;
+    case 1:  MakeCrcS(mpbOutBuff1 + bOffset, wSize);  break;
+    case 2:  MakeCrcS(mpbOutBuff2 + bOffset, wSize);  break;
+    case 3:  MakeCrcS(mpbOutBuff3 + bOffset, wSize);  break;
     default: ASSERT(false);
   }
 }
 
 
-void    MakeCRC9InBuff(uchar  bOffset, uint  wSize)
+void    MakeCrcSInBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
-    case 0:  MakeCRC8_B5(mpbInBuff0 + bOffset, wSize);  break;
-    case 1:  MakeCRC8_B5(mpbInBuff1 + bOffset, wSize);  break;
-    case 2:  MakeCRC8_B5(mpbInBuff2 + bOffset, wSize);  break;
-    case 3:  MakeCRC8_B5(mpbInBuff3 + bOffset, wSize);  break;
+    case 0:  MakeCrcS(mpbInBuff0 + bOffset, wSize);  break;
+    case 1:  MakeCrcS(mpbInBuff1 + bOffset, wSize);  break;
+    case 2:  MakeCrcS(mpbInBuff2 + bOffset, wSize);  break;
+    case 3:  MakeCrcS(mpbInBuff3 + bOffset, wSize);  break;
     default: ASSERT(false);
   }
 }
