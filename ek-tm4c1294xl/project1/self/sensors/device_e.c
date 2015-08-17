@@ -141,7 +141,7 @@ void    DefaultDefectE(void)
 uint    i;
 
   for (i=0; i<48*16; i++) 
-    mpbEsc_Def[i] = boTrue;
+    mpbEsc_Def[i] = true;
 }
 
 
@@ -246,7 +246,7 @@ uchar   i,j;
       if ((i >= GetHouIndex()) || (i > j)) break;
     }
 
-    if (mpbEsc_Def[16*i + ibDig] == boTrue)
+    if (mpbEsc_Def[16*i + ibDig] == true)
       MakePrevHou();
 
     if (MakeStopHou(48) == 0) return(0);        // выход: граница опроса пройдена    

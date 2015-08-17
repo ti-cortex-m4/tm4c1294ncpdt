@@ -5,10 +5,13 @@ DECOMPRESS_S.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_settings.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_digitals.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
-//#include "../display/display.h"
+#include "../display/display.h"
+#include "../time/delay.h"
 #include "decompress_s.h"
 
 
@@ -47,10 +50,10 @@ uchar   i,j;
     return;
   }
 
-  fAlt = 1;
-  while ((fAlt == 1) && (IndexInBuff() > 11) && (IndexInBuff() != (GetInBuff(6) & 0x0F) + 11))
+  bool f = 1;
+  while ((f == 1) && (IndexInBuff() > 11) && (IndexInBuff() != (GetInBuff(6) & 0x0F) + 11))
   {
-    fAlt = 0;
+    f = 0;
 
     j = RepackS_0xDB(0xDD);
     if (j != 0)
@@ -58,7 +61,7 @@ uchar   i,j;
       SetInBuff(j, 0xDB);
       for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, GetInBuff(i+1));
       SetIndexInBuff(IndexInBuff()-1);
-      fAlt = 1;
+      f = 1;
       continue;
     }
 
@@ -68,7 +71,7 @@ uchar   i,j;
       SetInBuff(j, 0xC0);
       for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, GetInBuff(i+1));
       SetIndexInBuff(IndexInBuff()-1);
-      fAlt = 1;
+      f = 1;
       continue;
     }
   }

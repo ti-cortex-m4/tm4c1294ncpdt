@@ -96,3 +96,33 @@ void    MakeCRC16InBuff(uchar  bOffset, uint  wSize)
     default: ASSERT(false);
   }
 }
+
+
+
+#ifndef SKIP_S
+
+void    MakeCRC9OutBuff(uchar  bOffset, uint  wSize)
+{
+  switch (ibPort)
+  {
+    case 0:  MakeCRC8_B5(&mpbOutBuff0+bOffset, wSize);  break;
+    case 1:  MakeCRC8_B5(&mpbOutBuff1+bOffset, wSize);  break;
+    case 2:  MakeCRC8_B5(&mpbOutBuff2+bOffset, wSize);  break;
+    case 3:  MakeCRC8_B5(&mpbOutBuff3+bOffset, wSize);  break;
+  }
+}
+
+
+void    MakeCRC9InBuff(uchar  bOffset, uint  wSize)
+{
+  switch (ibPort)
+  {
+    case 0:  MakeCRC8_B5(&mpbInBuff0+bOffset, wSize);  break;
+    case 1:  MakeCRC8_B5(&mpbInBuff1+bOffset, wSize);  break;
+    case 2:  MakeCRC8_B5(&mpbInBuff2+bOffset, wSize);  break;
+    case 3:  MakeCRC8_B5(&mpbInBuff3+bOffset, wSize);  break;
+  }
+}
+
+#endif
+

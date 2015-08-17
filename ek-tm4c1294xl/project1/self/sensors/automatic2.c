@@ -30,6 +30,7 @@ AUTOMATIC2.C
 #include "automatic_a.h"
 #include "automatic_b.h"
 #include "automatic_c.h"
+#include "automatic_s.h"
 #include "automatic_u.h"
 
 
@@ -1964,7 +1965,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_S
-    case 24: return( ReadCntMonCanS(ibMon) ); break;
+    case 24: return ReadCntMonCanS(ibMon);
 #endif
 
 #ifndef SKIP_T
