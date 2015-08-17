@@ -96,7 +96,7 @@ void    SaveHeaderC(uchar  i)
     vValue71.mpwSelf[ibCan] = wBuffD;
   }
 
-  //x_str("\n"); x_bytedec(ibValue7); x_value1(); ResetWDT();
+  //x_str("\n"); x_bytedec(ibValue7); x_value1(); ResetWatchdog();
 }
 
 
@@ -187,7 +187,7 @@ uchar i;
     vValue71 = mpValue71[i];
     vValue72 = mpValue72[i];
 
-    //x_str("\n"); x_bytedec(i); x_value1(); x_value2(); ResetWDT();
+    //x_str("\n"); x_bytedec(i); x_value1(); x_value2(); ResetWatchdog();
 
     if (vValue71.tiSelf.bSecond != vValue72.tiSelf.bSecond) return 1;
     if (vValue71.tiSelf.bMinute != vValue72.tiSelf.bMinute) return 2;
@@ -210,7 +210,7 @@ bit   SaveDataC_7(uchar  i)
 {
   vValue71  = mpValue71[i];
   tiDig = vValue71.tiSelf; 
-  //x_str("\n"); x_bytedec(i); x_value1(); ResetWDT(); 
+  //x_str("\n"); x_bytedec(i); x_value1(); ResetWatchdog(); 
   if (vValue71.bSelf == 0) return 1;
 
 
@@ -237,7 +237,7 @@ bit   SaveDataC0_6()
 uchar i;
 
   for (i=0; i<bVALUE7_REAL_SIZE; i++) {
-    ResetWDT();
+    ResetWatchdog();
     if (SaveDataC_7(i) == 0) return 0;
   }
 

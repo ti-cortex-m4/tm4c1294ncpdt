@@ -62,7 +62,7 @@ void    DelayMilly(uint  wMillySec) {
 
 
 void    Delay(uint  wMillySec) {
-  ResetWDT();
+  ResetWatchdog();
   DelayMilly(wMillySec);
 }
 

@@ -51,7 +51,7 @@ uchar   i,j,k;
 
     for (j=bInBuffB; j<bInBuffB+bInBuffD; j++)
     {
-      ResetWDT();
+      ResetWatchdog();
       memset(&mpbDefUni, 0, sizeof(mpbDefUni));
 
       uint iwHou = GetDayHouIndex(j);
@@ -105,7 +105,7 @@ uchar   i,j,k;
 
     for (j=bInBuffB; j<bInBuffB+bInBuffD; j++)
     {
-      ResetWDT();
+      ResetWatchdog();
       memset(&mpbDefUni, 0, sizeof(mpbDefUni));
 
       uint iwHou = GetDayHouIndex(j);

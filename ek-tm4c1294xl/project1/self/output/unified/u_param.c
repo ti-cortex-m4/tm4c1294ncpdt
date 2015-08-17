@@ -263,7 +263,7 @@ uint    i,j;
       wSize += PushParamsUni(10, ibCan);
 
       if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
-      ResetWDT();
+      ResetWatchdog();
     }
 
     Output2_Code(wSize, ((boParamsFlag == true) ? bUNI_OK : bUNI_NOTREADY), ti);

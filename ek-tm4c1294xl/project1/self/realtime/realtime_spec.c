@@ -36,7 +36,7 @@ static void ProcessTimeMnt(void)
 
 void    NexttimeMnt(void)
 {
-  ResetWDT();
+  ResetWatchdog();
   // TODO if (GetLabelRTC() == 0) return;
 
   time tiT = *GetCurrTimeDate();

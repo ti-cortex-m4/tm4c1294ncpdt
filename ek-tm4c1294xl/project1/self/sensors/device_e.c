@@ -224,7 +224,7 @@ uchar   i,j;
 
   for (i=0; i<48; i++)                          // читаем информацию по получасам
   {  
-    ResetWDT();
+    ResetWatchdog();
 
     for (ibCan=0; ibCan<16; ibCan++)
       if (ibCan < bCHANNELS) mpwChannels[ibCan] = mpwEsc_L[(uint)i*16 + ibCan];
@@ -274,7 +274,7 @@ uchar   i;
 
   do 
   {
-    ResetWDT();
+    ResetWatchdog();
     if (fKey == 1) { fKey = 0; Beep(); }
 
     // индекс на начало требуемых суток
@@ -322,7 +322,7 @@ uchar   i,j;
 
     for (j=0; j<bMaximum; j++)
     {
-      ResetWDT();
+      ResetWatchdog();
       if (fKey == 1) { fKey = 0; Beep(); }
 
       InitPush();

@@ -46,7 +46,7 @@ uchar   j;
     {
       if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-      ResetWDT();
+      ResetWatchdog();
       ShowWaitAnswer(1);
       if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
@@ -106,7 +106,7 @@ uchar   j;
     {
       if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-      ResetWDT();
+      ResetWatchdog();
       ShowWaitAnswer(1);
       if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
@@ -173,7 +173,7 @@ uchar   j;
     {
       if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-      ResetWDT();
+      ResetWatchdog();
       ShowWaitAnswer(1);
       if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
@@ -232,7 +232,7 @@ uchar   j;
     {
       if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-      ResetWDT();
+      ResetWatchdog();
       ShowWaitAnswer(1);
       if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 

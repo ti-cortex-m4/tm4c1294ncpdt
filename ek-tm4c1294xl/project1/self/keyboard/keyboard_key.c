@@ -164,7 +164,7 @@ void    Keyboard_Key(void)
       case bSET_RESETCUSTOM:
       case bSET_RESETFULL:      key_SetReset();         break;
 
-      case bSET_RESET_WDT:      key_ResetWDT();         break;
+      case bSET_RESET_WDT:      key_ResetWatchdog();         break;
 
       case bSEARCH_BY_NUMBER:   key_SearchByNumber();   break;
       case bSEARCH_BY_SPEED:    key_SearchBySpeed();    break;
@@ -580,7 +580,7 @@ void    Keyboard_Key(void)
       case bSET_RESETCUSTOM:
       case bSET_RESETFULL:      key_SetReset();         break;
 
-      case bSET_RESET_WDT:      key_ResetWDT();         break;
+      case bSET_RESET_WDT:      key_ResetWatchdog();         break;
 
       case bSEARCH_BY_NUMBER:   key_SearchByNumber();   break;
       case bSEARCH_BY_SPEED:    key_SearchBySpeed();    break;

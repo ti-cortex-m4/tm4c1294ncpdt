@@ -27,7 +27,7 @@ serial  ModInput(uchar  bSecond, bool  fShow)
   {
     if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-    ResetWDT();
+    ResetWatchdog();
     ShowWaitAnswer(fShow);
 
     if (GetCurr() == DEV_MODEM_MANUAL) break;

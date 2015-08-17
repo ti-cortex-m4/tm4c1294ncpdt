@@ -35,14 +35,14 @@ static uint             wPage;
 
 void    ShowFlashErase(void)
 {
-  ResetWDT();
+  ResetWatchdog();
   ShowPercent((ulong)100*(++wPage)/(IMPHOUCAN_PAGES + bMINUTES + bDAYS*2 + bMONTHS*3 + PARAMS_PAGES*wTIMES + bRECORD_PAGES*6 + wRECORD2_PAGES*1));
 }
 
 
 void    ShowFlashRead(void)
 {
-  ResetWDT();
+  ResetWatchdog();
   ShowPercent((ulong)100*(++wPage)/((FLASH_END-FLASH_BEGIN+1)/2));
 }
 
@@ -91,7 +91,7 @@ uint    i;
 
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
-    ResetWDT();
+    ResetWatchdog();
     if (Test1WriteNvramBuff(i*1000, 1000) == false) return false;
     if (Test1ReadNvramBuff(i*1000, 1000) == false) return false;
     ShowPercent(0 + (uint)20*i/(dwNVRAM_BYTES/1000));
@@ -99,7 +99,7 @@ uint    i;
 
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
-    ResetWDT();
+    ResetWatchdog();
     if (Test2WriteNvramBuff(i*1000, 1000, 0x55) == false) return false;
     if (Test2ReadNvramBuff(i*1000, 1000, 0x55) == false) return false;
     ShowPercent(20 + (uint)20*i/(dwNVRAM_BYTES/1000));
@@ -107,7 +107,7 @@ uint    i;
 
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
-    ResetWDT();
+    ResetWatchdog();
     if (Test2WriteNvramBuff(i*1000, 1000, 0xAA) == false) return false;
     if (Test2ReadNvramBuff(i*1000, 1000, 0xAA) == false) return false;
     ShowPercent(40 + (uint)20*i/(dwNVRAM_BYTES/1000));
@@ -115,7 +115,7 @@ uint    i;
 
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
-    ResetWDT();
+    ResetWatchdog();
     if (Test2WriteNvramBuff(i*1000, 1000, 0xFF) == false) return false;
     if (Test2ReadNvramBuff(i*1000, 1000, 0xFF) == false) return false;
     ShowPercent(60 + (uint)20*i/(dwNVRAM_BYTES/1000));
@@ -123,7 +123,7 @@ uint    i;
 
   for (i=0; i<=dwNVRAM_BYTES/1000; i++)
   {
-    ResetWDT();
+    ResetWatchdog();
     if (Test2WriteNvramBuff(i*1000, 1000, 0x00) == false) return false;
     if (Test2ReadNvramBuff(i*1000, 1000, 0x00) == false) return false;
     ShowPercent(80 + (uint)20*i/(dwNVRAM_BYTES/1000));

@@ -229,7 +229,7 @@ void    TestError(const char  *szT)
 
   while (1)
   {
-    ResetWDT();
+    ResetWatchdog();
     DelayMsg(); Beep();
   }
 }

@@ -17,7 +17,7 @@ static char const       szResetWDT[]    = "—брос по WDT ?  ";
 
 
 
-void    key_ResetWDT(void)
+void    key_ResetWatchdog(void)
 {
   if (bKey == bKEY_ENTER)
   {

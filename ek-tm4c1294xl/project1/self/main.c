@@ -91,7 +91,7 @@ int     main(void)
   InitUart3(ui32SysClockFreq);
   InitUart4(ui32SysClockFreq);
 
-  DisableWDT();
+  DisableWatchdog();
 
   InitBeep();
   InitLCD();
@@ -158,13 +158,13 @@ int     main(void)
   InitUartLoader();
   LongBeep();
 
-  InitWDT();
+  InitWatchdog();
 
   while (1)
   {
     ASSERT((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_WORK) || (enGlobal == GLB_REPROGRAM));
 
-    ResetWDT();
+    ResetWatchdog();
 
     RunRealtime();
     RunDevices();
