@@ -30,6 +30,7 @@ DEVICE_S.C
 #include "../digitals/limits.h"
 #include "../special/special.h"
 #include "../hardware/watchdog.h"
+#include "automatic_s.h"
 #include "device_s.h"
 //#include        "xdata.h"
 //#include        "ports.h"
