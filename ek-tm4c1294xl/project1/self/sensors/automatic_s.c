@@ -43,7 +43,7 @@ uchar	i,j;
 
   MakeCRC9OutBuff(1, cbOut-3);
 
-  InitPush();
+  InitPush(0);
   PushChar(0xC0);
   for (i=0; i<cbOut-3; i++) SkipChar();
   PushChar(bCRC);
@@ -174,7 +174,7 @@ uchar   i;
 }
 
 
-bit     QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
+bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
 {
 uchar   i;
 
@@ -196,7 +196,7 @@ uchar   i;
 
 
 
-bit     ReadTimeDateS(void)                 
+time2   ReadTimeDateS(void)
 {
   Clear();
 
@@ -209,7 +209,7 @@ bit     ReadTimeDateS(void)
 }
 
 
-bit     ReadSensorS(void)                 
+double2 ReadSensorS(void)
 {
   Clear();
 
@@ -225,7 +225,7 @@ bit     ReadSensorS(void)
 }
 
 
-bit     ReadCntMonCanS(uchar  ibMonth)
+double2 ReadCntMonCanS(uchar  ibMonth)
 { 
   Clear();
 

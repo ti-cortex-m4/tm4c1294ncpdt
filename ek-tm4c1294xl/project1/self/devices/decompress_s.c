@@ -7,7 +7,7 @@ DECOMPRESS_S.C
 #include "../main.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
-//#include "../serial/ports2.h"
+#include "../serial/ports2.h"
 //#include "../display/display.h"
 #include "decompress_s.h"
 

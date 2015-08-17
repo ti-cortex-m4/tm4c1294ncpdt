@@ -80,7 +80,7 @@ void    QueryOptionQ(void)
 {
 uchar   i;
 
-  InitPush();
+  InitPush(0);
   PushChar1Bcc(0x06);
 
   switch (mppoPorts[ diCurr.ibPort ].ibSpeed)
@@ -106,7 +106,7 @@ uchar   i;
 
 void    QueryCorrectQ(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc('/');
   PushChar1Bcc('?');
@@ -200,7 +200,7 @@ void    QueryEnergyMonQ(void)
 
 void    QueryEnergySpecQ(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
@@ -253,7 +253,7 @@ void    InitHeaderQ(void)
 
 void    QueryHeaderQ_22(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');

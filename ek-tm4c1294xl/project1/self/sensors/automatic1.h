@@ -17,3 +17,4 @@ bool    AutomaticA(void);
 bool    AutomaticB(void);
 bool    AutomaticC(void);
 bool    AutomaticJ(void);
+bool    AutomaticS(void);

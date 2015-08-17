@@ -175,7 +175,7 @@ uchar   i,bT;
 // посылка запроса на чтение энергии
 void    QueryEnergySpecK(uchar  ibLine)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
@@ -403,7 +403,7 @@ time    ReadDateK(time  ti)
 /*
 void    QueryCorrectK(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc('/');
   PushChar1Bcc('?');
@@ -455,7 +455,7 @@ void    QueryControlK(void)
 /*
 void    QueryHeaderK_13(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
@@ -484,7 +484,7 @@ void    QueryHeaderK_13(void)
 
 void    QueryHeaderK_14(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
