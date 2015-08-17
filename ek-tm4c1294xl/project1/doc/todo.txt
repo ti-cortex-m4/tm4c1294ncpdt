@@ -41,4 +41,5 @@ AUTOMATIC4
 
 sem2reader расчет макс. мощности по получасам
 
-output - profile debug data
+output - from mem_profile
+profile - show time difference

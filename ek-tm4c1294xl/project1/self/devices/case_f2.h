@@ -17,7 +17,7 @@
 
     case DEV_POSTOPENCANAL_F2:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
+      sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = GetMaxRepeats();
       QueryTimeF();                          

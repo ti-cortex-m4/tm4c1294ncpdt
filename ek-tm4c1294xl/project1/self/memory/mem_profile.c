@@ -73,10 +73,10 @@ uint                    mpcwOutputZ[bCANALS],
                         mpcwOutput3[bCANALS];
 
 // глобальная переменная
-time                    tiValueA, tiValueB, tiValueC;
+time                    tiValueA, tiValueB, tiValueC, tiValueS;
 
 // глобальная переменная
-ulong                   dwValueC;
+ulong                   dwValueC, dwValueS;
 
 
 
