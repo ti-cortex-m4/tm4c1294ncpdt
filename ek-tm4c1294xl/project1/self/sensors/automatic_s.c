@@ -12,6 +12,7 @@ AUTOMATIC_S.C
 #include "../time/delay.h"
 #include "../time/timedate.h"
 #include "../hardware/watchdog.h"
+#include "../kernel/crc-s.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
 #include "../serial/ports_devices.h"
@@ -49,7 +50,7 @@ uchar	i,j;
   InitPush(0);
   PushChar(0xC0);
   for (i=0; i<cbOut-3; i++) SkipChar();
-  PushChar(bCRC);
+  PushChar(bCrcS);
   PushChar(0xC0);
 
 

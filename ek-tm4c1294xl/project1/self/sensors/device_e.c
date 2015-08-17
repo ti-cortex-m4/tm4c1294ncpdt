@@ -247,7 +247,7 @@ uchar   i,j;
     }
 
     if (mpbEsc_Def[16*i + ibDig] == true)
-      MakePrevHou();
+      MakeSpecial();
 
     if (MakeStopHou(48) == 0) return(0);        // выход: граница опроса пройдена    
 

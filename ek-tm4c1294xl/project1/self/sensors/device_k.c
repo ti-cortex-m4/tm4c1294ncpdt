@@ -599,7 +599,7 @@ uchar   i,j;
     MakeDataK(47-i);
 
     tiAlt = tiDig;
-    MakePrevHou();
+    MakeSpecial();
     if (MakeStopHou(0) == 0) return(0);
 
 

@@ -315,7 +315,7 @@ bool    ReadEnergyF(uchar  ibBlock)
     mpwChannels[ibCan] = PopChar()*0x100 + PopChar();
 
   tiAlt = tiDig;
-  MakePrevHou();  
+  MakeSpecial();  
   return(MakeStopHou(0));
 }
 

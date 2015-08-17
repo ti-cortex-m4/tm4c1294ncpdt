@@ -253,7 +253,9 @@ uchar i;
   else 
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
-    sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+
+    Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+
     if (boShowMessages == true) DelayMsg();
   }
 
@@ -272,13 +274,9 @@ void    QueryHeaderS(void)
   HideCurrTime(1);
 
 
-  tiAlt = tiDigPrev;
-  dwBuffC = DateToHouIndex();
-
-  dwBuffC -= wBaseCurr;
-
-  HouIndexToDate(dwBuffC);
-  tiDig = tiAlt;
+  ulong dw = DateToHouIndex(tiDigPrev);
+  dw -= wBaseCurr;
+  tiDig = HouIndexToDate(dw);
 
 
   InitPush(0);
@@ -304,8 +302,7 @@ void    QueryHeaderS(void)
 
 bool    ReadDataS(uchar  i)
 {
-  sprintf(szLo," %02bu:%02bu %02bu.%02bu.%02bu",
-          tiDig.bHour,tiDig.bMinute, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
   tiAlt = tiDig;
   if (SearchDefHouIndex() == 0) return(1); 
@@ -315,14 +312,14 @@ bool    ReadDataS(uchar  i)
 
   InitPop(9+i*3);                                    
 
-  dwBuffC  = PopChar();
-  dwBuffC += PopChar()*0x100;
-  dwBuffC += PopChar()*0x10000;
+  ulong dw  = PopChar();
+  dw += PopChar()*0x100;
+  dw += PopChar()*0x10000;
 
-  if (dwBuffC != 0xFFFFFF)
+  if (dw != 0xFFFFFF)
   {
     reBuffB = mpdbPulseHou[ibDig];
-    reBuffA = (float)dwBuffC/wDividerS;
+    reBuffA = (float)dw/wDividerS;
     mpreEngFrac[ibDig] += reBuffA;
 
     if ((ulong)(mpreEngFrac[ibDig]*reBuffB) < 0xFFFF)
@@ -333,8 +330,7 @@ bool    ReadDataS(uchar  i)
     mpwChannels[0] = wBuffD;
     mpreEngFrac[ibDig] -= (float)wBuffD/reBuffB;
 
-    tiAlt = tiDig;
-    MakePrevHou();  
+    MakeSpecial(tiDig);
     return(MakeStopHou(0));  
   }
   else
@@ -351,16 +347,14 @@ uchar i;
 
   for (i=0; i<4; i++)
   {
-    tiAlt = tiDigPrev;
-    dwBuffC = DateToHouIndex();
+    ulong dw = DateToHouIndex(tiDigPrev);
 
-    dwBuffC += 4-1;
-    dwBuffC -= (wBaseCurr + i);
+    dw += 4-1;
+    dw -= (wBaseCurr + i);
 
-    HouIndexToDate(dwBuffC);
-    tiDig = tiAlt;
+    tiDig = HouIndexToDate(dw);
 
-    if (dwBuffC < dwValueC)     
+    if (dw < dwValueC)
       if (ReadDataS(4-1-i) == 0) return(0);
   }
   

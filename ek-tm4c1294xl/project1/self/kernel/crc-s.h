@@ -8,4 +8,4 @@ extern  uchar                   bCrcS;
 
 
 
-uchar   MakeCrcS(uchar  *pbData, uint  wSize);
+void    MakeCrcS(uchar  *pbData, uint  wSize);
