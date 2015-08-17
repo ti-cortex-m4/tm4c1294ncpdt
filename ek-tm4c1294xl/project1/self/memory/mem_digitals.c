@@ -101,8 +101,3 @@ uchar                   bPlcUSize;
 
 // размер
 uint                    wPlcUShutdown;
-
-
-
-// делитель для энергии счетчика СЕ102
-uint                    wDividerS;

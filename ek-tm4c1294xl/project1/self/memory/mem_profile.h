@@ -63,4 +63,14 @@ extern  ulong                   dwValueC;
 
 extern  float                   mpflBuffCanHou[4][48];
 
+extern  float                   mpreEngFrac[bCANALS];
+
 extern  float                   mpflEngFracDigCan[bCANALS][6];
+
+extern  uint                    mpcwOverflowHou[bCANALS];
+
+extern  uint                    mpcwErrorLink[bCANALS];
+
+extern  uchar                   mpbOutBuffSave[1024];
+
+extern  uint                    wDividerS;

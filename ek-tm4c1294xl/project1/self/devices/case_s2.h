@@ -101,7 +101,7 @@
       else
       {
         cbRepeat = GetMaxRepeats();                         
-        QueryControlS();                          
+        QueryControlS(tiCurr);
         SetCurr(DEV_POSTOPENCANAL_S2);
       }
       break;

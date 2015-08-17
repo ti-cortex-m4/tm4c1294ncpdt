@@ -5,9 +5,9 @@ DEVICE_S.C
 ------------------------------------------------------------------------------*/
 
 void    QueryTimeS(void);
-void    ReadTimeAltS(void);
+time    ReadTimeS(void);
 
-void    QueryControlS(void);
+void    QueryControlS(time  ti);
 
 void    QueryConfigS(void);
 void    ReadConfigS(void);
