@@ -40,3 +40,5 @@ P15 просмотр счетчиков
 AUTOMATIC4
 
 sem2reader расчет макс. мощности по получасам
+
+output - profile debug data

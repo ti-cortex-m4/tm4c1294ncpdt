@@ -199,7 +199,7 @@ uchar   i;
 
 
 
-time2   ReadTimeDateS(void)
+time2   ReadTimeCanS(void)
 {
   Clear();
 
@@ -213,7 +213,7 @@ time2   ReadTimeDateS(void)
 }
 
 
-double2 ReadSensorS(void)
+double2 ReadCntCurrS(void)
 {
   Clear();
 
@@ -221,11 +221,10 @@ double2 ReadSensorS(void)
 
   if (QueryEngMonS_Full(0, 75) == 0) return GetDouble2(0, false);
 
-  reBuffA = (float)mpdwChannelsA[0] / wDividerS;
-  mpreChannelsB[0] = reBuffA;
+  mpdbChannelsC[0] = (float)mpdwChannelsA[0] / wDividerS;
   mpboChannelsA[0] = true;
 
-  return(1);
+  return GetDouble2(mpdbChannelsC[0], true);
 }
 
 
@@ -248,11 +247,10 @@ double2 ReadCntMonCanS(uchar  ibMonth)
     if (QueryEngDayS_Full(1, 75) == 0) return GetDouble2(0, false);
   }
 
-  reBuffA = (float)mpdwChannelsA[0] / wDividerS;
-  mpreChannelsB[0] = reBuffA;
+  mpdbChannelsC[0] = (float)mpdwChannelsA[0] / wDividerS;
   mpboChannelsA[0] = true;
 
-  return(1);
+  return GetDouble2(mpdbChannelsC[0], true);
 }
 
 #endif
