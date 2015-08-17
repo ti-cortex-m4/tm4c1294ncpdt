@@ -1,6 +1,5 @@
-beep.c
-beep.h
-hardware.txt
++   beep.c
++   beep.h
 memory.c
 memory.h
 power_off.c
