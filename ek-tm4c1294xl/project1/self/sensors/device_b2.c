@@ -46,13 +46,17 @@ void    ReadTopBNew(void)
     if (mpboStartCan[ibDig] == false)
     {
       dwBaseCurr = InBuff(1); dwBaseCurr <<= 12; dwBaseCurr += InBuff(2) << 4;
-      if (boShowMessages == true) sprintf(szLo," начало %05lX * ",dwBaseCurr);
+
+      if (boShowMessages == true) { Clear(); sprintf(szLo+1,"начало %05lX *",dwBaseCurr); }
+
       ResetLimitsAux(ibDig);
     }
     else 
     {
       dwBaseCurr = mpcdwStartAbs32Can[ibDig];
-      if (boShowMessages == true) sprintf(szLo," начало %05lX   ",dwBaseCurr);
+
+      if (boShowMessages == true) { Clear(); sprintf(szLo+1,"начало %05lX",dwBaseCurr); }
+
       iwMajor = dwBaseCurr % 0x10000; AddDigRecord(EVE_PREVIOUS_TOP);
     }
 
