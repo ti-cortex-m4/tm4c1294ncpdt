@@ -15,7 +15,7 @@ crc-s.h
 +  float.h
 parity.c
 parity.h
-tuple.c
-tuple.h
++   tuples.c
++   tuples.h
 +   wrappers.c
 +   wrappers.h
