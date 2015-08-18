@@ -90,7 +90,7 @@ float                   mpflEngFrac[bCANALS];
 float                   mpflEngFracDigCan[bCANALS][6];
 
 // счетчики переполнений получасовых графиков
-uint                    mpcwOverflowHou[bCANALS];
+uint                    mpcwOverflowHhr[bCANALS];
 
 // счетчики ошибок связи
 uint                    mpcwErrorLink[bCANALS];

@@ -329,7 +329,7 @@ bool    ReadDataS(uchar  i)
     if ((ulong)(mpflEngFrac[ibDig]*dbPulse) < 0xFFFF)
     { w = (uint)(mpflEngFrac[ibDig]*dbPulse); }
     else
-    { w = 0xFFFF; mpcwOverflowHou[ibDig]++; }
+    { w = 0xFFFF; mpcwOverflowHhr[ibDig]++; }
 
     mpwChannels[0] = w;
     mpflEngFrac[ibDig] -= (float)w/dbPulse;
