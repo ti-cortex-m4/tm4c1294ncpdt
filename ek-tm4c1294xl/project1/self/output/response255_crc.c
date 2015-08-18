@@ -202,7 +202,45 @@ void    Response255_CRC(void)
     case bEXT_SETCANALSNAME: SetCanalsNameExt(); break;
     case bEXT_GETGROUPSNAME: GetGroupsNameExt(); break;
     case bEXT_SETGROUPSNAME: SetGroupsNameExt(); break;
+/*
+    case bEXT_OVERFLOW_HOU:
+      InitPushCRC();
+      Push(&mpcwOverflowHou, sizeof(mpcwOverflowHou));
+      Output(2*64);
+      break;
 
+    case bEXT_GET_ERROR_LINK:
+      InitPushCRC();
+      Push(&mpcwErrorLink, sizeof(mpcwErrorLink));
+      Output(sizeof(mpcwErrorLink));
+      break;
+
+    case bEXT_GET_ENGFRAC:
+      InitPushCRC();
+      Push(&mpreEngFrac, sizeof(mpreEngFrac));
+      Output(sizeof(mpreEngFrac));
+      break;
+
+    case bEXT_GET_ENGFRACDIGCAN:
+      InitPushCRC();
+      Push(&mpreEngFracDigCan, sizeof(mpreEngFracDigCan));
+      Output(sizeof(mpreEngFracDigCan));
+      break;
+
+    case bEXT_RESET_ENGFRAC:
+      if (enGlobal == GLB_REPROGRAM)
+        memset(&mpreEngFrac, 0, sizeof(mpreEngFrac));
+      else
+        Result(bRES_NEEDREPROGRAM);
+      break;
+
+    case bEXT_RESET_ENGFRACDIGCAN:
+      if (enGlobal == GLB_REPROGRAM)
+        memset(&mpreEngFracDigCan, 0, sizeof(mpreEngFracDigCan));
+      else
+        Result(bRES_NEEDREPROGRAM);
+      break;
+*/
     case bEXT_FLASH_CONTROL: OutFlashControl(); break;
 
     default:
