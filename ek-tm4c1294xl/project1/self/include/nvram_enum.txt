@@ -7,15 +7,15 @@ typedef enum
   LABEL_GLOBAL          = NVRAM_BEGIN,
 
   REALTIME_TIMES        = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_FOOTER,
-  REALTIME_VALUES       = REALTIME_TIMES + sizeof(tuple2time) + bNVRAM_FOOTER,
+  REALTIME_VALUES       = REALTIME_TIMES + sizeof(t2time) + bNVRAM_FOOTER,
 
   PTR_MNT               = REALTIME_VALUES + sizeof(realtime1) + bNVRAM_FOOTER,
-  PTR_HHR               = PTR_MNT + sizeof(tuple2uint) + bNVRAM_FOOTER,
-  PTR_DAY               = PTR_HHR + sizeof(tuple2uint) + bNVRAM_FOOTER,
-  PTR_MON               = PTR_DAY + sizeof(tuple2uint) + bNVRAM_FOOTER,
-  PTR_TIM               = PTR_MON + sizeof(tuple2uint) + bNVRAM_FOOTER,
+  PTR_HHR               = PTR_MNT + sizeof(t2uint) + bNVRAM_FOOTER,
+  PTR_DAY               = PTR_HHR + sizeof(t2uint) + bNVRAM_FOOTER,
+  PTR_MON               = PTR_DAY + sizeof(t2uint) + bNVRAM_FOOTER,
+  PTR_TIM               = PTR_MON + sizeof(t2uint) + bNVRAM_FOOTER,
 
-  PUBLIC_TRF            = PTR_TIM + sizeof(tuple2uint) + bNVRAM_FOOTER,
+  PUBLIC_TRF            = PTR_TIM + sizeof(t2uint) + bNVRAM_FOOTER,
   PUBLIC_TRF_PREV_MON   = PUBLIC_TRF + sizeof(bool) + bNVRAM_FOOTER,
   OLD_TRF_MODE          = PUBLIC_TRF_PREV_MON + sizeof(bool) + bNVRAM_FOOTER,
 
