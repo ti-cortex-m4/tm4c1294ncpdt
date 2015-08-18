@@ -67,7 +67,7 @@ extern  float                   mpflEngFrac[bCANALS];
 
 extern  float                   mpflEngFracDigCan[bCANALS][6];
 
-extern  uint                    mpcwOverflowHou[bCANALS];
+extern  uint                    mpcwOverflowHhr[bCANALS];
 
 extern  uint                    mpcwErrorLink[bCANALS];
 
