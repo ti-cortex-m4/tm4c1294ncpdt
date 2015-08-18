@@ -8,6 +8,8 @@ boolean.c
 boolean.h
 crc-16.c
 crc-16.h
+crc-s.c
+crc-s.h
 +  error.c
 +  float.c
 +  float.h
