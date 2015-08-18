@@ -100,7 +100,7 @@ QUERIES2.H
 
 #define bEXT_GET_EXTENDED_4T           119
 
-#define bEXT_OVERFLOW_HOU              103
+#define bEXT_OVERFLOW_HHR              103
 #define bEXT_GET_ERROR_LINK            134
 
 #define bEXT_GET_ENGFRAC               133
