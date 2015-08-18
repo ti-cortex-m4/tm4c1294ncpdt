@@ -41,6 +41,7 @@ DEVICES.C
 #include "../sensors/device_k.h"
 #include "../sensors/device_s.h"
 #include "../sensors/device_u.h"
+#include "../sensors/device_u2.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"

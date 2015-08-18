@@ -10,7 +10,6 @@ NVRAM.H
 
 #include "../label_global.h"
 #include "../kernel/asserts.h"
-#include "../kernel/tuples.h"
 #include "../memory/mem_groups.h"
 #include "../memory/mem_digitals0.h"
 #include "../memory/mem_digitals.h"
