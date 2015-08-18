@@ -354,7 +354,7 @@ QUERIES.H
 +   #define bEXT_GETEXTENDED7              100
 #define bEXT_ANSWER_DISABLE            101
 #define bEXT_CONTROL_R                 102
-#define bEXT_OVERFLOW_HOU              103
++   #define bEXT_OVERFLOW_HOU              103
 
 #define bEXT_GETSTOPAUXCAN             104
 +   #define bEXT_GETDECRET                 105
@@ -362,7 +362,7 @@ QUERIES.H
 #define bEXT_GETBULK                   107
 #define bEXT_GETMNTCURRENT2            108
 #define bEXT_RECORD_DISABLE            109
-#define bEXT_GETENGFRACDIGCAN          110
++   #define bEXT_GETENGFRACDIGCAN          110
 
 +   #define bEXT_GETOBJECTNAME             111
 +   #define bEXT_SETOBJECTNAME             112
@@ -413,36 +413,6 @@ QUERIES.H
 
 #define bRES_OUTOVERFLOW               99
 
-#define bRES_NEEDPROGRAM               100
-#define bRES_NEEDWORK                  101
-#define bRES_NEEDREPROGRAM             102
-/*
-#define bRES_BUSY                      110
-#define bRES_DIGITALNO                 111
-#define bRES_DIGITALYES                112
-#define bRES_DIGITALOK                 113
-#define bRES_DIGITALERROR              114
-#define bRES_BREAKCONNECT              115
-#define bRES_CONNECT                   116
-#define bRES_DISCONNECT                117
-#define bRES_MODEMBAUD                 118
-#define bRES_MODEMCOMMON               119
-#define bRES_MODEMCUSTOM               120
-#define bRES_MODEMCONNECT              121
-#define bRES_MODEMESCAPE               122
-#define bRES_MODEMHOOKOFF              123
-#define bRES_NOCONNECT                 124
-#define bRES_NODISCONNECT              125
-#define bRES_COMPLETE                  126
-#define bRES_READY                     127
-
-#define bRES_NOGROUPS                  200
-#define bRES_NOTIMEDATE                201
-#define bRES_NOTARIFFS                 202
-#define bRES_NOCANALS                  203
-#define bRES_NOCOUNTERS                204
-#define bRES_NODIGITALS                205
-*/
 
 
 #endif
