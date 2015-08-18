@@ -100,6 +100,15 @@ QUERIES2.H
 
 #define bEXT_GET_EXTENDED_4T           119
 
+#define bEXT_OVERFLOW_HOU              103
+#define bEXT_GET_ERROR_LINK            134
+
+#define bEXT_GET_ENGFRAC               133
+#define bEXT_GET_ENGFRACDIGCAN         110
+
+#define bEXT_RESET_ENGFRAC             248
+#define bEXT_RESET_ENGFRACDIGCAN       249
+
 #define bEXT_FLASH_CONTROL             250
 
 
