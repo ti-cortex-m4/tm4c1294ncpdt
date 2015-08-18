@@ -15,7 +15,13 @@ OUT_PROFILE,C
 void    OutGetOverflowHhr(void)
 {
   InitPushCRC();
-  Push(&mpcwOverflowHhr, sizeof(mpcwOverflowHhr));
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    PushInt(mpcwOverflowHhr[c]);
+  }
+
   Output(sizeof(mpcwOverflowHhr));
 }
 
@@ -23,7 +29,13 @@ void    OutGetOverflowHhr(void)
 void    OutGetErrorLink(void)
 {
   InitPushCRC();
-  Push(&mpcwErrorLink, sizeof(mpcwErrorLink));
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    PushInt(mpcwErrorLink[c]);
+  }
+
   Output(sizeof(mpcwErrorLink));
 }
 
@@ -31,23 +43,39 @@ void    OutGetErrorLink(void)
 void    OutGetEngFrac(void)
 {
   InitPushCRC();
-  Push(&mpreEngFrac, sizeof(mpreEngFrac));
-  Output(sizeof(mpreEngFrac));
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    PushFloat(mpflEngFrac[c]);
+  }
+
+  Output(sizeof(mpflEngFrac));
 }
 
 
 void    OutGetEngFracDigCan(void)
 {
   InitPushCRC();
-  Push(&mpreEngFracDigCan, sizeof(mpreEngFracDigCan));
-  Output(sizeof(mpreEngFracDigCan));
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    uchar i;
+    for (i=0; i<6; i++)
+    {
+      PushFloat(mpflEngFracDigCan[c][i]);
+    }
+  }
+
+  Output(sizeof(mpflEngFracDigCan));
 }
 
 
 void    OutResetEngFrac(void)
 {
   if (enGlobal == GLB_REPROGRAM)
-    memset(&mpreEngFrac, 0, sizeof(mpreEngFrac));
+    memset(&mpflEngFrac, 0, sizeof(mpflEngFrac));
   else
     Result(bRES_NEEDREPROGRAM);
 }
@@ -56,7 +84,7 @@ void    OutResetEngFrac(void)
 void    OutResetEngFracDigCan(void)
 {
   if (enGlobal == GLB_REPROGRAM)
-    memset(&mpreEngFracDigCan, 0, sizeof(mpreEngFracDigCan));
+    memset(&mpflEngFracDigCan, 0, sizeof(mpflEngFracDigCan));
   else
     Result(bRES_NEEDREPROGRAM);
 }
