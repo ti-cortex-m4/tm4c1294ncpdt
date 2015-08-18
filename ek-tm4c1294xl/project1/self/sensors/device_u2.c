@@ -46,7 +46,9 @@ uchar   i;
   else 
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / bPlcUSize) * bPlcUSize;
-    sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+
+    Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+
     DelayMsg();
   }
 
@@ -62,7 +64,7 @@ uchar   i;
 
 void    QueryHeaderU_PlcSize(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
@@ -117,26 +119,23 @@ void    ReadHeaderU_Plc(void)
   uchar i;
   for (i=0; i<bPlcUSize; i++)
   {
-    mpreBuffCanHou[ibMinor][i] = PopFloatQ()/2;
+    mpflBuffCanHou[ibMinor][i] = PopDoubleQ()/2;
   }
 }
 
 
 bool    ReadDataU_PlcSize(uchar  i)
 {
-  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",
-          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
        
-  tiAlt = tiDig;
-  if (SearchDefHouIndex() == 0) return(1);             
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
   ShowProgressDigHou();      
   
   MakeDataU(i);
 
-  tiAlt = tiDig;
-  MakePrevHou();  
+  MakeSpecial(tiDig);
   return(MakeStopHou(0)); 
 
 }
@@ -144,18 +143,15 @@ bool    ReadDataU_PlcSize(uchar  i)
 
 bool    ReadDataU_Plc(void)
 {
-uchar i;
-
+  uchar i;
   for (i=0; i<bPlcUSize; i++)
   {
-    tiAlt = tiDigPrev;
-    dwBuffC = DateToHouIndex();
+    ulong dw = DateToHouIndex(tiDigPrev);
 
-    dwBuffC += (bPlcUSize-1);
-    dwBuffC -= (wBaseCurr + i);
+    dw += (bPlcUSize-1);
+    dw -= (wBaseCurr + i);
 
-    HouIndexToDate(dwBuffC);
-    tiDig = tiAlt;
+    tiDig = HouIndexToDate(dw);
 
     if (ReadDataU_PlcSize(bPlcUSize-1-i) == 0) return(0);
   }
