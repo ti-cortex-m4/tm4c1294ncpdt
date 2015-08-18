@@ -1814,8 +1814,74 @@ double2 ReadCntCurrCan(uchar  ibCan)
     case 3:  return ReadCntCurrC();
 #endif
 
+#ifndef SKIP_D
+    case 4:  return( ReadSensorD() );  break;
+#endif
+
+#ifndef SKIP_E
+    case 7:
+    case 5:  return( ReadSensorE('S',1) );  break;
+#endif
+
+#ifndef SKIP_F
+    case 6:  return( ReadSensorF() );  break;
+#endif
+
+#ifndef SKIP_G
+    case 9:  return( ReadSensorG() );  break;
+#endif
+
+#ifndef SKIP_H
+    case 10: return( ReadSensorH() );  break;
+#endif
+
+#ifndef SKIP_I
+    case 11: return( ReadSensorI() );  break;
+#endif
+
+#ifndef SKIP_K
+    case 13: return( ReadSensorK(4) ); break;
+    case 14: return( ReadSensorK(1) ); break;
+#endif
+
+#ifndef SKIP_L
+    case 17:
+    case 16: reBuffA = mpdwBase[ibCanal] * *PGetCanReal(mpreValueCntHou,ibCanal);
+             return(1);                break;
+#endif
+
+#ifndef SKIP_M
+    case 18: return( ReadSensorM() );  break;
+#endif
+
+#ifndef SKIP_N
+    case 19: reBuffA = mpdwBase[ibCanal] * *PGetCanReal(mpreValueCntHou,ibCanal);
+             reBuffA += *PGetCanReal(mpreCount,ibCanal);
+             return(1);                break;
+#endif
+
+#ifndef SKIP_O
+    case 20: return( ReadSensorO() );  break;
+#endif
+
+#ifndef SKIP_P
+    case 21: return( ReadSensorP() );  break;
+#endif
+
+#ifndef SKIP_Q
+    case 22: return( ReadSensorQ() );  break;
+#endif
+
+#ifndef SKIP_R
+    case 23: return( ReadSensorR() );  break;
+#endif
+
 #ifndef SKIP_S
     case 24: return ReadCntCurrS();
+#endif
+
+#ifndef SKIP_T
+    case 25: return( ReadSensorT() );  break;
 #endif
 
 #ifndef SKIP_U
@@ -1854,8 +1920,71 @@ time2   ReadTimeCan(uchar  ibCan)
     case 3:  return ReadTimeCanC();
 #endif
 
+#ifndef SKIP_D
+    case 4:  return( ReadTimeDateD() );  break;
+#endif
+
+#ifndef SKIP_E
+    case 7:
+    case 5:  return( ReadTimeDateE() );  break;
+#endif
+
+#ifndef SKIP_F
+    case 6:  return( ReadTimeDateF() );  break;
+#endif
+
+#ifndef SKIP_G
+    case 9:  return( ReadTimeDateG() );  break;
+#endif
+
+#ifndef SKIP_H
+    case 10: return( ReadTimeDateH() );  break;
+#endif
+
+#ifndef SKIP_I
+    case 11: return( ReadTimeDateI() );  break;
+#endif
+
+#ifndef SKIP_K
+    case 14:
+    case 13: return( ReadTimeDateK() );  break;
+#endif
+
+#ifndef SKIP_L
+    case 17:
+    case 16: tiAlt = tiCurr; return(1);  break;
+#endif
+
+#ifndef SKIP_M
+    case 18: tiAlt = tiCurr; return(1);  break;
+#endif
+
+#ifndef SKIP_N
+    case 19: tiAlt = tiCurr; return(1);  break;
+#endif
+
+#ifndef SKIP_O
+    case 20: return( ReadTimeDateO() );  break;
+#endif
+
+#ifndef SKIP_P
+    case 21: return( ReadTimeDateP() );  break;
+#endif
+
+#ifndef SKIP_Q
+    case 22: return( ReadTimeDateQ() );  break;
+#endif
+
+#ifndef SKIP_R
+    case 23: tiAlt = tiCurr; return(1);  break;
+#endif
+
 #ifndef SKIP_S
     case 24: return ReadTimeCanS();
+#endif
+
+#ifndef SKIP_T
+    case 25: return( ReadTimeDateT() );  break;
 #endif
 
 #ifndef SKIP_U
@@ -1982,10 +2111,6 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_U
     case 26: return ReadCntMonCanU(ibMon);
-#endif
-
-#ifndef SKIP_Z
-    case 99: reBuffA = 0; return(1);            break;
 #endif
 
     default: return GetDouble2(0, false);
