@@ -236,10 +236,10 @@ void    ReadEnergyS(void)
 {
   InitPop(9);
                    
-  coEnergy.mpbBuff[3] = PopChar();
-  coEnergy.mpbBuff[2] = PopChar();
-  coEnergy.mpbBuff[1] = PopChar();
   coEnergy.mpbBuff[0] = PopChar();
+  coEnergy.mpbBuff[1] = PopChar();
+  coEnergy.mpbBuff[2] = PopChar();
+  coEnergy.mpbBuff[3] = PopChar();
 
   mpdwChannelsA[0] = coEnergy.dwBuff;
   mpboChannelsA[0] = true;
