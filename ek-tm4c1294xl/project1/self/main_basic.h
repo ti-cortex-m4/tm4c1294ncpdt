@@ -59,20 +59,4 @@ typedef enum
 typedef char const      message[bDISPLAY+1];
 
 
-//
-typedef struct
-{
-  uint          w1;
-  uint          w2;
-} tuple2uint;
-
-
-//
-typedef struct
-{
-  time          ti1;
-  time          ti2;
-} tuple2time;
-
-
 #endif
