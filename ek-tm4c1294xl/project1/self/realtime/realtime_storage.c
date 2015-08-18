@@ -5,7 +5,6 @@ REALTIME_STORAGE.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../kernel/tuples.h"
 #include "../memory/mem_realtime.h"
 #include "../flash/files.h"
 #include "../nvram/23x1024.h"
