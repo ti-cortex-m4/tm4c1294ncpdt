@@ -950,7 +950,7 @@ float2  ReadParamRepeat(uint  iwPrm)
     if (fKey == true) return GetFloat2(0, false);
 
     float2 fl2 = ReadParam(iwPrm);
-    if (fl2.flValue == true) return fl2;
+    if (fl2.fValid == true) return fl2;
   }
 
   return GetFloat2(0, false);
