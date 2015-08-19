@@ -129,7 +129,7 @@ void    NextCheckup(void)
 {/*
   if (boHideMessages == false)
   {
-    sprintf(szLo," принято: %4u  ",cwHouRead);
+    Clear(); sprintf(szLo+1,"принято: %04u",cwHouRead);
     DelayMsg();
   }
 
