@@ -16,8 +16,8 @@ AUTOMATIC_U.C
 #include "../devices/devices.h"
 #include "../digitals/digitals.h"
 #include "automatic1.h"
-#include "device_k.h"
 #include "device_u.h"
+#include "automatic_k.h"
 #include "automatic_u.h"
 
 
