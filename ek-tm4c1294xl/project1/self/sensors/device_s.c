@@ -39,7 +39,7 @@ DEVICE_S.C
 
 void    PushAddressS(void)
 {
-uint    i;
+uint  i;
 
   i = mpdwAddress1[diCurr.bAddress-1] % 0x10000;
   PushChar(i % 0x100);
