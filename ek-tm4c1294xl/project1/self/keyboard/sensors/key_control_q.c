@@ -12,12 +12,11 @@ KEY_CONTROL_Q.C
 
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "Контроль времени",
-                        szMessage2[]    = " для счетчиков  ",
-                        szMessage3[]    = "  CE301, CE304  ",
+                        szMessage2[]    = "для CE301, CE304",
                         szTrue[]        = " установка      ",
                         szFalse[]       = " коррекция      ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 
