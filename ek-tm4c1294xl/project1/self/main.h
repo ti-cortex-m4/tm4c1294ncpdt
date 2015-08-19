@@ -27,6 +27,7 @@ MAIN,H
 #include "main_extended.h"
 #include "main_correct.h"
 #include "kernel/boolean.h"
+#include "kernel/number.h"
 #include "kernel/float.h"
 #include "kernel/tuples.h"
 #include "kernel/wrappers.h"

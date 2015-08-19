@@ -8,9 +8,6 @@ MAIN_BASIC.H
 #define __MAIN_BASIC
 
 
-#define ABS(x)          (((x) >= 0) ? (x) : -(x))
-
-
 typedef uint8_t         uchar;
 typedef int8_t          schar;
 

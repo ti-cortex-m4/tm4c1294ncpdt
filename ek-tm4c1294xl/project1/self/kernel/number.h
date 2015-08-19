@@ -1,9 +1,7 @@
 /*------------------------------------------------------------------------------
-NUMBERS,H
+NUMBER,H
 
 
 ------------------------------------------------------------------------------*/
 
-bool    ValidBoolean(uchar  b);
-bool    CharToBoolean(uchar  b);
-bool    InvertBoolean(bool  bo);
+ulong   AbsLong(slong  dw);
