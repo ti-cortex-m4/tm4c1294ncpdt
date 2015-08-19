@@ -87,3 +87,17 @@ void    ShowDeltaTimeNegative(uchar  ibCan, ulong  dwSecond)
   Clear();
   sprintf(szLo+1,"сдвиг: -%lu с", dwSecond); (boShowMessages == true) ? DelayMsg() : DelayInf();
 }
+
+
+void    ShowDigitalDeltaTime(uchar  ibCan, ulong  dwSecond1, ulong  dwSecond2)
+{
+  ShowCanalNumber(ibCan);
+  Clear();
+
+  if (dwSecond1 > dwSecond2)
+    sprintf(szLo+1,"сдвиг: -%lu с", dwSecond1 - dwSecond2);
+  else
+    sprintf(szLo+1,"сдвиг: +%lu с", dwSecond2 - dwSecond1);
+
+  (boShowMessages == true) ? DelayMsg() : DelayInf();
+}
