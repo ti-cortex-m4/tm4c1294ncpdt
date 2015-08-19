@@ -11,16 +11,16 @@ KEY_CHAR_BLOCKED,C
 
 
 //                                            0123456789ABCDEF
-static char const       szMaskChar[]       = "      ___       ",
+static char const       szMaskInt[]        = "    _____       ",
                         szBlocked[]        = "Запрещено:      ";
 
 extern  char                    szCharLimits[bDISPLAY + bMARGIN];
 
 
 
-void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  bMin, uint  bMax, bool  fBlocked, uint  wProgram)
+void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin, uint  wMax, bool  fBlocked, uint  wProgram)
 {
-  uchar *pbVal = (uchar *) pch->pbBuff;
+  uint *pwVal = (uint *) pch->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {
@@ -32,10 +32,10 @@ void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  bMin
         Clear();
 
         strcpy(szCharLimits, szClear);
-        sprintf(szCharLimits+4, "%3u..%-3u", bMin, bMax);
+        sprintf(szCharLimits+4, "%3u..%-3u", wMin, wMax);
 
         LoadSlide(pszSlide);
-        ShowChar(*pbVal);
+        ShowInt(*pwVal);
       }
       else
       {
@@ -48,20 +48,20 @@ void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  bMin
     {
       enKeyboard = KBD_POSTENTER;
 
-      uchar b = GetCharLo(6,8);
-      if ((b >= bMin) && (b <= bMax))
+      uint w = GetIntLo(4,8);
+      if ((w >= wMin) && (w <= wMax))
       {
-        *pbVal = b;
+        *pwVal = w;
         SaveCache(pch);
 
-        ShowChar(*pbVal);
+        ShowInt(*pwVal);
       }
       else
       {
         enKeyboard = KBD_INPUT1;
         LongBeep();
 
-        ShowLo(szMaskChar);
+        ShowLo(szMaskInt);
       }
     }
     else Beep();
@@ -73,13 +73,13 @@ void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  bMin
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT1;
-      ShowLo(szMaskChar);
+      ShowLo(szMaskInt);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
     {
       enKeyboard = KBD_POSTINPUT1;
-      ShiftLo(6,8);
+      ShiftLo(4,8);
     }
   }
   else Beep();
