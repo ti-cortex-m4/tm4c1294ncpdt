@@ -15,7 +15,7 @@ KEY_MAX_REPEATS.C
 static char const       szMaxRepeats1[]    = "  Повторы при   ",
                         szMaxRepeats2[]    = "опросе счетчиков";
 
-static char const       *pszMaxRepeats[]   = { szMaxRepeats1, szMaxRepeats2, szCharLimits, "" };
+static char const       *pszMaxRepeats[]   = { szMaxRepeats1, szMaxRepeats2, szNumberLimits, "" };
 
 
 

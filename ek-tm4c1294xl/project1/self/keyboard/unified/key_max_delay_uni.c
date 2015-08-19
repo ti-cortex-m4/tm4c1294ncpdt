@@ -13,7 +13,7 @@ KEY_MAX_DELAY_UNI.C
 //                                         0123456789ABCDEF
 static char const       szMaxDelayUni[] = "  Таймаут УПИО  ";
 
-static char const       *pszMaxDelayUni[] = { szMaxDelayUni, szCharLimits, "" };
+static char const       *pszMaxDelayUni[] = { szMaxDelayUni, szNumberLimits, "" };
 
 
 

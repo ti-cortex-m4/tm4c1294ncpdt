@@ -15,7 +15,7 @@ KEY_MACHINES_ESC,C
 static char const       szMessage1[]     = "    Емкость     ",
                         szMessage2[]     = "протокола Esc ? ";
 
-static char const       *pszMessages[]   = { szMessage1, szMessage2, szCharLimits, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szNumberLimits, "" };
 
 
 

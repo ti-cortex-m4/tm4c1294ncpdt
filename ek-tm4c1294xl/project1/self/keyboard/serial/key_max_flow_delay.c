@@ -13,7 +13,7 @@ KEY_MAX_FLOW_DELAY.C
 //                                          0123456789ABCDEF
 static char const       szMaxFlowDelay[] = "Таймаут: транзит";
 
-static char const       *pszMaxFlowDelay[] = { szMaxFlowDelay, szCharLimits, "" };
+static char const       *pszMaxFlowDelay[] = { szMaxFlowDelay, szNumberLimits, "" };
 
 
 

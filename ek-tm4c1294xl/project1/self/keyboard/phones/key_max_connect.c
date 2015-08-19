@@ -13,7 +13,7 @@ KEY_MAX_CONNECT.C
 //                                            0123456789ABCDEF
 static char const       szMessage1[]       = "Время соединения";
 
-static char const       *pszMessages[]   = { szMessage1, szCharLimits, "" };
+static char const       *pszMessages[]   = { szMessage1, szNumberLimits, "" };
 
 
 

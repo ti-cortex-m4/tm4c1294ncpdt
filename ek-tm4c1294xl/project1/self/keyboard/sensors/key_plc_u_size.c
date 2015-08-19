@@ -17,7 +17,7 @@ static char const       szMessage1[]     = "  Размер блока  ",
                         szMessage3[]     = " профилей СЕ301 ",
                         szMessage4[]     = " по интерф. PLC ";
 
-static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szCharLimits, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szNumberLimits, "" };
 
 
 

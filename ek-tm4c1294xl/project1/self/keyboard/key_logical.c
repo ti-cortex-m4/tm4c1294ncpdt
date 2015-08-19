@@ -13,7 +13,7 @@ KEY_LOGICAL,C
 //                                          0123456789ABCDEF
 static char const       szMessage[]      = "Логический номер";
 
-static char const       *pszMessages[]   = { szMessage, szCharLimits, "" };
+static char const       *pszMessages[]   = { szMessage, szNumberLimits, "" };
 
 
 

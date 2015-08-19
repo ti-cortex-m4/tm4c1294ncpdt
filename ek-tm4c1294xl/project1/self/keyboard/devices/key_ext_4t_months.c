@@ -18,7 +18,7 @@ static char const       szMessage1[]     = " „исло мес€цев  ",
                         szMessage5[]     = "    мес€цев     ",
                         szMessage6[]     = "  по тарифам ?  ";
 
-static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szMessage6, szCharLimits, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szMessage6, szNumberLimits, "" };
 
 
 

@@ -4,7 +4,7 @@ KEY_CHAR.H
 
 ------------------------------------------------------------------------------*/
 
-extern  char                    szCharLimits[bDISPLAY + bMARGIN];
+extern  char                    szNumberLimits[bDISPLAY + bMARGIN];
 
 
 
