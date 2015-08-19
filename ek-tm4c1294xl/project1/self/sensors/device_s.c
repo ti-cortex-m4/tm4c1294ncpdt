@@ -32,18 +32,6 @@ DEVICE_S.C
 #include "../hardware/watchdog.h"
 #include "automatic_s.h"
 #include "device_s.h"
-//#include        "xdata.h"
-//#include        "ports.h"
-//#include        "display.h"
-//#include        "delay.h"
-//#include        "lines.h"
-//#include        "engine.h"
-//#include        "limits.h"
-//#include        "timedate.h"
-//#include        "essential.h"
-//#include        "digitals.h"
-//#include        "automatic_s.h"
-//#include        "_timedate.h"
 
 
 
@@ -51,7 +39,7 @@ DEVICE_S.C
 
 void    PushAddressS(void)
 {
-uint	i;
+uint    i;
 
   i = mpdwAddress1[diCurr.bAddress-1] % 0x10000;
   PushChar(i % 0x100);
@@ -249,8 +237,6 @@ void    ReadEnergyS(void)
 
 void    InitHeaderS(void)
 {
-uchar i;
-
   if (!UseBounds())
     wBaseCurr = 0;
   else 
@@ -262,7 +248,7 @@ uchar i;
 
   tiDigPrev = tiCurr;
 
-  i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
+  uchar i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
   i = (i / 4) * 4;
 
   tiDigPrev.bHour = i / 2;
@@ -312,7 +298,7 @@ bool    ReadDataS(uchar  i)
 
   InitPop(9+i*3);                                    
 
-  ulong dw  = PopChar();
+  ulong dw = PopChar();
   dw += PopChar()*0x100;
   dw += PopChar()*0x10000;
 
@@ -345,8 +331,7 @@ bool    ReadDataS(uchar  i)
 
 bool    ReadHeaderS(void)
 {
-uchar i;
-
+  uchar i;
   for (i=0; i<4; i++)
   {
     ulong dw = DateToHouIndex(tiDigPrev);
