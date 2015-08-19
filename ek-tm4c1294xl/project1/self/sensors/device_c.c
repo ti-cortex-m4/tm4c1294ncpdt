@@ -283,9 +283,7 @@ void    InitHeaderC_1(void)
   else 
   {
     wBaseCurr = mpcwStartRelCan[ibDig];
-
     Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-
     if (boShowMessages == true) DelayMsg();
   }
 
@@ -302,9 +300,7 @@ uchar i;
   else 
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
-
     Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-
     if (boShowMessages == true) DelayMsg();
   }
 
