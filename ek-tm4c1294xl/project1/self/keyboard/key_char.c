@@ -13,7 +13,7 @@ KEY_CHAR.C
 //                                            0123456789ABCDEF
 static char const       szMaskChar[]       = "      ___       ";
 
-char                    szCharLimits[bDISPLAY + bMARGIN];
+char                    szNumberLimits[bDISPLAY + bMARGIN];
 
 
 
@@ -28,8 +28,8 @@ void    key_SetChar(cache const  *pch, char const  *pszSlide[], uchar  bMin, uch
       enKeyboard = KBD_POSTENTER;
       Clear();
 
-      strcpy(szCharLimits, szClear);
-      sprintf(szCharLimits+4, "%3u..%-3u", bMin, bMax);
+      strcpy(szNumberLimits, szClear);
+      sprintf(szNumberLimits+4, "%3u..%-3u", bMin, bMax);
 
       LoadSlide(pszSlide);
       ShowChar(*pbVal);

@@ -8,7 +8,7 @@ KEY_CHAR_BLOCKED,H
 
 
 
-extern  char                    szCharLimits[bDISPLAY + bMARGIN];
+extern  char                    szNumberLimits[bDISPLAY + bMARGIN];
 
 
 

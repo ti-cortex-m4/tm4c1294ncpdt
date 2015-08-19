@@ -14,7 +14,7 @@ KEY_CHAR_BLOCKED,C
 static char const       szMaskChar[]       = "      ___       ",
                         szBlocked[]        = "Запрещено:      ";
 
-extern  char                    szCharLimits[bDISPLAY + bMARGIN];
+extern  char                    szNumberLimits[bDISPLAY + bMARGIN];
 
 
 
@@ -31,8 +31,8 @@ void    key_SetCharBlocked(cache const  *pch, char const  *pszSlide[], uchar  bM
         enKeyboard = KBD_POSTENTER;
         Clear();
 
-        strcpy(szCharLimits, szClear);
-        sprintf(szCharLimits+4, "%3u..%-3u", bMin, bMax);
+        strcpy(szNumberLimits, szClear);
+        sprintf(szNumberLimits+4, "%3u..%-3u", bMin, bMax);
 
         LoadSlide(pszSlide);
         ShowChar(*pbVal);

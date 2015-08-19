@@ -19,7 +19,7 @@ static char const       szMessage1[]     = "Число неактивных",
                         szMessage5[]     = "счетчиков СЕ301 ",
                         szMessage6[]     = " по интерф. PLC ";
 
-static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szMessage6, szCharLimits, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szMessage6, szNumberLimits, "" };
 
 
 

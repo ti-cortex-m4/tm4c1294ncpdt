@@ -14,7 +14,7 @@ KEY_KEYS_LEVEL_B.C
 static char const       szMessage1[]    = "Уровень доступа ",
                         szMessage2[]    = "для Меркурий-230";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, szCharLimits, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szNumberLimits, "" };
 
 
 
