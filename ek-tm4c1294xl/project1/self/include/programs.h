@@ -284,6 +284,10 @@ PROGRAMS.H
 
 #define wSET_RECORDS_DSBL           415
 
+#define wSET_PLC_U_FLAG             419
+#define wSET_PLC_U_SIZE             420
+#define wSET_PLC_U_SHUTDOWN         421
+
 #define wSET_STRICT_UNI             417
 #define wSET_ENBL_PASS_UNI          418
 #define wSET_MAX_DELAY_UNI          422
