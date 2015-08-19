@@ -83,19 +83,9 @@
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
         {
-          ulong dwDelta;
-          if (dwSecond1 > dwSecond2)
-          {
-            dwDelta = dwSecond1 - dwSecond2;
-            ShowDeltaTimeNegative(ibDig, dwDelta);
-          }
-          else
-          {
-            dwDelta = dwSecond2 - dwSecond1;
-            ShowDeltaTimePositive(ibDig, dwDelta);
-          }
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
 
-          if (dwDelta < GetCorrectLimit())                                        // без коррекции
+          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_S2); }
           else if (GetCurrHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))       // простая коррекция
           { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_S2); }
