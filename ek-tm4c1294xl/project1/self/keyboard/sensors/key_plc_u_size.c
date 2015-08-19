@@ -7,7 +7,7 @@ KEY_PLC_U_SIZE,C
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../devices/devices_init.h"
-#include "../key_char_blocked.h"
+#include "../common/key_char_blocked.h"
 
 
 

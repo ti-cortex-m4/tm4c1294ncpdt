@@ -6,7 +6,7 @@ KEY_MAX_CONNECT.C
 
 #include "../../main.h"
 #include "../../digitals/phones.h"
-#include "../key_char.h"
+#include "../common/key_char.h"
 
 
 

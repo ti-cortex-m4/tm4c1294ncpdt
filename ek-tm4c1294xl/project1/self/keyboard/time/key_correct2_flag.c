@@ -6,7 +6,7 @@ KEY_CORRECT_2_FLAG,C
 
 #include "../../main.h"
 #include "../../time/correct2.h"
-#include "../key_bool.h"
+#include "../common/key_bool.h"
 
 
 

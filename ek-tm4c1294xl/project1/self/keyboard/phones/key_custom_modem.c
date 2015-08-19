@@ -6,7 +6,7 @@ KEY_CUSTOM_MODEM.C
 
 #include "../../main.h"
 #include "../../digitals/phones.h"
-#include "../key_bool.h"
+#include "../common/key_bool.h"
 
 
 

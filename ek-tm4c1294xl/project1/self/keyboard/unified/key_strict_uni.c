@@ -7,7 +7,7 @@ KEY_STRICT_UNI,C
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../output/unified/uni.h"
-#include "../key_bool.h"
+#include "../common/key_bool.h"
 
 
 

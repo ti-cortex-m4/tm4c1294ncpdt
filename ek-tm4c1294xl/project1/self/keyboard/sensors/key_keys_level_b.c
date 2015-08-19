@@ -6,7 +6,7 @@ KEY_KEYS_LEVEL_B.C
 
 #include "../../console.h"
 #include "../../devices/devices_init.h"
-#include "../key_char.h"
+#include "../common/key_char.h"
 
 
 

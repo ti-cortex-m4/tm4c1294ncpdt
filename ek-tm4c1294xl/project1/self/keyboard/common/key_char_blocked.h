@@ -4,7 +4,7 @@ KEY_CHAR_BLOCKED,H
 
 ------------------------------------------------------------------------------*/
 
-#include "../include/programs.h"
+#include "../../include/programs.h"
 
 
 

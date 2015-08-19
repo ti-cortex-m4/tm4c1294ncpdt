@@ -6,7 +6,7 @@ KEY_EXTENDED_ESC,C
 
 #include "../../main.h"
 #include "../../digitals/extended/extended_1.h"
-#include "../key_bool.h"
+#include "../common/key_bool.h"
 #include "key_extended_esc.h"
 
 

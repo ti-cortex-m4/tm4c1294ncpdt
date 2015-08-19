@@ -7,7 +7,7 @@ KEY_PLC_U_SHUTDOWN,C
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../devices/devices_init.h"
-#include "../key_int_blocked.h"
+#include "../common/key_int_blocked.h"
 
 
 

@@ -6,7 +6,7 @@ KEY_RELAXS_FLAG,C
 
 #include "../../main.h"
 #include "../../tariffs/relaxs.h"
-#include "../key_bool.h"
+#include "../common/key_bool.h"
 
 
 

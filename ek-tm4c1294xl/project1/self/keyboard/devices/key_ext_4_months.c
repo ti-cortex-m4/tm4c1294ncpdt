@@ -6,7 +6,7 @@ KEY_EXT_4_MONTHS,C
 
 #include "../../main.h"
 #include "../../digitals/extended/extended_4.h"
-#include "../key_char_blocked.h"
+#include "../common/key_char_blocked.h"
 
 
 

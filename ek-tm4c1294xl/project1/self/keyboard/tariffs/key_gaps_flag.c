@@ -6,7 +6,7 @@ KEY_GAPS_FLAG,C
 
 #include "../../main.h"
 #include "../../tariffs/gaps.h"
-#include "../key_bool.h"
+#include "../common/key_bool.h"
 
 
 

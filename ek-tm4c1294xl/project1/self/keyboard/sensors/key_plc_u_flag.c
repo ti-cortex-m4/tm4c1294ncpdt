@@ -6,7 +6,7 @@ KEY_PLC_U_FLAG,C
 
 #include "../../main.h"
 #include "../../devices/devices_init.h"
-#include "../key_bool.h"
+#include "../common/key_bool.h"
 
 
 

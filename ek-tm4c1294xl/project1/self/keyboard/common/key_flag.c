@@ -4,8 +4,8 @@ KEY_FLAG,C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../console.h"
+#include "../../main.h"
+#include "../../console.h"
 #include "key_flag.h"
 
 
