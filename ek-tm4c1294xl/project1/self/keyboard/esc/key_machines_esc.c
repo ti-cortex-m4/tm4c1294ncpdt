@@ -7,7 +7,7 @@ KEY_MACHINES_ESC,C
 #include "../../main.h"
 #include "../../memory/mem_esc.h"
 #include "../../output/esc/esc.h"
-#include "../key_char.h"
+#include "../common/key_char.h"
 
 
 

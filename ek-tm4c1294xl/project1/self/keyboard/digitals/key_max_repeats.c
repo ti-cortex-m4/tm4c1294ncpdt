@@ -7,7 +7,7 @@ KEY_MAX_REPEATS.C
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../digitals/max_repeats.h"
-#include "../key_char.h"
+#include "../common/key_char.h"
 
 
 

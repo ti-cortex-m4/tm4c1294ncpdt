@@ -4,8 +4,8 @@ KEY_CHAR.C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../console.h"
+#include "../../main.h"
+#include "../../console.h"
 #include "key_char.h"
 
 

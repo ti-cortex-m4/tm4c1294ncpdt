@@ -6,7 +6,7 @@ KEY_ENBL_KEYS,C
 
 #include "../../main.h"
 #include "../../digitals/digitals.h"
-#include "../key_bool.h"
+#include "../common/key_bool.h"
 
 
 

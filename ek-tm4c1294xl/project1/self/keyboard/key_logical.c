@@ -6,7 +6,7 @@ KEY_LOGICAL,C
 
 #include "../main.h"
 #include "../settings.h"
-#include "key_char.h"
+#include "common/key_char.h"
 
 
 

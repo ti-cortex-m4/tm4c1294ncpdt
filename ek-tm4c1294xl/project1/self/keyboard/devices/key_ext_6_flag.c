@@ -6,7 +6,7 @@ KEY_EXT_6_FLAG,C
 
 #include "../../main.h"
 #include "../../digitals/extended/extended_6.h"
-#include "../key_bool.h"
+#include "../common/key_bool.h"
 
 
 

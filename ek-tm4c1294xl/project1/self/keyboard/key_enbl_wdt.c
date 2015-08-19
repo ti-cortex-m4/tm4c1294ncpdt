@@ -7,7 +7,7 @@ KEY_ENBL_WDT,C
 #include "../main.h"
 #include "../memory/mem_program.h"
 #include "../settings.h"
-#include "key_bool.h"
+#include "common/key_bool.h"
 
 
 

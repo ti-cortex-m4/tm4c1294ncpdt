@@ -4,8 +4,8 @@ KEY_BOOL,C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../console.h"
+#include "../../main.h"
+#include "../../console.h"
 #include "key_bool.h"
 
 

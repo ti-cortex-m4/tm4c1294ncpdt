@@ -4,23 +4,23 @@ KEY_CHAR_BLOCKED,C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../console.h"
+#include "../../main.h"
+#include "../../console.h"
 #include "key_char_blocked.h"
 
 
 
 //                                            0123456789ABCDEF
-static char const       szMaskInt[]        = "    _____       ",
+static char const       szMaskChar[]       = "      ___       ",
                         szBlocked[]        = "Запрещено:      ";
 
 extern  char                    szNumberLimits[bDISPLAY + bMARGIN];
 
 
 
-void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin, uint  wMax, bool  fBlocked, uint  wProgram)
+void    key_SetCharBlocked(cache const  *pch, char const  *pszSlide[], uchar  bMin, uchar  bMax, bool  fBlocked, uint  wProgram)
 {
-  uint *pwVal = (uint *) pch->pbBuff;
+  uchar *pbVal = (uchar *) pch->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {
@@ -32,10 +32,10 @@ void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin
         Clear();
 
         strcpy(szNumberLimits, szClear);
-        sprintf(szNumberLimits+4, "%3u..%-3u", wMin, wMax);
+        sprintf(szNumberLimits+4, "%3u..%-3u", bMin, bMax);
 
         LoadSlide(pszSlide);
-        ShowInt(*pwVal);
+        ShowChar(*pbVal);
       }
       else
       {
@@ -48,20 +48,20 @@ void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin
     {
       enKeyboard = KBD_POSTENTER;
 
-      uint w = GetIntLo(4,8);
-      if ((w >= wMin) && (w <= wMax))
+      uchar b = GetCharLo(6,8);
+      if ((b >= bMin) && (b <= bMax))
       {
-        *pwVal = w;
+        *pbVal = b;
         SaveCache(pch);
 
-        ShowInt(*pwVal);
+        ShowChar(*pbVal);
       }
       else
       {
         enKeyboard = KBD_INPUT1;
         LongBeep();
 
-        ShowLo(szMaskInt);
+        ShowLo(szMaskChar);
       }
     }
     else Beep();
@@ -73,13 +73,13 @@ void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT1;
-      ShowLo(szMaskInt);
+      ShowLo(szMaskChar);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
     {
       enKeyboard = KBD_POSTINPUT1;
-      ShiftLo(4,8);
+      ShiftLo(6,8);
     }
   }
   else Beep();

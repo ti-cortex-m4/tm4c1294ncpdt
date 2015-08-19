@@ -6,7 +6,7 @@ KEY_CONTROL_Q.C
 
 #include "../../console.h"
 #include "../../devices/devices_init.h"
-#include "../key_flag.h"
+#include "../common/key_flag.h"
 
 
 
