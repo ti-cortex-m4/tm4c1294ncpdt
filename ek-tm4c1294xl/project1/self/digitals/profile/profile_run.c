@@ -234,8 +234,7 @@ void    NextProfile(void)
 {
   if (boHideMessages == false)
   {
-    Clear();
-    sprintf(szLo+1,"принято: %4u",cwHouRead);
+    Clear(); sprintf(szLo+1,"принято: %04u",cwHouRead);
     DelayMsg();
   }
 
