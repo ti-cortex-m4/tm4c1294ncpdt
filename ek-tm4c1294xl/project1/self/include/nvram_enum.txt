@@ -89,7 +89,7 @@ typedef enum
   STOP_CAN              = START_CAN + sizeof(mpboStartCan) + bNVRAM_FOOTER,
   STOP_AUX_CAN          = STOP_CAN + sizeof(mpcwStopCan) + bNVRAM_FOOTER,
 
-  MAX_CONNECT           = STOP_AUX_CAN + sizeof(STOP_AUX_CAN) + bNVRAM_FOOTER,
+  MAX_CONNECT           = STOP_AUX_CAN + sizeof(mpcwStopAuxCan) + bNVRAM_FOOTER,
   CUSTOM_MODEM          = MAX_CONNECT + sizeof(uchar) + bNVRAM_FOOTER,
 
   SEPARATE_CAN          = CUSTOM_MODEM + sizeof(bool) + bNVRAM_FOOTER,
