@@ -15,11 +15,10 @@ KEY_PLC_U_SHUTDOWN,C
 static char const       szMessage1[]     = "Число неактивных",
                         szMessage2[]     = "   получасов    ",
                         szMessage3[]     = "   при опросе   ",
-                        szMessage4[]     = "    профилей    ",
-                        szMessage5[]     = "счетчиков СЕ301 ",
-                        szMessage6[]     = " по интерф. PLC ";
+                        szMessage4[]     = " профилей СЕ301 ",
+                        szMessage5[]     = " по интерф. PLC ";
 
-static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szMessage6, szNumberLimits, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szNumberLimits, "" };
 
 
 
