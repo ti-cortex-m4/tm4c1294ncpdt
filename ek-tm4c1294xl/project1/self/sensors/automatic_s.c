@@ -23,19 +23,6 @@ AUTOMATIC_S.C
 #include "automatic1.h"
 #include "device_s.h"
 #include "automatic_s.h"
-//#include        "xdata.h"
-//#include        "crc-9.h"
-//#include        "sensors.h"
-//#include        "watchdog.h"
-//#include        "timer0.h"
-//#include        "display.h"
-//#include        "engine.h"
-//#include        "timedate.h"
-//#include        "ports.h"
-//#include        "ports2.h"
-//#include        "delay.h"
-//#include        "device_s.h"
-//#include        "decompress_s.h"
 
 
 
@@ -117,8 +104,7 @@ serial  InputS(void)
 
 bool    QueryConfigS_Full(uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -138,8 +124,7 @@ uchar   i;
 
 time2   QueryTimeS_Full(uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -158,8 +143,7 @@ uchar   i;
 
 bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -179,8 +163,7 @@ uchar   i;
 
 bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();

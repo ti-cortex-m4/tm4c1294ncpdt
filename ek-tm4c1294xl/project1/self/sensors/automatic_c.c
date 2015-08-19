@@ -45,8 +45,7 @@ bool    QueryIdC_Full(void)
 
 bool    QueryEnergyDayC_Full2(uchar  bTime, uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -68,8 +67,7 @@ uchar   i;
 
 bool    QueryEnergyMonC_Full2(uchar  bTime, uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -91,8 +89,7 @@ uchar   i;
 
 bool    QueryEnergyAbsC_Full2(uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();

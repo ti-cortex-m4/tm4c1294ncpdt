@@ -58,7 +58,7 @@ void    InitHeaderU_Plc(void)
 }
 
 
-void    QueryHeaderU_PlcSize(void)
+static void QueryHeaderU_Plc_Inner(void)
 {
   InitPush(0);
 
@@ -103,7 +103,7 @@ void    QueryHeaderU_Plc(void)
   szHi[10] = 'A' + ibMinor;       
      
   ibMinorMax = 2;
-  QueryHeaderU_PlcSize();
+  QueryHeaderU_Plc_Inner();
 }
 
 
@@ -119,7 +119,7 @@ void    ReadHeaderU_Plc(void)
 }
 
 
-bool    ReadDataU_PlcSize(uchar  i)
+static bool ReadDataU_Plc_Inner(uchar  i)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
        
@@ -147,7 +147,7 @@ bool    ReadDataU_Plc(void)
 
     tiDig = HouIndexToDate(dw);
 
-    if (ReadDataU_PlcSize(bPlcUSize-1-i) == 0) return(0);
+    if (ReadDataU_Plc_Inner(bPlcUSize-1-i) == 0) return(0);
   }
   
   wBaseCurr += bPlcUSize;
