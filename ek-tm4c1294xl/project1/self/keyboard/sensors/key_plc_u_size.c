@@ -11,11 +11,11 @@ KEY_PLC_U_SIZE,C
 
 
 //                                          0123456789ABCDEF
-static char const       szMessage1[]     = " Число месяцев  ",
-                        szMessage2[]     = "  для загрузки  ",
-                        szMessage3[]     = "знач. счетчиков ",
-                        szMessage4[]     = "   на начало    ",
-                        szMessage5[]     = "   месяцев ?    ";
+static char const       szMessage1[]     = "  Размер блока  ",
+                        szMessage2[]     = "   при опросе   ",
+                        szMessage3[]     = "    профилей    ",
+                        szMessage4[]     = "счетчиков СЕ301 ",
+                        szMessage5[]     = " по интерф. PLC ";
 
 static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, szCharLimits, "" };
 
@@ -23,5 +23,5 @@ static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3,
 
 void    key_SetPlcUSize(void)
 {
-  key_SetCharBlocked(&chExt4Months, pszMessages, 1, 12, fExt4Flag, bSET_EXT4_FLAG);
+  key_SetCharBlocked(&chPlcUSize, pszMessages, 1, 8, boPlcUFlag, wSET_PLC_U_FLAG);
 }
