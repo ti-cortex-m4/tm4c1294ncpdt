@@ -39,8 +39,6 @@ DEVICE_U2.C
 
 void    InitHeaderU_Plc(void)
 { 
-uchar   i;
-
   if (!UseBounds())
     wBaseCurr = 0; // счетчик получасов
   else 
@@ -52,7 +50,7 @@ uchar   i;
 
   tiDigPrev = tiCurr;
 
-  i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
+  uchar i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
   i = (i / bPlcUSize) * bPlcUSize;
 
   tiDigPrev.bHour = i / 2;
@@ -109,7 +107,6 @@ void    QueryHeaderU_Plc(void)
 }
 
 
-
 void    ReadHeaderU_Plc(void)
 {
   InitPop(1);
@@ -135,7 +132,6 @@ bool    ReadDataU_PlcSize(uchar  i)
 
   MakeSpecial(tiDig);
   return(MakeStopHou(0)); 
-
 }
 
 
