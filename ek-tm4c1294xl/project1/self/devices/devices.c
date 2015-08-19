@@ -2167,11 +2167,11 @@ void    RunDevices(void)
 
     case DEV_POSTTIME_S2:
       {
-        uint iwDay1 = GetDayIndexMD(tiDig.bMonth, tiDig.bDay);                    // количество дней с начала года ведомого счётчика
-        ulong dwSecond1 = GetSecondIndex(tiDig);                                  // количество секунд ведомого счётчика
+        uint iwDay1 = GetDayIndexMD(tiDig.bMonth, tiDig.bDay);
+        ulong dwSecond1 = GetSecondIndex(tiDig);
 
-        uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
-        ulong dwSecond2 = GetSecondIndex(tiCurr);                                 // количество секунд сумматора
+        uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
+        ulong dwSecond2 = GetSecondIndex(tiCurr);
 
         if (iwDay1 != iwDay2)
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
