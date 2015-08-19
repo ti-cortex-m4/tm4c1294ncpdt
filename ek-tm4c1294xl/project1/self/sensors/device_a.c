@@ -268,17 +268,13 @@ void    ReadTopA(void)
     if (mpboStartCan[ibDig] == false)
     {
       iwMajor = (InBuff(6)*0x100 + InBuff(7)) / 24;
-
-      if (boShowMessages == true) { Clear(); sprintf(szLo+2,"начало %04X *",iwMajor); }
-
+      sprintf(szLo+2,"начало %04X *",iwMajor);
       ResetLimitsAux(ibDig);
     }
     else 
     {
       iwMajor = mpcwStartAbs16Can[ibDig];
-
-      if (boShowMessages == true) { Clear(); sprintf(szLo+2,"начало %04X",iwMajor); }
-
+      sprintf(szLo+2,"начало %04X",iwMajor);
       AddDigRecord(EVE_PREVIOUS_TOP);
     }
 

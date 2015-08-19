@@ -310,17 +310,13 @@ void    ReadTopBOld(void)
     if (mpboStartCan[ibDig] == false) 
     {
       wBaseCurr = InBuff(1)*0x100 + InBuff(2);
-
-      if (boShowMessages == true) { Clear(); sprintf(szLo+2,"начало %04X *",wBaseCurr); }
-
+      sprintf(szLo+2,"начало %04X *",wBaseCurr);
       ResetLimitsAux(ibDig);
     }
     else 
     {
       wBaseCurr = mpcwStartAbs16Can[ibDig];
-
-      if (boShowMessages == true) { Clear(); sprintf(szLo+2,"начало %04X",wBaseCurr); }
-
+      sprintf(szLo+2,"начало %04X",wBaseCurr);
       iwMajor = wBaseCurr; AddDigRecord(EVE_PREVIOUS_TOP);
     }
 
