@@ -2535,7 +2535,7 @@ void    RunDevices(void)
         {
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
 
-          if (AbsLong(dwSecond1 - dwSecond2) < bMINORCORRECT_K)                   // без коррекции
+          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_U2); }
           else if (GetCurrHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))       // простая коррекция
           { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_U2); }
