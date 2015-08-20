@@ -22,7 +22,7 @@ void    key_SetBool(cache const  *pch, char const  *pszMessages[])
       Clear();
 
       LoadSlide(pszMessages);
-      ShowBoolean(*pboValue);
+      ShowBool(*pboValue);
     }
     else Beep();
   }
@@ -37,7 +37,7 @@ void    key_SetBool(cache const  *pch, char const  *pszMessages[])
         *pboValue = InvertBoolean(*pboValue);
         SaveCache(pch);
 
-        ShowBoolean(*pboValue);
+        ShowBool(*pboValue);
       }
       else Beep(); 
     }
