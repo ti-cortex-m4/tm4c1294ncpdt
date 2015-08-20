@@ -72,23 +72,6 @@ void    ShowPortDelayLo(uchar  ibPrt)
 }
 
 
-
-void    ShowDeltaTimePositive(uchar  ibCan, ulong  dwSecond)
-{
-  ShowCanalNumber(ibCan);
-  Clear();
-  sprintf(szLo+1,"сдвиг: +%lu с", dwSecond); (boShowMessages == true) ? DelayMsg() : DelayInf();
-}
-
-
-void    ShowDeltaTimeNegative(uchar  ibCan, ulong  dwSecond)
-{
-  ShowCanalNumber(ibCan);
-  Clear();
-  sprintf(szLo+1,"сдвиг: -%lu с", dwSecond); (boShowMessages == true) ? DelayMsg() : DelayInf();
-}
-
-
 void    ShowDigitalDeltaTime(uchar  ibCan, ulong  dwSecond1, ulong  dwSecond2)
 {
   ShowCanalNumber(ibCan);

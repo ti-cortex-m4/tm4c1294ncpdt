@@ -11,6 +11,4 @@ void    ShowPort(uchar  ibPort);
 void    ShowPortDelayHi(uchar  ibPrt);
 void    ShowPortDelayLo(uchar  ibPrt);
 
-void    ShowDeltaTimePositive(uchar  ibCan, ulong  dwSecond);
-void    ShowDeltaTimeNegative(uchar  ibCan, ulong  dwSecond);
 void    ShowDigitalDeltaTime(uchar  ibCan, ulong  dwSecond1, ulong  dwSecond2);

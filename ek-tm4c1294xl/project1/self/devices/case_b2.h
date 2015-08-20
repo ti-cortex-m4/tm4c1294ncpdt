@@ -62,58 +62,49 @@
 
 
     case DEV_POSTTIME_B2:
-    {
-      uint iwDay1 = GetDayIndexMD(tiValueB.bMonth, tiValueB.bDay);              // количество дней с начала года ведомого счётчика
-      ulong dwSecond1 = GetSecondIndex(tiValueB);                               // количество секунд ведомого счётчика
-
-      uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);                  // количество дней с начала года сумматора
-      ulong dwSecond2 = GetSecondIndex(tiCurr);                                 // количество секунд сумматора
-
-      if (iwDay1 != iwDay2)
-      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
-      else
       {
-        ulong dwDelta;
-        if (dwSecond1 > dwSecond2)
-        {
-          dwDelta = dwSecond1 - dwSecond2;
-          ShowDeltaTimeNegative(ibDig, dwDelta);
-        }
+        uint iwDay1 = GetDayIndexMD(tiValueB.bMonth, tiValueB.bDay);
+        ulong dwSecond1 = GetSecondIndex(tiValueB);
+
+        uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
+        ulong dwSecond2 = GetSecondIndex(tiCurr);
+
+        if (iwDay1 != iwDay2)
+        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
         {
-          dwDelta = dwSecond2 - dwSecond1;
-          ShowDeltaTimePositive(ibDig, dwDelta);
-        }
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
+          ulong dwDelta = AbsLong(dwSecond1 - dwSecond2);
 
-        if (dwDelta < GetCorrectLimit())                                           // без коррекции
-        { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
-        else if (dwDelta < bMAJORCORRECT_B)                                     // простая коррекция
-        {
-          if (cbCorrects == 0)
+          if (dwDelta < GetCorrectLimit())                                        // без коррекции
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
+          else if (dwDelta < bMAJORCORRECT_B)                                     // простая коррекция
           {
-            bDeltaOld = (uchar)dwDelta;
-            (boShowMessages == true) ? DelayMsg() : DelayInf();
-            ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_B2);
+            if (cbCorrects == 0)
+            {
+              bDeltaOld = (uchar)dwDelta;
+              (boShowMessages == true) ? DelayMsg() : DelayInf();
+              ShowLo(szCorrectYes); DelayInf();  MakePause(DEV_CONTROL_B2);
+            }
+            else
+            {
+              bDeltaNew = (uchar)dwDelta;
+              if ((bDeltaNew < bDeltaOld) && (cbCorrects < 100))
+              {
+                bDeltaOld = bDeltaNew;
+                cbCorrects++;
+                MakePause(DEV_POSTOPENCANAL_B2);
+              }
+              else if (GetCurrHouIndex() == (tiValueB.bHour*2 + tiValueB.bMinute/30))
+              { ShowLo(szCorrectNext); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
+              else
+              { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
+            }
           }
           else
-          {
-            bDeltaNew = (uchar)dwDelta;
-            if ((bDeltaNew < bDeltaOld) && (cbCorrects < 100))
-            {
-              bDeltaOld = bDeltaNew;
-              cbCorrects++;
-              MakePause(DEV_POSTOPENCANAL_B2);
-            }
-            else if (GetCurrHouIndex() == (tiValueB.bHour*2 + tiValueB.bMinute/30))
-            { ShowLo(szCorrectNext); DelayInf(); MakePause(DEV_POSTCORRECT_B2); }
-            else
-            { ShowLo(szManageNo); DelayMsg();  ErrorProfile(); }
-          }
+          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
         }
-        else
-        { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
       }
-    }
       break;
 
 
