@@ -12,6 +12,7 @@
 #include "../memory/mem_nvram.h"
 #include "../kernel/crc-16.h"
 #include "../time/delay.h"
+#include "../serial/ports_stack.h"
 #include "nvram.h"
 #include "23x1024.h"
 
@@ -44,8 +45,6 @@ void    InitNvram(void)
 }
 
 
-
-uchar   PushChar(uchar  b);
 
 bool    PushNvramBuff(ulong  dwAddr, uint  wSize)
 {
