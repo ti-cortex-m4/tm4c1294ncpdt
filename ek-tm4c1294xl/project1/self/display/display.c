@@ -130,12 +130,6 @@ void    ShowBool(bool  bo)
 }
 
 
-void    ShowBoolean(bool  bo)
-{
-  ShowBool(bo == true);
-}
-
-
 void    ShowAnswer(void)
 {
   ShowBool(enKeyboard != KBD_INPUT1);
