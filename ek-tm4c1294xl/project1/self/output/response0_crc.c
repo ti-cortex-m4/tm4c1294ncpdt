@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-RESPONSE1_CRC.C
+RESPONSE0_CRC.C
 
 
 ------------------------------------------------------------------------------*/
@@ -28,10 +28,11 @@ RESPONSE1_CRC.C
 #include "response253_crc.h"
 #include "response254_crc.h"
 #include "response255_crc.h"
+#include "response0_crc.h"
 
 
 
-void    Response1_CRC(void)
+void    Response0_CRC(void)
 {
     switch (bInBuff4)
     {

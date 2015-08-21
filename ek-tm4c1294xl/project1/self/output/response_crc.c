@@ -15,7 +15,8 @@ RESPONSE_CRC.C
 #include "../keyboard/time/key_timedate.h"
 #include "../serial/ports.h"
 #include "../serial/flow.h"
-#include "response1_crc.h"
+#include "response0_crc.h"
+#include "response_crc.h"
 
 
 
@@ -80,7 +81,7 @@ void    RunResponseCRC(void) {
     }
 
     ShowTestResponse(bSTA_OK);
-    Response1_CRC();
+    Response0_CRC();
   }
 }
 
