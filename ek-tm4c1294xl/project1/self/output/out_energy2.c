@@ -5,10 +5,8 @@ OUT_ENERGY2.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../memory/mem_settings.h"
-//#include "../memory/mem_ports.h"
-//#include "../memory/mem_realtime.h"
-//#include "../memory/mem_energy.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_energy.h"
 #include "../serial/ports.h"
 #include "../realtime/realtime.h"
 #include "../energy.h"
@@ -28,15 +26,15 @@ void    OutEngDayCan(void)
         InitPushPtr();
         uint wSize = 0;
 
-        uchar i;
-        for (i=0; i<bCANALS; i++)
+        uchar c;
+        for (c=0; c<bCANALS; c++)
         {
-          if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+          if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
           {
-            uchar j;
-            for (j=0; j<bTARIFFS; j++)
+            uchar t;
+            for (t=0; t<bTARIFFS; t++)
             {
-              wSize += PushReal(GetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ], i, 0x01 << j));
+              wSize += PushFloat(GetCanImp2FloatEng(mpimDayCan[ PrevSoftDay() ], c, 0x01 << t));
             }
           }
         }
@@ -61,15 +59,15 @@ void    OutEngMonCan(void)
         InitPushPtr();
         uint wSize = 0;
 
-        uchar i;
-        for (i=0; i<bCANALS; i++)
+        uchar c;
+        for (c=0; c<bCANALS; c++)
         {
-          if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+          if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
           {
-            uchar j;
-            for (j=0; j<bTARIFFS; j++)
+            uchar t;
+            for (t=0; t<bTARIFFS; t++)
             {
-              wSize += PushReal(*PGetCanImp2RealEng(mpimMonCan[ PrevSoftMon() ], i, 0x01 << j));
+              wSize += PushFloat(GetCanImp2FloatEng(mpimMonCan[ PrevSoftMon() ], c, 0x01 << t));
             }
           }
         }
