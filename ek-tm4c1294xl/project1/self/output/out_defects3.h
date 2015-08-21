@@ -4,7 +4,7 @@ OUT_DEFECTS3.H
 
 ------------------------------------------------------------------------------*/
 
-void    PushRealDef(void);
+void    PushFloatDef(void);
 bool    GetGrpHouDef(uint  *mpwT, uchar  ibGrp);
 
 void    OutEngDayGrpDef(void);

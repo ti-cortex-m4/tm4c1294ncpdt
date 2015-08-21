@@ -162,12 +162,12 @@ void    Response255_CRC(void)
     case bEXT_GETDAYGRPDEF:         OutDayGrpDef();       break;
     case bEXT_GETMONGRPDEF:         OutMonGrpDef();       break;
 
-//    case bINQ_GETENGGRPDAY_DEF:     OutEngDayGrpDef();    break;
-//    case bINQ_GETENGGRPMON_DEF:     OutEngMonGrpDef();    break;
-//    case bINQ_GETMAXPOWGRPDAY_DEF:  OutMaxPowDayGrpDef(); break;
-//    case bINQ_GETMAXPOWGRPMON_DEF:  OutMaxPowMonGrpDef(); break;
-//    case bINQ_GETENGGRPHOUPREV_DEF: OutPowHouGrpDef(1);   break;
-//    case bINQ_GETPOWGRPHOUPREV_DEF: OutPowHouGrpDef(2);   break;
+    case bINQ_GETENGGRPDAY_DEF:     OutEngDayGrpDef();    break;
+    case bINQ_GETENGGRPMON_DEF:     OutEngMonGrpDef();    break;
+    case bINQ_GETMAXPOWGRPDAY_DEF:  OutMaxPowDayGrpDef(); break;
+    case bINQ_GETMAXPOWGRPMON_DEF:  OutMaxPowMonGrpDef(); break;
+    case bINQ_GETENGGRPHOUPREV_DEF: OutPowHouGrpDef(1);   break;
+    case bINQ_GETPOWGRPHOUPREV_DEF: OutPowHouGrpDef(2);   break;
 
     case bEXT_GETGAPS1: OutGaps1(); break;
     case bEXT_GETGAPS2: OutGaps2(); break;
