@@ -7,6 +7,7 @@ PORTS.H
 #include "../main.h"
 #include "../include/queries.h"
 #include "../include/queries2.h"
+#include "../memory/mem_ports.h"
 #include "ports_stack.h"
 #include "ports_common.h"
 

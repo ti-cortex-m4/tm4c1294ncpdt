@@ -4,6 +4,10 @@ REALTIME.H
 
 ------------------------------------------------------------------------------*/
 
+#include "../memory/mem_realtime.h"
+
+
+
 extern  bool                    fSeason;
 
 extern  bool                    fSummer, fWinter;

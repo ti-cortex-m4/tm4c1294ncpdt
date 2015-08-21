@@ -18,8 +18,6 @@ RESPONSE252_CRC,C
 #include "../output/out_health.h"
 #include "../output/out_tariffs.h"
 #include "../output/out_defects1.h"
-#include "../output/out_defects2.h"
-#include "../output/out_defects3.h"
 #include "../output/out_nvram.h"
 #include "../output/out_flash.h"
 #include "../kernel/asserts.h"
