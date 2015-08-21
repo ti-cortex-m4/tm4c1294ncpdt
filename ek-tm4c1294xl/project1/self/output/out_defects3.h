@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-OUT_DEFECTS21.H
+OUT_DEFECTS3.H
 
 
 ------------------------------------------------------------------------------*/
-/*
+
 void    PushRealDef(void);
-bit     GetGrpHouDef(uint  xdata  *mpwT, uchar  ibGroup);
+bool    GetGrpHouDef(uint  *mpwT, uchar  ibGrp);
 
 void    OutEngDayGrpDef(void);
 void    OutEngMonGrpDef(void);
@@ -14,4 +14,4 @@ void    OutMaxPowDayGrpDef(void);
 void    OutMaxPowMonGrpDef(void);
 
 void    OutPowHouGrpDef(uchar  bMul);
-*/
+

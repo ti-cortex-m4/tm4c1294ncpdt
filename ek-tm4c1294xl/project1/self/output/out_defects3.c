@@ -1,24 +1,20 @@
 /*------------------------------------------------------------------------------
-OUT_DEFECTS21.C
+OUT_DEFECTS3.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include "xdata.h"
-#include "queries.h"
-#include "ports.h"
-#include "engine.h"
-#include "groups.h"
-#include "energy.h"
-#include "general.h"
-#include "nexttime.h"
-#include "keyboard.h"
-#include "recalc_def.h"
-#include "c_defects20.h"
+
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_energy_spec.h"
+#include "../groups.h"
+#include "../realtime/realtime.h"
+#include "../serial/ports.h"
+#include "../special/recalc_def.h"
+#include "../energy2.h"
+#include "out_defects3.h"
 
 
-
-#ifndef MODBUS
 
 void    PushRealDef(void)
 {
@@ -49,12 +45,11 @@ uchar  i;
 
 void    PushEngDayGrpDef(void)
 {
-uchar  i;
-
   GetDayGrpMaxDef(ibGrp);
   GetGrpCurrDef(mpdeDayCan, ibGrp);
   boAlt = (dwBuffC == dwTmp);
 
+  uchar i;
   for (i=0; i<bTARIFFS; i++)
   {
     if (boAlt)
@@ -65,19 +60,18 @@ uchar  i;
     else
       PushRealDef();
 
-    wBuffD += sizeof(float);
+    wSize += sizeof(float);
   }
 }
 
 
 void    PushEngMonGrpDef(void)
 {
-uchar  i;
-
   GetMonGrpMaxDef(ibGrp);
   GetGrpCurrDef(mpdeMonCan, ibGrp);
   boAlt = (dwBuffC == dwTmp);
 
+  uchar i;
   for (i=0; i<bTARIFFS; i++)
   {
     if (boAlt)
@@ -88,7 +82,7 @@ uchar  i;
     else
       PushRealDef();
 
-    wBuffD += sizeof(float);
+    wSize += sizeof(float);
   }
 }
 
@@ -104,7 +98,7 @@ void    PushMaxPowDayGrpDef(void)
   else
     PushMaxPowDef();
 
-  wBuffD += sizeof(power);
+  wSize += sizeof(power);
 }
 
 
@@ -119,7 +113,7 @@ void    PushMaxPowMonGrpDef(void)
   else
     PushMaxPowDef();
 
-  wBuffD += sizeof(power);
+  wSize += sizeof(power);
 }
 
 
@@ -134,15 +128,16 @@ void    OutEngDayGrpDef(void)
       LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS );
 
       InitPushPtr();
-      wBuffD = 0;
+      uint wSize = 0;
 
-      for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+      uchar g;
+      for (g=0; g<bGROUPS; g++)
       {
-        if ((InBuff(7 + ibGrp/8) & (0x80 >> ibGrp%8)) != 0) 
+        if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           PushEngDayGrpDef();
       }
 
-      OutptrOutBuff(wBuffD);
+      OutptrOutBuff(wSize);
     }
     else Result(bRES_BADADDRESS);
   }
@@ -160,15 +155,16 @@ void    OutEngMonGrpDef(void)
       LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS );
       
       InitPushPtr();
-      wBuffD = 0;
+      uint wSize = 0;
 
-      for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+      uchar g;
+      for (g=0; g<bGROUPS; g++)
       {
-        if ((InBuff(7 + ibGrp/8) & (0x80 >> ibGrp%8)) != 0) 
+        if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           PushEngMonGrpDef();
       }
 
-      OutptrOutBuff(wBuffD);
+      OutptrOutBuff(wSize);
     }
     else Result(bRES_BADADDRESS);
   }
@@ -186,15 +182,16 @@ void    OutMaxPowDayGrpDef(void)
       LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS );
 
       InitPushPtr();
-      wBuffD = 0;
+      uint wSize = 0;
 
-      for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+      uchar g;
+      for (g=0; g<bGROUPS; g++)
       {
-        if ((InBuff(7 + ibGrp/8) & (0x80 >> ibGrp%8)) != 0) 
+        if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           PushMaxPowDayGrpDef();
       }
 
-      OutptrOutBuff(wBuffD);
+      OutptrOutBuff(wSize);
     }
     else Result(bRES_BADADDRESS);
   }
@@ -212,15 +209,16 @@ void    OutMaxPowMonGrpDef(void)
       LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS );
 
       InitPushPtr();
-      wBuffD = 0;
+      uint wSize = 0;
 
-      for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+      uchar g;
+      for (g=0; g<bGROUPS; g++)
       {
-        if ((InBuff(7 + ibGrp/8) & (0x80 >> ibGrp%8)) != 0) 
+        if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           PushMaxPowMonGrpDef();
       }
 
-      OutptrOutBuff(wBuffD);
+      OutptrOutBuff(wSize);
     }
     else Result(bRES_BADADDRESS);
   }
@@ -229,13 +227,12 @@ void    OutMaxPowMonGrpDef(void)
 
 
 
-bit     GetGrpHouDef(uint  xdata  *mpwT, uchar  ibGroup)
+bool    GetGrpHouDef(uint  *mpwT, uchar  ibGroup)
 {
-uchar   i,j;
-
+  uchar i;
   for (i=0; i<GetGroupsSize(ibGroup); i++)
   {
-    j = GetGroupsNodeCanal(ibGroup,i);
+    uchar j = GetGroupsNodeCanal(ibGroup,i);
 
     if (mpwT[j] == 0xFFFF)
       return 1;
@@ -257,7 +254,7 @@ void    PushPowHouGrpDef(uchar  bMul)
   else
     PushRealDef();
 
-  wBuffD += sizeof(float);
+  wSize += sizeof(float);
 }
 
 
@@ -266,19 +263,16 @@ void    OutPowHouGrpDef(uchar  bMul)
   if (enGlobal != GLB_PROGRAM)
   {
     InitPushPtr();
-    wBuffD = 0;
+    uint wSize = 0;
 
-    for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+    uchar g;
+    for (g=0; g<bGROUPS; g++)
     {
-      if ((InBuff(6 + ibGrp/8) & (0x80 >> ibGrp%8)) != 0) 
+      if ((InBuff(6 + g/8) & (0x80 >> g%8)) != 0)
         PushPowHouGrpDef(bMul);
     }
 
-    OutptrOutBuff(wBuffD);
+    OutptrOutBuff(wSize);
   }
   else Result(bRES_NEEDWORK);
 }
-
-
-#endif
-*/
