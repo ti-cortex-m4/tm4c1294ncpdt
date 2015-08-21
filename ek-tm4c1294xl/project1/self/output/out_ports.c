@@ -50,7 +50,7 @@ uchar i;
 
   PushChar(1);
 
-//  PushChar(bPortsStatus);
+  PushChar(bPortsStatus);
 //  PushChar(bIOControl);
 //  Push(&tiIOControl, sizeof(time));
 //  Push(&dwIOControl, sizeof(ulong));
