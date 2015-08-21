@@ -21,6 +21,7 @@ QUERIES2.H
 
 #define bEXT_GETGROUPS                 7
 #define bEXT_GETDIGITALS               8
+#define bEXT_GETPHONES                 9
 
 #define bEXT_GETSTOPCAN                12
 #define bEXT_GETSTOPCAN2               67
