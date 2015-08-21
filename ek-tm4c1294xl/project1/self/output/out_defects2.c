@@ -11,6 +11,9 @@ OUT_DEFECTS2.C
 #include "../realtime/realtime.h"
 #include "../serial/ports.h"
 #include "../special/recalc_def.h"
+#include "../time/timedate.h"
+#include "../energy.h"
+#include "../energy2.h"
 #include "out_defects3.h"
 #include "out_defects2.h"
 
@@ -23,21 +26,21 @@ void    OutImpCanHou48Def(void)
   InitPushPtr();
   uint wSize = 0;
 
-  uchar j;
-  for (j=0; j<48; j++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
     if (LoadImpHouFree(iwHou) == 0) break;
     else 
     {
-      uchar i;
-      for (i=0; i<bCANALS; i++)
+      uchar c;
+      for (c=0; c<bCANALS; c++)
       {
-        if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+        if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
         {
-          if ((bInBuff6 == 0) && (j > GetCurrHouIndex()))
+          if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
             PushInt(0xFFFF);
           else
-            PushInt( mpwImpHouCan[ PrevSoftHou() ][ i ] );
+            PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
 
           wSize += sizeof(uint);
           if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
@@ -48,7 +51,7 @@ void    OutImpCanHou48Def(void)
     if (++iwHou >= wHOURS) iwHou = 0;
   }      
 
-  if (j == 48) 
+  if (h == 48) 
     OutptrOutBuff(wSize);
   else 
     Result(bRES_BADFLASH);
@@ -62,23 +65,23 @@ void    OutPowGrpHou48Def(void)
   InitPushPtr();
   uint wSize = 0;
 
-  uchar j;
-  for (j=0; j<48; j++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
     if (LoadImpHouFree(iwHou) == 0) break;
     else 
     {
-      uchar i;
-      for (i=0; i<bGROUPS; i++)
+      uchar c;
+      for (c=0; c<bGROUPS; c++)
       {
-        if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+        if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
         {
-          if ((bInBuff6 == 0) && (j > GetCurrHouIndex()))
+          if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
             PushFloatDef();
           else {
-            if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], i) == 0)
+            if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], c) == 0)
             {
-              reBuffA = *PGetGrpHouInt2Float(mpwImpHouCan[ PrevSoftHou() ], i, 2);
+              reBuffA = GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2);
               PushFloat();
             }
             else
@@ -94,7 +97,7 @@ void    OutPowGrpHou48Def(void)
     if (++iwHou >= wHOURS) iwHou = 0;
   }      
 
-  if (j == 48) 
+  if (h == 48) 
     OutptrOutBuff(wSize);
   else 
     Result(bRES_BADFLASH);
@@ -102,32 +105,30 @@ void    OutPowGrpHou48Def(void)
 
 
 
-void    GetDayCanMaxDef(void)
+ulong   GetDayCanMaxDef(void)
 {
-  dwBuffC = (ulong)48;
+  return (ulong)48;
 }
 
 
-void    GetMonCanMaxDef(void)
+ulong   GetMonCanMaxDef(void)
 {
-  tiAlt.bMonth = ((12 - 1 + tiCurr.bMonth - bInBuff6) % 12) + 1;
-  tiAlt.bYear = (tiAlt.bMonth > tiCurr.bMonth) ? tiCurr.bYear-1 : tiCurr.bYear;
+  uchar bMonth = ((12 - 1 + tiCurr.bMonth - bInBuff6) % 12) + 1;
+  uchar bYear = (bMonth > tiCurr.bMonth) ? tiCurr.bYear-1 : tiCurr.bYear;
 
-  dwBuffC = (ulong)48*DaysInMonth();
+  return (ulong)48*GetDaysInMonthYM(bYear, bMonth);
 }
 
 
-void    GetDayGrpMaxDef(uchar  ibGroup)
+ulong   GetDayGrpMaxDef(uchar  ibGrp)
 {
-  GetDayCanMaxDef();
-  dwBuffC *= GetGroupsSize(ibGroup);
+  return GetDayCanMaxDef()*GetGroupsSize(ibGrp);
 }
 
 
-void    GetMonGrpMaxDef(uchar  ibGroup)
+ulong   GetMonGrpMaxDef(uchar  ibGrp)
 {
-  GetMonCanMaxDef();
-  dwBuffC *= GetGroupsSize(ibGroup);
+  return GetMonCanMaxDef()*GetGroupsSize(ibGrp);
 }
 
 
@@ -163,15 +164,16 @@ ulong   GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp)
 
 void    PushGrpDef(impulse  *mpimT, uchar  ibGrp)
 {
-uchar   i,j,k;
-
   memset(&mpdeTmpGrp, 0, sizeof(mpdeTmpGrp));
 
+  uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    j = GetGroupsNodeCanal(ibGrp,i);
-    for (k=0; k<bTARIFFS; k++)
-      mpdeTmpGrp.mpdwImp[k] += mpimT[j].mpdwImp[k];
+    uchar j = GetGroupsNodeCanal(ibGrp,i);
+
+    uchar t;
+    for (t=0; t<bTARIFFS; t++)
+      mpdeTmpGrp.mpdwImp[t] += mpimT[j].mpdwImp[t];
   }
 
   Push(&mpdeTmpGrp, sizeof(impulse));
