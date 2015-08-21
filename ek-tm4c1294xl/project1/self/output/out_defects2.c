@@ -80,7 +80,7 @@ void    OutPowGrpHou48Def(void)
           if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
             PushFloatDef();
           else {
-            if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], c) == 0)
+            if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], c) == false)
               PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2));
             else
               PushFloatDef();
@@ -226,8 +226,8 @@ void    OutMonCanDefAll(void)
         InitPushPtr();
         uint wSize = 0;
 
-       uchar c;
-       for (c=0; c<bCANALS; c++)
+        uchar c;
+        for (c=0; c<bCANALS; c++)
         {
           if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
           {
