@@ -4,9 +4,9 @@ OUT_DEFECTS2.H
 
 ------------------------------------------------------------------------------*/
 
-void    GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp);
-void    GetDayGrpMaxDef(uchar  ibGrp);
-void    GetMonGrpMaxDef(uchar  ibGrp);
+ulong   GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp);
+ulong   GetDayGrpMaxDef(uchar  ibGrp);
+ulong   GetMonGrpMaxDef(uchar  ibGrp);
 
 void    OutImpCanHou48Def(void);
 void    OutPowGrpHou48Def(void);
