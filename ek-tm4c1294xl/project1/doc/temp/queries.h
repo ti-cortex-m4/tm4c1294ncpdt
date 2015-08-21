@@ -294,8 +294,8 @@ QUERIES.H
 #define bEXT_GETEXTENDED30             47
 #define bEXT_GETEXTENDED31             48
 
-#define bEXT_GETEXTENDED50             49
-#define bEXT_GETEXTENDED51             50
++   #define bEXT_GETEXTENDED50             49
++   #define bEXT_GETEXTENDED51             50
 
 +   #define bEXT_GETSTARTCAN               52
 +   #define bEXT_GETVERSION                53
@@ -303,10 +303,10 @@ QUERIES.H
 #define bEXT_GETPHONES2                54
 +   #define bEXT_GETPORTS                  55
 
-#define bEXT_CORRECT20                 56
-#define bEXT_CORRECT21                 57
++   #define bEXT_CORRECT20                 56
++   #define bEXT_CORRECT21                 57
 #define bEXT_GETACE                    58
-#define bEXT_CORRECT3                  59
++   #define bEXT_CORRECT3                  59
 
 +   #define bEXT_GETEXTENDED401            60
 +   #define bEXT_GETEXTENDED43             61
@@ -356,7 +356,7 @@ QUERIES.H
 #define bEXT_CONTROL_R                 102
 +   #define bEXT_OVERFLOW_HOU              103
 
-#define bEXT_GETSTOPAUXCAN             104
++   #define bEXT_GETSTOPAUXCAN             104
 +   #define bEXT_GETDECRET                 105
 +   #define bEXT_GETSTART                  106
 #define bEXT_GETBULK                   107
