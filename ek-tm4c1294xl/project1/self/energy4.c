@@ -5,17 +5,8 @@ ENERGY4.C
 ------------------------------------------------------------------------------*/
 
 #include "main.h"
-//#include "engine.h"
-//#include "memory/mem_factors.h"
 #include "memory/mem_energy.h"
-//#include "memory/mem_energy_spec.h"
-//#include "memory/mem_groups.h"
-//#include "memory/mem_tariffs.h"
 #include "memory/mem_realtime.h"
-//#include "memory/mem_current.h"
-//#include "memory/mem_special.h"
-//#include "digitals/digitals.h"
-//#include "digitals/sensors.h"
 #include "realtime/realtime.h"
 #include "groups.h"
 #include "energy.h"

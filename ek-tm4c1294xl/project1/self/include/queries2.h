@@ -108,6 +108,7 @@ QUERIES2.H
 #define bEXT_GETSTOPAUXCAN             104
 
 #define bEXT_GETDECRET                 105
+#define bEXT_GETSTART                  106
 
 #define bEXT_GETOBJECTNAME             111
 #define bEXT_SETOBJECTNAME             112
