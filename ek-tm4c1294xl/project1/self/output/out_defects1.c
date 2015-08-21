@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-OUT_DEFECTS,C
+OUT_DEFECTS1,C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ OUT_DEFECTS,C
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_energy_spec.h"
 #include "../serial/ports.h"
-#include "out_defects.h"
+#include "out_defects1.h"
 
 
 
