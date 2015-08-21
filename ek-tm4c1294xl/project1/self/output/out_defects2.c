@@ -6,7 +6,6 @@ OUT_DEFECTS2.C
 
 #include "../main.h"
 #include "../memory/mem_settings.h"
-#include "../memory/mem_realtime.h"
 #include "../memory/mem_energy_spec.h"
 #include "../groups.h"
 #include "../realtime/realtime.h"
@@ -18,18 +17,18 @@ OUT_DEFECTS2.C
 
 void    OutImpCanHou48Def(void)
 {
-uchar   i,j;
-
-  iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHou = GetDayHouIndex(bInBuff6);
             
   InitPushPtr();
-  uint wBuffD = 0;
+  uint wSize = 0;
 
+  uchar j;
   for (j=0; j<48; j++)
   {
     if (LoadImpHouFree(iwHou) == 0) break;
     else 
     {
+      uchar i;
       for (i=0; i<bCANALS; i++)
       {
         if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
@@ -39,8 +38,8 @@ uchar   i,j;
           else
             PushInt( mpwImpHouCan[ PrevSoftHou() ][ i ] );
 
-          wBuffD += sizeof(uint);
-          if (wBuffD >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
+          wSize += sizeof(uint);
+          if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
         } 
       }
     } 
@@ -49,7 +48,7 @@ uchar   i,j;
   }      
 
   if (j == 48) 
-    OutptrOutBuff(wBuffD);
+    OutptrOutBuff(wSize);
   else 
     Result(bRES_BADFLASH);
 }
@@ -57,18 +56,18 @@ uchar   i,j;
 
 void    OutPowGrpHou48Def(void)
 {
-uchar   i,j;
-
-  iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHou = GetDayHouIndex(bInBuff6);
             
   InitPushPtr();
-  uint wBuffD = 0;
+  uint wSize = 0;
 
+  uchar j;
   for (j=0; j<48; j++)
   {
     if (LoadImpHouFree(iwHou) == 0) break;
     else 
     {
+      uchar i;
       for (i=0; i<bGROUPS; i++)
       {
         if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
@@ -85,8 +84,8 @@ uchar   i,j;
               PushRealDef();
           }
 
-          wBuffD += sizeof(float);
-          if (wBuffD >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
+          wSize += sizeof(float);
+          if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
         } 
       }
     } 
@@ -95,7 +94,7 @@ uchar   i,j;
   }      
 
   if (j == 48) 
-    OutptrOutBuff(wBuffD);
+    OutptrOutBuff(wSize);
   else 
     Result(bRES_BADFLASH);
 }
@@ -181,8 +180,6 @@ uchar   i,j,k;
 
 void    OutDayCanDefAll(void)
 {
-uchar   i;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bDAYS)
@@ -190,22 +187,23 @@ uchar   i;
       if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == 1)
       {
         InitPushPtr();
-        uint wBuffD = 0;
+        uint wSize = 0;
 
-        for (i=0; i<bCANALS; i++)
+       uchar i;
+       for (i=0; i<bCANALS; i++)
         {
           if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
           {
             GetDayCanMaxDef();
             PushLong(&dwBuffC);
-            wBuffD += sizeof(ulong);
+            wSize += sizeof(ulong);
 
             Push(&mpdeDayCan[ i ], sizeof(impulse));
-            wBuffD += sizeof(impulse);
+            wSize += sizeof(impulse);
           }
         }
 
-        OutptrOutBuff(wBuffD);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -217,8 +215,6 @@ uchar   i;
 
 void    OutMonCanDefAll(void)
 {
-uchar   i;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bMONTHS)
@@ -226,22 +222,23 @@ uchar   i;
       if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == 1)
       {
         InitPushPtr();
-        uint wBuffD = 0;
+        uint wSize = 0;
 
-        for (i=0; i<bCANALS; i++)
+       uchar i;
+       for (i=0; i<bCANALS; i++)
         {
           if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
           {
             GetMonCanMaxDef();
             PushLong(&dwBuffC);
-            wBuffD += sizeof(ulong);
+            wSize += sizeof(ulong);
 
             Push(&mpdeMonCan[ i ], sizeof(impulse));
-            wBuffD += sizeof(impulse);
+            wSize += sizeof(impulse);
           }
         }
 
-        OutptrOutBuff(wBuffD);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -254,8 +251,6 @@ uchar   i;
 
 void    OutDayGrpDefAll(void)
 {
-uchar   i;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bDAYS)
@@ -263,22 +258,23 @@ uchar   i;
       if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == 1)
       {
         InitPushPtr();
-        uint wBuffD = 0;
+        uint wSize = 0;
 
+        uchar i;
         for (i=0; i<bGROUPS; i++)
         {
           if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
           {
             GetDayGrpMaxDef(i);
             PushLong(&dwBuffC);
-            wBuffD += sizeof(ulong);
+            wSize += sizeof(ulong);
 
             PushGrpDef(mpdeDayCan, i);
-            wBuffD += sizeof(impulse);
+            wSize += sizeof(impulse);
           }
         }
 
-        OutptrOutBuff(wBuffD);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -290,8 +286,6 @@ uchar   i;
 
 void    OutMonGrpDefAll(void)
 {
-uchar   i;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bMONTHS)
@@ -299,22 +293,23 @@ uchar   i;
       if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == 1)
       {
         InitPushPtr();
-        uint wBuffD = 0;
+        uint wSize = 0;
 
-        for (i=0; i<bGROUPS; i++)
+       uchar i;
+       for (i=0; i<bGROUPS; i++)
         {
           if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
           {
             GetMonGrpMaxDef(i);
             PushLong(&dwBuffC);
-            wBuffD += sizeof(ulong);
+            wSize += sizeof(ulong);
 
             PushGrpDef(mpdeMonCan, i);
-            wBuffD += sizeof(impulse);
+            wSize += sizeof(impulse);
           }
         }
 
-        OutptrOutBuff(wBuffD);
+        OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -327,8 +322,6 @@ uchar   i;
 
 void    OutDayCanDef(void)
 {
-uchar   i;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bDAYS)
@@ -337,6 +330,7 @@ uchar   i;
       {
         InitPushPtr();
 
+        uchar i;
         for (i=0; i<bCANALS; i++)
         {
           GetDayCanMaxDef();
@@ -357,8 +351,6 @@ uchar   i;
 
 void    OutMonCanDef(void)
 {
-uchar   i;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bMONTHS)
@@ -367,8 +359,7 @@ uchar   i;
       {
         InitPushPtr();
 
-        InitPushPtr();
-
+        uchar i;
         for (i=0; i<bCANALS; i++)
         {
           GetMonCanMaxDef();
@@ -389,8 +380,6 @@ uchar   i;
 
 void    OutDayGrpDef(void)
 {
-uchar   i;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bDAYS)
@@ -399,6 +388,7 @@ uchar   i;
       {
         InitPushPtr();
 
+        uchar i;
         for (i=0; i<bGROUPS; i++)
         {
           GetDayGrpMaxDef(i);
@@ -419,8 +409,6 @@ uchar   i;
 
 void    OutMonGrpDef(void)
 {
-uchar   i;
-
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff6 < bMONTHS)
@@ -429,6 +417,7 @@ uchar   i;
       {
         InitPushPtr();
 
+        uchar i;
         for (i=0; i<bGROUPS; i++)
         {
           GetMonGrpMaxDef(i);
