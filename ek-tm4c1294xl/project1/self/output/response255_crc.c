@@ -78,8 +78,8 @@ void    Response255_CRC(void)
 
     case bEXT_GETGROUPS: OutGetGroupsExt(); break;
 
-    case bINQ_GETMAXPOWGRPDAY_ALL:  OutMaxPowDayGrpExt();  break;
-    case bINQ_GETMAXPOWGRPMON_ALL:  OutMaxPowMonGrpExt();  break;
+    case bINQ_GETMAXPOWGRPDAY_ALL: OutMaxPowDayGrpExt(); break;
+    case bINQ_GETMAXPOWGRPMON_ALL: OutMaxPowMonGrpExt(); break;
 
     case bINQ_GETENGGRPDAY_ALL: OutEngDayGrpExt(false); break;
     case bINQ_GETENGGRPMON_ALL: OutEngMonGrpExt(false); break;
@@ -87,19 +87,19 @@ void    Response255_CRC(void)
     case bINQ_GETENGGRPDAY_ALLSUM: OutEngDayGrpExtSum(); break;
     case bINQ_GETENGGRPMON_ALLSUM: OutEngMonGrpExtSum(); break;
 
-    case bINQ_GETIMPCANDAY_ALL:     OutImpDayCanExt();     break;
-    case bINQ_GETIMPCANMON_ALL:     OutImpMonCanExt();     break;
+    case bINQ_GETIMPCANDAY_ALL: OutImpDayCanExt(); break;
+    case bINQ_GETIMPCANMON_ALL: OutImpMonCanExt(); break;
 
-    case bINQ_GETPOWGRPHOU_DAY:     OutPowGrpHou48Ext();   break;
-    case bINQ_GETIMPCANHOU_DAY:     OutImpCanHou48Ext();   break;
-    case bINQ_GETPOWCANHOU_DAY:     OutPowCanHou48Ext();   break;
+    case bINQ_GETPOWGRPHOU_DAY: OutPowGrpHou48Ext(); break;
+    case bINQ_GETIMPCANHOU_DAY: OutImpCanHou48Ext(); break;
+    case bINQ_GETPOWCANHOU_DAY: OutPowCanHou48Ext(); break;
 
-    case bINQ_GETIMPCANMNT_ALL:     OutImpMntCanExt();     break;
-    case bINQ_GETPOWCANMNT_ALL:     OutPowMntCanExt();     break;
+    case bINQ_GETIMPCANMNT_ALL: OutImpMntCanExt(); break;
+    case bINQ_GETPOWCANMNT_ALL: OutPowMntCanExt(); break;
 
-    case bEXT_GETIMPCANHOU:         OutImpCanHouExt();     break;
-    case bEXT_GETIMPCANMNT:         OutImpCanMntExt();     break;
-    case bEXT_GETPOWCANMNT:         OutPowCanMntExt();     break;
+    case bEXT_GETIMPCANHOU: OutImpCanHouExt(); break;
+    case bEXT_GETIMPCANMNT: OutImpCanMntExt(); break;
+    case bEXT_GETPOWCANMNT: OutPowCanMntExt(); break;
 
     case bEXT_GETADDRESS: OutGetAddress(); break;
     case bEXT_SETADDRESS: OutSetAddress(); break;
