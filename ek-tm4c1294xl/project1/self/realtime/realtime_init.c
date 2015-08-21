@@ -18,6 +18,7 @@ REALTIME_INIT.C
 #include "../hardware/beep.h"
 #include "../serial/print.h"
 #include "../nvram/cache.h"
+#include "../settings.h"
 #include "realtime.h"
 #include "realtime_storage.h"
 
