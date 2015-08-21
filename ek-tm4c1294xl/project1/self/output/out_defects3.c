@@ -239,17 +239,17 @@ bool    GetGrpHouDef(uint  *mpwT, uchar  ibGrp)
     uchar c = GetGroupsNodeCanal(ibGrp,i);
 
     if (mpwT[c] == 0xFFFF)
-      return 1;
+      return true;
   }
 
-  return 0;
+  return false;
 }
 
 
 uint    PushPowHouGrpDef(uchar  bMul, uchar  ibGrp)
 {
   LoadImpHouFree( PrevHardHou() );
-  if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], ibGrp) == 0)
+  if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], ibGrp) == false)
   {
     LoadImpHou( PrevHardHou() );
     PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul));
