@@ -6,6 +6,7 @@ OUT_DEFECTS3.C
 
 #include "../main.h"
 #include "../memory/mem_settings.h"
+#include "../memory/mem_energy.h"
 #include "../memory/mem_energy_spec.h"
 #include "../groups.h"
 #include "../realtime/realtime.h"
@@ -45,11 +46,13 @@ uchar  i;
 }
 
 
-void    PushEngDayGrpDef(uchar  ibGrp)
+uint    PushEngDayGrpDef(uchar  ibGrp)
 {
   ulong dw1 = GetDayGrpMaxDef(ibGrp);
   ulong dw2 = GetGrpCurrDef(mpdeDayCan, ibGrp);
   bool f = (dw1 == dw2);
+
+  uint wSize = 0;
 
   uchar t;
   for (t=0; t<bTARIFFS; t++)
@@ -61,14 +64,18 @@ void    PushEngDayGrpDef(uchar  ibGrp)
 
     wSize += sizeof(float);
   }
+
+  return wSize;
 }
 
 
-void    PushEngMonGrpDef(uchar  ibGrp)
+uint    PushEngMonGrpDef(uchar  ibGrp)
 {
   ulong dw1 = GetMonGrpMaxDef(ibGrp);
   ulong dw2 = GetGrpCurrDef(mpdeMonCan, ibGrp);
   bool f = (dw1 == dw2);
+
+  uint wSize = 0;
 
   uchar t;
   for (t=0; t<bTARIFFS; t++)
@@ -80,10 +87,12 @@ void    PushEngMonGrpDef(uchar  ibGrp)
 
     wSize += sizeof(float);
   }
+
+  return wSize;
 }
 
 
-void    PushMaxPowDayGrpDef(uchar  ibGrp)
+uint    PushMaxPowDayGrpDef(uchar  ibGrp)
 {
   ulong dw1 = GetDayGrpMaxDef(ibGrp);
   ulong dw2 = GetGrpCurrDef(mpdeDayCan, ibGrp);
@@ -94,11 +103,11 @@ void    PushMaxPowDayGrpDef(uchar  ibGrp)
   else
     PushMaxPowDef();
 
-  wSize += sizeof(power);
+  return sizeof(power);
 }
 
 
-void    PushMaxPowMonGrpDef(uchar  ibGrp)
+uint    PushMaxPowMonGrpDef(uchar  ibGrp)
 {
   ulong dw1 = GetMonGrpMaxDef(ibGrp);
   ulong dw2 = GetGrpCurrDef(mpdeMonCan, ibGrp);
@@ -109,7 +118,7 @@ void    PushMaxPowMonGrpDef(uchar  ibGrp)
   else
     PushMaxPowDef();
 
-  wSize += sizeof(power);
+  return sizeof(power);
 }
 
 
@@ -130,7 +139,7 @@ void    OutEngDayGrpDef(void)
       for (g=0; g<bGROUPS; g++)
       {
         if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-          PushEngDayGrpDef();
+        	wSize += PushEngDayGrpDef(g);
       }
 
       OutptrOutBuff(wSize);
@@ -157,7 +166,7 @@ void    OutEngMonGrpDef(void)
       for (g=0; g<bGROUPS; g++)
       {
         if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-          PushEngMonGrpDef();
+          wSize += PushEngMonGrpDef(g);
       }
 
       OutptrOutBuff(wSize);
@@ -184,7 +193,7 @@ void    OutMaxPowDayGrpDef(void)
       for (g=0; g<bGROUPS; g++)
       {
         if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-          PushMaxPowDayGrpDef();
+          wSize += PushMaxPowDayGrpDef(g);
       }
 
       OutptrOutBuff(wSize);
@@ -211,7 +220,7 @@ void    OutMaxPowMonGrpDef(void)
       for (g=0; g<bGROUPS; g++)
       {
         if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
-          PushMaxPowMonGrpDef();
+          wSize += PushMaxPowMonGrpDef(g);
       }
 
       OutptrOutBuff(wSize);
@@ -228,9 +237,9 @@ bool    GetGrpHouDef(uint  *mpwT, uchar  ibGrp)
   uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    uchar j = GetGroupsNodeCanal(ibGrp,i);
+    uchar c = GetGroupsNodeCanal(ibGrp,i);
 
-    if (mpwT[j] == 0xFFFF)
+    if (mpwT[c] == 0xFFFF)
       return 1;
   }
 
@@ -238,19 +247,18 @@ bool    GetGrpHouDef(uint  *mpwT, uchar  ibGrp)
 }
 
 
-void    PushPowHouGrpDef(uchar  bMul)
+uint    PushPowHouGrpDef(uchar  bMul, uchar  ibGrp)
 {
   LoadImpHouFree( PrevHardHou() );
   if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], ibGrp) == 0)
   {
     LoadImpHou( PrevHardHou() );
-    reBuffA = GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul);
-    PushFloat();
+    PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul));
   }
   else
     PushFloatDef();
 
-  wSize += sizeof(float);
+  return sizeof(float);
 }
 
 
@@ -265,7 +273,7 @@ void    OutPowHouGrpDef(uchar  bMul)
     for (g=0; g<bGROUPS; g++)
     {
       if ((InBuff(6 + g/8) & (0x80 >> g%8)) != 0)
-        PushPowHouGrpDef(bMul);
+        wSize += PushPowHouGrpDef(bMul, g);
     }
 
     OutptrOutBuff(wSize);

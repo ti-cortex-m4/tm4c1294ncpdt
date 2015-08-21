@@ -6,6 +6,7 @@ OUT_DEFECTS2.C
 
 #include "../main.h"
 #include "../memory/mem_settings.h"
+#include "../memory/mem_energy.h"
 #include "../memory/mem_energy_spec.h"
 #include "../groups.h"
 #include "../realtime/realtime.h"
@@ -80,10 +81,7 @@ void    OutPowGrpHou48Def(void)
             PushFloatDef();
           else {
             if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], c) == 0)
-            {
-              reBuffA = GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2);
-              PushFloat();
-            }
+              PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2));
             else
               PushFloatDef();
           }
@@ -164,16 +162,18 @@ ulong   GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp)
 
 void    PushGrpDef(impulse  *mpimT, uchar  ibGrp)
 {
+  static impulse mpdeTmpGrp;
+
   memset(&mpdeTmpGrp, 0, sizeof(mpdeTmpGrp));
 
   uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    uchar j = GetGroupsNodeCanal(ibGrp,i);
+    uchar c = GetGroupsNodeCanal(ibGrp,i);
 
     uchar t;
     for (t=0; t<bTARIFFS; t++)
-      mpdeTmpGrp.mpdwImp[t] += mpimT[j].mpdwImp[t];
+      mpdeTmpGrp.mpdwImp[t] += mpimT[c].mpdwImp[t];
   }
 
   Push(&mpdeTmpGrp, sizeof(impulse));
@@ -192,16 +192,15 @@ void    OutDayCanDefAll(void)
         InitPushPtr();
         uint wSize = 0;
 
-       uchar i;
-       for (i=0; i<bCANALS; i++)
+        uchar c;
+        for (c=0; c<bCANALS; c++)
         {
-          if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+          if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
           {
-            GetDayCanMaxDef();
-            PushLong(&dwBuffC);
+            PushLong(GetDayCanMaxDef());
             wSize += sizeof(ulong);
 
-            Push(&mpdeDayCan[ i ], sizeof(impulse));
+            Push(&mpdeDayCan[ c ], sizeof(impulse));
             wSize += sizeof(impulse);
           }
         }
@@ -227,16 +226,15 @@ void    OutMonCanDefAll(void)
         InitPushPtr();
         uint wSize = 0;
 
-       uchar i;
-       for (i=0; i<bCANALS; i++)
+       uchar c;
+       for (c=0; c<bCANALS; c++)
         {
-          if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+          if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
           {
-            GetMonCanMaxDef();
-            PushLong(&dwBuffC);
+            PushLong(GetMonCanMaxDef());
             wSize += sizeof(ulong);
 
-            Push(&mpdeMonCan[ i ], sizeof(impulse));
+            Push(&mpdeMonCan[ c ], sizeof(impulse));
             wSize += sizeof(impulse);
           }
         }
@@ -263,16 +261,15 @@ void    OutDayGrpDefAll(void)
         InitPushPtr();
         uint wSize = 0;
 
-        uchar i;
-        for (i=0; i<bGROUPS; i++)
+        uchar g;
+        for (g=0; g<bGROUPS; g++)
         {
-          if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+          if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
-            GetDayGrpMaxDef(i);
-            PushLong(&dwBuffC);
+            PushLong(GetDayGrpMaxDef(g));
             wSize += sizeof(ulong);
 
-            PushGrpDef(mpdeDayCan, i);
+            PushGrpDef(mpdeDayCan, g);
             wSize += sizeof(impulse);
           }
         }
@@ -298,16 +295,15 @@ void    OutMonGrpDefAll(void)
         InitPushPtr();
         uint wSize = 0;
 
-       uchar i;
-       for (i=0; i<bGROUPS; i++)
+        uchar g;
+        for (g=0; g<bGROUPS; g++)
         {
-          if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
+          if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
-            GetMonGrpMaxDef(i);
-            PushLong(&dwBuffC);
+            PushLong(GetMonGrpMaxDef(g));
             wSize += sizeof(ulong);
 
-            PushGrpDef(mpdeMonCan, i);
+            PushGrpDef(mpdeMonCan, g);
             wSize += sizeof(impulse);
           }
         }
@@ -333,13 +329,13 @@ void    OutDayCanDef(void)
       {
         InitPushPtr();
 
-        uchar i;
-        for (i=0; i<bCANALS; i++)
+        uchar c;
+        for (c=0; c<bCANALS; c++)
         {
-          GetDayCanMaxDef();
-          GetCanCurrDef(mpdeDayCan, i);
+          ulong dw1 = GetDayCanMaxDef();
+          ulong dw2 = GetCanCurrDef(mpdeDayCan, c);
 
-          PushChar((dwBuffC == dwTmp) ? 0xFF : 0);
+          PushChar((dw1 == dw2) ? 0xFF : 0);
         }
 
         OutptrOutBuff(bCANALS);
@@ -362,13 +358,13 @@ void    OutMonCanDef(void)
       {
         InitPushPtr();
 
-        uchar i;
-        for (i=0; i<bCANALS; i++)
+        uchar g;
+        for (g=0; g<bCANALS; g++)
         {
-          GetMonCanMaxDef();
-          GetCanCurrDef(mpdeMonCan, i);
+          ulong dw1 = GetMonCanMaxDef();
+          ulong dw2 = GetCanCurrDef(mpdeMonCan, g);
 
-          PushChar(dwBuffC == dwTmp ? 0xFF : 0);
+          PushChar(dw1 == dw2 ? 0xFF : 0);
         }
 
         OutptrOutBuff(bCANALS);
@@ -391,13 +387,13 @@ void    OutDayGrpDef(void)
       {
         InitPushPtr();
 
-        uchar i;
-        for (i=0; i<bGROUPS; i++)
+        uchar g;
+        for (g=0; g<bGROUPS; g++)
         {
-          GetDayGrpMaxDef(i);
-          GetGrpCurrDef(mpdeDayCan, i);
+          ulong dw1 = GetDayGrpMaxDef(g);
+          ulong dw2 = GetGrpCurrDef(mpdeDayCan, g);
 
-          PushChar((dwBuffC == dwTmp) ? 0xFF : 0);
+          PushChar((dw1 == dw2) ? 0xFF : 0);
         }
 
         OutptrOutBuff(bGROUPS);
@@ -420,13 +416,13 @@ void    OutMonGrpDef(void)
       {
         InitPushPtr();
 
-        uchar i;
-        for (i=0; i<bGROUPS; i++)
+        uchar g;
+        for (g=0; g<bGROUPS; g++)
         {
-          GetMonGrpMaxDef(i);
-          GetGrpCurrDef(mpdeMonCan, i);
+          ulong dw1 = GetMonGrpMaxDef(g);
+          ulong dw2 = GetGrpCurrDef(mpdeMonCan, g);
 
-          PushChar((dwBuffC == dwTmp) ? 0xFF : 0);
+          PushChar((dw1 == dw2) ? 0xFF : 0);
         }
 
         OutptrOutBuff(bGROUPS);
