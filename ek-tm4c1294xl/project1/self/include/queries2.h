@@ -74,6 +74,9 @@ QUERIES2.H
 
 #define bEXT_GETDIAGRAM                95
 
+#define bEXT_GETENGCANDAY              65
+#define bEXT_GETENGCANMON              66
+
 #define bEXT_GETRELAXS                 45
 #define bEXT_SETRELAXS                 46
 
