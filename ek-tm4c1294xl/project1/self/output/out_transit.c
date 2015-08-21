@@ -13,6 +13,7 @@ OUT_TRANSIT.C
 #include "../serial/save_in_buff.h"
 #include "../serial/speeds.h"
 #include "../hardware/watchdog.h"
+#include "out_transit.h"
 
 
 
@@ -138,8 +139,6 @@ uchar   j;
 
 
 
-#ifndef SKIP_K
-
 void    SafeTransitExecute3(void)
 {
 uint    i;
@@ -197,8 +196,6 @@ uchar   j;
     Output(iwInBuffSave);
   }
 }
-
-#endif
 
 
 

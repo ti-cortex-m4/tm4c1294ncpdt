@@ -1,11 +1,10 @@
 /*------------------------------------------------------------------------------
-RESPONSE0_CRC.C
+RESPONSE0_CRC,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_ports.h"
 #include "../memory/mem_settings.h"
 #include "../include/states.h"
 #include "../serial/ports.h"
@@ -36,13 +35,9 @@ void    Response0_CRC(void)
 {
     switch (bInBuff4)
     {
-      case bINQ_GETGLOBAL:
-        LongResult(enGlobal);
-        break;
+      case bINQ_GETGLOBAL: LongResult(enGlobal); break;
 
-      case bINQ_GETCURRTIME:
-        OutGetCurrTimeDate();
-        break;
+      case bINQ_GETCURRTIME: OutGetCurrTimeDate(); break;
 
       case bINQ_GETGROUP: OutGetGroup(); break;
       case bINQ_SETGROUP: OutSetGroup(); break;
@@ -112,14 +107,10 @@ void    Response0_CRC(void)
 
       case bINQ_TRANSIT_EXECUTE1: SafeTransitExecute1(); break;
       case bINQ_TRANSIT_EXECUTE2: SafeTransitExecute2(); break;
-#ifndef SKIP_K
       case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
-#endif
       case bINQ_TRANSIT_EXECUTE4: SafeTransitExecute4(); break;
 
-      case bINQ_GETFLASHPAGE:
-        OutFlashPage();
-        break;
+      case bINQ_GETFLASHPAGE: OutFlashPage(); break;
 
       case bINQ_SETKEY: OutSetKey(); break;
       case bINQ_GETDISPLAY: OutGetDisplay(); break;
@@ -133,7 +124,7 @@ void    Response0_CRC(void)
 
 //      case 250: OutTestMinute3(); break;
 //      case 230: OutTestMinute15(); break;
-      case 251: OutTestMinute30(); break;
+//      case 251: OutTestMinute30(); break;
 //      case 252: OutTestDay(); break;
 //      case 253: OutTestMonth(); break;
 //      case 254: OutTestYear(); break;
