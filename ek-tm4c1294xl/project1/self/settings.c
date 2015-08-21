@@ -9,6 +9,7 @@ SETTINGS,C
 #include "memory/mem_program.h"
 #include "flash/files.h"
 #include "nvram/cache.h"
+#include "time/timedate.h"
 #include "label_global.h"
 #include "settings.h"
 
