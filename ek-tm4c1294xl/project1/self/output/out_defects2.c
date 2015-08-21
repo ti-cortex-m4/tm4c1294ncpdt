@@ -30,32 +30,27 @@ void    OutImpCanHou48Def(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == 0) break;
-    else 
-    {
-      uchar c;
-      for (c=0; c<bCANALS; c++)
-      {
-        if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
-        {
-          if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
-            PushInt(0xFFFF);
-          else
-            PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
+    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
 
-          wSize += sizeof(uint);
-          if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
-        } 
+    uchar c;
+    for (c=0; c<bCANALS; c++)
+    {
+      if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
+      {
+        if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
+          PushInt(0xFFFF);
+        else
+          PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
+
+        wSize += sizeof(uint);
+        if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
       }
-    } 
-          
+    }
+
     if (++iwHou >= wHOURS) iwHou = 0;
   }      
 
-  if (h == 48) 
-    OutptrOutBuff(wSize);
-  else 
-    Result(bRES_BADFLASH);
+  OutptrOutBuff(wSize);
 }
 
 
@@ -69,36 +64,32 @@ void    OutPowGrpHou48Def(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == 0) break;
-    else 
-    {
-      uchar c;
-      for (c=0; c<bGROUPS; c++)
-      {
-        if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
-        {
-          if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
-            PushFloatDef();
-          else {
-            if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], c) == false)
-              PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2));
-            else
-              PushFloatDef();
-          }
+    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
 
-          wSize += sizeof(float);
-          if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
-        } 
+    uchar c;
+    for (c=0; c<bGROUPS; c++)
+    {
+      if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
+      {
+        if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
+          PushFloatDef();
+        else
+        {
+          if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], c) == false)
+            PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2));
+          else
+            PushFloatDef();
+        }
+
+        wSize += sizeof(float);
+        if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
       }
-    } 
-          
+    }
+
     if (++iwHou >= wHOURS) iwHou = 0;
   }      
 
-  if (h == 48) 
-    OutptrOutBuff(wSize);
-  else 
-    Result(bRES_BADFLASH);
+  OutptrOutBuff(wSize);
 }
 
 
@@ -128,6 +119,7 @@ ulong   GetMonGrpMaxDef(uchar  ibGrp)
 {
   return GetMonCanMaxDef()*GetGroupsSize(ibGrp);
 }
+
 
 
 ulong   GetCanCurrDef(impulse  *mpimT, uchar  ibCan)
@@ -160,6 +152,7 @@ ulong   GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp)
 }
 
 
+
 void    PushGrpDef(impulse  *mpimT, uchar  ibGrp)
 {
   static impulse mpdeGrp;
@@ -187,7 +180,7 @@ void    OutDayCanDefAll(void)
   {
     if (bInBuff6 < bDAYS)
     {
-      if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == 1)
+      if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == true)
       {
         InitPushPtr();
         uint wSize = 0;
@@ -221,7 +214,7 @@ void    OutMonCanDefAll(void)
   {
     if (bInBuff6 < bMONTHS)
     {
-      if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == 1)
+      if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == true)
       {
         InitPushPtr();
         uint wSize = 0;
@@ -256,7 +249,7 @@ void    OutDayGrpDefAll(void)
   {
     if (bInBuff6 < bDAYS)
     {
-      if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == 1)
+      if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == true)
       {
         InitPushPtr();
         uint wSize = 0;
@@ -290,7 +283,7 @@ void    OutMonGrpDefAll(void)
   {
     if (bInBuff6 < bMONTHS)
     {
-      if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == 1)
+      if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == true)
       {
         InitPushPtr();
         uint wSize = 0;
@@ -325,7 +318,7 @@ void    OutDayCanDef(void)
   {
     if (bInBuff6 < bDAYS)
     {
-      if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == 1)
+      if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == true)
       {
         InitPushPtr();
 
@@ -354,7 +347,7 @@ void    OutMonCanDef(void)
   {
     if (bInBuff6 < bMONTHS)
     {
-      if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == 1)
+      if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == true)
       {
         InitPushPtr();
 
@@ -383,7 +376,7 @@ void    OutDayGrpDef(void)
   {
     if (bInBuff6 < bDAYS)
     {
-      if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == 1)
+      if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == true)
       {
         InitPushPtr();
 
@@ -412,7 +405,7 @@ void    OutMonGrpDef(void)
   {
     if (bInBuff6 < bMONTHS)
     {
-      if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == 1)
+      if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == true)
       {
         InitPushPtr();
 
