@@ -45,20 +45,17 @@ uchar  i;
 }
 
 
-void    PushEngDayGrpDef(void)
+void    PushEngDayGrpDef(uchar  ibGrp)
 {
-  GetDayGrpMaxDef(ibGrp);
-  GetGrpCurrDef(mpdeDayCan, ibGrp);
-  boAlt = (dwBuffC == dwTmp);
+  ulong dw1 = GetDayGrpMaxDef(ibGrp);
+  ulong dw2 = GetGrpCurrDef(mpdeDayCan, ibGrp);
+  bool f = (dw1 == dw2);
 
-  uchar i;
-  for (i=0; i<bTARIFFS; i++)
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
   {
-    if (boAlt)
-    {
-      reBuffA = GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << i);
-      PushFloat();
-    }
+    if (f)
+      PushFloat(GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << t));
     else
       PushFloatDef();
 
@@ -67,20 +64,17 @@ void    PushEngDayGrpDef(void)
 }
 
 
-void    PushEngMonGrpDef(void)
+void    PushEngMonGrpDef(uchar  ibGrp)
 {
-  GetMonGrpMaxDef(ibGrp);
-  GetGrpCurrDef(mpdeMonCan, ibGrp);
-  boAlt = (dwBuffC == dwTmp);
+  ulong dw1 = GetMonGrpMaxDef(ibGrp);
+  ulong dw2 = GetGrpCurrDef(mpdeMonCan, ibGrp);
+  bool f = (dw1 == dw2);
 
-  uchar i;
-  for (i=0; i<bTARIFFS; i++)
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
   {
-    if (boAlt)
-    {
-      reBuffA = GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << i);
-      PushFloat();
-    }
+    if (f)
+      PushFloat(GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << t));
     else
       PushFloatDef();
 
@@ -89,13 +83,13 @@ void    PushEngMonGrpDef(void)
 }
 
 
-void    PushMaxPowDayGrpDef(void)
+void    PushMaxPowDayGrpDef(uchar  ibGrp)
 {
-  GetDayGrpMaxDef(ibGrp);
-  GetGrpCurrDef(mpdeDayCan, ibGrp);
-  boAlt = (dwBuffC == dwTmp);
+  ulong dw1 = GetDayGrpMaxDef(ibGrp);
+  ulong dw2 = GetGrpCurrDef(mpdeDayCan, ibGrp);
+  bool f = (dw1 == dw2);
 
-  if (boAlt)
+  if (f)
     Push(&mppoDayGrp[ PrevSoftDay() ][ ibGrp ], sizeof(power));
   else
     PushMaxPowDef();
@@ -104,13 +98,13 @@ void    PushMaxPowDayGrpDef(void)
 }
 
 
-void    PushMaxPowMonGrpDef(void)
+void    PushMaxPowMonGrpDef(uchar  ibGrp)
 {
-  GetMonGrpMaxDef(ibGrp);
-  GetGrpCurrDef(mpdeMonCan, ibGrp);
-  boAlt = (dwBuffC == dwTmp);
+  ulong dw1 = GetMonGrpMaxDef(ibGrp);
+  ulong dw2 = GetGrpCurrDef(mpdeMonCan, ibGrp);
+  bool f = (dw1 == dw2);
 
-  if (boAlt)
+  if (f)
     Push(&mppoMonGrp[ PrevSoftMon() ][ ibGrp ], sizeof(power));
   else
     PushMaxPowDef();
@@ -229,12 +223,12 @@ void    OutMaxPowMonGrpDef(void)
 
 
 
-bool    GetGrpHouDef(uint  *mpwT, uchar  ibGroup)
+bool    GetGrpHouDef(uint  *mpwT, uchar  ibGrp)
 {
   uchar i;
-  for (i=0; i<GetGroupsSize(ibGroup); i++)
+  for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    uchar j = GetGroupsNodeCanal(ibGroup,i);
+    uchar j = GetGroupsNodeCanal(ibGrp,i);
 
     if (mpwT[j] == 0xFFFF)
       return 1;
@@ -250,7 +244,7 @@ void    PushPowHouGrpDef(uchar  bMul)
   if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], ibGrp) == 0)
   {
     LoadImpHou( PrevHardHou() );
-    reBuffA = GetGrpHouInt2Float(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul);
+    reBuffA = GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul);
     PushFloat();
   }
   else
