@@ -301,7 +301,7 @@ QUERIES.H
 +   #define bEXT_GETVERSION                53
 
 #define bEXT_GETPHONES2                54
-#define bEXT_GETPORTS                  55
++   #define bEXT_GETPORTS                  55
 
 #define bEXT_CORRECT20                 56
 #define bEXT_CORRECT21                 57
