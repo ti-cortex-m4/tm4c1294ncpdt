@@ -51,6 +51,11 @@ void    InitSettings(void)
   LoadCache(&chSetDate);
   LoadCache(&chSetGroups);
   LoadCache(&chSetPassword);
+
+  LoadCache(&chStart);
+  LoadCache(&chPowerOff);
+  LoadCache(&chPowerOn);
+  LoadCache(&chSwitchOn);
 }
 
 
@@ -79,4 +84,16 @@ void    ResetSettings(bool  fFull)
     boSetPassword = true;
     SaveCache(&chSetPassword);
   }
+
+  tiStart = tiZero;
+  SaveCache(&chStart);
+
+  tiPowerOff = tiZero;
+  SaveCache(&chPowerOff);
+
+  tiPowerOn = tiZero;
+  SaveCache(&chPowerOn);
+
+  cbSwitchOn = 0;
+  SaveCache(&chSwitchOn);
 }

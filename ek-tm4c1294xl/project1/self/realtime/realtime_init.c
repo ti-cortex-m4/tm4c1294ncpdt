@@ -230,7 +230,10 @@ void    InitRealtime(void)
     fSeason = 0;
 
     cbSwitchOn++;
+    SaveCache(&chSwitchOn);
+
     tiPowerOff = tiCurr;
+    SaveCache(&chPowerOff);
 
     AddSysRecord(EVE_PREVNEXTTIME2);
     if (RealtimeOffline() == true)
@@ -242,6 +245,7 @@ void    InitRealtime(void)
     AddSysRecord(EVE_POSTNEXTTIME);
 
     tiPowerOn = tiCurr;
+    SaveCache(&chPowerOn);
 
     RealtimeSeason();
   }
