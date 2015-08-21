@@ -162,9 +162,9 @@ ulong   GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp)
 
 void    PushGrpDef(impulse  *mpimT, uchar  ibGrp)
 {
-  static impulse mpdeTmpGrp;
+  static impulse mpdeGrp;
 
-  memset(&mpdeTmpGrp, 0, sizeof(mpdeTmpGrp));
+  memset(&mpdeGrp, 0, sizeof(mpdeGrp));
 
   uchar i;
   for (i=0; i<GetGroupsSize(ibGrp); i++)
@@ -173,10 +173,10 @@ void    PushGrpDef(impulse  *mpimT, uchar  ibGrp)
 
     uchar t;
     for (t=0; t<bTARIFFS; t++)
-      mpdeTmpGrp.mpdwImp[t] += mpimT[c].mpdwImp[t];
+      mpdeGrp.mpdwImp[t] += mpimT[c].mpdwImp[t];
   }
 
-  Push(&mpdeTmpGrp, sizeof(impulse));
+  Push(&mpdeGrp, sizeof(impulse));
 }
 
 
