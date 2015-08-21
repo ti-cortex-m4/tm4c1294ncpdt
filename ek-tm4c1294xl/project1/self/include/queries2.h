@@ -84,6 +84,24 @@ QUERIES2.H
 #define bEXT_GETVERSION                53
 #define bEXT_GETPORTS                  55
 
+#define bEXT_GETHOUCANDEF              76
+#define bEXT_GETHOUGRPDEF              91
+#define bEXT_GETDAYCANDEF_ALL          77
+#define bEXT_GETMONCANDEF_ALL          78
+#define bEXT_GETDAYGRPDEF_ALL          79
+#define bEXT_GETMONGRPDEF_ALL          80
+#define bEXT_GETDAYCANDEF              81
+#define bEXT_GETMONCANDEF              82
+#define bEXT_GETDAYGRPDEF              83
+#define bEXT_GETMONGRPDEF              84
+
+#define bINQ_GETENGGRPDAY_DEF          85
+#define bINQ_GETENGGRPMON_DEF          86
+#define bINQ_GETMAXPOWGRPDAY_DEF       87
+#define bINQ_GETMAXPOWGRPMON_DEF       88
+#define bINQ_GETENGGRPHOUPREV_DEF      89
+#define bINQ_GETPOWGRPHOUPREV_DEF      90
+
 #define bEXT_GETGAPS1                  96
 #define bEXT_GETGAPS2                  97
 

@@ -5,23 +5,16 @@ OUT_DEFECTS2.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_energy_spec.h"
 #include "../groups.h"
-/*
-#include "queries.h"
-#include "ports.h"
-#include "engine.h"
-#include "energy.h"
-#include "general.h"
-#include "groups.h"
-#include "timedate.h"
-#include "nexttime.h"
-#include "keyboard.h"
-#include "recalc_def.h"
-#include "c_defects21.h"
+#include "../realtime/realtime.h"
+#include "../serial/ports.h"
+#include "../special/recalc_def.h"
+#include "out_defects2.h"
 
 
-
-#ifndef MODBUS
 
 void    OutImpCanHou48Def(void)
 {
@@ -30,7 +23,7 @@ uchar   i,j;
   iwHou = GetDayHouIndex(bInBuff6);
             
   InitPushPtr();
-  wBuffD = 0;
+  uint wBuffD = 0;
 
   for (j=0; j<48; j++)
   {
@@ -69,7 +62,7 @@ uchar   i,j;
   iwHou = GetDayHouIndex(bInBuff6);
             
   InitPushPtr();
-  wBuffD = 0;
+  uint wBuffD = 0;
 
   for (j=0; j<48; j++)
   {
@@ -136,7 +129,7 @@ void    GetMonGrpMaxDef(uchar  ibGroup)
   GetMonCanMaxDef();
   dwBuffC *= GetGroupsSize(ibGroup);
 }
-*/
+
 
 ulong   GetCanCurrDef(impulse  *mpimT, uchar  ibCan)
 {
@@ -167,16 +160,16 @@ ulong   GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp)
   return dw;
 }
 
-/*
-void    PushGrpDef(impulse  _xdata  *mpimT, uchar  ibGroup)
+
+void    PushGrpDef(impulse  *mpimT, uchar  ibGrp)
 {
 uchar   i,j,k;
 
   memset(&mpdeTmpGrp, 0, sizeof(mpdeTmpGrp));
 
-  for (i=0; i<GetGroupsSize(ibGroup); i++)
+  for (i=0; i<GetGroupsSize(ibGrp); i++)
   {
-    j = GetGroupsNodeCanal(ibGroup,i);
+    j = GetGroupsNodeCanal(ibGrp,i);
     for (k=0; k<bTARIFFS; k++)
       mpdeTmpGrp.mpdwImp[k] += mpimT[j].mpdwImp[k];
   }
@@ -197,7 +190,7 @@ uchar   i;
       if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == 1)
       {
         InitPushPtr();
-        wBuffD = 0;
+        uint wBuffD = 0;
 
         for (i=0; i<bCANALS; i++)
         {
@@ -233,7 +226,7 @@ uchar   i;
       if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == 1)
       {
         InitPushPtr();
-        wBuffD = 0;
+        uint wBuffD = 0;
 
         for (i=0; i<bCANALS; i++)
         {
@@ -270,7 +263,7 @@ uchar   i;
       if (LoadDefDay( (bDAYS+ibHardDay-bInBuff6) % bDAYS ) == 1)
       {
         InitPushPtr();
-        wBuffD = 0;
+        uint wBuffD = 0;
 
         for (i=0; i<bGROUPS; i++)
         {
@@ -306,7 +299,7 @@ uchar   i;
       if (LoadDefMon( (bMONTHS+ibHardMon-bInBuff6) % bMONTHS ) == 1)
       {
         InitPushPtr();
-        wBuffD = 0;
+        uint wBuffD = 0;
 
         for (i=0; i<bGROUPS; i++)
         {
@@ -452,7 +445,3 @@ uchar   i;
   }
   else Result(bRES_NEEDWORK);
 }
-
-
-#endif
-*/

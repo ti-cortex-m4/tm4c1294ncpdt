@@ -3,10 +3,10 @@ OUT_DEFECTS2.H
 
 
 ------------------------------------------------------------------------------*/
-/*
-void    GetGrpCurrDef(impulse  _xdata  *mpimT, uchar  ibGroup);
-void    GetDayGrpMaxDef(uchar  ibGroup);
-void    GetMonGrpMaxDef(uchar  ibGroup);
+
+void    GetGrpCurrDef(impulse  *mpimT, uchar  ibGrp);
+void    GetDayGrpMaxDef(uchar  ibGrp);
+void    GetMonGrpMaxDef(uchar  ibGrp);
 
 void    OutImpCanHou48Def(void);
 void    OutPowGrpHou48Def(void);
@@ -20,4 +20,4 @@ void    OutDayCanDef(void);
 void    OutMonCanDef(void);
 void    OutDayGrpDef(void);
 void    OutMonGrpDef(void);
-*/
+
