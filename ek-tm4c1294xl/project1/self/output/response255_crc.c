@@ -35,6 +35,7 @@ RESPONSE255_CRC.C
 #include "../output/out_digitals.h"
 #include "../output/out_max_power.h"
 #include "../output/out_energy.h"
+#include "../output/out_energy2.h"
 #include "../output/out_impulse.h"
 #include "../output/out_minute3.h"
 #include "../output/out_minute30.h"
@@ -144,6 +145,9 @@ void    Response255_CRC(void)
     case bEXT_GETEXTENDED7: OutExtended7(false); break;
 
     case bEXT_GETDIAGRAM: OutDiagram(false); break;
+
+    case bEXT_GETENGCANDAY: OutEngDayCan(); break;
+    case bEXT_GETENGCANMON: OutEngMonCan(); break;
 
     case bEXT_GETRELAXS: OutGetRelaxs(); break;
     case bEXT_SETRELAXS: OutSetRelaxs(); break;
