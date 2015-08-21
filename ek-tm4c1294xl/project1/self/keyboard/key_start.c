@@ -148,8 +148,8 @@ void    key_Start(void)
 
     StartDefects();
 
-    // запоминаем время/дату первого запуска
     tiStart = *GetCurrTimeDate();
+    SaveCache(&chStart);
 
     Work();
     OK();
