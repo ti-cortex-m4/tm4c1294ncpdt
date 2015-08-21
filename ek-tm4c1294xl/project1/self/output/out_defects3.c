@@ -11,12 +11,14 @@ OUT_DEFECTS3.C
 #include "../realtime/realtime.h"
 #include "../serial/ports.h"
 #include "../special/recalc_def.h"
+#include "../energy.h"
 #include "../energy2.h"
+#include "out_defects2.h"
 #include "out_defects3.h"
 
 
 
-void    PushRealDef(void)
+void    PushFloatDef(void)
 {
   PushChar(0xFF);
   PushChar(0xFF);
@@ -38,7 +40,7 @@ uchar  i;
     PushChar(0);
     PushChar(0);
 
-    PushRealDef();
+    PushFloatDef();
   }
 }
 
@@ -54,11 +56,11 @@ void    PushEngDayGrpDef(void)
   {
     if (boAlt)
     {
-      reBuffA = *PGetGrpImp2RealEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << i);
-      PushReal();
+      reBuffA = GetGrpImp2FloatEng(mpimDayCan[ PrevSoftDay() ], ibGrp, 0x01 << i);
+      PushFloat();
     }
     else
-      PushRealDef();
+      PushFloatDef();
 
     wSize += sizeof(float);
   }
@@ -76,11 +78,11 @@ void    PushEngMonGrpDef(void)
   {
     if (boAlt)
     {
-      reBuffA = *PGetGrpImp2RealEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << i);
-      PushReal();
+      reBuffA = GetGrpImp2FloatEng(mpimMonCan[ PrevSoftMon() ], ibGrp, 0x01 << i);
+      PushFloat();
     }
     else
-      PushRealDef();
+      PushFloatDef();
 
     wSize += sizeof(float);
   }
@@ -248,11 +250,11 @@ void    PushPowHouGrpDef(uchar  bMul)
   if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], ibGrp) == 0)
   {
     LoadImpHou( PrevHardHou() );
-    reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul);
-    PushReal();
+    reBuffA = GetGrpHouInt2Float(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul);
+    PushFloat();
   }
   else
-    PushRealDef();
+    PushFloatDef();
 
   wSize += sizeof(float);
 }

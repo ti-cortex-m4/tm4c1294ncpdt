@@ -11,6 +11,7 @@ OUT_DEFECTS2.C
 #include "../realtime/realtime.h"
 #include "../serial/ports.h"
 #include "../special/recalc_def.h"
+#include "out_defects3.h"
 #include "out_defects2.h"
 
 
@@ -73,15 +74,15 @@ void    OutPowGrpHou48Def(void)
         if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0) 
         {
           if ((bInBuff6 == 0) && (j > GetCurrHouIndex()))
-            PushRealDef();
+            PushFloatDef();
           else {
             if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], i) == 0)
             {
-              reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], i, 2);
-              PushReal();
+              reBuffA = *PGetGrpHouInt2Float(mpwImpHouCan[ PrevSoftHou() ], i, 2);
+              PushFloat();
             }
             else
-              PushRealDef();
+              PushFloatDef();
           }
 
           wSize += sizeof(float);
