@@ -5,8 +5,8 @@ QUERIES2.H
 ------------------------------------------------------------------------------*/
 
 
-#ifndef __INQUIRYS2
-#define __INQUIRYS2
+#ifndef __QUERIES2
+#define __QUERIES2
 
 
 #define bEXT_GETPHONE                  1
