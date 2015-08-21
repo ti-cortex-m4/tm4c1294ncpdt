@@ -161,7 +161,7 @@ QUERIES.H
 #define bINQ_RESPONSE_255              255
 
 
-// TODO
+// результаты обработки Esc-запросов
 #define bESC_OK                        'O'
 #define bESC_BADCOMMAND                'C'
 #define bESC_BADADDRESS                'A'
@@ -172,7 +172,7 @@ QUERIES.H
 #define bESC_BADDIGITAL                'D'
 
 
-// TODO
+// результаты обработки CRC-запросов
 #define bRES_OK                        0
 #define bRES_BADCOMMAND                1
 #define bRES_BADADDRESS                2

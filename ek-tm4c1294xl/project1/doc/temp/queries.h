@@ -215,12 +215,12 @@ QUERIES.H
 +   #define bINQ_GETCONFIG                 248
 #define bINQ_GETFLASHPAGE              249
 
-#define bINQ_QUICKMNT                  250
-#define bINQ_QUICKMIN15                230
-#define bINQ_QUICKHOU                  251
-#define bINQ_QUICKDAY                  252
-#define bINQ_QUICKMON                  253
-#define bINQ_QUICKYEA                  254
++   #define bINQ_QUICKMNT                  250
++   #define bINQ_QUICKMIN15                230
++   #define bINQ_QUICKHOU                  251
++   #define bINQ_QUICKDAY                  252
++   #define bINQ_QUICKMON                  253
++   #define bINQ_QUICKYEA                  254
 
 #define bINQ_INFO                      244
 #define bINQ_FLOW                      245
@@ -243,13 +243,13 @@ QUERIES.H
 +   #define bEXT_GETDIGITALS               8
 +   #define bEXT_GETPHONES                 9
 
-#define bEXT_CORRECT1                  10
-#define bEXT_CORRECT2                  11
++   #define bEXT_CORRECT1                  10
++   #define bEXT_CORRECT2                  11
 
 +   #define bEXT_GETSTOPCAN                12
-#define bEXT_GETENBLCAN                13
-#define bEXT_GETCTRLHOU                14
-#define bEXT_GETENBLPORTHOU            15
++   #define bEXT_GETENBLCAN                13
++  #define bEXT_GETCTRLHOU                14
++  #define bEXT_GETENBLPORTHOU            15
 
 #define bEXT_GETIMPCANHOU              16   
 +   #define bEXT_GETADDRESSES              17
@@ -297,7 +297,7 @@ QUERIES.H
 #define bEXT_GETEXTENDED50             49
 #define bEXT_GETEXTENDED51             50
 
-#define bEXT_GETSTARTCAN               52
++   #define bEXT_GETSTARTCAN               52
 +   #define bEXT_GETVERSION                53
 
 #define bEXT_GETPHONES2                54
@@ -321,32 +321,32 @@ QUERIES.H
 #define bEXT_GETLINKERRORS             70
 #define bEXT_GETHOUCHECK               71
 
-#define bEXT_SETCTRLHOU                72
-#define bEXT_SETENBLPORTHOU            73
-#define bEXT_SETRECALC1                74
-#define bEXT_SETRECALC2                75
++   #define bEXT_SETCTRLHOU                72
++   #define bEXT_SETENBLPORTHOU            73
++   #define bEXT_SETRECALC1                74
++   #define bEXT_SETRECALC2                75
 
-#define bEXT_GETHOUCANDEF              76
-#define bEXT_GETHOUGRPDEF              91
-#define bEXT_GETDAYCANDEF_ALL          77
-#define bEXT_GETMONCANDEF_ALL          78
-#define bEXT_GETDAYGRPDEF_ALL          79
-#define bEXT_GETMONGRPDEF_ALL          80
-#define bEXT_GETDAYCANDEF              81
-#define bEXT_GETMONCANDEF              82
-#define bEXT_GETDAYGRPDEF              83
-#define bEXT_GETMONGRPDEF              84
++   #define bEXT_GETHOUCANDEF              76
++   #define bEXT_GETHOUGRPDEF              91
++   #define bEXT_GETDAYCANDEF_ALL          77
++   #define bEXT_GETMONCANDEF_ALL          78
++   #define bEXT_GETDAYGRPDEF_ALL          79
++   #define bEXT_GETMONGRPDEF_ALL          80
++   #define bEXT_GETDAYCANDEF              81
++   #define bEXT_GETMONCANDEF              82
++   #define bEXT_GETDAYGRPDEF              83
++   #define bEXT_GETMONGRPDEF              84
 
-#define bINQ_GETENGGRPDAY_DEF          85
-#define bINQ_GETENGGRPMON_DEF          86
-#define bINQ_GETMAXPOWGRPDAY_DEF       87
-#define bINQ_GETMAXPOWGRPMON_DEF       88
-#define bINQ_GETENGGRPHOUPREV_DEF      89
-#define bINQ_GETPOWGRPHOUPREV_DEF      90
++   #define bINQ_GETENGGRPDAY_DEF          85
++   #define bINQ_GETENGGRPMON_DEF          86
++   #define bINQ_GETMAXPOWGRPDAY_DEF       87
++   #define bINQ_GETMAXPOWGRPMON_DEF       88
++   #define bINQ_GETENGGRPHOUPREV_DEF      89
++   #define bINQ_GETPOWGRPHOUPREV_DEF      90
 
 #define bINQ_GETDIAGRAM                95
-#define bINQ_GETGAPS1                  96
-#define bINQ_GETGAPS2                  97
++   #define bINQ_GETGAPS1                  96
++   #define bINQ_GETGAPS2                  97
 
 #define bINQ_FAILURE2                  98
 
@@ -358,10 +358,10 @@ QUERIES.H
 
 #define bEXT_GETSTOPAUXCAN             104
 +   #define bEXT_GETDECRET                 105
-#define bEXT_GETSTART                  106
++   #define bEXT_GETSTART                  106
 #define bEXT_GETBULK                   107
 #define bEXT_GETMNTCURRENT2            108
-#define bEXT_RECORD_DISABLE            109
++   #define bEXT_RECORD_DISABLE            109
 +   #define bEXT_GETENGFRACDIGCAN          110
 
 +   #define bEXT_GETOBJECTNAME             111
@@ -382,37 +382,4 @@ QUERIES.H
 #define bEXT_CHECKUP_EVENT_MON         126
 #define bEXT_CHECKUP_DAYS              127
 
-#define bEXT_FLASH_CONTROL             250
-
-
-// символы результата передачи состояниииий Esc-команд
-#define bESC_OK                        'O'
-#define bESC_BADCOMMAND                'C'
-#define bESC_BADADDRESS                'A'
-#define bESC_BADDATA                   'D'
-#define bESC_BADSIZE                   'S'
-#define bESC_BADMODE                   'M'
-#define bESC_BADFLASH                  'F'
-#define bESC_BADDIGITAL                'D'
-
-
-
-// коды результата передачи состояниииий
-#define bRES_OK                        0
-#define bRES_BADCOMMAND                1
-#define bRES_BADADDRESS                2
-#define bRES_BADDATA                   3
-#define bRES_BADSIZE                   4
-#define bRES_BADMODE                   5
-#define bRES_BADFLASH                  6
-#define bRES_BADDIGITAL                7
-#define bRES_BADPORT                   8
-#define bRES_BADACCESS                 9
-#define bRES_BADCORRECTION             10
-#define bRES_BUSY                      11
-
-#define bRES_OUTOVERFLOW               99
-
-
-
-#endif
++   #define bEXT_FLASH_CONTROL             250
