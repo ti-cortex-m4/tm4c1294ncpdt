@@ -111,6 +111,7 @@ void    Response255_CRC(void)
     case bEXT_GETCURRENT: OutCurrentExt(); break;
 
     case bEXT_GETDIGITALS: OutGetDigitalsExt(); break;
+    case bEXT_GETPHONES: OutPhonesExt(); break;
 
     case bEXT_GETSTOPCAN: OutIntCanExt(mpcwStopCan); break;
     case bEXT_GETSTOPCAN2: OutStopCan2(); break;

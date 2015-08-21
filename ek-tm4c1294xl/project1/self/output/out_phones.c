@@ -52,3 +52,23 @@ void    OutSetPhone(void)
   }
   else Result(bRES_NEEDPROGRAM);
 }
+
+
+
+void    OutPhonesExt(void)
+{
+  InitPushPtr();
+  uchar wSize = 0;
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
+    {
+      Push(&mpphPhones[c], sizeof(line));
+      wSize += sizeof(line);
+    }
+  }
+
+  OutptrOutBuff(wSize);
+}

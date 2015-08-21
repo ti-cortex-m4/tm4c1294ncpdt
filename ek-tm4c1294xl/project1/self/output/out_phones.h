@@ -6,3 +6,5 @@ OUT_PHONES,H
 
 void    OutGetPhone(void);
 void    OutSetPhone(void);
+
+void    OutPhonesExt(void);
