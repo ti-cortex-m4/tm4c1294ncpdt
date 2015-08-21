@@ -17,6 +17,6 @@ void    OutStart(void)
   Push(&tiStart, sizeof(time));
   Push(&tiPowerOff, sizeof(time));
   Push(&tiPowerOn,  sizeof(time));
-  PushChar(cbPowerOn);
+  PushChar(cbSwitchOn);
   Output(6+6+6+1);
 }

@@ -22,7 +22,7 @@ extern  uchar                   cbSummer, cbWinter;
 
 extern  time                    tiPowerOn, tiPowerOff;
 
-extern  uchar                   cbPowerOn;
+extern  uchar                   cbSwitchOn;
 
 extern  time                    tiStart;
 

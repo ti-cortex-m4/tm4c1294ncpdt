@@ -308,17 +308,17 @@ uchar   i;
   else
     i = 0x01;                            // ошибка флэш-памяти
 
-  if (cbPowerOn == 0)
+  if (cbSwitchOn == 0)
     PushChar(i | 0x08);
   else
-  if (cbPowerOn == 1)
+  if (cbSwitchOn == 1)
     PushChar(i | 0x10);
   else
     PushChar(i);
 
   PushTime(tiPowerOff);                  // время последнего выключения питания
   PushTime(tiPowerOn);                   // время последнего включения питания
-  PushChar(cbPowerOn);                   // количество выключений питания
+  PushChar(cbSwitchOn);                   // количество выключений питания
 
   PushChar(0);                           // время выключения за предыдущий месяц (дней, часов, минут)
   PushChar(0);

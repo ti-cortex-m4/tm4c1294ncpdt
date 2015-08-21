@@ -15,6 +15,11 @@ extern  cache const             chSetDate;
 extern  cache const             chSetGroups;
 extern  cache const             chSetPassword;
 
+extern  cache const             chStart;
+extern  cache const             chPowerOff;
+extern  cache const             chPowerOn;
+extern  cache const             chSwitchOn;
+
 
 
 void    InitSettings(void);
