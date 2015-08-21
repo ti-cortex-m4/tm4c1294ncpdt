@@ -25,6 +25,11 @@ cache const             chSetDate = {SET_DATE, &boSetDate, sizeof(bool)};
 cache const             chSetGroups = {SET_GROUPS, &boSetGroups, sizeof(bool)};
 cache const             chSetPassword = {SET_PASSWORD, &boSetPassword, sizeof(bool)};
 
+cache const             chStart = {START, &tiStart, sizeof(time)};
+cache const             chPowerOff = {POWER_OFF, &tiPowerOff, sizeof(time)};
+cache const             chPowerOn = {POWER_ON, &tiPowerOn, sizeof(time)};
+cache const             chSwitchOn = {SWITCH_ON, &cbSwitchOn, sizeof(uchar)};
+
 
 
 void    InitSettings(void)

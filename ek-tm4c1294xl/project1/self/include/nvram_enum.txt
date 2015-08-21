@@ -192,5 +192,10 @@ typedef enum
   ASSERTS_IDX           = RECORDS_DSBL + sizeof(mpfRecordDsbl) + bNVRAM_FOOTER,
   ASSERTS               = ASSERTS_IDX + sizeof(ulong) + bNVRAM_FOOTER,
 
-  NVRAM_END             = ASSERTS + sizeof(mpAsserts) + bNVRAM_FOOTER
+  START                 = ASSERTS + sizeof(mpAsserts) + bNVRAM_FOOTER,
+  POWER_OFF             = START + sizeof(time) + bNVRAM_FOOTER,
+  POWER_ON              = POWER_OFF + sizeof(time) + bNVRAM_FOOTER,
+  SWITCH_ON             = POWER_ON + sizeof(time) + bNVRAM_FOOTER,
+
+  NVRAM_END             = SWITCH_ON + sizeof(uchar) + bNVRAM_FOOTER
 } nvram;

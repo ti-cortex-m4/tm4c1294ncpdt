@@ -229,7 +229,7 @@ void    InitRealtime(void)
 
     fSeason = 0;
 
-    cbPowerOn++;
+    cbSwitchOn++;
     tiPowerOff = tiCurr;
 
     AddSysRecord(EVE_PREVNEXTTIME2);

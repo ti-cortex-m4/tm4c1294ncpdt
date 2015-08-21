@@ -192,5 +192,10 @@ RESERVE(RECORDS_DSBL, sizeof(mpfRecordDsbl) + bNVRAM_FOOTER)
 RESERVE(ASSERTS_IDX, sizeof(ulong) + bNVRAM_FOOTER)
 RESERVE(ASSERTS, sizeof(mpAsserts) + bNVRAM_FOOTER)
 
+RESERVE(START, sizeof(time) + bNVRAM_FOOTER)
+RESERVE(POWER_OFF, sizeof(time) + bNVRAM_FOOTER)
+RESERVE(POWER_ON, sizeof(time) + bNVRAM_FOOTER)
+RESERVE(SWITCH_ON, sizeof(uchar) + bNVRAM_FOOTER)
+
 END(NVRAM_END)
 } nvram;

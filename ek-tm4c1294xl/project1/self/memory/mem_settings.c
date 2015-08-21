@@ -34,7 +34,7 @@ uchar                   cbSummer, cbWinter;
 time                    tiPowerOn, tiPowerOff;
 
 // счётчик выключений питания
-uchar                   cbPowerOn;
+uchar                   cbSwitchOn;
 
 // время/дата запуска
 time                    tiStart;
