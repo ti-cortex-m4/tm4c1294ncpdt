@@ -30,9 +30,8 @@ void    PushFloatDef(void)
 
 void    PushMaxPowDef(void)
 {
-uchar  i;
-
-  for (i=0; i<bTARIFFS; i++)
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
   {
     PushChar(0);
     PushChar(0);
