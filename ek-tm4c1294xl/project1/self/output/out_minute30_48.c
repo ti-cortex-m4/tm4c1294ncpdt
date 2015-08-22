@@ -156,39 +156,34 @@ float   re;
 
 void    OutDefCanHou48Ext(void)
 {
-  uint iwHou = PrevDayIndex(bInBuff6);
+  uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
-  uint wBuffD = 0;
+  uint wSize = 0;
 
-  uchar j;
-  for (j=0; j<48; j++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == 0) break;
-    else
-    {
-      uchar i;
-      for (i=0; i<bCANALS; i++)
-      {
-        if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0)
-        {
-          if ((bInBuff6 == 0) && (j > GetHouIndex()))
-            PushChar(0);
-          else if (GetDigitalDevice(i) == 0)
-            PushChar(1);
-          else
-            PushChar(*PGetCanInt(mpwImpHouCan[ PrevSoftHou() ], i) != 0xFFFF);
+    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
 
-          wBuffD += sizeof(uchar);
-        }
+    uchar c;
+    for (c=0; c<bCANALS; c++)
+    {
+      if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
+      {
+        if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
+          PushChar(0);
+        else if (GetDigitalDevice(c) == 0)
+          PushChar(1);
+        else
+          PushChar(GetCanInt(mpwImpHouCan[ PrevSoftHou() ], c) != 0xFFFF);
+
+        wSize += sizeof(uchar);
       }
     }
 
     if (++iwHou >= wHOURS) iwHou = 0;
   }
 
-  if (j == 48)
-    OutptrOutBuff(wBuffD);
-  else
-    Result(bRES_BADFLASH);
+  OutptrOutBuff(wSize);
 }

@@ -142,6 +142,7 @@ QUERIES.H
 #define bINQ_GETPOWGRPHOU_DAY          157
 #define bINQ_GETIMPCANHOU_DAY          158
 #define bINQ_GETPOWCANHOU_DAY          159
+#define bINQ_GETDEFCANHOU_DAY          179
 
 #define bINQ_TRANSIT_EXECUTE1          172
 #define bINQ_TRANSIT_EXECUTE2          173

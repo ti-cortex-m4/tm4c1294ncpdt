@@ -110,12 +110,12 @@ uchar   PushInt(uint  w)
 }
 
 
-uint    PushIntArray(uint  *mpw, uint  wSize)
+uint    PushIntArray(uint  *mpw, uint  wCount)
 {
   uint wSize = 0;
 
   uint i;
-  for (i=0; i<wSize; i++)
+  for (i=0; i<wCount; i++)
   {
     wSize += PushInt(mpw[i]);
   }
