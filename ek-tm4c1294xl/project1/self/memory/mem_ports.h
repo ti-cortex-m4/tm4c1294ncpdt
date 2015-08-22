@@ -14,6 +14,8 @@ extern  bool                mpboLocal[bPORTS];
 
 extern  bool                mpboLocalDisable[bPORTS];
 
+extern  uint                wOutputDelay[bPORTS];
+
 extern  uchar               mpbCorrectLimit[bPORTS];
 
 extern  uchar               bInBuff0,

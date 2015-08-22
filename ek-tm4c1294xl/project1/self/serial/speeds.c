@@ -158,7 +158,9 @@ uchar   p;
   LoadLocalDisable();
   LoadMajorInDelay();
   LoadMinorInDelay();
+
   LoadCache(&chCorrectLimit);
+  LoadCache(&chOutputDelay);
 
   for (p=0; p<bPORTS; p++)
   {
@@ -204,5 +206,11 @@ uchar   p;
   SaveLocalDisable();
   SaveMajorInDelay();
   SaveMinorInDelay();
+
   SaveCache(&chCorrectLimit);
+
+  for (p=0; p<bPORTS; p++)
+    mpwOutputDelay[p] = 0;
+
+  SaveCache(&chOutputDelay);
 }

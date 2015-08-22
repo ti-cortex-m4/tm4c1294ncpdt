@@ -18,6 +18,8 @@ cache const             chLocalDisable = {LOCAL_DISABLE, &mpboLocalDisable, size
 cache const             chMajorInDelay = {MAJOR_IN_DELAY, &mpwMajorInDelay, sizeof(mpwMajorInDelay)};
 cache const             chMinorInDelay = {MINOR_IN_DELAY, &mpwMinorInDelay, sizeof(mpwMinorInDelay)};
 
+cache const             chOutputDelay = {OUTPUT_DELAY, &mpwOutputDelay, sizeof(mpwOutputDelay)};
+
 
 
 bool SavePorts(void) {

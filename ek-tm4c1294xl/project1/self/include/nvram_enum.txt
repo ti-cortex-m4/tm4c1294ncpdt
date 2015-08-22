@@ -197,5 +197,7 @@ typedef enum
   POWER_ON              = POWER_OFF + sizeof(time) + bNVRAM_FOOTER,
   SWITCH_ON             = POWER_ON + sizeof(time) + bNVRAM_FOOTER,
 
-  NVRAM_END             = SWITCH_ON + sizeof(uchar) + bNVRAM_FOOTER
+  OUTPUT_DELAY          = SWITCH_ON + sizeof(uchar) + bNVRAM_FOOTER,
+
+  NVRAM_END             = OUTPUT_DELAY + sizeof(mpwOutputDelay) + bNVRAM_FOOTER
 } nvram;

@@ -197,5 +197,7 @@ RESERVE(POWER_OFF, sizeof(time) + bNVRAM_FOOTER)
 RESERVE(POWER_ON, sizeof(time) + bNVRAM_FOOTER)
 RESERVE(SWITCH_ON, sizeof(uchar) + bNVRAM_FOOTER)
 
+RESERVE(OUTPUT_DELAY, sizeof(mpwOutputDelay) + bNVRAM_FOOTER)
+
 END(NVRAM_END)
 } nvram;
