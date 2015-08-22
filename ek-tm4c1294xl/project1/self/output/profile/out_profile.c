@@ -88,3 +88,26 @@ void    OutResetEngFracDigCan(void)
   else
     Result(bRES_NEEDREPROGRAM);
 }
+
+
+
+void    OutCorrectLimit(void)
+{
+  InitPushCRC();
+  Push(&mpbCorrectLimit, sizeof(mpbCorrectLimit));
+  Output(sizeof(mpbCorrectLimit));
+}
+
+
+void    OutLinkErrors(void)
+{
+  InitPushCRC();
+  Push(&mpcwOutputZ, sizeof(mpcwOutputZ));
+  Push(&mpcwOutputC, sizeof(mpcwOutputC));
+  Push(&mpcwOutput0, sizeof(mpcwOutput0));
+  Push(&mpcwOutput1, sizeof(mpcwOutput1));
+  Push(&mpcwOutput2, sizeof(mpcwOutput2));
+  Push(&mpcwOutput3, sizeof(mpcwOutput3));
+  Output(6*64*2);
+
+}

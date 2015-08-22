@@ -12,3 +12,6 @@ void    OutGetEngFracDigCan(void);
 
 void    OutResetEngFrac(void);
 void    OutResetEngFracDigCan(void);
+
+void    OutCorrectLimit(void);
+void    OutLinkErrors(void);
