@@ -248,13 +248,13 @@ QUERIES.H
 
 +   #define bEXT_GETSTOPCAN                12
 +   #define bEXT_GETENBLCAN                13
-+  #define bEXT_GETCTRLHOU                14
-+  #define bEXT_GETENBLPORTHOU            15
++   #define bEXT_GETCTRLHOU                14
++   #define bEXT_GETENBLPORTHOU            15
 
 #define bEXT_GETIMPCANHOU              16   
 +   #define bEXT_GETADDRESSES              17
-#define bEXT_GETIMPCANMNT              18
-#define bEXT_GETPOWCANMNT              27
++   #define bEXT_GETIMPCANMNT              18
++   #define bEXT_GETPOWCANMNT              27
 
 +   #define bEXT_GETRECORD                 19
 +   #define bEXT_GETRECORDSBLOCK           20
