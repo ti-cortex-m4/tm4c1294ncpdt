@@ -1,16 +1,4 @@
-/*------------------------------------------------------------------------------
-QUERIES.H
-
- Номера удалённых запросов
-------------------------------------------------------------------------------*/
-
-
-#ifndef __INQUIRYS
-#define __INQUIRYS
-
-
-// коды удалёных запросов
-#define bINQ_GETGLOBAL                 0
++   #define bINQ_GETGLOBAL                 0
 
 #define bINQ_GETCURRTIME               1
 #define bINQ_SETCURRTIME               2
