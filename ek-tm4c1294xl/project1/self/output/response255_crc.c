@@ -159,6 +159,9 @@ void    Response255_CRC(void)
     case bEXT_GETPORTS: OutPorts(); break;
     case bEXT_GETOUTPUTDELAY: OutOutputDelay(); break;
 
+    case bEXT_GETCORRECTLIMIT: OutCorrectLimit(); break;
+    case bEXT_GETLINKERRORS: OutLinkErrors(); break;
+
     case bEXT_GETHOUCANDEF: OutImpCanHou48Def(); break;
     case bEXT_GETHOUGRPDEF: OutPowGrpHou48Def(); break;
     case bEXT_GETDAYCANDEF_ALL: OutDayCanDefAll(); break;
