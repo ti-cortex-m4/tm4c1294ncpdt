@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_OUTPUT_DELAY.H
+KEY_OUTPUT_DELAY,H
 
  
 ------------------------------------------------------------------------------*/
@@ -7,6 +7,7 @@ KEY_OUTPUT_DELAY.H
 #include "../../main.h"
 #include "../../console.h"
 #include "../../serial/ports.h"
+#include "key_output_delay.h"
 
 
 
