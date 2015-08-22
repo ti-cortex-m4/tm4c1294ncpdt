@@ -316,7 +316,7 @@ QUERIES.H
 +   #define bEXT_GETENGCANMON              66
 +   #define bEXT_GETSTOPCAN2               67
 
-#define bEXT_GETOUTPUTDELAY            68
++   #define bEXT_GETOUTPUTDELAY            68
 #define bEXT_GETCORRECTLIMIT           69
 #define bEXT_GETLINKERRORS             70
 #define bEXT_GETHOUCHECK               71

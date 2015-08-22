@@ -68,6 +68,11 @@ QUERIES2.H
 #define bEXT_GETEXTENDED44             60
 #define bEXT_GETEXTENDED43             61
 
+#define bEXT_GET_EXTENDED_4T           119
+
+#define bEXT_GETEXTENDED50             49
+#define bEXT_GETEXTENDED51             50
+
 #define bEXT_GETEXTENDED6              62
 
 #define bEXT_GETEXTENDED7              100
@@ -83,9 +88,6 @@ QUERIES2.H
 
 #define bEXT_GETRELAXS                 45
 #define bEXT_SETRELAXS                 46
-
-#define bEXT_GETEXTENDED50             49
-#define bEXT_GETEXTENDED51             50
 
 #define bEXT_GETSTARTCAN               52
 
@@ -126,8 +128,6 @@ QUERIES2.H
 #define bEXT_SETCANALSNAME             114
 #define bEXT_GETGROUPSNAME             115
 #define bEXT_SETGROUPSNAME             116
-
-#define bEXT_GET_EXTENDED_4T           119
 
 #define bEXT_OVERFLOW_HHR              103
 #define bEXT_GET_ERROR_LINK            134
