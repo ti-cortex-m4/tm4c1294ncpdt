@@ -14,6 +14,7 @@ void    Push(void  *pbData, uint  wSize);
 uchar   PushChar(uchar  b);
 uchar   PushBool(bool  f);
 uchar   PushInt(uint  w);
+void    PushIntArray(uint  *mpw, uint  wSize);
 uchar   PushLong(ulong  dw);
 uchar   PushFloat(float  fl);
 uchar   PushDouble(double  db);

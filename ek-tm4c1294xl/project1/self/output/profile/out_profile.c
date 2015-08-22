@@ -15,13 +15,7 @@ OUT_PROFILE,C
 void    OutGetOverflowHhr(void)
 {
   InitPushCRC();
-
-  uchar c;
-  for (c=0; c<bCANALS; c++)
-  {
-    PushInt(mpcwOverflowHhr[c]);
-  }
-
+  PushIntArray(mpcwOverflowHhr, bCANALS);
   Output(sizeof(mpcwOverflowHhr));
 }
 
@@ -29,13 +23,7 @@ void    OutGetOverflowHhr(void)
 void    OutGetErrorLink(void)
 {
   InitPushCRC();
-
-  uchar c;
-  for (c=0; c<bCANALS; c++)
-  {
-    PushInt(mpcwErrorLink[c]);
-  }
-
+  PushIntArray(mpcwErrorLink, bCANALS);
   Output(sizeof(mpcwErrorLink));
 }
 
@@ -102,12 +90,12 @@ void    OutCorrectLimit(void)
 void    OutLinkErrors(void)
 {
   InitPushCRC();
-  Push(&mpcwOutputZ, sizeof(mpcwOutputZ));
-  Push(&mpcwOutputC, sizeof(mpcwOutputC));
-  Push(&mpcwOutput0, sizeof(mpcwOutput0));
-  Push(&mpcwOutput1, sizeof(mpcwOutput1));
-  Push(&mpcwOutput2, sizeof(mpcwOutput2));
-  Push(&mpcwOutput3, sizeof(mpcwOutput3));
-  Output(6*64*2);
+  PushIntArray(mpcwOutputZ, bCANALS);
+  PushIntArray(mpcwOutputC, bCANALS);
+  PushIntArray(mpcwOutput0, bCANALS);
+  PushIntArray(mpcwOutput1, bCANALS);
+  PushIntArray(mpcwOutput2, bCANALS);
+  PushIntArray(mpcwOutput3, bCANALS);
+  Output(6*bCANALS*2);
 
 }

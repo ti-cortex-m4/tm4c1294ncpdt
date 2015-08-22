@@ -110,6 +110,16 @@ uchar   PushInt(uint  w)
 }
 
 
+void    PushIntArray(uint  *mpw, uint  wSize)
+{
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+    PushInt(mpw[i]);
+  }
+}
+
+
 uchar   PushLong(ulong  dw)
 {
   PushInt(dw / 0x10000);
