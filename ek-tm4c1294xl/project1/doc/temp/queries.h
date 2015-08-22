@@ -270,7 +270,7 @@
 
 #define bEXT_GETCONTACT3               39
 
-#define bEXT_GETRECALC                 41
++   #define bEXT_GETRECALC                 41
 
 +   #define bEXT_GETEXTENDED40             42
 +   #define bEXT_GETEXTENDED41             43
