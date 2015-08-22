@@ -443,6 +443,8 @@ void    Query3(uint  cwIn, uchar  cbOut, bool  fMinInDelay)
     mpwInDelay[3] = mpwMajorInDelay[3];
 
   OutputMode3();
+  Delay(mpwOutputDelay[3]);
+
   mpSerial[3] = SER_OUTPUT_MASTER;
 
   IntPendSet(INT_UART4);
@@ -456,6 +458,8 @@ void    Answer3(uint  wSize, serial  seT)
   cwOutBuff3 = wSize;
 
   OutputMode3();
+  Delay(mpwOutputDelay[3]);
+
   mpSerial[3] = seT;
   AnswerBulk3();
 
