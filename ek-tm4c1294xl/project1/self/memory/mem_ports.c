@@ -23,6 +23,9 @@ bool                    mpboLocal[bPORTS];
 // флаги запрещения временной смены режима
 bool                    mpboLocalDisable[bPORTS];
 
+// задержки на переключение сигнала прием-передача
+uint                    wOutputDelay[bPORTS];
+
 // минимальные лимиты коррекции времени
 uchar                   mpbCorrectLimit[bPORTS];
 

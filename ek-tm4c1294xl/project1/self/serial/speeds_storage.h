@@ -4,6 +4,10 @@ SPEEDS_STORAGE.H
 
 ------------------------------------------------------------------------------*/
 
+extern  cache const             chOutputDelay;
+
+
+
 bool SavePorts(void);
 bool LoadPorts(void);
 
