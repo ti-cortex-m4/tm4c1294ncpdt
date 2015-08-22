@@ -37,7 +37,7 @@ void    OutImpCanHouExt(void)
       dw -= iwHou;
       time ti = HouIndexToDate(dw);
 
-      wSize += PushTime(time);
+      wSize += PushTime(ti);
 
       if (LoadImpHouFree((wHOURS+iwHardHou-iwHou) % wHOURS) == false) { Result(bRES_BADFLASH); return; }
       else

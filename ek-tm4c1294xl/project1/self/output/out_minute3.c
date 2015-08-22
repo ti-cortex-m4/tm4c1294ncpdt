@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-OUT_MINUTE3.C
+OUT_MINUTE3,C
 
 
 ------------------------------------------------------------------------------*/
@@ -34,8 +34,7 @@ void    OutImpMntCanExt(void)
       {
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
-          PushInt(mpwImpMntCan[ PrevSoftMnt() ][ c ]);
-          wSize += sizeof(uint);
+          wSize += PushInt(mpwImpMntCan[ PrevSoftMnt() ][ c ]);
         }
       }
     }
@@ -85,7 +84,7 @@ void    OutImpCanMntExt(void)
   {
     if (LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES) == false) { Result(bRES_BADFLASH); return; }
 
-    Push( &mpwImpMntCan[ PrevSoftMnt() ], sizeof(uint)*bCANALS );
+    PushIntArray(mpwImpMntCan[ PrevSoftMnt() ], bCANALS);
     OutptrOutBuff(sizeof(uint)*bCANALS);
   }
 }
