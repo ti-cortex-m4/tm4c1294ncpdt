@@ -1,4 +1,4 @@
-#define wSET_OUTPUT_DELAY     298
++   #define wSET_OUTPUT_DELAY     298
 
 #define wGET_READTRANS        354
 #define wGET_READPULSE        355
@@ -24,9 +24,9 @@
 #define wSET_IO_CONTROL       416
 +   #define wSET_STRICT_UNI       417
 +   #define wSET_PASSWORD_UNI     418
-#define wSET_PLC_U_FLAG       419
-#define wSET_PLC_U_SIZE       420
-#define wSET_PLC_U_SHUTDOWN   421
++   #define wSET_PLC_U_FLAG       419
++   #define wSET_PLC_U_SIZE       420
++   #define wSET_PLC_U_SHUTDOWN   421
 #define wSET_MAX_DELAY_UNI    422
 
 #define wSET_MNT_ESC_S        500
