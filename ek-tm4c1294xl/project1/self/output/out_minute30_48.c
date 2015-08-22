@@ -176,7 +176,7 @@ void    OutDefCanHou48Ext(void)
         else if (GetDigitalDevice(c) == 0)
           PushChar(1);
         else
-          PushChar(GetCanInt(mpwImpHouCan[ PrevSoftHou() ], c) != 0xFFFF);
+          PushChar(mpwImpHouCan[ PrevSoftHou() ][ c ] != 0xFFFF);
 
         wSize += sizeof(uchar);
       }

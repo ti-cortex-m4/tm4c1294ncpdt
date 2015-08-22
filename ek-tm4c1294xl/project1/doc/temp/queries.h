@@ -255,7 +255,7 @@
 +   #define bEXT_GETENG3MIN_DATA           24
 +   #define bEXT_GETENG3MIN_TIME           25
 
-#define bEXT_GETENGGRPHOU_ALL          26
++   #define bEXT_GETENGGRPHOU_ALL          26
  
 +   #define bEXT_GETADDRESS                28
 +   #define bEXT_SETADDRESS                29
