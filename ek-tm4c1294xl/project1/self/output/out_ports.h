@@ -5,3 +5,4 @@ OUT_PORTS.H
 ------------------------------------------------------------------------------*/
 
 void    OutPorts(void);
+void    OutOutputDelay(void);

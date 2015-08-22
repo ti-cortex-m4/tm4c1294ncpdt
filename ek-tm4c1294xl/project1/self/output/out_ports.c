@@ -57,3 +57,16 @@ uchar i;
 
   Output(100);
 }
+
+
+
+void    OutOutputDelay(void)
+{
+  InitPushCRC();
+
+  uchar p;
+  for (p=0; p<bPORTS; p++)
+    PushInt(mpwOutputDelay[p]);
+
+  Output(sizeof(mpwOutputDelay));
+}

@@ -266,6 +266,7 @@ PROGRAMS.H
 #define bTEST_RTC                   229
 
 
+#define wSET_OUTPUT_DELAY           298
 #define wSET_HIDE_MESSAGES          299
 
 #define wSET_GAPS_FLAG              300
