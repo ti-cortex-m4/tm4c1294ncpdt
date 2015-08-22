@@ -41,13 +41,14 @@ RESPONSE255_CRC.C
 #include "../output/out_minute30.h"
 #include "../output/out_minute30_48.h"
 #include "../output/out_addresses.h"
-#include "../output/out_current.h"
 #include "../output/out_version.h"
 #include "../output/out_ports.h"
 #include "../output/out_names.h"
 #include "../output/out_limits.h"
 #include "../output/out_defects2.h"
 #include "../output/out_defects3.h"
+#include "../output/current/out_current.h"
+#include "../output/current/out_current2.h"
 #include "../output/profile/out_limits.h"
 #include "../output/profile/out_schedule.h"
 #include "../output/profile/out_profile.h"
@@ -110,6 +111,9 @@ void    Response255_CRC(void)
     case bEXT_GETADDRESSES: OutGetAddressesExt(); break;
 
     case bEXT_GETCURRENT: OutCurrentExt(); break;
+
+    case bEXT_GETENG3MIN_DATA: OutEng3MinDataExt(); break;
+    case bEXT_GETENG3MIN_TIME: OutEng3MinTimeExt(); break;
 
     case bEXT_GETDIGITALS: OutGetDigitalsExt(); break;
     case bEXT_GETPHONES: OutPhonesExt(); break;
