@@ -264,8 +264,8 @@ QUERIES.H
 
 #define bEXT_DOOR                      23
 
-#define bEXT_GETENG3MIN_DATA           24 
-#define bEXT_GETENG3MIN_TIME           25
++   #define bEXT_GETENG3MIN_DATA           24
++   #define bEXT_GETENG3MIN_TIME           25
 
 #define bEXT_GETENGGRPHOU_ALL          26
  
