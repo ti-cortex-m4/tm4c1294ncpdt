@@ -155,7 +155,9 @@ void    Response255_CRC(void)
     case bEXT_GETSTARTCAN: OutStartCan(); break;
 
     case bEXT_GETVERSION: OutVersion(); break;
+
     case bEXT_GETPORTS: OutPorts(); break;
+    case bEXT_GETOUTPUTDELAY: OutOutputDelay(); break;
 
     case bEXT_GETHOUCANDEF: OutImpCanHou48Def(); break;
     case bEXT_GETHOUGRPDEF: OutPowGrpHou48Def(); break;

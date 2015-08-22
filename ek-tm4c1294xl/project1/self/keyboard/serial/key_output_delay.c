@@ -23,8 +23,8 @@ static char const      *pszMessages[] = { szMessage1, szMessage2, szMessage3, ""
 static void Show(uchar  ibPrt)
 {
   Clear();
-  sprintf(szLo+5,"%4u",wOutputDelay[ibPrt]);
-  sprintf(szLo+10,"мс  %2bu",ibPrt+1);
+  sprintf(szLo+5,"%4u",mpwOutputDelay[ibPrt]);
+  sprintf(szLo+10,"мс  %2u",ibPrt+1);
 }
 
 
@@ -41,25 +41,25 @@ static uchar ibPrt;
       LoadSlide(pszMessages);
 
       ibPrt = 2;
-      Show();
+      Show(ibPrt);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {            
-      wBuffD = GetInt(5,8);
-      if (wBuffD <= 1000)
+      uint w = GetIntLo(5,8);
+      if (w <= 1000)
       {
         enKeyboard = KBD_POSTENTER;
-        wOutputDelay[ibPrt] = wBuffD;
+        mpwOutputDelay[ibPrt] = w;
 
         if (++ibPrt >= bPORTS) ibPrt = 2;
-        Show();
+        Show(ibPrt);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++ibPrt >= bPORTS) ibPrt = 2;
-      Show();
+      Show(ibPrt);
     }
     else Beep();
   }

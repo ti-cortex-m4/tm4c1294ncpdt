@@ -77,6 +77,10 @@ QUERIES2.H
 #define bEXT_GETENGCANDAY              65
 #define bEXT_GETENGCANMON              66
 
+#define bEXT_GETCORRECTLIMIT           69
+#define bEXT_GETLINKERRORS             70
+#define bEXT_GETHOUCHECK               71
+
 #define bEXT_GETRELAXS                 45
 #define bEXT_SETRELAXS                 46
 
@@ -86,7 +90,9 @@ QUERIES2.H
 #define bEXT_GETSTARTCAN               52
 
 #define bEXT_GETVERSION                53
+
 #define bEXT_GETPORTS                  55
+#define bEXT_GETOUTPUTDELAY            68
 
 #define bEXT_GETHOUCANDEF              76
 #define bEXT_GETHOUGRPDEF              91
