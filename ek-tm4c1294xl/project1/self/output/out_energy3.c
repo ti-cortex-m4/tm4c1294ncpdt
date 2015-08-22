@@ -1,31 +1,28 @@
 /*------------------------------------------------------------------------------
-PRIMARY.C
+OUT_ENERGY3.C
 
 
 ------------------------------------------------------------------------------*/
 
-#include        "xdata.h"
-#include        "queries.h"
-#include        "general.h"
-#include        "nexttime.h"
-#include        "ports.h"
-#include        "engine.h"
-#include        "energy.h"
-#include        "groups.h"
+#include "../main.h"
+#include "../memory/mem_settings.h"
+#include "../memory/mem_energy.h"
+#include "../serial/ports.h"
+#include "../realtime/realtime.h"
+#include "../energy.h"
+#include "../energy2.h"
+#include "out_energy3.h"
 
 
 
-#ifndef MODBUS
-
-bit     GetGrpHouInt2Def(uint  xdata  *mpwT, uchar  ibGroup)
+bool    GetGrpHouInt2Def(uint  *mpwT, uchar  ibGroup)
 {
-uchar   i,j;
-
+  uchar i;
   for (i=0; i<GetGroupsSize(ibGroup); i++)
   {
-    j = GetGroupsNodeCanal(ibGroup,i);
+    uchar c = GetGroupsNodeCanal(ibGroup,i);
 
-    if (*PGetCanInt(mpwT,j) == 0xFFFF)
+    if (*PGetCanInt(mpwT,c) == 0xFFFF)
       return(0);
   }
 
@@ -37,7 +34,6 @@ uchar   i,j;
 void    OutEngGrpHouExt1(void)
 {
 uchar   i,j;
-uint    wSize;
 
   if (bInBuff6 > wHOURS/48) 
     Result(bRES_BADADDRESS);
@@ -49,20 +45,21 @@ uint    wSize;
 
     for (j=0; j<bInBuff7+1; j++)
     {
-      LoadImpHou((PrevDayIndex(bInBuff6)+j) % wHOURS);
+      LoadImpHou((GetCurrHouIndex(bInBuff6)+j) % wHOURS);
       for (i=0; i<bGROUPS; i++)
       {
         if ((InBuff(8 + i/8) & (0x80 >> i%8)) != 0) 
-          mpreEngGrp[i] += *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], i, 1);
+          mpreEngGrp[i] += *PGetGrpHouInt2float(mpwImpHouCan[ PrevSoftHou() ], i, 1);
       } 
     }      
 
     InitPushPtr();
+    uint wSize = 0;
+
     for (i=0; i<4+bGROUPS/8; i++) PushChar(InBuff(4+i));
 
-    wSize = 0;
 
-    LoadImpHouFree((PrevDayIndex(bInBuff6)+bInBuff7) % wHOURS);
+    LoadImpHouFree((GetCurrHouIndex(bInBuff6)+bInBuff7) % wHOURS);
     for (i=0; i<bGROUPS; i++)
     {
       if ((InBuff(8 + i/8) & (0x80 >> i%8)) != 0) 
@@ -77,10 +74,10 @@ uint    wSize;
         else
         {
           reBuffA = mpreEngGrp[i];
-          PushReal();
+          Pushfloat();
         }
 
-        wSize += sizeof(real);
+        wSize += sizeof(float);
       } 
     }
 
@@ -92,9 +89,6 @@ uint    wSize;
 
 void    OutEngGrpHouExt2(void)
 {
-uchar   i;
-uint    wSize;
-
   if (bInBuff6 > wHOURS/48) 
     Result(bRES_BADADDRESS);
   else if ((bInBuff6 == 0) && (bInBuff7 > GetHouIndex())) 
@@ -102,11 +96,12 @@ uint    wSize;
   else
   {
     InitPushPtr();
+    uint wSize = 0;
+
+    uchar   i;
     for (i=0; i<4+bGROUPS/8; i++) PushChar(InBuff(4+i));
 
-    wSize = 0;
-
-    LoadImpHouFree((PrevDayIndex(bInBuff6)+bInBuff7) % wHOURS);
+    LoadImpHouFree((GetCurrHouIndex(bInBuff6)+bInBuff7) % wHOURS);
     for (i=0; i<bGROUPS; i++)
     {
       if ((InBuff(8 + i/8) & (0x80 >> i%8)) != 0) 
@@ -120,17 +115,14 @@ uint    wSize;
         }
         else
         {
-          reBuffA = *PGetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], i, 1);
-          PushReal();
+          Pushfloat(GetGrpHouInt2float(mpwImpHouCan[ PrevSoftHou() ], i, 1));
         }
 
-        wSize += sizeof(real);
+        wSize += sizeof(float);
       } 
     }
 
     OutptrOutBuff(4+bGROUPS/8+wSize);
   }
 }
-
-#endif
 

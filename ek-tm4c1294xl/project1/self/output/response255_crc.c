@@ -36,6 +36,7 @@ RESPONSE255_CRC.C
 #include "../output/out_max_power.h"
 #include "../output/out_energy.h"
 #include "../output/out_energy2.h"
+#include "../output/out_energy3.h"
 #include "../output/out_impulse.h"
 #include "../output/out_minute3.h"
 #include "../output/out_minute30.h"
