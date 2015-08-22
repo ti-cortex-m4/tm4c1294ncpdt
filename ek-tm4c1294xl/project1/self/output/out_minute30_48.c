@@ -152,3 +152,43 @@ float   re;
 
   OutptrOutBuff(wSize);
 }
+
+
+void    OutDefCanHou48Ext(void)
+{
+  uint iwHou = PrevDayIndex(bInBuff6);
+
+  InitPushPtr();
+  uint wBuffD = 0;
+
+  uchar j;
+  for (j=0; j<48; j++)
+  {
+    if (LoadImpHouFree(iwHou) == 0) break;
+    else
+    {
+      uchar i;
+      for (i=0; i<bCANALS; i++)
+      {
+        if ((InBuff(7 + i/8) & (0x80 >> i%8)) != 0)
+        {
+          if ((bInBuff6 == 0) && (j > GetHouIndex()))
+            PushChar(0);
+          else if (GetDigitalDevice(i) == 0)
+            PushChar(1);
+          else
+            PushChar(*PGetCanInt(mpwImpHouCan[ PrevSoftHou() ], i) != 0xFFFF);
+
+          wBuffD += sizeof(uchar);
+        }
+      }
+    }
+
+    if (++iwHou >= wHOURS) iwHou = 0;
+  }
+
+  if (j == 48)
+    OutptrOutBuff(wBuffD);
+  else
+    Result(bRES_BADFLASH);
+}

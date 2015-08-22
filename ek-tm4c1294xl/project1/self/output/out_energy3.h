@@ -1,10 +1,9 @@
 /*------------------------------------------------------------------------------
-OUT_MINUTE30_48.H
+PRIMARY.H
 
 
 ------------------------------------------------------------------------------*/
 
-void    OutPowGrpHou48Ext(void);
-void    OutImpCanHou48Ext(void);
-void    OutPowCanHou48Ext(void);
-void    OutDefCanHou48Ext(void);
+void    OutEngGrpHouExt1(void);
+void    OutEngGrpHouExt2(void);
+
