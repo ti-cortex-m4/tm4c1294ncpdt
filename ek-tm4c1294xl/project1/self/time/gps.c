@@ -10,6 +10,7 @@ GPS.C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_program.h"
 #include "../memory/mem_realtime.h"
+#include "../memory/mem_correct1.h"
 #include "../memory/mem_correct3.h"
 #include "../realtime/realtime.h"
 #include "../serial/ports.h"
@@ -26,7 +27,7 @@ GPS.C
 
 
 //                                         0123456789ABCDEF
-static char const       szTimeGPS[]      = "Время GPS       ",
+char const              szTimeGPS[]      = "Время GPS       ",
                         szDeltaTimeGPS[] = "Время GPS       ",
                         szTimeDateGPS[]  = "Дата GPS        ",
                         szVersionGPS[]   = "Версия GPS      ",
@@ -199,13 +200,11 @@ void    SetupTimeGPS(void)
   {
     if (ShowStatusGPS() == 1)
     {
-      tiSetRTC = ti;
-      SetCurrTimeDate();    // дата установлена правильно 
+      SetCurrTimeDate(ti);    // дата установлена правильно
 
       ReadTimeGPS();
 
-      tiSetRTC = ti;
-      SetCurrTimeDate();    // дата и время установлены правильно
+      SetCurrTimeDate(ti);    // дата и время установлены правильно
 
       boSetTime = true;
       SaveCache(&chSetTime);
@@ -220,13 +219,13 @@ void    SetupTimeGPS(void)
 
 
 
-void    CalcCorrect(void)
+void    CalcCorrect(ulong  dw)
 {
-  if (dwBuffC <   2) mpcwGPSRun[9]++;
-  if (dwBuffC <   5) mpcwGPSRun[10]++;
-  if (dwBuffC >   5) mpcwGPSRun[11]++;
-  if (dwBuffC >  60) mpcwGPSRun[12]++;
-  if (dwBuffC > 600) mpcwGPSRun[13]++;
+  if (dw <   2) mpcwGPSRun[9]++;
+  if (dw <   5) mpcwGPSRun[10]++;
+  if (dw >   5) mpcwGPSRun[11]++;
+  if (dw >  60) mpcwGPSRun[12]++;
+  if (dw > 600) mpcwGPSRun[13]++;
 }
 
 
@@ -279,8 +278,7 @@ bool    SetTimeGPS(void)
         tiPostCorrect = ti;
 
 
-        tiSetRTC = ti;
-        SetCurrTime();
+        SetCurrTime(ti);
         tiPrev = ti;
               
         OK(); DelayMsg(); Clear(); 
@@ -288,30 +286,30 @@ bool    SetTimeGPS(void)
 
 
         ti = tiPostCorrect;
-        dwBuffC = GetSecondIndex();
+        ulong dw = GetSecondIndex(ti);
 
         ti = tiPrevCorrect;
-        if (dwBuffC > GetSecondIndex())
+        if (dw > GetSecondIndex(ti))
         {
-          dwBuffC = dwBuffC - GetSecondIndex();
+          dw = dw - GetSecondIndex(ti);
 
-          mpcwPosValueCurr[0] += (uint)dwBuffC;
-          mpcwPosValueCurr[1] += (uint)dwBuffC;
-          mpcwPosCountCurr[0]++;
-          mpcwPosCountCurr[1]++;
+          Correct1.mpwPosValueCurr[0] += (uint)dw;
+          Correct1.mpwPosValueCurr[1] += (uint)dw;
+          Correct1.mpwPosCountCurr[0]++;
+          Correct1.mpwPosCountCurr[1]++;
 
-          CalcCorrect();
+          CalcCorrect(dw);
         }
         else
         {
-          dwBuffC = GetSecondIndex() - dwBuffC;
+          dw = GetSecondIndex(ti) - dw;
 
-          mpcwNegValueCurr[0] += (uint)dwBuffC;
-          mpcwNegValueCurr[1] += (uint)dwBuffC;
-          mpcwNegCountCurr[0]++;
-          mpcwNegCountCurr[1]++;
+          Correct1.mpwNegValueCurr[0] += (uint)dw;
+          Correct1.mpwNegValueCurr[1] += (uint)dw;
+          Correct1.mpwNegCountCurr[0]++;
+          Correct1.mpwNegCountCurr[1]++;
 
-          CalcCorrect();
+          CalcCorrect(dw);
         }
 
         return 1;
