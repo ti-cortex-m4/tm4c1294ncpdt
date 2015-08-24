@@ -24,7 +24,7 @@ time                    tiGps;
 uchar                   bGmtGps;
 
 // график коррекции времени
-bool                    mpboGpsSchedule[48];
+bool                    mpboScheduleGps[48];
 
 // счётчики событий
 uint                    mpcwGpsSchedule[20];

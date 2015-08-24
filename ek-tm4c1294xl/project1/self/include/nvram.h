@@ -26,6 +26,7 @@ NVRAM.H
 #include "../memory/mem_extended_1.h"
 #include "../memory/mem_extended_7.h"
 #include "../memory/mem_records.h"
+#include "../memory/mem_gps.h"
 #include "../memory/mem_correct1.h"
 
 
