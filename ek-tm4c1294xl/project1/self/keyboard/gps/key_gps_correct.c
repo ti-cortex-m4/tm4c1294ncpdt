@@ -8,7 +8,8 @@ KEY_GPS_CORRECT.C
 #include "../../console.h"
 #include "../../time/gps.h"
 #include "../../time/rtc.h"
-//#include "../../time/timedate_display.h"
+#include "../../time/timedate_display.h"
+#include "../../flash/records.h"
 
 
 
@@ -19,15 +20,15 @@ static char const       szMessage[]     = "Коррекция GPS   ";
 
 static void Show(void)
 {
-  if (ReadTimeDateGPS() == 0)
+  time2 ti2 = ReadTimeDateGps();
+  if (ti2.fValid == false)
   {
-    Error(); 
-    DelayInf(); Clear();
+    Error(); DelayInf(); Clear();
   }
   else
   {
-    if (ShowStatusGPS() == 1)
-      ShowDeltaTime();
+    if (ShowStatusGps() == 1)
+      ShowDeltaTime(ti2.tiValue);
   }
 }
 
@@ -84,4 +85,3 @@ void   auto_GetGpsCorrect(void)
     }
   } 
 }
-
