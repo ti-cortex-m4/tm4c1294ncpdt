@@ -212,7 +212,7 @@ void    Keyboard_Key(void)
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
-//      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
+      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
 //      case bSET_GPS_RUN:        key_SetGPSRun();        break;
@@ -390,7 +390,7 @@ void    Keyboard_Key(void)
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
-//      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
+      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
 //      case bSET_GPS_RUN:        key_SetGPSRun();        break;
@@ -650,7 +650,7 @@ void    Keyboard_Key(void)
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
-//      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
+      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
 //      case bSET_GPS_RUN:        key_SetGPSRun();        break;
