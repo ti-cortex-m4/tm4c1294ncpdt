@@ -71,6 +71,7 @@ MAIN,C
 #include "output/unified/uni.h"
 #include "output/unified/response_uni.h"
 #include "time/decret.h"
+#include "time/gps.h"
 #include "time/correct1.h"
 #include "time/correct2.h"
 #include "special/recalc.h"
@@ -116,6 +117,7 @@ int     main(void)
   InitRelaxs();
   InitGaps();
   InitDecret();
+  InitGPS();
   InitCorrect1();
   InitCorrect2();
   InitDigitals();

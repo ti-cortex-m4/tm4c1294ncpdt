@@ -199,5 +199,7 @@ RESERVE(SWITCH_ON, sizeof(uchar) + bNVRAM_FOOTER)
 
 RESERVE(OUTPUT_DELAY, sizeof(mpwOutputDelay) + bNVRAM_FOOTER)
 
+RESERVE(PORT_GPS, sizeof(uchar) + bNVRAM_FOOTER)
+
 END(NVRAM_END)
 } nvram;
