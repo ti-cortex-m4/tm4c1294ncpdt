@@ -211,7 +211,7 @@ PROGRAMS.H
 #define bSET_GPS_GMT                175
 #define bGET_GPS_DATA               176
 #define bGET_GPS_CORRECT            177
-#define bSET_GPS_RUN                178
+#define bSET_GPS_SCHEDULE           178
 #define bSET_GPS_SEASON             186
 
 #define bSET_FLOW_PORT_TO           187

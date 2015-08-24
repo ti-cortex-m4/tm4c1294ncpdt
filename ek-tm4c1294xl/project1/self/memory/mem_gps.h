@@ -14,7 +14,7 @@ extern  time                    tiGps;
 
 extern  uchar                   bGmtGps;
 
-extern  bool                    mpboGpsSchedule[48];
+extern  bool                    mpboScheduleGps[48];
 
 extern  uint                    mpcwGpsSchedule[20];
 

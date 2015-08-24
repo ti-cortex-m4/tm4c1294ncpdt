@@ -40,6 +40,7 @@ char const              szTimeGPS[]      = "Время GPS       ",
 cache const             chPortGps = {PORT_GPS, &bPortGps, sizeof(uchar)};
 cache const             chGmtGps = {GMT_GPS, &bGmtGps, sizeof(uchar)};
 cache const             chSeasonGps = {SEASON_GPS, &boSeasonGps, sizeof(bool)};
+cache const             chScheduleGps = {SCHEDULE_GPS, &mpboScheduleGps, sizeof(mpboScheduleGps)};
 
 
 
@@ -48,6 +49,7 @@ void    InitGps(void)
   LoadCacheChar(&chPortGps, 0, bPORTS, 0);
   LoadCacheChar(&chGmtGps, 0, 13, 2);
   LoadCacheBool(&chSeasonGps, true);
+  LoadCache(&chScheduleGps);
 }
 
 
@@ -57,10 +59,11 @@ void    ResetGps(void)
   bPortGps = 0;
   SaveCache(&chPortGps);
 
-  uchar i;
-  for (i=0; i<48; i++) mpboGpsSchedule[i] = false;
-  mpboGpsSchedule[12] = true;
-  mpboGpsSchedule[36] = true;
+  uchar h;
+  for (h=0; h<48; h++) mpboScheduleGps[h] = false;
+  mpboScheduleGps[12] = true;
+  mpboScheduleGps[36] = true;
+  SaveCache(&chScheduleGps);
 
   bGmtGps = 2;
   SaveCache(&chGmtGps);
@@ -364,7 +367,7 @@ uchar   i;
   i = tiCurr.bMinute/15;
   if ((i == 0) || (i == 2)) return;
 
-  if (mpboGpsSchedule[ GetCurrHouIndex() ] == false) return;
+  if (mpboScheduleGps[ GetCurrHouIndex() ] == false) return;
 
   AddKeyRecord(EVE_GPS_AUTO);
   CorrectTimeGPS();

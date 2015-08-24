@@ -20,6 +20,7 @@ extern  char const              szTimeGPS[],
 extern  cache const             chPortGps;
 extern  cache const             chGmtGps;
 extern  cache const             chSeasonGps;
+extern  cache const             chScheduleGps;
 
 
 

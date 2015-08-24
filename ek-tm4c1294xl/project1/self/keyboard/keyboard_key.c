@@ -216,7 +216,7 @@ void    Keyboard_Key(void)
       case bSET_GPS_GMT:        key_SetGpsGmt();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
-//      case bSET_GPS_RUN:        key_SetGPSRun();        break;
+      case bSET_GPS_SCHEDULE:   key_SetGpsSchedule();   break;
       case bSET_GPS_SEASON:     key_SetGpsSeason();     break;
 
       case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
@@ -395,7 +395,7 @@ void    Keyboard_Key(void)
       case bSET_GPS_GMT:        key_SetGpsGmt();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
-//      case bSET_GPS_RUN:        key_SetGPSRun();        break;
+      case bSET_GPS_SCHEDULE:   key_SetGpsSchedule();   break;
       case bSET_GPS_SEASON:     key_SetGpsSeason();     break;
 
       case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
@@ -656,7 +656,7 @@ void    Keyboard_Key(void)
       case bSET_GPS_GMT:        key_SetGpsGmt();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
-//      case bSET_GPS_RUN:        key_SetGPSRun();        break;
+      case bSET_GPS_SCHEDULE:   key_SetGpsSchedule();   break;
       case bSET_GPS_SEASON:     key_SetGpsSeason();     break;
 
       case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
