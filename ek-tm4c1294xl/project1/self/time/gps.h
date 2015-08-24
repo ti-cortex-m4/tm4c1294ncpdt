@@ -18,6 +18,7 @@ extern  char const              szTimeGPS[],
 
 
 extern  cache const             chPortGPS;
+extern  cache const             chGMT;
 
 
 

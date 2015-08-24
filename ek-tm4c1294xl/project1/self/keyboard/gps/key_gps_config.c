@@ -66,7 +66,6 @@ void    key_SetGPSConfig(void)
           Show();
 
           uchar ibPrt = bPrt - 1;
-
           mppoPorts[ibPrt].ibBaud = 3;
           mppoPorts[ibPrt].ibParity = 0;
           SetSpeed(ibPrt);

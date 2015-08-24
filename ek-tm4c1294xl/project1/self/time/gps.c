@@ -38,12 +38,14 @@ char const              szTimeGPS[]      = "Время GPS       ",
 
 
 cache const             chPortGPS = {PORT_GPS, &bPortGPS, sizeof(uchar)};
+cache const             chGMT = {GMT, &bGMT, sizeof(uchar)};
 
 
 
 void    InitGPS(void)
 {
   LoadCacheChar(&chPortGPS, 0, bPORTS, 0);
+  LoadCacheChar(&chGMT, 0, 13, 2);
 }
 
 
@@ -59,6 +61,7 @@ void    ResetGPS(void)
   mpboGPSRun[36] = true;
 
   bGMT = 2;
+  SaveCache(&chGMT);
 
   boSeasonGPS = true;
 }
