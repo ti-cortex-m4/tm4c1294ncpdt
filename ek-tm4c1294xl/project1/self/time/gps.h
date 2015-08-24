@@ -23,12 +23,12 @@ extern  cache const             chSeasonGps;
 
 
 
-void    InitGPS(void);
-void    ResetGPS(void);
+void    InitGps(void);
+void    ResetGps(void);
 
-bool    ShowStatusGPS(void);
-time2   ReadTimeDateGPS(void);
-void    ShowTimeDateGPS(bool  fShowTimeDate);
+bool    ShowStatusGps(void);
+time2   ReadTimeDateGps(void);
+void    ShowTimeDateGps(bool  fShowTimeDate);
 
 void    SetupTimeGPS(void);
 void    CorrectTimeGPS(void);

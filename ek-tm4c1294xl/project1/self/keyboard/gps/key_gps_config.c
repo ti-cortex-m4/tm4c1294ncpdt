@@ -85,11 +85,11 @@ void    key_SetGpsConfig(void)
 
 
   else if (bKey == bKEY_MINUS)
-    ShowTimeDateGPS(0);
+    ShowTimeDateGps(0);
 
 
   else if (bKey == bKEY_POINT)
-    ShowTimeDateGPS(1);
+    ShowTimeDateGps(1);
 
 
   else if (bKey < 10)
