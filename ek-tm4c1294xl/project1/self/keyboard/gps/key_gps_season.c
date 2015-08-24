@@ -18,7 +18,7 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 
-void    key_SetGPSSeason(void)
+void    key_SetGpsSeason(void)
 {
-  key_SetBool(&chSeasonGPS, pszMessages);
+  key_SetBool(&chSeasonGps, pszMessages);
 }

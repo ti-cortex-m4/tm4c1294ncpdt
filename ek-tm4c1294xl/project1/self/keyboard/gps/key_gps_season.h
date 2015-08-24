@@ -4,4 +4,4 @@ KEY_GPS_SEASON.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetGPSSeason(void);
+void    key_SetGpsSeason(void);

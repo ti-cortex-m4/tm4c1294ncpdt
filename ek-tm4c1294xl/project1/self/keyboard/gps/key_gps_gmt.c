@@ -18,18 +18,18 @@ static char const       szMessage[]     = "Часовой пояс    ",
 
 static void Show(void)
 {
-  ShowChar(bGMT);
+  ShowChar(bGmtGps);
 }
 
 
 
-void    key_SetGPS_GMT(void)
+void    key_SetGpsGmt(void)
 {
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if ((bPortGPS > 0) && (bPortGPS <= bPORTS))
+      if ((bPortGps > 0) && (bPortGps <= bPORTS))
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
@@ -46,8 +46,8 @@ void    key_SetGPS_GMT(void)
       uchar b = GetCharLo(6,8);
       if (b <= 13)
       {
-        bGMT = b;
-        SaveCache(&chGMT);
+        bGmtGps = b;
+        SaveCache(&chGmtGps);
 
         Show();
       }

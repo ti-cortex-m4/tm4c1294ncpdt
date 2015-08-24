@@ -17,9 +17,9 @@ extern  char const              szTimeGPS[],
                                 szBadTimeGPS[];
 
 
-extern  cache const             chPortGPS;
-extern  cache const             chGMT;
-extern  cache const             chSeasonGPS;
+extern  cache const             chPortGps;
+extern  cache const             chGmtGps;
+extern  cache const             chSeasonGps;
 
 
 

@@ -65,7 +65,7 @@ void    OutCorrect3(void)
 
   InitPushCRC();
 
-  PushChar(((bPortGPS > 0) && (bPortGPS <= bPORTS)) ? true : false);
+  PushChar(((bPortGps > 0) && (bPortGps <= bPORTS)) ? true : false);
   PushBool(boCorrect3);
   PushLong(cdwAbsCorrect3);
   PushLong(cdwPosCorrect3);

@@ -20,13 +20,13 @@ static char const       szMessage[]     = "Задание GPS     ",
 
 static void Show(void)
 {
-  (bPortGPS == 0) ? sprintf(szHi+11,": нет") : sprintf(szHi+11,": да ");
-  ShowChar(bPortGPS);
+  (bPortGps == 0) ? sprintf(szHi+11,": нет") : sprintf(szHi+11,": да ");
+  ShowChar(bPortGps);
   sprintf(szLo+2,"порт:");
 }
 
 
-void    key_SetGPSConfig(void)
+void    key_SetGpsConfig(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -46,22 +46,22 @@ void    key_SetGPSConfig(void)
       uchar bPrt = GetCharLo(6,8);
       if (bPrt == 0)
       {
-        bPortGPS = 0;
+        bPortGps = 0;
         Show();
       }
       else if (bPrt <= bPORTS)
       {
         if (StreamPortDirect(bPrt-1) == 0)
         {
-          bPortGPS = 0;
-          SaveCache(&chPortGPS);
+          bPortGps = 0;
+          SaveCache(&chPortGps);
 
           Show();
         }
         else
         {
-          bPortGPS = bPrt;
-          SaveCache(&chPortGPS);
+          bPortGps = bPrt;
+          SaveCache(&chPortGps);
 
           Show();
 

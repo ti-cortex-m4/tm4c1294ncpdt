@@ -4,20 +4,22 @@ MEM_GPS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  uchar                   bPortGPS;
+extern  uchar                   bPortGps;
 
-extern  uchar                   bStatusGPS, bVersionMaxGPS, bVersionMinGPS;
+extern  uchar                   bStatusGps;
 
-extern  time                    tiGPS;
+extern  uchar                   bVersionMaxGps, bVersionMinGps;
 
-extern  uchar                   bGMT;
+extern  time                    tiGps;
 
-extern  bool                    mpboGPSRun[48];
+extern  uchar                   bGmtGps;
 
-extern  uint                    mpcwGPSRun[20];
+extern  bool                    mpboGpsSchedule[48];
+
+extern  uint                    mpcwGpsSchedule[20];
 
 extern  time                    tiPrevCorrect, tiPostCorrect;
 
-extern  bool                    boSeasonGPS;
+extern  bool                    boSeasonGps;
 
 extern  uchar                   bSeasonCurr;
