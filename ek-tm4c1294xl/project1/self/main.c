@@ -117,7 +117,7 @@ int     main(void)
   InitRelaxs();
   InitGaps();
   InitDecret();
-  InitGPS();
+  InitGps();
   InitCorrect1();
   InitCorrect2();
   InitDigitals();

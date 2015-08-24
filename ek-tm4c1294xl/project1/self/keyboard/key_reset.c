@@ -30,6 +30,7 @@ KEY_RESET.C
 #include "../settings.h"
 #include "../hardware/memory.h"
 #include "../time/decret.h"
+#include "../time/gps.h"
 #include "../time/correct1.h"
 #include "../time/correct2.h"
 
@@ -127,6 +128,7 @@ void    key_SetReset(void)
           ResetRecords();
           ResetSettings(true);
           ResetDecret();
+          ResetGps();
           ResetCorrect1();
           ResetCorrect2();
 //          ResetCorrect3();
@@ -151,7 +153,6 @@ void    key_SetReset(void)
 //          ResetSendAT();
 //          ResetPhones2();
 //          ResetParams();
-//          ResetGPS();
 //          ResetSMK();
 //          ResetExtended3();
 //          ResetExtended4();

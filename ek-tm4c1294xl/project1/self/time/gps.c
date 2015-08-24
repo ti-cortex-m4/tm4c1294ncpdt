@@ -43,7 +43,7 @@ cache const             chSeasonGps = {SEASON_GPS, &boSeasonGps, sizeof(bool)};
 
 
 
-void    InitGPS(void)
+void    InitGps(void)
 {
   LoadCacheChar(&chPortGps, 0, bPORTS, 0);
   LoadCacheChar(&chGmtGps, 0, 13, 2);
@@ -52,7 +52,7 @@ void    InitGPS(void)
 
 
 
-void    ResetGPS(void)
+void    ResetGps(void)
 {
   bPortGps = 0;
   SaveCache(&chPortGps);
@@ -71,7 +71,7 @@ void    ResetGPS(void)
 
 
 
-bool    ShowStatusGPS(void)
+bool    ShowStatusGps(void)
 {
   if (bStatusGps == 0) return(1);
 
@@ -83,7 +83,7 @@ bool    ShowStatusGPS(void)
 
 
 
-void    QueryTimeGPS(void)
+void    QueryTimeGps(void)
 {
   InitPush(0);
 
@@ -98,7 +98,7 @@ void    QueryTimeGPS(void)
 
 
 
-time    CalcGMT(time  ti)
+time    CalcGmtGps(time  ti)
 {
   uchar j = bGmtGps;
   if ((bSeasonCurr == 0) && (boSeasonGps == true)) j++;
@@ -126,7 +126,7 @@ time    CalcGMT(time  ti)
 
 
 
-time    ReadTimeGPS(void)
+time    ReadTimeGps(void)
 {
   bSeasonCurr = SeasonCurr();
 
@@ -146,12 +146,12 @@ time    ReadTimeGPS(void)
   bVersionMaxGps = PopChar();
   bVersionMinGps = PopChar();
 
-  return CalcGMT(ti);
+  return CalcGmtGps(ti);
 }
 
 
 
-time2   ReadTimeDateGPS(void)
+time2   ReadTimeDateGps(void)
 {
   ibPort = bPortGps-1;
 
@@ -159,7 +159,7 @@ time2   ReadTimeDateGPS(void)
   for (i=0; i<bMINORREPEATS; i++)
   {    
     Delay(100);
-    QueryTimeGPS();
+    QueryTimeGps();
 
     if (Input() == SER_GOODCHECK) break;
     if (fKey == 1) return GetTime2(tiZero, false);
@@ -167,12 +167,12 @@ time2   ReadTimeDateGPS(void)
 
   if (i == bMINORREPEATS) return GetTime2(tiZero, false);
 
-  return GetTime2(ReadTimeGPS(), true);
+  return GetTime2(ReadTimeGps(), true);
 }
 
 
 
-void    ShowTimeDateGPS(bool  fShowTimeDate)
+void    ShowTimeDateGps(bool  fShowTimeDate)
 {
   (fShowTimeDate) ? ShowHi(szTimeDateGPS) : ShowHi(szTimeGPS);
 
@@ -182,12 +182,12 @@ void    ShowTimeDateGPS(bool  fShowTimeDate)
   enKeyboard = KBD_ENTER;
   Clear();
 
-  time2 ti2 = ReadTimeDateGPS();
+  time2 ti2 = ReadTimeDateGps();
   if (ti2.fValid == false)
     Error();
   else
   {
-    if (ShowStatusGPS() == 1)
+    if (ShowStatusGps() == 1)
     {
       Clear();
       (fShowTimeDate) ? ShowTimeDate(ti2.tiValue) : ShowTime(ti2.tiValue);
@@ -199,7 +199,7 @@ void    ShowTimeDateGPS(bool  fShowTimeDate)
 
 void    SetupTimeGPS(void)
 {
-  time2 ti2 = ReadTimeDateGPS();
+  time2 ti2 = ReadTimeDateGps();
   time ti = ti2.tiValue;
 
   if (ti2.fValid == false)
@@ -208,11 +208,11 @@ void    SetupTimeGPS(void)
   }
   else
   {
-    if (ShowStatusGPS() == 1)
+    if (ShowStatusGps() == 1)
     {
       SetCurrTimeDate(ti);    // дата установлена правильно
 
-      ReadTimeGPS();
+      ReadTimeGps();
 
       SetCurrTimeDate(ti);    // дата и время установлены правильно
 
@@ -244,7 +244,7 @@ bool    SetTimeGPS(void)
 {
   mpcwGpsSchedule[0]++;
 
-  time2 ti2 = ReadTimeDateGPS();
+  time2 ti2 = ReadTimeDateGps();
   time ti = ti2.tiValue;
 
   if (ti2.fValid == false)
@@ -256,7 +256,7 @@ bool    SetTimeGPS(void)
   {
     AddKeyRecord(EVE_GPS_GOODLINK); mpcwGpsSchedule[2]++;
 
-    if (ShowStatusGPS() == 0)
+    if (ShowStatusGps() == 0)
     { 
       AddKeyRecord(EVE_GPS_BADGPS); mpcwGpsSchedule[3]++;
     }
