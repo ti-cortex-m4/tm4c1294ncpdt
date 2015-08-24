@@ -70,8 +70,7 @@ bool    ShowStatusGPS(void)
 {
   if (bStatusGPS == 0) return(1);
 
-  Clear();
-  sprintf(szLo+2,"состояние: %bu",bStatusGPS);
+  Clear(); sprintf(szLo+2,"состояние: %u",bStatusGPS);
 
   DelayMsg(); Clear();
   return(0);
@@ -81,7 +80,7 @@ bool    ShowStatusGPS(void)
 
 void    QueryTimeGPS(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0xD0);          
   PushChar(0x0D);
@@ -121,25 +120,29 @@ uchar   i,j;
 
 
 
-void    ReadTimeAltGPS(void)
+time    ReadTimeGPS(void)
 {
   bSeasonCurr = SeasonCurr();
 
   InitPop(5);
   bStatusGPS = PopChar();
 
-  tiAlt.bSecond = PopChar();
-  tiAlt.bMinute = PopChar();
-  tiAlt.bHour   = PopChar();
-  tiAlt.bDay    = PopChar();
-  tiAlt.bMonth  = PopChar();
-  tiAlt.bYear   = PopChar();
+  time ti;
 
-  tiGPS = tiAlt;
+  ti.bSecond = PopChar();
+  ti.bMinute = PopChar();
+  ti.bHour   = PopChar();
+  ti.bDay    = PopChar();
+  ti.bMonth  = PopChar();
+  ti.bYear   = PopChar();
+
+  tiGPS = ti;
   bVersionMaxGPS = PopChar();
   bVersionMinGPS = PopChar();
 
   CalcGMT();
+
+  return ti;
 }
 
 
@@ -161,13 +164,13 @@ uchar   i;
 
   if (i == bMINORREPEATS) return(0);
 
-  ReadTimeAltGPS();
+  ReadTimeGPS();
   return(1);
 }
 
 
 
-void    ShowTimeDateGPS(bool fShow)
+void    ShowTimeDateGPS(bool  fShowTimeDate)
 {
   (fShow) ? ShowHi(szTimeDateGPS) : ShowHi(szTimeGPS);
 
@@ -184,7 +187,7 @@ void    ShowTimeDateGPS(bool fShow)
     if (ShowStatusGPS() == 1)
     {
       Clear();
-      (fShow) ? ShowTimeDate() : ShowTime();
+      (fShowTimeDate) ? ShowTimeDate() : ShowTime();
     }
   }
 }
@@ -205,7 +208,7 @@ void    SetupTimeGPS(void)
       tiSetRTC = tiAlt;
       SetCurrTimeDate();    // дата установлена правильно 
 
-      ReadTimeAltGPS();         
+      ReadTimeGPS();
 
       tiSetRTC = tiAlt;
       SetCurrTimeDate();    // дата и время установлены правильно

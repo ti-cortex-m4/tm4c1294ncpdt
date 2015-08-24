@@ -70,12 +70,30 @@ bool    IsWinter(time  ti)
 // возвращает день недели (1: зимнее время, 0: летнее время)
 uchar   GetSeasonMD(uchar  bMonth, uchar  bDay)
 {
-uint    i;
-
-  i = GetDayIndexMD(bMonth, bDay);
+  uint i = GetDayIndexMD(bMonth, bDay);
 
   if (i >= GetDayIndexMD(tiWinter.bMonth, tiWinter.bDay)) return(1);
   if (i >= GetDayIndexMD(tiSummer.bMonth, tiSummer.bDay)) return(0);
 
   return(1);
+}
+
+
+
+// возвращает день недели (1: зимнее время, 0: летнее время)
+uchar   Season(time  ti)
+{
+  uint i = GetDayIndexYMD(ti.bYear, ti.bMonth, ti.bYear);
+
+  if (i >= GetDayIndexYMD(tiWinter.bYear, tiWinter.bMonth, tiWinter.bYear)) return(1);
+  if (i >= GetDayIndexYMD(tiSummer.bYear, tiSummer.bMonth, tiSummer.bYear)) return(0);
+
+  return(1);
+}
+
+
+// возвращает день недели (1: зимнее время, 0: летнее время)
+uchar   SeasonCurr(void)
+{
+  return Season(*GetCurrTimeDate());
 }

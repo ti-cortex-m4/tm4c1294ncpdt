@@ -157,4 +157,3 @@ ulong   GetSecondIndex(time  ti)
 {
   return( (ulong)ti.bHour*3600 + ti.bMinute*60 + ti.bSecond );
 }
-

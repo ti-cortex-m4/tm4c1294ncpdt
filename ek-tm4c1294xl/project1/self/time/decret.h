@@ -17,3 +17,6 @@ void    ResetDecret(void);
 
 bool    IsWinter(time  ti);
 uchar   GetSeasonMD(uchar  bMonth, uchar  bDay);
+
+uchar   Season(time  ti);
+uchar   SeasonCurr(void);
