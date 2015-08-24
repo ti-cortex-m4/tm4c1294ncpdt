@@ -8,8 +8,17 @@ OUT_PROFILE,C
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_settings.h"
 #include "../../memory/mem_profile.h"
+#include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
 
+
+
+void    OutGetFailure2(void)
+{
+  InitPushCRC();
+  PushIntArray(mpcwFailure2, bCANALS);
+  Output(sizeof(mpcwFailure2));
+}
 
 
 void    OutGetOverflowHhr(void)

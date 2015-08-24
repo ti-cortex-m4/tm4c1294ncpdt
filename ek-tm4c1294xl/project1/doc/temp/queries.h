@@ -336,7 +336,7 @@
 +   #define bINQ_GETGAPS1                  96
 +   #define bINQ_GETGAPS2                  97
 
-#define bINQ_FAILURE2                  98
++   #define bINQ_FAILURE2                  98
 
 +   #define bEXT_GETRECORDSBLOCK2          99
 +   #define bEXT_GETEXTENDED7              100
