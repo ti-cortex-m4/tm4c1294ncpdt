@@ -75,7 +75,7 @@ static uchar ibHhr;
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       mpboScheduleGps[ibHhr] = InvertBoolean(mpboScheduleGps[ibHhr]);
-      LoadCache(&chScheduleGps);
+      SaveCache(&chScheduleGps);
 
       Show(ibHhr);
     }
