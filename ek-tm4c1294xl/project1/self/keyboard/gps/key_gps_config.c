@@ -3,25 +3,22 @@ KEY_GPS_CONFIG.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "speed.h"
-#include        "timedate.h"
-#include        "gps.h"
+
+#include "../../main.h"
+#include "../../console.h"
+#include "../../serial/speeds.h"
+#include "../../serial/speeds_display.h"
+#include "../../time/gps.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szGPSConfig     = "Задание GPS     ",
-                        szMaskGPSConfig = "      ___       ";
+static char const       szMessage[]     = "Задание GPS     ",
+                        szMask[]        = "      ___       ";
 
 
 
-void    ShowGPS(void)
+static void Show(void)
 {
   (bPortGPS == 0) ? sprintf(szHi+11,": нет") : sprintf(szHi+11,": да ");
   ShowChar(bPortGPS);
@@ -37,38 +34,43 @@ void    key_SetGPSConfig(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ShowHi(szGPSConfig);
+      ShowHi(szMessage);
       Clear();
 
-      ShowGPS();
+      Show();
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = GetChar(6,8);
-      if (ibX == 0)
+      uchar bPrt = GetCharLo(6,8);
+      if (bPrt == 0)
       {
         bPortGPS = 0;
-        ShowGPS();   
+        Show();
       }
-      else if (ibX <= bPORTS)
+      else if (bPrt <= bPORTS)
       {
-        if (StreamPortDirect(ibX-1) == 0)
+        if (StreamPortDirect(bPrt-1) == 0)
         {
           bPortGPS = 0;
-          ShowGPS();   
+          SaveCache(&chPortGPS);
+
+          Show();
         }
         else
         {
-          bPortGPS = ibX;
-          ShowGPS();   
+          bPortGPS = bPrt;
+          SaveCache(&chPortGPS);
 
-          ibX--;
-          mppoPorts[ibX].ibSpeed = 3;
-          mppoPorts[ibX].ibParity = 0;
-          SetSpeeds(ibX);               
-          SetDelay(ibX);
+          Show();
+
+          uchar ibPrt = bPrt - 1;
+
+          mppoPorts[ibPrt].ibBaud = 3;
+          mppoPorts[ibPrt].ibParity = 0;
+          SetSpeed(ibPrt);
+          SetDefaultDelay(ibPrt);
         }
       }
       else 
@@ -76,7 +78,7 @@ void    key_SetGPSConfig(void)
         enKeyboard = KBD_INPUT1;
         LongBeep();
 
-        ShowLo(szMaskGPSConfig);        
+        ShowLo(szMask);
       }
     }
     else Beep();
@@ -96,7 +98,7 @@ void    key_SetGPSConfig(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT1;
-      ShowLo(szMaskGPSConfig);        
+      ShowLo(szMask);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
@@ -107,5 +109,3 @@ void    key_SetGPSConfig(void)
   }
   else Beep();
 }
-
-*/
