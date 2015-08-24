@@ -123,6 +123,7 @@ KEYBOARD_KEY.C
 #include "gps/key_gps_gmt.h"
 #include "gps/key_gps_correct.h"
 #include "gps/key_gps_run.h"
+#include "gps/key_gps_season.h"
 
 
 
@@ -216,6 +217,7 @@ void    Keyboard_Key(void)
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
 //      case bSET_GPS_RUN:        key_SetGPSRun();        break;
+      case bSET_GPS_SEASON:     key_SetGPSSeason();     break;
 
       case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
       case bSET_MAX_FLOW_DELAY: key_SetMaxFlowDelay();  break;
@@ -394,6 +396,7 @@ void    Keyboard_Key(void)
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
 //      case bSET_GPS_RUN:        key_SetGPSRun();        break;
+      case bSET_GPS_SEASON:     key_SetGPSSeason();     break;
 
       case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
       case bSET_MAX_FLOW_DELAY: key_SetMaxFlowDelay();  break;
@@ -654,6 +657,7 @@ void    Keyboard_Key(void)
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
 //      case bSET_GPS_RUN:        key_SetGPSRun();        break;
+      case bSET_GPS_SEASON:     key_SetGPSSeason();     break;
 
       case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
       case bSET_MAX_FLOW_DELAY: key_SetMaxFlowDelay();  break;

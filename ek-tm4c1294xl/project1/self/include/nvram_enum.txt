@@ -201,6 +201,7 @@ typedef enum
 
   PORT_GPS              = OUTPUT_DELAY + sizeof(mpwOutputDelay) + bNVRAM_FOOTER,
   GMT                   = PORT_GPS + sizeof(uchar) + bNVRAM_FOOTER,
+  SEASON_GPS            = GMT + sizeof(uchar) + bNVRAM_FOOTER,
 
-  NVRAM_END             = GMT + sizeof(uchar) + bNVRAM_FOOTER
+  NVRAM_END             = SEASON_GPS + sizeof(bool) + bNVRAM_FOOTER
 } nvram;
