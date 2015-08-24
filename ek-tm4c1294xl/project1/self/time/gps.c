@@ -189,7 +189,7 @@ void    ShowTimeDateGPS(bool  fShowTimeDate)
 void    SetupTimeGPS(void)
 {
   time2 ti2 = ReadTimeDateGPS();
-  time tiAlt = ti2.tiValue;
+  time ti = ti2.tiValue;
 
   if (ti2.fValid == false)
   {
@@ -199,12 +199,12 @@ void    SetupTimeGPS(void)
   {
     if (ShowStatusGPS() == 1)
     {
-      tiSetRTC = tiAlt;
+      tiSetRTC = ti;
       SetCurrTimeDate();    // дата установлена правильно 
 
       ReadTimeGPS();
 
-      tiSetRTC = tiAlt;
+      tiSetRTC = ti;
       SetCurrTimeDate();    // дата и время установлены правильно
 
       boSetTime = true;
@@ -236,7 +236,7 @@ bool    SetTimeGPS(void)
   mpcwGPSRun[0]++;
 
   time2 ti2 = ReadTimeDateGPS();
-  time tiAlt = ti2.tiValue;
+  time ti = ti2.tiValue;
 
   if (ti2.fValid == false)
   {    
@@ -256,19 +256,19 @@ bool    SetTimeGPS(void)
       AddKeyRecord(EVE_GPS_GOODGPS_1); mpcwGPSRun[4]++;
       AddKeyRecord(EVE_GPS_GOODGPS_2);
 
-      if (ValidTimeDate(tiAlt) == 0)
+      if (ValidTimeDate(ti) == 0)
       { 
         ShowLo(szBadFormatGPS); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_BADFORMAT); mpcwGPSRun[5]++; 
       }
-      else if ((tiCurr.bDay   != tiAlt.bDay)   ||
-               (tiCurr.bMonth != tiAlt.bMonth) ||
-               (tiCurr.bYear  != tiAlt.bYear))
+      else if ((tiCurr.bDay   != ti.bDay)   ||
+               (tiCurr.bMonth != ti.bMonth) ||
+               (tiCurr.bYear  != ti.bYear))
       { 
         ShowLo(szBadDateGPS); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_BADDATE); mpcwGPSRun[6]++; 
       }
-      else if (GetCurrHouIndex() != (tiAlt.bHour*2 + tiAlt.bMinute/30))
+      else if (GetCurrHouIndex() != (ti.bHour*2 + ti.bMinute/30))
       { 
         ShowLo(szBadTimeGPS); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_BADTIME); mpcwGPSRun[7]++; 
@@ -276,21 +276,21 @@ bool    SetTimeGPS(void)
       else
       {
         tiPrevCorrect = tiCurr;
-        tiPostCorrect = tiAlt;
+        tiPostCorrect = ti;
 
 
-        tiSetRTC = tiAlt;
+        tiSetRTC = ti;
         SetCurrTime();
-        tiPrev = tiAlt;
+        tiPrev = ti;
               
         OK(); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_OK); mpcwGPSRun[8]++;
 
 
-        tiAlt = tiPostCorrect;
+        ti = tiPostCorrect;
         dwBuffC = GetSecondIndex();
 
-        tiAlt = tiPrevCorrect;
+        ti = tiPrevCorrect;
         if (dwBuffC > GetSecondIndex())
         {
           dwBuffC = dwBuffC - GetSecondIndex();
