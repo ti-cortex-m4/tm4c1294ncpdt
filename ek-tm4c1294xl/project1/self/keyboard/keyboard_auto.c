@@ -23,6 +23,7 @@ KEYBOARD_AUTO.C
 #include "test/key_test_keys.h"
 #include "test/key_test_rtc.h"
 #include "gps/key_gps_data.h"
+#include "gps/key_gps_correct.h"
 
 
 
@@ -36,7 +37,7 @@ void    Keyboard_Auto(void)
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
       case bGET_GPS_DATA:       auto_GetGpsData();      break;
-//      case bGET_GPS_CORRECT:    auto_GetGPSCorrect();   break;
+      case bGET_GPS_CORRECT:    auto_GetGpsCorrect();   break;
 
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
@@ -58,7 +59,7 @@ void    Keyboard_Auto(void)
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
 
       case bGET_GPS_DATA:       auto_GetGpsData();      break;
-//      case bGET_GPS_CORRECT:    auto_GetGPSCorrect();   break;
+      case bGET_GPS_CORRECT:    auto_GetGpsCorrect();   break;
 
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
@@ -114,7 +115,7 @@ void    Keyboard_Auto(void)
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
       case bGET_GPS_DATA:       auto_GetGpsData();      break;
-//      case bGET_GPS_CORRECT:    auto_GetGPSCorrect();   break;
+      case bGET_GPS_CORRECT:    auto_GetGpsCorrect();   break;
 
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;

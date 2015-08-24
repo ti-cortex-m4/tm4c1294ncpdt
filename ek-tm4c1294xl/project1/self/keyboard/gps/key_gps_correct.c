@@ -3,29 +3,21 @@ KEY_GPS_CORRECT.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "display.h"
-#include        "timedate.h"
-#include        "beep.h"
-#include        "delay.h"
-#include        "ports.h"
-#include        "rtc.h"
-#include        "nexttime.h"
-#include        "gps.h"
-#include        "record.h"
+
+#include "../../main.h"
+#include "../../console.h"
+#include "../../time/gps.h"
+#include "../../time/rtc.h"
+//#include "../../time/timedate_display.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szCorrectGPS     = "Коррекция GPS   ";
+static char const       szMessage[]     = "Коррекция GPS   ";
 
 
 
-void    ShowGPSCorrect(void)
+static void Show(void)
 {
   if (ReadTimeDateGPS() == 0)
   {
@@ -40,20 +32,20 @@ void    ShowGPSCorrect(void)
 }
 
 
-void    key_GetGPSCorrect(void)
+void    key_GetGpsCorrect(void)
 {
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if ((bPortGPS > 0) && (bPortGPS <= bPORTS))
+      if ((bPortGps > 0) && (bPortGps <= bPORTS))
       {
         enKeyboard = KBD_POSTENTER;
 
-        ShowHi(szCorrectGPS);
+        ShowHi(szMessage);
         Clear();
 
-        ShowGPSCorrect();
+        Show();
       }
       else BlockProgram(bSET_GPS_CONFIG);
     }
@@ -78,17 +70,18 @@ void    key_GetGPSCorrect(void)
 }
 
 
-void   auto_GetGPSCorrect(void)
+void   auto_GetGpsCorrect(void)
 { 
+  static uchar bSecondPrev;
+
   if (enKeyboard == KBD_POSTENTER)
   {
-    ibY = (*PGetCurrTimeDate()).bSecond;
-    if (ibY != ibZ)
+    uchar bSecond = GetCurrTimeDate()->bSecond;
+    if (bSecond != bSecondPrev)
     {
-      ibZ = ibY;
-      ShowGPSCorrect();
+    	bSecondPrev = bSecond;
+      Show();
     }
   } 
 }
 
-*/
