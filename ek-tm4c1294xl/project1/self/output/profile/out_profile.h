@@ -4,6 +4,7 @@ OUT_PROFILE.H
 
 ------------------------------------------------------------------------------*/
 
+void    OutGetFailure2(void);
 void    OutGetOverflowHhr(void);
 void    OutGetErrorLink(void);
 

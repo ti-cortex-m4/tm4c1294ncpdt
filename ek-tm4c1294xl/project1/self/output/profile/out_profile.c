@@ -10,6 +10,7 @@ OUT_PROFILE,C
 #include "../../memory/mem_profile.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
+#include "out_profile.h"
 
 
 
