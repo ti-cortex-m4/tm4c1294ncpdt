@@ -207,6 +207,7 @@ void    Response255_CRC(void)
     case bEXT_GETGROUPSNAME: GetGroupsNameExt(); break;
     case bEXT_SETGROUPSNAME: SetGroupsNameExt(); break;
 
+    case bINQ_FAILURE2: OutGetFailure2(); break;
     case bEXT_OVERFLOW_HHR: OutGetOverflowHhr(); break;
     case bEXT_GET_ERROR_LINK: OutGetErrorLink(); break;
     case bEXT_GET_ENGFRAC: OutGetEngFrac(); break;
