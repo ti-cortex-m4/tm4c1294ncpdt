@@ -6,9 +6,14 @@ GPS.C
 
 #include "../main.h"
 #include "../memory/mem_gps.h"
+#include "../memory/mem_settings.h"
 #include "../memory/mem_realtime.h"
+#include "../memory/mem_correct3.h"
 #include "../serial/ports.h"
+#include "../serial/ports_devices.h"
+#include "../keyboard/keyboard.h"
 #include "../display/display.h"
+#include "../flash/records.h"
 #include "../time/rtc.h"
 #include "../time/delay.h"
 #include "../time/timedate.h"
@@ -50,13 +55,13 @@ uchar   i;
 
   bPortGPS = 0;
 
-  for (i=0; i<48; i++) mpboGPSRun[i] = boFalse;
-  mpboGPSRun[12] = boTrue;
-  mpboGPSRun[36] = boTrue;
+  for (i=0; i<48; i++) mpboGPSRun[i] = false;
+  mpboGPSRun[12] = true;
+  mpboGPSRun[36] = true;
 
   bGMT = 2;
 
-  boSeasonGPS = boTrue;
+  boSeasonGPS = true;
 }
 
 
@@ -94,7 +99,7 @@ void    CalcGMT(void)
 uchar   i,j;
 
   j = bGMT;
-  if ((bSeasonCurr == 0) && (boSeasonGPS == boTrue)) j++;
+  if ((bSeasonCurr == 0) && (boSeasonGPS == true)) j++;
 
   for (i=0; i<j; i++)
   {
@@ -167,7 +172,7 @@ void    ShowTimeDateGPS(bool fShow)
   (fShow) ? ShowHi(szTimeDateGPS) : ShowHi(szTimeGPS);
 
   sprintf(szHi+12,"+%02bu",bGMT);
-  if ((SeasonCurr() == 0) && (boSeasonGPS == boTrue)) szHi[15] = '*';
+  if ((SeasonCurr() == 0) && (boSeasonGPS == true)) szHi[15] = '*';
 
   enKeyboard = KBD_ENTER;
   Clear();
@@ -205,8 +210,8 @@ void    SetupTimeGPS(void)
       tiSetRTC = tiAlt;
       SetCurrTimeDate();    // дата и время установлены правильно
 
-      boSetTime = boTrue;
-      boSetDate = boTrue;
+      boSetTime = true;
+      boSetDate = true;
 
       OK(); DelayMsg();
     }
@@ -259,7 +264,7 @@ bool    SetTimeGPS(void)
         ShowLo(szBadDateGPS); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_BADDATE); mpcwGPSRun[6]++; 
       }
-      else if (GetHouIndex() != (tiAlt.bHour*2 + tiAlt.bMinute/30))
+      else if (GetCurrHouIndex() != (tiAlt.bHour*2 + tiAlt.bMinute/30))
       { 
         ShowLo(szBadTimeGPS); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_BADTIME); mpcwGPSRun[7]++; 
@@ -321,12 +326,12 @@ void    CorrectTimeGPS(void)
   if (SetTimeGPS() == 1) 
   { 
     cdwPosCorrect3++;
-    tiPosCorrect3 = *PGetCurrTimeDate();
+    tiPosCorrect3 = *GetCurrTimeDate();
   }
   else 
   {
     cdwPosCorrect3 = 0;
-    tiNegCorrect3 = *PGetCurrTimeDate();
+    tiNegCorrect3 = *GetCurrTimeDate();
   }
 }
 
@@ -347,7 +352,7 @@ uchar   i;
   i = tiCurr.bMinute/15;
   if ((i == 0) || (i == 2)) return;
 
-  if (mpboGPSRun[ GetHouIndex() ] == boFalse) return;
+  if (mpboGPSRun[ GetCurrHouIndex() ] == false) return;
 
   AddKeyRecord(EVE_GPS_AUTO);
   CorrectTimeGPS();
