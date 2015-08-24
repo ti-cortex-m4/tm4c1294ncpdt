@@ -4,9 +4,9 @@ KEY_GPS_SEASON.C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../time/gps.h"
-#include "common/key_bool.h"
+#include "../../main.h"
+#include "../../time/gps.h"
+#include "../common/key_bool.h"
 
 
 
