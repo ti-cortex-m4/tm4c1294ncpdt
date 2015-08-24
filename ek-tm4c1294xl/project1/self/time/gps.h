@@ -4,7 +4,7 @@ GPS.H
 
 ------------------------------------------------------------------------------*/
 
-extern  static char const       szTimeGPS[],
+extern  char const              szTimeGPS[],
                                 szDeltaTimeGPS[],
                                 szTimeDateGPS[],
                                 szVersionGPS[],
