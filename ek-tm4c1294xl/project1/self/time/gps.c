@@ -37,19 +37,23 @@ char const              szTimeGPS[]      = "Время GPS       ",
 
 
 
+cache const             chPortGPS = {PORT_GPS, &bPortGPS, sizeof(uchar)};
+
+
+
 void    InitGPS(void)
 {
-  if (bPortGPS > bPORTS) bPortGPS = 0;
+  LoadCacheChar(&chPortGPS, 0, bPORTS, 0);
 }
 
 
 
 void    ResetGPS(void)
 {
-uchar   i;
-
   bPortGPS = 0;
+  SaveCache(&chPortGPS);
 
+  uchar i;
   for (i=0; i<48; i++) mpboGPSRun[i] = false;
   mpboGPSRun[12] = true;
   mpboGPSRun[36] = true;
