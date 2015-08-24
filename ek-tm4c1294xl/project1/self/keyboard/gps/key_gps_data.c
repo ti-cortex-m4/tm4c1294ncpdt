@@ -7,15 +7,20 @@ KEY_GPS_DATA.C
 #include "../../main.h"
 #include "../../console.h"
 #include "../../time/gps.h"
+#include "../../time/rtc.h"
 #include "../../time/timedate_display.h"
 
 
 
-static void Show(uchar  ibX)
+static uchar            ibVal;
+
+
+
+static void Show(uchar  ibVal)
 {
   Clear();
 
-  switch (ibX)
+  switch (ibVal)
   {
     case 0: ShowHi(szTimeGps); break;
     case 1: ShowHi(szDeltaTimeGps); break;
@@ -32,7 +37,7 @@ static void Show(uchar  ibX)
   {
     if (ShowStatusGps() == 1)
     {
-      switch (ibX)
+      switch (ibVal)
       {
         case 0: ShowTime(tm2.tiValue); break;
         case 1: ShowDeltaTime(tm2.tiValue); break;
@@ -46,8 +51,6 @@ static void Show(uchar  ibX)
 
 void    key_GetGpsData(void)
 {
-static uchar ibX;
-
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -56,15 +59,15 @@ static uchar ibX;
       {
         enKeyboard = KBD_POSTENTER;
 
-        ibX = 0;
-        Show(ibX);
+        ibVal = 0;
+        Show(ibVal);
       }
       else BlockProgram(bSET_GPS_CONFIG);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= 4) ibX = 0;
-      Show(ibX);
+      if (++ibVal >= 4) ibVal = 0;
+      Show(ibVal);
     }
     else Beep();
   }
@@ -73,14 +76,16 @@ static uchar ibX;
 
 
 void   auto_GetGpsData(void)
-{/*
+{
+static uchar bSecondPrev;
+
   if (enKeyboard == KBD_POSTENTER)
   {
-    ibY = (*PGetCurrTimeDate()).bSecond;
-    if (ibY != ibZ)
+    uchar bSecond = GetCurrTimeDate()->bSecond;
+    if (bSecond != bSecondPrev)
     {
-      ibZ = ibY;
-      ShowGpsData();
+      bSecondPrev = bSecond;
+      Show(ibVal);
     }
-  }*/
+  }
 }
