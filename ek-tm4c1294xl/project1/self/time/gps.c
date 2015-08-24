@@ -27,13 +27,13 @@ GPS.C
 
 
 //                                         0123456789ABCDEF
-char const              szTimeGPS[]      = "Время GPS       ",
-                        szDeltaTimeGPS[] = "Время GPS       ",
-                        szTimeDateGPS[]  = "Дата GPS        ",
-                        szVersionGPS[]   = "Версия GPS      ",
-                        szBadFormatGPS[] = "ошибка формата !",
-                        szBadDateGPS[]   = " ошибка даты !  ",
-                        szBadTimeGPS[]   = "ошибка режима ! ";
+char const              szTimeGps[]      = "Время GPS       ",
+                        szDeltaTimeGps[] = "Время GPS       ",
+                        szTimeDateGps[]  = "Дата GPS        ",
+                        szVersionGps[]   = "Версия GPS      ",
+                        szBadFormatGps[] = "ошибка формата !",
+                        szBadDateGps[]   = " ошибка даты !  ",
+                        szBadTimeGps[]   = "ошибка времени !";
 
 
 
@@ -177,7 +177,7 @@ time2   ReadTimeDateGps(void)
 
 void    ShowTimeDateGps(bool  fShowTimeDate)
 {
-  (fShowTimeDate) ? ShowHi(szTimeDateGPS) : ShowHi(szTimeGPS);
+  (fShowTimeDate) ? ShowHi(szTimeDateGps) : ShowHi(szTimeGps);
 
   sprintf(szHi+12,"+%02u",bGmtGps);
   if ((SeasonCurr() == 0) && (boSeasonGps == true)) szHi[15] = '*';
@@ -270,19 +270,19 @@ bool    SetTimeGPS(void)
 
       if (ValidTimeDate(ti) == 0)
       { 
-        ShowLo(szBadFormatGPS); DelayMsg(); Clear(); 
+        ShowLo(szBadFormatGps); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_BADFORMAT); mpcwGpsSchedule[5]++; 
       }
       else if ((tiCurr.bDay   != ti.bDay)   ||
                (tiCurr.bMonth != ti.bMonth) ||
                (tiCurr.bYear  != ti.bYear))
       { 
-        ShowLo(szBadDateGPS); DelayMsg(); Clear(); 
+        ShowLo(szBadDateGps); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_BADDATE); mpcwGpsSchedule[6]++; 
       }
       else if (GetCurrHouIndex() != (ti.bHour*2 + ti.bMinute/30))
       { 
-        ShowLo(szBadTimeGPS); DelayMsg(); Clear(); 
+        ShowLo(szBadTimeGps); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_BADTIME); mpcwGpsSchedule[7]++; 
        }
       else

@@ -8,13 +8,13 @@ GPS.H
 
 
 
-extern  char const              szTimeGPS[],
-                                szDeltaTimeGPS[],
-                                szTimeDateGPS[],
-                                szVersionGPS[],
+extern  char const              szTimeGps[],
+                                szDeltaTimeGps[],
+                                szTimeDateGps[],
+                                szVersionGps[],
                                 szBadTimeDateGPS[],
-                                szBadDateGPS[],
-                                szBadTimeGPS[];
+                                szBadDateGps[],
+                                szBadTimeGps[];
 
 
 extern  cache const             chPortGps;

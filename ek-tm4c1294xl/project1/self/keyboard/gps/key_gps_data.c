@@ -3,80 +3,68 @@ KEY_GPS_DATA.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "display.h"
-#include        "timedate.h"
-#include        "beep.h"
-#include        "delay.h"
-#include        "ports.h"
-#include        "rtc.h"
-#include        "gps.h"
+
+#include "../../main.h"
+#include "../../console.h"
+#include "../../time/gps.h"
+#include "../../time/timedate_display.h"
 
 
 
-void    ShowGPSData_Error(void)
+static void Show(uchar  ibX)
 {
-  Error(); DelayInf(); 
   Clear();
-}
 
-
-void    ShowGPSData_OK(void)
-{
-  if (ShowStatusGPS() == 1)
-  {
-    switch (ibX)
-    {
-      case 0: ShowTime();      break;
-      case 1: ShowDeltaTime(); break;
-      case 2: ShowTimeDate();  break;
-      case 3: sprintf(szLo+7,"%bu.%bu",bVersionMaxGPS,bVersionMinGPS); break;
-    }
-  } 
-}
-
-
-void    ShowGPSData(void)
-{
   switch (ibX)
   {
-    case 0: ShowHi(szTimeGPS);      break;
-    case 1: ShowHi(szDeltaTimeGPS); break;
-    case 2: ShowHi(szTimeDateGPS);  break;
-    case 3: ShowHi(szVersionGPS);   break;
+    case 0: ShowHi(szTimeGps); break;
+    case 1: ShowHi(szDeltaTimeGps); break;
+    case 2: ShowHi(szTimeDateGps); break;
+    case 3: ShowHi(szVersionGps); break;
   }
 
-  switch (ReadTimeDateGPS())
+  time2 tm2 = ReadTimeDateGps();
+  if (tm2.fValid == false)
   {
-    case 0: ShowGPSData_Error(); break;
-    case 1: ShowGPSData_OK();    break;
+    Error(); DelayInf(); Clear();
+  }
+  else
+  {
+    if (ShowStatusGps() == 1)
+    {
+      switch (ibX)
+      {
+        case 0: ShowTime(tm2.tiValue); break;
+        case 1: ShowDeltaTime(tm2.tiValue); break;
+        case 2: ShowTimeDate(tm2.tiValue); break;
+        case 3: sprintf(szLo+7,"%u.%u",bVersionMaxGps,bVersionMinGps); break;
+      }
+    }
   }
 }
 
 
-void    key_GetGPSData(void)
+void    key_GetGpsData(void)
 {
+static uchar ibX;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if ((bPortGPS > 0) && (bPortGPS <= bPORTS))
+      if ((bPortGps > 0) && (bPortGps <= bPORTS))
       {
         enKeyboard = KBD_POSTENTER;
 
-        ibX = 0; ibXmax = 4;
-        Clear(); ShowGPSData();
+        ibX = 0;
+        Show(ibX);
       }
       else BlockProgram(bSET_GPS_CONFIG);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= ibXmax) ibX = 0;
-      Clear(); ShowGPSData();
+      if (++ibX >= 4) ibX = 0;
+      Show(ibX);
     }
     else Beep();
   }
@@ -84,16 +72,15 @@ void    key_GetGPSData(void)
 }
 
 
-void   auto_GetGPSData(void)
-{ 
+void   auto_GetGpsData(void)
+{/*
   if (enKeyboard == KBD_POSTENTER)
   {
     ibY = (*PGetCurrTimeDate()).bSecond;
     if (ibY != ibZ)
     {
       ibZ = ibY;
-      ShowGPSData();
+      ShowGpsData();
     }
-  } 
+  }*/
 }
-*/

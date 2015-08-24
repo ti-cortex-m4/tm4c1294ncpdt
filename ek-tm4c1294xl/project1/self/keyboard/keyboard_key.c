@@ -213,8 +213,8 @@ void    Keyboard_Key(void)
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_GPS_CONFIG:     key_SetGpsConfig();     break;
-      case bSET_GPS_GMT:        key_SetGpsGmt();       break;
-//      case bGET_GPS_DATA:       key_GetGPSData();       break;
+      case bSET_GPS_GMT:        key_SetGpsGmt();        break;
+      case bGET_GPS_DATA:       key_GetGpsData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
       case bSET_GPS_SCHEDULE:   key_SetGpsSchedule();   break;
       case bSET_GPS_SEASON:     key_SetGpsSeason();     break;
@@ -392,8 +392,8 @@ void    Keyboard_Key(void)
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_GPS_CONFIG:     key_SetGpsConfig();     break;
-      case bSET_GPS_GMT:        key_SetGpsGmt();       break;
-//      case bGET_GPS_DATA:       key_GetGPSData();       break;
+      case bSET_GPS_GMT:        key_SetGpsGmt();        break;
+      case bGET_GPS_DATA:       key_GetGpsData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
       case bSET_GPS_SCHEDULE:   key_SetGpsSchedule();   break;
       case bSET_GPS_SEASON:     key_SetGpsSeason();     break;
@@ -653,8 +653,8 @@ void    Keyboard_Key(void)
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
       case bSET_GPS_CONFIG:     key_SetGpsConfig();     break;
-      case bSET_GPS_GMT:        key_SetGpsGmt();       break;
-//      case bGET_GPS_DATA:       key_GetGPSData();       break;
+      case bSET_GPS_GMT:        key_SetGpsGmt();        break;
+      case bGET_GPS_DATA:       key_GetGpsData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
       case bSET_GPS_SCHEDULE:   key_SetGpsSchedule();   break;
       case bSET_GPS_SEASON:     key_SetGpsSeason();     break;
