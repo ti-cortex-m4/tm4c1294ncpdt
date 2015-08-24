@@ -4,5 +4,5 @@ KEY_GPS_DATA.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_GetGPSData(void);
-void   auto_GetGPSData(void);
+void    key_GetGpsData(void);
+void    auto_GetGpsData(void);
