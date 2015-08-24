@@ -122,7 +122,7 @@ KEYBOARD_KEY.C
 #include "gps/key_gps_data.h"
 #include "gps/key_gps_gmt.h"
 #include "gps/key_gps_correct.h"
-#include "gps/key_gps_run.h"
+#include "gps/key_gps_schedule.h"
 #include "gps/key_gps_season.h"
 
 

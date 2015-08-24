@@ -12,15 +12,15 @@ KEY_GPS_SCHEDULE.С
 
 //                                         0123456789ABCDEF
 static char const       szMessage[]     = "Коррекция GPS   ";
-                     
+
 
 
 static void Show(uchar  ibHhr)
 {
   Clear();
-  sprintf(szLo+1,"%02bu:%02bu",ibHhr/2,(ibHhr%2)*30);
+  sprintf(szLo+1,"%02u:%02u",ibHhr/2,(ibHhr%2)*30);
 
-  if (mpboGPSRun[ibHhr] == boFalse)
+  if (mpboScheduleGps[ibHhr] == false)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -28,7 +28,7 @@ static void Show(uchar  ibHhr)
   if (enGlobal != GLB_WORK)
     szLo[7] = '.';
 
-  sprintf(szLo+14,"%2bu",ibHhr+1);
+  sprintf(szLo+14,"%2u",ibHhr+1);
 }
 
 
@@ -51,21 +51,21 @@ static uchar ibHhr;
       enKeyboard = KBD_POSTENTER;
 
       ibHhr = 0;
-      Show();
+      Show(ibHhr);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibHhr = GetChar(10,11) - 1) < 48)
+      if ((ibHhr = GetCharLo(10,11) - 1) < 48)
       {
         enKeyboard = KBD_POSTENTER;
-        Show();
+        Show(ibHhr);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++ibHhr >= 48) ibHhr = 0;
-      Show();
+      Show(ibHhr);
     }
   }
 
@@ -74,8 +74,10 @@ static uchar ibHhr;
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      mpboGPSRun[ibHhr] = ~mpboGPSRun[ibHhr];
-      Show();
+      mpboScheduleGps[ibHhr] = InvertBoolean(mpboScheduleGps[ibHhr]);
+      LoadCache(&chScheduleGps);
+
+      Show(ibHhr);
     }
     else Beep();
   }
@@ -86,7 +88,7 @@ static uchar ibHhr;
     if (enKeyboard == KBD_POSTENTER)
     {
       (ibHhr > 0) ? (ibHhr--) : (ibHhr = 48-1);
-      Show();
+      Show(ibHhr);
     }
     else Beep();
   }
