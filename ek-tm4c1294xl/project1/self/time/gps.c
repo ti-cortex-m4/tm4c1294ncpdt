@@ -5,29 +5,23 @@ GPS.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../console.h"
 #include "../memory/mem_gps.h"
 #include "../memory/mem_settings.h"
+#include "../memory/mem_program.h"
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_correct3.h"
+#include "../realtime/realtime.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
-#include "../keyboard/keyboard.h"
-#include "../display/display.h"
 #include "../flash/records.h"
 #include "../time/rtc.h"
 #include "../time/delay.h"
 #include "../time/timedate.h"
+#include "../time/timedate_display.h"
+#include "../time/decret.h"
+#include "../settings.h"
 #include "gps.h"
-//#include        "xdata.h"
-//#include        "delay.h"
-//#include        "keyboard.h"
-//#include        "display.h"
-//#include        "ports.h"
-//#include        "timedate.h"
-//#include        "engine.h"
-//#include        "nexttime.h"
-//#include        "rtc.h"
-//#include        "record.h"
 
 
 
@@ -93,29 +87,30 @@ void    QueryTimeGPS(void)
 
 
 
-void    CalcGMT(void)
+time    CalcGMT(time  ti)
 {
-uchar   i,j;
-
-  j = bGMT;
+  uchar j = bGMT;
   if ((bSeasonCurr == 0) && (boSeasonGPS == true)) j++;
 
+  uchar i;
   for (i=0; i<j; i++)
   {
-    if (++tiAlt.bHour >= 24)
+    if (++ti.bHour >= 24)
     {
-      tiAlt.bHour = 0;
-      if (++tiAlt.bDay > DaysInMonth())
+      ti.bHour = 0;
+      if (++ti.bDay > GetDaysInMonthYM(ti.bYear, ti.bMonth))
       {
-        tiAlt.bDay = 1;
-        if (++tiAlt.bMonth > 12)
+        ti.bDay = 1;
+        if (++ti.bMonth > 12)
         {
-          tiAlt.bMonth = 1;
-          tiAlt.bYear++;
+          ti.bMonth = 1;
+          ti.bYear++;
         }
       }
     }
   }
+
+  return ti;
 }
 
 
@@ -140,54 +135,51 @@ time    ReadTimeGPS(void)
   bVersionMaxGPS = PopChar();
   bVersionMinGPS = PopChar();
 
-  CalcGMT();
-
-  return ti;
+  return CalcGMT(ti);
 }
 
 
 
-uchar   ReadTimeDateGPS(void)
+time2   ReadTimeDateGPS(void)
 {
-uchar   i;
-
   ibPort = bPortGPS-1;
 
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {    
     Delay(100);
     QueryTimeGPS();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return(2);
+    if (fKey == 1) return GetTime2(tiZero, false);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
 
-  ReadTimeGPS();
-  return(1);
+  return GetTime2(ReadTimeGPS(), true);
 }
 
 
 
 void    ShowTimeDateGPS(bool  fShowTimeDate)
 {
-  (fShow) ? ShowHi(szTimeDateGPS) : ShowHi(szTimeGPS);
+  (fShowTimeDate) ? ShowHi(szTimeDateGPS) : ShowHi(szTimeGPS);
 
-  sprintf(szHi+12,"+%02bu",bGMT);
+  sprintf(szHi+12,"+%02u",bGMT);
   if ((SeasonCurr() == 0) && (boSeasonGPS == true)) szHi[15] = '*';
 
   enKeyboard = KBD_ENTER;
   Clear();
 
-  if (ReadTimeDateGPS() != 1) 
+  time2 ti2 = ReadTimeDateGPS();
+  if (ti2.fValid == false)
     Error();
   else
   {
     if (ShowStatusGPS() == 1)
     {
       Clear();
-      (fShowTimeDate) ? ShowTimeDate() : ShowTime();
+      (fShowTimeDate) ? ShowTimeDate(ti2.tiValue) : ShowTime(ti2.tiValue);
     }
   }
 }
@@ -196,10 +188,12 @@ void    ShowTimeDateGPS(bool  fShowTimeDate)
 
 void    SetupTimeGPS(void)
 {
-  if (ReadTimeDateGPS() != 1)
+  time2 ti2 = ReadTimeDateGPS();
+  time tiAlt = ti2.tiValue;
+
+  if (ti2.fValid == false)
   {
-    Error(); 
-    DelayInf(); Clear();
+    Error(); DelayInf(); Clear();
   }
   else
   {
@@ -214,7 +208,10 @@ void    SetupTimeGPS(void)
       SetCurrTimeDate();    // дата и время установлены правильно
 
       boSetTime = true;
+      SaveCache(&chSetTime);
+
       boSetDate = true;
+      SaveCache(&chSetDate);
 
       OK(); DelayMsg();
     }
@@ -237,7 +234,11 @@ void    CalcCorrect(void)
 bool    SetTimeGPS(void)
 {
   mpcwGPSRun[0]++;
-  if (ReadTimeDateGPS() != 1)
+
+  time2 ti2 = ReadTimeDateGPS();
+  time tiAlt = ti2.tiValue;
+
+  if (ti2.fValid == false)
   {    
     Error(); DelayInf(); Clear(); 
     AddKeyRecord(EVE_GPS_BADLINK); mpcwGPSRun[1]++;
@@ -255,7 +256,7 @@ bool    SetTimeGPS(void)
       AddKeyRecord(EVE_GPS_GOODGPS_1); mpcwGPSRun[4]++;
       AddKeyRecord(EVE_GPS_GOODGPS_2);
 
-      if (TrueTimeDate() == 0)
+      if (ValidTimeDate(tiAlt) == 0)
       { 
         ShowLo(szBadFormatGPS); DelayMsg(); Clear(); 
         AddKeyRecord(EVE_GPS_BADFORMAT); mpcwGPSRun[5]++; 
