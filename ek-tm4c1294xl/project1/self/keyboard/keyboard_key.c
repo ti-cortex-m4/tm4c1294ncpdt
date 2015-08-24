@@ -118,6 +118,11 @@ KEYBOARD_KEY.C
 #include "sensors/key_plc_u_flag.h"
 #include "sensors/key_plc_u_size.h"
 #include "sensors/key_plc_u_shutdown.h"
+#include "gps/key_gps_config.h"
+#include "gps/key_gps_data.h"
+#include "gps/key_gps_gmt.h"
+#include "gps/key_gps_correct.h"
+#include "gps/key_gps_run.h"
 
 
 
@@ -206,7 +211,7 @@ void    Keyboard_Key(void)
       case bSET_LIMITS32:       key_SetLimits32();      break;
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
-//      case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
+      case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
 //      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
@@ -384,7 +389,7 @@ void    Keyboard_Key(void)
       case bSET_LIMITS32:       key_SetLimits32();      break;
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
-//      case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
+      case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
 //      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
@@ -644,7 +649,7 @@ void    Keyboard_Key(void)
       case bSET_LIMITS32:       key_SetLimits32();      break;
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
-//      case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
+      case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
 //      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;

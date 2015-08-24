@@ -4,6 +4,10 @@ GPS.H
 
 ------------------------------------------------------------------------------*/
 
+#include "../memory/mem_gps.h"
+
+
+
 extern  char const              szTimeGPS[],
                                 szDeltaTimeGPS[],
                                 szTimeDateGPS[],
@@ -11,6 +15,10 @@ extern  char const              szTimeGPS[],
                                 szBadTimeDateGPS[],
                                 szBadDateGPS[],
                                 szBadTimeGPS[];
+
+
+extern  cache const             chPortGPS;
+
 
 
 void    InitGPS(void);
