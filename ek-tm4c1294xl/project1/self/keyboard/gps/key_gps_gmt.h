@@ -4,4 +4,4 @@ KEY_GPS_GMT.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetGPS_GMT(void);
+void    key_SetGpsGmt(void);

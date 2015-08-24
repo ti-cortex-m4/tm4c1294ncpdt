@@ -9,28 +9,31 @@ MEM_GPS.C
 
 
 // номер порта часов GPS
-uchar                   bPortGPS;
+uchar                   bPortGps;
 
 // глобальные переменные
-uchar                   bStatusGPS, bVersionMaxGPS, bVersionMinGPS;
+uchar                   bStatusGps;
+
+// глобальные переменные
+uchar                   bVersionMaxGps, bVersionMinGps;
 
 // глобальная переменная
-time                    tiGPS;
+time                    tiGps;
 
 // часовой пояс
-uchar                   bGMT;
+uchar                   bGmtGps;
 
 // график коррекции времени
-bool                    mpboGPSRun[48];
+bool                    mpboGpsSchedule[48];
 
 // счётчики событий
-uint                    mpcwGPSRun[20];
+uint                    mpcwGpsSchedule[20];
 
 // значения времени до/после последней коррекции
 time                    tiPrevCorrect, tiPostCorrect;
 
 // признак использования сезонного времени при расчете местного времени
-bool                    boSeasonGPS;
+bool                    boSeasonGps;
 
 // буфер значения сезона
 uchar                   bSeasonCurr;

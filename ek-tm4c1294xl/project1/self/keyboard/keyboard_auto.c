@@ -34,6 +34,9 @@ void    Keyboard_Auto(void)
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
 
+//      case bGET_GPS_DATA:       auto_GetGPSData();      break;
+//      case bGET_GPS_CORRECT:    auto_GetGPSCorrect();   break;
+
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
@@ -52,6 +55,9 @@ void    Keyboard_Auto(void)
       case bGET_CORRECT_TIME:
       case bGET_CURRTIME:       auto_GetCurrTime();     break;
       case bGET_CURRDATE:       auto_GetCurrDate();     break;
+
+//      case bGET_GPS_DATA:       auto_GetGPSData();      break;
+//      case bGET_GPS_CORRECT:    auto_GetGPSCorrect();   break;
 
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
@@ -105,6 +111,9 @@ void    Keyboard_Auto(void)
     {
       case bSET_CURRDATE:       auto_GetCurrDate();     break;
       case bSET_CURRTIME:       auto_GetCurrTime();     break;
+
+//      case bGET_GPS_DATA:       auto_GetGPSData();      break;
+//      case bGET_GPS_CORRECT:    auto_GetGPSCorrect();   break;
 
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;

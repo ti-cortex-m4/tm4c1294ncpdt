@@ -37,45 +37,45 @@ char const              szTimeGPS[]      = "Время GPS       ",
 
 
 
-cache const             chPortGPS = {PORT_GPS, &bPortGPS, sizeof(uchar)};
-cache const             chGMT = {GMT, &bGMT, sizeof(uchar)};
-cache const             chSeasonGPS = {SEASON_GPS, &boSeasonGPS, sizeof(bool)};
+cache const             chPortGps = {PORT_GPS, &bPortGps, sizeof(uchar)};
+cache const             chGmtGps = {GMT_GPS, &bGmtGps, sizeof(uchar)};
+cache const             chSeasonGps = {SEASON_GPS, &boSeasonGps, sizeof(bool)};
 
 
 
 void    InitGPS(void)
 {
-  LoadCacheChar(&chPortGPS, 0, bPORTS, 0);
-  LoadCacheChar(&chGMT, 0, 13, 2);
-  LoadCacheBool(&chSeasonGPS, true);
+  LoadCacheChar(&chPortGps, 0, bPORTS, 0);
+  LoadCacheChar(&chGmtGps, 0, 13, 2);
+  LoadCacheBool(&chSeasonGps, true);
 }
 
 
 
 void    ResetGPS(void)
 {
-  bPortGPS = 0;
-  SaveCache(&chPortGPS);
+  bPortGps = 0;
+  SaveCache(&chPortGps);
 
   uchar i;
-  for (i=0; i<48; i++) mpboGPSRun[i] = false;
-  mpboGPSRun[12] = true;
-  mpboGPSRun[36] = true;
+  for (i=0; i<48; i++) mpboGpsSchedule[i] = false;
+  mpboGpsSchedule[12] = true;
+  mpboGpsSchedule[36] = true;
 
-  bGMT = 2;
-  SaveCache(&chGMT);
+  bGmtGps = 2;
+  SaveCache(&chGmtGps);
 
-  boSeasonGPS = true;
-  SaveCache(&chSeasonGPS);
+  boSeasonGps = true;
+  SaveCache(&chSeasonGps);
 }
 
 
 
 bool    ShowStatusGPS(void)
 {
-  if (bStatusGPS == 0) return(1);
+  if (bStatusGps == 0) return(1);
 
-  Clear(); sprintf(szLo+2,"состояние: %u",bStatusGPS);
+  Clear(); sprintf(szLo+2,"состояние: %u",bStatusGps);
 
   DelayMsg(); Clear();
   return(0);
@@ -100,8 +100,8 @@ void    QueryTimeGPS(void)
 
 time    CalcGMT(time  ti)
 {
-  uchar j = bGMT;
-  if ((bSeasonCurr == 0) && (boSeasonGPS == true)) j++;
+  uchar j = bGmtGps;
+  if ((bSeasonCurr == 0) && (boSeasonGps == true)) j++;
 
   uchar i;
   for (i=0; i<j; i++)
@@ -131,7 +131,7 @@ time    ReadTimeGPS(void)
   bSeasonCurr = SeasonCurr();
 
   InitPop(5);
-  bStatusGPS = PopChar();
+  bStatusGps = PopChar();
 
   time ti;
 
@@ -142,9 +142,9 @@ time    ReadTimeGPS(void)
   ti.bMonth  = PopChar();
   ti.bYear   = PopChar();
 
-  tiGPS = ti;
-  bVersionMaxGPS = PopChar();
-  bVersionMinGPS = PopChar();
+  tiGps = ti;
+  bVersionMaxGps = PopChar();
+  bVersionMinGps = PopChar();
 
   return CalcGMT(ti);
 }
@@ -153,7 +153,7 @@ time    ReadTimeGPS(void)
 
 time2   ReadTimeDateGPS(void)
 {
-  ibPort = bPortGPS-1;
+  ibPort = bPortGps-1;
 
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
@@ -176,8 +176,8 @@ void    ShowTimeDateGPS(bool  fShowTimeDate)
 {
   (fShowTimeDate) ? ShowHi(szTimeDateGPS) : ShowHi(szTimeGPS);
 
-  sprintf(szHi+12,"+%02u",bGMT);
-  if ((SeasonCurr() == 0) && (boSeasonGPS == true)) szHi[15] = '*';
+  sprintf(szHi+12,"+%02u",bGmtGps);
+  if ((SeasonCurr() == 0) && (boSeasonGps == true)) szHi[15] = '*';
 
   enKeyboard = KBD_ENTER;
   Clear();
@@ -231,18 +231,18 @@ void    SetupTimeGPS(void)
 
 void    CalcCorrect(ulong  dw)
 {
-  if (dw <   2) mpcwGPSRun[9]++;
-  if (dw <   5) mpcwGPSRun[10]++;
-  if (dw >   5) mpcwGPSRun[11]++;
-  if (dw >  60) mpcwGPSRun[12]++;
-  if (dw > 600) mpcwGPSRun[13]++;
+  if (dw <   2) mpcwGpsSchedule[9]++;
+  if (dw <   5) mpcwGpsSchedule[10]++;
+  if (dw >   5) mpcwGpsSchedule[11]++;
+  if (dw >  60) mpcwGpsSchedule[12]++;
+  if (dw > 600) mpcwGpsSchedule[13]++;
 }
 
 
 
 bool    SetTimeGPS(void)
 {
-  mpcwGPSRun[0]++;
+  mpcwGpsSchedule[0]++;
 
   time2 ti2 = ReadTimeDateGPS();
   time ti = ti2.tiValue;
@@ -250,37 +250,37 @@ bool    SetTimeGPS(void)
   if (ti2.fValid == false)
   {    
     Error(); DelayInf(); Clear(); 
-    AddKeyRecord(EVE_GPS_BADLINK); mpcwGPSRun[1]++;
+    AddKeyRecord(EVE_GPS_BADLINK); mpcwGpsSchedule[1]++;
   }
   else
   {
-    AddKeyRecord(EVE_GPS_GOODLINK); mpcwGPSRun[2]++;
+    AddKeyRecord(EVE_GPS_GOODLINK); mpcwGpsSchedule[2]++;
 
     if (ShowStatusGPS() == 0)
     { 
-      AddKeyRecord(EVE_GPS_BADGPS); mpcwGPSRun[3]++;
+      AddKeyRecord(EVE_GPS_BADGPS); mpcwGpsSchedule[3]++;
     }
     else
     {
-      AddKeyRecord(EVE_GPS_GOODGPS_1); mpcwGPSRun[4]++;
+      AddKeyRecord(EVE_GPS_GOODGPS_1); mpcwGpsSchedule[4]++;
       AddKeyRecord(EVE_GPS_GOODGPS_2);
 
       if (ValidTimeDate(ti) == 0)
       { 
         ShowLo(szBadFormatGPS); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_BADFORMAT); mpcwGPSRun[5]++; 
+        AddKeyRecord(EVE_GPS_BADFORMAT); mpcwGpsSchedule[5]++; 
       }
       else if ((tiCurr.bDay   != ti.bDay)   ||
                (tiCurr.bMonth != ti.bMonth) ||
                (tiCurr.bYear  != ti.bYear))
       { 
         ShowLo(szBadDateGPS); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_BADDATE); mpcwGPSRun[6]++; 
+        AddKeyRecord(EVE_GPS_BADDATE); mpcwGpsSchedule[6]++; 
       }
       else if (GetCurrHouIndex() != (ti.bHour*2 + ti.bMinute/30))
       { 
         ShowLo(szBadTimeGPS); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_BADTIME); mpcwGPSRun[7]++; 
+        AddKeyRecord(EVE_GPS_BADTIME); mpcwGpsSchedule[7]++; 
        }
       else
       {
@@ -292,7 +292,7 @@ bool    SetTimeGPS(void)
         tiPrev = ti;
               
         OK(); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_OK); mpcwGPSRun[8]++;
+        AddKeyRecord(EVE_GPS_OK); mpcwGpsSchedule[8]++;
 
 
         ti = tiPostCorrect;
@@ -353,7 +353,7 @@ void    RunGPS(void)
 {
 uchar   i;
 
-  if ((bPortGPS == 0) || (bPortGPS > bPORTS)) return;
+  if ((bPortGps == 0) || (bPortGps > bPORTS)) return;
 
   if ((tiCurr.bDay   == tiSummer.bDay) &&
       (tiCurr.bMonth == tiSummer.bMonth)) return;
@@ -364,7 +364,7 @@ uchar   i;
   i = tiCurr.bMinute/15;
   if ((i == 0) || (i == 2)) return;
 
-  if (mpboGPSRun[ GetCurrHouIndex() ] == false) return;
+  if (mpboGpsSchedule[ GetCurrHouIndex() ] == false) return;
 
   AddKeyRecord(EVE_GPS_AUTO);
   CorrectTimeGPS();

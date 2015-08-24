@@ -212,12 +212,12 @@ void    Keyboard_Key(void)
       case bSET_LIMITS32:       key_SetLimits32();      break;
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
-      case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
-      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
+      case bSET_GPS_CONFIG:     key_SetGpsConfig();     break;
+      case bSET_GPS_GMT:        key_SetGpsGmt();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
 //      case bSET_GPS_RUN:        key_SetGPSRun();        break;
-      case bSET_GPS_SEASON:     key_SetGPSSeason();     break;
+      case bSET_GPS_SEASON:     key_SetGpsSeason();     break;
 
       case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
       case bSET_MAX_FLOW_DELAY: key_SetMaxFlowDelay();  break;
@@ -391,12 +391,12 @@ void    Keyboard_Key(void)
       case bSET_LIMITS32:       key_SetLimits32();      break;
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
-      case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
-      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
+      case bSET_GPS_CONFIG:     key_SetGpsConfig();     break;
+      case bSET_GPS_GMT:        key_SetGpsGmt();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
 //      case bSET_GPS_RUN:        key_SetGPSRun();        break;
-      case bSET_GPS_SEASON:     key_SetGPSSeason();     break;
+      case bSET_GPS_SEASON:     key_SetGpsSeason();     break;
 
       case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
       case bSET_MAX_FLOW_DELAY: key_SetMaxFlowDelay();  break;
@@ -652,12 +652,12 @@ void    Keyboard_Key(void)
       case bSET_LIMITS32:       key_SetLimits32();      break;
       case bSET_LIMITS33:       key_SetLimits33();      break;
 
-      case bSET_GPS_CONFIG:     key_SetGPSConfig();     break;
-      case bSET_GPS_GMT:        key_SetGPS_GMT();       break;
+      case bSET_GPS_CONFIG:     key_SetGpsConfig();     break;
+      case bSET_GPS_GMT:        key_SetGpsGmt();       break;
 //      case bGET_GPS_DATA:       key_GetGPSData();       break;
 //      case bGET_GPS_CORRECT:    key_GetGPSCorrect();    break;
 //      case bSET_GPS_RUN:        key_SetGPSRun();        break;
-      case bSET_GPS_SEASON:     key_SetGPSSeason();     break;
+      case bSET_GPS_SEASON:     key_SetGpsSeason();     break;
 
       case bSET_FLOW_PORT_TO:   key_FlowPortTo();       break;
       case bSET_MAX_FLOW_DELAY: key_SetMaxFlowDelay();  break;

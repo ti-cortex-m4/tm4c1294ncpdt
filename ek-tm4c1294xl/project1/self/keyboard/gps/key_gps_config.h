@@ -4,4 +4,4 @@ KEY_GPS_CONFIG.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetGPSConfig(void);
+void    key_SetGpsConfig(void);
