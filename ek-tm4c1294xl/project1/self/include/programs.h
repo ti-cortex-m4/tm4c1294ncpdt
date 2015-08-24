@@ -207,6 +207,13 @@ PROGRAMS.H
 #define bSET_LIMITS32               147
 #define bSET_LIMITS33               142
 
+#define bSET_GPS_CONFIG             174
+#define bSET_GPS_GMT                175
+#define bGET_GPS_DATA               176
+#define bGET_GPS_CORRECT            177
+#define bSET_GPS_RUN                178
+#define bSET_GPS_SEASON             186
+
 #define bSET_FLOW_PORT_TO           187
 #define bSET_MAX_FLOW_DELAY         188
 #define bSET_FLOW_PORT_FROM         189
