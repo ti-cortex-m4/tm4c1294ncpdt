@@ -18,7 +18,7 @@ void    ResetGPS(void);
 
 bool    ShowStatusGPS(void);
 uchar   ReadTimeDateGPS(void);
-void    ShowTimeDateGPS(bool  fShow);
+void    ShowTimeDateGPS(bool  fShowTimeDate);
 
 void    SetupTimeGPS(void);
 void    CorrectTimeGPS(void);
