@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_GPS_DATA.C
+KEY_GPS_DATA,C
 
 
 ------------------------------------------------------------------------------*/
@@ -18,8 +18,6 @@ static uchar            ibVal;
 
 static void Show(uchar  ibVal)
 {
-  Clear();
-
   switch (ibVal)
   {
     case 0: ShowHi(szTimeGps); break;
@@ -60,14 +58,14 @@ void    key_GetGpsData(void)
         enKeyboard = KBD_POSTENTER;
 
         ibVal = 0;
-        Show(ibVal);
+        Clear(); Show(ibVal);
       }
       else BlockProgram(bSET_GPS_CONFIG);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++ibVal >= 4) ibVal = 0;
-      Show(ibVal);
+      Clear(); Show(ibVal);
     }
     else Beep();
   }
