@@ -44,7 +44,7 @@ void    key_SetRecalcTime(void)
       enKeyboard = KBD_INPUT1;
       ShowHi(szSetRecalc);
 
-      Hour();
+      HalfHour();
     } 
     else if (enKeyboard == KBD_INPUT1)
     {

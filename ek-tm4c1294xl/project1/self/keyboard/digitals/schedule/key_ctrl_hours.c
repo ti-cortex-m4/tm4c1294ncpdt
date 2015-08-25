@@ -45,7 +45,7 @@ void    key_SetCtrlHours(void)
       enKeyboard = KBD_INPUT1;
       ShowHi(szControl);
 
-      Hour();
+      HalfHour();
     } 
     else if (enKeyboard == KBD_INPUT1)
     {

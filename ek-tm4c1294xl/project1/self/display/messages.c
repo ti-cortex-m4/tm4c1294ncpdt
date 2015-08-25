@@ -22,7 +22,7 @@ char const              szClear[]       = "                ",
                         szNumber[]      = "   номер ?__    ",
                         szPort[]        = "    порт ?__    ",
                         szAddress[]     = "   адрес ?___   ",
-                        szHour[]        = " получас ?__    ",
+                        szHalfHour[]    = " получас ?__    ",
                         szDay[]         = "   сутки ?__    ",
                         szMonth[]       = "   месяц ?__    ",
                         szQuarter[]     = " квартал ?__    ",
@@ -90,7 +90,7 @@ void    Param(void)    {  ShowLo(szParam);    }
 void    Number(void)   {  ShowLo(szNumber);   }
 void    Port(void)     {  ShowLo(szPort);     }
 void    Address(void)  {  ShowLo(szAddress);  }
-void    Hour(void )    {  ShowLo(szHour);     }
+void    HalfHour(void) {  ShowLo(szHalfHour); }
 void    Day(void)      {  ShowLo(szDay);      }
 void    Month(void)    {  ShowLo(szMonth);    }
 void    Quarter(void)  {  ShowLo(szQuarter);  }
