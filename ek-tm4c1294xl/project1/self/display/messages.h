@@ -84,7 +84,7 @@ void    Param(void);
 void    Number(void);
 void    Port(void);
 void    Address(void);
-void    Hour(void);
+void    HalfHour(void);
 void    Day(void);
 void    Month(void);
 void    Quarter(void);

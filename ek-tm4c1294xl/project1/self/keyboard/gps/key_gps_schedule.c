@@ -44,7 +44,7 @@ static uchar ibHhr;
       enKeyboard = KBD_INPUT1;
       ShowHi(szMessage);
 
-      Hour();
+      HalfHour();
     } 
     else if (enKeyboard == KBD_INPUT1)
     {
