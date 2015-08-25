@@ -131,7 +131,7 @@ time    CalcGmtGps(time  ti)
 
 time    ReadTimeGps(void)
 {
-  bSeasonCurr = SeasonCurr();
+  bSeasonCurr = GetSeasonCurr();
 
   InitPop(5);
   bStatusGps = PopChar();
@@ -180,7 +180,7 @@ void    ShowTimeDateGps(bool  fShowTimeDate)
   (fShowTimeDate) ? ShowHi(szTimeDateGps) : ShowHi(szTimeGps);
 
   sprintf(szHi+12,"+%02u",bGmtGps);
-  if ((SeasonCurr() == 0) && (boSeasonGps == true)) szHi[15] = '*';
+  if ((GetSeasonCurr() == 0) && (boSeasonGps == true)) szHi[15] = '*';
 
   enKeyboard = KBD_ENTER;
   Clear();
