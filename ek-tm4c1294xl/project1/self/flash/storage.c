@@ -20,13 +20,15 @@ STORAGE.C
 #include "../time/delay.h"
 #include "../time/calendar.h"
 #include "../realtime/realtime_init.h"
+#include "../hardware/beep.h"
 
 
 
 //                                         0123456789ABCDEF
 static char const       szMemoryTest1[] = "Тест памяти: 1  ",
                         szFlashErase[]  = "Тест памяти: 2  ",
-                        szFlashRead[]   = "Тест памяти: 3  ";
+                        szFlashRead[]   = "Тест памяти: 3  ",
+                        szErrorCrc[]    = "   Ошибка CRC   ";
 
 
 static uint             wPage;
@@ -43,7 +45,7 @@ void    ShowFlashErase(void)
 void    ShowFlashRead(void)
 {
   ResetWatchdog();
-  ShowPercent((ulong)100*(++wPage)/((FLASH_END-FLASH_BEGIN+1)/2));
+  ShowPercent((ulong)100*(++wPage)/(FLASH_END-FLASH_BEGIN+1));
 }
 
 
@@ -228,15 +230,30 @@ uint    i;
   ShowHi(szFlashRead);
   wPage = 0;
 
+  bool f = true;
+
   uint wPageIn;
-  for (wPageIn=FLASH_BEGIN; wPageIn<FLASH_END; wPageIn += 2)
+  for (wPageIn=FLASH_BEGIN; wPageIn<FLASH_END; wPageIn++)
   {
     if (SafePageRead(wPageIn) == false) return false;
-    if (GetFlashChecksum() == 0) return false;
+
+    if (GetFlashChecksum() == 0)
+    {
+      SaveDisplay();
+
+      ShowHi(szErrorCrc);
+      Clear(); sprintf(szLo+1,"страница: %u",wPageIn);
+
+      Beep();
+      DelayMsg();
+
+      LoadDisplay();
+
+      f = false;
+    }
+
     ShowFlashRead();
   }
 
-//  DelayMsg();
-
-  return true;
+  return f;
 }
