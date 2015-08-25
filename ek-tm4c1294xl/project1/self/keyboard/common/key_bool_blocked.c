@@ -10,6 +10,11 @@ KEY_BOOL_BLOCKED,C
 
 
 
+//                                            0123456789ABCDEF
+static char const       szBlocked[]        = "Запрещено:      ";
+
+
+
 void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  fBlocked, uint  wProgram)
 {
   bool *pboValue = (bool *) pch->pbBuff;
@@ -18,11 +23,20 @@ void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  
   {
     if (enKeyboard == KBD_ENTER)  
     {
-      enKeyboard = KBD_INPUT1;
-      Clear();
+      if (fBlocked == true)
+      {
+        enKeyboard = KBD_INPUT1;
+        Clear();
 
-      LoadSlide(pszMessages);
-      ShowBool(*pboValue);
+        LoadSlide(pszMessages);
+        ShowBool(*pboValue);
+      }
+      else
+      {
+        ShowHi(szBlocked);
+        Clear();
+        sprintf(szLo+1,"программой %u",wProgram);
+      }
     }
     else Beep();
   }

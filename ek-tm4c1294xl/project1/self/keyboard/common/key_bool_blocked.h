@@ -4,4 +4,8 @@ KEY_BOOL_BLOCKED,H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetBool(cache const  *pch, char const  *pszMessages[], bool  fBlocked, uint  wProgram);
+#include "../../include/programs.h"
+
+
+
+void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  fBlocked, uint  wProgram);
