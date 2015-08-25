@@ -11,7 +11,10 @@ KEY_GPS_SCHEDULE,С
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage[]     = "Коррекция GPS   ";
+static char const       szMessage1[]    = "     График     ",
+                        szMessage2[]    = "коррекции по GPS";
+
+static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 
@@ -42,7 +45,7 @@ static uchar ibHhr;
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
-      ShowHi(szMessage);
+      LoadSlide(pszMessages);
 
       HalfHour();
     } 
