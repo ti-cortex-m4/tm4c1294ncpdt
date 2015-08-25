@@ -234,18 +234,18 @@ void    SetupTimeGPS(void)
 
 void    CalcCorrect(ulong  dw)
 {
-  if (dw <   2) mpcwGpsSchedule[9]++;
-  if (dw <   5) mpcwGpsSchedule[10]++;
-  if (dw >   5) mpcwGpsSchedule[11]++;
-  if (dw >  60) mpcwGpsSchedule[12]++;
-  if (dw > 600) mpcwGpsSchedule[13]++;
+  if (dw <   2) mpcwGpsStatus[9]++;
+  if (dw <   5) mpcwGpsStatus[10]++;
+  if (dw >   5) mpcwGpsStatus[11]++;
+  if (dw >  60) mpcwGpsStatus[12]++;
+  if (dw > 600) mpcwGpsStatus[13]++;
 }
 
 
 
 bool    SetTimeGPS(void)
 {
-  mpcwGpsSchedule[0]++;
+  mpcwGpsStatus[0]++;
 
   time2 ti2 = ReadTimeDateGps();
   time ti = ti2.tiValue;
@@ -253,37 +253,37 @@ bool    SetTimeGPS(void)
   if (ti2.fValid == false)
   {    
     Error(); DelayInf(); Clear(); 
-    AddKeyRecord(EVE_GPS_BADLINK); mpcwGpsSchedule[1]++;
+    AddKeyRecord(EVE_GPS_BADLINK); mpcwGpsStatus[1]++;
   }
   else
   {
-    AddKeyRecord(EVE_GPS_GOODLINK); mpcwGpsSchedule[2]++;
+    AddKeyRecord(EVE_GPS_GOODLINK); mpcwGpsStatus[2]++;
 
     if (ShowStatusGps() == 0)
     { 
-      AddKeyRecord(EVE_GPS_BADGPS); mpcwGpsSchedule[3]++;
+      AddKeyRecord(EVE_GPS_BADGPS); mpcwGpsStatus[3]++;
     }
     else
     {
-      AddKeyRecord(EVE_GPS_GOODGPS_1); mpcwGpsSchedule[4]++;
+      AddKeyRecord(EVE_GPS_GOODGPS_1); mpcwGpsStatus[4]++;
       AddKeyRecord(EVE_GPS_GOODGPS_2);
 
       if (ValidTimeDate(ti) == 0)
       { 
         ShowLo(szBadFormatGps); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_BADFORMAT); mpcwGpsSchedule[5]++; 
+        AddKeyRecord(EVE_GPS_BADFORMAT); mpcwGpsStatus[5]++; 
       }
       else if ((tiCurr.bDay   != ti.bDay)   ||
                (tiCurr.bMonth != ti.bMonth) ||
                (tiCurr.bYear  != ti.bYear))
       { 
         ShowLo(szBadDateGps); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_BADDATE); mpcwGpsSchedule[6]++; 
+        AddKeyRecord(EVE_GPS_BADDATE); mpcwGpsStatus[6]++; 
       }
       else if (GetCurrHouIndex() != (ti.bHour*2 + ti.bMinute/30))
       { 
         ShowLo(szBadTimeGps); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_BADTIME); mpcwGpsSchedule[7]++; 
+        AddKeyRecord(EVE_GPS_BADTIME); mpcwGpsStatus[7]++; 
        }
       else
       {
@@ -295,7 +295,7 @@ bool    SetTimeGPS(void)
         tiPrev = ti;
               
         OK(); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_OK); mpcwGpsSchedule[8]++;
+        AddKeyRecord(EVE_GPS_OK); mpcwGpsStatus[8]++;
 
 
         ti = tiPostCorrect;

@@ -16,7 +16,7 @@ extern  uchar                   bGmtGps;
 
 extern  bool                    mpboScheduleGps[48];
 
-extern  uint                    mpcwGpsSchedule[20];
+extern  uint                    mpcwGpsStatus[20];
 
 extern  time                    tiPrevCorrect, tiPostCorrect;
 
