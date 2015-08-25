@@ -6,7 +6,7 @@ KEY_GPS_SEASON.C
 
 #include "../../main.h"
 #include "../../time/gps.h"
-#include "../common/key_bool.h"
+#include "../common/key_bool_blocked.h"
 
 
 
@@ -20,5 +20,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 void    key_SetGpsSeason(void)
 {
-  key_SetBool(&chSeasonGps, pszMessages);
+  key_SetBoolBlocked(&chSeasonGps, pszMessages, ((bPortGps > 0) && (bPortGps <= bPORTS)), bSET_GPS_CONFIG);
 }
