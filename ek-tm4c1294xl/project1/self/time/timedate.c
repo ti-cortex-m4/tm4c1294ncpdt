@@ -55,7 +55,7 @@ uchar   GetWeekdayYMD(uchar  bYear, uchar  bMonth, uchar  bDay)
 uchar   i;
 uint    j;
 
-  ASSERT((bYear >= bMINYEAR) && (bYear <= bMAXYEAR));
+  ASSERT(bYear <= bMAXYEAR);
   ASSERT((bMonth >= 1) && (bMonth <= 12));
   ASSERT((bDay >= 1) && (bDay <= 31));
 
@@ -76,7 +76,7 @@ time   *GetDecretDateYM(uchar  bYear, uchar  bMonth)
 {
 static time ti;
 
-  ASSERT((bYear >= bMINYEAR) && (bYear <= bMAXYEAR));
+  ASSERT(bYear <= bMAXYEAR);
   ASSERT((bMonth >= 1) && (bMonth <= 12));
 
   ti = tiZero;
@@ -97,7 +97,7 @@ uint    GetDayIndexYMD(uchar  bYear, uchar  bMonth, uchar  bDay)
 uchar   i;
 uint    j;
 
-  ASSERT((bYear >= bMINYEAR) && (bYear <= bMAXYEAR));
+  ASSERT(bYear <= bMAXYEAR);
 	ASSERT((bMonth >= 1) && (bMonth <= 12));
 	ASSERT((bDay >= 1) && (bDay <= 31));
 
