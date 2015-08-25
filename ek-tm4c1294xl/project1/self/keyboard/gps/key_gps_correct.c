@@ -14,7 +14,10 @@ KEY_GPS_CORRECT.C
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage[]     = "Коррекция GPS   ";
+static char const       szMessage1[]    = "   Коррекция    ",
+                        szMessage2[]    = " времени по GPS ";
+
+static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 
@@ -28,7 +31,9 @@ static void Show(void)
   else
   {
     if (ShowStatusGps() == 1)
+    {
       ShowDeltaTime(ti2.tiValue);
+    }
   }
 }
 
@@ -43,7 +48,7 @@ void    key_GetGpsCorrect(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        ShowHi(szMessage);
+        LoadSlide(pszMessages);
         Clear();
 
         Show();
