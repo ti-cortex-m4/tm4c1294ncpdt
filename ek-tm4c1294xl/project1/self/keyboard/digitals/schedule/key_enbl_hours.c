@@ -60,7 +60,7 @@ void    key_SetEnblHours(void)
         ShowPort(ibX);
 
         enKeyboard = KBD_INPUT2;
-        Hour();
+        HalfHour();
       }
     }
     else if (enKeyboard == KBD_POSTINPUT1)
@@ -72,7 +72,7 @@ void    key_SetEnblHours(void)
           ShowPort(ibX);
 
           enKeyboard = KBD_INPUT2;
-          Hour();
+          HalfHour();
         }        
       } else Beep(); 
     }
