@@ -11,8 +11,8 @@ KEY_GPS_SEASON.C
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = " GPS учитывает  ",
-                        szMessage2[]    = "сезонное врем€ ?";
+static char const       szMessage1[]    = " —езонное врем€ ",
+                        szMessage2[]    = "   дл€ GPS ?    ";
 
 static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
