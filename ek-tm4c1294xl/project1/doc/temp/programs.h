@@ -79,7 +79,7 @@
 #define bSET_ENABLE_LINES           172
 #define bSET_LINES                  173
 
-#define bSET_GPS_CONFIG             174
++   #define bSET_GPS_CONFIG             174
 #define bSET_GPS_GMT                175
 #define bGET_GPS_DATA               176
 #define bGET_GPS_CORRECT            177
