@@ -22,7 +22,7 @@ void    OutGetGps(void)
   PushChar(bVersionMinGps);
   PushChar(bGmtGps);
   Push(mpboScheduleGps, sizeof(mpboScheduleGps));
-  PushIntArray(mpcwGpsStatus, 15);
+  PushIntArray(mpcwGpsStatus, 20);
   PushTime(tiPrevCorrect);
   PushTime(tiPostCorrect);
   PushIntArray(Correct1.mpwPosValueCurr, 15);

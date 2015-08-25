@@ -42,6 +42,7 @@ RESPONSE255_CRC.C
 #include "../output/out_minute30.h"
 #include "../output/out_minute30_48.h"
 #include "../output/out_addresses.h"
+#include "../output/out_gps.h"
 #include "../output/out_version.h"
 #include "../output/out_ports.h"
 #include "../output/out_names.h"
