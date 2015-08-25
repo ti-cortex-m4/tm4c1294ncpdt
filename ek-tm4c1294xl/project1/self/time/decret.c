@@ -81,7 +81,7 @@ uchar   GetSeasonMD(uchar  bMonth, uchar  bDay)
 
 
 // возвращает день недели (1: зимнее время, 0: летнее время)
-uchar   Season(time  ti)
+uchar   GetSeason(time  ti)
 {
   uint i = GetDayIndexYMD(ti.bYear, ti.bMonth, ti.bYear);
 
@@ -93,7 +93,7 @@ uchar   Season(time  ti)
 
 
 // возвращает день недели (1: зимнее время, 0: летнее время)
-uchar   SeasonCurr(void)
+uchar   GetSeasonCurr(void)
 {
-  return Season(*GetCurrTimeDate());
+  return GetSeason(*GetCurrTimeDate());
 }
