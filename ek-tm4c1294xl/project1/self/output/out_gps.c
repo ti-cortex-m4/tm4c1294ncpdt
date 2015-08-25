@@ -3,46 +3,37 @@ OUT_GPS.C
 
 
 ------------------------------------------------------------------------------*/
-/*
+
 #include "../main.h"
+#include "../memory/mem_correct1.h"
+#include "../serial/ports.h"
+#include "../time/decret.h"
+#include "../time/gps.h"
+#include "out_gps.h"
 
 
 
-void    OutCorrect1(void)
+void    OutGetGps(void)
 {
   InitPushCRC();
-  PushChar(bPortGPS);
-  PushChar(bStatusGPS);
-  PushChar(bVersionMaxGPS);
-  PushChar(bVersionMinGPS);
-  PushChar(bGMT);
-  Push(mpboGPSRun, sizeof(mpboGPSRun));
-  Push(mpcwGPSRun, sizeof(mpcwGPSRun));
+  PushChar(bPortGps);
+  PushChar(bStatusGps);
+  PushChar(bVersionMaxGps);
+  PushChar(bVersionMinGps);
+  PushChar(bGmtGps);
+  Push(mpboScheduleGps, sizeof(mpboScheduleGps));
+  Push(mpcwGpsSchedule, sizeof(mpcwGpsSchedule));
   Push(&tiPrevCorrect, sizeof(time));
   Push(&tiPostCorrect, sizeof(time));
-  Push(&mpcwPosValueCurr, sizeof(mpcwPosValueCurr));
-  Push(&mpcwNegValueCurr, sizeof(mpcwNegValueCurr));
-  Push(&mpcwPosCountCurr, sizeof(mpcwPosCountCurr));
-  Push(&mpcwNegCountCurr, sizeof(mpcwNegCountCurr));
-  Push(&mpcwPosValuePrev, sizeof(mpcwPosValuePrev));
-  Push(&mpcwNegValuePrev, sizeof(mpcwNegValuePrev));
-  Push(&mpcwPosCountPrev, sizeof(mpcwPosCountPrev));
-  Push(&mpcwNegCountPrev, sizeof(mpcwNegCountPrev));
-  PushChar(SeasonCurr());
-  PushBool(boSeasonGPS);
+  Push(&Correct1.mpwPosValueCurr, sizeof(Correct1.mpwPosValueCurr));
+  Push(&Correct1.mpwNegValueCurr, sizeof(Correct1.mpwNegValueCurr));
+  Push(&Correct1.mpwPosCountCurr, sizeof(Correct1.mpwPosCountCurr));
+  Push(&Correct1.mpwNegCountCurr, sizeof(Correct1.mpwNegCountCurr));
+  Push(&Correct1.mpwPosValuePrev, sizeof(Correct1.mpwPosValuePrev));
+  Push(&Correct1.mpwNegValuePrev, sizeof(Correct1.mpwNegValuePrev));
+  Push(&Correct1.mpwPosCountPrev, sizeof(Correct1.mpwPosCountPrev));
+  Push(&Correct1.mpwNegCountPrev, sizeof(Correct1.mpwNegCountPrev));
+  PushChar(GetSeasonCurr());
+  PushBool(boSeasonGps);
   Output(345+2);
 }
-
-
-
-void    OutCorrect2(void)
-{
-  InitPushCRC();
-  PushChar(bPortSMK);
-  Push(mpboSMKRun, sizeof(mpboSMKRun));
-  Push(mpcwSMKRun, sizeof(mpcwSMKRun));
-  Push(&tiPrevCorrect, sizeof(time));
-  Push(&tiPostCorrect, sizeof(time));
-  Output(101);
-}
-*/

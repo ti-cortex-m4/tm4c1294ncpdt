@@ -260,7 +260,7 @@
 +   #define bEXT_GETADDRESS                28
 +   #define bEXT_SETADDRESS                29
 
-#define bEXT_GETCORRECT_1              31
++   #define bEXT_GETCORRECT_1              31
 #define bEXT_GETCORRECT_2              51
 
 #define bEXT_GETMAXPOWGRPDAY_CUST1     33

@@ -3,7 +3,5 @@ OUT_GPS.H
 
 
 ------------------------------------------------------------------------------*/
-/*
-void    OutCorrect1(void);
-void    OutCorrect2(void);
-*/
+
+void    OutGetGps(void);
