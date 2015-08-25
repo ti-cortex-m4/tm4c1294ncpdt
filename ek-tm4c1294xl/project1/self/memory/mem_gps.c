@@ -27,7 +27,7 @@ uchar                   bGmtGps;
 bool                    mpboScheduleGps[48];
 
 // счётчики событий
-uint                    mpcwGpsSchedule[20];
+uint                    mpcwGpsStatus[20];
 
 // значения времени до/после последней коррекции
 time                    tiPrevCorrect, tiPostCorrect;
