@@ -205,6 +205,7 @@ RESERVE(SEASON_GPS, sizeof(bool) + bNVRAM_FOOTER)
 RESERVE(SCHEDULE_GPS, sizeof(mpboScheduleGps) + bNVRAM_FOOTER)
 
 RESERVE(CORRECT3_FLAG, sizeof(bool) + bNVRAM_FOOTER)
+RESERVE(CORRECT3_MAX, sizeof(uchar) + bNVRAM_FOOTER)
 
 END(NVRAM_END)
 } nvram;
