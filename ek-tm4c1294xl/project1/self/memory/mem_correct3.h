@@ -6,7 +6,7 @@ MEM_CORRECT3.H
 
 extern  bool                    boCorrect3Flag;
 
-extern  uchar                   bMaxCorrect3;
+extern  uchar                   bCorrect3Max;
 
 extern  uint                    mpcwCorrect3[15];
 
