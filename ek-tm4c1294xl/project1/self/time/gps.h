@@ -28,4 +28,3 @@ void    SetupTimeGps(void);
 void    CorrectTimeGps(void);
 
 void    RunGps(void);
-

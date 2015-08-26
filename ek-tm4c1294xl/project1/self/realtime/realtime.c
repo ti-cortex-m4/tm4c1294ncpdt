@@ -13,6 +13,7 @@ TODO атомарные операции
 #include "../digitals/wait_query.h"
 #include "../hardware/power_off.h"
 #include "../time/rtc.h"
+#include "../time/gps.h"
 #include "../health.h"
 #include "../serial/dtr.h"
 #include "../serial/print.h"
@@ -170,6 +171,12 @@ void    ProcessTime(void)
     PrintInt(ibSoftMnt); PrintInt(iwHardMnt);
 
     if (fActive == 1) fCurrent = 1;
+  }
+
+
+  if ((tiCurr.bMinute % 15 == 0) && (tiPrev.bMinute % 15 != 0))
+  {
+    if (fActive == 1) RunGps();
   }
 
 
