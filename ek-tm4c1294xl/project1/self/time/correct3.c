@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 CORRECT3.C
 
- (Отчет № 49 от 07.09.2009)
+ ('Отчет № 49 от 07.09.2009')
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -13,10 +13,21 @@ CORRECT3.C
 #include "correct3.h"
 
 
-/*
+
+cache const             chCorrect3Flag = {CORRECT3_FLAG, &boCorrect3Flag, sizeof(bool)};
+
+
+
+void    InitCorrect3(void)
+{
+  LoadCache(&chCorrect3Flag);
+}
+
+
 void    ResetCorrect3(void)
 {
-  boCorrect3 = false;
+  boCorrect3Flag = false;
+  SaveCache(&chCorrect3Flag);
 
   bMaxCorrect3 = 3;
 
@@ -29,7 +40,7 @@ void    ResetCorrect3(void)
   memset(&mpcwCorrect3, 0, sizeof(mpcwCorrect3));
 }
 
-
+/*
 bit     Correct3Allow(void)
 {
   return (cdwPosCorrect3 < bMaxCorrect3);
@@ -67,7 +78,7 @@ void    OutCorrect3(void)
   InitPushCRC();
 
   PushChar(UseGps() ? true : false); // TODO
-  PushBool(boCorrect3);
+  PushBool(boCorrect3Flag);
   PushLong(cdwAbsCorrect3);
   PushLong(cdwPosCorrect3);
   PushChar(bMaxCorrect3);

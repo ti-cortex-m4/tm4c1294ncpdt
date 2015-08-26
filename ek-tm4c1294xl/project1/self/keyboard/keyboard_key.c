@@ -189,7 +189,7 @@ void    Keyboard_Key(void)
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_CORRECT2:       key_SetCorrect2Flag();  break;
-      case bSET_CORRECT30:      key_SetCorrect30();     break;
+      case bSET_CORRECT30:      key_SetCorrect3Flag();     break;
       case bSET_CORRECT31:      key_SetCorrect31();     break;
       case bSET_CORRECT32:      key_SetCorrect32();     break;
 
@@ -368,7 +368,7 @@ void    Keyboard_Key(void)
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_CORRECT2:       key_SetCorrect2Flag();  break;
-      case bSET_CORRECT30:      key_SetCorrect30();     break;
+      case bSET_CORRECT30:      key_SetCorrect3Flag();     break;
       case bSET_CORRECT31:      key_SetCorrect31();     break;
       case bSET_CORRECT32:      key_SetCorrect32();     break;
 
@@ -629,7 +629,7 @@ void    Keyboard_Key(void)
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
 
       case bSET_CORRECT2:       key_SetCorrect2Flag();  break;
-      case bSET_CORRECT30:      key_SetCorrect30();     break;
+      case bSET_CORRECT30:      key_SetCorrect3Flag();     break;
       case bSET_CORRECT31:      key_SetCorrect31();     break;
       case bSET_CORRECT32:      key_SetCorrect32();     break;
 
