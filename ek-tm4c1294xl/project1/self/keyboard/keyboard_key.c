@@ -351,8 +351,8 @@ void    Keyboard_Key(void)
       case bGET_LOSSE:
       case bSET_LEVEL:          key_GetFactors();       break;
 
-//      case bGET_PROGRAM18:      key_GetProgram18();     break;
-//      case bGET_PROGRAM19:      key_GetProgram19();     break;
+      case bGET_PROGRAM18:      key_GetProgram18();     break;
+      case bGET_PROGRAM19:      key_GetProgram19();     break;
 
       case bSET_PASSWORD:       key_GetPassword();      break;
       case bSET_LOGICAL:        key_SetLogical();       break;

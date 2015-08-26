@@ -79,6 +79,9 @@ PROGRAMS.H
 
 #define bGET_VERSION                15
 
+#define bGET_PROGRAM18              18
+#define bGET_PROGRAM19              19
+
 #define bGET_TRANS_ENG              6
 #define bGET_TRANS_CNT              246
 #define bGET_PULSE_HOU              7
