@@ -78,7 +78,7 @@ void    SetCurrTime_Full(time  ti, event  ev)
   if ((i = GetCorrectIndex(ev)) == 0) return;
 
 
-  tiRecordSetCurrTime = ti;
+  tiRecordTime = ti;
   AddKeyRecord(ev);
 
   tiPrevCorrect = tiCurr;
@@ -173,7 +173,7 @@ bool    CorrectTime_Full(event  ev)
 
   SaveCache(&chCorrect1);
 
-  tiRecordSetCurrTime = ti;
+  tiRecordTime = ti;
   AddKeyRecord(ev);
   SetCurrTime(ti);
   AddKeyRecord(EVE_TIME_OK);

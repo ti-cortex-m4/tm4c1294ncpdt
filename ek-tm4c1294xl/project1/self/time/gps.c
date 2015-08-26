@@ -272,6 +272,7 @@ bool    SetTimeGPS(void)
     }
     else
     {
+      tiRecordTime = ti;
       AddKeyRecord(EVE_GPS_GOODGPS_1); mpcwGpsStatus[4]++;
       AddKeyRecord(EVE_GPS_GOODGPS_2);
 

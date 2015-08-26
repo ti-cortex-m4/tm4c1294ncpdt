@@ -191,15 +191,15 @@ bool    AddKeyRecord(event  ev)
 
   switch (ev)
   {
-//    case EVE_GPS_GOODLINK:  memcpy(&reCurr.mpbBuff+0, &tiGPS, sizeof(time)); break;
+    case EVE_GPS_GOODLINK:  Put(0, (uchar *) &tiGPS, sizeof(time)); break;
 
-//    case EVE_GPS_BADGPS:    memcpy(&reCurr.mpbBuff+0, &bStatusGPS, sizeof(uchar)); break;
+    case EVE_GPS_BADGPS:    PutChar(0, bStatusGPS); break;
 
-//    case EVE_GPS_GOODGPS_1: memcpy(&reCurr.mpbBuff+0, &tiAlt, sizeof(time));
-//                            memcpy(&reCurr.mpbBuff+6, &bGMT, sizeof(uchar)); break;
+    case EVE_GPS_GOODGPS_1: Put(0, (uchar *) &tiRecordTime, sizeof(time));
+                            PutChar(6, bGmtGps); break;
 
-//    case EVE_GPS_GOODGPS_2: memcpy(&reCurr.mpbBuff+0, &bSeasonCurr, sizeof(uchar));
-//                            memcpy(&reCurr.mpbBuff+1, &boSeasonGPS, sizeof(uchar)); break;
+    case EVE_GPS_GOODGPS_2: PutChar(0, bSeasonCurr);
+                            PutChar(1, boSeasonGps); break;
 
     case EVE_EXT_CORRECT2:
     case EVE_ESC_K:
@@ -207,7 +207,7 @@ bool    AddKeyRecord(event  ev)
     case EVE_INQ_CORRECT1:
     case EVE_INQ_CORRECT2:
     case EVE_INQ_CORRECT4:
-    case EVE_PROGRAM_2:     Put(0, (uchar *) &tiRecordSetCurrTime, sizeof(time));
+    case EVE_PROGRAM_2:     Put(0, (uchar *) &tiRecordTime, sizeof(time));
   }
 
   CloseRecord(KEY_RECORD, i);
