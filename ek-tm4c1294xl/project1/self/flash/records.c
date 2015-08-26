@@ -191,9 +191,9 @@ bool    AddKeyRecord(event  ev)
 
   switch (ev)
   {
-    case EVE_GPS_GOODLINK:  Put(0, (uchar *) &tiGPS, sizeof(time)); break;
+    case EVE_GPS_GOODLINK:  Put(0, (uchar *) &tiGps, sizeof(time)); break;
 
-    case EVE_GPS_BADGPS:    PutChar(0, bStatusGPS); break;
+    case EVE_GPS_BADGPS:    PutChar(0, bStatusGps); break;
 
     case EVE_GPS_GOODGPS_1: Put(0, (uchar *) &tiRecordTime, sizeof(time));
                             PutChar(6, bGmtGps); break;
