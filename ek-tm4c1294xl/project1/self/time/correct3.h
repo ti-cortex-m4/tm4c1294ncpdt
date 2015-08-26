@@ -9,6 +9,7 @@ CORRECT3.H
 
 
 extern  cache const             chCorrect3Flag;
+extern  cache const             chCorrect3Max;
 
 
 
