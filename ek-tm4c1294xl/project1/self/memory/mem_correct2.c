@@ -12,7 +12,7 @@ MEM_CORRECT2.C
 bool                    boCorrect2Flag;
 
 // счетчики событий
-uint                    mpcwCorrect2[15];
+uint                    mpcwCorrect2Status15[15];
 
 // буфер пароля
 uchar                   mpbPassCorrect2[10];

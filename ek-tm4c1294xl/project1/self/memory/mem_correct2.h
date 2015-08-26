@@ -6,7 +6,7 @@ MEM_CORRECT2.H
 
 extern  bool                    boCorrect2Flag;
 
-extern  uint                    mpcwCorrect2[15];
+extern  uint                    mpcwCorrect2Status15[15];
 
 extern  uchar                   mpbPassCorrect2[10];
 
