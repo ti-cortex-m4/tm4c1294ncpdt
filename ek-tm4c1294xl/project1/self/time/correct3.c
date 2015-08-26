@@ -85,9 +85,9 @@ void    OutCorrect3(void)
   PushLong(cdwAbsCorrect3);
   PushLong(cdwPosCorrect3);
   PushChar(bCorrect3Max);
-  Push(&tiPosCorrect3, sizeof(time));
-  Push(&tiNegCorrect3, sizeof(time));
-  PushChar(Correct3Disabled() ? true : false);
+  PushTime(tiPosCorrect3);
+  PushTime(tiNegCorrect3);
+  PushBool(Correct3Disabled());
   Push(&mpcwCorrect3, sizeof(mpcwCorrect3)); // TODO
 
   Output(100);

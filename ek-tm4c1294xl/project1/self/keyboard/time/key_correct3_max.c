@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_CORRECT31.C
+KEY_CORRECT3_MAX.C
 
 
 ------------------------------------------------------------------------------*/
@@ -27,7 +27,7 @@ static void Show(void)
 }
 
 
-void    key_SetCorrect31(void)
+void    key_SetCorrect3Max(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -48,10 +48,12 @@ void    key_SetCorrect31(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = GetCharLo(6,8);
-      if ((ibX > 0) && (ibX <= 100))
+      uchar b = GetCharLo(6,8);
+      if ((b >= 1) && (b <= 100))
       {
-        bCorrect3Max = ibX;
+        bCorrect3Max = b;
+        SaveCache(&chCorrect3Max);
+
         Show();
       }
       else 
