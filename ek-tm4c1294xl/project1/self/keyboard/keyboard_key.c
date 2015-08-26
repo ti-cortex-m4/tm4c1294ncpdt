@@ -117,7 +117,7 @@ KEYBOARD_KEY.C
 #include "time/key_correct2_flag.h"
 #include "time/key_correct3_flag.h"
 #include "time/key_correct3_value.h"
-#include "time/key_correct3_status.h"
+#include "time/key_correct3_info.h"
 #include "sensors/key_plc_u_flag.h"
 #include "sensors/key_plc_u_size.h"
 #include "sensors/key_plc_u_shutdown.h"
@@ -190,8 +190,8 @@ void    Keyboard_Key(void)
 
       case bSET_CORRECT2_FLAG:  key_SetCorrect2Flag();  break;
       case bSET_CORRECT3_FLAG:  key_SetCorrect3Flag();  break;
-      case bSET_CORRECT3_VALUE: key_SetCorrect3Value();   break;
-      case bSET_CORRECT3_STATUS:key_SetCorrect3Status();break;
+      case bSET_CORRECT3_VALUE: key_SetCorrect3Value(); break;
+      case bSET_CORRECT3_INFO:  key_SetCorrect3Info();  break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
@@ -370,7 +370,7 @@ void    Keyboard_Key(void)
       case bSET_CORRECT2_FLAG:  key_SetCorrect2Flag();  break;
       case bSET_CORRECT3_FLAG:  key_SetCorrect3Flag();  break;
       case bSET_CORRECT3_VALUE: key_SetCorrect3Value(); break;
-      case bSET_CORRECT3_STATUS:key_SetCorrect3Status();break;
+      case bSET_CORRECT3_INFO:  key_SetCorrect3Info();  break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
@@ -631,7 +631,7 @@ void    Keyboard_Key(void)
       case bSET_CORRECT2_FLAG:  key_SetCorrect2Flag();  break;
       case bSET_CORRECT3_FLAG:  key_SetCorrect3Flag();  break;
       case bSET_CORRECT3_VALUE: key_SetCorrect3Value(); break;
-      case bSET_CORRECT3_STATUS:key_SetCorrect3Status();break;
+      case bSET_CORRECT3_INFO:  key_SetCorrect3Info();  break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
