@@ -44,10 +44,14 @@ static uchar ibHhr;
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      enKeyboard = KBD_INPUT1;
-      LoadSlide(pszMessages);
+      if (UseGps())
+      {
+        enKeyboard = KBD_INPUT1;
+        LoadSlide(pszMessages);
 
-      HalfHour();
+        HalfHour();
+      }
+      else BlockProgram(bSET_GPS_CONFIG);
     } 
     else if (enKeyboard == KBD_INPUT1)
     {

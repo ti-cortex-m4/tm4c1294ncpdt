@@ -47,6 +47,8 @@ void    key_SetGpsConfig(void)
       if (bPrt == 0)
       {
         bPortGps = 0;
+        SaveCache(&chPortGps);
+
         Show();
       }
       else if (bPrt <= bPORTS)
