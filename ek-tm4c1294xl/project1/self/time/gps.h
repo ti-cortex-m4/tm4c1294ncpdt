@@ -27,6 +27,8 @@ extern  cache const             chScheduleGps;
 void    InitGps(void);
 void    ResetGps(void);
 
+bool    UseGps(void);
+
 bool    ShowStatusGps(void);
 time2   ReadTimeDateGps(void);
 void    ShowTimeDateGps(bool  fShowTimeDate);

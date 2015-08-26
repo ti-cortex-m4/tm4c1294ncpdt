@@ -20,5 +20,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 void    key_SetGpsSeason(void)
 {
-  key_SetBoolBlocked(&chSeasonGps, pszMessages, ((bPortGps > 0) && (bPortGps <= bPORTS)), bSET_GPS_CONFIG);
+  key_SetBoolBlocked(&chSeasonGps, pszMessages, UseGps(), bSET_GPS_CONFIG);
 }

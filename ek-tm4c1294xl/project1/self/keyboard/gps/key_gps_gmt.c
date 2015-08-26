@@ -29,7 +29,7 @@ void    key_SetGpsGmt(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if ((bPortGps > 0) && (bPortGps <= bPORTS))
+      if (UseGps())
       {
         enKeyboard = KBD_POSTENTER;
         Clear();

@@ -74,6 +74,13 @@ void    ResetGps(void)
 
 
 
+bool    UseGps(void)
+{
+  return ((bPortGps > 0) && (bPortGps <= bPORTS));
+}
+
+
+
 bool    ShowStatusGps(void)
 {
   if (bStatusGps == 0) return(1);
