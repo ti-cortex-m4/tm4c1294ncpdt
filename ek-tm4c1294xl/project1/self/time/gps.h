@@ -24,8 +24,8 @@ bool    ShowStatusGps(void);
 time2   ReadTimeDateGps(void);
 void    ShowTimeDateGps(bool  fShowTimeDate);
 
-void    SetupTimeGPS(void);
-void    CorrectTimeGPS(void);
+void    SetupTimeGps(void);
+void    CorrectTimeGps(void);
 
-void    RunGPS(void);
+void    RunGps(void);
 
