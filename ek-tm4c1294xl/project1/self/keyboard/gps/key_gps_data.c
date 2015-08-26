@@ -53,7 +53,7 @@ void    key_GetGpsData(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if ((bPortGps > 0) && (bPortGps <= bPORTS))
+      if (UseGps())
       {
         enKeyboard = KBD_POSTENTER;
 
