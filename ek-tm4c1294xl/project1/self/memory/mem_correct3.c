@@ -21,4 +21,4 @@ uint                    mpcwCorrect3Status15[15];
 ulong                   dwCorrect3Total, dwCorrect3Success;
 
 // переменные
-time                    tiPosCorrect3, tiNegCorrect3;
+time                    tiCorrect3Sucess, tiCorrect3ErrorTime;

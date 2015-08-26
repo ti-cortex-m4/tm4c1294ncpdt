@@ -16,8 +16,12 @@ CORRECT3.C
 
 cache const             chCorrect3Flag = {CORRECT3_FLAG, &boCorrect3Flag, sizeof(bool)};
 cache const             chCorrect3SuccessMax = {CORRECT3_SUCCESS_MAX, &bCorrect3SuccessMax, sizeof(uchar)};
+
 cache const             chCorrect3Total = {CORRECT3_TOTAL, &dwCorrect3Total, sizeof(ulong)};
 cache const             chCorrect3Success = {CORRECT3_SUCCESS, &dwCorrect3Success, sizeof(ulong)};
+
+cache const             chCorrect3SuccessTime = {CORRECT3_SUCCESS_TIME, &tiCorrect3Sucess, sizeof(time)};
+cache const             chCorrect3ErrorTime = {CORRECT3_ERROR_TIME, &tiCorrect3ErrorTime, sizeof(time)};
 
 
 
@@ -28,6 +32,9 @@ void    InitCorrect3(void)
 
   LoadCache(&chCorrect3Total);
   LoadCache(&chCorrect3Success);
+
+  LoadCache(&chCorrect3SuccessTime);
+  LoadCache(&chCorrect3ErrorTime);
 }
 
 
@@ -45,8 +52,11 @@ void    ResetCorrect3(void)
   dwCorrect3Success = 0;
   SaveCache(&chCorrect3Success);
 
-  memset(&tiPosCorrect3, 0, sizeof(tiPosCorrect3));
-  memset(&tiNegCorrect3, 0, sizeof(tiNegCorrect3));
+  memset(&tiCorrect3Sucess, 0, sizeof(tiCorrect3Sucess));
+  SaveCache(&chCorrect3SuccessTime);
+
+  memset(&tiCorrect3ErrorTime, 0, sizeof(tiCorrect3ErrorTime));
+  SaveCache(&chCorrect3ErrorTime);
 
   memset(&mpcwCorrect3Status15, 0, sizeof(mpcwCorrect3Status15));
 }
@@ -93,8 +103,8 @@ void    OutCorrect3(void)
   PushLong(dwCorrect3Total);
   PushLong(dwCorrect3Success);
   PushChar(bCorrect3SuccessMax);
-  PushTime(tiPosCorrect3);
-  PushTime(tiNegCorrect3);
+  PushTime(tiCorrect3Sucess);
+  PushTime(tiCorrect3ErrorTime);
   PushBool(Correct3Disabled());
   PushIntArray(mpcwCorrect3Status15, 15);
 

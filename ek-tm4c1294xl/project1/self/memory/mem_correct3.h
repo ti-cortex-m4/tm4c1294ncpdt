@@ -12,4 +12,4 @@ extern  uint                    mpcwCorrect3Status15[15];
 
 extern  ulong                   dwCorrect3Total, dwCorrect3Success;
 
-extern  time                    tiPosCorrect3, tiNegCorrect3;
+extern  time                    tiCorrect3Sucess, tiCorrect3ErrorTime;
