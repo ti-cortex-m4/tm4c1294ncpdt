@@ -351,14 +351,16 @@ void    CorrectTimeGps(void)
     dwCorrect3Success++;
     SaveCache(&chCorrect3Success);
 
-    tiPosCorrect3 = *GetCurrTimeDate();
+    tiCorrect3Sucess = *GetCurrTimeDate();
+    SaveCache(&chCorrect3SuccessTime);
   }
   else 
   {
     dwCorrect3Success = 0;
     SaveCache(&chCorrect3Success);
 
-    tiNegCorrect3 = *GetCurrTimeDate();
+    tiCorrect3ErrorTime = *GetCurrTimeDate();
+    SaveCache(&chCorrect3ErrorTime);
   }
 }
 

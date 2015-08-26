@@ -14,6 +14,9 @@ extern  cache const             chCorrect3SuccessMax;
 extern  cache const             chCorrect3Total;
 extern  cache const             chCorrect3Success;
 
+extern  cache const             chCorrect3SuccessTime;
+extern  cache const             chCorrect3ErrorTime;
+
 
 
 void    InitCorrect3(void);
