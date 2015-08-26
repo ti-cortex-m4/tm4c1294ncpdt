@@ -358,7 +358,7 @@ void    CorrectTimeGps(void)
 
 void    RunGps(void)
 {
-  if ((bPortGps == 0) || (bPortGps > bPORTS)) return;
+  if (UseGps() == false) return;
 
   if ((tiCurr.bDay   == tiSummer.bDay) &&
       (tiCurr.bMonth == tiSummer.bMonth)) return;
