@@ -12,6 +12,13 @@ KEY_GPS_DATA,C
 
 
 
+//                                         0123456789ABCDEF
+static char const       szTimeGps[]      = "Время GPS       ",
+                        szDeltaTimeGps[] = "Время GPS       ",
+                        szTimeDateGps[]  = "Дата GPS        ",
+                        szVersionGps[]   = "Версия GPS      ";
+
+
 static uchar            ibVal;
 
 
