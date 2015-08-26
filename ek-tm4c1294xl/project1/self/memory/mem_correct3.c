@@ -15,7 +15,7 @@ bool                    boCorrect3Flag;
 uchar                   bCorrect3SuccessMax;
 
 // счетчики событий
-uint                    mpcwCorrect3[15];
+uint                    mpcwCorrect3Status15[15];
 
 // переменные
 ulong                   dwCorrect3Total, dwCorrect3Success;

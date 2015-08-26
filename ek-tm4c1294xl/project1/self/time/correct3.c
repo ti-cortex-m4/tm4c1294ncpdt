@@ -48,7 +48,7 @@ void    ResetCorrect3(void)
   memset(&tiPosCorrect3, 0, sizeof(tiPosCorrect3));
   memset(&tiNegCorrect3, 0, sizeof(tiNegCorrect3));
 
-  memset(&mpcwCorrect3, 0, sizeof(mpcwCorrect3));
+  memset(&mpcwCorrect3Status15, 0, sizeof(mpcwCorrect3Status15));
 }
 
 /*
@@ -73,8 +73,8 @@ void    Correct3(event  ev)
   uchar i;
   if ((i = GetCorrectIndex(ev)) == 0) return;
 
-  mpcwCorrect3[0]++;
-  mpcwCorrect3[i]++;
+  mpcwCorrect3Status15[0]++;
+  mpcwCorrect3Status15[i]++;
 }
 
 
@@ -96,7 +96,7 @@ void    OutCorrect3(void)
   PushTime(tiPosCorrect3);
   PushTime(tiNegCorrect3);
   PushBool(Correct3Disabled());
-  Push(&mpcwCorrect3, sizeof(mpcwCorrect3)); // TODO
+  PushIntArray(mpcwCorrect3Status15, 15);
 
   Output(100);
 }
