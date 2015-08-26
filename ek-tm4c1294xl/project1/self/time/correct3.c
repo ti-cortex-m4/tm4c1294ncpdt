@@ -61,20 +61,20 @@ void    ResetCorrect3(void)
   memset(&mpcwCorrect3Status15, 0, sizeof(mpcwCorrect3Status15));
 }
 
-/*
-bit     Correct3Allowed(void)
+
+
+bool    Correct3Allowed(void)
 {
-  return (cdwPosCorrect3 < bCorrect3Max);
+  return (dwCorrect3Success < bCorrect3SuccessMax);
 }
-*/
+
 
 bool    Correct3Disabled(void)
 {
-//  if ((bPortGPS == 0) || (bPortGPS > bPORTS)) return 0;
-//  if (boCorrect3 == false) return 0;
-//
-//  return !Correct3Allowed();
-  return false;
+  if (UseGps() == false) return false;
+  if (boCorrect3Flag == false) return false;
+
+  return (Correct3Allowed() == false);
 }
 
 
