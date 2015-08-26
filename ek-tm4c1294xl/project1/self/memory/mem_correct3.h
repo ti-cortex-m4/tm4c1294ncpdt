@@ -6,10 +6,10 @@ MEM_CORRECT3.H
 
 extern  bool                    boCorrect3Flag;
 
-extern  uchar                   bCorrect3Max;
+extern  uchar                   bCorrect3SuccessMax;
 
 extern  uint                    mpcwCorrect3[15];
 
-extern  ulong                   cdwAbsCorrect3, cdwPosCorrect3;
+extern  ulong                   dwCorrect3Total, dwCorrect3Success;
 
 extern  time                    tiPosCorrect3, tiNegCorrect3;

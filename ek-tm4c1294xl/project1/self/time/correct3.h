@@ -9,7 +9,10 @@ CORRECT3.H
 
 
 extern  cache const             chCorrect3Flag;
-extern  cache const             chCorrect3Max;
+extern  cache const             chCorrect3SuccessMax;
+
+extern  cache const             chCorrect3Total;
+extern  cache const             chCorrect3Success;
 
 
 

@@ -34,7 +34,7 @@ void    key_SetCorrect3Status(void)
         LoadSlide(pszMessages);    
         
         Clear();
-        sprintf(szLo,"%lu:%lu:%u", cdwAbsCorrect3, cdwPosCorrect3, bCorrect3Max);
+        sprintf(szLo,"%lu:%lu:%u", dwCorrect3Total, dwCorrect3Success, bCorrect3SuccessMax);
         szLo[15] = (Correct3Disabled() ? '-' : '+');
       }
       else BlockProgram(bSET_CORRECT3_FLAG);

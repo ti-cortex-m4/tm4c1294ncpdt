@@ -15,14 +15,19 @@ CORRECT3.C
 
 
 cache const             chCorrect3Flag = {CORRECT3_FLAG, &boCorrect3Flag, sizeof(bool)};
-cache const             chCorrect3Max = {CORRECT3_MAX, &bCorrect3Max, sizeof(uchar)};
+cache const             chCorrect3SuccessMax = {CORRECT3_SUCCESS_MAX, &bCorrect3SuccessMax, sizeof(uchar)};
+cache const             chCorrect3Total = {CORRECT3_TOTAL, &dwCorrect3Total, sizeof(ulong)};
+cache const             chCorrect3Success = {CORRECT3_SUCCESS, &dwCorrect3Success, sizeof(ulong)};
 
 
 
 void    InitCorrect3(void)
 {
   LoadCacheBool(&chCorrect3Flag,false);
-  LoadCacheChar(&chCorrect3Max,1,100,3);
+  LoadCacheChar(&chCorrect3SuccessMax, 1, 100, 3);
+
+  LoadCache(&chCorrect3Total);
+  LoadCache(&chCorrect3Success);
 }
 
 
@@ -31,11 +36,14 @@ void    ResetCorrect3(void)
   boCorrect3Flag = false;
   SaveCache(&chCorrect3Flag);
 
-  bCorrect3Max = 3;
-  SaveCache(&chCorrect3Max);
+  bCorrect3SuccessMax = 3;
+  SaveCache(&chCorrect3SuccessMax);
 
-  cdwAbsCorrect3 = 0;
-  cdwPosCorrect3 = 0;
+  dwCorrect3Total = 0;
+  SaveCache(&chCorrect3Total);
+
+  dwCorrect3Success = 0;
+  SaveCache(&chCorrect3Success);
 
   memset(&tiPosCorrect3, 0, sizeof(tiPosCorrect3));
   memset(&tiNegCorrect3, 0, sizeof(tiNegCorrect3));
@@ -82,9 +90,9 @@ void    OutCorrect3(void)
 
   PushBool(UseGps());
   PushBool(boCorrect3Flag);
-  PushLong(cdwAbsCorrect3);
-  PushLong(cdwPosCorrect3);
-  PushChar(bCorrect3Max);
+  PushLong(dwCorrect3Total);
+  PushLong(dwCorrect3Success);
+  PushChar(bCorrect3SuccessMax);
   PushTime(tiPosCorrect3);
   PushTime(tiNegCorrect3);
   PushBool(Correct3Disabled());
