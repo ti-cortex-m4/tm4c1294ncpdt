@@ -147,7 +147,7 @@
 +   #define bSET_CORRECT2               75
 +   #define bSET_CORRECT30              76
 +   #define bSET_CORRECT31              77
-#define bSET_CORRECT32              86
++   #define bSET_CORRECT32              86
 
 #ifdef  DS80C400
 #define bSET_ENBLHOURS              182
