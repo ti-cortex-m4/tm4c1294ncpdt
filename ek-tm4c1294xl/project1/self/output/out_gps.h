@@ -4,4 +4,4 @@ OUT_GPS.H
 
 ------------------------------------------------------------------------------*/
 
-void    OutGetGps(void);
+void    OutCorrectGps(void);

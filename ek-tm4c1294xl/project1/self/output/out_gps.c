@@ -13,7 +13,7 @@ OUT_GPS.C
 
 
 
-void    OutGetGps(void)
+void    OutCorrectGps(void)
 {
   InitPushCRC();
   PushChar(bPortGps);
