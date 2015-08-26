@@ -4,6 +4,10 @@ CORRECT2.H
 
 ------------------------------------------------------------------------------*/
 
+#include "../memory/mem_correct2.h"
+
+
+
 extern  cache const             chCorrect2Flag;
 
 

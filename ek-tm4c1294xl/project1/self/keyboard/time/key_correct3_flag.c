@@ -5,56 +5,22 @@ KEY_CORRECT3_FLAG.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../console.h"
-#include "../../memory/mem_correct3.h"
 #include "../../time/gps.h"
 #include "../../time/correct3.h"
+#include "../common/key_bool_blocked.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szTaking30[]    = "Учет работы GPS ",
-                        szCorrect30[]   = " при коррекции  ",
-                        szTime30[]      = "   времени ?    ";
+static char const       szMessage1[]    = "Учет работы GPS ",
+                        szMessage2[]    = " при коррекции  ",
+                        szMessage3[]    = "   времени ?    ";
 
-                        
-static char const      *pszCorrect30[]  = { szTaking30, szCorrect30, szTime30, "" };
+static char const      *pszMessages[]   = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
 void    key_SetCorrect3Flag(void)
 {
-  if (bKey == bKEY_ENTER)
-  {
-    if (enKeyboard == KBD_ENTER)  
-    {
-      if (UseGps())
-      {
-        enKeyboard = KBD_INPUT1;
-        Clear();
-      
-        LoadSlide(pszCorrect30);    
-        ShowBool(boCorrect3Flag);
-      }
-      else BlockProgram(bSET_GPS_CONFIG);
-    } 
-    else Beep();
-  }
-  
-
-  else if (bKey == bKEY_POINT)
-  {
-    if (enGlobal != GLB_WORK)
-    {
-      if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
-      {           
-        boCorrect3Flag = ~boCorrect3Flag;
-        ShowBool(boCorrect3Flag);
-      }
-      else Beep(); 
-    }
-    else Beep(); 
-  } 
-  else Beep(); 
+  key_SetBoolBlocked(&chCorrect3Flag, pszMessages, UseGps(), bSET_GPS_CONFIG);
 }
-
