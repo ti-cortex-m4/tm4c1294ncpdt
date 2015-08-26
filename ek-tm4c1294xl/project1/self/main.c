@@ -74,6 +74,7 @@ MAIN,C
 #include "time/gps.h"
 #include "time/correct1.h"
 #include "time/correct2.h"
+#include "time/correct3.h"
 #include "special/recalc.h"
 #include "realtime/realtime.h"
 #include "realtime/realtime_init.h"
@@ -120,6 +121,7 @@ int     main(void)
   InitGps();
   InitCorrect1();
   InitCorrect2();
+  InitCorrect3();
   InitDigitals();
   InitLimits();
   InitDevices1();

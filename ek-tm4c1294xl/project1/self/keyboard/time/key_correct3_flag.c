@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_CORRECT30.C
+KEY_CORRECT3_FLAG.C
 
 
 ------------------------------------------------------------------------------*/
@@ -22,7 +22,7 @@ static char const      *pszCorrect30[]  = { szTaking30, szCorrect30, szTime30, "
 
 
 
-void    key_SetCorrect30(void)
+void    key_SetCorrect3Flag(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -34,7 +34,7 @@ void    key_SetCorrect30(void)
         Clear();
       
         LoadSlide(pszCorrect30);    
-        ShowBool(boCorrect3);
+        ShowBool(boCorrect3Flag);
       }
       else BlockProgram(bSET_GPS_CONFIG);
     } 
@@ -48,8 +48,8 @@ void    key_SetCorrect30(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        boCorrect3 = ~boCorrect3;
-        ShowBool(boCorrect3);
+        boCorrect3Flag = ~boCorrect3Flag;
+        ShowBool(boCorrect3Flag);
       }
       else Beep(); 
     }

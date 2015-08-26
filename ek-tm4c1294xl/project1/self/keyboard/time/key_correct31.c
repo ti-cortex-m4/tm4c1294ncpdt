@@ -33,7 +33,7 @@ void    key_SetCorrect31(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (boCorrect3 == true)
+      if (boCorrect3Flag == true)
       {
         enKeyboard = KBD_POSTENTER;
 

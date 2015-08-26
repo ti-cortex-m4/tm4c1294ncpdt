@@ -33,6 +33,7 @@ KEY_RESET.C
 #include "../time/gps.h"
 #include "../time/correct1.h"
 #include "../time/correct2.h"
+#include "../time/correct3.h"
 
 
 
@@ -89,7 +90,7 @@ void    key_SetReset(void)
           ResetDecret();
           ResetCorrect1();
           ResetCorrect2();
-//          ResetCorrect3();
+          ResetCorrect3();
           ResetLimits();
 //          ResetGaps();
 //          ResetExtended3();
@@ -131,7 +132,7 @@ void    key_SetReset(void)
           ResetGps();
           ResetCorrect1();
           ResetCorrect2();
-//          ResetCorrect3();
+          ResetCorrect3();
           ResetGroups();
           ResetFactors();
           ResetZones();

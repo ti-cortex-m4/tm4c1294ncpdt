@@ -26,7 +26,7 @@ void    key_SetCorrect32(void)
   {
     if (enKeyboard == KBD_ENTER)  
     {
-      if (boCorrect3 == true)
+      if (boCorrect3Flag == true)
       {
         enKeyboard = KBD_INPUT1;
         Clear();

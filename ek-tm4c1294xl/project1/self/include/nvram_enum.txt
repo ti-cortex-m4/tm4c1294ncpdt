@@ -204,5 +204,7 @@ typedef enum
   SEASON_GPS            = GMT_GPS + sizeof(uchar) + bNVRAM_FOOTER,
   SCHEDULE_GPS          = SEASON_GPS + sizeof(bool) + bNVRAM_FOOTER,
 
-  NVRAM_END             = SCHEDULE_GPS + sizeof(mpboScheduleGps) + bNVRAM_FOOTER
+  CORRECT3_FLAG         = SCHEDULE_GPS + sizeof(mpboScheduleGps) + bNVRAM_FOOTER,
+
+  NVRAM_END             = CORRECT3_FLAG + sizeof(bool) + bNVRAM_FOOTER
 } nvram;
