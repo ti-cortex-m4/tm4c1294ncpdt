@@ -12,11 +12,11 @@ _CORRECT32.C
 
 
 //                                         0123456789ABCDEF
-static char const       szStatus32[]    = "   Состояние    ",
-                        szCorrect32[]   = " при коррекции  ",
-                        szTime32[]      = "    времени     ";
+static char const       szMessage1[]    = "   Состояние    ",
+                        szMessage2[]    = " при коррекции  ",
+                        szMessage3[]    = "    времени     ";
                         
-static char const      *pszCorrect32[]  = { szStatus32, szCorrect32, szTime32, "" };
+static char const      *pszMessages[]   = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
@@ -31,7 +31,7 @@ void    key_SetCorrect3Status(void)
         enKeyboard = KBD_INPUT1;
         Clear();
       
-        LoadSlide(pszCorrect32);    
+        LoadSlide(pszMessages);    
         
         Clear();
         sprintf(szLo,"%lu:%lu:%u", cdwAbsCorrect3, cdwPosCorrect3, bCorrect3Max);
@@ -43,4 +43,3 @@ void    key_SetCorrect3Status(void)
   }
   else Beep(); 
 }
-

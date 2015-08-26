@@ -185,7 +185,7 @@ PROGRAMS.H
 
 #define bSET_CORRECT2_FLAG          75
 #define bSET_CORRECT3_FLAG          76
-#define bSET_CORRECT3_MAX           77
+#define bSET_CORRECT3_VALUE         77
 #define bSET_CORRECT3_STATUS        86
 
 #define bSET_DIGITALS               90
