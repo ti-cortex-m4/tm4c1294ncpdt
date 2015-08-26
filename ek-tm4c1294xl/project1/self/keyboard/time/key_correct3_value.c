@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_CORRECT3_MAX.C
+KEY_CORRECT3_VALUE.C
 
 
 ------------------------------------------------------------------------------*/
@@ -27,7 +27,7 @@ static void Show(void)
 }
 
 
-void    key_SetCorrect3Max(void)
+void    key_SetCorrect3Value(void)
 {
   if (bKey == bKEY_ENTER)
   {
