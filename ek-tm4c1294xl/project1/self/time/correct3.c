@@ -8,6 +8,7 @@ CORRECT3.C
 #include "../serial/ports.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
+#include "../time/timedate.h"
 #include "../time/gps.h"
 #include "correct1.h"
 #include "correct3.h"
