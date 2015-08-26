@@ -84,8 +84,9 @@ bool    ShowStatusGps(void)
   if (bStatusGps == 0) return(1);
 
   Clear(); sprintf(szLo+2,"состояние: %u",bStatusGps);
+  DelayMsg();
+  Clear();
 
-  DelayMsg(); Clear();
   return(0);
 }
 
@@ -205,7 +206,7 @@ void    ShowTimeDateGps(bool  fShowTimeDate)
 
 
 
-void    SetupTimeGPS(void)
+void    SetupTimeGps(void)
 {
   time2 ti2 = ReadTimeDateGps();
   time ti = ti2.tiValue;
@@ -237,7 +238,7 @@ void    SetupTimeGPS(void)
 
 
 
-void    CalcCorrect(ulong  dw)
+static void CalcStatusGps(ulong  dw)
 {
   if (dw <   2) mpcwGpsStatus[9]++;
   if (dw <   5) mpcwGpsStatus[10]++;
@@ -247,8 +248,7 @@ void    CalcCorrect(ulong  dw)
 }
 
 
-
-bool    SetTimeGPS(void)
+static bool SetTimeGps(void)
 {
   mpcwGpsStatus[0]++;
 
@@ -317,7 +317,7 @@ bool    SetTimeGPS(void)
           Correct1.mpwPosCountCurr[0]++;
           Correct1.mpwPosCountCurr[1]++;
 
-          CalcCorrect(dw);
+          CalcStatusGps(dw);
         }
         else
         {
@@ -328,7 +328,7 @@ bool    SetTimeGPS(void)
           Correct1.mpwNegCountCurr[0]++;
           Correct1.mpwNegCountCurr[1]++;
 
-          CalcCorrect(dw);
+          CalcStatusGps(dw);
         }
 
         return 1;
@@ -340,11 +340,10 @@ bool    SetTimeGPS(void)
 }
 
 
-
-void    CorrectTimeGPS(void)
+void    CorrectTimeGps(void)
 {
   cdwAbsCorrect3++;
-  if (SetTimeGPS() == 1) 
+  if (SetTimeGps() == 1)
   { 
     cdwPosCorrect3++;
     tiPosCorrect3 = *GetCurrTimeDate();
@@ -357,11 +356,8 @@ void    CorrectTimeGPS(void)
 }
 
 
-
-void    RunGPS(void)
+void    RunGps(void)
 {
-uchar   i;
-
   if ((bPortGps == 0) || (bPortGps > bPORTS)) return;
 
   if ((tiCurr.bDay   == tiSummer.bDay) &&
@@ -370,12 +366,11 @@ uchar   i;
   if ((tiCurr.bDay   == tiWinter.bDay) &&
       (tiCurr.bMonth == tiWinter.bMonth)) return;
 
-  i = tiCurr.bMinute/15;
+  uchar i = tiCurr.bMinute/15;
   if ((i == 0) || (i == 2)) return;
 
   if (mpboScheduleGps[ GetCurrHouIndex() ] == false) return;
 
   AddKeyRecord(EVE_GPS_AUTO);
-  CorrectTimeGPS();
+  CorrectTimeGps();
 }
-

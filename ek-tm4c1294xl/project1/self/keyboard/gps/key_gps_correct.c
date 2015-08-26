@@ -63,11 +63,11 @@ void    key_GetGpsCorrect(void)
     if (enKeyboard == KBD_POSTENTER)
     {
       if (enGlobal == GLB_PROGRAM) 
-        SetupTimeGPS();
+        SetupTimeGps();
       else
       {
         AddKeyRecord(EVE_GPS_MANUAL);
-        CorrectTimeGPS();
+        CorrectTimeGps();
       }
     }
     else Beep();
