@@ -191,7 +191,7 @@ void    Keyboard_Key(void)
       case bSET_CORRECT2_FLAG:  key_SetCorrect2Flag();  break;
       case bSET_CORRECT3_FLAG:  key_SetCorrect3Flag();  break;
       case bSET_CORRECT3_MAX:   key_SetCorrect3Max();   break;
-      case bSET_CORRECT32:      key_SetCorrect32();     break;
+      case bSET_CORRECT3_STATUS:key_SetCorrect3Status();break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
@@ -370,7 +370,7 @@ void    Keyboard_Key(void)
       case bSET_CORRECT2_FLAG:  key_SetCorrect2Flag();  break;
       case bSET_CORRECT3_FLAG:  key_SetCorrect3Flag();  break;
       case bSET_CORRECT3_MAX:   key_SetCorrect3Max();   break;
-      case bSET_CORRECT32:      key_SetCorrect32();     break;
+      case bSET_CORRECT3_STATUS:key_SetCorrect3Status();break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;
@@ -631,7 +631,7 @@ void    Keyboard_Key(void)
       case bSET_CORRECT2_FLAG:  key_SetCorrect2Flag();  break;
       case bSET_CORRECT3_FLAG:  key_SetCorrect3Flag();  break;
       case bSET_CORRECT3_MAX:   key_SetCorrect3Max();   break;
-      case bSET_CORRECT32:      key_SetCorrect32();     break;
+      case bSET_CORRECT3_STATUS:key_SetCorrect3Status();break;
 
       case bSET_DIGITALS:       key_SetDigitals();      break;
       case bSET_ENBL_HOURS:     key_SetEnblHours();     break;

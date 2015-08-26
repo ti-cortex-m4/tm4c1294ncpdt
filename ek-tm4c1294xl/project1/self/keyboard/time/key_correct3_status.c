@@ -20,7 +20,7 @@ static char const      *pszCorrect32[]  = { szStatus32, szCorrect32, szTime32, "
 
 
 
-void    key_SetCorrect32(void)
+void    key_SetCorrect3Status(void)
 {
   if (bKey == bKEY_ENTER)
   {
