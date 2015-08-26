@@ -4,6 +4,10 @@ CORRECT3.H
 
 ------------------------------------------------------------------------------*/
 
+#include "../memory/mem_correct3.h"
+
+
+
 extern  cache const             chCorrect3Flag;
 
 

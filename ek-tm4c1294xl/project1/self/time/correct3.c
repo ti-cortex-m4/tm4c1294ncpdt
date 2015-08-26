@@ -5,8 +5,6 @@ CORRECT3.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_correct3.h"
-#include "../memory/mem_gps.h"
 #include "../serial/ports.h"
 #include "../nvram/cache.h"
 #include "../time/gps.h"
@@ -60,11 +58,11 @@ bool    Correct3Disabled(void)
 
 void    Correct3(event  ev)
 {
-//  uchar i;
-//  if ((i = GetCorrectIndex(ev)) == 0) return;
-//
-//  mpcwCorrect3[0]++;
-//  mpcwCorrect3[i]++;
+  uchar i;
+  if ((i = GetCorrectIndex(ev)) == 0) return;
+
+  mpcwCorrect3[0]++;
+  mpcwCorrect3[i]++;
 }
 
 
@@ -78,7 +76,7 @@ void    OutCorrect3(void)
 
   InitPushCRC();
 
-  PushChar(UseGps() ? true : false); // TODO
+  PushBool(UseGps());
   PushBool(boCorrect3Flag);
   PushLong(cdwAbsCorrect3);
   PushLong(cdwPosCorrect3);
