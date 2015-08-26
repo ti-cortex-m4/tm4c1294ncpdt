@@ -294,7 +294,7 @@ void    key_CorrectTime(void)
       if (Correct3Disabled())
       {
         Correct3(EVE_PROGRAM_2);
-        BlockPrograms(bSET_CORRECT30, bSET_CORRECT32);
+        BlockPrograms(bSET_CORRECT3_FLAG, bSET_CORRECT32);
       }
       else
       {
