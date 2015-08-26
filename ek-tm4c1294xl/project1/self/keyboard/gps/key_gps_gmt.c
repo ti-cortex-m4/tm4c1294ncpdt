@@ -51,6 +51,7 @@ void    key_SetGpsGmt(void)
 
         Show();
       }
+      else Beep();
     }
     else Beep();
   }
