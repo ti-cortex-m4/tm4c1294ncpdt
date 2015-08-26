@@ -116,7 +116,7 @@ void    Response255_CRC(void)
     case bEXT_SETADDRESS: OutSetAddress(); break;
     case bEXT_GETADDRESSES: OutGetAddressesExt(); break;
 
-    case bEXT_GETGPS: OutGetGps(); break;
+    case bEXT_GETGPS: OutCorrectGps(); break;
 
     case bEXT_GETCURRENT: OutCurrentExt(); break;
 
