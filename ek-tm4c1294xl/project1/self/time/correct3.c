@@ -23,6 +23,8 @@ cache const             chCorrect3Success = {CORRECT3_SUCCESS, &dwCorrect3Succes
 cache const             chCorrect3SuccessTime = {CORRECT3_SUCCESS_TIME, &tiCorrect3Sucess, sizeof(time)};
 cache const             chCorrect3ErrorTime = {CORRECT3_ERROR_TIME, &tiCorrect3ErrorTime, sizeof(time)};
 
+cache const             chCorrect3Status15 = {CORRECT3_STATUS, &mpcwCorrect3Status15, sizeof(mpcwCorrect3Status15)};
+
 
 
 void    InitCorrect3(void)
@@ -35,6 +37,8 @@ void    InitCorrect3(void)
 
   LoadCache(&chCorrect3SuccessTime);
   LoadCache(&chCorrect3ErrorTime);
+
+  LoadCache(&chCorrect3Status15);
 }
 
 
@@ -52,13 +56,14 @@ void    ResetCorrect3(void)
   dwCorrect3Success = 0;
   SaveCache(&chCorrect3Success);
 
-  memset(&tiCorrect3Sucess, 0, sizeof(tiCorrect3Sucess));
+  tiCorrect3Sucess = tiZero;
   SaveCache(&chCorrect3SuccessTime);
 
-  memset(&tiCorrect3ErrorTime, 0, sizeof(tiCorrect3ErrorTime));
+  tiCorrect3ErrorTime = tiZero;
   SaveCache(&chCorrect3ErrorTime);
 
   memset(&mpcwCorrect3Status15, 0, sizeof(mpcwCorrect3Status15));
+  SaveCache(&chCorrect3Status15);
 }
 
 
@@ -85,6 +90,8 @@ void    Correct3(event  ev)
 
   mpcwCorrect3Status15[0]++;
   mpcwCorrect3Status15[i]++;
+
+  SaveCache(&chCorrect3Status15);
 }
 
 

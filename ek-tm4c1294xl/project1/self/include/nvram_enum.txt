@@ -210,6 +210,7 @@ typedef enum
   CORRECT3_SUCCESS      = CORRECT3_TOTAL + sizeof(ulong) + bNVRAM_FOOTER,
   CORRECT3_SUCCESS_TIME = CORRECT3_SUCCESS + sizeof(ulong) + bNVRAM_FOOTER,
   CORRECT3_ERROR_TIME   = CORRECT3_SUCCESS_TIME + sizeof(time) + bNVRAM_FOOTER,
+  CORRECT3_STATUS       = CORRECT3_ERROR_TIME + sizeof(time) + bNVRAM_FOOTER,
 
-  NVRAM_END             = CORRECT3_ERROR_TIME + sizeof(time) + bNVRAM_FOOTER
+  NVRAM_END             = CORRECT3_STATUS + sizeof(mpcwCorrect3Status15) + bNVRAM_FOOTER
 } nvram;
