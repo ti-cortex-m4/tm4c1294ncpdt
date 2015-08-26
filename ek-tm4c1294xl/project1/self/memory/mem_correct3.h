@@ -8,7 +8,7 @@ extern  bool                    boCorrect3Flag;
 
 extern  uchar                   bCorrect3SuccessMax;
 
-extern  uint                    mpcwCorrect3[15];
+extern  uint                    mpcwCorrect3Status15[15];
 
 extern  ulong                   dwCorrect3Total, dwCorrect3Success;
 
