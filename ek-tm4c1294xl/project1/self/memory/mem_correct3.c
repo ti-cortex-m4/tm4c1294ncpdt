@@ -12,13 +12,13 @@ MEM_CORRECT3.C
 bool                    boCorrect3Flag;
 
 // переменные
-uchar                   bCorrect3Max;
+uchar                   bCorrect3SuccessMax;
 
 // счетчики событий
 uint                    mpcwCorrect3[15];
 
 // переменные
-ulong                   cdwAbsCorrect3, cdwPosCorrect3;
+ulong                   dwCorrect3Total, dwCorrect3Success;
 
 // переменные
 time                    tiPosCorrect3, tiNegCorrect3;

@@ -116,7 +116,7 @@ KEYBOARD_KEY.C
 #include "devices/key_ext_6_flag.h"
 #include "time/key_correct2_flag.h"
 #include "time/key_correct3_flag.h"
-#include "time/key_correct3_max.h"
+#include "time/key_correct3_value.h"
 #include "time/key_correct3_status.h"
 #include "sensors/key_plc_u_flag.h"
 #include "sensors/key_plc_u_size.h"

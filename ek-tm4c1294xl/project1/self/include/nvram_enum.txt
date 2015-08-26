@@ -205,7 +205,9 @@ typedef enum
   SCHEDULE_GPS          = SEASON_GPS + sizeof(bool) + bNVRAM_FOOTER,
 
   CORRECT3_FLAG         = SCHEDULE_GPS + sizeof(mpboScheduleGps) + bNVRAM_FOOTER,
-  CORRECT3_MAX          = CORRECT3_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  CORRECT3_SUCCESS_MAX  = CORRECT3_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  CORRECT3_TOTAL        = CORRECT3_SUCCESS_MAX + sizeof(uchar) + bNVRAM_FOOTER,
+  CORRECT3_SUCCESS      = CORRECT3_TOTAL + sizeof(ulong) + bNVRAM_FOOTER,
 
-  NVRAM_END             = CORRECT3_MAX + sizeof(uchar) + bNVRAM_FOOTER
+  NVRAM_END             = CORRECT3_SUCCESS + sizeof(ulong) + bNVRAM_FOOTER
 } nvram;

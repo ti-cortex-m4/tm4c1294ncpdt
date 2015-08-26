@@ -342,15 +342,21 @@ static bool SetTimeGps(void)
 
 void    CorrectTimeGps(void)
 {
-  cdwAbsCorrect3++;
+  dwCorrect3Total++;
+  SaveCache(&chCorrect3Total);
+
   if (SetTimeGps() == 1)
   { 
-    cdwPosCorrect3++;
+    dwCorrect3Success++;
+    SaveCache(&chCorrect3Success);
+
     tiPosCorrect3 = *GetCurrTimeDate();
   }
   else 
   {
-    cdwPosCorrect3 = 0;
+    dwCorrect3Success = 0;
+    SaveCache(&chCorrect3Success);
+
     tiNegCorrect3 = *GetCurrTimeDate();
   }
 }

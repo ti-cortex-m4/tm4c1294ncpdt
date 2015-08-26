@@ -23,7 +23,7 @@ static char const      *pszMessages[]   = { szMessage1, szMessage2, szMessage3, 
 
 static void Show(void)
 {
-  ShowChar(bCorrect3Max);
+  ShowChar(bCorrect3SuccessMax);
 }
 
 
@@ -51,8 +51,8 @@ void    key_SetCorrect3Value(void)
       uchar b = GetCharLo(6,8);
       if ((b >= 1) && (b <= 100))
       {
-        bCorrect3Max = b;
-        SaveCache(&chCorrect3Max);
+        bCorrect3SuccessMax = b;
+        SaveCache(&chCorrect3SuccessMax);
 
         Show();
       }
