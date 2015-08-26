@@ -199,7 +199,7 @@ bool    AddKeyRecord(event  ev)
                             PutChar(6, bGmtGps); break;
 
     case EVE_GPS_GOODGPS_2: PutChar(0, bSeasonCurr);
-                            PutChar(1, boSeasonGps); break;
+                            PutChar(1, boSeasonGps ? 0xFF : 0x00); break;
 
     case EVE_EXT_CORRECT2:
     case EVE_ESC_K:
