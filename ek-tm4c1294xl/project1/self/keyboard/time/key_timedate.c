@@ -15,6 +15,7 @@ KEY_TIMEDATE.C
 #include "../../time/decret.h"
 #include "../../time/correct1.h"
 #include "../../time/correct3.h"
+#include "key_timedate.h"
 
 
 
@@ -22,6 +23,8 @@ KEY_TIMEDATE.C
 static char const       szTime[]        = "Текущее время   ",
                         szDate[]        = "Текущая дата    ",
                         szCorrectTime[] = "Коррекция секунд",
+                        szStartDate[]   = "Дата запуска    ",
+                        szStartTime[]   = "Время запуска   ",
                         szMaskTime[]    = "    __ __ __    ",
                         szMaskDate[]    = "    __ __ __    ";
 
@@ -308,6 +311,45 @@ void    key_CorrectTime(void)
         enKeyboard = KBD_SHOW;
       else
         LongBeep();
+    }
+    else Beep();
+  }
+  else Beep();
+}
+
+
+
+void    key_GetProgram18(void)
+{
+  if (bKey == bKEY_ENTER)
+  {
+    if (enKeyboard == KBD_ENTER)
+    {
+      enKeyboard = KBD_POSTENTER;
+
+      ShowHi(szStartDate);
+      Clear();
+
+      ShowDate(tiStart);
+    }
+    else Beep();
+  }
+  else Beep();
+}
+
+
+void    key_GetProgram19(void)
+{
+  if (bKey == bKEY_ENTER)
+  {
+    if (enKeyboard == KBD_ENTER)
+    {
+      enKeyboard = KBD_POSTENTER;
+
+      ShowHi(szStartTime);
+      Clear();
+
+      ShowTime(tiStart);
     }
     else Beep();
   }

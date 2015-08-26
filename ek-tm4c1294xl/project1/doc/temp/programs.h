@@ -182,8 +182,8 @@
 #define bGET_GROUPS                 4
 +   #define bGET_VERSION                15
 
-#define bGET_PROGRAM18              18
-#define bGET_PROGRAM19              19
++   #define bGET_PROGRAM18              18
++   #define bGET_PROGRAM19              19
 
 #define bGET_PROGRAM5               5
 #define bGET_PROGRAM84              84
