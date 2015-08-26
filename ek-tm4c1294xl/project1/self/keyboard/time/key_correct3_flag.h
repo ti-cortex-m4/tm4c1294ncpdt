@@ -4,4 +4,4 @@ KEY_CORRECT3_FLAG.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetCorrect30(void);
+void    key_SetCorrect3Flag(void);

@@ -183,8 +183,8 @@ PROGRAMS.H
 
 // все режимы
 
-#define bSET_CORRECT2               75
-#define bSET_CORRECT30              76
+#define bSET_CORRECT2_FLAG          75
+#define bSET_CORRECT3_FLAG          76
 #define bSET_CORRECT31              77
 #define bSET_CORRECT32              86
 

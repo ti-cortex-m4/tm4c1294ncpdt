@@ -8,6 +8,7 @@ CORRECT3.C
 #include "../memory/mem_correct3.h"
 #include "../memory/mem_gps.h"
 #include "../serial/ports.h"
+#include "../nvram/cache.h"
 #include "../time/gps.h"
 #include "correct1.h"
 #include "correct3.h"

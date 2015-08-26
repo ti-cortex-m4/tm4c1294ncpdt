@@ -37,7 +37,7 @@ void    key_SetCorrect32(void)
         sprintf(szLo,"%lu:%lu:%u", cdwAbsCorrect3, cdwPosCorrect3, bMaxCorrect3);
         szLo[15] = (Correct3Disabled() ? '-' : '+');
       }
-      else BlockProgram(bSET_CORRECT30);
+      else BlockProgram(bSET_CORRECT3_FLAG);
     } 
     else Beep();
   }

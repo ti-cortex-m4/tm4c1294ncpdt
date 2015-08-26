@@ -42,7 +42,7 @@ void    key_SetCorrect31(void)
 
         ShowCorrect31();
       } 
-      else BlockProgram(bSET_CORRECT30);
+      else BlockProgram(bSET_CORRECT3_FLAG);
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
