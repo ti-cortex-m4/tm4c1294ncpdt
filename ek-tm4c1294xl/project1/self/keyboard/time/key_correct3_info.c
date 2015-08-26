@@ -20,7 +20,7 @@ static char const      *pszMessages[]   = { szMessage1, szMessage2, szMessage3, 
 
 
 
-void    key_SetCorrect3Status(void)
+void    key_SetCorrect3Info(void)
 {
   if (bKey == bKEY_ENTER)
   {
