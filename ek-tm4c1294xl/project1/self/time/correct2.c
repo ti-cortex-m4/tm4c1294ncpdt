@@ -29,7 +29,7 @@ void    ResetCorrect2(void)
   boCorrect2Flag = false;
   SaveCache(&chCorrect2Flag);
 
-  memset(&mpcwCorrect2, 0, sizeof(mpcwCorrect2));
+  memset(&mpcwCorrect2Status15, 0, sizeof(mpcwCorrect2Status15));
   memset(&mpbPassCorrect2, 0, sizeof(mpbPassCorrect2));
 
   cdwCorrect20 = 0;
@@ -94,8 +94,8 @@ void    Correct2(event  ev)
   uchar i;
   if ((i = GetCorrectIndex(ev)) == 0) return;
 
-  mpcwCorrect2[0]++;
-  mpcwCorrect2[i]++;
+  mpcwCorrect2Status15[0]++;
+  mpcwCorrect2Status15[i]++;
 }
 
 
@@ -111,7 +111,7 @@ void    OutCorrect21(void)
 
   PushBool(boCorrect2Flag);
   Push(&mpbPassCorrect2, sizeof(mpbPassCorrect2));
-  Push(&mpcwCorrect2, sizeof(mpcwCorrect2)); // TODO
+  PushIntArray(mpcwCorrect2Status15, 15);
 
   PushLong(cdwCorrect20);
   PushLong(cdwCorrect21);
