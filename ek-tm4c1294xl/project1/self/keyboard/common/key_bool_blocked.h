@@ -8,4 +8,4 @@ KEY_BOOL_BLOCKED,H
 
 
 
-void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  fBlocked, uint  wProgram);
+void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  fNonBlocked, uint  wProgram);
