@@ -15,7 +15,7 @@ static char const       szBlocked[]        = "Запрещено:      ";
 
 
 
-void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  fBlocked, uint  wProgram)
+void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  fNonBlocked, uint  wProgram)
 {
   bool *pboValue = (bool *) pch->pbBuff;
 
@@ -23,7 +23,7 @@ void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  
   {
     if (enKeyboard == KBD_ENTER)  
     {
-      if (fBlocked == true)
+      if (fNonBlocked)
       {
         enKeyboard = KBD_INPUT1;
         Clear();

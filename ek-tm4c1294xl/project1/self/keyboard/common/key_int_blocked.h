@@ -12,4 +12,4 @@ extern  char                    szNumberLimits[bDISPLAY + bMARGIN];
 
 
 
-void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin, uint  wMax, bool  fBlocked, uint  wProgram);
+void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin, uint  wMax, bool  fNonBlocked, uint  wProgram);

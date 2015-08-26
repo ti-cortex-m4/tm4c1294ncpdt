@@ -18,7 +18,7 @@ extern  char                    szNumberLimits[bDISPLAY + bMARGIN];
 
 
 
-void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin, uint  wMax, bool  fBlocked, uint  wProgram)
+void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin, uint  wMax, bool  fNonBlocked, uint  wProgram)
 {
   uint *pwVal = (uint *) pch->pbBuff;
 
@@ -26,7 +26,7 @@ void    key_SetIntBlocked(cache const  *pch, char const  *pszSlide[], uint  wMin
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (fBlocked == true)
+      if (fNonBlocked)
       {
         enKeyboard = KBD_POSTENTER;
         Clear();
