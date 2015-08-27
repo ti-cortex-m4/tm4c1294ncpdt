@@ -185,12 +185,12 @@ uint    PopChar2ElsHex(void)
 }
 
 
-bool    ReadCntMonCanP(uchar  ibMonth)
+double2 ReadCntMonCanP(uchar  ibMonth)
 {
 uchar   i,j;
 
   Clear();
-  if (OpenDeviceP() == 0) return(0);
+  if (OpenDeviceP() == 0) return GetDouble2(0, false);
 
 
   for (i=0; i<bMINORREPEATS; i++)
@@ -198,28 +198,28 @@ uchar   i,j;
     DelayOff();
     QueryTimeP();
 
-    if (ElsInput(0) != SER_GOODCHECK) continue; else break;
+    if (ElsInput(0) == SER_GOODCHECK) break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return GetDouble2(0, false);
   ShowPercent(50);
 
-  ReadTimeP();
+  time ti = ReadTimeP();
 
 
-  if (tiAlt.bMonth == ibMonth+1)
+  if (ti.bMonth == ibMonth+1)
   {
     QueryCloseP();
 
     //sprintf(szLo, "  нет данных !  ");
     //Delay(1000); 
-    return(0);
+    return GetDouble2(0, false);
   }
   else
   {
-    if (ReadKoeffDeviceP() == 0) return(0);
+    if (ReadKoeffDeviceP() == 0) return GetDouble2(0, false);
 
-    tiDig.bYear = (ibMonth+1 > tiAlt.bMonth) ? tiAlt.bYear-1 : tiAlt.bYear;
+    tiDig.bYear = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
     tiDig.bMonth = ibMonth+1;
 
     tiDigPrev.bYear = tiDig.bYear;
@@ -233,7 +233,7 @@ uchar   i,j;
 
     for (i=0; i<15; i++) 
     { 
-      if (QueryHistoryP1_Full(i) == 0) return(0);
+      if (QueryHistoryP1_Full(i) == 0) return GetDouble2(0, false);
 
       InitPop(2+8);
       
@@ -249,11 +249,11 @@ uchar   i,j;
 
       if ((j == 1) && (coTrue.dwBuff != 0)) 
       {
-        if ((tiDig.bMonth == tiAlt.bMonth) && (tiDig.bYear == tiAlt.bYear))
+        if ((tiDig.bMonth == ti.bMonth) && (tiDig.bYear == ti.bYear))
         {
-          if (QueryHistoryP2_Full(i*8+1+0) == 0) return(0);
+          if (QueryHistoryP2_Full(i*8+1+0) == 0) return GetDouble2(0, false);
           ReadEngAbsP(0);
-          if (QueryHistoryP2_Full(i*8+1+1) == 0) return(0);
+          if (QueryHistoryP2_Full(i*8+1+1) == 0) return GetDouble2(0, false);
           ReadEngAbsP(1);
        
           reKtrans = mpdbTransCnt[ibDig];
@@ -265,14 +265,14 @@ uchar   i,j;
           for (i=0; i<4; i++) 
           {
             if (mpbMappingEls[i] >= 16)
-              mpreChannelsEls[i] = 0;
+              mpdbChannelsEls[i] = 0;
             else
-              mpreChannelsEls[i] = mpreChannelsB[mpbMappingEls[i]];
+              mpdbChannelsEls[i] = mpreChannelsB[mpbMappingEls[i]];
           }
 
           for (i=0; i<4; i++) 
           {
-            mpreChannelsB[i] = mpreChannelsEls[i];
+            mpreChannelsB[i] = mpdbChannelsEls[i];
             mpboChannelsA[i] = true;
           }
 
@@ -288,7 +288,7 @@ uchar   i,j;
 
     sprintf(szLo, " мес€ц %02bu.%02bu ?  ",tiDigPrev.bMonth,tiDigPrev.bYear);
     Delay(1000); 
-    return(0);
+    return GetDouble2(0, false);
   }
 }
 
@@ -347,7 +347,7 @@ void    GetTariffP(uchar  ibTariff)
 
 
 
-status4 ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
+status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
 {
 uchar   i,j;
 
@@ -361,11 +361,13 @@ uchar   i,j;
     Clear();
     if (OpenDeviceP() == 0) return(ST4_BADDIGITAL);
 
-    if (QueryTimeP_Full() == 0) return(ST4_BADDIGITAL);
+    time2 ti2 = QueryTimeP_Full();
+    if (ti2.fValid == false) return(ST4_BADDIGITAL);
+    time ti = ti2.tiValue;
 
     if (ReadKoeffDeviceP() == 0) return(ST4_BADDIGITAL);
 
-    tiDig.bYear  = (ibMonth+1 > tiAlt.bMonth) ? tiAlt.bYear-1 : tiAlt.bYear;
+    tiDig.bYear  = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
     tiDig.bMonth = ibMonth+1;
     tiDig.bDay  = 1;
 
@@ -387,12 +389,12 @@ uchar   i,j;
  
      if ((j == 1) && (coTrue.dwBuff != 0)) 
       {
-        if ((tiDig.bMonth == tiAlt.bMonth) && (tiDig.bYear == tiAlt.bYear))
+        if ((tiDig.bMonth == ti.bMonth) && (tiDig.bYear == ti.bYear))
         { 
           if (QueryHistoryP3_Full(i*2+1) == 0) return(ST4_BADDIGITAL);
           ReadEngAbsP_RD();
 
-          reKtrans = mpreTransCnt[ibDig];
+          reKtrans = mpdbTransCnt[ibDig];
           for (i=0; i<22; i++) 
           {
             mpreChannelsB[i] *= reKtrans;

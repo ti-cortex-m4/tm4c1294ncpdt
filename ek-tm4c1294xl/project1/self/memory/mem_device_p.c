@@ -36,7 +36,7 @@ uchar                   bBreakEls, bFirstEls;
 uchar                   mpbMappingEls[4];
 
 // переменные
-float                   mpreChannelsEls[4];
+double                  mpdbChannelsEls[4];
 
 // признак получаса перевода времени
 bool                    boTimeChangeP;
