@@ -289,7 +289,7 @@ void    ElsQueryIO(uint  cbIn, uchar  cbOut)
 {
 uchar	i,bT;
 
-  InitPush();
+  InitPush(0);
   SkipChar();
 
   bT = 0;
