@@ -488,7 +488,7 @@ void    Setup1P(void)
     }
     else 
     {
-      ibMinor = mpcwStartAbsCan[ibDig];
+      ibMinor = mpcwStartAbs16Can[ibDig];
       if (boShowMessages == true) sprintf(szLo,"  продолжение   ");
     }
 
@@ -732,16 +732,16 @@ uchar i,j;
     iwMajor = 0;
     if (bFirstEls == 0) { ShowProgressDigHou(); bFirstEls = 1; }
 
-    reBuffB = mpdbPulseHou[ibDig];
+    double dbPulse = mpdbPulseHou[ibDig];
     for (ibCan=0; ibCan<ibMinorMax; ibCan++)        
     {
       reBuffA = mpreChannelsA[ibCan];
       mpflEngFracDigCan[ibDig][ibCan] += reBuffA;
 
-      uint w = (uint)(mpflEngFracDigCan[ibDig][ibCan]*reBuffB);
+      uint w = (uint)(mpflEngFracDigCan[ibDig][ibCan]*dbPulse);
       mpwChannels[ibCan] = w;
 
-      mpreEngFracDigCan[ibDig][ibCan] -= (float)w/reBuffB;
+      mpflEngFracDigCan[ibDig][ibCan] -= (float)w/dbPulse;
     }
 
     if (!IsDefect(ibDig) && (boTimeChangeP == true))
@@ -831,9 +831,9 @@ bool    BreakP(void)
 
 void    ReadCurrentP(void)
 {
-uchar   i;
+  double dbPulse = mpdbPulseMnt[ibDig];
 
-  reBuffB = mpdbPulseMnt[ibDig];
+  uchar i;
   for (i=0; i<4; i++)
   {
     if (mpbMappingEls[i] >= 16) 
@@ -843,7 +843,7 @@ uchar   i;
     else
     {
       dwBuffC = mpdwChannelsB[mpbMappingEls[i]];
-      dwBuffC /= (1e6/reBuffB);
+      dwBuffC /= (1e6/dbPulse);
     } 
     mpdwBaseDig[i] = dwBuffC;
   }
