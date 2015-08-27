@@ -585,12 +585,12 @@ double2 ReadCntCurrP(void)
   QueryCloseP();
 
 
-  reKtrans = mpdbTransCnt[ibDig];
+  double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
   for (i=0; i<16; i++) 
   {
-    mpreChannelsB[i] *= reKtrans;
+    mpdbChannelsC[i] *= dbTrans;
   }
 
   for (i=0; i<4; i++) 
@@ -598,18 +598,16 @@ double2 ReadCntCurrP(void)
     if (mpbMappingEls[i] >= 16)
       mpdbChannelsEls[i] = 0;
     else
-      mpdbChannelsEls[i] = mpreChannelsB[mpbMappingEls[i]];
+      mpdbChannelsEls[i] = mpdbChannelsC[mpbMappingEls[i]];
   }
 
   for (i=0; i<4; i++) 
   {
-    mpreChannelsB[i] = mpdbChannelsEls[i];
+    mpdbChannelsC[i] = mpdbChannelsEls[i];
     mpboChannelsA[i] = true;
   }
 
-  reBuffA = mpreChannelsB[diCurr.ibLine];
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
