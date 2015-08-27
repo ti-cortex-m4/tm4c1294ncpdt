@@ -369,8 +369,8 @@ uchar i,a,b;
     for (i=0; i<8; i++) mpbPasswordEls[i] = '0';
   else 
   {
-    phT = mpphKeys[ibDig];
-    for (i=0; i<8; i++) mpbPasswordEls[i] = phT.szNumber[i];  
+    line ph = mpphKeys[ibDig];
+    for (i=0; i<8; i++) mpbPasswordEls[i] = ph.szNumber[i];
   }
 
   InitPop(0);
@@ -666,7 +666,7 @@ uchar i,j;
       bBreakEls = 1;
   }
 
-  dwBuffC = coTrue.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
+  ulong dwBuffC = coTrue.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
   SecIndexToDate(dwBuffC);
 
   dwHouIndex = DateToHouIndex();

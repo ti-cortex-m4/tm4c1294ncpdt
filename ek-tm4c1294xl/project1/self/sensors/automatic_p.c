@@ -243,7 +243,7 @@ uchar   i,j;
       coTrue.mpbBuff[1] = PopChar2ElsHex();
       coTrue.mpbBuff[0] = PopChar2ElsHex();
 
-      dwBuffC = coTrue.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
+      ulong dwBuffC = coTrue.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
       SecIndexToDate(dwBuffC);
 
       if ((j == 1) && (coTrue.dwBuff != 0)) 
@@ -277,8 +277,7 @@ uchar   i,j;
 
           QueryCloseP();
 
-          reBuffA = mpreChannelsB[diCurr.ibLine];
-          return(1);
+          return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
         }
       }
     }
