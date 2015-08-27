@@ -259,25 +259,25 @@ uchar i,j;
   InitPop(2);
   for (i=0; i<8; i++)
   {
-    reBuffA = 0;
-    reBuffB = 1;
+    double dbA = 0;
+    double dbB = 1;
     for (j=0; j<8; j++)
     {
-      reBuffA += reBuffB*(PopChar1Els()*10 + PopChar1Els());
-      reBuffB *= 100;
+      dbA += dbB*(PopChar1Els()*10 + PopChar1Els());
+      dbB *= 100;
     }  
-    mpreChannelsB[bPart*8 + i] = reBuffA/1e6;
+    mpdbChannelsB[bPart*8 + i] = dbA/1e6;
   }
 
   InitPop(2);
   for (i=0; i<8; i++)
   {
     mpdwChannelsB[bPart*8 + i] = 0;
-    dwBuffC = 1;
+    ulong dw = 1;
     for (j=0; j<8; j++)
     {
-      mpdwChannelsB[bPart*8 + i] += dwBuffC*(PopChar1Els()*10 + PopChar1Els());
-      dwBuffC *= 100;
+      mpdwChannelsB[bPart*8 + i] += dw*(PopChar1Els()*10 + PopChar1Els());
+      dw *= 100;
     }  
   }
 }
@@ -285,20 +285,20 @@ uchar i,j;
 
 void    ReadEngAbsP_RD(void)
 {
-uchar i,j,k;
+uchar i,j;
 
   InitPop(4);
   for (i=0; i<22; i++)
   {
-    reBuffA = 0;
-    reBuffB = 1;
+    double dbA = 0;
+    double dbB = 1;
     for (j=0; j<8; j++)
     {
-      k = PopChar();
-      reBuffA += reBuffB*((k / 0x10)*10 + (k % 0x10));
-      reBuffB *= 100;
+      uchar k = PopChar();
+      dbA += dbB*((k / 0x10)*10 + (k % 0x10));
+      dbB *= 100;
     }  
-    mpreChannelsB[i] = reBuffA/1e6;
+    mpdbChannelsB[i] = dbA/1e6;
   }
 }
 
