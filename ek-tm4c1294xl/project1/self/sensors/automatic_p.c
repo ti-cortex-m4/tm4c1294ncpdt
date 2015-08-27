@@ -5,6 +5,7 @@ AUTOMATIC_P.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "device_p.h"
 #include "automatic_p.h"
 
 
