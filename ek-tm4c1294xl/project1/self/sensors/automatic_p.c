@@ -255,10 +255,10 @@ uchar   i,j;
           if (QueryHistoryP2_Full(i*8+1+1) == 0) return GetDouble2(0, false);
           ReadEngAbsP(1);
        
-          reKtrans = mpdbTransCnt[ibDig];
+          double dbTrans = mpdbTransCnt[ibDig];
           for (i=0; i<16; i++) 
           {
-            mpreChannelsB[i] *= reKtrans;
+            mpdbChannelsC[i] *= dbTrans;
           }
 
           for (i=0; i<4; i++) 
@@ -266,12 +266,12 @@ uchar   i,j;
             if (mpbMappingEls[i] >= 16)
               mpdbChannelsEls[i] = 0;
             else
-              mpdbChannelsEls[i] = mpreChannelsB[mpbMappingEls[i]];
+              mpdbChannelsEls[i] = mpdbChannelsC[mpbMappingEls[i]];
           }
 
           for (i=0; i<4; i++) 
           {
-            mpreChannelsB[i] = mpdbChannelsEls[i];
+            mpdbChannelsC[i] = mpdbChannelsEls[i];
             mpboChannelsA[i] = true;
           }
 
@@ -393,10 +393,10 @@ uchar   i,j;
           if (QueryHistoryP3_Full(i*2+1) == 0) return(ST4_BADDIGITAL);
           ReadEngAbsP_RD();
 
-          reKtrans = mpdbTransCnt[ibDig];
+          double dbTrans = mpdbTransCnt[ibDig];
           for (i=0; i<22; i++) 
           {
-            mpreChannelsB[i] *= reKtrans;
+            mpdbChannelsC[i] *= dbTrans;
           }
 
           GetTariffP(ibTariff);
@@ -409,7 +409,7 @@ uchar   i,j;
     
     QueryCloseP();
 
-    sprintf(szLo, " мес€ц %02bu.%02bu ?  ",tiDig.bMonth,tiDig.bYear);
+    sprintf(szLo, " мес€ц %02u.%02u ?  ",tiDig.bMonth,tiDig.bYear);
     Delay(1000);
     return(ST4_NOTPRESENTED);
   }

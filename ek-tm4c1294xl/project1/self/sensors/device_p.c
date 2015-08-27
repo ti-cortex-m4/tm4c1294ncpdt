@@ -267,7 +267,7 @@ uchar i,j;
       dbA += dbB*(PopChar1Els()*10 + PopChar1Els());
       dbB *= 100;
     }  
-    mpreChannelsB[bPart*8 + i] = dbA/1e6;
+    mpdbChannelsC[bPart*8 + i] = dbA/1e6;
   }
 
   InitPop(2);
@@ -855,8 +855,7 @@ void    ReadCurrentP(void)
 
 bool    QueryEnergyP_Full(uchar  bPart)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
