@@ -79,15 +79,16 @@ void    QueryOpenB(void)
   }
   else
   {
-    line ph = mpphKeys[ibDig];
-    bool  f = 0;
+    line ln = mpphKeys[ibDig];
+    bool f = 0;
+
     uchar i;
     for (i=0; i<6; i++)
     {
-      if (ph.szLine[i] == 0) f = 1;
+      if (ln.szLine[i] == 0) f = 1;
 
       if (f == 0)
-        PushChar(ph.szLine[i] - '0');
+        PushChar(ln.szLine[i] - '0');
       else
         PushChar(0);
     }

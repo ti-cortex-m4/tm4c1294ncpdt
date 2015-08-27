@@ -24,6 +24,7 @@ DEVICE_P.C
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
 #include "../serial/ports_common.h"
+#include "../impulses/energy_spec.h"
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
 #include "../digitals/digitals.h"
@@ -32,6 +33,7 @@ DEVICE_P.C
 #include "../special/special.h"
 #include "../hardware/watchdog.h"
 #include "../flash/records.h"
+#include "automatic1.h"
 #include "automatic_p.h"
 #include "device_p.h"
 //#include        "main.h"
@@ -299,7 +301,7 @@ uchar i,j;
       dbA += dbB*((k / 0x10)*10 + (k % 0x10));
       dbB *= 100;
     }  
-    mpreChannelsB[i] = dbA/1e6;
+    mpdbChannelsC[i] = dbA/1e6;
   }
 }
 
@@ -369,8 +371,8 @@ uchar i,a,b;
     for (i=0; i<8; i++) mpbPasswordEls[i] = '0';
   else 
   {
-    line ph = mpphKeys[ibDig];
-    for (i=0; i<8; i++) mpbPasswordEls[i] = ph.szNumber[i];
+    line ln = mpphKeys[ibDig];
+    for (i=0; i<8; i++) mpbPasswordEls[i] = ln.szLine[i];
   }
 
   InitPop(0);
@@ -667,9 +669,9 @@ uchar i,j;
   }
 
   ulong dwBuffC = coTrue.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
-  SecIndexToDate(dwBuffC);
+  time ti = SecIndexToDate(dwBuffC);
 
-  dwHouIndex = DateToHouIndex();
+  dwHouIndex = DateToHouIndex(ti);
 
 
   for (i=0; i<j-5; i++) SkipByteEls();
@@ -686,7 +688,7 @@ void  Setup2P(void)
 }
 
 
-bool   GetProfile(void)
+bool   GetProfile(time  tiAlt)
 {
 uchar i,j;
 
@@ -724,7 +726,7 @@ uchar i,j;
   }
 
   HouIndexToDate(dwHouIndex++);
-  sprintf(szLo," %02bu:%02bu %02bu.%02bu.%02bu ", tiAlt.bHour,tiAlt.bMinute, tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
+  sprintf(szLo," %02u:%02u %02u.%02u.%02u ", tiAlt.bHour,tiAlt.bMinute, tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
 
   tiDig = tiAlt;
   if (SearchDefHouIndex() == 1) 
@@ -752,7 +754,7 @@ uchar i,j;
       for (c=0; c<bCANALS; c++)
       {
         LoadPrevDigital(c);
-        if (CompareCurrPrevLines() == 1)
+        if (CompareCurrPrevLines(tiDig, c) == 1)
         {
           mpwImpHouCanSpec[c] += mpwChannels[diPrev.ibLine];
           mpwChannels[diPrev.ibLine] = 0;
@@ -765,8 +767,7 @@ uchar i,j;
       boRecalcCurr = true;      
     }
 
-    tiAlt = tiDig;
-    MakePrevHou();
+    MakeSpecial(tiDig);
   } 
   else 
   { 
@@ -778,7 +779,7 @@ uchar i,j;
 }
 
 
-void    ReadProfileP(void)
+void    ReadProfileP(time  ti)
 {
 uchar i;
 
@@ -807,7 +808,7 @@ uchar i;
     {
       if ((i & 0x80) == 0) 
       {
-        if (GetProfile() == 1) break;
+        if (GetProfile(ti) == 1) break;
       }  
       else
         SkipByteEls();

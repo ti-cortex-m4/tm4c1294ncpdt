@@ -14,6 +14,7 @@ PARAMS2.C
 #include    "../../digitals/digitals_display.h"
 #include    "../../digitals/digitals_messages.h"
 #include    "../../devices/devices.h"
+#include    "../../sensors/automatic1.h"
 #include    "../../sensors/device_a.h"
 #include    "../../sensors/device_b.h"
 #include    "../../sensors/device_c.h"
@@ -678,7 +679,7 @@ bool    ReadParamP(void)
     case PAR_U2 : reValue = mpreParamP[1]; break;
     case PAR_U3 : reValue = mpreParamP[2]; break;
 
-    default: return(0); break;
+    default: return(0);
   }
 
   return(1);
