@@ -43,3 +43,9 @@ bool                    boTimeChangeP;
 
 // индекс текущего получаса и индекс получаса перевода времени
 ulong                   dwHouIndexP1, dwHouIndexP2;
+
+// массив мгновенных значений (напряжения по фазам)
+float                   mpreParamP[3];
+
+// счетчик времени
+uint                    cwTimeLockoutP;
