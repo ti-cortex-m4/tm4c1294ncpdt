@@ -27,10 +27,12 @@ DEVICE_P.C
 #include "../serial/ports_common.h"
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
+#include "../digitals/digitals.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/limits.h"
 #include "../special/special.h"
 #include "../hardware/watchdog.h"
+#include "../flash/records.h"
 #include "automatic_p.h"
 #include "device_p.h"
 //#include        "main.h"
@@ -736,10 +738,10 @@ uchar i,j;
       reBuffA = mpreChannelsA[ibCan];
       mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
 
-      wBuffD = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
-      mpwChannels[ibCan] = wBuffD;
+      uint w = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
+      mpwChannels[ibCan] = w;
 
-      mpreEngFracDigCan[ibDig][ibCan] -= (float)wBuffD/reBuffB;
+      mpreEngFracDigCan[ibDig][ibCan] -= (float)w/reBuffB;
     }
 
     if (!IsDefect(ibDig) && (boTimeChangeP == true))

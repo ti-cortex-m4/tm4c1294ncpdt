@@ -12,7 +12,7 @@ AUTOMATIC_S.C
 #include "../time/delay.h"
 #include "../time/timedate.h"
 #include "../hardware/watchdog.h"
-#include "../kernel/crc-s.h"
+#include "../kernel/crc_s.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
 #include "../serial/ports_devices.h"

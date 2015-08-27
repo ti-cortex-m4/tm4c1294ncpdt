@@ -17,6 +17,7 @@ CURRENT_RUN.C
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
 #include "../../realtime/realtime.h"
+#include "../../sensors/device_p.h"
 #include "../../sensors/device_u.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_status.h"

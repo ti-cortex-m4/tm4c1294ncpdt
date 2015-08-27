@@ -9,7 +9,7 @@ CRC_ELS.C
 
 
 
-void    MakeCRC_Els(uchar  *pbData, uint  wSize)
+void    MakeCrcEls(uchar  *pbData, uint  wSize)
 {
   wCRC = 0;
   while (wSize-- > 0)

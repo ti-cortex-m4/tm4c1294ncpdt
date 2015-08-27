@@ -11,6 +11,7 @@ AUTOMATIC_P.C
 #include "../keyboard/keyboard.h"
 #include "../time/delay.h"
 #include "../time/timedate.h"
+#include "../time/calendar.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"

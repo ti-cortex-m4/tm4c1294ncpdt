@@ -565,7 +565,7 @@ uchar   i,j;
 }
 
 #endif
-
+*/
 
 
 #ifndef SKIP_P
@@ -612,7 +612,7 @@ uchar   i;
 }
 
 #endif
-*/
+
 
 
 #ifndef SKIP_A
@@ -1867,7 +1867,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return( ReadSensorP() );  break;
+    case 21: return ReadCntCurrP();
 #endif
 
 #ifndef SKIP_Q
@@ -1970,7 +1970,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return( ReadTimeDateP() );  break;
+    case 21: return ReadTimeDateP();
 #endif
 
 #ifndef SKIP_Q
@@ -2090,7 +2090,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return( ReadCntMonCanP(ibMon) ); break;
+    case 21: return ReadCntMonCanP(ibMon);
 #endif
 
 #ifndef SKIP_Q

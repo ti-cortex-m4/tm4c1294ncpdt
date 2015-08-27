@@ -4,4 +4,4 @@ CRC_ELS.H
 
 ------------------------------------------------------------------------------*/
 
-void    MakeCRC_Els(uchar  *pbData, uint  wSize);
+void    MakeCrcEls(uchar  *pbData, uint  wSize);
