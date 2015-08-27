@@ -24,6 +24,7 @@ AUTOMATIC1.C
 #include "automatic_c.h"
 #include "automatic_p.h"
 #include "automatic_s.h"
+#include "automatic1.h"
 
 
 

@@ -11,6 +11,7 @@ DEVICES_POSTINPUT,C
 #include "../serial/ports_devices.h"
 #include "../devices/decompress_k.h"
 #include "../devices/decompress_s.h"
+#include "../digitals/digitals_status.h"
 #include "devices_postinput.h"
 
 
