@@ -332,13 +332,13 @@ void    ReadTransP(void)
 {
   InitPop(2);
 
-  dwBuffC = (PopChar4Els() << 16) + PopChar4Els();
-  reBuffB = dwBuffC;
+  ulong dw = (PopChar4Els() << 16) + PopChar4Els();
+  float flA = dw;
 
-  dwBuffC = (PopChar4Els() << 16) + PopChar4Els();
-  reBuffA = dwBuffC;
+  dw = (PopChar4Els() << 16) + PopChar4Els();
+  float flB = dw;
 
-  reBuffB /= reBuffA;
+  dbKtrans = flA / flB;
 }
 
 
@@ -365,7 +365,7 @@ void    QueryPasswordP(void)
 {
 uchar i,a,b;
 
-  if (boEnableKeys != true)
+  if (boEnblKeys != true)
     for (i=0; i<8; i++) mpbPasswordEls[i] = '0';
   else 
   {
@@ -738,7 +738,7 @@ uchar i,j;
       reBuffA = mpreChannelsA[ibCan];
       mpflEngFracDigCan[ibDig][ibCan] += reBuffA;
 
-      uint w = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
+      uint w = (uint)(mpflEngFracDigCan[ibDig][ibCan]*reBuffB);
       mpwChannels[ibCan] = w;
 
       mpreEngFracDigCan[ibDig][ibCan] -= (float)w/reBuffB;

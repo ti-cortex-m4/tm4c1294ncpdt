@@ -972,7 +972,6 @@ time2   ReadTimeCanP(void)
   ShowPercent(50);
 
   time ti = ReadTimeP();
-
   QueryCloseP();
 
 

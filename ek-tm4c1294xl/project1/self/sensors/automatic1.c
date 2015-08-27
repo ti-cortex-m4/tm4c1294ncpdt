@@ -1228,17 +1228,17 @@ uchar   i;
     DelayOff();
     QueryTransP();
 
-    if (ElsInput(0) != SER_GOODCHECK) continue; else break;
+    if (ElsInput(0) == SER_GOODCHECK) break;
   }
 
   if (i == bMINORREPEATS) return(0);
   ShowPercent(50);
 
-  ReadTransP();                        // K трансформации
+  ReadTransP();                         // K трансформации
   QueryCloseP();
 
 
-  reBuffA = 5000;                       // K преобразования
+  dbKpulse = 5000;                      // K преобразования
   SetCanalsAll();                       // сохранение К преобразования и К трансформации
 
   return(1);

@@ -102,23 +102,22 @@ void    QueryHistoryP3(uchar  ibRecord)
 
 time2   QueryTimeP_Full(void)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
     QueryTimeP();
 
     if (ElsInput(0) == SER_GOODCHECK) break;  
-    if (fKey == true) return(0);
+    if (fKey == true) return GetTime2(tiZero, false);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
 
-  ReadTimeP();
+  time ti = ReadTimeP();
   ShowPercent(50);
 
-  return(1);
+  return GetTime2(ti, true);
 }
 
 
