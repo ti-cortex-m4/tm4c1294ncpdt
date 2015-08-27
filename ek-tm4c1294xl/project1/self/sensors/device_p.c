@@ -508,7 +508,7 @@ void    Setup1P(void)
 void    QuerySetValueP(void)
 { 
   Clear();
-  if (boShowMessages == true) { sprintf(szLo+2,"индекс: -%-2bu",ibMinor); DelayInf(); }
+  if (boShowMessages == true) { sprintf(szLo+2,"индекс: -%-2u",ibMinor); DelayInf(); }
 
   bFlagElsCurr = 0;
   bFirstEls = 0;
@@ -694,25 +694,25 @@ uchar i,j;
 
   SkipByteEls();  // status
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<ibMinorMax; ibCan++)
+  uchar c;
+  for (c=0; c<ibMinorMax; c++)
   {
-    dwBuffC = 0;
+    ulong dw = 0;
     i = GetByteEls();
-    dwBuffC += ((i & 0xF0) >> 4) * (ulong)10000;
-    dwBuffC += (i & 0x0F) * 1000;
+    dw += ((i & 0xF0) >> 4) * (ulong)10000;
+    dw += (i & 0x0F) * 1000;
     i = GetByteEls();
-    dwBuffC += ((i & 0xF0) >> 4) * 100;
-    dwBuffC += (i & 0x0F) * 10;
+    dw += ((i & 0xF0) >> 4) * 100;
+    dw += (i & 0x0F) * 10;
     i = GetByteEls();
-    dwBuffC += ((i & 0xF0) >> 4);
+    dw += ((i & 0xF0) >> 4);
 
     reBuffA = 1;
     j = i & 0x0F;
     for (i=0; i<j; i++) reBuffA *= 10;
-    reBuffA *= dwBuffC;
+    reBuffA *= dw;
 
-    mpreChannelsA[ibCan] = reBuffA/2e6;
+    mpreChannelsA[c] = reBuffA/2e6;
   }
 
   cwDigHou++;
@@ -733,15 +733,15 @@ uchar i,j;
     if (bFirstEls == 0) { ShowProgressDigHou(); bFirstEls = 1; }
 
     double dbPulse = mpdbPulseHou[ibDig];
-    for (ibCan=0; ibCan<ibMinorMax; ibCan++)        
+    for (c=0; c<ibMinorMax; c++)        
     {
-      reBuffA = mpreChannelsA[ibCan];
-      mpflEngFracDigCan[ibDig][ibCan] += reBuffA;
+      reBuffA = mpreChannelsA[c];
+      mpflEngFracDigCan[ibDig][c] += reBuffA;
 
-      uint w = (uint)(mpflEngFracDigCan[ibDig][ibCan]*dbPulse);
-      mpwChannels[ibCan] = w;
+      uint w = (uint)(mpflEngFracDigCan[ibDig][c]*dbPulse);
+      mpwChannels[c] = w;
 
-      mpflEngFracDigCan[ibDig][ibCan] -= (float)w/dbPulse;
+      mpflEngFracDigCan[ibDig][c] -= (float)w/dbPulse;
     }
 
     if (!IsDefect(ibDig) && (boTimeChangeP == true))
@@ -749,12 +749,12 @@ uchar i,j;
       szLo[0] = '!';
 
       LoadCurrDigital(ibDig);
-      for (ibCan=0; ibCan<bCANALS; ibCan++)
+      for (c=0; c<bCANALS; c++)
       {
-        LoadPrevDigital(ibCan);
+        LoadPrevDigital(c);
         if (CompareCurrPrevLines() == 1)
         {
-          mpwImpHouCanSpec[ibCan] += mpwChannels[diPrev.ibLine];
+          mpwImpHouCanSpec[c] += mpwChannels[diPrev.ibLine];
           mpwChannels[diPrev.ibLine] = 0;
         }
       }
@@ -820,7 +820,7 @@ bool    BreakP(void)
 {
   if (cwDigHou == 0)
   {
-    sprintf(szLo," выключено: %-2bu  ",++cbDigDay); DelayInf();
+    sprintf(szLo," выключено: %-2u  ",++cbDigDay); DelayInf();
     if (cbDigDay >= 10) 
       return 1;
   }
