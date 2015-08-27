@@ -15,12 +15,15 @@ CORRECT2.C
 
 
 cache const             chCorrect2Flag = {CORRECT2_FLAG, &boCorrect2Flag, sizeof(bool)};
+cache const             chCorrect2Status15 = {CORRECT2_STATUS, &mpcwCorrect2Status15, sizeof(mpcwCorrect2Status15)};
 
 
 
 void    InitCorrect2(void)
 {
   LoadCache(&chCorrect2Flag);
+
+  LoadCache(&chCorrect2Status15);
 }
 
 
@@ -30,6 +33,8 @@ void    ResetCorrect2(void)
   SaveCache(&chCorrect2Flag);
 
   memset(&mpcwCorrect2Status15, 0, sizeof(mpcwCorrect2Status15));
+  SaveCache(&chCorrect2Status15);
+
   memset(&mpbPassCorrect2, 0, sizeof(mpbPassCorrect2));
 
   cdwCorrect20 = 0;
@@ -96,6 +101,8 @@ void    Correct2(event  ev)
 
   mpcwCorrect2Status15[0]++;
   mpcwCorrect2Status15[i]++;
+
+  SaveCache(&chCorrect2Status15);
 }
 
 
