@@ -285,7 +285,7 @@ uchar   i,j;
     
     QueryCloseP();
 
-    sprintf(szLo, " мес€ц %02bu.%02bu ?  ",tiDigPrev.bMonth,tiDigPrev.bYear);
+    sprintf(szLo, " мес€ц %02u.%02u ?  ",tiDigPrev.bMonth,tiDigPrev.bYear);
     Delay(1000); 
     return GetDouble2(0, false);
   }
