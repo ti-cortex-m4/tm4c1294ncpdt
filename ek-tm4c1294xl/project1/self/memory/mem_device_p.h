@@ -19,3 +19,11 @@ extern  uchar                   bCodeElsCurr, bCodeElsPrev;
 extern  ulong                   dwStampElsCurr, dwStampElsPrev;
 
 extern  uchar                   bBreakEls, bFirstEls;
+
+extern  uchar                   mpbMappingEls[4];
+
+extern  float                   mpreChannelsEls[4];
+
+extern  bool                    boTimeChangeP;
+
+extern  ulong                   dwHouIndexP1, dwHouIndexP2;

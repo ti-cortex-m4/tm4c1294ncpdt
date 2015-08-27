@@ -26,10 +26,12 @@ AUTOMATIC2.C
 #include "device_a.h"
 #include "device_b.h"
 #include "device_c.h"
+#include "device_p.h"
 #include "device_u.h"
 #include "automatic_a.h"
 #include "automatic_b.h"
 #include "automatic_c.h"
+#include "automatic_p.h"
 #include "automatic_s.h"
 #include "automatic_u.h"
 

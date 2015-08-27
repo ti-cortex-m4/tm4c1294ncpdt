@@ -31,3 +31,15 @@ ulong                   dwStampElsCurr, dwStampElsPrev;
 
 // переменные
 uchar                   bBreakEls, bFirstEls;
+
+// переменные
+uchar                   mpbMappingEls[4];
+
+// переменные
+float                   mpreChannelsEls[4];
+
+// признак получаса перевода времени
+bool                    boTimeChangeP;
+
+// индекс текущего получаса и индекс получаса перевода времени
+ulong                   dwHouIndexP1, dwHouIndexP2;
