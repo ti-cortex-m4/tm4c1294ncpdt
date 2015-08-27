@@ -362,7 +362,7 @@ void    QueryPasswordP(void)
 {
 uchar i,a,b;
 
-  if (boEnableKeys != boTrue)
+  if (boEnableKeys != true)
     for (i=0; i<8; i++) mpbPasswordEls[i] = '0';
   else 
   {
@@ -478,24 +478,24 @@ void    Setup1P(void)
     ibMinor = 1;
   else 
   {
-    if (mpboStartCan[ibDig] == boFalse) 
+    if (mpboStartCan[ibDig] == false) 
     {
       ibMinor = 1;
-      if (boShowMessages == boTrue) sprintf(szLo," первый запуск  ");
+      if (boShowMessages == true) sprintf(szLo," первый запуск  ");
     }
     else 
     {
       ibMinor = mpcwStartAbsCan[ibDig];
-      if (boShowMessages == boTrue) sprintf(szLo,"  продолжение   ");
+      if (boShowMessages == true) sprintf(szLo,"  продолжение   ");
     }
 
-    if (boShowMessages == boTrue) DelayInf();
+    if (boShowMessages == true) DelayInf();
   }
 
   bFlagElsPrev = 0;
   iwDigHou = 0xFFFF;
 
-  boTimeChangeP = boFalse;
+  boTimeChangeP = false;
 
   dwHouIndexP1 = 0;
   dwHouIndexP2 = 0;
@@ -505,7 +505,7 @@ void    Setup1P(void)
 void    QuerySetValueP(void)
 { 
   Clear();
-  if (boShowMessages == boTrue) { sprintf(szLo+2,"индекс: -%-2bu",ibMinor); DelayInf(); }
+  if (boShowMessages == true) { sprintf(szLo+2,"индекс: -%-2bu",ibMinor); DelayInf(); }
 
   bFlagElsCurr = 0;
   bFirstEls = 0;
@@ -578,7 +578,7 @@ void    QueryProfileP(void)
 uint  w;
 
   Clear();
-  if (boShowMessages == boTrue) sprintf(szLo+1,"блок: %u - %u",wBaseCurr,wBaseLast);
+  if (boShowMessages == true) sprintf(szLo+1,"блок: %u - %u",wBaseCurr,wBaseLast);
 
   InitPush();
   PushChar(0x01);
@@ -634,7 +634,7 @@ uchar i,j;
     case 0xE5: j = 5; break;
     case 0xE6: j = 5; break;
     case 0xE8: j = 8; break;
-    case 0xEA: j = 5; boTimeChangeP = boTrue; dwHouIndexP2 = dwHouIndexP1; break;
+    case 0xEA: j = 5; boTimeChangeP = true; dwHouIndexP2 = dwHouIndexP1; break;
     case 0xEB: j = 5; break;
     case 0xED: j = 5; break;
     default:   j = 5; 
@@ -714,9 +714,9 @@ uchar i,j;
   cwDigHou++;
 
   dwHouIndexP1 = dwHouIndex;
-  if ((boTimeChangeP == boTrue) && (dwHouIndexP1 > dwHouIndexP2))
+  if ((boTimeChangeP == true) && (dwHouIndexP1 > dwHouIndexP2))
   {
-     boTimeChangeP = boFalse;
+     boTimeChangeP = false;
   }
 
   HouIndexToDate(dwHouIndex++);
@@ -740,7 +740,7 @@ uchar i,j;
       mpreEngFracDigCan[ibDig][ibCan] -= (real)wBuffD/reBuffB;
     }
 
-    if (!IsDefect(ibDig) && (boTimeChangeP == boTrue))
+    if (!IsDefect(ibDig) && (boTimeChangeP == true))
     {
       szLo[0] = '!';
 
@@ -758,7 +758,7 @@ uchar i,j;
       SaveImpHouSpec(0,iwDigHou); 
 
       AddDigRecord(EVE_DEVICE_P_DEFECT);
-      boRecalcCurr = boTrue;      
+      boRecalcCurr = true;      
     }
 
     tiAlt = tiDig;

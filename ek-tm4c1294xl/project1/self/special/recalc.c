@@ -192,7 +192,7 @@ bool    ClearCanals(bool  fStopCan)
       for (ibCan=0; ibCan<bCANALS; ibCan++)         // обработка по каналам
       {
         // если канал не используется: пропустить
-        //if (mpboUsedNodes[ibCan] == boFalse) continue;
+        //if (mpboUsedNodes[ibCan] == false) continue;
 
         if (mpboReadyCan[ibCan] == true)
         {
