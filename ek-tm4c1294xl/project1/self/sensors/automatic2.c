@@ -586,7 +586,7 @@ uchar   i;
   QueryCloseP();
 
 
-  reKtrans = mpreTransCnt[ibDig];
+  reKtrans = mpdbTransCnt[ibDig];
   for (i=0; i<16; i++) 
   {
     mpreChannelsB[i] *= reKtrans;
@@ -948,7 +948,7 @@ uchar   i;
 }
 
 #endif
-
+*/
 
 
 #ifndef SKIP_P
@@ -985,7 +985,7 @@ uchar   i;
 #endif
 
 
-
+/*
 #ifndef SKIP_Z
 
 //  чтение значение времени/даты

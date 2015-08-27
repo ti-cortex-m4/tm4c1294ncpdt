@@ -4,6 +4,10 @@ DEVICE_P.H
  
 ------------------------------------------------------------------------------*/
 
+#include "../memory/mem_device_p.h"
+
+
+
 #ifndef SKIP_P
 
 uchar   PopChar1Els(void);
