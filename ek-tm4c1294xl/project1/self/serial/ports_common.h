@@ -15,3 +15,5 @@ void    MakeCRC16InBuff(uchar  bOffset, uint  wSize);
 
 void    MakeCrcSOutBuff(uchar  bOffset, uint  wSize);
 void    MakeCrcSInBuff(uchar  bOffset, uint  wSize);
+
+void    MakeCRCElsInBuff(uchar  bOffset, uint  wSize);
