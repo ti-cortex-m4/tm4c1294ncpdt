@@ -13,10 +13,12 @@ bool    ReadKoeffDeviceB(void);
 bool    ReadKoeffDeviceB_Special(void);
 bool    ReadKoeffDeviceC(void);
 bool    ReadKoeffDeviceP(void);
+
 bool    OpenDeviceP(void);
 
 bool    AutomaticA(void);
 bool    AutomaticB(void);
 bool    AutomaticC(void);
 bool    AutomaticJ(void);
+bool    AutomaticP(void);
 bool    AutomaticS(void);

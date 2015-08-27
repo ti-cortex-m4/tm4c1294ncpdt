@@ -266,7 +266,7 @@ uchar i,j;
       dbA += dbB*(PopChar1Els()*10 + PopChar1Els());
       dbB *= 100;
     }  
-    mpdbChannelsB[bPart*8 + i] = dbA/1e6;
+    mpreChannelsB[bPart*8 + i] = dbA/1e6;
   }
 
   InitPop(2);
@@ -298,7 +298,7 @@ uchar i,j;
       dbA += dbB*((k / 0x10)*10 + (k % 0x10));
       dbB *= 100;
     }  
-    mpdbChannelsB[i] = dbA/1e6;
+    mpreChannelsB[i] = dbA/1e6;
   }
 }
 
@@ -731,11 +731,11 @@ uchar i,j;
     iwMajor = 0;
     if (bFirstEls == 0) { ShowProgressDigHou(); bFirstEls = 1; }
 
-    reBuffB = mprePulseHou[ibDig];
+    reBuffB = mpdbPulseHou[ibDig];
     for (ibCan=0; ibCan<ibMinorMax; ibCan++)        
     {
       reBuffA = mpreChannelsA[ibCan];
-      mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
+      mpflEngFracDigCan[ibDig][ibCan] += reBuffA;
 
       uint w = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
       mpwChannels[ibCan] = w;
@@ -781,7 +781,7 @@ void    ReadProfileP(void)
 {
 uchar i;
 
-  NoShowTime(1);
+  HideCurrTime(1);
 
   InitPop(2);
   for (i=0; i<64; i++) 
@@ -832,7 +832,7 @@ void    ReadCurrentP(void)
 {
 uchar   i;
 
-  reBuffB = mprePulseMnt[ibDig];
+  reBuffB = mpdbPulseMnt[ibDig];
   for (i=0; i<4; i++)
   {
     if (mpbMappingEls[i] >= 16) 
