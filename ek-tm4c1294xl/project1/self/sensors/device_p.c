@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE_P.C
-              
- 
+
+ Elster A1140
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -124,8 +124,7 @@ void    QueryStopP(void)
 
 void    QueryCloseP(void)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<3; i++)
     QueryStopP();
 }
@@ -207,17 +206,17 @@ void    QueryTimeP(void)
 }
 
 
-void    ReadTimeAltP(void)
+time    ReadTimeP(void)
 {
-uint  w;
-
   InitPop(2);
+
+  time tiAlt;
 
   tiAlt.bSecond = PopChar1Els()*10 + PopChar1Els();
   tiAlt.bMinute = PopChar1Els()*10 + PopChar1Els();
   tiAlt.bHour   = PopChar1Els()*10 + PopChar1Els();
 
-  w = PopChar4Els();
+  uint w = PopChar4Els();
 
   tiAlt.bDay    = FromBCD((w & 0x3F00) / 0x100);
   tiAlt.bMonth  = FromBCD(w & 0x001F);
@@ -225,6 +224,8 @@ uint  w;
   PopChar();
   PopChar();
   tiAlt.bYear   = PopChar1Els()*10 + PopChar1Els();
+
+  return tiAlt;
 }
 
 
