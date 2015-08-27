@@ -571,23 +571,23 @@ uchar   i,j;
 
 #ifndef SKIP_P
 
-bool    ReadCntCurrP(void)
+double2 ReadCntCurrP(void)
 {
-uchar   i;
-
   Clear();
-  if (OpenDeviceP() == 0) return(0);
+  if (OpenDeviceP() == 0) return GetDouble2(0, false);
 
 
-  if (ReadKoeffDeviceP() == 0) return(0);
+  if (ReadKoeffDeviceP() == 0) return GetDouble2(0, false);
 
-  if (QueryEnergyP_Full(0) == 0) return(0);
-  if (QueryEnergyP_Full(1) == 0) return(0);
+  if (QueryEnergyP_Full(0) == 0) return GetDouble2(0, false);
+  if (QueryEnergyP_Full(1) == 0) return GetDouble2(0, false);
 
   QueryCloseP();
 
 
   reKtrans = mpdbTransCnt[ibDig];
+
+  uchar i;
   for (i=0; i<16; i++) 
   {
     mpreChannelsB[i] *= reKtrans;
@@ -596,14 +596,14 @@ uchar   i;
   for (i=0; i<4; i++) 
   {
     if (mpbMappingEls[i] >= 16)
-      mpreChannelsEls[i] = 0;
+      mpdbChannelsEls[i] = 0;
     else
-      mpreChannelsEls[i] = mpreChannelsB[mpbMappingEls[i]];
+      mpdbChannelsEls[i] = mpreChannelsB[mpbMappingEls[i]];
   }
 
   for (i=0; i<4; i++) 
   {
-    mpreChannelsB[i] = mpreChannelsEls[i];
+    mpreChannelsB[i] = mpdbChannelsEls[i];
     mpboChannelsA[i] = true;
   }
 
