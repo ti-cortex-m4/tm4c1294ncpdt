@@ -99,7 +99,7 @@ void    QueryHistoryP3(uchar  ibRecord)
 }
 
 
-bit     QueryTimeP_Full(void)
+bool    QueryTimeP_Full(void)
 {
 uchar   i;
 
@@ -121,7 +121,7 @@ uchar   i;
 }
 
 
-bit     QueryHistoryP1_Full(uchar  ibRecord)
+bool    QueryHistoryP1_Full(uchar  ibRecord)
 {
 uchar   i;
 
@@ -140,7 +140,7 @@ uchar   i;
 }
 
 
-bit     QueryHistoryP2_Full(uchar  ibRecord)
+bool    QueryHistoryP2_Full(uchar  ibRecord)
 {
 uchar   i;
 
@@ -159,7 +159,7 @@ uchar   i;
 }
 
 
-bit     QueryHistoryP3_Full(uchar  ibRecord)
+bool    QueryHistoryP3_Full(uchar  ibRecord)
 {
 uchar   i;
 
@@ -184,7 +184,7 @@ uint    PopChar2ElsHex(void)
 }
 
 
-bit     ReadCntMonCanP(uchar  ibMonth)
+bool    ReadCntMonCanP(uchar  ibMonth)
 {
 uchar   i,j;
 

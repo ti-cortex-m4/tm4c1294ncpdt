@@ -27,3 +27,7 @@ extern  float                   mpreChannelsEls[4];
 extern  bool                    boTimeChangeP;
 
 extern  ulong                   dwHouIndexP1, dwHouIndexP2;
+
+extern  float                   mpreParamP[3];
+
+extern  uint                    cwTimeLockoutP;

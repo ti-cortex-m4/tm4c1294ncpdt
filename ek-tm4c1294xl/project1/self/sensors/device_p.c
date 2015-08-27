@@ -625,7 +625,7 @@ uchar i;
 }
 
 
-bit    GetConfig(uchar  bT)
+bool   GetConfig(uchar  bT)
 {
 uchar i,j;
 
@@ -684,7 +684,7 @@ void  Setup2P(void)
 }
 
 
-bit    GetProfile(void) 
+bool   GetProfile(void)
 {
 uchar i,j;
 
@@ -692,6 +692,7 @@ uchar i,j;
 
   SkipByteEls();  // status
 
+  uchar ibCan;
   for (ibCan=0; ibCan<ibMinorMax; ibCan++)
   {
     dwBuffC = 0;
@@ -738,7 +739,7 @@ uchar i,j;
       wBuffD = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
       mpwChannels[ibCan] = wBuffD;
 
-      mpreEngFracDigCan[ibDig][ibCan] -= (real)wBuffD/reBuffB;
+      mpreEngFracDigCan[ibDig][ibCan] -= (float)wBuffD/reBuffB;
     }
 
     if (!IsDefect(ibDig) && (boTimeChangeP == true))
