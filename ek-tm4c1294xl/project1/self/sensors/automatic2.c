@@ -954,72 +954,36 @@ uchar   i;
 
 #ifndef SKIP_P
 
-bool    ReadTimeCanP(void)
+time2   ReadTimeCanP(void)
 {
-uchar   i;
-
   Clear();
-  if (OpenDeviceP() == 0) return(0);
+  if (OpenDeviceP() == 0) GetTime2(tiZero, false);
 
-
+  uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
     QueryTimeP();
 
-    if (ElsInput(0) != SER_GOODCHECK) continue; else break;
+    if (ElsInput(0) == SER_GOODCHECK) break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == bMINORREPEATS) GetTime2(tiZero, false);
   ShowPercent(50);
 
-  ReadTimeAltP();
+  time ti = ReadTimeP();
+
   QueryCloseP();
 
 
-  tiChannelC = tiAlt;
+  tiChannelC = ti;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;       
 
-  return(1);
+  return GetTime2(ti, true);
 }
 
 #endif
 
-
-/*
-#ifndef SKIP_Z
-
-//  чтение значение времени/даты
-bool    ReadTimeCanZ(void)
-{
-uchar   i;
-
-  Clear();
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryTimeZ();
-
-    if (ZetInput() != SER_GOODCHECK) 
-      continue;
-    else 
-      break;
-  }
-
-  if (i == bMINORREPEATS) return(0);
-
-
-  ReadTimeAltZ();
-
-  tiChannelC = tiAlt;
-  mpboChannelsA[0] = true;     
-
-  return(1);
-}
-
-#endif
-*/
 
 
 #ifndef SKIP_A

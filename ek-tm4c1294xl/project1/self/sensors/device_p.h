@@ -16,7 +16,7 @@ void    QueryCloseP(void);
 void    QueryOpenP(void);
 void    QueryCorrectP(void);
 void    QueryTimeP(void);
-void    ReadTimeAltP(void);
+time    ReadTimeP(void);
 void    QueryEngAbsP(uchar  bPart);
 void    ReadEngAbsP(uchar  bPart);
 void    ReadEngAbsP_RD(void);

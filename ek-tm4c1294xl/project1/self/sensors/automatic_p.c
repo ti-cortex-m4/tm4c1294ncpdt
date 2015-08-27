@@ -100,7 +100,7 @@ void    QueryHistoryP3(uchar  ibRecord)
 }
 
 
-bool    QueryTimeP_Full(void)
+time2   QueryTimeP_Full(void)
 {
 uchar   i;
 
@@ -115,7 +115,7 @@ uchar   i;
 
   if (i == bMINORREPEATS) return(0);
 
-  ReadTimeAltP();
+  ReadTimeP();
   ShowPercent(50);
 
   return(1);
@@ -204,7 +204,7 @@ uchar   i,j;
   if (i == bMINORREPEATS) return(0);
   ShowPercent(50);
 
-  ReadTimeAltP();
+  ReadTimeP();
 
 
   if (tiAlt.bMonth == ibMonth+1)

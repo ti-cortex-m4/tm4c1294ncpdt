@@ -595,16 +595,6 @@ typedef enum
 
 #endif
 
-#ifndef SKIP_Z
-
-  DEV_START_Z2          =  0x6300,
-  DEV_POSTOPENCANAL_Z2  =  0x6301,
-  DEV_TIME_Z2           =  0x6302,
-  DEV_POSTTIME_Z2       =  0x6303,
-  DEV_POSTCORRECT_Z2    =  0x6304,
-
-#endif
-
   DEV_PAUSE             =  1 
 
 } device;
