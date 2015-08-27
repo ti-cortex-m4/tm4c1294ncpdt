@@ -15,7 +15,7 @@ AUTOMATIC_P.C
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals.h"
-//#include "automatic1.h"
+#include "automatic1.h"
 #include "device_p.h"
 #include "automatic_p.h"
 
