@@ -629,7 +629,7 @@ uchar i;
 }
 
 
-bool   GetConfig(uchar  bT)
+bool   GetConfigP(uchar  bT)
 {
 uchar i,j;
 
@@ -688,7 +688,7 @@ void  Setup2P(void)
 }
 
 
-bool   GetProfile(time  tiAlt)
+bool   GetProfileP(time  tiAlt)
 {
 uchar i,j;
 
@@ -801,14 +801,14 @@ uchar i;
     i = mpbBuffEls[pbGetEls];
     if ((i & 0xF0) == 0xE0) 
     {
-      if (GetConfig(i) == 1) break;
+      if (GetConfigP(i) == 1) break;
       if (bBreakEls == 1) break;
     } 
     else 
     {
       if ((i & 0x80) == 0) 
       {
-        if (GetProfile(ti) == 1) break;
+        if (GetProfileP(ti) == 1) break;
       }  
       else
         SkipByteEls();
