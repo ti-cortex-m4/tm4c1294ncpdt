@@ -14,7 +14,7 @@ PORTS_COMMON.C
 #include "../isr/serial2.h"
 #include "../isr/serial3.h"
 #include "../kernel/crc-16.h"
-#include "../kernel/crc-s.h"
+#include "../kernel/crc_s.h"
 #include "../kernel/crc_els.h"
 #include "ports.h"
 
@@ -136,10 +136,10 @@ void    MakeCRCElsInBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
-    case 0:  MakeCRC_Els(&mpbInBuff0+bOffset, wSize);  break;
-    case 1:  MakeCRC_Els(&mpbInBuff1+bOffset, wSize);  break;
-    case 2:  MakeCRC_Els(&mpbInBuff2+bOffset, wSize);  break;
-    case 3:  MakeCRC_Els(&mpbInBuff3+bOffset, wSize);  break;
+    case 0:  MakeCrcEls(mpbInBuff0 + bOffset, wSize);  break;
+    case 1:  MakeCrcEls(mpbInBuff1 + bOffset, wSize);  break;
+    case 2:  MakeCrcEls(mpbInBuff2 + bOffset, wSize);  break;
+    case 3:  MakeCrcEls(mpbInBuff3 + bOffset, wSize);  break;
     default: ASSERT(false);
   }
 }

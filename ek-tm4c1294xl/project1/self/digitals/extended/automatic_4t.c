@@ -9,6 +9,7 @@ AUTOMATIC_4T,C
 #include "../../display/display.h"
 #include "../../serial/ports.h"
 #include "../../sensors/automatic_c.h"
+#include "../../sensors/automatic_p.h"
 #include "extended_4t_b.h"
 #include "extended_4t_c.h"
 #include "automatic_4t.h"
