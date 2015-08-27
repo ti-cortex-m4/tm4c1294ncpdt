@@ -23,6 +23,8 @@ extern  uint                    iwDigHou;
 
 extern  uint                    cwDigHou;
 
+extern  uchar                   cbDigDay, cbDigMon;
+
 
 
 extern  uint                    wBaseCurr, wOffsCurr,
