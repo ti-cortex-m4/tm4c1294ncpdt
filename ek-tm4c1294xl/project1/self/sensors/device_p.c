@@ -16,6 +16,7 @@ DEVICE_P.C
 #include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
+#include "../memory/mem_device_p.h"
 #include "../display/display.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../time/timedate.h"
@@ -104,7 +105,7 @@ void    PushCharEls(uchar  bT)
 
 void    QueryStopP(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('B');
   PushChar('0');
@@ -135,7 +136,7 @@ uchar i;
 
   QueryStopP();
 
-  InitPush();
+  InitPush(0);
   PushChar('/');
   PushChar('?');
 
@@ -159,7 +160,7 @@ uchar i;
 
 void    QueryCorrectP(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('W');
   PushChar('1');
@@ -183,7 +184,7 @@ void    QueryCorrectP(void)
 
 void    QueryTimeP(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
@@ -228,7 +229,7 @@ uint  w;
 
 void    QueryEngAbsP(uchar  bPart)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
@@ -303,7 +304,7 @@ uchar i,j,k;
 
 void    QueryTransP(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
@@ -341,7 +342,7 @@ void    ReadTransP(void)
 
 void    QueryModeP(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x06);
   PushChar('0');
   PushChar('5');
@@ -391,7 +392,7 @@ uchar i,a,b;
     mpbResultEls[i*2+1] = ToHalfEls(a & 0x0F);
   }
 
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('P');
   PushChar('2');
@@ -410,7 +411,7 @@ void    QueryRepasswordP(void)
 {  
 uchar i;
 
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('P');
   PushChar('2');
@@ -427,7 +428,7 @@ uchar i;
 
 void    QueryRegisterP(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
@@ -511,7 +512,7 @@ void    QuerySetValueP(void)
   bFirstEls = 0;
   cwDigHou = 0;
 
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('W');
   PushChar('1');
@@ -539,7 +540,7 @@ void    QuerySetValueP(void)
 
 void    QueryGetValueP(void)
 {
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
@@ -580,7 +581,7 @@ uint  w;
   Clear();
   if (boShowMessages == true) sprintf(szLo+1,"блок: %u - %u",wBaseCurr,wBaseLast);
 
-  InitPush();
+  InitPush(0);
   PushChar(0x01);
   PushChar('R');
   PushChar('1');
