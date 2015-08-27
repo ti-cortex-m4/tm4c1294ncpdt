@@ -8,7 +8,6 @@ PARAMS2.C
 #include    "../../memory/mem_digitals.h"
 #include    "../../memory/mem_realtime.h"
 #include    "../../memory/mem_params.h"
-#include    "../../memory/mem_device_p.h"
 #include    "../../serial/ports.h"
 #include    "../../serial/ports_devices.h"
 #include    "../../digitals/digitals.h"
@@ -928,7 +927,7 @@ float2  ReadParam(uint  iwPrm)
 #endif
 
 #ifndef SKIP_P
-    case 21: return( ReadParamP() );  break;
+    case 21: return GetFloat2(reValue, ReadParamP());
 #endif
 
 #ifndef SKIP_T

@@ -256,7 +256,7 @@ uchar   i,j;
           if (QueryHistoryP2_Full(i*8+1+1) == 0) return(0);
           ReadEngAbsP(1);
        
-          reKtrans = mpreTransCnt[ibDig];
+          reKtrans = mpdbTransCnt[ibDig];
           for (i=0; i<16; i++) 
           {
             mpreChannelsB[i] *= reKtrans;

@@ -16,7 +16,6 @@ DEVICE_P.C
 #include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
-#include "../memory/mem_device_p.h"
 #include "../display/display.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../time/timedate.h"

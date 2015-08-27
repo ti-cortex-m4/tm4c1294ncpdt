@@ -19,6 +19,7 @@ PORTS_DEVICES.H
 #include "../isr/serial2.h"
 #include "../isr/serial3.h"
 #include "../kernel/crc-16.h"
+#include "../kernel/crc_els.h"
 #include "../display/display.h"
 #include "../time/delay.h"
 #include "ports.h"
@@ -413,7 +414,7 @@ serial  ElsInputRD(void)
     {
       MakeCRCElsInBuff(0, CountInBuff());
 
-      if (wCRC == 0) {
+      if (wCrcEls == 0) {
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else {
