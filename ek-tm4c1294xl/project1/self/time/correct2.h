@@ -9,6 +9,7 @@ CORRECT2.H
 
 
 extern  cache const             chCorrect2Flag;
+extern  cache const             chCorrect2Status15;
 
 
 
