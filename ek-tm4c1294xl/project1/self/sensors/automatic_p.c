@@ -238,15 +238,16 @@ uchar   i,j;
       
       j = PopChar2ElsHex();
 
-      coTrue.mpbBuff[3] = PopChar2ElsHex();
-      coTrue.mpbBuff[2] = PopChar2ElsHex();
-      coTrue.mpbBuff[1] = PopChar2ElsHex();
-      coTrue.mpbBuff[0] = PopChar2ElsHex();
+      combo32 co;
+      co.mpbBuff[0] = PopChar2ElsHex();
+      co.mpbBuff[1] = PopChar2ElsHex();
+      co.mpbBuff[2] = PopChar2ElsHex();
+      co.mpbBuff[3] = PopChar2ElsHex();
 
-      ulong dwBuffC = coTrue.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
+      ulong dwBuffC = co.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
       SecIndexToDate(dwBuffC);
 
-      if ((j == 1) && (coTrue.dwBuff != 0)) 
+      if ((j == 1) && (co.dwBuff != 0))
       {
         if ((tiDig.bMonth == ti.bMonth) && (tiDig.bYear == ti.bYear))
         {
