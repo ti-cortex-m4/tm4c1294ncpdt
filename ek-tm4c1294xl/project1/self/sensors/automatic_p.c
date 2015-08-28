@@ -222,8 +222,8 @@ double2 ReadCntMonCanP(uchar  ibMonth)
   {
     QueryCloseP();
 
-    //sprintf(szLo, "  нет данных !  ");
-    //Delay(1000);
+//    sprintf(szLo, "  нет данных !  ");
+//    Delay(1000);
     return GetDouble2(0, false);
   }
   else

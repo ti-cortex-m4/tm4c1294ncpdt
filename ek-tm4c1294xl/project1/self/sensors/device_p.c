@@ -118,15 +118,13 @@ void    QueryCloseP(void)
 
 void    QueryOpenP(void)
 {
-uchar i;
-
   QueryStopP();
 
   InitPush(0);
   PushChar('/');
   PushChar('?');
 
-  i = diCurr.bAddress;
+  uchar i = diCurr.bAddress;
 
   PushChar(szDigits[ i/100 ]);
   PushChar(szDigits[ (i%100) / 10 ]);
@@ -196,22 +194,22 @@ time    ReadTimeP(void)
 {
   InitPop(2);
 
-  time tiAlt;
+  time ti;
 
-  tiAlt.bSecond = PopChar1Els()*10 + PopChar1Els();
-  tiAlt.bMinute = PopChar1Els()*10 + PopChar1Els();
-  tiAlt.bHour   = PopChar1Els()*10 + PopChar1Els();
+  ti.bSecond = PopChar1Els()*10 + PopChar1Els();
+  ti.bMinute = PopChar1Els()*10 + PopChar1Els();
+  ti.bHour   = PopChar1Els()*10 + PopChar1Els();
 
   uint w = PopChar4Els();
 
-  tiAlt.bDay    = FromBCD((w & 0x3F00) / 0x100);
-  tiAlt.bMonth  = FromBCD(w & 0x001F);
+  ti.bDay    = FromBCD((w & 0x3F00) / 0x100);
+  ti.bMonth  = FromBCD(w & 0x001F);
     
   PopChar();
   PopChar();
-  tiAlt.bYear   = PopChar1Els()*10 + PopChar1Els();
+  ti.bYear   = PopChar1Els()*10 + PopChar1Els();
 
-  return tiAlt;
+  return ti;
 }
 
 
@@ -564,8 +562,6 @@ void    ReadGetValueP(void)
 
 void    QueryProfileP(void)
 {
-uint  w;
-
   Clear();
   if (boShowMessages == true) sprintf(szLo+1,"блок: %u - %u",wBaseCurr,wBaseLast);
 
@@ -579,7 +575,7 @@ uint  w;
   PushChar('5');
   PushChar('0');
 
-  w = wBaseCurr;
+  uint w = wBaseCurr;
   PushChar(szDigits[ w/0x100 ]);
   PushChar(szDigits[ (w%0x100) / 0x10 ]);
   PushChar(szDigits[ w%0x10 ]);
@@ -603,9 +599,7 @@ void   SkipByteEls(void)
 
 uchar   GetByteEls(void) 
 {
-uchar i;
-
-  i = mpbBuffEls[pbGetEls];
+  uchar i = mpbBuffEls[pbGetEls];
   pbGetEls = ++pbGetEls % 128;
   cbSizeEls--;
 
