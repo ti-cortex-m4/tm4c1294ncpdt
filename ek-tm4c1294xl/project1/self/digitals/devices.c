@@ -68,12 +68,71 @@ bool    IsValidDevice(uchar  bDevice)
     case 3:  return true;
 #endif
 
+#ifndef SKIP_D
+    case 4:  return true;
+#endif
+
+#ifndef SKIP_E
+    case 7:
+    case 5:  return true;
+#endif
+
+#ifndef SKIP_F
+    case 6:  return true;
+#endif
+
+#ifndef SKIP_G
+    case 9:  return true;
+#endif
+
+#ifndef SKIP_H
+    case 10: return true;
+#endif
+
+#ifndef SKIP_I
+    case 11: return true;
+#endif
+
+#ifndef SKIP_K
+    case 14:
+    case 13: return true;
+#endif
+
+#ifndef SKIP_L
+    case 16:
+    case 17: return true;
+#endif
+
+#ifndef SKIP_M
+    case 18: return true;
+#endif
+
+#ifndef SKIP_N
+    case 19: return true;
+#endif
+
+#ifndef SKIP_O
+    case 20: return true;
+#endif
+
 #ifndef SKIP_P
     case 21: return true;
 #endif
 
+#ifndef SKIP_Q
+    case 22: return true;
+#endif
+
+#ifndef SKIP_R
+    case 23: return true;
+#endif
+
 #ifndef SKIP_S
     case 24: return true;
+#endif
+
+#ifndef SKIP_T
+    case 25: return true;
 #endif
 
 #ifndef SKIP_U
