@@ -93,9 +93,9 @@
     case DEV_TIME_P2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltP();
+        tiDig = ReadTimeP();
 
-        if (boControlTime == boTrue)
+        if (boControlTime == true)
           MakePause(DEV_POSTTIME_P2);
         else
           MakePause(DEV_POSTCORRECT_P2);
@@ -281,7 +281,7 @@
       break;
 
     case DEV_POSTPROFILE_P2:
-      ReadProfileP();
+      ReadProfileP(tiDig);
       if ((++wBaseCurr > wBaseLast) || (bBreakEls == 1))
       {
         Setup2P();
@@ -297,7 +297,7 @@
           }
           else
           {
-            NewBoundsAbs(ibMinor++);
+            NewBoundsAbs16(ibMinor++);
 
             if (cwTimeLockoutP > 60)
             {
