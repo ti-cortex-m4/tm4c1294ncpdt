@@ -209,12 +209,11 @@ uint    PopChar2ElsHex(void)
 
 double2 ReadCntMonCanP(uchar  ibMonth)
 {
-uchar   i,j;
-
   Clear();
   if (OpenDeviceP() == 0) return GetDouble2(0, false);
 
 
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -259,7 +258,7 @@ uchar   i,j;
 
       InitPop(2+8);
       
-      j = PopChar2ElsHex();
+      uchar j = PopChar2ElsHex();
 
       combo32 co;
       co.mpbBuff[0] = PopChar2ElsHex();
