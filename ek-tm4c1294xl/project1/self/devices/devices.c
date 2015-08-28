@@ -2183,37 +2183,43 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTTIME_P2:
-      dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
-      tiAlt = tiCurr;                       // текущие время/дата сумматора
-
-      if (dwBuffC == GetSecondIndex())
       {
-        MakePause(DEV_POSTCORRECT_P2);
-      }
-      else if (dwBuffC > GetSecondIndex())  // необходима коррекция времени ведомого счётчика назад
-      {
-        ShowDeltaNeg();
-        if (dwBuffC > 5) dwBuffC = 5;
-        iwMajor = dwBuffC % 0x10000;
+        ulong dwSecond1 = GetSecondIndex(tiDig);
+        ulong dwSecond2 = GetSecondIndex(tiCurr);
 
-        Clear(); sprintf(szLo+1,"коррекция: -%u с", iwMajor); DelayInf();
-        iwMajor |= 0x8000;
+        if (dwSecond1 == dwSecond2)
+        {
+          MakePause(DEV_POSTCORRECT_P2);
+        }
+        else if (dwSecond1 > dwSecond2)
+        {
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
 
-        cbRepeat = bMINORREPEATS;
-        QueryCorrectP();
-        SetCurr(DEV_CORRECT_P2);
-      }
-      else
-      {
-        ShowDeltaPos();
-        if (dwBuffC > 5) dwBuffC = 5;
-        iwMajor = dwBuffC % 0x10000;
+          ulong dw = dwSecond1 - dwSecond2;
+          if (dw > 5) dw = 5;
+          iwMajor = dw % 0x10000;
 
-        Clear(); sprintf(szLo+1,"коррекция: +%u с", iwMajor); DelayInf();
+          Clear(); sprintf(szLo+1,"коррекция: -%u с", iwMajor); DelayInf();
+          iwMajor |= 0x8000;
 
-        cbRepeat = bMINORREPEATS;
-        QueryCorrectP();
-        SetCurr(DEV_CORRECT_P2);
+          cbRepeat = bMINORREPEATS;
+          QueryCorrectP();
+          SetCurr(DEV_CORRECT_P2);
+        }
+        else
+        {
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
+
+          ulong dw = dwSecond2 - dwSecond1;
+          if (dw > 5) dw = 5;
+          iwMajor = dw % 0x10000;
+
+          Clear(); sprintf(szLo+1,"коррекция: +%u с", iwMajor); DelayInf();
+
+          cbRepeat = bMINORREPEATS;
+          QueryCorrectP();
+          SetCurr(DEV_CORRECT_P2);
+        }
       }
       break;
 
