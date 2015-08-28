@@ -689,7 +689,7 @@ void  Setup2P(void)
 }
 
 
-bool   GetProfileP(time  tiAlt)
+bool   GetProfileP(time  ti)
 {
 uchar i,j;
 
@@ -710,12 +710,12 @@ uchar i,j;
     i = GetByteEls();
     dw += ((i & 0xF0) >> 4);
 
-    reBuffA = 1;
+    double db = 1;
     j = i & 0x0F;
-    for (i=0; i<j; i++) reBuffA *= 10;
-    reBuffA *= dw;
+    for (i=0; i<j; i++) db *= 10;
+    db *= dw;
 
-    mpreChannelsA[c] = reBuffA/2e6;
+    mpdbChannelsC[c] = db/2e6;
   }
 
   cwDigHou++;
@@ -727,10 +727,10 @@ uchar i,j;
   }
 
   HouIndexToDate(dwHouIndex++);
-  sprintf(szLo," %02u:%02u %02u.%02u.%02u ", tiAlt.bHour,tiAlt.bMinute, tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
+  sprintf(szLo," %02u:%02u %02u.%02u.%02u ", ti.bHour,ti.bMinute, ti.bDay,ti.bMonth,ti.bYear);
 
-  tiDig = tiAlt;
-  if (SearchDefHouIndex() == 1) 
+
+  if (SearchDefHouIndex(ti) == 1)
   {
     iwMajor = 0;
     if (bFirstEls == 0) { ShowProgressDigHou(); bFirstEls = 1; }
@@ -738,7 +738,7 @@ uchar i,j;
     double dbPulse = mpdbPulseHou[ibDig];
     for (c=0; c<ibMinorMax; c++)        
     {
-      float fl = mpreChannelsA[c];
+      float fl = mpdbChannelsC[c];
       mpflEngFracDigCan[ibDig][c] += fl;
 
       uint w = (uint)(mpflEngFracDigCan[ibDig][c]*dbPulse);
@@ -768,7 +768,7 @@ uchar i,j;
       boRecalcCurr = true;      
     }
 
-    MakeSpecial(tiDig);
+    MakeSpecial(ti);
   } 
   else 
   { 
