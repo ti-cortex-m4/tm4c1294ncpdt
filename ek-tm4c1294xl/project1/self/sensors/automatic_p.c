@@ -100,6 +100,7 @@ void    QueryHistoryP3(uchar  ibRecord)
 }
 
 
+
 time2   QueryTimeP_Full(void)
 {
   uchar i;
@@ -119,6 +120,28 @@ time2   QueryTimeP_Full(void)
 
   return GetTime2(ti, true);
 }
+
+
+
+bool    QueryEnergyP_Full(uchar  bPart)
+{
+  uchar i;
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryEngAbsP(bPart);
+
+    if (ElsInput(0) != SER_GOODCHECK) continue; else break;
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(70+bPart);
+
+  ReadEngAbsP(bPart);
+
+  return(1);
+}
+
 
 
 bool    QueryHistoryP1_Full(uchar  ibRecord)

@@ -856,26 +856,5 @@ void    ReadCurrentP(void)
 }
 
 
-
-bool    QueryEnergyP_Full(uchar  bPart)
-{
-  uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryEngAbsP(bPart);
-
-    if (ElsInput(0) != SER_GOODCHECK) continue; else break;
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(70+bPart);
-
-  ReadEngAbsP(bPart);
-
-  return(1);
-}
-
-
 #endif
 

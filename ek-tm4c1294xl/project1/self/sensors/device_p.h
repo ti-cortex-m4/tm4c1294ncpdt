@@ -36,7 +36,6 @@ void    Setup2P(void);
 void    ReadProfileP(time  ti);
 bool    BreakP(void);
 void    ReadCurrentP(void);
-bool    QueryEnergyP_Full(uchar  bPart);
 
 #endif
 
