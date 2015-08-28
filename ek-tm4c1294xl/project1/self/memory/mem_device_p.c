@@ -41,8 +41,8 @@ double                  mpdbChannelsEls[4];
 // признак получаса перевода времени
 bool                    boTimeChangeP;
 
-// индекс текущего получаса и индекс получаса перевода времени
-ulong                   dwHouIndexP1, dwHouIndexP2;
+// ???, индекс текущего получаса, индекс получаса перевода времени
+ulong                   dwHouIndexP, dwHouIndexP1, dwHouIndexP2;
 
 // массив мгновенных значений (напряжения по фазам)
 float                   mpreParamP[3];
