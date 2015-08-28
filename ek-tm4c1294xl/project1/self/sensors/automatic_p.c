@@ -245,7 +245,7 @@ uchar   i,j;
       co.mpbBuff[3] = PopChar2ElsHex();
 
       ulong dw = co.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
-      SecIndexToDate(dw);
+      ti = SecIndexToDate(dw);
 
       if ((j == 1) && (co.dwBuff != 0))
       {
@@ -381,8 +381,8 @@ uchar   i,j;
       co.mpbBuff[2] = PopChar2ElsHex();
       co.mpbBuff[3] = PopChar2ElsHex();
 
-      ulong dwBuffC = co.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
-      SecIndexToDate(dwBuffC);
+      ulong dw = co.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
+      ti = SecIndexToDate(dw);
  
       if ((j == 1) && (co.dwBuff != 0))
       {
