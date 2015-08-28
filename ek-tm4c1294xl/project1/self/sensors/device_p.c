@@ -649,26 +649,27 @@ uchar i,j;
   
   SkipByteEls();  // status
 
-  coTrue.mpbBuff[3] = GetByteEls();
-  coTrue.mpbBuff[2] = GetByteEls();
-  coTrue.mpbBuff[1] = GetByteEls();
-  coTrue.mpbBuff[0] = GetByteEls();
+  combo32 co;
+  co.mpbBuff[0] = GetByteEls();
+  co.mpbBuff[1] = GetByteEls();
+  co.mpbBuff[2] = GetByteEls();
+  co.mpbBuff[3] = GetByteEls();
 
   if (bFlagElsCurr == 0)
   {
     bFlagElsCurr = 1;
     bCodeElsCurr = bT;
-    dwStampElsCurr = coTrue.dwBuff;
+    dwStampElsCurr = co.dwBuff;
   } 
 
   bBreakEls = 0;
   if (bFlagElsPrev == 1)
   {
-    if ((bCodeElsPrev == bT) && (dwStampElsPrev == coTrue.dwBuff))
+    if ((bCodeElsPrev == bT) && (dwStampElsPrev == co.dwBuff))
       bBreakEls = 1;
   }
 
-  ulong dwBuffC = coTrue.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
+  ulong dwBuffC = co.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
   time ti = SecIndexToDate(dwBuffC);
 
   dwHouIndex = DateToHouIndex(ti);
@@ -754,7 +755,7 @@ uchar i,j;
       for (c=0; c<bCANALS; c++)
       {
         LoadPrevDigital(c);
-        if (CompareCurrPrevLines(tiDig, c) == 1)
+        if (CompareCurrPrevLines(ibDig, c) == 1)
         {
           mpwImpHouCanSpec[c] += mpwChannels[diPrev.ibLine];
           mpwChannels[diPrev.ibLine] = 0;
