@@ -1217,12 +1217,11 @@ uchar   i;
 
 bool    AutomaticP(void)
 {
-uchar   i;
-
   Clear();
   if (OpenDeviceP() == 0) return(0);
 
 
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -1239,7 +1238,7 @@ uchar   i;
 
 
   dbKpulse = 5000;                      // K преобразования
-  SetCanalsAll();                       // сохранение К преобразования и К трансформации
+  SetCanalsAll();
 
   return(1);
 }
