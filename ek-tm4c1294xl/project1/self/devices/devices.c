@@ -2066,6 +2066,516 @@ void    RunDevices(void)
 
 #endif
 
+#ifndef SKIP_P
+
+    case DEV_START_P2:
+      ShowPercent(50);
+
+      cbRepeat = bMINORREPEATS;
+      QueryOpenP();
+      SetCurr(DEV_OPENCANAL_P2);
+    break;
+
+    case DEV_OPENCANAL_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        MakePause(DEV_POSTOPENCANAL_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryOpenP();
+          SetCurr(DEV_OPENCANAL_P2);
+        }
+      }
+      break;
+
+    case DEV_POSTOPENCANAL_P2:
+      ShowPercent(60);
+
+      cbRepeat = bMINORREPEATS;
+      QueryModeP();
+      SetCurr(DEV_MODE_P2);
+    break;
+
+    case DEV_MODE_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        MakePause(DEV_POSTMODE_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryModeP();
+          SetCurr(DEV_MODE_P2);
+        }
+      }
+      break;
+
+    case DEV_POSTMODE_P2:
+      ShowPercent(70);
+
+      cbRepeat = bMINORREPEATS;
+      QueryPasswordP();
+      SetCurr(DEV_PASSWORD_P2);
+    break;
+
+    case DEV_PASSWORD_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        MakePause(DEV_POSTPASSWORD_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryPasswordP();
+          SetCurr(DEV_PASSWORD_P2);
+        }
+      }
+      break;
+
+    case DEV_POSTPASSWORD_P2:
+      ShowPercent(80);
+
+      cbRepeat = bMINORREPEATS;
+      QueryTimeP();
+      SetCurr(DEV_TIME_P2);
+      break;
+
+    case DEV_TIME_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadTimeAltP();
+
+        if (boControlTime == boTrue)
+          MakePause(DEV_POSTTIME_P2);
+        else
+          MakePause(DEV_POSTCORRECT_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryTimeP();
+          SetCurr(DEV_TIME_P2);
+        }
+      }
+      break;
+
+    case DEV_POSTTIME_P2:
+      dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
+      tiAlt = tiCurr;                       // текущие время/дата сумматора
+
+      if (dwBuffC == GetSecondIndex())
+      {
+        MakePause(DEV_POSTCORRECT_P2);
+      }
+      else if (dwBuffC > GetSecondIndex())  // необходима коррекция времени ведомого счётчика назад
+      {
+        ShowDeltaNeg();
+        if (dwBuffC > 5) dwBuffC = 5;
+        iwMajor = dwBuffC % 0x10000;
+
+        Clear(); sprintf(szLo+1,"коррекция: -%u с", iwMajor); DelayInf();
+        iwMajor |= 0x8000;
+
+        cbRepeat = bMINORREPEATS;
+        QueryCorrectP();
+        SetCurr(DEV_CORRECT_P2);
+      }
+      else
+      {
+        ShowDeltaPos();
+        if (dwBuffC > 5) dwBuffC = 5;
+        iwMajor = dwBuffC % 0x10000;
+
+        Clear(); sprintf(szLo+1,"коррекция: +%u с", iwMajor); DelayInf();
+
+        cbRepeat = bMINORREPEATS;
+        QueryCorrectP();
+        SetCurr(DEV_CORRECT_P2);
+      }
+      break;
+
+    case DEV_CORRECT_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        Clear();
+        MakePause(DEV_POSTCORRECT_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryCorrectP();
+          SetCurr(DEV_CORRECT_P2);
+        }
+      }
+      break;
+
+    case DEV_POSTCORRECT_P2:
+      ShowPercent(90);
+
+      cbRepeat = bMINORREPEATS;
+      QueryRegisterP();
+      SetCurr(DEV_REGISTER_P2);
+      break;
+
+    case DEV_REGISTER_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadRegisterP();
+        if (ibMinorMax == 0)
+          ErrorProfile();
+        else
+          MakePause(DEV_POSTREGISTER_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryRegisterP();
+          SetCurr(DEV_REGISTER_P2);
+        }
+      }
+      break;
+
+    case DEV_POSTREGISTER_P2:
+      Setup1P();
+
+      cbRepeat = bMINORREPEATS;
+      QuerySetValueP(); // возвращает (ERR5), если прошло более 6 минут после команды Р2
+      SetCurr(DEV_SETVALUE_P2);
+      break;
+
+    case DEV_SETVALUE_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        MakePause(DEV_POSTSETVALUE_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QuerySetValueP();
+          SetCurr(DEV_SETVALUE_P2);
+        }
+      }
+      break;
+
+    case DEV_POSTSETVALUE_P2:
+      cbRepeat = bMINORREPEATS;
+      QueryGetValueP();
+      SetCurr(DEV_GETVALUE_P2);
+      break;
+
+    case DEV_GETVALUE_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadGetValueP();
+        MakePause(DEV_POSTGETVALUE_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryGetValueP();
+          SetCurr(DEV_GETVALUE_P2);
+        }
+      }
+      break;
+
+    case DEV_POSTGETVALUE_P2:
+      cbRepeat = bMINORREPEATS;
+      QueryProfileP();
+      SetCurr(DEV_PROFILE_P2);
+      break;
+
+    case DEV_PROFILE_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        MakePause(DEV_POSTPROFILE_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryProfileP();
+          SetCurr(DEV_PROFILE_P2);
+        }
+      }
+      break;
+
+    case DEV_POSTPROFILE_P2:
+      ReadProfileP();
+      if ((++wBaseCurr > wBaseLast) || (bBreakEls == 1))
+      {
+        Setup2P();
+        if (((MakeStopHou(0) == 0) || (iwMajor > 10)) && (iwDigHou != 0xFFFF))
+        {
+          DoneProfile();
+        }
+        else
+        {
+          if (BreakP())
+          {
+            DoneProfile();
+          }
+          else
+          {
+            NewBoundsAbs(ibMinor++);
+
+            if (cwTimeLockoutP > 60)
+            {
+              cbRepeat = bMINORREPEATS;
+              QueryRepasswordP();
+              SetCurr(DEV_REPASSWORD_P2);
+            }
+            else
+            {
+              cbRepeat = bMINORREPEATS;
+              QuerySetValueP();
+              SetCurr(DEV_SETVALUE_P2);
+            }
+          }
+        }
+      }
+      else
+      {
+        cbRepeat = bMINORREPEATS;
+        QueryProfileP();
+        SetCurr(DEV_PROFILE_P2);
+      }
+      break;
+
+    case DEV_REPASSWORD_P2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+          QuerySetValueP();
+          SetCurr(DEV_SETVALUE_P2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryRepasswordP();
+          SetCurr(DEV_REPASSWORD_P2);
+        }
+      }
+      break;
+
+#endif
+
+#ifndef SKIP_P
+
+    case DEV_START_P3:
+      ShowPercent(50);
+
+      cbRepeat = bMINORREPEATS;
+      QueryOpenP();
+      SetCurr(DEV_OPENCANAL_P3);
+    break;
+
+    case DEV_OPENCANAL_P3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        MakePause(DEV_POSTOPENCANAL_P3);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryOpenP();
+          SetCurr(DEV_OPENCANAL_P3);
+        }
+      }
+      break;
+
+    case DEV_POSTOPENCANAL_P3:
+      ShowPercent(60);
+
+      cbRepeat = bMINORREPEATS;
+      QueryModeP();
+      SetCurr(DEV_MODE_P3);
+    break;
+
+    case DEV_MODE_P3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        MakePause(DEV_POSTMODE_P3);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryModeP();
+          SetCurr(DEV_MODE_P3);
+        }
+      }
+      break;
+
+    case DEV_POSTMODE_P3:
+      ShowPercent(70);
+
+      cbRepeat = bMINORREPEATS;
+      QueryPasswordP();
+      SetCurr(DEV_PASSWORD_P3);
+    break;
+
+    case DEV_PASSWORD_P3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        MakePause(DEV_POSTPASSWORD_P3);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryPasswordP();
+          SetCurr(DEV_PASSWORD_P3);
+        }
+      }
+      break;
+
+    case DEV_POSTPASSWORD_P3:
+      ShowPercent(80);
+
+      cbRepeat = bMINORREPEATS;
+      QueryRegisterP();
+      SetCurr(DEV_REGISTER_P3);
+      break;
+
+    case DEV_REGISTER_P3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadRegisterP();
+        MakePause(DEV_POSTREGISTER_P3);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryRegisterP();
+          SetCurr(DEV_REGISTER_P3);
+        }
+      }
+      break;
+
+    case DEV_POSTREGISTER_P3:
+      ShowPercent(90);
+
+      cbRepeat = bMINORREPEATS;
+      QueryEngAbsP(0);
+      SetCurr(DEV_ENERGY0_P3);
+      break;
+
+    case DEV_ENERGY0_P3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadEngAbsP(0);
+
+        cbRepeat = bMINORREPEATS;
+        QueryEngAbsP(1);
+        SetCurr(DEV_ENERGY1_P3);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryEngAbsP(0);
+          SetCurr(DEV_ENERGY0_P3);
+        }
+      }
+      break;
+
+    case DEV_ENERGY1_P3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadEngAbsP(1);
+
+        ReadCurrentP();
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryEngAbsP(1);
+          SetCurr(DEV_ENERGY1_P3);
+        }
+      }
+      break;
+
+#endif
+
 #ifndef SKIP_S
 
     case DEV_START_S2:                  
