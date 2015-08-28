@@ -738,8 +738,8 @@ uchar i,j;
     double dbPulse = mpdbPulseHou[ibDig];
     for (c=0; c<ibMinorMax; c++)        
     {
-      reBuffA = mpreChannelsA[c];
-      mpflEngFracDigCan[ibDig][c] += reBuffA;
+      float fl = mpreChannelsA[c];
+      mpflEngFracDigCan[ibDig][c] += fl;
 
       uint w = (uint)(mpflEngFracDigCan[ibDig][c]*dbPulse);
       mpwChannels[c] = w;
@@ -838,16 +838,17 @@ void    ReadCurrentP(void)
   uchar i;
   for (i=0; i<4; i++)
   {
+    ulong dw;
     if (mpbMappingEls[i] >= 16) 
     {
-      dwBuffC = 0;
+      dw = 0;
     }
     else
     {
-      dwBuffC = mpdwChannelsB[mpbMappingEls[i]];
-      dwBuffC /= (1e6/dbPulse);
+      dw = mpdwChannelsB[mpbMappingEls[i]];
+      dw /= (1e6/dbPulse);
     } 
-    mpdwBaseDig[i] = dwBuffC;
+    mpdwBaseDig[i] = dw;
   }
 
   MakeCurrent();
