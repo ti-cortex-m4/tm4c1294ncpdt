@@ -37,23 +37,6 @@ DEVICE_P.C
 #include "automatic1.h"
 #include "automatic_p.h"
 #include "device_p.h"
-//#include        "main.h"
-//#include        "xdata.h"
-//#include        "x_digitals.h"
-//#include        "ports.h"
-//#include        "engine.h"
-//#include        "energy.h"
-//#include        "essential.h"
-//#include        "timedate.h"
-//#include        "delay.h"
-//#include        "lines.h"
-//#include        "display.h"
-//#include        "limits.h"
-//#include        "digitals.h"
-//#include        "sensors.h"
-//#include        "special.h"
-//#include        "record.h"
-//#include        "_timedate.h"
 
 
 //#define TRANSIT_ENABLED
@@ -85,7 +68,7 @@ uchar   ToHalfEls(uchar  bT)
 
 uchar   PopChar1Els(void)
 {
-  return  FromCharEls(PopChar());
+  return FromCharEls(PopChar());
 }
 
 
@@ -857,4 +840,3 @@ void    ReadCurrentP(void)
 
 
 #endif
-
