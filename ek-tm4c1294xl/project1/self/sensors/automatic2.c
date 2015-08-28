@@ -957,7 +957,8 @@ time2   ReadTimeCanP(void)
   Clear();
   if (OpenDeviceP() == 0) GetTime2(tiZero, false);
 
-  uchar   i;
+
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
