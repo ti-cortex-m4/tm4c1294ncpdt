@@ -293,54 +293,51 @@ uchar   i,j;
 
 
 
-void    ClrValueP(uchar  ibLine)
+void    ClrValueP(uchar  ibLine, double  db)
 {
-  mpreChannelsB[ibLine] = coEnergy.reBuff;
+  mpdbChannelsC[ibLine] = db;
   mpboChannelsA[ibLine] = true;
 }
 
 
 void    SetValueP(uchar  ibLine, uchar  i)
 {
-  mpreChannelsB[ibLine] = mpreChannelsB[i];
+  mpdbChannelsC[ibLine] = mpdbChannelsC[i];
   mpboChannelsA[ibLine] = true;
 }
 
 
 void    GetTariffP(uchar  ibTariff)
 {
-  coEnergy.mpbBuff[0] = 0xFF; 
-  coEnergy.mpbBuff[1] = 0xFF; 
-  coEnergy.mpbBuff[2] = 0xFF; 
-  coEnergy.mpbBuff[3] = 0xFF; 
+  const double db = GetDoubleNAN();
 
   if (ibTariff == 0)
   {
     SetValueP(0, 16);
-    ClrValueP(1);
+    ClrValueP(1, db);
     SetValueP(2, 19);
-    ClrValueP(3);
+    ClrValueP(3, db);
   }
   else if (ibTariff == 1)
   {
     SetValueP(0, 17);
-    ClrValueP(1);
+    ClrValueP(1, db);
     SetValueP(2, 20);
-    ClrValueP(3);
+    ClrValueP(3, db);
   }
   else if (ibTariff == 2)
   {
     SetValueP(0, 18);
-    ClrValueP(1);
+    ClrValueP(1, db);
     SetValueP(2, 21);
-    ClrValueP(3);
+    ClrValueP(3, db);
   }
   else
   {
-    ClrValueP(0);
-    ClrValueP(1);
-    ClrValueP(2);
-    ClrValueP(3);
+    ClrValueP(0, db);
+    ClrValueP(1, db);
+    ClrValueP(2, db);
+    ClrValueP(3, db);
   }
 }
 
@@ -378,15 +375,16 @@ uchar   i,j;
       
       j = PopChar2ElsHex();
 
-      coTrue.mpbBuff[3] = PopChar2ElsHex();
-      coTrue.mpbBuff[2] = PopChar2ElsHex();
-      coTrue.mpbBuff[1] = PopChar2ElsHex();
-      coTrue.mpbBuff[0] = PopChar2ElsHex();
+      combo32 co;
+      co.mpbBuff[0] = PopChar2ElsHex();
+      co.mpbBuff[1] = PopChar2ElsHex();
+      co.mpbBuff[2] = PopChar2ElsHex();
+      co.mpbBuff[3] = PopChar2ElsHex();
 
-      dwBuffC = coTrue.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
+      ulong dwBuffC = co.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
       SecIndexToDate(dwBuffC);
  
-     if ((j == 1) && (coTrue.dwBuff != 0)) 
+      if ((j == 1) && (co.dwBuff != 0))
       {
         if ((tiDig.bMonth == ti.bMonth) && (tiDig.bYear == ti.bYear))
         { 
