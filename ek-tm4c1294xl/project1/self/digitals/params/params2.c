@@ -608,10 +608,10 @@ void    ReadArrayP(uchar  i)
 {
   InitPop(2 + i*8);
 
-  ulong dwBuffC = PopChar4Els();
-  dwBuffC <<= 16;
-  dwBuffC |= PopChar4Els();
-  reValue = (slong)dwBuffC;
+  ulong dw = PopChar4Els();
+  dw <<= 16;
+  dw |= PopChar4Els();
+  reValue = (slong)dw;
 }
 
 
@@ -619,8 +619,8 @@ void    ReadArray2P(uchar  i)
 {
   InitPop(2 + i*4);
 
-  ulong dwBuffC = PopChar4Els();
-  reValue = (slong)dwBuffC;
+  ulong dw = PopChar4Els();
+  reValue = (slong)dw;
 }
 
 
