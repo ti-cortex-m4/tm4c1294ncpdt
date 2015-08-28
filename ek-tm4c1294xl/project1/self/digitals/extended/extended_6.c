@@ -116,7 +116,7 @@ void    MakeExtended6(uchar  ibCan, double  db)
 
 bool    SupportedExtended6(uchar  ibCan)
 {
-  return ((fExt6Flag == true) && ((GetDigitalDevice(ibCan) == 4) || (GetDigitalDevice(ibCan) == 21)));
+  return (((fExt6Flag == true) && (GetDigitalDevice(ibCan) == 4)) || (GetDigitalDevice(ibCan) == 21));
 }
 
 
