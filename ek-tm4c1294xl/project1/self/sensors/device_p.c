@@ -319,12 +319,12 @@ void    ReadTransP(void)
   InitPop(2);
 
   ulong dw = (PopChar4Els() << 16) + PopChar4Els();
-  float flA = dw;
+  double dbA = dw;
 
   dw = (PopChar4Els() << 16) + PopChar4Els();
-  float flB = dw;
+  double dbB = dw;
 
-  dbKtrans = flA / flB;
+  dbKtrans = dbA / dbB;
 }
 
 
