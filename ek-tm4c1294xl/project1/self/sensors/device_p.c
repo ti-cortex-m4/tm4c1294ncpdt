@@ -16,6 +16,7 @@ DEVICE_P.C
 #include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
+#include "../memory/mem_schedule.h"
 #include "../display/display.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../time/timedate.h"
@@ -669,10 +670,10 @@ uchar i,j;
       bBreakEls = 1;
   }
 
-  ulong dwBuffC = co.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
-  time ti = SecIndexToDate(dwBuffC);
+  ulong dw = co.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
+  time ti = SecIndexToDate(dw);
 
-  dwHouIndex = DateToHouIndex(ti);
+  dwHouIndexP = DateToHouIndex(ti);
 
 
   for (i=0; i<j-5; i++) SkipByteEls();
@@ -720,13 +721,13 @@ uchar i,j;
 
   cwDigHou++;
 
-  dwHouIndexP1 = dwHouIndex;
+  dwHouIndexP1 = dwHouIndexP;
   if ((boTimeChangeP == true) && (dwHouIndexP1 > dwHouIndexP2))
   {
      boTimeChangeP = false;
   }
 
-  HouIndexToDate(dwHouIndex++);
+  ti = HouIndexToDate(dwHouIndexP++);
   sprintf(szLo," %02u:%02u %02u.%02u.%02u ", ti.bHour,ti.bMinute, ti.bDay,ti.bMonth,ti.bYear);
 
 

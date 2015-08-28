@@ -26,7 +26,7 @@ extern  double                  mpdbChannelsEls[4];
 
 extern  bool                    boTimeChangeP;
 
-extern  ulong                   dwHouIndexP1, dwHouIndexP2;
+extern  ulong                   dwHouIndexP, dwHouIndexP1, dwHouIndexP2;
 
 extern  float                   mpreParamP[3];
 
