@@ -213,19 +213,9 @@ double2 ReadCntMonCanP(uchar  ibMonth)
   if (OpenDeviceP() == 0) return GetDouble2(0, false);
 
 
-  uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryTimeP();
-
-    if (ElsInput(0) == SER_GOODCHECK) break;
-  }
-
-  if (i == bMINORREPEATS) return GetDouble2(0, false);
-  ShowPercent(50);
-
-  time ti = ReadTimeP();
+  time2 ti2 = QueryTimeP_Full();
+  if (ti2.fValid == false) return GetDouble2(0, false);
+  time ti = ti2.tiValue;
 
 
   if (ti.bMonth == ibMonth+1)
@@ -233,7 +223,7 @@ double2 ReadCntMonCanP(uchar  ibMonth)
     QueryCloseP();
 
     //sprintf(szLo, "  нет данных !  ");
-    //Delay(1000); 
+    //Delay(1000);
     return GetDouble2(0, false);
   }
   else
@@ -252,6 +242,7 @@ double2 ReadCntMonCanP(uchar  ibMonth)
       tiDig.bYear++;
     }
 
+    uchar i;
     for (i=0; i<15; i++) 
     { 
       if (QueryHistoryP1_Full(i) == 0) return GetDouble2(0, false);
@@ -367,8 +358,6 @@ void    GetTariffP(uchar  ibTariff)
 
 status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
 {
-uchar   i,j;
-
   if (ibMonth == ibMonthP)
   {
     GetTariffP(ibTariff);
@@ -389,13 +378,14 @@ uchar   i,j;
     tiDig.bMonth = ibMonth+1;
     tiDig.bDay  = 1;
 
+    uchar i;
     for (i=0; i<15; i++) 
     {
       if (QueryHistoryP1_Full(i) == 0) return(ST4_BADDIGITAL);
 
       InitPop(2+8);
       
-      j = PopChar2ElsHex();
+      uchar j = PopChar2ElsHex();
 
       combo32 co;
       co.mpbBuff[0] = PopChar2ElsHex();
