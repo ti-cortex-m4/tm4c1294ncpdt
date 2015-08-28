@@ -68,6 +68,10 @@ bool    IsValidDevice(uchar  bDevice)
     case 3:  return true;
 #endif
 
+#ifndef SKIP_P
+    case 21: return true;
+#endif
+
 #ifndef SKIP_S
     case 24: return true;
 #endif
