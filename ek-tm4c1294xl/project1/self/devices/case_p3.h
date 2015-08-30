@@ -122,10 +122,7 @@
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         ReadEngAbsP(0);
-
-        cbRepeat = bMINORREPEATS;
-        QueryEngAbsP(1);
-        SetCurr(DEV_ENERGY1_P3);
+        MakePause(DEV_POSTENERGY0_P3);
       }
       else
       {
@@ -139,6 +136,14 @@
           SetCurr(DEV_ENERGY0_P3);
         }
       }
+      break;
+
+    case DEV_POSTENERGY0_P3:
+      ShowPercent(91);
+
+      cbRepeat = bMINORREPEATS;
+      QueryEngAbsP(1);
+      SetCurr(DEV_ENERGY1_P3);
       break;
 
     case DEV_ENERGY1_P3:
