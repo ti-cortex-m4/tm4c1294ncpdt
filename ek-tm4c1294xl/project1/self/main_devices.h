@@ -466,6 +466,7 @@ typedef enum
   DEV_REGISTER_P3       =  0x1547,
   DEV_POSTREGISTER_P3   =  0x1548,
   DEV_ENERGY0_P3        =  0x1549,
+  DEV_POSTENERGY0_P3    =  0x154B,
   DEV_ENERGY1_P3        =  0x154A,
 
 #endif
