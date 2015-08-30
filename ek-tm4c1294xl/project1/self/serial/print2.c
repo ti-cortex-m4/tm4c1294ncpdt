@@ -64,6 +64,15 @@ void    x_bytehex(uchar  b)
 }
 
 
+void    x_bytechr(uchar  b)
+{
+#ifdef ENABLE_PRINT2
+
+  UARTprintf("%c", b);
+
+#endif
+}
+
 void    x_intdec(uint  w)
 {
 #ifdef ENABLE_PRINT2
