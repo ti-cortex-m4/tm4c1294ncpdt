@@ -331,8 +331,8 @@
     case DEV_REPASSWORD_P2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-          QuerySetValueP();
-          SetCurr(DEV_SETVALUE_P2);
+        QuerySetValueP();
+        SetCurr(DEV_SETVALUE_P2);
       }
       else
       {
