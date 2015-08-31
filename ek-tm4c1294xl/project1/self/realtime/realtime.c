@@ -9,7 +9,6 @@ TODO атомарные операции
 #include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_params.h"
-#include "../digitals/current/current_run.h"
 #include "../digitals/wait_query.h"
 #include "../hardware/power_off.h"
 #include "../time/rtc.h"
@@ -17,7 +16,6 @@ TODO атомарные операции
 #include "../health.h"
 #include "../serial/dtr.h"
 #include "../serial/print.h"
-#include "../sensors/device_p.h"
 #include "next_second.h"
 #include "next_minute1.h"
 #include "next_minute3.h"
@@ -140,22 +138,6 @@ void    ProcessTime(void)
   if (tiCurr.bSecond != tiPrev.bSecond)
   {
     NextSecond();
-
-    if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
-    {
-      if ((fCurrent == 1) && (cbWaitQuery == 0))
-      {
-        if ((tiCurr.bMinute % 3)*60 + tiCurr.bSecond >= bTimeoutCurrent)
-        {
-          RunCurrent();
-        }
-      }
-    }
-
-    if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
-    {
-      EverySecondP();
-    }
   }
 
 
