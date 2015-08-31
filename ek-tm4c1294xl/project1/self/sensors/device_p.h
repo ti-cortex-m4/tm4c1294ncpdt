@@ -35,7 +35,7 @@ void    QueryProfileP(void);
 void    Setup2P(void);
 void    ReadProfileP(time  ti);
 bool    BreakP(void);
-void    DeviceP_EverySecond(void);
+void    EverySecondP(void);
 void    ReadCurrentP(void);
 
 #endif
