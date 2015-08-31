@@ -811,7 +811,7 @@ bool    BreakP(void)
 
 
 
-void    DeviceP_EverySecond(void)
+void    EverySecondP(void)
 {
   cwSecondLockoutP++;
 }

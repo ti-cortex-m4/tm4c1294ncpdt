@@ -154,7 +154,7 @@ void    ProcessTime(void)
 
     if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
     {
-      DeviceP_EverySecond();
+      EverySecondP();
     }
   }
 
