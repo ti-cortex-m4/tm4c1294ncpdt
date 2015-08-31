@@ -390,7 +390,7 @@ uchar i,a,b;
   PushChar(0x03);
 
   ElsQueryIO(1, 4+19+1);
-  cwTimeLockoutP = 0;
+  cwSecondLockoutP = 0;
 }
 
 void    QueryRepasswordP(void)
@@ -409,7 +409,7 @@ uchar i;
   PushChar(0x03);
 
   ElsQueryIO(1, 4+19+1);
-  cwTimeLockoutP = 0;
+  cwSecondLockoutP = 0;
 }
 
 void    QueryRegisterP(void)
@@ -808,6 +808,14 @@ bool    BreakP(void)
   else cbDigDay = 0;
   return 0;
 }
+
+
+
+void    DeviceP_EverySecond(void)
+{
+  cwSecondLockoutP++;
+}
+
 
 
 void    ReadCurrentP(void)

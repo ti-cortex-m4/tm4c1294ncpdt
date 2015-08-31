@@ -9,7 +9,6 @@ TODO атомарные операции
 #include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_params.h"
-#include "../memory/mem_device_p.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/wait_query.h"
 #include "../hardware/power_off.h"
@@ -18,6 +17,7 @@ TODO атомарные операции
 #include "../health.h"
 #include "../serial/dtr.h"
 #include "../serial/print.h"
+#include "../sensors/device_p.h"
 #include "next_second.h"
 #include "next_minute1.h"
 #include "next_minute3.h"
@@ -154,7 +154,7 @@ void    ProcessTime(void)
 
     if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
     {
-       cwTimeLockoutP++;
+      DeviceP_EverySecond();
     }
   }
 
