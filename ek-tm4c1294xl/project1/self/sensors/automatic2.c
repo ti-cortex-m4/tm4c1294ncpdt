@@ -955,7 +955,7 @@ uchar   i;
 time2   ReadTimeCanP(void)
 {
   Clear();
-  if (OpenDeviceP() == 0) GetTime2(tiZero, false);
+  if (OpenDeviceP() == 0) return GetTime2(tiZero, false);
 
 
   uchar i;
@@ -965,9 +965,10 @@ time2   ReadTimeCanP(void)
     QueryTimeP();
 
     if (ElsInput(0) == SER_GOODCHECK) break;
+    if (fKey == true) return GetTime2(tiZero, false);
   }
 
-  if (i == bMINORREPEATS) GetTime2(tiZero, false);
+  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
   ShowPercent(50);
 
   time ti = ReadTimeP();
