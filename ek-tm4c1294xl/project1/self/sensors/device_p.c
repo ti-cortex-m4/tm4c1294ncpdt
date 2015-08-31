@@ -788,6 +788,7 @@ uchar i;
       if ((i & 0x80) == 0) 
       {
         if (GetProfileP(ti) == 1) break;
+        Delay(100);
       }  
       else
         SkipByteEls();

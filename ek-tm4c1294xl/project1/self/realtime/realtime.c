@@ -9,6 +9,7 @@ TODO атомарные операции
 #include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_params.h"
+#include "../memory/mem_device_p.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/wait_query.h"
 #include "../hardware/power_off.h"
@@ -149,6 +150,11 @@ void    ProcessTime(void)
           RunCurrent();
         }
       }
+    }
+
+    if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
+    {
+       cwTimeLockoutP++;
     }
   }
 
