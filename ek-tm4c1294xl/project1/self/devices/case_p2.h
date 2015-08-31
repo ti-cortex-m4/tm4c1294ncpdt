@@ -305,7 +305,7 @@
           {
             NewBoundsAbs16(ibMinor++);
 
-            if (cwTimeLockoutP > 60)
+            if (cwSecondLockoutP > 60)
             {
               cbRepeat = bMINORREPEATS;
               QueryRepasswordP();

@@ -48,4 +48,4 @@ ulong                   dwHouIndexP, dwHouIndexP1, dwHouIndexP2;
 float                   mpreParamP[3];
 
 // счетчик времени
-uint                    cwTimeLockoutP;
+uint                    cwSecondLockoutP;

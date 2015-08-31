@@ -30,4 +30,4 @@ extern  ulong                   dwHouIndexP, dwHouIndexP1, dwHouIndexP2;
 
 extern  float                   mpreParamP[3];
 
-extern  uint                    cwTimeLockoutP;
+extern  uint                    cwSecondLockoutP;
