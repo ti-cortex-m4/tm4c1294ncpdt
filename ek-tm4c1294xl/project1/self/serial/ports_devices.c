@@ -27,6 +27,32 @@ PORTS_DEVICES.H
 
 
 
+/*
+void    DebugOut(uint  cwIn, uchar  cbOut)
+{
+uint i;
+
+  x_init();
+  x_str("\n\n Output: out ="); x_intdec(cbOut); x_str(" in ="); x_intdec(cwIn);
+
+  x_str(" "); tiAlt = *PGetCurrTimeDate(); x_time_alt();
+  x_str("\n"); InitPush(); for (i=0; i<cbOut; i++) x_bytehex( SkipChar() );
+  x_str("\n"); InitPush(); for (i=0; i<cbOut; i++) x_bytechr( SkipChar() );
+}
+
+void  DebugIn(void)
+{
+uint i;
+
+  x_init();
+  x_str("\n Input: in ="); x_intdec(IndexInBuff());
+
+  x_str(" "); tiAlt = *PGetCurrTimeDate(); x_time_alt();
+  x_str("\n"); InitPush(); for (i=0; i<IndexInBuff(); i++) x_bytehex( mpbInBuff3[i] );
+  x_str("\n"); InitPush(); for (i=0; i<IndexInBuff(); i++) x_bytechr( mpbInBuff3[i] );
+}
+*/
+
 void    Query(uint  cwIn, uchar  cbOut, bool  fMinor)
 {
 //  DebugOut(cwIn, cbOut);
