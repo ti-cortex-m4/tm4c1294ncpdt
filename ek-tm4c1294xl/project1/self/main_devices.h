@@ -455,6 +455,7 @@ typedef enum
   DEV_PROFILE_P2        =  0x1511,
   DEV_POSTPROFILE_P2    =  0x1512,
   DEV_REPASSWORD_P2     =  0x1513,
+  DEV_POSTREPASSWORD_P2 =  0x1514,
 
   DEV_START_P3          =  0x1540,
   DEV_OPENCANAL_P3      =  0x1541,

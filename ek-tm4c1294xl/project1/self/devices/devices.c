@@ -2398,8 +2398,7 @@ void    RunDevices(void)
     case DEV_REPASSWORD_P2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-          QuerySetValueP();
-          SetCurr(DEV_SETVALUE_P2);
+        MakePause(DEV_POSTREPASSWORD_P2);
       }
       else
       {
@@ -2413,6 +2412,12 @@ void    RunDevices(void)
           SetCurr(DEV_REPASSWORD_P2);
         }
       }
+      break;
+
+    case DEV_POSTREPASSWORD_P2:
+      cbRepeat = bMINORREPEATS;
+      QuerySetValueP();
+      SetCurr(DEV_SETVALUE_P2);
       break;
 
 #endif
