@@ -82,6 +82,14 @@ void    x_intdec(uint  w)
 #endif
 }
 
+void    x_inthex(uint  w)
+{
+#ifdef ENABLE_PRINT2
+
+	UARTprintf(" %04X ", w);
+
+#endif
+}
 
 void    x_longdec(ulong  dw)
 {
