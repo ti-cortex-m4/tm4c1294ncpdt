@@ -76,3 +76,8 @@ extern  uint                    mpcwErrorLink[bCANALS];
 extern  uchar                   mpbOutBuffSave[1024];
 
 extern  uint                    wDividerS;
+
+
+
+extern  uint                    mpcwProfileLinkWrn[bPORTS][48],
+                                mpcwProfileLinkErr[bPORTS][48];
