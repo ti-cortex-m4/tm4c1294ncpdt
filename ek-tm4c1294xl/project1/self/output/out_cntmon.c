@@ -6,15 +6,17 @@ OUT_CNTMON.C
 
 #include "../main.h"
 #include "../serial/ports.h"
+#include "../sensors/automatic2.h"
+#include "../digitals/digitals.h"
+#include "../digitals/digitals_pause.h"
+#include "../display/display.h"
 
 
 
 void    OutCntCanMonExt(void)
 {
-uchar   i;
-
   SaveDisplay();
-  sprintf(szHi,"—четчики: %02bu-%02bu",bInBuff6+1,bInBuff7+1); Clear();
+  sprintf(szHi,"—четчики: %02u-%02u",bInBuff6+1,bInBuff7+1); Clear();
 
   if ((bInBuff6 < bCANALS) && (bInBuff7 < 12))
   {
@@ -28,7 +30,7 @@ uchar   i;
       PushChar(0xFF);
       PushChar(0xFF);
     }
-    else if (mpboEnblCan[bInBuff6] == boFalse)
+    else if (mpboEnblCan[bInBuff6] == false)
     {
       PushChar(2);
       PushChar(0xFF);
@@ -38,11 +40,11 @@ uchar   i;
     }
     else
     {
-      i = ibPort;
-      fAlt = ReadCntMonCan(bInBuff7,bInBuff6);
-      ibPort = i;
+      uchar p = ibPort;
+      double2 db2 = ReadCntMonCan(bInBuff7,bInBuff6);
+      ibPort = p;
 
-      if (fAlt == 0) 
+      if (db2.fValid == false)
       {
         PushChar(1);
         PushChar(0xFF);
@@ -53,14 +55,14 @@ uchar   i;
       else
       {
         PushChar(0);
-        PushReal();
+        PushFloat(db2.dbValue);
       }
     }
 
-    OutptrOutBuff(1+sizeof(real));       
+    OutptrOutBuff(1+sizeof(float));
   }
   else Result(bRES_BADADDRESS);
 
   LoadDisplay();
-  NextPause();                                    // внимание !
+  NextPause(); // внимание !
 }

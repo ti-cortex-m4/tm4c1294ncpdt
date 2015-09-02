@@ -28,6 +28,7 @@ RESPONSE255_CRC.C
 #include "../digitals/extended/extended_7_out.h"
 #include "../digitals/extended/diagram.h"
 #include "../output/out_common.h"
+#include "../output/out_cntmon.h"
 #include "../output/out_settings.h"
 #include "../output/out_phones.h"
 #include "../output/out_gaps.h"
