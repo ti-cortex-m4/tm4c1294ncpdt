@@ -43,11 +43,8 @@ sem2reader расчет макс. мощности по получасам
 output - from mem_profile
 profile - show time difference
 
-INQ запросы в extended
-
 счетчики повторов и ошибок по портам и 48 получасам
 убрать dbKtrans
-убрать keyboard comments
 обороты в 100 ms за 10 секунд
 extended3
 short diagramm
