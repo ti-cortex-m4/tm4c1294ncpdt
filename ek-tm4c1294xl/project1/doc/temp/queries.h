@@ -266,7 +266,7 @@
 #define bEXT_GETMAXPOWGRPDAY_CUST1     33
 +   #define bEXT_GETCURRENT                35
 #define bEXT_GETMAXPOWGRPDAY_CUST2     36
-#define bEXT_GETCNTCANMON              37
++   #define bEXT_GETCNTCANMON              37
 
 #define bEXT_GETCONTACT3               39
 
