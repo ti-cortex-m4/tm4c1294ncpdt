@@ -26,6 +26,7 @@ DEVICES.C
 #include "../digitals/wait_query.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/profile/profile_run.h"
+#include "../digitals/profile/profile_link.h"
 #include "../digitals/checkup/checkup_run.h"
 #include "../digitals/params/params2.h"
 #include "../digitals/max_repeats.h"
@@ -129,6 +130,8 @@ bool    MakeStopHou(uint  wAdd)
 
 void    ErrorLink(void)
 {
+  IncProfileLinkWrn(diCurr.ibPort, GetCurrHouIndex());
+
   ShowLo(szNoLink);
   sprintf(szLo+14,"%2u",cbRepeat); DelayInf();
 }
