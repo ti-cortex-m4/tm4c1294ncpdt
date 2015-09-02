@@ -32,6 +32,7 @@ PROFILE_RUN.C
 #include "../../time/decret.h"
 #include "../../flash/records.h"
 #include "../limits.h"
+#include "profile_link.h"
 #include "profile_run.h"
 
 
@@ -340,7 +341,7 @@ void    NextProfile(void)
 // аварийный переход на следующий канал
 void    ErrorProfile(void)
 {
-uchar   ibCan;
+  IncProfileLinkErr(diCurr.ibPort, GetCurrHouIndex());
 
   SaveDisplay();
 
@@ -350,6 +351,7 @@ uchar   ibCan;
   LongBeep();
 
   LoadCurrDigital(ibDig);
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);
