@@ -124,10 +124,10 @@ uint    GetFlashStatus(void)
 {
   uint i = 0;
 
-  if (cwFlashCompareErr   != 0) i |= 0x0001;
-  if (cwFlashEraseErr != 0) i |= 0x0002;
-  if (cwFlashReadErr  != 0) i |= 0x0004;
-  if (cwFlashWriteErr != 0) i |= 0x0008;
+  if (cwFlashCompareErr != 0) i |= 0x0001;
+  if (cwFlashEraseErr   != 0) i |= 0x0002;
+  if (cwFlashReadErr    != 0) i |= 0x0004;
+  if (cwFlashWriteErr   != 0) i |= 0x0008;
 
   return(i);
 }
