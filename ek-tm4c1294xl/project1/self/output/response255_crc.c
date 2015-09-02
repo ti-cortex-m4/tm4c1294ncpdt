@@ -83,6 +83,8 @@ void    Response255_CRC(void)
     case bEXT_GET_ESC_S_TIME:  OutEscS_Time();       break;
     case bEXT_GET_ESC_V_TIME:  OutEscV_Time();       break;
 
+    case bEXT_GETCNTCANMON: OutCntCanMonExt(); break;
+
     case bEXT_GETGROUPS: OutGetGroupsExt(); break;
 
     case bINQ_GETMAXPOWGRPDAY_ALL: OutMaxPowDayGrpExt(); break;

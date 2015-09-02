@@ -49,3 +49,5 @@ INQ запросы в extended
 убрать dbKtrans
 убрать keyboard comments
 обороты в 100 ms за 10 секунд
+extended3
+short diagramm
