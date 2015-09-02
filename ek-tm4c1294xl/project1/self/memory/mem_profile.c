@@ -104,3 +104,8 @@ uchar                   mpbOutBuffSave[1024];
 // делитель для энергии счетчика СЕ102
 uint                    wDividerS;
 
+
+
+// счетчики
+uint                    mpcwProfileLinkWrn[bPORTS][48],
+                        mpcwProfileLinkErr[bPORTS][48];

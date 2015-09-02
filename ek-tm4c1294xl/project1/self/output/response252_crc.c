@@ -21,6 +21,7 @@ RESPONSE252_CRC,C
 #include "../output/out_nvram.h"
 #include "../output/out_flash.h"
 #include "../kernel/asserts.h"
+#include "../output/profile/out_profile_link.h"
 
 
 
@@ -55,6 +56,11 @@ void    Response252_CRC(void)
     case 15: ResetFlashCounters(); break;
 
     case 16: OutAsserts(); break;
+
+    case 17: OutGetProfileLinkWrn(); break;
+    case 18: OutGetProfileLinkErr(); break;
+    case 19: OutResetProfileLinkWrn(); break;
+    case 20: OutResetProfileLinkErr(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
