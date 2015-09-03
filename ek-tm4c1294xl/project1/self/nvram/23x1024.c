@@ -397,3 +397,17 @@ bool    Test2ReadNvramBuff(ulong  dwAddr, uint  wSize, uchar  b)
 
   return f;
 }
+
+
+
+uint    GetNvramStatus(void)
+{
+  uint w = 0;
+
+  if (cwNvramCompareErr != 0) w |= 0x0001;
+  if (cwNvramFreeErr    != 0) w |= 0x0002;
+  if (cwNvramReadErr    != 0) w |= 0x0004;
+  if (cwNvramWriteErr   != 0) w |= 0x0008;
+
+  return w;
+}
