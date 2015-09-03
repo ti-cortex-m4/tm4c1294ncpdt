@@ -48,7 +48,7 @@ void    OutExtended31(void)
       }
 
       Push(&dw, sizeof(ulong));
-      PushTime(EveIndexToDate(dw));
+      PushTime(EventIndexToDate(dw));
 
       wSize += 10;
     }
