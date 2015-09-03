@@ -12,7 +12,7 @@ KEY_HEALTH,C
 
 
 //                                         0123456789ABCDEF
-static char const       szHealth[]      = "Версия          ",
+static char const       szHealth[]      = "Состояние       ",
                         szFlash1[]      = "FLASH1:         ",
                         szFlash2[]      = "FLASH2:         ",
                         szNvram[]       = "NVRAM:          ",
