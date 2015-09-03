@@ -5,8 +5,17 @@ EXTENDED_3.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../console.h"
 #include "../../memory/mem_extended_3.h"
-#include "../../display/display.h"
+#include "../../memory/mem_digitals.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
+#include "../../devices/devices.h"
+#include "../../sensors/automatic_a.h"
+#include "../../sensors/automatic_b.h"
+#include "../../include/flash.h"
+#include "../../flash/records.h"
+#include "../../time/timedate.h"
 #include "extended_3.h"
 
 
@@ -16,40 +25,42 @@ static char const       szEventsAll[]  =  "События         ";
 
 
 
-void    ResetExtended3(void) {
-uchar i;
-
-  for (i=0; i<bCANALS; i++) {
-    mpboEventFirst[i] = boTrue;
-    mpdwEventDevice[i] = 0;
-    mpdwEventPhase1[i] = 0;
-    mpdwEventPhase2[i] = 0;
-    mpdwEventPhase3[i] = 0;
+void    ResetExtended3(void)
+{
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    mpboEventFirst[c] = true;
+    mpdwEventDevice[c] = 0;
+    mpdwEventPhase1[c] = 0;
+    mpdwEventPhase2[c] = 0;
+    mpdwEventPhase3[c] = 0;
   }
 
   boExt3Flag = false;
 
-  for (i=0; i<sizeof(mpboEventA); i++) 
-    mpboEventA[i] = false;
+  for (c=0; c<sizeof(mpboEventA); c++)
+    mpboEventA[c] = false;
 
-  for (i=0; i<sizeof(mpboEventB); i++) 
-    mpboEventB[i] = false;
+  for (c=0; c<sizeof(mpboEventB); c++)
+    mpboEventB[c] = false;
 }
 
 
-void    ResetExtended3_Full(void) {
-uchar i;
-
-  for (i=0; i<bCANALS; i++) {
-    mpboEventFirst[i] = boTrue;
-    mpdwEventDevice[i] = 0;
-    mpdwEventPhase1[i] = 0;
-    mpdwEventPhase2[i] = 0;
-    mpdwEventPhase3[i] = 0;
+void    ResetExtended3_Full(void)
+{
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    mpboEventFirst[c] = true;
+    mpdwEventDevice[c] = 0;
+    mpdwEventPhase1[c] = 0;
+    mpdwEventPhase2[c] = 0;
+    mpdwEventPhase3[c] = 0;
   }
 
   wPageOut=wFLA_IMPRECORD;
-  for (i=0; i<bRECORD_SIZE; i++) {
+  for (c=0; c<bRECORD_SIZE; c++) {
     SafePageErase();
     wPageOut++;
   }
@@ -57,67 +68,68 @@ uchar i;
 
 
 
-ulong   DateToEveIndex(void)
+ulong   DateToEveIndex(time  ti)
 {
-uchar   i;
+  ulong dw = 0;
 
-  dwBuffC = 0;
+  if ((ti.bYear   == 0) &&
+      (ti.bMonth  == 0) &&
+      (ti.bDay    == 0) &&
+      (ti.bHour   == 0) &&
+      (ti.bMinute == 0) &&
+      (ti.bSecond == 0)) return dw; // обрабатывать и неправильный форматы даты ?
 
-  if ((tiAlt.bYear   == 0) &&
-      (tiAlt.bMonth  == 0) &&
-      (tiAlt.bDay    == 0) &&
-      (tiAlt.bHour   == 0) &&
-      (tiAlt.bMinute == 0) &&
-      (tiAlt.bSecond == 0)) return dwBuffC;   // обрабатывать и неправильный форматы даты ?
+  uchar i;
+  for (i=0; i<ti.bYear; i++)
+    dw += DaysInYearSpec(i);
 
-  for (i=0; i<tiAlt.bYear; i++)
-    dwBuffC += DaysInYearSpec(i);
+  for (i=1; i<ti.bMonth; i++)
+    dw += DaysInMonthSpec(ti.bYear,i);
 
-  for (i=1; i<tiAlt.bMonth; i++)
-    dwBuffC += DaysInMonthSpec(tiAlt.bYear,i);
+  dw += ti.bDay-1;
+  dw *= 24;
+  dw += ti.bHour;
+  dw *= 60;
+  dw += ti.bMinute;
+  dw *= 60;
+  dw += ti.bSecond;
 
-  dwBuffC += tiAlt.bDay-1;
-  dwBuffC *= 24;
-  dwBuffC += tiAlt.bHour;
-  dwBuffC *= 60;
-  dwBuffC += tiAlt.bMinute;
-  dwBuffC *= 60;
-  dwBuffC += tiAlt.bSecond;
-
-  return(dwBuffC);
+  return(dw);
 }
 
 
-#ifndef MODBUS
 
-void    EveIndexToDate(ulong  dwT)
+time    EveIndexToDate(ulong  dwT)
 {
-  tiAlt.bYear = 0;
-  while (dwT >= (ulong)24*60*60*DaysInYearSpec(tiAlt.bYear))
+  time ti;
+
+  ti.bYear = 0;
+  while (dwT >= (ulong)24*60*60*GetDaysInYearY(ti.bYear))
   {
-    dwT -= (ulong)24*60*60*DaysInYearSpec(tiAlt.bYear); 
-    tiAlt.bYear++;
+    dwT -= (ulong)24*60*60*GetDaysInYearY(ti.bYear);
+    ti.bYear++;
   }
   
-  tiAlt.bMonth = 1;
-  while (dwT >= (ulong)24*60*60*DaysInMonthSpec(tiAlt.bYear,tiAlt.bMonth))
+  ti.bMonth = 1;
+  while (dwT >= (ulong)24*60*60*GetDaysInMonthYM(ti.bYear,ti.bMonth))
   {
-    dwT -= (ulong)24*60*60*DaysInMonthSpec(tiAlt.bYear,tiAlt.bMonth);
-    tiAlt.bMonth++;
+    dwT -= (ulong)24*60*60*GetDaysInMonthYM(ti.bYear,ti.bMonth);
+    ti.bMonth++;
   }
   
-  tiAlt.bDay = dwT/86400; 
-  dwT -= (ulong)86400*tiAlt.bDay;
-  tiAlt.bDay++;
+  ti.bDay = dwT/86400;
+  dwT -= (ulong)86400*ti.bDay;
+  ti.bDay++;
 
-  tiAlt.bHour = dwT/3600; 
-  dwT -= (ulong)3600*tiAlt.bHour;  
+  ti.bHour = dwT/3600;
+  dwT -= (ulong)3600*ti.bHour;
 
-  tiAlt.bMinute = dwT/60; 
-  tiAlt.bSecond = dwT%60;
+  ti.bMinute = dwT/60;
+  ti.bSecond = dwT%60;
+
+  return ti;
 }
 
-#endif
 
 
 void    ShowEventsA(uchar  ibEvent)
@@ -137,7 +149,7 @@ void    ShowEventsA(uchar  ibEvent)
 
 void    QueryEventA(uchar  ibEvent, uchar  j)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(4);                       
@@ -148,7 +160,7 @@ void    QueryEventA(uchar  ibEvent, uchar  j)
 }
 
 
-bit     QueryEventA_Full(uchar  ibEvent, uchar  j, uchar  bPercent)
+bool    QueryEventA_Full(uchar  ibEvent, uchar  j, uchar  bPercent)
 {
 uchar   i;
 
@@ -168,15 +180,18 @@ uchar   i;
 }
 
 
-void    ReadEventA(void)
+time    ReadEventA(void)
 {
-  tiAlt.bSecond = FromBCD( PopChar() );
-  tiAlt.bMinute = FromBCD( PopChar() );
-  tiAlt.bHour   = FromBCD( PopChar() );
+  time ti;
+  ti.bSecond = FromBCD( PopChar() );
+  ti.bMinute = FromBCD( PopChar() );
+  ti.bHour   = FromBCD( PopChar() );
   PopChar();
-  tiAlt.bDay    = FromBCD( PopChar() );
-  tiAlt.bMonth  = FromBCD( PopChar() );
-  tiAlt.bYear   = FromBCD( PopChar() );
+  ti.bDay    = FromBCD( PopChar() );
+  ti.bMonth  = FromBCD( PopChar() );
+  ti.bYear   = FromBCD( PopChar() );
+
+  return ti;
 }
 
 
@@ -218,18 +233,19 @@ uchar i,j,k;
   }
 
   dwCurr = 0;
-  boAlt = false;
+  bool f = false;
+
   for (i=0; i<10; i++)
   {
     tiAlt = mptiEventAB1[i];
-    if (dwPrev == DateToEveIndex()) boAlt = boTrue;
+    if (dwPrev == DateToEveIndex()) f = true;
     if (dwCurr < DateToEveIndex()) {
       dwCurr = DateToEveIndex();
       j = i;
     }
 
     tiAlt = mptiEventAB2[i];
-    if (dwPrev == DateToEveIndex()) boAlt = boTrue;
+    if (dwPrev == DateToEveIndex()) f = true;
     if (dwCurr < DateToEveIndex()) {
       dwCurr = DateToEveIndex();
       j = i;
@@ -237,7 +253,7 @@ uchar i,j,k;
   }
 
   if (dwCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
-  if ((boAlt == false) && (mpboEventFirst[ibDig] == boTrue)) { bEventCode = GetEventCodeA(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
+  if ((f == false) && (mpboEventFirst[ibDig] == true)) { bEventCode = GetEventCodeA(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
   for (i=0; i<10; i++) {
     k = (10 + j + i + 1) % 10;
@@ -264,16 +280,16 @@ uchar i,j,k;
 
 void    ReadEventsAllA(void)
 {
-  if (mpboEventA[0] == boTrue) {
+  if (mpboEventA[0] == true) {
     ReadEventsA(1);
   }
-  if (mpboEventA[1] == boTrue) {
+  if (mpboEventA[1] == true) {
     ReadEventsA(7);
   }
-  if (mpboEventA[2] == boTrue) {
+  if (mpboEventA[2] == true) {
     ReadEventsA(8);
   }
-  if (mpboEventA[3] == boTrue) {
+  if (mpboEventA[3] == true) {
     ReadEventsA(9);
   }
 }
@@ -297,7 +313,7 @@ void    ShowEventsB(uchar  ibEvent)
 
 void    QueryEventB(uchar  ibEvent, uchar  j)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(diCurr.bAddress);           
   PushChar(4);                       
@@ -309,7 +325,7 @@ void    QueryEventB(uchar  ibEvent, uchar  j)
 }
 
 
-bit     QueryEventB_Full(uchar  ibEvent, uchar  j, uchar  bPercent)
+bool    QueryEventB_Full(uchar  ibEvent, uchar  j, uchar  bPercent)
 {
 uchar   i;
 
@@ -329,14 +345,17 @@ uchar   i;
 }
 
 
-void    ReadEventB(void)
+time    ReadEventB(void)
 {
-  tiAlt.bSecond = FromBCD( PopChar() );
-  tiAlt.bMinute = FromBCD( PopChar() );
-  tiAlt.bHour   = FromBCD( PopChar() );
-  tiAlt.bDay    = FromBCD( PopChar() );
-  tiAlt.bMonth  = FromBCD( PopChar() );
-  tiAlt.bYear   = FromBCD( PopChar() );
+  time ti;
+  ti.bSecond = FromBCD( PopChar() );
+  ti.bMinute = FromBCD( PopChar() );
+  ti.bHour   = FromBCD( PopChar() );
+  ti.bDay    = FromBCD( PopChar() );
+  ti.bMonth  = FromBCD( PopChar() );
+  ti.bYear   = FromBCD( PopChar() );
+
+  return ti;
 }
 
 
@@ -382,14 +401,14 @@ uchar i,j,k;
   for (i=0; i<10; i++)
   {
     tiAlt = mptiEventAB1[i];
-    if (dwPrev == DateToEveIndex()) boAlt = boTrue;
+    if (dwPrev == DateToEveIndex()) boAlt = true;
     if (dwCurr < DateToEveIndex()) {
       dwCurr = DateToEveIndex();
       j = i;
     }
 
     tiAlt = mptiEventAB2[i];
-    if (dwPrev == DateToEveIndex()) boAlt = boTrue;
+    if (dwPrev == DateToEveIndex()) boAlt = true;
     if (dwCurr < DateToEveIndex()) {
       dwCurr = DateToEveIndex();
       j = i;
@@ -397,7 +416,7 @@ uchar i,j,k;
   }
 
   if (dwCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
-  if ((boAlt == false) && (mpboEventFirst[ibDig] == boTrue)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
+  if ((boAlt == false) && (mpboEventFirst[ibDig] == true)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
   for (i=0; i<10; i++) {
     k = (10 + j + i + 1) % 10;
@@ -424,16 +443,16 @@ uchar i,j,k;
 
 void    ReadEventsAllB(void)
 {
-  if (mpboEventB[0] == boTrue) {
+  if (mpboEventB[0] == true) {
     ReadEventsB(1);
   }
-  if (mpboEventB[1] == boTrue) {
+  if (mpboEventB[1] == true) {
     ReadEventsB(3);
   }
-  if (mpboEventB[2] == boTrue) {
+  if (mpboEventB[2] == true) {
     ReadEventsB(4);
   }
-  if (mpboEventB[3] == boTrue) {
+  if (mpboEventB[3] == true) {
     ReadEventsB(5);
   }
 }
@@ -442,10 +461,10 @@ void    ReadEventsAllB(void)
 
 void    MakeExtended3(void)
 {
-  if (boExt3Flag == boTrue)
+  if (boExt3Flag == true)
   {
     ShowHi(szEventsAll); Clear();
-    sprintf(szLo+14,"%2bu",ibDig+1); DelayInf();
+    sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
 
     switch (diCurr.bDevice)
     {

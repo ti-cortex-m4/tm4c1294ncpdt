@@ -279,8 +279,8 @@
 +   #define bEXT_GETRELAXS                 45
 +   #define bEXT_SETRELAXS                 46
 
-#define bEXT_GETEXTENDED30             47
-#define bEXT_GETEXTENDED31             48
++   #define bEXT_GETEXTENDED30             47
++   #define bEXT_GETEXTENDED31             48
 
 +   #define bEXT_GETEXTENDED50             49
 +   #define bEXT_GETEXTENDED51             50

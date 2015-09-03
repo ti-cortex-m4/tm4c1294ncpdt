@@ -28,8 +28,5 @@ void    ResetExtended3_Full(void);
 
 void    MakeExtended3(void);
 
-void    OutExtended30(void);
-void    OutExtended31(void);
-
 
 #endif
