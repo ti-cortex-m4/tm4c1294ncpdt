@@ -4,10 +4,10 @@ KEY_EXT_3_A.H
  
 ------------------------------------------------------------------------------*/
 
-#include "../../../main.h"
-#include "../../../console.h"
-#include "../../../memory/mem_extended_3.h"
-#include "../../../digitals/extended/extended_3_a.h"
+#include "../../main.h"
+#include "../../console.h"
+#include "../../memory/mem_extended_3.h"
+#include "../../digitals/extended/extended_3_a.h"
 
 
 
@@ -40,7 +40,7 @@ static void Show(uchar  i)
 
 
 
-void    key_SetExtended3A(void)
+void    key_SetExt3A(void)
 {
 static uchar i;
 

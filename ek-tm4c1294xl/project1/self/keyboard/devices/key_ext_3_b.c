@@ -4,10 +4,10 @@ KEY_EXT_3_B.H
  
 ------------------------------------------------------------------------------*/
 
-#include "../../../main.h"
-#include "../../../console.h"
-#include "../../../memory/mem_extended_3.h"
-#include "../../../digitals/extended/extended_3_b.h"
+#include "../../main.h"
+#include "../../console.h"
+#include "../../memory/mem_extended_3.h"
+#include "../../digitals/extended/extended_3_b.h"
 
 
 
@@ -40,7 +40,7 @@ static void Show(uchar  i)
 
 
 
-void    key_SetExtended3B(void)
+void    key_SetExt3B(void)
 {
 static uchar i;
 
