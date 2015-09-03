@@ -19,6 +19,6 @@ extern  ulong                   mpdwEventDevice[bCANALS],
                                 mpdwEventPhase2[bCANALS],
                                 mpdwEventPhase3[bCANALS];
 
-extern  ulong                   dwEventCurr, dwEventPrev;
+extern  ulong                   dwEventIndexCurr, dwEventIndexPrev;
 
 extern  uchar                   bEventCode;
