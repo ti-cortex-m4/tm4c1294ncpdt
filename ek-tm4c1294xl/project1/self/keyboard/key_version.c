@@ -25,15 +25,13 @@ static void Show(uchar  i)
     case 0: 
       ShowHi(szVersion);
       Clear();
-      sprintf(szLo+0,"%02u.%02u.%u.%04X",
-              bMAXVERSION, bMINVERSION, GetBuildNumber(), GetRomChecksum());
+      sprintf(szLo+0,"%02u.%02u.%u.%04X", bMAXVERSION, bMINVERSION, GetBuildNumber(), GetRomChecksum());
       break;
 
     case 1: 
       ShowHi(szParameters);
       Clear();
-      sprintf(szLo+0,"%02u.%02u.%03u.%lu",
-              bCANALS, bGROUPS, (uchar)(wHOURS/48), GetFileSize());
+      sprintf(szLo+0,"%02u.%02u.%03u.%lu", bCANALS, bGROUPS, (uchar)(wHOURS/48), GetFileSize());
       break;
 
     case 2: 
