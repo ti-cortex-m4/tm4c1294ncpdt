@@ -20,14 +20,12 @@ typedef enum
 
 
 
-void    ShowEventsA(uchar  ibEvent);
-void    ShowEventsB(uchar  ibEvent);
-
 void    ResetExtended3(void);
 void    ResetExtended3_Full(void);
 
 void    MakeExtended3(void);
 
+ulong   DateToEventIndex(time  ti);
 time    EventIndexToDate(ulong  dw);
 
 
