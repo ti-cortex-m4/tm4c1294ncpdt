@@ -17,13 +17,10 @@ static char const       szVersion[]     = "Версия          ",
                         szDevices[]     = "Счетчики        ";
 
 
-static uchar            ibVal;
 
-
-
-static void Show(void)
+static void Show(uchar  i)
 {
-  switch (ibVal)
+  switch (i)
   {
     case 0: 
       ShowHi(szVersion);
@@ -63,19 +60,21 @@ static void Show(void)
 
 void    key_GetVersion(void)
 {
+static uchar i;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibVal = 0;
-      Show();
+      i = 0;
+      Show(i);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibVal >= 4) ibVal = 0;
-      Show();
+      if (++i > 3) i = 0;
+      Show(i);
     }
     else Beep();
   }
