@@ -21,9 +21,9 @@ static char const       szHealth[]      = "Состояние       ",
 
 
 
-static void Show(uchar  ibVal)
+static void Show(uchar  i)
 {
-  switch (ibVal)
+  switch (i)
   {
     case 0: 
       ShowLo(szFlash1);
@@ -46,7 +46,7 @@ static void Show(uchar  ibVal)
 
 void    key_GetHealth(void)
 {
-static uchar ibVal;
+static uchar i;
 
   if (bKey == bKEY_ENTER)
   {
@@ -55,13 +55,13 @@ static uchar ibVal;
       enKeyboard = KBD_POSTENTER;
       ShowHi(szHealth);
 
-      ibVal = 0;
-      Show(ibVal);
+      i = 0;
+      Show(i);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibVal > 2) ibVal = 0;
-      Show(ibVal);
+      if (++i > 2) i = 0;
+      Show(i);
     }
     else Beep();
   }
