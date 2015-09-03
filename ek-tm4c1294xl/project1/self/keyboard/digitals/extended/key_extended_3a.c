@@ -12,15 +12,15 @@ KEY_EXTENDED_3A.H
 
 
 //                                         0123456789ABCDEF
-static char const       szEventsAllA[]  = "События счетчика",
-                        szForDeviceA[]  = "   СЭТ-4ТМ.02   ";
+static char const       szEvents[]      = "События счетчика",
+                        szDeviceA[]     = "   СЭТ-4ТМ.02   ";
 
 
 
-static void Show(uchar ibX)
+static void Show(uchar  i)
 {
   Clear();
-  switch (ibX) 
+  switch (i)
   {
     case 0: ShowEventsA(1); break;
     case 1: ShowEventsA(7); break;
@@ -29,7 +29,7 @@ static void Show(uchar ibX)
     default: Error(); break;
   }
 
-  if (mpboEventA[ibX] == false) 
+  if (mpboEventA[i] == false)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -42,7 +42,7 @@ static void Show(uchar ibX)
 
 void    key_SetExtended3A(void)
 {
-static uchar ibX;
+static uchar i;
 
   if (bKey == bKEY_ENTER)
   {                                           
@@ -52,19 +52,19 @@ static uchar ibX;
       {
         enKeyboard = KBD_POSTENTER;
 
-        ShowHi(szEventsAllA);
-        ShowLo(szForDeviceA);
+        ShowHi(szEvents);
+        ShowLo(szDeviceA);
         DelayMsg();
 
-        ibX = 0;
-        Show(ibX);
+        i = 0;
+        Show(i);
       }
       else BlockProgram(bSET_EXT3_FLAG);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibX >= 4) ibX = 0;
-      Show(ibX);
+      if (++i >= 4) i = 0;
+      Show(i);
     }
   }
 
@@ -73,8 +73,8 @@ static uchar ibX;
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {           
-      mpboEventA[ibX] = ~mpboEventA[ibX];      
-      Show(ibX);
+      mpboEventA[i] = InvertBoolean(mpboEventA[i]);
+      Show(i);
     }
     else Beep();
   }
