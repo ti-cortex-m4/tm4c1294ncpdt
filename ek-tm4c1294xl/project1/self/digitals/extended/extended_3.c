@@ -5,6 +5,9 @@ EXTENDED_3.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_extended_3.h"
+#include "../../display/display.h"
+#include "extended_3.h"
 
 
 
@@ -24,13 +27,13 @@ uchar i;
     mpdwEventPhase3[i] = 0;
   }
 
-  boExt3Flag = boFalse;
+  boExt3Flag = false;
 
   for (i=0; i<sizeof(mpboEventA); i++) 
-    mpboEventA[i] = boFalse;
+    mpboEventA[i] = false;
 
   for (i=0; i<sizeof(mpboEventB); i++) 
-    mpboEventB[i] = boFalse;
+    mpboEventB[i] = false;
 }
 
 
@@ -215,7 +218,7 @@ uchar i,j,k;
   }
 
   dwCurr = 0;
-  boAlt = boFalse;
+  boAlt = false;
   for (i=0; i<10; i++)
   {
     tiAlt = mptiEventAB1[i];
@@ -234,7 +237,7 @@ uchar i,j,k;
   }
 
   if (dwCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
-  if ((boAlt == boFalse) && (mpboEventFirst[ibDig] == boTrue)) { bEventCode = GetEventCodeA(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
+  if ((boAlt == false) && (mpboEventFirst[ibDig] == boTrue)) { bEventCode = GetEventCodeA(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
   for (i=0; i<10; i++) {
     k = (10 + j + i + 1) % 10;
@@ -375,7 +378,7 @@ uchar i,j,k;
   }
 
   dwCurr = 0;
-  boAlt = boFalse;
+  boAlt = false;
   for (i=0; i<10; i++)
   {
     tiAlt = mptiEventAB1[i];
@@ -394,7 +397,7 @@ uchar i,j,k;
   }
 
   if (dwCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
-  if ((boAlt == boFalse) && (mpboEventFirst[ibDig] == boTrue)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
+  if ((boAlt == false) && (mpboEventFirst[ibDig] == boTrue)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
   for (i=0; i<10; i++) {
     k = (10 + j + i + 1) % 10;
@@ -450,50 +453,6 @@ void    MakeExtended3(void)
       case 2:  ReadEventsAllB();  break;
     }
     
-    mpboEventFirst[ibDig] = boFalse;
+    mpboEventFirst[ibDig] = false;
   }
 }
-
-
-
-void    OutExtended30(void)
-{
-  InitPushCRC();
-  PushChar(boExt3Flag);
-  Push(&mpboEventFirst, sizeof(mpboEventFirst));
-  Push(&mpboEventA, sizeof(mpboEventA));
-  Push(&mpboEventB, sizeof(mpboEventB));
-  Output(1+64+32+32);
-}
-
-
-void    OutExtended31(void)
-{
-uchar   i,j;
-
-  j = bInBuff6;
-  if (j > 3) 
-    Result(bRES_BADADDRESS);
-  else {  
-    InitPushPtr();
-    wBuffD = 0;
-
-    for (i=0; i<bCANALS; i++) {
-      switch (j) {
-        case 0: dwBuffC = mpdwEventDevice[i]; break;
-        case 1: dwBuffC = mpdwEventPhase1[i]; break;
-        case 2: dwBuffC = mpdwEventPhase2[i]; break;
-        case 3: dwBuffC = mpdwEventPhase3[i]; break;
-      }
-
-      Push(&dwBuffC, sizeof(ulong));
-      EveIndexToDate(dwBuffC);
-      Push(&tiAlt, sizeof(time));
-
-      wBuffD += 10;
-    }
-
-    OutptrOutBuff(wBuffD);
-  }
-}
-
