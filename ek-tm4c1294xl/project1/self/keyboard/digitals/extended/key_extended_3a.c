@@ -1,27 +1,23 @@
 /*------------------------------------------------------------------------------
-_EXTENDED_3A.H
+KEY_EXTENDED_3A.H
 
  
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "delay.h"
-#include        "display.h"
-#include        "programs.h"
-#include        "extended_3.h"
-#include        "keyboard.h"
+
+#include "../../../main.h"
+#include "../../../console.h"
+#include "../../../memory/mem_extended_3.h"
+#include "../../../digitals/extended/extended_3_a.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szEventsAllA    = "События счетчика",
-                        szForDeviceA    = "   СЭТ-4ТМ.02   ";
+static char const       szEventsAllA[]  = "События счетчика",
+                        szForDeviceA[]  = "   СЭТ-4ТМ.02   ";
 
 
-void    ShowExtended3A(void)
+
+static void Show(uchar ibX)
 {
   Clear();
   switch (ibX) 
@@ -33,7 +29,7 @@ void    ShowExtended3A(void)
     default: Error(); break;
   }
 
-  if (mpboEventA[ibX] == boFalse) 
+  if (mpboEventA[ibX] == false) 
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -46,11 +42,13 @@ void    ShowExtended3A(void)
 
 void    key_SetExtended3A(void)
 {
+static uchar ibX;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boExt3Flag == boTrue) 
+      if (boExt3Flag == true) 
       {
         enKeyboard = KBD_POSTENTER;
 
@@ -59,14 +57,14 @@ void    key_SetExtended3A(void)
         DelayMsg();
 
         ibX = 0;
-        ShowExtended3A();
+        Show(ibX);
       }
       else BlockProgram(bSET_EXT3_FLAG);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
       if (++ibX >= 4) ibX = 0;
-      ShowExtended3A();
+      Show(ibX);
     }
   }
 
@@ -76,11 +74,9 @@ void    key_SetExtended3A(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {           
       mpboEventA[ibX] = ~mpboEventA[ibX];      
-      ShowExtended3A();
+      Show(ibX);
     }
     else Beep();
   }
   else Beep();
 }
-
-*/

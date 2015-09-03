@@ -10,6 +10,7 @@ EXTENDED_3.C
 #include "../../memory/mem_digitals.h"
 #include "../../devices/devices.h"
 #include "../../include/flash.h"
+#include "../../flash/flash.h"
 #include "../../flash/records.h"
 #include "../../time/timedate.h"
 #include "extended_3_a.h"
