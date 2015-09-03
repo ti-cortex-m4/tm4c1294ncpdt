@@ -5,18 +5,15 @@ EXTENDED_3_B.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../console.h"
+#include "../../console.h"
 #include "../../memory/mem_extended_3.h"
-//#include "../../memory/mem_digitals.h"
-//#include "../../serial/ports.h"
-//#include "../../serial/ports_devices.h"
-//#include "../../devices/devices.h"
-//#include "../../sensors/automatic_a.h"
-//#include "../../sensors/automatic_b.h"
-//#include "../../include/flash.h"
-//#include "../../flash/flash.h"
-//#include "../../flash/records.h"
-//#include "../../time/timedate.h"
+#include "../../memory/mem_digitals.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
+#include "../../devices/devices.h"
+#include "../../sensors/automatic_b.h"
+#include "../../flash/records.h"
+#include "extended_3.h"
 #include "extended_3_b.h"
 
 
