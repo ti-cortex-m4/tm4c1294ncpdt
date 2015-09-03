@@ -32,3 +32,12 @@ extern  uint                    cwFlashBusyCnt,
                                 cwFlashReadErr,
                                 cwFlashWriteWrn,
                                 cwFlashWriteErr;
+
+extern  uint                    cwFlashCompareErr1,
+                                cwFlashCompareErr2,
+                                cwFlashEraseErr1,
+                                cwFlashEraseErr2,
+                                cwFlashReadErr1,
+                                cwFlashReadErr2,
+                                cwFlashWriteErr1,
+                                cwFlashWriteErr2;

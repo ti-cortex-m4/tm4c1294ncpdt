@@ -58,6 +58,8 @@ bool    SafePageErase(uint const  wPageOut)
   if (i == FLASH_REPEATS)
   {
     cwFlashEraseErr++;
+    (wPageOut < wPAGES) ? cwFlashEraseErr1++ : cwFlashEraseErr2++;
+
     return false;
   }
   else return true;
@@ -79,6 +81,8 @@ bool    SafePageRead(uint const  wPageIn)
   if (i == FLASH_REPEATS)
   {
     cwFlashReadErr++;
+    (wPageIn < wPAGES) ? cwFlashReadErr1++ : cwFlashReadErr2++;
+
     return false;
   }
   else return true;
@@ -113,6 +117,8 @@ bool    SafePageWrite(uint const  wPageOut)
   if (i == FLASH_REPEATS)
   {
     cwFlashWriteErr++;
+    (wPageOut < wPAGES) ? cwFlashWriteErr1++ : cwFlashWriteErr2++;
+
     return false;
   }
   else return true;
@@ -122,15 +128,42 @@ bool    SafePageWrite(uint const  wPageOut)
 
 uint    GetFlashStatus(void)
 {
-  uint i = 0;
+  uint w = 0;
 
-  if (cwFlashCompareErr != 0) i |= 0x0001;
-  if (cwFlashEraseErr   != 0) i |= 0x0002;
-  if (cwFlashReadErr    != 0) i |= 0x0004;
-  if (cwFlashWriteErr   != 0) i |= 0x0008;
+  if (cwFlashCompareErr != 0) w |= 0x0001;
+  if (cwFlashEraseErr   != 0) w |= 0x0002;
+  if (cwFlashReadErr    != 0) w |= 0x0004;
+  if (cwFlashWriteErr   != 0) w |= 0x0008;
 
-  return(i);
+  return w;
 }
+
+
+uint    GetFlashStatus1(void)
+{
+  uint w = 0;
+
+  if (cwFlashCompareErr1 != 0) w |= 0x0001;
+  if (cwFlashEraseErr1   != 0) w |= 0x0002;
+  if (cwFlashReadErr1    != 0) w |= 0x0004;
+  if (cwFlashWriteErr1   != 0) w |= 0x0008;
+
+  return w;
+}
+
+
+uint    GetFlashStatus2(void)
+{
+  uint w = 0;
+
+  if (cwFlashCompareErr2 != 0) w |= 0x0001;
+  if (cwFlashEraseErr2   != 0) w |= 0x0002;
+  if (cwFlashReadErr2    != 0) w |= 0x0004;
+  if (cwFlashWriteErr2   != 0) w |= 0x0008;
+
+  return w;
+}
+
 
 
 bool    GetFlashChecksum(void)

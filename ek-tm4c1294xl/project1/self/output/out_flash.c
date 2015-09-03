@@ -79,6 +79,15 @@ void    OutFlashCounters(void)
   wSize += PushInt(cwFlashWriteWrn);
   wSize += PushInt(cwFlashWriteErr);
 
+  wSize += PushInt(cwFlashCompareErr1);
+  wSize += PushInt(cwFlashCompareErr2);
+  wSize += PushInt(cwFlashEraseErr1);
+  wSize += PushInt(cwFlashEraseErr2);
+  wSize += PushInt(cwFlashReadErr1);
+  wSize += PushInt(cwFlashReadErr2);
+  wSize += PushInt(cwFlashWriteErr1);
+  wSize += PushInt(cwFlashWriteErr2);
+
   Output(wSize);
 }
 
@@ -102,6 +111,15 @@ void    ResetFlashCounters(void)
   cwFlashReadErr = 0;
   cwFlashWriteWrn = 0;
   cwFlashWriteErr = 0;
+
+  cwFlashCompareErr1 = 0;
+  cwFlashCompareErr2 = 0;
+  cwFlashEraseErr1 = 0;
+  cwFlashEraseErr2 = 0;
+  cwFlashReadErr1 = 0;
+  cwFlashReadErr2 = 0;
+  cwFlashWriteErr1 = 0;
+  cwFlashWriteErr2 = 0;
 
   Result(bRES_OK);
 }
