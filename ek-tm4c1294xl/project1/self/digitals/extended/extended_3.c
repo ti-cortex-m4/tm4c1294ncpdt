@@ -60,6 +60,7 @@ void    ResetExtended3_Full(void)
     mpdwEventPhase3[c] = 0;
   }
 
+  uint wPageOut;
   for (wPageOut=IMP_RECORD; wPageOut<IMP_RECORD+bRECORD_PAGES; wPageOut++)
   {
     SafePageErase(wPageOut);
@@ -163,8 +164,7 @@ void    QueryEventA(uchar  ibEvent, uchar  j)
 
 bool    QueryEventA_Full(uchar  ibEvent, uchar  j, uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -211,7 +211,7 @@ uchar   GetEventCodeA(uchar  ibEvent)
 
 void    ReadEventsA(uchar  ibEvent)
 {
-uchar i,j,k;
+uchar i,j;
  
   ShowEventsA(ibEvent);
 
@@ -260,17 +260,17 @@ uchar i,j,k;
 
   for (i=0; i<10; i++)
   {
-    k = (10 + j + i + 1) % 10;
+    uchar k = (10 + j + i + 1) % 10;
 
     time ti = mptiEventAB1[k];
-    if (dwEventIndexPrev < DateToEventIndex())
+    if (dwEventIndexPrev < DateToEventIndex(ti))
     {
       bEventCode = GetEventCodeA(ibEvent) | 0x80; // внимание !
       AddImpRecord(EVE_EVENTS_A);
     }
 
     ti = mptiEventAB2[k];
-    if (dwEventIndexPrev < DateToEventIndex())
+    if (dwEventIndexPrev < DateToEventIndex(ti))
     {
       bEventCode = GetEventCodeA(ibEvent);
       AddImpRecord(EVE_EVENTS_A);
@@ -381,7 +381,7 @@ uchar   GetEventCodeB(uchar  ibEvent)
 
 void    ReadEventsB(uchar  ibEvent)
 {
-uchar j,k;
+uchar j;
  
   ShowEventsB(ibEvent);
 
@@ -431,7 +431,7 @@ uchar j,k;
 
   for (i=0; i<10; i++)
   {
-    k = (10 + j + i + 1) % 10;
+    uchar k = (10 + j + i + 1) % 10;
 
     time ti = mptiEventAB1[k];
     if (dwEventIndexPrev < DateToEventIndex(ti))
