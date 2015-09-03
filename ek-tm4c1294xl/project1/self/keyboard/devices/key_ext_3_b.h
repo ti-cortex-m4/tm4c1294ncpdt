@@ -4,4 +4,4 @@ KEY_EXT_3_B.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetExtended3B(void);
+void    key_SetExt3B(void);

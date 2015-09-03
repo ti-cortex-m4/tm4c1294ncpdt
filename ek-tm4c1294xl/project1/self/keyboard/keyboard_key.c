@@ -307,8 +307,8 @@ void    Keyboard_Key(void)
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
       case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
-      case bSET_EXT3_EVENTS_A:  key_SetExtended3A();    break;
-      case bSET_EXT3_EVENTS_B:  key_SetExtended3B();    break;
+      case bSET_EXT3_EVENTS_A:  key_SetExt3A();    break;
+      case bSET_EXT3_EVENTS_B:  key_SetExt3B();    break;
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
@@ -575,8 +575,8 @@ void    Keyboard_Key(void)
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
       case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
-      case bSET_EXT3_EVENTS_A:  key_SetExtended3A();    break;
-      case bSET_EXT3_EVENTS_B:  key_SetExtended3B();    break;
+      case bSET_EXT3_EVENTS_A:  key_SetExt3A();    break;
+      case bSET_EXT3_EVENTS_B:  key_SetExt3B();    break;
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
@@ -762,8 +762,8 @@ void    Keyboard_Key(void)
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
       case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
-      case bSET_EXT3_EVENTS_A:  key_SetExtended3A();    break;
-      case bSET_EXT3_EVENTS_B:  key_SetExtended3B();    break;
+      case bSET_EXT3_EVENTS_A:  key_SetExt3A();    break;
+      case bSET_EXT3_EVENTS_B:  key_SetExt3B();    break;
 
       case bSET_EXT4_FLAG:      key_SetExt4Flag();      break;
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
