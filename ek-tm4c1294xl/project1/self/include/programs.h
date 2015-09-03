@@ -322,5 +322,7 @@ PROGRAMS.H
 
 #define wSET_EXT6_FLAG              400
 
+#define wGET_HEALTH                 999
+
 
 #endif

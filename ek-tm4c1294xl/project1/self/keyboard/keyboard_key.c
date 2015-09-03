@@ -127,6 +127,7 @@ KEYBOARD_KEY.C
 #include "gps/key_gps_correct.h"
 #include "gps/key_gps_schedule.h"
 #include "gps/key_gps_season.h"
+#include "key_health.h"
 
 
 
@@ -316,6 +317,8 @@ void    Keyboard_Key(void)
       case wSET_EXT4T_RESET_CUSTOM: key_SetExt4TResetCustom(); break;
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
+
+      case wGET_HEALTH:         key_GetHealth();        break;
 
       default:                  NoProgram();            break;
     }
@@ -578,6 +581,8 @@ void    Keyboard_Key(void)
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
 
+      case wGET_HEALTH:         key_GetHealth();        break;
+
       default:                  NoProgram();            break;
     }
   }
@@ -761,6 +766,8 @@ void    Keyboard_Key(void)
       case wSET_EXT4T_RESET_CUSTOM: key_SetExt4TResetCustom(); break;
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
+
+      case wGET_HEALTH:         key_GetHealth();        break;
 
       default:                  NoProgram();            break;
     }
