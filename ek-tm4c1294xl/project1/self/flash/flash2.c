@@ -252,6 +252,8 @@ bool    PageWrite2(uint const  wPageOut)
   if (SafeReadStatus2() == false)
   {
     cwFlashCompareErr++;
+    cwFlashCompareErr2++;
+
     return false;
   }
   else
