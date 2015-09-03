@@ -14,6 +14,7 @@ EXTENDED_3.C
 #include "../../sensors/automatic_a.h"
 #include "../../sensors/automatic_b.h"
 #include "../../include/flash.h"
+#include "../../flash/flash.h"
 #include "../../flash/records.h"
 #include "../../time/timedate.h"
 #include "extended_3.h"
@@ -59,16 +60,16 @@ void    ResetExtended3_Full(void)
     mpdwEventPhase3[c] = 0;
   }
 
-  wPageOut=wFLA_IMPRECORD;
+  uint wPageOut = wFLA_IMPRECORD;
   for (c=0; c<bRECORD_SIZE; c++) {
-    SafePageErase();
+    SafePageErase(wPageOut);
     wPageOut++;
   }
 }
 
 
 
-ulong   DateToEveIndex(time  ti)
+ulong   DateToEventIndex(time  ti)
 {
   ulong dw = 0;
 
@@ -79,12 +80,13 @@ ulong   DateToEveIndex(time  ti)
       (ti.bMinute == 0) &&
       (ti.bSecond == 0)) return dw; // обрабатывать и неправильный форматы даты ?
 
-  uchar i;
-  for (i=0; i<ti.bYear; i++)
-    dw += DaysInYearSpec(i);
+  uchar y;
+  for (y=0; y<ti.bYear; y++)
+    dw += GetDaysInYearY(y);
 
-  for (i=1; i<ti.bMonth; i++)
-    dw += DaysInMonthSpec(ti.bYear,i);
+  uchar m;
+  for (m=1; m<ti.bMonth; m++)
+    dw += GetDaysInMonthYM(ti.bYear,m);
 
   dw += ti.bDay-1;
   dw *= 24;
@@ -94,38 +96,37 @@ ulong   DateToEveIndex(time  ti)
   dw *= 60;
   dw += ti.bSecond;
 
-  return(dw);
+  return dw;
 }
 
 
-
-time    EveIndexToDate(ulong  dwT)
+time    EventIndexToDate(ulong  dw)
 {
   time ti;
 
   ti.bYear = 0;
-  while (dwT >= (ulong)24*60*60*GetDaysInYearY(ti.bYear))
+  while (dw >= (ulong)24*60*60*GetDaysInYearY(ti.bYear))
   {
-    dwT -= (ulong)24*60*60*GetDaysInYearY(ti.bYear);
+    dw -= (ulong)24*60*60*GetDaysInYearY(ti.bYear);
     ti.bYear++;
   }
   
   ti.bMonth = 1;
-  while (dwT >= (ulong)24*60*60*GetDaysInMonthYM(ti.bYear,ti.bMonth))
+  while (dw >= (ulong)24*60*60*GetDaysInMonthYM(ti.bYear,ti.bMonth))
   {
-    dwT -= (ulong)24*60*60*GetDaysInMonthYM(ti.bYear,ti.bMonth);
+    dw -= (ulong)24*60*60*GetDaysInMonthYM(ti.bYear,ti.bMonth);
     ti.bMonth++;
   }
   
-  ti.bDay = dwT/86400;
-  dwT -= (ulong)86400*ti.bDay;
+  ti.bDay = dw/86400;
+  dw -= (ulong)86400*ti.bDay;
   ti.bDay++;
 
-  ti.bHour = dwT/3600;
-  dwT -= (ulong)3600*ti.bHour;
+  ti.bHour = dw/3600;
+  dw -= (ulong)3600*ti.bHour;
 
-  ti.bMinute = dwT/60;
-  ti.bSecond = dwT%60;
+  ti.bMinute = dw/60;
+  ti.bSecond = dw%60;
 
   return ti;
 }
@@ -226,54 +227,54 @@ uchar i,j,k;
   } 
 
   switch (ibEvent) {
-    case 1: dwPrev = mpdwEventDevice[ibDig]; break;
-    case 7: dwPrev = mpdwEventPhase1[ibDig]; break;
-    case 8: dwPrev = mpdwEventPhase2[ibDig]; break;
-    case 9: dwPrev = mpdwEventPhase3[ibDig]; break;
+    case 1: dwEventPrev = mpdwEventDevice[ibDig]; break;
+    case 7: dwEventPrev = mpdwEventPhase1[ibDig]; break;
+    case 8: dwEventPrev = mpdwEventPhase2[ibDig]; break;
+    case 9: dwEventPrev = mpdwEventPhase3[ibDig]; break;
   }
 
-  dwCurr = 0;
+  dwEventCurr = 0;
   bool f = false;
 
   for (i=0; i<10; i++)
   {
     tiAlt = mptiEventAB1[i];
-    if (dwPrev == DateToEveIndex()) f = true;
-    if (dwCurr < DateToEveIndex()) {
-      dwCurr = DateToEveIndex();
+    if (dwEventPrev == DateToEventIndex()) f = true;
+    if (dwEventCurr < DateToEventIndex()) {
+      dwEventCurr = DateToEventIndex();
       j = i;
     }
 
     tiAlt = mptiEventAB2[i];
-    if (dwPrev == DateToEveIndex()) f = true;
-    if (dwCurr < DateToEveIndex()) {
-      dwCurr = DateToEveIndex();
+    if (dwEventPrev == DateToEventIndex()) f = true;
+    if (dwEventCurr < DateToEventIndex()) {
+      dwEventCurr = DateToEventIndex();
       j = i;
     }
   }
 
-  if (dwCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
+  if (dwEventCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
   if ((f == false) && (mpboEventFirst[ibDig] == true)) { bEventCode = GetEventCodeA(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
   for (i=0; i<10; i++) {
     k = (10 + j + i + 1) % 10;
     tiAlt = mptiEventAB1[k];
-    if (dwPrev < DateToEveIndex()) {
+    if (dwEventPrev < DateToEventIndex()) {
       bEventCode = GetEventCodeA(ibEvent) | 0x80;   // внимание !
       AddImpRecord(EVE_EVENTS_A);
     }
     tiAlt = mptiEventAB2[k];
-    if (dwPrev < DateToEveIndex()) {
+    if (dwEventPrev < DateToEventIndex()) {
       bEventCode = GetEventCodeA(ibEvent);
       AddImpRecord(EVE_EVENTS_A);
     }
   }   
 
   switch (ibEvent) {
-    case 1: mpdwEventDevice[ibDig] = dwCurr; break;
-    case 7: mpdwEventPhase1[ibDig] = dwCurr; break;
-    case 8: mpdwEventPhase2[ibDig] = dwCurr; break;
-    case 9: mpdwEventPhase3[ibDig] = dwCurr; break;
+    case 1: mpdwEventDevice[ibDig] = dwEventCurr; break;
+    case 7: mpdwEventPhase1[ibDig] = dwEventCurr; break;
+    case 8: mpdwEventPhase2[ibDig] = dwEventCurr; break;
+    case 9: mpdwEventPhase3[ibDig] = dwEventCurr; break;
   }
 }
 
@@ -390,53 +391,54 @@ uchar i,j,k;
   } 
 
   switch (ibEvent) {
-    case 1: dwPrev = mpdwEventDevice[ibDig]; break;
-    case 3: dwPrev = mpdwEventPhase1[ibDig]; break;
-    case 4: dwPrev = mpdwEventPhase2[ibDig]; break;
-    case 5: dwPrev = mpdwEventPhase3[ibDig]; break;
+    case 1: dwEventPrev = mpdwEventDevice[ibDig]; break;
+    case 3: dwEventPrev = mpdwEventPhase1[ibDig]; break;
+    case 4: dwEventPrev = mpdwEventPhase2[ibDig]; break;
+    case 5: dwEventPrev = mpdwEventPhase3[ibDig]; break;
   }
 
-  dwCurr = 0;
-  boAlt = false;
+  dwEventCurr = 0;
+  bool f = false;
+
   for (i=0; i<10; i++)
   {
     tiAlt = mptiEventAB1[i];
-    if (dwPrev == DateToEveIndex()) boAlt = true;
-    if (dwCurr < DateToEveIndex()) {
-      dwCurr = DateToEveIndex();
+    if (dwEventPrev == DateToEventIndex()) f = true;
+    if (dwEventCurr < DateToEventIndex()) {
+      dwEventCurr = DateToEventIndex();
       j = i;
     }
 
     tiAlt = mptiEventAB2[i];
-    if (dwPrev == DateToEveIndex()) boAlt = true;
-    if (dwCurr < DateToEveIndex()) {
-      dwCurr = DateToEveIndex();
+    if (dwEventPrev == DateToEventIndex()) f = true;
+    if (dwEventCurr < DateToEventIndex()) {
+      dwEventCurr = DateToEventIndex();
       j = i;
     }
   }
 
-  if (dwCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
-  if ((boAlt == false) && (mpboEventFirst[ibDig] == true)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
+  if (dwEventCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
+  if ((f == false) && (mpboEventFirst[ibDig] == true)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
   for (i=0; i<10; i++) {
     k = (10 + j + i + 1) % 10;
     tiAlt = mptiEventAB1[k];
-    if (dwPrev < DateToEveIndex()) {
+    if (dwEventPrev < DateToEventIndex()) {
       bEventCode = GetEventCodeB(ibEvent);
       AddImpRecord(EVE_EVENTS_B);
     }
     tiAlt = mptiEventAB2[k];
-    if (dwPrev < DateToEveIndex()) {
+    if (dwEventPrev < DateToEventIndex()) {
       bEventCode = GetEventCodeB(ibEvent) | 0x80;   // внимание !
       AddImpRecord(EVE_EVENTS_B);
     }
   }   
 
   switch (ibEvent) {
-    case 1: mpdwEventDevice[ibDig] = dwCurr; break;
-    case 3: mpdwEventPhase1[ibDig] = dwCurr; break;
-    case 4: mpdwEventPhase2[ibDig] = dwCurr; break;
-    case 5: mpdwEventPhase3[ibDig] = dwCurr; break;
+    case 1: mpdwEventDevice[ibDig] = dwEventCurr; break;
+    case 3: mpdwEventPhase1[ibDig] = dwEventCurr; break;
+    case 4: mpdwEventPhase2[ibDig] = dwEventCurr; break;
+    case 5: mpdwEventPhase3[ibDig] = dwEventCurr; break;
   }
 }
 

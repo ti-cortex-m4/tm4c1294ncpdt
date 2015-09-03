@@ -28,5 +28,7 @@ void    ResetExtended3_Full(void);
 
 void    MakeExtended3(void);
 
+time    EventIndexToDate(ulong  dw);
+
 
 #endif
