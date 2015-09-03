@@ -60,8 +60,8 @@ void    ResetExtended3_Full(void)
     mpdwEventPhase3[c] = 0;
   }
 
-  uint wPageOut = wFLA_IMPRECORD;
-  for (c=0; c<bRECORD_SIZE; c++) {
+  for (wPageOut=IMP_RECORD; wPageOut<IMP_RECORD+bRECORD_PAGES; wPageOut++)
+  {
     SafePageErase(wPageOut);
     wPageOut++;
   }
@@ -222,8 +222,8 @@ uchar i,j,k;
     if (QueryEventA_Full(ibEvent,i,50) == 0) {  bEventCode = i+1; AddImpRecord(EVE_EVENTS_BADLINK); return; }
 
     InitPop(1);
-    ReadEventA(); mptiEventAB1[i] = tiAlt;
-    ReadEventA(); mptiEventAB2[i] = tiAlt;
+    mptiEventAB1[i] = ReadEventA();
+    mptiEventAB2[i] = ReadEventA();
   } 
 
   switch (ibEvent) {
@@ -238,17 +238,19 @@ uchar i,j,k;
 
   for (i=0; i<10; i++)
   {
-    tiAlt = mptiEventAB1[i];
-    if (dwEventPrev == DateToEventIndex()) f = true;
-    if (dwEventCurr < DateToEventIndex()) {
-      dwEventCurr = DateToEventIndex();
+    time ti = mptiEventAB1[i];
+    if (dwEventPrev == DateToEventIndex(ti)) f = true;
+    if (dwEventCurr < DateToEventIndex(ti))
+    {
+      dwEventCurr = DateToEventIndex(ti);
       j = i;
     }
 
-    tiAlt = mptiEventAB2[i];
-    if (dwEventPrev == DateToEventIndex()) f = true;
-    if (dwEventCurr < DateToEventIndex()) {
-      dwEventCurr = DateToEventIndex();
+    ti = mptiEventAB2[i];
+    if (dwEventPrev == DateToEventIndex(ti)) f = true;
+    if (dwEventCurr < DateToEventIndex(ti))
+    {
+      dwEventCurr = DateToEventIndex(ti);
       j = i;
     }
   }
@@ -256,15 +258,20 @@ uchar i,j,k;
   if (dwEventCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
   if ((f == false) && (mpboEventFirst[ibDig] == true)) { bEventCode = GetEventCodeA(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
-  for (i=0; i<10; i++) {
+  for (i=0; i<10; i++)
+  {
     k = (10 + j + i + 1) % 10;
-    tiAlt = mptiEventAB1[k];
-    if (dwEventPrev < DateToEventIndex()) {
-      bEventCode = GetEventCodeA(ibEvent) | 0x80;   // внимание !
+
+    time ti = mptiEventAB1[k];
+    if (dwEventPrev < DateToEventIndex())
+    {
+      bEventCode = GetEventCodeA(ibEvent) | 0x80; // внимание !
       AddImpRecord(EVE_EVENTS_A);
     }
-    tiAlt = mptiEventAB2[k];
-    if (dwEventPrev < DateToEventIndex()) {
+
+    ti = mptiEventAB2[k];
+    if (dwEventPrev < DateToEventIndex())
+    {
       bEventCode = GetEventCodeA(ibEvent);
       AddImpRecord(EVE_EVENTS_A);
     }
@@ -328,8 +335,7 @@ void    QueryEventB(uchar  ibEvent, uchar  j)
 
 bool    QueryEventB_Full(uchar  ibEvent, uchar  j, uchar  bPercent)
 {
-uchar   i;
-
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -375,19 +381,20 @@ uchar   GetEventCodeB(uchar  ibEvent)
 
 void    ReadEventsB(uchar  ibEvent)
 {
-uchar i,j,k;
+uchar j,k;
  
   ShowEventsB(ibEvent);
 
   if (QueryOpenB_Full(25) == 0) { bEventCode = 0; AddImpRecord(EVE_EVENTS_BADLINK); return; }
 
+  uchar i;
   for (i=0; i<10; i++)
   {
     if (QueryEventB_Full(ibEvent,i,50) == 0) {  bEventCode = i+1; AddImpRecord(EVE_EVENTS_BADLINK); return; }
 
     InitPop(1);
-    ReadEventB(); mptiEventAB1[i] = tiAlt;
-    ReadEventB(); mptiEventAB2[i] = tiAlt;
+    mptiEventAB1[i] = ReadEventB();
+    mptiEventAB2[i] = ReadEventB();
   } 
 
   switch (ibEvent) {
@@ -402,17 +409,19 @@ uchar i,j,k;
 
   for (i=0; i<10; i++)
   {
-    tiAlt = mptiEventAB1[i];
-    if (dwEventPrev == DateToEventIndex()) f = true;
-    if (dwEventCurr < DateToEventIndex()) {
-      dwEventCurr = DateToEventIndex();
+    time ti = mptiEventAB1[i];
+    if (dwEventPrev == DateToEventIndex(ti)) f = true;
+    if (dwEventCurr < DateToEventIndex(ti))
+    {
+      dwEventCurr = DateToEventIndex(ti);
       j = i;
     }
 
-    tiAlt = mptiEventAB2[i];
-    if (dwEventPrev == DateToEventIndex()) f = true;
-    if (dwEventCurr < DateToEventIndex()) {
-      dwEventCurr = DateToEventIndex();
+    ti = mptiEventAB2[i];
+    if (dwEventPrev == DateToEventIndex(ti)) f = true;
+    if (dwEventCurr < DateToEventIndex(ti))
+    {
+      dwEventCurr = DateToEventIndex(ti);
       j = i;
     }
   }
@@ -420,16 +429,21 @@ uchar i,j,k;
   if (dwEventCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
   if ((f == false) && (mpboEventFirst[ibDig] == true)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
-  for (i=0; i<10; i++) {
+  for (i=0; i<10; i++)
+  {
     k = (10 + j + i + 1) % 10;
-    tiAlt = mptiEventAB1[k];
-    if (dwEventPrev < DateToEventIndex()) {
+
+    time ti = mptiEventAB1[k];
+    if (dwEventPrev < DateToEventIndex(ti))
+    {
       bEventCode = GetEventCodeB(ibEvent);
       AddImpRecord(EVE_EVENTS_B);
     }
-    tiAlt = mptiEventAB2[k];
-    if (dwEventPrev < DateToEventIndex()) {
-      bEventCode = GetEventCodeB(ibEvent) | 0x80;   // внимание !
+
+    ti = mptiEventAB2[k];
+    if (dwEventPrev < DateToEventIndex(ti))
+    {
+      bEventCode = GetEventCodeB(ibEvent) | 0x80; // внимание !
       AddImpRecord(EVE_EVENTS_B);
     }
   }   
