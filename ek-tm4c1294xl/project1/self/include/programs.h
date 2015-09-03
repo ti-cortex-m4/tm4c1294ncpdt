@@ -307,6 +307,11 @@ PROGRAMS.H
 #define wSET_MNT_ESC_S              500
 #define wSET_CORRECT_LIMIT          501
 
+#define bSET_EXT3_RESET             136
+#define bSET_EXT3_FLAG              137
+#define bSET_EXT3_EVENTS_A          138
+#define bSET_EXT3_EVENTS_B          139
+
 #define bSET_EXT4_FLAG              249
 #define bSET_EXT4_MONTHS            250
 #define bSET_EXT4_ENBL_CAN          252
