@@ -68,6 +68,9 @@ QUERIES2.H
 
 #define bEXT_GETCURRENT                35
 
+#define bEXT_GETEXTENDED30             47
+#define bEXT_GETEXTENDED31             48
+
 #define bEXT_GETEXTENDED40             42
 #define bEXT_GETEXTENDED41             43
 #define bEXT_GETEXTENDED42             44

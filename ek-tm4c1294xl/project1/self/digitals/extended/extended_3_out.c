@@ -25,31 +25,35 @@ void    OutExtended30(void)
 
 void    OutExtended31(void)
 {
-uchar   i,j;
-
-  j = bInBuff6;
+  uchar j = bInBuff6;
   if (j > 3) 
     Result(bRES_BADADDRESS);
-  else {  
+  else
+  {
     InitPushPtr();
-    wBuffD = 0;
+    uint wSize = 0;
 
-    for (i=0; i<bCANALS; i++) {
-      switch (j) {
-        case 0: dwBuffC = mpdwEventDevice[i]; break;
-        case 1: dwBuffC = mpdwEventPhase1[i]; break;
-        case 2: dwBuffC = mpdwEventPhase2[i]; break;
-        case 3: dwBuffC = mpdwEventPhase3[i]; break;
+    ulong dw;
+
+    uchar c;
+    for (c=0; c<bCANALS; c++)
+    {
+      switch (j)
+      {
+        case 0: dw = mpdwEventDevice[c]; break;
+        case 1: dw = mpdwEventPhase1[c]; break;
+        case 2: dw = mpdwEventPhase2[c]; break;
+        case 3: dw = mpdwEventPhase3[c]; break;
+        default: ASSERT(false);
       }
 
-      Push(&dwBuffC, sizeof(ulong));
-      EveIndexToDate(dwBuffC);
-      Push(&tiAlt, sizeof(time));
+      Push(&dw, sizeof(ulong));
+      PushTime(EveIndexToDate(dw));
 
-      wBuffD += 10;
+      wSize += 10;
     }
 
-    OutptrOutBuff(wBuffD);
+    OutptrOutBuff(wSize);
   }
 }
 

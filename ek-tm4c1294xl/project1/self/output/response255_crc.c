@@ -21,6 +21,7 @@ RESPONSE255_CRC.C
 #include "../output/out_groups.h"
 #include "../output/out_relaxs.h"
 #include "../digitals/extended/extended_1_out.h"
+#include "../digitals/extended/extended_3_out.h"
 #include "../digitals/extended/extended_4_out.h"
 #include "../digitals/extended/extended_4t_out.h"
 #include "../digitals/extended/extended_5_out.h"
@@ -143,6 +144,9 @@ void    Response255_CRC(void)
     case bEXT_GETRECALC: OutGetRecalcHou(); break;
     case bEXT_SETRECALC1: OutSetRecalcHou1(); break;
     case bEXT_SETRECALC2: OutSetRecalcHou2(); break;
+
+    case bEXT_GETEXTENDED30: OutExtended30(); break;
+    case bEXT_GETEXTENDED31: OutExtended31(); break;
 
     case bEXT_GETEXTENDED40: OutExtended40(false); break;
     case bEXT_GETEXTENDED44: OutExtended44(false); break;
