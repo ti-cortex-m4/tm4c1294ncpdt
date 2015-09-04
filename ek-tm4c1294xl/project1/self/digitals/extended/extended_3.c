@@ -38,7 +38,7 @@ void    ResetExtended3(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpboEventFirst[c] = true;
+    mpfEventFirst[c] = true;
     mpdwEventDevice[c] = 0;
     mpdwEventPhase1[c] = 0;
     mpdwEventPhase2[c] = 0;
@@ -49,11 +49,11 @@ void    ResetExtended3(void)
   SaveCache(&chExt3Flag);
 
 
-  for (c=0; c<sizeof(mpboEventA); c++)
-    mpboEventA[c] = false;
+  for (c=0; c<sizeof(mpfEventA); c++)
+    mpfEventA[c] = false;
 
-  for (c=0; c<sizeof(mpboEventB); c++)
-    mpboEventB[c] = false;
+  for (c=0; c<sizeof(mpfEventB); c++)
+    mpfEventB[c] = false;
 }
 
 
@@ -62,7 +62,7 @@ void    ResetExtended3_Manual(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpboEventFirst[c] = true;
+    mpfEventFirst[c] = true;
     mpdwEventDevice[c] = 0;
     mpdwEventPhase1[c] = 0;
     mpdwEventPhase2[c] = 0;
@@ -156,6 +156,6 @@ void    MakeExtended3(void)
       case 2:  ReadEventsAllB();  break;
     }
     
-    mpboEventFirst[ibDig] = false;
+    mpfEventFirst[ibDig] = false;
   }
 }
