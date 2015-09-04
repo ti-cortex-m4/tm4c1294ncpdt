@@ -25,8 +25,8 @@ void    OutExtended30(void)
 
 void    OutExtended31(void)
 {
-  uchar j = bInBuff6;
-  if (j > 3) 
+  uchar i = bInBuff6;
+  if (i > 3)
     Result(bRES_BADADDRESS);
   else
   {
@@ -38,7 +38,7 @@ void    OutExtended31(void)
     uchar c;
     for (c=0; c<bCANALS; c++)
     {
-      switch (j)
+      switch (i)
       {
         case 0: dw = mpdwEventDevice[c]; break;
         case 1: dw = mpdwEventPhase1[c]; break;
@@ -47,13 +47,10 @@ void    OutExtended31(void)
         default: ASSERT(false);
       }
 
-      Push(&dw, sizeof(ulong));
-      PushTime(EventIndexToDate(dw));
-
-      wSize += 10;
+      wSize += PushLong(dw);
+      wSize += PushTime(EventIndexToDate(dw));
     }
 
     OutptrOutBuff(wSize);
   }
 }
-
