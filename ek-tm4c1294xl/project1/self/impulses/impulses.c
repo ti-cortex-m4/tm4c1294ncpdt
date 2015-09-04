@@ -29,12 +29,12 @@ static uint             bLo0,bLo1,bLo2,bLo3;
 
 
 void    EnableImpulses(void) {
-	fEnabledImpulses = true;
+  fEnabledImpulses = true;
 }
 
 
 void    DisableImpulses(void) {
-	fEnabledImpulses = false;
+  fEnabledImpulses = false;
 }
 
 
@@ -71,44 +71,44 @@ uint  i = 0;
 void    Impulses_Timer0(void) {
 // TODO uint *pwImpMntCan = mpwImpMntCan[ibSoftMnt];
 
-	if (fEnabledImpulses)	{
+  if (fEnabledImpulses)  {
 #ifdef NATIVE_IMPULSES
 
-	  bLo0 = GetImpulses(); // TODO wDigitalsMask
-		int i = bLo0 & bLo1 & bLo2 & bLo3;
+    bLo0 = GetImpulses(); // TODO wDigitalsMask
+    int i = bLo0 & bLo1 & bLo2 & bLo3;
 
-		i &= wDigitalsMask;
-		if (i != 0) fOnImpulse = 1;
+    i &= wDigitalsMask;
+    if (i != 0) fOnImpulse = 1;
 
-		if ((i & 0x0001) != 0) mpwImpMntCan[ibSoftMnt][0]++;
-		if ((i & 0x0002) != 0) mpwImpMntCan[ibSoftMnt][1]++;
-		if ((i & 0x0004) != 0) mpwImpMntCan[ibSoftMnt][2]++;
-		if ((i & 0x0008) != 0) mpwImpMntCan[ibSoftMnt][3]++;
-		if ((i & 0x0010) != 0) mpwImpMntCan[ibSoftMnt][4]++;
-		if ((i & 0x0020) != 0) mpwImpMntCan[ibSoftMnt][5]++;
-		if ((i & 0x0040) != 0) mpwImpMntCan[ibSoftMnt][6]++;
-		if ((i & 0x0080) != 0) mpwImpMntCan[ibSoftMnt][7]++;
-		if ((i & 0x0100) != 0) mpwImpMntCan[ibSoftMnt][8]++;
-		if ((i & 0x0200) != 0) mpwImpMntCan[ibSoftMnt][9]++;
-		if ((i & 0x0400) != 0) mpwImpMntCan[ibSoftMnt][10]++;
-		if ((i & 0x0800) != 0) mpwImpMntCan[ibSoftMnt][11]++;
-		if ((i & 0x1000) != 0) mpwImpMntCan[ibSoftMnt][12]++;
-		if ((i & 0x2000) != 0) mpwImpMntCan[ibSoftMnt][13]++;
-		if ((i & 0x4000) != 0) mpwImpMntCan[ibSoftMnt][14]++;
-		if ((i & 0x8000) != 0) mpwImpMntCan[ibSoftMnt][15]++;
+    if ((i & 0x0001) != 0) mpwImpMntCan[ibSoftMnt][0]++;
+    if ((i & 0x0002) != 0) mpwImpMntCan[ibSoftMnt][1]++;
+    if ((i & 0x0004) != 0) mpwImpMntCan[ibSoftMnt][2]++;
+    if ((i & 0x0008) != 0) mpwImpMntCan[ibSoftMnt][3]++;
+    if ((i & 0x0010) != 0) mpwImpMntCan[ibSoftMnt][4]++;
+    if ((i & 0x0020) != 0) mpwImpMntCan[ibSoftMnt][5]++;
+    if ((i & 0x0040) != 0) mpwImpMntCan[ibSoftMnt][6]++;
+    if ((i & 0x0080) != 0) mpwImpMntCan[ibSoftMnt][7]++;
+    if ((i & 0x0100) != 0) mpwImpMntCan[ibSoftMnt][8]++;
+    if ((i & 0x0200) != 0) mpwImpMntCan[ibSoftMnt][9]++;
+    if ((i & 0x0400) != 0) mpwImpMntCan[ibSoftMnt][10]++;
+    if ((i & 0x0800) != 0) mpwImpMntCan[ibSoftMnt][11]++;
+    if ((i & 0x1000) != 0) mpwImpMntCan[ibSoftMnt][12]++;
+    if ((i & 0x2000) != 0) mpwImpMntCan[ibSoftMnt][13]++;
+    if ((i & 0x4000) != 0) mpwImpMntCan[ibSoftMnt][14]++;
+    if ((i & 0x8000) != 0) mpwImpMntCan[ibSoftMnt][15]++;
 
-		bLo3 = bLo2; bLo2 = bLo1; bLo1 = ~bLo0;
+    bLo3 = bLo2; bLo2 = bLo1; bLo1 = ~bLo0;
 
 #endif
-	}
+  }
 }
 
 
 void    Impulses_1Hz(void) {
-	if (fEnabledImpulses)	{
-//		fOnImpulse = 1;
-//		mpwImpMntCan[ibSoftMnt][0]++;
-	}
+  if (fEnabledImpulses)  {
+//    fOnImpulse = 1;
+//    mpwImpMntCan[ibSoftMnt][0]++;
+  }
 }
 
 
@@ -130,10 +130,10 @@ void    InitImpulses(void) {
 
 #endif
 
-	(enGlobal == GLB_WORK) ? EnableImpulses() : DisableImpulses();
+  (enGlobal == GLB_WORK) ? EnableImpulses() : DisableImpulses();
 }
 
 
 void    StartImpulses(void) {
-	EnableImpulses();
+  EnableImpulses();
 }
