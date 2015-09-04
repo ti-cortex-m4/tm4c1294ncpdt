@@ -24,6 +24,7 @@ NVRAM.H
 #include "../memory/mem_limits.h"
 #include "../memory/mem_uni.h"
 #include "../memory/mem_extended_1.h"
+#include "../memory/mem_extended_3.h"
 #include "../memory/mem_extended_7.h"
 #include "../memory/mem_records.h"
 #include "../memory/mem_gps.h"
