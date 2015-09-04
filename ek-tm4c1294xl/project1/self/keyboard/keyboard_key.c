@@ -105,6 +105,7 @@ KEYBOARD_KEY.C
 #include "digitals/params/key_params_all.h"
 #include "digitals/params/key_fix_params_bugs.h"
 #include "digitals/params/key_use_params_div.h"
+#include "devices/key_ext_3_reset.h"
 #include "devices/key_ext_3_flag.h"
 #include "devices/key_ext_3_a.h"
 #include "devices/key_ext_3_b.h"
@@ -308,6 +309,7 @@ void    Keyboard_Key(void)
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
       case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
+      case bSET_EXT3_RESET:     key_SetExt3Reset();     break;
       case bSET_EXT3_FLAG:      key_SetExt3Flag();      break;
       case bSET_EXT3_EVENTS_A:  key_SetExt3A();         break;
       case bSET_EXT3_EVENTS_B:  key_SetExt3B();         break;
@@ -577,6 +579,7 @@ void    Keyboard_Key(void)
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
       case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
+      case bSET_EXT3_RESET:     key_SetExt3Reset();     break;
       case bSET_EXT3_FLAG:      key_SetExt3Flag();      break;
       case bSET_EXT3_EVENTS_A:  key_SetExt3A();         break;
       case bSET_EXT3_EVENTS_B:  key_SetExt3B();         break;
@@ -765,6 +768,7 @@ void    Keyboard_Key(void)
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
       case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
+      case bSET_EXT3_RESET:     key_SetExt3Reset();     break;
       case bSET_EXT3_FLAG:      key_SetExt3Flag();      break;
       case bSET_EXT3_EVENTS_A:  key_SetExt3A();         break;
       case bSET_EXT3_EVENTS_B:  key_SetExt3B();         break;
