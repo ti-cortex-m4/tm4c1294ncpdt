@@ -114,7 +114,9 @@ bool    IsValidGroup(group  *pgr)
 void    InitGroups(void)
 {
   LoadGroups();
-  MakeUsedNodes();
+
+  if (enGlobal == GLB_WORK)
+    MakeUsedNodes();
 }
 
 
