@@ -29,7 +29,7 @@ static void Show(uchar  i)
     default: Error(); break;
   }
 
-  if (mpboEventA[i] == false)
+  if (mpfEventA[i] == false)
     strcpy(szLo+8,szNo);
   else         
     strcpy(szLo+8,szYes);
@@ -73,7 +73,7 @@ static uchar i;
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {           
-      mpboEventA[i] = InvertBoolean(mpboEventA[i]);
+      mpfEventA[i] = InvertBoolean(mpfEventA[i]);
       Show(i);
     }
     else Beep();

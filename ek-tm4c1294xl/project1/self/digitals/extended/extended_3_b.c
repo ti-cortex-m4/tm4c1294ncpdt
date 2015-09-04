@@ -141,7 +141,7 @@ uchar j;
   }
 
   if (dwEventIndexCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
-  if ((f == false) && (mpboEventFirst[ibDig] == true)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
+  if ((f == false) && (mpfEventFirst[ibDig] == true)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
   for (i=0; i<10; i++)
   {
@@ -173,16 +173,16 @@ uchar j;
 
 void    ReadEventsAllB(void)
 {
-  if (mpboEventB[0] == true) {
+  if (mpfEventB[0] == true) {
     ReadEventsB(1);
   }
-  if (mpboEventB[1] == true) {
+  if (mpfEventB[1] == true) {
     ReadEventsB(3);
   }
-  if (mpboEventB[2] == true) {
+  if (mpfEventB[2] == true) {
     ReadEventsB(4);
   }
-  if (mpboEventB[3] == true) {
+  if (mpfEventB[3] == true) {
     ReadEventsB(5);
   }
 }

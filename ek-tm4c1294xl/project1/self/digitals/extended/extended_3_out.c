@@ -15,10 +15,10 @@ EXTENDED_3_OUT.C
 void    OutExtended30(void)
 {
   InitPushCRC();
-  PushChar(fExt3Flag);
-  Push(&mpboEventFirst, sizeof(mpboEventFirst));
-  Push(&mpboEventA, sizeof(mpboEventA));
-  Push(&mpboEventB, sizeof(mpboEventB));
+  PushBool(fExt3Flag);
+  Push(&mpfEventFirst, sizeof(mpfEventFirst));
+  Push(&mpfEventA, sizeof(mpfEventA));
+  Push(&mpfEventB, sizeof(mpfEventB));
   Output(1+64+32+32);
 }
 
