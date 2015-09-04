@@ -21,7 +21,7 @@ typedef enum
 
 
 void    ResetExtended3(void);
-void    ResetExtended3_Full(void);
+void    ResetExtended3_Manual(void);
 
 void    MakeExtended3(void);
 

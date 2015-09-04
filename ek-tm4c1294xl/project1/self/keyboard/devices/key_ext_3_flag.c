@@ -12,11 +12,10 @@ KEY_EXT_3_FLAG,C
 
 //                                          0123456789ABCDEF
 static char const       szMessage1[]     = "   Загружать    ",
-                        szMessage2[]     = "знач. счетчиков ",
-                        szMessage3[]     = "   на начало    ",
-                        szMessage4[]     = "   месяцев ?    ";
+                        szMessage2[]     = "журналы событий ",
+                        szMessage3[]     = " со счетчиков ? ";
 
-static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
