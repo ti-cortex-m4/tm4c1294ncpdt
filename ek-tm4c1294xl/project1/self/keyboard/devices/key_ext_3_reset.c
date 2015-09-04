@@ -10,8 +10,12 @@ KEY_EXT_3_RESET.C
 
 
 
-//                                         0123456789ABCDEF
-static char const       szResetWDT[]    = "—брос по WDT ?  ";
+//                                          0123456789ABCDEF
+static char const       szMessage1[]     = "    ќчистить    ",
+                        szMessage2[]     = "журналы событий ",
+                        szMessage3[]     = " со счетчиков ? ";
+
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
@@ -23,14 +27,14 @@ void    key_SetExt3Reset(void)
     {
       enKeyboard = KBD_INPUT1;
 
-      ShowHi(szResetWDT);
+      LoadSlide(pszMessages);
 
       Clear();
       ShowAnswer();
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ResetExtended3_Full();
+      ResetExtended3_Manual();
       OK();
     }
     else Beep();

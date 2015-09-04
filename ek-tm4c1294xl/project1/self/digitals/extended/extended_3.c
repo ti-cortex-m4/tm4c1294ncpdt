@@ -46,7 +46,7 @@ void    ResetExtended3(void)
 }
 
 
-void    ResetExtended3_Full(void)
+void    ResetExtended3_Manual(void)
 {
   uchar c;
   for (c=0; c<bCANALS; c++)
