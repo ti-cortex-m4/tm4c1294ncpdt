@@ -73,7 +73,6 @@ void    ResetExtended3_Manual(void)
   for (wPageOut=IMP_RECORD; wPageOut<IMP_RECORD+bRECORD_PAGES; wPageOut++)
   {
     SafePageErase(wPageOut);
-    wPageOut++;
   }
 }
 
