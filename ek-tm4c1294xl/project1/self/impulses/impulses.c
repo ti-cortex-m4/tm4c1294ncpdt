@@ -42,27 +42,27 @@ void    DisableImpulses(void) {
 
 uint    GetImpulses(void)
 {
-uint  i = 0;
+  uint w = 0;
 
-  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0004) == 0) i |= 0x0001;
-  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0008) == 0) i |= 0x0002;
-  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0010) == 0) i |= 0x0004;
-  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0020) == 0) i |= 0x0008;
-  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0040) == 0) i |= 0x0010;
-  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0080) == 0) i |= 0x0020;
-  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0100) == 0) i |= 0x0040;
-  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0200) == 0) i |= 0x0080;
+  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0004) == 0) w |= 0x0001;
+  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0008) == 0) w |= 0x0002;
+  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0010) == 0) w |= 0x0004;
+  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0020) == 0) w |= 0x0008;
+  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0040) == 0) w |= 0x0010;
+  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0080) == 0) w |= 0x0020;
+  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0100) == 0) w |= 0x0040;
+  if (HWREG(GPIO_PORTK_BASE + GPIO_O_DATA + 0x0200) == 0) w |= 0x0080;
 
-  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0004) == 0) i |= 0x0100;
-  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0008) == 0) i |= 0x0200;
-  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0010) == 0) i |= 0x0400;
-  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0020) == 0) i |= 0x0800;
-  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0040) == 0) i |= 0x1000;
-  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0080) == 0) i |= 0x2000;
-  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0100) == 0) i |= 0x4000;
-  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0200) == 0) i |= 0x8000;
+  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0004) == 0) w |= 0x0100;
+  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0008) == 0) w |= 0x0200;
+  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0010) == 0) w |= 0x0400;
+  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0020) == 0) w |= 0x0800;
+  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0040) == 0) w |= 0x1000;
+  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0080) == 0) w |= 0x2000;
+  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0100) == 0) w |= 0x4000;
+  if (HWREG(GPIO_PORTM_BASE + GPIO_O_DATA + 0x0200) == 0) w |= 0x8000;
 
-  return i;
+  return w;
 }
 
 #endif
@@ -74,28 +74,28 @@ void    Impulses_Timer0(void) {
   if (fEnabledImpulses)  {
 #ifdef NATIVE_IMPULSES
 
-    bLo0 = GetImpulses(); // TODO wDigitalsMask
-    int i = bLo0 & bLo1 & bLo2 & bLo3;
+    bLo0 = GetImpulses();
+    uint w = bLo0 & bLo1 & bLo2 & bLo3;
 
-    i &= wDigitalsMask;
-    if (i != 0) fOnImpulse = 1;
+    w &= wDigitalsMask;
+    if (w != 0) fOnImpulse = 1;
 
-    if ((i & 0x0001) != 0) mpwImpMntCan[ibSoftMnt][0]++;
-    if ((i & 0x0002) != 0) mpwImpMntCan[ibSoftMnt][1]++;
-    if ((i & 0x0004) != 0) mpwImpMntCan[ibSoftMnt][2]++;
-    if ((i & 0x0008) != 0) mpwImpMntCan[ibSoftMnt][3]++;
-    if ((i & 0x0010) != 0) mpwImpMntCan[ibSoftMnt][4]++;
-    if ((i & 0x0020) != 0) mpwImpMntCan[ibSoftMnt][5]++;
-    if ((i & 0x0040) != 0) mpwImpMntCan[ibSoftMnt][6]++;
-    if ((i & 0x0080) != 0) mpwImpMntCan[ibSoftMnt][7]++;
-    if ((i & 0x0100) != 0) mpwImpMntCan[ibSoftMnt][8]++;
-    if ((i & 0x0200) != 0) mpwImpMntCan[ibSoftMnt][9]++;
-    if ((i & 0x0400) != 0) mpwImpMntCan[ibSoftMnt][10]++;
-    if ((i & 0x0800) != 0) mpwImpMntCan[ibSoftMnt][11]++;
-    if ((i & 0x1000) != 0) mpwImpMntCan[ibSoftMnt][12]++;
-    if ((i & 0x2000) != 0) mpwImpMntCan[ibSoftMnt][13]++;
-    if ((i & 0x4000) != 0) mpwImpMntCan[ibSoftMnt][14]++;
-    if ((i & 0x8000) != 0) mpwImpMntCan[ibSoftMnt][15]++;
+    if ((w & 0x0001) != 0) mpwImpMntCan[ibSoftMnt][0]++;
+    if ((w & 0x0002) != 0) mpwImpMntCan[ibSoftMnt][1]++;
+    if ((w & 0x0004) != 0) mpwImpMntCan[ibSoftMnt][2]++;
+    if ((w & 0x0008) != 0) mpwImpMntCan[ibSoftMnt][3]++;
+    if ((w & 0x0010) != 0) mpwImpMntCan[ibSoftMnt][4]++;
+    if ((w & 0x0020) != 0) mpwImpMntCan[ibSoftMnt][5]++;
+    if ((w & 0x0040) != 0) mpwImpMntCan[ibSoftMnt][6]++;
+    if ((w & 0x0080) != 0) mpwImpMntCan[ibSoftMnt][7]++;
+    if ((w & 0x0100) != 0) mpwImpMntCan[ibSoftMnt][8]++;
+    if ((w & 0x0200) != 0) mpwImpMntCan[ibSoftMnt][9]++;
+    if ((w & 0x0400) != 0) mpwImpMntCan[ibSoftMnt][10]++;
+    if ((w & 0x0800) != 0) mpwImpMntCan[ibSoftMnt][11]++;
+    if ((w & 0x1000) != 0) mpwImpMntCan[ibSoftMnt][12]++;
+    if ((w & 0x2000) != 0) mpwImpMntCan[ibSoftMnt][13]++;
+    if ((w & 0x4000) != 0) mpwImpMntCan[ibSoftMnt][14]++;
+    if ((w & 0x8000) != 0) mpwImpMntCan[ibSoftMnt][15]++;
 
     bLo3 = bLo2; bLo2 = bLo1; bLo1 = ~bLo0;
 
