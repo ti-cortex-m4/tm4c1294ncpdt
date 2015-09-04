@@ -20,6 +20,11 @@ typedef enum
 
 
 
+extern  cache const             chExt3Flag;
+
+
+
+void    InitExtended3(void);
 void    ResetExtended3(void);
 void    ResetExtended3_Manual(void);
 

@@ -48,7 +48,7 @@ static uchar i;
   {                                           
     if (enKeyboard == KBD_ENTER)
     {
-      if (boExt3Flag == true) 
+      if (fExt3Flag == true) 
       {
         enKeyboard = KBD_POSTENTER;
 
