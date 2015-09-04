@@ -32,6 +32,7 @@ DEVICES_INIT.C
 #include "../flash/records.h"
 #include "../time/delay.h"
 #include "../digitals/extended/extended_1.h"
+#include "../digitals/extended/extended_3.h"
 #include "../digitals/extended/extended_4.h"
 #include "../digitals/extended/extended_4t.h"
 #include "../digitals/extended/extended_5.h"
@@ -80,6 +81,7 @@ void    InitDevices1(void)
   InitRefill();
   InitSchedule();
   InitExtended1();
+  InitExtended3();
   InitExtended4();
   InitExtended4T();
   InitExtended5();
@@ -159,6 +161,7 @@ void    ResetDevices(bool  fFull)
   ResetRefill();
   ResetSchedule();
   ResetExtended1();
+  ResetExtended3();
   ResetExtended4(fFull);
   ResetExtended4T(fFull);
   ResetExtended5(fFull);

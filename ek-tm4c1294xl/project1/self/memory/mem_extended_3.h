@@ -4,7 +4,7 @@ MEM_EXTENDED_3,H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                    boExt3Flag;
+extern  bool                    fExt3Flag;
 
 extern  bool                    mpboEventFirst[bCANALS];
 

@@ -23,6 +23,15 @@ EXTENDED_3.C
 static char const       szEventsAll[]  =  "События         ";
 
 
+cache const             chExt3Flag = {EXT_3_FLAG, &fExt3Flag, sizeof(bool)};
+
+
+
+void    InitExtended3(void)
+{
+  LoadCacheBool(&chExt3Flag, false);
+}
+
 
 void    ResetExtended3(void)
 {
@@ -36,7 +45,9 @@ void    ResetExtended3(void)
     mpdwEventPhase3[c] = 0;
   }
 
-  boExt3Flag = false;
+  fExt3Flag = false;
+  SaveCache(&chExt3Flag);
+
 
   for (c=0; c<sizeof(mpboEventA); c++)
     mpboEventA[c] = false;
@@ -134,7 +145,7 @@ time    EventIndexToDate(ulong  dw)
 
 void    MakeExtended3(void)
 {
-  if (boExt3Flag == true)
+  if (fExt3Flag == true)
   {
     ShowHi(szEventsAll); Clear();
     sprintf(szLo+14,"%2u",ibDig+1); DelayInf();

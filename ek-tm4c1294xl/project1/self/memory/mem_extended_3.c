@@ -9,7 +9,7 @@ MEM_EXTENDED_3,C
 
 
 // флаг разрешения чтения событий
-bool                    boExt3Flag;
+bool                    fExt3Flag;
 
 // флаги первичного чтения событий
 bool                    mpboEventFirst[bCANALS];

@@ -15,7 +15,7 @@ EXTENDED_3_OUT.C
 void    OutExtended30(void)
 {
   InitPushCRC();
-  PushChar(boExt3Flag);
+  PushChar(fExt3Flag);
   Push(&mpboEventFirst, sizeof(mpboEventFirst));
   Push(&mpboEventA, sizeof(mpboEventA));
   Push(&mpboEventB, sizeof(mpboEventB));
