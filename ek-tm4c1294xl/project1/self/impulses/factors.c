@@ -34,7 +34,8 @@ void    InitFactors(void)
   LoadCache(&chLosse);
   LoadCache(&chLevel);
 
-  StartFactors();
+  if (enGlobal == GLB_WORK)
+    StartFactors();
 }
 
 
