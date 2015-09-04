@@ -28,8 +28,5 @@ ulong                   mpdwEventDevice[bCANALS],
                         mpdwEventPhase2[bCANALS],
                         mpdwEventPhase3[bCANALS];
 
-// текущее коды событий
-ulong                   dwEventIndexCurr, dwEventIndexPrev;
-
 // код ошибки
 uchar                   bEventCode;

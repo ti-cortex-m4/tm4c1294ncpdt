@@ -95,12 +95,14 @@ uchar   GetEventCodeA(uchar  ibEvent)
 
 void    ReadEventsA(uchar  ibEvent)
 {
-uchar i,j;
+uchar j;
+ulong dwEventIndexCurr, dwEventIndexPrev;
  
   ShowEventsA(ibEvent);
 
   if (QueryOpenA_Full(25) == 0) { bEventCode = 0; AddImpRecord(EVE_EVENTS_BADLINK); return; }
 
+  uchar i;
   for (i=0; i<10; i++)
   {
     if (QueryEventA_Full(ibEvent,i,50) == 0) {  bEventCode = i+1; AddImpRecord(EVE_EVENTS_BADLINK); return; }

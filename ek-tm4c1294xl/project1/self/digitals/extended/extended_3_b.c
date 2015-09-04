@@ -96,6 +96,7 @@ uchar   GetEventCodeB(uchar  ibEvent)
 void    ReadEventsB(uchar  ibEvent)
 {
 uchar j;
+ulong dwEventIndexCurr, dwEventIndexPrev;
  
   ShowEventsB(ibEvent);
 
