@@ -5,13 +5,14 @@ IMPULSES.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include       "inc/hw_gpio.h"
-#include       "inc/hw_memmap.h"
-#include       "inc/hw_sysctl.h"
-#include       "inc/hw_types.h"
+#include "inc/hw_gpio.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_sysctl.h"
+#include "inc/hw_types.h"
 #include "../memory/mem_settings.h"
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_energy.h"
+#include "../memory/mem_digitals.h"
 #include "../realtime/realtime.h"
 #include "../time/delay.h"
 #include "impulses.h"
@@ -76,6 +77,7 @@ void    Impulses_Timer0(void) {
 	  bLo0 = GetImpulses(); // TODO wDigitalsMask
 		int i = bLo0 & bLo1 & bLo2 & bLo3;
 
+		i &= wDigitalsMask;
 		if (i != 0) fOnImpulse = 1;
 
 		if ((i & 0x0001) != 0) mpwImpMntCan[ibSoftMnt][0]++;
