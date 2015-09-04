@@ -96,7 +96,7 @@ uchar   GetEventCodeB(uchar  ibEvent)
 void    ReadEventsB(uchar  ibEvent)
 {
 uchar j;
-ulong dwEventIndexCurr, dwEventIndexPrev;
+ulong dwCurr, dwPrev;
  
   ShowEventsB(ibEvent);
 
@@ -113,35 +113,35 @@ ulong dwEventIndexCurr, dwEventIndexPrev;
   } 
 
   switch (ibEvent) {
-    case 1: dwEventIndexPrev = mpdwEventDevice[ibDig]; break;
-    case 3: dwEventIndexPrev = mpdwEventPhase1[ibDig]; break;
-    case 4: dwEventIndexPrev = mpdwEventPhase2[ibDig]; break;
-    case 5: dwEventIndexPrev = mpdwEventPhase3[ibDig]; break;
+    case 1: dwPrev = mpdwEventDevice[ibDig]; break;
+    case 3: dwPrev = mpdwEventPhase1[ibDig]; break;
+    case 4: dwPrev = mpdwEventPhase2[ibDig]; break;
+    case 5: dwPrev = mpdwEventPhase3[ibDig]; break;
   }
 
-  dwEventIndexCurr = 0;
+  dwCurr = 0;
   bool f = false;
 
   for (i=0; i<10; i++)
   {
     time ti = mptiEventAB1[i];
-    if (dwEventIndexPrev == DateToEventIndex(ti)) f = true;
-    if (dwEventIndexCurr < DateToEventIndex(ti))
+    if (dwPrev == DateToEventIndex(ti)) f = true;
+    if (dwCurr < DateToEventIndex(ti))
     {
-      dwEventIndexCurr = DateToEventIndex(ti);
+      dwCurr = DateToEventIndex(ti);
       j = i;
     }
 
     ti = mptiEventAB2[i];
-    if (dwEventIndexPrev == DateToEventIndex(ti)) f = true;
-    if (dwEventIndexCurr < DateToEventIndex(ti))
+    if (dwPrev == DateToEventIndex(ti)) f = true;
+    if (dwCurr < DateToEventIndex(ti))
     {
-      dwEventIndexCurr = DateToEventIndex(ti);
+      dwCurr = DateToEventIndex(ti);
       j = i;
     }
   }
 
-  if (dwEventIndexCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
+  if (dwCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
   if ((f == false) && (mpfEventFirst[ibDig] == true)) { bEventCode = GetEventCodeB(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
   for (i=0; i<10; i++)
@@ -149,14 +149,14 @@ ulong dwEventIndexCurr, dwEventIndexPrev;
     uchar k = (10 + j + i + 1) % 10;
 
     time ti = mptiEventAB1[k];
-    if (dwEventIndexPrev < DateToEventIndex(ti))
+    if (dwPrev < DateToEventIndex(ti))
     {
       bEventCode = GetEventCodeB(ibEvent);
       AddImpRecord(EVE_EVENTS_B);
     }
 
     ti = mptiEventAB2[k];
-    if (dwEventIndexPrev < DateToEventIndex(ti))
+    if (dwPrev < DateToEventIndex(ti))
     {
       bEventCode = GetEventCodeB(ibEvent) | 0x80; // внимание !
       AddImpRecord(EVE_EVENTS_B);
@@ -164,10 +164,10 @@ ulong dwEventIndexCurr, dwEventIndexPrev;
   }   
 
   switch (ibEvent) {
-    case 1: mpdwEventDevice[ibDig] = dwEventIndexCurr; break;
-    case 3: mpdwEventPhase1[ibDig] = dwEventIndexCurr; break;
-    case 4: mpdwEventPhase2[ibDig] = dwEventIndexCurr; break;
-    case 5: mpdwEventPhase3[ibDig] = dwEventIndexCurr; break;
+    case 1: mpdwEventDevice[ibDig] = dwCurr; break;
+    case 3: mpdwEventPhase1[ibDig] = dwCurr; break;
+    case 4: mpdwEventPhase2[ibDig] = dwCurr; break;
+    case 5: mpdwEventPhase3[ibDig] = dwCurr; break;
   }
 }
 
