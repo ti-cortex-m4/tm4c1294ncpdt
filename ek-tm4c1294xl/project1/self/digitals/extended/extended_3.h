@@ -23,6 +23,11 @@ typedef enum
 extern  cache const             chExt3Flag;
 extern  cache const             chEventFlagA;
 extern  cache const             chEventFlagB;
+extern  cache const             chEventStart;
+extern  cache const             chEventDevice;
+extern  cache const             chEventPhase1;
+extern  cache const             chEventPhase2;
+extern  cache const             chEventPhase3;
 
 
 
