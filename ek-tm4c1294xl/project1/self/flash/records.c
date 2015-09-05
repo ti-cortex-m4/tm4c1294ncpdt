@@ -378,12 +378,12 @@ bool    AddImpRecord(event  ev)
 
   switch (ev)
   {
-//    case EVE_EVENTS_BADLINK:  memcpy(&reCurr.mpbBuff+1, &mpSerial[ibPort], sizeof(uchar));
-//                              memcpy(&reCurr.mpbBuff+2, &bEventCode, sizeof(uchar));
-//                              break;
+    case EVE_EVENTS_BADLINK:  PutChar(1, mpSerial[ibPort]);
+                              PutChar(2, bEventCode);
+                              break;
 
-//    case EVE_EVENTS_OMISSION: memcpy(&reCurr.mpbBuff+1, &bEventCode, sizeof(uchar));
-//                              break;
+    case EVE_EVENTS_OMISSION: PutChar(1, bEventCode);
+                              break;
 
     case EVE_EVENTS_A:
     case EVE_EVENTS_B:        Put(1, (uchar *) &tiRecordTime, sizeof(time));
