@@ -12,11 +12,11 @@ MEM_EXTENDED_3,C
 bool                    fExt3Flag;
 
 // флаги первичного чтения событий
-bool                    mpfEventFirst[bCANALS];
+bool                    mpfEventStart[bCANALS];
 
 // флаг разрешения конкретного события
-bool                    mpfEventA[32],
-                        mpfEventB[32];
+bool                    mpfEventFlagA[32],
+                        mpfEventFlagB[32];
 
 // массивы событий
 time                    mptiEventAB1[10],

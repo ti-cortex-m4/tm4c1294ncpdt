@@ -142,7 +142,7 @@ ulong dwCurr, dwPrev;
   }
 
   if (dwCurr == 0) AddImpRecord(EVE_EVENTS_BADDATA);
-  if ((f == false) && (mpfEventFirst[ibDig] == true)) { bEventCode = GetEventCodeA(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
+  if ((f == false) && (mpfEventStart[ibDig] == true)) { bEventCode = GetEventCodeA(ibEvent); AddImpRecord(EVE_EVENTS_OMISSION); }
 
   for (i=0; i<10; i++)
   {
@@ -174,16 +174,16 @@ ulong dwCurr, dwPrev;
 
 void    ReadEventsAllA(void)
 {
-  if (mpfEventA[0] == true) {
+  if (mpfEventFlagA[0] == true) {
     ReadEventsA(1);
   }
-  if (mpfEventA[1] == true) {
+  if (mpfEventFlagA[1] == true) {
     ReadEventsA(7);
   }
-  if (mpfEventA[2] == true) {
+  if (mpfEventFlagA[2] == true) {
     ReadEventsA(8);
   }
-  if (mpfEventA[3] == true) {
+  if (mpfEventFlagA[3] == true) {
     ReadEventsA(9);
   }
 }

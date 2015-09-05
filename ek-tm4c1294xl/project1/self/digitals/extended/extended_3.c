@@ -24,12 +24,18 @@ static char const       szEventsAll[]  =  "События         ";
 
 
 cache const             chExt3Flag = {EXT_3_FLAG, &fExt3Flag, sizeof(bool)};
+cache const             chEventFlagA = {EXT_3_EVENT_FLAG_A, &mpfEventFlagA, sizeof(mpfEventFlagA)};
+cache const             chEventFlagB = {EXT_3_EVENT_FLAG_B, &mpfEventFlagB, sizeof(mpfEventFlagB)};
+cache const             chEventStart = {EXT_3_EVENT_START, &mpfEventStart, sizeof(mpfEventStart)};
 
 
 
 void    InitExtended3(void)
 {
   LoadCacheBool(&chExt3Flag, false);
+  LoadCache(&chEventFlagA);
+  LoadCache(&chEventFlagB);
+  LoadCache(&chEventStart);
 }
 
 
@@ -38,22 +44,30 @@ void    ResetExtended3(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpfEventFirst[c] = true;
+    mpfEventStart[c] = true;
     mpdwEventDevice[c] = 0;
     mpdwEventPhase1[c] = 0;
     mpdwEventPhase2[c] = 0;
     mpdwEventPhase3[c] = 0;
   }
 
+  SaveCache(&chEventStart);
+
+
   fExt3Flag = false;
   SaveCache(&chExt3Flag);
 
 
-  for (c=0; c<sizeof(mpfEventA); c++)
-    mpfEventA[c] = false;
+  for (c=0; c<sizeof(mpfEventFlagA); c++)
+    mpfEventFlagA[c] = false;
 
-  for (c=0; c<sizeof(mpfEventB); c++)
-    mpfEventB[c] = false;
+  SaveCache(&chEventFlagA);
+
+
+  for (c=0; c<sizeof(mpfEventFlagB); c++)
+    mpfEventFlagB[c] = false;
+
+  SaveCache(&chEventFlagB);
 }
 
 
@@ -62,12 +76,15 @@ void    ResetExtended3_Manual(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    mpfEventFirst[c] = true;
+    mpfEventStart[c] = true;
     mpdwEventDevice[c] = 0;
     mpdwEventPhase1[c] = 0;
     mpdwEventPhase2[c] = 0;
     mpdwEventPhase3[c] = 0;
   }
+
+  SaveCache(&chEventStart);
+
 
   uint wPageOut;
   for (wPageOut=IMP_RECORD; wPageOut<IMP_RECORD+bRECORD_PAGES; wPageOut++)
@@ -155,6 +172,6 @@ void    MakeExtended3(void)
       case 2:  ReadEventsAllB();  break;
     }
     
-    mpfEventFirst[ibDig] = false;
+    mpfEventStart[ibDig] = false;
   }
 }

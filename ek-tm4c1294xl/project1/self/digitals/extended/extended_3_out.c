@@ -16,9 +16,9 @@ void    OutExtended30(void)
 {
   InitPushCRC();
   PushBool(fExt3Flag);
-  Push(&mpfEventFirst, sizeof(mpfEventFirst));
-  Push(&mpfEventA, sizeof(mpfEventA));
-  Push(&mpfEventB, sizeof(mpfEventB));
+  Push(&mpfEventStart, sizeof(mpfEventStart));
+  Push(&mpfEventFlagA, sizeof(mpfEventFlagA));
+  Push(&mpfEventFlagB, sizeof(mpfEventFlagB));
   Output(1+64+32+32);
 }
 
