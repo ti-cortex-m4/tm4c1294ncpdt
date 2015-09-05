@@ -151,6 +151,7 @@ ulong dwCurr, dwPrev;
     time ti = mptiEventAB1[k];
     if (dwPrev < DateToEventIndex(ti))
     {
+      tiRecordTime = ti;
       bEventCode = GetEventCodeA(ibEvent) | 0x80; // внимание !
       AddImpRecord(EVE_EVENTS_A);
     }
@@ -158,6 +159,7 @@ ulong dwCurr, dwPrev;
     ti = mptiEventAB2[k];
     if (dwPrev < DateToEventIndex(ti))
     {
+      tiRecordTime = ti;
       bEventCode = GetEventCodeA(ibEvent);
       AddImpRecord(EVE_EVENTS_A);
     }
