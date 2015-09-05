@@ -20,7 +20,7 @@ EXTENDED_3.C
 
 
 //                                         0123456789ABCDEF
-static char const       szEventsAll[]  =  "События         ";
+static char const       szExtended3[]  =  "События         ";
 
 
 cache const             chExt3Flag = {EXT_3_FLAG, &fExt3Flag, sizeof(bool)};
@@ -163,7 +163,7 @@ void    MakeExtended3(void)
 {
   if (fExt3Flag == true)
   {
-    ShowHi(szEventsAll); Clear();
+    ShowHi(szExtended3); Clear();
     sprintf(szLo+14,"%2u",ibDig+1); DelayInf();
 
     switch (diCurr.bDevice)
@@ -173,5 +173,6 @@ void    MakeExtended3(void)
     }
     
     mpfEventStart[ibDig] = false;
+    SaveCache(&chEventStart);
   }
 }
