@@ -70,14 +70,15 @@ void    ResetExtended3(void)
   SaveCache(&chExt3Flag);
 
 
-  for (c=0; c<sizeof(mpfEventFlagA); c++)
-    mpfEventFlagA[c] = false;
+  uchar i;
+  for (i=0; i<sizeof(mpfEventFlagA); i++)
+    mpfEventFlagA[i] = false;
 
   SaveCache(&chEventFlagA);
 
 
-  for (c=0; c<sizeof(mpfEventFlagB); c++)
-    mpfEventFlagB[c] = false;
+  for (i=0; i<sizeof(mpfEventFlagB); i++)
+    mpfEventFlagB[i] = false;
 
   SaveCache(&chEventFlagB);
 }
