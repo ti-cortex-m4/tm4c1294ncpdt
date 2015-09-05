@@ -215,8 +215,9 @@ typedef enum
   CORRECT3_STATUS       = CORRECT3_ERROR_TIME + sizeof(time) + bNVRAM_FOOTER,
 
   EXT_3_FLAG            = CORRECT3_STATUS + sizeof(mpcwCorrect3Status15) + bNVRAM_FOOTER,
-  EXT_3_EVENT_A         = EXT_3_FLAG + sizeof(bool) + bNVRAM_FOOTER,
-  EXT_3_EVENT_B         = EXT_3_EVENT_A + sizeof(mpfEventA) + bNVRAM_FOOTER,
+  EXT_3_EVENT_FLAG_A    = EXT_3_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  EXT_3_EVENT_FLAG_B    = EXT_3_EVENT_FLAG_A + sizeof(mpfEventFlagA) + bNVRAM_FOOTER,
+  EXT_3_EVENT_START     = EXT_3_EVENT_FLAG_B + sizeof(mpfEventFlagB) + bNVRAM_FOOTER,
 
-  NVRAM_END             = EXT_3_EVENT_B + sizeof(mpfEventA) + bNVRAM_FOOTER
+  NVRAM_END             = EXT_3_EVENT_START + sizeof(mpfEventStart) + bNVRAM_FOOTER
 } nvram;

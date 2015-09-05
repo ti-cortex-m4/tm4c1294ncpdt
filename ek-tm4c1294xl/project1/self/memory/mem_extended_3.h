@@ -6,10 +6,10 @@ MEM_EXTENDED_3,H
 
 extern  bool                    fExt3Flag;
 
-extern  bool                    mpfEventFirst[bCANALS];
+extern  bool                    mpfEventStart[bCANALS];
 
-extern  bool                    mpfEventA[32],
-                                mpfEventB[32];
+extern  bool                    mpfEventFlagA[32],
+                                mpfEventFlagB[32];
 
 extern  time                    mptiEventAB1[10],
                                 mptiEventAB2[10];

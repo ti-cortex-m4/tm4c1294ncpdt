@@ -8,6 +8,7 @@ KEY_EXT_3_B.H
 #include "../../console.h"
 #include "../../memory/mem_extended_3.h"
 #include "../../digitals/extended/extended_3_b.h"
+#include "../../digitals/extended/extended_3.h"
 
 
 
@@ -29,13 +30,13 @@ static void Show(uchar  i)
     default: Error(); break;
   }
 
-  if (mpfEventB[i] == false)
-    strcpy(szLo+8,szNo);
+  if (mpfEventFlagB[i] == false)
+    strcpy(szLo+1,szNo);
   else         
-    strcpy(szLo+8,szYes);
+    strcpy(szLo+1,szYes);
 
   if (enGlobal != GLB_WORK)
-    szLo[7] = '.';
+    szLo[0] = '.';
 }
 
 
@@ -73,7 +74,9 @@ static uchar i;
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {           
-      mpfEventB[i] = InvertBoolean(mpfEventB[i]);
+      mpfEventFlagB[i] = InvertBoolean(mpfEventFlagB[i]);
+      SaveCache(&chEventFlagB);
+
       Show(i);
     }
     else Beep();
