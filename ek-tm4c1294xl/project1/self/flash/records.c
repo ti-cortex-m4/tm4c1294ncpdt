@@ -385,10 +385,10 @@ bool    AddImpRecord(event  ev)
 //    case EVE_EVENTS_OMISSION: memcpy(&reCurr.mpbBuff+1, &bEventCode, sizeof(uchar));
 //                              break;
 
-//    case EVE_EVENTS_A:
-//    case EVE_EVENTS_B:        memcpy(&reCurr.mpbBuff+1, &tiAlt, sizeof(time));
-//                              memcpy(&reCurr.mpbBuff+7, &bEventCode, sizeof(uchar));
-//                              break;
+    case EVE_EVENTS_A:
+    case EVE_EVENTS_B:        Put(1, (uchar *) &tiRecordTime, sizeof(time));
+                              PutChar(7, bEventCode);
+                              break;
   }
 
   CloseRecord(IMP_RECORD, i);
