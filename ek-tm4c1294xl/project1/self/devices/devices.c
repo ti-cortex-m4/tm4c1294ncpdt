@@ -52,6 +52,7 @@ DEVICES.C
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
 #include "../digitals/extended/extended_1.h"
+#include "../digitals/extended/extended_3.h"
 #include "../digitals/extended/extended_4.h"
 #include "../digitals/extended/extended_4t.h"
 #include "../digitals/extended/extended_5.h"
@@ -462,9 +463,9 @@ void    RunDevices(void)
       if (exExtended == EXT_PROFILE_30MIN)
       {
         MakeExtended1();
+        MakeExtended3();
         MakeExtended4();
         MakeExtended5();
-//        MakeExtended3();
         MakeExtended4T();
       }
 

@@ -246,9 +246,9 @@
       if (exExtended == EXT_PROFILE_30MIN)
       {
         MakeExtended1();
+        MakeExtended3();
         MakeExtended4();
         MakeExtended5();
-//        MakeExtended3();
         MakeExtended4T();
       }
 
