@@ -164,10 +164,10 @@ ulong dwCurr, dwPrev;
   }   
 
   switch (ibEvent) {
-    case 1: mpdwEventDevice[ibDig] = dwCurr; break;
-    case 7: mpdwEventPhase1[ibDig] = dwCurr; break;
-    case 8: mpdwEventPhase2[ibDig] = dwCurr; break;
-    case 9: mpdwEventPhase3[ibDig] = dwCurr; break;
+    case 1: mpdwEventDevice[ibDig] = dwCurr; SaveCache(&chEventDevice); break;
+    case 7: mpdwEventPhase1[ibDig] = dwCurr; SaveCache(&chEventPhase1); break;
+    case 8: mpdwEventPhase2[ibDig] = dwCurr; SaveCache(&chEventPhase2); break;
+    case 9: mpdwEventPhase3[ibDig] = dwCurr; SaveCache(&chEventPhase3); break;
   }
 }
 
