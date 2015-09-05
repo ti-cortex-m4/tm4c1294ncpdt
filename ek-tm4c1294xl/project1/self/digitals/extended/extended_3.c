@@ -27,6 +27,10 @@ cache const             chExt3Flag = {EXT_3_FLAG, &fExt3Flag, sizeof(bool)};
 cache const             chEventFlagA = {EXT_3_EVENT_FLAG_A, &mpfEventFlagA, sizeof(mpfEventFlagA)};
 cache const             chEventFlagB = {EXT_3_EVENT_FLAG_B, &mpfEventFlagB, sizeof(mpfEventFlagB)};
 cache const             chEventStart = {EXT_3_EVENT_START, &mpfEventStart, sizeof(mpfEventStart)};
+cache const             chEventDevice = {EXT_3_EVENT_DEVICE, &mpdwEventDevice, sizeof(mpdwEventDevice)};
+cache const             chEventPhase1 = {EXT_3_EVENT_PHASE1, &mpdwEventPhase1, sizeof(mpdwEventPhase1)};
+cache const             chEventPhase2 = {EXT_3_EVENT_PHASE2, &mpdwEventPhase2, sizeof(mpdwEventPhase2)};
+cache const             chEventPhase3 = {EXT_3_EVENT_PHASE3, &mpdwEventPhase3, sizeof(mpdwEventPhase3)};
 
 
 
@@ -36,6 +40,10 @@ void    InitExtended3(void)
   LoadCache(&chEventFlagA);
   LoadCache(&chEventFlagB);
   LoadCache(&chEventStart);
+  LoadCache(&chEventDevice);
+  LoadCache(&chEventPhase1);
+  LoadCache(&chEventPhase2);
+  LoadCache(&chEventPhase3);
 }
 
 
@@ -52,6 +60,10 @@ void    ResetExtended3(void)
   }
 
   SaveCache(&chEventStart);
+  SaveCache(&chEventDevice);
+  SaveCache(&chEventPhase1);
+  SaveCache(&chEventPhase2);
+  SaveCache(&chEventPhase3);
 
 
   fExt3Flag = false;
@@ -84,6 +96,10 @@ void    ResetExtended3_Manual(void)
   }
 
   SaveCache(&chEventStart);
+  SaveCache(&chEventDevice);
+  SaveCache(&chEventPhase1);
+  SaveCache(&chEventPhase2);
+  SaveCache(&chEventPhase3);
 
 
   uint wPageOut;
