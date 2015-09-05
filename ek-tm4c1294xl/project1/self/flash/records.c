@@ -375,24 +375,22 @@ bool    AddImpRecord(event  ev)
   reCurr.ev = ev;
 
   PutChar(0, ibDig);
-/*
+
   switch (ev)
   {
-    case EVE_EVENTS_BADLINK:  memcpy(&reCurr.mpbBuff+1, &mpSerial[ibPort], sizeof(uchar));
-                              memcpy(&reCurr.mpbBuff+2, &bEventCode, sizeof(uchar));
-                              break;
+//    case EVE_EVENTS_BADLINK:  memcpy(&reCurr.mpbBuff+1, &mpSerial[ibPort], sizeof(uchar));
+//                              memcpy(&reCurr.mpbBuff+2, &bEventCode, sizeof(uchar));
+//                              break;
 
-    case EVE_EVENTS_BADDATA:  break;
+//    case EVE_EVENTS_OMISSION: memcpy(&reCurr.mpbBuff+1, &bEventCode, sizeof(uchar));
+//                              break;
 
-    case EVE_EVENTS_OMISSION: memcpy(&reCurr.mpbBuff+1, &bEventCode, sizeof(uchar));
-                              break;
-
-    case EVE_EVENTS_A:
-    case EVE_EVENTS_B:        memcpy(&reCurr.mpbBuff+1, &tiAlt, sizeof(time));
-                              memcpy(&reCurr.mpbBuff+7, &bEventCode, sizeof(uchar));
-                              break;
+//    case EVE_EVENTS_A:
+//    case EVE_EVENTS_B:        memcpy(&reCurr.mpbBuff+1, &tiAlt, sizeof(time));
+//                              memcpy(&reCurr.mpbBuff+7, &bEventCode, sizeof(uchar));
+//                              break;
   }
-*/
+
   CloseRecord(IMP_RECORD, i);
 
   return CloseOut();
