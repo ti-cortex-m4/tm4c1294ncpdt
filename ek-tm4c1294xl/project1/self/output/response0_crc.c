@@ -17,6 +17,7 @@ RESPONSE0_CRC,C
 #include "out_factors.h"
 #include "out_digitals.h"
 #include "out_impulse.h"
+#include "out_minute30.h"
 #include "out_energy.h"
 #include "out_max_power.h"
 #include "out_flash.h"
@@ -105,6 +106,18 @@ void    Response0_CRC(void)
       case bINQ_GETPARAM_FULL: OutGetParamFull(); break;
       case bINQ_RESETDIVIDERS: OutGetParamDivs(); break;
       case bINQ_GETPARAMS_ALL: OutGetParamsAll(); break;
+
+      case bINQ_GETPOWGRPHOUCURR: OutPowHouGrp(0, iwHardHou,                 2); break;
+      case bINQ_GETPOWGRPHOUPREV: OutPowHouGrp(0, PrevHardHou(),             2); break;
+      case bINQ_GETPOWGRPHOU:     OutPowHouGrp(0, bInBuff6*0x100 + bInBuff7, 2); break;
+
+      case bINQ_GETENGGRPHOUCURR_ALL: OutPowHouGrp(1, iwHardHou,                 1); break;
+      case bINQ_GETENGGRPHOUPREV_ALL: OutPowHouGrp(1, PrevHardHou(),             1); break;
+      case bINQ_GETENGGRPHOU_ALL:     OutPowHouGrp(1, bInBuff5*0x100 + bInBuff6, 1); break;
+
+      case bINQ_GETPOWGRPHOUCURR_ALL: OutPowHouGrp(1, iwHardHou,                 2); break;
+      case bINQ_GETPOWGRPHOUPREV_ALL: OutPowHouGrp(1, PrevHardHou(),             2); break;
+      case bINQ_GETPOWGRPHOU_ALL:     OutPowHouGrp(1, bInBuff5*0x100 + bInBuff6, 2); break;
 
       case bINQ_GETENGGRPDAYCURR: OutEngDayGrp(0, ibHardDay,     0); break;
       case bINQ_GETENGGRPDAYPREV: OutEngDayGrp(0, PrevHardDay(), 0); break;

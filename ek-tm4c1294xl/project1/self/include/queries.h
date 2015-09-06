@@ -91,15 +91,15 @@ QUERIES.H
 #define bINQ_GETPOWCANMNT_ALL          206
 
 #define bINQ_GETPOWGRPHOUPREV          112
-#define bINQ_GETPOWGRPHOUCURR          113
+#define bINQ_GETPOWGRPHOUCURR          113 // прогнозируема€ получасова€ средн€€ мощность
 #define bINQ_GETPOWGRPHOU              114
 
 #define bINQ_GETENGGRPHOUPREV_ALL      162
-#define bINQ_GETENGGRPHOUCURR_ALL      163
+#define bINQ_GETENGGRPHOUCURR_ALL      163 // прогнозируема€ получасова€ средн€€ энерги€
 #define bINQ_GETENGGRPHOU_ALL          164
 
 #define bINQ_GETPOWGRPHOUPREV_ALL      212
-#define bINQ_GETPOWGRPHOUCURR_ALL      213
+#define bINQ_GETPOWGRPHOUCURR_ALL      213 // прогнозируема€ получасова€ средн€€ мощность
 #define bINQ_GETPOWGRPHOU_ALL          214
 
 #define bINQ_GETENGGRPDAYCURR          115

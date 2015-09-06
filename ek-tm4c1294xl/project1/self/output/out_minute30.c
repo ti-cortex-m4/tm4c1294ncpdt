@@ -13,7 +13,59 @@ OUT_MINUTE30,C
 #include "../realtime/realtime.h"
 #include "../time/timedate.h"
 #include "../time/calendar.h"
+#include "../energy.h"
 #include "../energy2.h"
+#include "../energy4.h"
+#include "out_minute30.h"
+
+
+
+static uchar PushPowHouGrp(uchar  ibGrp, uint  iwHhr, uchar  bMul)
+{
+  if (iwHhr == iwHardHou)
+    return PushFloat(GetPowGrpHouCurr(ibGrp, bMul));
+  else
+    return PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul));
+}
+
+
+void    OutPowHouGrp(bool  fAllGroups, uint  iwHhr, uchar  bMul)
+{
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (iwHhr < wHOURS)
+    {
+      if (LoadImpHou(iwHhr) == 1)
+      {
+        if (fAllGroups == 1)
+        {
+          InitPushPtr();
+          uint wSize = 0;
+
+          uchar g;
+          for (g=0; g<bGROUPS; g++)
+          {
+            wSize += PushPowHouGrp(g, iwHhr, bMul);
+          }
+
+          OutptrOutBuff(wSize);
+        }
+        else
+        {
+          if (bInBuff5 < bGROUPS)
+          {
+            InitPushPtr();
+            OutptrOutBuff(PushPowHouGrp(bInBuff5, iwHhr, bMul));
+          }
+          else Result(bRES_BADADDRESS);
+        }
+      }
+      else Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
+}
 
 
 
