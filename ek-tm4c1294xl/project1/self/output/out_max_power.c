@@ -47,7 +47,9 @@ void    OutMaxPowDayGrp(bool  fAllGroups, uchar  ibDay)
 
           uchar g;
           for (g=0; g<bGROUPS; g++)
+          {
             wSize += PushMaxPow(&mppoDayGrp[ PrevSoftDay() ][ g ]);
+          }
 
           OutptrOutBuff(wSize);
         }
@@ -85,7 +87,9 @@ void    OutMaxPowMonGrp(bool  fAllGroups, uchar  ibMon)
 
           uchar g;
           for (g=0; g<bGROUPS; g++)
+          {
             wSize += PushMaxPow(&mppoMonGrp[ PrevSoftMon() ][ g ]);
+          }
 
           OutptrOutBuff(wSize);
         }
@@ -125,8 +129,7 @@ void    OutMaxPowDayGrpExt(void)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
-          	PushMaxPow(&mppoDayGrp[ PrevSoftDay() ][ g ]);
-            wSize += (sizeof(time) + sizeof(float))*bTARIFFS;
+            wSize += PushMaxPow(&mppoDayGrp[ PrevSoftDay() ][ g ]);
           }
         }
 
@@ -156,8 +159,7 @@ void    OutMaxPowMonGrpExt(void)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
-          	PushMaxPow(&mppoMonGrp[ PrevSoftMon() ][ g ]);
-            wSize += (sizeof(time) + sizeof(float))*bTARIFFS;
+            wSize += PushMaxPow(&mppoMonGrp[ PrevSoftMon() ][ g ]);
           }
         }
 
