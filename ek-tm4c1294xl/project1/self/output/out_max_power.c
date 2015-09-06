@@ -12,10 +12,11 @@ OUT_MAX_POWER.C
 #include "../serial/ports.h"
 #include "../realtime/realtime.h"
 #include "../energy2.h"
+#include "out_max_power.h"
 
 
 
-void    PushMaxPow(power  *ppo)
+static void PushMaxPow(power  *ppo)
 {
 uchar   t;
 
@@ -24,6 +25,59 @@ uchar   t;
     PushTime((ppo->mpmaMax[t]).tiSelf);
     PushFloat(ppo->mpmaMax[t].reSelf);
 	}
+}
+
+
+
+void    OutMaxPowDayGrp(bool  fAllGroups, uchar  ibDay)
+{
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (ibDay < bDAYS)
+    {
+      if (LoadPowDay( ibDay ) == 1)
+      {
+        if (fAllGroups == 1)
+          Outptr(&mppoDayGrp[ PrevSoftDay() ], sizeof(power)*bGROUPS);
+        else
+        {
+          if (bInBuff5 < bGROUPS)
+            Outptr(&mppoDayGrp[ PrevSoftDay() ][ bInBuff5 ], sizeof(power));
+          else
+            Result(bRES_BADADDRESS);
+        }
+      }
+      else Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
+}
+
+
+void    OutMaxPowMonGrp(bool  fAllGroups, uchar  ibMon)
+{
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (ibMon < bMONTHS)
+    {
+      if (LoadPowMon( ibMon ) == 1)
+      {
+        if (fAllGroups == 1)
+          Outptr(&mppoMonGrp[ PrevSoftMon() ], sizeof(power)*bGROUPS);
+        else
+        {
+          if (bInBuff5 < bGROUPS)
+            Outptr(&mppoMonGrp[ PrevSoftMon() ][ bInBuff5 ], sizeof(power));
+          else
+            Result(bRES_BADADDRESS);
+        }
+      }
+      else Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
