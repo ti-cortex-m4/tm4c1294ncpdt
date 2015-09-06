@@ -16,15 +16,18 @@ OUT_MAX_POWER.C
 
 
 
-static void PushMaxPow(power  *ppo)
+static uchar PushMaxPow(power  *ppo)
 {
-uchar   t;
+  uchar wSize = 0;
 
-	for (t=0; t<bTARIFFS; t++)
-	{
-    PushTime((ppo->mpmaMax[t]).tiSelf);
-    PushFloat(ppo->mpmaMax[t].reSelf);
-	}
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
+  {
+    wSize += PushTime((ppo->mpmaMax[t]).tiSelf);
+    wSize += PushFloat(ppo->mpmaMax[t].reSelf);
+  }
+
+  return wSize;
 }
 
 
@@ -35,14 +38,26 @@ void    OutMaxPowDayGrp(bool  fAllGroups, uchar  ibDay)
   {
     if (ibDay < bDAYS)
     {
-      if (LoadPowDay( ibDay ) == 1)
+      if (LoadPowDay(ibDay) == true)
       {
-        if (fAllGroups == 1)
-          Outptr(&mppoDayGrp[ PrevSoftDay() ], sizeof(power)*bGROUPS);
+        if (fAllGroups == true)
+        {
+          InitPushPtr();
+          uint wSize = 0;
+
+          uchar g;
+          for (g=0; g<bGROUPS; g++)
+            wSize += PushMaxPow(&mppoDayGrp[ PrevSoftDay() ][ g ]);
+
+          OutptrOutBuff(wSize);
+        }
         else
         {
           if (bInBuff5 < bGROUPS)
-            Outptr(&mppoDayGrp[ PrevSoftDay() ][ bInBuff5 ], sizeof(power));
+          {
+            InitPushPtr();
+            OutptrOutBuff(PushMaxPow(&mppoDayGrp[ PrevSoftDay() ][ bInBuff5 ]));
+          }
           else
             Result(bRES_BADADDRESS);
         }
@@ -61,14 +76,26 @@ void    OutMaxPowMonGrp(bool  fAllGroups, uchar  ibMon)
   {
     if (ibMon < bMONTHS)
     {
-      if (LoadPowMon( ibMon ) == 1)
+      if (LoadPowMon( ibMon ) == true)
       {
-        if (fAllGroups == 1)
-          Outptr(&mppoMonGrp[ PrevSoftMon() ], sizeof(power)*bGROUPS);
+        if (fAllGroups == true)
+        {
+          InitPushPtr();
+          uint wSize = 0;
+
+          uchar g;
+          for (g=0; g<bGROUPS; g++)
+            wSize += PushMaxPow(&mppoMonGrp[ PrevSoftMon() ][ g ]);
+
+          OutptrOutBuff(wSize);
+        }
         else
         {
           if (bInBuff5 < bGROUPS)
-            Outptr(&mppoMonGrp[ PrevSoftMon() ][ bInBuff5 ], sizeof(power));
+          {
+            InitPushPtr();
+            OutptrOutBuff(PushMaxPow(&mppoMonGrp[ PrevSoftMon() ][ bInBuff5 ]));
+          }
           else
             Result(bRES_BADADDRESS);
         }
