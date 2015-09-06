@@ -90,13 +90,13 @@
 +   #define bINQ_GETIMPCANMON_ALL          203 x2
 #define bINQ_GETIMPCANABS_ALL          204
 
-#define bINQ_GETCNTCANMON              140
-#define bINQ_GETCNTCANMONPREV          141
-#define bINQ_GETCNTCANMONCURR          142
+-   #define bINQ_GETCNTCANMON              140
+-   #define bINQ_GETCNTCANMONPREV          141
+-   #define bINQ_GETCNTCANMONCURR          142
 
-#define bINQ_GETCNTCANMON_ALL          240
-#define bINQ_GETCNTCANMONPREV_ALL      241   
-#define bINQ_GETCNTCANMONCURR_ALL      242
+-   #define bINQ_GETCNTCANMON_ALL          240
+-   #define bINQ_GETCNTCANMONPREV_ALL      241
+-   #define bINQ_GETCNTCANMONCURR_ALL      242
 
 #define bINQ_GETCNTCANNEW              107
 #define bINQ_GETCNTCANOLD              108
@@ -118,7 +118,7 @@
 
 +   #define bINQ_GETPOWGRPMNTPREV_ALL      210
 +   #define bINQ_GETPOWGRPMNT_ALL          211
-#define bINQ_GETPOWCANMNT_ALL          206
+-   #define bINQ_GETPOWCANMNT_ALL          206
 
 
 +   #define bINQ_GETPOWGRPHOUPREV          112
