@@ -91,24 +91,22 @@ void    OutEngDayGrp(bool  fAllGroups, uchar  ibDay, bool  fSum)
         if (fAllGroups == 1)
         {
           InitPushPtr();
-          wBuffD = 0;
+          uint wSize = 0;
 
+          uchar ibGrp;
           for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
-            PushEngDayGrp(fSum);
+          {
+            PushEngDayGrp(ibGrp, fSum, false);
+          }
 
-          OutptrOutBuff(wBuffD);
+          OutptrOutBuff(wSize);
         }
         else
         {
           if (bInBuff5 < bGROUPS)
           {
             InitPushPtr();
-            wBuffD = 0;
-
-            ibGrp = bInBuff5;
-            PushEngDayGrp(fSum);
-
-            OutptrOutBuff(wBuffD);
+            OutptrOutBuff(PushEngDayGrp(bInBuff5, fSum, false));
           }
           else Result(bRES_BADADDRESS);
         }
@@ -132,24 +130,22 @@ void    OutEngMonGrp(bool  fAllGroups, uchar  ibMon, bool  fSum)
         if (fAllGroups == 1)
         {
           InitPushPtr();
-          wBuffD = 0;
+          uint wSize = 0;
 
+          uchar ibGrp;
           for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
-            PushEngMonGrp(fSum);
+          {
+            wSize += PushEngMonGrp(ibGrp, fSum, false);
+          }
 
-          OutptrOutBuff(wBuffD);
+          OutptrOutBuff(wSize);
         }
         else
         {
           if (bInBuff5 < bGROUPS)
           {
             InitPushPtr();
-            wBuffD = 0;
-
-            ibGrp = bInBuff5;
-            PushEngMonGrp(fSum);
-
-            OutptrOutBuff(wBuffD);
+            OutptrOutBuff(PushEngMonGrp(bInBuff5, fSum, false));
           }
           else Result(bRES_BADADDRESS);
         }

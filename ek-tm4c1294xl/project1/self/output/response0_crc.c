@@ -17,6 +17,7 @@ RESPONSE0_CRC,C
 #include "out_factors.h"
 #include "out_digitals.h"
 #include "out_impulse.h"
+#include "out_energy.h"
 #include "out_max_power.h"
 #include "out_flash.h"
 #include "out_transit.h"

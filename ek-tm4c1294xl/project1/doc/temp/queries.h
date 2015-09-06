@@ -134,12 +134,12 @@
 #define bINQ_GETPOWGRPHOU_ALL          214
 
 
-#define bINQ_GETENGGRPDAYCURR          115
-#define bINQ_GETENGGRPDAYPREV          116
-#define bINQ_GETENGGRPDAY              117
-#define bINQ_GETENGGRPMONCURR          118
-#define bINQ_GETENGGRPMONPREV          119
-#define bINQ_GETENGGRPMON              120
++   #define bINQ_GETENGGRPDAYCURR          115
++   #define bINQ_GETENGGRPDAYPREV          116
++   #define bINQ_GETENGGRPDAY              117
++   #define bINQ_GETENGGRPMONCURR          118
++   #define bINQ_GETENGGRPMONPREV          119
++   #define bINQ_GETENGGRPMON              120
 
 #define bINQ_GETENGGRPDAYCURR_ALLSUM   165
 #define bINQ_GETENGGRPDAYPREV_ALLSUM   166
@@ -148,11 +148,11 @@
 #define bINQ_GETENGGRPMONPREV_ALLSUM   169
 +   #define bINQ_GETENGGRPMON_ALLSUM       170
 
-#define bINQ_GETENGGRPDAYCURR_ALL      215
-#define bINQ_GETENGGRPDAYPREV_ALL      216
++   #define bINQ_GETENGGRPDAYCURR_ALL      215
++   #define bINQ_GETENGGRPDAYPREV_ALL      216
 +   #define bINQ_GETENGGRPDAY_ALL          217
-#define bINQ_GETENGGRPMONCURR_ALL      218
-#define bINQ_GETENGGRPMONPREV_ALL      219
++   #define bINQ_GETENGGRPMONCURR_ALL      218
++   #define bINQ_GETENGGRPMONPREV_ALL      219
 +   #define bINQ_GETENGGRPMON_ALL          220
 
 

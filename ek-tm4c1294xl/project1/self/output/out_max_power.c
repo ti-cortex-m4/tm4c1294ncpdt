@@ -40,7 +40,7 @@ void    OutMaxPowDayGrp(bool  fAllGroups, uchar  ibDay)
     {
       if (LoadPowDay(ibDay) == true)
       {
-        if (fAllGroups == true)
+        if (fAllGroups == 1)
         {
           InitPushPtr();
           uint wSize = 0;
@@ -80,7 +80,7 @@ void    OutMaxPowMonGrp(bool  fAllGroups, uchar  ibMon)
     {
       if (LoadPowMon( ibMon ) == true)
       {
-        if (fAllGroups == true)
+        if (fAllGroups == 1)
         {
           InitPushPtr();
           uint wSize = 0;
