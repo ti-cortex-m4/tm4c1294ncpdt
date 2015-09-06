@@ -110,14 +110,14 @@
 #define bINQ_GETIMPCANMNTCURR_ALL      209
 
 
-#define bINQ_GETPOWGRPMNTPREV          110
-#define bINQ_GETPOWGRPMNT              111
++   #define bINQ_GETPOWGRPMNTPREV          110
++   #define bINQ_GETPOWGRPMNT              111
 
-#define bINQ_GETENGGRPMNTPREV_ALL      160
-#define bINQ_GETENGGRPMNT_ALL          161
++   #define bINQ_GETENGGRPMNTPREV_ALL      160
++   #define bINQ_GETENGGRPMNT_ALL          161
 
-#define bINQ_GETPOWGRPMNTPREV_ALL      210
-#define bINQ_GETPOWGRPMNT_ALL          211
++   #define bINQ_GETPOWGRPMNTPREV_ALL      210
++   #define bINQ_GETPOWGRPMNT_ALL          211
 #define bINQ_GETPOWCANMNT_ALL          206
 
 

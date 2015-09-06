@@ -17,6 +17,41 @@ OUT_MINUTE3,C
 
 
 
+void    OutPowMntGrp(bool  fAllGroups, uchar  ibMnt, uchar  bMul)
+{
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (ibMnt < bMINUTES)
+    {
+      if (fAllGroups == 1)
+      {
+        InitPushPtr();
+        uint wSize = 0;
+
+        uchar g;
+        for (g=0; g<bGROUPS; g++)
+        {
+          wSize += PushFloat(GetGrpMntInt2Real(mpwImpMntCan[ ibMnt ], g, bMul));
+        }
+        OutptrOutBuff(wSize);
+      }
+      else
+      {
+        if (bInBuff5 < bGROUPS)
+        {
+          InitPushPtr();
+          OutptrOutBuff(PushFloat(GetGrpMntInt2Real(mpwImpMntCan[ ibMnt ], bInBuff5, bMul)));
+        }
+        else Result(bRES_BADADDRESS);
+      }
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
+}
+
+
+
 void    OutImpMntCanExt(void)
 {
   if (enGlobal != GLB_PROGRAM)
