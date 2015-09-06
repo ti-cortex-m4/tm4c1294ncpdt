@@ -93,10 +93,10 @@ void    OutEngDayGrp(bool  fAllGroups, uchar  ibDay, bool  fSum)
           InitPushPtr();
           uint wSize = 0;
 
-          uchar ibGrp;
-          for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+          uchar g;
+          for (g=0; g<bGROUPS; g++)
           {
-            PushEngDayGrp(ibGrp, fSum, false);
+            PushEngDayGrp(g, fSum, false);
           }
 
           OutptrOutBuff(wSize);
@@ -132,10 +132,10 @@ void    OutEngMonGrp(bool  fAllGroups, uchar  ibMon, bool  fSum)
           InitPushPtr();
           uint wSize = 0;
 
-          uchar ibGrp;
-          for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+          uchar g;
+          for (g=0; g<bGROUPS; g++)
           {
-            wSize += PushEngMonGrp(ibGrp, fSum, false);
+            wSize += PushEngMonGrp(g, fSum, false);
           }
 
           OutptrOutBuff(wSize);
