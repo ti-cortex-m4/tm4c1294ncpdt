@@ -174,7 +174,7 @@ void    CalcAllCanals(bool  fUseImp, time  ti)
     }
 
     uchar c;
-    for (c=0; c<bCANALS; c++)           // обработка по каналам
+    for (c=0; c<bCANALS; c++)
     { 
       // если канал не используется: пропустить
       //if (mpboUsedNodes[ibCan] == false) continue;
@@ -200,13 +200,13 @@ void    CalcAllGroups(bool  fUsePow, time  ti)
       LoadImpHouSpec(iwDigHou,0);                   // обработка по получасам
     }
 
-    uchar ibGrp;
-    for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)           // обработка по группам
+    uchar g;
+    for (g=0; g<bGROUPS; g++)
     {
-      if (mpfUsedGroups[ibGrp] == false) continue;
+      if (mpfUsedGroups[g] == false) continue;
 
-      if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec, ibGrp, ti );
-      if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec, ibGrp, ti );
+      if (fLoadDay == 1) MakeMaxPowSpec( mppoDayGrpSpec, g, ti );
+      if (fLoadMon == 1) MakeMaxPowSpec( mppoMonGrpSpec, g, ti );
     }
   }
 }
