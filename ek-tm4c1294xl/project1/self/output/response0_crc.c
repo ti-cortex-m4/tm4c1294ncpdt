@@ -7,6 +7,7 @@ RESPONSE0_CRC,C
 #include "../main.h"
 #include "../memory/mem_settings.h"
 #include "../include/states.h"
+#include "../realtime/realtime.h"
 #include "../serial/ports.h"
 #include "../impulses/factors.h"
 #include "out_common.h"
@@ -16,6 +17,7 @@ RESPONSE0_CRC,C
 #include "out_factors.h"
 #include "out_digitals.h"
 #include "out_impulse.h"
+#include "out_max_power.h"
 #include "out_flash.h"
 #include "out_transit.h"
 #include "out_console.h"
@@ -102,6 +104,22 @@ void    Response0_CRC(void)
       case bINQ_GETPARAM_FULL: OutGetParamFull(); break;
       case bINQ_RESETDIVIDERS: OutGetParamDivs(); break;
       case bINQ_GETPARAMS_ALL: OutGetParamsAll(); break;
+
+      case bINQ_GETMAXPOWGRPDAYCURR:      OutMaxPowDayGrp( 0, ibHardDay     );  break;
+      case bINQ_GETMAXPOWGRPDAYPREV:      OutMaxPowDayGrp( 0, PrevHardDay() );  break;
+      case bINQ_GETMAXPOWGRPDAY:          OutMaxPowDayGrp( 0, bInBuff6 );       break;
+
+      case bINQ_GETMAXPOWGRPMONCURR:      OutMaxPowMonGrp( 0, ibHardMon     );  break;
+      case bINQ_GETMAXPOWGRPMONPREV:      OutMaxPowMonGrp( 0, PrevHardMon() );  break;
+      case bINQ_GETMAXPOWGRPMON:          OutMaxPowMonGrp( 0, bInBuff6 );       break;
+
+      case bINQ_GETMAXPOWGRPDAYCURR_ALL:  OutMaxPowDayGrp( 1, ibHardDay     );  break;
+      case bINQ_GETMAXPOWGRPDAYPREV_ALL:  OutMaxPowDayGrp( 1, PrevHardDay() );  break;
+      case bINQ_GETMAXPOWGRPDAY_ALL:      OutMaxPowDayGrp( 1, bInBuff5 );       break;
+
+      case bINQ_GETMAXPOWGRPMONCURR_ALL:  OutMaxPowMonGrp( 1, ibHardMon     );  break;
+      case bINQ_GETMAXPOWGRPMONPREV_ALL:  OutMaxPowMonGrp( 1, PrevHardMon() );  break;
+      case bINQ_GETMAXPOWGRPMON_ALL:      OutMaxPowMonGrp( 1, bInBuff5 );       break;
 
       case bINQ_GETTARIFFSDAY: OutGetTariffsDay(); break;
 
