@@ -80,6 +80,89 @@ double db;
 
 
 
+void    OutEngDayGrp(bool  fAllGroups, uchar  ibDay, bool  fSum)
+{
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (ibDay < bDAYS)
+    {
+      if (LoadImpDay( ibDay ) == 1)
+      {
+        if (fAllGroups == 1)
+        {
+          InitPushPtr();
+          wBuffD = 0;
+
+          for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+            PushEngDayGrp(fSum);
+
+          OutptrOutBuff(wBuffD);
+        }
+        else
+        {
+          if (bInBuff5 < bGROUPS)
+          {
+            InitPushPtr();
+            wBuffD = 0;
+
+            ibGrp = bInBuff5;
+            PushEngDayGrp(fSum);
+
+            OutptrOutBuff(wBuffD);
+          }
+          else Result(bRES_BADADDRESS);
+        }
+      }
+      else Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
+}
+
+
+void    OutEngMonGrp(bool  fAllGroups, uchar  ibMon, bool  fSum)
+{
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (ibMon < bMONTHS)
+    {
+      if (LoadImpMon( ibMon ) == 1)
+      {
+        if (fAllGroups == 1)
+        {
+          InitPushPtr();
+          wBuffD = 0;
+
+          for (ibGrp=0; ibGrp<bGROUPS; ibGrp++)
+            PushEngMonGrp(fSum);
+
+          OutptrOutBuff(wBuffD);
+        }
+        else
+        {
+          if (bInBuff5 < bGROUPS)
+          {
+            InitPushPtr();
+            wBuffD = 0;
+
+            ibGrp = bInBuff5;
+            PushEngMonGrp(fSum);
+
+            OutptrOutBuff(wBuffD);
+          }
+          else Result(bRES_BADADDRESS);
+        }
+      }
+      else Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
+}
+
+
+
 void    OutEngDayGrpExt(bool  fDouble)
 {
   if (enGlobal != GLB_PROGRAM)

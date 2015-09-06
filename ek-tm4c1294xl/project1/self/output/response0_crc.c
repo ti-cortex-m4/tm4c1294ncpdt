@@ -105,6 +105,22 @@ void    Response0_CRC(void)
       case bINQ_RESETDIVIDERS: OutGetParamDivs(); break;
       case bINQ_GETPARAMS_ALL: OutGetParamsAll(); break;
 
+      case bINQ_GETENGGRPDAYCURR: OutEngDayGrp(0, ibHardDay, 0); break;
+      case bINQ_GETENGGRPDAYPREV: OutEngDayGrp(0, PrevHardDay(), 0); break;
+      case bINQ_GETENGGRPDAY:     OutEngDayGrp(0, bInBuff6, 0); break;
+
+      case bINQ_GETENGGRPDAYCURR_ALL: OutEngDayGrp(1, ibHardDay,     0); break;
+      case bINQ_GETENGGRPDAYPREV_ALL: OutEngDayGrp(1, PrevHardDay(), 0); break;
+      case bINQ_GETENGGRPDAY_ALL:     OutEngDayGrp(1, bInBuff5, 0); break;
+
+      case bINQ_GETENGGRPMONCURR: OutEngMonGrp(0, ibHardMon, 0); break;
+      case bINQ_GETENGGRPMONPREV: OutEngMonGrp(0, PrevHardMon(), 0); break;
+      case bINQ_GETENGGRPMON:     OutEngMonGrp(0, bInBuff6, 0); break;
+
+      case bINQ_GETENGGRPMONCURR_ALL: OutEngMonGrp(1, ibHardMon, 0); break;
+      case bINQ_GETENGGRPMONPREV_ALL: OutEngMonGrp(1, PrevHardMon(), 0); break;
+      case bINQ_GETENGGRPMON_ALL:     OutEngMonGrp(1, bInBuff5, 0); break;
+
       case bINQ_GETMAXPOWGRPDAYCURR: OutMaxPowDayGrp(0, ibHardDay); break;
       case bINQ_GETMAXPOWGRPDAYPREV: OutMaxPowDayGrp(0, PrevHardDay()); break;
       case bINQ_GETMAXPOWGRPDAY:     OutMaxPowDayGrp(0, bInBuff6); break;
@@ -115,7 +131,7 @@ void    Response0_CRC(void)
 
       case bINQ_GETMAXPOWGRPDAYCURR_ALL: OutMaxPowDayGrp(1, ibHardDay); break;
       case bINQ_GETMAXPOWGRPDAYPREV_ALL: OutMaxPowDayGrp(1, PrevHardDay()); break;
-      case bINQ_GETMAXPOWGRPDAY_ALL:     OutMaxPowDayGrp(1, bInBuff5 ); break;
+      case bINQ_GETMAXPOWGRPDAY_ALL:     OutMaxPowDayGrp(1, bInBuff5); break;
 
       case bINQ_GETMAXPOWGRPMONCURR_ALL: OutMaxPowMonGrp(1, ibHardMon); break;
       case bINQ_GETMAXPOWGRPMONPREV_ALL: OutMaxPowMonGrp(1, PrevHardMon()); break;
