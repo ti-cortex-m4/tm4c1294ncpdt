@@ -41,9 +41,8 @@ AUTOMATIC4
 sem2reader расчет макс. мощности по получасам
 
 output - from mem_profile
-profile - show time difference
 
 убрать dbKtrans
 обороты в 100 ms за 10 секунд
 short diagramm
-999 исправность DataFlash в том числе и старый прибор
+bMul -> bMultiplier

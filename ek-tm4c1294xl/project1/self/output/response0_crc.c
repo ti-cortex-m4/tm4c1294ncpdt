@@ -17,6 +17,7 @@ RESPONSE0_CRC,C
 #include "out_factors.h"
 #include "out_digitals.h"
 #include "out_impulse.h"
+#include "out_minute3.h"
 #include "out_minute30.h"
 #include "out_energy.h"
 #include "out_max_power.h"
@@ -106,6 +107,15 @@ void    Response0_CRC(void)
       case bINQ_GETPARAM_FULL: OutGetParamFull(); break;
       case bINQ_RESETDIVIDERS: OutGetParamDivs(); break;
       case bINQ_GETPARAMS_ALL: OutGetParamsAll(); break;
+
+      case bINQ_GETPOWGRPMNTPREV: OutPowMntGrp(0, PrevSoftMnt(), 20); break;
+      case bINQ_GETPOWGRPMNT:     OutPowMntGrp(0, bInBuff6,      20); break;
+
+      case bINQ_GETENGGRPMNTPREV_ALL: OutPowMntGrp(1, PrevSoftMnt(), 1); break;
+      case bINQ_GETENGGRPMNT_ALL:     OutPowMntGrp(1, bInBuff5,      1); break;
+
+      case bINQ_GETPOWGRPMNTPREV_ALL: OutPowMntGrp(1, PrevSoftMnt(), 20); break;
+      case bINQ_GETPOWGRPMNT_ALL:     OutPowMntGrp(1, bInBuff5, 20);      break;
 
       case bINQ_GETPOWGRPHOUCURR: OutPowHouGrp(0, iwHardHou,                 2); break;
       case bINQ_GETPOWGRPHOUPREV: OutPowHouGrp(0, PrevHardHou(),             2); break;
