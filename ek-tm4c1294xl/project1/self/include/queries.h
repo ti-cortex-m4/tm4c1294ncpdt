@@ -83,6 +83,15 @@ QUERIES.H
 #define bINQ_GETIMPCANMON_ALL          203
 #define bINQ_GETIMPCANABS_ALL          204
 
+#define bINQ_GETCNTCANNEW              107
+#define bINQ_GETCNTCANOLD              108
+
+#define bINQ_GETCNTCANNEW_ALL          207
+#define bINQ_GETCNTCANOLD_ALL          208
+
+#define bINQ_GETIMPCANMNTCURR          109
+#define bINQ_GETIMPCANMNTCURR_ALL      209
+
 #define bINQ_GETPOWGRPMNTPREV          110
 #define bINQ_GETPOWGRPMNT              111
 

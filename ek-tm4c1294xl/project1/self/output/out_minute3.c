@@ -17,6 +17,41 @@ OUT_MINUTE3,C
 
 
 
+void    OutImpMntCurrCan(void)
+{
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (bInBuff5 < bCANALS)
+    {
+      InitPushPtr();
+      OutptrOutBuff(PushInt(mpwImpMntCan[ ibSoftMnt ][ bInBuff5 ]));
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
+}
+
+
+void    OutImpMntCurrCanAll(void)
+{
+  if (enGlobal != GLB_PROGRAM)
+  {
+    InitPushPtr();
+    uint wSize = 0;
+
+    uchar c;
+    for (c=0; c<bCANALS; c++)
+    {
+      wSize += PushInt(mpwImpMntCan[ ibSoftMnt ][ c ]);
+    }
+
+    OutptrOutBuff(wSize);
+  }
+  else Result(bRES_NEEDWORK);
+}
+
+
+
 void    OutPowMntGrp(bool  fAllGroups, uchar  ibMnt, uchar  bMul)
 {
   if (enGlobal != GLB_PROGRAM)

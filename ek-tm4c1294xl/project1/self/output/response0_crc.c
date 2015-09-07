@@ -121,6 +121,9 @@ void    Response0_CRC(void)
       case bINQ_RESETDIVIDERS: OutGetParamDivs(); break;
       case bINQ_GETPARAMS_ALL: OutGetParamsAll(); break;
 
+      case bINQ_GETIMPCANMNTCURR: OutImpMntCurrCan(); break;
+      case bINQ_GETIMPCANMNTCURR_ALL: OutImpMntCurrCanAll(); break;
+
       case bINQ_GETPOWGRPMNTPREV: OutPowMntGrp(0, PrevSoftMnt(), 20); break;
       case bINQ_GETPOWGRPMNT:     OutPowMntGrp(0, bInBuff6,      20); break;
 
