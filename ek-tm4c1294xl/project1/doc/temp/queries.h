@@ -78,17 +78,17 @@
 
 #define bINQ_GETKOEFF                  233
 
-#define bINQ_GETIMPCANMNT              100
-#define bINQ_GETIMPCANHOU              101
-#define bINQ_GETIMPCANDAY              102
-#define bINQ_GETIMPCANMON              103
-#define bINQ_GETIMPCANABS              104
++   #define bINQ_GETIMPCANMNT              100
++   #define bINQ_GETIMPCANHOU              101
++   #define bINQ_GETIMPCANDAY              102
++   #define bINQ_GETIMPCANMON              103
++   #define bINQ_GETIMPCANABS              104
 
-#define bINQ_GETIMPCANMNT_ALL          200
-#define bINQ_GETIMPCANHOU_ALL          201
++   #define bINQ_GETIMPCANMNT_ALL          200
++   #define bINQ_GETIMPCANHOU_ALL          201
 +   #define bINQ_GETIMPCANDAY_ALL          202 x2
 +   #define bINQ_GETIMPCANMON_ALL          203 x2
-#define bINQ_GETIMPCANABS_ALL          204
++   #define bINQ_GETIMPCANABS_ALL          204
 
 -   #define bINQ_GETCNTCANMON              140
 -   #define bINQ_GETCNTCANMONPREV          141
