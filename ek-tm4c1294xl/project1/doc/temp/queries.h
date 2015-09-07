@@ -10,10 +10,10 @@
 #define bINQ_SETPASSWORD               8
 +   #define bINQ_GETGROUP                  9
 +   #define bINQ_SETGROUP                  10
-#define bINQ_CORRECT1                  11
-#define bINQ_CORRECT2                  12
-#define bINQ_CORRECT3                  13
-#define bINQ_CORRECT4                  238
++   #define bINQ_CORRECT1                  11
++   #define bINQ_CORRECT2                  12
++   #define bINQ_CORRECT3                  13
++   #define bINQ_CORRECT4                  238
 +   #define bINQ_GETPUBLIC                 14
 +   #define bINQ_SETPUBLIC                 15
 #define bINQ_GETOLDMODE                16

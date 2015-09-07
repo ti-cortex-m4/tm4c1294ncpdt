@@ -8,6 +8,7 @@ OUT_CORRECT,C
 #include "../memory/mem_ports.h"
 #include "../memory/mem_settings.h"
 #include "../memory/mem_realtime.h"
+#include "../memory/mem_correct1.h"
 #include "../serial/ports.h"
 #include "../time/rtc.h"
 #include "../time/timedate.h"
@@ -20,10 +21,10 @@ OUT_CORRECT,C
 
 void    OutCorrect1(void)
 {
-  if (Correct2Disable()) { Correct2(EVE_INQ_CORRECT1); LongResult(bRES_BADACCESS); }
-  if (Correct3Disable()) { Correct3(EVE_INQ_CORRECT1); LongResult(bRES_BADCORRECTION); }
+  if (Correct2Disabled()) { Correct2(EVE_INQ_CORRECT1); LongResult(bRES_BADACCESS); }
+  if (Correct3Disabled()) { Correct3(EVE_INQ_CORRECT1); LongResult(bRES_BADCORRECTION); }
 
-  if (CorrectTime(EVE_INQ_CORRECT1) == 1)
+  if (CorrectTime_Full(EVE_INQ_CORRECT1) == 1)
     LongResult(bRES_OK);
   else
     LongResult(bRES_BADMODE);
@@ -32,18 +33,18 @@ void    OutCorrect1(void)
 
 void    OutCorrect2(void)
 {
-  if (Correct2Disable()) { Correct2(EVE_INQ_CORRECT2); LongResult(bRES_BADACCESS); }
-  if (Correct3Disable()) { Correct3(EVE_INQ_CORRECT2); LongResult(bRES_BADCORRECTION); }
+  if (Correct2Disabled()) { Correct2(EVE_INQ_CORRECT2); LongResult(bRES_BADACCESS); }
+  if (Correct3Disabled()) { Correct3(EVE_INQ_CORRECT2); LongResult(bRES_BADCORRECTION); }
 
-  CorrectTime(EVE_INQ_CORRECT2);
+  CorrectTime_Full(EVE_INQ_CORRECT2);
 }
 
 
 void    OutCorrect3(void)
 {
   InitPushCRC();
-  PushInt(mpcwPosValueCurr[0]);
-  PushInt(mpcwNegValueCurr[0]);
+  PushInt(Correct1.mpwPosValueCurr[0]);
+  PushInt(Correct1.mpwNegValueCurr[0]);
   Output(4);
 }
 
