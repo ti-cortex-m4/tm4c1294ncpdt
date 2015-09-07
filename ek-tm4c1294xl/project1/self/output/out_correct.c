@@ -48,73 +48,74 @@ void    OutCorrect3(void)
   Output(4);
 }
 
-/*
+
 void    OutCorrect4(void)
 {
-        if (Correct2Disable()) { Correct2(EVE_INQ_CORRECT4); LongResult(bRES_BADACCESS); break; }
-        if (Correct3Disable()) { Correct3(EVE_INQ_CORRECT4); LongResult(bRES_BADCORRECTION); break; }
+  if (Correct2Disabled()) { Correct2(EVE_INQ_CORRECT4); LongResult(bRES_BADACCESS); }
+  if (Correct3Disabled()) { Correct3(EVE_INQ_CORRECT4); LongResult(bRES_BADCORRECTION); }
 
-        tiAlt.bSecond = bInBuff5;
-        tiAlt.bMinute = bInBuff6;
-        tiAlt.bHour   = bInBuff7;
+  time ti;
+  ti.bSecond = bInBuff5;
+  ti.bMinute = bInBuff6;
+  ti.bHour   = bInBuff7;
 
-        dwBuffC = GetSecondIndex();
+  ulong dw = GetSecondIndex(ti);
 
-        tiAlt.bSecond = tiCurr.bSecond;
-        tiAlt.bMinute = tiCurr.bMinute;
-        tiAlt.bHour   = tiCurr.bHour;
+  ti.bSecond = tiCurr.bSecond;
+  ti.bMinute = tiCurr.bMinute;
+  ti.bHour   = tiCurr.bHour;
 
-        if (dwBuffC > GetSecondIndex())
-        {
-          dwBuffC = dwBuffC - GetSecondIndex();
+  if (dw > GetSecondIndex(ti))
+  {
+    dw = dw - GetSecondIndex(ti);
 
-          if (dwBuffC < wMAXCORRECT)
-          {
-            tiSetRTC.bSecond = bInBuff5;
-            tiSetRTC.bMinute = bInBuff6;
-            tiSetRTC.bHour   = bInBuff7;
+    if (dw < wMAXCORRECT)
+    {
+      tiSetRTC.bSecond = bInBuff5;
+      tiSetRTC.bMinute = bInBuff6;
+      tiSetRTC.bHour   = bInBuff7;
 
-            AddKeyRecord(EVE_INQ_CORRECT4);
-            SetCurrTime();
-            AddKeyRecord(EVE_TIME_OK);
+      AddKeyRecord(EVE_INQ_CORRECT4);
+      SetCurrTime();
+      AddKeyRecord(EVE_TIME_OK);
 
-            i = GetCorrectIndex(EVE_INQ_CORRECT4);
+      uchar i = GetCorrectIndex(EVE_INQ_CORRECT4);
 
-            mpcwNegValueCurr[0] += (uint)dwBuffC;
-            mpcwNegValueCurr[i] += (uint)dwBuffC;
-            mpcwNegCountCurr[0]++;
-            mpcwNegCountCurr[i]++;
+      mpcwNegValueCurr[0] += (uint)dw;
+      mpcwNegValueCurr[i] += (uint)dw;
+      mpcwNegCountCurr[0]++;
+      mpcwNegCountCurr[i]++;
 
-            LongResult(bRES_OK);
-          }
-          else LongResult(bRES_BADDATA);
-        }
-        else
-        {
-          dwBuffC = GetSecondIndex() - dwBuffC;
+      LongResult(bRES_OK);
+    }
+    else LongResult(bRES_BADDATA);
+  }
+  else
+  {
+    dw = GetSecondIndex(ti) - dw;
 
-          if (dwBuffC < wMAXCORRECT)
-          {
-            tiSetRTC.bSecond = bInBuff5;
-            tiSetRTC.bMinute = bInBuff6;
-            tiSetRTC.bHour   = bInBuff7;
+    if (dw < wMAXCORRECT)
+    {
+      tiSetRTC.bSecond = bInBuff5;
+      tiSetRTC.bMinute = bInBuff6;
+      tiSetRTC.bHour   = bInBuff7;
 
-            AddKeyRecord(EVE_INQ_CORRECT4);
-            SetCurrTime();
+      AddKeyRecord(EVE_INQ_CORRECT4);
+      SetCurrTime();
 
-            i = GetCorrectIndex(EVE_INQ_CORRECT4);
+      uchar i = GetCorrectIndex(EVE_INQ_CORRECT4);
 
-            mpcwPosValueCurr[0] += (uint)dwBuffC;
-            mpcwPosValueCurr[i] += (uint)dwBuffC;
-            mpcwPosCountCurr[0]++;
-            mpcwPosCountCurr[i]++;
+      mpcwPosValueCurr[0] += (uint)dw;
+      mpcwPosValueCurr[i] += (uint)dw;
+      mpcwPosCountCurr[0]++;
+      mpcwPosCountCurr[i]++;
 
-            LongResult(bRES_OK);
-          }
-          else LongResult(bRES_BADDATA);
-        }
+      LongResult(bRES_OK);
+    }
+    else LongResult(bRES_BADDATA);
+  }
 }
-*/
+
 
 
 void    OutCorrectExt1(void)
