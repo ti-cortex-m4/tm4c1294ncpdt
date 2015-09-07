@@ -18,6 +18,7 @@ RESPONSE0_CRC,C
 #include "out_factors.h"
 #include "out_digitals.h"
 #include "out_impulse.h"
+#include "out_cnt.h"
 #include "out_minute3.h"
 #include "out_minute30.h"
 #include "out_energy.h"
@@ -97,15 +98,23 @@ void    Response0_CRC(void)
       case bINQ_GETVALUE_ENGMNT: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueEngMnt, false); break;
       case bINQ_GETVALUE_CNTMNT: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueCntMnt, false); break;
 
+      case bINQ_GETCNTCANNEW: OutCntCanNew(); break;
+      case bINQ_GETCNTCANOLD: OutCntCanOld(); break;
+
+      case bINQ_GETCNTCANNEW_ALL: OutCntCanNewAll(); break;
+      case bINQ_GETCNTCANOLD_ALL: OutCntCanOldAll(); break;
+
       case bINQ_GETIMPCANMNT: OutImpMntCan(); break;
       case bINQ_GETIMPCANHOU: OutImpHhrCan(); break;
       case bINQ_GETIMPCANDAY: OutImpDayCan(); break;
       case bINQ_GETIMPCANMON: OutImpMonCan(); break;
+      case bINQ_GETIMPCANABS: OutImpAbsCan(); break;
 
       case bINQ_GETIMPCANMNT_ALL: OutImpMntCanAll(); break;
       case bINQ_GETIMPCANHOU_ALL: OutImpHhrCanAll(); break;
       case bINQ_GETIMPCANDAY_ALL: OutImpDayCanAll(); break;
       case bINQ_GETIMPCANMON_ALL: OutImpMonCanAll(); break;
+      case bINQ_GETIMPCANABS_ALL: OutImpAbsCanAll(); break;
 
       case bINQ_GETDIGITAL: OutGetDigital(); break;
       case bINQ_SETDIGITAL: OutSetDigital(); break;
