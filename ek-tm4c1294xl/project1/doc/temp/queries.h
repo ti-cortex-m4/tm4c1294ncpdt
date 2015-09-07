@@ -98,12 +98,12 @@
 -   #define bINQ_GETCNTCANMONPREV_ALL      241
 -   #define bINQ_GETCNTCANMONCURR_ALL      242
 
-#define bINQ_GETCNTCANNEW              107
-#define bINQ_GETCNTCANOLD              108
++   #define bINQ_GETCNTCANNEW              107
++   #define bINQ_GETCNTCANOLD              108
 -   //#define bINQ_GETCNTCAN                 231
 
-#define bINQ_GETCNTCANNEW_ALL          207
-#define bINQ_GETCNTCANOLD_ALL          208
++   #define bINQ_GETCNTCANNEW_ALL          207
++   #define bINQ_GETCNTCANOLD_ALL          208
 -   //#define bINQ_GETCNTCAN_ALL             232
 
 +   #define bINQ_GETIMPCANMNTCURR          109
