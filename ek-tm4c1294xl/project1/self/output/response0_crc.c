@@ -91,8 +91,15 @@ void    Response0_CRC(void)
       case bINQ_GETVALUE_ENGMNT: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueEngMnt, false); break;
       case bINQ_GETVALUE_CNTMNT: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueCntMnt, false); break;
 
-      case bINQ_GETIMPCANDAY_ALL: OutImpDayCan(); break;
-      case bINQ_GETIMPCANMON_ALL: OutImpMonCan(); break;
+      case bINQ_GETIMPCANMNT: OutImpMntCan(); break;
+      case bINQ_GETIMPCANHOU: OutImpHhrCan(); break;
+      case bINQ_GETIMPCANDAY: OutImpDayCan(); break;
+      case bINQ_GETIMPCANMON: OutImpMonCan(); break;
+
+      case bINQ_GETIMPCANMNT_ALL: OutImpMntCanAll(); break;
+      case bINQ_GETIMPCANHOU_ALL: OutImpHhrCanAll(); break;
+      case bINQ_GETIMPCANDAY_ALL: OutImpDayCanAll(); break;
+      case bINQ_GETIMPCANMON_ALL: OutImpMonCanAll(); break;
 
       case bINQ_GETDIGITAL: OutGetDigital(); break;
       case bINQ_SETDIGITAL: OutSetDigital(); break;

@@ -66,19 +66,17 @@ QUERIES.H
 #define bINQ_RESETDIVIDERS             51
 #define bINQ_GETPARAMS_ALL             52
 
+#define bINQ_GETIMPCANMNT              100
+#define bINQ_GETIMPCANHOU              101
+#define bINQ_GETIMPCANDAY              102
+#define bINQ_GETIMPCANMON              103
+#define bINQ_GETIMPCANABS              104
+
 #define bINQ_GETIMPCANMNT_ALL          200
 #define bINQ_GETIMPCANHOU_ALL          201
 #define bINQ_GETIMPCANDAY_ALL          202
 #define bINQ_GETIMPCANMON_ALL          203
 #define bINQ_GETIMPCANABS_ALL          204
-
-#define bINQ_GETCNTCANMON              140
-#define bINQ_GETCNTCANMONPREV          141
-#define bINQ_GETCNTCANMONCURR          142
-
-#define bINQ_GETCNTCANMON_ALL          240
-#define bINQ_GETCNTCANMONPREV_ALL      241
-#define bINQ_GETCNTCANMONCURR_ALL      242
 
 #define bINQ_GETPOWGRPMNTPREV          110
 #define bINQ_GETPOWGRPMNT              111
