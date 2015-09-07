@@ -4,9 +4,6 @@ ENERGY.H
 
 ------------------------------------------------------------------------------*/
 
-float   GetCanReal(float *mpreT, uchar  ibCan);
-void    SetCanReal(float *mpreT, uchar  ibCan, float *preT);
-
 ulong   *PGetCanImp(impulse  *mpimT, uchar  ibCan, uchar  ibTariff);
 ulong   *PGetCanImpAll(impulse  *mpimT, uchar  ibCan);
 
