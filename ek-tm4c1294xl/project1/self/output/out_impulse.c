@@ -184,9 +184,11 @@ void    OutImpAbsCan(void)
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff5 < bCANALS)
-      Outptr(&mpimAbsCan[ bInBuff5 ], sizeof(impulse));
-    else
-      Result(bRES_BADADDRESS);
+    {
+      InitPushPtr();
+      OutptrOutBuff(PushImpulse(&mpimAbsCan[ bInBuff5 ]));
+    }
+    else Result(bRES_BADADDRESS);
   }
   else Result(bRES_NEEDWORK);
 }
@@ -195,9 +197,19 @@ void    OutImpAbsCan(void)
 void    OutImpAbsCanAll(void)
 {
   if (enGlobal != GLB_PROGRAM)
-    Outptr(&mpimAbsCan, sizeof(mpimAbsCan));
-  else
-    Result(bRES_NEEDWORK);
+  {
+    InitPushPtr();
+    uint wSize = 0;
+
+    uchar c;
+    for (c=0; c<bCANALS; c++)
+    {
+      wSize += PushImpulse(&mpimAbsCan[ c ]);
+    }
+
+    OutptrOutBuff(wSize);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
