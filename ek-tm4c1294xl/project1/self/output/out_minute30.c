@@ -92,18 +92,16 @@ void    OutImpCanHouExt(void)
       wSize += PushTime(ti);
 
       if (LoadImpHouFree((wHOURS+iwHardHou-iwHou) % wHOURS) == false) { Result(bRES_BADFLASH); return; }
-      else
-      {
-        uchar c;
-        for (c=0; c<bCANALS; c++)
-        {
-          if (iwHou >= wHOURS)
-            PushInt(0);
-          else
-            PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
 
-          wSize += sizeof(uint);
-        }
+      uchar c;
+      for (c=0; c<bCANALS; c++)
+      {
+        if (iwHou >= wHOURS)
+          PushInt(0);
+        else
+          PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
+
+        wSize += sizeof(uint);
       }
 
       iwHou++;
