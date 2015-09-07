@@ -75,7 +75,7 @@ void    OutImpCanHou48(void)
 
 void    OutPowGrpHou48Ext(void)
 {
-float   re;
+float   fl;
 
   uint iwHou = GetDayHouIndex(bInBuff6);
 
@@ -93,11 +93,11 @@ float   re;
       if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
       {
         if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
-          re = 0;
+          fl = 0;
         else
-          re = GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g, 2);
+          fl = GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g, 2);
 
-        PushFloat(re);
+        PushFloat(fl);
 
         wSize += sizeof(float);
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
