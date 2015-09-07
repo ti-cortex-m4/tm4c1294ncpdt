@@ -17,21 +17,6 @@ OUT_IMPULSE,C
 
 
 
-static uchar PushImpulse(impulse  *pim)
-{
-  uchar bSize = 0;
-
-  uchar t;
-  for (t=0; t<bTARIFFS; t++)
-  {
-    bSize += PushLong((*pim).mpdwImp[t]);
-  }
-
-  return bSize;
-}
-
-
-
 void    OutImpMntCan(void)
 {
   if (enGlobal != GLB_PROGRAM)
@@ -124,6 +109,22 @@ void    OutImpHhrCanAll(void)
   }
   else Result(bRES_NEEDWORK);
 }
+
+
+
+static uchar PushImpulse(impulse  *pim)
+{
+  uchar bSize = 0;
+
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
+  {
+    bSize += PushLong((*pim).mpdwImp[t]);
+  }
+
+  return bSize;
+}
+
 
 
 void    OutImpDayCan(void)
