@@ -176,18 +176,18 @@
 
 +   #define bINQ_GETTARIFFSDAY             150
 
-#define bINQ_GETDEFHOU                 151
-#define bINQ_GETDEFDAY                 152
-#define bINQ_GETDEFMON                 153
++   #define bINQ_GETDEFHOU                 151
++   #define bINQ_GETDEFDAY                 152
++   #define bINQ_GETDEFMON                 153
 
 +   #define bINQ_GETDEFHOU_INDEX           154
 +   #define bINQ_GETDEFDAY_INDEX           155
 +   #define bINQ_GETDEFMON_INDEX           156
 
-#define bINQ_GETPOWGRPHOU_DAY          157
-#define bINQ_GETIMPCANHOU_DAY          158
-#define bINQ_GETPOWCANHOU_DAY          159
-#define bINQ_GETDEFCANHOU_DAY          179
++   #define bINQ_GETPOWGRPHOU_DAY          157
++   #define bINQ_GETIMPCANHOU_DAY          158
++   #define bINQ_GETPOWCANHOU_DAY          159
++   #define bINQ_GETDEFCANHOU_DAY          179
 
 //#define bINQ_TRANSIT_INIT              171
 #define bINQ_TRANSIT_EXECUTE           172
@@ -201,7 +201,7 @@
 +   #define bINQ_GETDISPLAY                247
 
 +   #define bINQ_GETCONFIG                 248
-#define bINQ_GETFLASHPAGE              249
++   #define bINQ_GETFLASHPAGE              249
 
 +   #define bINQ_QUICKMNT                  250
 +   #define bINQ_QUICKMIN15                230

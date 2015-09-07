@@ -21,6 +21,7 @@ RESPONSE0_CRC,C
 #include "out_cnt.h"
 #include "out_minute3.h"
 #include "out_minute30.h"
+#include "out_minute30_48.h"
 #include "out_energy.h"
 #include "out_max_power.h"
 #include "out_flash.h"
@@ -193,6 +194,9 @@ void    Response0_CRC(void)
       case bINQ_GETMAXPOWGRPMONCURR_ALL: OutMaxPowMonGrp(1, ibHardMon);     break;
       case bINQ_GETMAXPOWGRPMONPREV_ALL: OutMaxPowMonGrp(1, PrevHardMon()); break;
       case bINQ_GETMAXPOWGRPMON_ALL:     OutMaxPowMonGrp(1, bInBuff5);      break;
+
+      case bINQ_GETPOWGRPHOU_DAY: OutPowGrpHou48(); break;
+      case bINQ_GETIMPCANHOU_DAY: OutImpCanHou48(); break;
 
       case bINQ_GETTARIFFSDAY: OutGetTariffsDay(); break;
 

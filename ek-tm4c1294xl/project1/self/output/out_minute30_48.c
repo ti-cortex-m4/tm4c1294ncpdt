@@ -16,6 +16,68 @@ OUT_MINUTE30_48.C
 #include "../digitals/digitals.h"
 #include "../digitals/sensors.h"
 #include "../digitals/current/current.h"
+#include "out_minute30_48.h"
+
+
+
+void    OutPowGrpHou48(void)
+{
+  uint iwHou = GetDayHouIndex(bInBuff6);
+
+  InitPushPtr();
+  uint wSize = 0;
+
+  uchar h;
+  for (h=0; h<48; h++)
+  {
+    if (LoadImpHou(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    else
+    {
+      if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
+      {
+        PushFloat(0);
+      }
+      else
+      {
+        PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], bInBuff5, 2));
+      }
+
+      wSize += sizeof(float);
+    }
+
+    if (++iwHou >= wHOURS) iwHou = 0;
+  }
+
+  OutptrOutBuff(wSize);
+}
+
+
+void    OutImpCanHou48(void)
+{
+  uint iwHou = GetDayHouIndex(bInBuff6);
+
+  InitPushPtr();
+  uint wSize = 0;
+
+  uchar h;
+  for (h=0; h<48; h++)
+  {
+    if (LoadImpHou(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    else
+    {
+      if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
+        PushInt(0);
+      else
+        PushInt( mpwImpHouCan[ PrevSoftHou() ][ bInBuff5 ] );
+
+      wSize += sizeof(uint);
+    }
+
+    if (++iwHou >= wHOURS) iwHou = 0;
+  }
+
+  OutptrOutBuff(wSize);
+}
 
 
 
