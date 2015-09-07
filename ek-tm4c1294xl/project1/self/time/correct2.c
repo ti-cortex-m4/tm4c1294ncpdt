@@ -107,7 +107,7 @@ void    Correct2(event  ev)
 
 
 
-void    OutCorrect21(void)
+void    OutCorrectExt21(void)
 {
   InitPushCRC();
 
