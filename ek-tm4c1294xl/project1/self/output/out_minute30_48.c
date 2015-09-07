@@ -75,8 +75,6 @@ void    OutImpCanHou48(void)
 
 void    OutPowGrpHou48Ext(void)
 {
-float   fl;
-
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
@@ -93,11 +91,9 @@ float   fl;
       if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
       {
         if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
-          fl = 0;
+          PushFloat(0);
         else
-          fl = GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g, 2);
-
-        PushFloat(fl);
+          PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g, 2));
 
         wSize += sizeof(float);
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
@@ -154,8 +150,6 @@ void    OutImpCanHou48Ext(void)
 
 void    OutPowCanHou48Ext(void)
 {
-float   fl;
-
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
@@ -175,8 +169,7 @@ float   fl;
         {
           PushFloat(0);
         }
-        else
-        if (mpwImpHouCan[ PrevSoftHou() ][c] == 0xFFFF)
+        else if (mpwImpHouCan[ PrevSoftHou() ][c] == 0xFFFF)
         {
           PushChar(0xFF);
           PushChar(0xFF);
@@ -185,8 +178,7 @@ float   fl;
         }
         else
         {
-          fl = GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2);
-          PushFloat(fl);
+          PushFloat(GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2));
         }
 
         wSize += sizeof(float);
