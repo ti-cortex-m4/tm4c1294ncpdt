@@ -33,78 +33,78 @@ static uchar PushImpulse(impulse  *pim)
 
 void    OutImpMntCan(void)
 {
-        if (enGlobal != GLB_PROGRAM)
-        {
-          if ((bInBuff5 < bCANALS) && (bInBuff6 < bMINUTES))
-            Outptr(&mpwImpMntCan[ bInBuff6 ][ bInBuff5 ], sizeof(uint));
-          else
-            Result(bRES_BADADDRESS);
-        }
-        else Result(bRES_NEEDWORK);
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if ((bInBuff5 < bCANALS) && (bInBuff6 < bMINUTES))
+      Outptr(&mpwImpMntCan[ bInBuff6 ][ bInBuff5 ], sizeof(uint));
+    else
+      Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
 void    OutImpMntCanAll(void)
 {
-        if (enGlobal != GLB_PROGRAM)
-        {
-          if (bInBuff5 < bMINUTES)
-            Outptr(&mpwImpMntCan[ bInBuff5 ], sizeof(uint)*bCANALS);
-          else
-            Result(bRES_BADADDRESS);
-        }
-        else Result(bRES_NEEDWORK);
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (bInBuff5 < bMINUTES)
+      Outptr(&mpwImpMntCan[ bInBuff5 ], sizeof(uint)*bCANALS);
+    else
+      Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
 void    OutImpHhrCan(void)
 {
-        if (enGlobal != GLB_PROGRAM)
-        {
-          if ((bInBuff5 < bCANALS) && (bInBuff6*0x100 + bInBuff7 < wHOURS))
-          {
-            if (LoadImpHou( bInBuff6*0x100 + bInBuff7 ) == 1)
-              Outptr(&mpwImpHouCan[ PrevSoftHou() ][ bInBuff5 ], sizeof(uint));
-            else
-              Result(bRES_BADFLASH);
-          }
-          else Result(bRES_BADADDRESS);
-        }
-        else Result(bRES_NEEDWORK);
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if ((bInBuff5 < bCANALS) && (bInBuff6*0x100 + bInBuff7 < wHOURS))
+    {
+      if (LoadImpHou( bInBuff6*0x100 + bInBuff7 ) == 1)
+        Outptr(&mpwImpHouCan[ PrevSoftHou() ][ bInBuff5 ], sizeof(uint));
+      else
+        Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
 void    OutImpHhrCanAll(void)
 {
-        if (enGlobal != GLB_PROGRAM)
-        {
-          if (bInBuff5*0x100 + bInBuff6 < wHOURS)
-          {
-            if (LoadImpHou( bInBuff5*0x100 + bInBuff6 ) == 1)
-              Outptr(&mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS);
-            else
-              Result(bRES_BADFLASH);
-          }
-          else Result(bRES_BADADDRESS);
-        }
-        else Result(bRES_NEEDWORK);
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (bInBuff5*0x100 + bInBuff6 < wHOURS)
+    {
+      if (LoadImpHou( bInBuff5*0x100 + bInBuff6 ) == 1)
+        Outptr(&mpwImpHouCan[ PrevSoftHou() ], sizeof(uint)*bCANALS);
+      else
+        Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
 void    OutImpDayCan(void)
 {
-        if (enGlobal != GLB_PROGRAM)
-        {
-          if ((bInBuff5 < bCANALS) && (bInBuff6 < bDAYS))
-          {
-            if (LoadImpDay( bInBuff6 ) == 1)
-              Outptr(&mpimDayCan[ PrevSoftDay() ][ bInBuff5 ], sizeof(impulse));
-            else
-              Result(bRES_BADFLASH);
-          }
-          else Result(bRES_BADADDRESS);
-        }
-        else Result(bRES_NEEDWORK);
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if ((bInBuff5 < bCANALS) && (bInBuff6 < bDAYS))
+    {
+      if (LoadImpDay( bInBuff6 ) == 1)
+        Outptr(&mpimDayCan[ PrevSoftDay() ][ bInBuff5 ], sizeof(impulse));
+      else
+        Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
@@ -116,16 +116,16 @@ void    OutImpDayCanAll(void)
     {
       if (LoadImpDay( bInBuff5 ) == 1)
       {
-        InitPushPtr();
-        uint wSize = 0;
+  InitPushPtr();
+  uint wSize = 0;
 
-        uchar c;
-        for (c=0; c<bCANALS; c++)
-        {
-          wSize += PushImpulse(&mpimDayCan[ PrevSoftDay() ][ c ]);
-        }
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    wSize += PushImpulse(&mpimDayCan[ PrevSoftDay() ][ c ]);
+  }
 
-        OutptrOutBuff(wSize);
+  OutptrOutBuff(wSize);
       }
       else Result(bRES_BADFLASH);
     }
@@ -137,18 +137,18 @@ void    OutImpDayCanAll(void)
 
 void    OutImpMonCan(void)
 {
-        if (enGlobal != GLB_PROGRAM)
-        {
-          if ((bInBuff5 < bCANALS) && (bInBuff6 < bMONTHS))
-          {
-            if (LoadImpMon( bInBuff6 ) == 1)
-              Outptr(&mpimMonCan[ PrevSoftMon() ][ bInBuff5 ], sizeof(impulse));
-            else
-              Result(bRES_BADFLASH);
-          }
-          else Result(bRES_BADADDRESS);
-        }
-        else Result(bRES_NEEDWORK);
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if ((bInBuff5 < bCANALS) && (bInBuff6 < bMONTHS))
+    {
+      if (LoadImpMon( bInBuff6 ) == 1)
+        Outptr(&mpimMonCan[ PrevSoftMon() ][ bInBuff5 ], sizeof(impulse));
+      else
+        Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
@@ -181,23 +181,23 @@ void    OutImpMonCanAll(void)
 
 void    OutImpAbsCan(void)
 {
-        if (enGlobal != GLB_PROGRAM)
-        {
-          if (bInBuff5 < bCANALS)
-            Outptr(&mpimAbsCan[ bInBuff5 ], sizeof(impulse));
-          else
-            Result(bRES_BADADDRESS);
-        }
-        else Result(bRES_NEEDWORK);
+  if (enGlobal != GLB_PROGRAM)
+  {
+    if (bInBuff5 < bCANALS)
+      Outptr(&mpimAbsCan[ bInBuff5 ], sizeof(impulse));
+    else
+      Result(bRES_BADADDRESS);
+  }
+  else Result(bRES_NEEDWORK);
 }
 
 
 void    OutImpAbsCanAll(void)
 {
-        if (enGlobal != GLB_PROGRAM)
-          Outptr(&mpimAbsCan, sizeof(mpimAbsCan));
-        else
-          Result(bRES_NEEDWORK);
+  if (enGlobal != GLB_PROGRAM)
+    Outptr(&mpimAbsCan, sizeof(mpimAbsCan));
+  else
+    Result(bRES_NEEDWORK);
 }
 
 
