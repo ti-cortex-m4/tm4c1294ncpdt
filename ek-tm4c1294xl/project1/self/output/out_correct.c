@@ -16,6 +16,7 @@ OUT_CORRECT,C
 #include "../time/correct2.h"
 #include "../time/correct3.h"
 #include "../flash/records.h"
+#include "../nvram/cache.h"
 #include "out_correct.h"
 
 
@@ -88,6 +89,8 @@ void    OutCorrect4(void)
       Correct1.mpwNegCountCurr[0]++;
       Correct1.mpwNegCountCurr[i]++;
 
+      SaveCache(&chCorrect1);
+
       LongResult(bRES_OK);
     }
     else LongResult(bRES_BADDATA);
@@ -112,6 +115,8 @@ void    OutCorrect4(void)
       Correct1.mpwPosValueCurr[i] += (uint)dw;
       Correct1.mpwPosCountCurr[0]++;
       Correct1.mpwPosCountCurr[i]++;
+
+      SaveCache(&chCorrect1);
 
       LongResult(bRES_OK);
     }

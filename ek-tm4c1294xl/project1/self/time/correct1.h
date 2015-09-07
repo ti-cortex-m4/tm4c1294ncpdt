@@ -4,6 +4,10 @@ CORRECT1,H
 
 ------------------------------------------------------------------------------*/
 
+extern  cache const             chCorrect1;
+
+
+
 void    InitCorrect1(void);
 void    ResetCorrect1(void);
 
