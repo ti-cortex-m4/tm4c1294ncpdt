@@ -6,6 +6,9 @@ OUT_CNT.C
 
 #include "../main.h"
 #include "../memory/mem_settings.h"
+#include "../memory/mem_factors.h"
+#include "../memory/mem_current.h"
+#include "../memory/mem_extended_1.h"
 #include "../serial/ports.h"
 #include "../digitals/digitals.h"
 #include "../energy.h"
@@ -76,16 +79,15 @@ void    OutCntCanNewAll(void)
       float fl;
 
       if (GetDigitalDevice(c) == 0)
-        fl = *GetCntCurrImp(c);
-      else
-      if ((GetDigitalDevice(c) == 5) || (GetDigitalDevice(c) == 6))
-        fl = mpreEsc_S[c];
+        fl = GetCntCurrImp(c);
+      else if ((GetDigitalDevice(c) == 5) || (GetDigitalDevice(c) == 6))
+        fl = mpdbEsc_S[c];
       else
       {
         if (boEnblCurrent == true)
-          fl = mpreValueCntHou[c] * mpdwBase[c];
+          fl = mpdbValueCntHou[c] * mpdwBase[c];
         else
-          fl = mpreEsc_S[c];
+          fl = mpdbEsc_S[c];
       }
 
       wSize += PushFloat(fl);

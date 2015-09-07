@@ -19,19 +19,6 @@ ENERGY.C
 
 
 
-float   GetCanReal(float *mpreT, uchar  ibCan) {
-	ASSERT(ibCan < bCANALS);
-  return mpreT[ibCan];
-}
-
-
-void    SetCanReal(float *mpreT, uchar  ibCan, float *preT) {
-	ASSERT(ibCan < bCANALS);
-  mpreT[ibCan] = *preT;
-}
-
-
-
 ulong   *PGetCanImp(impulse  *mpimT, uchar  ibCanal, uchar  ibTariff) {
   return( &mpimT[ibCanal].mpdwImp[ibTariff] );
 }
