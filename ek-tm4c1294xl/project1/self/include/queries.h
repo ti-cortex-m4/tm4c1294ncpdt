@@ -15,6 +15,11 @@ QUERIES.H
 #define bINQ_GETGROUP                  9
 #define bINQ_SETGROUP                  10
 
+#define bINQ_CORRECT1                  11
+#define bINQ_CORRECT2                  12
+#define bINQ_CORRECT3                  13
+#define bINQ_CORRECT4                  238
+
 #define bINQ_GETPUBLIC_TARIFFS         14
 #define bINQ_SETPUBLIC_TARIFFS         15
 

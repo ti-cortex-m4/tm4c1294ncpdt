@@ -12,6 +12,7 @@ RESPONSE0_CRC,C
 #include "../impulses/factors.h"
 #include "out_common.h"
 #include "out_rtc.h"
+#include "out_correct.h"
 #include "out_groups.h"
 #include "out_tariffs.h"
 #include "out_factors.h"
@@ -46,6 +47,11 @@ void    Response0_CRC(void)
 
       case bINQ_GETGROUP: OutGetGroup(); break;
       case bINQ_SETGROUP: OutSetGroup(); break;
+
+      case bINQ_CORRECT1: OutCorrect1(); break;
+      case bINQ_CORRECT2: OutCorrect2(); break;
+      case bINQ_CORRECT3: OutCorrect3(); break;
+      case bINQ_CORRECT4: OutCorrect4(); break;
 
       case bINQ_GETPUBLIC_TARIFFS: OutGetPublicTariffs(); break;
       case bINQ_SETPUBLIC_TARIFFS: OutSetPublicTariffs(); break;
