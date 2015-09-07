@@ -174,15 +174,15 @@
 -   #define bINQ_GETTRACNTCURRCAN          228
 -   #define bINQ_GETTRACNTMONCAN           229
 
-#define bINQ_GETTARIFFSDAY             150
++   #define bINQ_GETTARIFFSDAY             150
 
 #define bINQ_GETDEFHOU                 151
 #define bINQ_GETDEFDAY                 152
 #define bINQ_GETDEFMON                 153
 
-#define bINQ_GETDEFHOU_INDEX           154
-#define bINQ_GETDEFDAY_INDEX           155
-#define bINQ_GETDEFMON_INDEX           156
++   #define bINQ_GETDEFHOU_INDEX           154
++   #define bINQ_GETDEFDAY_INDEX           155
++   #define bINQ_GETDEFMON_INDEX           156
 
 #define bINQ_GETPOWGRPHOU_DAY          157
 #define bINQ_GETIMPCANHOU_DAY          158
