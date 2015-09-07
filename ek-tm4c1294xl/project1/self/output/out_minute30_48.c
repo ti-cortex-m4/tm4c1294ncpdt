@@ -166,7 +166,7 @@ void    OutImpCanHou48Ext(void)
 
 void    OutPowCanHou48Ext(void)
 {
-float   re;
+float   fl;
 
   uint iwHou = GetDayHouIndex(bInBuff6);
 
@@ -177,35 +177,32 @@ float   re;
   for (h=0; h<48; h++)
   {
     if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
-    else
-    {
-      uchar c;
-      for (c=0; c<bCANALS; c++)
-      {
-        if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
-        {
-          if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
-          {
-            re = 0;
-            PushFloat(re);
-          }
-          else
-          if (mpwImpHouCan[ PrevSoftHou() ][c] == 0xFFFF)
-          {
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
-            PushChar(0xFF);
-          }
-          else
-          {
-            re = GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2);
-            PushFloat(re);
-          }
 
-          wSize += sizeof(float);
-          if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
+    uchar c;
+    for (c=0; c<bCANALS; c++)
+    {
+      if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
+      {
+        if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
+        {
+          PushFloat(0);
         }
+        else
+        if (mpwImpHouCan[ PrevSoftHou() ][c] == 0xFFFF)
+        {
+          PushChar(0xFF);
+          PushChar(0xFF);
+          PushChar(0xFF);
+          PushChar(0xFF);
+        }
+        else
+        {
+          fl = GetCanHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], c, 2);
+          PushFloat(fl);
+        }
+
+        wSize += sizeof(float);
+        if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
       }
     }
 
