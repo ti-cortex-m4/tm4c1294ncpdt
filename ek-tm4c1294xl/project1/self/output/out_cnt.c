@@ -68,26 +68,30 @@ void    OutCntCanNewAll(void)
   if (enGlobal != GLB_PROGRAM)
   {
     InitPushPtr();
+    uint wSize = 0;
 
     uchar c;
     for (c=0; c<bCANALS; c++)
     {
+      float fl;
+
       if (GetDigitalDevice(c) == 0)
-        reBuffA = *GetCntCurrImp(c);
+        fl = *GetCntCurrImp(c);
       else
       if ((GetDigitalDevice(c) == 5) || (GetDigitalDevice(c) == 6))
-        reBuffA = *PGetCanReal(mpreEsc_S,c);
+        fl = mpreEsc_S[c];
       else
       {
-        if (boLoadMnt == true)
-          reBuffA = *PGetCanReal(mpreValueCntHou,c) * mpdwBase[c];
+        if (boEnblCurrent == true)
+          fl = mpreValueCntHou[c] * mpdwBase[c];
         else
-          reBuffA = *PGetCanReal(mpreEsc_S,c);
+          fl = mpreEsc_S[c];
       }
 
-      PushFloat();
+      wSize += PushFloat(fl);
     }
-    OutptrOutBuff(sizeof(real)*bCANALS);
+
+    OutptrOutBuff(wSize);
   }
   else Result(bRES_NEEDWORK);
 }
