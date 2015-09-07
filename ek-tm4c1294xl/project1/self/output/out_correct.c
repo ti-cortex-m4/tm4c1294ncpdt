@@ -17,7 +17,7 @@ OUT_CORRECT,C
 
 
 
-void    OutCorrect1(void)
+void    OutCorrectExt1(void)
 {
   if (Correct2Disabled()) { Correct2(EVE_EXT_CORRECT2); Result(bRES_BADACCESS); return; }
   if (Correct3Disabled()) { Correct3(EVE_EXT_CORRECT2); Result(bRES_BADCORRECTION); return; }
@@ -37,7 +37,7 @@ void    OutCorrect1(void)
 
 
 
-void    OutCorrect2(void)
+void    OutCorrectExt2(void)
 {
   if (Correct2Disabled()) { Correct2(EVE_EXT_CORRECT2); Result(bRES_BADACCESS); return; }
   if (Correct3Disabled()) { Correct3(EVE_EXT_CORRECT2); Result(bRES_BADCORRECTION); return; }
@@ -66,7 +66,7 @@ void    OutCorrect2(void)
 
 
 
-void    OutCorrect20(void)
+void    OutCorrectExt20(void)
 {
   if (Correct3Disabled()) { Correct3(EVE_EXT_CORRECT2); Result(bRES_BADCORRECTION); return; }
 

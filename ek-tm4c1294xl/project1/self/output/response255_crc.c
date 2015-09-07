@@ -63,11 +63,11 @@ void    Response255_CRC(void)
 {
   switch (bInBuff5)
   {
-    case bEXT_CORRECT1: OutCorrect1(); break;
-    case bEXT_CORRECT2: OutCorrect2(); break;
-    case bEXT_CORRECT20: OutCorrect20(); break;
-    case bEXT_CORRECT21: OutCorrect21(); break;
-    case bEXT_CORRECT3:  OutCorrect3();  break;
+    case bEXT_CORRECT1: OutCorrectExt1(); break;
+    case bEXT_CORRECT2: OutCorrectExt2(); break;
+    case bEXT_CORRECT20: OutCorrectExt20(); break;
+    case bEXT_CORRECT21: OutCorrectExt21(); break;
+    case bEXT_CORRECT3:  OutCorrectExt3();  break;
 
     case bEXT_GETPHONE: OutGetPhone(); break;
     case bEXT_SETPHONE: OutSetPhone(); break;

@@ -97,7 +97,7 @@ void    Correct3(event  ev)
 
 
 
-void    OutCorrect3(void)
+void    OutCorrectExt3(void)
 {
   InitPushCRC();
 
