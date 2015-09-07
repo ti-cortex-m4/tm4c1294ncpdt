@@ -15,6 +15,7 @@ OUT_CORRECT,C
 #include "../time/correct1.h"
 #include "../time/correct2.h"
 #include "../time/correct3.h"
+#include "../flash/records.h"
 #include "out_correct.h"
 
 
@@ -71,20 +72,21 @@ void    OutCorrect4(void)
 
     if (dw < wMAXCORRECT)
     {
-      tiSetRTC.bSecond = bInBuff5;
-      tiSetRTC.bMinute = bInBuff6;
-      tiSetRTC.bHour   = bInBuff7;
+      time ti2;
+      ti2.bSecond = bInBuff5;
+      ti2.bMinute = bInBuff6;
+      ti2.bHour   = bInBuff7;
 
       AddKeyRecord(EVE_INQ_CORRECT4);
-      SetCurrTime();
+      SetCurrTime(ti2);
       AddKeyRecord(EVE_TIME_OK);
 
       uchar i = GetCorrectIndex(EVE_INQ_CORRECT4);
 
-      mpcwNegValueCurr[0] += (uint)dw;
-      mpcwNegValueCurr[i] += (uint)dw;
-      mpcwNegCountCurr[0]++;
-      mpcwNegCountCurr[i]++;
+      Correct1.mpwNegValueCurr[0] += (uint)dw;
+      Correct1.mpwNegValueCurr[i] += (uint)dw;
+      Correct1.mpwNegCountCurr[0]++;
+      Correct1.mpwNegCountCurr[i]++;
 
       LongResult(bRES_OK);
     }
@@ -96,19 +98,20 @@ void    OutCorrect4(void)
 
     if (dw < wMAXCORRECT)
     {
-      tiSetRTC.bSecond = bInBuff5;
-      tiSetRTC.bMinute = bInBuff6;
-      tiSetRTC.bHour   = bInBuff7;
+      time ti2;
+      ti2.bSecond = bInBuff5;
+      ti2.bMinute = bInBuff6;
+      ti2.bHour   = bInBuff7;
 
       AddKeyRecord(EVE_INQ_CORRECT4);
-      SetCurrTime();
+      SetCurrTime(ti2);
 
       uchar i = GetCorrectIndex(EVE_INQ_CORRECT4);
 
-      mpcwPosValueCurr[0] += (uint)dw;
-      mpcwPosValueCurr[i] += (uint)dw;
-      mpcwPosCountCurr[0]++;
-      mpcwPosCountCurr[i]++;
+      Correct1.mpwPosValueCurr[0] += (uint)dw;
+      Correct1.mpwPosValueCurr[i] += (uint)dw;
+      Correct1.mpwPosCountCurr[0]++;
+      Correct1.mpwPosCountCurr[i]++;
 
       LongResult(bRES_OK);
     }
