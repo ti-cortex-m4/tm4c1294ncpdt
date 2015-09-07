@@ -103,7 +103,7 @@ void    OutImpHhrCanAll(void)
   if (enGlobal != GLB_PROGRAM)
   {
     uint wHhr = bInBuff5*0x100 + bInBuff6;
-    if (wHhr< wHOURS)
+    if (wHhr < wHOURS)
     {
       if (LoadImpHou(wHhr) == 1)
       {
@@ -133,9 +133,11 @@ void    OutImpDayCan(void)
     if ((bInBuff5 < bCANALS) && (bInBuff6 < bDAYS))
     {
       if (LoadImpDay( bInBuff6 ) == 1)
-        Outptr(&mpimDayCan[ PrevSoftDay() ][ bInBuff5 ], sizeof(impulse));
-      else
-        Result(bRES_BADFLASH);
+      {
+        InitPushPtr();
+        OutptrOutBuff(PushImpulse(&mpimDayCan[ PrevSoftDay() ][ bInBuff5 ]));
+      }
+      else Result(bRES_BADFLASH);
     }
     else Result(bRES_BADADDRESS);
   }
@@ -177,9 +179,11 @@ void    OutImpMonCan(void)
     if ((bInBuff5 < bCANALS) && (bInBuff6 < bMONTHS))
     {
       if (LoadImpMon( bInBuff6 ) == 1)
-        Outptr(&mpimMonCan[ PrevSoftMon() ][ bInBuff5 ], sizeof(impulse));
-      else
-        Result(bRES_BADFLASH);
+      {
+        InitPushPtr();
+        OutptrOutBuff(PushImpulse(&mpimMonCan[ PrevSoftMon() ][ bInBuff5 ]));
+      }
+      else Result(bRES_BADFLASH);
     }
     else Result(bRES_BADADDRESS);
   }
