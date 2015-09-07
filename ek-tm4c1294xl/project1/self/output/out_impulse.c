@@ -11,6 +11,7 @@ OUT_IMPULSE,C
 #include "../memory/mem_energy.h"
 #include "../serial/ports.h"
 #include "../realtime/realtime.h"
+#include "../kernel/array_mnt.h"
 #include "../energy2.h"
 #include "out_impulse.h"
 
@@ -36,9 +37,15 @@ void    OutImpMntCan(void)
   if (enGlobal != GLB_PROGRAM)
   {
     if ((bInBuff5 < bCANALS) && (bInBuff6 < bMINUTES))
-      Outptr(&mpwImpMntCan[ bInBuff6 ][ bInBuff5 ], sizeof(uint));
-    else
-      Result(bRES_BADADDRESS);
+    {
+      if (LoadImpMnt(bInBuff6) == 1)
+      {
+        InitPushPtr();
+        OutptrOutBuff(PushInt(mpwImpMntCan[ PrevSoftMnt() ][ bInBuff5 ]));
+      }
+      else Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
   }
   else Result(bRES_NEEDWORK);
 }
@@ -49,9 +56,23 @@ void    OutImpMntCanAll(void)
   if (enGlobal != GLB_PROGRAM)
   {
     if (bInBuff5 < bMINUTES)
-      Outptr(&mpwImpMntCan[ bInBuff5 ], sizeof(uint)*bCANALS);
-    else
-      Result(bRES_BADADDRESS);
+    {
+      if (LoadImpMnt(bInBuff5) == 1)
+      {
+        InitPushPtr();
+        uint wSize = 0;
+
+        uchar c;
+        for (c=0; c<bCANALS; c++)
+        {
+          wSize += PushInt(mpwImpMntCan[ PrevSoftMnt() ][ c ]);
+        }
+
+        OutptrOutBuff(wSize);
+      }
+      else Result(bRES_BADFLASH);
+    }
+    else Result(bRES_BADADDRESS);
   }
   else Result(bRES_NEEDWORK);
 }
