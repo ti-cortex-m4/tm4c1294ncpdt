@@ -170,9 +170,9 @@
 +   #define bINQ_GETMAXPOWGRPMONPREV_ALL   225
 +   #define bINQ_GETMAXPOWGRPMON_ALL       226
 
-#define bINQ_GETTRATIMEDATE            227
-#define bINQ_GETTRACNTCURRCAN          228
-#define bINQ_GETTRACNTMONCAN           229
+-   #define bINQ_GETTRATIMEDATE            227
+-   #define bINQ_GETTRACNTCURRCAN          228
+-   #define bINQ_GETTRACNTMONCAN           229
 
 #define bINQ_GETTARIFFSDAY             150
 
