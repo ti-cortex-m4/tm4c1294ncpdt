@@ -356,7 +356,8 @@ bool    AddDigRecord(event  ev)
 //    case EVE_DEVICE_P_DEFECT: memcpy(&reCurr.mpbBuff+0, &tiDig, sizeof(time)); break;
 
     case EVE_EXTENDED_0_ERROR: PutChar(0, bRecord);
-                               PutChar(1, bExt0Counter); break;
+                               PutChar(1, bExt0Counter);
+                               PutChar(2, bExt0Limit); break;
   }
 
   CloseRecord(AUX_RECORD, i);
