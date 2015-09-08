@@ -31,7 +31,6 @@ x
 
 UART FIFO + sem2reader time
 
-tiKey
 params
 
 вывод дампа обмена со счетчиком

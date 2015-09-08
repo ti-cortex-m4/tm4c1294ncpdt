@@ -21,8 +21,6 @@ extern  key                     enKeyboard;
 
 extern  uint                    wProgram;
 
-extern  time                    tiKey;
-
 extern  uchar                   ibX, ibY;
 
 
