@@ -2,9 +2,9 @@
 
 +   #define bINQ_GETCURRTIME               1
 #define bINQ_SETCURRTIME               2
-#define bINQ_GETLOGICAL                3
++   #define bINQ_GETLOGICAL                3
 #define bINQ_SETLOGICAL                4
-#define bINQ_GETPRIVATE                5
++   #define bINQ_GETPRIVATE                5
 #define bINQ_SETPRIVATE                6
 #define bINQ_GETPASSWORD               7
 #define bINQ_SETPASSWORD               8

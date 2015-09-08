@@ -9,11 +9,14 @@ QUERIES.H
 #define __INQUIRYS
 
 #define bINQ_GETGLOBAL                 0
-
 #define bINQ_GETCURRTIME               1
+#define bINQ_GETLOGICAL                3
+#define bINQ_GETPRIVATE                5
 
 #define bINQ_GETGROUP                  9
 #define bINQ_SETGROUP                  10
+
+#define bINQ_GETOLDMODE                16
 
 #define bINQ_CORRECT1                  11
 #define bINQ_CORRECT2                  12
@@ -161,12 +164,14 @@ QUERIES.H
 #define bINQ_TRANSIT_EXECUTE3          174
 #define bINQ_TRANSIT_EXECUTE4          175
 
-#define bINQ_GETFLASHPAGE              249
+#define bINQ_FLOW                      245
 
 #define bINQ_SETKEY                    246
 #define bINQ_GETDISPLAY                247
 
 #define bINQ_GETCONFIG                 248
+
+#define bINQ_GETFLASHPAGE              249
 
 #define bINQ_RESPONSE_252              252
 #define bINQ_RESPONSE_253              253
