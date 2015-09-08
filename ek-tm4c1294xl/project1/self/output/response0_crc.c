@@ -47,6 +47,8 @@ void    Response0_CRC(void)
       case bINQ_GETGLOBAL: LongResult(enGlobal); break;
 
       case bINQ_GETCURRTIME: OutGetCurrTimeDate(); break;
+      case bINQ_GETLOGICAL: LongResult(bLogical); break;
+      case bINQ_GETPRIVATE: Common(&wPrivate, sizeof(uint)); break;
 
       case bINQ_GETGROUP: OutGetGroup(); break;
       case bINQ_SETGROUP: OutSetGroup(); break;
