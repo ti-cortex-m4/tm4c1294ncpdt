@@ -31,8 +31,10 @@ typedef struct
 
 
 float2  GetFloat2(float  flValue, bool  fValid);
-double2 GetDouble2(double  dbValue, bool  fValid);
-time2   GetTime2(time  tiValue, bool  fValid);
 
+double2 GetDouble2(double  dbValue, bool  fValid);
+
+time2   GetTime2(time  tiValue, bool  fValid);
+time2   GetTime2Error(void);
 
 #endif

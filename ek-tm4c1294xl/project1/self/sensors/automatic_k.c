@@ -33,7 +33,7 @@ uchar   i;
     if (BccInput() == SER_GOODCHECK) break;
   }
 
-  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  if (i == bMINORREPEATS) return GetTime2Error();
   ShowPercent(25);
 
   time ti = ReadTimeK();
@@ -47,7 +47,7 @@ uchar   i;
     if (BccInput() == SER_GOODCHECK) break;
   }
 
-  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  if (i == bMINORREPEATS) return GetTime2Error();
   ShowPercent(50);
 
   ti = ReadDateK(ti);

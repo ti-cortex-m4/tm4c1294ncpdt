@@ -622,10 +622,10 @@ uchar   i;
 
   Clear();
 
-  if (QueryOpenA_Full(25) == 0) return GetTime2(tiZero, false);
+  if (QueryOpenA_Full(25) == 0) return GetTime2Error();
 
   time2 ti2 = QueryTimeA_Full(75);
-  if (ti2.fValid == false) return GetTime2(tiZero, false);
+  if (ti2.fValid == false) return GetTime2Error();
 
   tiChannelC = ti2.tiValue;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;     
@@ -645,10 +645,10 @@ uchar   i;
 
   Clear();
 
-  if (QueryOpenB_Full(25) == 0) return GetTime2(tiZero, false);
+  if (QueryOpenB_Full(25) == 0) return GetTime2Error();
 
   time2 ti2 = QueryTimeB_Full(75);
-  if (ti2.fValid == false) return GetTime2(tiZero, false);
+  if (ti2.fValid == false) return GetTime2Error();
 
   tiChannelC = ti2.tiValue;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;
@@ -673,10 +673,10 @@ time2   ReadTimeCanC(void)
     QueryTimeC();
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return GetTime2(tiZero, false);
+    if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  if (i == bMINORREPEATS) return GetTime2Error();
   ShowPercent(75);
 
   time ti = ReadTimeC();
@@ -955,7 +955,7 @@ uchar   i;
 time2   ReadTimeCanP(void)
 {
   Clear();
-  if (OpenDeviceP() == 0) return GetTime2(tiZero, false);
+  if (OpenDeviceP() == 0) return GetTime2Error();
 
 
   uchar i;
@@ -965,10 +965,10 @@ time2   ReadTimeCanP(void)
     QueryTimeP();
 
     if (ElsInput(0) == SER_GOODCHECK) break;
-    if (fKey == true) return GetTime2(tiZero, false);
+    if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  if (i == bMINORREPEATS) return GetTime2Error();
   ShowPercent(50);
 
   time ti = ReadTimeP();
@@ -1957,7 +1957,7 @@ time2   ReadTimeCan(uchar  ibCan)
     case 26: return ReadTimeCanU();
 #endif
 
-    default: return GetTime2(tiZero, false);
+    default: return GetTime2Error();
   }
 }
 

@@ -40,3 +40,10 @@ time2   GetTime2(time  tiValue, bool  fValid)
 
   return ti2;
 }
+
+
+time2   GetTime2Error(void)
+{
+  static const time tiZero = { 0, 0, 0, 0, 0, 0 };
+  return GetTime2(tiZero, false);
+}
