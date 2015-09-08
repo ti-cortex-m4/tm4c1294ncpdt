@@ -60,21 +60,19 @@ void    ResetExtended0(bool  fFull)
 
 bool    MakeExtended0(void)
 {
-uchar i;
-
   if (boExt0Flag == false)
     return 1;
   else
   {
     ShowHi(szExtended0); Clear();
 
-    i = 0;
+    uchar c = 0;
 
-    uchar x;
-    for (x=1; x<=bExt0Counter; x++)
+    uchar i;
+    for (i=1; i<=bExt0Counter; i++)
     {
-      Clear(); sprintf(szLo+4,"%2u из %-2u", x, bExt0Counter);
-      Delay(((x % 5) + 1)*100);
+      Clear(); sprintf(szLo+4,"%2u из %-2u", i, bExt0Counter);
+      Delay(((i % 5) + 1)*100);
 
       time2 ti2 = ReadTimeDate_Short(ibDig);
       if (ti2.fValid == true)
@@ -85,7 +83,7 @@ uchar i;
       {
         ShowLo(szLinkError); DelayInf();
 
-        if (++i > (bExt0Counter - bExt0Limit))
+        if (++c > (bExt0Counter - bExt0Limit))
         {
           mpdwExt0ErrorsPH[ibPort][GetCurrHouIndex()]++;
           AddDigRecord(EVE_EXTENDED_0_ERROR);
