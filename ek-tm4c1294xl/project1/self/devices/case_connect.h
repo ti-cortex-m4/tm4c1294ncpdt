@@ -245,6 +245,7 @@
 
       if (exExtended == EXT_PROFILE_30MIN)
       {
+        if (MakeExtended0() == 0) { MakePause(DEV_MODEM_STOP); break; }
         MakeExtended1();
         MakeExtended3();
         MakeExtended4();

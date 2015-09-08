@@ -51,6 +51,7 @@ DEVICES.C
 #include "../digitals/answer.h"
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
+#include "../digitals/extended/extended_0.h"
 #include "../digitals/extended/extended_1.h"
 #include "../digitals/extended/extended_3.h"
 #include "../digitals/extended/extended_4.h"
@@ -462,6 +463,7 @@ void    RunDevices(void)
 
       if (exExtended == EXT_PROFILE_30MIN)
       {
+        if (MakeExtended0() == 0) { MakePause(DEV_MODEM_STOP); break; }
         MakeExtended1();
         MakeExtended3();
         MakeExtended4();
