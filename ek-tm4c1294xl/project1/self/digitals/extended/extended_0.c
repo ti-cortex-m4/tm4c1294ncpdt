@@ -76,7 +76,8 @@ uchar i;
       Clear(); sprintf(szLo+4,"%2u из %-2u", x, bExt0Counter);
       Delay(((x % 5) + 1)*100);
 
-      if (ReadTimeDate_Short(ibDig) == 1)
+      time2 ti2 = ReadTimeDate_Short(ibDig);
+      if (ti2.fValid == true)
       {
         mpdwExt0RepeatsPH[ibPort][GetCurrHouIndex()]++;
       }
