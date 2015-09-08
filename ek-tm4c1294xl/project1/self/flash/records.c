@@ -10,6 +10,7 @@ RECORDS,C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
+#include "../memory/mem_extended_0.h"
 #include "../serial/ports.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_status.h"
@@ -354,8 +355,8 @@ bool    AddDigRecord(event  ev)
 //
 //    case EVE_DEVICE_P_DEFECT: memcpy(&reCurr.mpbBuff+0, &tiDig, sizeof(time)); break;
 
-//    case EVE_EXTENDED_0_ERROR: memcpy(&reCurr.mpbBuff+0, &x, sizeof(uchar));
-//                               memcpy(&reCurr.mpbBuff+1, &bExt0Counter, sizeof(uchar)); break;
+    case EVE_EXTENDED_0_ERROR: PutChar(0, bRecord);
+                               PutChar(1, bExt0Counter); break;
   }
 
   CloseRecord(AUX_RECORD, i);

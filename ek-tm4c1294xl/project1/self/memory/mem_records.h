@@ -19,3 +19,5 @@ extern  uchar                   mpfRecordDsbl[256];
 extern  time                    tiRecordTime;
 
 extern  uchar                   ibRecordCan;
+
+extern  uchar                   bRecord;

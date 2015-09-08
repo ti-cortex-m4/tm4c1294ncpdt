@@ -101,6 +101,8 @@ bool    MakeExtended0(void)
         if (++c > (bExt0Counter - bExt0Limit))
         {
           mpdwExt0ErrorsPH[ibPort][GetCurrHouIndex()]++;
+
+          bRecord = i;
           AddDigRecord(EVE_EXTENDED_0_ERROR);
 
           ShowLo(szBadLink); DelayMsg();
