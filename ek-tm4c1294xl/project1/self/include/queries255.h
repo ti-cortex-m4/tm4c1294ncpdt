@@ -138,6 +138,8 @@ QUERIES2.H
 #define bEXT_GETGROUPSNAME             115
 #define bEXT_SETGROUPSNAME             116
 
+#define bEXT_GETEXTENDED0              128
+
 #define bINQ_FAILURE2                  98
 #define bEXT_OVERFLOW_HHR              103
 #define bEXT_GET_ERROR_LINK            134
