@@ -15,7 +15,7 @@ ENERGY4.C
 
 
 
-float   GetPowGrpHouCurr(uchar  ibGroup, uchar  bMul)
+float   GetPowGrpHouCurr(uchar  ibGroup, uchar  bMultiplier)
 {
 uchar   i, j;
 float   reA, reB; 
@@ -27,7 +27,7 @@ float   reA, reB;
   for (i=1; i<=j; i++)
   {
   	LoadImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES); // TODO check result
-    reB += GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], ibGroup, bMul);
+    reB += GetGrpMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], ibGroup, bMultiplier);
   }
 
   reA = 10*reB/j;
@@ -36,7 +36,7 @@ float   reA, reB;
 }
 
 
-float   GetPowCanHouCurr(uchar  ibCan, uchar  bMul)
+float   GetPowCanHouCurr(uchar  ibCan, uchar  bMultiplier)
 {
 uchar   i,j;
 float   reA, reB;
@@ -48,7 +48,7 @@ float   reA, reB;
   for (i=1; i<=j; i++)
   {
   	LoadImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES); // TODO check result
-    reB += GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], ibCan, bMul);
+    reB += GetCanMntInt2Real(mpwImpMntCan[ PrevSoftMnt() ], ibCan, bMultiplier);
   }
 
   reA = 10*reB/j;

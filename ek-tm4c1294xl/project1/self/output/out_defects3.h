@@ -13,5 +13,5 @@ void    OutEngMonGrpDef(void);
 void    OutMaxPowDayGrpDef(void);
 void    OutMaxPowMonGrpDef(void);
 
-void    OutPowHouGrpDef(uchar  bMul);
+void    OutPowHouGrpDef(uchar  bMultiplier);
 

@@ -52,7 +52,7 @@ void    OutImpMntCurrCanAll(void)
 
 
 
-void    OutPowMntGrp(bool  fAllGroups, uchar  ibMnt, uchar  bMul)
+void    OutPowMntGrp(bool  fAllGroups, uchar  ibMnt, uchar  bMultiplier)
 {
   if (enGlobal != GLB_PROGRAM)
   {
@@ -66,7 +66,7 @@ void    OutPowMntGrp(bool  fAllGroups, uchar  ibMnt, uchar  bMul)
         uchar g;
         for (g=0; g<bGROUPS; g++)
         {
-          wSize += PushFloat(GetGrpMntInt2Real(mpwImpMntCan[ ibMnt ], g, bMul));
+          wSize += PushFloat(GetGrpMntInt2Real(mpwImpMntCan[ ibMnt ], g, bMultiplier));
         }
         OutptrOutBuff(wSize);
       }
@@ -75,7 +75,7 @@ void    OutPowMntGrp(bool  fAllGroups, uchar  ibMnt, uchar  bMul)
         if (bInBuff5 < bGROUPS)
         {
           InitPushPtr();
-          OutptrOutBuff(PushFloat(GetGrpMntInt2Real(mpwImpMntCan[ ibMnt ], bInBuff5, bMul)));
+          OutptrOutBuff(PushFloat(GetGrpMntInt2Real(mpwImpMntCan[ ibMnt ], bInBuff5, bMultiplier)));
         }
         else Result(bRES_BADADDRESS);
       }
