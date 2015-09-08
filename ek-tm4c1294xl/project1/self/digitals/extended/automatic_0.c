@@ -15,6 +15,7 @@ AUTOMATIC_0.C
 #include "../../sensors/device_k.h"
 #include "../../sensors/device_p.h"
 #include "../../sensors/device_s.h"
+#include "../../sensors/automatic_s.h"
 #include "../../sensors/device_u.h"
 #include "../../console.h"
 #include "../../time/timedate.h"
@@ -342,17 +343,15 @@ bool    ReadTimeDateQ_Short(void)
 
 #ifndef SKIP_S
 
-bool    ReadTimeDateS_Short(void)
+time2   ReadTimeDateS_Short(void)
 {
   DelayOff();
   QueryTimeS();
 
-  if (InputS() != SER_GOODCHECK) return(0);
+  if (InputS() != SER_GOODCHECK) return GetTime2(tiZero, false);
 
 
-  ReadTimeAltS();
-
-  return(1);
+  return GetTime2(ReadTimeS(), true);
 }
 
 #endif
@@ -502,6 +501,6 @@ time2   ReadTimeDate_Short(uchar  ibCan)
     case 26: return ReadTimeDateU_Short();
 #endif
 
-    default: tiAlt = tiZero; return(0);
+    default: return GetTime2(tiZero, false);
   }
 }

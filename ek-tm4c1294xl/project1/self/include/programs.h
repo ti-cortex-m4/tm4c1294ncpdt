@@ -325,6 +325,9 @@ PROGRAMS.H
 #define wSET_EXT4T_RESET_FULL       518
 #define wSET_EXT4T_RESET_CUSTOM     519
 
+#define wSET_EXT0_FLAG              520
+#define wSET_EXT0_COUNTER           521
+
 #define wSET_EXT6_FLAG              400
 
 #define wGET_HEALTH                 999
