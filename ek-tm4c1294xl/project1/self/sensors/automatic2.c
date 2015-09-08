@@ -45,12 +45,12 @@ double2 ReadCntCurrA(void)
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceA() == 0) return GetDouble2(0, false);
+  if (ReadKoeffDeviceA() == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
 
-  if (QueryEnergyA_Full(0,100) == 0) return GetDouble2(0, false);
+  if (QueryEnergyA_Full(0,100) == 0) return GetDouble2Error();
 
 
   for (i=0; i<4; i++) 
@@ -73,12 +73,12 @@ double2 ReadCntCurrB(void)
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2(0, false);
+  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
 
-  if (QueryEnergyB_Full(0,100) == 0) return GetDouble2(0, false);
+  if (QueryEnergyB_Full(0,100) == 0) return GetDouble2Error();
 
 
   for (i=0; i<4; i++) 
@@ -101,7 +101,7 @@ double2 ReadCntCurrC(void)
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceC() == 0) return GetDouble2(0, false);
+  if (ReadKoeffDeviceC() == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -109,7 +109,7 @@ uchar   i;
   DelayOff();
   QueryEnergyAbsC();
 
-  if (RevInput() != SER_GOODCHECK) return GetDouble2(0, false);
+  if (RevInput() != SER_GOODCHECK) return GetDouble2Error();
   ShowPercent(100);
 
   ReadEnergyC();
@@ -574,13 +574,13 @@ uchar   i,j;
 double2 ReadCntCurrP(void)
 {
   Clear();
-  if (OpenDeviceP() == 0) return GetDouble2(0, false);
+  if (OpenDeviceP() == 0) return GetDouble2Error();
 
 
-  if (ReadKoeffDeviceP() == 0) return GetDouble2(0, false);
+  if (ReadKoeffDeviceP() == 0) return GetDouble2Error();
 
-  if (QueryEnergyP_Full(0) == 0) return GetDouble2(0, false);
-  if (QueryEnergyP_Full(1) == 0) return GetDouble2(0, false);
+  if (QueryEnergyP_Full(0) == 0) return GetDouble2Error();
+  if (QueryEnergyP_Full(1) == 0) return GetDouble2Error();
 
   QueryCloseP();
 
@@ -993,25 +993,25 @@ uchar   i,j;
 ulong   dw;
 
   Clear();
-  if (ReadKoeffDeviceA() == 0) return GetDouble2(0, false);
+  if (ReadKoeffDeviceA() == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
 
   time2 ti2 = QueryTimeA_Full(76);
-  if (ti2.fValid == false) return GetDouble2(0, false);
+  if (ti2.fValid == false) return GetDouble2Error();
 
 
   if (ti2.tiValue.bMonth == ibMonth+1)  // значени€е счЄтчиков на начало текущего мес€ца
   {
-    if (QueryEnergyA_Full2(0x40,98) == 0) return GetDouble2(0, false);
+    if (QueryEnergyA_Full2(0x40,98) == 0) return GetDouble2Error();
     for (i=0; i<4; i++)
     {
       dw = mpdwChannelsA[i];
       mpdwChannelsB[i] = dw;
     }
 
-    if (QueryEnergyA_Full2(0,99) == 0) return GetDouble2(0, false);
+    if (QueryEnergyA_Full2(0,99) == 0) return GetDouble2Error();
     for (i=0; i<4; i++)
     {
       dw  = mpdwChannelsA[i];
@@ -1028,7 +1028,7 @@ ulong   dw;
     j = ibMonth + 2;
     do
     {
-      if (QueryEnergyA_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return GetDouble2(0, false);
+      if (QueryEnergyA_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return GetDouble2Error();
       for (i=0; i<4; i++)
       {
         dw  = mpdwChannelsA[i];
@@ -1039,7 +1039,7 @@ ulong   dw;
     }
     while ((bMONTHS + ti2.tiValue.bMonth - j++) % bMONTHS != 0 );
 
-    if (QueryEnergyA_Full2(0,99) == 0) return GetDouble2(0, false);
+    if (QueryEnergyA_Full2(0,99) == 0) return GetDouble2Error();
     for (i=0; i<4; i++)
     {
       dw  = mpdwChannelsA[i];
@@ -1072,25 +1072,25 @@ uchar   i,j;
 ulong   dw;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2(0, false);
+  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
 
   time2 ti2 = QueryTimeB_Full(76);
-  if (ti2.fValid == false) return GetDouble2(0, false);
+  if (ti2.fValid == false) return GetDouble2Error();
 
 
   if (ti2.tiValue.bMonth == ibMonth+1)  // значени€е счЄтчиков на начало текущего мес€ца
   {
-    if (QueryEnergyB_Full2(0x40,98) == 0) return GetDouble2(0, false);
+    if (QueryEnergyB_Full2(0x40,98) == 0) return GetDouble2Error();
     for (i=0; i<4; i++)
     {
       dw = mpdwChannelsA[i];
       mpdwChannelsB[i] = dw;
     }
 
-    if (QueryEnergyB_Full2(0,99) == 0) return GetDouble2(0, false);
+    if (QueryEnergyB_Full2(0,99) == 0) return GetDouble2Error();
     for (i=0; i<4; i++)
     {
       dw  = mpdwChannelsA[i];
@@ -1107,7 +1107,7 @@ ulong   dw;
     j = ibMonth + 2;
     do
     {
-      if (QueryEnergyB_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return GetDouble2(0, false);
+      if (QueryEnergyB_Full2( 0x30 | ((j - 1) % 12 + 1), 76 + j ) == 0) return GetDouble2Error();
       for (i=0; i<4; i++)
       {
         dw  = mpdwChannelsA[i];
@@ -1118,7 +1118,7 @@ ulong   dw;
     }
     while ((bMONTHS + ti2.tiValue.bMonth - j++) % bMONTHS != 0 );
 
-    if (QueryEnergyB_Full2(0,99) == 0) return GetDouble2(0, false);
+    if (QueryEnergyB_Full2(0,99) == 0) return GetDouble2Error();
     for (i=0; i<4; i++)
     {
       dw  = mpdwChannelsA[i];
@@ -1150,7 +1150,7 @@ double2 ReadCntMonCanC(uchar  ibMonth)
 uchar   i,j;
 
   Clear();
-  if (ReadKoeffDeviceC() == 0) return GetDouble2(0, false);
+  if (ReadKoeffDeviceC() == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -1158,8 +1158,8 @@ uchar   i,j;
   DelayOff();
   QueryTimeC();                   
 
-  if (RevInput() != SER_GOODCHECK) return GetDouble2(0, false);
-  if (fKey == true) return GetDouble2(0, false);
+  if (RevInput() != SER_GOODCHECK) return GetDouble2Error();
+  if (fKey == true) return GetDouble2Error();
 
   ShowPercent(76);
 
@@ -1168,7 +1168,7 @@ uchar   i,j;
 
   if (ti.bMonth == ibMonth+1)           // значени€е счЄтчиков на начало текущего мес€ца
   {
-    if (QueryEnergyDayC_Full2(0, 98) == 0) return GetDouble2(0, false);
+    if (QueryEnergyDayC_Full2(0, 98) == 0) return GetDouble2Error();
     for (i=0; i<4; i++)
     {
       ulong dw = mpdwChannelsA[i];
@@ -1176,7 +1176,7 @@ uchar   i,j;
     }
 
 
-    if (QueryEnergyAbsC_Full2(99) == 0) return GetDouble2(0, false);
+    if (QueryEnergyAbsC_Full2(99) == 0) return GetDouble2Error();
     for (i=0; i<4; i++)
     {
       ulong dw  = mpdwChannelsA[i];
@@ -1193,7 +1193,7 @@ uchar   i,j;
     j = (ibMonth + 1)%12;
     do
     {
-      if (QueryEnergyMonC_Full2(-((12-1+ti.bMonth-j)%12), 76+j) == 0) return GetDouble2(0, false);
+      if (QueryEnergyMonC_Full2(-((12-1+ti.bMonth-j)%12), 76+j) == 0) return GetDouble2Error();
       for (i=0; i<4; i++)
       {
         ulong dw = mpdwChannelsA[i];
@@ -1205,7 +1205,7 @@ uchar   i,j;
     while ((bMONTHS + ti.bMonth - ++j) % bMONTHS != 0 );
 
 
-    if (QueryEnergyAbsC_Full2(99) == 0) return GetDouble2(0, false);
+    if (QueryEnergyAbsC_Full2(99) == 0) return GetDouble2Error();
     for (i=0; i<4; i++)
     {
       ulong dw = mpdwChannelsA[i];
@@ -1854,7 +1854,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
     case 26: return ReadCntCurrU();
 #endif
 
-    default: return GetDouble2(0, false);
+    default: return GetDouble2Error();
   }
 }
 
@@ -1975,7 +1975,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
   switch (diCurr.bDevice)
   {
     case 0:  if (LoadCntMon(ibMon) == false)
-               return GetDouble2(0, false);
+               return GetDouble2Error();
              else
                return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);
 
@@ -1989,7 +1989,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
     case 2:  return ReadCntMonCanB(ibMon);
 
     case 12: if (LoadCntMon(ibMon) == false)
-               return GetDouble2(0, false);
+               return GetDouble2Error();
              else
                return GetDouble2(mpdbCntMonCan[ PrevSoftMon() ][ibCan], true);
 #endif
@@ -2079,7 +2079,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
     case 26: return ReadCntMonCanU(ibMon);
 #endif
 
-    default: return GetDouble2(0, false);
+    default: return GetDouble2Error();
   }
 }
 

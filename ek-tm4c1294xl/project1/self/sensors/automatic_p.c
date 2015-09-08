@@ -210,11 +210,11 @@ uint    PopChar2ElsHex(void)
 double2 ReadCntMonCanP(uchar  ibMonth)
 {
   Clear();
-  if (OpenDeviceP() == 0) return GetDouble2(0, false);
+  if (OpenDeviceP() == 0) return GetDouble2Error();
 
 
   time2 ti2 = QueryTimeP_Full();
-  if (ti2.fValid == false) return GetDouble2(0, false);
+  if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
 
@@ -224,11 +224,11 @@ double2 ReadCntMonCanP(uchar  ibMonth)
 
 //    sprintf(szLo, "  нет данных !  ");
 //    Delay(1000);
-    return GetDouble2(0, false);
+    return GetDouble2Error();
   }
   else
   {
-    if (ReadKoeffDeviceP() == 0) return GetDouble2(0, false);
+    if (ReadKoeffDeviceP() == 0) return GetDouble2Error();
 
     tiDig.bYear = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
     tiDig.bMonth = ibMonth+1;
@@ -245,7 +245,7 @@ double2 ReadCntMonCanP(uchar  ibMonth)
     uchar i;
     for (i=0; i<15; i++) 
     { 
-      if (QueryHistoryP1_Full(i) == 0) return GetDouble2(0, false);
+      if (QueryHistoryP1_Full(i) == 0) return GetDouble2Error();
 
       InitPop(2+8);
       
@@ -264,9 +264,9 @@ double2 ReadCntMonCanP(uchar  ibMonth)
       {
         if ((tiDig.bMonth == ti.bMonth) && (tiDig.bYear == ti.bYear))
         {
-          if (QueryHistoryP2_Full(i*8+1+0) == 0) return GetDouble2(0, false);
+          if (QueryHistoryP2_Full(i*8+1+0) == 0) return GetDouble2Error();
           ReadEngAbsP(0);
-          if (QueryHistoryP2_Full(i*8+1+1) == 0) return GetDouble2(0, false);
+          if (QueryHistoryP2_Full(i*8+1+1) == 0) return GetDouble2Error();
           ReadEngAbsP(1);
        
           double dbTrans = mpdbTransCnt[ibDig];
@@ -300,7 +300,7 @@ double2 ReadCntMonCanP(uchar  ibMonth)
 
     sprintf(szLo, " мес€ц %02u.%02u ?  ",tiDigPrev.bMonth,tiDigPrev.bYear);
     Delay(1000); 
-    return GetDouble2(0, false);
+    return GetDouble2Error();
   }
 }
 
