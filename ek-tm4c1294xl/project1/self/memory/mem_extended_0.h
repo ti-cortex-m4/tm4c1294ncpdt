@@ -4,7 +4,7 @@ MEM_EXTENDED_0,H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                    boExt0Flag;
+extern  bool                    fExt0Flag;
 
 extern  uchar                   bExt0Limit, bExt0Counter;
 
