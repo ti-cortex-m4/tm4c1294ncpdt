@@ -200,9 +200,9 @@ double2 ReadCntCurrS(void)
 {
   Clear();
 
-  if (QueryConfigS_Full(50) == 0) return GetDouble2(0, false);
+  if (QueryConfigS_Full(50) == 0) return GetDouble2Error();
 
-  if (QueryEngMonS_Full(0, 75) == 0) return GetDouble2(0, false);
+  if (QueryEngMonS_Full(0, 75) == 0) return GetDouble2Error();
 
   mpdbChannelsC[0] = (float)mpdwChannelsA[0] / wDividerS;
   mpboChannelsA[0] = true;
@@ -215,19 +215,19 @@ double2 ReadCntMonCanS(uchar  ibMonth)
 { 
   Clear();
 
-  if (QueryConfigS_Full(25) == 0) return GetDouble2(0, false);
+  if (QueryConfigS_Full(25) == 0) return GetDouble2Error();
 
   time2 ti2 = QueryTimeS_Full(50);
-  if (ti2.fValid == false) return GetDouble2(0, false);
+  if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
   if (ti.bMonth != ibMonth+1)
   {
-    if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2(0, false);
+    if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2Error();
   }
   else 
   {
-    if (QueryEngDayS_Full(1, 75) == 0) return GetDouble2(0, false);
+    if (QueryEngDayS_Full(1, 75) == 0) return GetDouble2Error();
   }
 
   mpdbChannelsC[0] = (float)mpdwChannelsA[0] / wDividerS;

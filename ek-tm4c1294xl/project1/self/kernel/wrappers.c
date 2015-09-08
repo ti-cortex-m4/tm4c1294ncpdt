@@ -20,6 +20,13 @@ float2  GetFloat2(float  flValue, bool  fValid)
 }
 
 
+float2  GetFloat2Error(void)
+{
+  return GetFloat2(0, false);
+}
+
+
+
 double2 GetDouble2(double  dbValue, bool  fValid)
 {
   double2 db2;
@@ -29,6 +36,13 @@ double2 GetDouble2(double  dbValue, bool  fValid)
 
   return db2;
 }
+
+
+double2 GetDouble2Error(void)
+{
+  return GetDouble2(0, false);
+}
+
 
 
 time2   GetTime2(time  tiValue, bool  fValid)

@@ -48,10 +48,10 @@ uchar   i,j;
       QueryEnergyAbsU(j);
 
       if (BccInput() == SER_GOODCHECK) break;
-      if (fKey == 1) return GetDouble2(0, false);
+      if (fKey == 1) return GetDouble2Error();
     }
 
-    if (i == bMINORREPEATS) return GetDouble2(0, false);
+    if (i == bMINORREPEATS) return GetDouble2Error();
     ReadEnergyU(j);
   }
 
@@ -74,7 +74,7 @@ double2 ReadCntMonCanU(uchar  ibMonth)
 uchar   i,j;
 
   time2 ti2 = ReadTimeCanK();
-  if (ti2.fValid == false) return GetDouble2(0, false);
+  if (ti2.fValid == false) return GetDouble2Error();
 
   time ti = ti2.tiValue;
   if (ti.bMonth == ibMonth+1)
@@ -109,12 +109,12 @@ uchar   i,j;
         { 
           sprintf(szLo, "сутки %02u.%02u.%02u ?",ti.bDay,ti.bMonth,ti.bYear);
           Delay(1000); 
-          return GetDouble2(0, false);
+          return GetDouble2Error();
         }
-        if (fKey == 1) return GetDouble2(0, false);
+        if (fKey == 1) return GetDouble2Error();
       }
 
-      if (i == bMINORREPEATS) return GetDouble2(0, false);
+      if (i == bMINORREPEATS) return GetDouble2Error();
       ReadEnergyU(j);
     }
 
@@ -140,12 +140,12 @@ uchar   i,j;
         { 
           sprintf(szLo, " мес€ц %02u.%02u ?  ",ti.bMonth,ti.bYear);
           Delay(1000); 
-          return GetDouble2(0, false);
+          return GetDouble2Error();
         }
-        if (fKey == 1) return GetDouble2(0, false);
+        if (fKey == 1) return GetDouble2Error();
       }
 
-      if (i == bMINORREPEATS) return GetDouble2(0, false);
+      if (i == bMINORREPEATS) return GetDouble2Error();
       ReadEnergyU(j);
     }
 
