@@ -40,7 +40,7 @@ static ulong   dw;
 
 
 // рассчитывает групповое значение на основе канального массива uint (трёхминутная мощность)
-float   GetGrpMntInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMul)
+float   GetGrpMntInt2Real(uint  *mpwT, uchar  ibGrp, uchar  bMultiplier)
 {
 float   reA, reB;
 
@@ -58,26 +58,26 @@ float   reA, reB;
       reA -= reB;
   }
 
-  reA *= bMul;
+  reA *= bMultiplier;
   return reA;
 }
 
 
 // рассчитывает групповое значение на основе канального массива uint (трёхминутная мощность)
-float   GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
+float   GetCanMntInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMultiplier)
 {
 float   re;
 
   re = mpdbValueEngMnt[ibCan] * mpwT[ibCan];
 
-  re *= bMul;
+  re *= bMultiplier;
   return re;
 }
 
 
 
 // рассчитывает групповое значение на основе канального массива uint (получасовая мощность)
-float    GetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMul)
+float    GetGrpHouInt2Real(uint  *mpwT, uchar  ibGroup, uchar  bMultiplier)
 {
 float   reA, reB;
 
@@ -99,13 +99,13 @@ float   reA, reB;
       reA -= reB;
   }
 
-  reA *= bMul;
+  reA *= bMultiplier;
   return reA;
 }
 
 
 // рассчитывает канальное значение на основе канального массива uint (получасовая мощность)
-float   GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMul)
+float   GetCanHouInt2Real(uint  *mpwT, uchar  ibCan, uchar  bMultiplier)
 {
 float   re;
 
@@ -114,7 +114,7 @@ float   re;
   else
     re = mpdbValueEngHou[ibCan] * mpwT[ibCan];
 
-  re *= bMul;
+  re *= bMultiplier;
   return re;
 }
 

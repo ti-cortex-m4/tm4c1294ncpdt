@@ -246,13 +246,13 @@ bool    GetGrpHouDef(uint  *mpwT, uchar  ibGrp)
 }
 
 
-uint    PushPowHouGrpDef(uchar  bMul, uchar  ibGrp)
+uint    PushPowHouGrpDef(uchar  bMultiplier, uchar  ibGrp)
 {
   LoadImpHouFree( PrevHardHou() );
   if (GetGrpHouDef(mpwImpHouCan[ PrevSoftHou() ], ibGrp) == false)
   {
     LoadImpHou( PrevHardHou() );
-    PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul));
+    PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMultiplier));
   }
   else
     PushFloatDef();
@@ -261,7 +261,7 @@ uint    PushPowHouGrpDef(uchar  bMul, uchar  ibGrp)
 }
 
 
-void    OutPowHouGrpDef(uchar  bMul)
+void    OutPowHouGrpDef(uchar  bMultiplier)
 {
   if (enGlobal != GLB_PROGRAM)
   {
@@ -272,7 +272,7 @@ void    OutPowHouGrpDef(uchar  bMul)
     for (g=0; g<bGROUPS; g++)
     {
       if ((InBuff(6 + g/8) & (0x80 >> g%8)) != 0)
-        wSize += PushPowHouGrpDef(bMul, g);
+        wSize += PushPowHouGrpDef(bMultiplier, g);
     }
 
     OutptrOutBuff(wSize);

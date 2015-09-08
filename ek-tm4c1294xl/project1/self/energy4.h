@@ -4,5 +4,5 @@ ENERGY4.H
 
 ------------------------------------------------------------------------------*/
 
-float   GetPowGrpHouCurr(uchar  ibGrp, uchar  bMul);
-float   GetPowCanHouCurr(uchar  ibCan, uchar  bMul);
+float   GetPowGrpHouCurr(uchar  ibGrp, uchar  bMultiplier);
+float   GetPowCanHouCurr(uchar  ibCan, uchar  bMultiplier);

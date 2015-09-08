@@ -20,16 +20,16 @@ OUT_MINUTE30,C
 
 
 
-static uchar PushPowHouGrp(uchar  ibGrp, uint  iwHhr, uchar  bMul)
+static uchar PushPowHouGrp(uchar  ibGrp, uint  iwHhr, uchar  bMultiplier)
 {
   if (iwHhr == iwHardHou)
-    return PushFloat(GetPowGrpHouCurr(ibGrp, bMul));
+    return PushFloat(GetPowGrpHouCurr(ibGrp, bMultiplier));
   else
-    return PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMul));
+    return PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], ibGrp, bMultiplier));
 }
 
 
-void    OutPowHouGrp(bool  fAllGroups, uint  iwHhr, uchar  bMul)
+void    OutPowHouGrp(bool  fAllGroups, uint  iwHhr, uchar  bMultiplier)
 {
   if (enGlobal != GLB_PROGRAM)
   {
@@ -45,7 +45,7 @@ void    OutPowHouGrp(bool  fAllGroups, uint  iwHhr, uchar  bMul)
           uchar g;
           for (g=0; g<bGROUPS; g++)
           {
-            wSize += PushPowHouGrp(g, iwHhr, bMul);
+            wSize += PushPowHouGrp(g, iwHhr, bMultiplier);
           }
 
           OutptrOutBuff(wSize);
@@ -55,7 +55,7 @@ void    OutPowHouGrp(bool  fAllGroups, uint  iwHhr, uchar  bMul)
           if (bInBuff5 < bGROUPS)
           {
             InitPushPtr();
-            OutptrOutBuff(PushPowHouGrp(bInBuff5, iwHhr, bMul));
+            OutptrOutBuff(PushPowHouGrp(bInBuff5, iwHhr, bMultiplier));
           }
           else Result(bRES_BADADDRESS);
         }
