@@ -118,10 +118,10 @@ time2   QueryTimeC_Full(void)
     QueryTimeC();
 
     if (RevInput() == SER_GOODCHECK) break;
-    if (fKey == true) return GetTime2(tiZero, false);
+    if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  if (i == bMINORREPEATS) return GetTime2Error();
 
   return GetTime2(ReadTimeC(), true);
 }

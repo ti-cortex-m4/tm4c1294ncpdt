@@ -131,10 +131,10 @@ time2   QueryTimeS_Full(uchar  bPercent)
     QueryTimeS();
 
     if (InputS() == SER_GOODCHECK) break;  
-    if (fKey == 1) return GetTime2(tiZero, false);
+    if (fKey == 1) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  if (i == bMINORREPEATS) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTimeS(), true);
@@ -187,7 +187,7 @@ time2   ReadTimeCanS(void)
   Clear();
 
   time2 ti2 = QueryTimeS_Full(50);
-  if (ti2.fValid == false) return GetTime2(tiZero, false);
+  if (ti2.fValid == false) return GetTime2Error();
 
   tiChannelC = ti2.tiValue;
   mpboChannelsA[0] = true;     

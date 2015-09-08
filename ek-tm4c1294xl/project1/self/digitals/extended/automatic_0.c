@@ -30,13 +30,13 @@ time2   ReadTimeDateA_Short(void)
   DelayOff();
   QueryOpenA();
 
-  if (Input() != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (Input() != SER_GOODCHECK) return GetTime2Error();
 
 
   DelayOff();
   QueryTimeA();
 
-  if (Input() != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (Input() != SER_GOODCHECK) return GetTime2Error();
 
 
   return GetTime2(ReadTimeA(), true);
@@ -53,13 +53,13 @@ time2   ReadTimeDateB_Short(void)
   DelayOff();
   QueryOpenB();
 
-  if (Input() != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (Input() != SER_GOODCHECK) return GetTime2Error();
 
 
   DelayOff();
   QueryTimeB();
 
-  if (Input() != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (Input() != SER_GOODCHECK) return GetTime2Error();
 
 
   return GetTime2(ReadTimeB(), true);
@@ -76,7 +76,7 @@ time2   ReadTimeDateC_Short(void)
   DelayOff();
   QueryTimeC();
 
-  if (RevInput() != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (RevInput() != SER_GOODCHECK) return GetTime2Error();
 
 
   return GetTime2(ReadTimeC(), true);
@@ -253,7 +253,7 @@ time2   ReadTimeDateK_Short(void)
   QueryCloseK();
   QueryTimeK();
 
-  if (BccInput() != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (BccInput() != SER_GOODCHECK) return GetTime2Error();
 
   time ti = ReadTimeK();
 
@@ -261,9 +261,9 @@ time2   ReadTimeDateK_Short(void)
   QueryCloseK();
   QueryDateK();
 
-  if (BccInput() != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (BccInput() != SER_GOODCHECK) return GetTime2Error();
 
-  time = ReadDateK(ti);
+  ti = ReadDateK(ti);
 
 
   QueryCloseK();
@@ -300,25 +300,25 @@ time2   ReadTimeDateP_Short(void)
 {
   QueryOpenP();
 
-  if (ElsInput(1) != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (ElsInput(1) != SER_GOODCHECK) return GetTime2Error();
 
 
   DelayOff();
   QueryModeP();
 
-  if (ElsInput(0) != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (ElsInput(0) != SER_GOODCHECK) return GetTime2Error();
 
 
   DelayOff();
   QueryPasswordP();
 
-  if (ElsInput(2) != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (ElsInput(2) != SER_GOODCHECK) return GetTime2Error();
 
 
   DelayOff();
   QueryTimeP();
 
-  if (ElsInput(0) != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (ElsInput(0) != SER_GOODCHECK) return GetTime2Error();
 
 
   QueryCloseP();
@@ -348,7 +348,7 @@ time2   ReadTimeDateS_Short(void)
   DelayOff();
   QueryTimeS();
 
-  if (InputS() != SER_GOODCHECK) return GetTime2(tiZero, false);
+  if (InputS() != SER_GOODCHECK) return GetTime2Error();
 
 
   return GetTime2(ReadTimeS(), true);
@@ -501,6 +501,6 @@ time2   ReadTimeDate_Short(uchar  ibCan)
     case 26: return ReadTimeDateU_Short();
 #endif
 
-    default: return GetTime2(tiZero, false);
+    default: return GetTime2Error();
   }
 }

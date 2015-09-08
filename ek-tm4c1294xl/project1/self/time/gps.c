@@ -172,10 +172,10 @@ time2   ReadTimeDateGps(void)
     QueryTimeGps();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == 1) return GetTime2(tiZero, false);
+    if (fKey == 1) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  if (i == bMINORREPEATS) return GetTime2Error();
 
   return GetTime2(ReadTimeGps(), true);
 }

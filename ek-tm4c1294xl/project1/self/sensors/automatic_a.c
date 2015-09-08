@@ -49,10 +49,10 @@ time2   QueryTimeA_Full(uchar  bPercent)
     QueryTimeA();
 
     if (Input() == SER_GOODCHECK) break;  
-    if (fKey == true) return GetTime2(tiZero, false);
+    if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2(tiZero, false);
+  if (i == bMINORREPEATS) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTimeA(), true);
