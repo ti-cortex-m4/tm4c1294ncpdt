@@ -939,7 +939,7 @@ float2  ReadParam(uint  iwPrm)
     case 26: return GetFloat2(reValue, ReadParamU());
 #endif
 
-    default: return GetFloat2(0, false);
+    default: return GetFloat2Error();
   }
 }
 
@@ -949,13 +949,13 @@ float2  ReadParamRepeat(uint  iwPrm)
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
-    if (fKey == true) return GetFloat2(0, false);
+    if (fKey == true) return GetFloat2Error();
 
     float2 fl2 = ReadParam(iwPrm);
     if (fl2.fValid == true) return fl2;
   }
 
-  return GetFloat2(0, false);
+  return GetFloat2Error();
 }
 
 
