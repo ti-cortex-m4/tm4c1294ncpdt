@@ -29,6 +29,7 @@ RESPONSE0_CRC,C
 #include "out_console.h"
 #include "out_config.h"
 #include "out_params.h"
+#include "out_flow.h"
 #include "out_test_time.h"
 #include "response_crc.h"
 #include "response252_crc.h"
@@ -205,12 +206,14 @@ void    Response0_CRC(void)
       case bINQ_TRANSIT_EXECUTE3: SafeTransitExecute3(); break;
       case bINQ_TRANSIT_EXECUTE4: SafeTransitExecute4(); break;
 
-      case bINQ_GETFLASHPAGE: OutFlashPage(); break;
+      case bINQ_FLOW: OutFlow(); break;
 
       case bINQ_SETKEY: OutSetKey(); break;
       case bINQ_GETDISPLAY: OutGetDisplay(); break;
 
       case bINQ_GETCONFIG: OutGetConfig(); break;
+
+      case bINQ_GETFLASHPAGE: OutFlashPage(); break;
 
       case bINQ_RESPONSE_252: Response252_CRC(); break;
       case bINQ_RESPONSE_253: Response253_CRC(); break;

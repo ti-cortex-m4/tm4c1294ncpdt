@@ -195,7 +195,7 @@
 #define bINQ_TRANSIT_EXECUTE3          174
 //#define bINQ_TRANSIT_DONE              173
 
-#define bINQ_GETDEFIMPCANHOU           239
+-   #define bINQ_GETDEFIMPCANHOU           239
 
 +   #define bINQ_SETKEY                    246
 +   #define bINQ_GETDISPLAY                247
@@ -210,8 +210,8 @@
 +   #define bINQ_QUICKMON                  253
 +   #define bINQ_QUICKYEA                  254
 
-#define bINQ_INFO                      244
-#define bINQ_FLOW                      245
+-   #define bINQ_INFO                      244
++   #define bINQ_FLOW                      245
 
 #define bINQ_ANSWER_ENABLE             231
 
