@@ -9,6 +9,7 @@ EXTENDED_0.C
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_extended_0.h"
+#include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "../../devices/devices.h"
 #include "../../time/timedate.h"
@@ -41,7 +42,7 @@ void    InitExtended0(void)
 
 void    ResetExtended0(bool  fFull)
 { 
-  boExt0Flag = boFalse;
+  boExt0Flag = false;
 
   bExt0Limit = 20;
   bExt0Counter = 20;
@@ -59,7 +60,7 @@ bool    MakeExtended0(void)
 {
 uchar i;
 
-  if (boExt0Flag == boFalse)
+  if (boExt0Flag == false)
     return 1;
   else
   {

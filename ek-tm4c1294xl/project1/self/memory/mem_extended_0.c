@@ -11,8 +11,8 @@ MEM_EXTENDED_0,C
 // флаг разрешения режима
 bool                    boExt0Flag;
 
-// количество повторов
-uchar                   bExt0Counter;
+// количество повторов: граничное и максимальное
+uchar                   bExt0Limit, bExt0Counter;
 
 // массив повторов
 ulong                   mpdwExt0RepeatsPH[bPORTS][48];

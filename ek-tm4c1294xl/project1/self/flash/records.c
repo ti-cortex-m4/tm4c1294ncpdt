@@ -353,9 +353,9 @@ bool    AddDigRecord(event  ev)
 //                            memcpy(&reCurr.mpbBuff+2, &cbCheckupErrorMon, sizeof(uchar)); break;
 //
 //    case EVE_DEVICE_P_DEFECT: memcpy(&reCurr.mpbBuff+0, &tiDig, sizeof(time)); break;
-//
-//    case EVE_EXTENDED_0_ERROR: memcpy(&reCurr.mpbBuff+0, &x, sizeof(uchar));
-//                               memcpy(&reCurr.mpbBuff+1, &bExt0Counter, sizeof(uchar)); break;
+
+    case EVE_EXTENDED_0_ERROR: memcpy(&reCurr.mpbBuff+0, &x, sizeof(uchar));
+                               memcpy(&reCurr.mpbBuff+1, &bExt0Counter, sizeof(uchar)); break;
   }
 
   CloseRecord(AUX_RECORD, i);
