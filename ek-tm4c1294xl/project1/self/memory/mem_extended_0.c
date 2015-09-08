@@ -9,7 +9,7 @@ MEM_EXTENDED_0,C
 
 
 // флаг разрешения режима
-bool                    boExt0Flag;
+bool                    fExt0Flag;
 
 // количество повторов: граничное и максимальное
 uchar                   bExt0Limit, bExt0Counter;

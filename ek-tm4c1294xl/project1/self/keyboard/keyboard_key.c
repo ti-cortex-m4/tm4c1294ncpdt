@@ -105,6 +105,8 @@ KEYBOARD_KEY.C
 #include "digitals/params/key_params_all.h"
 #include "digitals/params/key_fix_params_bugs.h"
 #include "digitals/params/key_use_params_div.h"
+#include "devices/key_ext_0_flag.h"
+#include "devices/key_ext_0_counter.h"
 #include "devices/key_ext_3_reset.h"
 #include "devices/key_ext_3_flag.h"
 #include "devices/key_ext_3_a.h"
@@ -309,6 +311,9 @@ void    Keyboard_Key(void)
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
       case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
+      case wSET_EXT0_FLAG:      key_SetExt0Flag();      break;
+      case wSET_EXT0_COUNTER:   key_SetExt0Counter();   break;
+
       case bSET_EXT3_RESET:     key_SetExt3Reset();     break;
       case bSET_EXT3_FLAG:      key_SetExt3Flag();      break;
       case bSET_EXT3_EVENTS_A:  key_SetExt3A();         break;
@@ -318,12 +323,12 @@ void    Keyboard_Key(void)
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
       case bSET_EXT4_ENBL_CAN:  key_SetExt4EnblCan();   break;
 
-      case bSET_EXT5_FLAG:      key_SetExt5Flag();      break;
-
       case wSET_EXT4T_FLAG:         key_SetExt4TFlag();        break;
       case wSET_EXT4T_MONTHS:       key_SetExt4TMonths();      break;
       case wSET_EXT4T_RESET_FULL:   key_SetExt4TResetFull();   break;
       case wSET_EXT4T_RESET_CUSTOM: key_SetExt4TResetCustom(); break;
+
+      case bSET_EXT5_FLAG:      key_SetExt5Flag();      break;
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
 
@@ -579,6 +584,9 @@ void    Keyboard_Key(void)
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
       case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
+      case wSET_EXT0_FLAG:      key_SetExt0Flag();      break;
+      case wSET_EXT0_COUNTER:   key_SetExt0Counter();   break;
+
       case bSET_EXT3_RESET:     key_SetExt3Reset();     break;
       case bSET_EXT3_FLAG:      key_SetExt3Flag();      break;
       case bSET_EXT3_EVENTS_A:  key_SetExt3A();         break;
@@ -588,10 +596,10 @@ void    Keyboard_Key(void)
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
       case bSET_EXT4_ENBL_CAN:  key_SetExt4EnblCan();   break;
 
-      case bSET_EXT5_FLAG:      key_SetExt5Flag();      break;
-
       case wSET_EXT4T_FLAG:     key_SetExt4TFlag();     break;
       case wSET_EXT4T_MONTHS:   key_SetExt4TMonths();   break;
+
+      case bSET_EXT5_FLAG:      key_SetExt5Flag();      break;
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
 
@@ -768,6 +776,9 @@ void    Keyboard_Key(void)
       case wSET_MNT_ESC_S:      key_SetMntEscS();       break;
       case wSET_CORRECT_LIMIT:  key_SetCorrectLimit();  break;
 
+      case wSET_EXT0_FLAG:      key_SetExt0Flag();      break;
+      case wSET_EXT0_COUNTER:   key_SetExt0Counter();   break;
+
       case bSET_EXT3_RESET:     key_SetExt3Reset();     break;
       case bSET_EXT3_FLAG:      key_SetExt3Flag();      break;
       case bSET_EXT3_EVENTS_A:  key_SetExt3A();         break;
@@ -777,12 +788,12 @@ void    Keyboard_Key(void)
       case bSET_EXT4_MONTHS:    key_SetExt4Months();    break;
       case bSET_EXT4_ENBL_CAN:  key_SetExt4EnblCan();   break;
 
-      case bSET_EXT5_FLAG:      key_SetExt5Flag();      break;
-
       case wSET_EXT4T_FLAG:         key_SetExt4TFlag();        break;
       case wSET_EXT4T_MONTHS:       key_SetExt4TMonths();      break;
       case wSET_EXT4T_RESET_FULL:   key_SetExt4TResetFull();   break;
       case wSET_EXT4T_RESET_CUSTOM: key_SetExt4TResetCustom(); break;
+
+      case bSET_EXT5_FLAG:      key_SetExt5Flag();      break;
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
 

@@ -223,5 +223,9 @@ RESERVE(EXT_3_EVENT_PHASE1, sizeof(mpdwEventPhase1) + bNVRAM_FOOTER)
 RESERVE(EXT_3_EVENT_PHASE2, sizeof(mpdwEventPhase2) + bNVRAM_FOOTER)
 RESERVE(EXT_3_EVENT_PHASE3, sizeof(mpdwEventPhase3) + bNVRAM_FOOTER)
 
+RESERVE(EXT_0_FLAG, sizeof(bool) + bNVRAM_FOOTER)
+RESERVE(EXT_0_LIMIT, sizeof(uchar) + bNVRAM_FOOTER)
+RESERVE(EXT_0_COUNTER, sizeof(uchar) + bNVRAM_FOOTER)
+
 END(NVRAM_END)
 } nvram;

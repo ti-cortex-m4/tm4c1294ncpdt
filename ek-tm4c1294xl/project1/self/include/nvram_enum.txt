@@ -223,5 +223,9 @@ typedef enum
   EXT_3_EVENT_PHASE2    = EXT_3_EVENT_PHASE1 + sizeof(mpdwEventPhase1) + bNVRAM_FOOTER,
   EXT_3_EVENT_PHASE3    = EXT_3_EVENT_PHASE2 + sizeof(mpdwEventPhase2) + bNVRAM_FOOTER,
 
-  NVRAM_END             = EXT_3_EVENT_PHASE3 + sizeof(mpdwEventPhase3) + bNVRAM_FOOTER
+  EXT_0_FLAG            = EXT_3_EVENT_PHASE3 + sizeof(mpdwEventPhase3) + bNVRAM_FOOTER,
+  EXT_0_LIMIT           = EXT_0_FLAG + sizeof(bool) + bNVRAM_FOOTER,
+  EXT_0_COUNTER         = EXT_0_LIMIT + sizeof(uchar) + bNVRAM_FOOTER,
+
+  NVRAM_END             = EXT_0_COUNTER + sizeof(uchar) + bNVRAM_FOOTER
 } nvram;

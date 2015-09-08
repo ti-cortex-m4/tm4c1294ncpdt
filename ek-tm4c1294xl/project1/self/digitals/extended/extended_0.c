@@ -15,9 +15,9 @@ EXTENDED_0.C
 #include "../../devices/devices.h"
 #include "../../time/timedate.h"
 #include "../../flash/records.h"
+#include "../../nvram/cache.h"
 #include "automatic_0.h"
 #include "extended_0.h"
-
 
 
 
@@ -29,14 +29,25 @@ static char const       szExtended0[]   = "Проверка связи  ",
 
 
 
+cache const             chExt0Flag = {EXT_0_FLAG, &fExt0Flag, sizeof(bool)};
+cache const             chExt0Limit = {EXT_0_LIMIT, &bExt0Limit, sizeof(uchar)};
+cache const             chExt0Counter = {EXT_0_COUNTER, &bExt0Counter, sizeof(uchar)};
+
+
+
 void    InitExtended0(void) 
 { 
-  if ((bExt0Limit   <= 0) || (bExt0Limit   > 50) || 
-      (bExt0Counter <= 0) || (bExt0Counter > 50) ||
-      (bExt0Limit > bExt0Counter))
+  LoadCacheBool(&chExt0Flag, false);
+  LoadCacheChar(&chExt0Limit, 0, 50, 20);
+  LoadCacheChar(&chExt0Counter, 0, 50, 20);
+
+  if (bExt0Limit > bExt0Counter)
   {
     bExt0Limit = 20;
+    SaveCache(&chExt0Limit);
+
     bExt0Counter = 20;
+    SaveCache(&chExt0Counter);
   }
 }
 
@@ -44,10 +55,14 @@ void    InitExtended0(void)
 
 void    ResetExtended0(bool  fFull)
 { 
-  boExt0Flag = false;
+  fExt0Flag = false;
+  SaveCache(&chExt0Flag);
 
   bExt0Limit = 20;
+  SaveCache(&chExt0Limit);
+
   bExt0Counter = 20;
+  SaveCache(&chExt0Counter);
 
   if (fFull == 1)
   {
@@ -60,7 +75,7 @@ void    ResetExtended0(bool  fFull)
 
 bool    MakeExtended0(void)
 {
-  if (boExt0Flag == false)
+  if (fExt0Flag == false)
     return 1;
   else
   {
@@ -109,7 +124,7 @@ void    OutExtended0(void)
   {
     InitPushPtr();            
 
-    PushChar(boExt0Flag);
+    PushChar(fExt0Flag);
     PushChar(bExt0Limit);
     PushChar(bExt0Counter);
 
