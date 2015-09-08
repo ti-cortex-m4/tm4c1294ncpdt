@@ -9,10 +9,12 @@ EXTENDED_0.C
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_extended_0.h"
+#include "../../realtime/realtime.h"
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "../../devices/devices.h"
 #include "../../time/timedate.h"
+#include "../../flash/records.h"
 #include "automatic_0.h"
 #include "extended_0.h"
 
@@ -67,14 +69,16 @@ uchar i;
     ShowHi(szExtended0); Clear();
 
     i = 0;
+
+    uchar x;
     for (x=1; x<=bExt0Counter; x++)
     {
-      Clear(); sprintf(szLo+4,"%2bu из %-2bu", x, bExt0Counter); 
+      Clear(); sprintf(szLo+4,"%2u из %-2u", x, bExt0Counter);
       Delay(((x % 5) + 1)*100);
 
       if (ReadTimeDate_Short(ibDig) == 1)
       {
-        mpdwExt0RepeatsPH[ibPort][GetHouIndex()]++;
+        mpdwExt0RepeatsPH[ibPort][GetCurrHouIndex()]++;
       }
       else
       {
@@ -82,7 +86,7 @@ uchar i;
 
         if (++i > (bExt0Counter - bExt0Limit))
         {
-          mpdwExt0ErrorsPH[ibPort][GetHouIndex()]++;
+          mpdwExt0ErrorsPH[ibPort][GetCurrHouIndex()]++;
           AddDigRecord(EVE_EXTENDED_0_ERROR);
 
           ShowLo(szBadLink); DelayMsg();

@@ -4,4 +4,4 @@ AUTOMATIC_0.H
 
 ------------------------------------------------------------------------------*/
 
-bool    ReadTimeDate_Short(uchar  ibCan);
+time2   ReadTimeDate_Short(uchar  ibCan);

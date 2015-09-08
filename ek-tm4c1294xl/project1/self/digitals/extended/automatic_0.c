@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 AUTOMATIC_0.C
-              
+
 
 ------------------------------------------------------------------------------*/
 
@@ -8,36 +8,37 @@ AUTOMATIC_0.C
 #include "../../memory/mem_digitals.h"
 #include "../../digitals/digitals.h"
 #include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
 #include "../../sensors/device_a.h"
 #include "../../sensors/device_b.h"
 #include "../../sensors/device_c.h"
+#include "../../sensors/device_k.h"
 #include "../../sensors/device_p.h"
 #include "../../sensors/device_s.h"
 #include "../../sensors/device_u.h"
 #include "../../console.h"
+#include "../../time/timedate.h"
 #include "extended_0.h"
 
 
 
 #ifndef SKIP_A
 
-bool    ReadTimeDateA_Short(void)
+time2   ReadTimeDateA_Short(void)
 {
   DelayOff();
   QueryOpenA();
 
-  if (Input() != SER_GOODCHECK) return(0);
+  if (Input() != SER_GOODCHECK) return GetTime2(tiZero, false);
 
 
   DelayOff();
   QueryTimeA();
 
-  if (Input() != SER_GOODCHECK) return(0);
+  if (Input() != SER_GOODCHECK) return GetTime2(tiZero, false);
 
 
-  ReadTimeAltA();
-
-  return(1);
+  return GetTime2(ReadTimeA(), true);
 }
 
 #endif
@@ -46,23 +47,21 @@ bool    ReadTimeDateA_Short(void)
 
 #ifndef SKIP_B
 
-bool    ReadTimeDateB_Short(void)
+time2   ReadTimeDateB_Short(void)
 {
   DelayOff();
   QueryOpenB();
 
-  if (Input() != SER_GOODCHECK) return(0);
+  if (Input() != SER_GOODCHECK) return GetTime2(tiZero, false);
 
 
   DelayOff();
   QueryTimeB();
 
-  if (Input() != SER_GOODCHECK) return(0);
+  if (Input() != SER_GOODCHECK) return GetTime2(tiZero, false);
 
 
-  ReadTimeAltB();
-
-  return(1);
+  return GetTime2(ReadTimeB(), true);
 }
 
 #endif
@@ -71,17 +70,15 @@ bool    ReadTimeDateB_Short(void)
 
 #ifndef SKIP_C
 
-bool    ReadTimeDateC_Short(void)
+time2   ReadTimeDateC_Short(void)
 {
   DelayOff();
   QueryTimeC();
 
-  if (RevInput() != SER_GOODCHECK) return(0);
+  if (RevInput() != SER_GOODCHECK) return GetTime2(tiZero, false);
 
 
-  ReadTimeAltC();
-
-  return(1);
+  return GetTime2(ReadTimeC(), true);
 }
 
 #endif
@@ -248,32 +245,32 @@ bool    ReadTimeDateI_Short(void)
 
 
 
-#ifndef SKIP_K
+//#ifndef SKIP_K
 
-bool    ReadTimeDateK_Short(void)
+time2   ReadTimeDateK_Short(void)
 {
   QueryCloseK();
   QueryTimeK();
 
-  if (BccInput() != SER_GOODCHECK) return(0); 
+  if (BccInput() != SER_GOODCHECK) return GetTime2(tiZero, false);
 
-  ReadTimeAltK();
+  time ti = ReadTimeK();
 
 
   QueryCloseK();
   QueryDateK();
 
-  if (BccInput() != SER_GOODCHECK) return(0); 
+  if (BccInput() != SER_GOODCHECK) return GetTime2(tiZero, false);
 
-  ReadDateAltK();
+  time = ReadDateK(ti);
 
 
   QueryCloseK();
 
-  return(1);
+  return GetTime2(ti, true);
 }
 
-#endif
+//#endif
 
 
 
@@ -298,36 +295,34 @@ bool    ReadTimeDateO_Short(void)
 
 #ifndef SKIP_P
 
-bool    ReadTimeDateP_Short(void)
+time2   ReadTimeDateP_Short(void)
 {
   QueryOpenP();
 
-  if (ElsInput(1) != SER_GOODCHECK) return(0);
+  if (ElsInput(1) != SER_GOODCHECK) return GetTime2(tiZero, false);
 
 
   DelayOff();
   QueryModeP();
 
-  if (ElsInput(0) != SER_GOODCHECK) return(0);
+  if (ElsInput(0) != SER_GOODCHECK) return GetTime2(tiZero, false);
 
 
   DelayOff();
   QueryPasswordP();
 
-  if (ElsInput(2) != SER_GOODCHECK) return(0);
+  if (ElsInput(2) != SER_GOODCHECK) return GetTime2(tiZero, false);
 
 
   DelayOff();
   QueryTimeP();
 
-  if (ElsInput(0) != SER_GOODCHECK) return(0);
+  if (ElsInput(0) != SER_GOODCHECK) return GetTime2(tiZero, false);
 
-
-  ReadTimeAltP();
 
   QueryCloseP();
 
-  return(1);
+  return GetTime2(ReadTimeP(), true);
 }
 
 #endif
@@ -345,7 +340,7 @@ bool    ReadTimeDateQ_Short(void)
 
 
 
-#ifndef SKIP_Q
+#ifndef SKIP_S
 
 bool    ReadTimeDateS_Short(void)
 {
@@ -385,7 +380,7 @@ bool    ReadTimeDateT_Short(void)
 
 #ifndef SKIP_U
 
-bool    ReadTimeDateU_Short(void)
+time2   ReadTimeDateU_Short(void)
 {
   return ReadTimeDateK_Short();
 }
@@ -413,7 +408,7 @@ bool    ReadTimeDateZ_Short(void)
 
 
 
-bool    ReadTimeDate_Short(uchar  ibCan)
+time2   ReadTimeDate_Short(uchar  ibCan)
 {
   LoadCurrDigital(ibCan);
   ibPort = diCurr.ibPort;
@@ -422,18 +417,18 @@ bool    ReadTimeDate_Short(uchar  ibCan)
   {
 #ifndef SKIP_A
     case 15:
-    case 1:  return( ReadTimeDateA_Short() );
+    case 1:  return ReadTimeDateA_Short();
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return( ReadTimeDateB_Short() );
+    case 2:  return ReadTimeDateB_Short();
 
-    case 12: tiAlt = tiCurr; return(1);
+    case 12: return GetTime2(tiCurr, true);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return( ReadTimeDateC_Short() );
+    case 3:  return ReadTimeDateC_Short();
 #endif
 
 #ifndef SKIP_D
@@ -484,7 +479,7 @@ bool    ReadTimeDate_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return( ReadTimeDateP_Short() );
+    case 21: return ReadTimeDateP_Short();
 #endif
 
 #ifndef SKIP_Q
@@ -496,7 +491,7 @@ bool    ReadTimeDate_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_S
-    case 24: return( ReadTimeDateS_Short() );
+    case 24: return ReadTimeDateS_Short();
 #endif
 
 #ifndef SKIP_T
@@ -504,7 +499,7 @@ bool    ReadTimeDate_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_U
-    case 26: return( ReadTimeDateU_Short() );
+    case 26: return ReadTimeDateU_Short();
 #endif
 
     default: tiAlt = tiZero; return(0);
