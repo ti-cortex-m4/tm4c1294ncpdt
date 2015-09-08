@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_EXTENDED_0_COUNTER.C
+KEY_EXT_0_COUNTER.C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,6 +8,7 @@ _EXTENDED_0_COUNTER.C
 #include "../../console.h"
 #include "../../memory/mem_extended_0.h"
 #include "../../digitals/extended/extended_0.h"
+#include "../../nvram/cache.h"
 
 
 
@@ -24,12 +25,14 @@ static char const      *pszExt0Counter[] = { szExt0Counter1, szExt0Counter2, szE
 static void Show(void)
 {
   Clear();
-  sprintf(szLo+4,"%2bu из %-2bu", bExt0Limit, bExt0Counter);
+  sprintf(szLo+4,"%2u из %-2u", bExt0Limit, bExt0Counter);
 }
 
 
 void    key_SetExt0Counter(void)
 {
+static uchar bLimit;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -46,8 +49,8 @@ void    key_SetExt0Counter(void)
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ibX = GetCharLo(4,5);
-      if ((ibX != 0) && (ibX <= 50))
+      bLimit = GetCharLo(4,5);
+      if ((bLimit > 0) && (bLimit <= 50))
       {
         enKeyboard = KBD_INPUT2;
         szLo[10] = '_';
@@ -66,11 +69,14 @@ void    key_SetExt0Counter(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibY = GetCharLo(10,11);
-      if ((ibY != 0) && (ibY <= 50) && (ibX <= ibY))
+      uchar bCounter = GetCharLo(10,11);
+      if ((bCounter > 0) && (bCounter <= 50) && (bLimit <= bCounter))
       {
-        bExt0Limit = ibX;
-        bExt0Counter = ibY;
+        bExt0Limit = bLimit;
+        SaveCache(&chExt0Limit);
+
+        bExt0Counter = bCounter;
+        SaveCache(&chExt0Counter);
 
         Show();
       }

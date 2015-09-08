@@ -122,14 +122,22 @@ void    OutExtended0(void)
     Result(bRES_NEEDWORK);
   else
   {
-    InitPushPtr();            
+    InitPushPtr();
 
     PushChar(fExt0Flag);
     PushChar(bExt0Limit);
     PushChar(bExt0Counter);
 
-    Push(&mpdwExt0RepeatsPH, sizeof(mpdwExt0RepeatsPH));
-    Push(&mpdwExt0ErrorsPH, sizeof(mpdwExt0ErrorsPH));
+    uchar p;
+    for (p=0; p<bPORTS; p++)
+    {
+      PushLongArray(mpdwExt0RepeatsPH[p], 48);
+    }
+
+    for (p=0; p<bPORTS; p++)
+    {
+      PushLongArray(mpdwExt0ErrorsPH[p], 48);
+    }
 
     OutptrOutBuff(3+4*4*48+4*4*48);
   }

@@ -16,6 +16,7 @@ uchar   PushBool(bool  f);
 uchar   PushInt(uint  w);
 uint    PushIntArray(uint  *mpw, uint  wCount);
 uchar   PushLong(ulong  dw);
+uint    PushLongArray(ulong  *mpdw, uint  wCount);
 uchar   PushFloat(float  fl);
 uchar   PushDouble(double  db);
 uchar   PushFloatOrDouble(double  db, bool  fDouble);

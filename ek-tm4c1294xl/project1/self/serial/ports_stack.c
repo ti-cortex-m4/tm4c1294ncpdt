@@ -133,6 +133,20 @@ uchar   PushLong(ulong  dw)
 }
 
 
+uint    PushLongArray(ulong  *mpdw, uint  wCount)
+{
+  uint wSize = 0;
+
+  uint i;
+  for (i=0; i<wCount; i++)
+  {
+    wSize += PushLong(mpdw[i]);
+  }
+
+  return wSize;
+}
+
+
 uchar    PushFloat(float  fl)
 {
   static combo32 co;
