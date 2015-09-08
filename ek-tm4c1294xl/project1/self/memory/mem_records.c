@@ -28,3 +28,6 @@ time                    tiRecordTime;
 
 // глобальная переменная - канал
 uchar                   ibRecordCan;
+
+// глобальная переменная
+uchar                   bRecord;
