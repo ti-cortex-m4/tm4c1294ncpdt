@@ -51,6 +51,7 @@ DEVICES.C
 #include "../digitals/answer.h"
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
+#include "../digitals/extended/extended_0.h"
 #include "../digitals/extended/extended_1.h"
 #include "../digitals/extended/extended_3.h"
 #include "../digitals/extended/extended_4.h"
