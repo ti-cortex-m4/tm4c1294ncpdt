@@ -66,11 +66,16 @@ void    ResetCurrent2(void)
 
 void    NextMntCurrent2(void)
 {
-  uchar c;
-  for (c=0; c<64; c++)
+  if (fEnblCurrent2 == true)
   {
-    if (GetDigitalDevice(c) != 0)
-      mpwCurrent2Mnt[c]++;
+    uchar c;
+    for (c=0; c<64; c++)
+    {
+      if (GetDigitalDevice(c) != 0)
+        mpwCurrent2Mnt[c]++;
+    }
+
+    SaveCache(&chCurrent2Mnt);
   }
 }
 
@@ -213,6 +218,8 @@ void    MakeCurrent2(void)
       mpwCurrent2Mnt[c] = 0;
     }
   }
+
+  SaveCache(&chCurrent2Mnt);
 
   NextCurrent();
 }
