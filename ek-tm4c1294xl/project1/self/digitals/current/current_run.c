@@ -251,11 +251,11 @@ void    NextCurrent(void)
 
 void    MakeCurrent(void)
 {
-uchar   ibCan;
-
   ShowLo(szPowerOK); Delay(200);
 
   LoadCurrDigital(ibDig);
+
+  uchar ibCan;
   for (ibCan=0; ibCan<bCANALS; ibCan++)
   {
     LoadPrevDigital(ibCan);

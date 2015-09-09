@@ -11,6 +11,7 @@ CURRENT2.C
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_current.h"
 #include "../../memory/mem_extended_1.h"
+#include "../../display/display.h"
 #include "../../realtime/realtime.h"
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
@@ -23,6 +24,7 @@ CURRENT2.C
 #include "../../nvram/cache.h"
 #include "../../nvram/cache2.h"
 #include "../../flash/records.h"
+#include "../../time/delay.h"
 #include "current.h"
 #include "current_run.h"
 #include "current2.h"
@@ -72,9 +74,9 @@ void    StartCurrent2(void)
 }
 
 
-/*
+
 void    Current2Disabled(uchar  ibCan)
-{
+{/*
   uint wImp;
 
   if (dwUpdate > 0xFFFF)
@@ -87,12 +89,12 @@ void    Current2Disabled(uchar  ibCan)
     wImp = (uint)dwUpdate;
 
   mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = wImp;
-  MakeSpecCurrent();
+  MakeSpecCurrent();*/
 }
 
 
 void    Current2Enabled(uchar  ibCan)
-{
+{/*
 uchar i;
 
   if (mpwCurrent2Mnt[ibCan] == 1)
@@ -118,7 +120,7 @@ uchar i;
 
     mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dwFloat;
     MakeSpecCurrent();
-  }
+  }*/
 }
 
 
@@ -139,7 +141,7 @@ void    MakeCurrent2(void)
 
       if (boMntEscS == true)
       {
-        mpreEsc_S[ibCan] = mpreValueCntHou[ibCan] * mpdwBase[ibCan];
+        mpdbEsc_S[ibCan] = mpdbValueCntHou[ibCan] * mpdwBase[ibCan];
         mptiEsc_S[ibCan] = *GetCurrTimeDate();
       }
 
@@ -157,8 +159,8 @@ void    MakeCurrent2(void)
       }
       else
       {
-        tiDig = *GetCurrTimeDate();
-        tiAlt = mptiBase[ibCan];
+        time tiDig = *GetCurrTimeDate();
+        time tiAlt = mptiBase[ibCan];
 
         ulong dwSecond;
 
@@ -180,7 +182,7 @@ void    MakeCurrent2(void)
 
         mptiBaseOK[ibCan] = *GetCurrTimeDate();
 
-        mpreBase[ibCan] += dwImp;            // обеспечиваем измерение энергии, а не средней мощности
+        mpreBase[ibCan] += dwImp;            // обеспециваем измерение энергии, а не средней мощности
 
         dwImp = mpreBase[ibCan];
         mpreBase[ibCan] -= dwImp;
@@ -189,14 +191,14 @@ void    MakeCurrent2(void)
         if (dwImp > 1000) mpwMore1000[ibCan]++;
         if (dwImp > 10000) mpwMore10000[ibCan]++;
 
-        if (dwImp > 0xFFFF)                  // переполнение
+        if (dwImp > 0xFFFF)
           mpwOverflow[ibCan]++;
         else
-        if (dwImp < 0)                       // заём
+        if (dwImp < 0)
           mpwUnderflow[ibCan]++;
         else
         {
-          (fCurrent2Enbl == true ? Current2Enabled() : Current2Disabled());
+          (fEnblCurrent2 == true ? Current2Enabled(ibCan) : Current2Disabled(ibCan));
         }
       }
 
@@ -206,7 +208,7 @@ void    MakeCurrent2(void)
 
   NextCurrent();
 }
-*/
+
 
 
 static bool Currect2First(void)
