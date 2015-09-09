@@ -32,12 +32,17 @@ CURRENT2.C
 
 
 cache const             chEnblCurrent2 = {ENBL_CURRENT2, &fEnblCurrent2, sizeof(bool)};
+cache const             chCurrent2Mnt = {CURRENT2_MNT, &mpwCurrent2Mnt, sizeof(mpwCurrent2Mnt)};
+cache const             chCurrent2Overflow = {CURRENT2_OVERFLOW, &mpwCurrent2Overflow, sizeof(mpwCurrent2Overflow)};
 
 
 
 void    InitCurrent2(void)
 {
   LoadCacheBool(&chEnblCurrent2, true);
+
+  LoadCache(&chCurrent2Mnt);
+  LoadCache(&chCurrent2Overflow);
 
   memset(&mpbCurrent2Curr, 0, 8);
   memset(&mpbCurrent2Prev, 0, 8);
@@ -50,8 +55,11 @@ void    ResetCurrent2(void)
   fEnblCurrent2 = true;
   SaveCache(&chEnblCurrent2);
 
-//  memset(&mpwCurrent2Mnt, 0, sizeof(mpwCurrent2Mnt));
-//  memset(&mpwCurrent2Overflow, 0, sizeof(mpwCurrent2Overflow));
+  memset(&mpwCurrent2Mnt, 0, sizeof(mpwCurrent2Mnt));
+  SaveCache(&chCurrent2Mnt);
+
+  memset(&mpwCurrent2Overflow, 0, sizeof(mpwCurrent2Overflow));
+  SaveCache(&chCurrent2Overflow);
 }
 
 

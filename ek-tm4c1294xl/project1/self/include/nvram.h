@@ -23,6 +23,7 @@ NVRAM.H
 #include "../memory/mem_schedule.h"
 #include "../memory/mem_limits.h"
 #include "../memory/mem_uni.h"
+#include "../memory/mem_current.h"
 #include "../memory/mem_extended_1.h"
 #include "../memory/mem_extended_3.h"
 #include "../memory/mem_extended_7.h"
