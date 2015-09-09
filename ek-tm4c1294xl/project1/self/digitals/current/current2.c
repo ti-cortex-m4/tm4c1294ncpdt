@@ -138,12 +138,16 @@ void    Current2Enabled(uchar  ibCan, ulong  dwImp)
     {
       float fl = dw / i;
 
-      mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ][ibCan] = (uint)fl;
+      LoadImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES);
+      mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)fl;
+      SaveImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES, PrevSoftMnt());
 
       dw -= (uint)fl;
     }
 
-    mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dw;
+    LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES);
+    mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dw;
+    SaveImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
 
     MakeSpecCurrent(ibCan, (uint)dwImp);
   }
