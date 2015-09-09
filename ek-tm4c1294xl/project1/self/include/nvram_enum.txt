@@ -227,5 +227,7 @@ typedef enum
   EXT_0_LIMIT           = EXT_0_FLAG + sizeof(bool) + bNVRAM_FOOTER,
   EXT_0_COUNTER         = EXT_0_LIMIT + sizeof(uchar) + bNVRAM_FOOTER,
 
-  NVRAM_END             = EXT_0_COUNTER + sizeof(uchar) + bNVRAM_FOOTER
+  ENBL_CURRENT2         = EXT_0_COUNTER + sizeof(uchar) + bNVRAM_FOOTER,
+
+  NVRAM_END             = ENBL_CURRENT2 + sizeof(bool) + bNVRAM_FOOTER
 } nvram;
