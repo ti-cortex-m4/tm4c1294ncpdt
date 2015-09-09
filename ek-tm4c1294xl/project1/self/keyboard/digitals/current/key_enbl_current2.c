@@ -1,29 +1,29 @@
 /*------------------------------------------------------------------------------
-
+KEY_ENBL_CURRENT2,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../../main.h"
 #include "../../../memory/mem_current.h"
-#include "../../../digitals/current/current.h"
+#include "../../../digitals/current/current2.h"
 #include "../../common/key_bool.h"
 
 
-/*
-//                                         0123456789ABCDEF
-static char const       szEnbl1[]       = "   Перерасчет   ",
-                        szEnbl2[]       = "  трехминутных  ",
-                        szEnbl3[]       = "  графиков для  ",
-                        szEnbl4[]       = " беспрофильных  ",
-                        szEnbl5[]       = "  счетчиков ?   ";
 
-static char const       *pszEnblCurrent2[]  = { szEnbl1, szEnbl2, szEnbl3, szEnbl4, szEnbl5, "" };
-*/
+//                                         0123456789ABCDEF
+static char const       szMessage1[]    = "   Перерасчет   ",
+                        szMessage2[]    = "  трехминутных  ",
+                        szMessage3[]    = "  графиков для  ",
+                        szMessage4[]    = " беспрофильных  ",
+                        szMessage5[]    = "  счетчиков ?   ";
+
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, "" };
+
 
 
 void    key_SetEnblCurrent2(void)
 {
-//  key_SetBool(&flEnblCurrent2, pszEnblCurrent2);
+  key_SetBool(&chEnblCurrent2, pszMessages);
 }
 

@@ -222,6 +222,7 @@ PROGRAMS.H
 #define bSET_FLOW_PORT_FROM         189
 
 #define bSET_ENBL_CURRENT           192
+#define bSET_ENBL_CURRENT2          414
 #define bSET_ENBL_PROFILE           193
 #define bSET_TIMEOUT_PROFILE        194
 #define bSET_TIMEOUT_CURRENT        195

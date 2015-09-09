@@ -14,6 +14,7 @@ KEY_RESET.C
 #include "../tariffs/gaps.h"
 #include "../digitals/digitals.h"
 #include "../digitals/limits.h"
+#include "../digitals/current/current2.h"
 #include "../digitals/params/params.h"
 #include "../digitals/profile/profile_core.h"
 #include "../digitals/phones.h"
@@ -97,7 +98,7 @@ void    key_SetReset(void)
 //          ResetExtended4();
 //          ResetExtended6();
           ResetDevices(false);
-//          ResetCurrent2();
+          ResetCurrent2();
 //          ResetCheckupCustom();
 
           Restart();
@@ -149,6 +150,7 @@ void    key_SetReset(void)
           ResetUni();
           ResetFlow();
 //          ResetCurrent();
+          ResetCurrent2();
 //          ResetProfiles();
           ResetDevices(true);
 //          ResetSendAT();
@@ -158,7 +160,6 @@ void    key_SetReset(void)
 //          ResetExtended3();
 //          ResetExtended4();
 //          ResetExtended6();
-//          ResetCurrent2();
 //          ResetBulk();
 //          ResetRecordsDsbl();
 //          ResetCheckupFull();
