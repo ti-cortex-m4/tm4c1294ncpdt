@@ -15,6 +15,7 @@ EXTENDED_1.Ñ
 #include "../../devices/devices.h"
 #include "../../digitals/extended/extended_6.h"
 #include "../../digitals/extended/extended_7.h"
+#include "../../digitals/extended/diagram.h"
 #include "../../sensors/automatic2.h"
 #include "../../time/timedate.h"
 #include "../../time/rtc.h"
@@ -230,7 +231,7 @@ void    MakeExtended1(void)
 
           MakeExtended6(c, db);
           MakeExtended7(c, db);
-          //MakeDiagram(c);
+          MakeDiagram(c, db);
 
           mpcwEscS_OK[c]++;
           /*AddDigRecord(EVE_ESC_S_DATA);*/

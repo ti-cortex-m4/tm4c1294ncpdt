@@ -20,6 +20,7 @@ STORAGE.C
 #include "../time/delay.h"
 #include "../time/calendar.h"
 #include "../realtime/realtime_init.h"
+#include "../digitals/extended/diagram.h"
 #include "../hardware/beep.h"
 
 
@@ -225,6 +226,8 @@ uint    i;
   if (CleanPowMonBuff() == false) return false;
 
   if (CleanCntMonBuff() == false) return false;
+
+  if (ClearDiagram() == false) return false;
 
 
   ShowHi(szFlashRead);

@@ -10,6 +10,7 @@ NEXT_MINUTE30.C
 #include "../memory/mem_params.h"
 #include "../impulses/max_power.h"
 #include "../digitals/profile/profile.h"
+#include "../digitals/extended/diagram.h"
 #include "../digitals/limits.h"
 #include "../energy2.h"
 #include "../kernel/arrays_buff.h"
@@ -39,6 +40,7 @@ void    NextMinute30(void)
 
   MakeLimits();
   NextHouLimitsAux();
+  NextHouDiagram();
 
   if (boMntParams == false) NextParamsTime();
 }

@@ -46,7 +46,9 @@ FLASH.H
 #define VALUE5_CAN_PAGES    (uchar)(sizeof(mpCntDayCan5)/wLEAF_BYTES + 1)
 #define VALUE6_CAN_PAGES    (uchar)(sizeof(mpCntMonCan6)/wLEAF_BYTES + 1)
 #define VALUE7_CAN_PAGES    (uchar)(sizeof(mpCntDayCan7)/wLEAF_BYTES + 1)
+
 #define DIAGRAM_CAN_PAGES   (uchar)(sizeof(mpDiagram)/wLEAF_BYTES + 1)
+#define DIAGRAM_PAGES       (uint)(wHOURS_DIAGRAM*DIAGRAM_CAN_PAGES)
 
 
 // размер блока данных
