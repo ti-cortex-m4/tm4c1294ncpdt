@@ -42,3 +42,5 @@ output - from mem_profile
 убрать dbKtrans
 обороты в 100 ms за 10 секунд
 short diagramm
+
+remove external headers
