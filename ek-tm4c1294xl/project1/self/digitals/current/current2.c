@@ -32,26 +32,27 @@ void    ResetCurrent2(void)
   memset(&mpwCurrent2Overflow, 0, sizeof(mpwCurrent2Overflow));
   fCurrent2Enbl = true;
 }
-
+*/
 
 void    NextMntCurrent2(void)
 {
-uchar   i;
-
-  for (i=0; i<64; i++) 
-    if (GetDigitalDevice(i) != 0)
-      mpwCurrent2Mnt[i]++;
+  uchar c;
+  for (c=0; c<64; c++)
+  {
+    if (GetDigitalDevice(c) != 0)
+      mpwCurrent2Mnt[c]++;
+  }
 }
 
 
-
+/*
 void    InitCurrent2(void) 
 {
   memset(&mpbCurrent2Curr, 0, 8);
   memset(&mpbCurrent2Prev, 0, 8);
-  boCurrent2 = true;
+  fCurrent2First = true;
 }
-
+*/
 
 
 void    StartCurrent2(void) 
@@ -60,7 +61,7 @@ void    StartCurrent2(void)
 }
 
 
-
+/*
 void    Current2Disabled(uchar  ibCan)
 {
   uint wImp;
@@ -199,10 +200,12 @@ void    MakeCurrent2(void)
 
 static bool Currect2First(void)
 {
-  uchar i;
-  for (i=0; i<64; i++) 
-    if ((mpbCurrent2Curr[i/8] & (0x80 >> i%8)) == 0)
+  uchar c;
+  for (c=0; c<64; c++)
+  {
+    if ((mpbCurrent2Curr[c/8] & (0x80 >> c%8)) == 0)
       return 0;
+  }
 
   return 1;
 }
@@ -211,9 +214,11 @@ static bool Currect2First(void)
 static bool Currect2Next(void)
 {
   uchar i;
-  for (i=0; i<8; i++) 
+  for (i=0; i<8; i++)
+  {
     if (mpbCurrent2Curr[i] != mpbCurrent2Prev[i])
       return 0;
+  }
 
   return 1;
 }
@@ -221,14 +226,15 @@ static bool Currect2Next(void)
 
 static void Currect2Record(void)
 {
-
   memset(&mpbCurrent2Buff, 0, sizeof(mpbCurrent2Buff));
 
-  uchar i;
-  for (i=0; i<64; i++) 
-    if (GetDigitalDevice(i) != 0)
-      if ((mpbCurrent2Curr[i/8] & (0x80 >> i%8)) == 0)
-        mpbCurrent2Buff[i/8] |= (0x80 >> i%8);
+  uchar c;
+  for (c=0; c<64; c++)
+  {
+    if (GetDigitalDevice(c) != 0)
+      if ((mpbCurrent2Curr[c/8] & (0x80 >> c%8)) == 0)
+        mpbCurrent2Buff[c/8] |= (0x80 >> c%8);
+  }
 
   AddDigRecord(EVE_CURRENT2_CANALS);
 }
@@ -236,7 +242,7 @@ static void Currect2Record(void)
 
 void    StopCurrent2(void) 
 {
-  if (boCurrent2 == true)
+  if (fCurrent2First == true)
   {
     if (Currect2First() == 0) Currect2Record();
   }
@@ -245,7 +251,6 @@ void    StopCurrent2(void)
     if (Currect2Next() == 0) Currect2Record();
   }
 
-  boCurrent2 = false;
+  fCurrent2First = false;
   memcpy(&mpbCurrent2Prev, &mpbCurrent2Curr, 8);
 }
-

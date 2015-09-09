@@ -11,6 +11,7 @@ NEXT_MINUTE3.C
 #include "../energy.h"
 #include "../kernel/arrays_buff.h"
 #include "../impulses/impulses.h"
+#include "../digitals/current/current2.h"
 #include "next_params_time.h"
 #include "realtime_storage.h"
 #include "../nvram/cache.h"
@@ -51,6 +52,7 @@ void    NextMinute3(void)
   SaveCache(&chRealtimeValues);
 
   if (boMntParams == true) NextParamsTime();
+  NextMntCurrent2();
 }
 
 
