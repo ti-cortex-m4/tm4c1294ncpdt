@@ -194,13 +194,12 @@ void    MakeCurrent2(void)
 
   NextCurrent();
 }
+*/
 
 
-
-bool    Currect2First()
+static bool Currect2First(void)
 {
-uchar i;
-
+  uchar i;
   for (i=0; i<64; i++) 
     if ((mpbCurrent2Curr[i/8] & (0x80 >> i%8)) == 0)
       return 0;
@@ -209,10 +208,9 @@ uchar i;
 }
 
 
-bool    Currect2Next()
+static bool Currect2Next(void)
 {
-uchar i;
-
+  uchar i;
   for (i=0; i<8; i++) 
     if (mpbCurrent2Curr[i] != mpbCurrent2Prev[i])
       return 0;
@@ -221,12 +219,12 @@ uchar i;
 }
 
 
-void    Currect2Record(void) 
+static void Currect2Record(void)
 {
-uchar i;
 
   memset(&mpbCurrent2Buff, 0, sizeof(mpbCurrent2Buff));
 
+  uchar i;
   for (i=0; i<64; i++) 
     if (GetDigitalDevice(i) != 0)
       if ((mpbCurrent2Curr[i/8] & (0x80 >> i%8)) == 0)
@@ -238,7 +236,7 @@ uchar i;
 
 void    StopCurrent2(void) 
 {
-  if (boCurrent2 == true )
+  if (boCurrent2 == true)
   {
     if (Currect2First() == 0) Currect2Record();
   }
@@ -250,4 +248,4 @@ void    StopCurrent2(void)
   boCurrent2 = false;
   memcpy(&mpbCurrent2Prev, &mpbCurrent2Curr, 8);
 }
-*/
+
