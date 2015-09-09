@@ -21,3 +21,7 @@ extern  time                    tiRecordTime;
 extern  uchar                   ibRecordCan;
 
 extern  uchar                   bRecord;
+
+extern  uint                    wRecord;
+
+extern  ulong                   dwRecord;

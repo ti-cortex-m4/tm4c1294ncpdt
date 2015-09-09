@@ -170,6 +170,13 @@ static void PutInt(uchar  i, uint  w)
 }
 
 
+static void PutLong(uchar  i, ulong  dw)
+{
+	PutInt(i + 0, dw / 0x10000);
+	PutInt(i + 2, dw % 0x10000);
+}
+
+
 static void Put(uchar  i, uchar  *pbBuff,  uint  wSize)
 {
   uchar j;
@@ -324,9 +331,9 @@ bool    AddDigRecord(event  ev)
 
     case EVE_CURRENT2_CANALS: Put(0, (uchar *)&mpbCurrent2Buff, 8); break;
 
-//    case EVE_CURRENT2_VALUE:  memcpy(&reCurr.mpbBuff+1, &dwUpdate, sizeof(ulong));
-//                              memcpy(&reCurr.mpbBuff+5, &mpwCurrent2Mnt[ibCan], sizeof(uint)); break;
-//
+    case EVE_CURRENT2_VALUE:  PutLong(1, dwRecord);
+                              PutInt(5, wRecord); break;
+
 //    case EVE_CHECKUP_START: memcpy(&reCurr.mpbBuff+0, &boCheckupReadonly, sizeof(uchar));
 //                            memcpy(&reCurr.mpbBuff+1, &mpbCheckupLimitD[ibDig], sizeof(uchar));
 //                            memcpy(&reCurr.mpbBuff+2, &mpbCheckupLimitM[ibDig], sizeof(uchar)); break;
