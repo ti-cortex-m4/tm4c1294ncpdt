@@ -234,6 +234,7 @@ void    NextCurrent(void)
     SetCurr(DEV_BEGIN);
 
     fCurrent = 0;
+    StopCurrent2();
     Work(); OK();
 
     wProgram = 0;
