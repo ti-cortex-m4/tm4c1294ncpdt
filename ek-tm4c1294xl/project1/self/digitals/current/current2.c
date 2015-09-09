@@ -45,14 +45,14 @@ void    NextMntCurrent2(void)
 }
 
 
-/*
+
 void    InitCurrent2(void) 
 {
   memset(&mpbCurrent2Curr, 0, 8);
   memset(&mpbCurrent2Prev, 0, 8);
   fCurrent2First = true;
 }
-*/
+
 
 
 void    StartCurrent2(void) 
