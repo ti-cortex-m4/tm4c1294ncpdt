@@ -20,6 +20,8 @@ CURRENT2.C
 #include "../../time/rtc.h"
 #include "../../energy.h"
 #include "../../energy2.h"
+#include "../../nvram/cache.h"
+#include "../../nvram/cache2.h"
 #include "../../flash/records.h"
 #include "current.h"
 #include "current_run.h"
@@ -40,16 +42,16 @@ void    InitCurrent2(void)
   fCurrent2First = true;
 }
 
-/*
+
 void    ResetCurrent2(void)
 {
-  boEnblCurrent2 = true;
+  fEnblCurrent2 = true;
   SaveCache(&chEnblCurrent2);
 
-  memset(&mpwCurrent2Mnt, 0, sizeof(mpwCurrent2Mnt));
-  memset(&mpwCurrent2Overflow, 0, sizeof(mpwCurrent2Overflow));
+//  memset(&mpwCurrent2Mnt, 0, sizeof(mpwCurrent2Mnt));
+//  memset(&mpwCurrent2Overflow, 0, sizeof(mpwCurrent2Overflow));
 }
-*/
+
 
 
 void    NextMntCurrent2(void)

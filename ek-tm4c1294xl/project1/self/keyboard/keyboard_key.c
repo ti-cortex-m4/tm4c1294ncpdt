@@ -23,6 +23,7 @@ KEYBOARD_KEY.C
 #include "digitals/schedule/key_recalc.h"
 #include "digitals/key_enbl_canals.h"
 #include "digitals/current/key_enbl_current.h"
+#include "digitals/current/key_enbl_current2.h"
 #include "digitals/profile/key_enbl_profile.h"
 #include "digitals/current/key_timeout_current.h"
 #include "digitals/profile/key_timeout_profile.h"
@@ -234,6 +235,7 @@ void    Keyboard_Key(void)
       case bSET_FLOW_PORT_FROM: key_FlowPortFrom();     break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
+      case bSET_ENBL_CURRENT2:  key_SetEnblCurrent2();  break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
@@ -423,6 +425,7 @@ void    Keyboard_Key(void)
       case bSET_FLOW_PORT_FROM: key_FlowPortFrom();     break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
+      case bSET_ENBL_CURRENT2:  key_SetEnblCurrent2();  break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
@@ -694,6 +697,7 @@ void    Keyboard_Key(void)
       case bSET_FLOW_PORT_FROM: key_FlowPortFrom();     break;
 
       case bSET_ENBL_CURRENT:   key_SetEnblCurrent();   break;
+      case bSET_ENBL_CURRENT2:  key_SetEnblCurrent2();  break;
       case bSET_ENBL_PROFILE:   key_SetEnblProfile();   break;
       case bSET_TIMEOUT_PROFILE:key_SetTimeoutProfile();break;
       case bSET_TIMEOUT_CURRENT:key_SetTimeoutCurrent();break;
