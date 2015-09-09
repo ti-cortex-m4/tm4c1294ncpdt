@@ -255,36 +255,36 @@ void    MakeCurrent(void)
 
   LoadCurrDigital(ibDig);
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == 1)
     {
-      mpbCurrent2Curr[ibCan/8] |= (0x80 >> ibCan%8);
+      mpbCurrent2Curr[c/8] |= (0x80 >> c%8);
 
       if (boMntEscS == true)
       {
-        mpdbEsc_S[ibCan] = mpdbValueCntHou[ibCan] * mpdwBase[ibCan];
-        mptiEsc_S[ibCan] = *GetCurrTimeDate();
+        mpdbEsc_S[c] = mpdbValueCntHou[c] * mpdwBase[c];
+        mptiEsc_S[c] = *GetCurrTimeDate();
       }
 
-      mpboReadyCan[ibCan] = true;
+      mpboReadyCan[c] = true;
 
-      mpwTrue[ibCan]++;
-      if (mpboBase[ibCan] == false)
+      mpwTrue[c]++;
+      if (mpboBase[c] == false)
       {
-        mpboBase[ibCan] = true;
+        mpboBase[c] = true;
 
-        mpdwBase[ibCan] = mpdwBaseDig[ diPrev.ibLine ];
-        mpreBase[ibCan] = 0;
-        mptiBase[ibCan] = *GetCurrTimeDate();
-        mptiOffs[ibCan] = tiOffs;
+        mpdwBase[c] = mpdwBaseDig[ diPrev.ibLine ];
+        mpreBase[c] = 0;
+        mptiBase[c] = *GetCurrTimeDate();
+        mptiOffs[c] = tiOffs;
       }
       else
       {
         time tiDig = *GetCurrTimeDate();
-        time tiAlt = mptiBase[ibCan];
+        time tiAlt = mptiBase[c];
 
         ulong dwSecond;
 
@@ -295,39 +295,39 @@ void    MakeCurrent(void)
         else
           dwSecond = (ulong)24*3600;
 
-        slong dwImp = mpdwBaseDig[ GetDigitalLine(ibCan) ] - mpdwBase[ibCan];
-        mpdwBase[ibCan] = mpdwBaseDig[ GetDigitalLine(ibCan) ];
+        slong dwImp = mpdwBaseDig[ GetDigitalLine(c) ] - mpdwBase[c];
+        mpdwBase[c] = mpdwBaseDig[ GetDigitalLine(c) ];
 
         dwSecond += GetSecondIndex(tiDig);
-        dwSecond -= GetSecondIndex(mptiBase[ibCan]);
+        dwSecond -= GetSecondIndex(mptiBase[c]);
 
-        mptiBase[ibCan] = tiDig;
-        mptiOffs[ibCan] = tiOffs;
+        mptiBase[c] = tiDig;
+        mptiOffs[c] = tiOffs;
 
-        mptiBaseOK[ibCan] = *GetCurrTimeDate();
+        mptiBaseOK[c] = *GetCurrTimeDate();
 
         if ((dwSecond > 0) && (dwSecond < 1800))
-          mpreBase[ibCan] += (float)180*dwImp/dwSecond;
+          mpreBase[c] += (float)180*dwImp/dwSecond;
 
-        dwImp = mpreBase[ibCan];
-        mpreBase[ibCan] -= dwImp;
+        dwImp = mpreBase[c];
+        mpreBase[c] -= dwImp;
 
-        if (dwImp > 100) mpwMore100[ibCan]++;
-        if (dwImp > 1000) mpwMore1000[ibCan]++;
-        if (dwImp > 10000) mpwMore10000[ibCan]++;
+        if (dwImp > 100) mpwMore100[c]++;
+        if (dwImp > 1000) mpwMore1000[c]++;
+        if (dwImp > 10000) mpwMore10000[c]++;
 
         if (dwImp > 0xFFFF)
-          mpwOverflow[ibCan]++;
+          mpwOverflow[c]++;
         else
         if (dwImp < 0)
-          mpwUnderflow[ibCan]++;
+          mpwUnderflow[c]++;
         else
         {
           LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES);
-          mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dwImp;
+          mpwImpMntCan[ PrevSoftMnt() ][c] = (uint)dwImp;
           SaveImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
 
-          MakeSpecCurrent(ibCan, (uint)dwImp);
+          MakeSpecCurrent(c, (uint)dwImp);
         }
       }
     }
