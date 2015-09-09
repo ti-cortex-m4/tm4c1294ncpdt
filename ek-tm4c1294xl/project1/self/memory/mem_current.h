@@ -35,7 +35,7 @@ extern  time                    mptiBaseOK[bCANALS],
 
 
 
-extern  bool                    boCurrent2Enable;
+extern  bool                    fCurrent2Enbl;
 
 extern  bool                    boCurrent2;
 
