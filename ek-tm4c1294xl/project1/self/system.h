@@ -134,6 +134,9 @@ SYSTEM.H
 // размер получасовых массивов
 #define wHOURS_62       (uint)(62*48)
 
+// размер получасовых массивов
+#define wHOURS_DIAGRAM  (uint)(3*48)
+
 // размер суточных массивов
 #define bDAYS           14
 

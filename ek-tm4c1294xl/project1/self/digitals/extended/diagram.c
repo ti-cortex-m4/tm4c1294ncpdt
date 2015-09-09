@@ -13,6 +13,7 @@ DIAGRAM.C
 #include "../../digitals/digitals.h"
 #include "../../realtime/realtime.h"
 #include "../../energy.h"
+#include "../../flash/flash.h"
 #include "../../flash/files.h"
 #include "../../time/rtc.h"
 #include "../../serial/ports.h"
@@ -31,6 +32,20 @@ bool    LoadDgrHou(uint  iwHouFrom)
 {
   ASSERT(iwHouFrom < wHOURS);
   return LoadBuff(DIAGRAM_HHR_VALUES + iwHouFrom*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
+}
+
+
+
+bool    ClearDiagram(void)
+{
+  uint wPageOut;
+  for (wPageOut=DIAGRAM_HHR_VALUES; wPageOut<DIAGRAM_HHR_VALUES+DIAGRAM_PAGES; wPageOut++)
+  {
+    if (SafePageErase(wPageOut) == 0) return(0);
+    if (GetFlashStatus() != 0) return(0);
+  }
+
+  return 1;
 }
 
 
@@ -87,7 +102,7 @@ void    MakeDiagram(uchar  ibCan, double  db)
 
 void    OutDiagram(bool  fDouble)
 {
-  if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
+  if (bInBuff6 > wHOURS_DIAGRAM/48) { Result(bRES_BADADDRESS); return; }
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
@@ -121,9 +136,9 @@ void    OutDiagram(bool  fDouble)
 
           wSize += PushFloatOrDouble(vl.dbValue, fDouble);
 
-          wSize += PushChar(vl.stValue.bHour);
-          wSize += PushChar(vl.stValue.bMinute);
           wSize += PushChar(vl.stValue.bSecond);
+          wSize += PushChar(vl.stValue.bMinute);
+          wSize += PushChar(vl.stValue.bHour);
         }
 
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
