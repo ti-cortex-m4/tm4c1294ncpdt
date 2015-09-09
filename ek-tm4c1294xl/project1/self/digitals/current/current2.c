@@ -25,6 +25,14 @@ CURRENT2.C
 #include "current2.h"
 
 
+
+void    InitCurrent2(void)
+{
+  memset(&mpbCurrent2Curr, 0, 8);
+  memset(&mpbCurrent2Prev, 0, 8);
+  fCurrent2First = true;
+}
+
 /*
 void    ResetCurrent2(void)
 {
@@ -34,6 +42,7 @@ void    ResetCurrent2(void)
 }
 */
 
+
 void    NextMntCurrent2(void)
 {
   uchar c;
@@ -42,15 +51,6 @@ void    NextMntCurrent2(void)
     if (GetDigitalDevice(c) != 0)
       mpwCurrent2Mnt[c]++;
   }
-}
-
-
-
-void    InitCurrent2(void) 
-{
-  memset(&mpbCurrent2Curr, 0, 8);
-  memset(&mpbCurrent2Prev, 0, 8);
-  fCurrent2First = true;
 }
 
 
