@@ -25,6 +25,7 @@ CURRENT2.C
 #include "../../nvram/cache2.h"
 #include "../../flash/records.h"
 #include "../../time/delay.h"
+#include "../../kernel/array_mnt.h"
 #include "current.h"
 #include "current_run.h"
 #include "current2.h"
@@ -88,11 +89,10 @@ void    StartCurrent2(void)
 
 
 
-void    Current2Disabled(uchar  ibCan)
-{/*
+void    Current2Disabled(uchar  ibCan, ulong  dwImp)
+{
   uint wImp;
-
-  if (dwUpdate > 0xFFFF)
+  if (dwImp > 0xFFFF)
   { 
     wImp = 0xFFFF;
 
@@ -102,10 +102,15 @@ void    Current2Disabled(uchar  ibCan)
     AddDigRecord(EVE_CURRENT2_OVERFLOW);
   }
   else
-    wImp = (uint)dwUpdate;
+  {
+    wImp = (uint)dwImp;
+  }
 
-  mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = wImp;
-  MakeSpecCurrent();*/
+  LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES);
+  mpwImpMntCan[ PrevSoftMnt() ][ibCan] = wImp;
+  SaveImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
+
+  MakeSpecCurrent();
 }
 
 
@@ -214,7 +219,7 @@ void    MakeCurrent2(void)
           mpwUnderflow[c]++;
         else
         {
-          (fEnblCurrent2 == true ? Current2Enabled(c) : Current2Disabled(c));
+          (fEnblCurrent2 == true ? Current2Enabled(c) : Current2Disabled(c, dwImp));
         }
       }
 
