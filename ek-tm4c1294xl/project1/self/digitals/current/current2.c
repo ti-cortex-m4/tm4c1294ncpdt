@@ -110,38 +110,37 @@ void    Current2Disabled(uchar  ibCan, ulong  dwImp)
   mpwImpMntCan[ PrevSoftMnt() ][ibCan] = wImp;
   SaveImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
 
-  MakeSpecCurrent();
+  MakeSpecCurrent(ibCan, (uint)dwImp);
 }
 
 
-void    Current2Enabled(uchar  ibCan)
-{/*
-uchar i;
-
+void    Current2Enabled(uchar  ibCan, ulong  dwImp)
+{
   if (mpwCurrent2Mnt[ibCan] == 1)
   {
-    Current2Disabled(ibCan);
+    Current2Disabled(ibCan, dwImp);
   }
   else if (mpwCurrent2Mnt[ibCan] > (tiCurr.bMinute%30)/3)
   {
-    Current2Disabled(ibCan);
+    Current2Disabled(ibCan, dwImp);
     AddDigRecord(EVE_CURRENT2_LIMIT);
   }
   else
   {
-    dwFloat = dwUpdate;
+    ulong dwFloat = dwImp;
     AddDigRecord(EVE_CURRENT2_VALUE);
 
+    uchar i;
     for (i=mpwCurrent2Mnt[ibCan]; i>1; i--) 
     {
-      reBuffA = dwFloat / i; 
+      float reBuffA = dwFloat / i;
       mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ][ibCan] = (uint)reBuffA;
       dwFloat -= (uint)reBuffA;
     }
 
     mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dwFloat;
-    MakeSpecCurrent();
-  }*/
+    MakeSpecCurrent(ibCan, (uint)dwImp);
+  }
 }
 
 
@@ -219,7 +218,7 @@ void    MakeCurrent2(void)
           mpwUnderflow[c]++;
         else
         {
-          (fEnblCurrent2 == true ? Current2Enabled(c) : Current2Disabled(c, dwImp));
+          (fEnblCurrent2 == true ? Current2Enabled(c, dwImp) : Current2Disabled(c, dwImp));
         }
       }
 
