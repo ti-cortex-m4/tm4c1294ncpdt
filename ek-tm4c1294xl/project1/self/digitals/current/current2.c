@@ -30,7 +30,7 @@ void    ResetCurrent2(void)
 {
   memset(&mpwCurrent2Mnt, 0, sizeof(mpwCurrent2Mnt));
   memset(&mpwCurrent2Overflow, 0, sizeof(mpwCurrent2Overflow));
-  boCurrent2Enable = true;
+  fCurrent2Enbl = true;
 }
 
 
@@ -184,7 +184,7 @@ void    MakeCurrent2(void)
           mpwUnderflow[ibCan]++;
         else
         {
-          (boCurrent2Enable == true ? Current2Enabled() : Current2Disabled());
+          (fCurrent2Enbl == true ? Current2Enabled() : Current2Disabled());
         }
       }
 
