@@ -27,8 +27,14 @@ CURRENT2.C
 
 
 
+cache const             chEnblCurrent2 = {ENBL_CURRENT2, &fEnblCurrent2, sizeof(bool)};
+
+
+
 void    InitCurrent2(void)
 {
+  LoadCacheBool(&chEnblCurrent2, true);
+
   memset(&mpbCurrent2Curr, 0, 8);
   memset(&mpbCurrent2Prev, 0, 8);
   fCurrent2First = true;
@@ -37,9 +43,11 @@ void    InitCurrent2(void)
 /*
 void    ResetCurrent2(void)
 {
+  boEnblCurrent2 = true;
+  SaveCache(&chEnblCurrent2);
+
   memset(&mpwCurrent2Mnt, 0, sizeof(mpwCurrent2Mnt));
   memset(&mpwCurrent2Overflow, 0, sizeof(mpwCurrent2Overflow));
-  fCurrent2Enbl = true;
 }
 */
 
@@ -261,8 +269,8 @@ void    StopCurrent2(void)
 void    OutCurrent2(void)
 {
   InitPushCRC();
-  PushChar(fCurrent2Enbl);
-  Push(&mpwCurrent2Mnt, sizeof(mpwCurrent2Mnt));
-  Push(&mpwCurrent2Overflow, sizeof(mpwCurrent2Overflow));
+  PushChar(fEnblCurrent2);
+  PushIntArray(mpwCurrent2Mnt, bCANALS);
+  PushIntArray(mpwCurrent2Overflow, bCANALS);
   Output(1+64*2+64*2);
 }

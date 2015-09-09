@@ -227,5 +227,7 @@ RESERVE(EXT_0_FLAG, sizeof(bool) + bNVRAM_FOOTER)
 RESERVE(EXT_0_LIMIT, sizeof(uchar) + bNVRAM_FOOTER)
 RESERVE(EXT_0_COUNTER, sizeof(uchar) + bNVRAM_FOOTER)
 
+RESERVE(ENBL_CURRENT2, sizeof(bool) + bNVRAM_FOOTER)
+
 END(NVRAM_END)
 } nvram;

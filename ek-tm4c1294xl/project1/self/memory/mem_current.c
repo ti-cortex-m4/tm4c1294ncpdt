@@ -50,7 +50,7 @@ time                    mptiBaseOK[bCANALS],
 
 
 // разрешения перерасчета
-bool                    fCurrent2Enbl;
+bool                    fEnblCurrent2;
 
 // флаг первого запуска
 bool                    fCurrent2First;

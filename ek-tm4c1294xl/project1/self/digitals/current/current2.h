@@ -4,6 +4,10 @@ CURRENT2.H
 
 ------------------------------------------------------------------------------*/
 
+extern  cache const             chEnblCurrent2;
+
+
+
 void    InitCurrent2(void);
 void    ResetCurrent2(void);
 
