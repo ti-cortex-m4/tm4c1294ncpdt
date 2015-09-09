@@ -194,6 +194,19 @@ uchar   PushFloatOrDouble(double  db, bool  fDouble)
 }
 
 
+uchar   GetFloatOrDoubleSize(bool  fDouble)
+{
+  if (fDouble)
+  {
+    return sizeof(double);
+  }
+  else
+  {
+    return sizeof(float);
+  }
+}
+
+
 uchar   PushTime(time  ti)
 {
   Push(&ti, sizeof(time));

@@ -20,6 +20,7 @@ uint    PushLongArray(ulong  *mpdw, uint  wCount);
 uchar   PushFloat(float  fl);
 uchar   PushDouble(double  db);
 uchar   PushFloatOrDouble(double  db, bool  fDouble);
+uchar   GetFloatOrDoubleSize(bool  fDouble);
 uchar   PushTime(time  ti);
 void    PushString(char  *psz);
 void    PushLongAsString(ulong  dw);

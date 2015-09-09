@@ -87,6 +87,7 @@ void    MakeDiagram(uchar  ibCan, double  db)
 
 void    OutDiagram(bool  fDouble)
 {
+  if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
@@ -104,15 +105,10 @@ void    OutDiagram(bool  fDouble)
       {
         if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
         {
-          if (fDouble)
+          uchar i;
+          for (i=0; i<GetFloatOrDoubleSize(fDouble); i++)
           {
-            uchar i;
-            for (i=0; i<8; i++) wSize += PushChar(0xFF);
-          }
-          else
-          {
-            uchar i;
-            for (i=0; i<4; i++) wSize += PushChar(0xFF);
+            wSize += PushChar(0xFF);
           }
 
           wSize += PushChar(0xFF);
