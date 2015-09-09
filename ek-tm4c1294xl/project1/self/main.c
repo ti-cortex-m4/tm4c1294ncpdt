@@ -59,6 +59,7 @@ MAIN,C
 #include "digitals/digitals.h"
 #include "digitals/limits.h"
 #include "digitals/params/params.h"
+#include "digitals/current/current2.h"
 #include "digitals/profile/profile_core.h"
 #include "devices/devices_init.h"
 #include "devices/devices.h"
@@ -145,6 +146,7 @@ int     main(void)
   InitDisplay();
 
 //  InitCurrent();
+  InitCurrent2();
 //  InitProfiles();
   InitDevices2();
 
