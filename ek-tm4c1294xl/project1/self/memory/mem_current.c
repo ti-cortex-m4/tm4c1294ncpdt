@@ -53,7 +53,7 @@ time                    mptiBaseOK[bCANALS],
 bool                    fCurrent2Enbl;
 
 // флаг первого запуска
-bool                    boCurrent2;
+bool                    fCurrent2First;
 
 // битовые маски каналов
 uchar                   mpbCurrent2Curr[8],

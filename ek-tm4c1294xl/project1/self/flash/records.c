@@ -8,6 +8,7 @@ RECORDS,C
 #include "../memory/mem_flash.h"
 #include "../memory/mem_records.h"
 #include "../memory/mem_settings.h"
+#include "../memory/mem_current.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
 #include "../memory/mem_extended_0.h"
@@ -321,8 +322,8 @@ bool    AddDigRecord(event  ev)
 
     case EVE_PREVIOUS_TOP:  PutInt(0, iwMajor); break;
 
-//    case EVE_CURRENT2_CANALS: memcpy(&reCurr.mpbBuff+0, &mpbCurrent2Buff, 8); break;
-//
+    case EVE_CURRENT2_CANALS: Put(0, (uchar *)&mpbCurrent2Buff, 8); break;
+
 //    case EVE_CURRENT2_VALUE:  memcpy(&reCurr.mpbBuff+1, &dwUpdate, sizeof(ulong));
 //                              memcpy(&reCurr.mpbBuff+5, &mpwCurrent2Mnt[ibCan], sizeof(uint)); break;
 //

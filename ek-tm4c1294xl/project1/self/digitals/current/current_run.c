@@ -26,6 +26,7 @@ CURRENT_RUN.C
 #include "../../digitals/digitals_messages.h"
 #include "../../digitals/digitals_display.h"
 #include "../../digitals/current/current.h"
+#include "../../digitals/current/current2.h"
 #include "../../time/timedate.h"
 #include "../../time/rtc.h"
 #include "../../kernel/array_mnt.h"
@@ -177,6 +178,8 @@ void    RunCurrent(void)
 
     if (GetCurr() == DEV_PAUSE) return;
     if (fConnect == 1) return;
+
+    StartCurrent2();
 
     memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
     if (StartCurrent(0) == 0)
