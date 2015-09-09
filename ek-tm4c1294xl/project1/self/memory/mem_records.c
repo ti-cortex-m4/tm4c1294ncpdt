@@ -31,3 +31,9 @@ uchar                   ibRecordCan;
 
 // глобальная переменная
 uchar                   bRecord;
+
+// глобальная переменная
+uint                    wRecord;
+
+// глобальная переменная
+ulong                   dwRecord;

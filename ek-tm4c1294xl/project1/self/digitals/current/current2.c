@@ -127,18 +127,24 @@ void    Current2Enabled(uchar  ibCan, ulong  dwImp)
   }
   else
   {
-    ulong dwFloat = dwImp;
+    dwRecord = dwImp;
+    wRecord = mpwCurrent2Mnt[ibCan];
     AddDigRecord(EVE_CURRENT2_VALUE);
+
+    ulong dw = dwImp;
 
     uchar i;
     for (i=mpwCurrent2Mnt[ibCan]; i>1; i--) 
     {
-      float reBuffA = dwFloat / i;
-      mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ][ibCan] = (uint)reBuffA;
-      dwFloat -= (uint)reBuffA;
+      float fl = dw / i;
+
+      mpwImpMntCan[ (bMINUTES+ibSoftMnt-i) % bMINUTES ][ibCan] = (uint)fl;
+
+      dw -= (uint)fl;
     }
 
-    mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dwFloat;
+    mpwImpMntCan[ (bMINUTES+ibSoftMnt-1) % bMINUTES ][ibCan] = (uint)dw;
+
     MakeSpecCurrent(ibCan, (uint)dwImp);
   }
 }
