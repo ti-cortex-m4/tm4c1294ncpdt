@@ -22,6 +22,7 @@ OUT_MINUTE30_48.C
 
 void    OutPowGrpHou48(void)
 {
+  if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
@@ -48,6 +49,7 @@ void    OutPowGrpHou48(void)
 
 void    OutImpCanHou48(void)
 {
+  if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
@@ -75,6 +77,7 @@ void    OutImpCanHou48(void)
 
 void    OutPowGrpHou48Ext(void)
 {
+  if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
@@ -116,6 +119,7 @@ void    PushImpHouCan(uint  wT, uchar  ibCan)
 
 void    OutImpCanHou48Ext(void)
 {
+  if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
@@ -150,6 +154,7 @@ void    OutImpCanHou48Ext(void)
 
 void    OutPowCanHou48Ext(void)
 {
+  if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
@@ -195,6 +200,7 @@ void    OutPowCanHou48Ext(void)
 
 void    OutDefCanHou48Ext(void)
 {
+  if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
   uint iwHou = GetDayHouIndex(bInBuff6);
 
   InitPushPtr();
