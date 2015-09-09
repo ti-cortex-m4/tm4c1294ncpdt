@@ -20,6 +20,7 @@ RESPONSE255_CRC.C
 #include "../time/correct3.h"
 #include "../output/out_groups.h"
 #include "../output/out_relaxs.h"
+#include "../digitals/current/current2.h"
 #include "../digitals/extended/extended_0.h"
 #include "../digitals/extended/extended_1_out.h"
 #include "../digitals/extended/extended_3_out.h"
@@ -212,6 +213,8 @@ void    Response255_CRC(void)
     case bEXT_GETDECRET: OutDecret(); break;
 
     case bEXT_GETSTART: OutStart(); break;
+
+    case bEXT_GETCURRENT2: OutCurrent2(); break;
 
     case bEXT_GETOBJECTNAME: GetObjectNameExt(); break;
     case bEXT_SETOBJECTNAME: SetObjectNameExt(); break;

@@ -11,3 +11,5 @@ void    NextMntCurrent2(void);
 void    StartCurrent2(void);
 void    MakeCurrent2(void);
 void    StopCurrent2(void);
+
+void    OutCurrent2(void);
