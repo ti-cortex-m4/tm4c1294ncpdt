@@ -95,7 +95,10 @@ void    Current2Disabled(uchar  ibCan)
   if (dwUpdate > 0xFFFF)
   { 
     wImp = 0xFFFF;
+
     mpwCurrent2Overflow[ibCan]++;
+    SaveCache(&chCurrent2Overflow);
+
     AddDigRecord(EVE_CURRENT2_OVERFLOW);
   }
   else
