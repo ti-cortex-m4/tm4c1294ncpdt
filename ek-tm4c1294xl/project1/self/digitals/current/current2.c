@@ -12,6 +12,7 @@ CURRENT2.C
 #include "../../memory/mem_current.h"
 #include "../../memory/mem_extended_1.h"
 #include "../../realtime/realtime.h"
+#include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../devices/devices.h"
@@ -253,4 +254,15 @@ void    StopCurrent2(void)
 
   fCurrent2First = false;
   memcpy(&mpbCurrent2Prev, &mpbCurrent2Curr, 8);
+}
+
+
+
+void    OutCurrent2(void)
+{
+  InitPushCRC();
+  PushChar(fCurrent2Enbl);
+  Push(&mpwCurrent2Mnt, sizeof(mpwCurrent2Mnt));
+  Push(&mpwCurrent2Overflow, sizeof(mpwCurrent2Overflow));
+  Output(1+64*2+64*2);
 }

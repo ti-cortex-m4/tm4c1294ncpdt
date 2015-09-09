@@ -332,7 +332,7 @@
 +   #define bINQ_GETENGGRPHOUPREV_DEF      89
 +   #define bINQ_GETPOWGRPHOUPREV_DEF      90
 
-#define bINQ_GETDIAGRAM                95
++   #define bINQ_GETDIAGRAM                95
 +   #define bINQ_GETGAPS1                  96
 +   #define bINQ_GETGAPS2                  97
 
@@ -348,7 +348,7 @@
 +   #define bEXT_GETDECRET                 105
 +   #define bEXT_GETSTART                  106
 #define bEXT_GETBULK                   107
-#define bEXT_GETMNTCURRENT2            108
++   #define bEXT_GETMNTCURRENT2            108
 +   #define bEXT_RECORD_DISABLE            109
 +   #define bEXT_GETENGFRACDIGCAN          110
 
