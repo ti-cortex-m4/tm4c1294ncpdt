@@ -54,3 +54,11 @@ extern  uchar               mpbInBuffSave[wINBUFF_SIZE];
 extern  uchar               cbHeaderBcc;
 
 extern  uint                cwInBuffBcc;
+
+
+
+extern  uchar               bIOControl;
+
+extern  time                tiIOControl;
+
+extern  ulong               dwIOControl;

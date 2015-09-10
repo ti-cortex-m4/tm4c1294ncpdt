@@ -4,4 +4,4 @@ KEY_INPUT_MODE_CONTROL.H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetInputModeControl(void);
+void    key_SetInputModeReset(void);

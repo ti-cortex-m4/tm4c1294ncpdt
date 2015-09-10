@@ -23,7 +23,7 @@ uchar           *code   pszIOControl[]  = { szIOControl1, szIOControl2, szIOCont
 
 
 
-void    key_SetInputModeControl(void)
+void    key_SetInputModeReset(void)
 {
   Clear();
   switch (bIOControl)
