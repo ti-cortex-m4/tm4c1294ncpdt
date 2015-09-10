@@ -89,6 +89,7 @@ KEYBOARD_KEY.C
 #include "key_records_dsbl.h"
 #include "esc/key_machines_esc.h"
 #include "esc/key_block_esc.h"
+#include "serial/key_input_mode_reset.h"
 #include "unified/key_strict_uni.h"
 #include "unified/key_enbl_pass_uni.h"
 #include "unified/key_max_delay_uni.h"
@@ -304,6 +305,8 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_FLAG:     key_SetPlcUFlag();      break;
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
+
+      case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
@@ -579,6 +582,8 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
 
+      case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
+
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
@@ -771,6 +776,8 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_FLAG:     key_SetPlcUFlag();      break;
       case wSET_PLC_U_SIZE:     key_SetPlcUSize();      break;
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
+
+      case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;

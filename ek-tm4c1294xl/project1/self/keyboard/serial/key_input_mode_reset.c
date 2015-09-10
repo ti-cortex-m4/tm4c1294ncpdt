@@ -3,27 +3,25 @@ KEY_INPUT_MODE_RESET.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "keyboard.h"
+
+#include "../../main.h"
+#include "../../console.h"
+#include "../../memory/mem_ports.h"
+#include "../../serial/input_mode_reset.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szInputModeReset1    = " Автоматическое ",
-                        szInputModeReset2    = "  переключение  ",
-                        szInputModeReset3    = "на прием ведомых",
-                        szInputModeReset4    = "   портов 3,4   ";
+static char const       szMessage1[]    = " Автоматическое ",
+                        szMessage2[]    = "  переключение  ",
+                        szMessage3[]    = "на прием ведомых",
+                        szMessage4[]    = "   портов 3,4   ";
                         
-uchar           *code   pszInputModeReset[]  = { szInputModeReset1, szInputModeReset2, szInputModeReset3, szInputModeReset4, "" };
+static char const      *pszMessages[]   = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
 
 
 
-void    key_SetInputModeReset(void)
+void    ShowInputModeReset(void)
 {
   Clear();
   switch (bInputModeReset)
@@ -51,7 +49,7 @@ void    key_SetInputModeReset(void)
       enKeyboard = KBD_POSTENTER;
       Clear();
       
-      LoadSlide(pszInputModeReset);    
+      LoadSlide(pszMessages);
       ShowInputModeReset();  
     } 
     else Beep();
@@ -85,4 +83,3 @@ void    key_SetInputModeReset(void)
   } 
   else Beep(); 
 }
-*/
