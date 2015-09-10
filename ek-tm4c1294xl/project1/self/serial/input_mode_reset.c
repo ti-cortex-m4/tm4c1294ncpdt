@@ -4,9 +4,15 @@ INPUT_MODE_RESET.C
 
 ------------------------------------------------------------------------------*/
 
-#include    "../main.h"
-#include    "../nvram/cache.h"
-#include    "input_mode_reset.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../realtime/realtime.h"
+#include "../isr/serial2.h"
+#include "../isr/serial3.h"
+#include "../serial/speeds.h"
+#include "../nvram/cache.h"
+#include "../nvram/cache2.h"
+#include "input_mode_reset.h"
 
 
 
@@ -16,7 +22,7 @@ cache const             chInputModeReset = {INPUT_MODE_RESET, &bInputModeReset, 
 
 void    InitInputModeReset(void)
 {
-  LoadCacheChar(&chInputModeReset, 0);
+  LoadCache(&chInputModeReset);
 }
 
 
@@ -30,12 +36,15 @@ void    ResetInputModeReset(void)
 
 void    NextHhrInputModeReset(void)
 {
-  if ((fActive == 0) || (bInputModeReset == 0)) return;
-  if (GetHouIndex() % bInputModeReset != 0) return;
+  if (fActive == true)
+  {
+    if (bInputModeReset == 0) return;
+    if (GetCurrHouIndex() % bInputModeReset != 0) return;
 
-  tiInputModeReset = tiCurr;
-  dwInputModeReset++;
+    tiInputModeReset = tiCurr;
+    dwInputModeReset++;
 
-  if (IsSlave(2)) InputMode2();
-  if (IsSlave(3)) InputMode3();
+    if (IsSlave(2)) InputMode2();
+    if (IsSlave(3)) InputMode3();
+  }
 }

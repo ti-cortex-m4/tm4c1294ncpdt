@@ -16,7 +16,7 @@ void    NextMinute1(void)
 {
   Realtime1.cdwMinutes1++;
 
-  if ((fActive == 1) && (enGlobal == GLB_WORK))
+  if ((fActive == true) && (enGlobal == GLB_WORK))
   {
     if (cbShowCurrentTime >= 2)
       ShowCurrTime();
