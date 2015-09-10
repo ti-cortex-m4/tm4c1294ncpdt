@@ -57,8 +57,8 @@ extern  uint                cwInBuffBcc;
 
 
 
-extern  uchar               bIOControl;
+extern  uchar               bInputModeReset;
 
-extern  time                tiIOControl;
+extern  time                tiInputModeReset;
 
-extern  ulong               dwIOControl;
+extern  ulong               dwInputModeReset;

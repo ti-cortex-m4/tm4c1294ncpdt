@@ -51,9 +51,9 @@ uchar i;
   PushChar(1);
 
   PushChar(bPortsStatus);
-//  PushChar(bIOControl);
-//  Push(&tiIOControl, sizeof(time));
-//  Push(&dwIOControl, sizeof(ulong));
+//  PushChar(bInputModeReset);
+//  Push(&tiInputModeReset, sizeof(time));
+//  Push(&dwInputModeReset, sizeof(ulong));
 
   Output(100);
 }

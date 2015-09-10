@@ -78,10 +78,10 @@ uint                    cwInBuffBcc;
 
 
 // правило выключения режима на прием для ведомых портов 3,4
-uchar                   bIOControl;
+uchar                   bInputModeReset;
 
 // время последнего выключения
-time                    tiIOControl;
+time                    tiInputModeReset;
 
 // количество выключений
-ulong                   dwIOControl;
+ulong                   dwInputModeReset;
