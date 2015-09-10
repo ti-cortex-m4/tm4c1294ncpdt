@@ -496,12 +496,12 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 void    ReadCurrentB(void)
 {
   ReadEnergyB();
-  float re = mpdbLevel[ibDig];
+  double db = mpdbLevel[ibDig];
 
   uchar i;
   for (i=0; i<4; i++)
   {
-    mpdwBaseDig[i] = mpdwChannelsA[i] * re;
+    mpdwBaseDig[i] = mpdwChannelsA[i] * db;
   }
 
   MakeCurrent();
