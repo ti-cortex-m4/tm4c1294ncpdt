@@ -23,7 +23,6 @@ DEVICE_C.C
 #include "../serial/ports_common.h"
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
-#include "../digitals/current/current_run.h"
 #include "../digitals/current/current2.h"
 #include "../digitals/digitals_messages.h"
 #include "../digitals/limits.h"
@@ -424,7 +423,7 @@ void    ReadCurrentC(void)
     mpdwBaseDig[i] = mpdwChannelsA[i];
   }
 
-  MakeCurrent(); // TODO MakeCurrent2();
+  MakeCurrent2();
 }
 
 #endif
