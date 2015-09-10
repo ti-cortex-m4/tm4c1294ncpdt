@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_INPUT_MODE_CONTROL.C
+KEY_INPUT_MODE_RESET.C
 
 
 ------------------------------------------------------------------------------*/
@@ -75,6 +75,8 @@ void    key_SetInputModeReset(void)
           default: bInputModeReset = 0;  break;
         }
         
+        SaveCache(&chInputModeReset);
+
         ShowInputModeReset();
       }
       else Beep(); 
