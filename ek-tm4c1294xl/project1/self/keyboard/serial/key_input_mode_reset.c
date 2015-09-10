@@ -21,7 +21,7 @@ static char const      *pszMessages[]   = { szMessage1, szMessage2, szMessage3, 
 
 
 
-void    ShowInputModeReset(void)
+static void Show(void)
 {
   Clear();
   switch (bInputModeReset)
@@ -50,7 +50,7 @@ void    key_SetInputModeReset(void)
       Clear();
       
       LoadSlide(pszMessages);
-      ShowInputModeReset();  
+      Show();
     } 
     else Beep();
   }
@@ -75,7 +75,7 @@ void    key_SetInputModeReset(void)
         
         SaveCache(&chInputModeReset);
 
-        ShowInputModeReset();
+        Show();
       }
       else Beep(); 
     }
