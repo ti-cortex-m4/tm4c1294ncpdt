@@ -74,3 +74,14 @@ uchar                   cbHeaderBcc;
 
 // счётчик принятых байт
 uint                    cwInBuffBcc;
+
+
+
+// правило выключения режима на прием для ведомых портов 3,4
+uchar                   bIOControl;
+
+// время последнего выключения
+time                    tiIOControl;
+
+// количество выключений
+ulong                   dwIOControl;

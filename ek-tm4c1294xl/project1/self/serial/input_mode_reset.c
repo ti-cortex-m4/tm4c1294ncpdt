@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-INPUT_MODE_CONTROL.C
+INPUT_MODE_RESET.C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,7 +8,7 @@ INPUT_MODE_CONTROL.C
 
 
 /*
-void    InputModeControl(void)
+void    InputModeReset(void)
 {
   if ((fActive == 0) || (bIOControl == 0)) return;
   if (GetHouIndex() % bIOControl != 0) return;
