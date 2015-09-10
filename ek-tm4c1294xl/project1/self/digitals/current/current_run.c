@@ -323,10 +323,7 @@ void    MakeCurrent(void)
           mpwUnderflow[c]++;
         else
         {
-          LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES);
-          mpwImpMntCan[ PrevSoftMnt() ][c] = (uint)dwImp;
-          SaveImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
-
+          SetImpMnt(1, c, (uint)dwImp);
           MakeSpecCurrent(c, (uint)dwImp);
         }
       }

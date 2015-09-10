@@ -17,6 +17,7 @@ bool    SaveImpMnt(uint  iwMntTo, uchar  ibMntFrom)
 {
   ASSERT(iwMntTo < bMINUTES);
   ASSERT(ibMntFrom < 2);
+
   return SaveArrayX(IMPMNTCAN, sizeof(uint)*bCANALS, iwMntTo, &mpwImpMntCan[ ibMntFrom ]);
 }
 
@@ -24,6 +25,7 @@ bool    SaveImpMnt(uint  iwMntTo, uchar  ibMntFrom)
 bool    FreeImpMnt(uint  iwMntTo)
 {
   ASSERT(iwMntTo < bMINUTES);
+
   return FreeArrayX(IMPMNTCAN, sizeof(uint)*bCANALS, iwMntTo);
 }
 
@@ -31,6 +33,7 @@ bool    FreeImpMnt(uint  iwMntTo)
 bool    LoadImpMnt(uint  iwMntFrom)
 {
   ASSERT(iwMntFrom < bMINUTES);
+
   if (iwMntFrom == iwHardMnt)
   {
     memcpy(mpwImpMntCan[ PrevSoftMnt() ], mpwImpMntCan[ ibSoftMnt ], sizeof(uint)*bCANALS);
@@ -40,4 +43,16 @@ bool    LoadImpMnt(uint  iwMntFrom)
   {
     return LoadArrayX(IMPMNTCAN, sizeof(uint)*bCANALS, iwMntFrom, &mpwImpMntCan[ PrevSoftMnt() ]);
   }
+}
+
+
+
+void    SetImpMnt(uchar  iwMnt, uchar  ibCan, uint  wImp)
+{
+  ASSERT(iwMnt < bMINUTES);
+  ASSERT(ibCan < bCANALS);
+
+  LoadImpMnt((bMINUTES+iwHardMnt-iwMnt) % bMINUTES);
+  mpwImpMntCan[ PrevSoftMnt() ][ ibCan ] = wImp;
+  SaveImpMnt((bMINUTES+iwHardMnt-iwMnt) % bMINUTES, PrevSoftMnt());
 }
