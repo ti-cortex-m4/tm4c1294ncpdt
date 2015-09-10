@@ -158,22 +158,22 @@ void    ProcessTime(void)
     NextMinute3();
     PrintInt(ibSoftMnt); PrintInt(iwHardMnt);
 
-    if (fActive == 1) fCurrent = 1;
+    if (fActive == true) fCurrent = 1;
   }
 
 
   if ((tiCurr.bMinute % 15 == 0) && (tiPrev.bMinute % 15 != 0))
   {
-    if (fActive == 1) RunGps();
+    if (fActive == true) RunGps();
   }
 
 
   // переход на следующий получас
   if ((tiCurr.bMinute % 30 == 0) && (tiPrev.bMinute % 30 != 0))
   {
-    if (fActive == 1) RunDTR();
+    if (fActive == true) RunDTR();
 
-    if (fActive == 1) fProfile = 1;
+    if (fActive == true) fProfile = 1;
 
     if ((tiCurr.bDay   == tiSummer.bDay)   &&
         (tiCurr.bMonth == tiSummer.bMonth) &&
@@ -181,7 +181,7 @@ void    ProcessTime(void)
     {
       cbSummer++;
 
-      if (fActive == 1)
+      if (fActive == true)
       {
         tiCurr.bHour = 3;
         SetCurrTimeDate(tiCurr);
@@ -201,7 +201,7 @@ void    ProcessTime(void)
     {
       cbWinter++;
 
-      if (fActive == 1)
+      if (fActive == true)
       {
         tiCurr.bHour = 2;
         SetCurrTimeDate(tiCurr);
@@ -292,7 +292,7 @@ time    tiT;
     	ASSERT(iwHardTim < wTIMES);
     	ASSERT(ibSoftTim < 2);
 
-      fActive = 1;
+      fActive = true;
       ProcessTime();
     }
 

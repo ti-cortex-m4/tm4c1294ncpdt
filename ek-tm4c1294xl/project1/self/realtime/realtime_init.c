@@ -190,7 +190,7 @@ void    DefaultRealtime(void)
 
 void    InitRealtime(void)
 {
-  fActive = 0;
+  fActive = false;
 
   fCurrent = 0;
   fProfile = 0;
