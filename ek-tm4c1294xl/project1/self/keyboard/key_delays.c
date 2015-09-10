@@ -5,10 +5,8 @@ KEY_DELAYS.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../console.h"
 #include "../memory/mem_ports.h"
-#include "keyboard.h"
-#include "../display/display.h"
-
 #include "../digitals/sensors.h"
 #include "../serial/speeds_storage.h"
 
