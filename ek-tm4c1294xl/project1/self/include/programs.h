@@ -300,6 +300,8 @@ PROGRAMS.H
 #define wSET_PLC_U_SIZE             420
 #define wSET_PLC_U_SHUTDOWN         421
 
+#define wSET_INPUT_MODE_RESET       416
+
 #define wSET_STRICT_UNI             417
 #define wSET_ENBL_PASS_UNI          418
 #define wSET_MAX_DELAY_UNI          422

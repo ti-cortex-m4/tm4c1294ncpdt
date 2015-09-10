@@ -277,8 +277,8 @@ int2.c
 int2.h
 int4.c
 int4.h
-io_control.c
-io_control.h
++   io_control.c
++   io_control.h
 keyboard.c
 keyboard.h
 keyboard2.c
@@ -571,8 +571,8 @@ _hou_check.c
 _hou_check.h
 _inslines.c
 _inslines.h
-_io_control.c
-_io_control.h
++   _io_control.c
++   _io_control.h
 +   _keys.c
 +   _keys.h
 _limits.c
