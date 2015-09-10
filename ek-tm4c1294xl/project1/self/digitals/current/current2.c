@@ -137,18 +137,11 @@ void    Current2Enabled(uchar  ibCan, ulong  dwImp)
     for (i=mpwCurrent2Mnt[ibCan]; i>1; i--) 
     {
       float fl = dw / i;
-
-      LoadImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES);
-      mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)fl;
-      SaveImpMnt((bMINUTES+iwHardMnt-i) % bMINUTES, PrevSoftMnt());
-
+      SetImpMnt(i, ibCan, (uint)fl);
       dw -= (uint)fl;
     }
 
-    LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES);
-    mpwImpMntCan[ PrevSoftMnt() ][ibCan] = (uint)dw;
-    SaveImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES, PrevSoftMnt());
-
+    SetImpMnt(1, ibCan, (uint)dw);
     MakeSpecCurrent(ibCan, (uint)dwImp);
   }
 }
@@ -305,7 +298,7 @@ void    StopCurrent2(void)
 void    OutCurrent2(void)
 {
   InitPushCRC();
-  PushChar(fEnblCurrent2);
+  PushBool(fEnblCurrent2);
   PushIntArray(mpwCurrent2Mnt, bCANALS);
   PushIntArray(mpwCurrent2Overflow, bCANALS);
   Output(1+64*2+64*2);
