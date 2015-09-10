@@ -8,6 +8,7 @@ NEXT_MINUTE30.C
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_energy.h"
 #include "../memory/mem_params.h"
+#include "../serial/input_mode_reset.h"
 #include "../impulses/max_power.h"
 #include "../digitals/profile/profile.h"
 #include "../digitals/extended/diagram.h"
@@ -41,6 +42,7 @@ void    NextMinute30(void)
   MakeLimits();
   NextHouLimitsAux();
   NextHouDiagram();
+  NextHhrInputModeReset();
 
   if (boMntParams == false) NextParamsTime();
 }

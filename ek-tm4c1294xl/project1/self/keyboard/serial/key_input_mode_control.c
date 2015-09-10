@@ -14,19 +14,19 @@ KEY_INPUT_MODE_CONTROL.C
 
 
 //                                         0123456789ABCDEF
-message         code    szIOControl1    = " Автоматическое ",
-                        szIOControl2    = "  переключение  ",
-                        szIOControl3    = "на прием ведомых",
-                        szIOControl4    = "   портов 3,4   ";
+message         code    szInputModeReset1    = " Автоматическое ",
+                        szInputModeReset2    = "  переключение  ",
+                        szInputModeReset3    = "на прием ведомых",
+                        szInputModeReset4    = "   портов 3,4   ";
                         
-uchar           *code   pszIOControl[]  = { szIOControl1, szIOControl2, szIOControl3, szIOControl4, "" };
+uchar           *code   pszInputModeReset[]  = { szInputModeReset1, szInputModeReset2, szInputModeReset3, szInputModeReset4, "" };
 
 
 
 void    key_SetInputModeReset(void)
 {
   Clear();
-  switch (bIOControl)
+  switch (bInputModeReset)
   {
     case 0:  strcpy(szLo+1,"нет");      break;
     case 1:  strcpy(szLo+1,"30 минут"); break;
@@ -42,7 +42,7 @@ void    key_SetInputModeReset(void)
 }
 
 
-void    key_SetIOControl(void)
+void    key_SetInputModeReset(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -51,8 +51,8 @@ void    key_SetIOControl(void)
       enKeyboard = KBD_POSTENTER;
       Clear();
       
-      LoadSlide(pszIOControl);    
-      ShowIOControl();  
+      LoadSlide(pszInputModeReset);    
+      ShowInputModeReset();  
     } 
     else Beep();
   }
@@ -64,18 +64,18 @@ void    key_SetIOControl(void)
     {
       if (enKeyboard == KBD_POSTENTER)
       {           
-        switch (bIOControl)
+        switch (bInputModeReset)
         {
-          case 0:  bIOControl = 1;  break;
-          case 1:  bIOControl = 6;  break;
-          case 6:  bIOControl = 12; break;
-          case 12: bIOControl = 24; break;
-          case 24: bIOControl = 48; break;
-          case 48: bIOControl = 0;  break;
-          default: bIOControl = 0;  break;
+          case 0:  bInputModeReset = 1;  break;
+          case 1:  bInputModeReset = 6;  break;
+          case 6:  bInputModeReset = 12; break;
+          case 12: bInputModeReset = 24; break;
+          case 24: bInputModeReset = 48; break;
+          case 48: bInputModeReset = 0;  break;
+          default: bInputModeReset = 0;  break;
         }
         
-        ShowIOControl();
+        ShowInputModeReset();
       }
       else Beep(); 
     }
