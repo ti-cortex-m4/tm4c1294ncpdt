@@ -10,6 +10,7 @@ DEVICE_B12.C
 #include "../memory/mem_profile.h"
 #include "../memory/mem_factors.h"
 #include "../devices/devices.h"
+#include "../digitals/current/current2.h"
 #include "device_b.h"
 #include "device_b12.h"
 
@@ -17,16 +18,14 @@ DEVICE_B12.C
 
 void    ReadCurrentB12(void)
 {
-uchar   i;
-float   reBuffA;
-
   ReadEnergyB();
-  reBuffA = mpdbLevel[ibDig];
+  double db = mpdbLevel[ibDig];
 
+  uchar i;
   for (i=0; i<4; i++)
   {
-    mpdwBaseDig[i] = mpdwChannelsA[i] * reBuffA;
+    mpdwBaseDig[i] = mpdwChannelsA[i] * db;
   }
 
-  // TODO MakeCurrent2();
+  MakeCurrent2();
 }
