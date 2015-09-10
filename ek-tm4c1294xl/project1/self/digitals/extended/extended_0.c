@@ -126,7 +126,7 @@ void    OutExtended0(void)
   {
     InitPushPtr();
 
-    PushChar(fExt0Flag);
+    PushBool(fExt0Flag);
     PushChar(bExt0Limit);
     PushChar(bExt0Counter);
 
