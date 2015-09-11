@@ -98,4 +98,4 @@ bool                    fSendAT;
 uchar                   mpcbSendAT[bPORTS];
 
 // массив состояний
-answer                  mpanSendAT[bPORTS];
+send_at                 mpstSendAT[bPORTS];
