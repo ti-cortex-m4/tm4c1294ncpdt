@@ -22,6 +22,8 @@ cache const             chSlaveModem = {SLAVE_MODEM, &fSlaveModem, sizeof(bool)}
 void    InitSlaveModem(void)
 {
   LoadCacheBool(&chSlaveModem, false);
+
+  ResetSendAT_All();
 }
 
 
@@ -122,27 +124,19 @@ void    SlaveModem_All(void)
 
 
 
-void    InitSerial_SlaveModem(uchar  ibPrt)
+void    ResetSendAT(uchar  ibPrt)
 {
   mpcbSendAT[ibPrt] = bSEND_AT_TIMEOUT;
   mpstSendAT[ibPrt] = AT_TIMEOUT;
 }
 
 
-void    UARTIntHandler_SlaveModem(uchar  ibPrt)
-{
-  mpcbSendAT[ibPrt] = bSEND_AT_TIMEOUT;
-  mpstSendAT[ibPrt] = AT_TIMEOUT;
-}
-
-
-void    ResetSendAT(void)
+void    ResetSendAT_All(void)
 {
   uchar p;
   for (p=0; p<bPORTS; p++)
   {
-    mpcbSendAT[p] = bSEND_AT_TIMEOUT;
-    mpstSendAT[p] = AT_TIMEOUT;
+    ResetSendAT(p);
   }
 }
 
@@ -158,4 +152,18 @@ void    SlaveModem_1Hz(void)
       (mpcbSendAT[p] == 0) ? (mpstSendAT[p] = AT_ANSWER) : (mpcbSendAT[p]--);
     }
   }
+}
+
+
+
+void    OutSlaveModem(void)
+{
+  InitPushCRC();
+
+  PushBool(fSlaveModem);
+  PushChar(fSendAT)
+  Push(&mpcbSendAT, sizeof(mpcbSendAT))
+  Push(&mpstSendAT, sizeof(mpstSendAT))
+
+  Output(1+1+4+4);
 }

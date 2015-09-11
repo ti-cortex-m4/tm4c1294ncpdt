@@ -13,6 +13,7 @@ NEXT_DAY.C
 #include "../energy.h"
 #include "../energy2.h"
 #include "../kernel/arrays_buff.h"
+#include "../serial/slave_modem.h"
 #include "../digitals/answer.h"
 #include "../digitals/extended/extended_4.h"
 #include "../digitals/extended/extended_5.h"
@@ -56,4 +57,5 @@ void    NextDay(void)
   NextDayDef();
 
   EnableAnswer();
+  ResetSendAT_All();
 }

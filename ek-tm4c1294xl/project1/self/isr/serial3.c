@@ -184,7 +184,7 @@ uint32_t ui32Status;
 
       if (fSendAT == 1)
       {
-        UARTIntHandler_SlaveModem(3);
+        ResetSendAT(3);
       }
 
       if ((mppoPorts[3].enStream == STR_SLAVECRC) || (IsFlow3() == 1))
@@ -425,7 +425,7 @@ void    InitSerial3(void)
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) |= 0x0040; // GPIO Direction
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x0040; // GPIO Digital Enable
 
-  InitSerial_SlaveModem(3);
+  ResetSendAT(3);
 
   mpboLocal[3] = false;
 

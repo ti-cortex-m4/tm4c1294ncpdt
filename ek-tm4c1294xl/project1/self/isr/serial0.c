@@ -178,7 +178,7 @@ uint32_t ui32Status;
 
       if ((fSendAT == 1) && (IsFlow0() == 0))
       {
-        UARTIntHandler_SlaveModem(0);
+        ResetSendAT(0);
       }
 
       if ((mppoPorts[0].enStream == STR_SLAVECRC) || (IsFlow0() == 1))
@@ -414,7 +414,7 @@ void    InDelay0_Timer0(void) {
 
 void    InitSerial0(void)
 {
-  InitSerial_SlaveModem(0);
+  ResetSendAT(0);
 
   mpboLocal[0] = false;
 

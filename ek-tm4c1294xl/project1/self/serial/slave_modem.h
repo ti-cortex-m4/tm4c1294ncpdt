@@ -7,8 +7,9 @@ SLAVE_MODEM.H
 void    InitSlaveModem(void);
 void    ResetSlaveModem(void);
 
-void    InitSerial_SlaveModem(uchar  ibPrt);
-void    UARTIntHandler_SlaveModem(uchar  ibPrt);
-void    ResetSendAT(void);
+void    ResetSendAT(uchar  ibPrt);
+void    ResetSendAT_All(void);
 
 void    SlaveModem_1Hz(void);
+
+void    OutSlaveModem(void);
