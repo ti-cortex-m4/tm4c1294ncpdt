@@ -62,6 +62,8 @@ void    Response252_CRC(void)
     case 19: OutResetProfileLinkWrn(); break;
     case 20: OutResetProfileLinkErr(); break;
 
+    case 21: OutSlaveModem(); break;
+
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
       Result(bRES_BADCOMMAND);

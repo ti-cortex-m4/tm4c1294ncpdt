@@ -13,6 +13,7 @@ SPEEDS.C
 #include "../serial/ports.h"
 #include "../nvram/cache.h"
 #include "../digitals/correct_limit.h"
+#include "slave_modem.h"
 #include "speeds.h"
 #include "speeds_storage.h"
 
@@ -146,6 +147,8 @@ void    SetSpeed(uchar  ibPrt)
   }
 
   SavePorts();
+
+  ResetSendAT(ibPrt);
 }
 
 
