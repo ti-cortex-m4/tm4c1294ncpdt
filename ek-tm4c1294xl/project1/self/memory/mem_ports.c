@@ -85,3 +85,17 @@ time                    tiInputModeReset;
 
 // количество выключений
 ulong                   dwInputModeReset;
+
+
+
+// флаг управления модемом
+bool                    boSlaveModem;
+
+// признак выдачи команды на программирование модема
+bool                    fSendAT;
+
+// массив текущих значений таймаутов
+uchar                   mpcbSendAT[bPORTS];
+
+// массив состояний
+answer                  mpanSendAT[bPORTS];

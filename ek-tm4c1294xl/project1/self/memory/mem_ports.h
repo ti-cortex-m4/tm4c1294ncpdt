@@ -62,3 +62,13 @@ extern  uchar               bInputModeReset;
 extern  time                tiInputModeReset;
 
 extern  ulong               dwInputModeReset;
+
+
+
+extern  bool                boSlaveModem;
+
+extern  bool                fSendAT;
+
+extern  uchar               mpcbSendAT[bPORTS];
+
+extern  answer              mpanSendAT[bPORTS];
