@@ -4,6 +4,10 @@ SLAVE_MODEM.H
 
 -----------------------------------------------------------------------------*/
 
+extern  cache const             chSlaveModem;
+
+
+
 void    InitSlaveModem(void);
 void    ResetSlaveModem(void);
 
