@@ -42,16 +42,17 @@ void InitTimer1(uint32_t ui32SysClock) {
 
 
 
-void Timer1IntHandler(void) {
-	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+void Timer1IntHandler(void)
+{
+  TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
 
-	fOnSecond = 1;
+  fOnSecond = 1;
 
   Slides_1Hz();
-	Impulses_1Hz();
+  Impulses_1Hz();
 
-	WaitAnswer_1Hz();
-	WaitQuery_1Hz();
-	DelayUni_1Hz();
-	DelayFlow_1Hz();
+  WaitAnswer_1Hz();
+  WaitQuery_1Hz();
+  DelayUni_1Hz();
+  DelayFlow_1Hz();
 }
