@@ -17,6 +17,7 @@ TODO volatile
 #include "../digitals/wait_query.h"
 #include "../output/unified/uni.h"
 #include "../serial/flow.h"
+#include "../serial/slave_modem.h"
 
 
 
@@ -55,4 +56,5 @@ void Timer1IntHandler(void)
   WaitQuery_1Hz();
   DelayUni_1Hz();
   DelayFlow_1Hz();
+  SlaveModem_1Hz();
 }

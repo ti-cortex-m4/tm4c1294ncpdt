@@ -7,6 +7,8 @@ SLAVE_MODEM.C
 #include "../main.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
+#include "../nvram/cache.h"
+#include "../nvram/cache2.h"
 #include "../display/display.h"
 #include "../time/delay.h"
 #include "slave_modem.h"
@@ -31,7 +33,7 @@ void    ResetSlaveModem(void)
 
 
 
-static void SendAT(void)
+static void SendAT1(void)
 {
   InitPush(0);
 
@@ -41,11 +43,11 @@ static void SendAT(void)
   PushChar('\n');
 
   Answer(4,SER_OUTPUT_SLAVE);
+}
 
 
-  DelayMsg();
-
-
+static void SendAT2(void)
+{
   InitPush(0);
 
   PushChar('A');
@@ -71,11 +73,22 @@ static void SendAT(void)
 }
 
 
+static void SendAT(void)
+{
+  SendAT1();
+
+  DelayMsg();
+
+  SendAT2();
+}
+
+
+
 static void SlaveModem(void)
 {
-  if ((fSlaveModem == true) && (mpanSendAT[ibPort] == ANS_ANSWER))
+  if ((fSlaveModem == true) && (mpstSendAT[ibPort] == AT_ANSWER))
   {
-    mpanSendAT[ibPort] = ANS_BEGIN;
+    mpstSendAT[ibPort] = AT_BEGIN;
 
     SaveDisplay();
 
@@ -107,3 +120,16 @@ void    SlaveModem_All(void)
   SlaveModem();
 }
 
+
+
+void    SlaveModem_1Hz(void)
+{
+  uchar p;
+  for (p=0; p<PORTS; p++)
+  {
+    if (mpstSendAT[p] == AT_TIMEOUT)
+    {
+      (mpcbSendAT[p] == 0) ? (mpstSendAT[p] = AT_ANSWER) : (mpcbSendAT[p]--);
+    }
+  }
+}

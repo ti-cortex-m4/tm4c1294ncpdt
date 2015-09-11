@@ -71,4 +71,4 @@ extern  bool                fSendAT;
 
 extern  uchar               mpcbSendAT[bPORTS];
 
-extern  answer              mpanSendAT[bPORTS];
+extern  send_at             mpstSendAT[bPORTS];
