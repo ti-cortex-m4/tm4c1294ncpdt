@@ -8,6 +8,10 @@ MAIN_SERIAL.H
 
 
 
+// таймаут между последним выданным запросом и подачей команды AT, секунд
+#define bSEND_AT_TIMEOUT 10
+
+
 //
 typedef enum
 {

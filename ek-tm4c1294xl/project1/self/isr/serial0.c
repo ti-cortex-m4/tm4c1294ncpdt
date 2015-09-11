@@ -408,6 +408,8 @@ void    InDelay0_Timer0(void) {
 
 void    InitSerial0(void)
 {
+  InitSerial_SlaveModem(0);
+
   mpboLocal[0] = false;
 
   InputMode0();

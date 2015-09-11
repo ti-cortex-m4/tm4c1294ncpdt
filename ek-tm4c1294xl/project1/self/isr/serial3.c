@@ -419,6 +419,8 @@ void    InitSerial3(void)
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DIR) |= 0x0040; // GPIO Direction
   HWREG(GPIO_PORTD_AHB_BASE + GPIO_O_DEN) |= 0x0040; // GPIO Digital Enable
 
+  InitSerial_SlaveModem(3);
+
   mpboLocal[3] = false;
 
   InputMode3();
