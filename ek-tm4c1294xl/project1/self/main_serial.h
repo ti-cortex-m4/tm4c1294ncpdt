@@ -8,6 +8,15 @@ MAIN_SERIAL.H
 
 
 
+//
+typedef enum
+{
+  ANS_BEGIN             =  0,
+  ANS_TIMEOUT           =  1,
+  ANS_ANSWER            =  2
+} answer;
+
+
 // тип 'режим работы порта'
 typedef enum
 {
