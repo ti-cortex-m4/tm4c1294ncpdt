@@ -301,6 +301,7 @@ PROGRAMS.H
 #define wSET_PLC_U_SHUTDOWN         421
 
 #define wSET_INPUT_MODE_RESET       416
+#define bSET_SLAVE_MODEM            198
 
 #define wSET_STRICT_UNI             417
 #define wSET_ENBL_PASS_UNI          418
