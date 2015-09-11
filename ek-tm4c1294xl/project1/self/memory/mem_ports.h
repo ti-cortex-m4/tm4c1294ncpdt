@@ -65,7 +65,7 @@ extern  ulong               dwInputModeReset;
 
 
 
-extern  bool                boSlaveModem;
+extern  bool                fSlaveModem;
 
 extern  bool                fSendAT;
 

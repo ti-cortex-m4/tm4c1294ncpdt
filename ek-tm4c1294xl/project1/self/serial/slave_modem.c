@@ -9,10 +9,29 @@ SLAVE_MODEM.C
 #include "../serial/ports.h"
 #include "../display/display.h"
 #include "../time/delay.h"
+#include "slave_modem.h"
 
 
 
-static void EscAT(void)
+cache const             chSlaveModem = {SLAVE_MODEM, &fSlaveModem, sizeof(bool)};
+
+
+
+void    InitSlaveModem(void)
+{
+  LoadCacheBool(&chSlaveModem, false);
+}
+
+
+void    ResetSlaveModem(void)
+{
+	fSlaveModem = false;
+  SaveCache(&chSlaveModem);
+}
+
+
+
+static void SendAT(void)
 {
   InitPush(0);
 
@@ -23,7 +42,9 @@ static void EscAT(void)
 
   Answer(4,SER_OUTPUT_SLAVE);
 
+
   DelayMsg();
+
 
   InitPush(0);
 
@@ -52,7 +73,7 @@ static void EscAT(void)
 
 static void SlaveModem(void)
 {
-  if ((boSlaveModem == true) && (mpanSendAT[ibPort] == ANS_ANSWER))
+  if ((fSlaveModem == true) && (mpanSendAT[ibPort] == ANS_ANSWER))
   {
     mpanSendAT[ibPort] = ANS_BEGIN;
 
@@ -65,7 +86,7 @@ static void SlaveModem(void)
 
     LoadDisplay();
 
-    EscAT();
+    SendAT();
     fSendAT = 0;
   }
 }

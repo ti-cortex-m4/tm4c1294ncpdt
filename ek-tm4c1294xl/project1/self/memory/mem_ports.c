@@ -89,7 +89,7 @@ ulong                   dwInputModeReset;
 
 
 // флаг управления модемом
-bool                    boSlaveModem;
+bool                    fSlaveModem;
 
 // признак выдачи команды на программирование модема
 bool                    fSendAT;

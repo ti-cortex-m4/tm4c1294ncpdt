@@ -67,6 +67,7 @@ MAIN,C
 #include "special/defects.h"
 #include "serial/speeds.h"
 #include "serial/input_mode_reset.h"
+#include "serial/slave_modem.h"
 #include "serial/flow.h"
 #include "output/esc/esc.h"
 #include "output/esc/response_esc.h"
@@ -132,6 +133,7 @@ int     main(void)
   InitProfile();
   InitSpeeds();
   InitInputModeReset();
+  InitSlaveModem();
   InitEsc();
   InitUni();
   InitFlow();

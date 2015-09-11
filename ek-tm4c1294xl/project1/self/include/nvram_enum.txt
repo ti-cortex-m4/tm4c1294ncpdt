@@ -232,6 +232,7 @@ typedef enum
   CURRENT2_OVERFLOW     = CURRENT2_MNT + sizeof(mpwCurrent2Mnt) + bNVRAM_FOOTER,
 
   INPUT_MODE_RESET      = CURRENT2_OVERFLOW + sizeof(mpwCurrent2Overflow) + bNVRAM_FOOTER,
+  SLAVE_MODEM           = INPUT_MODE_RESET + sizeof(uchar) + bNVRAM_FOOTER,
 
-  NVRAM_END             = INPUT_MODE_RESET + sizeof(uchar) + bNVRAM_FOOTER
+  NVRAM_END             = SLAVE_MODEM + sizeof(bool) + bNVRAM_FOOTER
 } nvram;
