@@ -124,11 +124,28 @@ void    SlaveModem_All(void)
 
 void    InitSerial_SlaveModem(uchar  ibPrt)
 {
-  ASSERT(ibPrt < bPOSTS);
-
   mpcbSendAT[ibPrt] = bSEND_AT_TIMEOUT;
   mpstSendAT[ibPrt] = AT_TIMEOUT;
 }
+
+
+void    UARTIntHandler_SlaveModem(uchar  ibPrt)
+{
+  mpcbSendAT[ibPrt] = bSEND_AT_TIMEOUT;
+  mpstSendAT[ibPrt] = AT_TIMEOUT;
+}
+
+
+void    ResetSendAT(void)
+{
+  uchar p;
+  for (p=0; p<bPORTS; p++)
+  {
+    mpcbSendAT[p] = bSEND_AT_TIMEOUT;
+    mpstSendAT[p] = AT_TIMEOUT;
+  }
+}
+
 
 
 void    SlaveModem_1Hz(void)
