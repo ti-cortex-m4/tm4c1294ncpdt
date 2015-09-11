@@ -20,6 +20,7 @@ KEY_RESET.C
 #include "../digitals/phones.h"
 #include "../devices/devices_init.h"
 #include "../serial/speeds.h"
+#include "../serial/input_mode_reset.h"
 #include "../serial/flow.h"
 #include "../output/esc/esc.h"
 #include "../output/unified/uni.h"
@@ -146,6 +147,7 @@ void    key_SetReset(void)
           ResetPhones();
           ResetProfile();
           ResetSpeeds();
+          ResetInputModeReset();
           ResetEsc();
           ResetUni();
           ResetFlow();
