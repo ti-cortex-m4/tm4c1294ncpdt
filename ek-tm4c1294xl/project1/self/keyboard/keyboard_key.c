@@ -90,6 +90,7 @@ KEYBOARD_KEY.C
 #include "esc/key_machines_esc.h"
 #include "esc/key_block_esc.h"
 #include "serial/key_input_mode_reset.h"
+#include "serial/key_slave_modem.h"
 #include "unified/key_strict_uni.h"
 #include "unified/key_enbl_pass_uni.h"
 #include "unified/key_max_delay_uni.h"
@@ -307,6 +308,7 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
+      case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
@@ -583,6 +585,7 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
+      case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
@@ -778,6 +781,7 @@ void    Keyboard_Key(void)
       case wSET_PLC_U_SHUTDOWN: key_SetPlcUShutdown();  break;
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
+      case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
