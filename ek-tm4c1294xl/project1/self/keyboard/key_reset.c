@@ -21,6 +21,7 @@ KEY_RESET.C
 #include "../devices/devices_init.h"
 #include "../serial/speeds.h"
 #include "../serial/input_mode_reset.h"
+#include "../serial/slave_modem.h"
 #include "../serial/flow.h"
 #include "../output/esc/esc.h"
 #include "../output/unified/uni.h"
@@ -148,6 +149,7 @@ void    key_SetReset(void)
           ResetProfile();
           ResetSpeeds();
           ResetInputModeReset();
+          ResetSlaveModem();
           ResetEsc();
           ResetUni();
           ResetFlow();
