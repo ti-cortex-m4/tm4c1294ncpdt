@@ -18,6 +18,7 @@ SERIAL2.C
 #include "../serial/flow.h"
 #include "../serial/ports.h"
 #include "../serial/bulk.h"
+#include "../serial/slave_modem.h"
 #include "../time/delay.h"
 #include "../kernel/crc-16.h"
 #include "../uarts.h"
@@ -180,6 +181,11 @@ uint32_t ui32Status;
 
       cwIn2++;
       bIn2 = bT;
+
+      if (fSendAT == 1)
+      {
+        UARTIntHandler_SlaveModem(2);
+      }
 
       if ((mppoPorts[2].enStream == STR_SLAVECRC) || (IsFlow2() == 1))
       {

@@ -17,6 +17,7 @@ TODO: volatile
 #include "../serial/flow.h"
 #include "../serial/ports.h"
 #include "../serial/bulk.h"
+#include "../serial/slave_modem.h"
 #include "../kernel/crc-16.h"
 #include "../uarts.h"
 #include "serial.h"
@@ -174,6 +175,11 @@ uint32_t ui32Status;
 
       cwIn1++;
       bIn1 = bT;
+
+      if ((fSendAT == 1) && (IsFlow1() == 0))
+      {
+        UARTIntHandler_SlaveModem(1);
+      }
 
       if ((mppoPorts[1].enStream == STR_SLAVECRC) || (IsFlow1() == 1))
       {

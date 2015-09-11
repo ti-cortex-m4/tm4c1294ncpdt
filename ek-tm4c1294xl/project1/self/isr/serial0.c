@@ -17,6 +17,7 @@ SERIAL0.C
 #include "../serial/flow.h"
 #include "../serial/ports.h"
 #include "../serial/bulk.h"
+#include "../serial/slave_modem.h"
 #include "../kernel/crc-16.h"
 #include "../uarts.h"
 #include "serial.h"
@@ -174,6 +175,11 @@ uint32_t ui32Status;
 
       cwIn0++;
       bIn0 = bT;
+
+      if ((fSendAT == 1) && (IsFlow0() == 0))
+      {
+        UARTIntHandler_SlaveModem(0);
+      }
 
       if ((mppoPorts[0].enStream == STR_SLAVECRC) || (IsFlow0() == 1))
       {
