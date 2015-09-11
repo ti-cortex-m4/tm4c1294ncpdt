@@ -231,7 +231,7 @@ void    MakeExtended1(void)
 
           MakeExtended6(c, db);
           MakeExtended7(c, db);
-          MakeDiagram(c, db);
+//          MakeDiagram(c, db);
 
           mpcwEscS_OK[c]++;
           /*AddDigRecord(EVE_ESC_S_DATA);*/
