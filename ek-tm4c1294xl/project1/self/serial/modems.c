@@ -283,7 +283,7 @@ void    ModemDTROff(void)
 
 
 
-void    Local(void)
+void    RunLocal(void)
 {
   if (mpSerial[ibPort] == SER_LOCAL)
   {
@@ -304,19 +304,19 @@ void    Local(void)
 }
 
 
-void    RunLocal(void)
+void    RunLocal_All(void)
 {
   ibPort = 0;
-  Local();
+  RunLocal();
 
   ibPort = 1;
-  Local();
+  RunLocal();
 
   ibPort = 2;
-  Local();
+  RunLocal();
 
   ibPort = 3;
-  Local();
+  RunLocal();
 }
 
 

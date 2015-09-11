@@ -22,6 +22,7 @@ RESPONSE252_CRC,C
 #include "../output/out_flash.h"
 #include "../kernel/asserts.h"
 #include "../output/profile/out_profile_link.h"
+#include "../serial/slave_modem.h"
 
 
 

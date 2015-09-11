@@ -7,6 +7,7 @@ SLAVE_MODEM.C
 #include "../main.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
+#include "../serial/ports_devices.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
 #include "../display/display.h"
@@ -86,7 +87,7 @@ static void SendAT(void)
 
 
 
-static void SlaveModem(void)
+static void RunSlaveModem(void)
 {
   if ((fSlaveModem == true) && (mpstSendAT[ibPort] == AT_ANSWER))
   {
@@ -107,19 +108,19 @@ static void SlaveModem(void)
 }
 
 
-void    SlaveModem_All(void)
+void    RunSlaveModem_All(void)
 {
   ibPort = 0;
-  SlaveModem();
+  RunSlaveModem();
 
   ibPort = 1;
-  SlaveModem();
+  RunSlaveModem();
 
   ibPort = 2;
-  SlaveModem();
+  RunSlaveModem();
 
   ibPort = 3;
-  SlaveModem();
+  RunSlaveModem();
 }
 
 
@@ -161,9 +162,9 @@ void    OutSlaveModem(void)
   InitPushCRC();
 
   PushBool(fSlaveModem);
-  PushChar(fSendAT)
-  Push(&mpcbSendAT, sizeof(mpcbSendAT))
-  Push(&mpstSendAT, sizeof(mpstSendAT))
+  PushChar(fSendAT);
+  Push(&mpcbSendAT, sizeof(mpcbSendAT));
+  Push(&mpstSendAT, sizeof(mpstSendAT));
 
   Output(1+1+4+4);
 }
