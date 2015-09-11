@@ -181,7 +181,9 @@ int     main(void)
     RunDevices();
     RunInfrared();
     RunKeyboard();
-    RunLocal();
+
+    RunLocal_All();
+    RunSlaveModem_All();
 
     RunResponseCRC_All();
     RunResponseEsc_All();
