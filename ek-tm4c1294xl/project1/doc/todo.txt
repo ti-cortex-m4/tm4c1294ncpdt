@@ -48,3 +48,5 @@ remove external headers
 answer_at
 bulk
 hhr100
+
+записано/прочитано байтов (страниц) в секунду
