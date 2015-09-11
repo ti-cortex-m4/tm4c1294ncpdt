@@ -36,6 +36,7 @@ params
 вывод дампа обмена со счетчиком
 
 sem2reader расчет макс. мощности по получасам
+sem2reader фильтрация по названию
 
 output - from mem_profile
 
