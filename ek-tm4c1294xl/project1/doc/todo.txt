@@ -51,3 +51,7 @@ bulk
 hhr100
 
 записано/прочитано байтов (страниц) в секунду
+
+direct flash2
+profiles /4
+pdf
