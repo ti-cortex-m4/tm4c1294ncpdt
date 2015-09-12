@@ -216,7 +216,7 @@ bool    AddKeyRecord(event  ev)
     case EVE_INQ_CORRECT1:
     case EVE_INQ_CORRECT2:
     case EVE_INQ_CORRECT4:
-    case EVE_PROGRAM_2:     Put(0, (uchar *) &tiRecordTime, sizeof(time));
+    case EVE_PROGRAM_2:     Put(0, (uchar *) &tiRecordTime, sizeof(time)); break;
   }
 
   CloseRecord(KEY_RECORD, i);
