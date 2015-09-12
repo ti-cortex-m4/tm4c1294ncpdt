@@ -217,6 +217,9 @@ bool    AddKeyRecord(event  ev)
     case EVE_INQ_CORRECT2:
     case EVE_INQ_CORRECT4:
     case EVE_PROGRAM_2:     Put(0, (uchar *) &tiRecordTime, sizeof(time)); break;
+
+//    case EVE_SMK_GOODLINK:  memcpy(&reCurr.mpbBuff+0, &tiSMK, sizeof(time)); break;
+//    case EVE_SMK_GOODSMK_1: memcpy(&reCurr.mpbBuff+0, &tiAlt, sizeof(time)); break;
   }
 
   CloseRecord(KEY_RECORD, i);
