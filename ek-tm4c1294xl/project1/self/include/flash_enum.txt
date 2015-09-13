@@ -35,12 +35,12 @@ typedef enum
   PH2_RECORD            = MOD_RECORD + bRECORD_PAGES,
   AUX_RECORD            = PH2_RECORD + bRECORD_PAGES,
 
-  DIAGRAM_HHR_VALUES    = AUX_RECORD + wRECORD2_PAGES,
-
-  LOCAL_END             = DIAGRAM_HHR_VALUES + DIAGRAM_PAGES,
+  LOCAL_END             = AUX_RECORD + wRECORD2_PAGES,
   LOCAL_BEGIN           = wPAGES,
 
   PRIVATE               = LOCAL_BEGIN,
 
-  FLASH_END             = PRIVATE + 1
+  DIAGRAM_HHR_VALUES    = PRIVATE + 1,
+
+  FLASH_END             = DIAGRAM_HHR_VALUES + DIAGRAM_PAGES
 } flash;
