@@ -100,10 +100,27 @@ void    MakeDiagram(uchar  ibCan, double  db)
 
 
 
+static uint GetDayHouIndex_Diagram(uchar  ibDay)
+{
+  // индекс на первый получас текущих суток
+  uint w = (wHOURS_DIAGRAM+iwHardHou-GetCurrHouIndex()) % wHOURS_DIAGRAM;
+
+  // индексы на первые получасы суток назад
+  uchar i;
+  for (i=0; i<ibDay; i++)
+  {
+    w = (wHOURS_DIAGRAM+w-48) % wHOURS_DIAGRAM;
+  }
+
+  // индекс на первый получас требуемых суток
+  return w;
+}
+
+
 void    OutDiagram(bool  fDouble)
 {
   if (bInBuff6 > wHOURS_DIAGRAM/48) { Result(bRES_BADADDRESS); return; }
-  uint iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHou = GetDayHouIndex_Diagram(bInBuff6);
 
   InitPushPtr();
   uint wSize = 0;
@@ -145,7 +162,7 @@ void    OutDiagram(bool  fDouble)
       } 
     }
           
-    if (++iwHou >= wHOURS) iwHou = 0;
+    if (++iwHou >= wHOURS_DIAGRAM) iwHou = 0;
   }      
 
   OutptrOutBuff(wSize);
