@@ -48,20 +48,21 @@ uchar   GetCurrHouIndex(void)
 }
 
 
-// TODO rename возвращает индекс на первый получас требуемых суток назад
-uint    GetDayHouIndex(uchar  bDay)
+// TODO rename индекс на первый получас требуемых суток назад
+uint    GetDayHouIndex(uchar  ibDay)
 {
-uchar   i;
-uint    j;
-
   // индекс на первый получас текущих суток
-  j = (wHOURS+iwHardHou-GetCurrHouIndex()) % wHOURS;
+  uint w = (wHOURS+iwHardHou-GetCurrHouIndex()) % wHOURS;
 
   // индексы на первые получасы суток назад
-  for (i=0; i<bDay; i++) j = (wHOURS+j-48) % wHOURS;
+  uchar i;
+  for (i=0; i<ibDay; i++)
+  {
+    w = (wHOURS+w-48) % wHOURS;
+  }
 
   // индекс на первый получас требуемых суток
-  return(j);
+  return w;
 }
 
 

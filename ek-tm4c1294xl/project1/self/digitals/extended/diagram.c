@@ -100,6 +100,7 @@ void    MakeDiagram(uchar  ibCan, double  db)
 
 
 
+// индекс на первый получас требуемых суток назад
 static uint GetDayHouIndex_Diagram(uchar  ibDay)
 {
   // индекс на первый получас текущих суток
