@@ -41,7 +41,7 @@ void    NextMinute30(void)
 
   MakeLimits();
   NextHouLimitsAux();
-//  NextHouDiagram();
+  NextHouDiagram();
   NextHhrInputModeReset();
 
   if (boMntParams == false) NextParamsTime();
