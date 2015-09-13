@@ -10,6 +10,7 @@ DIAGRAM.C
 #include "../../memory/mem_energy.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_ports.h"
+#include "../../hardware/watchdog.h"
 #include "../../digitals/digitals.h"
 #include "../../realtime/realtime.h"
 #include "../../energy.h"
@@ -43,6 +44,7 @@ bool    ClearDiagram(void)
   {
     if (SafePageErase(wPageOut) == 0) return(0);
     if (GetFlashStatus() != 0) return(0);
+    ResetWatchdog();
   }
 
   return 1;
