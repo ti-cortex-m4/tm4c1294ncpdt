@@ -53,3 +53,5 @@ hhr100
 
 direct flash2
 profiles /4
+
+flash/nvram split address/value
