@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_Delay_BULK.C
+KEY_BULK_DELAY.C
 
  
 ------------------------------------------------------------------------------*/
@@ -37,7 +37,7 @@ void    ShowDelayBulk(void)
 
 
 
-void    key_SetDelayBulk(void)
+void    key_SetBulkDelay(void)
 {
   if (bKey == bKEY_ENTER)
   {

@@ -313,7 +313,7 @@ void    Keyboard_Key(void)
 #ifdef  BULK
       case wSET_BULK_ENBL:      key_SetBulkEnable();    break;
       case wSET_BULK_SIZE:      key_SetBulkSize();      break;
-      case wSET_BULK_DELAY:     key_SetDelayBulk();     break;
+      case wSET_BULK_DELAY:     key_SetBulkDelay();     break;
 #endif
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
@@ -596,7 +596,7 @@ void    Keyboard_Key(void)
 #ifdef  BULK
       case wSET_BULK_ENBL:      key_SetBulkEnable();    break;
       case wSET_BULK_SIZE:      key_SetBulkSize();      break;
-      case wSET_BULK_DELAY:     key_SetDelayBulk();     break;
+      case wSET_BULK_DELAY:     key_SetBulkDelay();     break;
 #endif
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
@@ -798,7 +798,7 @@ void    Keyboard_Key(void)
 #ifdef  BULK
       case wSET_BULK_ENBL:      key_SetBulkEnable();    break;
       case wSET_BULK_SIZE:      key_SetBulkSize();      break;
-      case wSET_BULK_DELAY:     key_SetDelayBulk();     break;
+      case wSET_BULK_DELAY:     key_SetBulkDelay();     break;
 #endif
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;

@@ -10,6 +10,7 @@ BULK.H
 
 extern  cache const             chBulkEnbl;
 extern  cache const             chBulkSize;
+extern  cache const             chBulkMaxDelay;
 
 
 
