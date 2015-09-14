@@ -9,6 +9,7 @@ BULK.H
 
 
 extern  cache const             chBulkEnbl;
+extern  cache const             chBulkSize;
 
 
 

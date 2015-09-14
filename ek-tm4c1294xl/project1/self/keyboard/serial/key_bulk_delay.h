@@ -4,8 +4,4 @@ _DELAY_BULK.H
  
 ------------------------------------------------------------------------------*/
 
-#include "../../serial/bulk.h"
-
-
-
 void    key_SetDelayBulk(void);

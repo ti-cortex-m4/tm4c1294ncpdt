@@ -14,12 +14,14 @@ BULK.C
 
 
 cache const             chBulkEnbl = {BULK_ENBL, &fBulkEnbl, sizeof(bool)};
+cache const             chBulkSize = {BULK_SIZE, &bMaxBulk, sizeof(uchar)};
 
 
 
 void    InitBulk(void)
 {
   LoadCacheBool(&chBulkEnbl, false);
+  LoadCacheChar(&chBulkSize, 1, 250, 100);
 }
 
 
@@ -29,6 +31,8 @@ void    ResetBulk(void)
   SaveCache(&chBulkEnbl);
 
   bMaxBulk = 100;
+  SaveCache(&chBulkSize);
+
   wMaxBulkDelay = wFREQUENCY_T0;
 }
 
