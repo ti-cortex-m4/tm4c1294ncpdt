@@ -1,10 +1,12 @@
 /*------------------------------------------------------------------------------
 BULK.C
 
-
+ 'Отчет №81 от 10.03.2012'
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "inc/hw_ints.h"
+#include "driverlib/interrupt.h"
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
 #include "../nvram/cache.h"
@@ -152,7 +154,7 @@ void    RunBulk0(void)
     if (cwBulkDelay[0] == 0)
     {
       mpSerial[0] = mpSerial_Bulk[0];
-//      TI = 1;
+      IntPendSet(INT_UART0);
     }
     else cwBulkDelay[0]--;
   }
@@ -168,7 +170,7 @@ void    RunBulk1(void)
     if (cwBulkDelay[1] == 0)
     {
       mpSerial[1] = mpSerial_Bulk[1];
-//      EXIF |= 0x10;
+      IntPendSet(INT_UART1);
     }
     else cwBulkDelay[1]--;
   }
@@ -184,7 +186,7 @@ void    RunBulk2(void)
     if (cwBulkDelay[2] == 0)
     {
       mpSerial[2] = mpSerial_Bulk[2];
-//      TI1 = 1;
+      IntPendSet(INT_UART2);
     }
     else cwBulkDelay[2]--;
   }
@@ -200,7 +202,7 @@ void    RunBulk3(void)
     if (cwBulkDelay[3] == 0)
     {
       mpSerial[3] = mpSerial_Bulk[3];
-//      EXIF |= 0x40;
+      IntPendSet(INT_UART3);
     }
     else cwBulkDelay[3]--;
   }
