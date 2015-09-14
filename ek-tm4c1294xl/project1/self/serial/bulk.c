@@ -14,7 +14,7 @@ BULK.C
 
 
 cache const             chBulkEnbl = {BULK_ENBL, &fBulkEnbl, sizeof(bool)};
-cache const             chBulkSize = {BULK_SIZE, &bMaxBulk, sizeof(uchar)};
+cache const             chBulkSize = {BULK_SIZE, &bBulkSize, sizeof(uchar)};
 
 
 
@@ -30,7 +30,7 @@ void    ResetBulk(void)
   fBulkEnbl = false;
   SaveCache(&chBulkEnbl);
 
-  bMaxBulk = 100;
+  bBulkSize = 100;
   SaveCache(&chBulkSize);
 
   wMaxBulkDelay = wFREQUENCY_T0;
@@ -41,7 +41,7 @@ void    ResetBulk(void)
 #ifdef  BULK
 bool    BulkEnabled(void)
 {
-  return (fBulkEnbl == true) && (bMaxBulk > 0);
+  return (fBulkEnbl == true) && (bBulkSize > 0);
 }
 #endif
 
@@ -83,7 +83,7 @@ void    AnswerBulk3(void)
 void    OutByteBulk0(void)
 {
 #ifdef  BULK
-  if (BulkEnabled() && (++cbBulk[0] >= bMaxBulk))
+  if (BulkEnabled() && (++cbBulk[0] >= bBulkSize))
   {
     cbBulk[0] = 0;
     cwBulkDelay[0] = wMaxBulkDelay;
@@ -98,7 +98,7 @@ void    OutByteBulk0(void)
 void    OutByteBulk1(void)
 {
 #ifdef  BULK
-  if (BulkEnabled() && (++cbBulk[1] >= bMaxBulk))
+  if (BulkEnabled() && (++cbBulk[1] >= bBulkSize))
   {
     cbBulk[1] = 0;
     cwBulkDelay[1] = wMaxBulkDelay;
@@ -113,7 +113,7 @@ void    OutByteBulk1(void)
 void    OutByteBulk2(void)
 {
 #ifdef  BULK
-  if (BulkEnabled() && (++cbBulk[2] >= bMaxBulk))
+  if (BulkEnabled() && (++cbBulk[2] >= bBulkSize))
   {
     cbBulk[2] = 0;
     cwBulkDelay[2] = wMaxBulkDelay;
@@ -128,7 +128,7 @@ void    OutByteBulk2(void)
 void    OutByteBulk3(void)
 {
 #ifdef  BULK
-  if (BulkEnabled() && (++cbBulk[3] >= bMaxBulk))
+  if (BulkEnabled() && (++cbBulk[3] >= bBulkSize))
   {
     cbBulk[3] = 0;
     cwBulkDelay[3] = wMaxBulkDelay;

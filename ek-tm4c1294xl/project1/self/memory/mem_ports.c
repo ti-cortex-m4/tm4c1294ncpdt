@@ -106,7 +106,7 @@ send_at                 mpstSendAT[bPORTS];
 bool                    fBulkEnbl;
 
 // размеры пакета
-uchar                   bMaxBulk, cbBulk[bPORTS];
+uchar                   bBulkSize, cbBulk[bPORTS];
 
 // счетчики таймаута
 uint                    wMaxBulkDelay, cwBulkDelay[bPORTS];

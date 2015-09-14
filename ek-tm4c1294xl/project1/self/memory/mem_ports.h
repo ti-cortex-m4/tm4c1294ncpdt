@@ -77,7 +77,7 @@ extern  send_at                 mpstSendAT[bPORTS];
 
 extern  bool                    fBulkEnbl;
 
-extern  uchar                   bMaxBulk, cbBulk[bPORTS];
+extern  uchar                   bBulkSize, cbBulk[bPORTS];
 
 extern  uint                    wMaxBulkDelay, cwBulkDelay[bPORTS];
 
