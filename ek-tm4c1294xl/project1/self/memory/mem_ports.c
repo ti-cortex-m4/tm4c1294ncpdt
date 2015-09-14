@@ -99,3 +99,17 @@ uchar                   mpcbSendAT[bPORTS];
 
 // массив состояний
 send_at                 mpstSendAT[bPORTS];
+
+
+
+// флаг включения пакетного режима
+boolean                 boEnableBulk;
+
+// размеры пакета
+uchar                   bMaxBulk, cbBulk[bPORTS];
+
+// счетчики таймаута
+uint                    wMaxBulkDelay, cwBulkDelay[bPORTS];
+
+// буфера
+serial                  mpSerial_Bulk[bPORTS];
