@@ -55,3 +55,8 @@ direct flash2
 profiles /4
 
 flash/nvram split address/value
+
+Git tags
+
+extended console + server push
+? show message + profile
