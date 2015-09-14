@@ -310,6 +310,12 @@ void    Keyboard_Key(void)
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
 
+#ifdef  BULK
+      case wSET_BULK_ENBL:      key_SetEnableBulk();    break;
+      case wSET_BULK_SIZE:      key_SetSizeBulk();      break;
+      case wSET_BULK_DELAY:     key_SetDelayBulk();     break;
+#endif
+
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
@@ -587,6 +593,12 @@ void    Keyboard_Key(void)
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
 
+#ifdef  BULK
+      case wSET_BULK_ENBL:      key_SetEnableBulk();    break;
+      case wSET_BULK_SIZE:      key_SetSizeBulk();      break;
+      case wSET_BULK_DELAY:     key_SetDelayBulk();     break;
+#endif
+
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
       case wSET_MAX_DELAY_UNI:      key_SetMaxDelayUni();      break;
@@ -782,6 +794,12 @@ void    Keyboard_Key(void)
 
       case wSET_INPUT_MODE_RESET: key_SetInputModeReset(); break;
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
+
+#ifdef  BULK
+      case wSET_BULK_ENBL:      key_SetEnableBulk();    break;
+      case wSET_BULK_SIZE:      key_SetSizeBulk();      break;
+      case wSET_BULK_DELAY:     key_SetDelayBulk();     break;
+#endif
 
       case wSET_STRICT_UNI:         key_SetStrictUni();        break;
       case wSET_ENBL_PASS_UNI:      key_SetEnblPassUni();      break;
