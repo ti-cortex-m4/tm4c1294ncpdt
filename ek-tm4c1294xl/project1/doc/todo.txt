@@ -53,7 +53,5 @@ hhr100
 
 profiles /4
 
-flash/nvram split address/value
-
 extended console + server push
-? show message + profile
+console in local loops
