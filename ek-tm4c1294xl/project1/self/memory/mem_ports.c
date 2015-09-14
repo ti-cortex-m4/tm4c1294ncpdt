@@ -103,7 +103,7 @@ send_at                 mpstSendAT[bPORTS];
 
 
 // флаг включения пакетного режима
-boolean                 boEnableBulk;
+bool                    boEnableBulk;
 
 // размеры пакета
 uchar                   bMaxBulk, cbBulk[bPORTS];

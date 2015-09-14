@@ -5,14 +5,15 @@ BULK.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../mem_ports.h"
 #include "bulk.h"
 
 
 
 #ifdef  BULK
-bit     BulkEnabled(void)
+bool    BulkEnabled(void)
 {
-  return (boEnableBulk == boTrue) && (bMaxBulk > 0);
+  return (boEnableBulk == true) && (bMaxBulk > 0);
 }
 #endif
 
@@ -175,6 +176,11 @@ void    RunBulk3(void)
 #endif
 }
 
+
+
+void    InitBulk(void)
+{
+}
 
 
 void    ResetBulk(void)

@@ -23,4 +23,5 @@ void    RunBulk1(void);
 void    RunBulk2(void);
 void    RunBulk3(void);
 
+void    InitBulk(void);
 void    ResetBulk(void);

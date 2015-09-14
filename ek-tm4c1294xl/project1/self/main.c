@@ -68,6 +68,7 @@ MAIN,C
 #include "serial/speeds.h"
 #include "serial/input_mode_reset.h"
 #include "serial/slave_modem.h"
+#include "serial/bulk.h"
 #include "serial/flow.h"
 #include "output/esc/esc.h"
 #include "output/esc/response_esc.h"
@@ -134,6 +135,7 @@ int     main(void)
   InitSpeeds();
   InitInputModeReset();
   InitSlaveModem();
+  InitBulk();
   InitEsc();
   InitUni();
   InitFlow();
