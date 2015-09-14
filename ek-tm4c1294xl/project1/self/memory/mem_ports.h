@@ -75,7 +75,7 @@ extern  send_at                 mpstSendAT[bPORTS];
 
 
 
-extern  bool                    boEnableBulk;
+extern  bool                    fBulkEnbl;
 
 extern  uchar                   bMaxBulk, cbBulk[bPORTS];
 

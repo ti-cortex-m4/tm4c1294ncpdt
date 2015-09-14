@@ -13,7 +13,7 @@ BULK.C
 
 
 
-cache const             chBulkEnbl = {BULK_ENBL, &boEnableBulk, sizeof(bool)};
+cache const             chBulkEnbl = {BULK_ENBL, &fBulkEnbl, sizeof(bool)};
 
 
 
@@ -25,7 +25,7 @@ void    InitBulk(void)
 
 void    ResetBulk(void)
 {
-  boEnableBulk = false;
+  fBulkEnbl = false;
   SaveCache(&chBulkEnbl);
 
   bMaxBulk = 100;
@@ -37,7 +37,7 @@ void    ResetBulk(void)
 #ifdef  BULK
 bool    BulkEnabled(void)
 {
-  return (boEnableBulk == true) && (bMaxBulk > 0);
+  return (fBulkEnbl == true) && (bMaxBulk > 0);
 }
 #endif
 
