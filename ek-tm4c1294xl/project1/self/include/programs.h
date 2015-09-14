@@ -303,6 +303,10 @@ PROGRAMS.H
 #define wSET_INPUT_MODE_RESET       416
 #define bSET_SLAVE_MODEM            198
 
+#define wSET_BULK_ENBL              411
+#define wSET_BULK_SIZE              412
+#define wSET_BULK_DELAY             413
+
 #define wSET_STRICT_UNI             417
 #define wSET_ENBL_PASS_UNI          418
 #define wSET_MAX_DELAY_UNI          422
