@@ -48,7 +48,7 @@ begin
             PrevAddr := Trim(Copy(z, j+1, Length(z)-j));
 
             Target1.Add('  ' + PackStrR(PrevName, 21) + ' = ' + PrevAddr + ',');
-            Target2.Add('  PUSH_ENUM(' + PrevName + ')');
+            Target2.Add('  PUSH_VALUE(' + PrevName + ')');
 
             State := FIRST;
             continue;
@@ -68,11 +68,11 @@ begin
               State := NEXT;
 
               Target1.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ',');
-              Target2.Add('  PUSH_ENUM(' + CurrName + ')');
+              Target2.Add('  PUSH_ADDRESS(' + CurrName + ')');
             end
             else begin
               Target1.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ' + ' + PrevAddr + ',');
-              Target2.Add('  PUSH_ENUM(' + CurrName + ')');
+              Target2.Add('  PUSH_ADDRESS(' + CurrName + ')');
             end;
 
             PrevName := CurrName;
@@ -89,7 +89,7 @@ begin
           CurrName := z;
 
           Target1.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ' + ' + PrevAddr);
-          Target2.Add('  PUSH_ENUM(' + CurrName + ')');
+          Target2.Add('  PUSH_VALUE(' + CurrName + ')');
 
           State := LAST;
           continue;
