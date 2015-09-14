@@ -22,9 +22,9 @@ void    OutNvramStack(void)
 
   InitPushCRC();
 
-  PUSH_ENUM(NVRAM_BEGIN)
-  PUSH_ENUM(NVRAM_END)
-  PUSH_ENUM(dwNVRAM_BYTES)
+  PUSH_VALUE(NVRAM_BEGIN)
+  PUSH_VALUE(NVRAM_END)
+  PUSH_VALUE(dwNVRAM_BYTES)
 
   PushChar(0x0D); PushChar(0x0A);
 
