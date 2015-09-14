@@ -15,6 +15,7 @@ BULK.C
 
 cache const             chBulkEnbl = {BULK_ENBL, &fBulkEnbl, sizeof(bool)};
 cache const             chBulkSize = {BULK_SIZE, &bBulkSize, sizeof(uchar)};
+cache const             chBulkMaxDelay = {BULK_MAX_DELAY, &wBulkMaxDelay, sizeof(uint)};
 
 
 
@@ -22,6 +23,7 @@ void    InitBulk(void)
 {
   LoadCacheBool(&chBulkEnbl, false);
   LoadCacheChar(&chBulkSize, 1, 250, 100);
+  LoadCacheInt(&chBulkMaxDelay, 1, 1000, wFREQUENCY_T0);
 }
 
 
@@ -33,7 +35,8 @@ void    ResetBulk(void)
   bBulkSize = 100;
   SaveCache(&chBulkSize);
 
-  wMaxBulkDelay = wFREQUENCY_T0;
+  wBulkMaxDelay = wFREQUENCY_T0;
+  SaveCache(&chBulkMaxDelay);
 }
 
 
@@ -86,7 +89,7 @@ void    OutByteBulk0(void)
   if (BulkEnabled() && (++cbBulk[0] >= bBulkSize))
   {
     cbBulk[0] = 0;
-    cwBulkDelay[0] = wMaxBulkDelay;
+    cwBulkDelay[0] = wBulkMaxDelay;
 
     mpSerial_Bulk[0] = mpSerial[0];
     mpSerial[0] = SER_BULK; 
@@ -101,7 +104,7 @@ void    OutByteBulk1(void)
   if (BulkEnabled() && (++cbBulk[1] >= bBulkSize))
   {
     cbBulk[1] = 0;
-    cwBulkDelay[1] = wMaxBulkDelay;
+    cwBulkDelay[1] = wBulkMaxDelay;
 
     mpSerial_Bulk[1] = mpSerial[1];
     mpSerial[1] = SER_BULK; 
@@ -116,7 +119,7 @@ void    OutByteBulk2(void)
   if (BulkEnabled() && (++cbBulk[2] >= bBulkSize))
   {
     cbBulk[2] = 0;
-    cwBulkDelay[2] = wMaxBulkDelay;
+    cwBulkDelay[2] = wBulkMaxDelay;
 
     mpSerial_Bulk[2] = mpSerial[2];
     mpSerial[2] = SER_BULK; 
@@ -131,7 +134,7 @@ void    OutByteBulk3(void)
   if (BulkEnabled() && (++cbBulk[3] >= bBulkSize))
   {
     cbBulk[3] = 0;
-    cwBulkDelay[3] = wMaxBulkDelay;
+    cwBulkDelay[3] = wBulkMaxDelay;
 
     mpSerial_Bulk[3] = mpSerial[3];
     mpSerial[3] = SER_BULK;

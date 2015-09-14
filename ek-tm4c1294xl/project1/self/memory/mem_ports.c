@@ -109,7 +109,7 @@ bool                    fBulkEnbl;
 uchar                   bBulkSize, cbBulk[bPORTS];
 
 // счетчики таймаута
-uint                    wMaxBulkDelay, cwBulkDelay[bPORTS];
+uint                    wBulkMaxDelay, cwBulkDelay[bPORTS];
 
 // буфера
 serial                  mpSerial_Bulk[bPORTS];

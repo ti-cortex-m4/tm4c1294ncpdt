@@ -79,6 +79,6 @@ extern  bool                    fBulkEnbl;
 
 extern  uchar                   bBulkSize, cbBulk[bPORTS];
 
-extern  uint                    wMaxBulkDelay, cwBulkDelay[bPORTS];
+extern  uint                    wBulkMaxDelay, cwBulkDelay[bPORTS];
 
 extern  serial                  mpSerial_Bulk[bPORTS];
