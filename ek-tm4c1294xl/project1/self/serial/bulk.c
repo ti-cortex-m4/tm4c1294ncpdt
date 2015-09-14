@@ -5,8 +5,31 @@ BULK.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../mem_ports.h"
+#include "../memory/mem_ports.h"
+#include "../nvram/cache.h"
+#include "../nvram/cache2.h"
 #include "bulk.h"
+
+
+
+cache const             chBulkEnbl = {BULK_ENBL, &boEnableBulk, sizeof(bool)};
+
+
+
+void    InitBulk(void)
+{
+  LoadCacheBool(&chBulkEnbl, false);
+}
+
+
+void    ResetBulk(void)
+{
+  boEnableBulk = false;
+  SaveCache(&chBulkEnbl);
+
+  bMaxBulk = 100;
+  wMaxBulkDelay = wFREQUENCY_T0;
+}
 
 
 
@@ -121,7 +144,7 @@ void    RunBulk0(void)
     if (cwBulkDelay[0] == 0)
     {
       mpSerial[0] = mpSerial_Bulk[0];
-      TI = 1;  
+//      TI = 1;
     }
     else cwBulkDelay[0]--;
   }
@@ -137,7 +160,7 @@ void    RunBulk1(void)
     if (cwBulkDelay[1] == 0)
     {
       mpSerial[1] = mpSerial_Bulk[1];
-      EXIF |= 0x10;
+//      EXIF |= 0x10;
     }
     else cwBulkDelay[1]--;
   }
@@ -153,7 +176,7 @@ void    RunBulk2(void)
     if (cwBulkDelay[2] == 0)
     {
       mpSerial[2] = mpSerial_Bulk[2];
-      TI1 = 1;
+//      TI1 = 1;
     }
     else cwBulkDelay[2]--;
   }
@@ -169,22 +192,9 @@ void    RunBulk3(void)
     if (cwBulkDelay[3] == 0)
     {
       mpSerial[3] = mpSerial_Bulk[3];
-      EXIF |= 0x40;
+//      EXIF |= 0x40;
     }
     else cwBulkDelay[3]--;
   }
 #endif
-}
-
-
-
-void    InitBulk(void)
-{
-}
-
-
-void    ResetBulk(void)
-{
-  bMaxBulk = 100;
-  wMaxBulkDelay = wFREQUENCY_T0;
 }
