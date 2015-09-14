@@ -6,6 +6,7 @@ BULK.C
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
+#include "../serial/ports.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
 #include "bulk.h"
