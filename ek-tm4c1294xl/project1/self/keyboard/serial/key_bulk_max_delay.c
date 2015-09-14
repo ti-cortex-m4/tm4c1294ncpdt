@@ -11,7 +11,7 @@ KEY_BULK_MAX_DELAY.C
 
 
 
-#ifdef  BULK
+#ifdef ENABLE_BULK
 
 //                                          0123456789ABCDEF
 static char const       szMessage1[]     = "Таймаут пакетной ",
