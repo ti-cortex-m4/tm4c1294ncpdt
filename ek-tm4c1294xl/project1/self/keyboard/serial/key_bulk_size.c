@@ -8,7 +8,6 @@ KEY_BULK_SIZE.C
 #include "../../memory/mem_ports.h"
 #include "../common/key_char_blocked.h"
 #include "../../serial/bulk.h"
-#include "key_bulk_size.h"
 
 
 

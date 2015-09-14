@@ -23,7 +23,7 @@ void    InitBulk(void)
 {
   LoadCacheBool(&chBulkEnbl, false);
   LoadCacheChar(&chBulkSize, 1, 250, 100);
-  LoadCacheInt(&chBulkMaxDelay, 1, 1000, wFREQUENCY_T0);
+  LoadCacheInt(&chBulkMaxDelay, 1, wFREQUENCY_T0, wFREQUENCY_T0);
 }
 
 
