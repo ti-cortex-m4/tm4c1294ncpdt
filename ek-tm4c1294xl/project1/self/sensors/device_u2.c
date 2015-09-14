@@ -44,7 +44,7 @@ void    InitHeaderU_Plc(void)
   else 
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / bPlcUSize) * bPlcUSize;
-    Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
     DelayMsg();
   }
 
