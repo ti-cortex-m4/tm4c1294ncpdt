@@ -43,7 +43,7 @@ void    ResetBulk(void)
 
 
 
-#ifdef  BULK
+#ifdef ENABLE_BULK
 bool    BulkEnabled(void)
 {
   return (fBulkEnbl == true) && (bBulkSize > 0);
@@ -54,7 +54,7 @@ bool    BulkEnabled(void)
 
 void    AnswerBulk0(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   cbBulk[0] = 0;
 #endif
 }
@@ -62,7 +62,7 @@ void    AnswerBulk0(void)
 
 void    AnswerBulk1(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   cbBulk[1] = 0;
 #endif
 }
@@ -70,7 +70,7 @@ void    AnswerBulk1(void)
 
 void    AnswerBulk2(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   cbBulk[2] = 0;
 #endif
 }
@@ -78,7 +78,7 @@ void    AnswerBulk2(void)
 
 void    AnswerBulk3(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   cbBulk[3] = 0;
 #endif
 }
@@ -87,7 +87,7 @@ void    AnswerBulk3(void)
 
 void    OutByteBulk0(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   if (BulkEnabled() && (++cbBulk[0] >= bBulkSize))
   {
     cbBulk[0] = 0;
@@ -102,7 +102,7 @@ void    OutByteBulk0(void)
 
 void    OutByteBulk1(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   if (BulkEnabled() && (++cbBulk[1] >= bBulkSize))
   {
     cbBulk[1] = 0;
@@ -117,7 +117,7 @@ void    OutByteBulk1(void)
 
 void    OutByteBulk2(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   if (BulkEnabled() && (++cbBulk[2] >= bBulkSize))
   {
     cbBulk[2] = 0;
@@ -132,7 +132,7 @@ void    OutByteBulk2(void)
 
 void    OutByteBulk3(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   if (BulkEnabled() && (++cbBulk[3] >= bBulkSize))
   {
     cbBulk[3] = 0;
@@ -148,7 +148,7 @@ void    OutByteBulk3(void)
 
 void    RunBulk0(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   if (BulkEnabled())
   {
     if (cwBulkDelay[0] == 0)
@@ -164,7 +164,7 @@ void    RunBulk0(void)
 
 void    RunBulk1(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   if (BulkEnabled())
   {
     if (cwBulkDelay[1] == 0)
@@ -180,7 +180,7 @@ void    RunBulk1(void)
 
 void    RunBulk2(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   if (BulkEnabled())
   {
     if (cwBulkDelay[2] == 0)
@@ -196,7 +196,7 @@ void    RunBulk2(void)
 
 void    RunBulk3(void)
 {
-#ifdef  BULK
+#ifdef ENABLE_BULK
   if (BulkEnabled())
   {
     if (cwBulkDelay[3] == 0)
