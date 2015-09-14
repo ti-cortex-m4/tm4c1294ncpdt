@@ -94,7 +94,7 @@ KEYBOARD_KEY.C
 #include "../serial/bulk.h"
 #include "serial/key_bulk_enbl.h"
 #include "serial/key_bulk_size.h"
-#include "serial/key_bulk_delay.h"
+#include "serial/key_bulk_max_delay.h"
 #include "unified/key_strict_uni.h"
 #include "unified/key_enbl_pass_uni.h"
 #include "unified/key_max_delay_uni.h"
