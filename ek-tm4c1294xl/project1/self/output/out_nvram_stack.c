@@ -18,7 +18,7 @@ void    OutNvramStack(void)
   InitPushCRC();
 
   uint i;
-  for (i=0; i<3000; i++) PushChar(0);
+  for (i=0; i<4000; i++) PushChar(0);
 
   InitPushCRC();
 
@@ -36,5 +36,5 @@ void    OutNvramStack(void)
 
   #include "../include/out_nvram.txt"
 
-  Output(3000);
+  Output(4000);
 }
