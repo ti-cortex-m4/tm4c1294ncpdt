@@ -72,3 +72,13 @@ extern  bool                fSendAT;
 extern  uchar               mpcbSendAT[bPORTS];
 
 extern  send_at             mpstSendAT[bPORTS];
+
+
+
+extern  boolean                 boEnableBulk;
+
+extern  uchar                   bMaxBulk, cbBulk[bPORTS];
+
+extern  uint                    wMaxBulkDelay, cwBulkDelay[bPORTS];
+
+extern  serial                  mpSerial_Bulk[bPORTS];

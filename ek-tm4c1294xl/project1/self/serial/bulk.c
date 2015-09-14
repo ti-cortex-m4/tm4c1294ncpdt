@@ -12,7 +12,7 @@ BULK.C
 #ifdef  BULK
 bit     BulkEnabled(void)
 {
-  return (boEnableBulk == true) && (bMaxBulk > 0);
+  return (boEnableBulk == boTrue) && (bMaxBulk > 0);
 }
 #endif
 
@@ -179,6 +179,6 @@ void    RunBulk3(void)
 
 void    ResetBulk(void)
 {
-//  bMaxBulk = 100;
-//  wMaxBulkDelay = wFREQUENCY_T0;
+  bMaxBulk = 100;
+  wMaxBulkDelay = wFREQUENCY_T0;
 }
