@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_BULK_DELAY.C
+KEY_BULK_MAX_DELAY.C
 
  
 ------------------------------------------------------------------------------*/
@@ -31,7 +31,7 @@ static void Show(void)
 }
 
 
-void    key_SetBulkDelay(void)
+void    key_SetBulkMaxDelay(void)
 {
   if (bKey == bKEY_ENTER)
   {
