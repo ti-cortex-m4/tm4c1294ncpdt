@@ -235,6 +235,7 @@ typedef enum
   SLAVE_MODEM           = INPUT_MODE_RESET + sizeof(uchar) + bNVRAM_FOOTER,
 
   BULK_ENBL             = SLAVE_MODEM + sizeof(bool) + bNVRAM_FOOTER,
+  BULK_SIZE             = BULK_ENBL + sizeof(bool) + bNVRAM_FOOTER,
 
-  NVRAM_END             = BULK_ENBL + sizeof(bool) + bNVRAM_FOOTER
+  NVRAM_END             = BULK_SIZE + sizeof(uchar) + bNVRAM_FOOTER
 } nvram;
