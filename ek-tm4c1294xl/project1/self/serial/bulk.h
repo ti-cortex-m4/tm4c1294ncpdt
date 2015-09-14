@@ -4,9 +4,16 @@ BULK.H
 
 ------------------------------------------------------------------------------*/
 
-//#define BULK  true
+#define BULK  true
 
 
+
+extern  cache const             chBulkEnbl;
+
+
+
+void    InitBulk(void);
+void    ResetBulk(void);
 
 void    AnswerBulk0(void);
 void    AnswerBulk1(void);
@@ -22,6 +29,3 @@ void    RunBulk0(void);
 void    RunBulk1(void);
 void    RunBulk2(void);
 void    RunBulk3(void);
-
-void    InitBulk(void);
-void    ResetBulk(void);
