@@ -3,38 +3,32 @@ KEY_BULK_DELAY.C
 
  
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "display.h"
-#include        "keyboard.h"
-#include        "keyboard2.h"
-#include        "programs2.h"
-#include        "bulk.h"
+
+#include "../../main.h"
+#include "../../console.h"
+#include "../../memory/mem_program.h"
+#include "../../serial/bulk.h"
 
 
 
 #ifdef  BULK
 
 //                                          0123456789ABCDEF
-message         code    szDelayBulk1     = "Таймаут пакетной ",
-                        szDelayBulk2     = "    передачи     ",
-                        szDelayBulk3     = "     1..1000     ",
-                        szMaskDelayBulk  = "     ____ мс     ";
+static char const       szMessage1[]     = "Таймаут пакетной ",
+                        szMessage2[]     = "    передачи     ",
+                        szMessage3[]     = "     5..1000     ",
+                        szMask[]         = "     ____ мс     ";
 
-uchar           *code   pszDelayBulk[]   = { szDelayBulk1, szDelayBulk2, szDelayBulk3, "" };
-                      
+static char const       *pszMessages[]   = { szMessage1, szMessage2, szMessage3, "" };
 
 
-void    ShowDelayBulk(void)
+
+static void Show(void)
 {
   Clear();
-  iwA = (ulong)1000*wMaxBulkDelay/wFREQUENCY_T0;
-  sprintf(szLo+5,"%4u мс", iwA);
+  uint w = (ulong)1000*wBulkMaxDelay/wFREQUENCY_T0;
+  sprintf(szLo+5,"%4u мс", w);
 }
-
 
 
 void    key_SetBulkDelay(void)
@@ -43,7 +37,7 @@ void    key_SetBulkDelay(void)
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (boEnableBulk == boFalse)
+      if (fBulkEnbl == false)
       { 
         BlockProgram2(wSET_BULK_ENBL, 1);
       }
@@ -52,26 +46,28 @@ void    key_SetBulkDelay(void)
         enKeyboard = KBD_POSTENTER;
         Clear();
 
-        LoadSlide(pszDelayBulk); 
-        ShowDelayBulk();
+        LoadSlide(pszMessages);
+        Show();
       }
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {            
-      iwA = GetLong(5,8);
-      if ((iwA > 0) && (iwA <= 1000))
+      uint w = GetIntLo(5,8);
+      if ((w >= 5) && (w <= 1000))
       {
         enKeyboard = KBD_POSTENTER;
 
-        wMaxBulkDelay = (ulong)iwA*wFREQUENCY_T0/1000;
-        ShowDelayBulk();
+        wBulkMaxDelay = (ulong)w*wFREQUENCY_T0/1000;
+        SaveCache(&chBulkMaxDelay);
+
+        Show();
       }
       else 
       {
         enKeyboard = KBD_INPUT1;
         LongBeep();
 
-        ShowLo(szMaskDelayBulk);        
+        ShowLo(szMask);
       }
     }
     else Beep();
@@ -85,7 +81,7 @@ void    key_SetBulkDelay(void)
       if (enGlobal != GLB_WORK)
       {
         enKeyboard = KBD_INPUT1;
-        ShowLo(szMaskDelayBulk);
+        ShowLo(szMask);
       }
       else Beep();
     }
@@ -101,4 +97,3 @@ void    key_SetBulkDelay(void)
 }
 
 #endif
-*/
