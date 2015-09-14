@@ -311,7 +311,7 @@ void    Keyboard_Key(void)
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
 
 #ifdef  BULK
-      case wSET_BULK_ENBL:      key_SetEnableBulk();    break;
+      case wSET_BULK_ENBL:      key_SetBulkEnable();    break;
       case wSET_BULK_SIZE:      key_SetSizeBulk();      break;
       case wSET_BULK_DELAY:     key_SetDelayBulk();     break;
 #endif
@@ -594,7 +594,7 @@ void    Keyboard_Key(void)
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
 
 #ifdef  BULK
-      case wSET_BULK_ENBL:      key_SetEnableBulk();    break;
+      case wSET_BULK_ENBL:      key_SetBulkEnable();    break;
       case wSET_BULK_SIZE:      key_SetSizeBulk();      break;
       case wSET_BULK_DELAY:     key_SetDelayBulk();     break;
 #endif
@@ -796,7 +796,7 @@ void    Keyboard_Key(void)
       case bSET_SLAVE_MODEM: key_SetSlaveModem(); break;
 
 #ifdef  BULK
-      case wSET_BULK_ENBL:      key_SetEnableBulk();    break;
+      case wSET_BULK_ENBL:      key_SetBulkEnable();    break;
       case wSET_BULK_SIZE:      key_SetSizeBulk();      break;
       case wSET_BULK_DELAY:     key_SetDelayBulk();     break;
 #endif
