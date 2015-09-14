@@ -202,7 +202,7 @@ void    InitHeaderU(void)
   else 
   {
     wBaseCurr = mpcwStartAbs16Can[ibDig];
-    Clear(); sprintf(szLo+3,"начало %2u",wBaseCurr);
+    sprintf(szLo,"   начало %2u    ",wBaseCurr);
     if (boShowMessages == true) DelayMsg();
   }
       
