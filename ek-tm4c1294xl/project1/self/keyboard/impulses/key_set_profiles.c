@@ -43,24 +43,24 @@ static void ShowAnswer(void)
 }
 
 
-void    SetProfiles(uchar  ibXmin, uchar  ibXmax, uint  iwAmin, uint  iwAmax, uint  iwA)
+void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  iwAmin, uint  iwAmax, uint  wImp)
 {
   ShowHi(szProcess); Clear();
 
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
 
   uchar ibDig;
-  for (ibDig=ibXmin; ibDig<=ibXmax; ibDig++)
+  for (ibDig=ibDigMin; ibDig<=ibDigMax; ibDig++)
   { 
     LoadCurrDigital(ibDig);
 
-    uchar ibCan;
-    for (ibCan=0; ibCan<bCANALS; ibCan++) 
+    uchar c;
+    for (c=0; c<bCANALS; c++) 
     {
-      LoadPrevDigital(ibCan);
+      LoadPrevDigital(c);
 
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
-        mpboReadyCan[ibCan] = true;
+      if (CompareCurrPrevLines(ibDig, c) == 1)
+        mpboReadyCan[c] = true;
     } 
   }
 
@@ -85,11 +85,11 @@ void    SetProfiles(uchar  ibXmin, uchar  ibXmax, uint  iwAmin, uint  iwAmax, ui
     {
       LoadImpHouSpec(iwDigHou,1);                   
     
-      uchar ibCan;
-      for (ibCan=0; ibCan<bCANALS; ibCan++)                         
+      uchar c;
+      for (c=0; c<bCANALS; c++)                         
       {
-        if (mpboReadyCan[ibCan] == true)
-          mpwImpHouCanSpec[ibCan] = iwA;
+        if (mpboReadyCan[c] == true)
+          mpwImpHouCanSpec[c] = wImp;
       }
 
       SaveImpHouSpec(1,iwDigHou);
@@ -103,8 +103,8 @@ void    SetProfiles(uchar  ibXmin, uchar  ibXmax, uint  iwAmin, uint  iwAmax, ui
 
 void    key_SetProfiles1(void)
 { 
-static uchar ibXmin,ibXmax,ibYmin,ibYmax,ibZmin,ibZmax;
-static uint  iwA, iwAmin,iwAmax;
+static uchar ibDigMin,ibDigMax,ibYmin,ibYmax,ibZmin,ibZmax;
+static uint  wImp, iwAmin,iwAmax;
 
   if (bKey == bKEY_ENTER)
   {                                           
@@ -124,8 +124,8 @@ static uint  iwA, iwAmin,iwAmax;
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ibXmin = GetCharLo(5,6) - 1;
-      if (ibXmin < bCANALS)
+      ibDigMin = GetCharLo(5,6) - 1;
+      if (ibDigMin < bCANALS)
       {
         enKeyboard = KBD_INPUT2;
         strcpy(szLo+8,szCanalTo);
@@ -134,8 +134,8 @@ static uint  iwA, iwAmin,iwAmax;
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      ibXmax = GetCharLo(13,14) - 1;
-      if ((ibXmax < bCANALS) && (ibXmax >= ibXmin))
+      ibDigMax = GetCharLo(13,14) - 1;
+      if ((ibDigMax < bCANALS) && (ibDigMax >= ibDigMin))
       {
         enKeyboard = KBD_INPUT3;
         ShowHi(szDateFrom); Clear();
@@ -181,7 +181,7 @@ static uint  iwA, iwAmin,iwAmax;
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
-      iwA = GetIntLo(11,15);
+      wImp = GetIntLo(11,15);
 
       enKeyboard = KBD_INPUT6;
       ShowAnswer();
@@ -191,7 +191,7 @@ static uint  iwA, iwAmin,iwAmax;
       enKeyboard = KBD_SHOW;
       Clear();
 
-      SetProfiles(ibXmin, ibXmax, iwAmin, iwAmax, iwA);
+      SetProfiles(ibDigMin, ibDigMax, iwAmin, iwAmax, wImp);
 
       ShowHi(szSetProfiles);
       OK();
@@ -274,8 +274,8 @@ static uint  iwA, iwAmin,iwAmax;
 
 void    key_SetProfiles2(void)
 { 
-static uchar ibXmin,ibXmax,ibYmin,ibZmin;
-static uint  iwA,iwAmin,iwAmax;
+static uchar ibDigMin,ibDigMax,ibYmin,ibZmin;
+static uint  wImp,iwAmin,iwAmax;
 
   if (bKey == bKEY_ENTER)
   {                                           
@@ -295,8 +295,8 @@ static uint  iwA,iwAmin,iwAmax;
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ibXmin = GetCharLo(5,6) - 1;
-      if (ibXmin < bCANALS)
+      ibDigMin = GetCharLo(5,6) - 1;
+      if (ibDigMin < bCANALS)
       {
         enKeyboard = KBD_INPUT2;
         strcpy(szLo+8,szCanalTo);
@@ -305,8 +305,8 @@ static uint  iwA,iwAmin,iwAmax;
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      ibXmax = GetCharLo(13,14) - 1;
-      if ((ibXmax < bCANALS) && (ibXmax >= ibXmin))
+      ibDigMax = GetCharLo(13,14) - 1;
+      if ((ibDigMax < bCANALS) && (ibDigMax >= ibDigMin))
       {
         enKeyboard = KBD_INPUT3;
         ShowHi(szDateFrom); Clear();
@@ -335,7 +335,7 @@ static uint  iwA,iwAmin,iwAmax;
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
-      iwA = GetIntLo(11,15);
+      wImp = GetIntLo(11,15);
 
       enKeyboard = KBD_INPUT6;
       ShowAnswer();
@@ -345,7 +345,7 @@ static uint  iwA,iwAmin,iwAmax;
       enKeyboard = KBD_SHOW;
       Clear();
 
-      SetProfiles(ibXmin, ibXmax, iwAmin, iwAmax, iwA);
+      SetProfiles(ibDigMin, ibDigMax, iwAmin, iwAmax, wImp);
 
       ShowHi(szSetProfiles);
       OK();
