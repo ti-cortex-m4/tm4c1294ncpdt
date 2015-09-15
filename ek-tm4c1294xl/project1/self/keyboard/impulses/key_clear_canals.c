@@ -8,19 +8,18 @@ _CLEAR.C
 #include "../../memory/mem_energy_spec.h"
 #include "../../memory/mem_profile.h"
 #include "../../console.h"
-//#include "../../access.h"
 #include "../../realtime/realtime.h"
 #include "../../realtime/realtime_spec.h"
 #include "../../impulses/energy_spec.h"
 #include "../../digitals/digitals.h"
 #include "../../special/calc.h"
 #include "../../special/recalc.h"
+#include "../../time/calendar.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szClearCanals1[]  = "Синхронизация   ",
-                        szClearCanals2[]  = "Очистка каналов ",
+static char const       szClearCanals[]   = "Очистка каналов ",
                         szCanalsTitle[]   = "Каналы:         ",
                         szDateFrom[]      = "Дата от:        ",
                         szDateTo[]        = "Дата до:        ",
@@ -38,14 +37,11 @@ static uint             iwA, iwAmin, iwAmax;
 
 void    ShowDateClear(uchar  j)
 {
-  tiAlt = tiCurr;
-  ulong dwBuffC = DateToHouIndex();
+  ulong dw = DateToHouIndex(tiCurr);
+  dw -= (uint)48*j + GetCurrHouIndex();
+  time ti = HouIndexToDate(dw);
 
-  dwBuffC -= (uint)48*j + GetHouIndex();
-
-  HouIndexToDate(dwBuffC);
-
-  sprintf(szLo+7,"%02u.%02u.%02u",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
+  sprintf(szLo+7,"%02u.%02u.%02u",ti.bDay,ti.bMonth,ti.bYear);
   sprintf(szHi+13,".%02u",j);
 }
 
@@ -57,12 +53,12 @@ void    ShowTimeClear(uchar  j)
 }
 
 
-void    ShowAnswerClear(void)
+
+static void ShowAnswer(void)
 {
   Clear();
-  ShowBoolean(enKeyboard != KBD_INPUT5);
+  ShowBool(enKeyboard != KBD_INPUT5);
 }
-
 
 
 void    key_ClearCanals(void)
@@ -73,7 +69,7 @@ void    key_ClearCanals(void)
     {
       enKeyboard = KBD_INPUT1;
 
-      ShowHi(szClearCanals2);
+      ShowHi(szClearCanals);
       Clear(); DelayInf();
 
       ShowHi(szCanalsTitle);
@@ -129,13 +125,13 @@ void    key_ClearCanals(void)
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
-      iwAmin = (PrevDayIndex(ibZmin) + ibYmin) % wHOURS;
-      iwAmax = (PrevDayIndex(ibZmax) + ibYmax) % wHOURS;
+      iwAmin = (GetDayHouIndex(ibZmin) + ibYmin) % wHOURS;
+      iwAmax = (GetDayHouIndex(ibZmax) + ibYmax) % wHOURS;
 
       enKeyboard = KBD_INPUT5;
 
-      ShowHi(szClearCanals2);
-      ShowAnswerClear();
+      ShowHi(szClearCanals);
+      ShowAnswer();
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
@@ -179,7 +175,7 @@ void    key_ClearCanals(void)
     else if ((enKeyboard == KBD_INPUT5) || (enKeyboard == KBD_POSTINPUT5))
     {           
       (enKeyboard == KBD_INPUT5) ? (enKeyboard = KBD_POSTINPUT5) : (enKeyboard = KBD_INPUT5);
-      ShowAnswerClear(); 
+      ShowAnswer();
     }
     else Beep();
   }

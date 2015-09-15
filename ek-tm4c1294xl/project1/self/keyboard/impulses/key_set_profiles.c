@@ -41,7 +41,7 @@ static uint             iwA, iwAmin, iwAmax;
 
 
 
-static void ShowAnswerProfiles(void)
+static void ShowAnswer(void)
 {
   Clear();
   ShowBool(enKeyboard != KBD_INPUT6);
@@ -90,10 +90,10 @@ void    SetProfiles(void)
 
     if (fLoadHou == 1)
     {
-      LoadImpHouSpec(iwDigHou,1);                   // обработка по получасам
+      LoadImpHouSpec(iwDigHou,1);                   
     
       uchar ibCan;
-      for (ibCan=0; ibCan<bCANALS; ibCan++)         // обработка по каналам                
+      for (ibCan=0; ibCan<bCANALS; ibCan++)                         
       {
         if (mpboReadyCan[ibCan] == true)
           mpwImpHouCanSpec[ibCan] = iwA;
@@ -188,7 +188,7 @@ void    key_SetProfiles1(void)
       iwA = GetIntLo(11,15);
 
       enKeyboard = KBD_INPUT6;
-      ShowAnswerProfiles();
+      ShowAnswer();
     }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
@@ -233,7 +233,7 @@ void    key_SetProfiles1(void)
     else if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
     {           
       (enKeyboard == KBD_INPUT6) ? (enKeyboard = KBD_POSTINPUT6) : (enKeyboard = KBD_INPUT6);
-      ShowAnswerProfiles(); 
+      ShowAnswer(); 
     }
     else Beep();
   }
@@ -339,7 +339,7 @@ void    key_SetProfiles2(void)
       iwA = GetIntLo(11,15);
 
       enKeyboard = KBD_INPUT6;
-      ShowAnswerProfiles();
+      ShowAnswer();
     }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
@@ -370,7 +370,7 @@ void    key_SetProfiles2(void)
     else if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
     {           
       (enKeyboard == KBD_INPUT6) ? (enKeyboard = KBD_POSTINPUT6) : (enKeyboard = KBD_INPUT6);
-      ShowAnswerProfiles(); 
+      ShowAnswer(); 
     }
     else Beep();
   }

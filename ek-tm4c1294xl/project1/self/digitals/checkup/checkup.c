@@ -498,9 +498,9 @@ uchar   i;
 
     if (fLoadHou == 1)
     {
-      LoadImpHouSpec(iwA,1);                   // обработка по получасам
+      LoadImpHouSpec(iwA,1);                   
     
-      for (ibCan=0; ibCan<bCANALS; ibCan++)         // обработка по каналам
+      for (ibCan=0; ibCan<bCANALS; ibCan++)         
       {
         if (mpboReadyCheckup[ibCan] == true) 
         { 

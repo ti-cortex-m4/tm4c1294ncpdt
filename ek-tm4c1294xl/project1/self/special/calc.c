@@ -117,9 +117,9 @@ static time tiDig;
 
 void    CalcDigCanals(time  ti)
 {
-  LoadImpHouSpec(iwDigHou,1);                       // обработка по получасам
+  LoadImpHouSpec(iwDigHou,1);                       
 
-  LoadCurrDigital(ibDig);                           // обработка по каналам
+  LoadCurrDigital(ibDig);                           
 
   uchar c;
   for (c=0; c<bCANALS; c++)                           
@@ -158,7 +158,7 @@ void    CalcDigCanals(time  ti)
     }
   }
 
-  SaveImpHouSpec(1,iwDigHou);                       // обработка по получасам
+  SaveImpHouSpec(1,iwDigHou);                       
 }
 
 
@@ -170,7 +170,7 @@ void    CalcAllCanals(bool  fUseImp, time  ti)
     if (fLoadMem == 0)
     { 
       fLoadMem = 1;
-      LoadImpHouSpec(iwDigHou,0);                   // обработка по получасам
+      LoadImpHouSpec(iwDigHou,0);                   
     }
 
     uchar c;
@@ -197,7 +197,7 @@ void    CalcAllGroups(bool  fUsePow, time  ti)
     if (fLoadMem == 0)
     { 
       fLoadMem = 1;
-      LoadImpHouSpec(iwDigHou,0);                   // обработка по получасам
+      LoadImpHouSpec(iwDigHou,0);                   
     }
 
     uchar g;
