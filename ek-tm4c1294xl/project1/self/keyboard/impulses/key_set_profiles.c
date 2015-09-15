@@ -36,11 +36,6 @@ static char const       szSetProfiles[]  = "Редактирование  ",
 
 
 
-static uchar            ibXmin, ibXmax, ibYmin, ibYmax, ibZmin, ibZmax;
-static uint             iwA, iwAmin, iwAmax;
-
-
-
 static void ShowAnswer(void)
 {
   Clear();
@@ -48,7 +43,7 @@ static void ShowAnswer(void)
 }
 
 
-void    SetProfiles(void)
+void    SetProfiles(uchar  ibXmin, uchar  ibXmax, uint  iwAmin, uint  iwAmax, uint  iwA)
 {
   ShowHi(szProcess); Clear();
 
@@ -108,6 +103,9 @@ void    SetProfiles(void)
 
 void    key_SetProfiles1(void)
 { 
+static uchar ibXmin,ibXmax,ibYmin,ibYmax,ibZmin,ibZmax;
+static uint  iwA, iwAmin,iwAmax;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
@@ -193,7 +191,7 @@ void    key_SetProfiles1(void)
       enKeyboard = KBD_SHOW;
       Clear();
 
-      SetProfiles();
+      SetProfiles(ibXmin, ibXmax, iwAmin, iwAmax, iwA);
 
       ShowHi(szSetProfiles);
       OK();
@@ -276,6 +274,9 @@ void    key_SetProfiles1(void)
 
 void    key_SetProfiles2(void)
 { 
+static uchar ibXmin,ibXmax,ibYmin,ibZmin;
+static uint  iwA,iwAmin,iwAmax;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)
@@ -344,7 +345,7 @@ void    key_SetProfiles2(void)
       enKeyboard = KBD_SHOW;
       Clear();
 
-      SetProfiles();
+      SetProfiles(ibXmin, ibXmax, iwAmin, iwAmax, iwA);
 
       ShowHi(szSetProfiles);
       OK();
