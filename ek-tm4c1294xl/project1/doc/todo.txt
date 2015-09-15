@@ -44,6 +44,7 @@ remove external headers
 hhr100
 answer disable
 990/991
+clear canals 87
 params
 ! вывод дампа обмена со счетчиком
 modem quality

@@ -19,7 +19,7 @@ extern  bool                    fCurrent, fProfile;
 
 
 uchar   GetCurrHouIndex(void);
-uint    GetDayHouIndex(uchar  bDay);
+uint    GetDayHouIndex(uchar  ibDay);
 
 uchar   PrevSoftMnt(void);
 uint    PrevHardMnt(void);
