@@ -23,7 +23,7 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szNumberLimi
 
 void    key_SetBulkSize(void)
 {
-  key_SetCharBlocked(&chBulkSize, pszMessages, 1, 250, bBulkSize, wSET_BULK_ENBL);
+  key_SetCharBlocked(&chBulkSize, pszMessages, 1, 250, fBulkEnbl, wSET_BULK_ENBL);
 }
 
 #endif

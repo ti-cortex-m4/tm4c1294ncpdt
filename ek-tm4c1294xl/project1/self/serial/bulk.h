@@ -31,3 +31,5 @@ void    RunBulk0(void);
 void    RunBulk1(void);
 void    RunBulk2(void);
 void    RunBulk3(void);
+
+void    OutBulk(void);
