@@ -11,10 +11,12 @@ RECALC.C
 #include "../memory/mem_profile.h"
 #include "../memory/mem_settings.h"
 #include "../realtime/realtime_spec.h"
+#include "../tariffs/tariffs.h"
+#include "../impulses/energy_spec.h"
+#include "../digitals/digitals.h"
+#include "../flash/records.h"
 #include "../time/timedate.h"
 #include "../time/calendar.h"
-#include "../tariffs/tariffs.h"
-#include "../flash/records.h"
 #include "../energy2.h"
 #include "calc.h"
 #include "special.h"
@@ -146,18 +148,21 @@ uchar   i;
 }
 
 
-/*
-bool    ClearCanals(bool  fStopCan)
+
+bool    ClearCanals(bool  fStopCan, uchar  ibXmin, uchar  ibXmax, uint  iwAmin, uint  iwAmax)
 {
   ShowHi(szProcess); Clear();
 
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
 
-  wBuffD = ((wHOURS + iwHardHou - iwAmin) % wHOURS) + 4;
+  uint wBuffD = ((wHOURS + iwHardHou - iwAmin) % wHOURS) + 4;
 
+  uchar ibDig;
   for (ibDig=ibXmin; ibDig<=ibXmax; ibDig++)
   {
     LoadCurrDigital(ibDig);
+
+    uchar ibCan;
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
       LoadPrevDigital(ibCan);
@@ -174,6 +179,8 @@ bool    ClearCanals(bool  fStopCan)
   fLoadHou = 0;
 
   bHouInc = 0;
+
+  uint iwHou;
   for (iwHou=0; iwHou<wHOURS; iwHou++)
   {
     if (fKey == 1) { fKey = 0; Beep(); }
@@ -187,9 +194,9 @@ bool    ClearCanals(bool  fStopCan)
 
     if (fLoadHou == 1)
     {
-      LoadImpHouSpec(iwDigHou,1);                   // обработка по получасам
+      LoadImpHouSpec(iwDigHou,1);                   
 
-      for (ibCan=0; ibCan<bCANALS; ibCan++)         // обработка по каналам
+      for (ibCan=0; ibCan<bCANALS; ibCan++)
       {
         // если канал не используется: пропустить
         //if (mpboUsedNodes[ibCan] == false) continue;
@@ -197,7 +204,7 @@ bool    ClearCanals(bool  fStopCan)
         if (mpboReadyCan[ibCan] == true)
         {
           if (fStopCan == 1) wBuffD = 0xFFFF; else wBuffD = 0;
-          SetCanInt(mpwImpHouCanSpec, ibCan, wBuffD);
+          mpwImpHouCanSpec[ibCan] = wBuffD;
         }
       }
 
@@ -207,6 +214,6 @@ bool    ClearCanals(bool  fStopCan)
     if (iwDigHou == iwAmin) fLoadHou = 0;
   }
 
-  return( Recalc(1,1) );
+  return Recalc(1,1);
 }
-*/
+
