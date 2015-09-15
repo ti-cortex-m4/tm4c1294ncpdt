@@ -58,16 +58,16 @@ void    StartRefill(void)
 void    DoRefill(void)
 {
   uint iwB = 0;
-  uint iwHou = iwBmin;
+  uint iwHhr = iwBmin;
   
-  while (iwHou != iwBmax) {
+  while (iwHhr != iwBmax) {
     if (fKey == true) { fKey = 0; Beep(); }
-    if ((iwHou % 0x10) == 0) NexttimeMnt();
+    if ((iwHhr % 0x10) == 0) NexttimeMnt();
 
     Clear();
     sprintf(szLo,"обработано: %u",++iwB);
 
-    LoadImpHouSpec(iwHou,1);
+    LoadImpHouSpec(iwHhr,1);
 
     uchar ibCan;
     for (ibCan=0; ibCan<bCANALS; ibCan++)
@@ -76,9 +76,9 @@ void    DoRefill(void)
         mpwImpHouCanSpec[ibCan] = 0; 
     }
 
-    SaveImpHouSpec(1,iwHou);
+    SaveImpHouSpec(1,iwHhr);
 
-    iwHou = (wHOURS+iwHou-1)%wHOURS; 
+    iwHhr = (wHOURS+iwHhr-1)%wHOURS; 
   }
 }
 

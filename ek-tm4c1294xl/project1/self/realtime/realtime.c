@@ -49,7 +49,7 @@ uchar   GetCurrHouIndex(void)
 
 
 // TODO rename индекс на первый получас требуемых суток назад
-uint    GetDayHouIndex(uchar  ibDay)
+uint    GetDayHhrIndex(uchar  ibDay)
 {
   // индекс на первый получас текущих суток
   uint w = (wHOURS+iwHardHou-GetCurrHouIndex()) % wHOURS;

@@ -123,8 +123,8 @@ static uint  iwAmin,iwAmax;
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
-      iwAmin = (GetDayHouIndex(ibZmin) + ibYmin) % wHOURS;
-      iwAmax = (GetDayHouIndex(ibZmax) + ibYmax) % wHOURS;
+      iwAmin = (GetDayHhrIndex(ibZmin) + ibYmin) % wHOURS;
+      iwAmax = (GetDayHhrIndex(ibZmax) + ibYmax) % wHOURS;
 
       enKeyboard = KBD_INPUT5;
 

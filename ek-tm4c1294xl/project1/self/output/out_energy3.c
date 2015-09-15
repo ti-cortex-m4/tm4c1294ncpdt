@@ -48,7 +48,7 @@ static float mpreEngGrp[bGROUPS];
     uchar i;
     for (i=0; i<bInBuff7+1; i++)
     {
-      LoadImpHou((GetDayHouIndex(bInBuff6)+i) % wHOURS);
+      LoadImpHou((GetDayHhrIndex(bInBuff6)+i) % wHOURS);
       for (g=0; g<bGROUPS; g++)
       {
         if ((InBuff(8 + g/8) & (0x80 >> g%8)) != 0) 
@@ -62,7 +62,7 @@ static float mpreEngGrp[bGROUPS];
     for (i=0; i<4+bGROUPS/8; i++) PushChar(InBuff(4+i));
 
 
-    LoadImpHouFree((GetDayHouIndex(bInBuff6)+bInBuff7) % wHOURS);
+    LoadImpHouFree((GetDayHhrIndex(bInBuff6)+bInBuff7) % wHOURS);
     for (g=0; g<bGROUPS; g++)
     {
       if ((InBuff(8 + g/8) & (0x80 >> g%8)) != 0) 
@@ -103,7 +103,7 @@ void    OutEngGrpHouExt2(void)
     uchar i;
     for (i=0; i<4+bGROUPS/8; i++) PushChar(InBuff(4+i));
 
-    LoadImpHouFree((GetDayHouIndex(bInBuff6)+bInBuff7) % wHOURS);
+    LoadImpHouFree((GetDayHhrIndex(bInBuff6)+bInBuff7) % wHOURS);
 
     uchar g;
     for (g=0; g<bGROUPS; g++)

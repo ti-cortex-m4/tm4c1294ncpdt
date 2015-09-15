@@ -22,7 +22,7 @@ OUT_DEFECTS2.C
 
 void    OutImpCanHou48Def(void)
 {
-  uint iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHhr = GetDayHhrIndex(bInBuff6);
             
   InitPushPtr();
   uint wSize = 0;
@@ -30,7 +30,7 @@ void    OutImpCanHou48Def(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    if (LoadImpHouFree(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     uchar c;
     for (c=0; c<bCANALS; c++)
@@ -47,7 +47,7 @@ void    OutImpCanHou48Def(void)
       }
     }
 
-    if (++iwHou >= wHOURS) iwHou = 0;
+    if (++iwHhr >= wHOURS) iwHhr = 0;
   }      
 
   OutptrOutBuff(wSize);
@@ -56,7 +56,7 @@ void    OutImpCanHou48Def(void)
 
 void    OutPowGrpHou48Def(void)
 {
-  uint iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHhr = GetDayHhrIndex(bInBuff6);
             
   InitPushPtr();
   uint wSize = 0;
@@ -64,7 +64,7 @@ void    OutPowGrpHou48Def(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    if (LoadImpHouFree(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     uchar c;
     for (c=0; c<bGROUPS; c++)
@@ -86,7 +86,7 @@ void    OutPowGrpHou48Def(void)
       }
     }
 
-    if (++iwHou >= wHOURS) iwHou = 0;
+    if (++iwHhr >= wHOURS) iwHhr = 0;
   }      
 
   OutptrOutBuff(wSize);

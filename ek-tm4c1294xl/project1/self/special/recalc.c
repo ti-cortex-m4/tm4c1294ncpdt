@@ -118,14 +118,14 @@ uchar   i;
 
   bHouInc = 0;
 
-  uint iwHou;
-  for (iwHou=0; iwHou<wHOURS; iwHou++)
+  uint iwHhr;
+  for (iwHhr=0; iwHhr<wHOURS; iwHhr++)
   {
     if (fKey == 1) { fKey = 0; Beep(); }
-    if ((iwHou % 0x10) == 0) ShowPercent((ulong)100*iwHou/(wHOURS-1));
-    if ((iwHou % 0x10) == 0) NexttimeMnt();
+    if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
+    if ((iwHhr % 0x10) == 0) NexttimeMnt();
 
-    iwDigHou = (wHOURS + iwHardHou - iwHou - bHouInc) % wHOURS;
+    iwDigHou = (wHOURS + iwHardHou - iwHhr - bHouInc) % wHOURS;
 
 
     time ti = HouIndexToDate(dwHouIndex);
@@ -181,14 +181,14 @@ bool    ClearCanals(bool  fStopCan, uchar  ibXmin, uchar  ibXmax, uint  iwAmin, 
 
   bHouInc = 0;
 
-  uint iwHou;
-  for (iwHou=0; iwHou<wHOURS; iwHou++)
+  uint iwHhr;
+  for (iwHhr=0; iwHhr<wHOURS; iwHhr++)
   {
     if (fKey == 1) { fKey = 0; Beep(); }
-    if ((iwHou % 0x10) == 0) ShowPercent((ulong)100*iwHou/(wHOURS-1));
-    if ((iwHou % 0x10) == 0) NexttimeMnt();
+    if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
+    if ((iwHhr % 0x10) == 0) NexttimeMnt();
 
-    iwDigHou = (wHOURS + iwHardHou - iwHou - bHouInc) % wHOURS;
+    iwDigHou = (wHOURS + iwHardHou - iwHhr - bHouInc) % wHOURS;
 
 
     if (iwDigHou == iwAmax) fLoadHou = 1;

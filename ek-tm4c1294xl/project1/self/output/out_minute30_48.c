@@ -23,7 +23,7 @@ OUT_MINUTE30_48.C
 void    OutPowGrpHou48(void)
 {
   if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
-  uint iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHhr = GetDayHhrIndex(bInBuff6);
 
   InitPushPtr();
   uint wSize = 0;
@@ -31,7 +31,7 @@ void    OutPowGrpHou48(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHou(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    if (LoadImpHou(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
       PushFloat(0);
@@ -40,7 +40,7 @@ void    OutPowGrpHou48(void)
 
     wSize += sizeof(float);
 
-    if (++iwHou >= wHOURS) iwHou = 0;
+    if (++iwHhr >= wHOURS) iwHhr = 0;
   }
 
   OutptrOutBuff(wSize);
@@ -50,7 +50,7 @@ void    OutPowGrpHou48(void)
 void    OutImpCanHou48(void)
 {
   if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
-  uint iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHhr = GetDayHhrIndex(bInBuff6);
 
   InitPushPtr();
   uint wSize = 0;
@@ -58,7 +58,7 @@ void    OutImpCanHou48(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHou(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    if (LoadImpHou(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
       PushInt(0);
@@ -67,7 +67,7 @@ void    OutImpCanHou48(void)
 
     wSize += sizeof(uint);
 
-    if (++iwHou >= wHOURS) iwHou = 0;
+    if (++iwHhr >= wHOURS) iwHhr = 0;
   }
 
   OutptrOutBuff(wSize);
@@ -78,7 +78,7 @@ void    OutImpCanHou48(void)
 void    OutPowGrpHou48Ext(void)
 {
   if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
-  uint iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHhr = GetDayHhrIndex(bInBuff6);
 
   InitPushPtr();
   uint wSize = 0;
@@ -86,7 +86,7 @@ void    OutPowGrpHou48Ext(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHou(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    if (LoadImpHou(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     uchar g;
     for (g=0; g<bGROUPS; g++)
@@ -103,7 +103,7 @@ void    OutPowGrpHou48Ext(void)
       }
     }
 
-    if (++iwHou >= wHOURS) iwHou = 0;
+    if (++iwHhr >= wHOURS) iwHhr = 0;
   }
 
   OutptrOutBuff(wSize);
@@ -120,7 +120,7 @@ void    PushImpHouCan(uint  wT, uchar  ibCan)
 void    OutImpCanHou48Ext(void)
 {
   if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
-  uint iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHhr = GetDayHhrIndex(bInBuff6);
 
   InitPushPtr();
   uint wSize = 0;
@@ -128,7 +128,7 @@ void    OutImpCanHou48Ext(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    if (LoadImpHouFree(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     uchar c;
     for (c=0; c<bCANALS; c++)
@@ -145,7 +145,7 @@ void    OutImpCanHou48Ext(void)
       }
     }
 
-    if (++iwHou >= wHOURS) iwHou = 0;
+    if (++iwHhr >= wHOURS) iwHhr = 0;
   }
 
   OutptrOutBuff(wSize);
@@ -155,7 +155,7 @@ void    OutImpCanHou48Ext(void)
 void    OutPowCanHou48Ext(void)
 {
   if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
-  uint iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHhr = GetDayHhrIndex(bInBuff6);
 
   InitPushPtr();
   uint wSize = 0;
@@ -163,7 +163,7 @@ void    OutPowCanHou48Ext(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    if (LoadImpHouFree(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     uchar c;
     for (c=0; c<bCANALS; c++)
@@ -191,7 +191,7 @@ void    OutPowCanHou48Ext(void)
       }
     }
 
-    if (++iwHou >= wHOURS) iwHou = 0;
+    if (++iwHhr >= wHOURS) iwHhr = 0;
   }
 
   OutptrOutBuff(wSize);
@@ -201,7 +201,7 @@ void    OutPowCanHou48Ext(void)
 void    OutDefCanHou48Ext(void)
 {
   if (bInBuff6 > wHOURS/48) { Result(bRES_BADADDRESS); return; }
-  uint iwHou = GetDayHouIndex(bInBuff6);
+  uint iwHhr = GetDayHhrIndex(bInBuff6);
 
   InitPushPtr();
   uint wSize = 0;
@@ -209,7 +209,7 @@ void    OutDefCanHou48Ext(void)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadImpHouFree(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    if (LoadImpHouFree(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     uchar c;
     for (c=0; c<bCANALS; c++)
@@ -227,7 +227,7 @@ void    OutDefCanHou48Ext(void)
       }
     }
 
-    if (++iwHou >= wHOURS) iwHou = 0;
+    if (++iwHhr >= wHOURS) iwHhr = 0;
   }
 
   OutptrOutBuff(wSize);
