@@ -163,15 +163,15 @@ bool    ClearCanals(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
   {
     LoadCurrDigital(ibDig);
 
-    uchar ibCan;
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-      LoadPrevDigital(ibCan);
+      LoadPrevDigital(c);
 
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
+      if (CompareCurrPrevLines(ibDig, c) == 1)
       {
-        mpboReadyCan[ibCan] = true;
-        if (fStopCan == true) mpcwStopCan[ibCan] = wStop;
+        mpboReadyCan[c] = true;
+        if (fStopCan == true) mpcwStopCan[c] = wStop;
       }
     }
   }
@@ -197,16 +197,12 @@ bool    ClearCanals(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
     {
       LoadImpHouSpec(iwDigHou,1);                   
 
-      uchar ibCan;
-      for (ibCan=0; ibCan<bCANALS; ibCan++)
+      uchar c;
+      for (c=0; c<bCANALS; c++)
       {
-        // если канал не используется: пропустить
-        //if (mpboUsedNodes[ibCan] == false) continue;
-
-        if (mpboReadyCan[ibCan] == true)
+        if (mpboReadyCan[c] == true)
         {
-          if (fStopCan == 1) wStop = 0xFFFF; else wStop = 0;
-          mpwImpHouCanSpec[ibCan] = wStop;
+          mpwImpHouCanSpec[c] = ((fStopCan == true) ? 0xFFFF : 0);
         }
       }
 
