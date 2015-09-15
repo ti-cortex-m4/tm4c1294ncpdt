@@ -275,7 +275,7 @@ static uint  wImp,wHhrMin,wHhrMax;
 void    key_SetProfiles2(void)
 {
 static uchar ibDigMin,ibDigMax,ibHhrMin,ibDayMin;
-static uint  wImp,iwAmin,iwAmax;
+static uint  wImp,wHhrMin,wHhrMax;
 
   if (bKey == bKEY_ENTER)
   {
@@ -326,8 +326,8 @@ static uint  wImp,iwAmin,iwAmax;
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      iwAmin = (GetDayHhrIndex(ibDayMin) + ibHhrMin) % wHOURS;
-      iwAmax = iwAmin;
+      wHhrMin = (GetDayHhrIndex(ibDayMin) + ibHhrMin) % wHOURS;
+      wHhrMax = wHhrMin;
 
       enKeyboard = KBD_INPUT5;
       ShowHi(szSetProfiles);
@@ -345,7 +345,7 @@ static uint  wImp,iwAmin,iwAmax;
       enKeyboard = KBD_SHOW;
       Clear();
 
-      SetProfiles(ibDigMin, ibDigMax, iwAmin, iwAmax, wImp);
+      SetProfiles(ibDigMin, ibDigMax, wHhrMin, wHhrMax, wImp);
 
       ShowHi(szSetProfiles);
       OK();
