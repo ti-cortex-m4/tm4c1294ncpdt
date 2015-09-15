@@ -58,8 +58,8 @@ static void ShowAnswer(void)
 
 void    key_ClearCanals(void)
 {
-static uchar ibXmin,ibXmax,ibYmin,ibYmax,ibZmin,ibZmax;
-static uint  iwAmin,iwAmax;
+static uchar ibDigMin,ibDigMax,ibHhrMin,ibHhrMax,ibDayMin,ibDayMax;
+static uint  wHhrMin,wHhrMax;
 
   if (bKey == bKEY_ENTER)
   {                                           
@@ -75,8 +75,8 @@ static uint  iwAmin,iwAmax;
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ibXmin = GetCharLo(5,6) - 1;
-      if (ibXmin < bCANALS)
+      ibDigMin = GetCharLo(5,6) - 1;
+      if (ibDigMin < bCANALS)
       {
         enKeyboard = KBD_INPUT2;
         strcpy(szLo+8,szCanalTo);
@@ -85,14 +85,14 @@ static uint  iwAmin,iwAmax;
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      ibXmax = GetCharLo(13,14) - 1;
-      if ((ibXmax < bCANALS) && (ibXmax >= ibXmin))
+      ibDigMax = GetCharLo(13,14) - 1;
+      if ((ibDigMax < bCANALS) && (ibDigMax >= ibDigMin))
       {
         enKeyboard = KBD_INPUT3;
         ShowHi(szDateFrom); Clear();
 
-        ibZmin = 0;
-        ShowDate_ClearCanals(ibZmin);
+        ibDayMin = 0;
+        ShowDate_ClearCanals(ibDayMin);
       }
       else Beep();
     }
@@ -101,8 +101,8 @@ static uint  iwAmin,iwAmax;
       enKeyboard = KBD_POSTINPUT3;
       ShowHi(szTimeFrom);
 
-      ibYmin = 0;
-      ShowTime_ClearCanals(ibYmin);
+      ibHhrMin = 0;
+      ShowTime_ClearCanals(ibHhrMin);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
@@ -110,21 +110,21 @@ static uint  iwAmin,iwAmax;
       ShowHi(szDateTo);
       Clear();
 
-      ibZmax = ibZmin;
-      ShowDate_ClearCanals(ibZmax);
+      ibDayMax = ibDayMin;
+      ShowDate_ClearCanals(ibDayMax);
     }
     else if (enKeyboard == KBD_INPUT4)
     {
       enKeyboard = KBD_POSTINPUT4;
       ShowHi(szTimeTo);
 
-      (ibZmax == ibZmin) ? (ibYmax = ibYmin) : (ibYmax = 0);
-      ShowTime_ClearCanals(ibYmax);
+      (ibDayMax == ibDayMin) ? (ibHhrMax = ibHhrMin) : (ibHhrMax = 0);
+      ShowTime_ClearCanals(ibHhrMax);
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
-      iwAmin = (GetDayHhrIndex(ibZmin) + ibYmin) % wHOURS;
-      iwAmax = (GetDayHhrIndex(ibZmax) + ibYmax) % wHOURS;
+      wHhrMin = (GetDayHhrIndex(ibDayMin) + ibHhrMin) % wHOURS;
+      wHhrMax = (GetDayHhrIndex(ibDayMax) + ibHhrMax) % wHOURS;
 
       enKeyboard = KBD_INPUT5;
 
@@ -136,7 +136,7 @@ static uint  iwAmin,iwAmax;
       enKeyboard = KBD_SHOW;
       Clear();
 
-      (ClearCanals(1, ibXmin, ibXmax, iwAmin, iwAmax) == 1) ? OK() : Error();
+      (ClearCanals(1, ibDigMin, ibDigMax, wHhrMin, wHhrMax) == 1) ? OK() : Error();
 
       ShowHi(szCanalsTitle);
     }
@@ -148,27 +148,27 @@ static uint  iwAmin,iwAmax;
   {
     if (enKeyboard == KBD_INPUT3)
     {
-      if (++ibZmin >= wHOURS/48) ibZmin = 0;
-      ShowDate_ClearCanals(ibZmin);
+      if (++ibDayMin >= wHOURS/48) ibDayMin = 0;
+      ShowDate_ClearCanals(ibDayMin);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      if (++ibYmin >= 48) ibYmin = 0;
-      ShowTime_ClearCanals(ibYmin);
+      if (++ibHhrMin >= 48) ibHhrMin = 0;
+      ShowTime_ClearCanals(ibHhrMin);
     }
     else if (enKeyboard == KBD_INPUT4)
     {
-      (ibZmax > 0) ? (ibZmax--) : (ibZmax = ibZmin);
-      ShowDate_ClearCanals(ibZmax);
+      (ibDayMax > 0) ? (ibDayMax--) : (ibDayMax = ibDayMin);
+      ShowDate_ClearCanals(ibDayMax);
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
-      if (ibZmax == ibZmin)
-      { if (++ibYmax >= 48) ibYmax = ibYmin; }
+      if (ibDayMax == ibDayMin)
+      { if (++ibHhrMax >= 48) ibHhrMax = ibHhrMin; }
       else
-      { if (++ibYmax >= 48) ibYmax = 0; }
+      { if (++ibHhrMax >= 48) ibHhrMax = 0; }
       
-      ShowTime_ClearCanals(ibYmax);
+      ShowTime_ClearCanals(ibHhrMax);
     }
     else if ((enKeyboard == KBD_INPUT5) || (enKeyboard == KBD_POSTINPUT5))
     {           
