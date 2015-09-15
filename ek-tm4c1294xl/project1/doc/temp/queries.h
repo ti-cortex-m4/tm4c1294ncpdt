@@ -347,7 +347,7 @@
 +   #define bEXT_GETSTOPAUXCAN             104
 +   #define bEXT_GETDECRET                 105
 +   #define bEXT_GETSTART                  106
-#define bEXT_GETBULK                   107
++   #define bEXT_GETBULK                   107
 +   #define bEXT_GETMNTCURRENT2            108
 +   #define bEXT_RECORD_DISABLE            109
 +   #define bEXT_GETENGFRACDIGCAN          110

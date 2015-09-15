@@ -11,6 +11,7 @@ RESPONSE255_CRC.C
 #include "../memory/mem_limits.h"
 #include "../include/states.h"
 #include "../serial/ports.h"
+#include "../serial/bulk.h"
 #include "../output/response_crc.h"
 #include "../flash/flash_control.h"
 #include "../flash/records_dsbl.h"
@@ -211,8 +212,11 @@ void    Response255_CRC(void)
     case bEXT_RECORDS_DSBL: OutRecordsDsbl(); break;
 
     case bEXT_GETDECRET: OutDecret(); break;
-
     case bEXT_GETSTART: OutStart(); break;
+
+#ifdef ENABLE_BULK
+    case bEXT_BULK: OutBulk(); break;
+#endif
 
     case bEXT_GETCURRENT2: OutCurrent2(); break;
 

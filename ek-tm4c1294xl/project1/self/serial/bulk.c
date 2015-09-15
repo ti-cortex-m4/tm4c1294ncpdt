@@ -208,3 +208,20 @@ void    RunBulk3(void)
   }
 #endif
 }
+
+
+
+#ifdef ENABLE_BULK
+void    OutBulk(void)
+{
+  InitPushCRC();
+  PushChar(boEnableBulk);
+  PushChar(bMaxBulk);
+  Push(&cbBulk, sizeof(cbBulk));
+  PushInt(wMaxBulkDelay);
+  Push(&cwBulkDelay, sizeof(cwBulkDelay));
+  Push(&mpSerial, sizeof(mpSerial));
+  Push(&mpSerial_Bulk, sizeof(mpSerial_Bulk));
+  Output(1+1+4*1+2+4*2+4*1+4*1);
+}
+#endif

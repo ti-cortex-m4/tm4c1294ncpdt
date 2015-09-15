@@ -130,7 +130,7 @@ QUERIES2.H
 
 #define bEXT_GETDECRET                 105
 #define bEXT_GETSTART                  106
-
+#define bEXT_GETBULK                   107
 #define bEXT_GETCURRENT2               108
 
 #define bEXT_GETOBJECTNAME             111
