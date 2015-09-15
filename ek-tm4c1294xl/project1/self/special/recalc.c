@@ -195,7 +195,7 @@ bool    ClearCanals(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
 
     if (fLoadHou == 1)
     {
-      LoadImpHouSpec(iwDigHou,1);                   
+      LoadImpHouSpec(iwDigHou,1);
 
       uchar c;
       for (c=0; c<bCANALS; c++)

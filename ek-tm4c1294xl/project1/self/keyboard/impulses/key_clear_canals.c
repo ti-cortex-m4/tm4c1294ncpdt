@@ -62,7 +62,7 @@ static uchar ibDigMin,ibDigMax,ibHhrMin,ibHhrMax,ibDayMin,ibDayMax;
 static uint  wHhrMin,wHhrMax;
 
   if (bKey == bKEY_ENTER)
-  {                                           
+  {
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
@@ -72,7 +72,7 @@ static uint  wHhrMin,wHhrMax;
 
       ShowHi(szCanalsTitle);
       strcpy(szLo+0,szCanalFrom);
-    } 
+    }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       ibDigMin = GetCharLo(5,6) - 1;
@@ -167,11 +167,11 @@ static uint  wHhrMin,wHhrMax;
       { if (++ibHhrMax >= 48) ibHhrMax = ibHhrMin; }
       else
       { if (++ibHhrMax >= 48) ibHhrMax = 0; }
-      
+
       ShowTime_ClearCanals(ibHhrMax);
     }
     else if ((enKeyboard == KBD_INPUT5) || (enKeyboard == KBD_POSTINPUT5))
-    {           
+    {
       (enKeyboard == KBD_INPUT5) ? (enKeyboard = KBD_POSTINPUT5) : (enKeyboard = KBD_INPUT5);
       ShowAnswer();
     }
@@ -180,19 +180,19 @@ static uint  wHhrMin,wHhrMax;
 
 
   else if (bKey < 10)
-  {        
+  {
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
     {
       enKeyboard = KBD_POSTINPUT1;
       ShiftLo(5,6);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
       ShiftLo(13,14);
     }
-    else Beep(); 
+    else Beep();
   }
   else Beep();
 }
