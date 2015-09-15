@@ -25,7 +25,7 @@ static uchar            ibH;
 
 static void ShowPowGrpHou(void)
 {
-  if (LoadImpHou( (GetDayHouIndex(ibY)+ibH)%wHOURS ) == true)
+  if (LoadImpHou( (GetDayHhrIndex(ibY)+ibH)%wHOURS ) == true)
   {
     if ((ibY == 0) && (ibH > GetCurrHouIndex()))
       sprintf(szLo,"         -    ");

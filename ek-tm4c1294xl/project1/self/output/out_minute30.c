@@ -74,11 +74,11 @@ void    OutImpCanHouExt(void)
   InitPushPtr();
   uint wSize = 0;
 
-  uint iwHou = bInBuff6*0x100 + bInBuff7;
+  uint iwHhr = bInBuff6*0x100 + bInBuff7;
 
   if (enGlobal == GLB_PROGRAM)
     Result(bRES_NEEDWORK);
-  else if (iwHou >= wHOURS)
+  else if (iwHhr >= wHOURS)
     Result(bRES_BADADDRESS);
   else
   {
@@ -86,17 +86,17 @@ void    OutImpCanHouExt(void)
     for (i=0; i<bInBuff8; i++)
     {
       ulong dw = DateToHouIndex(tiCurr);
-      dw -= iwHou;
+      dw -= iwHhr;
       time ti = HouIndexToDate(dw);
 
       wSize += PushTime(ti);
 
-      if (LoadImpHouFree((wHOURS+iwHardHou-iwHou) % wHOURS) == false) { Result(bRES_BADFLASH); return; }
+      if (LoadImpHouFree((wHOURS+iwHardHou-iwHhr) % wHOURS) == false) { Result(bRES_BADFLASH); return; }
 
       uchar c;
       for (c=0; c<bCANALS; c++)
       {
-        if (iwHou >= wHOURS)
+        if (iwHhr >= wHOURS)
           PushInt(0);
         else
           PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
@@ -104,7 +104,7 @@ void    OutImpCanHouExt(void)
         wSize += sizeof(uint);
       }
 
-      iwHou++;
+      iwHhr++;
     }
 
     OutptrOutBuff(wSize);

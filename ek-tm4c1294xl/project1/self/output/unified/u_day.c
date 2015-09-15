@@ -54,10 +54,10 @@ uchar   i,j,k;
       ResetWatchdog();
       memset(&mpbDefUni, 0, sizeof(mpbDefUni));
 
-      uint iwHou = GetDayHouIndex(j);
+      uint iwHhr = GetDayHhrIndex(j);
       for (i=0; i<48; i++)
       {
-        LoadImpHouFree(iwHou);
+        LoadImpHouFree(iwHhr);
 
         uchar c;
         for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
@@ -66,7 +66,7 @@ uchar   i,j,k;
             mpbDefUni[k-1 - ((c - bInBuff7) / 8)] |= (uchar)(0x01 << ((c - bInBuff7) % 8));
         }
 
-        if (++iwHou >= wHOURS) iwHou = 0;
+        if (++iwHhr >= wHOURS) iwHhr = 0;
       }
 
       Push(mpbDefUni, k);
@@ -108,10 +108,10 @@ uchar   i,j,k;
       ResetWatchdog();
       memset(&mpbDefUni, 0, sizeof(mpbDefUni));
 
-      uint iwHou = GetDayHouIndex(j);
+      uint iwHhr = GetDayHhrIndex(j);
       for (i=0; i<48; i++)
       {
-        LoadImpHouFree(iwHou);
+        LoadImpHouFree(iwHhr);
 
         uchar g;
         for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
@@ -120,7 +120,7 @@ uchar   i,j,k;
             mpbDefUni[k-1 - ((g - bInBuff7) / 8)] |= (uchar)(0x01 << ((g - bInBuff7) % 8));
         }
 
-        if (++iwHou >= wHOURS) iwHou = 0;
+        if (++iwHhr >= wHOURS) iwHhr = 0;
       }
 
       Push(mpbDefUni, k);

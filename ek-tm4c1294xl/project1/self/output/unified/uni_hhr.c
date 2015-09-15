@@ -41,12 +41,12 @@ void    GetPowCanHouUni(void)
     bool fDef = 0;
     uint wSize = 0;
 
-    uint iwHou = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
+    uint iwHhr = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
 
     uchar i;
     for (i=0; i<bInBuffD; i++)
     {
-      LoadImpHouFree(iwHou);
+      LoadImpHouFree(iwHhr);
 
       uchar c;
       for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
@@ -70,7 +70,7 @@ void    GetPowCanHouUni(void)
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
 
-      if (iwHou > 0) iwHou--; else iwHou = wHOURS-1;
+      if (iwHhr > 0) iwHhr--; else iwHhr = wHOURS-1;
     }
 
     ulong dw = DateToHouIndex(*GetCurrTimeDate());
@@ -98,12 +98,12 @@ void    GetPowGrpHouUni(void)
     bool fDef = 0;
     uint wSize = 0;
 
-    uint iwHou = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
+    uint iwHhr = (wHOURS+iwHardHou-bInBuffB) % wHOURS;
 
     uchar i;
     for (i=0; i<bInBuffD; i++)
     {
-      LoadImpHouFree(iwHou);
+      LoadImpHouFree(iwHhr);
 
       uchar g;
       for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
@@ -117,7 +117,7 @@ void    GetPowGrpHouUni(void)
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
 
-      if (iwHou > 0) iwHou--; else iwHou = wHOURS-1;
+      if (iwHhr > 0) iwHhr--; else iwHhr = wHOURS-1;
     }
 
     ulong dw = DateToHouIndex(*GetCurrTimeDate());
@@ -145,12 +145,12 @@ void    GetPowCanHou48Uni(void)
     bool fDef = 0;
     uint wSize = 0;
 
-    uint iwHou = GetDayHouIndex(bInBuffB);
+    uint iwHhr = GetDayHhrIndex(bInBuffB);
 
     uchar i;
     for (i=0; i<48; i++)
     {
-      LoadImpHouFree(iwHou);
+      LoadImpHouFree(iwHhr);
 
       uchar c;
       for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
@@ -181,7 +181,7 @@ void    GetPowCanHou48Uni(void)
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
 
-      if (++iwHou >= wHOURS) iwHou = 0;
+      if (++iwHhr >= wHOURS) iwHhr = 0;
     }
 
     ulong dw = DateToDayIndex(*GetCurrTimeDate());
@@ -209,12 +209,12 @@ void    GetPowGrpHou48Uni(void)
     bool fDef = 0;
     uint wSize = 0;
 
-    uint iwHou = GetDayHouIndex(bInBuffB);
+    uint iwHhr = GetDayHhrIndex(bInBuffB);
 
     uchar i;
     for (i=0; i<48; i++)
     {
-      LoadImpHouFree(iwHou);
+      LoadImpHouFree(iwHhr);
 
       uchar g;
       for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
@@ -238,7 +238,7 @@ void    GetPowGrpHou48Uni(void)
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result2(bUNI_OUTOVERFLOW); return; }
       }
 
-      if (++iwHou >= wHOURS) iwHou = 0;
+      if (++iwHhr >= wHOURS) iwHhr = 0;
     }
 
     ulong dw = DateToDayIndex(*GetCurrTimeDate());

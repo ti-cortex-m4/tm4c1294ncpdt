@@ -123,7 +123,7 @@ static uint GetDayHouIndex_Diagram(uchar  ibDay)
 void    OutDiagram(bool  fDouble)
 {
   if (bInBuff6 > wHOURS_DIAGRAM/48) { Result(bRES_BADADDRESS); return; }
-  uint iwHou = GetDayHouIndex_Diagram(bInBuff6);
+  uint iwHhr = GetDayHouIndex_Diagram(bInBuff6);
 
   InitPushPtr();
   uint wSize = 0;
@@ -131,7 +131,7 @@ void    OutDiagram(bool  fDouble)
   uchar h;
   for (h=0; h<48; h++)
   {
-    if (LoadDgrHou(iwHou) == false) { Result(bRES_BADFLASH); return; }
+    if (LoadDgrHou(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     uchar c;
     for (c=0; c<bCANALS; c++)
@@ -165,7 +165,7 @@ void    OutDiagram(bool  fDouble)
       } 
     }
           
-    if (++iwHou >= wHOURS_DIAGRAM) iwHou = 0;
+    if (++iwHhr >= wHOURS_DIAGRAM) iwHhr = 0;
   }      
 
   OutptrOutBuff(wSize);
