@@ -33,4 +33,4 @@ realtime1               Realtime1;
 
 
 // переменная
-uchar                   bHouInc;
+uchar                   bHhrInc;

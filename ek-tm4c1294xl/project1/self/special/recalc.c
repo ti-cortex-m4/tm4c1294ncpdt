@@ -116,7 +116,7 @@ uchar   i;
   OpenCalc();                                       // начинаем обработку
 
 
-  bHouInc = 0;
+  bHhrInc = 0;
 
   uint iwHhr;
   for (iwHhr=0; iwHhr<wHOURS; iwHhr++)
@@ -125,7 +125,7 @@ uchar   i;
     if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
 
-    iwDigHou = (wHOURS + iwHardHou - iwHhr - bHouInc) % wHOURS;
+    iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
 
 
     time ti = HouIndexToDate(dwHouIndex);
@@ -179,7 +179,7 @@ bool    ClearCanals(bool  fStopCan, uchar  ibXmin, uchar  ibXmax, uint  iwAmin, 
 
   fLoadHou = 0;
 
-  bHouInc = 0;
+  bHhrInc = 0;
 
   uint iwHhr;
   for (iwHhr=0; iwHhr<wHOURS; iwHhr++)
@@ -188,7 +188,7 @@ bool    ClearCanals(bool  fStopCan, uchar  ibXmin, uchar  ibXmax, uint  iwAmin, 
     if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
 
-    iwDigHou = (wHOURS + iwHardHou - iwHhr - bHouInc) % wHOURS;
+    iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
 
 
     if (iwDigHou == iwAmax) fLoadHou = 1;

@@ -29,7 +29,7 @@ static void ProcessTimeMnt(void)
   if ((tiCurr.bMinute % 30 == 0) && (tiPrev.bMinute % 30 != 0))
   {
   	NextMinute30();
-    bHouInc++;
+    bHhrInc++;
   }
 }
 
