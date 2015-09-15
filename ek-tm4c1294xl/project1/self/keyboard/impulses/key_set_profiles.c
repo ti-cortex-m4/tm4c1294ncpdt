@@ -5,19 +5,17 @@ KEY_SET_PROFILES.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_energy_spec.h"
+#include "../../memory/mem_profile.h"
 #include "../../console.h"
+#include "../../access.h"
+#include "../../realtime/realtime.h"
+#include "../../realtime/realtime_spec.h"
+#include "../../impulses/energy_spec.h"
 #include "../../digitals/digitals.h"
+#include "../../special/calc.h"
 
 
-
-extern  char const              szProcess[],
-                                szCanalsTitle[],
-                                szDateFrom[],
-                                szDateTo[],
-                                szTimeFrom[],
-                                szTimeTo[],
-                                szCanalFrom[],
-                                szCanalTo[];
 
 void    ShowDateClear(uchar  j);
 void    ShowTimeClear(uchar  j);
@@ -26,14 +24,27 @@ void    ShowTimeClear(uchar  j);
 
 //                                         0123456789ABCDEF
 static char const       szSetProfiles[]  = "Редактирование  ",
-                        szProfilesMask[] = " значение: _____";
+                        szProfilesMask[] = " значение: _____",
+                        szProcess[]      = "Обработка       ",
+                        szCanalsTitle[]  = "Каналы:         ",
+                        szDateFrom[]     = "Дата от:        ",
+                        szDateTo[]       = "Дата до:        ",
+                        szTimeFrom[]     = "Время от:       ",
+                        szTimeTo[]       = "Время до:       ",
+                        szCanalFrom[]    = " от: __",
+                        szCanalTo[]      = " до: __";
+
+
+
+static uchar            ibXmin, ibXmax, ibYmin, ibYmax, ibZmin, ibZmax;
+static uint             iwA, iwAmin, iwAmax;
 
 
 
 static void ShowAnswerProfiles(void)
 {
   Clear();
-  ShowBoolean(enKeyboard != KBD_INPUT6);
+  ShowBool(enKeyboard != KBD_INPUT6);
 }
 
 
@@ -43,16 +54,19 @@ void    SetProfiles(void)
 
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
 
-  uchar wBuffD = ((wHOURS + iwHardHou - iwAmin) % wHOURS) + 4;
+  uint wBuffD = ((wHOURS + iwHardHou - iwAmin) % wHOURS) + 4;
 
+  uchar ibDig;
   for (ibDig=ibXmin; ibDig<=ibXmax; ibDig++)
   { 
-    LoadCurrDigital(ibDig);                             
+    LoadCurrDigital(ibDig);
+
+    uchar ibCan;
     for (ibCan=0; ibCan<bCANALS; ibCan++) 
     {
       LoadPrevDigital(ibCan);
 
-      if (CompareCurrPrevLines() == 1)
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
         mpboReadyCan[ibCan] = true;
     } 
   }
@@ -61,6 +75,8 @@ void    SetProfiles(void)
   fLoadHou = 0;
 
   bHouInc = 0;
+
+  uint iwHou;
   for (iwHou=0; iwHou<wHOURS; iwHou++) 
   {
     if (fKey == 1) { fKey = 0; Beep(); }
@@ -76,10 +92,11 @@ void    SetProfiles(void)
     {
       LoadImpHouSpec(iwDigHou,1);                   // обработка по получасам
     
+      uchar ibCan;
       for (ibCan=0; ibCan<bCANALS; ibCan++)         // обработка по каналам                
       {
         if (mpboReadyCan[ibCan] == true)
-          SetCanInt(mpwImpHouCanSpec, ibCan, iwA); 
+          mpwImpHouCanSpec[ibCan] = iwA;
       }
 
       SaveImpHouSpec(1,iwDigHou);
@@ -159,8 +176,8 @@ void    key_SetProfiles1(void)
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
-      iwAmin = (PrevDayIndex(ibZmin) + ibYmin) % wHOURS;
-      iwAmax = (PrevDayIndex(ibZmax) + ibYmax) % wHOURS;
+      iwAmin = (GetDayHouIndex(ibZmin) + ibYmin) % wHOURS;
+      iwAmax = (GetDayHouIndex(ibZmax) + ibYmax) % wHOURS;
 
       enKeyboard = KBD_INPUT5;
       ShowHi(szSetProfiles);
@@ -168,7 +185,7 @@ void    key_SetProfiles1(void)
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
-      iwA = GetInt(11,15);
+      iwA = GetIntLo(11,15);
 
       enKeyboard = KBD_INPUT6;
       ShowAnswerProfiles();
@@ -310,7 +327,7 @@ void    key_SetProfiles2(void)
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      iwAmin = (PrevDayIndex(ibZmin) + ibYmin) % wHOURS;
+      iwAmin = (GetDayHouIndex(ibZmin) + ibYmin) % wHOURS;
       iwAmax = iwAmin;
 
       enKeyboard = KBD_INPUT5;
@@ -319,7 +336,7 @@ void    key_SetProfiles2(void)
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
-      iwA = GetInt(11,15);
+      iwA = GetIntLo(11,15);
 
       enKeyboard = KBD_INPUT6;
       ShowAnswerProfiles();
