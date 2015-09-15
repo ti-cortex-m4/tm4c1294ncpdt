@@ -54,8 +54,6 @@ void    SetProfiles(void)
 
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
 
-  uint wBuffD = ((wHOURS + iwHardHou - iwAmin) % wHOURS) + 4;
-
   uchar ibDig;
   for (ibDig=ibXmin; ibDig<=ibXmax; ibDig++)
   { 

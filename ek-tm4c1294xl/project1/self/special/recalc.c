@@ -29,7 +29,8 @@ RECALC.C
 static char const       szRecalc1[]     = "Очистка данных  ",
                         szRecalc2[]     = "Расчет данных   ",
                         szOpenCalc1[]   = "   Выключение   ",
-                        szOpenCalc2[]   = "во время расчета";
+                        szOpenCalc2[]   = "во время расчета",
+                        szProcess[]     = "Обработка       ";
 
 
 cache const             chOpenCalc = {OPEN_CALC, &boOpenCalc, sizeof(bool)};
@@ -167,7 +168,7 @@ bool    ClearCanals(bool  fStopCan, uchar  ibXmin, uchar  ibXmax, uint  iwAmin, 
     {
       LoadPrevDigital(ibCan);
 
-      if (CompareCurrPrevLines() == 1)
+      if (CompareCurrPrevLines(ibDig, ibCan) == 1)
       {
         mpboReadyCan[ibCan] = true;
         if (fStopCan == 1) mpcwStopCan[ibCan] = wBuffD;
@@ -196,6 +197,7 @@ bool    ClearCanals(bool  fStopCan, uchar  ibXmin, uchar  ibXmax, uint  iwAmin, 
     {
       LoadImpHouSpec(iwDigHou,1);                   
 
+      uchar ibCan;
       for (ibCan=0; ibCan<bCANALS; ibCan++)
       {
         // если канал не используется: пропустить
