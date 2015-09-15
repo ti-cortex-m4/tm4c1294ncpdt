@@ -136,7 +136,7 @@ static uint  wHhrMin,wHhrMax;
       enKeyboard = KBD_SHOW;
       Clear();
 
-      (ClearCanals(1, ibDigMin, ibDigMax, wHhrMin, wHhrMax) == 1) ? OK() : Error();
+      (ClearCanals(ibDigMin, ibDigMax, wHhrMin, wHhrMax, true) == true) ? OK() : Error();
 
       ShowHi(szCanalsTitle);
     }
