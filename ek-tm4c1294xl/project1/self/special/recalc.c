@@ -150,16 +150,16 @@ uchar   i;
 
 
 
-bool    ClearCanals(bool  fStopCan, uchar  ibXmin, uchar  ibXmax, uint  iwAmin, uint  iwAmax)
+bool    ClearCanals(bool  fStopCan, uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrMax)
 {
   ShowHi(szProcess); Clear();
 
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
 
-  uint wBuffD = ((wHOURS + iwHardHou - iwAmin) % wHOURS) + 4;
+  uint wBuffD = ((wHOURS + iwHardHou - wHhrMin) % wHOURS) + 4;
 
   uchar ibDig;
-  for (ibDig=ibXmin; ibDig<=ibXmax; ibDig++)
+  for (ibDig=ibDigMin; ibDig<=ibDigMax; ibDig++)
   {
     LoadCurrDigital(ibDig);
 
@@ -191,7 +191,7 @@ bool    ClearCanals(bool  fStopCan, uchar  ibXmin, uchar  ibXmax, uint  iwAmin, 
     iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
 
 
-    if (iwDigHou == iwAmax) fLoadHou = 1;
+    if (iwDigHou == wHhrMax) fLoadHou = 1;
 
     if (fLoadHou == 1)
     {
@@ -213,7 +213,7 @@ bool    ClearCanals(bool  fStopCan, uchar  ibXmin, uchar  ibXmax, uint  iwAmin, 
       SaveImpHouSpec(1,iwDigHou);
     }
 
-    if (iwDigHou == iwAmin) fLoadHou = 0;
+    if (iwDigHou == wHhrMin) fLoadHou = 0;
   }
 
   return Recalc(1,1);
