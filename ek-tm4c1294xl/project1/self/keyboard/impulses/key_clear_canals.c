@@ -31,7 +31,7 @@ static char const       szClearCanals[]   = "Очистка каналов ",
 
 
 static uchar            ibXmin, ibXmax, ibYmin, ibYmax, ibZmin, ibZmax;
-static uint             iwA, iwAmin, iwAmax;
+static uint             iwAmin, iwAmax;
 
 
 
@@ -138,7 +138,7 @@ void    key_ClearCanals(void)
       enKeyboard = KBD_SHOW;
       Clear();
 
-      (ClearCanals(1) == 1) ? OK() : Error();
+      (ClearCanals(1, ibXmin, ibXmax, iwAmin, iwAmax) == 1) ? OK() : Error();
 
       ShowHi(szCanalsTitle);
     }
