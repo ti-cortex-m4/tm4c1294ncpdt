@@ -338,6 +338,9 @@ PROGRAMS.H
 
 #define wSET_EXT6_FLAG              400
 
+#define wSET_SET_PROFILES1          990
+#define wSET_SET_PROFILES2          991
+
 #define wGET_HEALTH                 999
 
 

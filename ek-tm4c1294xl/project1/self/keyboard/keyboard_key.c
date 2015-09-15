@@ -68,6 +68,7 @@ KEYBOARD_KEY.C
 #include "impulses/key_cnt_year.h"
 #include "impulses/key_oldprogram73.h"
 #include "impulses/key_oldprogram74.h"
+#include "impulses/key_set_profiles.h"
 #include "key_reset.h"
 #include "key_reset_wdt.h"
 #include "test/key_test_direct.h"
@@ -833,6 +834,9 @@ void    Keyboard_Key(void)
       case bSET_EXT5_FLAG:      key_SetExt5Flag();      break;
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
+
+      case wSET_SET_PROFILES1:  key_SetProfiles1();     break;
+      case wSET_SET_PROFILES2:  key_SetProfiles2();     break;
 
       case wGET_HEALTH:         key_GetHealth();        break;
 
