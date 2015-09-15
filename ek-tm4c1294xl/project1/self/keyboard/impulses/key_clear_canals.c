@@ -8,13 +8,13 @@ _CLEAR.C
 #include "../../memory/mem_energy_spec.h"
 #include "../../memory/mem_profile.h"
 #include "../../console.h"
-#include "../../access.h"
+//#include "../../access.h"
 #include "../../realtime/realtime.h"
 #include "../../realtime/realtime_spec.h"
 #include "../../impulses/energy_spec.h"
 #include "../../digitals/digitals.h"
 #include "../../special/calc.h"
-#include "../../hardware/beep.h"
+#include "../../special/recalc.h"
 
 
 
@@ -31,24 +31,29 @@ static char const       szClearCanals1[]  = "Синхронизация   ",
 
 
 
+static uchar            ibXmin, ibXmax, ibYmin, ibYmax, ibZmin, ibZmax;
+static uint             iwA, iwAmin, iwAmax;
+
+
+
 void    ShowDateClear(uchar  j)
 {
   tiAlt = tiCurr;
-  dwBuffC = DateToHouIndex();
+  ulong dwBuffC = DateToHouIndex();
 
   dwBuffC -= (uint)48*j + GetHouIndex();
 
   HouIndexToDate(dwBuffC);
 
-  sprintf(szLo+7,"%02bu.%02bu.%02bu",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
-  sprintf(szHi+13,".%02bu",j);
+  sprintf(szLo+7,"%02u.%02u.%02u",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
+  sprintf(szHi+13,".%02u",j);
 }
 
 
 void    ShowTimeClear(uchar  j)
 {
-  sprintf(szLo+1,"%02bu:%02bu",j/2,(j%2)*30);
-  sprintf(szHi+13,".%02bu",j);
+  sprintf(szLo+1,"%02u:%02u",j/2,(j%2)*30);
+  sprintf(szHi+13,".%02u",j);
 }
 
 
@@ -68,12 +73,7 @@ void    key_ClearCanals(void)
     {
       enKeyboard = KBD_INPUT1;
 
-      switch (bProgram)
-      { 
-//        case bSET_CLEARCANALS_1:  ShowHi(szClearCanals1);  break;
-        case bSET_CLEARCANALS_2:  ShowHi(szClearCanals2);  break;
-      }
-
+      ShowHi(szClearCanals2);
       Clear(); DelayInf();
 
       ShowHi(szCanalsTitle);
@@ -81,7 +81,7 @@ void    key_ClearCanals(void)
     } 
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ibXmin = GetChar(5,6) - 1;
+      ibXmin = GetCharLo(5,6) - 1;
       if (ibXmin < bCANALS)
       {
         enKeyboard = KBD_INPUT2;
@@ -91,7 +91,7 @@ void    key_ClearCanals(void)
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      ibXmax = GetChar(13,14) - 1;
+      ibXmax = GetCharLo(13,14) - 1;
       if ((ibXmax < bCANALS) && (ibXmax >= ibXmin))
       {
         enKeyboard = KBD_INPUT3;
@@ -134,12 +134,7 @@ void    key_ClearCanals(void)
 
       enKeyboard = KBD_INPUT5;
 
-      switch (bProgram)
-      { 
-//        case bSET_CLEARCANALS_1:  ShowHi(szClearCanals1);  break;
-        case bSET_CLEARCANALS_2:  ShowHi(szClearCanals2);  break;
-      }
-
+      ShowHi(szClearCanals2);
       ShowAnswerClear();
     }
     else if (enKeyboard == KBD_POSTINPUT5)
@@ -147,11 +142,7 @@ void    key_ClearCanals(void)
       enKeyboard = KBD_SHOW;
       Clear();
 
-      switch (bProgram)
-      { 
-//        case bSET_CLEARCANALS_1:  (ClearCanals(0) == 1) ? OK() : Error();  break;
-        case bSET_CLEARCANALS_2:  (ClearCanals(1) == 1) ? OK() : Error();  break;
-      }
+      (ClearCanals(1) == 1) ? OK() : Error();
 
       ShowHi(szCanalsTitle);
     }
