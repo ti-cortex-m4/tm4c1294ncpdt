@@ -836,7 +836,7 @@ void    Keyboard_Key(void)
 
       case wSET_EXT6_FLAG:      key_SetExt6Flag();      break;
 
-      case bSET_CLEARCANALS_2:  key_ClearCanals();      break;
+      case bSET_CLEAR_CANALS:   key_ClearCanals();      break;
       case wSET_SET_PROFILES1:  key_SetProfiles1();     break;
       case wSET_SET_PROFILES2:  key_SetProfiles2();     break;
 

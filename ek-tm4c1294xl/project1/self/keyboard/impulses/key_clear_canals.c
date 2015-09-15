@@ -30,11 +30,6 @@ static char const       szClearCanals[]   = "Очистка каналов ",
 
 
 
-static uchar            ibXmin, ibXmax, ibYmin, ibYmax, ibZmin, ibZmax;
-static uint             iwAmin, iwAmax;
-
-
-
 void    ShowDateClear(uchar  j)
 {
   ulong dw = DateToHouIndex(tiCurr);
@@ -62,7 +57,10 @@ static void ShowAnswer(void)
 
 
 void    key_ClearCanals(void)
-{ 
+{
+static uchar ibXmin,ibXmax,ibYmin,ibYmax,ibZmin,ibZmax;
+static uint  iwAmin,iwAmax;
+
   if (bKey == bKEY_ENTER)
   {                                           
     if (enKeyboard == KBD_ENTER)

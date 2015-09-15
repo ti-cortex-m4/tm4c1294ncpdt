@@ -338,7 +338,7 @@ PROGRAMS.H
 
 #define wSET_EXT6_FLAG              400
 
-#define bSET_CLEARCANALS_2          87
+#define bSET_CLEAR_CANALS           87
 #define wSET_SET_PROFILES1          990
 #define wSET_SET_PROFILES2          991
 
