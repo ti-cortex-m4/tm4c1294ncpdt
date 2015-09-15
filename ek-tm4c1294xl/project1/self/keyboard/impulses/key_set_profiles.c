@@ -51,17 +51,17 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
 
   uchar ibDig;
   for (ibDig=ibDigMin; ibDig<=ibDigMax; ibDig++)
-  { 
+  {
     LoadCurrDigital(ibDig);
 
     uchar c;
-    for (c=0; c<bCANALS; c++) 
+    for (c=0; c<bCANALS; c++)
     {
       LoadPrevDigital(c);
 
       if (CompareCurrPrevLines(ibDig, c) == 1)
         mpboReadyCan[c] = true;
-    } 
+    }
   }
 
 
@@ -70,10 +70,10 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
   bHhrInc = 0;
 
   uint iwHhr;
-  for (iwHhr=0; iwHhr<wHOURS; iwHhr++) 
+  for (iwHhr=0; iwHhr<wHOURS; iwHhr++)
   {
     if (fKey == 1) { fKey = 0; Beep(); }
-    if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));    
+    if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
 
     iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
@@ -83,10 +83,10 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
 
     if (fLoadHou == 1)
     {
-      LoadImpHouSpec(iwDigHou,1);                   
-    
+      LoadImpHouSpec(iwDigHou,1);
+
       uchar c;
-      for (c=0; c<bCANALS; c++)                         
+      for (c=0; c<bCANALS; c++)
       {
         if (mpboReadyCan[c] == true)
           mpwImpHouCanSpec[c] = wImp;
@@ -102,12 +102,12 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
 
 
 void    key_SetProfiles1(void)
-{ 
+{
 static uchar ibDigMin,ibDigMax,ibHhrMin,ibHhrMax,ibDayMin,ibDayMax;
 static uint  wImp,wHhrMin,wHhrMax;
 
   if (bKey == bKEY_ENTER)
-  {                                           
+  {
     if (enKeyboard == KBD_ENTER)
     {
       if (SuperUser())
@@ -121,7 +121,7 @@ static uint  wImp,wHhrMin,wHhrMax;
         strcpy(szLo+0,szCanalFrom);
       }
       else LongBeep();
-    } 
+    }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       ibDigMin = GetCharLo(5,6) - 1;
@@ -223,13 +223,13 @@ static uint  wImp,wHhrMin,wHhrMax;
       { if (++ibHhrMax >= 48) ibHhrMax = ibHhrMin; }
       else
       { if (++ibHhrMax >= 48) ibHhrMax = 0; }
-      
+
       ShowTime_ClearCanals(ibHhrMax);
     }
     else if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
-    {           
+    {
       (enKeyboard == KBD_INPUT6) ? (enKeyboard = KBD_POSTINPUT6) : (enKeyboard = KBD_INPUT6);
-      ShowAnswer(); 
+      ShowAnswer();
     }
     else Beep();
   }
@@ -242,30 +242,30 @@ static uint  wImp,wHhrMin,wHhrMax;
       enKeyboard = KBD_POSTINPUT5;
       sprintf(szLo+11,"65535");
     }
-    else Beep(); 
+    else Beep();
   }
 
 
   else if (bKey < 10)
-  {        
+  {
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
     {
       enKeyboard = KBD_POSTINPUT1;
       ShiftLo(5,6);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
       ShiftLo(13,14);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT5) || (enKeyboard == KBD_POSTINPUT5))
     {
       enKeyboard = KBD_POSTINPUT5;
       ShiftLo(11,15);
     }
-    else Beep(); 
+    else Beep();
   }
   else Beep();
 }
@@ -273,12 +273,12 @@ static uint  wImp,wHhrMin,wHhrMax;
 
 
 void    key_SetProfiles2(void)
-{ 
+{
 static uchar ibDigMin,ibDigMax,ibHhrMin,ibDayMin;
 static uint  wImp,iwAmin,iwAmax;
 
   if (bKey == bKEY_ENTER)
-  {                                           
+  {
     if (enKeyboard == KBD_ENTER)
     {
       if (SuperUser())
@@ -292,7 +292,7 @@ static uint  wImp,iwAmin,iwAmax;
         strcpy(szLo+0,szCanalFrom);
       }
       else LongBeep();
-    } 
+    }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       ibDigMin = GetCharLo(5,6) - 1;
@@ -367,9 +367,9 @@ static uint  wImp,iwAmin,iwAmax;
       ShowTime_ClearCanals(ibHhrMin);
     }
     else if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
-    {           
+    {
       (enKeyboard == KBD_INPUT6) ? (enKeyboard = KBD_POSTINPUT6) : (enKeyboard = KBD_INPUT6);
-      ShowAnswer(); 
+      ShowAnswer();
     }
     else Beep();
   }
@@ -382,30 +382,30 @@ static uint  wImp,iwAmin,iwAmax;
       enKeyboard = KBD_POSTINPUT5;
       sprintf(szLo+11,"65535");
     }
-    else Beep(); 
+    else Beep();
   }
 
 
   else if (bKey < 10)
-  {        
+  {
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
     {
       enKeyboard = KBD_POSTINPUT1;
       ShiftLo(5,6);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
       ShiftLo(13,14);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT5) || (enKeyboard == KBD_POSTINPUT5))
     {
       enKeyboard = KBD_POSTINPUT5;
       ShiftLo(11,15);
     }
-    else Beep(); 
+    else Beep();
   }
   else Beep();
 }
