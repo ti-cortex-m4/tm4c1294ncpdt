@@ -150,13 +150,13 @@ uchar   i;
 
 
 
-bool    ClearCanals(bool  fStopCan, uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrMax)
+bool    ClearCanals(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrMax, bool  fStopCan)
 {
   ShowHi(szProcess); Clear();
 
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
 
-  uint wBuffD = ((wHOURS + iwHardHou - wHhrMin) % wHOURS) + 4;
+  uint wStop = ((wHOURS + iwHardHou - wHhrMin) % wHOURS) + 4;
 
   uchar ibDig;
   for (ibDig=ibDigMin; ibDig<=ibDigMax; ibDig++)
@@ -171,7 +171,7 @@ bool    ClearCanals(bool  fStopCan, uchar  ibDigMin, uchar  ibDigMax, uint  wHhr
       if (CompareCurrPrevLines(ibDig, ibCan) == 1)
       {
         mpboReadyCan[ibCan] = true;
-        if (fStopCan == 1) mpcwStopCan[ibCan] = wBuffD;
+        if (fStopCan == true) mpcwStopCan[ibCan] = wStop;
       }
     }
   }
@@ -205,8 +205,8 @@ bool    ClearCanals(bool  fStopCan, uchar  ibDigMin, uchar  ibDigMax, uint  wHhr
 
         if (mpboReadyCan[ibCan] == true)
         {
-          if (fStopCan == 1) wBuffD = 0xFFFF; else wBuffD = 0;
-          mpwImpHouCanSpec[ibCan] = wBuffD;
+          if (fStopCan == 1) wStop = 0xFFFF; else wStop = 0;
+          mpwImpHouCanSpec[ibCan] = wStop;
         }
       }
 
