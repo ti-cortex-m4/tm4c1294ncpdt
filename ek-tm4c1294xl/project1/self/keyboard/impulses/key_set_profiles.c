@@ -17,8 +17,8 @@ KEY_SET_PROFILES.C
 
 
 
-void    ShowDateClear(uchar  j);
-void    ShowTimeClear(uchar  j);
+void    ShowDate_ClearCanals(uchar  ibDay);
+void    ShowTime_ClearCanals(uchar  ibHhr);
 
 
 
@@ -141,7 +141,7 @@ static uint  wImp, iwAmin,iwAmax;
         ShowHi(szDateFrom); Clear();
 
         ibZmin = 0;
-        ShowDateClear(ibZmin);
+        ShowDate_ClearCanals(ibZmin);
       }
       else Beep();
     }
@@ -151,7 +151,7 @@ static uint  wImp, iwAmin,iwAmax;
       ShowHi(szTimeFrom);
 
       ibYmin = 0;
-      ShowTimeClear(ibYmin);
+      ShowTime_ClearCanals(ibYmin);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
@@ -160,7 +160,7 @@ static uint  wImp, iwAmin,iwAmax;
       Clear();
 
       ibZmax = ibZmin;
-      ShowDateClear(ibZmax);
+      ShowDate_ClearCanals(ibZmax);
     }
     else if (enKeyboard == KBD_INPUT4)
     {
@@ -168,7 +168,7 @@ static uint  wImp, iwAmin,iwAmax;
       ShowHi(szTimeTo);
 
       (ibZmax == ibZmin) ? (ibYmax = ibYmin) : (ibYmax = 0);
-      ShowTimeClear(ibYmax);
+      ShowTime_ClearCanals(ibYmax);
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
@@ -205,17 +205,17 @@ static uint  wImp, iwAmin,iwAmax;
     if (enKeyboard == KBD_INPUT3)
     {
       if (++ibZmin >= wHOURS/48) ibZmin = 0;
-      ShowDateClear(ibZmin);
+      ShowDate_ClearCanals(ibZmin);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
       if (++ibYmin >= 48) ibYmin = 0;
-      ShowTimeClear(ibYmin);
+      ShowTime_ClearCanals(ibYmin);
     }
     else if (enKeyboard == KBD_INPUT4)
     {
       (ibZmax > 0) ? (ibZmax--) : (ibZmax = ibZmin);
-      ShowDateClear(ibZmax);
+      ShowDate_ClearCanals(ibZmax);
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
@@ -224,7 +224,7 @@ static uint  wImp, iwAmin,iwAmax;
       else
       { if (++ibYmax >= 48) ibYmax = 0; }
       
-      ShowTimeClear(ibYmax);
+      ShowTime_ClearCanals(ibYmax);
     }
     else if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
     {           
@@ -312,7 +312,7 @@ static uint  wImp,iwAmin,iwAmax;
         ShowHi(szDateFrom); Clear();
 
         ibZmin = 0;
-        ShowDateClear(ibZmin);
+        ShowDate_ClearCanals(ibZmin);
       }
       else Beep();
     }
@@ -322,7 +322,7 @@ static uint  wImp,iwAmin,iwAmax;
       ShowHi(szTimeFrom);
 
       ibYmin = 0;
-      ShowTimeClear(ibYmin);
+      ShowTime_ClearCanals(ibYmin);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
@@ -359,12 +359,12 @@ static uint  wImp,iwAmin,iwAmax;
     if (enKeyboard == KBD_INPUT3)
     {
       if (++ibZmin >= wHOURS/48) ibZmin = 0;
-      ShowDateClear(ibZmin);
+      ShowDate_ClearCanals(ibZmin);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
       if (++ibYmin >= 48) ibYmin = 0;
-      ShowTimeClear(ibYmin);
+      ShowTime_ClearCanals(ibYmin);
     }
     else if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
     {           
