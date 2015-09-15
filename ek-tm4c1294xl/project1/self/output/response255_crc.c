@@ -215,7 +215,7 @@ void    Response255_CRC(void)
     case bEXT_GETSTART: OutStart(); break;
 
 #ifdef ENABLE_BULK
-    case bEXT_BULK: OutBulk(); break;
+    case bEXT_GETBULK: OutBulk(); break;
 #endif
 
     case bEXT_GETCURRENT2: OutCurrent2(); break;

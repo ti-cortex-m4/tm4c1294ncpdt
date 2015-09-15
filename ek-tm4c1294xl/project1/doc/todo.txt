@@ -41,7 +41,6 @@ output - from mem_profile
 
 remove external headers
 
-bulk
 hhr100
 answer disable
 990/991
