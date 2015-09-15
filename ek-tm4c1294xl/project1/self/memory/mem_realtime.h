@@ -39,7 +39,7 @@ extern  realtime1               Realtime1;
 
 
 
-extern  uchar                   bHouInc;
+extern  uchar                   bHhrInc;
 
 
 #endif

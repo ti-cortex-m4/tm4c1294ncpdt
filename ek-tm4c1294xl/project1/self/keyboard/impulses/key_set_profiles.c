@@ -24,8 +24,8 @@ void    ShowTime_ClearCanals(uchar  ibHhr);
 
 //                                         0123456789ABCDEF
 static char const       szSetProfiles[]  = "Редактирование  ",
-                        szProfilesMask[] = " значение: _____",
                         szProcess[]      = "Обработка       ",
+                        szMask[]         = " значение: _____",
                         szCanalsTitle[]  = "Каналы:         ",
                         szDateFrom[]     = "Дата от:        ",
                         szDateTo[]       = "Дата до:        ",
@@ -43,7 +43,7 @@ static void ShowAnswer(void)
 }
 
 
-void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  iwAmin, uint  iwAmax, uint  wImp)
+void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrMax, uint  wImp)
 {
   ShowHi(szProcess); Clear();
 
@@ -67,7 +67,7 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  iwAmin, uint  iwAmax
 
   fLoadHou = 0;
 
-  bHouInc = 0;
+  bHhrInc = 0;
 
   uint iwHhr;
   for (iwHhr=0; iwHhr<wHOURS; iwHhr++) 
@@ -76,10 +76,10 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  iwAmin, uint  iwAmax
     if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));    
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
 
-    iwDigHou = (wHOURS + iwHardHou - iwHhr - bHouInc) % wHOURS;
+    iwDigHou = (wHOURS + iwHardHou - iwHhr - bHhrInc) % wHOURS;
 
 
-    if (iwDigHou == iwAmax) fLoadHou = 1;
+    if (iwDigHou == wHhrMax) fLoadHou = 1;
 
     if (fLoadHou == 1)
     {
@@ -95,7 +95,7 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  iwAmin, uint  iwAmax
       SaveImpHouSpec(1,iwDigHou);
     }
 
-    if (iwDigHou == iwAmin) fLoadHou = 0;
+    if (iwDigHou == wHhrMin) fLoadHou = 0;
   }
 }
 
@@ -104,7 +104,7 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  iwAmin, uint  iwAmax
 void    key_SetProfiles1(void)
 { 
 static uchar ibDigMin,ibDigMax,ibHhrMin,ibHhrMax,ibDayMin,ibDayMax;
-static uint  wImp,iwAmin,iwAmax;
+static uint  wImp,wHhrMin,wHhrMax;
 
   if (bKey == bKEY_ENTER)
   {                                           
@@ -172,12 +172,12 @@ static uint  wImp,iwAmin,iwAmax;
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
-      iwAmin = (GetDayHhrIndex(ibDayMin) + ibHhrMin) % wHOURS;
-      iwAmax = (GetDayHhrIndex(ibDayMax) + ibHhrMax) % wHOURS;
+      wHhrMin = (GetDayHhrIndex(ibDayMin) + ibHhrMin) % wHOURS;
+      wHhrMax = (GetDayHhrIndex(ibDayMax) + ibHhrMax) % wHOURS;
 
       enKeyboard = KBD_INPUT5;
       ShowHi(szSetProfiles);
-      ShowLo(szProfilesMask);
+      ShowLo(szMask);
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
@@ -191,7 +191,7 @@ static uint  wImp,iwAmin,iwAmax;
       enKeyboard = KBD_SHOW;
       Clear();
 
-      SetProfiles(ibDigMin, ibDigMax, iwAmin, iwAmax, wImp);
+      SetProfiles(ibDigMin, ibDigMax, wHhrMin, wHhrMax, wImp);
 
       ShowHi(szSetProfiles);
       OK();
@@ -331,7 +331,7 @@ static uint  wImp,iwAmin,iwAmax;
 
       enKeyboard = KBD_INPUT5;
       ShowHi(szSetProfiles);
-      ShowLo(szProfilesMask);
+      ShowLo(szMask);
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
