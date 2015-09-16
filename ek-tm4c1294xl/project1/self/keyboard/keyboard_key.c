@@ -86,6 +86,7 @@ KEYBOARD_KEY.C
 #include "sensors/key_control_q.h"
 #include "sensors/key_short_profile_c.h"
 #include "digitals/profile/key_dsbl_refill.h"
+#include "digitals/key_dsbl_answer.h"
 #include "digitals/key_max_repeats.h"
 #include "digitals/key_dsbl_esc.h"
 #include "key_records_dsbl.h"
@@ -303,6 +304,7 @@ void    Keyboard_Key(void)
       case wSET_CONTROL_Q:      key_SetControlQ();      break;
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
+      case wSET_DSBL_ANSWER:    key_SetDsblAnswer();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
@@ -586,6 +588,7 @@ void    Keyboard_Key(void)
       case wSET_CONTROL_Q:      key_SetControlQ();      break;
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
+      case wSET_DSBL_ANSWER:    key_SetDsblAnswer();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
@@ -788,6 +791,7 @@ void    Keyboard_Key(void)
       case wSET_CONTROL_Q:      key_SetControlQ();      break;
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
+      case wSET_DSBL_ANSWER:    key_SetDsblAnswer();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;

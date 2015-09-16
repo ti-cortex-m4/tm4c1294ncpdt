@@ -290,6 +290,7 @@ PROGRAMS.H
 #define wSET_CONTROL_K              403
 #define wSET_SHORT_PROFILE_C        404
 #define wSET_DSBL_REFILL            405
+#define wSET_DSBL_ANSWER            406
 #define wSET_MAX_REPEATS            409
 
 #define wSET_DSBL_ESC               410

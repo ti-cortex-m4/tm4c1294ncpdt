@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DISABLE_ANSWER.C
+DSBL_ANSWER.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ DISABLE_ANSWER.C
 #include "../main.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
-#include "disable_answer.h"
+#include "dsbl_answer.h"
 
 
 cache const             chDsblAnswer = {DSBL_ANSWER, &boAnswerDisable, sizeof(bool)};
