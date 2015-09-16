@@ -54,12 +54,11 @@ bool   AnswerDisabled(void)
 void    OutDsblAnswer(void)
 {
   InitPushCRC();
-  PushChar(boAnswerDisable);
-  PushChar(boAnswerFlag);
-  Push(&cdwAnswerDisable, sizeof(ulong));
-  Push(&tiAnswerDisable, sizeof(time));
-  Push(&cdwAnswerEnable, sizeof(ulong));
-  Push(&tiAnswerEnable, sizeof(time));
+  PushBool(boAnswerDisable);
+  PushBool(boAnswerFlag);
+  PushLong(cdwAnswerDisable);
+  PushTime(tiAnswerDisable);
+  PushLong(cdwAnswerEnable);
+  PushTime(tiAnswerEnable);
   Output(1+1+4+6+4+6);
 }
-
