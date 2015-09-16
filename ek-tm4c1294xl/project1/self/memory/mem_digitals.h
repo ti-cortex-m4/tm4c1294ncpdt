@@ -77,6 +77,6 @@ extern  bool                    fDsblAnswer;
 
 extern  bool                    boAnswerFlag;
 
-extern  ulong                   cdwAnswerDisable, cdwAnswerEnabled;
+extern  ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
-extern  time                    tiAnswerDisable, tiAnswerEnable;
+extern  time                    tiAnswerDisabled, tiAnswerEnabled;

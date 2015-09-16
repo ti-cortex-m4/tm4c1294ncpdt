@@ -13,6 +13,6 @@ void    ResetDsblAnswer(void);
 
 void    EnableAnswer(void);
 void    DisableAnswer(void);
-bool    AnswerDisabled(void);
+bool    IsAnswerDisabled(void);
 
 void    OutDsblAnswer(void);

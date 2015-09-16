@@ -111,7 +111,7 @@ bool                    fDsblAnswer;
 bool                    boAnswerFlag;
 
 // счетчик
-ulong                   cdwAnswerDisable, cdwAnswerEnabled;
+ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
 // время/дата
-time                    tiAnswerDisable, tiAnswerEnable;
+time                    tiAnswerDisabled, tiAnswerEnabled;

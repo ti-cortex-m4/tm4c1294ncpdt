@@ -33,18 +33,18 @@ void    ResetDsblAnswer(void)
 void    EnableAnswer(void)
 {
 //  boAnswerFlag = true;
-  cdwAnswerEnable++; tiAnswerEnable = tiCurr;
+  cdwAnswerEnabled++; tiAnswerEnabled = tiCurr;
 }
 
 
 void    DisableAnswer(void)
 {
 //  boAnswerFlag = false;
-  cdwAnswerDisable++; tiAnswerDisable = tiCurr;
+  cdwAnswerDisabled++; tiAnswerDisabled = tiCurr;
 }
 
 
-bool   AnswerDisabled(void)
+bool   IsAnswerDisabled(void)
 {
   return 0; // boAnswerFlag != true;
 }
@@ -56,9 +56,9 @@ void    OutDsblAnswer(void)
   InitPushCRC();
   PushBool(fDsblAnswer);
   PushBool(boAnswerFlag);
-  PushLong(cdwAnswerDisable);
-  PushTime(tiAnswerDisable);
+  PushLong(cdwAnswerDisabled);
+  PushTime(tiAnswerDisabled);
   PushLong(cdwAnswerEnabled);
-  PushTime(tiAnswerEnable);
+  PushTime(tiAnswerEnabled);
   Output(1+1+4+6+4+6);
 }
