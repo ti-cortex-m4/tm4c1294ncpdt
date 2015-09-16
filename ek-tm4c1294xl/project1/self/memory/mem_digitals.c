@@ -105,13 +105,13 @@ uint                    wPlcUShutdown;
 
 
 // запрет ответа на запросы во время чтения цифровых счетчиков
-bool                    boAnswerDisable;
+bool                    fDsblAnswer;
 
 // признак
 bool                    boAnswerFlag;
 
 // счетчик
-ulong                   cdwAnswerDisable, cdwAnswerEnable;
+ulong                   cdwAnswerDisable, cdwAnswerEnabled;
 
 // время/дата
 time                    tiAnswerDisable, tiAnswerEnable;

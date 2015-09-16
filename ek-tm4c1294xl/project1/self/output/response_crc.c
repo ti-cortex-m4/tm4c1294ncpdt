@@ -82,7 +82,7 @@ void    RunResponseCRC(void) {
       return;
     }
 
-    if ((boAnswerDisable == true) && AnswerDisabled()) {
+    if ((fDsblAnswer == true) && AnswerDisabled()) {
       if (bInBuff4 != bINQ_ENBL_ANSWER) {
       	ShowTestResponse(bSTA_BUSY);
         Result(bRES_BUSY);

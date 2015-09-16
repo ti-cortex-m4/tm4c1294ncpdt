@@ -10,6 +10,7 @@ RESPONSE0_CRC,C
 #include "../realtime/realtime.h"
 #include "../serial/ports.h"
 #include "../impulses/factors.h"
+#include "../digitals/dsbl_answer.h"
 #include "out_common.h"
 #include "out_rtc.h"
 #include "out_correct.h"

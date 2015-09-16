@@ -73,10 +73,10 @@ extern  uint                    wPlcUShutdown;
 
 
 
-extern  bool                    boAnswerDisable;
+extern  bool                    fDsblAnswer;
 
 extern  bool                    boAnswerFlag;
 
-extern  ulong                   cdwAnswerDisable, cdwAnswerEnable;
+extern  ulong                   cdwAnswerDisable, cdwAnswerEnabled;
 
 extern  time                    tiAnswerDisable, tiAnswerEnable;

@@ -12,19 +12,19 @@ DSBL_ANSWER.C
 
 
 
-cache const             chDsblAnswer = {DSBL_ANSWER, &boAnswerDisable, sizeof(bool)};
+cache const             chDsblAnswer = {DSBL_ANSWER, &fDsblAnswer, sizeof(bool)};
 
 
 
-void    InitDisableAnswer(void)
+void    InitDsblAnswer(void)
 {
   LoadCacheBool(&chDsblAnswer, false);
 }
 
 
-void    ResetDisableAnswer(void)
+void    ResetDsblAnswer(void)
 {
-	boAnswerDisable = false;
+	fDsblAnswer = false;
   SaveCache(&chDsblAnswer);
 }
 
@@ -33,14 +33,14 @@ void    ResetDisableAnswer(void)
 void    EnableAnswer(void)
 {
 //  boAnswerFlag = true;
-//  cdwAnswerEnable++; tiAnswerEnable = tiCurr;
+  cdwAnswerEnable++; tiAnswerEnable = tiCurr;
 }
 
 
 void    DisableAnswer(void)
 {
 //  boAnswerFlag = false;
-//  cdwAnswerDisable++; tiAnswerDisable = tiCurr;
+  cdwAnswerDisable++; tiAnswerDisable = tiCurr;
 }
 
 
@@ -54,11 +54,11 @@ bool   AnswerDisabled(void)
 void    OutDsblAnswer(void)
 {
   InitPushCRC();
-  PushBool(boAnswerDisable);
+  PushBool(fDsblAnswer);
   PushBool(boAnswerFlag);
   PushLong(cdwAnswerDisable);
   PushTime(tiAnswerDisable);
-  PushLong(cdwAnswerEnable);
+  PushLong(cdwAnswerEnabled);
   PushTime(tiAnswerEnable);
   Output(1+1+4+6+4+6);
 }
