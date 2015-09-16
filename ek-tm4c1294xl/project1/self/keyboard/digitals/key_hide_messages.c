@@ -11,11 +11,11 @@ KEY_HIDE_MESSAGES,C
 
 
 
-//                                           0123456789ABCDEF
-static char const       szMessage1[]      = "Ускоренный вывод",
-                        szMessage2[]      = "  на индикацию  ";
+//                                         0123456789ABCDEF
+static char const       szMessage1[]    = "Ускоренный вывод",
+                        szMessage2[]    = "  на индикацию  ";
 
-static char const       *pszMessages[]    = { szMessage1, szMessage2, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 
