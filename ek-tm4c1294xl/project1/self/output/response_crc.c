@@ -7,6 +7,7 @@ RESPONSE_CRC.C
 #include "../main.h"
 #include "../memory/mem_settings.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_digitals.h"
 #include "../include/states.h"
 #include "../access.h"
 #include "../kernel/crc-16.h"
@@ -15,6 +16,7 @@ RESPONSE_CRC.C
 #include "../keyboard/time/key_timedate.h"
 #include "../serial/ports.h"
 #include "../serial/flow.h"
+#include "../digitals/dsbl_answer.h"
 #include "response0_crc.h"
 #include "response_crc.h"
 
@@ -79,15 +81,15 @@ void    RunResponseCRC(void) {
       Result(bRES_BADSIZE);
       return;
     }
-/*
-    if ((boAnswerDisable == boTrue) && AnswerDisabled()) {
-      if (bInBuff4 != bINQ_ANSWER_ENABLE) {
-        ShowCommandCRC(bSTA_BUSY);
+
+    if ((boAnswerDisable == true) && AnswerDisabled()) {
+      if (bInBuff4 != bINQ_ENBL_ANSWER) {
+      	ShowTestResponse(bSTA_BUSY);
         Result(bRES_BUSY);
         return;
       }
     }
-*/
+
     ShowTestResponse(bSTA_OK);
     Response0_CRC();
   }
