@@ -5,7 +5,7 @@
 #define bSET_SPEED                  1
 
 #define bSET_GROUPS                 2
-//#define bSET_NODES                  102 
+//#define bSET_NODES                  102
 
 +   #define bSET_TRANS_ENG              4
 +   #define bSET_TRANS_CNT              244
@@ -15,20 +15,20 @@
 +   #define bSET_LOSSE                  3
 +   #define bSET_LEVEL                  108
 
-#define bSET_DAYZONE                7 
+#define bSET_DAYZONE                7
 #define bSET_PUBLIC                 26
 
-#define bSET_PROGRAM10              10 
+#define bSET_PROGRAM10              10
 #define bSET_PROGRAM17              17
-#define bSET_PROGRAM20              20 
+#define bSET_PROGRAM20              20
 #define bSET_PROGRAM27              27
- 
+
 #define bSET_PROGRAM18              18
 +   #define bSET_RELAXS_FLAG            117
 #define bSET_RELAXS_TARIFF          118
 #define bSET_RELAXS                 119
 /*
-#define bSET_PUBMODE1               130 
+#define bSET_PUBMODE1               130
 #define bSET_PUBMODE2               131
 #define bSET_PUBMODE3               132
 #define bSET_POWMODE1               133
@@ -39,7 +39,7 @@
 #define bSET_ENGMODE3               138
 
 #define bSET_RESETZONES             140
-#define bSET_RESETGROUPS            141  
+#define bSET_RESETGROUPS            141
 #define bSET_RESETRELAXS            142
 #define bSET_RESETENGINE            143
 */
@@ -64,8 +64,8 @@
 #define bSET_DEBUG                  83
 #define bSET_PROGRAM85              85
 
-//#define bSET_CLEARCANALS_1          86
-#define bSET_CLEARCANALS_2          87
+- //#define bSET_CLEARCANALS_1          86
++   #define bSET_CLEARCANALS_2          87
 #define bSET_FINDDEVICENUMBER       88
 #define bSET_FINDDEVICESPEED        89
 +   #define bSET_DIGITALS               90
@@ -211,8 +211,8 @@
 #define bGET_PUBLIC                 126
 #define bGET_PROGRAM38              38
 
-#define bGET_IMPCANCURRMNT          9 
-#define bGET_POWGRPCURRMNT          20 
+#define bGET_IMPCANCURRMNT          9
+#define bGET_POWGRPCURRMNT          20
 
 #define bGET_POWGRPPREVHOU          21
 #define bGET_POWGRPCURRHOU          22
@@ -342,7 +342,7 @@
 #define bGET_ANALYSIS3              237
 +   #define bGET_ANALYSIS4              238
 
-#define bGET_POWCANCURRMNT          120 
+#define bGET_POWCANCURRMNT          120
 
 #define bGET_POWCANPREVHOU          121
 #define bGET_POWCANCURRHOU          122
