@@ -53,5 +53,5 @@
 +   #define wSET_PARAM_DIVIDER    304
 #define wSET_SETCALC_3        340
 
-#define wSET_SET_PROFILES1    990
-#define wSET_SET_PROFILES2    991
++   #define wSET_SET_PROFILES1    990
++   #define wSET_SET_PROFILES2    991

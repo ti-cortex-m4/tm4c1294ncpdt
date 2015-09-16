@@ -451,8 +451,8 @@ _checkup_reset.c
 _checkup_reset.h
 _checkup_run.c
 _checkup_run.h
-_clear.c
-_clear.h
++   _clear.c
++   _clear.h
 _cntcanyear3.c
 _cntcanyear3.h
 _contacts.c
@@ -673,8 +673,8 @@ _search.h
 +   _season.h
 +   _sensors.c
 +   _sensors.h
-_set_profiles.c
-_set_profiles.h
++   _set_profiles.c
++   _set_profiles.h
 _single.c
 _single.h
 _single2.c
