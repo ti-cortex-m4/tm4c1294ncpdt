@@ -14,11 +14,10 @@ KEY_DSBL_ANSWER,C
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = " Запрет ответа  ",
                         szMessage2[]    = "   на запросы   ",
-                        szMessage3[]    = "   по портам    ",
-                        szMessage4[]    = "во время опроса ",
-                        szMessage5[]    = "цифр. счетчиков ";
+                        szMessage3[]    = "во время опроса ",
+                        szMessage4[]    = "   счетчиков    ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, szMessage5, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
 
 
 
