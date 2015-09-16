@@ -21,6 +21,7 @@ RESPONSE255_CRC.C
 #include "../time/correct3.h"
 #include "../output/out_groups.h"
 #include "../output/out_relaxs.h"
+#include "../digitals/dsbl_answer.h"
 #include "../digitals/current/current2.h"
 #include "../digitals/extended/extended_0.h"
 #include "../digitals/extended/extended_1_out.h"
@@ -207,6 +208,7 @@ void    Response255_CRC(void)
     case bEXT_GETGAPS1: OutGaps1(); break;
     case bEXT_GETGAPS2: OutGaps2(); break;
 
+    case bEXT_DSBL_ANSWER: OutDsblAnswer(); break;
     case bEXT_GETSTOPAUXCAN: OutStopAuxCan(); break;
 
     case bEXT_RECORDS_DSBL: OutRecordsDsbl(); break;

@@ -256,7 +256,7 @@
 +   #define bEXT_GETENG3MIN_TIME           25
 
 +   #define bEXT_GETENGGRPHOU_ALL          26
- 
+
 +   #define bEXT_GETADDRESS                28
 +   #define bEXT_SETADDRESS                29
 
@@ -340,7 +340,7 @@
 
 +   #define bEXT_GETRECORDSBLOCK2          99
 +   #define bEXT_GETEXTENDED7              100
-#define bEXT_ANSWER_DISABLE            101
++   #define bEXT_ANSWER_DISABLE            101
 #define bEXT_CONTROL_R                 102
 +   #define bEXT_OVERFLOW_HOU              103
 
