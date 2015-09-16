@@ -10,14 +10,23 @@ CACHE2.C
 
 
 
-void    LoadCacheBool(cache const  *pch, bool  boDef)
+void    SaveCacheBool(cache const  *pch, bool  fVal)
+{
+  bool *pfVal = (bool *) pch->pbBuff;
+  *pfVal = fVal;
+
+  SaveCache(pch);
+}
+
+
+void    LoadCacheBool(cache const  *pch, bool  fDef)
 {
   LoadCache(pch);
-  bool *pboVal = (bool *) pch->pbBuff;
+  bool *pfVal = (bool *) pch->pbBuff;
 
-  if (!((*pboVal == true) || (*pboVal == false)))
+  if (!((*pfVal == true) || (*pfVal == false)))
   {
-    *pboVal = boDef;
+    *pfVal = fDef;
     SaveCache(pch);
   }
 }

@@ -24,8 +24,7 @@ void    InitDsblAnswer(void)
 
 void    ResetDsblAnswer(void)
 {
-	fDsblAnswer = false;
-  SaveCache(&chDsblAnswer);
+  SaveCacheBool(&chDsblAnswer, false);
 }
 
 
@@ -44,7 +43,7 @@ void    DisableAnswer(void)
 }
 
 
-bool   IsAnswerDisabled(void)
+bool    IsAnswerDisabled(void)
 {
   return 0; // boAnswerFlag != true;
 }
