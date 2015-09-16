@@ -26,7 +26,7 @@ void    ShowTime_ClearCanals(uchar  ibHhr);
 static char const       szSetProfiles[]  = "Редактирование  ",
                         szProcess[]      = "Обработка       ",
                         szMask[]         = " значение: _____",
-                        szCanalsTitle[]  = "Каналы:         ",
+                        szCanals[]       = "Каналы:         ",
                         szDateFrom[]     = "Дата от:        ",
                         szDateTo[]       = "Дата до:        ",
                         szTimeFrom[]     = "Время от:       ",
@@ -117,7 +117,7 @@ static uint  wImp,wHhrMin,wHhrMax;
         ShowHi(szSetProfiles);
         Clear(); DelayInf();
 
-        ShowHi(szCanalsTitle);
+        ShowHi(szCanals);
         strcpy(szLo+0,szCanalFrom);
       }
       else LongBeep();
@@ -288,7 +288,7 @@ static uint  wImp,wHhrMin,wHhrMax;
         ShowHi(szSetProfiles);
         Clear(); DelayInf();
 
-        ShowHi(szCanalsTitle);
+        ShowHi(szCanals);
         strcpy(szLo+0,szCanalFrom);
       }
       else LongBeep();
