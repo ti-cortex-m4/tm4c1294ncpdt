@@ -48,7 +48,7 @@ DEVICES.C
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
 #include "../serial/speeds_display.h"
-#include "../digitals/answer.h"
+#include "../digitals/disable_answer.h"
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
 #include "../digitals/extended/extended_0.h"

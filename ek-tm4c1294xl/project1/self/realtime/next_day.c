@@ -14,7 +14,7 @@ NEXT_DAY.C
 #include "../energy2.h"
 #include "../kernel/arrays_buff.h"
 #include "../serial/slave_modem.h"
-#include "../digitals/answer.h"
+#include "../digitals/disable_answer.h"
 #include "../digitals/extended/extended_4.h"
 #include "../digitals/extended/extended_5.h"
 #include "../digitals/extended/extended_6.h"
