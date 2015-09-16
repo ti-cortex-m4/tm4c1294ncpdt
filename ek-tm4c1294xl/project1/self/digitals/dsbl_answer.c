@@ -51,6 +51,13 @@ bool   IsAnswerDisabled(void)
 
 
 
+void    OutEnableAnswer(void)
+{
+  EnableAnswer();
+  LongResult(bRES_OK);
+}
+
+
 void    OutDsblAnswer(void)
 {
   InitPushCRC();

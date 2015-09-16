@@ -210,7 +210,7 @@ void    Response0_CRC(void)
       case bINQ_TRANSIT_EXECUTE4: SafeTransitExecute4(); break;
 
       case bINQ_FLOW: OutFlow(); break;
-      case bINQ_ENBL_ANSWER: EnableAnswer(); LongResult(bRES_OK); break;
+      case bINQ_ENBL_ANSWER: OutEnableAnswer(); break;
 
       case bINQ_SETKEY: OutSetKey(); break;
       case bINQ_GETDISPLAY: OutGetDisplay(); break;

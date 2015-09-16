@@ -15,4 +15,5 @@ void    EnableAnswer(void);
 void    DisableAnswer(void);
 bool    IsAnswerDisabled(void);
 
+void    OutEnableAnswer(void);
 void    OutDsblAnswer(void);
