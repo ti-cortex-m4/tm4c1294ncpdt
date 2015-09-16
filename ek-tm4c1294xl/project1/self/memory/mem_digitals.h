@@ -70,3 +70,13 @@ extern  bool                    boPlcUFlag;
 extern  uchar                   bPlcUSize;
 
 extern  uint                    wPlcUShutdown;
+
+
+
+extern  bool                    boAnswerDisable;
+
+extern  bool                    boAnswerFlag;
+
+extern  ulong                   cdwAnswerDisable, cdwAnswerEnable;
+
+extern  time                    tiAnswerDisable, tiAnswerEnable;

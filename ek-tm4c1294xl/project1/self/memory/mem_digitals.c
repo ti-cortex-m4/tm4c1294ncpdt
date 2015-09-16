@@ -101,3 +101,17 @@ uchar                   bPlcUSize;
 
 // размер
 uint                    wPlcUShutdown;
+
+
+
+// запрет ответа на запросы во время чтения цифровых счетчиков
+bool                    boAnswerDisable;
+
+// признак
+bool                    boAnswerFlag;
+
+// счетчик
+ulong                   cdwAnswerDisable, cdwAnswerEnable;
+
+// время/дата
+time                    tiAnswerDisable, tiAnswerEnable;

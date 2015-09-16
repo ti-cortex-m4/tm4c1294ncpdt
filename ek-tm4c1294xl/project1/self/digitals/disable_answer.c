@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-ANSWER.C
+DISABLE_ANSWER.C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,14 +8,14 @@ ANSWER.C
 
 
 
-void    EnableAnswer(void) 
+void    EnableAnswer(void)
 {
 //  boAnswerFlag = true;
 //  cdwAnswerEnable++; tiAnswerEnable = tiCurr;
 }
 
 
-void    DisableAnswer(void) 
+void    DisableAnswer(void)
 {
 //  boAnswerFlag = false;
 //  cdwAnswerDisable++; tiAnswerDisable = tiCurr;
