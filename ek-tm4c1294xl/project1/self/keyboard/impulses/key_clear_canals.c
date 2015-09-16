@@ -65,13 +65,17 @@ static uint  wHhrMin,wHhrMax;
   {
     if (enKeyboard == KBD_ENTER)
     {
-      enKeyboard = KBD_INPUT1;
+      if (SuperUser())
+      {
+        enKeyboard = KBD_INPUT1;
 
-      ShowHi(szClearCanals);
-      Clear(); DelayInf();
+        ShowHi(szClearCanals);
+        Clear(); DelayInf();
 
-      ShowHi(szCanalsTitle);
-      strcpy(szLo+0,szCanalFrom);
+        ShowHi(szCanalsTitle);
+        strcpy(szLo+0,szCanalFrom);
+      }
+      else LongBeep();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
