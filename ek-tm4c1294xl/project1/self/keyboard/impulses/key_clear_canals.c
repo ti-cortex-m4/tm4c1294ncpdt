@@ -8,6 +8,7 @@ _CLEAR.C
 #include "../../memory/mem_energy_spec.h"
 #include "../../memory/mem_profile.h"
 #include "../../console.h"
+#include "../../access.h"
 #include "../../realtime/realtime.h"
 #include "../../realtime/realtime_spec.h"
 #include "../../impulses/energy_spec.h"
@@ -20,7 +21,7 @@ _CLEAR.C
 
 //                                         0123456789ABCDEF
 static char const       szClearCanals[]   = "Очистка каналов ",
-                        szCanalsTitle[]   = "Каналы:         ",
+                        szCanals[]        = "Каналы:         ",
                         szDateFrom[]      = "Дата от:        ",
                         szDateTo[]        = "Дата до:        ",
                         szTimeFrom[]      = "Время от:       ",
@@ -72,7 +73,7 @@ static uint  wHhrMin,wHhrMax;
         ShowHi(szClearCanals);
         Clear(); DelayInf();
 
-        ShowHi(szCanalsTitle);
+        ShowHi(szCanals);
         strcpy(szLo+0,szCanalFrom);
       }
       else LongBeep();
@@ -142,7 +143,8 @@ static uint  wHhrMin,wHhrMax;
 
       (ClearCanals(ibDigMin, ibDigMax, wHhrMin, wHhrMax, true) == true) ? OK() : Error();
 
-      ShowHi(szCanalsTitle);
+      ShowHi(szClearCanals);
+      OK();
     }
     else Beep();
   }
