@@ -1,6 +1,10 @@
 3 мин - 24 часа
 30 мин - 100 суток
 
+get installs x4
+install ccs6
+use cg_xml
+
 key_SetDigitals MakeInDelays
 
 CRC 32h 50d bINQ_GETPARAM_FULL
@@ -43,8 +47,6 @@ remove external headers
 
 hhr100
 answer disable
-990/991
-clear canals 87
 params
 ! вывод дампа обмена со счетчиком
 modem quality
