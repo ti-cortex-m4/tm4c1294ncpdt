@@ -11,7 +11,7 @@
 #define wSET_CONTROL_K        403
 #define wSET_LONG_PROFILE_C   404
 +   #define wSET_REFILL_DISABLE   405
-#define wSET_ANSWER_DISABLE   406
++   #define wSET_ANSWER_DISABLE   406
 #define wSET_CONTROL_R        407
 //#define wSET_LONG_PROFILE_B2  408
 #define wSET_MAX_REPEATS      409

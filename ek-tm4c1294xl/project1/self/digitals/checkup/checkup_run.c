@@ -21,7 +21,7 @@ CHECKUP_RUN.C
 #include "../../devices/devices.h"
 #include "../../digitals/digitals_display.h"
 #include "../../digitals/digitals_messages.h"
-#include "../../digitals/disable_answer.h"
+#include "../../digitals/dsbl_answer.h"
 #include "../../special/special.h"
 #include "../../time/decret.h"
 #include "../../flash/records.h"
