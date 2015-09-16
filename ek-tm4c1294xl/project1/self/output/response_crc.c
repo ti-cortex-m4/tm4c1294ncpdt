@@ -79,7 +79,15 @@ void    RunResponseCRC(void) {
       Result(bRES_BADSIZE);
       return;
     }
-
+/*
+    if ((boAnswerDisable == boTrue) && AnswerDisabled()) {
+      if (bInBuff4 != bINQ_ANSWER_ENABLE) {
+        ShowCommandCRC(bSTA_BUSY);
+        Result(bRES_BUSY);
+        return;
+      }
+    }
+*/
     ShowTestResponse(bSTA_OK);
     Response0_CRC();
   }

@@ -213,7 +213,7 @@
 -   #define bINQ_INFO                      244
 +   #define bINQ_FLOW                      245
 
-#define bINQ_ANSWER_ENABLE             231
++   #define bINQ_ANSWER_ENABLE             231
 
 
 -   #define bINQ_EXTENDED                  255
