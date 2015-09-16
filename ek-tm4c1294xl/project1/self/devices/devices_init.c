@@ -82,7 +82,7 @@ void    InitDevices1(void)
   InitDef();
   InitRefill();
   InitSchedule();
-  InitDisableAnswer();
+  InitDsblAnswer();
 
   InitExtended0();
   InitExtended1();
@@ -165,7 +165,7 @@ void    ResetDevices(bool  fFull)
   ResetDef();
   ResetRefill();
   ResetSchedule();
-  ResetDisableAnswer();
+  ResetDsblAnswer();
 
   ResetExtended0(fFull);
   ResetExtended1();

@@ -164,7 +164,7 @@ QUERIES.H
 #define bINQ_TRANSIT_EXECUTE3          174
 #define bINQ_TRANSIT_EXECUTE4          175
 
-#define bINQ_ENBL_ANSWER             231
+#define bINQ_ENBL_ANSWER               231
 
 #define bINQ_FLOW                      245
 
