@@ -238,5 +238,7 @@ typedef enum
   BULK_SIZE             = BULK_ENBL + sizeof(bool) + bNVRAM_FOOTER,
   BULK_MAX_DELAY        = BULK_SIZE + sizeof(uchar) + bNVRAM_FOOTER,
 
-  NVRAM_END             = BULK_MAX_DELAY + sizeof(uint) + bNVRAM_FOOTER
+  DSBL_ANSWER           = BULK_MAX_DELAY + sizeof(uint) + bNVRAM_FOOTER,
+
+  NVRAM_END             = DSBL_ANSWER + sizeof(bool) + bNVRAM_FOOTER
 } nvram;

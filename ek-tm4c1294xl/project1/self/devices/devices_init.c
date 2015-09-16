@@ -29,6 +29,7 @@ DEVICES_INIT.C
 #include "../digitals/disable_answer.h"
 #include "../digitals/profile/refill.h"
 #include "../digitals/schedule/schedule.h"
+#include "../digitals/disable_answer.h"
 #include "../flash/records.h"
 #include "../time/delay.h"
 #include "../digitals/extended/extended_0.h"
@@ -81,6 +82,8 @@ void    InitDevices1(void)
   InitDef();
   InitRefill();
   InitSchedule();
+  InitDisableAnswer();
+
   InitExtended0();
   InitExtended1();
   InitExtended3();
@@ -162,6 +165,8 @@ void    ResetDevices(bool  fFull)
   ResetDef();
   ResetRefill();
   ResetSchedule();
+  ResetDisableAnswer();
+
   ResetExtended0(fFull);
   ResetExtended1();
   ResetExtended3();
