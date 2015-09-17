@@ -27,7 +27,7 @@
 	<variableList>
 		<variable>
 			<name>SW_ROOT</name>
-			<value>$%7BPARENT-5-ORIGINAL_PROJECT_ROOT%7D</value>
+			<value>file:/D:/TI/SW-EK-TM4C1294XL-2.1.0.12573</value>
 		</variable>
 	</variableList>
 </projectDescription>

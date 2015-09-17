@@ -6,8 +6,7 @@
 		<cconfiguration id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.954048065">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.954048065" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<macros>
-					<stringMacro name="ORIGINAL_PROJECT_ROOT" type="VALUE_PATH_DIR" value="D:/TI/SW-EK-TM4C1294XL-2.1.0.12573/examples/boards/ek-tm4c1294xl/uart_echo/ccs"/>
-					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="${ORIGINAL_PROJECT_ROOT}/../../../../.."/>
+					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="D:/TI/SW-EK-TM4C1294XL-2.1.0.12573"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -98,8 +97,7 @@
 		<cconfiguration id="com.ti.ccstudio.buildDefinitions.TMS470.Release.316780728">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.TMS470.Release.316780728" moduleId="org.eclipse.cdt.core.settings" name="Release">
 				<macros>
-					<stringMacro name="ORIGINAL_PROJECT_ROOT" type="VALUE_PATH_DIR" value="D:/TI/SW-EK-TM4C1294XL-2.1.0.12573/examples/boards/ek-tm4c1294xl/uart_echo/ccs"/>
-					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="${ORIGINAL_PROJECT_ROOT}/../../../../.."/>
+					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="D:/TI/SW-EK-TM4C1294XL-2.1.0.12573"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -184,7 +182,7 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="uart_echo.com.ti.ccstudio.buildDefinitions.TMS470.ProjectType.155849752" name="ARM" projectType="com.ti.ccstudio.buildDefinitions.TMS470.ProjectType"/>
+		<project id="project1.com.ti.ccstudio.buildDefinitions.TMS470.ProjectType.155849752" name="ARM" projectType="com.ti.ccstudio.buildDefinitions.TMS470.ProjectType"/>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration"/>
 	<storageModule moduleId="org.eclipse.cdt.core.language.mapping">
@@ -195,5 +193,13 @@
 			<content-type-mapping configuration="" content-type="org.eclipse.cdt.core.cxxHeader" language="com.ti.ccstudio.core.TIGPPLanguage"/>
 			<content-type-mapping configuration="" content-type="org.eclipse.cdt.core.cxxSource" language="com.ti.ccstudio.core.TIGPPLanguage"/>
 		</project-mappings>
+	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/project1"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/project1"/>
+		</configuration>
 	</storageModule>
 </cproject>
