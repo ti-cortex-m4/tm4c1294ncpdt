@@ -46,10 +46,10 @@ output - from mem_profile
 remove external headers
 
 hhr100
-answer disable
 params
 ! вывод дампа обмена со счетчиком
 modem quality
+SMK
 
 записано/прочитано байтов (страниц) в секунду
 
