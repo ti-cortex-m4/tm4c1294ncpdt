@@ -10,10 +10,10 @@ CACHE2.C
 
 
 
-void    SaveCacheBool(cache const  *pch, bool  fVal)
+void    SaveCacheBool(cache const  *pch, bool  f)
 {
-  bool *pfVal = (bool *) pch->pbBuff;
-  *pfVal = fVal;
+  bool *pf = (bool *) pch->pbBuff;
+  *pf = f;
 
   SaveCache(pch);
 }
@@ -22,37 +22,57 @@ void    SaveCacheBool(cache const  *pch, bool  fVal)
 void    LoadCacheBool(cache const  *pch, bool  fDef)
 {
   LoadCache(pch);
-  bool *pfVal = (bool *) pch->pbBuff;
+  bool *pf = (bool *) pch->pbBuff;
 
-  if (!((*pfVal == true) || (*pfVal == false)))
+  if (!((*pf == true) || (*pf == false)))
   {
-    *pfVal = fDef;
+    *pf = fDef;
     SaveCache(pch);
   }
+}
+
+
+
+void    SaveCacheChar(cache const  *pch, uchar  w)
+{
+  uchar *pb = (uchar *) pch->pbBuff;
+  *pb = w;
+
+  SaveCache(pch);
 }
 
 
 void    LoadCacheChar(cache const  *pch, uchar  bMin, uchar  bMax, uchar  bDef)
 {
   LoadCache(pch);
-  uchar *pbVal = (uchar *) pch->pbBuff;
+  uchar *pb = (uchar *) pch->pbBuff;
 
-  if (!((*pbVal >= bMin) && (*pbVal <= bMax)))
+  if (!((*pb >= bMin) && (*pb <= bMax)))
   {
-    *pbVal = bDef;
+    *pb = bDef;
     SaveCache(pch);
   }
+}
+
+
+
+void    SaveCacheInt(cache const  *pch, uint  w)
+{
+  uint *pw = (uint *) pch->pbBuff;
+  *pw = w;
+
+  SaveCache(pch);
 }
 
 
 void    LoadCacheInt(cache const  *pch, uint  wMin, uint  wMax, uint  wDef)
 {
   LoadCache(pch);
-  uint *pwVal = (uint *) pch->pbBuff;
+  uint *pw = (uint *) pch->pbBuff;
 
-  if (!((*pwVal >= wMin) && (*pwVal <= wMax)))
+  if (!((*pw >= wMin) && (*pw <= wMax)))
   {
-    *pwVal = wDef;
+    *pw = wDef;
     SaveCache(pch);
   }
 }
