@@ -75,7 +75,7 @@ extern  uint                    wPlcUShutdown;
 
 extern  bool                    fDsblAnswer;
 
-extern  bool                    boAnswerFlag;
+extern  bool                    fEnblAnswerCurr;
 
 extern  ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
