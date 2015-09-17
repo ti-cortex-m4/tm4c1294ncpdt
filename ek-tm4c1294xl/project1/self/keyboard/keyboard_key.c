@@ -45,6 +45,7 @@ KEYBOARD_KEY.C
 #include "digitals/profile/key_limits31.h"
 #include "digitals/profile/key_limits32.h"
 #include "digitals/profile/key_limits33.h"
+#include "phones/key_modems2.h"
 #include "phones/key_phones.h"
 #include "phones/key_max_connect.h"
 #include "phones/key_custom_modem.h"
@@ -263,6 +264,7 @@ void    Keyboard_Key(void)
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
 
+      case bGET_MODEMS_QUALITY: key_GetModemsQuality(); break;
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
@@ -463,6 +465,7 @@ void    Keyboard_Key(void)
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
 
+      case bGET_MODEMS_QUALITY: key_GetModemsQuality(); break;
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
@@ -745,6 +748,7 @@ void    Keyboard_Key(void)
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
 
+      case bGET_MODEMS_QUALITY: key_GetModemsQuality(); break;
       case bSET_PHONES:         key_SetPhones();        break;
       case bSET_MAX_CONNECT:    key_SetMaxConnect();    break;
       case bSET_CUSTOM_MODEM:   key_SetCustomModem();   break;
