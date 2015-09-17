@@ -3,7 +3,7 @@ EXTENDED_5.C
 
  Значения счетчиков
  на начало текущих суток
- из буфера с дозапросом по тарифам ('Отчет № 18a от 01.02.2008')
+ из буфера с дозапросом по тарифам ('Отчет №18a от 01.02.2008')
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -68,7 +68,7 @@ void    NextDayExtended5(void)
 
 static bool MakeDevices(void)
 {
-  memset(&stBuff, 0, sizeof(stBuff));  
+  memset(&stBuff, 0, sizeof(stBuff));
 
   uchar t;
   for (t=0; t<bTARIFFS; t++)
@@ -94,11 +94,11 @@ static bool MakeDevices(void)
 
 
 void    MakeExtended5(void)
-{ 
+{
   if ((fExt5Flag == true) && ((mpCntDayCan5[ibDig].boSuccess == false) || (boManualProfile == true)))
   {
     ShowHi(szExtended5); Clear();
-   
+
     if (MakeDevices() == true)
     {
       LoadCurrDigital(ibDig);

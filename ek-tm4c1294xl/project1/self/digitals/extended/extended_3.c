@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 EXTENDED_3.C
 
- 'Отчет № 17 от 23.01.2008'
+ ('Отчет №17 от 23.01.2008')
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -153,14 +153,14 @@ time    EventIndexToDate(ulong  dw)
     dw -= (ulong)24*60*60*GetDaysInYearY(ti.bYear);
     ti.bYear++;
   }
-  
+
   ti.bMonth = 1;
   while (dw >= (ulong)24*60*60*GetDaysInMonthYM(ti.bYear,ti.bMonth))
   {
     dw -= (ulong)24*60*60*GetDaysInMonthYM(ti.bYear,ti.bMonth);
     ti.bMonth++;
   }
-  
+
   ti.bDay = dw/86400;
   dw -= (ulong)86400*ti.bDay;
   ti.bDay++;
@@ -188,7 +188,7 @@ void    MakeExtended3(void)
       case 1:  ReadEventsAllA();  break;
       case 2:  ReadEventsAllB();  break;
     }
-    
+
     mpfEventStart[ibDig] = false;
     SaveCache(&chEventStart);
   }
