@@ -108,7 +108,7 @@ uint                    wPlcUShutdown;
 bool                    fDsblAnswer;
 
 // признак
-bool                    boAnswerFlag;
+bool                    fEnblAnswerCurr;
 
 // счетчик
 ulong                   cdwAnswerDisabled, cdwAnswerEnabled;

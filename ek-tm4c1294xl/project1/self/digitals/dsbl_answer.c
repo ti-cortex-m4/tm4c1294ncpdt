@@ -31,21 +31,21 @@ void    ResetDsblAnswer(void)
 
 void    EnableAnswer(void)
 {
-//  boAnswerFlag = true;
+  fEnblAnswerCurr = true;
   cdwAnswerEnabled++; tiAnswerEnabled = tiCurr;
 }
 
 
 void    DisableAnswer(void)
 {
-//  boAnswerFlag = false;
+  fEnblAnswerCurr = false;
   cdwAnswerDisabled++; tiAnswerDisabled = tiCurr;
 }
 
 
 bool    IsAnswerDisabled(void)
 {
-  return 0; // boAnswerFlag != true;
+  return fEnblAnswerCurr != true;
 }
 
 
@@ -61,7 +61,7 @@ void    OutDsblAnswer(void)
 {
   InitPushCRC();
   PushBool(fDsblAnswer);
-  PushBool(boAnswerFlag);
+  PushBool(fEnblAnswerCurr);
   PushLong(cdwAnswerDisabled);
   PushTime(tiAnswerDisabled);
   PushLong(cdwAnswerEnabled);
