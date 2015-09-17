@@ -3,7 +3,7 @@ EXTENDED_7,C
 
  Значения счетчиков
  на начало суток
- из буфера прямого опроса ('Отчет № 69 от 11.11.2010')
+ из буфера прямого опроса ('Отчет №69 от 11.11.2010')
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
@@ -44,7 +44,7 @@ bool    LoadCntDayCan7(uchar  ibDayFrom, uchar  ibCan, value6  *pvl)
 
 
 
-void    ResetExtended7(void) 
+void    ResetExtended7(void)
 {
   memset(&mpCntDayCan7, 0, sizeof(mpCntDayCan7));
 
@@ -61,7 +61,7 @@ void    ResetExtended7(void)
 
 
 void    NextDayExtended7(void)
-{ 
+{
   cwDayCan7++;
 
   memset(&mpCntDayCan7, 0, sizeof(mpCntDayCan7));

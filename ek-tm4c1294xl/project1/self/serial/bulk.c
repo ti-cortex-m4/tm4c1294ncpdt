@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 BULK.C
 
- 'Отчет №81 от 10.03.2012'
+ ('Отчет №81 от 10.03.2012')
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -94,7 +94,7 @@ void    OutByteBulk0(void)
     cwBulkDelay[0] = wBulkMaxDelay;
 
     mpSerial_Bulk[0] = mpSerial[0];
-    mpSerial[0] = SER_BULK; 
+    mpSerial[0] = SER_BULK;
   }
 #endif
 }
@@ -109,7 +109,7 @@ void    OutByteBulk1(void)
     cwBulkDelay[1] = wBulkMaxDelay;
 
     mpSerial_Bulk[1] = mpSerial[1];
-    mpSerial[1] = SER_BULK; 
+    mpSerial[1] = SER_BULK;
   }
 #endif
 }
@@ -124,7 +124,7 @@ void    OutByteBulk2(void)
     cwBulkDelay[2] = wBulkMaxDelay;
 
     mpSerial_Bulk[2] = mpSerial[2];
-    mpSerial[2] = SER_BULK; 
+    mpSerial[2] = SER_BULK;
   }
 #endif
 }
