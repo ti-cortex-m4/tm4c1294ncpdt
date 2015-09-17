@@ -48,7 +48,6 @@ remove external headers
 hhr100
 params
 ! вывод дампа обмена со счетчиком
-modem quality
 SMK
 
 записано/прочитано байтов (страниц) в секунду
