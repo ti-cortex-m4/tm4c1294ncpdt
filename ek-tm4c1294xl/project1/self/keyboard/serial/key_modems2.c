@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-_MODEMS2.C
+KEY_MODEMS2.C
 
 
 ------------------------------------------------------------------------------*/
@@ -43,16 +43,16 @@ void    key_GetModemsQuality(void)
       else Beep();
     }
     else if (enKeyboard == KBD_SHOW)
-    {   
+    {
       ShowModemQuality(ibX);
       SetCurr(DEV_BEGIN);
-    } 
+    }
     else Beep();
   }
 
 
   else if (bKey < 10)
-  {        
+  {
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
     {
       enKeyboard = KBD_POSTINPUT1;

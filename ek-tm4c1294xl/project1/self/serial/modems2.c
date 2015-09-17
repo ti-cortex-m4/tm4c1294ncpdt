@@ -1,25 +1,28 @@
 /*------------------------------------------------------------------------------
 MODEMS2.C
 
-
+ 'Отчет № 24 от 01.06.2008'
 ------------------------------------------------------------------------------*/
-/*
-#include    "main.h"
-#include    "xdata.h"
-#include    "timer0.h"
-#include    "display.h"
-#include    "delay.h"
-#include    "ports.h"
-#include    "modems.h"
+
+#include "../main.h"
+#include "../console.h"
+#include "ports.h"
+#include "ports_devices.h"
+#include "ports_modems.h"
+#include "modems.h"
+#include "modems2.h"
 
 
-bit     ModQualityOK(uchar  bSecond) {
-  return( (ModInput(bSecond,0) == SER_POSTANSWER_MODEM) );
+
+bool    ModQualityOK(uchar  bSecond)
+{
+  return (ModInput(bSecond,0) == SER_POSTANSWER_MODEM);
 }
 
 
-void    QueryModemQuality(void) {
-  InitPush();
+void    QueryModemQuality(void)
+{
+  InitPush(0);
 
   PushChar('A');
   PushChar('T');
@@ -36,10 +39,11 @@ void    QueryModemQuality(void) {
 }
 
 
-bit     ReadModemQuality(void) {
-uchar i;
-
-  for (i=0; i<bMINORREPEATS; i++) {
+bool    ReadModemQuality(void)
+{
+  uchar i;
+  for (i=0; i<bMINORREPEATS; i++)
+  {
     DelayOff();
     QueryModemBaud(0);
 
@@ -49,59 +53,57 @@ uchar i;
 
   if (i == bMINORREPEATS) ;
 
-  for (i=0; i<bMINORREPEATS; i++) {
+  for (i=0; i<bMINORREPEATS; i++)
+  {
     DelayOff();
     QueryModemCommon(0);
 
     if (ModInputOK(1) == 1) break;
     if (fKey == 1) return(0);
-    sprintf(szLo+15, "%1bu", i+1);
+    sprintf(szLo+15, "%1u", i+1);
   }
 
-  if (i == bMINORREPEATS)
-    return(0);
+  if (i == bMINORREPEATS) return(0);
 
-  for (i=0; i<bMINORREPEATS; i++) {
+  for (i=0; i<bMINORREPEATS; i++)
+  {
     DelayOff();
     QueryModemQuality();
 
     if (ModQualityOK(1) == 1) break;
     if (fKey == 1) return(0);
-    sprintf(szLo+15, "%1bu", i+1);
+    sprintf(szLo+15, "%1u", i+1);
   }
 
   return(1);
 }
 
 
-bit   SafeReadModemQuality(uchar  ibPrt) {
-stream  s;
-bit     f;
- 
-  s = mppoPorts[ibPrt].enStream;
+bool  SafeReadModemQuality(uchar  ibPrt)
+{
+  stream s = mppoPorts[ibPrt].enStream;
   mppoPorts[ibPrt].enStream = STR_MASTERDIRECT;
-  f = ReadModemQuality();
+  bool f = ReadModemQuality();
   mppoPorts[ibPrt].enStream = s;
 
   return f;
 }
 
 
-void    ShowModemQuality(uchar  ibPrt) {
-uchar   i;
-
+void    ShowModemQuality(uchar  ibPrt)
+{
   Clear();
 
   ibPort = ibPrt;
   diCurr.ibPort = ibPrt;
 
-  if (SafeReadModemQuality(ibPrt) != 1) 
+  if (SafeReadModemQuality(ibPrt) != 1)
     Error();
   else {
-    for (i=0; i<IndexInBuff()-1; i++) {
+    uchar i;
+    for (i=0; i<IndexInBuff()-1; i++)
+    {
       szLo[i] = InBuff(i);
     }
   }
 }
-
-*/
