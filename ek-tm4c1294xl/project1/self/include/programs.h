@@ -249,6 +249,7 @@ PROGRAMS.H
 #define bSET_KEYS                   171
 #define wSET_KEYS_LEVEL_B           271
 
+#define bGET_MODEMS_QUALITY         222
 #define bSET_PHONES                 180
 #define bSET_MAX_CONNECT            181
 #define bSET_CUSTOM_MODEM           203

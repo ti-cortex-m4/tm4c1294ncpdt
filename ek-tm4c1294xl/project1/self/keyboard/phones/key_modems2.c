@@ -6,6 +6,7 @@ KEY_MODEMS2.C
 
 #include "../../main.h"
 #include "../../console.h"
+#include "../../digitals/digitals_status.h"
 #include "../../serial/modems2.h"
 
 
@@ -17,6 +18,8 @@ static char const       szMessage[]     = "Качество сигнала";
 
 void    key_GetModemsQuality(void)
 {
+static uchar ibPrt;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -28,19 +31,19 @@ void    key_GetModemsQuality(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      ibX = GetChar(10,11) - 1;
-      if (ibX < bPORTS)
+      ibPrt = GetCharLo(10,11) - 1;
+      if (ibPrt < bPORTS)
       {
         enKeyboard = KBD_SHOW;
 
-        ShowModemQuality(ibX);
+        ShowModemQuality(ibPrt);
         SetCurr(DEV_BEGIN);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_SHOW)
     {
-      ShowModemQuality(ibX);
+      ShowModemQuality(ibPrt);
       SetCurr(DEV_BEGIN);
     }
     else Beep();
