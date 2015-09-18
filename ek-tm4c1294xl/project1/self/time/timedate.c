@@ -136,15 +136,15 @@ bool    ValidTimeDate(time  ti)
   if (ti.bHour   > 23) return false;
 
   if ((ti.bDay == 0) ||
-  		(ti.bDay > GetDaysInMonthYM(ti.bYear, ti.bMonth)))
+      (ti.bDay > GetDaysInMonthYM(ti.bYear, ti.bMonth)))
     return false;
 
   if ((ti.bMonth == 0) ||
-  		(ti.bMonth > 12 ))
+      (ti.bMonth > 12 ))
     return false;
 
   if ((ti.bYear < bMINYEAR) ||
-  		(ti.bYear > bMAXYEAR))
+      (ti.bYear > bMAXYEAR))
     return false;
 
   return true;
