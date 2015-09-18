@@ -28,7 +28,8 @@ void    ShowDate(time  ti)
                  ti.bMonth,
                  ti.bYear);
 
-  szLo[14] = szDigits[GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) + 1];
+  if (ValidTimeDate(ti) == true)
+    szLo[14] = szDigits[GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) + 1];
 }
 
 

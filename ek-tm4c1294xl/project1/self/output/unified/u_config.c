@@ -84,7 +84,7 @@ bool    IsDeviceAdded(uchar  ibDev)
 }
 
 
-void    MakeDevicesUni(void) 
+void    MakeDevicesUni(void)
 {
   memset(&mpdiDevicesUni, 0, sizeof(mpdiDevicesUni));
   cbDevicesUni = 0;
@@ -135,7 +135,7 @@ uchar   i,j;
         (mpdiDevicesUni[ibDev].bAddress == GetDigitalAddress(i)) ) j++;
   }
 
-  return j; 
+  return j;
 }
 
 
@@ -180,7 +180,7 @@ void    GetCorrectUni(void)
   time ti;
   Pop(&ti, sizeof(time));
 
-  if (ValidTimeDate(ti) == 1)
+  if (ValidTimeDate(ti) == true)
   {
     if ((tiCurr.bDay   != ti.bDay)   ||
         (tiCurr.bMonth != ti.bMonth) ||
@@ -190,7 +190,7 @@ void    GetCorrectUni(void)
     if ((tiCurr.bHour*2 + tiCurr.bMinute/30) != (ti.bHour*2 + ti.bMinute/30))
       Result2(bUNI_BADTIME);
     else
-    { 
+    {
       SetCurrTime_Full(ti, EVE_UNI_CORRECT);
       Result2(bUNI_OK);
     }
@@ -220,13 +220,13 @@ void    GetCorrectionsUni(void)
 
 
 
-void    GetOpenUni(void) 
+void    GetOpenUni(void)
 {
 uchar   i;
 
   memset(&mpbPassTwo, 0, sizeof(mpbPassTwo));
 
-  for (i=0; i<8; i++) 
+  for (i=0; i<8; i++)
     mpbPassTwo[i] = InBuff(6+i) - 0x30;
 
   if ((memcmp(mpbPassOne, mpbPassTwo, 8) == 0) || SuperUser())
@@ -242,7 +242,7 @@ uchar   i;
 
 
 
-void    GetConfigUni(void) 
+void    GetConfigUni(void)
 {
   MakeDevicesUni();
 
@@ -288,7 +288,7 @@ void    GetConfigUni(void)
 
 
 
-void    GetSensorsUni(void) 
+void    GetSensorsUni(void)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
     Result2(bUNI_BADDATA);
@@ -317,7 +317,7 @@ void    GetSensorsUni(void)
 
 
 
-void    GetDigitalsUni(void) 
+void    GetDigitalsUni(void)
 {
 uchar   i,j;
 
@@ -375,10 +375,10 @@ uchar   i,j;
         for (i=0; i<32; i++) PushChar(0);
       }
       else
-      { 
+      {
         Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szLine, 13);
         for (i=0; i<32-13; i++) PushChar(0);
-      }    
+      }
     }
   }
   Output2((uint)(2+2+4+2+2+2+2+6+2+8+32)*bInBuff9);
@@ -386,7 +386,7 @@ uchar   i,j;
 
 
 
-void    GetCanalsUni(void) 
+void    GetCanalsUni(void)
 {
   MakeDevicesUni();
 
@@ -426,7 +426,7 @@ void    GetCanalsUni(void)
 
 
 
-void    GetGroupsUni(void) 
+void    GetGroupsUni(void)
 {
 uchar   i;
 
@@ -458,7 +458,7 @@ uchar   i;
           mpbGroupMaskUni[16-1 - (i / 4)] |= (0x01 << ((i % 4) * 2));
 
           if (GetGroupsNodeSign(g, c) == 1)
-            mpbGroupMaskUni[16-1 - (i / 4)] |= (0x02 << ((i % 4) * 2));   
+            mpbGroupMaskUni[16-1 - (i / 4)] |= (0x02 << ((i % 4) * 2));
         }
       }
       Push(mpbGroupMaskUni, sizeof(mpbGroupMaskUni));

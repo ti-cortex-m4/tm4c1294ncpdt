@@ -97,11 +97,11 @@ void    QueryTimeGps(void)
 {
   InitPush(0);
 
-  PushChar(0xD0);          
+  PushChar(0xD0);
   PushChar(0x0D);
   PushChar(7);
   PushChar(0);
-  PushChar(1);         
+  PushChar(1);
 
   QueryIO(5+15+2, 5+0+2);
 }
@@ -167,7 +167,7 @@ time2   ReadTimeDateGps(void)
 
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
-  {    
+  {
     Delay(100);
     QueryTimeGps();
 
@@ -257,8 +257,8 @@ static bool SetTimeGps(void)
   time ti = ti2.tiValue;
 
   if (ti2.fValid == false)
-  {    
-    Error(); DelayInf(); Clear(); 
+  {
+    Error(); DelayInf(); Clear();
     AddKeyRecord(EVE_GPS_BADLINK); mpcwGpsStatus20[1]++;
   }
   else
@@ -266,7 +266,7 @@ static bool SetTimeGps(void)
     AddKeyRecord(EVE_GPS_GOODLINK); mpcwGpsStatus20[2]++;
 
     if (ShowStatusGps() == 0)
-    { 
+    {
       AddKeyRecord(EVE_GPS_BADGPS); mpcwGpsStatus20[3]++;
     }
     else
@@ -275,22 +275,22 @@ static bool SetTimeGps(void)
       AddKeyRecord(EVE_GPS_GOODGPS_1); mpcwGpsStatus20[4]++;
       AddKeyRecord(EVE_GPS_GOODGPS_2);
 
-      if (ValidTimeDate(ti) == 0)
-      { 
-        ShowLo(szBadFormatGps); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_BADFORMAT); mpcwGpsStatus20[5]++; 
+      if (ValidTimeDate(ti) == false)
+      {
+        ShowLo(szBadFormatGps); DelayMsg(); Clear();
+        AddKeyRecord(EVE_GPS_BADFORMAT); mpcwGpsStatus20[5]++;
       }
       else if ((tiCurr.bDay   != ti.bDay)   ||
                (tiCurr.bMonth != ti.bMonth) ||
                (tiCurr.bYear  != ti.bYear))
-      { 
-        ShowLo(szBadDateGps); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_BADDATE); mpcwGpsStatus20[6]++; 
+      {
+        ShowLo(szBadDateGps); DelayMsg(); Clear();
+        AddKeyRecord(EVE_GPS_BADDATE); mpcwGpsStatus20[6]++;
       }
       else if (GetCurrHouIndex() != (ti.bHour*2 + ti.bMinute/30))
-      { 
-        ShowLo(szBadTimeGps); DelayMsg(); Clear(); 
-        AddKeyRecord(EVE_GPS_BADTIME); mpcwGpsStatus20[7]++; 
+      {
+        ShowLo(szBadTimeGps); DelayMsg(); Clear();
+        AddKeyRecord(EVE_GPS_BADTIME); mpcwGpsStatus20[7]++;
        }
       else
       {
@@ -300,8 +300,8 @@ static bool SetTimeGps(void)
 
         SetCurrTime(ti);
         tiPrev = ti;
-              
-        OK(); DelayMsg(); Clear(); 
+
+        OK(); DelayMsg(); Clear();
         AddKeyRecord(EVE_GPS_OK); mpcwGpsStatus20[8]++;
 
 
@@ -347,14 +347,14 @@ void    CorrectTimeGps(void)
   SaveCache(&chCorrect3Total);
 
   if (SetTimeGps() == 1)
-  { 
+  {
     dwCorrect3Success++;
     SaveCache(&chCorrect3Success);
 
     tiCorrect3Sucess = *GetCurrTimeDate();
     SaveCache(&chCorrect3SuccessTime);
   }
-  else 
+  else
   {
     dwCorrect3Success = 0;
     SaveCache(&chCorrect3Success);
