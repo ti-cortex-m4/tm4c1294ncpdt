@@ -12,19 +12,15 @@ KEY_PARAMS_DIV,C
 
 
 //                                         0123456789ABCDEF
-static char const       szParamsDiv1[]  = " Коэфф. деления ",
-                        szParamsDiv2[]  = " для параметров ",
+static char const       szMessage1[]    = " Коэфф. деления ",
+                        szMessage2[]    = " для параметров ",
                         szMask[]        = "________ ___";
 
-static char const       *pszParamsDiv[] = { szParamsDiv1, szParamsDiv2, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 
-static uint             iwPrm;
-
-
-
-static void  Show(void)
+static void  Show(uint  iwPrm)
 {
   Clear();
   sprintf(szLo,"%12.3f", mpreParamsDiv[iwPrm]);
@@ -32,31 +28,32 @@ static void  Show(void)
 }
 
 
-
 void    key_SetParamsDiv(void)
 {
+static uint iwPrm;
+
   if (bKey == bKEY_ENTER)
-  {                                           
+  {
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
       Param();
 
-      LoadSlide(pszParamsDiv);
-    } 
+      LoadSlide(pszMessages);
+    }
     else if (enKeyboard == KBD_INPUT1)
     {
       enKeyboard = KBD_POSTENTER;
 
       iwPrm = 0;
-      Show();
+      Show(iwPrm);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       if ((iwPrm = GetIntLo(10,12) - 1) < wPARAMS)
       {
         enKeyboard = KBD_POSTENTER;
-        Show();
+        Show(iwPrm);
       }
       else Beep();
     }
@@ -64,10 +61,10 @@ void    key_SetParamsDiv(void)
     {
       if (++iwPrm >= wPARAMS) iwPrm = 0;
 
-      Show();
+      Show(iwPrm);
     }
     else if ((enKeyboard == KBD_POSTINPUT2) || (enKeyboard == KBD_POSTINPUT3))
-    {      
+    {
       float fl = (float)GetIntLo(0,7) + (float)GetIntLo(9,11)/1000;
       if (fl >= 0)
       {
@@ -82,9 +79,9 @@ void    key_SetParamsDiv(void)
       {
         if (++iwPrm >= wPARAMS) iwPrm = 0;
 
-        Show();
+        Show(iwPrm);
       }
-      else 
+      else
       {
         enKeyboard = KBD_INPUT2;
         LongBeep();
@@ -101,7 +98,7 @@ void    key_SetParamsDiv(void)
     {
       if (iwPrm > 0) iwPrm--; else iwPrm = wPARAMS-1;
 
-      Show();
+      Show(iwPrm);
     }
     else if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
@@ -113,7 +110,7 @@ void    key_SetParamsDiv(void)
 
 
   else if (bKey < 10)
-  {        
+  {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT2;
@@ -125,13 +122,13 @@ void    key_SetParamsDiv(void)
       enKeyboard = KBD_POSTINPUT1;
       ShiftLo(10,12);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
       ShiftLo(0,7);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT3) || (enKeyboard == KBD_POSTINPUT3))
     {
       enKeyboard = KBD_POSTINPUT3;
