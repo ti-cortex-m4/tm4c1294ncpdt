@@ -60,3 +60,5 @@ extended console + server push
 console in local loops
 
 CCS App Center: TI-RTOS etc
+
+*3     00:00:00 00.00.00 140    ../self/tariffs/tariffs.c 
