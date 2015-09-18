@@ -26,7 +26,7 @@ static char const       szParams[]       = "Параметры       ",
 
 void    key_SetParams(void)
 {
-static digital diT;
+static digital di;
 static uint iwPrm;
 
   if (bKey == bKEY_ENTER)
@@ -62,13 +62,13 @@ static uint iwPrm;
     }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
-      diT.ibLine = GetCharLo(12,13);
-      if (ValidParamLine(diT.ibLine) == true)
+      di.ibLine = GetCharLo(12,13);
+      if (ValidParamLine(di.ibLine) == true)
       {
         enKeyboard = KBD_POSTENTER;
         ShowHi(szParams);
 
-        SetParam(iwPrm, &diT);
+        SetParam(iwPrm, &di);
 
         MakeParamDiv(iwPrm);
         SaveCache(&flParamsDiv);
@@ -110,9 +110,9 @@ static uint iwPrm;
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      if ((diT.ibPort = GetCharLo(0,0) - 1) < bPORTS)
+      if ((di.ibPort = GetCharLo(0,0) - 1) < bPORTS)
       {
-        if (StreamPortCan(diT.ibPort,iwPrm) == 1) 
+        if (StreamPortCan(di.ibPort,iwPrm) == 1) 
         {
           enKeyboard = KBD_INPUT3;
           ShowHi(szPhone);
@@ -124,9 +124,9 @@ static uint iwPrm;
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
-      if ((diT.ibPhone = GetCharLo(2,3)) < bCANALS)
+      if ((di.ibPhone = GetCharLo(2,3)) < bCANALS)
       { 
-        if (StreamPortPhoneCan(diT.ibPort,diT.ibPhone,iwPrm) == 1) 
+        if (StreamPortPhoneCan(di.ibPort,di.ibPhone,iwPrm) == 1) 
         {
           enKeyboard = KBD_INPUT4;
           ShowHi(szDevice);
@@ -138,18 +138,18 @@ static uint iwPrm;
     }
     else if (enKeyboard == KBD_POSTINPUT4)
     {
-      diT.bDevice = GetCharLo(5,6);
-      if ((diT.bDevice <= bDEVICES) || (diT.bDevice == 99))
+      di.bDevice = GetCharLo(5,6);
+      if ((di.bDevice <= bDEVICES) || (di.bDevice == 99))
       {
-        if (diT.bDevice == 0)
+        if (di.bDevice == 0)
         {
           enKeyboard = KBD_POSTENTER;
           ShowHi(szParams);
 
-          diT.bAddress = 0;
-          diT.ibLine = 0;
+          di.bAddress = 0;
+          di.ibLine = 0;
 
-          SetParam(iwPrm, &diT);
+          SetParam(iwPrm, &di);
 
           ShowParam(iwPrm);
         }
@@ -164,9 +164,9 @@ static uint iwPrm;
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
-      if ((diT.bAddress = GetCharLo(8,10)) < 255)
+      if ((di.bAddress = GetCharLo(8,10)) < 255)
       {
-        if (((diT.bDevice == 9) || (diT.bDevice == 10)) && (diT.bAddress == 0))
+        if (((di.bDevice == 9) || (di.bDevice == 10)) && (di.bAddress == 0))
           Beep();
         else
         {
