@@ -19,7 +19,6 @@ U_PARAM.C
 #include "../../digitals/params/params.h"
 #include "../../digitals/params/params2.h"
 #include "../../digitals/params/params_storage.h"
-
 #include "response_uni.h"
 #include "u_config.h"
 #include "uni_float.h"
@@ -67,16 +66,16 @@ uchar   GetParamLineUni(uchar  i)
 
 
 
-uint    GetParamIndexUni(digital  diT)
+uint    GetParamIndexUni(digital  di)
 {
-  uint p;
-  for (p=0; p<wPARAMS; p++)
+  uint i;
+  for (i=0; i<wPARAMS; i++)
   {
-    if( (mpdiParam[p].ibPort   == diT.ibPort) &&
-        (mpdiParam[p].ibPhone  == diT.ibPhone) &&
-        (mpdiParam[p].bDevice  == diT.bDevice) &&
-        (mpdiParam[p].bAddress == diT.bAddress) &&
-        (mpdiParam[p].ibLine   == diT.ibLine)) return p;
+    if( (mpdiParam[i].ibPort   == di.ibPort) &&
+        (mpdiParam[i].ibPhone  == di.ibPhone) &&
+        (mpdiParam[i].bDevice  == di.bDevice) &&
+        (mpdiParam[i].bAddress == di.bAddress) &&
+        (mpdiParam[i].ibLine   == di.ibLine)) return i;
   }
 
   return 0xFFFF;
@@ -84,35 +83,35 @@ uint    GetParamIndexUni(digital  diT)
 
 
 
-float   FixParamsUni(digital  diT, float  fl)
+float   FixParamsUni(digital  di, float  fl)
 {
-  if ((diT.ibLine == PAR_P) || (diT.ibLine == PAR_P1) || (diT.ibLine == PAR_P2) || (diT.ibLine == PAR_P3))
+  if ((di.ibLine == PAR_P) || (di.ibLine == PAR_P1) || (di.ibLine == PAR_P2) || (di.ibLine == PAR_P3))
   {
-    if ((diT.bDevice == 3) && (boFixParamsBugs == false))
+    if ((di.bDevice == 3) && (boFixParamsBugs == false))
     {
-    	fl *= 1000;
+      fl *= 1000;
     }
   }
 
-  if ((diT.ibLine == PAR_Q) || (diT.ibLine == PAR_Q1) || (diT.ibLine == PAR_Q2) || (diT.ibLine == PAR_Q3))
+  if ((di.ibLine == PAR_Q) || (di.ibLine == PAR_Q1) || (di.ibLine == PAR_Q2) || (di.ibLine == PAR_Q3))
   {
-    if ((diT.bDevice == 3) && (boFixParamsBugs == false))
+    if ((di.bDevice == 3) && (boFixParamsBugs == false))
     {
-    	fl *= 1000;
+      fl *= 1000;
     }
   }
 
-  if ((diT.ibLine == PAR_I) || (diT.ibLine == PAR_I1) || (diT.ibLine == PAR_I2) || (diT.ibLine == PAR_I3))
+  if ((di.ibLine == PAR_I) || (di.ibLine == PAR_I1) || (di.ibLine == PAR_I2) || (di.ibLine == PAR_I3))
   {
-    if (((diT.bDevice == 2) || (diT.bDevice == 8) || (diT.bDevice == 12)) && (boFixParamsBugs == false))
+    if (((di.bDevice == 2) || (di.bDevice == 8) || (di.bDevice == 12)) && (boFixParamsBugs == false))
     {
     }
-    else if ((diT.bDevice == 3) && (boFixParamsBugs == false))
+    else if ((di.bDevice == 3) && (boFixParamsBugs == false))
     {
     }
     else
     {
-    	fl /= 1000;
+      fl /= 1000;
     }
   }
 
