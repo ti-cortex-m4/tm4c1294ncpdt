@@ -18,7 +18,6 @@ OUT_PARAMS.C
 #include "../digitals/params/params2.h"
 #include "../digitals/params/params_storage.h"
 #include "../digitals/params/params_div.h"
-
 #include "../console.h"
 
 
@@ -37,11 +36,11 @@ void    OutGetParams100(void)
 
 void    OutGetParams(void)
 {
-  uint iwParam = bInBuff5*0x100 + bInBuff6;
-  if (iwParam < wPARAMS)
+  uint iwPrm = bInBuff5*0x100 + bInBuff6;
+  if (iwPrm < wPARAMS)
   {
     InitPushCRC();
-    Push(&mpdiParam[iwParam],sizeof(digital));
+    Push(&mpdiParam[iwPrm],sizeof(digital));
     Output(sizeof(digital));
   }
   else Result(bRES_BADADDRESS);
@@ -52,8 +51,8 @@ void    OutSetParam(void)
 {
   if (enGlobal != GLB_WORK)
   {
-    uint iwParam = bInBuff5*0x100 + bInBuff6;
-    if (iwParam < wPARAMS)
+    uint iwPrm = bInBuff5*0x100 + bInBuff6;
+    if (iwPrm < wPARAMS)
     {
       digital di;
 
@@ -65,9 +64,9 @@ void    OutSetParam(void)
 
       if (ValidParam(&di) == true)
       {
-        mpdiParam[iwParam] = di;
+        mpdiParam[iwPrm] = di;
 
-        if (iwParam == wPARAMS - 1)
+        if (iwPrm == wPARAMS - 1)
           SaveCache(&flParams);
 
         LongResult(bRES_OK);
@@ -83,11 +82,11 @@ void    OutSetParam(void)
 
 void    OutGetParamDiv(void)
 {
-  uint iwParam = bInBuff5*0x100 + bInBuff6;
-  if (iwParam < wPARAMS)
+  uint iwPrm = bInBuff5*0x100 + bInBuff6;
+  if (iwPrm < wPARAMS)
   {
     InitPushCRC();
-    PushFloat(mpreParamsDiv[iwParam]);
+    PushFloat(mpreParamsDiv[iwPrm]);
     Output(sizeof(float));
   }
   else Result(bRES_BADADDRESS);
@@ -98,14 +97,14 @@ void    OutSetParamDiv(void)
 {
   if (enGlobal != GLB_WORK)
   {
-    uint iwParam = bInBuff5*0x100 + bInBuff6;
-    if (iwParam < wPARAMS)
+    uint iwPrm = bInBuff5*0x100 + bInBuff6;
+    if (iwPrm < wPARAMS)
     {
       InitPop(7);
 
-      mpreParamsDiv[iwParam] = PopFloat();
+      mpreParamsDiv[iwPrm] = PopFloat();
 
-      if (iwParam == wPARAMS - 1)
+      if (iwPrm == wPARAMS - 1)
         SaveCache(&flParamsDiv);
 
       LongResult(bRES_OK);
@@ -129,6 +128,7 @@ void    OutGetParamCurr(void)
     boBeginParam = false;
 
     bool f = 1;
+
     uchar i;
     for (i=0; i<10; i++)
     {
@@ -163,7 +163,7 @@ void    OutGetParamCurr(void)
     }
 
     Output(sizeof(time)+(uint)10*sizeof(float));
-    NextPause();                                      // внимание !
+    NextPause(); // внимание !
 
     LoadDisplay();
   }
@@ -255,6 +255,7 @@ void    OutGetParamsAll(void)
     boBeginParam = false;
 
     bool f = 1;
+
     uchar i;
     for (i=0; i<bPARAM_BLOCK; i++)
     {
@@ -277,9 +278,9 @@ void    OutGetParamsAll(void)
 
         if (boUseParamsDiv == true)
         {
-          uint iw = GetParamIndex(di);
-          if (iw != 0xFFFF)
-            mpreParamsDiv[wPARAMS-1] = mpreParamsDiv[iw];
+          uint p = GetParamIndex(di);
+          if (p != 0xFFFF)
+            mpreParamsDiv[wPARAMS-1] = mpreParamsDiv[p];
         }
 
         if (mpboEnblParams[wPARAMS-1] != true)
@@ -310,7 +311,7 @@ void    OutGetParamsAll(void)
     }
 
     Output(sizeof(time)+bPARAM_BLOCK*sizeof(float));
-    NextPause();                                      // внимание !
+    NextPause(); // внимание !
 
     LoadDisplay();
   }
