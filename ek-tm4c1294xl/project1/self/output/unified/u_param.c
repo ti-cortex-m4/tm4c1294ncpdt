@@ -69,15 +69,14 @@ uchar   GetParamLineUni(uchar  i)
 
 uint    GetParamIndexUni(digital  diT)
 {
-uint    i;
-
-  for (i=0; i<wPARAMS; i++)
+  uint p;
+  for (p=0; p<wPARAMS; p++)
   {
-    if( (mpdiParam[i].ibPort   == diT.ibPort) &&
-        (mpdiParam[i].ibPhone  == diT.ibPhone) &&
-        (mpdiParam[i].bDevice  == diT.bDevice) &&
-        (mpdiParam[i].bAddress == diT.bAddress) &&
-        (mpdiParam[i].ibLine   == diT.ibLine)) return i;
+    if( (mpdiParam[p].ibPort   == diT.ibPort) &&
+        (mpdiParam[p].ibPhone  == diT.ibPhone) &&
+        (mpdiParam[p].bDevice  == diT.bDevice) &&
+        (mpdiParam[p].bAddress == diT.bAddress) &&
+        (mpdiParam[p].ibLine   == diT.ibLine)) return p;
   }
 
   return 0xFFFF;
@@ -106,13 +105,13 @@ float   FixParamsUni(digital  diT, float  fl)
   if ((diT.ibLine == PAR_I) || (diT.ibLine == PAR_I1) || (diT.ibLine == PAR_I2) || (diT.ibLine == PAR_I3))
   {
     if (((diT.bDevice == 2) || (diT.bDevice == 8) || (diT.bDevice == 12)) && (boFixParamsBugs == false))
-    { 
+    {
     }
     else if ((diT.bDevice == 3) && (boFixParamsBugs == false))
-    { 
+    {
     }
     else
-    {    
+    {
     	fl /= 1000;
     }
   }
@@ -132,7 +131,7 @@ uint    j;
   uchar p;
   for (p=0; p<23; p++)
   {
-    if ((InBuff(ibPtr + 7 - p/8) & (0x01 << p%8)) != 0) 
+    if ((InBuff(ibPtr + 7 - p/8) & (0x01 << p%8)) != 0)
     {
       wSize += sizeof(float);
 
