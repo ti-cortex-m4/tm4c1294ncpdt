@@ -13,7 +13,7 @@ WDT.C
 
 
 
-cache const             chEnblWDT = {ENBL_WDT, &boEnblWatchdog, sizeof(bool)};
+cache const             chEnblWDT = {ENBL_WDT, &fEnblWDT, sizeof(bool)};
 
 
 
@@ -21,7 +21,7 @@ void    InitWDT(void)
 {
   LoadCache(&chEnblWDT);
 
-  if (boEnblWatchdog == true)
+  if (fEnblWDT)
   {
     EnableWatchdog();
   }
