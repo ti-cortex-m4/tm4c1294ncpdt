@@ -29,7 +29,7 @@ KEY_RESET.C
 #include "../impulses/factors.h"
 #include "../label_global.h"
 #include "../kernel/asserts.h"
-#include "../kernel/цве.h"
+#include "../kernel/wdt.h"
 #include "../flash/records.h"
 #include "../flash/storage.h"
 #include "../settings.h"
