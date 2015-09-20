@@ -81,7 +81,7 @@ time    ti;
 
 
 
-void    InitDefects(void)
+void    InitDefects_Custom(void)
 {
   if (enGlobal == GLB_PROGRAM)
   {

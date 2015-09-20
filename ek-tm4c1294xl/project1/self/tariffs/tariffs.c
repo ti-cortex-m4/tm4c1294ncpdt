@@ -52,7 +52,7 @@ bool LoadZonesEng(uchar  ibMonth, uchar  ibMode) {
 
 
 
-void    InitTariffs(void)
+void    InitTariffs_Custom(void)
 {
 uchar  ibMonth, ibMode;
 
