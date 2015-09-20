@@ -121,7 +121,7 @@ int     main(void)
   InitFactors();
   InitGroups();
   InitZones();
-  InitTariffs();
+  InitTariffs_Custom();
   InitRelaxs();
   InitGaps();
   InitDecret();
@@ -142,14 +142,13 @@ int     main(void)
   InitEsc();
   InitUni();
   InitFlow();
-  InitPowerOff();
 
   InitSlide();
 
   PrintStart();
   InitStorage();
-  InitDefects();
-  InitRealtime();
+  InitDefects_Custom();
+  InitRealtime_Custom();
   PrintStop();
 
   InitDisplay();
@@ -168,10 +167,12 @@ int     main(void)
   InitTimer1(ui32SysClockFreq);
   InitTimer2(ui32SysClockFreq);
 
-  IntMasterEnable();
-
   InitRecalc();
+
+  InitPowerOff();
   InitUartLoader();
+
+  IntMasterEnable();
   LongBeep();
 
   while (1)

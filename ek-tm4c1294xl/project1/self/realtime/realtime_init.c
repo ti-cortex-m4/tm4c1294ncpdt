@@ -188,7 +188,7 @@ void    DefaultRealtime(void)
 }
 
 
-void    InitRealtime(void)
+void    InitRealtime_Custom(void)
 {
   fActive = false;
 
