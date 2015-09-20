@@ -19,6 +19,7 @@ MAIN,C
 #include "driverlib/uart.h"
 #include "utils/uartstdio.h"
 #include "kernel/asserts.h"
+#include "kernel/wdt.h"
 #include "hardware/watchdog.h"
 #include "hardware/system_clock.h"
 #include "hardware/sys_tick.h"
