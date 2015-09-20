@@ -19,13 +19,6 @@ WATCHDOG.C
 
 
 
-void    InitWatchdog(void)
-{
-  if (boEnblWatchdog == true)
-    EnableWatchdog();
-}
-
-
 void    EnableWatchdog(void)
 {
 #ifdef ENABLE_WATCHDOG
