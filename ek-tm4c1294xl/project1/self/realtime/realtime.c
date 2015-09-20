@@ -264,7 +264,7 @@ time    tiT;
 //  boHealthLabelRTC = true;
 
   tiT = *GetCurrTimeDate();
-  if (TrueCurrTimeDate(tiT) == 0) {
+  if (IsValidTimeDateRTC(tiT) == 0) {
     boHealthTimeRTC = false;
 	return;
   }

@@ -221,7 +221,7 @@ uchar   i;
 */
 
 
-bool    TrueCurrTimeDate(time  ti)
+bool    IsValidTimeDateRTC(time  ti)
 {
   if (ti.bSecond == FromBCD(0xFF)) return(0);
   if (ti.bMinute == FromBCD(0xFF)) return(0);
