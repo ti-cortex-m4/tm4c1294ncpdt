@@ -108,6 +108,8 @@ int     main(void)
   InitRTC();
   InitCODE();
 
+  InitWDT();
+
   InitAsserts();
   InitRecords();
   InitSettings();
@@ -170,8 +172,6 @@ int     main(void)
   InitRecalc();
   InitUartLoader();
   LongBeep();
-
-  InitWatchdog();
 
   while (1)
   {

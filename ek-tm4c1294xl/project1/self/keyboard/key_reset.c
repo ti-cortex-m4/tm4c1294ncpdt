@@ -29,6 +29,7 @@ KEY_RESET.C
 #include "../impulses/factors.h"
 #include "../label_global.h"
 #include "../kernel/asserts.h"
+#include "../kernel/öâå.h"
 #include "../flash/records.h"
 #include "../flash/storage.h"
 #include "../settings.h"
@@ -51,23 +52,23 @@ void    key_SetReset(void)
 {
   if (bKey == bKEY_ENTER)
   {
-    if (enKeyboard == KBD_ENTER)  
+    if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
       Clear();
-      
+
       switch (wProgram)
-      { 
-        case bSET_RESETCUSTOM:  
-          ShowHi(szResetCustom);    
+      {
+        case bSET_RESETCUSTOM:
+          ShowHi(szResetCustom);
           ShowAnswer();  break;
 
-        case bSET_RESETFULL:  
-          ShowHi(szResetFull);    
+        case bSET_RESETFULL:
+          ShowHi(szResetFull);
           ShowAnswer();
           break;
-      }                 
-    } 
+      }
+    }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       switch (wProgram)
@@ -86,6 +87,7 @@ void    key_SetReset(void)
           }
 
           BreakLabelGlobal();
+          ResetWDT(false);
           ResetAsserts();
           ResetRecords();
           ResetSettings(false);
@@ -129,6 +131,7 @@ void    key_SetReset(void)
           }
 
           BreakLabelGlobal();
+          ResetWDT(true);
           ResetAsserts();
           ResetRecords();
           ResetSettings(true);
@@ -178,14 +181,14 @@ void    key_SetReset(void)
     }
     else Beep();
   }
-  
+
 
   else if (bKey == bKEY_POINT)
   {
     if (enGlobal != GLB_WORK)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
-      {           
+      {
         if (enKeyboard == KBD_INPUT1)
           enKeyboard = KBD_POSTINPUT1;
         else
@@ -193,9 +196,9 @@ void    key_SetReset(void)
 
         ShowAnswer();
       }
-      else Beep(); 
+      else Beep();
     }
-    else Beep(); 
-  } 
-  else Beep(); 
+    else Beep();
+  }
+  else Beep();
 }
