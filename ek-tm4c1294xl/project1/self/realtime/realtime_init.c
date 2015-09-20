@@ -197,7 +197,7 @@ void    InitRealtime_Custom(void)
 
 //  if (GetLabelRTC() == 0) TestError(szBadRTC1);
 
-  if (TrueCurrTimeDate(*GetCurrTimeDate()) == false)
+  if (IsValidTimeDateRTC(*GetCurrTimeDate()) == false)
   {
     ShowHi(szAlarm);
     ShowLo(szBadRTC2);
@@ -213,7 +213,7 @@ void    InitRealtime_Custom(void)
   {
     //LoadRealtime();
 
-    if (TrueCurrTimeDate(tiCurr) == false)
+    if (IsValidTimeDateRTC(tiCurr) == false)
     {
       ShowHi(szAlarm);
       ShowLo(szBadRTC2); // TODO

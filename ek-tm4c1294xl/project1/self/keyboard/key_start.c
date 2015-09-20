@@ -124,7 +124,7 @@ void    key_Start(void)
     if (TestTariffs() == 0)
       return;
 
-    if (TrueCurrTimeDate(*GetCurrTimeDate()) == false)
+    if (IsValidTimeDateRTC(*GetCurrTimeDate()) == false)
     {
       ShowHi(szAlarm);
       ShowLo(szBadRTC); LongBeep(); DelayMsg();
