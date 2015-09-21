@@ -128,3 +128,15 @@ void    OutBoolCanExt(bool  *mpf)
 
   OutptrOutBuff(wSize);
 }
+
+
+
+uchar   PushStatusFloatOrDouble(status  bStatus, double  db, bool  fDouble)
+{
+  uchar bSize = 0;
+
+  bSize += PushChar(bStatus);
+  bSize += PushFloatOrDouble(db, fDouble);
+
+  return bSize;
+}

@@ -13,3 +13,5 @@ void    OutFloatOrDoubleCanExt(double  *mpdb, bool  fDouble);
 void    OutIntCanExt(uint  *mpw);
 void    OutCharCanExt(uchar  *mpb);
 void    OutBoolCanExt(bool  *mpf);
+
+uchar   PushStatusFloatOrDouble(status  bStatus, double  db, bool  fDouble);
