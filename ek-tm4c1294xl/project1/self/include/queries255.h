@@ -150,6 +150,8 @@ QUERIES2.H
 #define bEXT_GET_ENGFRAC               133
 #define bEXT_GET_ENGFRACDIGCAN         110
 
+#define bEXT_GET_CNTCURR               135
+
 #define bEXT_RESET_ENGFRAC             248
 #define bEXT_RESET_ENGFRACDIGCAN       249
 
