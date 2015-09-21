@@ -55,6 +55,7 @@ RESPONSE255_CRC.C
 #include "../output/out_limits.h"
 #include "../output/out_defects2.h"
 #include "../output/out_defects3.h"
+#include "../output/out_cnt.h"
 #include "../output/current/out_current.h"
 #include "../output/current/out_current2.h"
 #include "../output/profile/out_limits.h"
@@ -236,6 +237,8 @@ void    Response255_CRC(void)
     case bEXT_GET_ENGFRACDIGCAN: OutGetEngFracDigCan(); break;
     case bEXT_RESET_ENGFRAC: OutResetEngFrac(); break;
     case bEXT_RESET_ENGFRACDIGCAN: OutResetEngFracDigCan(); break;
+
+    case bEXT_GET_CNTCURR: OutCntCanCurr(false); break;
 
     case bEXT_FLASH_CONTROL: OutFlashControl(); break;
 
