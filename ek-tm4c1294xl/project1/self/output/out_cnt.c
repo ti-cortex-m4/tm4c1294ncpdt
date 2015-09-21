@@ -16,6 +16,7 @@ OUT_CNT.C
 #include "../time/rtc.h"
 #include "../display/display.h"
 #include "../energy.h"
+#include "unified/uni_float.h"
 #include "out_cnt.h"
 
 
@@ -121,38 +122,31 @@ void    OutCntCanCurr(bool  fDouble)
     {
       sprintf(szHi+14,"%2u",c+1);
 
-      double db;
-      time ti;
-
       if (GetDigitalDevice(c) == 0)
-      {
-        db = GetCntCurrImp(c);
-        ti = *GetCurrTimeDate();
-      }
-      else if ((mpboEnblCan[c] == false) || (GetDigitalPhone(c) != 0))
-      {
-        db = 0;
-        ti = *GetCurrTimeDate();
-      }
+        wSize += PushFloatOrDoubleCRC(ST4_OK, GetCntCurrImp(c), fDouble);
+      else if (mpboEnblCan[c] == false)
+        wSize += PushFloatOrDoubleCRC(ST4_DISABLED, 0, fDouble);
+      else if (GetDigitalPhone(c) != 0)
+        wSize += PushFloatOrDoubleCRC(ST4_MODEM_LINK, 0, fDouble);
       else
       {
         LoadCurrDigital(c);
         if (mpboChannelsA[diCurr.ibLine] == true)
-          db = mpdbChannelsC[diCurr.ibLine];
+          wSize += PushFloatOrDoubleCRC(ST4_OK, mpdbChannelsC[diCurr.ibLine], fDouble);
         else
         {
           uchar p = ibPort;
           double2 db2 = ReadCntCurrCan(c);
           ibPort = p;
 
-          if (!db2.fValid) db = 0; else db = db2.dbValue;
+          if (!db2.fValid)
+            wSize += PushFloatOrDoubleCRC(ST4_BADDIGITAL, 0, fDouble);
+          else
+            wSize += PushFloatOrDoubleCRC(ST4_OK, db2.dbValue, fDouble);
         }
-
-        ti = *GetCurrTimeDate();
       }
 
-      wSize += PushFloatOrDouble(db, fDouble);
-      wSize += PushTime(ti);
+      wSize += PushTime(*GetCurrTimeDate());
     }
   }
 
