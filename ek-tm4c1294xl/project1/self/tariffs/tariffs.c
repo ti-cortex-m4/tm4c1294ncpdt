@@ -213,8 +213,8 @@ uchar i;
   {
     GetRelaxDate(i);
     if ((tiRelax.bDay   == ti.bDay) &&
-        (tiRelax.bMonth == ti.bMonth)) 
-      return tiRelax.bSecond;   
+        (tiRelax.bMonth == ti.bMonth))
+      return tiRelax.bSecond;
   }
 
   return 0;
@@ -224,12 +224,12 @@ uchar i;
 
 void    MakeAllCurrTariffs(void)
 {
-uchar  i, j;
 uchar  ibMonth, ibMode;
 
   time ti = *GetCurrTimeDate();
+  ASSERT(IsValidTimeDateRTC(ti));
 
-  if (boGapsFlag == false) 
+  if (boGapsFlag == false)
   {
     ibMonth = ti.bMonth - 1;
   }
@@ -237,7 +237,7 @@ uchar  ibMonth, ibMode;
   {
     MakeGaps();
     ibMonth = mpbGaps[GetDayIndexMD(ti.bMonth, ti.bDay)];
-  } 
+  }
 
   ibMode  = GetMode(ti);
 
@@ -249,12 +249,12 @@ uchar  ibMonth, ibMode;
 
   if (boRelaxsFlag == true)
   {
-    j = RelaxIndex(ti);
-    i = GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay);
+    uchar j = RelaxIndex(ti);
+    uchar i = GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay);
 
     if ((j != 2) && ((i == 5) || (i == 6) || (j == 1)))
     {
-      i = ibRelaxsTariff; 
+      i = ibRelaxsTariff;
       if (i >= bTARIFFS) i = 0;
 
       // memset(&mpibEngCurrTariff, i, sizeof(mpibEngCurrTariff));
@@ -269,9 +269,9 @@ void    MakeAllPrevTariffs(time  ti)
 uchar  i, j;
 uchar  ibMonth, ibMode;
 
-  ibMonth = ti.bMonth - 1;                   
+  ibMonth = ti.bMonth - 1;
 
-  if (boGapsFlag == false) 
+  if (boGapsFlag == false)
   {
     ibMonth = ti.bMonth - 1;
   }
@@ -279,7 +279,7 @@ uchar  ibMonth, ibMode;
   {
     MakeGaps();
     ibMonth = mpbGaps[GetDayIndexMD(ti.bMonth, ti.bDay)];
-  } 
+  }
 
   ibMode  = GetMode(ti);
 
@@ -296,7 +296,7 @@ uchar  ibMonth, ibMode;
 
     if ((j != 2) && ((i == 5) || (i == 6) || (j == 1)))
     {
-      i = ibRelaxsTariff; 
+      i = ibRelaxsTariff;
       if (i >= bTARIFFS) i = 0;
 
       // memset(&mpibEngPrevTariff, i, sizeof(mpibEngPrevTariff));

@@ -38,9 +38,8 @@ void    MakeDefectMon(uchar  ibMon, time  ti)
 
 void    MakeAllDefects(void)
 {
-time    ti;
-
-  ti = *GetCurrTimeDate();
+  time ti = *GetCurrTimeDate();
+  ASSERT(IsValidTimeDateRTC(ti));
 
   uchar d;
   for (d=0; d<bDAYS; d++)
