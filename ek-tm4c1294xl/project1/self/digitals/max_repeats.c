@@ -5,6 +5,7 @@ MAX_REPEATS.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../nvram/cache.h"
 #include "../nvram/cache2.h"
 #include "max_repeats.h"
 
