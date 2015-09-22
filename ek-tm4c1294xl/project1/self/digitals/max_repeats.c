@@ -10,14 +10,14 @@ MAX_REPEATS.C
 
 
 
-// количество повторов при ошибках обмена со счетчиками
+// максимальное количество повторов при ошибках обмена со счетчиками
 uchar                   bMaxRepeats;
 
 cache const             chMaxRepeats = {MAX_REPEATS, &bMaxRepeats, sizeof(uchar)};
 
 
 
-void    InitMaxRepeats(void) 
+void    InitMaxRepeats(void)
 {
   LoadCache(&chMaxRepeats);
   if ((bMaxRepeats <= 0) || (bMaxRepeats > 20))
