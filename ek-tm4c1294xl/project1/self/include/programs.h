@@ -293,6 +293,7 @@ PROGRAMS.H
 #define wSET_DSBL_REFILL            405
 #define wSET_DSBL_ANSWER            406
 #define wSET_MAX_REPEATS            409
+#define wSET_MAX_SHUTDOWN           423
 
 #define wSET_DSBL_ESC               410
 
