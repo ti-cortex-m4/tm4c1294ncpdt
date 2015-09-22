@@ -14,9 +14,6 @@ mpdwChannelsB[i] > 0xF0000000) dev_a dev_b
 
 optimise SetTime & SetDigitals
 
-doc различие старой и новой версии
-doc несовместимость старого и нового проборов по ext4
-
 чтение из RAM ROM DF NVRAM
 
 reset all buffers remotely
@@ -59,3 +56,7 @@ console in local loops
 
 максимуму по 3-мин мощности
 макс/мин по мгновенным параметрам
+
+doc количество повторов
+doc длительность выключения питания
+doc информация по программированию каждого счетчика
