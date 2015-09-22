@@ -1,14 +1,14 @@
 /*------------------------------------------------------------------------------
-MAX_REPEATS.H
+MAX_SHUTDOWN.H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  cache const             chMaxRepeats;
+extern  cache const             chMaxShutdown;
 
 
 
-void    InitMaxRepeats(void);
-void    ResetMaxRepeats(void);
+void    InitMaxShutdown(void);
+void    ResetMaxShutdown(void);
 
-uchar   GetMaxRepeats(void);
+uint    GetMaxShutdown(void);

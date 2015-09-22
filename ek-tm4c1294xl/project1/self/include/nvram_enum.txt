@@ -154,7 +154,7 @@ typedef enum
   DSBL_REFILL           = TIMEOUT_PROFILE + sizeof(bool) + bNVRAM_FOOTER,
   USE_BOUNDS            = DSBL_REFILL + sizeof(bool) + bNVRAM_FOOTER,
   MAX_REPEATS           = USE_BOUNDS + sizeof(bool) + bNVRAM_FOOTER,
-  RECALC_ALWAYS         = MAX_REPEATS + sizeof(bool) + bNVRAM_FOOTER,
+  RECALC_ALWAYS         = MAX_REPEATS + sizeof(uchar) + bNVRAM_FOOTER,
 
   OPEN_CALC             = RECALC_ALWAYS + sizeof(bool) + bNVRAM_FOOTER,
 
@@ -240,5 +240,7 @@ typedef enum
 
   DSBL_ANSWER           = BULK_MAX_DELAY + sizeof(uint) + bNVRAM_FOOTER,
 
-  NVRAM_END             = DSBL_ANSWER + sizeof(bool) + bNVRAM_FOOTER
+  MAX_SHUTDOWN          = DSBL_ANSWER + sizeof(bool) + bNVRAM_FOOTER,
+
+  NVRAM_END             = MAX_SHUTDOWN + sizeof(uint) + bNVRAM_FOOTER
 } nvram;
