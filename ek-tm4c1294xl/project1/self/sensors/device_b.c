@@ -420,7 +420,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
       (tiDig.bMonth  == 0) &&
       (tiDig.bYear   == 0))
   {
-    if (++iwMajor > GetMaxShutdown) return(0);
+    if (++iwMajor > GetMaxShutdown()) return(0);
     sprintf(szLo," выключено: %-4u   ",iwMajor); if (fDelay == 1) DelayOff();
 
     if (iwDigHou != 0)
