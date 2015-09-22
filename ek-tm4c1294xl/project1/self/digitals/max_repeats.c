@@ -5,7 +5,7 @@ MAX_REPEATS.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../nvram/cache.h"
+#include "../nvram/cache2.h"
 #include "max_repeats.h"
 
 
@@ -19,19 +19,13 @@ cache const             chMaxRepeats = {MAX_REPEATS, &bMaxRepeats, sizeof(uchar)
 
 void    InitMaxRepeats(void)
 {
-  LoadCache(&chMaxRepeats);
-  if ((bMaxRepeats <= 0) || (bMaxRepeats > 20))
-  {
-    bMaxRepeats = bMINORREPEATS;
-    SaveCache(&chMaxRepeats);
-  }
+  LoadCacheChar(&chMaxRepeats, 1, 20, bMINORREPEATS);
 }
 
 
 void    ResetMaxRepeats(void)
 {
-  bMaxRepeats = bMINORREPEATS;
-  SaveCache(&chMaxRepeats);
+  SaveCacheChar(&chMaxRepeats, bMINORREPEATS);
 }
 
 
