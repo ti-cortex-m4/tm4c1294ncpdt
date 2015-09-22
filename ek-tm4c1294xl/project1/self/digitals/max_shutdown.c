@@ -11,10 +11,10 @@ MAX_SHUTDOWN.C
 
 
 
-// количество повторов при ошибках обмена со счетчиками
+// максимальная длительность выключения счечтика (в получасах)
 uint                    wMaxShutdown;
 
-cache const             chMaxShutdown = {MAX_SHUTDOWN, &bMaxShutdown, sizeof(uint)};
+cache const             chMaxShutdown = {MAX_SHUTDOWN, &wMaxShutdown, sizeof(uint)};
 
 
 
