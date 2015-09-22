@@ -89,6 +89,7 @@ KEYBOARD_KEY.C
 #include "digitals/profile/key_dsbl_refill.h"
 #include "digitals/key_dsbl_answer.h"
 #include "digitals/key_max_repeats.h"
+#include "digitals/key_max_shutdown.h"
 #include "digitals/key_dsbl_esc.h"
 #include "key_records_dsbl.h"
 #include "esc/key_machines_esc.h"
@@ -308,6 +309,7 @@ void    Keyboard_Key(void)
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_DSBL_ANSWER:    key_SetDsblAnswer();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
+      case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
@@ -593,6 +595,7 @@ void    Keyboard_Key(void)
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_DSBL_ANSWER:    key_SetDsblAnswer();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
+      case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
@@ -797,6 +800,7 @@ void    Keyboard_Key(void)
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_DSBL_ANSWER:    key_SetDsblAnswer();    break;
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
+      case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
