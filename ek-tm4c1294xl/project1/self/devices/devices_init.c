@@ -20,6 +20,7 @@ DEVICES_INIT.C
 #include "../digitals/profile/profile_run.h"
 #include "../digitals/checkup/checkup_run.h"
 #include "../digitals/max_repeats.h"
+#include "../digitals/max_shutdown.h"
 #include "../special/recalc_def.h"
 #include "../sensors/device_b.h"
 #include "../serial/ports.h"
@@ -79,6 +80,7 @@ void    InitDevices1(void)
   LoadCacheInt(&chPlcUShutdown, 10, 500, 100);
 
   InitMaxRepeats();
+  InitMaxShutdown();
   InitDef();
   InitRefill();
   InitSchedule();
@@ -162,6 +164,7 @@ void    ResetDevices(bool  fFull)
   SaveCache(&chPlcUShutdown);
 
   ResetMaxRepeats();
+  ResetMaxShutdown();
   ResetDef();
   ResetRefill();
   ResetSchedule();

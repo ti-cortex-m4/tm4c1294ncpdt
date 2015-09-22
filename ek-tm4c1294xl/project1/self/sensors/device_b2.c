@@ -26,6 +26,7 @@ DEVICE_B2.C
 #include "../devices/devices_time.h"
 #include "../digitals/digitals_messages.h"
 #include "../digitals/limits.h"
+#include "../digitals/max_shutdown.h"
 #include "../special/special.h"
 #include "../flash/records.h"
 #include "../energy.h"
@@ -36,12 +37,12 @@ DEVICE_B2.C
 void    ReadTopBNew(void)
 {
   // адрес обрабатываемого блока
-  if (!UseBounds()) 
+  if (!UseBounds())
   {
     dwBaseCurr = InBuff(1); dwBaseCurr <<= 12; dwBaseCurr += InBuff(2) << 4;
     ResetLimitsAux(ibDig);
   }
-  else 
+  else
   {
     if (mpboStartCan[ibDig] == false)
     {
@@ -49,7 +50,7 @@ void    ReadTopBNew(void)
       if (boShowMessages == true) sprintf(szLo," начало %05lX * ",dwBaseCurr);
       ResetLimitsAux(ibDig);
     }
-    else 
+    else
     {
       dwBaseCurr = mpcdwStartAbs32Can[ibDig];
       if (boShowMessages == true) sprintf(szLo," начало %05lX   ",dwBaseCurr);
@@ -71,14 +72,14 @@ void    QueryHeaderBNew(void)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);         
-  PushChar(6);      
-  (dwBaseCurr > 0xFFFF) ? PushChar(0x83) : PushChar(0x03);    
+  PushChar(diCurr.bAddress);
+  PushChar(6);
+  (dwBaseCurr > 0xFFFF) ? PushChar(0x83) : PushChar(0x03);
 
-  PushChar((dwBaseCurr % 0x10000) / 0x100);      
-  PushChar(dwBaseCurr % 0x100);      
+  PushChar((dwBaseCurr % 0x10000) / 0x100);
+  PushChar(dwBaseCurr % 0x100);
 
-  PushChar(0xFF);      
+  PushChar(0xFF);
 
   QueryIO((uint)(1+15*17+2), 3+3+2);
 }
@@ -86,8 +87,8 @@ void    QueryHeaderBNew(void)
 
 bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
 {
-	HideCurrTime(1);                                   
-  
+	HideCurrTime(1);
+
   InitPop((uint)(1+(16-ibBlock)*15));
 
   PopChar();
@@ -101,9 +102,9 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
       (tiDig.bMinute == 0) &&
       (tiDig.bDay    == 0) &&
       (tiDig.bMonth  == 0) &&
-      (tiDig.bYear   == 0)) 
+      (tiDig.bYear   == 0))
   {
-    if (++iwMajor > 480) return(0);                     // если питание было выключено слишком долго
+    if (++iwMajor > GetMaxShutdown) return(0);
     sprintf(szLo," выключено: %-4u   ",iwMajor); if (fDelay == 1) DelayOff();
 
     if (iwDigHou != 0)
@@ -111,7 +112,7 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
        iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
 
        ShowProgressDigHou();
-       return(MakeStopHou(0));  
+       return(MakeStopHou(0));
     }
     else return(1);
   }
@@ -120,10 +121,10 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
   if ((tiDig.bDay   == tiSummer.bDay) &&
       (tiDig.bMonth == tiSummer.bMonth))
   {
-    if ((tiDig.bHour   == 3) && 
+    if ((tiDig.bHour   == 3) &&
         (tiDig.bMinute == 0))
     {
-      tiDig.bHour   = 2;  
+      tiDig.bHour   = 2;
       tiDig.bMinute = 0;
     }
   }
@@ -136,7 +137,7 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
     tiDig.bMinute = (tiDig.bMinute / 30)*30;
     if (SearchDefHouIndex(tiDig) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
 
-    iwDigHou = (wHOURS+iwDigHou+1)%wHOURS;   
+    iwDigHou = (wHOURS+iwDigHou+1)%wHOURS;
   }
   else if (SearchDefHouIndex(tiDig) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
 
@@ -151,7 +152,7 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
   time ti = HouIndexToDate(dw);
 
 
-  ShowProgressDigHou();      
+  ShowProgressDigHou();
   if (fDelay == 1) DelayOff();
 
   PopChar();

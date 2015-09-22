@@ -11,10 +11,12 @@ KEY_MAX_SHUTDOWN.C
 
 
 //                                            0123456789ABCDEF
-static char const       szMessage1[]       = "  Повторы при   ",
-                        szMessage2[]       = "опросе счетчиков";
+static char const       szMessage1[]       = "  Макс. время   ",
+                        szMessage2[]       = "   выключения   ",
+                        szMessage3[]       = "   счетчиков    ",
+                        szMessage4[]       = "  (получасов)   ";
 
-static char const       *pszMessages[]     = { szMessage1, szMessage2, szNumberLimits, "" };
+static char const       *pszMessages[]     = { szMessage1, szMessage2, szMessage3, szMessage4, szNumberLimits, "" };
 
 
 
