@@ -18,10 +18,10 @@ bool    SearchDefHouIndex(time  tiExt)
 
   if (dwExt > dwInt) return(0);
 
-  ulong dwT = dwInt - dwExt;
-  if (dwT > wHOURS) return(0);
+  ulong dw = dwInt - dwExt;
+  if (dw > wHOURS) return(0);
 
-  iwDigHou = (wHOURS+iwHardHou-dwT) % wHOURS;
+  iwDigHou = (wHOURS+iwHardHou-dw) % wHOURS;
   return(1);
 }
 
