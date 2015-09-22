@@ -27,6 +27,7 @@ DEVICE_B.C
 #include "../digitals/digitals_messages.h"
 #include "../digitals/limits.h"
 #include "../digitals/profile/refill.h"
+#include "../digitals/max_shutdown.h"
 #include "../special/special.h"
 #include "../flash/records.h"
 #include "../energy.h"
@@ -63,8 +64,8 @@ void    QueryOpenB(void)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);         
-  PushChar(1);         
+  PushChar(diCurr.bAddress);
+  PushChar(1);
 
   PushChar(bKeysLevelB);
 
@@ -120,7 +121,7 @@ void    ReadVersionB(void)
   bVersionB1 = FromBCD( PopChar() );
   bVersionB2 = FromBCD( PopChar() );
   bVersionB3 = FromBCD( PopChar() );
-  
+
   Clear();
   sprintf(szLo+1, "версия %u.%u.%u", bVersionB1, bVersionB2, bVersionB3);
   (boShowMessages == true) ? DelayMsg() : DelayInf();
@@ -166,7 +167,7 @@ void    QueryEnergyB(uchar  bTime)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
+  PushChar(diCurr.bAddress);
   PushChar(5);                          // чтение накопленной энергии
 
   PushChar(bTime);                      // вид энергии
@@ -209,8 +210,8 @@ void    QueryControlB(void)
   InitPush(0);
 
   PushChar(diCurr.bAddress);
-  PushChar(3);      
-  PushChar(0x0D);      
+  PushChar(3);
+  PushChar(0x0D);
 
   PushChar( ToBCD(tiCurr.bSecond) );
   PushChar( ToBCD(tiCurr.bMinute) );
@@ -227,8 +228,8 @@ void    QueryManageB(void)
   InitPush(0);
 
   PushChar(diCurr.bAddress);
-  PushChar(3);      
-  PushChar(0x0C);      
+  PushChar(3);
+  PushChar(0x0C);
 
   PushChar( ToBCD(tiCurr.bSecond) );
   PushChar( ToBCD(tiCurr.bMinute) );
@@ -254,7 +255,7 @@ void    QueryTimeB(void)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);       
+  PushChar(diCurr.bAddress);
   PushChar(4);
   PushChar(0);
 
@@ -289,9 +290,9 @@ void    QueryTopB(void)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);         
-  PushChar(8);      
-  PushChar(0x13);      
+  PushChar(diCurr.bAddress);
+  PushChar(8);
+  PushChar(0x13);
 
   QueryIO(1+9+2, 2+1+2);
 }
@@ -299,22 +300,22 @@ void    QueryTopB(void)
 
 // чтение вершины массива
 void    ReadTopBOld(void)
-{ 
+{
   // адрес обрабатываемого блока
   if (!UseBounds())
   {
     wBaseCurr = InBuff(1)*0x100 + InBuff(2);
     ResetLimitsAux(ibDig);
   }
-  else 
+  else
   {
-    if (mpboStartCan[ibDig] == false) 
+    if (mpboStartCan[ibDig] == false)
     {
       wBaseCurr = InBuff(1)*0x100 + InBuff(2);
       if (boShowMessages == true) sprintf(szLo,"  начало %04X * ",wBaseCurr);
       ResetLimitsAux(ibDig);
     }
-    else 
+    else
     {
       wBaseCurr = mpcwStartAbs16Can[ibDig];
       if (boShowMessages == true) sprintf(szLo,"  начало %04X   ",wBaseCurr);
@@ -346,14 +347,14 @@ void    QueryHeaderB(void)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);         
-  PushChar(6);      
-  PushChar(3);      
+  PushChar(diCurr.bAddress);
+  PushChar(6);
+  PushChar(3);
 
-  PushChar(wBaseCurr / 0x100);      
-  PushChar(wBaseCurr % 0x100);      
+  PushChar(wBaseCurr / 0x100);
+  PushChar(wBaseCurr % 0x100);
 
-  PushChar(15);      
+  PushChar(15);
 
   QueryIO(1+15+2, 3+3+2);
 }
@@ -362,18 +363,18 @@ void    QueryHeaderB(void)
 // посылка запроса на чтение заголовка часового блока
 void    QueryHeaderB_Plus(uchar  bSize)
 {
-  ShowLo(szWaiting); 
+  ShowLo(szWaiting);
 
   InitPush(0);
 
-  PushChar(diCurr.bAddress);         
-  PushChar(6);      
-  PushChar(4);      
+  PushChar(diCurr.bAddress);
+  PushChar(6);
+  PushChar(4);
 
-  PushChar(wBaseCurr / 0x100);      
-  PushChar(wBaseCurr % 0x100);      
+  PushChar(wBaseCurr / 0x100);
+  PushChar(wBaseCurr % 0x100);
 
-  PushChar(bSize);      
+  PushChar(bSize);
 
   QueryIO((uint)18*bSize+2, 3+3+2);
 }
@@ -392,7 +393,7 @@ bool    TestHeaderB(uchar  ibBlock)
       (tiDig.bMinute == 99) &&
       (tiDig.bDay    == 99) &&
       (tiDig.bMonth  == 99) &&
-      (tiDig.bYear   == 99)) 
+      (tiDig.bYear   == 99))
   {
     ShowLo(szNoDevice); DelayMsg();
     return(0);
@@ -405,8 +406,8 @@ bool    TestHeaderB(uchar  ibBlock)
 // чтение заголовка часового блока
 bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
 {
-  HideCurrTime(1);                                   
-  
+  HideCurrTime(1);
+
   tiDig.bHour   = FromBCD( InBuff((uint)2+ibBlock*18) );// время/дата часового блока
   tiDig.bMinute = FromBCD( InBuff((uint)3+ibBlock*18) );
   tiDig.bDay    = FromBCD( InBuff((uint)4+ibBlock*18) );
@@ -417,9 +418,9 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
       (tiDig.bMinute == 0) &&
       (tiDig.bDay    == 0) &&
       (tiDig.bMonth  == 0) &&
-      (tiDig.bYear   == 0)) 
+      (tiDig.bYear   == 0))
   {
-    if (++iwMajor > 480) return(0);                     // если питание было выключено слишком долго
+    if (++iwMajor > GetMaxShutdown) return(0);
     sprintf(szLo," выключено: %-4u   ",iwMajor); if (fDelay == 1) DelayOff();
 
     if (iwDigHou != 0)
@@ -427,7 +428,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
        iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
 
        ShowProgressDigHou();
-       return(MakeStopHou(0));  
+       return(MakeStopHou(0));
     }
     else return(1);
   }
@@ -436,10 +437,10 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   if ((tiDig.bDay   == tiSummer.bDay) &&
       (tiDig.bMonth == tiSummer.bMonth))
   {
-    if ((tiDig.bHour   == 3) && 
+    if ((tiDig.bHour   == 3) &&
         (tiDig.bMinute == 0))
     {
-      tiDig.bHour   = 2;  
+      tiDig.bHour   = 2;
       tiDig.bMinute = 0;
     }
   }
@@ -452,7 +453,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
     tiDig = HouIndexToDate(DateToHouIndex(tiDig) + 1);
   }
 #ifdef  DAYS100
-  else if (SearchDefHouIndex2(31*48) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); } 
+  else if (SearchDefHouIndex2(31*48) == 0) { szLo[4] = '?'; if (fDelay == 1) DelayOff(); return(1); }
 
   if ((wBasePrev > wBaseInit) && (wBaseCurr <= wBaseInit)) return 0;
   wBasePrev = wBaseCurr;
@@ -471,12 +472,12 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   time ti = HouIndexToDate(dw);
 
 
-  ShowProgressDigHou();      
+  ShowProgressDigHou();
   if (fDelay == 1) DelayOff();
 
 
   uchar c;
-  for (c=0; c<4; c++)        
+  for (c=0; c<4; c++)
   {
     uint w = InBuff( (uint)8+ibBlock*18+c*2 );
     w     += InBuff( (uint)9+ibBlock*18+c*2 )*0x100;
@@ -488,7 +489,7 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   MakeRefillWinter(ti);
   MakeSpecial(ti);
   if (boDsblRefill == false) MakeRefill(ti);
-  return(MakeStopHou(0));  
+  return(MakeStopHou(0));
 }
 
 
