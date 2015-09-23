@@ -13,24 +13,16 @@ THROUGHPUT.C
 
 
 
-//static volatile bool    fLock;
-
-
-
 void    InitThroughput(void)
 {
-  iwThroughput = tiCurr.bSecond*10 - 1;
-//  fLock = false;
+  iwThroughput = tiCurr.bSecond*10;
 }
 
 
 
 void    RunThroughput(void)
 {
-//  if (fLock == false)
-  {
-    mdwThroughput[iwThroughput]++;
-  }
+  mdwThroughput[iwThroughput]++;
 }
 
 
