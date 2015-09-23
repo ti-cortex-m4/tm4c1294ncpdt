@@ -124,7 +124,7 @@ void    NeedPrograms(uchar  bA, uchar  bB)
 {
   ShowHi(szNeed);
   sprintf(szLo," программы %u,%u ",bA,bB);
-  LongBeep(); 
+  LongBeep();
 }
 
 
@@ -150,7 +150,7 @@ void    RunKeyboard(void)
 uchar   i;
 
   // постоянно выполняемые программы
-  Keyboard_Auto();
+  if (wProgram != 0) Keyboard_Auto();
 
   // факт нажатия на клавиатуру
   if (fKey == false) return;
@@ -158,7 +158,7 @@ uchar   i;
 
   for (i=0; i<sizeof(mpbKeys); i++)
     if (bKey == mpbKeys[i]) break;
-      
+
   if (i < sizeof(mpbKeys)) bKey = i; else return;
 
 
@@ -217,14 +217,14 @@ uchar   i;
     ShowLo(szButtonP);
     LongBeep();
 
-    return;     
+    return;
   }
 
   // нажаты кнопки '-' или '.'
   if ((bKey == bKEY_MINUS) || (bKey == bKEY_POINT))
   {
-    if ((enKeyboard == KBD_PROGRAM) || (enKeyboard == KBD_DIGITS)) 
-    {      
+    if ((enKeyboard == KBD_PROGRAM) || (enKeyboard == KBD_DIGITS))
+    {
       NeedNumber(); DelayInf();
       bKey = bKEY_PROGRAM;
     }
@@ -270,12 +270,12 @@ uchar   i;
   if (bKey == bKEY_ENTER)
   {
     if ((enKeyboard == KBD_PROGRAM) || (enKeyboard == KBD_DIGITS))
-    {      
+    {
       enKeyboard = KBD_ENTER;
 
       wProgram = GetIntLo(1,3);
       if (wProgram == 0)
-      { 
+      {
         NeedNumber();
         return;
       }
