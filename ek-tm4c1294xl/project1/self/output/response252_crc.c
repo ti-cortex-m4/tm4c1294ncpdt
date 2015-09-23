@@ -23,6 +23,7 @@ RESPONSE252_CRC,C
 #include "../kernel/asserts.h"
 #include "../output/profile/out_profile_link.h"
 #include "../serial/slave_modem.h"
+#include "../realtime/throughput.h"
 
 
 
@@ -64,6 +65,8 @@ void    Response252_CRC(void)
     case 20: OutResetProfileLinkErr(); break;
 
     case 21: OutSlaveModem(); break;
+
+    case 22: OutThroughput(); break;
 
     default:
       ShowTestResponse(bSTA_BADCOMMAND);
