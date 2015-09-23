@@ -35,6 +35,7 @@ MAIN,C
 #include "isr/timer0.h"
 #include "isr/timer1.h"
 #include "isr/timer2.h"
+#include "isr/timer3.h"
 #include "isr/serial0.h"
 #include "isr/serial1.h"
 #include "isr/serial2.h"
@@ -83,6 +84,7 @@ MAIN,C
 #include "special/recalc.h"
 #include "realtime/realtime.h"
 #include "realtime/realtime_init.h"
+#include "realtime/throughput.h"
 #include "output/response_crc.h"
 
 
@@ -149,6 +151,7 @@ int     main(void)
   InitStorage();
   InitDefects_Custom();
   InitRealtime_Custom();
+  InitThroughput();
   PrintStop();
 
   InitDisplay();
@@ -166,6 +169,7 @@ int     main(void)
   InitTimer0(ui32SysClockFreq);
   InitTimer1(ui32SysClockFreq);
   InitTimer2(ui32SysClockFreq);
+  InitTimer3(ui32SysClockFreq);
 
   InitRecalc();
 
@@ -193,5 +197,7 @@ int     main(void)
     RunResponseEsc_All();
     RunResponseUni_All();
     RunResponseFlow_All();
+
+    RunThroughput();
   }
 }

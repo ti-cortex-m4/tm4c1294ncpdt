@@ -37,6 +37,7 @@ extern void UART4IntHandler(void);
 extern void Timer0IntHandler(void);
 extern void Timer1IntHandler(void);
 extern void Timer2IntHandler(void);
+extern void Timer3IntHandler(void);
 
 //*****************************************************************************
 //
@@ -100,7 +101,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // GPIO Port H
     UART2IntHandler,                        // UART2 Rx and Tx
     IntDefaultHandler,                      // SSI1 Rx and Tx
-    IntDefaultHandler,                      // Timer 3 subtimer A
+    Timer3IntHandler,                       // Timer 3 subtimer A
     IntDefaultHandler,                      // Timer 3 subtimer B
     IntDefaultHandler,                      // I2C1 Master and Slave
     IntDefaultHandler,                      // CAN0
