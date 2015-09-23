@@ -30,6 +30,7 @@ void    RunThroughput(void)
 void    EveryMinuteThroughput(void)
 {
   iwThroughput = 0;
+  mdwThroughput[iwThroughput] = 0;
 }
 
 
@@ -46,4 +47,5 @@ void    OutThroughput(void)
 void    Throughput_10Hz(void)
 {
   iwThroughput = (iwThroughput + 1) % 600;
+  mdwThroughput[iwThroughput] = 0;
 }
