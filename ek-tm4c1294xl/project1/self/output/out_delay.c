@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-OUT_DELAY,C
+OUT_DELAY.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,11 +7,12 @@ OUT_DELAY,C
 #include "../main.h"
 #include "../serial/ports.h"
 #include "../time/delay.h"
+#include "out_delay.h"
 
 
 
 void    OutDelay(void)
 {
-  Delay(10000);
+  DelaySeconds(10);
   LongResult(bRES_OK);
 }

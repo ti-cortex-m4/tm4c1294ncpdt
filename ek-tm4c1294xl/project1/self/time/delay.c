@@ -1,11 +1,12 @@
 /*------------------------------------------------------------------------------
-DELAY!C 
+DELAY!C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "../hardware/watchdog.h"
+#include "delay.h"
 
 
 
@@ -59,6 +60,15 @@ void    DelayMilly(uint  wMillySec) {
   }
 }
 
+
+void    DelaySeconds(uint  wSecond) {
+  if (wSecond == 0) return;
+
+  while (wSecond-- > 0) {
+    ResetWatchdog();
+    DelayMilly(1000);
+  }
+}
 
 
 void    Delay(uint  wMillySec) {
