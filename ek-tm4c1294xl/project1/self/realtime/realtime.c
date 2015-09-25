@@ -255,7 +255,7 @@ void    ProcessTime(void)
 
 void    RunRealtime(void)
 {
-  if (GetLabelRTC() == true)
+  if (GetLabelRTC() == false)
   {
     fHealthLabelRTC = false;
     return;
