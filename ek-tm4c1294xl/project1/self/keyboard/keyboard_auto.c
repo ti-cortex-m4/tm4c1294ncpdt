@@ -22,6 +22,7 @@ KEYBOARD_AUTO!C
 #include "test/key_test_impulses.h"
 #include "test/key_test_keys.h"
 #include "test/key_test_rtc.h"
+#include "test/key_test_power_off.h"
 #include "gps/key_gps_data.h"
 #include "gps/key_gps_correct.h"
 
@@ -47,6 +48,7 @@ void    Keyboard_Auto(void)
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
       case bTEST_RTC:           auto_TestRTC();         break;
+      case bTEST_POWER_OFF:     auto_TestPowerOff();    break;
     }
   }
 
@@ -69,6 +71,7 @@ void    Keyboard_Auto(void)
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
       case bTEST_RTC:           auto_TestRTC();         break;
+      case bTEST_POWER_OFF:     auto_TestPowerOff();    break;
     }
 
     // обновление показаний с каждым импульсом
@@ -125,6 +128,7 @@ void    Keyboard_Auto(void)
       case bTEST_IMPULSES:      auto_TestImpulses();    break;
       case bTEST_KEYS:          auto_TestKeys();        break;
       case bTEST_RTC:           auto_TestRTC();         break;
+      case bTEST_POWER_OFF:     auto_TestPowerOff();    break;
     }
   }
 }

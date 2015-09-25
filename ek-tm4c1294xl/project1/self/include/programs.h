@@ -276,6 +276,7 @@ PROGRAMS!H
 #define bTEST_IMPULSES              227
 #define bTEST_KEYS                  228
 #define bTEST_RTC                   229
+#define bTEST_POWER_OFF             230
 
 
 #define wSET_OUTPUT_DELAY           298
