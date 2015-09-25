@@ -27,9 +27,9 @@ void    DelayMicro(uint  wMicroSec) {
   if (wMicroSec == 0) return;
 
   while (wMicroSec-- > 0) {
-    Nop();
-    Nop();
-    Nop();
+//    Nop();
+//    Nop();
+//    Nop();
     Nop();
     Nop();
     Nop();
