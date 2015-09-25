@@ -34,9 +34,6 @@ MAIN,H
 
 
 
-#define UNDEFINED       0x55
-
-
 // тип 'правило перехода на сезонное время'
 typedef enum
 {

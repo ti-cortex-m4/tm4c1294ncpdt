@@ -42,5 +42,12 @@ extern  realtime1               Realtime1;
 extern  uchar                   bHhrInc;
 
 
+
+extern  bool                    fHealthLabelRTC;
+
+extern  bool                    fHealthTimeRTC;
+
+
+
 #endif
 
