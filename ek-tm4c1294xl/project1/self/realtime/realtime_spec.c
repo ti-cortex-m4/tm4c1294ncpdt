@@ -37,14 +37,15 @@ static void ProcessTimeMnt(void)
 void    NexttimeMnt(void)
 {
   ResetWatchdog();
-  // TODO if (GetLabelRTC() == 0) return;
 
-  time tiT = *GetCurrTimeDate();
-  if (IsValidTimeDateRTC(tiT) == 0) return;
+  if (GetLabelRTC() == false) return;
 
-  if (tiCurr.bSecond != tiT.bSecond)
+  time ti = *GetCurrTimeDate();
+  if (IsValidTimeDateRTC(ti) == false) return;
+
+  if (tiCurr.bSecond != ti.bSecond)
   {
-    tiCurr = tiT;
+    tiCurr = ti;
 
     if (enGlobal != GLB_PROGRAM)
       ProcessTimeMnt();

@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 RTC!C TODO RTC read temperature
-              
+
  DS3234EN
 ------------------------------------------------------------------------------*/
 
@@ -174,12 +174,22 @@ void    SetCurrDate(time  ti)
 
 void    SetLabelRTC(void)
 {
-uchar   i;
-
   EnableSPI();
 
-  CharOutSPI(0xA0);
-  for (i=0; i<0x10; i++) CharOutSPI(i);
+  CharOutSPI(0x98);
+  CharOutSPI(0x00);
+
+  DisableSPI();
+
+
+  EnableSPI();
+  CharOutSPI(0x99);
+
+  uchar i;
+  for (i=0; i<0x10; i++)
+  {
+    CharOutSPI(i);
+  }
 
   DisableSPI();
 }
@@ -187,17 +197,33 @@ uchar   i;
 
 bool    GetLabelRTC(void)
 {
-uchar   i;
-
   EnableSPI();
 
-  CharOutSPI(0x20);
-  for (i=0; i<0x10; i++)
-    if (CharInSPI() != i) return(0);
+  CharOutSPI(0x98);
+  CharOutSPI(0x00);
 
   DisableSPI();
 
-  return(1);
+
+  EnableSPI();
+
+  CharOutSPI(0x19);
+
+  bool f = true;
+
+  uchar i;
+  for (i=0; i<0x10; i++)
+  {
+    if (CharInSPI() != i)
+    {
+      f = false;
+      break;
+    }
+  }
+
+  DisableSPI();
+
+  return f;
 }
 
 /*
