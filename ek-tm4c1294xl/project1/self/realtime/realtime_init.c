@@ -19,6 +19,7 @@ REALTIME_INIT!C
 #include "../serial/print.h"
 #include "../nvram/cache.h"
 #include "../settings.h"
+#include "../health.h"
 #include "realtime.h"
 #include "realtime_storage.h"
 
@@ -195,12 +196,22 @@ void    InitRealtime_Custom(void)
   fCurrent = 0;
   fProfile = 0;
 
-//  if (GetLabelRTC() == 0) TestError(szBadRTC1);
+  if (GetLabelRTC() == false)
+  {
+    ShowHi(szAlarm);
+    ShowLo(szErrLabelRTC);
+
+    LongBeep();
+    DelayMsg();
+
+    enGlobal = GLB_PROGRAM;
+    return;
+  }
 
   if (IsValidTimeDateRTC(*GetCurrTimeDate()) == false)
   {
     ShowHi(szAlarm);
-    ShowLo(szBadRTC2);
+    ShowLo(szErrTimeRTC);
 
     LongBeep();
     DelayMsg();
@@ -216,7 +227,7 @@ void    InitRealtime_Custom(void)
     if (IsValidTimeDateRTC(tiCurr) == false)
     {
       ShowHi(szAlarm);
-      ShowLo(szBadRTC2); // TODO
+      ShowLo(szErrTimeRTC); // TODO
 
       LongBeep();
       DelayMsg();
