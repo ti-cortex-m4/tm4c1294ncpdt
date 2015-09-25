@@ -81,6 +81,7 @@ KEYBOARD_KEY!C
 #include "test/key_test_impulses.h"
 #include "test/key_test_keys.h"
 #include "test/key_test_rtc.h"
+#include "test/key_test_power_off.h"
 #include "tariffs/key_gaps_flag.h"
 #include "tariffs/key_gaps.h"
 #include "digitals/key_hide_messages.h"
@@ -296,6 +297,7 @@ void    Keyboard_Key(void)
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
+      case bTEST_POWER_OFF:     key_TestPowerOff();     break;
 
 
       case wSET_OUTPUT_DELAY:   key_SetOutputDelay();   break;
@@ -582,6 +584,7 @@ void    Keyboard_Key(void)
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
+      case bTEST_POWER_OFF:     key_TestPowerOff();     break;
 
 
       case wSET_OUTPUT_DELAY:   key_SetOutputDelay();   break;
@@ -787,6 +790,7 @@ void    Keyboard_Key(void)
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
       case bTEST_RTC:           key_TestRTC();          break;
+      case bTEST_POWER_OFF:     key_TestPowerOff();     break;
 
 
       case wSET_OUTPUT_DELAY:   key_SetOutputDelay();   break;

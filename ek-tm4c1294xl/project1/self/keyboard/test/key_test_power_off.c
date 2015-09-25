@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_TEST_RTC.H
+KEY_TEST_POWER_OFF.H
 
 
 ------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ KEY_TEST_RTC.H
 #include "../../main.h"
 #include "../keyboard.h"
 #include "../../display/display.h"
-#include "../../time/rtc.h"
+#include "../../hardware/power_off.h"
 #include "../../health.h"
 #include       "inc/hw_gpio.h"
 #include       "inc/hw_memmap.h"
@@ -22,7 +22,7 @@ static char const       szTestRTC1[]    = "Тест часов      ",
 
 
 
-void    key_TestRTC(void)
+void    key_TestPowerOff(void)
 {
   if (bKey == bKEY_ENTER)
   {
@@ -37,7 +37,7 @@ void    key_TestRTC(void)
 }
 
 
-
+/*
 static uchar Show(bool  f)
 {
   switch (f)
@@ -48,14 +48,13 @@ static uchar Show(bool  f)
     default:        return ' ';
   }
 }
+*/
 
 
-
-void    auto_TestRTC(void)
+void    auto_TestPowerOff(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   {
-    szLo[6]  = Show(GetLabelRTC());
-    szLo[15] = Show(boHealthTimeRTC);
+    szLo[15] = IsPowerOff() ? '+' : '-';
   }
 }
