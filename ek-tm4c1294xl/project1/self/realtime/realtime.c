@@ -255,7 +255,7 @@ void    ProcessTime(void)
 
 void    RunRealtime(void)
 {
-time    tiT;
+time    ti;
 
 //  if (GetLabelRTC() == 0) {
 //	boHealthLabelRTC = false;
@@ -263,19 +263,20 @@ time    tiT;
 //  }
 //  boHealthLabelRTC = true;
 
-  tiT = *GetCurrTimeDate();
-  if (IsValidTimeDateRTC(tiT) == 0) {
-    boHealthTimeRTC = false;
-	return;
+  ti = *GetCurrTimeDate();
+  if (IsValidTimeDateRTC(ti) == false)
+  {
+    fHealthTimeRTC = false;
+    return;
   }
-  boHealthTimeRTC = true;
+  fHealthTimeRTC = true;
 
   if (RunPowerOff())
     return;
 
-  if (tiCurr.bSecond != tiT.bSecond)
+  if (tiCurr.bSecond != ti.bSecond)
   {
-    tiCurr = tiT;
+    tiCurr = ti;
 
     if (enGlobal != GLB_PROGRAM)
     {

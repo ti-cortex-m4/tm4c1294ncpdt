@@ -56,6 +56,6 @@ void    auto_TestRTC(void)
   if (enKeyboard == KBD_POSTENTER)
   {
     szLo[6]  = Show(GetLabelRTC());
-    szLo[15] = Show(boHealthTimeRTC);
+    szLo[15] = Show(fHealthTimeRTC);
   }
 }
