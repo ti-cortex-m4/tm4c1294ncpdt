@@ -1,24 +1,24 @@
 /*------------------------------------------------------------------------------
 KEY_TEST_RTC.H
 
-
+Тест часов
 ------------------------------------------------------------------------------*/
 
+#include "inc/hw_gpio.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_sysctl.h"
+#include "inc/hw_types.h"
 #include "../../main.h"
-#include "../keyboard.h"
-#include "../../display/display.h"
-#include "../../time/rtc.h"
+#include "../../console.h"
 #include "../../health.h"
-#include       "inc/hw_gpio.h"
-#include       "inc/hw_memmap.h"
-#include       "inc/hw_sysctl.h"
-#include       "inc/hw_types.h"
+#include "../../time/rtc.h"
+#include "key_test_rtc.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szTestRTC1[]    = "Тест часов      ",
-                        szTestRTC2[]    = "метка    время  ";
+static char const       szMessageHi[]   = "Тест часов      ",
+                        szMessageLo[]   = "метка    время  ";
 
 
 
@@ -30,8 +30,8 @@ void    key_TestRTC(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ShowHi(szTestRTC1);
-      ShowLo(szTestRTC2);
+      ShowHi(szMessageHi);
+      ShowLo(szMessageLo);
     }
   }
 }
@@ -42,10 +42,9 @@ static uchar Show(bool  f)
 {
   switch (f)
   {
-    case true:      return '+';
-    case false:     return '-';
-    case UNDEFINED: return '?';
-    default:        return ' ';
+    case true:  return '+';
+    case false: return '-';
+    default:    return '?';
   }
 }
 
@@ -55,7 +54,7 @@ void    auto_TestRTC(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   {
-    szLo[6]  = Show(GetLabelRTC());
+    szLo[6]  = Show(fHealthLabelRTC);
     szLo[15] = Show(fHealthTimeRTC);
   }
 }
