@@ -13,7 +13,6 @@ TODO атомарные операции
 #include "../hardware/power_off.h"
 #include "../time/rtc.h"
 #include "../time/gps.h"
-#include "../health.h"
 #include "../serial/dtr.h"
 #include "../serial/print.h"
 #include "next_second.h"

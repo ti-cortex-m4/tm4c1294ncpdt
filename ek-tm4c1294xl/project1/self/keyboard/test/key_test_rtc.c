@@ -10,7 +10,7 @@ KEY_TEST_RTC.H
 #include "inc/hw_types.h"
 #include "../../main.h"
 #include "../../console.h"
-#include "../../health.h"
+#include "../../memory/mem_realtime.h"
 #include "../../time/rtc.h"
 #include "key_test_rtc.h"
 

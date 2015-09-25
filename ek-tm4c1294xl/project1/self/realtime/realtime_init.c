@@ -19,7 +19,6 @@ REALTIME_INIT!C
 #include "../serial/print.h"
 #include "../nvram/cache.h"
 #include "../settings.h"
-#include "../health.h"
 #include "realtime.h"
 #include "realtime_storage.h"
 

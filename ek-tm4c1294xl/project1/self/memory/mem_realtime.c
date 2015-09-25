@@ -34,3 +34,11 @@ realtime1               Realtime1;
 
 // переменная
 uchar                   bHhrInc;
+
+
+
+//
+bool                    fHealthLabelRTC;
+
+//
+bool                    fHealthTimeRTC;
