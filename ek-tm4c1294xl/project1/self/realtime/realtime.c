@@ -255,15 +255,14 @@ void    ProcessTime(void)
 
 void    RunRealtime(void)
 {
-time    ti;
+  if (GetLabelRTC() == true)
+  {
+    fHealthLabelRTC = false;
+    return;
+  }
+  fHealthLabelRTC = true;
 
-//  if (GetLabelRTC() == 0) {
-//	boHealthLabelRTC = false;
-//    return;
-//  }
-//  boHealthLabelRTC = true;
-
-  ti = *GetCurrTimeDate();
+  time ti = *GetCurrTimeDate();
   if (IsValidTimeDateRTC(ti) == false)
   {
     fHealthTimeRTC = false;
