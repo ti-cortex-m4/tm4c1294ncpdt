@@ -199,7 +199,7 @@ void    InitRealtime_Custom(void)
   if (GetLabelRTC() == false)
   {
     ShowHi(szAlarm);
-    ShowLo(szErrLabelRTC);
+    ShowLo(szBadLabelRTC);
 
     LongBeep();
     DelayMsg();
@@ -211,7 +211,7 @@ void    InitRealtime_Custom(void)
   if (IsValidTimeDateRTC(*GetCurrTimeDate()) == false)
   {
     ShowHi(szAlarm);
-    ShowLo(szErrTimeRTC);
+    ShowLo(szBadTimeRTC);
 
     LongBeep();
     DelayMsg();
@@ -227,7 +227,7 @@ void    InitRealtime_Custom(void)
     if (IsValidTimeDateRTC(tiCurr) == false)
     {
       ShowHi(szAlarm);
-      ShowLo(szErrTimeRTC); // TODO
+      ShowLo(szBadTimeValue);
 
       LongBeep();
       DelayMsg();
