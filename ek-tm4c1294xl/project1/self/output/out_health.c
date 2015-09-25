@@ -20,8 +20,8 @@ uint    i;
   for (i=0; i<100; i++) PushChar(UNDEFINED);
 
   InitPushCRC();
-  PushBool(boHealthLabelRTC);
-  PushBool(boHealthTimeRTC);
+  PushBool(fHealthLabelRTC);
+  PushBool(fHealthTimeRTC);
 
   Output(1000);
 }

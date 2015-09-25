@@ -1,8 +1,8 @@
 /*------------------------------------------------------------------------------
-HEALTH!H
+HEALTH.H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                    boHealthLabelRTC;
-extern  bool                    boHealthTimeRTC;
+extern  bool                    fHealthLabelRTC;
+extern  bool                    fHealthTimeRTC;

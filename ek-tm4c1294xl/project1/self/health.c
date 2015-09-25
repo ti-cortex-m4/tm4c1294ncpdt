@@ -1,11 +1,13 @@
 /*------------------------------------------------------------------------------
-HEALTH!C
+HEALTH.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "main.h"
+#include "health.h"
 
 
-bool                    boHealthLabelRTC = UNDEFINED;
-bool                    boHealthTimeRTC = UNDEFINED;
+
+bool                    fHealthLabelRTC = UNDEFINED;
+bool                    fHealthTimeRTC = UNDEFINED;
