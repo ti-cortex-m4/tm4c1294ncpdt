@@ -85,7 +85,7 @@ static void DisableSPI(void)
 }
 
 
-
+/*
 void    EnableWriteRTC(void) {
   EnableSPI();
 
@@ -95,7 +95,7 @@ void    EnableWriteRTC(void) {
   DisableSPI();
 }
 
-/*
+
 void    DisableWriteRTC(void) {
   EnableSPI();
 
@@ -292,7 +292,7 @@ time    ti;
 void    InitRTC(void) {
 	InitGPIO_RTC();
 
-  EnableWriteRTC();
+//  EnableWriteRTC();
   SetLabelRTC();
 
   DisableSPI();
