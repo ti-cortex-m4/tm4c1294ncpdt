@@ -66,10 +66,8 @@ doc programs2
 ++iwMajor > GetMaxShutdown()
 
 use CCS6
-изменения в документы
 show time 10 Hz
 внутки проекта SW-TM4C-2.1.1.71
-RTC label
 RTC temperature ?
 RTC disable write ?
 systick in ms
