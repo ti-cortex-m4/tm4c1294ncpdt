@@ -17,7 +17,7 @@ KEY_TEST_RTC.H
 
 
 //                                         0123456789ABCDEF
-static char const       szMessageHi[]   = "Тест RTC        ",
+static char const       szMessageHi[]   = "Тест часов      ",
                         szMessageLo[]   = "метка    время  ";
 
 
