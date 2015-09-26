@@ -4,6 +4,11 @@ RTC!C TODO RTC read temperature
  DS3234EN
 ------------------------------------------------------------------------------*/
 
+#include "inc/hw_sysctl.h"
+#include "inc/hw_gpio.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_ssi.h"
+#include "inc/hw_types.h"
 #include "../main.h"
 #include "../time/timedate.h"
 #include "../display/lines.h"
@@ -13,9 +18,8 @@ RTC!C TODO RTC read temperature
 #include "inc/hw_memmap.h"
 #include "inc/hw_ssi.h"
 #include "inc/hw_types.h"
+#include "rtc_define.h"
 #include "rtc.h"
-#include "rtc1.h"
-#include "rtc2.h"
 
 
 
@@ -30,12 +34,12 @@ static void  CharOutSPI(unsigned char bI)
 
  for(bK=0; bK<8; bK++)
  {
-  if(bI & (0x80 >> bK )) HWREG(GPIO_DATABIT_SI) = SPI_BIT_SI;
-  else HWREG(GPIO_DATABIT_SI) = ~SPI_BIT_SI;
+  if(bI & (0x80 >> bK )) HWREG(GPIO_RTC_SI) = MASK_RTC_SI;
+  else HWREG(GPIO_RTC_SI) = ~MASK_RTC_SI;
   Wait();
-  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
   Wait();
-  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
   Wait();
  }
 }
@@ -48,11 +52,11 @@ static unsigned char  CharInSPI(void)
 
  for(bK=0; bK<8; bK++)
  {
-  HWREG(GPIO_DATABIT_SCK) =  SPI_BIT_SCK;
+  HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
   Wait();
-  HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
   Wait();
-  if(HWREG(GPIO_DATABIT_SO)) bRez |= 0x80 >> bK;
+  if(HWREG(GPIO_RTC_SO)) bRez |= 0x80 >> bK;
   Wait();
  }
 
@@ -64,13 +68,13 @@ static unsigned char  CharInSPI(void)
 //Подготовка к началу работы по SPI
 static void EnableSPI(void)
 {
- HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+ HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
  Wait();
- HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
+ HWREG(GPIO_RTC_CS)  = MASK_RTC_CS;
  Wait();
- HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+ HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
  Wait();
- HWREG(GPIO_DATABIT_CS)  = ~SPI_BIT_CS;
+ HWREG(GPIO_RTC_CS)  = ~MASK_RTC_CS;
  Wait();
 }
 
@@ -78,9 +82,9 @@ static void EnableSPI(void)
 //Окончание работы по SPI
 static void DisableSPI(void)
 {
- HWREG(GPIO_DATABIT_SCK) = ~SPI_BIT_SCK;
+ HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
  Wait();
- HWREG(GPIO_DATABIT_CS)  = SPI_BIT_CS;
+ HWREG(GPIO_RTC_CS)  = MASK_RTC_CS;
  Wait();
 }
 
@@ -288,6 +292,16 @@ time    ti;
 }
 */
 
+void    InitGPIO_RTC() {
+  HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R1;
+
+  DelayGPIO();
+
+  HWREG(GPIO_PORTB_AHB_BASE + GPIO_O_DIR)   |= 0x000E;
+  HWREG(GPIO_PORTB_AHB_BASE + GPIO_O_DIR)   &= 0xFFFE;
+
+  HWREG(GPIO_PORTB_AHB_BASE + GPIO_O_DEN)   |= 0x000F;
+}
 
 void    InitRTC(void) {
 	InitGPIO_RTC();
