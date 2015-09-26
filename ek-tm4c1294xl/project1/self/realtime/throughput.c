@@ -5,11 +5,16 @@ THROUGHPUT!C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_throughput.h"
 #include "../memory/mem_realtime.h"
 #include "../serial/ports.h"
 #include "../serial/ports_stack.h"
 #include "throughput.h"
+
+
+
+static volatile ulong   mdwThroughput[600];
+
+static volatile uint    iwThroughput;
 
 
 
