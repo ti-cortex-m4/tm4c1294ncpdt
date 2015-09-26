@@ -4,13 +4,6 @@ RTC!H
  DS3234EN
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-
-
-
-#define NATIVE_RTC
-
-
 void    InitGPIO_RTC();
 
 time    *GetCurrTimeDate(void);
