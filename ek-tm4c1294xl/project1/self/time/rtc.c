@@ -23,9 +23,9 @@ RTC!C
 
 
 
-static void CharOutSPI(uchar bI)
+static void OutChar(uchar bI)
 {
- unsigned char bK;
+ uchar bK;
 
  for(bK=0; bK<8; bK++)
  {
@@ -40,9 +40,9 @@ static void CharOutSPI(uchar bI)
 }
 
 
-static uchar CharInSPI(void)
+static uchar InChar(void)
 {
- unsigned char bRez, bK;
+ uchar bRez, bK;
  bRez = 0;
 
  for(bK=0; bK<8; bK++)
@@ -60,8 +60,7 @@ static uchar CharInSPI(void)
 
 
 
-//Подготовка к началу работы по SPI
-static void EnableSPI(void)
+static void Enable(void)
 {
  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
 
@@ -74,8 +73,7 @@ static void EnableSPI(void)
 }
 
 
-//Окончание работы по SPI
-static void DisableSPI(void)
+static void Disable(void)
 {
  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
 
@@ -86,22 +84,22 @@ static void DisableSPI(void)
 
 /*
 void    EnableWriteRTC(void) {
-  EnableSPI();
+  Enable();
 
-  CharOutSPI(0x8F);
-  CharOutSPI(0x04);
+  OutChar(0x8F);
+  OutChar(0x04);
 
-  DisableSPI();
+  Disable();
 }
 
 
 void    DisableWriteRTC(void) {
-  EnableSPI();
+  Enable();
 
-  CharOutSPI(0x8F);
-  CharOutSPI(0x44);
+  OutChar(0x8F);
+  OutChar(0x44);
 
-  DisableSPI();
+  Disable();
 }
 */
 
@@ -110,18 +108,18 @@ time    *GetCurrTimeDate(void)
 {
 static time ti;
 
-  EnableSPI();
-  CharOutSPI(0x00);
+  Enable();
+  OutChar(0x00);
 
-  ti.bSecond = FromBCD(CharInSPI());
-  ti.bMinute = FromBCD(CharInSPI());
-  ti.bHour   = FromBCD(CharInSPI());
-                       CharInSPI(); // день недели
-  ti.bDay    = FromBCD(CharInSPI());
-  ti.bMonth  = FromBCD(CharInSPI());
-  ti.bYear   = FromBCD(CharInSPI());
+  ti.bSecond = FromBCD(InChar());
+  ti.bMinute = FromBCD(InChar());
+  ti.bHour   = FromBCD(InChar());
+                       InChar(); // день недели
+  ti.bDay    = FromBCD(InChar());
+  ti.bMonth  = FromBCD(InChar());
+  ti.bYear   = FromBCD(InChar());
 
-  DisableSPI();
+  Disable();
 
   return &ti;
 }
@@ -129,98 +127,98 @@ static time ti;
 
 void    SetCurrTimeDate(time  ti)
 {
-  EnableSPI();
-  CharOutSPI(0x80);
+  Enable();
+  OutChar(0x80);
 
-  CharOutSPI( ToBCD(ti.bSecond) );
-  CharOutSPI( ToBCD(ti.bMinute) );
-  CharOutSPI( ToBCD(ti.bHour)   );
-  CharOutSPI( 0 ); // день недели
-  CharOutSPI( ToBCD(ti.bDay)    );
-  CharOutSPI( ToBCD(ti.bMonth)  );
-  CharOutSPI( ToBCD(ti.bYear)   );
+  OutChar( ToBCD(ti.bSecond) );
+  OutChar( ToBCD(ti.bMinute) );
+  OutChar( ToBCD(ti.bHour)   );
+  OutChar( 0 ); // день недели
+  OutChar( ToBCD(ti.bDay)    );
+  OutChar( ToBCD(ti.bMonth)  );
+  OutChar( ToBCD(ti.bYear)   );
 
-  DisableSPI();
+  Disable();
 }
 
 
 void    SetCurrTime(time  ti)
 {
-  EnableSPI();
-  CharOutSPI(0x80);
+  Enable();
+  OutChar(0x80);
 
-  CharOutSPI( ToBCD(ti.bSecond) );
-  CharOutSPI( ToBCD(ti.bMinute) );
-  CharOutSPI( ToBCD(ti.bHour)   );
+  OutChar( ToBCD(ti.bSecond) );
+  OutChar( ToBCD(ti.bMinute) );
+  OutChar( ToBCD(ti.bHour)   );
 
-  DisableSPI();
+  Disable();
 }
 
 
 void    SetCurrDate(time  ti)
 {
-  EnableSPI();
-  CharOutSPI(0x84);
+  Enable();
+  OutChar(0x84);
 
-  CharOutSPI( ToBCD(ti.bDay)   );
-  CharOutSPI( ToBCD(ti.bMonth) );
-  CharOutSPI( ToBCD(ti.bYear)  );
+  OutChar( ToBCD(ti.bDay)   );
+  OutChar( ToBCD(ti.bMonth) );
+  OutChar( ToBCD(ti.bYear)  );
 
-  DisableSPI();
+  Disable();
 }
 
 
 
 void    SetLabelRTC(void)
 {
-  EnableSPI();
+  Enable();
 
-  CharOutSPI(0x98);
-  CharOutSPI(0x00);
+  OutChar(0x98);
+  OutChar(0x00);
 
-  DisableSPI();
+  Disable();
 
 
-  EnableSPI();
-  CharOutSPI(0x99);
+  Enable();
+  OutChar(0x99);
 
   uchar i;
   for (i=0; i<0x10; i++)
   {
-    CharOutSPI(i);
+    OutChar(i);
   }
 
-  DisableSPI();
+  Disable();
 }
 
 
 bool    GetLabelRTC(void)
 {
-  EnableSPI();
+  Enable();
 
-  CharOutSPI(0x98);
-  CharOutSPI(0x00);
+  OutChar(0x98);
+  OutChar(0x00);
 
-  DisableSPI();
+  Disable();
 
 
-  EnableSPI();
+  Enable();
 
-  CharOutSPI(0x19);
+  OutChar(0x19);
 
   bool f = true;
 
   uchar i;
   for (i=0; i<0x10; i++)
   {
-    if (CharInSPI() != i)
+    if (InChar() != i)
     {
       f = false;
       break;
     }
   }
 
-  DisableSPI();
+  Disable();
 
   return f;
 }
@@ -231,13 +229,13 @@ uchar   i;
 
   InitPushCRC();
 
-  EnableSPI();
+  Enable();
 
-  CharOutSPI(0x20);
+  OutChar(0x20);
   for (i=0; i<0x10; i++)
-    PushChar(CharInSPI());
+    PushChar(InChar());
 
-  DisableSPI();
+  Disable();
 
   PushChar(GetLabelRTC());
 
@@ -304,5 +302,5 @@ void    InitRTC(void) {
 //  EnableWriteRTC();
   SetLabelRTC();
 
-  DisableSPI();
+  Disable();
 }
