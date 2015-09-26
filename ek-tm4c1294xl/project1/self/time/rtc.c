@@ -244,7 +244,7 @@ uchar   i;
 */
 
 
-bool    IsValidTimeDateRTC(time  ti)
+bool    ValidTimeDateRTC(time  ti)
 {
   if (ti.bSecond == FromBCD(0xFF)) return(0);
   if (ti.bMinute == FromBCD(0xFF)) return(0);

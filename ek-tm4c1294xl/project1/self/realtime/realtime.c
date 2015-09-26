@@ -262,7 +262,7 @@ void    RunRealtime(void)
   fHealthLabelRTC = true;
 
   time ti = *GetCurrTimeDate();
-  if (IsValidTimeDateRTC(ti) == false)
+  if (ValidTimeDateRTC(ti) == false)
   {
     fHealthTimeRTC = false;
     return;

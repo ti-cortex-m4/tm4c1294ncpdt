@@ -15,6 +15,6 @@ void    SetCurrDate(time  ti);
 void    SetLabelRTC(void);
 bool    GetLabelRTC(void);
 
-bool    IsValidTimeDateRTC(time  ti);
+bool    ValidTimeDateRTC(time  ti);
 
 void    InitRTC(void);

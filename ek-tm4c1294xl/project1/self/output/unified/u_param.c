@@ -154,7 +154,7 @@ uint    j;
         else
         {
           fl = mpreParamsBuff[ PrevSoftTim() ][ j ];
-          if (IsValidFloat(fl))
+          if (ValidFloat(fl))
           {
             PushFloatUni(ST4_OK, FixParamsUni(diT, fl));
           }
