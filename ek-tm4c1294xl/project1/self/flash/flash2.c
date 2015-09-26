@@ -38,7 +38,7 @@ static void Disable(void)
 
 
 
-static void CharOut(uchar  b)
+static void OutChar(uchar  b)
 {
   cdwFlashWriteByte++;
 
@@ -84,7 +84,7 @@ static void CharOut(uchar  b)
 }
 
 
-static uchar CharIn(void)
+static uchar InChar(void)
 {
   cdwFlashReadByte++;
 
@@ -131,8 +131,8 @@ uchar   ReadStatus2(void)
 {
   Enable();
 
-  CharOut(0x57);
-  bFlashStatus = CharIn();
+  OutChar(0x57);
+  bFlashStatus = InChar();
 
   Disable();
   return bFlashStatus;
@@ -168,12 +168,12 @@ bool    PageErase2(uint const  wPageOut)
   {
     Enable();
 
-    CharOut(0x81);
+    OutChar(0x81);
 
     uint i = (wPageOut << 2) & 0xFFFC;
-    CharOut(i / 0x100);
-    CharOut(i % 0x100);
-    CharOut(0);
+    OutChar(i / 0x100);
+    OutChar(i % 0x100);
+    OutChar(0);
 
     Disable();
     return true;
@@ -192,16 +192,16 @@ bool    PageRead2(uint const  wPageIn)
   {
     Enable();
 
-    CharOut(0x52);
+    OutChar(0x52);
 
     uint i = (wPageIn << 2) & 0xFFFC;
-    CharOut(i / 0x100);
-    CharOut(i % 0x100);
-    CharOut(0);
+    OutChar(i / 0x100);
+    OutChar(i % 0x100);
+    OutChar(0);
 
-    for (i=0; i<4; i++) CharOut(0);
+    for (i=0; i<4; i++) OutChar(0);
 
-    for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = CharIn();
+    for (i=0; i<wPAGE_BYTES; i++) mpbPageIn[i] = InChar();
 
     Disable();
     return true;
@@ -221,14 +221,14 @@ bool    PageWrite2(uint const  wPageOut)
   {
     Enable();
 
-    CharOut(0x82);
+    OutChar(0x82);
 
     uint i = (wPageOut << 2) & 0xFFFC;
-    CharOut(i / 0x100);
-    CharOut(i % 0x100);
-    CharOut(0);
+    OutChar(i / 0x100);
+    OutChar(i % 0x100);
+    OutChar(0);
 
-    for (i=0; i<wPAGE_BYTES; i++) CharOut(mpbPageOut[i]);
+    for (i=0; i<wPAGE_BYTES; i++) OutChar(mpbPageOut[i]);
 
     Disable();
   }
@@ -239,12 +239,12 @@ bool    PageWrite2(uint const  wPageOut)
   {
     Enable();
 
-    CharOut(0x60);
+    OutChar(0x60);
 
     uint i = (wPageOut << 2) & 0xFFFC;
-    CharOut(i / 0x100);
-    CharOut(i % 0x100);
-    CharOut(0);
+    OutChar(i / 0x100);
+    OutChar(i % 0x100);
+    OutChar(0);
 
     Disable();
   }
