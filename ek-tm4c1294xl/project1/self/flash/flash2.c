@@ -15,7 +15,7 @@ FLASH2,C
 #include "../display/lcd.h"
 #include "../display/messages.h"
 #include "flash_control.h"
-#include "flash_define2.h"
+#include "flash2_define.h"
 #include "flash2.h"
 
 

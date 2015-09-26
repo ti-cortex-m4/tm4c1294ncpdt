@@ -15,7 +15,7 @@ FLASH1,C
 #include "../display/lcd.h"
 #include "../display/messages.h"
 #include "flash_control.h"
-#include "flash_define1.h"
+#include "flash1_define.h"
 #include "flash1.h"
 
 
