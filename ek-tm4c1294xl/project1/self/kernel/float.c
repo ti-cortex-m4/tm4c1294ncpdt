@@ -25,7 +25,7 @@ bool    IsFloatNAN(float  fl)
 }
 
 
-bool    IsValidFloat(float  fl)
+bool    ValidFloat(float  fl)
 {
   return !IsFloatNAN(fl);
 }

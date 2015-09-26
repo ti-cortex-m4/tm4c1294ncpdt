@@ -41,7 +41,7 @@ void    NexttimeMnt(void)
   if (GetLabelRTC() == false) return;
 
   time ti = *GetCurrTimeDate();
-  if (IsValidTimeDateRTC(ti) == false) return;
+  if (ValidTimeDateRTC(ti) == false) return;
 
   if (tiCurr.bSecond != ti.bSecond)
   {

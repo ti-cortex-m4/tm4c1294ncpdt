@@ -50,7 +50,7 @@ void    ResetPhones(void)
 
 
 
-bool    IsValidPhone(line  *pph)
+bool    ValidPhone(line  *pph)
 {
   return true;
 }

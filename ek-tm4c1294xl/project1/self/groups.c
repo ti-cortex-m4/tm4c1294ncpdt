@@ -97,7 +97,7 @@ bool    LoadGroups(void)
 
 
 
-bool    IsValidGroup(group  *pgr)
+bool    ValidGroup(group  *pgr)
 {
   uchar c;
   for (c=0; c<pgr->bSize; c++)

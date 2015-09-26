@@ -9,5 +9,5 @@ extern  uchar const             mpbMaxLines[bMAXDEVICES+1];
 
 
 
-bool    IsValidDevice(uchar  ibDevice);
+bool    ValidDevice(uchar  ibDevice);
 void    ShowDeviceName(uchar  ibDevice);

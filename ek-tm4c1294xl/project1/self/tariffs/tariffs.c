@@ -227,7 +227,7 @@ void    MakeAllCurrTariffs(void)
 uchar  ibMonth, ibMode;
 
   time ti = *GetCurrTimeDate();
-  ASSERT(IsValidTimeDateRTC(ti));
+  ASSERT(ValidTimeDateRTC(ti));
 
   if (boGapsFlag == false)
   {

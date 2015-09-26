@@ -96,7 +96,7 @@ static void ShowParamFull(void)
 
          float fl = mpreParamsBuff[ PrevSoftTim() ][ iwPrm ];
 
-         if (IsValidFloat(fl))
+         if (ValidFloat(fl))
            sprintf(szLo,"%12.3f", fl);
          else
            ShowLo(szEmpty);
