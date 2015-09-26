@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-RTC!C TODO RTC read temperature
+RTC!C
 
  DS3234EN
 ------------------------------------------------------------------------------*/
@@ -23,12 +23,7 @@ RTC!C TODO RTC read temperature
 
 
 
-static void Wait(void) // TODO
-{
-}
-
-
-static void  CharOutSPI(unsigned char bI)
+static void CharOutSPI(uchar bI)
 {
  unsigned char bK;
 
@@ -36,16 +31,16 @@ static void  CharOutSPI(unsigned char bI)
  {
   if(bI & (0x80 >> bK )) HWREG(GPIO_RTC_SI) = MASK_RTC_SI;
   else HWREG(GPIO_RTC_SI) = ~MASK_RTC_SI;
-  Wait();
+
   HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
-  Wait();
+
   HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
-  Wait();
+
  }
 }
 
 
-static unsigned char  CharInSPI(void)
+static uchar CharInSPI(void)
 {
  unsigned char bRez, bK;
  bRez = 0;
@@ -53,11 +48,11 @@ static unsigned char  CharInSPI(void)
  for(bK=0; bK<8; bK++)
  {
   HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
-  Wait();
+
   HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
-  Wait();
+
   if(HWREG(GPIO_RTC_SO)) bRez |= 0x80 >> bK;
-  Wait();
+
  }
 
  return(bRez);
@@ -69,13 +64,13 @@ static unsigned char  CharInSPI(void)
 static void EnableSPI(void)
 {
  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
- Wait();
+
  HWREG(GPIO_RTC_CS)  = MASK_RTC_CS;
- Wait();
+
  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
- Wait();
+
  HWREG(GPIO_RTC_CS)  = ~MASK_RTC_CS;
- Wait();
+
 }
 
 
@@ -83,9 +78,9 @@ static void EnableSPI(void)
 static void DisableSPI(void)
 {
  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
- Wait();
+
  HWREG(GPIO_RTC_CS)  = MASK_RTC_CS;
- Wait();
+
 }
 
 
