@@ -13,11 +13,6 @@ RTC!C
 #include "../time/timedate.h"
 #include "../display/lines.h"
 #include "../time/delay.h"
-#include "inc/hw_sysctl.h"
-#include "inc/hw_gpio.h"
-#include "inc/hw_memmap.h"
-#include "inc/hw_ssi.h"
-#include "inc/hw_types.h"
 #include "rtc_define.h"
 #include "rtc.h"
 
@@ -26,12 +21,12 @@ RTC!C
 static void OutChar(uchar  b)
 {
   uchar i;
-  for(i=0; i<8; i++)
+  for (i=0; i<8; i++)
   {
     if (b & (0x80 >> i)) HWREG(GPIO_RTC_SI) = MASK_RTC_SI;
     else HWREG(GPIO_RTC_SI) = ~MASK_RTC_SI;
 
-    HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
+    HWREG(GPIO_RTC_SCK) = MASK_RTC_SCK;
     HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
   }
 }
@@ -42,12 +37,12 @@ static uchar InChar(void)
   uchar b = 0;
 
   uchar i;
-  for(i=0; i<8; i++)
+  for (i=0; i<8; i++)
   {
-    HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
+    HWREG(GPIO_RTC_SCK) = MASK_RTC_SCK;
     HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
 
-    if(HWREG(GPIO_RTC_SO)) b |= 0x80 >> i;
+    if (HWREG(GPIO_RTC_SO)) b |= 0x80 >> i;
   }
 
   return b;
