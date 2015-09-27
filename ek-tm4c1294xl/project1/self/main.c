@@ -96,10 +96,10 @@ int     main(void)
 
   InitSysTick(ui32SysClockFreq);
 
-  InitUart0(ui32SysClockFreq);
-  InitUart2(ui32SysClockFreq);
-  InitUart3(ui32SysClockFreq);
-  InitUart4(ui32SysClockFreq);
+  InitUart0();
+  InitUart2();
+  InitUart3();
+  InitUart4();
 
   DisableWatchdog();
 
