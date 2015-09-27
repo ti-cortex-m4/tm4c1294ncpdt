@@ -42,7 +42,6 @@ hhr100
 params
 ! вывод дампа обмена со счетчиком
 SMK
-label in RTC
 realtime
 
 записано/прочитано байтов (страниц) в секунду
@@ -73,3 +72,6 @@ systick in ms
 
 FIFO
 CRC метка времени + код запрос/ответ
+
+http://easyelectronics.ru/freertos_manual.html 
+third_party\FreeRTOS
