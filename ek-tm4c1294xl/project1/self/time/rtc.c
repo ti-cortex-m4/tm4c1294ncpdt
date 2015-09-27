@@ -23,12 +23,12 @@ RTC!C
 
 
 
-static void OutChar(uchar bI)
+static void OutChar(uchar  b)
 {
-  uchar bK;
-  for(bK=0; bK<8; bK++)
+  uchar i;
+  for(i=0; i<8; i++)
   {
-    if(bI & (0x80 >> bK )) HWREG(GPIO_RTC_SI) = MASK_RTC_SI;
+    if (b & (0x80 >> i)) HWREG(GPIO_RTC_SI) = MASK_RTC_SI;
     else HWREG(GPIO_RTC_SI) = ~MASK_RTC_SI;
 
     HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
@@ -39,18 +39,18 @@ static void OutChar(uchar bI)
 
 static uchar InChar(void)
 {
-  uchar bRez = 0;
+  uchar b = 0;
 
-  uchar bK;
-  for(bK=0; bK<8; bK++)
+  uchar i;
+  for(i=0; i<8; i++)
   {
     HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
     HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
 
-    if(HWREG(GPIO_RTC_SO)) bRez |= 0x80 >> bK;
+    if(HWREG(GPIO_RTC_SO)) b |= 0x80 >> i;
   }
 
-  return bRez;
+  return b;
 }
 
 
@@ -152,7 +152,7 @@ void    SetLabelRTC(void)
   OutChar(0x99);
 
   uchar i;
-  for (i=0; i<0x10; i++)
+  for (i=0; i<8; i++)
   {
     OutChar(i);
   }
@@ -178,7 +178,7 @@ bool    GetLabelRTC(void)
   bool f = true;
 
   uchar i;
-  for (i=0; i<0x10; i++)
+  for (i=0; i<8; i++)
   {
     if (InChar() != i)
     {
