@@ -70,3 +70,6 @@ show time 10 Hz
 внутри проекта SW-TM4C-2.1.1.71
 RTC temperature ?
 systick in ms
+
+FIFO
+CRC метка времени + код запрос/ответ
