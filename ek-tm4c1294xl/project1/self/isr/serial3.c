@@ -21,7 +21,7 @@ SERIAL3!C
 #include "../serial/slave_modem.h"
 #include "../time/delay.h"
 #include "../kernel/crc-16.h"
-#include "../uarts.h"
+#include "../hardware/uarts.h"
 #include "serial.h"
 
 

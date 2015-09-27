@@ -19,7 +19,7 @@ TODO: volatile
 #include "../serial/bulk.h"
 #include "../serial/slave_modem.h"
 #include "../kernel/crc-16.h"
-#include "../uarts.h"
+#include "../hardware/uarts.h"
 #include "serial.h"
 
 
