@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-THROUGHPUT!C
+THROUGHPUT.C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,7 +12,7 @@ THROUGHPUT!C
 
 
 
-static volatile ulong   mdwThroughput[600];
+static volatile uint    mwThroughput[600];
 
 static volatile uint    iwThroughput;
 
@@ -21,13 +21,14 @@ static volatile uint    iwThroughput;
 void    InitThroughput(void)
 {
   iwThroughput = tiCurr.bSecond*10;
+  mwThroughput[iwThroughput] = 0;
 }
 
 
 
 void    RunThroughput(void)
 {
-  mdwThroughput[iwThroughput]++;
+  mwThroughput[iwThroughput]++;
 }
 
 
@@ -35,16 +36,17 @@ void    RunThroughput(void)
 void    EveryMinuteThroughput(void)
 {
   iwThroughput = 0;
-  mdwThroughput[iwThroughput] = 0;
+  mwThroughput[iwThroughput] = 0;
 }
+
 
 
 void    OutThroughput(void)
 {
   InitPushCRC();
   PushInt(iwThroughput);
-  Push(&mdwThroughput, sizeof(mdwThroughput));
-  Output(2 + sizeof(mdwThroughput));
+  PushIntArray((uint *)mwThroughput, 600);
+  Output(2 + sizeof(mwThroughput));
 }
 
 
@@ -52,5 +54,5 @@ void    OutThroughput(void)
 void    Throughput_10Hz(void)
 {
   iwThroughput = (iwThroughput + 1) % 600;
-  mdwThroughput[iwThroughput] = 0;
+  mwThroughput[iwThroughput] = 0;
 }
