@@ -48,7 +48,7 @@ void    key_SetSlaveModem(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        fSlaveModem = InvertBoolean(fSlaveModem);
+        fSlaveModem = InvertBool(fSlaveModem);
         SaveCache(&chSlaveModem);
         Show();
 

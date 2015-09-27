@@ -89,7 +89,7 @@ static uint iwPrm;
     {
       if (enGlobal != GLB_WORK)
       { 
-        mpboEnblParams[iwPrm] = InvertBoolean(mpboEnblParams[iwPrm]);
+        mpboEnblParams[iwPrm] = InvertBool(mpboEnblParams[iwPrm]);
 
         SaveCache(&flEnblParams);
         ShowParam(iwPrm);

@@ -82,7 +82,7 @@ void    key_SetExt4EnblCan(void)
     {
       if (enKeyboard == KBD_POSTENTER)
       {
-        mpfExt4EnblCan[ibX] = InvertBoolean(mpfExt4EnblCan[ibX]);
+        mpfExt4EnblCan[ibX] = InvertBool(mpfExt4EnblCan[ibX]);
 
         SaveFile(&flExt4EnblCan);
         Show();

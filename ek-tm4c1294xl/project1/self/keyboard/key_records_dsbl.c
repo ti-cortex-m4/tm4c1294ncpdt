@@ -87,7 +87,7 @@ static uint iwRec;
     {
       if (enKeyboard == KBD_POSTENTER)
       {
-        mpfRecordDsbl[iwRec] = InvertBoolean(mpfRecordDsbl[iwRec]);
+        mpfRecordDsbl[iwRec] = InvertBool(mpfRecordDsbl[iwRec]);
         Show(iwRec);
         SaveCache(&chRecordDsbl);
       }

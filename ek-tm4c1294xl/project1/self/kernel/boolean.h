@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-BOOLEAN,H
+BOOLEAN.H
 
 
 ------------------------------------------------------------------------------*/
 
-bool    ValidBoolean(uchar  b);
-bool    CharToBoolean(uchar  b);
-bool    InvertBoolean(bool  bo);
+bool    ValidBool(uchar  b);
+bool    CharToBool(uchar  b);
+bool    InvertBool(bool  f);

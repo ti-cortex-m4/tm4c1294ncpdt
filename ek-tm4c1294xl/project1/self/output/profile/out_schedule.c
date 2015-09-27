@@ -31,7 +31,7 @@ void    OutSetEnblPrtHou(void)
     uchar i;
     for (i=0; i<48; i++)
     {
-      mpboEnblPrtHou[bInBuff6][i] = CharToBoolean(PopChar());
+      mpboEnblPrtHou[bInBuff6][i] = CharToBool(PopChar());
     }
 
     SaveCache(&chEnblPrtHou);
@@ -56,7 +56,7 @@ void    OutSetCtrlHou(void)
   uchar i;
   for (i=0; i<48; i++)
   {
-    mpboCtrlHou[i] = CharToBoolean(PopChar());
+    mpboCtrlHou[i] = CharToBool(PopChar());
   }
 
   SaveCache(&chCtrlHou);
@@ -79,13 +79,13 @@ void    OutSetRecalcHou1(void)
 {
   InitPop(6);
 
-  boRecalcAlways = CharToBoolean(PopChar());
+  boRecalcAlways = CharToBool(PopChar());
   SaveCache(&chRecalcAlways);
 
   uchar i;
   for (i=0; i<48; i++)
   {
-    mpboRecalcHou[i] = CharToBoolean(PopChar());
+    mpboRecalcHou[i] = CharToBool(PopChar());
   }
 
   SaveCache(&chRecalcHou);
@@ -103,7 +103,7 @@ void    OutSetRecalcHou2(void)
   uchar i;
   for (i=0; i<48; i++)
   {
-    mpboRecalcHou[i] = CharToBoolean(PopChar());
+    mpboRecalcHou[i] = CharToBool(PopChar());
   }
 
   SaveCache(&chRecalcHou);

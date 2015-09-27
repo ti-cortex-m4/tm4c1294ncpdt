@@ -27,9 +27,9 @@ void    OutSetPublicTariffs(void)
 {
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
-    if (ValidBoolean(bInBuff5))
+    if (ValidBool(bInBuff5))
     {
-      fPublicTrf = CharToBoolean(bInBuff5);
+      fPublicTrf = CharToBool(bInBuff5);
       SaveCache(&chPublicTrf);
       Result(bRES_OK);
     }

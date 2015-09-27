@@ -58,7 +58,7 @@ void    key_SetMntEscS(void)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {
-        boMntEscS = InvertBoolean(boMntEscS);
+        boMntEscS = InvertBool(boMntEscS);
         ShowMntEscS(boMntEscS);
       }
       else Beep();

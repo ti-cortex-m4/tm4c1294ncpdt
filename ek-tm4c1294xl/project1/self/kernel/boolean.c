@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-BOOLEAN,C
+BOOLEAN.C
 
 
 ------------------------------------------------------------------------------*/
@@ -9,19 +9,19 @@ BOOLEAN,C
 
 
 
-bool    ValidBoolean(uchar  b)
+bool    ValidBool(uchar  b)
 {
   return (b == true) || (b == false);
 }
 
 
-bool    CharToBoolean(uchar  b)
+bool    CharToBool(uchar  b)
 {
   return (b == 0xFF ? true : false);
 }
 
 
-bool    InvertBoolean(bool  bo)
+bool    InvertBool(bool  f)
 {
-  return (bo == true ? false : true);
+  return (f == true ? false : true);
 }

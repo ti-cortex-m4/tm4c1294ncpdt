@@ -78,7 +78,7 @@ static uchar ibCan;
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      mpboEnblCan[ibCan] = InvertBoolean(mpboEnblCan[ibCan]);
+      mpboEnblCan[ibCan] = InvertBool(mpboEnblCan[ibCan]);
 
       SaveCache(&chEnblCan);
 
