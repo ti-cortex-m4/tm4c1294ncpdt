@@ -25,83 +25,52 @@ RTC!C
 
 static void OutChar(uchar bI)
 {
- uchar bK;
+  uchar bK;
+  for(bK=0; bK<8; bK++)
+  {
+    if(bI & (0x80 >> bK )) HWREG(GPIO_RTC_SI) = MASK_RTC_SI;
+    else HWREG(GPIO_RTC_SI) = ~MASK_RTC_SI;
 
- for(bK=0; bK<8; bK++)
- {
-  if(bI & (0x80 >> bK )) HWREG(GPIO_RTC_SI) = MASK_RTC_SI;
-  else HWREG(GPIO_RTC_SI) = ~MASK_RTC_SI;
-
-  HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
-
-  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
-
- }
+    HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
+    HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
+  }
 }
 
 
 static uchar InChar(void)
 {
- uchar bRez, bK;
- bRez = 0;
+  uchar bRez = 0;
 
- for(bK=0; bK<8; bK++)
- {
-  HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
+  uchar bK;
+  for(bK=0; bK<8; bK++)
+  {
+    HWREG(GPIO_RTC_SCK) =  MASK_RTC_SCK;
+    HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
 
-  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
+    if(HWREG(GPIO_RTC_SO)) bRez |= 0x80 >> bK;
+  }
 
-  if(HWREG(GPIO_RTC_SO)) bRez |= 0x80 >> bK;
-
- }
-
- return(bRez);
+  return bRez;
 }
 
 
 
 static void Enable(void)
 {
- HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
+  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
+  HWREG(GPIO_RTC_CS) = MASK_RTC_CS;
 
- HWREG(GPIO_RTC_CS)  = MASK_RTC_CS;
-
- HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
-
- HWREG(GPIO_RTC_CS)  = ~MASK_RTC_CS;
-
+  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
+  HWREG(GPIO_RTC_CS) = ~MASK_RTC_CS;
 }
 
 
 static void Disable(void)
 {
- HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
-
- HWREG(GPIO_RTC_CS)  = MASK_RTC_CS;
-
+  HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
+  HWREG(GPIO_RTC_CS) = MASK_RTC_CS;
 }
 
-
-/*
-void    EnableWriteRTC(void) {
-  Enable();
-
-  OutChar(0x8F);
-  OutChar(0x04);
-
-  Disable();
-}
-
-
-void    DisableWriteRTC(void) {
-  Enable();
-
-  OutChar(0x8F);
-  OutChar(0x44);
-
-  Disable();
-}
-*/
 
 
 time    *GetCurrTimeDate(void)
@@ -223,25 +192,6 @@ bool    GetLabelRTC(void)
   return f;
 }
 
-/*
-void    TODO OutLabelRTC(void) {
-uchar   i;
-
-  InitPushCRC();
-
-  Enable();
-
-  OutChar(0x20);
-  for (i=0; i<0x10; i++)
-    PushChar(InChar());
-
-  Disable();
-
-  PushChar(GetLabelRTC());
-
-  Output(0x10+sizeof(bool));
-}
-*/
 
 
 bool    ValidTimeDateRTC(time  ti)
@@ -269,37 +219,25 @@ bool    ValidTimeDateRTC(time  ti)
   return(1);
 }
 
-/*
-void    TODO OutTrueCurrTimeDate(void) {
-uchar   i;
-time    ti;
 
-  InitPushCRC();
 
-  ti = *GetCurrTimeDate();
-  Push(&ti, sizeof(time));
-
-  PushChar(TrueCurrTimeDate(ti));
-
-  Output(sizeof(time)+sizeof(bool));
-}
-*/
-
-void    InitGPIO_RTC() {
+static void InitGPIO()
+{
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R1;
 
   DelayGPIO();
 
-  HWREG(GPIO_PORTB_AHB_BASE + GPIO_O_DIR)   |= 0x000E;
-  HWREG(GPIO_PORTB_AHB_BASE + GPIO_O_DIR)   &= 0xFFFE;
+  HWREG(GPIO_PORTB_AHB_BASE + GPIO_O_DIR) |= 0x000E;
+  HWREG(GPIO_PORTB_AHB_BASE + GPIO_O_DIR) &= 0xFFFE;
 
-  HWREG(GPIO_PORTB_AHB_BASE + GPIO_O_DEN)   |= 0x000F;
+  HWREG(GPIO_PORTB_AHB_BASE + GPIO_O_DEN) |= 0x000F;
 }
 
-void    InitRTC(void) {
-	InitGPIO_RTC();
 
-//  EnableWriteRTC();
+void    InitRTC(void)
+{
+  InitGPIO();
+
   SetLabelRTC();
 
   Disable();
