@@ -74,7 +74,7 @@ static uchar i;
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {           
-      mpfEventFlagB[i] = InvertBoolean(mpfEventFlagB[i]);
+      mpfEventFlagB[i] = InvertBool(mpfEventFlagB[i]);
       SaveCache(&chEventFlagB);
 
       Show(i);

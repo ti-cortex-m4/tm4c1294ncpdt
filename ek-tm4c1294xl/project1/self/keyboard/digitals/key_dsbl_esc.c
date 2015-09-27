@@ -48,21 +48,21 @@ void    key_SetDsblEsc(void)
 
   else if ((bKey == 1) && (enGlobal != GLB_WORK))
   {
-    boDsblEscU = InvertBoolean(boDsblEscU);
+    boDsblEscU = InvertBool(boDsblEscU);
 
     SaveCache(&chDsblEscU);
     Show();
   }
   else if ((bKey == 2) && (enGlobal != GLB_WORK))
   {
-    boDsblEscV = InvertBoolean(boDsblEscV);
+    boDsblEscV = InvertBool(boDsblEscV);
     SaveCache(&chDsblEscV);
 
     Show();
   }
   else if ((bKey == 3) && (enGlobal != GLB_WORK))
   {
-    boDsblEscS = InvertBoolean(boDsblEscS);
+    boDsblEscS = InvertBool(boDsblEscS);
     SaveCache(&chDsblEscS);
 
     Show();

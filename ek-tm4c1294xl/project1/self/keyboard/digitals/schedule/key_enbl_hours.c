@@ -106,7 +106,7 @@ void    key_SetEnblHours(void)
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      bool bo = InvertBoolean(GetEnblPrtHou(ibX,ibY));
+      bool bo = InvertBool(GetEnblPrtHou(ibX,ibY));
       SetEnblPrtHou(ibX,ibY,bo);
 
       SaveCache(&chEnblPrtHou);

@@ -76,7 +76,7 @@ void    key_SetLimits33(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      mpboStartCan[ibX] = InvertBoolean(mpboStartCan[ibX]);
+      mpboStartCan[ibX] = InvertBool(mpboStartCan[ibX]);
       Show();
     }
     else Beep();

@@ -47,7 +47,7 @@ void    key_SetFlag(cache const  *pch, char const  *pszMessages[], char const  s
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
       {           
-        *pboValue = InvertBoolean(*pboValue);
+        *pboValue = InvertBool(*pboValue);
         SaveCache(pch);
 
         ShowFlag(*pboValue, szTrue, szFalse);

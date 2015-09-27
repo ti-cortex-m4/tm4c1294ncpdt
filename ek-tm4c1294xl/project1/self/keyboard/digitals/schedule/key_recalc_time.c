@@ -74,7 +74,7 @@ void    key_SetRecalcTime(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      mpboRecalcHou[ibX] = InvertBoolean(mpboRecalcHou[ibX]);
+      mpboRecalcHou[ibX] = InvertBool(mpboRecalcHou[ibX]);
       Show();
     }
     else Beep();
