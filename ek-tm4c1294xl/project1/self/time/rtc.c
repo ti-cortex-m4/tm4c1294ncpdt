@@ -23,8 +23,10 @@ static void OutChar(uchar  b)
   uchar i;
   for (i=0; i<8; i++)
   {
-    if (b & (0x80 >> i)) HWREG(GPIO_RTC_SI) = MASK_RTC_SI;
-    else HWREG(GPIO_RTC_SI) = ~MASK_RTC_SI;
+    if (b & (0x80 >> i))
+      HWREG(GPIO_RTC_SI) = MASK_RTC_SI;
+    else
+      HWREG(GPIO_RTC_SI) = ~MASK_RTC_SI;
 
     HWREG(GPIO_RTC_SCK) = MASK_RTC_SCK;
     HWREG(GPIO_RTC_SCK) = ~MASK_RTC_SCK;
