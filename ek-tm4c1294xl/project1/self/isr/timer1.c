@@ -7,6 +7,8 @@ TODO volatile
 #include "../main.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ints.h"
+#include "inc/hw_types.h"
+#include "inc/hw_timer.h"
 #include "driverlib/gpio.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
@@ -45,7 +47,7 @@ void InitTimer1(uint32_t ui32SysClock) {
 
 void Timer1IntHandler(void)
 {
-  TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+  HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
   fOnSecond = 1;
 
