@@ -4398,12 +4398,12 @@ irmp_ISR (void)
             }
         }
     }
-
+/*
 #if defined(STELLARIS_ARM_CORTEX_M4)
     // Clear the timer interrupt
     TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
 #endif
-
+*/
     return (irmp_ir_detected);
 }
 
