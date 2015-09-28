@@ -70,6 +70,3 @@ systick in ms
 
 FIFO
 CRC метка времени + код запрос/ответ
-
-http://easyelectronics.ru/freertos_manual.html 
-third_party\FreeRTOS
