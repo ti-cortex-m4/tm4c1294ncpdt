@@ -6,6 +6,8 @@ TIMER2!C
 #include "../main.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ints.h"
+#include "inc/hw_types.h"
+#include "inc/hw_timer.h"
 #include "driverlib/gpio.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
@@ -40,7 +42,7 @@ void InitTimer2(uint32_t ui32SysClock)
 
 void Timer2IntHandler(void)
 {
-  TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+  HWREG(TIMER2_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
   irmp_ISR();
 }

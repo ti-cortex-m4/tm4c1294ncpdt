@@ -7,6 +7,8 @@ TIMER3!C
 #include "../main.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ints.h"
+#include "inc/hw_types.h"
+#include "inc/hw_timer.h"
 #include "driverlib/gpio.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
@@ -36,7 +38,7 @@ void    InitTimer3(uint32_t ui32SysClock)
 
 void    Timer3IntHandler(void)
 {
-  TimerIntClear(TIMER3_BASE, TIMER_TIMA_TIMEOUT);
+  HWREG(TIMER3_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
   Throughput_10Hz();
 }
