@@ -9,6 +9,7 @@ KEY_TIMEDATE!C
 #include "../../memory/mem_realtime.h"
 #include "../../console.h"
 #include "../../settings.h"
+#include "../../isr/timer3.h"
 #include "../../time/rtc.h"
 #include "../../time/timedate.h"
 #include "../../time/timedate_display.h"
@@ -91,7 +92,7 @@ static time tiT;
     }
     else Beep();
   }
-  
+
 
   else if (bKey == bKEY_POINT)
   {
@@ -154,11 +155,16 @@ void   auto_GetCurrTime(void)
 {
   if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
   {
-    uchar bSecond = GetCurrTimeDate()->bSecond;
-    if (bSecond != bSecondPrev)
+    if (f10Hz == true)
     {
-      bSecondPrev = bSecond;
-      ShowTime(*GetCurrTimeDate());
+      f10Hz = false;
+
+      uchar bSecond = GetCurrTimeDate()->bSecond;
+      if (bSecond != bSecondPrev)
+      {
+        bSecondPrev = bSecond;
+        ShowTime(*GetCurrTimeDate());
+      }
     }
   }
 }
@@ -198,7 +204,7 @@ static time tiT;
         MakeDecret();
       }
       else
-      {  
+      {
         enKeyboard = KBD_INPUT1;
         LongBeep();
 
@@ -206,7 +212,7 @@ static time tiT;
       }
     }
     else Beep();
-  }   
+  }
 
 
   else if (bKey == bKEY_POINT)
@@ -274,11 +280,16 @@ void   auto_GetCurrDate(void)
 {
   if ((enKeyboard == KBD_POSTENTER) || (enKeyboard == KBD_SHOW))
   {
-    uchar bSecond = GetCurrTimeDate()->bSecond;
-    if (bSecond != bSecondPrev)
+    if (f10Hz == true)
     {
-      bSecondPrev = bSecond;
-      ShowDate(*GetCurrTimeDate());
+      f10Hz = false;
+
+      uchar bSecond = GetCurrTimeDate()->bSecond;
+      if (bSecond != bSecondPrev)
+      {
+        bSecondPrev = bSecond;
+        ShowDate(*GetCurrTimeDate());
+      }
     }
   }
 }

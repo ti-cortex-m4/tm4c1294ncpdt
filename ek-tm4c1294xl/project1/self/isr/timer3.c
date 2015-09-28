@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-TIMER3!C
+TIMER3.C
 
-
+Таймер для измерения производительности (10 Hz)
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -14,6 +14,11 @@ TIMER3!C
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 #include "../realtime/throughput.h"
+#include "timer3.h"
+
+
+
+volatile bool           f10Hz;
 
 
 
@@ -39,6 +44,8 @@ void    InitTimer3(uint32_t ui32SysClock)
 void    Timer3IntHandler(void)
 {
   HWREG(TIMER3_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
+
+  f10Hz = true;
 
   Throughput_10Hz();
 }
