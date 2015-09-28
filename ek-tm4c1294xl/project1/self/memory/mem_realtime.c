@@ -23,7 +23,7 @@ uint                    iwHardMnt,
                         iwHardHou;
 
 // сечетчик включения отображения текущего времени
-uchar                   cbShowCurrentTime;
+uchar                   cbShowCurrTime;
 
 
 

@@ -26,9 +26,9 @@ void    NextMinute1(void)
 
   if ((fActive == true) && (enGlobal == GLB_WORK))
   {
-    if (cbShowCurrentTime >= 2)
+    if (cbShowCurrTime >= 2)
       ShowCurrTime();
     else
-      cbShowCurrentTime++;
+      cbShowCurrTime++;
   }
 }

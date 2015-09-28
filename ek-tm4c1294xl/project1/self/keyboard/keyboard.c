@@ -62,7 +62,7 @@ void    InitKeyboard(void)
   bKey = 0;
   fKey = 0;
 
-  cbShowCurrentTime = 0;
+  cbShowCurrTime = 0;
 }
 
 
@@ -167,7 +167,7 @@ uchar   i;
   fOnSecond = 1;
 
   // обнуляем счётчик вызова программы по умолчанию
-  cbShowCurrentTime = 0;
+  cbShowCurrTime = 0;
 
   // разрешаем оставаться в режиме connect на следующие паузу bMAXWAITONLINE
   cbWaitOnline = 0;
