@@ -31,7 +31,7 @@ extern  uchar                   ibSoftMnt,
 extern  uint                    iwHardMnt,
                                 iwHardHou;
 
-extern  uchar                   cbShowCurrentTime;
+extern  uchar                   cbShowCurrTime;
 
 
 

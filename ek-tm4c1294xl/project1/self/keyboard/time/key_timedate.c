@@ -375,7 +375,7 @@ void    ShowCurrTime(void)
 // выключение просмотра текущего времени
 void    HideCurrTime(bool  fClearProgram)
 {
-  cbShowCurrentTime = 0;
+  cbShowCurrTime = 0;
   fSlide = false;
 
   if (fClearProgram == true)
