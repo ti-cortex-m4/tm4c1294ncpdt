@@ -8,7 +8,6 @@ RESPONSE_CRC!C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_ports.h"
 #include "../memory/mem_digitals.h"
-#include "../include/states.h"
 #include "../access.h"
 #include "../kernel/crc-16.h"
 #include "../display/display.h"

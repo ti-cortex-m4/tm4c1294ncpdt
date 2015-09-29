@@ -9,7 +9,6 @@ RESPONSE255_CRC!C
 #include "../memory/mem_factors.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_limits.h"
-#include "../include/states.h"
 #include "../serial/ports.h"
 #include "../serial/bulk.h"
 #include "../output/response_crc.h"

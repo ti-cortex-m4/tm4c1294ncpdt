@@ -7,7 +7,6 @@ RESPONSE253_CRC,C
 #include "../main.h"
 #include "../memory/mem_ports.h"
 #include "../memory/mem_factors.h"
-#include "../include/states.h"
 #include "../serial/ports.h"
 #include "../digitals/extended/extended_1_out.h"
 #include "../digitals/extended/extended_4_out.h"

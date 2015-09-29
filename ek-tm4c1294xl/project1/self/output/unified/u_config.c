@@ -16,7 +16,6 @@ U_CONFIG!C
 #include "../../memory/mem_params.h"
 #include "../../memory/mem_uni.h"
 #include "../../memory/mem_correct1.h"
-#include "../../include/states.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"

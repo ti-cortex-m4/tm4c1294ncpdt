@@ -13,7 +13,6 @@ RESPONSE_UNI!C
 #include "../../display/display.h"
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
-#include "../../include/states.h"
 #include "../../include/queries_uni.h"
 #include "../../time/rtc.h"
 #include "../../kernel/crc-16.h"
@@ -71,7 +70,7 @@ void    Output2_Code(uint  wSize, uchar  bCode, time  tiCode)
 
   PushChar(bInBuff4);
   PushChar(bInBuff5);
-  
+
   Skip(wSize);
 
   PushChar(bCode);
@@ -181,7 +180,7 @@ void    RunResponseUni(void)
       return;
     }
 
-    if ((mpbDelayUni[ibPort] == 0) && 
+    if ((mpbDelayUni[ibPort] == 0) &&
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETOPEN) &&
         (bInBuff5 + bInBuff4*0x100 != wUNI_GETQUERY_CRC))
     {
@@ -202,20 +201,20 @@ void    RunResponseUni(void)
       case wUNI_GETCORRECTTIME: GetCorrectUni(); break;
       case wUNI_GETCORRECTIONS: GetCorrectionsUni(); break;
 
-      case wUNI_GETOPEN: 
-        GetOpenUni(); 
+      case wUNI_GETOPEN:
+        GetOpenUni();
         break;
 
       case wUNI_GETPARAMS1:
-        GetParamUni1(); 
+        GetParamUni1();
         break;
 
       case wUNI_GETPARAMS2:
-        GetParamUni2(); 
+        GetParamUni2();
         break;
 
       case wUNI_GETTRANSIT:
-        GetTransitUni(); 
+        GetTransitUni();
         break;
 
       case wUNI_GETCONFIG: GetConfigUni(); break;
@@ -261,14 +260,14 @@ void    RunResponseUni(void)
       case wUNI_GETEVENTS_MESSAGES: GetEventsMessagesUni(); break;
 
       case wUNI_GETQUERY_CRC:
-        GetQueryCRCUni(); 
+        GetQueryCRCUni();
         break;
 
       default:
         ShowCommandUni(bSTA_BADCOMMAND);
         Result2(bUNI_BADCOMMAND);
         break;
-    } 
+    }
   }
 }
 

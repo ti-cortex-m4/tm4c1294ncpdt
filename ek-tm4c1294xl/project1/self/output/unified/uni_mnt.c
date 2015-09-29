@@ -8,7 +8,6 @@ UNI_MNT!C
 #include "../../memory/mem_ports.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy.h"
-#include "../../include/states.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
 #include "../../realtime/realtime.h"
@@ -22,7 +21,7 @@ UNI_MNT!C
 
 
 
-void    GetPowCanMntUni(void) 
+void    GetPowCanMntUni(void)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0) || (bInBuffC != 0))
     Result2(bUNI_BADDATA);
@@ -67,7 +66,7 @@ void    GetPowCanMntUni(void)
 
 
 
-void    GetPowGrpMntUni(void) 
+void    GetPowGrpMntUni(void)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0) || (bInBuffC != 0))
     Result2(bUNI_BADDATA);

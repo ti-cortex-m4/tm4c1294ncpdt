@@ -9,7 +9,6 @@ U_DAY!C
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy.h"
 #include "../../memory/mem_uni.h"
-#include "../../include/states.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
 #include "../../realtime/realtime.h"
@@ -28,13 +27,13 @@ U_DAY!C
 
 
 
-void    GetDefCanDayUni(void) 
+void    GetDefCanDayUni(void)
 {
 uchar   i,j,k;
 
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0) || (bInBuffC != 0))
     Result2_Info(bUNI_BADDATA, 1);
-  else if ((bInBuff9 == 0) || (bInBuffD == 0)) 
+  else if ((bInBuff9 == 0) || (bInBuffD == 0))
     Result2_Info(bUNI_BADDATA, 2);
   else if (bInBuff7 > bCANALS)
     Result2_Info(bUNI_BADDATA, 3);
@@ -61,8 +60,8 @@ uchar   i,j,k;
 
         uchar c;
         for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
-        {   
-          if (GetDefCan(c-1) == 1) 
+        {
+          if (GetDefCan(c-1) == 1)
             mpbDefUni[k-1 - ((c - bInBuff7) / 8)] |= (uchar)(0x01 << ((c - bInBuff7) % 8));
         }
 
@@ -82,13 +81,13 @@ uchar   i,j,k;
 
 
 
-void    GetDefGrpDayUni(void) 
+void    GetDefGrpDayUni(void)
 {
 uchar   i,j,k;
 
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0) || (bInBuffC != 0))
     Result2_Info(bUNI_BADDATA, 1);
-  else if ((bInBuff9 == 0) || (bInBuffD == 0)) 
+  else if ((bInBuff9 == 0) || (bInBuffD == 0))
     Result2_Info(bUNI_BADDATA, 2);
   else if (bInBuff7 > bGROUPS)
     Result2_Info(bUNI_BADDATA, 3);
@@ -115,8 +114,8 @@ uchar   i,j,k;
 
         uchar g;
         for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
-        {   
-          if (GetDefGrp(g-1) == 1) 
+        {
+          if (GetDefGrp(g-1) == 1)
             mpbDefUni[k-1 - ((g - bInBuff7) / 8)] |= (uchar)(0x01 << ((g - bInBuff7) % 8));
         }
 

@@ -5,6 +5,7 @@ PORTS!H
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../include/states.h"
 #include "../include/queries.h"
 #include "../include/queries255.h"
 #include "../memory/mem_ports.h"

@@ -6,7 +6,6 @@ RESPONSE0_CRC,C
 
 #include "../main.h"
 #include "../memory/mem_settings.h"
-#include "../include/states.h"
 #include "../realtime/realtime.h"
 #include "../serial/ports.h"
 #include "../impulses/factors.h"
