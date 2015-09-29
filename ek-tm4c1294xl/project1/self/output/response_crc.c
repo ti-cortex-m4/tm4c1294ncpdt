@@ -22,7 +22,7 @@ RESPONSE_CRC!C
 
 
 
-void    ShowTestResponse(uchar  bState) {
+void    ShowResponseCRC(uchar  bState) {
   if (wProgram == bTEST_RESPONSE)
   {
 #ifdef  MODBUS
@@ -47,11 +47,11 @@ void    RunResponseCRC(void) {
   if (mpSerial[ibPort] == SER_POSTINPUT_SLAVE) {
 
     mpSerial[ibPort] = SER_BEGIN;
-    ShowTestResponse(bSTA_BEGIN);
+    ShowResponseCRC(bSTA_BEGIN);
 
     MakeCRC16InBuff( 0, IndexInBuff() );
     if ((bCRCHi != 0) || (bCRCLo != 0)) {
-      ShowTestResponse(bSTA_BADCRC);
+      ShowResponseCRC(bSTA_BADCRC);
       return;
     }
 
@@ -71,26 +71,26 @@ void    RunResponseCRC(void) {
 
     if ((bInBuff0 != 0) || (bInBuff1 != 0)) {
       if ((bInBuff0 != bLogical) || (bInBuff1 != 0)) {
-        ShowTestResponse(bSTA_BADNUMBER);
+        ShowResponseCRC(bSTA_BADNUMBER);
         return;
       }
     }
 
     if (bInBuff2 + bInBuff3*0x100 != IndexInBuff()) {
-      ShowTestResponse(bSTA_BADSIZE);
+      ShowResponseCRC(bSTA_BADSIZE);
       Result(bRES_BADSIZE);
       return;
     }
 
     if ((fDsblAnswer == true) && IsAnswerDisabled()) {
       if (bInBuff4 != bINQ_ENBL_ANSWER) {
-        ShowTestResponse(bSTA_BUSY);
+        ShowResponseCRC(bSTA_BUSY);
         Result(bRES_BUSY);
         return;
       }
     }
 
-    ShowTestResponse(bSTA_OK);
+    ShowResponseCRC(bSTA_OK);
     Response0_CRC();
   }
 }

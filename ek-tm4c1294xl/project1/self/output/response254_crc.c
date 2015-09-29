@@ -44,7 +44,7 @@ void    Response254_CRC(void)
     case bINQ_GETVALUE_CNTMNT: OutGetFloatOrDoubleCan_GlobalWork(mpdbValueCntMnt, true); break;
 
     default:
-      ShowTestResponse(bSTA_BADCOMMAND);
+      ShowResponseCRC(bSTA_BADCOMMAND);
       Result(bRES_BADCOMMAND);
       break;
   }
