@@ -47,11 +47,8 @@ void    Output(uint  wSize) {
 
   PushChar(bCRCHi);
   PushChar(bCRCLo);
-/*
-  if (UseExpansionCRC())
-    PushExpansionCrcResponse();
-*/
-  Answer(wSize+7/*+ExpansionCrcResponseSize()*/,SER_OUTPUT_SLAVE);
+
+  Answer(wSize+7,SER_OUTPUT_SLAVE);
 }
 
 
