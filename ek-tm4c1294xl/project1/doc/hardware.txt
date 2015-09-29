@@ -1,5 +1,5 @@
-?   beep.c
-?   beep.h
++   beep.c
++   beep.h
 memory.c
 memory.h
 ?   power_off.c

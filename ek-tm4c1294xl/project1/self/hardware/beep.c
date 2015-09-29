@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-BEEP,C
+BEEP.C
 
- Звуковой сигнал
+Звуковой сигнал
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -14,7 +14,7 @@ BEEP,C
 
 
 
-void    SoundOn(void)
+static void BeepOn(void)
 {
 #ifdef ENABLE_BEEP
 
@@ -24,7 +24,7 @@ void    SoundOn(void)
 }
 
 
-void    SoundOff(void)
+static void BeepOff(void)
 {
 #ifdef ENABLE_BEEP
 
@@ -53,10 +53,10 @@ void    InitBeep(void)
 
 void    Beep(void)
 {
-  SoundOn();
+  BeepOn();
   Delay(50);
 
-  SoundOff();
+  BeepOff();
   Delay(50);
 }
 
