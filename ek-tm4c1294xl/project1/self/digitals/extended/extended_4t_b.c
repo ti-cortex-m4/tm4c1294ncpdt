@@ -10,7 +10,6 @@ EXTENDED_4T_B,C
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
 #include "../../sensors/device_b.h"
-
 #include "../../sensors/automatic1.h"
 #include "extended_4t_b.h"
 
@@ -41,7 +40,7 @@ static bool QueryCntMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало меся
     DelayOff();
     QueryCntMonTariffB(ibMon, bTrf);
 
-    if (Input() == SER_GOODCHECK) break;  
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
@@ -53,7 +52,7 @@ static bool QueryCntMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало меся
 
 
 status ReadCntMonCanTariffB(uchar  ibMon, uchar  ibTrf) // на начало месяца
-{ 
+{
   Clear();
   if (ReadKoeffDeviceB() == 0) return ST4_BADDIGITAL;
 
@@ -66,7 +65,7 @@ status ReadCntMonCanTariffB(uchar  ibMon, uchar  ibTrf) // на начало месяца
 
 
   uchar i;
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
     mpdbChannelsC[i] = mpdwChannelsA[i] * dbK;
     mpboChannelsA[i] = true;

@@ -15,10 +15,6 @@ PORTS_STACK.H
 
 
 
-static char const       szHex[0x10]  = "0123456789ABCDEF";
-
-
-
 uchar	PopChar0Bcc(void)
 {
   return(PopChar() & 0x7F);
