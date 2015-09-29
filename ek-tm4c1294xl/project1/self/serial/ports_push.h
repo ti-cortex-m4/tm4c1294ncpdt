@@ -31,17 +31,3 @@ void    PushCharDec2Txt(uchar  bT);
 
 void    PushChar1Bcc(uchar  bT);
 void    PushChar2Bcc(uchar  bT);
-uchar   PopChar0Bcc(void);
-uchar   PopChar1Bcc(void);
-uchar   PopChar2Bcc(void);
-
-uchar   SkipChar(void);
-void    Skip(uint  wSize);
-
-void    InitPop(uint  i);
-
-void    Pop(void  *pbData, uint  wSize);
-uchar   PopChar(void);
-ulong   PopLong(void);
-float   PopFloat(void);
-double  PopDouble(void);
