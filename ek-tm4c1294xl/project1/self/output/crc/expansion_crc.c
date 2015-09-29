@@ -13,6 +13,14 @@ EXPANSION_CRC.C
 
 
 
+static uchar            bExpansionCrc;
+
+static time             tiExpansionCrc;
+
+static uint             wExpansionCrc;
+
+
+
 bool    IsExpansionCrc(void)
 {
   return false;
@@ -29,23 +37,23 @@ bool    CheckExpansionCrcRequest(void)
 {
   InitPop(IndexInBuff() - 11);
 
-  uchar bExpansionCRC = PopChar();
-  if (bExpansionCRC != 0)
+  bExpansionCrc = PopChar();
+  if (bExpansionCrc != 0)
   {
     ShowResponseCRC(bSTA_BADSIZE);
     Result(bRES_BADSIZE);
     return false;
   }
 
-  time tiExpansionCRC = PopTime();
-  if (!ValidTimeDate(tiExpansionCRC))
+  tiExpansionCrc = PopTime();
+  if (!ValidTimeDate(tiExpansionCrc))
   {
     ShowResponseCRC(bSTA_BADSIZE);
     Result(bRES_BADSIZE);
     return false;
   }
 
-  uint wExpansionCRC = PopInt();
+  wExpansionCrc = PopInt();
 
   return true;
 }
@@ -55,7 +63,7 @@ void    PushExpansionCrcResponse(void)
 {
   PushChar(0);
   PushTime(*GetCurrTimeDate());
-  PuchInt(wExpansionCRC);
+  PushInt(wExpansionCrc);
 }
 
 

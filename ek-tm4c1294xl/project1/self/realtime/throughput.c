@@ -7,7 +7,6 @@ THROUGHPUT.C
 #include "../main.h"
 #include "../memory/mem_realtime.h"
 #include "../serial/ports.h"
-#include "../serial/ports_stack.h"
 #include "throughput.h"
 
 

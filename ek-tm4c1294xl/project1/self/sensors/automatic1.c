@@ -10,9 +10,8 @@ AUTOMATIC1!C
 #include "../memory/mem_profile.h"
 #include "../keyboard/keyboard.h"
 #include "../display/display.h"
-#include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
-#include "../serial/ports_common.h"
+#include "../serial/ports.h"
 #include "../devices/devices.h"
 #include "../energy.h"
 #include "device_a.h"
@@ -45,14 +44,14 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
-    PushChar(diCurr.bAddress);           
-    PushChar(8);           
+    PushChar(diCurr.bAddress);
+    PushChar(8);
     PushChar(2);                        // чтение коэффициентов
 
     DelayOff();
     QueryIO(1+10+2, 2+1+2);
 
-    if (Input() == SER_GOODCHECK) break; 
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -61,20 +60,20 @@ uchar   i;
 
 
  // K трансформации
-  dbKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
+  dbKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));
 
 
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
-    PushChar(diCurr.bAddress);           
-    PushChar(8);           
+    PushChar(diCurr.bAddress);
+    PushChar(8);
     PushChar(0x12);                     // чтение постоянной счётчика
 
     DelayOff();
     QueryIO(1+3+2, 2+1+2);
 
-    if (Input() == SER_GOODCHECK) break; 
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -91,7 +90,7 @@ uchar   i;
     case 4:  dbKpulse =  2000;  break;   // ?
     case 5:  dbKpulse =   500;  break;   // ?
 
-    default: return(0);  
+    default: return(0);
   }
 
   return(1);
@@ -114,14 +113,14 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
-    PushChar(diCurr.bAddress);           
-    PushChar(8);           
+    PushChar(diCurr.bAddress);
+    PushChar(8);
     PushChar(2);                        // чтение коэффициентов
 
     DelayOff();
     QueryIO(1+4+2, 2+1+2);
 
-    if (Input() == SER_GOODCHECK) break; 
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -130,33 +129,33 @@ uchar   i;
 
 
  // K трансформации
-  dbKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
+  dbKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));
 
 
   for (i=0; i<bMINORREPEATS; i++)
   {
     // первый вариант: ответ 3 байта
     InitPush(0);
-    PushChar(diCurr.bAddress);           
-    PushChar(8);           
+    PushChar(diCurr.bAddress);
+    PushChar(8);
     PushChar(0x12);                     // чтение постоянной счётчика
 
     DelayOff();
     QueryIO(1+3+2, 2+1+2);
 
-    if (Input() == SER_GOODCHECK) break; 
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
-                                        
+
     // второй вариант: ответ 6 байт
     InitPush(0);
-    PushChar(diCurr.bAddress);           
-    PushChar(8);           
+    PushChar(diCurr.bAddress);
+    PushChar(8);
     PushChar(0x12);                     // чтение постоянной счётчика
 
     DelayOff();
     QueryIO(1+6+2, 2+1+2);
 
-    if (Input() == SER_GOODCHECK) break; 
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -170,7 +169,7 @@ uchar   i;
     case 3:  dbKpulse =  1000;  break;
     case 4:  dbKpulse =  2000;  break;
 
-    default: return(0);  
+    default: return(0);
   }
 
   mpdbLevel[ibDig] = dbKpulse / 1000;
@@ -190,14 +189,14 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
-    PushChar(diCurr.bAddress);           
-    PushChar(8);           
+    PushChar(diCurr.bAddress);
+    PushChar(8);
     PushChar(2);                        // чтение коэффициентов
 
     DelayOff();
     QueryIO(1+4+2, 2+1+2);
 
-    if (Input() == SER_GOODCHECK) break; 
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -206,7 +205,7 @@ uchar   i;
 
 
  // K трансформации
-  dbKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));  
+  dbKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));
 
   // K преобразования
   dbKpulse = 2000;
@@ -230,7 +229,7 @@ uchar   i;
     DelayOff();
     QueryOpenC();                       // открытие канала связи
 
-    if (RevInput() == SER_GOODCHECK) break;  
+    if (RevInput() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -243,7 +242,7 @@ uchar   i;
     DelayOff();
 
     InitPush(0);
-    PushChar(diCurr.bAddress);           
+    PushChar(diCurr.bAddress);
     PushChar(3);
     PushChar(34);
 
@@ -253,7 +252,7 @@ uchar   i;
 
     RevQueryIO(4+18+2, 3+3+2);
 
-    if (RevInput() == SER_GOODCHECK) break;  
+    if (RevInput() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -293,7 +292,7 @@ uchar   i;
 
     RevQueryIO(4+8+2, 3+3+2);
 
-    if (RevInput() == SER_GOODCHECK) break;  
+    if (RevInput() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -345,7 +344,7 @@ uchar   i;
 
     CodQueryIO(3+25+1, 3+3+1);
 
-    if (CodInput() == SER_GOODCHECK) break; 
+    if (CodInput() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -359,9 +358,9 @@ uchar   i;
   if (ExtVersionCod()) PopRealExt_G(); else PopRealBCD_G();
   dbKtrans = reBuffA;
 
-  if (ExtVersionCod()) PopRealExt_G(); else PopRealBCD_G();  
+  if (ExtVersionCod()) PopRealExt_G(); else PopRealBCD_G();
   dbKtrans *= reBuffA;                  // K трансформации
-  
+
   reBuffA = 10000;                      // K преобразования
 
   return(1);
@@ -456,7 +455,7 @@ void    SetEnergyAll(void)
   reBuffA  = GetCanReal(mpreTransCnt,ibDig) / GetCanReal(mprePulseHou,ibDig);
   reBuffA *= coEnergy.dwBuff;
 
-  SetCanReal(mpreCount,ibDig);    
+  SetCanReal(mpreCount,ibDig);
 }
 
 #endif
@@ -597,12 +596,12 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     if (diCurr.bAddress <= 16)
-    {   
+    {
       QueryBreakE();
 
       InitPush(0);
-      PushChar(0x1B);          
-      PushChar('0'+diCurr.bAddress);            
+      PushChar(0x1B);
+      PushChar('0'+diCurr.bAddress);
 
       Query(1+1, 2, 1);
 
@@ -815,7 +814,7 @@ uchar   i;
 
   if (InBuff(2) != 0) return(0);
   ShowPercent(52);
-  
+
   ReadConfigD();
 
 
@@ -826,7 +825,7 @@ uchar   i;
 
   MakeEnergyD();
 
-  SetCanReal(mpreCount,ibDig);    
+  SetCanReal(mpreCount,ibDig);
 
   return(1);
 }
@@ -848,10 +847,10 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
-    PushChar(0x1B);          
-    PushChar('w');            
+    PushChar(0x1B);
+    PushChar('w');
 
-    Query(300+1, 2, 1);  
+    Query(300+1, 2, 1);
 
     if (EscInput() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
@@ -864,7 +863,7 @@ uchar   i;
   InitPop((uint)132 + diCurr.ibLine*3);// K трансформации
   PopRealBCD();
 
-  dbKtrans = reBuffA;                    
+  dbKtrans = reBuffA;
 
 
   InitPop((uint)180 + diCurr.ibLine*3); // K преобразования
@@ -878,10 +877,10 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)       // чтение накопленной энергии
   {
     InitPush(0);
-    PushChar(0x1B);          
-    PushChar('S');            
+    PushChar(0x1B);
+    PushChar('S');
 
-    Query(64+1, 2, 1);  
+    Query(64+1, 2, 1);
 
     if (EscInput() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
@@ -891,7 +890,7 @@ uchar   i;
   ShowPercent(100);
 
 
-  InitPop(diCurr.ibLine*4); 
+  InitPop(diCurr.ibLine*4);
 
   coFloat.mpbBuff[0] = PopChar();
   coFloat.mpbBuff[1] = PopChar();
@@ -944,7 +943,7 @@ uchar   i;
 
   ReadRealExtendedF();
 
-  SetCanReal(mpreCount,ibDig);  
+  SetCanReal(mpreCount,ibDig);
 
 
   return(1);
@@ -1032,7 +1031,7 @@ uchar   i,bT;
     if (fKey == true) return(0);
 
     bT = InBuff(IndexInBuff() - 1) & 0x7F;
-    if ((bT == '\r') || (bT == '\n')) 
+    if ((bT == '\r') || (bT == '\n'))
       break;
   }
 
@@ -1095,7 +1094,7 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
-    PushChar(0);   
+    PushChar(0);
     PushChar(diCurr.bAddress);
 
     PushChar(8);
@@ -1118,14 +1117,14 @@ uchar   i;
   if (i == bMINORREPEATS) return(0);
 
   sprintf(szLo+1,"версия:");
-  szLo[ 9] = InBuff(3); 
-  szLo[10] = InBuff(4); 
-  szLo[11] = InBuff(5); 
-  szLo[12] = InBuff(6); 
-  szLo[13] = InBuff(7); 
+  szLo[ 9] = InBuff(3);
+  szLo[10] = InBuff(4);
+  szLo[11] = InBuff(5);
+  szLo[12] = InBuff(6);
+  szLo[13] = InBuff(7);
 
   DelayInf(); Clear();
-  
+
 
   for (i=0; i<bMINORREPEATS; i++)
   {
