@@ -7,7 +7,6 @@ RESPONSE252_CRC,C
 #include "../main.h"
 #include "../memory/mem_ports.h"
 #include "../memory/mem_energy_spec.h"
-#include "../include/states.h"
 #include "../hardware/beep.h"
 #include "../serial/ports.h"
 #include "../output/response_crc.h"

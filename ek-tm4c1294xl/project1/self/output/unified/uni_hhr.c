@@ -9,7 +9,6 @@ UNI_HHR,C
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy.h"
 #include "../../memory/mem_energy_spec.h"
-#include "../../include/states.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
 #include "../../realtime/realtime.h"
@@ -50,7 +49,7 @@ void    GetPowCanHouUni(void)
 
       uchar c;
       for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
-      {      
+      {
         fDef |= GetDefCan(c-1);
         InitPush(6 + 4*bInBuffD*(c-bInBuff7) + i*4);
 
@@ -107,7 +106,7 @@ void    GetPowGrpHouUni(void)
 
       uchar g;
       for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
-      {      
+      {
         fDef |= GetDefCan(g-1);
         InitPush(6 + 4*bInBuffD*(g-bInBuff7) + i*4);
 
@@ -130,7 +129,7 @@ void    GetPowGrpHouUni(void)
 
 
 
-void    GetPowCanHou48Uni(void) 
+void    GetPowCanHou48Uni(void)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -154,7 +153,7 @@ void    GetPowCanHou48Uni(void)
 
       uchar c;
       for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
-      {      
+      {
         fDef |= GetDefCan(c-1);
         InitPush(6 + 4*48*(c-bInBuff7) + i*4);
 
@@ -194,7 +193,7 @@ void    GetPowCanHou48Uni(void)
 
 
 
-void    GetPowGrpHou48Uni(void) 
+void    GetPowGrpHou48Uni(void)
 {
   if ((bInBuff6 != 0) || (bInBuff8 != 0) || (bInBuffA != 0))
     Result2(bUNI_BADDATA);
@@ -218,7 +217,7 @@ void    GetPowGrpHou48Uni(void)
 
       uchar g;
       for (g=bInBuff7; g<bInBuff7+bInBuff9; g++)
-      {      
+      {
         fDef |= GetDefCan(g-1);
         InitPush(6 + 4*48*(g-bInBuff7) + i*4);
 
@@ -229,7 +228,7 @@ void    GetPowGrpHou48Uni(void)
           PushChar(0xFF);
           PushChar(0xFF);
         }
-        else 
+        else
         {
           PushFloat(GetGrpHouInt2Real(mpwImpHouCan[ PrevSoftHou() ], g-1, 2));
         }

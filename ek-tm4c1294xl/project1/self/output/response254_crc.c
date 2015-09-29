@@ -6,7 +6,6 @@ RESPONSE254_CRC,C
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
-#include "../include/states.h"
 #include "../serial/ports.h"
 #include "../impulses/factors.h"
 #include "response_crc.h"

@@ -9,7 +9,6 @@ U_ENERGY!C
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_energy.h"
 #include "../../memory/mem_energy_spec.h"
-#include "../../include/states.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
 #include "../../realtime/realtime.h"
@@ -143,7 +142,7 @@ void    GetEngCanDayUni(bool  fDouble)
   else if (bInBuffC+bInBuffD-1 > bTARIFFS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     InitPushUni();
     LoadImpDay((bDAYS+ibHardDay-bInBuffB) % bDAYS);
 
@@ -192,7 +191,7 @@ void    GetEngGrpDayUni(bool  fDouble)
   else if (bInBuffC+bInBuffD-1 > bTARIFFS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     InitPushUni();
     LoadImpDay((bDAYS+ibHardDay-bInBuffB) % bDAYS);
 
@@ -242,7 +241,7 @@ void    GetEngCanMonUni(bool  fDouble)
   else if (bInBuffC+bInBuffD-1 > bTARIFFS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     InitPushUni();
     LoadImpMon((bMONTHS+ibHardMon-bInBuffB) % bMONTHS);
 
@@ -291,7 +290,7 @@ void    GetEngGrpMonUni(bool  fDouble)
   else if (bInBuffC+bInBuffD-1 > bTARIFFS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     InitPushUni();
     LoadImpMon((bMONTHS+ibHardMon-bInBuffB) % bMONTHS);
 
@@ -341,7 +340,7 @@ void    GetMaxGrpDayUni(void)
   else if (bInBuffC+bInBuffD-1 > bTARIFFS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     InitPushUni();
     LoadPowDay((bDAYS+ibHardDay-bInBuffB) % bDAYS);
 
@@ -382,7 +381,7 @@ void    GetMaxGrpMonUni(void)
   else if (bInBuffC+bInBuffD-1 > bTARIFFS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     InitPushUni();
     LoadPowMon((bMONTHS+ibHardMon-bInBuffB) % bMONTHS);
 

@@ -12,7 +12,6 @@ UNI_CNT!C
 #include "../../memory/mem_extended_4.h"
 #include "../../memory/mem_extended_5.h"
 #include "../../memory/mem_extended_4t.h"
-#include "../../include/states.h"
 #include "../../include/queries_uni.h"
 #include "../../realtime/realtime.h"
 #include "../../serial/ports.h"
@@ -55,7 +54,7 @@ void    GetCntCanMonAllUni(bool  fDouble)
   else if (bInBuffB >= bMONTHS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     ulong dw = DateToMonIndex(*GetCurrTimeDate());
     dw -= bInBuffB;
     time ti = MonIndexToDate(dw);
@@ -108,7 +107,7 @@ void    GetCntCanMonTrfUni(bool  fDouble)
   else if (bInBuffC+bInBuffD-1 > bTARIFFS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     ulong dw = DateToMonIndex(*GetCurrTimeDate());
     dw -= bInBuffB;
     time ti = MonIndexToDate(dw);
@@ -153,7 +152,7 @@ void    GetCntCanAllUni(bool  fDouble)
   else if (bInBuff7+bInBuff9-1 > bCANALS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     InitPushUni();
     uint wSize = 0;
 
@@ -182,7 +181,7 @@ void    GetCntCanTrfUni(bool  fDouble)
   else if (bInBuffA+bInBuffB-1 > bTARIFFS)
     Result2(bUNI_BADDATA);
   else
-  { 
+  {
     InitPushUni();
     uint wSize = 0;
 
