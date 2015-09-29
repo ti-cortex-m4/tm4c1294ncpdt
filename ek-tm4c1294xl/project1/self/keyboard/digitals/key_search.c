@@ -10,7 +10,6 @@ KEY_SEARCH!C
 #include "../../display/display.h"
 #include "../keyboard.h"
 #include "../../serial/ports.h"
-#include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/modems.h"
 #include "../../serial/ports_modems.h"
@@ -69,27 +68,27 @@ bool    ChangeSpeedModem(void)
 bool    ChangeSpeedA(void)
 {
   InitPush(0);
-  PushChar(0);          
+  PushChar(0);
   PushChar(0);                          // тест канала связи
 
   QueryIO(2+2, 2+2);
-  
+
   if (Input() != SER_GOODCHECK) return(0);
   Beep();
 
   diCurr.bAddress = 0;                  // открытие канала связи
-                                
-  QueryOpenA();               
+
+  QueryOpenA();
   if (Input() != SER_GOODCHECK) return(0);
   Beep();
 
   InitPush(0);
-  PushChar(0);           
-  PushChar(8);           
+  PushChar(0);
+  PushChar(8);
   PushChar(5);                          // чтение сетевого адреса
 
   QueryIO(2+1+2, 2+1+2);
-  
+
   if (Input() != SER_GOODCHECK) return(0);
 
   ShowFoundNumber(InBuff(2));
@@ -105,27 +104,27 @@ bool    ChangeSpeedA(void)
 bool    ChangeSpeedB(void)
 {
   InitPush(0);
-  PushChar(0);          
+  PushChar(0);
   PushChar(0);                          // тест канала связи
 
   QueryIO(2+2, 2+2);
-  
+
   if (Input() != SER_GOODCHECK) return(0);
   Beep();
 
   diCurr.bAddress = 0;                  // открытие канала связи
-                                
-  QueryOpenB();               
+
+  QueryOpenB();
   if (Input() != SER_GOODCHECK) return(0);
   Beep();
 
   InitPush(0);
-  PushChar(0);           
-  PushChar(8);           
+  PushChar(0);
+  PushChar(8);
   PushChar(5);                          // чтение сетевого адреса
 
   QueryIO(2+1+2, 2+1+2);
-  
+
   if (Input() != SER_GOODCHECK) return(0);
 
   ShowFoundNumber(InBuff(2));
@@ -141,7 +140,7 @@ bool    ChangeSpeedB(void)
 bool    ChangeSpeedC(void)
 {
   InitPush(0);
-  PushChar(0);           
+  PushChar(0);
   PushChar(3);
   PushChar(21);
 
@@ -175,12 +174,12 @@ uchar   i;
     QueryBreakE();
 
     InitPush(0);
-    PushChar(0x1B);          
-    PushChar('0'+i);            
+    PushChar(0x1B);
+    PushChar('0'+i);
 
     Query(1+1, 2, 1);
 
-    if (EscInput() == SER_GOODCHECK) 
+    if (EscInput() == SER_GOODCHECK)
     {
       ShowFoundNumber(i);
       return(1);
@@ -290,7 +289,7 @@ void    key_SearchBySpeed(void)
       if (ibX < bPORTS)
       {
         if (ibXmax == 0)
-          {  if (StreamPortModem(ibX) == 1) enKeyboard = KBD_SHOW;  }      
+          {  if (StreamPortModem(ibX) == 1) enKeyboard = KBD_SHOW;  }
         else
           {  if (StreamPortDirect(ibX) == 1) enKeyboard = KBD_SHOW;  }
       }
@@ -299,10 +298,10 @@ void    key_SearchBySpeed(void)
 
 
     if (enKeyboard == KBD_SHOW)
-    {   
+    {
       enKeyboard = KBD_POSTSHOW;
       Clear();
-          
+
       ibPort = ibX;
 
       diCurr.ibPort = ibX;
@@ -351,8 +350,8 @@ void    key_SearchBySpeed(void)
 #ifndef SKIP_N
             case 19:  if (ChangeSpeedN() == 1) bRes = 0xEE;  break;
 #endif
-            default:  Error();  return; 
-          }            
+            default:  Error();  return;
+          }
 
           if (fKey == true) { fKey = 0; bRes = 0xFF; }
 
@@ -368,12 +367,12 @@ void    key_SearchBySpeed(void)
         Stop();
       else if (bRes == 0)
         Error();
-    } 
+    }
   }
 
 
   else if (bKey < 10)
-  {        
+  {
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
     {
       enKeyboard = KBD_POSTINPUT1;
@@ -388,7 +387,7 @@ void    key_SearchBySpeed(void)
     {
       if (++ibXmax >= bMAXDEVICES+1) ibXmax = 0;
       ShowDeviceName(ibXmax);
-    } 
+    }
     else Beep();
   }
 
@@ -399,7 +398,7 @@ void    key_SearchBySpeed(void)
     {
       if (ibXmax > 0) ibXmax--; else ibXmax = bMAXDEVICES;
       ShowDeviceName(ibXmax);
-    } 
+    }
     else Beep();
   }
   else Beep();
@@ -412,7 +411,7 @@ void    key_SearchBySpeed(void)
 bool    ChangeNumberA(void)
 {
   InitPush(0);
-  PushChar(ibY);           
+  PushChar(ibY);
   PushChar(0);                          // тест канала связи
 
   QueryIO(2+2, 2+2);
@@ -432,7 +431,7 @@ bool    ChangeNumberA(void)
 bool    ChangeNumberB(void)
 {
   InitPush(0);
-  PushChar(ibY);           
+  PushChar(ibY);
   PushChar(0);                          // тест канала связи
 
   QueryIO(2+2, 2+2);
@@ -452,7 +451,7 @@ bool    ChangeNumberB(void)
 bool    ChangeNumberC(void)
 {
   InitPush(0);
-  PushChar(ibY);           
+  PushChar(ibY);
   PushChar(3);
   PushChar(21);
 
@@ -481,8 +480,8 @@ bool    ChangeNumberE(void)
     QueryBreakE();
 
     InitPush(0);
-    PushChar(0x1B);          
-    PushChar('0'+ibY);            
+    PushChar(0x1B);
+    PushChar('0'+ibY);
 
     Query(1+1, 2, 1);
 
@@ -491,7 +490,7 @@ bool    ChangeNumberE(void)
 
     return(1);
   }
-  else 
+  else
   {
     bRes = 0xFF;                      // досрочное прекращение цикла
     return(0);
@@ -589,7 +588,7 @@ void    key_SearchByNumber(void)
       ibX = GetCharLo(10,11) - 1;
     }
     else if (enKeyboard == KBD_INPUT2)
-    { 
+    {
       Beep();
     }
     else if (enKeyboard == KBD_POSTINPUT2)
@@ -602,10 +601,10 @@ void    key_SearchByNumber(void)
 
     if (enKeyboard == KBD_POSTINPUT1)
     {
-      if (ibX < bPORTS) 
+      if (ibX < bPORTS)
       {
         if (StreamPortDirect(ibX) == 1)
-          { enKeyboard = KBD_INPUT2;  Address(); }        
+          { enKeyboard = KBD_INPUT2;  Address(); }
       }
       else Beep();
     }
@@ -658,8 +657,8 @@ void    key_SearchByNumber(void)
 #ifndef SKIP_N
           case 19:  if (ChangeNumberN() == 1) bRes = 0xEE;  break;
 #endif
-        default:  Error();  return; 
-        }            
+        default:  Error();  return;
+        }
 
         if (bRes == 0xEE)
         {
@@ -673,7 +672,7 @@ void    key_SearchByNumber(void)
       }
 
       ShowHi(szSearch); OK();
-    } 
+    }
   }
 
 
@@ -700,7 +699,7 @@ void    key_SearchByNumber(void)
     {
       if (++ibXmax >= bMAXDEVICES+1) ibXmax = 1;
       ShowDeviceName(ibXmax);
-    } 
+    }
     else Beep();
   }
 
@@ -711,7 +710,7 @@ void    key_SearchByNumber(void)
     {
       if (ibXmax > 1) ibXmax--; else ibXmax = bMAXDEVICES;
       ShowDeviceName(ibXmax);
-    } 
+    }
     else Beep();
   }
   else Beep();

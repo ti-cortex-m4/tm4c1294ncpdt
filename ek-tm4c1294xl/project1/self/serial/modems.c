@@ -19,7 +19,6 @@ MODEMS!C
 #include    "../digitals/digitals_messages.h"
 #include    "../digitals/digitals_display.h"
 #include    "ports.h"
-#include    "ports_stack.h"
 #include    "ports_common.h"
 #include    "ports_devices.h"
 #include    "ports_modems.h"
@@ -99,14 +98,14 @@ uchar   w;
   if (w < 0x100)
     return(w);
   else
-    return(0xFD);  
+    return(0xFD);
 }
 
 
 
 void    QueryModemBaud(bool fShow)
 {
-  if (fShow == 1) ShowLo(szBaud); 
+  if (fShow == 1) ShowLo(szBaud);
 
   InitPush(0);
 
@@ -122,7 +121,7 @@ void    QueryModemBaud(bool fShow)
 
 void    QueryModemCommon(bool fShow)
 {
-  if (fShow == 1) ShowLo(szCommon); 
+  if (fShow == 1) ShowLo(szCommon);
 
   InitPush(0);
 
@@ -214,7 +213,7 @@ bool    ShowModemConnect(void)
 {
   bool fAlt = 0;
 
-  switch ( GetModemAnswer() ) 
+  switch ( GetModemAnswer() )
   {
     case 2:  ShowLo(szRing);        break;
     case 3:  ShowLo(szNoCarrier);   break;
@@ -223,8 +222,8 @@ bool    ShowModemConnect(void)
     case 7:  ShowLo(szBusy);        break;
     case 8:  ShowLo(szNoAnswer);    break;
 
-    case 0xFF: 
-    case 0xFE: 
+    case 0xFF:
+    case 0xFE:
     case 0xFD: Clear(); sprintf(szLo+3,"ошибка: %u", GetModemAnswer());
                                     break;
 
@@ -298,7 +297,7 @@ void    RunLocal(void)
       PushChar('\r');
       PushChar('\n');
 
-      Query(SERIAL_LOCAL, 2+2, 1); 
+      Query(SERIAL_LOCAL, 2+2, 1);
     }
   }
 }
@@ -330,7 +329,7 @@ uchar   i;
   ibPort = diCurr.ibPort;
 
   if (StreamPort(diCurr.ibPort) == 0) return(0);
-  if (diCurr.ibPhone == 0) return(1); 
+  if (diCurr.ibPhone == 0) return(1);
 
   if (mpboEnblCan[ibDig] == false) { ShowLo(szBlockingAll); DelayInf(); return(1); }
 
@@ -495,11 +494,11 @@ bool    fResult;
 
   if (i == bMINORREPEATS) ;
   else
-  { 
+  {
     fResult = 1;
     ShowLo(szHookOffOK); DelayInf(); mpcwHookOff[diCurr.ibPort]++;
   }
- 
+
 
   ModemDTROff();
   mpcwDTROff[diCurr.ibPort]++;
@@ -596,12 +595,12 @@ bool    LoadConnect(uchar  ibCanal)
   if (fConnect == 1)
   {
     if ((diLast.ibPort == 0xFF) || (diLast.ibPhone == 0xFF))
-    { 
+    {
       KeyBreakConnect();
       return(0);
     }
     else if (BreakConnect() == 1)
-    { 
+    {
       if (NeedDisconnect() == 1)
       {
         diNext = diCurr; diCurr = diLast;
@@ -616,7 +615,7 @@ bool    LoadConnect(uchar  ibCanal)
     }
     else ibDig = ibCanal;
   }
-  else 
+  else
   {
     ibDig = ibCanal;
     if (SafeConnect() == 0) { ShowLo(szNoConnect);  InitConnect(); return(0); }

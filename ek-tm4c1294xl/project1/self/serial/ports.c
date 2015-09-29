@@ -17,8 +17,7 @@ PORTS!C
 #include "../digitals/wait_query.h"
 #include "../realtime/realtime.h"
 #include "../kernel/crc-16.h"
-#include "ports_stack.h"
-#include "ports_common.h"
+#include "ports.h"
 
 
 
