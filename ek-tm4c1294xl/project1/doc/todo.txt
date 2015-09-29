@@ -34,7 +34,6 @@ sem2reader фильтраци€ по названию
 output - from mem_profile
 
 убрать dbKtrans
-обороты в 100 ms за 10 секунд
 
 remove external headers
 
@@ -70,3 +69,9 @@ systick in ms
 
 FIFO
 CRC метка времени + код запрос/ответ
+
+Х	 Up to 256-KB Flash
+Х	 Up to 32-KB single-cycle SRAM and 2-KB EEPROM
+Х	 Ethernet MAC+PHY ???
+
+delphi конфигураци€ GPIO 
