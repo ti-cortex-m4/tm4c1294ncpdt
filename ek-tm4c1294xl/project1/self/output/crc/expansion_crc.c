@@ -3,7 +3,7 @@ EXPANSION_CRC.C
 
 
 ------------------------------------------------------------------------------*/
-
+/*
 #include "../../main.h"
 #include "../../serial/ports.h"
 #include "../../time/timedate.h"
@@ -19,12 +19,6 @@ static time             tiExpansionCrc;
 
 static uint             wExpansionCrc;
 
-
-
-bool    IsExpansionCrc(void)
-{
-  return false;
-}
 
 
 bool    UseExpansionCrc(void)
@@ -71,3 +65,4 @@ uchar   ExpansionCrcResponseSize(void)
 {
   return UseExpansionCrc() ? 1 + 6 + 2 : 0;
 }
+*/
