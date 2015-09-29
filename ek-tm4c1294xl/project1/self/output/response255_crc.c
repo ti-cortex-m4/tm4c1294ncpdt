@@ -243,7 +243,7 @@ void    Response255_CRC(void)
     case bEXT_FLASH_CONTROL: OutFlashControl(); break;
 
     default:
-      ShowTestResponse(bSTA_BADCOMMAND);
+      ShowResponseCRC(bSTA_BADCOMMAND);
       Result(bRES_BADCOMMAND);
       break;
   }

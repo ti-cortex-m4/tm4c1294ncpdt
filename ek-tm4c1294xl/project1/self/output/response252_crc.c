@@ -69,7 +69,7 @@ void    Response252_CRC(void)
     case 22: OutThroughput(); break;
 
     default:
-      ShowTestResponse(bSTA_BADCOMMAND);
+      ShowResponseCRC(bSTA_BADCOMMAND);
       Result(bRES_BADCOMMAND);
       break;
   }

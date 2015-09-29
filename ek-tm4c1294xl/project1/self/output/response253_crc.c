@@ -65,7 +65,7 @@ void    Response253_CRC(void)
     case bEXT_GET_CNTCURR: OutCntCanCurr(true); break;
 
     default:
-      ShowTestResponse(bSTA_BADCOMMAND);
+      ShowResponseCRC(bSTA_BADCOMMAND);
       Result(bRES_BADCOMMAND);
       break;
   }

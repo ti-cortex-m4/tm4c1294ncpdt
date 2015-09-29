@@ -232,7 +232,7 @@ void    Response0_CRC(void)
 //      case 254: OutTestYear(); break;
 
       default:
-        ShowTestResponse(bSTA_BADCOMMAND);
+        ShowResponseCRC(bSTA_BADCOMMAND);
         Result(bRES_BADCOMMAND);
         break;
   }
