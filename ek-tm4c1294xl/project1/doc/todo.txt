@@ -75,3 +75,5 @@ CRC метка времени + код запрос/ответ
 Х	 Ethernet MAC+PHY ???
 
 delphi конфигураци€ GPIO 
+
+http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0349a/Babjdbff.html
