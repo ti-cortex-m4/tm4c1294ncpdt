@@ -18,7 +18,6 @@ RESPONSE253_CRC,C
 #include "response_crc.h"
 #include "out_energy.h"
 #include "out_common.h"
-#include "out_records.h"
 #include "out_cnt.h"
 #include "response253_crc.h"
 
@@ -56,10 +55,6 @@ void    Response253_CRC(void)
     case bEXT_GETEXTENDED7: OutExtended7(true); break;
 
     case bEXT_GETDIAGRAM: OutDiagram(true); break;
-
-    case bEXT_GETRECORD:        OutRecordExt();        break;
-    case bEXT_GETRECORDSBLOCK:  OutRecordsBlockExt();  break;
-    case bEXT_GETRECORDSBLOCK2: OutRecordsBlockExt2(); break;
 
     case bEXT_GET_CNTCURR: OutCntCanCurr(true); break;
 
