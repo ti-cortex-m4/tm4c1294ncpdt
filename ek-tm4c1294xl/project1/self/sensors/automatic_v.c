@@ -20,8 +20,8 @@ AUTOMATIC_V!C
 //#include "../digitals/digitals.h"
 //#include "../digitals/wait_answer.h"
 //#include "automatic1.h"
-//#include "device_s.h"
-//#include "automatic_s.h"
+#include "device_v.h"
+#include "automatic_v.h"
 
 
 /*

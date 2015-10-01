@@ -1,82 +1,89 @@
 /*------------------------------------------------------------------------------
 DEVICE_V!C
 
-
+Счетчик МИРТЕК
 ------------------------------------------------------------------------------*/
-/*
+
 #include "../main.h"
-#include "../serial/ports_stack.h"
-#include "../serial/ports_devices.h"
 #include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
-#include "../memory/mem_ports.h"
-#include "../memory/mem_current.h"
-#include "../memory/mem_factors.h"
-#include "../memory/mem_realtime.h"
-#include "../memory/mem_energy_spec.h"
-#include "../memory/mem_profile.h"
-#include "../memory/mem_limits.h"
-#include "../display/display.h"
-#include "../keyboard/time/key_timedate.h"
-#include "../time/timedate.h"
-#include "../time/calendar.h"
-#include "../time/delay.h"
+//#include "../memory/mem_ports.h"
+//#include "../memory/mem_current.h"
+//#include "../memory/mem_factors.h"
+//#include "../memory/mem_realtime.h"
+//#include "../memory/mem_energy_spec.h"
+//#include "../memory/mem_profile.h"
+//#include "../memory/mem_limits.h"
 #include "../serial/ports_stack.h"
-#include "../serial/ports_devices.h"
-#include "../serial/ports_common.h"
-#include "../devices/devices.h"
-#include "../devices/devices_time.h"
-#include "../digitals/current/current_run.h"
-#include "../digitals/limits.h"
-#include "../special/special.h"
-#include "../hardware/watchdog.h"
-#include "automatic_s.h"
-#include "device_s.h"
+//#include "../serial/ports_devices.h"
+//#include "../keyboard/time/key_timedate.h"
+//#include "../time/timedate.h"
+//#include "../time/calendar.h"
+//#include "../time/delay.h"
+//#include "../serial/ports_stack.h"
+//#include "../serial/ports_devices.h"
+//#include "../serial/ports_common.h"
+//#include "../devices/devices.h"
+//#include "../devices/devices_time.h"
+//#include "../digitals/current/current_run.h"
+//#include "../digitals/limits.h"
+//#include "../special/special.h"
+//#include "../hardware/watchdog.h"
+//#include "automatic_s.h"
+#include "device_v.h"
 
 
 
-#ifndef SKIP_S
+#ifndef SKIP_V
 
-void    PushAddressS(void)
+static void PushIntV(uint  w)
 {
-uint  i;
+  PushChar(w % 0x100);
+  PushChar(w / 0x100);
+}
 
-  i = mpdwAddress1[diCurr.bAddress-1] % 0x10000;
-  PushChar(i % 0x100);
-  PushChar(i / 0x100);
 
-  i = wPrivate;
-  PushChar(i % 0x100);
-  PushChar(i / 0x100);
-
-  i = mpdwAddress2[diCurr.bAddress-1] % 0x10000;
-  PushChar(i % 0x100);
-  PushChar(i / 0x100);
-  i = mpdwAddress2[diCurr.bAddress-1] / 0x10000;
-  PushChar(i % 0x100);
-  PushChar(i / 0x100);
+static void PushLongV(ulong  dw)
+{
+  PushInt(dw % 0x10000);
+  PushInt(dw / 0x10000);
 }
 
 
 
-void    QueryTimeS(void)
+void    PushAddressV(uchar  bCode)
+{
+  PushIntV(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
+  PushIntV(wPrivate);
+
+  PushChar(bCode);
+
+  PushLongV(mpdwAddress2[diCurr.bAddress-1]);
+}
+
+
+
+void    QueryTimeV(void)
 {
   InitPush(0);
 
-  PushChar(0xC0);
-  PushChar(0x48);
+  PushChar(0x73);
+  PushChar(0x55);
 
-  PushAddressS();
+  PushChar(0x20);
+  PushChar(0x00);
+
+  PushAddressV(0x1C);
 
   PushChar(0xD0);
   PushChar(0x01);
   PushChar(0x20);
 
-  QueryS_IO(100+18, 15);
+  QueryIoS(100+18, 15);
 }
 
 
-time    ReadTimeS(void)
+time    ReadTimeV(void)
 {
   InitPop(9);
 
@@ -96,7 +103,7 @@ time    ReadTimeS(void)
 }
 
 
-
+/*
 void    QueryControlS(time  ti)
 {
   InitPush(0);
@@ -360,11 +367,5 @@ void    ReadCurrentS(void)
 
   MakeCurrent();
 }
-
-#endif
-
-// device_24: чтение данных по сезонному времени
-// поиск счетчиков
-// признаки переполнения получасов - проверить изменение коэффициентов
-// разрыв получасового опроса
 */
+#endif
