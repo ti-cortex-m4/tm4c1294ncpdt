@@ -284,7 +284,7 @@ serial  BccInput(void)
 
   while (1)
   {
-    if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
+    if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     ResetWatchdog();
     ShowWaitAnswer(1);
@@ -380,7 +380,7 @@ serial  ElsInput(uchar  bMode)
 
   while (1)
   {
-    if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
+    if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     ResetWatchdog();
     ShowWaitAnswer(1);
@@ -432,7 +432,7 @@ serial  ElsInputRD(void)
 
   while (1)
   {
-    if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
+    if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     ResetWatchdog();
     ShowWaitAnswer(1);
