@@ -16,6 +16,7 @@ DEVICE_V!C
 //#include "../memory/mem_limits.h"
 #include "../serial/ports_stack.h"
 //#include "../serial/ports_devices.h"
+#include "../display/display.h"
 //#include "../keyboard/time/key_timedate.h"
 //#include "../time/timedate.h"
 //#include "../time/calendar.h"
@@ -79,25 +80,25 @@ void    QueryTimeV(void)
   PushChar(0x01);
   PushChar(0x20);
 
-  QueryIoS(100+18, 15);
+  QueryIoV(100+22, 15);
 }
 
 
 time    ReadTimeV(void)
 {
-  InitPop(9);
+  InitPop(13);
 
   time ti;
 
-  ti.bSecond = FromBCD(PopChar());
-  ti.bMinute = FromBCD(PopChar());
-  ti.bHour   = FromBCD(PopChar());
+  ti.bSecond = PopChar();
+  ti.bMinute = PopChar();
+  ti.bHour   = PopChar();
 
   PopChar();
 
-  ti.bDay    = FromBCD(PopChar());
-  ti.bMonth  = FromBCD(PopChar());
-  ti.bYear   = FromBCD(PopChar());
+  ti.bDay    = PopChar();
+  ti.bMonth  = PopChar();
+  ti.bYear   = PopChar();
 
   return ti;
 }

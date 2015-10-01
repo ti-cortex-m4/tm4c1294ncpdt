@@ -234,6 +234,6 @@ double2 ReadCntMonCanS(uchar  ibMonth)
 
   return GetDouble2(mpdbChannelsC[0], true);
 }
-
-#endif
 */
+#endif
+
