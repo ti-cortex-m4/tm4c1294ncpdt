@@ -97,7 +97,7 @@ serial  InputS(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
-  return( mpSerial[ibPort] );
+  return mpSerial[ibPort];
 }
 
 

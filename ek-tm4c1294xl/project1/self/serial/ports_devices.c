@@ -120,7 +120,7 @@ serial  Input(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
-  return( mpSerial[ibPort] );
+  return mpSerial[ibPort];
 }
 
 
@@ -203,7 +203,7 @@ serial  RevInput(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
-  return( mpSerial[ibPort] );
+  return mpSerial[ibPort];
 }
 
 #endif
@@ -307,7 +307,7 @@ serial  BccInput(void)
   }
 
 
-  return( mpSerial[ibPort] );
+  return mpSerial[ibPort];
 }
 
 
@@ -422,7 +422,7 @@ serial  ElsInput(uchar  bMode)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
-  return( mpSerial[ibPort] );
+  return mpSerial[ibPort];
 }
 
 
@@ -455,7 +455,7 @@ serial  ElsInputRD(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
-  return( mpSerial[ibPort] );
+  return mpSerial[ibPort];
 }
 
 #endif

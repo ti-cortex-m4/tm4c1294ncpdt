@@ -42,7 +42,7 @@ serial  ModInput(uchar  bSecond, bool  fShow)
   SetCurr(DEV_MODEM_MANUAL);
   HideCurrTime(0);
 
-  return( mpSerial[ibPort] );
+  return mpSerial[ibPort];
 }
 
 
