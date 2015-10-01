@@ -4,9 +4,9 @@ DEVICE_V.H
 
 ------------------------------------------------------------------------------*/
 
-//void    QueryTimeS(void);
-//time    ReadTimeS(void);
-//
+void    QueryTimeV(void);
+time    ReadTimeV(void);
+
 //void    QueryControlS(time  ti);
 //
 //void    QueryConfigS(void);
