@@ -29,7 +29,7 @@ MAIN_DEFINES!H
 //#define SKIP_S
 #define SKIP_T
 //#define SKIP_U
-#define SKIP_V
+//#define SKIP_V
 #define SKIP_W
 #define SKIP_X
 #define SKIP_Y
