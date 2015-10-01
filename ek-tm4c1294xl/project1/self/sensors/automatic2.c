@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 AUTOMATIC2!C
-              
+
 
 ------------------------------------------------------------------------------*/
 
@@ -53,10 +53,10 @@ uchar   i;
   if (QueryEnergyA_Full(0,100) == 0) return GetDouble2Error();
 
 
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
     mpdbChannelsC[i] = mpdwChannelsA[i] * dbK;
-    mpboChannelsA[i] = true;     
+    mpboChannelsA[i] = true;
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
@@ -81,7 +81,7 @@ uchar   i;
   if (QueryEnergyB_Full(0,100) == 0) return GetDouble2Error();
 
 
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
     mpdbChannelsC[i] = mpdwChannelsA[i] * dbK * 2;
     mpboChannelsA[i] = true;
@@ -115,10 +115,10 @@ uchar   i;
   ReadEnergyC();
 
 
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
     mpdbChannelsC[i] = mpdwChannelsA[i] * dbK;
-    mpboChannelsA[i] = true;     
+    mpboChannelsA[i] = true;
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
@@ -136,7 +136,7 @@ bool    ReadCntCurrD(void)
   Clear();
   if (OpenDeviceD() == 0) return(0);
 
-  
+
   if (ReadAllEnergyD() == 0) return(0);
 
   QueryCloseD(0);
@@ -164,10 +164,10 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
-    PushChar(0x1B);          
-    PushChar(chEsc);            
+    PushChar(0x1B);
+    PushChar(chEsc);
 
-    Query(64+1, 2, 1);  
+    Query(64+1, 2, 1);
 
     if (EscInput() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
@@ -177,7 +177,7 @@ uchar   i;
   ShowPercent(85);
 
 
-  InitPop(0); 
+  InitPop(0);
 
   for (i=0; i<16; i++)
   {
@@ -189,7 +189,7 @@ uchar   i;
     ToReal();
     SetCanReal(mpreChannelsB, i);
 
-    mpboChannelsA[i] = true;                          
+    mpboChannelsA[i] = true;
   }
 
 
@@ -247,9 +247,9 @@ uchar   i;
     DelayOff();
     QueryEnergyAbsG();                      // чтение накопленной энергии
 
-    if (CodInput() != SER_GOODCHECK) 
+    if (CodInput() != SER_GOODCHECK)
       continue;
-    else 
+    else
       break;
   }
 
@@ -297,7 +297,7 @@ uchar   i,j;
     }
 
     if (i == bMINORREPEATS) return(0);
-    else 
+    else
     {
       if (ChecksumH(14) == 0) { sprintf(szLo," ошибка CRC: H5 "); Delay(1000); return(0); }
 
@@ -317,12 +317,12 @@ uchar   i,j;
 
   reKtrans = GetCanReal(mpreTransCnt,ibDig);
 
-  for (i=0; i<1; i++) 
+  for (i=0; i<1; i++)
   {
     reBuffA = mpreCodEng30[0] * reKtrans;
     SetCanReal(mpreChannelsB, i);
 
-    mpboChannelsA[i] = true;     
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
@@ -356,14 +356,14 @@ uchar   i,j;
 
       ShowPercent(60+j);
 
-      if (TxtInput() != SER_GOODCHECK) 
+      if (TxtInput() != SER_GOODCHECK)
         continue;
-      else 
+      else
         break;
     }
 
     if (i == bMINORREPEATS) return(0);
-    else 
+    else
     {
       ReadEnergyI();
       reKtrans += reBuffA;
@@ -376,7 +376,7 @@ uchar   i,j;
   reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = true;     
+  mpboChannelsA[0] = true;
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -397,7 +397,7 @@ uchar   i,j;
 
   Clear();
 
-  for (j=0; j<bMaxLines; j++) 
+  for (j=0; j<bMaxLines; j++)
   {
     for (i=0; i<bMINORREPEATS; i++)
     {
@@ -420,12 +420,12 @@ uchar   i,j;
 
   reKtrans = GetCanReal(mpreTransCnt,ibDig);
 
-  for (i=0; i<bMaxLines; i++) 
+  for (i=0; i<bMaxLines; i++)
   {
     reBuffA = GetCanReal(mpreChannelsB, i) * reKtrans;
     SetCanReal(mpreChannelsB, i);
 
-    mpboChannelsA[i] = true;     
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
@@ -464,7 +464,7 @@ uchar   i;
   reBuffA = GetCanReal(mpreChannelsB, 0) * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = true;     
+  mpboChannelsA[0] = true;
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -503,7 +503,7 @@ uchar   i;
   reBuffA += GetCanReal(mpreCount,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = true;     
+  mpboChannelsA[0] = true;
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -537,14 +537,14 @@ uchar   i,j;
 
       ShowPercent(60+j);
 
-      if (TxtInput() != SER_GOODCHECK) 
+      if (TxtInput() != SER_GOODCHECK)
         continue;
-      else 
+      else
         break;
     }
 
     if (i == bMINORREPEATS) return(0);
-    else 
+    else
     {
       ReadEnergyO();
       reKtrans += reBuffA;
@@ -557,7 +557,7 @@ uchar   i,j;
   reBuffA = reKtrans * GetCanReal(mpreTransCnt,ibDig);
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = true;     
+  mpboChannelsA[0] = true;
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -588,12 +588,12 @@ double2 ReadCntCurrP(void)
   double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
-  for (i=0; i<16; i++) 
+  for (i=0; i<16; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
   }
 
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
     if (mpbMappingEls[i] >= 16)
       mpdbChannelsEls[i] = 0;
@@ -601,7 +601,7 @@ double2 ReadCntCurrP(void)
       mpdbChannelsEls[i] = mpdbChannelsC[mpbMappingEls[i]];
   }
 
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
     mpdbChannelsC[i] = mpdbChannelsEls[i];
     mpboChannelsA[i] = true;
@@ -628,7 +628,7 @@ uchar   i;
   if (ti2.fValid == false) return GetTime2Error();
 
   tiChannelC = ti2.tiValue;
-  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
   return ti2;
 }
@@ -683,7 +683,7 @@ time2   ReadTimeCanC(void)
 
 
   tiChannelC = ti;
-  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
   return GetTime2(ti, true);
 }
@@ -702,7 +702,7 @@ uchar   i;
   Clear();
   if (OpenDeviceD() == 0) return(0);
 
-  
+
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -721,7 +721,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = true;       
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
   return(1);
 }
@@ -743,10 +743,10 @@ uchar   i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
-    PushChar(0x1B);          
-    PushChar('T');            
+    PushChar(0x1B);
+    PushChar('T');
 
-    Query(6+1, 2, 1);  
+    Query(6+1, 2, 1);
 
     if (EscInput() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
@@ -760,7 +760,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<16; i++) mpboChannelsA[i] = true;     
+  for (i=0; i<16; i++) mpboChannelsA[i] = true;
 
   return(1);
 }
@@ -793,7 +793,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<bCANALS; i++) mpboChannelsA[i] = true;       
+  for (i=0; i<bCANALS; i++) mpboChannelsA[i] = true;
 
   return(1);
 }
@@ -818,9 +818,9 @@ uchar   i;
     DelayOff();
     QueryTimeG();
 
-    if (CodInput() != SER_GOODCHECK) 
+    if (CodInput() != SER_GOODCHECK)
       continue;
-    else 
+    else
       break;
   }
 
@@ -831,7 +831,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<6; i++) mpboChannelsA[i] = true;     
+  for (i=0; i<6; i++) mpboChannelsA[i] = true;
 
   return(1);
 }
@@ -856,9 +856,9 @@ uchar   i;
     DelayOff();
     QueryTimeH();
 
-    if (CodInput() != SER_GOODCHECK) 
+    if (CodInput() != SER_GOODCHECK)
       continue;
-    else 
+    else
       break;
   }
 
@@ -869,7 +869,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<6; i++) mpboChannelsA[i] = true;     
+  for (i=0; i<6; i++) mpboChannelsA[i] = true;
 
   return(1);
 }
@@ -892,9 +892,9 @@ uchar   i;
     DelayOff();
     QueryTimeI();
 
-    if (TxtInput() != SER_GOODCHECK) 
+    if (TxtInput() != SER_GOODCHECK)
       continue;
-    else 
+    else
       break;
   }
 
@@ -905,7 +905,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
   return(1);
 }
@@ -928,9 +928,9 @@ uchar   i;
     DelayOff();
     QueryTimeO();
 
-    if (TxtInput() != SER_GOODCHECK) 
+    if (TxtInput() != SER_GOODCHECK)
       continue;
-    else 
+    else
       break;
   }
 
@@ -941,7 +941,7 @@ uchar   i;
 
 
   tiChannelC = tiAlt;
-  for (i=0; i<4; i++) mpboChannelsA[i] = true;     
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
   return(1);
 }
@@ -976,7 +976,7 @@ time2   ReadTimeCanP(void)
 
 
   tiChannelC = ti;
-  for (i=0; i<4; i++) mpboChannelsA[i] = true;       
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
   return GetTime2(ti, true);
 }
@@ -988,7 +988,7 @@ time2   ReadTimeCanP(void)
 #ifndef SKIP_A
 
 double2 ReadCntMonCanA(uchar  ibMonth)
-{ 
+{
 uchar   i,j;
 ulong   dw;
 
@@ -1050,11 +1050,11 @@ ulong   dw;
   }
 
 
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
     mpdbChannelsC[i] = mpdwChannelsB[i] * dbK;
-    mpboChannelsA[i] = true;     
+    mpboChannelsA[i] = true;
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
@@ -1067,7 +1067,7 @@ ulong   dw;
 #ifndef SKIP_B
 
 double2 ReadCntMonCanB(uchar  ibMonth)
-{ 
+{
 uchar   i,j;
 ulong   dw;
 
@@ -1129,7 +1129,7 @@ ulong   dw;
   }
 
 
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
     if (mpdwChannelsB[i] > 0xF0000000) mpdwChannelsB[i] = 0;
     mpdbChannelsC[i] = mpdwChannelsB[i] * dbK * 2;
@@ -1146,7 +1146,7 @@ ulong   dw;
 #ifndef SKIP_C
 
 double2 ReadCntMonCanC(uchar  ibMonth)
-{ 
+{
 uchar   i,j;
 
   Clear();
@@ -1156,7 +1156,7 @@ uchar   i,j;
 
 
   DelayOff();
-  QueryTimeC();                   
+  QueryTimeC();
 
   if (RevInput() != SER_GOODCHECK) return GetDouble2Error();
   if (fKey == true) return GetDouble2Error();
@@ -1216,10 +1216,10 @@ uchar   i,j;
   }
 
 
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
     mpdbChannelsC[i] = mpdwChannelsB[i] * dbK;
-    mpboChannelsA[i] = true;     
+    mpboChannelsA[i] = true;
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
@@ -1232,29 +1232,29 @@ uchar   i,j;
 #ifndef SKIP_D
 
 bool    ReadCntMonCanD(uchar  ibMonth)
-{ 
+{
 uchar	i,j;
 
   Clear();
   if (OpenDeviceD() == 0) return(0);
 
-  
+
   DelayOff();
-  QueryTimeD();                   
+  QueryTimeD();
 
   if (ExtInput() != SER_GOODCHECK) return(0);
   ShowPercent(50);
 
-  ReadTimeD();                        
+  ReadTimeD();
 
 
-  if (tiAlt.bMonth == ibMonth+1) 
-  {  
+  if (tiAlt.bMonth == ibMonth+1)
+  {
     if (ReadAllEnergyD() == 0) return(0);
 
     QueryCloseD(0);
     MakeEnergyD();
-  
+
     if (LoadImpDay( ibHardDay ) == 0) return(0);
 
     for (i=0; i<4; i++) {
@@ -1274,7 +1274,7 @@ uchar	i,j;
     }
   }
   else
-  { 
+  {
     if (ReadAllEnergyD() == 0) return(0);
 
     QueryCloseD(0);
@@ -1299,7 +1299,7 @@ uchar	i,j;
             mpreChannelsB[i] -= reBuffA;
           }
         }
-      }  
+      }
 
       j = (bMONTHS + j - 1) % bMONTHS;
     }
@@ -1325,10 +1325,10 @@ bool    ReadCntMonCanE(uchar  ibMonth)
 
   ibMonth = (bMONTHS+tiAlt.bMonth-1-ibMonth) % bMONTHS;
 
-  if (ibMonth > 6-1) 
-  { 
-    reBuffA = 0; 
-    return(1); 
+  if (ibMonth > 6-1)
+  {
+    reBuffA = 0;
+    return(1);
   }
 
 
@@ -1355,12 +1355,12 @@ bool    ReadCntMonCanF(uchar  ibMonth)
 {
 uchar   i;
 
-  Clear(); 
+  Clear();
 
   for (i=0; i<bMINORREPEATS; i++)
   {
     QueryBreakF();
-    QueryTimeF();                   
+    QueryTimeF();
 
     if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
@@ -1370,7 +1370,7 @@ uchar   i;
   ShowPercent(50);
 
 
-  ReadTimeAltF();                        
+  ReadTimeAltF();
   if (tiAlt.bMonth != ibMonth+1) return(0);     // значени€е счЄтчиков на начало текущего мес€ца
 
 
@@ -1408,53 +1408,53 @@ uchar   i;
 
 
   DelayOff();
-  QueryTimeG();                   
+  QueryTimeG();
 
   if (CodInput() != SER_GOODCHECK) return(0);  if (fKey == true) return(0);
   ShowPercent(55);
 
-  ReadTimeAltG();                        
+  ReadTimeAltG();
 
 
   for (i=0; i<30; i++) mpreCodEng30[i] = 0;
 
-  if (ExtVersionCod()) 
+  if (ExtVersionCod())
   {
-    if (tiAlt.bMonth != ibMonth+1) 
+    if (tiAlt.bMonth != ibMonth+1)
     {
-      if (bVersionCod == 49) 
-        return ReadCntMonCanExt_G(ibMonth); 
+      if (bVersionCod == 49)
+        return ReadCntMonCanExt_G(ibMonth);
       else
         { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return(0); }
-    }                                           
+    }
     else                                        // значени€е счЄтчиков на начало текущего мес€ца
     {
-      if (ReadEnergyExt_G() == 0) return(0); 
-    } 
+      if (ReadEnergyExt_G() == 0) return(0);
+    }
   }
   else
   {
-    if (tiAlt.bMonth != ibMonth+1) 
+    if (tiAlt.bMonth != ibMonth+1)
     {
       { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return(0); }
-    }                                           
+    }
     else                                        // значени€е счЄтчиков на начало текущего мес€ца
     {
-      if (ReadEnergyBCD_G() == 0) return(0); 
+      if (ReadEnergyBCD_G() == 0) return(0);
     }
   }
 
   ShowPercent(100);
 
 
-  for (i=0; i<6; i++) 
+  for (i=0; i<6; i++)
   {
     mpreChannelsB[i] = mpreCodEng30[i*5+0] - mpreCodEng30[i*5+3];
 
     reBuffA = GetCanReal(mpreChannelsB, i) * dbKtrans;
     SetCanReal(mpreChannelsB, i);
 
-    mpboChannelsA[i] = true;     
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
@@ -1479,20 +1479,20 @@ uchar   i,j;
 
 
   DelayOff();
-  QueryTimeH();                   
+  QueryTimeH();
 
   if (CodInput() != SER_GOODCHECK) return(0);  if (fKey == true) return(0);
   ShowPercent(55);
 
-  ReadTimeAltH();                        
+  ReadTimeAltH();
 
-  if (tiAlt.bMonth != ibMonth+1) 
+  if (tiAlt.bMonth != ibMonth+1)
   {
     if ((bVersionCod == 43) || (bVersionCod == 45) || (bVersionCod == 47))
-      return ReadCntMonCanExt_H(ibMonth); 
+      return ReadCntMonCanExt_H(ibMonth);
     else
       { sprintf(szLo,"   необходимы   "); Delay(1000); sprintf(szLo,"версии 43,45,47 "); Delay(1000); return(0); }
-  }                                           
+  }
                                                 // значени€е счЄтчиков на начало текущего мес€ца
 
   for (i=0; i<3; i++) mpreCodEng30[i] = 0;
@@ -1513,7 +1513,7 @@ uchar   i,j;
     }
 
     if (i == bMINORREPEATS) return(0);
-    else 
+    else
     {
       if (ChecksumH(14) == 0) { sprintf(szLo," ошибка CRC: H7 "); Delay(1000); return(0); }
 
@@ -1540,7 +1540,7 @@ uchar   i,j;
   reBuffA = mpreCodEng30[0] * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = true;     
+  mpboChannelsA[0] = true;
 
 
   reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
@@ -1555,18 +1555,18 @@ uchar   i,j;
 #ifndef SKIP_I
 
 bool    ReadCntMonCanI(uchar  ibMonth)
-{ 
+{
 uchar   i,j;
 
   Clear();
 
   DelayOff();
-  QueryTimeI();                   
+  QueryTimeI();
 
   if (TxtInput() != SER_GOODCHECK) return(0);
   ShowPercent(50);
 
-  ReadTimeAltI();                        
+  ReadTimeAltI();
 
   if (tiAlt.bMonth != ibMonth+1) return(0);     // значени€е счЄтчиков на начало текущего мес€ца
 
@@ -1584,14 +1584,14 @@ uchar   i,j;
 
       ShowPercent(60+j);
 
-      if (TxtInput() != SER_GOODCHECK) 
+      if (TxtInput() != SER_GOODCHECK)
         continue;
-      else 
+      else
         break;
     }
 
     if (i == bMINORREPEATS) return(0);
-    else 
+    else
     {
       ReadEnergyI();
       dbKtrans += reBuffA;
@@ -1610,7 +1610,7 @@ uchar   i,j;
   reBuffA = dbKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
   SetCanReal(mpreChannelsB, 0);
 
-  mpboChannelsA[0] = true;     
+  mpboChannelsA[0] = true;
 
 
   reBuffA = GetCanReal(mpreChannelsB, 0);
@@ -1636,7 +1636,7 @@ bool    ReadCntMonCanK(void)
   // энерги€ за текущие сутки рассчитываетс€, а не запрашиваетс€ со счЄтчика (как должно быть) !
   if (LoadImpDay( ibHardDay ) == 0) return(0);
 
-  for (ibMinor=0; ibMinor<ibMinorMax; ibMinor++) 
+  for (ibMinor=0; ibMinor<ibMinorMax; ibMinor++)
   {
     for (ibCan=0; ibCan<bCANALS; ibCan++)
     {
@@ -1648,7 +1648,7 @@ bool    ReadCntMonCanK(void)
          dbKtrans = GetCanReal(mpreChannelsB, ibMinor);
          reBuffA = dbKtrans * GetCanReal(mpreTransCnt,ibCan) - reBuffA;
          SetCanReal(mpreChannelsB, ibMinor);
-       }  
+       }
     }
   }
 
@@ -1664,23 +1664,23 @@ bool    ReadCntMonCanK(void)
 #ifndef SKIP_O
 
 bool    ReadCntMonCanO(uchar  ibMonth)
-{ 
+{
 uchar   i,j;
 
   Clear();
 
   DelayOff();
-  QueryTimeO();                   
+  QueryTimeO();
 
   if (TxtInput() != SER_GOODCHECK) return(0);
   ShowPercent(50);
 
-  ReadTimeAltO();                        
+  ReadTimeAltO();
 
-  if (tiAlt.bMonth != ibMonth+1) 
+  if (tiAlt.bMonth != ibMonth+1)
   {
     dbKtrans = 0;
-    for (j=0; j<bTARIFFS; j++) 
+    for (j=0; j<bTARIFFS; j++)
     {
       if (fKey == true) return(0);
       for (i=0; i<bMINORREPEATS; i++)
@@ -1693,7 +1693,7 @@ uchar   i,j;
       }
 
       if (i == bMINORREPEATS) return(0);
-      else 
+      else
       {
         ReadEnergyO();
         dbKtrans += reBuffA;
@@ -1702,14 +1702,14 @@ uchar   i,j;
 
     reBuffA = dbKtrans * GetCanReal(mpreTransCnt,ibDig);
     SetCanReal(mpreChannelsB, 0);
- 
-    mpboChannelsA[0] = true;     
+
+    mpboChannelsA[0] = true;
     reBuffA = GetCanReal(mpreChannelsB, 0);
   }
-  else 
+  else
   {
     dbKtrans = 0;
-    for (j=0; j<bTARIFFS; j++) 
+    for (j=0; j<bTARIFFS; j++)
     {
       if (fKey == true) return(0);
       for (i=0; i<bMINORREPEATS; i++)
@@ -1722,7 +1722,7 @@ uchar   i,j;
       }
 
       if (i == bMINORREPEATS) return(0);
-      else 
+      else
       {
         ReadEnergyO();
         dbKtrans += reBuffA;
@@ -1737,8 +1737,8 @@ uchar   i,j;
 
     reBuffA = dbKtrans * GetCanReal(mpreTransCnt,ibDig) - reBuffA;
     SetCanReal(mpreChannelsB, 0);
- 
-    mpboChannelsA[0] = true;     
+
+    mpboChannelsA[0] = true;
     reBuffA = GetCanReal(mpreChannelsB, 0);
   }
 
@@ -1957,6 +1957,10 @@ time2   ReadTimeCan(uchar  ibCan)
     case 26: return ReadTimeCanU();
 #endif
 
+#ifndef SKIP_V
+    case 27: return ReadTimeCanV();
+#endif
+
     default: return GetTime2Error();
   }
 }
@@ -2003,7 +2007,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_E
-    case 7:  
+    case 7:
     case 5:  return( ReadCntMonCanE(ibMon) ); break;
 #endif
 
