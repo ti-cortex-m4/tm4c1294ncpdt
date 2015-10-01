@@ -5,28 +5,26 @@ AUTOMATIC_V!C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../console.h"
+//#include "../memory/mem_profile.h"
+//#include "../memory/mem_factors.h"
+//#include "../time/delay.h"
+//#include "../time/timedate.h"
+//#include "../hardware/watchdog.h"
+//#include "../kernel/crc_s.h"
+//#include "../serial/ports.h"
+//#include "../serial/ports2.h"
+//#include "../serial/ports_devices.h"
+//#include "../devices/devices.h"
+//#include "../devices/decompress_s.h"
+//#include "../digitals/digitals.h"
+//#include "../digitals/wait_answer.h"
+//#include "automatic1.h"
+//#include "device_s.h"
+//#include "automatic_s.h"
+
+
 /*
-#include "../memory/mem_profile.h"
-#include "../memory/mem_factors.h"
-#include "../display/display.h"
-#include "../keyboard/keyboard.h"
-#include "../time/delay.h"
-#include "../time/timedate.h"
-#include "../hardware/watchdog.h"
-#include "../kernel/crc_s.h"
-#include "../serial/ports.h"
-#include "../serial/ports2.h"
-#include "../serial/ports_devices.h"
-#include "../devices/devices.h"
-#include "../devices/decompress_s.h"
-#include "../digitals/digitals.h"
-#include "../digitals/wait_answer.h"
-#include "automatic1.h"
-#include "device_s.h"
-#include "automatic_s.h"
-
-
-
 #ifndef SKIP_S
 
 void    QueryS_IO(uchar  cbIn, uchar  cbOut)
@@ -121,27 +119,27 @@ bool    QueryConfigS_Full(uchar  bPercent)
   ReadConfigS();
   return(1);
 }
+*/
 
-
-time2   QueryTimeS_Full(uchar  bPercent)
+time2   QueryTimeV_Full(uchar  bPercent)
 {
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryTimeS();
+    QueryTimeV();
 
-    if (InputS() == SER_GOODCHECK) break;
+    if (InputV() == SER_GOODCHECK) break;
     if (fKey == 1) return GetTime2Error();
   }
 
   if (i == bMINORREPEATS) return GetTime2Error();
   ShowPercent(bPercent);
 
-  return GetTime2(ReadTimeS(), true);
+  return GetTime2(ReadTimeV(), true);
 }
 
-
+/*
 bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
@@ -187,7 +185,7 @@ time2   ReadTimeCanV(void)
 {
   Clear();
 
-  time2 ti2 = QueryTimeS_Full(50);
+  time2 ti2 = QueryTimeV_Full(50);
   if (ti2.fValid == false) return GetTime2Error();
 
   tiChannelC = ti2.tiValue;
