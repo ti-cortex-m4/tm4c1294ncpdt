@@ -29,7 +29,7 @@ DEVICE_V!C
 //#include "../digitals/limits.h"
 //#include "../special/special.h"
 //#include "../hardware/watchdog.h"
-//#include "automatic_s.h"
+#include "automatic_v.h"
 #include "device_v.h"
 
 
@@ -45,8 +45,8 @@ static void PushIntV(uint  w)
 
 static void PushLongV(ulong  dw)
 {
-  PushInt(dw % 0x10000);
-  PushInt(dw / 0x10000);
+  PushIntV(dw % 0x10000);
+  PushIntV(dw / 0x10000);
 }
 
 

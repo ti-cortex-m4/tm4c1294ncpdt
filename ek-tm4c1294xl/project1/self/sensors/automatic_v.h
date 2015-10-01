@@ -4,8 +4,8 @@ AUTOMATIC_V.H
 
 ------------------------------------------------------------------------------*/
 
-//void    QueryS_IO(uchar  cbIn, uchar  cbOut);
-//serial  InputV(void);
+void    QueryIoV(uchar  cbIn, uchar  cbOut);
+serial  InputV(void);
 
 //bool    QueryConfigS_Full(uchar  bPercent);
 

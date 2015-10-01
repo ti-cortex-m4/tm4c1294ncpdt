@@ -12,7 +12,7 @@ AUTOMATIC_V!C
 //#include "../time/timedate.h"
 //#include "../hardware/watchdog.h"
 //#include "../kernel/crc_s.h"
-//#include "../serial/ports.h"
+#include "../serial/ports.h"
 //#include "../serial/ports2.h"
 //#include "../serial/ports_devices.h"
 //#include "../devices/devices.h"
@@ -24,11 +24,11 @@ AUTOMATIC_V!C
 #include "automatic_v.h"
 
 
-/*
-#ifndef SKIP_S
 
-void    QueryS_IO(uchar  cbIn, uchar  cbOut)
-{
+#ifndef SKIP_V
+
+void    QueryIoV(uchar  cbIn, uchar  cbOut)
+{/*
 uchar	i,j;
 
   MakeCrcSOutBuff(1, cbOut-3);
@@ -64,12 +64,12 @@ uchar	i,j;
   SetOutBuff(j++, 0xC0);
 
 
-  Query(cbIn,j,1);
+  Query(cbIn,j,1);*/
 }
 
 
-serial  InputS(void)
-{
+serial  InputV(void)
+{/*
   InitWaitAnswer();
 
   while (1)
@@ -95,12 +95,12 @@ serial  InputS(void)
     else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
-
-  return( mpSerial[ibPort] );
+*/
+  return mpSerial[ibPort];
 }
 
 
-
+/*
 bool    QueryConfigS_Full(uchar  bPercent)
 {
   uchar i;
