@@ -121,7 +121,7 @@ uchar   i;
   uint iwHhr;
   for (iwHhr=0; iwHhr<wHOURS; iwHhr++)
   {
-    if (fKey == 1) { fKey = 0; Beep(); }
+    if (fKey == true) { fKey = 0; Beep(); }
     if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
 
@@ -184,7 +184,7 @@ bool    ClearCanals(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
   uint iwHhr;
   for (iwHhr=0; iwHhr<wHOURS; iwHhr++)
   {
-    if (fKey == 1) { fKey = 0; Beep(); }
+    if (fKey == true) { fKey = 0; Beep(); }
     if ((iwHhr % 0x10) == 0) ShowPercent((ulong)100*iwHhr/(wHOURS-1));
     if ((iwHhr % 0x10) == 0) NexttimeMnt();
 

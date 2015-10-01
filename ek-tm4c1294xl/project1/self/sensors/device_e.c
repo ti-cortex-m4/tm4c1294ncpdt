@@ -275,7 +275,7 @@ uchar   i;
   do 
   {
     ResetWatchdog();
-    if (fKey == 1) { fKey = 0; Beep(); }
+    if (fKey == true) { fKey = 0; Beep(); }
 
     // индекс на начало требуемых суток
     iwDigHou = PrevDayIndex(ibMinor);
@@ -323,7 +323,7 @@ uchar   i,j;
     for (j=0; j<bMaximum; j++)
     {
       ResetWatchdog();
-      if (fKey == 1) { fKey = 0; Beep(); }
+      if (fKey == true) { fKey = 0; Beep(); }
 
       InitPush(0);
       PushChar(0x1B);          

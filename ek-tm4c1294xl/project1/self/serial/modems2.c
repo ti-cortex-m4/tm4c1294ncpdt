@@ -48,7 +48,7 @@ bool    ReadModemQuality(void)
     QueryModemBaud(0);
 
     if (ModInputOK(1) == 1) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) ;
@@ -59,7 +59,7 @@ bool    ReadModemQuality(void)
     QueryModemCommon(0);
 
     if (ModInputOK(1) == 1) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
     sprintf(szLo+15, "%1u", i+1);
   }
 
@@ -71,7 +71,7 @@ bool    ReadModemQuality(void)
     QueryModemQuality();
 
     if (ModQualityOK(1) == 1) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
     sprintf(szLo+15, "%1u", i+1);
   }
 

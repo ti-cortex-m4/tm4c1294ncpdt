@@ -74,7 +74,7 @@ serial  InputV(void)
 
   while (1)
   {
-    if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
+    if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     ResetWatchdog();
     ShowWaitAnswer(1);
@@ -110,7 +110,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
     QueryConfigS();
 
     if (InputS() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -130,7 +130,7 @@ time2   QueryTimeV_Full(uchar  bPercent)
     QueryTimeV();
 
     if (InputV() == SER_GOODCHECK) break;
-    if (fKey == 1) return GetTime2Error();
+    if (fKey == true) return GetTime2Error();
   }
 
   if (i == bMINORREPEATS) return GetTime2Error();
@@ -149,7 +149,7 @@ bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
     QueryEngDayS(bTime);
 
     if (InputS() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
@@ -169,7 +169,7 @@ bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
     QueryEngMonS(bTime);
 
     if (InputS() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);

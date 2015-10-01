@@ -48,7 +48,7 @@ uchar   i,j;
       QueryEnergyAbsU(j);
 
       if (BccInput() == SER_GOODCHECK) break;
-      if (fKey == 1) return GetDouble2Error();
+      if (fKey == true) return GetDouble2Error();
     }
 
     if (i == bMINORREPEATS) return GetDouble2Error();
@@ -111,7 +111,7 @@ uchar   i,j;
           Delay(1000); 
           return GetDouble2Error();
         }
-        if (fKey == 1) return GetDouble2Error();
+        if (fKey == true) return GetDouble2Error();
       }
 
       if (i == bMINORREPEATS) return GetDouble2Error();
@@ -142,7 +142,7 @@ uchar   i,j;
           Delay(1000); 
           return GetDouble2Error();
         }
-        if (fKey == 1) return GetDouble2Error();
+        if (fKey == true) return GetDouble2Error();
       }
 
       if (i == bMINORREPEATS) return GetDouble2Error();
