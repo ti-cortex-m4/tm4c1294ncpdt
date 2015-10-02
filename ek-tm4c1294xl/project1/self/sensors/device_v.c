@@ -80,7 +80,7 @@ void    QueryTimeV(void)
   PushChar(0x01);
   PushChar(0x20);
 
-  QueryIoV(100+22, 15);
+  QueryV(100+22, 15);
 }
 
 

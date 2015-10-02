@@ -27,7 +27,7 @@ AUTOMATIC_V!C
 
 #ifndef SKIP_V
 
-void    QueryIoV(uchar  cbIn, uchar  cbOut)
+void    QueryV(uchar  cbIn, uchar  cbOut)
 {/*
 uchar	i,j;
 
