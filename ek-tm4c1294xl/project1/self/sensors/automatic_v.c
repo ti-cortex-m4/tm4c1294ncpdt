@@ -29,41 +29,43 @@ AUTOMATIC_V!C
 
 void    QueryV(uchar  cbIn, uchar  cbOut)
 {
-  uchar bCrc = MakeCrcVOutBuff(1, cbOut-3);
+  uchar bCrc = MakeCrcVOutBuff(2, cbOut-4);
 
   InitPush(0);
-  PushChar(0xC0);
+  PushChar(0x73);
+  PushChar(0x55);
 
   uchar i;
-  for (i=0; i<cbOut-3; i++) SkipChar();
+  for (i=0; i<cbOut-4; i++) SkipChar();
 
   PushChar(bCrc);
-  PushChar(0xC0);
+  PushChar(0x55);
 
 
   for (i=0; i<=cbOut-1; i++)
     mpbOutBuffSave[i] = GetOutBuff(i);
 
   uchar j = 0;
-  SetOutBuff(j++, 0xC0);
-  for (i=1; i<=cbOut-2; i++)
+  SetOutBuff(j++, 0x73);
+  SetOutBuff(j++, 0x55);
+  for (i=2; i<=cbOut-2; i++)
   {
-    if (mpbOutBuffSave[i] == 0xC0)
+    if (mpbOutBuffSave[i] == 0x55)
     {
-      SetOutBuff(j++, 0xDB);
-      SetOutBuff(j++, 0xDC);
+      SetOutBuff(j++, 0x73);
+      SetOutBuff(j++, 0x11);
     }
-    else if (mpbOutBuffSave[i] == 0xDB)
+    else if (mpbOutBuffSave[i] == 0x73)
     {
-      SetOutBuff(j++, 0xDB);
-      SetOutBuff(j++, 0xDD);
+      SetOutBuff(j++, 0x73);
+      SetOutBuff(j++, 0x22);
     }
     else
     {
       SetOutBuff(j++, mpbOutBuffSave[i]);
     }
   }
-  SetOutBuff(j++, 0xC0);
+  SetOutBuff(j++, 0x55);
 
 
   Query(cbIn,j,true);
@@ -83,11 +85,11 @@ serial  InputV(void)
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      DecompressS();
+      DecompressV();
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (ChecksumS() == 0)
+      if (ChecksumV() == 0)
         mpSerial[ibPort] = SER_GOODCHECK;
       else
         mpSerial[ibPort] = SER_BADCHECK;
