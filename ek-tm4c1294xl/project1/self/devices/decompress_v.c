@@ -58,7 +58,7 @@ uchar   i,j;
   {
     f = 0;
 
-    j = RepackV(0xDB,0xDD);
+    j = RepackV(0xDB, 0xDD);
     if (j != 0)
     {
       SetInBuff(j, 0xDB);
@@ -68,7 +68,7 @@ uchar   i,j;
       continue;
     }
 
-    j = RepackV(0xDB,0xDC);
+    j = RepackV(0xDB, 0xDC);
     if (j != 0)
     {
       SetInBuff(j, 0xC0);
@@ -86,15 +86,13 @@ uchar   i,j;
 
 static uchar CheckV(void)
 {
-uint    i;
-
   if (GetInBuff(0) != 0x73) return 1;
   if (GetInBuff(1) != 0x55) return 2;
   if (GetInBuff(IndexInBuff()-1) != 0x55) return 3;
 
   if (GetInBuff(1) != 0x48) return 4;
 
-  i = mpdwAddress1[diCurr.bAddress-1] % 0x10000;
+  uint i = mpdwAddress1[diCurr.bAddress-1] % 0x10000;
   if (GetInBuff(4) != (i % 0x100)) return 5;
   if (GetInBuff(5) != (i / 0x100)) return 6;
 
