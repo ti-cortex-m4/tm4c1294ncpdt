@@ -67,6 +67,9 @@ uint                    cwInBuffSave;
 // промежуточный буфер
 uchar                   mpbInBuffSave[wINBUFF_SIZE];
 
+// промежуточный буфер
+uchar                   mpbOutBuffZ[1024];
+
 
 
 // счётчик служебных символов

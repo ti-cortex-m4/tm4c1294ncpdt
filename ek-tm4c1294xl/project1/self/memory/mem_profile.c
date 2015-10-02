@@ -98,9 +98,6 @@ uint                    mpcwOverflowHhr[bCANALS];
 // счетчики ошибок связи
 uint                    mpcwErrorLink[bCANALS];
 
-// промежуточный буфер
-uchar                   mpbOutBuffZ[1024];
-
 // делитель для энергии счетчика СЕ102
 uint                    wDividerS;
 

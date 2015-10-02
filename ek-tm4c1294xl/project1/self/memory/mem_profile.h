@@ -73,8 +73,6 @@ extern  uint                    mpcwOverflowHhr[bCANALS];
 
 extern  uint                    mpcwErrorLink[bCANALS];
 
-extern  uchar                   mpbOutBuffZ[1024];
-
 extern  uint                    wDividerS;
 
 
