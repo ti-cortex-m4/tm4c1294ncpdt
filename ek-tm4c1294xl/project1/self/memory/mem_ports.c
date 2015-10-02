@@ -68,7 +68,7 @@ uint                    cwInBuffSave;
 uchar                   mpbInBuffSave[wINBUFF_SIZE];
 
 // промежуточный буфер
-uchar                   mpbOutBuffZ[1024];
+uchar                   mpbOutBuffSave[1024];
 
 
 
