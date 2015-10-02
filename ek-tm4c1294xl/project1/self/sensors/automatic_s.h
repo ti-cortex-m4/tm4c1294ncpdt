@@ -4,7 +4,7 @@ AUTOMATIC_S.C
 
 ------------------------------------------------------------------------------*/
 
-void    QueryS_IO(uchar  cbIn, uchar  cbOut);
+void    QueryS(uchar  cbIn, uchar  cbOut);
 serial  InputS(void);
 
 bool    QueryConfigS_Full(uchar  bPercent);

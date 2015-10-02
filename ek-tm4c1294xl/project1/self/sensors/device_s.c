@@ -72,7 +72,7 @@ void    QueryTimeS(void)
   PushChar(0x01);
   PushChar(0x20);
 
-  QueryS_IO(100+18, 15);
+  QueryS(100+18, 15);
 }
 
 
@@ -120,7 +120,7 @@ void    QueryControlS(time  ti)
   PushChar(ToBCD(tiCurr.bMonth));
   PushChar(ToBCD(tiCurr.bYear));
 
-  QueryS_IO(100+11, 22);
+  QueryS(100+11, 22);
 }
 
 
@@ -138,7 +138,7 @@ void    QueryConfigS(void)
   PushChar(0x01);
   PushChar(0x01);
 
-  QueryS_IO(100+16, 15);
+  QueryS(100+16, 15);
 }
 
 
@@ -170,7 +170,7 @@ void    QueryVersionS(void)
   PushChar(0x01);
   PushChar(0x00);
 
-  QueryS_IO(100+17, 15);
+  QueryS(100+17, 15);
 }
 
 
@@ -198,7 +198,7 @@ void    QueryEngDayS(uchar  bDay)
   PushChar(0x2F);
   PushChar(bDay);
 
-  QueryS_IO(100+15, 16);
+  QueryS(100+15, 16);
 }
 
 
@@ -216,7 +216,7 @@ void    QueryEngMonS(uchar  bMonth)
   PushChar(0x31);
   PushChar(bMonth);
 
-  QueryS_IO(100+15, 16);
+  QueryS(100+15, 16);
 }
 
 
@@ -283,7 +283,7 @@ void    QueryHeaderS(void)
   PushChar(tiDig.bHour*2 + tiDig.bMinute/30);
   PushChar(4);
 
-  QueryS_IO(100+23, 20);
+  QueryS(100+23, 20);
 }
 
 

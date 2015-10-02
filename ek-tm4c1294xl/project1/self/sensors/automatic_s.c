@@ -28,44 +28,46 @@ AUTOMATIC_S!C
 
 #ifndef SKIP_S
 
-void    QueryS_IO(uchar  cbIn, uchar  cbOut)
+void    QueryS(uchar  cbIn, uchar  cbOut)
 {
-uchar	i,j;
-
   MakeCrcSOutBuff(1, cbOut-3);
 
   InitPush(0);
   PushChar(0xC0);
+
+  uchar i;
   for (i=0; i<cbOut-3; i++) SkipChar();
+
   PushChar(bCrcS);
   PushChar(0xC0);
 
 
   for (i=0; i<=cbOut-1; i++)
-    mpbOutBuffSave[i] = GetOutBuff(i); 
+    mpbOutBuffSave[i] = GetOutBuff(i);
 
-  j = 0;
+  uchar j = 0;
   SetOutBuff(j++, 0xC0);
   for (i=1; i<=cbOut-2; i++)
   {
-    if (mpbOutBuffSave[i] == 0xC0) 
+    if (mpbOutBuffSave[i] == 0xC0)
     {
       SetOutBuff(j++, 0xDB);
       SetOutBuff(j++, 0xDC);
     }
-    else 
-    if (mpbOutBuffSave[i] == 0xDB) 
+    else if (mpbOutBuffSave[i] == 0xDB)
     {
       SetOutBuff(j++, 0xDB);
       SetOutBuff(j++, 0xDD);
     }
-    else 
+    else
+    {
       SetOutBuff(j++, mpbOutBuffSave[i]);
+    }
   }
   SetOutBuff(j++, 0xC0);
 
 
-  Query(cbIn,j,1);
+  Query(cbIn,j,true);
 }
 
 
@@ -86,14 +88,14 @@ serial  InputS(void)
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (ChecksumS() == 0) 
-        mpSerial[ibPort] = SER_GOODCHECK; 
+      if (ChecksumS() == 0)
+        mpSerial[ibPort] = SER_GOODCHECK;
       else
-        mpSerial[ibPort] = SER_BADCHECK; 
+        mpSerial[ibPort] = SER_BADCHECK;
 
       break;
     }
-    else if ((mpSerial[ibPort] == SER_OVERFLOW) || 
+    else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
@@ -130,7 +132,7 @@ time2   QueryTimeS_Full(uchar  bPercent)
     DelayOff();
     QueryTimeS();
 
-    if (InputS() == SER_GOODCHECK) break;  
+    if (InputS() == SER_GOODCHECK) break;
     if (fKey == true) return GetTime2Error();
   }
 
@@ -149,7 +151,7 @@ bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
     DelayOff();
     QueryEngDayS(bTime);
 
-    if (InputS() == SER_GOODCHECK) break;  
+    if (InputS() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -169,7 +171,7 @@ bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
     DelayOff();
     QueryEngMonS(bTime);
 
-    if (InputS() == SER_GOODCHECK) break;  
+    if (InputS() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -190,7 +192,7 @@ time2   ReadTimeCanS(void)
   if (ti2.fValid == false) return GetTime2Error();
 
   tiChannelC = ti2.tiValue;
-  mpboChannelsA[0] = true;     
+  mpboChannelsA[0] = true;
 
   return GetTime2(ti2.tiValue, true);
 }
@@ -212,7 +214,7 @@ double2 ReadCntCurrS(void)
 
 
 double2 ReadCntMonCanS(uchar  ibMonth)
-{ 
+{
   Clear();
 
   if (QueryConfigS_Full(25) == 0) return GetDouble2Error();
@@ -225,7 +227,7 @@ double2 ReadCntMonCanS(uchar  ibMonth)
   {
     if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2Error();
   }
-  else 
+  else
   {
     if (QueryEngDayS_Full(1, 75) == 0) return GetDouble2Error();
   }
