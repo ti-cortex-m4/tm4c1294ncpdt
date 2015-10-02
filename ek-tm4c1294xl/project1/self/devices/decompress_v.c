@@ -58,7 +58,7 @@ uchar   i,j;
   {
     f = 0;
 
-    j = RepackS_0xDB(0xDD);
+    j = RepackV_0xDB(0xDD);
     if (j != 0)
     {
       SetInBuff(j, 0xDB);
@@ -68,7 +68,7 @@ uchar   i,j;
       continue;
     }
 
-    j = RepackS_0xDB(0xDC);
+    j = RepackV_0xDB(0xDC);
     if (j != 0)
     {
       SetInBuff(j, 0xC0);
@@ -111,7 +111,7 @@ uchar   ChecksumV(void)
 {
 uchar   i;
 
-  i = CheckS();
+  i = CheckV();
   if (i != 0)
   {
     Clear(); sprintf(szLo+1,"код ошибки: %u",i);
