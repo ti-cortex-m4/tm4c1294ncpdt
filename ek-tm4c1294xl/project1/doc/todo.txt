@@ -77,3 +77,6 @@ CRC метка времени + код запрос/ответ
 delphi конфигурация GPIO 
 
 http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0349a/Babjdbff.html
+
+[Push|Pop][Int|Long]BigEnd
+GetInBuff(1) -> GetInBuffInt[Big|Low]End(1)

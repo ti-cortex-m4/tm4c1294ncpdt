@@ -49,7 +49,7 @@ extern  uint                    cwInBuffSave;
 
 extern  uchar                   mpbInBuffSave[wINBUFF_SIZE];
 
-extern  uchar                   mpbOutBuffZ[1024];
+extern  uchar                   mpbOutBuffSave[1024];
 
 
 

@@ -43,26 +43,26 @@ void    QueryV(uchar  cbIn, uchar  cbOut)
 
 
   for (i=0; i<=cbOut-1; i++)
-    mpbOutBuffZ[i] = GetOutBuff(i);
+    mpbOutBuffSave[i] = GetOutBuff(i);
 
   uchar j = 0;
   SetOutBuff(j++, 0x73);
   SetOutBuff(j++, 0x55);
   for (i=2; i<=cbOut-2; i++)
   {
-    if (mpbOutBuffZ[i] == 0x55)
+    if (mpbOutBuffSave[i] == 0x55)
     {
       SetOutBuff(j++, 0x73);
       SetOutBuff(j++, 0x11);
     }
-    else if (mpbOutBuffZ[i] == 0x73)
+    else if (mpbOutBuffSave[i] == 0x73)
     {
       SetOutBuff(j++, 0x73);
       SetOutBuff(j++, 0x22);
     }
     else
     {
-      SetOutBuff(j++, mpbOutBuffZ[i]);
+      SetOutBuff(j++, mpbOutBuffSave[i]);
     }
   }
   SetOutBuff(j++, 0x55);
