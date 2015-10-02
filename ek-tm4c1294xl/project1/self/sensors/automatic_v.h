@@ -4,7 +4,7 @@ AUTOMATIC_V.H
 
 ------------------------------------------------------------------------------*/
 
-void    QueryIoV(uchar  cbIn, uchar  cbOut);
+void    QueryV(uchar  cbIn, uchar  cbOut);
 serial  InputV(void);
 
 //bool    QueryConfigS_Full(uchar  bPercent);
