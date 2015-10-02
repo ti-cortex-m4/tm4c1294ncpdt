@@ -28,22 +28,23 @@ AUTOMATIC_V!C
 #ifndef SKIP_V
 
 void    QueryV(uchar  cbIn, uchar  cbOut)
-{/*
-uchar	i,j;
-
-  MakeCrcSOutBuff(1, cbOut-3);
+{
+  uchar bCrc = MakeCrcVOutBuff(1, cbOut-3);
 
   InitPush(0);
   PushChar(0xC0);
+
+  uchar i;
   for (i=0; i<cbOut-3; i++) SkipChar();
-  PushChar(bCrcS);
+
+  PushChar(bCrc);
   PushChar(0xC0);
 
 
   for (i=0; i<=cbOut-1; i++)
     mpbOutBuffSave[i] = GetOutBuff(i);
 
-  j = 0;
+  uchar j = 0;
   SetOutBuff(j++, 0xC0);
   for (i=1; i<=cbOut-2; i++)
   {
@@ -52,19 +53,20 @@ uchar	i,j;
       SetOutBuff(j++, 0xDB);
       SetOutBuff(j++, 0xDC);
     }
-    else
-    if (mpbOutBuffSave[i] == 0xDB)
+    else if (mpbOutBuffSave[i] == 0xDB)
     {
       SetOutBuff(j++, 0xDB);
       SetOutBuff(j++, 0xDD);
     }
     else
+    {
       SetOutBuff(j++, mpbOutBuffSave[i]);
+    }
   }
   SetOutBuff(j++, 0xC0);
 
 
-  Query(cbIn,j,1);*/
+  Query(cbIn,j,true);
 }
 
 
