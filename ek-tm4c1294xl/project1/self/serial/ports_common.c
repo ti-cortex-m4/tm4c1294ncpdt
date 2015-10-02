@@ -15,6 +15,7 @@ PORTS_COMMON!C
 #include "../isr/serial3.h"
 #include "../kernel/crc-16.h"
 #include "../kernel/crc_s.h"
+#include "../kernel/crc_v.h"
 #include "../kernel/crc_els.h"
 #include "ports.h"
 
@@ -148,28 +149,28 @@ void    MakeCRCElsInBuff(uchar  bOffset, uint  wSize)
 
 #ifndef SKIP_V
 
-void    MakeCrcVOutBuff(uchar  bOffset, uint  wSize)
+uchar   MakeCrcVOutBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
-    case 0:  MakeCrcV(mpbOutBuff0 + bOffset, wSize);  break;
-    case 1:  MakeCrcV(mpbOutBuff1 + bOffset, wSize);  break;
-    case 2:  MakeCrcV(mpbOutBuff2 + bOffset, wSize);  break;
-    case 3:  MakeCrcV(mpbOutBuff3 + bOffset, wSize);  break;
-    default: ASSERT(false);
+    case 0:  return MakeCrcV(mpbOutBuff0 + bOffset, wSize);
+    case 1:  return MakeCrcV(mpbOutBuff1 + bOffset, wSize);
+    case 2:  return MakeCrcV(mpbOutBuff2 + bOffset, wSize);
+    case 3:  return MakeCrcV(mpbOutBuff3 + bOffset, wSize);
+    default: ASSERT(false); return 0;
   }
 }
 
 
-void    MakeCrcVInBuff(uchar  bOffset, uint  wSize)
+uchar   MakeCrcVInBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
-    case 0:  MakeCrcV(mpbInBuff0 + bOffset, wSize);  break;
-    case 1:  MakeCrcV(mpbInBuff1 + bOffset, wSize);  break;
-    case 2:  MakeCrcV(mpbInBuff2 + bOffset, wSize);  break;
-    case 3:  MakeCrcV(mpbInBuff3 + bOffset, wSize);  break;
-    default: ASSERT(false);
+    case 0:  return MakeCrcV(mpbInBuff0 + bOffset, wSize);
+    case 1:  return MakeCrcV(mpbInBuff1 + bOffset, wSize);
+    case 2:  return MakeCrcV(mpbInBuff2 + bOffset, wSize);
+    case 3:  return MakeCrcV(mpbInBuff3 + bOffset, wSize);
+    default: ASSERT(false); return 0;
   }
 }
 
