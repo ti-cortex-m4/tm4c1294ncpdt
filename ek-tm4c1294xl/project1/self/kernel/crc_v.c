@@ -15,7 +15,7 @@ uchar   MakeCrcV(uchar  *pbData, uint  wSize)
 
   while (wSize-- > 0)
   {
-    b = *(pbData++);
+    uchar b = *(pbData++);
 
     uchar i;
     for (i=0; i<8; i++)

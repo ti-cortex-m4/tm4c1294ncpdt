@@ -10,15 +10,15 @@ AUTOMATIC_V!C
 //#include "../memory/mem_factors.h"
 //#include "../time/delay.h"
 //#include "../time/timedate.h"
-//#include "../hardware/watchdog.h"
-//#include "../kernel/crc_s.h"
+#include "../hardware/watchdog.h"
+#include "../kernel/crc_v.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
 #include "../serial/ports_devices.h"
 //#include "../devices/devices.h"
-//#include "../devices/decompress_s.h"
+#include "../devices/decompress_v.h"
 //#include "../digitals/digitals.h"
-//#include "../digitals/wait_answer.h"
+#include "../digitals/wait_answer.h"
 //#include "automatic1.h"
 #include "device_v.h"
 #include "automatic_v.h"
@@ -36,7 +36,7 @@ void    QueryV(uchar  cbIn, uchar  cbOut)
   PushChar(0x55);
 
   uchar i;
-  for (i=0; i<cbOut-4; i++) SkipChar();
+  for (i=0; i<cbOut-3; i++) SkipChar();
 
   PushChar(bCrc);
   PushChar(0x55);
@@ -73,7 +73,7 @@ void    QueryV(uchar  cbIn, uchar  cbOut)
 
 
 serial  InputV(void)
-{/*
+{
   InitWaitAnswer();
 
   while (1)
@@ -99,7 +99,7 @@ serial  InputV(void)
     else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
-*/
+
   return mpSerial[ibPort];
 }
 
