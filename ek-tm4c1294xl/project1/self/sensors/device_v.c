@@ -66,10 +66,7 @@ void    PushAddressV(uchar  bCode)
 
 void    QueryTimeV(void)
 {
-  InitPush(0);
-
-  PushChar(0x73);
-  PushChar(0x55);
+  InitPush(2);
 
   PushChar(0x20);
   PushChar(0x00);
