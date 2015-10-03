@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PORTS_STACK.H
+PORTS_POP!H
 
 
 ------------------------------------------------------------------------------*/
@@ -12,6 +12,7 @@ PORTS_STACK.H
 #include "../kernel/parity.h"
 #include "../display/lines.h"
 #include "ports.h"
+#include "ports_pop.h"
 
 
 
@@ -105,7 +106,13 @@ uchar   PopChar(void) {
 }
 
 
-uint    PopInt(void)
+uint    PopIntBig(void)
+{
+  return PopChar()*0x100 + PopChar();
+}
+
+
+uint    PopIntLtl(void)
 {
   return PopChar() + PopChar()*0x100;
 }
