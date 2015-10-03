@@ -29,25 +29,18 @@ AUTOMATIC_V!C
 
 void    QueryV(uchar  cbIn, uchar  cbOut)
 {
-  uchar bCrc = MakeCrcVOutBuff(2, cbOut-4);
+  InitPush(cbOut-2);
+  PushChar(MakeCrcVOutBuff(2, cbOut-4));
 
-  InitPush(0);
-  PushChar(0x73);
-  PushChar(0x55);
 
   uchar i;
-  for (i=0; i<cbOut-3; i++) SkipChar();
-
-  PushChar(bCrc);
-  PushChar(0x55);
-
-
-  for (i=0; i<=cbOut-1; i++)
+  for (i=0; i<=cbOut-2; i++)
     mpbOutBuffSave[i] = GetOutBuff(i);
 
   uchar j = 0;
   SetOutBuff(j++, 0x73);
   SetOutBuff(j++, 0x55);
+
   for (i=2; i<=cbOut-2; i++)
   {
     if (mpbOutBuffSave[i] == 0x55)
@@ -66,7 +59,6 @@ void    QueryV(uchar  cbIn, uchar  cbOut)
     }
   }
   SetOutBuff(j++, 0x55);
-
 
   Query(cbIn,j,true);
 }
