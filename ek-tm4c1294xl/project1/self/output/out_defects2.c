@@ -38,9 +38,9 @@ void    OutImpCanHou48Def(void)
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
       {
         if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
-          PushInt(0xFFFF);
+          PushIntBig(0xFFFF);
         else
-          PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
+          PushIntBig( mpwImpHouCan[ PrevSoftHou() ][ c ] );
 
         wSize += sizeof(uint);
         if (wSize >= (wOUTBUFF_SIZE-0x40)) { Result(bRES_OUTOVERFLOW); return; }
@@ -190,7 +190,7 @@ void    OutDayCanDefAll(void)
         {
           if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
           {
-            PushLong(GetDayCanMaxDef());
+            PushLongBig(GetDayCanMaxDef());
             wSize += sizeof(ulong);
 
             Push(&mpdeDayCan[ c ], sizeof(impulse));
@@ -224,7 +224,7 @@ void    OutMonCanDefAll(void)
         {
           if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0) 
           {
-            PushLong(GetMonCanMaxDef());
+            PushLongBig(GetMonCanMaxDef());
             wSize += sizeof(ulong);
 
             Push(&mpdeMonCan[ c ], sizeof(impulse));
@@ -259,7 +259,7 @@ void    OutDayGrpDefAll(void)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
-            PushLong(GetDayGrpMaxDef(g));
+            PushLongBig(GetDayGrpMaxDef(g));
             wSize += sizeof(ulong);
 
             PushGrpDef(mpdeDayCan, g);
@@ -293,7 +293,7 @@ void    OutMonGrpDefAll(void)
         {
           if ((InBuff(7 + g/8) & (0x80 >> g%8)) != 0)
           {
-            PushLong(GetMonGrpMaxDef(g));
+            PushLongBig(GetMonGrpMaxDef(g));
             wSize += sizeof(ulong);
 
             PushGrpDef(mpdeMonCan, g);

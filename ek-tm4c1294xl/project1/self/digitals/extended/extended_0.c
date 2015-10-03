@@ -133,12 +133,12 @@ void    OutExtended0(void)
     uchar p;
     for (p=0; p<bPORTS; p++)
     {
-      PushLongArray(mpdwExt0RepeatsPH[p], 48);
+      PushLongBigArray(mpdwExt0RepeatsPH[p], 48);
     }
 
     for (p=0; p<bPORTS; p++)
     {
-      PushLongArray(mpdwExt0ErrorsPH[p], 48);
+      PushLongBigArray(mpdwExt0ErrorsPH[p], 48);
     }
 
     OutptrOutBuff(3+4*4*48+4*4*48);

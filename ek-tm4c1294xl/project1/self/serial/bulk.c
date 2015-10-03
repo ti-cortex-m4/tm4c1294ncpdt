@@ -220,11 +220,11 @@ void    OutBulk(void)
   PushChar(bBulkSize);
   Push(&cbBulk, sizeof(cbBulk));
 
-  PushInt(wBulkMaxDelay);
-  PushInt(cwBulkDelay[0]);
-  PushInt(cwBulkDelay[1]);
-  PushInt(cwBulkDelay[2]);
-  PushInt(cwBulkDelay[3]);
+  PushIntBig(wBulkMaxDelay);
+  PushIntBig(cwBulkDelay[0]);
+  PushIntBig(cwBulkDelay[1]);
+  PushIntBig(cwBulkDelay[2]);
+  PushIntBig(cwBulkDelay[3]);
 
   Push(&mpSerial, sizeof(mpSerial));
   Push(&mpSerial_Bulk, sizeof(mpSerial_Bulk));

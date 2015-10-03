@@ -25,7 +25,7 @@ void    OutCurrentExt(void)
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
       PushBool(mpboBase[c]);
-      PushLong(mpdwBase[c]);
+      PushLongBig(mpdwBase[c]);
       PushFloat(mpreBase[c]);
       PushTime(mptiBase[c]);
       PushTime(mptiOffs[c]);
@@ -51,14 +51,14 @@ void    OutCurrentExt(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushInt(mpwTrue[c]);
-      PushInt(mpwFalse[c]);
-      PushInt(mpwMore100[c]);
-      PushInt(mpwMore1000[c]);
-      PushInt(mpwMore10000[c]);
-      PushInt(mpwOverflow[c]);
-      PushInt(mpwUnderflow[c]);
-      PushInt(mpwRepeat[c]);
+      PushIntBig(mpwTrue[c]);
+      PushIntBig(mpwFalse[c]);
+      PushIntBig(mpwMore100[c]);
+      PushIntBig(mpwMore1000[c]);
+      PushIntBig(mpwMore10000[c]);
+      PushIntBig(mpwOverflow[c]);
+      PushIntBig(mpwUnderflow[c]);
+      PushIntBig(mpwRepeat[c]);
 
       wSize += 16;
     }

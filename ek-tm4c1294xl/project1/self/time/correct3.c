@@ -108,13 +108,13 @@ void    OutCorrectExt3(void)
 
   PushBool(UseGps());
   PushBool(boCorrect3Flag);
-  PushLong(dwCorrect3Total);
-  PushLong(dwCorrect3Success);
+  PushLongBig(dwCorrect3Total);
+  PushLongBig(dwCorrect3Success);
   PushChar(bCorrect3SuccessMax);
   PushTime(tiCorrect3Sucess);
   PushTime(tiCorrect3ErrorTime);
   PushBool(Correct3Disabled());
-  PushIntArray(mpcwCorrect3Status15, 15);
+  PushIntBigArray(mpcwCorrect3Status15, 15);
 
   Output(100);
 }

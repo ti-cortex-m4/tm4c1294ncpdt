@@ -86,7 +86,7 @@ void    OutIntCanExt(uint  *mpw)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      wSize += PushInt(mpw[c]);
+      wSize += PushIntBig(mpw[c]);
     }
   }
 

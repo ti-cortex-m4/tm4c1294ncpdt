@@ -18,13 +18,13 @@ void    OutGetConfig(void)
   PushChar(bGROUPS);
   PushChar(bTARIFFS);
   PushChar(bMINUTES);
-  PushInt(wHOURS);
+  PushIntBig(wHOURS);
   PushChar(bDAYS);
   PushChar(bMONTHS);
 
   PushChar(0xFF);
 
-  PushInt(GetFlashStatus());
+  PushIntBig(GetFlashStatus());
 
   PushChar(0);
   PushChar(0);

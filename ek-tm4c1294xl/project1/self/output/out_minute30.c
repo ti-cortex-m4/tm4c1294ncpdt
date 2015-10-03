@@ -97,9 +97,9 @@ void    OutImpCanHouExt(void)
       for (c=0; c<bCANALS; c++)
       {
         if (iwHhr >= wHOURS)
-          PushInt(0);
+          PushIntBig(0);
         else
-          PushInt( mpwImpHouCan[ PrevSoftHou() ][ c ] );
+          PushIntBig( mpwImpHouCan[ PrevSoftHou() ][ c ] );
 
         wSize += sizeof(uint);
       }

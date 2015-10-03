@@ -25,10 +25,10 @@ void    OutStartCan(void)
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
       PushBool(mpboStartCan[c]);
-      PushInt(mpcwStopCan[c]);
-      PushInt(mpcwStartRelCan[c]);
-      PushInt(mpcwStartAbs16Can[c]);
-      PushLong(mpcdwStartAbs32Can[c]);
+      PushIntBig(mpcwStopCan[c]);
+      PushIntBig(mpcwStartRelCan[c]);
+      PushIntBig(mpcwStartAbs16Can[c]);
+      PushLongBig(mpcdwStartAbs32Can[c]);
       PushChar(0);
       PushChar(0);
       wSize += 13;
@@ -46,7 +46,7 @@ void    OutStopAuxCan(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    PushInt(mpcwStopAuxCan[c]);
+    PushIntBig(mpcwStopAuxCan[c]);
   }
 
   Output(2*64);

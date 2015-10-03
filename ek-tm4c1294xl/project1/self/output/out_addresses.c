@@ -18,8 +18,8 @@ void    OutGetAddress(void)
   if (bInBuff6 < bCANALS)
   {
     InitPushCRC();
-    PushLong(mpdwAddress1[bInBuff6]);
-    PushLong(mpdwAddress2[bInBuff6]);
+    PushLongBig(mpdwAddress1[bInBuff6]);
+    PushLongBig(mpdwAddress2[bInBuff6]);
     Output(2*sizeof(ulong));
   }
   else Result(bRES_BADADDRESS);
@@ -62,8 +62,8 @@ void    OutGetAddressesExt(void)
   {
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
-      PushLong(mpdwAddress1[c]);
-      PushLong(mpdwAddress2[c]);
+      PushLongBig(mpdwAddress1[c]);
+      PushLongBig(mpdwAddress2[c]);
       wSize += sizeof(ulong)*2;
     }
   }

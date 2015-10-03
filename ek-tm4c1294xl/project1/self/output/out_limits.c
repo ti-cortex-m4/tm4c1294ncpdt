@@ -22,9 +22,9 @@ void    OutStopCan2(void)
     if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
     {
       if (GetDigitalDevice(c) == 0)
-        PushInt(0);
+        PushIntBig(0);
       else
-        PushInt(mpcwStopCan[c]);
+        PushIntBig(mpcwStopCan[c]);
 
       wSize += sizeof(uint);
     }

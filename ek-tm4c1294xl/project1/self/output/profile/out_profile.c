@@ -17,7 +17,7 @@ OUT_PROFILE,C
 void    OutGetFailure2(void)
 {
   InitPushCRC();
-  PushIntArray(mpcwFailure2, bCANALS);
+  PushIntBigArray(mpcwFailure2, bCANALS);
   Output(sizeof(mpcwFailure2));
 }
 
@@ -25,7 +25,7 @@ void    OutGetFailure2(void)
 void    OutGetOverflowHhr(void)
 {
   InitPushCRC();
-  PushIntArray(mpcwOverflowHhr, bCANALS);
+  PushIntBigArray(mpcwOverflowHhr, bCANALS);
   Output(sizeof(mpcwOverflowHhr));
 }
 
@@ -33,7 +33,7 @@ void    OutGetOverflowHhr(void)
 void    OutGetErrorLink(void)
 {
   InitPushCRC();
-  PushIntArray(mpcwErrorLink, bCANALS);
+  PushIntBigArray(mpcwErrorLink, bCANALS);
   Output(sizeof(mpcwErrorLink));
 }
 
@@ -100,12 +100,12 @@ void    OutCorrectLimit(void)
 void    OutLinkErrors(void)
 {
   InitPushCRC();
-  PushIntArray(mpcwOutputZ, bCANALS);
-  PushIntArray(mpcwOutputC, bCANALS);
-  PushIntArray(mpcwOutput0, bCANALS);
-  PushIntArray(mpcwOutput1, bCANALS);
-  PushIntArray(mpcwOutput2, bCANALS);
-  PushIntArray(mpcwOutput3, bCANALS);
+  PushIntBigArray(mpcwOutputZ, bCANALS);
+  PushIntBigArray(mpcwOutputC, bCANALS);
+  PushIntBigArray(mpcwOutput0, bCANALS);
+  PushIntBigArray(mpcwOutput1, bCANALS);
+  PushIntBigArray(mpcwOutput2, bCANALS);
+  PushIntBigArray(mpcwOutput3, bCANALS);
   Output(6*bCANALS*2);
 
 }

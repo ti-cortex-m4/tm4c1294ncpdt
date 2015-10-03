@@ -28,8 +28,8 @@ static uchar PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
     uchar bSize = 0;
 
     bSize += PushChar(ST4_OK);
-    bSize += PushInt(0xFFFF);
-    bSize += PushInt(0xFFFF);
+    bSize += PushIntBig(0xFFFF);
+    bSize += PushIntBig(0xFFFF);
     bSize += PushFloatOrDouble(mpdbCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
     bSize += PushTime(tiZero);
 
@@ -42,8 +42,8 @@ static uchar PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
     value6 vl = mpCntMonCan4[ibCan];
 
     bSize += PushChar(vl.bStatus);
-    bSize += PushInt(0xFFFF);
-    bSize += PushInt(0xFFFF);
+    bSize += PushIntBig(0xFFFF);
+    bSize += PushIntBig(0xFFFF);
     bSize += PushFloatOrDouble(vl.dbValue, fDouble);
     bSize += PushTime(vl.tiUpdate);
 
@@ -98,8 +98,8 @@ void    OutExtended44(bool  fDouble)
 
     wSize += PushBool(fExt4Flag);
     wSize += PushChar(bExt4Months);
-    wSize += PushInt(cwDayCan6);
-    wSize += PushInt(cwMonCan6);
+    wSize += PushIntBig(cwDayCan6);
+    wSize += PushIntBig(cwMonCan6);
 
     uchar c;
     for (c=0; c<bCANALS; c++)
@@ -141,8 +141,8 @@ static void OutData4(uchar  bStatus, double  dbValue, bool  fDouble)
   uchar bSize = 0;
 
   bSize += PushChar(bStatus);
-  bSize += PushInt(0);
-  bSize += PushInt(0);
+  bSize += PushIntBig(0);
+  bSize += PushIntBig(0);
   bSize += PushFloatOrDouble(dbValue, fDouble);
   bSize += PushTime(*GetCurrTimeDate());
 

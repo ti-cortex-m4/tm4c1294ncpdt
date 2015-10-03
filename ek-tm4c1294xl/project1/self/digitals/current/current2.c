@@ -299,7 +299,7 @@ void    OutCurrent2(void)
 {
   InitPushCRC();
   PushBool(fEnblCurrent2);
-  PushIntArray(mpwCurrent2Mnt, bCANALS);
-  PushIntArray(mpwCurrent2Overflow, bCANALS);
+  PushIntBigArray(mpwCurrent2Mnt, bCANALS);
+  PushIntBigArray(mpwCurrent2Overflow, bCANALS);
   Output(1+64*2+64*2);
 }

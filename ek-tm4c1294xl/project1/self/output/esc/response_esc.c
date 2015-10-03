@@ -424,8 +424,8 @@ static void EscTransit(void)
 static void EscId(void)
 {
   InitPush(0);
-  PushInt(GetRomChecksum());
-  PushInt(wPrivate);
+  PushIntBig(GetRomChecksum());
+  PushIntBig(wPrivate);
   PushChar(bLogical);
   Esc(5);
 }

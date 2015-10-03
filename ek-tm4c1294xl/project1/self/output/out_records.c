@@ -25,8 +25,8 @@ void    OutRecordExt(void)
   else
   {
     InitPushCRC();
-    PushLong(GetRecordCount((class) InBuff(6)));
-    PushInt(wRECORDS);
+    PushLongBig(GetRecordCount((class) InBuff(6)));
+    PushIntBig(wRECORDS);
 
     Push(&reCurr, SIZEOF_RECORD);
     Output(6+SIZEOF_RECORD);
@@ -43,8 +43,8 @@ void    OutRecordsBlockExt(void)
   else
   {
     InitPushCRC();
-    PushLong(GetRecordCount((class) InBuff(6)));
-    PushInt(wRECORDS);
+    PushLongBig(GetRecordCount((class) InBuff(6)));
+    PushIntBig(wRECORDS);
 
     Push(&mpbPageIn, wLEAF_BYTES);
     Output(6+wLEAF_BYTES);
@@ -61,8 +61,8 @@ void    OutRecordsBlockExt2(void)
   else
   {
     InitPushCRC();
-    PushLong(GetRecordCount2((class2) InBuff(6)));
-    PushInt(wRECORDS2);
+    PushLongBig(GetRecordCount2((class2) InBuff(6)));
+    PushIntBig(wRECORDS2);
 
     Push(&mpbPageIn, wLEAF_BYTES);
     Output(6+wLEAF_BYTES);

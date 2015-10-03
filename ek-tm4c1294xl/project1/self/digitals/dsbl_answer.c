@@ -62,9 +62,9 @@ void    OutDsblAnswer(void)
   InitPushCRC();
   PushBool(fDsblAnswer);
   PushBool(fEnblAnswerCurr);
-  PushLong(cdwAnswerDisabled);
+  PushLongBig(cdwAnswerDisabled);
   PushTime(tiAnswerDisabled);
-  PushLong(cdwAnswerEnabled);
+  PushLongBig(cdwAnswerEnabled);
   PushTime(tiAnswerEnabled);
   Output(1+1+4+6+4+6);
 }

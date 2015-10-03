@@ -33,7 +33,7 @@ void    OutFlashControl(void)
     PushBuffInt(&mpcwFlashControl[500*bInBuff6], wPAGES_TOTAL-500*bInBuff6);
 
     uint i;
-    for (i=0; i<500*(bInBuff6+1)-wPAGES_TOTAL; i++) PushInt(0xFFFF);
+    for (i=0; i<500*(bInBuff6+1)-wPAGES_TOTAL; i++) PushIntBig(0xFFFF);
 
     Output(sizeof(uint)*500);
   }

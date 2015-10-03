@@ -24,22 +24,22 @@ void    OutFlashPage(void)
   {
     InitPushPtr();
 
-    PushInt(cwFlashBusyErr);
-    PushInt(cwFlashCompareWrn);
-    PushInt(cwFlashEraseWrn);
-    PushInt(cwFlashReadWrn);
-    PushInt(cwFlashWriteWrn);
-    PushInt(cwFlashCompareErr);
-    PushInt(cwFlashEraseErr);
-    PushInt(cwFlashReadErr);
-    PushInt(cwFlashWriteErr);
+    PushIntBig(cwFlashBusyErr);
+    PushIntBig(cwFlashCompareWrn);
+    PushIntBig(cwFlashEraseWrn);
+    PushIntBig(cwFlashReadWrn);
+    PushIntBig(cwFlashWriteWrn);
+    PushIntBig(cwFlashCompareErr);
+    PushIntBig(cwFlashEraseErr);
+    PushIntBig(cwFlashReadErr);
+    PushIntBig(cwFlashWriteErr);
 
     InitPush(63);
 
-    PushInt(cwWrnResetWDT);
+    PushIntBig(cwWrnResetWDT);
 
-    PushInt(GetRomChecksum());
-    PushInt(wPrivate);
+    PushIntBig(GetRomChecksum());
+    PushIntBig(wPrivate);
     PushChar(bLogical);
 
     OutptrOutBuff(1056);
@@ -61,32 +61,32 @@ void    OutFlashCounters(void)
   InitPushCRC();
   uint wSize = 0;
 
-  wSize += PushLong(cdwFlashErasePage);
-  wSize += PushLong(cdwFlashReadPage);
-  wSize += PushLong(cdwFlashWritePage);
+  wSize += PushLongBig(cdwFlashErasePage);
+  wSize += PushLongBig(cdwFlashReadPage);
+  wSize += PushLongBig(cdwFlashWritePage);
 
-  wSize += PushLong(cdwFlashReadByte);
-  wSize += PushLong(cdwFlashWriteByte);
+  wSize += PushLongBig(cdwFlashReadByte);
+  wSize += PushLongBig(cdwFlashWriteByte);
 
-  wSize += PushInt(cwFlashBusyCnt);
-  wSize += PushInt(cwFlashBusyErr);
-  wSize += PushInt(cwFlashCompareWrn);
-  wSize += PushInt(cwFlashCompareErr);
-  wSize += PushInt(cwFlashEraseWrn);
-  wSize += PushInt(cwFlashEraseErr);
-  wSize += PushInt(cwFlashReadWrn);
-  wSize += PushInt(cwFlashReadErr);
-  wSize += PushInt(cwFlashWriteWrn);
-  wSize += PushInt(cwFlashWriteErr);
+  wSize += PushIntBig(cwFlashBusyCnt);
+  wSize += PushIntBig(cwFlashBusyErr);
+  wSize += PushIntBig(cwFlashCompareWrn);
+  wSize += PushIntBig(cwFlashCompareErr);
+  wSize += PushIntBig(cwFlashEraseWrn);
+  wSize += PushIntBig(cwFlashEraseErr);
+  wSize += PushIntBig(cwFlashReadWrn);
+  wSize += PushIntBig(cwFlashReadErr);
+  wSize += PushIntBig(cwFlashWriteWrn);
+  wSize += PushIntBig(cwFlashWriteErr);
 
-  wSize += PushInt(cwFlashCompareErr1);
-  wSize += PushInt(cwFlashCompareErr2);
-  wSize += PushInt(cwFlashEraseErr1);
-  wSize += PushInt(cwFlashEraseErr2);
-  wSize += PushInt(cwFlashReadErr1);
-  wSize += PushInt(cwFlashReadErr2);
-  wSize += PushInt(cwFlashWriteErr1);
-  wSize += PushInt(cwFlashWriteErr2);
+  wSize += PushIntBig(cwFlashCompareErr1);
+  wSize += PushIntBig(cwFlashCompareErr2);
+  wSize += PushIntBig(cwFlashEraseErr1);
+  wSize += PushIntBig(cwFlashEraseErr2);
+  wSize += PushIntBig(cwFlashReadErr1);
+  wSize += PushIntBig(cwFlashReadErr2);
+  wSize += PushIntBig(cwFlashWriteErr1);
+  wSize += PushIntBig(cwFlashWriteErr2);
 
   Output(wSize);
 }

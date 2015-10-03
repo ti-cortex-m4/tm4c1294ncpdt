@@ -199,8 +199,8 @@ void    OutGetParamFull(void)
         {
           InitPushCRC();
 
-          PushInt(iwHardTim);
-          PushInt(wTIMES);
+          PushIntBig(iwHardTim);
+          PushIntBig(wTIMES);
           PushBool(boMntParams);
           PushTime(tiCurr);
 

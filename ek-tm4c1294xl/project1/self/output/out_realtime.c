@@ -30,24 +30,24 @@ void    OutRealtime(void)
 
   wSize += PushBool(fActive);
 
-  wSize += PushInt(ibSoftMnt);
-  wSize += PushInt(iwHardMnt);
-  wSize += PushInt(ibSoftHou);
-  wSize += PushInt(iwHardHou);
-  wSize += PushInt(ibSoftDay);
-  wSize += PushInt(ibHardDay);
-  wSize += PushInt(ibSoftMon);
-  wSize += PushInt(ibHardMon);
-  wSize += PushInt(ibSoftTim);
-  wSize += PushInt(iwHardTim);
+  wSize += PushIntBig(ibSoftMnt);
+  wSize += PushIntBig(iwHardMnt);
+  wSize += PushIntBig(ibSoftHou);
+  wSize += PushIntBig(iwHardHou);
+  wSize += PushIntBig(ibSoftDay);
+  wSize += PushIntBig(ibHardDay);
+  wSize += PushIntBig(ibSoftMon);
+  wSize += PushIntBig(ibHardMon);
+  wSize += PushIntBig(ibSoftTim);
+  wSize += PushIntBig(iwHardTim);
 
-  wSize += PushLong(Realtime1.cdwSeconds);
-  wSize += PushLong(Realtime1.cdwMinutes1);
-  wSize += PushLong(Realtime1.cdwMinutes3);
-  wSize += PushLong(Realtime1.cdwMinutes30);
-  wSize += PushInt(Realtime1.cwDays);
-  wSize += PushInt(Realtime1.cwMonths);
-  wSize += PushInt(Realtime1.cwYears);
+  wSize += PushLongBig(Realtime1.cdwSeconds);
+  wSize += PushLongBig(Realtime1.cdwMinutes1);
+  wSize += PushLongBig(Realtime1.cdwMinutes3);
+  wSize += PushLongBig(Realtime1.cdwMinutes30);
+  wSize += PushIntBig(Realtime1.cwDays);
+  wSize += PushIntBig(Realtime1.cwMonths);
+  wSize += PushIntBig(Realtime1.cwYears);
 
   Output(wSize);
 }
