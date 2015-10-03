@@ -40,8 +40,8 @@ void    OutExtended50(bool  fDouble)
 
         wSize += PushChar(vl.boSuccess);
 
-        wSize += PushInt(vl.cwSuccess);
-        wSize += PushInt(vl.cwError);
+        wSize += PushIntBig(vl.cwSuccess);
+        wSize += PushIntBig(vl.cwError);
       }
     }
 

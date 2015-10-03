@@ -207,11 +207,11 @@ void    GetCorrectionsUni(void)
   for (c=bInBuff6; c<bInBuff6+bInBuff7; c++)
   {
     if (c == 0)
-      PushInt((sint)(Correct1.mpwPosValueCurr[0] - Correct1.mpwNegValueCurr[0]));
+      PushIntBig((sint)(Correct1.mpwPosValueCurr[0] - Correct1.mpwNegValueCurr[0]));
     else if (c == 1)
-      PushInt((sint)(Correct1.mpwPosValuePrev[0] - Correct1.mpwNegValuePrev[0]));
+      PushIntBig((sint)(Correct1.mpwPosValuePrev[0] - Correct1.mpwNegValuePrev[0]));
     else
-      PushInt(0);
+      PushIntBig(0);
   }
 
   Output2(2*(bInBuff7-bInBuff6));
@@ -271,16 +271,16 @@ void    GetConfigUni(void)
 
   Push(szObjectName, 32);
 
-  PushInt(wPrivate / 0x10000);
-  PushInt(wPrivate % 0x10000);
+  PushIntBig(wPrivate / 0x10000);
+  PushIntBig(wPrivate % 0x10000);
 
-  PushInt(GetRomChecksum());
-  PushInt(GetUsedCanals());
-  PushInt(GetUsedGroups());
-  PushInt(bTARIFFS);
-  PushInt(bMAXDEVICES);
-  PushInt(cbDevicesUni);
-  PushInt(wOUTBUFF_SIZE);
+  PushIntBig(GetRomChecksum());
+  PushIntBig(GetUsedCanals());
+  PushIntBig(GetUsedGroups());
+  PushIntBig(bTARIFFS);
+  PushIntBig(bMAXDEVICES);
+  PushIntBig(cbDevicesUni);
+  PushIntBig(wOUTBUFF_SIZE);
 
   Output2(32+32+4+2+2+2+2+2+2+2);
 }
@@ -302,7 +302,7 @@ void    GetSensorsUni(void)
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushInt(c);
+      PushIntBig(c);
 
       uchar i;
       for (i=1; i<16; i++)
@@ -335,19 +335,19 @@ uchar   i,j;
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushInt(c);
+      PushIntBig(c);
 
-      PushInt(mpdiDevicesUni[c-1].bDevice);
+      PushIntBig(mpdiDevicesUni[c-1].bDevice);
 
       PushChar(0xFF);
       PushChar(0xFF);
       PushChar(0xFF);
       PushChar(0xFF);
 
-      PushInt(mpdiDevicesUni[c-1].bAddress);
-      PushInt(GetCanalsCount(c-1));
-      PushInt(wHOURS);
-      PushInt(GetFirstCanalsNumber(c-1));
+      PushIntBig(mpdiDevicesUni[c-1].bAddress);
+      PushIntBig(GetCanalsCount(c-1));
+      PushIntBig(wHOURS);
+      PushIntBig(GetFirstCanalsNumber(c-1));
 
       PushChar(0);
       PushChar(0);
@@ -402,10 +402,10 @@ void    GetCanalsUni(void)
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
     {
-      PushInt(c);
+      PushIntBig(c);
 
-      PushInt(GetDeviceNumber(c-1));
-      PushInt(GetDigitalLine(c-1)+1);
+      PushIntBig(GetDeviceNumber(c-1));
+      PushIntBig(GetDigitalLine(c-1)+1);
 
       PushFloat(mpdbTransEng[c-1]);
       PushFloat(mpdbPulseHou[c-1]);
@@ -442,7 +442,7 @@ uchar   i;
     uchar g;
     for (g=bInBuff7-1; g<bInBuff7+bInBuff9-1; g++)
     {
-      PushInt(g+1);
+      PushIntBig(g+1);
 
       uchar c;
       for (c=0; c<128-16; c++)

@@ -88,7 +88,7 @@ void    Outptr(void  *pData, uint  wSize)
   PushChar( mpibPowCurrTariff[ GetCurrHouIndex() ] );
 
   PushChar(ibSoftMnt);
-  PushInt(iwHardHou);
+  PushIntBig(iwHardHou);
   PushChar(ibHardDay);
   PushChar(ibHardMon);
 

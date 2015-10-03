@@ -44,8 +44,8 @@ void    OutExtended6(bool  fDouble)
     InitPushPtr();
     uint wSize = 0;
 
-    wSize += PushInt(cwDayCan6);
-    wSize += PushInt(cwMonCan6);
+    wSize += PushIntBig(cwDayCan6);
+    wSize += PushIntBig(cwMonCan6);
 
     uchar c;
     for (c=0; c<bCANALS; c++)

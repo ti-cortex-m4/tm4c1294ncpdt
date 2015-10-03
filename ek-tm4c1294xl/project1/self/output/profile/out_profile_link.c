@@ -18,7 +18,7 @@ void    OutGetProfileLinkWrn(void)
 
   uchar p;
   for (p=0; p<bPORTS; p++)
-    PushIntArray(mpcwProfileLinkWrn[p], 48);
+    PushIntBigArray(mpcwProfileLinkWrn[p], 48);
 
   Output(sizeof(mpcwProfileLinkWrn));
 }
@@ -30,7 +30,7 @@ void    OutGetProfileLinkErr(void)
 
   uchar p;
   for (p=0; p<bPORTS; p++)
-    PushIntArray(mpcwProfileLinkErr[p], 48);
+    PushIntBigArray(mpcwProfileLinkErr[p], 48);
 
   Output(sizeof(mpcwProfileLinkErr));
 }

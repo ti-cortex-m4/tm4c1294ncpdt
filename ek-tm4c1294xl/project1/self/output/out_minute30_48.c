@@ -61,9 +61,9 @@ void    OutImpCanHou48(void)
     if (LoadImpHou(iwHhr) == false) { Result(bRES_BADFLASH); return; }
 
     if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
-      PushInt(0);
+      PushIntBig(0);
     else
-      PushInt( mpwImpHouCan[ PrevSoftHou() ][ bInBuff5 ] );
+      PushIntBig( mpwImpHouCan[ PrevSoftHou() ][ bInBuff5 ] );
 
     wSize += sizeof(uint);
 
@@ -113,7 +113,7 @@ void    OutPowGrpHou48Ext(void)
 void    PushImpHouCan(uint  wT, uchar  ibCan)
 {
   if ((IsPulseCanal(ibCan) || IsSpecCurrent(GetDigitalDevice(ibCan))) && (wT == 0xFFFF)) wT = 0;
-  PushInt(wT);
+  PushIntBig(wT);
 }
 
 
@@ -136,7 +136,7 @@ void    OutImpCanHou48Ext(void)
       if ((InBuff(7 + c/8) & (0x80 >> c%8)) != 0)
       {
         if ((bInBuff6 == 0) && (h > GetCurrHouIndex()))
-          PushInt(0);
+          PushIntBig(0);
         else
           PushImpHouCan( mpwImpHouCan[ PrevSoftHou() ][ c ], c );
 

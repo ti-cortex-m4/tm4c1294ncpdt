@@ -45,8 +45,8 @@ void    OutCorrect2(void)
 void    OutCorrect3(void)
 {
   InitPushCRC();
-  PushInt(Correct1.mpwPosValueCurr[0]);
-  PushInt(Correct1.mpwNegValueCurr[0]);
+  PushIntBig(Correct1.mpwPosValueCurr[0]);
+  PushIntBig(Correct1.mpwNegValueCurr[0]);
   Output(4);
 }
 

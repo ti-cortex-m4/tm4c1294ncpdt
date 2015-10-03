@@ -26,7 +26,7 @@ void    OutExtended7(bool  fDouble)
     InitPushPtr();
     uint wSize = 0;
 
-    wSize += PushInt(cwDayCan7);
+    wSize += PushIntBig(cwDayCan7);
 
     uchar c;
     for (c=0; c<bCANALS; c++)

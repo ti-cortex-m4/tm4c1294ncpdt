@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PORTS_STACK.H
+PORTS_PUSH.H
 
 
 ------------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@ PORTS_STACK.H
 #include "../memory/mem_serial3.h"
 #include "../kernel/parity.h"
 #include "../display/lines.h"
-#include "ports.h"
+#include "ports_push.h"
 
 
 
@@ -101,7 +101,7 @@ uchar   PushBool(bool  f)
 }
 
 
-uchar   PushInt(uint  w)
+uchar   PushIntBig(uint  w)
 {
   PushChar(w / 0x100);
   PushChar(w % 0x100);
@@ -110,37 +110,55 @@ uchar   PushInt(uint  w)
 }
 
 
-uint    PushIntArray(uint  *mpw, uint  wCount)
+uchar   PushIntLtl(uint  w)
+{
+  PushChar(w % 0x100);
+  PushChar(w / 0x100);
+
+  return sizeof(uint);
+}
+
+
+uint    PushIntBigArray(uint  *mpw, uint  wCount)
 {
   uint wSize = 0;
 
   uint i;
   for (i=0; i<wCount; i++)
   {
-    wSize += PushInt(mpw[i]);
+    wSize += PushIntBig(mpw[i]);
   }
 
   return wSize;
 }
 
 
-uchar   PushLong(ulong  dw)
+uchar   PushLongBig(ulong  dw)
 {
-  PushInt(dw / 0x10000);
-  PushInt(dw % 0x10000);
+  PushIntBig(dw / 0x10000);
+  PushIntBig(dw % 0x10000);
 
   return sizeof(ulong);
 }
 
 
-uint    PushLongArray(ulong  *mpdw, uint  wCount)
+uchar   PushLongLtl(ulong  dw)
+{
+  PushIntLtl(dw % 0x10000);
+  PushIntLtl(dw / 0x10000);
+
+  return sizeof(ulong);
+}
+
+
+uint    PushLongBigArray(ulong  *mpdw, uint  wCount)
 {
   uint wSize = 0;
 
   uint i;
   for (i=0; i<wCount; i++)
   {
-    wSize += PushLong(mpdw[i]);
+    wSize += PushLongBig(mpdw[i]);
   }
 
   return wSize;
@@ -228,14 +246,14 @@ void    PushString(char  *psz)
 void    PushBuffInt(uint  *pwData, uint  wSize)
 {
   while (wSize-- > 0)
-    PushInt(*pwData++);
+    PushIntBig(*pwData++);
 }
 
 
 void    PushBuffLong(ulong  *pdwData, uint  wSize)
 {
   while (wSize-- > 0)
-    PushLong(*pdwData++);
+    PushLongBig(*pdwData++);
 }
 
 

@@ -43,8 +43,8 @@ void    EveryMinuteThroughput(void)
 void    OutThroughput(void)
 {
   InitPushCRC();
-  PushInt(iwThroughput);
-  PushIntArray((uint *)mwThroughput, 600);
+  PushIntBig(iwThroughput);
+  PushIntBigArray((uint *)mwThroughput, 600);
   Output(2 + sizeof(mwThroughput));
 }
 

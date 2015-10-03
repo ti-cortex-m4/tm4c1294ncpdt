@@ -23,8 +23,7 @@ DECOMPRESS_V!C
 
 static uchar RepackV(uchar  bCode1, uchar  bCode2)
 {
-uchar   i;
-
+  uchar i;
   for (i=1; i<=IndexInBuff()-2; i++)
     if ((GetInBuff(i) == bCode1) && (GetInBuff(i+1) == bCode2)) return i;
 

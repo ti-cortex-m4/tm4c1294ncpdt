@@ -26,7 +26,7 @@ void    OutImpMntCan(void)
       if (LoadImpMnt(bInBuff6) == 1)
       {
         InitPushPtr();
-        OutptrOutBuff(PushInt(mpwImpMntCan[ PrevSoftMnt() ][ bInBuff5 ]));
+        OutptrOutBuff(PushIntBig(mpwImpMntCan[ PrevSoftMnt() ][ bInBuff5 ]));
       }
       else Result(bRES_BADFLASH);
     }
@@ -50,7 +50,7 @@ void    OutImpMntCanAll(void)
         uchar c;
         for (c=0; c<bCANALS; c++)
         {
-          wSize += PushInt(mpwImpMntCan[ PrevSoftMnt() ][ c ]);
+          wSize += PushIntBig(mpwImpMntCan[ PrevSoftMnt() ][ c ]);
         }
 
         OutptrOutBuff(wSize);
@@ -73,7 +73,7 @@ void    OutImpHhrCan(void)
       if (LoadImpHou(wHhr) == 1)
       {
         InitPushPtr();
-        OutptrOutBuff(PushInt(mpwImpHouCan[ PrevSoftHou() ][ bInBuff5 ]));
+        OutptrOutBuff(PushIntBig(mpwImpHouCan[ PrevSoftHou() ][ bInBuff5 ]));
       }
       else Result(bRES_BADFLASH);
     }
@@ -98,7 +98,7 @@ void    OutImpHhrCanAll(void)
         uchar c;
         for (c=0; c<bCANALS; c++)
         {
-          wSize += PushInt(mpwImpHouCan[ PrevSoftHou() ][ c ]);
+          wSize += PushIntBig(mpwImpHouCan[ PrevSoftHou() ][ c ]);
         }
 
         OutptrOutBuff(wSize);
@@ -119,7 +119,7 @@ static uchar PushImpulse(impulse  *pim)
   uchar t;
   for (t=0; t<bTARIFFS; t++)
   {
-    bSize += PushLong((*pim).mpdwImp[t]);
+    bSize += PushLongBig((*pim).mpdwImp[t]);
   }
 
   return bSize;

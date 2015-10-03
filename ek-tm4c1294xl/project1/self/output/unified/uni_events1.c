@@ -102,8 +102,8 @@ void    GetEventsCountsUni(void)
     InitPushUni();
 
     PushChar(bInBuff7);
-    PushInt(GetMaxRecordsCount(bInBuff7));
-    PushInt(GetRecordsCount(bInBuff7));
+    PushIntBig(GetMaxRecordsCount(bInBuff7));
+    PushIntBig(GetRecordsCount(bInBuff7));
     
     time ti = *GetCurrTimeDate();
     ulong dw = DateToDayIndex(ti);
@@ -111,7 +111,7 @@ void    GetEventsCountsUni(void)
     uint i;
     for (i=0; i<0x100*bInBuffA+bInBuffB; i++)
     {
-      PushInt(0);
+      PushIntBig(0);
       PushChar(ti.bDay);
       PushChar(ti.bMonth);
 

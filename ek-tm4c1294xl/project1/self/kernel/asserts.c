@@ -61,14 +61,14 @@ void    OutAsserts(void)
 {
   InitPushCRC();
 
-  PushLong(dwAssertsIdx);
+  PushLongBig(dwAssertsIdx);
 
   uchar i;
   for (i=0; i<ASSERTS_SIZE; i++)
   {
-    PushInt(mpAsserts[i].iwEvent);
+    PushIntBig(mpAsserts[i].iwEvent);
     PushTime(mpAsserts[i].tiEvent);
-    PushLong(mpAsserts[i].dwLine);
+    PushLongBig(mpAsserts[i].dwLine);
     Push(mpAsserts[i].szFileName, FILE_NAME_SIZE);
   }
 

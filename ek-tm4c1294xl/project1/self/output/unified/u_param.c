@@ -239,7 +239,7 @@ uint    i,j;
     j += i;
 
     InitPushUni();
-    PushInt(cwParamTim*cbDevicesUni);
+    PushIntBig(cwParamTim*cbDevicesUni);
     uint wSize = 2;
 
     time ti;
@@ -253,7 +253,7 @@ uint    i,j;
 
       ti = GetTimeParamUni(iwTim);
 
-      PushInt(ibCan);
+      PushIntBig(ibCan);
       Push(&ti, sizeof(time));
       wSize += 2+6;
 

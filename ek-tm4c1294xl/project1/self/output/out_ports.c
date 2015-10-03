@@ -26,13 +26,13 @@ uchar i;
     Push(&mppoPorts[i], sizeof(port));
 
   for (i=0; i<bPORTS; i++) {
-    PushInt(mpwMinorInDelay[i]);
-    PushLong(GetMinorDelay(i));
+    PushIntBig(mpwMinorInDelay[i]);
+    PushLongBig(GetMinorDelay(i));
   }
 
   for (i=0; i<bPORTS; i++) {
-    PushInt(mpwMajorInDelay[i]);
-    PushLong(GetMajorDelay(i));
+    PushIntBig(mpwMajorInDelay[i]);
+    PushLongBig(GetMajorDelay(i));
   }
 
   for (i=0; i<bPORTS; i++)
@@ -44,9 +44,9 @@ uchar i;
   for (i=0; i<bPORTS; i++)
     PushBool(mpboLocalDisable[i]);
 
-  PushInt(GetCurr());
-  PushInt(GetPause());
-  PushInt(GetNext());
+  PushIntBig(GetCurr());
+  PushIntBig(GetPause());
+  PushIntBig(GetNext());
 
   PushChar(1);
 
@@ -54,7 +54,7 @@ uchar i;
 
   PushChar(bInputModeReset);
   PushTime(tiInputModeReset);
-  PushLong(dwInputModeReset);
+  PushLongBig(dwInputModeReset);
 
   Output(100);
 }
@@ -67,7 +67,7 @@ void    OutOutputDelay(void)
 
   uchar p;
   for (p=0; p<bPORTS; p++)
-    PushInt(mpwOutputDelay[p]);
+    PushIntBig(mpwOutputDelay[p]);
 
   Output(sizeof(mpwOutputDelay));
 }

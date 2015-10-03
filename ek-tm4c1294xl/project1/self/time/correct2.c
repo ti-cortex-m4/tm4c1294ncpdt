@@ -118,13 +118,13 @@ void    OutCorrectExt21(void)
 
   PushBool(boCorrect2Flag);
   Push(&mpbPassCorrect2, sizeof(mpbPassCorrect2));
-  PushIntArray(mpcwCorrect2Status15, 15);
+  PushIntBigArray(mpcwCorrect2Status15, 15);
 
-  PushLong(cdwCorrect20);
-  PushLong(cdwCorrect21);
-  PushLong(cdwCorrect22);
-  PushLong(cdwCorrect23);
-  PushLong(cdwCorrect24);
+  PushLongBig(cdwCorrect20);
+  PushLongBig(cdwCorrect21);
+  PushLongBig(cdwCorrect22);
+  PushLongBig(cdwCorrect23);
+  PushLongBig(cdwCorrect24);
 
   Output(100);
 }

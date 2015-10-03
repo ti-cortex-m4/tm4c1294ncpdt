@@ -24,7 +24,7 @@ void    OutImpMntCurrCan(void)
     if (bInBuff5 < bCANALS)
     {
       InitPushPtr();
-      OutptrOutBuff(PushInt(mpwImpMntCan[ ibSoftMnt ][ bInBuff5 ]));
+      OutptrOutBuff(PushIntBig(mpwImpMntCan[ ibSoftMnt ][ bInBuff5 ]));
     }
     else Result(bRES_BADADDRESS);
   }
@@ -42,7 +42,7 @@ void    OutImpMntCurrCanAll(void)
     uchar c;
     for (c=0; c<bCANALS; c++)
     {
-      wSize += PushInt(mpwImpMntCan[ ibSoftMnt ][ c ]);
+      wSize += PushIntBig(mpwImpMntCan[ ibSoftMnt ][ c ]);
     }
 
     OutptrOutBuff(wSize);
@@ -104,7 +104,7 @@ void    OutImpMntCanExt(void)
       {
         if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
         {
-          wSize += PushInt(mpwImpMntCan[ PrevSoftMnt() ][ c ]);
+          wSize += PushIntBig(mpwImpMntCan[ PrevSoftMnt() ][ c ]);
         }
       }
     }
@@ -154,7 +154,7 @@ void    OutImpCanMntExt(void)
   {
     if (LoadImpMnt((bMINUTES+iwHardMnt-1) % bMINUTES) == false) { Result(bRES_BADFLASH); return; }
 
-    PushIntArray(mpwImpMntCan[ PrevSoftMnt() ], bCANALS);
+    PushIntBigArray(mpwImpMntCan[ PrevSoftMnt() ], bCANALS);
     OutptrOutBuff(sizeof(uint)*bCANALS);
   }
 }

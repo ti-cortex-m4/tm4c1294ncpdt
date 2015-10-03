@@ -47,7 +47,7 @@ void    OutExtended31(void)
         default: ASSERT(false);
       }
 
-      wSize += PushLong(dw);
+      wSize += PushLongBig(dw);
       wSize += PushTime(EventIndexToDate(dw));
     }
 
