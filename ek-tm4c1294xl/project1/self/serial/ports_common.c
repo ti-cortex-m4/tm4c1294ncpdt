@@ -48,6 +48,19 @@ uchar   InBuff(uint  i)
 }
 
 
+uint    InBuffIntBig(uint  i)
+{
+  return InBuff(i)*0x100 + InBuff(i+1);
+}
+
+
+uint    InBuffIntLtl(uint  i)
+{
+  return InBuff(i) + InBuff(i+1)*0x100;
+}
+
+
+
 uint    CountInBuff(void)
 {
   switch (ibPort)
