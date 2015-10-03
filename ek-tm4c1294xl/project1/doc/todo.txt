@@ -79,5 +79,7 @@ delphi конфигурация GPIO
 http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0349a/Babjdbff.html
 
 GetInBuff(1) -> GetInBuffInt[Big|Low]End(1)
+InBuff -> InBuffChar
+remove GetInBuff
 
 msg_limit
