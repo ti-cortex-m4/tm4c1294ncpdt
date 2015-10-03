@@ -17,7 +17,7 @@ void    Pop(void  *pbData, uint  wSize);
 uchar   PopChar(void);
 uint    PopIntBig(void);
 uint    PopIntLtl(void);
-ulong   PopLong(void);
+ulong   PopLongBig(void);
 float   PopFloat(void);
 double  PopDouble(void);
 time    PopTime(void);

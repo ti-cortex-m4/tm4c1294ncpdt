@@ -118,7 +118,7 @@ uint    PopIntLtl(void)
 }
 
 
-ulong   PopLong(void)
+ulong   PopLongBig(void)
 {
   static combo32 co;
 

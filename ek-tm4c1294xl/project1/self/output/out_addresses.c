@@ -34,8 +34,8 @@ void    OutSetAddress(void)
     {
       InitPop(7);
 
-      mpdwAddress1[bInBuff6] = PopLong();
-      mpdwAddress2[bInBuff6] = PopLong();
+      mpdwAddress1[bInBuff6] = PopLongBig();
+      mpdwAddress2[bInBuff6] = PopLongBig();
 
       if (bInBuff6 == bCANALS - 1)
       {

@@ -78,8 +78,6 @@ delphi конфигурация GPIO
 
 http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0349a/Babjdbff.html
 
-[Push|Pop][Int|Long]BigLtl
 GetInBuff(1) -> GetInBuffInt[Big|Low]End(1)
-PopLong ???
 
 msg_limit
