@@ -43,7 +43,7 @@ uchar   i,j;
 
   if ((GetInBuff(0) != 0x73) || (GetInBuff(1) != 0x55) || (GetInBuff(IndexInBuff()-1) != 0x55))
     return;
-
+/*
   if ((GetInBuff(6) & 0xF0) != 0x50)
   {
     mpcwErrorLink[ibDig]++;
@@ -77,7 +77,7 @@ uchar   i,j;
       continue;
     }
   }
-
+*/
   mpSerial[ibPort] = SER_POSTINPUT_MASTER;
 }
 
