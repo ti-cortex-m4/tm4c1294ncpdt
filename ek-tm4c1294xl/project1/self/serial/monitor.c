@@ -29,11 +29,19 @@ void    InitMonitor(void)
 }
 
 
+bool    UseMonitor(void)
+{
+  return cwMonitorDelay > 0;
+}
+
+
 
 void    MonitorRepeat(void)
 {
-//  if (fMonitor == true)
-//    cbFlowDelay = cbMaxFlowDelay;
+  if (UseMonitor())
+  {
+    cwMonitorDelay = 60*5;
+  }
 }
 
 
@@ -56,7 +64,7 @@ void    MonitorOpen(uchar  ibPrt)
   }
 
   fMonitor = true;
-  cwMonitorDelay = 60*5;
+  MonitorRepeat();
 }
 
 
@@ -82,13 +90,6 @@ void    DelayMonitor_1Hz(void)
     MonitorClose();
   else
     cwMonitorDelay--;
-}
-
-
-
-bool    UseMonitor(void)
-{
-  return cwMonitorDelay > 0;
 }
 
 
