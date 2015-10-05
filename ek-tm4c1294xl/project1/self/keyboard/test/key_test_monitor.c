@@ -28,6 +28,11 @@ void    key_TestMonitor(void)
       Clear();
     }
   }
+  else if (bKey == bKEY_MINUS)
+  {
+    MonitorClose();
+  }
+  else Beep();
 }
 
 
