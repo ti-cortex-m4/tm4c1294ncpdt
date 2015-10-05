@@ -39,7 +39,6 @@ remove external headers
 
 hhr100
 params
-! вывод дампа обмена со счетчиком
 SMK
 realtime
 

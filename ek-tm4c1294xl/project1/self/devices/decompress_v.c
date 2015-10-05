@@ -12,6 +12,7 @@ DECOMPRESS_V!C
 #include "../kernel/crc_s.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
+#include "../serial/monitor.h"
 #include "../devices/devices.h"
 #include "../display/display.h"
 #include "../time/delay.h"
@@ -57,6 +58,12 @@ uchar   i,j;
   bool f = 1;
   while ((f == 1) && (IndexInBuff() > 15) && (IndexInBuff() != (GetInBuff(2) & 0x0F) + 15))
   {
+    if (UseMonitor())
+    {
+      MonitorString("\n Decompress");
+      MonitorIn();
+    }
+
     f = 0;
 
     j = RepackV(0x73, 0x11);
