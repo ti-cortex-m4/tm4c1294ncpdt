@@ -13,6 +13,8 @@ uint    InBuffIntLtl(uint  i);
 uint    CountInBuff(void);
 uint    IndexInBuff(void);
 
+uchar   OutBuff(uint  i);
+
 void    MakeCRC16OutBuff(uchar  bOffset, uint  wSize);
 void    MakeCRC16InBuff(uchar  bOffset, uint  wSize);
 
