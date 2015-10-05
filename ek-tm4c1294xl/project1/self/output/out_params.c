@@ -125,7 +125,7 @@ void    OutGetParamCurr(void)
     InitPushCRC();
     Push(&tiCurr, sizeof(time));
 
-    boBeginParam = false;
+    fBeginParam = false;
 
     bool f = 1;
 
@@ -252,7 +252,7 @@ void    OutGetParamsAll(void)
     InitPushCRC();
     Push(&tiCurr, sizeof(time));
 
-    boBeginParam = false;
+    fBeginParam = false;
 
     bool f = 1;
 

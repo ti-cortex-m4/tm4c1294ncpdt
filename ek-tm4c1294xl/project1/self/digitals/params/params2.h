@@ -4,7 +4,7 @@ PARAMS2!H
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                    boBeginParam;
+extern  bool                    fBeginParam;
 
 
 

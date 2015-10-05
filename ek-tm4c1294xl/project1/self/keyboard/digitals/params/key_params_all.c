@@ -37,7 +37,7 @@ static void ShowParamCurr(void)
     ShowLo(szNoParam);
   else
   {
-    boBeginParam = false;
+    fBeginParam = false;
 
     LoadCurrParam(iwPrm);
     ibPort = diCurr.ibPort;
