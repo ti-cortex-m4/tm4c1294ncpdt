@@ -9,6 +9,7 @@ MONITOR.C
 #include "../../tm4c1294xl/driverlib/interrupt.h"
 #include "inc/hw_ints.h"
 #include "../time/rtc.h"
+#include "speeds.h"
 #include "ports_common.h"
 #include "monitor.h"
 
@@ -18,8 +19,6 @@ MONITOR.C
 
 
 
-static volatile bool    fMonitor;
-
 static volatile uint    cwMonitorDelay;
 
 static char             ibMonitorPort;
@@ -28,14 +27,13 @@ static char             ibMonitorPort;
 
 void    InitMonitor(void)
 {
-  fMonitor = false;
   cwMonitorDelay = 0;
 }
 
 
 bool    UseMonitor(void)
 {
-  return (fMonitor == true) && (cwMonitorDelay > 0);
+  return cwMonitorDelay > 0;
 }
 
 
@@ -71,24 +69,22 @@ void    MonitorOpen(uchar  ibPrt)
     ASSERT(false);
   }
 
-  fMonitor = true;
   cwMonitorDelay = MONITOR_DELAY;
 }
 
 
 void    MonitorClose(void)
 {
-  fMonitor = false;
   cwMonitorDelay = 0;
 
   if (ibMonitorPort == 0)
   {
-    SetSpeed0();
+    SetSpeed(0);
     IntEnable(INT_UART0);
   }
   else if (ibMonitorPort == 1)
   {
-    SetSpeed1();
+    SetSpeed(1);
     IntEnable(INT_UART1);
   }
 }
@@ -166,19 +162,19 @@ void    MonitorTime(time  ti)
 
 
 
-void    MonitorOut(uint  cwIn, uchar  cbOut)
+void    MonitorOut(uint  cwIn, uint  cwOut)
 {
   if (UseMonitor())
   {
     MonitorRepeat();
 
-    MonitorString("\n\n 1 Output: out ="); MonitorIntDec(cbOut);
+    MonitorString("\n\n Output: out ="); MonitorIntDec(cwOut);
     MonitorString(" in ="); MonitorIntDec(cwIn);
-    MonitorString(" "); MonitorTime(*GetCurrTimeDate());
+    MonitorString("  "); MonitorTime(*GetCurrTimeDate());
     MonitorString("\n");
 
-    uchar i;
-    for (i=0; i<cbOut; i++)
+    uint i;
+    for (i=0; i<cwOut; i++)
     {
       MonitorCharHex(OutBuff(i));
     }
@@ -190,8 +186,8 @@ void    MonitorIn(void)
 {
   if (UseMonitor())
   {
-    MonitorString("\n 2 Input: in ="); MonitorIntDec(IndexInBuff());
-    MonitorString(" "); MonitorTime(*GetCurrTimeDate());
+    MonitorString("\n Input: in ="); MonitorIntDec(IndexInBuff());
+    MonitorString("  "); MonitorTime(*GetCurrTimeDate());
     MonitorString("\n");
 
     uint i;
