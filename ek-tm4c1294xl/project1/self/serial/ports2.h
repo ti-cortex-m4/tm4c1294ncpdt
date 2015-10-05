@@ -4,7 +4,6 @@ PORTS2!H
 
 ------------------------------------------------------------------------------*/
 
-uchar   GetOutBuff(uint  i);
 void    SetOutBuff(uint  i, uchar  bT);
 
 uchar   GetInBuff(uint  i);

@@ -43,7 +43,7 @@ void    QueryS(uchar  cbIn, uchar  cbOut)
 
 
   for (i=0; i<=cbOut-1; i++)
-    mpbOutBuffSave[i] = GetOutBuff(i);
+    mpbOutBuffSave[i] = OutBuff(i);
 
   uchar j = 0;
   SetOutBuff(j++, 0xC0);

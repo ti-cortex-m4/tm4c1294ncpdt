@@ -17,19 +17,6 @@ PORTS2!C
 
 
 
-uchar   GetOutBuff(uint  i)
-{
-  switch (ibPort)
-  {
-    case 0:  return( mpbOutBuff0[i] );
-    case 1:  return( mpbOutBuff1[i] );
-    case 2:  return( mpbOutBuff2[i] );
-    case 3:  return( mpbOutBuff3[i] );
-    default: ASSERT(false); return 0;
-  }
-}
-
-
 void    SetOutBuff(uint  i, uchar  bT)
 {
   switch (ibPort)

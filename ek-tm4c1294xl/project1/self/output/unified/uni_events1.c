@@ -22,7 +22,7 @@ UNI_EVENTS1,C
 void    IncEventsCount(uint  i)
 {
   i = 6+1+2+2+i*4;
-  uint w = 0x100*GetOutBuff(i+0)+GetOutBuff(i+1);
+  uint w = 0x100*OutBuff(i+0)+OutBuff(i+1);
   w++;
   SetOutBuff(i+0, w / 0x100);
   SetOutBuff(i+1, w % 0x100);
