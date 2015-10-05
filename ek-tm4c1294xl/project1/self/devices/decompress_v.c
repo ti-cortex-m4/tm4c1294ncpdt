@@ -18,7 +18,6 @@ DECOMPRESS_V!C
 #include "decompress_v.h"
 
 
-void  DebugIn(void);
 
 #ifndef SKIP_V
 
@@ -45,7 +44,7 @@ uchar   i,j;
   if ((GetInBuff(0) != 0x73) || (GetInBuff(1) != 0x55) || (GetInBuff(IndexInBuff()-1) != 0x55))
     return;
 
-  DebugIn();
+  MonitorIn();
 
   if (GetInBuff(12) != 0)
   {

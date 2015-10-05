@@ -31,7 +31,7 @@ void    InitMonitor(void)
 
 bool    UseMonitor(void)
 {
-  return cwMonitorDelay > 0;
+  return fMonitor = true && (cwMonitorDelay > 0);
 }
 
 
@@ -51,11 +51,15 @@ void    MonitorOpen(uchar  ibPrt)
   if (ibPrt == 0)
   {
     IntDisable(INT_UART0);
+    UARTStdioConfig(0, 38400, 120000000);
+
     ibMonitorPort = 0;
   }
   else if (ibPrt == 1)
   {
     IntDisable(INT_UART1);
+    UARTStdioConfig(1, 38400, 120000000);
+
     ibMonitorPort = 1;
   }
   else
@@ -64,21 +68,21 @@ void    MonitorOpen(uchar  ibPrt)
   }
 
   fMonitor = true;
-  MonitorRepeat();
+  cwMonitorDelay = 60*5;
 }
 
 
 void    MonitorClose(void)
 {
+  fMonitor = false;
+
   if (ibMonitorPort == 0)
   {
     IntEnable(INT_UART0);
-    ibMonitorPort = 0;
   }
   else if (ibMonitorPort == 1)
   {
     IntEnable(INT_UART1);
-    ibMonitorPort = 1;
   }
 }
 
@@ -167,7 +171,10 @@ void    MonitorOut(uint  cwIn, uchar  cbOut)
     MonitorString("\n");
 
     uchar i;
-    for (i=0; i<cbOut; i++) MonitorCharHex(OutBuff(i));
+    for (i=0; i<cbOut; i++)
+    {
+      MonitorCharHex(OutBuff(i));
+    }
   }
 }
 
@@ -181,7 +188,10 @@ void    MonitorIn(void)
     MonitorString("\n");
 
     uint i;
-    for (i=0; i<IndexInBuff(); i++) MonitorCharHex(InBuff(i));
+    for (i=0; i<IndexInBuff(); i++)
+    {
+      MonitorCharHex(InBuff(i));
+    }
   }
 }
 
