@@ -14,6 +14,10 @@ MONITOR.C
 
 
 
+#define MONITOR_DELAY   60*5
+
+
+
 static volatile bool    fMonitor;
 
 static volatile uint    cwMonitorDelay;
@@ -31,7 +35,7 @@ void    InitMonitor(void)
 
 bool    UseMonitor(void)
 {
-  return fMonitor = true && (cwMonitorDelay > 0);
+  return (fMonitor == true) && (cwMonitorDelay > 0);
 }
 
 
@@ -40,7 +44,7 @@ void    MonitorRepeat(void)
 {
   if (UseMonitor())
   {
-    cwMonitorDelay = 60*5;
+    cwMonitorDelay = MONITOR_DELAY;
   }
 }
 
@@ -68,20 +72,23 @@ void    MonitorOpen(uchar  ibPrt)
   }
 
   fMonitor = true;
-  cwMonitorDelay = 60*5;
+  cwMonitorDelay = MONITOR_DELAY;
 }
 
 
 void    MonitorClose(void)
 {
   fMonitor = false;
+  cwMonitorDelay = 0;
 
   if (ibMonitorPort == 0)
   {
+    SetSpeed0();
     IntEnable(INT_UART0);
   }
   else if (ibMonitorPort == 1)
   {
+    SetSpeed1();
     IntEnable(INT_UART1);
   }
 }
@@ -165,7 +172,7 @@ void    MonitorOut(uint  cwIn, uchar  cbOut)
   {
     MonitorRepeat();
 
-    MonitorString("\n\n Output: out ="); MonitorIntDec(cbOut);
+    MonitorString("\n\n 1 Output: out ="); MonitorIntDec(cbOut);
     MonitorString(" in ="); MonitorIntDec(cwIn);
     MonitorString(" "); MonitorTime(*GetCurrTimeDate());
     MonitorString("\n");
@@ -183,7 +190,7 @@ void    MonitorIn(void)
 {
   if (UseMonitor())
   {
-    MonitorString("\n Input: in ="); MonitorIntDec(IndexInBuff());
+    MonitorString("\n 2 Input: in ="); MonitorIntDec(IndexInBuff());
     MonitorString(" "); MonitorTime(*GetCurrTimeDate());
     MonitorString("\n");
 

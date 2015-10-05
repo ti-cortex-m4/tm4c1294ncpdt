@@ -9,7 +9,9 @@ MONITOR.H
 
 
 void    InitMonitor(void);
+
 void    MonitorOpen(uchar  ibPrt);
+void    MonitorClose(void);
 
 void    DelayMonitor_1Hz(void);
 
