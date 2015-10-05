@@ -18,6 +18,7 @@ DECOMPRESS_V!C
 #include "decompress_v.h"
 
 
+void  DebugIn(void);
 
 #ifndef SKIP_V
 
@@ -43,8 +44,10 @@ uchar   i,j;
 
   if ((GetInBuff(0) != 0x73) || (GetInBuff(1) != 0x55) || (GetInBuff(IndexInBuff()-1) != 0x55))
     return;
-/*
-  if ((GetInBuff(6) & 0xF0) != 0x50)
+
+  DebugIn();
+
+  if (GetInBuff(12) != 0)
   {
     mpcwErrorLink[ibDig]++;
 
@@ -53,31 +56,31 @@ uchar   i,j;
   }
 
   bool f = 1;
-  while ((f == 1) && (IndexInBuff() > 11) && (IndexInBuff() != (GetInBuff(6) & 0x0F) + 11))
+  while ((f == 1) && (IndexInBuff() > 15) && (IndexInBuff() != (GetInBuff(2) & 0x0F) + 15))
   {
     f = 0;
 
-    j = RepackV(0xDB, 0xDD);
+    j = RepackV(0x73, 0x11);
     if (j != 0)
     {
-      SetInBuff(j, 0xDB);
+      SetInBuff(j, 0x55);
       for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, GetInBuff(i+1));
       SetIndexInBuff(IndexInBuff()-1);
       f = 1;
       continue;
     }
 
-    j = RepackV(0xDB, 0xDC);
+    j = RepackV(0x73, 0x22);
     if (j != 0)
     {
-      SetInBuff(j, 0xC0);
+      SetInBuff(j, 0x73);
       for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, GetInBuff(i+1));
       SetIndexInBuff(IndexInBuff()-1);
       f = 1;
       continue;
     }
   }
-*/
+
   mpSerial[ibPort] = SER_POSTINPUT_MASTER;
 }
 
@@ -85,21 +88,20 @@ uchar   i,j;
 
 static uchar CheckV(void)
 {
-  if (GetInBuff(0) != 0x73) return 1;
-  if (GetInBuff(1) != 0x55) return 2;
-  if (GetInBuff(IndexInBuff()-1) != 0x55) return 3;
+  if (InBuff(0) != 0x73) return 1;
+  if (InBuff(1) != 0x55) return 2;
 
-  if (GetInBuff(1) != 0x48) return 4;
+  if ((IndexInBuff() >= 15) && (IndexInBuff() != (GetInBuff(2) & 0x0F) + 15)) return 3;
 
-  uint i = mpdwAddress1[diCurr.bAddress-1] % 0x10000;
-  if (GetInBuff(4) != (i % 0x100)) return 5;
-  if (GetInBuff(5) != (i / 0x100)) return 6;
+  if (InBuff(3) != 0) return 4;
 
-  i = wPrivate;
-  if (GetInBuff(2) != (i % 0x100)) return 7;
-  if (GetInBuff(3) != (i / 0x100)) return 8;
+  if (InBuffIntLtl(4) != wPrivate) return 5;
+  if (InBuffIntLtl(6) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 6;
 
-  if (MakeCrcVInBuff(2, IndexInBuff()-2) != 0) return 9;
+  if (InBuff(8) != OutBuff(8)) return 7;
+
+  if (MakeCrcVInBuff(2, IndexInBuff()-3) != 0) return 8;
+  if (InBuff(IndexInBuff()-1) != 0x55) return 9;
 
   return 0;
 }
@@ -111,7 +113,7 @@ uchar   ChecksumV(void)
   if (i != 0)
   {
     Clear(); sprintf(szLo+1,"код ошибки: %u",i);
-    Delay(500);
+    DelayInf();
   }
 
   return i;
