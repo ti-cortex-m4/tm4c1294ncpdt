@@ -29,7 +29,7 @@ PARAMS2!C
 
 
 
-bool                    boBeginParam;
+bool                    fBeginParam;
 
 static float            reParamDiv;
 
@@ -78,13 +78,13 @@ uchar   i;
 
   Clear();
 
-  if (boBeginParam == false)
+  if (fBeginParam == false)
   {
     DelayOff();
     QueryOpenA();
 
     if (Input() != SER_GOODCHECK) return(0);
-    boBeginParam = true;
+    fBeginParam = true;
   }
 
   ShowPercent(100);
@@ -197,13 +197,13 @@ uchar   i;
 
   Clear();
 
-  if (boBeginParam == false)
+  if (fBeginParam == false)
   {
     DelayOff();
     QueryOpenB();
 
     if (Input() != SER_GOODCHECK) return(0);
-    boBeginParam = true;
+    fBeginParam = true;
   }
 
   ShowPercent(100);
@@ -315,13 +315,13 @@ bool    ReadParamC(void)
 {
   Clear();
 
-  if (boBeginParam == false)
+  if (fBeginParam == false)
   {
     DelayOff();
     QueryOpenC();
 
     if (RevInput() != SER_GOODCHECK) return(0);
-    boBeginParam = true;
+    fBeginParam = true;
   }
 
   ShowPercent(100);
@@ -355,7 +355,7 @@ bool    ReadParamC(void)
 
     case PAR_F  : QueryArrayC(13,1); break;
 
-    default:              return(0);
+    default: return(0);
    }
 
 
@@ -387,7 +387,7 @@ bool    ReadParamC(void)
 
     case PAR_F  : ReadArrayC(4);  break;
 
-    default:           return(0);
+    default: return(0);
    }
 
   switch (diCurr.ibLine)
@@ -461,7 +461,7 @@ bool    ReadParamG(void)
 {
   Clear();
 
-  if (boBeginParam == false)
+  if (fBeginParam == false)
   {
     DelayOff();
     QueryOpenG();
@@ -476,7 +476,7 @@ bool    ReadParamG(void)
 
     if (CodInput() != SER_GOODCHECK) return(0);
 
-    boBeginParam = true;
+    fBeginParam = true;
   }
 
   switch (diCurr.ibLine)
@@ -629,7 +629,7 @@ bool    ReadParamP(void)
 {
   Clear();
 
-  if (boBeginParam == false)
+  if (fBeginParam == false)
   {
     if (OpenDeviceP() == 0) return(0);
 
@@ -650,7 +650,7 @@ bool    ReadParamP(void)
     if (ElsInput(0) != SER_GOODCHECK) return(0);
 
     QueryCloseP();
-    boBeginParam = true;
+    fBeginParam = true;
   }
 
   switch (diCurr.ibLine)
@@ -734,7 +734,7 @@ bool    ReadParamT(void)
 {
   Clear();
 
-  if (boBeginParam == false)
+  if (fBeginParam == false)
   {
     DelayOff();
     QueryParamT1();
@@ -754,7 +754,7 @@ bool    ReadParamT(void)
     if (TxtInput() != SER_GOODCHECK) return(0);
     ReadParamT3();
 
-    boBeginParam = true;
+    fBeginParam = true;
   }
 
   switch (diCurr.ibLine)
@@ -833,7 +833,7 @@ bool    ReadParamU(void)
 {
   Clear();
 
-  if (boBeginParam == false)
+  if (fBeginParam == false)
   {
     QueryCloseU();
     QueryParamU1();
@@ -863,7 +863,7 @@ bool    ReadParamU(void)
     ReadParamU4();
 
 
-    boBeginParam = true;
+    fBeginParam = true;
   }
 
   switch (diCurr.ibLine)
@@ -969,7 +969,7 @@ void    MakeExtended2(void)
     Clear(); sprintf(szLo+14,"%2u",ibDig+1);
     DelayInf();
 
-    boBeginParam = false;
+    fBeginParam = false;
 
     LoadPrevDigital(ibDig);
 
