@@ -1,23 +1,22 @@
 /*------------------------------------------------------------------------------
-KEY_MONITOR_RUN.C
+KEY_MONITOR_OPEN.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../console.h"
-#include "key_monitor_run.h"
+#include "../../console.h"
+#include "../../serial/monitor.h"
+#include "key_monitor_open.h"
 
 
 
 //                                          0123456789ABCDEF
-static char const       szPortFrom[]     = "Транзит: запуск ",
-                        szPortTo[]       = "Транзит: порт   ",
-                        szMaskPortTo[]   = "      ___       ";
+static char const       szPortFrom[]     = "Монитор: запуск ";
 
 
 
-void    key_MonitorRun(void)
+void    key_MonitorOpen(void)
 {
 static uchar ibPrt;
 
@@ -36,7 +35,7 @@ static uchar ibPrt;
       {
         if ((ibPrt == 0) || (ibPrt == 1))
         {
-          StartMonitor(ibPrt);
+          MonitorOpen(ibPrt);
           OK();
         }
         else

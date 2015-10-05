@@ -72,6 +72,7 @@ MAIN,C
 #include "serial/slave_modem.h"
 #include "serial/bulk.h"
 #include "serial/flow.h"
+#include "serial/monitor.h"
 #include "output/esc/esc.h"
 #include "output/esc/response_esc.h"
 #include "output/unified/uni.h"
@@ -144,6 +145,7 @@ int     main(void)
   InitEsc();
   InitUni();
   InitFlow();
+  InitMonitor();
 
   InitSlide();
 

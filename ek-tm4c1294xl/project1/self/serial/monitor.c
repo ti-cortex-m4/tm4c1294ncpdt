@@ -5,6 +5,11 @@ MONITOR.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../../tm4c1294xl/utils/uartstdio.h"
+#include "../../tm4c1294xl/driverlib/interrupt.h"
+#include "inc/hw_ints.h"
+#include "../time/rtc.h"
+#include "ports_common.h"
 #include "monitor.h"
 
 
@@ -12,6 +17,8 @@ MONITOR.C
 static volatile bool    fMonitor;
 
 static volatile uint    cwMonitorDelay;
+
+static char             ibMonitorPort;
 
 
 
@@ -23,29 +30,56 @@ void    InitMonitor(void)
 
 
 
-void    RepeatMonitor(void)
+void    MonitorRepeat(void)
 {
-  if (fMonitor == true)
-    cbFlowDelay = cbMaxFlowDelay;
+//  if (fMonitor == true)
+//    cbFlowDelay = cbMaxFlowDelay;
 }
 
 
-void    CloseMonitor(void)
-{
-  if (fMonitor == true)
-  {
-    cwMonitorDelay = 0;
-    fMonitor = false;
 
-    //
+void    MonitorOpen(uchar  ibPrt)
+{
+  if (ibPrt == 0)
+  {
+    IntDisable(INT_UART0);
+    ibMonitorPort = 0;
+  }
+  else if (ibPrt == 1)
+  {
+    IntDisable(INT_UART1);
+    ibMonitorPort = 1;
+  }
+  else
+  {
+    ASSERT(false);
+  }
+
+  fMonitor = true;
+  cwMonitorDelay = 60*5;
+}
+
+
+void    MonitorClose(void)
+{
+  if (ibMonitorPort == 0)
+  {
+    IntEnable(INT_UART0);
+    ibMonitorPort = 0;
+  }
+  else if (ibMonitorPort == 1)
+  {
+    IntEnable(INT_UART1);
+    ibMonitorPort = 1;
   }
 }
+
 
 
 void    DelayMonitor_1Hz(void)
 {
   if (cwMonitorDelay == 0)
-    CloseMonitor();
+    MonitorClose();
   else
     cwMonitorDelay--;
 }
@@ -54,61 +88,52 @@ void    DelayMonitor_1Hz(void)
 
 bool    UseMonitor(void)
 {
-  return false;
+  return cwMonitorDelay > 0;
 }
 
-/*
-void    MonitorStart(void) {
- if (UseMonitor()) {
-
-  IntDisable(INT_UART0);
-  UARTStdioConfig(0, 9600, 120000000);
-
-  }
-}
-
-
-void    MonitorStop(void) {
- if (UseMonitor()) {
-
-  IntEnable(INT_UART0);
-
-  }
-}
-*/
 
 
 void    MonitorString(const char  *psz)
 {
-  if (UseMonitor()) {
+  if (UseMonitor())
+  {
     UARTprintf(psz);
   }
 }
 
 
-void    MonitorChar(uchar  b)
+void    MonitorCharDec(uchar  b)
 {
   if (UseMonitor())
   {
-    UARTprintf(" %u ", b);
+    UARTprintf(" %u", b);
   }
 }
 
 
-void    MonitorInt(uint  w)
+void    MonitorCharHex(uchar  b)
 {
   if (UseMonitor())
   {
-    UARTprintf(" %u ", w);
+    UARTprintf(" %02X", b);
   }
 }
 
 
-void    MonitorLong(ulong  dw)
+void    MonitorIntDec(uint  w)
 {
   if (UseMonitor())
   {
-    UARTprintf(" %u ", dw);
+    UARTprintf(" %u", w);
+  }
+}
+
+
+void    MonitorLongDec(ulong  dw)
+{
+  if (UseMonitor())
+  {
+    UARTprintf(" %u", dw);
   }
 }
 
@@ -125,4 +150,43 @@ void    MonitorTime(time  ti)
                ti.bMonth,
                ti.bYear);
   }
+}
+
+
+
+void    MonitorOut(uint  cwIn, uchar  cbOut)
+{
+  if (UseMonitor())
+  {
+    MonitorRepeat();
+
+    MonitorString("\n\n Output: out ="); MonitorIntDec(cbOut);
+    MonitorString(" in ="); MonitorIntDec(cwIn);
+    MonitorString(" "); MonitorTime(*GetCurrTimeDate());
+    MonitorString("\n");
+
+    uchar i;
+    for (i=0; i<cbOut; i++) MonitorCharHex(OutBuff(i));
+  }
+}
+
+
+void    MonitorIn(void)
+{
+  if (UseMonitor())
+  {
+    MonitorString("\n Input: in ="); MonitorIntDec(IndexInBuff());
+    MonitorString(" "); MonitorTime(*GetCurrTimeDate());
+    MonitorString("\n");
+
+    uint i;
+    for (i=0; i<IndexInBuff(); i++) MonitorCharHex(InBuff(i));
+  }
+}
+
+
+
+uint    GetMonitorDelay(void)
+{
+  return cwMonitorDelay;
 }
