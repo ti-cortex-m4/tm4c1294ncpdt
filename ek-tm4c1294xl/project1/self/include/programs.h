@@ -277,7 +277,8 @@ PROGRAMS!H
 #define bTEST_KEYS                  801
 #define bTEST_RTC                   802
 #define bTEST_POWER_OFF             803
-#define wTEST_MONITOR               810
+#define wSET_MONITOR_OPEN           810
+#define wTEST_MONITOR               811
 
 
 #define wSET_OUTPUT_DELAY           298

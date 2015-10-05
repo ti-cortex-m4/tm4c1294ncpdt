@@ -6,6 +6,7 @@ PORTS_DEVICES.H
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_serial3.h"
 #include "../memory/mem_profile.h"
 #include "../keyboard/keyboard.h"
 #include "../hardware/watchdog.h"
@@ -22,42 +23,16 @@ PORTS_DEVICES.H
 #include "../kernel/crc_els.h"
 #include "../display/display.h"
 #include "../time/delay.h"
+#include "../serial/print2.h"
+#include "monitor.h"
 #include "ports.h"
 #include "ports_devices.h"
 
 
 
-/*
-void    DebugOut(uint  cwIn, uchar  cbOut)
-{
-uint i;
-
-  x_init();
-  x_str("\n\n Output: out ="); x_intdec(cbOut); x_str(" in ="); x_intdec(cwIn);
-
-  x_str(" "); x_time(*GetCurrTimeDate());
-  x_str("\n"); for (i=0; i<cbOut; i++) x_bytehex( mpbOutBuff3[i] );
-  x_str("\n"); for (i=0; i<cbOut; i++) x_bytechr( mpbOutBuff3[i] );
-}
-
-
-void  DebugIn(void)
-{
-uint i;
-
-  x_init();
-  x_str("\n Input: in ="); x_intdec(IndexInBuff());
-
-  x_str(" "); x_time(*GetCurrTimeDate());
-  x_str("\n"); for (i=0; i<IndexInBuff(); i++) x_bytehex( mpbInBuff3[i] );
-  x_str("\n"); for (i=0; i<IndexInBuff(); i++) x_bytechr( mpbInBuff3[i] );
-}
-*/
-
-
 void    Query(uint  cwIn, uchar  cbOut, bool  fMinor)
 {
-//  DebugOut(cwIn, cbOut);
+  MonitorOut(cwIn, cbOut);
 
   // при передаче порт переключается в ведущий режим из временного ведомого
   mpboLocal[ibPort] = false;
