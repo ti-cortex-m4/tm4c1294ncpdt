@@ -138,14 +138,14 @@ uchar   i;
 
   switch (diCurr.ibLine)
   {
-    case PAR_P  : 
-    case PAR_P1 : 
-    case PAR_P2 : 
+    case PAR_P  :
+    case PAR_P1 :
+    case PAR_P2 :
     case PAR_P3 : if (ReadArrayA() & 0x80) reValue *= -1; break;
 
-    case PAR_Q  : 
-    case PAR_Q1 : 
-    case PAR_Q2 : 
+    case PAR_Q  :
+    case PAR_Q1 :
+    case PAR_Q2 :
     case PAR_Q3 : if (ReadArrayA() & 0x40) reValue *= -1; break;
   }
 
@@ -257,18 +257,18 @@ uchar   i;
 
   switch (diCurr.ibLine)
   {
-    case PAR_P  : 
-    case PAR_P1 : 
-    case PAR_P2 : 
+    case PAR_P  :
+    case PAR_P1 :
+    case PAR_P2 :
     case PAR_P3 : if (ReadArrayB() & 0x80) reValue *= -1; break;
 
-    case PAR_Q  : 
-    case PAR_Q1 : 
-    case PAR_Q2 : 
+    case PAR_Q  :
+    case PAR_Q1 :
+    case PAR_Q2 :
     case PAR_Q3 : if (ReadArrayB() & 0x40) reValue *= -1; break;
 
-    case PAR_I1 : 
-    case PAR_I2 : 
+    case PAR_I1 :
+    case PAR_I2 :
     case PAR_I3 : if (boFixParamsBugs != false) reValue *= 1000; break;
   }
 
@@ -285,7 +285,7 @@ void    QueryArrayC(uchar  bT, uchar  bSize)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(bT);
 
@@ -301,10 +301,10 @@ void    ReadArrayC(uchar  bT)
 {
   InitPop(bT);
 
-  coEnergy.mpbBuff[3] = PopChar();
-  coEnergy.mpbBuff[2] = PopChar();
-  coEnergy.mpbBuff[1] = PopChar();
   coEnergy.mpbBuff[0] = PopChar();
+  coEnergy.mpbBuff[1] = PopChar();
+  coEnergy.mpbBuff[2] = PopChar();
+  coEnergy.mpbBuff[3] = PopChar();
 
   reValue = coEnergy.flBuff / reParamDiv;
 }
@@ -340,16 +340,16 @@ bool    ReadParamC(void)
     case PAR_Q2 :
     case PAR_Q3 : QueryArrayC(9,4);  break;
 
-    case PAR_U1 : 
-    case PAR_U2 : 
+    case PAR_U1 :
+    case PAR_U2 :
     case PAR_U3 : QueryArrayC(10,3); break;
 
-    case PAR_I1 : 
-    case PAR_I2 : 
+    case PAR_I1 :
+    case PAR_I2 :
     case PAR_I3 : QueryArrayC(11,3); break;
 
-    case PAR_C1 : 
-    case PAR_C2 : 
+    case PAR_C1 :
+    case PAR_C2 :
     case PAR_C3 : QueryArrayC(12,3); break;
 
     case PAR_F  : QueryArrayC(13,1); break;
@@ -429,7 +429,7 @@ void    QueryArrayG(void)
 
 void    ReadRealG(void)
 {
-  PopRealExt_G(); 
+  PopRealExt_G();
   if (reValue == 2) reValue = 0;
 }
 
@@ -531,7 +531,7 @@ void    QueryArrayM(void)
 
 void    ReadArrayM(void)
 {
-  InitPop(5);  
+  InitPop(5);
   reValue = 0.01*(FromBCD(PopChar())*100 + FromBCD(PopChar()));
 }
 
@@ -636,7 +636,7 @@ bool    ReadParamP(void)
     DelayOff();
     QueryArray2P();
 
-    if (ElsInput(0) != SER_GOODCHECK) return(0); 
+    if (ElsInput(0) != SER_GOODCHECK) return(0);
 
     ReadArray2P(0); mpreParamP[0] = reValue/10;
     ReadArray2P(1); mpreParamP[1] = reValue/10;
@@ -646,7 +646,7 @@ bool    ReadParamP(void)
     DelayOff();
     QueryArrayP();
 
-    if (ElsInput(0) != SER_GOODCHECK) return(0); 
+    if (ElsInput(0) != SER_GOODCHECK) return(0);
 
     QueryCloseP();
     boBeginParam = true;
@@ -762,7 +762,7 @@ bool    ReadParamT(void)
     case PAR_P1 : reValue = mpreParam[PAR_P1];  break;
     case PAR_P2 : reValue = mpreParam[PAR_P2];  break;
     case PAR_P3 : reValue = mpreParam[PAR_P3];  break;
-                                                 
+
     case PAR_Q  : reValue = mpreParam[PAR_Q];   break;
     case PAR_Q1 : reValue = mpreParam[PAR_Q1];  break;
     case PAR_Q2 : reValue = mpreParam[PAR_Q2];  break;
