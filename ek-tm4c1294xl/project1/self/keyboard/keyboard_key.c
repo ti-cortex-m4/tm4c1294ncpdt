@@ -78,6 +78,7 @@ KEYBOARD_KEY!C
 #include "test/key_test_flow.h"
 #include "test/key_test_ports_io.h"
 #include "test/key_test_uni.h"
+#include "test/key_test_monitor.h"
 #include "test/key_test_impulses.h"
 #include "test/key_test_keys.h"
 #include "test/key_test_rtc.h"
@@ -293,6 +294,7 @@ void    Keyboard_Key(void)
       case bTEST_FLOW:          key_TestFlow();         break;
       case bTEST_PORTS_IO:      key_TestPortsIO();      break;
       case bTEST_UNI:           key_TestUni();          break;
+      case wTEST_MONITOR:       key_TestMonitor();      break;
 
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
@@ -580,6 +582,7 @@ void    Keyboard_Key(void)
       case bTEST_FLOW:          key_TestFlow();         break;
       case bTEST_PORTS_IO:      key_TestPortsIO();      break;
       case bTEST_UNI:           key_TestUni();          break;
+      case wTEST_MONITOR:       key_TestMonitor();      break;
 
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
@@ -786,6 +789,7 @@ void    Keyboard_Key(void)
       case bTEST_FLOW:          key_TestFlow();         break;
       case bTEST_PORTS_IO:      key_TestPortsIO();      break;
       case bTEST_UNI:           key_TestUni();          break;
+      case wTEST_MONITOR:       key_TestMonitor();      break;
 
       case bTEST_IMPULSES:      key_TestImpulses();     break;
       case bTEST_KEYS:          key_TestKeys();         break;
