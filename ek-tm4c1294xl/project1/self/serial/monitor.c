@@ -19,21 +19,24 @@ MONITOR.C
 
 
 
+static volatile bool    fMonitor;
+
 static volatile uint    cwMonitorDelay;
 
-static char             ibMonitorPort;
+static volatile uchar   ibMonitorPort;
 
 
 
 void    InitMonitor(void)
 {
+  fMonitor = false;
   cwMonitorDelay = 0;
 }
 
 
 bool    UseMonitor(void)
 {
-  return cwMonitorDelay > 0;
+  return (fMonitor == true) && (cwMonitorDelay > 0);
 }
 
 
@@ -69,23 +72,28 @@ void    MonitorOpen(uchar  ibPrt)
     ASSERT(false);
   }
 
+  fMonitor = true;
   cwMonitorDelay = MONITOR_DELAY;
 }
 
 
 void    MonitorClose(void)
 {
-  cwMonitorDelay = 0;
+  if (fMonitor == true)
+  {
+    fMonitor = false;
+    cwMonitorDelay = 0;
 
-  if (ibMonitorPort == 0)
-  {
-    SetSpeed(0);
-    IntEnable(INT_UART0);
-  }
-  else if (ibMonitorPort == 1)
-  {
-    SetSpeed(1);
-    IntEnable(INT_UART1);
+    if (ibMonitorPort == 0)
+    {
+      SetSpeed(0);
+      IntEnable(INT_UART0);
+    }
+    else if (ibMonitorPort == 1)
+    {
+      SetSpeed(1);
+      IntEnable(INT_UART1);
+    }
   }
 }
 

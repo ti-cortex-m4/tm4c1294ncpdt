@@ -74,8 +74,6 @@ void    key_SetReset(void)
       switch (wProgram)
       {
         case bSET_RESETCUSTOM:
-//          Waiting();
-//          LongBeep();
           Clear();
 
           if (ResetFlash() == false)
@@ -110,16 +108,18 @@ void    key_SetReset(void)
           break;
 
         case bSET_RESETFULL:
-//          Waiting();
-//          LongBeep();
           Clear();
 
           if (ResetNvram() == false)
           {
+            SaveDisplay();
+
             ShowHi(szAlarm);
             ShowLo(szBadNvram);
             LongBeep();
             DelayMsg();
+
+            LoadDisplay();
           }
 
           if (ResetFlash() == false)
