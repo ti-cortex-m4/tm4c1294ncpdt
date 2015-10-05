@@ -36,7 +36,7 @@ DEVICE_V!C
 
 
 #ifndef SKIP_V
-
+/*
 static void PushIntV(uint  w)
 {
   PushChar(w % 0x100);
@@ -49,17 +49,17 @@ static void PushLongV(ulong  dw)
   PushIntV(dw % 0x10000);
   PushIntV(dw / 0x10000);
 }
-
+*/
 
 
 void    PushAddressV(uchar  bCode)
 {
-  PushIntV(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
-  PushIntV(wPrivate);
+  PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
+  PushIntLtl(wPrivate);
 
   PushChar(bCode);
 
-  PushLongV(mpdwAddress2[diCurr.bAddress-1]);
+  PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
 }
 
 
