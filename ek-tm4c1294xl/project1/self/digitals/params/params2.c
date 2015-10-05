@@ -297,16 +297,17 @@ void    QueryArrayC(uchar  bT, uchar  bSize)
 }
 
 
-void    ReadArrayC(uchar  bT)
+void    ReadArrayC(uchar  i)
 {
-  InitPop(bT);
+  InitPop(i);
 
-  coEnergy.mpbBuff[0] = PopChar();
-  coEnergy.mpbBuff[1] = PopChar();
-  coEnergy.mpbBuff[2] = PopChar();
-  coEnergy.mpbBuff[3] = PopChar();
+  combo32 co;
+  co.mpbBuff[0] = PopChar();
+  co.mpbBuff[1] = PopChar();
+  co.mpbBuff[2] = PopChar();
+  co.mpbBuff[3] = PopChar();
 
-  reValue = coEnergy.flBuff / reParamDiv;
+  reValue = co.flBuff / reParamDiv;
 }
 
 
