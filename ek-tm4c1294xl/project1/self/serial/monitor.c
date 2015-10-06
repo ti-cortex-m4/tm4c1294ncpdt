@@ -56,14 +56,14 @@ void    MonitorOpen(uchar  ibPrt)
   if (ibPrt == 0)
   {
     IntDisable(INT_UART0);
-    UARTStdioConfig(0, 38400, 120000000);
+    UARTStdioConfig(0, 57600, 120000000);
 
     ibMonitorPort = 0;
   }
   else if (ibPrt == 1)
   {
     IntDisable(INT_UART1);
-    UARTStdioConfig(1, 38400, 120000000);
+    UARTStdioConfig(1, 57600, 120000000);
 
     ibMonitorPort = 1;
   }
@@ -158,7 +158,7 @@ void    MonitorTime(time  ti)
 {
   if (UseMonitor())
   {
-    UARTprintf("%02u:%02u:%02u %02u.%02u.%02u",
+    UARTprintf(" %02u:%02u:%02u %02u.%02u.%02u",
                ti.bHour,
                ti.bMinute,
                ti.bSecond,

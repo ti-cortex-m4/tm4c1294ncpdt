@@ -31,8 +31,8 @@ void    IncEventsCount(uint  i)
 
 void    PushEventsCounts(void)
 {
-  MonitorString("\n\n get events table ");
-  MonitorString(" index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
+  MonitorString("\n\n events table ");
+  MonitorString(" day index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" day count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
 
   time ti = *GetCurrTimeDate();
   ulong dw1 = DateToDayIndex(ti);
@@ -49,7 +49,7 @@ void    PushEventsCounts(void)
     {
       ti = ReadEventBlock(ibBlock);
 
-      MonitorString(" countdown "); MonitorIntDec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); MonitorIntDec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
+      MonitorString(" countdown "); MonitorIntDec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); MonitorString(" > "); MonitorIntDec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
       if (bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock) > GetRecordsCount(bInBuff7) + bRECORD_BLOCK)
       {
         MonitorString(" exit ");
