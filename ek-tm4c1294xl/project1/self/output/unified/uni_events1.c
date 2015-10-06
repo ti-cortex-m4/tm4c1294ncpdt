@@ -6,6 +6,7 @@ UNI_EVENTS1,C
 
 #include "../../main.h"
 #include "../../memory/mem_ports.h"
+#include "../../memory/mem_records.h"
 #include "../../include/flash.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
@@ -19,11 +20,16 @@ UNI_EVENTS1,C
 
 
 
-void    IncEventsCount(uint  i)
+void    IncEventsCount(uint  j)
 {
-  i = 6+1+2+2+i*4;
+  uint i = 6+1+2+2+j*4;
+  ASSERT(i < 0x100*bInBuffA+bInBuffB);
+
   uint w = 0x100*OutBuff(i+0)+OutBuff(i+1);
   w++;
+
+  MonitorString(" count["); MonitorIntDec(j); MonitorString("]"); MonitorIntDec(w);
+
   SetOutBuff(i+0, w / 0x100);
   SetOutBuff(i+1, w % 0x100);
 }
@@ -32,10 +38,9 @@ void    IncEventsCount(uint  i)
 void    PushEventsCounts(void)
 {
   MonitorString("\n\n events table ");
-  MonitorString(" day index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" day count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
+  MonitorString(" day_index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" day_count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
 
-  time ti = *GetCurrTimeDate();
-  ulong dw1 = DateToDayIndex(ti);
+  ulong dw1 = DateToDayIndex(*GetCurrTimeDate());
 
   bool f = 0;
 
@@ -47,37 +52,51 @@ void    PushEventsCounts(void)
     uchar ibBlock;
     for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--)
     {
-      ti = ReadEventBlock(ibBlock);
+      time ti = ReadEventBlock(ibBlock);
 
       MonitorString(" countdown "); MonitorIntDec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); MonitorString(" > "); MonitorIntDec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
       if (bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock) > GetRecordsCount(bInBuff7) + bRECORD_BLOCK)
       {
-        MonitorString(" exit ");
+        MonitorString(" stop 1 ");
         return;
       }
       else
       {
         ulong dw2 = DateToDayIndex(ti);
-        MonitorString(" delta "); MonitorLongDec(dw1); MonitorString("-"); MonitorLongDec(dw2); MonitorString("="); MonitorLongDec(dw1 - dw2);
-
-        if ((f == 0) && (dw1 >= dw2))
+        if (reCurr.ev == 0xFF)
         {
-          if (dw1 - dw2 >= 0x100*bInBuff8+bInBuff9)
+          MonitorString(" empty ");
+        }
+        else
+        {
+          MonitorString(" day_delta "); MonitorLongDec(dw1); MonitorString("-"); MonitorLongDec(dw2); MonitorString("="); MonitorLongDec(dw1 - dw2);
+          if ((f == 0) && (dw1 >= dw2))
           {
-            MonitorString(" start ");
-            f = 1;
+            if (dw1 - dw2 >= 0x100*bInBuff8+bInBuff9)
+            {
+              MonitorString(" start ");
+              f = 1;
+            }
           }
         }
 
         if (f == 1)
         {
-          MonitorString(" add ");
-          IncEventsCount(dw1 - dw2);
-
-          if (dw1 - dw2 >= (0x100*bInBuff8+bInBuff9) + (0x100*bInBuffA+bInBuffB))
+          if (reCurr.ev == 0xFF)
           {
-            MonitorString(" stop ");
+            MonitorString(" stop 2 ");
             return;
+          }
+          else
+          {
+            MonitorString(" add ");
+            IncEventsCount(dw1 - dw2);
+
+            if (dw1 - dw2 >= (0x100*bInBuff8+bInBuff9) + (0x100*bInBuffA+bInBuffB))
+            {
+              MonitorString(" stop 3 ");
+              return;
+            }
           }
         }
       }
