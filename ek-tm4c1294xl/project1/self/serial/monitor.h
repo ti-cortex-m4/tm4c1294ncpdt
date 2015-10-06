@@ -18,8 +18,10 @@ void    MonitorClose(void);
 void    DelayMonitor_1Hz(void);
 
 void    MonitorString(const char  *psz);
+void    MonitorChar(const char  psz, uchar  b);
 void    MonitorCharDec(uchar  b);
 void    MonitorCharHex(uchar  b);
+void    MonitorInt(const char  psz, uint  w);
 void    MonitorIntDec(uint  w);
 void    MonitorLongDec(ulong  dw);
 void    MonitorTime(time  ti);

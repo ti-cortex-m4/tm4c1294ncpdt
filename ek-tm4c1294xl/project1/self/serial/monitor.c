@@ -118,6 +118,15 @@ void    MonitorString(const char  *psz)
 }
 
 
+void    MonitorChar(const char  psz, uchar  b)
+{
+  if (UseMonitor())
+  {
+    UARTprintf(psz, b);
+  }
+}
+
+
 void    MonitorCharDec(uchar  b)
 {
   if (UseMonitor())
@@ -132,6 +141,15 @@ void    MonitorCharHex(uchar  b)
   if (UseMonitor())
   {
     UARTprintf(" %02X", b);
+  }
+}
+
+
+void    MonitorInt(const char  psz, uint  w)
+{
+  if (UseMonitor())
+  {
+    UARTprintf(psz, w);
   }
 }
 
