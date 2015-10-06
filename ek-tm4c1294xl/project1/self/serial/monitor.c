@@ -122,7 +122,7 @@ void    MonitorCharDec(uchar  b)
 {
   if (UseMonitor())
   {
-    UARTprintf(" %u", b);
+    UARTprintf(" %3u", b);
   }
 }
 

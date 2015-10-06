@@ -31,9 +31,6 @@ void    IncEventsCount(uint  i)
 
 void    PushEventsCounts(void)
 {
-uint    iwPage;
-uchar   ibBlock;
-
   MonitorString("\n\n get events table ");
   MonitorString(" index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
 
@@ -42,10 +39,12 @@ uchar   ibBlock;
 
   bool f = 0;
 
+  uint iwPage;
   for (iwPage=0; iwPage<GetPagesCount(bInBuff7); iwPage++)
   {
     LoadEventsPage(bInBuff7, iwPage);
 
+    uchar ibBlock;
     for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--)
     {
       ti = ReadEventBlock(ibBlock);
