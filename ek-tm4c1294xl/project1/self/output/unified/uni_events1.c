@@ -10,7 +10,7 @@ UNI_EVENTS1,C
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports2.h"
-#include "../../serial/print2.h"
+#include "../../serial/monitor.h"
 #include "../../time/calendar.h"
 #include "../../time/rtc.h"
 #include "response_uni.h"
@@ -34,8 +34,8 @@ void    PushEventsCounts(void)
 uint    iwPage;
 uchar   ibBlock;
 
-  x_str("\n\n get events table ");
-  x_str(" index "); x_intdec(0x100*bInBuff8+bInBuff9); x_str(" count "); x_intdec(0x100*bInBuffA+bInBuffB);
+  MonitorString("\n\n get events table ");
+  MonitorString(" index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
 
   time ti = *GetCurrTimeDate();
   ulong dw1 = DateToDayIndex(ti);
@@ -43,41 +43,41 @@ uchar   ibBlock;
   bool f = 0;
 
   for (iwPage=0; iwPage<GetPagesCount(bInBuff7); iwPage++)
-  { 
+  {
     LoadEventsPage(bInBuff7, iwPage);
 
-    for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--) 
-    { 
+    for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--)
+    {
       ti = ReadEventBlock(ibBlock);
 
-      x_str(" countdown "); x_intdec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); x_intdec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
+      MonitorString(" countdown "); MonitorIntDec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); MonitorIntDec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
       if (bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock) > GetRecordsCount(bInBuff7) + bRECORD_BLOCK)
       {
-        x_str(" exit ");
+        MonitorString(" exit ");
         return;
       }
       else
       {
         ulong dw2 = DateToDayIndex(ti);
-        x_str(" delta "); x_longdec(dw1); x_str("-"); x_longdec(dw2); x_str("="); x_longdec(dw1 - dw2);
+        MonitorString(" delta "); MonitorLongDec(dw1); MonitorString("-"); MonitorLongDec(dw2); MonitorString("="); MonitorLongDec(dw1 - dw2);
 
         if ((f == 0) && (dw1 >= dw2))
         {
           if (dw1 - dw2 >= 0x100*bInBuff8+bInBuff9)
           {
-            x_str(" start ");
+            MonitorString(" start ");
             f = 1;
           }
         }
 
         if (f == 1)
         {
-          x_str(" add ");
+          MonitorString(" add ");
           IncEventsCount(dw1 - dw2);
 
           if (dw1 - dw2 >= (0x100*bInBuff8+bInBuff9) + (0x100*bInBuffA+bInBuffB))
           {
-            x_str(" stop ");
+            MonitorString(" stop ");
             return;
           }
         }
@@ -85,7 +85,7 @@ uchar   ibBlock;
     }
   }
 
-  x_str("\n failure");
+  MonitorString("\n failure");
 }
 
 
@@ -104,7 +104,7 @@ void    GetEventsCountsUni(void)
     PushChar(bInBuff7);
     PushIntBig(GetMaxRecordsCount(bInBuff7));
     PushIntBig(GetRecordsCount(bInBuff7));
-    
+
     time ti = *GetCurrTimeDate();
     ulong dw = DateToDayIndex(ti);
 
@@ -118,9 +118,7 @@ void    GetEventsCountsUni(void)
       ti = DayIndexToDate(--dw);
     }
 
-    x_init();
     PushEventsCounts();
-    x_done();
 
     Output2(1+2+2+(0x100*bInBuffA+bInBuffB)*4);
   }
