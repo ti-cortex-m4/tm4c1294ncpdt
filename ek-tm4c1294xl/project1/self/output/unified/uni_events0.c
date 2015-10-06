@@ -59,6 +59,7 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
   ASSERT((ibClass >= 1) && (ibClass <= 3));
 
   MonitorString("\n\n page"); MonitorIntDec(iwPage);
+  MonitorString(" class"); MonitorCharDec(ibClass);
 
   ResetWatchdog();
 
