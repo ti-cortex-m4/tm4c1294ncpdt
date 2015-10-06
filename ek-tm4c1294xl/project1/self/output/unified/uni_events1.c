@@ -22,13 +22,15 @@ UNI_EVENTS1,C
 
 void    IncEventsCount(uint  j)
 {
+  //ASSERT(j < 0x100*bInBuffA+bInBuffB);
+  MonitorIntDec(j); MonitorString(" < "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
+
   uint i = 6+1+2+2+j*4;
-  ASSERT(i < 0x100*bInBuffA+bInBuffB);
 
   uint w = 0x100*OutBuff(i+0)+OutBuff(i+1);
   w++;
 
-  MonitorString(" count["); MonitorIntDec(j); MonitorString("]"); MonitorIntDec(w);
+  MonitorString(" count["); MonitorIntDec(j); MonitorString("]="); MonitorIntDec(w);
 
   SetOutBuff(i+0, w / 0x100);
   SetOutBuff(i+1, w % 0x100);
