@@ -17,7 +17,7 @@ void    GetQueryCRCUni(void)
 {
 uint    i;
 
-  for (i=0; i<IndexInBuff()-10; i++) SetInBuff(i, GetInBuff(i+6));
+  for (i=0; i<IndexInBuff()-10; i++) SetInBuff(i, InBuff(i+6));
   SetIndexInBuff(IndexInBuff()-10);
 
   mpSerial[ibPort] = SER_POSTINPUT_SLAVE;

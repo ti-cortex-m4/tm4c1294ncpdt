@@ -26,7 +26,7 @@ static uchar RepackV(uchar  bCode1, uchar  bCode2)
 {
   uchar i;
   for (i=1; i<=IndexInBuff()-2; i++)
-    if ((GetInBuff(i) == bCode1) && (GetInBuff(i+1) == bCode2)) return i;
+    if ((InBuff(i) == bCode1) && (InBuff(i+1) == bCode2)) return i;
 
   return 0;
 }
@@ -39,15 +39,15 @@ uchar   i,j;
   if (mpSerial[ibPort] != SER_INPUT_MASTER) return;
 
   j = 0;
-  for (i=0; i<IndexInBuff(); i++) if (GetInBuff(i) == 0x55) j++;
+  for (i=0; i<IndexInBuff(); i++) if (InBuff(i) == 0x55) j++;
   if (j != 2) return;
 
-  if ((GetInBuff(0) != 0x73) || (GetInBuff(1) != 0x55) || (GetInBuff(IndexInBuff()-1) != 0x55))
+  if ((InBuff(0) != 0x73) || (InBuff(1) != 0x55) || (InBuff(IndexInBuff()-1) != 0x55))
     return;
 
   MonitorIn();
 
-  if (GetInBuff(12) != 0)
+  if (InBuff(12) != 0)
   {
     mpcwErrorLink[ibDig]++;
 
@@ -56,7 +56,7 @@ uchar   i,j;
   }
 
   bool f = 1;
-  while ((f == 1) && (IndexInBuff() > 15) && (IndexInBuff() != (GetInBuff(2) & 0x0F) + 15))
+  while ((f == 1) && (IndexInBuff() > 15) && (IndexInBuff() != (InBuff(2) & 0x0F) + 15))
   {
     if (UseMonitor())
     {
@@ -70,7 +70,7 @@ uchar   i,j;
     if (j != 0)
     {
       SetInBuff(j, 0x55);
-      for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, GetInBuff(i+1));
+      for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, InBuff(i+1));
       SetIndexInBuff(IndexInBuff()-1);
       f = 1;
       continue;
@@ -80,7 +80,7 @@ uchar   i,j;
     if (j != 0)
     {
       SetInBuff(j, 0x73);
-      for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, GetInBuff(i+1));
+      for (i=j+1; i<=IndexInBuff()-2; i++) SetInBuff(i, InBuff(i+1));
       SetIndexInBuff(IndexInBuff()-1);
       f = 1;
       continue;
@@ -97,7 +97,7 @@ static uchar CheckV(void)
   if (InBuff(0) != 0x73) return 1;
   if (InBuff(1) != 0x55) return 2;
 
-  if ((IndexInBuff() >= 15) && (IndexInBuff() != (GetInBuff(2) & 0x0F) + 15)) return 3;
+  if ((IndexInBuff() >= 15) && (IndexInBuff() != (InBuff(2) & 0x0F) + 15)) return 3;
 
   if (InBuff(3) != 0) return 4;
 
