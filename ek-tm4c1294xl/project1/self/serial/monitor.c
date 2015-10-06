@@ -118,7 +118,7 @@ void    MonitorString(const char  *psz)
 }
 
 
-void    MonitorChar(const char  psz, uchar  b)
+void    MonitorChar(const char  *psz, uchar  b)
 {
   if (UseMonitor())
   {
@@ -129,23 +129,17 @@ void    MonitorChar(const char  psz, uchar  b)
 
 void    MonitorCharDec(uchar  b)
 {
-  if (UseMonitor())
-  {
-    UARTprintf(" %3u", b);
-  }
+  MonitorChar("%u", b);
 }
 
 
 void    MonitorCharHex(uchar  b)
 {
-  if (UseMonitor())
-  {
-    UARTprintf(" %02X", b);
-  }
+  MonitorChar("%02X", b);
 }
 
 
-void    MonitorInt(const char  psz, uint  w)
+void    MonitorInt(const char  *psz, uint  w)
 {
   if (UseMonitor())
   {
@@ -156,19 +150,22 @@ void    MonitorInt(const char  psz, uint  w)
 
 void    MonitorIntDec(uint  w)
 {
+  MonitorInt("%u", w);
+}
+
+
+void    MonitorLong(const char  *psz, ulong  dw)
+{
   if (UseMonitor())
   {
-    UARTprintf(" %u", w);
+    UARTprintf(psz, w);
   }
 }
 
 
 void    MonitorLongDec(ulong  dw)
 {
-  if (UseMonitor())
-  {
-    UARTprintf(" %u", dw);
-  }
+  MonitorLong("%u", dw);
 }
 
 
@@ -176,7 +173,7 @@ void    MonitorTime(time  ti)
 {
   if (UseMonitor())
   {
-    UARTprintf(" %02u:%02u:%02u %02u.%02u.%02u",
+    UARTprintf("%02u:%02u:%02u %02u.%02u.%02u",
                ti.bHour,
                ti.bMinute,
                ti.bSecond,
@@ -196,7 +193,7 @@ void    MonitorOut(uint  cwIn, uint  cwOut)
 
     MonitorString("\n\n Output: out ="); MonitorIntDec(cwOut);
     MonitorString(" in ="); MonitorIntDec(cwIn);
-    MonitorString("  "); MonitorTime(*GetCurrTimeDate());
+    MonitorString(" "); MonitorTime(*GetCurrTimeDate());
     MonitorString("\n");
 
     uint i;
@@ -213,7 +210,7 @@ void    MonitorIn(void)
   if (UseMonitor())
   {
     MonitorString("\n Input: in ="); MonitorIntDec(IndexInBuff());
-    MonitorString("  "); MonitorTime(*GetCurrTimeDate());
+    MonitorString(" "); MonitorTime(*GetCurrTimeDate());
     MonitorString("\n");
 
     uint i;
