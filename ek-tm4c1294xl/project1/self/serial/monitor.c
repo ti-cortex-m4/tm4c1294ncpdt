@@ -129,13 +129,13 @@ void    MonitorChar(const char  *psz, uchar  b)
 
 void    MonitorCharDec(uchar  b)
 {
-  MonitorChar("%u", b);
+  MonitorChar("%u ", b);
 }
 
 
 void    MonitorCharHex(uchar  b)
 {
-  MonitorChar("%02X", b);
+  MonitorChar("%02X ", b);
 }
 
 
@@ -150,7 +150,7 @@ void    MonitorInt(const char  *psz, uint  w)
 
 void    MonitorIntDec(uint  w)
 {
-  MonitorInt("%u", w);
+  MonitorInt("%u ", w);
 }
 
 
@@ -173,7 +173,7 @@ void    MonitorTime(time  ti)
 {
   if (UseMonitor())
   {
-    UARTprintf("%02u:%02u:%02u %02u.%02u.%02u",
+    UARTprintf("%02u:%02u:%02u %02u.%02u.%02u ",
                ti.bHour,
                ti.bMinute,
                ti.bSecond,

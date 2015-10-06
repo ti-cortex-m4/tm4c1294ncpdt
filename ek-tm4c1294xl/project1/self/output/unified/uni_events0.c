@@ -58,8 +58,8 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
 {
   ASSERT((ibClass >= 1) && (ibClass <= 3));
 
-  MonitorString("\n\n page"); MonitorIntDec(iwPage);
-  MonitorString(" class"); MonitorCharDec(ibClass);
+  MonitorString("\n\n page "); MonitorIntDec(iwPage);
+  MonitorString(" class "); MonitorCharDec(ibClass);
 
   ResetWatchdog();
 
@@ -85,7 +85,7 @@ time    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
 {
   BuffToRecord((uchar *) &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD);
 
-  MonitorString("\n block"); MonitorCharDec(ibBlock-1);
+  MonitorString("\n block "); MonitorCharDec(ibBlock-1);
   MonitorIntDec(reCurr.cdwRecord);
   MonitorCharDec(reCurr.ev);
 	MonitorTime(reCurr.ti);
