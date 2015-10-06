@@ -78,6 +78,5 @@ delphi конфигурация GPIO
 http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0349a/Babjdbff.html
 
 InBuff -> InBuffChar
-remove GetInBuff
 
 msg_limit
