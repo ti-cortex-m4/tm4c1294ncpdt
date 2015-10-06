@@ -158,7 +158,7 @@ void    MonitorLong(const char  *psz, ulong  dw)
 {
   if (UseMonitor())
   {
-    UARTprintf(psz, w);
+    UARTprintf(psz, dw);
   }
 }
 
