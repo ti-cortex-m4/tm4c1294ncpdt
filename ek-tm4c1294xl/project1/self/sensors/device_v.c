@@ -186,10 +186,10 @@ void    ReadVersionS(void)
   Clear();
   sprintf(szLo+1, "версия %u.%u.%u", PopChar(), PopChar(), PopChar());
 }
+*/
 
 
-
-void    QueryEngDayS(uchar  bDay)
+void    QueryEngAbsV(void)
 {
   InitPush(0);
 
@@ -206,7 +206,7 @@ void    QueryEngDayS(uchar  bDay)
   QueryS_IO(100+15, 16);
 }
 
-
+/*
 void    QueryEngMonS(uchar  bMonth)
 {
   InitPush(0);
@@ -223,9 +223,9 @@ void    QueryEngMonS(uchar  bMonth)
 
   QueryS_IO(100+15, 16);
 }
+*/
 
-
-void    ReadEnergyS(void)
+void    ReadEnergyV(void)
 {
   InitPop(9);
 
@@ -239,7 +239,7 @@ void    ReadEnergyS(void)
 }
 
 
-
+/*
 void    InitHeaderS(void)
 {
   if (!UseBounds())

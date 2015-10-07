@@ -135,27 +135,27 @@ time2   QueryTimeV_Full(uchar  bPercent)
   return GetTime2(ReadTimeV(), true);
 }
 
-/*
-bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
+
+bool    QueryEngAbsV_Full(uchar  bPercent)
 {
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryEngDayS(bTime);
+    QueryEngAbsV();
 
-    if (InputS() == SER_GOODCHECK) break;
+    if (InputV() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
   ShowPercent(bPercent);
 
-  ReadEnergyS();
+  ReadEnergyV();
   return(1);
 }
 
-
+/*
 bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
@@ -190,22 +190,22 @@ time2   ReadTimeCanV(void)
   return GetTime2(ti2.tiValue, true);
 }
 
-/*
-double2 ReadCntCurrS(void)
+
+double2 ReadCntCurrV(void)
 {
   Clear();
 
-  if (QueryConfigS_Full(50) == 0) return GetDouble2Error();
+//  if (QueryConfigS_Full(50) == 0) return GetDouble2Error();
 
-  if (QueryEngMonS_Full(0, 75) == 0) return GetDouble2Error();
+  if (QueryEngAbsV_Full(0, 75) == 0) return GetDouble2Error();
 
-  mpdbChannelsC[0] = (float)mpdwChannelsA[0] / wDividerS;
+  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);
 }
 
-
+/*
 double2 ReadCntMonCanS(uchar  ibMonth)
 {
   Clear();
@@ -225,7 +225,7 @@ double2 ReadCntMonCanS(uchar  ibMonth)
     if (QueryEngDayS_Full(1, 75) == 0) return GetDouble2Error();
   }
 
-  mpdbChannelsC[0] = (float)mpdwChannelsA[0] / wDividerS;
+  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);
