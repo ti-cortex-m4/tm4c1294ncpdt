@@ -39,8 +39,8 @@ static void IncEventsCount(uint  iwDay)
 
 static void PushEventsCounts(void)
 {
-  MonitorString("\n\n events counts ");
-  MonitorString(" day_index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" day_count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
+  MonitorString("\n\n events count ");
+  MonitorString(" index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
 
   ulong dw1 = DateToDayIndex(*GetCurrTimeDate());
 

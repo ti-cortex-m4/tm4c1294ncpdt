@@ -82,13 +82,13 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
 }
 
 
-time    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
+time    ReadEventBlock(uchar  ibBlock)
 {
   ASSERT((ibBlock >= 1) && (ibBlock <= bRECORD_BLOCK));
 
   BuffToRecord((uchar *) &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD);
 
-  MonitorString("\n block "); MonitorCharDec3(ibBlock-1);
+  MonitorString("\n block"); MonitorCharDec3(ibBlock-1);
   MonitorIntDec5(reCurr.cdwRecord);
   MonitorCharDec3(reCurr.ev);
   MonitorTime(reCurr.ti);
