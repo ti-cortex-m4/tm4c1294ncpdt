@@ -64,13 +64,19 @@ static void PushEventsCounts(void)
       }
       else
       {
-        ulong dw2 = DateToDayIndex(ti);
         if (reCurr.ev == 0xFF)
         {
           MonitorString(" empty ");
+          if (f == 1)
+          {
+            MonitorString(" stop 2 ");
+            return;
+          }
         }
         else
         {
+          ulong dw2 = DateToDayIndex(ti);
+
           MonitorString(" day_delta "); MonitorLongDec(dw1); MonitorString("-"); MonitorLongDec(dw2); MonitorString("="); MonitorLongDec(dw1 - dw2);
           if ((f == 0) && (dw1 >= dw2))
           {
@@ -80,16 +86,8 @@ static void PushEventsCounts(void)
               f = 1;
             }
           }
-        }
 
-        if (f == 1)
-        {
-          if (reCurr.ev == 0xFF)
-          {
-            MonitorString(" stop 2 ");
-            return;
-          }
-          else
+          if (f == 1)
           {
             if (dw1 - dw2 >= (0x100*bInBuff8+bInBuff9) + (0x100*bInBuffA+bInBuffB))
             {
