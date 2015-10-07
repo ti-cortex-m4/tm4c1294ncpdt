@@ -20,24 +20,24 @@ UNI_EVENTS1,C
 
 
 
-void    IncEventsCount(uint  j)
+static void IncEventsCount(uint  iwDay)
 {
   //ASSERT(j < 0x100*bInBuffA+bInBuffB);
-  MonitorIntDec(j); MonitorString(" < "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
+  MonitorIntDec(iwDay); MonitorString(" < "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
 
-  uint i = 6+1+2+2+j*4;
+  uint i = 6+1+2+2+iwDay*4;
 
   uint w = 0x100*OutBuff(i+0)+OutBuff(i+1);
   w++;
 
-  MonitorString(" count["); MonitorInt("%u",j); MonitorString("]="); MonitorIntDec(w);
+  MonitorString(" count["); MonitorIntDec(iwDay); MonitorString("]="); MonitorIntDec(w);
 
   SetOutBuff(i+0, w / 0x100);
   SetOutBuff(i+1, w % 0x100);
 }
 
 
-void    PushEventsCounts(void)
+static void PushEventsCounts(void)
 {
   MonitorString("\n\n events counts ");
   MonitorString(" day_index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" day_count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);

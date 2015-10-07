@@ -69,15 +69,16 @@ void    LoadEventsPage(uchar  ibClass, uint  iwPage)
     GetRecordsBlock2(CLA_AUXILIARY, iwPage);
   else
     GetRecordsBlock(CLA_IMPULSE, iwPage);
-
+/*
   MonitorString("\n");
   uint i;
   for (i=0; i<wLEAF_BYTES; i++)
   {
-    if (i % SIZEOF_RECORD == 0) { MonitorString("\n"); MonitorChar("%3u ", i / SIZEOF_RECORD); }
+    if (i % SIZEOF_RECORD == 0) { MonitorString("\n"); MonitorCharDec3(i / SIZEOF_RECORD); MonitorString(" "); }
     MonitorCharHex(mpbPageIn[i]);
   }
   MonitorString("\n");
+*/
 }
 
 
@@ -87,9 +88,9 @@ time    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
 
   BuffToRecord((uchar *) &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD);
 
-  MonitorString("\n block "); MonitorChar("%3u ", ibBlock-1);
+  MonitorString("\n block "); MonitorCharDec3(ibBlock-1);
   MonitorIntDec(reCurr.cdwRecord);
-  MonitorChar("%3u ", reCurr.ev);
+  MonitorCharDec3(reCurr.ev);
 	MonitorTime(reCurr.ti);
 
   return reCurr.ti;
