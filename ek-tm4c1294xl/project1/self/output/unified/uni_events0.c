@@ -89,7 +89,7 @@ time    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
   BuffToRecord((uchar *) &mpbPageIn + ((ibBlock-1) % bRECORD_BLOCK)*SIZEOF_RECORD);
 
   MonitorString("\n block "); MonitorCharDec3(ibBlock-1);
-  MonitorIntDec(reCurr.cdwRecord);
+  MonitorIntDec5(reCurr.cdwRecord);
   MonitorCharDec3(reCurr.ev);
 	MonitorTime(reCurr.ti);
 
