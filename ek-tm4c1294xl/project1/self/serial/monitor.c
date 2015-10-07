@@ -43,7 +43,7 @@ void    MonitorCharDec(uchar  b)
 
 void    MonitorCharDec3(uchar  b)
 {
-  MonitorChar("%3u", b);
+  MonitorChar("%3u ", b);
 }
 
 
@@ -71,7 +71,7 @@ void    MonitorIntDec(uint  w)
 
 void    MonitorIntDec5(uint  w)
 {
-  MonitorInt("%5u", w);
+  MonitorInt("%5u ", w);
 }
 
 

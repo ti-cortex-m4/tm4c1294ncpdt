@@ -22,7 +22,7 @@ UNI_EVENTS1,C
 
 static void IncEventsCount(uint  iwDay)
 {
-  //ASSERT(j < 0x100*bInBuffA+bInBuffB);
+  ASSERT(iwDay < 0x100*bInBuffA+bInBuffB);
   MonitorIntDec(iwDay); MonitorString(" < "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
 
   uint i = 6+1+2+2+iwDay*4;
@@ -56,7 +56,7 @@ static void PushEventsCounts(void)
     {
       time ti = ReadEventBlock(ibBlock);
 
-      MonitorString(" countdown "); MonitorIntDec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); MonitorString(" > "); MonitorIntDec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
+      MonitorString(" events "); MonitorIntDec(bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock)); MonitorString(" > "); MonitorIntDec(GetRecordsCount(bInBuff7) + bRECORD_BLOCK);
       if (bRECORD_BLOCK*iwPage + (bRECORD_BLOCK-ibBlock) > GetRecordsCount(bInBuff7) + bRECORD_BLOCK)
       {
         MonitorString(" stop 1 ");

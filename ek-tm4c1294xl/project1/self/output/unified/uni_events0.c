@@ -91,7 +91,7 @@ time    ReadEventBlock(uchar  ibBlock) // 1 .. bRECORD_BLOCK
   MonitorString("\n block "); MonitorCharDec3(ibBlock-1);
   MonitorIntDec5(reCurr.cdwRecord);
   MonitorCharDec3(reCurr.ev);
-	MonitorTime(reCurr.ti);
+  MonitorTime(reCurr.ti);
 
   return reCurr.ti;
 }
