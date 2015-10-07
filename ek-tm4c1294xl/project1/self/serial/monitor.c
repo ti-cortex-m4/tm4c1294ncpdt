@@ -129,7 +129,13 @@ void    MonitorChar(const char  *psz, uchar  b)
 
 void    MonitorCharDec(uchar  b)
 {
-  MonitorChar("%u ", b);
+  MonitorChar("%u", b);
+}
+
+
+void    MonitorCharDec3(uchar  b)
+{
+  MonitorChar("%3u", b);
 }
 
 
@@ -150,7 +156,7 @@ void    MonitorInt(const char  *psz, uint  w)
 
 void    MonitorIntDec(uint  w)
 {
-  MonitorInt("%u ", w);
+  MonitorInt("%u", w);
 }
 
 
