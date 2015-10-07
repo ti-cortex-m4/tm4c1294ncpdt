@@ -4,6 +4,10 @@ DEVICE_V.H
 
 ------------------------------------------------------------------------------*/
 
+extern  uint                    wDividerV;
+
+
+
 void    QueryTimeV(void);
 time    ReadTimeV(void);
 
