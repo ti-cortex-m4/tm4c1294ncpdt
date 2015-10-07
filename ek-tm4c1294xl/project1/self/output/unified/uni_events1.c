@@ -77,7 +77,7 @@ static void PushEventsCounts(void)
         {
           ulong dw2 = DateToDayIndex(ti);
 
-          MonitorString(" day_delta "); MonitorLongDec(dw1); MonitorString("-"); MonitorLongDec(dw2); MonitorString("="); MonitorLongDec(dw1 - dw2);
+          MonitorString(" days "); MonitorLongDec(dw1); MonitorString("-"); MonitorLongDec(dw2); MonitorString("="); MonitorLongDec(dw1 - dw2);
           if ((f == 0) && (dw1 >= dw2))
           {
             if (dw1 - dw2 >= 0x100*bInBuff8+bInBuff9)
