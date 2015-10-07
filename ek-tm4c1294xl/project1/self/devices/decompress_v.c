@@ -56,7 +56,7 @@ uchar   i,j;
   }
 
   bool f = 1;
-  while ((f == 1) && (IndexInBuff() > 15) && (IndexInBuff() != (InBuff(2) & 0x0F) + 15))
+  while ((f == 1) && (IndexInBuff() > 15) && (IndexInBuff() != (InBuff(2) & 0x1F) + 15))
   {
     if (UseMonitor())
     {
@@ -97,7 +97,7 @@ static uchar CheckV(void)
   if (InBuff(0) != 0x73) return 1;
   if (InBuff(1) != 0x55) return 2;
 
-  if ((IndexInBuff() >= 15) && (IndexInBuff() != (InBuff(2) & 0x0F) + 15)) return 3;
+  if ((IndexInBuff() >= 15) && (IndexInBuff() != (InBuff(2) & 0x1F) + 15)) return 3;
 
   if (InBuff(3) != 0) return 4;
 

@@ -197,9 +197,9 @@ double2 ReadCntCurrV(void)
 
 //  if (QueryConfigS_Full(50) == 0) return GetDouble2Error();
 
-  if (QueryEngAbsV_Full(0, 75) == 0) return GetDouble2Error();
+  if (QueryEngAbsV_Full(75) == 0) return GetDouble2Error();
 
-  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;
+  mpdbChannelsC[0] = (double)mpdwChannelsA[0]/* / wDividerS*/;
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);

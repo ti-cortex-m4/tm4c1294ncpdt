@@ -36,21 +36,6 @@ DEVICE_V!C
 
 
 #ifndef SKIP_V
-/*
-static void PushIntV(uint  w)
-{
-  PushChar(w % 0x100);
-  PushChar(w / 0x100);
-}
-
-
-static void PushLongV(ulong  dw)
-{
-  PushIntV(dw % 0x10000);
-  PushIntV(dw / 0x10000);
-}
-*/
-
 
 void    PushAddressV(uchar  bCode)
 {
@@ -73,9 +58,9 @@ void    QueryTimeV(void)
 
   PushAddressV(0x1C);
 
-  PushChar(0xD0);
-  PushChar(0x01);
-  PushChar(0x20);
+//  PushChar(0xD0);
+//  PushChar(0x01);
+//  PushChar(0x20);
 
   QueryV(100+22, 15);
 }
@@ -191,19 +176,18 @@ void    ReadVersionS(void)
 
 void    QueryEngAbsV(void)
 {
-  InitPush(0);
+  InitPush(2);
 
-  PushChar(0xC0);
-  PushChar(0x48);
+  PushChar(0x20);
+  PushChar(0x00);
 
-  PushAddressS();
+  PushAddressV(0x05);
 
-  PushChar(0xD1);
-  PushChar(0x01);
-  PushChar(0x2F);
-  PushChar(bDay);
+//  PushChar(0xD0);
+//  PushChar(0x01);
+//  PushChar(0x20);
 
-  QueryS_IO(100+15, 16);
+  QueryV(100+41, 15);
 }
 
 /*
@@ -227,14 +211,9 @@ void    QueryEngMonS(uchar  bMonth)
 
 void    ReadEnergyV(void)
 {
-  InitPop(9);
+  InitPop(13);
 
-  coEnergy.mpbBuff[0] = PopChar();
-  coEnergy.mpbBuff[1] = PopChar();
-  coEnergy.mpbBuff[2] = PopChar();
-  coEnergy.mpbBuff[3] = PopChar();
-
-  mpdwChannelsA[0] = coEnergy.dwBuff;
+  mpdwChannelsA[0] = PopLongLtl();
   mpboChannelsA[0] = true;
 }
 
