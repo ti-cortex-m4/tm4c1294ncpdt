@@ -131,6 +131,19 @@ ulong   PopLongBig(void)
 }
 
 
+ulong   PopLongLtl(void)
+{
+  static combo32 co;
+
+  co.mpbBuff[0] = PopChar();
+  co.mpbBuff[1] = PopChar();
+  co.mpbBuff[2] = PopChar();
+  co.mpbBuff[3] = PopChar();
+
+  return co.dwBuff;
+}
+
+
 float   PopFloat(void)
 {
   static combo32 co;

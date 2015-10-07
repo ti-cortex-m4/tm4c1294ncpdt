@@ -18,6 +18,7 @@ uchar   PopChar(void);
 uint    PopIntBig(void);
 uint    PopIntLtl(void);
 ulong   PopLongBig(void);
+ulong   PopLongLtl(void);
 float   PopFloat(void);
 double  PopDouble(void);
 time    PopTime(void);

@@ -6,10 +6,7 @@ MONITOR.C
 
 #include "../main.h"
 #include "../../tm4c1294xl/utils/uartstdio.h"
-//#include "../../tm4c1294xl/driverlib/interrupt.h"
-//#include "inc/hw_ints.h"
 #include "../time/rtc.h"
-//#include "speeds.h"
 #include "ports_common.h"
 #include "monitor.h"
 
@@ -112,10 +109,10 @@ void    MonitorOut(uint  cwIn, uint  cwOut)
 {
   if (UseMonitor())
   {
-    MonitorString("\n\n Output: out ="); MonitorIntDec(cwOut);
-    MonitorString(" in ="); MonitorIntDec(cwIn);
+    MonitorString("\n\n Output: out="); MonitorIntDec(cwOut);
+    MonitorString(" in="); MonitorIntDec(cwIn);
     MonitorString(" "); MonitorTime(*GetCurrTimeDate());
-    MonitorString("\n");
+    MonitorString("\n ");
 
     uint i;
     for (i=0; i<cwOut; i++)
@@ -130,9 +127,9 @@ void    MonitorIn(void)
 {
   if (UseMonitor())
   {
-    MonitorString("\n Input: in ="); MonitorIntDec(IndexInBuff());
+    MonitorString("\n Input: in="); MonitorIntDec(IndexInBuff());
     MonitorString(" "); MonitorTime(*GetCurrTimeDate());
-    MonitorString("\n");
+    MonitorString("\n ");
 
     uint i;
     for (i=0; i<IndexInBuff(); i++)
