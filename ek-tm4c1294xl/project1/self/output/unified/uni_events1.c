@@ -30,7 +30,7 @@ void    IncEventsCount(uint  j)
   uint w = 0x100*OutBuff(i+0)+OutBuff(i+1);
   w++;
 
-  MonitorString(" count["); MonitorIntDec(j); MonitorString("]="); MonitorIntDec(w);
+  MonitorString(" count["); MonitorInt("%u",j); MonitorString("]="); MonitorIntDec(w);
 
   SetOutBuff(i+0, w / 0x100);
   SetOutBuff(i+1, w % 0x100);
@@ -39,7 +39,7 @@ void    IncEventsCount(uint  j)
 
 void    PushEventsCounts(void)
 {
-  MonitorString("\n\n events table ");
+  MonitorString("\n\n events counts ");
   MonitorString(" day_index "); MonitorIntDec(0x100*bInBuff8+bInBuff9); MonitorString(" day_count "); MonitorIntDec(0x100*bInBuffA+bInBuffB);
 
   ulong dw1 = DateToDayIndex(*GetCurrTimeDate());
