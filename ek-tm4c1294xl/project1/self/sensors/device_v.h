@@ -14,11 +14,11 @@ time    ReadTimeV(void);
 //
 //void    QueryVersionS(void);
 //void    ReadVersionS(void);
-//
-//void    QueryEngDayS(uchar  bDay);
+
+void    QueryEngAbsV(void);
 //void    QueryEngMonS(uchar  bMonth);
-//void    ReadEnergyS(void);
-//
+void    ReadEnergyV(void);
+
 //void    InitHeaderS(void);
 //void    QueryHeaderS(void);
 //bool    ReadHeaderS(void);

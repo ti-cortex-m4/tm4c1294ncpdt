@@ -206,7 +206,7 @@ double2 ReadCntCurrS(void)
 
   if (QueryEngMonS_Full(0, 75) == 0) return GetDouble2Error();
 
-  mpdbChannelsC[0] = (float)mpdwChannelsA[0] / wDividerS;
+  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);
@@ -232,7 +232,7 @@ double2 ReadCntMonCanS(uchar  ibMonth)
     if (QueryEngDayS_Full(1, 75) == 0) return GetDouble2Error();
   }
 
-  mpdbChannelsC[0] = (float)mpdwChannelsA[0] / wDividerS;
+  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;
   mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[0], true);
