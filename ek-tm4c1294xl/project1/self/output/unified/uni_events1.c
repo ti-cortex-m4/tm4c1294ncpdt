@@ -91,14 +91,14 @@ void    PushEventsCounts(void)
           }
           else
           {
-            MonitorString(" add ");
-            IncEventsCount(dw1 - dw2);
-
             if (dw1 - dw2 >= (0x100*bInBuff8+bInBuff9) + (0x100*bInBuffA+bInBuffB))
             {
               MonitorString(" stop 3 ");
               return;
             }
+
+            MonitorString(" add ");
+            IncEventsCount(dw1 - dw2);
           }
         }
       }

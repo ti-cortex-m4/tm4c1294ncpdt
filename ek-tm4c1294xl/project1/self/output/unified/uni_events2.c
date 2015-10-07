@@ -11,7 +11,7 @@ UNI_EVENTS2,C
 #include "../../include/flash.h"
 #include "../../include/queries_uni.h"
 #include "../../serial/ports.h"
-#include "../../serial/print2.h"
+#include "../../serial/monitor.h"
 #include "../../time/calendar.h"
 #include "response_uni.h"
 #include "uni_events0.h"
@@ -107,9 +107,9 @@ static time PushEventParams(void)
 
 static void PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex, uint  wCount)
 {
-  x_str("\n\n push events \n");
-  x_str("\n page "); x_intdec(iwPage); x_str(" block "); x_bytedec(ibBlock-1); x_str(" total "); x_intdec(wTotal);
-  x_str(" index "); x_intdec(wIndex); x_str(" count "); x_intdec(wCount);
+  MonitorString("\n\n push events \n");
+  MonitorString("\n page "); MonitorIntDec(iwPage); MonitorString(" block "); MonitorCharDec(ibBlock-1); MonitorString(" total "); MonitorIntDec(wTotal);
+  MonitorString(" index "); MonitorIntDec(wIndex); MonitorString(" count "); MonitorIntDec(wCount);
 
   InitPushUni();
 
@@ -121,12 +121,12 @@ static void PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex
   {
     time ti = ReadEventBlock(ibBlock);
 
-    x_str(" index "); x_intdec(i);
+    MonitorString(" index "); MonitorIntDec(i);
     if (i+1 >= wIndex)
     {
       if ((ti.bDay == bInBuff7) && (ti.bMonth == bInBuff8) && (ti.bYear == bInBuff9))
       {
-        x_str(" push ");
+        MonitorString(" push ");
         PushChar(reCurr.ev);
         ti = PushEventParams();
 
@@ -138,7 +138,7 @@ static void PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex
 
         if (++c >= wCount)
         {
-          x_str("\n success");
+          MonitorString("\n success");
           Output2(wCount*10);
           return;
         }
@@ -155,14 +155,14 @@ static void PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex
       }
       else
       {
-        x_str("\n underflow");
+        MonitorString("\n underflow");
         Result2_Info(bUNI_BADDATA,7);
         return;
       }
     }
   }
 
-  x_str("\n failure");
+  MonitorString("\n failure");
   Result2_Info(bUNI_BADDATA,8);
 }
 
@@ -174,8 +174,8 @@ uchar   ibBlock,b;
 uint    wTotal;
 
   MonitorString("\n\n events ");
-  x_bytedec(bInBuff7); x_str("."); x_bytedec(bInBuff8); x_str("."); x_bytedec(bInBuff9);
-  x_str(" index "); x_intdec(wIndex); x_str(" count "); x_intdec(wCount);
+  MonitorCharDec(bInBuff7); MonitorString("."); MonitorCharDec(bInBuff8); MonitorString("."); MonitorCharDec(bInBuff9);
+  MonitorString(" index "); MonitorIntDec(wIndex); MonitorString(" count "); MonitorIntDec(wCount);
 
   bool f = 0;
   p = 0;
@@ -191,7 +191,7 @@ uint    wTotal;
       time ti = ReadEventBlock(ibBlock);
       if ((ti.bDay == bInBuff7) && (ti.bMonth == bInBuff8) && (ti.bYear == bInBuff9))
       {
-        x_str(" calc ");
+        MonitorString(" calc ");
 
         f = 1;
         p = iwPage;
@@ -202,7 +202,7 @@ uint    wTotal;
       {
         if (f == 1)
         {
-          x_str("\n success");
+          MonitorString("\n success");
           PushEvents2(p, b, wTotal, wIndex, wCount);
           return;
         }
@@ -210,7 +210,7 @@ uint    wTotal;
     }
   }
 
-  x_str("\n failure");
+  MonitorString("\n failure");
   Result2_Info(bUNI_BADDATA,6);
 }
 
@@ -229,10 +229,8 @@ void    GetEventsUni(void)
     Result2_Info(bUNI_BADDATA,5);
   else
   {
-    x_init();
     SetDelayUni();
     PushEvents1(bInBuffA, bInBuffB);
-    x_done();
   }
 }
 
@@ -251,9 +249,7 @@ void    GetEventsUni_Fix(void)
     Result2_Info(bUNI_BADDATA,5);
   else
   {
-    x_init();
     SetDelayUni();
     PushEvents1(0x100*bInBuffA+bInBuffB, 0x100*bInBuffC+bInBuffD);
-    x_done();
   }
 }
