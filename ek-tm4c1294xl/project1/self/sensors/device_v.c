@@ -37,6 +37,10 @@ DEVICE_V!C
 
 #ifndef SKIP_V
 
+uint                    wDividerV;
+
+
+
 void    PushAddressV(uchar  bCode)
 {
   PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
@@ -57,10 +61,6 @@ void    QueryTimeV(void)
   PushChar(0x00);
 
   PushAddressV(0x1C);
-
-//  PushChar(0xD0);
-//  PushChar(0x01);
-//  PushChar(0x20);
 
   QueryV(100+22, 15);
 }
@@ -183,10 +183,6 @@ void    QueryEngAbsV(void)
 
   PushAddressV(0x05);
 
-//  PushChar(0xD0);
-//  PushChar(0x01);
-//  PushChar(0x20);
-
   QueryV(100+41, 15);
 }
 
@@ -215,6 +211,14 @@ void    ReadEnergyV(void)
 
   mpdwChannelsA[0] = PopLongLtl();
   mpboChannelsA[0] = true;
+
+  switch (PopChar() & 0x03)
+  {
+    case 0x00: wDividerV = 1; break;
+    case 0x01: wDividerV = 10; break;
+    case 0x02: wDividerV = 100; break;
+    default:   wDividerV = 1000; break;
+  }
 }
 
 
