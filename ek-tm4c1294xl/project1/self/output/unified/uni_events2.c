@@ -123,7 +123,7 @@ static void PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex
 
     x_str(" index "); x_intdec(i);
     if (i+1 >= wIndex)
-    { 
+    {
       if ((ti.bDay == bInBuff7) && (ti.bMonth == bInBuff8) && (ti.bYear == bInBuff9))
       {
         x_str(" push ");
@@ -148,7 +148,7 @@ static void PushEvents2(uint  iwPage, uchar  ibBlock, uint  wTotal, uint  wIndex
     if (++ibBlock > bRECORD_BLOCK)
     {
       ibBlock = 1;
-      if (iwPage > 0) 
+      if (iwPage > 0)
       {
         iwPage--;
         LoadEventsPage(bInBuff6, iwPage);
@@ -173,7 +173,7 @@ uint    iwPage,p;
 uchar   ibBlock,b;
 uint    wTotal;
 
-  x_str("\n\n get events \n");
+  MonitorString("\n\n events ");
   x_bytedec(bInBuff7); x_str("."); x_bytedec(bInBuff8); x_str("."); x_bytedec(bInBuff9);
   x_str(" index "); x_intdec(wIndex); x_str(" count "); x_intdec(wCount);
 
@@ -186,11 +186,11 @@ uint    wTotal;
   {
     LoadEventsPage(bInBuff6, iwPage);
 
-    for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--) 
-    { 
+    for (ibBlock=bRECORD_BLOCK; ibBlock>0; ibBlock--)
+    {
       time ti = ReadEventBlock(ibBlock);
       if ((ti.bDay == bInBuff7) && (ti.bMonth == bInBuff8) && (ti.bYear == bInBuff9))
-      { 
+      {
         x_str(" calc ");
 
         f = 1;
@@ -201,7 +201,7 @@ uint    wTotal;
       else
       {
         if (f == 1)
-        { 
+        {
           x_str("\n success");
           PushEvents2(p, b, wTotal, wIndex, wCount);
           return;
