@@ -105,7 +105,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
     DelayOff();
     QueryConfigS();
 
-    if (InputS() == SER_GOODCHECK) break;
+    if (InputV() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -164,17 +164,36 @@ bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
     DelayOff();
     QueryEngMonS(bTime);
 
-    if (InputS() == SER_GOODCHECK) break;
+    if (InputV() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
   ShowPercent(bPercent);
 
-  ReadEnergyS();
+  ReadEnergyV();
   return(1);
 }
 */
+
+bool    QueryEngDayV_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPercent)
+{
+  uchar i;
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryEngDayV(bDay,bMonth,bYear);
+
+    if (InputV() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(bPercent);
+
+  ReadEnergyV();
+  return(1);
+}
 
 
 time2   ReadTimeCanV(void)
@@ -205,24 +224,24 @@ double2 ReadCntCurrV(void)
   return GetDouble2(mpdbChannelsC[0], true);
 }
 
-/*
-double2 ReadCntMonCanS(uchar  ibMonth)
+
+double2 ReadCntMonCanV(uchar  ibMonth)
 {
   Clear();
 
-  if (QueryConfigS_Full(25) == 0) return GetDouble2Error();
+//  if (QueryConfigS_Full(25) == 0) return GetDouble2Error();
 
-  time2 ti2 = QueryTimeS_Full(50);
+  time2 ti2 = QueryTimeV_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
   if (ti.bMonth != ibMonth+1)
   {
-    if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2Error();
+//    if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2Error();
   }
   else
   {
-    if (QueryEngDayS_Full(1, 75) == 0) return GetDouble2Error();
+    if (QueryEngDayV_Full(bDay, bMonth, bYear, 75) == 0) return GetDouble2Error();
   }
 
   mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;
@@ -230,6 +249,6 @@ double2 ReadCntMonCanS(uchar  ibMonth)
 
   return GetDouble2(mpdbChannelsC[0], true);
 }
-*/
+
 #endif
 
