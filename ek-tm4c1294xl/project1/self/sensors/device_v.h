@@ -20,7 +20,7 @@ time    ReadTimeV(void);
 //void    ReadVersionS(void);
 
 void    QueryEngAbsV(void);
-//void    QueryEngMonS(uchar  bMonth);
+void    QueryEngMonV(uchar  bMonth, uchar  bYear);
 void    QueryEngDayV(uchar  bDay, uchar  bMonth, uchar  bYear);
 void    ReadEnergyV(void);
 

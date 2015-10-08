@@ -9,7 +9,7 @@ AUTOMATIC_V!C
 #include "../memory/mem_profile.h"
 //#include "../memory/mem_factors.h"
 //#include "../time/delay.h"
-//#include "../time/timedate.h"
+#include "../time/timedate.h"
 #include "../hardware/watchdog.h"
 #include "../kernel/crc_v.h"
 #include "../serial/ports.h"
@@ -155,14 +155,14 @@ bool    QueryEngAbsV_Full(uchar  bPercent)
   return(1);
 }
 
-/*
-bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
+
+bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
 {
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryEngMonS(bTime);
+    QueryEngMonV(bMonth,bYear);
 
     if (InputV() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
@@ -174,7 +174,7 @@ bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
   ReadEnergyV();
   return(1);
 }
-*/
+
 
 bool    QueryEngDayV_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPercent)
 {
@@ -237,11 +237,26 @@ double2 ReadCntMonCanV(uchar  ibMonth)
 
   if (ti.bMonth != ibMonth+1)
   {
-//    if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2Error();
+    if (QueryEngMonV_Full(ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
   }
   else
   {
-    if (QueryEngDayV_Full(bDay, bMonth, bYear, 75) == 0) return GetDouble2Error();
+    if (ti.bDay > 1)
+      ti.bDay--;
+    else
+    {
+      if (ti.bMonth > 1)
+        ti.bMonth--;
+      else
+      {
+        ti.bMonth = 12;
+        ti.bYear--;
+      }
+
+      ti.bDay = GetDaysInMonthYM(ti.bYear, ti.bMonth);
+    }
+
+    if (QueryEngDayV_Full(ti.bDay, ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
   }
 
   mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerS;

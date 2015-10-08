@@ -186,24 +186,22 @@ void    QueryEngAbsV(void)
   QueryV(100+41, 15);
 }
 
-/*
-void    QueryEngMonS(uchar  bMonth)
+
+void    QueryEngMonV(uchar  bMonth, uchar  bYear)
 {
-  InitPush(0);
+  InitPush(2);
 
-  PushChar(0xC0);
-  PushChar(0x48);
+  PushChar(0x22);
+  PushChar(0x00);
 
-  PushAddressS();
+  PushAddressV(0x24);
 
-  PushChar(0xD1);
-  PushChar(0x01);
-  PushChar(0x31);
   PushChar(bMonth);
+  PushChar(bYear);
 
-  QueryS_IO(100+15, 16);
+  QueryV(100+39, 17);
 }
-*/
+
 
 void    QueryEngDayV(uchar  bDay, uchar  bMonth, uchar  bYear)
 {
