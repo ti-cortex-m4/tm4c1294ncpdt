@@ -205,6 +205,23 @@ void    QueryEngMonS(uchar  bMonth)
 }
 */
 
+void    QueryEngDayV(uchar  bDay, uchar  bMonth, uchar  bYear)
+{
+  InitPush(2);
+
+  PushChar(0x23);
+  PushChar(0x00);
+
+  PushAddressV(0x25);
+
+  PushChar(bDay);
+  PushChar(bMonth);
+  PushChar(bYear);
+
+  QueryV(100+40, 18);
+}
+
+
 void    ReadEnergyV(void)
 {
   InitPop(13);

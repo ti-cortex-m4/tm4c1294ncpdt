@@ -21,6 +21,7 @@ time    ReadTimeV(void);
 
 void    QueryEngAbsV(void);
 //void    QueryEngMonS(uchar  bMonth);
+void    QueryEngDayV(uchar  bDay, uchar  bMonth, uchar  bYear);
 void    ReadEnergyV(void);
 
 //void    InitHeaderS(void);
