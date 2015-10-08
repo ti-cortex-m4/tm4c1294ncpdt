@@ -220,9 +220,9 @@ void    QueryEngDayV(uchar  bDay, uchar  bMonth, uchar  bYear)
 }
 
 
-void    ReadEnergyV(void)
+static void ReadEngV(uchar  ibPop)
 {
-  InitPop(13);
+  InitPop(ibPop);
 
   mpdwChannelsA[0] = PopLongLtl();
   mpboChannelsA[0] = true;
@@ -234,6 +234,24 @@ void    ReadEnergyV(void)
     case 0x02: wDividerV = 100; break;
     default:   wDividerV = 1000; break;
   }
+}
+
+
+void    ReadEngAbsV(void)
+{
+  ReadEngV(13);
+}
+
+
+void    ReadEngMonV(void)
+{
+  ReadEngV(13+2);
+}
+
+
+void    ReadEngDayV(void)
+{
+  ReadEngV(13+3);
 }
 
 
