@@ -151,7 +151,7 @@ bool    QueryEngAbsV_Full(uchar  bPercent)
   if (i == bMINORREPEATS) return(0);
   ShowPercent(bPercent);
 
-  ReadEnergyV();
+  ReadEngAbsV();
   return(1);
 }
 
@@ -171,7 +171,7 @@ bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
   if (i == bMINORREPEATS) return(0);
   ShowPercent(bPercent);
 
-  ReadEnergyV();
+  ReadEngMonV();
   return(1);
 }
 
@@ -191,7 +191,7 @@ bool    QueryEngDayV_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPerc
   if (i == bMINORREPEATS) return(0);
   ShowPercent(bPercent);
 
-  ReadEnergyV();
+  ReadEngDayV();
   return(1);
 }
 
@@ -237,6 +237,14 @@ double2 ReadCntMonCanV(uchar  ibMonth)
 
   if (ti.bMonth != ibMonth+1)
   {
+    if (ti.bMonth < 12)
+      ti.bMonth++;
+    else
+    {
+      ti.bMonth = 1;
+      ti.bYear++;
+    }
+
     if (QueryEngMonV_Full(ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
   }
   else
