@@ -18,11 +18,13 @@ AUTOMATIC1!C
 #include "device_b.h"
 #include "device_c.h"
 #include "device_p.h"
+#include "device_v.h"
 #include "automatic_a.h"
 #include "automatic_b.h"
 #include "automatic_c.h"
 #include "automatic_p.h"
 #include "automatic_s.h"
+#include "automatic_v.h"
 #include "automatic1.h"
 
 
@@ -1276,6 +1278,25 @@ bool    AutomaticS(void)
   dbKpulse = wDividerS;                 // K преобразования
   dbKtrans = 1;                         // K трансформации
   SetCanalsAll();                       // сохранение К преобразования и К трансформации
+
+  return(1);
+}
+
+#endif
+
+
+
+#ifndef SKIP_V
+
+bool    AutomaticV(void)
+{
+  Clear();
+
+  if (QueryEngAbsV_Full(50) == 0) return(0);
+
+  dbKpulse = wDividerV;
+  dbKtrans = 1;
+  SetCanalsAll();
 
   return(1);
 }

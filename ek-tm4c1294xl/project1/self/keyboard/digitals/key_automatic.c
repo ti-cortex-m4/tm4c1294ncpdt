@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 KEY_AUTOMATIC!C
-              
+
 
 ------------------------------------------------------------------------------*/
 
@@ -46,7 +46,7 @@ uchar   i;
 
       Clear();
       InitConnectKey();
-      
+
       ibX = 0;
 
       for (i=ibMin; i<ibMax; i++)
@@ -60,7 +60,7 @@ uchar   i;
 
         if (GetDigitalDevice(i) != 0)
         {
-          if (StreamPortCan(GetDigitalPort(i),i) == 0) 
+          if (StreamPortCan(GetDigitalPort(i),i) == 0)
           { bRes = 0xEE; break; }
         }
 
@@ -71,8 +71,8 @@ uchar   i;
         Clear();
 
         if (mpboEnblCan[i] == false)
-        { 
-          ShowLo(szBlocked); 
+        {
+          ShowLo(szBlocked);
           DelayMsg();
         }
         else switch (diCurr.bDevice)
@@ -98,13 +98,13 @@ uchar   i;
 #endif
 
 #ifndef SKIP_E
-          case 7: 
+          case 7:
           case 5:  if (AutomaticE() != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_F
           case 6:  if (AutomaticF() != 1) bRes = 0xEE; break;
-#endif             
+#endif
 
 #ifndef SKIP_G
           case 9:  if (AutomaticG() != 1) bRes = 0xEE; break;
@@ -159,7 +159,11 @@ uchar   i;
 #ifndef SKIP_T
           case 25: if (AutomaticT() != 1) bRes = 0xEE; break;
 #endif
-        }            
+
+#ifndef SKIP_V
+          case 27: if (AutomaticV() != 1) bRes = 0xEE; break;
+#endif
+        }
 
         SaveConnect();
 
@@ -193,15 +197,15 @@ void    key_Automatic1(void)
     if (enKeyboard == KBD_ENTER)
     {
       Automatic(0,bCANALS);
-    } 
+    }
   }
 }
 
 
 void    key_Automatic2(void)
-{ 
+{
   if (bKey == bKEY_ENTER)
-  {                                           
+  {
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
@@ -211,7 +215,7 @@ void    key_Automatic2(void)
 
       ShowHi(szCana1s);
       strcpy(szLo+0,szCana1FromMask);
-    } 
+    }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       ibXmin = GetCharLo(5,6) - 1;
@@ -237,19 +241,19 @@ void    key_Automatic2(void)
 
 
   else if (bKey < 10)
-  {        
+  {
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
     {
       enKeyboard = KBD_POSTINPUT1;
       ShiftLo(5,6);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
       ShiftLo(13,14);
     }
-    else Beep(); 
+    else Beep();
   }
   else Beep();
 }
