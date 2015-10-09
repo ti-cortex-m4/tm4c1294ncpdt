@@ -30,5 +30,5 @@ void    ReadEngDayV(void);
 //void    InitHeaderS(void);
 //void    QueryHeaderS(void);
 //bool    ReadHeaderS(void);
-//
-//void    ReadCurrentS(void);
+
+void    ReadCurrentV(void);
