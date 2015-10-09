@@ -237,13 +237,8 @@ double2 ReadCntMonCanV(uchar  ibMonth)
 
   if (ti.bMonth != ibMonth+1)
   {
-    if (ti.bMonth < 12)
-      ti.bMonth++;
-    else
-    {
-      ti.bMonth = 1;
-      ti.bYear++;
-    }
+    ti.bYear = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    ti.bMonth = ibMonth+1;
 
     if (QueryEngMonV_Full(ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
   }
