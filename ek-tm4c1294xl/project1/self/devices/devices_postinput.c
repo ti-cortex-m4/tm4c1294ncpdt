@@ -11,6 +11,7 @@ DEVICES_POSTINPUT,C
 #include "../serial/ports_devices.h"
 #include "../devices/decompress_k.h"
 #include "../devices/decompress_s.h"
+#include "../devices/decompress_v.h"
 #include "../digitals/digitals_status.h"
 #include "devices_postinput.h"
 
@@ -182,6 +183,16 @@ void    DevicesPostInput(void)
     else if (diCurr.bDevice == 26)
     {
       if ( MakeBccInBuff() )
+        mpSerial[ibPort] = SER_GOODCHECK;
+      else
+        mpSerial[ibPort] = SER_BADCHECK;
+    }
+#endif
+
+#ifndef SKIP_V
+    if (diCurr.bDevice == 27)
+    {
+      if (ChecksumV() == 0)
         mpSerial[ibPort] = SER_GOODCHECK;
       else
         mpSerial[ibPort] = SER_BADCHECK;
