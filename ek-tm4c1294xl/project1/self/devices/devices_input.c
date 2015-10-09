@@ -10,6 +10,7 @@ DEVICES_INPUT,C
 #include "../devices/decompress_c.h"
 #include "../devices/decompress_k.h"
 #include "../devices/decompress_s.h"
+#include "../devices/decompress_v.h"
 #include "../serial/ports.h"
 #include "devices_input.h"
 
@@ -130,6 +131,13 @@ uchar   bT;
 
       else if (GetCurr() == DEV_ENERGY_U3)
         DecompressK(1);
+    }
+#endif
+
+#ifndef SKIP_V
+    else if (diCurr.bDevice == 27)
+    {
+      DecompressV();
     }
 #endif
 }
