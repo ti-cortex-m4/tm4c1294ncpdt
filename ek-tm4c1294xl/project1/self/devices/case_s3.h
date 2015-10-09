@@ -17,16 +17,16 @@
       }
       else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryConfigS();
           SetCurr(DEV_CONFIG_S3);
         }
-      } 
+      }
       break;
 
     case DEV_POSTCONFIG_S3:
@@ -40,18 +40,18 @@
     case DEV_ENERGY_S3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         ReadCurrentS();
-      else 
+      else
       {
-        if (cbRepeat == 0) ErrorCurrent(); 
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryEngMonS(0);
           SetCurr(DEV_ENERGY_S3);
         }
-      } 
+      }
       break;
 
 #endif
