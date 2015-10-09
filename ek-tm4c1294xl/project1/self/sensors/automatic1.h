@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 _AUTOMATIC1!H
-              
+
 
 ------------------------------------------------------------------------------*/
 
@@ -22,3 +22,4 @@ bool    AutomaticC(void);
 bool    AutomaticJ(void);
 bool    AutomaticP(void);
 bool    AutomaticS(void);
+bool    AutomaticV(void);

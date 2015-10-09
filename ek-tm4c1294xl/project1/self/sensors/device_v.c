@@ -8,8 +8,8 @@ DEVICE_V!C
 #include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
 //#include "../memory/mem_ports.h"
-//#include "../memory/mem_current.h"
-//#include "../memory/mem_factors.h"
+#include "../memory/mem_current.h"
+#include "../memory/mem_factors.h"
 //#include "../memory/mem_realtime.h"
 //#include "../memory/mem_energy_spec.h"
 //#include "../memory/mem_profile.h"
@@ -24,9 +24,9 @@ DEVICE_V!C
 //#include "../serial/ports_stack.h"
 //#include "../serial/ports_devices.h"
 //#include "../serial/ports_common.h"
-//#include "../devices/devices.h"
+#include "../devices/devices.h"
 //#include "../devices/devices_time.h"
-//#include "../digitals/current/current_run.h"
+#include "../digitals/current/current_run.h"
 //#include "../digitals/limits.h"
 //#include "../special/special.h"
 //#include "../hardware/watchdog.h"
@@ -376,10 +376,10 @@ bool    ReadHeaderS(void)
 
 void    ReadCurrentV(void)
 {
-//  ReadEnergyS();
-//  mpdwBaseDig[0] = coEnergy.dwBuff*mpdbPulseMnt[ibDig]/wDividerS;
-//
-//  MakeCurrent();
+  ReadEngAbsV();
+  mpdwBaseDig[0] = mpdwChannelsA[0]*mpdbPulseMnt[ibDig]/wDividerV;
+
+  MakeCurrent();
 }
 
 #endif
