@@ -13,9 +13,9 @@ MAIN_DEVICES!H
 
 
 // тип 'состояние опроса цифрового счётчика'
-typedef enum 
-{  
-  DEV_BEGIN             =  0, 
+typedef enum
+{
+  DEV_BEGIN             =  0,
 
   DEV_MODEM_MANUAL      =  0x09,
 
@@ -537,6 +537,9 @@ typedef enum
   DEV_POSTCONFIG_S3     =  0x1822,
   DEV_ENERGY_S3         =  0x1823,
 
+  DEV_START_V3          =  0x1920,
+  DEV_ENERGY_V3         =  0x1921,
+
 #endif
 
 #ifndef SKIP_T
@@ -597,7 +600,7 @@ typedef enum
 
 #endif
 
-  DEV_PAUSE             =  1 
+  DEV_PAUSE             =  1
 
 } device;
 

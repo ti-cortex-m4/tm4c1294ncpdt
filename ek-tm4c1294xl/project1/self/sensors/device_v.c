@@ -371,15 +371,15 @@ bool    ReadHeaderS(void)
 
   return(1);
 }
-
-
-
-void    ReadCurrentS(void)
-{
-  ReadEnergyS();
-  mpdwBaseDig[0] = coEnergy.dwBuff*mpdbPulseMnt[ibDig]/wDividerS;
-
-  MakeCurrent();
-}
 */
+
+
+void    ReadCurrentV(void)
+{
+//  ReadEnergyS();
+//  mpdwBaseDig[0] = coEnergy.dwBuff*mpdbPulseMnt[ibDig]/wDividerS;
+//
+//  MakeCurrent();
+}
+
 #endif
