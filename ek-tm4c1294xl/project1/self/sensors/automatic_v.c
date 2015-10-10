@@ -244,21 +244,6 @@ double2 ReadCntMonCanV(uchar  ibMonth)
   }
   else
   {
-    if (ti.bDay > 1)
-      ti.bDay--;
-    else
-    {
-      if (ti.bMonth > 1)
-        ti.bMonth--;
-      else
-      {
-        ti.bMonth = 12;
-        ti.bYear--;
-      }
-
-      ti.bDay = GetDaysInMonthYM(ti.bYear, ti.bMonth);
-    }
-
     if (QueryEngDayV_Full(ti.bDay, ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
   }
 
