@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-CACHE2!C
+CACHE2.C
 
 
 ------------------------------------------------------------------------------*/
@@ -33,10 +33,10 @@ void    LoadCacheBool(cache const  *pch, bool  fDef)
 
 
 
-void    SaveCacheChar(cache const  *pch, uchar  w)
+void    SaveCacheChar(cache const  *pch, uchar  b)
 {
   uchar *pb = (uchar *) pch->pbBuff;
-  *pb = w;
+  *pb = b;
 
   SaveCache(pch);
 }
