@@ -6,6 +6,8 @@ DEVICE_V.H
 
 extern  uint                    wDividerV;
 
+extern  ulong                   dwValueV;
+
 
 
 void    QueryTimeV(void);
@@ -15,9 +17,9 @@ time    ReadTimeV(void);
 //
 //void    QueryConfigS(void);
 //void    ReadConfigS(void);
-//
-//void    QueryVersionS(void);
-//void    ReadVersionS(void);
+
+void    QueryVersionV(void);
+bool    ReadVersionV(void);
 
 void    QueryEngAbsV(void);
 void    QueryEngMonV(uchar  bMonth, uchar  bYear);

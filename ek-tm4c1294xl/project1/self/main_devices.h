@@ -537,9 +537,6 @@ typedef enum
   DEV_POSTCONFIG_S3     =  0x1822,
   DEV_ENERGY_S3         =  0x1823,
 
-  DEV_START_V3          =  0x1920,
-  DEV_ENERGY_V3         =  0x1921,
-
 #endif
 
 #ifndef SKIP_T
@@ -597,6 +594,31 @@ typedef enum
   DEV_HEADER_U4         =  0x1A51,
   DEV_POSTHEADER_U4     =  0x1A52,
   DEV_DATA_U4           =  0x1A53,
+
+#endif
+
+#ifndef SKIP_V
+
+  DEV_START_V2          =  0x1B00,
+  DEV_VERSION_V2        =  0x1B01,
+  DEV_POSTVERSION_V2    =  0x1B02,
+  DEV_POSTOPENCANAL_V2  =  0x1B03,
+  DEV_TIME_V2           =  0x1B04,
+  DEV_POSTTIME_V2       =  0x1B05,
+  DEV_CONTROL_V2        =  0x1B06,
+  DEV_POSTCORRECT_V2    =  0x1B07,
+  DEV_CONFIG_V2         =  0x1B08,
+  DEV_POSTCONFIG_V2     =  0x1B09,
+  DEV_VALUE_V2          =  0x1B0A,
+  DEV_POSTVALUE_V2      =  0x1B0B,
+  DEV_HEADER_V2         =  0x1B0C,
+  DEV_POSTHEADER_V2     =  0x1B0D,
+  DEV_DATA_V2           =  0x1B0E,
+
+  DEV_START_V3          =  0x1B20,
+  DEV_CONFIG_V3         =  0x1B21,
+  DEV_POSTCONFIG_V3     =  0x1B22,
+  DEV_ENERGY_V3         =  0x1B23,
 
 #endif
 
