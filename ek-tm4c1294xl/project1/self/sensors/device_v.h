@@ -6,6 +6,8 @@ DEVICE_V.H
 
 extern  uint                    wDividerV;
 
+extern  time                    tiValueV;
+
 extern  ulong                   dwValueV;
 
 
