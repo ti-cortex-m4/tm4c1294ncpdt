@@ -3,14 +3,14 @@
 
     case DEV_START_V2:
       cbRepeat = GetMaxRepeats();
-      QueryVersionS();
+      QueryVersionV();
       SetCurr(DEV_VERSION_V2);
       break;
 
     case DEV_VERSION_V2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadVersionS();
+        ReadVersionV();
 
         if (boHideMessages == false)
           MakeLongPause(DEV_POSTVERSION_V2, 1);
@@ -25,7 +25,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryVersionS();
+          QueryVersionV();
           SetCurr(DEV_VERSION_V2);
         }
       }
@@ -46,14 +46,14 @@
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = GetMaxRepeats();
-      QueryTimeS();
+      QueryTimeV();
       SetCurr(DEV_TIME_V2);
       break;
 
     case DEV_TIME_V2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiDig = ReadTimeS();
+        tiDig = ReadTimeV();
         MakePause(DEV_POSTTIME_V2);
       }
       else
@@ -64,7 +64,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTimeS();
+          QueryTimeV();
           SetCurr(DEV_TIME_V2);
         }
       }
@@ -101,7 +101,7 @@
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryControlS(tiCurr);
+        QueryControlV(tiCurr);
         SetCurr(DEV_POSTOPENCANAL_V2);
       }
       break;
@@ -111,14 +111,14 @@
       Clear(); ShowPercent(25);
 
       cbRepeat = GetMaxRepeats();
-      QueryConfigS();
+      QueryConfigV();
       SetCurr(DEV_CONFIG_V2);
       break;
 
     case DEV_CONFIG_V2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadConfigS();
+        ReadConfigV();
         MakePause(DEV_POSTCONFIG_V2);
       }
       else
@@ -129,7 +129,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryConfigS();
+          QueryConfigV();
           SetCurr(DEV_CONFIG_V2);
         }
       }
@@ -139,14 +139,14 @@
       ShowPercent(50);
 
       cbRepeat = GetMaxRepeats();
-      QueryTimeS();
+      QueryTimeV();
       SetCurr(DEV_VALUE_V2);
       break;
 
     case DEV_VALUE_V2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiValueS = ReadTimeS();
+        tiValueS = ReadTimeV();
         dwValueS = DateToHouIndex(tiValueS);
         MakePause(DEV_POSTVALUE_V2);
       }
@@ -159,7 +159,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTimeS();
+          QueryTimeV();
           SetCurr(DEV_VALUE_V2);
         }
       }
@@ -167,10 +167,10 @@
 
     case DEV_POSTVALUE_V2:
       ShowPercent(75);
-      InitHeaderS();
+      InitHeaderV();
 
       cbRepeat = GetMaxRepeats();
-      QueryHeaderS();
+      QueryHeaderV();
       SetCurr(DEV_HEADER_V2);
       break;
 
@@ -185,14 +185,14 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderS();
+          QueryHeaderV();
           SetCurr(DEV_HEADER_V2);
         }
       }
       break;
 
     case DEV_POSTHEADER_V2:
-      if (ReadHeaderS() == 0)
+      if (ReadHeaderV() == 0)
         DoneProfile();
       else
         MakePause(DEV_DATA_V2);
@@ -200,7 +200,7 @@
 
     case DEV_DATA_V2:
       cbRepeat = GetMaxRepeats();
-      QueryHeaderS();
+      QueryHeaderV();
       SetCurr(DEV_HEADER_V2);
       break;
 
