@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DECOMPRESS_V!C
+UNPACK_V!C
 
 
 ------------------------------------------------------------------------------*/
@@ -32,7 +32,7 @@ static uchar RepackV(uchar  bCode1, uchar  bCode2)
 }
 
 
-void    DecompressV(void)
+void    UnpackV(void)
 {
 uchar   i,j;
 
@@ -58,11 +58,8 @@ uchar   i,j;
   bool f = 1;
   while ((f == 1) && (IndexInBuff() > 15) && (IndexInBuff() != (InBuff(2) & 0x1F) + 15))
   {
-    if (UseMonitor())
-    {
-      MonitorString("\n Decompress");
-      MonitorIn();
-    }
+    MonitorString("\n Unpack");
+    MonitorIn();
 
     f = 0;
 

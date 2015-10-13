@@ -77,7 +77,7 @@ serial  InputV(void)
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      DecompressV();
+      UnpackV();
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
