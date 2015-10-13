@@ -10,12 +10,18 @@
     case DEV_VERSION_V2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadVersionV();
-
-        if (boHideMessages == false)
-          MakeLongPause(DEV_POSTVERSION_V2, 1);
+        if (ReadVersionV() == false)
+        {
+          ShowHi(szBadVersion);
+          DelayMsg(); ErrorProfile();
+        }
         else
-          MakePause(DEV_POSTVERSION_V2);
+        {
+          if (boHideMessages == false)
+            MakeLongPause(DEV_POSTVERSION_V2, 1);
+          else
+            MakePause(DEV_POSTVERSION_V2);
+        }
       }
       else
       {

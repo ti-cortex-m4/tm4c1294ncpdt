@@ -51,4 +51,5 @@ extern  char const              szBaudOK[],
                                 szDirectParam[],
                                 szFailure1[],
                                 szFailure2[],
-                                szFailure20[];
+                                szFailure20[],
+                                szBadVersion[];
