@@ -17,7 +17,7 @@ AUTOMATIC_S!C
 #include "../serial/ports2.h"
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
-#include "../devices/decompress_s.h"
+#include "../sensors/unpack_s.h"
 #include "../digitals/digitals.h"
 #include "../digitals/wait_answer.h"
 #include "automatic1.h"

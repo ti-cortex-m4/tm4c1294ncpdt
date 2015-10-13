@@ -9,7 +9,7 @@ DECOMPRESS_K!C
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
 #include "../display/display.h"
-#include "decompress_k.h"
+#include "unpack_k.h"
 
 
 
@@ -27,12 +27,12 @@ uchar   j;
 
   if ((fShow == 1) && (IndexInBuff() > 40)) sprintf(szLo," прием: %-4u    ",IndexInBuff());
 
-  if (IndexInBuff() > 2) 
+  if (IndexInBuff() > 2)
   {
     InitPop(1);
 
     j = 0;
-    for (i=0; i<IndexInBuff()-2; i++) 
+    for (i=0; i<IndexInBuff()-2; i++)
     {
       if (PopChar0Bcc() == ')') j++;
 
@@ -63,15 +63,15 @@ uchar   j;
 
   if ((fShow == 1) && (IndexInBuff() > 40)) sprintf(szLo," прием: %-4u    ",IndexInBuff());
 
-  if (IndexInBuff() > 2) 
+  if (IndexInBuff() > 2)
   {
     InitPop(1);
 
     j = 0;
-    for (i=0; i<IndexInBuff()-2; i++) 
+    for (i=0; i<IndexInBuff()-2; i++)
     {
       if (PopChar0Bcc() == ')') j++;
-         
+
       if ((j == cbHeaderBcc) && (i+bOffset == IndexInBuff()))
       {
         SetCountInBuff(i+bOffset);
