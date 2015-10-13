@@ -36,6 +36,8 @@ DEVICE_V!C
 
 uint                    wDividerV;
 
+time                    tiValueV;
+
 ulong                   dwValueV;
 
 
