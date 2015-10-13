@@ -137,7 +137,7 @@ uchar   bT;
 #ifndef SKIP_V
     else if (diCurr.bDevice == 27)
     {
-      DecompressV();
+      UnpackV();
     }
 #endif
 }
