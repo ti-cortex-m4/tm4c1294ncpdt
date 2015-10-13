@@ -256,7 +256,7 @@ void    ReadEngDayV(void)
 
 
 /*
-void    InitHeaderS(void)
+void    InitHeaderV(void)
 {
   if (!UseBounds())
     wBaseCurr = 0;
@@ -277,7 +277,7 @@ void    InitHeaderS(void)
 }
 
 
-void    QueryHeaderS(void)
+void    QueryHeaderV(void)
 {
   HideCurrTime(1);
 
@@ -308,7 +308,7 @@ void    QueryHeaderS(void)
 }
 
 
-bool    ReadDataS(uchar  i)
+bool    ReadDataV(uchar  i)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
@@ -350,7 +350,7 @@ bool    ReadDataS(uchar  i)
 }
 
 
-bool    ReadHeaderS(void)
+bool    ReadHeaderV(void)
 {
   uchar i;
   for (i=0; i<4; i++)

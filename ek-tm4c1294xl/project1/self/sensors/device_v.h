@@ -27,8 +27,8 @@ void    ReadEngAbsV(void);
 void    ReadEngMonV(void);
 void    ReadEngDayV(void);
 
-//void    InitHeaderS(void);
-//void    QueryHeaderS(void);
-//bool    ReadHeaderS(void);
+void    InitHeaderV(void);
+void    QueryHeaderV(void);
+bool    ReadHeaderV(void);
 
 void    ReadCurrentV(void);
