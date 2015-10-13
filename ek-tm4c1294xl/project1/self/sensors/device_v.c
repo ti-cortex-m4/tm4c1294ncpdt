@@ -14,16 +14,13 @@ DEVICE_V!C
 #include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
-#include "../serial/ports_stack.h"
+#include "../serial/ports.h"
 #include "../serial/ports_devices.h"
 #include "../display/display.h"
 #include "../keyboard/time/key_timedate.h"
-//#include "../time/timedate.h"
+#include "../time/timedate.h"
 #include "../time/calendar.h"
 //#include "../time/delay.h"
-//#include "../serial/ports_stack.h"
-//#include "../serial/ports_devices.h"
-//#include "../serial/ports_common.h"
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
@@ -88,92 +85,52 @@ time    ReadTimeV(void)
 }
 
 
-/*
-void    QueryControlS(time  ti)
+
+void    QueryControlV(time  ti)
 {
-  InitPush(0);
+  InitPush(2);
 
-  PushChar(0xC0);
-  PushChar(0x48);
+  PushChar(0x27);
+  PushChar(0x00);
 
-  PushAddressS();
+  PushAddressV(0x1D);
 
-  PushChar(0xD7);
-  PushChar(0x01);
-  PushChar(0x21);
-
-  PushChar(ToBCD(tiCurr.bSecond));
-  PushChar(ToBCD(tiCurr.bMinute));
-  PushChar(ToBCD(tiCurr.bHour));
+  PushChar(ti.bSecond);
+  PushChar(ti.bMinute);
+  PushChar(ti.bHour);
 
   PushChar((GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) + 1) % 7);
 
-  PushChar(ToBCD(tiCurr.bDay));
-  PushChar(ToBCD(tiCurr.bMonth));
-  PushChar(ToBCD(tiCurr.bYear));
+  PushChar(ti.bDay);
+  PushChar(ti.bMonth);
+  PushChar(ti.bYear);
 
-  QueryS_IO(100+11, 22);
+  QueryV(100+15, 22);
 }
 
 
 
-void    QueryConfigS(void)
+void    QueryVersionV(void)
 {
-  InitPush(0);
+  InitPush(2);
 
-  PushChar(0xC0);
-  PushChar(0x48);
-
-  PushAddressS();
-
-  PushChar(0xD0);
-  PushChar(0x01);
-  PushChar(0x01);
-
-  QueryS_IO(100+16, 15);
-}
-
-
-void    ReadConfigS(void)
-{
-  InitPop(9);
-
-  switch (PopChar() & 0x03)
-  {
-    case 0x00: wDividerS = 1; break;
-    case 0x01: wDividerS = 10; break;
-    case 0x02: wDividerS = 100; break;
-    default:   wDividerS = 1000; break;
-  }
-}
-
-
-
-void    QueryVersionS(void)
-{
-  InitPush(0);
-
-  PushChar(0xC0);
-  PushChar(0x48);
-
-  PushAddressS();
-
-  PushChar(0xD0);
-  PushChar(0x01);
+  PushChar(0x20);
   PushChar(0x00);
 
-  QueryS_IO(100+17, 15);
+  PushAddressV(0x30);
+
+  QueryV(100+42, 15);
 }
 
 
-void    ReadVersionS(void)
+bool    ReadVersionV(void)
 {
-  InitPop(9);
-
   Clear();
-  sprintf(szLo+1, "версия %u.%u.%u", PopChar(), PopChar(), PopChar());
+  sprintf(szLo+2, "версия %2X.%2X", InBuff(9), InBuff(13));
+
+  return true;
 }
-*/
+
 
 
 void    QueryEngAbsV(void)

@@ -108,35 +108,7 @@
 
 
     case DEV_POSTCORRECT_V2:
-      Clear(); ShowPercent(25);
-
-      cbRepeat = GetMaxRepeats();
-      QueryConfigV();
-      SetCurr(DEV_CONFIG_V2);
-      break;
-
-    case DEV_CONFIG_V2:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-        ReadConfigV();
-        MakePause(DEV_POSTCONFIG_V2);
-      }
-      else
-      {
-        if (cbRepeat == 0) ErrorProfile();
-        else
-        {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryConfigV();
-          SetCurr(DEV_CONFIG_V2);
-        }
-      }
-      break;
-
-    case DEV_POSTCONFIG_V2:
-      ShowPercent(50);
+      Clear(); ShowPercent(50);
 
       cbRepeat = GetMaxRepeats();
       QueryTimeV();
