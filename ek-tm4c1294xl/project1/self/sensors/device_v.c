@@ -10,25 +10,25 @@ DEVICE_V!C
 //#include "../memory/mem_ports.h"
 #include "../memory/mem_current.h"
 #include "../memory/mem_factors.h"
-//#include "../memory/mem_realtime.h"
-//#include "../memory/mem_energy_spec.h"
-//#include "../memory/mem_profile.h"
-//#include "../memory/mem_limits.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_energy_spec.h"
+#include "../memory/mem_profile.h"
+#include "../memory/mem_limits.h"
 #include "../serial/ports_stack.h"
-//#include "../serial/ports_devices.h"
+#include "../serial/ports_devices.h"
 #include "../display/display.h"
-//#include "../keyboard/time/key_timedate.h"
+#include "../keyboard/time/key_timedate.h"
 //#include "../time/timedate.h"
-//#include "../time/calendar.h"
+#include "../time/calendar.h"
 //#include "../time/delay.h"
 //#include "../serial/ports_stack.h"
 //#include "../serial/ports_devices.h"
 //#include "../serial/ports_common.h"
 #include "../devices/devices.h"
-//#include "../devices/devices_time.h"
+#include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
-//#include "../digitals/limits.h"
-//#include "../special/special.h"
+#include "../digitals/limits.h"
+#include "../special/special.h"
 //#include "../hardware/watchdog.h"
 #include "automatic_v.h"
 #include "device_v.h"
@@ -38,6 +38,8 @@ DEVICE_V!C
 #ifndef SKIP_V
 
 uint                    wDividerV;
+
+ulong                   dwValueV;
 
 
 
@@ -255,22 +257,22 @@ void    ReadEngDayV(void)
 }
 
 
-/*
+
 void    InitHeaderV(void)
 {
-  if (!UseBounds())
+//  if (!UseBounds())
     wBaseCurr = 0;
-  else
-  {
-    wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
-    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-    if (boShowMessages == true) DelayMsg();
-  }
+//  else
+//  {
+//    wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
+//    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+//    if (boShowMessages == true) DelayMsg();
+//  }
 
   tiDigPrev = tiCurr;
 
   uchar i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
-  i = (i / 4) * 4;
+  i = (i / 8) * 8;
 
   tiDigPrev.bHour = i / 2;
   tiDigPrev.bMinute = (i % 2)*30;
@@ -287,24 +289,21 @@ void    QueryHeaderV(void)
   tiDig = HouIndexToDate(dw);
 
 
-  InitPush(0);
+  InitPush(2);
 
-  PushChar(0xC0);
-  PushChar(0x48);
+  PushChar(0x24);
+  PushChar(0x00);
 
-  PushAddressS();
+  PushAddressV(0x26);
 
-  PushChar(0xD5);
-  PushChar(0x01);
-  PushChar(0x34);
+  PushChar(tiDig.bDay);
+  PushChar(tiDig.bMonth);
+  PushChar(tiDig.bYear);
 
-  PushChar(ToBCD(tiDig.bDay));
-  PushChar(ToBCD(tiDig.bMonth));
-  PushChar(ToBCD(tiDig.bYear));
-  PushChar(tiDig.bHour*2 + tiDig.bMinute/30);
-  PushChar(4);
+  uchar i = tiDig.bHour*2 + tiDig.bMinute/30;
+  PushChar(i/8 + 1);
 
-  QueryS_IO(100+23, 20);
+  QueryV(100+37, 19);
 }
 
 
@@ -317,61 +316,36 @@ bool    ReadDataV(uchar  i)
 
   ShowProgressDigHou();
 
-  InitPop(9+i*3);
+  InitPop(17+i*2);
+  mpwChannels[0] = PopIntLtl();
 
-  ulong dw = PopChar();
-  dw += PopChar()*0x100;
-  dw += PopChar()*0x10000;
-
-  if (dw != 0xFFFFFF)
-  {
-    double dbPulse = mpdbPulseHou[ibDig];
-
-    float fl = (float)dw/wDividerS;
-    mpflEngFrac[ibDig] += fl;
-
-    uint w;
-    if ((ulong)(mpflEngFrac[ibDig]*dbPulse) < 0xFFFF)
-    { w = (uint)(mpflEngFrac[ibDig]*dbPulse); }
-    else
-    { w = 0xFFFF; mpcwOverflowHhr[ibDig]++; }
-
-    mpwChannels[0] = w;
-    mpflEngFrac[ibDig] -= (float)w/dbPulse;
-
-    MakeSpecial(tiDig);
-    return(MakeStopHou(0));
-  }
-  else
-  {
-    szLo[15] = '*';
-    return(MakeStopHou(0));
-  }
+  MakeSpecial(tiDig);
+  return(MakeStopHou(0));
 }
 
 
 bool    ReadHeaderV(void)
 {
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<8; i++)
   {
     ulong dw = DateToHouIndex(tiDigPrev);
 
-    dw += 4-1;
+    dw += 8-1;
     dw -= (wBaseCurr + i);
 
     tiDig = HouIndexToDate(dw);
 
-    if (dw < dwValueS)
-      if (ReadDataS(4-1-i) == 0) return(0);
+    if (dw < dwValueV)
+      if (ReadDataV(8-1-i) == 0) return(0);
   }
 
-  wBaseCurr += 4;
+  wBaseCurr += 8;
   if (wBaseCurr > wHOURS) return(0);
 
   return(1);
 }
-*/
+
 
 
 void    ReadCurrentV(void)
