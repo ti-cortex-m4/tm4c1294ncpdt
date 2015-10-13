@@ -114,7 +114,8 @@ uint    PopIntBig(void)
 
 uint    PopIntLtl(void)
 {
-  return PopChar() + PopChar()*0x100;
+  uchar b = PopChar();
+  return b + PopChar()*0x100;
 }
 
 
