@@ -15,7 +15,7 @@ DECOMPRESS_S!C
 #include "../devices/devices.h"
 #include "../display/display.h"
 #include "../time/delay.h"
-#include "decompress_s.h"
+#include "unpack_s.h"
 
 
 
@@ -47,7 +47,7 @@ uchar   i,j;
 
   if ((InBuff(6) & 0xF0) != 0x50)
   {
-    mpcwErrorLink[ibDig]++; 
+    mpcwErrorLink[ibDig]++;
 
     mpSerial[ibPort] = SER_BADLINK;
     return;
@@ -84,7 +84,7 @@ uchar   i,j;
 
 
 
-uchar   CheckS(void) 
+uchar   CheckS(void)
 {
 uint    i;
 
@@ -107,7 +107,7 @@ uint    i;
 }
 
 
-uchar   ChecksumS(void) 
+uchar   ChecksumS(void)
 {
 uchar   i;
 

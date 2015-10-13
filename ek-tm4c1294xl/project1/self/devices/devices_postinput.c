@@ -9,9 +9,9 @@ DEVICES_POSTINPUT,C
 #include "../kernel/crc-16.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
-#include "../devices/decompress_k.h"
-#include "../devices/decompress_s.h"
-#include "../devices/decompress_v.h"
+#include "../sensors/unpack_k.h"
+#include "../sensors/unpack_s.h"
+#include "../sensors/unpack_v.h"
 #include "../digitals/digitals_status.h"
 #include "devices_postinput.h"
 
