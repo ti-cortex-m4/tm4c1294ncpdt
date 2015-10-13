@@ -3418,7 +3418,7 @@ void    RunDevices(void)
       {
         if (ReadVersionV() == false)
         {
-          ShowLo(szBadVersion);
+          ShowHi(szBadVersion);
           DelayMsg(); ErrorProfile();
         }
         else
