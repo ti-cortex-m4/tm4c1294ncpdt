@@ -16,6 +16,7 @@ DEVICE_V!C
 #include "../memory/mem_limits.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
+#include "../serial/monitor.h"
 #include "../display/display.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../time/timedate.h"
@@ -245,7 +246,12 @@ void    QueryHeaderV(void)
 
   ulong dw = DateToHouIndex(tiDigPrev);
   dw -= wBaseCurr;
-  tiDig = HouIndexToDate(dw);
+  time ti = HouIndexToDate(dw);
+
+  MonitorString("\n\n");
+  MonitorTime(tiPrev); MonitorString("- ");
+  MonitorIntDec(wBaseCurr); MonitorString(" = ");
+  MonitorTime(ti);
 
 
   InitPush(2);
@@ -255,19 +261,28 @@ void    QueryHeaderV(void)
 
   PushAddressV(0x26);
 
-  PushChar(tiDig.bDay);
-  PushChar(tiDig.bMonth);
-  PushChar(tiDig.bYear);
+  PushChar(ti.bDay);
+  PushChar(ti.bMonth);
+  PushChar(ti.bYear);
 
-  uchar i = tiDig.bHour*2 + tiDig.bMinute/30;
-  PushChar(i/8 + 1);
+  uchar i = ti.bHour*2 + ti.bMinute/30;
+  i = i/8 + 1;
+  PushChar(i);
+
+  MonitorString("\n");
+  MonitorCharDec(ti.bDay); MonitorString(".");
+  MonitorCharDec(ti.bMonth); MonitorString(".");
+  MonitorCharDec(ti.bYear); MonitorString(" ");
+  MonitorCharDec(i);
 
   QueryV(100+37, 19);
 }
 
 
-bool    ReadDataV(uchar  i)
+static bool ReadDataV(uchar  i, time  tiDig)
 {
+  MonitorString("\n"); MonitorTime(tiDig);
+
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
@@ -275,8 +290,11 @@ bool    ReadDataV(uchar  i)
 
   ShowProgressDigHou();
 
-  InitPop(17+i*2);
-  mpwChannels[0] = PopIntLtl();
+  InitPop(19+i*2);
+  int w = PopIntLtl();
+
+  MonitorIntDec(w);
+  mpwChannels[0] = w;
 
   MakeSpecial(tiDig);
   return(MakeStopHou(0));
@@ -296,7 +314,7 @@ bool    ReadHeaderV(void)
     tiDig = HouIndexToDate(dw);
 
     if (dw < dwValueV)
-      if (ReadDataV(8-1-i) == 0) return(0);
+      if (ReadDataV(8-1-i, tiDig) == 0) return(0);
   }
 
   wBaseCurr += 8;
