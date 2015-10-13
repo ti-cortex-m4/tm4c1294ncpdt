@@ -129,9 +129,19 @@ void    QueryVersionV(void)
 bool    ReadVersionV(void)
 {
   Clear();
-  sprintf(szLo+2, "версия %2X.%2X", InBuff(9), InBuff(13));
 
-  return true;
+  uchar a = InBuff(9);
+  uchar b = InBuff(13);
+  sprintf(szLo+2, "версия %2X.%2X", a, b);
+
+  return ((b == 0x01) |
+          (b == 0x02) |
+          (b == 0x03) |
+          (b == 0x04) |
+          (b == 0x0C) |
+          (b == 0x0D) |
+          (b == 0x11) |
+          (b == 0x12));
 }
 
 
