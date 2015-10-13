@@ -13,10 +13,7 @@ extern  ulong                   dwValueV;
 void    QueryTimeV(void);
 time    ReadTimeV(void);
 
-//void    QueryControlS(time  ti);
-//
-//void    QueryConfigS(void);
-//void    ReadConfigS(void);
+void    QueryControlV(time  ti);
 
 void    QueryVersionV(void);
 bool    ReadVersionV(void);

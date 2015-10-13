@@ -607,8 +607,8 @@ typedef enum
   DEV_POSTTIME_V2       =  0x1B05,
   DEV_CONTROL_V2        =  0x1B06,
   DEV_POSTCORRECT_V2    =  0x1B07,
-  DEV_CONFIG_V2         =  0x1B08,
-  DEV_POSTCONFIG_V2     =  0x1B09,
+//  DEV_CONFIG_V2         =  0x1B08,
+//  DEV_POSTCONFIG_V2     =  0x1B09,
   DEV_VALUE_V2          =  0x1B0A,
   DEV_POSTVALUE_V2      =  0x1B0B,
   DEV_HEADER_V2         =  0x1B0C,
@@ -616,8 +616,8 @@ typedef enum
   DEV_DATA_V2           =  0x1B0E,
 
   DEV_START_V3          =  0x1B20,
-  DEV_CONFIG_V3         =  0x1B21,
-  DEV_POSTCONFIG_V3     =  0x1B22,
+//  DEV_CONFIG_V3         =  0x1B21,
+//  DEV_POSTCONFIG_V3     =  0x1B22,
   DEV_ENERGY_V3         =  0x1B23,
 
 #endif
