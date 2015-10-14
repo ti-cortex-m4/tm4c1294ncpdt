@@ -9,7 +9,7 @@ MEM_DIGITALS!C
 
 
 // битовая маска используемых цифровых счётчиков
-uint                    wDigitalsMask;
+volatile uint           wDigitalsMask;
 
 // массив разрешенных каналов
 bool                    mpboEnblCan[bCANALS];
