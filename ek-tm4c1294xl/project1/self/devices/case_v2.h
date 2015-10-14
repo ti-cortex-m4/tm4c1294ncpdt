@@ -124,8 +124,7 @@
     case DEV_VALUE_V2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiValueV = ReadTimeV();
-        dwValueV = DateToHouIndex(tiValueV);
+        dwValueV = DateToHouIndex(ReadTimeV());
         MakePause(DEV_POSTVALUE_V2);
       }
       else
