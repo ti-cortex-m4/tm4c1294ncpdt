@@ -102,7 +102,7 @@ bool                    fKeyOn;
 
 
 
-void    ShowProgressRepeat(void)
+void    ShowRepeat(void)
 {
   Clear();
   sprintf(szLo+3,"повтор: %u",cbRepeat); DelayInf();

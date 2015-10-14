@@ -48,7 +48,7 @@
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemBaud(1);
           MakeLongPause(DEV_MODEM_BAUD,1);
@@ -82,7 +82,7 @@
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           if (cbRepeat == bMINORREPEATS-1)
           {
@@ -119,7 +119,7 @@
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemHookOff();
           MakeLongPause(DEV_MODEM_POSTONLINE,1);
@@ -146,7 +146,7 @@
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemCommon(1);
           MakeLongPause(DEV_MODEM_COMMON,1);
@@ -187,7 +187,7 @@
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemCustom();
           MakeLongPause(DEV_MODEM_CUSTOM,1);
@@ -228,7 +228,7 @@
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           InitWaitAnswer();
 
@@ -303,7 +303,7 @@
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemHookOff();
           MakeLongPause(DEV_MODEM_PREVHOOKOFF,1);
@@ -329,7 +329,7 @@
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemEscape();
           MakeLongPause(DEV_MODEM_ESCAPE,3);
@@ -365,7 +365,7 @@
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemHookOff();
           MakeLongPause(DEV_MODEM_HOOKOFF,1);

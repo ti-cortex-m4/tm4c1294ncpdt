@@ -29,7 +29,7 @@
         if (cbRepeat == 0) ErrorProfile(); 
         else
         {
-          ShowProgressRepeat();
+          ShowRepeat();
           cbRepeat--;
           
           ShowLo(szOpen); 

@@ -102,7 +102,7 @@ bool                    fKeyOn;
 
 
 
-void    ShowProgressRepeat(void)
+void    ShowRepeat(void)
 {
   Clear();
   sprintf(szLo+3,"повтор: %u",cbRepeat); DelayInf();
@@ -271,7 +271,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemBaud(1);
           MakeLongPause(DEV_MODEM_BAUD,1);
@@ -305,7 +305,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           if (cbRepeat == bMINORREPEATS-1)
           {
@@ -342,7 +342,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemHookOff();
           MakeLongPause(DEV_MODEM_POSTONLINE,1);
@@ -369,7 +369,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemCommon(1);
           MakeLongPause(DEV_MODEM_COMMON,1);
@@ -410,7 +410,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemCustom();
           MakeLongPause(DEV_MODEM_CUSTOM,1);
@@ -451,7 +451,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           InitWaitAnswer();
 
@@ -526,7 +526,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemHookOff();
           MakeLongPause(DEV_MODEM_PREVHOOKOFF,1);
@@ -552,7 +552,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemEscape();
           MakeLongPause(DEV_MODEM_ESCAPE,3);
@@ -588,7 +588,7 @@ void    RunDevices(void)
         else
         {
           cbRepeat--;
-          ShowProgressRepeat();
+          ShowRepeat();
 
           QueryModemHookOff();
           MakeLongPause(DEV_MODEM_HOOKOFF,1);
