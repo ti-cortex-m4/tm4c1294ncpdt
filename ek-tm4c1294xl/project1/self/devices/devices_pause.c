@@ -20,7 +20,7 @@ uchar   bT;
 #ifndef SKIP_G
     if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10))
     {
-      if ((mpSerial[ibPort] == SER_BADLINK) && (fFlow == 0))
+      if (mpSerial[ibPort] == SER_BADLINK)
       {
         MakeCRC8InBuff( 1, IndexInBuff()-1 );
 
@@ -39,7 +39,7 @@ uchar   bT;
     else if ((diCurr.bDevice == 13) || (diCurr.bDevice == 14) ||
              (diCurr.bDevice == 16) || (diCurr.bDevice == 17))
     {
-      if ((mpSerial[ibPort] == SER_BADLINK) && (fFlow == 0))
+      if (mpSerial[ibPort] == SER_BADLINK)
       {
         if ((GetCurr() == DEV_OPENCANAL_K2) || (GetCurr() == DEV_OPENCANAL_K3))
         {
@@ -80,7 +80,7 @@ uchar   bT;
 #ifndef SKIP_Q
     else if (diCurr.bDevice == 22)
     {
-      if ((mpSerial[ibPort] == SER_BADLINK) && (fFlow == 0))
+      if (mpSerial[ibPort] == SER_BADLINK)
       {
         if ((GetCurr() == DEV_OPENCANAL_Q2) || (GetCurr() == DEV_OPENCANAL_Q3))
         {
@@ -121,7 +121,7 @@ uchar   bT;
 #ifndef SKIP_U
     /*else*/ if (diCurr.bDevice == 26)
     {
-      if ((mpSerial[ibPort] == SER_BADLINK) && (fFlow == 0))
+      if (mpSerial[ibPort] == SER_BADLINK)
       {
         if ((GetCurr() == DEV_OPENCANAL_U2) || (GetCurr() == DEV_OPENCANAL_U3))
         {

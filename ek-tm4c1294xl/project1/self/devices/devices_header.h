@@ -13,6 +13,7 @@ DEVICES.C
 #include "../memory/mem_energy_spec.h"
 #include "../memory/mem_limits.h"
 #include "../memory/mem_phones.h"
+#include "../memory/mem_flow.h"
 #include "../display/display.h"
 #include "../keyboard/keyboard.h"
 #include "../keyboard/time/key_timedate.h"
@@ -144,6 +145,8 @@ void    ErrorLink(void)
 
 void    RunDevices(void)
 {
+  if (fFlow == 1) return;
+
   LoadCurrDigital(ibDig);
   ibPort = diCurr.ibPort;
 
