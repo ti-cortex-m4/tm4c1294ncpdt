@@ -39,6 +39,8 @@ extern void Timer1IntHandler(void);
 extern void Timer2IntHandler(void);
 extern void Timer3IntHandler(void);
 
+extern void SysTickIntHandler(void);
+
 //*****************************************************************************
 //
 // The vector table.  Note that the proper constructs must be placed on this to
@@ -65,7 +67,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // Debug monitor handler
     0,                                      // Reserved
     IntDefaultHandler,                      // The PendSV handler
-    IntDefaultHandler,                      // The SysTick handler
+    SysTickIntHandler,                      // The SysTick handler
     IntDefaultHandler,                      // GPIO Port A
     IntDefaultHandler,                      // GPIO Port B
     IntDefaultHandler,                      // GPIO Port C
