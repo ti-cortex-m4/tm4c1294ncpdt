@@ -163,14 +163,14 @@ void    DevicesPostInput(void)
 #endif
 
 #ifndef SKIP_R
-    if (diCurr.bDevice == 23)
+    else if (diCurr.bDevice == 23)
     {
       mpSerial[ibPort] = SER_GOODCHECK;
     }
 #endif
 
 #ifndef SKIP_S
-    if (diCurr.bDevice == 24)
+    else if (diCurr.bDevice == 24)
     {
       if (ChecksumS() == 0)
         mpSerial[ibPort] = SER_GOODCHECK;
@@ -190,7 +190,7 @@ void    DevicesPostInput(void)
 #endif
 
 #ifndef SKIP_V
-    if (diCurr.bDevice == 27)
+    else if (diCurr.bDevice == 27)
     {
       if (ChecksumV() == 0)
         mpSerial[ibPort] = SER_GOODCHECK;
