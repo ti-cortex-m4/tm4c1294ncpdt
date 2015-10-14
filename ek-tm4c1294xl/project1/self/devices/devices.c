@@ -3533,7 +3533,7 @@ void    RunDevices(void)
     case DEV_VALUE_V2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        dwValueV = DateToHouIndex(ReadTimeV());
+        dwTimeV = DateToHouIndex(ReadTimeV());
         MakePause(DEV_POSTVALUE_V2);
       }
       else
