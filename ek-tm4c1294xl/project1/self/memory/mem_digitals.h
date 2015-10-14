@@ -4,7 +4,7 @@ MEM_DIGITALS!H
 
 ------------------------------------------------------------------------------*/
 
-extern  uint                    wDigitalsMask;
+extern  volatile uint           wDigitalsMask;
 
 extern  bool                    mpboEnblCan[bCANALS];
 
