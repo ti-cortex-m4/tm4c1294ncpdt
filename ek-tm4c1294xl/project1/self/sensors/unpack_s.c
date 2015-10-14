@@ -47,6 +47,9 @@ uchar   i,j;
 
   if ((InBuff(6) & 0xF0) != 0x50)
   {
+    Clear(); sprintf(szLo+2,"ошибка: 24.1.%u",(InBuff(6) & 0xF0));
+    DelayInf();
+
     mpcwErrorLink[ibDig]++;
 
     mpSerial[ibPort] = SER_BADLINK;
@@ -114,7 +117,7 @@ uchar   i;
   i = CheckS();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+1,"код ошибки: %u",i);
+    Clear(); sprintf(szLo+2,"ошибка: 24.2.%u",i);
     Delay(500);
   }
 

@@ -49,6 +49,9 @@ uchar   i,j;
 
   if (InBuff(12) != 0)
   {
+    Clear(); sprintf(szLo+2,"ошибка: 27.1.%u",InBuff(12));
+    DelayInf();
+
     mpcwErrorLink[ibDig]++;
 
     mpSerial[ibPort] = SER_BADLINK;
@@ -115,7 +118,7 @@ uchar   ChecksumV(void)
   uchar i = CheckV();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+1,"код ошибки: %u",i);
+    Clear(); sprintf(szLo+2,"ошибка: 27.2.%u",i);
     DelayInf();
   }
 
