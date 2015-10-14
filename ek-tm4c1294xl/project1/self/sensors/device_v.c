@@ -7,7 +7,6 @@ DEVICE_V!C
 #include "../main.h"
 #include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
-//#include "../memory/mem_ports.h"
 #include "../memory/mem_current.h"
 #include "../memory/mem_factors.h"
 #include "../memory/mem_realtime.h"
@@ -21,13 +20,11 @@ DEVICE_V!C
 #include "../keyboard/time/key_timedate.h"
 #include "../time/timedate.h"
 #include "../time/calendar.h"
-//#include "../time/delay.h"
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/limits.h"
 #include "../special/special.h"
-//#include "../hardware/watchdog.h"
 #include "automatic_v.h"
 #include "device_v.h"
 
@@ -37,9 +34,9 @@ DEVICE_V!C
 
 uint                    wDividerV;
 
-time                    tiValueV;
+static time             tiCurrV;
 
-ulong                   dwValueV;
+ulong                   dwTimeV;
 
 
 
@@ -239,13 +236,13 @@ void    InitHeaderV(void)
 //    if (boShowMessages == true) DelayMsg();
 //  }
 
-  tiDigPrev = tiCurr;
+  tiCurrV = tiCurr;
 
-  uchar i = tiDigPrev.bHour*2 + tiDigPrev.bMinute/30;
+  uchar i = tiCurrV.bHour*2 + tiCurrV.bMinute/30;
   i = (i / 8) * 8;
 
-  tiDigPrev.bHour = i / 2;
-  tiDigPrev.bMinute = (i % 2)*30;
+  tiCurrV.bHour = i / 2;
+  tiCurrV.bMinute = (i % 2)*30;
 }
 
 
@@ -254,7 +251,7 @@ void    QueryHeaderV(void)
   HideCurrTime(1);
 
 
-  ulong dw = DateToHouIndex(tiDigPrev);
+  ulong dw = DateToHouIndex(tiCurrV);
   dw -= wBaseCurr;
   time ti = HouIndexToDate(dw);
 
@@ -316,15 +313,15 @@ bool    ReadHeaderV(void)
   uchar i;
   for (i=0; i<8; i++)
   {
-    ulong dw = DateToHouIndex(tiDigPrev);
+    ulong dw = DateToHouIndex(tiCurrV);
 
     dw += 8-1;
     dw -= (wBaseCurr + i);
 
-    tiDig = HouIndexToDate(dw);
+    time ti = HouIndexToDate(dw);
 
-    if (dw < dwValueV)
-      if (ReadDataV(8-1-i, tiDig) == 0) return(0);
+    if (dw < dwTimeV)
+      if (ReadDataV(8-1-i, ti) == 0) return(0);
   }
 
   wBaseCurr += 8;
