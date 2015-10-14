@@ -12,23 +12,34 @@ SYS_TICK!C
 
 
 
+static volatile ulong   dwSysTick;
+
+
+
 void    InitSysTick(uint32_t  ui32SysClockFreq)
 {
-  SysTickPeriodSet(ui32SysClockFreq / 1000); // 1 ms
-  HWREG(NVIC_ST_CURRENT) = 0;
+  SysTickPeriodSet(ui32SysClockFreq / 10000); // 1 ms
+  SysTickEnable();
 }
 
 
 
 void    StartSysTick(void)
 {
-  HWREG(NVIC_ST_CURRENT) = 0;
-  SysTickEnable();
+  dwSysTick = 0;
+  SysTickIntEnable();
 }
 
 
 ulong   StopSysTick(void)
 {
-  SysTickDisable();
-  return HWREG(NVIC_ST_CURRENT);
+  SysTickIntDisable();
+  return dwSysTick;
+}
+
+
+
+void    SysTickIntHandler(void)
+{
+  dwSysTick++;
 }
