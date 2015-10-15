@@ -15,12 +15,14 @@ PARAMS2!C
 #include    "../../digitals/digitals_messages.h"
 #include    "../../devices/devices.h"
 #include    "../../sensors/automatic1.h"
+#include    "../../sensors/automatic_v.h"
 #include    "../../sensors/device_a.h"
 #include    "../../sensors/device_b.h"
 #include    "../../sensors/device_c.h"
 #include    "../../sensors/device_p.h"
 #include    "../../sensors/device_q.h"
 #include    "../../sensors/device_u.h"
+#include    "../../sensors/device_v.h"
 #include    "../../time/delay.h"
 #include    "../../console.h"
 #include    "../../flash/files.h"
@@ -892,6 +894,54 @@ bool    ReadParamU(void)
 
 
 
+#ifndef SKIP_V
+
+void    QueryParamV1(void)
+{
+  InitPush(2);
+
+  PushChar(0x20);
+  PushChar(0x00);
+
+  PushAddressV(0x2D);
+
+  QueryV(100+20, 15);
+}
+
+
+void    ReadParamV1(void)
+{
+  InitPop(13);
+
+  ulong dw = PopChar();
+  dw += PopChar()*0x100;
+  dw += PopChar()*0x10000;
+
+  reValue = dw / 100;
+}
+
+
+bool    ReadParamV(void)
+{
+  Clear();
+
+  QueryParamV1();
+  if (InputV() != SER_GOODCHECK) return(0);
+
+  switch (diCurr.ibLine)
+  {
+    case PAR_P : ReadParamV1(); break;
+
+    default: return(0);
+  }
+
+  return(1);
+}
+
+#endif
+
+
+
 float2  ReadParam(uint  iwPrm)
 {
   Clear();
@@ -938,6 +988,10 @@ float2  ReadParam(uint  iwPrm)
 
 #ifndef SKIP_U
     case 26: return GetFloat2(reValue, ReadParamU());
+#endif
+
+#ifndef SKIP_V
+    case 27: return GetFloat2(reValue, ReadParamV());
 #endif
 
     default: return GetFloat2Error();
