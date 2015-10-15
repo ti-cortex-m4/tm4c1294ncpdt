@@ -10,6 +10,8 @@ extern  ulong                   dwTimeV;
 
 
 
+void    PushAddressV(uchar  bCode);
+
 void    QueryTimeV(void);
 time    ReadTimeV(void);
 
