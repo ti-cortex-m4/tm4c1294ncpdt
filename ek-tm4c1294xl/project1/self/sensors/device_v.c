@@ -20,6 +20,7 @@ DEVICE_V!C
 #include "../keyboard/time/key_timedate.h"
 #include "../time/timedate.h"
 #include "../time/calendar.h"
+#include "../time/delay.h"
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
@@ -227,14 +228,14 @@ void    ReadEngDayV(void)
 
 void    InitHeaderV(void)
 {
-//  if (!UseBounds())
+  if (!UseBounds())
     wBaseCurr = 0;
-//  else
-//  {
-//    wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
-//    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-//    if (boShowMessages == true) DelayMsg();
-//  }
+  else
+  {
+    wBaseCurr = (mpcwStartRelCan[ibDig] / 8) * 8;
+    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    if (boShowMessages == true) DelayMsg();
+  }
 
   tiCurrV = tiCurr;
 
