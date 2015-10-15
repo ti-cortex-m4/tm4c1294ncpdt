@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 OUT_TRANSIT!C
-                    
+
 
 ------------------------------------------------------------------------------*/
 
@@ -59,7 +59,9 @@ uchar   j;
 
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
+      mpSerial[ibPort] = SER_BEGIN;
       ibPort = j;
+
       Result(bRES_BADMODE);
     }
     else
@@ -67,6 +69,7 @@ uchar   j;
       SaveInBuff();
       iwInBuffSave = IndexInBuff();
 
+      mpSerial[ibPort] = SER_BEGIN;
       ibPort = j;
 
       InitPushCRC();
@@ -119,15 +122,17 @@ uchar   j;
 
     if (mpSerial[ibPort] != SER_POSTINPUT_MASTER)
     {
+      mpSerial[ibPort] = SER_BEGIN;
       ibPort = j;
+
       Result(bRES_BADMODE);
     }
     else
     {
-      mpSerial[ibPort] = SER_BADLINK;   // !!!
       SaveInBuff();
       iwInBuffSave = IndexInBuff();
 
+      mpSerial[ibPort] = SER_BEGIN;
       ibPort = j;
 
       InitPushCRC();
@@ -188,6 +193,7 @@ uchar   j;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
+    mpSerial[ibPort] = SER_BEGIN;
     ibPort = j;
 
     InitPushCRC();
@@ -242,6 +248,7 @@ uchar   j;
     SaveInBuff();
     iwInBuffSave = IndexInBuff();
 
+    mpSerial[ibPort] = SER_BEGIN;
     ibPort = j;
 
     InitPushCRC();
