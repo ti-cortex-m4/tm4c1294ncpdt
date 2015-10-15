@@ -49,7 +49,7 @@ uchar   i,j;
 
   if (InBuff(12) != 0)
   {
-    Clear(); sprintf(szLo+2,"ошибка: 27.1.%u",InBuff(12));
+    Clear(); sprintf(szLo+1,"ошибка: 27.1.%u",InBuff(12));
     DelayInf();
 
     mpcwErrorLink[ibDig]++;
@@ -118,7 +118,7 @@ uchar   ChecksumV(void)
   uchar i = CheckV();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+2,"ошибка: 27.2.%u",i);
+    Clear(); sprintf(szLo+1,"ошибка: 27.2.%u",i);
     DelayInf();
   }
 

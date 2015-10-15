@@ -47,7 +47,7 @@ uchar   i,j;
 
   if ((InBuff(6) & 0xF0) != 0x50)
   {
-    Clear(); sprintf(szLo+2,"ошибка: 24.1.%u",(InBuff(6) & 0xF0));
+    Clear(); sprintf(szLo+1,"ошибка: 24.1.%u",(InBuff(6) & 0xF0));
     DelayInf();
 
     mpcwErrorLink[ibDig]++;
@@ -117,8 +117,8 @@ uchar   i;
   i = CheckS();
   if (i != 0)
   {
-    Clear(); sprintf(szLo+2,"ошибка: 24.2.%u",i);
-    Delay(500);
+    Clear(); sprintf(szLo+1,"ошибка: 24.2.%u",i);
+    DelayInf();
   }
 
   return i;
