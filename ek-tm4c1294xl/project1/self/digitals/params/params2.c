@@ -917,7 +917,7 @@ void    ReadParamV1(void)
   dw += PopChar()*0x100;
   dw += PopChar()*0x10000;
 
-  reValue = dw / 100;
+  reValue = dw * 10;
 }
 
 
