@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_EXT_3_FLAG,C
+KEY_EXT_3_FLAG.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,6 +7,7 @@ KEY_EXT_3_FLAG,C
 #include "../../main.h"
 #include "../../digitals/extended/extended_3.h"
 #include "../common/key_bool.h"
+#include "key_ext_3_flag.h"
 
 
 
