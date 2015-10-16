@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_CUSTOM_MODEM!C
+KEY_CUSTOM_MODEM.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,14 +7,15 @@ KEY_CUSTOM_MODEM!C
 #include "../../main.h"
 #include "../../digitals/phones.h"
 #include "../common/key_bool.h"
+#include "key_custom_modem.h"
 
 
 
-//                                         0123456789ABCDEF
-static char const       szMessage1[]    = "Выдавать модему ",
-                        szMessage2[]    = " настройки 2 ?  ";
+//                                          0123456789ABCDEF
+static char const       szMessage1[]     = "Выдавать модему ",
+                        szMessage2[]     = " настройки 2 ?  ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
+static char const       *pszMessages[]   = { szMessage1, szMessage2, "" };
 
 
 

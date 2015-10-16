@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_ENBL_WDT,C
+KEY_ENBL_WDT.C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,13 +8,14 @@ KEY_ENBL_WDT,C
 #include "../memory/mem_program.h"
 #include "../settings.h"
 #include "common/key_bool.h"
+#include "key_enbl_wdt.h"
 
 
 
-//                                         0123456789ABCDEF
-static char const       szMessage[]     = "¬ключенный WDT ?";
+//                                          0123456789ABCDEF
+static char const       szMessage[]      = "¬ключенный WDT ?";
 
-static char const       *pszMessages[]  = { szMessage, "" };
+static char const       *pszMessages[]   = { szMessage, "" };
 
 
 
