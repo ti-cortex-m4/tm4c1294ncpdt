@@ -6,6 +6,7 @@ KEY_PARAMS,C
 
 #include "../../../main.h"
 #include "../../../console.h"
+#include "../../../digitals/devices.h"
 #include "../../../digitals/params/params.h"
 #include "../../../digitals/params/params_div.h"
 #include "../../../serial/speeds_display.h"
@@ -37,7 +38,7 @@ static uint iwPrm;
       ShowHi(szParams);
 
       Param();
-    } 
+    }
     else if (enKeyboard == KBD_INPUT1)
     {
       enKeyboard = KBD_POSTENTER;
@@ -88,12 +89,12 @@ static uint iwPrm;
     if (enKeyboard == KBD_POSTENTER)
     {
       if (enGlobal != GLB_WORK)
-      { 
+      {
         mpboEnblParams[iwPrm] = InvertBool(mpboEnblParams[iwPrm]);
 
         SaveCache(&flEnblParams);
         ShowParam(iwPrm);
-      } 
+      }
       else Beep();
     }
     else Beep();
@@ -112,7 +113,7 @@ static uint iwPrm;
     {
       if ((di.ibPort = GetCharLo(0,0) - 1) < bPORTS)
       {
-        if (StreamPortCan(di.ibPort,iwPrm) == 1) 
+        if (StreamPortCan(di.ibPort,iwPrm) == 1)
         {
           enKeyboard = KBD_INPUT3;
           ShowHi(szPhone);
@@ -125,8 +126,8 @@ static uint iwPrm;
     else if (enKeyboard == KBD_POSTINPUT3)
     {
       if ((di.ibPhone = GetCharLo(2,3)) < bCANALS)
-      { 
-        if (StreamPortPhoneCan(di.ibPort,di.ibPhone,iwPrm) == 1) 
+      {
+        if (StreamPortPhoneCan(di.ibPort,di.ibPhone,iwPrm) == 1)
         {
           enKeyboard = KBD_INPUT4;
           ShowHi(szDevice);
@@ -139,7 +140,7 @@ static uint iwPrm;
     else if (enKeyboard == KBD_POSTINPUT4)
     {
       di.bDevice = GetCharLo(5,6);
-      if ((di.bDevice <= bDEVICES) || (di.bDevice == 99))
+      if ((di.bDevice <= bMAXDEVICES) && ValidDevice(di.bDevice))
       {
         if (di.bDevice == 0)
         {
@@ -183,7 +184,7 @@ static uint iwPrm;
 
 
   else if (bKey < 10)
-  {        
+  {
     if (enKeyboard == KBD_POSTENTER)
     {
       if (enGlobal != GLB_WORK)
@@ -199,37 +200,37 @@ static uint iwPrm;
       enKeyboard = KBD_POSTINPUT1;
       ShiftLo(10,12);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
       ShiftLo(0,0);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT3) || (enKeyboard == KBD_POSTINPUT3))
     {
       enKeyboard = KBD_POSTINPUT3;
       ShiftLo(2,3);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT4) || (enKeyboard == KBD_POSTINPUT4))
     {
       enKeyboard = KBD_POSTINPUT4;
       ShiftLo(5,6);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT5) || (enKeyboard == KBD_POSTINPUT5))
     {
       enKeyboard = KBD_POSTINPUT5;
       ShiftLo(8,10);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
     {
       enKeyboard = KBD_POSTINPUT6;
       ShiftLo(12,13);
     }
-    else Beep(); 
+    else Beep();
   }
   else Beep();
 }
