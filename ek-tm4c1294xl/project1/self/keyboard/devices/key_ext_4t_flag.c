@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_EXT_4T_FLAG,C
+KEY_EXT_4T_FLAG.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,6 +7,7 @@ KEY_EXT_4T_FLAG,C
 #include "../../main.h"
 #include "../../digitals/extended/extended_4t.h"
 #include "../common/key_bool.h"
+#include "key_ext_4t_flag.h"
 
 
 

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_EXT_0_FLAG!CS
+KEY_EXT_0_FLAG.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,6 +7,7 @@ KEY_EXT_0_FLAG!CS
 #include "../../main.h"
 #include "../../digitals/extended/extended_0.h"
 #include "../common/key_bool.h"
+#include "key_ext_0_flag.h"
 
 
 
