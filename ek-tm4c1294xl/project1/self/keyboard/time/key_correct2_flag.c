@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_CORRECT_2_FLAG,C
+KEY_CORRECT2_FLAG.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,6 +7,7 @@ KEY_CORRECT_2_FLAG,C
 #include "../../main.h"
 #include "../../time/correct2.h"
 #include "../common/key_bool.h"
+#include "key_correct2_flag.h"
 
 
 
