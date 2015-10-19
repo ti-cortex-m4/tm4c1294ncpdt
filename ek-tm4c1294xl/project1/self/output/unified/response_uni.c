@@ -205,13 +205,8 @@ void    RunResponseUni(void)
         GetOpenUni();
         break;
 
-      case wUNI_GETPARAMS1:
-        GetParamUni1();
-        break;
-
-      case wUNI_GETPARAMS2:
-        GetParamUni2();
-        break;
+      case wUNI_GETPARAMS1: GetParamUni1(); break;
+      case wUNI_GETPARAMS2: GetParamUni2(); break;
 
       case wUNI_GETTRANSIT:
         GetTransitUni();

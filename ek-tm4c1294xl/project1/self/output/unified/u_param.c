@@ -212,7 +212,7 @@ void    GetParamUni1(void)
 
     uchar c;
     for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
-      PushParamsUni(12, c);
+      wSize += PushParamsUni(12, c);
 
     time ti = GetTimeParamUni(iwTim);
     Output2_Code(wSize, ((boParamsFlag == true) ? bUNI_OK : bUNI_NOTREADY), ti);
