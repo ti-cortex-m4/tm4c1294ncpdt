@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_GAPS_FLAG,C
+KEY_GAPS_FLAG.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,13 +7,14 @@ KEY_GAPS_FLAG,C
 #include "../../main.h"
 #include "../../tariffs/gaps.h"
 #include "../common/key_bool.h"
+#include "key_gaps_flag.h"
 
 
 
-//                                         0123456789ABCDEF
-static char const       szMessage[]     = "Тарифные периоды";
+//                                          0123456789ABCDEF
+static char const       szMessage[]      = "Тарифные периоды";
 
-static char const       *pszMessages[]  = { szMessage, "" };
+static char const       *pszMessages[]   = { szMessage, "" };
 
 
 

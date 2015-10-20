@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_RELAXS_FLAG,C
+KEY_RELAXS_FLAG.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,13 +7,14 @@ KEY_RELAXS_FLAG,C
 #include "../../main.h"
 #include "../../tariffs/relaxs.h"
 #include "../common/key_bool.h"
+#include "key_relaxs_flag.h"
 
 
 
-//                                         0123456789ABCDEF
-static char const       szMessage[]     = "Праздники ?     ";
+//                                          0123456789ABCDEF
+static char const       szMessage[]      = "Праздники ?     ";
 
-static char const       *pszMessages[]  = { szMessage, "" };
+static char const       *pszMessages[]   = { szMessage, "" };
 
 
 
