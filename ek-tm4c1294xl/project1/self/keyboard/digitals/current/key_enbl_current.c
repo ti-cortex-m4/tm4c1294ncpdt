@@ -1,13 +1,14 @@
 /*------------------------------------------------------------------------------
-KEY_ENBL_CURRENT,C
+KEY_ENBL_CURRENT.C
 
- Флаг разрешения опроса трехминутных графиков
+
 ------------------------------------------------------------------------------*/
 
 #include "../../../main.h"
 #include "../../../memory/mem_digitals.h"
 #include "../../../digitals/profile/profile_core.h"
 #include "../../common/key_bool.h"
+#include "key_enbl_current.h"
 
 
 
