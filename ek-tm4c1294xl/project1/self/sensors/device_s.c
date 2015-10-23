@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE_S!C
 
- Энергомера СЕ102
+Энергомера СЕ102
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -39,22 +39,10 @@ DEVICE_S!C
 
 void    PushAddressS(void)
 {
-uint  i;
+  PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
+  PushIntLtl(wPrivate);
 
-  i = mpdwAddress1[diCurr.bAddress-1] % 0x10000;
-  PushChar(i % 0x100);
-  PushChar(i / 0x100);
-
-  i = wPrivate;
-  PushChar(i % 0x100);
-  PushChar(i / 0x100);
-
-  i = mpdwAddress2[diCurr.bAddress-1] % 0x10000;
-  PushChar(i % 0x100);
-  PushChar(i / 0x100);
-  i = mpdwAddress2[diCurr.bAddress-1] / 0x10000;
-  PushChar(i % 0x100);
-  PushChar(i / 0x100);
+  PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
 }
 
 
@@ -152,7 +140,7 @@ void    ReadConfigS(void)
     case 0x01: wDividerS = 10; break;
     case 0x02: wDividerS = 100; break;
     default:   wDividerS = 1000; break;
-  }  
+  }
 }
 
 
@@ -177,7 +165,7 @@ void    QueryVersionS(void)
 void    ReadVersionS(void)
 {
   InitPop(9);
-  
+
   Clear();
   sprintf(szLo+1, "версия %u.%u.%u", PopChar(), PopChar(), PopChar());
 }
@@ -223,7 +211,7 @@ void    QueryEngMonS(uchar  bMonth)
 void    ReadEnergyS(void)
 {
   InitPop(9);
-                   
+
   coEnergy.mpbBuff[0] = PopChar();
   coEnergy.mpbBuff[1] = PopChar();
   coEnergy.mpbBuff[2] = PopChar();
@@ -239,7 +227,7 @@ void    InitHeaderS(void)
 {
   if (!UseBounds())
     wBaseCurr = 0;
-  else 
+  else
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
     sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
@@ -294,9 +282,9 @@ bool    ReadDataS(uchar  i)
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
-  ShowProgressDigHou();      
+  ShowProgressDigHou();
 
-  InitPop(9+i*3);                                    
+  InitPop(9+i*3);
 
   ulong dw = PopChar();
   dw += PopChar()*0x100;
@@ -319,7 +307,7 @@ bool    ReadDataS(uchar  i)
     mpflEngFrac[ibDig] -= (float)w/dbPulse;
 
     MakeSpecial(tiDig);
-    return(MakeStopHou(0));  
+    return(MakeStopHou(0));
   }
   else
   {
@@ -344,7 +332,7 @@ bool    ReadHeaderS(void)
     if (dw < dwValueS)
       if (ReadDataS(4-1-i) == 0) return(0);
   }
-  
+
   wBaseCurr += 4;
   if (wBaseCurr > wHOURS) return(0);
 
