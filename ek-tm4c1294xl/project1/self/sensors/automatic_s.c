@@ -30,7 +30,7 @@ AUTOMATIC_S!C
 
 void    QueryS(uchar  cbIn, uchar  cbOut)
 {
-  MakeCrcSOutBuff(1, cbOut-3);
+  uchar bCrc = MakeCrcSOutBuff(1, cbOut-3);
 
   InitPush(0);
   PushChar(0xC0);
@@ -38,7 +38,7 @@ void    QueryS(uchar  cbIn, uchar  cbOut)
   uchar i;
   for (i=0; i<cbOut-3; i++) SkipChar();
 
-  PushChar(bCrcS);
+  PushChar(bCrc);
   PushChar(0xC0);
 
 

@@ -95,22 +95,20 @@ uchar   i,j;
 
 static uchar CheckS(void)
 {
-uint    i;
-
   if (InBuff(0) != 0xC0) return 1;
-  if (InBuff(IndexInBuff()-1) != 0xC0) return 2;
+  if (InBuff(1) != 0x48) return 2;
 
-  if (InBuff(1) != 0x48) return 3;
+  if (InBuffIntLtl(2) != wPrivate) return 3;
+  if (InBuffIntLtl(4) != (mpdwAddress1[diCurr.bAddress-1] % 0x10000)) return 4;
 
-  i = mpdwAddress1[diCurr.bAddress-1] % 0x10000;
-  if (InBuff(4) != (i % 0x100)) return 4;
-  if (InBuff(5) != (i / 0x100)) return 5;
+  if ((InBuff(6) & 0xF0) != 0x50) return 5;
+  if ((IndexInBuff() >= 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11)) return 6;
 
-  i = wPrivate;
-  if (InBuff(2) != (i % 0x100)) return 6;
-  if (InBuff(3) != (i / 0x100)) return 7;
+  if (InBuff(7) != OutBuff(11)) return 7;
+  if (InBuff(8) != OutBuff(12)) return 8;
 
-  MakeCrcSInBuff(1, IndexInBuff()-2); if (bCrcS != 0) return 8;
+  if (MakeCrcSInBuff(1, IndexInBuff()-2) != 0) return 9;
+  if (InBuff(IndexInBuff()-1) != 0xC0) return 10;
 
   return 0;
 }
