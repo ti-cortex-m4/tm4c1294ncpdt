@@ -1,11 +1,7 @@
 /*------------------------------------------------------------------------------
-CRC_S!H
+CRC_S.H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  uchar                   bCrcS;
-
-
-
-void    MakeCrcS(uchar  *pbData, uint  wSize);
+uchar   MakeCrcS(uchar  *pbData, uint  wSize);

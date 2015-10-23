@@ -18,10 +18,10 @@ uchar   OutBuff(uint  i);
 void    MakeCRC16OutBuff(uchar  bOffset, uint  wSize);
 void    MakeCRC16InBuff(uchar  bOffset, uint  wSize);
 
-void    MakeCrcSOutBuff(uchar  bOffset, uint  wSize);
-void    MakeCrcSInBuff(uchar  bOffset, uint  wSize);
-
 void    MakeCRCElsInBuff(uchar  bOffset, uint  wSize);
+
+uchar   MakeCrcSOutBuff(uchar  bOffset, uint  wSize);
+uchar   MakeCrcSInBuff(uchar  bOffset, uint  wSize);
 
 uchar   MakeCrcVOutBuff(uchar  bOffset, uint  wSize);
 uchar   MakeCrcVInBuff(uchar  bOffset, uint  wSize);

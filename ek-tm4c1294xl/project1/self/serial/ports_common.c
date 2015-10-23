@@ -129,37 +129,6 @@ void    MakeCRC16InBuff(uchar  bOffset, uint  wSize)
 
 
 
-#ifndef SKIP_S
-
-void    MakeCrcSOutBuff(uchar  bOffset, uint  wSize)
-{
-  switch (ibPort)
-  {
-    case 0:  MakeCrcS(mpbOutBuff0 + bOffset, wSize);  break;
-    case 1:  MakeCrcS(mpbOutBuff1 + bOffset, wSize);  break;
-    case 2:  MakeCrcS(mpbOutBuff2 + bOffset, wSize);  break;
-    case 3:  MakeCrcS(mpbOutBuff3 + bOffset, wSize);  break;
-    default: ASSERT(false);
-  }
-}
-
-
-void    MakeCrcSInBuff(uchar  bOffset, uint  wSize)
-{
-  switch (ibPort)
-  {
-    case 0:  MakeCrcS(mpbInBuff0 + bOffset, wSize);  break;
-    case 1:  MakeCrcS(mpbInBuff1 + bOffset, wSize);  break;
-    case 2:  MakeCrcS(mpbInBuff2 + bOffset, wSize);  break;
-    case 3:  MakeCrcS(mpbInBuff3 + bOffset, wSize);  break;
-    default: ASSERT(false);
-  }
-}
-
-#endif
-
-
-
 void    MakeCRCElsInBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
@@ -171,6 +140,38 @@ void    MakeCRCElsInBuff(uchar  bOffset, uint  wSize)
     default: ASSERT(false);
   }
 }
+
+
+
+
+#ifndef SKIP_S
+
+uchar   MakeCrcSOutBuff(uchar  bOffset, uint  wSize)
+{
+  switch (ibPort)
+  {
+    case 0:  return MakeCrcS(mpbOutBuff0 + bOffset, wSize);
+    case 1:  return MakeCrcS(mpbOutBuff1 + bOffset, wSize);
+    case 2:  return MakeCrcS(mpbOutBuff2 + bOffset, wSize);
+    case 3:  return MakeCrcS(mpbOutBuff3 + bOffset, wSize);
+    default: ASSERT(false); return 0;
+  }
+}
+
+
+uchar   MakeCrcSInBuff(uchar  bOffset, uint  wSize)
+{
+  switch (ibPort)
+  {
+    case 0:  return MakeCrcS(mpbInBuff0 + bOffset, wSize);
+    case 1:  return MakeCrcS(mpbInBuff1 + bOffset, wSize);
+    case 2:  return MakeCrcS(mpbInBuff2 + bOffset, wSize);
+    case 3:  return MakeCrcS(mpbInBuff3 + bOffset, wSize);
+    default: ASSERT(false); return 0;
+  }
+}
+
+#endif
 
 
 
