@@ -12,6 +12,7 @@ DECOMPRESS_S!C
 #include "../kernel/crc_s.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
+#include "../serial/monitor.h"
 #include "../devices/devices.h"
 #include "../display/display.h"
 #include "../time/delay.h"
@@ -21,7 +22,7 @@ DECOMPRESS_S!C
 
 #ifndef SKIP_S
 
-uchar   RepackS_0xDB(uchar  bCode)
+static uchar RepackS(uchar  bCode)
 {
 uchar   i;
 
@@ -45,6 +46,8 @@ uchar   i,j;
   if ((InBuff(0) != 0xC0) || (InBuff(IndexInBuff()-1) != 0xC0))
     return;
 
+  MonitorIn();
+
   if ((InBuff(6) & 0xF0) != 0x50)
   {
     Clear(); sprintf(szLo+1,"ошибка: 24.1.%u",(InBuff(6) & 0xF0));
@@ -59,9 +62,12 @@ uchar   i,j;
   bool f = 1;
   while ((f == 1) && (IndexInBuff() > 11) && (IndexInBuff() != (InBuff(6) & 0x0F) + 11))
   {
+    MonitorString("\n Unpack");
+    MonitorIn();
+
     f = 0;
 
-    j = RepackS_0xDB(0xDD);
+    j = RepackS(0xDD);
     if (j != 0)
     {
       SetInBuff(j, 0xDB);
@@ -71,7 +77,7 @@ uchar   i,j;
       continue;
     }
 
-    j = RepackS_0xDB(0xDC);
+    j = RepackS(0xDC);
     if (j != 0)
     {
       SetInBuff(j, 0xC0);
@@ -87,7 +93,7 @@ uchar   i,j;
 
 
 
-uchar   CheckS(void)
+static uchar CheckS(void)
 {
 uint    i;
 
@@ -112,9 +118,7 @@ uint    i;
 
 uchar   ChecksumS(void)
 {
-uchar   i;
-
-  i = CheckS();
+  uchar i = CheckS();
   if (i != 0)
   {
     Clear(); sprintf(szLo+1,"ошибка: 24.2.%u",i);
