@@ -257,7 +257,7 @@ void    QueryHeaderV(void)
   time ti = HouIndexToDate(dw);
 
   MonitorString("\n\n");
-  MonitorTime(tiPrev); MonitorString("- ");
+  MonitorTime(tiCurrV); MonitorString("- ");
   MonitorIntDec(wBaseCurr); MonitorString(" = ");
   MonitorTime(ti);
 

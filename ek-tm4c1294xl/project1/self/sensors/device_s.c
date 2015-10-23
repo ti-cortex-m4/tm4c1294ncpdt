@@ -21,9 +21,9 @@ DEVICE_S!C
 #include "../time/timedate.h"
 #include "../time/calendar.h"
 #include "../time/delay.h"
-#include "../serial/ports_stack.h"
+#include "../serial/ports.h"
 #include "../serial/ports_devices.h"
-#include "../serial/ports_common.h"
+#include "../serial/monitor.h"
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
@@ -275,7 +275,7 @@ void    QueryHeaderS(void)
 }
 
 
-bool    ReadDataS(uchar  i)
+static bool ReadDataS(uchar  i)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
