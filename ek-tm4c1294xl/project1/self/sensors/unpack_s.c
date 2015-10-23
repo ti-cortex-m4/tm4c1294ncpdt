@@ -24,8 +24,7 @@ DECOMPRESS_S!C
 
 static uchar RepackS(uchar  bCode)
 {
-uchar   i;
-
+  uchar i;
   for (i=1; i<=IndexInBuff()-2; i++)
     if ((InBuff(i) == 0xDB) && (InBuff(i+1) == bCode)) return i;
 
