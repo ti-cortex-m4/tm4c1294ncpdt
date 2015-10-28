@@ -31,11 +31,6 @@
 			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/drivers/pinout.c</locationURI>
 		</link>
 		<link>
-			<name>utils/locator.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/utils/locator.c</locationURI>
-		</link>
-		<link>
 			<name>utils/lwiplib.c</name>
 			<type>1</type>
 			<locationURI>SW_ROOT/utils/lwiplib.c</locationURI>
@@ -49,21 +44,6 @@
 			<name>utils/ustdlib.c</name>
 			<type>1</type>
 			<locationURI>SW_ROOT/utils/ustdlib.c</locationURI>
-		</link>
-		<link>
-			<name>third_party/fatfs/port/mmc-ek-tm4c1294xl.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/third_party/fatfs/port/mmc-ek-tm4c1294xl.c</locationURI>
-		</link>
-		<link>
-			<name>third_party/fatfs/src/ff.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/third_party/fatfs/src/ff.c</locationURI>
-		</link>
-		<link>
-			<name>third_party/lwip-1.4.1/apps/httpserver_raw/httpd.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/third_party/lwip-1.4.1/apps/httpserver_raw/httpd.c</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
