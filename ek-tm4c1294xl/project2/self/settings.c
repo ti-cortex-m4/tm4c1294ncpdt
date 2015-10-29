@@ -32,6 +32,8 @@ void InitSettings(void)
   {
     while (1) {}
   }
+
+  LoadSettings();
 }
 
 
