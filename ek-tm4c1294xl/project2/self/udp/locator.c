@@ -22,6 +22,8 @@
 //
 //*****************************************************************************
 
+#include "self/main.h"
+#include "self/settings.h"
 #include <stdint.h>
 #include "utils/locator.h"
 #include "utils/lwiplib.h"
@@ -62,6 +64,33 @@
 //
 //*****************************************************************************
 /*static*/ uint8_t g_pui8LocatorData[84];
+
+
+void GetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, ulong dw)
+{
+    p = pbuf_alloc(PBUF_TRANSPORT, 15, PBUF_RAM);
+    if (p == NULL) return;
+
+    uint8_t *pui8Data = p->payload;
+
+    combo32 cb;
+    cb.dwBuff = dwIP;
+
+    u8_t i;
+    u8_t j=0;
+    for (i=0; i<4; i++)
+    {
+      u8_t b = cb.mpbBuff[i];
+      pui8Data[j++] = '0' + b / 100;
+      pui8Data[j++] = '0' + (b % 100) / 10;
+      pui8Data[j++] = '0' + b % 10;
+      if (i != 4-1) pui8Data[j++] = '.';
+    }
+
+    udp_sendto(pcb, p, addr, port);
+    pbuf_free(p);
+}
+
 
 //*****************************************************************************
 //
@@ -123,6 +152,12 @@ LocatorReceive(void *arg, struct udp_pcb *pcb, struct pbuf *p,
 
         udp_sendto(pcb, p, addr, port);
         pbuf_free(p);
+    } else if ((p->len == 1) && (pui8Data[0] == 'D')) {
+      GetLong(pcb,p,addr,port,dwIP);
+    } else if ((p->len == 1) && (pui8Data[0] == 'E')) {
+      GetLong(pcb,p,addr,port,dwGateway);
+    } else if ((p->len == 1) && (pui8Data[0] == 'F')) {
+      GetLong(pcb,p,addr,port,dwNetmask);
     } else {
         p = pbuf_alloc(PBUF_TRANSPORT, 1, PBUF_RAM);
         if (p == NULL) return;
