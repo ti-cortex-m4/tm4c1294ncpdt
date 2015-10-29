@@ -14,14 +14,14 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   PixelsPerInch = 120
   TextHeight = 16
-  object BitBtn1: TBitBtn
+  object btbStartClient: TBitBtn
     Left = 8
     Top = 8
     Width = 80
     Height = 25
     Caption = 'start client'
     TabOrder = 0
-    OnClick = BitBtn1Click
+    OnClick = btbStartClientClick
   end
   object Memo1: TMemo
     Left = 8
@@ -30,50 +30,50 @@ object frmMain: TfrmMain
     Height = 349
     TabOrder = 1
   end
-  object BitBtn2: TBitBtn
+  object btbStopClient: TBitBtn
     Left = 94
     Top = 8
     Width = 80
     Height = 25
     Caption = 'stop client'
     TabOrder = 2
-    OnClick = BitBtn2Click
+    OnClick = btbStopClientClick
   end
-  object BitBtn3: TBitBtn
+  object btbStartServer: TBitBtn
     Left = 216
     Top = 8
     Width = 80
     Height = 25
     Caption = 'start server'
     TabOrder = 3
-    OnClick = BitBtn3Click
+    OnClick = btbStartServerClick
   end
-  object BitBtn4: TBitBtn
+  object btbStopServer: TBitBtn
     Left = 302
     Top = 8
     Width = 80
     Height = 25
     Caption = 'stop server'
     TabOrder = 4
-    OnClick = BitBtn4Click
+    OnClick = btbStopServerClick
   end
-  object IdUDPClient1: TIdUDPClient
-    OnStatus = IdUDPClient1Status
+  object IdUDPClient: TIdUDPClient
+    OnStatus = IdUDPClientStatus
     BroadcastEnabled = True
     Port = 0
-    OnConnected = IdUDPClient1Connected
-    OnDisconnected = IdUDPClient1Disconnected
+    OnConnected = IdUDPClientConnected
+    OnDisconnected = IdUDPClientDisconnected
     Left = 568
   end
-  object IdUDPServer1: TIdUDPServer
-    OnStatus = IdUDPServer1Status
+  object IdUDPServer: TIdUDPServer
+    OnStatus = IdUDPServerStatus
     BroadcastEnabled = True
     Bindings = <>
     DefaultPort = 0
-    OnBeforeBind = IdUDPServer1BeforeBind
-    OnAfterBind = IdUDPServer1AfterBind
-    OnUDPRead = IdUDPServer1UDPRead
-    OnUDPException = IdUDPServer1UDPException
+    OnBeforeBind = IdUDPServerBeforeBind
+    OnAfterBind = IdUDPServerAfterBind
+    OnUDPRead = IdUDPServerUDPRead
+    OnUDPException = IdUDPServerUDPException
     Left = 616
   end
 end
