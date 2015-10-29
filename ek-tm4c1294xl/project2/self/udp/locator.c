@@ -91,6 +91,65 @@ void GetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t po
     pbuf_free(p);
 }
 
+void SetAll(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port)
+{
+    uint8_t *pui8Data = p->payload;
+
+    combo32 cb;
+    u8_t j=1;
+
+    cb.mpbBuff[0] = pui8Data[j++];
+    cb.mpbBuff[1] = pui8Data[j++];
+    cb.mpbBuff[2] = pui8Data[j++];
+    cb.mpbBuff[3] = pui8Data[j++];
+
+    dwIP = cb.dwBuff;
+
+    cb.mpbBuff[0] = pui8Data[j++];
+    cb.mpbBuff[1] = pui8Data[j++];
+    cb.mpbBuff[2] = pui8Data[j++];
+    cb.mpbBuff[3] = pui8Data[j++];
+
+    dwGateway = cb.dwBuff;
+
+    cb.mpbBuff[0] = pui8Data[j++];
+    cb.mpbBuff[1] = pui8Data[j++];
+    cb.mpbBuff[2] = pui8Data[j++];
+    cb.mpbBuff[3] = pui8Data[j++];
+
+    dwNetmask = cb.dwBuff;
+
+    SaveSettings();
+
+    p = pbuf_alloc(PBUF_TRANSPORT, 1+4+4+4, PBUF_RAM);
+    if (p == NULL) return;
+
+    pui8Data = p->payload;
+
+    j=0;
+
+    cb.dwBuff = dwIP;
+    pui8Data[j++] = cb.mpbBuff[0];
+    pui8Data[j++] = cb.mpbBuff[1];
+    pui8Data[j++] = cb.mpbBuff[2];
+    pui8Data[j++] = cb.mpbBuff[3];
+
+    cb.dwBuff = dwGateway;
+    pui8Data[j++] = cb.mpbBuff[0];
+    pui8Data[j++] = cb.mpbBuff[1];
+    pui8Data[j++] = cb.mpbBuff[2];
+    pui8Data[j++] = cb.mpbBuff[3];
+
+    cb.dwBuff = dwNetmask;
+    pui8Data[j++] = cb.mpbBuff[0];
+    pui8Data[j++] = cb.mpbBuff[1];
+    pui8Data[j++] = cb.mpbBuff[2];
+    pui8Data[j++] = cb.mpbBuff[3];
+
+    udp_sendto(pcb, p, addr, port);
+    pbuf_free(p);
+}
+
 
 //*****************************************************************************
 //
@@ -158,6 +217,8 @@ LocatorReceive(void *arg, struct udp_pcb *pcb, struct pbuf *p,
       GetLong(pcb,p,addr,port,dwGateway);
     } else if ((p->len == 1) && (pui8Data[0] == 'F')) {
       GetLong(pcb,p,addr,port,dwNetmask);
+    } else if ((p->len == 1+4+4+4) && (pui8Data[0] == 'G')) {
+      SetAll(pcb,p,addr,port);
     } else {
         p = pbuf_alloc(PBUF_TRANSPORT, 1, PBUF_RAM);
         if (p == NULL) return;
