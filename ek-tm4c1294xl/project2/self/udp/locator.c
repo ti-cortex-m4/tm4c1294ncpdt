@@ -95,45 +95,45 @@ LocatorReceive(void *arg, struct udp_pcb *pcb, struct pbuf *p,
     //
     pbuf_free(p);
 
-    //
-    // Allocate a new pbuf for sending the response.
-    //
-    p = pbuf_alloc(PBUF_TRANSPORT, 1/*sizeof(g_pui8LocatorData)*/, PBUF_RAM);
-    if(p == NULL)
-    {
-        return;
+    if ((p->len == 1) && (pui8Data[0] == 'A')) {
+      p = pbuf_alloc(PBUF_TRANSPORT, 1, PBUF_RAM);
+      if (p == NULL) return;
+
+      pui8Data = p->payload;
+      pui8Data[0] = 'B';
+
+      udp_sendto(pcb, p, addr, port);
+      pbuf_free(p);
+    } else if ((p->len == 1) && (pui8Data[0] == 'C')) {
+        p = pbuf_alloc(PBUF_TRANSPORT, 24-1, PBUF_RAM);
+        if (p == NULL) return;
+
+        pui8Data = p->payload;
+
+        u8_t i;
+        u8_t j=0;
+        for (i=0; i<6; i++)
+        {
+          u8_t b = g_pui8LocatorData[9+i];
+          pui8Data[j++] = '0' + b / 100;
+          pui8Data[j++] = '0' + (b % 100) / 10;
+          pui8Data[j++] = '0' + b % 10;
+          if (i != 5) pui8Data[j++] = '.';
+        }
+
+        udp_sendto(pcb, p, addr, port);
+        pbuf_free(p);
+    } else {
+        p = pbuf_alloc(PBUF_TRANSPORT, 1, PBUF_RAM);
+        if (p == NULL) return;
+
+        pui8Data = p->payload;
+        pui8Data[0] = '?';
+
+        udp_sendto(pcb, p, addr, port);
+        pbuf_free(p);
     }
-/*
-    //
-    // Calculate and fill in the checksum on the response packet.
-    //
-    for(ui32Idx = 0, g_pui8LocatorData[sizeof(g_pui8LocatorData) - 1] = 0;
-        ui32Idx < (sizeof(g_pui8LocatorData) - 1); ui32Idx++)
-    {
-        g_pui8LocatorData[sizeof(g_pui8LocatorData) - 1] -=
-            g_pui8LocatorData[ui32Idx];
-    }
-*/
-    //
-    // Copy the response packet data into the pbuf.
-    //
-    pui8Data = p->payload;
-    pui8Data[0] = '!';
 
-//    for(ui32Idx = 0; ui32Idx < sizeof(g_pui8LocatorData); ui32Idx++)
-//    {
-//        pui8Data[ui32Idx] = g_pui8LocatorData[ui32Idx];
-//    }
-
-    //
-    // Send the response.
-    //
-    udp_sendto(pcb, p, addr, port);
-
-    //
-    // Free the pbuf.
-    //
-    pbuf_free(p);
 }
 
 //*****************************************************************************
