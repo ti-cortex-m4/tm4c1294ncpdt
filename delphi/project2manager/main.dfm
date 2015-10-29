@@ -1,9 +1,9 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Caption = 'project2manager'
-  ClientHeight = 333
-  ClientWidth = 437
+  Caption = #1059#1089#1090#1088#1086#1081#1089#1090#1074#1072
+  ClientHeight = 316
+  ClientWidth = 418
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,7 @@ object frmMain: TfrmMain
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 120
@@ -18,18 +19,18 @@ object frmMain: TfrmMain
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 437
-    Height = 333
+    Width = 418
+    Height = 316
     ActivePage = tbsSettings
     Align = alClient
     TabOrder = 0
     object tbsSettings: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072
       object panSettingsRight: TPanel
-        Left = 324
+        Left = 305
         Top = 0
         Width = 105
-        Height = 302
+        Height = 285
         Align = alRight
         BevelEdges = []
         BevelOuter = bvNone
@@ -43,12 +44,21 @@ object frmMain: TfrmMain
           TabOrder = 0
           OnClick = btbSearchClick
         end
+        object BitBtn1: TBitBtn
+          Left = 16
+          Top = 56
+          Width = 75
+          Height = 25
+          Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+          TabOrder = 1
+          OnClick = BitBtn1Click
+        end
       end
       object panSettingsClient: TPanel
         Left = 0
         Top = 0
-        Width = 324
-        Height = 302
+        Width = 305
+        Height = 285
         Align = alClient
         BevelEdges = []
         BevelOuter = bvNone
@@ -56,8 +66,8 @@ object frmMain: TfrmMain
         object stgSettings: TStringGrid
           Left = 0
           Top = 0
-          Width = 324
-          Height = 302
+          Width = 305
+          Height = 285
           Align = alClient
           BevelEdges = []
           BevelInner = bvNone
@@ -127,7 +137,8 @@ object frmMain: TfrmMain
     Port = 0
     OnConnected = IdUDPClientConnected
     OnDisconnected = IdUDPClientDisconnected
-    Left = 568
+    Left = 40
+    Top = 216
   end
   object IdUDPServer: TIdUDPServer
     OnStatus = IdUDPServerStatus
@@ -138,6 +149,7 @@ object frmMain: TfrmMain
     OnAfterBind = IdUDPServerAfterBind
     OnUDPRead = IdUDPServerUDPRead
     OnUDPException = IdUDPServerUDPException
-    Left = 616
+    Left = 112
+    Top = 216
   end
 end
