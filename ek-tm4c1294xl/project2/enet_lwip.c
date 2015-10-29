@@ -22,6 +22,7 @@
 //
 //*****************************************************************************
 
+#include "self/settings.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include "inc/hw_ints.h"
@@ -334,10 +335,7 @@ main(void)
     LocatorMACAddrSet(pui8MACArray);
     LocatorAppTitleSet("EK-TM4C1294XL enet_io");
 
-    //
-    // Initialize a sample httpd server.
-    //
-//    httpd_init();
+    InitSettings();
     init_uart(g_ui32SysClock);
     echo_init();
 

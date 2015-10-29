@@ -4,8 +4,7 @@ SETTINGS.C
 
 ------------------------------------------------------------------------------*/
 
-#include <stdbool.h>
-#include <stdint.h>
+#include "main.h"
 #include "driverlib/eeprom.h"
 #include "driverlib/sysctl.h"
 #include "settings.h"
