@@ -6,17 +6,24 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,
   IdUDPClient, IdBaseComponent, IdComponent, IdUDPBase, IdGlobal,IdUDPServer,
-  IdSocketHandle;
+  IdSocketHandle, Vcl.ComCtrls, Vcl.Grids, Vcl.ExtCtrls;
 
 type
   TfrmMain = class(TForm)
     IdUDPClient: TIdUDPClient;
-    btbStartClient: TBitBtn;
-    Memo1: TMemo;
-    btbStopClient: TBitBtn;
     IdUDPServer: TIdUDPServer;
+    PageControl1: TPageControl;
+    tbsSettings: TTabSheet;
+    tbsTerminal: TTabSheet;
+    btbStartClient: TBitBtn;
+    btbStopClient: TBitBtn;
     btbStartServer: TBitBtn;
     btbStopServer: TBitBtn;
+    Memo1: TMemo;
+    panSettingsRight: TPanel;
+    panSettingsClient: TPanel;
+    btbSearch: TBitBtn;
+    stgSettings: TStringGrid;
     procedure btbStartClientClick(Sender: TObject);
     procedure IdUDPClientConnected(Sender: TObject);
     procedure IdUDPClientDisconnected(Sender: TObject);
@@ -30,19 +37,45 @@ type
     procedure IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArray<System.Byte>; ABinding: TIdSocketHandle);
     procedure FormCreate(Sender: TObject);
     procedure btbStopServerClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure ShowSettings;
+    procedure btbSearchClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
 
+  setting = record
+    IP: string;
+    MAC: string;
+  end;
+
 var
   frmMain: TfrmMain;
+
+  mSettings: array of setting;
+  boardIP: string;
   step: (step1, step2, step3);
 
 implementation
 
 {$R *.dfm}
+
+procedure TfrmMain.btbSearchClick(Sender: TObject);
+begin
+//  SetLength(mSettings, 0);
+  ShowSettings;
+
+  step := step1;
+
+  try
+    IdUDPServer.Active := True;
+    IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('A', en8Bit));
+  except on e : Exception do
+    Memo1.Lines.Append('server error: ' + e.Message);
+  end;
+end;
 
 procedure TfrmMain.btbStartClientClick(Sender: TObject);
 var
@@ -96,6 +129,17 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   IdUDPServer.DefaultPort := $FFFF;
   IdUDPServer.Bindings.Add.IP := '0.0.0.0';
+
+  SetLength(mSettings, 0);
+end;
+
+procedure TfrmMain.FormShow(Sender: TObject);
+begin
+  with stgSettings do begin
+    Cells[0,0] := '¹';
+    Cells[1,0] := 'IP';
+    Cells[2,0] := 'MAC';
+  end;
 end;
 
 procedure TfrmMain.IdUDPClientConnected(Sender: TObject);
@@ -137,7 +181,7 @@ end;
 procedure TfrmMain.IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArray<System.Byte>; ABinding: TIdSocketHandle);
 var
   s: string;
-  boardIP: string;
+  st: setting;
 begin
   try
     s := BytesToString(AData, Indy8BitEncoding);
@@ -158,6 +202,14 @@ begin
       if ABinding.PeerIP = boardIP then begin
         Memo1.Lines.Add('step 2');
         step := step3;
+
+        st.IP := boardIP;
+        st.MAC := s;
+
+        SetLength(mSettings, Length(mSettings)+1);
+        mSettings[Length(mSettings)-1] := st;
+
+        ShowSettings;
       end;
     end
     else begin
@@ -165,6 +217,25 @@ begin
     end;
   except on e : Exception do
     Memo1.Lines.Append('server error: ' + e.Message);
+  end;
+end;
+
+procedure TfrmMain.ShowSettings;
+var
+  i: word;
+begin
+  if Length(mSettings) = 0 then begin
+    stgSettings.RowCount := 2;
+  end
+  else begin
+    stgSettings.RowCount := Length(mSettings)+1;
+    for i := 0 to Length(mSettings)-1 do begin
+      with stgSettings do begin
+        Cells[0,i+1] := IntToStr(i+1);
+        Cells[1,i+1] := mSettings[i].IP;
+        Cells[2,i+1] := mSettings[i].MAC;
+      end;
+    end;
   end;
 end;
 
