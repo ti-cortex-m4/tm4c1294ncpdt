@@ -24,6 +24,7 @@ type
     panSettingsClient: TPanel;
     btbSearch: TBitBtn;
     stgSettings: TStringGrid;
+    BitBtn1: TBitBtn;
     procedure btbStartClientClick(Sender: TObject);
     procedure IdUDPClientConnected(Sender: TObject);
     procedure IdUDPClientDisconnected(Sender: TObject);
@@ -40,6 +41,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure ShowSettings;
     procedure btbSearchClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,11 +58,26 @@ var
 
   mSettings: array of setting;
   boardIP: string;
-  step: (step1, step2, step3);
+  step: (step1, step2, step3, step4, step5, step6);
 
 implementation
 
 {$R *.dfm}
+
+uses device;
+
+procedure TfrmMain.BitBtn1Click(Sender: TObject);
+begin
+
+  step := step4;
+
+  try
+    IdUDPServer.Active := True;
+    IdUDPServer.SendBuffer('192.168.1.100', $FFFF, Id_IPv4, ToBytes('D', en8Bit));
+  except on e : Exception do
+    Memo1.Lines.Append('server error: ' + e.Message);
+  end;
+end;
 
 procedure TfrmMain.btbSearchClick(Sender: TObject);
 begin
@@ -182,6 +199,7 @@ procedure TfrmMain.IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArr
 var
   s: string;
   st: setting;
+  s1,s2,s3:string;
 begin
   try
     s := BytesToString(AData, Indy8BitEncoding);
@@ -210,6 +228,29 @@ begin
         mSettings[Length(mSettings)-1] := st;
 
         ShowSettings;
+      end;
+    end
+    else if step = step4 then begin
+      Memo1.Lines.Add('step 4');
+      step := step5;
+
+      if not Assigned(frmDevice) then frmDevice := TfrmDevice.Create(Self);
+      with frmDevice do begin
+        medIP.Text := IntToStr(AData[0])+'.'+IntToStr(AData[1])+'.'+IntToStr(AData[2])+'.'+IntToStr(AData[3]);
+        medGateway.Text := IntToStr(AData[4])+'.'+IntToStr(AData[5])+'.'+IntToStr(AData[6])+'.'+IntToStr(AData[7]);
+        medNetmask.Text := IntToStr(AData[8])+'.'+IntToStr(AData[9])+'.'+IntToStr(AData[10])+'.'+IntToStr(AData[11]);
+      end;
+
+      if frmDevice.ShowModal = mrOk then begin
+        step := step6;
+
+        with frmDevice do begin
+          s1 := medIP.Text;
+          s2 := medGateway.Text;
+          s3 := medNetmask.Text;
+        end;
+
+        IdUDPServer.SendBuffer(boardIP, $FFFF, Id_IPv4, ToBytes('E', en8Bit));
       end;
     end
     else begin
