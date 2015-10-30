@@ -329,8 +329,8 @@ main(void)
     //
     // Initialize the lwIP library, using DHCP.
     //
-    lwIPInit(g_ui32SysClock, pui8MACArray, inet_addr("100.1.168.192"), inet_addr("0.255.255.255"), inet_addr("1.1.168.192"), IPADDR_USE_STATIC);
-//    lwIPInit(g_ui32SysClock, pui8MACArray, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+//    lwIPInit(g_ui32SysClock, pui8MACArray, inet_addr("100.1.168.192"), inet_addr("0.255.255.255"), inet_addr("1.1.168.192"), IPADDR_USE_STATIC);
+    lwIPInit(g_ui32SysClock, pui8MACArray, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
     //
     // Setup the device locator service.

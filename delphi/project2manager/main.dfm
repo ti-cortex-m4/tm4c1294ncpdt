@@ -27,10 +27,6 @@ object frmMain: TfrmMain
     TabOrder = 0
     object tbsSettings: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object panSettingsRight: TPanel
         Left = 371
         Top = 0
@@ -83,6 +79,7 @@ object frmMain: TfrmMain
           RowCount = 2
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect]
           TabOrder = 0
+          OnDblClick = stgSettingsDblClick
           ColWidths = (
             31
             114
@@ -93,10 +90,6 @@ object frmMain: TfrmMain
     object tbsTerminal: TTabSheet
       Caption = #1058#1077#1088#1084#1080#1085#1072#1083
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memTerminal: TMemo
         Left = 0
         Top = 0

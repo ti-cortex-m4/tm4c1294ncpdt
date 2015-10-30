@@ -34,6 +34,7 @@ type
     procedure ShowSettings;
     procedure btbSearchClick(Sender: TObject);
     procedure btbSettingsClick(Sender: TObject);
+    procedure stgSettingsDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -104,15 +105,16 @@ begin
     Cells[1,0] := 'IP';
     Cells[2,0] := 'MAC';
   end;
-
   ShowSettings();
 
   pgcMain.ActivePage := tbsSettings;
+
+  btbSearchClick(self);
 end;
 
 procedure TfrmMain.btbSearchClick(Sender: TObject);
 begin
-//  SetLength(mSettings, 0);
+  SetLength(mSettings, 0);
   ShowSettings;
 
   step := step1;
@@ -142,7 +144,7 @@ end;
 
 function ReadIP(AData: TArray<System.Byte>; i: word): string;
 begin
-  result := IntToStr(AData[i])+'.'+IntToStr(AData[i+1])+'.'+IntToStr(AData[i+2])+'.'+IntToStr(AData[i+3])
+  result := IntToStr(AData[i+3])+'.'+IntToStr(AData[i+2])+'.'+IntToStr(AData[i+1])+'.'+IntToStr(AData[i+0])
 end;
 
 function StringToChar(s: string): string;
@@ -155,7 +157,18 @@ var
   a: TStringDynArray;
 begin
   a := SplitString(s,'.');
-  result := StringToChar(a[0]) + StringToChar(a[1]) + StringToChar(a[2]) + StringToChar(a[3]);
+  result := StringToChar(a[3]) + StringToChar(a[2]) + StringToChar(a[1]) + StringToChar(a[0]);
+end;
+
+procedure Delay(MSec: longword);
+var
+  FirstTickCount,Now: longword;
+begin
+  FirstTickCount := GetTickCount;
+  repeat
+    Application.ProcessMessages;
+    Now := GetTickCount;
+  until (Now - FirstTickCount >= MSec) or (Now < FirstTickCount);
 end;
 
 procedure TfrmMain.IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArray<System.Byte>; ABinding: TIdSocketHandle);
@@ -165,7 +178,7 @@ var
   z: string;
 begin
   s := BytesToString(AData, Indy8BitEncoding);
-  AddTerminal('// server read: ' + s + ' IP='+ABinding.IP + ' peer IP='+ABinding.PeerIP + ' port='+IntToStr(ABinding.Port) + ' peer port='+IntToStr(ABinding.PeerPort));
+  AddTerminal('// server read: ' + s + ' '+ABinding.IP+ ':'+IntToStr(ABinding.Port) + ' < '+ABinding.PeerIP  + ':'+IntToStr(ABinding.PeerPort));
 
   if step = step1 then begin
     AddTerminal('step 1');
@@ -211,6 +224,9 @@ begin
       end;
 
       IdUDPServer.SendBuffer(IP, $FFFF, Id_IPv4, ToBytes(z, Indy8BitEncoding));
+
+      Delay(3000);
+      btbSearchClick(self);
     end;
   end
   else begin
@@ -237,6 +253,11 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmMain.stgSettingsDblClick(Sender: TObject);
+begin
+  btbSettingsClick(self);
 end;
 
 end.
