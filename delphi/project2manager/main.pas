@@ -10,13 +10,10 @@ uses
 
 type
   TfrmMain = class(TForm)
-    IdUDPClient: TIdUDPClient;
     IdUDPServer: TIdUDPServer;
     PageControl1: TPageControl;
     tbsSettings: TTabSheet;
     tbsTerminal: TTabSheet;
-    btbStartClient: TBitBtn;
-    btbStopClient: TBitBtn;
     btbStartServer: TBitBtn;
     btbStopServer: TBitBtn;
     Memo1: TMemo;
@@ -25,11 +22,6 @@ type
     btbSearch: TBitBtn;
     stgSettings: TStringGrid;
     BitBtn1: TBitBtn;
-    procedure btbStartClientClick(Sender: TObject);
-    procedure IdUDPClientConnected(Sender: TObject);
-    procedure IdUDPClientDisconnected(Sender: TObject);
-    procedure IdUDPClientStatus(ASender: TObject; const AStatus: TIdStatus; const AStatusText: string);
-    procedure btbStopClientClick(Sender: TObject);
     procedure btbStartServerClick(Sender: TObject);
     procedure IdUDPServerAfterBind(Sender: TObject);
     procedure IdUDPServerBeforeBind(AHandle: TIdSocketHandle);
@@ -94,37 +86,6 @@ begin
   end;
 end;
 
-procedure TfrmMain.btbStartClientClick(Sender: TObject);
-var
-received_data: TIdBytes;
-i: integer;
-begin
-  try
-    IdUDPClient.Active := True;
-    IdUDPClient.Host := '192.168.1.255' ;//}'192.168.1.100';
-    IdUDPClient.Port := $FFFF;
-    IdUDPClient.Connect;
-    if IdUDPClient.Connected  then
-      begin
-        IdUDPClient.Broadcast('X', $FFFF);
-
-        SetLength(received_data, 100);
-        i := IdUDPClient.ReceiveBuffer(received_data, 5000);
-        Memo1.Lines.Add('Data received! Len:'+IntToStr(i)+', data:'+BytesToString(received_data, 0, i));
-      end;
-
-
-    IdUDPClient.Active := False;
-  except on e : Exception do
-    Memo1.Lines.Append('Error: ' + e.Message);
-  end;
-end;
-
-procedure TfrmMain.btbStopClientClick(Sender: TObject);
-begin
-  IdUDPClient.Disconnect;
-end;
-
 procedure TfrmMain.btbStartServerClick(Sender: TObject);
 begin
   step := step1;
@@ -157,22 +118,6 @@ begin
     Cells[1,0] := 'IP';
     Cells[2,0] := 'MAC';
   end;
-end;
-
-procedure TfrmMain.IdUDPClientConnected(Sender: TObject);
-begin
-   Memo1.Lines.Append('client connected');
-end;
-
-procedure TfrmMain.IdUDPClientDisconnected(Sender: TObject);
-begin
-   Memo1.Lines.Append('client disconnected');
-end;
-
-procedure TfrmMain.IdUDPClientStatus(ASender: TObject; const AStatus: TIdStatus;
-  const AStatusText: string);
-begin
-   Memo1.Lines.Append('client status: ' + AStatusText);
 end;
 
 procedure TfrmMain.IdUDPServerAfterBind(Sender: TObject);
