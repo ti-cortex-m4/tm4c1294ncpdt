@@ -145,7 +145,7 @@ begin
   result := IntToStr(AData[i])+'.'+IntToStr(AData[i+1])+'.'+IntToStr(AData[i+2])+'.'+IntToStr(AData[i+3])
 end;
 
-function x(s: string): string;
+function StringToChar(s: string): string;
 begin
   result := Chr(StrToInt(s));
 end;
@@ -155,7 +155,7 @@ var
   a: TStringDynArray;
 begin
   a := SplitString(s,'.');
-  result := x(a[0]) + x(a[1]) + x(a[2]) + x(a[3]);
+  result := StringToChar(a[0]) + StringToChar(a[1]) + StringToChar(a[2]) + StringToChar(a[3]);
 end;
 
 procedure TfrmMain.IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArray<System.Byte>; ABinding: TIdSocketHandle);
