@@ -1,4 +1,4 @@
-unit device;
+unit settings;
 
 interface
 
@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask;
 
 type
-  TfrmDevice = class(TForm)
+  TfrmSettings = class(TForm)
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     medIP: TMaskEdit;
@@ -23,7 +23,7 @@ type
   end;
 
 var
-  frmDevice: TfrmDevice;
+  frmSettings: TfrmSettings;
 
 implementation
 

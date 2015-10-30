@@ -11,10 +11,10 @@ uses
 type
   TfrmMain = class(TForm)
     IdUDPServer: TIdUDPServer;
-    PageControl1: TPageControl;
+    pgcMain: TPageControl;
     tbsSettings: TTabSheet;
     tbsTerminal: TTabSheet;
-    Memo1: TMemo;
+    memTerminal: TMemo;
     panSettingsRight: TPanel;
     panSettingsClient: TPanel;
     btbSearch: TBitBtn;
@@ -52,7 +52,7 @@ implementation
 
 {$R *.dfm}
 
-uses device;
+uses settings;
 
 procedure TfrmMain.btbSettingsClick(Sender: TObject);
 var
@@ -67,7 +67,7 @@ begin
 //    IdUDPServer.Active := True;
     IdUDPServer.SendBuffer(mSettings[i-1].IP, $FFFF, Id_IPv4, ToBytes('D', en8Bit));
   except on e : Exception do
-    Memo1.Lines.Append('server error: ' + e.Message);
+    memTerminal.Lines.Append('server error: ' + e.Message);
   end;
   end;
 end;
@@ -83,46 +83,46 @@ begin
 //    IdUDPServer.Active := True;
     IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('A', en8Bit));
   except on e : Exception do
-    Memo1.Lines.Append('server error: ' + e.Message);
+    memTerminal.Lines.Append('server error: ' + e.Message);
   end;
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-//  IdUDPServer.DefaultPort := $FFFF;
-//  IdUDPServer.Bindings.Add.IP := '0.0.0.0';
-
   SetLength(mSettings, 0);
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
-ShowSettings();
   with stgSettings do begin
     Cells[0,0] := '¹';
     Cells[1,0] := 'IP';
     Cells[2,0] := 'MAC';
   end;
+
+  ShowSettings();
+
+  pgcMain.ActivePage := tbsSettings;
 end;
 
 procedure TfrmMain.IdUDPServerAfterBind(Sender: TObject);
 begin
-  Memo1.Lines.Append('server after bind');
+  memTerminal.Lines.Append('server after bind');
 end;
 
 procedure TfrmMain.IdUDPServerBeforeBind(AHandle: TIdSocketHandle);
 begin
-  Memo1.Lines.Append('server before bind');
+  memTerminal.Lines.Append('server before bind');
 end;
 
 procedure TfrmMain.IdUDPServerStatus(ASender: TObject; const AStatus: TIdStatus; const AStatusText: string);
 begin
-  Memo1.Lines.Append('server status: ' + AStatusText);
+  memTerminal.Lines.Append('server status: ' + AStatusText);
 end;
 
 procedure TfrmMain.IdUDPServerUDPException(AThread: TIdUDPListenerThread; ABinding: TIdSocketHandle; const AMessage: string; const AExceptionClass: TClass);
 begin
-  Memo1.Lines.Append('exception: ' + AMessage);
+  memTerminal.Lines.Append('exception: ' + AMessage);
 end;
 
 function x(s: string): string;
@@ -143,22 +143,22 @@ var
 begin
   try
     s := BytesToString(AData, Indy8BitEncoding);
-    Memo1.Lines.Add('server read: ' + s + ' IP='+ABinding.IP + ' peer IP='+ABinding.PeerIP + ' port='+IntToStr(ABinding.Port) + ' peer port='+IntToStr(ABinding.PeerPort));
+    memTerminal.Lines.Add('server read: ' + s + ' IP='+ABinding.IP + ' peer IP='+ABinding.PeerIP + ' port='+IntToStr(ABinding.Port) + ' peer port='+IntToStr(ABinding.PeerPort));
 
     if step = step1 then begin
-      Memo1.Lines.Add('step 1');
+      memTerminal.Lines.Add('step 1');
       if s = 'B' then begin
         step := step2;
 
         boardIP := ABinding.PeerIP;
-        Memo1.Lines.Add('board IP = '+boardIP);
+        memTerminal.Lines.Add('board IP = '+boardIP);
 
         IdUDPServer.SendBuffer(boardIP, $FFFF, Id_IPv4, ToBytes('C', en8Bit));
       end;
     end
     else if step = step2 then begin
       if ABinding.PeerIP = boardIP then begin
-        Memo1.Lines.Add('step 2');
+        memTerminal.Lines.Add('step 2');
         step := step3;
 
         st.IP := boardIP;
@@ -171,20 +171,20 @@ begin
       end;
     end
     else if step = step4 then begin
-      Memo1.Lines.Add('step 4');
+      memTerminal.Lines.Add('step 4');
       step := step5;
 
-      if not Assigned(frmDevice) then frmDevice := TfrmDevice.Create(Self);
-      with frmDevice do begin
+      if not Assigned(frmSettings) then frmSettings := frmSettings.Create(Self);
+      with frmSettings do begin
         medIP.Text := IntToStr(AData[1])+'.'+IntToStr(AData[2])+'.'+IntToStr(AData[3])+'.'+IntToStr(AData[4]);
         medGateway.Text := IntToStr(AData[5])+'.'+IntToStr(AData[6])+'.'+IntToStr(AData[7])+'.'+IntToStr(AData[8]);
         medNetmask.Text := IntToStr(AData[9])+'.'+IntToStr(AData[10])+'.'+IntToStr(AData[11])+'.'+IntToStr(AData[12]);
       end;
 
-      if frmDevice.ShowModal = mrOk then begin
+      if frmSettings.ShowModal = mrOk then begin
         step := step6;
 
-        with frmDevice do begin
+        with frmSettings do begin
           s1 := medIP.Text;
           s2 := medGateway.Text;
           s3 := medNetmask.Text;
@@ -202,10 +202,10 @@ begin
       end;
     end
     else begin
-      Memo1.Lines.Add('step ?');
+      memTerminal.Lines.Add('step ?');
     end;
   except on e : Exception do
-    Memo1.Lines.Append('server error: ' + e.Message);
+    memTerminal.Lines.Append('server error: ' + e.Message);
   end;
 end;
 

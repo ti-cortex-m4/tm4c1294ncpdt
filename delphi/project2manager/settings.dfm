@@ -1,8 +1,8 @@
-object frmDevice: TfrmDevice
+object frmSettings: TfrmSettings
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
-  Caption = #1059#1089#1090#1088#1086#1081#1089#1090#1074#1086
+  Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
   ClientHeight = 178
   ClientWidth = 211
   Color = clBtnFace

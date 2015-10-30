@@ -3,7 +3,7 @@ program project2manager;
 uses
   Vcl.Forms,
   main in 'main.pas' {frmMain},
-  device in 'device.pas' {frmDevice};
+  settings in 'settings.pas' {frmSettings};
 
 {$R *.res}
 

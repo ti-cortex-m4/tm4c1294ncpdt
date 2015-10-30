@@ -88,8 +88,8 @@
 				<Form>frmMain</Form>
 				<FormType>dfm</FormType>
 			</DCCReference>
-			<DCCReference Include="device.pas">
-				<Form>frmDevice</Form>
+			<DCCReference Include="settings.pas">
+				<Form>frmSettings</Form>
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<BuildConfiguration Include="Release">
