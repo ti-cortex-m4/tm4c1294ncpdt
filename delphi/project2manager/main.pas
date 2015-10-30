@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,
   IdUDPClient, IdBaseComponent, IdComponent, IdUDPBase, IdGlobal,IdUDPServer,
-  IdSocketHandle, Vcl.ComCtrls, Vcl.Grids, Vcl.ExtCtrls;
+  IdSocketHandle, Vcl.ComCtrls, Vcl.Grids, Vcl.ExtCtrls, StrUtils, System.Types;
 
 type
   TfrmMain = class(TForm)
@@ -195,11 +195,21 @@ begin
   Memo1.Lines.Append('exception: ' + AMessage);
 end;
 
+function x(s: string): string;
+var
+  x: byte;
+begin
+  x := StrToInt(s);
+  result := Chr(x);
+end;
+
 procedure TfrmMain.IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArray<System.Byte>; ABinding: TIdSocketHandle);
 var
   s: string;
   st: setting;
   s1,s2,s3:string;
+  a:TStringDynArray;
+  z:string;
 begin
   try
     s := BytesToString(AData, Indy8BitEncoding);
@@ -236,9 +246,9 @@ begin
 
       if not Assigned(frmDevice) then frmDevice := TfrmDevice.Create(Self);
       with frmDevice do begin
-        medIP.Text := IntToStr(AData[0])+'.'+IntToStr(AData[1])+'.'+IntToStr(AData[2])+'.'+IntToStr(AData[3]);
-        medGateway.Text := IntToStr(AData[4])+'.'+IntToStr(AData[5])+'.'+IntToStr(AData[6])+'.'+IntToStr(AData[7]);
-        medNetmask.Text := IntToStr(AData[8])+'.'+IntToStr(AData[9])+'.'+IntToStr(AData[10])+'.'+IntToStr(AData[11]);
+        medIP.Text := IntToStr(AData[1])+'.'+IntToStr(AData[2])+'.'+IntToStr(AData[3])+'.'+IntToStr(AData[4]);
+        medGateway.Text := IntToStr(AData[5])+'.'+IntToStr(AData[6])+'.'+IntToStr(AData[7])+'.'+IntToStr(AData[8]);
+        medNetmask.Text := IntToStr(AData[9])+'.'+IntToStr(AData[10])+'.'+IntToStr(AData[11])+'.'+IntToStr(AData[12]);
       end;
 
       if frmDevice.ShowModal = mrOk then begin
@@ -250,7 +260,15 @@ begin
           s3 := medNetmask.Text;
         end;
 
-        IdUDPServer.SendBuffer(boardIP, $FFFF, Id_IPv4, ToBytes('E', en8Bit));
+        z := 'F';
+        a := SplitString(s1,'.');
+        z := z + x(a[0])+x(a[1])+x(a[2])+x(a[3]);
+        a := SplitString(s2,'.');
+        z := z + x(a[0])+x(a[1])+x(a[2])+x(a[3]);
+        a := SplitString(s3,'.');
+        z := z + x(a[0])+x(a[1])+x(a[2])+x(a[3]);
+
+        IdUDPServer.SendBuffer(boardIP, $FFFF, Id_IPv4, ToBytes(z, en8Bit));
       end;
     end
     else begin
