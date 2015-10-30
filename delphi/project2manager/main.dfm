@@ -2,8 +2,8 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = #1059#1089#1090#1088#1086#1081#1089#1090#1074#1072
-  ClientHeight = 316
-  ClientWidth = 418
+  ClientHeight = 313
+  ClientWidth = 447
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,18 +19,18 @@ object frmMain: TfrmMain
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 418
-    Height = 316
-    ActivePage = tbsTerminal
+    Width = 447
+    Height = 313
+    ActivePage = tbsSettings
     Align = alClient
     TabOrder = 0
     object tbsSettings: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072
       object panSettingsRight: TPanel
-        Left = 305
+        Left = 312
         Top = 0
-        Width = 105
-        Height = 283
+        Width = 127
+        Height = 280
         Align = alRight
         BevelEdges = []
         BevelOuter = bvNone
@@ -38,27 +38,27 @@ object frmMain: TfrmMain
         object btbSearch: TBitBtn
           Left = 16
           Top = 16
-          Width = 75
+          Width = 96
           Height = 25
           Caption = #1055#1086#1080#1089#1082
           TabOrder = 0
           OnClick = btbSearchClick
         end
-        object BitBtn1: TBitBtn
+        object btbSettings: TBitBtn
           Left = 16
           Top = 56
-          Width = 75
+          Width = 96
           Height = 25
-          Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+          Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072
           TabOrder = 1
-          OnClick = BitBtn1Click
+          OnClick = btbSettingsClick
         end
       end
       object panSettingsClient: TPanel
         Left = 0
         Top = 0
-        Width = 305
-        Height = 283
+        Width = 312
+        Height = 280
         Align = alClient
         BevelEdges = []
         BevelOuter = bvNone
@@ -66,8 +66,8 @@ object frmMain: TfrmMain
         object stgSettings: TStringGrid
           Left = 0
           Top = 0
-          Width = 305
-          Height = 283
+          Width = 312
+          Height = 280
           Align = alClient
           BevelEdges = []
           BevelInner = bvNone
@@ -75,6 +75,7 @@ object frmMain: TfrmMain
           ColCount = 3
           FixedCols = 0
           RowCount = 2
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect]
           TabOrder = 0
           ColWidths = (
             22
@@ -89,8 +90,8 @@ object frmMain: TfrmMain
       object Memo1: TMemo
         Left = 0
         Top = 0
-        Width = 410
-        Height = 283
+        Width = 439
+        Height = 280
         Align = alClient
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
@@ -117,7 +118,7 @@ object frmMain: TfrmMain
     OnAfterBind = IdUDPServerAfterBind
     OnUDPRead = IdUDPServerUDPRead
     OnUDPException = IdUDPServerUDPException
-    Left = 112
-    Top = 216
+    Left = 32
+    Top = 104
   end
 end
