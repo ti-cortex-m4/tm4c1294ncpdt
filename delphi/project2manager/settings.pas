@@ -14,9 +14,9 @@ type
     btbCancel: TBitBtn;
     btbSave: TBitBtn;
     panClient: TPanel;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
+    lblIP: TLabel;
+    lblGateway: TLabel;
+    lblNetmask: TLabel;
     medIP: TMaskEdit;
     medGateway: TMaskEdit;
     medNetmask: TMaskEdit;

@@ -20,6 +20,10 @@ type
     btbSearch: TBitBtn;
     stgSettings: TStringGrid;
     btbSettings: TBitBtn;
+    procedure AddTerminal(s: string);
+    procedure ErrBox(s: string);
+    procedure WrnBox(s: string);
+    procedure InfBox(s: string);
     procedure IdUDPServerAfterBind(Sender: TObject);
     procedure IdUDPServerBeforeBind(AHandle: TIdSocketHandle);
     procedure IdUDPServerStatus(ASender: TObject; const AStatus: TIdStatus; const AStatusText: string);
@@ -45,7 +49,7 @@ var
   frmMain: TfrmMain;
 
   mSettings: array of setting;
-  boardIP: string;
+  IP: string;
   step: (step1, step2, step3, step4, step5, step6);
 
 implementation
@@ -54,36 +58,37 @@ implementation
 
 uses settings;
 
+procedure TfrmMain.AddTerminal(s: string);
+begin
+  memTerminal.Lines.Add(s);
+end;
+
+procedure TfrmMain.ErrBox(s: string);
+begin
+  AddTerminal('Ошибка: '+s);
+  Application.MessageBox(PChar(s + ' '), 'Ошибка', mb_Ok + mb_IconHand);
+end;
+
+procedure TfrmMain.WrnBox(s: string);
+begin
+  AddTerminal('Внимание: '+s);
+  Application.MessageBox(PChar(s + ' '), 'Внимание', mb_Ok + mb_IconWarning);
+end;
+
+procedure TfrmMain.InfBox(s: string);
+begin
+  AddTerminal('Информация: '+s);
+  Application.MessageBox(PChar(s + ' '), 'Информация', mb_Ok + mb_IconAsterisk);
+end;
+
 procedure TfrmMain.btbSettingsClick(Sender: TObject);
 var
   i: word;
 begin
   i := stgSettings.Row;
-  if i >0 then begin
-
-  step := step4;
-
-  try
-//    IdUDPServer.Active := True;
-    IdUDPServer.SendBuffer(mSettings[i-1].IP, $FFFF, Id_IPv4, ToBytes('D', en8Bit));
-  except on e : Exception do
-    memTerminal.Lines.Append('server error: ' + e.Message);
-  end;
-  end;
-end;
-
-procedure TfrmMain.btbSearchClick(Sender: TObject);
-begin
-//  SetLength(mSettings, 0);
-  ShowSettings;
-
-  step := step1;
-
-  try
-//    IdUDPServer.Active := True;
-    IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('A', en8Bit));
-  except on e : Exception do
-    memTerminal.Lines.Append('server error: ' + e.Message);
+  if i > 0 then begin
+    step := step4;
+    IdUDPServer.SendBuffer(mSettings[i-1].IP, $FFFF, Id_IPv4, ToBytes('D', Indy8BitEncoding));
   end;
 end;
 
@@ -105,107 +110,111 @@ begin
   pgcMain.ActivePage := tbsSettings;
 end;
 
+procedure TfrmMain.btbSearchClick(Sender: TObject);
+begin
+//  SetLength(mSettings, 0);
+  ShowSettings;
+
+  step := step1;
+
+  IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('A', Indy8BitEncoding));
+end;
+
 procedure TfrmMain.IdUDPServerAfterBind(Sender: TObject);
 begin
-  memTerminal.Lines.Append('server after bind');
+  AddTerminal('// server: after bind');
 end;
 
 procedure TfrmMain.IdUDPServerBeforeBind(AHandle: TIdSocketHandle);
 begin
-  memTerminal.Lines.Append('server before bind');
+  AddTerminal('// server: before bind');
 end;
 
 procedure TfrmMain.IdUDPServerStatus(ASender: TObject; const AStatus: TIdStatus; const AStatusText: string);
 begin
-  memTerminal.Lines.Append('server status: ' + AStatusText);
+  AddTerminal('// server status: ' + AStatusText);
 end;
 
 procedure TfrmMain.IdUDPServerUDPException(AThread: TIdUDPListenerThread; ABinding: TIdSocketHandle; const AMessage: string; const AExceptionClass: TClass);
 begin
-  memTerminal.Lines.Append('exception: ' + AMessage);
+  ErrBox('Ошибка сервера: ' + AMessage);
+end;
+
+function ReadIP(AData: TArray<System.Byte>; i: word): string;
+begin
+  result := IntToStr(AData[i])+'.'+IntToStr(AData[i+1])+'.'+IntToStr(AData[i+2])+'.'+IntToStr(AData[i+3])
 end;
 
 function x(s: string): string;
-var
-  x: byte;
 begin
-  x := StrToInt(s);
-  result := Chr(x);
+  result := Chr(StrToInt(s));
+end;
+
+function SaveIP(s: string): string;
+var
+  a: TStringDynArray;
+begin
+  a := SplitString(s,'.');
+  result := x(a[0]) + x(a[1]) + x(a[2]) + x(a[3]);
 end;
 
 procedure TfrmMain.IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArray<System.Byte>; ABinding: TIdSocketHandle);
 var
   s: string;
-  st: setting;
-  s1,s2,s3:string;
-  a:TStringDynArray;
-  z:string;
+  x: setting;
+  z: string;
 begin
-  try
-    s := BytesToString(AData, Indy8BitEncoding);
-    memTerminal.Lines.Add('server read: ' + s + ' IP='+ABinding.IP + ' peer IP='+ABinding.PeerIP + ' port='+IntToStr(ABinding.Port) + ' peer port='+IntToStr(ABinding.PeerPort));
+  s := BytesToString(AData, Indy8BitEncoding);
+  AddTerminal('// server read: ' + s + ' IP='+ABinding.IP + ' peer IP='+ABinding.PeerIP + ' port='+IntToStr(ABinding.Port) + ' peer port='+IntToStr(ABinding.PeerPort));
 
-    if step = step1 then begin
-      memTerminal.Lines.Add('step 1');
-      if s = 'B' then begin
-        step := step2;
+  if step = step1 then begin
+    AddTerminal('step 1');
+    if s = 'B' then begin
+      step := step2;
 
-        boardIP := ABinding.PeerIP;
-        memTerminal.Lines.Add('board IP = '+boardIP);
+      IP := ABinding.PeerIP;
+      AddTerminal('IP = '+IP);
 
-        IdUDPServer.SendBuffer(boardIP, $FFFF, Id_IPv4, ToBytes('C', en8Bit));
-      end;
-    end
-    else if step = step2 then begin
-      if ABinding.PeerIP = boardIP then begin
-        memTerminal.Lines.Add('step 2');
-        step := step3;
-
-        st.IP := boardIP;
-        st.MAC := s;
-
-        SetLength(mSettings, Length(mSettings)+1);
-        mSettings[Length(mSettings)-1] := st;
-
-        ShowSettings;
-      end;
-    end
-    else if step = step4 then begin
-      memTerminal.Lines.Add('step 4');
-      step := step5;
-
-      if not Assigned(frmSettings) then frmSettings := TfrmSettings.Create(Self);
-      with frmSettings do begin
-        medIP.Text := IntToStr(AData[1])+'.'+IntToStr(AData[2])+'.'+IntToStr(AData[3])+'.'+IntToStr(AData[4]);
-        medGateway.Text := IntToStr(AData[5])+'.'+IntToStr(AData[6])+'.'+IntToStr(AData[7])+'.'+IntToStr(AData[8]);
-        medNetmask.Text := IntToStr(AData[9])+'.'+IntToStr(AData[10])+'.'+IntToStr(AData[11])+'.'+IntToStr(AData[12]);
-      end;
-
-      if frmSettings.ShowModal = mrOk then begin
-        step := step6;
-
-        with frmSettings do begin
-          s1 := medIP.Text;
-          s2 := medGateway.Text;
-          s3 := medNetmask.Text;
-        end;
-
-        z := 'F';
-        a := SplitString(s1,'.');
-        z := z + x(a[0])+x(a[1])+x(a[2])+x(a[3]);
-        a := SplitString(s2,'.');
-        z := z + x(a[0])+x(a[1])+x(a[2])+x(a[3]);
-        a := SplitString(s3,'.');
-        z := z + x(a[0])+x(a[1])+x(a[2])+x(a[3]);
-
-        IdUDPServer.SendBuffer(boardIP, $FFFF, Id_IPv4, ToBytes(z, en8Bit));
-      end;
-    end
-    else begin
-      memTerminal.Lines.Add('step ?');
+      IdUDPServer.SendBuffer(IP, $FFFF, Id_IPv4, ToBytes('C', Indy8BitEncoding));
     end;
-  except on e : Exception do
-    memTerminal.Lines.Append('server error: ' + e.Message);
+  end
+  else if step = step2 then begin
+    if ABinding.PeerIP = IP then begin
+      AddTerminal('step 2');
+      step := step3;
+
+      x.IP := IP;
+      x.MAC := s;
+
+      SetLength(mSettings, Length(mSettings)+1);
+      mSettings[Length(mSettings)-1] := x;
+
+      ShowSettings;
+    end;
+  end
+  else if step = step4 then begin
+    AddTerminal('step 4');
+    step := step5;
+
+    if not Assigned(frmSettings) then frmSettings := TfrmSettings.Create(Self);
+    with frmSettings do begin
+      medIP.Text := ReadIP(AData, 1);
+      medGateway.Text := ReadIP(AData, 5);
+      medNetmask.Text := ReadIP(AData, 9);
+    end;
+
+    if frmSettings.ShowModal = mrOk then begin
+      step := step6;
+
+      with frmSettings do begin
+        z := 'F' + SaveIP(medIP.Text) + SaveIP(medGateway.Text) + SaveIP(medNetmask.Text);
+      end;
+
+      IdUDPServer.SendBuffer(IP, $FFFF, Id_IPv4, ToBytes(z, Indy8BitEncoding));
+    end;
+  end
+  else begin
+    AddTerminal('step ?');
   end;
 end;
 
