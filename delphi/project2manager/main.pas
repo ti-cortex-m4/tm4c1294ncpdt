@@ -174,7 +174,7 @@ begin
       memTerminal.Lines.Add('step 4');
       step := step5;
 
-      if not Assigned(frmSettings) then frmSettings := frmSettings.Create(Self);
+      if not Assigned(frmSettings) then frmSettings := TfrmSettings.Create(Self);
       with frmSettings do begin
         medIP.Text := IntToStr(AData[1])+'.'+IntToStr(AData[2])+'.'+IntToStr(AData[3])+'.'+IntToStr(AData[4]);
         medGateway.Text := IntToStr(AData[5])+'.'+IntToStr(AData[6])+'.'+IntToStr(AData[7])+'.'+IntToStr(AData[8]);
