@@ -8,32 +8,32 @@ object frmDevice: TfrmDevice
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -15
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
   PixelsPerInch = 120
-  TextHeight = 16
+  TextHeight = 18
   object Label1: TLabel
     Left = 8
     Top = 19
-    Width = 11
-    Height = 16
+    Width = 14
+    Height = 18
     Caption = 'IP'
   end
   object Label2: TLabel
     Left = 8
     Top = 59
-    Width = 49
-    Height = 16
+    Width = 57
+    Height = 18
     Caption = 'Gateway'
   end
   object Label3: TLabel
     Left = 8
     Top = 99
-    Width = 49
-    Height = 16
+    Width = 58
+    Height = 18
     Caption = 'Netmask'
   end
   object BitBtn1: TBitBtn
@@ -58,21 +58,21 @@ object frmDevice: TfrmDevice
     Left = 72
     Top = 16
     Width = 121
-    Height = 24
+    Height = 26
     TabOrder = 2
   end
   object medGateway: TMaskEdit
     Left = 72
     Top = 56
     Width = 121
-    Height = 24
+    Height = 26
     TabOrder = 3
   end
   object medNetmask: TMaskEdit
     Left = 72
     Top = 96
     Width = 121
-    Height = 24
+    Height = 26
     TabOrder = 4
   end
 end
