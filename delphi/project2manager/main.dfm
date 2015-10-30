@@ -1,6 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   Caption = #1059#1089#1090#1088#1086#1081#1089#1090#1074#1072
   ClientHeight = 315
   ClientWidth = 506
@@ -26,10 +27,6 @@ object frmMain: TfrmMain
     TabOrder = 0
     object tbsSettings: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object panSettingsRight: TPanel
         Left = 371
         Top = 0
@@ -43,8 +40,9 @@ object frmMain: TfrmMain
           Left = 16
           Top = 16
           Width = 96
-          Height = 25
+          Height = 28
           Caption = #1055#1086#1080#1089#1082
+          Default = True
           TabOrder = 0
           OnClick = btbSearchClick
         end
@@ -52,7 +50,7 @@ object frmMain: TfrmMain
           Left = 16
           Top = 56
           Width = 96
-          Height = 25
+          Height = 28
           Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
           TabOrder = 1
           OnClick = btbSettingsClick
@@ -91,10 +89,6 @@ object frmMain: TfrmMain
     object tbsTerminal: TTabSheet
       Caption = #1058#1077#1088#1084#1080#1085#1072#1083
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memTerminal: TMemo
         Left = 0
         Top = 0

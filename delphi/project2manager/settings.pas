@@ -4,18 +4,22 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask,
+  Vcl.ExtCtrls;
 
 type
   TfrmSettings = class(TForm)
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    medIP: TMaskEdit;
-    medGateway: TMaskEdit;
-    medNetmask: TMaskEdit;
+    panBottom: TPanel;
+    panRight: TPanel;
+    btbCancel: TBitBtn;
+    btbSave: TBitBtn;
+    panClient: TPanel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    medIP: TMaskEdit;
+    medGateway: TMaskEdit;
+    medNetmask: TMaskEdit;
   private
     { Private declarations }
   public
