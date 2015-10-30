@@ -24,9 +24,9 @@ object frmSettings: TfrmSettings
     BevelEdges = []
     TabOrder = 0
     object panRight: TPanel
-      Left = 81
+      Left = 72
       Top = 1
-      Width = 217
+      Width = 226
       Height = 39
       Align = alRight
       BevelEdges = []
@@ -60,43 +60,45 @@ object frmSettings: TfrmSettings
     Height = 143
     Align = alClient
     TabOrder = 1
-    object Label1: TLabel
-      Left = 24
+    ExplicitLeft = 32
+    ExplicitTop = 8
+    object lblIP: TLabel
+      Left = 16
       Top = 19
       Width = 14
       Height = 18
       Caption = 'IP'
     end
-    object Label2: TLabel
-      Left = 24
+    object lblGateway: TLabel
+      Left = 16
       Top = 59
       Width = 76
       Height = 18
       Caption = 'Gateway IP'
     end
-    object Label3: TLabel
-      Left = 24
+    object lblNetmask: TLabel
+      Left = 16
       Top = 99
       Width = 85
       Height = 18
       Caption = 'Subnet mask'
     end
     object medIP: TMaskEdit
-      Left = 119
+      Left = 111
       Top = 15
       Width = 120
       Height = 26
       TabOrder = 0
     end
     object medGateway: TMaskEdit
-      Left = 119
+      Left = 111
       Top = 56
       Width = 120
       Height = 26
       TabOrder = 1
     end
     object medNetmask: TMaskEdit
-      Left = 119
+      Left = 111
       Top = 96
       Width = 120
       Height = 26
