@@ -68,13 +68,15 @@
 
 void GetAll(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port)
 {
-    p = pbuf_alloc(PBUF_TRANSPORT, 4+4+4, PBUF_RAM);
+    p = pbuf_alloc(PBUF_TRANSPORT, 1+4+4+4, PBUF_RAM);
     if (p == NULL) return;
 
     uint8_t *pui8Data = p->payload;
 
     u8_t j=0;
     combo32 cb;
+
+    pui8Data[j++] = 'E';
 
     cb.dwBuff = dwIP;
 
@@ -137,6 +139,7 @@ void SetAll(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t por
     pui8Data = p->payload;
 
     j=0;
+    pui8Data[j++] = 'G';
 
     cb.dwBuff = dwIP;
     pui8Data[j++] = cb.mpbBuff[0];
@@ -223,7 +226,7 @@ LocatorReceive(void *arg, struct udp_pcb *pcb, struct pbuf *p,
         pbuf_free(p);
     } else if ((p->len == 1) && (pui8Data[0] == 'D')) {
       GetAll(pcb,p,addr,port);
-    } else if ((p->len == 1+4+4+4) && (pui8Data[0] == 'E')) {
+    } else if ((p->len == 1+4+4+4) && (pui8Data[0] == 'F')) {
       SetAll(pcb,p,addr,port);
     } else {
         p = pbuf_alloc(PBUF_TRANSPORT, 1, PBUF_RAM);
