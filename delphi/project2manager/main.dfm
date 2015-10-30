@@ -7,7 +7,7 @@ object frmMain: TfrmMain
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -15
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
@@ -15,13 +15,13 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 120
-  TextHeight = 16
+  TextHeight = 18
   object PageControl1: TPageControl
     Left = 0
     Top = 0
     Width = 418
     Height = 316
-    ActivePage = tbsSettings
+    ActivePage = tbsTerminal
     Align = alClient
     TabOrder = 0
     object tbsSettings: TTabSheet
@@ -30,7 +30,7 @@ object frmMain: TfrmMain
         Left = 305
         Top = 0
         Width = 105
-        Height = 285
+        Height = 283
         Align = alRight
         BevelEdges = []
         BevelOuter = bvNone
@@ -58,7 +58,7 @@ object frmMain: TfrmMain
         Left = 0
         Top = 0
         Width = 305
-        Height = 285
+        Height = 283
         Align = alClient
         BevelEdges = []
         BevelOuter = bvNone
@@ -67,7 +67,7 @@ object frmMain: TfrmMain
           Left = 0
           Top = 0
           Width = 305
-          Height = 285
+          Height = 283
           Align = alClient
           BevelEdges = []
           BevelInner = bvNone
@@ -86,38 +86,33 @@ object frmMain: TfrmMain
     object tbsTerminal: TTabSheet
       Caption = #1058#1077#1088#1084#1080#1085#1072#1083
       ImageIndex = 1
-      object btbStartServer: TBitBtn
-        Left = 8
-        Top = 8
-        Width = 80
-        Height = 25
-        Caption = 'start server'
-        TabOrder = 0
-        OnClick = btbStartServerClick
-      end
-      object btbStopServer: TBitBtn
-        Left = 102
-        Top = 8
-        Width = 80
-        Height = 25
-        Caption = 'stop server'
-        TabOrder = 1
-        OnClick = btbStopServerClick
-      end
       object Memo1: TMemo
-        Left = 8
-        Top = 39
-        Width = 644
-        Height = 290
-        TabOrder = 2
+        Left = 0
+        Top = 0
+        Width = 410
+        Height = 283
+        Align = alClient
+        Font.Charset = RUSSIAN_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Lucida Console'
+        Font.Style = []
+        ParentFont = False
+        ScrollBars = ssBoth
+        TabOrder = 0
       end
     end
   end
   object IdUDPServer: TIdUDPServer
     OnStatus = IdUDPServerStatus
+    Active = True
     BroadcastEnabled = True
-    Bindings = <>
-    DefaultPort = 0
+    Bindings = <
+      item
+        IP = '0.0.0.0'
+        Port = 65535
+      end>
+    DefaultPort = 65535
     OnBeforeBind = IdUDPServerBeforeBind
     OnAfterBind = IdUDPServerAfterBind
     OnUDPRead = IdUDPServerUDPRead

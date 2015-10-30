@@ -14,22 +14,18 @@ type
     PageControl1: TPageControl;
     tbsSettings: TTabSheet;
     tbsTerminal: TTabSheet;
-    btbStartServer: TBitBtn;
-    btbStopServer: TBitBtn;
     Memo1: TMemo;
     panSettingsRight: TPanel;
     panSettingsClient: TPanel;
     btbSearch: TBitBtn;
     stgSettings: TStringGrid;
     BitBtn1: TBitBtn;
-    procedure btbStartServerClick(Sender: TObject);
     procedure IdUDPServerAfterBind(Sender: TObject);
     procedure IdUDPServerBeforeBind(AHandle: TIdSocketHandle);
     procedure IdUDPServerStatus(ASender: TObject; const AStatus: TIdStatus; const AStatusText: string);
     procedure IdUDPServerUDPException(AThread: TIdUDPListenerThread; ABinding: TIdSocketHandle; const AMessage: string; const AExceptionClass: TClass);
     procedure IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArray<System.Byte>; ABinding: TIdSocketHandle);
     procedure FormCreate(Sender: TObject);
-    procedure btbStopServerClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ShowSettings;
     procedure btbSearchClick(Sender: TObject);
@@ -64,7 +60,7 @@ begin
   step := step4;
 
   try
-    IdUDPServer.Active := True;
+//    IdUDPServer.Active := True;
     IdUDPServer.SendBuffer('192.168.1.100', $FFFF, Id_IPv4, ToBytes('D', en8Bit));
   except on e : Exception do
     Memo1.Lines.Append('server error: ' + e.Message);
@@ -79,34 +75,17 @@ begin
   step := step1;
 
   try
-    IdUDPServer.Active := True;
+//    IdUDPServer.Active := True;
     IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('A', en8Bit));
   except on e : Exception do
     Memo1.Lines.Append('server error: ' + e.Message);
   end;
-end;
-
-procedure TfrmMain.btbStartServerClick(Sender: TObject);
-begin
-  step := step1;
-
-  try
-    IdUDPServer.Active := True;
-    IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('A', en8Bit));
-  except on e : Exception do
-    Memo1.Lines.Append('server error: ' + e.Message);
-  end;
-end;
-
-procedure TfrmMain.btbStopServerClick(Sender: TObject);
-begin
-  IdUDPServer.Active := false;
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  IdUDPServer.DefaultPort := $FFFF;
-  IdUDPServer.Bindings.Add.IP := '0.0.0.0';
+//  IdUDPServer.DefaultPort := $FFFF;
+//  IdUDPServer.Bindings.Add.IP := '0.0.0.0';
 
   SetLength(mSettings, 0);
 end;
