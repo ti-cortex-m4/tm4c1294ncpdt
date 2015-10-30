@@ -19,7 +19,7 @@ type
     panSettingsClient: TPanel;
     btbSearch: TBitBtn;
     stgSettings: TStringGrid;
-    BitBtn1: TBitBtn;
+    btbSettings: TBitBtn;
     procedure IdUDPServerAfterBind(Sender: TObject);
     procedure IdUDPServerBeforeBind(AHandle: TIdSocketHandle);
     procedure IdUDPServerStatus(ASender: TObject; const AStatus: TIdStatus; const AStatusText: string);
@@ -29,7 +29,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure ShowSettings;
     procedure btbSearchClick(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
+    procedure btbSettingsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,16 +54,21 @@ implementation
 
 uses device;
 
-procedure TfrmMain.BitBtn1Click(Sender: TObject);
+procedure TfrmMain.btbSettingsClick(Sender: TObject);
+var
+  i: word;
 begin
+  i := stgSettings.Row;
+  if i >0 then begin
 
   step := step4;
 
   try
 //    IdUDPServer.Active := True;
-    IdUDPServer.SendBuffer('192.168.1.100', $FFFF, Id_IPv4, ToBytes('D', en8Bit));
+    IdUDPServer.SendBuffer(mSettings[i-1].IP, $FFFF, Id_IPv4, ToBytes('D', en8Bit));
   except on e : Exception do
     Memo1.Lines.Append('server error: ' + e.Message);
+  end;
   end;
 end;
 
@@ -92,6 +97,7 @@ end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
+ShowSettings();
   with stgSettings do begin
     Cells[0,0] := '¹';
     Cells[1,0] := 'IP';
@@ -208,9 +214,11 @@ var
   i: word;
 begin
   if Length(mSettings) = 0 then begin
+    btbSettings.Enabled := false;
     stgSettings.RowCount := 2;
   end
   else begin
+    btbSettings.Enabled := true;
     stgSettings.RowCount := Length(mSettings)+1;
     for i := 0 to Length(mSettings)-1 do begin
       with stgSettings do begin
