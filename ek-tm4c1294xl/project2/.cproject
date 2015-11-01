@@ -4,8 +4,7 @@
 		<cconfiguration id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.922120454">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.922120454" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<macros>
-					<stringMacro name="ORIGINAL_PROJECT_ROOT" type="VALUE_PATH_DIR" value="D:/demo.2/SW-TM4C-2.1.1.71/examples/boards/ek-tm4c1294xl/enet_lwip/ccs"/>
-					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="${ORIGINAL_PROJECT_ROOT}/../../../../.."/>
+					<stringMacro name="SW_ROOT" type="VALUE_PATH_DIR" value="D:\Cortex\tm4c1294ncpdt\sw-tm4c-2.1.1.71"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
