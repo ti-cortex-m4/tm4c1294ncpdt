@@ -7,26 +7,13 @@ UDP_OUTPUT.C
 #include "../main.h"
 #include "lwip/udp.h"
 #include "lwip/ip_addr.h"
+#include "mac.h"
 #include "udp_output.h"
 
 
 
-static uchar            pbMAC[6];
-
 static uchar            *pbOut;
 static uchar            ibOut;
-
-
-
-void SetMAC(uchar *pb)
-{
-  pbMAC[0] = pb[0];
-  pbMAC[1] = pb[1];
-  pbMAC[2] = pb[2];
-  pbMAC[3] = pb[3];
-  pbMAC[4] = pb[4];
-  pbMAC[5] = pb[5];
-}
 
 
 

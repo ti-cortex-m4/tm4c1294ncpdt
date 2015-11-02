@@ -1,7 +1,11 @@
 /*------------------------------------------------------------------------------
-UDP_OUTPUT.H
+MAC.H
 
 
 ------------------------------------------------------------------------------*/
 
-err_t UDPOutputX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port);
+extern uchar                   pbMAC[6];
+
+
+
+void SetMAC(uchar *pb);
