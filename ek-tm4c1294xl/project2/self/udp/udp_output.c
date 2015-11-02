@@ -84,12 +84,12 @@ static err_t PopCode(struct pbuf *p)
 
 
 
-static err_t InitPush(struct pbuf **p, uchar bSize)
+static err_t InitPush(struct pbuf **pp, uchar bSize)
 {
-  *p = pbuf_alloc(PBUF_TRANSPORT, bSize, PBUF_RAM);
-  if (p == NULL) return ERR_MEM;
+  *pp = pbuf_alloc(PBUF_TRANSPORT, bSize, PBUF_RAM);
+  if (pp == NULL) return ERR_MEM;
 
-  pbOut = (*p)->payload;
+  pbOut = (*pp)->payload;
   ibOut = 0;
 
   return ERR_OK;
