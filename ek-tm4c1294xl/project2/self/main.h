@@ -24,4 +24,8 @@ typedef union
 } combo32;
 
 
+#define ERR_SIZE       -20   /* Size too small.          */
+#define ERR_CODE       -21   /* No message code.         */
+
+
 #endif
