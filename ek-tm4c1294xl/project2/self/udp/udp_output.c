@@ -15,7 +15,50 @@ UDP_OUTPUT.C
 
 static uchar            *pbOut;
 static uchar            ibOut;
+static uint             wCode;
 
+
+
+static err_t CheckSize(struct pbuf *p, uchar bSize)
+{
+  if (p->len < bSize) return ERR_SIZE;
+
+  return ERR_OK;
+}
+
+
+
+static uchar PopChar(struct pbuf *p, uchar i)
+{
+  uchar *pb = p->payload;
+  return pb[i];
+}
+
+
+static uchar PopIntLtl(struct pbuf *p, uchar i)
+{
+  return PopChar(p, i) + PopChar(p, i+1)*0x100;
+}
+
+
+static uchar PopLongLtl(struct pbuf *p, uchar i)
+{
+  return PopIntLtl(p, i) + PopIntLtl(p, i+2)*0x10000;
+}
+
+
+
+static err_t PopCode(struct pbuf *p)
+{
+  uchar *pb = p->payload;
+
+  if (p->len < 4) return ERR_SIZE;
+
+  if (pb[p->len-3] != '|') return ERR_CODE;
+  wCode = PopIntLtl(p, p->len-1);
+
+  return ERR_OK;
+}
 
 
 static err_t InitPush(struct pbuf *p, uchar bSize)
@@ -36,15 +79,17 @@ static void PushChar(uchar b)
 }
 
 
-static void PushLong(ulong dw)
+static void PushIntLtl(uint w)
 {
-  combo32 cb;
-  cb.dwBuff = dw;
+  PushChar(w % 0x100);
+  PushChar(w / 0x100);
+}
 
-  PushChar(cb.mpbBuff[0]);
-  PushChar(cb.mpbBuff[1]);
-  PushChar(cb.mpbBuff[2]);
-  PushChar(cb.mpbBuff[3]);
+
+static void PushLongLtl(ulong dw)
+{
+  PushIntLtl(dw % 0x10000);
+  PushIntLtl(dw / 0x10000);
 }
 
 
@@ -85,11 +130,23 @@ static void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
 }
 
 
+static err_t UDPOutput_Error(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar bError)
+{
+  err_t err = InitPush(p, 1+1);
+  if (err != ERR_OK) return err;
+
+  PushChar('?');
+  PushChar(bError);
+
+  UDPOutput(pcb, p, addr, port);
+  return ERR_OK;
+}
+
 
 err_t UDPOutputX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
 {
   err_t err = InitPush(p, 1+6);
-  if (err == ERR_MEM) return err;
+  if (err != ERR_OK) return err;
 
   PushChar('A');
   PushMAC(pbMAC);
@@ -99,30 +156,41 @@ err_t UDPOutputX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 }
 
 
-err_t UDPOutputLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong dw)
+err_t UDPOutput_GetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong dw)
 {
-  err_t err = InitPush(p, 1+4);
-  if (err == ERR_MEM) return err;
+  err_t err = PopCode(p);
+  if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
+
+  err = InitPush(p, 1+4+3);
+  if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushLong(dw);
+  PushLongLtl(dw);
+  PushChar('|');
+  PushIntLtl(wCode);
 
   UDPOutput(pcb, p, addr, port);
   return ERR_OK;
 }
 
 
-err_t UDPOutputIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+err_t UDPOutput_SetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong *pdw)
 {
-  return UDPOutputLong(pcb, p, addr, port, dwIP);
-}
+  err_t err = CheckSize(p,2);
+  if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
 
-err_t UDPOutputGateway(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
-{
-  return UDPOutputLong(pcb, p, addr, port, dwGateway);
-}
+  err = PopCode(p);
+  if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
 
-err_t UDPOutputNetmask(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
-{
-  return UDPOutputLong(pcb, p, addr, port, dwNetmask);
+  *pdw = PopLongLtl(p, 2);
+
+  err = InitPush(p, 1+3);
+  if (err != ERR_OK) return err;
+
+  PushChar('A');
+  PushChar('|');
+  PushIntLtl(wCode);
+
+  UDPOutput(pcb, p, addr, port);
+  return ERR_OK;
 }
