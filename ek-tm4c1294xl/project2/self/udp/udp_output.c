@@ -7,36 +7,38 @@ UDP_OUTPUT.C
 #include "../main.h"
 #include "lwip/udp.h"
 #include "lwip/ip_addr.h"
+#include "udp_output.h"
 
 
-
-static struct pbuf      *p;
-static uchar            *pbOut;
-static uchar            ibOut;
 
 static uchar            pbMAC[6];
 
+static uchar            *pbOut;
+static uchar            ibOut;
 
 
-void SetMAC(uchar *_pbMAC)
+
+void SetMAC(uchar *pb)
 {
-  pbMAC[0] = _pbMAC[0];
-  pbMAC[1] = _pbMAC[1];
-  pbMAC[2] = _pbMAC[2];
-  pbMAC[3] = _pbMAC[3];
-  pbMAC[4] = _pbMAC[4];
-  pbMAC[5] = _pbMAC[5];
+  pbMAC[0] = pb[0];
+  pbMAC[1] = pb[1];
+  pbMAC[2] = pb[2];
+  pbMAC[3] = pb[3];
+  pbMAC[4] = pb[4];
+  pbMAC[5] = pb[5];
 }
 
 
 
-static void InitPush(uchar bSize)
+static err_t InitPush(struct pbuf *p, uchar bSize)
 {
   p = pbuf_alloc(PBUF_TRANSPORT, bSize, PBUF_RAM);
-  if (p == NULL) return;
+  if (p == NULL) return ERR_MEM;
 
   pbOut = p->payload;
   ibOut = 0;
+
+  return ERR_OK;
 }
 
 
@@ -67,7 +69,7 @@ static void PushMAC(uchar *pbMAC)
 
 static void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
 {
-  if (true)
+  if (addr->addr == IPADDR_BROADCAST)
     udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
   else
     udp_sendto(pcb, p, addr, port);
@@ -77,10 +79,15 @@ static void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
 
 
 
-void UDPOutputX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+err_t UDPOutputX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
 {
-  InitPush(5);
+  err_t err = InitPush(p, 1+23);
+  if (err == ERR_MEM) return err;
+
   PushChar('A');
   PushMAC(pbMAC);
+
   UDPOutput(pcb, p, addr, port);
+
+  return ERR_OK;
 }
