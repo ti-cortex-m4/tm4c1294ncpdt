@@ -13,15 +13,42 @@ UDP_OUTPUT.C
 
 
 
+static bool             fActive;
 static uchar            *pbOut;
 static uchar            ibOut;
 static uint             wCode;
 
 
 
+void Init_UDPOutput(void)
+{
+  fActive = true;
+}
+
+
+bool IsActive_UDPOutput(void)
+{
+  return fActive;
+}
+
+
+
 static err_t CheckSize(struct pbuf *p, uchar bSize)
 {
   return (p->len < bSize) ? ERR_SIZE : ERR_OK;
+}
+
+
+static bool CheckMAC(struct pbuf *p, uchar i)
+{
+  uchar *pb = p->payload;
+
+  return ((pb[0] == pbMAC[0]) &&
+          (pb[1] == pbMAC[1]) &&
+          (pb[2] == pbMAC[2]) &&
+          (pb[3] == pbMAC[3]) &&
+          (pb[4] == pbMAC[4]) &&
+          (pb[5] == pbMAC[5]));
 }
 
 
@@ -184,6 +211,47 @@ err_t UDPOutput_SetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
   *pdw = PopLongLtl(p, 3);
 
   err = InitPush(p, 1+3);
+  if (err != ERR_OK) return err;
+
+  PushChar('A');
+  PushChar('|');
+  PushIntLtl(wCode);
+
+  UDPOutput(pcb, p, addr, port);
+  return ERR_OK;
+}
+
+
+
+
+err_t UDPOutputW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+{
+  err_t err = CheckSize(p,1+6+1+2);
+  if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
+
+  fActive = CheckMAC(p, 1);
+  if (fActive == false) { return ERR_OK; }
+
+  err = InitPush(p, 1+1+3);
+  if (err != ERR_OK) return err;
+
+  PushChar('A');
+  PushChar('|');
+  PushIntLtl(wCode);
+
+  UDPOutput(pcb, p, addr, port);
+  return ERR_OK;
+}
+
+
+err_t UDPOutputO(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+{
+  err_t err = CheckSize(p,1+1+2);
+  if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
+
+  fActive = true;
+
+  err = InitPush(p, 1+1+3);
   if (err != ERR_OK) return err;
 
   PushChar('A');
