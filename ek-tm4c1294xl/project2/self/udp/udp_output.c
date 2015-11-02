@@ -151,7 +151,7 @@ static err_t UDPOutput_Error(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
 }
 
 
-err_t UDPOutputX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+err_t UDPOutputM(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
 {
   err_t err = InitPush(p, 1+6);
   if (err != ERR_OK) return err;
@@ -209,7 +209,7 @@ err_t UDPOutput_SetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
 
 
 
-err_t UDPOutputW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+err_t UDPOutputB(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
 {
   err_t err = CheckSize(p,1+6+1+2);
   if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
@@ -229,7 +229,7 @@ err_t UDPOutputW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 }
 
 
-err_t UDPOutputO(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+err_t UDPOutputE(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
 {
   err_t err = CheckSize(p,1+1+2);
   if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
