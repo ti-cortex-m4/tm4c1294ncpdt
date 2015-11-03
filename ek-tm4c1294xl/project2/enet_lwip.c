@@ -37,10 +37,12 @@
 #include "utils/lwiplib.h"
 #include "utils/ustdlib.h"
 #include "utils/uartstdio.h"
-#include "httpserver_raw/httpd.h"
 #include "drivers/pinout.h"
+#include "lwip/inet.h"
 #include "echo.h"
 #include "self/settings.h"
+#include "self/udp/mac.h"
+#include "self/udp/udp_output.h"
 
 //*****************************************************************************
 //
@@ -325,19 +327,21 @@ main(void)
     pui8MACArray[5] = ((ui32User1 >> 16) & 0xff);
 
     InitSettings();
+    SetMAC(pui8MACArray);
+    Init_UDPOutput();
 
     //
     // Initialize the lwIP library, using DHCP.
     //
-//    lwIPInit(g_ui32SysClock, pui8MACArray, inet_addr("100.1.168.192"), inet_addr("0.255.255.255"), inet_addr("1.1.168.192"), IPADDR_USE_STATIC);
+//    lwIPInit(g_ui32SysClock, pui8MACArray, inet_addr("100.10.168.192"), inet_addr("0.255.255.255"), inet_addr("1.1.168.192"), IPADDR_USE_STATIC);
     lwIPInit(g_ui32SysClock, pui8MACArray, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
     //
     // Setup the device locator service.
     //
     LocatorInit();
-    LocatorMACAddrSet(pui8MACArray);
-    LocatorAppTitleSet("EK-TM4C1294XL enet_io");
+//    LocatorMACAddrSet(pui8MACArray);
+//    LocatorAppTitleSet("EK-TM4C1294XL enet_io");
 
     init_uart(g_ui32SysClock);
     echo_init();
