@@ -176,7 +176,7 @@ lwIPHostTimerHandler(void)
             //
             UARTprintf("IP Address: ");
             DisplayIPAddress(ui32NewIPAddress);
-//            UARTprintf("\nOpen a browser and enter the IP address.\n");
+            UARTprintf("\n");
         }
 
         //
