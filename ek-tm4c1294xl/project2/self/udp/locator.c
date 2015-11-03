@@ -193,14 +193,9 @@ LocatorReceive(void *arg, struct udp_pcb *pcb, struct pbuf *p,
         UDPOutput_Unknown(pcb,p,addr,port);
       }
     } else if (pui8Data[0] == 'S') {
-      if ((pui8Data[1] == 'I') && (pui8Data[2] == 'P')) {
-        UDPOutput_SetLong(pcb, p, addr, port, &dwIP);
-        Reset();
-      } else if ((pui8Data[1] == 'G') && (pui8Data[2] == 'W')) {
-        UDPOutput_SetLong(pcb, p, addr, port, &dwGateway);
-        Reset();
-      } else if ((pui8Data[1] == 'N') && (pui8Data[2] == 'M')) {
-        UDPOutput_SetLong(pcb, p, addr, port, &dwNetmask);
+      if ((pui8Data[1] == 'N') && (pui8Data[2] == 'W')) {
+        UDPOutput_Set3Long(pcb, p, addr, port, &dwIP, &dwGateway, &dwNetmask);
+        SaveSettings();
         Reset();
       } else {
         UDPOutput_Unknown(pcb,p,addr,port);
