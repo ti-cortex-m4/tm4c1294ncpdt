@@ -203,7 +203,7 @@
 // ---------- UDP options ----------
 //
 //*****************************************************************************
-//#define LWIP_UDP                        1
+#define LWIP_UDP                        1
 //#define LWIP_UDPLITE                    0
 //#define UDP_TTL                         (IP_DEFAULT_TTL)
 
@@ -428,7 +428,7 @@ extern void UARTprintf(const char *pcString, ...);
 #define TCP_OUTPUT_DEBUG                LWIP_DBG_OFF
 #define TCP_RST_DEBUG                   LWIP_DBG_OFF
 #define TCP_QLEN_DEBUG                  LWIP_DBG_OFF
-//#define UDP_DEBUG                       LWIP_DBG_ON     // default is OFF
+#define UDP_DEBUG                       LWIP_DBG_ON     // default is OFF
 #define TCPIP_DEBUG                     LWIP_DBG_OFF
 #define PPP_DEBUG                       LWIP_DBG_OFF
 #define SLIP_DEBUG                      LWIP_DBG_OFF
