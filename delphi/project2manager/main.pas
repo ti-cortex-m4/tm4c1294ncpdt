@@ -48,12 +48,22 @@ type
     mbMAC: mac;
   end;
 
+  bytes4 = array[0..3] of byte;
+  combo4 = record case byte of
+    0: (siT:  longword);
+    1: (mpbT: bytes4);
+  end;
+
 var
   frmMain: TfrmMain;
 
   mSettings: array of setting;
-  IP: string;
-  step: (step1, step2, step3, step4, step5, step6);
+  PeerIP: string;
+
+  dwIP,dwGateway,dwNetmask: string;
+
+  step: (step1, step2, step3, step4, step5, step6, step7);
+  wCode: word;
 
 implementation
 
@@ -90,8 +100,14 @@ var
 begin
   i := stgSettings.Row;
   if i > 0 then begin
-    step := step4;
-    IdUDPServer.SendBuffer(mSettings[i-1].IP, $FFFF, Id_IPv4, ToBytes('D', Indy8BitEncoding));
+    wCode := 0;
+    PeerIP := mSettings[i-1].IP;
+
+    step := step3;
+
+
+//    IdUDPServer.SendBuffer(mSettings[i-1].IP, $FFFF, Id_IPv4, ToBytes('D', Indy8BitEncoding));
+    IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('M', Indy8BitEncoding));
   end;
 end;
 
@@ -181,6 +197,36 @@ begin
     result[i] := AData[i+1];
 end;
 
+function GetCombo4(AData: TArray<System.Byte>): combo4;
+begin
+  result.mpbT[0] := AData[1];
+  result.mpbT[1] := AData[2];
+  result.mpbT[2] := AData[3];
+  result.mpbT[3] := AData[4];
+end;
+
+function GetIP(AData: TArray<System.Byte>): string;
+var
+  i: combo4;
+begin
+  i := GetCombo4(AData);
+  result := IntToStr(i.mpbT[3])+'.'+IntToStr(i.mpbT[2])+'.'+IntToStr(i.mpbT[1])+'.'+IntToStr(i.mpbT[0]);
+end;
+
+function GetReadLong(a: char; b: char): TIdBytes;
+var
+  x: TArray<System.Byte>;
+begin
+  SetLength(x, 6);
+  x[0] := Ord('G');
+  x[1] := Ord(a);
+  x[2] := Ord(b);
+  x[3] := Ord('|');
+  x[4] := wCode mod $100;
+  x[5] := wCode div $100;
+  result := x;
+end;
+
 procedure TfrmMain.IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArray<System.Byte>; ABinding: TIdSocketHandle);
 var
   s: string;
@@ -195,15 +241,13 @@ begin
   AddTerminal('// server read: ' + z + ' '+ABinding.IP+ ':'+IntToStr(ABinding.Port) + ' < '+ABinding.PeerIP  + ':'+IntToStr(ABinding.PeerPort));
 
   if step = step1 then begin
-   AddTerminal('step 1');
-
    if ((Length(AData) = 1+6) and (AData[0] = Ord('A'))) then begin
+     AddTerminal('step 1');
      step := step2;
 
-     IP := ABinding.PeerIP;
-     AddTerminal('IP = '+IP);
+     AddTerminal('IP = '+ABinding.PeerIP);
 
-     x.IP := IP;
+     x.IP := ABinding.PeerIP;
      x.mbMAC := GetMAC(AData);
 
      SetLength(mSettings, Length(mSettings)+1);
@@ -211,30 +255,60 @@ begin
      ShowSettings;
    end;
   end
+  else if step = step3 then begin
+    if ((Length(AData) = 1+6) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
+      AddTerminal('step 3');
+      step := step4;
+      IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('I', 'P'));
+    end;
+  end
   else if step = step4 then begin
-    AddTerminal('step 4');
-    step := step5;
+    if ((Length(AData) = 8) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
+      AddTerminal('step 4');
+      step := step5;
+      dwIP := GetIP(AData);
+      Inc(wCode);
+      IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('G', 'W'));
+    end;
+  end
+  else if step = step5 then begin
+    if ((Length(AData) = 8) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
+      AddTerminal('step 5');
+      step := step6;
+      dwGateway := GetIP(AData);
+      Inc(wCode);
+      IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('N', 'M'));
+    end;
+  end
+  else if step = step6 then begin
+    if ((Length(AData) = 8) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
+      AddTerminal('step 6');
+      step := step7;
+      dwNetmask := GetIP(AData);
+      Inc(wCode);
 
     if not Assigned(frmSettings) then frmSettings := TfrmSettings.Create(Self);
     with frmSettings do begin
-      medIP.Text := ReadIP(AData, 1);
-      medGateway.Text := ReadIP(AData, 5);
-      medNetmask.Text := ReadIP(AData, 9);
+      medIP.Text := dwIP;
+      medGateway.Text := dwGateway;
+      medNetmask.Text := dwNetmask;
     end;
 
     if frmSettings.ShowModal = mrOk then begin
-      step := step6;
-
-      with frmSettings do begin
-        z := 'F' + SaveIP(medIP.Text) + SaveIP(medGateway.Text) + SaveIP(medNetmask.Text);
-      end;
-
-      IdUDPServer.SendBuffer(IP, $FFFF, Id_IPv4, ToBytes(z, Indy8BitEncoding));
-
-      Delay(3000);
-      btbSearchClick(self);
+//      step := step6;
+//
+//      with frmSettings do begin
+//        z := 'F' + SaveIP(medIP.Text) + SaveIP(medGateway.Text) + SaveIP(medNetmask.Text);
+//      end;
+//
+//      IdUDPServer.SendBuffer(IP, $FFFF, Id_IPv4, ToBytes(z, Indy8BitEncoding));
+//
+//      Delay(3000);
+//      btbSearchClick(self);
+    end;
     end;
   end
+
   else begin
     AddTerminal('step ?');
   end;
