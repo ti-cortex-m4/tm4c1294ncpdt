@@ -170,19 +170,21 @@ err_t UDPOutput_MAC(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 }
 
 
-err_t UDPOutput_GetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong dw)
+err_t UDPOutput_GetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong dw1, ulong dw2, ulong dw3)
 {
-  err_t err = CheckSize(p, 1+2+1+2);
+  err_t err = CheckSize(p, 1+1+1+2);
   if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
 
   err = PopCode(p);
   if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
 
-  err = InitPush(&p, 1+4+3);
+  err = InitPush(&p, 1+4+4+4+3);
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushLongLtl(dw);
+  PushLongLtl(dw1);
+  PushLongLtl(dw2);
+  PushLongLtl(dw3);
   PushChar('|');
   PushIntLtl(wCode);
 
@@ -191,17 +193,17 @@ err_t UDPOutput_GetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
 }
 
 
-err_t UDPOutput_Set3Long(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong *pdw1, ulong *pdw2, ulong *pdw3)
+err_t UDPOutput_SetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong *pdw1, ulong *pdw2, ulong *pdw3)
 {
-  err_t err = CheckSize(p, 1+2+4+4+4+1+2);
+  err_t err = CheckSize(p, 1+1+4+4+4+1+2);
   if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
 
   err = PopCode(p);
   if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
 
-  *pdw1 = PopLongLtl(p, 3);
-  *pdw2 = PopLongLtl(p, 7);
-  *pdw3 = PopLongLtl(p, 11);
+  *pdw1 = PopLongLtl(p, 2);
+  *pdw2 = PopLongLtl(p, 6);
+  *pdw3 = PopLongLtl(p, 10);
 
   err = InitPush(&p, 1+3);
   if (err != ERR_OK) return err;

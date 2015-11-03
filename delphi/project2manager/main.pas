@@ -202,33 +202,32 @@ begin
     result[i] := AData[i+1];
 end;
 
-function GetCombo4(AData: TArray<System.Byte>): combo4;
+function GetCombo4(AData: TArray<System.Byte>; i: byte): combo4;
 begin
-  result.mpbT[0] := AData[1];
-  result.mpbT[1] := AData[2];
-  result.mpbT[2] := AData[3];
-  result.mpbT[3] := AData[4];
+  result.mpbT[0] := AData[i+0];
+  result.mpbT[1] := AData[i+1];
+  result.mpbT[2] := AData[i+2];
+  result.mpbT[3] := AData[i+3];
 end;
 
-function GetIP(AData: TArray<System.Byte>): string;
+function GetIP(AData: TArray<System.Byte>; i: byte): string;
 var
-  i: combo4;
+  j: combo4;
 begin
-  i := GetCombo4(AData);
-  result := IntToStr(i.mpbT[3])+'.'+IntToStr(i.mpbT[2])+'.'+IntToStr(i.mpbT[1])+'.'+IntToStr(i.mpbT[0]);
+  j := GetCombo4(AData,i);
+  result := IntToStr(j.mpbT[3])+'.'+IntToStr(j.mpbT[2])+'.'+IntToStr(j.mpbT[1])+'.'+IntToStr(j.mpbT[0]);
 end;
 
-function GetReadLong(a: char; b: char): TIdBytes;
+function GetReadLong(a: char): TIdBytes;
 var
   x: TArray<System.Byte>;
 begin
-  SetLength(x, 6);
+  SetLength(x, 5);
   x[0] := Ord('G');
   x[1] := Ord(a);
-  x[2] := Ord(b);
-  x[3] := Ord('|');
-  x[4] := wCode mod $100;
-  x[5] := wCode div $100;
+  x[2] := Ord('|');
+  x[3] := wCode mod $100;
+  x[4] := wCode div $100;
   result := x;
 end;
 
@@ -241,30 +240,29 @@ begin
   dw2 := SaveIP(s2);
   dw3 := SaveIP(s3);
 
-  SetLength(x, 1+2+4+4+4+1+2);
+  SetLength(x, 1+1+4+4+4+1+2);
 
   x[0] := Ord('S');
-  x[1] := Ord('N');
-  x[2] := Ord('W');
+  x[1] := Ord('I');
 
-  x[3] := (dw1 mod $10000) mod $100;
-  x[4] := (dw1 mod $10000) div $100;
-  x[5] := (dw1 div $10000) mod $100;
-  x[6] := (dw1 div $10000) div $100;
+  x[2] := (dw1 mod $10000) mod $100;
+  x[3] := (dw1 mod $10000) div $100;
+  x[4] := (dw1 div $10000) mod $100;
+  x[5] := (dw1 div $10000) div $100;
 
-  x[7] := (dw2 mod $10000) mod $100;
-  x[8] := (dw2 mod $10000) div $100;
-  x[9] := (dw2 div $10000) mod $100;
-  x[10] := (dw2 div $10000) div $100;
+  x[6] := (dw2 mod $10000) mod $100;
+  x[7] := (dw2 mod $10000) div $100;
+  x[8] := (dw2 div $10000) mod $100;
+  x[9] := (dw2 div $10000) div $100;
 
-  x[11] := (dw3 mod $10000) mod $100;
-  x[12] := (dw3 mod $10000) div $100;
-  x[13] := (dw3 div $10000) mod $100;
-  x[14] := (dw3 div $10000) div $100;
+  x[10] := (dw3 mod $10000) mod $100;
+  x[11] := (dw3 mod $10000) div $100;
+  x[12] := (dw3 div $10000) mod $100;
+  x[13] := (dw3 div $10000) div $100;
 
-  x[15] := Ord('|');
-  x[16] := wCode mod $100;
-  x[17] := wCode div $100;
+  x[14] := Ord('|');
+  x[15] := wCode mod $100;
+  x[16] := wCode div $100;
 
   result := x;
 end;
@@ -300,15 +298,15 @@ begin
   else if step = step3 then begin
     if ((Length(AData) = 1+6) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
       AddTerminal('step 3');
-      step := step4;
-      IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('I', 'P'));
+      step := step6;
+      IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('I'));
     end;
   end
+{
   else if step = step4 then begin
     if ((Length(AData) = 8) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
       AddTerminal('step 4');
       step := step5;
-      dwIP := GetIP(AData);
       Inc(wCode);
       IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('G', 'W'));
     end;
@@ -317,16 +315,18 @@ begin
     if ((Length(AData) = 8) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
       AddTerminal('step 5');
       step := step6;
-      dwGateway := GetIP(AData);
       Inc(wCode);
       IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('N', 'M'));
     end;
   end
+}
   else if step = step6 then begin
-    if ((Length(AData) = 8) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
+    if ((Length(AData) = 16) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
       AddTerminal('step 6');
       step := step7;
-      dwNetmask := GetIP(AData);
+      dwIP := GetIP(AData, 1);
+      dwGateway := GetIP(AData, 5);
+      dwNetmask := GetIP(AData, 9);
       Inc(wCode);
 
     if not Assigned(frmSettings) then frmSettings := TfrmSettings.Create(Self);
