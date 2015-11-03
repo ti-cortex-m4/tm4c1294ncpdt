@@ -170,12 +170,17 @@ begin
   result := Chr(StrToInt(s));
 end;
 
-function SaveIP(s: string): string;
+function SaveIP(s: string): longword;
 var
   a: TStringDynArray;
+  b: combo4;
 begin
   a := SplitString(s,'.');
-  result := StringToChar(a[3]) + StringToChar(a[2]) + StringToChar(a[1]) + StringToChar(a[0]);
+  b.mpbT[0] := StrToInt(a[3]);
+  b.mpbT[1] := StrToInt(a[2]);
+  b.mpbT[2] := StrToInt(a[1]);
+  b.mpbT[3] := StrToInt(a[0]);
+  result := b.siT;
 end;
 
 procedure Delay(MSec: longword);
@@ -224,6 +229,43 @@ begin
   x[3] := Ord('|');
   x[4] := wCode mod $100;
   x[5] := wCode div $100;
+  result := x;
+end;
+
+function SetAll(s1,s2,s3: string): TIdBytes;
+var
+  x: TArray<System.Byte>;
+  dw1,dw2,dw3: longword;
+begin
+  dw1 := SaveIP(s1);
+  dw2 := SaveIP(s2);
+  dw3 := SaveIP(s3);
+
+  SetLength(x, 1+2+4+4+4+1+2);
+
+  x[0] := Ord('S');
+  x[1] := Ord('N');
+  x[2] := Ord('W');
+
+  x[3] := (dw1 mod $10000) mod $100;
+  x[4] := (dw1 mod $10000) div $100;
+  x[5] := (dw1 div $10000) mod $100;
+  x[6] := (dw1 div $10000) div $100;
+
+  x[7] := (dw2 mod $10000) mod $100;
+  x[8] := (dw2 mod $10000) div $100;
+  x[9] := (dw2 div $10000) mod $100;
+  x[10] := (dw2 div $10000) div $100;
+
+  x[11] := (dw3 mod $10000) mod $100;
+  x[12] := (dw3 mod $10000) div $100;
+  x[13] := (dw3 div $10000) mod $100;
+  x[14] := (dw3 div $10000) div $100;
+
+  x[15] := Ord('|');
+  x[16] := wCode mod $100;
+  x[17] := wCode div $100;
+
   result := x;
 end;
 
@@ -295,16 +337,14 @@ begin
     end;
 
     if frmSettings.ShowModal = mrOk then begin
-//      step := step6;
-//
-//      with frmSettings do begin
-//        z := 'F' + SaveIP(medIP.Text) + SaveIP(medGateway.Text) + SaveIP(medNetmask.Text);
-//      end;
-//
-//      IdUDPServer.SendBuffer(IP, $FFFF, Id_IPv4, ToBytes(z, Indy8BitEncoding));
-//
-//      Delay(3000);
-//      btbSearchClick(self);
+      step := step6;
+
+      with frmSettings do begin
+        IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, SetAll(medIP.Text, medGateway.Text, medNetmask.Text));
+      end;
+
+      Delay(2000);
+      btbSearchClick(self);
     end;
     end;
   end
