@@ -183,18 +183,14 @@ LocatorReceive(void *arg, struct udp_pcb *pcb, struct pbuf *p,
     if (pui8Data[0] == 'M') {
       UDPOutput_MAC(pcb, p, addr, port);
     } else if (pui8Data[0] == 'G') {
-      if ((pui8Data[1] == 'I') && (pui8Data[2] == 'P')) {
-        UDPOutput_GetLong(pcb, p, addr, port, dwIP);
-      } else if ((pui8Data[1] == 'G') && (pui8Data[2] == 'W')) {
-        UDPOutput_GetLong(pcb, p, addr, port, dwGateway);
-      } else if ((pui8Data[1] == 'N') && (pui8Data[2] == 'M')) {
-        UDPOutput_GetLong(pcb, p, addr, port, dwNetmask);
+      if (pui8Data[1] == 'I') {
+        UDPOutput_GetLong3(pcb, p, addr, port, dwIP, dwGateway, dwNetmask);
       } else {
         UDPOutput_Unknown(pcb,p,addr,port);
       }
     } else if (pui8Data[0] == 'S') {
-      if ((pui8Data[1] == 'N') && (pui8Data[2] == 'W')) {
-        UDPOutput_Set3Long(pcb, p, addr, port, &dwIP, &dwGateway, &dwNetmask);
+      if (pui8Data[1] == 'I') {
+        UDPOutput_SetLong3(pcb, p, addr, port, &dwIP, &dwGateway, &dwNetmask);
         SaveSettings();
         Reset();
       } else {
