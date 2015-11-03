@@ -46,108 +46,6 @@
 //*****************************************************************************
 /*static*/ uint8_t g_pui8LocatorData[84];
 
-
-void GetAll(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port)
-{
-    p = pbuf_alloc(PBUF_TRANSPORT, 1+4+4+4, PBUF_RAM);
-    if (p == NULL) return;
-
-    uint8_t *pui8Data = p->payload;
-
-    u8_t j=0;
-    combo32 cb;
-
-    pui8Data[j++] = 'E';
-
-    cb.dwBuff = dwIP;
-
-    pui8Data[j++] = cb.mpbBuff[0];
-    pui8Data[j++] = cb.mpbBuff[1];
-    pui8Data[j++] = cb.mpbBuff[2];
-    pui8Data[j++] = cb.mpbBuff[3];
-
-    cb.dwBuff = dwGateway;
-
-    pui8Data[j++] = cb.mpbBuff[0];
-    pui8Data[j++] = cb.mpbBuff[1];
-    pui8Data[j++] = cb.mpbBuff[2];
-    pui8Data[j++] = cb.mpbBuff[3];
-
-    cb.dwBuff = dwNetmask;
-
-    pui8Data[j++] = cb.mpbBuff[0];
-    pui8Data[j++] = cb.mpbBuff[1];
-    pui8Data[j++] = cb.mpbBuff[2];
-    pui8Data[j++] = cb.mpbBuff[3];
-
-    udp_sendto(pcb, p, addr, port);
-    pbuf_free(p);
-}
-
-void SetAll(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port)
-{
-    uint8_t *pui8Data = p->payload;
-
-    combo32 cb;
-    u8_t j=1;
-
-    cb.mpbBuff[0] = pui8Data[j++];
-    cb.mpbBuff[1] = pui8Data[j++];
-    cb.mpbBuff[2] = pui8Data[j++];
-    cb.mpbBuff[3] = pui8Data[j++];
-
-    dwIP = cb.dwBuff;
-
-    cb.mpbBuff[0] = pui8Data[j++];
-    cb.mpbBuff[1] = pui8Data[j++];
-    cb.mpbBuff[2] = pui8Data[j++];
-    cb.mpbBuff[3] = pui8Data[j++];
-
-    dwGateway = cb.dwBuff;
-
-    cb.mpbBuff[0] = pui8Data[j++];
-    cb.mpbBuff[1] = pui8Data[j++];
-    cb.mpbBuff[2] = pui8Data[j++];
-    cb.mpbBuff[3] = pui8Data[j++];
-
-    dwNetmask = cb.dwBuff;
-
-    SaveSettings();
-
-    p = pbuf_alloc(PBUF_TRANSPORT, 1+4+4+4, PBUF_RAM);
-    if (p == NULL) return;
-
-    pui8Data = p->payload;
-
-    j=0;
-    pui8Data[j++] = 'G';
-
-    cb.dwBuff = dwIP;
-    pui8Data[j++] = cb.mpbBuff[0];
-    pui8Data[j++] = cb.mpbBuff[1];
-    pui8Data[j++] = cb.mpbBuff[2];
-    pui8Data[j++] = cb.mpbBuff[3];
-
-    cb.dwBuff = dwGateway;
-    pui8Data[j++] = cb.mpbBuff[0];
-    pui8Data[j++] = cb.mpbBuff[1];
-    pui8Data[j++] = cb.mpbBuff[2];
-    pui8Data[j++] = cb.mpbBuff[3];
-
-    cb.dwBuff = dwNetmask;
-    pui8Data[j++] = cb.mpbBuff[0];
-    pui8Data[j++] = cb.mpbBuff[1];
-    pui8Data[j++] = cb.mpbBuff[2];
-    pui8Data[j++] = cb.mpbBuff[3];
-
-    udp_sendto(pcb, p, addr, port);
-    pbuf_free(p);
-
-    Delay(1000);
-    SysCtlReset();
-}
-
-
 //*****************************************************************************
 //
 // This function is called by the lwIP TCP/IP stack when it receives a UDP
@@ -157,7 +55,7 @@ void SetAll(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t por
 //*****************************************************************************
 static void
 LocatorReceive(void *arg, struct udp_pcb *pcb, struct pbuf *p,
-               struct ip_addr *addr, u16_t port)
+               struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
     uint8_t *pui8Data;
 //    uint32_t ui32Idx;
