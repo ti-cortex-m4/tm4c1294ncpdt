@@ -60,15 +60,21 @@ static uchar PopChar(struct pbuf *p, uchar i)
 }
 
 
-static uchar PopIntLtl(struct pbuf *p, uchar i)
+static uint PopIntLtl(struct pbuf *p, uchar i)
 {
   return PopChar(p, i) + PopChar(p, i+1)*0x100;
 }
 
 
-static uchar PopLongLtl(struct pbuf *p, uchar i)
+static ulong PopLongLtl(struct pbuf *p, uchar i)
 {
-  return PopIntLtl(p, i) + PopIntLtl(p, i+2)*0x10000;
+  combo32 cb;
+  cb.mpbBuff[0] = PopChar(p, i+0);
+  cb.mpbBuff[1] = PopChar(p, i+1);
+  cb.mpbBuff[2] = PopChar(p, i+2);
+  cb.mpbBuff[3] = PopChar(p, i+3);
+
+  return cb.dwBuff;
 }
 
 
@@ -185,15 +191,17 @@ err_t UDPOutput_GetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
 }
 
 
-err_t UDPOutput_SetLong(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong *pdw)
+err_t UDPOutput_Set3Long(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong *pdw1, ulong *pdw2, ulong *pdw3)
 {
-  err_t err = CheckSize(p, 1+2+4+1+2);
+  err_t err = CheckSize(p, 1+2+4+4+4+1+2);
   if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
 
   err = PopCode(p);
   if (err != ERR_OK) { UDPOutput_Error(pcb, p, addr, port, err); return err; }
 
-  *pdw = PopLongLtl(p, 3);
+  *pdw1 = PopLongLtl(p, 3);
+  *pdw2 = PopLongLtl(p, 7);
+  *pdw3 = PopLongLtl(p, 11);
 
   err = InitPush(&p, 1+3);
   if (err != ERR_OK) return err;
