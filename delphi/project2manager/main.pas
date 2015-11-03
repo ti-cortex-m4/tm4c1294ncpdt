@@ -41,9 +41,11 @@ type
     { Public declarations }
   end;
 
+  mac = array[0..5] of byte;
+
   setting = record
     IP: string;
-    MAC: string;
+    mbMAC: mac;
   end;
 
 var
@@ -119,7 +121,7 @@ begin
 
   step := step1;
 
-  IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('A', Indy8BitEncoding));
+  IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('M', Indy8BitEncoding));
 end;
 
 procedure TfrmMain.IdUDPServerAfterBind(Sender: TObject);
@@ -171,39 +173,43 @@ begin
   until (Now - FirstTickCount >= MSec) or (Now < FirstTickCount);
 end;
 
+function GetMAC(AData: TArray<System.Byte>): mac;
+var
+  i: byte;
+begin
+  for i := 0 to 5 do
+    result[i] := AData[i+1];
+end;
+
 procedure TfrmMain.IdUDPServerUDPRead(AThread: TIdUDPListenerThread; AData: TArray<System.Byte>; ABinding: TIdSocketHandle);
 var
   s: string;
   x: setting;
   z: string;
+  i: word;
 begin
-  s := BytesToString(AData, Indy8BitEncoding);
-  AddTerminal('// server read: ' + s + ' '+ABinding.IP+ ':'+IntToStr(ABinding.Port) + ' < '+ABinding.PeerIP  + ':'+IntToStr(ABinding.PeerPort));
+  z := '';
+  for i := 0 to Length(AData)-1 do z := z + IntToHex(AData[i],2);
+
+//  s := BytesToString(AData, Indy8BitEncoding);
+  AddTerminal('// server read: ' + z + ' '+ABinding.IP+ ':'+IntToStr(ABinding.Port) + ' < '+ABinding.PeerIP  + ':'+IntToStr(ABinding.PeerPort));
 
   if step = step1 then begin
-    AddTerminal('step 1');
-    if s = 'B' then begin
-      step := step2;
+   AddTerminal('step 1');
 
-      IP := ABinding.PeerIP;
-      AddTerminal('IP = '+IP);
+   if ((Length(AData) = 1+6) and (AData[0] = Ord('A'))) then begin
+     step := step2;
 
-      IdUDPServer.SendBuffer(IP, $FFFF, Id_IPv4, ToBytes('C', Indy8BitEncoding));
-    end;
-  end
-  else if step = step2 then begin
-    if ABinding.PeerIP = IP then begin
-      AddTerminal('step 2');
-      step := step3;
+     IP := ABinding.PeerIP;
+     AddTerminal('IP = '+IP);
 
-      x.IP := IP;
-      x.MAC := s;
+     x.IP := IP;
+     x.mbMAC := GetMAC(AData);
 
-      SetLength(mSettings, Length(mSettings)+1);
-      mSettings[Length(mSettings)-1] := x;
-
-      ShowSettings;
-    end;
+     SetLength(mSettings, Length(mSettings)+1);
+     mSettings[Length(mSettings)-1] := x;
+     ShowSettings;
+   end;
   end
   else if step = step4 then begin
     AddTerminal('step 4');
@@ -234,6 +240,16 @@ begin
   end;
 end;
 
+function MACToStr(mbMAC: mac):string;
+begin
+  result := IntToStr(mbMAC[0])+'.'+
+  IntToStr(mbMAC[1])+'.'+
+  IntToStr(mbMAC[2])+'.'+
+  IntToStr(mbMAC[3])+'.'+
+  IntToStr(mbMAC[4])+'.'+
+  IntToStr(mbMAC[5]);
+end;
+
 procedure TfrmMain.ShowSettings;
 var
   i: word;
@@ -249,7 +265,7 @@ begin
       with stgSettings do begin
         Cells[0,i+1] := IntToStr(i+1);
         Cells[1,i+1] := mSettings[i].IP;
-        Cells[2,i+1] := mSettings[i].MAC;
+        Cells[2,i+1] := MACToStr(mSettings[i].mbMAC);
       end;
     end;
   end;
