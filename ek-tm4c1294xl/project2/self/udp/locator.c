@@ -145,13 +145,6 @@ LocatorInit(void)
     g_pui8LocatorData[13] = 0;
     g_pui8LocatorData[14] = 0;
 
-#if LWIP_IGMP
-    ip_addr_t groupaddr;
-	groupaddr.addr = inet_addr("238.255.255.255");
-    err_t iret = igmp_joingroup(IP_ADDR_ANY, &groupaddr);
-    UARTprintf("ret of igmp_joingroup: %d \n\r",iret);
-#endif
-
     //
     // Create a new UDP port for listening to device locator requests.
     //

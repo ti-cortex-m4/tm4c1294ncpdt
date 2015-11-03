@@ -176,7 +176,7 @@ lwIPHostTimerHandler(void)
             //
             UARTprintf("IP Address: ");
             DisplayIPAddress(ui32NewIPAddress);
-            UARTprintf("\nOpen a browser and enter the IP address.\n");
+//            UARTprintf("\nOpen a browser and enter the IP address.\n");
         }
 
         //
@@ -271,7 +271,7 @@ main(void)
     // Clear the terminal and print banner.
     //
 //    UARTprintf("\033[2J\033[H");
-    UARTprintf("Ethernet lwIP example\n\n");
+//    UARTprintf("Ethernet lwIP example\n\n");
 
     //
     // Configure Port N1 for as an output for the animation LED.
