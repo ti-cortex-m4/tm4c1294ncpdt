@@ -5,6 +5,9 @@
 #include "utils/locator.h"
 #include "utils/lwiplib.h"
 #include "driverlib/sysctl.h"
+#include "lwip/udp.h"
+#include "reset.h"
+#include "udp_output.h"
 
 //*****************************************************************************
 //
@@ -177,49 +180,38 @@ LocatorReceive(void *arg, struct udp_pcb *pcb, struct pbuf *p,
     //
     pbuf_free(p);
 
-    if ((p->len == 1) && (pui8Data[0] == 'A')) {
-      p = pbuf_alloc(PBUF_TRANSPORT, 1, PBUF_RAM);
-      if (p == NULL) return;
-
-      pui8Data = p->payload;
-      pui8Data[0] = 'B';
-
-      udp_sendto(pcb, p, addr, port);
-      pbuf_free(p);
-    } else if ((p->len == 1) && (pui8Data[0] == 'C')) {
-        p = pbuf_alloc(PBUF_TRANSPORT, 24-1, PBUF_RAM);
-        if (p == NULL) return;
-
-        pui8Data = p->payload;
-
-        u8_t i;
-        u8_t j=0;
-        for (i=0; i<6; i++)
-        {
-          u8_t b = g_pui8LocatorData[9+i];
-          pui8Data[j++] = '0' + b / 100;
-          pui8Data[j++] = '0' + (b % 100) / 10;
-          pui8Data[j++] = '0' + b % 10;
-          if (i != 5) pui8Data[j++] = '.';
-        }
-
-        udp_sendto(pcb, p, addr, port);
-        pbuf_free(p);
-    } else if ((p->len == 1) && (pui8Data[0] == 'D')) {
-      GetAll(pcb,p,addr,port);
-    } else if ((p->len == 1+4+4+4) && (pui8Data[0] == 'F')) {
-      SetAll(pcb,p,addr,port);
+    if (pui8Data[0] == 'M') {
+      UDPOutput_MAC(pcb, p, addr, port);
+    } else if (pui8Data[0] == 'G') {
+      if ((pui8Data[1] == 'I') && (pui8Data[2] == 'P')) {
+        UDPOutput_GetLong(pcb, p, addr, port, dwIP);
+      } else if ((pui8Data[1] == 'G') && (pui8Data[2] == 'W')) {
+        UDPOutput_GetLong(pcb, p, addr, port, dwGateway);
+      } else if ((pui8Data[1] == 'N') && (pui8Data[2] == 'M')) {
+        UDPOutput_GetLong(pcb, p, addr, port, dwNetmask);
+      } else {
+        UDPOutput_Unknown(pcb,p,addr,port);
+      }
+    } else if (pui8Data[0] == 'S') {
+      if ((pui8Data[1] == 'I') && (pui8Data[2] == 'P')) {
+        UDPOutput_SetLong(pcb, p, addr, port, &dwIP);
+        Reset();
+      } else if ((pui8Data[1] == 'G') && (pui8Data[2] == 'W')) {
+        UDPOutput_SetLong(pcb, p, addr, port, &dwGateway);
+        Reset();
+      } else if ((pui8Data[1] == 'N') && (pui8Data[2] == 'M')) {
+        UDPOutput_SetLong(pcb, p, addr, port, &dwNetmask);
+        Reset();
+      } else {
+        UDPOutput_Unknown(pcb,p,addr,port);
+      }
+    } else if (pui8Data[0] == 'B') {
+      UDPOutput_Begin(pcb,p,addr,port);
+    } else if (pui8Data[0] == 'E') {
+      UDPOutput_End(pcb,p,addr,port);
     } else {
-        p = pbuf_alloc(PBUF_TRANSPORT, 1, PBUF_RAM);
-        if (p == NULL) return;
-
-        pui8Data = p->payload;
-        pui8Data[0] = '?';
-
-        udp_sendto(pcb, p, addr, port);
-        pbuf_free(p);
+      UDPOutput_Unknown(pcb,p,addr,port);
     }
-
 }
 
 //*****************************************************************************
@@ -263,6 +255,13 @@ LocatorInit(void)
     g_pui8LocatorData[12] = 0;
     g_pui8LocatorData[13] = 0;
     g_pui8LocatorData[14] = 0;
+
+#if LWIP_IGMP
+    ip_addr_t groupaddr;
+	groupaddr.addr = inet_addr("238.255.255.255");
+    err_t iret = igmp_joingroup(IP_ADDR_ANY, &groupaddr);
+    UARTprintf("ret of igmp_joingroup: %d \n\r",iret);
+#endif
 
     //
     // Create a new UDP port for listening to device locator requests.
@@ -337,95 +336,3 @@ LocatorClientIPSet(uint32_t ui32IP)
     g_pui8LocatorData[7] = (ui32IP >> 16) & 0xff;
     g_pui8LocatorData[8] = (ui32IP >> 24) & 0xff;
 }
-
-//*****************************************************************************
-//
-//! Sets the MAC address in the locator response packet.
-//!
-//! \param pui8MACArray is the MAC address of the network interface.
-//!
-//! This function sets the MAC address of the network interface in the locator
-//! response packet.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-LocatorMACAddrSet(uint8_t *pui8MACArray)
-{
-    //
-    // Save the MAC address.
-    //
-    g_pui8LocatorData[9] = pui8MACArray[0];
-    g_pui8LocatorData[10] = pui8MACArray[1];
-    g_pui8LocatorData[11] = pui8MACArray[2];
-    g_pui8LocatorData[12] = pui8MACArray[3];
-    g_pui8LocatorData[13] = pui8MACArray[4];
-    g_pui8LocatorData[14] = pui8MACArray[5];
-}
-
-//*****************************************************************************
-//
-//! Sets the firmware version in the locator response packet.
-//!
-//! \param ui32Version is the version number of the device firmware.
-//!
-//! This function sets the version number of the device firmware in the locator
-//! response packet.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-LocatorVersionSet(uint32_t ui32Version)
-{
-    //
-    // Save the firmware version number in the response data.
-    //
-    g_pui8LocatorData[15] = ui32Version & 0xff;
-    g_pui8LocatorData[16] = (ui32Version >> 8) & 0xff;
-    g_pui8LocatorData[17] = (ui32Version >> 16) & 0xff;
-    g_pui8LocatorData[18] = (ui32Version >> 24) & 0xff;
-}
-
-//*****************************************************************************
-//
-//! Sets the application title in the locator response packet.
-//!
-//! \param pcAppTitle is a pointer to the application title string.
-//!
-//! This function sets the application title in the locator response packet.
-//! The string is truncated at 64 characters if it is longer (without a
-//! terminating 0), and is zero-filled to 64 characters if it is shorter.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-LocatorAppTitleSet(const char *pcAppTitle)
-{
-    uint32_t ui32Count;
-
-    //
-    // Copy the application title string into the response data.
-    //
-    for(ui32Count = 0; (ui32Count < 64) && *pcAppTitle; ui32Count++)
-    {
-        g_pui8LocatorData[ui32Count + 19] = *pcAppTitle++;
-    }
-
-    //
-    // Zero-fill the remainder of the space in the response data (if any).
-    //
-    for(; ui32Count < 64; ui32Count++)
-    {
-        g_pui8LocatorData[ui32Count + 19] = 0;
-    }
-}
-
-//*****************************************************************************
-//
-// Close the Doxygen group.
-//! @}
-//
-//*****************************************************************************
