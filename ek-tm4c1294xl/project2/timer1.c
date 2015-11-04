@@ -10,6 +10,8 @@ TODO volatile
 #include <stdbool.h>
 #include <stdint.h>
 #include "inc/hw_memmap.h"
+#include "inc/hw_memmap.h"
+#include "self/main.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_types.h"
 #include "inc/hw_timer.h"
@@ -17,6 +19,9 @@ TODO volatile
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
+
+volatile ulong dwTimer;
+
 /*
 #include "../display/slides.h"
 #include "../impulses/impulses.h"
@@ -39,7 +44,7 @@ void InitTimer1(uint32_t ui32SysClock) {
 
     // Configure the 32-bit periodic timer.
     TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);
-    TimerLoadSet(TIMER1_BASE, TIMER_A, ui32SysClock / 10);
+    TimerLoadSet(TIMER1_BASE, TIMER_A, ui32SysClock / 1000);
 
     // Setup the interrupts for the timer timeouts.
     IntEnable(INT_TIMER1A);
@@ -55,6 +60,7 @@ void Timer1IntHandler(void)
 {
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
+  dwTimer++;
 //  fOnSecond = 1;
 //
 //  Slides_1Hz();

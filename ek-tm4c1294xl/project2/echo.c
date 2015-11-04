@@ -46,6 +46,7 @@
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
 #include "serial1.h"
+#include "timer1.h"
 
 
 #if LWIP_TCP
@@ -77,6 +78,10 @@ err_t echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len);
 void echo_send(struct tcp_pcb *tpcb, struct echo_state *es);
 void echo_close(struct tcp_pcb *tpcb, struct echo_state *es);
 
+void timer(void) {
+  UARTprintf("%05u.%03u ", (dwTimer / 1000), (dwTimer % 1000));
+}
+
 void
 echo_init(void)
 {
@@ -87,7 +92,7 @@ echo_init(void)
   {
     err_t err;
 
-    err = tcp_bind(echo_pcb, IP_ADDR_ANY, 23);
+    err = tcp_bind(echo_pcb, IP_ADDR_ANY, 1001);
     if (err == ERR_OK)
     {
       echo_pcb = tcp_listen(echo_pcb);
@@ -151,7 +156,7 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
 err_t
 echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
 {
-  UARTprintf(">>>  echo_recv start \n");
+  timer(); UARTprintf(">>>  echo_recv start \n");
 
   struct echo_state *es;
   err_t ret_err;
@@ -242,7 +247,7 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
     ret_err = ERR_OK;
   }
 
-  UARTprintf(">>>  echo_recv stop, err=%u \n", ret_err);
+  timer(); UARTprintf(">>>  echo_recv stop, err=%u \n\n", ret_err);
   return ret_err;
 }
 
@@ -292,7 +297,7 @@ u16_t i,c;
 err_t
 echo_poll(void *arg, struct tcp_pcb *tpcb)
 {
-  UARTprintf("--- echo_poll start \n");
+//  UARTprintf("--- echo_poll start \n");
 
   err_t ret_err;
   struct echo_state *es;
@@ -309,7 +314,7 @@ echo_poll(void *arg, struct tcp_pcb *tpcb)
     }
     else
     {
-      UARTprintf("--- no remaining pbuf (chain) \n");
+//      UARTprintf("--- no remaining pbuf (chain) \n");
       /* no remaining pbuf (chain)  */
       if(es->state == ES_CLOSING)
       {
@@ -327,16 +332,16 @@ echo_poll(void *arg, struct tcp_pcb *tpcb)
     ret_err = ERR_ABRT;
   }
 
-  UARTprintf("--- echo_poll stop \n");
+//  UARTprintf("--- echo_poll stop \n");
 
-  uart_poll(tpcb);
+//  uart_poll(tpcb);
   return ret_err;
 }
 
 err_t
 echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
 {
-  UARTprintf("+++ echo_sent start \n");
+  timer(); UARTprintf("+++ echo_sent start \n");
   struct echo_state *es;
 
   LWIP_UNUSED_ARG(len);
@@ -362,16 +367,16 @@ echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
     }
   }
 
-  UARTprintf("+++ echo_sent stop \n");
+  timer(); UARTprintf("+++ echo_sent stop \n");
   return ERR_OK;
 }
 
-void uart_out(void *arg, u16_t len);
+void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len);
 
 void
 echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
 {
-  UARTprintf("<<< echo_send2 start \n");
+  timer(); UARTprintf("<<< echo_send2 start \n");
 
   struct pbuf *ptr;
 //  err_t wr_err = ERR_OK;
@@ -386,7 +391,7 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
   /* enqueue data for transmission */
   UARTprintf("<<<  length=%u \n", ptr->len);
 
-  uart_out(ptr->payload, ptr->len);
+  uart_out(tpcb, ptr->payload, ptr->len);
   //wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
 
 //  if (wr_err == ERR_OK)
@@ -416,7 +421,7 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
    }
   }
 
-  UARTprintf("<<< echo_send2 stop \n");
+  timer(); UARTprintf("<<< echo_send2 stop \n");
 }
 
 void uart_in(u8_t b)
