@@ -24,7 +24,7 @@ volatile u8_t                    mpbIn[wINBUFF_SIZE], mpbOut[wOUTBUFF_SIZE];
 
 volatile uint32_t                   iwOutStart,iwOutStop,cwOut;
 volatile uint32_t                   iwInStart,iwInStop,cwIn;
-
+struct tcp_pcb *tpcb2;
 
 void InitTimer1(uint32_t ui32SysClock);
 
@@ -45,8 +45,10 @@ void init_uart(uint32_t ui32SysClockFreq)
   IntMasterEnable();
 }
 
-void uart_out(void *arg, u16_t len)
+void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 {
+  tpcb2 = tpcb;
+
   u8_t* ptr = arg;
 
   while (len-- > 0)
@@ -93,16 +95,21 @@ void    OutByte3(u8_t  bT) {
 
 void    UART4IntHandler(void)
 {
+	static u8_t buff[100];
+
   uint32_t ui32Status = UARTIntStatus(UART4_BASE, true);
   UARTIntClear(UART4_BASE, ui32Status);
 
     if (GetRI3(ui32Status))
     {
     	u8_t b = InByte3();
-        mpbIn[iwInStop] = b;
-//    	UARTprintf(" %02X",b);
-        iwInStop = (iwInStop+1) % wINBUFF_SIZE;
-        cwIn++;
+    	buff[0] = b;
+
+    	tcp_write(tpcb2, buff, 1, 1);
+//        mpbIn[iwInStop] = b;
+////    	UARTprintf(" %02X",b);
+//        iwInStop = (iwInStop+1) % wINBUFF_SIZE;
+//        cwIn++;
     }
 
     if (GetTI3(ui32Status))
