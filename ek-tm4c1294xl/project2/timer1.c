@@ -60,26 +60,15 @@ void InitTimer1(uint32_t ui32SysClock) {
 extern struct tcp_pcb *tpcb2;
 void uart_poll(struct tcp_pcb *tpcb);
 
+
 void Timer1IntHandler(void)
 {
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
   dwTimer++;
 
-  if (++dwTimeout > 10)
+  if (++dwTimeout > 3)
   {
-	  uart_poll(tpcb2);
+    uart_poll(tpcb2);
   }
-//  fOnSecond = 1;
-//
-//  Slides_1Hz();
-//  Impulses_1Hz();
-//
-//  WaitAnswer_1Hz();
-//  WaitQuery_1Hz();
-//  DelayUni_1Hz();
-//  DelayFlow_1Hz();
-//  DelayMonitor_1Hz();
-//  SlaveModem_1Hz();
 }
-
