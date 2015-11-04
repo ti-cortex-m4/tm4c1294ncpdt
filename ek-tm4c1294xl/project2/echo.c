@@ -45,6 +45,7 @@
 #include "lwip/debug.h"
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
+#include "lwip/tcp_impl.h"
 #include "serial1.h"
 #include "timer1.h"
 
@@ -92,6 +93,7 @@ echo_init(void)
   {
     err_t err;
 
+    tcp_nagle_disable(echo_pcb);
     err = tcp_bind(echo_pcb, IP_ADDR_ANY, 1001);
     if (err == ERR_OK)
     {
@@ -117,6 +119,7 @@ err_t
 echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
 {
   UARTprintf("*** echo_accept start \n");
+  tcp_nagle_disable(newpcb);
 
   err_t ret_err;
   struct echo_state *es;
@@ -137,6 +140,7 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
     es->retries = 0;
     es->p = NULL;
     /* pass newly allocated es to our callbacks */
+    tcp_nagle_disable(newpcb);
     tcp_arg(newpcb, es);
     tcp_recv(newpcb, echo_recv);
     tcp_err(newpcb, echo_error);
@@ -156,7 +160,8 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
 err_t
 echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
 {
-  timer(); UARTprintf(">>>  echo_recv start \n");
+  tcp_nagle_disable(tpcb);
+  timer(); UARTprintf("echo_recv B\n");
 
   struct echo_state *es;
   err_t ret_err;
@@ -247,7 +252,7 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
     ret_err = ERR_OK;
   }
 
-  timer(); UARTprintf(">>>  echo_recv stop, err=%u \n\n", ret_err);
+  timer(); UARTprintf("echo_recv E=%u\n\n", ret_err);
   return ret_err;
 }
 
@@ -271,7 +276,7 @@ void uart_poll(struct tcp_pcb *tpcb)
 static u8_t buff[100];
 u16_t i,c;
 
-    if (cwIn > 0) UARTprintf(" \n");
+    if (cwIn == 0) return;
 
     c = 0;
     for (i=0; i<100; i++) {
@@ -285,19 +290,33 @@ u16_t i,c;
     		iwInStart = iwInStart % wINBUFF_SIZE;
     		c++;
     	}
-    	else
-    		break;
+    	else break;
     }
 
-    if (cwIn > 0) UARTprintf(" \n");
+//    if (cwIn > 0) UARTprintf(" \n");
 
-	if (c > 0) tcp_write(tpcb, buff, c, 1);
+	if (c > 0) {
+//	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 5 %X\n", tpcb->flags));
+//	      (tpcb)->flags &= ~TF_ACK_DELAY;
+//	      (tpcb)->flags |= TF_ACK_NOW;
+//	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 6 %X\n", tpcb->flags));
+
+		tcp_write(tpcb, buff, c, 1);
+		tcp_output(tpcb);
+
+//	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 5 %X\n", tpcb->flags));
+//	      (tpcb)->flags &= ~TF_ACK_DELAY;
+//	      (tpcb)->flags |= TF_ACK_NOW;
+//	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 6 %X\n", tpcb->flags));
+		timer(); UARTprintf("out=%u\n",c);
+	}
 }
 
 err_t
 echo_poll(void *arg, struct tcp_pcb *tpcb)
 {
 //  UARTprintf("--- echo_poll start \n");
+  tcp_nagle_disable(tpcb);
 
   err_t ret_err;
   struct echo_state *es;
@@ -341,7 +360,9 @@ echo_poll(void *arg, struct tcp_pcb *tpcb)
 err_t
 echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
 {
-  timer(); UARTprintf("+++ echo_sent start \n");
+  tcp_nagle_disable(tpcb);
+
+  timer(); UARTprintf("echo_sent B\n");
   struct echo_state *es;
 
   LWIP_UNUSED_ARG(len);
@@ -367,7 +388,7 @@ echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
     }
   }
 
-  timer(); UARTprintf("+++ echo_sent stop \n");
+  timer(); UARTprintf("echo_sent E\n");
   return ERR_OK;
 }
 
@@ -376,7 +397,8 @@ void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len);
 void
 echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
 {
-  timer(); UARTprintf("<<< echo_send2 start \n");
+  tcp_nagle_disable(tpcb);
+  timer(); UARTprintf("echo_send2 B\n");
 
   struct pbuf *ptr;
 //  err_t wr_err = ERR_OK;
@@ -385,11 +407,11 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
          (es->p != NULL)/* &&
          (es->p->len <= tcp_sndbuf(tpcb))*/)
   {
-  UARTprintf("<<< while \n");
+//  UARTprintf("<<< while \n");
   ptr = es->p;
 
   /* enqueue data for transmission */
-  UARTprintf("<<<  length=%u \n", ptr->len);
+  timer(); UARTprintf("in=%u\n", ptr->len);
 
   uart_out(tpcb, ptr->payload, ptr->len);
   //wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
@@ -417,11 +439,15 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
       }
       while(freed == 0);
      /* we can read more data now */
+      LWIP_PLATFORM_DIAG(("~1 %X\n", tpcb->flags));
+      (tpcb)->flags &= ~TF_ACK_DELAY;
+      (tpcb)->flags |= TF_ACK_NOW;
+      LWIP_PLATFORM_DIAG(("~2 %X\n", tpcb->flags));
      tcp_recved(tpcb, plen);
    }
   }
 
-  timer(); UARTprintf("<<< echo_send2 stop \n");
+  timer(); UARTprintf("echo_send2 E\n");
 }
 
 void uart_in(u8_t b)
