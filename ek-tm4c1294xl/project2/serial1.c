@@ -49,7 +49,6 @@ void init_uart(uint32_t ui32SysClockFreq)
 void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 {
   tpcb2 = tpcb;
-
   u8_t* ptr = arg;
 
   while (len-- > 0)
@@ -96,27 +95,17 @@ extern volatile u32_t dwTimeout;
 
 void    UART4IntHandler(void)
 {
-//	static u8_t buff[100];
-
   uint32_t ui32Status = UARTIntStatus(UART4_BASE, true);
   UARTIntClear(UART4_BASE, ui32Status);
 
     if (GetRI3(ui32Status))
     {
-    	dwTimeout = 0;
+      dwTimeout = 0;
 
-    	u8_t b = InByte3();
-//    	buff[0] = b;
-
-//    	timer(); UARTprintf("Y\n");
-
-//    	  tcp_nagle_disable(tpcb2);
-//
-//    	tcp_write(tpcb2, buff, 1, 1);
-        mpbIn[iwInStop] = b;
-////    	UARTprintf(" %02X",b);
-        iwInStop = (iwInStop+1) % wINBUFF_SIZE;
-        cwIn++;
+      u8_t b = InByte3();
+      mpbIn[iwInStop] = b;
+      iwInStop = (iwInStop+1) % wINBUFF_SIZE;
+      cwIn++;
     }
 
     if (GetTI3(ui32Status))

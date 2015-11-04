@@ -213,18 +213,18 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
   }
   else if (es->state == ES_RECEIVED)
   {
-    UARTprintf(">>>  read some more data \n");
+//    UARTprintf(">>>  read some more data \n");
     /* read some more data */
     if(es->p == NULL)
     {
-      UARTprintf(">>>  read some more data 1 \n");
+//      UARTprintf(">>>  read some more data 1 \n");
       es->p = p;
       tcp_sent(tpcb, echo_sent);
       echo_send(tpcb, es);
     }
     else
     {
-      UARTprintf(">>>  read some more data 2 \n");
+//      UARTprintf(">>>  read some more data 2 \n");
       struct pbuf *ptr;
 
       /* chain pbufs to the end of what we recv'ed previously  */
@@ -284,8 +284,6 @@ u16_t i,c;
     		cwIn--;
     		buff[i] = mpbIn[iwInStart];
 
-//    		UARTprintf("%X > %02X \n",iwInStart,buff[i]);
-
     		iwInStart++;
     		iwInStart = iwInStart % wINBUFF_SIZE;
     		c++;
@@ -293,14 +291,13 @@ u16_t i,c;
     	else break;
     }
 
-//    if (cwIn > 0) UARTprintf(" \n");
-
 	if (c > 0) {
 //	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 5 %X\n", tpcb->flags));
 //	      (tpcb)->flags &= ~TF_ACK_DELAY;
 //	      (tpcb)->flags |= TF_ACK_NOW;
 //	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 6 %X\n", tpcb->flags));
 
+		timer(); UARTprintf("out\n");
 		tcp_write(tpcb, buff, c, 1);
 		tcp_output(tpcb);
 
