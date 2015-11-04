@@ -13,6 +13,7 @@ SERIAL1!C
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
 
+void timer(void);
 void  InitUart4(uint32_t ui32SysClock);
 
 
@@ -90,26 +91,32 @@ void    OutByte3(u8_t  bT) {
 	HWREG(UART4_BASE + UART_O_DR) = bT;
 }
 
-
+extern volatile u32_t dwTimeout;
 //void uart_in(u8_t b);
 
 void    UART4IntHandler(void)
 {
-	static u8_t buff[100];
+//	static u8_t buff[100];
 
   uint32_t ui32Status = UARTIntStatus(UART4_BASE, true);
   UARTIntClear(UART4_BASE, ui32Status);
 
     if (GetRI3(ui32Status))
     {
-    	u8_t b = InByte3();
-    	buff[0] = b;
+    	dwTimeout = 0;
 
-    	tcp_write(tpcb2, buff, 1, 1);
-//        mpbIn[iwInStop] = b;
+    	u8_t b = InByte3();
+//    	buff[0] = b;
+
+//    	timer(); UARTprintf("Y\n");
+
+//    	  tcp_nagle_disable(tpcb2);
+//
+//    	tcp_write(tpcb2, buff, 1, 1);
+        mpbIn[iwInStop] = b;
 ////    	UARTprintf(" %02X",b);
-//        iwInStop = (iwInStop+1) % wINBUFF_SIZE;
-//        cwIn++;
+        iwInStop = (iwInStop+1) % wINBUFF_SIZE;
+        cwIn++;
     }
 
     if (GetTI3(ui32Status))

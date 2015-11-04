@@ -21,6 +21,8 @@ TODO volatile
 #include "driverlib/timer.h"
 
 volatile ulong dwTimer;
+volatile ulong dwTimeout;
+
 
 /*
 #include "../display/slides.h"
@@ -55,12 +57,19 @@ void InitTimer1(uint32_t ui32SysClock) {
 }
 
 
+extern struct tcp_pcb *tpcb2;
+void uart_poll(struct tcp_pcb *tpcb);
 
 void Timer1IntHandler(void)
 {
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
   dwTimer++;
+
+  if (++dwTimeout > 10)
+  {
+	  uart_poll(tpcb2);
+  }
 //  fOnSecond = 1;
 //
 //  Slides_1Hz();
