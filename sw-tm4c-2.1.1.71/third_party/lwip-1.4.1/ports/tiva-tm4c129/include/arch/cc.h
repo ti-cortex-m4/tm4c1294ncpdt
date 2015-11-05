@@ -89,8 +89,10 @@ typedef u8_t                sys_prot_t;
 // Define an empty DIAG display maro here ... since we have no knowledge of
 // what display routines are available.
 //
+void OutLogTimer(void);
+
 #ifndef LWIP_PLATFORM_DIAG
-#define LWIP_PLATFORM_DIAG(msg) UARTprintf msg
+#define LWIP_PLATFORM_DIAG(msg) OutLogTimer(); UARTprintf msg
 #endif
 
 //
