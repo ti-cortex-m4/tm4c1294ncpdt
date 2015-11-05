@@ -3,12 +3,9 @@ TIMER1!C
 
 TODO volatile
 ------------------------------------------------------------------------------*/
-/*
-#include "../main.h"
-#include "inc/hw_memmap.h"
-*/
-#include <stdbool.h>
-#include <stdint.h>
+
+#include "self/main.h"
+#include "self/serial/log.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_memmap.h"
 #include "self/main.h"
@@ -20,7 +17,6 @@ TODO volatile
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 
-volatile ulong dwTimer;
 volatile ulong dwTimeout;
 
 
@@ -65,7 +61,7 @@ void Timer1IntHandler(void)
 {
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
-  dwTimer++;
+  IncLogTimer();
 
   if (++dwTimeout > 3)
   {
