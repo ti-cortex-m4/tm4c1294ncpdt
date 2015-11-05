@@ -22,9 +22,8 @@
 //
 //*****************************************************************************
 
+#include "self/main.h"
 #include "self/settings.h"
-#include <stdbool.h>
-#include <stdint.h>
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "driverlib/flash.h"
