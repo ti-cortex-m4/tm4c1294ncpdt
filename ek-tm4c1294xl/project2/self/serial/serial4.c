@@ -11,27 +11,36 @@ SERIAL1!C
 #include "lwip/debug.h"
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_uart.h"
+#include "inc/hw_types.h"
+#include "inc/hw_ints.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/uart.h"
 #include "self/serial/uarts.h"
+#include "serial4.h"
+
+
+extern volatile u32_t dwTimeout;
+//void uart_in(uchar b);
 
 void timer(void);
 
 
 
-#define wINBUFF_SIZE    0x1000
-#define wOUTBUFF_SIZE   0x1000
+volatile uchar          mpbIn[wINBUFF_SIZE], mpbOut[wOUTBUFF_SIZE];
 
-volatile u8_t                    mpbIn[wINBUFF_SIZE], mpbOut[wOUTBUFF_SIZE];
+volatile uint           iwOutStart, iwOutStop, cwOut;
+volatile uint           iwInStart, iwInStop, cwIn;
 
-volatile uint32_t                   iwOutStart,iwOutStop,cwOut;
-volatile uint32_t                   iwInStart,iwInStop,cwIn;
+
+
 struct tcp_pcb *tpcb2;
 
-void InitTimer1(uint32_t ui32SysClock);
 
-void init_uart(uint32_t ui32SysClockFreq)
+
+void init_uart(ulong ui32SysClockFreq)
 {
-  InitUART4(ui32SysClockFreq);
-
   iwOutStart = 0;
   iwOutStop = 0;
   cwOut = 0;
@@ -40,15 +49,15 @@ void init_uart(uint32_t ui32SysClockFreq)
   iwInStop = 0;
   cwIn = 0;
 
-  InitTimer1(ui32SysClockFreq);
-
-  IntMasterEnable();
+  InitUART4(ui32SysClockFreq);
 }
+
+
 
 void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 {
   tpcb2 = tpcb;
-  u8_t* ptr = arg;
+  uchar* ptr = arg;
 
   while (len-- > 0)
   {
@@ -61,59 +70,53 @@ void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 }
 
 
-#include "inc/hw_memmap.h"
-#include "inc/hw_uart.h"
-#include "inc/hw_types.h"
-#include "inc/hw_ints.h"
-#include "driverlib/interrupt.h"
-#include "driverlib/uart.h"
 
-
-
-bool    GetRI3(uint32_t ui32Status) {
-  return ((ui32Status & 0x00000010) != 0) || ((ui32Status & 0x00000040) != 0);
+static bool GetRI4(ulong dwStatus)
+{
+  return ((dwStatus & 0x00000010) != 0) || ((dwStatus & 0x00000040) != 0);
 }
 
 
-bool    GetTI3(uint32_t ui32Status) {
-  return ((ui32Status & 0x00000020) != 0) || (ui32Status == 0);
+static bool GetTI4(ulong dwStatus)
+{
+  return ((dwStatus & 0x00000020) != 0) || (dwStatus == 0);
 }
 
 
-u8_t	InByte3(void) {
+static uchar InByte3(void)
+{
   return HWREG(UART4_BASE + UART_O_DR);
 }
 
 
-void    OutByte3(u8_t  bT) {
-	HWREG(UART4_BASE + UART_O_DR) = bT;
+static void OutByte3(uchar b)
+{
+  HWREG(UART4_BASE + UART_O_DR) = b;
 }
 
-extern volatile u32_t dwTimeout;
-//void uart_in(u8_t b);
+
 
 void    UART4IntHandler(void)
 {
-  uint32_t ui32Status = UARTIntStatus(UART4_BASE, true);
-  UARTIntClear(UART4_BASE, ui32Status);
+  ulong dwStatus = UARTIntStatus(UART4_BASE, true);
+  UARTIntClear(UART4_BASE, dwStatus);
 
-    if (GetRI3(ui32Status))
+  if (GetRI4(dwStatus))
+  {
+    dwTimeout = 0;
+
+    cwIn++;
+    mpbIn[iwInStop] = InByte3();
+    iwInStop = (iwInStop+1) % wINBUFF_SIZE;
+  }
+
+  if (GetTI4(dwStatus))
+  {
+    if (cwOut > 0 )
     {
-      dwTimeout = 0;
-
-      u8_t b = InByte3();
-      mpbIn[iwInStop] = b;
-      iwInStop = (iwInStop+1) % wINBUFF_SIZE;
-      cwIn++;
+      cwOut--;
+      OutByte3(mpbOut[iwOutStart]);
+      iwOutStart = (iwOutStart+1) % wOUTBUFF_SIZE;
     }
-
-    if (GetTI3(ui32Status))
-    {
-      if (cwOut > 0 )
-      {
-        cwOut--;
-        OutByte3(mpbOut[iwOutStart]);
-        iwOutStart = (iwOutStart+1) % wOUTBUFF_SIZE;
-      }
-    }
+  }
 }
