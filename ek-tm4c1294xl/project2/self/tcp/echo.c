@@ -434,10 +434,10 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
       }
       while(freed == 0);
      /* we can read more data now */
-      LWIP_PLATFORM_DIAG(("~1 %X\n", tpcb->flags));
+      LOG(("~1 %X\n", tpcb->flags));
       (tpcb)->flags &= ~TF_ACK_DELAY;
       (tpcb)->flags |= TF_ACK_NOW;
-      LWIP_PLATFORM_DIAG(("~2 %X\n", tpcb->flags));
+      LOG(("~2 %X\n", tpcb->flags));
      tcp_recved(tpcb, plen);
    }
   }
