@@ -38,8 +38,8 @@
 #include "utils/uartstdio.h"
 #include "drivers/pinout.h"
 #include "lwip/inet.h"
-#include "echo.h"
 #include "self/settings.h"
+#include "self/tcp/echo.h"
 #include "self/udp/mac.h"
 #include "self/udp/udp_output.h"
 
