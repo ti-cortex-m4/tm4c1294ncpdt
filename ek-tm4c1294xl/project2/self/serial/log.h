@@ -9,7 +9,9 @@ void    OutLogTimer(void);
 
 
 
-#define USE_LOG
+//#define USE_LOG
+
+
 
 #ifdef USE_LOG
 #define LOG(msg) OutLogTimer(); UARTprintf msg
