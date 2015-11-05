@@ -343,6 +343,9 @@ main(void)
 //    LocatorAppTitleSet("EK-TM4C1294XL enet_io");
 
     init_uart(g_ui32SysClock);
+    InitTimer1(g_ui32SysClock);
+    IntMasterEnable();
+
     echo_init();
 
     //
