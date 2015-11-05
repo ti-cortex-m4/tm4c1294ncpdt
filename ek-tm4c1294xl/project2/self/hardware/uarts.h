@@ -4,4 +4,4 @@ UARTS.H
 
 ------------------------------------------------------------------------------*/
 
-void    InitUart4(ulong dwSysClockFreq);
+void    InitUART4(ulong dwSysClockFreq);
