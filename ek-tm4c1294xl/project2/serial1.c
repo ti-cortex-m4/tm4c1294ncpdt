@@ -4,17 +4,16 @@ SERIAL1!C
 
 ------------------------------------------------------------------------------*/
 
-#include <stdbool.h>
-#include <stdint.h>
+#include "self/main.h"
 #include "driverlib/interrupt.h"
 #include "inc/hw_ints.h"
 #include "lwip/opt.h"
 #include "lwip/debug.h"
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
+#include "self/serial/uarts.h"
 
 void timer(void);
-void  InitUart4(uint32_t ui32SysClock);
 
 
 
@@ -31,7 +30,7 @@ void InitTimer1(uint32_t ui32SysClock);
 
 void init_uart(uint32_t ui32SysClockFreq)
 {
-  InitUart4(ui32SysClockFreq);
+  InitUART4(ui32SysClockFreq);
 
   iwOutStart = 0;
   iwOutStop = 0;
