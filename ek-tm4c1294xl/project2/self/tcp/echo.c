@@ -48,7 +48,7 @@
 #include "lwip/tcp_impl.h"
 #include "timer1.h"
 #include "self/serial/log.h"
-#include "self/serial/serial1.h"
+#include "self/serial/serial4.h"
 
 
 #if LWIP_TCP
