@@ -9,16 +9,14 @@ UARTS.Ñ
 #include "inc/hw_memmap.h"
 #include "driverlib/gpio.h"
 #include "driverlib/pin_map.h"
-//#include "driverlib/rom.h"
 #include "driverlib/sysctl.h"
-//#include "driverlib/timer.h"
 #include "driverlib/uart.h"
-//#include "driverlib/interrupt.h"
+#include "driverlib/interrupt.h"
 #include "uarts.h"
 
 
 
-void    InitUART4(uint32_t ui32SysClockFreq)
+void    InitUART4(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART4);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -34,5 +32,5 @@ void    InitUART4(uint32_t ui32SysClockFreq)
   IntEnable(INT_UART4);
   UARTIntEnable(UART4_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  UARTConfigSetExpClk(UART4_BASE, ui32SysClockFreq, 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  UARTConfigSetExpClk(UART4_BASE, dwSysClockFreq, 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }

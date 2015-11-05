@@ -20,9 +20,9 @@ targetConfigs
 target_config.ccxml
 timer1.c
 timer1.h
-uarts.c
-uarts.h
-utils
++  uarts.c
++  uarts.h
+utils !!!
 
 delay.c
 delay.h
