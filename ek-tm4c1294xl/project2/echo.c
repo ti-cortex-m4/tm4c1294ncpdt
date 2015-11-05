@@ -48,6 +48,7 @@
 #include "lwip/tcp_impl.h"
 #include "serial1.h"
 #include "timer1.h"
+#include "self/serial/log.h"
 
 
 #if LWIP_TCP
@@ -79,14 +80,11 @@ err_t echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len);
 void echo_send(struct tcp_pcb *tpcb, struct echo_state *es);
 void echo_close(struct tcp_pcb *tpcb, struct echo_state *es);
 
-void timer(void) {
-  UARTprintf("%05u.%03u ", (dwTimer / 1000), (dwTimer % 1000));
-}
 
 void
 echo_init(void)
 {
-  UARTprintf("*** echo_init start \n");
+  LOG(("*** echo_init start \n"));
 
   echo_pcb = tcp_new();
   if (echo_pcb != NULL)
@@ -102,23 +100,23 @@ echo_init(void)
     }
     else 
     {
-      UARTprintf("*** abort? output diagnostic? 1 \n");
+      LOG(("*** abort? output diagnostic? 1 \n"));
       /* abort? output diagnostic? */
     }
   }
   else
   {
-    UARTprintf("*** abort? output diagnostic? 2 \n");
+    LOG(("*** abort? output diagnostic? 2 \n"));
     /* abort? output diagnostic? */
   }
-  UARTprintf("*** echo_init stop \n");
+  LOG(("*** echo_init stop \n"));
 }
 
 
 err_t
 echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
 {
-  UARTprintf("*** echo_accept start \n");
+  LOG(("*** echo_accept start \n"));
   tcp_nagle_disable(newpcb);
 
   err_t ret_err;
@@ -150,10 +148,10 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
   else
   {
     ret_err = ERR_MEM;
-    UARTprintf("***  ERR_MEM \n");
+    LOG(("***  ERR_MEM \n"));
   }
 
-  UARTprintf("*** echo_accept stop \n");
+  LOG(("*** echo_accept stop \n"));
   return ret_err;  
 }
 
@@ -161,7 +159,7 @@ err_t
 echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
 {
   tcp_nagle_disable(tpcb);
-  timer(); UARTprintf("echo_recv B\n");
+  LOG(("echo_recv B\n"));
 
   struct echo_state *es;
   err_t ret_err;
@@ -170,18 +168,18 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
   es = (struct echo_state *)arg;
   if (p == NULL)
   {
-    UARTprintf(">>>  remote host closed connection \n");
+    LOG((">>>  remote host closed connection \n"));
     /* remote host closed connection */
     es->state = ES_CLOSING;
     if(es->p == NULL)
     {
-       UARTprintf(">>>  we're done sending, close it \n");
+       LOG((">>>  we're done sending, close it \n"));
        /* we're done sending, close it */
        echo_close(tpcb, es);
     }
     else
     {
-   	  UARTprintf(">>>  we're not done yet \n");
+   	  LOG((">>>  we're not done yet \n"));
       /* we're not done yet */
       tcp_sent(tpcb, echo_sent);
       echo_send(tpcb, es);
@@ -190,7 +188,7 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
   }
   else if(err != ERR_OK)
   {
-    UARTprintf(">>>  cleanup, for unkown reason \n");
+    LOG((">>>  cleanup, for unkown reason \n"));
     /* cleanup, for unkown reason */
     if (p != NULL)
     {
@@ -201,7 +199,7 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
   }
   else if(es->state == ES_ACCEPTED)
   {
-	  UARTprintf(">>>  first data chunk \n");
+	  LOG((">>>  first data chunk \n"));
     /* first data chunk in p->payload */
     es->state = ES_RECEIVED;
     /* store reference to incoming pbuf (chain) */
@@ -213,18 +211,18 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
   }
   else if (es->state == ES_RECEIVED)
   {
-//    UARTprintf(">>>  read some more data \n");
+//    LOG((">>>  read some more data \n"));
     /* read some more data */
     if(es->p == NULL)
     {
-//      UARTprintf(">>>  read some more data 1 \n");
+//      LOG((">>>  read some more data 1 \n"));
       es->p = p;
       tcp_sent(tpcb, echo_sent);
       echo_send(tpcb, es);
     }
     else
     {
-//      UARTprintf(">>>  read some more data 2 \n");
+//      LOG((">>>  read some more data 2 \n"));
       struct pbuf *ptr;
 
       /* chain pbufs to the end of what we recv'ed previously  */
@@ -235,7 +233,7 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
   }
   else if(es->state == ES_CLOSING)
   {
-    UARTprintf(">>>  odd case, remote side closing twice, trash data \n");
+    LOG((">>>  odd case, remote side closing twice, trash data \n"));
     /* odd case, remote side closing twice, trash data */
     tcp_recved(tpcb, p->tot_len);
     es->p = NULL;
@@ -244,7 +242,7 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
   }
   else
   {
-    UARTprintf(">>>  unkown es->state, trash data \n");
+    LOG((">>>  unkown es->state, trash data \n"));
     /* unkown es->state, trash data  */
     tcp_recved(tpcb, p->tot_len);
     es->p = NULL;
@@ -252,14 +250,14 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
     ret_err = ERR_OK;
   }
 
-  timer(); UARTprintf("echo_recv E=%u\n\n", ret_err);
+  LOG(("echo_recv E=%u\n\n", ret_err));
   return ret_err;
 }
 
 void
 echo_error(void *arg, err_t err)
 {
-  UARTprintf("*** echo_error \n");
+  LOG(("*** echo_error \n"));
   struct echo_state *es;
 
   LWIP_UNUSED_ARG(err);
@@ -297,7 +295,7 @@ u16_t i,c;
 //	      (tpcb)->flags |= TF_ACK_NOW;
 //	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 6 %X\n", tpcb->flags));
 
-		timer(); UARTprintf("out\n");
+		LOG(("out\n"));
 		tcp_write(tpcb, buff, c, 1);
 		tcp_output(tpcb);
 
@@ -305,14 +303,14 @@ u16_t i,c;
 //	      (tpcb)->flags &= ~TF_ACK_DELAY;
 //	      (tpcb)->flags |= TF_ACK_NOW;
 //	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 6 %X\n", tpcb->flags));
-		timer(); UARTprintf("out=%u\n",c);
+		LOG(("out=%u\n",c));
 	}
 }
 
 err_t
 echo_poll(void *arg, struct tcp_pcb *tpcb)
 {
-//  UARTprintf("--- echo_poll start \n");
+//  LOG(("--- echo_poll start \n"));
   tcp_nagle_disable(tpcb);
 
   err_t ret_err;
@@ -323,14 +321,14 @@ echo_poll(void *arg, struct tcp_pcb *tpcb)
   {
     if (es->p != NULL)
     {
-      UARTprintf("--- there is a remaining pbuf (chain) \n");
+      LOG(("--- there is a remaining pbuf (chain) \n"));
       /* there is a remaining pbuf (chain)  */
       tcp_sent(tpcb, echo_sent);
       echo_send(tpcb, es);
     }
     else
     {
-//      UARTprintf("--- no remaining pbuf (chain) \n");
+//      LOG(("--- no remaining pbuf (chain) \n"));
       /* no remaining pbuf (chain)  */
       if(es->state == ES_CLOSING)
       {
@@ -341,14 +339,14 @@ echo_poll(void *arg, struct tcp_pcb *tpcb)
   }
   else
   {
-  	UARTprintf("--- nothing to be done \n");
+  	LOG(("--- nothing to be done \n"));
 
     /* nothing to be done */
     tcp_abort(tpcb);
     ret_err = ERR_ABRT;
   }
 
-//  UARTprintf("--- echo_poll stop \n");
+//  LOG(("--- echo_poll stop \n"));
 
 //  uart_poll(tpcb);
   return ret_err;
@@ -359,7 +357,7 @@ echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
 {
   tcp_nagle_disable(tpcb);
 
-  timer(); UARTprintf("echo_sent B\n");
+  LOG(("echo_sent B\n"));
   struct echo_state *es;
 
   LWIP_UNUSED_ARG(len);
@@ -369,14 +367,14 @@ echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
   
   if(es->p != NULL)
   {
-    UARTprintf("+++ still got pbufs to send \n");
+    LOG(("+++ still got pbufs to send \n"));
     /* still got pbufs to send */
     tcp_sent(tpcb, echo_sent);
     echo_send(tpcb, es);
   }
   else
   {
-    UARTprintf("+++ no more pbufs to send \n");
+    LOG(("+++ no more pbufs to send \n"));
 
     /* no more pbufs to send */
     if(es->state == ES_CLOSING)
@@ -385,7 +383,7 @@ echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
     }
   }
 
-  timer(); UARTprintf("echo_sent E\n");
+  LOG(("echo_sent E\n"));
   return ERR_OK;
 }
 
@@ -395,7 +393,7 @@ void
 echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
 {
   tcp_nagle_disable(tpcb);
-  timer(); UARTprintf("echo_send2 B\n");
+  LOG(("echo_send2 B\n"));
 
   struct pbuf *ptr;
 //  err_t wr_err = ERR_OK;
@@ -404,18 +402,18 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
          (es->p != NULL)/* &&
          (es->p->len <= tcp_sndbuf(tpcb))*/)
   {
-//  UARTprintf("<<< while \n");
+//  LOG(("<<< while \n"));
   ptr = es->p;
 
   /* enqueue data for transmission */
-  timer(); UARTprintf("in=%u\n", ptr->len);
+  LOG(("in=%u\n", ptr->len));
 
   uart_out(tpcb, ptr->payload, ptr->len);
   //wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
 
 //  if (wr_err == ERR_OK)
   {
-//     UARTprintf("<<< ERR_OK \n");
+//     LOG(("<<< ERR_OK \n"));
 
      u16_t plen;
       u8_t freed;
@@ -444,7 +442,7 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
    }
   }
 
-  timer(); UARTprintf("echo_send2 E\n");
+  LOG(("echo_send2 E\n"));
 }
 
 void uart_in(u8_t b)
@@ -455,7 +453,7 @@ void uart_in(u8_t b)
 void
 echo_send3(struct tcp_pcb *tpcb, struct echo_state *es)
 {
-  UARTprintf("<<< echo_send start \n");
+  LOG(("<<< echo_send start \n"));
 
   struct pbuf *ptr;
   err_t wr_err = ERR_OK;
@@ -464,16 +462,16 @@ echo_send3(struct tcp_pcb *tpcb, struct echo_state *es)
          (es->p != NULL) && 
          (es->p->len <= tcp_sndbuf(tpcb)))
   {
-  UARTprintf("<<< while \n");
+  LOG(("<<< while \n"));
   ptr = es->p;
 
   /* enqueue data for transmission */
-  UARTprintf("<<< enqueue data for transmission, length=%u \n", ptr->len);
+  LOG(("<<< enqueue data for transmission, length=%u \n", ptr->len));
 
   wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
   if (wr_err == ERR_OK)
   {
-     UARTprintf("<<< ERR_OK \n");
+     LOG(("<<< ERR_OK \n"));
 
      u16_t plen;
       u8_t freed;
@@ -498,24 +496,24 @@ echo_send3(struct tcp_pcb *tpcb, struct echo_state *es)
    }
    else if(wr_err == ERR_MEM)
    {
-     UARTprintf("<<< ERR_MEM \n");
+     LOG(("<<< ERR_MEM \n"));
       /* we are low on memory, try later / harder, defer to poll */
      es->p = ptr;
    }
    else
    {
-     UARTprintf("<<< other problem ?? \n");
+     LOG(("<<< other problem ?? \n"));
      /* other problem ?? */
    }
   }
 
-  UARTprintf("<<< echo_send stop \n");
+  LOG(("<<< echo_send stop \n"));
 }
 
 void
 echo_close(struct tcp_pcb *tpcb, struct echo_state *es)
 {
-  UARTprintf("*** echo_close start \n");
+  LOG(("*** echo_close start \n"));
   tcp_arg(tpcb, NULL);
   tcp_sent(tpcb, NULL);
   tcp_recv(tpcb, NULL);
@@ -527,7 +525,7 @@ echo_close(struct tcp_pcb *tpcb, struct echo_state *es)
     mem_free(es);
   }  
   tcp_close(tpcb);
-  UARTprintf("*** echo_close stop \n");
+  LOG(("*** echo_close stop \n"));
 }
 
 #endif /* LWIP_TCP */
