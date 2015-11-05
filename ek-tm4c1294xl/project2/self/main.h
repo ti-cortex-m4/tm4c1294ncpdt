@@ -4,8 +4,8 @@ MAIN.H
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __MAIN
-#define __MAIN
+#ifndef __MAIN_H__
+#define __MAIN_H__
 
 
 #include <stdbool.h>
