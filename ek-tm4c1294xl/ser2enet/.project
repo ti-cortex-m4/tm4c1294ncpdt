@@ -82,46 +82,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>config.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/boards/rdk-s2e/ser2enet/config.c</locationURI>
-		</link>
-		<link>
-			<name>fs_s2e.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/boards/rdk-s2e/ser2enet/fs_s2e.c</locationURI>
-		</link>
-		<link>
-			<name>ser2enet.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/boards/rdk-s2e/ser2enet/ser2enet.c</locationURI>
-		</link>
-		<link>
-			<name>ser2enet_ccs.cmd</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/boards/rdk-s2e/ser2enet/ser2enet_ccs.cmd</locationURI>
-		</link>
-		<link>
-			<name>serial.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/boards/rdk-s2e/ser2enet/serial.c</locationURI>
-		</link>
-		<link>
-			<name>startup_ccs.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/boards/rdk-s2e/ser2enet/startup_ccs.c</locationURI>
-		</link>
-		<link>
-			<name>telnet.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/boards/rdk-s2e/ser2enet/telnet.c</locationURI>
-		</link>
-		<link>
-			<name>upnp.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/boards/rdk-s2e/ser2enet/upnp.c</locationURI>
-		</link>
-		<link>
 			<name>utils/flash_pb.c</name>
 			<type>1</type>
 			<locationURI>SW_ROOT/utils/flash_pb.c</locationURI>
@@ -164,8 +124,12 @@
 	</linkedResources>
 	<variableList>
 		<variable>
+			<name>ORIGINAL_PROJECT_ROOT</name>
+			<value>file:/D:/Cortex/tm4c1294ncpdt/ek-tm4c1294xl/ser2enet/ccs</value>
+		</variable>
+		<variable>
 			<name>SW_ROOT</name>
-			<value>$%7BPARENT-4-PROJECT_LOC%7D</value>
+			<value>$%7BPARENT-4-ORIGINAL_PROJECT_ROOT%7D</value>
 		</variable>
 	</variableList>
 </projectDescription>
