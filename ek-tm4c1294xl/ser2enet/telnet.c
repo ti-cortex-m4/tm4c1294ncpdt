@@ -271,7 +271,7 @@ typedef struct
     //
     //! The remote address that the telnet client connects to.
     //
-    unsigned long ulTelnetRemoteIP;
+    uint32_t ulTelnetRemoteIP;
 
     //
     //! Flags for various options associated with the telnet session.
@@ -281,17 +281,17 @@ typedef struct
     //
     //! A counter for the TCP connection timeout.
     //
-    unsigned long ulConnectionTimeout;
+    uint32_t ulConnectionTimeout;
 
     //
     //! The max time for TCP connection timeout counter.
     //
-    unsigned long ulMaxTimeout;
+    uint32_t ulMaxTimeout;
 
     //
     //! This value holds the UART Port Number for this telnet session.
     //
-    unsigned long ulSerialPort;
+    uint32_t ulSerialPort;
 
     //
     //! This value holds an array of pbufs.
@@ -324,12 +324,12 @@ typedef struct
     //! This value holds the offset into the payload section of the current
     //! pbuf.
     //
-    unsigned long ulBufIndex;
+    uint32_t ulBufIndex;
 
     //
     //! The amount of time passed since rx byte count has changed.
     //
-    unsigned long ulLastTCPSendTime;
+    uint32_t ulLastTCPSendTime;
 
 #if CONFIG_RFC2217_ENABLED
     //
@@ -345,7 +345,7 @@ typedef struct
     //
     //! The COM-PORT value received (associed with the COM-PORT Command).
     //
-    unsigned long ulRFC2217Value;
+    uint32_t ulRFC2217Value;
 
     //
     //! The index into the COM-PORT value received (for multi-byte values).
@@ -433,7 +433,7 @@ static tTelnetSessionData g_sTelnetSession[MAX_S2E_PORTS];
 // External Reference to millisecond timer.
 //
 //*****************************************************************************
-extern unsigned long g_ulSystemTimeMS;
+extern uint32_t g_ulSystemTimeMS;
 
 //*****************************************************************************
 //
@@ -566,7 +566,7 @@ static void
 TelnetProcessRFC2217Command(tTelnetSessionData *pState)
 {
     int iIndex = 0;
-    unsigned long ulTemp;
+    uint32_t ulTemp;
 
     //
     // Set the com port option based on the command sent.
@@ -2509,7 +2509,7 @@ TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 //
 //*****************************************************************************
 void
-TelnetClose(unsigned long ulSerialPort)
+TelnetClose(uint32_t ulSerialPort)
 {
     tTelnetSessionData *pState;
 
@@ -2614,8 +2614,8 @@ TelnetClose(unsigned long ulSerialPort)
 //
 //*****************************************************************************
 void
-TelnetOpen(unsigned long ulIPAddr, unsigned short usTelnetRemotePort,
-           unsigned short usTelnetLocalPort, unsigned long ulSerialPort)
+TelnetOpen(uint32_t ulIPAddr, unsigned short usTelnetRemotePort,
+           unsigned short usTelnetLocalPort, uint32_t ulSerialPort)
 {
     void *pcb;
     struct ip_addr sIPAddr;
@@ -2719,7 +2719,7 @@ TelnetOpen(unsigned long ulIPAddr, unsigned short usTelnetRemotePort,
 //
 //*****************************************************************************
 void
-TelnetListen(unsigned short usTelnetPort, unsigned long ulSerialPort)
+TelnetListen(unsigned short usTelnetPort, uint32_t ulSerialPort)
 {
     void *pcb;
     tTelnetSessionData *pState;
@@ -2798,7 +2798,7 @@ TelnetListen(unsigned short usTelnetPort, unsigned long ulSerialPort)
 //
 //*****************************************************************************
 unsigned short
-TelnetGetLocalPort(unsigned long ulSerialPort)
+TelnetGetLocalPort(uint32_t ulSerialPort)
 {
     //
     // Check the arguments.
@@ -2823,7 +2823,7 @@ TelnetGetLocalPort(unsigned long ulSerialPort)
 //
 //*****************************************************************************
 unsigned short
-TelnetGetRemotePort(unsigned long ulSerialPort)
+TelnetGetRemotePort(uint32_t ulSerialPort)
 {
     //
     // Check the arguments.
@@ -3149,7 +3149,7 @@ TelnetHandler(void)
 //*****************************************************************************
 #if defined(CONFIG_RFC2217_ENABLED) || defined(DOXYGEN)
 void
-TelnetNotifyModemState(unsigned long ulPort, unsigned char ucModemState)
+TelnetNotifyModemState(uint32_t ulPort, unsigned char ucModemState)
 {
     tTelnetSessionData *pState;
 
