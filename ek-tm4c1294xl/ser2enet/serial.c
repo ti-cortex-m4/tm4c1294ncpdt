@@ -742,7 +742,7 @@ SerialSetBaudRate(unsigned long ulPort, unsigned long ulBaudRate)
 unsigned long
 SerialGetBaudRate(unsigned long ulPort)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig, ulDif, ulTemp;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig, ulDif, ulTemp;
 
     //
     // Check the arguments.
@@ -805,7 +805,7 @@ SerialGetBaudRate(unsigned long ulPort)
 void
 SerialSetDataSize(unsigned long ulPort, unsigned char ucDataSize)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
     //
     // Check the arguments.
@@ -899,7 +899,7 @@ SerialSetDataSize(unsigned long ulPort, unsigned char ucDataSize)
 unsigned char
 SerialGetDataSize(unsigned long ulPort)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig;
     unsigned char ucCurrentDataSize;
 
     //
@@ -972,7 +972,7 @@ SerialGetDataSize(unsigned long ulPort)
 void
 SerialSetParity(unsigned long ulPort, unsigned char ucParity)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
     //
     // Check the arguments.
@@ -1080,7 +1080,7 @@ SerialSetParity(unsigned long ulPort, unsigned char ucParity)
 unsigned char
 SerialGetParity(unsigned long ulPort)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig;
     unsigned char ucCurrentParity;
 
     //
@@ -1159,7 +1159,7 @@ SerialGetParity(unsigned long ulPort)
 void
 SerialSetStopBits(unsigned long ulPort, unsigned char ucStopBits)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
     //
     // Check the arguments.
@@ -1237,7 +1237,7 @@ SerialSetStopBits(unsigned long ulPort, unsigned char ucStopBits)
 unsigned char
 SerialGetStopBits(unsigned long ulPort)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig;
     unsigned char ucCurrentStopBits;
 
     //
