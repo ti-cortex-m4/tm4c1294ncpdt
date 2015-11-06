@@ -51,28 +51,28 @@
 //! The buffer used to hold characters received from the UART0.
 //
 //*****************************************************************************
-static unsigned char g_pucRX0Buffer[RX_RING_BUF_SIZE];
+static uint8_t g_pucRX0Buffer[RX_RING_BUF_SIZE];
 
 //*****************************************************************************
 //
 //! The buffer used to hold characters to be sent to the UART0.
 //
 //*****************************************************************************
-static unsigned char g_pucTX0Buffer[TX_RING_BUF_SIZE];
+static uint8_t g_pucTX0Buffer[TX_RING_BUF_SIZE];
 
 //*****************************************************************************
 //
 //! The buffer used to hold characters received from the UART1.
 //
 //*****************************************************************************
-static unsigned char g_pucRX1Buffer[RX_RING_BUF_SIZE];
+static uint8_t g_pucRX1Buffer[RX_RING_BUF_SIZE];
 
 //*****************************************************************************
 //
 //! The buffer used to hold characters to be sent to the UART1.
 //
 //*****************************************************************************
-static unsigned char g_pucTX1Buffer[TX_RING_BUF_SIZE];
+static uint8_t g_pucTX1Buffer[TX_RING_BUF_SIZE];
 
 //*****************************************************************************
 //
@@ -205,7 +205,7 @@ static void
 SerialUARTIntHandler(uint32_t ulPort)
 {
     uint32_t ulStatus;
-    unsigned char ucChar;
+    uint8_t ucChar;
 
     //
     // Get the cause of the interrupt.
@@ -361,7 +361,7 @@ SerialFlowInIntHandler(uint32_t ulPort)
 {
     uint32_t ulStatus;
 #if CONFIG_RFC2217_ENABLED
-    unsigned char ucModemState;
+    uint8_t ucModemState;
 #endif
 
     //
@@ -532,7 +532,7 @@ SerialSendFull(uint32_t ulPort)
 //
 //*****************************************************************************
 void
-SerialSend(uint32_t ulPort, unsigned char ucChar)
+SerialSend(uint32_t ulPort, uint8_t ucChar)
 {
     //
     // Check the arguments.
@@ -803,7 +803,7 @@ SerialGetBaudRate(uint32_t ulPort)
 //
 //*****************************************************************************
 void
-SerialSetDataSize(uint32_t ulPort, unsigned char ucDataSize)
+SerialSetDataSize(uint32_t ulPort, uint8_t ucDataSize)
 {
     uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
@@ -896,11 +896,11 @@ SerialSetDataSize(uint32_t ulPort, unsigned char ucDataSize)
 //! \return None.
 //
 //*****************************************************************************
-unsigned char
+uint8_t
 SerialGetDataSize(uint32_t ulPort)
 {
     uint32_t ulCurrentBaudRate, ulCurrentConfig;
-    unsigned char ucCurrentDataSize;
+    uint8_t ucCurrentDataSize;
 
     //
     // Check the arguments.
@@ -970,7 +970,7 @@ SerialGetDataSize(uint32_t ulPort)
 //
 //*****************************************************************************
 void
-SerialSetParity(uint32_t ulPort, unsigned char ucParity)
+SerialSetParity(uint32_t ulPort, uint8_t ucParity)
 {
     uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
@@ -1077,11 +1077,11 @@ SerialSetParity(uint32_t ulPort, unsigned char ucParity)
 //! \b SERIAL_PARITY_MARK, or \b SERIAL_PARITY_SPACE.
 //
 //*****************************************************************************
-unsigned char
+uint8_t
 SerialGetParity(uint32_t ulPort)
 {
     uint32_t ulCurrentBaudRate, ulCurrentConfig;
-    unsigned char ucCurrentParity;
+    uint8_t ucCurrentParity;
 
     //
     // Check the arguments.
@@ -1157,7 +1157,7 @@ SerialGetParity(uint32_t ulPort)
 //
 //*****************************************************************************
 void
-SerialSetStopBits(uint32_t ulPort, unsigned char ucStopBits)
+SerialSetStopBits(uint32_t ulPort, uint8_t ucStopBits)
 {
     uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
@@ -1234,11 +1234,11 @@ SerialSetStopBits(uint32_t ulPort, unsigned char ucStopBits)
 //! \return None.
 //
 //*****************************************************************************
-unsigned char
+uint8_t
 SerialGetStopBits(uint32_t ulPort)
 {
     uint32_t ulCurrentBaudRate, ulCurrentConfig;
-    unsigned char ucCurrentStopBits;
+    uint8_t ucCurrentStopBits;
 
     //
     // Check the arguments.
@@ -1295,7 +1295,7 @@ SerialGetStopBits(uint32_t ulPort)
 //
 //*****************************************************************************
 void
-SerialSetFlowOut(uint32_t ulPort, unsigned char ucFlowValue)
+SerialSetFlowOut(uint32_t ulPort, uint8_t ucFlowValue)
 {
     //
     // Check the arguments.
@@ -1358,7 +1358,7 @@ SerialSetFlowOut(uint32_t ulPort, unsigned char ucFlowValue)
 //! \return Returns \b SERIAL_FLOW_OUT_SET or \b SERIAL_FLOW_OUT_CLEAR.
 //
 //*****************************************************************************
-unsigned char
+uint8_t
 SerialGetFlowOut(uint32_t ulPort)
 {
     //
@@ -1397,7 +1397,7 @@ SerialGetFlowOut(uint32_t ulPort)
 //
 //*****************************************************************************
 void
-SerialSetFlowControl(uint32_t ulPort, unsigned char ucFlowControl)
+SerialSetFlowControl(uint32_t ulPort, uint8_t ucFlowControl)
 {
     //
     // Check the arguments.
@@ -1464,7 +1464,7 @@ SerialSetFlowControl(uint32_t ulPort, unsigned char ucFlowControl)
 //! \return None.
 //
 //*****************************************************************************
-unsigned char
+uint8_t
 SerialGetFlowControl(uint32_t ulPort)
 {
     //
@@ -1491,7 +1491,7 @@ SerialGetFlowControl(uint32_t ulPort)
 //
 //*****************************************************************************
 void
-SerialPurgeData(uint32_t ulPort, unsigned char ucPurgeCommand)
+SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand)
 {
     //
     // Check the arguments.

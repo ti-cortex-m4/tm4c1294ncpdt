@@ -222,7 +222,7 @@ int
 main(void)
 {
     uint32_t ulUser0, ulUser1;
-    unsigned char pucMACAddr[8];
+    uint8_t pucMACAddr[8];
     uint32_t ulLoop;
 
     //
