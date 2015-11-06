@@ -676,7 +676,7 @@ const tConfigParameters *const g_psFactoryParameters = &g_sParametersFactory;
 //! careful consideration.
 //
 //*****************************************************************************
-const unsigned short g_usFirmwareVersion = 10636;
+const uint16_t g_usFirmwareVersion = 10636;
 
 //*****************************************************************************
 //
@@ -1832,7 +1832,7 @@ ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[], char *pcVa
     // Telnet local port
     //
     sPortParams.usTelnetLocalPort =
-        (unsigned short)ConfigGetCGIParam("telnetlp", pcParam, pcValue,
+        (uint16_t)ConfigGetCGIParam("telnetlp", pcParam, pcValue,
                                          iNumParams, &bParamError);
 
     //
@@ -1851,7 +1851,7 @@ ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[], char *pcVa
         // Telnet remote port
         //
         sPortParams.usTelnetRemotePort =
-            (unsigned short)ConfigGetCGIParam("telnetrp", pcParam, pcValue,
+            (uint16_t)ConfigGetCGIParam("telnetrp", pcParam, pcValue,
                                              iNumParams, &bParamError);
 
         //
@@ -2232,7 +2232,7 @@ ConfigMiscCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[],
         // from the current value, store it and note that we made a change
         // that needs saving.
         //
-        if((unsigned short int)lValue !=
+        if((uint16_t)lValue !=
            g_sWorkingDefaultParameters.usLocationURLPort)
         {
             //
@@ -2243,9 +2243,9 @@ ConfigMiscCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[],
             //
             // Update our working parameters and the default set.
             //
-            g_sParameters.usLocationURLPort = (unsigned short)lValue;
+            g_sParameters.usLocationURLPort = (uint16_t)lValue;
             g_sWorkingDefaultParameters.usLocationURLPort =
-                (unsigned short int)lValue;
+                (uint16_t)lValue;
 
             //
             // Restart UPnP with the new location port number.
