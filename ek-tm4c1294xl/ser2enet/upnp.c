@@ -67,21 +67,21 @@ static struct tcp_pcb *g_psUPnP_ListenPCB = NULL;
 //! The UPnP multi-cast IP Address.
 //
 //*****************************************************************************
-static unsigned long g_ulUPnPAdverstisementTimer = 0;
+static uint32_t g_ulUPnPAdverstisementTimer = 0;
 
 //*****************************************************************************
 //
 //! The UPnP response counter.
 //
 //*****************************************************************************
-static unsigned long g_ulResponseCount = 0;
+static uint32_t g_ulResponseCount = 0;
 
 //*****************************************************************************
 //
 //! The UPnP response address.
 //
 //*****************************************************************************
-static unsigned long g_ulResponseAddr = 0;
+static uint32_t g_ulResponseAddr = 0;
 #define IP_ADDR_RESPONSE        ((struct ip_addr *)&g_ulResponseAddr)
 
 //*****************************************************************************
@@ -99,7 +99,7 @@ static unsigned short g_usResponsePort = 0;
 //*****************************************************************************
 typedef struct
 {
-    unsigned long ulRetryCount;
+    uint32_t ulRetryCount;
     bool bDescriptionSent;
 }
 tUPnPState;
@@ -280,7 +280,7 @@ static const char g_pcResponseRoot1[] =
 static void
 UPnP_send_data(struct tcp_pcb *pcb, tUPnPState *pState)
 {
-    unsigned long ulIPAddr;
+    uint32_t ulIPAddr;
     unsigned char pucMACAddr[6];
     static char pcBuf[30 + MOD_NAME_LEN];
     err_t err;
@@ -721,7 +721,7 @@ UPnP_recv_udp(void *arg, struct udp_pcb *pcb, struct pbuf *p,
 void
 UPnPInit(void)
 {
-    unsigned long ulTemp;
+    uint32_t ulTemp;
 
     //
     // Enable Ethernet Multicast Reception (required for UPnP operation).
@@ -751,7 +751,7 @@ UPnPInit(void)
 void
 UPnPStop(void)
 {
-    unsigned long ulIPAddr;
+    uint32_t ulIPAddr;
     unsigned char pucMACAddr[6];
     char pcBuf[MAX_BYEBYE_LEN];
     struct pbuf *p_out;
@@ -862,14 +862,14 @@ UPnPStart(void)
 //
 //*****************************************************************************
 void
-UPnPHandler(unsigned long ulTimeMS)
+UPnPHandler(uint32_t ulTimeMS)
 {
     struct pbuf *p_out;
     static char pcBuf[400];
-    unsigned long ulIPAddr;
+    uint32_t ulIPAddr;
     unsigned char pucMACAddr[6];
-    static unsigned long ulState = 0;
-    static unsigned long ulLastTimeMS = 0;
+    static uint32_t ulState = 0;
+    static uint32_t ulLastTimeMS = 0;
 
     //
     // If the timer hasn't ticked, then don't run anything.

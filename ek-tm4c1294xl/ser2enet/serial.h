@@ -60,28 +60,28 @@
 // Prototypes for the Serial interface functions.
 //
 //*****************************************************************************
-extern bool SerialSendFull(unsigned long ulPort);
-extern void SerialSend(unsigned long ulPort, unsigned char ucChar);
-extern long SerialReceive(unsigned long ulPort);
-extern unsigned long SerialReceiveAvailable(unsigned long ulPort);
-extern void SerialSetBaudRate(unsigned long ulPort, unsigned long ulBaudRate);
-extern unsigned long SerialGetBaudRate(unsigned long ulPort);
-extern void SerialSetDataSize(unsigned long ulPort, unsigned char ucDataSize);
-extern unsigned char SerialGetDataSize(unsigned long ulPort);
-extern void SerialSetParity(unsigned long ulPort, unsigned char ucParity);
-extern unsigned char SerialGetParity(unsigned long ulPort);
-extern void SerialSetStopBits(unsigned long ulPort, unsigned char ucStopBits);
-extern unsigned char SerialGetStopBits(unsigned long ulPort);
-extern void SerialSetFlowControl(unsigned long ulPort,
+extern bool SerialSendFull(uint32_t ulPort);
+extern void SerialSend(uint32_t ulPort, unsigned char ucChar);
+extern long SerialReceive(uint32_t ulPort);
+extern uint32_t SerialReceiveAvailable(uint32_t ulPort);
+extern void SerialSetBaudRate(uint32_t ulPort, uint32_t ulBaudRate);
+extern uint32_t SerialGetBaudRate(uint32_t ulPort);
+extern void SerialSetDataSize(uint32_t ulPort, unsigned char ucDataSize);
+extern unsigned char SerialGetDataSize(uint32_t ulPort);
+extern void SerialSetParity(uint32_t ulPort, unsigned char ucParity);
+extern unsigned char SerialGetParity(uint32_t ulPort);
+extern void SerialSetStopBits(uint32_t ulPort, unsigned char ucStopBits);
+extern unsigned char SerialGetStopBits(uint32_t ulPort);
+extern void SerialSetFlowControl(uint32_t ulPort,
                                  unsigned char ucFlowControl);
-extern unsigned char SerialGetFlowControl(unsigned long ulPort);
-extern void SerialSetFlowOut(unsigned long ulPort, unsigned char ucFlowValue);
-extern unsigned char SerialGetFlowOut(unsigned long ulPort);
-extern void SerialPurgeData(unsigned long ulPort,
+extern unsigned char SerialGetFlowControl(uint32_t ulPort);
+extern void SerialSetFlowOut(uint32_t ulPort, unsigned char ucFlowValue);
+extern unsigned char SerialGetFlowOut(uint32_t ulPort);
+extern void SerialPurgeData(uint32_t ulPort,
                             unsigned char ucPurgeCommand);
-extern void SerialSetDefault(unsigned long ulPort);
-extern void SerialSetFactory(unsigned long ulPort);
-extern void SerialSetCurrent(unsigned long ulPort);
+extern void SerialSetDefault(uint32_t ulPort);
+extern void SerialSetFactory(uint32_t ulPort);
+extern void SerialSetCurrent(uint32_t ulPort);
 extern void SerialInit(void);
 
 #endif // __SERIAL_H__
