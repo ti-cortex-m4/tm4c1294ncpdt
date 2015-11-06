@@ -124,12 +124,8 @@
 	</linkedResources>
 	<variableList>
 		<variable>
-			<name>ORIGINAL_PROJECT_ROOT</name>
-			<value>file:/D:/Cortex/tm4c1294ncpdt/ek-tm4c1294xl/ser2enet/ccs</value>
-		</variable>
-		<variable>
 			<name>SW_ROOT</name>
-			<value>$%7BPARENT-4-ORIGINAL_PROJECT_ROOT%7D</value>
+			<value>file:/D:/Cortex/tm4c1294ncpdt/sw-tm4c-2.1.1.71</value>
 		</variable>
 	</variableList>
 </projectDescription>
