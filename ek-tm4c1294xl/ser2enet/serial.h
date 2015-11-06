@@ -31,11 +31,11 @@
 // SerialGetParity.
 //
 //*****************************************************************************
-#define SERIAL_PARITY_NONE  ((unsigned char)1)
-#define SERIAL_PARITY_ODD   ((unsigned char)2)
-#define SERIAL_PARITY_EVEN  ((unsigned char)3)
-#define SERIAL_PARITY_MARK  ((unsigned char)4)
-#define SERIAL_PARITY_SPACE ((unsigned char)5)
+#define SERIAL_PARITY_NONE  ((uint8_t)1)
+#define SERIAL_PARITY_ODD   ((uint8_t)2)
+#define SERIAL_PARITY_EVEN  ((uint8_t)3)
+#define SERIAL_PARITY_MARK  ((uint8_t)4)
+#define SERIAL_PARITY_SPACE ((uint8_t)5)
 
 //*****************************************************************************
 //
@@ -43,8 +43,8 @@
 // and SerialGetFlowControl.
 //
 //*****************************************************************************
-#define SERIAL_FLOW_CONTROL_NONE ((unsigned char)1)
-#define SERIAL_FLOW_CONTROL_HW   ((unsigned char)3)
+#define SERIAL_FLOW_CONTROL_NONE ((uint8_t)1)
+#define SERIAL_FLOW_CONTROL_HW   ((uint8_t)3)
 
 //*****************************************************************************
 //
@@ -52,8 +52,8 @@
 // and SerialGetFlowOut.
 //
 //*****************************************************************************
-#define SERIAL_FLOW_OUT_SET      ((unsigned char)11)
-#define SERIAL_FLOW_OUT_CLEAR    ((unsigned char)12)
+#define SERIAL_FLOW_OUT_SET      ((uint8_t)11)
+#define SERIAL_FLOW_OUT_CLEAR    ((uint8_t)12)
 
 //*****************************************************************************
 //
@@ -61,24 +61,24 @@
 //
 //*****************************************************************************
 extern bool SerialSendFull(uint32_t ulPort);
-extern void SerialSend(uint32_t ulPort, unsigned char ucChar);
+extern void SerialSend(uint32_t ulPort, uint8_t ucChar);
 extern long SerialReceive(uint32_t ulPort);
 extern uint32_t SerialReceiveAvailable(uint32_t ulPort);
 extern void SerialSetBaudRate(uint32_t ulPort, uint32_t ulBaudRate);
 extern uint32_t SerialGetBaudRate(uint32_t ulPort);
-extern void SerialSetDataSize(uint32_t ulPort, unsigned char ucDataSize);
-extern unsigned char SerialGetDataSize(uint32_t ulPort);
-extern void SerialSetParity(uint32_t ulPort, unsigned char ucParity);
-extern unsigned char SerialGetParity(uint32_t ulPort);
-extern void SerialSetStopBits(uint32_t ulPort, unsigned char ucStopBits);
-extern unsigned char SerialGetStopBits(uint32_t ulPort);
+extern void SerialSetDataSize(uint32_t ulPort, uint8_t ucDataSize);
+extern uint8_t SerialGetDataSize(uint32_t ulPort);
+extern void SerialSetParity(uint32_t ulPort, uint8_t ucParity);
+extern uint8_t SerialGetParity(uint32_t ulPort);
+extern void SerialSetStopBits(uint32_t ulPort, uint8_t ucStopBits);
+extern uint8_t SerialGetStopBits(uint32_t ulPort);
 extern void SerialSetFlowControl(uint32_t ulPort,
-                                 unsigned char ucFlowControl);
-extern unsigned char SerialGetFlowControl(uint32_t ulPort);
-extern void SerialSetFlowOut(uint32_t ulPort, unsigned char ucFlowValue);
-extern unsigned char SerialGetFlowOut(uint32_t ulPort);
+                                 uint8_t ucFlowControl);
+extern uint8_t SerialGetFlowControl(uint32_t ulPort);
+extern void SerialSetFlowOut(uint32_t ulPort, uint8_t ucFlowValue);
+extern uint8_t SerialGetFlowOut(uint32_t ulPort);
 extern void SerialPurgeData(uint32_t ulPort,
-                            unsigned char ucPurgeCommand);
+                            uint8_t ucPurgeCommand);
 extern void SerialSetDefault(uint32_t ulPort);
 extern void SerialSetFactory(uint32_t ulPort);
 extern void SerialSetCurrent(uint32_t ulPort);

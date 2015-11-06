@@ -68,7 +68,7 @@ bool g_bStartBootloader = false;
 //! browser telling it the address has changed).
 //
 //*****************************************************************************
-unsigned char g_cUpdateRequired;
+uint8_t g_cUpdateRequired;
 
 //*****************************************************************************
 //
@@ -388,7 +388,7 @@ typedef struct
     //! An identifier value associated with the string held in the pcString
     //! field.
     //
-    unsigned char ucId;
+    uint8_t ucId;
 }
 tStringMap;
 
@@ -711,7 +711,7 @@ ConfigLoadFactory(void)
 void
 ConfigLoad(void)
 {
-    unsigned char *pucBuffer;
+    uint8_t *pucBuffer;
 
     //
     // Get a pointer to the latest parameter block in flash.
@@ -745,12 +745,12 @@ ConfigLoad(void)
 void
 ConfigSave(void)
 {
-    unsigned char *pucBuffer;
+    uint8_t *pucBuffer;
 
     //
     // Save the working defaults parameter block to flash.
     //
-    FlashPBSave((unsigned char *)&g_sWorkingDefaultParameters);
+    FlashPBSave((uint8_t *)&g_sWorkingDefaultParameters);
 
     //
     // Get the pointer to the most recenly saved buffer.
@@ -786,7 +786,7 @@ ConfigSave(void)
 void
 ConfigInit(void)
 {
-    unsigned char *pucBuffer;
+    uint8_t *pucBuffer;
 
     //
     // Verify that the parameter block structure matches the FLASH parameter
@@ -877,7 +877,7 @@ ConfigWebInit(void)
 //*****************************************************************************
 static const char *
 ConfigMapIdToString(const tStringMap *psMap, uint32_t ulEntries,
-                    unsigned char ucId)
+                    uint8_t ucId)
 {
     uint32_t ulLoop;
 
@@ -1145,7 +1145,7 @@ ConfigIsValidHexDigit(const char cDigit)
     }
 }
 
-static unsigned char
+static uint8_t
 ConfigHexDigit(const char cDigit)
 {
     if((cDigit >= '0') && (cDigit <= '9'))
@@ -1786,7 +1786,7 @@ ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[], char *pcVa
     //
     // Parity
     //
-    sPortParams.ucParity = (unsigned char)ConfigGetCGIParam("parity", pcParam,
+    sPortParams.ucParity = (uint8_t)ConfigGetCGIParam("parity", pcParam,
                                                             pcValue,
                                                             iNumParams,
                                                             &bParamError);
@@ -1794,7 +1794,7 @@ ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[], char *pcVa
     //
     // Stop bits
     //
-    sPortParams.ucStopBits = (unsigned char)ConfigGetCGIParam("stop", pcParam,
+    sPortParams.ucStopBits = (uint8_t)ConfigGetCGIParam("stop", pcParam,
                                                               pcValue,
                                                               iNumParams,
                                                               &bParamError);
@@ -1802,7 +1802,7 @@ ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[], char *pcVa
     //
     // Data Size
     //
-    sPortParams.ucDataSize = (unsigned char)ConfigGetCGIParam("bc", pcParam,
+    sPortParams.ucDataSize = (uint8_t)ConfigGetCGIParam("bc", pcParam,
                                                               pcValue,
                                                               iNumParams,
                                                               &bParamError);
@@ -1810,7 +1810,7 @@ ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[], char *pcVa
     //
     // Flow control
     //
-    sPortParams.ucFlowControl = (unsigned char)ConfigGetCGIParam("flow",
+    sPortParams.ucFlowControl = (uint8_t)ConfigGetCGIParam("flow",
                                                                  pcParam,
                                                                  pcValue,
                                                                  iNumParams,
@@ -1839,7 +1839,7 @@ ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[], char *pcVa
     // Telnet timeout
     //
     sPortParams.ulTelnetTimeout =
-        (unsigned char)ConfigGetCGIParam("telnett", pcParam, pcValue,
+        (uint8_t)ConfigGetCGIParam("telnett", pcParam, pcValue,
                                          iNumParams, &bParamError);
 
     //
@@ -1936,7 +1936,7 @@ ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[], char *pcVa
     //
     // Were we asked to save this parameter set as the new default?
     //
-    lValue = (unsigned char)ConfigGetCGIParam("default", pcParam, pcValue,
+    lValue = (uint8_t)ConfigGetCGIParam("default", pcParam, pcValue,
                                               iNumParams, &bParamError);
     if(!bParamError && (lValue == 1))
     {
@@ -2546,7 +2546,7 @@ ConfigSSIHandler(int32_t iIndex, char *pcInsert, int32_t iInsertLen)
         //
         case SSI_INDEX_MACADDR:
         {
-            unsigned char pucMACAddr[6];
+            uint8_t pucMACAddr[6];
 
             lwIPLocalMACGet(pucMACAddr);
             return(usnprintf(pcInsert, iInsertLen,

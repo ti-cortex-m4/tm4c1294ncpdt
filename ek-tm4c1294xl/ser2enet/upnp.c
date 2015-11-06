@@ -281,7 +281,7 @@ static void
 UPnP_send_data(struct tcp_pcb *pcb, tUPnPState *pState)
 {
     uint32_t ulIPAddr;
-    unsigned char pucMACAddr[6];
+    uint8_t pucMACAddr[6];
     static char pcBuf[30 + MOD_NAME_LEN];
     err_t err;
 
@@ -648,7 +648,7 @@ UPnP_recv_udp(void *arg, struct udp_pcb *pcb, struct pbuf *p,
     char *pcData = p->payload;
     char *pcST;
     static char pcBuf[40];
-    unsigned char pucMACAddr[6];
+    uint8_t pucMACAddr[6];
 
     //
     // Check if this is an M-SEARCH packet.
@@ -752,7 +752,7 @@ void
 UPnPStop(void)
 {
     uint32_t ulIPAddr;
-    unsigned char pucMACAddr[6];
+    uint8_t pucMACAddr[6];
     char pcBuf[MAX_BYEBYE_LEN];
     struct pbuf *p_out;
 
@@ -867,7 +867,7 @@ UPnPHandler(uint32_t ulTimeMS)
     struct pbuf *p_out;
     static char pcBuf[400];
     uint32_t ulIPAddr;
-    unsigned char pucMACAddr[6];
+    uint8_t pucMACAddr[6];
     static uint32_t ulState = 0;
     static uint32_t ulLastTimeMS = 0;
 

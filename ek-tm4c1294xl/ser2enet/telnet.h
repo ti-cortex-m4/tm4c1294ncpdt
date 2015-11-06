@@ -120,11 +120,11 @@ extern unsigned short TelnetGetLocalPort(uint32_t ulSerialPort);
 extern unsigned short TelnetGetRemotePort(uint32_t ulSerialPort);
 #if CONFIG_RFC2217_ENABLED
 extern void TelnetNotifyModemState(uint32_t ulPort,
-                                   unsigned char ucModemState);
+                                   uint8_t ucModemState);
 #endif
 extern void TelnetNotifyLinkStatus(bool bLinkStatusUp);
 #ifdef ENABLE_WEB_DIAGNOSTICS
 extern void TelnetWriteDiagInfo(char *pcBuffer, int iLen,
-                                unsigned char ucPort);
+                                uint8_t ucPort);
 #endif
 #endif // __TELNET_H__

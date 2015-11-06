@@ -6,7 +6,7 @@
 //
 //***************************************************************************
 
-static const unsigned char data_404_html[] =
+static const uint8_t data_404_html[] =
 {
 	/* /404.html */
     0x2f, 0x34, 0x30, 0x34, 0x2e, 0x68, 0x74, 0x6d,
@@ -79,7 +79,7 @@ static const unsigned char data_404_html[] =
     0x6d, 0x6c, 0x3e, 0x0a,
 };
 
-static const unsigned char data_blstart_shtml[] =
+static const uint8_t data_blstart_shtml[] =
 {
 	/* /blstart.shtml */
     0x2f, 0x62, 0x6c, 0x73, 0x74, 0x61, 0x72, 0x74,
@@ -278,7 +278,7 @@ static const unsigned char data_blstart_shtml[] =
     0x6d, 0x6c, 0x3e, 0x0a,
 };
 
-static const unsigned char data_cfg_js[] =
+static const uint8_t data_cfg_js[] =
 {
 	/* /cfg.js */
     0x2f, 0x63, 0x66, 0x67, 0x2e, 0x6a, 0x73, 0x00,
@@ -497,7 +497,7 @@ static const unsigned char data_cfg_js[] =
     0x2f, 0x2d, 0x2d, 0x3e, 0x0a,
 };
 
-static const unsigned char data_config1_shtml[] =
+static const uint8_t data_config1_shtml[] =
 {
 	/* /config1.shtml */
     0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x31,
@@ -1114,7 +1114,7 @@ static const unsigned char data_config1_shtml[] =
     0x6c, 0x3e, 0x0a,
 };
 
-static const unsigned char data_config2_shtml[] =
+static const uint8_t data_config2_shtml[] =
 {
 	/* /config2.shtml */
     0x2f, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x32,
@@ -1741,7 +1741,7 @@ static const unsigned char data_config2_shtml[] =
     0x6d, 0x6c, 0x3e, 0x0a,
 };
 
-static const unsigned char data_favicon_ico[] =
+static const uint8_t data_favicon_ico[] =
 {
 	/* /favicon.ico */
     0x2f, 0x66, 0x61, 0x76, 0x69, 0x63, 0x6f, 0x6e,
@@ -1963,7 +1963,7 @@ static const unsigned char data_favicon_ico[] =
     0xff, 0xff, 0xf0, 0xff, 0xff, 0xff,
 };
 
-static const unsigned char data_footer_html[] =
+static const uint8_t data_footer_html[] =
 {
 	/* /footer.html */
     0x2f, 0x66, 0x6f, 0x6f, 0x74, 0x65, 0x72, 0x2e,
@@ -2044,7 +2044,7 @@ static const unsigned char data_footer_html[] =
     0x3e, 0x0a, 0x0a,
 };
 
-static const unsigned char data_header_html[] =
+static const uint8_t data_header_html[] =
 {
 	/* /header.html */
     0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
@@ -2144,7 +2144,7 @@ static const unsigned char data_header_html[] =
     0x74, 0x6d, 0x6c, 0x3e, 0x0a,
 };
 
-static const unsigned char data_images_ti_logo_gif[] =
+static const uint8_t data_images_ti_logo_gif[] =
 {
 	/* /images/ti_logo.gif */
     0x2f, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x73, 0x2f,
@@ -2363,7 +2363,7 @@ static const unsigned char data_images_ti_logo_gif[] =
     0x91, 0x00, 0x00, 0x3b,
 };
 
-static const unsigned char data_index_html[] =
+static const uint8_t data_index_html[] =
 {
 	/* /index.html */
     0x2f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x68,
@@ -2518,7 +2518,7 @@ static const unsigned char data_index_html[] =
     0x68, 0x74, 0x6d, 0x6c, 0x3e, 0x0a, 0x0a,
 };
 
-static const unsigned char data_ipchg_shtml[] =
+static const uint8_t data_ipchg_shtml[] =
 {
 	/* /ipchg.shtml */
     0x2f, 0x69, 0x70, 0x63, 0x68, 0x67, 0x2e, 0x73,
@@ -2690,7 +2690,7 @@ static const unsigned char data_ipchg_shtml[] =
     0x3e, 0x0a,
 };
 
-static const unsigned char data_misc_shtml[] =
+static const uint8_t data_misc_shtml[] =
 {
 	/* /misc.shtml */
     0x2f, 0x6d, 0x69, 0x73, 0x63, 0x2e, 0x73, 0x68,
@@ -3321,7 +3321,7 @@ static const unsigned char data_misc_shtml[] =
     0x3e, 0x0a,
 };
 
-static const unsigned char data_perror_shtml[] =
+static const uint8_t data_perror_shtml[] =
 {
 	/* /perror.shtml */
     0x2f, 0x70, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x2e,
@@ -3408,7 +3408,7 @@ static const unsigned char data_perror_shtml[] =
     0x74, 0x6d, 0x6c, 0x3e, 0x0a,
 };
 
-static const unsigned char data_s2e_shtml[] =
+static const uint8_t data_s2e_shtml[] =
 {
 	/* /s2e.shtml */
     0x2f, 0x73, 0x32, 0x65, 0x2e, 0x73, 0x68, 0x74,
@@ -3776,7 +3776,7 @@ static const unsigned char data_s2e_shtml[] =
     0x74, 0x6d, 0x6c, 0x3e, 0x0a,
 };
 
-static const unsigned char data_styles_css[] =
+static const uint8_t data_styles_css[] =
 {
 	/* /styles.css */
     0x2f, 0x73, 0x74, 0x79, 0x6c, 0x65, 0x73, 0x2e,
@@ -3893,7 +3893,7 @@ static const unsigned char data_styles_css[] =
     0x0a,
 };
 
-static const unsigned char data_upd_shtml[] =
+static const uint8_t data_upd_shtml[] =
 {
 	/* /upd.shtml */
     0x2f, 0x75, 0x70, 0x64, 0x2e, 0x73, 0x68, 0x74,

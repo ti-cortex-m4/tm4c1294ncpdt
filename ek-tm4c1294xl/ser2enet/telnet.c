@@ -276,7 +276,7 @@ typedef struct
     //
     //! Flags for various options associated with the telnet session.
     //
-    unsigned char ucFlags;
+    uint8_t ucFlags;
 
     //
     //! A counter for the TCP connection timeout.
@@ -340,7 +340,7 @@ typedef struct
     //
     //! The COM-PORT Command being processed.
     //
-    unsigned char ucRFC2217Command;
+    uint8_t ucRFC2217Command;
 
     //
     //! The COM-PORT value received (associed with the COM-PORT Command).
@@ -350,42 +350,42 @@ typedef struct
     //
     //! The index into the COM-PORT value received (for multi-byte values).
     //
-    unsigned char ucRFC2217Index;
+    uint8_t ucRFC2217Index;
 
     //
     //! The maximum number of bytes expected (0 means ignore data).
     //
-    unsigned char ucRFC2217IndexMax;
+    uint8_t ucRFC2217IndexMax;
 
     //
     //! The response buffer for RFC2217 commands.
     //
-    unsigned char pucRFC2217Response[16];
+    uint8_t pucRFC2217Response[16];
 
     //
     //! The RFC 2217 flow control value.
     //
-    unsigned char ucRFC2217FlowControl;
+    uint8_t ucRFC2217FlowControl;
 
     //
     //! The modem state mask.
     //
-    unsigned char ucRFC2217ModemMask;
+    uint8_t ucRFC2217ModemMask;
 
     //
     //! The line state mask.
     //
-    unsigned char ucRFC2217LineMask;
+    uint8_t ucRFC2217LineMask;
 
     //
     //! The reported modem state.
     //
-    unsigned char ucModemState;
+    uint8_t ucModemState;
 
     //
     //! The last reported modem state.
     //
-    unsigned char ucLastModemState;
+    uint8_t ucLastModemState;
 #endif
 
     //
@@ -396,9 +396,9 @@ typedef struct
     //
     //! Debug and diagnostic counters.
     //
-    unsigned char ucErrorCount;
-    unsigned char ucReconnectCount;
-    unsigned char ucConnectCount;
+    uint8_t ucErrorCount;
+    uint8_t ucReconnectCount;
+    uint8_t ucConnectCount;
 
     //
     //! The last error reported by lwIP while attempting to make a connection.
@@ -413,7 +413,7 @@ tTelnetSessionData;
 //! connects to the telnet server.
 //
 //*****************************************************************************
-static const unsigned char g_pucTelnetInit[] =
+static const uint8_t g_pucTelnetInit[] =
 {
     TELNET_IAC, TELNET_DO, TELNET_OPT_SUPPRESS_GA,
 #if CONFIG_RFC2217_ENABLED
@@ -460,7 +460,7 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err);
 //
 //*****************************************************************************
 #if ((defined ENABLE_WEB_DIAGNOSTICS) || (defined DOXYGEN))
-void TelnetWriteDiagInfo(char *pcBuffer, int iLen, unsigned char ucPort)
+void TelnetWriteDiagInfo(char *pcBuffer, int iLen, uint8_t ucPort)
 {
     char *pcState;
 
@@ -594,7 +594,7 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
             if(pState->ulRFC2217Value && pState->ucRFC2217Index)
             {
                 SerialSetDataSize(pState->ulSerialPort,
-                                 (unsigned char)pState->ulRFC2217Value);
+                                 (uint8_t)pState->ulRFC2217Value);
             }
             break;
         }
@@ -607,7 +607,7 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
             if(pState->ulRFC2217Value && pState->ucRFC2217Index)
             {
                 SerialSetParity(pState->ulSerialPort,
-                               (unsigned char)pState->ulRFC2217Value);
+                               (uint8_t)pState->ulRFC2217Value);
             }
             break;
         }
@@ -620,7 +620,7 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
             if(pState->ulRFC2217Value && pState->ucRFC2217Index)
             {
                 SerialSetStopBits(pState->ulSerialPort,
-                                 (unsigned char)pState->ulRFC2217Value);
+                                 (uint8_t)pState->ulRFC2217Value);
             }
             break;
         }
@@ -636,7 +636,7 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
                 case 3:
                 {
                     SerialSetFlowControl(pState->ulSerialPort,
-                            (unsigned char)pState->ulRFC2217Value);
+                            (uint8_t)pState->ulRFC2217Value);
                     break;
                 }
 
@@ -644,7 +644,7 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
                 case 12:
                 {
                     SerialSetFlowOut(pState->ulSerialPort,
-                            (unsigned char)pState->ulRFC2217Value);
+                            (uint8_t)pState->ulRFC2217Value);
                     break;
                 }
 
@@ -663,7 +663,7 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
         case TELNET_C2S_FLOWCONTROL_RESUME:
         {
             pState->ucRFC2217FlowControl =
-                (unsigned char)pState->ucRFC2217Command;
+                (uint8_t)pState->ucRFC2217Command;
             break;
         }
 
@@ -672,7 +672,7 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
         //
         case TELNET_C2S_SET_LINESTATE_MASK:
         {
-            pState->ucRFC2217LineMask = (unsigned char)pState->ulRFC2217Value;
+            pState->ucRFC2217LineMask = (uint8_t)pState->ulRFC2217Value;
             break;
         }
 
@@ -681,7 +681,7 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
         //
         case TELNET_C2S_SET_MODEMSTATE_MASK:
         {
-            pState->ucRFC2217ModemMask = (unsigned char)pState->ulRFC2217Value;
+            pState->ucRFC2217ModemMask = (uint8_t)pState->ulRFC2217Value;
             break;
         }
 
@@ -691,7 +691,7 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
         case TELNET_C2S_PURGE_DATA:
         {
             SerialPurgeData(pState->ulSerialPort,
-                            (unsigned char)pState->ulRFC2217Value);
+                            (uint8_t)pState->ulRFC2217Value);
             break;
         }
     }
@@ -854,9 +854,9 @@ TelnetProcessRFC2217Command(tTelnetSessionData *pState)
 //*****************************************************************************
 #if defined(CONFIG_RFC2217_ENABLED) || defined(DOXYGEN)
 static void
-TelnetProcessRFC2217Character(unsigned char ucChar, tTelnetSessionData *pState)
+TelnetProcessRFC2217Character(uint8_t ucChar, tTelnetSessionData *pState)
 {
-    unsigned char *pucValue;
+    uint8_t *pucValue;
 
     //
     // Determine the current state of the telnet COM-PORT option parser.
@@ -974,7 +974,7 @@ TelnetProcessRFC2217Character(unsigned char ucChar, tTelnetSessionData *pState)
             //
             // Setup the pointer to the COM-PORT value.
             //
-            pucValue = (unsigned char *)&pState->ulRFC2217Value;
+            pucValue = (uint8_t *)&pState->ulRFC2217Value;
 
             //
             // Save the data, if we still need it.
@@ -1046,7 +1046,7 @@ TelnetProcessRFC2217Character(unsigned char ucChar, tTelnetSessionData *pState)
             //
             // Setup the pointer to the COM-PORT value.
             //
-            pucValue = (unsigned char *)&pState->ulRFC2217Value;
+            pucValue = (uint8_t *)&pState->ulRFC2217Value;
 
             //
             // Save the data, if we still need it.
@@ -1093,9 +1093,9 @@ TelnetProcessRFC2217Character(unsigned char ucChar, tTelnetSessionData *pState)
 //
 //*****************************************************************************
 static void
-TelnetProcessWill(unsigned char ucOption, tTelnetSessionData *pState)
+TelnetProcessWill(uint8_t ucOption, tTelnetSessionData *pState)
 {
-    unsigned char pucBuf[3];
+    uint8_t pucBuf[3];
 
     //
     // Check for supported options.
@@ -1195,9 +1195,9 @@ TelnetProcessWill(unsigned char ucOption, tTelnetSessionData *pState)
 //
 //*****************************************************************************
 static void
-TelnetProcessWont(unsigned char ucOption, tTelnetSessionData *pState)
+TelnetProcessWont(uint8_t ucOption, tTelnetSessionData *pState)
 {
-    unsigned char pucBuf[3];
+    uint8_t pucBuf[3];
 
     //
     // Check for supported options.
@@ -1290,9 +1290,9 @@ TelnetProcessWont(unsigned char ucOption, tTelnetSessionData *pState)
 //
 //*****************************************************************************
 static void
-TelnetProcessDo(unsigned char ucOption, tTelnetSessionData *pState)
+TelnetProcessDo(uint8_t ucOption, tTelnetSessionData *pState)
 {
-    unsigned char pucBuf[3];
+    uint8_t pucBuf[3];
 
     //
     // Check for supported options.
@@ -1392,9 +1392,9 @@ TelnetProcessDo(unsigned char ucOption, tTelnetSessionData *pState)
 //
 //*****************************************************************************
 static void
-TelnetProcessDont(unsigned char ucOption, tTelnetSessionData *pState)
+TelnetProcessDont(uint8_t ucOption, tTelnetSessionData *pState)
 {
-    unsigned char pucBuf[3];
+    uint8_t pucBuf[3];
 
     //
     // Check for supported options.
@@ -1484,9 +1484,9 @@ TelnetProcessDont(unsigned char ucOption, tTelnetSessionData *pState)
 //
 //*****************************************************************************
 static void
-TelnetProcessCharacter(unsigned char ucChar, tTelnetSessionData *pState)
+TelnetProcessCharacter(uint8_t ucChar, tTelnetSessionData *pState)
 {
-    unsigned char pucBuf[9];
+    uint8_t pucBuf[9];
 
     if((g_sParameters.sPort[pState->ulSerialPort].ucFlags &
                 PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_RAW)
@@ -2905,10 +2905,10 @@ void
 TelnetHandler(void)
 {
     long lCount, lIndex;
-    static unsigned char pucTemp[PBUF_POOL_BUFSIZE];
+    static uint8_t pucTemp[PBUF_POOL_BUFSIZE];
     int iLoop;
     SYS_ARCH_DECL_PROTECT(lev);
-    unsigned char *pucData;
+    uint8_t *pucData;
     tTelnetSessionData *pState;
 
     //
@@ -3149,7 +3149,7 @@ TelnetHandler(void)
 //*****************************************************************************
 #if defined(CONFIG_RFC2217_ENABLED) || defined(DOXYGEN)
 void
-TelnetNotifyModemState(uint32_t ulPort, unsigned char ucModemState)
+TelnetNotifyModemState(uint32_t ulPort, uint8_t ucModemState)
 {
     tTelnetSessionData *pState;
 
