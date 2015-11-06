@@ -503,7 +503,7 @@ SerialUARTEnable(unsigned long ulPort)
 //! buffer.
 //
 //*****************************************************************************
-tBoolean
+bool
 SerialSendFull(unsigned long ulPort)
 {
     //
