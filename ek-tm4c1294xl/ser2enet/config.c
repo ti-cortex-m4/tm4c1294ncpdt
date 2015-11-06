@@ -22,6 +22,8 @@
 //
 //*****************************************************************************
 
+#include <stdbool.h>
+#include <stdint.h>
 #include <string.h>
 #include "inc/hw_types.h"
 #include "driverlib/debug.h"
