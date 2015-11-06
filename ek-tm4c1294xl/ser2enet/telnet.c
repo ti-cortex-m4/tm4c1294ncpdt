@@ -261,12 +261,12 @@ typedef struct
     //! The listen port for the telnet server or the local port for the telnet
     //! client.
     //
-    unsigned short usTelnetLocalPort;
+    uint16_t usTelnetLocalPort;
 
     //
     //! The remote port that the telnet client connects to.
     //
-    unsigned short usTelnetRemotePort;
+    uint16_t usTelnetRemotePort;
 
     //
     //! The remote address that the telnet client connects to.
@@ -2614,8 +2614,8 @@ TelnetClose(uint32_t ulSerialPort)
 //
 //*****************************************************************************
 void
-TelnetOpen(uint32_t ulIPAddr, unsigned short usTelnetRemotePort,
-           unsigned short usTelnetLocalPort, uint32_t ulSerialPort)
+TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,
+           uint16_t usTelnetLocalPort, uint32_t ulSerialPort)
 {
     void *pcb;
     struct ip_addr sIPAddr;
@@ -2719,7 +2719,7 @@ TelnetOpen(uint32_t ulIPAddr, unsigned short usTelnetRemotePort,
 //
 //*****************************************************************************
 void
-TelnetListen(unsigned short usTelnetPort, uint32_t ulSerialPort)
+TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
 {
     void *pcb;
     tTelnetSessionData *pState;
@@ -2797,7 +2797,7 @@ TelnetListen(unsigned short usTelnetPort, uint32_t ulSerialPort)
 //! \return None.
 //
 //*****************************************************************************
-unsigned short
+uint16_t
 TelnetGetLocalPort(uint32_t ulSerialPort)
 {
     //
@@ -2822,7 +2822,7 @@ TelnetGetLocalPort(uint32_t ulSerialPort)
 //! \return None.
 //
 //*****************************************************************************
-unsigned short
+uint16_t
 TelnetGetRemotePort(uint32_t ulSerialPort)
 {
     //

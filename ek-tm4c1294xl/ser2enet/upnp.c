@@ -89,7 +89,7 @@ static uint32_t g_ulResponseAddr = 0;
 //! The UPnP response address.
 //
 //*****************************************************************************
-static unsigned short g_usResponsePort = 0;
+static uint16_t g_usResponsePort = 0;
 
 //*****************************************************************************
 //
