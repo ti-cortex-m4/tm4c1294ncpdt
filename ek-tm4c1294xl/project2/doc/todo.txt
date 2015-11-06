@@ -2,6 +2,9 @@ TCP keepalive
 DS Manager: locator
 проверять возвращаемые значения, особенно MEM
 udp_remove & pbuf_free
+udp HELLO send IP
+tcp port in use
 serial test overflow
 serial4 символьные константы ((dwStatus & 0x00000020) != 0) || (dwStatus == 0);
+TCP_WRITE_FLAG_COPY
  
