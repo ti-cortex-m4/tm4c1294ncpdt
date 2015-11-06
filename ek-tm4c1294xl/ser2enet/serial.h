@@ -60,7 +60,7 @@
 // Prototypes for the Serial interface functions.
 //
 //*****************************************************************************
-extern tBoolean SerialSendFull(unsigned long ulPort);
+extern bool SerialSendFull(unsigned long ulPort);
 extern void SerialSend(unsigned long ulPort, unsigned char ucChar);
 extern long SerialReceive(unsigned long ulPort);
 extern unsigned long SerialReceiveAvailable(unsigned long ulPort);

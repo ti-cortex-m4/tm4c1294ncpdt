@@ -507,7 +507,7 @@ tConfigParameters;
 // A flag to indicate that a firmware update has been requested.
 //
 //*****************************************************************************
-extern tBoolean g_bStartBootloader;
+extern bool g_bStartBootloader;
 
 //*****************************************************************************
 //
@@ -536,6 +536,6 @@ extern void ConfigLoad(void);
 extern void ConfigSave(void);
 extern void ConfigWebInit(void);
 extern void ConfigUpdateIPAddress(void);
-extern void ConfigUpdateAllParameters(tBoolean bUpdateIP);
+extern void ConfigUpdateAllParameters(bool bUpdateIP);
 
 #endif // __CONFIG_H__

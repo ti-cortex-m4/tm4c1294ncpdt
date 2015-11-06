@@ -104,14 +104,14 @@ unsigned long g_ulSystemTimeMS = 0;
 //! A flag indicating that a firmware update request has been received.
 //
 //*****************************************************************************
-volatile tBoolean g_bFirmwareUpdate = false;
+volatile bool g_bFirmwareUpdate = false;
 
 //*****************************************************************************
 //
 //! A flag indicating the current link status.
 //
 //*****************************************************************************
-volatile tBoolean g_bLinkStatusUp = false;
+volatile bool g_bLinkStatusUp = false;
 
 //*****************************************************************************
 //
@@ -153,7 +153,7 @@ SoftwareUpdateRequestCallback(void)
 void
 lwIPHostTimerHandler(void)
 {
-    tBoolean bLinkStatusUp;
+    bool bLinkStatusUp;
 
     //
     // Get the current link status and see if it has changed.
