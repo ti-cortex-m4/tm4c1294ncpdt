@@ -207,7 +207,7 @@ static const char *g_pcConfigSSITags[] =
 //! Prototype for the function which handles requests for config.cgi.
 //
 //*****************************************************************************
-static char *ConfigCGIHandler(int iIndex, int iNumParams, char *pcParam[],
+static char *ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[],
                               char *pcValue[]);
 
 //*****************************************************************************
@@ -215,7 +215,7 @@ static char *ConfigCGIHandler(int iIndex, int iNumParams, char *pcParam[],
 //! Prototype for the function which handles requests for misc.cgi.
 //
 //*****************************************************************************
-static char *ConfigMiscCGIHandler(int iIndex, int iNumParams, char *pcParam[],
+static char *ConfigMiscCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[],
                                   char *pcValue[]);
 
 //*****************************************************************************
@@ -223,7 +223,7 @@ static char *ConfigMiscCGIHandler(int iIndex, int iNumParams, char *pcParam[],
 //! Prototype for the function which handles requests for ip.cgi.
 //
 //*****************************************************************************
-static char *ConfigIPCGIHandler(int iIndex, int iNumParams, char *pcParam[],
+static char *ConfigIPCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[],
                                 char *pcValue[]);
 
 //*****************************************************************************
@@ -231,7 +231,7 @@ static char *ConfigIPCGIHandler(int iIndex, int iNumParams, char *pcParam[],
 //! Prototype for the function which handles requests for update.cgi.
 //
 //*****************************************************************************
-static char *ConfigUpdateCGIHandler(int iIndex, int iNumParams,
+static char *ConfigUpdateCGIHandler(int32_t iIndex, int32_t iNumParams,
                                     char *pcParam[], char *pcValue[]);
 
 //*****************************************************************************
@@ -239,7 +239,7 @@ static char *ConfigUpdateCGIHandler(int iIndex, int iNumParams,
 //! Prototype for the function which handles requests for defaults.cgi.
 //
 //*****************************************************************************
-static char *ConfigDefaultsCGIHandler(int iIndex, int iNumParams,
+static char *ConfigDefaultsCGIHandler(int32_t iIndex, int32_t iNumParams,
                                       char *pcParam[], char *pcValue[]);
 
 //*****************************************************************************
@@ -271,11 +271,11 @@ static int ConfigSSIHandler(int iIndex, char *pcInsert, int iInsertLen);
 //*****************************************************************************
 static const tCGI g_psConfigCGIURIs[] =
 {
-    { "/config.cgi", ConfigCGIHandler },            // CGI_INDEX_CONFIG
-    { "/misc.cgi", ConfigMiscCGIHandler },          // CGI_INDEX_MISC
-    { "/update.cgi", ConfigUpdateCGIHandler },      // CGI_INDEX_UPDATE
-    { "/defaults.cgi", ConfigDefaultsCGIHandler },  // CGI_INDEX_DEFAULTS
-    { "/ip.cgi", ConfigIPCGIHandler },              // CGI_INDEX_IP
+    { "/config.cgi", (tCGIHandler)ConfigCGIHandler },            // CGI_INDEX_CONFIG
+    { "/misc.cgi", (tCGIHandler)ConfigMiscCGIHandler },          // CGI_INDEX_MISC
+    { "/update.cgi", (tCGIHandler)ConfigUpdateCGIHandler },      // CGI_INDEX_UPDATE
+    { "/defaults.cgi", (tCGIHandler)ConfigDefaultsCGIHandler },  // CGI_INDEX_DEFAULTS
+    { "/ip.cgi", (tCGIHandler)ConfigIPCGIHandler },              // CGI_INDEX_IP
 };
 
 //*****************************************************************************
@@ -845,7 +845,7 @@ ConfigWebInit(void)
     //
     // Pass our tag information to the HTTP server.
     //
-    http_set_ssi_handler(ConfigSSIHandler, g_pcConfigSSITags,
+    http_set_ssi_handler((tSSIHandler)ConfigSSIHandler, g_pcConfigSSITags,
                          NUM_CONFIG_SSI_TAGS);
 
     //
@@ -1740,7 +1740,7 @@ ConfigGetCGIIPAddr(const char *pcName, char *pcParam[], char *pcValue[],
 //
 //*****************************************************************************
 static char *
-ConfigCGIHandler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
+ConfigCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[], char *pcValue[])
 {
     long lPort;
     long lValue;
@@ -2007,7 +2007,7 @@ ConfigCGIHandler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
 //
 //*****************************************************************************
 static char *
-ConfigIPCGIHandler(int iIndex, int iNumParams, char *pcParam[],
+ConfigIPCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[],
                    char *pcValue[])
 {
     bool bChanged;
@@ -2192,7 +2192,7 @@ ConfigIPCGIHandler(int iIndex, int iNumParams, char *pcParam[],
 //
 //*****************************************************************************
 static char *
-ConfigMiscCGIHandler(int iIndex, int iNumParams, char *pcParam[],
+ConfigMiscCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[],
                      char *pcValue[])
 {
     int iParam;
@@ -2375,7 +2375,7 @@ ConfigWillIPAddrChange(tConfigParameters const *psNow,
 //
 //*****************************************************************************
 static char *
-ConfigDefaultsCGIHandler(int iIndex, int iNumParams, char *pcParam[],
+ConfigDefaultsCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[],
                          char *pcValue[])
 {
     bool bAddrChange;
@@ -2467,7 +2467,7 @@ ConfigDefaultsCGIHandler(int iIndex, int iNumParams, char *pcParam[],
 //
 //*****************************************************************************
 static char *
-ConfigUpdateCGIHandler(int iIndex, int iNumParams, char *pcParam[],
+ConfigUpdateCGIHandler(int32_t iIndex, int32_t iNumParams, char *pcParam[],
                        char *pcValue[])
 {
     //
@@ -2514,8 +2514,8 @@ ConfigUpdateCGIHandler(int iIndex, int iNumParams, char *pcParam[],
 //! including any terminating NULL.
 //
 //*****************************************************************************
-static int
-ConfigSSIHandler(int iIndex, char *pcInsert, int iInsertLen)
+static int32_t
+ConfigSSIHandler(int32_t iIndex, char *pcInsert, int32_t iInsertLen)
 {
     unsigned long ulPort;
     int iCount;
