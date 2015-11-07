@@ -346,6 +346,20 @@ fs_read(struct fs_file *file, char *buffer, int count)
 
 //*****************************************************************************
 //
+// Determine the number of bytes left to read from the file.
+//
+//*****************************************************************************
+int
+fs_bytes_left(struct fs_file *psFile)
+{
+    //
+    // Return the number of bytes left to be read from this file.
+    //
+    return(psFile->len - psFile->index);
+}
+
+//*****************************************************************************
+//
 // Close the Doxygen group.
 //! @}
 //
