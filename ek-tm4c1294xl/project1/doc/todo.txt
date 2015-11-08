@@ -80,3 +80,5 @@ http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0349a/Babjdbff.ht
 InBuff -> InBuffChar
 
 msg_limit
+
+изменение скорости порта - таймаут на след. порт = 0
