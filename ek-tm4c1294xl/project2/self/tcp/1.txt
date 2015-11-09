@@ -1,17 +1,58 @@
-/*------------------------------------------------------------------------------
-TCP_HANDLER.C
+/*
+ * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+ * All rights reserved. 
+ * 
+ * Redistribution and use in source and binary forms, with or without modification, 
+ * are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ * 3. The name of the author may not be used to endorse or promote products
+ *    derived from this software without specific prior written permission. 
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED 
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+ * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+ * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+ * OF SUCH DAMAGE.
+ *
+ * This file is part of and a contribution to the lwIP TCP/IP stack.
+ *
+ * Credits go to Adam Dunkels (and the current maintainers) of this software.
+ *
+ * Christiaan Simons rewrote this file to get a more stable echo example.
+ */
+
+/**
+ * @file
+ * TCP echo server example using raw API.
+ *
+ * Echos all bytes sent by connecting client,
+ * and passively closes when client is done.
+ *
+ */
 
 
-------------------------------------------------------------------------------*/
-
-#include "../main.h"
 #include "lwip/opt.h"
 #include "lwip/debug.h"
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
-#include "../uart/uart.h"
+#include "lwip/tcp_impl.h"
+#include "self/main.h"
+#include "self/timer1.h"
+#include "self/uart/log.h"
+#include "self/uart/isr_uart4.h"
 
 
+#if LWIP_TCP
 
 static struct tcp_pcb *echo_pcb;
 
@@ -26,7 +67,7 @@ enum echo_states
 struct echo_state
 {
   u8_t state;
-//  u8_t retries;
+  u8_t retries;
   struct tcp_pcb *pcb;
   /* pbuf (chain) to recycle */
   struct pbuf *p;
@@ -40,6 +81,7 @@ err_t echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len);
 void echo_send(struct tcp_pcb *tpcb, struct echo_state *es);
 void echo_close(struct tcp_pcb *tpcb, struct echo_state *es);
 
+
 void
 InitTCP_Handler(void)
 {
@@ -48,6 +90,7 @@ InitTCP_Handler(void)
   {
     err_t err;
 
+    tcp_nagle_disable(echo_pcb);
     err = tcp_bind(echo_pcb, IP_ADDR_ANY, 1001);
     if (err == ERR_OK)
     {
@@ -85,8 +128,10 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
   {
     es->state = ES_ACCEPTED;
     es->pcb = newpcb;
+    es->retries = 0;
     es->p = NULL;
     /* pass newly allocated es to our callbacks */
+    tcp_nagle_disable(newpcb);
     tcp_arg(newpcb, es);
     tcp_recv(newpcb, echo_recv);
     tcp_err(newpcb, echo_error);
@@ -97,6 +142,7 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
   {
     ret_err = ERR_MEM;
   }
+
   return ret_err;  
 }
 
@@ -181,6 +227,7 @@ echo_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
     pbuf_free(p);
     ret_err = ERR_OK;
   }
+
   return ret_err;
 }
 
@@ -197,6 +244,7 @@ echo_error(void *arg, err_t err)
     mem_free(es);
   }
 }
+
 
 err_t
 echo_poll(void *arg, struct tcp_pcb *tpcb)
@@ -229,6 +277,7 @@ echo_poll(void *arg, struct tcp_pcb *tpcb)
     tcp_abort(tpcb);
     ret_err = ERR_ABRT;
   }
+
   return ret_err;
 }
 
@@ -240,6 +289,7 @@ echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
   LWIP_UNUSED_ARG(len);
 
   es = (struct echo_state *)arg;
+  es->retries = 0;
   
   if(es->p != NULL)
   {
@@ -255,6 +305,7 @@ echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
       echo_close(tpcb, es);
     }
   }
+
   return ERR_OK;
 }
 
@@ -272,7 +323,7 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
   ptr = es->p;
 
   /* enqueue data for transmission */
-//  LOG(("in=%u\n", ptr->len));
+  LOG(("in=%u\n", ptr->len));
 
   UART_Out(tpcb, ptr->payload, ptr->len);
   //wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
@@ -300,11 +351,62 @@ echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
       }
       while(freed == 0);
      /* we can read more data now */
-//      LOG(("~1 %X\n", tpcb->flags));
+      LOG(("~1 %X\n", tpcb->flags));
       (tpcb)->flags &= ~TF_ACK_DELAY;
       (tpcb)->flags |= TF_ACK_NOW;
-//      LOG(("~2 %X\n", tpcb->flags));
+      LOG(("~2 %X\n", tpcb->flags));
      tcp_recved(tpcb, plen);
+   }
+  }
+}
+
+void
+echo_send3(struct tcp_pcb *tpcb, struct echo_state *es)
+{
+  struct pbuf *ptr;
+  err_t wr_err = ERR_OK;
+ 
+  while ((wr_err == ERR_OK) &&
+         (es->p != NULL) && 
+         (es->p->len <= tcp_sndbuf(tpcb)))
+  {
+  LOG(("<<< while \n"));
+  ptr = es->p;
+
+  /* enqueue data for transmission */
+
+  wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
+  if (wr_err == ERR_OK)
+  {
+     u16_t plen;
+      u8_t freed;
+
+     plen = ptr->len;
+     /* continue with next pbuf in chain (if any) */
+     es->p = ptr->next;
+     if(es->p != NULL)
+     {
+       /* new reference! */
+       pbuf_ref(es->p);
+     }
+     /* chop first pbuf from chain */
+      do
+      {
+        /* try hard to free pbuf */
+        freed = pbuf_free(ptr);
+      }
+      while(freed == 0);
+     /* we can read more data now */
+     tcp_recved(tpcb, plen);
+   }
+   else if(wr_err == ERR_MEM)
+   {
+      /* we are low on memory, try later / harder, defer to poll */
+     es->p = ptr;
+   }
+   else
+   {
+     /* other problem ?? */
    }
   }
 }
@@ -324,3 +426,5 @@ echo_close(struct tcp_pcb *tpcb, struct echo_state *es)
   }  
   tcp_close(tpcb);
 }
+
+#endif /* LWIP_TCP */
