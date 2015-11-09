@@ -61,7 +61,7 @@ void Timer1IntHandler(void)
 {
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
-  IncLogTimer();
+  LogTimer_1000Hz();
 
   if (++dwTimeout > 3)
   {
