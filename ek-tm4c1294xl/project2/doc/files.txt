@@ -11,13 +11,13 @@ echo.c
 +  enet_lwip.c
 +  enet_lwip_ccs.cmd
 lwipopts.h
-macros.ini_initial
+-  macros.ini_initial
 -  self
 +  serial1.c
 +  serial4.h
 +  startup_ccs.c
-targetConfigs
-target_config.ccxml
+-  targetConfigs
+-  target_config.ccxml
 +  timer1.c
 +  timer1.h
 +  uarts.c
