@@ -19,7 +19,7 @@ SERIAL1!C
 #include "driverlib/interrupt.h"
 #include "driverlib/uart.h"
 #include "uarts.h"
-#include "serial4.h"
+#include "uart4.h"
 #include "serial.h"
 
 

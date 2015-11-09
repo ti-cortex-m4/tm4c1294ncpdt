@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-SERIAL4.C
+UART4.C
 
 
 ------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@ SERIAL4.C
 #include "inc/hw_uart.h"
 #include "inc/hw_types.h"
 #include "driverlib/uart.h"
-#include "serial4.h"
+#include "uart4.h"
 
 
 
