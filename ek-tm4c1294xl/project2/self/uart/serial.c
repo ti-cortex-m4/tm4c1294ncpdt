@@ -60,7 +60,7 @@ void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 }
 
 void uart_poll(struct tcp_pcb *tpcb);
-void uart_timer(void)
+void Serial_1000Hz(void)
 {
 	  if (++wInTimer > 2)
 	  {
