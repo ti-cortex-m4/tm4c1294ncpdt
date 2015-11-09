@@ -30,8 +30,8 @@ utils !!!
 +  settings.c
 +  settings.h
 
-locator.c
-locator.h
++  locator.c
++  locator.h
 -  mac.c
 -  mac.h
 -  reset.c
