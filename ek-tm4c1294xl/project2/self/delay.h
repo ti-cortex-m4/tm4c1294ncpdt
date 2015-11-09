@@ -1,13 +1,10 @@
 /*------------------------------------------------------------------------------
-DELAY!H
+DELAY.H
 
 
 ------------------------------------------------------------------------------*/
 
 void    Nop(void);
-
-void    DelayMicro(uint  wMicroSec);
-void    DelayMilly(uint  wMillySec);
-void    DelaySeconds(uint  wSecond);
-
-void    Delay(uint  wMillySec);
+void    DelayMicroSecond(uint wMicroSecond);
+void    DelayMillySecond(uint wMillySecond);
+void    DelaySecond(uint wSecond);

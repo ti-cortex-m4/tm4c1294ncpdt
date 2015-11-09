@@ -13,6 +13,6 @@ RESET.C
 
 void Reset(void)
 {
-  Delay(100);
+  DelayMillySecond(100);
   SysCtlReset();
 }
