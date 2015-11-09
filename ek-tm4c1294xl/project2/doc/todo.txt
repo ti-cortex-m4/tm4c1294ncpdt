@@ -15,3 +15,5 @@ rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib
 
 InitSettings check result
 SaveSettings check result 
+
+tcp_nagle_disable

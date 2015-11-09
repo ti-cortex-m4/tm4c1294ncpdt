@@ -5,10 +5,10 @@
 .settings
 -  Debug
 doc
-drivers
++  drivers
 echo.c
 echo.h
-enet_lwip.c
++  enet_lwip.c
 enet_lwip_ccs.cmd
 lwipopts.h
 macros.ini_initial
@@ -22,7 +22,7 @@ target_config.ccxml
 +  timer1.h
 +  uarts.c
 +  uarts.h
-utils !!!
++  utils !!!
 
 +  delay.c
 +  delay.h
