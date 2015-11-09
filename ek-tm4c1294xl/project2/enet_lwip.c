@@ -33,7 +33,7 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/systick.h"
 #include "utils/locator.h"
-#include "utils/lwiplib.h"
+#include "utils/lwiplib_patched.h"
 #include "utils/ustdlib.h"
 #include "utils/uartstdio.h"
 #include "drivers/pinout.h"
