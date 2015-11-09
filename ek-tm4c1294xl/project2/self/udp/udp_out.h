@@ -8,7 +8,7 @@ UDP_OUT.H
 
 
 
-void Init_UDPOutput(void);
+void InitUDP_Out(void);
 bool IsActive_UDPOutput(void);
 
 err_t UDPOutput_MAC(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port);

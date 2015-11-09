@@ -19,7 +19,7 @@ static uint             wCode;
 
 
 
-void Init_UDPOutput(void)
+void InitUDP_Out(void)
 {
   fActive = true;
 }
