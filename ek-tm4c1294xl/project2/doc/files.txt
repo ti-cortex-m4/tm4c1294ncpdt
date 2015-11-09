@@ -38,3 +38,5 @@ reset.c
 reset.h
 udp_output.c
 udp_output.h
+log.c
+log.h
