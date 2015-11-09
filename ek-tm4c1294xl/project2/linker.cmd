@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * enet_lwip_ccs.cmd - CCS linker configuration file for enet_lwip.
+ * linker.cmd - CCS linker configuration file.
  *
  * Copyright (c) 2013-2015 Texas Instruments Incorporated.  All rights reserved.
  * Software License Agreement

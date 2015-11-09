@@ -8,11 +8,6 @@ UDP_IN.C
 #include "../settings.h"
 #include "../delay.h"
 #include "driverlib/sysctl.h"
-//#include "utils/locator.h"
-//#include "utils/lwiplib.h"
-//#include "driverlib/sysctl.h"
-//#include "lwip/udp.h"
-//#include "../delay.h"
 #include "udp_out.h"
 #include "udp_in.h"
 

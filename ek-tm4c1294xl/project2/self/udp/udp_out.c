@@ -6,8 +6,6 @@ UDP_OUTPUT.C
 
 #include "../main.h"
 #include "../settings.h"
-//#include "lwip/udp.h"
-//#include "lwip/ip_addr.h"
 #include "udp_out.h"
 
 
