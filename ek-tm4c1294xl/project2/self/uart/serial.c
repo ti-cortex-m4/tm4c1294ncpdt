@@ -18,7 +18,7 @@ SERIAL1!C
 #include "inc/hw_ints.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/uart.h"
-#include "uarts.h"
+#include "hw_uarts.h"
 #include "uart4.h"
 #include "serial.h"
 
