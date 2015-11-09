@@ -227,7 +227,7 @@ SysTickIntHandler(void)
     lwIPTimer(SYSTICKMS);
 }
 
-void init_uart(uint32_t ui32SysClockFreq);
+void InitUART(uint32_t ui32SysClockFreq);
 
 //*****************************************************************************
 //
@@ -342,7 +342,7 @@ main(void)
 //    LocatorMACAddrSet(pui8MACArray);
 //    LocatorAppTitleSet("EK-TM4C1294XL enet_io");
 
-    init_uart(g_ui32SysClock);
+    InitUART(g_ui32SysClock);
     InitTimer1(g_ui32SysClock);
     IntMasterEnable();
 
