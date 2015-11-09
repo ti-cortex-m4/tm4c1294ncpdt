@@ -13,3 +13,5 @@ extern volatile uchar          mpbIn[wINBUFF_SIZE], mpbOut[wOUTBUFF_SIZE];
 
 extern volatile uint           iwOutStart, iwOutStop, cwOut;
 extern volatile uint           iwInStart, iwInStop, cwIn;
+
+extern volatile ulong dwTimeout;

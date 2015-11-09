@@ -21,10 +21,6 @@ SERIAL1!C
 #include "serial4.h"
 
 
-extern volatile u32_t dwTimeout;
-//void uart_in(uchar b);
-
-void timer(void);
 
 
 
@@ -34,40 +30,7 @@ volatile uint           iwOutStart, iwOutStop, cwOut;
 volatile uint           iwInStart, iwInStop, cwIn;
 
 
-
-struct tcp_pcb *tpcb2;
-
-
-
-void init_uart(ulong ui32SysClockFreq)
-{
-  iwOutStart = 0;
-  iwOutStop = 0;
-  cwOut = 0;
-
-  iwInStart = 0;
-  iwInStop = 0;
-  cwIn = 0;
-
-  InitUART4(ui32SysClockFreq);
-}
-
-
-
-void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
-{
-  tpcb2 = tpcb;
-  uchar* ptr = arg;
-
-  while (len-- > 0)
-  {
-    mpbOut[iwOutStop] = (*ptr++);
-    iwOutStop = (iwOutStop+1) % wOUTBUFF_SIZE;
-    cwOut++;
-  }
-
-  IntPendSet(INT_UART4);
-}
+volatile ulong dwTimeout;
 
 
 
