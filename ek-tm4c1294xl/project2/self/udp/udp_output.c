@@ -8,7 +8,6 @@ UDP_OUTPUT.C
 #include "lwip/udp.h"
 #include "lwip/ip_addr.h"
 #include "../settings.h"
-#include "mac.h"
 #include "udp_output.h"
 
 

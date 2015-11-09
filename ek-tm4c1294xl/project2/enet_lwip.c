@@ -41,7 +41,6 @@
 #include "timer1.h"
 #include "self/settings.h"
 #include "self/tcp/echo.h"
-#include "self/udp/mac.h"
 #include "self/udp/udp_output.h"
 
 //*****************************************************************************

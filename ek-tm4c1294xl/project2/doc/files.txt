@@ -27,13 +27,13 @@ utils !!!
 delay.c
 delay.h
 +  main.h
-settings.c
-settings.h
++  settings.c
++  settings.h
 
 locator.c
 locator.h
-mac.c
-mac.h
+-  mac.c
+-  mac.h
 reset.c
 reset.h
 udp_output.c
