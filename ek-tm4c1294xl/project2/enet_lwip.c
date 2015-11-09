@@ -38,7 +38,7 @@
 #include "utils/uartstdio.h"
 #include "drivers/pinout.h"
 #include "lwip/inet.h"
-#include "timer1.h"
+#include "self/timer1.h"
 #include "self/settings.h"
 #include "self/tcp/echo.h"
 #include "self/udp/udp_output.h"
