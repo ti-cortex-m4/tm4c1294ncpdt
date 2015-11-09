@@ -30,6 +30,6 @@
 #ifndef __ECHO_H__
 #define __ECHO_H__
 
-void echo_init(void);
+void InitTCP_Handler(void);
 
 #endif /* __MINIMAL_ECHO_H */

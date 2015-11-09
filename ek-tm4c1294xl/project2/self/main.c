@@ -5,26 +5,18 @@ MAIN.C
 ------------------------------------------------------------------------------*/
 
 #include "main.h"
-//#include <self/udp/udp_out.h>
 #include "settings.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
-//#include "driverlib/flash.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/gpio.h"
-//#include "driverlib/rom_map.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/flash.h"
 #include "driverlib/systick.h"
-//#include "utils/locator.h"
 #include "utils/lwiplib_patched.h"
-//#include "utils/ustdlib.h"
-//#include "utils/uartstdio.h"
 #include "drivers/pinout.h"
-//#include "lwip/inet.h"
 #include "timer1.h"
-//#include "self/settings.h"
-//#include "self/tcp/echo.h"
+#include "uart/uart.h"
 #include "udp/udp_handler.h"
 #include "tcp/echo.h"
 
@@ -47,41 +39,28 @@ MAIN.C
 #define ETHERNET_INT_PRIORITY   0xC0
 
 
-//*****************************************************************************
+
 //
 // Required by lwIP library to support any host-related timer functions.
 //
-//*****************************************************************************
 void lwIPHostTimerHandler(void)
 {
 }
 
-//*****************************************************************************
+
+
 //
 // The interrupt handler for the SysTick interrupt.
 //
-//*****************************************************************************
 void SysTickIntHandler(void)
 {
-    //
-    // Call the lwIP timer handler.
-    //
-    lwIPTimer(SYSTICKMS);
+  lwIPTimer(SYSTICKMS);
 }
 
-void InitUART(uint32_t ui32SysClockFreq);
 
-//*****************************************************************************
-//
-// This example demonstrates the use of the Ethernet Controller.
-//
-//*****************************************************************************
-int
-main(void)
+
+int     main(void)
 {
-    uint32_t ui32User0, ui32User1;
-    uint8_t pui8MACArray[8];
-
     //
     // Make sure the main oscillator is enabled because this is required by
     // the PHY.  The system must have a 25MHz crystal attached to the OSC
@@ -93,10 +72,7 @@ main(void)
     //
     // Run from the PLL at 120 MHz.
     //
-    ulong  dwSysClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
-                                             SYSCTL_OSC_MAIN |
-                                             SYSCTL_USE_PLL |
-                                             SYSCTL_CFG_VCO_480), 120000000);
+    ulong dwSysClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
     //
     // Configure the device pins.
@@ -125,58 +101,44 @@ main(void)
     // incoming packets.  The MAC address will be stored in the non-volatile
     // USER0 and USER1 registers.
     //
-    FlashUserGet(&ui32User0, &ui32User1);
-    if((ui32User0 == 0xffffffff) || (ui32User1 == 0xffffffff))
+    ulong dwUser0, dwUser1;
+
+    FlashUserGet(&dwUser0, &dwUser1);
+    if((dwUser0 == 0xffffffff) || (dwUser1 == 0xffffffff))
     {
         //
         // We should never get here.  This is an error if the MAC address has
         // not been programmed into the device.  Exit the program.
         // Let the user know there is no MAC address
         //
-        UARTprintf("No MAC programmed!\n");
         while(1)
         {
         }
     }
 
     //
-    // Tell the user what we are doing just now.
-    //
-    UARTprintf("Waiting for IP.\n");
-
-    //
     // Convert the 24/24 split MAC address from NV ram into a 32/16 split MAC
     // address needed to program the hardware registers, then program the MAC
     // address into the Ethernet Controller registers.
     //
-    pui8MACArray[0] = ((ui32User0 >>  0) & 0xff);
-    pui8MACArray[1] = ((ui32User0 >>  8) & 0xff);
-    pui8MACArray[2] = ((ui32User0 >> 16) & 0xff);
-    pui8MACArray[3] = ((ui32User1 >>  0) & 0xff);
-    pui8MACArray[4] = ((ui32User1 >>  8) & 0xff);
-    pui8MACArray[5] = ((ui32User1 >> 16) & 0xff);
+    pbMAC[0] = ((dwUser0 >>  0) & 0xff);
+    pbMAC[1] = ((dwUser0 >>  8) & 0xff);
+    pbMAC[2] = ((dwUser0 >> 16) & 0xff);
+    pbMAC[3] = ((dwUser1 >>  0) & 0xff);
+    pbMAC[4] = ((dwUser1 >>  8) & 0xff);
+    pbMAC[5] = ((dwUser1 >> 16) & 0xff);
 
     InitSettings();
-    SetMAC(pui8MACArray);
 
-    //
-    // Initialize the lwIP library, using DHCP.
-    //
-//    lwIPInit(g_ui32SysClock, pui8MACArray, inet_addr("100.10.168.192"), inet_addr("0.255.255.255"), inet_addr("1.1.168.192"), IPADDR_USE_STATIC);
-    lwIPInit(dwSysClockFreq, pui8MACArray, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+    lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
-    //
-    // Setup the device locator service.
-    //
     InitUDP_Handler();
-//    LocatorMACAddrSet(pui8MACArray);
-//    LocatorAppTitleSet("EK-TM4C1294XL enet_io");
+    InitTCP_Handler();
 
     InitUART(dwSysClockFreq);
     InitTimer1(dwSysClockFreq);
-    IntMasterEnable();
 
-    echo_init();
+    IntMasterEnable();
 
     //
     // Set the interrupt priorities.  We set the SysTick interrupt to a higher
@@ -188,9 +150,6 @@ main(void)
     IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
     IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
-    //
-    // Loop forever.  All the work is done in interrupt handlers.
-    //
     while(1)
     {
     }
