@@ -10,6 +10,6 @@ extern ulong                   dwNetmask;
 
 
 
-void    InitSettings(void);
-ulong   SaveSettings(void);
-ulong   LoadSettings(void);
+uchar   InitSettings(void);
+uchar   SaveSettings(void);
+uchar   LoadSettings(void);
