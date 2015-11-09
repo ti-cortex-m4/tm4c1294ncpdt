@@ -23,42 +23,34 @@ ulong                   dwNetmask;
 
 
 
-void    InitSettings(void)
+uchar   InitSettings(void)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_EEPROM0);
 
-  ulong error = EEPROMInit();
-  if (error != EEPROM_INIT_OK)
-  {
-    while (1)
-    {
-//      TODO
-    }
-  }
+  uchar err = EEPROMInit();
+  if (err != EEPROM_INIT_OK) return err;
 
-  LoadSettings();
+  return LoadSettings();
 }
 
 
 
-ulong    SaveSettings(void)
+uchar    SaveSettings(void)
 {
-  ulong error;
+  uchar err = EEPROMProgram(&dwIP, EEPROM_ADDR_IP, 4);
+  if (err != 0) return err;
 
-  error = EEPROMProgram(&dwIP, EEPROM_ADDR_IP, 4);
-  if (error != 0) return error;
+  err = EEPROMProgram(&dwGateway, EEPROM_ADDR_GATEWAY, 4);
+  if (err != 0) return err;
 
-  error = EEPROMProgram(&dwGateway, EEPROM_ADDR_GATEWAY, 4);
-  if (error != 0) return error;
-
-  error = EEPROMProgram(&dwNetmask, EEPROM_ADDR_NETMASK, 4);
-  if (error != 0) return error;
+  err = EEPROMProgram(&dwNetmask, EEPROM_ADDR_NETMASK, 4);
+  if (err != 0) return err;
 
   return 0;
 }
 
 
-ulong   LoadSettings(void)
+uchar   LoadSettings(void)
 {
   EEPROMRead(&dwIP, EEPROM_ADDR_IP, 4);
 
