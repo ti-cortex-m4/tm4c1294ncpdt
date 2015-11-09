@@ -23,6 +23,7 @@
 //*****************************************************************************
 
 #include "self/main.h"
+#include <self/udp/udp_out.h>
 #include "self/settings.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
@@ -41,7 +42,7 @@
 #include "self/timer1.h"
 #include "self/settings.h"
 #include "self/tcp/echo.h"
-#include "self/udp/udp_output.h"
+#include "self/udp/udp_handler.h"
 
 //*****************************************************************************
 //
