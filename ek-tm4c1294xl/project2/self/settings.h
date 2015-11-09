@@ -4,16 +4,12 @@ SETTINGS.H
 
 ------------------------------------------------------------------------------*/
 
-#include "main.h"
+extern ulong                   dwIP;
+extern ulong                   dwGateway;
+extern ulong                   dwNetmask;
 
 
 
-extern uint32_t dwIP;
-extern uint32_t dwGateway;
-extern uint32_t dwNetmask;
-
-
-
-void InitSettings(void);
-uint32_t SaveSettings(void);
-uint32_t LoadSettings(void);
+void    InitSettings(void);
+ulong   SaveSettings(void);
+ulong   LoadSettings(void);

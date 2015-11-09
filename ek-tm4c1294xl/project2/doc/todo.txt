@@ -11,4 +11,7 @@ TCP_WRITE_FLAG_COPY
     IntDefaultHandler,                      // Fan 1
     0,                                      // Reserved
 
-rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib 
+rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib
+
+InitSettings check result
+SaveSettings check result 
