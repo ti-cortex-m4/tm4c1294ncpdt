@@ -13,7 +13,6 @@ TIMER1.C
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 #include "uart/serial.h"
-#include "uart/serial4.h"
 #include "timer1.h"
 
 
