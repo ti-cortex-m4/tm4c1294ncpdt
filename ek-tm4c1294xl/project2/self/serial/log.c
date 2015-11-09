@@ -14,13 +14,13 @@ static volatile ulong       dwLogTimer;
 
 
 
-void    IncLogTimer(void)
+void    LogTimer_1000Hz(void)
 {
   dwLogTimer++;
 }
 
 
-void    OutLogTimer(void)
+void    PrintLogTimer(void)
 {
   UARTprintf("%5u.%03u ", (dwLogTimer / 1000), (dwLogTimer % 1000));
 }

@@ -4,8 +4,8 @@ LOG.H
 
 ------------------------------------------------------------------------------*/
 
-void    IncLogTimer(void);
-void    OutLogTimer(void);
+void    LogTimer_1000Hz(void);
+void    PrintLogTimer(void);
 
 
 
