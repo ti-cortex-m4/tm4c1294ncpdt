@@ -4,4 +4,6 @@ UART.H
 
 ------------------------------------------------------------------------------*/
 
+void    InitUART(ulong dwSysClockFreq);
+
 void    UART_1000Hz(void);

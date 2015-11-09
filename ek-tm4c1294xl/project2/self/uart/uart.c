@@ -12,6 +12,7 @@ UART.C
 #include "lwip/debug.h"
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
+#include "lwip/def.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_uart.h"
 #include "inc/hw_types.h"
@@ -29,7 +30,7 @@ struct tcp_pcb *tpcb2;
 
 
 
-void init_uart(ulong dwSysClockFreq)
+void    InitUART(ulong dwSysClockFreq)
 {
   iwOutStart = 0;
   iwOutStop = 0;
@@ -38,6 +39,8 @@ void init_uart(ulong dwSysClockFreq)
   iwInStart = 0;
   iwInStop = 0;
   cwIn = 0;
+
+  tpcb2 = NULL;
 
   InitUART4(dwSysClockFreq);
 }
@@ -60,11 +63,15 @@ void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 }
 
 void uart_poll(struct tcp_pcb *tpcb);
+
+
 void UART_1000Hz(void)
 {
-	  if (++wInTimer > 2)
-	  {
-
-  uart_poll(tpcb2);
-	  }
+  if (++wInTimer > 2)
+  {
+    if (tpcb2 != NULL)
+    {
+      uart_poll(tpcb2);
+    }
+  }
 }
