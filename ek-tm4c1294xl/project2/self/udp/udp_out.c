@@ -5,10 +5,10 @@ UDP_OUTPUT.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "lwip/udp.h"
-#include "lwip/ip_addr.h"
 #include "../settings.h"
-#include "udp_output.h"
+//#include "lwip/udp.h"
+//#include "lwip/ip_addr.h"
+#include "udp_out.h"
 
 
 
