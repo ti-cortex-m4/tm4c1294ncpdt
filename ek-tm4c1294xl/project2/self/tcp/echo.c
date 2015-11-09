@@ -281,7 +281,7 @@ u16_t i,c;
     for (i=0; i<100; i++) {
     	if (cwIn > 0) {
     		cwIn--;
-    		buff[i] = mpbIn[iwInStart];
+    		buff[i] = mbIn[iwInStart];
 
     		iwInStart++;
     		iwInStart = iwInStart % INBUFF_SIZE;

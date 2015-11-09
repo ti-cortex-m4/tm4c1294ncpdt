@@ -49,7 +49,7 @@ void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 
   while (len-- > 0)
   {
-    mpbOut[iwOutStop] = (*ptr++);
+    mbOut[iwOutStop] = (*ptr++);
     iwOutStop = (iwOutStop+1) % OUTBUFF_SIZE;
     cwOut++;
   }

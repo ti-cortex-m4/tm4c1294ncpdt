@@ -1,34 +1,25 @@
 /*------------------------------------------------------------------------------
-SERIAL1!C
+SERIAL4.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "driverlib/interrupt.h"
-//#include "inc/hw_ints.h"
-//#include "lwip/opt.h"
-//#include "lwip/debug.h"
-//#include "lwip/stats.h"
-//#include "lwip/tcp.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_uart.h"
 #include "inc/hw_types.h"
-//#include "inc/hw_ints.h"
-//#include "driverlib/interrupt.h"
 #include "driverlib/uart.h"
-//#include "self/serial/uarts.h"
 #include "serial4.h"
 
 
 
-volatile uchar          mpbIn[INBUFF_SIZE], mpbOut[OUTBUFF_SIZE];
+volatile uchar          mbIn[INBUFF_SIZE], mbOut[OUTBUFF_SIZE];
 
 volatile uint           iwOutStart, iwOutStop, cwOut;
 volatile uint           iwInStart, iwInStop, cwIn;
 
 
-volatile ulong          dwInTimer;
+volatile uint           wInTimer;
 
 
 
@@ -64,10 +55,10 @@ void    UART4IntHandler(void)
 
   if (GetRI(dwStatus))
   {
-    dwInTimer = 0;
+    wInTimer = 0;
 
     cwIn++;
-    mpbIn[iwInStop] = InByte();
+    mbIn[iwInStop] = InByte();
     iwInStop = (iwInStop+1) % INBUFF_SIZE;
   }
 
@@ -76,7 +67,7 @@ void    UART4IntHandler(void)
     if (cwOut > 0 )
     {
       cwOut--;
-      OutByte(mpbOut[iwOutStart]);
+      OutByte(mbOut[iwOutStart]);
       iwOutStart = (iwOutStart+1) % OUTBUFF_SIZE;
     }
   }
