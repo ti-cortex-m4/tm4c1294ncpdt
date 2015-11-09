@@ -83,7 +83,7 @@ void echo_close(struct tcp_pcb *tpcb, struct echo_state *es);
 
 
 void
-echo_init(void)
+InitTCP_Handler(void)
 {
   LOG(("*** echo_init start \n"));
 
