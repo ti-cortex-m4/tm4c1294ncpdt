@@ -63,7 +63,7 @@ void Timer1IntHandler(void)
 
   LogTimer_1000Hz();
 
-  if (++dwInTimer > 3)
+  if (++wInTimer > 3)
   {
     uart_poll(tpcb2);
   }
