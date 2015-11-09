@@ -64,7 +64,7 @@ void    UART4IntHandler(void)
 
   if (GetTI(dwStatus))
   {
-    if (cwOut > 0 )
+    if (cwOut > 0)
     {
       cwOut--;
       OutByte(mbOut[iwOutStart]);
