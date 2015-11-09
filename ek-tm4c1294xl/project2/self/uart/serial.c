@@ -4,7 +4,7 @@ SERIAL1!C
 
 ------------------------------------------------------------------------------*/
 
-#include "self/main.h"
+#include "../main.h"
 #include "self/tcp/echo.h"
 #include "driverlib/interrupt.h"
 #include "inc/hw_ints.h"
@@ -18,7 +18,7 @@ SERIAL1!C
 #include "inc/hw_ints.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/uart.h"
-#include "self/serial/uarts.h"
+#include "uarts.h"
 #include "serial4.h"
 #include "serial.h"
 

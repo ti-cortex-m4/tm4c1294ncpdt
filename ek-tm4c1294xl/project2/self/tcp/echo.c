@@ -48,8 +48,8 @@
 #include "lwip/tcp_impl.h"
 #include "self/main.h"
 #include "self/timer1.h"
-#include "self/serial/log.h"
-#include "self/serial/serial4.h"
+#include "self/uart/log.h"
+#include "self/uart/serial4.h"
 
 
 #if LWIP_TCP
