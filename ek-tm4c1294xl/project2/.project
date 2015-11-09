@@ -31,7 +31,7 @@
 			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/drivers/pinout.c</locationURI>
 		</link>
 		<link>
-			<name>utils/lwiplib.c</name>
+			<name>utils/lwiplib_patched.c</name>
 			<type>1</type>
 			<locationURI>SW_ROOT/utils/lwiplib_patched.c</locationURI>
 		</link>
@@ -39,11 +39,6 @@
 			<name>utils/uartstdio.c</name>
 			<type>1</type>
 			<locationURI>SW_ROOT/utils/uartstdio.c</locationURI>
-		</link>
-		<link>
-			<name>utils/ustdlib.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/utils/ustdlib.c</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
