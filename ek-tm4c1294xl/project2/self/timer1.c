@@ -4,7 +4,7 @@ TIMER.C
 ------------------------------------------------------------------------------*/
 
 #include "main.h"
-#include "serial/log.h"
+#include "uart/log.h"
 //#include "serial/serial4.h"
 #include "inc/hw_memmap.h"
 //#include "inc/hw_memmap.h"
@@ -16,8 +16,8 @@ TIMER.C
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
-#include "serial/serial.h"
-#include "serial/serial4.h"
+#include "uart/serial.h"
+#include "uart/serial4.h"
 #include "timer1.h"
 
 
