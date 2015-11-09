@@ -29,7 +29,7 @@ struct tcp_pcb *tpcb2;
 
 
 
-void init_uart(ulong ui32SysClockFreq)
+void init_uart(ulong dwSysClockFreq)
 {
   iwOutStart = 0;
   iwOutStop = 0;
@@ -39,7 +39,7 @@ void init_uart(ulong ui32SysClockFreq)
   iwInStop = 0;
   cwIn = 0;
 
-  InitUART4(ui32SysClockFreq);
+  InitUART4(dwSysClockFreq);
 }
 
 
