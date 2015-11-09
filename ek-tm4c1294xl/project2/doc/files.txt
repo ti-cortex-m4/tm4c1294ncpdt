@@ -34,8 +34,8 @@ locator.c
 locator.h
 -  mac.c
 -  mac.h
-reset.c
-reset.h
+-  reset.c
+-  reset.h
 udp_output.c
 udp_output.h
 +  log.c

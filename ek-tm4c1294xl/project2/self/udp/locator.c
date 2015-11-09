@@ -6,7 +6,8 @@
 #include "utils/lwiplib.h"
 #include "driverlib/sysctl.h"
 #include "lwip/udp.h"
-#include "reset.h"
+#include "../delay.h"
+#include "driverlib/sysctl.h"
 #include "udp_output.h"
 
 //*****************************************************************************
@@ -90,7 +91,9 @@ LocatorReceive(void *arg, struct udp_pcb *pcb, struct pbuf *p,
       if (pui8Data[1] == 'I') {
         UDPOutput_SetLong3(pcb, p, addr, port, &dwIP, &dwGateway, &dwNetmask);
         SaveSettings();
-        Reset();
+
+        DelayMillySecond(100);
+        SysCtlReset();
       } else {
         UDPOutput_Unknown(pcb,p,addr,port);
       }
