@@ -18,14 +18,14 @@ serial1.c
 startup_ccs.c
 targetConfigs
 target_config.ccxml
-timer1.c
-timer1.h
++  timer1.c
++  timer1.h
 +  uarts.c
 +  uarts.h
 utils !!!
 
-delay.c
-delay.h
++  delay.c
++  delay.h
 +  main.h
 +  settings.c
 +  settings.h
