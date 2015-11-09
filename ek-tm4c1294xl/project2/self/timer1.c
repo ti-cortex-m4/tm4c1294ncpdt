@@ -1,60 +1,47 @@
 /*------------------------------------------------------------------------------
-TIMER1!C
+TIMER.C
 
-TODO volatile
 ------------------------------------------------------------------------------*/
 
 #include "main.h"
 #include "serial/log.h"
-#include "serial/serial4.h"
+//#include "serial/serial4.h"
 #include "inc/hw_memmap.h"
-#include "inc/hw_memmap.h"
-#include "self/main.h"
+//#include "inc/hw_memmap.h"
+//#include "self/main.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_types.h"
 #include "inc/hw_timer.h"
-#include "driverlib/gpio.h"
+//#include "driverlib/gpio.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
+#include "serial/serial.h"
+#include "serial/serial4.h"
+#include "timer1.h"
 
 
 
-/*
-#include "../display/slides.h"
-#include "../impulses/impulses.h"
-#include "../digitals/wait_answer.h"
-#include "../digitals/wait_query.h"
-#include "../output/unified/uni.h"
-#include "../serial/flow.h"
-#include "../serial/monitor.h"
-#include "../serial/slave_modem.h"
+#define TIMER1_FREQ     1000
 
 
 
-extern  volatile bool           fOnSecond;
+void    InitTimer1(ulong dwSysClockFreq)
+{
+  // Enable the peripherals.
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
 
+  // Configure the 32-bit periodic timer.
+  TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);
+  TimerLoadSet(TIMER1_BASE, TIMER_A, dwSysClockFreq / TIMER1_FREQ);
 
-*/
-void InitTimer1(uint32_t ui32SysClock) {
-    // Enable the peripherals.
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
+  // Setup the interrupts for the timer timeouts.
+  IntEnable(INT_TIMER1A);
+  TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
 
-    // Configure the 32-bit periodic timer.
-    TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);
-    TimerLoadSet(TIMER1_BASE, TIMER_A, ui32SysClock / 1000);
-
-    // Setup the interrupts for the timer timeouts.
-    IntEnable(INT_TIMER1A);
-    TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
-
-    // Enable the timer.
-    TimerEnable(TIMER1_BASE, TIMER_A);
+  // Enable the timer.
+  TimerEnable(TIMER1_BASE, TIMER_A);
 }
-
-
-extern struct tcp_pcb *tpcb2;
-void uart_poll(struct tcp_pcb *tpcb);
 
 
 void Timer1IntHandler(void)
@@ -62,9 +49,5 @@ void Timer1IntHandler(void)
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
   LogTimer_1000Hz();
-
-  if (++wInTimer > 3)
-  {
-    uart_poll(tpcb2);
-  }
+  uart_timer();
 }

@@ -5,6 +5,7 @@ SERIAL1!C
 ------------------------------------------------------------------------------*/
 
 #include "self/main.h"
+#include "self/tcp/echo.h"
 #include "driverlib/interrupt.h"
 #include "inc/hw_ints.h"
 #include "lwip/opt.h"
@@ -19,6 +20,7 @@ SERIAL1!C
 #include "driverlib/uart.h"
 #include "self/serial/uarts.h"
 #include "serial4.h"
+#include "serial.h"
 
 
 
@@ -57,5 +59,12 @@ void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
   IntPendSet(INT_UART4);
 }
 
+void uart_poll(struct tcp_pcb *tpcb);
+void uart_timer(void)
+{
+	  if (++wInTimer > 2)
+	  {
 
-
+  uart_poll(tpcb2);
+	  }
+}
