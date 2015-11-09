@@ -6,6 +6,7 @@ TODO volatile
 
 #include "main.h"
 #include "serial/log.h"
+#include "serial/serial4.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_memmap.h"
 #include "self/main.h"
@@ -17,7 +18,6 @@ TODO volatile
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 
-volatile ulong dwTimeout;
 
 
 /*
