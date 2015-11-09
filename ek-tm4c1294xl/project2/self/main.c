@@ -111,7 +111,7 @@ int     main(void)
       //
       while(1)
       {
-        // TODO
+        // TODO no MAC address
       }
   }
 
