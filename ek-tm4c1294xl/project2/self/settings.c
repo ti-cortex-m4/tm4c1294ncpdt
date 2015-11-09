@@ -17,20 +17,23 @@ SETTINGS.C
 
 
 
-uint32_t dwIP;
-uint32_t dwGateway;
-uint32_t dwNetmask;
+ulong                   dwIP;
+ulong                   dwGateway;
+ulong                   dwNetmask;
 
 
 
-void InitSettings(void)
+void    InitSettings(void)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_EEPROM0);
 
-  uint32_t error = EEPROMInit();
+  ulong error = EEPROMInit();
   if (error != EEPROM_INIT_OK)
   {
-    while (1) {}
+    while (1)
+    {
+//      TODO
+    }
   }
 
   LoadSettings();
@@ -38,9 +41,9 @@ void InitSettings(void)
 
 
 
-uint32_t SaveSettings(void)
+ulong    SaveSettings(void)
 {
-  uint32_t error;
+  ulong error;
 
   error = EEPROMProgram(&dwIP, EEPROM_ADDR_IP, 4);
   if (error != 0) return error;
@@ -55,7 +58,7 @@ uint32_t SaveSettings(void)
 }
 
 
-uint32_t LoadSettings(void)
+ulong   LoadSettings(void)
 {
   EEPROMRead(&dwIP, EEPROM_ADDR_IP, 4);
 
