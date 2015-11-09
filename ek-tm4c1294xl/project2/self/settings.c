@@ -21,6 +21,8 @@ ulong                   dwIP;
 ulong                   dwGateway;
 ulong                   dwNetmask;
 
+uchar                   pbMAC[6];
+
 
 
 uchar   InitSettings(void)
@@ -59,4 +61,16 @@ uchar   LoadSettings(void)
   EEPROMRead(&dwNetmask, EEPROM_ADDR_NETMASK, 4);
 
   return 0;
+}
+
+
+
+void    SetMAC(uchar *pb)
+{
+  pbMAC[0] = pb[0];
+  pbMAC[1] = pb[1];
+  pbMAC[2] = pb[2];
+  pbMAC[3] = pb[3];
+  pbMAC[4] = pb[4];
+  pbMAC[5] = pb[5];
 }
