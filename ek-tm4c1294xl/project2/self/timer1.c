@@ -4,8 +4,8 @@ TIMER1!C
 TODO volatile
 ------------------------------------------------------------------------------*/
 
-#include "self/main.h"
-#include "self/serial/log.h"
+#include "main.h"
+#include "serial/log.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_memmap.h"
 #include "self/main.h"
