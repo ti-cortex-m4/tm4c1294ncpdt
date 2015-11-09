@@ -338,7 +338,7 @@ main(void)
     //
     // Setup the device locator service.
     //
-    LocatorInit();
+    InitUDP_Handler();
 //    LocatorMACAddrSet(pui8MACArray);
 //    LocatorAppTitleSet("EK-TM4C1294XL enet_io");
 
