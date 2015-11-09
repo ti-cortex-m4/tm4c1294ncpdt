@@ -5,28 +5,17 @@ UART.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "self/tcp/echo.h"
-//#include "driverlib/interrupt.h"
 #include "inc/hw_ints.h"
-//#include "lwip/opt.h"
-//#include "lwip/debug.h"
-//#include "lwip/stats.h"
+#include "driverlib/interrupt.h"
 #include "lwip/tcp.h"
 #include "lwip/def.h"
-//#include "inc/hw_memmap.h"
-//#include "inc/hw_uart.h"
-//#include "inc/hw_types.h"
-//#include "inc/hw_ints.h"
-#include "driverlib/interrupt.h"
-//#include "driverlib/uart.h"
 #include "hw_uart.h"
 #include "isr_uart4.h"
 #include "uart.h"
 
 
 
-
-static struct tcp_pcb   *tpcb2;
+static struct tcp_pcb   *uart_tpcb;
 
 
 
@@ -40,7 +29,7 @@ void    InitUART(ulong dwSysClockFreq)
   iwInStop = 0;
   cwIn = 0;
 
-  tpcb2 = NULL;
+  uart_tpcb = NULL;
 
   InitUART4(dwSysClockFreq);
 }
@@ -49,9 +38,9 @@ void    InitUART(ulong dwSysClockFreq)
 
 void    UART_Out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 {
-  tpcb2 = tpcb;
-  uchar* ptr = arg;
+  uart_tpcb = tpcb;
 
+  uchar* ptr = arg;
   while (len-- > 0)
   {
     mbOut[iwOutStop] = (*ptr++);
@@ -67,49 +56,40 @@ void    UART_Out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 static void UART_In(struct tcp_pcb *tpcb)
 {
 static u8_t buff[100];
-u16_t i,c;
+u16_t i,len;
 
-    if (cwIn == 0) return;
+  if (cwIn == 0) return;
 
-    c = 0;
-    for (i=0; i<100; i++) {
-    	if (cwIn > 0) {
-    		cwIn--;
-    		buff[i] = mbIn[iwInStart];
+  len = 0;
+  for (i=0; i<100; i++)
+  {
+    if (cwIn > 0)
+    {
+      cwIn--;
+      buff[i] = mbIn[iwInStart];
 
-    		iwInStart++;
-    		iwInStart = iwInStart % INBUFF_SIZE;
-    		c++;
-    	}
-    	else break;
+      iwInStart++;
+      iwInStart = iwInStart % INBUFF_SIZE;
+      len++;
     }
+    else break;
+  }
 
-	if (c > 0) {
-//	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 5 %X\n", tpcb->flags));
-//	      (tpcb)->flags &= ~TF_ACK_DELAY;
-//	      (tpcb)->flags |= TF_ACK_NOW;
-//	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 6 %X\n", tpcb->flags));
-
-//		LOG(("out\n"));
-		tcp_write(tpcb, buff, c, 1);
-		tcp_output(tpcb);
-
-//	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 5 %X\n", tpcb->flags));
-//	      (tpcb)->flags &= ~TF_ACK_DELAY;
-//	      (tpcb)->flags |= TF_ACK_NOW;
-//	      LWIP_PLATFORM_DIAG(("~~~tcp_ack 6 %X\n", tpcb->flags));
-//		LOG(("out=%u\n",c));
-	}
+  if (len > 0)
+  {
+    tcp_write(tpcb, buff, len, TCP_WRITE_FLAG_COPY);
+    tcp_output(tpcb);
+  }
 }
 
 
-void UART_1000Hz(void)
+void    UART_1000Hz(void)
 {
-  if (++wInTimer > 2)
+  if ((++wInTimer > 2) && (cwIn > 0))
   {
-    if (tpcb2 != NULL)
+    if (uart_tpcb != NULL)
     {
-      UART_In(tpcb2);
+      UART_In(uart_tpcb);
     }
   }
 }
