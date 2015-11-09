@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-SERIAL1!C
+UART.C
 
 
 ------------------------------------------------------------------------------*/
@@ -18,9 +18,9 @@ SERIAL1!C
 #include "inc/hw_ints.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/uart.h"
-#include "hw_uarts.h"
-#include "uart4.h"
-#include "serial.h"
+#include "hw_uart.h"
+#include "isr_uart4.h"
+#include "uart.h"
 
 
 
@@ -60,7 +60,7 @@ void uart_out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 }
 
 void uart_poll(struct tcp_pcb *tpcb);
-void Serial_1000Hz(void)
+void UART_1000Hz(void)
 {
 	  if (++wInTimer > 2)
 	  {

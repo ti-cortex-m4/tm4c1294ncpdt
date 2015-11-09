@@ -49,7 +49,7 @@
 #include "self/main.h"
 #include "self/timer1.h"
 #include "self/uart/log.h"
-#include "self/uart/uart4.h"
+#include "self/uart/isr_uart4.h"
 
 
 #if LWIP_TCP
