@@ -36,7 +36,7 @@ void    InitUART(ulong dwSysClockFreq)
 
 
 
-void    UART_Out(struct tcp_pcb *tpcb, void *arg, u16_t len)
+void    UART_Out(struct tcp_pcb *tpcb, void *arg, uint len)
 {
   uart_tpcb = tpcb;
 
@@ -55,29 +55,30 @@ void    UART_Out(struct tcp_pcb *tpcb, void *arg, u16_t len)
 
 static void UART_In(struct tcp_pcb *tpcb)
 {
-static u8_t buff[100];
-u16_t i,len;
+static uchar mbBuff[100];
 
   if (cwIn == 0) return;
 
-  len = 0;
-  for (i=0; i<100; i++)
+  uint len = 0;
+
+  uint i;
+  for (i=0; i<sizeof(mbBuff)/sizeof(uchar); i++)
   {
     if (cwIn > 0)
     {
       cwIn--;
-      buff[i] = mbIn[iwInStart];
 
-      iwInStart++;
-      iwInStart = iwInStart % INBUFF_SIZE;
+      mbBuff[i] = mbIn[iwInStart];
       len++;
+
+      iwInStart = (iwInStart+1) % INBUFF_SIZE;
     }
     else break;
   }
 
   if (len > 0)
   {
-    tcp_write(tpcb, buff, len, TCP_WRITE_FLAG_COPY);
+    tcp_write(tpcb, mbBuff, len, TCP_WRITE_FLAG_COPY);
     tcp_output(tpcb);
   }
 }
@@ -85,11 +86,14 @@ u16_t i,len;
 
 void    UART_1000Hz(void)
 {
-  if ((++wInTimer > 2) && (cwIn > 0))
+  if (cwIn > 0)
   {
-    if (uart_tpcb != NULL)
+    if (++wInTimer > 2)
     {
-      UART_In(uart_tpcb);
+      if (uart_tpcb != NULL)
+      {
+        UART_In(uart_tpcb);
+      }
     }
   }
 }

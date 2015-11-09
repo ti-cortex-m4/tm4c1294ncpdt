@@ -3,7 +3,7 @@
 .launches
 .project
 .settings
-Debug
+-  Debug
 doc
 drivers
 echo.c
@@ -13,7 +13,7 @@ enet_lwip_ccs.cmd
 lwipopts.h
 macros.ini_initial
 -  self
-serial1.c
++  serial1.c
 +  serial4.h
 startup_ccs.c
 targetConfigs
