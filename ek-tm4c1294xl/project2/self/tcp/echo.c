@@ -284,7 +284,7 @@ u16_t i,c;
     		buff[i] = mpbIn[iwInStart];
 
     		iwInStart++;
-    		iwInStart = iwInStart % wINBUFF_SIZE;
+    		iwInStart = iwInStart % INBUFF_SIZE;
     		c++;
     	}
     	else break;
