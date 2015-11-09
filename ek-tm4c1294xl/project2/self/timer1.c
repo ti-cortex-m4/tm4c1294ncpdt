@@ -12,7 +12,7 @@ TIMER1.C
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
-#include "uart/serial.h"
+#include "uart/uart.h"
 #include "timer1.h"
 
 
@@ -41,5 +41,5 @@ void Timer1IntHandler(void)
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
   LogTimer_1000Hz();
-  Serial_1000Hz();
+  UART_1000Hz();
 }
