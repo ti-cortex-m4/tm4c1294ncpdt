@@ -1,21 +1,21 @@
-.ccsproject
-.cproject
-.launches
-.project
-.settings
+   .ccsproject
+   .cproject
+   .launches
+   .project
+   .settings
 -  Debug
-doc
+-  doc
 +  drivers
 echo.c
-echo.h
++  echo.h
 +  enet_lwip.c
-enet_lwip_ccs.cmd
++  enet_lwip_ccs.cmd
 lwipopts.h
 macros.ini_initial
 -  self
 +  serial1.c
 +  serial4.h
-startup_ccs.c
++  startup_ccs.c
 targetConfigs
 target_config.ccxml
 +  timer1.c
