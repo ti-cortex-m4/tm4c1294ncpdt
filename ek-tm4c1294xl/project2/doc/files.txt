@@ -1,42 +1,10 @@
-   .ccsproject
-   .cproject
-   .launches
-   .project
-   .settings
--  Debug
--  doc
-+  drivers
 echo.c
-+  echo.h
-+  enet_lwip.c
-+  enet_lwip_ccs.cmd
+
 lwipopts.h
--  macros.ini_initial
--  self
-+  serial1.c
-+  serial4.h
-+  startup_ccs.c
--  targetConfigs
--  target_config.ccxml
-+  timer1.c
-+  timer1.h
-+  uarts.c
-+  uarts.h
-+  utils !!!
 
-+  delay.c
-+  delay.h
-+  main.h
-+  settings.c
-+  settings.h
-
-+  locator.c
-+  locator.h
--  mac.c
--  mac.h
--  reset.c
--  reset.h
-udp_output.c
-udp_output.h
-+  log.c
-+  log.h
+udp_handler.c
+udp_handler.h
+udp_in.c
+udp_in.h
+udp_out.c
+udp_out.h
