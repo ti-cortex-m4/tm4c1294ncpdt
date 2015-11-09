@@ -5,7 +5,7 @@ udp_remove & pbuf_free
 udp HELLO send IP
 tcp port in use
 serial test overflow
-serial4 символьные константы ((dwStatus & 0x00000020) != 0) || (dwStatus == 0);
+serial4 ((dwStatus & 0x00000020) != 0) || (dwStatus == 0);
 TCP_WRITE_FLAG_COPY
  
     IntDefaultHandler,                      // Fan 1
@@ -15,5 +15,5 @@ rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib
 
 InitSettings check result
 SaveSettings check result 
-
 tcp_nagle_disable
+hello get IP
