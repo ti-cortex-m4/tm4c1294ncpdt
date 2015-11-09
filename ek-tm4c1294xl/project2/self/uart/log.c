@@ -4,9 +4,9 @@ LOG.Ñ
 
 ------------------------------------------------------------------------------*/
 
-#include <self/uart/log.h>
 #include "../main.h"
 #include "utils/uartstdio.h"
+#include "log.h"
 
 
 
