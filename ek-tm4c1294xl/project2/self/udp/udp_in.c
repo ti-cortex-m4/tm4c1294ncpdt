@@ -42,28 +42,28 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     pbuf_free(p);
 
     if (pui8Data[0] == 'M') {
-      UDPOutput_MAC(pcb, p, addr, port);
+      UDPOut_MAC(pcb, p, addr, port);
     } else if (pui8Data[0] == 'G') {
       if (pui8Data[1] == 'I') {
-        UDPOutput_GetLong3(pcb, p, addr, port, dwIP, dwGateway, dwNetmask);
+        UDPOut_GetLong3(pcb, p, addr, port, dwIP, dwGateway, dwNetmask);
       } else {
-        UDPOutput_Unknown(pcb,p,addr,port);
+        UDPOut_Unknown(pcb,p,addr,port);
       }
     } else if (pui8Data[0] == 'S') {
       if (pui8Data[1] == 'I') {
-        UDPOutput_SetLong3(pcb, p, addr, port, &dwIP, &dwGateway, &dwNetmask);
+        UDPOut_SetLong3(pcb, p, addr, port, &dwIP, &dwGateway, &dwNetmask);
         SaveSettings();
 
         DelayMillySecond(100);
         SysCtlReset();
       } else {
-        UDPOutput_Unknown(pcb,p,addr,port);
+        UDPOut_Unknown(pcb,p,addr,port);
       }
     } else if (pui8Data[0] == 'B') {
-      UDPOutput_Begin(pcb,p,addr,port);
+      UDPOut_Begin(pcb,p,addr,port);
     } else if (pui8Data[0] == 'E') {
-      UDPOutput_End(pcb,p,addr,port);
+      UDPOut_End(pcb,p,addr,port);
     } else {
-      UDPOutput_Unknown(pcb,p,addr,port);
+      UDPOut_Unknown(pcb,p,addr,port);
     }
 }
