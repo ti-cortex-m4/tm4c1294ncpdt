@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-UARTS.Ñ
+HW_UARTS.Ñ
 
 
 ------------------------------------------------------------------------------*/
@@ -12,7 +12,7 @@ UARTS.Ñ
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "driverlib/interrupt.h"
-#include "uarts.h"
+#include "hw_uarts.h"
 
 
 
