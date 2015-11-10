@@ -4,6 +4,10 @@ LOG.H
 
 ------------------------------------------------------------------------------*/
 
+#include "utils/uartstdio.h"
+
+
+
 void    LogTimer_1000Hz(void);
 
 void    InitLog(void);
