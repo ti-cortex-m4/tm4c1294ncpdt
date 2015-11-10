@@ -89,7 +89,7 @@ int     main(void)
       //
       while(1)
       {
-        LOG("No MAC address\n");
+        LOG(("No MAC address\n"));
       }
   }
 
