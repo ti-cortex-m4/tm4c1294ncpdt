@@ -14,7 +14,7 @@ void    PrintLogTimer(void);
 
 
 #ifdef USE_LOG
-#define LOG(msg) OutLogTimer(); UARTprintf msg
+#define LOG(msg) PrintLogTimer(); UARTprintf msg
 #else
 #define LOG(msg)
 #endif
