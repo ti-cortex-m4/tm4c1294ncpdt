@@ -17,6 +17,7 @@ MAIN.C
 #include "systick.h"
 #include "timer1.h"
 #include "uart/uart.h"
+#include "uart/log.h"
 #include "udp/udp_handler.h"
 #include "tcp/tcp_handler.h"
 
@@ -42,6 +43,8 @@ void    lwIPHostTimerHandler(void)
 
 int     main(void)
 {
+  InitLog();
+
   //
   // Make sure the main oscillator is enabled because this is required by
   // the PHY.  The system must have a 25MHz crystal attached to the OSC
@@ -77,7 +80,7 @@ int     main(void)
   //
   ulong dwUser0, dwUser1;
   FlashUserGet(&dwUser0, &dwUser1);
-  if((dwUser0 == 0xffffffff) || (dwUser1 == 0xffffffff))
+  if((dwUser0 == 0xFFFFFFFF) || (dwUser1 == 0xFFFFFFFF))
   {
       //
       // We should never get here.  This is an error if the MAC address has
@@ -86,7 +89,7 @@ int     main(void)
       //
       while(1)
       {
-        // TODO no MAC address
+        LOG("No MAC address\n");
       }
   }
 

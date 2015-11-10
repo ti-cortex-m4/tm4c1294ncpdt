@@ -20,6 +20,15 @@ void    LogTimer_1000Hz(void)
 }
 
 
+
+void    InitLog(void)
+{
+#ifdef DEBUG
+  UARTStdioConfig(0, 115200, 120000000);
+#endif
+}
+
+
 void    PrintLogTimer(void)
 {
   UARTprintf("%5u.%03u ", (dwLogTimer / 1000), (dwLogTimer % 1000));
