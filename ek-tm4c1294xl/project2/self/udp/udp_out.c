@@ -135,7 +135,7 @@ static void PushMAC(uchar *pbMAC)
 }
 
 
-static void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+static void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
 //  if (addr->addr == IPADDR_BROADCAST)
     udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
@@ -146,7 +146,7 @@ static void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
 }
 
 
-static err_t UDPOut_Error(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar bError)
+static err_t UDP_OutError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uchar bError)
 {
   err_t err = InitPush(&p, 1+1);
   if (err != ERR_OK) return err;
@@ -154,12 +154,12 @@ static err_t UDPOut_Error(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   PushChar('?');
   PushChar(bError);
 
-  UDPOutput(pcb, p, addr, port);
+  UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
 
-err_t UDPOut_MAC(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+err_t UDP_OutMAC(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   err_t err = InitPush(&p, 1+6);
   if (err != ERR_OK) return err;
@@ -167,18 +167,18 @@ err_t UDPOut_MAC(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   PushChar('A');
   PushMAC(pbMAC);
 
-  UDPOutput(pcb, p, addr, port);
+  UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
 
-err_t UDPOut_GetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong dw1, ulong dw2, ulong dw3)
+err_t UDP_OutGetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong dw1, ulong dw2, ulong dw3)
 {
   err_t err = CheckSize(p, 1+1+1+2);
-  if (err != ERR_OK) { UDPOut_Error(pcb, p, addr, port, err); return err; }
+  if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
   err = PopCode(p);
-  if (err != ERR_OK) { UDPOut_Error(pcb, p, addr, port, err); return err; }
+  if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
   err = InitPush(&p, 1+4+4+4+3);
   if (err != ERR_OK) return err;
@@ -190,18 +190,18 @@ err_t UDPOut_GetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
   PushChar('|');
   PushIntLtl(wCode);
 
-  UDPOutput(pcb, p, addr, port);
+  UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
 
-err_t UDPOut_SetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, ulong *pdw1, ulong *pdw2, ulong *pdw3)
+err_t UDP_OutSetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong *pdw1, ulong *pdw2, ulong *pdw3)
 {
   err_t err = CheckSize(p, 1+1+4+4+4+1+2);
-  if (err != ERR_OK) { UDPOut_Error(pcb, p, addr, port, err); return err; }
+  if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
   err = PopCode(p);
-  if (err != ERR_OK) { UDPOut_Error(pcb, p, addr, port, err); return err; }
+  if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
   *pdw1 = PopLongLtl(p, 2);
   *pdw2 = PopLongLtl(p, 6);
@@ -214,17 +214,17 @@ err_t UDPOut_SetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
   PushChar('|');
   PushIntLtl(wCode);
 
-  UDPOutput(pcb, p, addr, port);
+  UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
 
 
 
-err_t UDPOut_Begin(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+err_t UDP_OutBegin(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   err_t err = CheckSize(p,1+6+1+2);
-  if (err != ERR_OK) { UDPOut_Error(pcb, p, addr, port, err); return err; }
+  if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
   fActive = CheckMAC(p, 1);
   if (fActive == false) { return ERR_SKIP; }
@@ -236,15 +236,15 @@ err_t UDPOut_Begin(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, ui
   PushChar('|');
   PushIntLtl(wCode);
 
-  UDPOutput(pcb, p, addr, port);
+  UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
 
-err_t UDPOut_End(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+err_t UDP_OutEnd(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   err_t err = CheckSize(p,1+1+2);
-  if (err != ERR_OK) { UDPOut_Error(pcb, p, addr, port, err); return err; }
+  if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
   fActive = true;
 
@@ -255,20 +255,20 @@ err_t UDPOut_End(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   PushChar('|');
   PushIntLtl(wCode);
 
-  UDPOutput(pcb, p, addr, port);
+  UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
 
 
 // TODO
-err_t UDPOut_Unknown(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port)
+err_t UDP_OutUnknown(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   err_t err = InitPush(&p, 1);
   if (err != ERR_OK) return err;
 
   PushChar('?');
 
-  UDPOutput(pcb, p, addr, port);
+  UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
