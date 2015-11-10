@@ -18,16 +18,16 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   uchar *pbBuff = p->payload;
 
   if (pbBuff[0] == 'I') {
-    UDP_OutInfo(pcb,p,addr,port,broadcast,dwIP);
+    UDP_OutInfo(pcb,p,addr,port,broadcast);
   } else if (pbBuff[0] == 'G') {
     if (pbBuff[1] == 'I') {
-      UDP_OutGetLong3(pcb,p,addr,port,broadcast,dwIP,dwGateway,dwNetmask);
+      UDP_OutGetSettings(pcb,p,addr,port,broadcast);
     } else {
       UDP_OutUnknown(pcb,p,addr,port,broadcast);
     }
   } else if (pbBuff[0] == 'S') {
     if (pbBuff[1] == 'I') {
-      UDP_OutSetLong3(pcb,p,addr,port,broadcast,&dwIP,&dwGateway,&dwNetmask);
+      UDP_OutSetSettings(pcb,p,addr,port,broadcast);
       SaveSettings();
 
       DelayMillySecond(100);
