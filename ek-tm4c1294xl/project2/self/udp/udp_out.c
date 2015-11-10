@@ -89,6 +89,11 @@ static err_t PopCode(struct pbuf *p)
 
 static err_t InitPush(struct pbuf **pp, uchar bSize)
 {
+  //
+  // The incoming pbuf is no longer needed, so free it.
+  //
+  pbuf_free(*pp);
+
   *pp = pbuf_alloc(PBUF_TRANSPORT, bSize, PBUF_RAM);
   if (pp == NULL) return ERR_MEM;
 
