@@ -18,28 +18,28 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   uchar *pbBuff = p->payload;
 
   if (pbBuff[0] == 'M') {
-    UDPOut_MAC(pcb, p, addr, port);
+    UDP_OutMAC(pcb,p,addr,port,broadcast);
   } else if (pbBuff[0] == 'G') {
     if (pbBuff[1] == 'I') {
-      UDPOut_GetLong3(pcb, p, addr, port, dwIP, dwGateway, dwNetmask);
+      UDP_OutGetLong3(pcb,p,addr,port,broadcast,dwIP,dwGateway,dwNetmask);
     } else {
-      UDPOut_Unknown(pcb,p,addr,port);
+      UDP_OutUnknown(pcb,p,addr,port,broadcast);
     }
   } else if (pbBuff[0] == 'S') {
     if (pbBuff[1] == 'I') {
-      UDPOut_SetLong3(pcb, p, addr, port, &dwIP, &dwGateway, &dwNetmask);
+      UDP_OutSetLong3(pcb,p,addr,port,broadcast,&dwIP,&dwGateway,&dwNetmask);
       SaveSettings();
 
       DelayMillySecond(100);
       SysCtlReset();
     } else {
-      UDPOut_Unknown(pcb,p,addr,port);
+      UDP_OutUnknown(pcb,p,addr,port,broadcast);
     }
   } else if (pbBuff[0] == 'B') {
-    UDPOut_Begin(pcb,p,addr,port);
+    UDP_OutBegin(pcb,p,addr,port,broadcast);
   } else if (pbBuff[0] == 'E') {
-    UDPOut_End(pcb,p,addr,port);
+    UDP_OutEnd(pcb,p,addr,port,broadcast);
   } else {
-    UDPOut_Unknown(pcb,p,addr,port);
+    UDP_OutUnknown(pcb,p,addr,port,broadcast);
   }
 }
