@@ -12,7 +12,7 @@ void    PrintLogTimer(void);
 
 
 #ifdef DEBUG
-#define LOG(msg) { UARTprintf (msg); }
+#define LOG(msg) { UARTprintf msg; }
 #else
 #define LOG(msg)
 #endif
