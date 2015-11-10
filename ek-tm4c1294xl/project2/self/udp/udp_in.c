@@ -31,10 +31,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
         return;
     }
 */
-    //
-    // The incoming pbuf is no longer needed, so free it.
-    //
-    pbuf_free(p);
+
 
     if (pui8Data[0] == 'M') {
       UDPOut_MAC(pcb, p, addr, port);
