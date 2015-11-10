@@ -12,21 +12,13 @@ MAIN.C
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/flash.h"
-#include "driverlib/systick.h"
 #include "utils/lwiplib_patched.h"
 #include "drivers/pinout.h"
+#include "systick.h"
 #include "timer1.h"
 #include "uart/uart.h"
 #include "udp/udp_handler.h"
 #include "tcp/tcp_handler.h"
-
-
-
-//
-// Defines for setting up the system clock.
-//
-#define SYSTICKHZ               100
-#define SYSTICKMS               (1000 / SYSTICKHZ)
 
 
 
@@ -44,16 +36,6 @@ MAIN.C
 //
 void    lwIPHostTimerHandler(void)
 {
-}
-
-
-
-//
-// The interrupt handler for the SysTick interrupt.
-//
-void    SysTickIntHandler(void)
-{
-  lwIPTimer(SYSTICKMS);
 }
 
 
@@ -87,13 +69,6 @@ int     main(void)
   // Initialize LED to OFF (0)
   //
   GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, ~GPIO_PIN_1);
-
-  //
-  // Configure SysTick for a periodic interrupt.
-  //
-  SysTickPeriodSet(dwSysClockFreq / SYSTICKHZ);
-  SysTickEnable();
-  SysTickIntEnable();
 
   //
   // Configure the hardware MAC address for Ethernet Controller filtering of
@@ -134,6 +109,7 @@ int     main(void)
   InitUDP_Handler();
   InitTCP_Handler();
 
+  InitSysTick(dwSysClockFreq);
   InitUART(dwSysClockFreq);
   InitTimer1(dwSysClockFreq);
 
