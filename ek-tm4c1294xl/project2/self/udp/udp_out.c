@@ -160,21 +160,21 @@ static err_t UDP_OutError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
 }
 
 
-err_t UDP_OutInfo(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong dw)
+err_t UDP_OutInfo(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   err_t err = InitPush(&p, 1+6+4);
   if (err != ERR_OK) return err;
 
   PushChar('A');
   PushMAC(pbMAC);
-  PushLongLtl(dw);
+  PushLongLtl(dwIP);
 
   UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
 
-err_t UDP_OutGetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong dw1, ulong dw2, ulong dw3)
+err_t UDP_OutGetSettings(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   err_t err = CheckSize(p, 1+1+1+2);
   if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
@@ -186,9 +186,9 @@ err_t UDP_OutGetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushLongLtl(dw1);
-  PushLongLtl(dw2);
-  PushLongLtl(dw3);
+  PushLongLtl(dwIP);
+  PushLongLtl(dwGateway);
+  PushLongLtl(dwNetmask);
   PushChar('|');
   PushIntLtl(wCode);
 
@@ -197,7 +197,7 @@ err_t UDP_OutGetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
 }
 
 
-err_t UDP_OutSetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong *pdw1, ulong *pdw2, ulong *pdw3)
+err_t UDP_OutSetSettings(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   err_t err = CheckSize(p, 1+1+4+4+4+1+2);
   if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
@@ -205,9 +205,9 @@ err_t UDP_OutSetLong3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
   err = PopCode(p);
   if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
-  *pdw1 = PopLongLtl(p, 2);
-  *pdw2 = PopLongLtl(p, 6);
-  *pdw3 = PopLongLtl(p, 10);
+  dwIP = PopLongLtl(p, 2);
+  dwGateway = PopLongLtl(p, 6);
+  dwNetmask = PopLongLtl(p, 10);
 
   err = InitPush(&p, 1+3);
   if (err != ERR_OK) return err;
