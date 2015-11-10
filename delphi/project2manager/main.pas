@@ -104,10 +104,7 @@ begin
     PeerIP := mSettings[i-1].IP;
 
     step := step3;
-
-
-//    IdUDPServer.SendBuffer(mSettings[i-1].IP, $FFFF, Id_IPv4, ToBytes('D', Indy8BitEncoding));
-    IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('M', Indy8BitEncoding));
+    IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('I', Indy8BitEncoding));
   end;
 end;
 
@@ -136,8 +133,7 @@ begin
   ShowSettings;
 
   step := step1;
-
-  IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('M', Indy8BitEncoding));
+  IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, ToBytes('I', Indy8BitEncoding));
 end;
 
 procedure TfrmMain.IdUDPServerAfterBind(Sender: TObject);
@@ -281,7 +277,7 @@ begin
   AddTerminal('// server read: ' + z + ' '+ABinding.IP+ ':'+IntToStr(ABinding.Port) + ' < '+ABinding.PeerIP  + ':'+IntToStr(ABinding.PeerPort));
 
   if step = step1 then begin
-   if ((Length(AData) = 1+6) and (AData[0] = Ord('A'))) then begin
+   if ((Length(AData) = 1+6+4) and (AData[0] = Ord('A'))) then begin
      AddTerminal('step 1');
      step := step2;
 
@@ -296,30 +292,12 @@ begin
    end;
   end
   else if step = step3 then begin
-    if ((Length(AData) = 1+6) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
+    if ((Length(AData) = 1+6+4) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
       AddTerminal('step 3');
       step := step6;
       IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('I'));
     end;
   end
-{
-  else if step = step4 then begin
-    if ((Length(AData) = 8) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
-      AddTerminal('step 4');
-      step := step5;
-      Inc(wCode);
-      IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('G', 'W'));
-    end;
-  end
-  else if step = step5 then begin
-    if ((Length(AData) = 8) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
-      AddTerminal('step 5');
-      step := step6;
-      Inc(wCode);
-      IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, GetReadLong('N', 'M'));
-    end;
-  end
-}
   else if step = step6 then begin
     if ((Length(AData) = 16) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
       AddTerminal('step 6');

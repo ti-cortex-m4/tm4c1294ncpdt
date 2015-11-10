@@ -17,8 +17,8 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
 {
   uchar *pbBuff = p->payload;
 
-  if (pbBuff[0] == 'M') {
-    UDP_OutMAC(pcb,p,addr,port,broadcast);
+  if (pbBuff[0] == 'I') {
+    UDP_OutInfo(pcb,p,addr,port,broadcast,dwIP);
   } else if (pbBuff[0] == 'G') {
     if (pbBuff[1] == 'I') {
       UDP_OutGetLong3(pcb,p,addr,port,broadcast,dwIP,dwGateway,dwNetmask);

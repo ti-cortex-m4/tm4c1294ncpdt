@@ -135,6 +135,7 @@ static void PushMAC(uchar *pbMAC)
 }
 
 
+// TODO
 static void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
 //  if (addr->addr == IPADDR_BROADCAST)
@@ -159,13 +160,14 @@ static err_t UDP_OutError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
 }
 
 
-err_t UDP_OutMAC(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t UDP_OutInfo(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong dw)
 {
-  err_t err = InitPush(&p, 1+6);
+  err_t err = InitPush(&p, 1+6+4);
   if (err != ERR_OK) return err;
 
   PushChar('A');
   PushMAC(pbMAC);
+  PushLongLtl(dw);
 
   UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
