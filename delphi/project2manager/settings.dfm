@@ -3,8 +3,8 @@ object frmSettings: TfrmSettings
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
-  ClientHeight = 184
-  ClientWidth = 299
+  ClientHeight = 226
+  ClientWidth = 294
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,14 +17,16 @@ object frmSettings: TfrmSettings
   TextHeight = 18
   object panBottom: TPanel
     Left = 0
-    Top = 143
-    Width = 299
+    Top = 185
+    Width = 294
     Height = 41
     Align = alBottom
     BevelEdges = []
     TabOrder = 0
+    ExplicitTop = 143
+    ExplicitWidth = 299
     object panRight: TPanel
-      Left = 72
+      Left = 67
       Top = 1
       Width = 226
       Height = 39
@@ -32,6 +34,7 @@ object frmSettings: TfrmSettings
       BevelEdges = []
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitLeft = 72
       object btbCancel: TBitBtn
         Left = 118
         Top = 6
@@ -56,12 +59,12 @@ object frmSettings: TfrmSettings
   object panClient: TPanel
     Left = 0
     Top = 0
-    Width = 299
-    Height = 143
+    Width = 294
+    Height = 185
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 32
-    ExplicitTop = 8
+    ExplicitWidth = 299
+    ExplicitHeight = 143
     object lblIP: TLabel
       Left = 16
       Top = 19
@@ -83,6 +86,13 @@ object frmSettings: TfrmSettings
       Height = 18
       Caption = 'Subnet mask'
     end
+    object lblPort: TLabel
+      Left = 16
+      Top = 147
+      Width = 34
+      Height = 18
+      Caption = #1055#1086#1088#1090
+    end
     object medIP: TMaskEdit
       Left = 111
       Top = 15
@@ -103,6 +113,13 @@ object frmSettings: TfrmSettings
       Width = 120
       Height = 26
       TabOrder = 2
+    end
+    object medPort: TMaskEdit
+      Left = 111
+      Top = 144
+      Width = 120
+      Height = 26
+      TabOrder = 3
     end
   end
 end

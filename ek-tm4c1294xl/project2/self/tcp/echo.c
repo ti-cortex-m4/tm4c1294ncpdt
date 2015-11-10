@@ -9,6 +9,7 @@ TCP_HANDLER.C
 #include "lwip/debug.h"
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
+#include "../settings.h"
 #include "../uart/uart.h"
 
 
@@ -48,7 +49,7 @@ InitTCP_Handler(void)
   {
     err_t err;
 
-    err = tcp_bind(echo_pcb, IP_ADDR_ANY, 1001);
+    err = tcp_bind(echo_pcb, IP_ADDR_ANY, GetPort());
     if (err == ERR_OK)
     {
       echo_pcb = tcp_listen(echo_pcb);

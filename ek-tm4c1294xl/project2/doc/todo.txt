@@ -17,3 +17,4 @@ InitSettings check result
 SaveSettings check result 
 tcp_nagle_disable
 #define LWIP_PLATFORM_DIAG(msg)
+ASSERT

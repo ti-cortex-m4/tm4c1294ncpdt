@@ -61,6 +61,7 @@ var
   PeerIP: string;
 
   dwIP,dwGateway,dwNetmask: string;
+  wPort: word;
 
   step: (step1, step2, step3, step4, step5, step6, step7);
   wCode: word;
@@ -214,6 +215,11 @@ begin
   result := IntToStr(j.mpbT[3])+'.'+IntToStr(j.mpbT[2])+'.'+IntToStr(j.mpbT[1])+'.'+IntToStr(j.mpbT[0]);
 end;
 
+function GetWord(AData: TArray<System.Byte>; i: word): word;
+begin
+  result := $100*AData[i+1]+AData[i+0];
+end;
+
 function GetReadLong(a: char): TIdBytes;
 var
   x: TArray<System.Byte>;
@@ -227,16 +233,18 @@ begin
   result := x;
 end;
 
-function SetAll(s1,s2,s3: string): TIdBytes;
+function SetAll(s1,s2,s3,s4: string): TIdBytes;
 var
   x: TArray<System.Byte>;
   dw1,dw2,dw3: longword;
+  w: word;
 begin
   dw1 := SaveIP(s1);
   dw2 := SaveIP(s2);
   dw3 := SaveIP(s3);
+  w := StrToInt(s4);
 
-  SetLength(x, 1+1+4+4+4+1+2);
+  SetLength(x, 1+1+4+4+4+2+1+2);
 
   x[0] := Ord('S');
   x[1] := Ord('I');
@@ -256,9 +264,12 @@ begin
   x[12] := (dw3 div $10000) mod $100;
   x[13] := (dw3 div $10000) div $100;
 
-  x[14] := Ord('|');
-  x[15] := wCode mod $100;
-  x[16] := wCode div $100;
+  x[14] := w mod $100;
+  x[15] := w div $100;
+
+  x[16] := Ord('|');
+  x[17] := wCode mod $100;
+  x[18] := wCode div $100;
 
   result := x;
 end;
@@ -299,12 +310,13 @@ begin
     end;
   end
   else if step = step6 then begin
-    if ((Length(AData) = 16) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
+    if ((Length(AData) = 16+2) and (AData[0] = Ord('A')) and (PeerIP = ABinding.PeerIP)) then begin
       AddTerminal('step 6');
       step := step7;
       dwIP := GetIP(AData, 1);
       dwGateway := GetIP(AData, 5);
       dwNetmask := GetIP(AData, 9);
+      wPort := GetWord(AData, 13);
       Inc(wCode);
 
     if not Assigned(frmSettings) then frmSettings := TfrmSettings.Create(Self);
@@ -312,13 +324,14 @@ begin
       medIP.Text := dwIP;
       medGateway.Text := dwGateway;
       medNetmask.Text := dwNetmask;
+      medPort.Text := IntToStr(wPort);
     end;
 
     if frmSettings.ShowModal = mrOk then begin
       step := step6;
 
       with frmSettings do begin
-        IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, SetAll(medIP.Text, medGateway.Text, medNetmask.Text));
+        IdUDPServer.SendBuffer('255.255.255.255', $FFFF, Id_IPv4, SetAll(medIP.Text, medGateway.Text, medNetmask.Text, medPort.Text));
       end;
 
       Delay(2000);

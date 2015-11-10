@@ -90,6 +90,10 @@ object frmMain: TfrmMain
     object tbsTerminal: TTabSheet
       Caption = #1058#1077#1088#1084#1080#1085#1072#1083
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object memTerminal: TMemo
         Left = 0
         Top = 0
