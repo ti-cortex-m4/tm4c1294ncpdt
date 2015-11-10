@@ -120,12 +120,12 @@ int     main(void)
   // address needed to program the hardware registers, then program the MAC
   // address into the Ethernet Controller registers.
   //
-  pbMAC[0] = ((dwUser0 >>  0) & 0xff);
-  pbMAC[1] = ((dwUser0 >>  8) & 0xff);
-  pbMAC[2] = ((dwUser0 >> 16) & 0xff);
-  pbMAC[3] = ((dwUser1 >>  0) & 0xff);
-  pbMAC[4] = ((dwUser1 >>  8) & 0xff);
-  pbMAC[5] = ((dwUser1 >> 16) & 0xff);
+  pbMAC[0] = ((dwUser0 >>  0) & 0xFF);
+  pbMAC[1] = ((dwUser0 >>  8) & 0xFF);
+  pbMAC[2] = ((dwUser0 >> 16) & 0xFF);
+  pbMAC[3] = ((dwUser1 >>  0) & 0xFF);
+  pbMAC[4] = ((dwUser1 >>  8) & 0xFF);
+  pbMAC[5] = ((dwUser1 >> 16) & 0xFF);
 
   InitSettings();
 
