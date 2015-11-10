@@ -20,6 +20,8 @@ type
     medIP: TMaskEdit;
     medGateway: TMaskEdit;
     medNetmask: TMaskEdit;
+    lblPort: TLabel;
+    medPort: TMaskEdit;
   private
     { Private declarations }
   public

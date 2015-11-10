@@ -182,13 +182,14 @@ err_t UDP_OutGetSettings(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
   err = PopCode(p);
   if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
-  err = InitPush(&p, 1+4+4+4+3);
+  err = InitPush(&p, 1+4+4+4+2+3);
   if (err != ERR_OK) return err;
 
   PushChar('A');
   PushLongLtl(dwIP);
   PushLongLtl(dwGateway);
   PushLongLtl(dwNetmask);
+  PushIntLtl(GetPort());
   PushChar('|');
   PushIntLtl(wCode);
 
@@ -199,7 +200,7 @@ err_t UDP_OutGetSettings(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
 
 err_t UDP_OutSetSettings(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  err_t err = CheckSize(p, 1+1+4+4+4+1+2);
+  err_t err = CheckSize(p, 1+1+4+4+4+2+1+2);
   if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
   err = PopCode(p);
@@ -208,6 +209,7 @@ err_t UDP_OutSetSettings(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
   dwIP = PopLongLtl(p, 2);
   dwGateway = PopLongLtl(p, 6);
   dwNetmask = PopLongLtl(p, 10);
+  dwPort = PopIntLtl(p, 14);
 
   err = InitPush(&p, 1+3);
   if (err != ERR_OK) return err;
