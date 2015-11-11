@@ -49,7 +49,7 @@ InitTCP_Handler(void)
   {
     err_t err;
 
-    err = tcp_bind(echo_pcb, IP_ADDR_ANY, GetPort());
+    err = tcp_bind(echo_pcb, IP_ADDR_ANY, wPort);
     if (err == ERR_OK)
     {
       echo_pcb = tcp_listen(echo_pcb);
