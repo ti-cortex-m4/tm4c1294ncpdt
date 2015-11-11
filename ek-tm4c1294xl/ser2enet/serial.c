@@ -29,6 +29,7 @@
 #include "inc/hw_sysctl.h"
 #include "inc/hw_types.h"
 #include "inc/hw_uart.h"
+#include "driverlib/pin_map.h"
 #include "driverlib/debug.h"
 #include "driverlib/gpio.h"
 #include "driverlib/interrupt.h"
@@ -39,6 +40,7 @@
 #include "serial.h"
 #include "telnet.h"
 
+extern uint32_t g_ui32SysClock;
 //*****************************************************************************
 //
 //! \addtogroup serial_api
@@ -96,7 +98,7 @@ static tRingBufObject g_sTxBuf[MAX_S2E_PORTS];
 static const uint32_t g_ulUARTBase[MAX_S2E_PORTS] =
 {
     UART0_BASE,
-    UART1_BASE
+    UART4_BASE
 };
 
 //*****************************************************************************
@@ -107,7 +109,7 @@ static const uint32_t g_ulUARTBase[MAX_S2E_PORTS] =
 static const uint32_t g_ulUARTInterrupt[MAX_S2E_PORTS] =
 {
     INT_UART0,
-    INT_UART1
+    INT_UART4
 };
 
 //*****************************************************************************
@@ -337,7 +339,7 @@ SerialUART0IntHandler(void)
 //
 //*****************************************************************************
 void
-SerialUART1IntHandler(void)
+SerialUART4IntHandler(void)
 {
     SerialUARTIntHandler(1);
 }
@@ -697,14 +699,14 @@ SerialSetBaudRate(uint32_t ulPort, uint32_t ulBaudRate)
     //
     // Get and check the clock use by the UART.
     //
-    ulUARTClk = SysCtlClockGet();
-    ASSERT(ulUARTClk >= (ulBaudRate * 16));
+//    ulUARTClk = SysCtlClockGet();
+//    ASSERT(ulUARTClk >= (ulBaudRate * 16));
 
     //
     // Stop the UART.
     //
     UARTDisable(g_ulUARTBase[ulPort]);
-
+/*
     //
     // Compute the fractional baud rate divider.
     //
@@ -715,6 +717,8 @@ SerialSetBaudRate(uint32_t ulPort, uint32_t ulBaudRate)
     //
     HWREG(g_ulUARTBase[ulPort] + UART_O_IBRD) = ulDiv / 64;
     HWREG(g_ulUARTBase[ulPort] + UART_O_FBRD) = ulDiv % 64;
+*/
+    UARTConfigSetExpClk(g_ulUARTBase[ulPort], g_ui32SysClock, 9600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 
     //
     // Clear the flags register.
@@ -1757,18 +1761,26 @@ SerialInit(void)
     GPIOIntEnable(PIN_U0RTS_PORT, PIN_U0RTS_PIN);
     IntEnable(PIN_U0RTS_INT);
 
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART4);
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+    GPIOPinConfigure(GPIO_PA2_U4RX);
+    GPIOPinConfigure(GPIO_PA3_U4TX);
+    GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_2 | GPIO_PIN_3);
+    UARTFIFOLevelSet(UART4_BASE, UART_FIFO_TX4_8, UART_FIFO_RX4_8);
+    UARTTxIntModeSet(UART4_BASE, UART_TXINT_MODE_EOT);
+    UARTFIFOEnable(UART4_BASE);
     //
     // Configure the Port 1 pins appropriately.
     //
-    GPIOPinTypeUART(PIN_U1RX_PORT, PIN_U1RX_PIN);
-    GPIOPinTypeUART(PIN_U1TX_PORT, PIN_U1TX_PIN);
-    GPIOPinTypeGPIOInput(PIN_U1RTS_PORT, PIN_U1RTS_PIN);
-    GPIOPinTypeGPIOOutput(PIN_U1CTS_PORT, PIN_U1CTS_PIN);
-    GPIOPinWrite(PIN_U1CTS_PORT, PIN_U1CTS_PIN, 0);
-    GPIOIntTypeSet(PIN_U1RTS_PORT, PIN_U1RTS_PIN, GPIO_BOTH_EDGES);
-    GPIOIntEnable(PIN_U1RTS_PORT, PIN_U1RTS_PIN);
-    IntEnable(PIN_U1RTS_INT);
-
+//    GPIOPinTypeUART(PIN_U1RX_PORT, PIN_U1RX_PIN);
+//    GPIOPinTypeUART(PIN_U1TX_PORT, PIN_U1TX_PIN);
+//    GPIOPinTypeGPIOInput(PIN_U1RTS_PORT, PIN_U1RTS_PIN);
+//    GPIOPinTypeGPIOOutput(PIN_U1CTS_PORT, PIN_U1CTS_PIN);
+//    GPIOPinWrite(PIN_U1CTS_PORT, PIN_U1CTS_PIN, 0);
+//    GPIOIntTypeSet(PIN_U1RTS_PORT, PIN_U1RTS_PIN, GPIO_BOTH_EDGES);
+//    GPIOIntEnable(PIN_U1RTS_PORT, PIN_U1RTS_PIN);
+//    IntEnable(PIN_U1RTS_INT);
+/*
     //
     // Configure the RS-232 Transceiver pins appropriately.
     // (Note:  This is for Port 1 only).
@@ -1784,7 +1796,7 @@ SerialInit(void)
     GPIOPinWrite(PIN_XVR_RDY_PORT, PIN_XVR_RDY_PIN, 0);
     GPIOPinWrite(PIN_XVR_OFF_N_PORT, PIN_XVR_OFF_N_PIN, PIN_XVR_OFF_N_PIN);
     GPIOPinWrite(PIN_XVR_ON_PORT, PIN_XVR_ON_PIN, PIN_XVR_ON_PIN);
-
+*/
     //
     // Configure Port 0.
     //

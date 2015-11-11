@@ -44,6 +44,8 @@
 #include "utils/uartstdio.h"
 #endif
 #include "httpserver_raw/httpd.h"
+#include "lwip/inet.h"
+#include "drivers/pinout.h"
 #include "config.h"
 #include "serial.h"
 #include "telnet.h"
@@ -91,6 +93,13 @@
 //
 //*****************************************************************************
 #define SYSTICKMS               (1000 / SYSTICKHZ)
+
+//*****************************************************************************
+//
+// The system clock frequency.
+//
+//*****************************************************************************
+uint32_t g_ui32SysClock;
 
 //*****************************************************************************
 //
@@ -197,6 +206,7 @@ lwIPHostTimerHandler(void)
 void
 SysTickIntHandler(void)
 {
+
     //
     // Increment a local system time.
     //
@@ -226,20 +236,25 @@ main(void)
     uint32_t ulLoop;
 
     //
-    // If running on Rev A2 silicon, turn the LDO voltage up to 2.75V.  This is
-    // a workaround to allow the PLL to operate reliably.
+    // Make sure the main oscillator is enabled because this is required by
+    // the PHY.  The system must have a 25MHz crystal attached to the OSC
+    // pins. The SYSCTL_MOSC_HIGHFREQ parameter is used when the crystal
+    // frequency is 10MHz or higher.
     //
-    if(REVISION_IS_A2)
-    {
-        SysCtlLDOSet(SYSCTL_LDO_2_75V);
-    }
+    SysCtlMOSCConfigSet(SYSCTL_MOSC_HIGHFREQ);
 
     //
-    // Set the processor to run at 50 MHz, allowing UART operation at up to
-    // 3.125 MHz.
+    // Run from the PLL at 120 MHz.
     //
-    SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
-                   SYSCTL_XTAL_8MHZ);
+    g_ui32SysClock = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+                                             SYSCTL_OSC_MAIN |
+                                             SYSCTL_USE_PLL |
+                                             SYSCTL_CFG_VCO_480), 120000000);
+
+    //
+    // Configure the device pins.
+    //
+    PinoutSet(true, false);
 
     //
     // Enable the peripherals used by the application.
@@ -250,8 +265,7 @@ main(void)
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_UART1);
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_ETH);
-
+/*
     //
     // Enable the peripherals that should continue to run when the processor
     // is sleeping.
@@ -262,28 +276,42 @@ main(void)
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_GPIOF);
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_UART0);
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_UART1);
-    SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_ETH);
 
     //
     // Enable peripheral clock gating.  Note that this is required in order to
     // measure the the processor usage.
     //
     SysCtlPeripheralClockGating(true);
-
+*/
     //
     // Set the priorities of the interrupts used by the application.
     //
     IntPrioritySet(INT_UART0, 0x00);
-    IntPrioritySet(INT_UART1, 0x00);
-    IntPrioritySet(INT_ETH, 0x20);
+    IntPrioritySet(INT_UART4, 0x00);
+    IntPrioritySet(INT_EMAC0, 0x20);
     IntPrioritySet(FAULT_SYSTICK, 0x40);
+
+    //
+    // Configure Port N1 for as an output for the animation LED.
+    //
+    GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_1);
+
+    //
+    // Initialize LED to OFF (0)
+    //
+    GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, ~GPIO_PIN_1);
 
     //
     // Configure SysTick for a periodic interrupt.
     //
-    SysTickPeriodSet(SysCtlClockGet() / SYSTICKHZ);
+    SysTickPeriodSet(g_ui32SysClock / SYSTICKHZ);
     SysTickEnable();
     SysTickIntEnable();
+
+    //
+    // Configure the device pins.
+    //
+    PinoutSet(true, false);
 
 #ifdef DEBUG_UART
     //
@@ -291,9 +319,9 @@ main(void)
     // debug purposes.  Note that this will corrupt any telnet datastream also
     // carried on this UART so use this option with care and only during debug.
     //
-    UARTStdioInit(DEBUG_UART);
+    UARTStdioConfig(0, 115200, g_ui32SysClock);
 #endif
-
+/*
     //
     // Enable Port F for Ethernet LEDs.
     //  LED0        Bit 3   Output
@@ -306,39 +334,45 @@ main(void)
     // status in the PHY).
     //
     g_bLinkStatusUp = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_3) ? false : true;
-
+*/
     //
     // Initialize the configuration parameter module.
     //
     ConfigInit();
 
     //
-    // Get the MAC address from the USER0 and USER1 registers in NV memory.
+    // Configure the hardware MAC address for Ethernet Controller filtering of
+    // incoming packets.  The MAC address will be stored in the non-volatile
+    // USER0 and USER1 registers.
     //
-    FlashUserGet(&ulUser0, &ulUser1);
+    uint32_t ui32User0, ui32User1;
+    FlashUserGet(&ui32User0, &ui32User1);
 
     //
-    // Convert the 24/24 split MAC address from NV memory into a MAC address
-    // array.
+    // Convert the 24/24 split MAC address from NV ram into a 32/16 split MAC
+    // address needed to program the hardware registers, then program the MAC
+    // address into the Ethernet Controller registers.
     //
-    pucMACAddr[0] = ulUser0 & 0xff;
-    pucMACAddr[1] = (ulUser0 >> 8) & 0xff;
-    pucMACAddr[2] = (ulUser0 >> 16) & 0xff;
-    pucMACAddr[3] = ulUser1 & 0xff;
-    pucMACAddr[4] = (ulUser1 >> 8) & 0xff;
-    pucMACAddr[5] = (ulUser1 >> 16) & 0xff;
+    pucMACAddr[0] = ((ui32User0 >>  0) & 0xff);
+    pucMACAddr[1] = ((ui32User0 >>  8) & 0xff);
+    pucMACAddr[2] = ((ui32User0 >> 16) & 0xff);
+    pucMACAddr[3] = ((ui32User1 >>  0) & 0xff);
+    pucMACAddr[4] = ((ui32User1 >>  8) & 0xff);
+    pucMACAddr[5] = ((ui32User1 >> 16) & 0xff);
 
     //
     // Initialize the lwIP TCP/IP stack.
     //
-    lwIPInit(pucMACAddr, g_sParameters.ulStaticIP, g_sParameters.ulSubnetMask,
-             g_sParameters.ulGatewayIP, ((g_sParameters.ucFlags &
-             CONFIG_FLAG_STATICIP) ? IPADDR_USE_STATIC : IPADDR_USE_DHCP));
+//    lwIPInit(g_ui32SysClock, pucMACAddr, g_sParameters.ulStaticIP, g_sParameters.ulSubnetMask,
+//             g_sParameters.ulGatewayIP, ((g_sParameters.ucFlags &
+//             CONFIG_FLAG_STATICIP) ? IPADDR_USE_STATIC : IPADDR_USE_DHCP));
+
+    lwIPInit(g_ui32SysClock, pucMACAddr, inet_addr("100.1.168.192"), inet_addr("0.255.255.255"), inet_addr("2.1.168.192"), IPADDR_USE_STATIC);
 
     //
     // Setup the device locator service.
     //
-    LocatorInit();
+    InitUDP_Handler();
     LocatorMACAddrSet(pucMACAddr);
     LocatorAppTitleSet((char *)g_sParameters.ucModName);
 
@@ -475,7 +509,7 @@ main(void)
             // Initiate the Software Update Process in the Ethernet
             // Bootloader.
             //
-            SoftwareUpdateBegin();
+            SoftwareUpdateBegin(g_ui32SysClock);
 
             //
             // Should never get here, but stall just in case.
