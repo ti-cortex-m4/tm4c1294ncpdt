@@ -189,7 +189,7 @@ err_t UDP_OutGetSettings(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
   PushLongLtl(dwIP);
   PushLongLtl(dwGateway);
   PushLongLtl(dwNetmask);
-  PushIntLtl(GetPort());
+  PushIntLtl(wPort);
   PushChar('|');
   PushIntLtl(wCode);
 
@@ -209,7 +209,7 @@ err_t UDP_OutSetSettings(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
   dwIP = PopLongLtl(p, 2);
   dwGateway = PopLongLtl(p, 6);
   dwNetmask = PopLongLtl(p, 10);
-  dwPort = PopIntLtl(p, 14);
+  wPort = PopIntLtl(p, 14);
 
   err = InitPush(&p, 1+3);
   if (err != ERR_OK) return err;

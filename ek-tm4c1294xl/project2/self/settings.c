@@ -22,7 +22,7 @@ ulong                   dwIP;
 ulong                   dwGateway;
 ulong                   dwNetmask;
 
-ulong                   dwPort;
+uint                    wPort;
 
 uchar                   pbMAC[6];
 
@@ -40,40 +40,61 @@ uchar   InitSettings(void)
 
 
 
+static uchar SaveLong(ulong *pdw, ulong dwAddr)
+{
+  return EEPROMProgram(pdw, dwAddr, 4);
+}
+
+
+static uchar SaveInt(uint *pw, ulong dwAddr)
+{
+  ulong dw = *pw;
+  return EEPROMProgram(&dw, dwAddr, 4);
+}
+
+
 uchar    SaveSettings(void)
 {
-  uchar err = EEPROMProgram(&dwIP, EEPROM_ADDR_IP, 4);
+  uchar err = SaveLong(&dwIP, EEPROM_ADDR_IP);
   if (err != 0) return err;
 
-  err = EEPROMProgram(&dwGateway, EEPROM_ADDR_GATEWAY, 4);
+  err = SaveLong(&dwGateway, EEPROM_ADDR_GATEWAY);
   if (err != 0) return err;
 
-  err = EEPROMProgram(&dwNetmask, EEPROM_ADDR_NETMASK, 4);
+  err = SaveLong(&dwNetmask, EEPROM_ADDR_NETMASK);
   if (err != 0) return err;
 
-  err = EEPROMProgram(&dwPort, EEPROM_ADDR_PORT, 4);
+  err = SaveInt(&wPort, EEPROM_ADDR_PORT);
   if (err != 0) return err;
 
   return 0;
+}
+
+
+
+static void LoadLong(ulong *pdw, ulong dwAddr)
+{
+  EEPROMRead(pdw, dwAddr, 4);
+}
+
+
+static void LoadInt(uint *pw, ulong dwAddr)
+{
+  ulong dw;
+  EEPROMRead(&dw, dwAddr, 4);
+  *pw = dw % 0x10000;
 }
 
 
 uchar   LoadSettings(void)
 {
-  EEPROMRead(&dwIP, EEPROM_ADDR_IP, 4);
+  LoadLong(&dwIP, EEPROM_ADDR_IP);
 
-  EEPROMRead(&dwGateway, EEPROM_ADDR_GATEWAY, 4);
+  LoadLong(&dwGateway, EEPROM_ADDR_GATEWAY);
 
-  EEPROMRead(&dwNetmask, EEPROM_ADDR_NETMASK, 4);
+  LoadLong(&dwNetmask, EEPROM_ADDR_NETMASK);
 
-  EEPROMRead(&dwPort, EEPROM_ADDR_PORT, 4);
+  LoadInt(&wPort, EEPROM_ADDR_PORT);
 
   return 0;
-}
-
-
-
-uint    GetPort(void)
-{
-  return dwPort % 0x10000;
 }
