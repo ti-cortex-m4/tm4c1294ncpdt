@@ -108,16 +108,16 @@
 //
 //*****************************************************************************
 extern void TelnetInit(void);
-extern void TelnetListen(unsigned short usTelnetPort,
+extern void TelnetListen(uint16_t usTelnetPort,
                          uint32_t ulSerialPort);
 extern void TelnetOpen(uint32_t ulIPAddr,
-                       unsigned short usTelnetRemotePort,
-                       unsigned short usTelnetLocalPort,
+                       uint16_t usTelnetRemotePort,
+                       uint16_t usTelnetLocalPort,
                        uint32_t ulSerialPort);
 extern void TelnetClose(uint32_t ulSerialPort);
 extern void TelnetHandler(void);
-extern unsigned short TelnetGetLocalPort(uint32_t ulSerialPort);
-extern unsigned short TelnetGetRemotePort(uint32_t ulSerialPort);
+extern uint16_t TelnetGetLocalPort(uint32_t ulSerialPort);
+extern uint16_t TelnetGetRemotePort(uint32_t ulSerialPort);
 #if CONFIG_RFC2217_ENABLED
 extern void TelnetNotifyModemState(uint32_t ulPort,
                                    uint8_t ucModemState);
