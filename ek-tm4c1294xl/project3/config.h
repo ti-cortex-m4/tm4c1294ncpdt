@@ -107,13 +107,13 @@ typedef struct
     //! The local TCP port number to be listened on when in server mode or
     //! from which the outgoing connection will be initiated in client mode.
     //
-    unsigned short usTelnetLocalPort;
+    uint16_t usTelnetLocalPort;
 
     //
     //! The TCP port number to which a connection will be established when in
     //! telnet client mode.
     //
-    unsigned short usTelnetRemotePort;
+    uint16_t usTelnetRemotePort;
 
     //
     //! The IP address which will be connected to when in telnet client mode.
@@ -216,7 +216,7 @@ typedef struct
     //! The TCP port number to be used for access to the UPnP Location URL that
     //! is part of the discovery response message.
     //
-    unsigned short usLocationURLPort;
+    uint16_t usLocationURLPort;
 
     //
     //! Padding to ensure consistent parameter block alignment.
