@@ -33,7 +33,7 @@ static uchar            bOut0, bIn0,
 
 
 
-static void Test(ulong  dwBaseOut, ulong  dwBaseIn, uchar  *pbOut, uchar  *pbIn)
+static void OutIn(ulong  dwBaseOut, uchar  *pbOut, ulong  dwBaseIn, uchar  *pbIn)
 {
   if (UARTCharPutNonBlocking(dwBaseOut, TEST_CHAR))
     (*pbOut)++;
@@ -58,13 +58,13 @@ static void GetTest0(void)
 
   while (1)
   {
-    Test(UART0_BASE, UART0_BASE, &bOut0, &bIn0);
-    Test(UART2_BASE, UART2_BASE, &bOut1, &bIn1);
-    Test(UART3_BASE, UART3_BASE, &bOut2, &bIn2);
-    Test(UART4_BASE, UART4_BASE, &bOut3, &bIn3);
+    OutIn(UART0_BASE, &bOut0, UART0_BASE, &bIn0);
+    OutIn(UART2_BASE, &bOut1, UART2_BASE, &bIn1);
+    OutIn(UART3_BASE, &bOut2, UART3_BASE, &bIn2);
+    OutIn(UART4_BASE, &bOut3, UART4_BASE, &bIn3);
 
-    Lo(0, bOut0); Lo(2, bIn0);
-    Lo(5, bOut1); Lo(7, bIn1);
+    Lo( 0, bOut0); Lo( 2, bIn0);
+    Lo( 5, bOut1); Lo( 7, bIn1);
     Lo(10, bOut2); Lo(12, bIn2);
     Hi(10, bOut3); Hi(12, bIn3);
 
@@ -96,9 +96,9 @@ static void GetTest1(void)
 
   while (1)
   {
-    Test(UART3_BASE, UART4_BASE, &bOut2, &bIn3);
+    OutIn(UART3_BASE, &bOut2, UART4_BASE, &bIn3);
 
-    Lo(2, bOut2); Lo(4, bIn2);
+    Lo( 2, bOut2); Lo( 4, bIn2);
     Lo(11, bOut3); Lo(13, bIn3);
 
     if (fKey == true) {fKey = false; break; }
@@ -127,9 +127,9 @@ static void GetTest2(void)
 
   while (1)
   {
-    Test(UART4_BASE, UART3_BASE, &bOut3, &bIn2);
+    OutIn(UART4_BASE, &bOut3, UART3_BASE, &bIn2);
 
-    Lo(2, bOut2); Lo(4, bIn2);
+    Lo( 2, bOut2); Lo( 4, bIn2);
     Lo(11, bOut3); Lo(13, bIn3);
 
     if (fKey == true) {fKey = false; break; }
@@ -146,12 +146,15 @@ static void GetTest2(void)
 
 static void GetTest(uchar  i)
 {
-  sprintf(szHi+15,"%u",i+1); Clear();
+  sprintf(szHi+15,"%u",i+1);
+  Clear();
+
   switch (i)
   {
     case 0:  GetTest0();  break;
     case 1:  GetTest1();  break;
     case 2:  GetTest2();  break;
+    default: ASSERT(false);
   }
 }
 
@@ -159,8 +162,6 @@ static void GetTest(uchar  i)
 
 void    key_TestUART(void)
 {
-static uchar i;
-
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -173,11 +174,11 @@ static uchar i;
     {
       enKeyboard = KBD_POSTENTER;
 
-      i = 0;
-      GetTest(i);
+      GetTest(0);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
+      uchar i;
       if ((i = GetCharLo(10,11) - 1) < 3)
       {
         enKeyboard = KBD_POSTENTER;
@@ -200,4 +201,3 @@ static uchar i;
   }
   else Beep();
 }
-

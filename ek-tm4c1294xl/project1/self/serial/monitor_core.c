@@ -5,8 +5,8 @@ MONITOR_CORE.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../../tm4c1294xl/utils/uartstdio.h"
-#include "../../tm4c1294xl/driverlib/interrupt.h"
+#include "utils/uartstdio.h"
+#include "driverlib/interrupt.h"
 #include "inc/hw_ints.h"
 #include "speeds.h"
 #include "ports_common.h"

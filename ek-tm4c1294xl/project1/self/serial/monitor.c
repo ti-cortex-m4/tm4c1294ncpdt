@@ -5,7 +5,7 @@ MONITOR.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../../tm4c1294xl/utils/uartstdio.h"
+#include "utils/uartstdio.h"
 #include "../time/rtc.h"
 #include "ports_common.h"
 #include "monitor.h"
