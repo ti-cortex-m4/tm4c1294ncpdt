@@ -2232,7 +2232,7 @@ ConfigMiscCGIHandler(int iIndex, int iNumParams, char *pcParam[],
         // from the current value, store it and note that we made a change
         // that needs saving.
         //
-        if((uint16_t int)lValue !=
+        if((uint16_t)lValue !=
            g_sWorkingDefaultParameters.usLocationURLPort)
         {
             //
@@ -2245,7 +2245,7 @@ ConfigMiscCGIHandler(int iIndex, int iNumParams, char *pcParam[],
             //
             g_sParameters.usLocationURLPort = (uint16_t)lValue;
             g_sWorkingDefaultParameters.usLocationURLPort =
-                (uint16_t int)lValue;
+                (uint16_t)lValue;
 
             //
             // Restart UPnP with the new location port number.
