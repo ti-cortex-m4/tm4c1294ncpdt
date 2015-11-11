@@ -73,6 +73,7 @@ KEYBOARD_KEY!C
 #include "impulses/key_set_profiles.h"
 #include "key_reset.h"
 #include "key_reset_wdt.h"
+#include "test/key_test_uart.h"
 #include "test/key_test_direct.h"
 #include "test/key_test_response.h"
 #include "test/key_test_flow.h"
@@ -291,6 +292,7 @@ void    Keyboard_Key(void)
 
       case bTEST_DIRECT:        key_TestDirect();       break;
 
+      case bTEST_UART:          key_TestUART();         break;
       case bTEST_RESPONSE:      key_TestResponse();     break;
       case bTEST_FLOW:          key_TestFlow();         break;
       case bTEST_PORTS_IO:      key_TestPortsIO();      break;
@@ -788,6 +790,7 @@ void    Keyboard_Key(void)
 
       case bTEST_DIRECT:        key_TestDirect();       break;
 
+      case bTEST_UART:          key_TestUART();         break;
       case bTEST_RESPONSE:      key_TestResponse();     break;
       case bTEST_FLOW:          key_TestFlow();         break;
       case bTEST_PORTS_IO:      key_TestPortsIO();      break;
