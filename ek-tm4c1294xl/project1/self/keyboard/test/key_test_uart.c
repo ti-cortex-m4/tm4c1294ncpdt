@@ -6,7 +6,6 @@
 
 #include "../../main.h"
 #include "../../console.h"
-#include "../../display/lines.h"
 #include "../../hardware/watchdog.h"
 #include "../../isr/serial2.h"
 #include "../../isr/serial3.h"
