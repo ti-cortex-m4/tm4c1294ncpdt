@@ -6,7 +6,7 @@
 	<deviceEndianness value="little"/>
 	<codegenToolVersion value="4.9.5"/>
 	<isElfFormat value="true"/>
-	<connection value=""/>
+	<connection value="common/targetdb/connections/TIXDS100v2_Connection.xml"/>
 	<rts value="libc.a"/>
 	<isTargetManual value="false"/>
 </projectOptions>
