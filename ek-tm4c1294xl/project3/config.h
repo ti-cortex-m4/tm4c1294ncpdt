@@ -74,27 +74,27 @@ typedef struct
     //! The data size to be use for the serial port, specified in bits.  Valid
     //! values are 5, 6, 7, and 8.
     //
-    unsigned char ucDataSize;
+    uint8_t ucDataSize;
 
     //
     //! The parity to be use for the serial port, specified as an enumeration.
     //! Valid values are 1 for no parity, 2 for odd parity, 3 for even parity,
     //! 4 for mark parity, and 5 for space parity.
     //
-    unsigned char ucParity;
+    uint8_t ucParity;
 
     //
     //! The number of stop bits to be use for the serial port, specified as
     //! a number.  Valid values are 1 and 2.
     //
-    unsigned char ucStopBits;
+    uint8_t ucStopBits;
 
     //
     //! The flow control to be use for the serial port, specified as an
     //! enumeration.  Valid values are 1 for no flow control and 3 for HW
     //! (RTS/CTS) flow control.
     //
-    unsigned char ucFlowControl;
+    uint8_t ucFlowControl;
 
     //
     //! The timeout for the TCP connection used for the telnet session,
@@ -123,12 +123,12 @@ typedef struct
     //
     //! Miscellaneous flags associated with this connection.
     //
-    unsigned char ucFlags;
+    uint8_t ucFlags;
 
     //! Padding to ensure consistent parameter block alignment, and
     //! to allow for future expansion of port parameters.
     //
-    unsigned char ucReserved0[19];
+    uint8_t ucReserved0[19];
 }
 tPortParameters;
 
@@ -191,26 +191,26 @@ typedef struct
     //! is not used.  When in flash, this value is used to determine the
     //! parameter block with the most recent information.
     //
-    unsigned char ucSequenceNum;
+    uint8_t ucSequenceNum;
 
     //
     //! The CRC of the parameter block.  When in RAM, this value is not used.
     //! When in flash, this value is used to validate the contents of the
     //! parameter block (to avoid using a partially written parameter block).
     //
-    unsigned char ucCRC;
+    uint8_t ucCRC;
 
     //
     //! The version of this parameter block.  This can be used to distinguish
     //! saved parameters that correspond to an old version of the parameter
     //! block.
     //
-    unsigned char ucVersion;
+    uint8_t ucVersion;
 
     //
     //! Character field used to store various bit flags.
     //
-    unsigned char ucFlags;
+    uint8_t ucFlags;
 
     //
     //! The TCP port number to be used for access to the UPnP Location URL that
@@ -221,7 +221,7 @@ typedef struct
     //
     //! Padding to ensure consistent parameter block alignment.
     //
-    unsigned char ucReserved1[2];
+    uint8_t ucReserved1[2];
 
     //
     //! The configuration parameters for each port available on the S2E
@@ -233,7 +233,7 @@ typedef struct
     //! An ASCII string used to identify the module to users via UPnP and
     //! web configuration.
     //
-    unsigned char ucModName[MOD_NAME_LEN];
+    uint8_t ucModName[MOD_NAME_LEN];
 
     //
     //! The static IP address to use if DHCP is not in use.
@@ -253,7 +253,7 @@ typedef struct
     //
     //! Padding to ensure the whole structure is 256 bytes long.
     //
-    unsigned char ucReserved2[108];
+    uint8_t ucReserved2[108];
 }
 tConfigParameters;
 
@@ -516,7 +516,7 @@ extern tBoolean g_bStartBootloader;
 // browser telling it the address has changed).
 //
 //*****************************************************************************
-extern unsigned char g_cUpdateRequired;
+extern uint8_t g_cUpdateRequired;
 
 #define UPDATE_IP_ADDR 0x01
 #define UPDATE_ALL     0x02
