@@ -24,10 +24,17 @@
 		<nature>org.eclipse.cdt.core.ccnature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>utils/uartstdio.c</name>
+			<type>1</type>
+			<locationURI>SW_ROOT/utils/uartstdio.c</locationURI>
+		</link>
+	</linkedResources>
 	<variableList>
 		<variable>
 			<name>SW_ROOT</name>
-			<value>file:/D:/TI/SW-EK-TM4C1294XL-2.1.0.12573</value>
+			<value>file:/D:/Cortex/tm4c1294ncpdt/sw-tm4c-2.1.1.71</value>
 		</variable>
 	</variableList>
 </projectDescription>
