@@ -93,7 +93,7 @@ static tRingBufObject g_sTxBuf[MAX_S2E_PORTS];
 //! The base address for the UART associated with a port.
 //
 //*****************************************************************************
-static const unsigned long g_ulUARTBase[MAX_S2E_PORTS] =
+static const uint32_t g_ulUARTBase[MAX_S2E_PORTS] =
 {
     UART0_BASE,
     UART1_BASE
@@ -104,7 +104,7 @@ static const unsigned long g_ulUARTBase[MAX_S2E_PORTS] =
 //! The interruopt for the UART associated with a port.
 //
 //*****************************************************************************
-static const unsigned long g_ulUARTInterrupt[MAX_S2E_PORTS] =
+static const uint32_t g_ulUARTInterrupt[MAX_S2E_PORTS] =
 {
     INT_UART0,
     INT_UART1
@@ -115,7 +115,7 @@ static const unsigned long g_ulUARTInterrupt[MAX_S2E_PORTS] =
 //! The interrupt for the GPIO Flow Control pin associated with a port.
 //
 //*****************************************************************************
-static const unsigned long g_ulFlowInterrupt[MAX_S2E_PORTS] =
+static const uint32_t g_ulFlowInterrupt[MAX_S2E_PORTS] =
 {
     PIN_U0RTS_INT,
     PIN_U1RTS_INT
@@ -126,7 +126,7 @@ static const unsigned long g_ulFlowInterrupt[MAX_S2E_PORTS] =
 //! The GPIO base address for the flow control output pin.
 //
 //*****************************************************************************
-static const unsigned long g_ulFlowOutBase[MAX_S2E_PORTS] =
+static const uint32_t g_ulFlowOutBase[MAX_S2E_PORTS] =
 {
     PIN_U0CTS_PORT,
     PIN_U1CTS_PORT
@@ -137,7 +137,7 @@ static const unsigned long g_ulFlowOutBase[MAX_S2E_PORTS] =
 //! The GPIO base address for the flow control input pin.
 //
 //*****************************************************************************
-static const unsigned long g_ulFlowInBase[MAX_S2E_PORTS] =
+static const uint32_t g_ulFlowInBase[MAX_S2E_PORTS] =
 {
     PIN_U0RTS_PORT,
     PIN_U1RTS_PORT
@@ -148,7 +148,7 @@ static const unsigned long g_ulFlowInBase[MAX_S2E_PORTS] =
 //! The GPIO pin number for the flow control output pin.
 //
 //*****************************************************************************
-static const unsigned long g_ulFlowOutPin[MAX_S2E_PORTS] =
+static const uint32_t g_ulFlowOutPin[MAX_S2E_PORTS] =
 {
     PIN_U0CTS_PIN,
     PIN_U1CTS_PIN
@@ -159,7 +159,7 @@ static const unsigned long g_ulFlowOutPin[MAX_S2E_PORTS] =
 //! The GPIO pin number for the flow control input pin.
 //
 //*****************************************************************************
-static const unsigned long g_ulFlowInPin[MAX_S2E_PORTS] =
+static const uint32_t g_ulFlowInPin[MAX_S2E_PORTS] =
 {
     PIN_U0RTS_PIN,
     PIN_U1RTS_PIN
@@ -170,7 +170,7 @@ static const unsigned long g_ulFlowInPin[MAX_S2E_PORTS] =
 //! The status of the flow control output based on SerialSetFlowOut().
 //
 //*****************************************************************************
-static unsigned long g_ulSetFlowOutValue[MAX_S2E_PORTS] =
+static uint32_t g_ulSetFlowOutValue[MAX_S2E_PORTS] =
 {
     0,
     0
@@ -181,7 +181,7 @@ static unsigned long g_ulSetFlowOutValue[MAX_S2E_PORTS] =
 //! The current baud rate setting of the serial port
 //
 //*****************************************************************************
-static unsigned long g_ulCurrentBaudRate[MAX_S2E_PORTS] =
+static uint32_t g_ulCurrentBaudRate[MAX_S2E_PORTS] =
 {
     0,
     0
@@ -202,9 +202,9 @@ static unsigned long g_ulCurrentBaudRate[MAX_S2E_PORTS] =
 //
 //*****************************************************************************
 static void
-SerialUARTIntHandler(unsigned long ulPort)
+SerialUARTIntHandler(uint32_t ulPort)
 {
-    unsigned long ulStatus;
+    uint32_t ulStatus;
     uint8_t ucChar;
 
     //
@@ -357,9 +357,9 @@ SerialUART1IntHandler(void)
 //
 //*****************************************************************************
 static void
-SerialFlowInIntHandler(unsigned long ulPort)
+SerialFlowInIntHandler(uint32_t ulPort)
 {
-    unsigned long ulStatus;
+    uint32_t ulStatus;
 #if CONFIG_RFC2217_ENABLED
     uint8_t ucModemState;
 #endif
@@ -466,7 +466,7 @@ SerialGPIOAIntHandler(void)
 //
 //*****************************************************************************
 static void
-SerialUARTEnable(unsigned long ulPort)
+SerialUARTEnable(uint32_t ulPort)
 {
     //
     // Enable the FIFO.
@@ -504,7 +504,7 @@ SerialUARTEnable(unsigned long ulPort)
 //
 //*****************************************************************************
 tBoolean
-SerialSendFull(unsigned long ulPort)
+SerialSendFull(uint32_t ulPort)
 {
     //
     // Check the arguments.
@@ -532,7 +532,7 @@ SerialSendFull(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialSend(unsigned long ulPort, uint8_t ucChar)
+SerialSend(uint32_t ulPort, uint8_t ucChar)
 {
     //
     // Check the arguments.
@@ -589,9 +589,9 @@ SerialSend(unsigned long ulPort, uint8_t ucChar)
 //
 //*****************************************************************************
 long
-SerialReceive(unsigned long ulPort)
+SerialReceive(uint32_t ulPort)
 {
-    unsigned long ulData;
+    uint32_t ulData;
 
     //
     // Check the arguments.
@@ -650,8 +650,8 @@ SerialReceive(unsigned long ulPort)
 //! \return The number of characters available in the ring buffer..
 //
 //*****************************************************************************
-unsigned long
-SerialReceiveAvailable(unsigned long ulPort)
+uint32_t
+SerialReceiveAvailable(uint32_t ulPort)
 {
     //
     // Check the arguments.
@@ -679,9 +679,9 @@ SerialReceiveAvailable(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialSetBaudRate(unsigned long ulPort, unsigned long ulBaudRate)
+SerialSetBaudRate(uint32_t ulPort, uint32_t ulBaudRate)
 {
-    unsigned long ulDiv, ulUARTClk;
+    uint32_t ulDiv, ulUARTClk;
 
     //
     // Check the arguments.
@@ -739,10 +739,10 @@ SerialSetBaudRate(unsigned long ulPort, unsigned long ulBaudRate)
 //! \return The current baud rate of the serial port.
 //
 //*****************************************************************************
-unsigned long
-SerialGetBaudRate(unsigned long ulPort)
+uint32_t
+SerialGetBaudRate(uint32_t ulPort)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig, ulDif, ulTemp;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig, ulDif, ulTemp;
 
     //
     // Check the arguments.
@@ -803,9 +803,9 @@ SerialGetBaudRate(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialSetDataSize(unsigned long ulPort, uint8_t ucDataSize)
+SerialSetDataSize(uint32_t ulPort, uint8_t ucDataSize)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
     //
     // Check the arguments.
@@ -897,9 +897,9 @@ SerialSetDataSize(unsigned long ulPort, uint8_t ucDataSize)
 //
 //*****************************************************************************
 uint8_t
-SerialGetDataSize(unsigned long ulPort)
+SerialGetDataSize(uint32_t ulPort)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig;
     uint8_t ucCurrentDataSize;
 
     //
@@ -970,9 +970,9 @@ SerialGetDataSize(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialSetParity(unsigned long ulPort, uint8_t ucParity)
+SerialSetParity(uint32_t ulPort, uint8_t ucParity)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
     //
     // Check the arguments.
@@ -1078,9 +1078,9 @@ SerialSetParity(unsigned long ulPort, uint8_t ucParity)
 //
 //*****************************************************************************
 uint8_t
-SerialGetParity(unsigned long ulPort)
+SerialGetParity(uint32_t ulPort)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig;
     uint8_t ucCurrentParity;
 
     //
@@ -1157,9 +1157,9 @@ SerialGetParity(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialSetStopBits(unsigned long ulPort, uint8_t ucStopBits)
+SerialSetStopBits(uint32_t ulPort, uint8_t ucStopBits)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
     //
     // Check the arguments.
@@ -1235,9 +1235,9 @@ SerialSetStopBits(unsigned long ulPort, uint8_t ucStopBits)
 //
 //*****************************************************************************
 uint8_t
-SerialGetStopBits(unsigned long ulPort)
+SerialGetStopBits(uint32_t ulPort)
 {
-    unsigned long ulCurrentBaudRate, ulCurrentConfig;
+    uint32_t ulCurrentBaudRate, ulCurrentConfig;
     uint8_t ucCurrentStopBits;
 
     //
@@ -1295,7 +1295,7 @@ SerialGetStopBits(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialSetFlowOut(unsigned long ulPort, uint8_t ucFlowValue)
+SerialSetFlowOut(uint32_t ulPort, uint8_t ucFlowValue)
 {
     //
     // Check the arguments.
@@ -1359,7 +1359,7 @@ SerialSetFlowOut(unsigned long ulPort, uint8_t ucFlowValue)
 //
 //*****************************************************************************
 uint8_t
-SerialGetFlowOut(unsigned long ulPort)
+SerialGetFlowOut(uint32_t ulPort)
 {
     //
     // Check the arguments.
@@ -1397,7 +1397,7 @@ SerialGetFlowOut(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialSetFlowControl(unsigned long ulPort, uint8_t ucFlowControl)
+SerialSetFlowControl(uint32_t ulPort, uint8_t ucFlowControl)
 {
     //
     // Check the arguments.
@@ -1465,7 +1465,7 @@ SerialSetFlowControl(unsigned long ulPort, uint8_t ucFlowControl)
 //
 //*****************************************************************************
 uint8_t
-SerialGetFlowControl(unsigned long ulPort)
+SerialGetFlowControl(uint32_t ulPort)
 {
     //
     // Check the arguments.
@@ -1491,7 +1491,7 @@ SerialGetFlowControl(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialPurgeData(unsigned long ulPort, uint8_t ucPurgeCommand)
+SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand)
 {
     //
     // Check the arguments.
@@ -1538,7 +1538,7 @@ SerialPurgeData(unsigned long ulPort, uint8_t ucPurgeCommand)
 //
 //*****************************************************************************
 void
-SerialSetDefault(unsigned long ulPort)
+SerialSetDefault(uint32_t ulPort)
 {
     //
     // Check the arguments.
@@ -1606,7 +1606,7 @@ SerialSetDefault(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialSetCurrent(unsigned long ulPort)
+SerialSetCurrent(uint32_t ulPort)
 {
     //
     // Check the arguments.
@@ -1674,7 +1674,7 @@ SerialSetCurrent(unsigned long ulPort)
 //
 //*****************************************************************************
 void
-SerialSetFactory(unsigned long ulPort)
+SerialSetFactory(uint32_t ulPort)
 {
     //
     // Check the arguments.
