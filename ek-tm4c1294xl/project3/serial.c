@@ -22,6 +22,8 @@
 //
 //*****************************************************************************
 
+#include <stdint.h>
+#include <stdbool.h>
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_sysctl.h"
