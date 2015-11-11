@@ -45,7 +45,7 @@ extern void _c_int00(void);
 // Linker variable that marks the top of the stack.
 //
 //*****************************************************************************
-extern unsigned long __STACK_TOP;
+extern uint32_t __STACK_TOP;
 
 //*****************************************************************************
 //
@@ -69,7 +69,7 @@ extern void SerialUART1IntHandler(void);
 #pragma DATA_SECTION(g_pfnVectors, ".intvecs")
 void (* const g_pfnVectors[])(void) =
 {
-    (void (*)(void))((unsigned long)&__STACK_TOP),
+    (void (*)(void))((uint32_t)&__STACK_TOP),
                                             // The initial stack pointer
     ResetISR,                               // The reset handler
     NmiSR,                                  // The NMI handler

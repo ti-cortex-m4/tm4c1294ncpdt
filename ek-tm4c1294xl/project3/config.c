@@ -876,10 +876,10 @@ ConfigWebInit(void)
 //
 //*****************************************************************************
 static const char *
-ConfigMapIdToString(const tStringMap *psMap, unsigned long ulEntries,
+ConfigMapIdToString(const tStringMap *psMap, uint32_t ulEntries,
                     uint8_t ucId)
 {
-    unsigned long ulLoop;
+    uint32_t ulLoop;
 
     //
     // Check each entry in the map array looking for the ID number we were
@@ -926,7 +926,7 @@ ConfigMapIdToString(const tStringMap *psMap, unsigned long ulEntries,
 //
 //*****************************************************************************
 void
-ConfigUpdatePortParameters(unsigned long ulPort, tBoolean bSerial,
+ConfigUpdatePortParameters(uint32_t ulPort, tBoolean bSerial,
                            tBoolean bTelnet)
 {
     //
@@ -1228,12 +1228,12 @@ ConfigDecodeHexEscape(const char *pcEncoded, char *pcDecoded)
 //! not including the terminating NULL.
 //
 //*****************************************************************************
-static unsigned long
+static uint32_t
 ConfigEncodeFormString(const char *pcDecoded, char *pcEncoded,
-                       unsigned long ulLen)
+                       uint32_t ulLen)
 {
-    unsigned long ulLoop;
-    unsigned long ulCount;
+    uint32_t ulLoop;
+    uint32_t ulCount;
 
     //
     // Make sure we were not passed a tiny buffer.
@@ -1297,12 +1297,12 @@ ConfigEncodeFormString(const char *pcDecoded, char *pcEncoded,
 //! including the terminating NULL.
 //
 //*****************************************************************************
-static unsigned long
+static uint32_t
 ConfigDecodeFormString(const  char *pcEncoded, char *pcDecoded,
-                       unsigned long ulLen)
+                       uint32_t ulLen)
 {
-    unsigned long ulLoop;
-    unsigned long ulCount;
+    uint32_t ulLoop;
+    uint32_t ulCount;
     tBoolean bValid;
 
     ulCount = 0;
@@ -1407,7 +1407,7 @@ ConfigDecodeFormString(const  char *pcEncoded, char *pcDecoded,
 static tBoolean
 ConfigCheckDecimalParam(const char *pcValue, long *plValue)
 {
-    unsigned long ulLoop;
+    uint32_t ulLoop;
     tBoolean bStarted;
     tBoolean bFinished;
     tBoolean bNeg;
@@ -1622,12 +1622,12 @@ ConfigGetCGIParam(const char *pcName, char *pcParams[], char *pcValue[],
 //! which case \e *pbError will be \b true).
 //
 //*****************************************************************************
-unsigned long
+uint32_t
 ConfigGetCGIIPAddr(const char *pcName, char *pcParam[], char *pcValue[],
                    int iNumParams, tBoolean *pbError)
 {
-    unsigned long ulIPAddr;
-    unsigned long ulLoop;
+    uint32_t ulIPAddr;
+    uint32_t ulLoop;
     long lValue;
     char pcVariable[MAX_VARIABLE_NAME_LEN];
     tBoolean bError;
@@ -1659,7 +1659,7 @@ ConfigGetCGIIPAddr(const char *pcName, char *pcParam[], char *pcValue[],
         //
         lValue = ConfigGetCGIParam(pcVariable, pcParam, pcValue, iNumParams,
                                    &bError);
-        ulIPAddr |= ((unsigned long)lValue & 0xFF);
+        ulIPAddr |= ((uint32_t)lValue & 0xFF);
     }
 
     //
@@ -1778,7 +1778,7 @@ ConfigCGIHandler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
     //
     // Baud rate
     //
-    sPortParams.ulBaudRate = (unsigned long)ConfigGetCGIParam("br", pcParam,
+    sPortParams.ulBaudRate = (uint32_t)ConfigGetCGIParam("br", pcParam,
                                                               pcValue,
                                                               iNumParams,
                                                               &bParamError);
@@ -2013,9 +2013,9 @@ ConfigIPCGIHandler(int iIndex, int iNumParams, char *pcParam[],
     tBoolean bChanged;
     tBoolean bParamError;
     long lMode;
-    unsigned long ulIPAddr;
-    unsigned long ulGatewayAddr;
-    unsigned long ulSubnetMask;
+    uint32_t ulIPAddr;
+    uint32_t ulGatewayAddr;
+    uint32_t ulSubnetMask;
 
     //
     // Nothing has changed and we have seen no errors so far.
@@ -2517,7 +2517,7 @@ ConfigUpdateCGIHandler(int iIndex, int iNumParams, char *pcParam[],
 static int
 ConfigSSIHandler(int iIndex, char *pcInsert, int iInsertLen)
 {
-    unsigned long ulPort;
+    uint32_t ulPort;
     int iCount;
     const char *pcString;
 
@@ -2531,7 +2531,7 @@ ConfigSSIHandler(int iIndex, char *pcInsert, int iInsertLen)
         //
         case SSI_INDEX_IPADDR:
         {
-            unsigned long ulIPAddr;
+            uint32_t ulIPAddr;
 
             ulIPAddr = lwIPLocalIPAddrGet();
             return(usnprintf(pcInsert, iInsertLen, "%d.%d.%d.%d",

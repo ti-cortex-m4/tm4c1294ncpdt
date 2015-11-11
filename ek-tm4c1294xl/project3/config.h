@@ -68,7 +68,7 @@ typedef struct
     //! The baud rate to be used for the UART, specified in bits-per-second
     //! (bps).
     //
-    unsigned long ulBaudRate;
+    uint32_t ulBaudRate;
 
     //
     //! The data size to be use for the serial port, specified in bits.  Valid
@@ -101,7 +101,7 @@ typedef struct
     //! specified in seconds.  A value of 0 indicates no timeout is to
     //! be used.
     //
-    unsigned long ulTelnetTimeout;
+    uint32_t ulTelnetTimeout;
 
     //
     //! The local TCP port number to be listened on when in server mode or
@@ -118,7 +118,7 @@ typedef struct
     //
     //! The IP address which will be connected to when in telnet client mode.
     //
-    unsigned long ulTelnetIPAddr;
+    uint32_t ulTelnetIPAddr;
 
     //
     //! Miscellaneous flags associated with this connection.
@@ -238,17 +238,17 @@ typedef struct
     //
     //! The static IP address to use if DHCP is not in use.
     //
-    unsigned long ulStaticIP;
+    uint32_t ulStaticIP;
 
     //
     //! The default gateway IP address to use if DHCP is not in use.
     //
-    unsigned long ulGatewayIP;
+    uint32_t ulGatewayIP;
 
     //
     //! The subnet mask to use if DHCP is not in use.
     //
-    unsigned long ulSubnetMask;
+    uint32_t ulSubnetMask;
 
     //
     //! Padding to ensure the whole structure is 256 bytes long.

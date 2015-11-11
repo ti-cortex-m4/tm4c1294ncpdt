@@ -40,6 +40,6 @@
 extern void UPnPInit(void);
 extern void UPnPStart(void);
 extern void UPnPStop(void);
-extern void UPnPHandler(unsigned long ulTimeMS);
+extern void UPnPHandler(uint32_t ulTimeMS);
 
 #endif // __UPnP_H__

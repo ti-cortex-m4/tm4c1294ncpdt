@@ -97,7 +97,7 @@
 //! Keeps track of elapsed time in milliseconds.
 //
 //*****************************************************************************
-unsigned long g_ulSystemTimeMS = 0;
+uint32_t g_ulSystemTimeMS = 0;
 
 //*****************************************************************************
 //
@@ -120,7 +120,7 @@ volatile tBoolean g_bLinkStatusUp = false;
 //*****************************************************************************
 #ifdef DEBUG
 void
-__error__(char *pcFilename, unsigned long ulLine)
+__error__(char *pcFilename, uint32_t ulLine)
 {
 }
 #endif
@@ -221,9 +221,9 @@ SysTickIntHandler(void)
 int
 main(void)
 {
-    unsigned long ulUser0, ulUser1;
+    uint32_t ulUser0, ulUser1;
     uint8_t pucMACAddr[8];
-    unsigned long ulLoop;
+    uint32_t ulLoop;
 
     //
     // If running on Rev A2 silicon, turn the LDO voltage up to 2.75V.  This is
