@@ -44,7 +44,8 @@ KEY_RESET!C
 
 //                                         0123456789ABCDEF
 static char const       szResetFull[]   = "Полный сброс    ",
-                        szResetCustom[] = "Частичный сброс ";
+                        szResetCustom[] = "Частичный сброс ",
+                        szBadFlash[]    = "  памяти FLASH !";
 
 
 
