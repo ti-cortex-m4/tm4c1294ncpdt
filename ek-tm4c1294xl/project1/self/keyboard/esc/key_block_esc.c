@@ -14,9 +14,9 @@ KEY_BLOCK_ESC,C
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "     Запрет     ",
                         szMessage2[]    = "протокола Esc ? ",
-                        szNo[]          = " нет            ",
-                        szPartial[]     = " частичный      ",
-                        szFull[]        = " полный         ";
+                        szNo_[]         = " нет            ",
+                        szPartial_[]    = " частичный      ",
+                        szFull_[]       = " полный         ";
 
 
 static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
@@ -26,11 +26,11 @@ static char const       *pszMessages[] = { szMessage1, szMessage2, "" };
 static void Show(void)
 {
   if (boBlockEsc == false)
-    ShowLo(szNo);
+    ShowLo(szNo_);
   else if (boBlockEsc == true)
-    ShowLo(szPartial);
+    ShowLo(szPartial_);
   else
-    ShowLo(szFull);
+    ShowLo(szFull_);
 
   if (enGlobal != GLB_WORK)
     szLo[0] = '.';

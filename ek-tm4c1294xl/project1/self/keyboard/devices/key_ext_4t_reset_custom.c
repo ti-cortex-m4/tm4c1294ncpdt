@@ -14,7 +14,7 @@ static char const       szMonths[]      = "Месяцы:         ",
                         szCanals[]      = "Каналы:         ",
                         szCanalFrom[]   = " от: __",
                         szCanalTo[]     = " до: __",
-                        szNo[]          = ".нет";
+                        szNo_[]         = ".нет";
 
 
 extern  char const                   *pszExt4TReset[];
@@ -42,7 +42,7 @@ static uchar ibMonMin, ibMonMax;
         Clear(); 
       
         LoadSlide(pszExt4TReset);
-        ShowLo(szNo);
+        ShowLo(szNo_);
       }
       else BlockProgram2(wSET_EXT4T_FLAG, 0);
     } 
