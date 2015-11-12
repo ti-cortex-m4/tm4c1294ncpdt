@@ -27,7 +27,6 @@
 #include <string.h>
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
-#include "driverlib/ethernet.h"
 #include "utils/lwiplib.h"
 #include "utils/ustdlib.h"
 #include "config.h"
