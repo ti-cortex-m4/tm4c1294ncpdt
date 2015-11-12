@@ -100,7 +100,7 @@ static uint16_t g_usResponsePort = 0;
 typedef struct
 {
     uint32_t ulRetryCount;
-    tBoolean bDescriptionSent;
+    bool bDescriptionSent;
 }
 tUPnPState;
 

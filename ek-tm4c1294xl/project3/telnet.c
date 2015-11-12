@@ -391,7 +391,7 @@ typedef struct
     //
     //! The indication that link layer has been lost.
     //
-    tBoolean bLinkLost;
+    bool bLinkLost;
 
     //
     //! Debug and diagnostic counters.
@@ -3187,7 +3187,7 @@ TelnetNotifyModemState(uint32_t ulPort, uint8_t ucModemState)
 //
 //*****************************************************************************
 void
-TelnetNotifyLinkStatus(tBoolean bLinkStatusUp)
+TelnetNotifyLinkStatus(bool bLinkStatusUp)
 {
     int iPort;
 

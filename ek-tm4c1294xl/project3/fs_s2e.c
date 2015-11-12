@@ -86,7 +86,7 @@ char g_pcDiagBuffer[SIZE_DIAG_BUFFER];
 struct sFileSystemTable
 {
     struct fs_file sHandle;
-    tBoolean bInUse;
+    bool bInUse;
 };
 
 //*****************************************************************************
