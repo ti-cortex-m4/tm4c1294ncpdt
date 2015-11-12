@@ -367,8 +367,8 @@ SerialFlowInIntHandler(uint32_t ulPort)
     //
     // Clear the interrupt condition.
     //
-    ulStatus = GPIOPinIntStatus(g_ulFlowInBase[ulPort], true);
-    GPIOPinIntClear(g_ulFlowInBase[ulPort], ulStatus);
+    ulStatus = GPIOIntStatus(g_ulFlowInBase[ulPort], true);
+    GPIOIntClear(g_ulFlowInBase[ulPort], ulStatus);
 
     //
     // If flow control is enabled, check the status of the pin and
@@ -1754,7 +1754,7 @@ SerialInit(void)
     GPIOPinTypeGPIOOutput(PIN_U0CTS_PORT, PIN_U0CTS_PIN);
     GPIOPinWrite(PIN_U0CTS_PORT, PIN_U0CTS_PIN, 0);
     GPIOIntTypeSet(PIN_U0RTS_PORT, PIN_U0RTS_PIN, GPIO_BOTH_EDGES);
-    GPIOPinIntEnable(PIN_U0RTS_PORT, PIN_U0RTS_PIN);
+    GPIOIntEnable(PIN_U0RTS_PORT, PIN_U0RTS_PIN);
     IntEnable(PIN_U0RTS_INT);
 
     //
@@ -1766,7 +1766,7 @@ SerialInit(void)
     GPIOPinTypeGPIOOutput(PIN_U1CTS_PORT, PIN_U1CTS_PIN);
     GPIOPinWrite(PIN_U1CTS_PORT, PIN_U1CTS_PIN, 0);
     GPIOIntTypeSet(PIN_U1RTS_PORT, PIN_U1RTS_PIN, GPIO_BOTH_EDGES);
-    GPIOPinIntEnable(PIN_U1RTS_PORT, PIN_U1RTS_PIN);
+    GPIOIntEnable(PIN_U1RTS_PORT, PIN_U1RTS_PIN);
     IntEnable(PIN_U1RTS_INT);
 
     //
