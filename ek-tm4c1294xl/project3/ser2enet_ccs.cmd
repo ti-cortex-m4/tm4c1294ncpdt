@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * ser2enet_ccs.cmd - CCS linker configuration file for ser2enet.
+ * project3_ccs.cmd - CCS linker configuration file for project3.
  *
  * Copyright (c) 2008-2013 Texas Instruments Incorporated.  All rights reserved.
  * Software License Agreement
@@ -32,7 +32,7 @@
 /*                                                                           */
 /* --heap_size=0                                                             */
 /* --stack_size=256                                                          */
-/* --library=rtsv7M3_T_le_eabi.lib                                           */
+/* --library=rtsv7M4_T_le_eabi.lib                                           */
 
 /* The starting address of the application.  Normally the interrupt vectors  */
 /* must be located at the beginning of the application.                      */
@@ -44,9 +44,9 @@
 MEMORY
 {
     /* Application stored in and executes from internal flash */
-    FLASH (RX) : origin = APP_BASE, length = 0x00016800
+    FLASH (RX) : origin = APP_BASE, length = 0x00100000
     /* Application uses internal RAM for data */
-    SRAM (RWX) : origin = 0x20000000, length = 0x00008000
+    SRAM (RWX) : origin = 0x20000000, length = 0x00040000
 }
 
 /* Section allocation in memory */
