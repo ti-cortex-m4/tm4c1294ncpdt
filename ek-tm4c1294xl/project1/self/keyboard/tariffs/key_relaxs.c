@@ -23,7 +23,7 @@ static char const       szRelaxs[]      = "Праздники       ",
                         szNoRelaxs[]    = " нет праздников ",
                         szHoliday[]     = " выходной",
                         szWeekday[]     = " рабочий ",
-                        szError[]       = " ошибка !";
+                        szError_[]      = " ошибка !";
 
 
 static time             tiT;
@@ -36,7 +36,7 @@ void    ShowRelaxName(uchar  i)
   {
     case 1:  strcpy(szLo+7, szHoliday);  break;
     case 2:  strcpy(szLo+7, szWeekday);  break;
-    default: strcpy(szLo+7, szError);    break;
+    default: strcpy(szLo+7, szError_);   break;
   }
 }
 

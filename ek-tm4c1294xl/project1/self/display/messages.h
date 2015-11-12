@@ -6,7 +6,7 @@ MESSAGES!H
 
 extern  char const              szClear[],
                                 szWarning[],
-//                                szError[],
+                                szError[],
 //                                szOK[],
                                 szStop[],
                                 szWaiting[],

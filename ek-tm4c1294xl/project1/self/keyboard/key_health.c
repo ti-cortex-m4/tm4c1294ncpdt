@@ -17,7 +17,7 @@ static char const       szHealth[]      = "Состояние       ",
                         szFlash2[]      = "FLASH2:         ",
                         szNvram[]       = "NVRAM:          ",
                         szOK[]          = "OK",
-                        szError[]       = "ошибка";
+                        szError_[]      = "ошибка";
 
 
 
@@ -27,17 +27,17 @@ static void Show(uchar  i)
   {
     case 0: 
       ShowLo(szFlash1);
-      GetFlashStatus1() == 0 ? strcpy(szLo+8, szOK) : strcpy(szLo+8, szError);
+      GetFlashStatus1() == 0 ? strcpy(szLo+8, szOK) : strcpy(szLo+8, szError_);
       break;
 
     case 1: 
       ShowLo(szFlash2);
-      GetFlashStatus2() == 0 ? strcpy(szLo+8, szOK) : strcpy(szLo+8, szError);
+      GetFlashStatus2() == 0 ? strcpy(szLo+8, szOK) : strcpy(szLo+8, szError_);
       break;
 
     case 2: 
       ShowLo(szNvram);
-      GetNvramStatus() == 0 ? strcpy(szLo+7, szOK) : strcpy(szLo+7, szError);
+      GetNvramStatus() == 0 ? strcpy(szLo+7, szOK) : strcpy(szLo+7, szError_);
       break;
   }
 }
