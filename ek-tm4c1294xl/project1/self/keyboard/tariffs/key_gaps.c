@@ -17,7 +17,7 @@ KEY_GAPS!C
 static char const       szGaps[]        = "Периоды         ",
                         szMaskGap[]     = "__ __           ",
                         szNoGaps[]      = "  нет периодов  ",
-                        szError[]       = " ошибка !";
+                        szError_[]      = " ошибка !";
 
 
 static time             tiT;
@@ -29,7 +29,7 @@ void    ShowGapName(uchar  i)
   if (i < 12)
     sprintf(szLo+7, "период %u" , i+1);
   else
-    strcpy(szLo+7, szError);
+    strcpy(szLo+7, szError_);
 }
 
 
