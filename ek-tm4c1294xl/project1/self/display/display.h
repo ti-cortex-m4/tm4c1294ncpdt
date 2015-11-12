@@ -4,6 +4,7 @@ DISPLAY!H
 
 ------------------------------------------------------------------------------*/
 
+#include <stdio.h>
 #include "../main.h"
 #include "lines.h"
 #include "slides.h"
