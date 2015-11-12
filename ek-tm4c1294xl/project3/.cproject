@@ -134,10 +134,10 @@
 									<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}/third_party/lwip-1.3.2/src/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}/third_party/lwip-1.3.2/src/include/ipv4&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}/third_party/lwip-1.3.2/apps&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}/third_party/lwip-1.3.2/ports/stellaris/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}/third_party/lwip-1.4.1/src/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}/third_party/lwip-1.4.1/src/include/ipv4&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}/third_party/lwip-1.4.1/apps&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}/third_party/lwip-1.4.1/ports/stellaris/include&quot;"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_4.9.compilerID.LITTLE_ENDIAN.267706086" name="Little endian code [See 'General' page to edit] (--little_endian, -me)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_4.9.compilerID.LITTLE_ENDIAN" value="true" valueType="boolean"/>
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_4.9.compilerID.GEN_FUNC_SUBSECTIONS.1694936705" name="Place each function in a separate subsection (--gen_func_subsections, -ms)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_4.9.compilerID.GEN_FUNC_SUBSECTIONS" value="com.ti.ccstudio.buildDefinitions.TMS470_4.9.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
