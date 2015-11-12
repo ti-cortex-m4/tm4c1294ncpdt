@@ -184,7 +184,7 @@ fs_free(struct fs_file *file)
 //
 //*****************************************************************************
 struct fs_file *
-fs_open(char *name)
+fs_open(const char *name)
 {
     const struct fsdata_file *ptTree;
     struct fs_file *ptFile = NULL;

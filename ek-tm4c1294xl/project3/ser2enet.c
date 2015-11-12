@@ -356,8 +356,7 @@ main(void)
     // Initialize the lwIP TCP/IP stack.
     //
     lwIPInit(g_ui32SysClock, pucMACAddr, g_sParameters.ulStaticIP, g_sParameters.ulSubnetMask,
-             g_sParameters.ulGatewayIP, ((g_sParameters.ucFlags &
-             CONFIG_FLAG_STATICIP) ? IPADDR_USE_STATIC : IPADDR_USE_DHCP));
+             g_sParameters.ulGatewayIP, ((g_sParameters.ucFlags & CONFIG_FLAG_STATICIP) ? IPADDR_USE_STATIC : IPADDR_USE_DHCP));
 
     //
     // Setup the device locator service.
