@@ -23,20 +23,20 @@ KEY_CNT_YEAR!C
 
 
 //                                           0123456789ABCDEF
-static char const       szCounters[]      = "    —четчики    ",
+static char const       szCounters_[]     = "    —четчики    ",
                         szAtBegin[]       = "на начало мес€ца",
                         szAtEnd[]         = "на конец мес€ца ",
-                        szNoData[]        = "  нет данных !  ",
+                        szNoData_[]       = "  нет данных !  ",
                         szNotSupported[]  = "*  нет данных   ",
                         szBuffer[]        = "   из буфера    ",
                         szType1[]         = "  с дозапросом  ",
                         szType2[]         = " пр€мого опроса ";
 
-static char const       *pszCntCanYear1[]  = { szCounters, szBeta, szAtEnd,   "" },
-                        *pszCntCanYear10[] = { szCounters, szBeta, szAtBegin, "" },
-                        *pszCntCanYear2[]  = { szCounters, szBeta, szAtEnd,   szBuffer, szType1, "" },
-                        *pszCntCanYear20[] = { szCounters, szBeta, szAtBegin, szBuffer, szType1, "" },
-                        *pszCntCanYear3[]  = { szCounters, szBeta, szAtEnd,   szBuffer, szType2, "" };
+static char const       *pszCntCanYear1[]  = { szCounters_, szBeta, szAtEnd,   "" },
+                        *pszCntCanYear10[] = { szCounters_, szBeta, szAtBegin, "" },
+                        *pszCntCanYear2[]  = { szCounters_, szBeta, szAtEnd,   szBuffer, szType1, "" },
+                        *pszCntCanYear20[] = { szCounters_, szBeta, szAtBegin, szBuffer, szType1, "" },
+                        *pszCntCanYear3[]  = { szCounters_, szBeta, szAtEnd,   szBuffer, szType2, "" };
 
 
 static uchar            ibCan, ibMon, ibVal;
@@ -88,7 +88,7 @@ static void Show(void)
 
     case bGET_CNTCANYEAR10:     
       if (ibMon == tiCurr.bMonth)
-        ShowLo(szNoData);
+        ShowLo(szNoData_);
       else
       {
         ibMon = (12+ibMon-1)%12;

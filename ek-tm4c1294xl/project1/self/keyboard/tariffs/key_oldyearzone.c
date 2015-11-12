@@ -28,7 +28,7 @@ static char const      *pszPubPrg10[]   = { szZones, szOnMonths,   "" },
                        *pszEngPrg20[]   = { szZones, szOnMonths,   szForEnergy, "" },
                        *pszEngPrg27[]   = { szZones, szOnQuarters, szForEnergy, "" };
 
-static uchar            ibX, ibXmax, ibYmin, ibYmax;
+static uchar            ibT, ibXmax, ibYmin, ibYmax;
 
 static period           pe;
 
@@ -109,7 +109,7 @@ void    key_SetOldYearZone(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibX = GetCharLo(10,11)) == 0)
+      if ((ibT = GetCharLo(10,11)) == 0)
       {
         enKeyboard = KBD_POSTENTER;
 
@@ -118,11 +118,11 @@ void    key_SetOldYearZone(void)
 
         pe = YEAR;
       }
-      else if ((ibXmax == 4) && (ibX <= ibXmax))
+      else if ((ibXmax == 4) && (ibT <= ibXmax))
       {
         enKeyboard = KBD_POSTENTER;
 
-        switch (ibX) 
+        switch (ibT) 
         {
           case 1:  ibYmin = 0; ibYmax =  2;  break;
           case 2:  ibYmin = 3; ibYmax =  5;  break;
@@ -132,12 +132,12 @@ void    key_SetOldYearZone(void)
 
         pe = QUARTER;
       }
-      else if ((ibXmax == 12) && (ibX <= ibXmax))
+      else if ((ibXmax == 12) && (ibT <= ibXmax))
       {
         enKeyboard = KBD_POSTENTER;
 
-        ibYmin = ibX-1;
-        ibYmax = ibX-1;
+        ibYmin = ibT-1;
+        ibYmax = ibT-1;
 
         pe = MONTH;
       }
