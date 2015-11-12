@@ -845,8 +845,7 @@ ConfigWebInit(void)
     //
     // Pass our tag information to the HTTP server.
     //
-    http_set_ssi_handler(ConfigSSIHandler, g_pcConfigSSITags,
-                         NUM_CONFIG_SSI_TAGS);
+    http_set_ssi_handler((tSSIHandler)ConfigSSIHandler, g_pcConfigSSITags, NUM_CONFIG_SSI_TAGS);
 
     //
     // Pass our CGI handlers to the HTTP server.
