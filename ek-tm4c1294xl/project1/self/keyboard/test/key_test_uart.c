@@ -32,6 +32,30 @@ static uchar            bOut0, bIn0,
 
 
 
+static void Disable(void)
+{
+  IntDisable(INT_UART0);
+  IntDisable(INT_UART2);
+  IntDisable(INT_UART3);
+  IntDisable(INT_UART4);
+
+  bOut0 = 0; bIn0 = 0;
+  bOut1 = 0; bIn1 = 0;
+  bOut2 = 0; bIn2 = 0;
+  bOut3 = 0; bIn3 = 0;
+}
+
+
+static void Enable(void)
+{
+  IntEnable(INT_UART0);
+  IntEnable(INT_UART2);
+  IntEnable(INT_UART3);
+  IntEnable(INT_UART4);
+}
+
+
+
 static void OutIn(ulong  dwBaseOut, uchar  *pbOut, ulong  dwBaseIn, uchar  *pbIn)
 {
   if (UARTCharPutNonBlocking(dwBaseOut, TEST_CHAR))
@@ -45,15 +69,7 @@ static void OutIn(ulong  dwBaseOut, uchar  *pbOut, ulong  dwBaseIn, uchar  *pbIn
 
 static void GetTest0(void)
 {
-  IntDisable(INT_UART0);
-  IntDisable(INT_UART2);
-  IntDisable(INT_UART3);
-  IntDisable(INT_UART4);
-
-  bOut0 = 0; bIn0 = 0;
-  bOut1 = 0; bIn1 = 0;
-  bOut2 = 0; bIn2 = 0;
-  bOut3 = 0; bIn3 = 0;
+  Disable();
 
   while (1)
   {
@@ -73,21 +89,13 @@ static void GetTest0(void)
     ResetWatchdog();
   }
 
-  IntEnable(INT_UART0);
-  IntEnable(INT_UART2);
-  IntEnable(INT_UART3);
-  IntEnable(INT_UART4);
+  Enable();
 }
 
 
 static void GetTest1(void)
 {
-  IntDisable(INT_UART3);
-  IntDisable(INT_UART4);
-
-  bOut2 = 0; bIn2 = 0;
-  bOut3 = 0; bIn3 = 0;
-
+  Disable();
   sprintf(szLo,"3:     > 4:");
 
   OutputMode2();
@@ -106,19 +114,13 @@ static void GetTest1(void)
     ResetWatchdog();
   }
 
-  IntEnable(INT_UART3);
-  IntEnable(INT_UART4);
+  Enable();
 }
 
 
 static void GetTest2(void)
 {
-  IntDisable(INT_UART3);
-  IntDisable(INT_UART4);
-
-  bOut2 = 0; bIn2 = 0;
-  bOut3 = 0; bIn3 = 0;
-
+  Disable();
   sprintf(szLo,"3:     < 4:");
 
   InputMode2();
@@ -137,8 +139,7 @@ static void GetTest2(void)
     ResetWatchdog();
   }
 
-  IntEnable(INT_UART3);
-  IntEnable(INT_UART4);
+  Enable();
 }
 
 
@@ -156,7 +157,6 @@ static void GetTest(uchar  i)
     default: ASSERT(false);
   }
 }
-
 
 
 void    key_TestUART(void)
