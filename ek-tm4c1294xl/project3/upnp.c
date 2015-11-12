@@ -720,6 +720,7 @@ UPnP_recv_udp(void *arg, struct udp_pcb *pcb, struct pbuf *p,
 void
 UPnPInit(void)
 {
+#if 0
     uint32_t ulTemp;
 
     //
@@ -728,6 +729,7 @@ UPnPInit(void)
     ulTemp = EthernetConfigGet(ETH_BASE);
     ulTemp |= ETH_CFG_RX_AMULEN;
     EthernetConfigSet(ETH_BASE, ulTemp);
+#endif
 
     //
     // Set up the ports required to listen for discovery and location
