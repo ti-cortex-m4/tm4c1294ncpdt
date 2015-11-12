@@ -22,13 +22,12 @@
 //
 //*****************************************************************************
 
-#include <stdbool.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <string.h>
 #include "inc/hw_memmap.h"
 #include "inc/hw_nvic.h"
 #include "inc/hw_types.h"
-//#include "driverlib/ethernet.h"
 #include "driverlib/systick.h"
 #include "driverlib/sysctl.h"
 #include "utils/lwiplib.h"

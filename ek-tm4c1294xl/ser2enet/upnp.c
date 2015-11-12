@@ -22,12 +22,11 @@
 //
 //*****************************************************************************
 
-#include <stdbool.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <string.h>
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
-//#include "driverlib/ethernet.h"
 #include "utils/lwiplib.h"
 #include "utils/ustdlib.h"
 #include "config.h"
@@ -720,7 +719,8 @@ UPnP_recv_udp(void *arg, struct udp_pcb *pcb, struct pbuf *p,
 //*****************************************************************************
 void
 UPnPInit(void)
-{/*
+{
+#if 0
     uint32_t ulTemp;
 
     //
@@ -729,7 +729,8 @@ UPnPInit(void)
     ulTemp = EthernetConfigGet(ETH_BASE);
     ulTemp |= ETH_CFG_RX_AMULEN;
     EthernetConfigSet(ETH_BASE, ulTemp);
-*/
+#endif
+
     //
     // Set up the ports required to listen for discovery and location
     // requests.
