@@ -50,7 +50,7 @@ void    ShowTime_ClearCanals(uchar  ibHhr)
 
 
 
-static void ShowAnswer(void)
+static void Show(void)
 {
   Clear();
   ShowBool(enKeyboard != KBD_INPUT5);
@@ -134,7 +134,7 @@ static uint  wHhrMin,wHhrMax;
       enKeyboard = KBD_INPUT5;
 
       ShowHi(szClearCanals);
-      ShowAnswer();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT5)
     {
@@ -179,7 +179,7 @@ static uint  wHhrMin,wHhrMax;
     else if ((enKeyboard == KBD_INPUT5) || (enKeyboard == KBD_POSTINPUT5))
     {
       (enKeyboard == KBD_INPUT5) ? (enKeyboard = KBD_POSTINPUT5) : (enKeyboard = KBD_INPUT5);
-      ShowAnswer();
+      Show();
     }
     else Beep();
   }

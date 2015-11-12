@@ -36,7 +36,7 @@ static char const       szSetProfiles[]  = "Редактирование  ",
 
 
 
-static void ShowAnswer(void)
+static void Show(void)
 {
   Clear();
   ShowBool(enKeyboard != KBD_INPUT6);
@@ -184,7 +184,7 @@ static uint  wImp,wHhrMin,wHhrMax;
       wImp = GetIntLo(11,15);
 
       enKeyboard = KBD_INPUT6;
-      ShowAnswer();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
@@ -229,7 +229,7 @@ static uint  wImp,wHhrMin,wHhrMax;
     else if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
     {
       (enKeyboard == KBD_INPUT6) ? (enKeyboard = KBD_POSTINPUT6) : (enKeyboard = KBD_INPUT6);
-      ShowAnswer();
+      Show();
     }
     else Beep();
   }
@@ -338,7 +338,7 @@ static uint  wImp,wHhrMin,wHhrMax;
       wImp = GetIntLo(11,15);
 
       enKeyboard = KBD_INPUT6;
-      ShowAnswer();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT6)
     {
@@ -369,7 +369,7 @@ static uint  wImp,wHhrMin,wHhrMax;
     else if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
     {
       (enKeyboard == KBD_INPUT6) ? (enKeyboard = KBD_POSTINPUT6) : (enKeyboard = KBD_INPUT6);
-      ShowAnswer();
+      Show();
     }
     else Beep();
   }
