@@ -37,6 +37,7 @@
 #include "driverlib/uart.h"
 #include "utils/lwiplib.h"
 #include "utils/ustdlib.h"
+#include "lwip/sys.h"
 #include "config.h"
 #include "serial.h"
 #include "telnet.h"
