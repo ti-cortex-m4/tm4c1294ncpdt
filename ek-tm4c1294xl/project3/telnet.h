@@ -122,7 +122,7 @@ extern uint16_t TelnetGetRemotePort(uint32_t ulSerialPort);
 extern void TelnetNotifyModemState(uint32_t ulPort,
                                    uint8_t ucModemState);
 #endif
-extern void TelnetNotifyLinkStatus(tBoolean bLinkStatusUp);
+extern void TelnetNotifyLinkStatus(bool bLinkStatusUp);
 #ifdef ENABLE_WEB_DIAGNOSTICS
 extern void TelnetWriteDiagInfo(char *pcBuffer, int iLen,
                                 uint8_t ucPort);

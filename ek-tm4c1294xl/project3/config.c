@@ -51,7 +51,7 @@
 //! web-based configuration pages.
 //
 //*****************************************************************************
-static tBoolean g_bUpdateRequested = false;
+static bool g_bUpdateRequested = false;
 
 //*****************************************************************************
 //
@@ -59,7 +59,7 @@ static tBoolean g_bUpdateRequested = false;
 //! perform a firmware update.
 //
 //*****************************************************************************
-tBoolean g_bStartBootloader = false;
+bool g_bStartBootloader = false;
 
 //*****************************************************************************
 //
@@ -926,8 +926,8 @@ ConfigMapIdToString(const tStringMap *psMap, uint32_t ulEntries,
 //
 //*****************************************************************************
 void
-ConfigUpdatePortParameters(uint32_t ulPort, tBoolean bSerial,
-                           tBoolean bTelnet)
+ConfigUpdatePortParameters(uint32_t ulPort, bool bSerial,
+                           bool bTelnet)
 {
     //
     // Do we have to update the telnet settings?  Note that we need to do this
@@ -1054,7 +1054,7 @@ ConfigUpdateIPAddress(void)
 //
 //*****************************************************************************
 void
-ConfigUpdateAllParameters(tBoolean bUpdateIP)
+ConfigUpdateAllParameters(bool bUpdateIP)
 {
     //
     // Have we been asked to update the IP address along with the other
@@ -1130,7 +1130,7 @@ ConfigFindCGIParameter(const char *pcToFind, char *pcParam[], int iNumParams)
     return(-1);
 }
 
-static tBoolean
+static bool
 ConfigIsValidHexDigit(const char cDigit)
 {
     if(((cDigit >= '0') && (cDigit <= '9')) ||
@@ -1193,7 +1193,7 @@ ConfigHexDigit(const char cDigit)
 //! to a valid escape sequence.
 //
 //*****************************************************************************
-static tBoolean
+static bool
 ConfigDecodeHexEscape(const char *pcEncoded, char *pcDecoded)
 {
     if((pcEncoded[0] != '%') || !ConfigIsValidHexDigit(pcEncoded[1]) ||
@@ -1303,7 +1303,7 @@ ConfigDecodeFormString(const  char *pcEncoded, char *pcDecoded,
 {
     uint32_t ulLoop;
     uint32_t ulCount;
-    tBoolean bValid;
+    bool bValid;
 
     ulCount = 0;
     ulLoop = 0;
@@ -1404,13 +1404,13 @@ ConfigDecodeFormString(const  char *pcEncoded, char *pcDecoded,
 //! decimal number or \b false if not.
 
 //*****************************************************************************
-static tBoolean
+static bool
 ConfigCheckDecimalParam(const char *pcValue, long *plValue)
 {
     uint32_t ulLoop;
-    tBoolean bStarted;
-    tBoolean bFinished;
-    tBoolean bNeg;
+    bool bStarted;
+    bool bFinished;
+    bool bNeg;
     long lAccum;
 
     //
@@ -1554,11 +1554,11 @@ ConfigCheckDecimalParam(const char *pcValue, long *plValue)
 //*****************************************************************************
 static long
 ConfigGetCGIParam(const char *pcName, char *pcParams[], char *pcValue[],
-                  int iNumParams, tBoolean *pbError)
+                  int iNumParams, bool *pbError)
 {
     int iParam;
     long lValue;
-    tBoolean bRetcode;
+    bool bRetcode;
 
     //
     // Is the parameter we are looking for in the list?
@@ -1624,13 +1624,13 @@ ConfigGetCGIParam(const char *pcName, char *pcParams[], char *pcValue[],
 //*****************************************************************************
 uint32_t
 ConfigGetCGIIPAddr(const char *pcName, char *pcParam[], char *pcValue[],
-                   int iNumParams, tBoolean *pbError)
+                   int iNumParams, bool *pbError)
 {
     uint32_t ulIPAddr;
     uint32_t ulLoop;
     long lValue;
     char pcVariable[MAX_VARIABLE_NAME_LEN];
-    tBoolean bError;
+    bool bError;
 
     //
     // Set up for the loop which reads each address element.
@@ -1746,9 +1746,9 @@ ConfigCGIHandler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
     long lValue;
     long lTelnetMode;
     long lTelnetProtocol;
-    tBoolean bParamError;
-    tBoolean bSerialChanged;
-    tBoolean bTelnetChanged;
+    bool bParamError;
+    bool bSerialChanged;
+    bool bTelnetChanged;
     tPortParameters sPortParams;
 
     //
@@ -2010,8 +2010,8 @@ static char *
 ConfigIPCGIHandler(int iIndex, int iNumParams, char *pcParam[],
                    char *pcValue[])
 {
-    tBoolean bChanged;
-    tBoolean bParamError;
+    bool bChanged;
+    bool bParamError;
     long lMode;
     uint32_t ulIPAddr;
     uint32_t ulGatewayAddr;
@@ -2197,8 +2197,8 @@ ConfigMiscCGIHandler(int iIndex, int iNumParams, char *pcParam[],
 {
     int iParam;
     long lValue;
-    tBoolean bChanged;
-    tBoolean bError;
+    bool bChanged;
+    bool bError;
 
     //
     // We have not made any changes that need written to flash yet.
@@ -2296,7 +2296,7 @@ ConfigMiscCGIHandler(int iIndex, int iNumParams, char *pcParam[],
 //! the parameters are applied or \e false if the address will not change.
 //
 //*****************************************************************************
-static tBoolean
+static bool
 ConfigWillIPAddrChange(tConfigParameters const *psNow,
                        tConfigParameters const *psNew)
 {
@@ -2378,7 +2378,7 @@ static char *
 ConfigDefaultsCGIHandler(int iIndex, int iNumParams, char *pcParam[],
                          char *pcValue[])
 {
-    tBoolean bAddrChange;
+    bool bAddrChange;
 
     //
     // Remove us from the UPnP network.

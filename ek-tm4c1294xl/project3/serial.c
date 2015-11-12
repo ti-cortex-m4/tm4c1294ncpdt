@@ -503,7 +503,7 @@ SerialUARTEnable(uint32_t ulPort)
 //! buffer.
 //
 //*****************************************************************************
-tBoolean
+bool
 SerialSendFull(uint32_t ulPort)
 {
     //
