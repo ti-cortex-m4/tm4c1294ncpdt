@@ -93,6 +93,13 @@
 
 //*****************************************************************************
 //
+// The system clock frequency.
+//
+//*****************************************************************************
+uint32_t g_ui32SysClock;
+
+//*****************************************************************************
+//
 //! Keeps track of elapsed time in milliseconds.
 //
 //*****************************************************************************
@@ -224,6 +231,7 @@ main(void)
     uint8_t pucMACAddr[8];
     uint32_t ulLoop;
 
+#if 0
     //
     // If running on Rev A2 silicon, turn the LDO voltage up to 2.75V.  This is
     // a workaround to allow the PLL to operate reliably.
@@ -239,6 +247,23 @@ main(void)
     //
     SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN |
                    SYSCTL_XTAL_8MHZ);
+#endif
+
+    //
+    // Make sure the main oscillator is enabled because this is required by
+    // the PHY.  The system must have a 25MHz crystal attached to the OSC
+    // pins. The SYSCTL_MOSC_HIGHFREQ parameter is used when the crystal
+    // frequency is 10MHz or higher.
+    //
+    SysCtlMOSCConfigSet(SYSCTL_MOSC_HIGHFREQ);
+
+    //
+    // Run from the PLL at 120 MHz.
+    //
+    g_ui32SysClock = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+                                         SYSCTL_OSC_MAIN |
+                                         SYSCTL_USE_PLL |
+                                         SYSCTL_CFG_VCO_480), 120000000);
 
     //
     // Enable the peripherals used by the application.
@@ -330,7 +355,7 @@ main(void)
     //
     // Initialize the lwIP TCP/IP stack.
     //
-    lwIPInit(pucMACAddr, g_sParameters.ulStaticIP, g_sParameters.ulSubnetMask,
+    lwIPInit(g_ui32SysClock, pucMACAddr, g_sParameters.ulStaticIP, g_sParameters.ulSubnetMask,
              g_sParameters.ulGatewayIP, ((g_sParameters.ucFlags &
              CONFIG_FLAG_STATICIP) ? IPADDR_USE_STATIC : IPADDR_USE_DHCP));
 
@@ -474,7 +499,7 @@ main(void)
             // Initiate the Software Update Process in the Ethernet
             // Bootloader.
             //
-            SoftwareUpdateBegin();
+            SoftwareUpdateBegin(g_ui32SysClock);
 
             //
             // Should never get here, but stall just in case.
