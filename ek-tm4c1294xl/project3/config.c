@@ -271,11 +271,11 @@ static int ConfigSSIHandler(int iIndex, char *pcInsert, int iInsertLen);
 //*****************************************************************************
 static const tCGI g_psConfigCGIURIs[] =
 {
-    { "/config.cgi", ConfigCGIHandler },            // CGI_INDEX_CONFIG
-    { "/misc.cgi", ConfigMiscCGIHandler },          // CGI_INDEX_MISC
-    { "/update.cgi", ConfigUpdateCGIHandler },      // CGI_INDEX_UPDATE
-    { "/defaults.cgi", ConfigDefaultsCGIHandler },  // CGI_INDEX_DEFAULTS
-    { "/ip.cgi", ConfigIPCGIHandler },              // CGI_INDEX_IP
+    { "/config.cgi", (tCGIHandler)ConfigCGIHandler },            // CGI_INDEX_CONFIG
+    { "/misc.cgi", (tCGIHandler)ConfigMiscCGIHandler },          // CGI_INDEX_MISC
+    { "/update.cgi", (tCGIHandler)ConfigUpdateCGIHandler },      // CGI_INDEX_UPDATE
+    { "/defaults.cgi", (tCGIHandler)ConfigDefaultsCGIHandler },  // CGI_INDEX_DEFAULTS
+    { "/ip.cgi", (tCGIHandler)ConfigIPCGIHandler },              // CGI_INDEX_IP
 };
 
 //*****************************************************************************
