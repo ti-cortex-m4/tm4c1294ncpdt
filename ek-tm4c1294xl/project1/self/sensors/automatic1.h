@@ -20,6 +20,7 @@ bool    AutomaticA(void);
 bool    AutomaticB(void);
 bool    AutomaticC(void);
 bool    AutomaticJ(void);
+bool    AutomaticK(void);
 bool    AutomaticP(void);
 bool    AutomaticS(void);
 bool    AutomaticV(void);

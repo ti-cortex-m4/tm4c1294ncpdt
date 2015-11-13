@@ -4,7 +4,7 @@ DEVICE_K!H
 
 ------------------------------------------------------------------------------*/
 
-//#ifndef SKIP_K
+#ifndef SKIP_K
 
 void    PushAddress2Bcc(void);
 void    PushLineBcc(uchar  ibLine);
@@ -41,4 +41,4 @@ bool    ReadDataK(void);
 
 void    ReadCurrentK(uchar  bMaxLine);
 
-//#endif
+#endif
