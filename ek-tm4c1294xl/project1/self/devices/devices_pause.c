@@ -36,7 +36,7 @@ uchar   bT;
 #endif
 
 #ifndef SKIP_K
-    else if ((diCurr.bDevice == 13) || (diCurr.bDevice == 14) ||
+    /*else*/ if ((diCurr.bDevice == 13) || (diCurr.bDevice == 14) ||
              (diCurr.bDevice == 16) || (diCurr.bDevice == 17))
     {
       if (mpSerial[ibPort] == SER_BADLINK)
@@ -119,7 +119,7 @@ uchar   bT;
 #endif
 
 #ifndef SKIP_U
-    /*else*/ if (diCurr.bDevice == 26)
+    else if (diCurr.bDevice == 26)
     {
       if (mpSerial[ibPort] == SER_BADLINK)
       {

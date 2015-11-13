@@ -246,7 +246,7 @@ bool    ReadTimeDateI_Short(void)
 
 
 
-//#ifndef SKIP_K
+#ifndef SKIP_K
 
 time2   ReadTimeDateK_Short(void)
 {
@@ -271,7 +271,7 @@ time2   ReadTimeDateK_Short(void)
   return GetTime2(ti, true);
 }
 
-//#endif
+#endif
 
 
 
@@ -457,7 +457,7 @@ time2   ReadTimeDate_Short(uchar  ibCan)
 
 #ifndef SKIP_K
     case 14:
-    case 13: return( ReadTimeDateK_Short() );  break;
+    case 13: return ReadTimeDateK_Short();
 #endif
 
 #ifndef SKIP_L
