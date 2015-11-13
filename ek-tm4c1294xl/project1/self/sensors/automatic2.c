@@ -27,11 +27,13 @@ AUTOMATIC2!C
 #include "device_a.h"
 #include "device_b.h"
 #include "device_c.h"
+#include "device_k.h"
 #include "device_p.h"
 #include "device_u.h"
 #include "automatic_a.h"
 #include "automatic_b.h"
 #include "automatic_c.h"
+#include "automatic_k.h"
 #include "automatic_p.h"
 #include "automatic_s.h"
 #include "automatic_u.h"
@@ -1807,8 +1809,8 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_K
-    case 13: return( ReadSensorK(4) ); break;
-    case 14: return( ReadSensorK(1) ); break;
+    case 13: return ReadSensorK(4);
+    case 14: return ReadSensorK(1);
 #endif
 
 #ifndef SKIP_L
@@ -1918,7 +1920,7 @@ time2   ReadTimeCan(uchar  ibCan)
 
 #ifndef SKIP_K
     case 14:
-    case 13: return( ReadTimeDateK() );  break;
+    case 13: return ReadTimeCanK();
 #endif
 
 #ifndef SKIP_L
@@ -2033,10 +2035,8 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_K
-    case 13: return( ReadCntMonCanK2(ibMon) ); break;
-
-    case 14: ibMon = ibMon; ibMinorMax = 1;
-             return( ReadCntMonCanK() ); break;
+    case 13: return ReadCntMonCanK2(ibMon);
+    case 14: ibMon = ibMon; ibMinorMax = 1; return ReadCntMonCanK();
 #endif
 
 #ifndef SKIP_L
