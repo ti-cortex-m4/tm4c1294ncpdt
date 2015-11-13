@@ -28,6 +28,8 @@ static char const      *pszPubPrg10[]   = { szZones, szOnMonths,   "" },
                        *pszEngPrg20[]   = { szZones, szOnMonths,   szForEnergy, "" },
                        *pszEngPrg27[]   = { szZones, szOnQuarters, szForEnergy, "" };
 
+static uchar            ibT, ibXmax, ibYmin, ibYmax;
+
 static period           pe;
 
 
@@ -58,8 +60,6 @@ uchar   i;
 
 void    key_SetOldYearZone(void)
 {
-static uchar ibT,ibTmax,ibMonMin,ibMonMax;
-
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -75,10 +75,10 @@ static uchar ibT,ibTmax,ibMonMin,ibMonMax;
         switch (wProgram)
         {
           case bSET_PROGRAM10:  LoadSlide(pszPubPrg10); 
-                                ibTmax = 12;
+                                ibXmax = 12;
                                 ShowOldZones();  break;
           case bSET_PROGRAM17:  LoadSlide(pszPubPrg17); 
-                                ibTmax = 4;
+                                ibXmax = 4;   
                                 ShowOldZones();  break; 
 
           case bSET_PROGRAM20: 
@@ -91,16 +91,16 @@ static uchar ibT,ibTmax,ibMonMin,ibMonMax;
         switch (wProgram)
         {
           case bSET_PROGRAM10:  LoadSlide(pszPowPrg10);
-                                ibTmax = 12;
+                                ibXmax = 12;  
                                 ShowOldZones();  break;
           case bSET_PROGRAM17:  LoadSlide(pszPowPrg17);
-                                ibTmax = 4;
+                                ibXmax = 4;      
                                 ShowOldZones();  break; 
           case bSET_PROGRAM20:  LoadSlide(pszEngPrg20); 
-                                ibTmax = 12;
+                                ibXmax = 12;  
                                 ShowOldZones();  break;
           case bSET_PROGRAM27:  LoadSlide(pszEngPrg27); 
-                                ibTmax = 4;
+                                ibXmax = 4;   
                                 ShowOldZones();  break; 
         }        
       }
@@ -113,31 +113,31 @@ static uchar ibT,ibTmax,ibMonMin,ibMonMax;
       {
         enKeyboard = KBD_POSTENTER;
 
-        ibMonMin = 0;
-        ibMonMax = 11;
+        ibYmin = 0; 
+        ibYmax = 11;
 
         pe = YEAR;
       }
-      else if ((ibTmax == 4) && (ibT <= ibTmax))
+      else if ((ibXmax == 4) && (ibT <= ibXmax))
       {
         enKeyboard = KBD_POSTENTER;
 
         switch (ibT) 
         {
-          case 1:  ibMonMin = 0; ibMonMax =  2;  break;
-          case 2:  ibMonMin = 3; ibMonMax =  5;  break;
-          case 3:  ibMonMin = 6; ibMonMax =  8;  break;
-          case 4:  ibMonMin = 9; ibMonMax = 11;  break;
+          case 1:  ibYmin = 0; ibYmax =  2;  break;
+          case 2:  ibYmin = 3; ibYmax =  5;  break;
+          case 3:  ibYmin = 6; ibYmax =  8;  break;
+          case 4:  ibYmin = 9; ibYmax = 11;  break;
         }
 
         pe = QUARTER;
       }
-      else if ((ibTmax == 12) && (ibT <= ibTmax))
+      else if ((ibXmax == 12) && (ibT <= ibXmax))
       {
         enKeyboard = KBD_POSTENTER;
 
-        ibMonMin = ibT-1;
-        ibMonMax = ibT-1;
+        ibYmin = ibT-1;
+        ibYmax = ibT-1;
 
         pe = MONTH;
       }
@@ -153,8 +153,8 @@ static uchar ibT,ibTmax,ibMonMin,ibMonMax;
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17:  
-            SetPeriodTariffsPow(ibMonMin,ibMonMax,&zoKey,pe);
-            SetPeriodTariffsEng(ibMonMin,ibMonMax,&zoKey,pe);
+            SetPeriodTariffsPow(ibYmin,ibYmax,&zoKey,pe);
+            SetPeriodTariffsEng(ibYmin,ibYmax,&zoKey,pe);
             ShowOldZones();  break;
         }
       }
@@ -164,12 +164,12 @@ static uchar ibT,ibTmax,ibMonMin,ibMonMax;
         {
           case bSET_PROGRAM10: 
           case bSET_PROGRAM17: 
-            SetPeriodTariffsPow(ibMonMin,ibMonMax,&zoKey,pe);
+            SetPeriodTariffsPow(ibYmin,ibYmax,&zoKey,pe);
             ShowOldZones();  break;
 
           case bSET_PROGRAM20: 
           case bSET_PROGRAM27: 
-            SetPeriodTariffsEng(ibMonMin,ibMonMax,&zoKey,pe);
+            SetPeriodTariffsEng(ibYmin,ibYmax,&zoKey,pe);
             ShowOldZones();  break;
         }        
       }
