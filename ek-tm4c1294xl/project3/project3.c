@@ -1,6 +1,6 @@
 //*****************************************************************************
 //
-// ser2enet.c - Serial to Ethernet converter.
+// project3.c - Serial to Ethernet converter.
 //
 // Copyright (c) 2008-2013 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement
