@@ -792,7 +792,7 @@ ConfigInit(void)
     // Verify that the parameter block structure matches the FLASH parameter
     // block size.
     //
-    ASSERT(sizeof(tConfigParameters) == FLASH_PB_SIZE)
+    ASSERT(sizeof(tConfigParameters) == FLASH_PB_SIZE);
 
     //
     // Initialize the flash parameter block driver.
