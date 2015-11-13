@@ -43,8 +43,6 @@
 //#define STATIC_IPADDR   ((u32_t)((192<<24)|(168<<16)|(  1<<8)| 50))
 //#define STATIC_NETMASK  ((u32_t)((255<<25)|(255<<16)|(255<<8)|  0))
 //#define STATIC_GWADDR   ((u32_t)((192<<24)|(168<<16)|(  1<<8)|  1))
-#define INCLUDE_HTTPD_SSI
-#define INCLUDE_HTTPD_CGI
 #define LWIP_HTTPD_SSI                  1
 #define LWIP_HTTPD_CGI                  1
 #define DYNAMIC_HTTP_HEADERS
