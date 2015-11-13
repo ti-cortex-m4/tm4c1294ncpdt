@@ -27,7 +27,7 @@ DEVICE_K!C
 
 
 
-//#ifndef SKIP_K
+#ifndef SKIP_K
 /*
 // чтение накопленной энергии
 void    PopRealK(void)
@@ -635,4 +635,4 @@ uchar   i;
   MakeCurrent();
 }
 */
-//#endif
+#endif

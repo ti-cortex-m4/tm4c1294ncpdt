@@ -17,6 +17,7 @@ PROFILE_RUN!C
 #include "../../serial/ports.h"
 #include "../../serial/flow.h"
 #include "../../serial/dtr.h"
+#include "../../sensors/device_k.h"
 #include "../../sensors/device_u.h"
 #include "../../sensors/device_p.h"
 #include "../../digitals/digitals.h"
