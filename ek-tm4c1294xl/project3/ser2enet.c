@@ -293,12 +293,16 @@ main(void)
     SysCtlPeripheralClockGating(true);
 
     //
-    // Set the priorities of the interrupts used by the application.
+    // Set the interrupt priorities.  We set the SysTick interrupt to a higher
+    // priority than the Ethernet interrupt to ensure that the file system
+    // tick is processed if SysTick occurs while the Ethernet handler is being
+    // processed.  This is very likely since all the TCP/IP and HTTP work is
+    // done in the context of the Ethernet interrupt.
     //
     IntPrioritySet(INT_UART0, 0x00);
     IntPrioritySet(INT_UART1, 0x00);
-    IntPrioritySet(INT_ETH, 0x20);
-    IntPrioritySet(FAULT_SYSTICK, 0x40);
+    IntPrioritySet(INT_EMAC0, 0xC0);
+    IntPrioritySet(FAULT_SYSTICK, 0x80);
 
     //
     // Configure SysTick for a periodic interrupt.
