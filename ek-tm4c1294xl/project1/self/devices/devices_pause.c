@@ -119,7 +119,7 @@ uchar   bT;
 #endif
 
 #ifndef SKIP_U
-    else if (diCurr.bDevice == 26)
+    /*else*/ if (diCurr.bDevice == 26)
     {
       if (mpSerial[ibPort] == SER_BADLINK)
       {
