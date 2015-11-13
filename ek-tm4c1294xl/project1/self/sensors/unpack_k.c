@@ -13,7 +13,7 @@ DECOMPRESS_K!C
 
 
 
-#ifndef SKIP_K
+//#ifndef SKIP_K
 
 void    DecompressK(bool  fShow)
 {
@@ -86,4 +86,4 @@ uchar   j;
   }
 }
 
-#endif
+//#endif
