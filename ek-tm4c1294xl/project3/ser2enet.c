@@ -274,7 +274,6 @@ main(void)
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_UART1);
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_ETH);
 
     //
     // Enable the peripherals that should continue to run when the processor
@@ -286,7 +285,6 @@ main(void)
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_GPIOF);
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_UART0);
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_UART1);
-    SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_ETH);
 
     //
     // Enable peripheral clock gating.  Note that this is required in order to
