@@ -26,56 +26,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>config.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/config.c</locationURI>
-		</link>
-		<link>
-			<name>enet_fs.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/enet_fs.c</locationURI>
-		</link>
-		<link>
-			<name>enet_s2e.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/enet_s2e.c</locationURI>
-		</link>
-		<link>
-			<name>enet_s2e_ccs.cmd</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/enet_s2e_ccs.cmd</locationURI>
-		</link>
-		<link>
-			<name>idle_task.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/idle_task.c</locationURI>
-		</link>
-		<link>
-			<name>lwip_task.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/lwip_task.c</locationURI>
-		</link>
-		<link>
-			<name>serial.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/serial.c</locationURI>
-		</link>
-		<link>
-			<name>serial_task.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/serial_task.c</locationURI>
-		</link>
-		<link>
-			<name>startup_ccs.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/startup_ccs.c</locationURI>
-		</link>
-		<link>
-			<name>telnet.c</name>
-			<type>1</type>
-			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/enet_s2e/telnet.c</locationURI>
-		</link>
-		<link>
 			<name>drivers/pinout.c</name>
 			<type>1</type>
 			<locationURI>SW_ROOT/examples/boards/ek-tm4c1294xl/drivers/pinout.c</locationURI>
@@ -158,8 +108,12 @@
 	</linkedResources>
 	<variableList>
 		<variable>
+			<name>ORIGINAL_PROJECT_ROOT</name>
+			<value>file:/D:/Cortex/tm4c1294ncpdt/ek-tm4c1294xl/enet_s2e/ccs</value>
+		</variable>
+		<variable>
 			<name>SW_ROOT</name>
-			<value>$%7BPARENT-5-PROJECT_LOC%7D</value>
+			<value>$%7BPARENT-5-ORIGINAL_PROJECT_ROOT%7D</value>
 		</variable>
 	</variableList>
 </projectDescription>
