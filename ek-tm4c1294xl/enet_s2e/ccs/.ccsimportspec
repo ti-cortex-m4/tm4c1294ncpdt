@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<importSpec>
+    <source root="..">
+        <file name="config.c"/>
+        <file name="config.h"/>
+        <file name="enet_fs.c"/>
+        <file name="enet_fs.h"/>
+        <file name="enet_fsdata.h"/>
+        <file name="enet_s2e.c"/>
+        <file name="FreeRTOSConfig.h"/>
+        <file name="idle_task.c"/>
+        <file name="lwip_task.c"/>
+        <file name="lwip_task.h"/>
+        <file name="lwipopts.h"/>
+        <file name="priorities.h"/>
+        <file name="serial.c"/>
+        <file name="serial.h"/>
+        <file name="serial_task.c"/>
+        <file name="serial_task.h"/>
+        <file name="telnet.c"/>
+        <file name="telnet.h"/>
+        <file regex=".*_ccs\.cmd"/>
+        <file name="startup_ccs.c"/>
+        <directory name="fs">
+            <file name="404.htm"/>
+            <file name="about.htm"/>
+            <file name="block.htm"/>
+            <file name="block.jpg"/>
+            <file name="ek-tm4c1294xl.jpg"/>
+            <file name="favicon.ico"/>
+            <file name="index.htm"/>
+            <file name="javascript.js"/>
+            <file name="overview.htm"/>
+            <file name="styles.css"/>
+            <file name="ti.jpg"/>
+            <file name="tm4c.jpg"/>
+        </directory>
+    </source>
+</importSpec>
