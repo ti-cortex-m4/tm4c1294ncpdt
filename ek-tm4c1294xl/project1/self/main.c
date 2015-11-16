@@ -44,6 +44,7 @@ MAIN,C
 #include "hardware/memory.h"
 #include "hardware/power_off.h"
 #include "hardware/uart_loader.h"
+#include "hardware/pulse_generator.h"
 #include "serial/modems.h"
 #include "serial/print.h"
 #include "flash/flash1.h"
@@ -177,6 +178,7 @@ int     main(void)
 
   InitPowerOff();
   InitUartLoader();
+  InitPulseGenerator();
 
   IntMasterEnable();
   LongBeep();
