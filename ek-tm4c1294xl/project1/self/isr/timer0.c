@@ -17,6 +17,7 @@ TODO volatile
 #include "../display/lcd.h"
 #include "../impulses/impulses.h"
 #include "../digitals/digitals_pause.h"
+#include "../hardware/pulse_generator.h"
 #include "serial0.h"
 #include "serial1.h"
 #include "serial2.h"
@@ -56,4 +57,5 @@ void Timer0IntHandler(void)
   Impulses_Timer0();
   LCD_Timer0();
   Key_Timer0();
+  PulseGenerator_350Hz();
 }
