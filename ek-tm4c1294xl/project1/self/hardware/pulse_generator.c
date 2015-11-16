@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PULSE_GENERATOR,C
+PULSE_GENERATOR.C
 
 
 ------------------------------------------------------------------------------*/
@@ -11,14 +11,17 @@ PULSE_GENERATOR,C
 #include "pulse_generator.h"
 
 
+
 uchar   bPulseGenerator;
 
 
 void    PulseGeneratorIntHandler(void)
 {
-  bPulseGenerator++;
-
-  GPIOIntClear(GPIO_PORTP_BASE, GPIO_PIN_5);
+  if (GPIOIntStatus(GPIO_PORTP_BASE, false) & GPIO_PIN_5)
+  {
+    bPulseGenerator++;
+    GPIOIntClear(GPIO_PORTP_BASE, GPIO_PIN_5);
+  }
 }
 
 
@@ -35,5 +38,4 @@ void    InitPulseGenerator(void)
   GPIOIntRegister(GPIO_PORTP_BASE, PulseGeneratorIntHandler);
   GPIOIntTypeSet(GPIO_PORTP_BASE, GPIO_PIN_5, GPIO_FALLING_EDGE);
   GPIOIntEnable(GPIO_PORTP_BASE, GPIO_PIN_5);
-
 }

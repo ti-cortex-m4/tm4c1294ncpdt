@@ -135,6 +135,17 @@ void    SetCurrDate(time  ti)
 
 
 
+void    Enable1HzOutput(void)
+{
+  Enable();
+
+  OutChar(0x8E);
+  OutChar(0x00);
+
+  Disable();
+}
+
+
 void    SetLabelRTC(void)
 {
   Enable();
@@ -235,6 +246,7 @@ void    InitRTC(void)
 {
   InitGPIO();
 
+  Enable1HzOutput();
   SetLabelRTC();
 
   Disable();
