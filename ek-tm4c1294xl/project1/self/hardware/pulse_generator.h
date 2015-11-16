@@ -4,6 +4,6 @@ PULSE_GENERATOR.H
 
 ------------------------------------------------------------------------------*/
 
-void    InitPulseGenerator(void);
+void InitPulseGenerator(void);
 
-void    PulseGenerator_350Hz(void);
+void PulseGenerator_350Hz(void);

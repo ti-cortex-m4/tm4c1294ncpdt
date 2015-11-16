@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 PULSE_GENERATOR.C
 
-
+Генератор 1 Гц
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -17,7 +17,6 @@ PULSE_GENERATOR.C
 
 
 
-uchar   bPulseGenerator;
 static volatile bool    fOutput;
 static volatile uint    cwOutput;
 
@@ -36,11 +35,10 @@ static void OutputOff(void)
 
 
 
-void    PulseGeneratorIntHandler(void)
+void PulseGeneratorIntHandler(void)
 {
   if (GPIOIntStatus(GPIO_PORTP_BASE, false) & GPIO_PIN_5)
   {
-    bPulseGenerator++;
     GPIOIntClear(GPIO_PORTP_BASE, GPIO_PIN_5);
 
     cwOutput = 0;
@@ -51,7 +49,7 @@ void    PulseGeneratorIntHandler(void)
 
 
 
-void    PulseGenerator_350Hz(void)
+void PulseGenerator_350Hz(void)
 {
   if (fOutput == true)
   {
@@ -89,7 +87,7 @@ static void InitOutput(void)
 }
 
 
-void    InitPulseGenerator(void)
+void InitPulseGenerator(void)
 {
   InitInput();
   InitOutput();
