@@ -270,50 +270,49 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 status  ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
 {
   time2 ti2 = ReadTimeCanK();
-  if (ti2.fValid == 0) return(ST4_BADDIGITAL);
+  if (ti2.fValid == 0) return ST4_BADDIGITAL;
 
-  time tiAlt = ti2.tiValue;
+  time ti = ti2.tiValue;
   if (ibMonth == 0)
   {
-    tiAlt.bMonth = 12;
-    tiAlt.bYear--;
+    ti.bMonth = 12;
+    ti.bYear--;
   }
   else
   {
-    if (ibMonth+1 > tiAlt.bMonth) tiAlt.bYear--;
-    tiAlt.bMonth = ibMonth;
+    if (ibMonth+1 > ti.bMonth) ti.bYear--;
+    ti.bMonth = ibMonth;
   }
 
-  if (ReadEnergyMonDatesK_Full() == 0) return (ST4_BADDIGITAL);
+  if (ReadEnergyMonDatesK_Full() == 0) return ST4_BADDIGITAL;
 
-  daAlt.bDay   = tiAlt.bDay;
-  daAlt.bMonth = tiAlt.bMonth;
-  daAlt.bYear  = tiAlt.bYear;
-  uchar ibGrp = IsMonAddedK();
+  date dt;
+  dt.bDay   = ti.bDay;
+  dt.bMonth = ti.bMonth;
+  dt.bYear  = ti.bYear;
+  uchar bMon = IsMonAddedK(dt);
 
-  if (ibGrp == 0)
+  if (bMon == 0)
   {
     Clear();
-    sprintf(szLo+1, "мес€ц %02u.%02u ?",tiAlt.bMonth,tiAlt.bYear);
+    sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
     Delay(1000);
     return(ST4_NOTPRESENTED);
   }
-  if (ReadEnergyMonTariffK_Full(ibGrp,ibTariff) == 0) return (ST4_BADDIGITAL);
+  if (ReadEnergyMonTariffK_Full(bMon,ibTariff) == 0) return ST4_BADDIGITAL;
 
   QueryCloseK();
 
 
-  reBuffB = mpreTransCnt[ibDig];
+  double dbKtrans = mpdbTransCnt[ibDig];
 
-  for (ibCan=0; ibCan<4; ibCan++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
-    reBuffA = mpreChannelsB[ibCan] * reBuffB;
-    mpreChannelsB[ibCan] = reBuffA;
-    mpboChannelsA[ibCan] = true;
+    mpdbChannelsC[i] *= dbKtrans;
+    mpboChannelsA[i] = true;
   }
 
-  reBuffA = mpreChannelsB[diCurr.ibLine];
-
-  return(ST4_OK);
+  return ST4_OK;
 }
 

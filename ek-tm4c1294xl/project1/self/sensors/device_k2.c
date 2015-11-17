@@ -17,7 +17,7 @@ DEVICE_K2!C
 
 static uchar            cbDatesK;
 
-static date             mpdaDatesK[45];
+static date             mpdtDatesK[45];
 
 
 
@@ -98,23 +98,21 @@ void    QueryEnergyMonK(uchar  ibLine, uchar  bMon)
 void    ClearDatesK(void)
 {
   cbDatesK = 0;
-  memset(&mpdaDatesK, 0, sizeof(mpdaDatesK));
+  memset(&mpdtDatesK, 0, sizeof(mpdtDatesK));
 }
 
 
 
 uchar   PopValueK(uchar  bCode) 
 {
-uchar   i,bT;
-
-  i = 0;
-  while (1) 
+  uchar i = 0;
+  while (true)
   {
-    bT = PopChar() & 0x7F;
-    if (bT == bCode) break;
+    uchar b = PopChar() & 0x7F;
+    if (b == bCode) break;
 
-    if ((bT >= '0') && (bT <= '9')) 
-      i = i*10 + (bT-'0');
+    if ((b >= '0') && (b <= '9'))
+      i = i*10 + (b-'0');
   }
 
   return i;
@@ -172,7 +170,7 @@ void    ReadEnergyDayDatesK(void)
   uchar i;
   for (i=0; i<45; i++) 
   {
-    mpdaDatesK[cbDatesK++] = PopDayDateK();
+    mpdtDatesK[cbDatesK++] = PopDayDateK();
   }
 }
 
@@ -186,7 +184,7 @@ void    ReadEnergyMonDatesK(void)
   uchar	i;
   for (i=0; i<24; i++) 
   {
-    mpdaDatesK[cbDatesK++] = PopMonDateK();
+    mpdtDatesK[cbDatesK++] = PopMonDateK();
   }
 }
 
@@ -205,7 +203,7 @@ uchar    IsDayAddedK(date  dt)
     uchar i;
     for (i=0; i<cbDatesK; i++)
     {
-      date daDig = mpdaDatesK[i];
+      date daDig = mpdtDatesK[i];
       if ((daDig.bDay   == dt.bDay)   &&
           (daDig.bMonth == dt.bMonth) &&
           (daDig.bYear  == dt.bYear))
@@ -219,9 +217,9 @@ uchar    IsDayAddedK(date  dt)
 }
 
 
-uchar    IsMonAddedK(date  daT)
+uchar    IsMonAddedK(date  dt)
 {
-  if (boShowMessages == true) { Clear(); sprintf(szLo+1,"мес€ц %02u.%02u",daT.bMonth,daT.bYear); DelayInf(); Clear(); }
+  if (boShowMessages == true) { Clear(); sprintf(szLo+1,"мес€ц %02u.%02u",dt.bMonth,dt.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
   {
@@ -232,9 +230,9 @@ uchar    IsMonAddedK(date  daT)
     uchar i;
     for (i=0; i<cbDatesK; i++)
     {
-      date daDig = mpdaDatesK[i];
-      if ((daDig.bMonth == daT.bMonth) &&
-          (daDig.bYear  == daT.bYear))
+      date daDig = mpdtDatesK[i];
+      if ((daDig.bMonth == dt.bMonth) &&
+          (daDig.bYear  == dt.bYear))
       {
         return i+1;
       }
@@ -248,14 +246,16 @@ uchar    IsMonAddedK(date  daT)
 
 void    ReadEnergyTariffK(uchar  ibLine, uchar  ibTrf)
 {
-uchar   i;
+double db;
 
   InitPop(1);
   
-  for (i=0; i<ibTrf+2; i++) PopRealK();
+  uchar i;
+  for (i=0; i<ibTrf+2; i++)
+  {
+    db = PopDoubleK();
+  }
 
-  mpreChannelsB[ibLine] = reBuffA;
+  mpdbChannelsC[ibLine] = db;
   mpboChannelsA[ibLine] = true;
-
-  reBuffA = mpreChannelsB[ibLine];
 }
