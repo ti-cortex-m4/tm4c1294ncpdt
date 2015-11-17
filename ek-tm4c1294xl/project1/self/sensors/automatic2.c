@@ -1622,29 +1622,31 @@ uchar   i,j;
 
 #ifndef SKIP_K
 
-bool    ReadCntMonCanK(void)
+double2 ReadCntMonCanK(uchar  ibMon, uchar  bMaxLines)
 {
-  if (ReadTimeCanK() == 0) return(0);
-  if (tiAlt.bMonth != ibMon+1) return(0);     // значени€е счЄтчиков на начало текущего мес€ца
+  if (ReadTimeCanK() == 0) return GetDouble2Error();
+  if (tiAlt.bMonth != ibMon+1) return GetDouble2Error();
 
 
-  if (ReadCntCurrK(4) == 0) return(0);
+  if (ReadCntCurrK(4) == 0) return GetDouble2Error();
 
   // энерги€ за текущие сутки рассчитываетс€, а не запрашиваетс€ со счЄтчика (как должно быть) !
-  if (LoadImpDay( ibHardDay ) == 0) return(0);
+  if (LoadImpDay(ibHardDay) == false) return GetDouble2Error();
 
-  for (ibMinor=0; ibMinor<ibMinorMax; ibMinor++)
+  uchar ibLine;
+  for (ibLine=0; ibLine<bMaxLines; ibLine++)
   {
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    uchar c;
+    for (c=0; c<bCANALS; c++)
     {
-       if (GetDigitalLine(ibCan) == ibMinor)
+       if (GetDigitalLine(c) == ibLine)
        {
-         reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],ibCan,0x0F);
-         reBuffA = reBuffA / GetCanReal(mpreTransEng,ibCan);
+         reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],c,0x0F);
+         reBuffA = reBuffA / GetCanReal(mpreTransEng,c);
 
-         dbKtrans = GetCanReal(mpreChannelsB, ibMinor);
-         reBuffA = dbKtrans * GetCanReal(mpreTransCnt,ibCan) - reBuffA;
-         SetCanReal(mpreChannelsB, ibMinor);
+         dbKtrans = GetCanReal(mpreChannelsB, ibLine);
+         reBuffA = dbKtrans * GetCanReal(mpreTransCnt,c) - reBuffA;
+         SetCanReal(mpreChannelsB, ibLine);
        }
     }
   }
@@ -2030,7 +2032,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_K
     case 13: return ReadCntMonCanK2(ibMon);
-    case 14: ibMon = ibMon; ibMinorMax = 1; return ReadCntMonCanK();
+    case 14: return ReadCntMonCanK(ibMon, 1);
 #endif
 
 #ifndef SKIP_L
