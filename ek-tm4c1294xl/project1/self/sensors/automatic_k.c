@@ -209,7 +209,7 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
     daAlt.bDay   = tiAlt.bDay;
     daAlt.bMonth = tiAlt.bMonth;
     daAlt.bYear  = tiAlt.bYear;
-    ibGrp = IsDayAddedK();
+    uchar ibGrp = IsDayAddedK(daAlt);
 
     if (ibGrp == 0)
     {
@@ -231,7 +231,7 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
     daAlt.bDay   = tiAlt.bDay;
     daAlt.bMonth = tiAlt.bMonth;
     daAlt.bYear  = tiAlt.bYear;
-    ibGrp = IsMonAddedK();
+    uchar ibGrp = IsMonAddedK(daAlt);
 
     if (ibGrp == 0)
     {
@@ -247,6 +247,7 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 
   reBuffB = mpreTransCnt[ibDig];
 
+  uchar ibCan;
   for (ibCan=0; ibCan<4; ibCan++)
   {
     reBuffA = mpreChannelsB[ibCan] * reBuffB;
