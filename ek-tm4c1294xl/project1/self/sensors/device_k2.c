@@ -21,7 +21,7 @@ static date             mpdaDatesK[45];
 
 
 
-void	  QueryEnergyDayDatesK(void) 
+void    QueryEnergyDayDatesK(void)
 {
   PushAddress2Bcc();
 
@@ -38,7 +38,7 @@ void	  QueryEnergyDayDatesK(void)
 }
 
 
-void	  QueryEnergyMonDatesK(void) 
+void    QueryEnergyMonDatesK(void)
 {
   PushAddress2Bcc();
 
@@ -95,7 +95,7 @@ void    QueryEnergyMonK(uchar  ibLine, uchar  bMon)
 
 
 
-void  	ClearDatesK(void)
+void    ClearDatesK(void)
 {
   cbDatesK = 0;
   memset(&mpdaDatesK, 0, sizeof(mpdaDatesK));
@@ -121,7 +121,7 @@ uchar   i,bT;
 }
 
 
-void	  PopDayK(void)
+void    PopDayK(void)
 {
 uchar   bT;
 
@@ -143,7 +143,7 @@ uchar   bT;
 }
 
 
-void	  PopMonK(void)
+void    PopMonK(void)
 {
 uchar   bT;
 
@@ -165,9 +165,9 @@ uchar   bT;
 
 
 
-void	  ReadEnergyDayDatesK(void) 
+void    ReadEnergyDayDatesK(void)
 {
-uchar	i;
+uchar  i;
 
   InitPop(1);
 
@@ -175,12 +175,12 @@ uchar	i;
   for (i=0; i<45; i++) 
   {
     PopDayK();
-	  mpdaDatesK[cbDatesK++] = daAlt; 
+    mpdaDatesK[cbDatesK++] = daAlt;
   }
 }
 
 
-void	  ReadEnergyMonDatesK(void) 
+void    ReadEnergyMonDatesK(void)
 {
 uchar	i;
 
@@ -190,13 +190,13 @@ uchar	i;
   for (i=0; i<24; i++) 
   {
     PopMonK();
-	  mpdaDatesK[cbDatesK++] = daAlt; 
+    mpdaDatesK[cbDatesK++] = daAlt;
   }
 }
 
 
 
-uchar	  IsDayAddedK(void)
+uchar    IsDayAddedK(void)
 {
 uchar   i;
 
@@ -224,7 +224,7 @@ uchar   i;
 }
 
 
-uchar	  IsMonAddedK(void)
+uchar    IsMonAddedK(void)
 {
 uchar   i;
 

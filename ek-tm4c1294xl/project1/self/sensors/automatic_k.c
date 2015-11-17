@@ -22,10 +22,9 @@ AUTOMATIC_K!C
 
 time2   ReadTimeCanK(void)
 {
-uchar   i;
-
   Clear();
 
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     QueryCloseK();
@@ -67,6 +66,7 @@ uchar   i;
 
 bool    ReadEnergyDayDatesK_Full(void)
 {
+  uchar ibZ;
   for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
   {
     QueryCloseK();
@@ -87,6 +87,7 @@ bool    ReadEnergyDayDatesK_Full(void)
 
 bool    ReadEnergyMonDatesK_Full(void)
 {
+  uchar ibZ;
   for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
   {
     QueryCloseK();
@@ -108,8 +109,10 @@ bool    ReadEnergyMonDatesK_Full(void)
 
 bool    ReadEnergyDayK_Full(uchar  bDay)
 {
+  uchar ibCan;
   for (ibCan=0; ibCan<4; ibCan++)
   {
+    uchar ibZ;
     for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
     {
       QueryCloseK();
@@ -131,8 +134,10 @@ bool    ReadEnergyDayK_Full(uchar  bDay)
 
 bool    ReadEnergyMonK_Full(uchar  bMon)
 {
+  uchar ibCan;
   for (ibCan=0; ibCan<4; ibCan++)
   {
+    uchar ibZ;
     for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
     {
       QueryCloseK();
@@ -154,8 +159,10 @@ bool    ReadEnergyMonK_Full(uchar  bMon)
 
 bool    ReadEnergyMonTariffK_Full(uchar  bMon, uchar  ibTariff)
 {
+  uchar ibCan;
   for (ibCan=0; ibCan<4; ibCan++)
   {
+    uchar ibZ;
     for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
     {
       QueryCloseK();
@@ -176,9 +183,9 @@ bool    ReadEnergyMonTariffK_Full(uchar  bMon, uchar  ibTariff)
 
 
 
-bool    ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
+double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 {
-  if (ReadTimeDateK() == 0) return(0);
+  if (ReadTimeDateK() == 0) return GetDouble2Error();
 
   if (tiAlt.bMonth == ibMonth+1)
   {
@@ -197,20 +204,20 @@ bool    ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
       tiAlt.bDay = DaysInMonth();
     }
 
-	  if (ReadEnergyDayDatesK_Full() == 0) return (0);
+    if (ReadEnergyDayDatesK_Full() == 0) return GetDouble2Error();
 
     daAlt.bDay   = tiAlt.bDay;
     daAlt.bMonth = tiAlt.bMonth;
     daAlt.bYear  = tiAlt.bYear;
-	  ibGrp = IsDayAddedK();
+    ibGrp = IsDayAddedK();
 
     if (ibGrp == 0)
     {
       sprintf(szLo, "сутки %02bu.%02bu.%02bu ?",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
       Delay(1000);
-      return(0);
+      return GetDouble2Error();
     }
-	  if (ReadEnergyDayK_Full(ibGrp) == 0) return (0);
+    if (ReadEnergyDayK_Full(ibGrp) == 0) return GetDouble2Error();
 
     QueryCloseK();
   }
@@ -219,20 +226,20 @@ bool    ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
     tiAlt.bYear = (ibMonth+1 > tiAlt.bMonth) ? tiAlt.bYear-1 : tiAlt.bYear;
     tiAlt.bMonth = ibMonth+1;
 
-	  if (ReadEnergyMonDatesK_Full() == 0) return (0);
+    if (ReadEnergyMonDatesK_Full() == 0) return GetDouble2Error();
 
     daAlt.bDay   = tiAlt.bDay;
     daAlt.bMonth = tiAlt.bMonth;
     daAlt.bYear  = tiAlt.bYear;
-	  ibGrp = IsMonAddedK();
+    ibGrp = IsMonAddedK();
 
     if (ibGrp == 0)
     {
       sprintf(szLo, " мес€ц %02bu.%02bu ?  ",tiAlt.bMonth,tiAlt.bYear);
       Delay(1000);
-      return(0);
+      return GetDouble2Error();
     }
-	  if (ReadEnergyMonK_Full(ibGrp) == 0) return (0);
+    if (ReadEnergyMonK_Full(ibGrp) == 0) return GetDouble2Error();
 
     QueryCloseK();
   }
