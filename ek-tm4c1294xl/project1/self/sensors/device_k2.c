@@ -196,10 +196,8 @@ uchar	i;
 
 
 
-uchar    IsDayAddedK(void)
+uchar    IsDayAddedK(date  daAlt)
 {
-uchar   i;
-
   if (boShowMessages == true) { Clear(); sprintf(szLo+0,"сутки %02bu.%02bu.%02bu",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
@@ -208,9 +206,10 @@ uchar   i;
   }
   else
   {
+    uchar i;
     for (i=0; i<cbDatesK; i++)
     {
-      daDig = mpdaDatesK[i];
+      date daDig = mpdaDatesK[i];
       if ((daDig.bDay   == daAlt.bDay)   &&
           (daDig.bMonth == daAlt.bMonth) &&
           (daDig.bYear  == daAlt.bYear))
@@ -224,10 +223,8 @@ uchar   i;
 }
 
 
-uchar    IsMonAddedK(void)
+uchar    IsMonAddedK(date  daAlt)
 {
-uchar   i;
-
   if (boShowMessages == true) { Clear(); sprintf(szLo+1,"мес€ц %02bu.%02bu",tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
@@ -236,9 +233,10 @@ uchar   i;
   }
   else
   {
+    uchar i;
     for (i=0; i<cbDatesK; i++)
     {
-      daDig = mpdaDatesK[i];
+      date daDig = mpdaDatesK[i];
       if ((daDig.bMonth == daAlt.bMonth) &&
           (daDig.bYear  == daAlt.bYear))
       {
@@ -252,7 +250,7 @@ uchar   i;
 
 
 
-void    ReadEnergyTariffK(uchar  ibLine, uchar  ibTariff)
+void    ReadEnergyTariffK(uchar  ibLine, uchar  ibTrf)
 {
 uchar   i;
 
