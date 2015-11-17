@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE_K!C
 
- Энергомера ЦЭ6850М
+Энергомера ЦЭ6850М
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -12,40 +12,30 @@ DEVICE_K!C
 #include "../serial/ports_devices.h"
 #include "../display/display.h"
 #include "../time/delay.h"
-//#include        "xdata.h"
-//#include        "ports.h"
-//#include        "digitals.h"
-//#include        "essential.h"
-//#include        "display.h"
-//#include        "lines.h"
-//#include        "engine.h"
-//#include        "energy.h"
-//#include        "timedate.h"
-//#include        "watchdog.h"
-//#include        "delay.h"
-//#include        "_timedate.h"
+#include "device_k.h"
 
 
 
-//#ifndef SKIP_K
+#ifndef SKIP_K
 
 double  PopDoubleK(void)
-{/*
-uchar	i,a,b,bT;
+{
+double  dbA,dbB;
 
-  a = 0;
-  b = 0;
+  uchar a = 0;
+  uchar b = 0;
 
+  uchar i;
   for (i=0; i<40; i++)
   {
-    bT = PopChar() & 0x7F;
+    uchar bT = PopChar() & 0x7F;
 
     if (a == 0)
     { 
       if (bT == '(') a = i+1;
 
-      reBuffA = 0;
-      reBuffB = 1;
+      dbA = 0;
+      dbB = 1;
     }
     else
     {
@@ -53,8 +43,8 @@ uchar	i,a,b,bT;
 
       if (bT == ')') 
       {
-        for (i=a; i<b; i++) reBuffA *= 10;
-        return;
+        for (i=a; i<b; i++) dbA *= 10;
+        return dbA;
       }
 
       if ((bT >= '0') && (bT <= '9'))
@@ -62,12 +52,12 @@ uchar	i,a,b,bT;
       else 
         break;
 
-      reBuffA += reBuffB*bT;
-      reBuffB /= 10;
+      dbA += dbB*bT;
+      dbB /= 10;
     }
   }
 
-  reBuffA = 0;*/ return 0;
+  return 0;
 }
 
 
@@ -628,4 +618,4 @@ uchar   i;
   MakeCurrent();
 }
 */
-//#endif
+#endif

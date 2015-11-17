@@ -395,26 +395,25 @@ uchar   i,j;
 
 double2 ReadCntCurrK(uchar  bMaxLines)
 {
-uchar   j;
-
   Clear();
 
-  for (j=0; j<bMaxLines; j++)
+  uchar i;
+  for (i=0; i<bMaxLines; i++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
       QueryCloseK();
-      QueryEnergyAbsK(j);
+      QueryEnergyAbsK(i);
 
       if (BccInput() == SER_GOODCHECK) break;
       if (fKey == true) return GetDouble2Error();
     }
 
     if (r == bMINORREPEATS) return GetDouble2Error();
-    ShowPercent(50+j);
+    ShowPercent(50+i);
 
-    ReadEnergyK(j);
+    ReadEnergyK(i);
   }
 
 
@@ -423,10 +422,10 @@ uchar   j;
 
   double dbKtrans = mpdbTransCnt[ibDig];
 
-  for (r=0; r<bMaxLines; r++)
+  for (i=0; i<bMaxLines; i++)
   {
-    mpdbChannelsC[r] = mpdbChannelsC[r] * dbKtrans;
-    mpboChannelsA[r] = true;
+    mpdbChannelsC[i] *= dbKtrans;
+    mpboChannelsA[i] = true;
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
