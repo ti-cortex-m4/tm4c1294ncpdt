@@ -192,9 +192,9 @@ void    ReadEnergyMonDatesK(void)
 
 
 
-uchar    IsDayAddedK(date  daT)
+uchar    IsDayAddedK(date  dt)
 {
-  if (boShowMessages == true) { Clear(); sprintf(szLo+0,"сутки %02u.%02u.%02u",daT.bDay,daT.bMonth,daT.bYear); DelayInf(); Clear(); }
+  if (boShowMessages == true) { Clear(); sprintf(szLo+0,"сутки %02u.%02u.%02u",dt.bDay,dt.bMonth,dt.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
   {
@@ -206,9 +206,9 @@ uchar    IsDayAddedK(date  daT)
     for (i=0; i<cbDatesK; i++)
     {
       date daDig = mpdaDatesK[i];
-      if ((daDig.bDay   == daT.bDay)   &&
-          (daDig.bMonth == daT.bMonth) &&
-          (daDig.bYear  == daT.bYear))
+      if ((daDig.bDay   == dt.bDay)   &&
+          (daDig.bMonth == dt.bMonth) &&
+          (daDig.bYear  == dt.bYear))
       {
         return i+1;
       }
