@@ -123,15 +123,14 @@ uchar   i,bT;
 
 void    PopDayK(void)
 {
-uchar   bT;
-
+  date daAlt;
   daAlt.bDay   = 0;
   daAlt.bMonth = 0;
   daAlt.bYear  = 0;
 
   while (1) 
   {
-    bT = PopChar() & 0x7F;
+    uchar bT = PopChar() & 0x7F;
 
     if (bT == 0x0D) return;
     if (bT != '(') continue;
@@ -145,15 +144,14 @@ uchar   bT;
 
 void    PopMonK(void)
 {
-uchar   bT;
-
+  date daAlt;
   daAlt.bDay   = 0;
   daAlt.bMonth = 0;
   daAlt.bYear  = 0;
 
   while (1) 
   {
-    bT = PopChar() & 0x7F;
+    uchar bT = PopChar() & 0x7F;
 
     if (bT == 0x0D) return;
     if (bT != '(') continue;
@@ -198,7 +196,7 @@ uchar	i;
 
 uchar    IsDayAddedK(date  daT)
 {
-  if (boShowMessages == true) { Clear(); sprintf(szLo+0,"сутки %02u.%02u.%02u",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
+  if (boShowMessages == true) { Clear(); sprintf(szLo+0,"сутки %02u.%02u.%02u",daT.bDay,daT.bMonth,daT.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
   {
@@ -225,7 +223,7 @@ uchar    IsDayAddedK(date  daT)
 
 uchar    IsMonAddedK(date  daT)
 {
-  if (boShowMessages == true) { Clear(); sprintf(szLo+1,"мес€ц %02u.%02u",tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
+  if (boShowMessages == true) { Clear(); sprintf(szLo+1,"мес€ц %02u.%02u",daT.bMonth,daT.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
   {
