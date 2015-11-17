@@ -196,9 +196,9 @@ uchar	i;
 
 
 
-uchar    IsDayAddedK(date  daAlt)
+uchar    IsDayAddedK(date  daT)
 {
-  if (boShowMessages == true) { Clear(); sprintf(szLo+0,"сутки %02bu.%02bu.%02bu",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
+  if (boShowMessages == true) { Clear(); sprintf(szLo+0,"сутки %02u.%02u.%02u",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
   {
@@ -210,9 +210,9 @@ uchar    IsDayAddedK(date  daAlt)
     for (i=0; i<cbDatesK; i++)
     {
       date daDig = mpdaDatesK[i];
-      if ((daDig.bDay   == daAlt.bDay)   &&
-          (daDig.bMonth == daAlt.bMonth) &&
-          (daDig.bYear  == daAlt.bYear))
+      if ((daDig.bDay   == daT.bDay)   &&
+          (daDig.bMonth == daT.bMonth) &&
+          (daDig.bYear  == daT.bYear))
       {
         return i+1;
       }
@@ -223,9 +223,9 @@ uchar    IsDayAddedK(date  daAlt)
 }
 
 
-uchar    IsMonAddedK(date  daAlt)
+uchar    IsMonAddedK(date  daT)
 {
-  if (boShowMessages == true) { Clear(); sprintf(szLo+1,"мес€ц %02bu.%02bu",tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
+  if (boShowMessages == true) { Clear(); sprintf(szLo+1,"мес€ц %02u.%02u",tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
   {
@@ -237,8 +237,8 @@ uchar    IsMonAddedK(date  daAlt)
     for (i=0; i<cbDatesK; i++)
     {
       date daDig = mpdaDatesK[i];
-      if ((daDig.bMonth == daAlt.bMonth) &&
-          (daDig.bYear  == daAlt.bYear))
+      if ((daDig.bMonth == daT.bMonth) &&
+          (daDig.bYear  == daT.bYear))
       {
         return i+1;
       }
@@ -256,7 +256,7 @@ uchar   i;
 
   InitPop(1);
   
-  for (i=0; i<ibTariff+2; i++) PopRealK();
+  for (i=0; i<ibTrf+2; i++) PopRealK();
 
   mpreChannelsB[ibLine] = reBuffA;
   mpboChannelsA[ibLine] = true;

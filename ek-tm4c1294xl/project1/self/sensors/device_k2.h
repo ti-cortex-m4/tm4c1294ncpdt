@@ -13,7 +13,7 @@ void    QueryEnergyMonK(uchar  ibLine, uchar  bMon);
 void    ReadEnergyDayDatesK(void);
 void    ReadEnergyMonDatesK(void);
 
-uchar   IsDayAddedK(date  da);
-uchar   IsMonAddedK(date  da);
+uchar   IsDayAddedK(date  daT);
+uchar   IsMonAddedK(date  daT);
 
 void    ReadEnergyTariffK(uchar  ibLine, uchar  ibTrf);
