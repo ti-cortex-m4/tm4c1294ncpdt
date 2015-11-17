@@ -1622,6 +1622,7 @@ uchar   i,j;
 
 #ifndef SKIP_K
 
+// энергия за текущие сутки рассчитывается, а не запрашивается со счётчика !
 double2 ReadCntMonCanK(uchar  ibMon, uchar  bMaxLines)
 {
   time2 ti2 = ReadTimeCanK();
@@ -1633,7 +1634,6 @@ double2 ReadCntMonCanK(uchar  ibMon, uchar  bMaxLines)
 
   if (ReadCntCurrK(4).fValid == false) return GetDouble2Error();
 
-  // энергия за текущие сутки рассчитывается, а не запрашивается со счётчика (как должно быть) !
   if (LoadImpDay(ibHardDay) == false) return GetDouble2Error();
 
   uchar ibLine;
