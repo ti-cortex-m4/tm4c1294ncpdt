@@ -1,12 +1,23 @@
 /*------------------------------------------------------------------------------
-DEVICE_K2.C
+DEVICE_K2!C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_digitals.h"
+#include "../display/display.h"
+#include "../time/delay.h"
+#include "../serial/ports_stack.h"
+#include "../serial/ports_devices.h"
 #include "device_k.h"
 #include "device_k2.h"
+
+
+
+static uchar            cbDatesK;
+
+static date             mpdaDatesK[45];
 
 
 
@@ -189,7 +200,7 @@ uchar	  IsDayAddedK(void)
 {
 uchar   i;
 
-  if (boShowMessages == boTrue) { Clear(); sprintf(szLo+0,"сутки %02bu.%02bu.%02bu",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
+  if (boShowMessages == true) { Clear(); sprintf(szLo+0,"сутки %02bu.%02bu.%02bu",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
   {
@@ -217,7 +228,7 @@ uchar	  IsMonAddedK(void)
 {
 uchar   i;
 
-  if (boShowMessages == boTrue) { Clear(); sprintf(szLo+1,"мес€ц %02bu.%02bu",tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
+  if (boShowMessages == true) { Clear(); sprintf(szLo+1,"мес€ц %02bu.%02bu",tiAlt.bMonth,tiAlt.bYear); DelayInf(); Clear(); }
 
   if (cbDatesK == 0)
   {
@@ -241,7 +252,7 @@ uchar   i;
 
 
 
-void    ReadEnergyTariffK(uchar  ibLine, ibTariff)
+void    ReadEnergyTariffK(uchar  ibLine, uchar  ibTariff)
 {
 uchar   i;
 
@@ -250,7 +261,7 @@ uchar   i;
   for (i=0; i<ibTariff+2; i++) PopRealK();
 
   mpreChannelsB[ibLine] = reBuffA;
-  mpboChannelsA[ibLine] = boTrue;
+  mpboChannelsA[ibLine] = true;
 
   reBuffA = mpreChannelsB[ibLine];
 }

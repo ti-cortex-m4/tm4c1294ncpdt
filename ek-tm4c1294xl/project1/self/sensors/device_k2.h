@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE_K2.H
+DEVICE_K2!H
 
 
 ------------------------------------------------------------------------------*/
@@ -16,4 +16,4 @@ void    ReadEnergyMonDatesK(void);
 uchar   IsDayAddedK(void);
 uchar   IsMonAddedK(void);
 
-void    ReadEnergyTariffK(uchar  ibLine, ibTariff);
+void    ReadEnergyTariffK(uchar  ibLine, uchar  ibTariff);
