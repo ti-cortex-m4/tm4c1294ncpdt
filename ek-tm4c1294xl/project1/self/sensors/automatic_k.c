@@ -24,8 +24,8 @@ time2   ReadTimeCanK(void)
 {
   Clear();
 
-  uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
   {
     QueryCloseK();
     QueryTimeK();
@@ -33,13 +33,13 @@ time2   ReadTimeCanK(void)
     if (BccInput() == SER_GOODCHECK) break;
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (r == bMINORREPEATS) return GetTime2Error();
   ShowPercent(25);
 
   time ti = ReadTimeK();
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (r=0; r<bMINORREPEATS; r++)
   {
     QueryCloseK();
     QueryDateK();
@@ -47,7 +47,7 @@ time2   ReadTimeCanK(void)
     if (BccInput() == SER_GOODCHECK) break;
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (r == bMINORREPEATS) return GetTime2Error();
   ShowPercent(50);
 
   ti = ReadDateK(ti);
@@ -57,6 +57,8 @@ time2   ReadTimeCanK(void)
 
 
   tiChannelC = ti;
+
+  uchar i;
   for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
   return GetTime2(ti, true);
@@ -66,17 +68,17 @@ time2   ReadTimeCanK(void)
 
 bool    ReadEnergyDayDatesK_Full(void)
 {
-  uchar ibZ;
-  for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
   {
     QueryCloseK();
     QueryEnergyDayDatesK();
 
     if (BccInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
-  if (ibZ == bMINORREPEATS) return(0);
+  if (r == bMINORREPEATS) return(0);
   ShowPercent(60);
 
   ReadEnergyDayDatesK();
@@ -87,17 +89,17 @@ bool    ReadEnergyDayDatesK_Full(void)
 
 bool    ReadEnergyMonDatesK_Full(void)
 {
-  uchar ibZ;
-  for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
   {
     QueryCloseK();
     QueryEnergyMonDatesK();
 
     if (BccInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) return(0);
   }
 
-  if (ibZ == bMINORREPEATS) return(0);
+  if (r == bMINORREPEATS) return(0);
   ShowPercent(60);
 
   ReadEnergyMonDatesK();
@@ -109,23 +111,23 @@ bool    ReadEnergyMonDatesK_Full(void)
 
 bool    ReadEnergyDayK_Full(uchar  bDay)
 {
-  uchar ibCan;
-  for (ibCan=0; ibCan<4; ibCan++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
-    uchar ibZ;
-    for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
     {
       QueryCloseK();
-      QueryEnergyDayK(ibCan,bDay);
+      QueryEnergyDayK(i,bDay);
 
       if (BccInput() == SER_GOODCHECK) break;
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
 
-    if (ibZ == bMINORREPEATS) return(0);
-    ShowPercent(70+ibCan);
+    if (r == bMINORREPEATS) return(0);
+    ShowPercent(70+i);
 
-    ReadEnergyK(ibCan);
+    ReadEnergyK(i);
   }
 
   return(1);
@@ -134,23 +136,23 @@ bool    ReadEnergyDayK_Full(uchar  bDay)
 
 bool    ReadEnergyMonK_Full(uchar  bMon)
 {
-  uchar ibCan;
-  for (ibCan=0; ibCan<4; ibCan++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
-    uchar ibZ;
-    for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
     {
       QueryCloseK();
-      QueryEnergyMonK(ibCan,bMon);
+      QueryEnergyMonK(i,bMon);
 
       if (BccInput() == SER_GOODCHECK) break;
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
 
-    if (ibZ == bMINORREPEATS) return(0);
-    ShowPercent(70+ibCan);
+    if (r == bMINORREPEATS) return(0);
+    ShowPercent(70+i);
 
-    ReadEnergyK(ibCan);
+    ReadEnergyK(i);
   }
 
   return(1);
@@ -159,23 +161,23 @@ bool    ReadEnergyMonK_Full(uchar  bMon)
 
 bool    ReadEnergyMonTariffK_Full(uchar  bMon, uchar  ibTariff)
 {
-  uchar ibCan;
-  for (ibCan=0; ibCan<4; ibCan++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
-    uchar ibZ;
-    for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
     {
       QueryCloseK();
-      QueryEnergyMonK(ibCan,bMon);
+      QueryEnergyMonK(i,bMon);
 
       if (BccInput() == SER_GOODCHECK) break;
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
 
-    if (ibZ == bMINORREPEATS) return(0);
-    ShowPercent(70+ibCan);
+    if (r == bMINORREPEATS) return(0);
+    ShowPercent(70+i);
 
-    ReadEnergyTariffK(ibCan,ibTariff);
+    ReadEnergyTariffK(i,ibTariff);
   }
 
   return(1);
@@ -256,22 +258,21 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
   uchar i;
   for (i=0; i<4; i++)
   {
-    reBuffA = mpreChannelsB[i] * dbKtrans;
-    mpreChannelsB[i] = reBuffA;
+    mpdbChannelsC[i] *= dbKtrans;
     mpboChannelsA[i] = true;
   }
 
-  reBuffA = mpreChannelsB[diCurr.ibLine];
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 
-/*
-status4 ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
-{
-  if (ReadTimeDateK() == 0) return(ST4_BADDIGITAL);
 
+status  ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
+{
+  time2 ti2 = ReadTimeCanK();
+  if (ti2.fValid == 0) return(ST4_BADDIGITAL);
+
+  time tiAlt = ti2.tiValue;
   if (ibMonth == 0)
   {
     tiAlt.bMonth = 12;
@@ -288,11 +289,12 @@ status4 ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
   daAlt.bDay   = tiAlt.bDay;
   daAlt.bMonth = tiAlt.bMonth;
   daAlt.bYear  = tiAlt.bYear;
-  ibGrp = IsMonAddedK();
+  uchar ibGrp = IsMonAddedK();
 
   if (ibGrp == 0)
   {
-    sprintf(szLo, " мес€ц %02u.%02u ?  ",tiAlt.bMonth,tiAlt.bYear);
+    Clear();
+    sprintf(szLo+1, "мес€ц %02u.%02u ?",tiAlt.bMonth,tiAlt.bYear);
     Delay(1000);
     return(ST4_NOTPRESENTED);
   }
@@ -314,4 +316,4 @@ status4 ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
 
   return(ST4_OK);
 }
-*/
+
