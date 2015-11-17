@@ -213,7 +213,7 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 
     if (ibGrp == 0)
     {
-      sprintf(szLo, "сутки %02bu.%02bu.%02bu ?",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
+      sprintf(szLo, "сутки %02u.%02u.%02u ?",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
       Delay(1000);
       return GetDouble2Error();
     }
@@ -235,7 +235,7 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 
     if (ibGrp == 0)
     {
-      sprintf(szLo, " мес€ц %02bu.%02bu ?  ",tiAlt.bMonth,tiAlt.bYear);
+      sprintf(szLo, " мес€ц %02u.%02u ?  ",tiAlt.bMonth,tiAlt.bYear);
       Delay(1000);
       return GetDouble2Error();
     }
@@ -286,7 +286,7 @@ status4 ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
 
   if (ibGrp == 0)
   {
-    sprintf(szLo, " мес€ц %02bu.%02bu ?  ",tiAlt.bMonth,tiAlt.bYear);
+    sprintf(szLo, " мес€ц %02u.%02u ?  ",tiAlt.bMonth,tiAlt.bYear);
     Delay(1000);
     return(ST4_NOTPRESENTED);
   }
