@@ -15,6 +15,7 @@ AUTOMATIC_K!C
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
 #include "device_k.h"
+#include "device_k2.h"
 #include "automatic_k.h"
 
 
@@ -64,7 +65,7 @@ uchar   i;
 
 
 
-bit     ReadEnergyDayDatesK_Full(void)
+bool    ReadEnergyDayDatesK_Full(void)
 {
   for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
   {
@@ -84,7 +85,7 @@ bit     ReadEnergyDayDatesK_Full(void)
 }
 
 
-bit     ReadEnergyMonDatesK_Full(void)
+bool    ReadEnergyMonDatesK_Full(void)
 {
   for (ibZ=0; ibZ<bMINORREPEATS; ibZ++)
   {
@@ -105,7 +106,7 @@ bit     ReadEnergyMonDatesK_Full(void)
 
 
 
-bit     ReadEnergyDayK_Full(uchar  bDay)
+bool    ReadEnergyDayK_Full(uchar  bDay)
 {
   for (ibCan=0; ibCan<4; ibCan++)
   {
@@ -128,7 +129,7 @@ bit     ReadEnergyDayK_Full(uchar  bDay)
 }
 
 
-bit     ReadEnergyMonK_Full(uchar  bMon)
+bool    ReadEnergyMonK_Full(uchar  bMon)
 {
   for (ibCan=0; ibCan<4; ibCan++)
   {
@@ -151,7 +152,7 @@ bit     ReadEnergyMonK_Full(uchar  bMon)
 }
 
 
-bit     ReadEnergyMonTariffK_Full(uchar  bMon, uchar  ibTariff)
+bool    ReadEnergyMonTariffK_Full(uchar  bMon, uchar  ibTariff)
 {
   for (ibCan=0; ibCan<4; ibCan++)
   {
@@ -175,7 +176,7 @@ bit     ReadEnergyMonTariffK_Full(uchar  bMon, uchar  ibTariff)
 
 
 
-bit     ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
+bool    ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 {
   if (ReadTimeDateK() == 0) return(0);
 
@@ -243,7 +244,7 @@ bit     ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
   {
     reBuffA = mpreChannelsB[ibCan] * reBuffB;
     mpreChannelsB[ibCan] = reBuffA;
-    mpboChannelsA[ibCan] = boTrue;
+    mpboChannelsA[ibCan] = true;
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];
@@ -292,7 +293,7 @@ status4 ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
   {
     reBuffA = mpreChannelsB[ibCan] * reBuffB;
     mpreChannelsB[ibCan] = reBuffA;
-    mpboChannelsA[ibCan] = boTrue;
+    mpboChannelsA[ibCan] = true;
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];

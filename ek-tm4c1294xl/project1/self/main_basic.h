@@ -30,6 +30,15 @@ typedef struct
 } time;
 
 
+// тип 'дата'
+typedef struct
+{
+  uchar         bDay;
+  uchar         bMonth;
+  uchar         bYear;
+} date;
+
+
 // тип 'комбинированный 32 бита'
 typedef union
 {
