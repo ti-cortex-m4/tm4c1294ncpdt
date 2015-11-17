@@ -9,6 +9,7 @@ AUTOMATIC_4T,C
 #include "../../display/display.h"
 #include "../../serial/ports.h"
 #include "../../sensors/automatic_c.h"
+#include "../../sensors/automatic_k.h"
 #include "../../sensors/automatic_p.h"
 #include "extended_4t_b.h"
 #include "extended_4t_c.h"
@@ -26,7 +27,7 @@ bool    SupportedExtended4T(uchar  ibCan)
 
     case 3:  return true;
 
-//    case 13: return true;
+    case 13: return true;
 
     case 21: return true;
 
@@ -48,7 +49,7 @@ status  ReadCntMonCanTariff(uchar  ibMon, uchar  ibCan, uchar  ibTrf)
 
     case 3:  return ReadCntMonCanTariffC(ibMon, ibTrf);
 
-//    case 13: return ReadCntMonCanTariffK(ibMon, ibTrf);
+    case 13: return ReadCntMonCanTariffK(ibMon, ibTrf);
 
     case 21: return ReadCntMonCanTariffP(ibMon, ibTrf);
 
