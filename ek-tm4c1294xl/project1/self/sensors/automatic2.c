@@ -1624,11 +1624,14 @@ uchar   i,j;
 
 double2 ReadCntMonCanK(uchar  ibMon, uchar  bMaxLines)
 {
-  if (ReadTimeCanK() == 0) return GetDouble2Error();
+  time2 ti2 = ReadTimeCanK();
+  if (ti2.fValid == false) return GetDouble2Error();
+
+  time tiAlt = ti2.tiValue;
   if (tiAlt.bMonth != ibMon+1) return GetDouble2Error();
 
 
-  if (ReadCntCurrK(4) == 0) return GetDouble2Error();
+  if (ReadCntCurrK(4).fValid == false) return GetDouble2Error();
 
   // энергия за текущие сутки рассчитывается, а не запрашивается со счётчика (как должно быть) !
   if (LoadImpDay(ibHardDay) == false) return GetDouble2Error();
@@ -1641,19 +1644,15 @@ double2 ReadCntMonCanK(uchar  ibMon, uchar  bMaxLines)
     {
        if (GetDigitalLine(c) == ibLine)
        {
-         reBuffA = *PGetCanImp2RealEng(mpimDayCan[ PrevSoftDay() ],c,0x0F);
-         reBuffA = reBuffA / GetCanReal(mpreTransEng,c);
-
-         dbKtrans = GetCanReal(mpreChannelsB, ibLine);
-         reBuffA = dbKtrans * GetCanReal(mpreTransCnt,c) - reBuffA;
-         SetCanReal(mpreChannelsB, ibLine);
+         double dbA = GetCanImp2DoubleEng(mpimDayCan[ PrevSoftDay() ],c,0x0F);
+         dbA /= mpdbTransEng[c];
+         double dbB = mpdbChannelsC[ibLine] * mpdbTransCnt[c];
+         mpdbChannelsC[ibLine] = dbB - dbA;
        }
     }
   }
 
-  reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
