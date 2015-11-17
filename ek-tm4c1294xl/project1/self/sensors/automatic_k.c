@@ -203,16 +203,16 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
         ti.bYear--;
       }
 
-      ti.bDay = DaysInMonth();
+      ti.bDay = GetDaysInMonthYM(ti.bYear, ti.bMonth);
     }
 
     if (ReadEnergyDayDatesK_Full() == 0) return GetDouble2Error();
 
-    date daAlt;
-    daAlt.bDay   = ti.bDay;
-    daAlt.bMonth = ti.bMonth;
-    daAlt.bYear  = ti.bYear;
-    uchar bDay = IsDayAddedK(daAlt);
+    date dt;
+    dt.bDay   = ti.bDay;
+    dt.bMonth = ti.bMonth;
+    dt.bYear  = ti.bYear;
+    uchar bDay = IsDayAddedK(dt);
 
     if (bDay == 0)
     {
@@ -232,11 +232,11 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 
     if (ReadEnergyMonDatesK_Full() == 0) return GetDouble2Error();
 
-    date daAlt;
-    daAlt.bDay   = ti.bDay;
-    daAlt.bMonth = ti.bMonth;
-    daAlt.bYear  = ti.bYear;
-    uchar bMon = IsMonAddedK(daAlt);
+    date dt;
+    dt.bDay   = ti.bDay;
+    dt.bMonth = ti.bMonth;
+    dt.bYear  = ti.bYear;
+    uchar bMon = IsMonAddedK(dt);
 
     if (bMon == 0)
     {
@@ -251,14 +251,14 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
   }
 
 
-  reBuffB = mpreTransCnt[ibDig];
+  double dbKtrans = mpdbTransCnt[ibDig];
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<4; ibCan++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
-    reBuffA = mpreChannelsB[ibCan] * reBuffB;
-    mpreChannelsB[ibCan] = reBuffA;
-    mpboChannelsA[ibCan] = true;
+    reBuffA = mpreChannelsB[i] * dbKtrans;
+    mpreChannelsB[i] = reBuffA;
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];
