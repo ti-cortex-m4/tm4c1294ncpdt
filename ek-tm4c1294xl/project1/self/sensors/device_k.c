@@ -28,10 +28,9 @@ DEVICE_K!C
 
 
 //#ifndef SKIP_K
-/*
-// чтение накопленной энергии
-void    PopRealK(void)
-{
+
+double  PopDoubleK(void)
+{/*
 uchar	i,a,b,bT;
 
   a = 0;
@@ -68,9 +67,9 @@ uchar	i,a,b,bT;
     }
   }
 
-  reBuffA = 0;
+  reBuffA = 0;*/ return 0;
 }
-*/
+
 
 
 // запись адреса
@@ -112,8 +111,7 @@ void    PushAddress2Bcc(void)
 }
 
 
-/*
-// запись типа энергии
+
 void    PushLineBcc(uchar  ibLine)
 {
   switch (ibLine) 
@@ -124,7 +122,7 @@ void    PushLineBcc(uchar  ibLine)
     default: PushChar1Bcc('Q'); PushChar1Bcc('I'); break;
   }
 }
-*/
+
 
 
 void    QueryCloseK(void)
@@ -194,7 +192,7 @@ void    QueryEnergySpecK(uchar  ibLine)
 
   BccQueryIO1(1+6*28+2, 4+8+1, 6);
 }
-
+*/
 
 // посылка запроса на чтение энергии
 void    QueryEnergyAbsK(uchar  ibLine)
@@ -215,19 +213,14 @@ void    QueryEnergyAbsK(uchar  ibLine)
 }
 
 
-// чтение энергии
 void    ReadEnergyK(uchar  ibLine)
 {
   InitPop(1);
   
-  PopRealK();
-
-  SetCanReal(mpreChannelsB, ibLine);
+  mpdbChannelsC[ibLine] = PopDoubleK();
   mpboChannelsA[ibLine] = true;
-
-  reBuffA = *PGetCanReal(&mpreChannelsB, ibLine);
 }
-*/
+
 
 
 void    QueryOptionK(void)
