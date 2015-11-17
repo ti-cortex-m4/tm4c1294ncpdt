@@ -185,8 +185,10 @@ bool    ReadEnergyMonTariffK_Full(uchar  bMon, uchar  ibTariff)
 
 double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 {
-  if (ReadTimeDateK() == 0) return GetDouble2Error();
+  time2 ti2 = ReadTimeCanK();
+  if (ti2.fValid == false) return GetDouble2Error();
 
+  time tiAlt = ti2.tiValue;
   if (tiAlt.bMonth == ibMonth+1)
   {
     if (tiAlt.bDay > 1)
@@ -206,6 +208,7 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 
     if (ReadEnergyDayDatesK_Full() == 0) return GetDouble2Error();
 
+    date daAlt;
     daAlt.bDay   = tiAlt.bDay;
     daAlt.bMonth = tiAlt.bMonth;
     daAlt.bYear  = tiAlt.bYear;
@@ -228,6 +231,7 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 
     if (ReadEnergyMonDatesK_Full() == 0) return GetDouble2Error();
 
+    date daAlt;
     daAlt.bDay   = tiAlt.bDay;
     daAlt.bMonth = tiAlt.bMonth;
     daAlt.bYear  = tiAlt.bYear;
