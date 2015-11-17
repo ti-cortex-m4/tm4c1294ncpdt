@@ -188,62 +188,64 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
   time2 ti2 = ReadTimeCanK();
   if (ti2.fValid == false) return GetDouble2Error();
 
-  time tiAlt = ti2.tiValue;
-  if (tiAlt.bMonth == ibMonth+1)
+  time ti = ti2.tiValue;
+  if (ti.bMonth == ibMonth+1)
   {
-    if (tiAlt.bDay > 1)
-      tiAlt.bDay--;
+    if (ti.bDay > 1)
+      ti.bDay--;
     else
     {
-      if (tiAlt.bMonth > 1)
-        tiAlt.bMonth--;
+      if (ti.bMonth > 1)
+        ti.bMonth--;
       else
       {
-        tiAlt.bMonth = 12;
-        tiAlt.bYear--;
+        ti.bMonth = 12;
+        ti.bYear--;
       }
 
-      tiAlt.bDay = DaysInMonth();
+      ti.bDay = DaysInMonth();
     }
 
     if (ReadEnergyDayDatesK_Full() == 0) return GetDouble2Error();
 
     date daAlt;
-    daAlt.bDay   = tiAlt.bDay;
-    daAlt.bMonth = tiAlt.bMonth;
-    daAlt.bYear  = tiAlt.bYear;
-    uchar ibGrp = IsDayAddedK(daAlt);
+    daAlt.bDay   = ti.bDay;
+    daAlt.bMonth = ti.bMonth;
+    daAlt.bYear  = ti.bYear;
+    uchar bDay = IsDayAddedK(daAlt);
 
-    if (ibGrp == 0)
+    if (bDay == 0)
     {
-      sprintf(szLo, "сутки %02u.%02u.%02u ?",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
+      Clear();
+      sprintf(szLo+0, "сутки %02u.%02u.%02u ?",ti.bDay,ti.bMonth,ti.bYear);
       Delay(1000);
       return GetDouble2Error();
     }
-    if (ReadEnergyDayK_Full(ibGrp) == 0) return GetDouble2Error();
+    if (ReadEnergyDayK_Full(bDay) == 0) return GetDouble2Error();
 
     QueryCloseK();
   }
   else
   {
-    tiAlt.bYear = (ibMonth+1 > tiAlt.bMonth) ? tiAlt.bYear-1 : tiAlt.bYear;
-    tiAlt.bMonth = ibMonth+1;
+    ti.bYear = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    ti.bMonth = ibMonth+1;
 
     if (ReadEnergyMonDatesK_Full() == 0) return GetDouble2Error();
 
     date daAlt;
-    daAlt.bDay   = tiAlt.bDay;
-    daAlt.bMonth = tiAlt.bMonth;
-    daAlt.bYear  = tiAlt.bYear;
-    uchar ibGrp = IsMonAddedK(daAlt);
+    daAlt.bDay   = ti.bDay;
+    daAlt.bMonth = ti.bMonth;
+    daAlt.bYear  = ti.bYear;
+    uchar bMon = IsMonAddedK(daAlt);
 
-    if (ibGrp == 0)
+    if (bMon == 0)
     {
-      sprintf(szLo, " мес€ц %02u.%02u ?  ",tiAlt.bMonth,tiAlt.bYear);
+      Clear();
+      sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
       Delay(1000);
       return GetDouble2Error();
     }
-    if (ReadEnergyMonK_Full(ibGrp) == 0) return GetDouble2Error();
+    if (ReadEnergyMonK_Full(bMon) == 0) return GetDouble2Error();
 
     QueryCloseK();
   }
