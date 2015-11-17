@@ -1621,7 +1621,7 @@ uchar   i,j;
 
 
 #ifndef SKIP_K
-/*
+
 bool    ReadCntMonCanK(void)
 {
   if (ReadTimeCanK() == 0) return(0);
@@ -1653,7 +1653,7 @@ bool    ReadCntMonCanK(void)
 
   return(1);
 }
-*/
+
 #endif
 
 
@@ -2030,7 +2030,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_K
     case 13: return ReadCntMonCanK2(ibMon);
-//    case 14: ibMon = ibMon; ibMinorMax = 1; return ReadCntMonCanK();
+    case 14: ibMon = ibMon; ibMinorMax = 1; return ReadCntMonCanK();
 #endif
 
 #ifndef SKIP_L
