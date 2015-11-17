@@ -9,7 +9,7 @@ DEVICE_K!H
 void    PushAddress2Bcc(void);
 void    PushLineBcc(uchar  ibLine);
 
-void    PopRealK(void);
+void    PopDoubleK(void);
 
 void    QueryCloseK(void);
 
