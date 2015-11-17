@@ -121,43 +121,43 @@ uchar   i,bT;
 }
 
 
-void    PopDayK(void)
+date    PopDayDateK(void)
 {
-  date daAlt;
-  daAlt.bDay   = 0;
-  daAlt.bMonth = 0;
-  daAlt.bYear  = 0;
+  date dt;
+  dt.bDay   = 0;
+  dt.bMonth = 0;
+  dt.bYear  = 0;
 
-  while (1) 
+  while (true)
   {
-    uchar bT = PopChar() & 0x7F;
+    uchar b = PopChar() & 0x7F;
 
-    if (bT == 0x0D) return;
-    if (bT != '(') continue;
+    if (b == 0x0D) return dt;
+    if (b != '(') continue;
 
-    daAlt.bDay   = PopValueK('.');
-    daAlt.bMonth = PopValueK('.');
-    daAlt.bYear  = PopValueK(')');
+    dt.bDay   = PopValueK('.');
+    dt.bMonth = PopValueK('.');
+    dt.bYear  = PopValueK(')');
   }
 }
 
 
-void    PopMonK(void)
+date    PopMonDateK(void)
 {
-  date daAlt;
-  daAlt.bDay   = 0;
-  daAlt.bMonth = 0;
-  daAlt.bYear  = 0;
+  date dt;
+  dt.bDay   = 0;
+  dt.bMonth = 0;
+  dt.bYear  = 0;
 
-  while (1) 
+  while (true)
   {
-    uchar bT = PopChar() & 0x7F;
+    uchar b = PopChar() & 0x7F;
 
-    if (bT == 0x0D) return;
-    if (bT != '(') continue;
+    if (b == 0x0D) return dt;
+    if (b != '(') continue;
 
-    daAlt.bMonth = PopValueK('.');
-    daAlt.bYear  = PopValueK(')');
+    dt.bMonth = PopValueK('.');
+    dt.bYear  = PopValueK(')');
   }
 }
 
@@ -165,30 +165,28 @@ void    PopMonK(void)
 
 void    ReadEnergyDayDatesK(void)
 {
-uchar  i;
-
   InitPop(1);
 
   ClearDatesK();
+
+  uchar i;
   for (i=0; i<45; i++) 
   {
-    PopDayK();
-    mpdaDatesK[cbDatesK++] = daAlt;
+    mpdaDatesK[cbDatesK++] = PopDayDateK();
   }
 }
 
 
 void    ReadEnergyMonDatesK(void)
 {
-uchar	i;
-
   InitPop(1);
 
   ClearDatesK();
+
+  uchar	i;
   for (i=0; i<24; i++) 
   {
-    PopMonK();
-    mpdaDatesK[cbDatesK++] = daAlt;
+    mpdaDatesK[cbDatesK++] = PopMonDateK();
   }
 }
 
