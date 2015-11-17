@@ -388,30 +388,30 @@ uchar   i,j;
 }
 
 #endif
-
+*/
 
 
 #ifndef SKIP_K
 
-// чтение реальных показаний счётчиков для счётчиков ЦЭ6850М
-bool    ReadCntCurrK(uchar  bMaxLines)
+double2 ReadCntCurrK(uchar  bMaxLines)
 {
-uchar   i,j;
+uchar   j;
 
   Clear();
 
   for (j=0; j<bMaxLines; j++)
   {
-    for (i=0; i<bMINORREPEATS; i++)
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
     {
       QueryCloseK();
       QueryEnergyAbsK(j);
 
       if (BccInput() == SER_GOODCHECK) break;
-      if (fKey == true) return(0);
+      if (fKey == true) return GetDouble2Error();
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (r == bMINORREPEATS) return GetDouble2Error();
     ShowPercent(50+j);
 
     ReadEnergyK(j);
@@ -421,25 +421,21 @@ uchar   i,j;
   QueryCloseK();
 
 
-  reKtrans = GetCanReal(mpreTransCnt,ibDig);
+  double dbKtrans = mpdbTransCnt[ibDig];
 
-  for (i=0; i<bMaxLines; i++)
+  for (r=0; r<bMaxLines; r++)
   {
-    reBuffA = GetCanReal(mpreChannelsB, i) * reKtrans;
-    SetCanReal(mpreChannelsB, i);
-
-    mpboChannelsA[i] = true;
+    mpdbChannelsC[r] = mpdbChannelsC[r] * dbKtrans;
+    mpboChannelsA[r] = true;
   }
 
-  reBuffA = GetCanReal(mpreChannelsB, diCurr.ibLine);
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
 
 
-
+/*
 #ifndef SKIP_M
 
 // чтение реальных показаний счётчиков для счётчиков Меркурий-200
@@ -1626,8 +1622,7 @@ uchar   i,j;
 
 
 #ifndef SKIP_K
-
-// чтение значение показаний счётчиков для счётчиков ЦЭ6850М
+/*
 bool    ReadCntMonCanK(void)
 {
   if (ReadTimeCanK() == 0) return(0);
@@ -1659,7 +1654,7 @@ bool    ReadCntMonCanK(void)
 
   return(1);
 }
-
+*/
 #endif
 
 
@@ -1809,8 +1804,8 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_K
-    case 13: return ReadSensorK(4);
-    case 14: return ReadSensorK(1);
+    case 13: return ReadCntCurrK(4);
+    case 14: return ReadCntCurrK(1);
 #endif
 
 #ifndef SKIP_L
@@ -2036,7 +2031,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_K
     case 13: return ReadCntMonCanK2(ibMon);
-    case 14: ibMon = ibMon; ibMinorMax = 1; return ReadCntMonCanK();
+//    case 14: ibMon = ibMon; ibMinorMax = 1; return ReadCntMonCanK();
 #endif
 
 #ifndef SKIP_L

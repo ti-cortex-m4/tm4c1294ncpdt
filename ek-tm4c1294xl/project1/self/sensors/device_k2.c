@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE_K2!C
+DEVICE_K2.C
 
 
 ------------------------------------------------------------------------------*/
@@ -203,10 +203,10 @@ uchar    IsDayAddedK(date  dt)
     uchar i;
     for (i=0; i<cbDatesK; i++)
     {
-      date daDig = mpdtDatesK[i];
-      if ((daDig.bDay   == dt.bDay)   &&
-          (daDig.bMonth == dt.bMonth) &&
-          (daDig.bYear  == dt.bYear))
+      date mp = mpdtDatesK[i];
+      if ((mp.bDay   == dt.bDay)   &&
+          (mp.bMonth == dt.bMonth) &&
+          (mp.bYear  == dt.bYear))
       {
         return i+1;
       }
@@ -230,9 +230,9 @@ uchar    IsMonAddedK(date  dt)
     uchar i;
     for (i=0; i<cbDatesK; i++)
     {
-      date daDig = mpdtDatesK[i];
-      if ((daDig.bMonth == dt.bMonth) &&
-          (daDig.bYear  == dt.bYear))
+      date mp = mpdtDatesK[i];
+      if ((mp.bMonth == dt.bMonth) &&
+          (mp.bYear  == dt.bYear))
       {
         return i+1;
       }
