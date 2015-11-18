@@ -199,14 +199,14 @@ void    InitHeaderU(void)
 {
   if (!UseBounds())
     wBaseCurr = 0;  // счетчик суток
-  else 
+  else
   {
     wBaseCurr = mpcwStartAbs16Can[ibDig];
     sprintf(szLo,"   начало %2u    ",wBaseCurr);
     if (boShowMessages == true) DelayMsg();
   }
-      
-  tiDigPrev = tiCurr;   
+
+  tiDigPrev = tiCurr;
 }
 
 
@@ -243,7 +243,7 @@ void    QueryHeaderU(void)
 {
 	HideCurrTime(1);
 
-  if (wBaseCurr == 0) 
+  if (wBaseCurr == 0)
     tiDig = tiDigPrev;
   else
   {
@@ -253,10 +253,10 @@ void    QueryHeaderU(void)
 
     tiDig.bHour   = 23;
     tiDig.bMinute = 30;
-  }           
-         
-  szHi[10] = 'A' + ibMinor;       
-     
+  }
+
+  szHi[10] = 'A' + ibMinor;
+
   ibMinorMax = 2;
   QueryHeaderU_26();
 }
@@ -309,36 +309,36 @@ void    MakeDataU(uchar  ibHou)
 bool    ReadDataU(void)
 {
 uchar   j;
-       
+
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-       
+
   if (SearchDefHouIndex(tiDig) == 0) return(1);
-       
+
   if ((tiDig.bDay   == tiCurr.bDay)   &&
       (tiDig.bMonth == tiCurr.bMonth) &&
       (tiDig.bYear  == tiCurr.bYear))
     j = 47-(tiCurr.bHour*2+tiCurr.bMinute/30);
   else
     j = 0;
-      
+
   ulong dwHouIndex = DateToHouIndex(tiDig);
 
   uchar i;
-  for (i=j; i<48; i++) 
-  {           
+  for (i=j; i<48; i++)
+  {
     ResetWatchdog();
     MakeDataU(47-i);
-      
+
     MakeSpecial(tiDig);
     if (MakeStopHou(0) == 0) return(0);
-                
+
     dwHouIndex--;
-       
+
     tiDig = HouIndexToDate(dwHouIndex);
-      
-    iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;      
+
+    iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
   }
-       
+
   NewBoundsAbs16(++wBaseCurr);
   return(1);
 }
