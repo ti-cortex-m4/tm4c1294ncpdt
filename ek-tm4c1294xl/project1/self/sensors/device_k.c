@@ -19,6 +19,9 @@ DEVICE_K!C
 #include "../devices/devices.h"
 #include "../digitals/current/current_run.h"
 #include "../display/display.h"
+#include "../keyboard/time/key_timedate.h"
+#include "../time/timedate.h"
+#include "../time/calendar.h"
 #include "../time/delay.h"
 #include "device_k.h"
 
@@ -167,8 +170,7 @@ uchar   i,bT;
 }
 
 
-/*
-// посылка запроса на чтение энергии
+
 void    QueryEnergySpecK(uchar  ibLine)
 {
   InitPush(0);
@@ -190,9 +192,8 @@ void    QueryEnergySpecK(uchar  ibLine)
 
   BccQueryIO1(1+6*28+2, 4+8+1, 6);
 }
-*/
 
-// посылка запроса на чтение энергии
+
 void    QueryEnergyAbsK(uchar  ibLine)
 {
   PushAddress2Bcc();
@@ -505,14 +506,9 @@ void    QueryHeaderK(void)
 {
   HideCurrTime(1);
 
-
-  tiAlt = tiDigPrev;
-  dwBuffC = DateToHouIndex();
-
-  dwBuffC -= wBaseCurr;
-
-  HouIndexToDate(dwBuffC);
-  tiDig = tiAlt;
+  ulong dw = DateToHouIndex(tiDigPrev);
+  dw -= wBaseCurr;
+  tiDig = HouIndexToDate(dw);
 
 
   szHi[10] = 'A' + ibMinor;
@@ -532,14 +528,12 @@ void    QueryHeaderK(void)
 
 void    ReadHeaderK(void)
 {
-uchar   j;
-
   InitPop(1);
 
-  for (j=0; j<48; j++)
+  uchar i;
+  for (i=0; i<48; i++)
   {
-    PopRealK();
-    mpreBuffCanHou[ibMinor][j] = reBuffA/2;
+    mpflBuffCanHou[ibMinor][i] = PopDoubleK()/2;
   }
 }
 
