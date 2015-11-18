@@ -32,7 +32,7 @@ DEVICE_E!H
 //bit     TestIndexE(void);
 //bit     ReadAllIndexesE(uchar  chEsc, uchar  bMaximum);
 
-void    ShowTimeOneE(uchar  inCan);
+void    ShowTimeOneE(uchar  ibCan);
 void    ShowTimeTwoE(time  ti);
 
 //#endif
