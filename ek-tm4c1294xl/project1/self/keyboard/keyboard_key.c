@@ -89,6 +89,7 @@ KEYBOARD_KEY!C
 #include "tariffs/key_gaps.h"
 #include "digitals/key_hide_messages.h"
 #include "sensors/key_control_q.h"
+#include "sensors/key_control_k.h"
 #include "sensors/key_short_profile_c.h"
 #include "digitals/profile/key_dsbl_refill.h"
 #include "digitals/key_dsbl_answer.h"
@@ -313,6 +314,7 @@ void    Keyboard_Key(void)
       case wSET_GAPS:           key_SetGaps();          break;
 
       case wSET_CONTROL_Q:      key_SetControlQ();      break;
+      case wSET_CONTROL_K:      key_SetControlK();      break;
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_DSBL_ANSWER:    key_SetDsblAnswer();    break;
@@ -602,6 +604,7 @@ void    Keyboard_Key(void)
       case wSET_GAPS:           key_GetGaps();          break;
 
       case wSET_CONTROL_Q:      key_SetControlQ();      break;
+      case wSET_CONTROL_K:      key_SetControlK();      break;
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_DSBL_ANSWER:    key_SetDsblAnswer();    break;
@@ -811,6 +814,7 @@ void    Keyboard_Key(void)
       case wSET_GAPS:           key_SetGaps();          break;
 
       case wSET_CONTROL_Q:      key_SetControlQ();      break;
+      case wSET_CONTROL_K:      key_SetControlK();      break;
       case wSET_SHORT_PROFILE_C:key_SetShortProfileC(); break;
       case wSET_DSBL_REFILL:    key_SetDsblRefill();    break;
       case wSET_DSBL_ANSWER:    key_SetDsblAnswer();    break;
