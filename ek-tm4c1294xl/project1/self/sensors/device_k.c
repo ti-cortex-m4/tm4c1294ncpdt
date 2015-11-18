@@ -17,7 +17,11 @@ DEVICE_K!C
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
+#include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
+#include "../digitals/limits.h"
+#include "../special/special.h"
+#include "../hardware/watchdog.h"
 #include "../display/display.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../time/timedate.h"
@@ -538,21 +542,23 @@ void    ReadHeaderK(void)
 }
 
 
-/*
+
 void    MakeDataK(uchar  ibHou)
 {
-  ShowProgressDigHou();      
-  reBuffB = mprePulseHou[ibDig];
+  ShowProgressDigHou();
 
-  for (ibCan=0; ibCan<ibMinorMax; ibCan++)        
+  double dbPulse = mpdbPulseHou[ibDig];
+
+  uchar i;
+  for (i=0; i<ibMinorMax; i++)        
   {
-    reBuffA = mpreBuffCanHou[ibCan][ibHou];   
-    mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
+    float fl = mpflBuffCanHou[i][ibHou];
+    mpflEngFracDigCan[ibDig][i] += fl;
 
-    wBuffD = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
-    mpwChannels[ibCan] = wBuffD;
+    uint w = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulse);
+    mpwChannels[i] = w;
 
-    mpreEngFracDigCan[ibDig][ibCan] -= (float)wBuffD/reBuffB;
+    mpflEngFracDigCan[ibDig][i] -= (float)w/dbPulse;
   }
 
   wBaseCurr++;
@@ -560,15 +566,13 @@ void    MakeDataK(uchar  ibHou)
 
 
 
-bit     ReadDataK(void)
+bool    ReadDataK(void)
 {
 uchar   i,j;
 
-  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",           // показываем время/дату часового блока
-          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay, tiDig.bMonth, tiDig.bYear);
 
-  tiAlt = tiDig;
-  if (SearchDefHouIndex() == 0) return(1); 
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
   if ((tiDig.bDay   == tiCurr.bDay)   &&
@@ -583,18 +587,13 @@ uchar   i,j;
     ResetWatchdog();
     MakeDataK(47-i);
 
-    tiAlt = tiDig;
-    MakeSpecial();
+    MakeSpecial(tiDig);
     if (MakeStopHou(0) == 0) return(0);
 
 
-    tiAlt = tiDigPrev;
-    dwBuffC = DateToHouIndex();
-
-    dwBuffC -= wBaseCurr;
-
-    HouIndexToDate(dwBuffC);
-    tiDig = tiAlt;
+    ulong dw = DateToHouIndex(tiDigPrev);
+    dw -= wBaseCurr;
+    tiDig = HouIndexToDate(dw);
 
 
     iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
@@ -602,7 +601,7 @@ uchar   i,j;
 
   return(1);
 }
-*/
+
 
 
 void    ReadCurrentK(uchar  bMaxLine)
