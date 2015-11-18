@@ -90,11 +90,11 @@ uchar                   bKeysLevelB;
 // флаг чтения профилей счетчика СС-301 (x6 - false, x1 - true)
 bool                    boShortProfileC;
 
-// флаг коррекции времени счетчиков Энергомера ЦЕ3850М
-bool                    boControlK;
-
 // флаг коррекции времени счетчиков Энергомера CE304
 bool                    boControlQ;
+
+// флаг коррекции времени счетчиков Энергомера ЦЕ3850М
+bool                    boControlK;
 
 // признак
 bool                    boPlcUFlag;
