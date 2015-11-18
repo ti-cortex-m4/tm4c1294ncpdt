@@ -2167,7 +2167,7 @@ void    RunDevices(void)
     case DEV_PASSWORD_K2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if ((boControlK != false) && (fCurrCtrlHou == 1))
+        if ((boControlK != false) && (fCurrCtrl == true))
           MakePause(DEV_POSTPASSWORD_K2);
         else
           MakePause(DEV_POSTCORRECT_K2);
