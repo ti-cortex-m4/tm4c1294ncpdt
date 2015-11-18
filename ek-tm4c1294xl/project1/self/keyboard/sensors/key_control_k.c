@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_CONTROL_Q.C
+KEY_CONTROL_K.C
 
 
 ------------------------------------------------------------------------------*/
@@ -12,7 +12,7 @@ KEY_CONTROL_Q.C
 
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "Контроль времени",
-                        szMessage2[]    = "для CE301, CE304",
+                        szMessage2[]    = "  для ЦЭ6850М   ",
                         szTrue[]        = " установка      ",
                         szFalse[]       = " коррекция      ";
 
@@ -20,8 +20,8 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 
-void    key_SetControlQ(void)
+void    key_SetControlK(void)
 {
-  key_SetFlag(&chControlQ, pszMessages, szTrue, szFalse);
+  key_SetFlag(&chControlK, pszMessages, szTrue, szFalse);
 }
 
