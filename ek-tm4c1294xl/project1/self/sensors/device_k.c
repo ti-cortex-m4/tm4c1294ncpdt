@@ -568,9 +568,9 @@ void    MakeDataK(uchar  ibHou)
 
 bool    ReadDataK(void)
 {
-uchar   i,j;
+uchar   j;
 
-  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay, tiDig.bMonth, tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
@@ -582,6 +582,7 @@ uchar   i,j;
   else 
     j = 0;
 
+  uchar i;
   for (i=j; i<48; i++) 
   {
     ResetWatchdog();
