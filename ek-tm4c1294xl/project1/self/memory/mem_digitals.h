@@ -63,6 +63,8 @@ extern  uchar                   bKeysLevelB;
 
 extern  bool                    boShortProfileC;
 
+extern  bool                    boControlK;
+
 extern  bool                    boControlQ;
 
 extern  bool                    boPlcUFlag;
