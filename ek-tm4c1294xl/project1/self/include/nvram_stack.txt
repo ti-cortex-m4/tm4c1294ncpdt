@@ -242,5 +242,7 @@ RESERVE(DSBL_ANSWER, sizeof(bool) + bNVRAM_FOOTER)
 
 RESERVE(MAX_SHUTDOWN, sizeof(uint) + bNVRAM_FOOTER)
 
+RESERVE(CONTROL_K, sizeof(bool) + bNVRAM_FOOTER)
+
 END(NVRAM_END)
 } nvram;

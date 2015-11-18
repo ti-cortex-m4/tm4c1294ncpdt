@@ -242,5 +242,7 @@ typedef enum
 
   MAX_SHUTDOWN          = DSBL_ANSWER + sizeof(bool) + bNVRAM_FOOTER,
 
-  NVRAM_END             = MAX_SHUTDOWN + sizeof(uint) + bNVRAM_FOOTER
+  CONTROL_K             = MAX_SHUTDOWN + sizeof(uint) + bNVRAM_FOOTER,
+
+  NVRAM_END             = CONTROL_K + sizeof(bool) + bNVRAM_FOOTER
 } nvram;
