@@ -207,4 +207,20 @@ SYSTEM!H
 #endif
 
 
+#ifndef SKIP_K
+
+// нижний порог коррекции времени для ведомого счётчика ЦЭ6850М, секунд
+#define bMINORCORRECT_K 3
+
+#endif
+
+
+#ifndef SKIP_U
+
+// нижний порог коррекции времени для ведомого счётчика СЕ301, секунд
+#define bMINORCORRECT_U 3
+
+#endif
+
+
 #endif
