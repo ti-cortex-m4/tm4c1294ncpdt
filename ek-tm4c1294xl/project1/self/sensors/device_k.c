@@ -6,10 +6,18 @@ DEVICE_K!C
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
+#include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
+#include "../memory/mem_current.h"
+#include "../memory/mem_factors.h"
 #include "../memory/mem_realtime.h"
+#include "../memory/mem_energy_spec.h"
+#include "../memory/mem_profile.h"
+#include "../memory/mem_limits.h"
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
+#include "../devices/devices.h"
+#include "../digitals/current/current_run.h"
 #include "../display/display.h"
 #include "../time/delay.h"
 #include "device_k.h"
@@ -383,7 +391,7 @@ time    ReadDateK(time  ti)
   return ti;
 }
 
-/*
+
 void    QueryCorrectK(void)
 {
   InitPush(0);
@@ -403,7 +411,7 @@ void    QueryCorrectK(void)
 
   Query(1000, 2+6+2, 1);
 }
-*/
+
 
 // посылка запроса на коррекцию времени
 void    QueryControlK(void)
@@ -435,7 +443,7 @@ void    QueryControlK(void)
 }
 
 
-/*
+
 void    QueryHeaderK_13(void)
 {
   InitPush(0);
@@ -536,7 +544,7 @@ uchar   j;
 }
 
 
-
+/*
 void    MakeDataK(uchar  ibHou)
 {
   ShowProgressDigHou();      
@@ -600,22 +608,18 @@ uchar   i,j;
 
   return(1);
 }
-
+*/
 
 
 void    ReadCurrentK(uchar  bMaxLine)
 {
-uchar   i;
-
-  reBuffB = mprePulseHou[ibDig];
-
+  uchar i;
   for (i=0; i<bMaxLine; i++)
   {
-    dwBuffC = *PGetCanReal(&mpreChannelsB, i) * reBuffB;
-    SetCanLong(mpdwBaseDig, i);
+    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseHou[ibDig];
   }
 
   MakeCurrent();
 }
-*/
+
 #endif
