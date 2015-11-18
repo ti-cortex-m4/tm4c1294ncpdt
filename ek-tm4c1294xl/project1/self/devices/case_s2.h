@@ -35,7 +35,7 @@
     case DEV_POSTVERSION_S2:                     
       cbCorrects = 0;
 
-      if (fCurrCtrl == 1)
+      if (fCurrCtrl == true)
         MakePause(DEV_POSTOPENCANAL_S2);
       else
         MakePause(DEV_POSTCORRECT_S2);  

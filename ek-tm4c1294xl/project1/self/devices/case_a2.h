@@ -12,7 +12,7 @@
     case DEV_OPENCANAL_A2:                     
       if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultA() == 1))
       {
-        if (fCurrCtrl == 1)
+        if (fCurrCtrl == true)
           MakePause(DEV_POSTOPENCANAL_A2);
         else
           MakePause(DEV_POSTCORRECT_A2);  

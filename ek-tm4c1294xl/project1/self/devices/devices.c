@@ -643,7 +643,7 @@ void    RunDevices(void)
     case DEV_OPENCANAL_A2:                     
       if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultA() == 1))
       {
-        if (fCurrCtrl == 1)
+        if (fCurrCtrl == true)
           MakePause(DEV_POSTOPENCANAL_A2);
         else
           MakePause(DEV_POSTCORRECT_A2);  
@@ -1105,7 +1105,7 @@ void    RunDevices(void)
     case DEV_OPENCANAL_B2:
       if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultB() == 1))
       {
-        if (fCurrCtrl == 1)
+        if (fCurrCtrl == true)
           MakePause(DEV_POSTOPENCANAL_B2);
         else
           MakePause(DEV_POSTCORRECT_B2);
@@ -1627,7 +1627,7 @@ void    RunDevices(void)
     case DEV_OPENCANAL_C2:
       if ((mpSerial[ibPort] == SER_GOODCHECK)/* && (ReadResultC() == 1)*/)
       {
-        if (fCurrCtrl == 1)
+        if (fCurrCtrl == true)
           MakePause(DEV_POSTOPENCANAL_C2);
         else
           MakePause(DEV_POSTCORRECT_C2);
@@ -2080,7 +2080,7 @@ void    RunDevices(void)
 #ifndef SKIP_K
 
     case DEV_START_K2:
-      if ((boControlK == false) && (fCurrCtrl == 1))
+      if ((boControlK == false) && (fCurrCtrl == true))
         MakePause(DEV_PREVCORRECT2_K2);
       else
         MakePause(DEV_OPEN_K2);
@@ -3042,7 +3042,7 @@ void    RunDevices(void)
     case DEV_POSTVERSION_S2:                     
       cbCorrects = 0;
 
-      if (fCurrCtrl == 1)
+      if (fCurrCtrl == true)
         MakePause(DEV_POSTOPENCANAL_S2);
       else
         MakePause(DEV_POSTCORRECT_S2);  
@@ -3273,7 +3273,7 @@ void    RunDevices(void)
 #ifndef SKIP_U
 
     case DEV_START_U2:
-      if ((boControlQ == false) && (fCurrCtrl == 1))
+      if ((boControlQ == false) && (fCurrCtrl == true))
         MakePause(DEV_PREVCORRECT_U2);
       else 
         MakePause(DEV_OPEN_U2);
@@ -3358,7 +3358,7 @@ void    RunDevices(void)
     case DEV_PASSWORD_U2:                     
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if ((boControlQ != false) && (fCurrCtrl == 1))
+        if ((boControlQ != false) && (fCurrCtrl == true))
           MakePause(DEV_POSTPASSWORD_U2);
         else
           MakePause(DEV_POSTCORRECT_U2);  
@@ -3853,7 +3853,7 @@ void    RunDevices(void)
     case DEV_POSTVERSION_V2:
       cbCorrects = 0;
 
-      if (fCurrCtrl == 1)
+      if (fCurrCtrl == true)
         MakePause(DEV_POSTOPENCANAL_V2);
       else
         MakePause(DEV_POSTCORRECT_V2);
