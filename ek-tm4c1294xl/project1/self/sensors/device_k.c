@@ -77,7 +77,6 @@ double  dbA,dbB;
 
 
 
-// запись адреса
 void    PushAddress1Bcc(void)
 {
 uint    i;
@@ -104,7 +103,6 @@ uint    i;
 }
 
 
-// запись адреса
 void    PushAddress2Bcc(void)
 {
   PushAddress1Bcc();
@@ -159,17 +157,16 @@ void    QueryOpenK(void)
 
 void    ReadOpenK(void)
 {
-uchar   i,bT;
-
   Clear();
   InitPop(1);
 
+  uchar i;
   for (i=0; i<16; i++)
   {
-    bT = PopChar0Bcc();
+    uchar b = PopChar0Bcc();
 
-    if ((bT == '\r') || (bT == '\n')) break;
-    szLo[i] = bT;
+    if ((b == '\r') || (b == '\n')) break;
+    szLo[i] = b;
   }
 }
 
@@ -255,11 +252,8 @@ uchar   i;
 
 
 
-// посылка запроса с паролем доступа
 void    QueryPasswordK(void)
 {
-uint    i;
-
   InitPush(0);
 
   PushChar1Bcc(0x01);
@@ -268,7 +262,7 @@ uint    i;
   PushChar1Bcc(0x02);
   PushChar1Bcc('(');
 
-  i = mpdwAddress2[diCurr.bAddress-1] / 1000;
+  uint i = mpdwAddress2[diCurr.bAddress-1] / 1000;
 
   PushChar1Bcc(szDigits[ (i/100) % 10 ]);
   PushChar1Bcc(szDigits[ (i%100) / 10 ]);
@@ -285,7 +279,6 @@ uint    i;
 
   BccQueryIO1(1+1, 4+9+1, 0);
 }
-
 
 
 
@@ -306,7 +299,6 @@ void    QueryTimeK(void)
 }
 
 
-// посылка запроса на чтение времени
 void    QueryTimeSpecK(void)
 {
   InitPush(0);
@@ -327,7 +319,6 @@ void    QueryTimeSpecK(void)
 
   BccQueryIO1(1+17+2, 4+8+1, 0);
 }
-
 
 
 time    ReadTimeK(void)
@@ -361,7 +352,6 @@ void    QueryDateK(void)
 }
 
 
-
 void    QueryDateSpecK(void)
 {
   InitPush(0);
@@ -384,7 +374,6 @@ void    QueryDateSpecK(void)
 }
 
 
-
 time    ReadDateK(time  ti)
 {
   InitPop(7+3);
@@ -395,6 +384,7 @@ time    ReadDateK(time  ti)
 
   return ti;
 }
+
 
 
 void    QueryCorrectK(void)
@@ -418,7 +408,6 @@ void    QueryCorrectK(void)
 }
 
 
-// посылка запроса на коррекцию времени
 void    QueryControlK(void)
 {
   InitPush(0);
@@ -563,7 +552,6 @@ void    MakeDataK(uchar  ibHou)
 
   wBaseCurr++;
 }
-
 
 
 bool    ReadDataK(void)

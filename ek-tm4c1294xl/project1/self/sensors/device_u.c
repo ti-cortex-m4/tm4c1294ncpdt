@@ -202,7 +202,8 @@ void    InitHeaderU(void)
   else
   {
     wBaseCurr = mpcwStartAbs16Can[ibDig];
-    sprintf(szLo,"   начало %2u    ",wBaseCurr);
+    Clear();
+    sprintf(szLo+3,"начало %2u",wBaseCurr);
     if (boShowMessages == true) DelayMsg();
   }
 
@@ -241,7 +242,7 @@ void    QueryHeaderU_26(void)
 
 void    QueryHeaderU(void)
 {
-	HideCurrTime(1);
+  HideCurrTime(1);
 
   if (wBaseCurr == 0)
     tiDig = tiDigPrev;
@@ -333,7 +334,6 @@ uchar   j;
     if (MakeStopHou(0) == 0) return(0);
 
     dwHouIndex--;
-
     tiDig = HouIndexToDate(dwHouIndex);
 
     iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
