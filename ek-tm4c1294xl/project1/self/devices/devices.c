@@ -2076,10 +2076,11 @@ void    RunDevices(void)
       break;
 
 #endif
+
 #ifndef SKIP_K
 
     case DEV_START_K2:
-      if ((boControlK == boFalse) && (fCurrCtrlHou == 1))
+      if ((boControlK == boFalse) && (fCurrCtrl == 1))
         MakePause(DEV_PREVCORRECT2_K2);
       else
         MakePause(DEV_OPEN_K2);
@@ -2244,27 +2245,27 @@ void    RunDevices(void)
       break;
 
 
-    case DEV_POSTDATE_K2:
-      wBuffD  = GetDayIndex();              // количество дней с начала года ведомого счётчика
-      dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
-
-      tiAlt = tiCurr;                       // текущие время/дата сумматора
-
-      if (wBuffD != GetDayIndex())
-      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
-      else
+    case DEV_POSTTIME_K2:
       {
-        if (dwBuffC > GetSecondIndex())                                         // необходима коррекция времени ведомого счётчика назад
-          ShowDeltaNeg();
-        else
-          ShowDeltaPos();
+        uint iwDay1 = GetDayIndexMD(tiValueK.bMonth, tiValueK.bDay);
+        ulong dwSecond1 = GetSecondIndex(tiValueK);
 
-        if (dwBuffC < bMINORCORRECT_K)                                          // без коррекции
-        { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_K2); }
-        else if (GetHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))           // простая коррекция
-        { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_K2); }
+        uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
+        ulong dwSecond2 = GetSecondIndex(tiCurr);
+
+        if (iwDay1 != iwDay2)
+        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
-        { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
+        {
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
+
+          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_K2); }
+          else if (GetCurrHouIndex() == (tiValueK.bHour*2 + tiValueK.bMinute/30)) // простая коррекция
+          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_K2);  }
+          else
+          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
+        }
       }
       break;
 
@@ -2314,6 +2315,7 @@ void    RunDevices(void)
             DoneProfile();
           else
           {
+            uchar i;
             for (i=0; i<48; i++)
             {
               wBaseCurr++;
@@ -2382,6 +2384,7 @@ void    RunDevices(void)
       break;
 
 #endif
+
 #ifndef SKIP_K
 
     case DEV_START_K3:
