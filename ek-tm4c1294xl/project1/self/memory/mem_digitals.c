@@ -91,7 +91,7 @@ uchar                   bKeysLevelB;
 bool                    boShortProfileC;
 
 // флаг коррекции времени счетчиков Энергомера ЦЕ3850М
-boolean                 boControlK;
+bool                    boControlK;
 
 // флаг коррекции времени счетчиков Энергомера CE304
 bool                    boControlQ;
