@@ -9,7 +9,7 @@
       break;
 
     case DEV_PREVCORRECT_U2:
-      if (tiCurr.bSecond < 3) {
+      if (tiCurr.bSecond < bMINORCORRECT_U) {
         MakePause(DEV_CORRECT_U2);
       } else {
         ShowTimeOneE(ibDig);

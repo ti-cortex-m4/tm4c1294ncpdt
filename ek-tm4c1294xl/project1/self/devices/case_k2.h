@@ -12,7 +12,7 @@
       if (tiCurr.bSecond < bMINORCORRECT_K) {
         MakePause(DEV_CORRECT2_K2);
       } else {
-        ShowTimeOneE();
+        ShowTimeOneE(ibDig);
         MakePause(DEV_PREVCORRECT2_K2);
       }
       break;
@@ -119,8 +119,7 @@
     case DEV_TIME_K2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltK();
-        tiDig = tiAlt;
+        tiDig = ReadTimeK();
         MakePause(DEV_POSTTIME_K2);
       }
       else
@@ -148,8 +147,7 @@
     case DEV_DATE_K2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadDateAltK();
-        tiDig = tiAlt;
+        tiDig = ReadDateK(tiDig);
         MakePause(DEV_POSTDATE_K2);
       }
       else
@@ -167,10 +165,10 @@
       break;
 
 
-    case DEV_POSTTIME_K2:
+    case DEV_POSTDATE_K2:
       {
-        uint iwDay1 = GetDayIndexMD(tiValueK.bMonth, tiValueK.bDay);
-        ulong dwSecond1 = GetSecondIndex(tiValueK);
+        uint iwDay1 = GetDayIndexMD(tiDig.bMonth, tiDig.bDay);
+        ulong dwSecond1 = GetSecondIndex(tiDig);
 
         uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
@@ -183,7 +181,7 @@
 
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_K2); }
-          else if (GetCurrHouIndex() == (tiValueK.bHour*2 + tiValueK.bMinute/30)) // простая коррекция
+          else if (GetCurrHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))       // простая коррекция
           { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_K2);  }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
