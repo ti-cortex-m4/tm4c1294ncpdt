@@ -57,8 +57,8 @@ cache const             chManageTime = {MANAGE_TIME, &boManageTime, sizeof(bool)
 
 cache const             chKeysLevelB = {KEYS_LEVEL_B, &bKeysLevelB, sizeof(uchar)};
 cache const             chShortProfileC = {SHORT_PROFILE_C, &boShortProfileC, sizeof(bool)};
-cache const             chControlK = {CONTROL_K, &boControlK, sizeof(bool)};
 cache const             chControlQ = {CONTROL_Q, &boControlQ, sizeof(bool)};
+cache const             chControlK = {CONTROL_K, &boControlK, sizeof(bool)};
 cache const             chPlcUFlag = {PLC_U_FLAG, &boPlcUFlag, sizeof(bool)};
 cache const             chPlcUSize = {PLC_U_SIZE, &bPlcUSize, sizeof(uchar)};
 cache const             chPlcUShutdown = {PLC_U_SHUTDOWN, &wPlcUShutdown, sizeof(uint)};
@@ -75,8 +75,8 @@ void    InitDevices1(void)
 
   LoadCacheChar(&chKeysLevelB, 1, 2, 2);
   LoadCache(&chShortProfileC);
-  LoadCacheBool(&chControlK, true);
   LoadCacheBool(&chControlQ, false);
+  LoadCacheBool(&chControlK, true);
   LoadCacheBool(&chPlcUFlag, false);
   LoadCacheChar(&chPlcUSize, 1, 8, 6);
   LoadCacheInt(&chPlcUShutdown, 10, 500, 100);
@@ -153,8 +153,8 @@ void    ResetDevices(bool  fFull)
   boShortProfileC = false;
   SaveCache(&chShortProfileC);
 
-  SaveCacheBool(&chControlK, true);
   SaveCacheBool(&chControlQ, false);
+  SaveCacheBool(&chControlK, true);
 
   boPlcUFlag = false;
   SaveCache(&chPlcUFlag);
