@@ -46,7 +46,7 @@ double  dbA,dbB;
     uchar bT = PopChar() & 0x7F;
 
     if (a == 0)
-    { 
+    {
       if (bT == '(') a = i+1;
 
       dbA = 0;
@@ -56,7 +56,7 @@ double  dbA,dbB;
     {
       if (bT == '.') { b = i-1; continue; }
 
-      if (bT == ')') 
+      if (bT == ')')
       {
         for (i=a; i<b; i++) dbA *= 10;
         return dbA;
@@ -64,7 +64,7 @@ double  dbA,dbB;
 
       if ((bT >= '0') && (bT <= '9'))
         bT -= '0';
-      else 
+      else
         break;
 
       dbA += dbB*bT;
@@ -119,7 +119,7 @@ void    PushAddress2Bcc(void)
 
 void    PushLineBcc(uchar  ibLine)
 {
-  switch (ibLine) 
+  switch (ibLine)
   {
     case 0:  PushChar1Bcc('P'); PushChar1Bcc('E'); break;
     case 1:  PushChar1Bcc('P'); PushChar1Bcc('I'); break;
@@ -219,7 +219,7 @@ void    QueryEnergyAbsK(uchar  ibLine)
 void    ReadEnergyK(uchar  ibLine)
 {
   InitPop(1);
-  
+
   mpdbChannelsC[ibLine] = PopDoubleK();
   mpboChannelsA[ibLine] = true;
 }
@@ -257,7 +257,7 @@ uchar   i;
 
 // посылка запроса с паролем доступа
 void    QueryPasswordK(void)
-{ 
+{
 uint    i;
 
   InitPush(0);
@@ -550,7 +550,7 @@ void    MakeDataK(uchar  ibHou)
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
-  for (i=0; i<ibMinorMax; i++)        
+  for (i=0; i<ibMinorMax; i++)
   {
     float fl = mpflBuffCanHou[i][ibHou];
     mpflEngFracDigCan[ibDig][i] += fl;
@@ -577,13 +577,13 @@ uchar   j;
 
   if ((tiDig.bDay   == tiCurr.bDay)   &&
       (tiDig.bMonth == tiCurr.bMonth) &&
-      (tiDig.bYear  == tiCurr.bYear))    
-    j = 47-(tiCurr.bHour*2+tiCurr.bMinute/30); 
-  else 
+      (tiDig.bYear  == tiCurr.bYear))
+    j = 47-(tiCurr.bHour*2+tiCurr.bMinute/30);
+  else
     j = 0;
 
   uchar i;
-  for (i=j; i<48; i++) 
+  for (i=j; i<48; i++)
   {
     ResetWatchdog();
     MakeDataK(47-i);
