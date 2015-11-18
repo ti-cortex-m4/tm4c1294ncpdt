@@ -2080,7 +2080,7 @@ void    RunDevices(void)
 #ifndef SKIP_K
 
     case DEV_START_K2:
-      if ((boControlK == boFalse) && (fCurrCtrl == 1))
+      if ((boControlK == false) && (fCurrCtrl == 1))
         MakePause(DEV_PREVCORRECT2_K2);
       else
         MakePause(DEV_OPEN_K2);
@@ -2167,7 +2167,7 @@ void    RunDevices(void)
     case DEV_PASSWORD_K2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if ((boControlK != boFalse) && (fCurrCtrlHou == 1))
+        if ((boControlK != false) && (fCurrCtrlHou == 1))
           MakePause(DEV_POSTPASSWORD_K2);
         else
           MakePause(DEV_POSTCORRECT_K2);
