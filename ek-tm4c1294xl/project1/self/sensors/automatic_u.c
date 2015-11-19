@@ -71,8 +71,6 @@ double2 ReadCntCurrU(uchar  bMaxLines)
 
 double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
 {
-uchar   i,j;
-
   time2 ti2 = ReadTimeCanK();
   if (ti2.fValid == false) return GetDouble2Error();
 
@@ -95,12 +93,12 @@ uchar   i,j;
     }
 
     uchar j;
-    for (j=0; j<2; j++)
+    for (j=0; j<bMaxLines; j++)
     {
       if (SkipLine(ibDig, j) == 1) { mpdbChannelsC[j] = 0; continue; }
 
-      uchar i;
-      for (i=0; i<bMINORREPEATS; i++)
+      uchar r;
+      for (r=0; r<bMINORREPEATS; r++)
       {
         ShowPercent(50 + j);
         QueryCloseU();
@@ -109,14 +107,15 @@ uchar   i,j;
         if (BccInput() == SER_GOODCHECK) break;
         if (IndexInBuff() == 10)
         {
-          sprintf(szLo, "сутки %02u.%02u.%02u ?",ti.bDay,ti.bMonth,ti.bYear);
+          Clear();
+          sprintf(szLo+0, "сутки %02u.%02u.%02u ?",ti.bDay,ti.bMonth,ti.bYear);
           Delay(1000);
           return GetDouble2Error();
         }
         if (fKey == true) return GetDouble2Error();
       }
 
-      if (i == bMINORREPEATS) return GetDouble2Error();
+      if (r == bMINORREPEATS) return GetDouble2Error();
       ReadEnergyU(j);
     }
 
@@ -128,12 +127,12 @@ uchar   i,j;
     ti.bMonth = ibMon+1;
 
     uchar j;
-    for (j=0; j<2; j++)
+    for (j=0; j<bMaxLines; j++)
     {
       if (SkipLine(ibDig, j) == 1) { mpdbChannelsC[j] = 0; continue; }
 
-      uchar i;
-      for (i=0; i<bMINORREPEATS; i++)
+      uchar r;
+      for (r=0; r<bMINORREPEATS; r++)
       {
         ShowPercent(50 + j);
         QueryCloseU();
@@ -142,14 +141,15 @@ uchar   i,j;
         if (BccInput() == SER_GOODCHECK) break;
         if (IndexInBuff() == 10)
         {
-          sprintf(szLo, " мес€ц %02u.%02u ?  ",ti.bMonth,ti.bYear);
+          Clear();
+          sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
           Delay(1000);
           return GetDouble2Error();
         }
         if (fKey == true) return GetDouble2Error();
       }
 
-      if (i == bMINORREPEATS) return GetDouble2Error();
+      if (r == bMINORREPEATS) return GetDouble2Error();
       ReadEnergyU(j);
     }
 
@@ -158,7 +158,7 @@ uchar   i,j;
 
 
   uchar i;
-  for (i=0; i<2; i++)
+  for (i=0; i<bMaxLines; i++)
   {
     mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
     mpboChannelsA[i] = true;
