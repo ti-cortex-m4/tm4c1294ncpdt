@@ -92,17 +92,17 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
       ti.bDay = GetDaysInMonthYM(ti.bYear, ti.bMonth);
     }
 
-    uchar j;
-    for (j=0; j<bMaxLines; j++)
+    uchar i;
+    for (i=0; i<bMaxLines; i++)
     {
-      if (SkipLine(ibDig, j) == 1) { mpdbChannelsC[j] = 0; continue; }
+      if (SkipLine(ibDig, i) == true) { mpdbChannelsC[i] = 0; continue; }
 
       uchar r;
       for (r=0; r<bMINORREPEATS; r++)
       {
-        ShowPercent(50 + j);
+        ShowPercent(50 + i);
         QueryCloseU();
-        QueryEnergyDayU(j, ti);
+        QueryEnergyDayU(i, ti);
 
         if (BccInput() == SER_GOODCHECK) break;
         if (IndexInBuff() == 10)
@@ -116,7 +116,7 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
       }
 
       if (r == bMINORREPEATS) return GetDouble2Error();
-      ReadEnergyU(j);
+      ReadEnergyU(i);
     }
 
     QueryCloseU();
@@ -126,17 +126,17 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
     ti.bYear = (ibMon+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
     ti.bMonth = ibMon+1;
 
-    uchar j;
-    for (j=0; j<bMaxLines; j++)
+    uchar i;
+    for (i=0; i<bMaxLines; i++)
     {
-      if (SkipLine(ibDig, j) == 1) { mpdbChannelsC[j] = 0; continue; }
+      if (SkipLine(ibDig, i) == true) { mpdbChannelsC[i] = 0; continue; }
 
       uchar r;
       for (r=0; r<bMINORREPEATS; r++)
       {
-        ShowPercent(50 + j);
+        ShowPercent(50 + i);
         QueryCloseU();
-        QueryEnergyMonU(j, ti);
+        QueryEnergyMonU(i, ti);
 
         if (BccInput() == SER_GOODCHECK) break;
         if (IndexInBuff() == 10)
@@ -150,14 +150,13 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
       }
 
       if (r == bMINORREPEATS) return GetDouble2Error();
-      ReadEnergyU(j);
+      ReadEnergyU(i);
     }
 
     QueryCloseU();
   }
 
 
-  uchar i;
   for (i=0; i<bMaxLines; i++)
   {
     mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
