@@ -157,6 +157,7 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
   }
 
 
+  uchar i;
   for (i=0; i<bMaxLines; i++)
   {
     mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
