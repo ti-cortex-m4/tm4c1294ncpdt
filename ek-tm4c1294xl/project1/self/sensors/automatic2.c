@@ -2082,7 +2082,8 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_U
-    case 26: return ReadCntMonCanU(ibMon);
+    case 26: return ReadCntMonCanU(ibMon,2);
+    case 28: return ReadCntMonCanU(ibMon,4);
 #endif
 
 #ifndef SKIP_V
