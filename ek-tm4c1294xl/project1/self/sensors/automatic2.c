@@ -1849,7 +1849,8 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_U
-    case 26: return ReadCntCurrU();
+    case 26: return ReadCntCurrU(2);
+    case 28: return ReadCntCurrU(4);
 #endif
 
 #ifndef SKIP_V
