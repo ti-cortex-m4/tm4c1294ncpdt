@@ -27,6 +27,7 @@ DEVICE_U!C
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
+#include "../digitals/digitals.h"
 #include "../digitals/limits.h"
 #include "../special/special.h"
 #include "../hardware/watchdog.h"
@@ -37,6 +38,17 @@ DEVICE_U!C
 
 
 #ifndef SKIP_U
+
+uchar   GetMaxLine(uchar  ibCan)
+{
+  switch (GetDigitalDevice(ibCan))
+  {
+    case 26: return 2;
+    case 28: return 4;
+    default: ASSERT(false); return 0;
+  }
+}
+
 
 void    QueryCloseU(void)
 {
@@ -345,10 +357,10 @@ uchar   j;
 
 
 
-void    ReadCurrentU(void)
+void    ReadCurrentU(uchar  bMaxLine)
 {
   uchar i;
-  for (i=0; i<2; i++)
+  for (i=0; i<bMaxLine; i++)
   {
     mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseHou[ibDig];
   }
