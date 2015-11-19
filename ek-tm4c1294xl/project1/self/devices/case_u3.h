@@ -1,7 +1,7 @@
 
 #ifndef SKIP_U
 
-    case DEV_START_U3:                     
+    case DEV_START_U3:
       Clear(); ShowPercent(50);
 
       cbRepeat = GetMaxRepeats();
@@ -9,24 +9,24 @@
       SetCurr(DEV_OPENCANAL_U3);
       break;
 
-    case DEV_OPENCANAL_U3:                     
+    case DEV_OPENCANAL_U3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTOPENCANAL_U3);
-      else                                      
+      else
       {
-        if (cbRepeat == 0) ErrorCurrent(); 
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryOpenK();
           SetCurr(DEV_OPENCANAL_U3);
         }
-      }  
+      }
       break;
 
-    case DEV_POSTOPENCANAL_U3:                     
+    case DEV_POSTOPENCANAL_U3:
       Clear(); ShowPercent(51);
 
       cbRepeat = GetMaxRepeats();
@@ -34,24 +34,24 @@
       SetCurr(DEV_OPTION_U3);
       break;
 
-    case DEV_OPTION_U3:                     
+    case DEV_OPTION_U3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTOPTION_U3);
-      else                                      
+      else
       {
-        if (cbRepeat == 0) ErrorCurrent(); 
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryOptionK();
           SetCurr(DEV_OPTION_U3);
         }
-      }  
+      }
       break;
 
-    case DEV_POSTOPTION_U3:                     
+    case DEV_POSTOPTION_U3:
       Clear(); ShowPercent(52);
 
       ibMinor = 0;
@@ -62,11 +62,11 @@
       }
 
       cbRepeat = GetMaxRepeats();
-      QueryEnergySpecU(ibMinor); 
+      QueryEnergySpecU(ibMinor);
       SetCurr(DEV_ENERGY_U3);
-      break; 
+      break;
 
-    case DEV_ENERGY_U3: 
+    case DEV_ENERGY_U3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         ReadEnergyU(ibMinor);
@@ -77,27 +77,27 @@
           ibMinor++;
         }
 
-        if (++ibMinor < 2) 
+        if (++ibMinor < 2)
         {
           Clear(); ShowPercent(53);
-          QueryEnergySpecU(ibMinor); 
+          QueryEnergySpecU(ibMinor);
           SetCurr(DEV_ENERGY_U3);
         }
         else
           ReadCurrentU();
       }
-      else                                      
+      else
       {
-        if (cbRepeat == 0) ErrorCurrent(); 
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
-          QueryEnergySpecU(ibMinor); 
+
+          QueryEnergySpecU(ibMinor);
           SetCurr(DEV_ENERGY_U3);
         }
-      }  
+      }
       break;
 
 #endif
