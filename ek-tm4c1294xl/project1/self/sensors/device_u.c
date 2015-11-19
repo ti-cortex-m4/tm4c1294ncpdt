@@ -270,7 +270,7 @@ void    QueryHeaderU(void)
 
   szHi[10] = 'A' + ibMinor;
 
-  ibMinorMax = 2;
+  ibMinorMax = GetMaxLine(ibDig);
   QueryHeaderU_26();
 }
 
