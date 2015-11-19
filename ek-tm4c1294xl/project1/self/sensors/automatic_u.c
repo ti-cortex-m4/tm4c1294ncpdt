@@ -69,7 +69,7 @@ double2 ReadCntCurrU(uchar  bMaxLines)
 
 
 
-double2 ReadCntMonCanU(uchar  ibMonth)
+double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
 {
 uchar   i,j;
 
@@ -77,7 +77,7 @@ uchar   i,j;
   if (ti2.fValid == false) return GetDouble2Error();
 
   time ti = ti2.tiValue;
-  if (ti.bMonth == ibMonth+1)
+  if (ti.bMonth == ibMon+1)
   {
     if (ti.bDay > 1)
       ti.bDay--;
@@ -94,10 +94,12 @@ uchar   i,j;
       ti.bDay = GetDaysInMonthYM(ti.bYear, ti.bMonth);
     }
 
+    uchar j;
     for (j=0; j<2; j++)
     {
       if (SkipLine(ibDig, j) == 1) { mpdbChannelsC[j] = 0; continue; }
 
+      uchar i;
       for (i=0; i<bMINORREPEATS; i++)
       {
         ShowPercent(50 + j);
@@ -122,13 +124,15 @@ uchar   i,j;
   }
   else
   {
-    ti.bYear = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
-    ti.bMonth = ibMonth+1;
+    ti.bYear = (ibMon+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    ti.bMonth = ibMon+1;
 
+    uchar j;
     for (j=0; j<2; j++)
     {
       if (SkipLine(ibDig, j) == 1) { mpdbChannelsC[j] = 0; continue; }
 
+      uchar i;
       for (i=0; i<bMINORREPEATS; i++)
       {
         ShowPercent(50 + j);
@@ -153,6 +157,7 @@ uchar   i,j;
   }
 
 
+  uchar i;
   for (i=0; i<2; i++)
   {
     mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
