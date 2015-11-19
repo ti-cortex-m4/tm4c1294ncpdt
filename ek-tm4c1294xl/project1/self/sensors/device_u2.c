@@ -70,8 +70,8 @@ static void QueryHeaderU_Plc_Inner(void)
   PushChar1Bcc('G');
   PushChar1Bcc('R');
   PushChar1Bcc('A');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibMinor == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibMinor);
 
   PushChar1Bcc('(');
   PushChar2Bcc(tiDig.bDay);
