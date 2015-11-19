@@ -103,8 +103,8 @@ void    QueryEnergyAbsU(uchar  ibLine)
   PushChar1Bcc('E');
   PushChar1Bcc('T');
   PushChar1Bcc('0');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLine);
 
   PushChar1Bcc('(');
   PushChar1Bcc(')');
@@ -121,8 +121,8 @@ void    QueryEnergyDayU(uchar  ibLine, time  ti)
   PushChar1Bcc('E');
   PushChar1Bcc('N');
   PushChar1Bcc('D');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLine);
 
   PushChar1Bcc('(');
   PushChar2Bcc(ti.bDay);
@@ -144,8 +144,8 @@ void    QueryEnergyMonU(uchar  ibLine, time  ti)
   PushChar1Bcc('E');
   PushChar1Bcc('N');
   PushChar1Bcc('M');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLine);
 
   PushChar1Bcc('(');
   PushChar2Bcc(ti.bMonth);
@@ -170,8 +170,8 @@ void    QueryEnergySpecU(uchar  ibLine)
   PushChar1Bcc('E');
   PushChar1Bcc('T');
   PushChar1Bcc('0');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLine);
 
   PushChar1Bcc('(');
   PushChar1Bcc(')');
@@ -223,8 +223,8 @@ void    QueryHeaderU_26(void)
   PushChar1Bcc('G');
   PushChar1Bcc('R');
   PushChar1Bcc('A');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibMinor == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibMinor);
 
   PushChar1Bcc('(');
   PushChar2Bcc(tiDig.bDay);
