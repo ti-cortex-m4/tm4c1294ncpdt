@@ -18,8 +18,6 @@ DEVICES_INPUT,C
 
 void    DevicesInput(void)
 {
-uchar   bT;
-
 #ifndef SKIP_C
     if (diCurr.bDevice == 3)
     {
@@ -29,7 +27,7 @@ uchar   bT;
 #endif
 
 #ifndef SKIP_G
-    if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10))
+    else if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10))
     {
       if ((InBuff(0) == 0x7E) && (IndexInBuff() > 3) && (IndexInBuff() == InBuff(1)+4))
         mpSerial[ibPort] = SER_BADLINK;
@@ -42,8 +40,8 @@ uchar   bT;
     {
       if ((GetCurr() == DEV_OPENCANAL_K2) || (GetCurr() == DEV_OPENCANAL_K3))
       {
-        bT = InBuff(IndexInBuff() - 1) & 0x7F;
-        if ((bT == '\r') || (bT == '\n'))
+        uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
+        if ((b == '\r') || (b == '\n'))
           mpSerial[ibPort] = SER_BADLINK;
       }
 
@@ -69,8 +67,8 @@ uchar   bT;
     {
       if ((GetCurr() == DEV_OPENCANAL_Q2) || (GetCurr() == DEV_OPENCANAL_Q3))
       {
-        bT = InBuff(IndexInBuff() - 1) & 0x7F;
-        if ((bT == '\r') || (bT == '\n'))
+        uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
+        if ((b == '\r') || (b == '\n'))
           mpSerial[ibPort] = SER_BADLINK;
       }
 
@@ -106,8 +104,8 @@ uchar   bT;
     {
       if ((GetCurr() == DEV_OPENCANAL_U2) || (GetCurr() == DEV_OPENCANAL_U3))
       {
-        bT = InBuff(IndexInBuff() - 1) & 0x7F;
-        if ((bT == '\r') || (bT == '\n'))
+        uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
+        if ((b == '\r') || (b == '\n'))
           mpSerial[ibPort] = SER_BADLINK;
       }
 
