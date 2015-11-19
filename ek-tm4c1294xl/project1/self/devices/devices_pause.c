@@ -117,7 +117,7 @@ void    DevicesPause(void)
 #endif
 
 #ifndef SKIP_U
-    else if (diCurr.bDevice == 26)
+    else if ((diCurr.bDevice == 26) || (diCurr.bDevice == 28))
     {
       if (mpSerial[ibPort] == SER_BADLINK)
       {
