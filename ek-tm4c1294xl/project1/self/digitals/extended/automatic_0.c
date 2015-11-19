@@ -126,12 +126,12 @@ bool    ReadTimeDateD_Short(void)
 bool    ReadTimeDateE_Short(void)
 {
   if (diCurr.bAddress <= 16)
-  {   
+  {
     QueryBreakE();
 
     InitPush();
-    PushChar(0x1B);          
-    PushChar('0'+diCurr.bAddress);            
+    PushChar(0x1B);
+    PushChar('0'+diCurr.bAddress);
     Query(1+1, 2, 1);
 
     if (EscInput() != SER_GOODCHECK) return(0);
@@ -140,9 +140,9 @@ bool    ReadTimeDateE_Short(void)
 
 
   InitPush();
-  PushChar(0x1B);          
-  PushChar('T');            
-  Query(6+1, 2, 1);  
+  PushChar(0x1B);
+  PushChar('T');
+  Query(6+1, 2, 1);
 
   if (EscInput() != SER_GOODCHECK) return(0);
 
@@ -246,7 +246,7 @@ bool    ReadTimeDateI_Short(void)
 
 
 
-//#ifndef SKIP_K
+#ifndef SKIP_K
 
 time2   ReadTimeDateK_Short(void)
 {
@@ -271,7 +271,7 @@ time2   ReadTimeDateK_Short(void)
   return GetTime2(ti, true);
 }
 
-//#endif
+#endif
 
 
 
@@ -435,7 +435,7 @@ time2   ReadTimeDate_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_E
-    case 7:  
+    case 7:
     case 5:  return( ReadTimeDateE_Short() );  break;
 #endif
 
