@@ -4,6 +4,8 @@ DEVICE_U!H
 
 ------------------------------------------------------------------------------*/
 
+uchar   GetMaxLine(uchar  ibCan);
+
 void    QueryCloseU(void);
 void    QueryOptionU(void);
 void    QueryCorrectU(void);
@@ -21,7 +23,7 @@ void    ReadHeaderU_SkipLine(uchar  ibLine);
 void    MakeDataU(uchar  ibHou);
 bool    ReadDataU(void);
 
-void    ReadCurrentU(void);
+void    ReadCurrentU(uchar  bMaxLine);
 
 void    QueryParamU1(void);
 void    QueryParamU2(void);

@@ -55,7 +55,7 @@
       Clear(); ShowPercent(52);
 
       ibMinor = 0;
-      if (SkipLine(ibDig, ibMinor) == 1)
+      if (SkipLine(ibDig, ibMinor) == true)
       {
         ReadEnergyU_SkipLine(ibMinor);
         ibMinor++;
@@ -71,20 +71,21 @@
       {
         ReadEnergyU(ibMinor);
 
-        if (SkipLine(ibDig, ibMinor+1) == 1)
+        if (SkipLine(ibDig, ibMinor+1) == true)
         {
           ReadEnergyU_SkipLine(ibMinor+1);
           ibMinor++;
         }
 
-        if (++ibMinor < 2)
+        uchar bMaxLine = GetMaxLine(ibDig);
+        if (++ibMinor < bMaxLine)
         {
-          Clear(); ShowPercent(53);
+          Clear(); ShowPercent(52+ibMinor);
           QueryEnergySpecU(ibMinor);
           SetCurr(DEV_ENERGY_U3);
         }
         else
-          ReadCurrentU();
+          ReadCurrentU(bMaxLine);
       }
       else
       {
