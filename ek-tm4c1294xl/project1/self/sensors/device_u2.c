@@ -38,10 +38,10 @@ DEVICE_U2!C
 
 
 void    InitHeaderU_Plc(void)
-{ 
+{
   if (!UseBounds())
     wBaseCurr = 0; // счетчик получасов
-  else 
+  else
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / bPlcUSize) * bPlcUSize;
     sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
@@ -98,10 +98,10 @@ void    QueryHeaderU_Plc(void)
   ulong dw = DateToHouIndex(tiDigPrev);
   dw -= wBaseCurr;
   tiDig = HouIndexToDate(dw);
-  
 
-  szHi[10] = 'A' + ibMinor;       
-     
+
+  szHi[10] = 'A' + ibMinor;
+
   ibMinorMax = 2;
   QueryHeaderU_Plc_Inner();
 }
@@ -122,16 +122,16 @@ void    ReadHeaderU_Plc(void)
 static bool ReadDataU_Plc_Inner(uchar  i)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-       
+
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
-  ShowProgressDigHou();      
-  
+  ShowProgressDigHou();
+
   MakeDataU(i);
 
   MakeSpecial(tiDig);
-  return(MakeStopHou(0)); 
+  return(MakeStopHou(0));
 }
 
 
@@ -149,7 +149,7 @@ bool    ReadDataU_Plc(void)
 
     if (ReadDataU_Plc_Inner(bPlcUSize-1-i) == 0) return(0);
   }
-  
+
   wBaseCurr += bPlcUSize;
   if (wBaseCurr > wHOURS) return(0);
 
