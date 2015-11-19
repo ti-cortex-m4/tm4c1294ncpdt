@@ -1956,7 +1956,8 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_U
-    case 26: return ReadTimeCanU();
+    case 26:
+    case 28: return ReadTimeCanU();
 #endif
 
 #ifndef SKIP_V
