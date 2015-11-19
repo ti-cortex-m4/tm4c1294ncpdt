@@ -15,8 +15,6 @@ TODO / *else* /
 
 void    DevicesPause(void)
 {
-uchar   bT;
-
 #ifndef SKIP_G
     if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10))
     {
@@ -43,7 +41,7 @@ uchar   bT;
       {
         if ((GetCurr() == DEV_OPENCANAL_K2) || (GetCurr() == DEV_OPENCANAL_K3))
         {
-          bT = InBuff(IndexInBuff() - 1) & 0x7F;
+          uchar bT = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((bT == '\r') || (bT == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -84,7 +82,7 @@ uchar   bT;
       {
         if ((GetCurr() == DEV_OPENCANAL_Q2) || (GetCurr() == DEV_OPENCANAL_Q3))
         {
-          bT = InBuff(IndexInBuff() - 1) & 0x7F;
+          uchar bT = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((bT == '\r') || (bT == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -125,7 +123,7 @@ uchar   bT;
       {
         if ((GetCurr() == DEV_OPENCANAL_U2) || (GetCurr() == DEV_OPENCANAL_U3))
         {
-          bT = InBuff(IndexInBuff() - 1) & 0x7F;
+          uchar bT = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((bT == '\r') || (bT == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
