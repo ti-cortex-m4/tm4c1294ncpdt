@@ -39,6 +39,9 @@ DEVICE_U!C
 
 #ifndef SKIP_U
 
+uchar                   ibLineU, bMaxLineU;
+
+
 uchar   GetMaxLine(uchar  ibCan)
 {
   switch (GetDigitalDevice(ibCan))
@@ -236,7 +239,7 @@ void    QueryHeaderU_26(void)
   PushChar1Bcc('R');
   PushChar1Bcc('A');
 
-  PushLineBcc(ibMinor);
+  PushLineBcc(ibLineU);
 
   PushChar1Bcc('(');
   PushChar2Bcc(tiDig.bDay);
@@ -268,9 +271,9 @@ void    QueryHeaderU(void)
     tiDig.bMinute = 30;
   }
 
-  szHi[10] = 'A' + ibMinor;
+  szHi[10] = 'A' + ibLineU;
 
-  ibMinorMax = GetMaxLine(ibDig);
+  bMaxLineU = GetMaxLine(ibDig);
   QueryHeaderU_26();
 }
 
@@ -283,7 +286,7 @@ void    ReadHeaderU(void)
   uchar i;
   for (i=0; i<48; i++)
   {
-    mpflBuffCanHou[ibMinor][i] = PopDoubleQ()/2;
+    mpflBuffCanHou[ibLineU][i] = PopDoubleQ()/2;
   }
 }
 
@@ -306,7 +309,7 @@ void    MakeDataU(uchar  ibHou)
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
-  for (i=0; i<ibMinorMax; i++)
+  for (i=0; i<bMaxLineU; i++)
   {
     float fl = mpflBuffCanHou[i][ibHou];
     mpflEngFracDigCan[ibDig][i] += fl;

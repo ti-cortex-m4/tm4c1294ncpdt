@@ -3774,7 +3774,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_U4:
-      if (++ibMinor < ibMinorMax)
+      if (++ibMinor < bMaxLineU)
       {
         cbRepeat = GetMaxRepeats();
         QueryHeaderU_Plc();

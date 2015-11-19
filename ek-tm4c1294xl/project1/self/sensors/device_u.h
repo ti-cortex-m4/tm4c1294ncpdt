@@ -4,6 +4,10 @@ DEVICE_U!H
 
 ------------------------------------------------------------------------------*/
 
+extern uchar                   ibLineU, bMaxLineU;
+
+
+
 uchar   GetMaxLine(uchar  ibCan);
 
 void    QueryCloseU(void);

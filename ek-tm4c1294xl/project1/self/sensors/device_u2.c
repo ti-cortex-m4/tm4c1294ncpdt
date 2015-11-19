@@ -71,7 +71,7 @@ static void QueryHeaderU_Plc_Inner(void)
   PushChar1Bcc('R');
   PushChar1Bcc('A');
 
-  PushLineBcc(ibMinor);
+  PushLineBcc(ibLineU);
 
   PushChar1Bcc('(');
   PushChar2Bcc(tiDig.bDay);
@@ -100,9 +100,9 @@ void    QueryHeaderU_Plc(void)
   tiDig = HouIndexToDate(dw);
 
 
-  szHi[10] = 'A' + ibMinor;
+  szHi[10] = 'A' + ibLineU;
 
-  ibMinorMax = 2;
+  bMaxLineU = GetMaxLine(ibDig);
   QueryHeaderU_Plc_Inner();
 }
 
@@ -114,7 +114,7 @@ void    ReadHeaderU_Plc(void)
   uchar i;
   for (i=0; i<bPlcUSize; i++)
   {
-    mpflBuffCanHou[ibMinor][i] = PopDoubleQ()/2;
+    mpflBuffCanHou[ibLineU][i] = PopDoubleQ()/2;
   }
 }
 

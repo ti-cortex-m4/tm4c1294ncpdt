@@ -5,11 +5,11 @@
       iwMajor = 0;
       InitHeaderU_Plc();
 
-      ibMinor = 0;
-      if (SkipLine(ibDig, ibMinor) == 1)
+      ibLineU = 0;
+      if (SkipLine(ibDig, ibLineU) == 1)
       {
-        ReadHeaderU_SkipLine(ibMinor);
-        ibMinor++;
+        ReadHeaderU_SkipLine(ibLineU);
+        ibLineU++;
       }
 
       cbRepeat = GetMaxRepeats();
@@ -45,10 +45,10 @@
         {
           ReadHeaderU_Plc();
 
-          if (SkipLine(ibDig, ibMinor+1) == 1)
+          if (SkipLine(ibDig, ibLineU+1) == 1)
           {
-            ReadHeaderU_SkipLine(ibMinor+1);
-            ibMinor++;
+            ReadHeaderU_SkipLine(ibLineU+1);
+            ibLineU++;
           }
 
           iwMajor = 0;                                  // если есть требуемая запись
@@ -71,7 +71,7 @@
       break;
 
     case DEV_POSTHEADER_U4:
-      if (++ibMinor < ibMinorMax)
+      if (++ibLineU < bMaxLineU)
       {
         cbRepeat = GetMaxRepeats();
         QueryHeaderU_Plc();
@@ -91,12 +91,12 @@
         DoneProfile();
       else
       {
-        ibMinor = 0;
+        ibLineU = 0;
 
-        if (SkipLine(ibDig, ibMinor) == 1)
+        if (SkipLine(ibDig, ibLineU) == 1)
         {
-          ReadHeaderU_SkipLine(ibMinor);
-          ibMinor++;
+          ReadHeaderU_SkipLine(ibLineU);
+          ibLineU++;
         }
 
         cbRepeat = GetMaxRepeats();
