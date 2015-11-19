@@ -41,8 +41,8 @@ void    DevicesPause(void)
       {
         if ((GetCurr() == DEV_OPENCANAL_K2) || (GetCurr() == DEV_OPENCANAL_K3))
         {
-          uchar bT = InBuff(IndexInBuff() - 1) & 0x7F;
-          if ((bT == '\r') || (bT == '\n'))
+          uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
+          if ((b == '\r') || (b == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
             mpSerial[ibPort] = SER_BADCHECK;
@@ -82,8 +82,8 @@ void    DevicesPause(void)
       {
         if ((GetCurr() == DEV_OPENCANAL_Q2) || (GetCurr() == DEV_OPENCANAL_Q3))
         {
-          uchar bT = InBuff(IndexInBuff() - 1) & 0x7F;
-          if ((bT == '\r') || (bT == '\n'))
+          uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
+          if ((b == '\r') || (b == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
             mpSerial[ibPort] = SER_BADCHECK;
@@ -123,8 +123,8 @@ void    DevicesPause(void)
       {
         if ((GetCurr() == DEV_OPENCANAL_U2) || (GetCurr() == DEV_OPENCANAL_U3))
         {
-          uchar bT = InBuff(IndexInBuff() - 1) & 0x7F;
-          if ((bT == '\r') || (bT == '\n'))
+          uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
+          if ((b == '\r') || (b == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
             mpSerial[ibPort] = SER_BADCHECK;
