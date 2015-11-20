@@ -11,10 +11,9 @@ MONITOR_SETTINGS.C
 
 
 
-static bool             fMonitorLogHex;
-static bool             fMonitorLogChar7;
-static bool             fMonitorLogChar8;
-
+bool                    fMonitorLogHex;
+bool                    fMonitorLogChar7;
+bool                    fMonitorLogChar8;
 
 cache const             chMonitorLogHex = {MONITOR_LOG_HEX, &fMonitorLogHex, sizeof(bool)};
 cache const             chMonitorLogChar7 = {MONITOR_LOG_CHAR7, &fMonitorLogChar7, sizeof(bool)};
