@@ -270,7 +270,7 @@ serial  BccInput(void)
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if ( MakeBccInBuff() )
+      if (MakeBccInBuff())
         mpSerial[ibPort] = SER_GOODCHECK;
       else
         mpSerial[ibPort] = SER_BADCHECK;
