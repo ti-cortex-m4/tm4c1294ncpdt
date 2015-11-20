@@ -30,7 +30,16 @@ void    InitMonitor(void)
 {
   fMonitor = false;
   cwMonitorDelay = 0;
+
+  InitMonitorSettings();
 }
+
+
+void    ResetMonitor(void)
+{
+  ResetMonitorSettings();
+}
+
 
 
 bool    UseMonitor(void)

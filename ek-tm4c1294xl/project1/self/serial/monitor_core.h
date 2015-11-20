@@ -5,6 +5,7 @@ MONITOR_CORE.H
 ------------------------------------------------------------------------------*/
 
 void    InitMonitor(void);
+void    ResetMonitor(void);
 
 bool    UseMonitor(void);
 void    MonitorRepeat(void);

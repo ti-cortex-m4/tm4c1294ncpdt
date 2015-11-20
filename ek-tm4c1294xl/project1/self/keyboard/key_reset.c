@@ -24,6 +24,7 @@ KEY_RESET!C
 #include "../serial/slave_modem.h"
 #include "../serial/bulk.h"
 #include "../serial/flow.h"
+#include "../serial/monitor.h"
 #include "../output/esc/esc.h"
 #include "../output/unified/uni.h"
 #include "../impulses/factors.h"
@@ -159,6 +160,7 @@ void    key_SetReset(void)
           ResetEsc();
           ResetUni();
           ResetFlow();
+          ResetMonitor();
 //          ResetCurrent();
           ResetCurrent2();
 //          ResetProfiles();
