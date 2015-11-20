@@ -10,6 +10,7 @@ MONITOR_CORE.C
 #include "inc/hw_ints.h"
 #include "speeds.h"
 #include "ports_common.h"
+#include "monitor_settings.h"
 #include "monitor_core.h"
 
 
