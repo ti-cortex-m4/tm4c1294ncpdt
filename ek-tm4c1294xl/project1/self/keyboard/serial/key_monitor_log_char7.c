@@ -12,7 +12,7 @@ KEY_MONITOR_LOG_CHAR7.C
 
 
 //                                          0123456789ABCDEF
-static char const       szMessage1[]     = " Монитор: лог в ",
+static char const       szMessage1[]     = "Логи монитора в ",
                         szMessage2[]     = "формате CHAR7 ? ";
 
 static char const       *pszMessages[]   = { szMessage1, szMessage2, "" };
