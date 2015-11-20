@@ -79,6 +79,9 @@ KEYBOARD_KEY!C
 #include "test/key_test_flow.h"
 #include "test/key_test_ports_io.h"
 #include "test/key_test_uni.h"
+#include "serial/key_monitor_log_hex.h"
+#include "serial/key_monitor_log_char7.h"
+#include "serial/key_monitor_log_char8.h"
 #include "serial/key_monitor_open.h"
 #include "test/key_test_monitor.h"
 #include "test/key_test_impulses.h"
@@ -298,6 +301,9 @@ void    Keyboard_Key(void)
       case bTEST_FLOW:          key_TestFlow();         break;
       case bTEST_PORTS_IO:      key_TestPortsIO();      break;
       case bTEST_UNI:           key_TestUni();          break;
+      case wSET_MONITOR_LOG_HEX:   key_MonitorLogHex();   break;
+      case wSET_MONITOR_LOG_CHAR7: key_MonitorLogChar7(); break;
+      case wSET_MONITOR_LOG_CHAR8: key_MonitorLogChar8(); break;
       case wSET_MONITOR_OPEN:   key_MonitorOpen();      break;
       case wTEST_MONITOR:       key_TestMonitor();      break;
 
@@ -588,6 +594,9 @@ void    Keyboard_Key(void)
       case bTEST_FLOW:          key_TestFlow();         break;
       case bTEST_PORTS_IO:      key_TestPortsIO();      break;
       case bTEST_UNI:           key_TestUni();          break;
+      case wSET_MONITOR_LOG_HEX:   key_MonitorLogHex();   break;
+      case wSET_MONITOR_LOG_CHAR7: key_MonitorLogChar7(); break;
+      case wSET_MONITOR_LOG_CHAR8: key_MonitorLogChar8(); break;
       case wSET_MONITOR_OPEN:   key_MonitorOpen();      break;
       case wTEST_MONITOR:       key_TestMonitor();      break;
 
@@ -798,6 +807,9 @@ void    Keyboard_Key(void)
       case bTEST_FLOW:          key_TestFlow();         break;
       case bTEST_PORTS_IO:      key_TestPortsIO();      break;
       case bTEST_UNI:           key_TestUni();          break;
+      case wSET_MONITOR_LOG_HEX:   key_MonitorLogHex();   break;
+      case wSET_MONITOR_LOG_CHAR7: key_MonitorLogChar7(); break;
+      case wSET_MONITOR_LOG_CHAR8: key_MonitorLogChar8(); break;
       case wSET_MONITOR_OPEN:   key_MonitorOpen();      break;
       case wTEST_MONITOR:       key_TestMonitor();      break;
 
