@@ -35,7 +35,7 @@ void    MonitorChar(const char  *psz, uchar  b)
 
 void    MonitorCharChar(uchar  b)
 {
-  MonitorChar("%c", b);
+  MonitorChar("%c", (b < ' ' ? '_' : b));
 }
 
 
@@ -183,7 +183,7 @@ static void MonitorInChar7(uint  cwIn)
   uint i;
   for (i=0; i<cwIn; i++)
   {
-    MonitorCharHex(InBuff(i) & 0x7F);
+    MonitorCharChar(InBuff(i) & 0x7F);
   }
 }
 
@@ -195,7 +195,7 @@ static void MonitorInChar8(uint  cwIn)
   uint i;
   for (i=0; i<cwIn; i++)
   {
-    MonitorCharHex(InBuff(i));
+    MonitorCharChar(InBuff(i));
   }
 }
 
