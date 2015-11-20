@@ -8,6 +8,7 @@ DECOMPRESS_K!C
 #include "../memory/mem_ports.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
+#include "../serial/monitor.h"
 #include "../display/display.h"
 #include "unpack_k.h"
 
@@ -41,6 +42,8 @@ uchar   j;
         SetCountInBuff(i+6);
 
         if ((fShow == 1) && (IndexInBuff() > 40)) sprintf(szLo," прием: %-4u    ",IndexInBuff());
+
+        MonitorIn();
 
         InputMode();
         mpSerial[ibPort] = SER_POSTINPUT_MASTER;
@@ -77,6 +80,8 @@ uchar   j;
         SetCountInBuff(i+bOffset);
 
         if ((fShow == 1) && (IndexInBuff() > 40)) sprintf(szLo," прием: %-4u    ",IndexInBuff());
+
+        MonitorIn();
 
         InputMode();
         mpSerial[ibPort] = SER_POSTINPUT_MASTER;
