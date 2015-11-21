@@ -214,7 +214,7 @@ void    ReadEnergyU_SkipLine(uchar  ibLine)
 void    InitHeaderU(void)
 {
   if (!UseBounds())
-    wBaseCurr = 0;  // счетчик суток
+    wBaseCurr = 0; // счетчик суток
   else
   {
     wBaseCurr = mpcwStartAbs16Can[ibDig];
