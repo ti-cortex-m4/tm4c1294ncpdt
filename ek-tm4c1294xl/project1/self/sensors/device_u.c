@@ -42,6 +42,7 @@ DEVICE_U!C
 uchar                   ibLineU, bMaxLineU;
 
 
+
 uchar   GetMaxLine(uchar  ibCan)
 {
   switch (GetDigitalDevice(ibCan))
