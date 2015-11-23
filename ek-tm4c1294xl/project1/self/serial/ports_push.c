@@ -301,3 +301,22 @@ void	PushChar2Bcc(uchar  bT)
   PushChar1Bcc(szDigits[ bT / 10 ]);
   PushChar1Bcc(szDigits[ bT % 10 ]);
 }
+
+
+extern int usprintf(char * restrict s, const char * restrict format, ...);
+
+uchar   PushNumberBcc(ulong  dwT)
+{
+static char mbT[16];
+
+  memset(&mbT, 0, sizeof(mbT));
+  uchar n = usprintf(mbT, "%u" ,dwT);
+
+  uchar i;
+  for (i=0; i<n; i++)
+  {
+    PushChar1Bcc(mbT[i]);
+  }
+
+  return n;
+}

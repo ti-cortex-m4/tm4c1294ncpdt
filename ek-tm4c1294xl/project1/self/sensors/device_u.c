@@ -91,6 +91,27 @@ uchar   i;
 }
 
 
+
+void    QueryPasswordU(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('P');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+  PushChar1Bcc('(');
+
+  uchar n = PushNumberBcc(mpdwAddress2[diCurr.bAddress-1]);
+
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO1(1+1, 5+n+2+1, 0);
+}
+
+
+
 void    QueryCorrectU(void)
 {
   InitPush(0);
