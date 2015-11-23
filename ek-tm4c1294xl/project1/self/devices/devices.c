@@ -3349,7 +3349,7 @@ void    RunDevices(void)
       ShowPercent(52);
 
       cbRepeat = GetMaxRepeats();
-      QueryPasswordK();
+      QueryPasswordU();
       SetCurr(DEV_PASSWORD_U2);
       break;
 
@@ -3369,7 +3369,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryPasswordK();
+          QueryPasswordU();
           SetCurr(DEV_PASSWORD_U2);
         }
       }

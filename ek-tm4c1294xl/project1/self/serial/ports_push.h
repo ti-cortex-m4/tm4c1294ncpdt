@@ -33,3 +33,4 @@ void    PushCharDec2Txt(uchar  bT);
 
 void    PushChar1Bcc(uchar  bT);
 void    PushChar2Bcc(uchar  bT);
+uchar   PushNumberBcc(ulong  dwT);
