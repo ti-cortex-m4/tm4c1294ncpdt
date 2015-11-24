@@ -27,6 +27,7 @@ DEVICE_U!C
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
+#include "../digitals/digitals.h"
 #include "../digitals/limits.h"
 #include "../special/special.h"
 #include "../hardware/watchdog.h"
@@ -37,6 +38,21 @@ DEVICE_U!C
 
 
 #ifndef SKIP_U
+
+uchar                   ibLineU, bMaxLineU;
+
+
+
+uchar   GetMaxLine(uchar  ibCan)
+{
+  switch (GetDigitalDevice(ibCan))
+  {
+    case 26: return 2;
+    case 28: return 4;
+    default: ASSERT(false); return 0;
+  }
+}
+
 
 void    QueryCloseU(void)
 {
@@ -75,6 +91,27 @@ uchar   i;
 }
 
 
+
+void    QueryPasswordU(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('P');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+  PushChar1Bcc('(');
+
+  uchar n = PushNumberBcc(mpdwAddress2[diCurr.bAddress-1]);
+
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  BccQueryIO1(1+1, 5+n+2+1, 0);
+}
+
+
+
 void    QueryCorrectU(void)
 {
   InitPush(0);
@@ -103,8 +140,8 @@ void    QueryEnergyAbsU(uchar  ibLine)
   PushChar1Bcc('E');
   PushChar1Bcc('T');
   PushChar1Bcc('0');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLine);
 
   PushChar1Bcc('(');
   PushChar1Bcc(')');
@@ -121,8 +158,8 @@ void    QueryEnergyDayU(uchar  ibLine, time  ti)
   PushChar1Bcc('E');
   PushChar1Bcc('N');
   PushChar1Bcc('D');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLine);
 
   PushChar1Bcc('(');
   PushChar2Bcc(ti.bDay);
@@ -144,8 +181,8 @@ void    QueryEnergyMonU(uchar  ibLine, time  ti)
   PushChar1Bcc('E');
   PushChar1Bcc('N');
   PushChar1Bcc('M');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLine);
 
   PushChar1Bcc('(');
   PushChar2Bcc(ti.bMonth);
@@ -170,8 +207,8 @@ void    QueryEnergySpecU(uchar  ibLine)
   PushChar1Bcc('E');
   PushChar1Bcc('T');
   PushChar1Bcc('0');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibLine == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLine);
 
   PushChar1Bcc('(');
   PushChar1Bcc(')');
@@ -198,7 +235,7 @@ void    ReadEnergyU_SkipLine(uchar  ibLine)
 void    InitHeaderU(void)
 {
   if (!UseBounds())
-    wBaseCurr = 0;  // счетчик суток
+    wBaseCurr = 0; // счетчик суток
   else
   {
     wBaseCurr = mpcwStartAbs16Can[ibDig];
@@ -223,8 +260,8 @@ void    QueryHeaderU_26(void)
   PushChar1Bcc('G');
   PushChar1Bcc('R');
   PushChar1Bcc('A');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibMinor == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLineU);
 
   PushChar1Bcc('(');
   PushChar2Bcc(tiDig.bDay);
@@ -256,9 +293,9 @@ void    QueryHeaderU(void)
     tiDig.bMinute = 30;
   }
 
-  szHi[10] = 'A' + ibMinor;
+  szHi[10] = 'A' + ibLineU;
 
-  ibMinorMax = 2;
+  bMaxLineU = GetMaxLine(ibDig);
   QueryHeaderU_26();
 }
 
@@ -271,7 +308,7 @@ void    ReadHeaderU(void)
   uchar i;
   for (i=0; i<48; i++)
   {
-    mpflBuffCanHou[ibMinor][i] = PopDoubleQ()/2;
+    mpflBuffCanHou[ibLineU][i] = PopDoubleQ()/2;
   }
 }
 
@@ -294,7 +331,7 @@ void    MakeDataU(uchar  ibHou)
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
-  for (i=0; i<ibMinorMax; i++)
+  for (i=0; i<bMaxLineU; i++)
   {
     float fl = mpflBuffCanHou[i][ibHou];
     mpflEngFracDigCan[ibDig][i] += fl;
@@ -345,10 +382,10 @@ uchar   j;
 
 
 
-void    ReadCurrentU(void)
+void    ReadCurrentU(uchar  bMaxLine)
 {
   uchar i;
-  for (i=0; i<2; i++)
+  for (i=0; i<bMaxLine; i++)
   {
     mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseHou[ibDig];
   }

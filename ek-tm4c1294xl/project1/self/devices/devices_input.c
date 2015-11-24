@@ -100,7 +100,7 @@ void    DevicesInput(void)
 #endif
 
 #ifndef SKIP_U
-    else if (diCurr.bDevice == 26)
+    else if ((diCurr.bDevice == 26) || (diCurr.bDevice == 28))
     {
       if ((GetCurr() == DEV_OPENCANAL_U2) || (GetCurr() == DEV_OPENCANAL_U3))
       {

@@ -10,6 +10,7 @@ MONITOR_CORE.C
 #include "inc/hw_ints.h"
 #include "speeds.h"
 #include "ports_common.h"
+#include "monitor_settings.h"
 #include "monitor_core.h"
 
 
@@ -30,7 +31,16 @@ void    InitMonitor(void)
 {
   fMonitor = false;
   cwMonitorDelay = 0;
+
+  InitMonitorSettings();
 }
+
+
+void    ResetMonitor(void)
+{
+  ResetMonitorSettings();
+}
+
 
 
 bool    UseMonitor(void)

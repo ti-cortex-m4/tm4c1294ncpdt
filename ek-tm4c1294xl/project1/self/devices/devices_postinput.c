@@ -180,9 +180,9 @@ void    DevicesPostInput(void)
 #endif
 
 #ifndef SKIP_U
-    else if (diCurr.bDevice == 26)
+    else if ((diCurr.bDevice == 26) || (diCurr.bDevice == 28))
     {
-      if ( MakeBccInBuff() )
+      if (MakeBccInBuff())
         mpSerial[ibPort] = SER_GOODCHECK;
       else
         mpSerial[ibPort] = SER_BADCHECK;

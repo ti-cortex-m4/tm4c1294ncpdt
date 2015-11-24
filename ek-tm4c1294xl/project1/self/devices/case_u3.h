@@ -1,7 +1,7 @@
 
 #ifndef SKIP_U
 
-    case DEV_START_U3:                     
+    case DEV_START_U3:
       Clear(); ShowPercent(50);
 
       cbRepeat = GetMaxRepeats();
@@ -9,24 +9,24 @@
       SetCurr(DEV_OPENCANAL_U3);
       break;
 
-    case DEV_OPENCANAL_U3:                     
+    case DEV_OPENCANAL_U3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTOPENCANAL_U3);
-      else                                      
+      else
       {
-        if (cbRepeat == 0) ErrorCurrent(); 
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryOpenK();
           SetCurr(DEV_OPENCANAL_U3);
         }
-      }  
+      }
       break;
 
-    case DEV_POSTOPENCANAL_U3:                     
+    case DEV_POSTOPENCANAL_U3:
       Clear(); ShowPercent(51);
 
       cbRepeat = GetMaxRepeats();
@@ -34,70 +34,71 @@
       SetCurr(DEV_OPTION_U3);
       break;
 
-    case DEV_OPTION_U3:                     
+    case DEV_OPTION_U3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTOPTION_U3);
-      else                                      
+      else
       {
-        if (cbRepeat == 0) ErrorCurrent(); 
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryOptionK();
           SetCurr(DEV_OPTION_U3);
         }
-      }  
+      }
       break;
 
-    case DEV_POSTOPTION_U3:                     
+    case DEV_POSTOPTION_U3:
       Clear(); ShowPercent(52);
 
-      ibMinor = 0;
-      if (SkipLine(ibDig, ibMinor) == 1)
+      ibLineU = 0;
+      if (SkipLine(ibDig, ibLineU) == true)
       {
-        ReadEnergyU_SkipLine(ibMinor);
-        ibMinor++;
+        ReadEnergyU_SkipLine(ibLineU);
+        ibLineU++;
       }
 
       cbRepeat = GetMaxRepeats();
-      QueryEnergySpecU(ibMinor); 
+      QueryEnergySpecU(ibLineU);
       SetCurr(DEV_ENERGY_U3);
-      break; 
+      break;
 
-    case DEV_ENERGY_U3: 
+    case DEV_ENERGY_U3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadEnergyU(ibMinor);
+        ReadEnergyU(ibLineU);
 
-        if (SkipLine(ibDig, ibMinor+1) == 1)
+        if (SkipLine(ibDig, ibLineU+1) == true)
         {
-          ReadEnergyU_SkipLine(ibMinor+1);
-          ibMinor++;
+          ReadEnergyU_SkipLine(ibLineU+1);
+          ibLineU++;
         }
 
-        if (++ibMinor < 2) 
+        uchar bMaxLine = GetMaxLine(ibDig);
+        if (++ibLineU < bMaxLine)
         {
-          Clear(); ShowPercent(53);
-          QueryEnergySpecU(ibMinor); 
+          Clear(); ShowPercent(52+ibLineU);
+          QueryEnergySpecU(ibLineU);
           SetCurr(DEV_ENERGY_U3);
         }
         else
-          ReadCurrentU();
+          ReadCurrentU(bMaxLine);
       }
-      else                                      
+      else
       {
-        if (cbRepeat == 0) ErrorCurrent(); 
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
-          QueryEnergySpecU(ibMinor); 
+
+          QueryEnergySpecU(ibLineU);
           SetCurr(DEV_ENERGY_U3);
         }
-      }  
+      }
       break;
 
 #endif

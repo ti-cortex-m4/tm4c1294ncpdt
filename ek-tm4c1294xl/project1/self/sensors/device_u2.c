@@ -38,13 +38,14 @@ DEVICE_U2!C
 
 
 void    InitHeaderU_Plc(void)
-{ 
+{
   if (!UseBounds())
     wBaseCurr = 0; // счетчик получасов
-  else 
+  else
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / bPlcUSize) * bPlcUSize;
-    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    Clear();
+    sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
     DelayMsg();
   }
 
@@ -70,8 +71,8 @@ static void QueryHeaderU_Plc_Inner(void)
   PushChar1Bcc('G');
   PushChar1Bcc('R');
   PushChar1Bcc('A');
-  PushChar1Bcc('P');
-  PushChar1Bcc((ibMinor == 0) ? 'E' : 'I');
+
+  PushLineBcc(ibLineU);
 
   PushChar1Bcc('(');
   PushChar2Bcc(tiDig.bDay);
@@ -98,11 +99,11 @@ void    QueryHeaderU_Plc(void)
   ulong dw = DateToHouIndex(tiDigPrev);
   dw -= wBaseCurr;
   tiDig = HouIndexToDate(dw);
-  
 
-  szHi[10] = 'A' + ibMinor;       
-     
-  ibMinorMax = 2;
+
+  szHi[10] = 'A' + ibLineU;
+
+  bMaxLineU = GetMaxLine(ibDig);
   QueryHeaderU_Plc_Inner();
 }
 
@@ -114,7 +115,7 @@ void    ReadHeaderU_Plc(void)
   uchar i;
   for (i=0; i<bPlcUSize; i++)
   {
-    mpflBuffCanHou[ibMinor][i] = PopDoubleQ()/2;
+    mpflBuffCanHou[ibLineU][i] = PopDoubleQ()/2;
   }
 }
 
@@ -122,16 +123,16 @@ void    ReadHeaderU_Plc(void)
 static bool ReadDataU_Plc_Inner(uchar  i)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-       
+
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
-  ShowProgressDigHou();      
-  
+  ShowProgressDigHou();
+
   MakeDataU(i);
 
   MakeSpecial(tiDig);
-  return(MakeStopHou(0)); 
+  return(MakeStopHou(0));
 }
 
 
@@ -149,7 +150,7 @@ bool    ReadDataU_Plc(void)
 
     if (ReadDataU_Plc_Inner(bPlcUSize-1-i) == 0) return(0);
   }
-  
+
   wBaseCurr += bPlcUSize;
   if (wBaseCurr > wHOURS) return(0);
 

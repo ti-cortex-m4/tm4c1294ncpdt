@@ -119,10 +119,11 @@ void    PushLineBcc(uchar  ibLine)
 {
   switch (ibLine)
   {
-    case 0:  PushChar1Bcc('P'); PushChar1Bcc('E'); break;
-    case 1:  PushChar1Bcc('P'); PushChar1Bcc('I'); break;
-    case 2:  PushChar1Bcc('Q'); PushChar1Bcc('E'); break;
-    default: PushChar1Bcc('Q'); PushChar1Bcc('I'); break;
+    case 0: PushChar1Bcc('P'); PushChar1Bcc('E'); break;
+    case 1: PushChar1Bcc('P'); PushChar1Bcc('I'); break;
+    case 2: PushChar1Bcc('Q'); PushChar1Bcc('E'); break;
+    case 3: PushChar1Bcc('Q'); PushChar1Bcc('I'); break;
+    default: ASSERT(false);
   }
 }
 
