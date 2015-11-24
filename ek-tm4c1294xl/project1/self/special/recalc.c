@@ -156,6 +156,9 @@ bool    ClearCanals(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
 
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
 
+  memset(&mpflEngFrac, 0, sizeof(mpflEngFrac));
+  memset(&mpflEngFracDigCan, 0, sizeof(mpflEngFracDigCan));
+
   uint wStop = ((wHOURS + iwHardHou - wHhrMin) % wHOURS) + 4;
 
   uchar ibDig;

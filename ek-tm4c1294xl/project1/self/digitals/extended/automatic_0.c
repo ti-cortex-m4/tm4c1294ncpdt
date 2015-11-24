@@ -498,7 +498,8 @@ time2   ReadTimeDate_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_U
-    case 26: return ReadTimeDateU_Short();
+    case 26:
+    case 28: return ReadTimeDateU_Short();
 #endif
 
     default: return GetTime2Error();

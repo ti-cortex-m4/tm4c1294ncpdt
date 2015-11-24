@@ -8,6 +8,7 @@ TODO / *else* /
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_flow.h"
 #include "../serial/ports.h"
+#include "../serial/monitor.h"
 #include "../digitals/digitals_status.h"
 #include "devices_pause.h"
 
@@ -117,12 +118,13 @@ void    DevicesPause(void)
 #endif
 
 #ifndef SKIP_U
-    else if (diCurr.bDevice == 26)
+    else if ((diCurr.bDevice == 26) || (diCurr.bDevice == 28))
     {
       if (mpSerial[ibPort] == SER_BADLINK)
       {
         if ((GetCurr() == DEV_OPENCANAL_U2) || (GetCurr() == DEV_OPENCANAL_U3))
         {
+          MonitorIn();
           uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((b == '\r') || (b == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
@@ -132,6 +134,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_PASSWORD_U2)
         {
+          MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -140,6 +143,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_POSTCONTROL_U2)
         {
+          MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -148,6 +152,7 @@ void    DevicesPause(void)
 
         else if ((GetCurr() == DEV_HEADER_U2) || (GetCurr() == DEV_HEADER_U4))
         {
+          MonitorIn();
           if (IndexInBuff() == 3)
             mpSerial[ibPort] = SER_GOODCHECK;
           else

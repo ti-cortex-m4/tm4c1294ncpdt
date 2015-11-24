@@ -5,5 +5,5 @@ AUTOMATIC_U!H
 ------------------------------------------------------------------------------*/
 
 time2   ReadTimeCanU(void);
-double2 ReadCntCurrU(void);
-double2 ReadCntMonCanU(uchar  ibMonth);
+double2 ReadCntCurrU(uchar  bMaxLines);
+double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines);

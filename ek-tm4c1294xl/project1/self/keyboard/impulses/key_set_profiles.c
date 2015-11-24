@@ -49,6 +49,9 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
 
   memset(&mpboReadyCan, 0, sizeof(mpboReadyCan));
 
+  memset(&mpflEngFrac, 0, sizeof(mpflEngFrac));
+  memset(&mpflEngFracDigCan, 0, sizeof(mpflEngFracDigCan));
+
   uchar ibDig;
   for (ibDig=ibDigMin; ibDig<=ibDigMax; ibDig++)
   {

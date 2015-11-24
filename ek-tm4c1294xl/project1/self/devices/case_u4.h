@@ -1,15 +1,15 @@
 
 #ifndef SKIP_U
 
-    case DEV_PREVHEADER_U4:                  
-      iwMajor = 0;                         
+    case DEV_PREVHEADER_U4:
+      iwMajor = 0;
       InitHeaderU_Plc();
 
-      ibMinor = 0;
-      if (SkipLine(ibDig, ibMinor) == 1)
+      ibLineU = 0;
+      if (SkipLine(ibDig, ibLineU) == true)
       {
-        ReadHeaderU_SkipLine(ibMinor);
-        ibMinor++;
+        ReadHeaderU_SkipLine(ibLineU);
+        ibLineU++;
       }
 
       cbRepeat = GetMaxRepeats();
@@ -17,7 +17,7 @@
       SetCurr(DEV_HEADER_U4);
       break;
 
-    case DEV_HEADER_U4:                       
+    case DEV_HEADER_U4:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         if (IndexInBuff() == 3)                        // если нет требуемой записи
@@ -27,7 +27,7 @@
           else
           {
             iwMajor += bPlcUSize;
-            sprintf(szLo," выключено: %-4u   ",iwMajor);  
+            sprintf(szLo," выключено: %-4u   ",iwMajor);
 
             wBaseCurr += bPlcUSize;
             iwDigHou = (wHOURS+iwHardHou-wBaseCurr)%wHOURS;
@@ -35,30 +35,30 @@
 
             if (wBaseCurr >= wHOURS)
               DoneProfile();
-            else if (MakeStopHou(0) == 0)  
+            else if (MakeStopHou(0) == 0)
               DoneProfile();
             else
               MakePause(DEV_DATA_U4);
           }
         }
-        else 
+        else
         {
-          ReadHeaderU_Plc();   
+          ReadHeaderU_Plc();
 
-          if (SkipLine(ibDig, ibMinor+1) == 1)
+          if (SkipLine(ibDig, ibLineU+1) == true)
           {
-            ReadHeaderU_SkipLine(ibMinor+1);
-            ibMinor++;
+            ReadHeaderU_SkipLine(ibLineU+1);
+            ibLineU++;
           }
 
           iwMajor = 0;                                  // если есть требуемая запись
-          MakePause(DEV_POSTHEADER_U4);         
-        } 
+          MakePause(DEV_POSTHEADER_U4);
+        }
       }
       else
       {
         if (cbRepeat == 0)
-          ErrorProfile(); 
+          ErrorProfile();
         else
         {
           ErrorLink();
@@ -67,11 +67,11 @@
           QueryHeaderU_Plc();
           SetCurr(DEV_HEADER_U4);
         }
-      } 
+      }
       break;
 
-    case DEV_POSTHEADER_U4:                   
-      if (++ibMinor < ibMinorMax)
+    case DEV_POSTHEADER_U4:
+      if (++ibLineU < bMaxLineU)
       {
         cbRepeat = GetMaxRepeats();
         QueryHeaderU_Plc();
@@ -80,23 +80,23 @@
       else
       {
         if (ReadDataU_Plc() == 0)
-          DoneProfile();  
-        else 
-          MakePause(DEV_DATA_U4);         
+          DoneProfile();
+        else
+          MakePause(DEV_DATA_U4);
       }
       break;
 
-    case DEV_DATA_U4:                   
-      if (wBaseCurr > wHOURS) 
+    case DEV_DATA_U4:
+      if (wBaseCurr > wHOURS)
         DoneProfile();
       else
       {
-        ibMinor = 0;
+        ibLineU = 0;
 
-        if (SkipLine(ibDig, ibMinor) == 1)
+        if (SkipLine(ibDig, ibLineU) == true)
         {
-          ReadHeaderU_SkipLine(ibMinor);
-          ibMinor++;
+          ReadHeaderU_SkipLine(ibLineU);
+          ibLineU++;
         }
 
         cbRepeat = GetMaxRepeats();

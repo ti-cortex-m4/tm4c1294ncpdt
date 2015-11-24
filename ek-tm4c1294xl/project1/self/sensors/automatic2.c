@@ -1849,7 +1849,8 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_U
-    case 26: return ReadCntCurrU();
+    case 26: return ReadCntCurrU(2);
+    case 28: return ReadCntCurrU(4);
 #endif
 
 #ifndef SKIP_V
@@ -1956,7 +1957,8 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_U
-    case 26: return ReadTimeCanU();
+    case 26:
+    case 28: return ReadTimeCanU();
 #endif
 
 #ifndef SKIP_V
@@ -2080,7 +2082,8 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_U
-    case 26: return ReadCntMonCanU(ibMon);
+    case 26: return ReadCntMonCanU(ibMon,2);
+    case 28: return ReadCntMonCanU(ibMon,4);
 #endif
 
 #ifndef SKIP_V
