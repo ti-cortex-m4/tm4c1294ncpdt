@@ -10,6 +10,7 @@ OUT_TRANSIT!C
 #include "../serial/ports_devices.h"
 #include "../serial/save_in_buff.h"
 #include "../serial/speeds.h"
+#include "../serial/monitor.h"
 #include "../sensors/unpack_k.h"
 #include "../digitals/wait_answer.h"
 #include "../hardware/watchdog.h"
@@ -189,6 +190,8 @@ uchar   j;
       else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
                (mpSerial[ibPort] == SER_BADLINK)) break;
     }
+
+    MonitorIn();
 
     SaveInBuff();
     iwInBuffSave = IndexInBuff();

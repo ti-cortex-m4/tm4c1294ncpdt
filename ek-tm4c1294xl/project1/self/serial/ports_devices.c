@@ -23,6 +23,7 @@ PORTS_DEVICES.H
 #include "../kernel/crc_els.h"
 #include "../display/display.h"
 #include "../time/delay.h"
+#include "../serial/monitor.h"
 #include "../serial/print2.h"
 #include "monitor.h"
 #include "ports.h"
@@ -281,7 +282,7 @@ serial  BccInput(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
-
+  MonitorIn();
   return mpSerial[ibPort];
 }
 
