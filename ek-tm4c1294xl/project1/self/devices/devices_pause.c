@@ -123,6 +123,7 @@ void    DevicesPause(void)
       {
         if ((GetCurr() == DEV_OPENCANAL_U2) || (GetCurr() == DEV_OPENCANAL_U3))
         {
+          MonitorIn();
           uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((b == '\r') || (b == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
@@ -132,6 +133,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_PASSWORD_U2)
         {
+          MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -140,6 +142,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_POSTCONTROL_U2)
         {
+          MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -148,6 +151,7 @@ void    DevicesPause(void)
 
         else if ((GetCurr() == DEV_HEADER_U2) || (GetCurr() == DEV_HEADER_U4))
         {
+          MonitorIn();
           if (IndexInBuff() == 3)
             mpSerial[ibPort] = SER_GOODCHECK;
           else
