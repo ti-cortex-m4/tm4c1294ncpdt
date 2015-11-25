@@ -80,7 +80,7 @@
       ShowPercent(52);
 
       cbRepeat = GetMaxRepeats();
-      QueryPasswordU();
+      QueryPasswordK();
       SetCurr(DEV_PASSWORD_U2);
       break;
 
@@ -100,7 +100,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryPasswordU();
+          QueryPasswordK();
           SetCurr(DEV_PASSWORD_U2);
         }
       }

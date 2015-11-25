@@ -91,7 +91,7 @@ uchar   i;
 }
 
 
-
+/*
 void    QueryPasswordU(void)
 {
   InitPush(0);
@@ -109,7 +109,7 @@ void    QueryPasswordU(void)
 
   BccQueryIO1(1+1, 5+n+2+1, 0);
 }
-
+*/
 
 
 void    QueryCorrectU(void)
