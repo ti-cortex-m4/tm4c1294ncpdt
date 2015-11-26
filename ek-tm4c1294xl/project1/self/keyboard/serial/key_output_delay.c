@@ -1,12 +1,13 @@
 /*------------------------------------------------------------------------------
 KEY_OUTPUT_DELAY,H
 
- 
+
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "../../console.h"
 #include "../../serial/ports.h"
+#include "../../serial/speeds_storage.h"
 #include "key_output_delay.h"
 
 
@@ -45,12 +46,14 @@ static uchar ibPrt;
       Show(ibPrt);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
-    {            
+    {
       uint w = GetIntLo(5,8);
       if (w <= 1000)
       {
         enKeyboard = KBD_POSTENTER;
+
         mpwOutputDelay[ibPrt] = w;
+        SaveCache(&chOutputDelay);
 
         if (++ibPrt >= bPORTS) ibPrt = 2;
         Show(ibPrt);
@@ -67,7 +70,7 @@ static uchar ibPrt;
 
 
   else if (bKey < 10)
-  {        
+  {
     if (enKeyboard == KBD_POSTENTER)
     {
       if (enGlobal != GLB_WORK)
@@ -83,7 +86,7 @@ static uchar ibPrt;
       enKeyboard = KBD_POSTINPUT1;
       ShiftLo(5,8);
     }
-    else Beep(); 
+    else Beep();
   }
   else Beep();
 }

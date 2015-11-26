@@ -7,6 +7,7 @@ KEY_TX_DELAY,H
 #include "../../main.h"
 #include "../../console.h"
 #include "../../serial/ports.h"
+#include "../../serial/speeds_storage.h"
 #include "key_tx_delay.h"
 
 
@@ -37,11 +38,18 @@ static uchar ibPrt;
   {
     if (enKeyboard == KBD_ENTER)
     {
-      enKeyboard = KBD_POSTENTER;
-      LoadSlide(pszMessages);
+      if (fBulkEnbl == false)
+      {
+        BlockProgram2(wSET_BULK_ENBL, 1);
+      }
+      else
+      {
+        enKeyboard = KBD_POSTENTER;
+        LoadSlide(pszMessages);
 
-      ibPrt = 2;
-      Show(ibPrt);
+        ibPrt = 2;
+        Show(ibPrt);
+      }
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
@@ -49,7 +57,9 @@ static uchar ibPrt;
       if (w <= 1000)
       {
         enKeyboard = KBD_POSTENTER;
+
         mpwTxDelay[ibPrt] = w;
+        SaveCache(&chTxDelay);
 
         if (++ibPrt >= bPORTS) ibPrt = 2;
         Show(ibPrt);
