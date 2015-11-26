@@ -246,5 +246,7 @@ typedef enum
   MONITOR_LOG_CHAR7     = MONITOR_LOG_HEX + sizeof(bool) + bNVRAM_FOOTER,
   MONITOR_LOG_CHAR8     = MONITOR_LOG_CHAR7 + sizeof(bool) + bNVRAM_FOOTER,
 
-  NVRAM_END             = MONITOR_LOG_CHAR8 + sizeof(bool) + bNVRAM_FOOTER
+  TX_DELAY              = MONITOR_LOG_CHAR8 + sizeof(bool) + bNVRAM_FOOTER,
+
+  NVRAM_END             = TX_DELAY + sizeof(mpwTxDelay) + bNVRAM_FOOTER
 } nvram;
