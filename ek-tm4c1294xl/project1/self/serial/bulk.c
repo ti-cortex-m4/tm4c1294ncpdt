@@ -170,7 +170,7 @@ void    RunBulk1(void)
     if (cwBulkDelay[1] == 0)
     {
       mpSerial[1] = mpSerial_Bulk[1];
-      IntPendSet(INT_UART1);
+      IntPendSet(INT_UART2);
     }
     else cwBulkDelay[1]--;
   }
@@ -186,7 +186,7 @@ void    RunBulk2(void)
     if (cwBulkDelay[2] == 0)
     {
       mpSerial[2] = mpSerial_Bulk[2];
-      IntPendSet(INT_UART2);
+      IntPendSet(INT_UART3);
     }
     else cwBulkDelay[2]--;
   }
@@ -202,7 +202,7 @@ void    RunBulk3(void)
     if (cwBulkDelay[3] == 0)
     {
       mpSerial[3] = mpSerial_Bulk[3];
-      IntPendSet(INT_UART3);
+      IntPendSet(INT_UART4);
     }
     else cwBulkDelay[3]--;
   }
