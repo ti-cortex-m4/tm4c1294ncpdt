@@ -13,8 +13,8 @@ KEY_TX_DELAY,H
 
 
 //                                          0123456789ABCDEF
-static char const       szMessage1[]     = "  Таймауты на   ",
-                        szMessage2[]     = "передачу пакета ",
+static char const       szMessage1[]     = "  Таймауты при  ",
+                        szMessage2[]     = "передаче пакета ",
                         szMask[]         = "     ____ мс  ";
 
 static char const      *pszMessages[] = { szMessage1, szMessage2, "" };
