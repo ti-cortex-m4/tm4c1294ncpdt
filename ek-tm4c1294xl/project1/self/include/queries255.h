@@ -104,6 +104,7 @@ QUERIES2!H
 
 #define bEXT_GETPORTS                  55
 #define bEXT_GETOUTPUTDELAY            68
+#define bEXT_GETTXDELAY                136
 
 #define bEXT_GETHOUCANDEF              76
 #define bEXT_GETHOUGRPDEF              91
