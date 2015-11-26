@@ -19,6 +19,7 @@ cache const             chMajorInDelay = {MAJOR_IN_DELAY, &mpwMajorInDelay, size
 cache const             chMinorInDelay = {MINOR_IN_DELAY, &mpwMinorInDelay, sizeof(mpwMinorInDelay)};
 
 cache const             chOutputDelay = {OUTPUT_DELAY, &mpwOutputDelay, sizeof(mpwOutputDelay)};
+cache const             chTxDelay = {TX_DELAY, &mpwTxDelay, sizeof(mpwTxDelay)};
 
 
 

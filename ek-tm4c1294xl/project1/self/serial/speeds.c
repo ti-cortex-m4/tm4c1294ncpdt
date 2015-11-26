@@ -72,7 +72,7 @@ uint    w;
 
   mpSerial[ibPrt] = SER_BEGIN;
 
-  if ((mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) || 
+  if ((mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) ||
       (mppoPorts[ibPrt].enStream == STR_MASTERMODEM))
     w = mpwInDelayMaster[ mppoPorts[ibPrt].ibBaud ];
   else
@@ -164,6 +164,7 @@ uchar   p;
 
   LoadCache(&chCorrectLimit);
   LoadCache(&chOutputDelay);
+  LoadCache(&chTxDelay);
 
   for (p=0; p<bPORTS; p++)
   {
@@ -187,7 +188,7 @@ uchar   p;
 
 
 void    ResetSpeeds(void)
-{  
+{
 uchar   p;
 
   mppoPorts[0].enStream = STR_SLAVEESC;
@@ -212,8 +213,15 @@ uchar   p;
 
   SaveCache(&chCorrectLimit);
 
+
   for (p=0; p<bPORTS; p++)
     mpwOutputDelay[p] = 0;
 
   SaveCache(&chOutputDelay);
+
+
+  for (p=0; p<bPORTS; p++)
+    mpwTxDelay[p] = 0;
+
+  SaveCache(&chTxDelay);
 }

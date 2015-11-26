@@ -5,6 +5,7 @@ SPEEDS_STORAGE!H
 ------------------------------------------------------------------------------*/
 
 extern  cache const             chOutputDelay;
+extern  cache const             chTxDelay;
 
 
 
