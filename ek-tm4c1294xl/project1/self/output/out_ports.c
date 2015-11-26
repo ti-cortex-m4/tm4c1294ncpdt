@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------
 OUT_PORTS!C
-                    
+
 
 ------------------------------------------------------------------------------*/
 
@@ -70,4 +70,16 @@ void    OutOutputDelay(void)
     PushIntBig(mpwOutputDelay[p]);
 
   Output(sizeof(mpwOutputDelay));
+}
+
+
+void    OutTxDelay(void)
+{
+  InitPushCRC();
+
+  uchar p;
+  for (p=0; p<bPORTS; p++)
+    PushIntBig(mpwTxDelay[p]);
+
+  Output(sizeof(mpwTxDelay));
 }
