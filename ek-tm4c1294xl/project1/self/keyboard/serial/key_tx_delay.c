@@ -38,18 +38,11 @@ static uchar ibPrt;
   {
     if (enKeyboard == KBD_ENTER)
     {
-      if (fBulkEnbl == false)
-      {
-        BlockProgram2(wSET_BULK_ENBL, 1);
-      }
-      else
-      {
-        enKeyboard = KBD_POSTENTER;
-        LoadSlide(pszMessages);
+      enKeyboard = KBD_POSTENTER;
+      LoadSlide(pszMessages);
 
-        ibPrt = 2;
-        Show(ibPrt);
-      }
+      ibPrt = 2;
+      Show(ibPrt);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
