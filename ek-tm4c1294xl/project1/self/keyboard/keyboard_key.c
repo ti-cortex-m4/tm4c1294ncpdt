@@ -118,6 +118,7 @@ KEYBOARD_KEY!C
 #include "serial/key_flow.h"
 #include "serial/key_max_flow_delay.h"
 #include "serial/key_output_delay.h"
+#include "serial/key_tx_delay.h"
 #include "digitals/params/key_params_flag.h"
 #include "digitals/params/key_mnt_params.h"
 #include "digitals/params/key_params.h"
@@ -314,6 +315,7 @@ void    Keyboard_Key(void)
 
 
       case wSET_OUTPUT_DELAY:   key_SetOutputDelay();   break;
+      case wSET_TX_DELAY:       key_SetTxDelay();       break;
       case wSET_HIDE_MESSAGES:  key_SetHideMessages();  break;
 
       case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;
@@ -607,6 +609,7 @@ void    Keyboard_Key(void)
 
 
       case wSET_OUTPUT_DELAY:   key_SetOutputDelay();   break;
+      case wSET_TX_DELAY:       key_SetTxDelay();       break;
       case wSET_HIDE_MESSAGES:  key_SetHideMessages();  break;
 
       case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;
@@ -820,6 +823,7 @@ void    Keyboard_Key(void)
 
 
       case wSET_OUTPUT_DELAY:   key_SetOutputDelay();   break;
+      case wSET_TX_DELAY:       key_SetTxDelay();       break;
       case wSET_HIDE_MESSAGES:  key_SetHideMessages();  break;
 
       case wSET_GAPS_FLAG:      key_SetGapsFlag();      break;

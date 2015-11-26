@@ -26,6 +26,9 @@ bool                    mpboLocalDisable[bPORTS];
 // задержки на переключение сигнала прием-передача
 uint                    mpwOutputDelay[bPORTS];
 
+// задержки на передачу пакета
+uint                    mpwTxDelay[bPORTS];
+
 // минимальные лимиты коррекции времени
 uchar                   mpbCorrectLimit[bPORTS];
 
