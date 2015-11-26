@@ -212,35 +212,6 @@ void    RunBulk3(void)
 
 
 
-void    TxDelayBulk2(void)
-{
-#ifdef ENABLE_BULK
-  if (BulkEnabled())
-  {
-    if (mpwTxDelay[2] != 0)
-    {
-      Delay(mpwTxDelay[2]);
-    }
-  }
-#endif
-}
-
-
-void    TxDelayBulk3(void)
-{
-#ifdef ENABLE_BULK
-  if (BulkEnabled())
-  {
-    if (mpwTxDelay[3] != 0)
-    {
-      Delay(mpwTxDelay[3]);
-    }
-  }
-#endif
-}
-
-
-
 #ifdef ENABLE_BULK
 void    OutBulk(void)
 {
