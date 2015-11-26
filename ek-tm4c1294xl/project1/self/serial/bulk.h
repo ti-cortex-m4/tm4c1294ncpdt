@@ -32,4 +32,7 @@ void    RunBulk1(void);
 void    RunBulk2(void);
 void    RunBulk3(void);
 
+void    TxDelayBulk2(void);
+void    TxDelayBulk3(void);
+
 void    OutBulk(void);

@@ -11,6 +11,7 @@ BULK!C
 #include "../serial/ports.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
+#include "../time/delay.h"
 #include "bulk.h"
 
 
@@ -205,6 +206,35 @@ void    RunBulk3(void)
       IntPendSet(INT_UART4);
     }
     else cwBulkDelay[3]--;
+  }
+#endif
+}
+
+
+
+void    TxDelayBulk2(void)
+{
+#ifdef ENABLE_BULK
+  if (BulkEnabled())
+  {
+    if (mpwTxDelay[2] != 0)
+    {
+      Delay(mpwTxDelay[2]);
+    }
+  }
+#endif
+}
+
+
+void    TxDelayBulk3(void)
+{
+#ifdef ENABLE_BULK
+  if (BulkEnabled())
+  {
+    if (mpwTxDelay[3] != 0)
+    {
+      Delay(mpwTxDelay[3]);
+    }
   }
 #endif
 }

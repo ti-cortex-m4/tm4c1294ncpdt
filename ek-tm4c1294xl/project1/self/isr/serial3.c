@@ -137,7 +137,10 @@ uint32_t ui32Status;
         bT = mpbOutBuff3[ iwOutBuff3 ];
 
         if (++iwOutBuff3 <= cwOutBuff3)         // продолжаем передачу ?
+        {
           OutByte3(bT);
+          OutByteBulk3();
+        }
         else                                    // передача завершена
         {
           if (cwInBuff3 == 0)
@@ -456,6 +459,7 @@ void    Query3(uint  cwIn, uchar  cbOut, bool  fMinInDelay)
   mpSerial[3] = SER_OUTPUT_MASTER;
 
   IntPendSet(INT_UART4);
+  TxDelayBulk3();
 }
 
 
