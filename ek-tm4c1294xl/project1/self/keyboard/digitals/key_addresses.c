@@ -16,8 +16,8 @@ KEY_ADDRESSES.C
 
 //                                           0123456789ABCDEF
 static char const       szAddresses[]     = "Адреса          ",
-                        szMask[]          = "________",
-                        szSpace[]         = "        ";
+                        szMask[]          = "_________",
+                        szSpace[]         = "         ";
 
 
 
