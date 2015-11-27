@@ -28,7 +28,11 @@ static void Show(uchar  c)
   if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
   {
     sprintf(szHi+7,"%9lu",mpdwAddress1[c]);
-    sprintf(szLo+7,"%9lu",mpdwAddress2[c]);
+
+    if (mpdwAddress2[c] == MAX_LONG)
+      sprintf(szLo+7,"        -");
+    else
+      sprintf(szLo+7,"%9lu",mpdwAddress2[c]);
   }
   else
   {
@@ -123,6 +127,27 @@ static uchar c;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS11);
       }
       else Beep();
+    }
+    else Beep();
+  }
+
+
+  else if (bKey == bKEY_MINUS)
+  {
+    if ((enKeyboard == KBD_INPUT3) || (enKeyboard == KBD_POSTINPUT3))
+    {
+      enKeyboard = KBD_POSTENTER;
+
+      ibRecordCan = c;
+      AddSysRecordReprogram(EVE_EDIT_ADDRESS20);
+
+      mpdwAddress2[c] = MAX_LONG;
+      SaveCache(&chAddress2);
+
+      AddSysRecordReprogram(EVE_EDIT_ADDRESS21);
+
+      if (++c >= bCANALS) c = 0;
+      Show(c);
     }
     else Beep();
   }

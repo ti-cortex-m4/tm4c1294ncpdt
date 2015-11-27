@@ -4,4 +4,8 @@ NUMBER,H
 
 ------------------------------------------------------------------------------*/
 
+#define MAX_LONG        0xFFFFFFFF
+
+
+
 ulong   AbsLong(slong  dw);
