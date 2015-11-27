@@ -19,7 +19,7 @@ KEY_ADDRESSES!C
 static char const       szAddresses[]     = "Адреса          ",
                         szMaskAddresses[] = "________",
                         szNullAddresses[] = "        ";
-                      
+
 
 
 static void Show(uchar  ibCan)
@@ -47,14 +47,14 @@ void    key_SetAddresses(void)
 static uchar ibCan;
 
   if (bKey == bKEY_ENTER)
-  {                                           
+  {
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
       Number();
 
       ShowHi(szAddresses);
-    } 
+    }
     else if (enKeyboard == KBD_INPUT1)
     {
       enKeyboard = KBD_POSTENTER;
@@ -99,13 +99,13 @@ static uchar ibCan;
 
 
   else if (bKey == bKEY_POINT)
-  {        
+  {
     if (enKeyboard == KBD_POSTENTER)
     {
       if (ibCan > 0) ibCan--; else ibCan = bCANALS-1;
 
       Show(ibCan);
-    } 
+    }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
       ulong dw;
@@ -123,11 +123,11 @@ static uchar ibCan;
       else Beep();
     }
     else Beep();
-  } 
+  }
 
 
   else if (bKey < 10)
-  {        
+  {
     if (enKeyboard == KBD_POSTENTER)
     {
       if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
@@ -144,19 +144,19 @@ static uchar ibCan;
       enKeyboard = KBD_POSTINPUT1;
       ShiftLo(10,11);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
       ShiftHi(8,15);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT3) || (enKeyboard == KBD_POSTINPUT3))
     {
       enKeyboard = KBD_POSTINPUT3;
       ShiftLo(8,15);
     }
-    else Beep(); 
+    else Beep();
   }
   else Beep();
 }
