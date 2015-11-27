@@ -43,7 +43,7 @@ static void Show(uchar  c)
 
 void    key_SetAddresses(void)
 {
-static uchar ibCan;
+static uchar c;
 
   if (bKey == bKEY_ENTER)
   {
@@ -58,22 +58,22 @@ static uchar ibCan;
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibCan = 0;
-      Show(ibCan);
+      c = 0;
+      Show(c);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibCan = GetCharLo(10,11) - 1) < bCANALS)
+      if ((c = GetCharLo(10,11) - 1) < bCANALS)
       {
         enKeyboard = KBD_POSTENTER;
-        Show(ibCan);
+        Show(c);
       }
       else Beep();
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
-      if (++ibCan >= bCANALS) ibCan = 0;
-      Show(ibCan);
+      if (++c >= bCANALS) c = 0;
+      Show(c);
     }
     else if (enKeyboard == KBD_POSTINPUT3)
     {
@@ -82,16 +82,16 @@ static uchar ibCan;
       {
         enKeyboard = KBD_POSTENTER;
 
-        ibRecordCan = ibCan;
+        ibRecordCan = c;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS20);
 
-        mpdwAddress2[ibCan] = dw;
+        mpdwAddress2[c] = dw;
         SaveCache(&chAddress2);
 
         AddSysRecordReprogram(EVE_EDIT_ADDRESS21);
 
-        if (++ibCan >= bCANALS) ibCan = 0;
-        Show(ibCan);
+        if (++c >= bCANALS) c = 0;
+        Show(c);
       }
       else Beep();
     }
@@ -103,8 +103,8 @@ static uchar ibCan;
   {
     if (enKeyboard == KBD_POSTENTER)
     {
-      if (ibCan > 0) ibCan--; else ibCan = bCANALS-1;
-      Show(ibCan);
+      if (c > 0) c--; else c = bCANALS-1;
+      Show(c);
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
@@ -114,10 +114,10 @@ static uchar ibCan;
         enKeyboard = KBD_INPUT3;
         sprintf(szLo+7,szMask);
 
-        ibRecordCan = ibCan;
+        ibRecordCan = c;
         AddSysRecordReprogram(EVE_EDIT_ADDRESS10);
 
-        mpdwAddress1[ibCan] = dw;
+        mpdwAddress1[c] = dw;
         SaveCache(&chAddress1);
 
         AddSysRecordReprogram(EVE_EDIT_ADDRESS11);
