@@ -77,40 +77,29 @@ double  dbA,dbB;
 
 
 
-void    PushAddress1Bcc(void)
+uchar   PushAddress1Bcc(void)
 {
-uint    i;
-
   InitPush(0);
   PushChar1Bcc('/');
   PushChar1Bcc('?');
 
-  i = mpdwAddress1[diCurr.bAddress-1] / 10000;
-
-  PushChar1Bcc(szDigits[ i/1000 ]);
-  PushChar1Bcc(szDigits[ (i/100) % 10 ]);
-  PushChar1Bcc(szDigits[ (i%100) / 10 ]);
-  PushChar1Bcc(szDigits[ i%10 ]);
-
-  i = mpdwAddress1[diCurr.bAddress-1] % 10000;
-
-  PushChar1Bcc(szDigits[ i/1000 ]);
-  PushChar1Bcc(szDigits[ (i/100) % 10 ]);
-  PushChar1Bcc(szDigits[ (i%100) / 10 ]);
-  PushChar1Bcc(szDigits[ i%10 ]);
+  uchar n = PushNumberBcc(mpdwAddress1[diCurr.bAddress-1]);
 
   PushChar1Bcc('!');
+  return 2+n+1;
 }
 
 
-void    PushAddress2Bcc(void)
+uchar   PushAddress2Bcc(void)
 {
-  PushAddress1Bcc();
+  uchar n = PushAddress1Bcc();
 
   PushChar1Bcc(0x01);
   PushChar1Bcc('R');
   PushChar1Bcc('1');
   PushChar1Bcc(0x02);
+
+  return n+4;
 }
 
 
@@ -138,7 +127,7 @@ void    QueryCloseK(void)
   PushChar1Bcc('0');
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(0, 4+1, 0);
+  BccQueryIO(0, 4+1, 0);
   DelayOff();
 }
 
@@ -147,12 +136,12 @@ void    QueryOpenK(void)
 {
   QueryCloseK();
 
-  PushAddress1Bcc();
+  uchar n = PushAddress1Bcc();
 
   PushChar1Bcc(0x0D);
   PushChar1Bcc(0x0A);
 
-  Query(2000, 11+2, 1);
+  Query(2000, n+2, 1);
 }
 
 
@@ -192,13 +181,13 @@ void    QueryEnergySpecK(uchar  ibLine)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(1+6*28+2, 4+8+1, 6);
+  BccQueryIO(1+6*28+2, 4+8+1, 6);
 }
 
 
 void    QueryEnergyAbsK(uchar  ibLine)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('E');
   PushChar1Bcc('T');
@@ -210,7 +199,7 @@ void    QueryEnergyAbsK(uchar  ibLine)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+6*28+2, 15+8+1, 6);
+  BccQueryIO(1+6*28+2, n+8+1, 6);
 }
 
 
@@ -263,29 +252,19 @@ void    QueryPasswordK(void)
   PushChar1Bcc(0x02);
   PushChar1Bcc('(');
 
-  uint i = mpdwAddress2[diCurr.bAddress-1] / 1000;
-
-  PushChar1Bcc(szDigits[ (i/100) % 10 ]);
-  PushChar1Bcc(szDigits[ (i%100) / 10 ]);
-  PushChar1Bcc(szDigits[ i%10 ]);
-
-  i = mpdwAddress2[diCurr.bAddress-1] % 1000;
-
-  PushChar1Bcc(szDigits[ (i/100) % 10 ]);
-  PushChar1Bcc(szDigits[ (i%100) / 10 ]);
-  PushChar1Bcc(szDigits[ i%10 ]);
+  uchar n = PushNumberBcc(mpdwAddress2[diCurr.bAddress-1]);
 
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(1+1, 4+9+1, 0);
+  BccQueryIO(1+1, 5+n+2+1, 0);
 }
 
 
 
 void    QueryTimeK(void)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('T');
   PushChar1Bcc('I');
@@ -296,7 +275,7 @@ void    QueryTimeK(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+17+2, 15+8+1, 0);
+  BccQueryIO(1+17+2, n+8+1, 0);
 }
 
 
@@ -318,7 +297,7 @@ void    QueryTimeSpecK(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(1+17+2, 4+8+1, 0);
+  BccQueryIO(1+17+2, 4+8+1, 0);
 }
 
 
@@ -338,7 +317,7 @@ time    ReadTimeK(void)
 
 void    QueryDateK(void)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('D');
   PushChar1Bcc('A');
@@ -349,7 +328,7 @@ void    QueryDateK(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+20+2, 15+8+1, 0);
+  BccQueryIO(1+20+2, n+8+1, 0);
 }
 
 
@@ -371,7 +350,7 @@ void    QueryDateSpecK(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(1+20+2, 4+8+1, 0);
+  BccQueryIO(1+20+2, 4+8+1, 0);
 }
 
 
@@ -434,7 +413,7 @@ void    QueryControlK(void)
 
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(1+1, 4+16+1, 0);
+  BccQueryIO(1+1, 4+16+1, 0);
 }
 
 
@@ -464,7 +443,7 @@ void    QueryHeaderK_13(void)
 
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(2000, 4+16+1, 48);
+  BccQueryIO(2000, 4+16+1, 48);
 }
 
 
@@ -491,7 +470,7 @@ void    QueryHeaderK_14(void)
 
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(2000, 4+13+1, 48);
+  BccQueryIO(2000, 4+13+1, 48);
 }
 
 

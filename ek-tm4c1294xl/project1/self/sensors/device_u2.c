@@ -88,7 +88,7 @@ static void QueryHeaderU_Plc_Inner(void)
 
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(2000, 4+22+1, bPlcUSize);
+  BccQueryIO(2000, 4+22+1, bPlcUSize);
 }
 
 
