@@ -39,7 +39,7 @@ double  dbA,dbB;
     uchar bT = PopChar() & 0x7F;
 
     if (a == 0)
-    { 
+    {
       if (bT == '(') a = i+1;
 
       dbA = 0;
@@ -57,7 +57,7 @@ double  dbA,dbB;
 
       if ((bT >= '0') && (bT <= '9'))
         bT -= '0';
-      else 
+      else
         break;
 
       dbA += dbB*bT;
@@ -127,13 +127,13 @@ void    QueryCorrectQ(void)
 
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(1000, 2+16+1, 0);
+  BccQueryIO(1000, 2+16+1, 0);
 }
 
 
 void    QueryEnergyAbsQ(void)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('E');
   PushChar1Bcc('N');
@@ -146,13 +146,13 @@ void    QueryEnergyAbsQ(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+6*28+2, 15+9+1, 6);
+  BccQueryIO(1+6*28+2, n+9+1, 6);
 }
 
 
 void    QueryEnergyDayQ(void)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('E');
   PushChar1Bcc('N');
@@ -171,13 +171,13 @@ void    QueryEnergyDayQ(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+6*28+2, 15+18+1, 6);
+  BccQueryIO(1+6*28+2, n+18+1, 6);
 }
 
 
 void    QueryEnergyMonQ(void)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('E');
   PushChar1Bcc('N');
@@ -194,7 +194,7 @@ void    QueryEnergyMonQ(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+6*28+2, 15+15+1, 6);
+  BccQueryIO(1+6*28+2, n+15+1, 6);
 }
 
 
@@ -218,7 +218,7 @@ void    QueryEnergySpecQ(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(1+6*28+2, 4+9+1, 6);
+  BccQueryIO(1+6*28+2, 4+9+1, 6);
 }
 
 
@@ -228,7 +228,7 @@ uchar   i;
 
   InitPop(1);
 
-  for (i=0; i<Q_LINES; i++) 
+  for (i=0; i<Q_LINES; i++)
   {
     PopFloatQ();
     mpreChannelsB[i] = reBuffA;
@@ -240,7 +240,7 @@ void    InitHeaderQ(void)
 {
   if (!UseBounds())
     wBaseCurr = 0;
-  else 
+  else
   {
     wBaseCurr = mpcwStartRelCan[ibDig];
     sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
@@ -264,26 +264,26 @@ void    QueryHeaderQ_22(void)
   PushChar1Bcc('P');
   PushChar1Bcc('R');
 
-  if (ibMinor == 0) 
+  if (ibMinor == 0)
   {
     PushChar1Bcc('0');
     PushChar1Bcc('1');
-  } 
-  else if (ibMinor == 1) 
+  }
+  else if (ibMinor == 1)
   {
     PushChar1Bcc('0');
     PushChar1Bcc('2');
-  } 
-  else if (ibMinor == 2) 
+  }
+  else if (ibMinor == 2)
   {
     PushChar1Bcc('0');
     PushChar1Bcc('3');
-  } 
-  else if (ibMinor == 3) 
+  }
+  else if (ibMinor == 3)
   {
     PushChar1Bcc('0');
     PushChar1Bcc('4');
-  } 
+  }
 
   PushChar1Bcc('(');
   PushChar2Bcc(tiDig.bDay);
@@ -295,7 +295,7 @@ void    QueryHeaderQ_22(void)
 
   PushChar1Bcc(0x03);
 
-  BccQueryIO1(2000, 4+16+1, 48);
+  BccQueryIO(2000, 4+16+1, 48);
 }
 
 
@@ -338,12 +338,12 @@ uchar   j;
 
 void    MakeDataQ(uchar  ibHou)
 {
-  ShowProgressDigHou();      
+  ShowProgressDigHou();
   reBuffB = mprePulseHou[ibDig];
 
-  for (ibCan=0; ibCan<ibMinorMax; ibCan++)        
+  for (ibCan=0; ibCan<ibMinorMax; ibCan++)
   {
-    reBuffA = mpreBuffCanHou[ibCan][ibHou];   
+    reBuffA = mpreBuffCanHou[ibCan][ibHou];
     mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
 
     wBuffD = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
@@ -365,17 +365,17 @@ uchar   i,j;
           tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
   tiAlt = tiDig;
-  if (SearchDefHouIndex() == 0) return(1); 
+  if (SearchDefHouIndex() == 0) return(1);
 
 
   if ((tiDig.bDay   == tiCurr.bDay)   &&
       (tiDig.bMonth == tiCurr.bMonth) &&
-      (tiDig.bYear  == tiCurr.bYear))    
-    j = 47-(tiCurr.bHour*2+tiCurr.bMinute/30); 
-  else 
+      (tiDig.bYear  == tiCurr.bYear))
+    j = 47-(tiCurr.bHour*2+tiCurr.bMinute/30);
+  else
     j = 0;
 
-  for (i=j; i<48; i++) 
+  for (i=j; i<48; i++)
   {
     ResetWatchdog();
     MakeDataQ(47-i);

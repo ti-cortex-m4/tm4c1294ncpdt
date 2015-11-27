@@ -12,7 +12,6 @@ uchar   GetMaxLine(uchar  ibCan);
 
 void    QueryCloseU(void);
 void    QueryOptionU(void);
-//void    QueryPasswordU(void);
 void    QueryCorrectU(void);
 void    QueryEnergyAbsU(uchar  ibLine);
 void    QueryEnergyDayU(uchar  ibLine, time  ti);
