@@ -571,6 +571,7 @@ typedef enum
   DEV_POSTOPTION_U2     =  0x1A07,
   DEV_PASSWORD_U2       =  0x1A08,
   DEV_POSTPASSWORD_U2   =  0x1A09,
+  DEV_PREVTIME_U2       =  0x1A15,
   DEV_TIME_U2           =  0x1A0A,
   DEV_POSTTIME_U2       =  0x1A0B,
   DEV_DATE_U2           =  0x1A0C,
