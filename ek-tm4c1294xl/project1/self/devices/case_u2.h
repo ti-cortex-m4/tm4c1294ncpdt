@@ -61,7 +61,12 @@
 
     case DEV_OPTION_U2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPTION_U2);
+      {
+        if (HasPasswordK())
+          MakePause(DEV_POSTOPTION_U2);
+        else
+          MakePause(DEV_POSTPASSWORD_U2);
+      }
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -86,12 +91,7 @@
 
     case DEV_PASSWORD_U2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-        if ((boControlQ != false) && (fCurrCtrl == true))
-          MakePause(DEV_POSTPASSWORD_U2);
-        else
-          MakePause(DEV_POSTCORRECT_U2);
-      }
+        MakePause(DEV_POSTPASSWORD_U2);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -107,6 +107,13 @@
       break;
 
     case DEV_POSTPASSWORD_U2:
+      if ((boControlQ != false) && (fCurrCtrl == true))
+        MakePause(DEV_PREVTIME_U2);
+      else
+        MakePause(DEV_POSTCORRECT_U2);
+      break;
+
+    case DEV_PREVTIME_U2:
       ShowPercent(53);
 
       cbRepeat = GetMaxRepeats();
