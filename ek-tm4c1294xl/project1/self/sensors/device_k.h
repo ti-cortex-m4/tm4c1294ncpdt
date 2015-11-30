@@ -21,6 +21,7 @@ void    QueryEnergyAbsK(uchar  ibLine);
 void    ReadEnergyK(uchar  ibLine);
 
 void    QueryOptionK(void);
+bool    HasPasswordK(void);
 void    QueryPasswordK(void);
 
 void    QueryTimeK(void);
