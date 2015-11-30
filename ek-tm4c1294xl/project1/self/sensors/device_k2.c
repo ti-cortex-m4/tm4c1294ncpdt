@@ -23,7 +23,7 @@ static date             mpdtDatesK[45];
 
 void    QueryEnergyDayDatesK(void)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('D');
   PushChar1Bcc('A');
@@ -34,13 +34,13 @@ void    QueryEnergyDayDatesK(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+45*17+2, 15+8+1, 45);
+  BccQueryIO(1+45*17+2, n+8+1, 45);
 }
 
 
 void    QueryEnergyMonDatesK(void)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('D');
   PushChar1Bcc('A');
@@ -51,14 +51,14 @@ void    QueryEnergyMonDatesK(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+24*14+2, 15+8+1, 24);
+  BccQueryIO(1+24*14+2, n+8+1, 24);
 }
 
 
 
 void    QueryEnergyDayK(uchar  ibLine, uchar  bDay)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('E');
   PushChar1Bcc('D');
@@ -71,13 +71,13 @@ void    QueryEnergyDayK(uchar  ibLine, uchar  bDay)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+6*28+2, 15+10+1, 6);
+  BccQueryIO(1+6*28+2, n+10+1, 6);
 }
 
 
 void    QueryEnergyMonK(uchar  ibLine, uchar  bMon)
 {
-  PushAddress2Bcc();
+  uchar n = PushAddress2Bcc();
 
   PushChar1Bcc('E');
   PushChar1Bcc('M');
@@ -90,7 +90,7 @@ void    QueryEnergyMonK(uchar  ibLine, uchar  bMon)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO2(1+6*28+2, 15+10+1, 6);
+  BccQueryIO(1+6*28+2, n+10+1, 6);
 }
 
 
@@ -103,7 +103,7 @@ void    ClearDatesK(void)
 
 
 
-uchar   PopValueK(uchar  bCode) 
+uchar   PopValueK(uchar  bCode)
 {
   uchar i = 0;
   while (true)
@@ -168,7 +168,7 @@ void    ReadEnergyDayDatesK(void)
   ClearDatesK();
 
   uchar i;
-  for (i=0; i<45; i++) 
+  for (i=0; i<45; i++)
   {
     mpdtDatesK[cbDatesK++] = PopDayDateK();
   }
@@ -182,7 +182,7 @@ void    ReadEnergyMonDatesK(void)
   ClearDatesK();
 
   uchar	i;
-  for (i=0; i<24; i++) 
+  for (i=0; i<24; i++)
   {
     mpdtDatesK[cbDatesK++] = PopMonDateK();
   }
@@ -249,7 +249,7 @@ void    ReadEnergyTariffK(uchar  ibLine, uchar  ibTrf)
 double db;
 
   InitPop(1);
-  
+
   uchar i;
   for (i=0; i<ibTrf+2; i++)
   {

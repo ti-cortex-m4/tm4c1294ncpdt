@@ -204,37 +204,25 @@ void    PckQueryIO(uint  cwIn, uchar  cbOut)
 
 
 
-void    BccQueryIO1(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
+void    BccQueryIO(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
 {
-uchar	i,bT;
-
   cbHeaderBcc = cbMaxHeader;
   cwInBuffBcc = 0;
 
   InitPush(0);
-  SkipChar();
 
-  bT = 0;
-  for (i=0; i<cbOut-2; i++) bT += SkipChar();
-  PushChar1Bcc(bT);
+  uchar bSum = 0;
+  bool f = false;
 
-  Query(cwIn,cbOut,1);
-}
+  uchar i;
+  for (i=0; i<cbOut-1; i++)
+  {
+    uchar b = SkipChar();
+    if (f == true) bSum += b;
+    if ((b & 0x7F) == 0x01) f = true;
+  }
 
-
-void    BccQueryIO2(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
-{
-uchar	i,bT;
-
-  cbHeaderBcc = cbMaxHeader;
-  cwInBuffBcc = 0;
-
-  InitPush(0);
-  for (i=0; i<12; i++) SkipChar();
-
-  bT = 0;
-  for (i=0; i<cbOut-13; i++) bT += SkipChar();
-  PushChar1Bcc(bT);
+  PushChar1Bcc(bSum);
 
   Query(cwIn,cbOut,1);
 }
