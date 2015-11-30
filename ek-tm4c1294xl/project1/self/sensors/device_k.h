@@ -6,7 +6,7 @@ DEVICE_K.H
 
 #ifndef SKIP_K
 
-void    PushAddress2Bcc(void);
+uchar   PushAddress2Bcc(void);
 void    PushLineBcc(uchar  ibLine);
 
 double  PopDoubleK(void);

@@ -15,8 +15,7 @@ serial  RevInput(void);
 
 void    PckQueryIO(uint  cwIn, uchar  cbOut);
 
-void    BccQueryIO1(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader);
-void    BccQueryIO2(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader);
+void    BccQueryIO(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader);
 bool    MakeBccInBuff(void);
 serial  BccInput(void);
 

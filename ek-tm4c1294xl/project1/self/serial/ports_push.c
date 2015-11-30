@@ -302,12 +302,12 @@ void	PushChar2Bcc(uchar  bT)
   PushChar1Bcc(szDigits[ bT % 10 ]);
 }
 
-/*
+
 extern int usprintf(char * restrict s, const char * restrict format, ...);
 
 uchar   PushNumberBcc(ulong  dwT)
 {
-static char mbT[16];
+static char mbT[10*2];
 
   memset(&mbT, 0, sizeof(mbT));
   uchar n = usprintf(mbT, "%u" ,dwT);
@@ -320,4 +320,3 @@ static char mbT[16];
 
   return n;
 }
-*/
