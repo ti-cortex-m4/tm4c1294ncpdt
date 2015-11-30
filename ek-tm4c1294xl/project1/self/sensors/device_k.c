@@ -241,6 +241,11 @@ uchar   i;
 }
 
 
+bool    HasPasswordK(void)
+{
+  return mpdwAddress2[diCurr.bAddress-1] != MAX_LONG;
+}
+
 
 void    QueryPasswordK(void)
 {
@@ -252,9 +257,7 @@ void    QueryPasswordK(void)
   PushChar1Bcc(0x02);
   PushChar1Bcc('(');
 
-  ulong dw = mpdwAddress2[diCurr.bAddress-1];
-  uchar n = 0;
-  if (dw != MAX_LONG) n = PushNumberBcc(dw);
+  uchar n = PushNumberBcc(mpdwAddress2[diCurr.bAddress-1]);
 
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);

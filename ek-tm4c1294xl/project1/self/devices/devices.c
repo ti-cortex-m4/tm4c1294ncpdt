@@ -2141,7 +2141,12 @@ void    RunDevices(void)
 
     case DEV_OPTION_K2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPTION_K2);
+      {
+        if (HasPasswordK())
+          MakePause(DEV_POSTOPTION_K2);
+        else
+          MakePause(DEV_POSTCORRECT_K2);
+      }
       else
       {
         if (cbRepeat == 0) ErrorProfile();
