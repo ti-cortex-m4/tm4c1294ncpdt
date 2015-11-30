@@ -252,7 +252,9 @@ void    QueryPasswordK(void)
   PushChar1Bcc(0x02);
   PushChar1Bcc('(');
 
-  uchar n = PushNumberBcc(mpdwAddress2[diCurr.bAddress-1]);
+  ulong dw = mpdwAddress2[diCurr.bAddress-1];
+  uchar n = 0;
+  if (dw != MAX_LONG) n = PushNumberBcc(dw);
 
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
