@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_BOOL_BLOCKED,C
+KEY_BOOL_BLOCKED.C
 
 
 ------------------------------------------------------------------------------*/
@@ -10,18 +10,18 @@ KEY_BOOL_BLOCKED,C
 
 
 
-//                                            0123456789ABCDEF
-static char const       szBlocked[]        = "Запрещено:      ";
+//                                          0123456789ABCDEF
+static char const       szBlocked[]      = "Запрещено:      ";
 
 
 
 void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  fNonBlocked, uint  wProgram)
 {
-  bool *pboValue = (bool *) pch->pbBuff;
+  bool *pf = (bool *) pch->pbBuff;
 
   if (bKey == bKEY_ENTER)
   {
-    if (enKeyboard == KBD_ENTER)  
+    if (enKeyboard == KBD_ENTER)
     {
       if (fNonBlocked)
       {
@@ -29,7 +29,7 @@ void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  
         Clear();
 
         LoadSlide(pszMessages);
-        ShowBool(*pboValue);
+        ShowBool(*pf);
       }
       else
       {
@@ -40,22 +40,22 @@ void    key_SetBoolBlocked(cache const  *pch, char const  *pszMessages[], bool  
     }
     else Beep();
   }
-  
+
 
   else if (bKey == bKEY_POINT)
   {
     if (enGlobal != GLB_WORK)
     {
       if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
-      {           
-        *pboValue = InvertBool(*pboValue);
+      {
+        *pf = InvertBool(*pf);
         SaveCache(pch);
 
-        ShowBool(*pboValue);
+        ShowBool(*pf);
       }
-      else Beep(); 
+      else Beep();
     }
-    else Beep(); 
-  } 
-  else Beep(); 
+    else Beep();
+  }
+  else Beep();
 }
