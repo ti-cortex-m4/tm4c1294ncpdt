@@ -76,7 +76,7 @@ void    InitDevices1(void)
   LoadCacheChar(&chKeysLevelB, 1, 2, 2);
   LoadCache(&chShortProfileC);
   LoadCacheBool(&chControlQ, false);
-  LoadCacheBool(&chControlK, true);
+  LoadCacheBool(&chControlK, false);
   LoadCacheBool(&chPlcUFlag, false);
   LoadCacheChar(&chPlcUSize, 1, 8, 6);
   LoadCacheInt(&chPlcUShutdown, 10, 500, 100);
@@ -154,7 +154,7 @@ void    ResetDevices(bool  fFull)
   SaveCache(&chShortProfileC);
 
   SaveCacheBool(&chControlQ, false);
-  SaveCacheBool(&chControlK, true);
+  SaveCacheBool(&chControlK, false);
 
   boPlcUFlag = false;
   SaveCache(&chPlcUFlag);
