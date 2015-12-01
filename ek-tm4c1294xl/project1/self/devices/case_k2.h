@@ -113,7 +113,7 @@
         MakePause(DEV_PREVTIME_K2);
       else
         MakePause(DEV_POSTCORRECT_K2);
-    break;
+      break;
 
     case DEV_PREVTIME_K2:
       ShowPercent(53);
