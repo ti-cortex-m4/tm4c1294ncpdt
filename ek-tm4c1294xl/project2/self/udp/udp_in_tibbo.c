@@ -296,47 +296,60 @@ err_t CommandSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 }
 
 
+static bool IsCmd(struct pbuf *p, const char *szCmd)
+{
+  uchar *pb = p->payload;
+
+  uchar i = 0;
+  while (*szCmd)
+  {
+    if (i >= p->len) return false;
+    if (pb[i++] != *szCmd++) return false;
+  }
+
+  return true;
+}
+
+
 void    UDP_InTibbo(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
   LOG(("broadcast: %d\n", broadcast));
 
-  uchar *pbBuff = p->payload;
-
-  if (pbBuff[0] == 'X') {
+  if (IsCmd(p,"X")) {
     CommandX(pcb,p,addr,port,broadcast);
-  } else if (pbBuff[0] == 'E') {
+  } else if (IsCmd(p,"E")) {
     SysCtlReset();
-  } else if (pbBuff[0] == 'L') {
+  } else if (IsCmd(p,"L")) {
     CommandString(pcb,p,addr,port,broadcast,"A");
-  } else if (pbBuff[0] == 'O') {
+  } else if (IsCmd(p,"O")) {
     CommandString(pcb,p,addr,port,broadcast,"A");
-  } else if (pbBuff[0] == 'V') {
+  } else if (IsCmd(p,"V")) {
     CommandV(pcb,p,addr,port,broadcast);
-  } else if (pbBuff[0] == 'H') {
+  } else if (IsCmd(p,"H")) {
     CommandH(pcb,p,addr,port,broadcast);
-  } else if ((pbBuff[0] == 'C') && (pbBuff[1] == 'S')) {
+  } else if (IsCmd(p,"CS")) {
     CommandCS(pcb,p,addr,port,broadcast);
-  } else if ((pbBuff[0] == 'F') && (pbBuff[1] == 'S')) {
+  } else if (IsCmd(p,"FS")) {
     CommandFS(pcb,p,addr,port,broadcast);
-  } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'P') && (pbBuff[2] == 'W')) {
+  } else if (IsCmd(p,"GPW")) {
     CommandString(pcb,p,addr,port,broadcast,"0");
-  } else if ((pbBuff[0] == 'S') && (pbBuff[1] == 'P') && (pbBuff[2] == 'W')) {
+  } else if (IsCmd(p,"SPW")) {
     CommandString(pcb,p,addr,port,broadcast,"0");
-  } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'O') && (pbBuff[2] == 'N')) {
+  } else if (IsCmd(p,"GON")) {
     CommandGON(pcb,p,addr,port,broadcast);
-  } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'D') && (pbBuff[2] == 'N')) {
+  } else if (IsCmd(p,"GDN")) {
     CommandGDN(pcb,p,addr,port,broadcast);
-  } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'D') && (pbBuff[2] == 'H')) {
+  } else if (IsCmd(p,"GDH")) {
     CommandString(pcb,p,addr,port,broadcast,"0");
-  } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'I') && (pbBuff[2] == 'P')) {
+  } else if (IsCmd(p,"GIP")) {
     CommandIP(pcb,p,addr,port,broadcast,inet_addr("100.1.168.192"));
-  } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'G') && (pbBuff[2] == 'I')) {
+  } else if (IsCmd(p,"GGI")) {
     CommandIP(pcb,p,addr,port,broadcast,inet_addr("0.255.255.255"));
-  } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'N') && (pbBuff[2] == 'M')) {
+  } else if (IsCmd(p,"GNM")) {
     CommandIP(pcb,p,addr,port,broadcast,inet_addr("1.1.168.192"));
-  } else if ((pbBuff[0] == 'S') && (pbBuff[1] == 'O') && (pbBuff[2] == 'N')) {
+  } else if (IsCmd(p,"SON")) {
     CommandSON(pcb,p,addr,port,broadcast);
-  } else if ((pbBuff[0] == 'S') && (pbBuff[1] == 'D') && (pbBuff[2] == 'N')) {
+  } else if (IsCmd(p,"SDN")) {
     CommandSDN(pcb,p,addr,port,broadcast);
   }
 }
