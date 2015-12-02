@@ -3,29 +3,29 @@ UDP_OUTPUT.C
 
 
 ------------------------------------------------------------------------------*/
-#if 0
 #include "../main.h"
 #include "../settings.h"
 #include "udp_push.h"
 #include "udp_out.h"
 
 
-
+#if 0
 #define ERR_SIZE       -20   /* Message size too small.  */
 #define ERR_CODE       -21   /* No message code.         */
 #define ERR_SKIP       -22   /* Skip message.            */
 
-
 static bool             fActive;
 static uint             wCode;
-
+#endif
 
 
 void InitUDP_Out(void)
 {
-  fActive = true;
+//  fActive = true;
 }
 
+
+#if 0
 // TODO
 bool IsActive_UDPOutput(void)
 {
@@ -88,7 +88,7 @@ static err_t PopCode(struct pbuf *p)
 
   return ERR_OK;
 }
-
+#endif
 
 
 void UDPOutput2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
@@ -104,7 +104,7 @@ void UDPOutput2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   pbuf_free(p);
 }
 
-
+#if 0
 // TODO
 void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
