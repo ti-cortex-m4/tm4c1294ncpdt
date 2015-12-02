@@ -8,6 +8,6 @@ UDP_POP.H
 
 
 
-err_t PopIntArgument(struct pbuf *p, uint *pw);
-err_t PopStringArgument(struct pbuf *p, char *sz, uchar  bSize);
+err_t PopIntArg(struct pbuf *p, uint *pw);
+err_t PopStringArg(struct pbuf *p, char *sz, uchar  bSize);
 err_t PopSfx(struct pbuf *p, uint *pw);

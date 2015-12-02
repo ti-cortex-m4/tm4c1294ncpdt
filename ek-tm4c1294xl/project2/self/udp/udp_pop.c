@@ -23,7 +23,7 @@ const static char mbCHARS[] = "0123456789abcdef";
 }
 
 
-err_t PopIntArgument(struct pbuf *p, uint *pw)
+err_t PopIntArg(struct pbuf *p, uint *pw)
 {
   uchar *pb = p->payload;
 
@@ -44,7 +44,7 @@ err_t PopIntArgument(struct pbuf *p, uint *pw)
 }
 
 
-err_t PopStringArgument(struct pbuf *p, char *sz, uchar bSize)
+err_t PopStringArg(struct pbuf *p, char *sz, uchar bSize)
 {
   uchar *pb = p->payload;
 
