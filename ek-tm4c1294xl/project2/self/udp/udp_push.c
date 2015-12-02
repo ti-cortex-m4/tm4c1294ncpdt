@@ -34,6 +34,7 @@ err_t InitPush(struct pbuf **pp, uchar bSize)
 }
 
 
+
 void PushChar(uchar b)
 {
   pbPush[ibPush++] = b;
@@ -127,6 +128,7 @@ void PushArray(uchar *pb, uchar bSize)
     PushChar(pb[i]);
   }
 }
+
 
 
 uchar GetPushSize(void)
