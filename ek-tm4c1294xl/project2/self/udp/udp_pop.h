@@ -8,6 +8,5 @@ UDP_POP.H
 
 
 
-uchar GetChar(uchar b)
-err_t PopCode2(struct pbuf *p, uint *pw)
+err_t PopSuffix(struct pbuf *p, uint *pw)
 err_t PopNumber(struct pbuf *p, uchar x, uint *pw)
