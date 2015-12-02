@@ -130,6 +130,16 @@ void PushArray(uchar *pb, uchar bSize)
 }
 
 
+void PushArrayString(uchar *pb, uchar bSize)
+{
+  uchar i;
+  for (i=0; i<bSize; i++)
+  {
+    PushCharDec(pb[i]);
+    if (i < bSize-1) PushChar('.');
+  }
+}
+
 
 uchar GetPushSize(void)
 {
