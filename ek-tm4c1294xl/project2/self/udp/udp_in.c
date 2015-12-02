@@ -19,11 +19,10 @@ UDP_IN.C
 err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *sz)
 {
   uint wSfx = 0;
-
   err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100);
+  err = InitPush(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   PushChar('A');
@@ -34,6 +33,7 @@ err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   return ERR_OK;
 }
 
+
 err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong  dw)
 {
   uint wSfx = 0;
@@ -41,7 +41,7 @@ err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100);
+  err = InitPush(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   PushChar('A');
@@ -54,7 +54,7 @@ err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
 err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  err_t err = InitPush(&p, 100);
+  err_t err = InitPush(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   PushString("A");
@@ -88,7 +88,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   err = PopIntArg(p, &wArg);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100);
+  err = InitPush(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   if (wArg == 0) {
@@ -130,7 +130,7 @@ err_t CmdSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint por
   err = SaveOwnerName();
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100);
+  err = InitPush(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   PushChar('A');
@@ -154,7 +154,7 @@ err_t CmdSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint por
   if (err != ERR_OK) return err;
 
 
-  err = InitPush(&p, 100);
+  err = InitPush(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   PushChar('A');
