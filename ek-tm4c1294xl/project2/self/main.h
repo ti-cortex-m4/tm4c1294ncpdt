@@ -8,8 +8,10 @@ MAIN.H
 #define __MAIN_H__
 
 
+#include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 
 
 typedef uint8_t         uchar;

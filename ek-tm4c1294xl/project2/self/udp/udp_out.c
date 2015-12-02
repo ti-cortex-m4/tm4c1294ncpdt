@@ -4,7 +4,6 @@ UDP_OUTPUT.C
 
 ------------------------------------------------------------------------------*/
 
-#include <string.h>
 #include "../main.h"
 #include "../settings.h"
 #include "udp_push.h"

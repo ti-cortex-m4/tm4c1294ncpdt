@@ -3,7 +3,9 @@ typedef enum
 {
   EEPROM_BEGIN          = 0,
 
-  EEPROM_IP             = EEPROM_BEGIN,
+  EEPROM_LABEL          = EEPROM_BEGIN,
+
+  EEPROM_IP             = EEPROM_LABEL + 4,
   EEPROM_GATEWAY        = EEPROM_IP + 4,
   EEPROM_NETMASK        = EEPROM_GATEWAY + 4,
 

@@ -7,10 +7,13 @@ SETTINGS.C
 #include "main.h"
 #include "driverlib/eeprom.h"
 #include "driverlib/sysctl.h"
+#include "lwip/inet.h"
 #include "generated/eeprom.h"
 #include "settings.h"
 
 
+
+#define LABEL           0xC0FEBABE
 
 ulong                   dwIP;
 ulong                   dwGateway;
@@ -76,7 +79,12 @@ uchar SaveOwnerName(void) // TODO
 
 uchar    SaveSettings(void)
 {
-  uchar err = SaveLong(&dwIP, EEPROM_IP);
+  ulong dw = LABEL;
+  uchar err = SaveLong(&dw, EEPROM_LABEL);
+  if (err != 0) return err;
+
+
+  err = SaveLong(&dwIP, EEPROM_IP);
   if (err != 0) return err;
 
   err = SaveLong(&dwGateway, EEPROM_GATEWAY);
@@ -125,14 +133,36 @@ static void LoadString(char *sz, ulong dwAddr)
 
 uchar   LoadSettings(void)
 {
-  LoadLong(&dwIP, EEPROM_IP);
-  LoadLong(&dwGateway, EEPROM_GATEWAY);
-  LoadLong(&dwNetmask, EEPROM_NETMASK);
+  ulong dw = 0;
+  LoadLong(&dw, EEPROM_LABEL);
 
-  LoadInt(&wPort, EEPROM_PORT);
+  if (dw == LABEL)
+  {
+    LoadLong(&dwIP, EEPROM_IP);
+    LoadLong(&dwGateway, EEPROM_GATEWAY);
+    LoadLong(&dwNetmask, EEPROM_NETMASK);
 
-  LoadString(szDeviceName, EEPROM_DEVICE_NAME);
-  LoadString(szOwnerName, EEPROM_OWNER_NAME);
+    LoadInt(&wPort, EEPROM_PORT);
+
+    LoadString(szDeviceName, EEPROM_DEVICE_NAME);
+    LoadString(szOwnerName, EEPROM_OWNER_NAME);
+  }
+  else
+  {
+    dwIP = inet_addr("100.1.168.192");
+    dwGateway = inet_addr("0.255.255.255");
+    dwNetmask = inet_addr("1.1.168.192");
+
+    wPort = 1001;
+
+    memset(&szDeviceName,  0, sizeof(szDeviceName));
+    sprintf(szDeviceName, "Device");
+
+    memset(&szOwnerName,  0, sizeof(szOwnerName));
+    sprintf(szOwnerName, "Owner");
+
+    SaveSettings();
+  }
 
   return 0;
 }
