@@ -6,13 +6,14 @@ UDP_PUSH.C
 
 #include <string.h>
 #include "../main.h"
-//#include "../settings.h"
 #include "udp_push.h"
 
+extern int usprintf(char * restrict s, const char * restrict format, ...);
 
 
-static uchar            *pbOut;
-static uchar            ibOut;
+
+static uchar            *pbPush;
+static uchar            ibPush;
 
 
 
@@ -26,8 +27,8 @@ err_t InitPush(struct pbuf **pp, uchar bSize)
   *pp = pbuf_alloc(PBUF_TRANSPORT, bSize, PBUF_RAM);
   if (pp == NULL) return ERR_MEM;
 
-  pbOut = (*pp)->payload;
-  ibOut = 0;
+  pbPush = (*pp)->payload;
+  ibPush = 0;
 
   return ERR_OK;
 }
@@ -35,7 +36,7 @@ err_t InitPush(struct pbuf **pp, uchar bSize)
 
 void PushChar(uchar b)
 {
-  pbOut[ibOut++] = b;
+  pbPush[ibPush++] = b;
 }
 
 
@@ -62,19 +63,17 @@ void PushString(const char *sz)
 }
 
 
-extern int usprintf(char * restrict s, const char * restrict format, ...);
-
 uchar   PushIntHex(uint w)
 {
-static char mbT[6*2];
+static char mb[6*2];
 
-  memset(&mbT, 0, sizeof(mbT));
-  uchar n = usprintf(mbT, "%X" ,w);
+  memset(&mb, 0, sizeof(mb));
+  uchar n = usprintf(mb, "%X" ,w);
 
   uchar i;
   for (i=0; i<n; i++)
   {
-    PushChar(mbT[i]);
+    PushChar(mb[i]);
   }
 
   return n;
@@ -83,22 +82,22 @@ static char mbT[6*2];
 
 uchar   PushCharDec(uchar b)
 {
-static char mbT[4*2];
+static char mb[4*2];
 
-  memset(&mbT, 0, sizeof(mbT));
-  uchar n = usprintf(mbT, "%u" ,b);
+  memset(&mb, 0, sizeof(mb));
+  uchar n = usprintf(mb, "%u" ,b);
 
   uchar i;
   for (i=0; i<n; i++)
   {
-    PushChar(mbT[i]);
+    PushChar(mb[i]);
   }
 
   return n;
 }
 
 
-void PushIPCtrl(ulong dw)
+void PushIP_String(ulong dw)
 {
   combo32 cb;
   cb.dwBuff = dw;
@@ -113,10 +112,10 @@ void PushIPCtrl(ulong dw)
 }
 
 
-void PushCode(uint wCode)
+void PushSuffix(uint w)
 {
   PushChar('|');
-  PushIntHex(wCode);
+  PushIntHex(w);
 }
 
 
@@ -133,5 +132,8 @@ void PushMAC(uchar *pbMAC)
 
 uchar GetPushSize(void)
 {
-  return ibOut;
+  return ibPush;
 }
+
+
+// TODO test overflow
