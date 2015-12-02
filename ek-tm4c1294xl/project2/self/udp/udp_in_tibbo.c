@@ -28,7 +28,7 @@ err_t CommandString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 
   PushChar('A');
   PushString(sz);
-  PushCode(wCode2);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -45,8 +45,8 @@ err_t CommandIPCtrl(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushIPCtrl(dw);
-  PushCode(wCode2);
+  PushIP_String(dw);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -78,7 +78,7 @@ err_t CommandL(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushCode(wCode2);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -96,7 +96,7 @@ err_t CommandV(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
   if (err != ERR_OK) return err;
 
   PushString("A{ds1.0}");
-  PushCode(wCode2);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -114,7 +114,7 @@ err_t CommandH(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
   if (err != ERR_OK) return err;
 
   PushString("A1A");
-  PushCode(wCode2);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -132,7 +132,7 @@ err_t CommandCS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   if (err != ERR_OK) return err;
 
   PushString("A7");
-  PushCode(wCode2);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -172,7 +172,7 @@ err_t CommandFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   PushChar(0x0D);
   PushChar(0x0A);
 
-  PushCode(wCode2);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -190,7 +190,7 @@ err_t CommandGPW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   if (err != ERR_OK) return err;
 
   PushString("A");
-  PushCode(wCode2);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -208,7 +208,7 @@ err_t CommandGON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   if (err != ERR_OK) return err;
 
   PushString("AMikron");
-  PushCode(wCode2);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -225,7 +225,7 @@ err_t CommandGDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   if (err != ERR_OK) return err;
 
   PushString("AEth-RS");
-  PushCode(wCode2);
+  PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
