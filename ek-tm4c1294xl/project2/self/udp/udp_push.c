@@ -119,14 +119,13 @@ void PushSuffix(uint w)
 }
 
 
-void PushMAC(uchar *pbMAC)
+void PushArray(uchar *pb, uchar bSize)
 {
-  PushChar(pbMAC[0]);
-  PushChar(pbMAC[1]);
-  PushChar(pbMAC[2]);
-  PushChar(pbMAC[3]);
-  PushChar(pbMAC[4]);
-  PushChar(pbMAC[5]);
+  uchar i;
+  for (i=0; i<bSize; i++)
+  {
+    PushChar(pb[i]);
+  }
 }
 
 
