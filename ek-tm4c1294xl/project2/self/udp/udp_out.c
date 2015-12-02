@@ -4,15 +4,15 @@ UDP_OUTPUT.C
 
 ------------------------------------------------------------------------------*/
 
+#include <string.h>
 #include "../main.h"
 #include "../settings.h"
+#include "udp_push.h"
 #include "udp_out.h"
 
 
 
 static bool             fActive;
-static uchar            *pbOut;
-static uchar            ibOut;
 static uint             wCode;
 
 
@@ -86,57 +86,84 @@ static err_t PopCode(struct pbuf *p)
 }
 
 
-
-static err_t InitPush(struct pbuf **pp, uchar bSize)
+uchar GetChar(uchar b)
 {
-  //
-  // The incoming pbuf is no longer needed, so free it.
-  //
-  pbuf_free(*pp);
+const static char szNumbers[] = "0123456789abcdef";
 
-  *pp = pbuf_alloc(PBUF_TRANSPORT, bSize, PBUF_RAM);
-  if (pp == NULL) return ERR_MEM;
+  uchar i;
+  for (i=0; i<16; i++) {
+    if (szNumbers[i] == b) return i;
+  }
 
-  pbOut = (*pp)->payload;
-  ibOut = 0;
-
-  return ERR_OK;
+  return 0xFF;
 }
 
 
-static void PushChar(uchar b)
+err_t PopCode2(struct pbuf *p, uint *pw)
 {
-  pbOut[ibOut++] = b;
+  uchar *pb = p->payload;
+
+  bool f = false;
+  *pw = 0;
+
+  uchar i;
+  for (i=0; i<p->len; i++)
+  {
+    if (f)
+    {
+      char b = GetChar(pb[i]);
+      if (b == 0xFF) return ERR_CODE;
+
+     *pw = *pw*0x10 + b;
+    }
+    else
+    {
+      if (pb[i] == '|') f = true;
+    }
+  }
+
+  return (f) ? ERR_OK : ERR_CODE;
+}
+
+err_t PopNumber(struct pbuf *p, uchar x, uint *pw)
+{
+  uchar *pb = p->payload;
+
+  //bool f = false;
+  *pw = 0;
+
+  uchar i;
+  for (i=x; i<p->len; i++)
+  {
+    if (pb[i] == '|') return ERR_OK;
+
+    char b = GetChar(pb[i]);
+    if (b == 0xFF) return ERR_CODE;
+
+    *pw = *pw*0x10 + b;
+  }
+
+  return ERR_CODE;
 }
 
 
-static void PushIntLtl(uint w)
+
+void UDPOutput2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  PushChar(w % 0x100);
-  PushChar(w / 0x100);
-}
+  p->tot_len = GetPushSize();
+  p->len = GetPushSize();
 
+//  if (addr->addr == IPADDR_BROADCAST)
+    udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
+//  else
+//    udp_sendto(pcb, p, addr, port);
 
-static void PushLongLtl(ulong dw)
-{
-  PushIntLtl(dw % 0x10000);
-  PushIntLtl(dw / 0x10000);
-}
-
-
-static void PushMAC(uchar *pbMAC)
-{
-  PushChar(pbMAC[0]);
-  PushChar(pbMAC[1]);
-  PushChar(pbMAC[2]);
-  PushChar(pbMAC[3]);
-  PushChar(pbMAC[4]);
-  PushChar(pbMAC[5]);
+  pbuf_free(p);
 }
 
 
 // TODO
-static void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+void UDPOutput(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
 //  if (addr->addr == IPADDR_BROADCAST)
     udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
@@ -166,7 +193,7 @@ err_t UDP_OutInfo(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uin
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushMAC(pbMAC);
+  PushArray(pbMAC,6);
   PushLongLtl(dwIP);
 
   UDPOutput(pcb,p,addr,port,broadcast);

@@ -17,5 +17,5 @@ uchar PushIntHex(uint w);
 uchar PushCharDec(uchar b);
 void PushIPString(ulong dw);
 void PushSuffix(uint w);
-void PushMAC(uchar *pbMAC);
+void PushArray(uchar *pb, uchar bSize);
 uchar GetPushSize(void);
