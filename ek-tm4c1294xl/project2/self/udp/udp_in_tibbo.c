@@ -1,15 +1,14 @@
 /*------------------------------------------------------------------------------
-UDP_IN_TIBBO.C
+UDP_IN.C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "../settings.h"
-//#include "../delay.h"
 #include "driverlib/sysctl.h"
+#include "lwip/inet.h" // TODO
 #include "../uart/log.h"
-#include                "lwip/inet.h"
 #include "udp_out.h"
 #include "udp_pop.h"
 #include "udp_push.h"
@@ -17,7 +16,7 @@ UDP_IN_TIBBO.C
 
 
 
-err_t CommandString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *sz)
+err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *sz)
 {
   uint wSfx = 0;
 
@@ -35,7 +34,7 @@ err_t CommandString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
   return ERR_OK;
 }
 
-err_t CommandIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong  dw)
+err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong  dw)
 {
   uint wSfx = 0;
 
@@ -53,7 +52,7 @@ err_t CommandIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   return ERR_OK;
 }
 
-err_t CommandX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   err_t err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
@@ -78,28 +77,7 @@ err_t CommandX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
 }
 
 
-err_t CommandL(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
-//  err_t err = CheckSize(p, 1+1+1+2);
-//  if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
-
-  uint wSfx = 0;
-
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  err = InitPush(&p, 100);
-  if (err != ERR_OK) return err;
-
-  PushChar('A');
-  PushSfx(wSfx);
-
-  UDPOutput2(pcb,p,addr,port,broadcast);
-  return ERR_OK;
-}
-
-
-err_t CommandV(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t CmdV(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint wSfx = 0;
 
@@ -117,69 +95,33 @@ err_t CommandV(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
 }
 
 
-err_t CommandH(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint wSfx = 0;
 
   err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100);
-  if (err != ERR_OK) return err;
-
-  PushString("A1A");
-  PushSfx(wSfx);
-
-  UDPOutput2(pcb,p,addr,port,broadcast);
-  return ERR_OK;
-}
-
-
-err_t CommandCS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
-  uint wSfx = 0;
-
-  err_t err = PopSfx(p, &wSfx);
+  uint wArg = 0;
+  err = PopIntArg(p, &wArg);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
-  PushString("A7");
-  PushSfx(wSfx);
-
-  UDPOutput2(pcb,p,addr,port,broadcast);
-  return ERR_OK;
-}
-
-
-err_t CommandFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
-  uint wSfx = 0;
-
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  uint wNumber = 0;
-  err = PopIntArg(p, &wNumber);
-  if (err != ERR_OK) return err;
-
-  err = InitPush(&p, 100);
-  if (err != ERR_OK) return err;
-
-  if (wNumber == 0) {
+  if (wArg == 0) {
     PushString("AI=$GENERAL;D=General;T=GROUP");
-  } else if (wNumber == 1) {
+  } else if (wArg == 1) {
     PushString("AI=ON;D=Owner name;T=STRING;C=EDIT;MAXLEN=8;F=R*");
-  } else if (wNumber == 2) {
+  } else if (wArg == 2) {
     PushString("AI=DN;D=Device name;T=STRING;C=EDIT;MAXLEN=8;F=R*");
-  } else if (wNumber == 3) {
+  } else if (wArg == 3) {
     PushString("AI=DH;D=DHCP;T=INT;C=STATIC;O=0- Disabled/0/1- Enabled/1;F=R");
-  } else if (wNumber == 4) {
+  } else if (wArg == 4) {
     PushString("AI=IP;D=IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*");
-  } else if (wNumber == 5) {
+  } else if (wArg == 5) {
     PushString("AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*");
-  } else if (wNumber == 6) {
+  } else if (wArg == 6) {
     PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*");
   }
 
@@ -192,26 +134,8 @@ err_t CommandFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   return ERR_OK;
 }
 
-/*
-err_t CommandGPW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
-  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  err = InitPush(&p, 100);
-  if (err != ERR_OK) return err;
-
-  PushString("A");
-  PushSuffix(wSfx);
-
-  UDPOutput2(pcb,p,addr,port,broadcast);
-  return ERR_OK;
-}
-*/
-
-err_t CommandGON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t CmdGON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint wSfx = 0;
 
@@ -229,7 +153,7 @@ err_t CommandGON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   return ERR_OK;
 }
 
-err_t CommandGDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t CmdGDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint wSfx = 0;
 
@@ -248,7 +172,7 @@ err_t CommandGDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 }
 
 
-err_t CommandSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t CmdSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint wSfx = 0;
 
@@ -271,7 +195,7 @@ err_t CommandSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   return ERR_OK;
 }
 
-err_t CommandSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t CmdSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint wSfx = 0;
 
@@ -296,6 +220,7 @@ err_t CommandSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 }
 
 
+
 static bool IsCmd(struct pbuf *p, const char *szCmd)
 {
   uchar *pb = p->payload;
@@ -311,45 +236,45 @@ static bool IsCmd(struct pbuf *p, const char *szCmd)
 }
 
 
-void    UDP_InTibbo(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
+void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
   LOG(("broadcast: %d\n", broadcast));
 
   if (IsCmd(p,"X")) {
-    CommandX(pcb,p,addr,port,broadcast);
+    CmdX(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"E")) {
     SysCtlReset();
   } else if (IsCmd(p,"L")) {
-    CommandString(pcb,p,addr,port,broadcast,"A");
+    CmdString(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"O")) {
-    CommandString(pcb,p,addr,port,broadcast,"A");
+    CmdString(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"V")) {
-    CommandV(pcb,p,addr,port,broadcast);
+    CmdString(pcb,p,addr,port,broadcast,"{ds1.0}");
   } else if (IsCmd(p,"H")) {
-    CommandH(pcb,p,addr,port,broadcast);
+    CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CommandCS(pcb,p,addr,port,broadcast);
+    CmdString(pcb,p,addr,port,broadcast,"7");
   } else if (IsCmd(p,"FS")) {
-    CommandFS(pcb,p,addr,port,broadcast);
+    CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
-    CommandString(pcb,p,addr,port,broadcast,"0");
+    CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"SPW")) {
-    CommandString(pcb,p,addr,port,broadcast,"0");
+    CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"GON")) {
-    CommandGON(pcb,p,addr,port,broadcast);
+    CmdGON(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GDN")) {
-    CommandGDN(pcb,p,addr,port,broadcast);
+    CmdGDN(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GDH")) {
-    CommandString(pcb,p,addr,port,broadcast,"0");
+    CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"GIP")) {
-    CommandIP(pcb,p,addr,port,broadcast,inet_addr("100.1.168.192"));
+    CmdIP(pcb,p,addr,port,broadcast,inet_addr("100.1.168.192"));
   } else if (IsCmd(p,"GGI")) {
-    CommandIP(pcb,p,addr,port,broadcast,inet_addr("0.255.255.255"));
+    CmdIP(pcb,p,addr,port,broadcast,inet_addr("0.255.255.255"));
   } else if (IsCmd(p,"GNM")) {
-    CommandIP(pcb,p,addr,port,broadcast,inet_addr("1.1.168.192"));
+    CmdIP(pcb,p,addr,port,broadcast,inet_addr("1.1.168.192"));
   } else if (IsCmd(p,"SON")) {
-    CommandSON(pcb,p,addr,port,broadcast);
+    CmdSON(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"SDN")) {
-    CommandSDN(pcb,p,addr,port,broadcast);
+    CmdSDN(pcb,p,addr,port,broadcast);
   }
 }
