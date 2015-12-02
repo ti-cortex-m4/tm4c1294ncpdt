@@ -66,7 +66,7 @@ err_t PopStringArgument(struct pbuf *p, char *sz, uchar bSize)
 }
 
 
-err_t PopSuffix(struct pbuf *p, uint *pw)
+err_t PopSfx(struct pbuf *p, uint *pw)
 {
   uchar *pb = p->payload;
 
