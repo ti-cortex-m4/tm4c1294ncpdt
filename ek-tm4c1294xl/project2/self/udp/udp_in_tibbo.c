@@ -255,13 +255,13 @@ err_t CommandSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   err_t err = PopSuffix(p, &wCode2);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100);
-  if (err != ERR_OK) return err;
-
-  err = PopStringNameArgument(p, szOwnerName);
+  err = PopStringNameArgument(p, (char *)szOwnerName);
   if (err != ERR_OK) return err;
 
   err = SaveOwnerName();
+  if (err != ERR_OK) return err;
+
+  err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
   PushChar('A');
@@ -278,13 +278,14 @@ err_t CommandSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   err_t err = PopSuffix(p, &wCode2);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100);
-  if (err != ERR_OK) return err;
-
-  err = PopStringNameArgument(p, szDeviceName);
+  err = PopStringNameArgument(p, (char *)szDeviceName);
   if (err != ERR_OK) return err;
 
   err = SaveDeviceName();
+  if (err != ERR_OK) return err;
+
+
+  err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
   PushChar('A');

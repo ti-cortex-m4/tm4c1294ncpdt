@@ -9,5 +9,5 @@ UDP_POP.H
 
 
 err_t PopIntArgument(struct pbuf *p, uint *pw);
-err_t PopStringNameArgument(struct pbuf *p, char szName[NAME_SIZE]);
+err_t PopStringNameArgument(struct pbuf *p, char *sz);
 err_t PopSuffix(struct pbuf *p, uint *pw);
