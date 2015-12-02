@@ -18,5 +18,9 @@ extern uchar                   pbMAC[6];
 
 
 uchar   InitSettings(void);
+
 uchar   SaveSettings(void);
+uchar SaveDeviceName(void);
+uchar SaveOwnerName(void);
+
 uchar   LoadSettings(void);

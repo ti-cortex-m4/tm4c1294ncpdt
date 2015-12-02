@@ -4,6 +4,7 @@ UDP_POP.C
 
 ------------------------------------------------------------------------------*/
 
+#include <string.h>
 #include "../main.h"
 #include "udp_pop.h"
 
@@ -23,7 +24,7 @@ const static char mbCHARS[] = "0123456789abcdef";
 }
 
 
-err_t PopArgument(struct pbuf *p, uint *pw)
+err_t PopIntArgument(struct pbuf *p, uint *pw)
 {
   uchar *pb = p->payload;
 
@@ -38,6 +39,28 @@ err_t PopArgument(struct pbuf *p, uint *pw)
     if (b == 0xFF) return ERR_VAL;
 
     *pw = *pw*0x10 + b;
+  }
+
+  return ERR_ARG;
+}
+
+
+err_t PopStringNameArgument(struct pbuf *p, char szName[NAME_SIZE])
+{
+  uchar *pb = p->payload;
+
+  memset(&szName, 0, sizeof(szName));
+
+  uchar i;
+  for (i=2; i<p->len; i++)
+  {
+    if (pb[i] == '|') return ERR_OK;
+
+    char b = pb[i];
+    if (b < 0x20) return ERR_VAL;
+
+    if (i-2 >= NAME_SIZE) return ERR_VAL;
+    szName[i-2] = b;
   }
 
   return ERR_ARG;
