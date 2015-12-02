@@ -59,8 +59,8 @@ err_t PopStringNameArgument(struct pbuf *p, char *sz)
     char b = pb[i];
     if (b < 0x20) return ERR_VAL;
 
-    if (i-2 >= NAME_SIZE) return ERR_VAL;
-    sz[i-2] = b;
+    if (i-3 >= NAME_SIZE) return ERR_VAL;
+    sz[i-3] = b;
   }
 
   return ERR_ARG;
