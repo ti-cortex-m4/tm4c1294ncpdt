@@ -112,7 +112,7 @@ void PushIP(ulong dw)
 }
 
 
-void PushSuffix(uint w)
+void PushSfx(uint w)
 {
   PushChar('|');
   PushIntHex(w);
