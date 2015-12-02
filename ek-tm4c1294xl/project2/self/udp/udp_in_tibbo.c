@@ -45,7 +45,7 @@ err_t CommandIPCtrl(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushIP_String(dw);
+  PushIPString(dw);
   PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
