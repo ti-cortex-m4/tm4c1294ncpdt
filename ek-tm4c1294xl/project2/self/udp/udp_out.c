@@ -3,12 +3,17 @@ UDP_OUTPUT.C
 
 
 ------------------------------------------------------------------------------*/
-
+#if 0
 #include "../main.h"
 #include "../settings.h"
 #include "udp_push.h"
 #include "udp_out.h"
 
+
+
+#define ERR_SIZE       -20   /* Message size too small.  */
+#define ERR_CODE       -21   /* No message code.         */
+#define ERR_SKIP       -22   /* Skip message.            */
 
 
 static bool             fActive;
@@ -241,3 +246,4 @@ err_t UDP_OutUnknown(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, 
   UDPOutput(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
+#endif
