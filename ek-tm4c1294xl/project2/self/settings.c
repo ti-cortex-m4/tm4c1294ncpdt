@@ -11,16 +11,22 @@ SETTINGS.C
 
 
 
-#define EEPROM_ADDR_IP      0
-#define EEPROM_ADDR_GATEWAY 4
-#define EEPROM_ADDR_NETMASK 8
-#define EEPROM_ADDR_PORT    12
+#define EEPROM_ADDR_IP          0
+#define EEPROM_ADDR_GATEWAY     4
+#define EEPROM_ADDR_NETMASK     8
+#define EEPROM_ADDR_PORT        12
+#define EEPROM_ADDR_DEVICE_NAME 16
+#define EEPROM_ADDR_OWNER_NAME  28
+#define EEPROM_ADDR_END         40
 
 
 
 ulong                   dwIP;
 ulong                   dwGateway;
 ulong                   dwNetmask;
+
+char                    szDeviceName[NAME_SIZE];
+char                    szOwnerName[NAME_SIZE];
 
 uint                    wPort;
 
@@ -53,6 +59,13 @@ static uchar SaveInt(uint *pw, ulong dwAddr)
 }
 
 
+static uchar SaveString(char *sz, ulong dwAddr)
+{
+  return EEPROMProgram((ulong *)sz, dwAddr, 4*3);
+}
+
+
+
 uchar    SaveSettings(void)
 {
   uchar err = SaveLong(&dwIP, EEPROM_ADDR_IP);
@@ -64,8 +77,17 @@ uchar    SaveSettings(void)
   err = SaveLong(&dwNetmask, EEPROM_ADDR_NETMASK);
   if (err != 0) return err;
 
+
   err = SaveInt(&wPort, EEPROM_ADDR_PORT);
   if (err != 0) return err;
+
+
+  err = SaveString(szDeviceName, EEPROM_ADDR_DEVICE_NAME);
+  if (err != 0) return err;
+
+  err = SaveString(szOwnerName, EEPROM_ADDR_OWNER_NAME);
+  if (err != 0) return err;
+
 
   return 0;
 }
@@ -86,15 +108,23 @@ static void LoadInt(uint *pw, ulong dwAddr)
 }
 
 
+static void LoadString(char *sz, ulong dwAddr)
+{
+  EEPROMRead((ulong *)sz, dwAddr, 4*3);
+}
+
+
+
 uchar   LoadSettings(void)
 {
   LoadLong(&dwIP, EEPROM_ADDR_IP);
-
   LoadLong(&dwGateway, EEPROM_ADDR_GATEWAY);
-
   LoadLong(&dwNetmask, EEPROM_ADDR_NETMASK);
 
   LoadInt(&wPort, EEPROM_ADDR_PORT);
+
+  LoadString(szDeviceName, EEPROM_ADDR_DEVICE_NAME);
+  LoadString(szOwnerName, EEPROM_ADDR_OWNER_NAME);
 
   return 0;
 }

@@ -5,12 +5,13 @@ UDP_IN_TIBBO.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../settings.h"
+#include "../settings.h"
 //#include "../delay.h"
 //#include "driverlib/sysctl.h"
 #include "../uart/log.h"
 #include                "lwip/inet.h"
 #include "udp_out.h"
+#include "udp_pop.h"
 #include "udp_push.h"
 #include "udp_in_tibbo.h"
 
@@ -57,7 +58,20 @@ err_t CommandX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
   err_t err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
-  PushString("A0.36.119.81.168.16/000001001/N**M*/**/Mikron/Eth-RS/4");
+  PushString("A");
+  PushString("0.36.119.81.168.16");
+  PushString("/");
+  PushString("000001001");
+  PushString("/");
+  PushString("N**M*");
+  PushString("/");
+  PushString("**");
+  PushString("/");
+  PushString(szOwnerName);
+  PushString("/");
+  PushString(szDeviceName);
+  PushString("/");
+  PushString("4");
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -147,7 +161,7 @@ err_t CommandFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   if (err != ERR_OK) return err;
 
   uint wNumber = 0;
-  err = PopArgument(p, 2, &wNumber);
+  err = PopArgument(p, &wNumber);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
@@ -207,7 +221,8 @@ err_t CommandGON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
-  PushString("AMikron");
+  PushString("A");
+  PushString(szOwnerName);
   PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
@@ -224,7 +239,8 @@ err_t CommandGDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
-  PushString("AEth-RS");
+  PushString("A");
+  PushString(szDeviceName);
   PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
