@@ -23,25 +23,24 @@ const static char mbCHARS[] = "0123456789abcdef";
 }
 
 
-err_t PopArgument(struct pbuf *p, uchar x, uint *pw)
+err_t PopArgument(struct pbuf *p, uint *pw)
 {
   uchar *pb = p->payload;
 
-  //bool f = false;
   *pw = 0;
 
   uchar i;
-  for (i=x; i<p->len; i++)
+  for (i=2; i<p->len; i++)
   {
     if (pb[i] == '|') return ERR_OK;
 
     char b = DecodeChar(pb[i]);
-    if (b == 0xFF) return ERR_CODE;
+    if (b == 0xFF) return ERR_VAL;
 
     *pw = *pw*0x10 + b;
   }
 
-  return ERR_CODE;
+  return ERR_ARG;
 }
 
 

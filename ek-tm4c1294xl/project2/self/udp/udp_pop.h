@@ -8,5 +8,5 @@ UDP_POP.H
 
 
 
-err_t PopArgument(struct pbuf *p, uchar x, uint *pw)
-err_t PopSuffix(struct pbuf *p, uint *pw)
+err_t PopArgument(struct pbuf *p, uint *pw);
+err_t PopSuffix(struct pbuf *p, uint *pw);

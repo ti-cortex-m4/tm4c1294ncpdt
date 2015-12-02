@@ -29,4 +29,7 @@ typedef union
 #define ERR_SKIP       -22   /* Skip message.            */
 
 
+#define NAME_SIZE      8
+
+
 #endif
