@@ -19,9 +19,9 @@ UDP_IN_TIBBO.C
 
 err_t CommandString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *sz)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
@@ -29,7 +29,7 @@ err_t CommandString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 
   PushChar('A');
   PushString(sz);
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -37,9 +37,9 @@ err_t CommandString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 
 err_t CommandIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong  dw)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
@@ -47,7 +47,7 @@ err_t CommandIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
   PushChar('A');
   PushIP(dw);
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -83,16 +83,16 @@ err_t CommandL(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
 //  err_t err = CheckSize(p, 1+1+1+2);
 //  if (err != ERR_OK) { UDP_OutError(pcb,p,addr,port,broadcast,err); return err; }
 
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -101,16 +101,16 @@ err_t CommandL(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
 
 err_t CommandV(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
   PushString("A{ds1.0}");
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -119,16 +119,16 @@ err_t CommandV(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
 
 err_t CommandH(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
   PushString("A1A");
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -137,16 +137,16 @@ err_t CommandH(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
 
 err_t CommandCS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
   PushString("A7");
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -155,9 +155,9 @@ err_t CommandCS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
 err_t CommandFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   uint wNumber = 0;
@@ -186,7 +186,7 @@ err_t CommandFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   PushChar(0x0D);
   PushChar(0x0A);
 
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -195,16 +195,16 @@ err_t CommandFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 /*
 err_t CommandGPW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
   if (err != ERR_OK) return err;
 
   PushString("A");
-  PushSuffix(wCode2);
+  PushSuffix(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -213,9 +213,9 @@ err_t CommandGPW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 
 err_t CommandGON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
@@ -223,7 +223,7 @@ err_t CommandGON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 
   PushString("A");
   PushString(szOwnerName);
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -231,9 +231,9 @@ err_t CommandGON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 
 err_t CommandGDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
@@ -241,7 +241,7 @@ err_t CommandGDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 
   PushString("A");
   PushString(szDeviceName);
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -250,9 +250,9 @@ err_t CommandGDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 
 err_t CommandSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = PopStringArgument(p, (char *)szOwnerName, NAME_SIZE);
@@ -265,7 +265,7 @@ err_t CommandSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;
@@ -273,9 +273,9 @@ err_t CommandSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 
 err_t CommandSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wCode2 = 0;
+  uint wSfx = 0;
 
-  err_t err = PopSuffix(p, &wCode2);
+  err_t err = PopSuffix(p, &wSfx);
   if (err != ERR_OK) return err;
 
   err = PopStringArgument(p, (char *)szDeviceName, NAME_SIZE);
@@ -289,7 +289,7 @@ err_t CommandSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushSuffix(wCode2);
+  PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
   return ERR_OK;

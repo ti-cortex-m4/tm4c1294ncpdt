@@ -17,7 +17,7 @@ void PushString(const char *sz);
 uchar PushIntHex(uint w);
 uchar PushCharDec(uchar b);
 void PushIP(ulong dw);
-void PushSuffix(uint w);
+void PushSfx(uint w);
 void PushArray(uchar *pb, uchar bSize);
 void PushArrayString(uchar *pb, uchar bSize);
 
