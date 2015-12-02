@@ -9,6 +9,7 @@ UDP_PUSH.H
 
 
 err_t InitPush(struct pbuf **pp, uchar bSize);
+
 void PushChar(uchar b);
 void PushIntLtl(uint w);
 void PushLongLtl(ulong dw);
@@ -18,4 +19,5 @@ uchar PushCharDec(uchar b);
 void PushIPString(ulong dw);
 void PushSuffix(uint w);
 void PushArray(uchar *pb, uchar bSize);
+
 uchar GetPushSize(void);
