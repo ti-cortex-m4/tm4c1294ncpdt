@@ -77,24 +77,6 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 }
 
 
-err_t CmdV(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
-  uint wSfx = 0;
-
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  err = InitPush(&p, 100);
-  if (err != ERR_OK) return err;
-
-  PushString("A{ds1.0}");
-  PushSfx(wSfx);
-
-  UDPOutput2(pcb,p,addr,port,broadcast);
-  return ERR_OK;
-}
-
-
 err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint wSfx = 0;
@@ -128,43 +110,6 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   PushChar(0x0D);
   PushChar(0x0A);
 
-  PushSfx(wSfx);
-
-  UDPOutput2(pcb,p,addr,port,broadcast);
-  return ERR_OK;
-}
-
-
-err_t CmdGON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
-  uint wSfx = 0;
-
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  err = InitPush(&p, 100);
-  if (err != ERR_OK) return err;
-
-  PushString("A");
-  PushString(szOwnerName);
-  PushSfx(wSfx);
-
-  UDPOutput2(pcb,p,addr,port,broadcast);
-  return ERR_OK;
-}
-
-err_t CmdGDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
-  uint wSfx = 0;
-
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  err = InitPush(&p, 100);
-  if (err != ERR_OK) return err;
-
-  PushString("A");
-  PushString(szDeviceName);
   PushSfx(wSfx);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
@@ -261,9 +206,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"SPW")) {
     CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"GON")) {
-    CmdGON(pcb,p,addr,port,broadcast);
+    CmdString(pcb,p,addr,port,broadcast,szOwnerName);
   } else if (IsCmd(p,"GDN")) {
-    CmdGDN(pcb,p,addr,port,broadcast);
+    CmdString(pcb,p,addr,port,broadcast,szDeviceName);
   } else if (IsCmd(p,"GDH")) {
     CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"GIP")) {
