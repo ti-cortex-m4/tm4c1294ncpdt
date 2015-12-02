@@ -9,7 +9,7 @@ UDP_POP.C
 
 
 
-uchar DecodeChar(uchar b)
+static uchar DecodeChar(uchar b)
 {
 const static char mbCHARS[] = "0123456789abcdef";
 
@@ -23,34 +23,7 @@ const static char mbCHARS[] = "0123456789abcdef";
 }
 
 
-err_t PopSuffix(struct pbuf *p, uint *pw)
-{
-  uchar *pb = p->payload;
-
-  bool f = false;
-  *pw = 0;
-
-  uchar i;
-  for (i=0; i<p->len; i++)
-  {
-    if (f)
-    {
-      char b = DecodeChar(pb[i]);
-      if (b == 0xFF) return ERR_CODE;
-
-     *pw = *pw*0x10 + b;
-    }
-    else
-    {
-      if (pb[i] == '|') f = true;
-    }
-  }
-
-  return (f) ? ERR_OK : ERR_CODE;
-}
-
-
-err_t PopNumber(struct pbuf *p, uchar x, uint *pw)
+err_t PopArgument(struct pbuf *p, uchar x, uint *pw)
 {
   uchar *pb = p->payload;
 
@@ -69,4 +42,31 @@ err_t PopNumber(struct pbuf *p, uchar x, uint *pw)
   }
 
   return ERR_CODE;
+}
+
+
+err_t PopSuffix(struct pbuf *p, uint *pw)
+{
+  uchar *pb = p->payload;
+
+  bool f = false;
+  *pw = 0;
+
+  uchar i;
+  for (i=0; i<p->len; i++)
+  {
+    if (f)
+    {
+      char b = DecodeChar(pb[i]);
+      if (b == 0xFF) return ERR_VAL;
+
+     *pw = *pw*0x10 + b;
+    }
+    else
+    {
+      if (pb[i] == '|') f = true;
+    }
+  }
+
+  return (f) ? ERR_OK : ERR_ARG;
 }

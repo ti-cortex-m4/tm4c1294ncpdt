@@ -147,7 +147,7 @@ err_t CommandFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   if (err != ERR_OK) return err;
 
   uint wNumber = 0;
-  err = PopNumber(p, 2, &wNumber);
+  err = PopArgument(p, 2, &wNumber);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
