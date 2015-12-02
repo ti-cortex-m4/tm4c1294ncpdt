@@ -7,17 +7,8 @@ SETTINGS.C
 #include "main.h"
 #include "driverlib/eeprom.h"
 #include "driverlib/sysctl.h"
+#include "generated/eeprom.h"
 #include "settings.h"
-
-
-
-#define EEPROM_ADDR_IP          0
-#define EEPROM_ADDR_GATEWAY     4
-#define EEPROM_ADDR_NETMASK     8
-#define EEPROM_ADDR_PORT        12
-#define EEPROM_ADDR_DEVICE_NAME 16
-#define EEPROM_ADDR_OWNER_NAME  28
-#define EEPROM_ADDR_END         40
 
 
 
@@ -67,7 +58,7 @@ static uchar SaveString(char *sz, ulong dwAddr)
 
 uchar SaveDeviceName(void) // TODO
 {
-  uchar err = SaveString(szDeviceName, EEPROM_ADDR_DEVICE_NAME);
+  uchar err = SaveString(szDeviceName, EEPROM_DEVICE_NAME);
   if (err != 0) return err;
 
   return 0;
@@ -76,7 +67,7 @@ uchar SaveDeviceName(void) // TODO
 
 uchar SaveOwnerName(void) // TODO
 {
-  uchar err = SaveString(szOwnerName, EEPROM_ADDR_OWNER_NAME);
+  uchar err = SaveString(szOwnerName, EEPROM_OWNER_NAME);
   if (err != 0) return err;
 
   return 0;
@@ -85,24 +76,24 @@ uchar SaveOwnerName(void) // TODO
 
 uchar    SaveSettings(void)
 {
-  uchar err = SaveLong(&dwIP, EEPROM_ADDR_IP);
+  uchar err = SaveLong(&dwIP, EEPROM_IP);
   if (err != 0) return err;
 
-  err = SaveLong(&dwGateway, EEPROM_ADDR_GATEWAY);
+  err = SaveLong(&dwGateway, EEPROM_GATEWAY);
   if (err != 0) return err;
 
-  err = SaveLong(&dwNetmask, EEPROM_ADDR_NETMASK);
-  if (err != 0) return err;
-
-
-  err = SaveInt(&wPort, EEPROM_ADDR_PORT);
+  err = SaveLong(&dwNetmask, EEPROM_NETMASK);
   if (err != 0) return err;
 
 
-  err = SaveString(szDeviceName, EEPROM_ADDR_DEVICE_NAME);
+  err = SaveInt(&wPort, EEPROM_PORT);
   if (err != 0) return err;
 
-  err = SaveString(szOwnerName, EEPROM_ADDR_OWNER_NAME);
+
+  err = SaveString(szDeviceName, EEPROM_DEVICE_NAME);
+  if (err != 0) return err;
+
+  err = SaveString(szOwnerName, EEPROM_OWNER_NAME);
   if (err != 0) return err;
 
 
@@ -134,14 +125,14 @@ static void LoadString(char *sz, ulong dwAddr)
 
 uchar   LoadSettings(void)
 {
-  LoadLong(&dwIP, EEPROM_ADDR_IP);
-  LoadLong(&dwGateway, EEPROM_ADDR_GATEWAY);
-  LoadLong(&dwNetmask, EEPROM_ADDR_NETMASK);
+  LoadLong(&dwIP, EEPROM_IP);
+  LoadLong(&dwGateway, EEPROM_GATEWAY);
+  LoadLong(&dwNetmask, EEPROM_NETMASK);
 
-  LoadInt(&wPort, EEPROM_ADDR_PORT);
+  LoadInt(&wPort, EEPROM_PORT);
 
-  LoadString(szDeviceName, EEPROM_ADDR_DEVICE_NAME);
-  LoadString(szOwnerName, EEPROM_ADDR_OWNER_NAME);
+  LoadString(szDeviceName, EEPROM_DEVICE_NAME);
+  LoadString(szOwnerName, EEPROM_OWNER_NAME);
 
   return 0;
 }
