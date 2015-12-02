@@ -45,14 +45,14 @@ err_t PopIntArgument(struct pbuf *p, uint *pw)
 }
 
 
-err_t PopStringNameArgument(struct pbuf *p, char szName[NAME_SIZE])
+err_t PopStringNameArgument(struct pbuf *p, char *sz)
 {
   uchar *pb = p->payload;
 
-  memset(&szName, 0, sizeof(szName));
+  memset(sz, 0, NAME_SIZE);
 
   uchar i;
-  for (i=2; i<p->len; i++)
+  for (i=3; i<p->len; i++)
   {
     if (pb[i] == '|') return ERR_OK;
 
@@ -60,7 +60,7 @@ err_t PopStringNameArgument(struct pbuf *p, char szName[NAME_SIZE])
     if (b < 0x20) return ERR_VAL;
 
     if (i-2 >= NAME_SIZE) return ERR_VAL;
-    szName[i-2] = b;
+    sz[i-2] = b;
   }
 
   return ERR_ARG;
