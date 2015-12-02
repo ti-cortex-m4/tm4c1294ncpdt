@@ -19,5 +19,6 @@ uchar PushCharDec(uchar b);
 void PushIPString(ulong dw);
 void PushSuffix(uint w);
 void PushArray(uchar *pb, uchar bSize);
+void PushArrayString(uchar *pb, uchar bSize);
 
 uchar GetPushSize(void);

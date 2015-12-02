@@ -59,7 +59,7 @@ err_t CommandX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint p
   if (err != ERR_OK) return err;
 
   PushString("A");
-  PushString("0.36.119.81.168.16");
+  PushArrayString(pbMAC, 6);
   PushString("/");
   PushString("000001001");
   PushString("/");
@@ -255,7 +255,7 @@ err_t CommandSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   err_t err = PopSuffix(p, &wCode2);
   if (err != ERR_OK) return err;
 
-  err = PopStringNameArgument(p, (char *)szOwnerName);
+  err = PopStringArgument(p, (char *)szOwnerName, NAME_SIZE);
   if (err != ERR_OK) return err;
 
   err = SaveOwnerName();
@@ -278,7 +278,7 @@ err_t CommandSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   err_t err = PopSuffix(p, &wCode2);
   if (err != ERR_OK) return err;
 
-  err = PopStringNameArgument(p, (char *)szDeviceName);
+  err = PopStringArgument(p, (char *)szDeviceName, NAME_SIZE);
   if (err != ERR_OK) return err;
 
   err = SaveDeviceName();
