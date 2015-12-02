@@ -59,21 +59,19 @@ static uchar SaveString(char *sz, ulong dwAddr)
 }
 
 
-uchar SaveDeviceName(void) // TODO
+uchar SaveGateway(void)
 {
-  uchar err = SaveString(szDeviceName, EEPROM_DEVICE_NAME);
-  if (err != 0) return err;
-
-  return 0;
+  return SaveLong(&dwGateway, EEPROM_GATEWAY);
 }
 
-
-uchar SaveOwnerName(void) // TODO
+uchar SaveDeviceName(void)
 {
-  uchar err = SaveString(szOwnerName, EEPROM_OWNER_NAME);
-  if (err != 0) return err;
+  return SaveString(szDeviceName, EEPROM_DEVICE_NAME);
+}
 
-  return 0;
+uchar SaveOwnerName(void)
+{
+  return SaveString(szOwnerName, EEPROM_OWNER_NAME);
 }
 
 

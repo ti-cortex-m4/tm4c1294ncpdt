@@ -9,12 +9,12 @@ UDP_POP.C
 
 
 
-static uchar DecodeChar(uchar b)
+static uchar DecodeChar(uchar b, uchar bMax)
 {
 const static char mbCHARS[] = "0123456789abcdef";
 
   uchar i;
-  for (i=0; i<16; i++)
+  for (i=0; i<bMax; i++)
   {
     if (mbCHARS[i] == b) return i;
   }
@@ -34,10 +34,54 @@ err_t PopIntArg(struct pbuf *p, uint *pw)
   {
     if (pb[i] == '|') return ERR_OK;
 
-    char b = DecodeChar(pb[i]);
+    char b = DecodeChar(pb[i],0x10);
     if (b == 0xFF) return ERR_VAL;
 
     *pw = *pw*0x10 + b;
+  }
+
+  return ERR_ARG;
+}
+
+
+err_t PopIPArg(struct pbuf *p, ulong *pdw) // TODO
+{
+  uchar *pb = p->payload;
+
+  combo32 cb;
+  cb.dwBuff = 0;
+
+  uchar y = 0;
+  uchar x = 0;
+
+  uchar i;
+  for (i=3; i<p->len; i++)
+  {
+    if (pb[i] == '.')
+    {
+      if (y > 3) return ERR_VAL;
+      else
+      {
+        cb.mpbBuff[3-y] = x;
+        y++;
+        x = 0;
+      }
+    }
+
+    else if (pb[i] == '|')
+    {
+      cb.mpbBuff[3-y] = x;
+      *pdw = cb.dwBuff;
+      return ERR_OK;
+    }
+
+    else
+    {
+      char b = DecodeChar(pb[i],10);
+      if (b == 0xFF) return ERR_VAL;
+
+      x = x*10 + b;
+    }
   }
 
   return ERR_ARG;
@@ -78,7 +122,7 @@ err_t PopSfx(struct pbuf *p, uint *pw)
   {
     if (f)
     {
-      char b = DecodeChar(pb[i]);
+      char b = DecodeChar(pb[i],0x10);
       if (b == 0xFF) return ERR_VAL;
 
      *pw = *pw*0x10 + b;
