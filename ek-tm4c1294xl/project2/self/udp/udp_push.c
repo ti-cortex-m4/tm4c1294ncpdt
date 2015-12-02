@@ -97,7 +97,7 @@ static char mb[4*2];
 }
 
 
-void PushIPString(ulong dw)
+void PushIP(ulong dw)
 {
   combo32 cb;
   cb.dwBuff = dw;
