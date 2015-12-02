@@ -161,7 +161,7 @@ err_t CommandFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   if (err != ERR_OK) return err;
 
   uint wNumber = 0;
-  err = PopIntArgument(p, &wNumber);
+  err = PopIntArg(p, &wNumber);
   if (err != ERR_OK) return err;
 
   err = InitPush(&p, 100);
@@ -255,7 +255,7 @@ err_t CommandSON(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  err = PopStringArgument(p, (char *)szOwnerName, NAME_SIZE);
+  err = PopStringArg(p, (char *)szOwnerName, NAME_SIZE);
   if (err != ERR_OK) return err;
 
   err = SaveOwnerName();
@@ -278,7 +278,7 @@ err_t CommandSDN(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  err = PopStringArgument(p, (char *)szDeviceName, NAME_SIZE);
+  err = PopStringArg(p, (char *)szDeviceName, NAME_SIZE);
   if (err != ERR_OK) return err;
 
   err = SaveDeviceName();
