@@ -12,7 +12,7 @@ void InitUDP_Out(void);
 bool IsActive_UDPOutput(void);
 
 err_t PopSuffix(struct pbuf *p, uint *pw);
-err_t PopNumber(struct pbuf *p, uchar x, uint *pw);
+err_t PopArgument(struct pbuf *p, uchar x, uint *pw);
 
 void UDPOutput2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
 
