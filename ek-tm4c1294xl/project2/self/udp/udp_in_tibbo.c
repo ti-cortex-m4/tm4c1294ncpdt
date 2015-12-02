@@ -35,7 +35,7 @@ err_t CommandString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
   return ERR_OK;
 }
 
-err_t CommandIPCtrl(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong  dw)
+err_t CommandIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong  dw)
 {
   uint wCode2 = 0;
 
@@ -46,7 +46,7 @@ err_t CommandIPCtrl(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
   if (err != ERR_OK) return err;
 
   PushChar('A');
-  PushIPString(dw);
+  PushIP(dw);
   PushSuffix(wCode2);
 
   UDPOutput2(pcb,p,addr,port,broadcast);
@@ -329,11 +329,11 @@ void    UDP_InTibbo(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_ad
   } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'D') && (pbBuff[2] == 'H')) {
     CommandString(pcb,p,addr,port,broadcast,"0");
   } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'I') && (pbBuff[2] == 'P')) {
-    CommandIPCtrl(pcb,p,addr,port,broadcast,inet_addr("100.1.168.192"));
+    CommandIP(pcb,p,addr,port,broadcast,inet_addr("100.1.168.192"));
   } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'G') && (pbBuff[2] == 'I')) {
-    CommandIPCtrl(pcb,p,addr,port,broadcast,inet_addr("0.255.255.255"));
+    CommandIP(pcb,p,addr,port,broadcast,inet_addr("0.255.255.255"));
   } else if ((pbBuff[0] == 'G') && (pbBuff[1] == 'N') && (pbBuff[2] == 'M')) {
-    CommandIPCtrl(pcb,p,addr,port,broadcast,inet_addr("1.1.168.192"));
+    CommandIP(pcb,p,addr,port,broadcast,inet_addr("1.1.168.192"));
   } else if ((pbBuff[0] == 'S') && (pbBuff[1] == 'O') && (pbBuff[2] == 'N')) {
     CommandSON(pcb,p,addr,port,broadcast);
   } else if ((pbBuff[0] == 'S') && (pbBuff[1] == 'D') && (pbBuff[2] == 'N')) {
