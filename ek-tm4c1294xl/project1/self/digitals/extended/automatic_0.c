@@ -482,7 +482,7 @@ time2   ReadTimeDate_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_Q
-    case 22: return( ReadTimeDateQ_Short() );  break;
+    case 22: return ReadTimeDateQ_Short();
 #endif
 
 #ifndef SKIP_R
