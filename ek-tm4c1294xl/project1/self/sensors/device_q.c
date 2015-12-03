@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------
 DEVICE_Q!C
 
-
+Энергомера СЕ304
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../memory/mem_ports.h"
+#include "../memory/mem_ports.h"
 //#include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
-//#include "../memory/mem_current.h"
-//#include "../memory/mem_factors.h"
-//#include "../memory/mem_realtime.h"
+#include "../memory/mem_current.h"
+#include "../memory/mem_factors.h"
+#include "../memory/mem_realtime.h"
 //#include "../memory/mem_energy_spec.h"
 //#include "../memory/mem_profile.h"
 //#include "../memory/mem_limits.h"
@@ -83,15 +83,14 @@ void    QueryCloseQ(void)
 }
 
 
-/*
+
 void    QueryOptionQ(void)
 {
-uchar   i;
-
   InitPush(0);
   PushChar1Bcc(0x06);
 
-  switch (mppoPorts[ diCurr.ibPort ].ibSpeed)
+  uchar i;
+  switch (mppoPorts[ diCurr.ibPort ].ibBaud)
   {
     case 0:  i = '2'; break;
     case 1:  i = '3'; break;
@@ -137,7 +136,8 @@ void    QueryCorrectQ(void)
 
   BccQueryIO(1000, 2+16+1, 0);
 }
-*/
+
+
 
 void    QueryEnergyAbsQ(void)
 {
@@ -205,7 +205,7 @@ void    QueryEnergyMonQ(time  ti)
   BccQueryIO(1+6*28+2, n+15+1, 6);
 }
 
-/*
+
 void    QueryEnergySpecQ(void)
 {
   InitPush(0);
@@ -228,7 +228,7 @@ void    QueryEnergySpecQ(void)
 
   BccQueryIO(1+6*28+2, 4+9+1, 6);
 }
-*/
+
 
 void    ReadEnergyQ(void)
 {
@@ -240,6 +240,7 @@ void    ReadEnergyQ(void)
     mpdbChannelsC[i] = PopDoubleQ();
   }
 }
+
 
 /*
 void    InitHeaderQ(void)
