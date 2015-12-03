@@ -34,23 +34,22 @@ time2   ReadTimeDateQ(void)
 }
 
 
-/*
-bool    ReadSensorQ(void)
-{
-uchar   i;
 
+double2 ReadCntCurrQ(void)
+{
   Clear();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
   {
     QueryCloseQ();
     QueryEnergyAbsQ();
 
     if (BccInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
+    if (fKey == true) GetDouble2Error();
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (r == bMINORREPEATS) GetDouble2Error();
 
   ReadEnergyQ();
   QueryCloseQ();
@@ -58,11 +57,11 @@ uchar   i;
 
   reBuffB = mpreTransCnt[ibDig];
 
-  for (i=0; i<Q_LINES; i++)
+  for (r=0; r<Q_LINES; r++)
   {
-    reBuffA = mpreChannelsB[i] * reBuffB;
-    mpreChannelsB[i] = reBuffA;
-    mpboChannelsA[i] = true;
+    reBuffA = mpreChannelsB[r] * reBuffB;
+    mpreChannelsB[r] = reBuffA;
+    mpboChannelsA[r] = true;
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];
@@ -71,7 +70,7 @@ uchar   i;
 }
 
 
-
+/*
 bool    ReadCntMonCanQ(uchar  ibMonth)
 {
 uchar   i;
@@ -107,7 +106,7 @@ uchar   i;
         Delay(1000);
         return(0);
       }
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
 
     if (i == bMINORREPEATS) return(0);
@@ -132,7 +131,7 @@ uchar   i;
         Delay(1000);
         return(0);
       }
-      if (fKey == 1) return(0);
+      if (fKey == true) return(0);
     }
 
     if (i == bMINORREPEATS) return(0);
