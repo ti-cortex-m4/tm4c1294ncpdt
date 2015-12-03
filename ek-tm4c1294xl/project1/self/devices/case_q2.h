@@ -1,8 +1,8 @@
-/*
+
 #ifndef SKIP_Q
 
     case DEV_START_Q2:
-      if ((boControlQ == boFalse) && (fCurrCtrlHou == 1))
+      if ((boControlQ == false) && (fCurrCtrl == true))
       {
         ShowLo(szCorrectQ1);
         QueryCorrectQ();
@@ -80,7 +80,7 @@
     case DEV_PASSWORD_Q2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if ((boControlQ != boFalse) && (fCurrCtrlHou == 1))
+        if ((boControlQ != false) && (fCurrCtrl == true))
           MakePause(DEV_POSTPASSWORD_Q2);
         else
           MakePause(DEV_POSTCORRECT_Q2);
@@ -110,8 +110,7 @@
     case DEV_TIME_Q2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltK();
-        tiDig = tiAlt;
+        tiDig = ReadTimeK();
         MakePause(DEV_POSTTIME_Q2);
       }
       else
@@ -139,8 +138,7 @@
     case DEV_DATE_Q2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadDateAltK();
-        tiDig = tiAlt;
+        tiDig = ReadDateK(tiDig);
         MakePause(DEV_POSTDATE_Q2);
       }
       else
@@ -157,7 +155,7 @@
       }
       break;
 
-
+/*
     case DEV_POSTDATE_Q2:
       wBuffD  = GetDayIndex();              // количество дней с начала года ведомого счётчика
       dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
@@ -293,6 +291,6 @@
         SetCurr(DEV_HEADER_Q2);
       }
       break;
-
-#endif
 */
+#endif
+
