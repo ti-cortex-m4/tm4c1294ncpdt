@@ -11,13 +11,13 @@ DEVICE_Q!C
 #include "../memory/mem_current.h"
 #include "../memory/mem_factors.h"
 #include "../memory/mem_realtime.h"
-//#include "../memory/mem_energy_spec.h"
+#include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
-//#include "../devices/devices_time.h"
+#include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/limits.h"
 #include "../special/special.h"
@@ -310,14 +310,9 @@ void    QueryHeaderQ(void)
 {
   HideCurrTime(1);
 
-
-  tiAlt = tiDigPrev;
-  dwBuffC = DateToHouIndex();
-
-  dwBuffC -= wBaseCurr;
-
-  HouIndexToDate(dwBuffC);
-  tiDig = tiAlt;
+  ulong dw = DateToHouIndex(tiDigPrev);
+  dw -= wBaseCurr;
+  tiDig = HouIndexToDate(dw);
 
 
   szHi[10] = 'A' + ibMinor;
@@ -335,7 +330,7 @@ void    ReadHeaderQ(void)
   uchar i;
   for (i=0; i<48; i++)
   {
-    mpdbBuffCanHou[ibMinor][i] = PopDoubleQ()/2;
+    mpflBuffCanHou[ibMinor][i] = PopDoubleQ()/2;
   }
 }
 
@@ -345,23 +340,22 @@ void    MakeDataQ(uchar  ibHou)
 {
   ShowProgressDigHou();
 
-  double dbPulse = mprePulseHou[ibDig];
+  double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
   for (i=0; i<ibMinorMax; i++)
   {
-    float fl = mpreBuffCanHou[i][ibHou];
-    mpreEngFracDigCan[ibDig][i] += fl;
+    float fl = mpflBuffCanHou[i][ibHou];
+    mpflEngFracDigCan[ibDig][i] += fl;
 
-    uint w = (uint)(mpreEngFracDigCan[ibDig][i]*dbPulse);
+    uint w = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulse);
     mpwChannels[i] = w;
 
-    mpreEngFracDigCan[ibDig][i] -= (float)w/dbPulse;
+    mpflEngFracDigCan[ibDig][i] -= (float)w/dbPulse;
   }
 
   wBaseCurr++;
 }
-
 
 
 bool    ReadDataQ(void)
@@ -370,8 +364,7 @@ uchar   j;
 
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
-  tiAlt = tiDig;
-  if (SearchDefHouIndex() == 0) return(1);
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
   if ((tiDig.bDay   == tiCurr.bDay)   &&
@@ -387,18 +380,13 @@ uchar   j;
     ResetWatchdog();
     MakeDataQ(47-i);
 
-    tiAlt = tiDig;
-    MakeSpecial();
+    MakeSpecial(tiDig);
     if (MakeStopHou(0) == 0) return(0);
 
 
-    tiAlt = tiDigPrev;
-    dwBuffC = DateToHouIndex();
-
-    dwBuffC -= wBaseCurr;
-
-    HouIndexToDate(dwBuffC);
-    tiDig = tiAlt;
+    ulong dw = DateToHouIndex(tiDigPrev);
+    dw -= wBaseCurr;
+    tiDig = HouIndexToDate(dw);
 
 
     iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
@@ -406,6 +394,7 @@ uchar   j;
 
   return(1);
 }
+
 
 
 void    ReadCurrentQ(void)
