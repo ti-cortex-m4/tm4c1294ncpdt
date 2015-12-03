@@ -332,7 +332,7 @@ time2   ReadTimeDateP_Short(void)
 
 #ifndef SKIP_Q
 
-bool    ReadTimeDateQ_Short(void)
+time2   ReadTimeDateQ_Short(void)
 {
   return ReadTimeDateK_Short();
 }

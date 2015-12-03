@@ -5,16 +5,16 @@ AUTOMATIC_Q.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../memory/mem_digitals.h"
-//#include "../memory/mem_factors.h"
-//#include "../display/display.h"
-//#include "../keyboard/keyboard.h"
+#include "../memory/mem_digitals.h"
+#include "../memory/mem_factors.h"
+#include "../display/display.h"
+#include "../keyboard/keyboard.h"
 //#include "../time/delay.h"
 //#include "../time/timedate.h"
 //#include "../time/calendar.h"
-//#include "../serial/ports.h"
-//#include "../serial/ports_devices.h"
-//#include "../devices/devices.h"
+#include "../serial/ports.h"
+#include "../serial/ports_devices.h"
+#include "../devices/devices.h"
 //#include "../digitals/digitals.h"
 //#include "automatic1.h"
 #include "device_q.h"
@@ -24,17 +24,17 @@ AUTOMATIC_Q.C
 
 #ifndef SKIP_Q
 
-bool    ReadTimeDateK(void);
+time2   ReadTimeDateK(void);
 
 
 
-bool    ReadTimeDateQ(void)
+time2   ReadTimeDateQ(void)
 {
   return ReadTimeDateK();
 }
 
 
-
+/*
 bool    ReadSensorQ(void)
 {
 uchar   i;
@@ -62,7 +62,7 @@ uchar   i;
   {
     reBuffA = mpreChannelsB[i] * reBuffB;
     mpreChannelsB[i] = reBuffA;
-    mpboChannelsA[i] = boTrue;
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];
@@ -148,13 +148,13 @@ uchar   i;
   {
     reBuffA = mpreChannelsB[i] * reBuffB;
     mpreChannelsB[i] = reBuffA;
-    mpboChannelsA[i] = boTrue;
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];
 
   return(1);
 }
-
+*/
 #endif
 
