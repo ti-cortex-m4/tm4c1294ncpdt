@@ -22,7 +22,7 @@ uchar   InitSettings(void);
 uchar   SaveSettings(void);
 
 uchar SaveGateway(void);
-
+uchar SaveNetmask(void);
 uchar SaveDeviceName(void);
 uchar SaveOwnerName(void);
 

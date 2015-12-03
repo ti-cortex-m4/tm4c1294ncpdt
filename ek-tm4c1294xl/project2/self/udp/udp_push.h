@@ -20,5 +20,4 @@ void PushSfx(uint w);
 void PushArray(uchar *pb, uchar bSize);
 void PushArrayString(uchar *pb, uchar bSize);
 
-
-err_t UDPOutput2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
+err_t PushOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);

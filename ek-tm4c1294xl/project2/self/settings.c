@@ -64,6 +64,11 @@ uchar SaveGateway(void)
   return SaveLong(&dwGateway, EEPROM_GATEWAY);
 }
 
+uchar SaveNetmask(void)
+{
+  return SaveLong(&dwNetmask, EEPROM_NETMASK);
+}
+
 uchar SaveDeviceName(void)
 {
   return SaveString(szDeviceName, EEPROM_DEVICE_NAME);
