@@ -1835,7 +1835,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_Q
-    case 22: return ReadSensorQ();
+    case 22: return ReadCntCurrQ();
 #endif
 
 #ifndef SKIP_R

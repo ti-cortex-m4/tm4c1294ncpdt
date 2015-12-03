@@ -24,7 +24,7 @@ DEVICE_Q!C
 
 
 
-//#ifndef SKIP_Q
+#ifndef SKIP_Q
 
 double  PopDoubleQ(void)
 {
@@ -416,5 +416,5 @@ uchar   i;
   MakeCurrent();
 }
 */
-//#endif
+#endif
 

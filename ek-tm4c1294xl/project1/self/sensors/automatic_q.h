@@ -5,5 +5,5 @@ AUTOMATIC_Q!C
 ------------------------------------------------------------------------------*/
 
 time2   ReadTimeDateQ(void);
-bool    ReadSensorQ(void);
+double2 ReadCntCurrQ(void);
 bool    ReadCntMonCanQ(uchar  ibMonth);
