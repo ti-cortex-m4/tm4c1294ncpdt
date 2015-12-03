@@ -31,7 +31,7 @@ err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   PushString(sz);
   PushSfx(wSfx);
 
-  UDPOutput2(pcb,p,addr,port,broadcast);
+  PushOut(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
@@ -47,7 +47,7 @@ err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   PushIP(dw);
   PushSfx(wSfx);
 
-  UDPOutput2(pcb,p,addr,port,broadcast);
+  PushOut(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
@@ -69,7 +69,7 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
   PushString("/");
   PushString("4");
 
-  UDPOutput2(pcb,p,addr,port,broadcast);
+  PushOut(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
@@ -87,7 +87,7 @@ err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   PushChar('A');
   PushSfx(wSfx);
 
-  UDPOutput2(pcb,p,addr,port,broadcast);
+  PushOut(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
@@ -125,7 +125,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
   PushSfx(wSfx);
 
-  UDPOutput2(pcb,p,addr,port,broadcast);
+  PushOut(pcb,p,addr,port,broadcast);
   return ERR_OK;
 }
 
