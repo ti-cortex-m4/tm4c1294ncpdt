@@ -215,11 +215,10 @@ void    ReadEnergyK(uchar  ibLine)
 
 void    QueryOptionK(void)
 {
-uchar   i;
-
   InitPush(0);
   PushChar1Bcc(0x06);
 
+  uchar i;
   switch (mppoPorts[ diCurr.ibPort ].ibBaud)
   {
     case 0:  i = '2'; break;
