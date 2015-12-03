@@ -8,7 +8,7 @@ UDP_PUSH.H
 
 
 
-err_t InitPush(struct pbuf **pp, uchar bSize);
+err_t InitPush2(struct pbuf **pp, uchar bSize);
 
 void PushChar(uchar b);
 void PushIntLtl(uint w);
