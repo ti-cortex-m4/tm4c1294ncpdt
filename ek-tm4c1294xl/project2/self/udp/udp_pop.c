@@ -9,7 +9,7 @@ UDP_POP.C
 
 
 
-static uchar DecodeChar(uchar b, uchar bMax)
+static uchar DecodeChar(uchar b, uchar bMax) // TODO
 {
 const static char mbCHARS[] = "0123456789abcdef";
 
@@ -23,7 +23,7 @@ const static char mbCHARS[] = "0123456789abcdef";
 }
 
 
-err_t PopInt(struct pbuf *p, uint *pw)
+err_t PopInt(struct pbuf *p, uint *pw) // TODO
 {
   uchar *pb = p->payload;
 
@@ -88,7 +88,7 @@ err_t PopIP(struct pbuf *p, ulong *pdw) // TODO
 }
 
 
-err_t PopString(struct pbuf *p, char *sz, uchar bSize)
+err_t PopString(struct pbuf *p, char *sz, uchar bSize) // TODO
 {
   uchar *pb = p->payload;
 
@@ -110,7 +110,7 @@ err_t PopString(struct pbuf *p, char *sz, uchar bSize)
 }
 
 
-err_t PopSfx(struct pbuf *p, uint *pw)
+err_t PopSfx(struct pbuf *p, uint *pw) // TODO
 {
   uchar *pb = p->payload;
 

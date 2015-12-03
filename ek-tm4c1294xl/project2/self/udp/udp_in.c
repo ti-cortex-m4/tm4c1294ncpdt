@@ -147,6 +147,18 @@ err_t SDN(struct pbuf *p)
 }
 
 
+err_t SIP(struct pbuf *p)
+{
+  ulong dw = 0;
+  err_t err = PopIP(p, &dw);
+  if (err != ERR_OK) return err;
+
+  dwIP = dw;
+  err = SaveIP();
+  if (err != ERR_OK) return err;
+
+  return ERR_OK;
+}
 
 err_t SGI(struct pbuf *p)
 {
@@ -160,7 +172,6 @@ err_t SGI(struct pbuf *p)
 
   return ERR_OK;
 }
-
 
 err_t SNM(struct pbuf *p)
 {
@@ -227,7 +238,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"GDH")) {
     CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"GIP")) {
-    CmdIP(pcb,p,addr,port,broadcast,inet_addr("100.1.168.192"));
+    CmdIP(pcb,p,addr,port,broadcast,dwIP);
+  } else if (IsCmd(p,"SIP")) {
+    CmdIn(pcb,p,addr,port,broadcast,SIP);
   } else if (IsCmd(p,"GGI")) {
     CmdIP(pcb,p,addr,port,broadcast,dwGateway);
   } else if (IsCmd(p,"SGI")) {
