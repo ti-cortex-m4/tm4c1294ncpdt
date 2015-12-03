@@ -13,6 +13,8 @@ extern char                    szOwnerName[NAME_SIZE];
 
 extern uint                    wPort;
 
+extern uchar                   ibBaud;
+
 extern uchar                   pbMAC[6];
 
 
