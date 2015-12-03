@@ -9,7 +9,6 @@ UDP_IN.C
 #include "driverlib/sysctl.h"
 #include "lwip/inet.h" // TODO
 #include "../uart/log.h"
-#include "udp_out.h"
 #include "udp_pop.h"
 #include "udp_push.h"
 #include "udp_in.h"
@@ -31,8 +30,7 @@ err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   PushString(sz);
   PushSfx(wSfx);
 
-  PushOut(pcb,p,addr,port,broadcast);
-  return ERR_OK;
+  return PushOut(pcb,p,addr,port,broadcast);;
 }
 
 
@@ -47,8 +45,7 @@ err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   PushIP(dw);
   PushSfx(wSfx);
 
-  PushOut(pcb,p,addr,port,broadcast);
-  return ERR_OK;
+  return PushOut(pcb,p,addr,port,broadcast);;
 }
 
 err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
@@ -69,8 +66,7 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
   PushString("/");
   PushString("4");
 
-  PushOut(pcb,p,addr,port,broadcast);
-  return ERR_OK;
+  return PushOut(pcb,p,addr,port,broadcast);;
 }
 
 
@@ -87,8 +83,7 @@ err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   PushChar('A');
   PushSfx(wSfx);
 
-  PushOut(pcb,p,addr,port,broadcast);
-  return ERR_OK;
+  return PushOut(pcb,p,addr,port,broadcast);;
 }
 
 
@@ -122,11 +117,9 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
   PushChar(0x0D);
   PushChar(0x0A);
-
   PushSfx(wSfx);
 
-  PushOut(pcb,p,addr,port,broadcast);
-  return ERR_OK;
+  return PushOut(pcb,p,addr,port,broadcast);;
 }
 
 
@@ -154,6 +147,7 @@ err_t SDN(struct pbuf *p)
 }
 
 
+
 err_t SGI(struct pbuf *p)
 {
   ulong dw = 0;
@@ -166,6 +160,21 @@ err_t SGI(struct pbuf *p)
 
   return ERR_OK;
 }
+
+
+err_t SNM(struct pbuf *p)
+{
+  ulong dw = 0;
+  err_t err = PopIPArg(p, &dw);
+  if (err != ERR_OK) return err;
+
+  dwNetmask = dw;
+  err = SaveNetmask();
+  if (err != ERR_OK) return err;
+
+  return ERR_OK;
+}
+
 
 
 static bool IsCmd(struct pbuf *p, const char *szCmd)
@@ -224,6 +233,8 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"SGI")) {
     CmdIn(pcb,p,addr,port,broadcast,SGI);
   } else if (IsCmd(p,"GNM")) {
-    CmdIP(pcb,p,addr,port,broadcast,inet_addr("1.1.168.192"));
+    CmdIP(pcb,p,addr,port,broadcast,dwNetmask);
+  } else if (IsCmd(p,"SNM")) {
+    CmdIn(pcb,p,addr,port,broadcast,SNM);
   }
 }

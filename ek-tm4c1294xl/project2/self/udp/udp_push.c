@@ -5,18 +5,17 @@ UDP_PUSH.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "utils/ustdlib.h"
 #include "udp_push.h"
 
 
 
 #define PUSH_SIZE       0x200
 
-extern int usprintf(char * restrict s, const char * restrict format, ...);
 
-
-
-static uint             iwPush;
 static uchar            mbPush[PUSH_SIZE];
+static uint             iwPush;
+
 
 
 void InitPush(void)
