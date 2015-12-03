@@ -179,7 +179,7 @@
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
       }
       break;
-
+*/
 
     case DEV_CONTROL_Q2:
       cbRepeat = GetMaxRepeats();
@@ -225,6 +225,7 @@
             DoneProfile();
           else
           {
+            uchar i;
             for (i=0; i<48; i++)
             {
               wBaseCurr++;
@@ -291,6 +292,6 @@
         SetCurr(DEV_HEADER_Q2);
       }
       break;
-*/
+
 #endif
 
