@@ -16,9 +16,9 @@ DEVICE_Q!C
 //#include "../memory/mem_limits.h"
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
-//#include "../devices/devices.h"
+#include "../devices/devices.h"
 //#include "../devices/devices_time.h"
-//#include "../digitals/current/current_run.h"
+#include "../digitals/current/current_run.h"
 //#include "../digitals/limits.h"
 //#include "../special/special.h"
 //#include "../hardware/watchdog.h"
@@ -406,22 +406,18 @@ uchar   i,j;
 
   return(1);
 }
-
+*/
 
 void    ReadCurrentQ(void)
 {
-uchar   i;
-
-  reBuffB = mprePulseHou[ibDig];
-
+  uchar i;
   for (i=0; i<Q_LINES; i++)
   {
-    dwBuffC = mpreChannelsB[i] * reBuffB;
-    mpdwBaseDig[i] = dwBuffC;
+    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseHou[ibDig];
   }
 
   MakeCurrent();
 }
-*/
+
 #endif
 
