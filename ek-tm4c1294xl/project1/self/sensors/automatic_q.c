@@ -10,7 +10,7 @@ AUTOMATIC_Q.C
 #include "../display/display.h"
 #include "../keyboard/keyboard.h"
 //#include "../time/delay.h"
-//#include "../time/timedate.h"
+#include "../time/timedate.h"
 //#include "../time/calendar.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
@@ -18,6 +18,7 @@ AUTOMATIC_Q.C
 //#include "../digitals/digitals.h"
 //#include "automatic1.h"
 #include "device_q.h"
+#include "automatic_k.h"
 #include "automatic_q.h"
 
 
@@ -90,9 +91,10 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
         ti.bYear--;
       }
 
-      ti.bDay = DaysInMonth();
+      ti.bDay = GetDaysInMonthYM(ti.bYear, ti.bMonth);
     }
 
+    uchar i;
     for (i=0; i<bMINORREPEATS; i++)
     {
       QueryCloseQ();
@@ -101,9 +103,10 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
       if (BccInput() == SER_GOODCHECK) break;
       if (IndexInBuff() == 10)
       {
-        sprintf(szLo, "сутки %02bu.%02bu.%02bu ?",ti.bDay,ti.bMonth,ti.bYear);
+        Clear();
+        sprintf(szLo+0, "сутки %02u.%02u.%02u ?",ti.bDay,ti.bMonth,ti.bYear);
         Delay(1000);
-        return(0);
+        return GetDouble2Error();
       }
       if (fKey == true) return GetDouble2Error();
     }
@@ -127,9 +130,10 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
       if (BccInput() == SER_GOODCHECK) break;
       if (IndexInBuff() == 10)
       {
-        sprintf(szLo, " мес€ц %02bu.%02bu ?  ",ti.bMonth,ti.bYear);
+        Clear();
+        sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
         Delay(1000);
-        return(0);
+        return GetDouble2Error();
       }
       if (fKey == true) return GetDouble2Error();
     }
@@ -141,18 +145,16 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
   }
 
 
-  reBuffB = mpreTransCnt[ibDig];
+  double dbTrans = mpdbTransCnt[ibDig];
 
+  uchar i;
   for (i=0; i<Q_LINES; i++)
   {
-    reBuffA = mpreChannelsB[i] * reBuffB;
-    mpreChannelsB[i] = reBuffA;
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
 
-  reBuffA = mpreChannelsB[diCurr.ibLine];
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
