@@ -55,18 +55,16 @@ double2 ReadCntCurrQ(void)
   QueryCloseQ();
 
 
-  reBuffB = mpreTransCnt[ibDig];
+  double dbTrans = mpdbTransCnt[ibDig];
 
-  for (r=0; r<Q_LINES; r++)
+  uchar i;
+  for (i=0; i<Q_LINES; i++)
   {
-    reBuffA = mpreChannelsB[r] * reBuffB;
-    mpreChannelsB[r] = reBuffA;
-    mpboChannelsA[r] = true;
+    mpdbChannelsC[i] *= dbTrans;
+    mpboChannelsA[i] = true;
   }
 
-  reBuffA = mpreChannelsB[diCurr.ibLine];
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 

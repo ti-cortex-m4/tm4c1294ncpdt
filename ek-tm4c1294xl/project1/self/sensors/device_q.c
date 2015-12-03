@@ -5,22 +5,29 @@ DEVICE_Q!C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../serial/ports.h"
-//#include        "xdata.h"
-//#include        "timer0.h"
-//#include        "delay.h"
-//#include        "display.h"
-//#include        "engine.h"
-//#include        "energy.h"
-//#include        "watchdog.h"
-//#include        "timedate.h"
-//#include        "ports.h"
-//#include        "limits.h"
-//#include        "digitals.h"
-//#include        "essential.h"
-//#include        "device_k.h"
-//#include        "device_q.h"
-//#include        "_timedate.h"
+//#include "../memory/mem_ports.h"
+//#include "../memory/mem_settings.h"
+#include "../memory/mem_digitals.h"
+//#include "../memory/mem_current.h"
+//#include "../memory/mem_factors.h"
+//#include "../memory/mem_realtime.h"
+//#include "../memory/mem_energy_spec.h"
+//#include "../memory/mem_profile.h"
+//#include "../memory/mem_limits.h"
+#include "../serial/ports_stack.h"
+//#include "../serial/ports_devices.h"
+//#include "../devices/devices.h"
+//#include "../devices/devices_time.h"
+//#include "../digitals/current/current_run.h"
+//#include "../digitals/limits.h"
+//#include "../special/special.h"
+//#include "../hardware/watchdog.h"
+//#include "../display/display.h"
+//#include "../keyboard/time/key_timedate.h"
+//#include "../time/timedate.h"
+//#include "../time/calendar.h"
+//#include "../time/delay.h"
+#include "device_q.h"
 
 
 
@@ -220,22 +227,20 @@ void    QueryEnergySpecQ(void)
 
   BccQueryIO(1+6*28+2, 4+9+1, 6);
 }
-
+*/
 
 void    ReadEnergyQ(void)
 {
-uchar   i;
-
   InitPop(1);
 
+  uchar i;
   for (i=0; i<Q_LINES; i++)
   {
-    PopFloatQ();
-    mpreChannelsB[i] = reBuffA;
+    mpdbChannelsC[i] = PopDoubleQ();
   }
 }
 
-
+/*
 void    InitHeaderQ(void)
 {
   if (!UseBounds())

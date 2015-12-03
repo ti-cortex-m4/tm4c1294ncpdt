@@ -422,11 +422,11 @@ double2 ReadCntCurrK(uchar  bMaxLines)
   QueryCloseK();
 
 
-  double dbKtrans = mpdbTransCnt[ibDig];
+  double dbTrans = mpdbTransCnt[ibDig];
 
   for (i=0; i<bMaxLines; i++)
   {
-    mpdbChannelsC[i] *= dbKtrans;
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
 
