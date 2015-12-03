@@ -7,7 +7,6 @@ UDP_IN.C
 #include "../main.h"
 #include "../settings.h"
 #include "driverlib/sysctl.h"
-#include "lwip/inet.h" // TODO
 #include "../uart/log.h"
 #include "udp_pop.h"
 #include "udp_push.h"
@@ -34,7 +33,7 @@ err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 }
 
 
-err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong  dw)
+err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong dw)
 {
   uint wSfx = 0;
   err_t err = PopSfx(p, &wSfx);
@@ -45,8 +44,23 @@ err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   PushIP(dw);
   PushSfx(wSfx);
 
-  return PushOut(pcb,p,addr,port,broadcast);;
+  return PushOut(pcb,p,addr,port,broadcast);
 }
+
+err_t CmdChar(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uchar b)
+{
+  uint wSfx = 0;
+  err_t err = PopSfx(p, &wSfx);
+  if (err != ERR_OK) return err;
+
+  InitPush();
+  PushChar('A');
+  PushCharDec(b);
+  PushSfx(wSfx);
+
+  return PushOut(pcb,p,addr,port,broadcast);
+}
+
 
 err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
@@ -113,6 +127,10 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     PushString("AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*");
   } else if (wArg == 6) {
     PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*");
+  } else if (wArg == 7) {
+    PushString("AI=$CHANNEL1;D=Channel1;T=GROUP");
+  } else if (wArg == 8) {
+    PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=8-150bps/8/9-300bps/9/10-600bps/10/0-1200bps/0/1-2400bps/1/2-4800bps/2/3-9600bps/3/4-19200bps/4/11-28800bps/11/5-38400bps/5/6-57600bps/6/7-115200bps/7/12-230400bps/12/13-460800bps/13");
   }
 
   PushChar(0x0D);
@@ -186,6 +204,18 @@ err_t SNM(struct pbuf *p)
   return ERR_OK;
 }
 
+err_t SBR(struct pbuf *p)
+{
+  uchar b = 0;
+  err_t err = PopChar(p, &b);
+  if (err != ERR_OK) return err;
+
+  ibBaud = b;
+//  err = SaveBaud();
+//  if (err != ERR_OK) return err;
+
+  return ERR_OK;
+}
 
 
 static bool IsCmd(struct pbuf *p, const char *szCmd)
@@ -220,7 +250,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"7");
+    CmdString(pcb,p,addr,port,broadcast,"9");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -249,5 +279,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdIP(pcb,p,addr,port,broadcast,dwNetmask);
   } else if (IsCmd(p,"SNM")) {
     CmdIn(pcb,p,addr,port,broadcast,SNM);
+  } else if (IsCmd(p,"GBR")) {
+    CmdChar(pcb,p,addr,port,broadcast,ibBaud);
+  } else if (IsCmd(p,"SBR")) {
+    CmdIn(pcb,p,addr,port,broadcast,SBR);
   }
 }

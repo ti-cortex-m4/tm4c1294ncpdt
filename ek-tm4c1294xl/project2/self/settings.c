@@ -24,6 +24,8 @@ char                    szOwnerName[NAME_SIZE];
 
 uint                    wPort;
 
+uchar                   ibBaud;
+
 uchar                   pbMAC[6];
 
 

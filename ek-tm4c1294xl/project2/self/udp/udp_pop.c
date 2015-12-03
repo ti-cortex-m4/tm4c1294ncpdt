@@ -23,6 +23,18 @@ const static char mbCHARS[] = "0123456789abcdef";
 }
 
 
+err_t PopChar(struct pbuf *p, uchar *pb)
+{
+  uint w = 0;
+  err_t err = PopInt(p, &w);
+  if (err != ERR_OK) return err;
+
+  if (w >= 0x100) return ERR_ARG;
+  *pb = w;
+
+  return ERR_OK;
+}
+
 err_t PopInt(struct pbuf *p, uint *pw) // TODO
 {
   uchar *pb = p->payload;
