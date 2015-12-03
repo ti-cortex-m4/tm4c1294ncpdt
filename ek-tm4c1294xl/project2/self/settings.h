@@ -21,6 +21,7 @@ uchar   InitSettings(void);
 
 uchar   SaveSettings(void);
 
+uchar SaveIP(void);
 uchar SaveGateway(void);
 uchar SaveNetmask(void);
 uchar SaveDeviceName(void);

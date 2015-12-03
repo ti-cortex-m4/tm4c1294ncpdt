@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 SETTINGS.C
 
-
+TODO
 ------------------------------------------------------------------------------*/
 
 #include "main.h"
@@ -58,6 +58,11 @@ static uchar SaveString(char *sz, ulong dwAddr)
   return EEPROMProgram((ulong *)sz, dwAddr, 4*3);
 }
 
+
+uchar SaveIP(void)
+{
+  return SaveLong(&dwIP, EEPROM_IP);
+}
 
 uchar SaveGateway(void)
 {
