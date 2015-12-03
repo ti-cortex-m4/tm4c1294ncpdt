@@ -1943,7 +1943,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_Q
-    case 22: return ReadTimeDateQ();
+    case 22: return ReadTimeCanQ();
 #endif
 
 #ifndef SKIP_R

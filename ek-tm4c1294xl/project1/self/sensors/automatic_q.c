@@ -25,13 +25,13 @@ AUTOMATIC_Q.C
 
 #ifndef SKIP_Q
 
-time2   ReadTimeDateK(void);
+time2   ReadTimeCanK(void);
 
 
 
-time2   ReadTimeDateQ(void)
+time2   ReadTimeCanQ(void)
 {
-  return ReadTimeDateK();
+  return ReadTimeCanK();
 }
 
 
@@ -94,11 +94,11 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
       ti.bDay = GetDaysInMonthYM(ti.bYear, ti.bMonth);
     }
 
-    uchar i;
-    for (i=0; i<bMINORREPEATS; i++)
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
     {
       QueryCloseQ();
-      QueryEnergyDayQ();
+      QueryEnergyDayQ(ti);
 
       if (BccInput() == SER_GOODCHECK) break;
       if (IndexInBuff() == 10)
@@ -111,7 +111,7 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
       if (fKey == true) return GetDouble2Error();
     }
 
-    if (i == bMINORREPEATS) return GetDouble2Error();
+    if (r == bMINORREPEATS) return GetDouble2Error();
 
     ReadEnergyQ();
     QueryCloseQ();
@@ -121,11 +121,11 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
     ti.bYear = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
     ti.bMonth = ibMonth+1;
 
-    uchar i;
-    for (i=0; i<bMINORREPEATS; i++)
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
     {
       QueryCloseQ();
-      QueryEnergyMonQ();
+      QueryEnergyMonQ(ti);
 
       if (BccInput() == SER_GOODCHECK) break;
       if (IndexInBuff() == 10)
@@ -138,7 +138,7 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
       if (fKey == true) return GetDouble2Error();
     }
 
-    if (i == bMINORREPEATS) return GetDouble2Error();
+    if (r == bMINORREPEATS) return GetDouble2Error();
 
     ReadEnergyQ();
     QueryCloseQ();

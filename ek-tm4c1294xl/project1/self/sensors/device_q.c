@@ -15,7 +15,7 @@ DEVICE_Q!C
 //#include "../memory/mem_profile.h"
 //#include "../memory/mem_limits.h"
 #include "../serial/ports_stack.h"
-//#include "../serial/ports_devices.h"
+#include "../serial/ports_devices.h"
 //#include "../devices/devices.h"
 //#include "../devices/devices_time.h"
 //#include "../digitals/current/current_run.h"
@@ -27,6 +27,7 @@ DEVICE_Q!C
 //#include "../time/timedate.h"
 //#include "../time/calendar.h"
 //#include "../time/delay.h"
+#include "device_k.h"
 #include "device_q.h"
 
 
@@ -75,14 +76,14 @@ double  dbA,dbB;
   return 0;
 }
 
-/*
+
 void    QueryCloseQ(void)
 {
   QueryCloseK();
 }
 
 
-
+/*
 void    QueryOptionQ(void)
 {
 uchar   i;
@@ -136,7 +137,7 @@ void    QueryCorrectQ(void)
 
   BccQueryIO(1000, 2+16+1, 0);
 }
-
+*/
 
 void    QueryEnergyAbsQ(void)
 {
@@ -157,7 +158,7 @@ void    QueryEnergyAbsQ(void)
 }
 
 
-void    QueryEnergyDayQ(void)
+void    QueryEnergyDayQ(time  ti)
 {
   uchar n = PushAddress2Bcc();
 
@@ -168,11 +169,11 @@ void    QueryEnergyDayQ(void)
   PushChar1Bcc('0');
 
   PushChar1Bcc('(');
-  PushChar2Bcc(tiAlt.bDay);
+  PushChar2Bcc(ti.bDay);
   PushChar1Bcc('.');
-  PushChar2Bcc(tiAlt.bMonth);
+  PushChar2Bcc(ti.bMonth);
   PushChar1Bcc('.');
-  PushChar2Bcc(tiAlt.bYear);
+  PushChar2Bcc(ti.bYear);
   PushChar1Bcc(',');
   PushChar1Bcc('1');
   PushChar1Bcc(')');
@@ -182,7 +183,7 @@ void    QueryEnergyDayQ(void)
 }
 
 
-void    QueryEnergyMonQ(void)
+void    QueryEnergyMonQ(time  ti)
 {
   uchar n = PushAddress2Bcc();
 
@@ -193,9 +194,9 @@ void    QueryEnergyMonQ(void)
   PushChar1Bcc('0');
 
   PushChar1Bcc('(');
-  PushChar2Bcc(tiAlt.bMonth);
+  PushChar2Bcc(ti.bMonth);
   PushChar1Bcc('.');
-  PushChar2Bcc(tiAlt.bYear);
+  PushChar2Bcc(ti.bYear);
   PushChar1Bcc(',');
   PushChar1Bcc('1');
   PushChar1Bcc(')');
@@ -204,7 +205,7 @@ void    QueryEnergyMonQ(void)
   BccQueryIO(1+6*28+2, n+15+1, 6);
 }
 
-
+/*
 void    QueryEnergySpecQ(void)
 {
   InitPush(0);
