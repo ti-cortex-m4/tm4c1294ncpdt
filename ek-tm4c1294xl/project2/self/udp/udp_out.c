@@ -91,18 +91,6 @@ static err_t PopCode(struct pbuf *p)
 #endif
 
 
-void UDPOutput2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
-  p->tot_len = GetPushSize();
-  p->len = GetPushSize();
-
-//  if (addr->addr == IPADDR_BROADCAST)
-    udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
-//  else
-//    udp_sendto(pcb, p, addr, port);
-
-  pbuf_free(p);
-}
 
 #if 0
 // TODO

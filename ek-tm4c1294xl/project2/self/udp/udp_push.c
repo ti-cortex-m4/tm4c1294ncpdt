@@ -7,36 +7,27 @@ UDP_PUSH.C
 #include "../main.h"
 #include "udp_push.h"
 
+
+
+#define PUSH_SIZE       0x200
+
 extern int usprintf(char * restrict s, const char * restrict format, ...);
 
 
 
-static uchar            *pbPush;
-static uchar            ibPush;
+static uint             iwPush;
+static uchar            mbPush[PUSH_SIZE];
 
 
-
-err_t InitPush2(struct pbuf **pp, uchar bSize)
+void InitPush(void)
 {
-  //
-  // The incoming pbuf is no longer needed, so free it.
-  //
-  pbuf_free(*pp);
-
-  *pp = pbuf_alloc(PBUF_TRANSPORT, bSize, PBUF_RAM);
-  if (pp == NULL) return ERR_MEM;
-
-  pbPush = (*pp)->payload;
-  ibPush = 0;
-
-  return ERR_OK;
+  iwPush = 0;
 }
-
 
 
 void PushChar(uchar b)
 {
-  pbPush[ibPush++] = b;
+  mbPush[iwPush++] = b;
 }
 
 
@@ -140,9 +131,21 @@ void PushArrayString(uchar *pb, uchar bSize)
 }
 
 
-uchar GetPushSize(void)
+err_t UDPOutput2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) // TODO
 {
-  return ibPush;
+  pbuf_free(p);
+  p = pbuf_alloc(PBUF_TRANSPORT, iwPush, PBUF_RAM);
+  if (p == NULL) return ERR_MEM;
+
+  memcpy(p->payload, mbPush, iwPush);
+
+//  if (addr->addr == IPADDR_BROADCAST)
+    udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
+//  else
+//    udp_sendto(pcb, p, addr, port);
+
+  pbuf_free(p);
+  return ERR_OK;
 }
 
 

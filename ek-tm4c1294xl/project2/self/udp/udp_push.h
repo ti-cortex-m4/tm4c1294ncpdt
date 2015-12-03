@@ -8,8 +8,7 @@ UDP_PUSH.H
 
 
 
-err_t InitPush2(struct pbuf **pp, uchar bSize);
-
+void InitPush(void);
 void PushChar(uchar b);
 void PushIntLtl(uint w);
 void PushLongLtl(ulong dw);
@@ -21,4 +20,5 @@ void PushSfx(uint w);
 void PushArray(uchar *pb, uchar bSize);
 void PushArrayString(uchar *pb, uchar bSize);
 
-uchar GetPushSize(void);
+
+err_t UDPOutput2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
