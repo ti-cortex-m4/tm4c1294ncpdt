@@ -16,7 +16,7 @@ static uchar            ibPush;
 
 
 
-err_t InitPush(struct pbuf **pp, uchar bSize)
+err_t InitPush2(struct pbuf **pp, uchar bSize)
 {
   //
   // The incoming pbuf is no longer needed, so free it.

@@ -26,7 +26,7 @@ err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100); // TODO
+  err = InitPush2(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   PushChar('A');
@@ -44,7 +44,7 @@ err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100); // TODO
+  err = InitPush2(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   PushChar('A');
@@ -57,7 +57,7 @@ err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
 err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  err_t err = InitPush(&p, 100); // TODO
+  err_t err = InitPush2(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   PushString("A");
@@ -89,7 +89,7 @@ err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   err = in(p);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100); // TODO
+  err = InitPush2(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   PushChar('A');
@@ -110,7 +110,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   err = PopIntArg(p, &wArg);
   if (err != ERR_OK) return err;
 
-  err = InitPush(&p, 100); // TODO
+  err = InitPush2(&p, 100); // TODO
   if (err != ERR_OK) return err;
 
   if (wArg == 0) {
