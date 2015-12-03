@@ -1,9 +1,9 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC_Q!C
+AUTOMATIC_Q.H
 
 
 ------------------------------------------------------------------------------*/
 
 time2   ReadTimeDateQ(void);
 double2 ReadCntCurrQ(void);
-bool    ReadCntMonCanQ(uchar  ibMonth);
+double2 ReadCntMonCanQ(uchar  ibMonth);

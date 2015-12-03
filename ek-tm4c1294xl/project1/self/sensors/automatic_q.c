@@ -68,28 +68,29 @@ double2 ReadCntCurrQ(void)
 }
 
 
-/*
-bool    ReadCntMonCanQ(uchar  ibMonth)
+
+double2 ReadCntMonCanQ(uchar  ibMonth)
 {
-uchar   i;
+  time2 ti2 = ReadTimeCanK();
+  if (ti2.fValid == false) return GetDouble2Error();
 
-  if (ReadTimeDateK() == 0) return(0);
+  time ti = ti2.tiValue;
 
-  if (tiAlt.bMonth == ibMonth+1)
+  if (ti.bMonth == ibMonth+1)
   {
-    if (tiAlt.bDay > 1)
-      tiAlt.bDay--;
+    if (ti.bDay > 1)
+      ti.bDay--;
     else
     {
-      if (tiAlt.bMonth > 1)
-        tiAlt.bMonth--;
+      if (ti.bMonth > 1)
+        ti.bMonth--;
       else
       {
-        tiAlt.bMonth = 12;
-        tiAlt.bYear--;
+        ti.bMonth = 12;
+        ti.bYear--;
       }
 
-      tiAlt.bDay = DaysInMonth();
+      ti.bDay = DaysInMonth();
     }
 
     for (i=0; i<bMINORREPEATS; i++)
@@ -100,23 +101,24 @@ uchar   i;
       if (BccInput() == SER_GOODCHECK) break;
       if (IndexInBuff() == 10)
       {
-        sprintf(szLo, "сутки %02bu.%02bu.%02bu ?",tiAlt.bDay,tiAlt.bMonth,tiAlt.bYear);
+        sprintf(szLo, "сутки %02bu.%02bu.%02bu ?",ti.bDay,ti.bMonth,ti.bYear);
         Delay(1000);
         return(0);
       }
-      if (fKey == true) return(0);
+      if (fKey == true) return GetDouble2Error();
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (i == bMINORREPEATS) return GetDouble2Error();
 
     ReadEnergyQ();
     QueryCloseQ();
   }
   else
   {
-    tiAlt.bYear = (ibMonth+1 > tiAlt.bMonth) ? tiAlt.bYear-1 : tiAlt.bYear;
-    tiAlt.bMonth = ibMonth+1;
+    ti.bYear = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    ti.bMonth = ibMonth+1;
 
+    uchar i;
     for (i=0; i<bMINORREPEATS; i++)
     {
       QueryCloseQ();
@@ -125,14 +127,14 @@ uchar   i;
       if (BccInput() == SER_GOODCHECK) break;
       if (IndexInBuff() == 10)
       {
-        sprintf(szLo, " мес€ц %02bu.%02bu ?  ",tiAlt.bMonth,tiAlt.bYear);
+        sprintf(szLo, " мес€ц %02bu.%02bu ?  ",ti.bMonth,ti.bYear);
         Delay(1000);
         return(0);
       }
-      if (fKey == true) return(0);
+      if (fKey == true) return GetDouble2Error();
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (i == bMINORREPEATS) return GetDouble2Error();
 
     ReadEnergyQ();
     QueryCloseQ();
@@ -152,6 +154,6 @@ uchar   i;
 
   return(1);
 }
-*/
+
 #endif
 
