@@ -6,6 +6,8 @@ DEVICE_Q!H
 
 #define Q_LINES   4
 
+
+
 double  PopDoubleQ(void);
 
 void    QueryCloseQ(void);
