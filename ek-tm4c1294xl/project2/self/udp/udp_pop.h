@@ -8,7 +8,7 @@ UDP_POP.H
 
 
 
-err_t PopIntArg(struct pbuf *p, uint *pw);
-err_t PopIPArg(struct pbuf *p, ulong *pdw);
-err_t PopStringArg(struct pbuf *p, char *sz, uchar  bSize);
+err_t PopInt(struct pbuf *p, uint *pw);
+err_t PopIP(struct pbuf *p, ulong *pdw);
+err_t PopString(struct pbuf *p, char *sz, uchar  bSize);
 err_t PopSfx(struct pbuf *p, uint *pw);

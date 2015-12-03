@@ -94,7 +94,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   if (err != ERR_OK) return err;
 
   uint wArg = 0;
-  err = PopIntArg(p, &wArg);
+  err = PopInt(p, &wArg);
   if (err != ERR_OK) return err;
 
   InitPush();
@@ -125,7 +125,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
 err_t SON(struct pbuf *p)
 {
-  err_t err = PopStringArg(p, (char *)szOwnerName, NAME_SIZE);
+  err_t err = PopString(p, (char *)szOwnerName, NAME_SIZE);
   if (err != ERR_OK) return err;
 
   err = SaveOwnerName();
@@ -137,7 +137,7 @@ err_t SON(struct pbuf *p)
 
 err_t SDN(struct pbuf *p)
 {
-  err_t err = PopStringArg(p, (char *)szDeviceName, NAME_SIZE);
+  err_t err = PopString(p, (char *)szDeviceName, NAME_SIZE);
   if (err != ERR_OK) return err;
 
   err = SaveDeviceName();
@@ -151,7 +151,7 @@ err_t SDN(struct pbuf *p)
 err_t SGI(struct pbuf *p)
 {
   ulong dw = 0;
-  err_t err = PopIPArg(p, &dw);
+  err_t err = PopIP(p, &dw);
   if (err != ERR_OK) return err;
 
   dwGateway = dw;
@@ -165,7 +165,7 @@ err_t SGI(struct pbuf *p)
 err_t SNM(struct pbuf *p)
 {
   ulong dw = 0;
-  err_t err = PopIPArg(p, &dw);
+  err_t err = PopIP(p, &dw);
   if (err != ERR_OK) return err;
 
   dwNetmask = dw;
