@@ -1,4 +1,4 @@
-
+/*
 #ifndef SKIP_Q
 
     case DEV_START_Q2:
@@ -295,3 +295,4 @@
       break;
 
 #endif
+*/
