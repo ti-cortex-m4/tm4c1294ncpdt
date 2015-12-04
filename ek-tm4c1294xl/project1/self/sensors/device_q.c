@@ -305,11 +305,11 @@ void    QueryHeaderQ(void)
   tiDig = HouIndexToDate(dw);
 
 
-  szHi[10] = 'A' + ibMinor;
+  szHi[10] = 'A' + ibLineQ;
 
 
-  ibMinorMax = 4;
-  QueryHeaderQ_22(ibMinor);
+  bMaxLineQ = 4;
+  QueryHeaderQ_22(ibLineQ);
 }
 
 
@@ -333,7 +333,7 @@ void    MakeDataQ(uchar  ibHou)
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
-  for (i=0; i<ibMinorMax; i++)
+  for (i=0; i<bMaxLineQ; i++)
   {
     float fl = mpflBuffCanHou[i][ibHou];
     mpflEngFracDigCan[ibDig][i] += fl;
