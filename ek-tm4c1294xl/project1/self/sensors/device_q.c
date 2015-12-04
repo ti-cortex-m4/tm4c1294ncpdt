@@ -235,7 +235,7 @@ void    ReadEnergyQ(void)
   InitPop(1);
 
   uchar i;
-  for (i=0; i<Q_LINES; i++)
+  for (i=0; i<MAX_LINE_Q; i++)
   {
     mpdbChannelsC[i] = PopDoubleQ();
   }
@@ -400,7 +400,7 @@ uchar   j;
 void    ReadCurrentQ(void)
 {
   uchar i;
-  for (i=0; i<Q_LINES; i++)
+  for (i=0; i<MAX_LINE_Q; i++)
   {
     mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseHou[ibDig];
   }

@@ -59,7 +59,7 @@ double2 ReadCntCurrQ(void)
   double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
-  for (i=0; i<Q_LINES; i++)
+  for (i=0; i<MAX_LINE_Q; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
@@ -148,7 +148,7 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
   double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
-  for (i=0; i<Q_LINES; i++)
+  for (i=0; i<MAX_LINE_Q; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
