@@ -374,11 +374,11 @@ uchar   j;
   else
     j = 0;
 
-  uchar i;
-  for (i=j; i<48; i++)
+  uchar h;
+  for (h=j; h<48; h++)
   {
     ResetWatchdog();
-    MakeDataQ(47-i);
+    MakeDataQ(47-h);
 
     MakeSpecial(tiDig);
     if (MakeStopHou(0) == 0) return(0);
