@@ -250,7 +250,7 @@ void    InitHeaderQ(void)
   else
   {
     wBaseCurr = mpcwStartRelCan[ibDig];
-    sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
     DelayMsg();
   }
 
