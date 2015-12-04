@@ -323,14 +323,14 @@ void    QueryHeaderQ(void)
 }
 
 
-void    ReadHeaderQ(void)
+void    ReadHeaderQ(uchar  ibLine)
 {
   InitPop(1);
 
   uchar h;
   for (h=0; h<48; h++)
   {
-    mpflBuffCanHou[ibMinor][h] = PopDoubleQ()/2;
+    mpflBuffCanHou[ibLine][h] = PopDoubleQ()/2;
   }
 }
 

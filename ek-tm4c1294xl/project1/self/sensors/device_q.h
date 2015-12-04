@@ -21,7 +21,7 @@ void    ReadEnergyQ(void);
 
 void    InitHeaderQ(void);
 void    QueryHeaderQ(void);
-void    ReadHeaderQ(void);
+void    ReadHeaderQ(uchar  ibLine);
 bool    ReadDataQ(void);
 
 void    ReadCurrentQ(void);
