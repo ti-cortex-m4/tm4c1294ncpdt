@@ -8,6 +8,10 @@ DEVICE_Q!H
 
 
 
+extern  uchar                   ibLineQ, bMaxLineQ;
+
+
+
 double  PopDoubleQ(void);
 
 void    QueryCloseQ(void);

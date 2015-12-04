@@ -6,7 +6,6 @@ DEVICE_Q!C
 
 #include "../main.h"
 #include "../memory/mem_ports.h"
-//#include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_current.h"
 #include "../memory/mem_factors.h"
@@ -24,7 +23,6 @@ DEVICE_Q!C
 #include "../hardware/watchdog.h"
 #include "../display/display.h"
 #include "../keyboard/time/key_timedate.h"
-//#include "../time/timedate.h"
 #include "../time/calendar.h"
 #include "../time/delay.h"
 #include "device_k.h"
@@ -33,6 +31,10 @@ DEVICE_Q!C
 
 
 #ifndef SKIP_Q
+
+uchar                   ibLineQ, bMaxLineQ;
+
+
 
 double  PopDoubleQ(void)
 {
@@ -258,7 +260,7 @@ void    InitHeaderQ(void)
 }
 
 
-void    QueryHeaderQ_22(void)
+void    QueryHeaderQ_22(uchar  ibLine)
 {
   InitPush(0);
 
@@ -271,25 +273,13 @@ void    QueryHeaderQ_22(void)
   PushChar1Bcc('P');
   PushChar1Bcc('R');
 
-  if (ibMinor == 0)
+  switch (ibLine)
   {
-    PushChar1Bcc('0');
-    PushChar1Bcc('1');
-  }
-  else if (ibMinor == 1)
-  {
-    PushChar1Bcc('0');
-    PushChar1Bcc('2');
-  }
-  else if (ibMinor == 2)
-  {
-    PushChar1Bcc('0');
-    PushChar1Bcc('3');
-  }
-  else if (ibMinor == 3)
-  {
-    PushChar1Bcc('0');
-    PushChar1Bcc('4');
+    case 0: PushChar1Bcc('0'); PushChar1Bcc('1'); break;
+    case 1: PushChar1Bcc('0'); PushChar1Bcc('2'); break;
+    case 2: PushChar1Bcc('0'); PushChar1Bcc('3'); break;
+    case 3: PushChar1Bcc('0'); PushChar1Bcc('4'); break;
+    default: ASSERT(false);
   }
 
   PushChar1Bcc('(');
@@ -319,7 +309,7 @@ void    QueryHeaderQ(void)
 
 
   ibMinorMax = 4;
-  QueryHeaderQ_22();
+  QueryHeaderQ_22(ibMinor);
 }
 
 
