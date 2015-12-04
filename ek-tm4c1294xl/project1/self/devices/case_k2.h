@@ -242,8 +242,8 @@
             DoneProfile();
           else
           {
-            uchar i;
-            for (i=0; i<48; i++)
+            uchar h;
+            for (h=0; h<48; h++)
             {
               wBaseCurr++;
 
