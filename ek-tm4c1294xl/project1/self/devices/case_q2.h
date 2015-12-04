@@ -207,7 +207,7 @@
 
     case DEV_POSTCORRECT_Q2:
       iwMajor = 0;
-      ibMinor = 0;
+      ibLineQ = 0;
 
       InitHeaderQ();
 
@@ -244,7 +244,7 @@
         }
         else
         {
-          ReadHeaderQ(ibMinor);
+          ReadHeaderQ(ibLineQ);
 
           iwMajor = 0;                                  // если есть требуемая запись
           MakePause(DEV_POSTHEADER_Q2);
@@ -266,7 +266,7 @@
       break;
 
     case DEV_POSTHEADER_Q2:
-      if (++ibMinor < ibMinorMax)
+      if (++ibLineQ < bMaxLineQ)
       {
         cbRepeat = GetMaxRepeats();
         QueryHeaderQ();
@@ -274,7 +274,7 @@
       }
       else
       {
-        ibMinor = 0;
+        ibLineQ = 0;
         if (ReadDataQ() == 0)
           DoneProfile();
         else
