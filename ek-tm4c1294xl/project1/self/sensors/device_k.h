@@ -36,7 +36,7 @@ void    QueryCorrectK(void);
 void    QueryControlK(void);
 
 void    QueryHeaderK(void);
-void    ReadHeaderK(void);
+void    ReadHeaderK(uchar  ibLine);
 
 bool    ReadDataK(void);
 

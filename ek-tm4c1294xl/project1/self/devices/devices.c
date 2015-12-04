@@ -2340,7 +2340,7 @@ void    RunDevices(void)
         }
         else
         {
-          ReadHeaderK();
+          ReadHeaderK(ibMinor);
 
           iwMajor = 0;                                  // если есть требуемая запись
           MakePause(DEV_POSTHEADER_K2);
@@ -3257,7 +3257,7 @@ void    RunDevices(void)
         }
         else
         {
-          ReadHeaderQ();
+          ReadHeaderQ(ibMinor);
 
           iwMajor = 0;                                  // если есть требуемая запись
           MakePause(DEV_POSTHEADER_Q2);

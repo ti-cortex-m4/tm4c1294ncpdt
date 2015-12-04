@@ -261,7 +261,7 @@
         }
         else
         {
-          ReadHeaderK();
+          ReadHeaderK(ibMinor);
 
           iwMajor = 0;                                  // если есть требуемая запись
           MakePause(DEV_POSTHEADER_K2);
