@@ -284,20 +284,20 @@ void    ReadHeaderU(void)
 {
   InitPop(1);
 
-  uchar i;
-  for (i=0; i<48; i++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
-    mpflBuffCanHou[ibLineU][i] = PopDoubleQ()/2;
+    mpflBuffCanHou[ibLineU][h] = PopDoubleQ()/2;
   }
 }
 
 
 void    ReadHeaderU_SkipLine(uchar  ibLine)
 {
-  uchar i;
-  for (i=0; i<48; i++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
-    mpflBuffCanHou[ibLine][i] = 0;
+    mpflBuffCanHou[ibLine][h] = 0;
   }
 }
 

@@ -155,31 +155,31 @@
       }
       break;
 
-/*
+
     case DEV_POSTDATE_Q2:
-      wBuffD  = GetDayIndex();              // количество дней с начала года ведомого счётчика
-      dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
-
-      tiAlt = tiCurr;                       // текущие время/дата сумматора
-
-      if (wBuffD != GetDayIndex())
-      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
-      else
       {
-        if (dwBuffC > GetSecondIndex())                                         // необходима коррекция времени ведомого счётчика назад
-          ShowDeltaNeg();
-        else
-          ShowDeltaPos();
+        uint iwDay1 = GetDayIndexMD(tiDig.bMonth, tiDig.bDay);
+        ulong dwSecond1 = GetSecondIndex(tiDig);
 
-        if (dwBuffC < bMINORCORRECT_K)                                          // без коррекции
-        { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_Q2); }
-        else if (GetHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))           // простая коррекция
-        { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_Q2); }
+        uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
+        ulong dwSecond2 = GetSecondIndex(tiCurr);
+
+        if (iwDay1 != iwDay2)
+        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
-        { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
+        {
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
+
+          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_Q2); }
+          else if (GetCurrHouIndex() == (tiDig.bHour*2 + tiDig.bMinute/30))       // простая коррекция
+          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_Q2);  }
+          else
+          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
+        }
       }
       break;
-*/
+
 
     case DEV_CONTROL_Q2:
       cbRepeat = GetMaxRepeats();
@@ -225,8 +225,8 @@
             DoneProfile();
           else
           {
-            uchar i;
-            for (i=0; i<48; i++)
+            uchar h;
+            for (h=0; h<48; h++)
             {
               wBaseCurr++;
 

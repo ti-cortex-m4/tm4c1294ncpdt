@@ -507,10 +507,10 @@ void    ReadHeaderK(void)
 {
   InitPop(1);
 
-  uchar i;
-  for (i=0; i<48; i++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
-    mpflBuffCanHou[ibMinor][i] = PopDoubleK()/2;
+    mpflBuffCanHou[ibMinor][h] = PopDoubleK()/2;
   }
 }
 
