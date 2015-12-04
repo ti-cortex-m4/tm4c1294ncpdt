@@ -89,7 +89,7 @@ bool    MakeExtended0(void)
       Clear(); sprintf(szLo+4,"%2u из %-2u", i, bExt0Counter);
       Delay(((i % 5) + 1)*100);
 
-      time2 ti2 = ReadTimeDate_Short(ibDig);
+      time2 ti2 = ReadTimeCan_Short(ibDig);
       if (ti2.fValid == true)
       {
         mpdwExt0RepeatsPH[ibPort][GetCurrHouIndex()]++;
