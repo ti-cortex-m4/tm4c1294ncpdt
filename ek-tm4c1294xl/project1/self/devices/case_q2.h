@@ -266,7 +266,7 @@
       break;
 
     case DEV_POSTHEADER_Q2:
-      if (++ibLineQ < bMaxLineQ)
+      if (++ibLineQ < MAX_LINE_Q)
       {
         cbRepeat = GetMaxRepeats();
         QueryHeaderQ();

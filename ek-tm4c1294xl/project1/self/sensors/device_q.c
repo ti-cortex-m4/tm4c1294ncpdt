@@ -32,7 +32,7 @@ DEVICE_Q!C
 
 #ifndef SKIP_Q
 
-uchar                   ibLineQ, bMaxLineQ;
+uchar                   ibLineQ;
 
 
 
@@ -308,7 +308,6 @@ void    QueryHeaderQ(void)
   szHi[10] = 'A' + ibLineQ;
 
 
-  bMaxLineQ = 4;
   QueryHeaderQ_22(ibLineQ);
 }
 
@@ -333,7 +332,7 @@ void    MakeDataQ(uchar  ibHou)
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
-  for (i=0; i<bMaxLineQ; i++)
+  for (i=0; i<MAX_LINE_Q; i++)
   {
     float fl = mpflBuffCanHou[i][ibHou];
     mpflEngFracDigCan[ibDig][i] += fl;
