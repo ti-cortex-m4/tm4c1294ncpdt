@@ -8,7 +8,7 @@ DEVICE_Q!H
 
 
 
-extern  uchar                   ibLineQ, bMaxLineQ;
+extern  uchar                   ibLineQ;
 
 
 
