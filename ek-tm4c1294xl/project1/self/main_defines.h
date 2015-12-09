@@ -24,7 +24,7 @@ MAIN_DEFINES!H
 #define SKIP_N
 #define SKIP_O
 //#define SKIP_P
-#define SKIP_Q
+//#define SKIP_Q
 #define SKIP_R
 //#define SKIP_S
 #define SKIP_T

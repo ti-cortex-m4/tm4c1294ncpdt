@@ -19,13 +19,13 @@ AUTOMATIC_0!C
 #include "../../sensors/device_u.h"
 #include "../../console.h"
 #include "../../time/timedate.h"
-#include "extended_0.h"
+#include "automatic_0.h"
 
 
 
 #ifndef SKIP_A
 
-time2   ReadTimeDateA_Short(void)
+time2   ReadTimeCanA_Short(void)
 {
   DelayOff();
   QueryOpenA();
@@ -48,7 +48,7 @@ time2   ReadTimeDateA_Short(void)
 
 #ifndef SKIP_B
 
-time2   ReadTimeDateB_Short(void)
+time2   ReadTimeCanB_Short(void)
 {
   DelayOff();
   QueryOpenB();
@@ -71,7 +71,7 @@ time2   ReadTimeDateB_Short(void)
 
 #ifndef SKIP_C
 
-time2   ReadTimeDateC_Short(void)
+time2   ReadTimeCanC_Short(void)
 {
   DelayOff();
   QueryTimeC();
@@ -88,7 +88,7 @@ time2   ReadTimeDateC_Short(void)
 
 #ifndef SKIP_D
 
-bool    ReadTimeDateD_Short(void)
+bool    ReadTimeCanD_Short(void)
 {
   DelayOff();
   QueryOpenD();
@@ -123,7 +123,7 @@ bool    ReadTimeDateD_Short(void)
 
 #ifndef SKIP_E
 
-bool    ReadTimeDateE_Short(void)
+bool    ReadTimeCanE_Short(void)
 {
   if (diCurr.bAddress <= 16)
   {
@@ -158,7 +158,7 @@ bool    ReadTimeDateE_Short(void)
 
 #ifndef SKIP_F
 
-bool    ReadTimeDateF_Short(void)
+bool    ReadTimeCanF_Short(void)
 {
   QueryBreakF();
   QueryTimeF();
@@ -177,7 +177,7 @@ bool    ReadTimeDateF_Short(void)
 
 #ifndef SKIP_G
 
-bool    ReadTimeDateG_Short(void)
+bool    ReadTimeCanG_Short(void)
 {
   QueryOpenG();
 
@@ -203,7 +203,7 @@ bool    ReadTimeDateG_Short(void)
 
 #ifndef SKIP_H
 
-bool    ReadTimeDateH_Short(void)
+bool    ReadTimeCanH_Short(void)
 {
   QueryOpenH();
 
@@ -229,7 +229,7 @@ bool    ReadTimeDateH_Short(void)
 
 #ifndef SKIP_I
 
-bool    ReadTimeDateI_Short(void)
+bool    ReadTimeCanI_Short(void)
 {
   DelayOff();
   QueryTimeI();
@@ -248,7 +248,7 @@ bool    ReadTimeDateI_Short(void)
 
 #ifndef SKIP_K
 
-time2   ReadTimeDateK_Short(void)
+time2   ReadTimeCanK_Short(void)
 {
   QueryCloseK();
   QueryTimeK();
@@ -277,7 +277,7 @@ time2   ReadTimeDateK_Short(void)
 
 #ifndef SKIP_O
 
-bool    ReadTimeDateO_Short(void)
+bool    ReadTimeCanO_Short(void)
 {
   DelayOff();
   QueryTimeO();
@@ -296,7 +296,7 @@ bool    ReadTimeDateO_Short(void)
 
 #ifndef SKIP_P
 
-time2   ReadTimeDateP_Short(void)
+time2   ReadTimeCanP_Short(void)
 {
   QueryOpenP();
 
@@ -332,9 +332,9 @@ time2   ReadTimeDateP_Short(void)
 
 #ifndef SKIP_Q
 
-bool    ReadTimeDateQ_Short(void)
+time2   ReadTimeCanQ_Short(void)
 {
-  return ReadTimeDateK_Short();
+  return ReadTimeCanK_Short();
 }
 
 #endif
@@ -343,7 +343,7 @@ bool    ReadTimeDateQ_Short(void)
 
 #ifndef SKIP_S
 
-time2   ReadTimeDateS_Short(void)
+time2   ReadTimeCanS_Short(void)
 {
   DelayOff();
   QueryTimeS();
@@ -360,7 +360,7 @@ time2   ReadTimeDateS_Short(void)
 
 #ifndef SKIP_T
 
-bool    ReadTimeDateT_Short(void)
+bool    ReadTimeCanT_Short(void)
 {
   DelayOff();
   QueryTimeT();
@@ -379,9 +379,9 @@ bool    ReadTimeDateT_Short(void)
 
 #ifndef SKIP_U
 
-time2   ReadTimeDateU_Short(void)
+time2   ReadTimeCanU_Short(void)
 {
-  return ReadTimeDateK_Short();
+  return ReadTimeCanK_Short();
 }
 
 #endif
@@ -390,7 +390,7 @@ time2   ReadTimeDateU_Short(void)
 
 #ifndef SKIP_Z
 
-bool    ReadTimeDateZ_Short(void)
+bool    ReadTimeCanZ_Short(void)
 {
   DelayOff();
   QueryTimeZ();
@@ -407,7 +407,7 @@ bool    ReadTimeDateZ_Short(void)
 
 
 
-time2   ReadTimeDate_Short(uchar  ibCan)
+time2   ReadTimeCan_Short(uchar  ibCan)
 {
   LoadCurrDigital(ibCan);
   ibPort = diCurr.ibPort;
@@ -416,48 +416,48 @@ time2   ReadTimeDate_Short(uchar  ibCan)
   {
 #ifndef SKIP_A
     case 15:
-    case 1:  return ReadTimeDateA_Short();
+    case 1:  return ReadTimeCanA_Short();
 #endif
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return ReadTimeDateB_Short();
+    case 2:  return ReadTimeCanB_Short();
 
     case 12: return GetTime2(tiCurr, true);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return ReadTimeDateC_Short();
+    case 3:  return ReadTimeCanC_Short();
 #endif
 
 #ifndef SKIP_D
-    case 4:  return( ReadTimeDateD_Short() );  break;
+    case 4:  return( ReadTimeCanD_Short() );  break;
 #endif
 
 #ifndef SKIP_E
     case 7:
-    case 5:  return( ReadTimeDateE_Short() );  break;
+    case 5:  return( ReadTimeCanE_Short() );  break;
 #endif
 
 #ifndef SKIP_F
-    case 6:  return( ReadTimeDateF_Short() );  break;
+    case 6:  return( ReadTimeCanF_Short() );  break;
 #endif
 
 #ifndef SKIP_G
-    case 9:  return( ReadTimeDateG_Short() );  break;
+    case 9:  return( ReadTimeCanG_Short() );  break;
 #endif
 
 #ifndef SKIP_H
-    case 10: return( ReadTimeDateH_Short() );  break;
+    case 10: return( ReadTimeCanH_Short() );  break;
 #endif
 
 #ifndef SKIP_I
-    case 11: return( ReadTimeDateI_Short() );  break;
+    case 11: return( ReadTimeCanI_Short() );  break;
 #endif
 
 #ifndef SKIP_K
     case 14:
-    case 13: return ReadTimeDateK_Short();
+    case 13: return ReadTimeCanK_Short();
 #endif
 
 #ifndef SKIP_L
@@ -474,15 +474,15 @@ time2   ReadTimeDate_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_O
-    case 20: return( ReadTimeDateO_Short() );  break;
+    case 20: return( ReadTimeCanO_Short() );  break;
 #endif
 
 #ifndef SKIP_P
-    case 21: return ReadTimeDateP_Short();
+    case 21: return ReadTimeCanP_Short();
 #endif
 
 #ifndef SKIP_Q
-    case 22: return( ReadTimeDateQ_Short() );  break;
+    case 22: return ReadTimeCanQ_Short();
 #endif
 
 #ifndef SKIP_R
@@ -490,16 +490,16 @@ time2   ReadTimeDate_Short(uchar  ibCan)
 #endif
 
 #ifndef SKIP_S
-    case 24: return ReadTimeDateS_Short();
+    case 24: return ReadTimeCanS_Short();
 #endif
 
 #ifndef SKIP_T
-    case 25: return( ReadTimeDateT_Short() );  break;
+    case 25: return( ReadTimeCanT_Short() );  break;
 #endif
 
 #ifndef SKIP_U
     case 26:
-    case 28: return ReadTimeDateU_Short();
+    case 28: return ReadTimeCanU_Short();
 #endif
 
     default: return GetTime2Error();

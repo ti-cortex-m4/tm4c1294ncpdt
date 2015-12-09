@@ -4,6 +4,13 @@ DEVICE_U!H
 
 ------------------------------------------------------------------------------*/
 
+#ifndef SKIP_U
+
+// нижний порог коррекции времени, секунд
+#define bMINORCORRECT_U 3
+
+
+
 extern uchar                   ibLineU, bMaxLineU;
 
 
@@ -33,3 +40,6 @@ void    QueryParamU1(void);
 void    QueryParamU2(void);
 void    QueryParamU3(void);
 void    QueryParamU4(void);
+
+#endif
+

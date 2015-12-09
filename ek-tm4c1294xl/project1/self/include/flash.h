@@ -74,7 +74,7 @@ FLASH!H
 #endif
 
 
-#include "flash_enum.txt"
+#include "../generated/flash_enum.txt"
 
 
 #if (LOCAL_END >= wPAGES)

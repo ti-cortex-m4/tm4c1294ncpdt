@@ -253,12 +253,12 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
   }
 
 
-  double dbKtrans = mpdbTransCnt[ibDig];
+  double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
   for (i=0; i<4; i++)
   {
-    mpdbChannelsC[i] *= dbKtrans;
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
 
@@ -304,12 +304,12 @@ status  ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
   QueryCloseK();
 
 
-  double dbKtrans = mpdbTransCnt[ibDig];
+  double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
   for (i=0; i<4; i++)
   {
-    mpdbChannelsC[i] *= dbKtrans;
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
 

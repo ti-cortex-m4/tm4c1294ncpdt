@@ -29,12 +29,14 @@ AUTOMATIC2!C
 #include "device_c.h"
 #include "device_k.h"
 #include "device_p.h"
+#include "device_q.h"
 #include "device_u.h"
 #include "automatic_a.h"
 #include "automatic_b.h"
 #include "automatic_c.h"
 #include "automatic_k.h"
 #include "automatic_p.h"
+#include "automatic_q.h"
 #include "automatic_s.h"
 #include "automatic_u.h"
 #include "automatic_v.h"
@@ -420,11 +422,11 @@ double2 ReadCntCurrK(uchar  bMaxLines)
   QueryCloseK();
 
 
-  double dbKtrans = mpdbTransCnt[ibDig];
+  double dbTrans = mpdbTransCnt[ibDig];
 
   for (i=0; i<bMaxLines; i++)
   {
-    mpdbChannelsC[i] *= dbKtrans;
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
 
@@ -1833,7 +1835,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_Q
-    case 22: return( ReadSensorQ() );  break;
+    case 22: return ReadCntCurrQ();
 #endif
 
 #ifndef SKIP_R
@@ -1941,7 +1943,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_Q
-    case 22: return( ReadTimeDateQ() );  break;
+    case 22: return ReadTimeCanQ();
 #endif
 
 #ifndef SKIP_R
@@ -2064,7 +2066,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_Q
-    case 22: return( ReadCntMonCanQ(ibMon) ); break;
+    case 22: return ReadCntMonCanQ(ibMon);
 #endif
 
 #ifndef SKIP_R

@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE_U!C
 
- Энергомера СЕ301
+Энергомера СЕ301
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -219,8 +219,7 @@ void    InitHeaderU(void)
   else
   {
     wBaseCurr = mpcwStartAbs16Can[ibDig];
-    Clear();
-    sprintf(szLo+3,"начало %2u",wBaseCurr);
+    Clear(); sprintf(szLo+3,"начало %2u",wBaseCurr);
     if (boShowMessages == true) DelayMsg();
   }
 
@@ -285,20 +284,20 @@ void    ReadHeaderU(void)
 {
   InitPop(1);
 
-  uchar i;
-  for (i=0; i<48; i++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
-    mpflBuffCanHou[ibLineU][i] = PopDoubleQ()/2;
+    mpflBuffCanHou[ibLineU][h] = PopDoubleQ()/2;
   }
 }
 
 
 void    ReadHeaderU_SkipLine(uchar  ibLine)
 {
-  uchar i;
-  for (i=0; i<48; i++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
-    mpflBuffCanHou[ibLine][i] = 0;
+    mpflBuffCanHou[ibLine][h] = 0;
   }
 }
 
@@ -341,11 +340,11 @@ uchar   j;
 
   ulong dwHouIndex = DateToHouIndex(tiDig);
 
-  uchar i;
-  for (i=j; i<48; i++)
+  uchar h;
+  for (h=j; h<48; h++)
   {
     ResetWatchdog();
-    MakeDataU(47-i);
+    MakeDataU(47-h);
 
     MakeSpecial(tiDig);
     if (MakeStopHou(0) == 0) return(0);

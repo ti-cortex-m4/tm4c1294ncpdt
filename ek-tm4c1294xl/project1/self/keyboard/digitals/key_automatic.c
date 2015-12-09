@@ -160,6 +160,11 @@ uchar   i;
           case 25: if (AutomaticT() != 1) bRes = 0xEE; break;
 #endif
 
+#ifndef SKIP_U
+          case 28:
+          case 26: if (AutomaticK() != 1) bRes = 0xEE; break;
+#endif
+
 #ifndef SKIP_V
           case 27: if (AutomaticV() != 1) bRes = 0xEE; break;
 #endif
