@@ -484,6 +484,7 @@ typedef enum
   DEV_POSTOPTION_Q2     =  0x1606,
   DEV_PASSWORD_Q2       =  0x1607,
   DEV_POSTPASSWORD_Q2   =  0x1608,
+  DEV_PREVTIME_Q2       =  0x1613,
   DEV_TIME_Q2           =  0x1609,
   DEV_POSTTIME_Q2       =  0x160A,
   DEV_DATE_Q2           =  0x160B,

@@ -3067,7 +3067,12 @@ void    RunDevices(void)
 
     case DEV_OPTION_Q2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPTION_Q2);
+      {
+        if (HasPasswordK())
+          MakePause(DEV_POSTOPTION_Q2);
+        else
+          MakePause(DEV_POSTPASSWORD_Q2);
+      }
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -3092,12 +3097,7 @@ void    RunDevices(void)
 
     case DEV_PASSWORD_Q2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-        if ((boControlQ != false) && (fCurrCtrl == true))
-          MakePause(DEV_POSTPASSWORD_Q2);
-        else
-          MakePause(DEV_POSTCORRECT_Q2);
-      }
+        MakePause(DEV_POSTPASSWORD_Q2);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -3113,6 +3113,13 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTPASSWORD_Q2:
+      if ((boControlQ != false) && (fCurrCtrl == true))
+        MakePause(DEV_PREVTIME_Q2);
+      else
+        MakePause(DEV_POSTCORRECT_Q2);
+      break;
+
+    case DEV_PREVTIME_Q2:
       ShowPercent(53);
 
       cbRepeat = GetMaxRepeats();
