@@ -93,7 +93,7 @@ static void QueryHeaderU_Plc_Inner(void)
 
 void    QueryHeaderU_Plc(void)
 {
-	HideCurrTime(1);
+  HideCurrTime(1);
 
   ulong dw = DateToHouIndex(tiDigPrev);
   dw -= wBaseCurr;
