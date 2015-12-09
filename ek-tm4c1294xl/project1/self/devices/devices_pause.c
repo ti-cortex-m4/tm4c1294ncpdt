@@ -42,6 +42,7 @@ void    DevicesPause(void)
       {
         if ((GetCurr() == DEV_OPENCANAL_K2) || (GetCurr() == DEV_OPENCANAL_K3))
         {
+          MonitorIn();
           uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((b == '\r') || (b == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
@@ -51,6 +52,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_PASSWORD_K2)
         {
+          MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -59,6 +61,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_POSTCONTROL_K2)
         {
+          MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -67,6 +70,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_HEADER_K2)
         {
+          MonitorIn();
           if (IndexInBuff() == 10)
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -83,6 +87,7 @@ void    DevicesPause(void)
       {
         if ((GetCurr() == DEV_OPENCANAL_Q2) || (GetCurr() == DEV_OPENCANAL_Q3))
         {
+          MonitorIn();
           uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((b == '\r') || (b == '\n'))
             mpSerial[ibPort] = SER_GOODCHECK;
@@ -92,6 +97,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_PASSWORD_Q2)
         {
+          MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -100,6 +106,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_POSTCONTROL_Q2)
         {
+          MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
             mpSerial[ibPort] = SER_GOODCHECK;
           else
@@ -108,6 +115,7 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_HEADER_Q2)
         {
+          MonitorIn();
           if (IndexInBuff() == 10)
             mpSerial[ibPort] = SER_GOODCHECK;
           else
