@@ -34,7 +34,7 @@ void    OutNvramStack(void)
   PushChar(0x0D); PushChar(0x0A);
   PushChar(0x0D); PushChar(0x0A);
 
-  #include "../include/out_nvram.txt"
+  #include "../generated/out_nvram.txt"
 
   Output(4000);
 }

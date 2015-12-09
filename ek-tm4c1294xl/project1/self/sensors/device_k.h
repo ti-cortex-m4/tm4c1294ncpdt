@@ -6,6 +6,11 @@ DEVICE_K.H
 
 #ifndef SKIP_K
 
+// нижний порог коррекции времени, секунд
+#define bMINORCORRECT_K 3
+
+
+
 uchar   PushAddress2Bcc(void);
 void    PushLineBcc(uchar  ibLine);
 
@@ -36,7 +41,7 @@ void    QueryCorrectK(void);
 void    QueryControlK(void);
 
 void    QueryHeaderK(void);
-void    ReadHeaderK(void);
+void    ReadHeaderK(uchar  ibLine);
 
 bool    ReadDataK(void);
 

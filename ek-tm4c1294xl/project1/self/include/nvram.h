@@ -42,7 +42,7 @@ NVRAM!H
 #define bNVRAM_FOOTER   (uchar)(3+2+6+2)
 
 
-#include "nvram_enum.txt"
+#include "../generated/nvram_enum.txt"
 
 
 #endif

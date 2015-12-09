@@ -215,11 +215,10 @@ void    ReadEnergyK(uchar  ibLine)
 
 void    QueryOptionK(void)
 {
-uchar   i;
-
   InitPush(0);
   PushChar1Bcc(0x06);
 
+  uchar i;
   switch (mppoPorts[ diCurr.ibPort ].ibBaud)
   {
     case 0:  i = '2'; break;
@@ -504,14 +503,14 @@ void    QueryHeaderK(void)
 }
 
 
-void    ReadHeaderK(void)
+void    ReadHeaderK(uchar  ibLine)
 {
   InitPop(1);
 
-  uchar i;
-  for (i=0; i<48; i++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
-    mpflBuffCanHou[ibMinor][i] = PopDoubleK()/2;
+    mpflBuffCanHou[ibLine][h] = PopDoubleK()/2;
   }
 }
 
@@ -555,11 +554,11 @@ uchar   j;
   else
     j = 0;
 
-  uchar i;
-  for (i=j; i<48; i++)
+  uchar h;
+  for (h=j; h<48; h++)
   {
     ResetWatchdog();
-    MakeDataK(47-i);
+    MakeDataK(47-h);
 
     MakeSpecial(tiDig);
     if (MakeStopHou(0) == 0) return(0);

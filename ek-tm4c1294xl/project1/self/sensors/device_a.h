@@ -1,10 +1,21 @@
 /*------------------------------------------------------------------------------
 DEVICE_A!H
-              
+
 
 ------------------------------------------------------------------------------*/
 
 #ifndef SKIP_A
+
+// верхний порог коррекции времени, секунд
+#define bMAJORCORRECT_A 110
+
+// верхний порог коррекции времени, секунд
+#define wLIMITCORRECT_A 1800
+
+//
+#define bBLOCKS_A       10
+
+
 
 bool    ReadAddressA(void);
 bool    ReadResultA(void);
@@ -38,4 +49,3 @@ bool    ReadDataA_Plus(uchar  ibBlock);
 void    ReadCurrentA(void);
 
 #endif
-

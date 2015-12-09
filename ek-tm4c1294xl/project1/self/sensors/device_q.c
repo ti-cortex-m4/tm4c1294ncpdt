@@ -1,30 +1,40 @@
 /*------------------------------------------------------------------------------
 DEVICE_Q!C
 
-
+Энергомера СЕ304
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../serial/ports.h"
-//#include        "xdata.h"
-//#include        "timer0.h"
-//#include        "delay.h"
-//#include        "display.h"
-//#include        "engine.h"
-//#include        "energy.h"
-//#include        "watchdog.h"
-//#include        "timedate.h"
-//#include        "ports.h"
-//#include        "limits.h"
-//#include        "digitals.h"
-//#include        "essential.h"
-//#include        "device_k.h"
-//#include        "device_q.h"
-//#include        "_timedate.h"
+#include "../memory/mem_ports.h"
+#include "../memory/mem_digitals.h"
+#include "../memory/mem_current.h"
+#include "../memory/mem_factors.h"
+#include "../memory/mem_realtime.h"
+#include "../memory/mem_energy_spec.h"
+#include "../memory/mem_profile.h"
+#include "../memory/mem_limits.h"
+#include "../serial/ports_stack.h"
+#include "../serial/ports_devices.h"
+#include "../devices/devices.h"
+#include "../devices/devices_time.h"
+#include "../digitals/current/current_run.h"
+#include "../digitals/limits.h"
+#include "../special/special.h"
+#include "../hardware/watchdog.h"
+#include "../display/display.h"
+#include "../keyboard/time/key_timedate.h"
+#include "../time/calendar.h"
+#include "../time/delay.h"
+#include "device_k.h"
+#include "device_q.h"
 
 
 
-//#ifndef SKIP_Q
+#ifndef SKIP_Q
+
+uchar                   ibLineQ;
+
+
 
 double  PopDoubleQ(void)
 {
@@ -68,7 +78,7 @@ double  dbA,dbB;
   return 0;
 }
 
-/*
+
 void    QueryCloseQ(void)
 {
   QueryCloseK();
@@ -78,12 +88,11 @@ void    QueryCloseQ(void)
 
 void    QueryOptionQ(void)
 {
-uchar   i;
-
   InitPush(0);
   PushChar1Bcc(0x06);
 
-  switch (mppoPorts[ diCurr.ibPort ].ibSpeed)
+  uchar i;
+  switch (mppoPorts[ diCurr.ibPort ].ibBaud)
   {
     case 0:  i = '2'; break;
     case 1:  i = '3'; break;
@@ -131,6 +140,7 @@ void    QueryCorrectQ(void)
 }
 
 
+
 void    QueryEnergyAbsQ(void)
 {
   uchar n = PushAddress2Bcc();
@@ -150,7 +160,7 @@ void    QueryEnergyAbsQ(void)
 }
 
 
-void    QueryEnergyDayQ(void)
+void    QueryEnergyDayQ(time  ti)
 {
   uchar n = PushAddress2Bcc();
 
@@ -161,11 +171,11 @@ void    QueryEnergyDayQ(void)
   PushChar1Bcc('0');
 
   PushChar1Bcc('(');
-  PushChar2Bcc(tiAlt.bDay);
+  PushChar2Bcc(ti.bDay);
   PushChar1Bcc('.');
-  PushChar2Bcc(tiAlt.bMonth);
+  PushChar2Bcc(ti.bMonth);
   PushChar1Bcc('.');
-  PushChar2Bcc(tiAlt.bYear);
+  PushChar2Bcc(ti.bYear);
   PushChar1Bcc(',');
   PushChar1Bcc('1');
   PushChar1Bcc(')');
@@ -175,7 +185,7 @@ void    QueryEnergyDayQ(void)
 }
 
 
-void    QueryEnergyMonQ(void)
+void    QueryEnergyMonQ(time  ti)
 {
   uchar n = PushAddress2Bcc();
 
@@ -186,9 +196,9 @@ void    QueryEnergyMonQ(void)
   PushChar1Bcc('0');
 
   PushChar1Bcc('(');
-  PushChar2Bcc(tiAlt.bMonth);
+  PushChar2Bcc(ti.bMonth);
   PushChar1Bcc('.');
-  PushChar2Bcc(tiAlt.bYear);
+  PushChar2Bcc(ti.bYear);
   PushChar1Bcc(',');
   PushChar1Bcc('1');
   PushChar1Bcc(')');
@@ -224,16 +234,15 @@ void    QueryEnergySpecQ(void)
 
 void    ReadEnergyQ(void)
 {
-uchar   i;
-
   InitPop(1);
 
-  for (i=0; i<Q_LINES; i++)
+  uchar i;
+  for (i=0; i<MAX_LINE_Q; i++)
   {
-    PopFloatQ();
-    mpreChannelsB[i] = reBuffA;
+    mpdbChannelsC[i] = PopDoubleQ();
   }
 }
+
 
 
 void    InitHeaderQ(void)
@@ -243,7 +252,7 @@ void    InitHeaderQ(void)
   else
   {
     wBaseCurr = mpcwStartRelCan[ibDig];
-    sprintf(szLo," начало %04u:%02bu ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    Clear(); sprintf(szLo+1,"начало %04u:%02u",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
     DelayMsg();
   }
 
@@ -251,7 +260,7 @@ void    InitHeaderQ(void)
 }
 
 
-void    QueryHeaderQ_22(void)
+void    QueryHeaderQ_22(uchar  ibLine)
 {
   InitPush(0);
 
@@ -264,25 +273,13 @@ void    QueryHeaderQ_22(void)
   PushChar1Bcc('P');
   PushChar1Bcc('R');
 
-  if (ibMinor == 0)
+  switch (ibLine)
   {
-    PushChar1Bcc('0');
-    PushChar1Bcc('1');
-  }
-  else if (ibMinor == 1)
-  {
-    PushChar1Bcc('0');
-    PushChar1Bcc('2');
-  }
-  else if (ibMinor == 2)
-  {
-    PushChar1Bcc('0');
-    PushChar1Bcc('3');
-  }
-  else if (ibMinor == 3)
-  {
-    PushChar1Bcc('0');
-    PushChar1Bcc('4');
+    case 0: PushChar1Bcc('0'); PushChar1Bcc('1'); break;
+    case 1: PushChar1Bcc('0'); PushChar1Bcc('2'); break;
+    case 2: PushChar1Bcc('0'); PushChar1Bcc('3'); break;
+    case 3: PushChar1Bcc('0'); PushChar1Bcc('4'); break;
+    default: ASSERT(false);
   }
 
   PushChar1Bcc('(');
@@ -303,34 +300,26 @@ void    QueryHeaderQ(void)
 {
   HideCurrTime(1);
 
-
-  tiAlt = tiDigPrev;
-  dwBuffC = DateToHouIndex();
-
-  dwBuffC -= wBaseCurr;
-
-  HouIndexToDate(dwBuffC);
-  tiDig = tiAlt;
+  ulong dw = DateToHouIndex(tiDigPrev);
+  dw -= wBaseCurr;
+  tiDig = HouIndexToDate(dw);
 
 
-  szHi[10] = 'A' + ibMinor;
+  szHi[10] = 'A' + ibLineQ;
 
 
-  ibMinorMax = 4;
-  QueryHeaderQ_22();
+  QueryHeaderQ_22(ibLineQ);
 }
 
 
-void    ReadHeaderQ(void)
+void    ReadHeaderQ(uchar  ibLine)
 {
-uchar   j;
-
   InitPop(1);
 
-  for (j=0; j<48; j++)
+  uchar h;
+  for (h=0; h<48; h++)
   {
-    PopFloatQ();
-    mpreBuffCanHou[ibMinor][j] = reBuffA/2;
+    mpflBuffCanHou[ibLine][h] = PopDoubleQ()/2;
   }
 }
 
@@ -339,33 +328,32 @@ uchar   j;
 void    MakeDataQ(uchar  ibHou)
 {
   ShowProgressDigHou();
-  reBuffB = mprePulseHou[ibDig];
 
-  for (ibCan=0; ibCan<ibMinorMax; ibCan++)
+  double dbPulse = mpdbPulseHou[ibDig];
+
+  uchar i;
+  for (i=0; i<MAX_LINE_Q; i++)
   {
-    reBuffA = mpreBuffCanHou[ibCan][ibHou];
-    mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
+    float fl = mpflBuffCanHou[i][ibHou];
+    mpflEngFracDigCan[ibDig][i] += fl;
 
-    wBuffD = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
-    mpwChannels[ibCan] = wBuffD;
+    uint w = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulse);
+    mpwChannels[i] = w;
 
-    mpreEngFracDigCan[ibDig][ibCan] -= (float)wBuffD/reBuffB;
+    mpflEngFracDigCan[ibDig][i] -= (float)w/dbPulse;
   }
 
   wBaseCurr++;
 }
 
 
-
-bit     ReadDataQ(void)
+bool    ReadDataQ(void)
 {
-uchar   i,j;
+uchar   j;
 
-  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",           // показываем время/дату часового блока
-          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
-  tiAlt = tiDig;
-  if (SearchDefHouIndex() == 0) return(1);
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
   if ((tiDig.bDay   == tiCurr.bDay)   &&
@@ -375,23 +363,19 @@ uchar   i,j;
   else
     j = 0;
 
-  for (i=j; i<48; i++)
+  uchar h;
+  for (h=j; h<48; h++)
   {
     ResetWatchdog();
-    MakeDataQ(47-i);
+    MakeDataQ(47-h);
 
-    tiAlt = tiDig;
-    MakeSpecial();
+    MakeSpecial(tiDig);
     if (MakeStopHou(0) == 0) return(0);
 
 
-    tiAlt = tiDigPrev;
-    dwBuffC = DateToHouIndex();
-
-    dwBuffC -= wBaseCurr;
-
-    HouIndexToDate(dwBuffC);
-    tiDig = tiAlt;
+    ulong dw = DateToHouIndex(tiDigPrev);
+    dw -= wBaseCurr;
+    tiDig = HouIndexToDate(dw);
 
 
     iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
@@ -401,20 +385,17 @@ uchar   i,j;
 }
 
 
+
 void    ReadCurrentQ(void)
 {
-uchar   i;
-
-  reBuffB = mprePulseHou[ibDig];
-
-  for (i=0; i<Q_LINES; i++)
+  uchar i;
+  for (i=0; i<MAX_LINE_Q; i++)
   {
-    dwBuffC = mpreChannelsB[i] * reBuffB;
-    mpdwBaseDig[i] = dwBuffC;
+    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseHou[ibDig];
   }
 
   MakeCurrent();
 }
-*/
-//#endif
+
+#endif
 
