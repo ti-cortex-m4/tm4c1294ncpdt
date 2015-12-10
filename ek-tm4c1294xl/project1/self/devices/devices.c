@@ -2117,7 +2117,10 @@ void    RunDevices(void)
 
     case DEV_OPENCANAL_K2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPENCANAL_K2);
+      {
+        ReadOpenK();
+        MakeLongPause(DEV_POSTOPENCANAL_K2, 1);
+      }
       else
       {
         if (cbRepeat == 0) ErrorProfile();
