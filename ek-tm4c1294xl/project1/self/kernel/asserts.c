@@ -29,7 +29,7 @@ void    InitAsserts(void)
 
 void    ResetAsserts(void)
 {
-	dwAssertsIdx = 0;
+  dwAssertsIdx = 0;
   SaveCache(&chAssertsIdx);
 
   memset(&mpAsserts, 0, sizeof(mpAsserts));
