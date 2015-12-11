@@ -10,29 +10,25 @@ PERIOD30.C
 #include "period30.h"
 
 
-#define VALUE1_IDX      0
-#define VALUE1_VALUES   0
+
+period30                vPeriod30;
+static uint             wPeriod30Idx;
+static uint             wSeconds;
+
+
+static cache const      chPeriod30Idx = {PERIOD30_IDX, &wPeriod30Idx, sizeof(uint)};
 
 
 
-static ulong            dwPeriod30Idx;
-static uint             wPeriod30Seconds;
-static period30         mpPeriod30;
-
-
-cache const             chPeriod30Idx = {VALUE1_IDX, &dwPeriod30Idx, sizeof(ulong)};
-
-
-
-bool    SavePeriod30(uint  i)
+static bool SavePeriod30(uint  wIdx)
 {
-  return SaveArrayX(VALUE1_VALUES, sizeof(mpPeriod30), i, &mpPeriod30);
+  return SaveArrayX(PERIOD30_VALUES, sizeof(vPeriod30), wIdx, &vPeriod30);
 }
 
 
-bool    LoadPeriod30(uint  i)
+static bool LoadPeriod30(uint  wIdx)
 {
-  return LoadArrayX(VALUE1_VALUES, sizeof(mpPeriod30), i, &mpPeriod30);
+  return LoadArrayX(PERIOD30_VALUES, sizeof(vPeriod30), wIdx, &vPeriod30);
 }
 
 
@@ -40,19 +36,20 @@ bool    LoadPeriod30(uint  i)
 void    InitPeriod30(void)
 {
   LoadCache(&chPeriod30Idx);
-  wPeriod30Seconds = 0;
+
+  wSeconds = 0;
 }
 
 
 void    ResetPeriod30(void)
 {
-  dwPeriod30Idx = 0;
+  wPeriod30Idx = 0;
   SaveCache(&chPeriod30Idx);
 
 
-  memset(&mpPeriod30, 0, sizeof(mpPeriod30));
+  memset(&vPeriod30, 0, sizeof(vPeriod30));
 
-  uchar i;
+  uint i;
   for (i=0; i<PERIOD30_SIZE; i++)
   {
     SavePeriod30(i);
@@ -65,27 +62,29 @@ void    NextSecPeriod30(void)
 {
   if (fActive == true)
   {
-    wPeriod30Seconds = 0;
+    wSeconds++;
   }
 }
 
 
 void    NextHhrPeriod30(void)
 {
-  if ((fActive == true) && (wPeriod30Seconds != 30*60))
+  if (fActive == true)
   {
-    dwPeriod30Idx++;
-    SaveCache(&chPeriod30Idx);
+    if (wSeconds != 30*60)
+    {
+      wPeriod30Idx++;
+      SaveCache(&chPeriod30Idx);
 
 
-    memset(&mpPeriod30, 0, sizeof(mpPeriod30));
-    mpPeriod30.iwIdx = dwPeriod30Idx;
-    mpPeriod30.tiCurr = tiCurr;
-    mpPeriod30.tiPrev = tiPrev;
-    mpPeriod30.cwSecond = wPeriod30Seconds;
+      vPeriod30.iwIdx = wPeriod30Idx;
+      vPeriod30.tiCurr = tiCurr;
+      vPeriod30.tiPrev = tiPrev;
+      vPeriod30.cwSecond = wSeconds;
 
-    SavePeriod30(dwPeriod30Idx);
+      SavePeriod30(wPeriod30Idx);
+    }
 
-    wPeriod30Seconds = 0;
+    wSeconds = 0;
   }
 }
