@@ -6,6 +6,7 @@ PERIOD30.C
 
 #include "../main.h"
 #include "../nvram/cache.h"
+#include "../serial/ports.h"
 #include "realtime.h"
 #include "period30.h"
 
@@ -87,4 +88,34 @@ void    NextHhrPeriod30(void)
 
     wSeconds = 0;
   }
+}
+
+
+
+uint    PushPeriod30()
+{
+  uchar bSize = 0;
+
+  bSize += PushIntBig(vPeriod30.iwIdx);
+  bSize += PushTime(vPeriod30.tiCurr);
+  bSize += PushTime(vPeriod30.tiPrev);
+  bSize += PushIntBig(vPeriod30.cwSecond);
+
+  return bSize;
+}
+
+
+void    OutPeriod30(void)
+{
+  InitPushCRC();
+  uint wSize = 0;
+
+  uint i;
+  for (i=0; i<PERIOD30_SIZE; i++)
+  {
+    LoadPeriod30(i);
+    wSize += PushPeriod30();
+  }
+
+  Output(wSize);
 }
