@@ -23,4 +23,7 @@ typedef struct
 } period30;
 
 
+extern period30                vPeriod30;
+
+
 #endif
