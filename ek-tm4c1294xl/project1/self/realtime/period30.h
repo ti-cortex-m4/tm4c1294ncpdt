@@ -19,7 +19,8 @@ typedef struct
   uint          iwIdx;
   time          tiPrev;
   time          tiCurr;
-  uint          cwSecond;
+  time          tiRTC;
+  uint          cwSeconds;
 } period30;
 
 

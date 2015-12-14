@@ -7,17 +7,18 @@ PERIOD30.C
 #include "../main.h"
 #include "../nvram/cache.h"
 #include "../serial/ports.h"
+#include "../time/rtc.h"
 #include "realtime.h"
 #include "period30.h"
 
 
 
 period30                vPeriod30;
-static uint             wPeriod30Idx;
-static uint             wSeconds;
+static uint             iwPeriod30Idx;
+static uint             cwSeconds;
 
 
-static cache const      chPeriod30Idx = {PERIOD30_IDX, &wPeriod30Idx, sizeof(uint)};
+static cache const      chPeriod30Idx = {PERIOD30_IDX, &iwPeriod30Idx, sizeof(uint)};
 
 
 
@@ -38,13 +39,13 @@ void    InitPeriod30(void)
 {
   LoadCache(&chPeriod30Idx);
 
-  wSeconds = 0;
+  cwSeconds = 0;
 }
 
 
 void    ResetPeriod30(void)
 {
-  wPeriod30Idx = 0;
+  iwPeriod30Idx = 0;
   SaveCache(&chPeriod30Idx);
 
 
@@ -63,7 +64,7 @@ void    NextSecPeriod30(void)
 {
   if (fActive == true)
   {
-    wSeconds++;
+    cwSeconds++;
   }
 }
 
@@ -72,21 +73,22 @@ void    NextHhrPeriod30(void)
 {
   if (fActive == true)
   {
-    if (wSeconds != 30*60)
+    if (cwSeconds != 30*60)
     {
-      wPeriod30Idx++;
+      iwPeriod30Idx++;
       SaveCache(&chPeriod30Idx);
 
 
-      vPeriod30.iwIdx = wPeriod30Idx;
-      vPeriod30.tiCurr = tiCurr;
+      vPeriod30.iwIdx = iwPeriod30Idx;
       vPeriod30.tiPrev = tiPrev;
-      vPeriod30.cwSecond = wSeconds;
+      vPeriod30.tiCurr = tiCurr;
+      vPeriod30.tiRTC = *GetCurrTimeDate();
+      vPeriod30.cwSeconds = cwSeconds;
 
-      SavePeriod30(wPeriod30Idx);
+      SavePeriod30(iwPeriod30Idx);
     }
 
-    wSeconds = 0;
+    cwSeconds = 0;
   }
 }
 
@@ -97,9 +99,10 @@ uint    PushPeriod30()
   uchar bSize = 0;
 
   bSize += PushIntBig(vPeriod30.iwIdx);
-  bSize += PushTime(vPeriod30.tiCurr);
   bSize += PushTime(vPeriod30.tiPrev);
-  bSize += PushIntBig(vPeriod30.cwSecond);
+  bSize += PushTime(vPeriod30.tiCurr);
+  bSize += PushTime(vPeriod30.tiRTC);
+  bSize += PushIntBig(vPeriod30.cwSeconds);
 
   return bSize;
 }
