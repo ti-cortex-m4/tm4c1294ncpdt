@@ -25,12 +25,14 @@ static cache const      chPeriod30Idx = {PERIOD30_IDX, &iwPeriod30Idx, sizeof(ui
 
 static bool SavePeriod30(uint  wIdx)
 {
+  ASSERT(wIdx < PERIOD30_SIZE);
   return SaveArrayX(PERIOD30_VALUES, sizeof(period30), wIdx, &vPeriod30);
 }
 
 
 static bool LoadPeriod30(uint  wIdx)
 {
+  ASSERT(wIdx < PERIOD30_SIZE);
   return LoadArrayX(PERIOD30_VALUES, sizeof(period30), wIdx, &vPeriod30);
 }
 
@@ -81,10 +83,10 @@ void    NextHhrPeriod30(void)
       vPeriod30.tiRTC = *GetCurrTimeDate();
       vPeriod30.cwSeconds = cwSeconds;
 
-      SavePeriod30(iwPeriod30Idx);
+      SavePeriod30(iwPeriod30Idx % PERIOD30_SIZE);
 
 
-      iwPeriod30Idx = (iwPeriod30Idx + 1) % PERIOD30_SIZE;
+      iwPeriod30Idx++;
       SaveCache(&chPeriod30Idx);
     }
 
