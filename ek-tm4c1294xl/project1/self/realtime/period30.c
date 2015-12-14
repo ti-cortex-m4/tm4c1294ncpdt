@@ -77,7 +77,7 @@ void    NextHhrPeriod30(void)
   {
     if (cwSeconds != 1*60)
     {
-      period30 v;
+      static period30 v;
       v.iwIdx = iwPeriod30Idx;
       v.tiPrev = tiPrev;
       v.tiCurr = tiCurr;
@@ -121,7 +121,7 @@ void    OutPeriod30(void)
   uint i;
   for (i=0; i<PERIOD30_SIZE; i++)
   {
-    period30 v;
+    static period30 v;
     LoadPeriod30(i, &v);
     wSize += PushPeriod30(&v);
   }
