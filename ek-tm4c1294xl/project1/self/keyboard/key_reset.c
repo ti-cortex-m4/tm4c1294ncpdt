@@ -40,6 +40,7 @@ KEY_RESET!C
 #include "../time/correct1.h"
 #include "../time/correct2.h"
 #include "../time/correct3.h"
+#include "../realtime/period30.h"
 
 
 
@@ -103,6 +104,9 @@ void    key_SetReset(void)
 //          ResetExtended4();
 //          ResetExtended6();
           ResetDevices(false);
+
+          ResetPeriod30();
+
           ResetCurrent2();
 //          ResetCheckupCustom();
 
@@ -161,6 +165,9 @@ void    key_SetReset(void)
           ResetUni();
           ResetFlow();
           ResetMonitor();
+
+          ResetPeriod30();
+
 //          ResetCurrent();
           ResetCurrent2();
 //          ResetProfiles();
