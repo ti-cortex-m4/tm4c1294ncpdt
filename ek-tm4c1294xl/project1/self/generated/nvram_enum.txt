@@ -249,7 +249,7 @@ typedef enum
   TX_DELAY              = MONITOR_LOG_CHAR8 + sizeof(bool) + bNVRAM_FOOTER,
 
   PERIOD30_VALUES       = TX_DELAY + sizeof(mpwTxDelay) + bNVRAM_FOOTER,
-  PERIOD30_IDX          = PERIOD30_VALUES + (sizeof(vPeriod30) + bNVRAM_FOOTER)*PERIOD30_SIZE,
+  PERIOD30_IDX          = PERIOD30_VALUES + (sizeof(period30) + bNVRAM_FOOTER)*PERIOD30_SIZE,
 
   NVRAM_END             = PERIOD30_IDX + sizeof(uint) + bNVRAM_FOOTER
 } nvram;
