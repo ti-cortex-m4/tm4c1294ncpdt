@@ -23,6 +23,7 @@ RESPONSE252_CRC,C
 #include "../output/profile/out_profile_link.h"
 #include "../serial/slave_modem.h"
 #include "../realtime/throughput.h"
+#include "../realtime/period30.h"
 
 
 
@@ -66,6 +67,7 @@ void    Response252_CRC(void)
     case 21: OutSlaveModem(); break;
 
     case 22: OutThroughput(); break;
+    case 23: OutPeriod30(); break;
 
     default:
       ShowResponseCRC(bSTA_BADCOMMAND);

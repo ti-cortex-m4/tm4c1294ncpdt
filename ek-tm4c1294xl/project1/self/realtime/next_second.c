@@ -14,6 +14,7 @@ NEXT_SECOND!C
 #include "../digitals/profile/profile_run.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/schedule/ctrl_hours.h"
+#include "period30.h"
 #include "realtime.h"
 
 
@@ -51,4 +52,6 @@ void    NextSecond(void)
   {
     EverySecondP();
   }
+
+  NextSecPeriod30();
 }
