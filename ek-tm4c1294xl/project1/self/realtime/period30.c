@@ -6,6 +6,7 @@ PERIOD30.C
 
 #include "../main.h"
 #include "../nvram/cache.h"
+#include "../nvram/cache2.h"
 #include "../serial/ports.h"
 #include "../time/rtc.h"
 #include "realtime.h"
@@ -13,7 +14,7 @@ PERIOD30.C
 
 
 
-period30                vPeriod30;
+static period30         vPeriod30;
 static uint             iwPeriod30Idx;
 static uint             cwSeconds;
 
@@ -37,7 +38,7 @@ static bool LoadPeriod30(uint  wIdx)
 
 void    InitPeriod30(void)
 {
-  LoadCache(&chPeriod30Idx);
+  LoadCacheInt(&chPeriod30Idx, 0, PERIOD30_SIZE-1, 0);
 
   cwSeconds = 0;
 }
@@ -45,8 +46,7 @@ void    InitPeriod30(void)
 
 void    ResetPeriod30(void)
 {
-  iwPeriod30Idx = 0;
-  SaveCache(&chPeriod30Idx);
+  SaveCacheInt(&chPeriod30Idx, 0);
 
 
   memset(&vPeriod30, 0, sizeof(vPeriod30));
@@ -75,7 +75,7 @@ void    NextHhrPeriod30(void)
   {
     if (cwSeconds != 30*60)
     {
-      iwPeriod30Idx++;
+      iwPeriod30Idx = (iwPeriod30Idx + 1) % PERIOD30_SIZE;
       SaveCache(&chPeriod30Idx);
 
 
