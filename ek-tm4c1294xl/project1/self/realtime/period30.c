@@ -14,7 +14,6 @@ PERIOD30.C
 
 
 
-static period30         vPeriod30;
 static uint             iwPeriod30Idx;
 static uint             cwSeconds;
 
@@ -23,17 +22,17 @@ static cache const      chPeriod30Idx = {PERIOD30_IDX, &iwPeriod30Idx, sizeof(ui
 
 
 
-static bool SavePeriod30(uint  wIdx)
+static bool SavePeriod30(uint  wIdx, period30  *pv)
 {
   ASSERT(wIdx < PERIOD30_SIZE);
-  return SaveArrayX(PERIOD30_VALUES, sizeof(period30), wIdx, &vPeriod30);
+  return SaveArrayX(PERIOD30_VALUES, sizeof(period30), wIdx, pv);
 }
 
 
-static bool LoadPeriod30(uint  wIdx)
+static bool LoadPeriod30(uint  wIdx, period30  *pv)
 {
   ASSERT(wIdx < PERIOD30_SIZE);
-  return LoadArrayX(PERIOD30_VALUES, sizeof(period30), wIdx, &vPeriod30);
+  return LoadArrayX(PERIOD30_VALUES, sizeof(period30), wIdx, pv);
 }
 
 
@@ -51,12 +50,13 @@ void    ResetPeriod30(void)
   SaveCacheInt(&chPeriod30Idx, 0);
 
 
-  memset(&vPeriod30, 0, sizeof(vPeriod30));
+  period30 v;
+  memset(&v, 0, sizeof(v));
 
   uint i;
   for (i=0; i<PERIOD30_SIZE; i++)
   {
-    SavePeriod30(i);
+    SavePeriod30(i, &v);
   }
 }
 
@@ -77,13 +77,14 @@ void    NextHhrPeriod30(void)
   {
     if (cwSeconds != 1*60)
     {
-      vPeriod30.iwIdx = iwPeriod30Idx;
-      vPeriod30.tiPrev = tiPrev;
-      vPeriod30.tiCurr = tiCurr;
-      vPeriod30.tiRTC = *GetCurrTimeDate();
-      vPeriod30.cwSeconds = cwSeconds;
+      period30 v;
+      v.iwIdx = iwPeriod30Idx;
+      v.tiPrev = tiPrev;
+      v.tiCurr = tiCurr;
+      v.tiRTC = *GetCurrTimeDate();
+      v.cwSeconds = cwSeconds;
 
-      SavePeriod30(iwPeriod30Idx % PERIOD30_SIZE);
+      SavePeriod30(iwPeriod30Idx % PERIOD30_SIZE, &v);
 
 
       iwPeriod30Idx++;
@@ -96,15 +97,15 @@ void    NextHhrPeriod30(void)
 
 
 
-static uint PushPeriod30(void)
+static uint PushPeriod30(period30  *pv)
 {
   uchar bSize = 0;
 
-  bSize += PushIntBig(vPeriod30.iwIdx);
-  bSize += PushTime(vPeriod30.tiPrev);
-  bSize += PushTime(vPeriod30.tiCurr);
-  bSize += PushTime(vPeriod30.tiRTC);
-  bSize += PushIntBig(vPeriod30.cwSeconds);
+  bSize += PushIntBig(pv->iwIdx);
+  bSize += PushTime(pv->tiPrev);
+  bSize += PushTime(pv->tiCurr);
+  bSize += PushTime(pv->tiRTC);
+  bSize += PushIntBig(pv->cwSeconds);
 
   return bSize;
 }
@@ -120,8 +121,9 @@ void    OutPeriod30(void)
   uint i;
   for (i=0; i<PERIOD30_SIZE; i++)
   {
-    LoadPeriod30(i);
-    wSize += PushPeriod30();
+    period30 v;
+    LoadPeriod30(i, &v);
+    wSize += PushPeriod30(&v);
   }
 
   Output(wSize);
