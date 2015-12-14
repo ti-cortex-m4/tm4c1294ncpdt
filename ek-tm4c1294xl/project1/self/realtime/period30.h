@@ -11,7 +11,7 @@ PERIOD30.H
 #include "../main.h"
 
 
-#define PERIOD30_SIZE   5
+#define PERIOD30_SIZE   100
 
 
 typedef struct

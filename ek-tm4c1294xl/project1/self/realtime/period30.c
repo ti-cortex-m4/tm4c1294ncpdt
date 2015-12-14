@@ -75,7 +75,7 @@ void    NextHhrPeriod30(void)
 {
   if (fActive == true)
   {
-    if (cwSeconds != 1*60)
+    if (cwSeconds != 30*60)
     {
       static period30 v;
       v.iwIdx = iwPeriod30Idx;
