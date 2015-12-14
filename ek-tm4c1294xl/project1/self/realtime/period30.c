@@ -25,13 +25,13 @@ static cache const      chPeriod30Idx = {PERIOD30_IDX, &iwPeriod30Idx, sizeof(ui
 
 static bool SavePeriod30(uint  wIdx)
 {
-  return SaveArrayX(PERIOD30_VALUES, sizeof(vPeriod30), wIdx, &vPeriod30);
+  return SaveArrayX(PERIOD30_VALUES, sizeof(period30), wIdx, &vPeriod30);
 }
 
 
 static bool LoadPeriod30(uint  wIdx)
 {
-  return LoadArrayX(PERIOD30_VALUES, sizeof(vPeriod30), wIdx, &vPeriod30);
+  return LoadArrayX(PERIOD30_VALUES, sizeof(period30), wIdx, &vPeriod30);
 }
 
 
@@ -94,7 +94,7 @@ void    NextHhrPeriod30(void)
 
 
 
-uint    PushPeriod30()
+static uint PushPeriod30(void)
 {
   uchar bSize = 0;
 

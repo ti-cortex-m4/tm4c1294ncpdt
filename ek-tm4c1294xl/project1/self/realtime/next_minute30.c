@@ -16,6 +16,7 @@ NEXT_MINUTE30!C
 #include "../energy2.h"
 #include "../kernel/arrays_buff.h"
 #include "next_params_time.h"
+#include "period30.h"
 #include "realtime_storage.h"
 
 
@@ -43,6 +44,7 @@ void    NextMinute30(void)
   NextHouLimitsAux();
   NextHouDiagram();
   NextHhrInputModeReset();
+  NextHhrPeriod30();
 
   if (boMntParams == false) NextParamsTime();
 }
