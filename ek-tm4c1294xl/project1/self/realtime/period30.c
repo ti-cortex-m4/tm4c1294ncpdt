@@ -40,7 +40,7 @@ static bool LoadPeriod30(uint  wIdx)
 
 void    InitPeriod30(void)
 {
-  LoadCacheInt(&chPeriod30Idx, 0, PERIOD30_SIZE-1, 0);
+  LoadCache(&chPeriod30Idx);
 
   cwSeconds = 0;
 }
@@ -75,7 +75,7 @@ void    NextHhrPeriod30(void)
 {
   if (fActive == true)
   {
-    if (cwSeconds != 3*60)
+    if (cwSeconds != 1*60)
     {
       vPeriod30.iwIdx = iwPeriod30Idx;
       vPeriod30.tiPrev = tiPrev;
