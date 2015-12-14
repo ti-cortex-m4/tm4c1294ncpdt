@@ -87,6 +87,7 @@ MAIN,C
 #include "realtime/realtime.h"
 #include "realtime/realtime_init.h"
 #include "realtime/throughput.h"
+#include "realtime/period30.h"
 #include "output/response_crc.h"
 
 
@@ -155,6 +156,7 @@ int     main(void)
   InitDefects_Custom();
   InitRealtime_Custom();
   InitThroughput();
+  InitPeriod30();
   PrintStop();
 
   InitDisplay();
