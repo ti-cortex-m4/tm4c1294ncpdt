@@ -73,12 +73,8 @@ void    NextHhrPeriod30(void)
 {
   if (fActive == true)
   {
-    if (cwSeconds != 30*60)
+    if (cwSeconds != 3*60)
     {
-      iwPeriod30Idx = (iwPeriod30Idx + 1) % PERIOD30_SIZE;
-      SaveCache(&chPeriod30Idx);
-
-
       vPeriod30.iwIdx = iwPeriod30Idx;
       vPeriod30.tiPrev = tiPrev;
       vPeriod30.tiCurr = tiCurr;
@@ -86,6 +82,10 @@ void    NextHhrPeriod30(void)
       vPeriod30.cwSeconds = cwSeconds;
 
       SavePeriod30(iwPeriod30Idx);
+
+
+      iwPeriod30Idx = (iwPeriod30Idx + 1) % PERIOD30_SIZE;
+      SaveCache(&chPeriod30Idx);
     }
 
     cwSeconds = 0;
@@ -112,6 +112,8 @@ void    OutPeriod30(void)
 {
   InitPushCRC();
   uint wSize = 0;
+
+  wSize += PushIntBig(iwPeriod30Idx);
 
   uint i;
   for (i=0; i<PERIOD30_SIZE; i++)
