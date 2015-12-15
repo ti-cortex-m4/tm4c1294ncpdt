@@ -41,12 +41,11 @@ uchar   InitSettings(void)
 }
 
 
-
-static uchar SaveLong(ulong *pdw, ulong dwAddr)
+static uchar SaveChar(uchar *pb, ulong dwAddr)
 {
-  return EEPROMProgram(pdw, dwAddr, 4);
+  ulong dw = *pb;
+  return EEPROMProgram(&dw, dwAddr, 4);
 }
-
 
 static uchar SaveInt(uint *pw, ulong dwAddr)
 {
@@ -54,11 +53,16 @@ static uchar SaveInt(uint *pw, ulong dwAddr)
   return EEPROMProgram(&dw, dwAddr, 4);
 }
 
+static uchar SaveLong(ulong *pdw, ulong dwAddr)
+{
+  return EEPROMProgram(pdw, dwAddr, 4);
+}
 
 static uchar SaveString(char *sz, ulong dwAddr)
 {
   return EEPROMProgram((ulong *)sz, dwAddr, 4*3);
 }
+
 
 
 uchar SaveIP(void)
@@ -125,11 +129,12 @@ uchar    SaveSettings(void)
 
 
 
-static void LoadLong(ulong *pdw, ulong dwAddr)
+static void LoadChar(uchar *pb, ulong dwAddr)
 {
-  EEPROMRead(pdw, dwAddr, 4);
+  ulong dw;
+  EEPROMRead(&dw, dwAddr, 4);
+  *pb = dw % 0x100;
 }
-
 
 static void LoadInt(uint *pw, ulong dwAddr)
 {
@@ -138,6 +143,10 @@ static void LoadInt(uint *pw, ulong dwAddr)
   *pw = dw % 0x10000;
 }
 
+static void LoadLong(ulong *pdw, ulong dwAddr)
+{
+  EEPROMRead(pdw, dwAddr, 4);
+}
 
 static void LoadString(char *sz, ulong dwAddr)
 {
@@ -158,6 +167,7 @@ uchar   LoadSettings(void)
     LoadLong(&dwNetmask, EEPROM_NETMASK);
 
     LoadInt(&wPort, EEPROM_PORT);
+    LoadChar(&ibBaud, EEPROM_BAUD);
 
     LoadString(szDeviceName, EEPROM_DEVICE_NAME);
     LoadString(szOwnerName, EEPROM_OWNER_NAME);
@@ -169,6 +179,7 @@ uchar   LoadSettings(void)
     dwNetmask = inet_addr("1.1.168.192");
 
     wPort = 1001;
+    ibBaud = 6; // 9600bps
 
     memset(&szDeviceName,  0, sizeof(szDeviceName));
     sprintf(szDeviceName, "Device");
