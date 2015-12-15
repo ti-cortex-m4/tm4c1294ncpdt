@@ -9,6 +9,7 @@ TODO
 #include "driverlib/sysctl.h"
 #include "lwip/inet.h"
 #include "generated/eeprom.h"
+#include "settings_eeprom.h"
 #include "settings.h"
 
 
@@ -41,29 +42,6 @@ uchar   InitSettings(void)
   if (err != EEPROM_INIT_OK) return err;
 
   return LoadSettings();
-}
-
-
-static uchar SaveChar(uchar *pb, ulong dwAddr)
-{
-  ulong dw = *pb;
-  return EEPROMProgram(&dw, dwAddr, 4);
-}
-
-static uchar SaveInt(uint *pw, ulong dwAddr)
-{
-  ulong dw = *pw;
-  return EEPROMProgram(&dw, dwAddr, 4);
-}
-
-static uchar SaveLong(ulong *pdw, ulong dwAddr)
-{
-  return EEPROMProgram(pdw, dwAddr, 4);
-}
-
-static uchar SaveString(char *sz, ulong dwAddr)
-{
-  return EEPROMProgram((ulong *)sz, dwAddr, 4*3);
 }
 
 
@@ -131,32 +109,6 @@ uchar    SaveSettings(void)
 
 
   return 0;
-}
-
-
-
-static void LoadChar(uchar *pb, ulong dwAddr)
-{
-  ulong dw;
-  EEPROMRead(&dw, dwAddr, 4);
-  *pb = dw % 0x100;
-}
-
-static void LoadInt(uint *pw, ulong dwAddr)
-{
-  ulong dw;
-  EEPROMRead(&dw, dwAddr, 4);
-  *pw = dw % 0x10000;
-}
-
-static void LoadLong(ulong *pdw, ulong dwAddr)
-{
-  EEPROMRead(pdw, dwAddr, 4);
-}
-
-static void LoadString(char *sz, ulong dwAddr)
-{
-  EEPROMRead((ulong *)sz, dwAddr, 4*3);
 }
 
 
