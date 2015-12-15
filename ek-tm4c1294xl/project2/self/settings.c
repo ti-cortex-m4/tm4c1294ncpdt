@@ -86,6 +86,11 @@ uchar SaveOwnerName(void)
   return SaveString(szOwnerName, EEPROM_OWNER_NAME);
 }
 
+uchar SaveBaud(void)
+{
+  return 0;
+}
+
 
 uchar    SaveSettings(void)
 {
