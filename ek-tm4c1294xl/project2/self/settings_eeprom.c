@@ -6,9 +6,6 @@ SETTINGS_EEPROM.C
 
 #include "main.h"
 #include "driverlib/eeprom.h"
-//#include "driverlib/sysctl.h"
-//#include "lwip/inet.h"
-//#include "generated/eeprom.h"
 #include "settings_eeprom.h"
 
 
