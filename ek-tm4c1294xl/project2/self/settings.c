@@ -203,5 +203,5 @@ uchar   LoadSettings(void)
 
 ulong GetBaud(void)
 {
-  return (ibBaud < BAUDS_SIZE) ? mdwBauds[ibBaud] : DEFAULT_BAUD;
+  return (ibBaud < BAUDS_SIZE) ? mdwBauds[ibBaud] : mdwBauds[DEFAULT_BAUD];
 }
