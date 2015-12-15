@@ -23,16 +23,36 @@ const static char mbCHARS[] = "0123456789abcdef";
 }
 
 
-err_t PopCharHex(struct pbuf *p, uchar *pb, uchar ibStart)
+err_t PopCharDec(struct pbuf *p, uchar *pb, uchar ibStart)
 {
   uint w = 0;
-  err_t err = PopIntHex(p, &w, ibStart);
+  err_t err = PopIntDec(p, &w, ibStart);
   if (err != ERR_OK) return err;
 
   if (w >= 0x100) return ERR_ARG;
   *pb = w;
 
   return ERR_OK;
+}
+
+err_t PopIntDec(struct pbuf *p, uint *pw, uchar ibStart) // TODO
+{
+  uchar *pb = p->payload;
+
+  *pw = 0;
+
+  uchar i;
+  for (i=ibStart; i<p->len; i++)
+  {
+    if (pb[i] == '|') return ERR_OK;
+
+    char b = DecodeChar(pb[i],10);
+    if (b == 0xFF) return ERR_VAL;
+
+    *pw = *pw*10 + b;
+  }
+
+  return ERR_ARG;
 }
 
 err_t PopIntHex(struct pbuf *p, uint *pw, uchar ibStart) // TODO
