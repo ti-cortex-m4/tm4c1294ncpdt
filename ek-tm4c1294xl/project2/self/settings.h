@@ -28,5 +28,6 @@ uchar SaveGateway(void);
 uchar SaveNetmask(void);
 uchar SaveDeviceName(void);
 uchar SaveOwnerName(void);
+uchar SaveBaud(void);
 
 uchar   LoadSettings(void);

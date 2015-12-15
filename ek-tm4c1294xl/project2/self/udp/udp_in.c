@@ -108,7 +108,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   if (err != ERR_OK) return err;
 
   uint wArg = 0;
-  err = PopInt(p, &wArg);
+  err = PopInt(p, &wArg, 2);
   if (err != ERR_OK) return err;
 
   InitPush();
@@ -130,7 +130,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   } else if (wArg == 7) {
     PushString("AI=$CHANNEL1;D=Channel1;T=GROUP");
   } else if (wArg == 8) {
-    PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=8-150bps/8/9-300bps/9/10-600bps/10/0-1200bps/0/1-2400bps/1/2-4800bps/2/3-9600bps/3/4-19200bps/4/11-28800bps/11/5-38400bps/5/6-57600bps/6/7-115200bps/7/12-230400bps/12/13-460800bps/13");
+    PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=150bps/0/300bps/1/600bps/2/1200bps/3/2400bps/4/4800bps/5/9600bps/6/19200bps/7/28800bps/8/38400bps/9/57600bps/10/115200bps/11/230400bps/12/460800bps/13");
   }
 
   PushChar(0x0D);
@@ -207,12 +207,12 @@ err_t SNM(struct pbuf *p)
 err_t SBR(struct pbuf *p)
 {
   uchar b = 0;
-  err_t err = PopChar(p, &b);
+  err_t err = PopChar(p, &b, 3);
   if (err != ERR_OK) return err;
 
   ibBaud = b;
-//  err = SaveBaud();
-//  if (err != ERR_OK) return err;
+  err = SaveBaud();
+  if (err != ERR_OK) return err;
 
   return ERR_OK;
 }
