@@ -9,12 +9,14 @@ UDP_POP.C
 
 
 
-static uchar DecodeChar(uchar b, uchar bMax) // TODO
+static uchar DecodeChar(uchar b, uchar bRadix) // TODO
 {
 const static char mbCHARS[] = "0123456789abcdef";
 
+//  ASSERT((bRadix == 10) || (bRadix == 16));
+
   uchar i;
-  for (i=0; i<bMax; i++)
+  for (i=0; i<bRadix; i++)
   {
     if (mbCHARS[i] == b) return i;
   }
@@ -23,10 +25,41 @@ const static char mbCHARS[] = "0123456789abcdef";
 }
 
 
-err_t PopCharDec(struct pbuf *p, uchar *pb, uchar ibStart)
+static err_t PopInt(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix) // TODO
+{
+  uchar *pb = p->payload;
+
+  *pw = 0;
+
+  uchar i;
+  for (i=ibStart; i<p->len; i++)
+  {
+    if (pb[i] == '|') return ERR_OK;
+
+    char b = DecodeChar(pb[i],bRadix);
+    if (b == 0xFF) return ERR_VAL;
+
+    *pw = *pw*bRadix + b;
+  }
+
+  return ERR_ARG;
+}
+
+err_t PopIntDec(struct pbuf *p, uint *pw, uchar ibStart)
+{
+  return PopInt(p, pw, ibStart, 10);
+}
+
+err_t PopIntHex(struct pbuf *p, uint *pw, uchar ibStart)
+{
+  return PopInt(p, pw, ibStart, 0x10);
+}
+
+
+static err_t PopChar(struct pbuf *p, uchar *pb, uchar ibStart, uchar bRadix)
 {
   uint w = 0;
-  err_t err = PopIntDec(p, &w, ibStart);
+  err_t err = PopInt(p, &w, ibStart, bRadix);
   if (err != ERR_OK) return err;
 
   if (w >= 0x100) return ERR_ARG;
@@ -35,44 +68,9 @@ err_t PopCharDec(struct pbuf *p, uchar *pb, uchar ibStart)
   return ERR_OK;
 }
 
-err_t PopIntDec(struct pbuf *p, uint *pw, uchar ibStart) // TODO
+err_t PopCharDec(struct pbuf *p, uchar *pb, uchar ibStart)
 {
-  uchar *pb = p->payload;
-
-  *pw = 0;
-
-  uchar i;
-  for (i=ibStart; i<p->len; i++)
-  {
-    if (pb[i] == '|') return ERR_OK;
-
-    char b = DecodeChar(pb[i],10);
-    if (b == 0xFF) return ERR_VAL;
-
-    *pw = *pw*10 + b;
-  }
-
-  return ERR_ARG;
-}
-
-err_t PopIntHex(struct pbuf *p, uint *pw, uchar ibStart) // TODO
-{
-  uchar *pb = p->payload;
-
-  *pw = 0;
-
-  uchar i;
-  for (i=ibStart; i<p->len; i++)
-  {
-    if (pb[i] == '|') return ERR_OK;
-
-    char b = DecodeChar(pb[i],0x10);
-    if (b == 0xFF) return ERR_VAL;
-
-    *pw = *pw*0x10 + b;
-  }
-
-  return ERR_ARG;
+  return PopChar(p, pb, ibStart, 10);
 }
 
 
