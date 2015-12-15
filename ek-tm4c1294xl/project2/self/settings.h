@@ -4,6 +4,12 @@ SETTINGS.H
 
 ------------------------------------------------------------------------------*/
 
+
+#define BAUDS_SIZE      14
+#define DEFAULT_BAUD    6 // 9600
+
+
+
 extern ulong                   dwIP;
 extern ulong                   dwGateway;
 extern ulong                   dwNetmask;
@@ -31,3 +37,5 @@ uchar SaveOwnerName(void);
 uchar SaveBaud(void);
 
 uchar   LoadSettings(void);
+
+ulong GetBaud(void);

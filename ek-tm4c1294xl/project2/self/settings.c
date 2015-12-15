@@ -13,6 +13,9 @@ TODO
 
 
 
+static const ulong      mdwBauds[BAUDS_SIZE] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
+
+
 #define LABEL           0xC0FEBABE
 
 ulong                   dwIP;
@@ -92,7 +95,7 @@ uchar SaveOwnerName(void)
 
 uchar SaveBaud(void)
 {
-  return 0;
+  return SaveChar(&ibBaud, EEPROM_BAUD);
 }
 
 
@@ -182,7 +185,7 @@ uchar   LoadSettings(void)
     dwNetmask = inet_addr("1.1.168.192");
 
     wPort = 1001;
-    ibBaud = 6; // 9600bps
+    ibBaud = DEFAULT_BAUD;
 
     memset(&szDeviceName,  0, sizeof(szDeviceName));
     sprintf(szDeviceName, "Device");
@@ -194,4 +197,11 @@ uchar   LoadSettings(void)
   }
 
   return 0;
+}
+
+
+
+ulong GetBaud(void)
+{
+  return (ibBaud < BAUDS_SIZE) ? mdwBauds[ibBaud] : DEFAULT_BAUD;
 }

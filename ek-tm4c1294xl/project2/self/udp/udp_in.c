@@ -47,7 +47,7 @@ err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
-err_t CmdChar(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uchar b)
+err_t CmdCharHex(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uchar b)
 {
   uint wSfx = 0;
   err_t err = PopSfx(p, &wSfx);
@@ -55,7 +55,7 @@ err_t CmdChar(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
 
   InitPush();
   PushChar('A');
-  PushCharDec(b);
+  PushCharHex(b);
   PushSfx(wSfx);
 
   return PushOut(pcb,p,addr,port,broadcast);
@@ -108,7 +108,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   if (err != ERR_OK) return err;
 
   uint wArg = 0;
-  err = PopInt(p, &wArg, 2);
+  err = PopIntHex(p, &wArg, 2);
   if (err != ERR_OK) return err;
 
   InitPush();
@@ -207,7 +207,7 @@ err_t SNM(struct pbuf *p)
 err_t SBR(struct pbuf *p)
 {
   uchar b = 0;
-  err_t err = PopChar(p, &b, 3);
+  err_t err = PopCharHex(p, &b, 3);
   if (err != ERR_OK) return err;
 
   ibBaud = b;
@@ -280,7 +280,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"SNM")) {
     CmdIn(pcb,p,addr,port,broadcast,SNM);
   } else if (IsCmd(p,"GBR")) {
-    CmdChar(pcb,p,addr,port,broadcast,ibBaud);
+    CmdCharHex(pcb,p,addr,port,broadcast,ibBaud);
   } else if (IsCmd(p,"SBR")) {
     CmdIn(pcb,p,addr,port,broadcast,SBR);
   }

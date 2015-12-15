@@ -15,6 +15,7 @@ void PushLongLtl(ulong dw);
 void PushString(const char *sz);
 uchar PushIntHex(uint w);
 uchar PushCharDec(uchar b);
+uchar PushCharHex(uchar b);
 void PushIP(ulong dw);
 void PushSfx(uint w);
 void PushArray(uchar *pb, uchar bSize);

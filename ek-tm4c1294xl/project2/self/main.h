@@ -26,7 +26,7 @@ typedef union
 } combo32;
 
 
-#define NAME_SIZE      (8+1)
+#define NAME_SIZE       (8+1)
 
 
 #endif
