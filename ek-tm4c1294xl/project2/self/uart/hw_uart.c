@@ -5,6 +5,7 @@ HW_UART.Ñ
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../settings.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "driverlib/gpio.h"
@@ -32,5 +33,5 @@ void    InitUART4(ulong dwSysClockFreq)
   IntEnable(INT_UART4);
   UARTIntEnable(UART4_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  UARTConfigSetExpClk(UART4_BASE, dwSysClockFreq, 57600, (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  UARTConfigSetExpClk(UART4_BASE, dwSysClockFreq, GetBaud(), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }

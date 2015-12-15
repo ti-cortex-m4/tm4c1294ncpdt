@@ -86,6 +86,21 @@ static char mb[4*2];
   return n;
 }
 
+uchar   PushCharHex(uchar b)
+{
+static char mb[4*2];
+
+  memset(&mb, 0, sizeof(mb));
+  uchar n = usprintf(mb, "%X" ,b);
+
+  uchar i;
+  for (i=0; i<n; i++)
+  {
+    PushChar(mb[i]);
+  }
+
+  return n;
+}
 
 void PushIP(ulong dw)
 {
