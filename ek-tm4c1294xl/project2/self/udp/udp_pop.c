@@ -13,7 +13,7 @@ static uchar DecodeChar(uchar b, uchar bRadix) // TODO
 {
 const static char mbCHARS[] = "0123456789abcdef";
 
-//  ASSERT((bRadix == 10) || (bRadix == 16));
+  ASSERT((bRadix == 10) || (bRadix == 16));
 
   uchar i;
   for (i=0; i<bRadix; i++)

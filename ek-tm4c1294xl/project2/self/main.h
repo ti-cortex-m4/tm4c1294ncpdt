@@ -12,6 +12,7 @@ MAIN.H
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include "driverlib/debug.h"
 
 
 typedef uint8_t         uchar;
