@@ -116,6 +116,9 @@ uchar    SaveSettings(void)
   err = SaveInt(&wPort, EEPROM_PORT);
   if (err != 0) return err;
 
+  err = SaveInt(&ibBaud, EEPROM_BAUD);
+  if (err != 0) return err;
+
 
   err = SaveString(szDeviceName, EEPROM_DEVICE_NAME);
   if (err != 0) return err;
