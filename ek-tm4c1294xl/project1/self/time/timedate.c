@@ -18,7 +18,7 @@ static uchar const      mpbDaysInMonth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 3
 // количество дней в мес€це
 uchar   GetDaysInMonthM(uchar  bMonth)
 {
-	ASSERT((bMonth >= 1) && (bMonth <= 12));
+  ASSERT((bMonth >= 1) && (bMonth <= 12));
 
   return mpbDaysInMonth[bMonth-1];
 }
