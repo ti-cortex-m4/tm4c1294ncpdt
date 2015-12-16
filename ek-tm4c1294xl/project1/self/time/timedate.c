@@ -27,8 +27,8 @@ uchar   GetDaysInMonthM(uchar  bMonth)
 // количество дней в месяце
 uchar   GetDaysInMonthYM(uchar  bYear, uchar  bMonth)
 {
-  ASSERT(bYear <= bMAXYEAR);
-  ASSERT((bMonth >= 1) && (bMonth <= 12));
+//  ASSERT(bYear <= bMAXYEAR);
+//  ASSERT((bMonth >= 1) && (bMonth <= 12));
 
   if ((bYear % 4 == 0) && (bMonth == 2))
     return 29;
@@ -40,7 +40,7 @@ uchar   GetDaysInMonthYM(uchar  bYear, uchar  bMonth)
 // количество дней в году
 uint    GetDaysInYearY(uchar  bYear)
 {
-  ASSERT(bYear <= bMAXYEAR);
+//  ASSERT(bYear <= bMAXYEAR);
 
   if (bYear % 4 == 0)
     return 366;
