@@ -71,6 +71,11 @@ uchar SaveOwnerName(void)
   return SaveString(szOwnerName, EEPROM_OWNER_NAME);
 }
 
+uchar SavePort(void)
+{
+  return SaveInt(&wPort, EEPROM_PORT);
+}
+
 uchar SaveBaud(void)
 {
   return SaveChar(&ibBaud, EEPROM_BAUD);
@@ -94,17 +99,17 @@ uchar    SaveSettings(void)
   if (err != 0) return err;
 
 
-  err = SaveInt(&wPort, EEPROM_PORT);
-  if (err != 0) return err;
-
-  err = SaveChar(&ibBaud, EEPROM_BAUD);
-  if (err != 0) return err;
-
-
   err = SaveString(szDeviceName, EEPROM_DEVICE_NAME);
   if (err != 0) return err;
 
   err = SaveString(szOwnerName, EEPROM_OWNER_NAME);
+  if (err != 0) return err;
+
+
+  err = SaveInt(&wPort, EEPROM_PORT);
+  if (err != 0) return err;
+
+  err = SaveChar(&ibBaud, EEPROM_BAUD);
   if (err != 0) return err;
 
 
@@ -124,11 +129,11 @@ uchar   LoadSettings(void)
     LoadLong(&dwGateway, EEPROM_GATEWAY);
     LoadLong(&dwNetmask, EEPROM_NETMASK);
 
-    LoadInt(&wPort, EEPROM_PORT);
-    LoadChar(&ibBaud, EEPROM_BAUD);
-
     LoadString(szDeviceName, EEPROM_DEVICE_NAME);
     LoadString(szOwnerName, EEPROM_OWNER_NAME);
+
+    LoadInt(&wPort, EEPROM_PORT);
+    LoadChar(&ibBaud, EEPROM_BAUD);
   }
   else
   {
@@ -136,14 +141,14 @@ uchar   LoadSettings(void)
     dwGateway = inet_addr("0.255.255.255");
     dwNetmask = inet_addr("1.1.168.192");
 
-    wPort = 1001;
-    ibBaud = DEFAULT_BAUD;
-
     memset(&szDeviceName,  0, sizeof(szDeviceName));
     sprintf(szDeviceName, "Device");
 
     memset(&szOwnerName,  0, sizeof(szOwnerName));
     sprintf(szOwnerName, "Owner");
+
+    wPort = 1001;
+    ibBaud = DEFAULT_BAUD;
 
     SaveSettings();
   }
