@@ -61,6 +61,20 @@ err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
+err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uint w)
+{
+  uint wSfx = 0;
+  err_t err = PopSfx(p, &wSfx);
+  if (err != ERR_OK) return err;
+
+  InitPush();
+  PushChar('A');
+  PushIntDec(w);
+  PushSfx(wSfx);
+
+  return PushOut(pcb,p,addr,port,broadcast);
+}
+
 
 err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
@@ -130,7 +144,9 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   } else if (wArg == 7) {
     PushString("AI=$CHANNEL1;D=Channel1;T=GROUP");
   } else if (wArg == 8) {
-    PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=150bps/0/300bps/1/600bps/2/1200bps/3/2400bps/4/4800bps/5/9600bps/6/19200bps/7/28800bps/8/38400bps/9/57600bps/10/115200bps/11/230400bps/12/460800bps/13");
+    PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\""); // TODO S=RM!=2?"e":"i"
+  } else if (wArg == 9) {
+    PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13");
   }
 
   PushChar(0x0D);
@@ -204,6 +220,19 @@ err_t SNM(struct pbuf *p)
   return ERR_OK;
 }
 
+err_t SPN(struct pbuf *p)
+{
+  uint w = 0;
+  err_t err = PopIntDec(p, &w, 3);
+  if (err != ERR_OK) return err;
+
+  wPort = w;
+  err = SavePort();
+  if (err != ERR_OK) return err;
+
+  return ERR_OK;
+}
+
 err_t SBR(struct pbuf *p)
 {
   uchar b = 0;
@@ -250,7 +279,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"9");
+    CmdString(pcb,p,addr,port,broadcast,"10");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -279,6 +308,10 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdIP(pcb,p,addr,port,broadcast,dwNetmask);
   } else if (IsCmd(p,"SNM")) {
     CmdIn(pcb,p,addr,port,broadcast,SNM);
+  } else if (IsCmd(p,"GPN")) {
+    CmdIntDec(pcb,p,addr,port,broadcast,wPort);
+  } else if (IsCmd(p,"SPN")) {
+    CmdIn(pcb,p,addr,port,broadcast,SPN);
   } else if (IsCmd(p,"GBR")) {
     CmdCharDec(pcb,p,addr,port,broadcast,ibBaud);
   } else if (IsCmd(p,"SBR")) {

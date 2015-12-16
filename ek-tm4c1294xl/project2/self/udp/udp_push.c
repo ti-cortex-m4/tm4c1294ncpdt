@@ -53,22 +53,6 @@ void PushString(const char *sz)
 }
 
 
-uchar   PushIntHex(uint w)
-{
-static char mb[6*2];
-
-  memset(&mb, 0, sizeof(mb));
-  uchar n = usprintf(mb, "%X" ,w);
-
-  uchar i;
-  for (i=0; i<n; i++)
-  {
-    PushChar(mb[i]);
-  }
-
-  return n;
-}
-
 
 uchar   PushCharDec(uchar b)
 {
@@ -88,7 +72,7 @@ static char mb[4*2];
 
 uchar   PushCharHex(uchar b)
 {
-static char mb[4*2];
+static char mb[3*2];
 
   memset(&mb, 0, sizeof(mb));
   uchar n = usprintf(mb, "%X" ,b);
@@ -101,6 +85,41 @@ static char mb[4*2];
 
   return n;
 }
+
+
+uchar   PushIntDec(uint w)
+{
+static char mb[6*2];
+
+  memset(&mb, 0, sizeof(mb));
+  uchar n = usprintf(mb, "%u" ,w);
+
+  uchar i;
+  for (i=0; i<n; i++)
+  {
+    PushChar(mb[i]);
+  }
+
+  return n;
+}
+
+uchar   PushIntHex(uint w)
+{
+static char mb[5*2];
+
+  memset(&mb, 0, sizeof(mb));
+  uchar n = usprintf(mb, "%X" ,w);
+
+  uchar i;
+  for (i=0; i<n; i++)
+  {
+    PushChar(mb[i]);
+  }
+
+  return n;
+}
+
+
 
 void PushIP(ulong dw)
 {
