@@ -144,7 +144,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   } else if (wArg == 7) {
     PushString("AI=$CHANNEL1;D=Channel1;T=GROUP");
   } else if (wArg == 8) {
-    PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\""); // TODO S=RM!=2?"e":"i"
+    PushString("AI=PN;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\""); // TODO S=RM!=2?"e":"i"
   } else if (wArg == 9) {
     PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13");
   }
