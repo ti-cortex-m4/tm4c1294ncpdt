@@ -14,10 +14,10 @@ TODO
 
 
 
-static const ulong      mdwBauds[BAUDS_SIZE] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
+static const ulong      mdwBAUDS[BAUDS_SIZE] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define LABEL           0xC0FEBABE
+#define SETTINGS_LABEL  0xC0FEBABE
 
 ulong                   dwIP;
 ulong                   dwGateway;
@@ -84,7 +84,7 @@ uchar SaveBaud(void)
 
 uchar    SaveSettings(void)
 {
-  ulong dw = LABEL;
+  ulong dw = SETTINGS_LABEL;
   uchar err = SaveLong(&dw, EEPROM_LABEL);
   if (err != 0) return err;
 
@@ -123,7 +123,7 @@ uchar   LoadSettings(void)
   ulong dw = 0;
   LoadLong(&dw, EEPROM_LABEL);
 
-  if (dw == LABEL)
+  if (dw == SETTINGS_LABEL)
   {
     LoadLong(&dwIP, EEPROM_IP);
     LoadLong(&dwGateway, EEPROM_GATEWAY);
@@ -160,5 +160,5 @@ uchar   LoadSettings(void)
 
 ulong GetBaud(void)
 {
-  return (ibBaud < BAUDS_SIZE) ? mdwBauds[ibBaud] : mdwBauds[DEFAULT_BAUD];
+  return (ibBaud < BAUDS_SIZE) ? mdwBAUDS[ibBaud] : mdwBAUDS[DEFAULT_BAUD];
 }
