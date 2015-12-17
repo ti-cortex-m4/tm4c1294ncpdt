@@ -89,10 +89,10 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
     es->p = NULL;
     /* pass newly allocated es to our callbacks */
     tcp_arg(newpcb, es);
-    tcp_sent(newpcb, HandlerSent);
     tcp_recv(newpcb, HandlerReceive);
     tcp_err(newpcb, HandlerError);
     tcp_poll(newpcb, HandlerPoll, 0);
+    tcp_sent(newpcb, HandlerSent);
     ret_err = ERR_OK;
   }
   else
@@ -170,10 +170,10 @@ static void HandlerClose(struct tcp_pcb *tpcb)
 {
   // Clear out all of the TCP callbacks.
   tcp_arg(tpcb, NULL);
-  tcp_sent(tpcb, NULL);
   tcp_recv(tpcb, NULL);
   tcp_err(tpcb, NULL);
   tcp_poll(tpcb, NULL, 0);
+  tcp_sent(tpcb, NULL);
 
   // Close the TCP connection.
   tcp_close(tpcb);
