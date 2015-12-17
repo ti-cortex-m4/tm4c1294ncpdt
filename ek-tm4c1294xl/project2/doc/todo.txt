@@ -17,3 +17,4 @@ tcp_nagle_disable
 #define LWIP_PLATFORM_DIAG(msg)
 ASSERT
 // Free up the pbuf.  Note that we don't acknowledge receipt of the data since we want it to be retransmitted later.
+// If we already have a connection, kill it and start over.
