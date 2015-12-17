@@ -80,6 +80,10 @@ int     main(void)
   //
   ulong dwUser0, dwUser1;
   FlashUserGet(&dwUser0, &dwUser1);
+
+  dwUser0 = 0x00B61A00; // TODO
+  dwUser1 = 0x00FCC502;
+
   if((dwUser0 == 0xFFFFFFFF) || (dwUser1 == 0xFFFFFFFF))
   {
       //

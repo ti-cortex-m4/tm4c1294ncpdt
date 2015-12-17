@@ -20,3 +20,6 @@ ASSERT
 // If we already have a connection, kill it and start over.
 
 http://lwip.wikia.com/wiki/Raw/TCP
+
+http://docs.tibbo.com/soism/index.html?bcast_out_of_band.htm
+
