@@ -16,24 +16,9 @@ TCP_HANDLER.C
 
 static struct tcp_pcb *echo_pcb;
 
-enum echo_states
-{
-  ES_NONE = 0,
-  ES_ACCEPTED,
-  ES_RECEIVED,
-  ES_CLOSING
-};
 
-struct echo_state
-{
-  u8_t state;
-//  u8_t retries;
-  struct tcp_pcb *pcb;
-  /* pbuf (chain) to recycle */
-  struct pbuf *p;
-};
 
-err_t echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err);
+static err_t HandlerAccept(void *arg, struct tcp_pcb *tpcb, err_t err);
 static err_t HandlerReceive(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err);
 static void HandlerError(void *arg, err_t err);
 static err_t HandlerPoll(void *arg, struct tcp_pcb *tpcb);
@@ -53,7 +38,7 @@ void InitTCP_Handler(void)
     if (err == ERR_OK)
     {
       echo_pcb = tcp_listen(echo_pcb);
-      tcp_accept(echo_pcb, echo_accept);
+      tcp_accept(echo_pcb, HandlerAccept);
     }
     else
     {
@@ -67,39 +52,17 @@ void InitTCP_Handler(void)
 }
 
 
-err_t
-echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
+static err_t HandlerAccept(void *arg, struct tcp_pcb *tpcb, err_t err)
 {
-  err_t ret_err;
-  struct echo_state *es;
+  tcp_setprio(tpcb, TCP_PRIO_MIN);
 
-  LWIP_UNUSED_ARG(arg);
-  LWIP_UNUSED_ARG(err);
+  tcp_arg(tpcb, NULL);
+  tcp_recv(tpcb, HandlerReceive);
+  tcp_err(tpcb, HandlerError);
+  tcp_poll(tpcb, HandlerPoll, 0);
+  tcp_sent(tpcb, HandlerSent);
 
-  /* Unless this pcb should have NORMAL priority, set its priority now.
-     When running out of pcbs, low priority pcbs can be aborted to create
-     new pcbs of higher priority. */
-  tcp_setprio(newpcb, TCP_PRIO_MIN);
-
-  es = (struct echo_state *)mem_malloc(sizeof(struct echo_state));
-  if (es != NULL)
-  {
-    es->state = ES_ACCEPTED;
-    es->pcb = newpcb;
-    es->p = NULL;
-    /* pass newly allocated es to our callbacks */
-    tcp_arg(newpcb, es);
-    tcp_recv(newpcb, HandlerReceive);
-    tcp_err(newpcb, HandlerError);
-    tcp_poll(newpcb, HandlerPoll, 0);
-    tcp_sent(newpcb, HandlerSent);
-    ret_err = ERR_OK;
-  }
-  else
-  {
-    ret_err = ERR_MEM;
-  }
-  return ret_err;
+  return (ERR_OK);
 }
 
 
