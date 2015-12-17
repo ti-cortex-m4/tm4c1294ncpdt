@@ -1,5 +1,3 @@
-TCP keepalive
-DS Manager: locator
 проверять возвращаемые значения, особенно MEM
 udp_remove & pbuf_free
 udp HELLO send IP
@@ -18,3 +16,4 @@ SaveSettings check result
 tcp_nagle_disable
 #define LWIP_PLATFORM_DIAG(msg)
 ASSERT
+// Free up the pbuf.  Note that we don't acknowledge receipt of the data since we want it to be retransmitted later.

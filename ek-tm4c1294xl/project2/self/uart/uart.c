@@ -36,17 +36,20 @@ void    InitUART(ulong dwSysClockFreq)
 
 
 
-void    UART_Out(struct tcp_pcb *tpcb, void *arg, uint len)
+void    UART_Out1(uchar* ptr, uint len)
 {
-  uart_tpcb = tpcb;
-
-  uchar* ptr = arg;
   while (len-- > 0)
   {
     mbOut[iwOutStop] = (*ptr++);
     iwOutStop = (iwOutStop+1) % OUTBUFF_SIZE;
     cwOut++;
   }
+}
+
+
+void    UART_Out2(struct tcp_pcb *tpcb)
+{
+  uart_tpcb = tpcb;
 
   IntPendSet(INT_UART4);
 }
