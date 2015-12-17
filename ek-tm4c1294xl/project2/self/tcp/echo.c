@@ -34,12 +34,12 @@ struct echo_state
 };
 
 err_t echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err);
-err_t HandlerReceive(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err);
+static err_t HandlerReceive(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err);
 void echo_error(void *arg, err_t err);
 err_t echo_poll(void *arg, struct tcp_pcb *tpcb);
 err_t echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len);
 void echo_send(struct tcp_pcb *tpcb, struct echo_state *es);
-void HandlerClose(struct tcp_pcb *tpcb, struct echo_state *es);
+static void HandlerClose(struct tcp_pcb *tpcb);
 
 void
 InitTCP_Handler(void)
@@ -102,48 +102,38 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
 }
 
 
-err_t HandlerReceive(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
+static err_t HandlerReceive(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
 {
-    struct pbuf *q;
-//    unsigned long ulIdx;
-//    unsigned char *pucData;
+struct pbuf *q;
 
-    // Process the incoming packet.
-    if((err == ERR_OK) && (p != NULL))
+  // Process the incoming packet.
+  if ((err == ERR_OK) && (p != NULL))
+  {
+    // Accept the packet from TCP.
+    tcp_recved(tpcb, p->tot_len);
+
+    (tpcb)->flags &= ~TF_ACK_DELAY;
+    (tpcb)->flags |= TF_ACK_NOW;
+
+    // Loop through the pbufs in this packet.
+    for(q = p; q != NULL; q = q->next)
     {
-        // Accept the packet from TCP.
-        tcp_recved(tpcb, p->tot_len);
-
-              (tpcb)->flags &= ~TF_ACK_DELAY;
-              (tpcb)->flags |= TF_ACK_NOW;
-
-        // Loop through the pbufs in this packet.
-        for(q = p/*, pucData = q->payload*/; q != NULL; q = q->next)
-        {
-            UART_Out1(q->payload, q->len);
-
-//            // Loop through the bytes in this pbuf.
-//            for(ulIdx = 0; ulIdx < q->len; ulIdx++)
-//            {
-//                // Process this character.
-//                TelnetProcessCharacter(pucData[ulIdx]);
-//            }
-        }
-
-        UART_Out2(tpcb);
-
-        // Free the pbuf.
-        pbuf_free(p);
+      UART_Out1(q->payload, q->len);
     }
 
-    // If a null packet is passed in, close the connection.
-    else if((err == ERR_OK) && (p == NULL))
-    {
-    	HandlerClose(tpcb,NULL);
-    }
+    UART_Out2(tpcb);
 
-    // Return okay.
-    return(ERR_OK);
+    // Free the pbuf.
+    pbuf_free(p);
+  }
+
+  // If a null packet is passed in, close the connection.
+  else if ((err == ERR_OK) && (p == NULL))
+  {
+    HandlerClose(tpcb);
+  }
+
+  return (ERR_OK);
 }
 
 
@@ -273,18 +263,13 @@ echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
 //}
 
 
-void HandlerClose(struct tcp_pcb *tpcb, struct echo_state *es)
+static void HandlerClose(struct tcp_pcb *tpcb)
 {
   tcp_arg(tpcb, NULL);
   tcp_sent(tpcb, NULL);
   tcp_recv(tpcb, NULL);
   tcp_err(tpcb, NULL);
   tcp_poll(tpcb, NULL, 0);
-
-  if (es != NULL)
-  {
-    mem_free(es);
-  }
 
   tcp_close(tpcb);
 }
