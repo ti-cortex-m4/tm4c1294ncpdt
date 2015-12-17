@@ -35,14 +35,14 @@ struct echo_state
 
 err_t echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err);
 static err_t HandlerReceive(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err);
-void echo_error(void *arg, err_t err);
-err_t echo_poll(void *arg, struct tcp_pcb *tpcb);
-err_t echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len);
-void echo_send(struct tcp_pcb *tpcb, struct echo_state *es);
+static void HandlerError(void *arg, err_t err);
+static err_t HandlerPoll(void *arg, struct tcp_pcb *tpcb);
+static err_t HandlerSent(void *arg, struct tcp_pcb *pcb, u16_t len);
 static void HandlerClose(struct tcp_pcb *tpcb);
 
-void
-InitTCP_Handler(void)
+
+
+void InitTCP_Handler(void)
 {
   echo_pcb = tcp_new();
   if (echo_pcb != NULL)
@@ -89,9 +89,10 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
     es->p = NULL;
     /* pass newly allocated es to our callbacks */
     tcp_arg(newpcb, es);
+    tcp_sent(newpcb, HandlerSent);
     tcp_recv(newpcb, HandlerReceive);
-    tcp_err(newpcb, echo_error);
-    tcp_poll(newpcb, echo_poll, 0);
+    tcp_err(newpcb, HandlerError);
+    tcp_poll(newpcb, HandlerPoll, 0);
     ret_err = ERR_OK;
   }
   else
@@ -102,6 +103,8 @@ echo_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
 }
 
 
+
+// This function is called when the lwIP TCP/IP stack has an incoming packet to be processed.
 static err_t HandlerReceive(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
 {
 struct pbuf *q;
@@ -137,139 +140,41 @@ struct pbuf *q;
 }
 
 
-void
-echo_error(void *arg, err_t err)
+
+// This function is called when the lwIP TCP/IP stack has detected an error. The connection is no longer valid.
+static void HandlerError(void *arg, err_t err)
 {
-  struct echo_state *es;
-
-  LWIP_UNUSED_ARG(err);
-
-  es = (struct echo_state *)arg;
-  if (es != NULL)
-  {
-    mem_free(es);
-  }
+//  TODO
 }
 
-err_t
-echo_poll(void *arg, struct tcp_pcb *tpcb)
+
+
+// This function is called when the lwIP TCP/IP stack has no incoming or outgoing data. It can be used to reset an idle connection.
+static err_t HandlerPoll(void *arg, struct tcp_pcb *pcb)
 {
-//  err_t ret_err;
-//  struct echo_state *es;
-//
-//  es = (struct echo_state *)arg;
-//  if (es != NULL)
-//  {
-//    if (es->p != NULL)
-//    {
-//      /* there is a remaining pbuf (chain)  */
-//      tcp_sent(tpcb, echo_sent);
-//      echo_send(tpcb, es);
-//    }
-//    else
-//    {
-//      /* no remaining pbuf (chain)  */
-//      if(es->state == ES_CLOSING)
-//      {
-//        HandlerClose(tpcb, es);
-//      }
-//    }
-//    ret_err = ERR_OK;
-//  }
-//  else
-//  {
-//    /* nothing to be done */
-//    tcp_abort(tpcb);
-//    ret_err = ERR_ABRT;
-//  }
-  return ERR_OK;
+  return (ERR_OK);
 }
 
-err_t
-echo_sent(void *arg, struct tcp_pcb *tpcb, u16_t len)
+
+
+// This function is called when the lwIP TCP/IP stack has received an acknowledgment for data that has been transmitted.
+static err_t HandlerSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
-//  struct echo_state *es;
-//
-//  LWIP_UNUSED_ARG(len);
-//
-//  es = (struct echo_state *)arg;
-//
-//  if(es->p != NULL)
-//  {
-//    /* still got pbufs to send */
-//    tcp_sent(tpcb, echo_sent);
-//    echo_send(tpcb, es);
-//  }
-//  else
-//  {
-//    /* no more pbufs to send */
-//    if(es->state == ES_CLOSING)
-//    {
-//      HandlerClose(tpcb, es);
-//    }
-//  }
-  return ERR_OK;
+  return (ERR_OK);
 }
 
-//void
-//echo_send(struct tcp_pcb *tpcb, struct echo_state *es)
-//{
-//  struct pbuf *ptr;
-////  err_t wr_err = ERR_OK;
-//
-//  while (/*(wr_err == ERR_OK) &&*/
-//         (es->p != NULL)/* &&
-//         (es->p->len <= tcp_sndbuf(tpcb))*/)
-//  {
-////  LOG(("<<< while \n"));
-//  ptr = es->p;
-//
-//  /* enqueue data for transmission */
-////  LOG(("in=%u\n", ptr->len));
-//
-//  UART_Out(tpcb, ptr->payload, ptr->len);
-//  //wr_err = tcp_write(tpcb, ptr->payload, ptr->len, 1);
-//
-////  if (wr_err == ERR_OK)
-//  {
-////     LOG(("<<< ERR_OK \n"));
-//
-//     u16_t plen;
-//      u8_t freed;
-//
-//     plen = ptr->len;
-//     /* continue with next pbuf in chain (if any) */
-//     es->p = ptr->next;
-//     if(es->p != NULL)
-//     {
-//       /* new reference! */
-//       pbuf_ref(es->p);
-//     }
-//     /* chop first pbuf from chain */
-//      do
-//      {
-//        /* try hard to free pbuf */
-//        freed = pbuf_free(ptr);
-//      }
-//      while(freed == 0);
-//     /* we can read more data now */
-////      LOG(("~1 %X\n", tpcb->flags));
-//      (tpcb)->flags &= ~TF_ACK_DELAY;
-//      (tpcb)->flags |= TF_ACK_NOW;
-////      LOG(("~2 %X\n", tpcb->flags));
-//     tcp_recved(tpcb, plen);
-//   }
-//  }
-//}
 
 
+// This function is called when the the TCP connection should be closed.
 static void HandlerClose(struct tcp_pcb *tpcb)
 {
+  // Clear out all of the TCP callbacks.
   tcp_arg(tpcb, NULL);
   tcp_sent(tpcb, NULL);
   tcp_recv(tpcb, NULL);
   tcp_err(tpcb, NULL);
   tcp_poll(tpcb, NULL, 0);
 
+  // Close the TCP connection.
   tcp_close(tpcb);
 }
