@@ -14,7 +14,7 @@ TCP_HANDLER.C
 
 
 
-static struct tcp_pcb *echo_pcb;
+static struct tcp_pcb *main_pcb;
 
 
 
@@ -27,29 +27,27 @@ static void HandlerClose(struct tcp_pcb *tpcb);
 
 
 
-void InitTCP_Handler(void)
+// TODO check result
+err_t InitTCP_Handler(void)
 {
-  echo_pcb = tcp_new();
-  if (echo_pcb != NULL)
+  main_pcb = tcp_new();
+  if (main_pcb == NULL)
   {
-    err_t err;
-
-    err = tcp_bind(echo_pcb, IP_ADDR_ANY, wPort);
-    if (err == ERR_OK)
-    {
-      echo_pcb = tcp_listen(echo_pcb);
-      tcp_accept(echo_pcb, HandlerAccept);
-    }
-    else
-    {
-      /* abort? output diagnostic? */
-    }
+    return ERR_MEM;
   }
   else
   {
-    /* abort? output diagnostic? */
+    err_t err = tcp_bind(main_pcb, IP_ADDR_ANY, wPort);
+    if (err == ERR_OK)
+    {
+      main_pcb = tcp_listen(main_pcb);
+      tcp_accept(main_pcb, HandlerAccept);
+    }
+
+    return err;
   }
 }
+
 
 
 static err_t HandlerAccept(void *arg, struct tcp_pcb *tpcb, err_t err)

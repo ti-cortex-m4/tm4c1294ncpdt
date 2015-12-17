@@ -4,4 +4,4 @@ TCP_HANDLER.H
 
 ------------------------------------------------------------------------------*/
 
-void    InitTCP_Handler(void);
+err_t InitTCP_Handler(void);
