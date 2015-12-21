@@ -8,3 +8,5 @@ void    OutGetDigital(void);
 void    OutSetDigital(void);
 
 void    OutGetDigitalsExt(void);
+
+void    OutKeysExt(void);

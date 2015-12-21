@@ -77,3 +77,25 @@ void    OutGetDigitalsExt(void)
 
   OutptrOutBuff(wSize);
 }
+
+
+
+void    OutKeysExt(void)
+{
+  InitPushPtr();
+  uchar wSize = 0;
+
+  wSize += PushBool(boEnblKeys);
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    if ((InBuff(6 + c/8) & (0x80 >> c%8)) != 0)
+    {
+      Push(&mpphKeys[c], sizeof(line));
+      wSize += sizeof(line);
+    }
+  }
+
+  OutptrOutBuff(wSize);
+}
