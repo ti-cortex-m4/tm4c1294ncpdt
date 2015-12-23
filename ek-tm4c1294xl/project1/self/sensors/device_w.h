@@ -11,10 +11,10 @@ DEVICE_W.H
 //
 //
 //void    PushAddressV(uchar  bCode);
-//
-//void    QueryTimeV(void);
-//time    ReadTimeV(void);
-//
+
+void    QueryTimeW(void);
+time    ReadTimeW(void);
+
 //void    QueryControlV(time  ti);
 //
 //void    QueryVersionV(void);

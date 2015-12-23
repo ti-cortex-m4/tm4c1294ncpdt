@@ -4,16 +4,16 @@ DEVICE_W!C
 Rovalant ÌÝÑ-3
 ------------------------------------------------------------------------------*/
 
-//#include "../main.h"
+#include "../main.h"
 //#include "../memory/mem_settings.h"
-//#include "../memory/mem_digitals.h"
+#include "../memory/mem_digitals.h"
 //#include "../memory/mem_current.h"
 //#include "../memory/mem_factors.h"
 //#include "../memory/mem_realtime.h"
 //#include "../memory/mem_energy_spec.h"
 //#include "../memory/mem_profile.h"
 //#include "../memory/mem_limits.h"
-//#include "../serial/ports.h"
+#include "../serial/ports.h"
 //#include "../serial/ports_devices.h"
 //#include "../serial/monitor.h"
 //#include "../display/display.h"
@@ -41,31 +41,43 @@ Rovalant ÌÝÑ-3
 
 
 
-//void    PushAddressV(uchar  bCode)
-//{
-//  PushIntLtl(mpdwAddress1[diCurr.bAddress-1] % 0x10000);
-//  PushIntLtl(wPrivate);
-//
-//  PushChar(bCode);
-//
-//  PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
-//}
-//
-//
-//
-//void    QueryTimeV(void)
-//{
-//  InitPush(2);
-//
-//  PushChar(0x20);
-//  PushChar(0x00);
-//
-//  PushAddressV(0x1C);
-//
-//  QueryV(100+22, 15);
-//}
-//
-//
+uchar   PushAddress1W(void)
+{
+  InitPush(0);
+  PushChar1Bcc('/');
+  PushChar1Bcc('?');
+
+  uchar n = PushNumberBcc(mpdwAddress1[diCurr.bAddress-1]);
+
+  PushChar1Bcc('!');
+  return 2+n+1;
+}
+
+
+uchar   PushAddress2W(void)
+{
+  uchar n = PushAddress1W();
+
+  PushChar1Bcc('R');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  return n+3;
+}
+
+
+
+void    QueryTimeW(void)
+{
+  uchar n = PushAddress2W();
+
+  PushStringBcc("1-0:0.9.1");
+  PushChar1Bcc(0x03);
+
+  BccQueryIO(1+28+2, n+10+1, 1);
+}
+
+
 //time    ReadTimeV(void)
 //{
 //  InitPop(13);
