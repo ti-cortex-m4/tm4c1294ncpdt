@@ -14,7 +14,7 @@ Rovalant ÌÝÑ-3
 //#include "../memory/mem_profile.h"
 //#include "../memory/mem_limits.h"
 #include "../serial/ports.h"
-//#include "../serial/ports_devices.h"
+#include "../serial/ports_devices.h"
 //#include "../serial/monitor.h"
 //#include "../display/display.h"
 //#include "../keyboard/time/key_timedate.h"
@@ -74,31 +74,28 @@ void    QueryTimeW(void)
   PushStringBcc("1-0:0.9.1");
   PushChar1Bcc(0x03);
 
-  BccQueryIO(1+28+2, n+10+1, 1);
+  QueryW(1+28+2, n+10+1, 0);
 }
 
 
-//time    ReadTimeV(void)
-//{
-//  InitPop(13);
-//
-//  time ti;
-//
-//  ti.bSecond = PopChar();
-//  ti.bMinute = PopChar();
-//  ti.bHour   = PopChar();
-//
-//  PopChar();
-//
-//  ti.bDay    = PopChar();
-//  ti.bMonth  = PopChar();
-//  ti.bYear   = PopChar();
-//
-//  return ti;
-//}
-//
-//
-//
+time    ReadTimeW(void)
+{
+  InitPop(11);
+
+  time ti;
+
+  ti.bYear   = PopChar2Bcc(); PopChar();
+  ti.bMonth  = PopChar2Bcc(); PopChar();
+  ti.bDay    = PopChar2Bcc(); PopChar();
+  ti.bHour   = PopChar2Bcc(); PopChar();
+  ti.bMinute = PopChar2Bcc(); PopChar();
+  ti.bSecond = PopChar2Bcc(); PopChar();
+
+  return ti;
+}
+
+
+
 //void    QueryControlV(time  ti)
 //{
 //  InitPush(2);

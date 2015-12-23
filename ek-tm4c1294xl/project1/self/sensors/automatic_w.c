@@ -26,44 +26,31 @@ AUTOMATIC_W!C
 
 
 #ifndef SKIP_W
-/*
-void    QueryW(uchar  cbIn, uchar  cbOut)
-{
-  InitPush(cbOut-2);
-  PushChar(MakeCrcVOutBuff(2, cbOut-4));
 
+void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
+{
+  cbHeaderBcc = cbMaxHeader;
+  cwInBuffBcc = 0;
+
+  InitPush(0);
+
+  uchar bSum = 0;
+  bool f = false;
 
   uchar i;
-  for (i=0; i<=cbOut-2; i++)
-    mpbOutBuffSave[i] = OutBuff(i);
-
-  uchar j = 0;
-  SetOutBuff(j++, 0x73);
-  SetOutBuff(j++, 0x55);
-
-  for (i=2; i<=cbOut-2; i++)
+  for (i=0; i<cbOut-1; i++)
   {
-    if (mpbOutBuffSave[i] == 0x55)
-    {
-      SetOutBuff(j++, 0x73);
-      SetOutBuff(j++, 0x11);
-    }
-    else if (mpbOutBuffSave[i] == 0x73)
-    {
-      SetOutBuff(j++, 0x73);
-      SetOutBuff(j++, 0x22);
-    }
-    else
-    {
-      SetOutBuff(j++, mpbOutBuffSave[i]);
-    }
+    uchar b = SkipChar();
+    if (f == true) bSum += b;
+    if ((b & 0x7F) == 0x02) f = true;
   }
-  SetOutBuff(j++, 0x55);
 
-  Query(cbIn,j,true);
+  PushChar1Bcc(bSum);
+
+  Query(cwIn,cbOut,1);
 }
 
-
+/*
 serial  InputW(void)
 {
   InitWaitAnswer();
