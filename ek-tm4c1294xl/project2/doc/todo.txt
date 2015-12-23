@@ -16,10 +16,11 @@ SaveSettings check result
 tcp_nagle_disable
 #define LWIP_PLATFORM_DIAG(msg)
 ASSERT
+
 // Free up the pbuf.  Note that we don't acknowledge receipt of the data since we want it to be retransmitted later.
 // If we already have a connection, kill it and start over.
+// Process the RX ring buffer data if space is available in the TCP output buffer.
 
 http://lwip.wikia.com/wiki/Raw/TCP
 
 http://docs.tibbo.com/soism/index.html?bcast_out_of_band.htm
-
