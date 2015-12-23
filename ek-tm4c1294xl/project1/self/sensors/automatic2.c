@@ -1967,6 +1967,10 @@ time2   ReadTimeCan(uchar  ibCan)
     case 27: return ReadTimeCanV();
 #endif
 
+#ifndef SKIP_W
+    case 29: return ReadTimeCanW();
+#endif
+
     default: return GetTime2Error();
   }
 }
