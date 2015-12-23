@@ -3,29 +3,29 @@ AUTOMATIC_W!C
 
 
 ------------------------------------------------------------------------------*/
-/*
+
 #include "../main.h"
 #include "../console.h"
-#include "../memory/mem_profile.h"
-//#include "../memory/mem_factors.h"
-//#include "../time/delay.h"
-#include "../time/timedate.h"
-#include "../hardware/watchdog.h"
-#include "../kernel/crc_v.h"
-#include "../serial/ports.h"
-#include "../serial/ports2.h"
-#include "../serial/ports_devices.h"
-//#include "../devices/devices.h"
-#include "../sensors/unpack_v.h"
-//#include "../digitals/digitals.h"
-#include "../digitals/wait_answer.h"
-//#include "automatic1.h"
-#include "device_v.h"
-#include "automatic_v.h"
+//#include "../memory/mem_profile.h"
+////#include "../memory/mem_factors.h"
+////#include "../time/delay.h"
+//#include "../time/timedate.h"
+//#include "../hardware/watchdog.h"
+//#include "../kernel/crc_v.h"
+//#include "../serial/ports.h"
+//#include "../serial/ports2.h"
+//#include "../serial/ports_devices.h"
+////#include "../devices/devices.h"
+//#include "../sensors/unpack_v.h"
+////#include "../digitals/digitals.h"
+//#include "../digitals/wait_answer.h"
+////#include "automatic1.h"
+//#include "device_v.h"
+//#include "automatic_v.h"
 
 
 
-#ifndef SKIP_V
+#ifndef SKIP_W
 
 void    QueryV(uchar  cbIn, uchar  cbOut)
 {
@@ -198,15 +198,15 @@ bool    QueryEngDayV_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPerc
 
 time2   ReadTimeCanW(void)
 {
-//  Clear();
-//
-//  time2 ti2 = QueryTimeV_Full(50);
-//  if (ti2.fValid == false) return GetTime2Error();
-//
+  Clear();
+
+  time2 ti2 = QueryTimeW_Full(50);
+  if (ti2.fValid == false) return GetTime2Error();
+
 //  tiChannelC = ti2.tiValue;
 //  mpboChannelsA[0] = true;
-//
-//  return GetTime2(ti2.tiValue, true);
+
+  return GetTime2(ti2.tiValue, true);
 }
 
 /*

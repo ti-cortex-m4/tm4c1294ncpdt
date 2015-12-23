@@ -40,6 +40,7 @@ AUTOMATIC2!C
 #include "automatic_s.h"
 #include "automatic_u.h"
 #include "automatic_v.h"
+#include "automatic_w.h"
 
 
 
