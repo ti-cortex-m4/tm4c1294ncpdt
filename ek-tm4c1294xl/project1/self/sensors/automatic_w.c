@@ -14,20 +14,20 @@ AUTOMATIC_W!C
 //#include "../kernel/crc_v.h"
 //#include "../serial/ports.h"
 //#include "../serial/ports2.h"
-//#include "../serial/ports_devices.h"
+#include "../serial/ports_devices.h"
 ////#include "../devices/devices.h"
 //#include "../sensors/unpack_v.h"
 ////#include "../digitals/digitals.h"
 //#include "../digitals/wait_answer.h"
 ////#include "automatic1.h"
-//#include "device_v.h"
-//#include "automatic_v.h"
+#include "device_w.h"
+#include "automatic_w.h"
 
 
 
 #ifndef SKIP_W
-
-void    QueryV(uchar  cbIn, uchar  cbOut)
+/*
+void    QueryW(uchar  cbIn, uchar  cbOut)
 {
   InitPush(cbOut-2);
   PushChar(MakeCrcVOutBuff(2, cbOut-4));
@@ -64,7 +64,7 @@ void    QueryV(uchar  cbIn, uchar  cbOut)
 }
 
 
-serial  InputV(void)
+serial  InputW(void)
 {
   InitWaitAnswer();
 
@@ -115,28 +115,28 @@ bool    QueryConfigS_Full(uchar  bPercent)
   ReadConfigS();
   return(1);
 }
-* /
+*/
 
-time2   QueryTimeV_Full(uchar  bPercent)
+time2   QueryTimeW_Full(uchar  bPercent)
 {
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
-    DelayOff();
-    QueryTimeV();
+//    QueryCloseK();
+    QueryTimeW();
 
-    if (InputV() == SER_GOODCHECK) break;
+    if (BccInput() == SER_GOODCHECK) break;
     if (fKey == true) return GetTime2Error();
   }
 
   if (i == bMINORREPEATS) return GetTime2Error();
   ShowPercent(bPercent);
 
-  return GetTime2(ReadTimeV(), true);
+  return GetTime2(ReadTimeW(), true);
 }
 
-
-bool    QueryEngAbsV_Full(uchar  bPercent)
+/*
+bool    QueryEngAbsW_Full(uchar  bPercent)
 {
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
@@ -156,7 +156,7 @@ bool    QueryEngAbsV_Full(uchar  bPercent)
 }
 
 
-bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
+bool    QueryEngMonW_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
 {
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
@@ -176,7 +176,7 @@ bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
 }
 
 
-bool    QueryEngDayV_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPercent)
+bool    QueryEngDayW_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPercent)
 {
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
@@ -216,7 +216,7 @@ double2 ReadCntCurrV(void)
 
 //  if (QueryConfigS_Full(50) == 0) return GetDouble2Error();
 
-  if (QueryEngAbsV_Full(75) == 0) return GetDouble2Error();
+  if (QueryEngAbsW_Full(75) == 0) return GetDouble2Error();
 
   mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerV;
   mpboChannelsA[0] = true;
@@ -231,7 +231,7 @@ double2 ReadCntMonCanV(uchar  ibMonth)
 
 //  if (QueryConfigS_Full(25) == 0) return GetDouble2Error();
 
-  time2 ti2 = QueryTimeV_Full(50);
+  time2 ti2 = QueryTimeW_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
@@ -240,11 +240,11 @@ double2 ReadCntMonCanV(uchar  ibMonth)
     ti.bMonth = ibMonth+2;
     ti.bYear = (ibMonth+2 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
-    if (QueryEngMonV_Full(ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
+    if (QueryEngMonW_Full(ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
   }
   else
   {
-    if (QueryEngDayV_Full(ti.bDay, ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
+    if (QueryEngDayW_Full(ti.bDay, ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
   }
 
   mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerV;
@@ -252,6 +252,6 @@ double2 ReadCntMonCanV(uchar  ibMonth)
 
   return GetDouble2(mpdbChannelsC[0], true);
 }
-
-#endif
 */
+#endif
+

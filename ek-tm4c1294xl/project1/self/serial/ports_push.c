@@ -320,3 +320,13 @@ static char mbT[10*2];
 
   return n;
 }
+
+
+void    PushStringBcc(char  *psz)
+{
+  while (true)
+  {
+    if (!*psz) break;
+    PushChar1Bcc(*psz++);
+  }
+}
