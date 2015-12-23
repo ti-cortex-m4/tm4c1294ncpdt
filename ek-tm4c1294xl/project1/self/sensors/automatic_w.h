@@ -4,7 +4,7 @@ AUTOMATIC_W.H
 
 ------------------------------------------------------------------------------*/
 
-//void    QueryW(uchar  cbIn, uchar  cbOut);
+void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbMaxHeaderBcc);
 //serial  InputW(void);
 
 //bool    QueryEngAbsW_Full(uchar  bPercent);

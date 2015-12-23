@@ -12,7 +12,7 @@ AUTOMATIC_W!C
 //#include "../time/timedate.h"
 //#include "../hardware/watchdog.h"
 //#include "../kernel/crc_v.h"
-//#include "../serial/ports.h"
+#include "../serial/ports.h"
 //#include "../serial/ports2.h"
 #include "../serial/ports_devices.h"
 ////#include "../devices/devices.h"
@@ -27,9 +27,9 @@ AUTOMATIC_W!C
 
 #ifndef SKIP_W
 
-void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
+void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbMaxHeaderBcc)
 {
-  cbHeaderBcc = cbMaxHeader;
+  cbHeaderBcc = cbMaxHeaderBcc;
   cwInBuffBcc = 0;
 
   InitPush(0);
