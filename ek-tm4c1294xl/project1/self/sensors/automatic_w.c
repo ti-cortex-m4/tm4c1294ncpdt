@@ -7,18 +7,19 @@ AUTOMATIC_W!C
 #include "../main.h"
 #include "../console.h"
 //#include "../memory/mem_profile.h"
-////#include "../memory/mem_factors.h"
+#include "../memory/mem_factors.h"
 ////#include "../time/delay.h"
 //#include "../time/timedate.h"
-//#include "../hardware/watchdog.h"
+#include "../hardware/watchdog.h"
 //#include "../kernel/crc_v.h"
 #include "../serial/ports.h"
 //#include "../serial/ports2.h"
 #include "../serial/ports_devices.h"
-////#include "../devices/devices.h"
+#include "../serial/monitor.h"
+#include "../devices/devices.h"
 //#include "../sensors/unpack_v.h"
 ////#include "../digitals/digitals.h"
-//#include "../digitals/wait_answer.h"
+#include "../digitals/wait_answer.h"
 ////#include "automatic1.h"
 #include "device_w.h"
 #include "automatic_w.h"
@@ -41,8 +42,8 @@ void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbMaxHeaderBcc)
   for (i=0; i<cbOut-1; i++)
   {
     uchar b = SkipChar();
-    if (f == true) bSum += b;
-    if ((b & 0x7F) == 0x02) f = true;
+    if (f == true) bSum ^= b;
+    if ((b & 0x7F) == '!') f = true;
   }
 
   PushChar1Bcc(bSum);
@@ -50,7 +51,7 @@ void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbMaxHeaderBcc)
   Query(cwIn,cbOut,1);
 }
 
-/*
+
 serial  InputW(void)
 {
   InitWaitAnswer();
@@ -63,15 +64,15 @@ serial  InputW(void)
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-    if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      UnpackV();
+//    if (mpSerial[ibPort] == SER_INPUT_MASTER)
+//      DecompressK(0);
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (ChecksumV() == 0)
+//      if (MakeBccInBuff())
         mpSerial[ibPort] = SER_GOODCHECK;
-      else
-        mpSerial[ibPort] = SER_BADCHECK;
+//      else
+//        mpSerial[ibPort] = SER_BADCHECK;
 
       break;
     }
@@ -79,11 +80,12 @@ serial  InputW(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
+  MonitorIn();
   return mpSerial[ibPort];
 }
 
 
-/ *
+/*
 bool    QueryConfigS_Full(uchar  bPercent)
 {
   uchar i;
@@ -106,18 +108,20 @@ bool    QueryConfigS_Full(uchar  bPercent)
 
 time2   QueryTimeW_Full(uchar  bPercent)
 {
-  uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
   {
-//    QueryCloseK();
+    QueryCloseW();
     QueryTimeW();
 
-    if (BccInput() == SER_GOODCHECK) break;
+    if (InputW() == SER_GOODCHECK) break;
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (r == bMINORREPEATS) return GetTime2Error();
   ShowPercent(bPercent);
+
+  QueryCloseW();
 
   return GetTime2(ReadTimeW(), true);
 }
@@ -129,16 +133,16 @@ bool    QueryEngAbsW_Full(uchar  bPercent)
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
-    QueryEngAbsV();
+    QueryEngAbsW();
 
-    if (InputV() == SER_GOODCHECK) break;
+    if (InputW() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
   if (i == bMINORREPEATS) return(0);
   ShowPercent(bPercent);
 
-  ReadEngAbsV();
+  ReadEngAbsW();
   return(1);
 }
 
@@ -190,28 +194,51 @@ time2   ReadTimeCanW(void)
   time2 ti2 = QueryTimeW_Full(50);
   if (ti2.fValid == false) return GetTime2Error();
 
-//  tiChannelC = ti2.tiValue;
-//  mpboChannelsA[0] = true;
+  tiChannelC = ti2.tiValue;
+
+  uchar i;
+  for (i=0; i<4; i++) mpboChannelsA[i] = true;
 
   return GetTime2(ti2.tiValue, true);
 }
 
-/*
-double2 ReadCntCurrV(void)
+
+
+double2 ReadCntCurrW(void)
 {
   Clear();
 
-//  if (QueryConfigS_Full(50) == 0) return GetDouble2Error();
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
+    {
+      ShowPercent(50 + i);
+      QueryCloseW();
+      QueryEngAbsW(i);
 
-  if (QueryEngAbsW_Full(75) == 0) return GetDouble2Error();
+      if (InputW() == SER_GOODCHECK) break;
+      if (fKey == true) return GetDouble2Error();
+    }
 
-  mpdbChannelsC[0] = (double)mpdwChannelsA[0] / wDividerV;
-  mpboChannelsA[0] = true;
+    if (r == bMINORREPEATS) return GetDouble2Error();
+    ReadEngAbsW(i);
+  }
 
-  return GetDouble2(mpdbChannelsC[0], true);
+  QueryCloseW();
+
+
+  for (i=0; i<4; i++)
+  {
+    mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
+    mpboChannelsA[i] = true;
+  }
+
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
-
+/*
 double2 ReadCntMonCanV(uchar  ibMonth)
 {
   Clear();

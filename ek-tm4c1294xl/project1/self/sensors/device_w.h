@@ -7,9 +7,11 @@ DEVICE_W.H
 //extern  uint                    wDividerV;
 //
 //extern  ulong                   dwTimeV;
-//
-//
-//
+
+
+
+void    QueryCloseW(void);
+
 //void    PushAddressV(uchar  bCode);
 
 void    QueryTimeW(void);
@@ -19,12 +21,12 @@ time    ReadTimeW(void);
 //
 //void    QueryVersionV(void);
 //bool    ReadVersionV(void);
-//
-//void    QueryEngAbsV(void);
+
+void    QueryEngAbsW(uchar  ibLine);
 //void    QueryEngMonV(uchar  bMonth, uchar  bYear);
 //void    QueryEngDayV(uchar  bDay, uchar  bMonth, uchar  bYear);
-//
-//void    ReadEngAbsV(void);
+
+void    ReadEngAbsW(void);
 //void    ReadEngMonV(void);
 //void    ReadEngDayV(void);
 //
