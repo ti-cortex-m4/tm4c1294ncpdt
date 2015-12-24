@@ -52,7 +52,6 @@ void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
 }
 
 
-
 bool    ChecksumW(void)
 {
   InitPop(1);
@@ -64,6 +63,8 @@ bool    ChecksumW(void)
   {
     bT ^= PopChar0Bcc();
   }
+
+//  MonitorString("\n checksum "); MonitorCharHex(bT & 0x7F); MonitorString(" ? "); MonitorCharHex(PopChar0Bcc());
 
   return ((bT & 0x7F) == PopChar0Bcc());
 }
