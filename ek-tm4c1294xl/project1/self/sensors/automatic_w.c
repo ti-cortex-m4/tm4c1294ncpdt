@@ -17,7 +17,7 @@ AUTOMATIC_W!C
 #include "../serial/ports_devices.h"
 #include "../serial/monitor.h"
 #include "../devices/devices.h"
-//#include "../sensors/unpack_v.h"
+#include "../sensors/unpack_w.h"
 ////#include "../digitals/digitals.h"
 #include "../digitals/wait_answer.h"
 ////#include "automatic1.h"
@@ -52,6 +52,23 @@ void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
 }
 
 
+
+bool    ChecksumW(void)
+{
+  InitPop(1);
+
+  uchar bT = 0;
+
+  uint i;
+  for (i=0; i<CountInBuff()-2; i++)
+  {
+    bT ^= PopChar0Bcc();
+  }
+
+  return ((bT & 0x7F) == PopChar0Bcc());
+}
+
+
 serial  InputW(void)
 {
   InitWaitAnswer();
@@ -65,14 +82,14 @@ serial  InputW(void)
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      UnpackW(0);
+      UnpackW(false,3);
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-//      if (MakeBccInBuff())
+      if (ChecksumW())
         mpSerial[ibPort] = SER_GOODCHECK;
-//      else
-//        mpSerial[ibPort] = SER_BADCHECK;
+      else
+        mpSerial[ibPort] = SER_BADCHECK;
 
       break;
     }
