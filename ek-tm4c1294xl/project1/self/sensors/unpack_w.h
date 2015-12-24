@@ -4,5 +4,4 @@ UNPACK_W.H
 
 ------------------------------------------------------------------------------*/
 
-void    DecompressW(bool  fShow);
-void    DecompressW2(bool  fShow, uchar  bOffset);
+void    UnpackW(bool  fShow, uchar  bOffset);
