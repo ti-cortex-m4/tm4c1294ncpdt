@@ -204,9 +204,9 @@ void    PckQueryIO(uint  cwIn, uchar  cbOut)
 
 
 
-void    BccQueryIO(uint  cwIn, uchar  cbOut, uchar  cbMaxHeader)
+void    BccQueryIO(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
 {
-  cbHeaderBcc = cbMaxHeader;
+  cbHeaderBcc = cbHeaderMax;
   cwInBuffBcc = 0;
 
   InitPush(0);
