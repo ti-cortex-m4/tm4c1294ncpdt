@@ -41,6 +41,12 @@ Rovalant ÌÝÑ-3
 
 
 
+void    QueryCloseW(void)
+{
+}
+
+
+
 uchar   PushAddress1W(void)
 {
   InitPush(0);
@@ -150,22 +156,14 @@ time    ReadTimeW(void)
 //          (b == 0x11) |
 //          (b == 0x12));
 //}
-//
-//
-//
-//void    QueryEngAbsV(void)
-//{
-//  InitPush(2);
-//
-//  PushChar(0x20);
-//  PushChar(0x00);
-//
-//  PushAddressV(0x05);
-//
-//  QueryV(100+41, 15);
-//}
-//
-//
+
+
+
+void    QueryEngAbsW(uchar  ibLine)
+{
+}
+
+
 //void    QueryEngMonV(uchar  bMonth, uchar  bYear)
 //{
 //  InitPush(2);
@@ -214,14 +212,13 @@ time    ReadTimeW(void)
 //    default:   wDividerV = 1000; break;
 //  }
 //}
-//
-//
-//void    ReadEngAbsV(void)
-//{
-//  ReadEngV(13);
-//}
-//
-//
+
+
+void    ReadEngAbsV(void)
+{
+}
+
+
 //void    ReadEngMonV(void)
 //{
 //  ReadEngV(13+2);
