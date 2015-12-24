@@ -26,7 +26,7 @@ void    QueryEngAbsW(uchar  ibLine);
 //void    QueryEngMonV(uchar  bMonth, uchar  bYear);
 //void    QueryEngDayV(uchar  bDay, uchar  bMonth, uchar  bYear);
 
-void    ReadEngAbsW(void);
+void    ReadEngAbsW(uchar  ibLine);
 //void    ReadEngMonV(void);
 //void    ReadEngDayV(void);
 //
