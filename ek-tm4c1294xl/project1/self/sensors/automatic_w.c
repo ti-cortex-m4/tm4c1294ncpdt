@@ -28,9 +28,9 @@ AUTOMATIC_W!C
 
 #ifndef SKIP_W
 
-void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbMaxHeaderBcc)
+void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
 {
-  cbHeaderBcc = cbMaxHeaderBcc;
+  cbHeaderBcc = cbHeaderMax;
   cwInBuffBcc = 0;
 
   InitPush(0);
@@ -64,8 +64,8 @@ serial  InputW(void)
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-//    if (mpSerial[ibPort] == SER_INPUT_MASTER)
-//      DecompressK(0);
+    if (mpSerial[ibPort] == SER_INPUT_MASTER)
+      UnpackW(0);
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
