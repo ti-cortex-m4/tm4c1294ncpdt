@@ -161,6 +161,16 @@ time    ReadTimeW(void)
 
 void    QueryEngAbsW(uchar  ibLine)
 {
+  ASSERT(ibLine < 4);
+
+  uchar n = PushAddress2W();
+
+  PushStringBcc("1-1:");
+  PushChar1Bcc('1'+ibLine);
+  PushStringBcc(".8.0(1)");
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, n+13+1, 2);
 }
 
 
@@ -214,7 +224,7 @@ void    QueryEngAbsW(uchar  ibLine)
 //}
 
 
-void    ReadEngAbsV(void)
+void    ReadEngAbsW(uchar  ibLine)
 {
 }
 
