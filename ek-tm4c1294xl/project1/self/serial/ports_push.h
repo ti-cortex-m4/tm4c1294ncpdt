@@ -4,6 +4,8 @@ PORTS_STACK!H
 
 ------------------------------------------------------------------------------*/
 
+uint    GetPushSize(void);
+
 void    InitPush(uint  iwPush);
 void    InitPushCRC(void);
 void    InitPushPtr(void);
