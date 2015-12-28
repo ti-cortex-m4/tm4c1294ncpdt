@@ -27,6 +27,7 @@ Rovalant ÌÝÑ-3
 //#include "../digitals/limits.h"
 //#include "../special/special.h"
 #include "automatic_w.h"
+#include "device_k.h"
 #include "device_w.h"
 
 
@@ -38,6 +39,49 @@ Rovalant ÌÝÑ-3
 //static time             tiCurrV;
 //
 //ulong                   dwTimeV;
+
+
+
+double  PopDoubleW(void)
+{
+double  dbA,dbB;
+
+  uchar a = 0;
+  uchar b = 0;
+
+  uchar i;
+  for (i=0; i<40; i++)
+  {
+    uchar bT = PopChar() & 0x7F;
+
+    if (a == 0)
+    {
+      if (bT == '(') a = i+1;
+
+      dbA = 0;
+      dbB = 1;
+    }
+    else
+    {
+      if (bT == ')')
+      {
+        b = i-1;
+        for (i=a; i<b; i++) dbA *= 10;
+        return dbA;
+      }
+
+      if ((bT >= '0') && (bT <= '9'))
+        bT -= '0';
+      else
+        break;
+
+      dbA += dbB*bT;
+      dbB /= 10;
+    }
+  }
+
+  return 0;
+}
 
 
 
@@ -226,6 +270,9 @@ void    QueryEngAbsW(uchar  ibLine)
 
 void    ReadEngAbsW(uchar  ibLine)
 {
+  InitPop(10);
+
+  mpdbChannelsC[ibLine] = PopDoubleW();
 }
 
 
