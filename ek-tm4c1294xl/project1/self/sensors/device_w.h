@@ -23,8 +23,8 @@ time    ReadTimeW(void);
 //bool    ReadVersionV(void);
 
 void    QueryEngAbsW(uchar  ibLine);
-//void    QueryEngMonV(uchar  bMonth, uchar  bYear);
-//void    QueryEngDayV(uchar  bDay, uchar  bMonth, uchar  bYear);
+void    QueryEngMonW(uchar  ibLine, uchar  bTime);
+void    QueryEngDayW(uchar  ibLine, uchar  bTime);
 
 void    ReadEngAbsW(uchar  ibLine);
 //void    ReadEngMonV(void);

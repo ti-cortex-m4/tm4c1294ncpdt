@@ -4,6 +4,8 @@ DEVICE_W!C
 Rovalant ÌÝÑ-3
 ------------------------------------------------------------------------------*/
 
+// TODO K trans 96.68.0 96.68.1
+
 #include "../main.h"
 //#include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
@@ -124,7 +126,7 @@ void    QueryTimeW(void)
   PushStringBcc("1-0:0.9.1");
   PushChar1Bcc(0x03);
 
-  QueryW(1+28+2, n+10+1, 0);
+  QueryW(1+28+2, 0);
 }
 
 
@@ -207,44 +209,49 @@ void    QueryEngAbsW(uchar  ibLine)
 {
   ASSERT(ibLine < 4);
 
-  uchar n = PushAddress2W();
+  PushAddress2W();
 
   PushStringBcc("1-1:");
   PushChar1Bcc('1'+ibLine);
-  PushStringBcc(".8.0(1)");
+  PushStringBcc(".8.0");
+  PushStringBcc("(1)");
   PushChar1Bcc(0x03);
 
-  QueryW(1000, n+13+1, 2);
+  QueryW(1000, 2);
 }
 
 
-void    QueryEngMonW(uchar  bMonth, uchar  bYear)
+void    QueryEngMonW(uchar  ibLine, uchar  bTime)
 {
   ASSERT(ibLine < 4);
 
-  uchar n = PushAddress2W();
+  PushAddress2W();
 
   PushStringBcc("1-1:");
   PushChar1Bcc('1'+ibLine);
-  PushStringBcc(".8.0(1)");
+  PushStringBcc(".129.0*");
+  PushNumberBcc(bTime);
+  PushStringBcc("(1)");
   PushChar1Bcc(0x03);
 
-  QueryW(1000, n+13+1, 2);
+  QueryW(1000, 2);
 }
 
 
-void    QueryEngDayW(uchar  bDay, uchar  bMonth, uchar  bYear)
+void    QueryEngDayW(uchar  ibLine, uchar  bTime)
 {
   ASSERT(ibLine < 4);
 
-  uchar n = PushAddress2W();
+  PushAddress2W();
 
   PushStringBcc("1-1:");
   PushChar1Bcc('1'+ibLine);
-  PushStringBcc(".8.0(1)");
+  PushStringBcc(".182.0*");
+  PushNumberBcc(bTime);
+  PushStringBcc("(1)");
   PushChar1Bcc(0x03);
 
-  QueryW(1000, n+13+1, 2);
+  QueryW(1000, 2);
 }
 
 
