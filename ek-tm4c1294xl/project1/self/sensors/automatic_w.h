@@ -13,4 +13,4 @@ serial  InputW(void);
 
 time2   ReadTimeCanW(void);
 double2 ReadCntCurrW(void);
-//double2 ReadCntMonCanW(uchar  ibMonth);
+double2 ReadCntMonCanW(uchar  ibMonth);

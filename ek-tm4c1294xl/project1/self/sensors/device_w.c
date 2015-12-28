@@ -270,9 +270,9 @@ void    QueryEngAbsW(uchar  ibLine)
 
 void    ReadEngAbsW(uchar  ibLine)
 {
-  InitPop(10);
+  InitPop(1);
 
-  mpdbChannelsC[ibLine] = PopDoubleW();
+  mpdbChannelsC[ibLine] = PopDoubleW()/1000;
 }
 
 
