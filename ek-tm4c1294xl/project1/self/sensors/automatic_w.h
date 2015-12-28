@@ -7,7 +7,7 @@ AUTOMATIC_W.H
 void    QueryW(uint  cwIn, uchar  cbHeaderMax);
 serial  InputW(void);
 
-//bool    QueryEngAbsW_Full(uchar  bPercent);
+bool    QueryEngAbsW_Full(uchar  bPercent);
 bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent);
 bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent);
 

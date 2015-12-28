@@ -272,7 +272,7 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime)
 //}
 
 
-void    ReadEngAbsW(uchar  ibLine)
+void    ReadEngW(uchar  ibLine)
 {
   InitPop(1);
 
@@ -280,19 +280,7 @@ void    ReadEngAbsW(uchar  ibLine)
 }
 
 
-//void    ReadEngMonV(void)
-//{
-//  ReadEngV(13+2);
-//}
-//
-//
-//void    ReadEngDayV(void)
-//{
-//  ReadEngV(13+3);
-//}
-//
-//
-//
+
 //void    InitHeaderV(void)
 //{
 //  if (!UseBounds())
