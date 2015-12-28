@@ -169,6 +169,8 @@ bool    QueryEngAbsW_Full(uchar  bPercent)
     ReadEngW(i);
   }
 
+  QueryCloseW();
+
   return(1);
 }
 
@@ -193,6 +195,8 @@ bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
 
     ReadEngW(i);
   }
+
+  QueryCloseW();
 
   return(1);
 }
@@ -219,6 +223,8 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
     ReadEngW(i);
   }
 
+  QueryCloseW();
+
   return(1);
 }
 
@@ -230,6 +236,7 @@ time2   ReadTimeCanW(void)
 
   time2 ti2 = QueryTimeW_Full(50);
   if (ti2.fValid == false) return GetTime2Error();
+
 
   tiChannelC = ti2.tiValue;
 
@@ -249,8 +256,6 @@ double2 ReadCntCurrW(void)
   Clear();
 
   if (QueryEngAbsW_Full(50) == 0) return GetDouble2Error();
-
-  QueryCloseW();
 
 
   double dbTrans = mpdbTransCnt[ibDig];
@@ -282,8 +287,6 @@ double2 ReadCntMonCanW(uchar  ibMonth)
   {
     if (QueryEngDayW_Full(0, 75) == 0) return GetDouble2Error();
   }
-
-  QueryCloseW();
 
 
   double dbTrans = mpdbTransCnt[ibDig];
