@@ -189,7 +189,7 @@ bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
     }
 
     if (r == bMINORREPEATS) return(0);
-    ShowPercent(bPercent);
+    ShowPercent(bPercent+i);
 
     ReadEngW(i);
   }
@@ -214,7 +214,7 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
     }
 
     if (r == bMINORREPEATS) return(0);
-    ShowPercent(bPercent);
+    ShowPercent(bPercent+i);
 
     ReadEngW(i);
   }
@@ -234,7 +234,10 @@ time2   ReadTimeCanW(void)
   tiChannelC = ti2.tiValue;
 
   uchar i;
-  for (i=0; i<4; i++) mpboChannelsA[i] = true;
+  for (i=0; i<4; i++)
+  {
+    mpboChannelsA[i] = true;
+  }
 
   return GetTime2(ti2.tiValue, true);
 }
@@ -252,6 +255,7 @@ double2 ReadCntCurrW(void)
 
   double dbTrans = mpdbTransCnt[ibDig];
 
+  uchar i;
   for (i=0; i<4; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
@@ -272,7 +276,7 @@ double2 ReadCntMonCanW(uchar  ibMonth)
 
   if (ti.bMonth != ibMonth+1)
   {
-    if (QueryEngMonW_Full(0, 75) == 0) return GetDouble2Error();
+    if (QueryEngMonW_Full(-1, 75) == 0) return GetDouble2Error();
   }
   else
   {
