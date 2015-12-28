@@ -153,7 +153,7 @@ bool    QueryEngAbsW_Full(uchar  bPercent)
   uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
-    DelayOff();
+    QueryCloseW();
     QueryEngAbsW();
 
     if (InputW() == SER_GOODCHECK) break;
@@ -166,47 +166,48 @@ bool    QueryEngAbsW_Full(uchar  bPercent)
   ReadEngAbsW();
   return(1);
 }
-
-
-bool    QueryEngMonW_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
-{
-  uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryEngMonV(bMonth,bYear);
-
-    if (InputV() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(bPercent);
-
-  ReadEngMonV();
-  return(1);
-}
-
-
-bool    QueryEngDayW_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPercent)
-{
-  uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryEngDayV(bDay,bMonth,bYear);
-
-    if (InputV() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(bPercent);
-
-  ReadEngDayV();
-  return(1);
-}
 */
+
+bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    QueryCloseW();
+    QueryEngMonW(bTime);
+
+    if (InputW() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (r == bMINORREPEATS) return(0);
+  ShowPercent(bPercent);
+
+  ReadEngMonW();
+  return(1);
+}
+
+
+bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    QueryCloseW();
+    QueryEngDayW(bTime);
+
+    if (InputW() == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (r == bMINORREPEATS) return(0);
+  ShowPercent(bPercent);
+
+  ReadEngDayW();
+  return(1);
+}
+
+
 
 time2   ReadTimeCanW(void)
 {
