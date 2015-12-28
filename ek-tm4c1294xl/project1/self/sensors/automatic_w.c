@@ -256,8 +256,8 @@ double2 ReadCntCurrW(void)
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
-/*
-double2 ReadCntMonCanV(uchar  ibMonth)
+
+double2 ReadCntMonCanW(uchar  ibMonth)
 {
   Clear();
 
@@ -284,6 +284,6 @@ double2 ReadCntMonCanV(uchar  ibMonth)
 
   return GetDouble2(mpdbChannelsC[0], true);
 }
-*/
+
 #endif
 
