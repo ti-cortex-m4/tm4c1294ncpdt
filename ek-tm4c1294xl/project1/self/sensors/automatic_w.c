@@ -245,30 +245,16 @@ double2 ReadCntCurrW(void)
 {
   Clear();
 
-  uchar i;
-  for (i=0; i<4; i++)
-  {
-    uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
-    {
-      ShowPercent(50 + i);
-      QueryCloseW();
-      QueryEngAbsW(i);
-
-      if (InputW() == SER_GOODCHECK) break;
-      if (fKey == true) return GetDouble2Error();
-    }
-
-    if (r == bMINORREPEATS) return GetDouble2Error();
-    ReadEngW(i);
-  }
+  if (QueryEngAbsW_Full(50) == 0) return GetDouble2Error();
 
   QueryCloseW();
 
 
+  double dbTrans = mpdbTransCnt[ibDig];
+
   for (i=0; i<4; i++)
   {
-    mpdbChannelsC[i] *= mpdbTransCnt[ibDig];
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
 
@@ -279,8 +265,6 @@ double2 ReadCntCurrW(void)
 double2 ReadCntMonCanW(uchar  ibMonth)
 {
   Clear();
-
-//  if (QueryConfigS_Full(25) == 0) return GetDouble2Error();
 
   time2 ti2 = QueryTimeW_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
