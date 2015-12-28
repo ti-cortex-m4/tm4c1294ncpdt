@@ -31,7 +31,7 @@ AUTOMATIC_W!C
 void    QueryW(uint  cwIn, uchar  cbHeaderMax)
 {
   ASSERT(GetPushSize() < 256);
-  uchar cbOut = GetPushSize();
+  uchar cbOut = GetPushSize() + 1;
 
   cbHeaderBcc = cbHeaderMax;
   cwInBuffBcc = 0;
