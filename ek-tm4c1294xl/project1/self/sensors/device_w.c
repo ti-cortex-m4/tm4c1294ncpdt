@@ -218,39 +218,36 @@ void    QueryEngAbsW(uchar  ibLine)
 }
 
 
-//void    QueryEngMonV(uchar  bMonth, uchar  bYear)
-//{
-//  InitPush(2);
-//
-//  PushChar(0x22);
-//  PushChar(0x00);
-//
-//  PushAddressV(0x24);
-//
-//  PushChar(bMonth);
-//  PushChar(bYear);
-//
-//  QueryV(100+39, 17);
-//}
-//
-//
-//void    QueryEngDayV(uchar  bDay, uchar  bMonth, uchar  bYear)
-//{
-//  InitPush(2);
-//
-//  PushChar(0x23);
-//  PushChar(0x00);
-//
-//  PushAddressV(0x25);
-//
-//  PushChar(bDay);
-//  PushChar(bMonth);
-//  PushChar(bYear);
-//
-//  QueryV(100+40, 18);
-//}
-//
-//
+void    QueryEngMonW(uchar  bMonth, uchar  bYear)
+{
+  ASSERT(ibLine < 4);
+
+  uchar n = PushAddress2W();
+
+  PushStringBcc("1-1:");
+  PushChar1Bcc('1'+ibLine);
+  PushStringBcc(".8.0(1)");
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, n+13+1, 2);
+}
+
+
+void    QueryEngDayW(uchar  bDay, uchar  bMonth, uchar  bYear)
+{
+  ASSERT(ibLine < 4);
+
+  uchar n = PushAddress2W();
+
+  PushStringBcc("1-1:");
+  PushChar1Bcc('1'+ibLine);
+  PushStringBcc(".8.0(1)");
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, n+13+1, 2);
+}
+
+
 //static void ReadEngV(uchar  ibPop)
 //{
 //  InitPop(ibPop);
