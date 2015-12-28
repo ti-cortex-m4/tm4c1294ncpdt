@@ -22,7 +22,7 @@ Rovalant ÌÝÑ-3
 //#include "../keyboard/time/key_timedate.h"
 //#include "../time/timedate.h"
 //#include "../time/calendar.h"
-//#include "../time/delay.h"
+#include "../time/delay.h"
 //#include "../devices/devices.h"
 //#include "../devices/devices_time.h"
 //#include "../digitals/current/current_run.h"
