@@ -113,7 +113,7 @@ void    QueryCorrectU(void)
 }
 
 
-void    QueryEnergyAbsU(uchar  ibLine)
+void    QueryEngAbsU(uchar  ibLine)
 {
   uchar n = PushAddress2Bcc();
 
@@ -131,7 +131,7 @@ void    QueryEnergyAbsU(uchar  ibLine)
 }
 
 
-void    QueryEnergyDayU(uchar  ibLine, time  ti)
+void    QueryEngDayU(uchar  ibLine, time  ti)
 {
   uchar n = PushAddress2Bcc();
 
@@ -175,7 +175,7 @@ void    QueryEngMonU(uchar  ibLine, time  ti)
 }
 
 
-void    QueryEnergySpecU(uchar  ibLine)
+void    QueryEngSpecU(uchar  ibLine)
 {
   InitPush(0);
 
@@ -198,7 +198,7 @@ void    QueryEnergySpecU(uchar  ibLine)
 }
 
 
-void    ReadEnergyU(uchar  ibLine)
+void    ReadEngU(uchar  ibLine)
 {
   InitPop(1);
 
@@ -206,7 +206,7 @@ void    ReadEnergyU(uchar  ibLine)
 }
 
 
-void    ReadEnergyU_SkipLine(uchar  ibLine)
+void    ReadEng_SkipLine(uchar  ibLine)
 {
   mpdbChannelsC[ibLine] = 0;
 }

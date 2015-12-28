@@ -20,12 +20,12 @@ uchar   GetMaxLine(uchar  ibCan);
 void    QueryCloseU(void);
 void    QueryOptionU(void);
 void    QueryCorrectU(void);
-void    QueryEnergyAbsU(uchar  ibLine);
+void    QueryEngAbsU(uchar  ibLine);
 void    QueryEngDayU(uchar  ibLine, time  ti);
 void    QueryEngMonU(uchar  ibLine, time  ti);
-void    QueryEnergySpecU(uchar  ibLine);
-void    ReadEnergyU(uchar  ibLine);
-void    ReadEnergyU_SkipLine(uchar  ibLine);
+void    QueryEngSpecU(uchar  ibLine);
+void    ReadEngU(uchar  ibLine);
+void    ReadEng_SkipLine(uchar  ibLine);
 
 void    InitHeaderU(void);
 void    QueryHeaderU(void);
