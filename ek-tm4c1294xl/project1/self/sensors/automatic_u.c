@@ -136,7 +136,7 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
       {
         ShowPercent(50 + i);
         QueryCloseU();
-        QueryEnergyMonU(i, ti);
+        QueryEngMonU(i, ti);
 
         if (BccInput() == SER_GOODCHECK) break;
         if (IndexInBuff() == 10)
