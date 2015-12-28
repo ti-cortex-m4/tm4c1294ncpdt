@@ -45,14 +45,14 @@ double2 ReadCntCurrU(uchar  bMaxLines)
     {
       ShowPercent(50 + i);
       QueryCloseU();
-      QueryEnergyAbsU(i);
+      QueryEngAbsU(i);
 
       if (BccInput() == SER_GOODCHECK) break;
       if (fKey == true) return GetDouble2Error();
     }
 
     if (r == bMINORREPEATS) return GetDouble2Error();
-    ReadEnergyU(i);
+    ReadEngU(i);
   }
 
   QueryCloseU();
@@ -116,7 +116,7 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
       }
 
       if (r == bMINORREPEATS) return GetDouble2Error();
-      ReadEnergyU(i);
+      ReadEngU(i);
     }
 
     QueryCloseU();
@@ -150,7 +150,7 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
       }
 
       if (r == bMINORREPEATS) return GetDouble2Error();
-      ReadEnergyU(i);
+      ReadEngU(i);
     }
 
     QueryCloseU();

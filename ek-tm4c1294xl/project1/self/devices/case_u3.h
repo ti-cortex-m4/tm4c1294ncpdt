@@ -62,7 +62,7 @@
       }
 
       cbRepeat = GetMaxRepeats();
-      QueryEnergySpecU(ibLineU);
+      QueryEngSpecU(ibLineU);
       SetCurr(DEV_ENERGY_U3);
       break;
 
@@ -81,7 +81,7 @@
         if (++ibLineU < bMaxLine)
         {
           Clear(); ShowPercent(52+ibLineU);
-          QueryEnergySpecU(ibLineU);
+          QueryEngSpecU(ibLineU);
           SetCurr(DEV_ENERGY_U3);
         }
         else
@@ -95,7 +95,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryEnergySpecU(ibLineU);
+          QueryEngSpecU(ibLineU);
           SetCurr(DEV_ENERGY_U3);
         }
       }

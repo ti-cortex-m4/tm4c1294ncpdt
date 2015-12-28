@@ -4060,23 +4060,23 @@ void    RunDevices(void)
       ibLineU = 0;
       if (SkipLine(ibDig, ibLineU) == true)
       {
-        ReadEnergyU_SkipLine(ibLineU);
+        ReadEng_SkipLine(ibLineU);
         ibLineU++;
       }
 
       cbRepeat = GetMaxRepeats();
-      QueryEnergySpecU(ibLineU);
+      QueryEngSpecU(ibLineU);
       SetCurr(DEV_ENERGY_U3);
       break;
 
     case DEV_ENERGY_U3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadEnergyU(ibLineU);
+        ReadEngU(ibLineU);
 
         if (SkipLine(ibDig, ibLineU+1) == true)
         {
-          ReadEnergyU_SkipLine(ibLineU+1);
+          ReadEng_SkipLine(ibLineU+1);
           ibLineU++;
         }
 
@@ -4084,7 +4084,7 @@ void    RunDevices(void)
         if (++ibLineU < bMaxLine)
         {
           Clear(); ShowPercent(52+ibLineU);
-          QueryEnergySpecU(ibLineU);
+          QueryEngSpecU(ibLineU);
           SetCurr(DEV_ENERGY_U3);
         }
         else
@@ -4098,7 +4098,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryEnergySpecU(ibLineU);
+          QueryEngSpecU(ibLineU);
           SetCurr(DEV_ENERGY_U3);
         }
       }
