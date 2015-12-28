@@ -28,8 +28,11 @@ AUTOMATIC_W!C
 
 #ifndef SKIP_W
 
-void    QueryW(uint  cwIn, uchar  cbOut, uchar  cbHeaderMax)
+void    QueryW(uint  cwIn, uchar  cbHeaderMax)
 {
+  ASSERT(GetPushSize() < 256);
+  uchar cbOut = GetPushSize();
+
   cbHeaderBcc = cbHeaderMax;
   cwInBuffBcc = 0;
 
