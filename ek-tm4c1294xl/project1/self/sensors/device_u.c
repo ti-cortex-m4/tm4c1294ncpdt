@@ -154,7 +154,7 @@ void    QueryEnergyDayU(uchar  ibLine, time  ti)
 }
 
 
-void    QueryEnergyMonU(uchar  ibLine, time  ti)
+void    QueryEngMonU(uchar  ibLine, time  ti)
 {
   uchar n = PushAddress2Bcc();
 
