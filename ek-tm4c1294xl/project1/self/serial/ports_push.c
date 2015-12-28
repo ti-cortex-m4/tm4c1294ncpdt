@@ -18,10 +18,21 @@ PORTS_PUSH!H
 
 static char const       szHex[0x10]  = "0123456789ABCDEF";
 
+static uint             cwPushSize;
+
+
+
+uint    GetPushSize(void)
+{
+  return cwPushSize;
+}
+
 
 
 void    InitPush(uint  iwPush)
 {
+  cwPushSize = 0;
+
   switch (ibPort) {
     case 0: iwPush0 = iwPush; break;
     case 1: iwPush1 = iwPush; break;
@@ -90,6 +101,8 @@ void    Push(void  *pbData, uint  wSize) {
 
 uchar   PushChar(uchar  b)
 {
+  cwPushSize++;
+
   Push(&b, sizeof(uchar));
   return sizeof(uchar);
 }
