@@ -11,4 +11,4 @@ bool    QueryConfigS_Full(uchar  bPercent);
 
 time2   ReadTimeCanS(void);
 double2 ReadCntCurrS(void);
-double2 ReadCntMonCanS(uchar  ibMonth);
+double2 ReadCntMonCanS(uchar  ibMon);
