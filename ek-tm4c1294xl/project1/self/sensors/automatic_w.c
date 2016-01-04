@@ -319,21 +319,25 @@ double2 ReadCntMonCanW(uchar  ibMon)
 {
   Clear();
 
+  double2 db2 = QueryKtransW_Full(25);
+  if (db2.fValid == false) return GetDouble2Error();
+  double dbTrans = db2.dbValue;
+
+
   time2 ti2 = QueryTimeW_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
   if (ti.bMonth != ibMon+1)
   {
-    if (QueryEngMonW_Full(-1, 75) == 0) return GetDouble2Error();
+    uchar m = (12 + ti.bMonth - (ibMon+1)) % 12;
+    if (QueryEngMonW_Full(m, 75) == 0) return GetDouble2Error();
   }
   else
   {
     if (QueryEngDayW_Full(0, 75) == 0) return GetDouble2Error();
   }
 
-
-  double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
   for (i=0; i<4; i++)
