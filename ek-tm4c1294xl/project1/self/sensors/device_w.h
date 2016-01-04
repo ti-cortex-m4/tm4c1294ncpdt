@@ -8,7 +8,7 @@ DEVICE_W.H
 //
 //extern  ulong                   dwTimeV;
 
-
+double  PopDoubleW(void);
 
 void    QueryCloseW(void);
 
@@ -21,6 +21,8 @@ time    ReadTimeW(void);
 //
 //void    QueryVersionV(void);
 //bool    ReadVersionV(void);
+
+void    QueryKtransW(uchar  ibKtrans);
 
 void    QueryEngAbsW(uchar  ibLine);
 void    QueryEngMonW(uchar  ibLine, uchar  bTime);

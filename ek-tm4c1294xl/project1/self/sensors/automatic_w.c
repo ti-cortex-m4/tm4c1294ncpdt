@@ -148,6 +148,47 @@ time2   QueryTimeW_Full(uchar  bPercent)
 }
 
 
+double2 QueryKtransW_Full(uchar  bPercent)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    QueryCloseW();
+    QueryKtransW(0);
+
+    if (InputW() == SER_GOODCHECK) break;
+    if (fKey == true) return GetDouble2Error();
+  }
+
+  if (r == bMINORREPEATS) return GetDouble2Error();
+  ShowPercent(bPercent+0);
+
+  InitPop(1);
+  double dbKtrans0 = PopDoubleW();
+
+
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    QueryCloseW();
+    QueryKtransW(1);
+
+    if (InputW() == SER_GOODCHECK) break;
+    if (fKey == true) return GetDouble2Error();
+  }
+
+  if (r == bMINORREPEATS) return GetDouble2Error();
+  ShowPercent(bPercent+1);
+
+  InitPop(1);
+  double dbKtrans1 = PopDoubleW();
+
+
+  QueryCloseW();
+
+  return GetDouble2(dbKtrans0*dbKtrans1, true);
+}
+
+
 bool    QueryEngAbsW_Full(uchar  bPercent)
 {
   uchar i;
@@ -255,10 +296,13 @@ double2 ReadCntCurrW(void)
 {
   Clear();
 
+  double2 db2 = QueryKtransW_Full(25);
+  if (db2.fValid == false) return GetDouble2Error();
+  double dbTrans = db2.dbValue;
+
+
   if (QueryEngAbsW_Full(50) == 0) return GetDouble2Error();
 
-
-  double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
   for (i=0; i<4; i++)

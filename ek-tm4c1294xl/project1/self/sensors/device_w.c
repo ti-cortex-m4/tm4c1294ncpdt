@@ -4,8 +4,6 @@ DEVICE_W!C
 Rovalant ÌÝÑ-3
 ------------------------------------------------------------------------------*/
 
-// TODO K trans 96.68.0 96.68.1
-
 #include "../main.h"
 //#include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
@@ -82,7 +80,7 @@ double  dbA,dbB;
     }
   }
 
-  return 0;
+  return -1;
 }
 
 
@@ -153,6 +151,22 @@ time    ReadTimeW(void)
   ti.bSecond = PopChar2Bcc(); PopChar();
 
   return ti;
+}
+
+
+
+void    QueryKtransW(uchar  ibKtrans)
+{
+  ASSERT(ibKtrans < 2);
+
+  PushAddress2W();
+
+  PushStringBcc("0-0:");
+  PushStringBcc("96.68.");
+  PushChar1Bcc('0'+ibKtrans);
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, 1);
 }
 
 
