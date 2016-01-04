@@ -213,7 +213,7 @@ double2 ReadCntCurrS(void)
 }
 
 
-double2 ReadCntMonCanS(uchar  ibMonth)
+double2 ReadCntMonCanS(uchar  ibMon)
 {
   Clear();
 
@@ -223,9 +223,9 @@ double2 ReadCntMonCanS(uchar  ibMonth)
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
-  if (ti.bMonth != ibMonth+1)
+  if (ti.bMonth != ibMon+1)
   {
-    if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMonth) % bMONTHS, 75) == 0) return GetDouble2Error();
+    if (QueryEngMonS_Full((bMONTHS+ti.bMonth-1-ibMon) % bMONTHS, 75) == 0) return GetDouble2Error();
   }
   else
   {

@@ -70,14 +70,14 @@ double2 ReadCntCurrQ(void)
 
 
 
-double2 ReadCntMonCanQ(uchar  ibMonth)
+double2 ReadCntMonCanQ(uchar  ibMon)
 {
   time2 ti2 = ReadTimeCanK();
   if (ti2.fValid == false) return GetDouble2Error();
 
   time ti = ti2.tiValue;
 
-  if (ti.bMonth == ibMonth+1)
+  if (ti.bMonth == ibMon+1)
   {
     if (ti.bDay > 1)
       ti.bDay--;
@@ -118,8 +118,8 @@ double2 ReadCntMonCanQ(uchar  ibMonth)
   }
   else
   {
-    ti.bYear = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
-    ti.bMonth = ibMonth+1;
+    ti.bYear = (ibMon+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    ti.bMonth = ibMon+1;
 
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)

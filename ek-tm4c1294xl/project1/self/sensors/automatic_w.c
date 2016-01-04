@@ -315,7 +315,7 @@ double2 ReadCntCurrW(void)
 }
 
 
-double2 ReadCntMonCanW(uchar  ibMonth)
+double2 ReadCntMonCanW(uchar  ibMon)
 {
   Clear();
 
@@ -323,7 +323,7 @@ double2 ReadCntMonCanW(uchar  ibMonth)
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
-  if (ti.bMonth != ibMonth+1)
+  if (ti.bMonth != ibMon+1)
   {
     if (QueryEngMonW_Full(-1, 75) == 0) return GetDouble2Error();
   }

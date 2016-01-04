@@ -225,7 +225,7 @@ double2 ReadCntCurrV(void)
 }
 
 
-double2 ReadCntMonCanV(uchar  ibMonth)
+double2 ReadCntMonCanV(uchar  ibMon)
 {
   Clear();
 
@@ -235,10 +235,10 @@ double2 ReadCntMonCanV(uchar  ibMonth)
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
-  if (ti.bMonth != ibMonth+1)
+  if (ti.bMonth != ibMon+1)
   {
-    ti.bMonth = ibMonth+2;
-    ti.bYear = (ibMonth+2 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
+    ti.bMonth = ibMon+2;
+    ti.bYear = (ibMon+2 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
 
     if (QueryEngMonV_Full(ti.bMonth, ti.bYear, 75) == 0) return GetDouble2Error();
   }
