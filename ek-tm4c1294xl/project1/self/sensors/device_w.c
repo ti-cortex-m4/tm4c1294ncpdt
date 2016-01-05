@@ -153,6 +153,7 @@ void    ReadTypeW(void)
     if (b == ')') break;
     if (i >= 16) break;
 
+    if (b == '\\') b = '/';
     if (f) szLo[i++] = b;
 
     if (b == '(') f = true;

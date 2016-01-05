@@ -107,38 +107,6 @@ serial  InputW(void)
 
 
 
-bool    AutomaticW(void)
-{
-  uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
-  {
-    QueryCloseW();
-    QueryTypeW();
-
-    if (InputW() == SER_GOODCHECK) break;
-    if (fKey == true) return false;
-  }
-
-  if (r == bMINORREPEATS) return false;
-  ShowPercent(25);
-
-  ReadTypeW();
-
-  QueryCloseW();
-//
-//
-//  dbKtrans = 1;                         // K трансформации
-//  dbKpulse = 5000;                      // K преобразования
-//
-  Delay(1000);
-//
-//  SetCanalsAll();                       // сохранение К преобразования и К трасформации
-
-  return true;
-}
-
-
-
 time2   QueryTimeW_Full(uchar  bPercent)
 {
   uchar r;
@@ -199,6 +167,43 @@ double2 QueryKtransW_Full(uchar  bPercent)
 
   return GetDouble2(dbKtrans0*dbKtrans1, true);
 }
+
+
+bool    AutomaticW(void)
+{
+  Clear();
+
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    QueryCloseW();
+    QueryTypeW();
+
+    if (InputW() == SER_GOODCHECK) break;
+    if (fKey == true) return false;
+  }
+
+  if (r == bMINORREPEATS) return false;
+  ShowPercent(25);
+
+  ReadTypeW();
+
+  QueryCloseW();
+
+
+  Delay(1000);
+  Clear();
+
+  double2 db2 = QueryKtransW_Full(50);
+  if (db2.fValid == false) return false;
+  double dbTrans = db2.dbValue;
+
+  mpdbTransEng[ibDig] = dbTrans;
+  mpdbTransCnt[ibDig] = dbTrans;
+
+  return true;
+}
+
 
 
 bool    QueryEngAbsW_Full(uchar  bPercent)
