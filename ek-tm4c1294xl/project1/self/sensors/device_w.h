@@ -12,7 +12,8 @@ double  PopDoubleW(void);
 
 void    QueryCloseW(void);
 
-//void    PushAddressV(uchar  bCode);
+void    QueryTypeW(void);
+void    ReadTypeW(void);
 
 void    QueryTimeW(void);
 time    ReadTimeW(void);
