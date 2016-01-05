@@ -228,6 +228,13 @@ bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
       QueryEngMonW(i,bTime);
 
       if (InputW() == SER_GOODCHECK) break;
+      if (IndexInBuff() == 10)
+      {
+        Clear();
+        sprintf(szLo+3, "мес€ц -%u ?",bTime);
+        Delay(1000);
+        return false;
+      }
       if (fKey == true) return false;
     }
 
@@ -255,6 +262,13 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
       QueryEngDayW(i,bTime);
 
       if (InputW() == SER_GOODCHECK) break;
+      if (IndexInBuff() == 10)
+      {
+        Clear();
+        sprintf(szLo+3, "сутки -%u ?",bTime);
+        Delay(1000);
+        return false;
+      }
       if (fKey == true) return false;
     }
 
@@ -331,7 +345,6 @@ double2 ReadCntMonCanW(uchar  ibMon)
   if (ti.bMonth != ibMon+1)
   {
     uchar m = (12 + ti.bMonth - (ibMon+1) - 1) % 12;
-    MonitorString("\n m=");MonitorCharDec(m);
     if (QueryEngMonW_Full(m, 75) == 0) return GetDouble2Error();
   }
   else
