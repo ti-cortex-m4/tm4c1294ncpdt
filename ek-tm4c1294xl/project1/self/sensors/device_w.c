@@ -16,7 +16,7 @@ Rovalant ÌÝÑ-3
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
 //#include "../serial/monitor.h"
-//#include "../display/display.h"
+#include "../display/display.h"
 //#include "../keyboard/time/key_timedate.h"
 //#include "../time/timedate.h"
 //#include "../time/calendar.h"
@@ -122,6 +122,41 @@ uchar   PushAddress2W(void)
   PushChar1Bcc(0x02);
 
   return n+3;
+}
+
+
+
+void    QueryTypeW(void)
+{
+  PushAddress2W();
+
+  PushStringBcc("0-0:");
+  PushStringBcc("96.53.0");
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, 1);
+}
+
+
+void    ReadTypeW(void)
+{
+  Clear();
+  InitPop(1);
+
+  bool f = false;
+
+  uchar i = 0;
+  while (true)
+  {
+    uchar b = PopChar0Bcc();
+
+    if (b == ')') break;
+    if (i >= 16) break;
+
+    if (f) szLo[i++] = b;
+
+    if (b == '(') f = true;
+  }
 }
 
 

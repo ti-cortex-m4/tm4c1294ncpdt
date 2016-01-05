@@ -106,26 +106,38 @@ serial  InputW(void)
 }
 
 
-/*
-bool    QueryConfigS_Full(uchar  bPercent)
-{
-  uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryConfigS();
 
-    if (InputV() == SER_GOODCHECK) break;
+bool    AutomaticW(void)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    QueryCloseW();
+    QueryTypeW();
+
+    if (InputW() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
-  ShowPercent(bPercent);
+  if (r == bMINORREPEATS) return false;
+  ShowPercent(25);
 
-  ReadConfigS();
+  ReadTypeW();
+
+  QueryCloseW();
+//
+//
+//  dbKtrans = 1;                         // K трансформации
+//  dbKpulse = 5000;                      // K преобразования
+//
+  Delay(1000);
+//
+//  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+
   return true;
 }
-*/
+
+
 
 time2   QueryTimeW_Full(uchar  bPercent)
 {
