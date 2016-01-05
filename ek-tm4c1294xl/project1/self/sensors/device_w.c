@@ -269,7 +269,7 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime)
 
   PushStringBcc("1-1:");
   PushChar1Bcc('1'+ibLine);
-  PushStringBcc(".182.0*");
+  PushStringBcc(".128.0*");
   PushNumberBcc(bTime);
   PushStringBcc("(1)");
   PushChar1Bcc(0x03);

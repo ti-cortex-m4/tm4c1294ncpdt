@@ -330,7 +330,8 @@ double2 ReadCntMonCanW(uchar  ibMon)
 
   if (ti.bMonth != ibMon+1)
   {
-    uchar m = (12 + ti.bMonth - (ibMon+1)) % 12;
+    uchar m = (12 + ti.bMonth - (ibMon+1) - 1) % 12;
+    MonitorString("\n m=");MonitorCharDec(m);
     if (QueryEngMonW_Full(m, 75) == 0) return GetDouble2Error();
   }
   else
