@@ -36,9 +36,9 @@ void    UnpackW(bool  fShow, uchar  bOffset)
     {
       if (PopChar0Bcc() == ')') j++;
 
-      if ((j == cbHeaderBcc) && (i+bOffset == IndexInBuff()))
+      if ((j == cbHeaderBcc) && (i+bOffset == IndexInBuff()) && (InBuff(IndexInBuff()-2) == 0x03))
       {
-        SetCountInBuff(i+bOffset+1);
+        SetCountInBuff(i+bOffset);
 
         if ((fShow == true) && (IndexInBuff() > 40)) sprintf(szLo," прием: %-4u    ",IndexInBuff());
 

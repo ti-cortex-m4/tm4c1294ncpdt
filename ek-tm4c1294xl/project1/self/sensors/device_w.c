@@ -87,14 +87,14 @@ double  dbA,dbB;
 
 void    QueryCloseW(void)
 {
-//  InitPush(0);
-//
-//  PushChar1Bcc(0x01);
-//  PushChar1Bcc('B');
-//  PushChar1Bcc('0');
-//  PushChar1Bcc(0x03);
-//
-//  BccQueryIO(0, 4+1, 0);
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('B');
+  PushChar1Bcc('0');
+  PushChar1Bcc(0x03);
+
+  QueryW(0, 0);
   DelayOff();
 }
 

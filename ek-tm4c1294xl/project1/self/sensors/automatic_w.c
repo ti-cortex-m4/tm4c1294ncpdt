@@ -46,7 +46,7 @@ void    QueryW(uint  cwIn, uchar  cbHeaderMax)
   {
     uchar b = SkipChar();
     if (f == true) bSum ^= b;
-    if ((b & 0x7F) == '!') f = true;
+    if (((b & 0x7F) == 0x01) || ((b & 0x7F) == '!')) f = true;
   }
 
   PushChar1Bcc(bSum);
