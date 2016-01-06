@@ -7,8 +7,8 @@ Rovalant ÌÝÑ-3
 #include "../main.h"
 //#include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
-//#include "../memory/mem_current.h"
-//#include "../memory/mem_factors.h"
+#include "../memory/mem_current.h"
+#include "../memory/mem_factors.h"
 //#include "../memory/mem_realtime.h"
 //#include "../memory/mem_energy_spec.h"
 //#include "../memory/mem_profile.h"
@@ -21,9 +21,9 @@ Rovalant ÌÝÑ-3
 //#include "../time/timedate.h"
 //#include "../time/calendar.h"
 #include "../time/delay.h"
-//#include "../devices/devices.h"
+#include "../devices/devices.h"
 //#include "../devices/devices_time.h"
-//#include "../digitals/current/current_run.h"
+#include "../digitals/current/current_run.h"
 //#include "../digitals/limits.h"
 //#include "../special/special.h"
 #include "automatic_w.h"
@@ -34,11 +34,7 @@ Rovalant ÌÝÑ-3
 
 #ifndef SKIP_W
 
-//uint                    wDividerV;
-//
-//static time             tiCurrV;
-//
-//ulong                   dwTimeV;
+uchar                   ibLineW;
 
 
 
@@ -333,8 +329,9 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime)
 
 void    ReadEngW(uchar  ibLine)
 {
-  InitPop(1);
+  ASSERT(ibLine < 4);
 
+  InitPop(1);
   mpdbChannelsC[ibLine] = PopDoubleW()/1000;
 }
 
@@ -444,15 +441,21 @@ void    ReadEngW(uchar  ibLine)
 //
 //  return(1);
 //}
-//
-//
-//
-//void    ReadCurrentV(void)
-//{
+
+
+
+void    ReadCurrentW(void)
+{
 //  ReadEngAbsV();
 //  mpdwBaseDig[0] = mpdwChannelsA[0]*mpdbPulseMnt[ibDig]/wDividerV;
-//
-//  MakeCurrent();
-//}
+
+  uchar i;
+  for (i=0; i<MAX_LINE_W; i++)
+  {
+    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseMnt[ibDig];
+  }
+
+  MakeCurrent();
+}
 
 #endif

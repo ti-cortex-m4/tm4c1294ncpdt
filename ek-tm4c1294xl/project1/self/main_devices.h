@@ -633,6 +633,7 @@ typedef enum
   DEV_OPTION_W3         =  0x1B43,
   DEV_POSTOPTION_W3     =  0x1B44,
   DEV_ENERGY_W3         =  0x1B45,
+  DEV_POSTENERGY_W3     =  0x1B46,
 
 #endif
 

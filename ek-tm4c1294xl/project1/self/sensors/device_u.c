@@ -366,7 +366,7 @@ void    ReadCurrentU(uchar  bMaxLine)
   uchar i;
   for (i=0; i<bMaxLine; i++)
   {
-    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseHou[ibDig];
+    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseMnt[ibDig];
   }
 
   MakeCurrent();
