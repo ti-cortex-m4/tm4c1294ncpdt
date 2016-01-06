@@ -625,6 +625,17 @@ typedef enum
 
 #endif
 
+#ifndef SKIP_W
+
+  DEV_START_W3          =  0x1B40,
+  DEV_OPENCANAL_W3      =  0x1B41,
+  DEV_POSTOPENCANAL_W3  =  0x1B42,
+  DEV_OPTION_W3         =  0x1B43,
+  DEV_POSTOPTION_W3     =  0x1B44,
+  DEV_ENERGY_W3         =  0x1B45,
+
+#endif
+
   DEV_PAUSE             =  1
 
 } device;

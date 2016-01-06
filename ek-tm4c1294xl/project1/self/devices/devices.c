@@ -48,6 +48,7 @@ DEVICES.C
 #include "../sensors/device_u.h"
 #include "../sensors/device_u2.h"
 #include "../sensors/device_v.h"
+#include "../sensors/device_w.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -4060,7 +4061,7 @@ void    RunDevices(void)
       ibLineU = 0;
       if (SkipLine(ibDig, ibLineU) == true)
       {
-        ReadEng_SkipLine(ibLineU);
+        ReadEngU_SkipLine(ibLineU);
         ibLineU++;
       }
 
@@ -4076,7 +4077,7 @@ void    RunDevices(void)
 
         if (SkipLine(ibDig, ibLineU+1) == true)
         {
-          ReadEng_SkipLine(ibLineU+1);
+          ReadEngU_SkipLine(ibLineU+1);
           ibLineU++;
         }
 
@@ -4419,6 +4420,93 @@ void    RunDevices(void)
 
           QueryEngAbsV();
           SetCurr(DEV_ENERGY_V3);
+        }
+      }
+      break;
+
+#endif
+
+#ifndef SKIP_W
+
+
+#endif
+
+#ifndef SKIP_W
+
+    case DEV_START_W3:
+      ShowPercent(50);
+
+      cbRepeat = GetMaxRepeats();
+      QueryOpenW();
+      SetCurr(DEV_OPENCANAL_W3);
+      break;
+
+    case DEV_OPENCANAL_W3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTOPENCANAL_W3);
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryOpenW();
+          SetCurr(DEV_OPENCANAL_W3);
+        }
+      }
+      break;
+
+    case DEV_POSTOPENCANAL_W3:
+      Clear(); ShowPercent(51);
+
+      cbRepeat = GetMaxRepeats();
+      QueryOptionW();
+      SetCurr(DEV_OPTION_W3);
+      break;
+
+    case DEV_OPTION_W3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTOPTION_W3);
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryOptionW();
+          SetCurr(DEV_OPTION_W3);
+        }
+      }
+      break;
+
+    case DEV_POSTOPTION_W3:
+      ShowPercent(52);
+
+      cbRepeat = GetMaxRepeats();
+      QueryEngAbsW();
+      SetCurr(DEV_ENERGY_W3);
+      break;
+
+    case DEV_ENERGY_W3:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ReadEngW();
+        ReadCurrentW();
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorCurrent();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryEngAbsW();
+          SetCurr(DEV_ENERGY_W3);
         }
       }
       break;
