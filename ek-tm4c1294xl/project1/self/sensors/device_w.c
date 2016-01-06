@@ -224,7 +224,10 @@ void    QueryOptionW(void)
   PushChar1Bcc(0x0D);
   PushChar1Bcc(0x0A);
 
-  Query(1+13+2, 4+2, 1);
+  cbHeaderBcc = 1;
+  cwInBuffBcc = 0;
+
+  Query(1000, 4+2, 1);
 }
 
 
