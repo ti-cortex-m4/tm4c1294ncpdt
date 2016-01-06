@@ -80,7 +80,7 @@
     case DEV_POSTENERGY_W3:
       ReadEngW(ibLineW);
 
-      if (++ibLineW < 4)
+      if (++ibLineW < MAX_LINE_W)
         MakePause(DEV_POSTOPTION_W3);
       else
         ReadCurrentW();
