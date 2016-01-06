@@ -163,13 +163,13 @@ void    DevicesInput(void)
       }
 
       else if ((GetCurr() == DEV_OPTION_W2) || (GetCurr() == DEV_OPTION_W3))
-        UnpackW(true, 4);
+        UnpackW(true, 3);
 
       else if (GetCurr() == DEV_HEADER_W2)
-        UnpackW(true, 6);
+        UnpackW(true, 3);
 
       else if (GetCurr() == DEV_ENERGY_W3)
-        UnpackW(true, 6);
+        UnpackW(true, 3);
     }
 #endif
 }
