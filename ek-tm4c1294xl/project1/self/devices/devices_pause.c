@@ -169,4 +169,49 @@ void    DevicesPause(void)
       }
     }
 #endif
+
+#ifndef SKIP_W
+    else if (diCurr.bDevice == 29)
+    {
+      if (mpSerial[ibPort] == SER_BADLINK)
+      {
+        if ((GetCurr() == DEV_OPENCANAL_W2) || (GetCurr() == DEV_OPENCANAL_W3))
+        {
+          MonitorIn();
+          uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
+          if ((b == '\r') || (b == '\n'))
+            mpSerial[ibPort] = SER_GOODCHECK;
+          else
+            mpSerial[ibPort] = SER_BADCHECK;
+        }
+
+        else if (GetCurr() == DEV_PASSWORD_W2)
+        {
+          MonitorIn();
+          if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+            mpSerial[ibPort] = SER_GOODCHECK;
+          else
+            mpSerial[ibPort] = SER_BADCHECK;
+        }
+
+        else if (GetCurr() == DEV_POSTCONTROL_W2)
+        {
+          MonitorIn();
+          if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+            mpSerial[ibPort] = SER_GOODCHECK;
+          else
+            mpSerial[ibPort] = SER_BADCHECK;
+        }
+
+        else if (GetCurr() == DEV_HEADER_W2)
+        {
+          MonitorIn();
+          if (IndexInBuff() == 3)
+            mpSerial[ibPort] = SER_GOODCHECK;
+          else
+            mpSerial[ibPort] = SER_BADCHECK;
+        }
+      }
+    }
+#endif
 }

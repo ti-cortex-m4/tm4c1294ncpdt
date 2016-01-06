@@ -11,6 +11,7 @@ DEVICES_INPUT,C
 #include "../sensors/unpack_k.h"
 #include "../sensors/unpack_s.h"
 #include "../sensors/unpack_v.h"
+#include "../sensors/unpack_w.h"
 #include "../serial/ports.h"
 #include "devices_input.h"
 
@@ -136,6 +137,39 @@ void    DevicesInput(void)
     else if (diCurr.bDevice == 27)
     {
       UnpackV();
+    }
+#endif
+
+#ifndef SKIP_W
+    else if (diCurr.bDevice == 29)
+    {
+      if ((GetCurr() == DEV_OPENCANAL_W2) || (GetCurr() == DEV_OPENCANAL_W3))
+      {
+        uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
+        if ((b == '\r') || (b == '\n'))
+          mpSerial[ibPort] = SER_BADLINK;
+      }
+
+      else if (GetCurr() == DEV_PASSWORD_W2)
+      {
+        if (IndexInBuff() > 0)
+          mpSerial[ibPort] = SER_BADLINK;
+      }
+
+      else if (GetCurr() == DEV_POSTCONTROL_W2)
+      {
+        if (IndexInBuff() > 0)
+          mpSerial[ibPort] = SER_BADLINK;
+      }
+
+      else if ((GetCurr() == DEV_OPTION_W2) || (GetCurr() == DEV_OPTION_W3))
+        UnpackW(true, 4);
+
+      else if (GetCurr() == DEV_HEADER_W2)
+        UnpackW(true, 6);
+
+      else if (GetCurr() == DEV_ENERGY_W3)
+        UnpackW(true, 6);
     }
 #endif
 }

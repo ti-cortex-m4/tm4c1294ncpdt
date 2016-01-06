@@ -5,6 +5,7 @@ AUTOMATIC_W.H
 ------------------------------------------------------------------------------*/
 
 void    QueryW(uint  cwIn, uchar  cbHeaderMax);
+bool    ChecksumW(void);
 serial  InputW(void);
 
 bool    AutomaticW(void);
