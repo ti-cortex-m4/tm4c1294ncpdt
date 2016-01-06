@@ -36,6 +36,9 @@ void    UnpackW(bool  fShow, uchar  bOffset)
     {
       if (PopChar0Bcc() == ')') j++;
 
+//      MonitorString("\n"); MonitorCharDec(j); MonitorString(" ? "); MonitorCharDec(cbHeaderBcc);
+//      MonitorString(" "); MonitorCharDec(i); MonitorString(" + "); MonitorCharDec(bOffset); MonitorString(" ? "); MonitorCharDec(IndexInBuff());
+
       if ((j == cbHeaderBcc) && (i+bOffset == IndexInBuff()) && (InBuff(IndexInBuff()-2) == 0x03))
       {
         SetCountInBuff(i+bOffset);
