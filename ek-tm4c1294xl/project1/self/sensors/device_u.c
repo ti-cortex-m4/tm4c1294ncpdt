@@ -206,7 +206,7 @@ void    ReadEngU(uchar  ibLine)
 }
 
 
-void    ReadEng_SkipLine(uchar  ibLine)
+void    ReadEngU_SkipLine(uchar  ibLine)
 {
   mpdbChannelsC[ibLine] = 0;
 }

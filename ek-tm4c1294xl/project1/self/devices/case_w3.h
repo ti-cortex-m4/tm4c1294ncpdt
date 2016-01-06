@@ -1,17 +1,17 @@
 
-#ifndef SKIP_Q
+#ifndef SKIP_W
 
-    case DEV_START_Q3:
+    case DEV_START_W3:
       ShowPercent(50);
 
       cbRepeat = GetMaxRepeats();
-      QueryOpenK();
-      SetCurr(DEV_OPENCANAL_Q3);
+      QueryOpenW();
+      SetCurr(DEV_OPENCANAL_W3);
       break;
 
-    case DEV_OPENCANAL_Q3:
+    case DEV_OPENCANAL_W3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPENCANAL_Q3);
+        MakePause(DEV_POSTOPENCANAL_W3);
       else
       {
         if (cbRepeat == 0) ErrorCurrent();
@@ -20,23 +20,23 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOpenK();
-          SetCurr(DEV_OPENCANAL_Q3);
+          QueryOpenW();
+          SetCurr(DEV_OPENCANAL_W3);
         }
       }
       break;
 
-    case DEV_POSTOPENCANAL_Q3:
+    case DEV_POSTOPENCANAL_W3:
       Clear(); ShowPercent(51);
 
       cbRepeat = GetMaxRepeats();
-      QueryOptionQ();
-      SetCurr(DEV_OPTION_Q3);
+      QueryOptionW();
+      SetCurr(DEV_OPTION_W3);
       break;
 
-    case DEV_OPTION_Q3:
+    case DEV_OPTION_W3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPTION_Q3);
+        MakePause(DEV_POSTOPTION_W3);
       else
       {
         if (cbRepeat == 0) ErrorCurrent();
@@ -45,25 +45,25 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOptionK();
-          SetCurr(DEV_OPTION_Q3);
+          QueryOptionW();
+          SetCurr(DEV_OPTION_W3);
         }
       }
       break;
 
-    case DEV_POSTOPTION_Q3:
+    case DEV_POSTOPTION_W3:
       ShowPercent(52);
 
       cbRepeat = GetMaxRepeats();
-      QueryEnergySpecQ();
-      SetCurr(DEV_ENERGY_Q3);
+      QueryEngAbsW();
+      SetCurr(DEV_ENERGY_W3);
       break;
 
-    case DEV_ENERGY_Q3:
+    case DEV_ENERGY_W3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadEnergyQ();
-        ReadCurrentQ();
+        ReadEngW();
+        ReadCurrentW();
       }
       else
       {
@@ -73,8 +73,8 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryEnergySpecQ();
-          SetCurr(DEV_ENERGY_Q3);
+          QueryEngAbsW();
+          SetCurr(DEV_ENERGY_W3);
         }
       }
       break;

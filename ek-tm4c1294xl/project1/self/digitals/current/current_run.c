@@ -59,7 +59,8 @@ bool    StartCurrent(uchar  ibCanal)
         (diCurr.bDevice == 23) ||
         (diCurr.bDevice == 24) ||
         (diCurr.bDevice == 26) || (diCurr.bDevice == 28) ||
-        (diCurr.bDevice == 27))
+        (diCurr.bDevice == 27) ||
+        (diCurr.bDevice == 29))
     {
       if (mpboReadyCan[ibDig] == false)
       {
@@ -171,6 +172,10 @@ bool    StartCurrent(uchar  ibCanal)
 #ifndef SKIP_V
     case 27: SetNext(DEV_START_V3);  break;
 #endif
+
+#ifndef SKIP_W
+    case 29: SetNext(DEV_START_W3);  break;
+#endif
   }
 
   exExtended = EXT_CURRENT_3MIN;
@@ -237,6 +242,10 @@ void    NextCurrent(void)
 #ifndef SKIP_U
     case 26:
     case 28: QueryCloseU();  break;
+#endif
+
+#ifndef SKIP_W
+    case 29: QueryCloseW();  break;
 #endif
   }
 

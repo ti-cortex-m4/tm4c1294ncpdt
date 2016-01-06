@@ -57,7 +57,7 @@
       ibLineU = 0;
       if (SkipLine(ibDig, ibLineU) == true)
       {
-        ReadEnergyU_SkipLine(ibLineU);
+        ReadEngU_SkipLine(ibLineU);
         ibLineU++;
       }
 
@@ -69,11 +69,11 @@
     case DEV_ENERGY_U3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadEnergyU(ibLineU);
+        ReadEngU(ibLineU);
 
         if (SkipLine(ibDig, ibLineU+1) == true)
         {
-          ReadEnergyU_SkipLine(ibLineU+1);
+          ReadEngU_SkipLine(ibLineU+1);
           ibLineU++;
         }
 

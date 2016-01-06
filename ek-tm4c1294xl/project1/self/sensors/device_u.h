@@ -25,7 +25,7 @@ void    QueryEngDayU(uchar  ibLine, time  ti);
 void    QueryEngMonU(uchar  ibLine, time  ti);
 void    QueryEngSpecU(uchar  ibLine);
 void    ReadEngU(uchar  ibLine);
-void    ReadEng_SkipLine(uchar  ibLine);
+void    ReadEngU_SkipLine(uchar  ibLine);
 
 void    InitHeaderU(void);
 void    QueryHeaderU(void);
