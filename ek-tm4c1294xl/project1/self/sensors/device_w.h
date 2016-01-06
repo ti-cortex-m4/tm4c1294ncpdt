@@ -13,12 +13,15 @@ extern  uchar                   ibLineW;
 double  PopDoubleW(void);
 
 void    QueryCloseW(void);
+void    QueryOpenW(void);
 
 void    QueryTypeW(void);
 void    ReadTypeW(void);
 
 void    QueryTimeW(void);
 time    ReadTimeW(void);
+
+void    QueryOptionW(void);
 
 //void    QueryControlV(time  ti);
 //
@@ -27,6 +30,7 @@ time    ReadTimeW(void);
 
 void    QueryKtransW(uchar  ibKtrans);
 
+void    QueryEngSpecW(uchar  ibLine);
 void    QueryEngAbsW(uchar  ibLine);
 void    QueryEngMonW(uchar  ibLine, uchar  bTime);
 void    QueryEngDayW(uchar  ibLine, uchar  bTime);

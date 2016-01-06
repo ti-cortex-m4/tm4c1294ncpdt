@@ -122,6 +122,20 @@ uchar   PushAddress2W(void)
 
 
 
+void    QueryOpenW(void)
+{
+  QueryCloseW();
+
+  uchar n = PushAddress1W();
+
+  PushChar1Bcc(0x0D);
+  PushChar1Bcc(0x0A);
+
+  Query(2000, n+2, 1);
+}
+
+
+
 void    QueryTypeW(void)
 {
   PushAddress2W();
@@ -183,6 +197,34 @@ time    ReadTimeW(void)
   ti.bSecond = PopChar2Bcc(); PopChar();
 
   return ti;
+}
+
+
+
+void    QueryOptionW(void)
+{
+  InitPush(0);
+  PushChar1Bcc(0x06);
+
+  uchar i;
+  switch (mppoPorts[ diCurr.ibPort ].ibBaud)
+  {
+    case 0:  i = '2'; break;
+    case 1:  i = '3'; break;
+    case 2:  i = '4'; break;
+    case 3:  i = '5'; break;
+    case 4:  i = '6'; break;
+    default: i = '7'; break;
+  }
+
+  PushChar1Bcc('0');
+  PushChar1Bcc(i);
+  PushChar1Bcc('1');
+
+  PushChar1Bcc(0x0D);
+  PushChar1Bcc(0x0A);
+
+  Query(1+13+2, 4+2, 1);
 }
 
 
@@ -258,6 +300,26 @@ void    QueryKtransW(uchar  ibKtrans)
 //          (b == 0x12));
 //}
 
+
+void    QueryEngSpecW(uchar  ibLine)
+{
+  ASSERT(ibLine < 4);
+
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('R');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushStringBcc("1-1:");
+  PushChar1Bcc('1'+ibLine);
+  PushStringBcc(".8.0");
+  PushStringBcc("(1)");
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, 2);
+}
 
 
 void    QueryEngAbsW(uchar  ibLine)
@@ -446,9 +508,6 @@ void    ReadEngW(uchar  ibLine)
 
 void    ReadCurrentW(void)
 {
-//  ReadEngAbsV();
-//  mpdwBaseDig[0] = mpdwChannelsA[0]*mpdbPulseMnt[ibDig]/wDividerV;
-
   uchar i;
   for (i=0; i<MAX_LINE_W; i++)
   {
