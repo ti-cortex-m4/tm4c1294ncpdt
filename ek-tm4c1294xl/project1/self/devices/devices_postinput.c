@@ -203,7 +203,7 @@ void    DevicesPostInput(void)
 #ifndef SKIP_W
     else if (diCurr.bDevice == 29)
     {
-      if (ChecksumW() == 0)
+      if (ChecksumW())
         mpSerial[ibPort] = SER_GOODCHECK;
       else
         mpSerial[ibPort] = SER_BADCHECK;
