@@ -4,9 +4,11 @@ DEVICE_W.H
 
 ------------------------------------------------------------------------------*/
 
-//extern  uint                    wDividerV;
-//
-//extern  ulong                   dwTimeV;
+#define MAX_LINE_W      4
+
+extern  uchar                   ibLineW;
+
+
 
 double  PopDoubleW(void);
 
@@ -34,5 +36,5 @@ void    ReadEngW(uchar  ibLine);
 //void    InitHeaderV(void);
 //void    QueryHeaderV(void);
 //bool    ReadHeaderV(void);
-//
-//void    ReadCurrentV(void);
+
+void    ReadCurrentW(void);

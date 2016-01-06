@@ -391,7 +391,7 @@ void    ReadCurrentQ(void)
   uchar i;
   for (i=0; i<MAX_LINE_Q; i++)
   {
-    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseHou[ibDig];
+    mpdwBaseDig[i] = mpdbChannelsC[i] * mpdbPulseMnt[ibDig];
   }
 
   MakeCurrent();
