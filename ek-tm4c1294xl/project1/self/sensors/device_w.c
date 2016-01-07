@@ -249,6 +249,50 @@ void    QueryControlW(time  ti)
 
 
 
+void    QueryGetCorrectW(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('R');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushStringBcc("0-0:96.52.0");
+
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, 1);
+}
+
+
+uint    ReadGetCorrectW(void)
+{
+  return PopDoubleW();
+}
+
+
+void    QuerySetCorrectW(sint  wSecond)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('W');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushStringBcc("0-0:96.51.0");
+  PushChar1Bcc('(');
+  if (wSecond < 0) PushChar1Bcc('-');
+  PushNumberBcc(AbsInt(wSecond));
+  PushChar1Bcc(')');
+
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, 1);
+}
+
+
 void    QueryOptionW(void)
 {
   InitPush(0);

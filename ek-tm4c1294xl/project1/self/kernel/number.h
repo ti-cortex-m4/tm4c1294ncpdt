@@ -7,5 +7,5 @@ NUMBER,H
 #define MAX_LONG        0xFFFFFFFF
 
 
-
+uint    AbsInt(sint  w);
 ulong   AbsLong(slong  dw);
