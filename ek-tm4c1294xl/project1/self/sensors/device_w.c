@@ -36,6 +36,8 @@ Rovalant ÌÝÑ-3
 
 uchar                   ibLineW;
 
+time                    tiProfileW;
+
 
 
 double  PopDoubleW(void)
@@ -171,6 +173,26 @@ void    ReadTypeW(void)
 }
 
 
+void    QueryTimeW_Profile(void)
+{
+  ASSERT(ibLine < 4);
+
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('R');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushStringBcc("1-1:");
+  PushChar1Bcc('1'+ibLine);
+  PushStringBcc(".8.0");
+  PushStringBcc("(1)");
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, 2);
+}
+
 
 void    QueryTimeW(void)
 {
@@ -304,7 +326,7 @@ void    QueryKtransW(uchar  ibKtrans)
 //}
 
 
-void    QueryEngSpecW(uchar  ibLine)
+void    QueryEngAbsW_Current(uchar  ibLine)
 {
   ASSERT(ibLine < 4);
 

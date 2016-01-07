@@ -6,7 +6,11 @@ DEVICE_W.H
 
 #define MAX_LINE_W      4
 
+
+
 extern  uchar                   ibLineW;
+
+extern  time                    tiProfileW;
 
 
 
@@ -18,6 +22,7 @@ void    QueryOpenW(void);
 void    QueryTypeW(void);
 void    ReadTypeW(void);
 
+void    QueryTimeW_Profile(void);
 void    QueryTimeW(void);
 time    ReadTimeW(void);
 
@@ -30,7 +35,7 @@ void    QueryOptionW(void);
 
 void    QueryKtransW(uchar  ibKtrans);
 
-void    QueryEngSpecW(uchar  ibLine);
+void    QueryEngAbsW_Current(uchar  ibLine);
 void    QueryEngAbsW(uchar  ibLine);
 void    QueryEngMonW(uchar  ibLine, uchar  bTime);
 void    QueryEngDayW(uchar  ibLine, uchar  bTime);
