@@ -175,8 +175,6 @@ void    ReadTypeW(void)
 
 void    QueryTimeW_Profile(void)
 {
-  ASSERT(ibLine < 4);
-
   InitPush(0);
 
   PushChar1Bcc(0x01);
@@ -184,13 +182,10 @@ void    QueryTimeW_Profile(void)
   PushChar1Bcc('1');
   PushChar1Bcc(0x02);
 
-  PushStringBcc("1-1:");
-  PushChar1Bcc('1'+ibLine);
-  PushStringBcc(".8.0");
-  PushStringBcc("(1)");
+  PushStringBcc("1-0:0.9.1");
   PushChar1Bcc(0x03);
 
-  QueryW(1000, 2);
+  QueryW(1+28+2, 0);
 }
 
 
