@@ -217,6 +217,37 @@ time    ReadTimeW(void)
 }
 
 
+void    QueryControlW(time  ti)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('W');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushStringBcc("1-0:0.9.1");
+
+  PushChar1Bcc('(');
+  PushChar2Bcc(ti.bYear);
+  PushChar1Bcc('-');
+  PushChar2Bcc(ti.bMonth);
+  PushChar1Bcc('-');
+  PushChar2Bcc(ti.bDay);
+  PushChar1Bcc(' ');
+  PushChar2Bcc(ti.bHour);
+  PushChar1Bcc(':');
+  PushChar2Bcc(ti.bMinute);
+  PushChar1Bcc(':');
+  PushChar2Bcc(ti.bSecond);
+  PushChar1Bcc(')');
+
+  PushChar1Bcc(0x03);
+
+  QueryW(1, 0);
+}
+
+
 
 void    QueryOptionW(void)
 {
@@ -248,6 +279,25 @@ void    QueryOptionW(void)
 }
 
 
+void    QueryPasswordW(void)
+{
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('P');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+  PushChar1Bcc('(');
+
+  uchar n = PushNumberBcc(mpdwAddress2[diCurr.bAddress-1]);
+
+  PushChar1Bcc(')');
+  PushChar1Bcc(0x03);
+
+  QueryW(1, 0);
+}
+
+
 
 void    QueryKtransW(uchar  ibKtrans)
 {
@@ -262,30 +312,6 @@ void    QueryKtransW(uchar  ibKtrans)
 
   QueryW(1000, 1);
 }
-
-
-
-//void    QueryControlV(time  ti)
-//{
-//  InitPush(2);
-//
-//  PushChar(0x27);
-//  PushChar(0x00);
-//
-//  PushAddressV(0x1D);
-//
-//  PushChar(ti.bSecond);
-//  PushChar(ti.bMinute);
-//  PushChar(ti.bHour);
-//
-//  PushChar((GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) + 1) % 7);
-//
-//  PushChar(ti.bDay);
-//  PushChar(ti.bMonth);
-//  PushChar(ti.bYear);
-//
-//  QueryV(100+15, 22);
-//}
 //
 //
 //

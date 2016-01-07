@@ -26,12 +26,10 @@ void    QueryTimeW_Profile(void);
 void    QueryTimeW(void);
 time    ReadTimeW(void);
 
-void    QueryOptionW(void);
+void    QueryControlW(time  ti);
 
-//void    QueryControlV(time  ti);
-//
-//void    QueryVersionV(void);
-//bool    ReadVersionV(void);
+void    QueryOptionW(void);
+void    QueryPasswordW(void);
 
 void    QueryKtransW(uchar  ibKtrans);
 
