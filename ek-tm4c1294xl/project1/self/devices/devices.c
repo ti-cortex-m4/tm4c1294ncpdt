@@ -4503,8 +4503,8 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryPasswordK();
-          SetCurr(DEV_PASSWORD_K2);
+          QueryPasswordW();
+          SetCurr(DEV_PASSWORD_W2);
         }
       }
       break;
@@ -4552,7 +4552,7 @@ void    RunDevices(void)
 
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_W2); }
-          else if (GetCurrHouIndex() == (tiValueC.bHour*2 + tiValueC.bMinute/30)) // простая коррекция
+          else if (GetCurrHouIndex() == (tiProfileW.bHour*2 + tiProfileW.bMinute/30)) // простая коррекция
           { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_W2);  }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
