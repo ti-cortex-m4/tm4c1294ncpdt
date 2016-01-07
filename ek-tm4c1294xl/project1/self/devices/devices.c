@@ -4545,20 +4545,68 @@ void    RunDevices(void)
         ulong dwSecond2 = GetSecondIndex(tiCurr);
 
         if (iwDay1 != iwDay2)
-        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
+        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); } // даты не совпадают, коррекция невозможна
         else
         {
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
 
-          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
+          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit()) // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_W2); }
           else if (GetCurrHouIndex() == (tiProfileW.bHour*2 + tiProfileW.bMinute/30)) // простая коррекция
           { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_W2);  }
           else
-          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
+          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
         }
       }
       break;
+
+
+    case DEV_GETCORRECT_W2:
+      cbRepeat = GetMaxRepeats();
+      QueryGetCorrectW();
+      SetCurr(DEV_POSTGETCORRECT_W2);
+    break;
+
+    case DEV_POSTGETCORRECT_W2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_SETCORRECT_W2);
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryGetCorrectW();
+          SetCurr(DEV_POSTGETCORRECT_W2);
+        }
+      }
+      break;
+
+    case DEV_SETCORRECT_W2:
+      cbRepeat = GetMaxRepeats();
+      QuerySetCorrectW(dwSecond1 - dwSecond2);
+      SetCurr(DEV_POSTSETCORRECT_W2);
+      break;
+
+    case DEV_POSTSETCORRECT_W2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTCORRECT_W2);
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QuerySetCorrectW();
+          SetCurr(DEV_POSTSETCORRECT_W2);
+        }
+      }
+      break;
+
 
     case DEV_CONTROL_W2:
       cbRepeat = GetMaxRepeats();
