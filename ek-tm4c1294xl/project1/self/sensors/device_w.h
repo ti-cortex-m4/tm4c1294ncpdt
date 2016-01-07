@@ -27,6 +27,9 @@ void    QueryTimeW(void);
 time    ReadTimeW(void);
 
 void    QueryControlW(time  ti);
+void    QueryGetCorrectW(void);
+uint    ReadGetCorrectW(void);
+void    QuerySetCorrectW(sint  wSecond);
 
 void    QueryOptionW(void);
 void    QueryPasswordW(void);
