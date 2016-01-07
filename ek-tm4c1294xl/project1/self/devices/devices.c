@@ -4454,21 +4454,17 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTOPENCANAL_W2:
-      Clear(); ShowPercent(51);
+      ShowPercent(51);
 
       cbRepeat = GetMaxRepeats();
       QueryOptionW();
       SetCurr(DEV_OPTION_W2);
       break;
 
+
     case DEV_OPTION_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-        if (fCurrCtrl == true)
-          MakePause(DEV_PREVTIME_W2);
-        else
-          MakePause(DEV_POSTCORRECT_W2); // ?
-      }
+        MakePause(DEV_POSTOPTION_W2);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -4479,6 +4475,36 @@ void    RunDevices(void)
 
           QueryOptionW();
           SetCurr(DEV_OPTION_W2);
+        }
+      }
+      break;
+
+    case DEV_POSTOPTION_W2:
+      ShowPercent(52);
+
+      cbRepeat = GetMaxRepeats();
+      QueryPasswordW();
+      SetCurr(DEV_PASSWORD_W2);
+      break;
+
+    case DEV_PASSWORD_W2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        if (fCurrCtrl == true)
+          MakePause(DEV_PREVTIME_W2);
+        else
+          MakePause(DEV_POSTCORRECT_W2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryPasswordK();
+          SetCurr(DEV_PASSWORD_K2);
         }
       }
       break;
@@ -4497,8 +4523,7 @@ void    RunDevices(void)
       }
       else
       {
-        if (cbRepeat == 0)
-          ErrorProfile();
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -4534,25 +4559,19 @@ void    RunDevices(void)
         }
       }
       break;
-/*
+
     case DEV_CONTROL_W2:
-      if (++cbCorrects > 3)
-        MakePause(DEV_POSTCORRECT_W2);
-      else
-      {
-        cbRepeat = GetMaxRepeats();
-        QueryControlC();
-        SetCurr(DEV_POSTCONTROL_W2);
-      }
+      cbRepeat = GetMaxRepeats();
+      QueryControlW(tiCurr);
+      SetCurr(DEV_POSTCONTROL_W2);
       break;
 
     case DEV_POSTCONTROL_W2:
-      if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadResultC() == 1))
-        MakePause(DEV_POSTOPENCANAL_W2);
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTCORRECT_W2);
       else
       {
-        if (cbRepeat == 0)
-          MakePause(DEV_POSTOPENCANAL_W2);   // да !
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -4564,43 +4583,10 @@ void    RunDevices(void)
       }
       break;
 
-
     case DEV_POSTCORRECT_W2:
-      cbRepeat = GetMaxRepeats();
-      QueryVersionC();
-      SetCurr(DEV_VERSION_W2);
+      ErrorProfile();
       break;
 
-    case DEV_VERSION_W2:
-      if (mpSerial[ibPort] == SER_GOODCHECK)
-      {
-        ReadVersionC();
-
-        if (boHideMessages == false)
-          MakeLongPause(DEV_POSTVERSION_W2, 1);
-        else
-          MakePause(DEV_POSTVERSION_W2);
-      }
-      else
-      {
-        if (cbRepeat == 0) ErrorProfile();
-        else
-        {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryVersionC();
-          SetCurr(DEV_VERSION_W2);
-        }
-      }
-      break;
-
-    case DEV_POSTVERSION_W2:
-      cbRepeat = GetMaxRepeats();
-      QueryTimeC();
-      SetCurr(DEV_VALUE_W2);
-      break;
-*/
 #endif
 
 #ifndef SKIP_W
