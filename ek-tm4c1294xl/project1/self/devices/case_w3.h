@@ -3,7 +3,6 @@
 
     case DEV_START_W3:
       ShowPercent(50);
-      ibLineW = 0;
 
       cbRepeat = GetMaxRepeats();
       QueryOpenW();
@@ -28,7 +27,7 @@
       break;
 
     case DEV_POSTOPENCANAL_W3:
-      Clear(); ShowPercent(51);
+      ShowPercent(51);
 
       cbRepeat = GetMaxRepeats();
       QueryOptionW();
@@ -37,7 +36,10 @@
 
     case DEV_OPTION_W3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
+      {
+        ibLineW = 0;
         MakePause(DEV_POSTOPTION_W3);
+      }
       else
       {
         if (cbRepeat == 0) ErrorCurrent();
@@ -56,7 +58,7 @@
       ShowPercent(52+ibLineW);
 
       cbRepeat = GetMaxRepeats();
-      QueryEngSpecW(ibLineW);
+      QueryEngAbsW_Current(ibLineW);
       SetCurr(DEV_ENERGY_W3);
       break;
 
@@ -71,7 +73,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryEngSpecW(ibLineW);
+          QueryEngAbsW_Current(ibLineW);
           SetCurr(DEV_ENERGY_W3);
         }
       }
