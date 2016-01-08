@@ -4599,7 +4599,7 @@ void    RunDevices(void)
 
     case DEV_POSTSETCORRECT_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTCORRECT_W2);
+        MakeLongPause(DEV_POSTCORRECT_W2,1);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -4623,7 +4623,7 @@ void    RunDevices(void)
 
     case DEV_POSTCONTROL_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTCORRECT_W2);
+        MakeLongPause(DEV_POSTCORRECT_W2,1);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -4639,7 +4639,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTCORRECT_W2:
-      ErrorProfile();
+      DoneProfile();
       break;
 
 #endif
