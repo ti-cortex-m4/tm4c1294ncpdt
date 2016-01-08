@@ -12,7 +12,7 @@ extern  uchar                   ibLineW;
 
 extern  time                    tiProfileW;
 
-extern  ulong                   dwCorrectW;
+extern  slong                   dwCorrectW;
 
 
 
