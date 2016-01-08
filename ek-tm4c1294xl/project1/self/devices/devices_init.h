@@ -17,6 +17,7 @@ extern  cache const             chControlK;
 extern  cache const             chPlcUFlag;
 extern  cache const             chPlcUSize;
 extern  cache const             chPlcUShutdown;
+extern  cache const             chControlW;
 
 
 

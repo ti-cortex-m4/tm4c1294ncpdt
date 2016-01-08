@@ -62,6 +62,7 @@ cache const             chControlK = {CONTROL_K, &boControlK, sizeof(bool)};
 cache const             chPlcUFlag = {PLC_U_FLAG, &boPlcUFlag, sizeof(bool)};
 cache const             chPlcUSize = {PLC_U_SIZE, &bPlcUSize, sizeof(uchar)};
 cache const             chPlcUShutdown = {PLC_U_SHUTDOWN, &wPlcUShutdown, sizeof(uint)};
+cache const             chControlW = {CONTROL_W, &boControlW, sizeof(bool)};
 
 
 
@@ -80,6 +81,7 @@ void    InitDevices1(void)
   LoadCacheBool(&chPlcUFlag, false);
   LoadCacheChar(&chPlcUSize, 1, 8, 6);
   LoadCacheInt(&chPlcUShutdown, 10, 500, 100);
+  LoadCacheBool(&chControlW, false);
 
   InitMaxRepeats();
   InitMaxShutdown();
@@ -164,6 +166,8 @@ void    ResetDevices(bool  fFull)
 
   wPlcUShutdown = 100;
   SaveCache(&chPlcUShutdown);
+
+  SaveCacheBool(&chControlW, false);
 
   ResetMaxRepeats();
   ResetMaxShutdown();
