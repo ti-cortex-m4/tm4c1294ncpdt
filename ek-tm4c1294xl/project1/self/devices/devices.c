@@ -4509,6 +4509,7 @@ void    RunDevices(void)
       }
       break;
 
+
     case DEV_PREVTIME_W2:
       cbRepeat = GetMaxRepeats();
       QueryTimeW_Profile();
@@ -4535,7 +4536,6 @@ void    RunDevices(void)
       }
       break;
 
-
     case DEV_POSTTIME_W2:
       {
         uint iwDay1 = GetDayIndexMD(tiProfileW.bMonth, tiProfileW.bDay);
@@ -4549,11 +4549,12 @@ void    RunDevices(void)
         else
         {
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
+          dwCorrectW = dwSecond2 - dwSecond1;
 
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit()) // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_W2); }
           else if (GetCurrHouIndex() == (tiProfileW.bHour*2 + tiProfileW.bMinute/30)) // простая коррекция
-          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_W2);  }
+          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_GETCORRECT_W2); } // DEV_CONTROL_W2
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
         }
@@ -4565,7 +4566,7 @@ void    RunDevices(void)
       cbRepeat = GetMaxRepeats();
       QueryGetCorrectW();
       SetCurr(DEV_POSTGETCORRECT_W2);
-    break;
+      break;
 
     case DEV_POSTGETCORRECT_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
@@ -4586,7 +4587,7 @@ void    RunDevices(void)
 
     case DEV_SETCORRECT_W2:
       cbRepeat = GetMaxRepeats();
-      QuerySetCorrectW(dwSecond1 - dwSecond2);
+      QuerySetCorrectW(dwCorrectW);
       SetCurr(DEV_POSTSETCORRECT_W2);
       break;
 
@@ -4601,7 +4602,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QuerySetCorrectW();
+          QuerySetCorrectW(dwCorrectW);
           SetCurr(DEV_POSTSETCORRECT_W2);
         }
       }
