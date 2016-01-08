@@ -185,16 +185,9 @@ void    DevicesPause(void)
             mpSerial[ibPort] = SER_BADCHECK;
         }
 
-        else if (GetCurr() == DEV_PASSWORD_W2)
-        {
-          MonitorIn();
-          if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
-            mpSerial[ibPort] = SER_GOODCHECK;
-          else
-            mpSerial[ibPort] = SER_BADCHECK;
-        }
-
-        else if (GetCurr() == DEV_POSTCONTROL_W2)
+        else if ((GetCurr() == DEV_PASSWORD_W2) ||
+                 (GetCurr() == DEV_POSTCONTROL_W2) ||
+                 (GetCurr() == DEV_POSTSETCORRECT_W2))
         {
           MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
