@@ -38,6 +38,8 @@ uchar                   ibLineW;
 
 time                    tiProfileW;
 
+ulong                   dwCorrectW;
+
 
 
 double  PopDoubleW(void)
@@ -289,7 +291,7 @@ void    QuerySetCorrectW(sint  wSecond)
 
   PushChar1Bcc(0x03);
 
-  QueryW(1000, 1);
+  QueryW(1+1, 0);
 }
 
 
