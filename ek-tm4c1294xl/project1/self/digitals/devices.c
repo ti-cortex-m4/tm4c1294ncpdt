@@ -40,7 +40,7 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".—≈301          ",
                                           ".Ã»–“≈          ",
                                           ".—≈303          ",
-                                          ".Rovalant Ã›—-3 "
+                                          ".Rovalant Ã›—   "
                                       };
 
 uchar const             mpbMaxLines[bMAXDEVICES+1] =
