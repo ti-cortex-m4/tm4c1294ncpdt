@@ -73,6 +73,8 @@ extern  uchar                   bPlcUSize;
 
 extern  uint                    wPlcUShutdown;
 
+extern  bool                    boControlW;
+
 
 
 extern  bool                    fDsblAnswer;

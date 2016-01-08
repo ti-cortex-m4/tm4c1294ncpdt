@@ -105,6 +105,9 @@ uchar                   bPlcUSize;
 // размер
 uint                    wPlcUShutdown;
 
+// флаг коррекции времени счетчиков Rovalant ћЁ—-3
+bool                    boControlW;
+
 
 
 // запрет ответа на запросы во врем€ чтени€ цифровых счетчиков
