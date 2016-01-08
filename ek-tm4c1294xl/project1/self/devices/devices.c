@@ -4554,7 +4554,14 @@ void    RunDevices(void)
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit()) // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_W2); }
           else if (GetCurrHouIndex() == (tiProfileW.bHour*2 + tiProfileW.bMinute/30)) // простая коррекция
-          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_GETCORRECT_W2); }
+          {
+            ShowLo(szCorrectYes); DelayInf();
+
+            if (boControlW)
+              MakePause(DEV_CONTROL_W2);
+            else
+              MakePause(DEV_GETCORRECT_W2);
+          }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
         }
