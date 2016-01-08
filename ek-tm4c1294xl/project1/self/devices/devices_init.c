@@ -68,11 +68,11 @@ cache const             chControlW = {CONTROL_W, &boControlW, sizeof(bool)};
 
 void    InitDevices1(void)
 {
-  LoadCache(&chSeparateCan);
-  LoadCache(&chShowMessages);
-  LoadCache(&chHideMessages);
-  LoadCache(&chControlTime);
-  LoadCache(&chManageTime);
+  LoadCacheBool(&chSeparateCan, false);
+  LoadCacheBool(&chShowMessages, false);
+  LoadCacheBool(&chHideMessages, false);
+  LoadCacheBool(&chControlTime, true);
+  LoadCacheBool(&chManageTime, true);
 
   LoadCacheChar(&chKeysLevelB, 1, 2, 2);
   LoadCache(&chShortProfileC);
@@ -134,20 +134,11 @@ void    InitDevices2(void)
 
 void    ResetDevices(bool  fFull)
 {
-  boSeparateCan = false;
-  SaveCache(&chSeparateCan);
-
-  boShowMessages = false;
-  SaveCache(&chShowMessages);
-
-  boHideMessages = false;
-  SaveCache(&chHideMessages);
-
-  boControlTime = true;
-  SaveCache(&chControlTime);
-
-  boManageTime = true;
-  SaveCache(&chManageTime);
+  SaveCacheBool(&chSeparateCan, false);
+  SaveCacheBool(&chShowMessages, false);
+  SaveCacheBool(&chHideMessages, false);
+  SaveCacheBool(&chControlTime, true);
+  SaveCacheBool(&chManageTime, true);
 
   bKeysLevelB = 2;
   SaveCache(&chKeysLevelB);
