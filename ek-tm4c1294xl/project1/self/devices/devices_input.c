@@ -150,26 +150,21 @@ void    DevicesInput(void)
           mpSerial[ibPort] = SER_BADLINK;
       }
 
-      else if (GetCurr() == DEV_PASSWORD_W2)
+      else if ((GetCurr() == DEV_PASSWORD_W2) ||
+               (GetCurr() == DEV_POSTCONTROL_W2) ||
+               (GetCurr() == DEV_POSTSETCORRECT_W2))
       {
         if (IndexInBuff() > 0)
           mpSerial[ibPort] = SER_BADLINK;
       }
 
-      else if (GetCurr() == DEV_POSTCONTROL_W2)
+      else if ((GetCurr() == DEV_OPTION_W2) || (GetCurr() == DEV_OPTION_W3) ||
+               (GetCurr() == DEV_POSTGETCORRECT_W2) ||
+               (GetCurr() == DEV_HEADER_W2) ||
+               (GetCurr() == DEV_ENERGY_W3))
       {
-        if (IndexInBuff() > 0)
-          mpSerial[ibPort] = SER_BADLINK;
+        UnpackW(true, 3);
       }
-
-      else if ((GetCurr() == DEV_OPTION_W2) || (GetCurr() == DEV_OPTION_W3))
-        UnpackW(true, 3);
-
-      else if (GetCurr() == DEV_HEADER_W2)
-        UnpackW(true, 3);
-
-      else if (GetCurr() == DEV_ENERGY_W3)
-        UnpackW(true, 3);
     }
 #endif
 }

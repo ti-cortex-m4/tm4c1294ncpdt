@@ -221,6 +221,8 @@ time    ReadTimeW(void)
 
 void    QueryControlW(time  ti)
 {
+  Clear(); sprintf(szLo+3,"установка");
+
   InitPush(0);
 
   PushChar1Bcc(0x01);
@@ -270,12 +272,19 @@ void    QueryGetCorrectW(void)
 
 uint    ReadGetCorrectW(void)
 {
-  return PopDoubleW();
+  InitPop(1);
+  uint w = PopDoubleW();
+
+  Clear(); sprintf(szLo+2,"лимит: %u",w);
+
+  return w;
 }
 
 
 void    QuerySetCorrectW(sint  wSecond)
 {
+  Clear(); sprintf(szLo+1,"коррекция: %d",wSecond);
+
   InitPush(0);
 
   PushChar1Bcc(0x01);
