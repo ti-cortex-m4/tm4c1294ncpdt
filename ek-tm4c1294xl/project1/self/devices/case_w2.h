@@ -127,7 +127,7 @@
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit()) // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_W2); }
           else if (GetCurrHouIndex() == (tiProfileW.bHour*2 + tiProfileW.bMinute/30)) // простая коррекция
-          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_GETCORRECT_W2); } // DEV_CONTROL_W2
+          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_GETCORRECT_W2); }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); } // разница времени слишком велика, коррекция невозможна
         }
@@ -143,7 +143,13 @@
 
     case DEV_POSTGETCORRECT_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_SETCORRECT_W2);
+      {
+        uint w = ReadGetCorrectW();
+        if (w <= 1800)
+          MakeLongPause(DEV_SETCORRECT_W2,1);
+        else
+          MakeLongPause(DEV_CONTROL_W2,1);
+      }
       else
       {
         if (cbRepeat == 0) ErrorProfile();
