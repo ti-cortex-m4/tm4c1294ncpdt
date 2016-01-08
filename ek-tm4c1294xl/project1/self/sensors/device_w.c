@@ -38,7 +38,7 @@ uchar                   ibLineW;
 
 time                    tiProfileW;
 
-ulong                   dwCorrectW;
+slong                   dwCorrectW;
 
 
 
