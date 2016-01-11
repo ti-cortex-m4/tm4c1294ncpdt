@@ -65,6 +65,8 @@ void    InitPushPck(void) {
 
 
 void    Push(void  *pbData, uint  wSize) {
+  cwPushSize += wSize;
+
   switch (ibPort) {
     case 0:
       if (iwPush0+wSize < sizeof(mpbOutBuff0)-bMARGIN) {

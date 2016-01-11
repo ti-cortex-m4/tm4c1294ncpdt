@@ -4,6 +4,8 @@ PORTS_POP!H
 
 ------------------------------------------------------------------------------*/
 
+uint    GetPopSize(void);
+
 uchar   PopChar0Bcc(void);
 uchar   PopChar1Bcc(void);
 uchar   PopChar2Bcc(void);

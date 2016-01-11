@@ -16,6 +16,17 @@ PORTS_POP!H
 
 
 
+static uint             cwPopSize;
+
+
+
+uint    GetPopSize(void)
+{
+  return cwPopSize;
+}
+
+
+
 uchar	PopChar0Bcc(void)
 {
   return(PopChar() & 0x7F);
@@ -73,6 +84,8 @@ void    Skip(uint  wSize) {
 
 
 void    InitPop(uint  i) {
+  cwPopSize = i;
+
   switch (ibPort) {
     case 0: iwPop0 = i; break;
     case 1: iwPop1 = i; break;
@@ -85,6 +98,8 @@ void    InitPop(uint  i) {
 
 
 void    Pop(void  *pbData, uint  wSize) {
+  cwPopSize += wSize;
+
   switch (ibPort) {
     case 0: memcpy(pbData, &mpbInBuff0[ iwPop0 ], wSize); iwPop0 += wSize; break;
     case 1: memcpy(pbData, &mpbInBuff1[ iwPop1 ], wSize); iwPop1 += wSize; break;
@@ -96,6 +111,8 @@ void    Pop(void  *pbData, uint  wSize) {
 
 
 uchar   PopChar(void) {
+  cwPopSize++;
+
   switch (ibPort) {
     case 0: return mpbInBuff0[ iwPop0++ ];
     case 1: return mpbInBuff1[ iwPop1++ ];
