@@ -4660,24 +4660,22 @@ void    RunDevices(void)
 
     case DEV_PROFILE_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTPROFILE_W2);
-      else
       {
         if (DoneProfileW())
-        {
           DoneProfile();
-        }
+        else
+          MakePause(DEV_POSTPROFILE_W2);
+      }
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
-          if (cbRepeat == 0) ErrorProfile();
-          else
-          {
-            ErrorLink();
-            cbRepeat--;
+          ErrorLink();
+          cbRepeat--;
 
-            QueryProfileW();
-            SetCurr(DEV_PROFILE_W2);
-          }
+          QueryProfileW();
+          SetCurr(DEV_PROFILE_W2);
         }
       }
       break;
