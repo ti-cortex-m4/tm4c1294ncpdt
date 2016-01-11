@@ -395,10 +395,10 @@ bool    ReadDataBlockA(uchar  bOffset, uchar  ibRecord, uchar  ibBlock)
 
   InitPop(bOffset+ibRecord*8+ibBlock*30);
 
-  uchar c;
-  for (c=0; c<4; c++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
-    mpwChannels[c] = (PopChar()*0x100 + PopChar()) & 0x7FFF;
+    mpwChannels[i] = (PopChar()*0x100 + PopChar()) & 0x7FFF;
   }
 
   MakeSpecial(ti);
