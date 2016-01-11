@@ -235,14 +235,22 @@
         MakePause(DEV_POSTPROFILE_W2);
       else
       {
-        if (cbRepeat == 0) ErrorProfile();
+        if ((IndexInBuff() == 10) && ((InBuff(1) & 0x7F) == 'E') && ((InBuff(2) & 0x7F) == 'R') && ((InBuff(3) & 0x7F) == 'R'))
+		{
+		  MonitorString("\n done2 ");
+          DoneProfile();
+		}
         else
         {
-          ErrorLink();
-          cbRepeat--;
+          if (cbRepeat == 0) ErrorProfile();
+          else
+          {
+            ErrorLink();
+            cbRepeat--;
 
-          QueryProfileW();
-          SetCurr(DEV_PROFILE_W2);
+            QueryProfileW();
+            SetCurr(DEV_PROFILE_W2);
+          }
         }
       }
       break;

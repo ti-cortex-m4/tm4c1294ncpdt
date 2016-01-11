@@ -196,14 +196,16 @@ void    DevicesPause(void)
             mpSerial[ibPort] = SER_BADCHECK;
         }
 
-//        else if (GetCurr() == DEV_PROFILE_W2)
-//        {
-//          MonitorIn();
-//          if (IndexInBuff() == 3)
-//            mpSerial[ibPort] = SER_GOODCHECK;
-//          else
-//            mpSerial[ibPort] = SER_BADCHECK;
-//        }
+        else if (GetCurr() == DEV_PROFILE_W2)
+        {
+          if ((IndexInBuff() == 10) && ((InBuff(1) & 0x7F) == 'E') && ((InBuff(2) & 0x7F) == 'R') && ((InBuff(3) & 0x7F) == 'R'))
+		{
+			MonitorString("\n done1 ");
+            mpSerial[ibPort] = SER_BADCHECK;
+		}
+          else
+            mpSerial[ibPort] = SER_GOODCHECK;
+        }
       }
     }
 #endif
