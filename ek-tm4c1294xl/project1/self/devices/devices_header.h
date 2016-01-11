@@ -49,6 +49,7 @@ DEVICES.C
 #include "../sensors/device_u2.h"
 #include "../sensors/device_v.h"
 #include "../sensors/device_w.h"
+#include "../sensors/unpack_w.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"

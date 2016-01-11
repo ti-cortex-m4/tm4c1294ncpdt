@@ -9,6 +9,7 @@ TODO / *else* /
 #include "../memory/mem_flow.h"
 #include "../serial/ports.h"
 #include "../serial/monitor.h"
+#include "../sensors/unpack_w.h"
 #include "../digitals/digitals_status.h"
 #include "devices_pause.h"
 
@@ -198,11 +199,8 @@ void    DevicesPause(void)
 
         else if (GetCurr() == DEV_PROFILE_W2)
         {
-          if ((IndexInBuff() == 10) && ((InBuff(1) & 0x7F) == 'E') && ((InBuff(2) & 0x7F) == 'R') && ((InBuff(3) & 0x7F) == 'R'))
-		{
-			MonitorString("\n done1 ");
+          if (DoneProfileW())
             mpSerial[ibPort] = SER_BADCHECK;
-		}
           else
             mpSerial[ibPort] = SER_GOODCHECK;
         }
