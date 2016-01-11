@@ -200,9 +200,9 @@ void    DevicesPause(void)
         else if (GetCurr() == DEV_PROFILE_W2)
         {
           if (DoneProfileW())
-            mpSerial[ibPort] = SER_BADCHECK;
-          else
             mpSerial[ibPort] = SER_GOODCHECK;
+          else
+            mpSerial[ibPort] = SER_BADCHECK;
         }
       }
     }

@@ -59,9 +59,7 @@ void    UnpackW(bool  fShow, uchar  bOffset)
 
 bool    DoneProfileW(void)
 {
-  bool f = ((IndexInBuff() == 10) && ((InBuff(1) & 0x7F) == 'E') && ((InBuff(2) & 0x7F) == 'R') && ((InBuff(3) & 0x7F) == 'R'));
-  if (f) MonitorString("\n DoneProfileW ");
-  return f;
+  return ((IndexInBuff() == 10) && ((InBuff(1) & 0x7F) == 'E') && ((InBuff(2) & 0x7F) == 'R') && ((InBuff(3) & 0x7F) == 'R'));
 }
 
 #endif
