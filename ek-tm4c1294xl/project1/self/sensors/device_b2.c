@@ -157,14 +157,14 @@ bool    ReadHeaderBNew(uchar  ibBlock, bool  fDelay)
 
   PopChar();
 
-  uchar c;
-  for (c=0; c<4; c++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
     uint w = PopChar();
     w     += PopChar()*0x100;
 
     if (w == 0xFFFF) w = 0;
-    mpwChannels[c] = w;
+    mpwChannels[i] = w;
   }
 
   MakeSpecial(ti);

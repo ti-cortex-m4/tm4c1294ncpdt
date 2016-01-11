@@ -476,14 +476,14 @@ bool    ReadHeaderB(uchar  ibBlock, bool  fDelay)
   if (fDelay == 1) DelayOff();
 
 
-  uchar c;
-  for (c=0; c<4; c++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
-    uint w = InBuff( (uint)8+ibBlock*18+c*2 );
-    w     += InBuff( (uint)9+ibBlock*18+c*2 )*0x100;
+    uint w = InBuff( (uint)8+ibBlock*18+i*2 );
+    w     += InBuff( (uint)9+ibBlock*18+i*2 )*0x100;
 
     if (w == 0xFFFF) w = 0;
-    mpwChannels[c] = w;
+    mpwChannels[i] = w;
   }
 
   MakeRefillWinter(ti);
