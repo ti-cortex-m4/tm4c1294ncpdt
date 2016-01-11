@@ -9,22 +9,22 @@ Rovalant МЭС-3
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_current.h"
 #include "../memory/mem_factors.h"
-//#include "../memory/mem_realtime.h"
+#include "../memory/mem_realtime.h"
 //#include "../memory/mem_energy_spec.h"
-//#include "../memory/mem_profile.h"
-//#include "../memory/mem_limits.h"
+#include "../memory/mem_profile.h"
+#include "../memory/mem_limits.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
 //#include "../serial/monitor.h"
 #include "../display/display.h"
-//#include "../keyboard/time/key_timedate.h"
+#include "../keyboard/time/key_timedate.h"
 //#include "../time/timedate.h"
 //#include "../time/calendar.h"
 #include "../time/delay.h"
 #include "../devices/devices.h"
 //#include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
-//#include "../digitals/limits.h"
+#include "../digitals/limits.h"
 //#include "../special/special.h"
 #include "automatic_w.h"
 #include "device_k.h"
@@ -39,6 +39,8 @@ uchar                   ibLineW;
 time                    tiProfileW;
 
 slong                   dwCorrectW;
+
+static time             tiCurrW;
 
 
 
@@ -500,32 +502,26 @@ void    ReadEngW(uchar  ibLine)
 
 
 
-//void    InitHeaderV(void)
-//{
-//  if (!UseBounds())
-//    wBaseCurr = 0;
-//  else
-//  {
-//    wBaseCurr = (mpcwStartRelCan[ibDig] / 8) * 8;
-//    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-//    if (boShowMessages == true) DelayMsg();
-//  }
-//
-//  tiCurrV = tiCurr;
-//
-//  uchar i = tiCurrV.bHour*2 + tiCurrV.bMinute/30;
-//  i = (i / 8) * 8;
-//
-//  tiCurrV.bHour = i / 2;
-//  tiCurrV.bMinute = (i % 2)*30;
-//}
-//
-//
-//void    QueryHeaderV(void)
-//{
-//  HideCurrTime(1);
-//
-//
+void    InitHeaderW(void)
+{
+  if (!UseBounds())
+    wBaseCurr = 0;
+  else
+  {
+    wBaseCurr = mpcwStartRelCan[ibDig];
+    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    if (boShowMessages == true) DelayMsg();
+  }
+
+  tiCurrW = tiCurr; // время со счетчика
+}
+
+
+void    QueryHeaderW(void)
+{
+  HideCurrTime(1);
+
+
 //  ulong dw = DateToHouIndex(tiCurrV);
 //  dw -= wBaseCurr;
 //  time ti = HouIndexToDate(dw);
@@ -534,33 +530,24 @@ void    ReadEngW(uchar  ibLine)
 //  MonitorTime(tiCurrV); MonitorString("- ");
 //  MonitorIntDec(wBaseCurr); MonitorString(" = ");
 //  MonitorTime(ti);
-//
-//
-//  InitPush(2);
-//
-//  PushChar(0x24);
-//  PushChar(0x00);
-//
-//  PushAddressV(0x26);
-//
-//  PushChar(ti.bDay);
-//  PushChar(ti.bMonth);
-//  PushChar(ti.bYear);
-//
-//  uchar i = ti.bHour*2 + ti.bMinute/30;
-//  i = i/8 + 1;
-//  PushChar(i);
-//
-//  MonitorString("\n");
-//  MonitorCharDec(ti.bDay); MonitorString(".");
-//  MonitorCharDec(ti.bMonth); MonitorString(".");
-//  MonitorCharDec(ti.bYear); MonitorString(" ");
-//  MonitorCharDec(i);
-//
-//  QueryV(100+37, 19);
-//}
-//
-//
+
+
+  InitPush(0);
+
+  PushChar1Bcc(0x01);
+  PushChar1Bcc('R');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  PushStringBcc("1-1:1.29.0*");
+  PushNumberBcc(wBaseCurr);
+  PushStringBcc("(4)");
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, 5);
+}
+
+
 //static bool ReadDataV(uchar  i, time  tiDig)
 //{
 //  MonitorString("\n"); MonitorTime(tiDig);
