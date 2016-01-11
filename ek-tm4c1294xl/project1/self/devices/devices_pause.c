@@ -196,14 +196,14 @@ void    DevicesPause(void)
             mpSerial[ibPort] = SER_BADCHECK;
         }
 
-        else if (GetCurr() == DEV_PROFILE_W2)
-        {
-          MonitorIn();
-          if (IndexInBuff() == 3)
-            mpSerial[ibPort] = SER_GOODCHECK;
-          else
-            mpSerial[ibPort] = SER_BADCHECK;
-        }
+//        else if (GetCurr() == DEV_PROFILE_W2)
+//        {
+//          MonitorIn();
+//          if (IndexInBuff() == 3)
+//            mpSerial[ibPort] = SER_GOODCHECK;
+//          else
+//            mpSerial[ibPort] = SER_BADCHECK;
+//        }
       }
     }
 #endif
