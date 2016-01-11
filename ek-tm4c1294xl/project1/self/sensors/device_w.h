@@ -14,6 +14,8 @@ extern  time                    tiProfileW;
 
 extern  slong                   dwCorrectW;
 
+extern  uint                    wProfileW;
+
 
 
 double  PopDoubleW(void);

@@ -10,7 +10,7 @@ Rovalant МЭС-3
 #include "../memory/mem_current.h"
 #include "../memory/mem_factors.h"
 #include "../memory/mem_realtime.h"
-//#include "../memory/mem_energy_spec.h"
+#include "../memory/mem_energy_spec.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_limits.h"
 #include "../serial/ports.h"
@@ -22,10 +22,10 @@ Rovalant МЭС-3
 //#include "../time/calendar.h"
 #include "../time/delay.h"
 #include "../devices/devices.h"
-//#include "../devices/devices_time.h"
+#include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/limits.h"
-//#include "../special/special.h"
+#include "../special/special.h"
 #include "automatic_w.h"
 #include "device_k.h"
 #include "device_w.h"
@@ -40,7 +40,7 @@ time                    tiProfileW;
 
 slong                   dwCorrectW;
 
-static uint             wP
+uint                    wProfileW;
 
 
 
@@ -504,16 +504,14 @@ void    ReadEngW(uchar  ibLine)
 
 void    InitProfileW(void)
 {
-  if (!UseBounds())
-    wBaseCurr = 0;
-  else
-  {
-    wBaseCurr = mpcwStartRelCan[ibDig];
-    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
-    if (boShowMessages == true) DelayMsg();
-  }
-
-  tiCurrW = tiCurr; // время со счетчика
+//  if (!UseBounds())
+	wProfileW = 0;
+//  else
+//  {
+//    wBaseCurr = mpcwStartRelCan[ibDig];
+//    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+//    if (boShowMessages == true) DelayMsg();
+//  }
 }
 
 
@@ -540,7 +538,7 @@ void    QueryProfileW(void)
   PushChar1Bcc(0x02);
 
   PushStringBcc("1-1:1.29.0*");
-  PushNumberBcc(wBaseCurr);
+  PushNumberBcc(wProfileW);
   PushStringBcc("(4)");
   PushChar1Bcc(0x03);
 
@@ -548,49 +546,29 @@ void    QueryProfileW(void)
 }
 
 
-//static bool ReadDataV(uchar  i, time  tiDig)
-//{
-//  MonitorString("\n"); MonitorTime(tiDig);
-//
-//  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-//
-//  if (SearchDefHouIndex(tiDig) == 0) return(1);
-//
-//
-//  ShowProgressDigHou();
-//
-//  InitPop(19+i*2);
-//  int w = PopIntLtl();
-//
-//  MonitorIntDec(w);
-//  mpwChannels[0] = w;
-//
-//  MakeSpecial(tiDig);
-//  return(MakeStopHou(0));
-//}
-//
-//
-//bool    ReadHeaderV(void)
-//{
-//  uchar i;
-//  for (i=0; i<8; i++)
-//  {
-//    ulong dw = DateToHouIndex(tiCurrV);
-//
-//    dw += 8-1;
-//    dw -= (wBaseCurr + i);
-//
-//    time ti = HouIndexToDate(dw);
-//
-//    if (dw < dwTimeV)
-//      if (ReadDataV(8-1-i, ti) == 0) return(0);
-//  }
-//
-//  wBaseCurr += 8;
-//  if (wBaseCurr > wHOURS) return(0);
-//
-//  return(1);
-//}
+bool    ReadProfileW(void)
+{
+  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+
+  if (SearchDefHouIndex(tiDig) == 0) return(1);
+
+
+  ShowProgressDigHou();
+
+  InitPop(4+i*8);
+
+  uchar c;
+  for (c=0; c<4; c++)
+  {
+    uint w = PopChar();
+    w += PopChar()*0x100;
+
+    mpwChannels[c] = w;
+  }
+
+  MakeSpecial(tiDig);
+  return(MakeStopHou(0));
+}
 
 
 
