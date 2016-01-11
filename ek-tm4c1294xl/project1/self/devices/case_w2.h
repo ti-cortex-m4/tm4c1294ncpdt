@@ -251,7 +251,10 @@
       if (ReadProfileW() == false)
         DoneProfile();
       else
+      {
+        wProfileW++;
         MakePause(DEV_PREVPROFILE_W2);
+      }
       break;
 
 #endif
