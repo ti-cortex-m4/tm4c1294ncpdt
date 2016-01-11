@@ -45,8 +45,8 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime);
 
 void    ReadEngW(uchar  ibLine);
 
-//void    InitHeaderV(void);
-//void    QueryHeaderV(void);
-//bool    ReadHeaderV(void);
+void    InitHeaderW(void);
+void    QueryHeaderW(void);
+bool    ReadHeaderW(void);
 
 void    ReadCurrentW(void);
