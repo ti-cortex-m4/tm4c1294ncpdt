@@ -220,19 +220,19 @@
 
 
     case DEV_POSTCORRECT_W2:
-      InitHeaderW();
-      MakePause(DEV_PREVHEADER_W2);
+      InitProfileW();
+      MakePause(DEV_PREVPROFILE_W2);
       break;
 
-    case DEV_PREVHEADER_W2:
+    case DEV_PREVPROFILE_W2:
       cbRepeat = GetMaxRepeats();
-      QueryHeaderW();
-      SetCurr(DEV_HEADER_W2);
+      QueryProfileW();
+      SetCurr(DEV_PROFILE_W2);
       break;
 
-    case DEV_HEADER_W2:
+    case DEV_PROFILE_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTHEADER_W2);
+        MakePause(DEV_POSTPROFILE_W2);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -241,17 +241,17 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderW();
-          SetCurr(DEV_HEADER_W2);
+          QueryProfileW();
+          SetCurr(DEV_PROFILE_W2);
         }
       }
       break;
 
-    case DEV_POSTHEADER_W2:
-      if (ReadHeaderW() == false)
+    case DEV_POSTPROFILE_W2:
+      if (ReadProfileW() == false)
         DoneProfile();
       else
-        MakePause(DEV_PREVHEADER_W2);
+        MakePause(DEV_PREVPROFILE_W2);
       break;
 
 #endif

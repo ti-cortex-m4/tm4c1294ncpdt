@@ -160,7 +160,7 @@ void    DevicesInput(void)
 
       else if ((GetCurr() == DEV_OPTION_W2) || (GetCurr() == DEV_OPTION_W3) ||
                (GetCurr() == DEV_POSTGETCORRECT_W2) ||
-               (GetCurr() == DEV_HEADER_W2) ||
+               (GetCurr() == DEV_PROFILE_W2) ||
                (GetCurr() == DEV_ENERGY_W3))
       {
         UnpackW(true, 3);
