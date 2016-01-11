@@ -40,7 +40,7 @@ time                    tiProfileW;
 
 slong                   dwCorrectW;
 
-static time             tiCurrW;
+static uint             wP
 
 
 
@@ -502,7 +502,7 @@ void    ReadEngW(uchar  ibLine)
 
 
 
-void    InitHeaderW(void)
+void    InitProfileW(void)
 {
   if (!UseBounds())
     wBaseCurr = 0;
@@ -517,7 +517,7 @@ void    InitHeaderW(void)
 }
 
 
-void    QueryHeaderW(void)
+void    QueryProfileW(void)
 {
   HideCurrTime(1);
 
