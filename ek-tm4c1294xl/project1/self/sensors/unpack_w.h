@@ -5,3 +5,5 @@ UNPACK_W.H
 ------------------------------------------------------------------------------*/
 
 void    UnpackW(bool  fShow, uchar  bOffset);
+
+bool    DoneProfileW(void);
