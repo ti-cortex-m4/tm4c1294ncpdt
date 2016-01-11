@@ -521,14 +521,22 @@ bool    ReadProfileW(void)
 {
   InitPop(1);
 
-  uchar i;
-  for (i=0; i<4; i++)
-  {
-    uint w = PopDoubleW();
-    MonitorString("\n value "); MonitorIntDec(w);
-    mpwChannels[i] = w;
-  }
+  double dbPulse = mpdbPulseHou[ibDig];
 
+  uchar i;
+  for (i=0; i<MAX_LINE_W; i++)
+  {
+    uint w1 = PopDoubleW();
+    MonitorString("\n value1 "); MonitorIntDec(w1);
+
+    mpflEngFracDigCan[ibDig][i] += (float)w1;
+
+    uint w2 = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulse);
+    MonitorString("\n value2 "); MonitorIntDec(w2);
+    mpwChannels[i] = w2;
+
+    mpflEngFracDigCan[ibDig][i] -= (float)w2/dbPulse;
+  }
 
   time ti = PopTimeW();
   MonitorString("\n time "); MonitorTime(ti);
