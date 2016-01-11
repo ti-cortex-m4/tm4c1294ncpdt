@@ -23,7 +23,7 @@ void    UnpackW(bool  fShow, uchar  bOffset)
   if (cwInBuffBcc == IndexInBuff()) return;
   cwInBuffBcc = IndexInBuff();
 
-  if ((fShow == true) && (IndexInBuff() > 40)) sprintf(szLo," прием: %-4u    ",IndexInBuff());
+  if ((fShow == true) && (IndexInBuff() > 60)) sprintf(szLo," прием: %-4u    ",IndexInBuff());
 
   if (IndexInBuff() > 2)
   {
@@ -43,7 +43,7 @@ void    UnpackW(bool  fShow, uchar  bOffset)
       {
         SetCountInBuff(i+bOffset);
 
-        if ((fShow == true) && (IndexInBuff() > 40)) sprintf(szLo," прием: %-4u    ",IndexInBuff());
+        if ((fShow == true) && (IndexInBuff() > 60)) sprintf(szLo," прием: %-4u    ",IndexInBuff());
 
         MonitorIn();
 

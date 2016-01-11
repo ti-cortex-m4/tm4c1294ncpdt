@@ -103,8 +103,6 @@ void    Push(void  *pbData, uint  wSize) {
 
 uchar   PushChar(uchar  b)
 {
-  cwPushSize++;
-
   Push(&b, sizeof(uchar));
   return sizeof(uchar);
 }
