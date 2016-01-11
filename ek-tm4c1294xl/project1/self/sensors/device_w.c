@@ -531,11 +531,11 @@ bool    ReadProfileW(void)
 
     mpflEngFracDigCan[ibDig][i] += (float)w1;
 
-    uint w2 = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulse);
-    MonitorString("\n value2 "); MonitorIntDec(w2);
-    mpwChannels[i] = w2;
+    uint w = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulse);
+    MonitorString("\n value2 "); MonitorIntDec(w);
+    mpwChannels[i] = w;
 
-    mpflEngFracDigCan[ibDig][i] -= (float)w2/dbPulse;
+    mpflEngFracDigCan[ibDig][i] -= (float)w/dbPulse;
   }
 
   time ti = PopTimeW();
