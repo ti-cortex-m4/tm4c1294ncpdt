@@ -15,10 +15,10 @@ Rovalant МЭС-3
 #include "../memory/mem_limits.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
-//#include "../serial/monitor.h"
+#include "../serial/monitor.h"
 #include "../display/display.h"
 #include "../keyboard/time/key_timedate.h"
-//#include "../time/timedate.h"
+#include "../time/timedate.h"
 //#include "../time/calendar.h"
 #include "../time/delay.h"
 #include "../devices/devices.h"
@@ -83,6 +83,33 @@ double  dbA,dbB;
   }
 
   return -1;
+}
+
+
+time    PopTimeW(void)
+{
+  while (GetPopSize() < IndexInBuff())
+  {
+//    MonitorString("\n GetPopSize() "); MonitorIntDec(GetPopSize());
+//    MonitorString("\n IndexInBuff() "); MonitorIntDec(IndexInBuff());
+
+    uchar b = PopChar0Bcc();
+    if (b == '(')
+    {
+   	  time ti;
+
+      ti.bYear   = PopChar2Bcc(); PopChar();
+      ti.bMonth  = PopChar2Bcc(); PopChar();
+      ti.bDay    = PopChar2Bcc(); PopChar();
+      ti.bHour   = PopChar2Bcc(); PopChar();
+      ti.bMinute = PopChar2Bcc(); PopChar();
+      ti.bSecond = 0;
+
+      return ti;
+    }
+  }
+
+  return tiZero;
 }
 
 
@@ -369,39 +396,7 @@ void    QueryKtransW(uchar  ibKtrans)
 
   QueryW(1000, 1);
 }
-//
-//
-//
-//void    QueryVersionV(void)
-//{
-//  InitPush(2);
-//
-//  PushChar(0x20);
-//  PushChar(0x00);
-//
-//  PushAddressV(0x30);
-//
-//  QueryV(100+42, 15);
-//}
-//
-//
-//bool    ReadVersionV(void)
-//{
-//  Clear();
-//
-//  uchar a = InBuff(9);
-//  uchar b = InBuff(13);
-//  sprintf(szLo+2, "версия %2X.%2X", a, b);
-//
-//  return ((b == 0x01) |
-//          (b == 0x02) |
-//          (b == 0x03) |
-//          (b == 0x04) |
-//          (b == 0x0C) |
-//          (b == 0x0D) |
-//          (b == 0x11) |
-//          (b == 0x12));
-//}
+
 
 
 void    QueryEngAbsW_Current(uchar  ibLine)
@@ -475,23 +470,6 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime)
 }
 
 
-//static void ReadEngV(uchar  ibPop)
-//{
-//  InitPop(ibPop);
-//
-//  mpdwChannelsA[0] = PopLongLtl();
-//  mpboChannelsA[0] = true;
-//
-//  switch (PopChar() & 0x03)
-//  {
-//    case 0x00: wDividerV = 1; break;
-//    case 0x01: wDividerV = 10; break;
-//    case 0x02: wDividerV = 100; break;
-//    default:   wDividerV = 1000; break;
-//  }
-//}
-
-
 void    ReadEngW(uchar  ibLine)
 {
   ASSERT(ibLine < 4);
@@ -520,14 +498,7 @@ void    QueryProfileW(void)
   HideCurrTime(1);
 
 
-//  ulong dw = DateToHouIndex(tiCurrV);
-//  dw -= wBaseCurr;
-//  time ti = HouIndexToDate(dw);
-//
-//  MonitorString("\n\n");
-//  MonitorTime(tiCurrV); MonitorString("- ");
-//  MonitorIntDec(wBaseCurr); MonitorString(" = ");
-//  MonitorTime(ti);
+  MonitorString("\n\n index "); MonitorIntDec(wProfileW);
 
 
   InitPush(0);
@@ -548,25 +519,26 @@ void    QueryProfileW(void)
 
 bool    ReadProfileW(void)
 {
-  sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  InitPop(1);
 
-  if (SearchDefHouIndex(tiDig) == 0) return(1);
-
-
-  ShowProgressDigHou();
-
-  InitPop(4+i*8);
-
-  uchar c;
-  for (c=0; c<4; c++)
+  uchar i;
+  for (i=0; i<4; i++)
   {
-    uint w = PopChar();
-    w += PopChar()*0x100;
-
-    mpwChannels[c] = w;
+    uint w = PopDoubleW();
+    MonitorString("\n value "); MonitorIntDec(w);
+    mpwChannels[i] = w;
   }
 
-  MakeSpecial(tiDig);
+
+  time ti = PopTimeW();
+  MonitorString("\n time "); MonitorTime(ti);
+
+
+  sprintf(szLo," %02u    %02u.%02u.%02u", ti.bHour, ti.bDay,ti.bMonth,ti.bYear);
+  if (SearchDefHouIndex(ti) == 0) return true;
+  ShowProgressDigHou();
+
+  MakeSpecial(ti);
   return(MakeStopHou(0));
 }
 
