@@ -648,10 +648,9 @@ typedef enum
   DEV_POSTCORRECT_W2    =  0x1C14,
   DEV_CONTROL_W2        =  0x1C15,
   DEV_POSTCONTROL_W2    =  0x1C16,
-  DEV_HEADER_W2         =  0x1C17,
-  DEV_POSTHEADER_W2     =  0x1C18,
-  DEV_DATA_W2           =  0x1C19,
-  DEV_PREVHEADER_W2     =  0x1C1A,
+  DEV_PREVHEADER_W2     =  0x1C17,
+  DEV_HEADER_W2         =  0x1C18,
+  DEV_POSTHEADER_W2     =  0x1C19,
 
   DEV_START_W3          =  0x1C40,
   DEV_OPENCANAL_W3      =  0x1C41,
