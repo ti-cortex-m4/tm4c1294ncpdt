@@ -218,8 +218,40 @@
       }
       break;
 
+
     case DEV_POSTCORRECT_W2:
-      DoneProfile();
+      InitHeaderW();
+      MakePause(DEV_PREVHEADER_W2);
+      break;
+
+    case DEV_PREVHEADER_W2:
+      cbRepeat = GetMaxRepeats();
+      QueryHeaderW();
+      SetCurr(DEV_HEADER_W2);
+      break;
+
+    case DEV_HEADER_W2:
+      if (mpSerial[ibPort] == SER_GOODCHECK)
+        MakePause(DEV_POSTHEADER_W2);
+      else
+      {
+        if (cbRepeat == 0) ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryHeaderW();
+          SetCurr(DEV_HEADER_W2);
+        }
+      }
+      break;
+
+    case DEV_POSTHEADER_W2:
+      if (ReadHeaderW() == false)
+        DoneProfile();
+      else
+        MakePause(DEV_PREVHEADER_W2);
       break;
 
 #endif
