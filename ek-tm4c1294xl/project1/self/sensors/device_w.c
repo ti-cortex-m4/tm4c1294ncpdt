@@ -32,7 +32,7 @@ Rovalant ÌÝÑ-3
 
 
 
-#ifndef SKIP_W
+#ifndef SKIP_29
 
 uchar                   ibLineW;
 

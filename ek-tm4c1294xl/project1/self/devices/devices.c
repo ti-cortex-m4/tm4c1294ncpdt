@@ -4444,7 +4444,7 @@ void    RunDevices(void)
 
 #endif
 
-#ifndef SKIP_W
+#ifndef SKIP_29
 
     case DEV_START_W2:
       ShowPercent(50);
@@ -4709,7 +4709,7 @@ void    RunDevices(void)
 
 #endif
 
-#ifndef SKIP_W
+#ifndef SKIP_29
 
     case DEV_START_W3:
       ShowPercent(50);

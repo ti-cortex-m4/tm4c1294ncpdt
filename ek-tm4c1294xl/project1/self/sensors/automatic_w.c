@@ -26,7 +26,7 @@ AUTOMATIC_W!C
 
 
 
-#ifndef SKIP_W
+#ifndef SKIP_29
 
 void    QueryW(uint  cwIn, uchar  cbHeaderMax)
 {
