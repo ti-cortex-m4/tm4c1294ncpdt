@@ -1006,28 +1006,15 @@ bool    ReadParam29(void)
 
   switch (diCurr.ibLine)
   {
-    case PAR_P  : ReadParamW2("1.7.0","2.7.0"); break;
-    case PAR_P1 : ReadParamW2("21.7.0","22.7.0"); break;
-    case PAR_P2 : ReadParamW2("41.7.0","42.7.0"); break;
-    case PAR_P3 : ReadParamW2("61.7.0","62.7.0"); break;
+    case PAR_P  : ReadParamW2("21.7.0","22.7.0"); break;
 
-    case PAR_Q  : ReadParamW2("3.7.0","4.7.0"); break;
-    case PAR_Q1 : ReadParamW2("23.7.0","24.7.0"); break;
-    case PAR_Q2 : ReadParamW2("43.7.0","44.7.0"); break;
-    case PAR_Q3 : ReadParamW2("63.7.0","64.7.0"); break;
+    case PAR_Q  : ReadParamW2("23.7.0","24.7.0"); break;
 
-    case PAR_U1 : ReadParamW1("32.7.0",1); break;
-    case PAR_U2 : ReadParamW1("52.7.0",1); break;
-    case PAR_U3 : ReadParamW1("72.7.0",1); break;
+    case PAR_U  : ReadParamW1("32.7.0",1); break;
 
-    case PAR_I1 : ReadParamW1("31.7.0",1000); break;
-    case PAR_I2 : ReadParamW1("51.7.0",1000); break;
-    case PAR_I3 : ReadParamW1("71.7.0",1000); break;
+    case PAR_I  : ReadParamW1("31.7.0",1000); break;
 
-    case PAR_C  : ReadParamW1("13.7.0",1); break;
-    case PAR_C1 : ReadParamW1("33.7.0",1); break;
-    case PAR_C2 : ReadParamW1("53.7.0",1); break;
-    case PAR_C3 : ReadParamW1("73.7.0",1); break;
+    case PAR_C  : ReadParamW1("33.7.0",1); break;
 
     case PAR_F  : ReadParamW1("14.7.0",1); break;
 
