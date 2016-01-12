@@ -951,7 +951,6 @@ void    QueryParamW1(char  *psz)
 {
   PushAddress2W();
 
-  PushStringBcc("1.1-0:");
   PushStringBcc(psz);
   PushChar1Bcc(0x03);
 
@@ -998,12 +997,12 @@ bool    ReadParamW(void)
     case PAR_I2 : reValue = -1; break;
     case PAR_I3 : reValue = -1; break;
 
-    case PAR_C  : ReadParamW1("13.7.0"); break;
-    case PAR_C1 : ReadParamW1("33.7.0"); break;
-    case PAR_C2 : ReadParamW1("53.7.0"); break;
-    case PAR_C3 : ReadParamW1("73.7.0"); break;
+    case PAR_C  : ReadParamW1("1-0:13.7.0"); break;
+    case PAR_C1 : ReadParamW1("1-0:33.7.0"); break;
+    case PAR_C2 : ReadParamW1("1-0:53.7.0"); break;
+    case PAR_C3 : ReadParamW1("1-0:73.7.0"); break;
 
-    case PAR_F  : ReadParamW1("14.7.0"); break;
+    case PAR_F  : ReadParamW1("1-0:14.7.0"); break;
 
     default: return false;
   }
