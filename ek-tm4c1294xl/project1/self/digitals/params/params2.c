@@ -945,7 +945,7 @@ bool    ReadParamV(void)
 
 
 
-#ifndef SKIP_W
+#ifndef SKIP_29
 
 void    QueryParamW1(char  *psz)
 {
@@ -1094,7 +1094,7 @@ float2  ReadParam(uint  iwPrm)
     case 27: return GetFloat2(reValue, ReadParamV());
 #endif
 
-#ifndef SKIP_W
+#ifndef SKIP_29
     case 29: return GetFloat2(reValue, ReadParamW());
 #endif
 

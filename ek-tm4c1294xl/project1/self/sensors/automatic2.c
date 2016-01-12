@@ -1860,7 +1860,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
     case 27: return ReadCntCurrV();
 #endif
 
-#ifndef SKIP_W
+#ifndef SKIP_29
     case 29: return ReadCntCurrW();
 #endif
 
@@ -1972,7 +1972,7 @@ time2   ReadTimeCan(uchar  ibCan)
     case 27: return ReadTimeCanV();
 #endif
 
-#ifndef SKIP_W
+#ifndef SKIP_29
     case 29: return ReadTimeCanW();
 #endif
 
@@ -2101,7 +2101,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
     case 27: return ReadCntMonCanV(ibMon);
 #endif
 
-#ifndef SKIP_W
+#ifndef SKIP_29
     case 29: return ReadCntMonCanW(ibMon);
 #endif
 

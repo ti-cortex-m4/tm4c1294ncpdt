@@ -209,7 +209,7 @@ bool    StartProfile(uchar  ibCanal)
     case 27: SetNext(DEV_START_V2);  break;
 #endif
 
-#ifndef SKIP_W
+#ifndef SKIP_29
     case 29: SetNext(DEV_START_W2);  break;
 #endif
   }

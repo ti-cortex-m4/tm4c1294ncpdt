@@ -170,7 +170,7 @@ uchar   i;
           case 27: if (AutomaticV() != 1) bRes = 0xEE; break;
 #endif
 
-#ifndef SKIP_W
+#ifndef SKIP_29
           case 29: if (AutomaticW() != 1) bRes = 0xEE; break;
 #endif
         }
