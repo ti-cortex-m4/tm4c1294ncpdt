@@ -359,7 +359,7 @@ void    QueryHeaderC_6(void)
 }
 
 
-bool    ReadHeaderC(uchar  i)
+bool    ReadHeaderC(uchar  ibBlock)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
@@ -368,15 +368,15 @@ bool    ReadHeaderC(uchar  i)
 
   ShowProgressDigHou();      
 
-  InitPop(4+i*8);
+  InitPop(4+ibBlock*8);
 
-  uchar c;
-  for (c=0; c<4; c++)        
+  uchar i;
+  for (i=0; i<4; i++)        
   {
     uint w = PopChar();
     w += PopChar()*0x100;
 
-    mpwChannels[c] = w;
+    mpwChannels[i] = w;
   }
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
