@@ -61,7 +61,7 @@ bool    StartCurrent(uchar  ibCanal)
         (diCurr.bDevice == 24) ||
         (diCurr.bDevice == 26) || (diCurr.bDevice == 28) ||
         (diCurr.bDevice == 27) ||
-        (diCurr.bDevice == 29))
+        (diCurr.bDevice == 29) || (diCurr.bDevice == 30))
     {
       if (mpboReadyCan[ibDig] == false)
       {
