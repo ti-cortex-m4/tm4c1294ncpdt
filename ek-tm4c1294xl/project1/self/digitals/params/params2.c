@@ -981,7 +981,7 @@ bool    ReadParamW2(char  *psz1, char  *psz2)
   if (InputW() != SER_GOODCHECK) return false;
 
   InitPop(1);
-  double db1 = PopDoubleQ();
+  double db1 = PopDoubleW();
 
 
   QueryCloseW();
@@ -990,7 +990,7 @@ bool    ReadParamW2(char  *psz1, char  *psz2)
   if (InputW() != SER_GOODCHECK) return false;
 
   InitPop(1);
-  double db2 = PopDoubleQ();
+  double db2 = PopDoubleW();
 
 
   reValue = db1 + db2;
