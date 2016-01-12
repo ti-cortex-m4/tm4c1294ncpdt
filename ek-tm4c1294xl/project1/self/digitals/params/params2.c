@@ -16,13 +16,16 @@ PARAMS2!C
 #include    "../../devices/devices.h"
 #include    "../../sensors/automatic1.h"
 #include    "../../sensors/automatic_v.h"
+#include    "../../sensors/automatic_w.h"
 #include    "../../sensors/device_a.h"
 #include    "../../sensors/device_b.h"
 #include    "../../sensors/device_c.h"
+#include    "../../sensors/device_k.h"
 #include    "../../sensors/device_p.h"
 #include    "../../sensors/device_q.h"
 #include    "../../sensors/device_u.h"
 #include    "../../sensors/device_v.h"
+#include    "../../sensors/device_w.h"
 #include    "../../time/delay.h"
 #include    "../../console.h"
 #include    "../../flash/files.h"
@@ -942,6 +945,76 @@ bool    ReadParamV(void)
 
 
 
+#ifndef SKIP_W
+
+void    QueryParamW1(char  *psz)
+{
+  PushAddress2W();
+
+  PushStringBcc("1.1-0:");
+  PushStringBcc(psz);
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, 1);
+}
+
+
+bool    ReadParamW1(char  *psz)
+{
+  QueryCloseW();
+  QueryParamW1(psz);
+
+  if (InputW() != SER_GOODCHECK) return false;
+
+  InitPop(1);
+  reValue = PopDoubleK();
+
+  return true;
+}
+
+
+
+bool    ReadParamW(void)
+{
+  Clear();
+
+  switch (diCurr.ibLine)
+  {
+    case PAR_P  : reValue = -1; break;
+    case PAR_P1 : reValue = -1; break;
+    case PAR_P2 : reValue = -1; break;
+    case PAR_P3 : reValue = -1; break;
+
+    case PAR_Q  : reValue = -1; break;
+    case PAR_Q1 : reValue = -1; break;
+    case PAR_Q2 : reValue = -1; break;
+    case PAR_Q3 : reValue = -1; break;
+
+    case PAR_U1 : reValue = -1; break;
+    case PAR_U2 : reValue = -1; break;
+    case PAR_U3 : reValue = -1; break;
+
+    case PAR_I1 : reValue = -1; break;
+    case PAR_I2 : reValue = -1; break;
+    case PAR_I3 : reValue = -1; break;
+
+    case PAR_C  : ReadParamW1("13.7.0"); break;
+    case PAR_C1 : ReadParamW1("33.7.0"); break;
+    case PAR_C2 : ReadParamW1("53.7.0"); break;
+    case PAR_C3 : ReadParamW1("73.7.0"); break;
+
+    case PAR_F  : ReadParamW1("14.7.0"); break;
+
+    default: return false;
+  }
+
+  return true;
+}
+
+#endif
+
+
+
 float2  ReadParam(uint  iwPrm)
 {
   Clear();
@@ -993,6 +1066,10 @@ float2  ReadParam(uint  iwPrm)
 
 #ifndef SKIP_V
     case 27: return GetFloat2(reValue, ReadParamV());
+#endif
+
+#ifndef SKIP_W
+    case 29: return GetFloat2(reValue, ReadParamW());
 #endif
 
     default: return GetFloat2Error();
