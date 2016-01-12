@@ -20,7 +20,6 @@ MAIN.C
 #include "uart/log.h"
 #include "udp/udp_handler.h"
 #include "tcp/tcp_handler.h"
-#include "lwip/inet.h"
 
 
 
@@ -112,8 +111,7 @@ int     main(void)
 
   InitSettings();
 
-//  lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
-  lwIPInit(dwSysClockFreq, pbMAC, inet_addr("100.1.168.192"), inet_addr("0.255.255.255"), inet_addr("1.1.168.192"), IPADDR_USE_STATIC);
+  lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
   InitUDP_Handler();
   InitTCP_Handler();
