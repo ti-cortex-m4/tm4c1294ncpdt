@@ -4,20 +4,20 @@
 //
 // Copyright (c) 2013-2015 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement
-// 
+//
 // Texas Instruments (TI) is supplying this software for use solely and
 // exclusively on TI's microcontroller products. The software is owned by
 // TI and/or its suppliers, and is protected under applicable copyright
 // laws. You may not combine this software with "viral" open-source
 // software in order to form a larger program.
-// 
+//
 // THIS SOFTWARE IS PROVIDED "AS IS" AND WITH ALL FAULTS.
 // NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT
 // NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. TI SHALL NOT, UNDER ANY
 // CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL
 // DAMAGES, FOR ANY REASON WHATSOEVER.
-// 
+//
 // This is part of revision 2.1.1.71 of the EK-TM4C1294XL Firmware Package.
 //
 //*****************************************************************************
@@ -407,13 +407,13 @@ extern void UARTprintf(const char *pcString, ...);
 //#define ETHARP_DEBUG                    LWIP_DBG_ON     // default is OFF
 //#define NETIF_DEBUG                     LWIP_DBG_ON     // default is OFF
 #define PBUF_DEBUG                      LWIP_DBG_OFF
-#define API_LIB_DEBUG                   LWIP_DBG_OFF
-#define API_MSG_DEBUG                   LWIP_DBG_OFF
-#define SOCKETS_DEBUG                   LWIP_DBG_OFF
+#define API_LIB_DEBUG                   LWIP_DBG_ON
+#define API_MSG_DEBUG                   LWIP_DBG_ON
+#define SOCKETS_DEBUG                   LWIP_DBG_ON
 #define ICMP_DEBUG                      LWIP_DBG_OFF
 #define IGMP_DEBUG                      LWIP_DBG_OFF
 #define INET_DEBUG                      LWIP_DBG_OFF
-//#define IP_DEBUG                        LWIP_DBG_ON     // default is OFF
+#define IP_DEBUG                        LWIP_DBG_ON     // default is OFF
 #define IP_REASS_DEBUG                  LWIP_DBG_OFF
 #define RAW_DEBUG                       LWIP_DBG_OFF
 #define MEM_DEBUG                       LWIP_DBG_OFF
@@ -428,7 +428,7 @@ extern void UARTprintf(const char *pcString, ...);
 #define TCP_OUTPUT_DEBUG                LWIP_DBG_OFF
 #define TCP_RST_DEBUG                   LWIP_DBG_OFF
 #define TCP_QLEN_DEBUG                  LWIP_DBG_OFF
-//#define UDP_DEBUG                       LWIP_DBG_ON     // default is OFF
+#define UDP_DEBUG                       LWIP_DBG_ON     // default is OFF
 #define TCPIP_DEBUG                     LWIP_DBG_OFF
 #define PPP_DEBUG                       LWIP_DBG_OFF
 #define SLIP_DEBUG                      LWIP_DBG_OFF
