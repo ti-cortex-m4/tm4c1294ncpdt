@@ -510,7 +510,7 @@ void    ReadHeaderK(uchar  ibLine)
   uchar h;
   for (h=0; h<48; h++)
   {
-    mpflBuffCanHou[ibLine][h] = PopDoubleK()/2;
+    mpdbBuffCanHou[ibLine][h] = PopDoubleK()/2;
   }
 }
 
@@ -525,13 +525,13 @@ void    MakeDataK(uchar  ibHou)
   uchar i;
   for (i=0; i<ibMinorMax; i++)
   {
-    float fl = mpflBuffCanHou[i][ibHou];
-    mpflEngFracDigCan[ibDig][i] += fl;
+    double db = mpdbBuffCanHou[i][ibHou];
+    mpdbEngFracDigCan[ibDig][i] += db;
 
-    uint w = (uint)(mpflEngFracDigCan[ibDig][i]*dbPulse);
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
     mpwChannels[i] = w;
 
-    mpflEngFracDigCan[ibDig][i] -= (float)w/dbPulse;
+    mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
   }
 
   wBaseCurr++;

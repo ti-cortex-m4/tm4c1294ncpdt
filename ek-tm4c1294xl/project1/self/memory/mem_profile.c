@@ -84,13 +84,13 @@ ulong                   dwValueC, dwValueS;
 
 
 // промежуточный массив
-float                   mpflBuffCanHou[4][48];
+double                  mpdbBuffCanHou[4][48];
 
 // промежуточный массив
-float                   mpflEngFrac[bCANALS];
+double                  mpdbEngFrac[bCANALS];
 
 // промежуточный массив
-float                   mpflEngFracDigCan[bCANALS][6];
+double                  mpdbEngFracDigCan[bCANALS][6];
 
 // счетчики переполнений получасовых графиков
 uint                    mpcwOverflowHhr[bCANALS];

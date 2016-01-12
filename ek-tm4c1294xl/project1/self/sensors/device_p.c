@@ -47,10 +47,10 @@ DEVICE_P!C
 uchar   FromCharEls(uchar  bT)
 {
   if ((bT >= '0') && (bT <= '9'))
-    return bT - '0'; 
+    return bT - '0';
   else if ((bT >= 'A') && (bT <= 'F'))
     return 10 + bT - 'A';
-  else 
+  else
     return 0;
 }
 
@@ -77,7 +77,7 @@ uint    PopChar4Els(void)
 uint  w;
 
   w = PopChar1Els()*0x10 + PopChar1Els();
-  w <<= 8;   
+  w <<= 8;
   w += PopChar1Els()*0x10 + PopChar1Els();
   return w;
 }
@@ -98,7 +98,7 @@ void    QueryStopP(void)
   PushChar('0');
   PushChar(0x03);
 
-#ifdef TRANSIT_ENABLED	
+#ifdef TRANSIT_ENABLED
   ElsQueryIO(100, 4+1);
   Delay(5000);
 #else
@@ -134,7 +134,7 @@ void    QueryOpenP(void)
   PushChar(0x0D);
   PushChar(0x0A);
 
-#ifdef  TRANSIT_ENABLED	
+#ifdef  TRANSIT_ENABLED
   QueryT(23, 6+2, 1);
 #else
   Query(23, 6+2, 1);
@@ -204,7 +204,7 @@ time    ReadTimeP(void)
 
   ti.bDay    = FromBCD((w & 0x3F00) / 0x100);
   ti.bMonth  = FromBCD(w & 0x001F);
-    
+
   PopChar();
   PopChar();
   ti.bYear   = PopChar1Els()*10 + PopChar1Els();
@@ -250,7 +250,7 @@ uchar i,j;
     {
       dbA += dbB*(PopChar1Els()*10 + PopChar1Els());
       dbB *= 100;
-    }  
+    }
     mpdbChannelsC[bPart*8 + i] = dbA/1e6;
   }
 
@@ -263,7 +263,7 @@ uchar i,j;
     {
       mpdwChannelsB[bPart*8 + i] += dw*(PopChar1Els()*10 + PopChar1Els());
       dw *= 100;
-    }  
+    }
   }
 }
 
@@ -282,7 +282,7 @@ uchar i,j;
       uchar k = PopChar();
       dbA += dbB*((k / 0x10)*10 + (k % 0x10));
       dbB *= 100;
-    }  
+    }
     mpdbChannelsC[i] = dbA/1e6;
   }
 }
@@ -337,7 +337,7 @@ void    QueryModeP(void)
   PushChar(0x0D);
   PushChar(0x0A);
 
-#ifdef  TRANSIT_ENABLED	
+#ifdef  TRANSIT_ENABLED
   QueryT(1+22+1, 4+2, 1);
 #else
   Query(1+22+1, 4+2, 1);
@@ -351,7 +351,7 @@ uchar i,a,b;
 
   if (boEnblKeys != true)
     for (i=0; i<8; i++) mpbPasswordEls[i] = '0';
-  else 
+  else
   {
     line ln = mpphKeys[ibDig];
     for (i=0; i<8; i++) mpbPasswordEls[i] = ln.szLine[i];
@@ -369,7 +369,7 @@ uchar i,a,b;
   }
 
   mpbEls2[8] = 0;
-  
+
   for (i=0; i<8; i++)
   {
     a = (mpbEls2[i] + mpbEls2[i+7]) % 0x100;
@@ -394,7 +394,7 @@ uchar i,a,b;
 }
 
 void    QueryRepasswordP(void)
-{  
+{
 uchar i;
 
   InitPush(0);
@@ -448,12 +448,12 @@ uint  w;
 
   ibMinorMax = 0;
   for (i=0; i<16; i++)
-    if ((w & (uint)(1 << i)) != 0) 
+    if ((w & (uint)(1 << i)) != 0)
     {
       if (ibMinorMax < 4) mpbMappingEls[ibMinorMax] = i;
-      ibMinorMax++; 
+      ibMinorMax++;
     }
-  
+
   if (ibMinorMax > 4) ibMinorMax = 4;
 //  if (ibMinorMax == 0) { sprintf(szLo, "каналы не заданы"); DelayMsg(); }
 }
@@ -463,14 +463,14 @@ void    Setup1P(void)
 {
   if (!UseBounds())
     ibMinor = 1;
-  else 
+  else
   {
-    if (mpboStartCan[ibDig] == false) 
+    if (mpboStartCan[ibDig] == false)
     {
       ibMinor = 1;
       if (boShowMessages == true) sprintf(szLo," первый запуск  ");
     }
-    else 
+    else
     {
       ibMinor = mpcwStartAbs16Can[ibDig];
       if (boShowMessages == true) sprintf(szLo,"  продолжение   ");
@@ -490,7 +490,7 @@ void    Setup1P(void)
 
 
 void    QuerySetValueP(void)
-{ 
+{
   Clear();
   if (boShowMessages == true) { sprintf(szLo+2,"индекс: -%-2u",ibMinor); DelayInf(); }
 
@@ -590,14 +590,14 @@ void    QueryProfileP(void)
 }
 
 
-void   SkipByteEls(void) 
+void   SkipByteEls(void)
 {
   pbGetEls = ++pbGetEls % 128;
   cbSizeEls--;
 }
 
 
-uchar   GetByteEls(void) 
+uchar   GetByteEls(void)
 {
   uchar i = mpbBuffEls[pbGetEls];
   pbGetEls = ++pbGetEls % 128;
@@ -611,7 +611,7 @@ bool   GetConfigP(uchar  bT)
 {
 uchar i,j;
 
-  switch (bT) 
+  switch (bT)
   {
     case 0xE4: j = 8; break;
     case 0xE5: j = 5; break;
@@ -620,11 +620,11 @@ uchar i,j;
     case 0xEA: j = 5; boTimeChangeP = true; dwHouIndexP2 = dwHouIndexP1; break;
     case 0xEB: j = 5; break;
     case 0xED: j = 5; break;
-    default:   j = 5; 
+    default:   j = 5;
   }
 
   if (j > cbSizeEls) return 1;
-  
+
   SkipByteEls();  // status
 
   combo32 co;
@@ -638,7 +638,7 @@ uchar i,j;
     bFlagElsCurr = 1;
     bCodeElsCurr = bT;
     dwStampElsCurr = co.dwBuff;
-  } 
+  }
 
   bBreakEls = 0;
   if (bFlagElsPrev == 1)
@@ -654,12 +654,12 @@ uchar i,j;
 
 
   for (i=0; i<j-5; i++) SkipByteEls();
-  
+
   return 0;
 }
 
 
-void  Setup2P(void) 
+void  Setup2P(void)
 {
   bFlagElsPrev = 1;
   bCodeElsPrev = bCodeElsCurr;
@@ -714,15 +714,15 @@ uchar i,j;
     if (bFirstEls == 0) { ShowProgressDigHou(); bFirstEls = 1; }
 
     double dbPulse = mpdbPulseHou[ibDig];
-    for (c=0; c<ibMinorMax; c++)        
+    for (c=0; c<ibMinorMax; c++)
     {
-      float fl = mpdbChannelsC[c];
-      mpflEngFracDigCan[ibDig][c] += fl;
+      double db = mpdbChannelsC[c];
+      mpdbEngFracDigCan[ibDig][c] += db;
 
-      uint w = (uint)(mpflEngFracDigCan[ibDig][c]*dbPulse);
+      uint w = (uint)(mpdbEngFracDigCan[ibDig][c]*dbPulse);
       mpwChannels[c] = w;
 
-      mpflEngFracDigCan[ibDig][c] -= (float)w/dbPulse;
+      mpdbEngFracDigCan[ibDig][c] -= (double)w/dbPulse;
     }
 
     if (!IsDefect(ibDig) && (boTimeChangeP == true))
@@ -740,18 +740,18 @@ uchar i,j;
         }
       }
 
-      SaveImpHouSpec(0,iwDigHou); 
+      SaveImpHouSpec(0,iwDigHou);
 
       AddDigRecord(EVE_DEVICE_P_DEFECT);
-      boRecalcCurr = true;      
+      boRecalcCurr = true;
     }
 
     MakeSpecial(ti);
-  } 
-  else 
-  { 
+  }
+  else
+  {
     iwMajor++;
-    szLo[15] = '?'; DelayOff(); 
+    szLo[15] = '?'; DelayOff();
   }
 
   return 0;
@@ -765,11 +765,11 @@ uchar i;
   HideCurrTime(1);
 
   InitPop(2);
-  for (i=0; i<64; i++) 
+  for (i=0; i<64; i++)
   {
     mpbBuffEls[pbPutEls] = PopChar1Els()*0x10 + PopChar1Els();
     pbPutEls = ++pbPutEls % 128;
-  }  
+  }
 
   cbSizeEls += 64;
 
@@ -778,22 +778,22 @@ uchar i;
     if (cbSizeEls == 0) break;
 
     i = mpbBuffEls[pbGetEls];
-    if ((i & 0xF0) == 0xE0) 
+    if ((i & 0xF0) == 0xE0)
     {
       if (GetConfigP(i) == 1) break;
       if (bBreakEls == 1) break;
-    } 
-    else 
+    }
+    else
     {
-      if ((i & 0x80) == 0) 
+      if ((i & 0x80) == 0)
       {
         if (GetProfileP(ti) == 1) break;
         Delay(100);
-      }  
+      }
       else
         SkipByteEls();
-    }  
-  }  
+    }
+  }
 }
 
 
@@ -802,7 +802,7 @@ bool    BreakP(void)
   if (cwDigHou == 0)
   {
     sprintf(szLo," выключено: %-2u  ",++cbDigDay); DelayInf();
-    if (cbDigDay >= 10) 
+    if (cbDigDay >= 10)
       return 1;
   }
   else cbDigDay = 0;
@@ -826,7 +826,7 @@ void    ReadCurrentP(void)
   for (i=0; i<4; i++)
   {
     ulong dw;
-    if (mpbMappingEls[i] >= 16) 
+    if (mpbMappingEls[i] >= 16)
     {
       dw = 0;
     }
@@ -834,7 +834,7 @@ void    ReadCurrentP(void)
     {
       dw = mpdwChannelsB[mpbMappingEls[i]];
       dw /= (1e6/dbPulse);
-    } 
+    }
     mpdwBaseDig[i] = dw;
   }
 
