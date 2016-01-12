@@ -959,7 +959,7 @@ void    QueryParamW1(char  *psz)
 }
 
 
-bool    ReadParamW1(char  *psz)
+bool    ReadParamW1(char  *psz, uint  wMul)
 {
   QueryCloseW();
   QueryParamW1(psz);
@@ -967,7 +967,7 @@ bool    ReadParamW1(char  *psz)
   if (InputW() != SER_GOODCHECK) return false;
 
   InitPop(1);
-  reValue = PopDoubleK();
+  reValue = PopDoubleK()*wMul;
 
   return true;
 }
@@ -990,20 +990,20 @@ bool    ReadParamW(void)
     case PAR_Q2 : reValue = -1; break;
     case PAR_Q3 : reValue = -1; break;
 
-    case PAR_U1 : ReadParamW1("32.7.0"); break;
-    case PAR_U2 : ReadParamW1("52.7.0"); break;
-    case PAR_U3 : ReadParamW1("72.7.0"); break;
+    case PAR_U1 : ReadParamW1("32.7.0",1); break;
+    case PAR_U2 : ReadParamW1("52.7.0",1); break;
+    case PAR_U3 : ReadParamW1("72.7.0",1); break;
 
-    case PAR_I1 : ReadParamW1("31.7.0"); break;
-    case PAR_I2 : ReadParamW1("35.7.0"); break;
-    case PAR_I3 : ReadParamW1("37.7.0"); break;
+    case PAR_I1 : ReadParamW1("31.7.0",1000); break;
+    case PAR_I2 : ReadParamW1("51.7.0",1000); break;
+    case PAR_I3 : ReadParamW1("71.7.0",1000); break;
 
-    case PAR_C  : ReadParamW1("13.7.0"); break;
-    case PAR_C1 : ReadParamW1("33.7.0"); break;
-    case PAR_C2 : ReadParamW1("53.7.0"); break;
-    case PAR_C3 : ReadParamW1("73.7.0"); break;
+    case PAR_C  : ReadParamW1("13.7.0",1); break;
+    case PAR_C1 : ReadParamW1("33.7.0",1); break;
+    case PAR_C2 : ReadParamW1("53.7.0",1); break;
+    case PAR_C3 : ReadParamW1("73.7.0",1); break;
 
-    case PAR_F  : ReadParamW1("14.7.0"); break;
+    case PAR_F  : ReadParamW1("14.7.0",1); break;
 
     default: return false;
   }
