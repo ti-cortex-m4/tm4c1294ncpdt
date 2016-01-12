@@ -114,7 +114,7 @@ void    ReadHeaderU_Plc(void)
   uchar i;
   for (i=0; i<bPlcUSize; i++)
   {
-    mpflBuffCanHou[ibLineU][i] = PopDoubleQ()/2;
+    mpdbBuffCanHou[ibLineU][i] = PopDoubleQ()/2;
   }
 }
 

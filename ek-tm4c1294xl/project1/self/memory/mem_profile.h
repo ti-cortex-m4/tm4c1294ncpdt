@@ -63,11 +63,11 @@ extern  ulong                   dwValueC, dwValueS;
 
 
 
-extern  float                   mpflBuffCanHou[4][48];
+extern  double                  mpdbBuffCanHou[4][48];
 
-extern  float                   mpflEngFrac[bCANALS];
+extern  double                  mpdbEngFrac[bCANALS];
 
-extern  float                   mpflEngFracDigCan[bCANALS][6];
+extern  double                  mpdbEngFracDigCan[bCANALS][6];
 
 extern  uint                    mpcwOverflowHhr[bCANALS];
 

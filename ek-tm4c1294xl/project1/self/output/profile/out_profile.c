@@ -45,10 +45,10 @@ void    OutGetEngFrac(void)
   uchar c;
   for (c=0; c<bCANALS; c++)
   {
-    PushFloat(mpflEngFrac[c]);
+    PushDouble(mpdbEngFrac[c]);
   }
 
-  Output(sizeof(mpflEngFrac));
+  Output(sizeof(mpdbEngFrac));
 }
 
 
@@ -62,18 +62,18 @@ void    OutGetEngFracDigCan(void)
     uchar i;
     for (i=0; i<6; i++)
     {
-      PushFloat(mpflEngFracDigCan[c][i]);
+      PushDouble(mpdbEngFracDigCan[c][i]);
     }
   }
 
-  Output(sizeof(mpflEngFracDigCan));
+  Output(sizeof(mpdbEngFracDigCan));
 }
 
 
 void    OutResetEngFrac(void)
 {
   if (enGlobal == GLB_REPROGRAM)
-    memset(&mpflEngFrac, 0, sizeof(mpflEngFrac));
+    memset(&mpdbEngFrac, 0, sizeof(mpdbEngFrac));
   else
     Result(bRES_NEEDREPROGRAM);
 }
@@ -82,7 +82,7 @@ void    OutResetEngFrac(void)
 void    OutResetEngFracDigCan(void)
 {
   if (enGlobal == GLB_REPROGRAM)
-    memset(&mpflEngFracDigCan, 0, sizeof(mpflEngFracDigCan));
+    memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
   else
     Result(bRES_NEEDREPROGRAM);
 }
