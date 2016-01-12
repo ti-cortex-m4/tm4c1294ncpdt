@@ -234,14 +234,30 @@ void    MakeParamDiv(uint  iwPrm)
   {
     switch (GetParamLine(iwPrm))
     {
+      case PAR_P1 :
+      case PAR_P2 :
+      case PAR_P3 :
+
+      case PAR_Q1 :
+      case PAR_Q2 :
+      case PAR_Q3 :
+
       case PAR_S  :
       case PAR_S1 :
       case PAR_S2 :
       case PAR_S3 :
 
-      case PAR_U  :
+      case PAR_U1 :
+      case PAR_U2 :
+      case PAR_U3 :
 
-      case PAR_I  :
+      case PAR_I1 :
+      case PAR_I2 :
+      case PAR_I3 :
+
+      case PAR_C1 :
+      case PAR_C2 :
+      case PAR_C3 :
 
       case PAR_F1 :
       case PAR_F2 :
