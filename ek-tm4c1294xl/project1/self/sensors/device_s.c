@@ -294,7 +294,7 @@ static bool ReadDataS(uchar  i)
   {
     double dbPulse = mpdbPulseHou[ibDig];
 
-    double db = (float)dw/wDividerS;
+    double db = (double)dw/wDividerS;
     mpdbEngFrac[ibDig] += db;
 
     uint w;
