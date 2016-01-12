@@ -141,7 +141,7 @@ void    DevicesInput(void)
 #endif
 
 #ifndef SKIP_29
-    else if (diCurr.bDevice == 29)
+    else if ((diCurr.bDevice == 29) || (diCurr.bDevice == 30))
     {
       if ((GetCurr() == DEV_OPENCANAL_W2) || (GetCurr() == DEV_OPENCANAL_W3))
       {

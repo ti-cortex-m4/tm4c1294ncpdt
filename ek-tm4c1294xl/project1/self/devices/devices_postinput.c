@@ -202,7 +202,7 @@ void    DevicesPostInput(void)
 #endif
 
 #ifndef SKIP_29
-    else if (diCurr.bDevice == 29)
+    else if ((diCurr.bDevice == 29) || (diCurr.bDevice == 30))
     {
       MonitorIn();
       if (ChecksumW())
