@@ -121,19 +121,36 @@ void    ShowProgressDigHou(void)
 }
 
 
+
 bool    MakeStopHou(uint  wAdd)
 {
   if (((wHOURS+iwHardHou-iwDigHou) % wHOURS) < (mpcwStopCan[ibDig]+wAdd))
   {
     NewBoundsRel((wHOURS+iwHardHou-iwDigHou) % wHOURS);
-    return(1);
+    return true;
   }
   else
   {
     NewLimits(); // переход границы со стороны сумматора
-    return(0);
+    return false;
   }
 }
+
+
+bool    MakeStopHou2(uint  wAdd, uint  wRel)
+{
+  if (((wHOURS+iwHardHou-iwDigHou) % wHOURS) < (mpcwStopCan[ibDig]+wAdd))
+  {
+    NewBoundsRel(wRel);
+    return true;
+  }
+  else
+  {
+    NewLimits(); // переход границы со стороны сумматора
+    return false;
+  }
+}
+
 
 
 void    ErrorLink(void)

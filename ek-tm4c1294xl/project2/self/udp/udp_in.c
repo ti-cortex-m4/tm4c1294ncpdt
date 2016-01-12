@@ -88,9 +88,9 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
   PushString("/");
   PushString("**");
   PushString("/");
-  PushString(szOwnerName);
+  PushString("name");
   PushString("/");
-  PushString(szDeviceName);
+  PushString("name");
   PushString("/");
   PushString("4");
 
