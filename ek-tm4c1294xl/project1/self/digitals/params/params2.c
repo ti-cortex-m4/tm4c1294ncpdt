@@ -973,6 +973,32 @@ bool    ReadParamW1(char  *psz, uint  wMul)
 }
 
 
+bool    ReadParamW2(char  *psz1, char  *psz2)
+{
+  QueryCloseW();
+  QueryParamW1(psz1);
+
+  if (InputW() != SER_GOODCHECK) return false;
+
+  InitPop(1);
+  double db1 = PopDoubleQ();
+
+
+  QueryCloseW();
+  QueryParamW1(psz2);
+
+  if (InputW() != SER_GOODCHECK) return false;
+
+  InitPop(1);
+  double db2 = PopDoubleQ();
+
+
+  reValue = db1 + db2;
+
+  return true;
+}
+
+
 
 bool    ReadParamW(void)
 {
@@ -980,15 +1006,15 @@ bool    ReadParamW(void)
 
   switch (diCurr.ibLine)
   {
-    case PAR_P  : reValue = -1; break;
-    case PAR_P1 : reValue = -1; break;
-    case PAR_P2 : reValue = -1; break;
-    case PAR_P3 : reValue = -1; break;
+    case PAR_P  : ReadParamW2("1.7.0","2.7.0"); break;
+    case PAR_P1 : ReadParamW2("21.7.0","22.7.0"); break;
+    case PAR_P2 : ReadParamW2("41.7.0","42.7.0"); break;
+    case PAR_P3 : ReadParamW2("61.7.0","62.7.0"); break;
 
-    case PAR_Q  : reValue = -1; break;
-    case PAR_Q1 : reValue = -1; break;
-    case PAR_Q2 : reValue = -1; break;
-    case PAR_Q3 : reValue = -1; break;
+    case PAR_Q  : ReadParamW2("3.7.0","4.7.0"); break;
+    case PAR_Q1 : ReadParamW2("23.7.0","24.7.0"); break;
+    case PAR_Q2 : ReadParamW2("43.7.0","44.7.0"); break;
+    case PAR_Q3 : ReadParamW2("63.7.0","64.7.0"); break;
 
     case PAR_U1 : ReadParamW1("32.7.0",1); break;
     case PAR_U2 : ReadParamW1("52.7.0",1); break;
