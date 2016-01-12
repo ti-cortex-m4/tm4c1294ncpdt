@@ -482,14 +482,14 @@ void    ReadEngW(uchar  ibLine)
 
 void    InitProfileW(void)
 {
-  if (!UseBounds())
-    wProfileW = 0;
-  else
-  {
-    wProfileW = mpcwStartRelCan[ibDig];
-    sprintf(szLo," начало %04u:%02u ",wProfileW,(uchar)(wProfileW/48 + 1));
-    if (boShowMessages == true) DelayMsg();
-  }
+//  if (!UseBounds())
+	wProfileW = 0;
+//  else
+//  {
+//    wBaseCurr = mpcwStartRelCan[ibDig];
+//    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+//    if (boShowMessages == true) DelayMsg();
+//  }
 }
 
 
@@ -546,9 +546,8 @@ bool    ReadProfileW(void)
   if (SearchDefHouIndex(ti) == 0) return true;
   ShowProgressDigHou();
 
-
   MakeSpecial(ti);
-  return MakeStopHou2(0,wProfileW);
+  return(MakeStopHou(0));
 }
 
 
