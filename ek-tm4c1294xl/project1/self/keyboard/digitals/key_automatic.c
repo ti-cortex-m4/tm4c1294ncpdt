@@ -171,7 +171,8 @@ uchar   i;
 #endif
 
 #ifndef SKIP_29
-          case 29: if (AutomaticW() != 1) bRes = 0xEE; break;
+          case 29:
+          case 30: if (AutomaticW() != 1) bRes = 0xEE; break;
 #endif
         }
 

@@ -1095,7 +1095,8 @@ float2  ReadParam(uint  iwPrm)
 #endif
 
 #ifndef SKIP_29
-    case 29: return GetFloat2(reValue, ReadParamW());
+    case 29:
+    case 30: return GetFloat2(reValue, ReadParamW());
 #endif
 
     default: return GetFloat2Error();
