@@ -470,6 +470,23 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime)
 }
 
 
+void    QueryEngMonTrfW(uchar  ibLine, uchar  bTime)
+{
+  ASSERT(ibLine < 4);
+
+  PushAddress2W();
+
+  PushStringBcc("1-1:");
+  PushChar1Bcc('1'+ibLine);
+  PushStringBcc(".129.0*");
+  PushNumberBcc(bTime);
+  PushStringBcc("(5)");
+  PushChar1Bcc(0x03);
+
+  QueryW(1000, 6);
+}
+
+
 void    ReadEngW(uchar  ibLine)
 {
   ASSERT(ibLine < 4);
