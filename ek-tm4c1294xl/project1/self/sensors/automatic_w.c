@@ -301,6 +301,39 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
 }
 
 
+bool    QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
+{
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
+    {
+      QueryCloseW();
+      QueryEngMonTrfW(i,bTime);
+
+      if (InputW() == SER_GOODCHECK) break;
+      if (IndexInBuff() == 10)
+      {
+        Clear();
+        sprintf(szLo+3, "мес€ц -%u ?",bTime);
+        Delay(1000);
+        return false;
+      }
+      if (fKey == true) return false;
+    }
+
+    if (r == bMINORREPEATS) return false;
+    ShowPercent(bPercent+i);
+
+    ReadEngTrfW(i,ibTrf);
+  }
+
+  QueryCloseW();
+
+  return true;
+}
+
 
 time2   ReadTimeCanW(void)
 {
@@ -381,51 +414,30 @@ double2 ReadCntMonCanW(uchar  ibMon)
 }
 
 
-status  ReadCntMonCanTariffW(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
+status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
-//  time2 ti2 = ReadTimeCanK();
-//  if (ti2.fValid == 0) return ST4_BADDIGITAL;
-//
-//  time ti = ti2.tiValue;
-//  if (ibMonth == 0)
-//  {
-//    ti.bMonth = 12;
-//    ti.bYear--;
-//  }
-//  else
-//  {
-//    if (ibMonth+1 > ti.bMonth) ti.bYear--;
-//    ti.bMonth = ibMonth;
-//  }
-//
-//  if (ReadEnergyMonDatesK_Full() == 0) return ST4_BADDIGITAL;
-//
-//  date dt;
-//  dt.bDay   = ti.bDay;
-//  dt.bMonth = ti.bMonth;
-//  dt.bYear  = ti.bYear;
-//  uchar bMon = IsMonAddedK(dt);
-//
-//  if (bMon == 0)
-//  {
-//    Clear();
-//    sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
-//    Delay(1000);
-//    return(ST4_NOTPRESENTED);
-//  }
-//  if (ReadEnergyMonTariffK_Full(bMon,ibTariff) == 0) return ST4_BADDIGITAL;
-//
-//  QueryCloseK();
-//
-//
-//  double dbTrans = mpdbTransCnt[ibDig];
-//
-//  uchar i;
-//  for (i=0; i<4; i++)
-//  {
-//    mpdbChannelsC[i] *= dbTrans;
-//    mpboChannelsA[i] = true;
-//  }
+  Clear();
+
+  double2 db2 = QueryKtransW_Full(25);
+  if (db2.fValid == false) return ST4_BADDIGITAL;
+  double dbTrans = db2.dbValue;
+
+
+  time2 ti2 = QueryTimeW_Full(50);
+  if (ti2.fValid == false) return GetDouble2Error();
+  time ti = ti2.tiValue;
+
+
+  uchar m = (12 + ti.bMonth - (ibMon+1) - 1) % 12;
+  if (QueryEngMonTrfW_Full(m, 75+ibTrf, ibTrf) == 0) return ST4_BADDIGITAL;
+
+
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    mpdbChannelsC[i] *= dbTrans;
+    mpboChannelsA[i] = true;
+  }
 
   return ST4_OK;
 }
