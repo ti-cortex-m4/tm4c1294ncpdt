@@ -967,7 +967,7 @@ bool    ReadParamW1(char  *psz, uint  wMul)
   if (InputW() != SER_GOODCHECK) return false;
 
   InitPop(1);
-  reValue = PopDoubleK()*wMul;
+  reValue = PopDoubleW()*wMul;
 
   return true;
 }
