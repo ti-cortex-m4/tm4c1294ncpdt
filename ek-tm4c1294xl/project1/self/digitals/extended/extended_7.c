@@ -76,7 +76,7 @@ void    NextDayExtended7(void)
       db += mpdbCount[c];
 
       value6 vl;
-      vl.bStatus = ST4_OK;
+      vl.bStatus = ST_OK;
       vl.dbValue = db;
       vl.tiUpdate = *GetCurrTimeDate();
 
@@ -94,10 +94,10 @@ void    MakeExtended7(uchar  ibCan, double  db)
   value6 vl1;
   LoadCntDayCan7(ibHardDay, ibCan, &vl1);
 
-  if (vl1.bStatus == ST4_NONE)
+  if (vl1.bStatus == ST_NONE)
   {
     value6 vl2;
-    vl2.bStatus = ST4_OK;
+    vl2.bStatus = ST_OK;
     vl2.dbValue = db;
     vl2.tiUpdate = *GetCurrTimeDate();
 

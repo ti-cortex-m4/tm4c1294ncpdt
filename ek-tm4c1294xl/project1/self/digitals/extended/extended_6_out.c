@@ -55,7 +55,7 @@ void    OutExtended6(bool  fDouble)
         if (GetDigitalDevice(c) == 0)
         {
           value6 vl;
-          vl.bStatus = ST4_OK;
+          vl.bStatus = ST_OK;
           vl.dbValue = mpdbCntMonCan[ PrevSoftMon() ][c];
           vl.tiUpdate = tiZero;
 

@@ -43,13 +43,13 @@ uchar   PushFloatOrDoubleUni(status  bStatus, double  db, bool  fDouble)
   {
     switch (bStatus)
     {
-      case ST4_NONE:          return PushDump(0xFF, fDouble);
-      case ST4_NOTSUPPORTED:  return PushDump(0xFF, fDouble);
-      case ST4_NOTPRESENTED:  return PushDump(0xFF, fDouble);
-      case ST4_BADDIGITAL:    return PushDump(0xFE, fDouble);
-      case ST4_BADFLASH:      return PushDump(0xFF, fDouble);
-      case ST4_MODEM_LINK:    return PushDump(0xFE, fDouble);
-      case ST4_DISABLED:      return PushDump(0xFF, fDouble);
+      case ST_NONE:          return PushDump(0xFF, fDouble);
+      case ST_NOTSUPPORTED:  return PushDump(0xFF, fDouble);
+      case ST_NOTPRESENTED:  return PushDump(0xFF, fDouble);
+      case ST_BADDIGITAL:    return PushDump(0xFE, fDouble);
+      case ST_BADFLASH:      return PushDump(0xFF, fDouble);
+      case ST_MODEM_LINK:    return PushDump(0xFE, fDouble);
+      case ST_DISABLED:      return PushDump(0xFF, fDouble);
       default:                return PushFloatOrDouble(db, fDouble);
     }
   }
@@ -57,13 +57,13 @@ uchar   PushFloatOrDoubleUni(status  bStatus, double  db, bool  fDouble)
   {
     switch (bStatus)
     {
-      case ST4_NONE:          return PushDump(0xE0, fDouble);
-      case ST4_NOTSUPPORTED:  return PushDump(0xE1, fDouble);
-      case ST4_NOTPRESENTED:  return PushDump(0xE2, fDouble);
-      case ST4_BADDIGITAL:    return PushDump(0xE3, fDouble);
-      case ST4_BADFLASH:      return PushDump(0xE4, fDouble);
-      case ST4_MODEM_LINK:    return PushDump(0xE5, fDouble);
-      case ST4_DISABLED:      return PushDump(0xE6, fDouble);
+      case ST_NONE:          return PushDump(0xE0, fDouble);
+      case ST_NOTSUPPORTED:  return PushDump(0xE1, fDouble);
+      case ST_NOTPRESENTED:  return PushDump(0xE2, fDouble);
+      case ST_BADDIGITAL:    return PushDump(0xE3, fDouble);
+      case ST_BADFLASH:      return PushDump(0xE4, fDouble);
+      case ST_MODEM_LINK:    return PushDump(0xE5, fDouble);
+      case ST_DISABLED:      return PushDump(0xE6, fDouble);
       default:                return PushFloatOrDouble(db, fDouble);
     }
   }

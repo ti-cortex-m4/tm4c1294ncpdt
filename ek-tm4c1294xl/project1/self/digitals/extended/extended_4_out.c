@@ -27,7 +27,7 @@ static uchar PushData4(uchar  ibCan, uchar  ibMon, bool  fDouble)
   {
     uchar bSize = 0;
 
-    bSize += PushChar(ST4_OK);
+    bSize += PushChar(ST_OK);
     bSize += PushIntBig(0xFFFF);
     bSize += PushIntBig(0xFFFF);
     bSize += PushFloatOrDouble(mpdbCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
@@ -164,17 +164,17 @@ void    OutExtended42(bool  fDouble)
     if (GetDigitalDevice(ibCan) == 0)
     {
       if (LoadCntMon(ibMon) == true)
-        OutData4(ST4_OK, mpdbCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
+        OutData4(ST_OK, mpdbCntMonCan[ PrevSoftMon() ][ibCan], fDouble);
       else
-        OutData4(ST4_BADFLASH, 0, fDouble);
+        OutData4(ST_BADFLASH, 0, fDouble);
     }
     else if (mpboEnblCan[ibCan] == false)
     {
-      OutData4(ST4_DISABLED, 0, fDouble);
+      OutData4(ST_DISABLED, 0, fDouble);
     }
     else if (GetDigitalPhone(ibCan) != 0)
     {
-      OutData4(ST4_MODEM_LINK, 0, fDouble);
+      OutData4(ST_MODEM_LINK, 0, fDouble);
     }
     else
     {
@@ -189,9 +189,9 @@ void    OutExtended42(bool  fDouble)
       ibPort = p;
 
       if (db2.fValid)
-        OutData4(ST4_OK, db2.dbValue, fDouble);
+        OutData4(ST_OK, db2.dbValue, fDouble);
       else
-        OutData4(ST4_BADDIGITAL, 0, fDouble);
+        OutData4(ST_BADDIGITAL, 0, fDouble);
 
       LoadDisplay();
       NextPause(); // внимание !

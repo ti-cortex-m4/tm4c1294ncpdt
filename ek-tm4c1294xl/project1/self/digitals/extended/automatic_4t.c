@@ -60,6 +60,6 @@ status  ReadCntMonCanTariff(uchar  ibMon, uchar  ibCan, uchar  ibTrf)
     case 29:
     case 30: return ReadCntMonCanTariffW(ibMon, ibTrf);
 
-    default: return ST4_NOTSUPPORTED;
+    default: return ST_NOTSUPPORTED;
   }
 }

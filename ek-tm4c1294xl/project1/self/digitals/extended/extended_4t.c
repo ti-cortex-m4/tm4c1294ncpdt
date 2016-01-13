@@ -118,7 +118,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
 
   status bStatus = ReadCntMonCanTariff(ibMon, ibDig, ibTrf);
 
-  if ((bStatus == ST4_BADDIGITAL) || (bStatus == ST4_NOTSUPPORTED) || (bStatus == ST4_NOTPRESENTED)) 
+  if ((bStatus == ST_BADDIGITAL) || (bStatus == ST_NOTSUPPORTED) || (bStatus == ST_NOTPRESENTED)) 
   { 
     LoadCurrDigital(ibDig);
 
@@ -138,7 +138,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
       }
     }
 
-    if (bStatus == ST4_BADDIGITAL) { ShowLo(szNoLink); DelayInf(); }
+    if (bStatus == ST_BADDIGITAL) { ShowLo(szNoLink); DelayInf(); }
     return false;
   }
   else
@@ -155,7 +155,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
         {
           value4t vl = mpCntMonCan4T[c];
 
-          vl.bStatus = ST4_OK;
+          vl.bStatus = ST_OK;
           vl.mpdbValuesT[ibTrf] = mpdbChannelsC[diPrev.ibLine];
           vl.tiUpdate = *GetCurrTimeDate();
 
@@ -189,7 +189,7 @@ void    MakeExtended4T(void)
       LoadExt4TValues(ibMon);
 
       status bStatus = mpCntMonCan4T[ibDig].bStatus;
-      if ((bStatus == ST4_OK) || (bStatus == ST4_NOTPRESENTED)) continue;
+      if ((bStatus == ST_OK) || (bStatus == ST_NOTPRESENTED)) continue;
 
       uchar t;
       for (t=0; t<bTARIFFS; t++)

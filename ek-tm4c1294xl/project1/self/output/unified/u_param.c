@@ -138,7 +138,7 @@ uint    j;
       i = GetParamLineUni(p);
       if (i == 0xFF)
       {
-        PushFloatUni(ST4_NOTSUPPORTED, 0);
+        PushFloatUni(ST_NOTSUPPORTED, 0);
       }
       else
       {
@@ -148,18 +148,18 @@ uint    j;
         j = GetParamIndexUni(diT);
         if (j == 0xFFFF)
         {
-          PushFloatUni(ST4_NOTPRESENTED, 0);
+          PushFloatUni(ST_NOTPRESENTED, 0);
         }
         else
         {
           fl = mpreParamsBuff[ PrevSoftTim() ][ j ];
           if (ValidFloat(fl))
           {
-            PushFloatUni(ST4_OK, FixParamsUni(diT, fl));
+            PushFloatUni(ST_OK, FixParamsUni(diT, fl));
           }
           else
           {
-            PushFloatUni(ST4_BADDIGITAL, fl);
+            PushFloatUni(ST_BADDIGITAL, fl);
           }
         }
       }
