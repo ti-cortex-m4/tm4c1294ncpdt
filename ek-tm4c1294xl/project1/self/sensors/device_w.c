@@ -504,7 +504,6 @@ void    ReadEngTrfW(uchar  ibLine, uchar  ibTrf)
   uchar t;
   for (t=0; t<ibTrf+2; t++)
   {
-    MonitorString("\n trf="); MonitorCharDec(ibTrf);
     mpdbChannelsC[ibLine] = PopDoubleW()/1000;
   }
 }
