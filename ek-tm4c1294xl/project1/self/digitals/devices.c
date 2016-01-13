@@ -148,7 +148,7 @@ bool    ValidDevice(uchar  bDevice)
     case 27: return true;
 #endif
 
-#ifndef SKIP_29
+#ifndef SKIP_W
     case 29:
     case 30: return true;
 #endif

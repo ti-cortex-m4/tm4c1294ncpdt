@@ -625,7 +625,7 @@ typedef enum
 
 #endif
 
-#ifndef SKIP_29
+#ifndef SKIP_W
 
   DEV_START_W2          =  0x1C00,
   DEV_OPEN_W2           =  0x1C03,

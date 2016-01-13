@@ -14,7 +14,7 @@ UNPACK_W!C
 
 
 
-#ifndef SKIP_29
+#ifndef SKIP_W
 
 void    UnpackW(bool  fShow, uchar  bOffset)
 {
