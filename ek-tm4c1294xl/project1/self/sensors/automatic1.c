@@ -433,20 +433,14 @@ uchar   i;
 
 
 
-#if (defined SKIP_A && defined SKIP_B && defined SKIP_C && defined SKIP_E)
-#else
-
-// сохранение К преобразования и К трасформации
-void    SetCanalsAll(void)
+void    SetPulseTrans(double  dbPulse, double  dbTrans)
 {
-  mpdbPulseHou[ibDig] = dbKpulse;
-  mpdbPulseMnt[ibDig] = dbKpulse;
+  mpdbPulseHou[ibDig] = dbPulse;
+  mpdbPulseMnt[ibDig] = dbPulse;
 
-  mpdbTransEng[ibDig] = dbKtrans;
-  mpdbTransCnt[ibDig] = dbKtrans;
+  mpdbTransEng[ibDig] = dbTrans;
+  mpdbTransCnt[ibDig] = dbTrans;
 }
-
-#endif
 
 
 /*
@@ -474,7 +468,7 @@ bool    AutomaticA(void)
   if (ReadKoeffDeviceA() == 0) return(0);
 
 
-  SetCanalsAll();                        // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                        
 
   if (QueryEnergyA_Full(0,100) == 0) return(0);
 
@@ -493,7 +487,7 @@ bool    AutomaticB(void)
   if (ReadKoeffDeviceB() == 0) return(0);
 
 
-  SetCanalsAll();                        // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                        
 
   if (QueryEnergyB_Full(0,100) == 0) return(0);
 
@@ -508,7 +502,7 @@ bool    AutomaticJ(void)
   mpdbLevel[ibDig] = dbKpulse / 1000;
 
 
-  SetCanalsAll();                        // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                        
 
   if (QueryEnergyB_Full(0,100) == 0) return(0);
 
@@ -527,7 +521,7 @@ bool    AutomaticC(void)
   if (ReadKoeffDeviceC() == 0) return(0);
 
 
-  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                       
 
   DelayOff();
   QueryEnergyAbsC();                    // чтение накопленной энергии
@@ -873,7 +867,7 @@ uchar   i;
   InitPop((uint)180 + diCurr.ibLine*3); // K преобразования
   PopRealBCD();
 
-  SetCanalsAll();                        // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                        
 
 
   DelayOff();
@@ -964,7 +958,7 @@ bool    AutomaticG(void)
   if (ReadKoeffDeviceG() == 0) return(0);
   ShowPercent(100);
 
-  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                       
 
   return(1);
 }
@@ -980,7 +974,7 @@ bool    AutomaticH(void)
   if (ReadKoeffDeviceH() == 0) return(0);
   ShowPercent(100);
 
-  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                       
 
   return(1);
 }
@@ -1011,7 +1005,7 @@ uchar   i;
 
   ShowPercent(100);
 
-  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                       
 
   return(1);
 }
@@ -1050,7 +1044,7 @@ uchar   i,bT;
 
   Delay(1000);
 
-  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                       
 
   return(1);
 }
@@ -1080,7 +1074,7 @@ uchar   i;
 
   ShowPercent(100);
 
-  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                       
 
   return(1);
 }
@@ -1174,7 +1168,7 @@ uchar   i;
 
   ShowPercent(100);
 
-  SetCanalsAll();                       // сохранение К преобразования и К трасформации
+  SetPulseTrans(dbKpulse,dbKtrans);                       
 
   return(1);
 }
@@ -1207,7 +1201,7 @@ uchar   i;
 
   ShowPercent(100);
 
-  SetCanalsAll();
+  SetPulseTrans(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -1241,7 +1235,7 @@ bool    AutomaticP(void)
 
 
   dbKpulse = 5000;                      // K преобразования
-  SetCanalsAll();
+  SetPulseTrans(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -1260,7 +1254,7 @@ bool    AutomaticR(void)
 
   reBuffA = 1;                          // K преобразования
   dbKtrans = 1;                         // K трансформации
-  SetCanalsAll();                       // сохранение К преобразования и К трансформации
+  SetPulseTrans(dbKpulse,dbKtrans);                       // сохранение К преобразования и К трансформации
 
   return(1);
 }
@@ -1279,7 +1273,7 @@ bool    AutomaticS(void)
 
   dbKpulse = wDividerS;                 // K преобразования
   dbKtrans = 1;                         // K трансформации
-  SetCanalsAll();                       // сохранение К преобразования и К трансформации
+  SetPulseTrans(dbKpulse,dbKtrans);                       // сохранение К преобразования и К трансформации
 
   return(1);
 }
@@ -1298,7 +1292,7 @@ bool    AutomaticV(void)
 
   dbKpulse = wDividerV;
   dbKtrans = 1;
-  SetCanalsAll();
+  SetPulseTrans(dbKpulse,dbKtrans);
 
   return(1);
 }
