@@ -6,21 +6,14 @@ AUTOMATIC_W!C
 
 #include "../main.h"
 #include "../console.h"
-//#include "../memory/mem_profile.h"
 #include "../memory/mem_factors.h"
-////#include "../time/delay.h"
-//#include "../time/timedate.h"
 #include "../hardware/watchdog.h"
-//#include "../kernel/crc_v.h"
 #include "../serial/ports.h"
-//#include "../serial/ports2.h"
 #include "../serial/ports_devices.h"
 #include "../serial/monitor.h"
 #include "../devices/devices.h"
 #include "../sensors/unpack_w.h"
-////#include "../digitals/digitals.h"
 #include "../digitals/wait_answer.h"
-////#include "automatic1.h"
 #include "device_w.h"
 #include "automatic_w.h"
 
@@ -424,7 +417,7 @@ status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 
 
   time2 ti2 = QueryTimeW_Full(50);
-  if (ti2.fValid == false) return GetDouble2Error();
+  if (ti2.fValid == false) return ST4_BADDIGITAL;
   time ti = ti2.tiValue;
 
 
