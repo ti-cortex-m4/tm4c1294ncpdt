@@ -46,6 +46,7 @@ void    QueryEngAbsW_Current(uchar  ibLine);
 void    QueryEngAbsW(uchar  ibLine);
 void    QueryEngMonW(uchar  ibLine, uchar  bTime);
 void    QueryEngDayW(uchar  ibLine, uchar  bTime);
+void    QueryEngMonTrfW(uchar  ibLine, uchar  bTime);
 
 void    ReadEngW(uchar  ibLine);
 

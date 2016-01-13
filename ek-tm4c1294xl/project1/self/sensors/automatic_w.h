@@ -17,3 +17,5 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent);
 time2   ReadTimeCanW(void);
 double2 ReadCntCurrW(void);
 double2 ReadCntMonCanW(uchar  ibMon);
+
+status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf);
