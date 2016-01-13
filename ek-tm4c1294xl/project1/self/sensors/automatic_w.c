@@ -202,7 +202,7 @@ bool    AutomaticW(void)
 bool    QueryEngAbsW_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_W; i++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
@@ -229,7 +229,7 @@ bool    QueryEngAbsW_Full(uchar  bPercent)
 bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_W; i++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
@@ -263,7 +263,7 @@ bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
 bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_W; i++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
@@ -297,7 +297,7 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
 bool    QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
 {
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_W; i++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
@@ -339,7 +339,7 @@ time2   ReadTimeCanW(void)
   tiChannelC = ti2.tiValue;
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_W; i++)
   {
     mpboChannelsA[i] = true;
   }
@@ -362,7 +362,7 @@ double2 ReadCntCurrW(void)
 
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_W; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
@@ -397,7 +397,7 @@ double2 ReadCntMonCanW(uchar  ibMon)
 
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_W; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
@@ -409,6 +409,8 @@ double2 ReadCntMonCanW(uchar  ibMon)
 
 status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
+	  MonitorString("\n ibMon="); MonitorCharDec(ibMon);
+	  MonitorString("\n ibTrf="); MonitorCharDec(ibTrf);
   Clear();
 
   double2 db2 = QueryKtransW_Full(25);
@@ -421,12 +423,13 @@ status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
   time ti = ti2.tiValue;
 
 
-  uchar m = (12 + ti.bMonth - (ibMon+1) - 1) % 12;
+  uchar m = (12 + ti.bMonth - (ibMon+1)) % 12;
+  MonitorString("\n m="); MonitorCharDec(m);
   if (QueryEngMonTrfW_Full(m, 75+ibTrf, ibTrf) == 0) return ST4_BADDIGITAL;
 
 
   uchar i;
-  for (i=0; i<4; i++)
+  for (i=0; i<MAX_LINE_W; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;

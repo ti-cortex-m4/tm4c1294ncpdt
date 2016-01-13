@@ -399,7 +399,7 @@ void    QueryKtransW(uchar  ibKtrans)
 
 void    QueryEngAbsW_Current(uchar  ibLine)
 {
-  ASSERT(ibLine < 4);
+  ASSERT(ibLine < MAX_LINE_W);
 
   InitPush(0);
 
@@ -420,7 +420,7 @@ void    QueryEngAbsW_Current(uchar  ibLine)
 
 void    QueryEngAbsW(uchar  ibLine)
 {
-  ASSERT(ibLine < 4);
+  ASSERT(ibLine < MAX_LINE_W);
 
   PushAddress2W();
 
@@ -436,7 +436,7 @@ void    QueryEngAbsW(uchar  ibLine)
 
 void    QueryEngMonW(uchar  ibLine, uchar  bTime)
 {
-  ASSERT(ibLine < 4);
+  ASSERT(ibLine < MAX_LINE_W);
 
   PushAddress2W();
 
@@ -453,7 +453,7 @@ void    QueryEngMonW(uchar  ibLine, uchar  bTime)
 
 void    QueryEngDayW(uchar  ibLine, uchar  bTime)
 {
-  ASSERT(ibLine < 4);
+  ASSERT(ibLine < MAX_LINE_W);
 
   PushAddress2W();
 
@@ -470,7 +470,7 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime)
 
 void    QueryEngMonTrfW(uchar  ibLine, uchar  bTime)
 {
-  ASSERT(ibLine < 4);
+  ASSERT(ibLine < MAX_LINE_W);
 
   PushAddress2W();
 
@@ -487,7 +487,7 @@ void    QueryEngMonTrfW(uchar  ibLine, uchar  bTime)
 
 void    ReadEngW(uchar  ibLine)
 {
-  ASSERT(ibLine < 4);
+  ASSERT(ibLine < MAX_LINE_W);
 
   InitPop(1);
   mpdbChannelsC[ibLine] = PopDoubleW()/1000;
@@ -496,14 +496,15 @@ void    ReadEngW(uchar  ibLine)
 
 void    ReadEngTrfW(uchar  ibLine, uchar  ibTrf)
 {
-  ASSERT(ibLine < 4);
+  ASSERT(ibLine < MAX_LINE_W);
   ASSERT(ibTrf < 4);
 
   InitPop(1);
 
   uchar t;
-  for (t=0; t<ibTrf+1; t++)
+  for (t=0; t<ibTrf+2; t++)
   {
+    MonitorString("\n trf="); MonitorCharDec(ibTrf);
     mpdbChannelsC[ibLine] = PopDoubleW()/1000;
   }
 }
