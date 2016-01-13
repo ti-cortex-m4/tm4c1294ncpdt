@@ -170,8 +170,7 @@ bool    AutomaticW(void)
   if (db2.fValid == false) return false;
   double dbTrans = db2.dbValue;
 
-  mpdbTransEng[ibDig] = dbTrans;
-  mpdbTransCnt[ibDig] = dbTrans;
+  SetPulseTrans(5000, dbTrans);
 
 
   Clear();
