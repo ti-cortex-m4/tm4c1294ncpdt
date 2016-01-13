@@ -54,12 +54,12 @@ static bool QueryCntMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало мес€
 status ReadCntMonCanTariffB(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
   Clear();
-  if (ReadKoeffDeviceB() == 0) return ST4_BADDIGITAL;
+  if (ReadKoeffDeviceB() == 0) return ST_BADDIGITAL;
 
   double dbK = dbKtrans/dbKpulse;
 
 
-  if (QueryCntMonTariffB_Full(ibMon, ibTrf) == 0) return ST4_BADDIGITAL;
+  if (QueryCntMonTariffB_Full(ibMon, ibTrf) == 0) return ST_BADDIGITAL;
 
   ShowPercent(60+ibTrf);
 
@@ -71,5 +71,5 @@ status ReadCntMonCanTariffB(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
     mpboChannelsA[i] = true;
   }
 
-  return ST4_OK;
+  return ST_OK;
 }

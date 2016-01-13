@@ -270,7 +270,7 @@ double2 ReadCntMonCanK2(uchar  ibMonth) // на конец мес€ца
 status  ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ца
 {
   time2 ti2 = ReadTimeCanK();
-  if (ti2.fValid == 0) return ST4_BADDIGITAL;
+  if (ti2.fValid == 0) return ST_BADDIGITAL;
 
   time ti = ti2.tiValue;
   if (ibMonth == 0)
@@ -284,7 +284,7 @@ status  ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
     ti.bMonth = ibMonth;
   }
 
-  if (ReadEnergyMonDatesK_Full() == 0) return ST4_BADDIGITAL;
+  if (ReadEnergyMonDatesK_Full() == 0) return ST_BADDIGITAL;
 
   date dt;
   dt.bDay   = ti.bDay;
@@ -297,9 +297,9 @@ status  ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
     Clear();
     sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
     Delay(1000);
-    return(ST4_NOTPRESENTED);
+    return(ST_NOTPRESENTED);
   }
-  if (ReadEnergyMonTariffK_Full(bMon,ibTariff) == 0) return ST4_BADDIGITAL;
+  if (ReadEnergyMonTariffK_Full(bMon,ibTariff) == 0) return ST_BADDIGITAL;
 
   QueryCloseK();
 
@@ -313,6 +313,6 @@ status  ReadCntMonCanTariffK(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
     mpboChannelsA[i] = true;
   }
 
-  return ST4_OK;
+  return ST_OK;
 }
 

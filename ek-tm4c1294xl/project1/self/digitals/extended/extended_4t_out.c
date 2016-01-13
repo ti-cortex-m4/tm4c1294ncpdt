@@ -19,7 +19,7 @@ uint    PushData4T(uchar  ibCan, bool  fDouble)
   if (SupportedExtended4T(ibCan) == false)
   {
     uint wSize = 0;
-    wSize += PushChar(ST4_NOTSUPPORTED);
+    wSize += PushChar(ST_NOTSUPPORTED);
 
     uchar t;
     for (t=0; t<bTARIFFS; t++)

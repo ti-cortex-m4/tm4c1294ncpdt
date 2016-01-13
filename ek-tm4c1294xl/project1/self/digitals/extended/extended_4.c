@@ -142,7 +142,7 @@ static void MakeDevices(uchar  ibMon)
 
         if (mpboChannelsA[diPrev.ibLine] == true)
         {
-          vl.bStatus = ST4_OK;
+          vl.bStatus = ST_OK;
           vl.dbValue = mpdbChannelsC[diPrev.ibLine];
 
           ShowLo(szDataOK); DelayInf();
@@ -150,7 +150,7 @@ static void MakeDevices(uchar  ibMon)
         }
         else
         {
-          vl.bStatus = ST4_BADDIGITAL;
+          vl.bStatus = ST_BADDIGITAL;
           vl.dbValue = 0;
 
           ShowLo(szDataError); DelayInf();
@@ -192,7 +192,7 @@ static void MakeDevice6(uchar  ibMon)
         PopChar(); PopChar();
         double dbValue = PopDouble();
 
-        if (bStatus == ST4_OK)
+        if (bStatus == ST_OK)
         {
           vl.bStatus = bStatus;
           vl.dbValue = dbValue;
@@ -235,7 +235,7 @@ void    MakeExtended4(void)
       LoadExt4Values(ibMon);
 
       value6 vl = mpCntMonCan4[ibDig];
-      if (vl.bStatus == ST4_OK) continue;
+      if (vl.bStatus == ST_OK) continue;
 
       Clear(); sprintf(szLo+3,"мес€ц: %-2u",ibMon+1); DelayInf();
 

@@ -311,12 +311,12 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
         Clear();
         sprintf(szLo+3, "мес€ц -%u ?",bTime);
         Delay(1000);
-        return ST4_NOTPRESENTED;
+        return ST_NOTPRESENTED;
       }
-      if (fKey == true) return ST4_OK;
+      if (fKey == true) return ST_OK;
     }
 
-    if (r == bMINORREPEATS) return ST4_OK;
+    if (r == bMINORREPEATS) return ST_OK;
     ShowPercent(bPercent+i);
 
     ReadEngTrfW(i,ibTrf);
@@ -324,7 +324,7 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
 
   QueryCloseW();
 
-  return ST4_OK;
+  return ST_OK;
 }
 
 
@@ -412,18 +412,18 @@ status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
   Clear();
 
   double2 db2 = QueryKtransW_Full(25);
-  if (db2.fValid == false) return ST4_BADDIGITAL;
+  if (db2.fValid == false) return ST_BADDIGITAL;
   double dbTrans = db2.dbValue;
 
 
   time2 ti2 = QueryTimeW_Full(50);
-  if (ti2.fValid == false) return ST4_BADDIGITAL;
+  if (ti2.fValid == false) return ST_BADDIGITAL;
   time ti = ti2.tiValue;
 
 
   uchar m = (12 + ti.bMonth - (ibMon+1)) % 12;
   status st = QueryEngMonTrfW_Full(m, 75+ibTrf, ibTrf);
-  if (st != ST4_OK) return st;
+  if (st != ST_OK) return st;
 
 
   uchar i;
@@ -433,7 +433,7 @@ status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
     mpboChannelsA[i] = true;
   }
 
-  return ST4_OK;
+  return ST_OK;
 }
 
 #endif

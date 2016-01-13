@@ -361,18 +361,18 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
   if (ibMonth == ibMonthP)
   {
     GetTariffP(ibTariff);
-    return(ST4_OK);
+    return(ST_OK);
   }
   else
   {
     Clear();
-    if (OpenDeviceP() == 0) return(ST4_BADDIGITAL);
+    if (OpenDeviceP() == 0) return(ST_BADDIGITAL);
 
     time2 ti2 = QueryTimeP_Full();
-    if (ti2.fValid == false) return(ST4_BADDIGITAL);
+    if (ti2.fValid == false) return(ST_BADDIGITAL);
     time ti = ti2.tiValue;
 
-    if (ReadKoeffDeviceP() == 0) return(ST4_BADDIGITAL);
+    if (ReadKoeffDeviceP() == 0) return(ST_BADDIGITAL);
 
     tiDig.bYear  = (ibMonth+1 > ti.bMonth) ? ti.bYear-1 : ti.bYear;
     tiDig.bMonth = ibMonth+1;
@@ -381,7 +381,7 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
     uchar i;
     for (i=0; i<15; i++) 
     {
-      if (QueryHistoryP1_Full(i) == 0) return(ST4_BADDIGITAL);
+      if (QueryHistoryP1_Full(i) == 0) return(ST_BADDIGITAL);
 
       InitPop(2+8);
       
@@ -400,7 +400,7 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
       {
         if ((tiDig.bMonth == ti.bMonth) && (tiDig.bYear == ti.bYear))
         { 
-          if (QueryHistoryP3_Full(i*2+1) == 0) return(ST4_BADDIGITAL);
+          if (QueryHistoryP3_Full(i*2+1) == 0) return(ST_BADDIGITAL);
           ReadEngAbsP_RD();
 
           double dbTrans = mpdbTransCnt[ibDig];
@@ -412,7 +412,7 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
           GetTariffP(ibTariff);
 
           QueryCloseP();
-          return(ST4_OK);
+          return(ST_OK);
         }
       }
     }
@@ -421,7 +421,7 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
 
     sprintf(szLo, " мес€ц %02u.%02u ?  ",tiDig.bMonth,tiDig.bYear);
     Delay(1000);
-    return(ST4_NOTPRESENTED);
+    return(ST_NOTPRESENTED);
   }
 }
 

@@ -97,14 +97,14 @@ void    NextMonExtended6(void)
 void    MakeExtended6(uchar  ibCan, double  db)
 {
   value6 vl;
-  vl.bStatus = ST4_OK;
+  vl.bStatus = ST_OK;
   vl.dbValue = db;
   vl.tiUpdate = *GetCurrTimeDate();
  
   mpCntMonCan6[ibCan] = vl;
   SaveCntMonCan6(ibHardMon);
 
-  if (mpCntBoxCan6[ibCan].bStatus == ST4_NONE)
+  if (mpCntBoxCan6[ibCan].bStatus == ST_NONE)
   {
     mpCntBoxCan6[ibCan] = vl;
     SaveFile(&flCntBoxCan6);

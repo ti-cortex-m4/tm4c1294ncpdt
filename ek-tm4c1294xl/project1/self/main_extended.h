@@ -11,14 +11,14 @@ MAIN_EXTENDED,H
 // статус опроса счетчиков
 typedef enum
 {
-  ST4_NONE              = 0,
-  ST4_OK                = 1,
-  ST4_NOTSUPPORTED      = 2,
-  ST4_NOTPRESENTED      = 3,
-  ST4_BADDIGITAL        = 0x80,
-  ST4_BADFLASH          = 0x81,
-  ST4_MODEM_LINK        = 0x82,
-  ST4_DISABLED          = 0x83
+  ST_NONE               = 0,
+  ST_OK                 = 1,
+  ST_NOTSUPPORTED       = 2,
+  ST_NOTPRESENTED       = 3,
+  ST_BADDIGITAL         = 0x80,
+  ST_BADFLASH           = 0x81,
+  ST_MODEM_LINK         = 0x82,
+  ST_DISABLED           = 0x83
 } status;
 
 

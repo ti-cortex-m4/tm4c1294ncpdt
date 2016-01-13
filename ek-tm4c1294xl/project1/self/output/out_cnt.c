@@ -123,16 +123,16 @@ void    OutCntCanCurr(bool  fDouble)
       sprintf(szHi+14,"%2u",c+1);
 
       if (GetDigitalDevice(c) == 0)
-        wSize += PushStatusFloatOrDouble(ST4_OK, GetCntCurrImp(c), fDouble);
+        wSize += PushStatusFloatOrDouble(ST_OK, GetCntCurrImp(c), fDouble);
       else if (mpboEnblCan[c] == false)
-        wSize += PushStatusFloatOrDouble(ST4_DISABLED, 0, fDouble);
+        wSize += PushStatusFloatOrDouble(ST_DISABLED, 0, fDouble);
       else if (GetDigitalPhone(c) != 0)
-        wSize += PushStatusFloatOrDouble(ST4_MODEM_LINK, 0, fDouble);
+        wSize += PushStatusFloatOrDouble(ST_MODEM_LINK, 0, fDouble);
       else
       {
         LoadCurrDigital(c);
         if (mpboChannelsA[diCurr.ibLine] == true)
-          wSize += PushStatusFloatOrDouble(ST4_OK, mpdbChannelsC[diCurr.ibLine], fDouble);
+          wSize += PushStatusFloatOrDouble(ST_OK, mpdbChannelsC[diCurr.ibLine], fDouble);
         else
         {
           uchar p = ibPort;
@@ -140,9 +140,9 @@ void    OutCntCanCurr(bool  fDouble)
           ibPort = p;
 
           if (!db2.fValid)
-            wSize += PushStatusFloatOrDouble(ST4_BADDIGITAL, 0, fDouble);
+            wSize += PushStatusFloatOrDouble(ST_BADDIGITAL, 0, fDouble);
           else
-            wSize += PushStatusFloatOrDouble(ST4_OK, db2.dbValue, fDouble);
+            wSize += PushStatusFloatOrDouble(ST_OK, db2.dbValue, fDouble);
         }
       }
 

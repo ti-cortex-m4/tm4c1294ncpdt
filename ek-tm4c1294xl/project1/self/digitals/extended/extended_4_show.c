@@ -31,12 +31,12 @@ void    ShowCntMonCanF(bool  fShowValue)
 {
   switch (bStatus4)
   {
-    case ST4_NONE:         ShowLo(szNone);         break;
-    case ST4_OK:           (fShowValue) ? ShowDouble(dbValue4) : ShowTimeDate(tiUpdate4); break;
-    case ST4_BADDIGITAL:   ShowLo(szBadDigital);   break;
-    case ST4_BADFLASH:     ShowLo(szBadFlash);     break;
-    case ST4_MODEM_LINK:   ShowLo(szModemLink);    break;
-    case ST4_DISABLED:     ShowLo(szDisabled);     break;
+    case ST_NONE:         ShowLo(szNone);         break;
+    case ST_OK:           (fShowValue) ? ShowDouble(dbValue4) : ShowTimeDate(tiUpdate4); break;
+    case ST_BADDIGITAL:   ShowLo(szBadDigital);   break;
+    case ST_BADFLASH:     ShowLo(szBadFlash);     break;
+    case ST_MODEM_LINK:   ShowLo(szModemLink);    break;
+    case ST_DISABLED:     ShowLo(szDisabled);     break;
     default:               Clear(); sprintf(szLo, "*  ошибка: %02X", bStatus4); break;
   }  
 }
@@ -49,7 +49,7 @@ void    ShowExtended4(uchar  ibCan, uchar  ibMon, bool  fShowValue)
   {
     LoadCntMon(ibMon);
 
-    bStatus4 = ST4_OK;
+    bStatus4 = ST_OK;
     dbValue4 = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
     tiUpdate4 = tiZero;
   }

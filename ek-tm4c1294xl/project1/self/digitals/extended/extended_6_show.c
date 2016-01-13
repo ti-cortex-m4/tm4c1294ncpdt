@@ -34,7 +34,7 @@ value6 vl;
   {
     LoadCntMon(ibMon);
 
-    vl.bStatus = ST4_OK;
+    vl.bStatus = ST_OK;
     vl.dbValue = mpdbCntMonCan[ PrevSoftMon() ][ibCan];
     vl.tiUpdate = tiZero;
   }
@@ -50,8 +50,8 @@ value6 vl;
 
   switch (vl.bStatus)
   {
-    case ST4_NONE: ShowLo(szNone); break;
-    case ST4_OK:   (fShowValue) ? ShowDouble(vl.dbValue) : ShowTimeDate(vl.tiUpdate); break;
+    case ST_NONE: ShowLo(szNone); break;
+    case ST_OK:   (fShowValue) ? ShowDouble(vl.dbValue) : ShowTimeDate(vl.tiUpdate); break;
     default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bStatus); break;
   }  
 }
@@ -64,8 +64,8 @@ void    ShowExtended6(uchar  ibCan)
 
   switch (vl.bStatus)
   {
-    case ST4_NONE: ShowLo(szNone); break;
-    case ST4_OK:   ShowDouble(vl.dbValue); break;
+    case ST_NONE: ShowLo(szNone); break;
+    case ST_OK:   ShowDouble(vl.dbValue); break;
     default:       Clear(); sprintf(szLo, "*  ошибка: %02X", vl.bStatus); break;
   }  
 }
