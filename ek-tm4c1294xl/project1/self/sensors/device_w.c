@@ -5,7 +5,6 @@ Rovalant ÌÝÑ-3
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../memory/mem_settings.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_current.h"
 #include "../memory/mem_factors.h"
@@ -19,7 +18,6 @@ Rovalant ÌÝÑ-3
 #include "../display/display.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../time/timedate.h"
-//#include "../time/calendar.h"
 #include "../time/delay.h"
 #include "../devices/devices.h"
 #include "../devices/devices_time.h"
@@ -495,6 +493,20 @@ void    ReadEngW(uchar  ibLine)
   mpdbChannelsC[ibLine] = PopDoubleW()/1000;
 }
 
+
+void    ReadEngTrfW(uchar  ibLine, uchar  ibTrf)
+{
+  ASSERT(ibLine < 4);
+  ASSERT(ibTrf < 4);
+
+  InitPop(1);
+
+  uchar t;
+  for (t=0; t<ibTrf+1; t++)
+  {
+    mpdbChannelsC[ibLine] = PopDoubleW()/1000;
+  }
+}
 
 
 void    InitProfileW(void)

@@ -49,6 +49,7 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime);
 void    QueryEngMonTrfW(uchar  ibLine, uchar  bTime);
 
 void    ReadEngW(uchar  ibLine);
+void    ReadEngTrfW(uchar  ibLine, uchar  ibTrf);
 
 void    InitProfileW(void);
 void    QueryProfileW(void);
