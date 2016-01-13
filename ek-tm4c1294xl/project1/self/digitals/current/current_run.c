@@ -174,7 +174,7 @@ bool    StartCurrent(uchar  ibCanal)
     case 27: SetNext(DEV_START_V3);  break;
 #endif
 
-#ifndef SKIP_29
+#ifndef SKIP_W
     case 29:
     case 30: SetNext(DEV_START_W3);  break;
 #endif
@@ -246,7 +246,7 @@ void    NextCurrent(void)
     case 28: QueryCloseU();  break;
 #endif
 
-#ifndef SKIP_29
+#ifndef SKIP_W
     case 29:
     case 30: QueryCloseW();  break;
 #endif

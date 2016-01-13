@@ -201,7 +201,7 @@ void    DevicesPostInput(void)
     }
 #endif
 
-#ifndef SKIP_29
+#ifndef SKIP_W
     else if ((diCurr.bDevice == 29) || (diCurr.bDevice == 30))
     {
       MonitorIn();

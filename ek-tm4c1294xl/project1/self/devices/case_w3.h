@@ -1,5 +1,5 @@
 
-#ifndef SKIP_29
+#ifndef SKIP_W
 
     case DEV_START_W3:
       ShowPercent(50);
