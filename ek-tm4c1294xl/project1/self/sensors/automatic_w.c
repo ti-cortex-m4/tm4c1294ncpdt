@@ -15,6 +15,7 @@ AUTOMATIC_W!C
 #include "../sensors/unpack_w.h"
 #include "../digitals/wait_answer.h"
 #include "device_w.h"
+#include "automatic1.h"
 #include "automatic_w.h"
 
 
