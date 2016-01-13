@@ -44,39 +44,45 @@ uint                    wProfileW;
 
 double  PopDoubleW(void)
 {
-double  dbA,dbB;
+  bool begin = false;
+  bool point = false;
 
-  uchar a = 0;
-  uchar b = 0;
+  double dbA = 0;
+  double dbB = 1;
+  double dbC = 0.1;
 
-  uchar i;
-  for (i=0; i<40; i++)
+  while (GetPopSize() < IndexInBuff())
   {
-    uchar bT = PopChar() & 0x7F;
+//    MonitorString("\n"); MonitorIntDec(GetPopSize()); MonitorString(" ? "); MonitorIntDec(IndexInBuff());
 
-    if (a == 0)
+    uchar b = PopChar0Bcc();
+    if (begin == false)
     {
-      if (bT == '(') a = i+1;
-
-      dbA = 0;
-      dbB = 1;
+      if (b == '(')
+        begin = true;
     }
     else
     {
-      if (bT == ')')
+      if (b == '.')
+        point = true;
+      else if (b == ')')
       {
-        b = i-1;
-        for (i=a; i<b; i++) dbA *= 10;
+        dbA *= dbC;
         return dbA;
       }
-
-      if ((bT >= '0') && (bT <= '9'))
-        bT -= '0';
       else
-        break;
+      {
+        if ((b >= '0') && (b <= '9'))
+        {
+          b -= '0';
+          dbA += dbB*b;
+          dbB /= 10;
 
-      dbA += dbB*bT;
-      dbB /= 10;
+          if (point == false)
+            dbC *= 10;
+        }
+        else break;
+      }
     }
   }
 
@@ -88,8 +94,7 @@ time    PopTimeW(void)
 {
   while (GetPopSize() < IndexInBuff())
   {
-//    MonitorString("\n GetPopSize() "); MonitorIntDec(GetPopSize());
-//    MonitorString("\n IndexInBuff() "); MonitorIntDec(IndexInBuff());
+//    MonitorString("\n"); MonitorIntDec(GetPopSize()); MonitorString(" ? "); MonitorIntDec(IndexInBuff());
 
     uchar b = PopChar0Bcc();
     if (b == '(')
