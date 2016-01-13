@@ -8,6 +8,8 @@ extern  double                  dbKtrans, dbKpulse;
 
 
 
+void    SetPulseTrans(double  dbPulse, double  dbTrans);
+
 bool    ReadKoeffDeviceA(void);
 bool    ReadKoeffDeviceB(void);
 bool    ReadKoeffDeviceB_Special(void);
