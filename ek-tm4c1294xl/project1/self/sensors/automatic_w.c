@@ -409,8 +409,6 @@ double2 ReadCntMonCanW(uchar  ibMon)
 
 status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
-	  MonitorString("\n ibMon="); MonitorCharDec(ibMon);
-	  MonitorString("\n ibTrf="); MonitorCharDec(ibTrf);
   Clear();
 
   double2 db2 = QueryKtransW_Full(25);
@@ -424,7 +422,6 @@ status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 
 
   uchar m = (12 + ti.bMonth - (ibMon+1)) % 12;
-  MonitorString("\n m="); MonitorCharDec(m);
   if (QueryEngMonTrfW_Full(m, 75+ibTrf, ibTrf) == 0) return ST4_BADDIGITAL;
 
 
