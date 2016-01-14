@@ -257,8 +257,10 @@
         DoneProfile();
       else
       {
-        wProfileW++;
-        MakePause(DEV_PREVPROFILE_W2);
+        if (++wProfileW >= wHOURS)
+          DoneProfile();
+        else
+          MakePause(DEV_PREVPROFILE_W2);
       }
       break;
 
