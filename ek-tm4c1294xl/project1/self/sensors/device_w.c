@@ -402,6 +402,13 @@ void    QueryKtransW(uchar  ibKtrans)
 
 
 
+static void PushLineW(uchar  ibLine)
+{
+  if ((diCurr.bDevice == 29) && (ibLine == 0)) ibLine = 14;
+  PushNumberBcc(ibLine+1);
+}
+
+
 void    QueryEngAbsW_Current(uchar  ibLine)
 {
   ASSERT(ibLine < MAX_LINE_W);
@@ -414,7 +421,7 @@ void    QueryEngAbsW_Current(uchar  ibLine)
   PushChar1Bcc(0x02);
 
   PushStringBcc("1-1:");
-  PushChar1Bcc('1'+ibLine);
+  PushLineW(ibLine);
   PushStringBcc(".8.0");
   PushStringBcc("(1)");
   PushChar1Bcc(0x03);
@@ -427,12 +434,10 @@ void    QueryEngAbsW(uchar  ibLine)
 {
   ASSERT(ibLine < MAX_LINE_W);
 
-  if ((diCurr.bDevice == 29) && (ibLine == 0)) ibLine = 14;
-
   PushAddress2W();
 
   PushStringBcc("1-1:");
-  PushNumberBcc(ibLine+1);
+  PushLineW(ibLine);
   PushStringBcc(".8.0");
   PushStringBcc("(1)");
   PushChar1Bcc(0x03);
@@ -445,12 +450,10 @@ void    QueryEngMonW(uchar  ibLine, uchar  bTime)
 {
   ASSERT(ibLine < MAX_LINE_W);
 
-  if ((diCurr.bDevice == 29) && (ibLine == 0)) ibLine = 14;
-
   PushAddress2W();
 
   PushStringBcc("1-1:");
-  PushNumberBcc(ibLine+1);
+  PushLineW(ibLine);
   PushStringBcc(".129.0*");
   PushNumberBcc(bTime);
   PushStringBcc("(1)");
@@ -467,7 +470,7 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime)
   PushAddress2W();
 
   PushStringBcc("1-1:");
-  PushChar1Bcc('1'+ibLine);
+  PushLineW(ibLine);
   PushStringBcc(".128.0*");
   PushNumberBcc(bTime);
   PushStringBcc("(1)");
@@ -484,7 +487,7 @@ void    QueryEngMonTrfW(uchar  ibLine, uchar  bTime)
   PushAddress2W();
 
   PushStringBcc("1-1:");
-  PushChar1Bcc('1'+ibLine);
+  PushLineW(ibLine);
   PushStringBcc(".129.0*");
   PushNumberBcc(bTime);
   PushStringBcc("(5)");
