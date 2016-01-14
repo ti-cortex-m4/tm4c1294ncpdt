@@ -993,7 +993,7 @@ bool    ReadParamW2(char  *psz1, char  *psz2)
   double db2 = PopDoubleW();
 
 
-  reValue = db1 + db2;
+  reValue = db1 - db2;
 
   return true;
 }
