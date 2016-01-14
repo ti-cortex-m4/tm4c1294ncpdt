@@ -524,6 +524,8 @@ void    InitProfileW(void)
     sprintf(szLo," начало %04u:%02u ",wProfileW,(uchar)(wProfileW/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
+
+  MonitorString("\n\n start index "); MonitorIntDec(wProfileW);
 }
 
 
