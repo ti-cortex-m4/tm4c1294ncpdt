@@ -551,7 +551,11 @@ void    QueryProfileW(void)
   PushChar1Bcc('1');
   PushChar1Bcc(0x02);
 
-  PushStringBcc("1-1:1.29.0*");
+  if (diCurr.bDevice == 29)
+    PushStringBcc("1-1:15.29.0*"); // ÌÝÑ-1
+  else
+    PushStringBcc("1-1:1.29.0*"); // ÌÝÑ-3
+
   PushNumberBcc(wProfileW);
   PushStringBcc("(4)");
   PushChar1Bcc(0x03);
