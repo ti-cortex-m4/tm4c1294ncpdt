@@ -557,7 +557,7 @@ bool    ReadProfileW(void)
 {
   InitPop(1);
 
-  double dbPulse = mpdbPulseHou[ibDig];
+  double dbK = mpdbPulseHou[ibDig]/2000;
 
   uchar i;
   for (i=0; i<MAX_LINE_W; i++)
@@ -567,11 +567,11 @@ bool    ReadProfileW(void)
 
     mpdbEngFracDigCan[ibDig][i] += (double)dw;
 
-    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*(dbPulse/2000));
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbK);
     MonitorString(" "); MonitorIntDec(w);
     mpwChannels[i] = w;
 
-    mpdbEngFracDigCan[ibDig][i] -= (double)w/(dbPulse/2000);
+    mpdbEngFracDigCan[ibDig][i] -= (double)w/dbK;
   }
 
   time ti = PopTimeW();
