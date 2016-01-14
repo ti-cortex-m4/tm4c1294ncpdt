@@ -427,10 +427,12 @@ void    QueryEngAbsW(uchar  ibLine)
 {
   ASSERT(ibLine < MAX_LINE_W);
 
+  if ((diCurr.bDevice == 29) && (ibLine == 0)) ibLine = 14;
+
   PushAddress2W();
 
   PushStringBcc("1-1:");
-  PushChar1Bcc('1'+ibLine);
+  PushNumberBcc(ibLine+1);
   PushStringBcc(".8.0");
   PushStringBcc("(1)");
   PushChar1Bcc(0x03);
@@ -443,10 +445,12 @@ void    QueryEngMonW(uchar  ibLine, uchar  bTime)
 {
   ASSERT(ibLine < MAX_LINE_W);
 
+  if ((diCurr.bDevice == 29) && (ibLine == 0)) ibLine = 14;
+
   PushAddress2W();
 
   PushStringBcc("1-1:");
-  PushChar1Bcc('1'+ibLine);
+  PushNumberBcc(ibLine+1);
   PushStringBcc(".129.0*");
   PushNumberBcc(bTime);
   PushStringBcc("(1)");
