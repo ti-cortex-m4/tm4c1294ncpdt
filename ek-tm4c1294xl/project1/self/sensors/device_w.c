@@ -90,6 +90,45 @@ double  PopDoubleW(void)
 }
 
 
+ulong   PopLongW(void)
+{
+  bool begin = false;
+
+  ulong dwA = 0;
+
+  while (GetPopSize() < IndexInBuff())
+  {
+//    MonitorString("\n"); MonitorIntDec(GetPopSize()); MonitorString(" ? "); MonitorIntDec(IndexInBuff());
+
+    uchar b = PopChar0Bcc();
+    if (begin == false)
+    {
+      if (b == '(')
+        begin = true;
+    }
+    else
+    {
+      if (b == ')')
+      {
+        return dwA;
+      }
+      else
+      {
+        if ((b >= '0') && (b <= '9'))
+        {
+          b -= '0';
+          dwA = dwA*10 + b;
+        }
+        else break;
+      }
+    }
+  }
+
+  return 0;
+}
+
+
+
 time    PopTimeW(void)
 {
   while (GetPopSize() < IndexInBuff())
@@ -573,7 +612,7 @@ bool    ReadProfileW(void)
   uchar i;
   for (i=0; i<MAX_LINE_W; i++)
   {
-    ulong dw = PopDoubleW();
+    ulong dw = PopLongW();
     MonitorString("\n value "); MonitorLongDec(dw);
 
     mpdbEngFracDigCan[ibDig][i] += (double)dw;
