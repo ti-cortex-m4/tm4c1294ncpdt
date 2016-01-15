@@ -163,6 +163,7 @@ QUERIES!H
 #define bINQ_TRANSIT_EXECUTE2          173
 #define bINQ_TRANSIT_EXECUTE3          174
 #define bINQ_TRANSIT_EXECUTE4          175
+#define bINQ_TRANSIT_W                 176
 
 #define bINQ_ENBL_ANSWER               231
 
