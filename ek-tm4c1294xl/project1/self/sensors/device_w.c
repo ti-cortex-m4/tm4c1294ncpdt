@@ -44,42 +44,37 @@ uint                    wProfileW;
 
 double  PopDoubleW(void)
 {
-  bool begin = false;
+  bool open = false;
   bool point = false;
 
   double dbA = 0;
   double dbB = 1;
-  double dbC = 0.1;
 
   while (GetPopSize() < IndexInBuff())
   {
 //    MonitorString("\n"); MonitorIntDec(GetPopSize()); MonitorString(" ? "); MonitorIntDec(IndexInBuff());
 
     uchar b = PopChar0Bcc();
-    if (begin == false)
+    if (open == false)
     {
       if (b == '(')
-        begin = true;
+        open = true;
     }
     else
     {
       if (b == '.')
         point = true;
       else if (b == ')')
-      {
-        dbA *= dbC;
-        return dbA;
-      }
+        return dbA/dbB;
       else
       {
         if ((b >= '0') && (b <= '9'))
         {
           b -= '0';
-          dbA += dbB*b;
-          dbB /= 10;
+          dbA = dbA*10 + b;
 
-          if (point == false)
-            dbC *= 10;
+          if (point == true)
+            dbB *= 10;
         }
         else break;
       }
@@ -92,7 +87,7 @@ double  PopDoubleW(void)
 
 ulong   PopLongW(void)
 {
-  bool begin = false;
+  bool open = false;
 
   ulong dwA = 0;
 
@@ -101,17 +96,15 @@ ulong   PopLongW(void)
 //    MonitorString("\n"); MonitorIntDec(GetPopSize()); MonitorString(" ? "); MonitorIntDec(IndexInBuff());
 
     uchar b = PopChar0Bcc();
-    if (begin == false)
+    if (open == false)
     {
       if (b == '(')
-        begin = true;
+        open = true;
     }
     else
     {
       if (b == ')')
-      {
         return dwA;
-      }
       else
       {
         if ((b >= '0') && (b <= '9'))
