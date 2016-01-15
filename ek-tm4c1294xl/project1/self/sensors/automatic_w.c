@@ -171,7 +171,7 @@ bool    AutomaticW(void)
   if (db2.fValid == false) return false;
   double dbTrans = db2.dbValue;
 
-  SetPulseTrans(5000, dbTrans);
+  SetPulseTrans(2000, dbTrans);
 
 
   Clear();
