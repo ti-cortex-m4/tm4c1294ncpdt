@@ -4,4 +4,5 @@ TCP_SERVER.H
 
 ------------------------------------------------------------------------------*/
 
-err_t InitTCP_Server(void);
+err_t TCPServerInit(void);
+err_t TCPServerConnect(void);

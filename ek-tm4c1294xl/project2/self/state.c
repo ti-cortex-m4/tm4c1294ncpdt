@@ -46,3 +46,11 @@ void InitState(void)
     mtState[u].eLastErr = ERR_OK;
   }
 }
+
+
+
+tState *GetState(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+  return &mtState[u];
+}

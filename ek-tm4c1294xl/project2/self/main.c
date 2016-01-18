@@ -118,7 +118,7 @@ int     main(void)
 
   InitUDP_Handler();
   InitTCP_Handler();
-  InitTCP_Server();
+  TCPServerInit();
 
   InitSysTick(dwSysClockFreq);
   InitUART(dwSysClockFreq);
