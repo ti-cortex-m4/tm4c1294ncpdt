@@ -5,7 +5,6 @@ MAIN.C
 ------------------------------------------------------------------------------*/
 
 #include "main.h"
-#include "settings.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "driverlib/interrupt.h"
@@ -14,12 +13,15 @@ MAIN.C
 #include "driverlib/flash.h"
 #include "utils/lwiplib_patched.h"
 #include "drivers/pinout.h"
+#include "settings.h"
+#include "state.h"
 #include "systick.h"
 #include "timer1.h"
 #include "uart/uart.h"
 #include "uart/log.h"
 #include "udp/udp_handler.h"
 #include "tcp/tcp_handler.h"
+#include "tcp/tcp_server.h"
 
 
 
@@ -110,11 +112,13 @@ int     main(void)
   pbMAC[5] = ((dwUser1 >> 16) & 0xFF);
 
   InitSettings();
+  InitState();
 
   lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
   InitUDP_Handler();
   InitTCP_Handler();
+  InitTCP_Server();
 
   InitSysTick(dwSysClockFreq);
   InitUART(dwSysClockFreq);

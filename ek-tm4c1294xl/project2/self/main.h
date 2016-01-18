@@ -12,6 +12,7 @@ MAIN.H
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include "lwip/tcp.h"
 #include "driverlib/debug.h"
 
 
@@ -28,6 +29,16 @@ typedef union
 
 
 #define NAME_SIZE       (8+1)
+
+
+#define UART_COUNT      1
+
+
+typedef struct
+{
+  // The last error reported by lwIP while attempting to make a connection.
+  err_t eLastErr;
+} tState;
 
 
 #endif
