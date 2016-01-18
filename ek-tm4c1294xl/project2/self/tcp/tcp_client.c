@@ -11,6 +11,7 @@ TCP_CLIENT.C
 #include "lwip/tcp.h"
 #include "lwip/tcp_impl.h"
 #include "../state.h"
+#include "../uart/log.h"
 #include "tcp_client.h"
 
 
@@ -24,10 +25,10 @@ err_t TCPClientInit(void)
 
 static void TCPClientError(void *arg, err_t err)
 {
-//    tTelnetSessionData *pState = arg;
-//
-//    DEBUG_MSG("TelnetError 0x%08x, %d\n", arg, err);
-//
+  tState *pState = arg;
+
+  LOG(("TCPClientError 0x%08x, %d\n", arg, err));
+
 //    //
 //    // Increment our error counter.
 //    //
@@ -85,10 +86,10 @@ static err_t TCPClientPoll(void *arg, struct tcp_pcb *pcb)
 {
 //    err_t eError;
 //    struct ip_addr sIPAddr;
-//    tTelnetSessionData *pState = arg;
-//
-//    DEBUG_MSG("TelnetPoll 0x%08x, 0x%08x\n", arg, pcb);
-//
+  tState *pState = arg;
+
+  LOG(("TCPClientPoll 0x%08x, 0x%08x\n", arg, pcb));
+
 //    //
 //    // Are we operating as a server or a client?
 //    //
@@ -141,10 +142,10 @@ static err_t TCPClientPoll(void *arg, struct tcp_pcb *pcb)
 
 static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
-//    tTelnetSessionData *pState = arg;
-//
-//    DEBUG_MSG("TelnetConnected 0x%08x, 0x%08x, %d\n", arg, pcb, err);
-//
+  tState *pState = arg;
+
+  LOG(("TCPClientConnected 0x%08x, 0x%08x, %d\n", arg, pcb, err));
+
 //    //
 //    // Increment our connection counter.
 //    //
