@@ -195,17 +195,13 @@ static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 //        //
 //        return(ERR_OK);
 //    }
-//
-//    //
-//    // Save the PCB for future reference.
-//    //
-//    pState->pConnectPCB = pcb;
-//
-//    //
-//    // Change TCP state to connected.
-//    //
-//    pState->eTCPState = STATE_TCP_CONNECTED;
-//
+
+    // Save the PCB for future reference.
+    pState->pConnectPCB = pcb;
+
+    // Change TCP state to connected.
+    pState->eTCPState = STATE_TCP_CONNECTED;
+
 //    //
 //    // Reset the serial port associated with this session to its default
 //    // parameters.

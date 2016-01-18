@@ -34,25 +34,39 @@ typedef union
 #define UART_COUNT      1
 
 
+typedef enum
+{
+  // The TCP session is idle.  No connection has been attempted, nor has it been configured to listen on any port.
+  STATE_TCP_IDLE,
+
+  // The TCP session is listening (server mode).
+  STATE_TCP_LISTEN,
+
+  // The TCP session is connecting (client mode).
+  STATE_TCP_CONNECTING,
+
+  // The TCP session is connected.
+  STATE_TCP_CONNECTED,
+}
+tTCPState;
+
+
 typedef struct
 {
-//    //
-//    //! This value holds the pointer to the TCP PCB associated with this
-//    //! connected telnet session.
-//    //
-//    struct tcp_pcb *pConnectPCB;
-//
+  // This value holds the pointer to the TCP PCB associated with this connected telnet session.
+  struct tcp_pcb *pConnectPCB;
+
 //    //
 //    //! This value holds the pointer to the TCP PCB associated with this
 //    //! listening telnet session.
 //    //
 //    struct tcp_pcb *pListenPCB;
-//
-//    //
-//    //! The current state of the TCP session.
-//    //
-//    tTCPState eTCPState;
-//
+
+  //
+  // The current state of the TCP session.
+  //
+  tTCPState eTCPState;
+
 //    //
 //    //! The current state of the telnet option parser.
 //    //
