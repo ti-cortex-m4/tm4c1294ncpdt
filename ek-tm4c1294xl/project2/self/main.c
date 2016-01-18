@@ -21,7 +21,7 @@ MAIN.C
 #include "uart/log.h"
 #include "udp/udp_handler.h"
 #include "tcp/tcp_handler.h"
-#include "tcp/tcp_server.h"
+#include "tcp/tcp_client.h"
 
 
 
@@ -118,7 +118,7 @@ int     main(void)
 
   InitUDP_Handler();
   InitTCP_Handler();
-  TCPServerInit();
+  TCPClientInit();
 
   InitSysTick(dwSysClockFreq);
   InitUART(dwSysClockFreq);
