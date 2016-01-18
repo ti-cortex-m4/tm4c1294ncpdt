@@ -253,14 +253,12 @@ static err_t TCPClientReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, er
 
 static err_t TCPClientSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
-//    tTelnetSessionData *pState = arg;
-//
-//    DEBUG_MSG("TelnetSent 0x%08x, 0x%08x, %d\n", arg, pcb, len);
-//
-//    //
-//    // Reset the connection timeout.
-//    //
-//    pState->ulConnectionTimeout = 0;
+  tState *pState = arg;
+
+  LOG(("TCPClientSent 0x%08x, 0x%08x, %d\n", arg, pcb, len));
+
+  // Reset the connection timeout.
+  pState->ulConnectionTimeout = 0;
 
   return ERR_OK;
 }
