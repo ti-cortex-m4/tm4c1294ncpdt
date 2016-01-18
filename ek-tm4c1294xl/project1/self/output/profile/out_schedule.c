@@ -9,6 +9,7 @@ OUT_SCHEDULE!C
 #include "../../memory/mem_schedule.h"
 #include "../../serial/ports.h"
 #include "../../digitals/schedule/schedule.h"
+#include "../../nvram/out_common.h"
 #include "../../nvram/cache.h"
 
 
@@ -16,7 +17,7 @@ OUT_SCHEDULE!C
 void    OutGetEnblPrtHou(void)
 {
   if (bInBuff6 < bPORTS)
-    Common(&mpboEnblPrtHou[ bInBuff6 ], 48);
+    OutBoolArray(&mpboEnblPrtHou[ bInBuff6 ], 48);
   else
     Result(bRES_BADADDRESS);
 }
@@ -45,7 +46,7 @@ void    OutSetEnblPrtHou(void)
 
 void    OutGetCtrlHou(void)
 {
-  Common(&mpboCtrlHou, 48);
+  OutBoolArray(&mpboCtrlHou, 48);
 }
 
 
@@ -70,7 +71,7 @@ void    OutGetRecalcHou(void)
 {
   InitPushCRC();
   PushBool(boRecalcAlways);
-  Push(&mpboRecalcHou, sizeof(mpboRecalcHou));
+  PushBoolArray(&mpboRecalcHou, 48);
   Output(1+48);
 }
 
