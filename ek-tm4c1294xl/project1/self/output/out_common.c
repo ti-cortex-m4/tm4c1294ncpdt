@@ -140,3 +140,26 @@ uchar   PushStatusFloatOrDouble(status  bStatus, double  db, bool  fDouble)
 
   return bSize;
 }
+
+
+
+uint    PushBoolArray(bool  *mpf, uchar  bCount)
+{
+  uint wSize = 0;
+
+  uchar i;
+  for (i=0; i<bCount; i++)
+  {
+    wSize += PushBool(mpf[i]);
+  }
+
+  return wSize;
+}
+
+
+void    OutBoolArray(bool  *mpf, uchar  bCount)
+{
+  InitPushCRC();
+  uint wSize = PushBoolArray(mpf,bCount);
+  Output(wSize);
+}

@@ -15,3 +15,6 @@ void    OutCharCanExt(uchar  *mpb);
 void    OutBoolCanExt(bool  *mpf);
 
 uchar   PushStatusFloatOrDouble(status  bStatus, double  db, bool  fDouble);
+
+uint    PushBoolArray(bool  *mpf, uchar  bCount);
+void    OutBoolArray(bool  *mpf, uchar  bCount);
