@@ -29,12 +29,10 @@ static void TCPClientError(void *arg, err_t err)
 
   LOG(("TCPClientError 0x%08x, %d\n", arg, err));
 
-//    //
-//    // Increment our error counter.
-//    //
-//    pState->ucErrorCount++;
-//    pState->eLastErr = err;
-//
+  // Increment our error counter.
+  pState->ucErrorCount++;
+  pState->eLastErr = err;
+
 //    //
 //    // Free the pbufs associated with this session.
 //    //
@@ -146,11 +144,9 @@ static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
   LOG(("TCPClientConnected 0x%08x, 0x%08x, %d\n", arg, pcb, err));
 
-//    //
-//    // Increment our connection counter.
-//    //
-//    pState->ucConnectCount++;
-//
+  // Increment our connection counter.
+  pState->ucConnectCount++;
+
 //    //
 //    // If we are not in the listening state, refuse this connection.
 //    //
