@@ -140,12 +140,12 @@ static err_t TCPClientPoll(void *arg, struct tcp_pcb *pcb)
 
 static err_t TCPClientReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 {
-//    tTelnetSessionData *pState = arg;
+  tState *pState = arg;
 //    int iNextWrite;
 //    SYS_ARCH_DECL_PROTECT(lev);
-//
-//    DEBUG_MSG("TelnetReceive 0x%08x, 0x%08x, 0x%08x, %d\n", arg, pcb, p, err);
-//
+
+  LOG(("TCPClientReceive 0x%08x, 0x%08x, 0x%08x, %d\n", arg, pcb, p, err));
+
 //    //
 //    // Place the incoming packet onto the queue if there is space.
 //    //
