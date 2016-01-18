@@ -1,8 +1,9 @@
 /*------------------------------------------------------------------------------
-TCP_SERVER.H
+TCP_CLIENT.H
 
 
 ------------------------------------------------------------------------------*/
 
-err_t TCPServerInit(void);
-err_t TCPServerConnect(void);
+err_t TCPClientInit(void);
+
+err_t TCPClientConnect(ulong dwRemoteIP, uint wRemotePort);
