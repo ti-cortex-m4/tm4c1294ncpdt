@@ -27,7 +27,7 @@ void InitState(void)
     mtState[u].eTCPState = STATE_TCP_IDLE;
 //    mtState[u].eTelnetState = STATE_NORMAL;
 //    mtState[u].ucFlags = 0;
-//    mtState[u].ulConnectionTimeout = 0;
+    mtState[u].ulConnectionTimeout = 0;
 //    mtState[u].ulMaxTimeout = 0;
 //    mtState[u].ulSerialPort = MAX_S2E_PORTS;
 //    mtState[u].usTelnetRemotePort = 0;
