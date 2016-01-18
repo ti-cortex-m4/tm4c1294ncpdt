@@ -24,3 +24,13 @@ ASSERT
 http://lwip.wikia.com/wiki/Raw/TCP
 
 http://docs.tibbo.com/soism/index.html?bcast_out_of_band.htm
+
+как принимать TCP: sw01266.zip -> TelnetReceive
+for(q = p, pucData = q->payload; q != NULL; q = q->next)
+ 
+как передавать TCP: ser2enet -> TelnetHandler
+        if(SerialReceiveAvailable(pState->ulSerialPort) &&
+          tcp_sndbuf(pState->pConnectPCB) &&
+          (pState->pConnectPCB->snd_queuelen < TCP_SND_QUEUELEN))
+        {
+                
