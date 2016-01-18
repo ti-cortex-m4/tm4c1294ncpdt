@@ -231,16 +231,6 @@ static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 //    // Setup the TCP sent callback function.
 //    //
 //    tcp_sent(pcb, TelnetSent);
-//
-//    //
-//    // Send the telnet initialization string.
-//    //
-//    if((g_sParameters.sPort[pState->ulSerialPort].ucFlags &
-//                PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
-//    {
-//        tcp_write(pcb, g_pucTelnetInit, sizeof(g_pucTelnetInit), 1);
-//        tcp_output(pcb);
-//    }
 
   return ERR_OK;
 }
