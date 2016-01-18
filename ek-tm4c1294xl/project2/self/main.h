@@ -92,12 +92,10 @@ typedef struct
 //    //! Flags for various options associated with the telnet session.
 //    //
 //    uint8_t ucFlags;
-//
-//    //
-//    //! A counter for the TCP connection timeout.
-//    //
-//    uint32_t ulConnectionTimeout;
-//
+
+  // A counter for the TCP connection timeout.
+  uint32_t ulConnectionTimeout;
+
 //    //
 //    //! The max time for TCP connection timeout counter.
 //    //

@@ -207,11 +207,9 @@ static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 //    // parameters.
 //    //
 //    SerialSetDefault(pState->ulSerialPort);
-//
-//    //
-//    // Set the connection timeout to 0.
-//    //
-//    pState->ulConnectionTimeout = 0;
+
+    // Set the connection timeout to 0.
+    pState->ulConnectionTimeout = 0;
 //
 //    //
 //    // Setup the TCP connection priority.
@@ -222,17 +220,13 @@ static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 //    // Setup the TCP receive function.
 //    //
 //    tcp_recv(pcb, TelnetReceive);
-//
-//    //
-//    // Setup the TCP error function.
-//    //
-//    tcp_err(pcb, TelnetError);
-//
-//    //
-//    // Setup the TCP polling function/interval.
-//    //
-//    tcp_poll(pcb, TelnetPoll, (1000 / TCP_SLOW_INTERVAL));
-//
+
+  // Setup the TCP error function.
+  tcp_err(pcb, TCPClientError);
+
+  // Setup the TCP polling function/interval.
+  tcp_poll(pcb, TCPClientPoll, (1000 / TCP_SLOW_INTERVAL));
+
 //    //
 //    // Setup the TCP sent callback function.
 //    //
