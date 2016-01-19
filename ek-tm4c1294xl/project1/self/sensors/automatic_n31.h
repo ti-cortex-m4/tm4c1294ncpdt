@@ -4,10 +4,10 @@ AUTOMATIC_N31.H
 
 ------------------------------------------------------------------------------*/
 
-//void    QueryW(uint  cwIn, uchar  cbHeaderMax);
+void    QueryN31(uint  cwIn, uchar  cbOut);
 //bool    ChecksumW(void);
-//serial  InputW(void);
-//
+serial  InputN31(void);
+
 //bool    AutomaticW(void);
 //
 //bool    QueryEngAbsW_Full(uchar  bPercent);
