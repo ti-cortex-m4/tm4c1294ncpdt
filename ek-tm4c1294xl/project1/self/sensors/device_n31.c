@@ -33,11 +33,23 @@ DEVICE_N31.C
 #ifndef SKIP_N31
 
 
+void    QueryCloseN31(void)
+{
+  InitPush();
+
+  PushChar(0x7E);
+  PushChar(0x00);
+  PushChar(0x02);
+
+  QueryN31(0, 3+1);
+}
+
+
 void    QueryOpenN31(void)
 {
-//  QueryCloseG();
-//  DelayOff();
-//
+  QueryCloseN31();
+  DelayOff();
+
 //  memset(&mpbCoder, 0, sizeof(mpbCoder));
   InitPush();
 
@@ -45,10 +57,10 @@ void    QueryOpenN31(void)
   PushChar(0x08);
   PushChar(0x03);
 
-  Push(&mpdwAddress1[diCurr.bAddress-1], sizeof(ulong));
+  Push(&mpdwAddress1[diCurr.bAddress-1], sizeof(ulong)); // TODO big/low
   Push(&mpdwAddress2[diCurr.bAddress-1], sizeof(ulong));
 
-//  CodQueryIO(3+8+1, 3+8+1);
+  QueryN31(3+8+1, 3+8+1);
 }
 
 

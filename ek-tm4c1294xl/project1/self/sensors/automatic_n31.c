@@ -20,8 +20,43 @@ AUTOMATIC_N31.C
 
 
 
+static uchar            mpbCoder[4], ibCoder;
+
+
 #ifndef SKIP_N31
 /*
+void    InitPushCod(void)
+{
+  InitPush();
+  ibCoder = 0;
+}
+
+
+void    PushCharCod(uchar  bT)
+{
+  PushChar(bT ^ mpbCoder[ibCoder]);
+  ibCoder = (ibCoder + 1)%4;
+}
+
+
+
+void    InitPopCod(void)
+{
+  InitPop(3); ibCoder = 0;
+}
+
+
+uchar   PopCharCod(void)
+{
+uchar   i;
+
+  i = PopChar() ^ mpbCoder[ibCoder];
+  ibCoder = (ibCoder + 1)%4;
+
+  return(i);
+}
+
+
 void    QueryN31(uint  cwIn, uchar  cbOut)
 {
   ASSERT(GetPushSize() < 256);
