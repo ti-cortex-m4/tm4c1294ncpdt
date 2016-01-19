@@ -5,7 +5,7 @@ AUTOMATIC_N31.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../console.h"
+#include "../console.h"
 //#include "../memory/mem_factors.h"
 //#include "../hardware/watchdog.h"
 //#include "../serial/ports.h"
@@ -14,15 +14,15 @@ AUTOMATIC_N31.C
 //#include "../devices/devices.h"
 //#include "../sensors/unpack_w.h"
 //#include "../digitals/wait_answer.h"
-//#include "device_w.h"
+#include "device_n31.h"
 //#include "automatic1.h"
-//#include "automatic_w.h"
+#include "automatic_n31.h"
 
 
 
 #ifndef SKIP_N31
 /*
-void    QueryW(uint  cwIn, uchar  cbHeaderMax)
+void    QueryN31(uint  cwIn, uchar  cbOut)
 {
   ASSERT(GetPushSize() < 256);
   uchar cbOut = GetPushSize() + 1;
@@ -100,7 +100,47 @@ serial  InputW(void)
 }
 
 
+bit     OpenDeviceG(void)
+{
+uchar   i;
 
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    QueryOpenG();
+
+    if (CodInput() == SER_GOODCHECK) break;
+    if (fKey == 1) return(0);
+  }
+
+  if (i == bMINORREPEATS) return(0);
+
+
+  if (ReadOpenG() == 0) return(0);
+
+  return(1);
+}
+*/
+
+bool    QueryOpenN31_Full(uchar  bPercent)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    QueryOpenN31();
+
+    if (InputN31() == SER_GOODCHECK) break;
+    if (fKey == true) return false;
+  }
+
+  if (r == bMINORREPEATS) return false;
+  ShowPercent(bPercent);
+
+  if (ReadOpenN31() == false) return false;
+
+  return true;
+}
+
+/*
 time2   QueryTimeW_Full(uchar  bPercent)
 {
   uchar r;
@@ -327,11 +367,43 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
   return ST_OK;
 }
 */
+/*
+bit     ReadTimeDateG(void)
+{
+uchar   i;
 
+  Clear();
+  if (OpenDeviceG() == 0) return(0);
+
+
+  for (i=0; i<bMINORREPEATS; i++)
+  {
+    DelayOff();
+    QueryTimeG();
+
+    if (CodInput() != SER_GOODCHECK)
+      continue;
+    else
+      break;
+  }
+
+  if (i == bMINORREPEATS) return(0);
+  ShowPercent(100);
+
+  ReadTimeAltG();
+
+
+  tiChannelC = tiAlt;
+  for (i=0; i<6; i++) mpboChannelsA[i] = boTrue;
+
+  return(1);
+}
+*/
 time2   ReadTimeCanN31(void)
 {
-//  Clear();
-//
+  Clear();
+  if (QueryOpenN31_Full(25) == 0) GetTime2Error();
+
 //  time2 ti2 = QueryTimeW_Full(50);
 //  if (ti2.fValid == false) return GetTime2Error();
 //

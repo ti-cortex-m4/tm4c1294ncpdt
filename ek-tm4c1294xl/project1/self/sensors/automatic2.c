@@ -41,6 +41,7 @@ AUTOMATIC2!C
 #include "automatic_u.h"
 #include "automatic_v.h"
 #include "automatic_w.h"
+#include "automatic_n31.h"
 
 
 
@@ -1976,6 +1977,10 @@ time2   ReadTimeCan(uchar  ibCan)
 #ifndef SKIP_W
     case 29:
     case 30: return ReadTimeCanW();
+#endif
+
+#ifndef SKIP_N31
+    case 31: return ReadTimeCanN31();
 #endif
 
     default: return GetTime2Error();
