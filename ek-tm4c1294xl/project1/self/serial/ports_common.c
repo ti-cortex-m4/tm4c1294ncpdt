@@ -17,6 +17,7 @@ PORTS_COMMON!C
 #include "../kernel/crc_s.h"
 #include "../kernel/crc_v.h"
 #include "../kernel/crc_els.h"
+#include "../kernel/crc_n31.h"
 #include "ports.h"
 
 
@@ -198,6 +199,37 @@ uchar   MakeCrcVInBuff(uchar  bOffset, uint  wSize)
     case 1:  return MakeCrcV(mpbInBuff1 + bOffset, wSize);
     case 2:  return MakeCrcV(mpbInBuff2 + bOffset, wSize);
     case 3:  return MakeCrcV(mpbInBuff3 + bOffset, wSize);
+    default: ASSERT(false); return 0;
+  }
+}
+
+#endif
+
+
+
+#ifndef SKIP_N31
+
+uchar   MakeCrcN31OutBuff(uchar  bOffset, uint  wSize)
+{
+  switch (ibPort)
+  {
+    case 0:  return MakeCrcN31(mpbOutBuff0 + bOffset, wSize);
+    case 1:  return MakeCrcN31(mpbOutBuff1 + bOffset, wSize);
+    case 2:  return MakeCrcN31(mpbOutBuff2 + bOffset, wSize);
+    case 3:  return MakeCrcN31(mpbOutBuff3 + bOffset, wSize);
+    default: ASSERT(false); return 0;
+  }
+}
+
+
+uchar   MakeCrcN31InBuff(uchar  bOffset, uint  wSize)
+{
+  switch (ibPort)
+  {
+    case 0:  return MakeCrcN31(mpbInBuff0 + bOffset, wSize);
+    case 1:  return MakeCrcN31(mpbInBuff1 + bOffset, wSize);
+    case 2:  return MakeCrcN31(mpbInBuff2 + bOffset, wSize);
+    case 3:  return MakeCrcN31(mpbInBuff3 + bOffset, wSize);
     default: ASSERT(false); return 0;
   }
 }
