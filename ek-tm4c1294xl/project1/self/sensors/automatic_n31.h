@@ -4,6 +4,10 @@ AUTOMATIC_N31.H
 
 ------------------------------------------------------------------------------*/
 
+extern  uchar               mpbCoder[4], ibCoder;
+
+
+
 void    QueryN31(uint  cwIn, uchar  cbOut);
 //bool    ChecksumW(void);
 serial  InputN31(void);
