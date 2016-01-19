@@ -24,11 +24,11 @@ uint    x;
   {
     InitPopCod();
 
-    for (i=0; i<GetInBuff(1); i++) SetInBuff(i+3, PopCharCod());
+    for (i=0; i<InBuff(1); i++) SetInBuff(i+3, PopCharCod());
   }
   else                                  // есть сжатие
   {
-    SetInBuff(2, GetInBuff(2) & 0x7F);
+    SetInBuff(2, InBuff(2) & 0x7F);
 
     InitPopCod();
 
@@ -36,7 +36,7 @@ uint    x;
     x = 0x200;                          // адрес промежуточного буфера
 
     i = 0;
-    while (i < GetInBuff(1)-1)
+    while (i < InBuff(1)-1)
     {
       a = PopCharCod(); i++;
 
@@ -51,8 +51,8 @@ uint    x;
     }
 
     SetInBuff(1, x-0x200);
-    for (i=0; i<GetInBuff(1); i++) SetInBuff(i+3, GetInBuff(i+0x200));
+    for (i=0; i<InBuff(1); i++) SetInBuff(i+3, InBuff(i+0x200));
 
-    SetIndexInBuff(3+GetInBuff(1));     // размер прин€того пакета
+    SetIndexInBuff(3+InBuff(1));        // размер прин€того пакета
   }
 }

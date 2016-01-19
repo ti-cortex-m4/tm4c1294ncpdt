@@ -25,7 +25,7 @@ AUTOMATIC_N31.C
 uchar                   mpbCoder[4], ibCoder;
 
 
-/*
+
 void    InitPushCod(void)
 {
   InitPush();
@@ -56,7 +56,7 @@ uchar   i;
 
   return(i);
 }
-*/
+
 
 void    QueryN31(uint  cwIn, uchar  cbOut)
 {
