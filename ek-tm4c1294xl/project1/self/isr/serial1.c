@@ -297,7 +297,7 @@ uint32_t ui32Status;
             InputMode1();
             mpSerial[1] = SER_CHAR;
 
-            mpbInBuff1[1] = bT;
+            mpbInBuff1[0] = bT;
           }
         }
       }
