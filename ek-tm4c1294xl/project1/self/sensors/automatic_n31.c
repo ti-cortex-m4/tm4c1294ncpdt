@@ -7,23 +7,24 @@ AUTOMATIC_N31.C
 #include "../main.h"
 #include "../console.h"
 //#include "../memory/mem_factors.h"
-//#include "../hardware/watchdog.h"
-//#include "../serial/ports.h"
-//#include "../serial/ports_devices.h"
-//#include "../serial/monitor.h"
-//#include "../devices/devices.h"
-//#include "../sensors/unpack_w.h"
-//#include "../digitals/wait_answer.h"
+#include "../hardware/watchdog.h"
+#include "../serial/ports.h"
+#include "../serial/ports_devices.h"
+#include "../serial/monitor.h"
+#include "../devices/devices.h"
+#include "../sensors/unpack_n31.h"
+#include "../digitals/wait_answer.h"
 #include "device_n31.h"
 //#include "automatic1.h"
 #include "automatic_n31.h"
 
 
 
-static uchar            mpbCoder[4], ibCoder;
-
-
 #ifndef SKIP_N31
+
+uchar                   mpbCoder[4], ibCoder;
+
+
 /*
 void    InitPushCod(void)
 {
@@ -55,35 +56,21 @@ uchar   i;
 
   return(i);
 }
-
+*/
 
 void    QueryN31(uint  cwIn, uchar  cbOut)
 {
-  ASSERT(GetPushSize() < 256);
-  uchar cbOut = GetPushSize() + 1;
-
-  cbHeaderBcc = cbHeaderMax;
-  cwInBuffBcc = 0;
+  uchar bCrc = MakeCrcN31OutBuff(1, cbOut-2);
 
   InitPush(0);
+  Skip(cbOut-1);
 
-  uchar bSum = 0;
-  bool f = false;
-
-  uchar i;
-  for (i=0; i<cbOut-1; i++)
-  {
-    uchar b = SkipChar();
-    if (f == true) bSum ^= b;
-    if (((b & 0x7F) == 0x01) || ((b & 0x7F) == '!')) f = true;
-  }
-
-  PushChar1Bcc(bSum);
+  PushChar(bCrc);
 
   Query(cwIn,cbOut,1);
 }
 
-
+/*
 bool    ChecksumW(void)
 {
   InitPop(1);
@@ -100,9 +87,9 @@ bool    ChecksumW(void)
 
   return ((bT & 0x7F) == PopChar0Bcc());
 }
+*/
 
-
-serial  InputW(void)
+serial  InputN31(void)
 {
   InitWaitAnswer();
 
@@ -115,26 +102,45 @@ serial  InputW(void)
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
     if (mpSerial[ibPort] == SER_INPUT_MASTER)
-      UnpackW(false,3);
+    {
+      if ((InBuff(0) == 0x7E) && (IndexInBuff() > 3) && (IndexInBuff() == InBuff(1)+4))
+        mpSerial[ibPort] = SER_BADLINK;
+    }
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      if (ChecksumW())
+      uchar bCrc = MakeCrcN31InBuff(1, CountInBuff()-1);
+      if (bCrc == 0)
+      {
+        UnpackN31();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
 
       break;
     }
-    else if ((mpSerial[ibPort] == SER_OVERFLOW) ||
-             (mpSerial[ibPort] == SER_BADLINK)) break;
+    else if (mpSerial[ibPort] == SER_BADLINK)
+    {
+      uchar bCrc = MakeCrcN31InBuff(1, IndexInBuff()-1);
+      if (bCrc == 0)
+      {
+    	  UnpackN31();
+        mpSerial[ibPort] = SER_GOODCHECK;
+      }
+      else
+        mpSerial[ibPort] = SER_BADCHECK;
+
+      break;
+    }
+    else if (mpSerial[ibPort] == SER_OVERFLOW) break;
   }
 
   MonitorIn();
   return mpSerial[ibPort];
 }
 
-
+/*
 bit     OpenDeviceG(void)
 {
 uchar   i;
