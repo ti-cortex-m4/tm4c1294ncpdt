@@ -92,7 +92,8 @@ static void ShowCtrlZ()
   if (wProgram == bTEST_RESPONSE)
   {
     sprintf(szHi,"Порт %u: Ctrl Z",ibPort+1);
-    Clear();
+
+    ibPortActive = ibPort;
     HideCurrTime(0);
   }
 }
@@ -103,6 +104,8 @@ static void ShowEsc(void)
   if (wProgram == bTEST_RESPONSE)
   {
     sprintf(szHi,"Порт %u: Esc %c",ibPort+1,bQuery);
+
+    ibPortActive = ibPort;
     HideCurrTime(0);
   }
 }
@@ -484,13 +487,13 @@ void    RunResponseEsc(void)
 
     if (boBlockEsc == true)
     {
-      if (bQuery != 'R') 
+      if (bQuery != 'R')
       {
         InitPush(0);
         Push("Disabled !",10);
         Esc(10);
         return;
-      } 
+      }
     }
 
     switch (bQuery)
