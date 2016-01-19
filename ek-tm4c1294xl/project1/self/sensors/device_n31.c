@@ -23,6 +23,7 @@ DEVICE_N31.C
 //#include "../devices/devices_time.h"
 //#include "../digitals/current/current_run.h"
 //#include "../digitals/limits.h"
+#include "../digitals/digitals_messages.h"
 //#include "../special/special.h"
 #include "automatic_n31.h"
 //#include "device_k.h"
