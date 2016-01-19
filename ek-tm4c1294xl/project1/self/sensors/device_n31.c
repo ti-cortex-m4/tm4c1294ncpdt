@@ -5,7 +5,7 @@ DEVICE_N31.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../memory/mem_digitals.h"
+#include "../memory/mem_digitals.h"
 //#include "../memory/mem_current.h"
 //#include "../memory/mem_factors.h"
 //#include "../memory/mem_realtime.h"
@@ -38,7 +38,7 @@ uchar                   bVersionN31;
 
 void    QueryCloseN31(void)
 {
-  InitPush();
+  InitPush(0);
 
   PushChar(0x7E);
   PushChar(0x00);
@@ -55,7 +55,7 @@ void    QueryOpenN31(void)
 
   memset(&mpbCoder, 0, sizeof(mpbCoder));
 
-  InitPush();
+  InitPush(0);
 
   PushChar(0x7E);
   PushChar(0x08);
