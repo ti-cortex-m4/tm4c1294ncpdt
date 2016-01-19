@@ -35,7 +35,7 @@ uchar   MakeCrcN31(uchar  *pbData, uint  wSize)
   uchar bCrc = 0;
 
   while (wSize-- > 0)
-    bCrc = mpbCRC8[bCrc ^ *(pbData++)];
+    bCrc = mpbCrcN31[bCrc ^ *(pbData++)];
 
   return bCrc;
 }
