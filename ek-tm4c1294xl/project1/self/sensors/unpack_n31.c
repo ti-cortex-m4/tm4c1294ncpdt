@@ -1,27 +1,29 @@
 /*------------------------------------------------------------------------------
-
+UNPACK_N31!C
 
 
 ------------------------------------------------------------------------------*/
 
-#include        "main.h"
-#include        "xdata.h"
-#include        "ports.h"
-#include        "ports2.h"
+#include "../main.h"
+#include "../memory/mem_ports.h"
+#include "../serial/ports.h"
+#include "../serial/ports2.h"
+//#include "../serial/monitor.h"
+//#include "../display/display.h"
+#include "automatic_n31.h"
+#include "unpack_n31.h"
 
 
 
-#ifndef SKIP_G
-
-void    DecompressG(void)
+void    UnpackN31(void)
 {
 uchar   i,j,k,a,b,c;
 uint    x;
 
-  if ((GetInBuff(2) & 0x80) == 0)       // нет сжатия
+  if ((InBuff(2) & 0x80) == 0)          // нет сжатия
   {
     InitPopCod();
-                                        
+
     for (i=0; i<GetInBuff(1); i++) SetInBuff(i+3, PopCharCod());
   }
   else                                  // есть сжатие
@@ -39,7 +41,7 @@ uint    x;
       a = PopCharCod(); i++;
 
       if (a != j) SetInBuff(x++, a);
-      else 
+      else
       {
         b = PopCharCod(); i++;          // количесство повторов
         c = PopCharCod(); i++;          // повторяемый байт
@@ -54,6 +56,3 @@ uint    x;
     SetIndexInBuff(3+GetInBuff(1));     // размер принятого пакета
   }
 }
-
-#endif
-
