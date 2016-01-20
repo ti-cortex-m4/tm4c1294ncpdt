@@ -1,56 +1,54 @@
 #ifndef SKIP_N31
-/*
-    case DEV_START_G3:
-      cbRepeat = bMINORREPEATS;
-      QueryOpenG();
-      SetCurr(DEV_OPENCANAL_G3);
+
+    case DEV_START_N31C:
+      cbRepeat = GetMaxRepeats();
+      QueryOpenN31();
+      SetCurr(DEV_OPENCANAL_N31C);
       break;
 
-    case DEV_OPENCANAL_G3:
+    case DEV_OPENCANAL_N31C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadOpenG() == 0)
+        if (ReadOpenN31() == false)
           ErrorCurrent();
         else
-          MakePause(DEV_POSTOPENCANAL_G3);
+          MakePause(DEV_POSTOPENCANAL_N31C);
       }
       else
       {
-        if (cbRepeat == 0)
-          ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
 
-          QueryOpenG();
-          SetCurr(DEV_OPENCANAL_G3);
+          QueryOpenN31();
+          SetCurr(DEV_OPENCANAL_N31C);
         }
       }
       break;
 
-    case DEV_POSTOPENCANAL_G3:
-      cbRepeat = bMINORREPEATS;
-      QueryEnergyAbsG();
-      SetCurr(DEV_ENERGY_G3);
+    case DEV_POSTOPENCANAL_N31C:
+      cbRepeat = GetMaxRepeats();
+      QueryEngAbsN31();
+      SetCurr(DEV_ENERGY_N31C);
       break;
 
-    case DEV_ENERGY_G3:
+    case DEV_ENERGY_N31C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        ReadCurrentG();
+        ReadCurrentN31();
       else
       {
-        if (cbRepeat == 0)
-          ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
 
-          QueryEnergyAbsG();
-          SetCurr(DEV_ENERGY_G3);
+          QueryEngAbsN31();
+          SetCurr(DEV_ENERGY_N31C);
         }
       }
       break;
-*/
+
 #endif
