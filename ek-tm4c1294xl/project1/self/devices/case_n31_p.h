@@ -1,5 +1,5 @@
 #ifndef SKIP_N31
-
+/*
     case DEV_START_G2:
       cbCorrects = 0;
 
@@ -181,5 +181,5 @@
         SetCurr(DEV_HEADER_G2);
       }
       break;
-
+*/
 #endif
