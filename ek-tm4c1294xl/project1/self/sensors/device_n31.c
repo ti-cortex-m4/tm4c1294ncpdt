@@ -37,15 +37,6 @@ uchar                   bVersionN31;
 
 
 
-bool    ExtVersionN31()
-{
-  return ((bVersionN31 == 36) ||
-          (bVersionN31 == 37) ||
-          (bVersionN31 == 49));
-}
-
-
-
 void    QueryCloseN31(void)
 {
   InitPush(0);
@@ -92,12 +83,7 @@ bool    ReadOpenN31(void)
   Clear(); sprintf(szLo+3,"версия: %2u",bVersionN31);
   DelayInf(); Clear();
 
-  if ((bVersionN31 == 22) ||
-      (bVersionN31 == 33) ||
-      (bVersionN31 == 35) ||
-      (bVersionN31 == 36) ||
-      (bVersionN31 == 37) ||
-      (bVersionN31 == 49)) return(1);
+  if (bVersionN31 == 49) return true;
 
   ShowLo(szNoVersion);
   DelayInf(); Clear();
@@ -123,18 +109,11 @@ time    ReadTimeN31(void)
 {
   time ti;
 
-  InitPop(3);
-               PopChar();
+  InitPop(4);
+
   ti.bDay    = PopChar();
   ti.bMonth  = PopChar();
-
-  uint y;
-  if (ExtVersionN31())
-    y = PopIntLtl();
-  else
-    y = PopIntBig();
-
-  ti.bYear   = y % 100;
+  ti.bYear   = PopIntLtl() % 100;
 
   ti.bHour   = PopChar();
   ti.bMinute = PopChar();
@@ -153,66 +132,25 @@ void    QueryEngAbsN31(void)
   PushChar(0x00);
   PushChar(0x12);
 
-  if (ExtVersionN31())
-    QueryN31(3+48+1, 3+1);
-  else
-    QueryN31(3+42+1, 3+1);
+  QueryN31(3+48+1, 3+1);
 }
 
 
 
-void    PopRealBCD_G(void)
+double  PopDoubleN31(void)
 {
-//uchar   i,j;
-//
-//  reBuffA = 0;
-//
-//  for (i=0; i<6; i++) reBuffA = reBuffA*100 + FromBCD( PopChar() );
-//  for (i=0; i<6; i++) reBuffA /= 100;
-//
-//  i = PopChar();
-//  j = i & 0x3F;
-//
-//  if ((i & 0x40) == 0)
-//    while (j-- > 0) reBuffA /= 10;
-//  else
-//    while (j-- > 0) reBuffA *= 10;
-//
-//  if ((i & 0x80) != 0) reBuffA *= -1;
-}
+  static combo64 co;
 
+  co.mpbBuff[0] = PopChar();
+  co.mpbBuff[1] = PopChar();
+  co.mpbBuff[2] = PopChar();
+  co.mpbBuff[3] = PopChar();
+  co.mpbBuff[4] = PopChar();
+  co.mpbBuff[5] = PopChar();
+  co.mpbBuff[6] = PopChar();
+  co.mpbBuff[7] = PopChar();
 
-void    PopRealExt_G(void)
-{
-//uchar   a,b,c;
-//uint    x;
-//
-//  PopChar();
-//  PopChar();
-//  PopChar();
-//
-//  coFloat.mpbBuff[3] = PopChar();
-//  coFloat.mpbBuff[2] = PopChar();
-//  coFloat.mpbBuff[1] = PopChar();
-//  a = PopChar();
-//  b = PopChar();
-//
-//  coFloat.mpbBuff[0] = a  & 0x0F;
-//  coFloat.dwBuff <<= 3;
-//
-//  x = (b & 0x7F)*0x100 + (a & 0xF0);
-//  x >>= 4;
-//  c = x - 896;
-//
-//  coFloat.mpbBuff[3] = coFloat.mpbBuff[2];
-//  coFloat.mpbBuff[2] = coFloat.mpbBuff[1];
-//  coFloat.mpbBuff[1] = coFloat.mpbBuff[0];
-//  coFloat.mpbBuff[0] = c >> 1;
-//
-//  if ((c & 0x01) != 0) coFloat.mpbBuff[1] |= 0x80;
-//  if ((b & 0x80) != 0) coFloat.mpbBuff[0] |= 0x80;
-//
-//  reBuffA = coFloat.reBuff;
+  return co.dbBuff;
 }
 
 
@@ -220,21 +158,12 @@ void    ReadEngN31(void)
 {
   InitPop(3);
 
-//  uchar i;
-//  for (i=0; i<6; i++)
-//  {
-//    if (ExtVersionCod())
-//      PopRealExt_G();
-//    else
-//      PopRealBCD_G();
-//
-//    reBuffA /= 1000;
-//
-//    SetCanReal(mpreChannelsB, i);
-//    mpboChannelsA[i] = boTrue;
-//  }
-//
-//  reBuffA = *PGetCanReal(&mpreChannelsB, diCurr.ibLine);
+  uchar i;
+  for (i=0; i<MAX_LINE_N31; i++)
+  {
+    mpdbChannelsC[i] = PopDoubleN31() / 1000;
+    mpboChannelsA[i] = true;
+  }
 }
 
 
