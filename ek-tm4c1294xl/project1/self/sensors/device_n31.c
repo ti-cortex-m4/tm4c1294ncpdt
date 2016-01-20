@@ -97,4 +97,37 @@ bool    ReadOpenN31(void)
 }
 
 
+
+void    QueryTimeN31(void)
+{
+  InitPush(0);
+
+  PushChar(0x7E);
+  PushChar(0x00);
+  PushChar(0x07);
+
+  QueryN31(3+8+1, 3+1);
+}
+
+
+time    ReadTimeN31(void)
+{
+  time ti;
+
+  InitPop(3);
+               PopChar();
+  ti.bDay    = PopChar();
+  ti.bMonth  = PopChar();
+
+  uint y = PopChar()*0x100 + PopChar();
+  ti.bYear   = y % 100;
+
+  ti.bHour   = PopChar();
+  ti.bMinute = PopChar();
+  ti.bSecond = PopChar();
+
+  return ti;
+}
+
+
 #endif
