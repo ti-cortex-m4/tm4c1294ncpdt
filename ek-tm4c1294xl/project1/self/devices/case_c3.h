@@ -3,7 +3,6 @@
 
     case DEV_START_C3:
       cbRepeat = GetMaxRepeats();
-
       QueryOpenC();
       SetCurr(DEV_OPENCANAL_C3);             
       break;

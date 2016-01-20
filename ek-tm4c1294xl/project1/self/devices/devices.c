@@ -2023,7 +2023,6 @@ void    RunDevices(void)
 
     case DEV_START_C3:
       cbRepeat = GetMaxRepeats();
-
       QueryOpenC();
       SetCurr(DEV_OPENCANAL_C3);             
       break;
@@ -4807,7 +4806,7 @@ void    RunDevices(void)
     case DEV_START_G2:
       cbCorrects = 0;
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryOpenG();
       SetCurr(DEV_OPENCANAL_G2);
       break;
@@ -4840,7 +4839,7 @@ void    RunDevices(void)
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryTimeG();
       SetCurr(DEV_TIME_G2);
       break;
@@ -4896,7 +4895,7 @@ void    RunDevices(void)
         MakePause(DEV_POSTCORRECT_G2);
       else
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryControlG();
         SetCurr(DEV_POSTCONTROL_G2);
       }
@@ -4924,7 +4923,7 @@ void    RunDevices(void)
     case DEV_POSTCORRECT_G2:
       Clear();
 
-      cbRepeat = bMINORREPEATS;
+      cbRepeat = GetMaxRepeats();
       QueryTopG();
       SetCurr(DEV_TOP_G2);
       break;
@@ -4950,7 +4949,7 @@ void    RunDevices(void)
       if (ReadTopG() == 0) DoneProfile();
       else
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderG();
         SetCurr(DEV_HEADER_G2);
       }
@@ -4980,7 +4979,7 @@ void    RunDevices(void)
         DoneProfile();
       else
       {
-        cbRepeat = bMINORREPEATS;
+        cbRepeat = GetMaxRepeats();
         QueryHeaderG();
         SetCurr(DEV_HEADER_G2);
       }
@@ -4988,60 +4987,58 @@ void    RunDevices(void)
 */
 #endif
 #ifndef SKIP_N31
-/*
-    case DEV_START_G3:
-      cbRepeat = bMINORREPEATS;
-      QueryOpenG();
-      SetCurr(DEV_OPENCANAL_G3);
+
+    case DEV_START_N31C:
+      cbRepeat = GetMaxRepeats();
+      QueryOpenN31();
+      SetCurr(DEV_OPENCANAL_N31C);
       break;
 
-    case DEV_OPENCANAL_G3:
+    case DEV_OPENCANAL_N31C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadOpenG() == 0)
+        if (ReadOpenN31() == false)
           ErrorCurrent();
         else
-          MakePause(DEV_POSTOPENCANAL_G3);
+          MakePause(DEV_POSTOPENCANAL_N31C);
       }
       else
       {
-        if (cbRepeat == 0)
-          ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
 
-          QueryOpenG();
-          SetCurr(DEV_OPENCANAL_G3);
+          QueryOpenN31();
+          SetCurr(DEV_OPENCANAL_N31C);
         }
       }
       break;
 
-    case DEV_POSTOPENCANAL_G3:
-      cbRepeat = bMINORREPEATS;
-      QueryEnergyAbsG();
-      SetCurr(DEV_ENERGY_G3);
+    case DEV_POSTOPENCANAL_N31C:
+      cbRepeat = GetMaxRepeats();
+      QueryEngAbsN31();
+      SetCurr(DEV_ENERGY_N31C);
       break;
 
-    case DEV_ENERGY_G3:
+    case DEV_ENERGY_N31C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        ReadCurrentG();
+        ReadCurrentN31();
       else
       {
-        if (cbRepeat == 0)
-          ErrorCurrent();
+        if (cbRepeat == 0) ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
 
-          QueryEnergyAbsG();
-          SetCurr(DEV_ENERGY_G3);
+          QueryEngAbsN31();
+          SetCurr(DEV_ENERGY_N31C);
         }
       }
       break;
-*/
+
 #endif
   }
 

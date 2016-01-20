@@ -16,3 +16,5 @@ time    ReadTimeN31(void);
 
 void    QueryEngAbsN31(void);
 void    ReadEngN31();
+
+void    ReadCurrentN31(void);

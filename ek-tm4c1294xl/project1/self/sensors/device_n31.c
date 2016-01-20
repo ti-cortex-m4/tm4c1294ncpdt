@@ -21,7 +21,7 @@ DEVICE_N31.C
 #include "../time/delay.h"
 //#include "../devices/devices.h"
 //#include "../devices/devices_time.h"
-//#include "../digitals/current/current_run.h"
+#include "../digitals/current/current_run.h"
 //#include "../digitals/limits.h"
 #include "../digitals/digitals_messages.h"
 //#include "../special/special.h"
@@ -166,5 +166,22 @@ void    ReadEngN31(void)
   }
 }
 
+
+
+void    ReadCurrentN31(void)
+{
+//uchar   i;
+//
+//  ReadEnergyG();
+//  reBuffB = mprePulseHou[ibDig];
+//
+//  for (i=0; i<6; i++)
+//  {
+//    dwBuffC = *PGetCanReal(&mpreChannelsB, i) * reBuffB;
+//    SetCanLong(mpdwBaseDig, i);
+//  }
+
+  MakeCurrent();
+}
 
 #endif
