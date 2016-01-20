@@ -37,6 +37,24 @@ uchar                   bVersionN31;
 
 
 
+double  PopDoubleN31(void)
+{
+  static combo64 co;
+
+  co.mpbBuff[0] = PopChar();
+  co.mpbBuff[1] = PopChar();
+  co.mpbBuff[2] = PopChar();
+  co.mpbBuff[3] = PopChar();
+  co.mpbBuff[4] = PopChar();
+  co.mpbBuff[5] = PopChar();
+  co.mpbBuff[6] = PopChar();
+  co.mpbBuff[7] = PopChar();
+
+  return co.dbBuff;
+}
+
+
+
 void    QueryCloseN31(void)
 {
   InitPush(0);
@@ -133,24 +151,6 @@ void    QueryEngAbsN31(void)
   PushChar(0x12);
 
   QueryN31(3+48+1, 3+1);
-}
-
-
-
-double  PopDoubleN31(void)
-{
-  static combo64 co;
-
-  co.mpbBuff[0] = PopChar();
-  co.mpbBuff[1] = PopChar();
-  co.mpbBuff[2] = PopChar();
-  co.mpbBuff[3] = PopChar();
-  co.mpbBuff[4] = PopChar();
-  co.mpbBuff[5] = PopChar();
-  co.mpbBuff[6] = PopChar();
-  co.mpbBuff[7] = PopChar();
-
-  return co.dbBuff;
 }
 
 
