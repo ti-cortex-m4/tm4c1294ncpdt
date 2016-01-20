@@ -154,6 +154,10 @@ bool    ValidDevice(uchar  bDevice)
     case 30: return true;
 #endif
 
+#ifndef SKIP_N31
+    case 31: return true;
+#endif
+
     default: return false;
   }
 }
