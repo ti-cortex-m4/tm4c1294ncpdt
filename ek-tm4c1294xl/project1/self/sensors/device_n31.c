@@ -62,8 +62,8 @@ void    QueryOpenN31(void)
   PushChar(0x08);
   PushChar(0x03);
 
-  PushLongLtl(mpdwAddress1[diCurr.bAddress-1]);
-  PushLongLtl(mpdwAddress2[diCurr.bAddress-1]);
+  PushLongBig(mpdwAddress1[diCurr.bAddress-1]);
+  PushLongBig(mpdwAddress2[diCurr.bAddress-1]);
 
   QueryN31(3+8+1, 3+8+1);
 }
@@ -83,12 +83,7 @@ bool    ReadOpenN31(void)
   Clear(); sprintf(szLo+3,"версия: %2u",bVersionN31);
   DelayInf(); Clear();
 
-  if ((bVersionN31 == 22) ||
-      (bVersionN31 == 33) ||
-      (bVersionN31 == 35) ||
-      (bVersionN31 == 36) ||
-      (bVersionN31 == 37) ||
-      (bVersionN31 == 49)) return true;
+  if (bVersionN31 == 49) return true;
 
   ShowLo(szNoVersion);
   DelayInf(); Clear();
