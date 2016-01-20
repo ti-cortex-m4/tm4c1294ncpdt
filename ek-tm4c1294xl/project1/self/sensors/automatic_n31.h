@@ -24,7 +24,7 @@ serial  InputN31(void);
 //bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent);
 
 time2   ReadTimeCanN31(void);
-//double2 ReadCntCurrW(void);
+double2 ReadCntCurrN31(void);
 //double2 ReadCntMonCanW(uchar  ibMon);
 //
 //status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf);

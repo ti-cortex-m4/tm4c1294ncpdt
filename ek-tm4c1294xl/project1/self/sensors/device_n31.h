@@ -13,3 +13,6 @@ bool    ReadOpenN31(void);
 
 void    QueryTimeN31(void);
 time    ReadTimeN31(void);
+
+void    QueryEngAbsN31(void);
+void    ReadEngN31();

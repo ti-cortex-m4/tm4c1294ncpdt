@@ -273,40 +273,33 @@ bool    AutomaticW(void)
 
   return true;
 }
+*/
 
 
-
-bool    QueryEngAbsW_Full(uchar  bPercent)
+bool    QueryEngAbsN31_Full(uchar  bPercent)
 {
-  uchar i;
-  for (i=0; i<MAX_LINE_W; i++)
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
   {
-    uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
-    {
-      QueryCloseW();
-      QueryEngAbsW(i);
+    QueryEngAbsN31();
 
-      if (InputW() == SER_GOODCHECK) break;
-      if (fKey == true) return false;
-    }
-
-    if (r == bMINORREPEATS) return false;
-    ShowPercent(bPercent);
-
-    ReadEngW(i);
+    if (InputN31() == SER_GOODCHECK) break;
+    if (fKey == true) return false;
   }
 
-  QueryCloseW();
+  if (r == bMINORREPEATS) return false;
+  ShowPercent(bPercent);
+
+  ReadEngN31();
 
   return true;
 }
 
-
+/*
 bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<MAX_LINE_W; i++)
+  for (i=0; i<MAX_LINE_N31; i++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
@@ -340,7 +333,7 @@ bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
 bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<MAX_LINE_W; i++)
+  for (i=0; i<MAX_LINE_N31; i++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
@@ -374,7 +367,7 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
 status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
 {
   uchar i;
-  for (i=0; i<MAX_LINE_W; i++)
+  for (i=0; i<MAX_LINE_N31; i++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
@@ -439,6 +432,7 @@ uchar   i;
 time2   ReadTimeCanN31(void)
 {
   Clear();
+
   if (QueryOpenN31_Full(25) == 0) GetTime2Error();
 
   time2 ti2 = QueryTimeN31_Full(50);
@@ -457,30 +451,27 @@ time2   ReadTimeCanN31(void)
 }
 
 
-/*
-double2 ReadCntCurrW(void)
+
+double2 ReadCntCurrN31(void)
 {
   Clear();
 
-  double2 db2 = QueryKtransW_Full(25);
-  if (db2.fValid == false) return GetDouble2Error();
-  double dbTrans = db2.dbValue;
+  if (QueryOpenN31_Full(25) == 0) GetDouble2Error();
+
+  if (QueryEngAbsN31_Full(50) == 0) return GetDouble2Error();
 
 
-  if (QueryEngAbsW_Full(50) == 0) return GetDouble2Error();
-
-
-  uchar i;
-  for (i=0; i<MAX_LINE_W; i++)
-  {
-    mpdbChannelsC[i] *= dbTrans;
-    mpboChannelsA[i] = true;
-  }
+//  uchar i;
+//  for (i=0; i<MAX_LINE_N31; i++)
+//  {
+//    mpdbChannelsC[i] *= dbTrans;
+//    mpboChannelsA[i] = true;
+//  }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
-
+/*
 double2 ReadCntMonCanW(uchar  ibMon)
 {
   Clear();
@@ -506,7 +497,7 @@ double2 ReadCntMonCanW(uchar  ibMon)
 
 
   uchar i;
-  for (i=0; i<MAX_LINE_W; i++)
+  for (i=0; i<MAX_LINE_N31; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
@@ -536,7 +527,7 @@ status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 
 
   uchar i;
-  for (i=0; i<MAX_LINE_W; i++)
+  for (i=0; i<MAX_LINE_N31; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
