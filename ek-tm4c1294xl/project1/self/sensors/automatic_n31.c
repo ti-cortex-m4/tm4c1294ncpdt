@@ -28,7 +28,7 @@ uchar                   mpbCoder[4], ibCoder;
 
 void    InitPushCod(void)
 {
-  InitPush();
+  InitPush(0);
   ibCoder = 0;
 }
 
@@ -43,18 +43,17 @@ void    PushCharCod(uchar  bT)
 
 void    InitPopCod(void)
 {
-  InitPop(3); ibCoder = 0;
+  InitPop(3);
+  ibCoder = 0;
 }
 
 
 uchar   PopCharCod(void)
 {
-uchar   i;
-
-  i = PopChar() ^ mpbCoder[ibCoder];
+  uchar i = PopChar() ^ mpbCoder[ibCoder];
   ibCoder = (ibCoder + 1)%4;
 
-  return(i);
+  return i;
 }
 
 
@@ -181,28 +180,25 @@ bool    QueryOpenN31_Full(uchar  bPercent)
   return true;
 }
 
-/*
-time2   QueryTimeW_Full(uchar  bPercent)
+
+time2   QueryTimeN31_Full(uchar  bPercent)
 {
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
-    QueryCloseW();
-    QueryTimeW();
+    QueryTimeN31();
 
-    if (InputW() == SER_GOODCHECK) break;
+    if (InputN31() == SER_GOODCHECK) break;
     if (fKey == true) return GetTime2Error();
   }
 
   if (r == bMINORREPEATS) return GetTime2Error();
   ShowPercent(bPercent);
 
-  QueryCloseW();
-
-  return GetTime2(ReadTimeW(), true);
+  return GetTime2(ReadTimeN31(), true);
 }
 
-
+/*
 double2 QueryKtransW_Full(uchar  bPercent)
 {
   uchar r;
@@ -445,19 +441,19 @@ time2   ReadTimeCanN31(void)
   Clear();
   if (QueryOpenN31_Full(25) == 0) GetTime2Error();
 
-//  time2 ti2 = QueryTimeW_Full(50);
-//  if (ti2.fValid == false) return GetTime2Error();
-//
-//
-//  tiChannelC = ti2.tiValue;
-//
-//  uchar i;
-//  for (i=0; i<MAX_LINE_W; i++)
-//  {
-//    mpboChannelsA[i] = true;
-//  }
+  time2 ti2 = QueryTimeN31_Full(50);
+  if (ti2.fValid == false) return GetTime2Error();
 
-  return GetTime2Error(); //GetTime2(ti2.tiValue, true);
+
+  tiChannelC = ti2.tiValue;
+
+  uchar i;
+  for (i=0; i<MAX_LINE_N31; i++)
+  {
+    mpboChannelsA[i] = true;
+  }
+
+  return GetTime2(ti2.tiValue, true);
 }
 
 
