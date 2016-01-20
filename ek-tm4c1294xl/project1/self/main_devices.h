@@ -323,10 +323,10 @@ typedef enum
   DEV_HEADER_G2         =  0x90C,
   DEV_POSTHEADER_G2     =  0x90D,
 
-  DEV_START_G3          =  0x940,
-  DEV_OPENCANAL_G3      =  0x941,
-  DEV_POSTOPENCANAL_G3  =  0x942,
-  DEV_ENERGY_G3         =  0x943,
+  DEV_START_N31C        =  0x940,
+  DEV_OPENCANAL_N31C    =  0x941,
+  DEV_POSTOPENCANAL_N31C=  0x942,
+  DEV_ENERGY_N31C       =  0x943,
 
 #endif
 
@@ -659,6 +659,30 @@ typedef enum
   DEV_POSTOPTION_W3     =  0x1C44,
   DEV_ENERGY_W3         =  0x1C45,
   DEV_POSTENERGY_W3     =  0x1C46,
+
+#endif
+
+#ifndef SKIP_N31
+
+  DEV_START_N31P         =  0x1D00,
+  DEV_OPENCANAL_N31P     =  0x1D01,
+  DEV_POSTOPENCANAL_N31P =  0x1D02,
+  DEV_TIME_N31P          =  0x1D03,
+  DEV_POSTTIME_N31P      =  0x1D04,
+  DEV_CONTROL_N31P       =  0x1D05,
+  DEV_POSTCONTROL_N31P   =  0x1D06,
+  DEV_POSTCORRECT_N31P   =  0x1D07,
+  DEV_PROFILE_N31P       =  0x1D08,
+  DEV_POSTPROFILE_N31P   =  0x1D09,
+  DEV_TOP_N31P           =  0x1D0A,
+  DEV_POSTTOP_N31P       =  0x1D0B,
+  DEV_HEADER_N31P        =  0x1D0C,
+  DEV_POSTHEADER_N31P    =  0x1D0D,
+
+  DEV_START_N31C         =  0x1D20,
+  DEV_OPENCANAL_N31C     =  0x1D21,
+  DEV_POSTOPENCANAL_N31C =  0x1D22,
+  DEV_ENERGY_N31C        =  0x1D23,
 
 #endif
 

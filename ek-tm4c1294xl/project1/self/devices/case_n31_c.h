@@ -1,5 +1,5 @@
 #ifndef SKIP_N31
-
+/*
     case DEV_START_G3:
       cbRepeat = bMINORREPEATS;
       QueryOpenG();
@@ -52,5 +52,5 @@
         }
       }
       break;
-
+*/
 #endif
