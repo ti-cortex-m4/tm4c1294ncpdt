@@ -15,7 +15,7 @@ AUTOMATIC_N31.C
 #include "../sensors/unpack_n31.h"
 #include "../digitals/wait_answer.h"
 #include "device_n31.h"
-//#include "automatic1.h"
+#include "automatic1.h"
 #include "automatic_n31.h"
 
 
@@ -163,6 +163,8 @@ uchar   i;
 
 bool    QueryOpenN31_Full(uchar  bPercent)
 {
+  Clear();
+
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
@@ -238,42 +240,58 @@ double2 QueryKtransW_Full(uchar  bPercent)
 
   return GetDouble2(dbKtrans0*dbKtrans1, true);
 }
+*/
 
-
-bool    AutomaticW(void)
+bool    ReadFactorsN31_Full(void)
 {
-  Clear();
+  if (QueryOpenN31_Full(25) == false) return false;
 
-  double2 db2 = QueryKtransW_Full(25);
-  if (db2.fValid == false) return false;
-  double dbTrans = db2.dbValue;
-
-  SetPulseTrans(2000, dbTrans);
-
-
-  Clear();
 
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
-    QueryCloseW();
-    QueryTypeW();
+    DelayOff();
+    InitPushCod();
 
-    if (InputW() == SER_GOODCHECK) break;
+    PushChar(0x7E); // чтение данных по идентификатору
+    PushChar(0x03);
+    PushChar(0x06);
+
+    PushCharCod(0x03); // коэффициенты трансформации
+    PushCharCod(0x00);
+    PushCharCod(0x00);
+
+    QueryN31(3+25+1, 3+3+1);
+
+    if (InputN31() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
   if (r == bMINORREPEATS) return false;
-  ReadTypeW();
-
-  QueryCloseW();
+  ShowPercent(50);
 
 
-  Delay(1000);
+  InitPop(3+4+4+1);
+
+  double dbTransU = PopDoubleN31();
+  double dbTransI = PopDoubleN31();
+
+  dbKtrans = dbTransU*dbTransI;
+  dbKpulse = 10000;
 
   return true;
 }
-*/
+
+bool    AutomaticN31(void)
+{
+  if (ReadFactorsN31_Full() == false) return false;
+  ShowPercent(100);
+
+  SetPulseTrans(dbKpulse, dbKtrans);
+
+  return true;
+}
+
 
 
 bool    QueryEngAbsN31_Full(uchar  bPercent)
@@ -431,8 +449,6 @@ uchar   i;
 */
 time2   ReadTimeCanN31(void)
 {
-  Clear();
-
   if (QueryOpenN31_Full(25) == 0) GetTime2Error();
 
   time2 ti2 = QueryTimeN31_Full(50);
@@ -454,8 +470,6 @@ time2   ReadTimeCanN31(void)
 
 double2 ReadCntCurrN31(void)
 {
-  Clear();
-
   if (QueryOpenN31_Full(25) == 0) GetDouble2Error();
 
   if (QueryEngAbsN31_Full(50) == 0) return GetDouble2Error();

@@ -17,8 +17,8 @@ void    QueryN31(uint  cwIn, uchar  cbOut);
 //bool    ChecksumW(void);
 serial  InputN31(void);
 
-//bool    AutomaticW(void);
-//
+bool    AutomaticN31(void);
+
 //bool    QueryEngAbsW_Full(uchar  bPercent);
 //bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent);
 //bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent);
