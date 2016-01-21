@@ -139,27 +139,6 @@ serial  InputN31(void)
   return mpSerial[ibPort];
 }
 
-/*
-bit     OpenDeviceG(void)
-{
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    QueryOpenG();
-
-    if (CodInput() == SER_GOODCHECK) break;
-    if (fKey == 1) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-
-
-  if (ReadOpenG() == 0) return(0);
-
-  return(1);
-}
-*/
 
 bool    QueryOpenN31_Full(uchar  bPercent)
 {
@@ -200,47 +179,6 @@ time2   QueryTimeN31_Full(uchar  bPercent)
   return GetTime2(ReadTimeN31(), true);
 }
 
-/*
-double2 QueryKtransW_Full(uchar  bPercent)
-{
-  uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
-  {
-    QueryCloseW();
-    QueryKtransW(0);
-
-    if (InputW() == SER_GOODCHECK) break;
-    if (fKey == true) return GetDouble2Error();
-  }
-
-  if (r == bMINORREPEATS) return GetDouble2Error();
-  ShowPercent(bPercent+0);
-
-  InitPop(1);
-  double dbKtrans0 = PopDoubleW();
-
-
-  for (r=0; r<bMINORREPEATS; r++)
-  {
-    QueryCloseW();
-    QueryKtransW(1);
-
-    if (InputW() == SER_GOODCHECK) break;
-    if (fKey == true) return GetDouble2Error();
-  }
-
-  if (r == bMINORREPEATS) return GetDouble2Error();
-  ShowPercent(bPercent+1);
-
-  InitPop(1);
-  double dbKtrans1 = PopDoubleW();
-
-
-  QueryCloseW();
-
-  return GetDouble2(dbKtrans0*dbKtrans1, true);
-}
-*/
 
 double2 ReadTransN31_Full(void)
 {
@@ -405,38 +343,8 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
   return ST_OK;
 }
 */
-/*
-bit     ReadTimeDateG(void)
-{
-uchar   i;
-
-  Clear();
-  if (OpenDeviceG() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryTimeG();
-
-    if (CodInput() != SER_GOODCHECK)
-      continue;
-    else
-      break;
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(100);
-
-  ReadTimeAltG();
-
-
-  tiChannelC = tiAlt;
-  for (i=0; i<6; i++) mpboChannelsA[i] = boTrue;
-
-  return(1);
-}
-*/
 time2   ReadTimeCanN31(void)
 {
   if (QueryOpenN31_Full(25) == 0) GetTime2Error();
