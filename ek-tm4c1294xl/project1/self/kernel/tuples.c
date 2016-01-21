@@ -31,12 +31,12 @@ t2time  GetTuple2Time(time  ti1, time  ti2)
 }
 
 
-factors GetFactors(double  dbKtrans, double  dbKpulse)
+factors GetFactors(double  dbTrans, double  dbPulse)
 {
   factors fc;
 
-  fc.dbKtrans = dbKtrans;
-  fc.dbKpulse = dbKpulse;
+  fc.dbKtrans = dbTrans;
+  fc.dbKpulse = dbPulse;
 
   return fc;
 }

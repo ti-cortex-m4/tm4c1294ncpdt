@@ -418,15 +418,15 @@ void    QueryPasswordW(void)
 
 
 
-void    QueryKtransW(uchar  ibKtrans)
+void    QueryTransW(uchar  ibTrans)
 {
-  ASSERT(ibKtrans < 2);
+  ASSERT(ibTrans < 2);
 
   PushAddress2W();
 
   PushStringBcc("0-0:");
   PushStringBcc("96.68.");
-  PushChar1Bcc('0'+ibKtrans);
+  PushChar1Bcc('0'+ibTrans);
   PushChar1Bcc(0x03);
 
   QueryW(1000, 1);
