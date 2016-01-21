@@ -146,11 +146,11 @@ void    QueryTransN31(void)
 {
   InitPushCod();
 
-  PushChar(0x7E); // чтение данных по идентификатору
+  PushChar(0x7E);
   PushChar(0x03);
-  PushChar(0x06);
+  PushChar(0x06); // "чтение данных по идентификатору"
 
-  PushCharCod(0x03); // коэффициенты трансформации
+  PushCharCod(0x03); // "коэффициенты трансформации"
   PushCharCod(0x00);
   PushCharCod(0x00);
 
@@ -165,7 +165,7 @@ void    QueryEngAbsN31(void)
 
   PushChar(0x7E);
   PushChar(0x00);
-  PushChar(0x12);
+  PushChar(0x12); // "чтение сумарных энергий"
 
   QueryN31(3+48+1, 3+1);
 }
