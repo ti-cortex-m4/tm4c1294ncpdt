@@ -6,7 +6,7 @@ AUTOMATIC_N31.C
 
 #include "../main.h"
 #include "../console.h"
-//#include "../memory/mem_factors.h"
+#include "../memory/mem_factors.h"
 #include "../hardware/watchdog.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"

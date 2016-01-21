@@ -1,22 +1,22 @@
 #ifndef SKIP_N31
 /*
-    case DEV_START_G2:
+    case DEV_START_N31P:
       cbCorrects = 0;
 
       cbRepeat = GetMaxRepeats();
-      QueryOpenG();
-      SetCurr(DEV_OPENCANAL_G2);
+      QueryOpenN31();
+      SetCurr(DEV_OPENCANAL_N31P);
       break;
 
-    case DEV_OPENCANAL_G2:
+    case DEV_OPENCANAL_N31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadOpenG() == 0)
+        if (ReadOpenN31() == 0)
           ErrorProfile();
         else if (fCurrCtrlHou == 1)
-          MakePause(DEV_POSTOPENCANAL_G2);
+          MakePause(DEV_POSTOPENCANAL_N31P);
         else
-          MakePause(DEV_POSTCORRECT_G2);
+          MakePause(DEV_POSTCORRECT_N31P);
       }
       else
       {
@@ -26,27 +26,27 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOpenG();
-          SetCurr(DEV_OPENCANAL_G2);
+          QueryOpenN31();
+          SetCurr(DEV_OPENCANAL_N31P);
         }
       }
       break;
 
-    case DEV_POSTOPENCANAL_G2:
+    case DEV_POSTOPENCANAL_N31P:
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
 
       cbRepeat = GetMaxRepeats();
-      QueryTimeG();
-      SetCurr(DEV_TIME_G2);
+      QueryTimeN31();
+      SetCurr(DEV_TIME_N31P);
       break;
 
-    case DEV_TIME_G2:
+    case DEV_TIME_N31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltG();
-        ReadTimeDigG();
-        MakePause(DEV_POSTTIME_G2);
+        ReadTimeAltN31();
+        ReadTimeDigN31();
+        MakePause(DEV_POSTTIME_N31P);
       }
       else
       {
@@ -56,14 +56,14 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTimeG();
-          SetCurr(DEV_TIME_G2);
+          QueryTimeN31();
+          SetCurr(DEV_TIME_N31P);
         }
       }
       break;
 
 
-    case DEV_POSTTIME_G2:
+    case DEV_POSTTIME_N31P:
       wBuffD  = GetDayIndex();              // количество дней с начала года ведомого счётчика
       dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
 
@@ -79,55 +79,55 @@
           ShowDeltaPos();
 
         if (dwBuffC < bMINORCORRECT_G)                                          // без коррекции
-        { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_G2); }
+        { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_N31P); }
         else if (GetHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))           // простая коррекция
-        { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_G2);  }
+        { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_N31P);  }
         else
         { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
       }
       break;
 
-    case DEV_CONTROL_G2:
+    case DEV_CONTROL_N31P:
       if (++cbCorrects > bMINORREPEATS)
-        MakePause(DEV_POSTCORRECT_G2);
+        MakePause(DEV_POSTCORRECT_N31P);
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryControlG();
-        SetCurr(DEV_POSTCONTROL_G2);
+        QueryControlN31();
+        SetCurr(DEV_POSTCONTROL_N31P);
       }
       break;
 
-    case DEV_POSTCONTROL_G2:
+    case DEV_POSTCONTROL_N31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPENCANAL_G2);
+        MakePause(DEV_POSTOPENCANAL_N31P);
       else
       {
         if (cbRepeat == 0)
-          MakePause(DEV_POSTCORRECT_G2);   // да !
+          MakePause(DEV_POSTCORRECT_N31P);   // да !
         else
         {
           ErrorLink();
           cbRepeat--;
 
-          QueryControlG();
-          SetCurr(DEV_POSTCONTROL_G2);
+          QueryControlN31();
+          SetCurr(DEV_POSTCONTROL_N31P);
         }
       }
       break;
 
 
-    case DEV_POSTCORRECT_G2:
+    case DEV_POSTCORRECT_N31P:
       Clear();
 
       cbRepeat = GetMaxRepeats();
-      QueryTopG();
-      SetCurr(DEV_TOP_G2);
+      QueryTopN31();
+      SetCurr(DEV_TOP_N31P);
       break;
 
-    case DEV_TOP_G2:
+    case DEV_TOP_N31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTTOP_G2);
+        MakePause(DEV_POSTTOP_N31P);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -136,25 +136,25 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTopG();
-          SetCurr(DEV_TOP_G2);
+          QueryTopN31();
+          SetCurr(DEV_TOP_N31P);
         }
       }
       break;
 
-    case DEV_POSTTOP_G2:
-      if (ReadTopG() == 0) DoneProfile();
+    case DEV_POSTTOP_N31P:
+      if (ReadTopN31() == 0) DoneProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryHeaderG();
-        SetCurr(DEV_HEADER_G2);
+        QueryHeaderN31();
+        SetCurr(DEV_HEADER_N31P);
       }
       break;
 
-    case DEV_HEADER_G2:
+    case DEV_HEADER_N31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTHEADER_G2);
+        MakePause(DEV_POSTHEADER_N31P);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -163,22 +163,22 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderG();
-          SetCurr(DEV_HEADER_G2);
+          QueryHeaderN31();
+          SetCurr(DEV_HEADER_N31P);
         }
       }
       break;
 
-    case DEV_POSTHEADER_G2:
-      if (ReadHeaderG() == 0)
+    case DEV_POSTHEADER_N31P:
+      if (ReadHeaderN31() == 0)
         DoneProfile();
-      else if (DecIndexG() == 0)
+      else if (DecIndexN31() == 0)
         DoneProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryHeaderG();
-        SetCurr(DEV_HEADER_G2);
+        QueryHeaderN31();
+        SetCurr(DEV_HEADER_N31P);
       }
       break;
 */
