@@ -22,8 +22,16 @@ typedef struct
 } t2time;
 
 
-t2uint  GetTuple2Int(uint  w1,  uint  w2);
-t2time  GetTuple2Time(time  ti1,  time  ti2);
+typedef struct
+{
+  double        dbKtrans;
+  double        dbKpulse;
+} factors;
+
+
+t2uint  GetTuple2Int(uint  w1, uint  w2);
+t2time  GetTuple2Time(time  ti1, time  ti2);
+factors GetFactors(double  dbKtrans, double  dbKpulse);
 
 
 #endif

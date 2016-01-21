@@ -9,7 +9,7 @@ TUPLES,C
 
 
 
-t2uint  GetTuple2Int(uint  w1,  uint  w2)
+t2uint  GetTuple2Int(uint  w1, uint  w2)
 {
   t2uint tp;
 
@@ -20,7 +20,7 @@ t2uint  GetTuple2Int(uint  w1,  uint  w2)
 }
 
 
-t2time  GetTuple2Time(time  ti1,  time  ti2)
+t2time  GetTuple2Time(time  ti1, time  ti2)
 {
   t2time tp;
 
@@ -28,4 +28,15 @@ t2time  GetTuple2Time(time  ti1,  time  ti2)
   tp.ti2 = ti2;
 
   return tp;
+}
+
+
+factors GetFactors(double  dbKtrans, double  dbKpulse)
+{
+  factors fc;
+
+  fc.dbKtrans = dbKtrans;
+  fc.dbKpulse = dbKpulse;
+
+  return fc;
 }
