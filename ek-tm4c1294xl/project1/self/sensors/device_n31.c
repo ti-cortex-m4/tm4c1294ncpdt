@@ -6,8 +6,8 @@ DEVICE_N31.C
 
 #include "../main.h"
 #include "../memory/mem_digitals.h"
-//#include "../memory/mem_current.h"
-//#include "../memory/mem_factors.h"
+#include "../memory/mem_current.h"
+#include "../memory/mem_factors.h"
 //#include "../memory/mem_realtime.h"
 //#include "../memory/mem_energy_spec.h"
 //#include "../memory/mem_profile.h"
@@ -19,7 +19,7 @@ DEVICE_N31.C
 //#include "../keyboard/time/key_timedate.h"
 //#include "../time/timedate.h"
 #include "../time/delay.h"
-//#include "../devices/devices.h"
+#include "../devices/devices.h"
 //#include "../devices/devices_time.h"
 #include "../digitals/current/current_run.h"
 //#include "../digitals/limits.h"
@@ -170,16 +170,15 @@ void    ReadEngN31(void)
 
 void    ReadCurrentN31(void)
 {
-//uchar   i;
-//
-//  ReadEnergyG();
-//  reBuffB = mprePulseHou[ibDig];
-//
-//  for (i=0; i<6; i++)
-//  {
-//    dwBuffC = *PGetCanReal(&mpreChannelsB, i) * reBuffB;
-//    SetCanLong(mpdwBaseDig, i);
-//  }
+  ReadEngN31();
+
+  double dbPulse = mpdbPulseMnt[ibDig];
+
+  uchar i;
+  for (i=0; i<MAX_LINE_N31; i++)
+  {
+    mpdwBaseDig[i] = mpdbChannelsC[i] * dbPulse;
+  }
 
   MakeCurrent();
 }
