@@ -465,12 +465,14 @@ double2 ReadCntCurrN31(void)
   if (QueryEngAbsN31_Full(50) == 0) return GetDouble2Error();
 
 
-//  uchar i;
-//  for (i=0; i<MAX_LINE_N31; i++)
-//  {
-//    mpdbChannelsC[i] *= dbTrans;
-//    mpboChannelsA[i] = true;
-//  }
+  double dbTrans = mpdbTransCnt[ibDig];
+
+  uchar i;
+  for (i=0; i<MAX_LINE_N31; i++)
+  {
+    mpdbChannelsC[i] *= dbTrans;
+    mpboChannelsA[i] = true;
+  }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
