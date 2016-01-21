@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICES_PAUSE,C
 
-TODO / *else* /
+
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -10,6 +10,7 @@ TODO / *else* /
 #include "../serial/ports.h"
 #include "../serial/monitor.h"
 #include "../sensors/unpack_w.h"
+#include "../sensors/unpack_n31.h"
 #include "../digitals/digitals_status.h"
 #include "devices_pause.h"
 
@@ -17,16 +18,16 @@ TODO / *else* /
 
 void    DevicesPause(void)
 {
-#ifndef SKIP_G
-    if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10))
+#ifndef SKIP_N31
+    if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10) ||
+        (diCurr.bDevice == 31))
     {
       if (mpSerial[ibPort] == SER_BADLINK)
       {
-        MakeCRC8InBuff( 1, IndexInBuff()-1 );
-
-        if (bCRC == 0)
+        uchar bCrc = MakeCrcN31InBuff(1, IndexInBuff()-1);
+        if (bCrc == 0)
         {
-          DecompressG();
+          UnpackN31();
           mpSerial[ibPort] = SER_GOODCHECK;
         }
         else
@@ -36,8 +37,8 @@ void    DevicesPause(void)
 #endif
 
 #ifndef SKIP_K
-    /*else*/ if ((diCurr.bDevice == 13) || (diCurr.bDevice == 14) ||
-             (diCurr.bDevice == 16) || (diCurr.bDevice == 17))
+    if ((diCurr.bDevice == 13) || (diCurr.bDevice == 14) ||
+        (diCurr.bDevice == 16) || (diCurr.bDevice == 17))
     {
       if (mpSerial[ibPort] == SER_BADLINK)
       {

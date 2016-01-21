@@ -124,7 +124,7 @@ serial  InputN31(void)
       uchar bCrc = MakeCrcN31InBuff(1, IndexInBuff()-1);
       if (bCrc == 0)
       {
-    	  UnpackN31();
+        UnpackN31();
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else
