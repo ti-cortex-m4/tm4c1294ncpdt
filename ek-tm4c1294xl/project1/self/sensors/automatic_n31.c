@@ -269,6 +269,7 @@ double2 ReadTransN31_Full(void)
   return GetDouble2(dbTransU*dbTransI, true);
 }
 
+
 bool    AutomaticN31(void)
 {
   double2 db2 = ReadTransN31_Full();
@@ -276,7 +277,7 @@ bool    AutomaticN31(void)
 
   ShowPercent(100);
 
-  SetFactors(GetFactors(db2.dbValue, 10000));
+  SetupFactors(GetFactors(db2.dbValue, 10000));
 
   return true;
 }
