@@ -24,14 +24,14 @@ typedef struct
 
 typedef struct
 {
-  double        dbKtrans;
-  double        dbKpulse;
+  double        dbTrans;
+  double        dbPulse;
 } factors;
 
 
 t2uint  GetTuple2Int(uint  w1, uint  w2);
 t2time  GetTuple2Time(time  ti1, time  ti2);
-factors GetFactors(double  dbKtrans, double  dbKpulse);
+factors GetFactors(double  dbTrans, double  dbPulse);
 
 
 #endif

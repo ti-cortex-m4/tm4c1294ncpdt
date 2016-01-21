@@ -287,7 +287,7 @@ bool    AutomaticN31(void)
   if (ReadFactorsN31_Full() == false) return false;
   ShowPercent(100);
 
-  SetPulseTrans(dbKpulse, dbKtrans);
+  SetAllFactors(dbKpulse, dbKtrans);
 
   return true;
 }

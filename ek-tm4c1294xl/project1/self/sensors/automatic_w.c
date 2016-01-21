@@ -128,7 +128,7 @@ double2 QueryKtransW_Full(uchar  bPercent)
   for (r=0; r<bMINORREPEATS; r++)
   {
     QueryCloseW();
-    QueryKtransW(0);
+    QueryTransW(0);
 
     if (InputW() == SER_GOODCHECK) break;
     if (fKey == true) return GetDouble2Error();
@@ -144,7 +144,7 @@ double2 QueryKtransW_Full(uchar  bPercent)
   for (r=0; r<bMINORREPEATS; r++)
   {
     QueryCloseW();
-    QueryKtransW(1);
+    QueryTransW(1);
 
     if (InputW() == SER_GOODCHECK) break;
     if (fKey == true) return GetDouble2Error();
@@ -171,7 +171,7 @@ bool    AutomaticW(void)
   if (db2.fValid == false) return false;
   double dbTrans = db2.dbValue;
 
-  SetPulseTrans(2000, dbTrans);
+  SetAllFactors(2000, dbTrans);
 
 
   Clear();
