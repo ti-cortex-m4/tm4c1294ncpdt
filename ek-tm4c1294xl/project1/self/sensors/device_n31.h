@@ -8,6 +8,8 @@ DEVICE_N31.H
 
 
 
+double  PopDoubleN31(void);
+
 void    QueryOpenN31(void);
 bool    ReadOpenN31(void);
 
