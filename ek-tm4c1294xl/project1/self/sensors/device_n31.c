@@ -17,7 +17,7 @@ DEVICE_N31.C
 //#include "../serial/monitor.h"
 #include "../display/display.h"
 //#include "../keyboard/time/key_timedate.h"
-//#include "../time/timedate.h"
+#include "../time/timedate.h"
 #include "../time/delay.h"
 #include "../devices/devices.h"
 //#include "../devices/devices_time.h"
@@ -138,6 +138,30 @@ time    ReadTimeN31(void)
   ti.bSecond = PopChar();
 
   return ti;
+}
+
+
+void    QueryControlN31(time  ti)
+{
+  InitPushCod();
+
+  PushChar(0x7E);
+  PushChar(0x08);
+  PushChar(0x08); // "запись времени и даты в счетчик"
+
+  PushCharCod(GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay)); // "день недели (0..6, 0-понедельник)"
+
+  PushCharCod(ti.bDay);
+  PushCharCod(ti.bMonth);
+
+  PushCharCod((2000 + ti.bYear) % 0x100);
+  PushCharCod((2000 + ti.bYear) / 0x100);
+
+  PushCharCod(ti.bHour);
+  PushCharCod(ti.bMinute);
+  PushCharCod(ti.bSecond);
+
+  QueryN31(3+1, 3+8+1);
 }
 
 
