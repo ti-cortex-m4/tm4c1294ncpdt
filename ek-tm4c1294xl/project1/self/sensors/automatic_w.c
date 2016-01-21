@@ -122,7 +122,7 @@ time2   QueryTimeW_Full(uchar  bPercent)
 }
 
 
-double2 QueryKtransW_Full(uchar  bPercent)
+double2 QueryTransW_Full(uchar  bPercent)
 {
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
@@ -167,7 +167,7 @@ bool    AutomaticW(void)
 {
   Clear();
 
-  double2 db2 = QueryKtransW_Full(25);
+  double2 db2 = QueryTransW_Full(25);
   if (db2.fValid == false) return false;
   double dbTrans = db2.dbValue;
 
@@ -353,7 +353,7 @@ double2 ReadCntCurrW(void)
 {
   Clear();
 
-  double2 db2 = QueryKtransW_Full(25);
+  double2 db2 = QueryTransW_Full(25);
   if (db2.fValid == false) return GetDouble2Error();
   double dbTrans = db2.dbValue;
 
@@ -376,7 +376,7 @@ double2 ReadCntMonCanW(uchar  ibMon)
 {
   Clear();
 
-  double2 db2 = QueryKtransW_Full(25);
+  double2 db2 = QueryTransW_Full(25);
   if (db2.fValid == false) return GetDouble2Error();
   double dbTrans = db2.dbValue;
 
@@ -411,7 +411,7 @@ status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
   Clear();
 
-  double2 db2 = QueryKtransW_Full(25);
+  double2 db2 = QueryTransW_Full(25);
   if (db2.fValid == false) return ST_BADDIGITAL;
   double dbTrans = db2.dbValue;
 
