@@ -35,8 +35,8 @@ factors GetFactors(double  dbTrans, double  dbPulse)
 {
   factors fc;
 
-  fc.dbKtrans = dbTrans;
-  fc.dbKpulse = dbPulse;
+  fc.dbTrans = dbTrans;
+  fc.dbPulse = dbPulse;
 
   return fc;
 }

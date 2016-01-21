@@ -242,32 +242,22 @@ double2 QueryKtransW_Full(uchar  bPercent)
 }
 */
 
-bool    ReadFactorsN31_Full(void)
+double2 ReadTransN31_Full(void)
 {
-  if (QueryOpenN31_Full(25) == false) return false;
+  if (QueryOpenN31_Full(25) == false) return GetDouble2Error();
 
 
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
-    InitPushCod();
-
-    PushChar(0x7E); // чтение данных по идентификатору
-    PushChar(0x03);
-    PushChar(0x06);
-
-    PushCharCod(0x03); // коэффициенты трансформации
-    PushCharCod(0x00);
-    PushCharCod(0x00);
-
-    QueryN31(3+25+1, 3+3+1);
+    QueryTransN31();
 
     if (InputN31() == SER_GOODCHECK) break;
-    if (fKey == true) return false;
+    if (fKey == true) return GetDouble2Error();
   }
 
-  if (r == bMINORREPEATS) return false;
+  if (r == bMINORREPEATS) return GetDouble2Error();
   ShowPercent(50);
 
 
@@ -276,18 +266,17 @@ bool    ReadFactorsN31_Full(void)
   double dbTransU = PopDoubleN31();
   double dbTransI = PopDoubleN31();
 
-  dbKtrans = dbTransU*dbTransI;
-  dbKpulse = 10000;
-
-  return true;
+  return GetDouble2(dbTransU*dbTransI, true);
 }
 
 bool    AutomaticN31(void)
 {
-  if (ReadFactorsN31_Full() == false) return false;
+  double2 db2 = ReadTransN31_Full();
+  if (db2.fValid == false) return false;
+
   ShowPercent(100);
 
-  SetAllFactors(dbKpulse, dbKtrans);
+  SetFactors(GetFactors(db2.dbValue, 10000));
 
   return true;
 }

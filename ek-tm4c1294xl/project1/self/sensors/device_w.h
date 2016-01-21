@@ -40,7 +40,7 @@ void    QuerySetCorrectW(sint  wSecond);
 void    QueryOptionW(void);
 void    QueryPasswordW(void);
 
-void    QueryKtransW(uchar  ibKtrans);
+void    QueryTransW(uchar  ibTrans);
 
 void    QueryEngAbsW_Current(uchar  ibLine);
 void    QueryEngAbsW(uchar  ibLine);
