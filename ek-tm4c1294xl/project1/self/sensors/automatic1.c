@@ -443,13 +443,13 @@ void    SetAllFactors(double  dbPulse, double  dbTrans)
 }
 
 
-void    SetFactors(factors  fc)
+void    SetupFactors(factors  fc)
 {
-  mpdbPulseHou[ibDig] = fc.dbPulse;
-  mpdbPulseMnt[ibDig] = fc.dbPulse;
-
   mpdbTransEng[ibDig] = fc.dbTrans;
   mpdbTransCnt[ibDig] = fc.dbTrans;
+
+  mpdbPulseHou[ibDig] = fc.dbPulse;
+  mpdbPulseMnt[ibDig] = fc.dbPulse;
 }
 
 

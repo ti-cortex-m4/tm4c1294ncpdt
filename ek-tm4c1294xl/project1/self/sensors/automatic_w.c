@@ -138,7 +138,7 @@ double2 QueryTransW_Full(uchar  bPercent)
   ShowPercent(bPercent+0);
 
   InitPop(1);
-  double dbKtrans0 = PopDoubleW();
+  double dbTransI = PopDoubleW();
 
 
   for (r=0; r<bMINORREPEATS; r++)
@@ -154,12 +154,12 @@ double2 QueryTransW_Full(uchar  bPercent)
   ShowPercent(bPercent+1);
 
   InitPop(1);
-  double dbKtrans1 = PopDoubleW();
+  double dbTransU = PopDoubleW();
 
 
   QueryCloseW();
 
-  return GetDouble2(dbKtrans0*dbKtrans1, true);
+  return GetDouble2(dbTransI*dbTransU, true);
 }
 
 
@@ -171,7 +171,7 @@ bool    AutomaticW(void)
   if (db2.fValid == false) return false;
   double dbTrans = db2.dbValue;
 
-  SetAllFactors(2000, dbTrans);
+  SetupFactors(GetFactors(dbTrans, 2000));
 
 
   Clear();
