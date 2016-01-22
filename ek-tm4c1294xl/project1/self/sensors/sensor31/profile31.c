@@ -169,7 +169,7 @@ bool    ReadHeaderN31(void)
   if ((ti.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
 
 
-  if (SearchDefHouIndex() == 0) return(++iwMajor31 < 48);
+  if (SearchDefHouIndex(ti) == 0) return(++iwMajor31 < 48);
   iwMajor31 = 0;
 //
 //
