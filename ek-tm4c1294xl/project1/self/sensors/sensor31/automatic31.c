@@ -1,23 +1,22 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC_N31.C
+AUTOMATIC31.C
 
 
 ------------------------------------------------------------------------------*/
 
-#include "automatic31.h"
-
-#include "../main.h"
-#include "../console.h"
-#include "../memory/mem_factors.h"
-#include "../hardware/watchdog.h"
-#include "../serial/ports.h"
-#include "../serial/ports_devices.h"
-#include "../serial/monitor.h"
-#include "../devices/devices.h"
-#include "../sensors/unpack_n31.h"
-#include "../digitals/wait_answer.h"
-#include "automatic1.h"
+#include "../../main.h"
+#include "../../console.h"
+#include "../../memory/mem_factors.h"
+#include "../../hardware/watchdog.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
+#include "../../serial/monitor.h"
+#include "../../devices/devices.h"
+#include "../../sensors/sensor31/unpack31.h"
+#include "../../digitals/wait_answer.h"
+#include "../automatic1.h"
 #include "device31.h"
+#include "automatic31.h"
 
 
 

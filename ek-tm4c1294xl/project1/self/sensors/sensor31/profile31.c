@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
-PROFILE_N31.C
+PROFILE31.C
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
+#include "../../main.h"
 //#include "../memory/mem_digitals.h"
 //#include "../memory/mem_current.h"
 //#include "../memory/mem_factors.h"
