@@ -4869,7 +4869,7 @@ void    RunDevices(void)
     case DEV_POSTTIME_N31P:
       {
         uint iwDay1 = GetDayIndexMD(tiProfileN31.bMonth, tiProfileN31.bDay);
-        ulong dwSecond1 = GetSecondIndex(tiDig);
+        ulong dwSecond1 = GetSecondIndex(tiProfileN31);
 
         uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
