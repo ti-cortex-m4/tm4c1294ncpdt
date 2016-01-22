@@ -33,7 +33,7 @@ PROFILE31.C
 
 #ifndef SKIP_N31
 
-time                    tiProfileN31;
+time                    tiProfile31;
 
 static uint             wBaseCurr31, wBaseLast31, wProfile31;
 
@@ -41,7 +41,7 @@ static uint             iwMajor31;
 
 
 
-time    ReadPackTimeN31(void)
+static time ReadPackTimeN31(void)
 {
   InitPop(3);
 
@@ -69,14 +69,14 @@ bool    DecIndexN31(void)
 {
   if (wBaseLast31 == wBaseCurr31)
   {
-    if (wProfile31 != 0) wProfile31--; else return(0);
+    if (wProfile31 != 0) wProfile31--; else return false;
   }
   else
   {
     if (wProfile31 != 0) wProfile31--; else wProfile31 = wBaseLast31-1;
   }
 
-  return(1);
+  return true;
 }
 
 

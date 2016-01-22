@@ -4848,7 +4848,7 @@ void    RunDevices(void)
     case DEV_TIME_N31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiProfileN31 = ReadTimeN31();
+        tiProfile31 = ReadTimeN31();
         MakePause(DEV_POSTTIME_N31P);
       }
       else
@@ -4868,8 +4868,8 @@ void    RunDevices(void)
 
     case DEV_POSTTIME_N31P:
       {
-        uint iwDay1 = GetDayIndexMD(tiProfileN31.bMonth, tiProfileN31.bDay);
-        ulong dwSecond1 = GetSecondIndex(tiProfileN31);
+        uint iwDay1 = GetDayIndexMD(tiProfile31.bMonth, tiProfile31.bDay);
+        ulong dwSecond1 = GetSecondIndex(tiProfile31);
 
         uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
@@ -4882,7 +4882,7 @@ void    RunDevices(void)
 
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
           { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_N31P); }
-          else if (GetCurrHouIndex() == (tiProfileN31.bHour*2 + tiProfileN31.bMinute/30))       // простая коррекция
+          else if (GetCurrHouIndex() == (tiProfile31.bHour*2 + tiProfile31.bMinute/30))       // простая коррекция
           { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_N31P);  }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна

@@ -4,7 +4,7 @@ PROFILE31.H
 
 ------------------------------------------------------------------------------*/
 
-extern  time                    tiProfileN31;
+extern  time                    tiProfile31;
 
 
 
