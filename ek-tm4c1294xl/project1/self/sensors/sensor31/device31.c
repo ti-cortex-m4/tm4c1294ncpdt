@@ -126,7 +126,7 @@ time    ReadTimeN31(void)
 {
   time ti;
 
-  InitPop(4);
+  InitPop(3+1);
 
   ti.bDay    = PopChar();
   ti.bMonth  = PopChar();
