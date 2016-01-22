@@ -41,7 +41,7 @@ AUTOMATIC2!C
 #include "automatic_u.h"
 #include "automatic_v.h"
 #include "automatic_w.h"
-#include "automatic_n31.h"
+#include "sensor31/automatic31.h"
 
 
 
