@@ -1,5 +1,5 @@
 #ifndef SKIP_N31
-/*
+
     case DEV_START_N31P:
       cbCorrects = 0;
 
@@ -13,7 +13,7 @@
       {
         if (ReadOpenN31() == 0)
           ErrorProfile();
-        else if (fCurrCtrlHou == 1)
+        else if (fCurrCtrl == true)
           MakePause(DEV_POSTOPENCANAL_N31P);
         else
           MakePause(DEV_POSTCORRECT_N31P);
@@ -44,8 +44,7 @@
     case DEV_TIME_N31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        ReadTimeAltN31();
-        ReadTimeDigN31();
+        tiProfileN31 = ReadTimeN31();
         MakePause(DEV_POSTTIME_N31P);
       }
       else
@@ -62,7 +61,7 @@
       }
       break;
 
-
+/*
     case DEV_POSTTIME_N31P:
       wBuffD  = GetDayIndex();              // количество дней с начала года ведомого счётчика
       dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
