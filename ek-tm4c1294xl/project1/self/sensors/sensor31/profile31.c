@@ -17,10 +17,10 @@ PROFILE31.C
 #include "../../serial/monitor.h"
 #include "../../display/display.h"
 #include "../../keyboard/time/key_timedate.h"
-////#include "../time/timedate.h"
+#include "../../time/calendar.h"
 #include "../../time/delay.h"
 #include "../../devices/devices.h"
-////#include "../devices/devices_time.h"
+#include "../../devices/devices_time.h"
 //#include "../digitals/current/current_run.h"
 ////#include "../digitals/limits.h"
 //#include "../digitals/digitals_messages.h"
@@ -105,6 +105,9 @@ bool    ReadTopN31(void)
   wBaseCurr31 = PopIntLtl(); // индекс текущей записи
   wBaseLast31 = PopIntLtl(); // количество записей
 
+  MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr31);
+  MonitorString("\n\n number "); MonitorIntDec(wBaseLast31);
+
   wOffsCurr31 = wBaseCurr31;
 
   iwMajor31 = 0; // количество ошибок чтения
@@ -117,6 +120,8 @@ bool    ReadTopN31(void)
 
 void    QueryHeaderN31(void)
 {
+  MonitorString("\n\n index "); MonitorIntDec(wOffsCurr31);
+
   InitPushCod();
 
   PushChar(0x7E);
@@ -153,7 +158,10 @@ bool    ReadHeaderN31(void)
   time ti = ReadPackTimeN31();
 
   MonitorString("\n time "); MonitorTime(ti);
-  ti = HouIndexToDate(DateToHouIndex(ti) - 1); // время записи должно соответсвовать началу получасового блока
+
+  ulong dw = DateToHouIndex(ti);
+  dw--;
+  ti = HouIndexToDate(dw); // время записи должно соответсвовать началу получасового блока
   MonitorTime(ti);
 
   sprintf(szLo," %02u    %02u.%02u.%02u", ti.bHour, ti.bDay,ti.bMonth,ti.bYear);
@@ -161,8 +169,8 @@ bool    ReadHeaderN31(void)
   if ((ti.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
 
 
-//  if (SearchDefHouIndex() == 0) return(++iwMajor31 < 48);
-//  iwMajor31 = 0;
+  if (SearchDefHouIndex() == 0) return(++iwMajor31 < 48);
+  iwMajor31 = 0;
 //
 //
 //  iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
