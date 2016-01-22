@@ -10,7 +10,7 @@ DEVICES_PAUSE,C
 #include "../serial/ports.h"
 #include "../serial/monitor.h"
 #include "../sensors/unpack_w.h"
-#include "../sensors/unpack_n31.h"
+#include "../sensors/sensor31/unpack31.h"
 #include "../digitals/digitals_status.h"
 #include "devices_pause.h"
 
