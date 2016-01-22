@@ -13,7 +13,7 @@ KEY_AUTOMATIC!C
 #include "../../serial/modems.h"
 #include "../../sensors/automatic1.h"
 #include "../../sensors/automatic_w.h"
-#include "../../sensors/automatic_n31.h"
+#include "../../sensors/sensor31/automatic31.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../digitals/digitals_display.h"
