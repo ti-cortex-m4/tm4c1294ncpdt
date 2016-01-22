@@ -7,14 +7,14 @@ PROFILE31.C
 #include "../../main.h"
 //#include "../memory/mem_digitals.h"
 //#include "../memory/mem_current.h"
-//#include "../memory/mem_factors.h"
+#include "../../memory/mem_factors.h"
 ////#include "../memory/mem_realtime.h"
-////#include "../memory/mem_energy_spec.h"
-////#include "../memory/mem_profile.h"
+#include "../../memory/mem_energy_spec.h"
+#include "../../memory/mem_profile.h"
 ////#include "../memory/mem_limits.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
-//#include "../../serial/monitor.h"
+#include "../../serial/monitor.h"
 #include "../../display/display.h"
 #include "../../keyboard/time/key_timedate.h"
 ////#include "../time/timedate.h"
@@ -35,7 +35,9 @@ PROFILE31.C
 
 time                    tiProfileN31;
 
-static uint             wBaseCurr, wBaseLast, wOffsCurr;
+static uint             wBaseCurr31, wBaseLast31, wOffsCurr31;
+
+static uint             iwMajor31;
 
 
 
@@ -65,13 +67,13 @@ time    ReadPackTimeN31(void)
 // переход на предыдущую запись
 bool    DecIndexN31(void)
 {
-  if (wBaseLast == wBaseCurr)
+  if (wBaseLast31 == wBaseCurr31)
   {
-    if (wOffsCurr != 0) wOffsCurr--; else return(0);
+    if (wOffsCurr31 != 0) wOffsCurr31--; else return(0);
   }
   else
   {
-    if (wOffsCurr != 0) wOffsCurr--; else wOffsCurr = wBaseLast-1;
+    if (wOffsCurr31 != 0) wOffsCurr31--; else wOffsCurr31 = wBaseLast31-1;
   }
 
   return(1);
@@ -100,13 +102,16 @@ bool    ReadTopN31(void)
 {
   InitPop(3+2);
 
-  wBaseCurr = PopIntLtl(); // индекс текущей записи
-  wBaseLast = PopIntLtl(); // количество записей
-  wOffsCurr = wBaseCurr;
+  wBaseCurr31 = PopIntLtl(); // индекс текущей записи
+  wBaseLast31 = PopIntLtl(); // количество записей
 
-  Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast,wBaseCurr); DelayInf();
+  wOffsCurr31 = wBaseCurr31;
 
-  return( DecIndexN31() );
+  iwMajor31 = 0; // количество ошибок чтени€
+
+  Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast31,wBaseCurr31); DelayInf();
+
+  return DecIndexN31();
 }
 
 
@@ -119,8 +124,8 @@ void    QueryHeaderN31(void)
   PushChar(0x06); // "чтение данных по идентификатору"
 
   PushCharCod(0x0E); // "график нагрузки"
-  PushCharCod(wOffsCurr / 0x100);
-  PushCharCod(wOffsCurr % 0x100);
+  PushCharCod(wOffsCurr31 / 0x100);
+  PushCharCod(wOffsCurr31 % 0x100);
 
   QueryN31(3+102+1, 3+3+1);
 }
@@ -135,27 +140,32 @@ bool    ReadHeaderN31(void)
 //    MakeCRC13InBuff(3, 100);
 //    if (wCRC != InBuff(103) + InBuff(104)*0x100)
 //    {
-//      sprintf(szLo,"   ошибки: %-4u    ",++iwMajor);
-//      return(iwMajor < 48);
+//      sprintf(szLo,"   ошибки: %-4u    ",++iwMajor31);
+//      return(iwMajor31 < 48);
 //    }
 //  }
 //
 /// *
 //  MakeCRC12InBuff(3, 24);
-//  if (wCRC != 0) { sprintf(szLo," выключено: %-4u   ",++iwMajor); return(iwMajor < 48); }
+//  if (wCRC != 0) { sprintf(szLo," выключено: %-4u   ",++iwMajor31); return(iwMajor31 < 48); }
 //* /
   InitPop(3);
   time ti = ReadPackTimeN31();
+
+  MonitorString("\n time "); MonitorTime(ti);
+  ti = HouIndexToDate(DateToHouIndex(ti) - 1); // врем€ записи должно соответсвовать началу получасового блока
+  MonitorTime(ti);
+
   sprintf(szLo," %02u    %02u.%02u.%02u", ti.bHour, ti.bDay,ti.bMonth,ti.bYear);
 
   if ((ti.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
 
 
-//  if (SearchDefHouIndex() == 0) return(++iwMajor < 48);
-//  iwMajor = 0;
+//  if (SearchDefHouIndex() == 0) return(++iwMajor31 < 48);
+//  iwMajor31 = 0;
 //
 //
-//  iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;                // врем€ записи должно соответсвовать началу получасового блока
+//  iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
 //
 //  tiAlt = tiCurr;
 //  dwBuffC = DateToHouIndex();
@@ -169,18 +179,22 @@ bool    ReadHeaderN31(void)
 
   InitPop(3+4+4*6*3);
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<6; ibCan++)
+  uchar i;
+  for (i=0; i<MAX_LINE_N31; i++)
   {
-    PopRealExtN31();
-    mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
+    float fl = PopFloatN31();
+    MonitorString("\n value "); MonitorLongDec(fl);
+
+    fl /= 1000;
+    mpdbEngFracDigCan[ibDig][i] += fl;
 
     if (ti.bMinute % 30 == 0)
     {
-      uint w = (uint)(mpreEngFracDigCan[ibDig][ibCan]*dbPulse);
-      mpwChannels[ibCan] = w;
+      uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
+      MonitorString(" "); MonitorIntDec(w);
+      mpwChannels[i] = w;
 
-      mpreEngFracDigCan[ibDig][ibCan] -= (real)w/dbPulse;
+      mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
     }
   }
 
