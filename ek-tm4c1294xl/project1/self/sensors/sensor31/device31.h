@@ -8,6 +8,7 @@ DEVICE31.H
 
 
 
+float   PopFloatN31(void);
 double  PopDoubleN31(void);
 
 void    QueryOpenN31(void);
