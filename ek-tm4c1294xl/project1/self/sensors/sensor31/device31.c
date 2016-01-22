@@ -4,6 +4,8 @@ DEVICE_N31.C
 
 ------------------------------------------------------------------------------*/
 
+#include "device31.h"
+
 #include "../main.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_current.h"
@@ -25,9 +27,7 @@ DEVICE_N31.C
 //#include "../digitals/limits.h"
 #include "../digitals/digitals_messages.h"
 //#include "../special/special.h"
-#include "automatic_n31.h"
-//#include "device_k.h"
-#include "device_n31.h"
+#include "automatic31.h"
 
 
 

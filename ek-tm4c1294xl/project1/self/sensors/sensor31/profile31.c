@@ -26,8 +26,8 @@ PROFILE_N31.C
 //#include "../digitals/digitals_messages.h"
 ////#include "../special/special.h"
 //#include "automatic_n31.h"
-#include "device_n31.h"
-#include "profile_n31.h"
+#include "device31.h"
+#include "profile31.h"
 
 
 
@@ -91,14 +91,10 @@ void    QueryTopN31(void)
 
 bool    ReadTopN31(void)
 {
-  InitPop(3);
-
-  PopChar();
-  PopChar();
+  InitPop(3+2);
 
   wBaseCurr = PopIntLtl()(); // индекс текущей записи
   wBaseLast = PopIntLtl()(); // количество записей
-
   wOffsCurr = wBaseCurr;
 
   Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast,wBaseCurr); DelayInf();
