@@ -4,6 +4,8 @@ AUTOMATIC_N31.C
 
 ------------------------------------------------------------------------------*/
 
+#include "automatic31.h"
+
 #include "../main.h"
 #include "../console.h"
 #include "../memory/mem_factors.h"
@@ -14,9 +16,8 @@ AUTOMATIC_N31.C
 #include "../devices/devices.h"
 #include "../sensors/unpack_n31.h"
 #include "../digitals/wait_answer.h"
-#include "device_n31.h"
 #include "automatic1.h"
-#include "automatic_n31.h"
+#include "device31.h"
 
 
 
