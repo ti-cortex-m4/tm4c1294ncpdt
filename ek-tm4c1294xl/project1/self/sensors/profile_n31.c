@@ -35,12 +35,13 @@ PROFILE_N31.C
 
 time                    tiProfileN31;
 
+static uint             wBaseCurr, wBaseLast, wOffsCurr;
 
 /*
 // чтение энергии дл€ счЄтчика Ёнерги€-9
-bit     ReadEnergyAllG(void)
+bit     ReadEnergyAllN31(void)
 {
-  ReadPackTimeDigG();
+  ReadPackTimeDigN31();
 
   if ((tiDig.bSecond == 0) &&
       (tiDig.bMinute == 0) &&
@@ -51,11 +52,11 @@ bit     ReadEnergyAllG(void)
 
   return(1);
 }
-
+*/
 
 
 // переход на предыдущую запись
-bit     DecIndexG(void)
+bool    DecIndexN31(void)
 {
   if (wBaseLast == wBaseCurr)
   {
@@ -71,20 +72,15 @@ bit     DecIndexG(void)
 
 
 
-// посылка запроса на чтение вершины массива дл€ счЄтчика Ёнерги€-9
-void    QueryTopG(void)
+void    QueryTopN31(void)
 {
   InitPushCod();
 
   PushChar(0x7E);
   PushChar(0x03);
-  PushChar(0x06);
+  PushChar(0x06); // "чтение данных по идентификатору"
 
-  if (ExtVersionCod())
-    PushCharCod(0x0B);
-  else
-    PushCharCod(0x0A);
-
+  PushCharCod(0x0B); // "указатели"
   PushCharCod(0x00);
   PushCharCod(0x00);
 
@@ -92,36 +88,28 @@ void    QueryTopG(void)
 }
 
 
-// чтение вершины массива дл€ счЄтчика Ёнерги€-9
-bit     ReadTopG(void)
+
+bool    ReadTopN31(void)
 {
   InitPop(3);
 
   PopChar();
   PopChar();
 
-  if (ExtVersionCod())
-  {
-    wBaseCurr = PopIntExtG();                   // индекс текущей записи
-    wBaseLast = PopIntExtG();                   // количество записей
-  }
-  else
-  {
-    wBaseCurr = PopChar()*0x100 + PopChar();    // индекс текущей записи
-    wBaseLast = PopChar()*0x100 + PopChar();    // количество записей
-  }
+  wBaseCurr = PopIntLtl()(); // индекс текущей записи
+  wBaseLast = PopIntLtl()(); // количество записей
 
   wOffsCurr = wBaseCurr;
 
-  sprintf(szLo,"  %5u:%-5u   ",wBaseLast,wBaseCurr); DelayInf();
+  Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast,wBaseCurr); DelayInf();
 
-  return( DecIndexG() );
+  return( DecIndexN31() );
 }
 
 
-
+/*
 // посылка запроса на чтение заголовка часового блока дл€ счЄтчика Ёнерги€-9
-void    QueryHeaderG(void)
+void    QueryHeaderN31(void)
 {
   InitPushCod();
 
@@ -145,7 +133,7 @@ void    QueryHeaderG(void)
 
 
 // чтение заголовка часового блока дл€ счЄтчика Ёнерги€-9
-bit     ReadHeaderG(void)
+bit     ReadHeaderN31(void)
 {
   NoShowTime(1);
 
@@ -164,7 +152,7 @@ bit     ReadHeaderG(void)
   if (wCRC != 0) { sprintf(szLo," выключено: %-4u   ",++iwMajor); return(iwMajor < 48); }
 * /
 
-  ReadPackTimeDigG();
+  ReadPackTimeDigN31();
   sprintf(szLo," %02bu    %02bu.%02bu.%02bu",
           tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 
@@ -191,9 +179,9 @@ bit     ReadHeaderG(void)
   for (ibCan=0; ibCan<6; ibCan++)
   {
     if (ExtVersionCod())
-      PopRealExtG();
+      PopRealExtN31();
     else
-      PopRealG();
+      PopRealN31();
 
     mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
 

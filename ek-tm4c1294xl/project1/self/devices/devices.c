@@ -4838,7 +4838,7 @@ void    RunDevices(void)
 
     case DEV_POSTOPENCANAL_N31P:
       Clear(); ShowLo(szRepeats);
-      sprintf(szLo+8,"%1bu",cbCorrects+1); DelayInf();
+      sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = GetMaxRepeats();
       QueryTimeN31();
@@ -4865,28 +4865,28 @@ void    RunDevices(void)
       }
       break;
 
-/*
+
     case DEV_POSTTIME_N31P:
-      wBuffD  = GetDayIndex();              // количество дней с начала года ведомого счётчика
-      dwBuffC = GetSecondIndex();           // количество секунд ведомого счётчика
-
-      tiAlt = tiCurr;                       // текущие время/дата сумматора
-
-      if (wBuffD != GetDayIndex())
-      { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
-      else
       {
-        if (dwBuffC > GetSecondIndex())                                         // необходима коррекция времени ведомого счётчика назад
-          ShowDeltaNeg();
-        else
-          ShowDeltaPos();
+        uint iwDay1 = GetDayIndexMD(tiProfileN31.bMonth, tiProfileN31.bDay);
+        ulong dwSecond1 = GetSecondIndex(tiDig);
 
-        if (dwBuffC < bMINORCORRECT_G)                                          // без коррекции
-        { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_N31P); }
-        else if (GetHouIndex() == (tiAlt.bHour*2 + tiAlt.bMinute/30))           // простая коррекция
-        { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_N31P);  }
+        uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
+        ulong dwSecond2 = GetSecondIndex(tiCurr);
+
+        if (iwDay1 != iwDay2)
+        { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
-        { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
+        {
+          ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
+
+          if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_N31P); }
+          else if (GetCurrHouIndex() == (tiProfileN31.bHour*2 + tiProfileN31.bMinute/30))       // простая коррекция
+          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_N31P);  }
+          else
+          { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
+        }
       }
       break;
 
@@ -4896,7 +4896,7 @@ void    RunDevices(void)
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryControlN31();
+        QueryControlN31(tiCurr);
         SetCurr(DEV_POSTCONTROL_N31P);
       }
       break;
@@ -4907,13 +4907,13 @@ void    RunDevices(void)
       else
       {
         if (cbRepeat == 0)
-          MakePause(DEV_POSTCORRECT_N31P);   // да !
+          MakePause(DEV_POSTCORRECT_N31P); // да !
         else
         {
           ErrorLink();
           cbRepeat--;
 
-          QueryControlN31();
+          QueryControlN31(tiCurr);
           SetCurr(DEV_POSTCONTROL_N31P);
         }
       }
@@ -4984,7 +4984,7 @@ void    RunDevices(void)
         SetCurr(DEV_HEADER_N31P);
       }
       break;
-*/
+
 #endif
 #ifndef SKIP_N31
 
