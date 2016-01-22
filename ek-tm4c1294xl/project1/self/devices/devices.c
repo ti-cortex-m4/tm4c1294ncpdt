@@ -4946,7 +4946,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTTOP_N31P:
-      if (ReadTopN31() == 0) DoneProfile();
+      if (ReadTopN31() == false) DoneProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
