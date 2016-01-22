@@ -33,6 +33,9 @@ PROFILE_N31.C
 
 #ifndef SKIP_N31
 
+time                    tiProfileN31;
+
+
 /*
 // чтение энергии дл€ счЄтчика Ёнерги€-9
 bit     ReadEnergyAllG(void)

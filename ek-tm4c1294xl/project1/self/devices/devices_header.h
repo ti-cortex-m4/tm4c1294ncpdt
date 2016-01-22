@@ -51,6 +51,7 @@ DEVICES.C
 #include "../sensors/device_w.h"
 #include "../sensors/unpack_w.h"
 #include "../sensors/device_n31.h"
+#include "../sensors/profile_n31.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
