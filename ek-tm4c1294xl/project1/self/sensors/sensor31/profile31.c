@@ -19,7 +19,7 @@ PROFILE31.C
 #include "../../keyboard/time/key_timedate.h"
 ////#include "../time/timedate.h"
 #include "../../time/delay.h"
-//#include "../devices/devices.h"
+#include "../../devices/devices.h"
 ////#include "../devices/devices_time.h"
 //#include "../digitals/current/current_run.h"
 ////#include "../digitals/limits.h"
@@ -37,22 +37,29 @@ time                    tiProfileN31;
 
 static uint             wBaseCurr, wBaseLast, wOffsCurr;
 
-/*
-// чтение энергии дл€ счЄтчика Ёнерги€-9
-bit     ReadEnergyAllN31(void)
+
+
+time    ReadPackTimeN31(void)
 {
-  ReadPackTimeDigN31();
+  InitPop(3);
 
-  if ((tiDig.bSecond == 0) &&
-      (tiDig.bMinute == 0) &&
-      (tiDig.bHour   == 0) &&
-      (tiDig.bDay    == 0) &&
-      (tiDig.bMonth  == 0) &&
-      (tiDig.bYear   == 0)) return(0);
+  uchar d = PopChar();
+  uchar c = PopChar();
+  uchar b = PopChar();
+  uchar a = PopChar();
 
-  return(1);
+  time ti;
+
+  ti.bHour   = (c & 0xF8) >> 3;
+  ti.bMinute = ((0x100*c+d) >> 5) & 0x3F;
+  ti.bSecond = (d & 0x1F) << 1;
+
+  ti.bDay    = (b & 0x1F);
+  ti.bMonth  = ((0x100*a+b) >> 5) & 0x0F;
+  ti.bYear   = (a & 0xFE) >> 1;
+
+  return ti;
 }
-*/
 
 
 // переход на предыдущую запись
@@ -137,14 +144,13 @@ bool    ReadHeaderN31(void)
 //  MakeCRC12InBuff(3, 24);
 //  if (wCRC != 0) { sprintf(szLo," выключено: %-4u   ",++iwMajor); return(iwMajor < 48); }
 //* /
-//
-//  ReadPackTimeDigN31();
-//  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",
-//          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-//
-//  if ((tiDig.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
-//
-//
+  InitPop(3);
+  time ti = ReadPackTimeN31();
+  sprintf(szLo," %02u    %02u.%02u.%02u", ti.bHour, ti.bDay,ti.bMonth,ti.bYear);
+
+  if ((ti.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
+
+
 //  if (SearchDefHouIndex() == 0) return(++iwMajor < 48);
 //  iwMajor = 0;
 //
@@ -156,31 +162,29 @@ bool    ReadHeaderN31(void)
 //
 //  dwBuffC -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
 //  HouIndexToDate(dwBuffC);
-//
-//
-//  ShowProgressDigHou();
-//  reBuffB = mprePulseHou[ibDig];
-//
-//  if (ExtVersionCod()) InitPop(3+4+4*6*3);
-//  for (ibCan=0; ibCan<6; ibCan++)
-//  {
-//    if (ExtVersionCod())
-//      PopRealExtN31();
-//    else
-//      PopRealN31();
-//
-//    mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
-//
-//    if (tiDig.bMinute % 30 == 0)
-//    {
-//      wBuffD = (uint)(mpreEngFracDigCan[ibDig][ibCan]*reBuffB);
-//      mpwChannels[ibCan] = wBuffD;
-//
-//      mpreEngFracDigCan[ibDig][ibCan] -= (real)wBuffD/reBuffB;
-//    }
-//  }
 
-  MakePrevHou();
+
+  ShowProgressDigHou();
+  double dbPulse = mpdbPulseHou[ibDig];
+
+  InitPop(3+4+4*6*3);
+
+  uchar ibCan;
+  for (ibCan=0; ibCan<6; ibCan++)
+  {
+    PopRealExtN31();
+    mpreEngFracDigCan[ibDig][ibCan] += reBuffA;
+
+    if (ti.bMinute % 30 == 0)
+    {
+      uint w = (uint)(mpreEngFracDigCan[ibDig][ibCan]*dbPulse);
+      mpwChannels[ibCan] = w;
+
+      mpreEngFracDigCan[ibDig][ibCan] -= (real)w/dbPulse;
+    }
+  }
+
+  MakeSpecial(ti);
   return MakeStopHou(0);
 }
 
