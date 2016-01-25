@@ -209,33 +209,33 @@ uchar   MakeCrcVInBuff(uchar  bOffset, uint  wSize)
 
 #ifndef SKIP_N31
 
-uchar   MakeCrcN31OutBuff(uchar  bOffset, uint  wSize)
+uchar   MakeCrc8Bit31OutBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
-    case 0:  return MakeCrcN31(mpbOutBuff0 + bOffset, wSize);
-    case 1:  return MakeCrcN31(mpbOutBuff1 + bOffset, wSize);
-    case 2:  return MakeCrcN31(mpbOutBuff2 + bOffset, wSize);
-    case 3:  return MakeCrcN31(mpbOutBuff3 + bOffset, wSize);
+    case 0:  return MakeCrc8Bit31(mpbOutBuff0 + bOffset, wSize);
+    case 1:  return MakeCrc8Bit31(mpbOutBuff1 + bOffset, wSize);
+    case 2:  return MakeCrc8Bit31(mpbOutBuff2 + bOffset, wSize);
+    case 3:  return MakeCrc8Bit31(mpbOutBuff3 + bOffset, wSize);
     default: ASSERT(false); return 0;
   }
 }
 
 
-uchar   MakeCrcN31InBuff(uchar  bOffset, uint  wSize)
+uchar   MakeCrc8Bit31InBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
-    case 0:  return MakeCrcN31(mpbInBuff0 + bOffset, wSize);
-    case 1:  return MakeCrcN31(mpbInBuff1 + bOffset, wSize);
-    case 2:  return MakeCrcN31(mpbInBuff2 + bOffset, wSize);
-    case 3:  return MakeCrcN31(mpbInBuff3 + bOffset, wSize);
+    case 0:  return MakeCrc8Bit31(mpbInBuff0 + bOffset, wSize);
+    case 1:  return MakeCrc8Bit31(mpbInBuff1 + bOffset, wSize);
+    case 2:  return MakeCrc8Bit31(mpbInBuff2 + bOffset, wSize);
+    case 3:  return MakeCrc8Bit31(mpbInBuff3 + bOffset, wSize);
     default: ASSERT(false); return 0;
   }
 }
 
 
-uint    MakeCrc16bitN31InBuff(uchar  bOffset, uint  wSize)
+uint    MakeCrc16Bit31InBuff(uchar  bOffset, uint  wSize)
 {
   switch (ibPort)
   {
