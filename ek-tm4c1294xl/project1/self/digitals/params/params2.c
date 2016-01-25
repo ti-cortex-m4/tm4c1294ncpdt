@@ -39,7 +39,7 @@ bool                    fBeginParam;
 
 static float            reParamDiv;
 
-float                   reValue;
+static float            reValue;
 
 
 
@@ -1126,7 +1126,7 @@ float2  ReadParam(uint  iwPrm)
 #endif
 
 #ifndef SKIP_N31
-    case 31: return GetFloat2(reValue, ReadParam31());
+    case 31: return ReadParam31();
 #endif
 
     default: return GetFloat2Error();
