@@ -22,8 +22,10 @@ CNTMON31.C
 #ifndef SKIP_N31
 
 // промежуточные буфера
-static double           mpdbChannelsMon[6],
-                        mpdbChannelsAbs[6];
+static double           mpdbChannelsMon[6]ж
+
+// промежуточные буфера
+static double           mpdbChannelsAbs[6];
 
 // промежуточные буфера
 static uchar            mpbChannelsMon[13];
@@ -99,7 +101,7 @@ static bool ValidPackTime(void)
 }
 
 
-bool    ReadEnergyExt_G(void)
+bool    ReadEngExt31(void)
 {
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
@@ -170,7 +172,7 @@ bool    ReadEnergyExt_G(void)
 }
 
 
-bool    ReadMonthIndexExt_G(void)
+bool    ReadMonIndexExt31(void)
 {
   uchar m;
   for (m=0; m<=12; m++)
@@ -211,7 +213,7 @@ bool    ReadMonthIndexExt_G(void)
 }
 
 
-uchar   SearchMonthIndexExt_G(uchar  bMon)
+uchar   SearchMonIndexExt31(uchar  bMon)
 {
   sprintf(szLo," требуетс€: %-2u  ", bMon); DelayInf();
 
@@ -224,7 +226,7 @@ uchar   SearchMonthIndexExt_G(uchar  bMon)
 }
 
 
-bool  ReadEngMonExt_G(uchar  ibMon)
+bool  ReadEngMonExt31(uchar  ibMon)
 {
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
@@ -259,7 +261,7 @@ bool  ReadEngMonExt_G(uchar  ibMon)
 }
 
 
-bool  ReadEngMonCurrExt_G(void)
+bool  ReadEngMonCurrExt31(void)
 {
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
@@ -304,7 +306,7 @@ bool  ReadEngMonCurrExt_G(void)
 }
 
 
-bool    ReadEngAbsExt_G(void)
+bool    ReadEngAbsExt31(void)
 {
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
@@ -343,9 +345,9 @@ bool    ReadEngAbsExt_G(void)
 }
 
 
-double2 ReadCntMonCanExt_G(uchar  ibMon, time  ti)
+double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 {
-  if (ReadMonthIndexExt_G() == 0) return GetDouble2Error();
+  if (ReadMonIndexExt31() == 0) return GetDouble2Error();
   Clear();
 
 
@@ -358,14 +360,14 @@ double2 ReadCntMonCanExt_G(uchar  ibMon, time  ti)
   {
     if ((m%12 + 1) == ti.bMonth)
     {
-      if (ReadEngMonCurrExt_G() == 0) return GetDouble2Error();
+      if (ReadEngMonCurrExt31() == 0) return GetDouble2Error();
     }
     else
     {
-      uchar ibGrp = SearchMonthIndexExt_G(m%12 + 1);
+      uchar ibGrp = SearchMonIndexExt31(m%12 + 1);
       if (ibGrp == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return GetDouble2Error(); }
       Clear();
-      if (ReadEngMonExt_G(ibGrp) == 0) return GetDouble2Error();
+      if (ReadEngMonExt31(ibGrp) == 0) return GetDouble2Error();
     }
     ShowPercent(80 + ibDay++);
   }
@@ -374,7 +376,7 @@ double2 ReadCntMonCanExt_G(uchar  ibMon, time  ti)
 
   for (i=0; i<6; i++) mpdbChannelsAbs[i] = 0;
 
-  if (ReadEngAbsExt_G() == 0) return GetDouble2Error();
+  if (ReadEngAbsExt31() == 0) return GetDouble2Error();
   ShowPercent(99);
 
 
@@ -407,13 +409,13 @@ double2 ReadCntMonCan31(uchar  ibMon)
     if (ti.bMonth != ibMon+1)
     {
       if (GetVersio31() == 49)
-        return ReadCntMonCanExt_G(ibMon, ti);
+        return ReadCntMonCanExt31(ibMon, ti);
       else
         { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return GetDouble2Error(); }
     }
     else // значени€е счЄтчиков на начало текущего мес€ца
     {
-      if (ReadEnergyExt_G() == 0) return GetDouble2Error();
+      if (ReadEngExt31() == 0) return GetDouble2Error();
     }
   }
   else
