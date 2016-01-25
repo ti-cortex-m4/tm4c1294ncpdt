@@ -22,7 +22,7 @@ CNTMON31.C
 #ifndef SKIP_N31
 
 // промежуточные буфера
-static double           mpdbChannelsMon[6]ж
+static double           mpdbChannelsMon[6];
 
 // промежуточные буфера
 static double           mpdbChannelsAbs[6];
@@ -412,8 +412,8 @@ double2 ReadCntMonCan31(uchar  ibMon)
         return ReadCntMonCanExt31(ibMon, ti);
       else
       {
-        CLear(); sprintf(szLo+3,"необходима"); Delay(1000);
-        CLear(); sprintf(szLo+3,"версия 49"); Delay(1000);
+        Clear(); sprintf(szLo+3,"необходима"); Delay(1000);
+        Clear(); sprintf(szLo+3,"версия 49"); Delay(1000);
         return GetDouble2Error();
       }
     }
