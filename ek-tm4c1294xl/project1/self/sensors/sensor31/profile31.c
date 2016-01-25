@@ -41,29 +41,6 @@ static uint             cwErrors31;
 
 
 
-static time ReadPackTimeN31(void)
-{
-  InitPop(3);
-
-  uchar d = PopChar();
-  uchar c = PopChar();
-  uchar b = PopChar();
-  uchar a = PopChar();
-
-  time ti;
-
-  ti.bHour   = (c & 0xF8) >> 3;
-  ti.bMinute = ((0x100*c+d) >> 5) & 0x3F;
-  ti.bSecond = (d & 0x1F) << 1;
-
-  ti.bDay    = (b & 0x1F);
-  ti.bMonth  = ((0x100*a+b) >> 5) & 0x0F;
-  ti.bYear   = (a & 0xFE) >> 1;
-
-  return ti;
-}
-
-
 // переход на предыдущую запись
 bool    DecIndexN31(void)
 {
