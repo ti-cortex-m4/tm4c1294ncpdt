@@ -2119,7 +2119,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_N31
-    case 31: return ReadCntMonCa31(ibMon);
+    case 31: return ReadCntMonCan31(ibMon);
 #endif
 
     default: return GetDouble2Error();
