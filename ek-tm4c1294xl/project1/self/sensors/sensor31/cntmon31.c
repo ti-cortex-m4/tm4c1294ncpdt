@@ -7,15 +7,11 @@ CNTMON31.C
 #include "../../main.h"
 #include "../../console.h"
 #include "../../memory/mem_digitals.h"
-//#include "../../memory/mem_current.h"
-//#include "../../memory/mem_factors.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
-//#include "../../time/timedate.h"
 #include "../../time/delay.h"
 #include "../../devices/devices.h"
-//#include "../../digitals/current/current_run.h"
-//#include "../../digitals/digitals_messages.h"
+#include "../../digitals/digitals_messages.h"
 #include "automatic31.h"
 #include "device31.h"
 #include "cntmon31.h"
@@ -34,12 +30,9 @@ static uchar            mpbChannelsMonG[13];
 // массив потреблЄнной энергии
 static double           mpreCodEng30[30];
 
-//
-static double           reBuffX;
 
 
-
-void    QueryIndex4_G(uchar  ibTariff)
+void    QueryIndex4_G(uchar  ibTrf)
 {
   InitPushCod();
 
@@ -49,13 +42,13 @@ void    QueryIndex4_G(uchar  ibTariff)
 
   PushCharCod(0x04);
   PushCharCod(0x00);
-  PushCharCod(ibTariff);
+  PushCharCod(ibTrf);
 
   QueryN31(3+4+8*24+2+1, 3+3+1);
 }
 
 
-void    QueryIndex5_G(uchar  ibTariff)
+void    QueryIndex5_G(uchar  ibTrf)
 {
   InitPushCod();
 
@@ -65,13 +58,13 @@ void    QueryIndex5_G(uchar  ibTariff)
 
   PushCharCod(0x05);
   PushCharCod(0x00);
-  PushCharCod(ibTariff);
+  PushCharCod(ibTrf);
 
   QueryN31(3+4+8*6+2+1, 3+3+1);
 }
 
 
-void    QueryIndex26_G(uchar  ibMonth, uchar  ibTariff)
+void    QueryIndex26_G(uchar  ibMon, uchar  ibTrf)
 {
 uint  i;
 
@@ -81,7 +74,7 @@ uint  i;
   PushChar(0x03);
   PushChar(0x06);
 
-  i = ibMonth * 72 + ibTariff;
+  i = ibMon * 72 + ibTrf;
   PushCharCod(26);
   PushCharCod(i / 0x100);
   PushCharCod(i % 0x100);
@@ -111,7 +104,7 @@ bool    ReadEnergyExt_G(void)
 uchar   i;
 
   uchar t;
-  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счЄтчике: 72)
+  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
   {
     if (fKey == 1) return(0);
 
@@ -141,7 +134,7 @@ uchar   i;
     }
   }
 
-  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счЄтчике: 72)
+  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
   {
     if (fKey == 1) return(0);
 
@@ -177,18 +170,17 @@ uchar   i;
 
 bool    ReadMonthIndexExt_G(void)
 {
-uchar   i,j;
-
-  for (j=0; j<=12; j++)                         // проходим по всем мес€цам (0..12)
+  uchar m;
+  for (m=0; m<=12; m++)
   {
     if (fKey == 1) return(0);
 
+    uchar i;
     for (i=0; i<bMINORREPEATS; i++)
     {
       DelayOff();
-      QueryIndex26_G(j, 0);
+      QueryIndex26_G(m, 0);
 
-      //ShowPercent(60+j);
       if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
@@ -201,14 +193,14 @@ uchar   i,j;
       time tiDig = ReadPackTimeN31();
 
       if (tiDig.bMonth == 0)
-        mpbChannelsMonG[j] = 0;
+        mpbChannelsMonG[m] = 0;
       else
-        mpbChannelsMonG[j] = (10 + tiDig.bMonth)%12 + 1;
+        mpbChannelsMonG[m] = (10 + tiDig.bMonth)%12 + 1;
 
       if (tiDig.bMonth != 0)
-        { sprintf(szLo,"  найдено: %-2u   ", mpbChannelsMonG[j]); Delay(200); }
+        { sprintf(szLo,"  найдено: %-2u   ", mpbChannelsMonG[m]); Delay(200); }
       else
-        sprintf(szLo," пусто: %2u-%-2u   ",j,12);
+        sprintf(szLo," пусто: %2u-%-2u   ",m,12);
     }
   }
 
@@ -235,7 +227,7 @@ bool  ReadEngMonExt_G(uchar  ibMonth)
 uchar   i;
 
   uchar t;
-  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счЄтчике: 72)
+  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
   {
     if (fKey == 1) return(0);
 
@@ -244,7 +236,6 @@ uchar   i;
       DelayOff();
       QueryIndex26_G(ibMonth, t);
 
-      //ShowPercent(60+j);
       if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
@@ -254,7 +245,7 @@ uchar   i;
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G3 "); Delay(1000); return(0); }
 
-      InitPop(7);                               // !
+      InitPop(7); // !
       for (i=0; i<6; i++)
       {
         mpreChannelsMonG[i] += PopDoubleN31()/1000;
@@ -271,7 +262,7 @@ bool  ReadEngMonCurrExt_G(void)
 uchar i;
 
   uchar t;
-  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счЄтчике: 72)
+  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
   {
     if (fKey == 1) return(0);
 
@@ -287,7 +278,7 @@ uchar i;
     if (i == bMINORREPEATS) return(0);
     else
     {
-      if (ValidPackTime() == 0) break;         // тариф не используетс€
+      if (ValidPackTime() == 0) break; // тариф не используетс€
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 196);
@@ -313,7 +304,7 @@ bool    ReadEngAbsExt_G(void)
 uchar   i;
 
   uchar t;
-  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счЄтчике: 72)
+  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
   {
     if (fKey == 1) return(0);
 
@@ -329,7 +320,7 @@ uchar   i;
     if (i == bMINORREPEATS) return(0);
     else
     {
-      if (ValidPackTime() == 0) break;         // тариф не используетс€
+      if (ValidPackTime() == 0) break; // тариф не используетс€
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 52);
@@ -347,7 +338,7 @@ uchar   i;
 }
 
 
-double2 ReadCntMonCanExt_G(uchar  ibMonth)
+double2 ReadCntMonCanExt_G(uchar  ibMonth, time  tiAlt)
 {
   if (ReadMonthIndexExt_G() == 0) return GetDouble2Error();
   Clear();
@@ -382,15 +373,14 @@ double2 ReadCntMonCanExt_G(uchar  ibMonth)
   ShowPercent(99);
 
 
+  double dbTrans = mpdbTransCnt[ibDig];
+
   for (i=0; i<6; i++)
   {
-    reBuffA = mpreChannelsAbsG[i] - mpreChannelsMonG[i];
-    mpdbChannelsC[i] = reBuffA * reBuffX;
-
+    mpdbChannelsC[i] = mpreChannelsAbsG[i] - mpreChannelsMonG[i];
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
-
-  reBuffA = mpdbChannelsC[diCurr.ibLine];
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
@@ -399,23 +389,12 @@ double2 ReadCntMonCanExt_G(uchar  ibMonth)
 
 double2 ReadCntMonCan31(uchar  ibMonth)
 {
-uchar   i;
-
-  Clear();
-  if (ReadKoeffDeviceG() == 0) return GetDouble2Error();
-  reBuffX = reBuffB;
+  time2 ti2 = QueryTimeN31_Full(50);
+  if (ti2.fValid == false) return GetDouble2Error();
+  time tiX = ti2.tiValue;
 
 
-  DelayOff();
-  QueryTimeG();
-
-  if (InputN31() != SER_GOODCHECK) GetDouble2Error();
-  if (fKey == 1) return GetDouble2Error();
-  ShowPercent(55);
-
-  ReadTimeAltG();
-
-
+  uchar i;
   for (i=0; i<30; i++) mpreCodEng30[i] = 0;
 
   if (ExtVersion31())
@@ -423,41 +402,31 @@ uchar   i;
     if (tiAlt.bMonth != ibMonth+1)
     {
       if (GetVersion31() == 49)
-        return ReadCntMonCanExt_G(ibMonth);
+        return ReadCntMonCanExt_G(ibMonth, tiX);
       else
         { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return GetDouble2Error(); }
     }
-    else                                        // значени€е счЄтчиков на начало текущего мес€ца
+    else // значени€е счЄтчиков на начало текущего мес€ца
     {
       if (ReadEnergyExt_G() == 0) return GetDouble2Error();
     }
   }
   else
   {
-    if (tiAlt.bMonth != ibMonth+1)
-    {
-      { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return GetDouble2Error(); }
-    }
-    else                                        // значени€е счЄтчиков на начало текущего мес€ца
-    {
-      if (ReadEnergyBCD_G() == 0) return GetDouble2Error();
-    }
+    ShowLo(szNoVersion); Delay(1000); return GetDouble2Error();
   }
 
   ShowPercent(100);
 
 
+  double dbTrans = mpdbTransCnt[ibDig];
+
   for (i=0; i<6; i++)
   {
     mpdbChannelsC[i] = mpreCodEng30[i*5+0] - mpreCodEng30[i*5+3];
-
-    reBuffA = *PGetCanReal(mpdbChannelsC, i) * reBuffB;
-    SetCanReal(mpdbChannelsC, i);
-
+    mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
-
-  reBuffA = *PGetCanReal(mpdbChannelsC, diCurr.ibLine);
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
