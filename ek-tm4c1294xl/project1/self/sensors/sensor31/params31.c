@@ -54,7 +54,9 @@ static float2 CalcParamS(uchar ibP, uchar ibQ)
   InitPop(ibQ);
   float flQ = PopDouble31();
 
-  return GetFloat2(sqrtf(flP*flP + flQ*flQ), true);
+  float flS = sqrtf(flP*flP + flQ*flQ);
+
+  return GetFloat2(flS, true);
 }
 
 
@@ -66,7 +68,10 @@ static float2 CalcParamC(uchar ibP, uchar ibQ)
   InitPop(ibQ);
   float flQ = PopDouble31();
 
-  return GetFloat2((flQ == 0) ? 0 : flP/flQ, true);
+  float flS = sqrtf(flP*flP + flQ*flQ);
+  float flC = (flS == 0) ? 0 : flP/flS;
+
+  return GetFloat2(flC, true);
 }
 
 
