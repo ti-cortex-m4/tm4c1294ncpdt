@@ -31,6 +31,8 @@ static double           mpreChannelsMonG[6],
 // промежуточные буфера
 static uchar            mpbChannelsMonG[13];
 
+// массив потреблённой энергии
+static double           mpreCodEng30[30];
 
 
 
@@ -378,15 +380,14 @@ uchar   i;
   for (ibCan=0; ibCan<6; ibCan++)
   {
     reBuffA = mpreChannelsAbsG[ibCan] - mpreChannelsMonG[ibCan];
-    mpreChannelsB[ibCan] = reBuffA * reBuffX;
+    mpdbChannelsC[ibCan] = reBuffA * reBuffX;
 
     mpboChannelsA[ibCan] = true;
   }
 
-  reBuffA = mpreChannelsB[diCurr.ibLine];
+  reBuffA = mpdbChannelsC[diCurr.ibLine];
 
-
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 
@@ -403,7 +404,8 @@ uchar   i;
   DelayOff();
   QueryTimeG();
 
-  if (InputN31() != SER_GOODCHECK) return(0);  if (fKey == 1) return GetDouble2Error();
+  if (InputN31() != SER_GOODCHECK) GetDouble2Error();
+  if (fKey == 1) return GetDouble2Error();
   ShowPercent(55);
 
   ReadTimeAltG();
@@ -415,7 +417,7 @@ uchar   i;
   {
     if (tiAlt.bMonth != ibMonth+1)
     {
-      if (bVersion31 == 49)
+      if (bVersionN31 == 49)
         return ReadCntMonCanExt_G(ibMonth);
       else
         { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   версия 49    "); Delay(1000); return GetDouble2Error(); }
@@ -442,17 +444,17 @@ uchar   i;
 
   for (i=0; i<6; i++)
   {
-    mpreChannelsB[i] = mpreCodEng30[i*5+0] - mpreCodEng30[i*5+3];
+    mpdbChannelsC[i] = mpreCodEng30[i*5+0] - mpreCodEng30[i*5+3];
 
-    reBuffA = *PGetCanReal(mpreChannelsB, i) * reBuffB;
-    SetCanReal(mpreChannelsB, i);
+    reBuffA = *PGetCanReal(mpdbChannelsC, i) * reBuffB;
+    SetCanReal(mpdbChannelsC, i);
 
     mpboChannelsA[i] = true;
   }
 
-  reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);
+  reBuffA = *PGetCanReal(mpdbChannelsC, diCurr.ibLine);
 
-  return(1);
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
