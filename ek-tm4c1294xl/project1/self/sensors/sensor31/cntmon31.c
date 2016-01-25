@@ -404,16 +404,20 @@ double2 ReadCntMonCan31(uchar  ibMon)
   uchar i;
   for (i=0; i<30; i++) mpdbEng30[i] = 0;
 
-  if (ExtVersio31())
+  if (ExtVersion31())
   {
     if (ti.bMonth != ibMon+1)
     {
-      if (GetVersio31() == 49)
+      if (GetVersion31() == 49)
         return ReadCntMonCanExt31(ibMon, ti);
       else
-        { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return GetDouble2Error(); }
+      {
+        CLear(); sprintf(szLo+3,"необходима"); Delay(1000);
+        CLear(); sprintf(szLo+3,"верси€ 49"); Delay(1000);
+        return GetDouble2Error();
+      }
     }
-    else // значени€е счЄтчиков на начало текущего мес€ца
+    else // значени€е счЄтчиков дл€ текущего мес€ца (на начало текущих суток)
     {
       if (ReadEngExt31() == 0) return GetDouble2Error();
     }

@@ -5,13 +5,9 @@ PROFILE31.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../memory/mem_digitals.h"
-//#include "../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
-////#include "../memory/mem_realtime.h"
 #include "../../memory/mem_energy_spec.h"
 #include "../../memory/mem_profile.h"
-////#include "../memory/mem_limits.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
@@ -21,9 +17,6 @@ PROFILE31.C
 #include "../../time/delay.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
-//#include "../digitals/current/current_run.h"
-////#include "../digitals/limits.h"
-//#include "../digitals/digitals_messages.h"
 #include "../../special/special.h"
 #include "automatic31.h"
 #include "device31.h"
@@ -117,7 +110,7 @@ bool    ReadHeader31(void)
 {
   HideCurrTime(1);
 
-  if (ExtVersio31())
+  if (ExtVersion31())
   {
     uint wCRC = MakeCrc16Bit31InBuff(3, 100);
     if (wCRC != InBuff(103) + InBuff(104)*0x100)
