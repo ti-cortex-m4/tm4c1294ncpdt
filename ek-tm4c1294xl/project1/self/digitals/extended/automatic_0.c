@@ -18,8 +18,11 @@ AUTOMATIC_0!C
 #include "../../sensors/automatic_s.h"
 #include "../../sensors/device_u.h"
 #include "../../sensors/device_v.h"
+#include "../../sensors/automatic_v.h"
 #include "../../sensors/device_w.h"
+#include "../../sensors/automatic_w.h"
 #include "../../sensors/sensor31/device31.h"
+#include "../../sensors/sensor31/automatic31.h"
 #include "../../console.h"
 #include "../../time/timedate.h"
 #include "automatic_0.h"
@@ -437,6 +440,8 @@ time2   ReadTimeCan31_Short(void)
 
   DelayOff();
   QueryTime31();
+
+  if (Input31() != SER_GOODCHECK) return GetTime2Error();
 
   return GetTime2(ReadTime31(), true);
 }
