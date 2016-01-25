@@ -394,7 +394,7 @@ double2 ReadCntMonCanExt_G(uchar  ibMon, time  ti)
 
 double2 ReadCntMonCa31(uchar  ibMon)
 {
-  time2 ti2 = QueryTimeN31_Full(50);
+  time2 ti2 = QueryTime31_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 

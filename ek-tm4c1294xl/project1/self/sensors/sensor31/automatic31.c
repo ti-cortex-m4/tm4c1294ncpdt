@@ -69,24 +69,6 @@ void    Query31(uint  cwIn, uchar  cbOut)
   Query(cwIn,cbOut,1);
 }
 
-/*
-bool    ChecksumW(void)
-{
-  InitPop(1);
-
-  uchar bT = 0;
-
-  uint i;
-  for (i=0; i<CountInBuff()-2; i++)
-  {
-    bT ^= PopChar0Bcc();
-  }
-
-//  MonitorString("\n checksum "); MonitorCharHex(bT & 0x7F); MonitorString(" ? "); MonitorCharHex(PopChar0Bcc());
-
-  return ((bT & 0x7F) == PopChar0Bcc());
-}
-*/
 
 serial  Input31(void)
 {
@@ -140,7 +122,7 @@ serial  Input31(void)
 }
 
 
-bool    QueryOpenN31_Full(uchar  bPercent)
+bool    QueryOpen31_Full(uchar  bPercent)
 {
   Clear();
 
@@ -162,7 +144,7 @@ bool    QueryOpenN31_Full(uchar  bPercent)
 }
 
 
-time2   QueryTimeN31_Full(uchar  bPercent)
+time2   QueryTime31_Full(uchar  bPercent)
 {
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
@@ -180,9 +162,9 @@ time2   QueryTimeN31_Full(uchar  bPercent)
 }
 
 
-double2 ReadTransN31_Full(void)
+double2 ReadTrans31_Full(void)
 {
-  if (QueryOpenN31_Full(25) == false) return GetDouble2Error();
+  if (QueryOpen31_Full(25) == false) return GetDouble2Error();
 
 
   uchar r;
@@ -210,7 +192,7 @@ double2 ReadTransN31_Full(void)
 
 bool    Automatic31(void)
 {
-  double2 db2 = ReadTransN31_Full();
+  double2 db2 = ReadTrans31_Full();
   if (db2.fValid == false) return false;
 
   ShowPercent(100);
@@ -222,7 +204,7 @@ bool    Automatic31(void)
 
 
 
-bool    QueryEngAbsN31_Full(uchar  bPercent)
+bool    QueryEngAbs31_Full(uchar  bPercent)
 {
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
@@ -347,9 +329,9 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
 
 time2   ReadTimeCan31(void)
 {
-  if (QueryOpenN31_Full(25) == 0) GetTime2Error();
+  if (QueryOpen31_Full(25) == 0) GetTime2Error();
 
-  time2 ti2 = QueryTimeN31_Full(50);
+  time2 ti2 = QueryTime31_Full(50);
   if (ti2.fValid == false) return GetTime2Error();
 
 
@@ -368,9 +350,9 @@ time2   ReadTimeCan31(void)
 
 double2 ReadCntCurr31(void)
 {
-  if (QueryOpenN31_Full(25) == 0) GetDouble2Error();
+  if (QueryOpen31_Full(25) == 0) GetDouble2Error();
 
-  if (QueryEngAbsN31_Full(50) == 0) return GetDouble2Error();
+  if (QueryEngAbs31_Full(50) == 0) return GetDouble2Error();
 
 
   double dbTrans = mpdbTransCnt[ibDig];
