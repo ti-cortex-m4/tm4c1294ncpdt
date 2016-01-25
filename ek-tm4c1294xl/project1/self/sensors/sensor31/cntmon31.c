@@ -346,8 +346,6 @@ uchar   i,j;
 
 double2 ReadCntMonCanExt_G(uchar  ibMonth)
 {
-uchar   i;
-
   if (ReadMonthIndexExt_G() == 0) return GetDouble2Error();
   Clear();
 
@@ -355,24 +353,24 @@ uchar   i;
   uchar ibCan;
   for (ibCan=0; ibCan<6; ibCan++) mpreChannelsMonG[ibCan] = 0;
 
-  i = ibMonth+1;
+  uchar m = ibMonth+1;
   uchar ibDay = 0;
   do
   {
-    if ((i%12 + 1) == tiAlt.bMonth)
+    if ((m%12 + 1) == tiAlt.bMonth)
     {
       if (ReadEngMonCurrExt_G() == 0) return GetDouble2Error();
     }
     else
     {
-      uchar ibGrp = SearchMonthIndexExt_G(i%12 + 1);
+      uchar ibGrp = SearchMonthIndexExt_G(m%12 + 1);
       if (ibGrp == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return GetDouble2Error(); }
       Clear();
       if (ReadEngMonExt_G(ibGrp) == 0) return GetDouble2Error();
     }
     ShowPercent(80 + ibDay++);
   }
-  while ((bMONTHS + tiAlt.bMonth - ++i) % bMONTHS != 0 );
+  while ((bMONTHS + tiAlt.bMonth - ++m) % bMONTHS != 0 );
 
 
   for (ibCan=0; ibCan<6; ibCan++) mpreChannelsAbsG[ibCan] = 0;
