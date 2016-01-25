@@ -5,23 +5,34 @@ CNTMON31.C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_digitals.h"
+#include "../../console.h"
+#include "../../memory/mem_digitals.h"
 //#include "../../memory/mem_current.h"
 //#include "../../memory/mem_factors.h"
-//#include "../../serial/ports.h"
-//#include "../../serial/ports_devices.h"
-//#include "../../display/display.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_devices.h"
 //#include "../../time/timedate.h"
-//#include "../../time/delay.h"
-//#include "../../devices/devices.h"
+#include "../../time/delay.h"
+#include "../../devices/devices.h"
 //#include "../../digitals/current/current_run.h"
 //#include "../../digitals/digitals_messages.h"
-//#include "automatic31.h"
+#include "automatic31.h"
+#include "device31.h"
 #include "cntmon31.h"
 
 
 
 #ifndef SKIP_N31
+
+// промежуточные буфера
+static double           mpreChannelsMonG[6],
+                        mpreChannelsAbsG[6];
+
+// промежуточные буфера
+static uchar            mpbChannelsMonG[13];
+
+
+
 
 void    QueryIndex4_G(uchar  ibTariff)
 {
@@ -35,7 +46,7 @@ void    QueryIndex4_G(uchar  ibTariff)
   PushCharCod(0x00);
   PushCharCod(ibTariff);
 
-  CodQueryIO(3+4+8*24+2+1, 3+3+1);
+  QueryN31(3+4+8*24+2+1, 3+3+1);
 }
 
 
@@ -51,7 +62,7 @@ void    QueryIndex5_G(uchar  ibTariff)
   PushCharCod(0x00);
   PushCharCod(ibTariff);
 
-  CodQueryIO(3+4+8*6+2+1, 3+3+1);
+  QueryN31(3+4+8*6+2+1, 3+3+1);
 }
 
 
@@ -70,7 +81,7 @@ uint  i;
   PushCharCod(i / 0x100);
   PushCharCod(i % 0x100);
 
-  CodQueryIO(3+102+1, 3+3+1);
+  QueryN31(3+102+1, 3+3+1);
 }
 
 
@@ -88,7 +99,7 @@ uchar   i,j;
       QueryIndex5_G(j);
 
       ShowPercent(60+j);
-      if (CodInput() != SER_GOODCHECK) continue; else break;
+      if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return(0);
@@ -97,7 +108,7 @@ uchar   i,j;
       if (ReadEnergyAllG() == 0) break;         // тариф не используетс€
       else
       {
-        MakeCRC13InBuff(3, 52);
+        uint wCRC = MakeCrc16Bit31InBuff(3, 52);
         if (wCRC != InBuff(55) + InBuff(56)*0x100) { sprintf(szLo," ошибка CRC: G0 "); Delay(1000); return(0); }
 
         for (i=0; i<6; i++)
@@ -122,7 +133,7 @@ uchar   i,j;
       QueryIndex4_G(j);
 
       ShowPercent(70+j);
-      if (CodInput() != SER_GOODCHECK) continue; else break;
+      if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return(0);
@@ -131,7 +142,7 @@ uchar   i,j;
       if (ReadEnergyAllG() == 0) break;         // тариф не используетс€
       else
       {
-        MakeCRC13InBuff(3, 196);
+        uint wCRC = MakeCrc16Bit31InBuff(3, 196);
         if (wCRC != InBuff(199) + InBuff(200)*0x100) { sprintf(szLo," ошибка CRC: G1 "); Delay(1000); return(0); }
 
         for (i=0; i<24; i++)
@@ -163,13 +174,13 @@ uchar   i,j;
       QueryIndex26_G(j, 0);
 
       //ShowPercent(60+j);
-      if (CodInput() != SER_GOODCHECK) continue; else break;
+      if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return 0xEE;
     else
     {
-      MakeCRC13InBuff(3, 100);
+      uint wCRC = MakeCrc16Bit31InBuff(3, 100);
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G2 "); Delay(1000); return(0); }
 
       ReadPackTimeDigG();
@@ -218,13 +229,13 @@ uchar   i,j;
       QueryIndex26_G(ibMonth, j);
 
       //ShowPercent(60+j);
-      if (CodInput() != SER_GOODCHECK) continue; else break;
+      if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return(0);
     else
     {
-      MakeCRC13InBuff(3, 100);
+      uint wCRC = MakeCrc16Bit31InBuff(3, 100);
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G3 "); Delay(1000); return(0); }
 
       InitPop(7);                               // !
@@ -256,7 +267,7 @@ uchar i,j;
       QueryIndex4_G(j);
 
       ShowPercent(80+j);
-      if (CodInput() != SER_GOODCHECK) continue; else break;
+      if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return(0);
@@ -265,7 +276,7 @@ uchar i,j;
       if (ReadEnergyAllG() == 0) break;         // тариф не используетс€
       else
       {
-        MakeCRC13InBuff(3, 196);
+        uint wCRC = MakeCrc16Bit31InBuff(3, 196);
         if (wCRC != InBuff(199) + InBuff(200)*0x100) { sprintf(szLo," ошибка CRC: G4 "); Delay(1000); return(0); }
 
         for (i=0; i<24; i++)
@@ -300,7 +311,7 @@ uchar   i,j;
       QueryIndex5_G(j);
 
       ShowPercent(90+j);
-      if (CodInput() != SER_GOODCHECK) continue; else break;
+      if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return(0);
@@ -309,7 +320,7 @@ uchar   i,j;
       if (ReadEnergyAllG() == 0) break;         // тариф не используетс€
       else
       {
-        MakeCRC13InBuff(3, 52);
+        uint wCRC = MakeCrc16Bit31InBuff(3, 52);
         if (wCRC != InBuff(55) + InBuff(56)*0x100) { sprintf(szLo," ошибка CRC: G5 "); Delay(1000); return(0); }
 
         for (i=0; i<6; i++)
@@ -327,30 +338,31 @@ uchar   i,j;
 }
 
 
-bool    ReadCntMonCanExt_G(uchar  ibMonth)
+double2 ReadCntMonCanExt_G(uchar  ibMonth)
 {
 uchar   i;
 
-  if (ReadMonthIndexExt_G() == 0) return(0);
+  if (ReadMonthIndexExt_G() == 0) return GetDouble2Error();
   Clear();
 
 
+  uchar ibCan;
   for (ibCan=0; ibCan<6; ibCan++) mpreChannelsMonG[ibCan] = 0;
 
   i = ibMonth+1;
-  ibDay = 0;
+  uchar ibDay = 0;
   do
   {
     if ((i%12 + 1) == tiAlt.bMonth)
     {
-      if (ReadEngMonCurrExt_G() == 0) return(0);
+      if (ReadEngMonCurrExt_G() == 0) return GetDouble2Error();
     }
     else
     {
-      ibGrp = SearchMonthIndexExt_G(i%12 + 1);
-      if (ibGrp == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return(0); }
+      uchar ibGrp = SearchMonthIndexExt_G(i%12 + 1);
+      if (ibGrp == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return GetDouble2Error(); }
       Clear();
-      if (ReadEngMonExt_G(ibGrp) == 0) return(0);
+      if (ReadEngMonExt_G(ibGrp) == 0) return GetDouble2Error();
     }
     ShowPercent(80 + ibDay++);
   }
@@ -359,7 +371,7 @@ uchar   i;
 
   for (ibCan=0; ibCan<6; ibCan++) mpreChannelsAbsG[ibCan] = 0;
 
-  if (ReadEngAbsExt_G() == 0) return(0);
+  if (ReadEngAbsExt_G() == 0) return GetDouble2Error();
   ShowPercent(99);
 
 
@@ -368,7 +380,7 @@ uchar   i;
     reBuffA = mpreChannelsAbsG[ibCan] - mpreChannelsMonG[ibCan];
     mpreChannelsB[ibCan] = reBuffA * reBuffX;
 
-    mpboChannelsA[ibCan] = boTrue;
+    mpboChannelsA[ibCan] = true;
   }
 
   reBuffA = mpreChannelsB[diCurr.ibLine];
@@ -379,19 +391,19 @@ uchar   i;
 
 
 
-bool    ReadCntMonCan31(uchar  ibMonth)
+double2 ReadCntMonCan31(uchar  ibMonth)
 {
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceG() == 0) return(0);
+  if (ReadKoeffDeviceG() == 0) return GetDouble2Error();
   reBuffX = reBuffB;
 
 
   DelayOff();
   QueryTimeG();
 
-  if (CodInput() != SER_GOODCHECK) return(0);  if (fKey == 1) return(0);
+  if (InputN31() != SER_GOODCHECK) return(0);  if (fKey == 1) return GetDouble2Error();
   ShowPercent(55);
 
   ReadTimeAltG();
@@ -399,29 +411,29 @@ uchar   i;
 
   for (i=0; i<30; i++) mpreCodEng30[i] = 0;
 
-  if (ExtVersionCod())
+  if (ExtVersion31())
   {
     if (tiAlt.bMonth != ibMonth+1)
     {
-      if (bVersionCod == 49)
+      if (bVersion31 == 49)
         return ReadCntMonCanExt_G(ibMonth);
       else
-        { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return(0); }
+        { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return GetDouble2Error(); }
     }
     else                                        // значени€е счЄтчиков на начало текущего мес€ца
     {
-      if (ReadEnergyExt_G() == 0) return(0);
+      if (ReadEnergyExt_G() == 0) return GetDouble2Error();
     }
   }
   else
   {
     if (tiAlt.bMonth != ibMonth+1)
     {
-      { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return(0); }
+      { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   верси€ 49    "); Delay(1000); return GetDouble2Error(); }
     }
     else                                        // значени€е счЄтчиков на начало текущего мес€ца
     {
-      if (ReadEnergyBCD_G() == 0) return(0);
+      if (ReadEnergyBCD_G() == 0) return GetDouble2Error();
     }
   }
 
@@ -435,7 +447,7 @@ uchar   i;
     reBuffA = *PGetCanReal(mpreChannelsB, i) * reBuffB;
     SetCanReal(mpreChannelsB, i);
 
-    mpboChannelsA[i] = boTrue;
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = *PGetCanReal(mpreChannelsB, diCurr.ibLine);

@@ -4,4 +4,4 @@ CNTMON31.H
 
 ------------------------------------------------------------------------------*/
 
-bool    ReadCntMonCan31(uchar  ibMonth);
+double2 ReadCntMonCan31(uchar  ibMonth);
