@@ -140,20 +140,14 @@ bool    ReadHeaderN31(void)
 {
   HideCurrTime(1);
 
-//  if (ExtVersionCod())
-//  {
-//    MakeCRC13InBuff(3, 100);
-//    if (wCRC != InBuff(103) + InBuff(104)*0x100)
-//    {
-//      sprintf(szLo,"   ошибки: %-4u    ",++cwErrors31);
-//      return(cwErrors31 < 48);
-//    }
-//  }
-//
-/// *
-//  MakeCRC12InBuff(3, 24);
-//  if (wCRC != 0) { sprintf(szLo," выключено: %-4u   ",++cwErrors31); return(cwErrors31 < 48); }
-//* /
+  uint wCRC = MakeCrc16bitN31InBuff(3, 100);
+  if (wCRC != InBuff(103) + InBuff(104)*0x100)
+  {
+    Clear(); sprintf(szLo+3,"ошибки: %-4u",++cwErrors31);
+    return (cwErrors31 < 48);
+  }
+
+
   InitPop(3);
   time ti1 = ReadPackTimeN31();
 

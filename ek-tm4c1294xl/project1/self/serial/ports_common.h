@@ -28,3 +28,4 @@ uchar   MakeCrcVInBuff(uchar  bOffset, uint  wSize);
 
 uchar   MakeCrcN31OutBuff(uchar  bOffset, uint  wSize);
 uchar   MakeCrcN31InBuff(uchar  bOffset, uint  wSize);
+uint    MakeCrc16bitN31InBuff(uchar  bOffset, uint  wSize);

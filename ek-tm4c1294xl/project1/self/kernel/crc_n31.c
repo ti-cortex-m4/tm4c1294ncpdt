@@ -39,3 +39,24 @@ uchar   MakeCrcN31(uchar  *pbData, uint  wSize)
 
   return bCrc;
 }
+
+
+uint    MakeCrc16bitN31(uchar  *pbData, uint  wSize)
+{
+  uint wCRC = 0;
+  while (wSize-- > 0)
+  {
+    wCRC ^= *(pbData++) << 8;
+
+    if (wCRC & 0x8000)
+    {
+      wCRC = (wCRC << 1) ^ 0x1021;
+    }
+    else
+    {
+      wCRC <<= 1;
+    }
+  }
+
+  return wCRC;
+}

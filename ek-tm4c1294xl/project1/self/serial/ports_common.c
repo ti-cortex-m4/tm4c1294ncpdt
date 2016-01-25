@@ -234,4 +234,17 @@ uchar   MakeCrcN31InBuff(uchar  bOffset, uint  wSize)
   }
 }
 
+
+uint    MakeCrc16bitN31InBuff(uchar  bOffset, uint  wSize)
+{
+  switch (ibPort)
+  {
+    case 0:  return MakeCrc16bitN31(mpbInBuff0 + bOffset, wSize);
+    case 1:  return MakeCrc16bitN31(mpbInBuff1 + bOffset, wSize);
+    case 2:  return MakeCrc16bitN31(mpbInBuff2 + bOffset, wSize);
+    case 3:  return MakeCrc16bitN31(mpbInBuff3 + bOffset, wSize);
+    default: ASSERT(false); return 0;
+  }
+}
+
 #endif
