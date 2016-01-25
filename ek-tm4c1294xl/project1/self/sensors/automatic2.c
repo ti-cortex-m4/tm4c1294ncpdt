@@ -1868,7 +1868,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_N31
-    case 31: return ReadCntCurrN31();
+    case 31: return ReadCntCurr31();
 #endif
 
     default: return GetDouble2Error();
@@ -1985,7 +1985,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_N31
-    case 31: return ReadTimeCanN31();
+    case 31: return ReadTimeCan31();
 #endif
 
     default: return GetTime2Error();
@@ -2119,7 +2119,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_N31
-    case 31: return ReadCntMonCan31(ibMon);
+    case 31: return ReadCntMonCa31(ibMon);
 #endif
 
     default: return GetDouble2Error();

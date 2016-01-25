@@ -27,13 +27,13 @@ static uchar            bVersionN31;
 
 
 
-uchar   GetVersion31(void)
+uchar   GetVersio31(void)
 {
   return bVersionN31;
 }
 
 
-bool    ExtVersion31(void)
+bool    ExtVersio31(void)
 {
   return ((bVersionN31 == 36) ||
           (bVersionN31 == 37) ||
@@ -42,7 +42,7 @@ bool    ExtVersion31(void)
 
 
 
-float   PopFloatN31(void)
+float   PopFloat31(void)
 {
   static combo32 co;
 
@@ -55,7 +55,7 @@ float   PopFloatN31(void)
 }
 
 
-double  PopDoubleN31(void)
+double  PopDouble31(void)
 {
   static combo64 co;
 
@@ -72,7 +72,7 @@ double  PopDoubleN31(void)
 }
 
 
-void    QueryCloseN31(void)
+void    QueryClose31(void)
 {
   InitPush(0);
 
@@ -80,13 +80,13 @@ void    QueryCloseN31(void)
   PushChar(0x00);
   PushChar(0x02);
 
-  QueryN31(0, 3+1);
+  Query31(0, 3+1);
 }
 
 
-void    QueryOpenN31(void)
+void    QueryOpen31(void)
 {
-  QueryCloseN31();
+  QueryClose31();
   DelayOff();
 
   memset(&mpbCoder, 0, sizeof(mpbCoder));
@@ -100,11 +100,11 @@ void    QueryOpenN31(void)
   PushLongBig(mpdwAddress1[diCurr.bAddress-1]);
   PushLongBig(mpdwAddress2[diCurr.bAddress-1]);
 
-  QueryN31(3+8+1, 3+8+1);
+  Query31(3+8+1, 3+8+1);
 }
 
 
-bool    ReadOpenN31(void)
+bool    ReadOpen31(void)
 {
   InitPop(3);
 
@@ -128,7 +128,7 @@ bool    ReadOpenN31(void)
 
 
 
-void    QueryTimeN31(void)
+void    QueryTime31(void)
 {
   InitPush(0);
 
@@ -136,11 +136,11 @@ void    QueryTimeN31(void)
   PushChar(0x00);
   PushChar(0x07);
 
-  QueryN31(3+8+1, 3+1);
+  Query31(3+8+1, 3+1);
 }
 
 
-time    ReadTimeN31(void)
+time    ReadTime31(void)
 {
   time ti;
 
@@ -158,7 +158,7 @@ time    ReadTimeN31(void)
 }
 
 
-time    ReadPackTimeN31(void)
+time    ReadPackTime31(void)
 {
   InitPop(3);
 
@@ -181,7 +181,7 @@ time    ReadPackTimeN31(void)
 }
 
 
-void    QueryControlN31(time  ti)
+void    QueryControl31(time  ti)
 {
   InitPushCod();
 
@@ -201,12 +201,12 @@ void    QueryControlN31(time  ti)
   PushCharCod(ti.bMinute);
   PushCharCod(ti.bSecond);
 
-  QueryN31(3+1, 3+8+1);
+  Query31(3+1, 3+8+1);
 }
 
 
 
-void    QueryTransN31(void)
+void    QueryTrans31(void)
 {
   InitPushCod();
 
@@ -218,12 +218,12 @@ void    QueryTransN31(void)
   PushCharCod(0x00);
   PushCharCod(0x00);
 
-  QueryN31(3+25+1, 3+3+1);
+  Query31(3+25+1, 3+3+1);
 }
 
 
 
-void    QueryEngAbsN31(void)
+void    QueryEngAbs31(void)
 {
   InitPush(0);
 
@@ -231,27 +231,27 @@ void    QueryEngAbsN31(void)
   PushChar(0x00);
   PushChar(0x12); // "чтение сумарных энергий"
 
-  QueryN31(3+48+1, 3+1);
+  Query31(3+48+1, 3+1);
 }
 
 
-void    ReadEngN31(void)
+void    ReadEng31(void)
 {
   InitPop(3);
 
   uchar i;
   for (i=0; i<MAX_LINE_N31; i++)
   {
-    mpdbChannelsC[i] = PopDoubleN31() / 1000;
+    mpdbChannelsC[i] = PopDouble31() / 1000;
     mpboChannelsA[i] = true;
   }
 }
 
 
 
-void    ReadCurrentN31(void)
+void    ReadCurrent31(void)
 {
-  ReadEngN31();
+  ReadEng31();
 
   double dbPulse = mpdbPulseMnt[ibDig];
 

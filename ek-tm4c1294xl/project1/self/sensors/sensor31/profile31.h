@@ -8,10 +8,10 @@ extern  time                    tiProfile31;
 
 
 
-bool    DecIndexN31(void);
+bool    DecIndex31(void);
 
-void    QueryTopN31(void);
-bool    ReadTopN31(void);
+void    QueryTop31(void);
+bool    ReadTop31(void);
 
-void    QueryHeaderN31(void);
-bool    ReadHeaderN31(void);
+void    QueryHeader31(void);
+bool    ReadHeader31(void);

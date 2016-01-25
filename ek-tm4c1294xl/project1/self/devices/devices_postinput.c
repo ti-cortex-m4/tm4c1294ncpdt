@@ -85,7 +85,7 @@ void    DevicesPostInput(void)
       uchar bCrc = MakeCrc8Bit31InBuff(1, CountInBuff()-1);
       if (bCrc == 0)
       {
-        UnpackN31();
+        Unpack31();
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else

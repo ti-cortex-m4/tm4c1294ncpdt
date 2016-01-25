@@ -14,7 +14,7 @@ UNPACK31!C
 
 
 
-void    UnpackN31(void)
+void    Unpack31(void)
 {
 uchar   i,j,k,a,b,c;
 uint    x;
