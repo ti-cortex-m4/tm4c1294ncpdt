@@ -151,7 +151,7 @@ bool    ReadEnergyExt_G(void)
     if (r == bMINORREPEATS) return(0);
     else
     {
-      if (ValidPackTime() == 0) break;         // тариф не используется
+      if (ValidPackTime() == 0) break; // тариф не используется
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 196);
@@ -191,14 +191,14 @@ bool    ReadMonthIndexExt_G(void)
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G2 "); Delay(1000); return(0); }
 
-      time tiDig = ReadPackTimeN31();
+      time ti = ReadPackTimeN31();
 
-      if (tiDig.bMonth == 0)
+      if (ti.bMonth == 0)
         mpbChannelsMonG[m] = 0;
       else
-        mpbChannelsMonG[m] = (10 + tiDig.bMonth)%12 + 1;
+        mpbChannelsMonG[m] = (10 + ti.bMonth)%12 + 1;
 
-      if (tiDig.bMonth != 0)
+      if (ti.bMonth != 0)
         { sprintf(szLo,"  найдено: %-2u   ", mpbChannelsMonG[m]); Delay(200); }
       else
         sprintf(szLo," пусто: %2u-%-2u   ",m,12);
@@ -246,9 +246,11 @@ bool  ReadEngMonExt_G(uchar  ibMonth)
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G3 "); Delay(1000); return(0); }
 
       InitPop(7); // !
-      for (r=0; r<6; r++)
+
+      uchar i;
+      for (i=0; i<6; i++)
       {
-        mpreChannelsMonG[r] += PopDoubleN31()/1000;
+        mpreChannelsMonG[i] += PopDoubleN31()/1000;
       }
     }
   }
@@ -283,16 +285,20 @@ bool  ReadEngMonCurrExt_G(void)
         uint wCRC = MakeCrc16Bit31InBuff(3, 196);
         if (wCRC != InBuff(199) + InBuff(200)*0x100) { sprintf(szLo," ошибка CRC: G4 "); Delay(1000); return(0); }
 
-        for (r=0; r<24; r++)
+        uchar i;
+        for (i=0; i<24; i++)
         {
-          mpreCodEng30[1 + (r/4)*5 + r%4] += PopDoubleN31()/1000;
+          mpreCodEng30[1 + (i/4)*5 + i%4] += PopDoubleN31()/1000;
         }
       }
     }
   }
 
+  uchar i;
   for (i=0; i<6; i++)
+  {
     mpreChannelsMonG[i] += mpreCodEng30[i*5+1];
+  }
 
   return(1);
 }
@@ -324,9 +330,10 @@ bool    ReadEngAbsExt_G(void)
         uint wCRC = MakeCrc16Bit31InBuff(3, 52);
         if (wCRC != InBuff(55) + InBuff(56)*0x100) { sprintf(szLo," ошибка CRC: G5 "); Delay(1000); return(0); }
 
-        for (r=0; r<6; r++)
+        uchar i;
+        for (i=0; i<6; i++)
         {
-          mpreChannelsAbsG[r] += PopDoubleN31()/1000;
+          mpreChannelsAbsG[i] += PopDoubleN31()/1000;
         }
       }
     }
