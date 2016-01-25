@@ -17,6 +17,9 @@ AUTOMATIC_0!C
 #include "../../sensors/device_s.h"
 #include "../../sensors/automatic_s.h"
 #include "../../sensors/device_u.h"
+#include "../../sensors/device_v.h"
+#include "../../sensors/device_w.h"
+#include "../../sensors/sensor31/device31.h"
 #include "../../console.h"
 #include "../../time/timedate.h"
 #include "automatic_0.h"
@@ -388,19 +391,54 @@ time2   ReadTimeCanU_Short(void)
 
 
 
-#ifndef SKIP_Z
+#ifndef SKIP_V
 
-bool    ReadTimeCanZ_Short(void)
+time2   ReadTimeCanV_Short(void)
 {
   DelayOff();
-  QueryTimeZ();
+  QueryTimeV();
 
-  if (ZetInput() != SER_GOODCHECK) return(0);
+  if (InputV() != SER_GOODCHECK) return GetTime2Error();
 
 
-  ReadTimeAltZ();
+  return GetTime2(ReadTimeV(), true);
+}
 
-  return(1);
+#endif
+
+
+#ifndef SKIP_W
+
+time2   ReadTimeCanW_Short(void)
+{
+  QueryCloseW();
+  QueryTimeW();
+
+  if (InputW() != SER_GOODCHECK) return GetTime2Error();
+
+  QueryCloseW();
+
+  return GetTime2(ReadTimeW(), true);
+}
+
+#endif
+
+
+#ifndef SKIP_N31
+
+time2   ReadTimeCan31_Short(void)
+{
+  DelayOff();
+  QueryOpen31();
+
+  if (Input31() != SER_GOODCHECK) return GetTime2Error();
+
+  if (ReadOpen31() == false) return GetTime2Error();
+
+  DelayOff();
+  QueryTime31();
+
+  return GetTime2(ReadTime31(), true);
 }
 
 #endif
@@ -500,6 +538,19 @@ time2   ReadTimeCan_Short(uchar  ibCan)
 #ifndef SKIP_U
     case 26:
     case 28: return ReadTimeCanU_Short();
+#endif
+
+#ifndef SKIP_V
+    case 27: return ReadTimeCanV_Short();
+#endif
+
+#ifndef SKIP_W
+    case 29:
+    case 30: return ReadTimeCanW_Short();
+#endif
+
+#ifndef SKIP_N31
+    case 31: return ReadTimeCan31_Short();
 #endif
 
     default: return GetTime2Error();

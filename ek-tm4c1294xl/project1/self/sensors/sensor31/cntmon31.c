@@ -21,16 +21,16 @@ CNTMON31.C
 
 #ifndef SKIP_N31
 
-// промежуточные буфера
+// энерги€ по мес€цам
 static double           mpdbChannelsMon[6];
 
-// промежуточные буфера
+// энерги€ всего
 static double           mpdbChannelsAbs[6];
 
-// промежуточные буфера
+// номера мес€цев
 static uchar            mpbChannelsMon[13];
 
-// массив потреблЄнной энергии
+// энерги€
 static double           mpdbEng30[30];
 
 
@@ -203,9 +203,9 @@ bool    ReadMonIndexExt31(void)
         mpbChannelsMon[m] = (10 + ti.bMonth)%12 + 1;
 
       if (ti.bMonth != 0)
-        { sprintf(szLo,"  найдено: %-2u   ", mpbChannelsMon[m]); Delay(200); }
+        { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbChannelsMon[m]); Delay(200); }
       else
-        sprintf(szLo," пусто: %2u-%-2u   ",m,12);
+        { Clear(); sprintf(szLo+1,"пусто: %2u-%-2u",m,12); }
     }
   }
 
