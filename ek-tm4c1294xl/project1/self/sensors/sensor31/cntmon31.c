@@ -93,24 +93,25 @@ uint  i;
 
 bool    ReadEnergyAllG(void)
 {
-  time tiDig = ReadPackTimeN31();
+  time ti = ReadPackTimeN31();
 
-  if ((tiDig.bSecond == 0) &&
-      (tiDig.bMinute == 0) &&
-      (tiDig.bHour   == 0) &&
-      (tiDig.bDay    == 0) &&
-      (tiDig.bMonth  == 0) &&
-      (tiDig.bYear   == 0)) return(0);
+  if ((ti.bSecond == 0) &&
+      (ti.bMinute == 0) &&
+      (ti.bHour   == 0) &&
+      (ti.bDay    == 0) &&
+      (ti.bMonth  == 0) &&
+      (ti.bYear   == 0)) return false;
 
-  return(1);
+  return true;
 }
 
 
 bool    ReadEnergyExt_G(void)
 {
-uchar   i,j;
+uchar   i;
 
-  for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 72)
+  uchar j;
+  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
@@ -140,8 +141,8 @@ uchar   i,j;
     }
   }
 
-
-  for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 72)
+  uchar j;
+  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
@@ -206,9 +207,9 @@ uchar   i,j;
         mpbChannelsMonG[j] = (10 + tiDig.bMonth)%12 + 1;
 
       if (tiDig.bMonth != 0)
-        { sprintf(szLo,"  найдено: %-2bu   ", mpbChannelsMonG[j]); Delay(200); }
+        { sprintf(szLo,"  найдено: %-2u   ", mpbChannelsMonG[j]); Delay(200); }
       else
-        sprintf(szLo," пусто: %2bu-%-2bu   ",j,12);
+        sprintf(szLo," пусто: %2u-%-2u   ",j,12);
     }
   }
 
@@ -220,7 +221,7 @@ uchar   SearchMonthIndexExt_G(uchar  bMonth)
 {
 uchar i;
 
-  sprintf(szLo," требуется: %-2bu  ", bMonth); DelayInf();
+  sprintf(szLo," требуется: %-2u  ", bMonth); DelayInf();
 
   for (i=0; i<=12; i++)
     if (mpbChannelsMonG[i] == bMonth)
@@ -232,9 +233,10 @@ uchar i;
 
 bool  ReadEngMonExt_G(uchar  ibMonth)
 {
-uchar   i,j;
+uchar   i;
 
-  for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 72)
+  uchar j;
+  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
@@ -267,9 +269,10 @@ uchar   i,j;
 
 bool  ReadEngMonCurrExt_G(void)
 {
-uchar i,j;
+uchar i;
 
-  for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 72)
+  uchar j;
+  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
@@ -308,9 +311,10 @@ uchar i,j;
 
 bool    ReadEngAbsExt_G(void)
 {
-uchar   i,j;
+uchar   i;
 
-  for (j=0; j<bTARIFFS; j++)                    // проходим по всем тарифам (в счётчике: 72)
+  uchar j;
+  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
