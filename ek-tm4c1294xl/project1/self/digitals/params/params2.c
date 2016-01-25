@@ -39,7 +39,7 @@ bool                    fBeginParam;
 
 static float            reParamDiv;
 
-static float            reValue;
+float                   reValue;
 
 
 
