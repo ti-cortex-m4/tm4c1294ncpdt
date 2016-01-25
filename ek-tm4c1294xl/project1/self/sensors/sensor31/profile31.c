@@ -37,7 +37,7 @@ time                    tiProfile31;
 
 static uint             wBaseCurr31, wBaseLast31, wProfile31;
 
-static uint             iwMajor31;
+static uint             cwErrors31;
 
 
 
@@ -110,7 +110,7 @@ bool    ReadTopN31(void)
 
   wProfile31 = wBaseCurr31;
 
-  iwMajor31 = 0; // количество ошибок чтения
+  cwErrors31 = 0; // количество ошибок чтения
 
   Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast31,wBaseCurr31); DelayInf();
 
@@ -145,14 +145,14 @@ bool    ReadHeaderN31(void)
 //    MakeCRC13InBuff(3, 100);
 //    if (wCRC != InBuff(103) + InBuff(104)*0x100)
 //    {
-//      sprintf(szLo,"   ошибки: %-4u    ",++iwMajor31);
-//      return(iwMajor31 < 48);
+//      sprintf(szLo,"   ошибки: %-4u    ",++cwErrors31);
+//      return(cwErrors31 < 48);
 //    }
 //  }
 //
 /// *
 //  MakeCRC12InBuff(3, 24);
-//  if (wCRC != 0) { sprintf(szLo," выключено: %-4u   ",++iwMajor31); return(iwMajor31 < 48); }
+//  if (wCRC != 0) { sprintf(szLo," выключено: %-4u   ",++cwErrors31); return(cwErrors31 < 48); }
 //* /
   InitPop(3);
   time ti1 = ReadPackTimeN31();
@@ -169,18 +169,8 @@ bool    ReadHeaderN31(void)
   MonitorTime(ti2);
 
 
-
-  if (SearchDefHouIndex(ti2) == 0) return (++iwMajor31 < 48);
-  iwMajor31 = 0;
-//
-//
-//  iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;
-//
-//  tiAlt = tiCurr;
-//  dwBuffC = DateToHouIndex();
-//
-//  dwBuffC -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
-//  HouIndexToDate(dwBuffC);
+  if (SearchDefHouIndex(ti2) == 0) return (++cwErrors31 < 48);
+  cwErrors31 = 0;
 
 
   ShowProgressDigHou();
