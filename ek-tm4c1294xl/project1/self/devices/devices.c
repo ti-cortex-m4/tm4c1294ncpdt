@@ -123,6 +123,12 @@ void    ShowProgressDigHou(void)
 }
 
 
+void    ShowProfileTime(time  ti)
+{
+  sprintf(szLo," %02u    %02u.%02u.%02u", ti.bHour,ti.bDay,ti.bMonth,ti.bYear);
+}
+
+
 
 bool    MakeStopHou(uint  wAdd)
 {

@@ -155,21 +155,22 @@ bool    ReadHeaderN31(void)
 //  if (wCRC != 0) { sprintf(szLo," выключено: %-4u   ",++iwMajor31); return(iwMajor31 < 48); }
 //* /
   InitPop(3);
-  time ti = ReadPackTimeN31();
+  time ti1 = ReadPackTimeN31();
 
-  MonitorString("\n time "); MonitorTime(ti);
+  ShowProfileTime(ti1);
+  if ((ti1.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
 
-  ulong dw = DateToHouIndex(ti);
+  MonitorString("\n time "); MonitorTime(ti1); if ((ti1.bMinute % 30) != 0) MonitorString(" ? ");
+
+  ulong dw = DateToHouIndex(ti1);
   dw--;
-  ti = HouIndexToDate(dw); // время записи должно соответсвовать началу получасового блока
-  MonitorTime(ti);
+  time ti2 = HouIndexToDate(dw); // время записи должно соответсвовать началу получасового блока
 
-  sprintf(szLo," %02u    %02u.%02u.%02u", ti.bHour, ti.bDay,ti.bMonth,ti.bYear);
-
-  if ((ti.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
+  MonitorTime(ti2);
 
 
-  if (SearchDefHouIndex(ti) == 0) return (++iwMajor31 < 48);
+
+  if (SearchDefHouIndex(ti2) == 0) return (++iwMajor31 < 48);
   iwMajor31 = 0;
 //
 //
@@ -196,7 +197,7 @@ bool    ReadHeaderN31(void)
     fl /= 1000;
     mpdbEngFracDigCan[ibDig][i] += fl;
 
-    if (ti.bMinute % 30 == 0)
+    if (ti1.bMinute % 30 == 0)
     {
       uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
       MonitorString(" "); MonitorIntDec(w);
@@ -204,9 +205,18 @@ bool    ReadHeaderN31(void)
 
       mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
     }
+    else
+    {
+      MonitorString(" ? ");
+    }
   }
 
-  MakeSpecial(ti);
+  if (IsDefect(ibDig))
+  {
+    MonitorString("\n add value");
+    MakeSpecial(ti2);
+  }
+
   return MakeStopHou(0);
 }
 
