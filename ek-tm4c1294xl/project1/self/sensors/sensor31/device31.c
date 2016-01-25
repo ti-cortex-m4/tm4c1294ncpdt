@@ -23,8 +23,14 @@ DEVICE31.C
 
 #ifndef SKIP_N31
 
-uchar                   bVersionN31;
+static uchar            bVersionN31;
 
+
+
+uchar   GetVersion31(void)
+{
+  return bVersionN31;
+}
 
 
 bool    ExtVersion31(void)
@@ -147,6 +153,29 @@ time    ReadTimeN31(void)
   ti.bHour   = PopChar();
   ti.bMinute = PopChar();
   ti.bSecond = PopChar();
+
+  return ti;
+}
+
+
+time    ReadPackTimeN31(void)
+{
+  InitPop(3);
+
+  uchar d = PopChar();
+  uchar c = PopChar();
+  uchar b = PopChar();
+  uchar a = PopChar();
+
+  time ti;
+
+  ti.bHour   = (c & 0xF8) >> 3;
+  ti.bMinute = ((0x100*c+d) >> 5) & 0x3F;
+  ti.bSecond = (d & 0x1F) << 1;
+
+  ti.bDay    = (b & 0x1F);
+  ti.bMonth  = ((0x100*a+b) >> 5) & 0x0F;
+  ti.bYear   = (a & 0xFE) >> 1;
 
   return ti;
 }

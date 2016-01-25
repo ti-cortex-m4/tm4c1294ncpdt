@@ -34,6 +34,9 @@ static uchar            mpbChannelsMonG[13];
 // массив потреблённой энергии
 static double           mpreCodEng30[30];
 
+//
+static double           reBuffX;
+
 
 
 void    QueryIndex4_G(uchar  ibTariff)
@@ -87,6 +90,22 @@ uint  i;
 }
 
 
+
+bool    ReadEnergyAllG(void)
+{
+  time tiDig = ReadPackTimeN31();
+
+  if ((tiDig.bSecond == 0) &&
+      (tiDig.bMinute == 0) &&
+      (tiDig.bHour   == 0) &&
+      (tiDig.bDay    == 0) &&
+      (tiDig.bMonth  == 0) &&
+      (tiDig.bYear   == 0)) return(0);
+
+  return(1);
+}
+
+
 bool    ReadEnergyExt_G(void)
 {
 uchar   i,j;
@@ -115,10 +134,7 @@ uchar   i,j;
 
         for (i=0; i<6; i++)
         {
-          PopRealExt_G();
-          reBuffA /= 1000;
-
-          mpreCodEng30[i*5] += reBuffA;
+          mpreCodEng30[i*5] += PopDoubleN31()/1000;
         }
       }
     }
@@ -149,10 +165,7 @@ uchar   i,j;
 
         for (i=0; i<24; i++)
         {
-          PopRealExt_G();
-          reBuffA /= 1000;
-
-          mpreCodEng30[1 + (i/4)*5 + i%4] += reBuffA;
+          mpreCodEng30[1 + (i/4)*5 + i%4] += PopDoubleN31()/1000;
         }
       }
     }
@@ -185,7 +198,7 @@ uchar   i,j;
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G2 "); Delay(1000); return(0); }
 
-      ReadPackTimeDigG();
+      time tiDig = ReadPackTimeN31();
 
       if (tiDig.bMonth == 0)
         mpbChannelsMonG[j] = 0;
@@ -243,10 +256,7 @@ uchar   i,j;
       InitPop(7);                               // !
       for (i=0; i<6; i++)
       {
-        PopRealExt_G();
-        reBuffA /= 1000;
-
-        mpreChannelsMonG[i] += reBuffA;
+        mpreChannelsMonG[i] += PopDoubleN31()/1000;
       }
     }
   }
@@ -283,10 +293,7 @@ uchar i,j;
 
         for (i=0; i<24; i++)
         {
-          PopRealExt_G();
-          reBuffA /= 1000;
-
-          mpreCodEng30[1 + (i/4)*5 + i%4] += reBuffA;
+          mpreCodEng30[1 + (i/4)*5 + i%4] += PopDoubleN31()/1000;
         }
       }
     }
@@ -327,10 +334,7 @@ uchar   i,j;
 
         for (i=0; i<6; i++)
         {
-          PopRealExt_G();
-          reBuffA /= 1000;
-
-          mpreChannelsAbsG[i] += reBuffA;
+          mpreChannelsAbsG[i] += PopDoubleN31()/1000;
         }
       }
     }
@@ -417,7 +421,7 @@ uchar   i;
   {
     if (tiAlt.bMonth != ibMonth+1)
     {
-      if (bVersionN31 == 49)
+      if (GetVersion31() == 49)
         return ReadCntMonCanExt_G(ibMonth);
       else
         { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   версия 49    "); Delay(1000); return GetDouble2Error(); }
