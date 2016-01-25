@@ -82,7 +82,7 @@ void    DevicesPostInput(void)
     else if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10) ||
              (diCurr.bDevice == 31))
     {
-      uchar bCrc = MakeCrcN31InBuff(1, CountInBuff()-1);
+      uchar bCrc = MakeCrc8Bit31InBuff(1, CountInBuff()-1);
       if (bCrc == 0)
       {
         UnpackN31();

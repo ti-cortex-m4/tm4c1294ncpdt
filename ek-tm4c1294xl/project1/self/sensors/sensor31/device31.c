@@ -26,6 +26,14 @@ DEVICE31.C
 uchar                   bVersionN31;
 
 
+bool    ExtVersion31(void)
+{
+  return ((bVersionCod == 36) ||
+          (bVersionCod == 37) ||
+          (bVersionCod == 49));
+}
+
+
 
 float   PopFloatN31(void)
 {

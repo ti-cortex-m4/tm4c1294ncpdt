@@ -8,6 +8,8 @@ DEVICE31.H
 
 
 
+bool    ExtVersion31(void);
+
 float   PopFloatN31(void);
 double  PopDoubleN31(void);
 

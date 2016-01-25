@@ -30,7 +30,7 @@ static const uchar      mpbCrcN31[0x100] = {
 
 
 
-uchar   MakeCrcN31(uchar  *pbData, uint  wSize)
+uchar   MakeCrc8Bit31(uchar  *pbData, uint  wSize)
 {
   uchar bCrc = 0;
 

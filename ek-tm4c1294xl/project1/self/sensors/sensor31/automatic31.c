@@ -59,7 +59,7 @@ uchar   PopCharCod(void)
 
 void    QueryN31(uint  cwIn, uchar  cbOut)
 {
-  uchar bCrc = MakeCrcN31OutBuff(1, cbOut-2);
+  uchar bCrc = MakeCrc8Bit31OutBuff(1, cbOut-2);
 
   InitPush(0);
   Skip(cbOut-1);
@@ -108,7 +108,7 @@ serial  InputN31(void)
 
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
-      uchar bCrc = MakeCrcN31InBuff(1, CountInBuff()-1);
+      uchar bCrc = MakeCrc8Bit31InBuff(1, CountInBuff()-1);
       if (bCrc == 0)
       {
         UnpackN31();
@@ -121,7 +121,7 @@ serial  InputN31(void)
     }
     else if (mpSerial[ibPort] == SER_BADLINK)
     {
-      uchar bCrc = MakeCrcN31InBuff(1, IndexInBuff()-1);
+      uchar bCrc = MakeCrc8Bit31InBuff(1, IndexInBuff()-1);
       if (bCrc == 0)
       {
         UnpackN31();

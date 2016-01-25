@@ -24,7 +24,7 @@ void    DevicesPause(void)
     {
       if (mpSerial[ibPort] == SER_BADLINK)
       {
-        uchar bCrc = MakeCrcN31InBuff(1, IndexInBuff()-1);
+        uchar bCrc = MakeCrc8Bit31InBuff(1, IndexInBuff()-1);
         if (bCrc == 0)
         {
           UnpackN31();

@@ -140,11 +140,14 @@ bool    ReadHeaderN31(void)
 {
   HideCurrTime(1);
 
-  uint wCRC = MakeCrc16bitN31InBuff(3, 100);
-  if (wCRC != InBuff(103) + InBuff(104)*0x100)
+  if (ExtVersion31())
   {
-    Clear(); sprintf(szLo+3,"ошибки: %-4u",++cwErrors31);
-    return (cwErrors31 < 48);
+    uint wCRC = MakeCrc16Bit31InBuff(3, 100);
+    if (wCRC != InBuff(103) + InBuff(104)*0x100)
+    {
+      Clear(); sprintf(szLo+3,"ошибки: %-4u",++cwErrors31);
+      return (cwErrors31 < 48);
+    }
   }
 
 
