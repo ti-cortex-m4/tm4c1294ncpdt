@@ -26,11 +26,12 @@ DEVICE31.C
 uchar                   bVersionN31;
 
 
+
 bool    ExtVersion31(void)
 {
-  return ((bVersionCod == 36) ||
-          (bVersionCod == 37) ||
-          (bVersionCod == 49));
+  return ((bVersionN31 == 36) ||
+          (bVersionN31 == 37) ||
+          (bVersionN31 == 49));
 }
 
 
