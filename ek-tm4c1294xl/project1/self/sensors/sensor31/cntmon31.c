@@ -45,7 +45,7 @@ void    QueryIndex4_G(uchar  ibTrf)
   PushCharCod(0x00);
   PushCharCod(ibTrf);
 
-  QueryN31(3+4+8*24+2+1, 3+3+1);
+  Query31(3+4+8*24+2+1, 3+3+1);
 }
 
 
@@ -61,7 +61,7 @@ void    QueryIndex5_G(uchar  ibTrf)
   PushCharCod(0x00);
   PushCharCod(ibTrf);
 
-  QueryN31(3+4+8*6+2+1, 3+3+1);
+  Query31(3+4+8*6+2+1, 3+3+1);
 }
 
 
@@ -80,14 +80,14 @@ uint  i;
   PushCharCod(i / 0x100);
   PushCharCod(i % 0x100);
 
-  QueryN31(3+102+1, 3+3+1);
+  Query31(3+102+1, 3+3+1);
 }
 
 
 
 static bool ValidPackTime(void)
 {
-  time ti = ReadPackTimeN31();
+  time ti = ReadPackTime31();
 
   if ((ti.bSecond == 0) &&
       (ti.bMinute == 0) &&
@@ -113,7 +113,7 @@ bool    ReadEnergyExt_G(void)
 
       ShowPercent(60+t);
 
-      if (InputN31() == SER_GOODCHECK) break;
+      if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
@@ -128,7 +128,7 @@ bool    ReadEnergyExt_G(void)
 
         for (r=0; r<6; r++)
         {
-          mpreCodEng30[r*5] += PopDoubleN31()/1000;
+          mpreCodEng30[r*5] += PopDouble31()/1000;
         }
       }
     }
@@ -144,7 +144,7 @@ bool    ReadEnergyExt_G(void)
 
       ShowPercent(70+t);
 
-      if (InputN31() == SER_GOODCHECK) break;
+      if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
@@ -159,7 +159,7 @@ bool    ReadEnergyExt_G(void)
 
         for (r=0; r<24; r++)
         {
-          mpreCodEng30[1 + (r/4)*5 + r%4] += PopDoubleN31()/1000;
+          mpreCodEng30[1 + (r/4)*5 + r%4] += PopDouble31()/1000;
         }
       }
     }
@@ -182,7 +182,7 @@ bool    ReadMonthIndexExt_G(void)
       DelayOff();
       QueryIndex26_G(m, 0);
 
-      if (InputN31() == SER_GOODCHECK) break;
+      if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
@@ -192,7 +192,7 @@ bool    ReadMonthIndexExt_G(void)
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G2 "); Delay(1000); return(0); }
 
-      time ti = ReadPackTimeN31();
+      time ti = ReadPackTime31();
 
       if (ti.bMonth == 0)
         mpbChannelsMonG[m] = 0;
@@ -235,7 +235,7 @@ bool  ReadEngMonExt_G(uchar  ibMonth)
       DelayOff();
       QueryIndex26_G(ibMonth, t);
 
-      if (InputN31() == SER_GOODCHECK) break;
+      if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
@@ -250,7 +250,7 @@ bool  ReadEngMonExt_G(uchar  ibMonth)
       uchar i;
       for (i=0; i<6; i++)
       {
-        mpreChannelsMonG[i] += PopDoubleN31()/1000;
+        mpreChannelsMonG[i] += PopDouble31()/1000;
       }
     }
   }
@@ -272,7 +272,7 @@ bool  ReadEngMonCurrExt_G(void)
 
       ShowPercent(80+t);
 
-      if (InputN31() == SER_GOODCHECK) break;
+      if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
@@ -288,7 +288,7 @@ bool  ReadEngMonCurrExt_G(void)
         uchar i;
         for (i=0; i<24; i++)
         {
-          mpreCodEng30[1 + (i/4)*5 + i%4] += PopDoubleN31()/1000;
+          mpreCodEng30[1 + (i/4)*5 + i%4] += PopDouble31()/1000;
         }
       }
     }
@@ -317,7 +317,7 @@ bool    ReadEngAbsExt_G(void)
 
       ShowPercent(90+t);
 
-      if (InputN31() == SER_GOODCHECK) break;
+      if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
@@ -333,7 +333,7 @@ bool    ReadEngAbsExt_G(void)
         uchar i;
         for (i=0; i<6; i++)
         {
-          mpreChannelsAbsG[i] += PopDoubleN31()/1000;
+          mpreChannelsAbsG[i] += PopDouble31()/1000;
         }
       }
     }
@@ -343,7 +343,7 @@ bool    ReadEngAbsExt_G(void)
 }
 
 
-double2 ReadCntMonCanExt_G(uchar  ibMonth, time  tiAlt)
+double2 ReadCntMonCanExt_G(uchar  ibMon, time  ti)
 {
   if (ReadMonthIndexExt_G() == 0) return GetDouble2Error();
   Clear();
@@ -352,11 +352,11 @@ double2 ReadCntMonCanExt_G(uchar  ibMonth, time  tiAlt)
   uchar i;
   for (i=0; i<6; i++) mpreChannelsMonG[i] = 0;
 
-  uchar m = ibMonth+1;
+  uchar m = ibMon+1;
   uchar ibDay = 0;
   do
   {
-    if ((m%12 + 1) == tiAlt.bMonth)
+    if ((m%12 + 1) == ti.bMonth)
     {
       if (ReadEngMonCurrExt_G() == 0) return GetDouble2Error();
     }
@@ -369,7 +369,7 @@ double2 ReadCntMonCanExt_G(uchar  ibMonth, time  tiAlt)
     }
     ShowPercent(80 + ibDay++);
   }
-  while ((bMONTHS + tiAlt.bMonth - ++m) % bMONTHS != 0 );
+  while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0 );
 
 
   for (i=0; i<6; i++) mpreChannelsAbsG[i] = 0;
@@ -392,7 +392,7 @@ double2 ReadCntMonCanExt_G(uchar  ibMonth, time  tiAlt)
 
 
 
-double2 ReadCntMonCan31(uchar  ibMon)
+double2 ReadCntMonCa31(uchar  ibMon)
 {
   time2 ti2 = QueryTimeN31_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
@@ -402,12 +402,12 @@ double2 ReadCntMonCan31(uchar  ibMon)
   uchar i;
   for (i=0; i<30; i++) mpreCodEng30[i] = 0;
 
-  if (ExtVersion31())
+  if (ExtVersio31())
   {
     if (ti.bMonth != ibMon+1)
     {
-      if (GetVersion31() == 49)
-        return ReadCntMonCanExt_G(ibMon, tiX);
+      if (GetVersio31() == 49)
+        return ReadCntMonCanExt_G(ibMon, ti);
       else
         { sprintf(szLo,"   необходима   "); Delay(1000); sprintf(szLo,"   версия 49    "); Delay(1000); return GetDouble2Error(); }
     }

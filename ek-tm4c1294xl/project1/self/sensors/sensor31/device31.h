@@ -8,23 +8,23 @@ DEVICE31.H
 
 
 
-uchar   GetVersion31(void);
-bool    ExtVersion31(void);
+uchar   GetVersio31(void);
+bool    ExtVersio31(void);
 
-float   PopFloatN31(void);
-double  PopDoubleN31(void);
+float   PopFloat31(void);
+double  PopDouble31(void);
 
-void    QueryOpenN31(void);
-bool    ReadOpenN31(void);
+void    QueryOpen31(void);
+bool    ReadOpen31(void);
 
-void    QueryTimeN31(void);
-time    ReadTimeN31(void);
-time    ReadPackTimeN31(void);
-void    QueryControlN31(time  ti);
+void    QueryTime31(void);
+time    ReadTime31(void);
+time    ReadPackTime31(void);
+void    QueryControl31(time  ti);
 
-void    QueryTransN31(void);
+void    QueryTrans31(void);
 
-void    QueryEngAbsN31(void);
-void    ReadEngN31();
+void    QueryEngAbs31(void);
+void    ReadEng31();
 
-void    ReadCurrentN31(void);
+void    ReadCurrent31(void);

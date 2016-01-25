@@ -177,7 +177,7 @@ uchar   i;
 #endif
 
 #ifndef SKIP_N31
-          case 31: if (AutomaticN31() != 1) bRes = 0xEE; break;
+          case 31: if (Automatic31() != 1) bRes = 0xEE; break;
 #endif
         }
 

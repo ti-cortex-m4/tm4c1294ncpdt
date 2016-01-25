@@ -4814,14 +4814,14 @@ void    RunDevices(void)
       cbCorrects = 0;
 
       cbRepeat = GetMaxRepeats();
-      QueryOpenN31();
+      QueryOpen31();
       SetCurr(DEV_OPENCANAL_N31P);
       break;
 
     case DEV_OPENCANAL_N31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadOpenN31() == 0)
+        if (ReadOpen31() == 0)
           ErrorProfile();
         else if (fCurrCtrl == true)
           MakePause(DEV_POSTOPENCANAL_N31P);
@@ -4836,7 +4836,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryOpenN31();
+          QueryOpen31();
           SetCurr(DEV_OPENCANAL_N31P);
         }
       }
@@ -4847,14 +4847,14 @@ void    RunDevices(void)
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = GetMaxRepeats();
-      QueryTimeN31();
+      QueryTime31();
       SetCurr(DEV_TIME_N31P);
       break;
 
     case DEV_TIME_N31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiProfile31 = ReadTimeN31();
+        tiProfile31 = ReadTime31();
         MakePause(DEV_POSTTIME_N31P);
       }
       else
@@ -4865,7 +4865,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryTimeN31();
+          QueryTime31();
           SetCurr(DEV_TIME_N31P);
         }
       }
@@ -4902,7 +4902,7 @@ void    RunDevices(void)
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryControlN31(tiCurr);
+        QueryControl31(tiCurr);
         SetCurr(DEV_POSTCONTROL_N31P);
       }
       break;
@@ -4919,7 +4919,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryControlN31(tiCurr);
+          QueryControl31(tiCurr);
           SetCurr(DEV_POSTCONTROL_N31P);
         }
       }
@@ -4930,7 +4930,7 @@ void    RunDevices(void)
       Clear();
 
       cbRepeat = GetMaxRepeats();
-      QueryTopN31();
+      QueryTop31();
       SetCurr(DEV_TOP_N31P);
       break;
 
@@ -4945,18 +4945,18 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryTopN31();
+          QueryTop31();
           SetCurr(DEV_TOP_N31P);
         }
       }
       break;
 
     case DEV_POSTTOP_N31P:
-      if (ReadTopN31() == false) DoneProfile();
+      if (ReadTop31() == false) DoneProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryHeaderN31();
+        QueryHeader31();
         SetCurr(DEV_HEADER_N31P);
       }
       break;
@@ -4972,21 +4972,21 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderN31();
+          QueryHeader31();
           SetCurr(DEV_HEADER_N31P);
         }
       }
       break;
 
     case DEV_POSTHEADER_N31P:
-      if (ReadHeaderN31() == 0)
+      if (ReadHeader31() == 0)
         DoneProfile();
-      else if (DecIndexN31() == 0)
+      else if (DecIndex31() == 0)
         DoneProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryHeaderN31();
+        QueryHeader31();
         SetCurr(DEV_HEADER_N31P);
       }
       break;
@@ -4996,14 +4996,14 @@ void    RunDevices(void)
 
     case DEV_START_N31C:
       cbRepeat = GetMaxRepeats();
-      QueryOpenN31();
+      QueryOpen31();
       SetCurr(DEV_OPENCANAL_N31C);
       break;
 
     case DEV_OPENCANAL_N31C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadOpenN31() == false)
+        if (ReadOpen31() == false)
           ErrorCurrent();
         else
           MakePause(DEV_POSTOPENCANAL_N31C);
@@ -5016,7 +5016,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryOpenN31();
+          QueryOpen31();
           SetCurr(DEV_OPENCANAL_N31C);
         }
       }
@@ -5024,13 +5024,13 @@ void    RunDevices(void)
 
     case DEV_POSTOPENCANAL_N31C:
       cbRepeat = GetMaxRepeats();
-      QueryEngAbsN31();
+      QueryEngAbs31();
       SetCurr(DEV_ENERGY_N31C);
       break;
 
     case DEV_ENERGY_N31C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        ReadCurrentN31();
+        ReadCurrent31();
       else
       {
         if (cbRepeat == 0) ErrorCurrent();
@@ -5039,7 +5039,7 @@ void    RunDevices(void)
           ErrorLink();
           cbRepeat--;
 
-          QueryEngAbsN31();
+          QueryEngAbs31();
           SetCurr(DEV_ENERGY_N31C);
         }
       }

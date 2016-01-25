@@ -4,4 +4,4 @@ CNTMON31.H
 
 ------------------------------------------------------------------------------*/
 
-double2 ReadCntMonCan31(uchar  ibMonth);
+double2 ReadCntMonCa31(uchar  ibMonth);

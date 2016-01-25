@@ -42,7 +42,7 @@ static uint             cwErrors31;
 
 
 // переход на предыдущую запись
-bool    DecIndexN31(void)
+bool    DecIndex31(void)
 {
   if (wBaseLast31 == wBaseCurr31)
   {
@@ -58,7 +58,7 @@ bool    DecIndexN31(void)
 
 
 
-void    QueryTopN31(void)
+void    QueryTop31(void)
 {
   InitPushCod();
 
@@ -70,12 +70,12 @@ void    QueryTopN31(void)
   PushCharCod(0x00);
   PushCharCod(0x00);
 
-  QueryN31(3+13+1, 3+3+1);
+  Query31(3+13+1, 3+3+1);
 }
 
 
 
-bool    ReadTopN31(void)
+bool    ReadTop31(void)
 {
   InitPop(3+2);
 
@@ -91,11 +91,11 @@ bool    ReadTopN31(void)
 
   Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast31,wBaseCurr31); DelayInf();
 
-  return DecIndexN31();
+  return DecIndex31();
 }
 
 
-void    QueryHeaderN31(void)
+void    QueryHeader31(void)
 {
   MonitorString("\n\n index "); MonitorIntDec(wProfile31);
 
@@ -109,15 +109,15 @@ void    QueryHeaderN31(void)
   PushCharCod(wProfile31 / 0x100);
   PushCharCod(wProfile31 % 0x100);
 
-  QueryN31(3+102+1, 3+3+1);
+  Query31(3+102+1, 3+3+1);
 }
 
 
-bool    ReadHeaderN31(void)
+bool    ReadHeader31(void)
 {
   HideCurrTime(1);
 
-  if (ExtVersion31())
+  if (ExtVersio31())
   {
     uint wCRC = MakeCrc16Bit31InBuff(3, 100);
     if (wCRC != InBuff(103) + InBuff(104)*0x100)
@@ -131,7 +131,7 @@ bool    ReadHeaderN31(void)
 
 
   InitPop(3);
-  time ti1 = ReadPackTimeN31();
+  time ti1 = ReadPackTime31();
 
   ShowProfileTime(ti1);
   if ((ti1.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
@@ -157,7 +157,7 @@ bool    ReadHeaderN31(void)
   uchar i;
   for (i=0; i<MAX_LINE_N31; i++)
   {
-    float fl = PopFloatN31();
+    float fl = PopFloat31();
     MonitorString("\n value "); MonitorLongDec(fl);
 
     fl /= 1000;

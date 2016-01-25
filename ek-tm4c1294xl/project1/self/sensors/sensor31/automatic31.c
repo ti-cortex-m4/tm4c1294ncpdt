@@ -57,7 +57,7 @@ uchar   PopCharCod(void)
 }
 
 
-void    QueryN31(uint  cwIn, uchar  cbOut)
+void    Query31(uint  cwIn, uchar  cbOut)
 {
   uchar bCrc = MakeCrc8Bit31OutBuff(1, cbOut-2);
 
@@ -88,7 +88,7 @@ bool    ChecksumW(void)
 }
 */
 
-serial  InputN31(void)
+serial  Input31(void)
 {
   InitWaitAnswer();
 
@@ -111,7 +111,7 @@ serial  InputN31(void)
       uchar bCrc = MakeCrc8Bit31InBuff(1, CountInBuff()-1);
       if (bCrc == 0)
       {
-        UnpackN31();
+        Unpack31();
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else
@@ -124,7 +124,7 @@ serial  InputN31(void)
       uchar bCrc = MakeCrc8Bit31InBuff(1, IndexInBuff()-1);
       if (bCrc == 0)
       {
-        UnpackN31();
+        Unpack31();
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else
@@ -147,16 +147,16 @@ bool    QueryOpenN31_Full(uchar  bPercent)
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
-    QueryOpenN31();
+    QueryOpen31();
 
-    if (InputN31() == SER_GOODCHECK) break;
+    if (Input31() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
   if (r == bMINORREPEATS) return false;
   ShowPercent(bPercent);
 
-  if (ReadOpenN31() == false) return false;
+  if (ReadOpen31() == false) return false;
 
   return true;
 }
@@ -167,16 +167,16 @@ time2   QueryTimeN31_Full(uchar  bPercent)
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
-    QueryTimeN31();
+    QueryTime31();
 
-    if (InputN31() == SER_GOODCHECK) break;
+    if (Input31() == SER_GOODCHECK) break;
     if (fKey == true) return GetTime2Error();
   }
 
   if (r == bMINORREPEATS) return GetTime2Error();
   ShowPercent(bPercent);
 
-  return GetTime2(ReadTimeN31(), true);
+  return GetTime2(ReadTime31(), true);
 }
 
 
@@ -189,9 +189,9 @@ double2 ReadTransN31_Full(void)
   for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
-    QueryTransN31();
+    QueryTrans31();
 
-    if (InputN31() == SER_GOODCHECK) break;
+    if (Input31() == SER_GOODCHECK) break;
     if (fKey == true) return GetDouble2Error();
   }
 
@@ -201,14 +201,14 @@ double2 ReadTransN31_Full(void)
 
   InitPop(3+4+4+1);
 
-  double dbTransU = PopDoubleN31();
-  double dbTransI = PopDoubleN31();
+  double dbTransU = PopDouble31();
+  double dbTransI = PopDouble31();
 
   return GetDouble2(dbTransU*dbTransI, true);
 }
 
 
-bool    AutomaticN31(void)
+bool    Automatic31(void)
 {
   double2 db2 = ReadTransN31_Full();
   if (db2.fValid == false) return false;
@@ -227,16 +227,16 @@ bool    QueryEngAbsN31_Full(uchar  bPercent)
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
-    QueryEngAbsN31();
+    QueryEngAbs31();
 
-    if (InputN31() == SER_GOODCHECK) break;
+    if (Input31() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
   if (r == bMINORREPEATS) return false;
   ShowPercent(bPercent);
 
-  ReadEngN31();
+  ReadEng31();
 
   return true;
 }
@@ -345,7 +345,7 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
 */
 
 
-time2   ReadTimeCanN31(void)
+time2   ReadTimeCan31(void)
 {
   if (QueryOpenN31_Full(25) == 0) GetTime2Error();
 
@@ -366,7 +366,7 @@ time2   ReadTimeCanN31(void)
 
 
 
-double2 ReadCntCurrN31(void)
+double2 ReadCntCurr31(void)
 {
   if (QueryOpenN31_Full(25) == 0) GetDouble2Error();
 
