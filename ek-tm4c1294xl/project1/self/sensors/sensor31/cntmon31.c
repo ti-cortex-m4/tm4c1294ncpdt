@@ -105,8 +105,6 @@ bool    ReadEnergyExt_G(void)
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счётчике 72 тарифа
   {
-    if (fKey == true) return(0);
-
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
@@ -114,7 +112,9 @@ bool    ReadEnergyExt_G(void)
       QueryIndex5_G(t);
 
       ShowPercent(60+t);
-      if (InputN31() != SER_GOODCHECK) continue; else break;
+
+      if (InputN31() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
     }
 
     if (r == bMINORREPEATS) return(0);
@@ -136,8 +136,6 @@ bool    ReadEnergyExt_G(void)
 
   for (t=0; t<bTARIFFS; t++) // в счётчике 72 тарифа
   {
-    if (fKey == true) return(0);
-
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
@@ -145,7 +143,9 @@ bool    ReadEnergyExt_G(void)
       QueryIndex4_G(t);
 
       ShowPercent(70+t);
-      if (InputN31() != SER_GOODCHECK) continue; else break;
+
+      if (InputN31() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
     }
 
     if (r == bMINORREPEATS) return(0);
@@ -182,7 +182,8 @@ bool    ReadMonthIndexExt_G(void)
       DelayOff();
       QueryIndex26_G(m, 0);
 
-      if (InputN31() != SER_GOODCHECK) continue; else break;
+      if (InputN31() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
     }
 
     if (r == bMINORREPEATS) return 0xEE;
@@ -228,15 +229,14 @@ bool  ReadEngMonExt_G(uchar  ibMonth)
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счётчике 72 тарифа
   {
-    if (fKey == true) return(0);
-
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
       QueryIndex26_G(ibMonth, t);
 
-      if (InputN31() != SER_GOODCHECK) continue; else break;
+      if (InputN31() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
     }
 
     if (r == bMINORREPEATS) return(0);
@@ -264,8 +264,6 @@ bool  ReadEngMonCurrExt_G(void)
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счётчике 72 тарифа
   {
-    if (fKey == true) return(0);
-
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
@@ -273,7 +271,9 @@ bool  ReadEngMonCurrExt_G(void)
       QueryIndex4_G(t);
 
       ShowPercent(80+t);
-      if (InputN31() != SER_GOODCHECK) continue; else break;
+
+      if (InputN31() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
     }
 
     if (r == bMINORREPEATS) return(0);
@@ -309,8 +309,6 @@ bool    ReadEngAbsExt_G(void)
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счётчике 72 тарифа
   {
-    if (fKey == true) return(0);
-
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
@@ -318,7 +316,9 @@ bool    ReadEngAbsExt_G(void)
       QueryIndex5_G(t);
 
       ShowPercent(90+t);
-      if (InputN31() != SER_GOODCHECK) continue; else break;
+
+      if (InputN31() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
     }
 
     if (r == bMINORREPEATS) return(0);
