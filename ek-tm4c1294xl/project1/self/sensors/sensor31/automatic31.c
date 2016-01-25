@@ -129,6 +129,7 @@ bool    QueryOpen31_Full(uchar  bPercent)
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
+    DelayOff();
     QueryOpen31();
 
     if (Input31() == SER_GOODCHECK) break;
@@ -149,6 +150,7 @@ time2   QueryTime31_Full(uchar  bPercent)
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
+    DelayOff();
     QueryTime31();
 
     if (Input31() == SER_GOODCHECK) break;
@@ -209,6 +211,7 @@ bool    QueryEngAbs31_Full(uchar  bPercent)
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
+    DelayOff();
     QueryEngAbs31();
 
     if (Input31() == SER_GOODCHECK) break;
