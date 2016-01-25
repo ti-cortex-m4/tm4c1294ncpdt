@@ -91,7 +91,7 @@ uint  i;
 
 
 
-bool    ReadEnergyAllG(void)
+static bool ValidPackTime(void)
 {
   time ti = ReadPackTimeN31();
 
@@ -110,24 +110,24 @@ bool    ReadEnergyExt_G(void)
 {
 uchar   i;
 
-  uchar j;
-  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
+  uchar t;
+  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
       DelayOff();
-      QueryIndex5_G(j);
+      QueryIndex5_G(t);
 
-      ShowPercent(60+j);
+      ShowPercent(60+t);
       if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return(0);
     else
     {
-      if (ReadEnergyAllG() == 0) break;         // тариф не используется
+      if (ValidPackTime() == 0) break;         // тариф не используется
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 52);
@@ -141,24 +141,23 @@ uchar   i;
     }
   }
 
-  uchar j;
-  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
+  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
       DelayOff();
-      QueryIndex4_G(j);
+      QueryIndex4_G(t);
 
-      ShowPercent(70+j);
+      ShowPercent(70+t);
       if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return(0);
     else
     {
-      if (ReadEnergyAllG() == 0) break;         // тариф не используется
+      if (ValidPackTime() == 0) break;         // тариф не используется
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 196);
@@ -235,15 +234,15 @@ bool  ReadEngMonExt_G(uchar  ibMonth)
 {
 uchar   i;
 
-  uchar j;
-  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
+  uchar t;
+  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
       DelayOff();
-      QueryIndex26_G(ibMonth, j);
+      QueryIndex26_G(ibMonth, t);
 
       //ShowPercent(60+j);
       if (InputN31() != SER_GOODCHECK) continue; else break;
@@ -271,24 +270,24 @@ bool  ReadEngMonCurrExt_G(void)
 {
 uchar i;
 
-  uchar j;
-  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
+  uchar t;
+  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
       DelayOff();
-      QueryIndex4_G(j);
+      QueryIndex4_G(t);
 
-      ShowPercent(80+j);
+      ShowPercent(80+t);
       if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return(0);
     else
     {
-      if (ReadEnergyAllG() == 0) break;         // тариф не используется
+      if (ValidPackTime() == 0) break;         // тариф не используется
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 196);
@@ -313,24 +312,24 @@ bool    ReadEngAbsExt_G(void)
 {
 uchar   i;
 
-  uchar j;
-  for (j=0; j<bTARIFFS; j++) // проходим по всем тарифам (в счётчике: 72)
+  uchar t;
+  for (t=0; t<bTARIFFS; t++) // проходим по всем тарифам (в счётчике: 72)
   {
     if (fKey == 1) return(0);
 
     for (i=0; i<bMINORREPEATS; i++)
     {
       DelayOff();
-      QueryIndex5_G(j);
+      QueryIndex5_G(t);
 
-      ShowPercent(90+j);
+      ShowPercent(90+t);
       if (InputN31() != SER_GOODCHECK) continue; else break;
     }
 
     if (i == bMINORREPEATS) return(0);
     else
     {
-      if (ReadEnergyAllG() == 0) break;         // тариф не используется
+      if (ValidPackTime() == 0) break;         // тариф не используется
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 52);
@@ -354,8 +353,8 @@ double2 ReadCntMonCanExt_G(uchar  ibMonth)
   Clear();
 
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<6; ibCan++) mpreChannelsMonG[ibCan] = 0;
+  uchar i;
+  for (i=0; i<6; i++) mpreChannelsMonG[i] = 0;
 
   uchar m = ibMonth+1;
   uchar ibDay = 0;
@@ -377,18 +376,18 @@ double2 ReadCntMonCanExt_G(uchar  ibMonth)
   while ((bMONTHS + tiAlt.bMonth - ++m) % bMONTHS != 0 );
 
 
-  for (ibCan=0; ibCan<6; ibCan++) mpreChannelsAbsG[ibCan] = 0;
+  for (i=0; i<6; i++) mpreChannelsAbsG[i] = 0;
 
   if (ReadEngAbsExt_G() == 0) return GetDouble2Error();
   ShowPercent(99);
 
 
-  for (ibCan=0; ibCan<6; ibCan++)
+  for (i=0; i<6; i++)
   {
-    reBuffA = mpreChannelsAbsG[ibCan] - mpreChannelsMonG[ibCan];
-    mpdbChannelsC[ibCan] = reBuffA * reBuffX;
+    reBuffA = mpreChannelsAbsG[i] - mpreChannelsMonG[i];
+    mpdbChannelsC[i] = reBuffA * reBuffX;
 
-    mpboChannelsA[ibCan] = true;
+    mpboChannelsA[i] = true;
   }
 
   reBuffA = mpdbChannelsC[diCurr.ibLine];
