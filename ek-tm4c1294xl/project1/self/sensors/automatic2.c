@@ -42,6 +42,7 @@ AUTOMATIC2!C
 #include "automatic_v.h"
 #include "automatic_w.h"
 #include "sensor31/automatic31.h"
+#include "sensor31/cntmon31.h"
 
 
 
@@ -2115,6 +2116,10 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #ifndef SKIP_W
     case 29:
     case 30: return ReadCntMonCanW(ibMon);
+#endif
+
+#ifndef SKIP_N31
+    case 31: return ReadCntMonCan31(ibMon);
 #endif
 
     default: return GetDouble2Error();
