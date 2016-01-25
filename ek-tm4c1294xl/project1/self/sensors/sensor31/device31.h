@@ -8,8 +8,8 @@ DEVICE31.H
 
 
 
-uchar   GetVersio31(void);
-bool    ExtVersio31(void);
+uchar   GetVersion31(void);
+bool    ExtVersion31(void);
 
 float   PopFloat31(void);
 double  PopDouble31(void);

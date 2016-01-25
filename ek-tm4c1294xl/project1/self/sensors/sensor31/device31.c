@@ -27,13 +27,13 @@ static uchar            bVersionN31;
 
 
 
-uchar   GetVersio31(void)
+uchar   GetVersion31(void)
 {
   return bVersionN31;
 }
 
 
-bool    ExtVersio31(void)
+bool    ExtVersion31(void)
 {
   return ((bVersionN31 == 36) ||
           (bVersionN31 == 37) ||
