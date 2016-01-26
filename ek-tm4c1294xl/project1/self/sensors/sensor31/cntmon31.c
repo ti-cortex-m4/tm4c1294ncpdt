@@ -404,7 +404,7 @@ double2 ReadCntMonCan31(uchar  ibMon)
   uchar i;
   for (i=0; i<30; i++) mpdbEng30[i] = 0;
 
-  if (ExtVersion31())
+  if (NewVersion31())
   {
     if (ti.bMonth != ibMon+1)
     {

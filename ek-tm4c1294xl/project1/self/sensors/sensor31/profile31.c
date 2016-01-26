@@ -110,7 +110,7 @@ bool    ReadHeader31(void)
 {
   HideCurrTime(1);
 
-  if (ExtVersion31())
+  if (NewVersion31())
   {
     uint wCRC = MakeCrc16Bit31InBuff(3, 100);
     if (wCRC != InBuff(103) + InBuff(104)*0x100)

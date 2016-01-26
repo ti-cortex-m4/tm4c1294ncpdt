@@ -87,7 +87,7 @@ float2  ReadParam31(void)
     if (Input31() != SER_GOODCHECK) return GetFloat2Error();
 
     if (ReadOpen31() == 0) return GetFloat2Error();
-    if (!ExtVersion31()) return GetFloat2Error();
+    if (!NewVersion31()) return GetFloat2Error();
 
     DelayOff();
     QueryArray31();
