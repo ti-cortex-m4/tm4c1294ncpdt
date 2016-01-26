@@ -16,15 +16,26 @@ DEVICE32.C
 #include "../../devices/devices.h"
 #include "../../digitals/current/current_run.h"
 #include "../../digitals/digitals_messages.h"
-//#include "automatic31.h"
+#include "../sensor31/automatic31.h"
+#include "automatic32.h"
 #include "device32.h"
 
 
 
 #ifndef SKIP_N32
 
+static uchar            bVersion32;
+
+
+
+uchar   GetVersion32(void)
+{
+  return bVersion32;
+}
+
+
 //// проверка версии
-//bit     OldVersion31(void)
+//bit     OldVersion32(void)
 //{
 //  return (bVersionCod == 16) || (bVersionCod == 43);
 //}
@@ -32,9 +43,9 @@ DEVICE32.C
 //
 //
 //// чтение данных типа 'long' дл€ счЄтчика Ёнерги€-9
-//void    PopLong31(void)
+//void    PopLong32(void)
 //{
-//  if (OldVersion31())
+//  if (OldVersion32())
 //  {
 //    coFloat.mpbBuff[3] = PopChar();
 //    coFloat.mpbBuff[2] = PopChar();
@@ -54,7 +65,7 @@ DEVICE32.C
 //
 //
 //// чтение графика нагрузки дл€ счЄтчика Ёнерги€-9
-//void    PopHeader31(void)
+//void    PopHeader32(void)
 //{
 //  if (bVersionCod == 43)
 //  {
@@ -92,13 +103,13 @@ DEVICE32.C
 //
 //
 //// чтение упакованной времени/даты дл€ счЄтчика Ёнерги€-9
-//void    ReadPackTimeDig31(void)
+//void    ReadPackTimeDig32(void)
 //{
 //uchar   a,b;
 //
 //  InitPop(3);
 //
-//  if (OldVersion31())
+//  if (OldVersion32())
 //  {
 //    b = PopChar();
 //    a = PopChar();
@@ -121,86 +132,79 @@ DEVICE32.C
 //
 //  tiDig.bSecond = 0;
 //}
-//
-//
-//
-//// посылка запроса на закрытие канала св€зи дл€ счЄтчика Ёнерги€-9
-//void    QueryClose31(void)
-//{
-//  InitPush();
-//
-//  PushChar(0x7E);
-//  PushChar(0x00);
-//  PushChar(0x02);
-//
-//  CodQueryIO(0, 3+1);
-//}
-//
-//
-//// посылка запроса на открытие канала св€зи дл€ счЄтчика Ёнерги€-9
-//void    QueryOpen31(void)
-//{
-//  QueryClose31();
-//  DelayOff();
-//
-//  memset(&mpbCoder, 0, sizeof(mpbCoder));
-//  InitPush();
-//
-//  PushChar(0x7E);
-//  PushChar(0x08);
-//  PushChar(0x03);
-//
-//  Push(&mpdwAddress1[diCurr.bAddress-1], sizeof(ulong));
-//  Push(&mpdwAddress2[diCurr.bAddress-1], sizeof(ulong));
-//
-//  CodQueryIO(3+8+1, 3+8+1);
-//}
-//
-//
-//// чтение парол€ дл€ счЄтчика Ёнерги€-9
-//bit     ReadOpen31(void)
-//{
-//  InitPop(3);
-//
-//  bVersionCod = PopChar();
-//
-//  mpbCoder[0] = PopChar();
-//  mpbCoder[1] = PopChar();
-//  mpbCoder[2] = PopChar();
-//  mpbCoder[3] = PopChar();
-//
-//  sprintf(szLo,"   верси€: %2bu   ",bVersionCod);
-//  DelayInf(); Clear();
-//
-//  if ((bVersionCod == 23) || (bVersionCod == 45) ||
-//      (bVersionCod == 25) || (bVersionCod == 47) ||
-//      (bVersionCod == 16) ||
-//      (bVersionCod == 30) ||
-//      (bVersionCod == 43)) return(1);
-//
-//  ShowLo(szNoVersion);
-//  DelayInf(); Clear();
-//
-//  return(0);
-//}
-//
-//
-//
-//// посылка запроса на чтене времени/даты дл€ счЄтчика Ёнерги€-9
-//void    QueryTime31(void)
-//{
-//  InitPush();
-//
-//  PushChar(0x7E);
-//  PushChar(0x00);
-//  PushChar(0x07);
-//
-//  CodQueryIO(3+8+1, 3+1);
-//}
-//
-//
+
+
+
+void    QueryClose32(void)
+{
+  InitPush(0);
+
+  PushChar(0x7E);
+  PushChar(0x00);
+  PushChar(0x02);
+
+  Query32(0, 3+1);
+}
+
+
+void    QueryOpen32(void)
+{
+  QueryClose32();
+  DelayOff();
+
+  memset(&mpbCoder, 0, sizeof(mpbCoder));
+
+  InitPush(0);
+
+  PushChar(0x7E);
+  PushChar(0x08);
+  PushChar(0x03);
+
+  PushLongBig(mpdwAddress1[diCurr.bAddress-1]);
+  PushLongBig(mpdwAddress2[diCurr.bAddress-1]);
+
+  Query32(3+8+1, 3+8+1);
+}
+
+
+bool    ReadOpen32(void)
+{
+  InitPop(3);
+
+  bVersion32 = PopChar();
+
+  mpbCoder[0] = PopChar();
+  mpbCoder[1] = PopChar();
+  mpbCoder[2] = PopChar();
+  mpbCoder[3] = PopChar();
+
+  Clear(); sprintf(szLo+3,"верси€: %2u",bVersion32);
+  DelayInf(); Clear();
+
+  if (bVersion32 == 51) return true;
+
+  ShowLo(szNoVersion);
+  DelayInf(); Clear();
+
+  return false;
+}
+
+
+
+void    QueryTime32(void)
+{
+  InitPush(0);
+
+  PushChar(0x7E);
+  PushChar(0x00);
+  PushChar(0x07);
+
+  Query32(3+8+1, 3+1);
+}
+
+
 //// чтение времени/даты дл€ счЄтчика Ёнерги€-9
-//void    ReadTimeAlt31(void)
+//void    ReadTimeAlt32(void)
 //{
 //  InitPop(3);
 //
@@ -215,7 +219,7 @@ DEVICE32.C
 //
 //
 //// чтение времени/даты дл€ счЄтчика Ёнерги€-9
-//void    ReadTimeDig31(void)
+//void    ReadTimeDig32(void)
 //{
 //  InitPop(3);
 //
@@ -230,7 +234,7 @@ DEVICE32.C
 //
 //
 //
-//void    QueryControl31(void)
+//void    QueryControl32(void)
 //{
 //  InitPushCod();
 //
@@ -250,13 +254,13 @@ DEVICE32.C
 //  PushCharCod( tiCurr.bYear   );
 //  PushCharCod( 20 );
 //
-//  CodQueryIO(3+1, 3+8+1);
+//  Query32(3+1, 3+8+1);
 //}
 //
 //
 //
 //// посылка запроса на чтене энергии дл€ счЄтчика Ёнерги€-9
-//void    QueryEnergyAbs31(uchar  ibTariff)
+//void    QueryEnergyAbs32(uchar  ibTariff)
 //{
 //  InitPushCod();
 //
@@ -268,13 +272,13 @@ DEVICE32.C
 //  PushCharCod(0x00);
 //  PushCharCod(ibTariff);
 //
-//  CodQueryIO(3+14+1, 3+3+1);
+//  Query32(3+14+1, 3+3+1);
 //}
 //
 //
 //
 //// посылка запроса на чтение версии дл€ счЄтчика Ёнерги€-9
-//void    QuerySpecies31(void)
+//void    QuerySpecies32(void)
 //{
 //  InitPushCod();
 //
@@ -286,12 +290,12 @@ DEVICE32.C
 //  PushCharCod(0);
 //  PushCharCod(0);
 //
-//  CodQueryIO(3+8+1, 3+3+1); // возможны ответы длиной 3+6+1, 3+7+1, 3+8+1: выбираем максимальный
+//  Query32(3+8+1, 3+3+1); // возможны ответы длиной 3+6+1, 3+7+1, 3+8+1: выбираем максимальный
 //}
 //
 //
 //// чтение версии дл€ счЄтчика Ёнерги€-9
-//bit     ReadSpecies31(void)
+//bit     ReadSpecies32(void)
 //{
 //  if (IndexInBuff() == 3+7+1) { bSpeciesCod = 0; return(1); }
 //  if (IndexInBuff() == 3+6+1) { bSpeciesCod = 1; return(1); }
@@ -303,7 +307,7 @@ DEVICE32.C
 //
 //
 //// переход на предыдущую запись
-//bit     DecIndex31(void)
+//bit     DecIndex32(void)
 //{
 //  if (wBaseLast == wBaseCurr)
 //  {
@@ -320,7 +324,7 @@ DEVICE32.C
 //
 //
 //// посылка запроса на чтение вершины массива дл€ счЄтчика Ёнерги€-9
-//void    QueryTop31(void)
+//void    QueryTop32(void)
 //{
 //  InitPushCod();
 //
@@ -332,18 +336,18 @@ DEVICE32.C
 //  PushCharCod(0x00);
 //  PushCharCod(0x00);
 //
-//  CodQueryIO(3+8+1, 3+3+1);
+//  Query32(3+8+1, 3+3+1);
 //}
 //
 //
 //// чтение вершины массива дл€ счЄтчика Ёнерги€-9
-//bit     ReadTop31(void)
+//bit     ReadTop32(void)
 //{
 //  InitPop(3);
 //
 //  iwMajor = 0;
 //
-//  if (OldVersion31())
+//  if (OldVersion32())
 //  {
 //    wBaseLast = PopIntExtG();                 // количество записей
 //    wBaseCurr = PopIntExtG();                 // индекс текущей записи
@@ -358,13 +362,13 @@ DEVICE32.C
 //
 //  sprintf(szLo,"   %4u:%-4u    ",wBaseLast,wBaseCurr); DelayInf();
 //
-//  return( DecIndex31() );
+//  return( DecIndex32() );
 //}
 //
 //
 //
 //// посылка запроса на чтение заголовка часового блока дл€ счЄтчика Ёнерги€-9
-//void    QueryHeader31(void)
+//void    QueryHeader32(void)
 //{
 //  InitPushCod();
 //
@@ -376,12 +380,12 @@ DEVICE32.C
 //  PushCharCod(wOffsCurr / 0x100);
 //  PushCharCod(wOffsCurr % 0x100);
 //
-//  CodQueryIO(3+8+1, 3+3+1); // возможны ответы длиной 3+6+1, 3+7+1, 3+8+1: выбираем максимальный
+//  Query32(3+8+1, 3+3+1); // возможны ответы длиной 3+6+1, 3+7+1, 3+8+1: выбираем максимальный
 //}
 //
 //
 //// чтение заголовка часового блока дл€ счЄтчика Ёнерги€-9
-//bit     ReadHeader31(void)
+//bit     ReadHeader32(void)
 //{
 //  NoShowTime(1);
 //
@@ -402,7 +406,7 @@ DEVICE32.C
 //  }
 //
 //
-//  ReadPackTimeDig31();
+//  ReadPackTimeDig32();
 //  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",
 //          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
 //
@@ -427,7 +431,7 @@ DEVICE32.C
 //
 //  for (ibCan=0; ibCan<1; ibCan++)
 //  {
-//    PopHeader31();
+//    PopHeader32();
 //    mpreEngFrac[ibDig] += reBuffA;
 //
 //    if (tiDig.bMinute % 30 == 0)
@@ -445,9 +449,9 @@ DEVICE32.C
 //
 //
 //
-//bit     Checksum31(uchar  bSize)
+//bit     Checksum32(uchar  bSize)
 //{
-//  if (OldVersion31())
+//  if (OldVersion32())
 //  {
 //    MakeCRC12InBuff(3, bSize-2);
 //    if (wCRC != InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100) return(0);

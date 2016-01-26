@@ -23,21 +23,21 @@ DEVICE31.C
 
 #ifndef SKIP_N31
 
-static uchar            bVersionN31;
+static uchar            bVersion31;
 
 
 
 uchar   GetVersion31(void)
 {
-  return bVersionN31;
+  return bVersion31;
 }
 
 
 bool    ExtVersion31(void)
 {
-  return ((bVersionN31 == 36) ||
-          (bVersionN31 == 37) ||
-          (bVersionN31 == 49));
+  return ((bVersion31 == 36) ||
+          (bVersion31 == 37) ||
+          (bVersion31 == 49));
 }
 
 
@@ -108,17 +108,17 @@ bool    ReadOpen31(void)
 {
   InitPop(3);
 
-  bVersionN31 = PopChar();
+  bVersion31 = PopChar();
 
   mpbCoder[0] = PopChar();
   mpbCoder[1] = PopChar();
   mpbCoder[2] = PopChar();
   mpbCoder[3] = PopChar();
 
-  Clear(); sprintf(szLo+3,"версия: %2u",bVersionN31);
+  Clear(); sprintf(szLo+3,"версия: %2u",bVersion31);
   DelayInf(); Clear();
 
-  if (bVersionN31 == 49) return true;
+  if (bVersion31 == 49) return true;
 
   ShowLo(szNoVersion);
   DelayInf(); Clear();
