@@ -142,10 +142,9 @@ void    QueryTime31(void)
 
 time    ReadTime31(void)
 {
-  time ti;
-
   InitPop(3+1);
 
+  time ti;
   ti.bDay    = PopChar();
   ti.bMonth  = PopChar();
   ti.bYear   = PopIntLtl() % 100;

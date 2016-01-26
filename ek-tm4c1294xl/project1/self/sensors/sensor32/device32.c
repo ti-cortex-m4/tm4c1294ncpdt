@@ -203,21 +203,23 @@ void    QueryTime32(void)
 }
 
 
-//// чтение времени/даты дл€ счЄтчика Ёнерги€-9
-//void    ReadTimeAlt32(void)
-//{
-//  InitPop(3);
-//
-//  tiAlt.bSecond = PopChar();
-//  tiAlt.bMinute = PopChar();
-//  tiAlt.bHour   = PopChar();
-//                  PopChar();
-//  tiAlt.bDay    = PopChar();
-//  tiAlt.bMonth  = PopChar();
-//  tiAlt.bYear   = PopChar();
-//}
-//
-//
+time    ReadTime32(void)
+{
+  InitPop(3);
+
+  time ti;
+  ti.bSecond = PopChar();
+  ti.bMinute = PopChar();
+  ti.bHour   = PopChar();
+               PopChar();
+  ti.bDay    = PopChar();
+  ti.bMonth  = PopChar();
+  ti.bYear   = PopChar();
+
+  return ti;
+}
+
+
 //// чтение времени/даты дл€ счЄтчика Ёнерги€-9
 //void    ReadTimeDig32(void)
 //{
@@ -256,27 +258,26 @@ void    QueryTime32(void)
 //
 //  Query32(3+1, 3+8+1);
 //}
-//
-//
-//
-//// посылка запроса на чтене энергии дл€ счЄтчика Ёнерги€-9
-//void    QueryEnergyAbs32(uchar  ibTariff)
-//{
-//  InitPushCod();
-//
-//  PushChar(0x7E);
-//  PushChar(0x03);
-//  PushChar(0x06);
-//
-//  PushCharCod((bVersionCod == 43) ? 0x02 : 0x04);
-//  PushCharCod(0x00);
-//  PushCharCod(ibTariff);
-//
-//  Query32(3+14+1, 3+3+1);
-//}
-//
-//
-//
+
+
+
+void    QueryEngAbs32(uchar  ibTrf)
+{
+  InitPushCod();
+
+  PushChar(0x7E);
+  PushChar(0x03);
+  PushChar(0x06);
+
+  PushCharCod(0x04); // "потреблЄнна€ энерги€ по тарифам"
+  PushCharCod(0x00);
+  PushCharCod(ibTrf);
+
+  Query32(3+14+1, 3+3+1);
+}
+
+
+
 //// посылка запроса на чтение версии дл€ счЄтчика Ёнерги€-9
 //void    QuerySpecies32(void)
 //{

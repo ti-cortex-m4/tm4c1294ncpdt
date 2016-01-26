@@ -22,4 +22,4 @@ serial  Input32(void);
 //double2 ReadTrans31_Full(void);
 
 time2   ReadTimeCan32(void);
-//double2 ReadCntCurr31(void);
+double2 ReadCntCurr32(void);

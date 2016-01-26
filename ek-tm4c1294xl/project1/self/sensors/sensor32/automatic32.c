@@ -12,11 +12,11 @@ AUTOMATIC32.C
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
-//#include "../../sensors/sensor31/unpack31.h"
+//#include "../../sensors/sensor32/unpack32.h"
 #include "../../digitals/wait_answer.h"
 //#include "../automatic1.h"
 #include "device32.h"
-#include "../sensor31/automatic31.h"
+#include "../sensor32/automatic32.h"
 #include "automatic32.h"
 
 
@@ -144,7 +144,7 @@ time2   QueryTime32_Full(uchar  bPercent)
 //bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
 //{
 //  uchar i;
-//  for (i=0; i<MAX_LINE_N31; i++)
+//  for (i=0; i<MAX_LINE_N32; i++)
 //  {
 //    uchar r;
 //    for (r=0; r<bMINORREPEATS; r++)
@@ -178,7 +178,7 @@ time2   QueryTime32_Full(uchar  bPercent)
 //bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
 //{
 //  uchar i;
-//  for (i=0; i<MAX_LINE_N31; i++)
+//  for (i=0; i<MAX_LINE_N32; i++)
 //  {
 //    uchar r;
 //    for (r=0; r<bMINORREPEATS; r++)
@@ -212,7 +212,7 @@ time2   QueryTime32_Full(uchar  bPercent)
 //status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
 //{
 //  uchar i;
-//  for (i=0; i<MAX_LINE_N31; i++)
+//  for (i=0; i<MAX_LINE_N32; i++)
 //  {
 //    uchar r;
 //    for (r=0; r<bMINORREPEATS; r++)
@@ -265,25 +265,25 @@ time2   ReadTimeCan32(void)
 
 
 
-//double2 ReadCntCurr32(void)
-//{
-//  if (QueryOpen32_Full(25) == 0) GetDouble2Error();
-//
-//  if (QueryEngAbs32_Full(50) == 0) return GetDouble2Error();
-//
-//
-//  double dbTrans = mpdbTransCnt[ibDig];
-//
-//  uchar i;
-//  for (i=0; i<MAX_LINE_N31; i++)
-//  {
-//    mpdbChannelsC[i] *= dbTrans;
-//    mpboChannelsA[i] = true;
-//  }
-//
-//  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
-//}
-//
+double2 ReadCntCurr32(void)
+{
+  if (QueryOpen32_Full(25) == 0) GetDouble2Error();
+
+  if (QueryEngAbs32_Full(50) == 0) return GetDouble2Error();
+
+
+  double dbTrans = mpdbTransCnt[ibDig];
+
+  uchar i;
+  for (i=0; i<MAX_LINE_N32; i++)
+  {
+    mpdbChannelsC[i] *= dbTrans;
+    mpboChannelsA[i] = true;
+  }
+
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
+}
+
 ///*
 //double2 ReadCntMonCanW(uchar  ibMon)
 //{
@@ -310,7 +310,7 @@ time2   ReadTimeCan32(void)
 //
 //
 //  uchar i;
-//  for (i=0; i<MAX_LINE_N31; i++)
+//  for (i=0; i<MAX_LINE_N32; i++)
 //  {
 //    mpdbChannelsC[i] *= dbTrans;
 //    mpboChannelsA[i] = true;
@@ -340,7 +340,7 @@ time2   ReadTimeCan32(void)
 //
 //
 //  uchar i;
-//  for (i=0; i<MAX_LINE_N31; i++)
+//  for (i=0; i<MAX_LINE_N32; i++)
 //  {
 //    mpdbChannelsC[i] *= dbTrans;
 //    mpboChannelsA[i] = true;
