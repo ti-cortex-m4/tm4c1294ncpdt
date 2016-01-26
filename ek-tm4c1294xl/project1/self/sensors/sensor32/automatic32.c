@@ -328,29 +328,29 @@ AUTOMATIC32.C
 //  return ST_OK;
 //}
 //*/
-//
-//
-//time2   ReadTimeCan31(void)
-//{
-//  if (QueryOpen31_Full(25) == 0) GetTime2Error();
-//
-//  time2 ti2 = QueryTime31_Full(50);
-//  if (ti2.fValid == false) return GetTime2Error();
-//
-//
-//  tiChannelC = ti2.tiValue;
-//
-//  uchar i;
-//  for (i=0; i<MAX_LINE_N31; i++)
-//  {
-//    mpboChannelsA[i] = true;
-//  }
-//
-//  return GetTime2(ti2.tiValue, true);
-//}
-//
-//
-//
+
+
+time2   ReadTimeCan32(void)
+{
+  if (QueryOpen32_Full(25) == 0) GetTime2Error();
+
+  time2 ti2 = QueryTime32_Full(50);
+  if (ti2.fValid == false) return GetTime2Error();
+
+
+  tiChannelC = ti2.tiValue;
+
+  uchar i;
+  for (i=0; i<MAX_LINE_N32; i++)
+  {
+    mpboChannelsA[i] = true;
+  }
+
+  return GetTime2(ti2.tiValue, true);
+}
+
+
+
 //double2 ReadCntCurr31(void)
 //{
 //  if (QueryOpen31_Full(25) == 0) GetDouble2Error();

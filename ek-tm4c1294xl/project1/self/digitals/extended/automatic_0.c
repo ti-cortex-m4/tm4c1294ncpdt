@@ -23,6 +23,8 @@ AUTOMATIC_0!C
 #include "../../sensors/automatic_w.h"
 #include "../../sensors/sensor31/device31.h"
 #include "../../sensors/sensor31/automatic31.h"
+#include "../../sensors/sensor32/device32.h"
+#include "../../sensors/sensor32/automatic32.h"
 #include "../../console.h"
 #include "../../time/timedate.h"
 #include "automatic_0.h"
@@ -449,6 +451,28 @@ time2   ReadTimeCan31_Short(void)
 #endif
 
 
+#ifndef SKIP_N32
+
+time2   ReadTimeCan32_Short(void)
+{
+  DelayOff();
+  QueryOpen32();
+
+  if (Input32() != SER_GOODCHECK) return GetTime2Error();
+
+  if (ReadOpen32() == false) return GetTime2Error();
+
+  DelayOff();
+  QueryTime32();
+
+  if (Input32() != SER_GOODCHECK) return GetTime2Error();
+
+  return GetTime2(ReadTime32(), true);
+}
+
+#endif
+
+
 
 time2   ReadTimeCan_Short(uchar  ibCan)
 {
@@ -556,6 +580,10 @@ time2   ReadTimeCan_Short(uchar  ibCan)
 
 #ifndef SKIP_N31
     case 31: return ReadTimeCan31_Short();
+#endif
+
+#ifndef SKIP_N32
+    case 32: return ReadTimeCan32_Short();
 #endif
 
     default: return GetTime2Error();

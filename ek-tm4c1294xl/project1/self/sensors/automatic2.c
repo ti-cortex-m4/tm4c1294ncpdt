@@ -43,6 +43,8 @@ AUTOMATIC2!C
 #include "automatic_w.h"
 #include "sensor31/automatic31.h"
 #include "sensor31/cntmon31.h"
+#include "sensor32/automatic32.h"
+#include "automatic2.h"
 
 
 
@@ -1986,6 +1988,10 @@ time2   ReadTimeCan(uchar  ibCan)
 
 #ifndef SKIP_N31
     case 31: return ReadTimeCan31();
+#endif
+
+#ifndef SKIP_N32
+    case 32: return ReadTimeCan32();
 #endif
 
     default: return GetTime2Error();
