@@ -14,7 +14,7 @@ AUTOMATIC31.C
 #include "../../devices/devices.h"
 #include "../../sensors/sensor31/unpack31.h"
 #include "../../digitals/wait_answer.h"
-//#include "../automatic1.h"
+#include "../automatic1.h"
 #include "device31.h"
 #include "automatic31.h"
 

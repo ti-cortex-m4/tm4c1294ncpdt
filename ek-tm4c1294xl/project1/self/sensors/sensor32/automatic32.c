@@ -16,7 +16,7 @@ AUTOMATIC32.C
 #include "../../digitals/wait_answer.h"
 //#include "../automatic1.h"
 #include "device32.h"
-#include "automatic31.h"
+#include "../sensor31/automatic31.h"
 #include "automatic32.h"
 
 

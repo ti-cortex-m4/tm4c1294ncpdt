@@ -12,10 +12,10 @@ AUTOMATIC32.H
 //void    PushCharCod(uchar  bT);
 //void    InitPopCod(void);
 //uchar   PopCharCod(void);
-//
-//void    Query31(uint  cwIn, uchar  cbOut);
-//serial  Input31(void);
-//
+
+void    Query32(uint  cwIn, uchar  cbOut);
+serial  Input32(void);
+
 //bool    Automatic31(void);
 //
 //time2   QueryTime31_Full(uchar  bPercent);
