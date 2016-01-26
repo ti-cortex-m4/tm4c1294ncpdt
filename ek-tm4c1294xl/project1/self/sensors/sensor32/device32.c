@@ -34,36 +34,33 @@ uchar   GetVersion32(void)
 }
 
 
+bool    OldVersion32(void)
+{
+  return false;
+}
+
 //// проверка версии
 //bit     OldVersion32(void)
 //{
 //  return (bVersionCod == 16) || (bVersionCod == 43);
 //}
-//
-//
-//
-//// чтение данных типа 'long' дл€ счЄтчика Ёнерги€-9
-//void    PopLong32(void)
-//{
-//  if (OldVersion32())
-//  {
-//    coFloat.mpbBuff[3] = PopChar();
-//    coFloat.mpbBuff[2] = PopChar();
-//    coFloat.mpbBuff[1] = PopChar();
-//    coFloat.mpbBuff[0] = PopChar();
-//  }
-//  else
-//  {
-//    coFloat.mpbBuff[0] = PopChar();
-//    coFloat.mpbBuff[1] = PopChar();
-//    coFloat.mpbBuff[2] = PopChar();
-//    coFloat.mpbBuff[3] = PopChar();
-//  }
-//
-//  dwBuffC = coFloat.dwBuff;
-//}
-//
-//
+
+
+
+ulong   PopLong32(void)
+{
+  static combo32 co;
+
+  co.mpbBuff[3] = PopChar();
+  co.mpbBuff[2] = PopChar();
+  co.mpbBuff[1] = PopChar();
+  co.mpbBuff[0] = PopChar();
+
+  return co.dwBuff;
+}
+
+
+
 //// чтение графика нагрузки дл€ счЄтчика Ёнерги€-9
 //void    PopHeader32(void)
 //{

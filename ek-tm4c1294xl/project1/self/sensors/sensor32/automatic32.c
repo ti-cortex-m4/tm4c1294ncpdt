@@ -16,12 +16,26 @@ AUTOMATIC32.C
 #include "../../digitals/wait_answer.h"
 //#include "../automatic1.h"
 #include "device32.h"
-#include "../sensor32/automatic32.h"
+#include "../sensor31/automatic31.h"
 #include "automatic32.h"
 
 
 
 #ifndef SKIP_N32
+
+bool    Checksum32(uchar  bSize)
+{
+  if (OldVersion32())
+  {
+    uint wCRC = MakeCrc16Bit31InBuff(3, bSize-2);
+    return (wCRC == InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
+  }
+  else
+  {
+    uint wCRC = MakeCrc16Bit31InBuff(3, bSize);
+    return (wCRC == 0);
+  }
+}
 
 
 void    Query32(uint  cwIn, uchar  cbOut)
@@ -269,7 +283,33 @@ double2 ReadCntCurr32(void)
 {
   if (QueryOpen32_Full(25) == 0) GetDouble2Error();
 
-  if (QueryEngAbs32_Full(50) == 0) return GetDouble2Error();
+
+  memset(&mpdbChannelsC, 0, sizeof(mpdbChannelsC));
+
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
+  {
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
+    {
+      DelayOff();
+      QueryEngAbs32(t);
+
+      ShowPercent(50+t);
+
+      if (Input32() == SER_GOODCHECK) break;
+      if (fKey == true) return GetDouble2Error();
+    }
+
+    if (r == bMINORREPEATS) return GetDouble2Error();
+    else
+    {
+      if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); GetDouble2Error(); }
+
+      InitPop(3);
+      mpdbChannelsC[0] += PopLong32();
+    }
+  }
 
 
   double dbTrans = mpdbTransCnt[ibDig];

@@ -4,14 +4,7 @@ AUTOMATIC32.H
 
 ------------------------------------------------------------------------------*/
 
-//extern  uchar               mpbCoder[4], ibCoder;
-//
-//
-//
-//void    InitPushCod(void);
-//void    PushCharCod(uchar  bT);
-//void    InitPopCod(void);
-//uchar   PopCharCod(void);
+bool    Checksum32(uchar  bSize);
 
 void    Query32(uint  cwIn, uchar  cbOut);
 serial  Input32(void);

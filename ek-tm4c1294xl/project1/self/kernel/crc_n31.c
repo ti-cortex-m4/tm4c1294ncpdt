@@ -41,7 +41,7 @@ uchar   MakeCrc8Bit31(uchar  *pbData, uint  wSize)
 }
 
 
-uint    MakeCrc16bit31(uchar  *pbData, uint  wSize)
+uint    MakeCrc16Bit31(uchar  *pbData, uint  wSize)
 {
   uint wCRC = 0;
   while (wSize-- > 0)
