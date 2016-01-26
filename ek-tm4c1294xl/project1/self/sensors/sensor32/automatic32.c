@@ -14,168 +14,82 @@ AUTOMATIC32.C
 #include "../../devices/devices.h"
 //#include "../../sensors/sensor31/unpack31.h"
 #include "../../digitals/wait_answer.h"
-#include "../automatic1.h"
+//#include "../automatic1.h"
 #include "device32.h"
+#include "automatic31.h"
 #include "automatic32.h"
 
 
 
 #ifndef SKIP_N32
 
-//uchar                   mpbCoder[4], ibCoder;
-//
-//
-//
-//void    InitPushCod(void)
+
+void    Query32(uint  cwIn, uchar  cbOut)
+{
+  Query31(cwIn,cbOut);
+}
+
+
+serial  Input32(void)
+{
+  return Input31();
+}
+
+
+bool    QueryOpen32_Full(uchar  bPercent)
+{
+  Clear();
+
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QueryOpen32();
+
+    if (Input32() == SER_GOODCHECK) break;
+    if (fKey == true) return false;
+  }
+
+  if (r == bMINORREPEATS) return false;
+  ShowPercent(bPercent);
+
+  if (ReadOpen32() == false) return false;
+
+  return true;
+}
+
+
+time2   QueryTime32_Full(uchar  bPercent)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QueryTime32();
+
+    if (Input32() == SER_GOODCHECK) break;
+    if (fKey == true) return GetTime2Error();
+  }
+
+  if (r == bMINORREPEATS) return GetTime2Error();
+  ShowPercent(bPercent);
+
+  return GetTime2(ReadTime32(), true);
+}
+
+
+//double2 ReadTrans32_Full(void)
 //{
-//  InitPush(0);
-//  ibCoder = 0;
-//}
-//
-//
-//void    PushCharCod(uchar  bT)
-//{
-//  PushChar(bT ^ mpbCoder[ibCoder]);
-//  ibCoder = (ibCoder + 1)%4;
-//}
-//
-//
-//
-//void    InitPopCod(void)
-//{
-//  InitPop(3);
-//  ibCoder = 0;
-//}
-//
-//
-//uchar   PopCharCod(void)
-//{
-//  uchar i = PopChar() ^ mpbCoder[ibCoder];
-//  ibCoder = (ibCoder + 1)%4;
-//
-//  return i;
-//}
-//
-//
-//void    Query31(uint  cwIn, uchar  cbOut)
-//{
-//  uchar bCrc = MakeCrc8Bit31OutBuff(1, cbOut-2);
-//
-//  InitPush(0);
-//  Skip(cbOut-1);
-//
-//  PushChar(bCrc);
-//
-//  Query(cwIn,cbOut,1);
-//}
-//
-//
-//serial  Input31(void)
-//{
-//  InitWaitAnswer();
-//
-//  while (1)
-//  {
-//    if (fKey == true) { mpSerial[ibPort] = SER_BADLINK; break; }
-//
-//    ResetWatchdog();
-//    ShowWaitAnswer(1);
-//    if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
-//
-//    if (mpSerial[ibPort] == SER_INPUT_MASTER)
-//    {
-//      if ((InBuff(0) == 0x7E) && (IndexInBuff() > 3) && (IndexInBuff() == InBuff(1)+4))
-//        mpSerial[ibPort] = SER_BADLINK;
-//    }
-//
-//    if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
-//    {
-//      uchar bCrc = MakeCrc8Bit31InBuff(1, CountInBuff()-1);
-//      if (bCrc == 0)
-//      {
-//        Unpack31();
-//        mpSerial[ibPort] = SER_GOODCHECK;
-//      }
-//      else
-//        mpSerial[ibPort] = SER_BADCHECK;
-//
-//      break;
-//    }
-//    else if (mpSerial[ibPort] == SER_BADLINK)
-//    {
-//      uchar bCrc = MakeCrc8Bit31InBuff(1, IndexInBuff()-1);
-//      if (bCrc == 0)
-//      {
-//        Unpack31();
-//        mpSerial[ibPort] = SER_GOODCHECK;
-//      }
-//      else
-//        mpSerial[ibPort] = SER_BADCHECK;
-//
-//      break;
-//    }
-//    else if (mpSerial[ibPort] == SER_OVERFLOW) break;
-//  }
-//
-//  MonitorIn();
-//  return mpSerial[ibPort];
-//}
-//
-//
-//bool    QueryOpen31_Full(uchar  bPercent)
-//{
-//  Clear();
-//
-//  uchar r;
-//  for (r=0; r<bMINORREPEATS; r++)
-//  {
-//    DelayOff();
-//    QueryOpen31();
-//
-//    if (Input31() == SER_GOODCHECK) break;
-//    if (fKey == true) return false;
-//  }
-//
-//  if (r == bMINORREPEATS) return false;
-//  ShowPercent(bPercent);
-//
-//  if (ReadOpen31() == false) return false;
-//
-//  return true;
-//}
-//
-//
-//time2   QueryTime31_Full(uchar  bPercent)
-//{
-//  uchar r;
-//  for (r=0; r<bMINORREPEATS; r++)
-//  {
-//    DelayOff();
-//    QueryTime31();
-//
-//    if (Input31() == SER_GOODCHECK) break;
-//    if (fKey == true) return GetTime2Error();
-//  }
-//
-//  if (r == bMINORREPEATS) return GetTime2Error();
-//  ShowPercent(bPercent);
-//
-//  return GetTime2(ReadTime31(), true);
-//}
-//
-//
-//double2 ReadTrans31_Full(void)
-//{
-//  if (QueryOpen31_Full(25) == false) return GetDouble2Error();
+//  if (QueryOpen32_Full(25) == false) return GetDouble2Error();
 //
 //
 //  uchar r;
 //  for (r=0; r<bMINORREPEATS; r++)
 //  {
 //    DelayOff();
-//    QueryTrans31();
+//    QueryTrans32();
 //
-//    if (Input31() == SER_GOODCHECK) break;
+//    if (Input32() == SER_GOODCHECK) break;
 //    if (fKey == true) return GetDouble2Error();
 //  }
 //
@@ -185,16 +99,16 @@ AUTOMATIC32.C
 //
 //  InitPop(3+4+4+1);
 //
-//  double dbTransU = PopDouble31();
-//  double dbTransI = PopDouble31();
+//  double dbTransU = PopDouble32();
+//  double dbTransI = PopDouble32();
 //
 //  return GetDouble2(dbTransU*dbTransI, true);
 //}
 //
 //
-//bool    Automatic31(void)
+//bool    Automatic32(void)
 //{
-//  double2 db2 = ReadTrans31_Full();
+//  double2 db2 = ReadTrans32_Full();
 //  if (db2.fValid == false) return false;
 //
 //  ShowPercent(100);
@@ -206,22 +120,22 @@ AUTOMATIC32.C
 //
 //
 //
-//bool    QueryEngAbs31_Full(uchar  bPercent)
+//bool    QueryEngAbs32_Full(uchar  bPercent)
 //{
 //  uchar r;
 //  for (r=0; r<bMINORREPEATS; r++)
 //  {
 //    DelayOff();
-//    QueryEngAbs31();
+//    QueryEngAbs32();
 //
-//    if (Input31() == SER_GOODCHECK) break;
+//    if (Input32() == SER_GOODCHECK) break;
 //    if (fKey == true) return false;
 //  }
 //
 //  if (r == bMINORREPEATS) return false;
 //  ShowPercent(bPercent);
 //
-//  ReadEng31();
+//  ReadEng32();
 //
 //  return true;
 //}
@@ -351,11 +265,11 @@ time2   ReadTimeCan32(void)
 
 
 
-//double2 ReadCntCurr31(void)
+//double2 ReadCntCurr32(void)
 //{
-//  if (QueryOpen31_Full(25) == 0) GetDouble2Error();
+//  if (QueryOpen32_Full(25) == 0) GetDouble2Error();
 //
-//  if (QueryEngAbs31_Full(50) == 0) return GetDouble2Error();
+//  if (QueryEngAbs32_Full(50) == 0) return GetDouble2Error();
 //
 //
 //  double dbTrans = mpdbTransCnt[ibDig];
