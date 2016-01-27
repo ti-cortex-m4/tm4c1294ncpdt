@@ -75,7 +75,7 @@ static void QueryData26(uchar  ibMon, uchar  ibTrf) // энергия по месяцам
   PushChar(0x03);
   PushChar(0x06);
 
-  PushCharCod(26); // "срез энергии""
+  PushCharCod(26); // "срез энергии"
 
   uint w = ibMon * 72 + ibTrf;
   PushCharCod(w / 0x100);
