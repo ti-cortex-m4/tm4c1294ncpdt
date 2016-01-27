@@ -28,7 +28,7 @@ PROFILE31.C
 
 time                    tiProfile31;
 
-static uint             wBaseCurr31, wBaseLast31, wProfile31;
+static uint             wBaseCurr31, wBaseLast31, iwProfile31;
 
 static uint             cwErrors31;
 
@@ -39,11 +39,11 @@ bool    DecIndex31(void)
 {
   if (wBaseLast31 == wBaseCurr31)
   {
-    if (wProfile31 != 0) wProfile31--; else return false;
+    if (iwProfile31 != 0) iwProfile31--; else return false;
   }
   else
   {
-    if (wProfile31 != 0) wProfile31--; else wProfile31 = wBaseLast31-1;
+    if (iwProfile31 != 0) iwProfile31--; else iwProfile31 = wBaseLast31-1;
   }
 
   return true;
@@ -78,7 +78,7 @@ bool    ReadTop31(void)
   MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr31);
   MonitorString("\n\n number "); MonitorIntDec(wBaseLast31);
 
-  wProfile31 = wBaseCurr31;
+  iwProfile31 = wBaseCurr31;
 
   cwErrors31 = 0; // количество ошибок чтения
 
@@ -90,7 +90,7 @@ bool    ReadTop31(void)
 
 void    QueryHeader31(void)
 {
-  MonitorString("\n\n index "); MonitorIntDec(wProfile31);
+  MonitorString("\n\n index "); MonitorIntDec(iwProfile31);
 
   InitPushCod();
 
@@ -99,8 +99,8 @@ void    QueryHeader31(void)
   PushChar(0x06); // "чтение данных по идентификатору"
 
   PushCharCod(0x0E); // "график нагрузки"
-  PushCharCod(wProfile31 / 0x100);
-  PushCharCod(wProfile31 % 0x100);
+  PushCharCod(iwProfile31 / 0x100);
+  PushCharCod(iwProfile31 % 0x100);
 
   Query31(3+102+1, 3+3+1);
 }
