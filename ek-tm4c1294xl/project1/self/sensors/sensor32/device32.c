@@ -28,25 +28,6 @@ static uchar            bVersion32;
 
 
 
-uchar   GetVersion32(void)
-{
-  return bVersion32;
-}
-
-
-bool    OldVersion32(void)
-{
-  return false;
-}
-
-//// проверка версии
-//bit     OldVersion32(void)
-//{
-//  return (bVersionCod == 16) || (bVersionCod == 43);
-//}
-
-
-
 ulong   PopLong32(void)
 {
   static combo32 co;
@@ -183,6 +164,18 @@ bool    ReadOpen32(void)
   ShowLo(szNoVersion);
   DelayInf(); Clear();
 
+  return false;
+}
+
+
+uchar   GetVersion32(void)
+{
+  return bVersion32;
+}
+
+
+bool    OldVersion32(void)
+{
   return false;
 }
 

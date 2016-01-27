@@ -27,21 +27,6 @@ static uchar            bVersion31;
 
 
 
-uchar   GetVersion31(void)
-{
-  return bVersion31;
-}
-
-
-bool    NewVersion31(void)
-{
-  return ((bVersion31 == 36) ||
-          (bVersion31 == 37) ||
-          (bVersion31 == 49));
-}
-
-
-
 float   PopFloat31(void)
 {
   static combo32 co;
@@ -124,6 +109,20 @@ bool    ReadOpen31(void)
   DelayInf(); Clear();
 
   return false;
+}
+
+
+uchar   GetVersion31(void)
+{
+  return bVersion31;
+}
+
+
+bool    NewVersion31(void)
+{
+  return ((bVersion31 == 36) ||
+          (bVersion31 == 37) ||
+          (bVersion31 == 49));
 }
 
 
