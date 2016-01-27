@@ -216,7 +216,7 @@ bool    StartProfile(uchar  ibCanal)
 #endif
 
 #ifndef SKIP_N31
-    case 31: SetNext(DEV_START_N31P); break;
+    case 31: SetNext(DEV_START_31P); break;
 #endif
   }
 

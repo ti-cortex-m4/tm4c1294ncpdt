@@ -1,22 +1,22 @@
 #ifndef SKIP_N31
 
-    case DEV_START_N31P:
+    case DEV_START_31P:
       cbCorrects = 0;
 
       cbRepeat = GetMaxRepeats();
       QueryOpen31();
-      SetCurr(DEV_OPENCANAL_N31P);
+      SetCurr(DEV_OPENCANAL_31P);
       break;
 
-    case DEV_OPENCANAL_N31P:
+    case DEV_OPENCANAL_31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         if (ReadOpen31() == 0)
           ErrorProfile();
         else if (fCurrCtrl == true)
-          MakePause(DEV_POSTOPENCANAL_N31P);
+          MakePause(DEV_POSTOPENCANAL_31P);
         else
-          MakePause(DEV_POSTCORRECT_N31P);
+          MakePause(DEV_POSTCORRECT_31P);
       }
       else
       {
@@ -27,25 +27,25 @@
           cbRepeat--;
 
           QueryOpen31();
-          SetCurr(DEV_OPENCANAL_N31P);
+          SetCurr(DEV_OPENCANAL_31P);
         }
       }
       break;
 
-    case DEV_POSTOPENCANAL_N31P:
+    case DEV_POSTOPENCANAL_31P:
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = GetMaxRepeats();
       QueryTime31();
-      SetCurr(DEV_TIME_N31P);
+      SetCurr(DEV_TIME_31P);
       break;
 
-    case DEV_TIME_N31P:
+    case DEV_TIME_31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         tiProfile31 = ReadTime31();
-        MakePause(DEV_POSTTIME_N31P);
+        MakePause(DEV_POSTTIME_31P);
       }
       else
       {
@@ -56,13 +56,13 @@
           cbRepeat--;
 
           QueryTime31();
-          SetCurr(DEV_TIME_N31P);
+          SetCurr(DEV_TIME_31P);
         }
       }
       break;
 
 
-    case DEV_POSTTIME_N31P:
+    case DEV_POSTTIME_31P:
       {
         uint iwDay1 = GetDayIndexMD(tiProfile31.bMonth, tiProfile31.bDay);
         ulong dwSecond1 = GetSecondIndex(tiProfile31);
@@ -77,56 +77,56 @@
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
 
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
-          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_N31P); }
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_31P); }
           else if (GetCurrHouIndex() == (tiProfile31.bHour*2 + tiProfile31.bMinute/30))       // простая коррекция
-          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_N31P);  }
+          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_31P);  }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
         }
       }
       break;
 
-    case DEV_CONTROL_N31P:
+    case DEV_CONTROL_31P:
       if (++cbCorrects > bMINORREPEATS)
-        MakePause(DEV_POSTCORRECT_N31P);
+        MakePause(DEV_POSTCORRECT_31P);
       else
       {
         cbRepeat = GetMaxRepeats();
         QueryControl31(tiCurr);
-        SetCurr(DEV_POSTCONTROL_N31P);
+        SetCurr(DEV_POSTCONTROL_31P);
       }
       break;
 
-    case DEV_POSTCONTROL_N31P:
+    case DEV_POSTCONTROL_31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPENCANAL_N31P);
+        MakePause(DEV_POSTOPENCANAL_31P);
       else
       {
         if (cbRepeat == 0)
-          MakePause(DEV_POSTCORRECT_N31P); // да !
+          MakePause(DEV_POSTCORRECT_31P); // да !
         else
         {
           ErrorLink();
           cbRepeat--;
 
           QueryControl31(tiCurr);
-          SetCurr(DEV_POSTCONTROL_N31P);
+          SetCurr(DEV_POSTCONTROL_31P);
         }
       }
       break;
 
 
-    case DEV_POSTCORRECT_N31P:
+    case DEV_POSTCORRECT_31P:
       Clear();
 
       cbRepeat = GetMaxRepeats();
       QueryTop31();
-      SetCurr(DEV_TOP_N31P);
+      SetCurr(DEV_TOP_31P);
       break;
 
-    case DEV_TOP_N31P:
+    case DEV_TOP_31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTTOP_N31P);
+        MakePause(DEV_POSTTOP_31P);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -136,24 +136,24 @@
           cbRepeat--;
 
           QueryTop31();
-          SetCurr(DEV_TOP_N31P);
+          SetCurr(DEV_TOP_31P);
         }
       }
       break;
 
-    case DEV_POSTTOP_N31P:
+    case DEV_POSTTOP_31P:
       if (ReadTop31() == false) DoneProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
         QueryHeader31();
-        SetCurr(DEV_HEADER_N31P);
+        SetCurr(DEV_HEADER_31P);
       }
       break;
 
-    case DEV_HEADER_N31P:
+    case DEV_HEADER_31P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTHEADER_N31P);
+        MakePause(DEV_POSTHEADER_31P);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -163,12 +163,12 @@
           cbRepeat--;
 
           QueryHeader31();
-          SetCurr(DEV_HEADER_N31P);
+          SetCurr(DEV_HEADER_31P);
         }
       }
       break;
 
-    case DEV_POSTHEADER_N31P:
+    case DEV_POSTHEADER_31P:
       if (ReadHeader31() == 0)
         DoneProfile();
       else if (DecIndex31() == 0)
@@ -177,7 +177,7 @@
       {
         cbRepeat = GetMaxRepeats();
         QueryHeader31();
-        SetCurr(DEV_HEADER_N31P);
+        SetCurr(DEV_HEADER_31P);
       }
       break;
 
