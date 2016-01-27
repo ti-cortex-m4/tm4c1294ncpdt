@@ -130,7 +130,7 @@ bool    ReadEngExt31(void)
         uchar i;
         for (i=0; i<6; i++)
         {
-          mpdbEng30[i*5] += PopDouble31()/1000;
+          mpdbEng30[i*5] += PopDouble31()/1000; // энерги€ всего
         }
       }
     }
@@ -162,7 +162,7 @@ bool    ReadEngExt31(void)
         uchar i;
         for (i=0; i<24; i++)
         {
-          mpdbEng30[1 + (i/4)*5 + i%4] += PopDouble31()/1000;
+          mpdbEng30[1 + (i/4)*5 + i%4] += PopDouble31()/1000; // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
         }
       }
     }
@@ -247,7 +247,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G3 "); Delay(1000); return(0); }
 
-      InitPop(7); // !
+      InitPop(3+4); // пропускаем дату/врем€
 
       uchar i;
       for (i=0; i<6; i++)
@@ -434,7 +434,7 @@ double2 ReadCntMonCan31(uchar  ibMon)
 
   for (i=0; i<6; i++)
   {
-    mpdbChannelsC[i] = mpdbEng30[i*5+0] - mpdbEng30[i*5+3];
+    mpdbChannelsC[i] = mpdbEng30[i*5+0] - mpdbEng30[i*5+3]; // энерги€ всего минус энерги€ за текущие сутки
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
