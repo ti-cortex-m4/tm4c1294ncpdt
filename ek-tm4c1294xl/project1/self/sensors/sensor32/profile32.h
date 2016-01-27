@@ -1,17 +1,17 @@
 /*------------------------------------------------------------------------------
-PROFILE31.H
+PROFILE32.H
 
 
 ------------------------------------------------------------------------------*/
 
-extern  time                    tiProfile31;
+extern  time                    tiProfile32;
 
 
 
-bool    DecIndex31(void);
+bool    DecIndex32(void);
 
-void    QueryTop31(void);
-bool    ReadTop31(void);
+void    QueryTop32(void);
+bool    ReadTop32(void);
 
-void    QueryHeader31(void);
-bool    ReadHeader31(void);
+void    QueryHeader32(void);
+bool    ReadHeader32(void);

@@ -4994,19 +4994,19 @@ void    RunDevices(void)
 #endif
 #ifndef SKIP_N31
 
-    case DEV_START_N31C:
+    case DEV_START_31C:
       cbRepeat = GetMaxRepeats();
       QueryOpen31();
-      SetCurr(DEV_OPENCANAL_N31C);
+      SetCurr(DEV_OPENCANAL_31C);
       break;
 
-    case DEV_OPENCANAL_N31C:
+    case DEV_OPENCANAL_31C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         if (ReadOpen31() == false)
           ErrorCurrent();
         else
-          MakePause(DEV_POSTOPENCANAL_N31C);
+          MakePause(DEV_POSTOPENCANAL_31C);
       }
       else
       {
@@ -5017,18 +5017,18 @@ void    RunDevices(void)
           cbRepeat--;
 
           QueryOpen31();
-          SetCurr(DEV_OPENCANAL_N31C);
+          SetCurr(DEV_OPENCANAL_31C);
         }
       }
       break;
 
-    case DEV_POSTOPENCANAL_N31C:
+    case DEV_POSTOPENCANAL_31C:
       cbRepeat = GetMaxRepeats();
       QueryEngAbs31();
-      SetCurr(DEV_ENERGY_N31C);
+      SetCurr(DEV_ENERGY_31C);
       break;
 
-    case DEV_ENERGY_N31C:
+    case DEV_ENERGY_31C:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         ReadCurrent31();
       else
@@ -5040,7 +5040,7 @@ void    RunDevices(void)
           cbRepeat--;
 
           QueryEngAbs31();
-          SetCurr(DEV_ENERGY_N31C);
+          SetCurr(DEV_ENERGY_31C);
         }
       }
       break;
