@@ -35,7 +35,7 @@ static double           mpdbEng30[30];
 
 
 
-static void QueryIndex4(uchar  ibTrf)
+static void QueryData4(uchar  ibTrf) // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
 {
   InitPushCod();
 
@@ -51,7 +51,7 @@ static void QueryIndex4(uchar  ibTrf)
 }
 
 
-static void QueryIndex5(uchar  ibTrf)
+static void QueryData5(uchar  ibTrf) // энерги€ всего
 {
   InitPushCod();
 
@@ -67,7 +67,7 @@ static void QueryIndex5(uchar  ibTrf)
 }
 
 
-static void QueryIndex26(uchar  ibMon, uchar  ibTrf)
+static void QueryData26(uchar  ibMon, uchar  ibTrf) // энерги€ по мес€цам
 {
   InitPushCod();
 
@@ -110,7 +110,7 @@ bool    ReadEngExt31(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryIndex5(t);
+      QueryData5(t);
 
       ShowPercent(60+t);
 
@@ -142,7 +142,7 @@ bool    ReadEngExt31(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryIndex4(t);
+      QueryData4(t);
 
       ShowPercent(70+t);
 
@@ -183,7 +183,7 @@ bool    ReadMonIndexExt31(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryIndex26(m, 0);
+      QueryData26(m, 0);
 
       if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -235,7 +235,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryIndex26(ibMon, t);
+      QueryData26(ibMon, t);
 
       if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -270,7 +270,7 @@ bool  ReadEngMonCurrExt31(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryIndex4(t);
+      QueryData4(t);
 
       ShowPercent(80+t);
 
@@ -290,7 +290,7 @@ bool  ReadEngMonCurrExt31(void)
         uchar i;
         for (i=0; i<24; i++)
         {
-          mpdbEng30[1 + (i/4)*5 + i%4] += PopDouble31()/1000;
+          mpdbEng30[1 + (i/4)*5 + i%4] += PopDouble31()/1000; // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
         }
       }
     }
@@ -299,7 +299,7 @@ bool  ReadEngMonCurrExt31(void)
   uchar i;
   for (i=0; i<6; i++)
   {
-    mpdbChannelsMon[i] += mpdbEng30[i*5+1];
+    mpdbChannelsMon[i] += mpdbEng30[i*5+1]; // энерги€ за текущий мес€ц
   }
 
   return(1);
@@ -315,7 +315,7 @@ bool    ReadEngAbsExt31(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryIndex5(t);
+      QueryData5(t);
 
       ShowPercent(90+t);
 
