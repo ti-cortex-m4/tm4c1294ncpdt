@@ -14,6 +14,7 @@ KEY_AUTOMATIC!C
 #include "../../sensors/automatic1.h"
 #include "../../sensors/automatic_w.h"
 #include "../../sensors/sensor31/automatic31.h"
+#include "../../sensors/sensor32/automatic32.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../digitals/digitals_display.h"
@@ -178,6 +179,10 @@ uchar   i;
 
 #ifndef SKIP_N31
           case 31: if (Automatic31() != 1) bRes = 0xEE; break;
+#endif
+
+#ifndef SKIP_N32
+          case 32: if (Automatic32() != 1) bRes = 0xEE; break;
 #endif
         }
 

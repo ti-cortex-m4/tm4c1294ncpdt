@@ -14,7 +14,7 @@ AUTOMATIC32.C
 #include "../../devices/devices.h"
 //#include "../../sensors/sensor32/unpack32.h"
 #include "../../digitals/wait_answer.h"
-//#include "../automatic1.h"
+#include "../automatic1.h"
 #include "device32.h"
 #include "../sensor31/automatic31.h"
 #include "automatic32.h"
@@ -119,22 +119,21 @@ time2   QueryTime32_Full(uchar  bPercent)
 //
 //  return GetDouble2(dbTransU*dbTransI, true);
 //}
-//
-//
-//bool    Automatic32(void)
-//{
-//  double2 db2 = ReadTrans32_Full();
-//  if (db2.fValid == false) return false;
-//
-//  ShowPercent(100);
-//
-//  SetupFactors(GetFactors(db2.dbValue, 10000));
-//
-//  return true;
-//}
-//
-//
-//
+
+
+bool    Automatic32(void)
+{
+  if (QueryOpen32_Full(25) == false) return false;
+
+  ShowPercent(100);
+
+  SetupFactors(GetFactors(1, 10000));
+
+  return true;
+}
+
+
+
 //bool    QueryEngAbs32_Full(uchar  bPercent)
 //{
 //  uchar r;
