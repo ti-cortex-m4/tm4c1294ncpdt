@@ -8,14 +8,13 @@ DEVICE31.H
 
 
 
-uchar   GetVersion31(void);
-bool    NewVersion31(void);
-
 float   PopFloat31(void);
 double  PopDouble31(void);
 
 void    QueryOpen31(void);
 bool    ReadOpen31(void);
+uchar   GetVersion31(void);
+bool    NewVersion31(void);
 
 void    QueryTime31(void);
 time    ReadTime31(void);
