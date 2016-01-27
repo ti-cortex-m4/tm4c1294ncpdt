@@ -18,5 +18,6 @@ bool    ReadOpen32(void);
 
 void    QueryTime32(void);
 time    ReadTime32(void);
+void    QueryControl32(time  ti);
 
 void    QueryEngAbs32(uchar  ibTrf);
