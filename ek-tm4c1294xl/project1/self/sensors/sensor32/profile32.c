@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PROFILE31.C
+PROFILE32.C
 
 
 ------------------------------------------------------------------------------*/
@@ -18,32 +18,32 @@ PROFILE31.C
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../special/special.h"
-#include "automatic31.h"
-#include "device31.h"
-#include "profile31.h"
+#include "automatic32.h"
+#include "device32.h"
+#include "profile32.h"
 
 
 
-#ifndef SKIP_N31
+#ifndef SKIP_N32
 
-time                    tiProfile31;
+time                    tiProfile32;
 
-static uint             wBaseCurr31, wBaseLast31, wProfile31;
+static uint             wBaseCurr32, wBaseLast32, wProfile32;
 
-static uint             cwErrors31;
+static uint             cwErrors32;
 
 
 
 // переход на предыдущую запись
-bool    DecIndex31(void)
+bool    DecIndex32(void)
 {
-  if (wBaseLast31 == wBaseCurr31)
+  if (wBaseLast32 == wBaseCurr32)
   {
-    if (wProfile31 != 0) wProfile31--; else return false;
+    if (wProfile32 != 0) wProfile32--; else return false;
   }
   else
   {
-    if (wProfile31 != 0) wProfile31--; else wProfile31 = wBaseLast31-1;
+    if (wProfile32 != 0) wProfile32--; else wProfile32 = wBaseLast32-1;
   }
 
   return true;
@@ -51,7 +51,7 @@ bool    DecIndex31(void)
 
 
 
-void    QueryTop31(void)
+void    QueryTop32(void)
 {
   InitPushCod();
 
@@ -63,34 +63,34 @@ void    QueryTop31(void)
   PushCharCod(0x00);
   PushCharCod(0x00);
 
-  Query31(3+13+1, 3+3+1);
+  Query32(3+13+1, 3+3+1);
 }
 
 
 
-bool    ReadTop31(void)
+bool    ReadTop32(void)
 {
   InitPop(3+2);
 
-  wBaseCurr31 = PopIntLtl(); // индекс текущей записи
-  wBaseLast31 = PopIntLtl(); // количество записей
+  wBaseCurr32 = PopIntLtl(); // индекс текущей записи
+  wBaseLast32 = PopIntLtl(); // количество записей
 
-  MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr31);
-  MonitorString("\n\n number "); MonitorIntDec(wBaseLast31);
+  MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr32);
+  MonitorString("\n\n number "); MonitorIntDec(wBaseLast32);
 
-  wProfile31 = wBaseCurr31;
+  wProfile32 = wBaseCurr32;
 
-  cwErrors31 = 0; // количество ошибок чтения
+  cwErrors32 = 0; // количество ошибок чтения
 
-  Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast31,wBaseCurr31); DelayInf();
+  Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast32,wBaseCurr32); DelayInf();
 
-  return DecIndex31();
+  return DecIndex32();
 }
 
 
-void    QueryHeader31(void)
+void    QueryHeader32(void)
 {
-  MonitorString("\n\n index "); MonitorIntDec(wProfile31);
+  MonitorString("\n\n index "); MonitorIntDec(wProfile32);
 
   InitPushCod();
 
@@ -99,32 +99,32 @@ void    QueryHeader31(void)
   PushChar(0x06); // "чтение данных по идентификатору"
 
   PushCharCod(0x0E); // "график нагрузки"
-  PushCharCod(wProfile31 / 0x100);
-  PushCharCod(wProfile31 % 0x100);
+  PushCharCod(wProfile32 / 0x100);
+  PushCharCod(wProfile32 % 0x100);
 
-  Query31(3+102+1, 3+3+1);
+  Query32(3+102+1, 3+3+1);
 }
 
 
-bool    ReadHeader31(void)
+bool    ReadHeader32(void)
 {
   HideCurrTime(1);
 
-  if (NewVersion31())
+  if (NewVersion32())
   {
-    uint wCRC = MakeCrc16Bit31InBuff(3, 100);
+    uint wCRC = MakeCrc16Bit32InBuff(3, 100);
     if (wCRC != InBuff(103) + InBuff(104)*0x100)
     {
       MonitorString("\n bad CRC");
 
-      Clear(); sprintf(szLo+3,"ошибки: %-4u",++cwErrors31);
-      return (cwErrors31 < 48);
+      Clear(); sprintf(szLo+3,"ошибки: %-4u",++cwErrors32);
+      return (cwErrors32 < 48);
     }
   }
 
 
   InitPop(3);
-  time ti1 = ReadPackTime31();
+  time ti1 = ReadPackTime32();
 
   ShowProfileTime(ti1);
   if ((ti1.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
@@ -138,8 +138,8 @@ bool    ReadHeader31(void)
   MonitorTime(ti2);
 
 
-  if (SearchDefHouIndex(ti2) == 0) return (++cwErrors31 < 48);
-  cwErrors31 = 0;
+  if (SearchDefHouIndex(ti2) == 0) return (++cwErrors32 < 48);
+  cwErrors32 = 0;
 
 
   ShowProgressDigHou();
@@ -148,9 +148,9 @@ bool    ReadHeader31(void)
   InitPop(3+4+4*6*3);
 
   uchar i;
-  for (i=0; i<MAX_LINE_N31; i++)
+  for (i=0; i<MAX_LINE_N32; i++)
   {
-    float fl = PopFloat31();
+    float fl = PopFloat32();
     MonitorString("\n value "); MonitorLongDec(fl);
 
     fl /= 1000;
