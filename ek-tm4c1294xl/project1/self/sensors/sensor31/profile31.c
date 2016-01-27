@@ -150,11 +150,11 @@ bool    ReadHeader31(void)
   uchar i;
   for (i=0; i<MAX_LINE_N31; i++)
   {
-    float fl = PopFloat31();
-    MonitorString("\n value "); MonitorLongDec(fl);
+    double db = PopFloat31();
+    MonitorString("\n value "); MonitorLongDec(db*1000); MonitorString(" "); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
 
-    fl /= 1000;
-    mpdbEngFracDigCan[ibDig][i] += fl;
+    db /= 1000;
+    mpdbEngFracDigCan[ibDig][i] += db;
 
     if (ti1.bMinute % 30 == 0)
     {
@@ -163,6 +163,7 @@ bool    ReadHeader31(void)
       mpwChannels[i] = w;
 
       mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
+      MonitorString(" "); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
     }
     else
     {
