@@ -217,44 +217,28 @@ time    ReadTime32(void)
 }
 
 
-//// чтение времени/даты дл€ счЄтчика Ёнерги€-9
-//void    ReadTimeDig32(void)
-//{
-//  InitPop(3);
-//
-//  tiDig.bSecond = PopChar();
-//  tiDig.bMinute = PopChar();
-//  tiDig.bHour   = PopChar();
-//                  PopChar();
-//  tiDig.bDay    = PopChar();
-//  tiDig.bMonth  = PopChar();
-//  tiDig.bYear   = PopChar();
-//}
-//
-//
-//
-//void    QueryControl32(void)
-//{
-//  InitPushCod();
-//
-//  PushChar(0x7E);
-//  PushChar(0x08);
-//  PushChar(0x08);
-//
-//  PushCharCod( tiCurr.bSecond );
-//  PushCharCod( tiCurr.bMinute );
-//  PushCharCod( tiCurr.bHour   );
-//
-//  tiAlt = tiCurr;
-//  PushCharCod(Weekday());
-//
-//  PushCharCod( tiCurr.bDay    );
-//  PushCharCod( tiCurr.bMonth  );
-//  PushCharCod( tiCurr.bYear   );
-//  PushCharCod( 20 );
-//
-//  Query32(3+1, 3+8+1);
-//}
+void    QueryControl32(time  ti)
+{
+  InitPushCod();
+
+  PushChar(0x7E);
+  PushChar(0x08);
+  PushChar(0x08); // "запись времени и даты в счетчик"
+
+  PushCharCod(ti.bSecond);
+  PushCharCod(ti.bMinute);
+  PushCharCod(ti.bHour);
+
+  PushCharCod(GetWeekdayYMD(ti.bYear, ti.bMonth, ti.bDay) + 1); // "день недели (1..7, 1-понедельник)"
+
+  PushCharCod(ti.bDay);
+  PushCharCod(ti.bMonth);
+
+  PushCharCod(ti.bYear);
+  PushCharCod(20);
+
+  Query32(3+1, 3+8+1);
+}
 
 
 
