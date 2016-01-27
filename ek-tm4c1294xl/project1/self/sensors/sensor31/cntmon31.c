@@ -406,7 +406,7 @@ double2 ReadCntMonCan31(uchar  ibMon)
 
   if (NewVersion31())
   {
-    if (ti.bMonth != ibMon+1)
+    if (ti.bMonth != ibMon+1) // значение счЄтчиков дл€ всех мес€цев, кроме текущего
     {
       if (GetVersion31() == 49)
         return ReadCntMonCanExt31(ibMon, ti);
