@@ -101,7 +101,7 @@ static bool ValidPackTime(void)
 }
 
 
-bool    ReadEngExt31(void)
+static bool ReadCntCurrMonCan(void)
 {
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
@@ -417,9 +417,9 @@ double2 ReadCntMonCan31(uchar  ibMon)
         return GetDouble2Error();
       }
     }
-    else // значени€е счЄтчиков дл€ текущего мес€ца (на начало текущих суток)
+    else // значение счЄтчиков дл€ текущего мес€ца (энерги€ на начало текущих суток)
     {
-      if (ReadEngExt31() == 0) return GetDouble2Error();
+      if (ReadCntCurrMonCan() == 0) return GetDouble2Error();
     }
   }
   else
@@ -434,7 +434,7 @@ double2 ReadCntMonCan31(uchar  ibMon)
 
   for (i=0; i<6; i++)
   {
-    mpdbChannelsC[i] = mpdbEng30[i*5+0] - mpdbEng30[i*5+3]; // энерги€ всего минус энерги€ за текущие сутки
+    mpdbChannelsC[i] = mpdbEng30[i*5+0] - mpdbEng30[i*5+3]; // энерги€ всего минус энерги€ за текущие сутки равно энергии на начало текущих суток
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
