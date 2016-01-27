@@ -60,21 +60,21 @@ void    QueryTop32(void)
   PushChar(0x03);
   PushChar(0x06); // "чтение данных по идентификатору"
 
-  PushCharCod(0x0B); // "указатели"
+  PushCharCod(0x0A); // "указатели"
   PushCharCod(0x00);
   PushCharCod(0x00);
 
-  Query32(3+13+1, 3+3+1);
+  Query32(3+8+1, 3+3+1);
 }
 
 
 
 bool    ReadTop32(void)
 {
-  InitPop(3+2);
+  InitPop(3);
 
-  wBaseCurr32 = PopIntLtl(); // индекс текущей записи
   wBaseLast32 = PopIntLtl(); // количество записей
+  wBaseCurr32 = PopIntLtl(); // индекс текущей записи
 
   MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr32);
   MonitorString("\n\n number "); MonitorIntDec(wBaseLast32);
@@ -83,7 +83,7 @@ bool    ReadTop32(void)
 
   cwErrors32 = 0; // количество ошибок чтения
 
-  Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast32,wBaseCurr32); DelayInf();
+  Clear(); sprintf(szLo+3,"%4u:%-4u",wBaseLast32,wBaseCurr32); DelayInf();
 
   return DecIndex32();
 }
@@ -99,11 +99,11 @@ void    QueryHeader32(void)
   PushChar(0x03);
   PushChar(0x06); // "чтение данных по идентификатору"
 
-  PushCharCod(0x0E); // "график нагрузки"
+  PushCharCod(0x0B); // "график нагрузки"
   PushCharCod(iwProfile32 / 0x100);
   PushCharCod(iwProfile32 % 0x100);
 
-  Query32(3+102+1, 3+3+1);
+  Query32(3+5+1, 3+3+1);
 }
 
 
