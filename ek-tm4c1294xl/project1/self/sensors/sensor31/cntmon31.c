@@ -335,7 +335,7 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 
       for (i=0; i<6; i++)
       {
-        mpdbEngMon[i] += mpdbEngMonCurr[i*5+1]; // энерги€ за текущий мес€ц
+        mpdbEngMon[i] += mpdbEngMonCurr[i]; // энерги€ за текущий мес€ц
       }
     }
     else
