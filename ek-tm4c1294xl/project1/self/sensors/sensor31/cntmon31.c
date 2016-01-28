@@ -131,21 +131,18 @@ static bool ReadEngVar_Full(uchar  bPercent)
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 196);
-        if (wCRC != InBuff(199) + InBuff(200)*0x100) { sprintf(szLo," ошибка CRC: G4 "); Delay(1000); return(0); }
+        if (wCRC != InBuff(199) + InBuff(200)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
 
         uchar i;
-        for (i=0; i<24; i++)
+        for (i=0; i<6; i++)
         {
-          mpdbEng30[1 + (i/4)*5 + i%4] += PopDouble31()/1000; // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
+          mpdbEngCurrMon[i] = PopDouble31()/1000;
+          mpdbEngPrevMon[i] = PopDouble31()/1000;
+          mpdbEngCurrDay[i] = PopDouble31()/1000;
+          mpdbEngPrevDay[i] = PopDouble31()/1000;
         }
       }
     }
-  }
-
-  uchar i;
-  for (i=0; i<6; i++)
-  {
-    mpdbChannelsMon[i] += mpdbEng30[i*5+1]; // энерги€ за текущий мес€ц
   }
 
   return(1);
@@ -163,7 +160,7 @@ bool    ReadEngAbs_Full(uchar  bPercent)
       DelayOff();
       QueryEngAbs(t);
 
-      ShowPercent(90+t);
+      ShowPercent(bPercent+t);
 
       if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -176,12 +173,12 @@ bool    ReadEngAbs_Full(uchar  bPercent)
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 52);
-        if (wCRC != InBuff(55) + InBuff(56)*0x100) { sprintf(szLo," ошибка CRC: G5 "); Delay(1000); return(0); }
+        if (wCRC != InBuff(55) + InBuff(56)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
 
         uchar i;
         for (i=0; i<6; i++)
         {
-          mpdbChannelsAbs[i] += PopDouble31()/1000;
+          mpdbEngAbs[i] = PopDouble31()/1000;
         }
       }
     }
