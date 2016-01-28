@@ -10,6 +10,7 @@ CNTMON31.C
 #include "../../memory/mem_factors.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
+#include "../../serial/monitor.h"
 #include "../../time/delay.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals_messages.h"
@@ -177,7 +178,7 @@ bool    ReadMonIndexExt31(void)
   uchar m;
   for (m=0; m<=12; m++)
   {
-    if (fKey == true) return(0);
+    MonitorString("\n month "); MonitorCharDec(m);
 
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
@@ -196,6 +197,7 @@ bool    ReadMonIndexExt31(void)
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G2 "); Delay(1000); return(0); }
 
       time ti = ReadPackTime31();
+      MonitorString("\n time "); MonitorTime(ti);
 
       if (ti.bMonth == 0)
         mpbChannelsMon[m] = 0;
