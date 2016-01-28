@@ -34,7 +34,8 @@ static uchar            mpbChannelsMon[13];
 // энерги€
 static double           mpdbEng30[30];
 
-static double           mpdbEngAbs[6],
+static double           mpdbEngMon[6],
+                        mpdbEngAbs[6],
                         mpdbEngMonCurr[6], mpdbEngMonPrev[6],
                         mpdbEngDayCurr[6], mpdbEngDayPrev[6];
 
@@ -91,6 +92,12 @@ static void QueryEngMon(uchar  ibMon, uchar  ibTrf) // энерги€ по мес€цам
 
 
 
+static double PopEng(void)
+{
+  return PopDouble31()/1000;
+}
+
+
 static bool ValidPackTime(void)
 {
   time ti = ReadPackTime31();
@@ -124,7 +131,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return(0);
+    if (r == bMINORREPEATS) return false;
     else
     {
       if (ValidPackTime() == 0) break; // тариф не используетс€
@@ -136,16 +143,16 @@ static bool ReadEngVar_Full(uchar  bPercent)
         uchar i;
         for (i=0; i<6; i++)
         {
-          mpdbEngCurrMon[i] = PopDouble31()/1000;
-          mpdbEngPrevMon[i] = PopDouble31()/1000;
-          mpdbEngCurrDay[i] = PopDouble31()/1000;
-          mpdbEngPrevDay[i] = PopDouble31()/1000;
+          mpdbEngMonCurr[i] = PopEng();
+          mpdbEngMonPrev[i] = PopEng();
+          mpdbEngDayCurr[i] = PopEng();
+          mpdbEngDayPrev[i] = PopEng();
         }
       }
     }
   }
 
-  return(1);
+  return true;
 }
 
 
@@ -166,7 +173,7 @@ bool    ReadEngAbs_Full(uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return(0);
+    if (r == bMINORREPEATS) return false;
     else
     {
       if (ValidPackTime() == 0) break; // тариф не используетс€
@@ -178,85 +185,31 @@ bool    ReadEngAbs_Full(uchar  bPercent)
         uchar i;
         for (i=0; i<6; i++)
         {
-          mpdbEngAbs[i] = PopDouble31()/1000;
+          mpdbEngAbs[i] = PopEng();
         }
       }
     }
   }
 
-  return(1);
+  return true;
 }
 
 
 
 static bool ReadCntCurrMonCan(void)
 {
-  uchar t;
-  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
+  if (ReadEngAbs_Full(60) == false) return false;
+
+  if (ReadEngVar_Full(70) == false) return false;
+
+
+  uchar i;
+  for (i=0; i<6; i++)
   {
-    uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
-    {
-      DelayOff();
-      QueryEngAbs(t);
-
-      ShowPercent(60+t);
-
-      if (Input31() == SER_GOODCHECK) break;
-      if (fKey == true) return false;
-    }
-
-    if (r == bMINORREPEATS) return(0);
-    else
-    {
-      if (ValidPackTime() == 0) break;         // тариф не используетс€
-      else
-      {
-        uint wCRC = MakeCrc16Bit31InBuff(3, 52);
-        if (wCRC != InBuff(55) + InBuff(56)*0x100) { sprintf(szLo," ошибка CRC: G0 "); Delay(1000); return(0); }
-
-        uchar i;
-        for (i=0; i<6; i++)
-        {
-          mpdbEng30[i*5] += PopDouble31()/1000; // энерги€ всего
-        }
-      }
-    }
+    mpdbEngMon[i] = mpdbEngAbs[i] - mpdbEngDayCurr[i]; // энерги€ всего минус энерги€ за текущие сутки равно энергии на начало текущих суток
   }
 
-  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
-  {
-    uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
-    {
-      DelayOff();
-      QueryEngVar(t);
-
-      ShowPercent(70+t);
-
-      if (Input31() == SER_GOODCHECK) break;
-      if (fKey == true) return false;
-    }
-
-    if (r == bMINORREPEATS) return(0);
-    else
-    {
-      if (ValidPackTime() == 0) break; // тариф не используетс€
-      else
-      {
-        uint wCRC = MakeCrc16Bit31InBuff(3, 196);
-        if (wCRC != InBuff(199) + InBuff(200)*0x100) { sprintf(szLo," ошибка CRC: G1 "); Delay(1000); return(0); }
-
-        uchar i;
-        for (i=0; i<24; i++)
-        {
-          mpdbEng30[1 + (i/4)*5 + i%4] += PopDouble31()/1000; // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
-        }
-      }
-    }
-  }
-
-  return(1);
+  return true;
 }
 
 
@@ -508,7 +461,7 @@ double2 ReadCntMonCan31(uchar  ibMon)
     }
     else // значение счЄтчиков дл€ текущего мес€ца (энерги€ на начало текущих суток)
     {
-      if (ReadCntCurrMonCan() == 0) return GetDouble2Error();
+      if (ReadCntCurrMonCan() == false) return GetDouble2Error();
     }
   }
   else
