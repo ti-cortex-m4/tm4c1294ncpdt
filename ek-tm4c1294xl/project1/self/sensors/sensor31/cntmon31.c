@@ -109,6 +109,15 @@ static bool ValidPackTime(void)
 
 static bool ReadEngVar_Full(uchar  bPercent)
 {
+  uchar i;
+  for (i=0; i<6; i++)
+  {
+    mpdbEngMonCurr[i] = 0;
+    mpdbEngMonPrev[i] = 0;
+    mpdbEngDayCurr[i] = 0;
+    mpdbEngDayPrev[i] = 0;
+  }
+
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
   {
@@ -136,10 +145,10 @@ static bool ReadEngVar_Full(uchar  bPercent)
         uchar i;
         for (i=0; i<6; i++)
         {
-          mpdbEngMonCurr[i] = PopEng();
-          mpdbEngMonPrev[i] = PopEng();
-          mpdbEngDayCurr[i] = PopEng();
-          mpdbEngDayPrev[i] = PopEng();
+          mpdbEngMonCurr[i] += PopEng();
+          mpdbEngMonPrev[i] += PopEng();
+          mpdbEngDayCurr[i] += PopEng();
+          mpdbEngDayPrev[i] += PopEng();
         }
       }
     }
@@ -151,6 +160,12 @@ static bool ReadEngVar_Full(uchar  bPercent)
 
 bool    ReadEngAbs_Full(uchar  bPercent)
 {
+  uchar i;
+  for (i=0; i<6; i++)
+  {
+    mpdbEngAbs[i] = 0;
+  }
+
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
   {
@@ -178,7 +193,7 @@ bool    ReadEngAbs_Full(uchar  bPercent)
         uchar i;
         for (i=0; i<6; i++)
         {
-          mpdbEngAbs[i] = PopEng();
+          mpdbEngAbs[i] += PopEng();
         }
       }
     }
@@ -189,20 +204,24 @@ bool    ReadEngAbs_Full(uchar  bPercent)
 
 
 
-static bool ReadCntCurrMonCan(void)
+static double2 ReadCntCurrMonCan(void)
 {
-  if (ReadEngAbs_Full(60) == false) return false;
+  if (ReadEngAbs_Full(60) == false) return GetDouble2Error();
 
-  if (ReadEngVar_Full(70) == false) return false;
+  if (ReadEngVar_Full(70) == false) return GetDouble2Error();
 
+
+  double dbTrans = mpdbTransCnt[ibDig];
 
   uchar i;
   for (i=0; i<6; i++)
   {
     mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngDayCurr[i]; // энерги€ всего минус энерги€ за текущие сутки равно энергии на начало текущих суток
+    mpdbChannelsC[i] *= dbTrans;
+    mpboChannelsA[i] = true;
   }
 
-  return true;
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 
@@ -295,90 +314,6 @@ bool  ReadEngMonExt31(uchar  ibMon)
   return(1);
 }
 
-/*
-bool  ReadEngMonCurrExt31(void)
-{
-  uchar t;
-  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
-  {
-    uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
-    {
-      DelayOff();
-      QueryEngVar(t);
-
-      ShowPercent(80+t);
-
-      if (Input31() == SER_GOODCHECK) break;
-      if (fKey == true) return false;
-    }
-
-    if (r == bMINORREPEATS) return(0);
-    else
-    {
-      if (ValidPackTime() == 0) break; // тариф не используетс€
-      else
-      {
-        uint wCRC = MakeCrc16Bit31InBuff(3, 196);
-        if (wCRC != InBuff(199) + InBuff(200)*0x100) { sprintf(szLo," ошибка CRC: G4 "); Delay(1000); return(0); }
-
-        uchar i;
-        for (i=0; i<24; i++)
-        {
-          mpdbEng30[1 + (i/4)*5 + i%4] += PopDouble31()/1000; // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
-        }
-      }
-    }
-  }
-
-  uchar i;
-  for (i=0; i<6; i++)
-  {
-    mpdbChannelsMon[i] += mpdbEng30[i*5+1]; // энерги€ за текущий мес€ц
-  }
-
-  return(1);
-}
-
-
-bool    ReadEngAbsExt31(void)
-{
-  uchar t;
-  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
-  {
-    uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
-    {
-      DelayOff();
-      QueryEngAbs(t);
-
-      ShowPercent(90+t);
-
-      if (Input31() == SER_GOODCHECK) break;
-      if (fKey == true) return false;
-    }
-
-    if (r == bMINORREPEATS) return(0);
-    else
-    {
-      if (ValidPackTime() == 0) break; // тариф не используетс€
-      else
-      {
-        uint wCRC = MakeCrc16Bit31InBuff(3, 52);
-        if (wCRC != InBuff(55) + InBuff(56)*0x100) { sprintf(szLo," ошибка CRC: G5 "); Delay(1000); return(0); }
-
-        uchar i;
-        for (i=0; i<6; i++)
-        {
-          mpdbChannelsAbs[i] += PopDouble31()/1000;
-        }
-      }
-    }
-  }
-
-  return(1);
-}
-*/
 
 double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 {
@@ -459,28 +394,13 @@ double2 ReadCntMonCan31(uchar  ibMon)
     }
     else // значение счЄтчиков дл€ текущего мес€ца (энерги€ на начало текущих суток)
     {
-      if (ReadCntCurrMonCan() == false) return GetDouble2Error();
+      return ReadCntCurrMonCan();
     }
   }
   else
   {
     ShowLo(szNoVersion); Delay(1000); return GetDouble2Error();
   }
-
-  ShowPercent(100);
-
-
-  double dbTrans = mpdbTransCnt[ibDig];
-
-  uchar i;
-  for (i=0; i<6; i++)
-  {
-//    mpdbChannelsC[i] = mpdbEng30[i*5+0] - mpdbEng30[i*5+3]; // энерги€ всего минус энерги€ за текущие сутки равно энергии на начало текущих суток
-    mpdbChannelsC[i] *= dbTrans;
-    mpboChannelsA[i] = true;
-  }
-
-  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
 #endif
