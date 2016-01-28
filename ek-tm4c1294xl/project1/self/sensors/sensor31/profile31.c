@@ -147,7 +147,7 @@ bool    ReadHeader31(void)
 
   bool def = IsDefect(ibDig);
   bool add = ((ti1.bMinute % 30 == 0) || def);
-  MonitorString("\n def "); MonitorByteDec(def); MonitorString(" add "); MonitorByteDec(add);
+  MonitorString("\n def "); MonitorCharDec(def); MonitorString(" add "); MonitorCharDec(add);
 
   InitPop(3+4+4*6*3);
 
