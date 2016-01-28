@@ -23,19 +23,12 @@ CNTMON31.C
 #ifndef SKIP_N31
 
 // энергия по месяцам
-static double           mpdbChannelsMon[6];
-
-// энергия всего
-static double           mpdbChannelsAbs[6];
+static double           mpdbEngMon[6];
 
 // номера месяцев
-static uchar            mpbChannelsMon[13];
+static uchar            mpbEngMon[13];
 
-// энергия
-static double           mpdbEng30[30];
-
-static double           mpdbEngMon[6],
-                        mpdbEngAbs[6],
+static double           mpdbEngAbs[6],
                         mpdbEngMonCurr[6], mpdbEngMonPrev[6],
                         mpdbEngDayCurr[6], mpdbEngDayPrev[6];
 
@@ -206,7 +199,7 @@ static bool ReadCntCurrMonCan(void)
   uchar i;
   for (i=0; i<6; i++)
   {
-    mpdbEngMon[i] = mpdbEngAbs[i] - mpdbEngDayCurr[i]; // энергия всего минус энергия за текущие сутки равно энергии на начало текущих суток
+    mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngDayCurr[i]; // энергия всего минус энергия за текущие сутки равно энергии на начало текущих суток
   }
 
   return true;
@@ -240,12 +233,12 @@ bool    ReadMonIndexExt31(void)
       MonitorString("\n time "); MonitorTime(ti);
 
       if (ti.bMonth == 0)
-        mpbChannelsMon[m] = 0;
+        mpbEngMon[m] = 0;
       else
-        mpbChannelsMon[m] = (10 + ti.bMonth)%12 + 1;
+        mpbEngMon[m] = (10 + ti.bMonth)%12 + 1;
 
       if (ti.bMonth != 0)
-        { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbChannelsMon[m]); Delay(200); }
+        { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbEngMon[m]); Delay(200); }
       else
         { Clear(); sprintf(szLo+1,"пусто: %2u-%-2u",m,12); }
     }
@@ -261,7 +254,7 @@ uchar   SearchMonIndexExt31(uchar  bMon)
 
   uchar m;
   for (m=0; m<=12; m++)
-    if (mpbChannelsMon[m] == bMon)
+    if (mpbEngMon[m] == bMon)
       return m;
 
   return 0xFF;
@@ -294,7 +287,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
       uchar i;
       for (i=0; i<6; i++)
       {
-        mpdbChannelsMon[i] += PopDouble31()/1000;
+        mpdbEngMon[i] += PopEng();
       }
     }
   }
@@ -302,7 +295,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
   return(1);
 }
 
-
+/*
 bool  ReadEngMonCurrExt31(void)
 {
   uchar t;
@@ -385,7 +378,7 @@ bool    ReadEngAbsExt31(void)
 
   return(1);
 }
-
+*/
 
 double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 {
@@ -394,7 +387,8 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 
 
   uchar i;
-  for (i=0; i<6; i++) mpdbChannelsMon[i] = 0;
+  for (i=0; i<6; i++) mpdbEngMon[i] = 0;
+
 
   uchar m = ibMon+1;
   uchar ibDay = 0;
@@ -402,7 +396,12 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
   {
     if ((m%12 + 1) == ti.bMonth)
     {
-      if (ReadEngMonCurrExt31() == 0) return GetDouble2Error();
+      if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
+
+      for (i=0; i<6; i++)
+      {
+        mpdbEngMon[i] += mpdbEngMonCurr[i*5+1]; // энергия за текущий месяц
+      }
     }
     else
     {
@@ -416,9 +415,9 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
   while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0 );
 
 
-  for (i=0; i<6; i++) mpdbChannelsAbs[i] = 0;
+//  for (i=0; i<6; i++) mpdbChannelsAbs[i] = 0;
 
-  if (ReadEngAbsExt31() == 0) return GetDouble2Error();
+  if (ReadEngAbs_Full(90) == false) return GetDouble2Error();
   ShowPercent(99);
 
 
@@ -426,7 +425,7 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 
   for (i=0; i<6; i++)
   {
-    mpdbChannelsC[i] = mpdbChannelsAbs[i] - mpdbChannelsMon[i];
+    mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngMon[i];
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
@@ -438,13 +437,12 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 
 double2 ReadCntMonCan31(uchar  ibMon)
 {
+  if (QueryOpen31_Full(25) == 0) GetDouble2Error();
+
   time2 ti2 = QueryTime31_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
-
-  uchar i;
-  for (i=0; i<30; i++) mpdbEng30[i] = 0;
 
   if (NewVersion31())
   {
@@ -474,9 +472,10 @@ double2 ReadCntMonCan31(uchar  ibMon)
 
   double dbTrans = mpdbTransCnt[ibDig];
 
+  uchar i;
   for (i=0; i<6; i++)
   {
-    mpdbChannelsC[i] = mpdbEng30[i*5+0] - mpdbEng30[i*5+3]; // энергия всего минус энергия за текущие сутки равно энергии на начало текущих суток
+//    mpdbChannelsC[i] = mpdbEng30[i*5+0] - mpdbEng30[i*5+3]; // энергия всего минус энергия за текущие сутки равно энергии на начало текущих суток
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
