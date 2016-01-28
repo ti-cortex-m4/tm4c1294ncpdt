@@ -141,15 +141,16 @@ bool    ReadHeader31(void)
   if (SearchDefHouIndex(ti2) == 0) return (++cwErrors31 < 48);
   cwErrors31 = 0;
 
-
   ShowProgressDigHou();
-  double dbPulse = mpdbPulseHou[ibDig];
+
 
   bool def = IsDefect(ibDig);
   bool add = ((ti1.bMinute % 30 == 0) || def);
   MonitorString("\n def "); MonitorCharDec(def); MonitorString(" add "); MonitorCharDec(add);
 
   InitPop(3+4+4*6*3);
+
+  double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
   for (i=0; i<MAX_LINE_N31; i++)
