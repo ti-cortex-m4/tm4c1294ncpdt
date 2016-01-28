@@ -41,6 +41,8 @@ char const              szBaudOK[]      = "   модем: OK    ",
                         szNoDevice[]    = " ошибка связи ! ",
                         szNoData[]      = "данные не готовы",
                         szNoVersion[]   = "ошибка версии ! ",
+                        szBadVersion[]  = "Ошибка версии ! ",
+                        szBadCRC[]      = "  ошибка CRC !  ",
                         szPowerOK[]     = "  мощность: OK  ",
                         szPowerNo[]     = "  мощность: нет ",
                         szNewSeason[]   = "Смена сезона:   ",
@@ -56,6 +58,5 @@ char const              szBaudOK[]      = "   модем: OK    ",
                         szDirectParam[] = "Параметры...    ",
                         szFailure1[]    = " сбой потока !  ",
                         szFailure2[]    = " сбой данных !  ",
-                        szFailure20[]   = "сбой данных !   ",
-                        szBadVersion[]  = "Ошибка версии ! ";
+                        szFailure20[]   = "сбой данных !   ";
 

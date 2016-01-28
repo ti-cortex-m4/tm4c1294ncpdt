@@ -34,6 +34,10 @@ static uchar            mpbChannelsMon[13];
 // энерги€
 static double           mpdbEng30[30];
 
+static double           mpdbEngAbs[6],
+                        mpdbEngMonCurr[6], mpdbEngMonPrev[6],
+                        mpdbEngDayCurr[6], mpdbEngDayPrev[6];
+
 
 
 static void QueryEngVar(uchar  ibTrf) // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
@@ -100,6 +104,92 @@ static bool ValidPackTime(void)
 
   return true;
 }
+
+
+
+static bool ReadEngVar_Full(uchar  bPercent)
+{
+  uchar t;
+  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
+  {
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
+    {
+      DelayOff();
+      QueryEngVar(t);
+
+      ShowPercent(bPercent+t);
+
+      if (Input31() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
+    }
+
+    if (r == bMINORREPEATS) return(0);
+    else
+    {
+      if (ValidPackTime() == 0) break; // тариф не используетс€
+      else
+      {
+        uint wCRC = MakeCrc16Bit31InBuff(3, 196);
+        if (wCRC != InBuff(199) + InBuff(200)*0x100) { sprintf(szLo," ошибка CRC: G4 "); Delay(1000); return(0); }
+
+        uchar i;
+        for (i=0; i<24; i++)
+        {
+          mpdbEng30[1 + (i/4)*5 + i%4] += PopDouble31()/1000; // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
+        }
+      }
+    }
+  }
+
+  uchar i;
+  for (i=0; i<6; i++)
+  {
+    mpdbChannelsMon[i] += mpdbEng30[i*5+1]; // энерги€ за текущий мес€ц
+  }
+
+  return(1);
+}
+
+
+bool    ReadEngAbs_Full(uchar  bPercent)
+{
+  uchar t;
+  for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
+  {
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
+    {
+      DelayOff();
+      QueryEngAbs(t);
+
+      ShowPercent(90+t);
+
+      if (Input31() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
+    }
+
+    if (r == bMINORREPEATS) return(0);
+    else
+    {
+      if (ValidPackTime() == 0) break; // тариф не используетс€
+      else
+      {
+        uint wCRC = MakeCrc16Bit31InBuff(3, 52);
+        if (wCRC != InBuff(55) + InBuff(56)*0x100) { sprintf(szLo," ошибка CRC: G5 "); Delay(1000); return(0); }
+
+        uchar i;
+        for (i=0; i<6; i++)
+        {
+          mpdbChannelsAbs[i] += PopDouble31()/1000;
+        }
+      }
+    }
+  }
+
+  return(1);
+}
+
 
 
 static bool ReadCntCurrMonCan(void)
