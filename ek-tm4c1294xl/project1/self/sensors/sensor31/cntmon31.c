@@ -36,7 +36,7 @@ static double           mpdbEng30[30];
 
 
 
-static void QueryData4(uchar  ibTrf) // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
+static void QueryEngVar(uchar  ibTrf) // энерги€ за текущий/предыдущий мес€ц и текущие/предыдущие сутки
 {
   InitPushCod();
 
@@ -52,7 +52,7 @@ static void QueryData4(uchar  ibTrf) // энерги€ за текущий/предыдущий мес€ц и те
 }
 
 
-static void QueryData5(uchar  ibTrf) // энерги€ всего
+static void QueryEngAbs(uchar  ibTrf) // энерги€ всего
 {
   InitPushCod();
 
@@ -68,7 +68,7 @@ static void QueryData5(uchar  ibTrf) // энерги€ всего
 }
 
 
-static void QueryData26(uchar  ibMon, uchar  ibTrf) // энерги€ по мес€цам
+static void QueryEngMon(uchar  ibMon, uchar  ibTrf) // энерги€ по мес€цам
 {
   InitPushCod();
 
@@ -111,7 +111,7 @@ static bool ReadCntCurrMonCan(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryData5(t);
+      QueryEngAbs(t);
 
       ShowPercent(60+t);
 
@@ -143,7 +143,7 @@ static bool ReadCntCurrMonCan(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryData4(t);
+      QueryEngVar(t);
 
       ShowPercent(70+t);
 
@@ -184,7 +184,7 @@ bool    ReadMonIndexExt31(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryData26(m, 0);
+      QueryEngMon(m, 0);
 
       if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -237,7 +237,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryData26(ibMon, t);
+      QueryEngMon(ibMon, t);
 
       if (Input31() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -272,7 +272,7 @@ bool  ReadEngMonCurrExt31(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryData4(t);
+      QueryEngVar(t);
 
       ShowPercent(80+t);
 
@@ -317,7 +317,7 @@ bool    ReadEngAbsExt31(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryData5(t);
+      QueryEngAbs(t);
 
       ShowPercent(90+t);
 
