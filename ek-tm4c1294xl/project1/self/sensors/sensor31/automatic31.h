@@ -18,6 +18,7 @@ serial  Input31(void);
 
 bool    Automatic31(void);
 
+bool    QueryOpen31_Full(uchar  bPercent);
 time2   QueryTime31_Full(uchar  bPercent);
 double2 ReadTrans31_Full(void);
 
