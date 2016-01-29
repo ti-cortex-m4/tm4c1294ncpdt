@@ -155,7 +155,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
 
   if (UseMonitor())
   {
-    MonitorString("\n eng mon. curr/prev day. curr/prev");
+    MonitorString("\n eng mon.curr/prev day.curr/prev");
     for (i=0; i<6; i++)
     {
       MonitorString("\n i="); MonitorCharDec(i+1);
@@ -243,7 +243,7 @@ static double2 ReadCntCurrMonCan(void)
 
   if (UseMonitor())
   {
-    MonitorString("\n cnt curr mon.");
+    MonitorString("\n cnt mon.curr");
     for (i=0; i<6; i++)
     {
       MonitorString("\n i="); MonitorCharDec(i+1);
@@ -258,7 +258,7 @@ static double2 ReadCntCurrMonCan(void)
 
 
 
-static bool ReadEngMonIndex_Full(void)
+static bool ReadEngMonIdx_Full(void)
 {
   uchar m;
   for (m=0; m<=12; m++)
@@ -289,6 +289,8 @@ static bool ReadEngMonIndex_Full(void)
       else
         mpbEngMon[m] = (10 + ti.bMonth)%12 + 1;
 
+      MonitorString(" index "); MonitorCharDec(mpbEngMon[m]);
+
       if (ti.bMonth != 0)
         { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbEngMon[m]); Delay(200); }
       else
@@ -300,7 +302,7 @@ static bool ReadEngMonIndex_Full(void)
 }
 
 
-uchar   SearchMonIndexExt31(uchar  bMon)
+static uchar SearchEngMonIdx(uchar  bMon)
 {
   sprintf(szLo," требуется: %-2u  ", bMon); DelayInf();
 
@@ -350,7 +352,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
 
 double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 {
-  if (ReadEngMonIndex_Full() == 0) return GetDouble2Error();
+  if (ReadEngMonIdx_Full() == 0) return GetDouble2Error();
   Clear();
 
 
@@ -364,6 +366,7 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
   {
     if ((m%12 + 1) == ti.bMonth)
     {
+      MonitorString("\n curr mon");
       if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
 
       for (i=0; i<6; i++)
@@ -373,10 +376,10 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
     }
     else
     {
-      uchar b = SearchMonIndexExt31(m%12 + 1);
-      if (b == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return GetDouble2Error(); }
+      uchar idx = SearchEngMonIdx(m%12 + 1);
+      if (idx == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return GetDouble2Error(); }
       Clear();
-      if (ReadEngMonExt31(b) == 0) return GetDouble2Error();
+      if (ReadEngMonExt31(idx) == 0) return GetDouble2Error();
     }
     ShowPercent(80 + a++);
   }
@@ -394,6 +397,18 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
     mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngMon[i];
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
+  }
+
+  if (UseMonitor())
+  {
+    MonitorString("\n cnt mon."); MonitorCharDec(ibMon);
+    for (i=0; i<6; i++)
+    {
+      MonitorString("\n i="); MonitorCharDec(i+1);
+      MonitorString(" "); MonitorLongDec(mpdbEngAbs[i]*1000);
+      MonitorString("-"); MonitorLongDec(mpdbEngMon[i]*1000);
+      MonitorString("="); MonitorLongDec((mpdbEngAbs[i] - mpdbEngMon[i])*1000);
+    }
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
