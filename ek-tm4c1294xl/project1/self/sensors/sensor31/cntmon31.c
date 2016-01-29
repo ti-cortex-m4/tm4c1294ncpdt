@@ -336,12 +336,17 @@ static bool  ReadEngMon_Full(uchar  ibMon)
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
       if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return(false); }
 
-      InitPop(3+4); // пропускаем дату/врем€
+      time ti = ReadPackTime31();
+      MonitorString("\n time "); MonitorTime(ti);
 
+      MonitorString("\n eng mon");
       uchar i;
       for (i=0; i<6; i++)
       {
-        mpdbEngMon[i] += PopEng();
+        MonitorString("\n i="); MonitorCharDec(i+1);
+        double db = PopEng();
+        MonitorString(" +"); MonitorLongDec(db*1000);
+        mpdbEngMon[i] += db;
       }
     }
   }
@@ -357,7 +362,10 @@ static double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 
 
   uchar i;
-  for (i=0; i<6; i++) mpdbEngMon[i] = 0;
+  for (i=0; i<6; i++)
+  {
+    mpdbEngMon[i] = 0;
+  }
 
 
   uchar m = ibMon+1;
@@ -366,12 +374,15 @@ static double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
   {
     if ((m%12 + 1) == ti.bMonth)
     {
-      MonitorString("\n curr mon");
       if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
 
+      MonitorString("\n eng mon.curr");
       for (i=0; i<6; i++)
       {
-        mpdbEngMon[i] += mpdbEngMonCurr[i]; // энерги€ за текущий мес€ц
+        MonitorString("\n i="); MonitorCharDec(i+1);
+        double db = mpdbEngMonCurr[i];
+        MonitorString(" +"); MonitorLongDec(db*1000);
+        mpdbEngMon[i] += db;
       }
     }
     else
