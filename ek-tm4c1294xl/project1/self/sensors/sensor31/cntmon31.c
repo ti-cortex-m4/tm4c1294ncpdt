@@ -22,10 +22,10 @@ CNTMON31.C
 
 #ifndef SKIP_N31
 
-// энерги€ по мес€цам
+// сумма энергии по мес€цам
 static double           mpdbEngMon[6];
 
-// номера мес€цев
+// номера доступных мес€цев
 static uchar            mpbEngMon[13];
 
 static double           mpdbEngAbs[6],
