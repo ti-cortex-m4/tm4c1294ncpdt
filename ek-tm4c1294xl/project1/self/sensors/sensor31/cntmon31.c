@@ -315,7 +315,7 @@ static uchar SearchEngMonIdx(uchar  bMon)
 }
 
 
-bool  ReadEngMonExt31(uchar  ibMon)
+static bool  ReadEngMon_Full(uchar  ibMon)
 {
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счётчике 72 тарифа
@@ -350,7 +350,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
 }
 
 
-double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
+static double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 {
   if (ReadEngMonIdx_Full() == 0) return GetDouble2Error();
   Clear();
@@ -379,7 +379,7 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
       uchar idx = SearchEngMonIdx(m%12 + 1);
       if (idx == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return GetDouble2Error(); }
       Clear();
-      if (ReadEngMonExt31(idx) == 0) return GetDouble2Error();
+      if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
     }
     ShowPercent(80 + a++);
   }
