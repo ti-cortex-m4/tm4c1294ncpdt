@@ -140,7 +140,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 196);
-        if (wCRC != InBuff(199) + InBuff(200)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
+        if (wCRC != InBuff(199) + InBuff(200)*0x100) { ShowLo(szBadCRC); Delay(1000); return(false); }
 
         for (i=0; i<6; i++)
         {
@@ -200,7 +200,7 @@ bool    ReadEngAbs_Full(uchar  bPercent)
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 52);
-        if (wCRC != InBuff(55) + InBuff(56)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
+        if (wCRC != InBuff(55) + InBuff(56)*0x100) { ShowLo(szBadCRC); Delay(1000); return(false); }
 
         for (i=0; i<6; i++)
         {
@@ -258,7 +258,7 @@ static double2 ReadCntCurrMonCan(void)
 
 
 
-bool    ReadMonIndexExt31(void)
+static bool ReadEngMonIndex_Full(void)
 {
   uchar m;
   for (m=0; m<=12; m++)
@@ -273,11 +273,11 @@ bool    ReadMonIndexExt31(void)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return 0xEE;
+    if (r == bMINORREPEATS) return false;
     else
     {
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
-      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
+      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return(false); }
 
       MonitorString("\n month "); MonitorCharDec(m);
 
@@ -332,7 +332,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
     else
     {
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
-      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
+      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return(false); }
 
       InitPop(3+4); // пропускаем дату/время
 
@@ -350,7 +350,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
 
 double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 {
-  if (ReadMonIndexExt31() == 0) return GetDouble2Error();
+  if (ReadEngMonIndex_Full() == 0) return GetDouble2Error();
   Clear();
 
 
