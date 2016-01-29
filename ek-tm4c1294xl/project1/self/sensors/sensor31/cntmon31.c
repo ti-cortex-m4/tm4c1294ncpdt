@@ -159,10 +159,10 @@ static bool ReadEngVar_Full(uchar  bPercent)
     for (i=0; i<6; i++)
     {
       MonitorString("\n i="); MonitorCharDec(i+1);
-      MonitorLongDec(mpdbEngMonCurr[i]*1000);
-      MonitorLongDec(mpdbEngMonPrev[i]*1000);
-      MonitorLongDec(mpdbEngDayCurr[i]*1000);
-      MonitorLongDec(mpdbEngDayPrev[i]*1000);
+      MonitorString(" "); MonitorLongDec(mpdbEngMonCurr[i]*1000);
+      MonitorString(" ");MonitorLongDec(mpdbEngMonPrev[i]*1000);
+      MonitorString(" ");MonitorLongDec(mpdbEngDayCurr[i]*1000);
+      MonitorString(" ");MonitorLongDec(mpdbEngDayPrev[i]*1000);
     }
   }
 
@@ -216,7 +216,7 @@ bool    ReadEngAbs_Full(uchar  bPercent)
     for (i=0; i<6; i++)
     {
       MonitorString("\n i="); MonitorCharDec(i+1);
-      MonitorLongDec(mpdbEngAbs[i]*1000);
+      MonitorString(" "); MonitorLongDec(mpdbEngAbs[i]*1000);
     }
   }
 
@@ -239,6 +239,18 @@ static double2 ReadCntCurrMonCan(void)
     mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngDayCurr[i]; // энергия всего минус энергия за текущие сутки равно энергии на начало текущих суток
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
+  }
+
+  if (UseMonitor())
+  {
+    MonitorString("\n cnt curr mon.");
+    for (i=0; i<6; i++)
+    {
+      MonitorString("\n i="); MonitorCharDec(i+1);
+      MonitorString(" "); MonitorLongDec(mpdbEngAbs[i]*1000);
+      MonitorString("-"); MonitorLongDec(mpdbEngDayCurr[i]*1000);
+      MonitorString("="); MonitorLongDec((mpdbEngAbs[i] - mpdbEngDayCurr[i])*1000);
+    }
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
@@ -270,7 +282,7 @@ bool    ReadMonIndexExt31(void)
       MonitorString("\n month "); MonitorCharDec(m);
 
       time ti = ReadPackTime31();
-      MonitorString("\n time "); MonitorTime(ti);
+      MonitorString(" time "); MonitorTime(ti);
 
       if (ti.bMonth == 0)
         mpbEngMon[m] = 0;
