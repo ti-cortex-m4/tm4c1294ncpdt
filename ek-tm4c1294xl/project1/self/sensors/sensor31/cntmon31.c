@@ -142,7 +142,6 @@ static bool ReadEngVar_Full(uchar  bPercent)
         uint wCRC = MakeCrc16Bit31InBuff(3, 196);
         if (wCRC != InBuff(199) + InBuff(200)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
 
-        uchar i;
         for (i=0; i<6; i++)
         {
           mpdbEngMonCurr[i] += PopEng();
@@ -151,6 +150,19 @@ static bool ReadEngVar_Full(uchar  bPercent)
           mpdbEngDayPrev[i] += PopEng();
         }
       }
+    }
+  }
+
+  if (UseMonitor())
+  {
+    MonitorString("\n eng mon. curr/prev day. curr/prev");
+    for (i=0; i<6; i++)
+    {
+      MonitorString("\n i="); MonitorCharDec(i+1);
+      MonitorLongDec(mpdbEngMonCurr[i]*1000);
+      MonitorLongDec(mpdbEngMonPrev[i]*1000);
+      MonitorLongDec(mpdbEngDayCurr[i]*1000);
+      MonitorLongDec(mpdbEngDayPrev[i]*1000);
     }
   }
 
@@ -190,7 +202,6 @@ bool    ReadEngAbs_Full(uchar  bPercent)
         uint wCRC = MakeCrc16Bit31InBuff(3, 52);
         if (wCRC != InBuff(55) + InBuff(56)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
 
-        uchar i;
         for (i=0; i<6; i++)
         {
           mpdbEngAbs[i] += PopEng();
@@ -199,9 +210,18 @@ bool    ReadEngAbs_Full(uchar  bPercent)
     }
   }
 
+  if (UseMonitor())
+  {
+    MonitorString("\n eng abs.");
+    for (i=0; i<6; i++)
+    {
+      MonitorString("\n i="); MonitorCharDec(i+1);
+      MonitorLongDec(mpdbEngAbs[i]*1000);
+    }
+  }
+
   return true;
 }
-
 
 
 static double2 ReadCntCurrMonCan(void)
@@ -225,13 +245,12 @@ static double2 ReadCntCurrMonCan(void)
 }
 
 
+
 bool    ReadMonIndexExt31(void)
 {
   uchar m;
   for (m=0; m<=12; m++)
   {
-    MonitorString("\n month "); MonitorCharDec(m);
-
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
@@ -246,7 +265,9 @@ bool    ReadMonIndexExt31(void)
     else
     {
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
-      if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G2 "); Delay(1000); return(0); }
+      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
+
+      MonitorString("\n month "); MonitorCharDec(m);
 
       time ti = ReadPackTime31();
       MonitorString("\n time "); MonitorTime(ti);
@@ -299,7 +320,7 @@ bool  ReadEngMonExt31(uchar  ibMon)
     else
     {
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
-      if (wCRC != InBuff(103) + InBuff(104)*0x100) { sprintf(szLo," ошибка CRC: G3 "); Delay(1000); return(0); }
+      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return(0); }
 
       InitPop(3+4); // пропускаем дату/врем€
 
@@ -326,7 +347,7 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
 
 
   uchar m = ibMon+1;
-  uchar ibDay = 0;
+  uchar a = 0;
   do
   {
     if ((m%12 + 1) == ti.bMonth)
@@ -340,17 +361,15 @@ double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
     }
     else
     {
-      uchar ibGrp = SearchMonIndexExt31(m%12 + 1);
-      if (ibGrp == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return GetDouble2Error(); }
+      uchar b = SearchMonIndexExt31(m%12 + 1);
+      if (b == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return GetDouble2Error(); }
       Clear();
-      if (ReadEngMonExt31(ibGrp) == 0) return GetDouble2Error();
+      if (ReadEngMonExt31(b) == 0) return GetDouble2Error();
     }
-    ShowPercent(80 + ibDay++);
+    ShowPercent(80 + a++);
   }
   while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0 );
 
-
-//  for (i=0; i<6; i++) mpdbChannelsAbs[i] = 0;
 
   if (ReadEngAbs_Full(90) == false) return GetDouble2Error();
   ShowPercent(99);
@@ -381,7 +400,7 @@ double2 ReadCntMonCan31(uchar  ibMon)
 
   if (NewVersion31())
   {
-    if (ti.bMonth != ibMon+1) // значение счЄтчиков дл€ всех мес€цев, кроме текущего
+    if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
       if (GetVersion31() == 49)
         return ReadCntMonCanExt31(ibMon, ti);
@@ -392,7 +411,7 @@ double2 ReadCntMonCan31(uchar  ibMon)
         return GetDouble2Error();
       }
     }
-    else // значение счЄтчиков дл€ текущего мес€ца (энерги€ на начало текущих суток)
+    else // значение счЄтчиков на начало текущих суток
     {
       return ReadCntCurrMonCan();
     }
