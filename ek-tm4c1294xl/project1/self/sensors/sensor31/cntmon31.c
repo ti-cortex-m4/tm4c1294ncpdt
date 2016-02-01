@@ -296,7 +296,7 @@ static bool ReadEngMonIdx_Full(void)
       MonitorString(" index "); MonitorCharDec(mpbIdxMon[m]);
 
       if (ti.bMonth != 0)
-        { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbIdxMon[m]); Delay(200); }
+        { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbIdxMon[m]); }
       else
         { Clear(); sprintf(szLo+1,"пусто: %2u-%-2u",m,12); }
     }
