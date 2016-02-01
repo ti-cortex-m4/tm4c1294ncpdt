@@ -4810,7 +4810,7 @@ void    RunDevices(void)
       break;
 
 #endif
-#ifndef SKIP_N31
+#ifndef SKIP_31
 
     case DEV_START_31P:
       cbCorrects = 0;
@@ -4994,7 +4994,7 @@ void    RunDevices(void)
       break;
 
 #endif
-#ifndef SKIP_N31
+#ifndef SKIP_31
 
     case DEV_START_31C:
       cbRepeat = GetMaxRepeats();
@@ -5048,7 +5048,7 @@ void    RunDevices(void)
       break;
 
 #endif
-#ifndef SKIP_N32
+#ifndef SKIP_32
 
     case DEV_START_32P:
       cbCorrects = 0;

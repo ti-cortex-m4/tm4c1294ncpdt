@@ -1869,11 +1869,11 @@ double2 ReadCntCurrCan(uchar  ibCan)
     case 30: return ReadCntCurrW();
 #endif
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
     case 31: return ReadCntCurr31();
 #endif
 
-#ifndef SKIP_N32
+#ifndef SKIP_32
     case 32: return ReadCntCurr32();
 #endif
 
@@ -1990,11 +1990,11 @@ time2   ReadTimeCan(uchar  ibCan)
     case 30: return ReadTimeCanW();
 #endif
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
     case 31: return ReadTimeCan31();
 #endif
 
-#ifndef SKIP_N32
+#ifndef SKIP_32
     case 32: return ReadTimeCan32();
 #endif
 
@@ -2128,7 +2128,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
     case 30: return ReadCntMonCanW(ibMon);
 #endif
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
     case 31: return ReadCntMonCan31(ibMon);
 #endif
 

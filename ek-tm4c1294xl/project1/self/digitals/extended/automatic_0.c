@@ -429,7 +429,7 @@ time2   ReadTimeCanW_Short(void)
 #endif
 
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
 
 time2   ReadTimeCan31_Short(void)
 {
@@ -451,7 +451,7 @@ time2   ReadTimeCan31_Short(void)
 #endif
 
 
-#ifndef SKIP_N32
+#ifndef SKIP_32
 
 time2   ReadTimeCan32_Short(void)
 {
@@ -578,11 +578,11 @@ time2   ReadTimeCan_Short(uchar  ibCan)
     case 30: return ReadTimeCanW_Short();
 #endif
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
     case 31: return ReadTimeCan31_Short();
 #endif
 
-#ifndef SKIP_N32
+#ifndef SKIP_32
     case 32: return ReadTimeCan32_Short();
 #endif
 

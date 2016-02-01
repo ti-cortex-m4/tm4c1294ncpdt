@@ -35,8 +35,8 @@ MAIN_DEFINES!H
 #define SKIP_Y
 #define SKIP_Z
 
-//#define SKIP_N31
-//#define SKIP_N32
+//#define SKIP_31
+//#define SKIP_32
 
 
 #define FLOW

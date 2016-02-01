@@ -25,7 +25,7 @@ PROFILE32.C
 
 
 
-#ifndef SKIP_N32
+#ifndef SKIP_32
 
 time                    tiProfile32;
 

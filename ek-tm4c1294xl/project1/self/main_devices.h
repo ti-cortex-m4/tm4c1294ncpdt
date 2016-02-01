@@ -662,7 +662,7 @@ typedef enum
 
 #endif
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
 
   DEV_START_31P         =  0x1D00,
   DEV_OPENCANAL_31P     =  0x1D01,
@@ -686,7 +686,7 @@ typedef enum
 
 #endif
 
-#ifndef SKIP_N32
+#ifndef SKIP_32
 
   DEV_START_32P         =  0x1E00,
   DEV_OPENCANAL_32P     =  0x1E01,

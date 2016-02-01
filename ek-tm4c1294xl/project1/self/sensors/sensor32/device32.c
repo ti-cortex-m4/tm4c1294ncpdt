@@ -22,7 +22,7 @@ DEVICE32.C
 
 
 
-#ifndef SKIP_N32
+#ifndef SKIP_32
 
 static uchar            bVersion32;
 

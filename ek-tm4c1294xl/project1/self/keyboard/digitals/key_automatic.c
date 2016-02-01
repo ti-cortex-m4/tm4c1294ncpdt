@@ -177,11 +177,11 @@ uchar   i;
           case 30: if (AutomaticW() != 1) bRes = 0xEE; break;
 #endif
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
           case 31: if (Automatic31() != 1) bRes = 0xEE; break;
 #endif
 
-#ifndef SKIP_N32
+#ifndef SKIP_32
           case 32: if (Automatic32() != 1) bRes = 0xEE; break;
 #endif
         }

@@ -20,7 +20,7 @@ CNTMON31.C
 
 
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
 
 // сумма энергии по мес€цам
 static double           mpdbEngSum[6];
