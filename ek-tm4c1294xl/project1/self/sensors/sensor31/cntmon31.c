@@ -318,6 +318,12 @@ static uchar SearchEngMonIdx(uchar  bMon)
 
 static bool  ReadEngMon_Full(uchar  ibMon)
 {
+  uchar i;
+  for (i=0; i<6; i++)
+  {
+    mpdbEngTmp[i] = 0;
+  }
+
   uchar t;
   for (t=0; t<bTARIFFS; t++) // в счЄтчике 72 тарифа
   {
@@ -340,10 +346,9 @@ static bool  ReadEngMon_Full(uchar  ibMon)
       time ti = ReadPackTime31();
       MonitorString("\n time "); MonitorTime(ti);
 
-      uchar i;
       for (i=0; i<6; i++)
       {
-        mpdbEngTmp[i] = PopEng();
+        mpdbEngTmp[i] += PopEng();
       }
     }
   }
@@ -351,7 +356,6 @@ static bool  ReadEngMon_Full(uchar  ibMon)
   if (UseMonitor())
   {
     MonitorString("\n eng mon."); MonitorCharDec(ibMon);
-    uchar i;
     for (i=0; i<6; i++)
     {
       MonitorString("\n i="); MonitorCharDec(i+1);
@@ -363,7 +367,7 @@ static bool  ReadEngMon_Full(uchar  ibMon)
 }
 
 
-static double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
+static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 {
   if (ReadEngMonIdx_Full() == 0) return GetDouble2Error();
   Clear();
@@ -380,10 +384,8 @@ static double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
   uchar a = 0;
   do
   {
-    MonitorString("\n m="); MonitorCharDec(m);
     if ((m%12 + 1) == ti.bMonth)
     {
-      MonitorString("\n CURR");
       if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
 
       MonitorString("\n eng mon.curr");
@@ -398,7 +400,6 @@ static double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
     else
     {
       uchar idx = SearchEngMonIdx(m%12 + 1);
-      MonitorString("\n IDX="); MonitorCharDec(idx);
       if (idx == 0xFF) { Clear(); sprintf(szLo+2,"отсутствует !"); Delay(1000); return GetDouble2Error(); }
       Clear();
       if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
@@ -461,7 +462,7 @@ double2 ReadCntMonCan31(uchar  ibMon)
     if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
       if (GetVersion31() == 49)
-        return ReadCntMonCanExt31(ibMon, ti);
+        return ReadCntPrevMonCan(ibMon, ti);
       else
       {
         Clear(); sprintf(szLo+3,"необходима"); Delay(1000);
