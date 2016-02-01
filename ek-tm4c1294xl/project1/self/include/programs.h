@@ -280,11 +280,12 @@ PROGRAMS!H
 #define bTEST_POWER_OFF             803
 #define wSET_MONITOR_BAUD           810
 #define wSET_MONITOR_TIMEOUT        811
-#define wSET_MONITOR_LOG_HEX        812
-#define wSET_MONITOR_LOG_CHAR7      813
-#define wSET_MONITOR_LOG_CHAR8      814
-#define wSET_MONITOR_OPEN           815
-#define wTEST_MONITOR               816
+#define wSET_MONITOR_LOG_BASIC      812
+#define wSET_MONITOR_LOG_HEX        813
+#define wSET_MONITOR_LOG_CHAR7      814
+#define wSET_MONITOR_LOG_CHAR8      815
+#define wSET_MONITOR_OPEN           816
+#define wTEST_MONITOR               817
 
 
 #define wSET_OUTPUT_DELAY           298
