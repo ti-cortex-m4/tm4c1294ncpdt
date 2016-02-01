@@ -29,7 +29,7 @@ static double           mpdbEngSum[6];
 static uchar            mpbIdxMon[13];
 
 // энерги€ за мес€ц
-static double           mpdbEngTmp[6];
+static double           mpdbEngMon[6];
 
 // энерги€ по временным интервалам
 static double           mpdbEngAbs[6],
@@ -324,7 +324,7 @@ static bool  ReadEngMon_Full(uchar  ibMon)
   uchar i;
   for (i=0; i<6; i++)
   {
-    mpdbEngTmp[i] = 0;
+    mpdbEngMon[i] = 0;
   }
 
   uchar t;
@@ -351,7 +351,7 @@ static bool  ReadEngMon_Full(uchar  ibMon)
 
       for (i=0; i<6; i++)
       {
-        mpdbEngTmp[i] += PopEng();
+        mpdbEngMon[i] += PopEng();
       }
     }
   }
@@ -362,7 +362,7 @@ static bool  ReadEngMon_Full(uchar  ibMon)
     for (i=0; i<6; i++)
     {
       MonitorString("\n i="); MonitorCharDec(i+1);
-      MonitorString(" "); MonitorLongDec(mpdbEngTmp[i]*1000);
+      MonitorString(" "); MonitorLongDec(mpdbEngMon[i]*1000);
     }
   }
 
@@ -403,6 +403,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
     else
     {
       uchar idx = SearchEngMonIdx(m%12 + 1);
+      MonitorString("\n index "); MonitorCharDec(idx);
       if (idx == 0xFF) { Clear(); sprintf(szLo+2,"отсутствует !"); Delay(1000); return GetDouble2Error(); }
       Clear();
       if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
@@ -411,14 +412,14 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
       for (i=0; i<6; i++)
       {
         MonitorString("\n i="); MonitorCharDec(i+1);
-        double db = mpdbEngTmp[i];
+        double db = mpdbEngMon[i];
         MonitorString(" +"); MonitorLongDec(db*1000);
         mpdbEngSum[i] += db;
       }
     }
     ShowPercent(80 + a++);
   }
-  while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0 );
+  while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0);
 
 
   if (ReadEngAbs_Full(90) == false) return GetDouble2Error();
