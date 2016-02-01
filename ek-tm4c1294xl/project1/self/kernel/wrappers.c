@@ -22,7 +22,7 @@ float2  GetFloat2(float  flValue, bool  fValid)
 
 float2  GetFloat2Error(void)
 {
-  return GetFloat2(0, false);
+  return GetFloat2(-1, false);
 }
 
 
@@ -40,7 +40,7 @@ double2 GetDouble2(double  dbValue, bool  fValid)
 
 double2 GetDouble2Error(void)
 {
-  return GetDouble2(0, false);
+  return GetDouble2(-1, false);
 }
 
 
@@ -60,4 +60,22 @@ time2   GetTime2Error(void)
 {
   static const time tiZero = { 0, 0, 0, 0, 0, 0 };
   return GetTime2(tiZero, false);
+}
+
+
+
+factors2 GetFactors2(factors  fcValue, bool  fValid)
+{
+  factors2 fc2;
+
+  fc2.fcValue = fcValue;
+  fc2.fValid = fValid;
+
+  return fc2;
+}
+
+
+factors2 GetFactors2Error(void)
+{
+  return GetFactors2(GetFactors(-1,-1), false);
 }

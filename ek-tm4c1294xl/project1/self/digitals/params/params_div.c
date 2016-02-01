@@ -84,7 +84,7 @@ void    MakeParamDiv(uint  iwPrm)
       default: fl = 1; break;
     }
   }
-  else if (GetParamDevice(iwPrm) == 9)
+  else if ((GetParamDevice(iwPrm) == 9) || (GetParamDevice(iwPrm) == 31))
   {
     switch (GetParamLine(iwPrm))
     {

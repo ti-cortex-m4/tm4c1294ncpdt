@@ -122,13 +122,13 @@ time2   QueryTimeW_Full(uchar  bPercent)
 }
 
 
-double2 QueryKtransW_Full(uchar  bPercent)
+double2 QueryTransW_Full(uchar  bPercent)
 {
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
     QueryCloseW();
-    QueryKtransW(0);
+    QueryTransW(0);
 
     if (InputW() == SER_GOODCHECK) break;
     if (fKey == true) return GetDouble2Error();
@@ -138,13 +138,13 @@ double2 QueryKtransW_Full(uchar  bPercent)
   ShowPercent(bPercent+0);
 
   InitPop(1);
-  double dbKtrans0 = PopDoubleW();
+  double dbTransI = PopDoubleW();
 
 
   for (r=0; r<bMINORREPEATS; r++)
   {
     QueryCloseW();
-    QueryKtransW(1);
+    QueryTransW(1);
 
     if (InputW() == SER_GOODCHECK) break;
     if (fKey == true) return GetDouble2Error();
@@ -154,12 +154,12 @@ double2 QueryKtransW_Full(uchar  bPercent)
   ShowPercent(bPercent+1);
 
   InitPop(1);
-  double dbKtrans1 = PopDoubleW();
+  double dbTransU = PopDoubleW();
 
 
   QueryCloseW();
 
-  return GetDouble2(dbKtrans0*dbKtrans1, true);
+  return GetDouble2(dbTransI*dbTransU, true);
 }
 
 
@@ -167,11 +167,11 @@ bool    AutomaticW(void)
 {
   Clear();
 
-  double2 db2 = QueryKtransW_Full(25);
+  double2 db2 = QueryTransW_Full(25);
   if (db2.fValid == false) return false;
   double dbTrans = db2.dbValue;
 
-  SetPulseTrans(2000, dbTrans);
+  SetupFactors(GetFactors(dbTrans, 2000));
 
 
   Clear();
@@ -353,7 +353,7 @@ double2 ReadCntCurrW(void)
 {
   Clear();
 
-  double2 db2 = QueryKtransW_Full(25);
+  double2 db2 = QueryTransW_Full(25);
   if (db2.fValid == false) return GetDouble2Error();
   double dbTrans = db2.dbValue;
 
@@ -376,7 +376,7 @@ double2 ReadCntMonCanW(uchar  ibMon)
 {
   Clear();
 
-  double2 db2 = QueryKtransW_Full(25);
+  double2 db2 = QueryTransW_Full(25);
   if (db2.fValid == false) return GetDouble2Error();
   double dbTrans = db2.dbValue;
 
@@ -411,7 +411,7 @@ status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
   Clear();
 
-  double2 db2 = QueryKtransW_Full(25);
+  double2 db2 = QueryTransW_Full(25);
   if (db2.fValid == false) return ST_BADDIGITAL;
   double dbTrans = db2.dbValue;
 

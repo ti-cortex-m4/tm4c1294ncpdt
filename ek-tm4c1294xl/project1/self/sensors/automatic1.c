@@ -433,13 +433,23 @@ uchar   i;
 
 
 
-void    SetPulseTrans(double  dbPulse, double  dbTrans)
+void    SetAllFactors(double  dbPulse, double  dbTrans)
 {
   mpdbPulseHou[ibDig] = dbPulse;
   mpdbPulseMnt[ibDig] = dbPulse;
 
   mpdbTransEng[ibDig] = dbTrans;
   mpdbTransCnt[ibDig] = dbTrans;
+}
+
+
+void    SetupFactors(factors  fc)
+{
+  mpdbTransEng[ibDig] = fc.dbTrans;
+  mpdbTransCnt[ibDig] = fc.dbTrans;
+
+  mpdbPulseHou[ibDig] = fc.dbPulse;
+  mpdbPulseMnt[ibDig] = fc.dbPulse;
 }
 
 
@@ -468,7 +478,7 @@ bool    AutomaticA(void)
   if (ReadKoeffDeviceA() == 0) return(0);
 
 
-  SetPulseTrans(dbKpulse,dbKtrans);                        
+  SetAllFactors(dbKpulse,dbKtrans);
 
   if (QueryEnergyA_Full(0,100) == 0) return(0);
 
@@ -487,7 +497,7 @@ bool    AutomaticB(void)
   if (ReadKoeffDeviceB() == 0) return(0);
 
 
-  SetPulseTrans(dbKpulse,dbKtrans);                        
+  SetAllFactors(dbKpulse,dbKtrans);
 
   if (QueryEnergyB_Full(0,100) == 0) return(0);
 
@@ -502,7 +512,7 @@ bool    AutomaticJ(void)
   mpdbLevel[ibDig] = dbKpulse / 1000;
 
 
-  SetPulseTrans(dbKpulse,dbKtrans);                        
+  SetAllFactors(dbKpulse,dbKtrans);
 
   if (QueryEnergyB_Full(0,100) == 0) return(0);
 
@@ -521,7 +531,7 @@ bool    AutomaticC(void)
   if (ReadKoeffDeviceC() == 0) return(0);
 
 
-  SetPulseTrans(dbKpulse,dbKtrans);                       
+  SetAllFactors(dbKpulse,dbKtrans);
 
   DelayOff();
   QueryEnergyAbsC();                    // чтение накопленной энергии
@@ -867,7 +877,7 @@ uchar   i;
   InitPop((uint)180 + diCurr.ibLine*3); // K преобразования
   PopRealBCD();
 
-  SetPulseTrans(dbKpulse,dbKtrans);                        
+  SetAllFactors(dbKpulse,dbKtrans);
 
 
   DelayOff();
@@ -958,7 +968,7 @@ bool    AutomaticG(void)
   if (ReadKoeffDeviceG() == 0) return(0);
   ShowPercent(100);
 
-  SetPulseTrans(dbKpulse,dbKtrans);                       
+  SetAllFactors(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -974,7 +984,7 @@ bool    AutomaticH(void)
   if (ReadKoeffDeviceH() == 0) return(0);
   ShowPercent(100);
 
-  SetPulseTrans(dbKpulse,dbKtrans);                       
+  SetAllFactors(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -1005,7 +1015,7 @@ uchar   i;
 
   ShowPercent(100);
 
-  SetPulseTrans(dbKpulse,dbKtrans);                       
+  SetAllFactors(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -1044,7 +1054,7 @@ uchar   i,bT;
 
   Delay(1000);
 
-  SetPulseTrans(dbKpulse,dbKtrans);                       
+  SetAllFactors(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -1074,7 +1084,7 @@ uchar   i;
 
   ShowPercent(100);
 
-  SetPulseTrans(dbKpulse,dbKtrans);                       
+  SetAllFactors(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -1168,7 +1178,7 @@ uchar   i;
 
   ShowPercent(100);
 
-  SetPulseTrans(dbKpulse,dbKtrans);                       
+  SetAllFactors(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -1201,7 +1211,7 @@ uchar   i;
 
   ShowPercent(100);
 
-  SetPulseTrans(dbKpulse,dbKtrans);
+  SetAllFactors(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -1235,7 +1245,7 @@ bool    AutomaticP(void)
 
 
   dbKpulse = 5000;                      // K преобразования
-  SetPulseTrans(dbKpulse,dbKtrans);
+  SetAllFactors(dbKpulse,dbKtrans);
 
   return(1);
 }
@@ -1254,7 +1264,7 @@ bool    AutomaticR(void)
 
   reBuffA = 1;                          // K преобразования
   dbKtrans = 1;                         // K трансформации
-  SetPulseTrans(dbKpulse,dbKtrans);                       // сохранение К преобразования и К трансформации
+  SetAllFactors(dbKpulse,dbKtrans);                       // сохранение К преобразования и К трансформации
 
   return(1);
 }
@@ -1273,7 +1283,7 @@ bool    AutomaticS(void)
 
   dbKpulse = wDividerS;                 // K преобразования
   dbKtrans = 1;                         // K трансформации
-  SetPulseTrans(dbKpulse,dbKtrans);                       // сохранение К преобразования и К трансформации
+  SetAllFactors(dbKpulse,dbKtrans);                       // сохранение К преобразования и К трансформации
 
   return(1);
 }
@@ -1292,7 +1302,7 @@ bool    AutomaticV(void)
 
   dbKpulse = wDividerV;
   dbKtrans = 1;
-  SetPulseTrans(dbKpulse,dbKtrans);
+  SetAllFactors(dbKpulse,dbKtrans);
 
   return(1);
 }
