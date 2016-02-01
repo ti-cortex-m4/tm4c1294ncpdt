@@ -23,11 +23,12 @@ CNTMON31.C
 #ifndef SKIP_N31
 
 // сумма энергии по мес€цам
-static double           mpdbEngMon[6],
-                        mpdbEngTmp[6];
+static double           mpdbEngSum[6];
 
 // номера доступных мес€цев
 static uchar            mpbEngMon[13];
+
+static double           mpdbEngTmp[6];
 
 static double           mpdbEngAbs[6],
                         mpdbEngMonCurr[6], mpdbEngMonPrev[6],
@@ -305,7 +306,7 @@ static bool ReadEngMonIdx_Full(void)
 
 static uchar SearchEngMonIdx(uchar  bMon)
 {
-  sprintf(szLo," требуетс€: %-2u  ", bMon); DelayInf();
+  Clear(); sprintf(szLo+1,"требуетс€: %-2u", bMon); DelayInf();
 
   uchar m;
   for (m=0; m<=12; m++)
@@ -376,7 +377,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
   uchar i;
   for (i=0; i<6; i++)
   {
-    mpdbEngMon[i] = 0;
+    mpdbEngSum[i] = 0;
   }
 
 
@@ -394,7 +395,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
         MonitorString("\n i="); MonitorCharDec(i+1);
         double db = mpdbEngMonCurr[i];
         MonitorString(" +"); MonitorLongDec(db*1000);
-        mpdbEngMon[i] += db;
+        mpdbEngSum[i] += db;
       }
     }
     else
@@ -410,7 +411,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
         MonitorString("\n i="); MonitorCharDec(i+1);
         double db = mpdbEngTmp[i];
         MonitorString(" +"); MonitorLongDec(db*1000);
-        mpdbEngMon[i] += db;
+        mpdbEngSum[i] += db;
       }
     }
     ShowPercent(80 + a++);
@@ -426,7 +427,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 
   for (i=0; i<6; i++)
   {
-    mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngMon[i];
+    mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngSum[i];
     mpdbChannelsC[i] *= dbTrans;
     mpboChannelsA[i] = true;
   }
@@ -438,8 +439,8 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
     {
       MonitorString("\n i="); MonitorCharDec(i+1);
       MonitorString(" "); MonitorLongDec(mpdbEngAbs[i]*1000);
-      MonitorString("-"); MonitorLongDec(mpdbEngMon[i]*1000);
-      MonitorString("="); MonitorLongDec((mpdbEngAbs[i] - mpdbEngMon[i])*1000);
+      MonitorString("-"); MonitorLongDec(mpdbEngSum[i]*1000);
+      MonitorString("="); MonitorLongDec((mpdbEngAbs[i] - mpdbEngSum[i])*1000);
     }
   }
 
