@@ -16,7 +16,7 @@ bool                    fMonitorLogHex;
 bool                    fMonitorLogChar7;
 bool                    fMonitorLogChar8;
 
-cache const             chMonitorLogHex = {MONITOR_LOG_BASIC, &fMonitorLogBasic, sizeof(bool)};
+cache const             chMonitorLogBasic = {MONITOR_LOG_BASIC, &fMonitorLogBasic, sizeof(bool)};
 cache const             chMonitorLogHex = {MONITOR_LOG_HEX, &fMonitorLogHex, sizeof(bool)};
 cache const             chMonitorLogChar7 = {MONITOR_LOG_CHAR7, &fMonitorLogChar7, sizeof(bool)};
 cache const             chMonitorLogChar8 = {MONITOR_LOG_CHAR8, &fMonitorLogChar8, sizeof(bool)};
