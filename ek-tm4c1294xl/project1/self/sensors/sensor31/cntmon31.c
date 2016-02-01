@@ -23,7 +23,8 @@ CNTMON31.C
 #ifndef SKIP_N31
 
 // сумма энергии по мес€цам
-static double           mpdbEngMon[6];
+static double           mpdbEngMon[6],
+                        mpdbEngTmp[6];
 
 // номера доступных мес€цев
 static uchar            mpbEngMon[13];
@@ -140,7 +141,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 196);
-        if (wCRC != InBuff(199) + InBuff(200)*0x100) { ShowLo(szBadCRC); Delay(1000); return(false); }
+        if (wCRC != InBuff(199) + InBuff(200)*0x100) { ShowLo(szBadCRC); Delay(1000); return false; }
 
         for (i=0; i<6; i++)
         {
@@ -200,7 +201,7 @@ bool    ReadEngAbs_Full(uchar  bPercent)
       else
       {
         uint wCRC = MakeCrc16Bit31InBuff(3, 52);
-        if (wCRC != InBuff(55) + InBuff(56)*0x100) { ShowLo(szBadCRC); Delay(1000); return(false); }
+        if (wCRC != InBuff(55) + InBuff(56)*0x100) { ShowLo(szBadCRC); Delay(1000); return false; }
 
         for (i=0; i<6; i++)
         {
@@ -277,7 +278,7 @@ static bool ReadEngMonIdx_Full(void)
     else
     {
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
-      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return(false); }
+      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       MonitorString("\n month "); MonitorCharDec(m);
 
@@ -330,28 +331,35 @@ static bool  ReadEngMon_Full(uchar  ibMon)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return(0);
+    if (r == bMINORREPEATS) return false;
     else
     {
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
-      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return(false); }
+      if (wCRC != InBuff(103) + InBuff(104)*0x100) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       time ti = ReadPackTime31();
       MonitorString("\n time "); MonitorTime(ti);
 
-      MonitorString("\n eng mon");
       uchar i;
       for (i=0; i<6; i++)
       {
-        MonitorString("\n i="); MonitorCharDec(i+1);
-        double db = PopEng();
-        MonitorString(" +"); MonitorLongDec(db*1000);
-        mpdbEngMon[i] += db;
+        mpdbEngTmp[i] = PopEng();
       }
     }
   }
 
-  return(1);
+  if (UseMonitor())
+  {
+    MonitorString("\n eng mon."); MonitorCharDec(ibMon);
+    uchar i;
+    for (i=0; i<6; i++)
+    {
+      MonitorString("\n i="); MonitorCharDec(i+1);
+      MonitorString(" "); MonitorLongDec(mpdbEngTmp[i]*1000);
+    }
+  }
+
+  return true;
 }
 
 
@@ -372,8 +380,10 @@ static double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
   uchar a = 0;
   do
   {
+    MonitorString("\n m="); MonitorCharDec(m);
     if ((m%12 + 1) == ti.bMonth)
     {
+      MonitorString("\n CURR");
       if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
 
       MonitorString("\n eng mon.curr");
@@ -388,9 +398,19 @@ static double2 ReadCntMonCanExt31(uchar  ibMon, time  ti)
     else
     {
       uchar idx = SearchEngMonIdx(m%12 + 1);
-      if (idx == 0xFF) { sprintf(szLo,"  отсутствует ! "); Delay(1000); return GetDouble2Error(); }
+      MonitorString("\n IDX="); MonitorCharDec(idx);
+      if (idx == 0xFF) { Clear(); sprintf(szLo+2,"отсутствует !"); Delay(1000); return GetDouble2Error(); }
       Clear();
       if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
+
+      MonitorString("\n eng mon"); MonitorCharDec(ibMon);
+      for (i=0; i<6; i++)
+      {
+        MonitorString("\n i="); MonitorCharDec(i+1);
+        double db = mpdbEngTmp[i];
+        MonitorString(" +"); MonitorLongDec(db*1000);
+        mpdbEngMon[i] += db;
+      }
     }
     ShowPercent(80 + a++);
   }
