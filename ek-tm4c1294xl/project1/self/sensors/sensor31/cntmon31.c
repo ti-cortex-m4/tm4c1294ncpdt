@@ -25,11 +25,13 @@ CNTMON31.C
 // сумма энергии по мес€цам
 static double           mpdbEngSum[6];
 
-// номера доступных мес€цев
-static uchar            mpbEngMon[13];
+// индексы доступных мес€цев
+static uchar            mpbIdxMon[13];
 
+// энерги€ за мес€ц
 static double           mpdbEngTmp[6];
 
+// энерги€ по временным интервалам
 static double           mpdbEngAbs[6],
                         mpdbEngMonCurr[6], mpdbEngMonPrev[6],
                         mpdbEngDayCurr[6], mpdbEngDayPrev[6];
@@ -287,14 +289,14 @@ static bool ReadEngMonIdx_Full(void)
       MonitorString(" time "); MonitorTime(ti);
 
       if (ti.bMonth == 0)
-        mpbEngMon[m] = 0;
+        mpbIdxMon[m] = 0;
       else
-        mpbEngMon[m] = (10 + ti.bMonth)%12 + 1;
+        mpbIdxMon[m] = (10 + ti.bMonth)%12 + 1;
 
-      MonitorString(" index "); MonitorCharDec(mpbEngMon[m]);
+      MonitorString(" index "); MonitorCharDec(mpbIdxMon[m]);
 
       if (ti.bMonth != 0)
-        { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbEngMon[m]); Delay(200); }
+        { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbIdxMon[m]); Delay(200); }
       else
         { Clear(); sprintf(szLo+1,"пусто: %2u-%-2u",m,12); }
     }
@@ -310,7 +312,7 @@ static uchar SearchEngMonIdx(uchar  bMon)
 
   uchar m;
   for (m=0; m<=12; m++)
-    if (mpbEngMon[m] == bMon)
+    if (mpbIdxMon[m] == bMon)
       return m;
 
   return 0xFF;
