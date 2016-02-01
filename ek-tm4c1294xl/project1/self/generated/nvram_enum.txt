@@ -253,5 +253,7 @@ typedef enum
 
   CONTROL_W             = PERIOD30_IDX + sizeof(uint) + bNVRAM_FOOTER,
 
-  NVRAM_END             = CONTROL_W + sizeof(bool) + bNVRAM_FOOTER
+  MONITOR_LOG_BASIC     = CONTROL_W + sizeof(bool) + bNVRAM_FOOTER,
+
+  NVRAM_END             = MONITOR_LOG_BASIC + sizeof(bool) + bNVRAM_FOOTER
 } nvram;

@@ -13,6 +13,7 @@ DEVICES_POSTINPUT,C
 #include "../sensors/unpack_k.h"
 #include "../sensors/unpack_s.h"
 #include "../sensors/unpack_v.h"
+#include "../sensors/sensor31/unpack31.h"
 #include "../sensors/automatic_w.h"
 #include "../digitals/digitals_status.h"
 #include "devices_postinput.h"
@@ -77,14 +78,14 @@ void    DevicesPostInput(void)
     }
 #endif
 
-#ifndef SKIP_G
-    else if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10))
+#ifndef SKIP_31
+    else if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10) ||
+             (diCurr.bDevice == 31))
     {
-      MakeCRC8InBuff( 1, CountInBuff()-1 );
-
-      if (bCRC == 0)
+      uchar bCrc = MakeCrc8Bit31InBuff(1, CountInBuff()-1);
+      if (bCrc == 0)
       {
-        DecompressG();
+        Unpack31();
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else

@@ -11,10 +11,12 @@ MONITOR_SETTINGS.C
 
 
 
+bool                    fMonitorLogBasic;
 bool                    fMonitorLogHex;
 bool                    fMonitorLogChar7;
 bool                    fMonitorLogChar8;
 
+cache const             chMonitorLogBasic = {MONITOR_LOG_BASIC, &fMonitorLogBasic, sizeof(bool)};
 cache const             chMonitorLogHex = {MONITOR_LOG_HEX, &fMonitorLogHex, sizeof(bool)};
 cache const             chMonitorLogChar7 = {MONITOR_LOG_CHAR7, &fMonitorLogChar7, sizeof(bool)};
 cache const             chMonitorLogChar8 = {MONITOR_LOG_CHAR8, &fMonitorLogChar8, sizeof(bool)};
@@ -23,6 +25,7 @@ cache const             chMonitorLogChar8 = {MONITOR_LOG_CHAR8, &fMonitorLogChar
 
 void    InitMonitorSettings(void)
 {
+  LoadCacheBool(&chMonitorLogBasic, true);
   LoadCacheBool(&chMonitorLogHex, true);
   LoadCacheBool(&chMonitorLogChar7, false);
   LoadCacheBool(&chMonitorLogChar8, false);
@@ -31,6 +34,7 @@ void    InitMonitorSettings(void)
 
 void    ResetMonitorSettings(void)
 {
+  SaveCacheBool(&chMonitorLogBasic, true);
   SaveCacheBool(&chMonitorLogHex, true);
   SaveCacheBool(&chMonitorLogChar7, false);
   SaveCacheBool(&chMonitorLogChar8, false);

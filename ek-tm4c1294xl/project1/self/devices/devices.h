@@ -23,6 +23,7 @@ extern  bool                    fKeyOn;
 
 
 void    ShowProgressDigHou(void);
+void    ShowProfileTime(time  ti);
 
 bool    MakeStopHou(uint  wAdd);
 bool    MakeStopHou2(uint  wAdd, uint  wRel);

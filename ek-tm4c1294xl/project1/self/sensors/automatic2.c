@@ -41,6 +41,10 @@ AUTOMATIC2!C
 #include "automatic_u.h"
 #include "automatic_v.h"
 #include "automatic_w.h"
+#include "sensor31/automatic31.h"
+#include "sensor31/cntmon31.h"
+#include "sensor32/automatic32.h"
+#include "automatic2.h"
 
 
 
@@ -1865,6 +1869,14 @@ double2 ReadCntCurrCan(uchar  ibCan)
     case 30: return ReadCntCurrW();
 #endif
 
+#ifndef SKIP_31
+    case 31: return ReadCntCurr31();
+#endif
+
+#ifndef SKIP_32
+    case 32: return ReadCntCurr32();
+#endif
+
     default: return GetDouble2Error();
   }
 }
@@ -1976,6 +1988,14 @@ time2   ReadTimeCan(uchar  ibCan)
 #ifndef SKIP_W
     case 29:
     case 30: return ReadTimeCanW();
+#endif
+
+#ifndef SKIP_31
+    case 31: return ReadTimeCan31();
+#endif
+
+#ifndef SKIP_32
+    case 32: return ReadTimeCan32();
 #endif
 
     default: return GetTime2Error();
@@ -2106,6 +2126,10 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #ifndef SKIP_W
     case 29:
     case 30: return ReadCntMonCanW(ibMon);
+#endif
+
+#ifndef SKIP_31
+    case 31: return ReadCntMonCan31(ibMon);
 #endif
 
     default: return GetDouble2Error();

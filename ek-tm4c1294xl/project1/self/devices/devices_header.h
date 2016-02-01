@@ -50,6 +50,10 @@ DEVICES.C
 #include "../sensors/device_v.h"
 #include "../sensors/device_w.h"
 #include "../sensors/unpack_w.h"
+#include "../sensors/sensor31/device31.h"
+#include "../sensors/sensor31/profile31.h"
+#include "../sensors/sensor32/device32.h"
+#include "../sensors/sensor32/profile32.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -118,6 +122,12 @@ void    ShowProgressDigHou(void)
   if (i > 100) i = 100;
 
   ShowProgress(12,i);
+}
+
+
+void    ShowProfileTime(time  ti)
+{
+  sprintf(szLo," %02u    %02u.%02u.%02u", ti.bHour,ti.bDay,ti.bMonth,ti.bYear);
 }
 
 

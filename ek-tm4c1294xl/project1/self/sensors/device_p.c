@@ -57,7 +57,7 @@ uchar   FromCharEls(uchar  bT)
 
 uchar   ToHalfEls(uchar  bT)
 {
-  if ((bT >= 0) && (bT <= 9))
+  if (/*(bT >= 0) &&*/ (bT <= 9))
     return bT + '0';
   else if ((bT >= 0xA) && (bT <= 0xF))
     return bT + 'A' - 10;

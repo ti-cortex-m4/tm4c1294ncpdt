@@ -13,6 +13,8 @@ KEY_AUTOMATIC!C
 #include "../../serial/modems.h"
 #include "../../sensors/automatic1.h"
 #include "../../sensors/automatic_w.h"
+#include "../../sensors/sensor31/automatic31.h"
+#include "../../sensors/sensor32/automatic32.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../digitals/digitals_display.h"
@@ -173,6 +175,14 @@ uchar   i;
 #ifndef SKIP_W
           case 29:
           case 30: if (AutomaticW() != 1) bRes = 0xEE; break;
+#endif
+
+#ifndef SKIP_31
+          case 31: if (Automatic31() != 1) bRes = 0xEE; break;
+#endif
+
+#ifndef SKIP_32
+          case 32: if (Automatic32() != 1) bRes = 0xEE; break;
 #endif
         }
 

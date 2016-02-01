@@ -41,11 +41,13 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".Ã»–“≈          ",
                                           ".—≈303          ",
                                           ".Rovalant Ã›—-1 ",
-                                          ".Rovalant Ã›—-3 "
+                                          ".Rovalant Ã›—-3 ",
+                                          ".—“ 3 v49       ",
+//                                          ".—“ 3 v51       "
                                       };
 
 uchar const             mpbMaxLines[bMAXDEVICES+1] =
-{ 1, 4, 4, 4, 4, 16, 64, 16, 4, 6, 1, 1, 4, 4, 1, 4, 4, 1, 1, 1, 1, 4, 4, 4, 1, 2, 2, 1, 4, 4, 4 };
+{ 1, 4, 4, 4, 4, 16, 64, 16, 4, 6, 1, 1, 4, 4, 1, 4, 4, 1, 1, 1, 1, 4, 4, 4, 1, 2, 2, 1, 4, 4, 4, 6/*, 1*/ };
 
 
 
@@ -151,6 +153,14 @@ bool    ValidDevice(uchar  bDevice)
 #ifndef SKIP_W
     case 29:
     case 30: return true;
+#endif
+
+#ifndef SKIP_31
+    case 31: return true;
+#endif
+
+#ifndef SKIP_32
+    case 32: return true;
 #endif
 
     default: return false;
