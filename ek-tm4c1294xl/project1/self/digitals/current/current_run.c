@@ -180,7 +180,7 @@ bool    StartCurrent(uchar  ibCanal)
     case 30: SetNext(DEV_START_W3);  break;
 #endif
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
     case 31: SetNext(DEV_START_31C);  break;
 #endif
   }

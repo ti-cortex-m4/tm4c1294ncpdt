@@ -1,4 +1,4 @@
-#ifndef SKIP_N32
+#ifndef SKIP_32
 
     case DEV_START_32P:
       cbCorrects = 0;

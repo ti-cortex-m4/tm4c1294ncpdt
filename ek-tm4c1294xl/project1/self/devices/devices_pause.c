@@ -18,7 +18,7 @@ DEVICES_PAUSE,C
 
 void    DevicesPause(void)
 {
-#ifndef SKIP_N31
+#ifndef SKIP_31
     if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10) ||
         (diCurr.bDevice == 31))
     {

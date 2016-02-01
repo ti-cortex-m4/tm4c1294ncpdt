@@ -1,4 +1,4 @@
-#ifndef SKIP_N31
+#ifndef SKIP_31
 
     case DEV_START_31C:
       cbRepeat = GetMaxRepeats();

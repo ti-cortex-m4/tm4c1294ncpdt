@@ -207,7 +207,7 @@ uchar   MakeCrcVInBuff(uchar  bOffset, uint  wSize)
 
 
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
 
 uchar   MakeCrc8Bit31OutBuff(uchar  bOffset, uint  wSize)
 {

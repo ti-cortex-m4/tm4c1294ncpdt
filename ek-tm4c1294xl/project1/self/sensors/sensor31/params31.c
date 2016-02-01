@@ -16,7 +16,7 @@ PARAMS31.C
 
 
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
 
 extern  bool                    fBeginParam;
 

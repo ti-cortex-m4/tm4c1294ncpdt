@@ -78,7 +78,7 @@ void    DevicesPostInput(void)
     }
 #endif
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
     else if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10) ||
              (diCurr.bDevice == 31))
     {

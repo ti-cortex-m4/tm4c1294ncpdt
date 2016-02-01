@@ -24,7 +24,7 @@ PROFILE31.C
 
 
 
-#ifndef SKIP_N31
+#ifndef SKIP_31
 
 time                    tiProfile31;
 
