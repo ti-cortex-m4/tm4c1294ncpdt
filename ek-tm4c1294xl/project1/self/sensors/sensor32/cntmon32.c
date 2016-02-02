@@ -20,7 +20,7 @@ CNTMON32.C
 
 
 
-#ifndef SKIP_32
+#if false //ndef SKIP_32
 
 double2 ReadCntMonCan32(uchar  ibMon)
 {
