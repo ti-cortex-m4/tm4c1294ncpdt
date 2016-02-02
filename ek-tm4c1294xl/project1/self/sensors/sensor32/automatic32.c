@@ -284,7 +284,12 @@ double2 ReadCntCurr32(void)
   if (QueryOpen32_Full(25) == 0) GetDouble2Error();
 
 
-  memset(&mpdbChannelsC, 0, sizeof(mpdbChannelsC));
+  uchar i;
+  for (i=0; i<MAX_LINE_N32; i++)
+  {
+    mpdbChannelsC[i] = 0;
+  }
+
 
   uchar t;
   for (t=0; t<bTARIFFS; t++)
@@ -314,7 +319,6 @@ double2 ReadCntCurr32(void)
 
   double dbTrans = mpdbTransCnt[ibDig];
 
-  uchar i;
   for (i=0; i<MAX_LINE_N32; i++)
   {
     mpdbChannelsC[i] *= dbTrans;
