@@ -22,6 +22,7 @@ CNTMON31.C
 
 #ifndef SKIP_31
 
+
 // сумма энергии по мес€цам
 static double           mpdbEngSum[6];
 
@@ -484,5 +485,6 @@ double2 ReadCntMonCan31(uchar  ibMon)
     ShowLo(szNoVersion); Delay(1000); return GetDouble2Error();
   }
 }
+
 
 #endif
