@@ -159,7 +159,7 @@ bool    ReadOpen32(void)
   Clear(); sprintf(szLo+3,"версия: %2u",bVersion32);
   DelayInf(); Clear();
 
-  if (bVersion32 == 51) return true;
+  if ((bVersion32 == 47) || (bVersion32 == 51)) return true;
 
   ShowLo(szNoVersion);
   DelayInf(); Clear();
