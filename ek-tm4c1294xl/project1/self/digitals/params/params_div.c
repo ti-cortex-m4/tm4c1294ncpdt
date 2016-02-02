@@ -102,6 +102,15 @@ void    MakeParamDiv(uint  iwPrm)
       default: fl = 1; break;
     }
   }
+  else if (GetParamDevice(iwPrm) == 32)
+  {
+    switch (GetParamLine(iwPrm))
+    {
+      case PAR_P  : fl = 1; break;
+
+      default: mpboEnblParams[iwPrm] = false; break;
+    }
+  }
   else if (GetParamDevice(iwPrm) == 18)
   {
     if (GetParamLine(iwPrm) != PAR_P)
