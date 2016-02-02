@@ -24,20 +24,16 @@ CNTMON32.C
 
 
 // энергия всего
-static double           mpdbEngAbs[MAX_LINE_N32];
+static double           dbEngAbs;
 
 // энергия за текущие сутки
-static double           mpdbEngDayCurr[MAX_LINE_N32];
+static double           dbEngDayCurr;
 
 
 
-bool    ReadEngAbs_Full(uchar  bPercent)
+static bool ReadEngAbs_Full(uchar  bPercent)
 {
-  uchar i;
-  for (i=0; i<MAX_LINE_N32; i++)
-  {
-    mpdbEngAbs[i] = 0;
-  }
+  dbEngAbs = 0;
 
   uchar t;
   for (t=0; t<bTARIFFS; t++)
@@ -60,21 +56,14 @@ bool    ReadEngAbs_Full(uchar  bPercent)
 //      if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return GetDouble2Error(); }
 
       InitPop(3);
-      for (i=0; i<MAX_LINE_N32; i++)
-      {
-        mpdbEngAbs[i] += PopLong32();
-      }
+      dbEngAbs += PopLong32();
     }
   }
 
   if (UseMonitor())
   {
     MonitorString("\n eng abs.");
-    for (i=0; i<MAX_LINE_N32; i++)
-    {
-      MonitorString("\n i="); MonitorCharDec(i+1);
-      MonitorString(" "); MonitorLongDec(mpdbEngAbs[i]*1000);
-    }
+    MonitorString("\n"); MonitorLongDec(dbEngAbs*1000);
   }
 
   return true;
@@ -91,24 +80,16 @@ static double2 ReadCntCurrMonCan(void)
 
   double dbTrans = mpdbTransCnt[ibDig];
 
-  uchar i;
-  for (i=0; i<6; i++)
-  {
-    mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngDayCurr[i]; // энергия всего минус энергия за текущие сутки равно энергии на начало текущих суток
-    mpdbChannelsC[i] *= dbTrans;
-    mpboChannelsA[i] = true;
-  }
+  mpdbChannelsC[0] = dbEngAbs - dbEngDayCurr; // энергия всего минус энергия за текущие сутки равно энергии на начало текущих суток
+  mpdbChannelsC[0] *= dbTrans;
+  mpboChannelsA[0] = true;
 
   if (UseMonitor())
   {
     MonitorString("\n cnt mon.curr");
-    for (i=0; i<6; i++)
-    {
-      MonitorString("\n i="); MonitorCharDec(i+1);
-      MonitorString(" "); MonitorLongDec(mpdbEngAbs[i]*1000);
-      MonitorString("-"); MonitorLongDec(mpdbEngDayCurr[i]*1000);
-      MonitorString("="); MonitorLongDec((mpdbEngAbs[i] - mpdbEngDayCurr[i])*1000);
-    }
+    MonitorString("\n"); MonitorLongDec(dbEngAbs*1000);
+    MonitorString("-"); MonitorLongDec(dbEngDayCurr*1000);
+    MonitorString("="); MonitorLongDec((dbEngAbs - dbEngDayCurr)*1000);
   }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);

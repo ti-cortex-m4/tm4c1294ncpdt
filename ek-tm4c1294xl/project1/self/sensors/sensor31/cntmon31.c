@@ -175,7 +175,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
 }
 
 
-bool    ReadEngAbs_Full(uchar  bPercent)
+static bool ReadEngAbs_Full(uchar  bPercent)
 {
   uchar i;
   for (i=0; i<6; i++)

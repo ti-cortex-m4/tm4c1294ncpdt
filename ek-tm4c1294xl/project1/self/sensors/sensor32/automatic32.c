@@ -284,11 +284,7 @@ double2 ReadCntCurr32(void)
   if (QueryOpen32_Full(25) == 0) GetDouble2Error();
 
 
-  uchar i;
-  for (i=0; i<MAX_LINE_N32; i++)
-  {
-    mpdbChannelsC[i] = 0;
-  }
+  mpdbChannelsC[0] = 0;
 
 
   uchar t;
@@ -319,11 +315,8 @@ double2 ReadCntCurr32(void)
 
   double dbTrans = mpdbTransCnt[ibDig];
 
-  for (i=0; i<MAX_LINE_N32; i++)
-  {
-    mpdbChannelsC[i] *= dbTrans;
-    mpboChannelsA[i] = true;
-  }
+  mpdbChannelsC[0] *= dbTrans;
+  mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
