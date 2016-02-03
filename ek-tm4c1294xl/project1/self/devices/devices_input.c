@@ -28,8 +28,8 @@ void    DevicesInput(void)
 #endif
 
 #ifndef SKIP_31
-    else if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10) ||
-             (diCurr.bDevice == 31))
+    else if ((diCurr.bDevice == 9)  || (diCurr.bDevice == 10) ||
+             (diCurr.bDevice == 31) || (diCurr.bDevice == 32))
     {
       if ((InBuff(0) == 0x7E) && (IndexInBuff() > 3) && (IndexInBuff() == InBuff(1)+4))
         mpSerial[ibPort] = SER_BADLINK;

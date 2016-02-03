@@ -122,60 +122,68 @@ bool    ReadHeader32(void)
 //      return (cwErrors32 < 48);
 //    }
 //  }
-//
-//
-//  InitPop(3);
-//  time ti1 = ReadPackTime32();
-//
-//  ShowProfileTime(ti1);
-//  if ((ti1.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
-//
-//  MonitorString("\n time "); MonitorTime(ti1); if ((ti1.bMinute % 30) != 0) MonitorString(" ? ");
-//
-//  ulong dw = DateToHouIndex(ti1);
-//  dw--;
-//  time ti2 = HouIndexToDate(dw); // время записи должно соответсвовать началу получасового блока
-//
-//  MonitorTime(ti2);
-//
-//
-//  if (SearchDefHouIndex(ti2) == 0) return (++cwErrors32 < 48);
-//  cwErrors32 = 0;
-//
-//
-//  ShowProgressDigHou();
-//  double dbPulse = mpdbPulseHou[ibDig];
-//
-//  InitPop(3+4+4*6*3);
-//
-//  uchar i;
-//  for (i=0; i<MAX_LINE_N32; i++)
-//  {
-//    float fl = PopFloat32();
-//    MonitorString("\n value "); MonitorLongDec(fl);
-//
-//    fl /= 1000;
-//    mpdbEngFracDigCan[ibDig][i] += fl;
-//
-//    if (ti1.bMinute % 30 == 0)
-//    {
-//      uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
-//      MonitorString(" "); MonitorIntDec(w);
-//      mpwChannels[i] = w;
-//
-//      mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
-//    }
-//    else
-//    {
-//      MonitorString(" ? ");
-//    }
-//  }
-//
-//  if (IsDefect(ibDig))
-//  {
-//    MonitorString("\n add value");
-//    MakeSpecial(ti2);
-//  }
+
+
+  InitPop(3);
+  time ti1 = ReadPackTime32();
+
+  ShowProfileTime(ti1);
+  if ((ti1.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
+
+  MonitorString("\n time "); MonitorTime(ti1); if ((ti1.bMinute % 30) != 0) MonitorString(" ? ");
+
+  ulong dw = DateToHouIndex(ti1);
+  dw--;
+  time ti2 = HouIndexToDate(dw); // время записи должно соответсвовать началу получасового блока
+
+  MonitorTime(ti2);
+
+
+  if (SearchDefHouIndex(ti2) == 0) return (++cwErrors32 < 48);
+  cwErrors32 = 0;
+
+  ShowProgressDigHou();
+
+
+  bool def = IsDefect(ibDig);
+  bool add = ((ti1.bMinute % 30 == 0) || def);
+  MonitorString("\n def "); MonitorCharDec(def); MonitorString(" add "); MonitorCharDec(add);
+
+  double dbPulse = mpdbPulseHou[ibDig];
+
+  uchar i;
+  for (i=0; i<MAX_LINE_N32; i++)
+  {
+    double db = PopIntBig();
+    MonitorString("\n value "); MonitorLongDec(db*1000); MonitorString("+"); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
+
+    db /= 1000;
+    mpdbEngFracDigCan[ibDig][i] += db;
+
+    if (add)
+    {
+      uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
+      MonitorString("="); MonitorIntDec(w);
+      mpwChannels[i] = w;
+
+      mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
+      MonitorString("+"); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
+    }
+    else
+    {
+      MonitorString(" skip ");
+    }
+  }
+
+  if (add)
+  {
+    MonitorString("\n add value");
+    MakeSpecial(ti2);
+  }
+  else
+  {
+    MonitorString("\n don't add value");
+  }
 
   return MakeStopHou(0);
 }
