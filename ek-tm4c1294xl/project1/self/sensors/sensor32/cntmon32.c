@@ -81,10 +81,12 @@ static status ReadHeader_Full(uchar  bPercent)
 
 
 
-static void ReadHeader(void)
+static bool ReadHeader(void)
 {
   InitPop(3);
   time ti = ReadPackTime32();
+
+  sprintf(szLo+1,"%02u:%02u %02u.%02u.%02u", ti.bHour,ti.bMinute, ti.bDay,ti.bMonth,ti.bYear);
 
   MonitorString("\n");
   MonitorTime(ti);
@@ -92,7 +94,11 @@ static void ReadHeader(void)
   uint w = PopIntBig();
   MonitorIntDec(w);
 
-  dbEngDayCurr += w;
+  dbEngDayCurr += (double)w/1000;
+
+  return ((ti.bDay   == tiCurr.bDay)   &&
+          (ti.bMonth == tiCurr.bMonth) &&
+          (ti.bYear  == tiCurr.bYear));
 }
 
 
@@ -105,15 +111,16 @@ static status ReadEngDayCurr_Full(uchar  bPercent)
 
   if (ReadTop32() == false) return ST_OK;
 
+  Clear();
   while (true)
   {
     if ((st = ReadHeader_Full(60)) != ST_OK) return st;
-    ReadHeader();
+    if (ReadHeader() == false) break;
 
     if (DecIndex32() == false) return ST_OK;
   }
 
-//  return ST_OK;
+  return ST_OK;
 }
 
 
