@@ -79,8 +79,8 @@ void    DevicesPostInput(void)
 #endif
 
 #ifndef SKIP_31
-    else if ((diCurr.bDevice == 9) || (diCurr.bDevice == 10) ||
-             (diCurr.bDevice == 31))
+    else if ((diCurr.bDevice == 9)  || (diCurr.bDevice == 10) ||
+             (diCurr.bDevice == 31) || (diCurr.bDevice == 32))
     {
       uchar bCrc = MakeCrc8Bit31InBuff(1, CountInBuff()-1);
       if (bCrc == 0)
