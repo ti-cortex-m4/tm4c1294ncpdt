@@ -133,7 +133,7 @@ bool    ReadHeader32(void)
   MonitorString("\n time "); MonitorTime(ti1); if ((ti1.bMinute % 30) != 0) MonitorString(" ? ");
 
   ulong dw = DateToHouIndex(ti1);
-  dw--;
+  if (ti1.bMinute % 30 == 0) dw--;
   time ti2 = HouIndexToDate(dw); // время записи должно соответсвовать началу получасового блока
 
   MonitorTime(ti2);
