@@ -56,7 +56,7 @@ static status ReadTop_Full(uchar  bPercent)
 }
 
 
-static status ReadHeader_Full(uchar  bPercent)
+static status ReadHeader_Full(void)
 {
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
@@ -64,7 +64,7 @@ static status ReadHeader_Full(uchar  bPercent)
     DelayOff();
     QueryHeader32();
 
-    ShowPercent(bPercent);
+//    ShowPercent(bPercent);
 
     if (Input32() == SER_GOODCHECK) break;
     if (fKey == true) return ST_BADDIGITAL;
@@ -84,7 +84,11 @@ static status ReadHeader_Full(uchar  bPercent)
 static bool ReadHeader(void)
 {
   InitPop(3);
+
   time ti = ReadPackTime32();
+  bool f = ((ti.bDay   == tiCurr.bDay)   &&
+            (ti.bMonth == tiCurr.bMonth) &&
+            (ti.bYear  == tiCurr.bYear));
 
   sprintf(szLo+1,"%02u:%02u %02u.%02u.%02u", ti.bHour,ti.bMinute, ti.bDay,ti.bMonth,ti.bYear);
 
@@ -94,11 +98,9 @@ static bool ReadHeader(void)
   uint w = PopIntBig();
   MonitorIntDec(w);
 
-  dbEngDayCurr += (double)w/1000;
+  if (f) dbEngDayCurr += (double)w/1000;
 
-  return ((ti.bDay   == tiCurr.bDay)   &&
-          (ti.bMonth == tiCurr.bMonth) &&
-          (ti.bYear  == tiCurr.bYear));
+  return f;
 }
 
 
@@ -114,7 +116,7 @@ static status ReadEngDayCurr_Full(uchar  bPercent)
   Clear();
   while (true)
   {
-    if ((st = ReadHeader_Full(60)) != ST_OK) return st;
+    if ((st = ReadHeader_Full()) != ST_OK) return st;
     if (ReadHeader() == false) break;
 
     if (DecIndex32() == false) return ST_OK;
