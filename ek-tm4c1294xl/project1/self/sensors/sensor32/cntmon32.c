@@ -84,9 +84,15 @@ static status ReadHeader_Full(uchar  bPercent)
 static void ReadHeader(void)
 {
   InitPop(3);
-//  time ti1 = ReadPackTime32();
-//  float fl = PopFloat32();
-//  dbEngDayCurr += fl;
+  time ti = ReadPackTime32();
+
+  MonitorString("\n");
+  MonitorTime(ti);
+
+  uint w = PopIntBig();
+  MonitorIntDec(w);
+
+  dbEngDayCurr += w;
 }
 
 
@@ -107,7 +113,7 @@ static status ReadEngDayCurr_Full(uchar  bPercent)
     if (DecIndex32() == false) return ST_OK;
   }
 
-  return ST_OK;
+//  return ST_OK;
 }
 
 

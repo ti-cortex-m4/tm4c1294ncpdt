@@ -8,6 +8,7 @@ DEVICE32.C
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_current.h"
 #include "../../memory/mem_factors.h"
+#include "../../memory/mem_realtime.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../display/display.h"
@@ -208,6 +209,28 @@ time    ReadTime32(void)
 
   return ti;
 }
+
+
+time    ReadPackTime32(void)
+{
+  InitPop(3);
+
+  uchar a = PopChar();
+  uchar b = PopChar();
+
+  time ti;
+
+  ti.bHour   = (b >> 2) & 0x1F;
+  ti.bMinute = (b & 0x03)*15;
+  ti.bSecond = 0;
+
+  ti.bDay    = ((0x100*a+b) >> 7) & 0x1F;
+  ti.bMonth  = (a >> 4) & 0x0F;
+  ti.bYear   = (ti.bMonth > tiCurr.bMonth) ? tiCurr.bYear-1 : tiCurr.bYear;
+
+  return ti;
+}
+
 
 
 void    QueryControl32(time  ti)
