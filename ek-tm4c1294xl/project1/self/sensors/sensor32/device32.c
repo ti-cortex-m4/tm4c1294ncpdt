@@ -28,7 +28,7 @@ DEVICE32.C
 static uchar            bVersion32;
 
 
-
+/*
 ulong   PopLong32(void)
 {
   static combo32 co;
@@ -40,7 +40,7 @@ ulong   PopLong32(void)
 
   return co.dwBuff;
 }
-
+*/
 
 
 //// чтение графика нагрузки дл€ счЄтчика Ёнерги€-9

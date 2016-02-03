@@ -73,8 +73,8 @@ bool    ReadTop32(void)
 {
   InitPop(3);
 
-  wBaseLast32 = PopIntLtl(); // количество записей
-  wBaseCurr32 = PopIntLtl(); // индекс текущей записи
+  wBaseLast32 = PopIntBig(); // количество записей
+  wBaseCurr32 = PopIntBig(); // индекс текущей записи
 
   MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr32);
   MonitorString("\n\n number "); MonitorIntDec(wBaseLast32);
@@ -103,7 +103,7 @@ void    QueryHeader32(void)
   PushCharCod(iwProfile32 / 0x100);
   PushCharCod(iwProfile32 % 0x100);
 
-  Query32(3+5+1, 3+3+1);
+  Query32(3+/*5*/6+1, 3+3+1);
 }
 
 

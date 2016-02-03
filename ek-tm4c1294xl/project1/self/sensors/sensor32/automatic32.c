@@ -308,7 +308,7 @@ double2 ReadCntCurr32(void)
 //      if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return GetDouble2Error(); }
 
       InitPop(3);
-      mpdbChannelsC[0] += PopLong32();
+      mpdbChannelsC[0] += (double)PopLongBig()/1000;
     }
   }
 

@@ -143,7 +143,7 @@ static bool ReadEngAbs_Full(uchar  bPercent)
 //      if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return GetDouble2Error(); }
 
       InitPop(3);
-      dbEngAbs += PopLong32();
+      dbEngAbs += (double)PopLongBig()/1000;
     }
   }
 

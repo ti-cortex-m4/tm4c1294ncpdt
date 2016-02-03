@@ -8,7 +8,7 @@ DEVICE32.H
 
 
 
-ulong   PopLong32(void);
+//ulong   PopLong32(void);
 
 void    QueryOpen32(void);
 bool    ReadOpen32(void);
