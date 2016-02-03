@@ -15,10 +15,12 @@ typedef enum
   ST_OK                 = 1,
   ST_NOTSUPPORTED       = 2,
   ST_NOTPRESENTED       = 3,
-  ST_BADDIGITAL         = 0x80,
-  ST_BADFLASH           = 0x81,
-  ST_MODEM_LINK         = 0x82,
-  ST_DISABLED           = 0x83
+  ST_BADDIGITAL         = 0x80, // счетчик не отвечает
+  ST_BADFLASH           = 0x81, // аппаратная ошибка сумматора
+  ST_MODEM_LINK         = 0x82, // модемная связь, невозможно получить данные
+  ST_DISABLED           = 0x83, // счетчик запрещен
+  ST_BAD_VERSION        = 0x84, // неправильная версия счетчика
+  ST_BAD_CRC            = 0x85  // ошибка контрольной суммы счетчика
 } status;
 
 
