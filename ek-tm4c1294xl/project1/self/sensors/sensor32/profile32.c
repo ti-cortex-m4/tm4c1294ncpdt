@@ -146,8 +146,8 @@ bool    ReadHeader32(void)
 
 
   bool def = IsDefect(ibDig);
-  bool add = ((ti1.bMinute % 30 == 0) || def);
-  MonitorString("\n def "); MonitorCharDec(def); MonitorString(" add "); MonitorCharDec(add);
+//  bool add = ((ti1.bMinute % 30 == 0) || def);
+  MonitorString("\n def "); MonitorCharDec(def); //MonitorString(" add "); MonitorCharDec(add);
 
   double dbPulse = mpdbPulseHou[ibDig];
 
@@ -160,7 +160,7 @@ bool    ReadHeader32(void)
     db /= 1000;
     mpdbEngFracDigCan[ibDig][i] += db;
 
-    if (add)
+    if (def)
     {
       uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
       MonitorString("="); MonitorIntDec(w);
@@ -175,7 +175,7 @@ bool    ReadHeader32(void)
     }
   }
 
-  if (add)
+  if (def)
   {
     MonitorString("\n add value");
     MakeSpecial(ti2);
