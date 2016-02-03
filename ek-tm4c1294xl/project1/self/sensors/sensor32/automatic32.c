@@ -305,7 +305,7 @@ double2 ReadCntCurr32(void)
     if (r == bMINORREPEATS) return GetDouble2Error();
     else
     {
-      if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return GetDouble2Error(); }
+//      if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return GetDouble2Error(); }
 
       InitPop(3);
       mpdbChannelsC[0] += PopLong32();
