@@ -16,6 +16,7 @@ CNTMON32.C
 #include "../../digitals/digitals_messages.h"
 #include "automatic32.h"
 #include "device32.h"
+#include "profile32.h"
 #include "cntmon32.h"
 
 
@@ -28,6 +29,86 @@ static double           dbEngAbs;
 
 // энергия за текущие сутки
 static double           dbEngDayCurr;
+
+
+
+static status ReadTop_Full(uchar  bPercent)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QueryTop32();
+
+    ShowPercent(bPercent);
+
+    if (Input32() == SER_GOODCHECK) break;
+    if (fKey == true) return ST_BADDIGITAL;
+  }
+
+  if (r == bMINORREPEATS) return ST_BADDIGITAL;
+  else
+  {
+//    if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return ST_BAD_CRC; }
+  }
+
+  return ST_OK;
+}
+
+
+static status ReadHeader_Full(uchar  bPercent)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QueryHeader32();
+
+    ShowPercent(bPercent);
+
+    if (Input32() == SER_GOODCHECK) break;
+    if (fKey == true) return ST_BADDIGITAL;
+  }
+
+  if (r == bMINORREPEATS) return ST_BADDIGITAL;
+  else
+  {
+//    if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return ST_BAD_CRC; }
+  }
+
+  return ST_OK;
+}
+
+
+
+static void ReadHeader(void)
+{
+  InitPop(3);
+//  time ti1 = ReadPackTime32();
+//  float fl = PopFloat32();
+//  dbEngDayCurr += fl;
+}
+
+
+static status ReadEngDayCurr_Full(uchar  bPercent)
+{
+  dbEngDayCurr = 0;
+
+  status st;
+  if ((st = ReadTop_Full(60)) != ST_OK) return st;
+
+  if (ReadTop32() == false) return ST_OK;
+
+  while (true)
+  {
+    if ((st = ReadHeader_Full(60)) != ST_OK) return st;
+    ReadHeader();
+
+    if (DecIndex32() == false) return ST_OK;
+  }
+
+  return ST_OK;
+}
 
 
 
@@ -75,7 +156,7 @@ static double2 ReadCntCurrMonCan(void)
 {
   if (ReadEngAbs_Full(60) == false) return GetDouble2Error();
 
-//  if (ReadEngDayCurr_Full(70) == false) return GetDouble2Error();
+  if (ReadEngDayCurr_Full(70) != ST_OK) return GetDouble2Error();
 
 
   double dbTrans = mpdbTransCnt[ibDig];
