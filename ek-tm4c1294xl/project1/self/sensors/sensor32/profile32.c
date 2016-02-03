@@ -146,7 +146,7 @@ bool    ReadHeader32(void)
 
 
   bool def = IsDefect(ibDig);
-//  bool add = ((ti1.bMinute % 30 == 0) || def);
+  //bool add = ((ti1.bMinute % 30 == 0) || def);
   MonitorString("\n def "); MonitorCharDec(def); //MonitorString(" add "); MonitorCharDec(add);
 
   double dbPulse = mpdbPulseHou[ibDig];
