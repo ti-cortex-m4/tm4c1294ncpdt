@@ -251,17 +251,18 @@ static bool ReadEngMonIdx_Full(void)
 
       InitPop(3+16);
 
-      uchar bMon = PopChar();
-      MonitorString(" time "); MonitorCharDec(bMon);
+      uchar bMonth = PopChar();
+      uchar bYear  = PopChar();
+      MonitorString(" time "); MonitorCharDec(bMonth); MonitorString("."); MonitorCharDec(bYear );
 
-      if (bMon == 0)
+      if (bMonth == 0)
         mpbIdxMon[m] = 0;
       else
-        mpbIdxMon[m] = (10 + bMon)%12 + 1;
+        mpbIdxMon[m] = (10 + bMonth)%12 + 1;
 
       MonitorString(" index "); MonitorCharDec(mpbIdxMon[m]);
 
-      if (bMon != 0)
+      if (bMonth != 0)
         { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbIdxMon[m]); }
       else
         { Clear(); sprintf(szLo+1,"пусто: %2u-%-2u",m,12); }
