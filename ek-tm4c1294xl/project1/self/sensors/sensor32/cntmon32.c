@@ -193,6 +193,88 @@ static double2 ReadCntCurrMonCan(void)
 
 
 
+static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
+{
+//  if (ReadEngMonIdx_Full() == 0) return GetDouble2Error();
+//  Clear();
+//
+//
+//  uchar i;
+//  for (i=0; i<6; i++)
+//  {
+//    mpdbEngSum[i] = 0;
+//  }
+//
+//
+//  uchar m = ibMon+1;
+//  uchar a = 0;
+//  do
+//  {
+//    if ((m%12 + 1) == ti.bMonth)
+//    {
+//      if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
+//
+//      MonitorString("\n eng mon.curr");
+//      for (i=0; i<6; i++)
+//      {
+//        MonitorString("\n i="); MonitorCharDec(i+1);
+//        double db = mpdbEngMonCurr[i];
+//        MonitorString(" +"); MonitorLongDec(db*1000);
+//        mpdbEngSum[i] += db;
+//      }
+//    }
+//    else
+//    {
+//      uchar idx = SearchEngMonIdx(m%12 + 1);
+//      MonitorString("\n index "); MonitorCharDec(idx);
+//      if (idx == 0xFF) { Clear(); sprintf(szLo+2,"отсутствует !"); Delay(1000); return GetDouble2Error(); }
+//      Clear();
+//      if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
+//
+//      MonitorString("\n eng mon"); MonitorCharDec(ibMon);
+//      for (i=0; i<6; i++)
+//      {
+//        MonitorString("\n i="); MonitorCharDec(i+1);
+//        double db = mpdbEngMon[i];
+//        MonitorString(" +"); MonitorLongDec(db*1000);
+//        mpdbEngSum[i] += db;
+//      }
+//    }
+//    ShowPercent(80 + a++);
+//  }
+//  while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0);
+//
+//
+//  if (ReadEngAbs_Full(90) == false) return GetDouble2Error();
+//  ShowPercent(99);
+//
+//
+//  double dbTrans = mpdbTransCnt[ibDig];
+//
+//  for (i=0; i<6; i++)
+//  {
+//    mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngSum[i];
+//    mpdbChannelsC[i] *= dbTrans;
+//    mpboChannelsA[i] = true;
+//  }
+//
+//  if (UseMonitor())
+//  {
+//    MonitorString("\n cnt mon."); MonitorCharDec(ibMon);
+//    for (i=0; i<6; i++)
+//    {
+//      MonitorString("\n i="); MonitorCharDec(i+1);
+//      MonitorString(" "); MonitorLongDec(mpdbEngAbs[i]*1000);
+//      MonitorString("-"); MonitorLongDec(mpdbEngSum[i]*1000);
+//      MonitorString("="); MonitorLongDec((mpdbEngAbs[i] - mpdbEngSum[i])*1000);
+//    }
+//  }
+
+  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
+}
+
+
+
 double2 ReadCntMonCan32(uchar  ibMon)
 {
   if (QueryOpen32_Full(25) == 0) GetDouble2Error();
