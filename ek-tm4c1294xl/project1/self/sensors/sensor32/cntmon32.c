@@ -237,14 +237,14 @@ static bool ReadEngMonIdx_Full(void)
 //      if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H0 "); Delay(1000); return(0); }
 
       InitPop(3+16);
-      uchar ibMon = PopChar();
+      uchar bMon = PopChar();
 
-      if (ibMon == 0)
+      if (bMon == 0)
         mpbIdxMon[m] = 0;
       else
-        mpbIdxMon[m] = (10 + ibMon)%12 + 1;
+        mpbIdxMon[m] = (10 + bMon)%12 + 1;
 
-      if (ibMon != 0)
+      if (bMon != 0)
         { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbIdxMon[m]); }
       else
         { Clear(); sprintf(szLo+1,"пусто: %2u-%-2u",m,12); }
