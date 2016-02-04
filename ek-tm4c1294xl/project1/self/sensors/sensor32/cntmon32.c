@@ -292,18 +292,20 @@ bool  ReadEngMon_Full(uchar  ibMon)
     if (fKey == true) return false;
   }
 
-  if (r == bMINORREPEATS) return(0);
+  if (r == bMINORREPEATS) return false;
   else
   {
-    if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H1 "); Delay(1000); return(0); }
+//    if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H1 "); Delay(1000); return(0); }
 
     InitPop(3);
-    for (r=0; r<3; r++) // по четырем тарифам из восьми
-    {
-      PopLongH();
-      reBuffA = (real)dwBuffC/1000;
 
-      mpreChannelsMonG[r] += reBuffA;
+    uchar i;
+    for (i=0; i<3; i++) // по четырем тарифам из восьми
+    {
+//      PopLongH();
+//      reBuffA = (real)dwBuffC/1000;
+//
+//      mpreChannelsMonG[r] += reBuffA;
     }
   }
 
@@ -340,7 +342,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
       MonitorString("\n index "); MonitorCharDec(idx);
       if (idx == 0xFF) { Clear(); sprintf(szLo+2,"отсутствует !"); Delay(1000); return GetDouble2Error(); }
       Clear();
-//      if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
+      if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
 
       MonitorString("\n eng mon"); MonitorCharDec(ibMon);
       double db = dbEngMon;
