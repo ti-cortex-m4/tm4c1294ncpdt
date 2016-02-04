@@ -255,10 +255,24 @@ static bool ReadEngMonIdx_Full(void)
       uchar bYear  = PopChar();
       MonitorString(" time "); MonitorCharDec(bMonth); MonitorString("."); MonitorCharDec(bYear );
 
-      if (bMonth == 0)
+      if ((bMonth == 0) || (bYear == 0))
         mpbIdxMon[m] = 0;
       else
-        mpbIdxMon[m] = (10 + bMonth)%12 + 1;
+      {
+        ulong i1 = DateToMonIndex(tiCurr);
+
+        time ti = tiZero;
+        ti.bMonth = bMonth;
+        ti.bYear  = bYear;
+        ulong i2 = DateToMonIndex(ti);
+
+        MonitorString("/n"); MonitorLongDec(i1); MonitorString(" ? "); MonitorLongDec(i2);
+
+        if ((i2 <= i1) && (i2 + m > i1))
+          mpbIdxMon[m] = (10 + bMonth)%12 + 1;
+        else
+          mpbIdxMon[m] = 0;
+      }
 
       MonitorString(" index "); MonitorCharDec(mpbIdxMon[m]);
 
