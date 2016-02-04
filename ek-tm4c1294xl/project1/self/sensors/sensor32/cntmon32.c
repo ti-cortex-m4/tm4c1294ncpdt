@@ -31,8 +31,14 @@ static double           dbEngSum;
 // индексы доступных мес€цев
 static uchar            mpbIdxMon[13];
 
+// сумма энергии за несколько мес€цев
+static double           dbEngMon;
+
 // энерги€ всего
 static double           dbEngAbs;
+
+// энерги€ за текущий мес€ц
+static double           dbEngMonCurr;
 
 // энерги€ за текущие сутки
 static double           dbEngDayCurr;
@@ -154,6 +160,7 @@ static status ReadEngDayCurr_Full(uchar  bPercent)
 static bool ReadEngAbs_Full(uchar  bPercent)
 {
   dbEngAbs = 0;
+  dbEngMonCurr = 0;
 
   uchar t;
   for (t=0; t<bTARIFFS; t++)
@@ -177,6 +184,7 @@ static bool ReadEngAbs_Full(uchar  bPercent)
 
       InitPop(3);
       dbEngAbs += (double)PopLongBig()/1000;
+      dbEngMonCurr += (double)PopLongBig()/1000;
     }
   }
 
@@ -184,6 +192,8 @@ static bool ReadEngAbs_Full(uchar  bPercent)
   {
     MonitorString("\n eng abs.");
     MonitorString("\n"); MonitorLongDec(dbEngAbs*1000);
+    MonitorString("\n eng mon.curr");
+    MonitorString("\n"); MonitorLongDec(dbEngMonCurr*1000);
   }
 
   return true;
@@ -285,33 +295,25 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
   {
     if ((m%12 + 1) == ti.bMonth)
     {
-//      if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
-//
-//      MonitorString("\n eng mon.curr");
-//      for (i=0; i<1; i++)
-//      {
-//        MonitorString("\n i="); MonitorCharDec(i+1);
-//        double db = mpdbEngMonCurr[i];
-//        MonitorString(" +"); MonitorLongDec(db*1000);
-//        mpdbEngSum[i] += db;
-//      }
+      if (ReadEngAbs_Full(80) == 0) return GetDouble2Error();
+
+      MonitorString("\n eng mon.curr");
+      double db = dbEngMonCurr;
+      MonitorString(" +"); MonitorLongDec(db*1000);
+      dbEngSum += db;
     }
     else
     {
-//      uchar idx = SearchEngMonIdx(m%12 + 1);
-//      MonitorString("\n index "); MonitorCharDec(idx);
-//      if (idx == 0xFF) { Clear(); sprintf(szLo+2,"отсутствует !"); Delay(1000); return GetDouble2Error(); }
-//      Clear();
+      uchar idx = SearchEngMonIdx(m%12 + 1);
+      MonitorString("\n index "); MonitorCharDec(idx);
+      if (idx == 0xFF) { Clear(); sprintf(szLo+2,"отсутствует !"); Delay(1000); return GetDouble2Error(); }
+      Clear();
 //      if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
-//
-//      MonitorString("\n eng mon"); MonitorCharDec(ibMon);
-//      for (i=0; i<1; i++)
-//      {
-//        MonitorString("\n i="); MonitorCharDec(i+1);
-//        double db = mpdbEngMon[i];
-//        MonitorString(" +"); MonitorLongDec(db*1000);
-//        mpdbEngSum[i] += db;
-//      }
+
+      MonitorString("\n eng mon"); MonitorCharDec(ibMon);
+      double db = dbEngMon;
+      MonitorString(" +"); MonitorLongDec(db*1000);
+      dbEngSum += db;
     }
     ShowPercent(80 + a++);
   }
