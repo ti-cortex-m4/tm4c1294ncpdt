@@ -27,11 +27,31 @@ CNTMON32.C
 // сумма энергии по мес€цам
 static double           dbEngSum;
 
+// индексы доступных мес€цев
+static uchar            mpbIdxMon[13];
+
 // энерги€ всего
 static double           dbEngAbs;
 
 // энерги€ за текущие сутки
 static double           dbEngDayCurr;
+
+
+
+void    QueryMonthIndexH(uchar  ibMon)
+{
+  InitPushCod();
+
+  PushChar(0x7E);
+  PushChar(0x03);
+  PushChar(0x06);
+
+  PushCharCod(32); // "энерги€ на расчЄтный период"
+  PushCharCod(0);
+  PushCharCod(ibMon*2);
+
+  Query32(3+20+1, 3+3+1);
+}
 
 
 
@@ -196,40 +216,38 @@ static double2 ReadCntCurrMonCan(void)
 
 
 
-bit     ReadMonthIndexExt_H(void)
+static bool ReadEngMonIdx_Full(void)
 {
-uchar   i,j;
-
-  for (j=0; j<=12; j++)                         // проходим по всем мес€цам (0..12)
+  uchar m;
+  for (m=0; m<=12; m++)
   {
-    if (fKey == 1) return(0);
-
-    for (i=0; i<bMINORREPEATS; i++)
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryMonthIndexH(j);
+      QueryMonthIndexH(m);
 
-      //ShowPercent(60+j);
-      if (CodInput() != SER_GOODCHECK) continue; else break;
+      if (Input32() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
     }
 
-    if (i == bMINORREPEATS) return 0xEE;
+    if (r == bMINORREPEATS) return false;
     else
     {
-    if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H0 "); Delay(1000); return(0); }
+//      if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H0 "); Delay(1000); return(0); }
 
       InitPop(3+16);
-      ibMon = PopChar();
+      uchar ibMon = PopChar();
 
       if (ibMon == 0)
-        mpbChannelsMonG[j] = 0;
+        mpbIdxMon[m] = 0;
       else
-        mpbChannelsMonG[j] = (10 + ibMon)%12 + 1;
+        mpbIdxMon[m] = (10 + ibMon)%12 + 1;
 
       if (ibMon != 0)
-        { sprintf(szLo,"  найдено: %-2bu   ", mpbChannelsMonG[j]); Delay(200); }
+        { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbIdxMon[m]); }
       else
-        sprintf(szLo," пусто: %2bu-%-2bu   ",j,12);
+        { Clear(); sprintf(szLo+1,"пусто: %2u-%-2u",m,12); }
     }
   }
 
@@ -237,15 +255,14 @@ uchar   i,j;
 }
 
 
-uchar   SearchMonthIndexExt_H(uchar  bMonth)
+static uchar SearchEngMonIdx(uchar  bMon)
 {
-uchar i;
+  Clear(); sprintf(szLo+1,"требуетс€: %-2u", bMon); DelayInf();
 
-  sprintf(szLo," требуетс€: %-2bu  ", bMonth); DelayInf();
-
-  for (i=0; i<=12; i++)
-    if (mpbChannelsMonG[i] == bMonth)
-      return i;
+  uchar m;
+  for (m=0; m<=12; m++)
+    if (mpbIdxMon[m] == bMon)
+      return m;
 
   return 0xFF;
 }
