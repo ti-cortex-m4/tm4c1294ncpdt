@@ -196,6 +196,62 @@ static double2 ReadCntCurrMonCan(void)
 
 
 
+bit     ReadMonthIndexExt_H(void)
+{
+uchar   i,j;
+
+  for (j=0; j<=12; j++)                         // проходим по всем мес€цам (0..12)
+  {
+    if (fKey == 1) return(0);
+
+    for (i=0; i<bMINORREPEATS; i++)
+    {
+      DelayOff();
+      QueryMonthIndexH(j);
+
+      //ShowPercent(60+j);
+      if (CodInput() != SER_GOODCHECK) continue; else break;
+    }
+
+    if (i == bMINORREPEATS) return 0xEE;
+    else
+    {
+    if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H0 "); Delay(1000); return(0); }
+
+      InitPop(3+16);
+      ibMon = PopChar();
+
+      if (ibMon == 0)
+        mpbChannelsMonG[j] = 0;
+      else
+        mpbChannelsMonG[j] = (10 + ibMon)%12 + 1;
+
+      if (ibMon != 0)
+        { sprintf(szLo,"  найдено: %-2bu   ", mpbChannelsMonG[j]); Delay(200); }
+      else
+        sprintf(szLo," пусто: %2bu-%-2bu   ",j,12);
+    }
+  }
+
+  return(1);
+}
+
+
+uchar   SearchMonthIndexExt_H(uchar  bMonth)
+{
+uchar i;
+
+  sprintf(szLo," требуетс€: %-2bu  ", bMonth); DelayInf();
+
+  for (i=0; i<=12; i++)
+    if (mpbChannelsMonG[i] == bMonth)
+      return i;
+
+  return 0xFF;
+}
+
+
+
 static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 {
 //  if (ReadEngMonIdx_Full() == 0) return GetDouble2Error();
