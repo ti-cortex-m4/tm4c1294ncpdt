@@ -24,6 +24,9 @@ CNTMON32.C
 #ifndef SKIP_32
 
 
+// сумма энергии по мес€цам
+static double           dbEngSum;
+
 // энерги€ всего
 static double           dbEngAbs;
 
@@ -197,15 +200,11 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 {
 //  if (ReadEngMonIdx_Full() == 0) return GetDouble2Error();
 //  Clear();
-//
-//
-//  uchar i;
-//  for (i=0; i<6; i++)
-//  {
-//    mpdbEngSum[i] = 0;
-//  }
-//
-//
+
+
+  dbEngSum = 0;
+
+
 //  uchar m = ibMon+1;
 //  uchar a = 0;
 //  do
@@ -215,7 +214,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 //      if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
 //
 //      MonitorString("\n eng mon.curr");
-//      for (i=0; i<6; i++)
+//      for (i=0; i<1; i++)
 //      {
 //        MonitorString("\n i="); MonitorCharDec(i+1);
 //        double db = mpdbEngMonCurr[i];
@@ -232,7 +231,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 //      if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
 //
 //      MonitorString("\n eng mon"); MonitorCharDec(ibMon);
-//      for (i=0; i<6; i++)
+//      for (i=0; i<1; i++)
 //      {
 //        MonitorString("\n i="); MonitorCharDec(i+1);
 //        double db = mpdbEngMon[i];
@@ -243,32 +242,25 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 //    ShowPercent(80 + a++);
 //  }
 //  while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0);
-//
-//
-//  if (ReadEngAbs_Full(90) == false) return GetDouble2Error();
-//  ShowPercent(99);
-//
-//
-//  double dbTrans = mpdbTransCnt[ibDig];
-//
-//  for (i=0; i<6; i++)
-//  {
-//    mpdbChannelsC[i] = mpdbEngAbs[i] - mpdbEngSum[i];
-//    mpdbChannelsC[i] *= dbTrans;
-//    mpboChannelsA[i] = true;
-//  }
-//
-//  if (UseMonitor())
-//  {
-//    MonitorString("\n cnt mon."); MonitorCharDec(ibMon);
-//    for (i=0; i<6; i++)
-//    {
-//      MonitorString("\n i="); MonitorCharDec(i+1);
-//      MonitorString(" "); MonitorLongDec(mpdbEngAbs[i]*1000);
-//      MonitorString("-"); MonitorLongDec(mpdbEngSum[i]*1000);
-//      MonitorString("="); MonitorLongDec((mpdbEngAbs[i] - mpdbEngSum[i])*1000);
-//    }
-//  }
+
+
+  if (ReadEngAbs_Full(90) == false) return GetDouble2Error();
+  ShowPercent(99);
+
+
+  double dbTrans = mpdbTransCnt[ibDig];
+
+  mpdbChannelsC[0] = dbEngAbs - dbEngSum;
+  mpdbChannelsC[0] *= dbTrans;
+  mpboChannelsA[0] = true;
+
+  if (UseMonitor())
+  {
+    MonitorString("\n cnt mon."); MonitorCharDec(ibMon);
+    MonitorString("\n"); MonitorLongDec(dbEngAbs*1000);
+    MonitorString("-"); MonitorLongDec(dbEngSum*1000);
+    MonitorString("="); MonitorLongDec((dbEngAbs - dbEngSum)*1000);
+  }
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
@@ -279,28 +271,28 @@ double2 ReadCntMonCan32(uchar  ibMon)
 {
   if (QueryOpen32_Full(25) == 0) GetDouble2Error();
 
-//  time2 ti2 = QueryTime32_Full(50);
-//  if (ti2.fValid == false) return GetDouble2Error();
-//  time ti = ti2.tiValue;
+  time2 ti2 = QueryTime32_Full(50);
+  if (ti2.fValid == false) return GetDouble2Error();
+  time ti = ti2.tiValue;
 
 
 //  if (NewVersion32())
 //  {
-//    if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
-//    {
+    if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
+    {
 //      if (GetVersion32() == 49)
-//        return ReadCntPrevMonCan(ibMon, ti);
+        return ReadCntPrevMonCan(ibMon, ti);
 //      else
 //      {
 //        Clear(); sprintf(szLo+3,"необходима"); Delay(1000);
 //        Clear(); sprintf(szLo+3,"верси€ 49"); Delay(1000);
 //        return GetDouble2Error();
 //      }
-//    }
-//    else // значение счЄтчиков на начало текущих суток
-//    {
+    }
+    else // значение счЄтчиков на начало текущих суток
+    {
       return ReadCntCurrMonCan();
-//    }
+    }
 //  }
 //  else
 //  {
