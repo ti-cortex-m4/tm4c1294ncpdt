@@ -12,6 +12,8 @@ CNTMON32.C
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "../../time/delay.h"
+#include "../../time/timedate.h"
+#include "../../time/calendar.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals_messages.h"
 #include "../sensor31/automatic31.h"
@@ -268,7 +270,7 @@ static bool ReadEngMonIdx_Full(void)
 
         MonitorString("/n"); MonitorLongDec(i1); MonitorString(" ? "); MonitorLongDec(i2);
 
-        if ((i2 <= i1) && (i2 + m > i1))
+        if ((i2 <= i1) && (i2 + 12 > i1))
           mpbIdxMon[m] = (10 + bMonth)%12 + 1;
         else
           mpbIdxMon[m] = 0;
