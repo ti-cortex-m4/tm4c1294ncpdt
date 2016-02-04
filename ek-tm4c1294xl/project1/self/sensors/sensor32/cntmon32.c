@@ -45,7 +45,7 @@ static double           dbEngDayCurr;
 
 
 
-void    QueryMonIdx(uchar  ibMon)
+void    QueryEngMonIdx(uchar  ibMon)
 {
   InitPushCod();
 
@@ -157,7 +157,7 @@ static status ReadEngDayCurr_Full(uchar  bPercent)
 
 
 
-static bool ReadEngAbs_Full(uchar  bPercent)
+static bool ReadEngVar_Full(uchar  bPercent)
 {
   dbEngAbs = 0;
   dbEngMonCurr = 0;
@@ -203,7 +203,7 @@ static bool ReadEngAbs_Full(uchar  bPercent)
 
 static double2 ReadCntCurrMonCan(void)
 {
-  if (ReadEngAbs_Full(60) == false) return GetDouble2Error();
+  if (ReadEngVar_Full(60) == false) return GetDouble2Error();
 
   if (ReadEngDayCurr_Full(70) != ST_OK) return GetDouble2Error();
 
@@ -236,7 +236,7 @@ static bool ReadEngMonIdx_Full(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryMonIdx(m);
+      QueryEngMonIdx(m);
 
       if (Input32() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -280,6 +280,38 @@ static uchar SearchEngMonIdx(uchar  bMon)
 
 
 
+bool  ReadEngMon_Full(uchar  ibMon)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QueryEngMonIdx(ibMon);
+
+    if (Input32() == SER_GOODCHECK) break;
+    if (fKey == true) return false;
+  }
+
+  if (r == bMINORREPEATS) return(0);
+  else
+  {
+    if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H1 "); Delay(1000); return(0); }
+
+    InitPop(3);
+    for (r=0; r<3; r++) // по четырем тарифам из восьми
+    {
+      PopLongH();
+      reBuffA = (real)dwBuffC/1000;
+
+      mpreChannelsMonG[r] += reBuffA;
+    }
+  }
+
+  return(1);
+}
+
+
+
 static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 {
   if (ReadEngMonIdx_Full() == 0) return GetDouble2Error();
@@ -295,7 +327,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
   {
     if ((m%12 + 1) == ti.bMonth)
     {
-      if (ReadEngAbs_Full(80) == 0) return GetDouble2Error();
+      if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
 
       MonitorString("\n eng mon.curr");
       double db = dbEngMonCurr;
@@ -320,7 +352,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
   while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0);
 
 
-  if (ReadEngAbs_Full(90) == false) return GetDouble2Error();
+  if (ReadEngVar_Full(90) == false) return GetDouble2Error();
   ShowPercent(99);
 
 
