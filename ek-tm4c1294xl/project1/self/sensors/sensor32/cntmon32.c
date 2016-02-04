@@ -14,6 +14,7 @@ CNTMON32.C
 #include "../../time/delay.h"
 #include "../../devices/devices.h"
 #include "../../digitals/digitals_messages.h"
+#include "../sensor31/automatic31.h"
 #include "automatic32.h"
 #include "device32.h"
 #include "profile32.h"
@@ -38,7 +39,7 @@ static double           dbEngDayCurr;
 
 
 
-void    QueryMonthIndexH(uchar  ibMon)
+void    QueryMonIdx(uchar  ibMon)
 {
   InitPushCod();
 
@@ -225,7 +226,7 @@ static bool ReadEngMonIdx_Full(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryMonthIndexH(m);
+      QueryMonIdx(m);
 
       if (Input32() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -271,8 +272,8 @@ static uchar SearchEngMonIdx(uchar  bMon)
 
 static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 {
-//  if (ReadEngMonIdx_Full() == 0) return GetDouble2Error();
-//  Clear();
+  if (ReadEngMonIdx_Full() == 0) return GetDouble2Error();
+  Clear();
 
 
   dbEngSum = 0;
