@@ -31,7 +31,7 @@ static double           dbEngSum;
 // индексы доступных мес€цев
 static uchar            mpbIdxMon[13];
 
-// сумма энергии за несколько мес€цев
+// энерги€ за мес€ц
 static double           dbEngMon;
 
 // энерги€ всего
@@ -282,6 +282,8 @@ static uchar SearchEngMonIdx(uchar  bMon)
 
 bool  ReadEngMon_Full(uchar  ibMon)
 {
+  dbEngMon = 0;
+
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
@@ -299,17 +301,20 @@ bool  ReadEngMon_Full(uchar  ibMon)
 
     InitPop(3);
 
-    uchar i;
-    for (i=0; i<3; i++) // по четырем тарифам из восьми
+    uchar t;
+    for (t=0; t<3; t++) // по четырем тарифам из восьми
     {
-//      PopLongH();
-//      reBuffA = (real)dwBuffC/1000;
-//
-//      mpreChannelsMonG[r] += reBuffA;
+      dbEngMon += (double)PopLongBig()/1000;
     }
   }
 
-  return(1);
+  if (UseMonitor())
+  {
+    MonitorString("\n eng mon."); MonitorCharDec(ibMon);
+    MonitorString(" "); MonitorLongDec(dbEngMon*1000);
+  }
+
+  return true;
 }
 
 

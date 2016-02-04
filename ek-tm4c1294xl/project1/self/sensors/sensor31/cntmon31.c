@@ -29,7 +29,7 @@ static double           mpdbEngSum[6];
 // индексы доступных мес€цев
 static uchar            mpbIdxMon[13];
 
-// сумма энергии за несколько мес€цев
+// энерги€ за мес€ц
 static double           mpdbEngMon[6];
 
 // энерги€ по временным интервалам
