@@ -279,12 +279,12 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
   dbEngSum = 0;
 
 
-//  uchar m = ibMon+1;
-//  uchar a = 0;
-//  do
-//  {
-//    if ((m%12 + 1) == ti.bMonth)
-//    {
+  uchar m = ibMon+1;
+  uchar a = 0;
+  do
+  {
+    if ((m%12 + 1) == ti.bMonth)
+    {
 //      if (ReadEngVar_Full(80) == 0) return GetDouble2Error();
 //
 //      MonitorString("\n eng mon.curr");
@@ -295,9 +295,9 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 //        MonitorString(" +"); MonitorLongDec(db*1000);
 //        mpdbEngSum[i] += db;
 //      }
-//    }
-//    else
-//    {
+    }
+    else
+    {
 //      uchar idx = SearchEngMonIdx(m%12 + 1);
 //      MonitorString("\n index "); MonitorCharDec(idx);
 //      if (idx == 0xFF) { Clear(); sprintf(szLo+2,"отсутствует !"); Delay(1000); return GetDouble2Error(); }
@@ -312,10 +312,10 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 //        MonitorString(" +"); MonitorLongDec(db*1000);
 //        mpdbEngSum[i] += db;
 //      }
-//    }
-//    ShowPercent(80 + a++);
-//  }
-//  while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0);
+    }
+    ShowPercent(80 + a++);
+  }
+  while ((bMONTHS + ti.bMonth - ++m) % bMONTHS != 0);
 
 
   if (ReadEngAbs_Full(90) == false) return GetDouble2Error();
