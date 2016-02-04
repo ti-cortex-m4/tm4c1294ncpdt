@@ -247,13 +247,19 @@ static bool ReadEngMonIdx_Full(void)
     {
 //      if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H0 "); Delay(1000); return(0); }
 
+      MonitorString("\n month "); MonitorCharDec(m);
+
       InitPop(3+16);
+
       uchar bMon = PopChar();
+      MonitorString(" time "); MonitorCharDec(bMon);
 
       if (bMon == 0)
         mpbIdxMon[m] = 0;
       else
         mpbIdxMon[m] = (10 + bMon)%12 + 1;
+
+      MonitorString(" index "); MonitorCharDec(mpbIdxMon[m]);
 
       if (bMon != 0)
         { Clear(); sprintf(szLo+2,"найдено: %-2u", mpbIdxMon[m]); }
