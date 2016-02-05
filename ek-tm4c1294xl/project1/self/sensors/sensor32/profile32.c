@@ -184,5 +184,4 @@ bool    ReadHeader32(void)
   return MakeStopHou(0);
 }
 
-
 #endif

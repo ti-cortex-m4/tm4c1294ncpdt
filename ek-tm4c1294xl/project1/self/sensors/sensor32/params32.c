@@ -17,7 +17,6 @@ PARAMS32.C
 
 #ifndef SKIP_32
 
-
 static void QueryPower32(void)
 {
   InitPush(0);
@@ -59,6 +58,5 @@ float2  ReadParam32(void)
     default: return GetFloat2Error();
   }
 }
-
 
 #endif

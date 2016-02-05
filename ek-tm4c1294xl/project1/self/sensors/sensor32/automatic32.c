@@ -23,7 +23,6 @@ AUTOMATIC32.C
 
 #ifndef SKIP_32
 
-
 void    Query32(uint  cwIn, uchar  cbOut)
 {
   Query31(cwIn,cbOut);
@@ -306,69 +305,4 @@ double2 ReadCntCurr32(void)
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
-///*
-//double2 ReadCntMonCanW(uchar  ibMon)
-//{
-//  Clear();
-//
-//  double2 db2 = QueryKtransW_Full(25);
-//  if (db2.fValid == false) return GetDouble2Error();
-//  double dbTrans = db2.dbValue;
-//
-//
-//  time2 ti2 = QueryTimeW_Full(50);
-//  if (ti2.fValid == false) return GetDouble2Error();
-//  time ti = ti2.tiValue;
-//
-//  if (ti.bMonth != ibMon+1)
-//  {
-//    uchar m = (12 + ti.bMonth - (ibMon+1) - 1) % 12;
-//    if (QueryEngMonW_Full(m, 75) == 0) return GetDouble2Error();
-//  }
-//  else
-//  {
-//    if (QueryEngDayW_Full(0, 75) == 0) return GetDouble2Error();
-//  }
-//
-//
-//  uchar i;
-//  for (i=0; i<MAX_LINE_N32; i++)
-//  {
-//    mpdbChannelsC[i] *= dbTrans;
-//    mpboChannelsA[i] = true;
-//  }
-//
-//  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
-//}
-//
-//
-//status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
-//{
-//  Clear();
-//
-//  double2 db2 = QueryKtransW_Full(25);
-//  if (db2.fValid == false) return ST_BADDIGITAL;
-//  double dbTrans = db2.dbValue;
-//
-//
-//  time2 ti2 = QueryTimeW_Full(50);
-//  if (ti2.fValid == false) return ST_BADDIGITAL;
-//  time ti = ti2.tiValue;
-//
-//
-//  uchar m = (12 + ti.bMonth - (ibMon+1)) % 12;
-//  status st = QueryEngMonTrfW_Full(m, 75+ibTrf, ibTrf);
-//  if (st != ST_OK) return st;
-//
-//
-//  uchar i;
-//  for (i=0; i<MAX_LINE_N32; i++)
-//  {
-//    mpdbChannelsC[i] *= dbTrans;
-//    mpboChannelsA[i] = true;
-//  }
-//
-//  return ST_OK;
-//}
-//*/
 #endif
