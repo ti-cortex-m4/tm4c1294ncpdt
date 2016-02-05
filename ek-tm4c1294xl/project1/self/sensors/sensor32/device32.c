@@ -280,12 +280,12 @@ bool    Checksum32(uchar  bSize)
   if (OldVersion32())
   {
     uint wCRC = MakeCrc16Bit32InBuff(3, bSize-2);
-    return (wCRC != InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
+    return (wCRC == InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
   }
   else
   {
     uint wCRC = MakeCrc16Bit32InBuff(3, bSize);
-    return (wCRC != 0);
+    return (wCRC == 0);
   }
 }
 
