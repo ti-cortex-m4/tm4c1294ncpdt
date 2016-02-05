@@ -23,21 +23,6 @@ AUTOMATIC32.C
 
 #ifndef SKIP_32
 
-bool    Checksum32(uchar  bSize)
-{
-//  if (OldVersion32())
-//  {
-    uint wCRC = MakeCrc16Bit31InBuff(3, bSize-2);
-    uint w = InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100;
-    return (wCRC == InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
-//  }
-//  else
-//  {
-//    uint wCRC = MakeCrc16Bit31InBuff(3, bSize);
-//    return (wCRC == 0);
-//  }
-}
-
 
 void    Query32(uint  cwIn, uchar  cbOut)
 {
