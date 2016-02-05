@@ -79,6 +79,12 @@ void    MonitorIntDec5(uint  w)
 }
 
 
+void    MonitorIntHex(uint  w)
+{
+  MonitorInt("%04X", w);
+}
+
+
 void    MonitorLong(const char  *psz, ulong  dw)
 {
   if (UseMonitor())
