@@ -12,7 +12,7 @@ AUTOMATIC32.C
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
-//#include "../../sensors/sensor32/unpack32.h"
+#include "../../digitals/digitals_messages.h"
 #include "../../digitals/wait_answer.h"
 #include "../automatic1.h"
 #include "device32.h"
@@ -290,7 +290,7 @@ double2 ReadCntCurr32(void)
     if (r == bMINORREPEATS) return GetDouble2Error();
     else
     {
-//      if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return GetDouble2Error(); }
+      if (Checksum32(14) == false) { ShowLo(szBadCRC); Delay(1000); return GetDouble2Error(); }
 
       InitPop(3);
       mpdbChannelsC[0] += (double)PopLongBig()/1000;
