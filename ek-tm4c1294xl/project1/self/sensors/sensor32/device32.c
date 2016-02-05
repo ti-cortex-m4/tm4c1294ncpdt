@@ -25,7 +25,6 @@ DEVICE32.C
 
 #ifndef SKIP_32
 
-
 static uchar            bVersion32;
 
 
@@ -289,6 +288,5 @@ bool    Checksum32(uchar  bSize)
     return (wCRC != 0);
   }
 }
-
 
 #endif
