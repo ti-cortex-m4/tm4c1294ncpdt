@@ -25,6 +25,7 @@ DEVICE32.C
 
 #ifndef SKIP_32
 
+
 static uchar            bVersion32;
 
 
@@ -160,7 +161,7 @@ bool    ReadOpen32(void)
   Clear(); sprintf(szLo+3,"верси€: %2u",bVersion32);
   DelayInf(); Clear();
 
-  if ((bVersion32 == 47) || (bVersion32 == 51)) return true;
+  if (bVersion32 == 51) return true;
 
   ShowLo(szNoVersion);
   DelayInf(); Clear();
@@ -275,192 +276,19 @@ void    QueryEngAbs32(uchar  ibTrf)
 
 
 
-//// посылка запроса на чтение версии дл€ счЄтчика Ёнерги€-9
-//void    QuerySpecies32(void)
-//{
-//  InitPushCod();
-//
-//  PushChar(0x7E);
-//  PushChar(0x03);
-//  PushChar(0x06);
-//
-//  PushCharCod((bVersionCod == 43) ? 0x09 : 0x0B);
-//  PushCharCod(0);
-//  PushCharCod(0);
-//
-//  Query32(3+8+1, 3+3+1); // возможны ответы длиной 3+6+1, 3+7+1, 3+8+1: выбираем максимальный
-//}
-//
-//
-//// чтение версии дл€ счЄтчика Ёнерги€-9
-//bit     ReadSpecies32(void)
-//{
-//  if (IndexInBuff() == 3+7+1) { bSpeciesCod = 0; return(1); }
-//  if (IndexInBuff() == 3+6+1) { bSpeciesCod = 1; return(1); }
-//  if (IndexInBuff() == 3+8+1) { bSpeciesCod = 2; return(1); }
-//
-//  return(0);
-//}
-//
-//
-//
-//// переход на предыдущую запись
-//bit     DecIndex32(void)
-//{
-//  if (wBaseLast == wBaseCurr)
-//  {
-//    if (wOffsCurr != 0) wOffsCurr--; else return(0);
-//  }
-//  else
-//  {
-//    if (wOffsCurr != 0) wOffsCurr--; else wOffsCurr = wBaseLast-1;
-//  }
-//
-//  return(1);
-//}
-//
-//
-//
-//// посылка запроса на чтение вершины массива дл€ счЄтчика Ёнерги€-9
-//void    QueryTop32(void)
-//{
-//  InitPushCod();
-//
-//  PushChar(0x7E);
-//  PushChar(0x03);
-//  PushChar(0x06);
-//
-//  PushCharCod((bVersionCod == 43) ? 0x08 : 0x0A);
-//  PushCharCod(0x00);
-//  PushCharCod(0x00);
-//
-//  Query32(3+8+1, 3+3+1);
-//}
-//
-//
-//// чтение вершины массива дл€ счЄтчика Ёнерги€-9
-//bit     ReadTop32(void)
-//{
-//  InitPop(3);
-//
-//  iwMajor = 0;
-//
-//  if (OldVersion32())
-//  {
-//    wBaseLast = PopIntExtG();                 // количество записей
-//    wBaseCurr = PopIntExtG();                 // индекс текущей записи
-//  }
-//  else
-//  {
-//  	wBaseLast = PopChar()*0x100 + PopChar();  // количество записей
-//  	wBaseCurr = PopChar()*0x100 + PopChar();  // индекс текущей записи
-//  }
-//
-//  wOffsCurr = wBaseCurr;
-//
-//  sprintf(szLo,"   %4u:%-4u    ",wBaseLast,wBaseCurr); DelayInf();
-//
-//  return( DecIndex32() );
-//}
-//
-//
-//
-//// посылка запроса на чтение заголовка часового блока дл€ счЄтчика Ёнерги€-9
-//void    QueryHeader32(void)
-//{
-//  InitPushCod();
-//
-//  PushChar(0x7E);
-//  PushChar(0x03);
-//  PushChar(0x06);
-//
-//  PushCharCod((bVersionCod == 43) ? 0x09 : 0x0B);
-//  PushCharCod(wOffsCurr / 0x100);
-//  PushCharCod(wOffsCurr % 0x100);
-//
-//  Query32(3+8+1, 3+3+1); // возможны ответы длиной 3+6+1, 3+7+1, 3+8+1: выбираем максимальный
-//}
-//
-//
-//// чтение заголовка часового блока дл€ счЄтчика Ёнерги€-9
-//bit     ReadHeader32(void)
-//{
-//  NoShowTime(1);
-//
-//  if (bVersionCod == 43)
-//  {
-//    MakeCRC12InBuff(3, 4);
-//  	if (wCRC != InBuff(7) + InBuff(8)*0x100) { sprintf(szLo," выключено: %-4u   ",++iwMajor); return(iwMajor < 48); }
-//  }
-//  else if (bVersionCod == 16)
-//  {
-//  	MakeCRC12InBuff(3, 6);
-//  	if (wCRC != InBuff(9) + InBuff(10)*0x100) { sprintf(szLo," выключено: %-4u   ",++iwMajor); return(iwMajor < 48); }
-//  }
-//  else
-//  {
-//    (bSpeciesCod == 0) ? MakeCRC12InBuff(3, 7) : MakeCRC12InBuff(3, 6);
-//    if (wCRC != 0) { sprintf(szLo," выключено: %-4u   ",++iwMajor); return(iwMajor < 48); }
-//  }
-//
-//
-//  ReadPackTimeDig32();
-//  sprintf(szLo," %02bu    %02bu.%02bu.%02bu",
-//          tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
-//
-//  if (tiDig.bMinute % 30 != 0) { szLo[4] = '?'; DelayInf(); }
-//
-//
-//  if (SearchDefHouIndex() == 0) return(++iwMajor < 48);
-//  iwMajor = 0;
-//
-//
-//  iwDigHou = (wHOURS+iwDigHou-1)%wHOURS;                // врем€ записи должно соответсвовать началу получасового блока
-//
-//  tiAlt = tiCurr;
-//  dwBuffC = DateToHouIndex();
-//
-//  dwBuffC -= (wHOURS + iwHardHou - iwDigHou) % wHOURS;
-//  HouIndexToDate(dwBuffC);
-//
-//
-//  ShowProgressDigHou();
-//  reBuffB = mprePulseHou[ibDig];
-//
-//  for (ibCan=0; ibCan<1; ibCan++)
-//  {
-//    PopHeader32();
-//    mpreEngFrac[ibDig] += reBuffA;
-//
-//    if (tiDig.bMinute % 30 == 0)
-//    {
-//      wBuffD = (uint)(mpreEngFrac[ibDig]*reBuffB);
-//      mpwChannels[ibCan] = wBuffD;
-//
-//      mpreEngFrac[ibDig] -= (real)wBuffD/reBuffB;
-//    }
-//  }
-//
-//  MakePrevHou();
-//  return(MakeStopHou(0));
-//}
-//
-//
-//
-//bit     Checksum32(uchar  bSize)
-//{
-//  if (OldVersion32())
-//  {
-//    MakeCRC12InBuff(3, bSize-2);
-//    if (wCRC != InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100) return(0);
-//  }
-//  else
-//  {
-// 	  MakeCRC12InBuff(3, bSize);
-//    if (wCRC != 0) return(0);
-//  }
-//
-//  return(1);
-//}
+bool    Checksum32(uchar  bSize)
+{
+  if (OldVersion32())
+  {
+    uint wCRC = MakeCrc16Bit32InBuff(3, bSize-2);
+    return (wCRC != InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
+  }
+  else
+  {
+    uint wCRC = MakeCrc16Bit32InBuff(3, bSize);
+    return (wCRC != 0);
+  }
+}
+
 
 #endif

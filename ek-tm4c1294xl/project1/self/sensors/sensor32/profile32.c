@@ -103,7 +103,7 @@ void    QueryHeader32(void)
   PushCharCod(iwProfile32 / 0x100);
   PushCharCod(iwProfile32 % 0x100);
 
-  Query32(3+/*5*/6+1, 3+3+1);
+  Query32(3+7+1, 3+3+1);
 }
 
 
@@ -111,17 +111,13 @@ bool    ReadHeader32(void)
 {
   HideCurrTime(1);
 
-//  if (NewVersion32())
-//  {
-//    uint wCRC = MakeCrc16Bit32InBuff(3, 100);
-//    if (wCRC != InBuff(103) + InBuff(104)*0x100)
-//    {
-//      MonitorString("\n bad CRC");
-//
-//      Clear(); sprintf(szLo+3,"ошибки: %-4u",++cwErrors32);
-//      return (cwErrors32 < 48);
-//    }
-//  }
+  if (Checksum32(5) == false)
+  {
+    MonitorString("\n bad CRC");
+
+    Clear(); sprintf(szLo+3,"ошибки: %-4u",++cwErrors32);
+    return (cwErrors32 < 48);
+  }
 
 
   InitPop(3);
