@@ -28,89 +28,11 @@ DEVICE32.C
 static uchar            bVersion32;
 
 
-/*
-ulong   PopLong32(void)
+
+ulong   PopChar3Big32(void)
 {
-  static combo32 co;
-
-  co.mpbBuff[3] = PopChar();
-  co.mpbBuff[2] = PopChar();
-  co.mpbBuff[1] = PopChar();
-  co.mpbBuff[0] = PopChar();
-
-  return co.dwBuff;
+  return PopChar()*0x10000 + PopChar()*0x100 + PopChar();
 }
-*/
-
-
-//// чтение графика нагрузки дл€ счЄтчика Ёнерги€-9
-//void    PopHeader32(void)
-//{
-//  if (bVersionCod == 43)
-//  {
-//    coFloat.mpbBuff[3] = PopChar();
-//    coFloat.mpbBuff[2] = PopChar();
-//    coFloat.mpbBuff[1] = 0;
-//    coFloat.mpbBuff[0] = 0;
-//  }
-//  else if (bSpeciesCod == 0)
-//  {
-//    coFloat.mpbBuff[0] = 0;
-//    coFloat.mpbBuff[1] = PopChar();
-//    coFloat.mpbBuff[2] = PopChar();
-//    coFloat.mpbBuff[3] = PopChar();
-//  }
-//  else if (bSpeciesCod == 1)
-//  {
-//    coFloat.mpbBuff[0] = 0;
-//    coFloat.mpbBuff[1] = 0;
-//    coFloat.mpbBuff[2] = PopChar();
-//    coFloat.mpbBuff[3] = PopChar();
-//  }
-//  else
-//  {
-//    coFloat.mpbBuff[3] = PopChar();
-//    coFloat.mpbBuff[2] = PopChar();
-//    coFloat.mpbBuff[1] = PopChar();
-//    coFloat.mpbBuff[0] = PopChar();
-//  }
-//
-//  dwBuffC = coFloat.dwBuff;
-//  reBuffA = (real)dwBuffC/1000;
-//}
-//
-//
-//
-//// чтение упакованной времени/даты дл€ счЄтчика Ёнерги€-9
-//void    ReadPackTimeDig32(void)
-//{
-//uchar   a,b;
-//
-//  InitPop(3);
-//
-//  if (OldVersion32())
-//  {
-//    b = PopChar();
-//    a = PopChar();
-//  }
-//  else
-//  {
-//    a = PopChar();
-//    b = PopChar();
-//  }
-//
-//  tiDig.bMonth  = (a >> 4) & 0x0F;
-//  tiDig.bDay    = ((0x100*a+b) >> 7) & 0x1F;
-//  tiDig.bHour   = (b >> 2) & 0x1F;
-//  tiDig.bMinute = (b & 0x03)*15;
-//
-//  if (tiDig.bMonth > tiCurr.bMonth)
-//    tiDig.bYear = tiCurr.bYear-1;
-//  else
-//    tiDig.bYear = tiCurr.bYear;
-//
-//  tiDig.bSecond = 0;
-//}
 
 
 

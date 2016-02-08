@@ -8,6 +8,8 @@ DEVICE32.H
 
 
 
+ulong   PopChar3Big32(void);
+
 void    QueryOpen32(void);
 bool    ReadOpen32(void);
 uchar   GetVersion32(void);

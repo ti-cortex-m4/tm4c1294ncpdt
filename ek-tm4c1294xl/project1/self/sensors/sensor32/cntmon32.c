@@ -126,10 +126,10 @@ static bool ReadHeader(void)
   MonitorString("\n");
   MonitorTime(ti);
 
-  uint w = PopIntBig();
-  MonitorIntDec(w);
+  ulong dw = PopChar3Big32();
+  MonitorLongDec(dw);
 
-  if (f) dbEngDayCurr += (double)w/1000;
+  if (f) dbEngDayCurr += (double)dw/1000;
 
   return f;
 }
