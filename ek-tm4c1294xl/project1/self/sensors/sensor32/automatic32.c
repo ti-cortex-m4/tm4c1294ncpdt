@@ -12,7 +12,7 @@ AUTOMATIC32.C
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
 #include "../../devices/devices.h"
-//#include "../../sensors/sensor32/unpack32.h"
+#include "../../digitals/digitals_messages.h"
 #include "../../digitals/wait_answer.h"
 #include "../automatic1.h"
 #include "device32.h"
@@ -22,22 +22,6 @@ AUTOMATIC32.C
 
 
 #ifndef SKIP_32
-
-bool    Checksum32(uchar  bSize)
-{
-//  if (OldVersion32())
-//  {
-    uint wCRC = MakeCrc16Bit31InBuff(3, bSize-2);
-    uint w = InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100;
-    return (wCRC == InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
-//  }
-//  else
-//  {
-//    uint wCRC = MakeCrc16Bit31InBuff(3, bSize);
-//    return (wCRC == 0);
-//  }
-}
-
 
 void    Query32(uint  cwIn, uchar  cbOut)
 {
@@ -284,7 +268,8 @@ double2 ReadCntCurr32(void)
   if (QueryOpen32_Full(25) == 0) GetDouble2Error();
 
 
-  memset(&mpdbChannelsC, 0, sizeof(mpdbChannelsC));
+  mpdbChannelsC[0] = 0;
+
 
   uchar t;
   for (t=0; t<bTARIFFS; t++)
@@ -304,89 +289,20 @@ double2 ReadCntCurr32(void)
     if (r == bMINORREPEATS) return GetDouble2Error();
     else
     {
-      if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return GetDouble2Error(); }
+      if (Checksum32(14) == false) { ShowLo(szBadCRC); Delay(1000); return GetDouble2Error(); }
 
       InitPop(3);
-      mpdbChannelsC[0] += PopLong32();
+      mpdbChannelsC[0] += (double)PopLongBig()/1000;
     }
   }
 
 
   double dbTrans = mpdbTransCnt[ibDig];
 
-  uchar i;
-  for (i=0; i<MAX_LINE_N32; i++)
-  {
-    mpdbChannelsC[i] *= dbTrans;
-    mpboChannelsA[i] = true;
-  }
+  mpdbChannelsC[0] *= dbTrans;
+  mpboChannelsA[0] = true;
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
 
-///*
-//double2 ReadCntMonCanW(uchar  ibMon)
-//{
-//  Clear();
-//
-//  double2 db2 = QueryKtransW_Full(25);
-//  if (db2.fValid == false) return GetDouble2Error();
-//  double dbTrans = db2.dbValue;
-//
-//
-//  time2 ti2 = QueryTimeW_Full(50);
-//  if (ti2.fValid == false) return GetDouble2Error();
-//  time ti = ti2.tiValue;
-//
-//  if (ti.bMonth != ibMon+1)
-//  {
-//    uchar m = (12 + ti.bMonth - (ibMon+1) - 1) % 12;
-//    if (QueryEngMonW_Full(m, 75) == 0) return GetDouble2Error();
-//  }
-//  else
-//  {
-//    if (QueryEngDayW_Full(0, 75) == 0) return GetDouble2Error();
-//  }
-//
-//
-//  uchar i;
-//  for (i=0; i<MAX_LINE_N32; i++)
-//  {
-//    mpdbChannelsC[i] *= dbTrans;
-//    mpboChannelsA[i] = true;
-//  }
-//
-//  return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
-//}
-//
-//
-//status  ReadCntMonCanTariffW(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
-//{
-//  Clear();
-//
-//  double2 db2 = QueryKtransW_Full(25);
-//  if (db2.fValid == false) return ST_BADDIGITAL;
-//  double dbTrans = db2.dbValue;
-//
-//
-//  time2 ti2 = QueryTimeW_Full(50);
-//  if (ti2.fValid == false) return ST_BADDIGITAL;
-//  time ti = ti2.tiValue;
-//
-//
-//  uchar m = (12 + ti.bMonth - (ibMon+1)) % 12;
-//  status st = QueryEngMonTrfW_Full(m, 75+ibTrf, ibTrf);
-//  if (st != ST_OK) return st;
-//
-//
-//  uchar i;
-//  for (i=0; i<MAX_LINE_N32; i++)
-//  {
-//    mpdbChannelsC[i] *= dbTrans;
-//    mpboChannelsA[i] = true;
-//  }
-//
-//  return ST_OK;
-//}
-//*/
 #endif

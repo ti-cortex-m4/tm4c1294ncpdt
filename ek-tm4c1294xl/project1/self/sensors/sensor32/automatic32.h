@@ -11,7 +11,8 @@ serial  Input32(void);
 
 bool    Automatic32(void);
 
-//time2   QueryTime31_Full(uchar  bPercent);
+bool    QueryOpen32_Full(uchar  bPercent);
+time2   QueryTime32_Full(uchar  bPercent);
 //double2 ReadTrans31_Full(void);
 
 time2   ReadTimeCan32(void);
