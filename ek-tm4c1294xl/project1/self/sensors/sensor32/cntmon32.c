@@ -56,7 +56,7 @@ void    QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
 
   PushCharCod(27); // "энергия на расчётный период"
 
-  uint w = ibMon*13*4 + ibTrf;
+  uint w = ibMon*12 + ibTrf*3;
   PushCharCod(w / 0x100);
   PushCharCod(w % 0x100);
 
