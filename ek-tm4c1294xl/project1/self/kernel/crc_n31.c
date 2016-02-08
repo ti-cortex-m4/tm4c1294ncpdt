@@ -44,6 +44,7 @@ uchar   MakeCrc8Bit31(uchar  *pbData, uint  wSize)
 uint    MakeCrc16Bit31(uchar  *pbData, uint  wSize)
 {
   uint wCRC = 0;
+
   while (wSize-- > 0)
   {
     wCRC ^= *(pbData++) << 8;
@@ -55,6 +56,32 @@ uint    MakeCrc16Bit31(uchar  *pbData, uint  wSize)
     else
     {
       wCRC <<= 1;
+    }
+  }
+
+  return wCRC;
+}
+
+
+uint    MakeCrc16Bit32(uchar  *pbData, uint  wSize)
+{
+  uint wCRC = 0;
+
+  while (wSize-- > 0)
+  {
+    wCRC ^= *(pbData++) << 8;
+
+    uchar i;
+    for (i=0; i<8; i++)
+    {
+      if (wCRC & 0x8000)
+      {
+        wCRC = (wCRC << 1) ^ 0x1021;
+      }
+      else
+      {
+        wCRC <<= 1;
+      }
     }
   }
 
