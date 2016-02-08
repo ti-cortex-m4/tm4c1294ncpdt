@@ -46,7 +46,7 @@ static double           dbEngDayCurr;
 
 
 
-void    QueryEngMonIdx(uchar  ibMon)
+void    QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
 {
   InitPushCod();
 
@@ -54,11 +54,13 @@ void    QueryEngMonIdx(uchar  ibMon)
   PushChar(0x03);
   PushChar(0x06);
 
-  PushCharCod(32); // "энергия на расчётный период"
-  PushCharCod(0);
-  PushCharCod(ibMon*2);
+  PushCharCod(27); // "энергия на расчётный период"
 
-  Query32(3+20+1, 3+3+1);
+  uint w = ibMon*13*4 + ibTrf;
+  PushCharCod(w / 0x100);
+  PushCharCod(w % 0x100);
+
+  Query32(3+14+1, 3+3+1);
 }
 
 
@@ -237,7 +239,7 @@ static bool ReadEngMonIdx_Full(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryEngMonIdx(m);
+      QueryEngMonIdx(m,0);
 
       if (Input32() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -246,15 +248,15 @@ static bool ReadEngMonIdx_Full(void)
     if (r == bMINORREPEATS) return false;
     else
     {
-      if (Checksum32(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
+      if (Checksum32(14) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       MonitorString("\n month "); MonitorCharDec(m);
 
-      InitPop(3+16);
+      InitPop(3+10);
 
       uchar bMonth = PopChar();
       uchar bYear  = PopChar();
-      MonitorString(" time "); MonitorCharDec(bMonth); MonitorString("."); MonitorCharDec(bYear );
+      MonitorString(" time "); MonitorCharDec(bMonth); MonitorString("."); MonitorCharDec(bYear);
 
       if ((bMonth == 0) || (bYear == 0))
         mpbIdxMon[m] = 0;
@@ -267,7 +269,7 @@ static bool ReadEngMonIdx_Full(void)
         ti.bYear  = bYear;
         ulong i2 = DateToMonIndex(ti);
 
-        MonitorString("/n"); MonitorLongDec(i1); MonitorString(" ? "); MonitorLongDec(i2);
+        MonitorString("\n"); MonitorLongDec(i1); MonitorString(" ? "); MonitorLongDec(i2);
 
         if ((i2 <= i1) && (i2 + 12 > i1))
           mpbIdxMon[m] = (10 + bMonth)%12 + 1;
@@ -306,26 +308,25 @@ bool  ReadEngMon_Full(uchar  ibMon)
 {
   dbEngMon = 0;
 
-  uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  uchar t;
+  for (t=0; t<bTARIFFS; t++)
   {
-    DelayOff();
-    QueryEngMonIdx(ibMon);
-
-    if (Input32() == SER_GOODCHECK) break;
-    if (fKey == true) return false;
-  }
-
-  if (r == bMINORREPEATS) return false;
-  else
-  {
-    if (Checksum32(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
-
-    InitPop(3);
-
-    uchar t;
-    for (t=0; t<3; t++) // по четырем тарифам из восьми
+    uchar r;
+    for (r=0; r<bMINORREPEATS; r++)
     {
+      DelayOff();
+      QueryEngMonIdx(ibMon,t);
+
+      if (Input32() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
+    }
+
+    if (r == bMINORREPEATS) return false;
+    else
+    {
+      if (Checksum32(14) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
+
+      InitPop(3);
       dbEngMon += (double)PopLongBig()/1000;
     }
   }
