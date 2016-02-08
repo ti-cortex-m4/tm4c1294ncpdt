@@ -107,11 +107,17 @@ void    QueryHeader32(void)
 }
 
 
+static ulong PopChar3Big(void)
+{
+  return PopChar()*0x10000 + PopChar()*0x100 + PopChar();
+}
+
+
 bool    ReadHeader32(void)
 {
   HideCurrTime(1);
 
-  if (Checksum32(5) == false)
+  if (Checksum32(7) == false)
   {
     MonitorString("\n bad CRC");
 
@@ -150,7 +156,7 @@ bool    ReadHeader32(void)
   uchar i;
   for (i=0; i<MAX_LINE_N32; i++)
   {
-    double db = PopIntBig();
+    double db = PopChar3Big();
     MonitorString("\n value "); MonitorLongDec(db*1000); MonitorString("+"); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
 
     db /= 1000;
