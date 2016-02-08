@@ -80,7 +80,7 @@ static status ReadTop_Full(uchar  bPercent)
   if (r == bMINORREPEATS) return ST_BADDIGITAL;
   else
   {
-//    if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return ST_BAD_CRC; }
+    if (Checksum32(8) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
   }
 
   return ST_OK;
@@ -95,8 +95,6 @@ static status ReadHeader_Full(void)
     DelayOff();
     QueryHeader32();
 
-//    ShowPercent(bPercent);
-
     if (Input32() == SER_GOODCHECK) break;
     if (fKey == true) return ST_BADDIGITAL;
   }
@@ -104,7 +102,7 @@ static status ReadHeader_Full(void)
   if (r == bMINORREPEATS) return ST_BADDIGITAL;
   else
   {
-//    if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return ST_BAD_CRC; }
+    if (Checksum32(7) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
   }
 
   return ST_OK;
@@ -121,15 +119,17 @@ static bool ReadHeader(void)
             (ti.bMonth == tiCurr.bMonth) &&
             (ti.bYear  == tiCurr.bYear));
 
-  sprintf(szLo+1,"%02u:%02u %02u.%02u.%02u", ti.bHour,ti.bMinute, ti.bDay,ti.bMonth,ti.bYear);
-
   MonitorString("\n");
   MonitorTime(ti);
 
   ulong dw = PopChar3Big32();
   MonitorLongDec(dw);
 
-  if (f) dbEngDayCurr += (double)dw/1000;
+  if (f)
+  {
+    sprintf(szLo+1,"%02u:%02u %02u.%02u.%02u", ti.bHour,ti.bMinute, ti.bDay,ti.bMonth,ti.bYear);
+    dbEngDayCurr += (double)dw/1000;
+  }
 
   return f;
 }
@@ -181,7 +181,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
     if (r == bMINORREPEATS) return false;
     else
     {
-//      if (Checksum32(14) == false) { Clear(); sprintf(szLo+1,"ошибка CRC: H5"); Delay(1000); return GetDouble2Error(); }
+      if (Checksum32(14) == false) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       InitPop(3);
       dbEngAbs += (double)PopLongBig()/1000;
@@ -246,7 +246,7 @@ static bool ReadEngMonIdx_Full(void)
     if (r == bMINORREPEATS) return false;
     else
     {
-//      if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H0 "); Delay(1000); return(0); }
+      if (Checksum32(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       MonitorString("\n month "); MonitorCharDec(m);
 
@@ -319,7 +319,7 @@ bool  ReadEngMon_Full(uchar  ibMon)
   if (r == bMINORREPEATS) return false;
   else
   {
-//    if (ChecksumH(20) == 0) { sprintf(szLo," ошибка CRC: H1 "); Delay(1000); return(0); }
+    if (Checksum32(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
 
     InitPop(3);
 
