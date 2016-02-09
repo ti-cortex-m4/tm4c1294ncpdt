@@ -465,12 +465,12 @@ double2 ReadCntMonCan31(uchar  ibMon)
   {
     if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
-      if (GetVersion31() == 49)
+      if ((GetVersion31() == 48) || (GetVersion31() == 49))
         return ReadCntPrevMonCan(ibMon, ti);
       else
       {
-        Clear(); sprintf(szLo+3,"необходима"); Delay(1000);
-        Clear(); sprintf(szLo+3,"верси€ 49"); Delay(1000);
+        Clear(); sprintf(szLo+3,"необходимы"); Delay(1000);
+        Clear(); sprintf(szLo+2,"верси€ 48-49"); Delay(1000);
         return GetDouble2Error();
       }
     }
