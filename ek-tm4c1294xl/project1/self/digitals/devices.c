@@ -42,7 +42,7 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".—≈303          ",
                                           ".Rovalant Ã›—-1 ",
                                           ".Rovalant Ã›—-3 ",
-                                          ".—“ 3 v49       ",
+                                          ".—“ 3 v48-49    ",
                                           ".—“ 3/1 v51-54  "
                                       };
 
