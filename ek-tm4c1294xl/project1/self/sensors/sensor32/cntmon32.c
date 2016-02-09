@@ -418,7 +418,7 @@ double2 ReadCntMonCan32(uchar  ibMon)
 //  {
     if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
-      if ((GetVersion32() >= 51) || (GetVersion32() <= 54))
+      if ((GetVersion32() >= 51) && (GetVersion32() <= 54))
         return ReadCntPrevMonCan(ibMon, ti);
       else
       {
