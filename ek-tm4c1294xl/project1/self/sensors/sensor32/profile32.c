@@ -103,7 +103,10 @@ void    QueryHeader32(void)
   PushCharCod(iwProfile32 / 0x100);
   PushCharCod(iwProfile32 % 0x100);
 
-  Query32(3+7+1, 3+3+1);
+  if (GetVersion32() == 54)
+    Query32(3+6+1, 3+3+1);
+  else
+    Query32(3+7+1, 3+3+1);
 }
 
 
@@ -112,7 +115,7 @@ bool    ReadHeader32(void)
 {
   HideCurrTime(1);
 
-  if (Checksum32(7) == false)
+  if (Checksum32(GetVersion32() == 54 ? 6 : 7) == false)
   {
     MonitorString("\n bad CRC");
 
@@ -150,7 +153,7 @@ bool    ReadHeader32(void)
   uchar i;
   for (i=0; i<MAX_LINE_N32; i++)
   {
-    double db = PopChar3Big32();
+    double db = (GetVersion32() == 54) ? PopIntBig() : PopChar3Big32();
     MonitorString("\n value "); MonitorLongDec(db*1000); MonitorString("+"); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
 
     db /= 1000;

@@ -124,7 +124,7 @@ static bool ReadHeader(void)
   MonitorString("\n");
   MonitorTime(ti);
 
-  ulong dw = PopChar3Big32();
+  ulong dw = (GetVersion32() == 54) ? PopIntBig() : PopChar3Big32();
   MonitorLongDec(dw);
 
   if (f)
