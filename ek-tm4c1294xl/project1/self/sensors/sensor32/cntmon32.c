@@ -418,14 +418,14 @@ double2 ReadCntMonCan32(uchar  ibMon)
 //  {
     if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
-//      if (GetVersion32() == 49)
+      if ((GetVersion32() >= 51) || (GetVersion32() <= 54))
         return ReadCntPrevMonCan(ibMon, ti);
-//      else
-//      {
-//        Clear(); sprintf(szLo+3,"необходима"); Delay(1000);
-//        Clear(); sprintf(szLo+3,"верси€ 49"); Delay(1000);
-//        return GetDouble2Error();
-//      }
+      else
+      {
+        Clear(); sprintf(szLo+3,"необходимы"); Delay(1000);
+        Clear(); sprintf(szLo+2,"версии 51-54"); Delay(1000);
+        return GetDouble2Error();
+      }
     }
     else // значение счЄтчиков на начало текущих суток
     {

@@ -122,9 +122,7 @@ uchar   GetVersion31(void)
 
 bool    NewVersion31(void)
 {
-  return ((bVersion31 == 36) ||
-          (bVersion31 == 37) ||
-          (bVersion31 == 49));
+  return true;
 }
 
 
