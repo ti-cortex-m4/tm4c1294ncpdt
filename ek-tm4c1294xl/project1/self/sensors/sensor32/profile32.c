@@ -8,6 +8,7 @@ PROFILE32.C
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_energy_spec.h"
 #include "../../memory/mem_profile.h"
+#include "../../memory/mem_limits.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"
@@ -154,10 +155,14 @@ bool    ReadHeader32(void)
   for (i=0; i<MAX_LINE_N32; i++)
   {
     double db = (GetVersion32() == 54) ? PopIntBig() : PopChar3Big32();
-    MonitorString("\n value "); MonitorLongDec(db*1000); MonitorString("+"); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
+    MonitorString("\n value "); MonitorLongDec(db*1000); MonitorString("+");
 
-    db /= 1000;
-    mpdbEngFracDigCan[ibDig][i] += db;
+    if (mpcwStopCan[ibDig] != 4+1)
+    {
+      MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
+      db /= 1000;
+      mpdbEngFracDigCan[ibDig][i] += db;
+    }
 
     if ((ti1.bMinute % 15 == 0) && def)
     {
