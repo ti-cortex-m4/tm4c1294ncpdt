@@ -155,11 +155,11 @@ bool    ReadHeader32(void)
   for (i=0; i<MAX_LINE_N32; i++)
   {
     double db = (GetVersion32() == 54) ? PopIntBig() : PopChar3Big32();
-    MonitorString("\n value "); MonitorLongDec(db*1000); MonitorString("+");
+    MonitorString("\n value "); MonitorLongDec(db*1000);
 
-    if (mpcwStopCan[ibDig] != 4+1)
+    if ((mpcwStopCan[ibDig] != 4+1) || def)
     {
-      MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
+      MonitorString("+"); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
       db /= 1000;
       mpdbEngFracDigCan[ibDig][i] += db;
     }
