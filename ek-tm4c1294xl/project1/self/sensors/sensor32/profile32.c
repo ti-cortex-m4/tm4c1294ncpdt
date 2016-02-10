@@ -145,6 +145,9 @@ bool    ReadHeader32(void)
   ShowProgressDigHou();
 
 
+  bool def = IsDefect(ibDig);
+  MonitorString("\n def "); MonitorCharDec(def);
+
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
@@ -156,7 +159,7 @@ bool    ReadHeader32(void)
     db /= 1000;
     mpdbEngFracDigCan[ibDig][i] += db;
 
-    if ((ti1.bMinute % 30 == 0) || (ti1.bMinute % 15 == 0))
+    if ((ti1.bMinute % 15 == 0) && def)
     {
       uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
       MonitorString("="); MonitorIntDec(w);
