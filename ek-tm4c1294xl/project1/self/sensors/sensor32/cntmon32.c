@@ -104,7 +104,7 @@ static status ReadHeader_Full(void)
   if (r == bMINORREPEATS) return ST_BADDIGITAL;
   else
   {
-    if (Checksum32(7) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
+    if (Checksum32(GetVersion32() == 54 ? 6 : 7) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
   }
 
   return ST_OK;
