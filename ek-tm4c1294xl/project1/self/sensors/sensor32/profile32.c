@@ -156,7 +156,7 @@ bool    ReadHeader32(void)
     db /= 1000;
     mpdbEngFracDigCan[ibDig][i] += db;
 
-    if (ti1.bMinute % 30 == 0)
+    if ((ti1.bMinute % 30 == 0) || (ti1.bMinute % 15 == 0))
     {
       uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
       MonitorString("="); MonitorIntDec(w);
@@ -167,7 +167,6 @@ bool    ReadHeader32(void)
     }
   }
 
-  MonitorString("\n add value");
   MakeSpecial(ti2);
   return MakeStopHou(0);
 }
