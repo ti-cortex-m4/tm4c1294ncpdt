@@ -52,6 +52,7 @@ DEVICES.C
 #include "../sensors/unpack_w.h"
 #include "../sensors/sensor31/device31.h"
 #include "../sensors/sensor31/profile31.h"
+#include "../sensors/sensor31/procedure31.h"
 #include "../sensors/sensor32/device32.h"
 #include "../sensors/sensor32/profile32.h"
 #include "../serial/ports.h"

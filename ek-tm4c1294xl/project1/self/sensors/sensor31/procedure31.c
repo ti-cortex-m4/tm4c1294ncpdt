@@ -6,32 +6,41 @@ PROCEDURE31.C
 
 
 #include "../../main.h"
+#include "../../memory/mem_profile.h"
 #include "../../memory/mem_energy_spec.h"
 #include "../../serial/monitor.h"
 #include "procedure31.h"
 
 
 
-time                    mtiProcedureDig[bCANALS];
+time                    mtiProcedure31Dig[bCANALS];
 
 
 
-void    ClearProcedure(void)
+void    ClearProcedure31(void)
 {
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
-  memset(&mtiProcedureDig, 0, sizeof(mtiProcedureDig));
+  memset(&mtiProcedure31Dig, 0, sizeof(mtiProcedure31Dig));
 }
 
 
-bool    IsCleanProcedure(uchar  ibDig)
+
+bool    IsCleanProcedure31(uchar  ibDig)
 {
-  return mtiProcedureDig[ibDig].bYear == 0;
+  return mtiProcedure31Dig[ibDig].bYear == 0;
 }
 
 
-void    AddProcedure(time  ti, uchar  ibDig, uchar  ibCan, double  db)
+uchar   GetProcedure31Idx(time  ti)
 {
-  mtiProcedureDig[ibDig] = ti;
+  return (((ti.bHour + 24)*60 + ti.bMinute - 1) / 30) % 48;
+}
+
+
+
+void    AddProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  db)
+{
+  mtiProcedure31Dig[ibDig] = ti;
 
   MonitorLongDec(mpdbEngFracDigCan[ibDig][ibCan]*1000); MonitorString("+"); MonitorLongDec(db*1000);
   db /= 1000;
@@ -40,7 +49,7 @@ void    AddProcedure(time  ti, uchar  ibDig, uchar  ibCan, double  db)
 }
 
 
-void    SubProcedure(time  ti, uchar  ibDig, uchar  ibCan, double  dbPulse)
+void    SubProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  dbPulse)
 {
   MonitorLongDec(mpdbEngFracDigCan[ibDig][ibCan]*1000);
   uint w = (uint)(mpdbEngFracDigCan[ibDig][ibCan]*dbPulse);
@@ -49,10 +58,4 @@ void    SubProcedure(time  ti, uchar  ibDig, uchar  ibCan, double  dbPulse)
 
   mpdbEngFracDigCan[ibDig][ibCan] -= (double)w/dbPulse;
   MonitorString("+"); MonitorLongDec(mpdbEngFracDigCan[ibDig][ibCan]*1000);
-}
-
-
-uchar   GetTimeIdx(time  ti)
-{
-  return (((ti.bHour + 24)*60 + ti.bMinute - 1) / 30) % 48;
 }
