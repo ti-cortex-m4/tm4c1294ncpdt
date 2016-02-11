@@ -138,14 +138,11 @@ bool    ReadHeader32(void)
   MonitorString("\n time1 "); MonitorTime(ti1); if ((ti1.bMinute % 30) != 0) MonitorString(" ? ");
 
 
-//  if (SearchDefHouIndex(ti1) == 0) return (++cwErrors32 < 48);
-//  cwErrors32 = 0;
-
   ShowProgressDigHou();
 
 
   time ti2 = mtiProcedure31Dig[ibDig];
-  bool cln = IsCleanProcedure31(ibDig);
+  bool new = (ti2.bYear == 0);
   bool add = false;
 
   double dbPulse = mpdbPulseHou[ibDig];
@@ -154,17 +151,17 @@ bool    ReadHeader32(void)
   for (i=0; i<MAX_LINE_N32; i++)
   {
     double db = (GetVersion32() == 54) ? PopIntBig() : PopChar3Big32();
-    MonitorString(" value "); MonitorLongDec(db);
+    MonitorString("\n value1 "); MonitorLongDec(db);
 
-    if (cln)
+    if (new)
     {
    	  MonitorString("\n clean start ");
       AddProcedure31(ti1, ibDig, i, db);
     }
     else
     {
-      uchar idx1 = GetProcedure31Idx(mtiProcedure31Dig[ibDig]); MonitorString(" idx1 "); MonitorCharDec(idx1);
-      uchar idx2 = GetProcedure31Idx(ti1); MonitorString(" idx2 "); MonitorCharDec(idx2);
+      uchar idx1 = GetProcedure31Idx(ti1); MonitorString("\n idx1 "); MonitorCharDec(idx1);
+      uchar idx2 = GetProcedure31Idx(ti2); MonitorString(" idx2 "); MonitorCharDec(idx2);
 
       if (idx1 == idx2)
       {
@@ -173,8 +170,9 @@ bool    ReadHeader32(void)
       }
       else
       {
-        MonitorString("\n another idx ");
         add = true;
+        MonitorString("\n another idx ");
+
         SubProcedure31(ti1, ibDig, i, dbPulse);
 
         MonitorString("\n next start ");
@@ -189,7 +187,13 @@ bool    ReadHeader32(void)
     ulong dw = DateToHouIndex(ti2);
     if (ti2.bMinute % 30 == 0) dw--;
     ti2 = HouIndexToDate(dw);
-    MonitorString("\n time3 "); MonitorTime(ti2); MonitorString(" value "); MonitorIntDec(mpwChannels[0]);
+    MonitorString("\n time2 "); MonitorTime(ti2);
+
+    for (i=0; i<MAX_LINE_N32; i++)
+    {
+      MonitorString("\n value2 ");
+      MonitorIntDec(mpwChannels[i]);
+    }
 
     if (SearchDefHouIndex(ti2) == 0) return (++cwErrors32 < 48);
     cwErrors32 = 0;
