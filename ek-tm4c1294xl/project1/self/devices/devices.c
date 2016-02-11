@@ -5220,9 +5220,9 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_32P:
-      if (ReadHeader32() == 0)
+      if (ReadHeader32() == false)
         DoneProfile();
-      else if (DecIndex32() == 0)
+      else if (DecIndex32() == false)
         DoneProfile();
       else
       {
