@@ -56,7 +56,7 @@ void    OpenSpecial(void)
 }
 
 
-void    MakeSpecial(time  ti)
+bool    MakeSpecial(time  ti)
 {
   if (IsDefect(ibDig) || IsWinterDouble(ibDig, ti))
   {
@@ -72,7 +72,11 @@ void    MakeSpecial(time  ti)
 
     fLoadMem = 0;
     CalcAllGroups(1, ti);
+
+    return true;
   }
+
+  return false;
 }
 
 
