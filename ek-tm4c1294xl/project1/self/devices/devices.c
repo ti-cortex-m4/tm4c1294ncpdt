@@ -52,6 +52,7 @@ DEVICES.C
 #include "../sensors/unpack_w.h"
 #include "../sensors/sensor31/device31.h"
 #include "../sensors/sensor31/profile31.h"
+#include "../sensors/sensor31/procedure31.h"
 #include "../sensors/sensor32/device32.h"
 #include "../sensors/sensor32/profile32.h"
 #include "../serial/ports.h"
@@ -5220,9 +5221,15 @@ void    RunDevices(void)
 
     case DEV_POSTHEADER_32P:
       if (ReadHeader32() == 0)
+      {
+        ClearProcedure31();
         DoneProfile();
+      }
       else if (DecIndex32() == 0)
+      {
+        ClearProcedure31();
         DoneProfile();
+      }
       else
       {
         cbRepeat = GetMaxRepeats();

@@ -16,10 +16,12 @@ PROFILE32.C
 #include "../../keyboard/time/key_timedate.h"
 #include "../../time/calendar.h"
 #include "../../time/delay.h"
+#include "../../time/timedate.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../special/special.h"
 #include "../sensor31/automatic31.h"
+#include "../sensor31/procedure31.h"
 #include "automatic32.h"
 #include "device32.h"
 #include "profile32.h"
@@ -84,6 +86,8 @@ bool    ReadTop32(void)
 
   cwErrors32 = 0; // количество ошибок чтения
 
+  ClearProcedure31();
+
   Clear(); sprintf(szLo+3,"%4u:%-4u",wBaseLast32,wBaseCurr32); DelayInf();
 
   return DecIndex32();
@@ -131,23 +135,18 @@ bool    ReadHeader32(void)
   ShowProfileTime(ti1);
   if ((ti1.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
 
-  MonitorString("\n time "); MonitorTime(ti1); if ((ti1.bMinute % 30) != 0) MonitorString(" ? ");
-
-  ulong dw = DateToHouIndex(ti1);
-  if (ti1.bMinute % 30 == 0) dw--;
-  time ti2 = HouIndexToDate(dw); // время записи должно соответсвовать началу получасового блока
-
-  MonitorTime(ti2);
+  MonitorString("\n time1 "); MonitorTime(ti1); if ((ti1.bMinute % 30) != 0) MonitorString(" ? ");
 
 
-  if (SearchDefHouIndex(ti2) == 0) return (++cwErrors32 < 48);
-  cwErrors32 = 0;
+//  if (SearchDefHouIndex(ti1) == 0) return (++cwErrors32 < 48);
+//  cwErrors32 = 0;
 
   ShowProgressDigHou();
 
 
-  bool def = IsDefect(ibDig);
-  MonitorString("\n def "); MonitorCharDec(def);
+  time ti2 = mtiProcedure31Dig[ibDig];
+  bool cln = IsCleanProcedure31(ibDig);
+  bool add = false;
 
   double dbPulse = mpdbPulseHou[ibDig];
 
@@ -155,28 +154,53 @@ bool    ReadHeader32(void)
   for (i=0; i<MAX_LINE_N32; i++)
   {
     double db = (GetVersion32() == 54) ? PopIntBig() : PopChar3Big32();
-    MonitorString("\n value "); MonitorLongDec(db*1000);
+    MonitorString(" value "); MonitorLongDec(db);
 
-    if ((mpcwStopCan[ibDig] != 4+1) || def)
+    if (cln)
     {
-      MonitorString("+"); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
-      db /= 1000;
-      mpdbEngFracDigCan[ibDig][i] += db;
+   	  MonitorString("\n clean start ");
+      AddProcedure31(ti1, ibDig, i, db);
     }
-
-    if ((ti1.bMinute % 15 == 0) && def)
+    else
     {
-      uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
-      MonitorString("="); MonitorIntDec(w);
-      mpwChannels[i] = w;
+      uchar idx1 = GetProcedure31Idx(mtiProcedure31Dig[ibDig]); MonitorString(" idx1 "); MonitorCharDec(idx1);
+      uchar idx2 = GetProcedure31Idx(ti1); MonitorString(" idx2 "); MonitorCharDec(idx2);
 
-      mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
-      MonitorString("+"); MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
+      if (idx1 == idx2)
+      {
+        MonitorString("\n the same idx ");
+        AddProcedure31(ti1, ibDig, i, db);
+      }
+      else
+      {
+        MonitorString("\n another idx ");
+        add = true;
+        SubProcedure31(ti1, ibDig, i, dbPulse);
+
+        MonitorString("\n next start ");
+        AddProcedure31(ti1, ibDig, i, db);
+      }
     }
   }
 
-  MakeSpecial(ti2);
-  return MakeStopHou(0);
+  if (add)
+  {
+    MonitorString("\n time2 "); MonitorTime(ti2);
+    ulong dw = DateToHouIndex(ti2);
+    if (ti2.bMinute % 30 == 0) dw--;
+    ti2 = HouIndexToDate(dw);
+    MonitorString("\n time3 "); MonitorTime(ti2); MonitorString(" value "); MonitorIntDec(mpwChannels[0]);
+
+    if (SearchDefHouIndex(ti2) == 0) return (++cwErrors32 < 48);
+    cwErrors32 = 0;
+
+    MakeSpecial(ti2);
+    return MakeStopHou(0);
+  }
+  else
+  {
+    return MakeStopHou(0);
+  }
 }
 
 #endif
