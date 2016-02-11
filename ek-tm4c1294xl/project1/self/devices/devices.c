@@ -55,6 +55,7 @@ DEVICES.C
 #include "../sensors/sensor31/procedure31.h"
 #include "../sensors/sensor32/device32.h"
 #include "../sensors/sensor32/profile32.h"
+#include "../serial/monitor.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -5168,6 +5169,7 @@ void    RunDevices(void)
 
 
     case DEV_POSTCORRECT_32P:
+      MonitorOpen(0);
       Clear();
 
       cbRepeat = GetMaxRepeats();
