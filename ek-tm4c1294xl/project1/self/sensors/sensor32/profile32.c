@@ -164,9 +164,10 @@ bool    ReadHeader32(void)
       ulong dwDay2 = DateToDayIndex(ti2); MonitorString(" idx2 "); MonitorCharDec(bIdx2); MonitorString("/"); MonitorLongDec(dwDay2);
 
       bool fSameDay = (dwDay1 == dwDay2);
-      bool fPrevDay = ((dwDay1 + 1 == dwDay2) && (bIdx1 == 47) && (bIdx2 == 47));
+      bool fMidnight = ((dwDay1 + 1 == dwDay2) && (bIdx1 == 47) && (bIdx2 == 47));
+      MonitorCharDec(bIdx1 == bIdx2); MonitorCharDec(fSameDay); MonitorCharDec(fMidnight);
 
-      if ((bIdx1 == bIdx2) && (fSameDay || fPrevDay))
+      if ((bIdx1 == bIdx2) && (fSameDay || fMidnight))
       {
         MonitorString("\n the same idx ");
         AddProcedure31(ti1, ibDig, i, db);
