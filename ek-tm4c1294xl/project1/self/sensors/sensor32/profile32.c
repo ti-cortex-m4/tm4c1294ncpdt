@@ -219,8 +219,8 @@ bool    ReadHeader32(void)
       if (f) ClearProcedure31(true,true);
       return f;
     }
-
-    cwErrors32 = 0;
+    else
+      cwErrors32 = 0;
 
     ShowProgressDigHou();
 
