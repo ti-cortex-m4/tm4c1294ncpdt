@@ -163,7 +163,7 @@ bool    ReadHeader32(void)
       uchar idx2 = GetProcedure31Idx(ti2);
       ulong dw2 = DateToDayIndex(ti2); MonitorString(" idx2 "); MonitorCharDec(idx2); MonitorString("/"); MonitorLongDec(dw2);
 
-      if (idx1 == idx2)
+      if (idx1 == idx2) // && ((dw1 == dw2) || ((dw1+1 == dw2) && (idx1 == 47)))
       {
         MonitorString("\n the same idx ");
         AddProcedure31(ti1, ibDig, i, db);
@@ -208,7 +208,7 @@ bool    ReadHeader32(void)
   else
   {
     MonitorString("\n don't add");
-    return MakeStopHou(0);
+    return true;
   }
 }
 
