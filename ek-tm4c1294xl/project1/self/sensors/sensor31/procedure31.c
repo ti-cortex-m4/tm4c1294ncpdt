@@ -17,11 +17,25 @@ time                    mtiProcedure31Dig[bCANALS];
 
 
 
-void    ClearProcedure31(void)
+void    InitProcedure31(void)
 {
-  MonitorString("\n clear procedure");
-  memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
-  memset(&mtiProcedure31Dig, 0, sizeof(mtiProcedure31Dig));
+  ClearProcedure31(true,true);
+}
+
+
+void    ClearProcedure31(bool  fClearValue, bool  fClearTime)
+{
+  if (fClearValue)
+  {
+    MonitorString("\n clear procedure value");
+    memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
+  }
+
+  if (fClearTime)
+  {
+    MonitorString("\n clear procedure time");
+    memset(&mtiProcedure31Dig, 0, sizeof(mtiProcedure31Dig));
+  }
 }
 
 

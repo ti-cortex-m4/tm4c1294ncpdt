@@ -5221,15 +5221,9 @@ void    RunDevices(void)
 
     case DEV_POSTHEADER_32P:
       if (ReadHeader32() == 0)
-      {
-        ClearProcedure31();
         DoneProfile();
-      }
       else if (DecIndex32() == 0)
-      {
-        ClearProcedure31();
         DoneProfile();
-      }
       else
       {
         cbRepeat = GetMaxRepeats();
