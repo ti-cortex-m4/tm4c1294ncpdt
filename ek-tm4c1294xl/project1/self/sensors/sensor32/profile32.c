@@ -43,11 +43,20 @@ bool    DecIndex32(void)
 {
   if (wBaseLast32 == wBaseCurr32)
   {
-    if (iwProfile32 != 0) iwProfile32--; else return false;
+    if (iwProfile32 != 0)
+      iwProfile32--;
+    else
+    {
+      ClearProcedure31(true,true);
+      return false;
+    }
   }
   else
   {
-    if (iwProfile32 != 0) iwProfile32--; else iwProfile32 = wBaseLast32-1;
+    if (iwProfile32 != 0)
+      iwProfile32--;
+    else
+      iwProfile32 = wBaseLast32-1;
   }
 
   return true;
@@ -86,7 +95,7 @@ bool    ReadTop32(void)
 
   cwErrors32 = 0; // количество ошибок чтения
 
-  ClearProcedure31();
+  ClearProcedure31(false,true);
 
   Clear(); sprintf(szLo+3,"%4u:%-4u",wBaseLast32,wBaseCurr32); DelayInf();
 
@@ -124,8 +133,10 @@ bool    ReadHeader32(void)
   {
     MonitorString("\n bad CRC");
 
-    Clear(); sprintf(szLo+3,"ошибки: %-4u",++cwErrors32);
-    return (cwErrors32 < 48);
+    Clear(); sprintf(szLo+3,"ошибки: %-4u",cwErrors32);
+    bool f = (++cwErrors32 < 48);
+    if (f) ClearProcedure31(true,true);
+    return f;
   }
 
 
@@ -164,10 +175,11 @@ bool    ReadHeader32(void)
       ulong dwDay2 = DateToDayIndex(ti2); MonitorString(" idx2 "); MonitorCharDec(bIdx2); MonitorString("/"); MonitorLongDec(dwDay2);
 
       bool fSameDay = (dwDay1 == dwDay2);
-      bool fMidnight = ((dwDay1 + 1 == dwDay2) && (bIdx1 == 47) && (bIdx2 == 47));
-      MonitorCharDec(bIdx1 == bIdx2); MonitorCharDec(fSameDay); MonitorCharDec(fMidnight);
+      bool fPrevDay = ((dwDay1 + 1 == dwDay2) && (bIdx1 == 47) && (bIdx2 == 47));
 
-      if ((bIdx1 == bIdx2) && (fSameDay || fMidnight))
+      MonitorCharDec(bIdx1 == bIdx2); MonitorCharDec(fSameDay); MonitorCharDec(fPrevDay);
+
+      if ((bIdx1 == bIdx2) && (fSameDay || fPrevDay))
       {
         MonitorString("\n the same idx ");
         AddProcedure31(ti1, ibDig, i, db);
@@ -201,7 +213,13 @@ bool    ReadHeader32(void)
       MonitorIntDec(mpwChannels[i]);
     }
 
-    if (SearchDefHouIndex(ti2) == 0) return (++cwErrors32 < 48);
+    if (SearchDefHouIndex(ti2) == false)
+    {
+      bool f = (++cwErrors32 < 48);
+      if (f) ClearProcedure31(true,true);
+      return f;
+    }
+
     cwErrors32 = 0;
 
     ShowProgressDigHou();
