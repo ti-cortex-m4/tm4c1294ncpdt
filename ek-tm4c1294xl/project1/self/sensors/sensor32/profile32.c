@@ -177,7 +177,7 @@ bool    ReadHeader32(void)
       bool fSameDay = (dwDay1 == dwDay2);
       bool fPrevDay = ((dwDay1 + 1 == dwDay2) && (bIdx1 == 47) && (bIdx2 == 47));
 
-      MonitorCharDec(bIdx1 == bIdx2); MonitorCharDec(fSameDay); MonitorCharDec(fPrevDay);
+      MonitorString(" "); MonitorCharDec(bIdx1 == bIdx2); MonitorCharDec(fSameDay); MonitorCharDec(fPrevDay);
 
       if ((bIdx1 == bIdx2) && (fSameDay || fPrevDay))
       {
