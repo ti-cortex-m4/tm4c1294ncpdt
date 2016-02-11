@@ -157,13 +157,16 @@ bool    ReadHeader32(void)
     }
     else
     {
-      uchar idx1 = GetProcedure31Idx(ti1);
-      ulong dw1 = DateToDayIndex(ti1); MonitorString("\n idx1 "); MonitorCharDec(idx1); MonitorString("/"); MonitorLongDec(dw1);
+      uchar bIdx1 = GetProcedure31Idx(ti1);
+      ulong dwDay1 = DateToDayIndex(ti1); MonitorString("\n idx1 "); MonitorCharDec(bIdx1); MonitorString("/"); MonitorLongDec(dwDay1);
 
-      uchar idx2 = GetProcedure31Idx(ti2);
-      ulong dw2 = DateToDayIndex(ti2); MonitorString(" idx2 "); MonitorCharDec(idx2); MonitorString("/"); MonitorLongDec(dw2);
+      uchar bIdx2 = GetProcedure31Idx(ti2);
+      ulong dwDay2 = DateToDayIndex(ti2); MonitorString(" idx2 "); MonitorCharDec(bIdx2); MonitorString("/"); MonitorLongDec(dwDay2);
 
-      if (idx1 == idx2) // && ((dw1 == dw2) || ((dw1+1 == dw2) && (idx1 == 47)))
+      bool fSameDay = (dwDay1 == dwDay2);
+      bool fPrevDay = ((dwDay1 + 1 == dwDay2) && (bIdx1 == 47) && (bIdx2 == 47));
+
+      if ((bIdx1 == bIdx2) && (fSameDay || fPrevDay))
       {
         MonitorString("\n the same idx ");
         AddProcedure31(ti1, ibDig, i, db);
