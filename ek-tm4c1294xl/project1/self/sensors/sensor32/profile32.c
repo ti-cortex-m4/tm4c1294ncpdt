@@ -157,7 +157,7 @@ bool    ReadHeader32(void)
     }
     else
     {
-      uchar idx1 = GetProcedure31Idx(ti1); MonitorString("\n idx1 "); MonitorCharDec(idx1);
+      uchar idx1 = GetProcedure31Idx(ti1);
       ulong dw1 = DateToDayIndex(ti1); MonitorString("\n idx1 "); MonitorCharDec(idx1); MonitorString("/"); MonitorLongDec(dw1);
 
       uchar idx2 = GetProcedure31Idx(ti2);
