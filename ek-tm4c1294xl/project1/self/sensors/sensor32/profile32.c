@@ -138,9 +138,6 @@ bool    ReadHeader32(void)
   MonitorString("\n time1 "); MonitorTime(ti1); if ((ti1.bMinute % 30) != 0) MonitorString(" ? ");
 
 
-  ShowProgressDigHou();
-
-
   time ti2 = mtiProcedure31Dig[ibDig];
   bool new = (ti2.bYear == 0);
   bool add = false;
@@ -161,7 +158,10 @@ bool    ReadHeader32(void)
     else
     {
       uchar idx1 = GetProcedure31Idx(ti1); MonitorString("\n idx1 "); MonitorCharDec(idx1);
-      uchar idx2 = GetProcedure31Idx(ti2); MonitorString(" idx2 "); MonitorCharDec(idx2);
+      ulong dw1 = DateToDayIndex(ti1); MonitorString("\n idx1 "); MonitorCharDec(idx1); MonitorString("/"); MonitorLongDec(dw1);
+
+      uchar idx2 = GetProcedure31Idx(ti2);
+      ulong dw2 = DateToDayIndex(ti2); MonitorString(" idx2 "); MonitorCharDec(idx2); MonitorString("/"); MonitorLongDec(dw2);
 
       if (idx1 == idx2)
       {
@@ -184,9 +184,11 @@ bool    ReadHeader32(void)
   if (add)
   {
     MonitorString("\n time2 "); MonitorTime(ti2);
+
     ulong dw = DateToHouIndex(ti2);
     if (ti2.bMinute % 30 == 0) dw--;
     ti2 = HouIndexToDate(dw);
+
     MonitorString("\n time2 "); MonitorTime(ti2);
 
     for (i=0; i<MAX_LINE_N32; i++)
@@ -198,11 +200,14 @@ bool    ReadHeader32(void)
     if (SearchDefHouIndex(ti2) == 0) return (++cwErrors32 < 48);
     cwErrors32 = 0;
 
-    MakeSpecial(ti2);
+    ShowProgressDigHou();
+
+    MakeSpecial(ti2) ? MonitorString("\n is added") : MonitorString("\n isn't added");
     return MakeStopHou(0);
   }
   else
   {
+    MonitorString("\n don't add");
     return MakeStopHou(0);
   }
 }
