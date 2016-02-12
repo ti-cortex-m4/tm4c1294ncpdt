@@ -41,20 +41,11 @@ bool    DecIndex31(void)
 {
   if (wBaseLast31 == wBaseCurr31)
   {
-    if (iwProfile31 != 0)
-      iwProfile31--;
-    else
-    {
-      ClearProcedure31(true,true);
-      return false;
-    }
+    if (iwProfile31 != 0) iwProfile31--; else return false;
   }
   else
   {
-    if (iwProfile31 != 0)
-      iwProfile31--;
-    else
-      iwProfile31 = wBaseLast31-1;
+    if (iwProfile31 != 0) iwProfile31--; else iwProfile31 = wBaseLast31-1;
   }
 
   return true;
@@ -93,7 +84,7 @@ bool    ReadTop31(void)
 
   cwErrors31 = 0; // количество ошибок чтения
 
-  ClearProcedure31(false,true);
+  ClearProcedure31(true,true);
 
   Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast31,wBaseCurr31); DelayInf();
 
@@ -131,9 +122,7 @@ bool    ReadHeader31(void)
       MonitorString("\n bad CRC");
 
       Clear(); sprintf(szLo+3,"ошибки: %-4u",cwErrors31);
-      bool f = (++cwErrors31 < 48);
-      if (f) ClearProcedure31(true,true);
-      return f;
+      return (++cwErrors31 < 48);
     }
   }
 
@@ -214,11 +203,7 @@ bool    ReadHeader31(void)
     }
 
     if (SearchDefHouIndex(ti2) == false)
-    {
-      bool f = (++cwErrors31 < 48);
-      if (f) ClearProcedure31(true,true);
-      return f;
-    }
+      return (++cwErrors31 < 48);
     else
       cwErrors31 = 0;
 
