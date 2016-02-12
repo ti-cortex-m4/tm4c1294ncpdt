@@ -55,7 +55,6 @@ DEVICES.C
 #include "../sensors/sensor31/procedure31.h"
 #include "../sensors/sensor32/device32.h"
 #include "../sensors/sensor32/profile32.h"
-#include "../serial/monitor.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -4983,9 +4982,9 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_31P:
-      if (ReadHeader31() == 0)
+      if (ReadHeader31() == false)
         DoneProfile();
-      else if (DecIndex31() == 0)
+      else if (DecIndex31() == false)
         DoneProfile();
       else
       {
@@ -5169,7 +5168,6 @@ void    RunDevices(void)
 
 
     case DEV_POSTCORRECT_32P:
-      MonitorOpen(0);
       Clear();
 
       cbRepeat = GetMaxRepeats();
