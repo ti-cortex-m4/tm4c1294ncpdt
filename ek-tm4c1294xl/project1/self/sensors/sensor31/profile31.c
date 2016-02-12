@@ -15,6 +15,7 @@ PROFILE31.C
 #include "../../keyboard/time/key_timedate.h"
 #include "../../time/calendar.h"
 #include "../../time/delay.h"
+#include "../../time/timedate.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../special/special.h"
