@@ -114,7 +114,6 @@ void    QueryHeader32(void)
 }
 
 
-
 bool    ReadHeader32(void)
 {
   HideCurrTime(1);
