@@ -8,7 +8,6 @@ PROFILE32.C
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_energy_spec.h"
 #include "../../memory/mem_profile.h"
-#include "../../memory/mem_limits.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/monitor.h"

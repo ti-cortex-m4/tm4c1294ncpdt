@@ -169,9 +169,9 @@
       break;
 
     case DEV_POSTHEADER_31P:
-      if (ReadHeader31() == 0)
+      if (ReadHeader31() == false)
         DoneProfile();
-      else if (DecIndex31() == 0)
+      else if (DecIndex31() == false)
         DoneProfile();
       else
       {
