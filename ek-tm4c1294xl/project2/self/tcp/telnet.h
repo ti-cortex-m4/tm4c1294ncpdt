@@ -36,26 +36,26 @@ typedef struct
     //! connected telnet session.
     struct tcp_pcb *pConnectPCB;
 
-//    //! This value holds the pointer to the TCP PCB associated with this
-//    //! listening telnet session.
-//    struct tcp_pcb *pListenPCB;
+    //! This value holds the pointer to the TCP PCB associated with this
+    //! listening telnet session.
+    struct tcp_pcb *pListenPCB;
 
     //! The current state of the TCP session.
     tTCPState eTCPState;
 //
 //    //! The current state of the telnet option parser.
 //    tTelnetState eTelnetState;
-//
-//    //! The listen port for the telnet server or the local port for the telnet
-//    //! client.
-//    uint16_t usTelnetLocalPort;
-//
-//    //! The remote port that the telnet client connects to.
-//    uint16_t usTelnetRemotePort;
-//
-//    //! The remote address that the telnet client connects to.
-//    uint32_t ulTelnetRemoteIP;
-//
+
+    //! The listen port for the telnet server or the local port for the telnet
+    //! client.
+    uint16_t usTelnetLocalPort;
+
+    //! The remote port that the telnet client connects to.
+    uint16_t usTelnetRemotePort;
+
+    //! The remote address that the telnet client connects to.
+    uint32_t ulTelnetRemoteIP;
+
 //    //! Flags for various options associated with the telnet session.
 //    uint8_t ucFlags;
 
