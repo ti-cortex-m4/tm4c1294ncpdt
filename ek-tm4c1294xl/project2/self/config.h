@@ -7,6 +7,7 @@ Configuration of the serial to Ethernet converter.
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
+
 //*****************************************************************************
 // During debug, DEBUG_UART may be defined with values 0 or 1 to select which
 // of the two UARTs are used to output debug messages.  Debug messages will be
@@ -21,9 +22,39 @@ Configuration of the serial to Ethernet converter.
 #define DEBUG_MSG while(0) ((int (*)(char *, ...))0)
 #endif
 
+
 //*****************************************************************************
 //! The number of serial to Ethernet ports supported by this module.
 //*****************************************************************************
 #define MAX_S2E_PORTS           2
+
+
+//*****************************************************************************
+//! Bit 0 of field ucFlags in tPortParameters is used to indicate whether to
+//! operate as a telnet server or a telnet client.
+//*****************************************************************************
+#define PORT_FLAG_TELNET_MODE   0x01
+
+//*****************************************************************************
+// Helpful labels used to determine if we are operating as a telnet client or
+// server (based on the state of the PORT_FLAG_TELNET_MODE bit in the ucFlags
+// field of tPortParameters).
+//*****************************************************************************
+#define PORT_TELNET_SERVER      0x00
+#define PORT_TELNET_CLIENT      PORT_FLAG_TELNET_MODE
+
+//*****************************************************************************
+//! Bit 1 of field ucFlags in tPortParameters is used to indicate whether to
+//! bypass the telnet protocol (raw data mode).
+//*****************************************************************************
+#define PORT_FLAG_PROTOCOL      0x02
+
+//*****************************************************************************
+// Helpful labels used to determine if we are operating in raw data mode, or
+// in telnet protocol mode.
+//*****************************************************************************
+#define PORT_PROTOCOL_TELNET    0x00
+#define PORT_PROTOCOL_RAW       PORT_FLAG_PROTOCOL
+
 
 #endif // __CONFIG_H__
