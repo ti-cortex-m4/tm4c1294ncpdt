@@ -24,47 +24,6 @@ static tTelnetSessionData g_sTelnetSession[MAX_S2E_PORTS];
 
 
 
-//*****************************************************************************
-//! Initializes the telnet session(s) for the Serial to Ethernet Module.
-//!
-//! This function initializes the telnet session data parameter block.
-//!
-//! \return None.
-//*****************************************************************************
-void TelnetInit(void)
-{
-    int iPort;
-
-    // Initialize the session data for each supported port.
-    for(iPort = 0; iPort < MAX_S2E_PORTS; iPort++)
-    {
-        g_sTelnetSession[iPort].pConnectPCB = NULL;
-//        g_sTelnetSession[iPort].pListenPCB = NULL;
-        g_sTelnetSession[iPort].eTCPState = STATE_TCP_IDLE;
-//        g_sTelnetSession[iPort].eTelnetState = STATE_NORMAL;
-//        g_sTelnetSession[iPort].ucFlags = 0;
-        g_sTelnetSession[iPort].ulConnectionTimeout = 0;
-//        g_sTelnetSession[iPort].ulMaxTimeout = 0;
-        g_sTelnetSession[iPort].ulSerialPort = MAX_S2E_PORTS;
-//        g_sTelnetSession[iPort].usTelnetRemotePort = 0;
-//        g_sTelnetSession[iPort].usTelnetLocalPort = 0;
-//        g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
-//        g_sTelnetSession[iPort].iBufQRead = 0;
-//        g_sTelnetSession[iPort].iBufQWrite = 0;
-//        g_sTelnetSession[iPort].pBufHead = NULL;
-//        g_sTelnetSession[iPort].pBufCurrent = NULL;
-//        g_sTelnetSession[iPort].ulBufIndex = 0;
-//        g_sTelnetSession[iPort].ulLastTCPSendTime = 0;
-//        g_sTelnetSession[iPort].bLinkLost = false;
-        g_sTelnetSession[iPort].ucConnectCount = 0;
-        g_sTelnetSession[iPort].ucReconnectCount = 0;
-        g_sTelnetSession[iPort].ucErrorCount = 0;
-        g_sTelnetSession[iPort].eLastErr = ERR_OK;
-    }
-}
-
-
-
 static void TCPClientError(void *arg, err_t err)
 {
   tTelnetSessionData *pState = arg;
@@ -475,6 +434,44 @@ err_t TCPClientConnect(ulong dwRemoteIP, uint wRemotePort)
   return eErr;
 }
 
+//*****************************************************************************
+//! Initializes the telnet session(s) for the Serial to Ethernet Module.
+//!
+//! This function initializes the telnet session data parameter block.
+//!
+//! \return None.
+//*****************************************************************************
+void TelnetInit(void)
+{
+    int iPort;
+
+    // Initialize the session data for each supported port.
+    for(iPort = 0; iPort < MAX_S2E_PORTS; iPort++)
+    {
+        g_sTelnetSession[iPort].pConnectPCB = NULL;
+//        g_sTelnetSession[iPort].pListenPCB = NULL;
+        g_sTelnetSession[iPort].eTCPState = STATE_TCP_IDLE;
+//        g_sTelnetSession[iPort].eTelnetState = STATE_NORMAL;
+//        g_sTelnetSession[iPort].ucFlags = 0;
+        g_sTelnetSession[iPort].ulConnectionTimeout = 0;
+//        g_sTelnetSession[iPort].ulMaxTimeout = 0;
+        g_sTelnetSession[iPort].ulSerialPort = MAX_S2E_PORTS;
+//        g_sTelnetSession[iPort].usTelnetRemotePort = 0;
+//        g_sTelnetSession[iPort].usTelnetLocalPort = 0;
+//        g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
+//        g_sTelnetSession[iPort].iBufQRead = 0;
+//        g_sTelnetSession[iPort].iBufQWrite = 0;
+//        g_sTelnetSession[iPort].pBufHead = NULL;
+//        g_sTelnetSession[iPort].pBufCurrent = NULL;
+//        g_sTelnetSession[iPort].ulBufIndex = 0;
+//        g_sTelnetSession[iPort].ulLastTCPSendTime = 0;
+//        g_sTelnetSession[iPort].bLinkLost = false;
+        g_sTelnetSession[iPort].ucConnectCount = 0;
+        g_sTelnetSession[iPort].ucReconnectCount = 0;
+        g_sTelnetSession[iPort].ucErrorCount = 0;
+        g_sTelnetSession[iPort].eLastErr = ERR_OK;
+    }
+}
 
 #if false
 //*****************************************************************************
