@@ -25,6 +25,42 @@ static tTelnetSessionData g_sTelnetSession[MAX_S2E_PORTS];
 
 
 //*****************************************************************************
+//! Free up any queued pbufs associated with at telnet session.
+//!
+//! \param pState is the pointer ot the telnet session state data.
+//!
+//! This will free up any pbufs on the queue, and any currently active pbufs.
+//!
+//! \return None.
+//*****************************************************************************
+static void TelnetFreePbufs(tTelnetSessionData *pState)
+{
+    SYS_ARCH_DECL_PROTECT(lev);
+
+    // This should be done in a protected/critical section.
+    SYS_ARCH_PROTECT(lev);
+
+    // Pop a pbuf off of the rx queue, if one is available, and we are
+    // not already processing a pbuf.
+    if(pState->pBufHead != NULL)
+    {
+        pbuf_free(pState->pBufHead);
+        pState->pBufHead = NULL;
+        pState->pBufCurrent = NULL;
+        pState->ulBufIndex = 0;
+    }
+
+    while(pState->iBufQRead != pState->iBufQWrite)
+    {
+        pbuf_free(pState->pBufQ[pState->iBufQRead]);
+        pState->iBufQRead = ((pState->iBufQRead + 1) % PBUF_POOL_SIZE);
+    }
+
+    // Restore previous level of protection.
+    SYS_ARCH_UNPROTECT(lev);
+}
+
+//*****************************************************************************
 //! Handles lwIP TCP/IP errors.
 //!
 //! \param arg is the telnet state data for this connection.
@@ -70,15 +106,6 @@ static void TelnetError(void *arg, err_t err)
         pState->pBufCurrent = NULL;
         pState->ulBufIndex = 0;
         pState->ulLastTCPSendTime = 0;
-#if CONFIG_RFC2217_ENABLED
-        pState->ucFlags |= (1 << OPT_FLAG_WILL_RFC2217);
-        pState->ucRFC2217FlowControl =
-            TELNET_C2S_FLOWCONTROL_RESUME;
-        pState->ucRFC2217ModemMask = 0;
-        pState->ucRFC2217LineMask = 0xff;
-        pState->ucLastModemState = 0;
-        pState->ucModemState = 0;
-#endif
         pState->bLinkLost = false;
     }
 }
