@@ -32,6 +32,12 @@ MAIN.C
 #define ETHERNET_INT_PRIORITY   0xC0
 
 
+//*****************************************************************************
+//! Keeps track of elapsed time in milliseconds.
+//*****************************************************************************
+uint32_t g_ulSystemTimeMS = 0;
+
+
 
 //
 // Required by lwIP library to support any host-related timer functions.
