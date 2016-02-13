@@ -5,7 +5,9 @@ SERIAL.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "inc/hw_memmap.h"
 #include "driverlib/gpio.h"
+#include "driverlib/uart.h"
 #include "utils/ringbuf.h"
 
 
@@ -19,6 +21,15 @@ static tRingBufObject g_sRxBuf[MAX_S2E_PORTS];
 //! The ring buffers used to hold characters to be sent to the UARTs.
 //*****************************************************************************
 static tRingBufObject g_sTxBuf[MAX_S2E_PORTS];
+
+//*****************************************************************************
+//! The base address for the UART associated with a port.
+//*****************************************************************************
+static const uint32_t g_ulUARTBase[MAX_S2E_PORTS] =
+{
+    UART0_BASE,
+    UART1_BASE
+};
 
 
 
@@ -144,7 +155,7 @@ SerialUARTIntHandler(uint32_t ulPort)
         }
     }
 }
-
+#endif
 //*****************************************************************************
 //
 //! Checks the availability of the serial port output buffer.
@@ -158,20 +169,15 @@ SerialUARTIntHandler(uint32_t ulPort)
 //! buffer.
 //
 //*****************************************************************************
-bool
-SerialSendFull(uint32_t ulPort)
+bool SerialSendFull(uint32_t ulPort)
 {
-    //
     // Check the arguments.
-    //
     ASSERT(ulPort < MAX_S2E_PORTS);
 
-    //
     // Return the number of bytes available in the tx ring buffer.
-    //
     return(RingBufFull(&g_sTxBuf[ulPort]));
 }
-#endif
+
 //*****************************************************************************
 //
 //! Sends a character to the UART.
@@ -188,45 +194,31 @@ SerialSendFull(uint32_t ulPort)
 //*****************************************************************************
 void SerialSend(uint32_t ulPort, uint8_t ucChar)
 {
-    //
     // Check the arguments.
-    //
     ASSERT(ulPort < MAX_S2E_PORTS);
 
-    //
     // Disable the UART transmit interrupt while determining how to handle this
     // character.  Failure to do so could result in the loss of this character,
     // or stalled output due to this character being placed into the UART
     // transmit buffer but never transferred out into the UART FIFO.
-    //
     UARTIntDisable(g_ulUARTBase[ulPort], UART_INT_TX);
 
-    //
     // See if the transmit buffer is empty and there is space in the FIFO.
-    //
     if(RingBufEmpty(&g_sTxBuf[ulPort]) &&
        (UARTSpaceAvail(g_ulUARTBase[ulPort])))
     {
-        //
         // Write this character directly into the FIFO.
-        //
         UARTCharPut(g_ulUARTBase[ulPort], ucChar);
     }
 
-    //
     // See if there is room in the transmit buffer.
-    //
     else if(!RingBufFull(&g_sTxBuf[ulPort]))
     {
-        //
         // Put this character into the transmit buffer.
-        //
         RingBufWriteOne(&g_sTxBuf[ulPort], ucChar);
     }
 
-    //
     // Enable the UART transmit interrupt.
-    //
     UARTIntEnable(g_ulUARTBase[ulPort], UART_INT_TX);
 }
 
