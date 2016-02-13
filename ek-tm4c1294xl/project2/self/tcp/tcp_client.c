@@ -24,60 +24,63 @@ static tTelnetSessionData g_sTelnetSession[MAX_S2E_PORTS];
 
 
 
-static void TCPClientError(void *arg, err_t err)
+//*****************************************************************************
+//! Handles lwIP TCP/IP errors.
+//!
+//! \param arg is the telnet state data for this connection.
+//! \param err is the error that was detected.
+//!
+//! This function is called when the lwIP TCP/IP stack has detected an error.
+//! The connection is no longer valid.
+//!
+//! \return None.
+//*****************************************************************************
+static void TelnetError(void *arg, err_t err)
 {
-  tTelnetSessionData *pState = arg;
+    tTelnetSessionData *pState = arg;
 
-  LOG(("TCPClientError 0x%08x, %d\n", arg, err));
+    DEBUG_MSG("TelnetError 0x%08x, %d\n", arg, err);
 
-  // Increment our error counter.
-  pState->ucErrorCount++;
-  pState->eLastErr = err;
+    // Increment our error counter.
+    pState->ucErrorCount++;
+    pState->eLastErr = err;
 
-//    //
-//    // Free the pbufs associated with this session.
-//    //
-//    TelnetFreePbufs(pState);
-//
-//    //
-//    // Reset the session data for this port.
-//    //
-//    if(pState->pListenPCB == NULL)
-//    {
-//        //
-//        // Attempt to reestablish the telnet connection to the server.
-//        //
-//        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-//                   pState->usTelnetLocalPort, pState->ulSerialPort);
-//    }
-//    else
-//    {
-//        //
-//        // Reinitialize the server state to wait for incoming connections.
-//        //
-//        pState->pConnectPCB = NULL;
-//        pState->eTCPState = STATE_TCP_LISTEN;
-//        pState->eTelnetState = STATE_NORMAL;
-//        pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) |
-//                           (1 << OPT_FLAG_SERVER));
-//        pState->ulConnectionTimeout = 0;
-//        pState->iBufQRead = 0;
-//        pState->iBufQWrite = 0;
-//        pState->pBufHead = NULL;
-//        pState->pBufCurrent = NULL;
-//        pState->ulBufIndex = 0;
-//        pState->ulLastTCPSendTime = 0;
-//#if CONFIG_RFC2217_ENABLED
-//        pState->ucFlags |= (1 << OPT_FLAG_WILL_RFC2217);
-//        pState->ucRFC2217FlowControl =
-//            TELNET_C2S_FLOWCONTROL_RESUME;
-//        pState->ucRFC2217ModemMask = 0;
-//        pState->ucRFC2217LineMask = 0xff;
-//        pState->ucLastModemState = 0;
-//        pState->ucModemState = 0;
-//#endif
-//        pState->bLinkLost = false;
-//    }
+    // Free the pbufs associated with this session.
+    TelnetFreePbufs(pState);
+
+    // Reset the session data for this port.
+    if(pState->pListenPCB == NULL)
+    {
+        // Attempt to reestablish the telnet connection to the server.
+        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
+                   pState->usTelnetLocalPort, pState->ulSerialPort);
+    }
+    else
+    {
+        // Reinitialize the server state to wait for incoming connections.
+        pState->pConnectPCB = NULL;
+        pState->eTCPState = STATE_TCP_LISTEN;
+        pState->eTelnetState = STATE_NORMAL;
+        pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) |
+                           (1 << OPT_FLAG_SERVER));
+        pState->ulConnectionTimeout = 0;
+        pState->iBufQRead = 0;
+        pState->iBufQWrite = 0;
+        pState->pBufHead = NULL;
+        pState->pBufCurrent = NULL;
+        pState->ulBufIndex = 0;
+        pState->ulLastTCPSendTime = 0;
+#if CONFIG_RFC2217_ENABLED
+        pState->ucFlags |= (1 << OPT_FLAG_WILL_RFC2217);
+        pState->ucRFC2217FlowControl =
+            TELNET_C2S_FLOWCONTROL_RESUME;
+        pState->ucRFC2217ModemMask = 0;
+        pState->ucRFC2217LineMask = 0xff;
+        pState->ucLastModemState = 0;
+        pState->ucModemState = 0;
+#endif
+        pState->bLinkLost = false;
+    }
 }
 
 
@@ -395,7 +398,7 @@ static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
   tcp_recv(pcb, TCPClientReceive);
 
   // Setup the TCP error function.
-  tcp_err(pcb, TCPClientError);
+  tcp_err(pcb, TelnetError);
 
   // Setup the TCP polling function/interval.
   tcp_poll(pcb, TCPClientPoll, (1000 / TCP_SLOW_INTERVAL));
@@ -417,7 +420,7 @@ err_t TCPClientConnect(ulong dwRemoteIP, uint wRemotePort)
   tcp_arg(pcb, pState);
 
   // Set the TCP error callback.
-  tcp_err(pcb, TCPClientError);
+  tcp_err(pcb, TelnetError);
 
   // Set the callback that will be made after 3 seconds.  This allows us to reattempt the connection if we do not receive a response.
   tcp_poll(pcb, TCPClientPoll, (3000 / TCP_SLOW_INTERVAL));
