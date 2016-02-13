@@ -99,8 +99,7 @@ static void TelnetError(void *arg, err_t err)
         pState->pConnectPCB = NULL;
         pState->eTCPState = STATE_TCP_LISTEN;
         pState->eTelnetState = STATE_NORMAL;
-        pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) |
-                           (1 << OPT_FLAG_SERVER));
+        pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) | (1 << OPT_FLAG_SERVER));
         pState->ulConnectionTimeout = 0;
         pState->iBufQRead = 0;
         pState->iBufQWrite = 0;
@@ -112,62 +111,61 @@ static void TelnetError(void *arg, err_t err)
     }
 }
 
-
-static err_t TCPClientPoll(void *arg, struct tcp_pcb *pcb)
+//*****************************************************************************
+//! Handles lwIP TCP/IP polling and timeout requests.
+//!
+//! \param arg is the telnet state data for this connection.
+//! \param pcb is the pointer to the TCP control structure.
+//!
+//! This function is called periodically and is used to re-establish dropped
+//! client connections and to reset idle server connections.
+//!
+//! \return This function will return an lwIP defined error code.
+//*****************************************************************************
+static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 {
-//    err_t eError;
-//    struct ip_addr sIPAddr;
-  tTelnetSessionData *pState = arg;
+    err_t eError;
+    struct ip_addr sIPAddr;
+    tTelnetSessionData *pState = arg;
 
-  LOG(("TCPClientPoll 0x%08x, 0x%08x\n", arg, pcb));
+    DEBUG_MSG("TelnetPoll 0x%08x, 0x%08x\n", arg, pcb);
 
-//    //
-//    // Are we operating as a server or a client?
-//    //
-//    if(!pState->pListenPCB)
-//    {
-//        //
-//        // We are operating as a client.  Are we currently trying to reconnect
-//        // to the server?
-//        //
-//        if(pState->eTCPState == STATE_TCP_CONNECTING)
-//        {
-//            //
-//            // We are trying to reconnect but can't have received the connection
-//            // callback in the last 3 seconds so we try connecting again.
-//            //
-//            pState->ucReconnectCount++;
-//            sIPAddr.addr = htonl(pState->ulTelnetRemoteIP);
-//            eError = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort,
-//                                 TelnetConnected);
-//
-//            if(eError != ERR_OK)
-//            {
-//                //
-//                // Remember the error for later.
-//                //
-//                pState->eLastErr = eError;
-//            }
-//        }
-//    }
-//    else
-//    {
-//        //
-//        // We are operating as a server. Increment the timeout value and close
-//        // the telnet connection if the configured timeout has been exceeded.
-//        //
-//        pState->ulConnectionTimeout++;
-//        if((pState->ulMaxTimeout != 0) &&
-//           (pState->ulConnectionTimeout > pState->ulMaxTimeout))
-//        {
-//            //
-//            // Close the telnet connection.
-//            //
-//            tcp_abort(pcb);
-//        }
-//    }
+    // Are we operating as a server or a client?
+    if(!pState->pListenPCB)
+    {
+        // We are operating as a client.  Are we currently trying to reconnect
+        // to the server?
+        if(pState->eTCPState == STATE_TCP_CONNECTING)
+        {
+            // We are trying to reconnect but can't have received the connection
+            // callback in the last 3 seconds so we try connecting again.
+            pState->ucReconnectCount++;
+            sIPAddr.addr = htonl(pState->ulTelnetRemoteIP);
+            eError = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort,
+                                 TelnetConnected);
 
-  return ERR_OK;
+            if(eError != ERR_OK)
+            {
+                // Remember the error for later.
+                pState->eLastErr = eError;
+            }
+        }
+    }
+    else
+    {
+        // We are operating as a server. Increment the timeout value and close
+        // the telnet connection if the configured timeout has been exceeded.
+        pState->ulConnectionTimeout++;
+        if((pState->ulMaxTimeout != 0) &&
+           (pState->ulConnectionTimeout > pState->ulMaxTimeout))
+        {
+            // Close the telnet connection.
+            tcp_abort(pcb);
+        }
+    }
+
+    // Return OK.
+    return(ERR_OK);
 }
 
 //*****************************************************************************
@@ -467,6 +465,281 @@ err_t TCPClientConnect(ulong dwRemoteIP, uint wRemotePort)
 }
 
 //*****************************************************************************
+//! Closes an existing Ethernet connection.
+//!
+//! \param ulSerialPort is the serial port associated with this telnet session.
+//!
+//! This function is called when the the Telnet/TCP session associated with
+//! the specified serial port is to be closed.
+//!
+//! \return None.
+//*****************************************************************************
+void TelnetClose(uint32_t ulSerialPort)
+{
+    tTelnetSessionData *pState;
+
+    DEBUG_MSG("TelnetClose UART %d\n", ulSerialPort);
+
+    // Check the arguments.
+    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+    pState = &g_sTelnetSession[ulSerialPort];
+
+    // If we have a connect PCB, close it down.
+    if(pState->pConnectPCB != NULL)
+    {
+        DEBUG_MSG("Closing connect pcb 0x%08x\n", pState->pConnectPCB);
+
+        // Clear out all of the TCP callbacks.
+        tcp_arg(pState->pConnectPCB, NULL);
+        tcp_sent(pState->pConnectPCB, NULL);
+        tcp_recv(pState->pConnectPCB, NULL);
+        tcp_err(pState->pConnectPCB, NULL);
+        tcp_poll(pState->pConnectPCB, NULL, 1);
+
+        // Abort the existing TCP connection.
+        tcp_abort(pState->pConnectPCB);
+
+        // Clear out any pbufs associated with this session.
+        TelnetFreePbufs(pState);
+    }
+
+    // If we have a listen PCB, close it down as well.
+    if(pState->pListenPCB != NULL)
+    {
+        DEBUG_MSG("Closing listen pcb 0x%08x\n", pState->pListenPCB);
+
+        // Close the TCP connection.
+        tcp_close(pState->pListenPCB);
+
+        // Clear out any pbufs associated with this session.
+        TelnetFreePbufs(pState);
+    }
+
+    // Reset the session data for this port.
+    pState->pConnectPCB = NULL;
+    pState->pListenPCB = NULL;
+    pState->eTCPState = STATE_TCP_IDLE;
+    pState->eTelnetState = STATE_NORMAL;
+    pState->ucFlags = 0;
+    pState->ulConnectionTimeout = 0;
+    pState->ulMaxTimeout = 0;
+    pState->ulSerialPort = MAX_S2E_PORTS;
+    pState->iBufQRead = 0;
+    pState->iBufQWrite = 0;
+    pState->pBufHead = NULL;
+    pState->pBufCurrent = NULL;
+    pState->ulBufIndex = 0;
+    pState->ulLastTCPSendTime = 0;
+#if CONFIG_RFC2217_ENABLED
+    pState->eRFC2217State = STATE_2217_GET_DATA;
+    pState->ucRFC2217Command = 0;
+    pState->ulRFC2217Value = 0;
+    pState->ucRFC2217Index = 0;
+    pState->ucRFC2217IndexMax = 0;
+    pState->ucRFC2217FlowControl = 0;
+    pState->ucRFC2217ModemMask = 0;
+    pState->ucRFC2217LineMask = 0;
+    pState->ucLastModemState = 0;
+    pState->ucModemState = 0;
+#endif
+    pState->bLinkLost = false;
+}
+
+//*****************************************************************************
+//! Opens a telnet server session (client).
+//!
+//! \param ulIPAddr is the IP address of the telnet server.
+//! \param usTelnetRemotePort is port number of the telnet server.
+//! \param usTelnetLocalPort is local port number to connect from.
+//! \param ulSerialPort is the serial port associated with this telnet session.
+//!
+//! This function establishes a TCP session by attempting a connection to
+//! a telnet server.
+//!
+//! \return None.
+//*****************************************************************************
+void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint16_t usTelnetLocalPort, uint32_t ulSerialPort)
+{
+    void *pcb;
+    struct ip_addr sIPAddr;
+    err_t eError;
+    tTelnetSessionData *pState;
+
+    DEBUG_MSG("TelnetOpen %d.%d.%d.%d port %d, UART %d\n",
+              (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF,
+              (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF, usTelnetRemotePort,
+              ulSerialPort);
+
+    // Check the arguments.
+    ASSERT(ulIPAddr != 0);
+    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+    ASSERT(usTelnetRemotePort != 0);
+    ASSERT(usTelnetLocalPort != 0);
+    pState = &g_sTelnetSession[ulSerialPort];
+
+    // Fill in the telnet state data structure for this session in client
+    // mode.
+    pState->pConnectPCB = NULL;
+    pState->pListenPCB = NULL;
+    pState->eTCPState = STATE_TCP_CONNECTING;
+    pState->eTelnetState = STATE_NORMAL;
+    pState->ucFlags = (1 << OPT_FLAG_WILL_SUPPRESS_GA);
+    pState->ulConnectionTimeout = 0;
+    pState->ulMaxTimeout = g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
+    pState->ulSerialPort = ulSerialPort;
+    pState->usTelnetRemotePort = usTelnetRemotePort;
+    pState->usTelnetLocalPort = usTelnetLocalPort;
+    pState->ulTelnetRemoteIP = ulIPAddr;
+    pState->iBufQRead = 0;
+    pState->iBufQWrite = 0;
+    pState->pBufHead = NULL;
+    pState->pBufCurrent = NULL;
+    pState->ulBufIndex = 0;
+    pState->ulLastTCPSendTime = 0;
+
+#if CONFIG_RFC2217_ENABLED
+    pState->ucFlags |= (1 << OPT_FLAG_WILL_RFC2217);
+    pState->ucRFC2217FlowControl =
+        TELNET_C2S_FLOWCONTROL_RESUME;
+    pState->ucRFC2217ModemMask = 0;
+    pState->ucRFC2217LineMask = 0xff;
+    pState->ucLastModemState = 0;
+    pState->ucModemState = 0;
+#endif
+    pState->bLinkLost = false;
+
+    // Make a connection to the remote telnet server.
+    sIPAddr.addr = htonl(ulIPAddr);
+    pcb = tcp_new();
+
+    // Save the requested information and set the TCP callback functions
+    // and arguments.
+    tcp_arg(pcb, pState);
+
+    // Set the TCP error callback.
+    tcp_err(pcb, TelnetError);
+
+    // Set the callback that will be made after 3 seconds.  This allows us to
+    // reattempt the connection if we do not receive a response.
+    tcp_poll(pcb, TelnetPoll, (3000 / TCP_SLOW_INTERVAL));
+
+    // Attempt to connect to the server.
+    eError = tcp_connect(pcb, &sIPAddr, usTelnetRemotePort, TelnetConnected);
+    if(eError != ERR_OK)
+    {
+        // Remember the error for later.
+        pState->eLastErr = eError;
+        return;
+    }
+}
+
+//*****************************************************************************
+//! Opens a telnet server session (listen).
+//!
+//! \param usTelnetPort is the telnet port number to listen on.
+//! \param ulSerialPort is the serial port associated with this telnet session.
+//!
+//! This function establishes a TCP session in listen mode as a telnet server.
+//!
+//! \return None.
+//*****************************************************************************
+void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
+{
+    void *pcb;
+    tTelnetSessionData *pState;
+
+    DEBUG_MSG("TelnetListen port %d, UART %d\n", usTelnetPort, ulSerialPort);
+
+    // Check the arguments.
+    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+    ASSERT(usTelnetPort != 0);
+    pState = &g_sTelnetSession[ulSerialPort];
+
+    // Fill in the telnet state data structure for this session in listen
+    // (in other words, server) mode.
+    pState->pConnectPCB = NULL;
+    pState->eTCPState = STATE_TCP_LISTEN;
+    pState->eTelnetState = STATE_NORMAL;
+    pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) |
+                       (1 << OPT_FLAG_SERVER));
+    pState->ulConnectionTimeout = 0;
+    pState->ulMaxTimeout = g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
+    pState->ulSerialPort = ulSerialPort;
+    pState->usTelnetLocalPort = usTelnetPort;
+    pState->usTelnetRemotePort = 0;
+    pState->ulTelnetRemoteIP = 0;
+    pState->iBufQRead = 0;
+    pState->iBufQWrite = 0;
+    pState->pBufHead = NULL;
+    pState->pBufCurrent = NULL;
+    pState->ulBufIndex = 0;
+    pState->ulLastTCPSendTime = 0;
+
+#if CONFIG_RFC2217_ENABLED
+    pState->ucFlags |= (1 << OPT_FLAG_WILL_RFC2217);
+    pState->ucRFC2217FlowControl =
+        TELNET_C2S_FLOWCONTROL_RESUME;
+    pState->ucRFC2217ModemMask = 0;
+    pState->ucRFC2217LineMask = 0xff;
+    pState->ucLastModemState = 0;
+    pState->ucModemState = 0;
+#endif
+    pState->bLinkLost = false;
+
+    // Initialize the application to listen on the requested telnet port.
+    pcb = tcp_new();
+    tcp_bind(pcb, IP_ADDR_ANY, usTelnetPort);
+    pcb = tcp_listen(pcb);
+    pState->pListenPCB = pcb;
+
+    // Save the requested information and set the TCP callback functions
+    // and arguments.
+    tcp_arg(pcb, pState);
+    tcp_accept(pcb, TelnetAccept);
+}
+
+//*****************************************************************************
+//! Gets the current local port for a connection's telnet session.
+//!
+//! \param ulSerialPort is the serial port associated with this telnet session.
+//!
+//! This function returns the local port in use by the telnet session
+//! associated with the given serial port.  If operating as a telnet server,
+//! this port is the port that is listening for an incoming connection.  If
+//! operating as a telnet client, this is the local port used to connect to
+//! the remote server.
+//!
+//! \return None.
+//*****************************************************************************
+uint16_t TelnetGetLocalPort(uint32_t ulSerialPort)
+{
+    // Check the arguments.
+    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+
+    return(g_sTelnetSession[ulSerialPort].usTelnetLocalPort);
+}
+
+//*****************************************************************************
+//! Gets the current remote port for a connection's telnet session.
+//!
+//! \param ulSerialPort is the serial port associated with this telnet session.
+//!
+//! This function returns the remote port in use by the telnet session
+//! associated with the given serial port.  If operating as a telnet server,
+//! this function will return 0.  If operating as a telnet client, this is the
+//! server port that the connection is using.
+//!
+//! \return None.
+//*****************************************************************************
+uint16_t TelnetGetRemotePort(uint32_t ulSerialPort)
+{
+    // Check the arguments.
+    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+
+    return(g_sTelnetSession[ulSerialPort].usTelnetRemotePort);
+}
+
+//*****************************************************************************
 //! Initializes the telnet session(s) for the Serial to Ethernet Module.
 //!
 //! This function initializes the telnet session data parameter block.
@@ -481,16 +754,16 @@ void TelnetInit(void)
     for(iPort = 0; iPort < MAX_S2E_PORTS; iPort++)
     {
         g_sTelnetSession[iPort].pConnectPCB = NULL;
-//        g_sTelnetSession[iPort].pListenPCB = NULL;
+        g_sTelnetSession[iPort].pListenPCB = NULL;
         g_sTelnetSession[iPort].eTCPState = STATE_TCP_IDLE;
 //        g_sTelnetSession[iPort].eTelnetState = STATE_NORMAL;
 //        g_sTelnetSession[iPort].ucFlags = 0;
         g_sTelnetSession[iPort].ulConnectionTimeout = 0;
 //        g_sTelnetSession[iPort].ulMaxTimeout = 0;
         g_sTelnetSession[iPort].ulSerialPort = MAX_S2E_PORTS;
-//        g_sTelnetSession[iPort].usTelnetRemotePort = 0;
-//        g_sTelnetSession[iPort].usTelnetLocalPort = 0;
-//        g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
+        g_sTelnetSession[iPort].usTelnetRemotePort = 0;
+        g_sTelnetSession[iPort].usTelnetLocalPort = 0;
+        g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
         g_sTelnetSession[iPort].iBufQRead = 0;
         g_sTelnetSession[iPort].iBufQWrite = 0;
         g_sTelnetSession[iPort].pBufHead = NULL;
