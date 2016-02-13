@@ -386,7 +386,7 @@ err_t TCPClientConnect(ulong dwRemoteIP, uint wRemotePort)
 }
 
 
-#ifdef false
+#if false
 //*****************************************************************************
 //
 //! Handles periodic task for telnet sessions.

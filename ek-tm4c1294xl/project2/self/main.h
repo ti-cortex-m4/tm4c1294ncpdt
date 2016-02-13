@@ -14,6 +14,7 @@ MAIN.H
 #include <stdio.h>
 #include "lwip/tcp.h"
 #include "driverlib/debug.h"
+#include "config.h"
 
 
 typedef uint8_t         uchar;
