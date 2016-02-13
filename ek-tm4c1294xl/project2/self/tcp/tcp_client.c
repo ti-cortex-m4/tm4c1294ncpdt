@@ -141,8 +141,7 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
             // callback in the last 3 seconds so we try connecting again.
             pState->ucReconnectCount++;
             sIPAddr.addr = htonl(pState->ulTelnetRemoteIP);
-            eError = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort,
-                                 TelnetConnected);
+            eError = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort, TelnetConnected);
 
             if(eError != ERR_OK)
             {
@@ -782,6 +781,7 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
     tcp_accept(pcb, TelnetAccept);
 }
 
+#if false
 //*****************************************************************************
 //! Gets the current local port for a connection's telnet session.
 //!
@@ -822,6 +822,7 @@ uint16_t TelnetGetRemotePort(uint32_t ulSerialPort)
 
     return(g_sTelnetSession[ulSerialPort].usTelnetRemotePort);
 }
+#endif
 
 //*****************************************************************************
 //! Initializes the telnet session(s) for the Serial to Ethernet Module.
