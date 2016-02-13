@@ -5,11 +5,13 @@ TCP_CLIENT.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "lwip/opt.h"
-#include "lwip/debug.h"
-#include "lwip/stats.h"
-#include "lwip/tcp.h"
-#include "lwip/tcp_impl.h"
+#include "utils/lwiplib.h"
+//#include "lwip/opt.h"
+//#include "lwip/debug.h"
+//#include "lwip/stats.h"
+//#include "lwip/tcp.h"
+//#include "lwip/tcp_impl.h"
+#include "lwip/sys.h"
 #include "../uart/log.h"
 #include "../uart/serial.h"
 #include "telnet.h"
@@ -489,11 +491,11 @@ void TelnetInit(void)
 //        g_sTelnetSession[iPort].usTelnetRemotePort = 0;
 //        g_sTelnetSession[iPort].usTelnetLocalPort = 0;
 //        g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
-//        g_sTelnetSession[iPort].iBufQRead = 0;
-//        g_sTelnetSession[iPort].iBufQWrite = 0;
-//        g_sTelnetSession[iPort].pBufHead = NULL;
-//        g_sTelnetSession[iPort].pBufCurrent = NULL;
-//        g_sTelnetSession[iPort].ulBufIndex = 0;
+        g_sTelnetSession[iPort].iBufQRead = 0;
+        g_sTelnetSession[iPort].iBufQWrite = 0;
+        g_sTelnetSession[iPort].pBufHead = NULL;
+        g_sTelnetSession[iPort].pBufCurrent = NULL;
+        g_sTelnetSession[iPort].ulBufIndex = 0;
 //        g_sTelnetSession[iPort].ulLastTCPSendTime = 0;
 //        g_sTelnetSession[iPort].bLinkLost = false;
         g_sTelnetSession[iPort].ucConnectCount = 0;
