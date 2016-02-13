@@ -24,10 +24,17 @@ TCP_CLIENT.C
 //*****************************************************************************
 static tTelnetSessionData g_sTelnetSession[MAX_S2E_PORTS];
 
+
 //*****************************************************************************
-// Forward References.
+// Forward Reference.
 //*****************************************************************************
 static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err);
+
+
+//*****************************************************************************
+// External Reference.
+//*****************************************************************************
+extern uint32_t g_ulSystemTimeMS;
 
 
 
@@ -395,12 +402,14 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
     // Setup the TCP sent callback function.
     tcp_sent(pcb, TelnetSent);
 
+#ifdef PROTOCOL_TELNET
     // Send the telnet initialization string.
     if((g_sParameters.sPort[pState->ulSerialPort].ucFlags & PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
     {
         tcp_write(pcb, g_pucTelnetInit, sizeof(g_pucTelnetInit), 1);
         tcp_output(pcb);
     }
+#endif
 
     // Return a success code.
     return(ERR_OK);
@@ -479,12 +488,14 @@ static err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
     // Setup the TCP sent callback function.
     tcp_sent(pcb, TelnetSent);
 
+#ifdef PROTOCOL_TELNET
     // Send the telnet initialization string.
     if((g_sParameters.sPort[pState->ulSerialPort].ucFlags & PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
     {
         tcp_write(pcb, g_pucTelnetInit, sizeof(g_pucTelnetInit), 1);
         tcp_output(pcb);
     }
+#endif
 
     // Return a success code.
     return(ERR_OK);
