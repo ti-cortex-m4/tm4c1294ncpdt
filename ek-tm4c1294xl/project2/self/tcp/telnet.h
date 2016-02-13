@@ -68,27 +68,27 @@ typedef struct
     //! This value holds the UART Port Number for this telnet session.
     uint32_t ulSerialPort;
 
-//    //! This value holds an array of pbufs.
-//    struct pbuf *pBufQ[PBUF_POOL_SIZE];
-//
-//    //! This value holds the read index for the pbuf queue.
-//    int iBufQRead;
-//
-//    //! This value holds the write index for the pbuf queue.
-//    int iBufQWrite;
-//
-//    //! This value holds the head of the pbuf that is currently being
-//    //! processed (that has been popped from the queue).
-//    struct pbuf *pBufHead;
-//
-//    //! This value holds the actual pbuf that is being processed within the
-//    //! pbuf chain pointed to by the pbuf head.
-//    struct pbuf *pBufCurrent;
-//
-//    //! This value holds the offset into the payload section of the current
-//    //! pbuf.
-//    uint32_t ulBufIndex;
-//
+    //! This value holds an array of pbufs.
+    struct pbuf *pBufQ[PBUF_POOL_SIZE];
+
+    //! This value holds the read index for the pbuf queue.
+    int iBufQRead;
+
+    //! This value holds the write index for the pbuf queue.
+    int iBufQWrite;
+
+    //! This value holds the head of the pbuf that is currently being
+    //! processed (that has been popped from the queue).
+    struct pbuf *pBufHead;
+
+    //! This value holds the actual pbuf that is being processed within the
+    //! pbuf chain pointed to by the pbuf head.
+    struct pbuf *pBufCurrent;
+
+    //! This value holds the offset into the payload section of the current
+    //! pbuf.
+    uint32_t ulBufIndex;
+
 //    //! The amount of time passed since rx byte count has changed.
 //    uint32_t ulLastTCPSendTime;
 //
