@@ -8,6 +8,40 @@ TELNET.H
 #define __TELNET_H__
 
 //*****************************************************************************
+//! The bit in the flag that is set when the remote client has sent a WILL
+//! request for SUPPRESS_GA and the server has accepted it.
+//*****************************************************************************
+#define OPT_FLAG_WILL_SUPPRESS_GA 0
+
+//*****************************************************************************
+//! The bit in the flag that is set when the remote client has sent a DO
+//! request for SUPPRESS_GA and the server has accepted it.
+//*****************************************************************************
+#define OPT_FLAG_DO_SUPPRESS_GA 1
+
+//*****************************************************************************
+//! The bit in the flag that is set when the remote client has sent a WILL
+//! request for COM_PORT and the server has accepted it.
+//*****************************************************************************
+#if CONFIG_RFC2217_ENABLED
+#define OPT_FLAG_WILL_RFC2217   2
+#endif
+
+//*****************************************************************************
+//! The bit in the flag that is set when the remote client has sent a DO
+//! request for COM_PORT and the server has accepted it.
+//*****************************************************************************
+#if CONFIG_RFC2217_ENABLED
+#define OPT_FLAG_DO_RFC2217     3
+#endif
+
+//*****************************************************************************
+//! The bit in the flag that is set when a connection is operating as a telnet
+//! server.  If clear, this implies that this connection is a telnet client.
+//*****************************************************************************
+#define OPT_FLAG_SERVER         4
+
+//*****************************************************************************
 //! The possible states of the TCP session.
 //*****************************************************************************
 typedef enum
@@ -56,14 +90,14 @@ typedef struct
     //! The remote address that the telnet client connects to.
     uint32_t ulTelnetRemoteIP;
 
-//    //! Flags for various options associated with the telnet session.
-//    uint8_t ucFlags;
+    //! Flags for various options associated with the telnet session.
+    uint8_t ucFlags;
 
     //! A counter for the TCP connection timeout.
     uint32_t ulConnectionTimeout;
 
-//    //! The max time for TCP connection timeout counter.
-//    uint32_t ulMaxTimeout;
+    //! The max time for TCP connection timeout counter.
+    uint32_t ulMaxTimeout;
 
     //! This value holds the UART Port Number for this telnet session.
     uint32_t ulSerialPort;
@@ -89,11 +123,11 @@ typedef struct
     //! pbuf.
     uint32_t ulBufIndex;
 
-//    //! The amount of time passed since rx byte count has changed.
-//    uint32_t ulLastTCPSendTime;
-//
-//    //! The indication that link layer has been lost.
-//    bool bLinkLost;
+    //! The amount of time passed since rx byte count has changed.
+    uint32_t ulLastTCPSendTime;
+
+    //! The indication that link layer has been lost.
+    bool bLinkLost;
 
     //! Debug and diagnostic counters.
     uint8_t ucErrorCount;
