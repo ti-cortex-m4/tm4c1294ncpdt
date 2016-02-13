@@ -10,16 +10,57 @@ TCP_CLIENT.C
 #include "lwip/stats.h"
 #include "lwip/tcp.h"
 #include "lwip/tcp_impl.h"
-#include "../state.h"
 #include "../uart/log.h"
 #include "../uart/serial.h"
 #include "telnet.h"
 #include "tcp_client.h"
 
 
-err_t TCPClientInit(void)
+
+//*****************************************************************************
+//! The telnet session data array, for use in the telnet handler function.
+//*****************************************************************************
+static tTelnetSessionData g_sTelnetSession[MAX_S2E_PORTS];
+
+
+
+//*****************************************************************************
+//! Initializes the telnet session(s) for the Serial to Ethernet Module.
+//!
+//! This function initializes the telnet session data parameter block.
+//!
+//! \return None.
+//*****************************************************************************
+void TelnetInit(void)
 {
-  return ERR_OK;
+    int iPort;
+
+    // Initialize the session data for each supported port.
+    for(iPort = 0; iPort < MAX_S2E_PORTS; iPort++)
+    {
+        g_sTelnetSession[iPort].pConnectPCB = NULL;
+        g_sTelnetSession[iPort].pListenPCB = NULL;
+        g_sTelnetSession[iPort].eTCPState = STATE_TCP_IDLE;
+        g_sTelnetSession[iPort].eTelnetState = STATE_NORMAL;
+        g_sTelnetSession[iPort].ucFlags = 0;
+        g_sTelnetSession[iPort].ulConnectionTimeout = 0;
+        g_sTelnetSession[iPort].ulMaxTimeout = 0;
+        g_sTelnetSession[iPort].ulSerialPort = MAX_S2E_PORTS;
+        g_sTelnetSession[iPort].usTelnetRemotePort = 0;
+        g_sTelnetSession[iPort].usTelnetLocalPort = 0;
+        g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
+        g_sTelnetSession[iPort].iBufQRead = 0;
+        g_sTelnetSession[iPort].iBufQWrite = 0;
+        g_sTelnetSession[iPort].pBufHead = NULL;
+        g_sTelnetSession[iPort].pBufCurrent = NULL;
+        g_sTelnetSession[iPort].ulBufIndex = 0;
+        g_sTelnetSession[iPort].ulLastTCPSendTime = 0;
+        g_sTelnetSession[iPort].bLinkLost = false;
+        g_sTelnetSession[iPort].ucConnectCount = 0;
+        g_sTelnetSession[iPort].ucReconnectCount = 0;
+        g_sTelnetSession[iPort].ucErrorCount = 0;
+        g_sTelnetSession[iPort].eLastErr = ERR_OK;
+    }
 }
 
 

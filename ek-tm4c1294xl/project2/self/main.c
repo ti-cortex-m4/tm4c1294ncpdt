@@ -14,7 +14,6 @@ MAIN.C
 #include "utils/lwiplib_patched.h"
 #include "drivers/pinout.h"
 #include "settings.h"
-#include "state.h"
 #include "systick.h"
 #include "timer1.h"
 #include "uart/uart.h"
@@ -118,7 +117,9 @@ int     main(void)
 
   InitUDP_Handler();
   InitTCP_Handler();
-  TCPClientInit();
+
+  // Initialize the telnet module.
+  TelnetInit();
 
   InitSysTick(dwSysClockFreq);
   InitUART(dwSysClockFreq);

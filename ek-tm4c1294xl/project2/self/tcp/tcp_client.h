@@ -4,6 +4,6 @@ TCP_CLIENT.H
 
 ------------------------------------------------------------------------------*/
 
-err_t TCPClientInit(void);
+extern void TelnetInit(void);
 
 err_t TCPClientConnect(ulong dwRemoteIP, uint wRemotePort);
