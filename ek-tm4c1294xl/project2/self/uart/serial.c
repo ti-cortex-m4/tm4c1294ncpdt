@@ -5,6 +5,7 @@ SERIAL.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "driverlib/gpio.h"
 #include "utils/ringbuf.h"
 
 
@@ -170,7 +171,7 @@ SerialSendFull(uint32_t ulPort)
     //
     return(RingBufFull(&g_sTxBuf[ulPort]));
 }
-
+#endif
 //*****************************************************************************
 //
 //! Sends a character to the UART.
@@ -185,8 +186,7 @@ SerialSendFull(uint32_t ulPort)
 //! \return None.
 //
 //*****************************************************************************
-void
-SerialSend(uint32_t ulPort, uint8_t ucChar)
+void SerialSend(uint32_t ulPort, uint8_t ucChar)
 {
     //
     // Check the arguments.
@@ -229,7 +229,7 @@ SerialSend(uint32_t ulPort, uint8_t ucChar)
     //
     UARTIntEnable(g_ulUARTBase[ulPort], UART_INT_TX);
 }
-#endif
+
 //*****************************************************************************
 //
 //! Receives a character from the UART.
@@ -259,6 +259,7 @@ long SerialReceive(uint32_t ulPort)
     // Read a single character.
     ulData = (long)RingBufReadOne(&g_sRxBuf[ulPort]);
 
+#ifdef SERIAL_FLOW_CONTROL
     // If flow control is enabled, check the status of the RX buffer to
     // determine if flow control GPIO needs to be de-asserted.
     if(g_sParameters.sPort[ulPort].ucFlowControl == SERIAL_FLOW_CONTROL_HW)
@@ -272,6 +273,7 @@ long SerialReceive(uint32_t ulPort)
             GPIOPinWrite(g_ulFlowOutBase[ulPort], g_ulFlowOutPin[ulPort], 0);
         }
     }
+#endif
 
     // Return the data that was read.
     return(ulData);
