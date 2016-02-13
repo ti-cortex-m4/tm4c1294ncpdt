@@ -6,4 +6,4 @@ STATE.H
 
 void InitState(void);
 
-tState *GetState(uchar u);
+tTelnetSessionData *GetState(uchar u);

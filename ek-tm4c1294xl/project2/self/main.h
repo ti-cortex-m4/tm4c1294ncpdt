@@ -101,12 +101,12 @@ typedef struct
 //    //! The max time for TCP connection timeout counter.
 //    //
 //    uint32_t ulMaxTimeout;
-//
-//    //
-//    //! This value holds the UART Port Number for this telnet session.
-//    //
-//    uint32_t ulSerialPort;
-//
+
+    //
+    //! This value holds the UART Port Number for this telnet session.
+    //
+    uint32_t ulSerialPort;
+
 //    //
 //    //! This value holds an array of pbufs.
 //    //
@@ -157,7 +157,7 @@ typedef struct
 
   // The last error reported by lwIP while attempting to make a connection.
   err_t eLastErr;
-} tState;
+} tTelnetSessionData;
 
 
 #endif
