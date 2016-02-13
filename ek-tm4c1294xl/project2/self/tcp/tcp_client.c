@@ -325,8 +325,7 @@ static err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 //!
 //! \return This function will return an lwIP defined error code.
 //*****************************************************************************
-static err_t
-TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
+static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tTelnetSessionData *pState = arg;
 
@@ -405,33 +404,6 @@ TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
     // Return a success code.
     return(ERR_OK);
-}
-
-err_t TCPClientConnect(ulong dwRemoteIP, uint wRemotePort)
-{
-  tTelnetSessionData *pState = GetState(0);
-
-  void *pcb = tcp_new();
-
-  // Save the requested information and set the TCP callback functions and arguments.
-  tcp_arg(pcb, pState);
-
-  // Set the TCP error callback.
-  tcp_err(pcb, TelnetError);
-
-  // Set the callback that will be made after 3 seconds.  This allows us to reattempt the connection if we do not receive a response.
-  tcp_poll(pcb, TelnetPoll, (3000 / TCP_SLOW_INTERVAL));
-
-  struct ip_addr sIPAddr;
-  sIPAddr.addr = htonl(dwRemoteIP);
-
-  err_t eErr = tcp_connect(pcb, &sIPAddr, wRemotePort, TelnetConnected);
-  if (eErr != ERR_OK)
-  {
-    pState->eLastErr = eErr;
-  }
-
-  return eErr;
 }
 
 //*****************************************************************************
@@ -584,18 +556,6 @@ void TelnetClose(uint32_t ulSerialPort)
     pState->pBufCurrent = NULL;
     pState->ulBufIndex = 0;
     pState->ulLastTCPSendTime = 0;
-#if CONFIG_RFC2217_ENABLED
-    pState->eRFC2217State = STATE_2217_GET_DATA;
-    pState->ucRFC2217Command = 0;
-    pState->ulRFC2217Value = 0;
-    pState->ucRFC2217Index = 0;
-    pState->ucRFC2217IndexMax = 0;
-    pState->ucRFC2217FlowControl = 0;
-    pState->ucRFC2217ModemMask = 0;
-    pState->ucRFC2217LineMask = 0;
-    pState->ucLastModemState = 0;
-    pState->ucModemState = 0;
-#endif
     pState->bLinkLost = false;
 }
 
@@ -650,16 +610,6 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint16_t usTelne
     pState->pBufCurrent = NULL;
     pState->ulBufIndex = 0;
     pState->ulLastTCPSendTime = 0;
-
-#if CONFIG_RFC2217_ENABLED
-    pState->ucFlags |= (1 << OPT_FLAG_WILL_RFC2217);
-    pState->ucRFC2217FlowControl =
-        TELNET_C2S_FLOWCONTROL_RESUME;
-    pState->ucRFC2217ModemMask = 0;
-    pState->ucRFC2217LineMask = 0xff;
-    pState->ucLastModemState = 0;
-    pState->ucModemState = 0;
-#endif
     pState->bLinkLost = false;
 
     // Make a connection to the remote telnet server.
@@ -727,16 +677,6 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
     pState->pBufCurrent = NULL;
     pState->ulBufIndex = 0;
     pState->ulLastTCPSendTime = 0;
-
-#if CONFIG_RFC2217_ENABLED
-    pState->ucFlags |= (1 << OPT_FLAG_WILL_RFC2217);
-    pState->ucRFC2217FlowControl =
-        TELNET_C2S_FLOWCONTROL_RESUME;
-    pState->ucRFC2217ModemMask = 0;
-    pState->ucRFC2217LineMask = 0xff;
-    pState->ucLastModemState = 0;
-    pState->ucModemState = 0;
-#endif
     pState->bLinkLost = false;
 
     // Initialize the application to listen on the requested telnet port.
