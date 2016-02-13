@@ -13,7 +13,7 @@ STATE.C
 
 
 
-static tState           mtState[UART_COUNT];
+static tTelnetSessionData           mtState[UART_COUNT];
 
 
 
@@ -49,7 +49,7 @@ void InitState(void)
 
 
 
-tState *GetState(uchar u)
+tTelnetSessionData *GetState(uchar u)
 {
   ASSERT(u < UART_COUNT);
   return &mtState[u];

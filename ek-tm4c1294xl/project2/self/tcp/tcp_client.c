@@ -25,7 +25,7 @@ err_t TCPClientInit(void)
 
 static void TCPClientError(void *arg, err_t err)
 {
-  tState *pState = arg;
+  tTelnetSessionData *pState = arg;
 
   LOG(("TCPClientError 0x%08x, %d\n", arg, err));
 
@@ -84,7 +84,7 @@ static err_t TCPClientPoll(void *arg, struct tcp_pcb *pcb)
 {
 //    err_t eError;
 //    struct ip_addr sIPAddr;
-  tState *pState = arg;
+  tTelnetSessionData *pState = arg;
 
   LOG(("TCPClientPoll 0x%08x, 0x%08x\n", arg, pcb));
 
@@ -175,7 +175,7 @@ static void TelnetProcessCharacter(uint8_t ucChar, tTelnetSessionData *pState)
 //*****************************************************************************
 static err_t TCPClientReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 {
-  tState *pState = arg;
+  tTelnetSessionData *pState = arg;
 //    int iNextWrite;
 //    SYS_ARCH_DECL_PROTECT(lev);
 
@@ -285,23 +285,36 @@ static err_t TCPClientReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, er
   return ERR_OK;
 }
 
-
-static err_t TCPClientSent(void *arg, struct tcp_pcb *pcb, u16_t len)
+//*****************************************************************************
+//
+//! Handles acknowledgment of data transmitted via Ethernet.
+//!
+//! \param arg is the telnet state data for this connection.
+//! \param pcb is the pointer to the TCP control structure.
+//! \param len is the length of the data transmitted.
+//!
+//! This function is called when the lwIP TCP/IP stack has received an
+//! acknowledgment for data that has been transmitted.
+//!
+//! \return This function will return an lwIP defined error code.
+//
+//*****************************************************************************
+static err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
-  tState *pState = arg;
+    tTelnetSessionData *pState = arg;
 
-  LOG(("TCPClientSent 0x%08x, 0x%08x, %d\n", arg, pcb, len));
+    DEBUG_MSG("TelnetSent 0x%08x, 0x%08x, %d\n", arg, pcb, len);
 
-  // Reset the connection timeout.
-  pState->ulConnectionTimeout = 0;
+    // Reset the connection timeout.
+    pState->ulConnectionTimeout = 0;
 
-  return ERR_OK;
+    // Return OK.
+    return(ERR_OK);
 }
-
 
 static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
-  tState *pState = arg;
+  tTelnetSessionData *pState = arg;
 
   LOG(("TCPClientConnected 0x%08x, 0x%08x, %d\n", arg, pcb, err));
 
@@ -387,7 +400,7 @@ static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
   tcp_poll(pcb, TCPClientPoll, (1000 / TCP_SLOW_INTERVAL));
 
   // Setup the TCP sent callback function.
-  tcp_sent(pcb, TCPClientSent);
+  tcp_sent(pcb, TelnetSent);
 
   return ERR_OK;
 }
@@ -395,7 +408,7 @@ static err_t TCPClientConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
 err_t TCPClientConnect(ulong dwRemoteIP, uint wRemotePort)
 {
-  tState *pState = GetState(0);
+  tTelnetSessionData *pState = GetState(0);
 
   void *pcb = tcp_new();
 
