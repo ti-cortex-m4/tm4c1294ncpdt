@@ -20,22 +20,6 @@ TELNET.H
 #define OPT_FLAG_DO_SUPPRESS_GA 1
 
 //*****************************************************************************
-//! The bit in the flag that is set when the remote client has sent a WILL
-//! request for COM_PORT and the server has accepted it.
-//*****************************************************************************
-#if CONFIG_RFC2217_ENABLED
-#define OPT_FLAG_WILL_RFC2217   2
-#endif
-
-//*****************************************************************************
-//! The bit in the flag that is set when the remote client has sent a DO
-//! request for COM_PORT and the server has accepted it.
-//*****************************************************************************
-#if CONFIG_RFC2217_ENABLED
-#define OPT_FLAG_DO_RFC2217     3
-#endif
-
-//*****************************************************************************
 //! The bit in the flag that is set when a connection is operating as a telnet
 //! server.  If clear, this implies that this connection is a telnet client.
 //*****************************************************************************
