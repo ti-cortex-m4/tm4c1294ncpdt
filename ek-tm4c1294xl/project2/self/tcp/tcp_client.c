@@ -12,6 +12,7 @@ TCP_CLIENT.C
 #include "lwip/tcp_impl.h"
 #include "../state.h"
 #include "../uart/log.h"
+#include "../uart/serial.h"
 #include "telnet.h"
 #include "tcp_client.h"
 
