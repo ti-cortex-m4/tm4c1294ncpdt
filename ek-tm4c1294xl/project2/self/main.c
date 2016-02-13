@@ -111,7 +111,6 @@ int     main(void)
   pbMAC[5] = ((dwUser1 >> 16) & 0xFF);
 
   InitSettings();
-  InitState();
 
   lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
