@@ -1159,9 +1159,8 @@ SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand)
     //
     SerialUARTEnable(ulPort);
 }
-
+#endif
 //*****************************************************************************
-//
 //! Configures the serial port to a default setup.
 //!
 //! \param ulPort is the UART port number to be accessed.
@@ -1169,60 +1168,40 @@ SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand)
 //! This function resets the serial port to a default configuration.
 //!
 //! \return None.
-//
 //*****************************************************************************
-void
-SerialSetDefault(uint32_t ulPort)
+void SerialSetDefault(uint32_t ulPort)
 {
-    //
     // Check the arguments.
-    //
     ASSERT(ulPort < MAX_S2E_PORTS);
 
-    //
     // Disable interrupts.
-    //
     IntDisable(g_ulUARTInterrupt[ulPort]);
 
-    //
     // Set the baud rate.
-    //
     SerialSetBaudRate(ulPort, g_psDefaultParameters->sPort[ulPort].ulBaudRate);
 
-    //
     // Set the data size.
-    //
     SerialSetDataSize(ulPort, g_psDefaultParameters->sPort[ulPort].ucDataSize);
 
-    //
     // Set the parity.
-    //
     SerialSetParity(ulPort, g_psDefaultParameters->sPort[ulPort].ucParity);
 
-    //
     // Set the stop bits.
-    //
     SerialSetStopBits(ulPort, g_psDefaultParameters->sPort[ulPort].ucStopBits);
 
-    //
     // Set the flow control.
-    //
     SerialSetFlowControl(ulPort,
                       g_psDefaultParameters->sPort[ulPort].ucFlowControl);
 
-    //
     // Purge the Serial Tx/Rx Ring Buffers.
-    //
     SerialPurgeData(ulPort, 0x03);
 
-    //
     // (Re)enable the UART transmit and receive interrupts.
-    //
     UARTIntEnable(g_ulUARTBase[ulPort],
                  (UART_INT_RX | UART_INT_RT | UART_INT_TX));
     IntEnable(g_ulUARTInterrupt[ulPort]);
 }
-
+#if false
 //*****************************************************************************
 //
 //! Configures the serial port according to the current working parameter
