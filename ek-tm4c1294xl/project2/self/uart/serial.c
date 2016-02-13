@@ -33,8 +33,6 @@ static const uint32_t g_ulUARTBase[MAX_S2E_PORTS] =
 
 
 
-#if false
-
 //*****************************************************************************
 //
 //! Handles the UART interrupt.
@@ -49,8 +47,7 @@ static const uint32_t g_ulUARTBase[MAX_S2E_PORTS] =
 //! \return None.
 //
 //*****************************************************************************
-static void
-SerialUARTIntHandler(uint32_t ulPort)
+static void SerialUARTIntHandler(uint32_t ulPort)
 {
     uint32_t ulStatus;
     uint8_t ucChar;
@@ -155,7 +152,39 @@ SerialUARTIntHandler(uint32_t ulPort)
         }
     }
 }
-#endif
+
+//*****************************************************************************
+//
+//! Handles the UART0 interrupt.
+//!
+//! This function is called when the UART generates an interrupt.  An interrupt
+//! will be generated when data is received and when the transmit FIFO becomes
+//! half empty.  The transmit and receive FIFOs are processed as appropriate.
+//!
+//! \return None.
+//
+//*****************************************************************************
+void SerialUART0IntHandler(void)
+{
+    SerialUARTIntHandler(0);
+}
+
+//*****************************************************************************
+//
+//! Handles the UART1 interrupt.
+//!
+//! This function is called when the UART generates an interrupt.  An interrupt
+//! will be generated when data is received and when the transmit FIFO becomes
+//! half empty.  The transmit and receive FIFOs are processed as appropriate.
+//!
+//! \return None.
+//
+//*****************************************************************************
+void SerialUART1IntHandler(void)
+{
+    SerialUARTIntHandler(1);
+}
+
 //*****************************************************************************
 //
 //! Checks the availability of the serial port output buffer.
