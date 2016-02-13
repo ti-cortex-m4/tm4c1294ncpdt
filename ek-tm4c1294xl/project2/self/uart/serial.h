@@ -3,3 +3,5 @@ SERIAL.H
 
 
 ------------------------------------------------------------------------------*/
+
+extern uint32_t SerialReceiveAvailable(uint32_t ulPort);

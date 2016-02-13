@@ -4,6 +4,23 @@ SERIAL.C
 
 ------------------------------------------------------------------------------*/
 
+#include "../main.h"
+#include "utils/ringbuf.h"
+
+
+
+//*****************************************************************************
+//! The ring buffers used to hold characters received from the UARTs.
+//*****************************************************************************
+static tRingBufObject g_sRxBuf[MAX_S2E_PORTS];
+
+//*****************************************************************************
+//! The ring buffers used to hold characters to be sent to the UARTs.
+//*****************************************************************************
+static tRingBufObject g_sTxBuf[MAX_S2E_PORTS];
+
+
+
 #if false
 
 //*****************************************************************************
@@ -274,9 +291,8 @@ SerialReceive(uint32_t ulPort)
     //
     return(ulData);
 }
-
+#endif
 //*****************************************************************************
-//
 //! Returns number of characters available in the serial ring buffer.
 //!
 //! \param ulPort is the UART port number to be accessed.
@@ -284,21 +300,13 @@ SerialReceive(uint32_t ulPort)
 //! This function will return the number of characters available in the
 //! serial ring buffer.
 //!
-//! \return The number of characters available in the ring buffer..
-//
+//! \return The number of characters available in the ring buffer.
 //*****************************************************************************
-uint32_t
-SerialReceiveAvailable(uint32_t ulPort)
+uint32_t SerialReceiveAvailable(uint32_t ulPort)
 {
-    //
     // Check the arguments.
-    //
     ASSERT(ulPort < MAX_S2E_PORTS);
 
-    //
     // Return the value.
-    //
     return(RingBufUsed(&g_sRxBuf[ulPort]));
 }
-
-#endif
