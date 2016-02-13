@@ -52,6 +52,7 @@ DEVICES.C
 #include "../sensors/unpack_w.h"
 #include "../sensors/sensor31/device31.h"
 #include "../sensors/sensor31/profile31.h"
+#include "../sensors/sensor31/procedure31.h"
 #include "../sensors/sensor32/device32.h"
 #include "../sensors/sensor32/profile32.h"
 #include "../serial/ports.h"
@@ -4981,9 +4982,9 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_31P:
-      if (ReadHeader31() == 0)
+      if (ReadHeader31() == false)
         DoneProfile();
-      else if (DecIndex31() == 0)
+      else if (DecIndex31() == false)
         DoneProfile();
       else
       {
@@ -5219,9 +5220,9 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_32P:
-      if (ReadHeader32() == 0)
+      if (ReadHeader32() == false)
         DoneProfile();
-      else if (DecIndex32() == 0)
+      else if (DecIndex32() == false)
         DoneProfile();
       else
       {

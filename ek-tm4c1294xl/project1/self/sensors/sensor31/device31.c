@@ -103,7 +103,9 @@ bool    ReadOpen31(void)
   Clear(); sprintf(szLo+3,"версия: %2u",bVersion31);
   DelayInf(); Clear();
 
-  if (bVersion31 == 49) return true;
+  if ((bVersion31 == 48) ||
+      (bVersion31 == 49))
+    return true;
 
   ShowLo(szNoVersion);
   DelayInf(); Clear();
@@ -120,9 +122,7 @@ uchar   GetVersion31(void)
 
 bool    NewVersion31(void)
 {
-  return ((bVersion31 == 36) ||
-          (bVersion31 == 37) ||
-          (bVersion31 == 49));
+  return true;
 }
 
 
