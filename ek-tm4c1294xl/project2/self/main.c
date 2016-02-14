@@ -145,12 +145,10 @@ int     main(void)
   for(ulLoop = 0; ulLoop < MAX_S2E_PORTS; ulLoop++)
   {
       // Are we to operate as a telnet server?
-      if((g_sParameters.sPort[ulLoop].ucFlags & PORT_FLAG_TELNET_MODE) ==
-         PORT_TELNET_SERVER)
+      if((g_sParameters.sPort[ulLoop].ucFlags & PORT_FLAG_TELNET_MODE) == PORT_TELNET_SERVER)
       {
           // Yes - start listening on the required port.
-          TelnetListen(g_sParameters.sPort[ulLoop].usTelnetLocalPort,
-                       ulLoop);
+          TelnetListen(g_sParameters.sPort[ulLoop].usTelnetLocalPort, ulLoop);
       }
       else
       {
