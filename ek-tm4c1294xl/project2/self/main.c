@@ -140,6 +140,29 @@ int     main(void)
   IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
+#if false
+  // Initialize the telnet session(s).
+  for(ulLoop = 0; ulLoop < MAX_S2E_PORTS; ulLoop++)
+  {
+      // Are we to operate as a telnet server?
+      if((g_sParameters.sPort[ulLoop].ucFlags & PORT_FLAG_TELNET_MODE) ==
+         PORT_TELNET_SERVER)
+      {
+          // Yes - start listening on the required port.
+          TelnetListen(g_sParameters.sPort[ulLoop].usTelnetLocalPort,
+                       ulLoop);
+      }
+      else
+      {
+          // No - we are a client so initiate a connection to the desired
+          // IP address using the configured ports.
+          TelnetOpen(g_sParameters.sPort[ulLoop].ulTelnetIPAddr,
+                     g_sParameters.sPort[ulLoop].usTelnetRemotePort,
+                     g_sParameters.sPort[ulLoop].usTelnetLocalPort, ulLoop);
+      }
+  }
+#endif
+
   IntMasterEnable();
 
   while(1)
