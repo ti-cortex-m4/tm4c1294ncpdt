@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-TCP_CLIENT.C
+TELNET.C
 
 
 ------------------------------------------------------------------------------*/
@@ -11,7 +11,7 @@ TCP_CLIENT.C
 #include "../uart/serial.h"
 #include "../settings2.h"
 #include "telnet_include.h"
-#include "tcp_client.h"
+#include "telnet.h"
 
 
 

@@ -20,7 +20,7 @@ MAIN.C
 #include "uart/log.h"
 #include "udp/udp_handler.h"
 #include "tcp/tcp_handler.h"
-#include "tcp/tcp_client.h"
+#include "tcp/telnet.h"
 
 
 
