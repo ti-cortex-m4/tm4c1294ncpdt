@@ -5,8 +5,15 @@ SERIAL.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
+#include "inc/hw_sysctl.h"
+#include "inc/hw_types.h"
+#include "inc/hw_uart.h"
+#include "driverlib/debug.h"
 #include "driverlib/gpio.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "utils/ringbuf.h"
 
@@ -247,7 +254,6 @@ SerialGPIOAIntHandler(void)
     // Call the generic flow control interrupt routine.
     SerialFlowInIntHandler(1);
 }
-#endif
 
 //*****************************************************************************
 //! Enables transmitting and receiving.
@@ -276,7 +282,7 @@ static void SerialUARTEnable(uint32_t ulPort)
         HWREG(g_ulUARTBase[ulPort] + UART_O_CTL) |= UART_CTL_TXE;
     }
 }
-
+#endif
 //*****************************************************************************
 //! Checks the availability of the serial port output buffer.
 //!
