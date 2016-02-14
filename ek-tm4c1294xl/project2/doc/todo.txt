@@ -38,3 +38,9 @@ SERIAL_FLOW_CONTROL_HW
 
 pState->eLastErr = err;
 pState->eLastErr = eError;     
+
+http://docs.tibbo.com/soism/index.html?s_e_routing.htm
+http://docs.tibbo.com/soism/index.html?setting_rm.htm
+http://docs.tibbo.com/soism/index.html?application_notes.htm
+
+TelnetWriteDiagInfo
