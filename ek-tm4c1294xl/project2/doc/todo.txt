@@ -34,3 +34,4 @@ for(q = p, pucData = q->payload; q != NULL; q = q->next)
           (pState->pConnectPCB->snd_queuelen < TCP_SND_QUEUELEN))
         {
                 
+SERIAL_FLOW_CONTROL_HW                
