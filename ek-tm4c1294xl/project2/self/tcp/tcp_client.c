@@ -10,7 +10,7 @@ TCP_CLIENT.C
 #include "../uart/log.h"
 #include "../uart/serial.h"
 #include "../settings2.h"
-#include "telnet.h"
+#include "telnet_include.h"
 #include "tcp_client.h"
 
 
