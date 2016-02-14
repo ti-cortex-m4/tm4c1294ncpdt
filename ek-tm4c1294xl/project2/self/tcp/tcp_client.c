@@ -9,6 +9,7 @@ TCP_CLIENT.C
 #include "lwip/sys.h"
 #include "../uart/log.h"
 #include "../uart/serial.h"
+#include "../settings2.h"
 #include "telnet.h"
 #include "tcp_client.h"
 
@@ -602,7 +603,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint16_t usTelne
 //    pState->eTelnetState = STATE_NORMAL;
     pState->ucFlags = (1 << OPT_FLAG_WILL_SUPPRESS_GA);
     pState->ulConnectionTimeout = 0;
-    pState->ulMaxTimeout = g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
+    pState->ulMaxTimeout = getTelnetTimeout(ulSerialPort); // g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
     pState->ulSerialPort = ulSerialPort;
     pState->usTelnetRemotePort = usTelnetRemotePort;
     pState->usTelnetLocalPort = usTelnetLocalPort;
@@ -669,7 +670,7 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
 //    pState->eTelnetState = STATE_NORMAL;
     pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) | (1 << OPT_FLAG_SERVER));
     pState->ulConnectionTimeout = 0;
-    pState->ulMaxTimeout = g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
+    pState->ulMaxTimeout = getTelnetTimeout(ulSerialPort); // g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
     pState->ulSerialPort = ulSerialPort;
     pState->usTelnetLocalPort = usTelnetPort;
     pState->usTelnetRemotePort = 0;
