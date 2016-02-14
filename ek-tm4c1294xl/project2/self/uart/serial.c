@@ -65,7 +65,7 @@ static void SerialUARTIntHandler(uint32_t ulPort)
             // Get the next character from the receive FIFO.
             ucChar = UARTCharGet(g_ulUARTBase[ulPort]);
 
-#ifdef PROTOCOL_TELNET
+#if false
             // If Telnet protocol enabled, check for incoming IAC character,
             // and escape it.
             if((g_sParameters.sPort[ulPort].ucFlags &
@@ -154,6 +154,127 @@ void SerialUART0IntHandler(void)
 void SerialUART1IntHandler(void)
 {
     SerialUARTIntHandler(1);
+}
+
+#if false
+//*****************************************************************************
+//! Handles the serial flow control interrupt.
+//!
+//! \param ulPort is the serial port number to be accessed.
+//!
+//! This function is called when the GPIO interrupt occurs for a serial port
+//! flow control GPIO input.  This function will clear the appropriate
+//! interrupt condition, and will toggle the transmitter status based on the
+//! flow control input signal level and the flow control setting.
+//!
+//! \return None.
+//*****************************************************************************
+static void
+SerialFlowInIntHandler(uint32_t ulPort)
+{
+    uint32_t ulStatus;
+#if CONFIG_RFC2217_ENABLED
+    uint8_t ucModemState;
+#endif
+
+    // Clear the interrupt condition.
+    ulStatus = GPIOIntStatus(g_ulFlowInBase[ulPort], true);
+    GPIOIntClear(g_ulFlowInBase[ulPort], ulStatus);
+
+    // If flow control is enabled, check the status of the pin and
+    // enable/disable the UART transmitter appropriately.
+    if(g_sParameters.sPort[ulPort].ucFlowControl == SERIAL_FLOW_CONTROL_HW)
+    {
+        if(GPIOPinRead(g_ulFlowInBase[ulPort], g_ulFlowInPin[ulPort]))
+        {
+            // Indicate the CTS (actually flow control input) has changed
+            // state to be asserted.
+#if CONFIG_RFC2217_ENABLED
+            ucModemState = (16 + 1);
+#endif
+            HWREG(g_ulUARTBase[ulPort] + UART_O_CTL) &= ~UART_CTL_TXE;
+        }
+        else
+        {
+            // Indicate the CTS (actually flow control input) has changed
+            // state to be deasserted.
+#if CONFIG_RFC2217_ENABLED
+            ucModemState = (0 + 1);
+#endif
+            HWREG(g_ulUARTBase[ulPort] + UART_O_CTL) |= UART_CTL_TXE;
+        }
+
+        // Notify the telnet RFC2217 process that RTS (actually flow control
+        // input) has chagned state.
+#if CONFIG_RFC2217_ENABLED
+        TelnetNotifyModemState(ulPort, ucModemState);
+#endif
+    }
+}
+
+//*****************************************************************************
+//! Handles the GPIO B interrupt for flow control (port 0).
+//!
+//! This function is called when the GPIO port B generates an interrupt.  An
+//! interrupt will be generated when the inbound flow control signal changes
+//! levels (rising/falling edge).  A notification function will be called to
+//! inform the corresponding telnet session that the flow control signal has
+//! changed.
+//!
+//! \return None.
+//*****************************************************************************
+void
+SerialGPIOBIntHandler(void)
+{
+    // Call the generic flow control interrupt routine.
+    SerialFlowInIntHandler(0);
+}
+
+//*****************************************************************************
+//! Handles the GPIO A interrupt for flow control (port 1).
+//!
+//! This function is called when the GPIO port A generates an interrupt.  An
+//! interrupt will be generated when the inbound flow control signal changes
+//! levels (rising/falling edge).  A notification function will be called to
+//! inform the corresponding telnet session that the flow control signal has
+//! changed.
+//!
+//! \return None.
+//*****************************************************************************
+void
+SerialGPIOAIntHandler(void)
+{
+    // Call the generic flow control interrupt routine.
+    SerialFlowInIntHandler(1);
+}
+#endif
+
+//*****************************************************************************
+//! Enables transmitting and receiving.
+//!
+//! \param ulPort is the UART port number to be accessed.
+//!
+//! Sets the UARTEN, and RXE bits, and enables the transmit and receive
+//! FIFOs.  Optionally sets the TXE bit if flow control conditions allow.
+//!
+//! \return None.
+//*****************************************************************************
+static void SerialUARTEnable(uint32_t ulPort)
+{
+    // Enable the FIFO.
+    HWREG(g_ulUARTBase[ulPort] + UART_O_LCRH) |= UART_LCRH_FEN;
+
+    // Enable RX and the UART.
+    HWREG(g_ulUARTBase[ulPort] + UART_O_CTL) |= UART_CTL_UARTEN | UART_CTL_RXE;
+
+    // If flow control is enabled and asserted, don't enable the transmitter.
+    // Otherwise, enable it.
+    if(!((g_sParameters.sPort[ulPort].ucFlowControl ==
+          SERIAL_FLOW_CONTROL_HW) &&
+         GPIOPinRead(g_ulFlowInBase[ulPort], g_ulFlowInPin[ulPort])))
+    {
+        HWREG(g_ulUARTBase[ulPort] + UART_O_CTL) |= UART_CTL_TXE;
+    }
 }
 
 //*****************************************************************************
@@ -285,7 +406,6 @@ uint32_t SerialReceiveAvailable(uint32_t ulPort)
 }
 
 #if false
-
 //*****************************************************************************
 //! Configures the serial port baud rate.
 //!
@@ -983,7 +1103,7 @@ SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand)
     // Renable the UART.
     SerialUARTEnable(ulPort);
 }
-//#endif
+
 //*****************************************************************************
 //! Configures the serial port to a default setup.
 //!
@@ -1014,16 +1134,18 @@ void SerialSetDefault(uint32_t ulPort)
     SerialSetStopBits(ulPort, g_psDefaultParameters->sPort[ulPort].ucStopBits);
 
     // Set the flow control.
-    SerialSetFlowControl(ulPort, g_psDefaultParameters->sPort[ulPort].ucFlowControl);
+    SerialSetFlowControl(ulPort,
+                      g_psDefaultParameters->sPort[ulPort].ucFlowControl);
 
     // Purge the Serial Tx/Rx Ring Buffers.
     SerialPurgeData(ulPort, 0x03);
 
     // (Re)enable the UART transmit and receive interrupts.
-    UARTIntEnable(g_ulUARTBase[ulPort], (UART_INT_RX | UART_INT_RT | UART_INT_TX));
+    UARTIntEnable(g_ulUARTBase[ulPort],
+                 (UART_INT_RX | UART_INT_RT | UART_INT_TX));
     IntEnable(g_ulUARTInterrupt[ulPort]);
 }
-//#if false
+
 //*****************************************************************************
 //! Configures the serial port according to the current working parameter
 //! values.
@@ -1174,5 +1296,4 @@ SerialInit(void)
     // Configure Port 1.
     SerialSetDefault(1);
 }
-
 #endif
