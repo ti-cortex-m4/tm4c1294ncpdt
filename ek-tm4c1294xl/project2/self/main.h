@@ -18,4 +18,7 @@ MAIN.H
 #include "config.h"
 
 
+extern uint32_t g_ulSystemTimeMS;
+
+
 #endif

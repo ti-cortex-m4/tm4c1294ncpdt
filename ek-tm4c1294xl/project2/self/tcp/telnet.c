@@ -27,12 +27,6 @@ static tTelnetSessionData g_sTelnetSession[MAX_S2E_PORTS];
 static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err);
 
 
-//*****************************************************************************
-// External Reference.
-//*****************************************************************************
-extern uint32_t g_ulSystemTimeMS;
-
-
 
 //*****************************************************************************
 //! Free up any queued pbufs associated with at telnet session.
