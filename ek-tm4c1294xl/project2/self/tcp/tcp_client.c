@@ -6,11 +6,6 @@ TCP_CLIENT.C
 
 #include "../main.h"
 #include "utils/lwiplib.h"
-//#include "lwip/opt.h"
-//#include "lwip/debug.h"
-//#include "lwip/stats.h"
-//#include "lwip/tcp.h"
-//#include "lwip/tcp_impl.h"
 #include "lwip/sys.h"
 #include "../uart/log.h"
 #include "../uart/serial.h"
@@ -967,5 +962,31 @@ TelnetHandler(void)
             tcp_output(pState->pConnectPCB);
             pState->ulLastTCPSendTime = g_ulSystemTimeMS;
         }
+    }
+}
+
+//*****************************************************************************
+//! Handles link status notification.
+//!
+//! \param bLinkStatusUp is the boolean indicate of link layer status.
+//!
+//! This function should be called when the link layer status has changed.
+//!
+//! \return None.
+//*****************************************************************************
+void TelnetNotifyLinkStatus(bool bLinkStatusUp)
+{
+    int iPort;
+
+    // We don't care if the link is up, only if it goes down.
+    if(bLinkStatusUp)
+    {
+        return;
+    }
+
+    // For every port, indicate that the link has been lost.
+    for(iPort = 0; iPort < MAX_S2E_PORTS; iPort++)
+    {
+        g_sTelnetSession[iPort].bLinkLost = true;
     }
 }
