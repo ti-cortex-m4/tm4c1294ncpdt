@@ -17,16 +17,18 @@ TODO
 static const ulong      mdwBAUDS[BAUDS_SIZE] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  0xC0FEBABE
+#define SETTINGS_LABEL  1
 
 ulong                   dwIP;
 ulong                   dwGateway;
 ulong                   dwNetmask;
+uint                    wPort;
+
+ulong                   dwDestIP;
+uint                    wDestPort;
 
 char                    szDeviceName[NAME_SIZE];
 char                    szOwnerName[NAME_SIZE];
-
-uint                    wPort;
 
 uchar                   ibBaud;
 
@@ -61,6 +63,23 @@ uchar SaveNetmask(void)
   return SaveLong(&dwNetmask, EEPROM_NETMASK);
 }
 
+uchar SavePort(void)
+{
+  return SaveInt(&wPort, EEPROM_PORT);
+}
+
+
+uchar SaveDestIP(void)
+{
+  return SaveLong(&dwDestIP, EEPROM_DEST_IP);
+}
+
+uchar SaveDestPort(void)
+{
+  return SaveInt(&wDestPort, EEPROM_DEST_PORT);
+}
+
+
 uchar SaveDeviceName(void)
 {
   return SaveString(szDeviceName, EEPROM_DEVICE_NAME);
@@ -69,11 +88,6 @@ uchar SaveDeviceName(void)
 uchar SaveOwnerName(void)
 {
   return SaveString(szOwnerName, EEPROM_OWNER_NAME);
-}
-
-uchar SavePort(void)
-{
-  return SaveInt(&wPort, EEPROM_PORT);
 }
 
 uchar SaveBaud(void)
@@ -98,6 +112,16 @@ uchar    SaveSettings(void)
   err = SaveLong(&dwNetmask, EEPROM_NETMASK);
   if (err != 0) return err;
 
+  err = SaveInt(&wPort, EEPROM_PORT);
+  if (err != 0) return err;
+
+
+  err = SaveLong(&dwDestIP, EEPROM_DEST_IP);
+  if (err != 0) return err;
+
+  err = SaveInt(&wDestPort, EEPROM_DEST_PORT);
+  if (err != 0) return err;
+
 
   err = SaveString(szDeviceName, EEPROM_DEVICE_NAME);
   if (err != 0) return err;
@@ -105,9 +129,6 @@ uchar    SaveSettings(void)
   err = SaveString(szOwnerName, EEPROM_OWNER_NAME);
   if (err != 0) return err;
 
-
-  err = SaveInt(&wPort, EEPROM_PORT);
-  if (err != 0) return err;
 
   err = SaveChar(&ibBaud, EEPROM_BAUD);
   if (err != 0) return err;
@@ -128,11 +149,14 @@ uchar   LoadSettings(void)
     LoadLong(&dwIP, EEPROM_IP);
     LoadLong(&dwGateway, EEPROM_GATEWAY);
     LoadLong(&dwNetmask, EEPROM_NETMASK);
+    LoadInt(&wPort, EEPROM_PORT);
+
+    LoadLong(&dwDestIP, EEPROM_DEST_IP);
+    LoadInt(&wDestPort, EEPROM_DEST_PORT);
 
     LoadString(szDeviceName, EEPROM_DEVICE_NAME);
     LoadString(szOwnerName, EEPROM_OWNER_NAME);
 
-    LoadInt(&wPort, EEPROM_PORT);
     LoadChar(&ibBaud, EEPROM_BAUD);
   }
   else
@@ -140,6 +164,10 @@ uchar   LoadSettings(void)
     dwIP = inet_addr("100.1.168.192");
     dwGateway = inet_addr("0.255.255.255");
     dwNetmask = inet_addr("1.1.168.192");
+    wPort = 100;
+
+    dwDestIP = inet_addr("101.1.168.192");
+    wDestPort = 101;
 
     memset(&szDeviceName,  0, sizeof(szDeviceName));
     sprintf(szDeviceName, "Device");
@@ -147,7 +175,6 @@ uchar   LoadSettings(void)
     memset(&szOwnerName,  0, sizeof(szOwnerName));
     sprintf(szOwnerName, "Owner");
 
-    wPort = 1001;
     ibBaud = DEFAULT_BAUD;
 
     SaveSettings();

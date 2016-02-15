@@ -13,29 +13,36 @@ SETTINGS.H
 extern ulong                   dwIP;
 extern ulong                   dwGateway;
 extern ulong                   dwNetmask;
+extern uint                    wPort;
+
+extern ulong                   dwDestIP;
+extern uint                    wDestPort;
 
 extern char                    szDeviceName[NAME_SIZE];
 extern char                    szOwnerName[NAME_SIZE];
 
-extern uint                    wPort;
 extern uchar                   ibBaud;
 
 extern uchar                   pbMAC[6];
 
 
 
-uchar   InitSettings(void);
+uchar InitSettings(void);
 
-uchar   SaveSettings(void);
+uchar SaveSettings(void);
 
 uchar SaveIP(void);
 uchar SaveGateway(void);
 uchar SaveNetmask(void);
+uchar SavePort(void);
+
+uchar SaveDestIP(void);
+uchar SaveDestPort(void);
+
 uchar SaveDeviceName(void);
 uchar SaveOwnerName(void);
-uchar SavePort(void);
 uchar SaveBaud(void);
 
-uchar   LoadSettings(void);
+uchar LoadSettings(void);
 
 ulong GetBaud(void);
