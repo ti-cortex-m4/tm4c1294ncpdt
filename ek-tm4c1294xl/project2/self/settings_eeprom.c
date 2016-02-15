@@ -6,6 +6,7 @@ SETTINGS_EEPROM.C
 
 #include "main.h"
 #include "driverlib/eeprom.h"
+#include "entity.h"
 #include "settings_eeprom.h"
 
 
@@ -32,6 +33,16 @@ uchar SaveString(char *sz, ulong dwAddr)
   return EEPROMProgram((ulong *)sz, dwAddr, 4*3);
 }
 
+uchar SaveEntity(entity const *pen)
+{
+  switch(pen->eType)
+  {
+    case CHAR: return SaveChar(pen->pbRAM, pen->dwEEPROM);
+    case INT: return SaveInt(pen->pbRAM, pen->dwEEPROM);
+    case LONG: return SaveLong(pen->pbRAM, pen->dwEEPROM);
+    default: ASSERT(false); return 0x80;
+  }
+}
 
 
 void LoadChar(uchar *pb, ulong dwAddr)
@@ -56,4 +67,15 @@ void LoadLong(ulong *pdw, ulong dwAddr)
 void LoadString(char *sz, ulong dwAddr)
 {
   EEPROMRead((ulong *)sz, dwAddr, 4*3);
+}
+
+void LoadEntity(entity const *pen)
+{
+  switch(pen->eType)
+  {
+    case CHAR: LoadChar(pen->pbRAM, pen->dwEEPROM);
+    case INT: LoadInt(pen->pbRAM, pen->dwEEPROM);
+    case LONG: LoadLong(pen->pbRAM, pen->dwEEPROM);
+    default: ASSERT(false);
+  }
 }
