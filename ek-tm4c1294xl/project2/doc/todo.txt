@@ -47,3 +47,5 @@ http://docs.tibbo.com/soism/index.html?an010.htm
 http://docs.tibbo.com/soism/index.html?an003.htm
 
 TelnetWriteDiagInfo
+
+^.*//\r\n
