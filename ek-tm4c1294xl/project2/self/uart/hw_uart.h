@@ -4,4 +4,5 @@ HW_UART.H
 
 ------------------------------------------------------------------------------*/
 
+void    InitUART0(ulong dwSysClockFreq);
 void    InitUART4(ulong dwSysClockFreq);

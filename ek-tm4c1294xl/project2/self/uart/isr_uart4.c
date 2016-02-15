@@ -35,17 +35,16 @@ static bool GetTI(ulong dwStatus)
 }
 
 
-static uchar InByte(void)
+static uchar InByte4(void)
 {
   return HWREG(UART4_BASE + UART_O_DR);
 }
 
 
-static void OutByte(uchar b)
+static void OutByte4(uchar b)
 {
   HWREG(UART4_BASE + UART_O_DR) = b;
 }
-
 
 
 void    UART4IntHandler(void)
@@ -58,7 +57,7 @@ void    UART4IntHandler(void)
     wInTimer = 0;
 
     cwIn++;
-    mbIn[iwInStop] = InByte();
+    mbIn[iwInStop] = InByte4();
     iwInStop = (iwInStop+1) % INBUFF_SIZE;
   }
 
@@ -67,7 +66,46 @@ void    UART4IntHandler(void)
     if (cwOut > 0)
     {
       cwOut--;
-      OutByte(mbOut[iwOutStart]);
+      OutByte4(mbOut[iwOutStart]);
+      iwOutStart = (iwOutStart+1) % OUTBUFF_SIZE;
+    }
+  }
+}
+
+
+
+static uchar InByte0(void)
+{
+  return HWREG(UART0_BASE + UART_O_DR);
+}
+
+
+static void OutByte0(uchar b)
+{
+  HWREG(UART0_BASE + UART_O_DR) = b;
+}
+
+
+void    UART0IntHandler(void)
+{
+  ulong dwStatus = UARTIntStatus(UART0_BASE, true);
+  UARTIntClear(UART0_BASE, dwStatus);
+
+  if (GetRI(dwStatus))
+  {
+    wInTimer = 0;
+
+    cwIn++;
+    mbIn[iwInStop] = InByte0();
+    iwInStop = (iwInStop+1) % INBUFF_SIZE;
+  }
+
+  if (GetTI(dwStatus))
+  {
+    if (cwOut > 0)
+    {
+      cwOut--;
+      OutByte0(mbOut[iwOutStart]);
       iwOutStart = (iwOutStart+1) % OUTBUFF_SIZE;
     }
   }

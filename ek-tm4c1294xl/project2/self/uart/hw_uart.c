@@ -17,6 +17,26 @@ HW_UART.Ñ
 
 
 
+void    InitUART0(ulong dwSysClockFreq)
+{
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+
+  GPIOPinConfigure(GPIO_PA0_U0RX);
+  GPIOPinConfigure(GPIO_PA1_U0TX);
+  GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+
+  UARTFIFOLevelSet(UART0_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(UART0_BASE, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(UART0_BASE);
+
+  IntEnable(INT_UART0);
+  UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+
+  UARTConfigSetExpClk(UART0_BASE, dwSysClockFreq, GetBaud(), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+}
+
+
 void    InitUART4(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART4);
