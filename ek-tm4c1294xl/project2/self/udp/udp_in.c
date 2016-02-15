@@ -134,7 +134,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   if (err != ERR_OK) return err;
 
   uint wArg = 0;
-  err = PopIntHex(p, &wArg, 2);
+  err = PopIntDec(p, &wArg, 2);
   if (err != ERR_OK) return err;
 
   InitPush();
@@ -149,12 +149,11 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 5: PushString("AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
     case 6: PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
     case 7: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
-    case 8: PushString("AI=PN;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\""); // TODO S=RM!=2?"e":"i" break;
-    case 9: PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13"); break;
-    case 10: PushString("AI=RM;D=Routing Mode;T=INT;C=STATIC;O=0- Server (Slave)/0/1- Server OR Client (Master)/1/2- Client only/2"); break;
-    case 11: PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534||PN==32767?\"Port number must be between 0 and 65534 (excluding 32767)\":\"\";S=RM!=2?\"e\":\"i\""); break;
-    case 12: PushString("AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1||RM==2||SF==1?\"e\":\"i\""); break;
-    case 13: PushString("AI=DP;E=1;D=Destination port;T=INT;C=EDIT;S=RM!=0?\"e\":\"i\""); break;
+    case 8: PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13"); break;
+    case 9: PushString("AI=RM;D=Routing Mode;T=INT;C=STATIC;O=0-Server (Slave)/0/2-Client (Master)/2"); break;
+    case 10: PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\""); break;
+    case 11: PushString("AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1||RM==2?\"e\":\"i\""); break; // TODO ||SF==1
+    case 12: PushString("AI=DP;E=1;D=Destination port;T=INT;C=EDIT;S=RM!=0?\"e\":\"i\""); break;
     default: ASSERT(false); break;
   }
 
@@ -242,6 +241,34 @@ err_t SPN(struct pbuf *p)
   return ERR_OK;
 }
 
+
+err_t SDI(struct pbuf *p)
+{
+  ulong dw = 0;
+  err_t err = PopIP(p, &dw);
+  if (err != ERR_OK) return err;
+
+  dwDestIP = dw;
+  err = SaveDestIP();
+  if (err != ERR_OK) return err;
+
+  return ERR_OK;
+}
+
+err_t SDP(struct pbuf *p)
+{
+  uint w = 0;
+  err_t err = PopIntDec(p, &w, 3);
+  if (err != ERR_OK) return err;
+
+  wDestPort = w;
+  err = SaveDestPort();
+  if (err != ERR_OK) return err;
+
+  return ERR_OK;
+}
+
+
 err_t SBR(struct pbuf *p)
 {
   uchar b = 0;
@@ -290,7 +317,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"10");
+    CmdString(pcb,p,addr,port,broadcast,"13");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -307,23 +334,45 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdIn(pcb,p,addr,port,broadcast, SDN);
   } else if (IsCmd(p,"GDH")) {
     CmdString(pcb,p,addr,port,broadcast,"0");
-  } else if (IsCmd(p,"GIP")) {
+  }
+
+  else if (IsCmd(p,"GIP")) {
     CmdIP(pcb,p,addr,port,broadcast,dwIP);
   } else if (IsCmd(p,"SIP")) {
     CmdIn(pcb,p,addr,port,broadcast,SIP);
-  } else if (IsCmd(p,"GGI")) {
+  }
+
+  else if (IsCmd(p,"GGI")) {
     CmdIP(pcb,p,addr,port,broadcast,dwGateway);
   } else if (IsCmd(p,"SGI")) {
     CmdIn(pcb,p,addr,port,broadcast,SGI);
-  } else if (IsCmd(p,"GNM")) {
+  }
+
+  else if (IsCmd(p,"GNM")) {
     CmdIP(pcb,p,addr,port,broadcast,dwNetmask);
   } else if (IsCmd(p,"SNM")) {
     CmdIn(pcb,p,addr,port,broadcast,SNM);
-  } else if (IsCmd(p,"GPN")) {
+  }
+
+  else if (IsCmd(p,"GPN")) {
     CmdIntDec(pcb,p,addr,port,broadcast,wPort);
   } else if (IsCmd(p,"SPN")) {
     CmdIn(pcb,p,addr,port,broadcast,SPN);
-  } else if (IsCmd(p,"GBR")) {
+  }
+
+  else if (IsCmd(p,"GDI")) {
+    CmdIP(pcb,p,addr,port,broadcast,dwDestIP);
+  } else if (IsCmd(p,"SDI")) {
+    CmdIn(pcb,p,addr,port,broadcast,SDI);
+  }
+
+  else if (IsCmd(p,"GDP")) {
+    CmdIntDec(pcb,p,addr,port,broadcast,wDestPort);
+  } else if (IsCmd(p,"SDP")) {
+    CmdIn(pcb,p,addr,port,broadcast,SDP);
+  }
+
+  else if (IsCmd(p,"GBR")) {
     CmdCharDec(pcb,p,addr,port,broadcast,ibBaud);
   } else if (IsCmd(p,"SBR")) {
     CmdIn(pcb,p,addr,port,broadcast,SBR);
