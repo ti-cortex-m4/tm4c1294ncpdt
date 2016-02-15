@@ -12,21 +12,22 @@ typedef enum
 {
   CHAR,
   INT,
-  IP,
+  LONG,
 } entityType;
 
 
 typedef struct
 {
-  ulong         dwAddr;
-  void         *pbBuff;
+  ulong         dwEEPROM;
+  void         *pbRAM;
   uint          wSize;
-  uint          wMin, wMax, wDef;
   entityType    eType;
+  uint          wMin, wMax, wDef;
+  const char    *szCode, *szName;
 } entity;
 
 
-extern const entity            enConnectionTimeout;
+extern const entity enConnectionTimeout;
 
 
 #endif
