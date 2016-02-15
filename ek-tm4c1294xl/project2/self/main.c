@@ -155,7 +155,7 @@ int     main(void)
   IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
-#if true
+#if false
   uint8_t u;
   for(u = 0; u < MAX_S2E_PORTS; u++)
   {
