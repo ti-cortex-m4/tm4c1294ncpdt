@@ -6,6 +6,8 @@ UDP_IN.C
 
 #include "../main.h"
 #include "../settings.h"
+#include "../settings_eeprom.h"
+#include "../entity.h"
 #include "driverlib/sysctl.h"
 #include "../uart/log.h"
 #include "udp_pop.h"
@@ -15,6 +17,7 @@ UDP_IN.C
 
 
 typedef err_t (*in_fn)(struct pbuf *p);
+typedef err_t (*in_fn2)(struct pbuf *p, entity const *pen);
 
 
 
@@ -126,6 +129,22 @@ err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
+err_t CmdIn2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, in_fn2 in)
+{
+  uint wSfx = 0;
+  err_t err = PopSfx(p, &wSfx);
+  if (err != ERR_OK) return err;
+
+  err = in(p,pen);
+  if (err != ERR_OK) return err;
+
+  InitPush();
+  PushChar('A');
+  PushSfx(wSfx);
+
+  return PushOut(pcb,p,addr,port,broadcast);
+}
+
 
 err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
@@ -150,7 +169,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 6: PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
     case 7: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
     case 8: PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13"); break;
-    case 9: PushString("AI=CT;D=Connection timeout (min);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT>255?\"Maximum timeout is 255 minutes\":\"\""); break;
+    case 9: PushString(enConnectionTimeout.szName); break;
     case 10: PushString("AI=RM;D=Routing Mode;T=INT;C=STATIC;O=0-Server (Slave)/0/2-Client (Master)/2"); break;
     case 11: PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\""); break;
     case 12: PushString("AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1||RM==2?\"e\":\"i\""); break; // TODO ||SF==1
@@ -322,6 +341,72 @@ static bool IsCmd(struct pbuf *p, const char *szCmd)
   }
 
   return true;
+}
+
+
+static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)
+{
+  uchar *pb = p->payload;
+  uchar i = 0;
+
+  if (i >= p->len) return false;
+  if (pb[i++] != bOperation) return false;
+
+  while (*szCode)
+  {
+    if (i >= p->len) return false;
+    if (pb[i++] != *szCode++) return false;
+  }
+
+  return true;
+}
+
+static err_t PopEntity(struct pbuf *p, entity const *pen)
+{
+  switch (pen->eType)
+  {
+//     case CHAR: return PopCharDec(p, &b, 3);
+//     case INT: return PopIntDec(p, &w, 3);
+//     case LONG: return PopIP(p, &dw);
+     default: ASSERT(false); return -1;
+  }
+}
+
+static err_t Save(struct pbuf *p, entity const *pen)
+{
+//  uchar b = 0;
+  err_t err = PopEntity(p, pen);
+  if (err != ERR_OK) return err;
+
+  err = SaveEntity(pen);
+  if (err != ERR_OK) return err;
+
+  return ERR_OK;
+}
+
+/*TODO static*/ bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen)
+{
+  if (IsEnityCode(p, 'G', pen->szCode))
+  {
+    switch (pen->eType)
+    {
+//      case CHAR: CmdCharDec(pcb,p,addr,port,broadcast,pen->pbRAM); break;
+//      case INT: CmdIntDec(pcb,p,addr,port,broadcast,pen->pbRAM); break;
+//      case LONG: CmdIP(pcb,p,addr,port,broadcast,pen->pbRAM); break;
+      default: ASSERT(false); break;
+    }
+
+    return true;
+  }
+  else if (IsEnityCode(p, 'S', pen->szCode))
+  {
+    CmdIn2(pcb,p,addr,port,broadcast,pen,Save);
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
 
