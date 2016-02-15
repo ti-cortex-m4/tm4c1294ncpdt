@@ -23,8 +23,6 @@ ASSERT
 
 http://lwip.wikia.com/wiki/Raw/TCP
 
-http://docs.tibbo.com/soism/index.html?bcast_out_of_band.htm
-
 как принимать TCP: sw01266.zip -> TelnetReceive
 for(q = p, pucData = q->payload; q != NULL; q = q->next)
  
@@ -39,6 +37,7 @@ SERIAL_FLOW_CONTROL_HW
 pState->eLastErr = err;
 pState->eLastErr = eError;     
 
+http://docs.tibbo.com/soism/index.html?bcast_out_of_band.htm
 http://docs.tibbo.com/soism/index.html?s_e_routing.htm
 http://docs.tibbo.com/soism/index.html?setting_rm.htm
 http://docs.tibbo.com/soism/index.html?application_notes.htm
@@ -53,3 +52,7 @@ TelnetWriteDiagInfo
 валидация ibBaud,ibRoutingMode
 
 usTelnetLocalPort in client mode
+
+watchdog
+
+UDP debug

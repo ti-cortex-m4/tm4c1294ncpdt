@@ -17,7 +17,7 @@ TODO
 static const ulong      mdwBAUDS[BAUDS_SIZE] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  3
+#define SETTINGS_LABEL  4
 
 ulong                   dwIP;
 ulong                   dwGateway;
@@ -27,6 +27,7 @@ uint                    wPort;
 char                    szDeviceName[NAME_SIZE];
 char                    szOwnerName[NAME_SIZE];
 
+uchar                   bConnectionTimeout;
 uchar                   ibRoutingMode;
 ulong                   dwDestIP;
 uint                    wDestPort;
@@ -81,6 +82,11 @@ uchar SaveOwnerName(void)
 }
 
 
+uchar SaveConnectionTimeout(void)
+{
+  return SaveChar(&bConnectionTimeout, EEPROM_CONNECTION_TIMEOUT);
+}
+
 uchar SaveRoutingMode(void)
 {
   return SaveChar(&ibRoutingMode, EEPROM_ROUTING_MODE);
@@ -130,6 +136,9 @@ uchar    SaveSettings(void)
   if (err != 0) return err;
 
 
+  err = SaveChar(&bConnectionTimeout, EEPROM_CONNECTION_TIMEOUT);
+  if (err != 0) return err;
+
   err = SaveChar(&ibRoutingMode, EEPROM_ROUTING_MODE);
   if (err != 0) return err;
 
@@ -164,6 +173,7 @@ uchar   LoadSettings(void)
     LoadString(szDeviceName, EEPROM_DEVICE_NAME);
     LoadString(szOwnerName, EEPROM_OWNER_NAME);
 
+    LoadChar(&bConnectionTimeout, EEPROM_CONNECTION_TIMEOUT);
     LoadChar(&ibRoutingMode, EEPROM_ROUTING_MODE);
     LoadLong(&dwDestIP, EEPROM_DEST_IP);
     LoadInt(&wDestPort, EEPROM_DEST_PORT);
@@ -183,6 +193,7 @@ uchar   LoadSettings(void)
     memset(&szOwnerName,  0, sizeof(szOwnerName));
     sprintf(szOwnerName, "Owner");
 
+    bConnectionTimeout = 0;
     ibRoutingMode = 0;
     dwDestIP = inet_addr("101.1.168.192");
     wDestPort = 101;

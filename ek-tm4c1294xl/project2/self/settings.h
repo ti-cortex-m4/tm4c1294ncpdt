@@ -18,6 +18,7 @@ extern uint                    wPort;
 extern char                    szDeviceName[NAME_SIZE];
 extern char                    szOwnerName[NAME_SIZE];
 
+extern uchar                   bConnectionTimeout;
 extern uchar                   ibRoutingMode;
 extern ulong                   dwDestIP;
 extern uint                    wDestPort;
@@ -40,6 +41,7 @@ uchar SavePort(void);
 uchar SaveDeviceName(void);
 uchar SaveOwnerName(void);
 
+uchar SaveConnectionTimeout(void);
 uchar SaveRoutingMode(void);
 uchar SaveDestIP(void);
 uchar SaveDestPort(void);
