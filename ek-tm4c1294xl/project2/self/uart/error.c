@@ -13,7 +13,7 @@ ERROR.C
 
 void __error__(char *pcFileName, ulong dwLine)
 {
-  LOG(("file: %s line: %d\n", pcFileName, dwLine));
+  LOG(("\nfile: %s line: %d\n", pcFileName, dwLine));
   while(1)
   {
   }

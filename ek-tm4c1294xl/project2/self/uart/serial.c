@@ -19,19 +19,28 @@ SERIAL.C
 
 
 
-//*****************************************************************************
+//! The buffer used to hold characters received from the UART0.
+static uint8_t g_pucRX0Buffer[RX_RING_BUF_SIZE];
+
+//! The buffer used to hold characters to be sent to the UART0.
+static uint8_t g_pucTX0Buffer[TX_RING_BUF_SIZE];
+
+
+//! The buffer used to hold characters received from the UART1.
+static uint8_t g_pucRX1Buffer[RX_RING_BUF_SIZE];
+
+//! The buffer used to hold characters to be sent to the UART1.
+static uint8_t g_pucTX1Buffer[TX_RING_BUF_SIZE];
+
+
 //! The ring buffers used to hold characters received from the UARTs.
-//*****************************************************************************
 static tRingBufObject g_sRxBuf[MAX_S2E_PORTS];
 
-//*****************************************************************************
 //! The ring buffers used to hold characters to be sent to the UARTs.
-//*****************************************************************************
 static tRingBufObject g_sTxBuf[MAX_S2E_PORTS];
 
-//*****************************************************************************
+
 //! The base address for the UART associated with a port.
-//*****************************************************************************
 static const uint32_t g_ulUARTBase[MAX_S2E_PORTS] =
 {
 //    UART0_BASE,
@@ -1248,7 +1257,7 @@ SerialSetFactory(uint32_t ulPort)
                  (UART_INT_RX | UART_INT_RT | UART_INT_TX));
     IntEnable(g_ulUARTInterrupt[ulPort]);
 }
-
+#endif
 //*****************************************************************************
 //! Initializes the serial port driver.
 //!
@@ -1256,15 +1265,14 @@ SerialSetFactory(uint32_t ulPort)
 //!
 //! \return None.
 //*****************************************************************************
-void
-SerialInit(void)
+void SerialInit(void)
 {
     // Initialize the ring buffers used by the UART Drivers.
     RingBufInit(&g_sRxBuf[0], g_pucRX0Buffer, sizeof(g_pucRX0Buffer));
     RingBufInit(&g_sTxBuf[0], g_pucTX0Buffer, sizeof(g_pucTX0Buffer));
     RingBufInit(&g_sRxBuf[1], g_pucRX1Buffer, sizeof(g_pucRX1Buffer));
     RingBufInit(&g_sTxBuf[1], g_pucTX1Buffer, sizeof(g_pucTX1Buffer));
-
+#if false
     // Configure the Port 0 pins appropriately.
     GPIOPinTypeUART(PIN_U0RX_PORT, PIN_U0RX_PIN);
     GPIOPinTypeUART(PIN_U0TX_PORT, PIN_U0TX_PIN);
@@ -1302,5 +1310,5 @@ SerialInit(void)
 
     // Configure Port 1.
     SerialSetDefault(1);
-}
 #endif
+}

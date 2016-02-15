@@ -13,5 +13,13 @@ SETTINGS2.C
 //! A value of 0 indicates no timeout is to be used.
 uint32_t getTelnetTimeout(uint8_t  ibPort)
 {
+  ASSERT(ibPort < MAX_S2E_PORTS);
   return 0;
+}
+
+
+bool isServer(uint8_t  ibPort)
+{
+  ASSERT(ibPort < MAX_S2E_PORTS);
+  return false;
 }

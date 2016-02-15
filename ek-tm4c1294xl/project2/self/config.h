@@ -8,6 +8,9 @@ Configuration of the serial to Ethernet converter.
 #define __CONFIG_H__
 
 
+#define DEBUG_UART 0
+
+
 //*****************************************************************************
 // During debug, DEBUG_UART may be defined with values 0 or 1 to select which
 // of the two UARTs are used to output debug messages.  Debug messages will be
@@ -55,6 +58,19 @@ Configuration of the serial to Ethernet converter.
 //*****************************************************************************
 #define PORT_PROTOCOL_TELNET    0x00
 #define PORT_PROTOCOL_RAW       PORT_FLAG_PROTOCOL
+
+
+//*****************************************************************************
+//! The size of the ring buffers used for interface between the UART and
+//! telnet session (RX).
+//*****************************************************************************
+#define RX_RING_BUF_SIZE        (256 * 2)
+
+//*****************************************************************************
+//! The size of the ring buffers used for interface between the UART and
+//! telnet session (TX).
+//*****************************************************************************
+#define TX_RING_BUF_SIZE        (256 * 6)
 
 
 #endif // __CONFIG_H__

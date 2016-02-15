@@ -49,3 +49,5 @@ http://docs.tibbo.com/soism/index.html?an003.htm
 TelnetWriteDiagInfo
 
 ^.*//\r\n
+
+валидация ibBaud,ibRoutingMode
