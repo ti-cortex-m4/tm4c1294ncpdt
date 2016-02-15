@@ -34,8 +34,8 @@ static tRingBufObject g_sTxBuf[MAX_S2E_PORTS];
 //*****************************************************************************
 static const uint32_t g_ulUARTBase[MAX_S2E_PORTS] =
 {
-    UART0_BASE,
-    UART1_BASE
+//    UART0_BASE,
+    UART4_BASE
 };
 
 
@@ -144,7 +144,8 @@ static void SerialUARTIntHandler(uint32_t ulPort)
 //!
 //! \return None.
 //*****************************************************************************
-void SerialUART0IntHandler(void)
+//void SerialUART0IntHandler(void)
+void UART4IntHandler(void)
 {
     SerialUARTIntHandler(0);
 }
