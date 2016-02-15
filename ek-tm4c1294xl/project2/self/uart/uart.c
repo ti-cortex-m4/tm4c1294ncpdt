@@ -31,6 +31,7 @@ void    InitUART(ulong dwSysClockFreq)
 
   uart_tpcb = NULL;
 
+  InitUART0(dwSysClockFreq);
   InitUART4(dwSysClockFreq);
 }
 
@@ -51,7 +52,7 @@ void    UART_Out2(struct tcp_pcb *tpcb)
 {
   uart_tpcb = tpcb;
 
-  IntPendSet(INT_UART4);
+  IntPendSet(INT_UART0); // TODO
 }
 
 
