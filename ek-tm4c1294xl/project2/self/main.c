@@ -39,11 +39,23 @@ uint32_t g_ulSystemTimeMS = 0;
 
 
 
+//*****************************************************************************
 //
-// Required by lwIP library to support any host-related timer functions.
+//! Handles the Ethernet interrupt hooks for the client software.
+//!
+//! This function will run any handlers that are required to run in the
+//! Ethernet interrupt context.  All the actual TCP/IP processing occurs within
+//! this function (since lwIP is not re-entrant).
+//!
+//! \return None.
 //
+//*****************************************************************************
 void    lwIPHostTimerHandler(void)
 {
+    //
+    // Service the telnet module.
+    //
+    TelnetHandler();
 }
 
 
