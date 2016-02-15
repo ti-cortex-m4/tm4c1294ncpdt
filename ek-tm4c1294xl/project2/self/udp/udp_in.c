@@ -343,7 +343,7 @@ static bool IsCmd(struct pbuf *p, const char *szCmd)
   return true;
 }
 
-
+#if false
 static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)
 {
   uchar *pb = p->payload;
@@ -378,7 +378,7 @@ static err_t Save(struct pbuf *p, entity const *pen)
   err_t err = PopEntity(p, pen);
   if (err != ERR_OK) return err;
 
-  err = SaveEntity(pen);
+  err = SaveEntity(pen); min max def
   if (err != ERR_OK) return err;
 
   return ERR_OK;
@@ -408,7 +408,7 @@ static err_t Save(struct pbuf *p, entity const *pen)
     return false;
   }
 }
-
+#endif
 
 void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
