@@ -40,7 +40,6 @@ uint32_t g_ulSystemTimeMS = 0;
 
 
 //*****************************************************************************
-//
 //! Handles the Ethernet interrupt hooks for the client software.
 //!
 //! This function will run any handlers that are required to run in the
@@ -48,13 +47,10 @@ uint32_t g_ulSystemTimeMS = 0;
 //! this function (since lwIP is not re-entrant).
 //!
 //! \return None.
-//
 //*****************************************************************************
 void    lwIPHostTimerHandler(void)
 {
-    //
     // Service the telnet module.
-    //
     TelnetHandler();
 }
 
