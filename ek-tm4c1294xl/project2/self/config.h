@@ -26,7 +26,7 @@ Configuration of the serial to Ethernet converter.
 //*****************************************************************************
 //! The number of serial to Ethernet ports supported by this module.
 //*****************************************************************************
-#define MAX_S2E_PORTS           2
+#define MAX_S2E_PORTS           1
 
 
 //*****************************************************************************

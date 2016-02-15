@@ -47,7 +47,7 @@ static void OutByte4(uchar b)
 }
 
 
-void    UART4IntHandler(void)
+void    UART4IntHandler_(void)
 {
   ulong dwStatus = UARTIntStatus(UART4_BASE, true);
   UARTIntClear(UART4_BASE, dwStatus);
