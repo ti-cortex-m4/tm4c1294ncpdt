@@ -77,7 +77,6 @@ static void TelnetFreePbufs(tTelnetSessionData *pState)
 //*****************************************************************************
 static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 {
-    err_t eError;
     struct ip_addr sIPAddr;
     tTelnetSessionData *pState = arg;
 
@@ -90,16 +89,23 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         // to the server?
         if(pState->eTCPState == STATE_TCP_CONNECTING)
         {
-            // We are trying to reconnect but can't have received the connection
-            // callback in the last 3 seconds so we try connecting again.
-            pState->ucReconnectCount++;
-            sIPAddr.addr = htonl(pState->ulTelnetRemoteIP);
-            eError = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort, TelnetConnected);
-
-            if(eError != ERR_OK)
+            if (pcb->state != CLOSED)
             {
-                DEBUG_MSG("TelnetPoll error %d\n", eError);
-                pState->eLastErr = eError;
+              DEBUG_MSG("TelnetPoll state %d\n", pcb->state);
+            }
+            else
+            {
+                // We are trying to reconnect but can't have received the connection
+                // callback in the last 3 seconds so we try connecting again.
+                pState->ucReconnectCount++;
+                sIPAddr.addr = htonl(pState->ulTelnetRemoteIP);
+
+                err_t err = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort, TelnetConnected);
+                if(err != ERR_OK)
+                {
+                    DEBUG_MSG("TelnetPoll error %d\n", err);
+                    pState->eLastErr = err;
+                }
             }
         }
     }
