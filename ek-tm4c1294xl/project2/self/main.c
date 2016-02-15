@@ -52,6 +52,8 @@ int     main(void)
 {
   InitLog();
 
+  LOG(("start 1\n"));
+
   //
   // Make sure the main oscillator is enabled because this is required by
   // the PHY.  The system must have a 25MHz crystal attached to the OSC
@@ -89,7 +91,7 @@ int     main(void)
   FlashUserGet(&dwUser0, &dwUser1);
 
   dwUser0 = 0x00B61A00; // TODO
-  dwUser1 = 0x00FCC502;
+  dwUser1 = 0x00FCC502+1;
 
   if((dwUser0 == 0xFFFFFFFF) || (dwUser1 == 0xFFFFFFFF))
   {
@@ -162,6 +164,8 @@ int     main(void)
 #endif
 
   IntMasterEnable();
+
+  LOG(("start 2\n"));
 
   while(1)
   {
