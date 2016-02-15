@@ -242,6 +242,19 @@ err_t SPN(struct pbuf *p)
 }
 
 
+err_t SRM(struct pbuf *p)
+{
+  uchar b = 0;
+  err_t err = PopCharDec(p, &b, 3);
+  if (err != ERR_OK) return err;
+
+  ibRoutingMode = b;
+  err = SaveRoutingMode();
+  if (err != ERR_OK) return err;
+
+  return ERR_OK;
+}
+
 err_t SDI(struct pbuf *p)
 {
   ulong dw = 0;
@@ -358,6 +371,12 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdIntDec(pcb,p,addr,port,broadcast,wPort);
   } else if (IsCmd(p,"SPN")) {
     CmdIn(pcb,p,addr,port,broadcast,SPN);
+  }
+
+  else if (IsCmd(p,"GRM")) {
+    CmdCharDec(pcb,p,addr,port,broadcast,ibRoutingMode);
+  } else if (IsCmd(p,"SRM")) {
+    CmdIn(pcb,p,addr,port,broadcast,SRM);
   }
 
   else if (IsCmd(p,"GDI")) {
