@@ -14,10 +14,12 @@ MAIN.C
 #include "utils/lwiplib_patched.h"
 #include "drivers/pinout.h"
 #include "settings.h"
+#include "settings2.h"
 #include "systick.h"
 #include "timer1.h"
 #include "uart/uart.h"
 #include "uart/log.h"
+#include "uart/serial.h"
 #include "udp/udp_handler.h"
 #include "tcp/tcp_handler.h"
 #include "tcp/telnet.h"
@@ -131,7 +133,10 @@ int     main(void)
   lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
   InitUDP_Handler();
-  InitTCP_Handler();
+//  InitTCP_Handler();
+
+  // Initialize the serial port module.
+  SerialInit();
 
   // Initialize the telnet module.
   TelnetInit();
@@ -150,27 +155,27 @@ int     main(void)
   IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
-#if false
-  // Initialize the telnet session(s).
-  for(ulLoop = 0; ulLoop < MAX_S2E_PORTS; ulLoop++)
+#if true
+  uint8_t u;
+  for(u = 0; u < MAX_S2E_PORTS; u++)
   {
       // Are we to operate as a telnet server?
-      if((g_sParameters.sPort[ulLoop].ucFlags & PORT_FLAG_TELNET_MODE) == PORT_TELNET_SERVER)
+      if(isServer(u))
       {
           // Yes - start listening on the required port.
-          TelnetListen(g_sParameters.sPort[ulLoop].usTelnetLocalPort, ulLoop);
+//           TelnetListen(g_sParameters.sPort[ibPort].usTelnetLocalPort, u);
+          ASSERT(false);
       }
       else
       {
-          // No - we are a client so initiate a connection to the desired
-          // IP address using the configured ports.
-          TelnetOpen(g_sParameters.sPort[ulLoop].ulTelnetIPAddr,
-                     g_sParameters.sPort[ulLoop].usTelnetRemotePort,
-                     g_sParameters.sPort[ulLoop].usTelnetLocalPort, ulLoop);
+          // No - we are a client so initiate a connection to the desired IP address using the configured ports.
+//          TelnetOpen(g_sParameters.sPort[u].ulTelnetIPAddr,
+//                     g_sParameters.sPort[u].usTelnetRemotePort,
+//                     g_sParameters.sPort[u].usTelnetLocalPort, u);
+          TelnetOpen(dwDestIP, wDestPort, 1, u);
       }
   }
 #endif
-
   IntMasterEnable();
 
   LOG(("start 2\n"));

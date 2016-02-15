@@ -98,7 +98,7 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 
             if(eError != ERR_OK)
             {
-                // Remember the error for later.
+                DEBUG_MSG("TelnetPoll error %d\n", eError);
                 pState->eLastErr = eError;
             }
         }
@@ -337,7 +337,7 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
     if(err != ERR_OK)
     {
-        // Remember the error that is being reported.
+        DEBUG_MSG("TelnetConnected error %d\n", err);
         pState->eLastErr = err;
 
         // Clear out all of the TCP callbacks.
@@ -367,9 +367,8 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
     // Change TCP state to connected.
     pState->eTCPState = STATE_TCP_CONNECTED;
 
-    // Reset the serial port associated with this session to its default
-    // parameters.
-    SerialSetDefault(pState->ulSerialPort);
+    // Reset the serial port associated with this session to its default parameters.
+    // TODO SerialSetDefault(pState->ulSerialPort);
 
     // Set the connection timeout to 0.
     pState->ulConnectionTimeout = 0;
@@ -453,9 +452,8 @@ static err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
     // Acknowledge that we have accepted this connection.
     tcp_accepted(pcb);
 
-    // Reset the serial port associated with this session to its default
-    // parameters.
-    SerialSetDefault(pState->ulSerialPort);
+    // Reset the serial port associated with this session to its default parameters.
+    // TODO SerialSetDefault(pState->ulSerialPort);
 
     // Set the connection timeout to 0.
     pState->ulConnectionTimeout = 0;
@@ -629,7 +627,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint16_t usTelne
     eError = tcp_connect(pcb, &sIPAddr, usTelnetRemotePort, TelnetConnected);
     if(eError != ERR_OK)
     {
-        // Remember the error for later.
+        DEBUG_MSG("TelnetOpen error %d\n", eError);
         pState->eLastErr = eError;
         return;
     }
