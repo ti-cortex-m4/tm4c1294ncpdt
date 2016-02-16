@@ -34,14 +34,14 @@ static uint8_t g_pucTX1Buffer[TX_RING_BUF_SIZE];
 
 
 //! The ring buffers used to hold characters received from the UARTs.
-static tRingBufObject g_sRxBuf[MAX_S2E_PORTS];
+static tRingBufObject g_sRxBuf[UART_COUNT];
 
 //! The ring buffers used to hold characters to be sent to the UARTs.
-static tRingBufObject g_sTxBuf[MAX_S2E_PORTS];
+static tRingBufObject g_sTxBuf[UART_COUNT];
 
 
 //! The base address for the UART associated with a port.
-static const uint32_t g_ulUARTBase[MAX_S2E_PORTS] =
+static const uint32_t g_ulUARTBase[UART_COUNT] =
 {
 //    UART0_BASE,
     UART4_BASE
@@ -307,7 +307,7 @@ static void SerialUARTEnable(uint32_t ulPort)
 bool SerialSendFull(uint32_t ulPort)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Return the number of bytes available in the tx ring buffer.
     return(RingBufFull(&g_sTxBuf[ulPort]));
@@ -328,7 +328,7 @@ bool SerialSendFull(uint32_t ulPort)
 void SerialSend(uint32_t ulPort, uint8_t ucChar)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Disable the UART transmit interrupt while determining how to handle this
     // character.  Failure to do so could result in the loss of this character,
@@ -370,7 +370,7 @@ long SerialReceive(uint32_t ulPort)
     uint32_t ulData;
 
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // See if the receive buffer is empty and there is space in the FIFO.
     if(RingBufEmpty(&g_sRxBuf[ulPort]))
@@ -415,7 +415,7 @@ long SerialReceive(uint32_t ulPort)
 uint32_t SerialReceiveAvailable(uint32_t ulPort)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Return the value.
     return(RingBufUsed(&g_sRxBuf[ulPort]));
@@ -440,7 +440,7 @@ SerialSetBaudRate(uint32_t ulPort, uint32_t ulBaudRate)
     uint32_t ulDiv, ulUARTClk;
 
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
     ASSERT(ulBaudRate != 0);
 
     // Save the baud rate for future reference.
@@ -483,7 +483,7 @@ SerialGetBaudRate(uint32_t ulPort)
     uint32_t ulCurrentBaudRate, ulCurrentConfig, ulDif, ulTemp;
 
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Get the current configuration of the UART.
     UARTConfigGetExpClk(g_ulUARTBase[ulPort], SysCtlClockGet(),
@@ -532,7 +532,7 @@ SerialSetDataSize(uint32_t ulPort, uint8_t ucDataSize)
     uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
     ASSERT((ucDataSize >= 5) && (ucDataSize <= 8));
 
     // Stop the UART.
@@ -611,7 +611,7 @@ SerialGetDataSize(uint32_t ulPort)
     uint8_t ucCurrentDataSize;
 
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Get the current configuration of the UART.
     UARTConfigGetExpClk(g_ulUARTBase[ulPort], SysCtlClockGet(),
@@ -673,7 +673,7 @@ SerialSetParity(uint32_t ulPort, uint8_t ucParity)
     uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
     ASSERT((ucParity == SERIAL_PARITY_NONE) ||
            (ucParity == SERIAL_PARITY_ODD) ||
            (ucParity == SERIAL_PARITY_EVEN) ||
@@ -766,7 +766,7 @@ SerialGetParity(uint32_t ulPort)
     uint8_t ucCurrentParity;
 
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Get the current configuration of the UART.
     UARTConfigGetExpClk(g_ulUARTBase[ulPort], SysCtlClockGet(),
@@ -834,7 +834,7 @@ SerialSetStopBits(uint32_t ulPort, uint8_t ucStopBits)
     uint32_t ulCurrentBaudRate, ulCurrentConfig, ulNewConfig;
 
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
     ASSERT((ucStopBits >= 1) && (ucStopBits <= 2));
 
     // Stop the UART.
@@ -897,7 +897,7 @@ SerialGetStopBits(uint32_t ulPort)
     uint8_t ucCurrentStopBits;
 
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Get the current configuration of the UART.
     UARTConfigGetExpClk(g_ulUARTBase[ulPort], SysCtlClockGet(),
@@ -944,7 +944,7 @@ void
 SerialSetFlowOut(uint32_t ulPort, uint8_t ucFlowValue)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
     ASSERT((ucFlowValue == SERIAL_FLOW_OUT_SET) ||
            (ucFlowValue == SERIAL_FLOW_OUT_CLEAR));
 
@@ -996,7 +996,7 @@ uint8_t
 SerialGetFlowOut(uint32_t ulPort)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // If flow control is set (ON) return an "11", otherwise, return
     // a "12" (based on the RFC2217 values).
@@ -1028,7 +1028,7 @@ void
 SerialSetFlowControl(uint32_t ulPort, uint8_t ucFlowControl)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
     ASSERT((ucFlowControl == SERIAL_FLOW_CONTROL_NONE) ||
            (ucFlowControl == SERIAL_FLOW_CONTROL_HW));
 
@@ -1078,7 +1078,7 @@ uint8_t
 SerialGetFlowControl(uint32_t ulPort)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Return the current flow control.
     return(g_sParameters.sPort[ulPort].ucFlowControl);
@@ -1098,7 +1098,7 @@ void
 SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
     ASSERT((ucPurgeCommand >= 1) && (ucPurgeCommand <= 3));
 
     // Disable the UART.
@@ -1132,7 +1132,7 @@ SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand)
 void SerialSetDefault(uint32_t ulPort)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Disable interrupts.
     IntDisable(g_ulUARTInterrupt[ulPort]);
@@ -1180,7 +1180,7 @@ void
 SerialSetCurrent(uint32_t ulPort)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Disable interrupts.
     IntDisable(g_ulUARTInterrupt[ulPort]);
@@ -1228,7 +1228,7 @@ void
 SerialSetFactory(uint32_t ulPort)
 {
     // Check the arguments.
-    ASSERT(ulPort < MAX_S2E_PORTS);
+    ASSERT(ulPort < UART_COUNT);
 
     // Disable interrupts.
     IntDisable(g_ulUARTInterrupt[ulPort]);

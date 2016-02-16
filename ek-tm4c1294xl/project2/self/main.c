@@ -157,7 +157,7 @@ int     main(void)
 
 #if false
   uint8_t u;
-  for(u = 0; u < MAX_S2E_PORTS; u++)
+  for(u = 0; u < UART_COUNT; u++)
   {
       // Are we to operate as a telnet server?
       if(isServer(u))

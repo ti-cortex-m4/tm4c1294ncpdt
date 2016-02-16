@@ -32,7 +32,7 @@ uchar                   bRoutingMode;
 ulong                   dwDestIP;
 uint                    wDestPort;
 
-uchar                   ibBaud;
+uchar                   mibBaud[UART_COUNT];
 
 uchar                   pbMAC[6];
 
@@ -114,7 +114,8 @@ uchar    SaveSettings(void)
   if ((err = SaveEntity(&enDestIP)) != 0) return err;
   if ((err = SaveEntity(&enDestPort)) != 0) return err;
 
-  if ((err = SaveEntity(&enBaud)) != 0) return err;
+  if ((err = SaveEntity(&enBaud0)) != 0) return err;
+  if ((err = SaveEntity(&enBaud1)) != 0) return err;
 
 
   return 0;
@@ -142,7 +143,8 @@ uchar   LoadSettings(void)
     LoadEntity(&enDestIP);
     LoadEntity(&enDestPort);
 
-    LoadEntity(&enBaud);
+    LoadEntity(&enBaud0);
+    LoadEntity(&enBaud1);
   }
   else
   {
@@ -162,7 +164,8 @@ uchar   LoadSettings(void)
     dwDestIP = DEFAULT_DEST_IP;
     wDestPort = DEFAULT_DEST_PORT;
 
-    ibBaud = DEFAULT_BAUD;
+    mibBaud[0] = DEFAULT_BAUD;
+    mibBaud[1] = DEFAULT_BAUD;
 
     SaveSettings();
   }
@@ -172,7 +175,9 @@ uchar   LoadSettings(void)
 
 
 
-ulong GetBaud(void)
+ulong GetBaud(uchar ibPort)
 {
-  return (ibBaud < BAUDS_SIZE) ? mdwBAUDS[ibBaud] : mdwBAUDS[DEFAULT_BAUD];
+  uchar ibBaud = mibBaud[ibPort] < BAUDS_SIZE ? mibBaud[ibPort] : DEFAULT_BAUD;
+  ASSERT(ibBaud < BAUDS_SIZE);
+  return mdwBAUDS[ibBaud];
 }
