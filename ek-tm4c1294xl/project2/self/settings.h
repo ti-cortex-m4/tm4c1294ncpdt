@@ -9,13 +9,13 @@ SETTINGS.H
 #define MAX_INT 0xFFFF
 #define MAX_LONG 0xFFFFFFFF
 
-#define BAUDS_SIZE      14
+#define BAUD_RATE_COUNT      14
 
 #define DEFAULT_CONNECTION_TIMEOUT 0
 #define DEFAULT_ROUTING_MODE 0
 #define DEFAULT_DEST_IP 0xC0A80165 // inet_addr("101.1.168.192")
 #define DEFAULT_DEST_PORT 101
-#define DEFAULT_BAUD 6 // 9600
+#define DEFAULT_BAUD_RATE 6 // 9600
 
 
 extern ulong                   dwIP;
@@ -31,7 +31,7 @@ extern uchar                   bRoutingMode;
 extern ulong                   dwDestIP;
 extern uint                    wDestPort;
 
-extern uchar                   mibBaud[UART_COUNT];
+extern uchar                   mibBaudRate[UART_COUNT];
 
 extern uchar                   pbMAC[6];
 

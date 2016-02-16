@@ -32,8 +32,8 @@ extern const entity enRoutingMode;
 extern const entity enDestIP;
 extern const entity enDestPort;
 
-extern const entity enBaud0;
-extern const entity enBaud1;
+extern const entity enBaudRate0;
+extern const entity enBaudRate1;
 
 
 #endif
