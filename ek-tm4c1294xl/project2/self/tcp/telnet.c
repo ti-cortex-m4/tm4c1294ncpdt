@@ -616,7 +616,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint16_t usTelne
 
     // Make a connection to the remote telnet server.
     sIPAddr.addr = htonl(ulIPAddr);
-    pcb = tcp_new();
+    pcb = tcp_new(); // TODO check NULL
 
     // Save the requested information and set the TCP callback functions
     // and arguments.
@@ -682,7 +682,7 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
     pState->bLinkLost = false;
 
     // Initialize the application to listen on the requested telnet port.
-    pcb = tcp_new();
+    pcb = tcp_new(); // TODO check NULL
     tcp_bind(pcb, IP_ADDR_ANY, usTelnetPort);
     pcb = tcp_listen(pcb);
     pState->pListenPCB = pcb;
