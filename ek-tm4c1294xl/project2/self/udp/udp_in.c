@@ -155,8 +155,8 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 9: PushString(enConnectionTimeout.szName); break;
     case 10: PushString(enRoutingMode.szName); break;
     case 11: PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\""); break;
-    case 12: PushString("AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1||RM==2?\"e\":\"i\""); break; // TODO ||SF==1
-    case 13: PushString("AI=DP;E=1;D=Destination port;T=INT;C=EDIT;S=RM!=0?\"e\":\"i\""); break;
+    case 12: PushString(enDestIP.szName); break;
+    case 13: PushString(enDestPort.szName); break;
     default: ASSERT(false); break;
   }
 
@@ -257,33 +257,6 @@ err_t SCT(struct pbuf *p)
 
   return ERR_OK;
 }
-
-err_t SDI(struct pbuf *p)
-{
-  ulong dw = 0;
-  err_t err = PopIP(p, &dw);
-  if (err != ERR_OK) return err;
-
-  dwDestIP = dw;
-  err = SaveDestIP();
-  if (err != ERR_OK) return err;
-
-  return ERR_OK;
-}
-
-err_t SDP(struct pbuf *p)
-{
-  uint w = 0;
-  err_t err = PopIntDec(p, &w, 3);
-  if (err != ERR_OK) return err;
-
-  wDestPort = w;
-  err = SaveDestPort();
-  if (err != ERR_OK) return err;
-
-  return ERR_OK;
-}
-
 
 err_t SBR(struct pbuf *p)
 {
@@ -453,17 +426,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode)) {
   }
-
-  else if (IsCmd(p,"GDI")) {
-    CmdIP(pcb,p,addr,port,broadcast,dwDestIP);
-  } else if (IsCmd(p,"SDI")) {
-    CmdIn(pcb,p,addr,port,broadcast,SDI);
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestIP)) {
   }
-
-  else if (IsCmd(p,"GDP")) {
-    CmdIntDec(pcb,p,addr,port,broadcast,wDestPort);
-  } else if (IsCmd(p,"SDP")) {
-    CmdIn(pcb,p,addr,port,broadcast,SDP);
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestPort)) {
   }
 
   else if (IsCmd(p,"GBR")) {

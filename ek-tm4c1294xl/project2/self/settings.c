@@ -81,16 +81,6 @@ uchar SaveOwnerName(void)
   return SaveString(szOwnerName, EEPROM_OWNER_NAME);
 }
 
-uchar SaveDestIP(void)
-{
-  return SaveLong(&dwDestIP, EEPROM_DEST_IP);
-}
-
-uchar SaveDestPort(void)
-{
-  return SaveInt(&wDestPort, EEPROM_DEST_PORT);
-}
-
 uchar SaveBaud(void)
 {
   return SaveChar(&ibBaud, EEPROM_BAUD);
@@ -126,12 +116,8 @@ uchar    SaveSettings(void)
 
   if ((err = SaveEntity(&enConnectionTimeout)) != 0) return err;
   if ((err = SaveEntity(&enRoutingMode)) != 0) return err;
-
-  err = SaveLong(&dwDestIP, EEPROM_DEST_IP);
-  if (err != 0) return err;
-
-  err = SaveInt(&wDestPort, EEPROM_DEST_PORT);
-  if (err != 0) return err;
+  if ((err = SaveEntity(&enDestIP)) != 0) return err;
+  if ((err = SaveEntity(&enDestPort)) != 0) return err;
 
 
   err = SaveChar(&ibBaud, EEPROM_BAUD);
@@ -160,8 +146,8 @@ uchar   LoadSettings(void)
 
     LoadEntity(&enConnectionTimeout);
     LoadEntity(&enRoutingMode);
-    LoadLong(&dwDestIP, EEPROM_DEST_IP);
-    LoadInt(&wDestPort, EEPROM_DEST_PORT);
+    LoadEntity(&enDestIP);
+    LoadEntity(&enDestPort);
 
     LoadChar(&ibBaud, EEPROM_BAUD);
   }
@@ -178,7 +164,7 @@ uchar   LoadSettings(void)
     memset(&szOwnerName,  0, sizeof(szOwnerName));
     sprintf(szOwnerName, "Owner");
 
-    bConnectionTimeout = DEFAULT_CONNECTION_TIMEOUT;
+    bConnectionTimeout = DEFAULT_CONNECTION_TIMEOUT; // TODO LoadEntityDef
     bRoutingMode = DEFAULT_ROUTING_MODE;
     dwDestIP = DEFAULT_DEST_IP;
     wDestPort = DEFAULT_DEST_PORT;
