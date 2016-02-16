@@ -163,14 +163,14 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 7: PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\""); break;
 
     case 8: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
-    case 9: PushString(enBaud0.szName); break;
+    case 9: PushString(enBaudRate0.szName); break;
     case 10: PushString(enConnectionTimeout.szName); break;
     case 11: PushString(enRoutingMode.szName); break;
     case 12: PushString(enDestIP.szName); break;
     case 13: PushString(enDestPort.szName); break;
 
-    case 14: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
-    case 15: PushString(enBaud1.szName); break;
+    case 14: PushString("AI=$CHANNEL2;D=Channel2;T=GROUP"); break;
+    case 15: PushString(enBaudRate1.szName); break;
 
     default: ASSERT(false); break;
   }
@@ -429,9 +429,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestPort)) {
   }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaud0)) {
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate0)) {
   }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaud1)) {
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate1)) {
   }
 
   else { // TODO

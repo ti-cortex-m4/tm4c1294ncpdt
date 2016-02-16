@@ -22,7 +22,7 @@ const entity enRoutingMode = {
         EEPROM_CONNECTION_TIMEOUT, &bRoutingMode, sizeof(uchar), CHAR,
         0, 2, DEFAULT_ROUTING_MODE, // TODO 2-> 1
         "RM",
-		"AI=RM;D=Routing Mode;T=INT;C=STATIC;O=0-Server (Slave)/0/2-Client (Master)/2",
+		"AI=RM;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/2-Client (Master)/2",
 };
 
 const entity enDestIP = {
@@ -40,16 +40,16 @@ const entity enDestPort = {
 };
 
 
-const entity enBaud0 = {
-        EEPROM_BAUD_0, &mibBaud[0], sizeof(uchar), CHAR,
-        0, BAUDS_SIZE-1, DEFAULT_BAUD,
+const entity enBaudRate0 = {
+        EEPROM_BAUD_RATE_0, &mibBaudRate[0], sizeof(uchar), CHAR,
+        0, BAUD_RATE_COUNT-1, DEFAULT_BAUD_RATE,
         "BR",
         "AI=BR;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13",
 };
 
-const entity enBaud1 = {
-        EEPROM_BAUD_1, &mibBaud[1], sizeof(uchar), CHAR,
-        0, BAUDS_SIZE-1, DEFAULT_BAUD,
+const entity enBaudRate1 = {
+        EEPROM_BAUD_RATE_1, &mibBaudRate[1], sizeof(uchar), CHAR,
+        0, BAUD_RATE_COUNT-1, DEFAULT_BAUD_RATE,
         "BR@2",
         "AI=BR@2;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13",
 };

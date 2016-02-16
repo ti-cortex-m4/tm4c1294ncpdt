@@ -14,7 +14,7 @@ TODO
 
 
 
-static const ulong      mdwBAUDS[BAUDS_SIZE] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
+static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
 #define SETTINGS_LABEL  5
@@ -32,7 +32,7 @@ uchar                   bRoutingMode;
 ulong                   dwDestIP;
 uint                    wDestPort;
 
-uchar                   mibBaud[UART_COUNT];
+uchar                   mibBaudRate[UART_COUNT];
 
 uchar                   pbMAC[6];
 
@@ -114,8 +114,8 @@ uchar    SaveSettings(void)
   if ((err = SaveEntity(&enDestIP)) != 0) return err;
   if ((err = SaveEntity(&enDestPort)) != 0) return err;
 
-  if ((err = SaveEntity(&enBaud0)) != 0) return err;
-  if ((err = SaveEntity(&enBaud1)) != 0) return err;
+  if ((err = SaveEntity(&enBaudRate0)) != 0) return err;
+  if ((err = SaveEntity(&enBaudRate1)) != 0) return err;
 
 
   return 0;
@@ -143,8 +143,8 @@ uchar   LoadSettings(void)
     LoadEntity(&enDestIP);
     LoadEntity(&enDestPort);
 
-    LoadEntity(&enBaud0);
-    LoadEntity(&enBaud1);
+    LoadEntity(&enBaudRate0);
+    LoadEntity(&enBaudRate1);
   }
   else
   {
@@ -164,8 +164,8 @@ uchar   LoadSettings(void)
     dwDestIP = DEFAULT_DEST_IP;
     wDestPort = DEFAULT_DEST_PORT;
 
-    mibBaud[0] = DEFAULT_BAUD;
-    mibBaud[1] = DEFAULT_BAUD;
+    mibBaudRate[0] = DEFAULT_BAUD_RATE;
+    mibBaudRate[1] = DEFAULT_BAUD_RATE;
 
     SaveSettings();
   }
@@ -177,7 +177,7 @@ uchar   LoadSettings(void)
 
 ulong GetBaud(uchar ibPort)
 {
-  uchar ibBaud = mibBaud[ibPort] < BAUDS_SIZE ? mibBaud[ibPort] : DEFAULT_BAUD;
-  ASSERT(ibBaud < BAUDS_SIZE);
+  uchar ibBaud = mibBaudRate[ibPort] < BAUD_RATE_COUNT ? mibBaudRate[ibPort] : DEFAULT_BAUD_RATE;
+  ASSERT(ibBaud < BAUD_RATE_COUNT);
   return mdwBAUDS[ibBaud];
 }
