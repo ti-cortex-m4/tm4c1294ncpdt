@@ -31,7 +31,9 @@ extern const entity enConnectionTimeout;
 extern const entity enRoutingMode;
 extern const entity enDestIP;
 extern const entity enDestPort;
-extern const entity enBaud;
+
+extern const entity enBaud0;
+extern const entity enBaud1;
 
 
 #endif

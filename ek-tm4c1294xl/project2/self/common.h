@@ -23,7 +23,4 @@ typedef union
 #define NAME_SIZE       (8+1)
 
 
-#define UART_COUNT      1
-
-
 #endif

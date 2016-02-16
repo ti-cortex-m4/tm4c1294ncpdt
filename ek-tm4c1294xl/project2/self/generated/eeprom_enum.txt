@@ -18,7 +18,8 @@ typedef enum
   EEPROM_DEST_IP        = EEPROM_ROUTING_MODE + 4,
   EEPROM_DEST_PORT      = EEPROM_DEST_IP + 4,
 
-  EEPROM_BAUD           = EEPROM_DEST_PORT + 4,
+  EEPROM_BAUD_0         = EEPROM_DEST_PORT + 4,
+  EEPROM_BAUD_1         = EEPROM_BAUD_0 + 4,
 
-  EEPROM_END            = EEPROM_BAUD + 4
+  EEPROM_END            = EEPROM_BAUD_1 + 4
 } eeprom;

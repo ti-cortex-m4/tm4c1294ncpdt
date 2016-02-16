@@ -18,6 +18,16 @@ UDP_IN.C
 
 typedef err_t (*in_fn)(struct pbuf *p);
 
+/*
+typedef struct
+{
+  struct udp_pcb *pcb,
+  struct pbuf *p,
+  struct ip_addr *addr,
+  uint port,
+  uchar broadcast
+} udp_input;
+*/
 
 
 err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *sz)
@@ -150,13 +160,18 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 4: PushString("AI=IP;D=IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
     case 5: PushString("AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
     case 6: PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
-    case 7: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
-    case 8: PushString(enBaud.szName); break;
-    case 9: PushString(enConnectionTimeout.szName); break;
-    case 10: PushString(enRoutingMode.szName); break;
-    case 11: PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\""); break;
+    case 7: PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\""); break;
+
+    case 8: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
+    case 9: PushString(enBaud0.szName); break;
+    case 10: PushString(enConnectionTimeout.szName); break;
+    case 11: PushString(enRoutingMode.szName); break;
     case 12: PushString(enDestIP.szName); break;
     case 13: PushString(enDestPort.szName); break;
+
+    case 14: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
+    case 15: PushString(enBaud1.szName); break;
+
     default: ASSERT(false); break;
   }
 
@@ -272,7 +287,6 @@ static bool IsCmd(struct pbuf *p, const char *szCmd)
   return true;
 }
 
-#if true
 static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)
 {
   uchar *pb = p->payload;
@@ -320,7 +334,7 @@ err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
-/*TODO static*/ bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen)
+static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen) // TODO check errors
 {
   if (IsEnityCode(p, 'G', pen->szCode))
   {
@@ -344,7 +358,6 @@ err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
     return false;
   }
 }
-#endif
 
 void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
@@ -365,7 +378,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"14");
+    CmdString(pcb,p,addr,port,broadcast,"16");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -416,7 +429,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestPort)) {
   }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaud)) {
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaud0)) {
+  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaud1)) {
   }
 
   else { // TODO

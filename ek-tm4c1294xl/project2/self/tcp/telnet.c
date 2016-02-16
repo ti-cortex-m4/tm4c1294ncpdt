@@ -18,7 +18,7 @@ TELNET.C
 //*****************************************************************************
 //! The telnet session data array, for use in the telnet handler function.
 //*****************************************************************************
-static tTelnetSessionData g_sTelnetSession[MAX_S2E_PORTS];
+static tTelnetSessionData g_sTelnetSession[UART_COUNT];
 
 
 //*****************************************************************************
@@ -509,7 +509,7 @@ void TelnetClose(uint32_t ulSerialPort)
     DEBUG_MSG("TelnetClose UART %d\n", ulSerialPort);
 
     // Check the arguments.
-    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+    ASSERT(ulSerialPort < UART_COUNT);
     pState = &g_sTelnetSession[ulSerialPort];
 
     // If we have a connect PCB, close it down.
@@ -551,7 +551,7 @@ void TelnetClose(uint32_t ulSerialPort)
     pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
-    pState->ulSerialPort = MAX_S2E_PORTS;
+    pState->ulSerialPort = UART_COUNT;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
     pState->pBufHead = NULL;
@@ -588,7 +588,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint16_t usTelne
 
     // Check the arguments.
     ASSERT(ulIPAddr != 0);
-    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+    ASSERT(ulSerialPort < UART_COUNT);
     ASSERT(usTelnetRemotePort != 0);
     ASSERT(usTelnetLocalPort != 0);
     pState = &g_sTelnetSession[ulSerialPort];
@@ -657,7 +657,7 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
     DEBUG_MSG("TelnetListen port %d, UART %d\n", usTelnetPort, ulSerialPort);
 
     // Check the arguments.
-    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+    ASSERT(ulSerialPort < UART_COUNT);
     ASSERT(usTelnetPort != 0);
     pState = &g_sTelnetSession[ulSerialPort];
 
@@ -710,7 +710,7 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
 uint16_t TelnetGetLocalPort(uint32_t ulSerialPort)
 {
     // Check the arguments.
-    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+    ASSERT(ulSerialPort < UART_COUNT);
 
     return(g_sTelnetSession[ulSerialPort].usTelnetLocalPort);
 }
@@ -730,7 +730,7 @@ uint16_t TelnetGetLocalPort(uint32_t ulSerialPort)
 uint16_t TelnetGetRemotePort(uint32_t ulSerialPort)
 {
     // Check the arguments.
-    ASSERT(ulSerialPort < MAX_S2E_PORTS);
+    ASSERT(ulSerialPort < UART_COUNT);
 
     return(g_sTelnetSession[ulSerialPort].usTelnetRemotePort);
 }
@@ -748,7 +748,7 @@ void TelnetInit(void)
     int iPort;
 
     // Initialize the session data for each supported port.
-    for(iPort = 0; iPort < MAX_S2E_PORTS; iPort++)
+    for(iPort = 0; iPort < UART_COUNT; iPort++)
     {
         g_sTelnetSession[iPort].pConnectPCB = NULL;
         g_sTelnetSession[iPort].pListenPCB = NULL;
@@ -757,7 +757,7 @@ void TelnetInit(void)
         g_sTelnetSession[iPort].ucFlags = 0;
         g_sTelnetSession[iPort].ulConnectionTimeout = 0;
         g_sTelnetSession[iPort].ulMaxTimeout = 0;
-        g_sTelnetSession[iPort].ulSerialPort = MAX_S2E_PORTS;
+        g_sTelnetSession[iPort].ulSerialPort = UART_COUNT;
         g_sTelnetSession[iPort].usTelnetRemotePort = 0;
         g_sTelnetSession[iPort].usTelnetLocalPort = 0;
         g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
@@ -796,7 +796,7 @@ TelnetHandler(void)
     tTelnetSessionData *pState;
 
     // Loop through the possible telnet sessions.
-    for(iLoop = 0; iLoop < MAX_S2E_PORTS; iLoop++)
+    for(iLoop = 0; iLoop < UART_COUNT; iLoop++)
     {
         // Initialize the state pointer.
         pState = &g_sTelnetSession[iLoop];
@@ -984,7 +984,7 @@ void TelnetNotifyLinkStatus(bool bLinkStatusUp)
     }
 
     // For every port, indicate that the link has been lost.
-    for(iPort = 0; iPort < MAX_S2E_PORTS; iPort++)
+    for(iPort = 0; iPort < UART_COUNT; iPort++)
     {
         g_sTelnetSession[iPort].bLinkLost = true;
     }

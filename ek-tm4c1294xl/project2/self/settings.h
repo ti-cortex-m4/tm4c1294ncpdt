@@ -31,7 +31,7 @@ extern uchar                   bRoutingMode;
 extern ulong                   dwDestIP;
 extern uint                    wDestPort;
 
-extern uchar                   ibBaud;
+extern uchar                   mibBaud[UART_COUNT];
 
 extern uchar                   pbMAC[6];
 
@@ -58,4 +58,4 @@ uchar SaveBaud(void);
 
 uchar LoadSettings(void);
 
-ulong GetBaud(void);
+ulong GetBaud(uchar ibPort);
