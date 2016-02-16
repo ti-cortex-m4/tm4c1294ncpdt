@@ -175,7 +175,8 @@ void UART4IntHandler(void)
 //!
 //! \return None.
 //*****************************************************************************
-void SerialUART1IntHandler(void)
+//void SerialUART1IntHandler(void)
+void UART3IntHandler(void)
 {
     SerialUARTIntHandler(1);
 }
