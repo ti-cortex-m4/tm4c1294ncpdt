@@ -38,3 +38,10 @@ const entity enDestPort = {
         "DP",
         "AI=DP;E=1;D=Destination port;T=INT;C=EDIT;S=RM!=0?\"e\":\"i\"",
 };
+
+const entity enBaud = {
+        EEPROM_BAUD, &ibBaud, sizeof(uchar), CHAR,
+        0, BAUDS_SIZE-1, DEFAULT_BAUD,
+        "BR",
+        "AI=BR;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13",
+};
