@@ -35,5 +35,8 @@ extern const entity enDestPort;
 extern const entity enBaudRate0;
 extern const entity enBaudRate1;
 
+extern const entity enUdpDebugFlag;
+extern const entity enUdpDebugPort;
+
 
 #endif
