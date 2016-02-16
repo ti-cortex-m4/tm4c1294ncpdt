@@ -1,36 +1,34 @@
 /*------------------------------------------------------------------------------
-log_stdio.C
+log_stdio.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <string.h>
 #include <stdarg.h>
-//#include "inc/hw_ints.h"
-//#include "inc/hw_memmap.h"
-//#include "inc/hw_types.h"
-//#include "inc/hw_uart.h"
 #include "driverlib/debug.h"
-//#include "driverlib/interrupt.h"
-//#include "driverlib/rom.h"
-//#include "driverlib/rom_map.h"
-//#include "driverlib/sysctl.h"
-//#include "driverlib/uart.h"
-//#include "utils/uartstdio.h"
+#include "log_stdio.h"
 
 
 
-//*****************************************************************************
-// A mapping from an integer between 0 and 15 to its ASCII character
-// equivalent.
-//*****************************************************************************
+unsigned char           mbLog[LOG_BUFF_SIZE];
+
+static unsigned int     iwLog;
+
+
+
 static const char * const g_pcHex = "0123456789abcdef";
 
 
 
 void CharPut(unsigned char ucData)
 {
+  if (iwLog < LOG_BUFF_SIZE)
+  {
+    mbLog[iwLog++] = ucData;
+  }
 }
 
 //*****************************************************************************
@@ -57,7 +55,7 @@ void CharPut(unsigned char ucData)
 //!
 //! \return Returns the count of characters written.
 //*****************************************************************************
-int LogWrite(const char *pcBuf, uint32_t ui32Len)
+static int LogWrite(const char *pcBuf, uint32_t ui32Len)
 {
     unsigned int uIdx;
 
@@ -118,7 +116,7 @@ int LogWrite(const char *pcBuf, uint32_t ui32Len)
 //!
 //! \return None.
 //*****************************************************************************
-void LogPrintArg(const char *pcString, va_list vaArgP)
+static void LogPrintVarArg(const char *pcString, va_list vaArgP)
 {
     uint32_t ui32Idx, ui32Value, ui32Pos, ui32Count, ui32Base, ui32Neg;
     char *pcStr, pcBuf[16], cFill;
@@ -426,12 +424,15 @@ convert:
 //*****************************************************************************
 void LogPrintF(const char *pcString, ...)
 {
+    memset(&mbLog, 0, sizeof(mbLog));
+    iwLog = 0;
+
     va_list vaArgP;
 
     // Start the varargs processing.
     va_start(vaArgP, pcString);
 
-    LogPrintArg(pcString, vaArgP);
+    LogPrintVarArg(pcString, vaArgP);
 
     // We're finished with the varargs now.
     va_end(vaArgP);

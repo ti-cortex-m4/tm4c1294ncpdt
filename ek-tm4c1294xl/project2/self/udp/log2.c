@@ -7,23 +7,22 @@ LOG2.Ñ
 #include "../main.h"
 #include "lwip/inet.h"
 #include "lwip/udp.h"
+#include "../log/log_stdio.h"
 #include "log2.h"
 
 
 
 static void            *pcb;
 
-static bool             enabled = false;
+static bool             enabled = true;
 
 static uint             cwErrors1, cwErrors2;
-
-//char                    mbLog2[1000];
 
 
 
 void InitLog2(void)
 {
-#if false
+#if true
   if (enabled)
   {
     pcb = udp_new();
@@ -35,7 +34,7 @@ void InitLog2(void)
 
 void Log2(const char *sz)
 {
-#if false
+#if true
   if (enabled)
   {
     uint wSize = strlen(sz);
@@ -59,8 +58,8 @@ void Log2(const char *sz)
 #endif
 }
 
-/*
-void Log3(const char *sz, ...)
+
+void UDPprintf(const char *sz, ...)
 {
     va_list vaArgP;
 
@@ -75,4 +74,4 @@ void Log3(const char *sz, ...)
 
     Log2(mbLog2);
 }
-*/
+
