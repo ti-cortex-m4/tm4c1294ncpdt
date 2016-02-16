@@ -1,9 +1,8 @@
 /*------------------------------------------------------------------------------
-LOG2.H
+udp_log.h
 
 
 ------------------------------------------------------------------------------*/
 
-void InitLog2(void);
-void Log2(uchar *pb, uint wSize);
-void UDPprintf(const char *sz, ...);
+void InitUdpLog(void);
+void UdpLog(uchar *pb, uint wSize);

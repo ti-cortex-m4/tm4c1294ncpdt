@@ -4,11 +4,11 @@ log_stdio.c
 
 ------------------------------------------------------------------------------*/
 
+#include "../main.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
-#include "driverlib/debug.h"
 #include "log_stdio.h"
 
 
@@ -424,7 +424,7 @@ convert:
 //!
 //! \return None.
 //*****************************************************************************
-log_t LogPrintF(const char *pcString, ...)
+buff_t LogPrintF(const char *pcString, ...)
 {
     memset(&mbLog, 0, sizeof(mbLog));
     iwLog = 0;
@@ -436,17 +436,17 @@ log_t LogPrintF(const char *pcString, ...)
 
     va_end(vaArgP);
 
-    log_t log;
-    log.pbData = (unsigned char *)mbLog;
-    log.wSize = iwLog;
-    return log;
+    buff_t buff;
+    buff.pbBuff = (unsigned char *)mbLog;
+    buff.wSize = iwLog;
+    return buff;
 }
 
 
 
-void Log2(unsigned char *pb, unsigned int wSize);
+void UdpLog(unsigned char *pb, unsigned int wSize);
 
-void UDPprintf(const char *pcString, ...)
+void UdpPrintF(const char *pcString, ...)
 {
     memset(&mbLog, 0, sizeof(mbLog));
     iwLog = 0;
@@ -458,5 +458,5 @@ void UDPprintf(const char *pcString, ...)
 
     va_end(vaArgP);
 
-    Log2((unsigned char *)mbLog, iwLog);
+    UdpLog((unsigned char *)mbLog, iwLog);
 }
