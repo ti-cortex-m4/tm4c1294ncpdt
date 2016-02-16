@@ -55,3 +55,23 @@ void    InitUART4(ulong dwSysClockFreq)
 
   UARTConfigSetExpClk(UART4_BASE, dwSysClockFreq, GetBaud(0), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
+
+
+void    InitUART3(ulong dwSysClockFreq)
+{
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_UART3);
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+
+  GPIOPinConfigure(GPIO_PA4_U3RX);
+  GPIOPinConfigure(GPIO_PA5_U3TX);
+  GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_4 | GPIO_PIN_5);
+
+  UARTFIFOLevelSet(UART3_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(UART3_BASE, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(UART3_BASE);
+
+  IntEnable(INT_UART3);
+  UARTIntEnable(UART3_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+
+  UARTConfigSetExpClk(UART3_BASE, dwSysClockFreq, GetBaud(1), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+}

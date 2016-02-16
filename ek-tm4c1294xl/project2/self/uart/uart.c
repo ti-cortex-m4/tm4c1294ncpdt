@@ -33,6 +33,7 @@ void    InitUART(ulong dwSysClockFreq)
 
 //  InitUART0(dwSysClockFreq);
   InitUART4(dwSysClockFreq);
+  InitUART3(dwSysClockFreq);
 }
 
 
