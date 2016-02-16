@@ -32,13 +32,11 @@ void InitLog2(void)
 
 
 
-void Log2(const char *sz)
+void Log2(uchar *pb, uint wSize)
 {
 #if true
   if (enabled)
   {
-    uint wSize = strlen(sz);
-
     struct pbuf *p = pbuf_alloc(PBUF_TRANSPORT, wSize, PBUF_RAM);
     if (p == NULL)
     {
@@ -46,7 +44,7 @@ void Log2(const char *sz)
     }
     else
     {
-      memcpy(p->payload, sz, wSize);
+      memcpy(p->payload, pb, wSize);
 
       err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, 50000);
       if (err != 0)
@@ -66,12 +64,11 @@ void UDPprintf(const char *sz, ...)
     // Start the varargs processing.
     va_start(vaArgP, sz);
 
-//    UARTvprintf(pcString, vaArgP);
-	sprintf(mbLog2, sz, vaArgP);
+    log_t log = LogPrintF(sz, vaArgP);
 
     // We're finished with the varargs now.
     va_end(vaArgP);
 
-    Log2(mbLog2);
+    Log2(log.pbData, log.wSize);
 }
 

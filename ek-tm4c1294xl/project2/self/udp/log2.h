@@ -5,5 +5,5 @@ LOG2.H
 ------------------------------------------------------------------------------*/
 
 void InitLog2(void);
-void Log2(const char *sz);
+void Log2(uchar *pb, uint wSize);
 void UDPprintf(const char *sz, ...);
