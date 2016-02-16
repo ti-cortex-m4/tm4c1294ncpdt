@@ -186,5 +186,7 @@ int     main(void)
 
   while(1)
   {
+	  SysCtlDelay(20*SysCtlClockGet());
+	  stats_display();
   }
 }
