@@ -73,9 +73,9 @@ void LoadEntity(entity const *pen) // TODO min max def
 {
   switch(pen->eType)
   {
-    case CHAR: LoadChar(pen->pbRAM, pen->dwEEPROM);
-    case INT: LoadInt(pen->pbRAM, pen->dwEEPROM);
-    case LONG: LoadLong(pen->pbRAM, pen->dwEEPROM);
-    default: ASSERT(false);
+    case CHAR: LoadChar(pen->pbRAM, pen->dwEEPROM); break;
+    case INT: LoadInt(pen->pbRAM, pen->dwEEPROM); break;
+    case LONG: LoadLong(pen->pbRAM, pen->dwEEPROM); break;
+    default: ASSERT(false); break;
   }
 }

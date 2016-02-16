@@ -7,6 +7,8 @@ SETTINGS.H
 
 #define BAUDS_SIZE      14
 #define DEFAULT_BAUD    6 // 9600
+#define DEFAULT_CONNECTION_TIMEOUT 0
+#define DEFAULT_ROUTING_MODE 0
 
 
 
@@ -19,7 +21,7 @@ extern char                    szDeviceName[NAME_SIZE];
 extern char                    szOwnerName[NAME_SIZE];
 
 extern uchar                   bConnectionTimeout;
-extern uchar                   ibRoutingMode;
+extern uchar                   bRoutingMode;
 extern ulong                   dwDestIP;
 extern uint                    wDestPort;
 
