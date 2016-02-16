@@ -81,11 +81,6 @@ uchar SaveOwnerName(void)
   return SaveString(szOwnerName, EEPROM_OWNER_NAME);
 }
 
-uchar SaveBaud(void)
-{
-  return SaveChar(&ibBaud, EEPROM_BAUD);
-}
-
 
 uchar    SaveSettings(void)
 {
@@ -119,9 +114,7 @@ uchar    SaveSettings(void)
   if ((err = SaveEntity(&enDestIP)) != 0) return err;
   if ((err = SaveEntity(&enDestPort)) != 0) return err;
 
-
-  err = SaveChar(&ibBaud, EEPROM_BAUD);
-  if (err != 0) return err;
+  if ((err = SaveEntity(&enBaud)) != 0) return err;
 
 
   return 0;
@@ -149,7 +142,7 @@ uchar   LoadSettings(void)
     LoadEntity(&enDestIP);
     LoadEntity(&enDestPort);
 
-    LoadChar(&ibBaud, EEPROM_BAUD);
+    LoadEntity(&enBaud);
   }
   else
   {
