@@ -13,7 +13,9 @@ log_stdio.c
 
 
 
-unsigned char           mbLog[LOG_BUFF_SIZE];
+#define LOG_BUFF_SIZE 1000
+
+static unsigned char    mbLog[LOG_BUFF_SIZE];
 
 static unsigned int     iwLog;
 
@@ -422,7 +424,7 @@ convert:
 //!
 //! \return None.
 //*****************************************************************************
-void LogPrintF(const char *pcString, ...)
+log_t LogPrintF(const char *pcString, ...)
 {
     memset(&mbLog, 0, sizeof(mbLog));
     iwLog = 0;
@@ -436,5 +438,10 @@ void LogPrintF(const char *pcString, ...)
 
     // We're finished with the varargs now.
     va_end(vaArgP);
+
+    log_t log;
+    log.pbData = (unsigned char *)mbLog;
+    log.wSize = iwLog;
+    return log;
 }
 

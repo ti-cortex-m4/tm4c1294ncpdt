@@ -182,7 +182,7 @@ int     main(void)
   IntMasterEnable();
 
   LOG(("start\n"));
-  Log2("start\n");
+//  Log2("start\n");
 
   while(1)
   {

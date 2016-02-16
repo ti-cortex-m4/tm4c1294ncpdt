@@ -8,6 +8,9 @@ Configuration of the serial to Ethernet converter.
 #define __CONFIG_H__
 
 
+void UDPprintf(const char *sz, ...);
+
+
 #define DEBUG_UART 0
 
 
@@ -20,6 +23,7 @@ Configuration of the serial to Ethernet converter.
 // set to use the inactive UART.
 //*****************************************************************************
 #ifdef DEBUG_UART
+//#define DEBUG_MSG UDPprintf
 #define DEBUG_MSG UARTprintf
 #else
 #define DEBUG_MSG while(0) ((int (*)(char *, ...))0)
