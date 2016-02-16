@@ -34,10 +34,10 @@ static uint8_t g_pucTX1Buffer[TX_RING_BUF_SIZE];
 
 
 //! The buffer used to hold characters received from the UART1.
-static uint8_t g_pucRX2Buffer[RX_RING_BUF_SIZE];
+//static uint8_t g_pucRX2Buffer[RX_RING_BUF_SIZE];
 
 //! The buffer used to hold characters to be sent to the UART1.
-static uint8_t g_pucTX2Buffer[TX_RING_BUF_SIZE];
+//static uint8_t g_pucTX2Buffer[TX_RING_BUF_SIZE];
 
 
 //! The ring buffers used to hold characters received from the UARTs.
@@ -51,7 +51,7 @@ static tRingBufObject g_sTxBuf[UART_COUNT];
 static const uint32_t g_ulUARTBase[UART_COUNT] =
 {
     UART4_BASE,
-    UART3_BASE,
+//    UART3_BASE,
 };
 
 
@@ -1282,8 +1282,8 @@ void SerialInit(void)
     RingBufInit(&g_sRxBuf[1], g_pucRX1Buffer, sizeof(g_pucRX1Buffer));
     RingBufInit(&g_sTxBuf[1], g_pucTX1Buffer, sizeof(g_pucTX1Buffer));
 
-    RingBufInit(&g_sRxBuf[2], g_pucRX2Buffer, sizeof(g_pucRX2Buffer));
-    RingBufInit(&g_sTxBuf[2], g_pucTX2Buffer, sizeof(g_pucTX2Buffer));
+//    RingBufInit(&g_sRxBuf[2], g_pucRX2Buffer, sizeof(g_pucRX2Buffer));
+//    RingBufInit(&g_sTxBuf[2], g_pucTX2Buffer, sizeof(g_pucTX2Buffer));
 
 #if false
     // Configure the Port 0 pins appropriately.

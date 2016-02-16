@@ -4,8 +4,8 @@ ISR_UART4.H
 
 ------------------------------------------------------------------------------*/
 
-#define INBUFF_SIZE     0x1000
-#define OUTBUFF_SIZE    0x1000
+#define INBUFF_SIZE     0x800
+#define OUTBUFF_SIZE    0x800
 
 
 

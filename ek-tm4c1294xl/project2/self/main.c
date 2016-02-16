@@ -158,7 +158,7 @@ int     main(void)
   IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
-#if false
+#if true
   uint8_t u;
   for(u = 0; u < UART_COUNT; u++)
   {

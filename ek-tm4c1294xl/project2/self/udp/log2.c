@@ -13,7 +13,7 @@ LOG2.Ñ
 
 static void            *pcb;
 
-static bool             enabled = true;
+static bool             enabled = false;
 
 static uint             cwErrors1, cwErrors2;
 
@@ -23,16 +23,19 @@ static uint             cwErrors1, cwErrors2;
 
 void InitLog2(void)
 {
+#if false
   if (enabled)
   {
     pcb = udp_new();
   }
+#endif
 }
 
 
 
 void Log2(const char *sz)
 {
+#if false
   if (enabled)
   {
     uint wSize = strlen(sz);
@@ -53,6 +56,7 @@ void Log2(const char *sz)
       }
     }
   }
+#endif
 }
 
 /*
