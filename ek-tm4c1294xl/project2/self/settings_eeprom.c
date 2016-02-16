@@ -33,7 +33,7 @@ uchar SaveString(char *sz, ulong dwAddr)
   return EEPROMProgram((ulong *)sz, dwAddr, 4*3);
 }
 
-uchar SaveEntity(entity const *pen)
+uchar SaveEntity(entity const *pen) // TODO min max def
 {
   switch(pen->eType)
   {
@@ -69,7 +69,7 @@ void LoadString(char *sz, ulong dwAddr)
   EEPROMRead((ulong *)sz, dwAddr, 4*3);
 }
 
-void LoadEntity(entity const *pen)
+void LoadEntity(entity const *pen) // TODO min max def
 {
   switch(pen->eType)
   {

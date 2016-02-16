@@ -17,7 +17,6 @@ UDP_IN.C
 
 
 typedef err_t (*in_fn)(struct pbuf *p);
-typedef err_t (*in_fn2)(struct pbuf *p, entity const *pen);
 
 
 
@@ -120,22 +119,6 @@ err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   if (err != ERR_OK) return err;
 
   err = in(p);
-  if (err != ERR_OK) return err;
-
-  InitPush();
-  PushChar('A');
-  PushSfx(wSfx);
-
-  return PushOut(pcb,p,addr,port,broadcast);
-}
-
-err_t CmdIn2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, in_fn2 in)
-{
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  err = in(p,pen);
   if (err != ERR_OK) return err;
 
   InitPush();
@@ -343,7 +326,7 @@ static bool IsCmd(struct pbuf *p, const char *szCmd)
   return true;
 }
 
-#if false
+#if true
 static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)
 {
   uchar *pb = p->payload;
@@ -365,23 +348,30 @@ static err_t PopEntity(struct pbuf *p, entity const *pen)
 {
   switch (pen->eType)
   {
-//     case CHAR: return PopCharDec(p, &b, 3);
-//     case INT: return PopIntDec(p, &w, 3);
-//     case LONG: return PopIP(p, &dw);
+     case CHAR: return PopCharDec(p, pen->pbRAM, 3);
+     case INT: return PopIntDec(p, pen->pbRAM, 3);
+     case LONG: return PopIP(p, pen->pbRAM);
      default: ASSERT(false); return -1;
   }
 }
 
-static err_t Save(struct pbuf *p, entity const *pen)
+err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen)
 {
-//  uchar b = 0;
-  err_t err = PopEntity(p, pen);
+  uint wSfx = 0;
+  err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  err = SaveEntity(pen); min max def
+  err = PopEntity(p, pen);
   if (err != ERR_OK) return err;
 
-  return ERR_OK;
+  err = SaveEntity(pen);
+  if (err != ERR_OK) return err;
+
+  InitPush();
+  PushChar('A');
+  PushSfx(wSfx);
+
+  return PushOut(pcb,p,addr,port,broadcast);
 }
 
 /*TODO static*/ bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen)
@@ -390,9 +380,9 @@ static err_t Save(struct pbuf *p, entity const *pen)
   {
     switch (pen->eType)
     {
-//      case CHAR: CmdCharDec(pcb,p,addr,port,broadcast,pen->pbRAM); break;
-//      case INT: CmdIntDec(pcb,p,addr,port,broadcast,pen->pbRAM); break;
-//      case LONG: CmdIP(pcb,p,addr,port,broadcast,pen->pbRAM); break;
+      case CHAR: CmdCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRAM); break;
+      case INT: CmdIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRAM); break;
+      case LONG: CmdIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRAM); break;
       default: ASSERT(false); break;
     }
 
@@ -400,7 +390,7 @@ static err_t Save(struct pbuf *p, entity const *pen)
   }
   else if (IsEnityCode(p, 'S', pen->szCode))
   {
-    CmdIn2(pcb,p,addr,port,broadcast,pen,Save);
+    SetEntity(pcb,p,addr,port,broadcast,pen);
     return true;
   }
   else
