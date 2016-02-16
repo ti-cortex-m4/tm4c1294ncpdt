@@ -28,7 +28,7 @@ char                    szDeviceName[NAME_SIZE];
 char                    szOwnerName[NAME_SIZE];
 
 uchar                   bConnectionTimeout;
-uchar                   ibRoutingMode;
+uchar                   bRoutingMode;
 ulong                   dwDestIP;
 uint                    wDestPort;
 
@@ -89,7 +89,7 @@ uchar SaveConnectionTimeout(void)
 
 uchar SaveRoutingMode(void)
 {
-  return SaveChar(&ibRoutingMode, EEPROM_ROUTING_MODE);
+  return SaveChar(&bRoutingMode, EEPROM_ROUTING_MODE);
 }
 
 uchar SaveDestIP(void)
@@ -136,11 +136,8 @@ uchar    SaveSettings(void)
   if (err != 0) return err;
 
 
-  err = SaveChar(&bConnectionTimeout, EEPROM_CONNECTION_TIMEOUT);
-  if (err != 0) return err;
-
-  err = SaveChar(&ibRoutingMode, EEPROM_ROUTING_MODE);
-  if (err != 0) return err;
+  if ((err = SaveEntity(&enConnectionTimeout)) != 0) return err;
+  if ((err = SaveEntity(&enRoutingMode)) != 0) return err;
 
   err = SaveLong(&dwDestIP, EEPROM_DEST_IP);
   if (err != 0) return err;
@@ -173,8 +170,8 @@ uchar   LoadSettings(void)
     LoadString(szDeviceName, EEPROM_DEVICE_NAME);
     LoadString(szOwnerName, EEPROM_OWNER_NAME);
 
-    LoadChar(&bConnectionTimeout, EEPROM_CONNECTION_TIMEOUT);
-    LoadChar(&ibRoutingMode, EEPROM_ROUTING_MODE);
+    LoadEntity(&enConnectionTimeout);
+    LoadEntity(&enRoutingMode);
     LoadLong(&dwDestIP, EEPROM_DEST_IP);
     LoadInt(&wDestPort, EEPROM_DEST_PORT);
 
@@ -193,8 +190,8 @@ uchar   LoadSettings(void)
     memset(&szOwnerName,  0, sizeof(szOwnerName));
     sprintf(szOwnerName, "Owner");
 
-    bConnectionTimeout = 0;
-    ibRoutingMode = 0;
+    bConnectionTimeout = DEFAULT_CONNECTION_TIMEOUT;
+    bRoutingMode = DEFAULT_ROUTING_MODE;
     dwDestIP = inet_addr("101.1.168.192");
     wDestPort = 101;
 

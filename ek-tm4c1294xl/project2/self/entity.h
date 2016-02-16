@@ -28,6 +28,6 @@ typedef struct
 
 
 extern const entity enConnectionTimeout;
-
+extern const entity enRoutingMode;
 
 #endif

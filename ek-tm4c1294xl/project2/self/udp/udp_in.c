@@ -153,7 +153,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 7: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
     case 8: PushString("AI=BR;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13"); break;
     case 9: PushString(enConnectionTimeout.szName); break;
-    case 10: PushString("AI=RM;D=Routing Mode;T=INT;C=STATIC;O=0-Server (Slave)/0/2-Client (Master)/2"); break;
+    case 10: PushString(enRoutingMode.szName); break;
     case 11: PushString("AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\""); break;
     case 12: PushString("AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1||RM==2?\"e\":\"i\""); break; // TODO ||SF==1
     case 13: PushString("AI=DP;E=1;D=Destination port;T=INT;C=EDIT;S=RM!=0?\"e\":\"i\""); break;
@@ -253,19 +253,6 @@ err_t SCT(struct pbuf *p)
 
   bConnectionTimeout = b;
   err = SaveConnectionTimeout();
-  if (err != ERR_OK) return err;
-
-  return ERR_OK;
-}
-
-err_t SRM(struct pbuf *p)
-{
-  uchar b = 0;
-  err_t err = PopCharDec(p, &b, 3);
-  if (err != ERR_OK) return err;
-
-  ibRoutingMode = b;
-  err = SaveRoutingMode();
   if (err != ERR_OK) return err;
 
   return ERR_OK;
@@ -462,16 +449,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdIn(pcb,p,addr,port,broadcast,SPN);
   }
 
-  else if (IsCmd(p,"GCT")) {
-    CmdCharDec(pcb,p,addr,port,broadcast,bConnectionTimeout);
-  } else if (IsCmd(p,"SCT")) {
-    CmdIn(pcb,p,addr,port,broadcast,SCT);
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout)) {
   }
-
-  else if (IsCmd(p,"GRM")) {
-    CmdCharDec(pcb,p,addr,port,broadcast,ibRoutingMode);
-  } else if (IsCmd(p,"SRM")) {
-    CmdIn(pcb,p,addr,port,broadcast,SRM);
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode)) {
   }
 
   else if (IsCmd(p,"GDI")) {
