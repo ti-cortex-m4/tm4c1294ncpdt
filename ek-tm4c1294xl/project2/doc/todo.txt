@@ -58,3 +58,17 @@ usTelnetLocalPort in client mode
 watchdog
 
 UDP debug
+
+
+Nu8_t ram_heap[MEM_SIZE_ALIGNED + (2*SIZEOF_STRUCT_MEM) + MEM_ALIGNMENT];
+Xu8_t ram_heap[((((64 * 1024)) + 4 - 1) & ~(4-1)) + (2*(((sizeof(struct mem)) + 4 - 1) & ~(4-1))) + 4];
+
+N  mem->next = MEM_SIZE_ALIGNED;
+X  mem->next = ((((64 * 1024)) + 4 - 1) & ~(4-1));
+
+N#define LWIP_MEM_ALIGN_SIZE(size) (((size) + MEM_ALIGNMENT - 1) & ~(MEM_ALIGNMENT-1))
+
+N#define MEM_SIZE                          (64 * 1024)
+
+
+Define MEM_STATS and look at the memory statistics via stats_display_mem. See stats.h, stats.c, and opt.h among other places. That should get you started.
