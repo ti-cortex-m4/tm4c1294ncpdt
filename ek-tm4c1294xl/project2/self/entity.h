@@ -22,12 +22,15 @@ typedef struct
   void         *pbRAM;
   uint          wSize;
   entityType    eType;
-  uint          wMin, wMax, wDef;
+  ulong         dwMin, dwMax, dwDef;
   const char    *szCode, *szName;
 } entity;
 
 
 extern const entity enConnectionTimeout;
 extern const entity enRoutingMode;
+extern const entity enDestIP;
+extern const entity enDestPort;
+
 
 #endif
