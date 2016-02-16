@@ -47,6 +47,8 @@ void UdpLog(uchar *pb, uint wSize)
       {
         errors2++;
       }
+
+      pbuf_free(p);
     }
   }
 }

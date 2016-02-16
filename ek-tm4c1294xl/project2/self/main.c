@@ -182,11 +182,10 @@ int     main(void)
   IntMasterEnable();
 
   LOG(("start\n"));
-//  Log2("start\n");
 
   while(1)
   {
-	  SysCtlDelay(20*SysCtlClockGet());
+	  SysCtlDelay(100*SysCtlClockGet());
 	  stats_display();
   }
 }
