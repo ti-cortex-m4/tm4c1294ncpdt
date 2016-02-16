@@ -185,7 +185,7 @@ int     main(void)
 
   while(1)
   {
-	  SysCtlDelay(100*SysCtlClockGet());
-	  stats_display();
+//    SysCtlDelay(100*SysCtlClockGet());
+//    stats_display();
   }
 }
