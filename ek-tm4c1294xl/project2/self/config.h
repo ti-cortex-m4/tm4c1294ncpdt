@@ -29,7 +29,7 @@ Configuration of the serial to Ethernet converter.
 //*****************************************************************************
 //! The number of serial to Ethernet ports supported by this module.
 //*****************************************************************************
-#define UART_COUNT              2
+#define UART_COUNT              1
 
 
 //*****************************************************************************
