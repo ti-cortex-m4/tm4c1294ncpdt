@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-LOG_STDIO.C
+log_stdio.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,17 +7,17 @@ LOG_STDIO.C
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdarg.h>
-#include "inc/hw_ints.h"
-#include "inc/hw_memmap.h"
-#include "inc/hw_types.h"
-#include "inc/hw_uart.h"
+//#include "inc/hw_ints.h"
+//#include "inc/hw_memmap.h"
+//#include "inc/hw_types.h"
+//#include "inc/hw_uart.h"
 #include "driverlib/debug.h"
-#include "driverlib/interrupt.h"
-#include "driverlib/rom.h"
-#include "driverlib/rom_map.h"
-#include "driverlib/sysctl.h"
-#include "driverlib/uart.h"
-#include "utils/uartstdio.h"
+//#include "driverlib/interrupt.h"
+//#include "driverlib/rom.h"
+//#include "driverlib/rom_map.h"
+//#include "driverlib/sysctl.h"
+//#include "driverlib/uart.h"
+//#include "utils/uartstdio.h"
 
 
 
@@ -57,7 +57,7 @@ void CharPut(unsigned char ucData)
 //!
 //! \return Returns the count of characters written.
 //*****************************************************************************
-int UARTwrite(const char *pcBuf, uint32_t ui32Len)
+int LogWrite(const char *pcBuf, uint32_t ui32Len)
 {
     unsigned int uIdx;
 
@@ -118,7 +118,7 @@ int UARTwrite(const char *pcBuf, uint32_t ui32Len)
 //!
 //! \return None.
 //*****************************************************************************
-void UART_vprintf(const char *pcString, va_list vaArgP)
+void LogPrintArg(const char *pcString, va_list vaArgP)
 {
     uint32_t ui32Idx, ui32Value, ui32Pos, ui32Count, ui32Base, ui32Neg;
     char *pcStr, pcBuf[16], cFill;
@@ -137,7 +137,7 @@ void UART_vprintf(const char *pcString, va_list vaArgP)
         }
 
         // Write this portion of the string.
-        UARTwrite(pcString, ui32Idx);
+        LogWrite(pcString, ui32Idx);
 
         // Skip the portion of the string that was written.
         pcString += ui32Idx;
@@ -195,7 +195,7 @@ again:
                     ui32Value = va_arg(vaArgP, uint32_t);
 
                     // Print out the character.
-                    UARTwrite((char *)&ui32Value, 1);
+                    LogWrite((char *)&ui32Value, 1);
 
                     // This command has been handled.
                     break;
@@ -247,7 +247,7 @@ again:
                     }
 
                     // Write the string.
-                    UARTwrite(pcStr, ui32Idx);
+                    LogWrite(pcStr, ui32Idx);
 
                     // Write any required padding spaces
                     if(ui32Count > ui32Idx)
@@ -255,7 +255,7 @@ again:
                         ui32Count -= ui32Idx;
                         while(ui32Count--)
                         {
-                            UARTwrite(" ", 1);
+                            LogWrite(" ", 1);
                         }
                     }
 
@@ -358,7 +358,7 @@ convert:
                     }
 
                     // Write the string.
-                    UARTwrite(pcBuf, ui32Pos);
+                    LogWrite(pcBuf, ui32Pos);
 
                     // This command has been handled.
                     break;
@@ -368,7 +368,7 @@ convert:
                 case '%':
                 {
                     // Simply write a single %.
-                    UARTwrite(pcString - 1, 1);
+                    LogWrite(pcString - 1, 1);
 
                     // This command has been handled.
                     break;
@@ -378,7 +378,7 @@ convert:
                 default:
                 {
                     // Indicate an error.
-                    UARTwrite("ERROR", 5);
+                    LogWrite("ERROR", 5);
 
                     // This command has been handled.
                     break;
@@ -431,7 +431,7 @@ void LogPrintF(const char *pcString, ...)
     // Start the varargs processing.
     va_start(vaArgP, pcString);
 
-    UART_vprintf(pcString, vaArgP);
+    LogPrintArg(pcString, vaArgP);
 
     // We're finished with the varargs now.
     va_end(vaArgP);
