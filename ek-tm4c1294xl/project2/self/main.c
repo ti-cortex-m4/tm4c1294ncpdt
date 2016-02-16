@@ -20,8 +20,8 @@ MAIN.C
 #include "uart/uart.h"
 #include "uart/log.h"
 #include "uart/serial.h"
+#include "udp/udp_log.h"
 #include "udp/udp_handler.h"
-#include "udp/log2.h"
 #include "tcp/tcp_handler.h"
 #include "tcp/telnet.h"
 
@@ -133,7 +133,7 @@ int     main(void)
 
   lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
-  InitLog2();
+  InitUdpLog();
 
   InitUDP_Handler();
 //  InitTCP_Handler();

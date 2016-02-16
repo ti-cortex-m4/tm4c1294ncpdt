@@ -6,10 +6,11 @@ log_stdio.h
 
 typedef struct
 {
-  unsigned char *pbData;
+  unsigned char *pbBuff;
   unsigned int  wSize;
-} log_t;
+} buff_t;
 
 
 
-log_t LogPrintF(const char *pcString, ...);
+buff_t LogPrintF(const char *pcString, ...);
+void UdpPrintF(const char *pcString, ...);
