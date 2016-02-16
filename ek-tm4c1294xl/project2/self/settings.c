@@ -17,7 +17,7 @@ TODO
 static const ulong      mdwBAUDS[BAUDS_SIZE] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  4
+#define SETTINGS_LABEL  5
 
 ulong                   dwIP;
 ulong                   dwGateway;
@@ -81,17 +81,6 @@ uchar SaveOwnerName(void)
   return SaveString(szOwnerName, EEPROM_OWNER_NAME);
 }
 
-
-uchar SaveConnectionTimeout(void)
-{
-  return SaveChar(&bConnectionTimeout, EEPROM_CONNECTION_TIMEOUT);
-}
-
-uchar SaveRoutingMode(void)
-{
-  return SaveChar(&bRoutingMode, EEPROM_ROUTING_MODE);
-}
-
 uchar SaveDestIP(void)
 {
   return SaveLong(&dwDestIP, EEPROM_DEST_IP);
@@ -101,7 +90,6 @@ uchar SaveDestPort(void)
 {
   return SaveInt(&wDestPort, EEPROM_DEST_PORT);
 }
-
 
 uchar SaveBaud(void)
 {
@@ -192,8 +180,8 @@ uchar   LoadSettings(void)
 
     bConnectionTimeout = DEFAULT_CONNECTION_TIMEOUT;
     bRoutingMode = DEFAULT_ROUTING_MODE;
-    dwDestIP = inet_addr("101.1.168.192");
-    wDestPort = 101;
+    dwDestIP = DEFAULT_DEST_IP;
+    wDestPort = DEFAULT_DEST_PORT;
 
     ibBaud = DEFAULT_BAUD;
 

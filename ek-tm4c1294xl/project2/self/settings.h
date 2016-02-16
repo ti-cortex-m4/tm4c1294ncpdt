@@ -5,11 +5,16 @@ SETTINGS.H
 ------------------------------------------------------------------------------*/
 
 
+#define MAX_CHAR 0xFF
+#define MAX_INT 0xFFFF
+#define MAX_LONG 0xFFFFFFFF
+
 #define BAUDS_SIZE      14
 #define DEFAULT_BAUD    6 // 9600
 #define DEFAULT_CONNECTION_TIMEOUT 0
 #define DEFAULT_ROUTING_MODE 0
-
+#define DEFAULT_DEST_IP 0xC0A80165 // inet_addr("101.1.168.192")
+#define DEFAULT_DEST_PORT 101
 
 
 extern ulong                   dwIP;
