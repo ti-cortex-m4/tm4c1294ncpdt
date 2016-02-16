@@ -21,6 +21,7 @@ MAIN.C
 #include "uart/log.h"
 #include "uart/serial.h"
 #include "udp/udp_handler.h"
+#include "udp/log2.h"
 #include "tcp/tcp_handler.h"
 #include "tcp/telnet.h"
 
@@ -62,7 +63,7 @@ int     main(void)
 {
   InitLog();
 
-  LOG(("start 1\n"));
+  LOG(("init\n"));
 
   //
   // Make sure the main oscillator is enabled because this is required by
@@ -100,7 +101,7 @@ int     main(void)
   ulong dwUser0, dwUser1;
   FlashUserGet(&dwUser0, &dwUser1);
 
-  dwUser0 = 0x00B61A00; // TODO
+  dwUser0 = 0x00B61A00; // TODO MAC
   dwUser1 = 0x00FCC502+1;
 
   if((dwUser0 == 0xFFFFFFFF) || (dwUser1 == 0xFFFFFFFF))
@@ -131,6 +132,8 @@ int     main(void)
   InitSettings();
 
   lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+
+  InitLog2();
 
   InitUDP_Handler();
 //  InitTCP_Handler();
@@ -178,7 +181,8 @@ int     main(void)
 #endif
   IntMasterEnable();
 
-  LOG(("start 2\n"));
+  LOG(("start\n"));
+  Log2("start\n");
 
   while(1)
   {
