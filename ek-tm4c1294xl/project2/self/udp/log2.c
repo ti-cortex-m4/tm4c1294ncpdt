@@ -57,18 +57,3 @@ void Log2(uchar *pb, uint wSize)
 }
 
 
-void UDPprintf(const char *sz, ...)
-{
-    va_list vaArgP;
-
-    // Start the varargs processing.
-    va_start(vaArgP, sz);
-
-    log_t log = LogPrintF(sz, vaArgP);
-
-    // We're finished with the varargs now.
-    va_end(vaArgP);
-
-    Log2(log.pbData, log.wSize);
-}
-

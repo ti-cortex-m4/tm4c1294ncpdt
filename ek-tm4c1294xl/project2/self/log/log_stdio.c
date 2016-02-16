@@ -430,13 +430,10 @@ log_t LogPrintF(const char *pcString, ...)
     iwLog = 0;
 
     va_list vaArgP;
-
-    // Start the varargs processing.
     va_start(vaArgP, pcString);
 
     LogPrintVarArg(pcString, vaArgP);
 
-    // We're finished with the varargs now.
     va_end(vaArgP);
 
     log_t log;
@@ -445,3 +442,21 @@ log_t LogPrintF(const char *pcString, ...)
     return log;
 }
 
+
+
+void Log2(unsigned char *pb, unsigned int wSize);
+
+void UDPprintf(const char *pcString, ...)
+{
+    memset(&mbLog, 0, sizeof(mbLog));
+    iwLog = 0;
+
+    va_list vaArgP;
+    va_start(vaArgP, pcString);
+
+    LogPrintVarArg(pcString, vaArgP);
+
+    va_end(vaArgP);
+
+    Log2((unsigned char *)mbLog, iwLog);
+}

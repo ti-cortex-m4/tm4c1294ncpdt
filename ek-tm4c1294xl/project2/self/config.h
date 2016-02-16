@@ -23,8 +23,8 @@ void UDPprintf(const char *sz, ...);
 // set to use the inactive UART.
 //*****************************************************************************
 #ifdef DEBUG_UART
-//#define DEBUG_MSG UDPprintf
-#define DEBUG_MSG UARTprintf
+#define DEBUG_MSG UDPprintf
+//#define DEBUG_MSG UARTprintf
 #else
 #define DEBUG_MSG while(0) ((int (*)(char *, ...))0)
 #endif
