@@ -6,3 +6,4 @@ LOG2.H
 
 void InitLog2(void);
 void Log2(const char *sz);
+void Log3(const char *sz, ...);

@@ -17,6 +17,8 @@ static bool             enabled = true;
 
 static uint             cwErrors1, cwErrors2;
 
+//char                    mbLog2[1000];
+
 
 
 void InitLog2(void)
@@ -52,3 +54,21 @@ void Log2(const char *sz)
     }
   }
 }
+
+/*
+void Log3(const char *sz, ...)
+{
+    va_list vaArgP;
+
+    // Start the varargs processing.
+    va_start(vaArgP, sz);
+
+//    UARTvprintf(pcString, vaArgP);
+	sprintf(mbLog2, sz, vaArgP);
+
+    // We're finished with the varargs now.
+    va_end(vaArgP);
+
+    Log2(mbLog2);
+}
+*/
