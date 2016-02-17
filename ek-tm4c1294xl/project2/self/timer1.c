@@ -36,10 +36,10 @@ void    InitTimer1(ulong dwSysClockFreq)
 
 
 
-void Timer1IntHandler(void)
+void Timer1IntHandler(void) // TODO Timer1IntHandler
 {
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
-  LogTimer_1000Hz();
+//  LogTimer_1000Hz();
   UART_1000Hz();
 }
