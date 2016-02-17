@@ -68,15 +68,27 @@ void Operation2(void)
   {
     if (mbRoutingMode[u] == ROUTING_MODE_CLIENT)
     {
-      if (mbConnectionMode[u] == CONNECTION_MODE_ON_DATA)
-      {
-        tTelnetSession *pState = getTelnetSession(u);
+      tTelnetSession *pState = getTelnetSession(u);
 
+      if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
+      {
+        if (pState->eTCPState == STATE_TCP_IDLE)
+        {
+          CONSOLE("%u: connects as client immediately after reset\n",u);
+          StartOpen(u);
+        }
+      }
+      else if (mbConnectionMode[u] == CONNECTION_MODE_ON_DATA)
+      {
         if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ulSerialPort))
         {
           CONSOLE("%u: connects as client on data\n",u);
           StartOpen(u);
         }
+      }
+      else
+      {
+        CONSOLE("%u: connection mode error %u\n",u,mbConnectionMode[u]); // TODO restart
       }
     }
   }
