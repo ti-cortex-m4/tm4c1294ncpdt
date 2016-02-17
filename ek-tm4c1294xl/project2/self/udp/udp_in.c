@@ -348,7 +348,7 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 
 void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
-  LOG("broadcast: %d\n", broadcast);
+  CONSOLE_UART("broadcast: %d\n", broadcast);
 
   if (IsCmd(p,"X")) {
     CmdX(pcb,p,addr,port,broadcast);

@@ -72,7 +72,7 @@ int     main(void)
   ulong dwSysClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
   InitUartLog(dwSysClockFreq);
-  LOG("init\n");
+  CONSOLE_UART("\n init \n");
 
   // Configure the device pins.
   PinoutSet(true, false);
@@ -99,7 +99,7 @@ int     main(void)
       // Let the user know there is no MAC address
       while(1)
       {
-        LOG("No MAC address\n");
+        ERROR_UART("No MAC address\n");
       }
   }
 
@@ -144,7 +144,7 @@ int     main(void)
 
   IntMasterEnable();
 
-  LOG("start\n");
+  CONSOLE_UART("\n start \n");
 
   while(1)
   {
