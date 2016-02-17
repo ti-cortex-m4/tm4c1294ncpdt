@@ -28,16 +28,16 @@ const entity enConnectionTimeout1 = {
 
 const entity enRoutingMode0 = {
         EEPROM_ROUTING_MODE_0, &mbRoutingMode[0], sizeof(uchar), CHAR,
-        0, 2, DEFAULT_ROUTING_MODE, // TODO 2-> 1
+        0, 1, DEFAULT_ROUTING_MODE,
         "RM",
-        "AI=RM;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/2-Client (Master)/2",
+        "AI=RM;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
 };
 
 const entity enRoutingMode1 = {
         EEPROM_ROUTING_MODE_1, &mbRoutingMode[1], sizeof(uchar), CHAR,
-        0, 2, DEFAULT_ROUTING_MODE, // TODO 2-> 1
+        0, 1, DEFAULT_ROUTING_MODE,
         "RM@2",
-        "AI=RM@2;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/2-Client (Master)/2",
+        "AI=RM@2;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
 };
 
 
@@ -45,14 +45,14 @@ const entity enPort0 = {
         EEPROM_PORT_0, &mwPort[0], sizeof(uint), INT,
         0, 65534, 1001,
         "PN",
-		"AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\"",
+        "AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=1?\"e\":\"i\"",
 };
 
 const entity enPort1 = {
         EEPROM_PORT_1, &mwPort[1], sizeof(uint), INT,
         0, 65534, 1002,
         "PN@2",
-		"AI=PN@2;E=1;D=Port;T=INT;C=EDIT;V=PN@2>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@2!=2?\"e\":\"i\"",
+        "AI=PN@2;E=1;D=Port;T=INT;C=EDIT;V=PN@2>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@2!=1?\"e\":\"i\"",
 };
 
 
@@ -79,14 +79,14 @@ const entity enDestinationIP0 = {
         EEPROM_DESTINATION_IP_0, &mdwDestinationIP[0], sizeof(ulong), LONG,
         0, MAX_LONG, DEFAULT_DESTINATION_IP,
         "DI",
-        "AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1||RM==2?\"e\":\"i\"", // TODO ||SF==1
+        "AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1?\"e\":\"i\"",
 };
 
 const entity enDestinationIP1 = {
         EEPROM_DESTINATION_IP_1, &mdwDestinationIP[1], sizeof(ulong), LONG,
         0, MAX_LONG, DEFAULT_DESTINATION_IP,
         "DI@2",
-        "AI=DI@2;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@2==1||RM@2==2?\"e\":\"i\"", // TODO ||SF==1
+        "AI=DI@2;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@2==1?\"e\":\"i\"",
 };
 
 

@@ -226,7 +226,7 @@ static err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t
         {
             // Re-open the connection.
             TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-                       pState->usTelnetLocalPort, pState->ulSerialPort);
+                       /*pState->usTelnetLocalPort,*/ pState->ulSerialPort);
         }
         else
         {
@@ -268,7 +268,7 @@ static void TelnetError(void *arg, err_t err)
     {
         // Attempt to reestablish the telnet connection to the server.
         TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-                   pState->usTelnetLocalPort, pState->ulSerialPort);
+                   /*pState->usTelnetLocalPort,*/ pState->ulSerialPort);
     }
     else
     {
@@ -361,7 +361,7 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
         // Re-open the connection.
         TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-                   pState->usTelnetLocalPort, pState->ulSerialPort);
+                   /*pState->usTelnetLocalPort,*/ pState->ulSerialPort);
 
         // And return.
         return(ERR_OK);
@@ -574,7 +574,7 @@ void TelnetClose(uint32_t ulSerialPort)
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint16_t usTelnetLocalPort, uint32_t ulSerialPort)
+void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTelnetLocalPort,*/ uint32_t ulSerialPort)
 {
     void *pcb;
     struct ip_addr sIPAddr;
@@ -590,7 +590,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint16_t usTelne
     ASSERT(ulIPAddr != 0);
     ASSERT(ulSerialPort < UART_COUNT);
     ASSERT(usTelnetRemotePort != 0);
-    ASSERT(usTelnetLocalPort != 0);
+//    ASSERT(usTelnetLocalPort != 0);
     pState = &g_sTelnetSession[ulSerialPort];
 
     // Fill in the telnet state data structure for this session in client
@@ -604,7 +604,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint16_t usTelne
     pState->ulMaxTimeout = getTelnetTimeout(ulSerialPort); // g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
     pState->ulSerialPort = ulSerialPort;
     pState->usTelnetRemotePort = usTelnetRemotePort;
-    pState->usTelnetLocalPort = usTelnetLocalPort;
+//    pState->usTelnetLocalPort = usTelnetLocalPort;
     pState->ulTelnetRemoteIP = ulIPAddr;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;

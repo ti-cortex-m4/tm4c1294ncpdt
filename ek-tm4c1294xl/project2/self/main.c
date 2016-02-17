@@ -13,6 +13,7 @@ MAIN.C
 #include "driverlib/flash.h"
 #include "utils/lwiplib_patched.h"
 #include "drivers/pinout.h"
+#include "kernel/entity.h"
 #include "settings.h"
 #include "settings2.h"
 #include "systick.h"
@@ -159,26 +160,30 @@ int     main(void)
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
 #if true
-  uint8_t u;
+  uchar u;
   for(u = 0; u < UART_COUNT; u++)
   {
-      // Are we to operate as a telnet server?
-      if(isServer(u))
+    if (mbRoutingMode[u] == ROUTING_MODE_SERVER)
+    {
+      LOG(("Channel %u listens as server on port %u\n", u, mwPort[u]));
+      TelnetListen(mwPort[u], u);
+    }
+    else
+    {
+      if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
       {
-          // Yes - start listening on the required port.
-//           TelnetListen(g_sParameters.sPort[ibPort].usTelnetLocalPort, u);
-          ASSERT(false);
+        ulong dwIP = mdwDestinationIP[u];
+        LOG(("Channel %u immediately connects as client to %u.%u.%u.%u port %u\n",
+                u,
+                (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
+                mwDestinationPort[u]));
+
+        TelnetOpen(mdwDestinationIP[u], mwDestinationPort[u], u);
       }
-      else
-      {
-          // No - we are a client so initiate a connection to the desired IP address using the configured ports.
-//          TelnetOpen(g_sParameters.sPort[u].ulTelnetIPAddr,
-//                     g_sParameters.sPort[u].usTelnetRemotePort,
-//                     g_sParameters.sPort[u].usTelnetLocalPort, u);
-          TelnetOpen(mdwDestinationIP[u], mwDestinationPort[u], 1, u);
-      }
+    }
   }
 #endif
+
   IntMasterEnable();
 
   LOG(("start\n"));

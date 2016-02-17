@@ -52,4 +52,18 @@ extern const entity enUdpDebugFlag;
 extern const entity enUdpDebugPort;
 
 
+typedef enum
+{
+  ROUTING_MODE_SERVER = 0,
+  ROUTING_MODE_CLIENT = 1,
+} routingMode;
+
+
+typedef enum
+{
+  CONNECTION_MODE_IMMEDIATELY = 0,
+  CONNECTION_MODE_ON_DATA = 1,
+} connectionMode;
+
+
 #endif
