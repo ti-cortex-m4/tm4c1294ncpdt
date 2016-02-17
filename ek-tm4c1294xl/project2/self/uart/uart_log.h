@@ -4,6 +4,7 @@ uart_log.h
 
 ------------------------------------------------------------------------------*/
 
+#include "utils/uartstdio.h"
 #include "uart_printf.h"
 
 
@@ -17,7 +18,7 @@ void    InitUartLog(ulong dwSysClockFreq);
 
 #ifdef DEBUG
 #define CONSOLE_UART UartPrintF
-#define ERROR_UART UartPrintF
+#define ERROR_UART UARTprintf
 #else
 #define CONSOLE_UART
 #define ERROR_UART
