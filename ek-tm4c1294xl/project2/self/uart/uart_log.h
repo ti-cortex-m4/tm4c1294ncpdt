@@ -1,9 +1,10 @@
 /*------------------------------------------------------------------------------
-LOG.H
+uart_log.h
 
 
 ------------------------------------------------------------------------------*/
 
+#include <stdint.h>
 #include "utils/uartstdio.h"
 
 
@@ -16,7 +17,7 @@ void    PrintLogTimer(void);
 
 
 #ifdef DEBUG
-#define LOG(msg) { UARTprintf msg; }
+#define LOG UARTprintf
 #else
-#define LOG(msg)
+#define LOG
 #endif

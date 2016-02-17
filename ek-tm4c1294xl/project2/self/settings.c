@@ -39,6 +39,9 @@ bool                    fUdpDebugFlag;
 ulong                   dwUdpDebugIP;
 uint                    wUdpDebugPort;
 
+bool                    fUartDebugFlag;
+uchar                   bUartDebugPort;
+
 uchar                   pbMAC[6];
 
 
@@ -127,6 +130,9 @@ uchar    SaveSettings(void)
   if ((err = SaveEntity(&enUdpDebugIP)) != 0) return err;
   if ((err = SaveEntity(&enUdpDebugPort)) != 0) return err;
 
+  if ((err = SaveEntity(&enUartDebugFlag)) != 0) return err;
+  if ((err = SaveEntity(&enUartDebugPort)) != 0) return err;
+
   return 0;
 }
 
@@ -170,6 +176,9 @@ uchar   LoadSettings(void)
     LoadEntity(&enUdpDebugFlag);
     LoadEntity(&enUdpDebugIP);
     LoadEntity(&enUdpDebugPort);
+
+    LoadEntity(&enUartDebugFlag);
+    LoadEntity(&enUartDebugPort);
   }
   else
   {
@@ -207,6 +216,9 @@ uchar   LoadSettings(void)
     fUdpDebugFlag = enUdpDebugFlag.dwDef;
     dwUdpDebugIP = enUdpDebugIP.dwDef;
     wUdpDebugPort = enUdpDebugPort.dwDef;
+
+    fUartDebugFlag = enUartDebugFlag.dwDef;
+    bUartDebugPort = enUartDebugPort.dwDef;
 
     SaveSettings();
   }

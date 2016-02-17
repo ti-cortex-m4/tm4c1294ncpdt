@@ -3,8 +3,8 @@ TIMER1.C
 
 ------------------------------------------------------------------------------*/
 
+#include <self/uart/uart_log.h>
 #include "main.h"
-#include "uart/log.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_types.h"

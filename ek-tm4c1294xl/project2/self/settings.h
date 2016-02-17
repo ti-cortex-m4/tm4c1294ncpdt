@@ -38,6 +38,9 @@ extern bool                    fUdpDebugFlag;
 extern ulong                   dwUdpDebugIP;
 extern uint                    wUdpDebugPort;
 
+extern bool                    fUartDebugFlag;
+extern uchar                   bUartDebugPort;
+
 extern uchar                   pbMAC[6];
 
 
