@@ -4,12 +4,12 @@ printf.c
 
 ------------------------------------------------------------------------------*/
 
-#include <self/kernel/printf.h>
 #include "../main.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
+#include "printf.h"
 
 
 
