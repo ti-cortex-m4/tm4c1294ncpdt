@@ -338,7 +338,7 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tTelnetSession *pState = arg;
 
-    CONSOLE("%u: Connected 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, err);
+    CONSOLE("%u: connected 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, err);
 
     // Increment our connection counter.
     pState->ucConnectCount++;
@@ -686,7 +686,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
 //    ASSERT(usTelnetLocalPort != 0);
     tTelnetSession *pState = &g_sTelnetSession[ulSerialPort];
 
-    CONSOLE("%u: Open %d.%d.%d.%d port %d, UART %d\n",
+    CONSOLE("%u: open %d.%d.%d.%d port %d, UART %d\n",
               pState->ulSerialPort,
               (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF,
               (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF, usTelnetRemotePort,
