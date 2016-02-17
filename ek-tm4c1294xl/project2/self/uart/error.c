@@ -4,8 +4,8 @@ ERROR.C
 
 ------------------------------------------------------------------------------*/
 
-#include <self/uart/uart_log.h>
 #include "../main.h"
+#include "../uart/uart_log.h"
 
 
 

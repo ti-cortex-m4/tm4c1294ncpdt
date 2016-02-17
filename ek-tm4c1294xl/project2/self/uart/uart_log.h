@@ -4,14 +4,9 @@ uart_log.h
 
 ------------------------------------------------------------------------------*/
 
-#include <stdint.h>
-#include "utils/uartstdio.h"
-
-
-
 void    LogTimer_1000Hz(void);
 
-void    InitLog(void);
+void    InitUartLog(ulong dwSysClockFreq);
 void    PrintLogTimer(void);
 
 

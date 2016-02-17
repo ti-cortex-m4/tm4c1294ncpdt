@@ -5,19 +5,20 @@ uart_printf.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "utils/uartstdio.h"
 #include "../settings.h"
 #include "uart_printf.h"
 
 
 
-void UartPrintF(const char *pcString, ...)
+void UartPrintF(const char *pcsz, ...)
 {
   if (fUartDebugFlag)
   {
     va_list va;
-    va_start(va, pcString);
+    va_start(va, pcsz);
 
-    UARTvprintf(pcString, va);
+    UARTvprintf(pcsz, va);
 
     va_end(va);
   }
