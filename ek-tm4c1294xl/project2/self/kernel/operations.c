@@ -88,7 +88,7 @@ void Operation2(void)
       }
       else
       {
-        CONSOLE("%u: connection mode error %u\n",u,mbConnectionMode[u]); // TODO restart
+        CONSOLE("%u: ERROR connection mode %u\n",u,mbConnectionMode[u]); // TODO restart
       }
     }
   }
