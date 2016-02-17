@@ -4,8 +4,8 @@ ERROR.C
 
 ------------------------------------------------------------------------------*/
 
+#include <self/uart/uart_log.h>
 #include "../main.h"
-#include "log.h"
 
 
 
@@ -13,7 +13,7 @@ ERROR.C
 
 void __error__(char *pcFileName, ulong dwLine)
 {
-  LOG(("\nfile: %s line: %d\n", pcFileName, dwLine));
+  LOG("\nfile: %s line: %d\n", pcFileName, dwLine);
   while(1)
   {
   }

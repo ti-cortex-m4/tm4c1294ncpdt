@@ -4,6 +4,7 @@ MAIN.C
 
 ------------------------------------------------------------------------------*/
 
+#include <self/uart/uart_log.h>
 #include "main.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
@@ -19,7 +20,6 @@ MAIN.C
 #include "systick.h"
 #include "timer1.h"
 #include "uart/uart.h"
-#include "uart/log.h"
 #include "uart/serial.h"
 #include "udp/udp_log.h"
 #include "udp/udp_handler.h"

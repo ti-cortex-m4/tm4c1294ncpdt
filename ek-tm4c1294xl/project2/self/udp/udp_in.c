@@ -4,12 +4,12 @@ UDP_IN.C
 
 ------------------------------------------------------------------------------*/
 
+#include <self/uart/uart_log.h>
 #include "../main.h"
 #include "../settings.h"
 #include "../settings_eeprom.h"
 #include "../kernel/entity.h"
 #include "driverlib/sysctl.h"
-#include "../uart/log.h"
 #include "udp_pop.h"
 #include "udp_push.h"
 #include "udp_in.h"
@@ -183,6 +183,9 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 24: PushString(enUdpDebugIP.szName); break;
     case 25: PushString(enUdpDebugPort.szName); break;
 
+    case 26: PushString(enUartDebugFlag.szName); break;
+    case 27: PushString(enUartDebugPort.szName); break;
+
     default: ASSERT(false); break; // TODO
   }
 
@@ -345,7 +348,7 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 
 void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
-  LOG(("broadcast: %d\n", broadcast));
+  LOG("broadcast: %d\n", broadcast);
 
   if (IsCmd(p,"X")) {
     CmdX(pcb,p,addr,port,broadcast);
@@ -362,7 +365,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"26");
+    CmdString(pcb,p,addr,port,broadcast,"28");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -431,6 +434,11 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugIP)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugPort)) {
+  }
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugFlag)) {
+  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugPort)) {
   }
 
   else { // TODO
