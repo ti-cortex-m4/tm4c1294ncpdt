@@ -73,14 +73,14 @@ const entity enDestinationIP1 = {
 
 const entity enDestinationPort0 = {
         EEPROM_DESTINATION_PORT_0, &mwDestinationPort[0], sizeof(uint), INT,
-        0, MAX_INT, DEFAULT_DESTINATION_PORT,
+        0, MAX_INT, 101,
         "DP",
         "AI=DP;E=1;D=Destination port;T=INT;C=EDIT;S=RM!=0?\"e\":\"i\"",
 };
 
 const entity enDestinationPort1 = {
         EEPROM_DESTINATION_PORT_1, &mwDestinationPort[1], sizeof(uint), INT,
-        0, MAX_INT, DEFAULT_DESTINATION_PORT,
+        0, MAX_INT, 102,
         "DP@2",
         "AI=DP@2;E=1;D=Destination port;T=INT;C=EDIT;S=RM@2!=0?\"e\":\"i\"",
 };
