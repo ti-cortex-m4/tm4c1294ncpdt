@@ -4,5 +4,5 @@ SETTINGS2.H
 
 ------------------------------------------------------------------------------*/
 
-uint32_t getTelnetTimeout(uint8_t  ibPort);
-bool isServer(uint8_t  ibPort);
+ulong getTelnetTimeout(uchar u);
+//bool isServer(uint8_t  ibPort);

@@ -123,6 +123,7 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         if((pState->ulMaxTimeout != 0) &&
            (pState->ulConnectionTimeout > pState->ulMaxTimeout))
         {
+            DEBUG_MSG("TelnetPoll abort connection %d %d\n", pState->ulConnectionTimeout, pState->ulMaxTimeout);
             // Close the telnet connection.
             tcp_abort(pcb);
         }
