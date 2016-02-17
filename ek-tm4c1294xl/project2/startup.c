@@ -1,6 +1,6 @@
 //*****************************************************************************
 //
-// startup_ccs.c - Startup code for use with TI's Code Composer Studio.
+// startup_ccs,C - Startup code for use with TI's Code Composer Studio.
 //
 // Copyright (c) 2013-2015 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement

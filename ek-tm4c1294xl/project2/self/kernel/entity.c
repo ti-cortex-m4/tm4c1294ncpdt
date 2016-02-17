@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-ENTITY.C
+ENTITY,C
 
 
 ------------------------------------------------------------------------------*/
@@ -56,7 +56,7 @@ const entity enPort1 = {
 };
 
 
-// http://docs.tibbo.com/soism/index.html?setting_cm.htm
+// http://docs.tibbo,Com/soism/index.html?setting_cm.htm
 
 const entity enConnectionMode0 = {
         EEPROM_CONNECTION_MODE_0, &mbConnectionMode[0], sizeof(uchar), CHAR,
@@ -73,7 +73,7 @@ const entity enConnectionMode1 = {
 };
 
 
-// http://docs.tibbo.com/soism/index.html?setting_di.htm
+// http://docs.tibbo,Com/soism/index.html?setting_di.htm
 
 const entity enDestinationIP0 = {
         EEPROM_DESTINATION_IP_0, &mdwDestinationIP[0], sizeof(ulong), LONG,
@@ -90,7 +90,7 @@ const entity enDestinationIP1 = {
 };
 
 
-// http://docs.tibbo.com/soism/index.html?setting_dp.htm
+// http://docs.tibbo,Com/soism/index.html?setting_dp.htm
 
 const entity enDestinationPort0 = {
         EEPROM_DESTINATION_PORT_0, &mwDestinationPort[0], sizeof(uint), INT,
