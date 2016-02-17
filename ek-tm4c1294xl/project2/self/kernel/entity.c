@@ -56,6 +56,8 @@ const entity enPort1 = {
 };
 
 
+// http://docs.tibbo.com/soism/index.html?setting_cm.htm
+
 const entity enConnectionMode0 = {
         EEPROM_CONNECTION_MODE_0, &mbConnectionMode[0], sizeof(uchar), CHAR,
         0, 1, DEFAULT_CONNECTION_MODE,
@@ -70,6 +72,8 @@ const entity enConnectionMode1 = {
         "AI=CM@2;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@2!=0?\"e\":\"i\"",
 };
 
+
+// http://docs.tibbo.com/soism/index.html?setting_di.htm
 
 const entity enDestinationIP0 = {
         EEPROM_DESTINATION_IP_0, &mdwDestinationIP[0], sizeof(ulong), LONG,
@@ -86,16 +90,18 @@ const entity enDestinationIP1 = {
 };
 
 
+// http://docs.tibbo.com/soism/index.html?setting_dp.htm
+
 const entity enDestinationPort0 = {
         EEPROM_DESTINATION_PORT_0, &mwDestinationPort[0], sizeof(uint), INT,
-        0, MAX_INT, DEFAULT_DESTINATION_PORT,
+        0, MAX_INT, 1001,
         "DP",
         "AI=DP;E=1;D=Destination port;T=INT;C=EDIT;S=RM!=0?\"e\":\"i\"",
 };
 
 const entity enDestinationPort1 = {
         EEPROM_DESTINATION_PORT_1, &mwDestinationPort[1], sizeof(uint), INT,
-        0, MAX_INT, DEFAULT_DESTINATION_PORT,
+        0, MAX_INT, 1002,
         "DP@2",
         "AI=DP@2;E=1;D=Destination port;T=INT;C=EDIT;S=RM@2!=0?\"e\":\"i\"",
 };

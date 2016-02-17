@@ -13,9 +13,9 @@ SETTINGS.H
 
 #define DEFAULT_CONNECTION_TIMEOUT 5
 #define DEFAULT_ROUTING_MODE 0
-#define DEFAULT_CONNECTION_MODE 1 // http://docs.tibbo.com/soism/index.html?setting_cm.htm
-#define DEFAULT_DESTINATION_IP 0x00000001 // http://docs.tibbo.com/soism/index.html?setting_di.htm
-#define DEFAULT_DESTINATION_PORT 1001 // http://docs.tibbo.com/soism/index.html?setting_dp.htm
+#define DEFAULT_CONNECTION_MODE 1
+#define DEFAULT_DESTINATION_IP 0x00000001
+#define DEFAULT_DESTINATION_PORT 1001
 #define DEFAULT_BAUD_RATE 6 // 9600
 
 
