@@ -8,7 +8,7 @@ TELNET.H
 
 
 
-tTelnetSessionData *getTelnetSession(uchar ibUart);
+tTelnetSession *getTelnetSession(uchar ibUart);
 
 extern void TelnetInit(void);
 

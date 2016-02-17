@@ -69,7 +69,7 @@ void Operation2(void)
     {
       if (mbConnectionMode[u] == CONNECTION_MODE_ON_DATA)
       {
-        tTelnetSessionData *pState = getTelnetSession(u);
+        tTelnetSession *pState = getTelnetSession(u);
 
         if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ulSerialPort))
         {

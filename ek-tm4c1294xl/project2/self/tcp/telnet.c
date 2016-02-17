@@ -17,10 +17,10 @@ TELNET.C
 //*****************************************************************************
 //! The telnet session data array, for use in the telnet handler function.
 //*****************************************************************************
-static tTelnetSessionData g_sTelnetSession[UART_COUNT];
+static tTelnetSession g_sTelnetSession[UART_COUNT];
 
 
-tTelnetSessionData *getTelnetSession(uchar ibUart)
+tTelnetSession *getTelnetSession(uchar ibUart)
 {
   ASSERT(ibUart < UART_COUNT);
   return &g_sTelnetSession[ibUart];
@@ -43,7 +43,7 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err);
 //!
 //! \return None.
 //*****************************************************************************
-static void TelnetFreePbufs(tTelnetSessionData *pState)
+static void TelnetFreePbufs(tTelnetSession *pState)
 {
     SYS_ARCH_DECL_PROTECT(lev);
 
@@ -84,7 +84,7 @@ static void TelnetFreePbufs(tTelnetSessionData *pState)
 static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 {
     struct ip_addr sIPAddr;
-    tTelnetSessionData *pState = arg;
+    tTelnetSession *pState = arg;
 
     DEBUG_MSG("TelnetPoll 0x%08x, 0x%08x\n", arg, pcb);
 
@@ -146,7 +146,7 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 //! \return None.
 //
 //*****************************************************************************
-static void TelnetProcessCharacter(uint8_t ucChar, tTelnetSessionData *pState)
+static void TelnetProcessCharacter(uint8_t ucChar, tTelnetSession *pState)
 {
     // Write this character to the UART with no telnet processing.
     SerialSend(pState->ulSerialPort, ucChar);
@@ -168,7 +168,7 @@ static void TelnetProcessCharacter(uint8_t ucChar, tTelnetSessionData *pState)
 //*****************************************************************************
 static err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 {
-    tTelnetSessionData *pState = arg;
+    tTelnetSession *pState = arg;
     int iNextWrite;
     SYS_ARCH_DECL_PROTECT(lev);
 
@@ -258,7 +258,7 @@ static err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t
 //*****************************************************************************
 static void TelnetError(void *arg, err_t err)
 {
-    tTelnetSessionData *pState = arg;
+    tTelnetSession *pState = arg;
 
     DEBUG_MSG("TelnetError 0x%08x, %d\n", arg, err);
 
@@ -308,7 +308,7 @@ static void TelnetError(void *arg, err_t err)
 //*****************************************************************************
 static err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
-    tTelnetSessionData *pState = arg;
+    tTelnetSession *pState = arg;
 
     DEBUG_MSG("TelnetSent 0x%08x, 0x%08x, %d\n", arg, pcb, len);
 
@@ -333,7 +333,7 @@ static err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 //*****************************************************************************
 static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
-    tTelnetSessionData *pState = arg;
+    tTelnetSession *pState = arg;
 
     DEBUG_MSG("TelnetConnected 0x%08x, 0x%08x, %d\n", arg, pcb, err);
 
@@ -427,7 +427,7 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 //*****************************************************************************
 static err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 {
-    tTelnetSessionData *pState = arg;
+    tTelnetSession *pState = arg;
 
     DEBUG_MSG("TelnetAccept 0x%08x, 0x%08x, 0x%08x\n", arg, pcb, err);
 
@@ -510,7 +510,7 @@ static err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 //*****************************************************************************
 void TelnetClose(uint32_t ulSerialPort)
 {
-    tTelnetSessionData *pState;
+    tTelnetSession *pState;
 
     DEBUG_MSG("TelnetClose UART %d\n", ulSerialPort);
 
@@ -585,7 +585,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
     void *pcb;
     struct ip_addr sIPAddr;
     err_t eError;
-    tTelnetSessionData *pState;
+    tTelnetSession *pState;
 
     DEBUG_MSG("TelnetOpen %d.%d.%d.%d port %d, UART %d\n",
               (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF,
@@ -658,7 +658,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
 void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
 {
     void *pcb;
-    tTelnetSessionData *pState;
+    tTelnetSession *pState;
 
     DEBUG_MSG("TelnetListen port %d, UART %d\n", usTelnetPort, ulSerialPort);
 
@@ -799,7 +799,7 @@ TelnetHandler(void)
     int iLoop;
     SYS_ARCH_DECL_PROTECT(lev);
     uint8_t *pucData;
-    tTelnetSessionData *pState;
+    tTelnetSession *pState;
 
     // Loop through the possible telnet sessions.
     for(iLoop = 0; iLoop < UART_COUNT; iLoop++)
