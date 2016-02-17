@@ -4,7 +4,7 @@ SETTINGS_EEPROM.H
 
 ------------------------------------------------------------------------------*/
 
-#include "entity.h"
+#include "kernel/entity.h"
 
 
 

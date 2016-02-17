@@ -4,9 +4,9 @@ ENTITY.C
 
 ------------------------------------------------------------------------------*/
 
-#include "main.h"
-#include "generated/eeprom.h"
-#include "settings.h"
+#include "../main.h"
+#include "../generated/eeprom.h"
+#include "../settings.h"
 #include "entity.h"
 
 
@@ -43,14 +43,14 @@ const entity enRoutingMode1 = {
 
 const entity enPort0 = {
         EEPROM_PORT_0, &mwPort[0], sizeof(uint), INT,
-        0, 65534, 101,
+        0, 65534, 1001,
         "PN",
 		"AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\"",
 };
 
 const entity enPort1 = {
         EEPROM_PORT_1, &mwPort[1], sizeof(uint), INT,
-        0, 65534, 102,
+        0, 65534, 1002,
         "PN@2",
 		"AI=PN@2;E=1;D=Port;T=INT;C=EDIT;V=PN@2>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@2!=2?\"e\":\"i\"",
 };
