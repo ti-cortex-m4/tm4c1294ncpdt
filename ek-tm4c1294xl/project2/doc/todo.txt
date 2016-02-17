@@ -58,8 +58,11 @@ usTelnetLocalPort in client mode
 watchdog
 
 UDP debug
+memstat debug
 
 http://lwip.wikia.com/wiki/Lwipopts.h
 
 F=R* F=R restart
+установка скорости uart без рестарта
 
+ip addr macro

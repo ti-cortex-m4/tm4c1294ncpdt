@@ -17,7 +17,7 @@ TODO
 static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  13
+#define SETTINGS_LABEL  14
 
 ulong                   dwIP;
 ulong                   dwGateway;
@@ -29,6 +29,7 @@ char                    szOwnerName[NAME_SIZE];
 uchar                   mbConnectionTimeout[UART_COUNT];
 uchar                   mbRoutingMode[UART_COUNT];
 uint                    mwPort[UART_COUNT];
+uchar                   mbConnectionMode[UART_COUNT];
 ulong                   mdwDestinationIP[UART_COUNT];
 uint                    mwDestinationPort[UART_COUNT];
 
@@ -104,12 +105,16 @@ uchar    SaveSettings(void)
 
 
   if ((err = SaveEntity(&enConnectionTimeout0)) != 0) return err;
+  if ((err = SaveEntity(&enConnectionTimeout1)) != 0) return err;
 
   if ((err = SaveEntity(&enRoutingMode0)) != 0) return err;
   if ((err = SaveEntity(&enRoutingMode1)) != 0) return err;
 
   if ((err = SaveEntity(&enPort0)) != 0) return err;
   if ((err = SaveEntity(&enPort1)) != 0) return err;
+
+  if ((err = SaveEntity(&enConnectionMode0)) != 0) return err;
+  if ((err = SaveEntity(&enConnectionMode1)) != 0) return err;
 
   if ((err = SaveEntity(&enDestinationIP0)) != 0) return err;
   if ((err = SaveEntity(&enDestinationPort1)) != 0) return err;
@@ -140,6 +145,7 @@ uchar   LoadSettings(void)
     LoadString(szOwnerName, EEPROM_OWNER_NAME);
 
     LoadEntity(&enConnectionTimeout0);
+    LoadEntity(&enConnectionTimeout1);
 
     LoadEntity(&enRoutingMode0);
     LoadEntity(&enRoutingMode1);
@@ -147,7 +153,13 @@ uchar   LoadSettings(void)
     LoadEntity(&enPort0);
     LoadEntity(&enPort1);
 
+    LoadEntity(&enConnectionMode0);
+    LoadEntity(&enConnectionMode1);
+
     LoadEntity(&enDestinationIP0);
+    LoadEntity(&enDestinationIP1);
+
+    LoadEntity(&enDestinationPort0);
     LoadEntity(&enDestinationPort1);
 
     LoadEntity(&enBaudRate0);
@@ -177,7 +189,10 @@ uchar   LoadSettings(void)
     mwPort[0] = enPort0.dwDef;
     mwPort[1] = enPort1.dwDef;
 
-    mdwDestinationIP[0] = enDestinationIP0.dwDef;
+    mbConnectionMode[0] = enConnectionMode0.dwDef;
+    mbConnectionMode[1] = enConnectionMode1.dwDef;
+
+    mdwDestinationIP[0] = inet_addr("101.1.168.192"); // TODO enDestinationIP0.dwDef;
     mdwDestinationIP[1] = enDestinationIP1.dwDef;
 
     mwDestinationPort[0] = enDestinationPort0.dwDef;
