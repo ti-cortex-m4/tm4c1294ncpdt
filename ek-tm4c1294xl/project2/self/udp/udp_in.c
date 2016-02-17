@@ -156,30 +156,29 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 0: PushString("AI=$GENERAL;D=General;T=GROUP"); break;
     case 1: PushString("AI=ON;D=Owner name;T=STRING;C=EDIT;MAXLEN=8;F=R*"); break;
     case 2: PushString("AI=DN;D=Device name;T=STRING;C=EDIT;MAXLEN=8;F=R*"); break;
-    case 3: PushString("AI=DH;D=DHCP;T=INT;C=STATIC;O=0- Disabled/0/1- Enabled/1;F=R"); break;
-    case 4: PushString("AI=IP;D=IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
-    case 5: PushString("AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
-    case 6: PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
+    case 3: PushString("AI=IP;D=IP-address;T=STRING;C=IPCTRL;F=R*"); break;
+    case 4: PushString("AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
+    case 5: PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
 
-    case 7: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
-    case 8: PushString(enBaudRate0.szName); break;
-    case 9: PushString(enConnectionTimeout0.szName); break;
-    case 10: PushString(enRoutingMode0.szName); break;
-    case 11: PushString(enPort0.szName); break;
-    case 12: PushString(enDestinationIP0.szName); break;
-    case 13: PushString(enDestinationPort0.szName); break;
+    case 6: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
+    case 7: PushString(enConnectionTimeout0.szName); break;
+    case 8: PushString(enRoutingMode0.szName); break;
+    case 9: PushString(enPort0.szName); break;
+    case 10: PushString(enDestinationIP0.szName); break;
+    case 11: PushString(enDestinationPort0.szName); break;
+    case 12: PushString(enBaudRate0.szName); break;
 
-    case 14: PushString("AI=$CHANNEL2;D=Channel2;T=GROUP"); break;
-    case 15: PushString(enConnectionTimeout1.szName); break;
-    case 16: PushString(enBaudRate1.szName); break;
-    case 17: PushString(enRoutingMode1.szName); break;
-    case 18: PushString(enPort1.szName); break;
-    case 19: PushString(enDestinationIP1.szName); break;
-    case 20: PushString(enDestinationPort1.szName); break;
+    case 13: PushString("AI=$CHANNEL2;D=Channel2;T=GROUP"); break;
+    case 14: PushString(enConnectionTimeout1.szName); break;
+    case 15: PushString(enRoutingMode1.szName); break;
+    case 16: PushString(enPort1.szName); break;
+    case 17: PushString(enDestinationIP1.szName); break;
+    case 18: PushString(enDestinationPort1.szName); break;
+    case 19: PushString(enBaudRate1.szName); break;
 
-    case 21: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
-    case 22: PushString(enUdpDebugFlag.szName); break;
-    case 23: PushString(enUdpDebugPort.szName); break;
+    case 20: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
+    case 21: PushString(enUdpDebugFlag.szName); break;
+    case 22: PushString(enUdpDebugPort.szName); break;
 
     default: ASSERT(false); break; // TODO
   }
@@ -360,7 +359,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"24");
+    CmdString(pcb,p,addr,port,broadcast,"23");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -375,8 +374,6 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdString(pcb,p,addr,port,broadcast,szDeviceName);
   } else if (IsCmd(p,"SDN")) {
     CmdIn(pcb,p,addr,port,broadcast, SDN);
-  } else if (IsCmd(p,"GDH")) {
-    CmdString(pcb,p,addr,port,broadcast,"0");
   }
 
   else if (IsCmd(p,"GIP")) {
