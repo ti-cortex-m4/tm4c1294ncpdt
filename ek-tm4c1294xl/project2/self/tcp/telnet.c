@@ -557,7 +557,7 @@ void TelnetClose(uint32_t ulSerialPort)
     pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
-    pState->ulSerialPort = UART_COUNT;
+    pState->ulSerialPort = ulSerialPort; // TODO ??? UART_COUNT;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
     pState->pBufHead = NULL;
@@ -763,7 +763,7 @@ void TelnetInit(void)
         g_sTelnetSession[iPort].ucFlags = 0;
         g_sTelnetSession[iPort].ulConnectionTimeout = 0;
         g_sTelnetSession[iPort].ulMaxTimeout = 0;
-        g_sTelnetSession[iPort].ulSerialPort = UART_COUNT;
+        g_sTelnetSession[iPort].ulSerialPort = iPort;// TODO ??? UART_COUNT;
         g_sTelnetSession[iPort].usTelnetRemotePort = 0;
         g_sTelnetSession[iPort].usTelnetLocalPort = 0;
         g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
