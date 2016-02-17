@@ -85,13 +85,12 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
     struct ip_addr sIPAddr;
     tTelnetSession *pState = arg;
 
-    CONSOLE("%u: Poll 0x%08x, 0x%08x\n", pState->ulSerialPort, arg, pcb);
+    CONSOLE("%u: Poll 0x%08x, 0x%08x %u %u\n", pState->ulSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
 
     // Are we operating as a server or a client?
     if(!pState->pListenPCB)
     {
-        // We are operating as a client.  Are we currently trying to reconnect
-        // to the server?
+        // We are operating as a client.  Are we currently trying to reconnect to the server?
         if(pState->eTCPState == STATE_TCP_CONNECTING)
         {
             if (pcb->state != CLOSED)
@@ -111,6 +110,13 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
                     CONSOLE("%u: Poll connect error %d\n", pState->ulSerialPort, err);
                     pState->eLastErr = err;
                 }
+            }
+        }
+        else if(pState->eTCPState == STATE_TCP_CONNECTED)
+        {
+            pState->ulConnectionTimeout++;
+            if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
+            {
             }
         }
     }
