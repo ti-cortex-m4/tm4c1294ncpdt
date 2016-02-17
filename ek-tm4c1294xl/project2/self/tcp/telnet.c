@@ -85,7 +85,7 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
     struct ip_addr sIPAddr;
     tTelnetSession *pState = arg;
 
-    CONSOLE("%u: Poll 0x%08x, 0x%08x %u %u\n", pState->ulSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
+    CONSOLE("%u: poll 0x%08x, 0x%08x %u %u\n", pState->ulSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
 
     // Are we operating as a server or a client?
     if(!pState->pListenPCB)
@@ -117,6 +117,8 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
             pState->ulConnectionTimeout++;
             if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
             {
+               CONSOLE("%u: poll close client connection by timeout\n", pState->ulSerialPort);
+               return TelnetCloseClient(pState->ulSerialPort);
             }
         }
     }
@@ -500,6 +502,53 @@ static err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 
     // Return a success code.
     return(ERR_OK);
+}
+
+err_t TelnetCloseClient(uint32_t ulSerialPort)
+{
+    // Check the arguments.
+    ASSERT(ulSerialPort < UART_COUNT);
+    tTelnetSession *pState = &g_sTelnetSession[ulSerialPort];
+
+    CONSOLE("%u: close client UART %d\n", pState->ulSerialPort, ulSerialPort);
+
+    // If we have a connect PCB, close it down.
+    if(pState->pConnectPCB != NULL)
+    {
+        CONSOLE("%u: Closing connect pcb 0x%08x\n", pState->ulSerialPort, pState->pConnectPCB);
+
+        // Clear out all of the TCP callbacks.
+        tcp_arg(pState->pConnectPCB, NULL);
+        tcp_sent(pState->pConnectPCB, NULL);
+        tcp_recv(pState->pConnectPCB, NULL);
+        tcp_err(pState->pConnectPCB, NULL);
+        tcp_poll(pState->pConnectPCB, NULL, 1);
+
+        // Abort the existing TCP connection.
+        tcp_abort(pState->pConnectPCB);
+
+        // Clear out any pbufs associated with this session.
+        TelnetFreePbufs(pState);
+    }
+
+    // Reset the session data for this port.
+    pState->pConnectPCB = NULL;
+    pState->pListenPCB = NULL;
+    pState->eTCPState = STATE_TCP_IDLE;
+//    pState->eTelnetState = STATE_NORMAL;
+    pState->ucFlags = 0;
+    pState->ulConnectionTimeout = 0;
+    pState->ulMaxTimeout = 0;
+    pState->ulSerialPort = ulSerialPort; // TODO ??? UART_COUNT;
+    pState->iBufQRead = 0;
+    pState->iBufQWrite = 0;
+    pState->pBufHead = NULL;
+    pState->pBufCurrent = NULL;
+    pState->ulBufIndex = 0;
+    pState->ulLastTCPSendTime = 0;
+    pState->bLinkLost = false;
+
+    return(ERR_ABRT);
 }
 
 //*****************************************************************************
