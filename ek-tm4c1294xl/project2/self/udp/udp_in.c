@@ -157,8 +157,8 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 1: PushString("AI=ON;D=Owner name;T=STRING;C=EDIT;MAXLEN=8;F=R*"); break;
     case 2: PushString("AI=DN;D=Device name;T=STRING;C=EDIT;MAXLEN=8;F=R*"); break;
     case 3: PushString("AI=IP;D=IP-address;T=STRING;C=IPCTRL;F=R*"); break;
-    case 4: PushString("AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
-    case 5: PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;S=DH==1?\"a\":\"e\";F=R*"); break;
+    case 4: PushString("AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;F=R*"); break;
+    case 5: PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;F=R*"); break;
 
     case 6: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
     case 7: PushString(enConnectionTimeout0.szName); break;
