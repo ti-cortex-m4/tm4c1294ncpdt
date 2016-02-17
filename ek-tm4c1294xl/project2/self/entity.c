@@ -18,12 +18,36 @@ const entity enConnectionTimeout = {
         "AI=CT;D=Connection timeout (min);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT>255?\"Maximum timeout is 255 minutes\":\"\"",
 };
 
-const entity enRoutingMode = {
-        EEPROM_CONNECTION_TIMEOUT, &bRoutingMode, sizeof(uchar), CHAR,
+
+const entity enRoutingMode0 = {
+        EEPROM_ROUTING_MODE_0, &mbRoutingMode[0], sizeof(uchar), CHAR,
         0, 2, DEFAULT_ROUTING_MODE, // TODO 2-> 1
         "RM",
         "AI=RM;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/2-Client (Master)/2",
 };
+
+const entity enRoutingMode1 = {
+        EEPROM_ROUTING_MODE_1, &mbRoutingMode[1], sizeof(uchar), CHAR,
+        0, 2, DEFAULT_ROUTING_MODE, // TODO 2-> 1
+        "RM@2",
+        "AI=RM@2;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/2-Client (Master)/2",
+};
+
+
+const entity enPort0 = {
+        EEPROM_PORT_0, &mwPort[0], sizeof(uint), INT,
+        0, 65534, 101,
+        "PN",
+		"AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=2?\"e\":\"i\"",
+};
+
+const entity enPort1 = {
+        EEPROM_PORT_1, &mwPort[1], sizeof(uint), INT,
+        0, 65534, 102,
+        "PN@2",
+		"AI=PN@2;E=1;D=Port;T=INT;C=EDIT;V=PN@2>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@2!=2?\"e\":\"i\"",
+};
+
 
 const entity enDestIP = {
         EEPROM_DEST_IP, &dwDestIP, sizeof(ulong), LONG,
@@ -62,6 +86,7 @@ const entity enUdpDebugFlag = {
         "AI=UDF;D=UDP debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
 
+// TODO enUdpDebugIP
 
 const entity enUdpDebugPort = {
         EEPROM_UDP_DEBUG_PORT, &wUdpDebugPort, sizeof(uint), INT,

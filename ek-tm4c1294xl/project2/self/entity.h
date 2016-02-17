@@ -28,7 +28,13 @@ typedef struct
 
 
 extern const entity enConnectionTimeout;
-extern const entity enRoutingMode;
+
+extern const entity enRoutingMode0;
+extern const entity enRoutingMode1;
+
+extern const entity enPort0;
+extern const entity enPort1;
+
 extern const entity enDestIP;
 extern const entity enDestPort;
 
