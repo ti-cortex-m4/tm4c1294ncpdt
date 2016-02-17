@@ -4,4 +4,6 @@ TCP_HANDLER.H
 
 ------------------------------------------------------------------------------*/
 
+#if false
 err_t InitTCP_Handler(void);
+#endif

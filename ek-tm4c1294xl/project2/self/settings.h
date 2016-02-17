@@ -21,13 +21,13 @@ SETTINGS.H
 extern ulong                   dwIP;
 extern ulong                   dwGateway;
 extern ulong                   dwNetmask;
-extern uint                    wPort;
 
 extern char                    szDeviceName[NAME_SIZE];
 extern char                    szOwnerName[NAME_SIZE];
 
 extern uchar                   bConnectionTimeout;
-extern uchar                   bRoutingMode;
+extern uchar                   mbRoutingMode[UART_COUNT];
+extern uint                    mwPort[UART_COUNT];
 extern ulong                   dwDestIP;
 extern uint                    wDestPort;
 

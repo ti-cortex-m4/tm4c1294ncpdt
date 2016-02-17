@@ -3,7 +3,7 @@ TCP_HANDLER.C
 
 
 ------------------------------------------------------------------------------*/
-
+#if false
 #include "../main.h"
 #include "lwip/opt.h"
 #include "lwip/debug.h"
@@ -139,3 +139,4 @@ static void HandlerClose(struct tcp_pcb *tpcb)
   // Close the TCP connection.
   tcp_close(tpcb);
 }
+#endif
