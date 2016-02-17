@@ -29,7 +29,7 @@ static void Open(uchar u)
 
   ulong dwIP = mdwDestinationIP[u];
 
-  CONSOLE("%u: immediately connects as client to %u.%u.%u.%u port %u\n",
+  CONSOLE("%u: connects as client to %u.%u.%u.%u port %u\n",
     u,
     (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
     mwDestinationPort[u]);
@@ -52,6 +52,7 @@ void Operation1(void)
     {
       if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
       {
+        CONSOLE("%u: connects as client immediately\n",u);
         Open(u);
       }
     }
@@ -73,6 +74,7 @@ void Operation2(void)
 
         if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ulSerialPort))
         {
+          CONSOLE("%u: connects as client on data\n",u);
           Open(u);
         }
       }
