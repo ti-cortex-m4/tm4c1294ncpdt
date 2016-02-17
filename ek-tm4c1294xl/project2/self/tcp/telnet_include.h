@@ -121,6 +121,6 @@ typedef struct
     //! The last error reported by lwIP while attempting to make a connection.
     err_t eLastErr;
 }
-tTelnetSessionData;
+tTelnetSession;
 
 #endif // __TELNET_H__
