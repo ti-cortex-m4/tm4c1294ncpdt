@@ -128,7 +128,6 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         }
     }
 
-    // Return OK.
     return(ERR_OK);
 }
 
@@ -315,7 +314,6 @@ static err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
     // Reset the connection timeout.
     pState->ulConnectionTimeout = 0;
 
-    // Return OK.
     return(ERR_OK);
 }
 

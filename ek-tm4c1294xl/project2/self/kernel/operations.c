@@ -13,7 +13,7 @@ operations.c
 
 
 
-static void Listen(uchar u)
+static void StartListen(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
@@ -23,7 +23,7 @@ static void Listen(uchar u)
 
 
 
-static void Open(uchar u)
+static void StartOpen(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
@@ -46,14 +46,14 @@ void Operation1(void)
   {
     if (mbRoutingMode[u] == ROUTING_MODE_SERVER)
     {
-      Listen(u);
+      StartListen(u);
     }
     else
     {
       if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
       {
         CONSOLE("%u: connects as client immediately\n",u);
-        Open(u);
+        StartOpen(u);
       }
     }
   }
@@ -75,7 +75,7 @@ void Operation2(void)
         if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ulSerialPort))
         {
           CONSOLE("%u: connects as client on data\n",u);
-          Open(u);
+          StartOpen(u);
         }
       }
     }
