@@ -64,7 +64,7 @@ int     main(void)
 {
   InitLog();
 
-  LOG(("init\n"));
+  LOG("init\n");
 
   //
   // Make sure the main oscillator is enabled because this is required by
@@ -114,7 +114,7 @@ int     main(void)
       //
       while(1)
       {
-        LOG(("No MAC address\n"));
+        LOG("No MAC address\n");
       }
   }
 
@@ -163,7 +163,7 @@ int     main(void)
 
   IntMasterEnable();
 
-  LOG(("start\n"));
+  LOG("start\n");
 
   while(1)
   {
