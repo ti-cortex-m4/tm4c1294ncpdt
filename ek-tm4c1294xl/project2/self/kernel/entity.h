@@ -36,6 +36,9 @@ extern const entity enRoutingMode1;
 extern const entity enPort0;
 extern const entity enPort1;
 
+extern const entity enConnectionMode0;
+extern const entity enConnectionMode1;
+
 extern const entity enDestinationIP0;
 extern const entity enDestinationIP1;
 
