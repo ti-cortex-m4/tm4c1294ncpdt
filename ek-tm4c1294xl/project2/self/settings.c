@@ -17,7 +17,7 @@ TODO
 static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  8
+#define SETTINGS_LABEL  9
 
 ulong                   dwIP;
 ulong                   dwGateway;
@@ -26,11 +26,11 @@ ulong                   dwNetmask;
 char                    szDeviceName[NAME_SIZE];
 char                    szOwnerName[NAME_SIZE];
 
-uchar                   bConnectionTimeout;
+uchar                   mbConnectionTimeout[UART_COUNT];
 uchar                   mbRoutingMode[UART_COUNT];
 uint                    mwPort[UART_COUNT];
-ulong                   dwDestIP;
-uint                    wDestPort;
+ulong                   mdwDestinationIP[UART_COUNT];
+uint                    mwDestinationPort[UART_COUNT];
 
 uchar                   mibBaudRate[UART_COUNT];
 
@@ -103,7 +103,7 @@ uchar    SaveSettings(void)
   if (err != 0) return err;
 
 
-  if ((err = SaveEntity(&enConnectionTimeout)) != 0) return err;
+  if ((err = SaveEntity(&enConnectionTimeout0)) != 0) return err;
 
   if ((err = SaveEntity(&enRoutingMode0)) != 0) return err;
   if ((err = SaveEntity(&enRoutingMode1)) != 0) return err;
@@ -111,8 +111,8 @@ uchar    SaveSettings(void)
   if ((err = SaveEntity(&enPort0)) != 0) return err;
   if ((err = SaveEntity(&enPort1)) != 0) return err;
 
-  if ((err = SaveEntity(&enDestIP)) != 0) return err;
-  if ((err = SaveEntity(&enDestPort)) != 0) return err;
+  if ((err = SaveEntity(&enDestinationIP0)) != 0) return err;
+  if ((err = SaveEntity(&enDestinationPort1)) != 0) return err;
 
   if ((err = SaveEntity(&enBaudRate0)) != 0) return err;
   if ((err = SaveEntity(&enBaudRate1)) != 0) return err;
@@ -139,7 +139,7 @@ uchar   LoadSettings(void)
     LoadString(szDeviceName, EEPROM_DEVICE_NAME);
     LoadString(szOwnerName, EEPROM_OWNER_NAME);
 
-    LoadEntity(&enConnectionTimeout);
+    LoadEntity(&enConnectionTimeout0);
 
     LoadEntity(&enRoutingMode0);
     LoadEntity(&enRoutingMode1);
@@ -147,8 +147,8 @@ uchar   LoadSettings(void)
     LoadEntity(&enPort0);
     LoadEntity(&enPort1);
 
-    LoadEntity(&enDestIP);
-    LoadEntity(&enDestPort);
+    LoadEntity(&enDestinationIP0);
+    LoadEntity(&enDestinationPort1);
 
     LoadEntity(&enBaudRate0);
     LoadEntity(&enBaudRate1);
@@ -168,7 +168,8 @@ uchar   LoadSettings(void)
     memset(&szOwnerName,  0, sizeof(szOwnerName));
     sprintf(szOwnerName, "Owner");
 
-    bConnectionTimeout = DEFAULT_CONNECTION_TIMEOUT; // TODO LoadEntityDef
+    mbConnectionTimeout[0] = enConnectionTimeout0.dwDef; // TODO LoadEntityDef
+    mbConnectionTimeout[1] = enConnectionTimeout1.dwDef;
 
     mbRoutingMode[0] = enRoutingMode0.dwDef;
     mbRoutingMode[1] = enRoutingMode1.dwDef;
@@ -176,8 +177,11 @@ uchar   LoadSettings(void)
     mwPort[0] = enPort0.dwDef;
     mwPort[1] = enPort1.dwDef;
 
-    dwDestIP = DEFAULT_DEST_IP;
-    wDestPort = DEFAULT_DEST_PORT;
+    mdwDestinationIP[0] = enDestinationIP0.dwDef;
+    mdwDestinationIP[1] = enDestinationIP1.dwDef;
+
+    mwDestinationPort[0] = enDestinationPort0.dwDef;
+    mwDestinationPort[1] = enDestinationPort1.dwDef;
 
     mibBaudRate[0] = DEFAULT_BAUD_RATE;
     mibBaudRate[1] = DEFAULT_BAUD_RATE;

@@ -163,20 +163,23 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
     case 7: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
     case 8: PushString(enBaudRate0.szName); break;
-    case 9: PushString(enConnectionTimeout.szName); break;
+    case 9: PushString(enConnectionTimeout0.szName); break;
     case 10: PushString(enRoutingMode0.szName); break;
     case 11: PushString(enPort0.szName); break;
-    case 12: PushString(enDestIP.szName); break;
-    case 13: PushString(enDestPort.szName); break;
+    case 12: PushString(enDestinationIP0.szName); break;
+    case 13: PushString(enDestinationPort0.szName); break;
 
     case 14: PushString("AI=$CHANNEL2;D=Channel2;T=GROUP"); break;
-    case 15: PushString(enBaudRate1.szName); break;
-    case 16: PushString(enRoutingMode1.szName); break;
-    case 17: PushString(enPort1.szName); break;
+    case 15: PushString(enConnectionTimeout1.szName); break;
+    case 16: PushString(enBaudRate1.szName); break;
+    case 17: PushString(enRoutingMode1.szName); break;
+    case 18: PushString(enPort1.szName); break;
+    case 19: PushString(enDestinationIP1.szName); break;
+    case 20: PushString(enDestinationPort1.szName); break;
 
-    case 18: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
-    case 19: PushString(enUdpDebugFlag.szName); break;
-    case 20: PushString(enUdpDebugPort.szName); break;
+    case 21: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
+    case 22: PushString(enUdpDebugFlag.szName); break;
+    case 23: PushString(enUdpDebugPort.szName); break;
 
     default: ASSERT(false); break; // TODO
   }
@@ -247,20 +250,6 @@ err_t SNM(struct pbuf *p)
 
   dwNetmask = dw;
   err = SaveNetmask();
-  if (err != ERR_OK) return err;
-
-  return ERR_OK;
-}
-
-
-err_t SCT(struct pbuf *p)
-{
-  uchar b = 0;
-  err_t err = PopCharDec(p, &b, 3);
-  if (err != ERR_OK) return err;
-
-  bConnectionTimeout = b;
-  err = SaveConnectionTimeout();
   if (err != ERR_OK) return err;
 
   return ERR_OK;
@@ -371,7 +360,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"21");
+    CmdString(pcb,p,addr,port,broadcast,"24");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -408,7 +397,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdIn(pcb,p,addr,port,broadcast,SNM);
   }
 
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout)) {
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout0)) {
+  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout1)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode0)) {
   }
@@ -418,9 +409,13 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enPort1)) {
   }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestIP)) {
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP0)) {
   }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestPort)) {
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP1)) {
+  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort0)) {
+  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort1)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate0)) {
   }
