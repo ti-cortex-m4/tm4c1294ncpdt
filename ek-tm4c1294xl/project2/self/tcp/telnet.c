@@ -86,7 +86,7 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
     struct ip_addr sIPAddr;
     tTelnetSession *pState = arg;
 
-    DEBUG_MSG("TelnetPoll 0x%08x, 0x%08x\n", arg, pcb);
+    CONSOLE("%u: TelnetPoll 0x%08x, 0x%08x\n", pState->ulSerialPort, arg, pcb);
 
     // Are we operating as a server or a client?
     if(!pState->pListenPCB)
@@ -97,7 +97,7 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         {
             if (pcb->state != CLOSED)
             {
-              DEBUG_MSG("TelnetPoll state %d\n", pcb->state);
+              CONSOLE("%u: TelnetPoll state %d\n", pState->ulSerialPort, pcb->state);
             }
             else
             {
@@ -109,7 +109,7 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
                 err_t err = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort, TelnetConnected);
                 if(err != ERR_OK)
                 {
-                    DEBUG_MSG("TelnetPoll error %d\n", err);
+                    CONSOLE("%u: TelnetPoll error %d\n", pState->ulSerialPort, err);
                     pState->eLastErr = err;
                 }
             }
@@ -123,7 +123,7 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         if((pState->ulMaxTimeout != 0) &&
            (pState->ulConnectionTimeout > pState->ulMaxTimeout))
         {
-            DEBUG_MSG("TelnetPoll abort connection %d %d\n", pState->ulConnectionTimeout, pState->ulMaxTimeout);
+            CONSOLE("%u: TelnetPoll abort connection %d %d\n", pState->ulSerialPort, pState->ulConnectionTimeout, pState->ulMaxTimeout);
             // Close the telnet connection.
             tcp_abort(pcb);
         }
@@ -173,7 +173,7 @@ static err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t
     int iNextWrite;
     SYS_ARCH_DECL_PROTECT(lev);
 
-    DEBUG_MSG("TelnetReceive 0x%08x, 0x%08x, 0x%08x, %d\n", arg, pcb, p, err);
+    CONSOLE("%u: TelnetReceive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, p, err);
 
     // Place the incoming packet onto the queue if there is space.
     if((err == ERR_OK) && (p != NULL))
@@ -261,7 +261,7 @@ static void TelnetError(void *arg, err_t err)
 {
     tTelnetSession *pState = arg;
 
-    DEBUG_MSG("TelnetError 0x%08x, %d\n", arg, err);
+    CONSOLE("%u: TelnetError 0x%08x, %d\n", pState->ulSerialPort, arg, err);
 
     // Increment our error counter.
     pState->ucErrorCount++;
@@ -311,7 +311,7 @@ static err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
     tTelnetSession *pState = arg;
 
-    DEBUG_MSG("TelnetSent 0x%08x, 0x%08x, %d\n", arg, pcb, len);
+    CONSOLE("%u: TelnetSent 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, len);
 
     // Reset the connection timeout.
     pState->ulConnectionTimeout = 0;
@@ -336,7 +336,7 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tTelnetSession *pState = arg;
 
-    DEBUG_MSG("TelnetConnected 0x%08x, 0x%08x, %d\n", arg, pcb, err);
+    CONSOLE("%u: TelnetConnected 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, err);
 
     // Increment our connection counter.
     pState->ucConnectCount++;
@@ -350,7 +350,7 @@ static err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
     if(err != ERR_OK)
     {
-        DEBUG_MSG("TelnetConnected error %d\n", err);
+        CONSOLE("%u: TelnetConnected error %d\n", pState->ulSerialPort, err);
         pState->eLastErr = err;
 
         // Clear out all of the TCP callbacks.
@@ -430,7 +430,7 @@ static err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tTelnetSession *pState = arg;
 
-    DEBUG_MSG("TelnetAccept 0x%08x, 0x%08x, 0x%08x\n", arg, pcb, err);
+    CONSOLE("%u: TelnetAccept 0x%08x, 0x%08x, 0x%08x\n", pState->ulSerialPort, arg, pcb, err);
 
     // If we are not in the listening state, refuse this connection.
     if(pState->eTCPState != STATE_TCP_LISTEN)
@@ -513,16 +513,16 @@ void TelnetClose(uint32_t ulSerialPort)
 {
     tTelnetSession *pState;
 
-    DEBUG_MSG("TelnetClose UART %d\n", ulSerialPort);
-
     // Check the arguments.
     ASSERT(ulSerialPort < UART_COUNT);
     pState = &g_sTelnetSession[ulSerialPort];
 
+    CONSOLE("%u: TelnetClose UART\n", pState->ulSerialPort);
+
     // If we have a connect PCB, close it down.
     if(pState->pConnectPCB != NULL)
     {
-        DEBUG_MSG("Closing connect pcb 0x%08x\n", pState->pConnectPCB);
+        CONSOLE("%u: Closing connect pcb 0x%08x\n", pState->ulSerialPort, pState->pConnectPCB);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pState->pConnectPCB, NULL);
@@ -541,7 +541,7 @@ void TelnetClose(uint32_t ulSerialPort)
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
     {
-        DEBUG_MSG("Closing listen pcb 0x%08x\n", pState->pListenPCB);
+        CONSOLE("%u: Closing listen pcb 0x%08x\n", pState->ulSerialPort, pState->pListenPCB);
 
         // Close the TCP connection.
         tcp_close(pState->pListenPCB);
@@ -588,17 +588,18 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
     err_t eError;
     tTelnetSession *pState;
 
-    DEBUG_MSG("TelnetOpen %d.%d.%d.%d port %d, UART %d\n",
-              (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF,
-              (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF, usTelnetRemotePort,
-              ulSerialPort);
-
     // Check the arguments.
     ASSERT(ulIPAddr != 0);
     ASSERT(ulSerialPort < UART_COUNT);
     ASSERT(usTelnetRemotePort != 0);
 //    ASSERT(usTelnetLocalPort != 0);
     pState = &g_sTelnetSession[ulSerialPort];
+
+    CONSOLE("%u: TelnetOpen %d.%d.%d.%d port %d, UART %d\n",
+              pState->ulSerialPort,
+              (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF,
+              (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF, usTelnetRemotePort,
+              ulSerialPort);
 
     // Fill in the telnet state data structure for this session in client
     // mode.
@@ -640,7 +641,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
     eError = tcp_connect(pcb, &sIPAddr, usTelnetRemotePort, TelnetConnected);
     if(eError != ERR_OK)
     {
-        DEBUG_MSG("TelnetOpen error %d\n", eError);
+        CONSOLE("%u: TelnetOpen error %d\n", pState->ulSerialPort, eError);
         pState->eLastErr = eError;
         return;
     }
@@ -661,12 +662,12 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
     void *pcb;
     tTelnetSession *pState;
 
-    DEBUG_MSG("TelnetListen port %d, UART %d\n", usTelnetPort, ulSerialPort);
-
     // Check the arguments.
     ASSERT(ulSerialPort < UART_COUNT);
     ASSERT(usTelnetPort != 0);
     pState = &g_sTelnetSession[ulSerialPort];
+
+    CONSOLE("%u: TelnetListen port %d, UART %d\n", pState->ulSerialPort, usTelnetPort, ulSerialPort);
 
     // Fill in the telnet state data structure for this session in listen
     // (in other words, server) mode.

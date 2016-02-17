@@ -65,8 +65,8 @@ http://lwip.wikia.com/wiki/Lwipopts.h
 F=R* F=R restart
 установка скорости uart без рестарта
 
-ip addr macro
-
 static const char * const g_pcHex
 
 name > 4*3
+
+DEBUG_MSG start with %d
