@@ -6,7 +6,7 @@ SETTINGS_EEPROM.C
 
 #include "main.h"
 #include "driverlib/eeprom.h"
-#include "entity.h"
+#include "kernel/entity.h"
 #include "settings_eeprom.h"
 
 
