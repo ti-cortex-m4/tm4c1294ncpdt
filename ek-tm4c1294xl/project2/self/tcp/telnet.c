@@ -124,13 +124,11 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
     }
     else
     {
-        // We are operating as a server. Increment the timeout value and close
-        // the telnet connection if the configured timeout has been exceeded.
+        // We are operating as a server. Increment the timeout value and close the telnet connection if the configured timeout has been exceeded.
         pState->ulConnectionTimeout++;
-        if((pState->ulMaxTimeout != 0) &&
-           (pState->ulConnectionTimeout > pState->ulMaxTimeout))
+        if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
         {
-            CONSOLE("%u: Poll close connection by timeout %d %d\n", pState->ulSerialPort, pState->ulConnectionTimeout, pState->ulMaxTimeout);
+            CONSOLE("%u: poll close server connection by timeout\n", pState->ulSerialPort);
             // Close the telnet connection.
             tcp_abort(pcb);
         }
@@ -549,6 +547,43 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
     pState->bLinkLost = false;
 
     return(ERR_ABRT);
+}
+
+void TelnetCloseServer(uint32_t ulSerialPort)
+{
+    ASSERT(ulSerialPort < UART_COUNT);
+    tTelnetSession *pState = &g_sTelnetSession[ulSerialPort];
+
+    CONSOLE("%u: close server UART %d\n", pState->ulSerialPort, ulSerialPort);
+
+    // If we have a listen PCB, close it down as well.
+    if(pState->pListenPCB != NULL)
+    {
+        CONSOLE("%u: Closing listen pcb 0x%08x\n", pState->ulSerialPort, pState->pListenPCB);
+
+        // Close the TCP connection.
+        tcp_close(pState->pListenPCB);
+
+        // Clear out any pbufs associated with this session.
+        TelnetFreePbufs(pState);
+    }
+
+    // Reset the session data for this port.
+    pState->pConnectPCB = NULL;
+    pState->pListenPCB = NULL;
+    pState->eTCPState = STATE_TCP_IDLE;
+//    pState->eTelnetState = STATE_NORMAL;
+    pState->ucFlags = 0;
+    pState->ulConnectionTimeout = 0;
+    pState->ulMaxTimeout = 0;
+    pState->ulSerialPort = ulSerialPort; // TODO ??? UART_COUNT;
+    pState->iBufQRead = 0;
+    pState->iBufQWrite = 0;
+    pState->pBufHead = NULL;
+    pState->pBufCurrent = NULL;
+    pState->ulBufIndex = 0;
+    pState->ulLastTCPSendTime = 0;
+    pState->bLinkLost = false;
 }
 
 //*****************************************************************************
