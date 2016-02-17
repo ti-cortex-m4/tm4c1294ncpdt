@@ -16,6 +16,7 @@ SERIAL.C
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "utils/ringbuf.h"
+#include "serial.h"
 
 
 
