@@ -13,7 +13,7 @@ MAIN.C
 #include "driverlib/flash.h"
 #include "utils/lwiplib_patched.h"
 #include "drivers/pinout.h"
-#include "kernel/entity.h"
+#include "kernel/operations.h"
 #include "settings.h"
 #include "settings2.h"
 #include "systick.h"
@@ -159,30 +159,7 @@ int     main(void)
   IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
-#if true
-  uchar u;
-  for(u = 0; u < UART_COUNT; u++)
-  {
-    if (mbRoutingMode[u] == ROUTING_MODE_SERVER)
-    {
-      LOG(("Channel %u listens as server on port %u\n", u, mwPort[u]));
-      TelnetListen(mwPort[u], u);
-    }
-    else
-    {
-      if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
-      {
-        ulong dwIP = mdwDestinationIP[u];
-        LOG(("Channel %u immediately connects as client to %u.%u.%u.%u port %u\n",
-                u,
-                (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
-                mwDestinationPort[u]));
-
-        TelnetOpen(mdwDestinationIP[u], mwDestinationPort[u], u);
-      }
-    }
-  }
-#endif
+  Operation1();
 
   IntMasterEnable();
 
@@ -190,7 +167,7 @@ int     main(void)
 
   while(1)
   {
-//    SysCtlDelay(100*SysCtlClockGet());
-//    stats_display();
+//    SysCtlDelay(100*SysCtlClockGet()); stats_display();
+    Operation2();
   }
 }
