@@ -512,7 +512,7 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
     // If we have a connect PCB, close it down.
     if(pState->pConnectPCB != NULL)
     {
-        CONSOLE("%u: Closing connect pcb 0x%08x\n", pState->ulSerialPort, pState->pConnectPCB);
+        CONSOLE("%u: closing client data 0x%08x\n", pState->ulSerialPort, pState->pConnectPCB);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pState->pConnectPCB, NULL);
@@ -560,13 +560,15 @@ err_t TelnetCloseServer(uint32_t ulSerialPort)
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
     {
-        CONSOLE("%u: Closing listen pcb 0x%08x\n", pState->ulSerialPort, pState->pListenPCB);
+        CONSOLE("%u: closing server data 0x%08x\n", pState->ulSerialPort, pState->pListenPCB);
 
         // Close the TCP connection.
         err = tcp_close(pState->pListenPCB);
+        CONSOLE("%u: tcp_close=%u\n", err);
+
         if (err != ERR_OK)
         {
-        // TODO
+           CONSOLE("%u: tcp_close error\n", err); // TODO
         }
 
         // Clear out any pbufs associated with this session.
