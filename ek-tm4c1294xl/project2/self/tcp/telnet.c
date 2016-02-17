@@ -549,12 +549,14 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
     return(ERR_ABRT);
 }
 
-void TelnetCloseServer(uint32_t ulSerialPort)
+err_t TelnetCloseServer(uint32_t ulSerialPort)
 {
     ASSERT(ulSerialPort < UART_COUNT);
     tTelnetSession *pState = &g_sTelnetSession[ulSerialPort];
 
     CONSOLE("%u: close server UART %d\n", pState->ulSerialPort, ulSerialPort);
+
+    err_t err = ERR_OK;
 
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
@@ -562,7 +564,11 @@ void TelnetCloseServer(uint32_t ulSerialPort)
         CONSOLE("%u: Closing listen pcb 0x%08x\n", pState->ulSerialPort, pState->pListenPCB);
 
         // Close the TCP connection.
-        tcp_close(pState->pListenPCB);
+        err = tcp_close(pState->pListenPCB);
+        if (err != ERR_OK)
+        {
+        // TODO
+        }
 
         // Clear out any pbufs associated with this session.
         TelnetFreePbufs(pState);
@@ -584,6 +590,8 @@ void TelnetCloseServer(uint32_t ulSerialPort)
     pState->ulBufIndex = 0;
     pState->ulLastTCPSendTime = 0;
     pState->bLinkLost = false;
+
+    return err;
 }
 
 //*****************************************************************************
