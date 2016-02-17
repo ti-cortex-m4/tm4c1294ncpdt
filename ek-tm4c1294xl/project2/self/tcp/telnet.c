@@ -564,11 +564,9 @@ err_t TelnetCloseServer(uint32_t ulSerialPort)
 
         // Close the TCP connection.
         err = tcp_close(pState->pListenPCB);
-        CONSOLE("%u: tcp_close=%u\n", err);
-
         if (err != ERR_OK)
         {
-           CONSOLE("%u: tcp_close error\n", err); // TODO
+           CONSOLE("%u: ERROR tcp_close %u\n", err); // TODO restart
         }
 
         // Clear out any pbufs associated with this session.
