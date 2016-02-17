@@ -7,6 +7,7 @@ udp_log.c
 #include "../main.h"
 #include "lwip/inet.h"
 #include "lwip/udp.h"
+#include "../settings.h"
 #include "udp_log.h"
 
 
@@ -42,7 +43,7 @@ void UdpLog(uchar *pb, uint wSize)
     {
       memcpy(p->payload, pb, wSize);
 
-      err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, 50000);
+      err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, wUdpDebugPort);
       if (err != 0)
       {
         errors2++;
