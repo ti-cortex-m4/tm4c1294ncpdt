@@ -49,6 +49,7 @@ extern const entity enBaudRate0;
 extern const entity enBaudRate1;
 
 extern const entity enUdpDebugFlag;
+extern const entity enUdpDebugIP;
 extern const entity enUdpDebugPort;
 
 

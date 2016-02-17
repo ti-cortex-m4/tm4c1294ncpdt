@@ -129,7 +129,12 @@ const entity enUdpDebugFlag = {
         "AI=UDF;D=UDP debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
 
-// TODO enUdpDebugIP
+const entity enUdpDebugIP = {
+        EEPROM_UDP_DEBUG_IP, &dwUdpDebugIP, sizeof(ulong), LONG,
+        0, MAX_LONG, 0xFFFFFFFF,
+        "UDI",
+        "AI=UDI;E=1;D=UDP debug IP-address;T=STRING;C=IPCTRL;S=UDF!=0?\"e\":\"i\"",
+};
 
 const entity enUdpDebugPort = {
         EEPROM_UDP_DEBUG_PORT, &wUdpDebugPort, sizeof(uint), INT,

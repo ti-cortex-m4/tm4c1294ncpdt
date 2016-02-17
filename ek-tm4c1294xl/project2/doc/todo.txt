@@ -69,3 +69,4 @@ ip addr macro
 
 static const char * const g_pcHex
 
+name > 4*3
