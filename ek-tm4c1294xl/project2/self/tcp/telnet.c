@@ -869,8 +869,7 @@ TelnetHandler(void)
                 {
                     SYS_ARCH_PROTECT(lev);
                     pState->pBufHead = pState->pBufQ[pState->iBufQRead];
-                    pState->iBufQRead =
-                        ((pState->iBufQRead + 1) % PBUF_POOL_SIZE);
+                    pState->iBufQRead = ((pState->iBufQRead + 1) % PBUF_POOL_SIZE);
                     pState->pBufCurrent = pState->pBufHead;
                     pState->ulBufIndex = 0;
                     SYS_ARCH_UNPROTECT(lev);
