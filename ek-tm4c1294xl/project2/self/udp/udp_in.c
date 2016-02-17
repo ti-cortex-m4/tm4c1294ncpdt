@@ -180,7 +180,8 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
     case 22: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
     case 23: PushString(enUdpDebugFlag.szName); break;
-    case 24: PushString(enUdpDebugPort.szName); break;
+    case 24: PushString(enUdpDebugIP.szName); break;
+    case 25: PushString(enUdpDebugPort.szName); break;
 
     default: ASSERT(false); break; // TODO
   }
@@ -361,7 +362,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"24");
+    CmdString(pcb,p,addr,port,broadcast,"26");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -426,6 +427,8 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   }
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugFlag)) {
+  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugIP)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugPort)) {
   }

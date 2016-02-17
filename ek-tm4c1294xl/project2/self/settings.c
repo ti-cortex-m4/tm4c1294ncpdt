@@ -17,7 +17,7 @@ TODO
 static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  17
+#define SETTINGS_LABEL  18
 
 ulong                   dwIP;
 ulong                   dwGateway;
@@ -36,6 +36,7 @@ uint                    mwDestinationPort[UART_COUNT];
 uchar                   mibBaudRate[UART_COUNT];
 
 bool                    fUdpDebugFlag;
+ulong                   dwUdpDebugIP;
 uint                    wUdpDebugPort;
 
 uchar                   pbMAC[6];
@@ -123,6 +124,7 @@ uchar    SaveSettings(void)
   if ((err = SaveEntity(&enBaudRate1)) != 0) return err;
 
   if ((err = SaveEntity(&enUdpDebugFlag)) != 0) return err;
+  if ((err = SaveEntity(&enUdpDebugIP)) != 0) return err;
   if ((err = SaveEntity(&enUdpDebugPort)) != 0) return err;
 
   return 0;
@@ -166,6 +168,7 @@ uchar   LoadSettings(void)
     LoadEntity(&enBaudRate1);
 
     LoadEntity(&enUdpDebugFlag);
+    LoadEntity(&enUdpDebugIP);
     LoadEntity(&enUdpDebugPort);
   }
   else
@@ -202,6 +205,7 @@ uchar   LoadSettings(void)
     mibBaudRate[1] = DEFAULT_BAUD_RATE;
 
     fUdpDebugFlag = enUdpDebugFlag.dwDef;
+    dwUdpDebugIP = enUdpDebugIP.dwDef;
     wUdpDebugPort = enUdpDebugPort.dwDef;
 
     SaveSettings();

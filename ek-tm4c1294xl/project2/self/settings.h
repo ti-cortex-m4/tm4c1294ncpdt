@@ -35,6 +35,7 @@ extern uint                    mwDestinationPort[UART_COUNT];
 extern uchar                   mibBaudRate[UART_COUNT];
 
 extern bool                    fUdpDebugFlag;
+extern ulong                   dwUdpDebugIP;
 extern uint                    wUdpDebugPort;
 
 extern uchar                   pbMAC[6];
