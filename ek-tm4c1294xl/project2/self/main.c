@@ -175,7 +175,7 @@ int     main(void)
 //          TelnetOpen(g_sParameters.sPort[u].ulTelnetIPAddr,
 //                     g_sParameters.sPort[u].usTelnetRemotePort,
 //                     g_sParameters.sPort[u].usTelnetLocalPort, u);
-          TelnetOpen(dwDestIP, wDestPort, 1, u);
+          TelnetOpen(mdwDestinationIP[u], mwDestinationPort[u], 1, u);
       }
   }
 #endif

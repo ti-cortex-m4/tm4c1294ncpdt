@@ -11,11 +11,18 @@ ENTITY.C
 
 
 
-const entity enConnectionTimeout = {
-        EEPROM_CONNECTION_TIMEOUT, &bConnectionTimeout, sizeof(uchar), CHAR,
+const entity enConnectionTimeout0 = {
+        EEPROM_CONNECTION_TIMEOUT_0, &mbConnectionTimeout[0], sizeof(uchar), CHAR,
         0, 255, DEFAULT_CONNECTION_TIMEOUT,
         "CT",
         "AI=CT;D=Connection timeout (min);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT>255?\"Maximum timeout is 255 minutes\":\"\"",
+};
+
+const entity enConnectionTimeout1 = {
+        EEPROM_CONNECTION_TIMEOUT_1, &mbConnectionTimeout[1], sizeof(uchar), CHAR,
+        0, 255, DEFAULT_CONNECTION_TIMEOUT,
+        "CT@2",
+        "AI=CT@2;D=Connection timeout (min);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@2>255?\"Maximum timeout is 255 minutes\":\"\"",
 };
 
 
@@ -49,18 +56,33 @@ const entity enPort1 = {
 };
 
 
-const entity enDestIP = {
-        EEPROM_DEST_IP, &dwDestIP, sizeof(ulong), LONG,
-        0, MAX_LONG, DEFAULT_DEST_IP,
+const entity enDestinationIP0 = {
+        EEPROM_DESTINATION_IP_0, &mdwDestinationIP[0], sizeof(ulong), LONG,
+        0, MAX_LONG, DEFAULT_DESTINATION_IP,
         "DI",
         "AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1||RM==2?\"e\":\"i\"", // TODO ||SF==1
 };
 
-const entity enDestPort = {
-        EEPROM_DEST_PORT, &wDestPort, sizeof(uint), INT,
-        0, MAX_INT, DEFAULT_DEST_PORT,
+const entity enDestinationIP1 = {
+        EEPROM_DESTINATION_IP_1, &mdwDestinationIP[1], sizeof(ulong), LONG,
+        0, MAX_LONG, DEFAULT_DESTINATION_IP,
+        "DI@2",
+        "AI=DI@2;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@2==1||RM@2==2?\"e\":\"i\"", // TODO ||SF==1
+};
+
+
+const entity enDestinationPort0 = {
+        EEPROM_DESTINATION_PORT_0, &mwDestinationPort[0], sizeof(uint), INT,
+        0, MAX_INT, DEFAULT_DESTINATION_PORT,
         "DP",
         "AI=DP;E=1;D=Destination port;T=INT;C=EDIT;S=RM!=0?\"e\":\"i\"",
+};
+
+const entity enDestinationPort1 = {
+        EEPROM_DESTINATION_PORT_1, &mwDestinationPort[1], sizeof(uint), INT,
+        0, MAX_INT, DEFAULT_DESTINATION_PORT,
+        "DP@2",
+        "AI=DP@2;E=1;D=Destination port;T=INT;C=EDIT;S=RM@2!=0?\"e\":\"i\"",
 };
 
 

@@ -13,8 +13,8 @@ SETTINGS.H
 
 #define DEFAULT_CONNECTION_TIMEOUT 0
 #define DEFAULT_ROUTING_MODE 0
-#define DEFAULT_DEST_IP 0xC0A80165 // inet_addr("101.1.168.192")
-#define DEFAULT_DEST_PORT 101
+#define DEFAULT_DESTINATION_IP 0xC0A80165 // inet_addr("101.1.168.192")
+#define DEFAULT_DESTINATION_PORT 101
 #define DEFAULT_BAUD_RATE 6 // 9600
 
 
@@ -25,11 +25,11 @@ extern ulong                   dwNetmask;
 extern char                    szDeviceName[NAME_SIZE];
 extern char                    szOwnerName[NAME_SIZE];
 
-extern uchar                   bConnectionTimeout;
+extern uchar                   mbConnectionTimeout[UART_COUNT];
 extern uchar                   mbRoutingMode[UART_COUNT];
 extern uint                    mwPort[UART_COUNT];
-extern ulong                   dwDestIP;
-extern uint                    wDestPort;
+extern ulong                   mdwDestinationIP[UART_COUNT];
+extern uint                    mwDestinationPort[UART_COUNT];
 
 extern uchar                   mibBaudRate[UART_COUNT];
 
