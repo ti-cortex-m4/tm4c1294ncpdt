@@ -10,7 +10,6 @@ TELNET.C
 #include "../uart/log.h"
 #include "../uart/serial.h"
 #include "../settings2.h"
-#include "telnet_include.h"
 #include "telnet.h"
 
 
@@ -19,6 +18,13 @@ TELNET.C
 //! The telnet session data array, for use in the telnet handler function.
 //*****************************************************************************
 static tTelnetSessionData g_sTelnetSession[UART_COUNT];
+
+
+tTelnetSessionData *getTelnetSession(uchar ibUart)
+{
+  ASSERT(ibUart < UART_COUNT);
+  return &g_sTelnetSession[ibUart];
+}
 
 
 //*****************************************************************************

@@ -66,3 +66,6 @@ F=R* F=R restart
 установка скорости uart без рестарта
 
 ip addr macro
+
+static const char * const g_pcHex
+
