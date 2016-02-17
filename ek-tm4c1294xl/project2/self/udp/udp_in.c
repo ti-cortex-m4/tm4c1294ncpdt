@@ -4,12 +4,12 @@ UDP_IN.C
 
 ------------------------------------------------------------------------------*/
 
-#include <self/uart/uart_log.h>
 #include "../main.h"
 #include "../settings.h"
 #include "../settings_eeprom.h"
 #include "../kernel/entity.h"
 #include "driverlib/sysctl.h"
+#include "../uart/uart_log.h"
 #include "udp_pop.h"
 #include "udp_push.h"
 #include "udp_in.h"

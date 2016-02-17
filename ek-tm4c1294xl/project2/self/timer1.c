@@ -3,7 +3,6 @@ TIMER1.C
 
 ------------------------------------------------------------------------------*/
 
-#include <self/uart/uart_log.h>
 #include "main.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_ints.h"
@@ -13,6 +12,7 @@ TIMER1.C
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 #include "uart/uart.h"
+#include "uart/uart_log.h"
 #include "timer1.h"
 
 
