@@ -13,7 +13,7 @@ ERROR.C
 
 void __error__(char *pcFileName, ulong dwLine)
 {
-  CONSOLE_UART("\nfile: %s line: %d\n", pcFileName, dwLine);
+  ERROR_UART("\n assert error: file %s, line %d\n", pcFileName, dwLine);
   while(1)
   {
   }
