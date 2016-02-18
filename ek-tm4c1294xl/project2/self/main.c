@@ -96,7 +96,7 @@ int     main(void)
 
   InitUdpLog();
 
-  InitUDP_Handler();
+  InitUdpHandler();
 //  InitTCP_Handler();
 
   // Initialize the serial port module.
