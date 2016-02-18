@@ -97,7 +97,7 @@ void TaskConnections(void)
 
 
 
-void TaskLwIpDebug(uint wSeconds)
+void TaskLwIpDebug(uint wSecond)
 {
 static uint wTimeout;
 

@@ -15,7 +15,6 @@ MAIN,C
 #include "drivers/pinout.h"
 #include "kernel/tasks.h"
 #include "settings.h"
-#include "settings2.h"
 #include "systick.h"
 #include "timer1.h"
 #include "uart/uart.h"
@@ -72,7 +71,7 @@ int     main(void)
   ulong dwSysClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
   InitUartLog(dwSysClockFreq);
-  CONSOLE_UART("\n init \n");
+  CONSOLE_UART("\n init\n");
 
   // Configure the device pins.
   PinoutSet(true, false);
@@ -99,10 +98,7 @@ int     main(void)
   InitUdpHandler();
 //  InitTCP_Handler();
 
-  // Initialize the serial port module.
   SerialInit();
-
-  // Initialize the telnet module.
   TelnetInit();
 
   InitSysTick(dwSysClockFreq);
@@ -121,15 +117,15 @@ int     main(void)
 
   IntMasterEnable();
 
-  CONSOLE("\n start \n");
+  CONSOLE("\n start\n");
 
-  while(1)
+  while (true)
   {
-    static uint wSeconds;
+    static uint wSecond;
 
-    wSeconds++; SysCtlDelay(SysCtlClockGet());
+    wSecond++; SysCtlDelay(SysCtlClockGet());
 
     TaskConnections();
-    TaskLwIpDebug(wSeconds);
+    TaskLwIpDebug(wSecond);
   }
 }

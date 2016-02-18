@@ -280,3 +280,12 @@ ulong GetBaud(uchar ibPort)
   ASSERT(ibBaud < BAUD_RATE_COUNT);
   return mdwBAUDS[ibBaud];
 }
+
+
+//! The timeout for the TCP connection used for the telnet session, specified in seconds.
+//! A value of 0 indicates no timeout is to be used.
+ulong getTelnetTimeout(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+  return mbConnectionTimeout[u]*60;
+}
