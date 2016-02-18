@@ -86,7 +86,7 @@ static void OutByte0(uchar b)
 }
 
 
-void    UART0IntHandler(void)
+void    UART0IntHandler_(void)
 {
   ulong dwStatus = UARTIntStatus(UART0_BASE, true);
   UARTIntClear(UART0_BASE, dwStatus);
