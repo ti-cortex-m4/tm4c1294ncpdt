@@ -176,7 +176,7 @@ static err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t
     int iNextWrite;
     SYS_ARCH_DECL_PROTECT(lev);
 
-    CONSOLE("%u: Receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, p, err);
+    CONSOLE("%u: receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, p, err);
 
     // Place the incoming packet onto the queue if there is space.
     if((err == ERR_OK) && (p != NULL))
@@ -264,7 +264,7 @@ static void TelnetError(void *arg, err_t err)
 {
     tTelnetSession *pState = arg;
 
-    CONSOLE("%u: Error 0x%08x, %d\n", pState->ulSerialPort, arg, err);
+    CONSOLE("%u: error 0x%08x, %d\n", pState->ulSerialPort, arg, err);
 
     // Increment our error counter.
     pState->ucErrorCount++;
@@ -432,7 +432,7 @@ static err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tTelnetSession *pState = arg;
 
-    CONSOLE("%u: Accept 0x%08x, 0x%08x, 0x%08x\n", pState->ulSerialPort, arg, pcb, err);
+    CONSOLE("%u: accept 0x%08x, 0x%08x, 0x%08x\n", pState->ulSerialPort, arg, pcb, err);
 
     // If we are not in the listening state, refuse this connection.
     if(pState->eTCPState != STATE_TCP_LISTEN)
@@ -465,7 +465,7 @@ static err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
     pState->eTCPState = STATE_TCP_CONNECTED;
 
     // Acknowledge that we have accepted this connection.
-    tcp_accepted(pcb);
+    // TODO tcp_accepted(pcb);
 
     // Reset the serial port associated with this session to its default parameters.
     // TODO SerialSetDefault(pState->ulSerialPort);

@@ -121,7 +121,7 @@ int     main(void)
 
   IntMasterEnable();
 
-  CONSOLE_UART("\n start \n");
+  CONSOLE("\n start \n");
 
   while(1)
   {
