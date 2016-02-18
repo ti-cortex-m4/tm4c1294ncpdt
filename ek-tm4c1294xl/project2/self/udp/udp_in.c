@@ -480,11 +480,11 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugIP)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugPort)) {}
 
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enLwipDebugFlag)) {}
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enLwipDebugTimeout)) {}
-
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugFlag)) {}
 //  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugPort)) {}
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enLwipDebugFlag)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enLwipDebugTimeout)) {}
 
   else { // TODO
     CONSOLE_UART("unknown command: %d\n", broadcast);
