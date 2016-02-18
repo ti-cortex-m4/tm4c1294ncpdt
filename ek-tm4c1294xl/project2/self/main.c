@@ -117,7 +117,7 @@ int     main(void)
   IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
-  Operation1();
+  InitConnections();
 
   IntMasterEnable();
 
@@ -129,7 +129,7 @@ int     main(void)
 
     wSeconds++; SysCtlDelay(SysCtlClockGet());
 
-    Operation2();
+    TaskConnections();
     TaskLwIpDebug(wSeconds);
   }
 }

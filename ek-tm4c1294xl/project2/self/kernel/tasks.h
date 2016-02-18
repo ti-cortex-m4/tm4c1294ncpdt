@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
-tasks,h
+tasks.h
 
 
 ------------------------------------------------------------------------------*/
 
-void Operation1(void);
-void Operation2(void);
+void InitConnections(void);
+void TaskConnections(void);
 
 void TaskLwIpDebug(uint wSeconds);
