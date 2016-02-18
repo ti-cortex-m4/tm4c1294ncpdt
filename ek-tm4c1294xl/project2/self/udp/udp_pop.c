@@ -5,6 +5,7 @@ UDP_POP,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../uart/uart_log.h"
 #include "udp_pop.h"
 
 
@@ -37,11 +38,12 @@ static err_t PopInt(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix) // TO
     if (pb[i] == '|') return ERR_OK;
 
     char b = DecodeChar(pb[i],bRadix);
-    if (b == 0xFF) return ERR_VAL;
+    if (b == 0xFF) { CONSOLE_UART("ERROR PopInt #1\n"); return ERR_VAL; }
 
     *pw = *pw*bRadix + b;
   }
 
+  CONSOLE_UART("ERROR PopInt #2\n");
   return ERR_ARG;
 }
 
@@ -62,7 +64,7 @@ static err_t PopChar(struct pbuf *p, uchar *pb, uchar ibStart, uchar bRadix)
   err_t err = PopInt(p, &w, ibStart, bRadix);
   if (err != ERR_OK) return err;
 
-  if (w >= 0x100) return ERR_ARG;
+  if (w >= 0x100) { CONSOLE_UART("ERROR PopChar #1\n"); return ERR_ARG; }
   *pb = w;
 
   return ERR_OK;
@@ -89,7 +91,7 @@ err_t PopIP(struct pbuf *p, ulong *pdw, uchar ibStart) // TODO
   {
     if (pb[i] == '.')
     {
-      if (y > 3) return ERR_VAL;
+      if (y > 3) { CONSOLE_UART("ERROR PopIP #1\n"); return ERR_VAL; }
       else
       {
         cb.mpbBuff[3-y] = x;
@@ -108,12 +110,13 @@ err_t PopIP(struct pbuf *p, ulong *pdw, uchar ibStart) // TODO
     else
     {
       char b = DecodeChar(pb[i],10);
-      if (b == 0xFF) return ERR_VAL;
+      if (b == 0xFF) { CONSOLE_UART("ERROR PopIP #2\n"); return ERR_VAL; }
 
       x = x*10 + b;
     }
   }
 
+  CONSOLE_UART("ERROR PopIP #3\n");
   return ERR_ARG;
 }
 
@@ -130,12 +133,13 @@ err_t PopString(struct pbuf *p, char *sz, uchar bSize) // TODO
     if (pb[i] == '|') return ERR_OK;
 
     char b = pb[i];
-    if (b < 0x20) return ERR_VAL;
+    if (b < 0x20) { CONSOLE_UART("ERROR PopString #1\n"); return ERR_VAL; }
 
-    if (i-3 >= bSize) return ERR_VAL;
+    if (i-3 >= bSize) { CONSOLE_UART("ERROR PopString #2\n"); return ERR_VAL; }
     sz[i-3] = b;
   }
 
+  CONSOLE_UART("ERROR PopString #3\n");
   return ERR_ARG;
 }
 
@@ -153,7 +157,7 @@ err_t PopSfx(struct pbuf *p, uint *pw) // TODO
     if (f)
     {
       char b = DecodeChar(pb[i],0x10);
-      if (b == 0xFF) return ERR_VAL;
+      if (b == 0xFF) { CONSOLE_UART("ERROR PopSfx #1\n"); return ERR_VAL; }
 
      *pw = *pw*0x10 + b;
     }
@@ -163,5 +167,13 @@ err_t PopSfx(struct pbuf *p, uint *pw) // TODO
     }
   }
 
-  return (f) ? ERR_OK : ERR_ARG;
+  if (f)
+  {
+    return ERR_OK;
+  }
+  else
+  {
+    CONSOLE_UART("ERROR PopSfx #2\n");
+    return ERR_ARG;
+  }
 }

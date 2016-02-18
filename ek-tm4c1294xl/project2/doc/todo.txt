@@ -69,4 +69,4 @@ static const char * const g_pcHex
 
 name > 4*3
 
-DEBUG_MSG start with %d
+return ERR_VAL&ERR_ARG CONSOLE_UART
