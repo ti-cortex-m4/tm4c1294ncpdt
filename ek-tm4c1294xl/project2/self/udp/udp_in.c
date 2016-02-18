@@ -285,7 +285,7 @@ static bool IsCmd(struct pbuf *p, const char *szCmd)
 
 static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode, uchar *pibStart)
 {
-  CONSOLE_UART("? code: %c%s\n", bOperation, szCode);
+  const char *sz = szCode;
 
   uchar *pb = p->payload;
   uchar i = 0;
@@ -299,7 +299,8 @@ static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCo
     if (pb[i++] != *szCode++) return false;
   }
 
-   CONSOLE_UART("? true %u\n",i);
+  CONSOLE_UART("code: %c%s %u\n", bOperation, sz, i);
+
   *pibStart = i;
   return true;
 }
@@ -307,20 +308,34 @@ static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCo
 static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
 {
   uchar ibStart = *pibStart;
-  CONSOLE_UART("index: %u\n",ibStart);
 
   if (ibStart == 0xFF)
   {
-    CONSOLE_UART("ERROR index\n");
+    CONSOLE_UART("ERROR index %u\n",ibStart);
     return -1;
   }
   else
   {
     switch (pen->eType)
     {
-       case CHAR: return PopCharDec(p, pen->pbRAM, ibStart);
-       case INT: return PopIntDec(p, pen->pbRAM, ibStart);
-       case LONG: return PopIP(p, pen->pbRAM, ibStart);
+       case CHAR:
+       {
+         uchar b = PopCharDec(p, pen->pbRAM, ibStart);
+         CONSOLE_UART("char[%u]=%u \n",ibStart,b);
+         return b;
+       }
+       case INT:
+       {
+         uint w = PopIntDec(p, pen->pbRAM, ibStart);
+         CONSOLE_UART("int[%u]=%u \n",ibStart,w);
+         return w;
+       }
+       case LONG:
+       {
+         ulong dw = PopIP(p, pen->pbRAM, ibStart);
+         CONSOLE_UART("long[%u]=%08x \n",ibStart,dw);
+         return dw;
+       }
        default: ASSERT(false); return -1;
     }
   }
