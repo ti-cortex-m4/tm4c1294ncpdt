@@ -85,7 +85,7 @@ err_t PopIP(struct pbuf *p, ulong *pdw, uchar ibStart) // TODO
   uchar x = 0;
 
   uchar i;
-  for (i=3; i<p->len; i++)
+  for (i=ibStart; i<p->len; i++)
   {
     if (pb[i] == '.')
     {

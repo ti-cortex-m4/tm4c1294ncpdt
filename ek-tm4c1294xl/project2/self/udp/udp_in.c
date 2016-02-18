@@ -320,21 +320,21 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
     {
        case CHAR:
        {
-         uchar b = PopCharDec(p, pen->pbRAM, ibStart);
-         CONSOLE_UART("char[%u]=%u \n",ibStart,b);
-         return b;
+         err_t err = PopCharDec(p, pen->pbRAM, ibStart);
+         CONSOLE_UART("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
+         return err;
        }
        case INT:
        {
-         uint w = PopIntDec(p, pen->pbRAM, ibStart);
-         CONSOLE_UART("int[%u]=%u \n",ibStart,w);
-         return w;
+         err_t err = PopIntDec(p, pen->pbRAM, ibStart);
+         CONSOLE_UART("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
+         return err;
        }
        case LONG:
        {
-         ulong dw = PopIP(p, pen->pbRAM, ibStart);
-         CONSOLE_UART("long[%u]=%08x \n",ibStart,dw);
-         return dw;
+         err_t err = PopIP(p, pen->pbRAM, ibStart);
+         CONSOLE_UART("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
+         return err;
        }
        default: ASSERT(false); return -1;
     }

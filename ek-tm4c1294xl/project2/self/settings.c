@@ -17,7 +17,7 @@ TODO
 static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  23
+#define SETTINGS_LABEL  1
 
 ulong                   dwIP;
 ulong                   dwGateway;
@@ -226,7 +226,7 @@ uchar   LoadSettings(void)
     mbConnectionMode[2] = enConnectionMode2.dwDef;
 
     mdwDestinationIP[0] = enDestinationIP0.dwDef;
-    mdwDestinationIP[1] = inet_addr("101.1.168.192"); // TODO enDestinationIP1.dwDef;
+    mdwDestinationIP[1] = enDestinationIP1.dwDef;
     mdwDestinationIP[2] = enDestinationIP2.dwDef;
 
     mwDestinationPort[0] = enDestinationPort0.dwDef;
