@@ -73,3 +73,5 @@ uchar SaveBaud(void);
 uchar LoadSettings(void);
 
 ulong GetBaud(uchar ibPort);
+ulong getTelnetTimeout(uchar u);
+
