@@ -130,6 +130,6 @@ int     main(void)
     wSeconds++; SysCtlDelay(SysCtlClockGet());
 
     Operation2();
-    Operation3(wSeconds);
+    TaskLwIpDebug(wSeconds);
   }
 }
