@@ -83,37 +83,14 @@ int     main(void)
   // Initialize LED to OFF (0)
   GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, ~GPIO_PIN_1);
 
-  // Configure the hardware MAC address for Ethernet Controller filtering of
-  // incoming packets.  The MAC address will be stored in the non-volatile
-  // USER0 and USER1 registers.
-  ulong dwUser0, dwUser1;
-  FlashUserGet(&dwUser0, &dwUser1);
-
-  dwUser0 = 0x00B61A00; // TODO MAC
-  dwUser1 = 0x00FCC502+1;
-
-  if((dwUser0 == 0xFFFFFFFF) || (dwUser1 == 0xFFFFFFFF))
-  {
-      // We should never get here.  This is an error if the MAC address has
-      // not been programmed into the device.  Exit the program.
-      // Let the user know there is no MAC address
-      while(1)
-      {
-        ERROR_UART("No MAC address\n");
-      }
-  }
-
-  // Convert the 24/24 split MAC address from NV ram into a 32/16 split MAC
-  // address needed to program the hardware registers, then program the MAC
-  // address into the Ethernet Controller registers.
-  pbMAC[0] = ((dwUser0 >>  0) & 0xFF);
-  pbMAC[1] = ((dwUser0 >>  8) & 0xFF);
-  pbMAC[2] = ((dwUser0 >> 16) & 0xFF);
-  pbMAC[3] = ((dwUser1 >>  0) & 0xFF);
-  pbMAC[4] = ((dwUser1 >>  8) & 0xFF);
-  pbMAC[5] = ((dwUser1 >> 16) & 0xFF);
-
   InitSettings();
+
+  pbMAC[0] = 0x00;
+  pbMAC[1] = 0x1B;
+  pbMAC[2] = 0xB6;
+  pbMAC[3] = 1;
+  pbMAC[4] = wSerialNumber / 0x100;
+  pbMAC[5] = wSerialNumber % 0x100;
 
   lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
