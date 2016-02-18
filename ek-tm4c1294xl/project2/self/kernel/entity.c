@@ -193,6 +193,14 @@ const entity enUdpDebugPort = {
 };
 
 
+const entity enSerialNumber = {
+        EEPROM_PORT_2, &wSerialNumber, sizeof(uint), INT,
+        0, 65535, 0,
+        "SRNM",
+        "AI=SRNM;D=Serial numeber;T=INT;C=EDIT;V=SRNM>65535?\"Serial number must be between 0 and 65535\":\"\"",
+};
+
+
 const entity enUartDebugFlag = {
         EEPROM_UART_DEBUG_FLAG, &fUartDebugFlag, sizeof(uchar), CHAR,
         0, 1, 1,

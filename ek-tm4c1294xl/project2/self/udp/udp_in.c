@@ -187,13 +187,16 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 28: PushString(enDestinationPort2.szName); break;
     case 29: PushString(enBaudRate2.szName); break;
 
-    case 30: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
-    case 31: PushString(enUdpDebugFlag.szName); break;
-    case 32: PushString(enUdpDebugIP.szName); break;
-    case 33: PushString(enUdpDebugPort.szName); break;
+    case 30: PushString("AI=$SETTINGS;D=Settings;T=GROUP"); break;
+    case 31: PushString(enSerialNumber.szName); break;
 
-    case 34: PushString(enUartDebugFlag.szName); break;
-    case 35: PushString(enUartDebugPort.szName); break;
+    case 32: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
+    case 33: PushString(enUdpDebugFlag.szName); break;
+    case 34: PushString(enUdpDebugIP.szName); break;
+    case 35: PushString(enUdpDebugPort.szName); break;
+
+    case 36: PushString(enUartDebugFlag.szName); break;
+//    case 37: PushString(enUartDebugPort.szName); break;
 
     default: ASSERT(false); break; // TODO
   }
@@ -405,7 +408,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"36");
+    CmdString(pcb,p,addr,port,broadcast,"37");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -472,8 +475,10 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugIP)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugPort)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enSerialNumber)) {}
+
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugFlag)) {}
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugPort)) {}
+//  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugPort)) {}
 
   else { // TODO
     CONSOLE_UART("unknown command: %d\n", broadcast);

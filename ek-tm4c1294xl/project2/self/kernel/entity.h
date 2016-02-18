@@ -59,6 +59,8 @@ extern const entity enUdpDebugFlag;
 extern const entity enUdpDebugIP;
 extern const entity enUdpDebugPort;
 
+extern const entity enSerialNumber;
+
 extern const entity enUartDebugFlag;
 extern const entity enUartDebugPort;
 

@@ -38,6 +38,8 @@ extern bool                    fUdpDebugFlag;
 extern ulong                   dwUdpDebugIP;
 extern uint                    wUdpDebugPort;
 
+extern uint                    wSerialNumber;
+
 extern bool                    fUartDebugFlag;
 extern uchar                   bUartDebugPort;
 
