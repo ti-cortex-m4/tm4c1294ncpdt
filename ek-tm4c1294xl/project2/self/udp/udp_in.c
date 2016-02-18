@@ -7,7 +7,7 @@ UDP_IN,C
 #include "../main.h"
 #include "../settings.h"
 #include "../settings_eeprom.h"
-#include "../kernel/entity.h"
+#include "../kernel/entities.h"
 #include "driverlib/sysctl.h"
 #include "../uart/uart_log.h"
 #include "udp_pop.h"
@@ -336,7 +336,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
          CONSOLE_UART("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
          return err;
        }
-       case LONG:
+       case IP:
        {
          err_t err = PopIP(p, pen->pbRAM, ibStart);
          CONSOLE_UART("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
@@ -375,7 +375,7 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
     {
       case CHAR: CmdCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRAM); break;
       case INT: CmdIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRAM); break;
-      case LONG: CmdIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRAM); break;
+      case IP: CmdIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRAM); break;
       default: ASSERT(false); break;
     }
 
