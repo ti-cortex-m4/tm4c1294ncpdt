@@ -55,14 +55,17 @@ extern const entity enBaudRate0;
 extern const entity enBaudRate1;
 extern const entity enBaudRate2;
 
+extern const entity enSerialNumber;
+
 extern const entity enUdpDebugFlag;
 extern const entity enUdpDebugIP;
 extern const entity enUdpDebugPort;
 
-extern const entity enSerialNumber;
-
 extern const entity enUartDebugFlag;
 extern const entity enUartDebugPort;
+
+extern const entity enLwipDebugFlag;
+extern const entity enLwipDebugTimeout;
 
 
 typedef enum

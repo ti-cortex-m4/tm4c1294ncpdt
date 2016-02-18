@@ -35,14 +35,17 @@ uint                    mwDestinationPort[UART_COUNT];
 
 uchar                   mibBaudRate[UART_COUNT];
 
+uint                    wSerialNumber;
+
 bool                    fUdpDebugFlag;
 ulong                   dwUdpDebugIP;
 uint                    wUdpDebugPort;
 
-uint                    wSerialNumber;
-
 bool                    fUartDebugFlag;
 uchar                   bUartDebugPort;
+
+bool                    fLwipStatsFlag;
+uint                    wLwipStatsTimeout;
 
 uchar                   pbMAC[6];
 
@@ -138,14 +141,17 @@ uchar    SaveSettings(void)
   if ((err = SaveEntity(&enBaudRate1)) != 0) return err;
   if ((err = SaveEntity(&enBaudRate2)) != 0) return err;
 
+  if ((err = SaveEntity(&enSerialNumber)) != 0) return err;
+
   if ((err = SaveEntity(&enUdpDebugFlag)) != 0) return err;
   if ((err = SaveEntity(&enUdpDebugIP)) != 0) return err;
   if ((err = SaveEntity(&enUdpDebugPort)) != 0) return err;
 
-  if ((err = SaveEntity(&enSerialNumber)) != 0) return err;
-
   if ((err = SaveEntity(&enUartDebugFlag)) != 0) return err;
   if ((err = SaveEntity(&enUartDebugPort)) != 0) return err;
+
+  if ((err = SaveEntity(&enLwipDebugFlag)) != 0) return err;
+  if ((err = SaveEntity(&enLwipDebugTimeout)) != 0) return err;
 
   return 0;
 }
@@ -194,14 +200,17 @@ uchar   LoadSettings(void)
     LoadEntity(&enBaudRate1);
     LoadEntity(&enBaudRate2);
 
+    LoadEntity(&enSerialNumber);
+
     LoadEntity(&enUdpDebugFlag);
     LoadEntity(&enUdpDebugIP);
     LoadEntity(&enUdpDebugPort);
 
-    LoadEntity(&enSerialNumber);
-
     LoadEntity(&enUartDebugFlag);
     LoadEntity(&enUartDebugPort);
+
+    LoadEntity(&enLwipDebugFlag);
+    LoadEntity(&enLwipDebugTimeout);
   }
   else
   {
@@ -243,14 +252,17 @@ uchar   LoadSettings(void)
     mibBaudRate[1] = enBaudRate1.dwDef;
     mibBaudRate[2] = enBaudRate2.dwDef;
 
+    wSerialNumber = enSerialNumber.dwDef;
+
     fUdpDebugFlag = enUdpDebugFlag.dwDef;
     dwUdpDebugIP = enUdpDebugIP.dwDef;
     wUdpDebugPort = enUdpDebugPort.dwDef;
 
-    wSerialNumber = enSerialNumber.dwDef;
-
     fUartDebugFlag = enUartDebugFlag.dwDef;
     bUartDebugPort = enUartDebugPort.dwDef;
+
+    fLwipDebugFlag = enUartDebugFlag.dwDef;
+    bLwipDebugTimeout = enLwipDebugTimeout.dwDef;
 
     SaveSettings();
   }
