@@ -178,13 +178,22 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 20: PushString(enDestinationPort1.szName); break;
     case 21: PushString(enBaudRate1.szName); break;
 
-    case 22: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
-    case 23: PushString(enUdpDebugFlag.szName); break;
-    case 24: PushString(enUdpDebugIP.szName); break;
-    case 25: PushString(enUdpDebugPort.szName); break;
+    case 22: PushString("AI=$CHANNEL3;D=Channel3;T=GROUP"); break;
+    case 23: PushString(enConnectionTimeout2.szName); break;
+    case 24: PushString(enRoutingMode2.szName); break;
+    case 25: PushString(enPort2.szName); break;
+    case 26: PushString(enConnectionMode2.szName); break;
+    case 27: PushString(enDestinationIP2.szName); break;
+    case 28: PushString(enDestinationPort2.szName); break;
+    case 29: PushString(enBaudRate2.szName); break;
 
-    case 26: PushString(enUartDebugFlag.szName); break;
-    case 27: PushString(enUartDebugPort.szName); break;
+    case 30: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
+    case 31: PushString(enUdpDebugFlag.szName); break;
+    case 32: PushString(enUdpDebugIP.szName); break;
+    case 33: PushString(enUdpDebugPort.szName); break;
+
+    case 34: PushString(enUartDebugFlag.szName); break;
+    case 35: PushString(enUartDebugPort.szName); break;
 
     default: ASSERT(false); break; // TODO
   }
@@ -365,7 +374,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"28");
+    CmdString(pcb,p,addr,port,broadcast,"36");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -404,29 +413,43 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout1)) {
   }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout2)) {
+  }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode0)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode1)) {
+  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode2)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enPort0)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enPort1)) {
   }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enPort2)) {
+  }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode0)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode1)) {
+  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode2)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP0)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP1)) {
   }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP2)) {
+  }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort0)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort1)) {
   }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort2)) {
+  }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate0)) {
   }
   else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate1)) {
+  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate2)) {
   }
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugFlag)) {

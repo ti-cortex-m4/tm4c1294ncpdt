@@ -9,6 +9,7 @@ UART,C
 #include "driverlib/interrupt.h"
 #include "lwip/tcp.h"
 #include "lwip/def.h"
+#include "../settings.h"
 #include "hw_uart.h"
 #include "isr_uart4.h"
 #include "uart.h"
@@ -31,9 +32,13 @@ void    InitUART(ulong dwSysClockFreq)
 
   uart_tpcb = NULL;
 
-//  InitUART0(dwSysClockFreq);
+  if (!fUartDebugFlag)
+  {
+    InitUART0(dwSysClockFreq);
+  }
+
   InitUART4(dwSysClockFreq);
-//  InitUART3(dwSysClockFreq);
+  InitUART3(dwSysClockFreq);
 }
 
 

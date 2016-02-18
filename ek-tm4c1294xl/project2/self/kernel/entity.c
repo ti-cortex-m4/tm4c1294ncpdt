@@ -155,5 +155,5 @@ const entity enUartDebugPort = {
         EEPROM_UART_DEBUG_PORT, &bUartDebugPort, sizeof(uchar), CHAR,
         0, UART_COUNT-1, 0,
         "UARTDP",
-        "AI=UARTDP;E=1;D=UDP debug port;T=INT;C=EDIT;S=UARTDF!=0?\"e\":\"i\"",
+        "AI=UARTDP;E=1;D=UART debug port;T=INT;C=EDIT;S=UARTDF!=0?\"e\":\"i\"",
 };

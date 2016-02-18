@@ -35,10 +35,10 @@ static uint8_t g_pucTX1Buffer[TX_RING_BUF_SIZE];
 
 
 //! The buffer used to hold characters received from the UART1.
-//static uint8_t g_pucRX2Buffer[RX_RING_BUF_SIZE];
+static uint8_t g_pucRX2Buffer[RX_RING_BUF_SIZE];
 
 //! The buffer used to hold characters to be sent to the UART1.
-//static uint8_t g_pucTX2Buffer[TX_RING_BUF_SIZE];
+static uint8_t g_pucTX2Buffer[TX_RING_BUF_SIZE];
 
 
 //! The ring buffers used to hold characters received from the UARTs.
@@ -51,8 +51,9 @@ static tRingBufObject g_sTxBuf[UART_COUNT];
 //! The base address for the UART associated with a port.
 static const uint32_t g_ulUARTBase[UART_COUNT] =
 {
+    UART0_BASE,
     UART4_BASE,
-//    UART3_BASE,
+    UART3_BASE,
 };
 
 
@@ -162,24 +163,20 @@ static void SerialUARTIntHandler(uint32_t ulPort)
 //! \return None.
 //*****************************************************************************
 //void SerialUART0IntHandler(void)
-void UART4IntHandler(void)
+void UART0IntHandler(void)
 {
     SerialUARTIntHandler(0);
 }
 
-//*****************************************************************************
-//! Handles the UART1 interrupt.
-//!
-//! This function is called when the UART generates an interrupt.  An interrupt
-//! will be generated when data is received and when the transmit FIFO becomes
-//! half empty.  The transmit and receive FIFOs are processed as appropriate.
-//!
-//! \return None.
-//*****************************************************************************
 //void SerialUART1IntHandler(void)
-void UART3IntHandler(void)
+void UART4IntHandler(void)
 {
     SerialUARTIntHandler(1);
+}
+
+void UART3IntHandler(void)
+{
+    SerialUARTIntHandler(2);
 }
 
 #if false
@@ -1283,8 +1280,8 @@ void SerialInit(void)
     RingBufInit(&g_sRxBuf[1], g_pucRX1Buffer, sizeof(g_pucRX1Buffer));
     RingBufInit(&g_sTxBuf[1], g_pucTX1Buffer, sizeof(g_pucTX1Buffer));
 
-//    RingBufInit(&g_sRxBuf[2], g_pucRX2Buffer, sizeof(g_pucRX2Buffer));
-//    RingBufInit(&g_sTxBuf[2], g_pucTX2Buffer, sizeof(g_pucTX2Buffer));
+    RingBufInit(&g_sRxBuf[2], g_pucRX2Buffer, sizeof(g_pucRX2Buffer));
+    RingBufInit(&g_sTxBuf[2], g_pucTX2Buffer, sizeof(g_pucTX2Buffer));
 
 #if false
     // Configure the Port 0 pins appropriately.
