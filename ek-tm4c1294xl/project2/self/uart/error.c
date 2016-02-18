@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-ERROR,C
+error.c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,10 +11,11 @@ ERROR,C
 
 #ifdef DEBUG
 
-void __error__(char *pcFileName, ulong dwLine)
+void __error__(char *pszFileName, ulong dwLine)
 {
-  ERROR_UART("\n assert error: file %s, line %d\n", pcFileName, dwLine);
-  while(1)
+  ERROR_UART("\n assert error: file %s, line %d\n", pszFileName, dwLine);
+
+  while (true)
   {
   }
 }
