@@ -104,21 +104,21 @@ const entity enConnectionMode2 = {
 // http://docs.tibbo,Com/soism/index.html?setting_di.htm
 
 const entity enDestinationIP0 = {
-        EEPROM_DESTINATION_IP_0, &mdwDestinationIP[0], sizeof(ulong), LONG,
+        EEPROM_DESTINATION_IP_0, &mdwDestinationIP[0], sizeof(ulong), IP,
         0, MAX_LONG, DEFAULT_DESTINATION_IP,
         "DI",
         "AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1?\"e\":\"i\"",
 };
 
 const entity enDestinationIP1 = {
-        EEPROM_DESTINATION_IP_1, &mdwDestinationIP[1], sizeof(ulong), LONG,
+        EEPROM_DESTINATION_IP_1, &mdwDestinationIP[1], sizeof(ulong), IP,
         0, MAX_LONG, DEFAULT_DESTINATION_IP,
         "DI@2",
         "AI=DI@2;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@2==1?\"e\":\"i\"",
 };
 
 const entity enDestinationIP2 = {
-        EEPROM_DESTINATION_IP_2, &mdwDestinationIP[2], sizeof(ulong), LONG,
+        EEPROM_DESTINATION_IP_2, &mdwDestinationIP[2], sizeof(ulong), IP,
         0, MAX_LONG, DEFAULT_DESTINATION_IP,
         "DI@3",
         "AI=DI@3;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@3==1?\"e\":\"i\"",
@@ -188,7 +188,7 @@ const entity enUdpDebugFlag = {
 };
 
 const entity enUdpDebugIP = {
-        EEPROM_UDP_DEBUG_IP, &dwUdpDebugIP, sizeof(ulong), LONG,
+        EEPROM_UDP_DEBUG_IP, &dwUdpDebugIP, sizeof(ulong), IP,
         0, MAX_LONG, 0xFFFFFFFF,
         "UDPDI",
         "AI=UDPDI;E=1;D=UDP debug IP-address;T=STRING;C=IPCTRL;S=UDPDF!=0?\"e\":\"i\"",
