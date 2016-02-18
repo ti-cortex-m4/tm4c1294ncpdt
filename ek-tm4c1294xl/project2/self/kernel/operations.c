@@ -9,7 +9,7 @@ operations,C
 #include "../settings.h"
 #include "../tcp/telnet.h"
 #include "../uart/serial.h"
-#include "entity.h"
+#include "entities.h"
 #include "operations.h"
 
 

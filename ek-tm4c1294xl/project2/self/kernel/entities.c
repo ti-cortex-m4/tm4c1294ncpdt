@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-ENTITY,C
+entities,C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ ENTITY,C
 #include "../main.h"
 #include "../generated/eeprom.h"
 #include "../settings.h"
-#include "entity.h"
+#include "entities.h"
 
 
 
