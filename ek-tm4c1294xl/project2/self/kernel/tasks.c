@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-operations,C
+tasks,C
 
 
 ------------------------------------------------------------------------------*/
@@ -10,7 +10,7 @@ operations,C
 #include "../tcp/telnet.h"
 #include "../uart/serial.h"
 #include "entities.h"
-#include "operations.h"
+#include "tasks.h"
 
 
 
