@@ -34,14 +34,17 @@ extern uint                    mwDestinationPort[UART_COUNT];
 
 extern uchar                   mibBaudRate[UART_COUNT];
 
+extern uint                    wSerialNumber;
+
 extern bool                    fUdpDebugFlag;
 extern ulong                   dwUdpDebugIP;
 extern uint                    wUdpDebugPort;
 
-extern uint                    wSerialNumber;
-
 extern bool                    fUartDebugFlag;
 extern uchar                   bUartDebugPort;
+
+extern bool                    fLwipStatsFlag;
+extern uint                    wLwipStatsTimeout;
 
 extern uchar                   pbMAC[6];
 

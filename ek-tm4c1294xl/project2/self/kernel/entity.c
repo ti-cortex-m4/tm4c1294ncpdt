@@ -171,6 +171,15 @@ const entity enBaudRate2 = {
 };
 
 
+
+const entity enSerialNumber = {
+        EEPROM_PORT_2, &wSerialNumber, sizeof(uint), INT,
+        0, 65535, 0,
+        "SRNM",
+        "AI=SRNM;D=Serial number;T=INT;C=EDIT;V=SRNM>65535?\"Serial number must be between 0 and 65535\":\"\"",
+};
+
+
 const entity enUdpDebugFlag = {
         EEPROM_UDP_DEBUG_FLAG, &fUdpDebugFlag, sizeof(uchar), CHAR,
         0, 1, 1,
@@ -193,14 +202,6 @@ const entity enUdpDebugPort = {
 };
 
 
-const entity enSerialNumber = {
-        EEPROM_PORT_2, &wSerialNumber, sizeof(uint), INT,
-        0, 65535, 0,
-        "SRNM",
-        "AI=SRNM;D=Serial number;T=INT;C=EDIT;V=SRNM>65535?\"Serial number must be between 0 and 65535\":\"\"",
-};
-
-
 const entity enUartDebugFlag = {
         EEPROM_UART_DEBUG_FLAG, &fUartDebugFlag, sizeof(uchar), CHAR,
         0, 1, 0,
@@ -213,4 +214,19 @@ const entity enUartDebugPort = {
         0, UART_COUNT-1, 0,
         "UARTDP",
         "AI=UARTDP;E=1;D=UART debug port;T=INT;C=EDIT;S=UARTDF!=0?\"e\":\"i\"",
+};
+
+
+const entity enLwipDebugFlag = {
+        EEPROM_LWIP_DEBUG_FLAG, &LwipDebugFlag, sizeof(uchar), CHAR,
+        0, 1, 0,
+        "LWIPDF",
+        "AI=LWIP;D=LwIP debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+};
+
+const entity enLwipDebugTimeout = {
+        EEPROM_LWIP_DEBUG_TIMEOUT, &mbConnectionTimeout[2], sizeof(uchar), CHAR,
+        0, 240, 60,
+        "LWIPDT",
+        "AI=LWIPDT;D=LwIP debug (seconds);T=INT;C=EDIT;V=LWIPDT>240?\"Maximum timeout is 240 seconds\":\"\"",
 };
