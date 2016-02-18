@@ -18,6 +18,9 @@ SETTINGS,H
 #define DEFAULT_BAUD_RATE 6 // 9600
 
 
+
+extern uchar                   pbMAC[6];
+
 extern ulong                   dwIP;
 extern ulong                   dwGateway;
 extern ulong                   dwNetmask;
@@ -43,10 +46,8 @@ extern uint                    wUdpDebugPort;
 extern bool                    fUartDebugFlag;
 extern uchar                   bUartDebugPort;
 
-extern bool                    fLwipStatsFlag;
-extern uint                    wLwipStatsTimeout;
-
-extern uchar                   pbMAC[6];
+extern bool                    fLwipDebugFlag;
+extern uint                    wLwipDebugTimeout;
 
 
 

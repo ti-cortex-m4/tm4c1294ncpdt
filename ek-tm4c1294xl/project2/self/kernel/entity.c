@@ -218,15 +218,15 @@ const entity enUartDebugPort = {
 
 
 const entity enLwipDebugFlag = {
-        EEPROM_LWIP_DEBUG_FLAG, &LwipDebugFlag, sizeof(uchar), CHAR,
+        EEPROM_LWIP_DEBUG_FLAG, &fLwipDebugFlag, sizeof(uchar), CHAR,
         0, 1, 0,
         "LWIPDF",
         "AI=LWIP;D=LwIP debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
 
 const entity enLwipDebugTimeout = {
-        EEPROM_LWIP_DEBUG_TIMEOUT, &mbConnectionTimeout[2], sizeof(uchar), CHAR,
-        0, 240, 60,
+        EEPROM_LWIP_DEBUG_TIMEOUT, &wLwipDebugTimeout, sizeof(uint), INT,
+        0, 3600, 60,
         "LWIPDT",
-        "AI=LWIPDT;D=LwIP debug (seconds);T=INT;C=EDIT;V=LWIPDT>240?\"Maximum timeout is 240 seconds\":\"\"",
+        "AI=LWIPDT;D=LwIP debug (seconds);T=INT;C=EDIT;V=LWIPDT>3600?\"Maximum timeout is 3600 seconds\":\"\"",
 };

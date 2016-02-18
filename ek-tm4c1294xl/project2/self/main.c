@@ -125,9 +125,11 @@ int     main(void)
 
   while(1)
   {
-    SysCtlDelay(SysCtlClockGet());
+    static uint wSeconds;
 
-//    stats_display();
+    wSeconds++; SysCtlDelay(SysCtlClockGet());
+
     Operation2();
+    Operation3(wSeconds);
   }
 }
