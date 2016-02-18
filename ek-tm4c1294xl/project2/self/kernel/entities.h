@@ -12,7 +12,7 @@ typedef enum
 {
   CHAR,
   INT,
-  LONG,
+  IP,
 } entityType;
 
 
