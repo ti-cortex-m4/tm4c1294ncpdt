@@ -409,61 +409,42 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdIn(pcb,p,addr,port,broadcast,SNM);
   }
 
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout0)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout1)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout2)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode0)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode1)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode2)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enPort0)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enPort1)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enPort2)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode0)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode1)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode2)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP0)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP1)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP2)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort0)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort1)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort2)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate0)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate1)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate2)) {
-  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout2)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout0)) {}
 
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugFlag)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugIP)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugPort)) {
-  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode2)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode0)) {}
 
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugFlag)) {
-  }
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugPort)) {
-  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enPort2)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enPort1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enPort0)) {}
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode2)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode0)) {}
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP2)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP0)) {}
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort2)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort0)) {}
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate2)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate0)) {}
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugFlag)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugIP)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugPort)) {}
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugFlag)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugPort)) {}
 
   else { // TODO
+    CONSOLE_UART("unknown command: %d\n", broadcast);
   }
 }
