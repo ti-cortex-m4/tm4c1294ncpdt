@@ -757,7 +757,7 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
     ASSERT(usTelnetPort != 0);
     tTelnetSession *pState = &g_sTelnetSession[ulSerialPort];
 
-    CONSOLE("%u: Listen port %d, UART %d\n", pState->ulSerialPort, usTelnetPort, ulSerialPort);
+    CONSOLE("%u: listen port %d, UART %d\n", pState->ulSerialPort, usTelnetPort, ulSerialPort);
 
     // Fill in the telnet state data structure for this session in listen
     // (in other words, server) mode.
