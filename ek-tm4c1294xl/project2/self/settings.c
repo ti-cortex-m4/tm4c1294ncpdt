@@ -17,7 +17,11 @@ TODO
 static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  3
+#define SETTINGS_LABEL  4
+
+
+
+uchar                   pbMAC[6];
 
 ulong                   dwIP;
 ulong                   dwGateway;
@@ -44,10 +48,8 @@ uint                    wUdpDebugPort;
 bool                    fUartDebugFlag;
 uchar                   bUartDebugPort;
 
-bool                    fLwipStatsFlag;
-uint                    wLwipStatsTimeout;
-
-uchar                   pbMAC[6];
+bool                    fLwipDebugFlag;
+uint                    wLwipDebugTimeout;
 
 
 
@@ -262,7 +264,7 @@ uchar   LoadSettings(void)
     bUartDebugPort = enUartDebugPort.dwDef;
 
     fLwipDebugFlag = enUartDebugFlag.dwDef;
-    bLwipDebugTimeout = enLwipDebugTimeout.dwDef;
+    wLwipDebugTimeout = enLwipDebugTimeout.dwDef;
 
     SaveSettings();
   }

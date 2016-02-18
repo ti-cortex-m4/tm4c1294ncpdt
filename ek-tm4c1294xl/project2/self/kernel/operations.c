@@ -5,6 +5,7 @@ operations,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "utils/lwiplib_patched.h"
 #include "../settings.h"
 #include "../tcp/telnet.h"
 #include "../uart/serial.h"
@@ -91,5 +92,18 @@ void Operation2(void)
         CONSOLE("%u: ERROR connection mode %u\n",u,mbConnectionMode[u]); // TODO restart
       }
     }
+  }
+}
+
+
+
+void Operation3(uint wSeconds)
+{
+static uint wTimeout;
+
+  if ((fLwipDebugFlag) && (++wTimeout > wLwipDebugTimeout))
+  {
+    wTimeout = 0;
+    stats_display();
   }
 }
