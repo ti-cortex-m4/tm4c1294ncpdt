@@ -40,7 +40,7 @@ static void StartOpen(uchar u)
 
 
 
-void Operation1(void)
+void InitConnections(void)
 {
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
@@ -62,7 +62,7 @@ void Operation1(void)
 
 
 
-void Operation2(void)
+void TaskConnections(void)
 {
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
