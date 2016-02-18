@@ -32,16 +32,16 @@ typedef enum
 {
     //! The TCP session is idle.  No connection has been attempted, nor has it
     //! been configured to listen on any port.
-    STATE_TCP_IDLE,
+    STATE_TCP_IDLE = 0,
 
     //! The TCP session is listening (server mode).
-    STATE_TCP_LISTEN,
+    STATE_TCP_LISTEN = 1,
 
     //! The TCP session is connecting (client mode).
-    STATE_TCP_CONNECTING,
+    STATE_TCP_CONNECTING = 2,
 
     //! The TCP session is connected.
-    STATE_TCP_CONNECTED,
+    STATE_TCP_CONNECTED = 3,
 }
 tTCPState;
 
