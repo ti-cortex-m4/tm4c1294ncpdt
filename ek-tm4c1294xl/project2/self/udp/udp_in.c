@@ -233,7 +233,7 @@ err_t SDN(struct pbuf *p)
 err_t SIP(struct pbuf *p)
 {
   ulong dw = 0;
-  err_t err = PopIP(p, &dw);
+  err_t err = PopIP(p, &dw, 3);
   if (err != ERR_OK) return err;
 
   dwIP = dw;
@@ -246,7 +246,7 @@ err_t SIP(struct pbuf *p)
 err_t SGI(struct pbuf *p)
 {
   ulong dw = 0;
-  err_t err = PopIP(p, &dw);
+  err_t err = PopIP(p, &dw, 3);
   if (err != ERR_OK) return err;
 
   dwGateway = dw;
@@ -259,7 +259,7 @@ err_t SGI(struct pbuf *p)
 err_t SNM(struct pbuf *p)
 {
   ulong dw = 0;
-  err_t err = PopIP(p, &dw);
+  err_t err = PopIP(p, &dw, 3);
   if (err != ERR_OK) return err;
 
   dwNetmask = dw;
@@ -283,8 +283,10 @@ static bool IsCmd(struct pbuf *p, const char *szCmd)
   return true;
 }
 
-static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)
+static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode, uchar *pibStart)
 {
+  CONSOLE_UART("? code: %c%s\n", bOperation, szCode);
+
   uchar *pb = p->payload;
   uchar i = 0;
 
@@ -297,27 +299,40 @@ static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCo
     if (pb[i++] != *szCode++) return false;
   }
 
+   CONSOLE_UART("? true %u\n",i);
+  *pibStart = i;
   return true;
 }
 
-static err_t PopEntity(struct pbuf *p, entity const *pen)
+static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
 {
-  switch (pen->eType)
+  uchar ibStart = *pibStart;
+  CONSOLE_UART("index: %u\n",ibStart);
+
+  if (ibStart == 0xFF)
   {
-     case CHAR: return PopCharDec(p, pen->pbRAM, 3);
-     case INT: return PopIntDec(p, pen->pbRAM, 3);
-     case LONG: return PopIP(p, pen->pbRAM);
-     default: ASSERT(false); return -1;
+    CONSOLE_UART("ERROR index\n");
+    return -1;
+  }
+  else
+  {
+    switch (pen->eType)
+    {
+       case CHAR: return PopCharDec(p, pen->pbRAM, ibStart);
+       case INT: return PopIntDec(p, pen->pbRAM, ibStart);
+       case LONG: return PopIP(p, pen->pbRAM, ibStart);
+       default: ASSERT(false); return -1;
+    }
   }
 }
 
-err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen)
+err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, uchar *pibStart)
 {
   uint wSfx = 0;
   err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  err = PopEntity(p, pen);
+  err = PopEntity(p, pen, pibStart);
   if (err != ERR_OK) return err;
 
   err = SaveEntity(pen);
@@ -332,7 +347,8 @@ err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
 static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen) // TODO check errors
 {
-  if (IsEnityCode(p, 'G', pen->szCode))
+  uchar ibStart = 0xFF;
+  if (IsEnityCode(p, 'G', pen->szCode, &ibStart))
   {
     switch (pen->eType)
     {
@@ -344,9 +360,9 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 
     return true;
   }
-  else if (IsEnityCode(p, 'S', pen->szCode))
+  else if (IsEnityCode(p, 'S', pen->szCode, &ibStart))
   {
-    SetEntity(pcb,p,addr,port,broadcast,pen);
+    SetEntity(pcb,p,addr,port,broadcast,pen,&ibStart);
     return true;
   }
   else

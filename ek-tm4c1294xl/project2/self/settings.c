@@ -225,8 +225,8 @@ uchar   LoadSettings(void)
     mbConnectionMode[1] = enConnectionMode1.dwDef;
     mbConnectionMode[2] = enConnectionMode2.dwDef;
 
-    mdwDestinationIP[0] = inet_addr("101.1.168.192"); // TODO enDestinationIP0.dwDef;
-    mdwDestinationIP[1] = enDestinationIP1.dwDef;
+    mdwDestinationIP[0] = enDestinationIP0.dwDef;
+    mdwDestinationIP[1] = inet_addr("101.1.168.192"); // TODO enDestinationIP1.dwDef;
     mdwDestinationIP[2] = enDestinationIP2.dwDef;
 
     mwDestinationPort[0] = enDestinationPort0.dwDef;
