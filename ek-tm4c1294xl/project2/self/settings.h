@@ -46,8 +46,8 @@ extern uint                    wUdpDebugPort;
 extern bool                    fUartDebugFlag;
 extern uchar                   bUartDebugPort;
 
-extern bool                    fLwipDebugFlag;
-extern uint                    wLwipDebugTimeout;
+extern bool                    fLwIpDebugFlag;
+extern uint                    wLwIpDebugTimeout;
 
 
 

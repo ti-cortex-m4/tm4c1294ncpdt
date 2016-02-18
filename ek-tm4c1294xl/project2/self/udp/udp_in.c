@@ -198,8 +198,8 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 36: PushString(enUartDebugFlag.szName); break;
 //    case 37: PushString(enUartDebugPort.szName); break;
 
-    case 37: PushString(enLwipDebugFlag.szName); break;
-    case 38: PushString(enLwipDebugTimeout.szName); break;
+    case 37: PushString(enLwIpDebugFlag.szName); break;
+    case 38: PushString(enLwIpDebugTimeout.szName); break;
 
     default: ASSERT(false); break; // TODO
   }
@@ -483,8 +483,8 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugFlag)) {}
 //  else if (IsEnity(pcb,p,addr,port,broadcast,&enUartDebugPort)) {}
 
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enLwipDebugFlag)) {}
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enLwipDebugTimeout)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enLwIpDebugFlag)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enLwIpDebugTimeout)) {}
 
   else { // TODO
     CONSOLE_UART("unknown command: %d\n", broadcast);

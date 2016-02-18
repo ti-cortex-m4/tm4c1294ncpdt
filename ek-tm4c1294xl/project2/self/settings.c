@@ -48,8 +48,8 @@ uint                    wUdpDebugPort;
 bool                    fUartDebugFlag;
 uchar                   bUartDebugPort;
 
-bool                    fLwipDebugFlag;
-uint                    wLwipDebugTimeout;
+bool                    fLwIpDebugFlag;
+uint                    wLwIpDebugTimeout;
 
 
 
@@ -152,8 +152,8 @@ uchar    SaveSettings(void)
   if ((err = SaveEntity(&enUartDebugFlag)) != 0) return err;
   if ((err = SaveEntity(&enUartDebugPort)) != 0) return err;
 
-  if ((err = SaveEntity(&enLwipDebugFlag)) != 0) return err;
-  if ((err = SaveEntity(&enLwipDebugTimeout)) != 0) return err;
+  if ((err = SaveEntity(&enLwIpDebugFlag)) != 0) return err;
+  if ((err = SaveEntity(&enLwIpDebugTimeout)) != 0) return err;
 
   return 0;
 }
@@ -211,8 +211,8 @@ uchar   LoadSettings(void)
     LoadEntity(&enUartDebugFlag);
     LoadEntity(&enUartDebugPort);
 
-    LoadEntity(&enLwipDebugFlag);
-    LoadEntity(&enLwipDebugTimeout);
+    LoadEntity(&enLwIpDebugFlag);
+    LoadEntity(&enLwIpDebugTimeout);
   }
   else
   {
@@ -263,8 +263,8 @@ uchar   LoadSettings(void)
     fUartDebugFlag = enUartDebugFlag.dwDef;
     bUartDebugPort = enUartDebugPort.dwDef;
 
-    fLwipDebugFlag = enUartDebugFlag.dwDef;
-    wLwipDebugTimeout = enLwipDebugTimeout.dwDef;
+    fLwIpDebugFlag = enUartDebugFlag.dwDef;
+    wLwIpDebugTimeout = enLwIpDebugTimeout.dwDef;
 
     SaveSettings();
   }

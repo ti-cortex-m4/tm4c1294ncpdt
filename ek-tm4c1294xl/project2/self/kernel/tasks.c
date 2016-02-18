@@ -97,11 +97,11 @@ void Operation2(void)
 
 
 
-void Operation3(uint wSeconds)
+void TaskLwIpDebug(uint wSeconds)
 {
 static uint wTimeout;
 
-  if ((fLwipDebugFlag) && (++wTimeout > wLwipDebugTimeout))
+  if ((fLwIpDebugFlag) && (++wTimeout > wLwIpDebugTimeout))
   {
     wTimeout = 0;
     stats_display();

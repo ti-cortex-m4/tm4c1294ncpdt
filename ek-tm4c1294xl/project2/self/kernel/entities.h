@@ -64,8 +64,8 @@ extern const entity enUdpDebugPort;
 extern const entity enUartDebugFlag;
 extern const entity enUartDebugPort;
 
-extern const entity enLwipDebugFlag;
-extern const entity enLwipDebugTimeout;
+extern const entity enLwIpDebugFlag;
+extern const entity enLwIpDebugTimeout;
 
 
 typedef enum
