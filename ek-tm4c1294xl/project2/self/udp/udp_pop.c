@@ -5,6 +5,7 @@ UDP_POP,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../kernel/log.h"
 #include "../uart/uart_log.h"
 #include "udp_pop.h"
 

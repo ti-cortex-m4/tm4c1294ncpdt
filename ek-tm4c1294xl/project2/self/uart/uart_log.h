@@ -16,10 +16,4 @@ void    InitUartLog(ulong dwSysClockFreq);
 
 
 
-#ifdef DEBUG
-#define CONSOLE_UART UartPrintF
-#define ERROR_UART UARTprintf
-#else
-#define CONSOLE_UART
-#define ERROR_UART
-#endif
+

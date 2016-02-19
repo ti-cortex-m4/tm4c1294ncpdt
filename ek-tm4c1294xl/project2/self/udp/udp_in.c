@@ -8,6 +8,7 @@ UDP_IN,C
 #include "../settings.h"
 #include "../settings_eeprom.h"
 #include "../kernel/entities.h"
+#include "../kernel/log.h"
 #include "driverlib/sysctl.h"
 #include "../uart/uart_log.h"
 #include "udp_pop.h"

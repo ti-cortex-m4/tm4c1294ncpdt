@@ -7,6 +7,7 @@ TELNET,C
 #include "../main.h"
 #include "utils/lwiplib.h"
 #include "lwip/sys.h"
+#include "../kernel/log.h"
 #include "../uart/serial.h"
 #include "../settings.h"
 #include "telnet.h"

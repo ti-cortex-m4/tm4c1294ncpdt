@@ -6,6 +6,7 @@ tasks,C
 
 #include "../main.h"
 #include "utils/lwiplib_patched.h"
+#include "../kernel/log.h"
 #include "../settings.h"
 #include "../tcp/telnet.h"
 #include "../uart/serial.h"

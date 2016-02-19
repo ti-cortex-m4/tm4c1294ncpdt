@@ -8,28 +8,6 @@ Configuration of the serial to Ethernet converter.
 #define __CONFIG_H__
 
 
-void UdpPrintF(const char *sz, ...);
-
-
-#define DEBUG_UART 0
-
-
-//*****************************************************************************
-// During debug, DEBUG_UART may be defined with values 0 or 1 to select which
-// of the two UARTs are used to output debug messages.  Debug messages will be
-// interleaved with any telnet data also being carried via that UART so great
-// care must be exercised when enabling this debug option.  Typically, you
-// should use only a single telnet connection when debugging with DEBUG_UART
-// set to use the inactive UART.
-//*****************************************************************************
-#ifdef DEBUG_UART
-#define CONSOLE UdpPrintF
-//#define CONSOLE UARTprintf
-#else
-#define CONSOLE while(0) ((int (*)(char *, ...))0)
-#endif
-
-
 //*****************************************************************************
 //! The number of serial to Ethernet ports supported by this module.
 //*****************************************************************************

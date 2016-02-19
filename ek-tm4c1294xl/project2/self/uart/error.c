@@ -5,6 +5,7 @@ error.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../kernel/log.h"
 #include "../uart/uart_log.h"
 
 
