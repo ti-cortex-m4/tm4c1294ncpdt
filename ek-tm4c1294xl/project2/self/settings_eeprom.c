@@ -37,9 +37,9 @@ uchar SaveEntity(entity const *pen) // TODO min max def
 {
   switch(pen->eType)
   {
-    case CHAR: return SaveChar(pen->pbRAM, pen->dwEEPROM);
-    case INT: return SaveInt(pen->pbRAM, pen->dwEEPROM);
-    case IP: return SaveLong(pen->pbRAM, pen->dwEEPROM);
+    case CHAR: return SaveChar(pen->pbRam, pen->dwEepRom);
+    case INT: return SaveInt(pen->pbRam, pen->dwEepRom);
+    case IP: return SaveLong(pen->pbRam, pen->dwEepRom);
     default: ASSERT(false); return 0x80;
   }
 }
@@ -73,9 +73,9 @@ void LoadEntity(entity const *pen) // TODO min max def
 {
   switch(pen->eType)
   {
-    case CHAR: LoadChar(pen->pbRAM, pen->dwEEPROM); break;
-    case INT: LoadInt(pen->pbRAM, pen->dwEEPROM); break;
-    case IP: LoadLong(pen->pbRAM, pen->dwEEPROM); break;
+    case CHAR: LoadChar(pen->pbRam, pen->dwEepRom); break;
+    case INT: LoadInt(pen->pbRam, pen->dwEepRom); break;
+    case IP: LoadLong(pen->pbRam, pen->dwEepRom); break;
     default: ASSERT(false); break;
   }
 }
