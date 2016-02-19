@@ -1,11 +1,13 @@
 /*------------------------------------------------------------------------------
-printf,C
+printf.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include <stdarg.h>
+#include "utils/uartstdio.h"
+#include "../settings.h"
 #include "../udp/udp_log.h"
 #include "printf.h"
 
@@ -331,6 +333,25 @@ convert:
 
 void UdpPrintF(const char *pcsz, ...)
 {
+  memset(&mbLog, 0, sizeof(mbLog));
+  iwLog = 0;
+
+  va_list va;
+  va_start(va, pcsz);
+
+  LogPrintVarArg(pcsz, va);
+
+  va_end(va);
+
+  UdpLog((unsigned char *)mbLog, iwLog);
+}
+
+
+
+void DebugPrintF(const char *pcsz, ...)
+{
+  if (ibDebugMode == DEBUG_MODE_UDP)
+  {
     memset(&mbLog, 0, sizeof(mbLog));
     iwLog = 0;
 
@@ -342,4 +363,14 @@ void UdpPrintF(const char *pcsz, ...)
     va_end(va);
 
     UdpLog((unsigned char *)mbLog, iwLog);
+  }
+  else if (ibDebugMode == DEBUG_MODE_UART)
+  {
+    va_list va;
+    va_start(va, pcsz);
+
+    UARTvprintf(pcsz, va);
+
+    va_end(va);
+  }
 }

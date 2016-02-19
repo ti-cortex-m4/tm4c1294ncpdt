@@ -45,7 +45,7 @@ typedef enum
 {
   DEBUG_MODE_NONE = 0,
   DEBUG_MODE_UDP = 1,
-  DEBUG_MODE_UART = 1,
+  DEBUG_MODE_UART = 2,
 } debugMode;
 
 

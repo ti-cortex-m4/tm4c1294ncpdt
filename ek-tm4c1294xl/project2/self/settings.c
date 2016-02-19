@@ -42,11 +42,9 @@ uchar                   mibBaudRate[UART_COUNT];
 uint                    wSerialNumber;
 
 bool                    ibDebugMode;
+
 ulong                   dwUdpDebugIP;
 uint                    wUdpDebugPort;
-
-bool                    fUartDebugFlag;
-uchar                   bUartDebugPort;
 
 bool                    fLwIpDebugFlag;
 uint                    wLwIpDebugTimeout;
