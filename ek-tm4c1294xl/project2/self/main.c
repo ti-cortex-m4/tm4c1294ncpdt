@@ -121,11 +121,9 @@ int     main(void)
 
   while (true)
   {
-    static uint wSecond;
-
-    wSecond++; SysCtlDelay(SysCtlClockGet());
+    SysCtlDelay(SysCtlClockGet());
 
     TaskConnections();
-    TaskLwIpDebug(wSecond);
+    TaskLwIpDebug();
   }
 }
