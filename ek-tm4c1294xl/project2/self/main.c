@@ -117,7 +117,7 @@ int     main(void)
 
   IntMasterEnable();
 
-  CONSOLE("\n start\n");
+  CONSOLE("start\n");
 
   while (true)
   {

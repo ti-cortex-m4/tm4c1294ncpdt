@@ -173,7 +173,7 @@ const entity enBaudRate2 = {
 
 
 const entity enSerialNumber = {
-        EEPROM_PORT_2, &wSerialNumber, sizeof(uint), INT,
+        EEPROM_SERIAL_NUMBER, &wSerialNumber, sizeof(uint), INT,
         0, 65535, 0,
         "SRNM",
         "AI=SRNM;D=Serial number;T=INT;C=EDIT;V=SRNM>65535?\"Serial number must be between 0 and 65535\":\"\"",
@@ -182,7 +182,7 @@ const entity enSerialNumber = {
 
 const entity enDebugMode = {
         EEPROM_DEBUG_MODE, &ibDebugMode, sizeof(uchar), CHAR,
-        0, 2, 0,
+        0, 2, 1,
         "DBMD",
         "AI=DBMD;D=Debug mode;T=INT;C=STATIC;O=0-No/0/1-UDP/1/2-UART/2",
 };
