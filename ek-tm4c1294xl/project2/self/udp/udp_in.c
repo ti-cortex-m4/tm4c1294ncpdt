@@ -324,19 +324,19 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
        case CHAR:
        {
          err_t err = PopCharDec(p, pen->pbRAM, ibStart);
-         CONSOLE_UART("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
+//         CONSOLE_UART("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
          return err;
        }
        case INT:
        {
          err_t err = PopIntDec(p, pen->pbRAM, ibStart);
-         CONSOLE_UART("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
+//         CONSOLE_UART("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
          return err;
        }
        case IP:
        {
          err_t err = PopIP(p, pen->pbRAM, ibStart);
-         CONSOLE_UART("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
+//         CONSOLE_UART("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
          return err;
        }
        default: ASSERT(false); return -1;
