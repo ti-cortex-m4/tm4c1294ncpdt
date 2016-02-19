@@ -27,6 +27,23 @@ typedef struct
 } entity;
 
 
+typedef enum
+{
+  ROUTING_MODE_SERVER = 0,
+  ROUTING_MODE_CLIENT = 1,
+} routingMode;
+
+
+typedef enum
+{
+  CONNECTION_MODE_IMMEDIATELY = 0,
+  CONNECTION_MODE_ON_DATA = 1,
+} connectionMode;
+
+
+#endif
+
+
 extern const entity enConnectionTimeout0;
 extern const entity enConnectionTimeout1;
 extern const entity enConnectionTimeout2;
@@ -66,20 +83,3 @@ extern const entity enUartDebugPort;
 
 extern const entity enLwIpDebugFlag;
 extern const entity enLwIpDebugTimeout;
-
-
-typedef enum
-{
-  ROUTING_MODE_SERVER = 0,
-  ROUTING_MODE_CLIENT = 1,
-} routingMode;
-
-
-typedef enum
-{
-  CONNECTION_MODE_IMMEDIATELY = 0,
-  CONNECTION_MODE_ON_DATA = 1,
-} connectionMode;
-
-
-#endif

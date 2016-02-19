@@ -49,7 +49,8 @@ void InitConnections(void)
     {
       StartListen(u);
     }
-    else
+
+    if (mbRoutingMode[u] == ROUTING_MODE_CLIENT)
     {
       if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
       {
@@ -79,17 +80,14 @@ void TaskConnections(void)
           StartOpen(u);
         }
       }
-      else if (mbConnectionMode[u] == CONNECTION_MODE_ON_DATA)
+
+      if (mbConnectionMode[u] == CONNECTION_MODE_ON_DATA)
       {
         if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ulSerialPort))
         {
           CONSOLE("%u: connects as client on data\n",u);
           StartOpen(u);
         }
-      }
-      else
-      {
-        CONSOLE("%u: ERROR connection mode %u\n",u,mbConnectionMode[u]); // TODO restart
       }
     }
   }
