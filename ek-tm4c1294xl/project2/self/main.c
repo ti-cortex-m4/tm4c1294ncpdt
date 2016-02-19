@@ -71,9 +71,6 @@ int     main(void)
   // Run from the PLL at 120 MHz.
   ulong dwSysClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
-  InitUartLog(dwSysClockFreq);
-  CONSOLE_UART("\n init\n");
-
   // Configure the device pins.
   PinoutSet(true, false);
 
@@ -84,6 +81,8 @@ int     main(void)
   GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, ~GPIO_PIN_1);
 
   InitSettings();
+
+  InitUartLog(dwSysClockFreq);
 
   pbMAC[0] = 0x00;
   pbMAC[1] = 0x1B;

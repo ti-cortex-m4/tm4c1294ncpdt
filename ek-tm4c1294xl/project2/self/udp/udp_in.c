@@ -314,7 +314,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
 
   if (ibStart == 0xFF)
   {
-    CONSOLE_UART("ERROR index %u\n",ibStart);
+    CONSOLE_UART("WARNING index %u\n",ibStart);
     return -1;
   }
   else

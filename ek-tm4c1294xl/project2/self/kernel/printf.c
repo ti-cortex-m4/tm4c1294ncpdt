@@ -347,7 +347,6 @@ void UdpPrintF(const char *pcsz, ...)
 }
 
 
-
 void DebugPrintF(const char *pcsz, ...)
 {
   if (ibDebugMode == DEBUG_MODE_UDP)
