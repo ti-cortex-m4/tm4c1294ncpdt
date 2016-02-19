@@ -25,7 +25,6 @@ void    LogTimer_1000Hz(void)
 void    InitUartLog(ulong dwSysClockFreq)
 {
 #ifdef DEBUG
-  ibDebugMode = DEBUG_MODE_UART;
   UARTStdioConfig(0, 115200, dwSysClockFreq);
 #endif
 }
