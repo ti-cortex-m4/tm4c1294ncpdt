@@ -1,23 +1,24 @@
 /*------------------------------------------------------------------------------
-DELAY,C
+delay.c
 
 
 ------------------------------------------------------------------------------*/
 
-#include "main.h"
+#include "../main.h"
 #include "delay.h"
 
 
 
-void    Nop(void)
+void Nop(void)
 {
   __asm("nop");
 }
 
 
-void    DelayMicroSecond(uint wMicroSecond)
+void DelayMicroSecond(uint wMicroSecond)
 {
-  if (wMicroSecond == 0) return;
+  if (wMicroSecond == 0)
+    return;
 
   while (wMicroSecond-- > 0)
   {
@@ -43,9 +44,10 @@ void    DelayMicroSecond(uint wMicroSecond)
 }
 
 
-void    DelayMillySecond(uint wMillySecond)
+void DelayMillySecond(uint wMillySecond)
 {
-  if (wMillySecond == 0) return;
+  if (wMillySecond == 0)
+    return;
 
   while (wMillySecond-- > 0)
   {
@@ -54,9 +56,10 @@ void    DelayMillySecond(uint wMillySecond)
 }
 
 
-void    DelaySecond(uint wSecond)
+void DelaySecond(uint wSecond)
 {
-  if (wSecond == 0) return;
+  if (wSecond == 0)
+    return;
 
   while (wSecond-- > 0)
   {

@@ -65,13 +65,6 @@ uchar SavePort(void);
 uchar SaveDeviceName(void);
 uchar SaveOwnerName(void);
 
-uchar SaveConnectionTimeout(void);
-uchar SaveRoutingMode(void);
-uchar SaveDestIP(void);
-uchar SaveDestPort(void);
-
-uchar SaveBaud(void);
-
 uchar LoadSettings(void);
 
 ulong GetBaud(uchar ibPort);
