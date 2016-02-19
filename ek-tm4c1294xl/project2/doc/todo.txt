@@ -52,15 +52,14 @@ watchdog
 UDP debug
 memstat debug
 
-http://lwip.wikia.com/wiki/Lwipopts.h
-
 F=R* F=R restart
 установка скорости uart без рестарта
-
-static const char * const g_pcHex
 
 name > 4*3
 
 return ERR_VAL&ERR_ARG CONSOLE_UART
 
 tibbo initialise routing_status buzz change_ip
+tibbo defaults
+
+1 sec. delay
