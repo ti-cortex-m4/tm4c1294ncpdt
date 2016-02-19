@@ -14,7 +14,7 @@ error.c
 
 void __error__(char *pszFileName, ulong dwLine)
 {
-  CONSOLE("\n assert error: file %s, line %d\n", pszFileName, dwLine);
+  CONSOLE("assert error: file %s, line %d\n", pszFileName, dwLine);
 
   while (true)
   {

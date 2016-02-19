@@ -302,7 +302,7 @@ static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCo
     if (pb[i++] != *szCode++) return false;
   }
 
-  CONSOLE_UART("code: %c%s %u\n", bOperation, sz, i);
+//  CONSOLE_UART("code: %c%s %u\n", bOperation, sz, i);
 
   *pibStart = i;
   return true;
