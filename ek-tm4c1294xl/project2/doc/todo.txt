@@ -63,3 +63,5 @@ tibbo initialise routing_status buzz change_ip
 tibbo defaults
 
 1 sec. delay
+
+minimise CONSOLE messages
