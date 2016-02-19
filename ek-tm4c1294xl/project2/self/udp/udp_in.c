@@ -323,19 +323,19 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
     {
        case CHAR:
        {
-         err_t err = PopCharDec(p, pen->pbRAM, ibStart);
+         err_t err = PopCharDec(p, pen->pbRam, ibStart);
 //         CONSOLE_UART("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
          return err;
        }
        case INT:
        {
-         err_t err = PopIntDec(p, pen->pbRAM, ibStart);
+         err_t err = PopIntDec(p, pen->pbRam, ibStart);
 //         CONSOLE_UART("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
          return err;
        }
        case IP:
        {
-         err_t err = PopIP(p, pen->pbRAM, ibStart);
+         err_t err = PopIP(p, pen->pbRam, ibStart);
 //         CONSOLE_UART("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
          return err;
        }
@@ -370,9 +370,9 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
   {
     switch (pen->eType)
     {
-      case CHAR: CmdCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRAM); break;
-      case INT: CmdIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRAM); break;
-      case IP: CmdIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRAM); break;
+      case CHAR: CmdCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRam); break;
+      case INT: CmdIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRam); break;
+      case IP: CmdIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRam); break;
       default: ASSERT(false); break;
     }
 

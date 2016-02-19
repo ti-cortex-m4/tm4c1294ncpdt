@@ -18,8 +18,8 @@ typedef enum
 
 typedef struct
 {
-  ulong         dwEEPROM;
-  void         *pbRAM;
+  ulong         dwEepRom;
+  void         *pbRam;
   uint          wSize;
   entityType    eType;
   ulong         dwMin, dwMax, dwDef;
