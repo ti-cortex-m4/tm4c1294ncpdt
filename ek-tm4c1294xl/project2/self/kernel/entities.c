@@ -180,40 +180,27 @@ const entity enSerialNumber = {
 };
 
 
-const entity enUdpDebugFlag = {
-        EEPROM_UDP_DEBUG_FLAG, &fUdpDebugFlag, sizeof(uchar), CHAR,
-        0, 1, 1,
-        "UDPDF",
-        "AI=UDPDF;D=UDP debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+const entity enDebugMode = {
+        EEPROM_DEBUG_MODE, &ibDebugMode, sizeof(uchar), CHAR,
+        0, 2, 0,
+        "DBMD",
+        "AI=DBMD;D=Debug mode;T=INT;C=STATIC;O=0-No/0/1-UDP/1/2-UART/2",
 };
+
+
 
 const entity enUdpDebugIP = {
         EEPROM_UDP_DEBUG_IP, &dwUdpDebugIP, sizeof(ulong), IP,
         0, MAX_LONG, 0xFFFFFFFF,
         "UDPDI",
-        "AI=UDPDI;E=1;D=UDP debug IP-address;T=STRING;C=IPCTRL;S=UDPDF!=0?\"e\":\"i\"",
+        "AI=UDPDI;E=1;D=UDP debug IP-address;T=STRING;C=IPCTRL;S=DBMD==1?\"e\":\"i\"",
 };
 
 const entity enUdpDebugPort = {
         EEPROM_UDP_DEBUG_PORT, &wUdpDebugPort, sizeof(uint), INT,
         0, MAX_INT, 50000,
         "UDPDP",
-        "AI=UDPDP;E=1;D=UDP debug port;T=INT;C=EDIT;S=UDPDF!=0?\"e\":\"i\"",
-};
-
-
-const entity enUartDebugFlag = {
-        EEPROM_UART_DEBUG_FLAG, &fUartDebugFlag, sizeof(uchar), CHAR,
-        0, 1, 0,
-        "UARTDF",
-        "AI=UARTDF;D=UART debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
-};
-
-const entity enUartDebugPort = {
-        EEPROM_UART_DEBUG_PORT, &bUartDebugPort, sizeof(uchar), CHAR,
-        0, UART_COUNT-1, 0,
-        "UARTDP",
-        "AI=UARTDP;E=1;D=UART debug port;T=INT;C=EDIT;S=UARTDF!=0?\"e\":\"i\"",
+        "AI=UDPDP;E=1;D=UDP debug port;T=INT;C=EDIT;S=DBMD==1?\"e\":\"i\"",
 };
 
 

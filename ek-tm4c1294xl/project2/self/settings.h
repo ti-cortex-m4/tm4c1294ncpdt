@@ -39,7 +39,7 @@ extern uchar                   mibBaudRate[UART_COUNT];
 
 extern uint                    wSerialNumber;
 
-extern bool                    fUdpDebugFlag;
+extern bool                    ibDebugMode;
 extern ulong                   dwUdpDebugIP;
 extern uint                    wUdpDebugPort;
 

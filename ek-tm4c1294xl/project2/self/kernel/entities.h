@@ -41,6 +41,14 @@ typedef enum
 } connectionMode;
 
 
+typedef enum
+{
+  DEBUG_MODE_NONE = 0,
+  DEBUG_MODE_UDP = 1,
+  DEBUG_MODE_UART = 1,
+} debugMode;
+
+
 #endif
 
 
@@ -74,12 +82,10 @@ extern const entity enBaudRate2;
 
 extern const entity enSerialNumber;
 
-extern const entity enUdpDebugFlag;
+extern const entity enDebugMode;
+
 extern const entity enUdpDebugIP;
 extern const entity enUdpDebugPort;
-
-extern const entity enUartDebugFlag;
-extern const entity enUartDebugPort;
 
 extern const entity enLwIpDebugFlag;
 extern const entity enLwIpDebugTimeout;

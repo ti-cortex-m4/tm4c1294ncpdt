@@ -6,23 +6,23 @@ printf,C
 
 #include "../main.h"
 #include <stdarg.h>
+#include "../udp/udp_log.h"
 #include "printf.h"
 
 
 
-#define LOG_BUFF_SIZE 1000
+#define LOG_BUFF_SIZE   0x400
 
-static unsigned char    mbLog[LOG_BUFF_SIZE];
-
-static unsigned int     iwLog;
-
-
-
-static const char * const g_pcHex = "0123456789abcdef";
+static uchar            mbLog[LOG_BUFF_SIZE];
+static uint             iwLog;
 
 
 
-void CharPut(unsigned char ucData)
+static const char * const pczHex = "0123456789abcdef";
+
+
+
+static void CharPut(unsigned char ucData)
 {
   if (iwLog < LOG_BUFF_SIZE)
   {
@@ -30,30 +30,7 @@ void CharPut(unsigned char ucData)
   }
 }
 
-//*****************************************************************************
-//! Writes a string of characters to the UART output.
-//!
-//! \param pcBuf points to a buffer containing the string to transmit.
-//! \param ui32Len is the length of the string to transmit.
-//!
-//! This function will transmit the string to the UART output.  The number of
-//! characters transmitted is determined by the \e ui32Len parameter.  This
-//! function does no interpretation or translation of any characters.  Since
-//! the output is sent to a UART, any LF (/n) characters encountered will be
-//! replaced with a CRLF pair.
-//!
-//! Besides using the \e ui32Len parameter to stop transmitting the string, if
-//! a null character (0) is encountered, then no more characters will be
-//! transmitted and the function will return.
-//!
-//! In non-buffered mode, this function is blocking and will not return until
-//! all the characters have been written to the output FIFO.  In buffered mode,
-//! the characters are written to the UART transmit buffer and the call returns
-//! immediately.  If insufficient space remains in the transmit buffer,
-//! additional characters are discarded.
-//!
-//! \return Returns the count of characters written.
-//*****************************************************************************
+
 static int LogWrite(const char *pcBuf, uint32_t ui32Len)
 {
     unsigned int uIdx;
@@ -79,42 +56,7 @@ static int LogWrite(const char *pcBuf, uint32_t ui32Len)
     return(uIdx);
 }
 
-//*****************************************************************************
-//! A simple UART based vprintf function supporting \%c, \%d, \%p, \%s, \%u,
-//! \%x, and \%X.
-//!
-//! \param pcString is the format string.
-//! \param vaArgP is a variable argument list pointer whose content will depend
-//! upon the format string passed in \e pcString.
-//!
-//! This function is very similar to the C library <tt>vprintf()</tt> function.
-//! All of its output will be sent to the UART.  Only the following formatting
-//! characters are supported:
-//!
-//! - \%c to print a character
-//! - \%d or \%i to print a decimal value
-//! - \%s to print a string
-//! - \%u to print an unsigned decimal value
-//! - \%x to print a hexadecimal value using lower case letters
-//! - \%X to print a hexadecimal value using lower case letters (not upper case
-//! letters as would typically be used)
-//! - \%p to print a pointer as a hexadecimal value
-//! - \%\% to print out a \% character
-//!
-//! For \%s, \%d, \%i, \%u, \%p, \%x, and \%X, an optional number may reside
-//! between the \% and the format character, which specifies the minimum number
-//! of characters to use for that value; if preceded by a 0 then the extra
-//! characters will be filled with zeros instead of spaces.  For example,
-//! ``\%8d'' will use eight characters to print the decimal value with spaces
-//! added to reach eight; ``\%08d'' will use eight characters as well but will
-//! add zeroes instead of spaces.
-//!
-//! The type of the arguments in the variable arguments list must match the
-//! requirements of the format string.  For example, if an integer was passed
-//! where a string was expected, an error of some kind will most likely occur.
-//!
-//! \return None.
-//*****************************************************************************
+
 static void LogPrintVarArg(const char *pcString, va_list vaArgP)
 {
     uint32_t ui32Idx, ui32Value, ui32Pos, ui32Count, ui32Base, ui32Neg;
@@ -351,7 +293,7 @@ convert:
                     // Convert the value into a string.
                     for(; ui32Idx; ui32Idx /= ui32Base)
                     {
-                        pcBuf[ui32Pos++] = g_pcHex[(ui32Value / ui32Idx) % ui32Base];
+                        pcBuf[ui32Pos++] = pczHex[(ui32Value / ui32Idx) % ui32Base];
                     }
 
                     // Write the string.
@@ -385,75 +327,19 @@ convert:
     }
 }
 
-//*****************************************************************************
-//! A simple UART based printf function supporting \%c, \%d, \%p, \%s, \%u,
-//! \%x, and \%X.
-//!
-//! \param pcString is the format string.
-//! \param ... are the optional arguments, which depend on the contents of the
-//! format string.
-//!
-//! This function is very similar to the C library <tt>fprintf()</tt> function.
-//! All of its output will be sent to the UART.  Only the following formatting
-//! characters are supported:
-//!
-//! - \%c to print a character
-//! - \%d or \%i to print a decimal value
-//! - \%s to print a string
-//! - \%u to print an unsigned decimal value
-//! - \%x to print a hexadecimal value using lower case letters
-//! - \%X to print a hexadecimal value using lower case letters (not upper case
-//! letters as would typically be used)
-//! - \%p to print a pointer as a hexadecimal value
-//! - \%\% to print out a \% character
-//!
-//! For \%s, \%d, \%i, \%u, \%p, \%x, and \%X, an optional number may reside
-//! between the \% and the format character, which specifies the minimum number
-//! of characters to use for that value; if preceded by a 0 then the extra
-//! characters will be filled with zeros instead of spaces.  For example,
-//! ``\%8d'' will use eight characters to print the decimal value with spaces
-//! added to reach eight; ``\%08d'' will use eight characters as well but will
-//! add zeroes instead of spaces.
-//!
-//! The type of the arguments after \e pcString must match the requirements of
-//! the format string.  For example, if an integer was passed where a string
-//! was expected, an error of some kind will most likely occur.
-//!
-//! \return None.
-//*****************************************************************************
-buff_t LogPrintF(const char *pcString, ...)
+
+
+void UdpPrintF(const char *pcsz, ...)
 {
     memset(&mbLog, 0, sizeof(mbLog));
     iwLog = 0;
 
-    va_list vaArgP;
-    va_start(vaArgP, pcString);
+    va_list va;
+    va_start(va, pcsz);
 
-    LogPrintVarArg(pcString, vaArgP);
+    LogPrintVarArg(pcsz, va);
 
-    va_end(vaArgP);
-
-    buff_t buff;
-    buff.pbBuff = (unsigned char *)mbLog;
-    buff.wSize = iwLog;
-    return buff;
-}
-
-
-
-void UdpLog(unsigned char *pb, unsigned int wSize);
-
-void UdpPrintF(const char *pcString, ...)
-{
-    memset(&mbLog, 0, sizeof(mbLog));
-    iwLog = 0;
-
-    va_list vaArgP;
-    va_start(vaArgP, pcString);
-
-    LogPrintVarArg(pcString, vaArgP);
-
-    va_end(vaArgP);
+    va_end(va);
 
     UdpLog((unsigned char *)mbLog, iwLog);
 }

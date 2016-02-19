@@ -17,7 +17,7 @@ TODO
 static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  5
+#define SETTINGS_LABEL  6
 
 
 
@@ -41,7 +41,7 @@ uchar                   mibBaudRate[UART_COUNT];
 
 uint                    wSerialNumber;
 
-bool                    fUdpDebugFlag;
+bool                    ibDebugMode;
 ulong                   dwUdpDebugIP;
 uint                    wUdpDebugPort;
 
@@ -145,12 +145,10 @@ uchar    SaveSettings(void)
 
   if ((err = SaveEntity(&enSerialNumber)) != 0) return err;
 
-  if ((err = SaveEntity(&enUdpDebugFlag)) != 0) return err;
+  if ((err = SaveEntity(&enDebugMode)) != 0) return err;
+
   if ((err = SaveEntity(&enUdpDebugIP)) != 0) return err;
   if ((err = SaveEntity(&enUdpDebugPort)) != 0) return err;
-
-  if ((err = SaveEntity(&enUartDebugFlag)) != 0) return err;
-  if ((err = SaveEntity(&enUartDebugPort)) != 0) return err;
 
   if ((err = SaveEntity(&enLwIpDebugFlag)) != 0) return err;
   if ((err = SaveEntity(&enLwIpDebugTimeout)) != 0) return err;
@@ -204,12 +202,10 @@ uchar   LoadSettings(void)
 
     LoadEntity(&enSerialNumber);
 
-    LoadEntity(&enUdpDebugFlag);
+    LoadEntity(&enDebugMode);
+
     LoadEntity(&enUdpDebugIP);
     LoadEntity(&enUdpDebugPort);
-
-    LoadEntity(&enUartDebugFlag);
-    LoadEntity(&enUartDebugPort);
 
     LoadEntity(&enLwIpDebugFlag);
     LoadEntity(&enLwIpDebugTimeout);
@@ -256,14 +252,12 @@ uchar   LoadSettings(void)
 
     wSerialNumber = enSerialNumber.dwDef;
 
-    fUdpDebugFlag = enUdpDebugFlag.dwDef;
+    ibDebugMode = enDebugMode.dwDef;
+
     dwUdpDebugIP = enUdpDebugIP.dwDef;
     wUdpDebugPort = enUdpDebugPort.dwDef;
 
-    fUartDebugFlag = enUartDebugFlag.dwDef;
-    bUartDebugPort = enUartDebugPort.dwDef;
-
-    fLwIpDebugFlag = enUartDebugFlag.dwDef;
+    fLwIpDebugFlag = enLwIpDebugFlag.dwDef;
     wLwIpDebugTimeout = enLwIpDebugTimeout.dwDef;
 
     SaveSettings();
