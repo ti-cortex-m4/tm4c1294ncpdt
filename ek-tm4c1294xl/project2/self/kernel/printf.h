@@ -5,3 +5,4 @@ printf.h
 ------------------------------------------------------------------------------*/
 
 void UdpPrintF(const char *pcsz, ...);
+void DebugPrintF(const char *pcsz, ...);

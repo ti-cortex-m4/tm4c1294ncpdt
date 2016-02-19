@@ -4,6 +4,10 @@ SETTINGS,H
 
 ------------------------------------------------------------------------------*/
 
+#include "kernel/entities.h"
+
+
+
 #define MAX_CHAR 0xFF
 #define MAX_INT 0xFFFF
 #define MAX_LONG 0xFFFFFFFF
@@ -40,11 +44,9 @@ extern uchar                   mibBaudRate[UART_COUNT];
 extern uint                    wSerialNumber;
 
 extern bool                    ibDebugMode;
+
 extern ulong                   dwUdpDebugIP;
 extern uint                    wUdpDebugPort;
-
-extern bool                    fUartDebugFlag;
-extern uchar                   bUartDebugPort;
 
 extern bool                    fLwIpDebugFlag;
 extern uint                    wLwIpDebugTimeout;

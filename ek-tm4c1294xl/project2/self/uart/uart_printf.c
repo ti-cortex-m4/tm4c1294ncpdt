@@ -13,7 +13,7 @@ uart_printf.c
 
 void UartPrintF(const char *pcsz, ...)
 {
-  if (fUartDebugFlag)
+  if (ibDebugMode == DEBUG_MODE_UART)
   {
     va_list va;
     va_start(va, pcsz);
