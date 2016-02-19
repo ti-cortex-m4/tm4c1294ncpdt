@@ -90,7 +90,7 @@ typedef u8_t                sys_prot_t;
 // what display routines are available.
 //
 #ifndef LWIP_PLATFORM_DIAG
-#define LWIP_PLATFORM_DIAG(msg) { UARTprintf msg; }
+#define LWIP_PLATFORM_DIAG(msg) { DebugPrintF msg; }
 #endif
 
 //

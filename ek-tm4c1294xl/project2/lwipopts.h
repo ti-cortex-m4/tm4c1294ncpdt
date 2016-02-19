@@ -390,7 +390,7 @@
 #define U32_F "u"
 #define S32_F "d"
 #define X32_F "x"
-extern void UARTprintf(const char *pcString, ...);
+extern void DebugPrintF(const char *pcString, ...);
 #define LWIP_DEBUG
 #endif
 
