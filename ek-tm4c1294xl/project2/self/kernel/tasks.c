@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-tasks,C
+tasks.c
 
 
 ------------------------------------------------------------------------------*/
@@ -15,7 +15,7 @@ tasks,C
 
 
 
-static void StartListen(uchar u)
+static void StartServerConnection(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
@@ -24,13 +24,11 @@ static void StartListen(uchar u)
 }
 
 
-
-static void StartOpen(uchar u)
+static void StartClientConnection(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
   ulong dwIP = mdwDestinationIP[u];
-
   CONSOLE("%u: connects as client to %u.%u.%u.%u port %u\n",
     u,
     (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
@@ -40,7 +38,6 @@ static void StartOpen(uchar u)
 }
 
 
-
 void InitConnections(void)
 {
   uchar u;
@@ -48,7 +45,7 @@ void InitConnections(void)
   {
     if (mbRoutingMode[u] == ROUTING_MODE_SERVER)
     {
-      StartListen(u);
+      StartServerConnection(u);
     }
 
     if (mbRoutingMode[u] == ROUTING_MODE_CLIENT)
@@ -56,12 +53,11 @@ void InitConnections(void)
       if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
       {
         CONSOLE("%u: connects as client immediately\n",u);
-        StartOpen(u);
+        StartClientConnection(u);
       }
     }
   }
 }
-
 
 
 void TaskConnections(void)
@@ -78,7 +74,7 @@ void TaskConnections(void)
         if (pState->eTCPState == STATE_TCP_IDLE)
         {
           CONSOLE("%u: connects as client immediately after reset\n",u);
-          StartOpen(u);
+          StartClientConnection(u);
         }
       }
 
@@ -87,7 +83,7 @@ void TaskConnections(void)
         if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ulSerialPort))
         {
           CONSOLE("%u: connects as client on data\n",u);
-          StartOpen(u);
+          StartClientConnection(u);
         }
       }
     }
@@ -96,7 +92,7 @@ void TaskConnections(void)
 
 
 
-void TaskLwIpDebug(uint wSecond)
+void TaskLwIpDebug(void)
 {
 static uint wTimeout;
 

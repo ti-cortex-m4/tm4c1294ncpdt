@@ -288,7 +288,7 @@ static bool IsCmd(struct pbuf *p, const char *szCmd)
 
 static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode, uchar *pibStart)
 {
-  const char *sz = szCode;
+//  const char *sz = szCode;
 
   uchar *pb = p->payload;
   uchar i = 0;
