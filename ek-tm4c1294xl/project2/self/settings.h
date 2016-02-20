@@ -52,14 +52,6 @@ uchar InitSettings(void);
 
 uchar SaveSettings(void);
 
-uchar SaveIP(void);
-uchar SaveGateway(void);
-uchar SaveNetmask(void);
-uchar SavePort(void);
-
-uchar SaveDeviceName(void);
-uchar SaveOwnerName(void);
-
 uchar LoadSettings(void);
 
 ulong GetBaud(uchar ibPort);

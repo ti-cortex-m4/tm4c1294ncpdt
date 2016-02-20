@@ -208,7 +208,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
-
+/*
 err_t SON(struct pbuf *p)
 {
   err_t err = PopString(p, (char *)szOwnerName, NAME_SIZE);
@@ -232,7 +232,7 @@ err_t SDN(struct pbuf *p)
   return ERR_OK;
 }
 
-/*
+
 err_t SIP(struct pbuf *p)
 {
   ulong dw = 0;
@@ -415,15 +415,10 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"SPW")) {
     CmdString(pcb,p,addr,port,broadcast,"0");
-  } else if (IsCmd(p,"GON")) {
-    CmdString(pcb,p,addr,port,broadcast,szOwnerName);
-  } else if (IsCmd(p,"SON")) {
-    CmdIn(pcb,p,addr,port,broadcast,SON);
-  } else if (IsCmd(p,"GDN")) {
-    CmdString(pcb,p,addr,port,broadcast,szDeviceName);
-  } else if (IsCmd(p,"SDN")) {
-    CmdIn(pcb,p,addr,port,broadcast, SDN);
   }
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enOwnerName)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDeviceName)) {}
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enIP)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enGateway)) {}
