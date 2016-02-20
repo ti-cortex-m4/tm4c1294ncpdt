@@ -17,7 +17,7 @@ TODO
 static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  1
+#define SETTINGS_LABEL  2
 
 
 
@@ -95,16 +95,9 @@ uchar    SaveSettings(void)
   uchar err = SaveLong(&dw, EEPROM_LABEL);
   if (err != 0) return err;
 
-
-  err = SaveLong(&dwIP, EEPROM_IP);
-  if (err != 0) return err;
-
-  err = SaveLong(&dwGateway, EEPROM_GATEWAY);
-  if (err != 0) return err;
-
-  err = SaveLong(&dwNetmask, EEPROM_NETMASK);
-  if (err != 0) return err;
-
+  if ((err = SaveEntity(&enIP)) != 0) return err;
+  if ((err = SaveEntity(&enGateway)) != 0) return err;
+  if ((err = SaveEntity(&enNetmask)) != 0) return err;
 
   err = SaveString(szDeviceName, EEPROM_DEVICE_NAME);
   if (err != 0) return err;
@@ -163,9 +156,9 @@ uchar   LoadSettings(void)
 
   if (dw == SETTINGS_LABEL)
   {
-    LoadLong(&dwIP, EEPROM_IP);
-    LoadLong(&dwGateway, EEPROM_GATEWAY);
-    LoadLong(&dwNetmask, EEPROM_NETMASK);
+    LoadEntity(&enIP);
+    LoadEntity(&enGateway);
+    LoadEntity(&enNetmask);
 
     LoadString(szDeviceName, EEPROM_DEVICE_NAME);
     LoadString(szOwnerName, EEPROM_OWNER_NAME);
@@ -210,9 +203,9 @@ uchar   LoadSettings(void)
   }
   else
   {
-    dwIP = inet_addr("100.1.168.192");
-    dwGateway = inet_addr("0.255.255.255");
-    dwNetmask = inet_addr("1.1.168.192");
+    dwIP = enIP.dwDef;
+    dwGateway = enGateway.dwDef;
+    dwNetmask = enNetmask.dwDef;
 
     memset(&szDeviceName,  0, sizeof(szDeviceName));
     sprintf(szDeviceName, "Device");

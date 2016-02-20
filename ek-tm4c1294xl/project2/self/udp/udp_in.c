@@ -157,9 +157,9 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 0: PushString("AI=$GENERAL;D=General;T=GROUP"); break;
     case 1: PushString("AI=ON;D=Owner name;T=STRING;C=EDIT;MAXLEN=8;F=R*"); break;
     case 2: PushString("AI=DN;D=Device name;T=STRING;C=EDIT;MAXLEN=8;F=R*"); break;
-    case 3: PushString("AI=IP;D=IP-address;T=STRING;C=IPCTRL;F=R*"); break;
-    case 4: PushString("AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;F=R*"); break;
-    case 5: PushString("AI=NM;D=Subnet mask;T=STRING;C=IPCTRL;F=R*"); break;
+    case 3: PushString(enIP.szName); break;
+    case 4: PushString(enGateway.szName); break;
+    case 5: PushString(enNetmask.szName); break;
 
     case 6: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
     case 7: PushString(enConnectionTimeout0.szName); break;
@@ -232,7 +232,7 @@ err_t SDN(struct pbuf *p)
   return ERR_OK;
 }
 
-
+/*
 err_t SIP(struct pbuf *p)
 {
   ulong dw = 0;
@@ -271,7 +271,7 @@ err_t SNM(struct pbuf *p)
 
   return ERR_OK;
 }
-
+*/
 static bool IsCmd(struct pbuf *p, const char *szCmd)
 {
   uchar *pb = p->payload;
@@ -425,23 +425,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     CmdIn(pcb,p,addr,port,broadcast, SDN);
   }
 
-  else if (IsCmd(p,"GIP")) {
-    CmdIP(pcb,p,addr,port,broadcast,dwIP);
-  } else if (IsCmd(p,"SIP")) {
-    CmdIn(pcb,p,addr,port,broadcast,SIP);
-  }
-
-  else if (IsCmd(p,"GGI")) {
-    CmdIP(pcb,p,addr,port,broadcast,dwGateway);
-  } else if (IsCmd(p,"SGI")) {
-    CmdIn(pcb,p,addr,port,broadcast,SGI);
-  }
-
-  else if (IsCmd(p,"GNM")) {
-    CmdIP(pcb,p,addr,port,broadcast,dwNetmask);
-  } else if (IsCmd(p,"SNM")) {
-    CmdIn(pcb,p,addr,port,broadcast,SNM);
-  }
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enIP)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enGateway)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enNetmask)) {}
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout2)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout1)) {}
