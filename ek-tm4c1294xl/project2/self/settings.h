@@ -7,11 +7,6 @@ SETTINGS,H
 #include "kernel/entities.h"
 
 
-
-#define MAX_CHAR 0xFF
-#define MAX_INT 0xFFFF
-#define MAX_LONG 0xFFFFFFFF
-
 #define BAUD_RATE_COUNT      14
 
 #define DEFAULT_CONNECTION_TIMEOUT 1 // 5
