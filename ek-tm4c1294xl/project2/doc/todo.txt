@@ -64,3 +64,6 @@ enet_s2e ISR priorities etc.
 
 lwIP inside project
 
+const entity * const
+
+

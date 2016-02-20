@@ -58,6 +58,8 @@ const entity * const mpenEntities[] = {
   &enLwIpDebugTimeout,
 };
 
+const uchar bEntitiesSize = sizeof(mpenEntities) / sizeof(entity);
+
 
 
 const entity enSerialNumber = {
