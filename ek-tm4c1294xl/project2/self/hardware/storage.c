@@ -57,3 +57,10 @@ void LoadString(char *sz, ulong dwEepRom)
 {
   EEPROMRead((ulong *)sz, dwEepRom, 4*3);
 }
+
+
+
+err_t LoadResult(ulong dw)
+{
+  return (dw == 0) ? ERR_OK : ERR_VAL;
+}
