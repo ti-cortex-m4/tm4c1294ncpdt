@@ -11,26 +11,26 @@ storage,C
 
 
 
-uchar SaveChar(uchar *pb, ulong dwAddr)
+uchar SaveChar(uchar *pb, ulong dwEepRom)
 {
   ulong dw = *pb;
-  return EEPROMProgram(&dw, dwAddr, 4);
+  return EEPROMProgram(&dw, dwEepRom, 4);
 }
 
-uchar SaveInt(uint *pw, ulong dwAddr)
+uchar SaveInt(uint *pw, ulong dwEepRom)
 {
   ulong dw = *pw;
-  return EEPROMProgram(&dw, dwAddr, 4);
+  return EEPROMProgram(&dw, dwEepRom, 4);
 }
 
-uchar SaveLong(ulong *pdw, ulong dwAddr)
+uchar SaveLong(ulong *pdw, ulong dwEepRom)
 {
-  return EEPROMProgram(pdw, dwAddr, 4);
+  return EEPROMProgram(pdw, dwEepRom, 4);
 }
 
-uchar SaveString(char *sz, ulong dwAddr)
+uchar SaveString(char *sz, ulong dwEepRom)
 {
-  return EEPROMProgram((ulong *)sz, dwAddr, 4*3);
+  return EEPROMProgram((ulong *)sz, dwEepRom, 4*3);
 }
 
 uchar SaveEntity(entity const *pen) // TODO min max def
@@ -45,28 +45,28 @@ uchar SaveEntity(entity const *pen) // TODO min max def
 }
 
 
-void LoadChar(uchar *pb, ulong dwAddr)
+void LoadChar(uchar *pb, ulong dwEepRom)
 {
   ulong dw;
-  EEPROMRead(&dw, dwAddr, 4);
+  EEPROMRead(&dw, dwEepRom, 4);
   *pb = dw % 0x100;
 }
 
-void LoadInt(uint *pw, ulong dwAddr)
+void LoadInt(uint *pw, ulong dwEepRom)
 {
   ulong dw;
-  EEPROMRead(&dw, dwAddr, 4);
+  EEPROMRead(&dw, dwEepRom, 4);
   *pw = dw % 0x10000;
 }
 
-void LoadLong(ulong *pdw, ulong dwAddr)
+void LoadLong(ulong *pdw, ulong dwEepRom)
 {
-  EEPROMRead(pdw, dwAddr, 4);
+  EEPROMRead(pdw, dwEepRom, 4);
 }
 
-void LoadString(char *sz, ulong dwAddr)
+void LoadString(char *sz, ulong dwEepRom)
 {
-  EEPROMRead((ulong *)sz, dwAddr, 4*3);
+  EEPROMRead((ulong *)sz, dwEepRom, 4*3);
 }
 
 void LoadEntity(entity const *pen) // TODO min max def
