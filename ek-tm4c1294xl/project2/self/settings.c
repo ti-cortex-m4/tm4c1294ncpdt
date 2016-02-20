@@ -9,7 +9,7 @@ TODO
 #include "driverlib/sysctl.h"
 #include "lwip/inet.h"
 #include "generated/eeprom.h"
-#include "settings_eeprom.h"
+#include "hardware/storage.h"
 #include "settings.h"
 
 

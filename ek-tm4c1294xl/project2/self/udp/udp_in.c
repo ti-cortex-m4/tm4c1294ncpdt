@@ -6,10 +6,10 @@ UDP_IN,C
 
 #include "../main.h"
 #include "../settings.h"
-#include "../settings_eeprom.h"
 #include "../kernel/entities.h"
 #include "../kernel/log.h"
 #include "driverlib/sysctl.h"
+#include "../hardware/storage.h"
 #include "../uart/uart_log.h"
 #include "udp_pop.h"
 #include "udp_push.h"
