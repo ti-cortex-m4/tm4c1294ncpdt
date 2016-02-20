@@ -39,7 +39,7 @@ static err_t Result(ulong dw)
   return (dw == 0) ? ERR_OK : ERR_VAL;
 }
 
-err_t SaveEntity(entity const *pen)
+err_t SaveEntity(const entity * const pen)
 {
   switch(pen->eType)
   {
@@ -78,7 +78,7 @@ static void LoadString(char *sz, ulong dwEepRom)
 }
 
 
-void LoadEntity(entity const *pen)
+void LoadEntity(const entity * const pen)
 {
   switch(pen->eType)
   {
