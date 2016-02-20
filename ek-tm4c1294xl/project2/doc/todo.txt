@@ -13,15 +13,11 @@ rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib
 
 InitSettings check result
 SaveSettings check result 
-tcp_nagle_disable
 #define LWIP_PLATFORM_DIAG(msg)
-ASSERT
 
 // Free up the pbuf.  Note that we don't acknowledge receipt of the data since we want it to be retransmitted later.
 // If we already have a connection, kill it and start over.
 // Process the RX ring buffer data if space is available in the TCP output buffer.
-
-http://lwip.wikia.com/wiki/Raw/TCP
 
 как принимать TCP: sw01266.zip -> TelnetReceive
 for(q = p, pucData = q->payload; q != NULL; q = q->next)
@@ -53,8 +49,6 @@ watchdog
 F=R* F=R restart readonly_values
 установка скорости uart без рестарта
 
-name > 4*3
-
 return ERR_VAL&ERR_ARG CONSOLE_UART
 
 tibbo initialise routing_status buzz change_ip
@@ -62,6 +56,11 @@ tibbo defaults
 
 1 sec. delay
 
-minimise CONSOLE messages
+minimise CONSOLE messages sizes
 
 enet_s2e ISR priorities etc.
+
+все операции с entities в одно место из udp_in
+
+lwIP inside project
+

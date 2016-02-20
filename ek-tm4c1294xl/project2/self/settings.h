@@ -48,7 +48,7 @@ extern uint                    wLwIpDebugTimeout;
 
 
 
-uchar InitSettings(void);
+void  InitSettings(void);
 
 uchar SaveSettings(void);
 

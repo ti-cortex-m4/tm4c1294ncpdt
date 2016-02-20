@@ -57,6 +57,9 @@ typedef enum
 #include "entities_channels.h"
 
 
+extern const entity * const mpenEntities[];
+
+
 extern const entity enSerialNumber;
 
 extern const entity enDebugMode;

@@ -11,13 +11,6 @@ storage.c
 
 
 
-static err_t Result(ulong dw)
-{
-  return (dw == 0) ? ERR_OK : ERR_VAL;
-}
-
-
-
 static ulong SaveChar(uchar *pb, ulong dwEepRom)
 {
   ulong dw = *pb;
@@ -40,6 +33,11 @@ static ulong SaveString(char *sz, ulong dwEepRom)
   return EEPROMProgram((ulong *)sz, dwEepRom, 4*3);
 }
 
+
+static err_t Result(ulong dw)
+{
+  return (dw == 0) ? ERR_OK : ERR_VAL;
+}
 
 err_t SaveEntity(entity const *pen)
 {
