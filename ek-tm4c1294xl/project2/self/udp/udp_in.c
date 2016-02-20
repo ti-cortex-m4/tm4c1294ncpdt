@@ -339,6 +339,11 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
 //         CONSOLE_UART("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
          return err;
        }
+       case STRING:
+       {
+         err_t err = PopString(p, (char *)szDeviceName, NAME_SIZE, ibStart);
+         return err;
+       }
        default: ASSERT(false); return -1;
     }
   }
@@ -373,6 +378,7 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
       case CHAR: CmdCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRam); break;
       case INT: CmdIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRam); break;
       case IP: CmdIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRam); break;
+      case STRING: CmdString(pcb,p,addr,port,broadcast,(const char *)pen->pbRam); break;
       default: ASSERT(false); break;
     }
 

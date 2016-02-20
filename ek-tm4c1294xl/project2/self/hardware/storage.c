@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-storage,C
+storage.c
 
 
 ------------------------------------------------------------------------------*/
@@ -8,6 +8,13 @@ storage,C
 #include "driverlib/eeprom.h"
 #include "../kernel/entities.h"
 #include "storage.h"
+
+
+
+static err_t Result(ulong dw)
+{
+  return (dw == 0) ? ERR_OK : ERR_VAL;
+}
 
 
 
@@ -38,11 +45,11 @@ err_t SaveEntity(entity const *pen)
 {
   switch(pen->eType)
   {
-    case CHAR: return SaveChar(pen->pbRam, pen->dwEepRom);
-    case INT: return SaveInt(pen->pbRam, pen->dwEepRom);
-    case IP: return SaveLong(pen->pbRam, pen->dwEepRom);
-    case STRING: return SaveString(pen->pbRam, pen->dwEepRom);
-    default: ASSERT(false); return 0x80;
+    case CHAR: return Result(SaveChar(pen->pbRam, pen->dwEepRom));
+    case INT: return Result(SaveInt(pen->pbRam, pen->dwEepRom));
+    case IP: return Result(SaveLong(pen->pbRam, pen->dwEepRom));
+    case STRING: return Result(SaveString(pen->pbRam, pen->dwEepRom));
+    default: ASSERT(false); return ERR_ARG;
   }
 }
 

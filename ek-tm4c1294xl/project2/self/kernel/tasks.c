@@ -28,10 +28,10 @@ static void StartClientConnection(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
-  ulong dwIP = mdwDestinationIP[u];
+  ulong dw = mdwDestinationIP[u];
   CONSOLE("%u: connects as client to %u.%u.%u.%u port %u\n",
     u,
-    (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
+    (dw >> 24), (dw >> 16) & 0xFF, (dw >> 8) & 0xFF, dw & 0xFF,
     mwDestinationPort[u]);
 
   TelnetOpen(mdwDestinationIP[u], mwDestinationPort[u], u);

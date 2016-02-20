@@ -48,12 +48,12 @@ static err_t PopInt(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix) // TO
   return ERR_ARG;
 }
 
-err_t PopIntDec(struct pbuf *p, uint *pw, uchar ibStart)
+err_t PopIntDec(struct pbuf *p, uint *pw, const uchar ibStart)
 {
   return PopInt(p, pw, ibStart, 10);
 }
 
-err_t PopIntHex(struct pbuf *p, uint *pw, uchar ibStart)
+err_t PopIntHex(struct pbuf *p, uint *pw, const uchar ibStart)
 {
   return PopInt(p, pw, ibStart, 0x10);
 }
@@ -71,13 +71,13 @@ static err_t PopChar(struct pbuf *p, uchar *pb, uchar ibStart, uchar bRadix)
   return ERR_OK;
 }
 
-err_t PopCharDec(struct pbuf *p, uchar *pb, uchar ibStart)
+err_t PopCharDec(struct pbuf *p, uchar *pb, const uchar ibStart)
 {
   return PopChar(p, pb, ibStart, 10);
 }
 
 
-err_t PopIP(struct pbuf *p, ulong *pdw, uchar ibStart) // TODO
+err_t PopIP(struct pbuf *p, ulong *pdw, const uchar ibStart) // TODO
 {
   uchar *pb = p->payload;
 
@@ -122,22 +122,22 @@ err_t PopIP(struct pbuf *p, ulong *pdw, uchar ibStart) // TODO
 }
 
 
-err_t PopString(struct pbuf *p, char *sz, uchar bSize) // TODO
+err_t PopString(struct pbuf *p, char *sz, const uchar bSize, const uchar ibStart) // TODO
 {
   uchar *pb = p->payload;
 
   memset(sz, 0, bSize);
 
   uchar i;
-  for (i=3; i<p->len; i++)
+  for (i=ibStart; i<p->len; i++)
   {
     if (pb[i] == '|') return ERR_OK;
 
     char b = pb[i];
     if (b < 0x20) { CONSOLE_UART("WARNING PopString #1\n"); return ERR_VAL; }
 
-    if (i-3 >= bSize) { CONSOLE_UART("WARNING PopString #2\n"); return ERR_VAL; }
-    sz[i-3] = b;
+    if (i-ibStart >= bSize) { CONSOLE_UART("WARNING PopString #2\n"); return ERR_VAL; }
+    sz[i-ibStart] = b;
   }
 
   CONSOLE_UART("WARNING PopString #3\n");
