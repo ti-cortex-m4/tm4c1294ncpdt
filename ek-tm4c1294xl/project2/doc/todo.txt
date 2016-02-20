@@ -49,10 +49,7 @@ usTelnetLocalPort in client mode
 
 watchdog
 
-UDP debug
-memstat debug
-
-F=R* F=R restart
+F=R* F=R restart readonly_values
 установка скорости uart без рестарта
 
 name > 4*3
@@ -65,3 +62,5 @@ tibbo defaults
 1 sec. delay
 
 minimise CONSOLE messages
+
+enet_s2e ISR priorities etc.
