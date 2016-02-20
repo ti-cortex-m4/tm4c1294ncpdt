@@ -51,28 +51,16 @@ uint                    wLwIpDebugTimeout;
 
 
 
-uchar   InitSettings(void)
+void    InitSettings(void)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_EEPROM0);
 
-  uchar err = EEPROMInit();
-  if (err != EEPROM_INIT_OK) return err;
+  ulong code = EEPROMInit();
+  if (code != EEPROM_INIT_OK) {} // TODO
 
-  return LoadSettings();
+  LoadSettings();
 }
 
-
-/*
-uchar SaveDeviceName(void)
-{
-  return SaveString(szDeviceName, EEPROM_DEVICE_NAME);
-}
-
-uchar SaveOwnerName(void)
-{
-  return SaveString(szOwnerName, EEPROM_OWNER_NAME);
-}
-*/
 
 uchar    SaveSettings(void)
 {
