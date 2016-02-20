@@ -58,6 +58,7 @@ typedef enum
 
 
 extern const entity * const mpenEntities[];
+extern const uchar bEntitiesSize;
 
 
 extern const entity enSerialNumber;
