@@ -21,7 +21,7 @@ const entity enIP = {
 const entity enGateway = {
   EEPROM_GATEWAY, &dwGateway, sizeof(ulong), IP,
   0, MAX_LONG, 0x00000001,
-  "GW",
+  "GI",
   "AI=GI;D=Gateway IP-address;T=STRING;C=IPCTRL;F=R*",
 };
 

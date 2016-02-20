@@ -1,13 +1,13 @@
 /*------------------------------------------------------------------------------
-SETTINGS_EEPROM,C
+storage,C
 
 
 ------------------------------------------------------------------------------*/
 
-#include "main.h"
+#include "../main.h"
 #include "driverlib/eeprom.h"
-#include "kernel/entities.h"
-#include "settings_eeprom.h"
+#include "../kernel/entities.h"
+#include "storage.h"
 
 
 

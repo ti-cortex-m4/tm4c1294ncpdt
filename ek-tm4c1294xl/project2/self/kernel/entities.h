@@ -13,6 +13,7 @@ typedef enum
   CHAR,
   INT,
   IP,
+  STRING,
 } entityType;
 
 
