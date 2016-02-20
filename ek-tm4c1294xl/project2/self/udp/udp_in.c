@@ -155,8 +155,8 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   switch (wArg)
   {
     case 0: PushString("AI=$GENERAL;D=General;T=GROUP"); break;
-    case 1: PushString("AI=ON;D=Owner name;T=STRING;C=EDIT;MAXLEN=8;F=R*"); break;
-    case 2: PushString("AI=DN;D=Device name;T=STRING;C=EDIT;MAXLEN=8;F=R*"); break;
+    case 1: PushString(enOwnerName.szName); break;
+    case 2: PushString(enDeviceName.szName); break;
     case 3: PushString(enIP.szName); break;
     case 4: PushString(enGateway.szName); break;
     case 5: PushString(enNetmask.szName); break;
