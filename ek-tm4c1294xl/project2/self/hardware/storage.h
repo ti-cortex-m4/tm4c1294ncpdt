@@ -13,3 +13,5 @@ void LoadChar(uchar *pb, ulong dwEepRom);
 void LoadInt(uint *pw, ulong dwEepRom);
 void LoadLong(ulong *pdw, ulong dwEepRom);
 void LoadString(char *sz, ulong dwEepRom);
+
+err_t LoadResult(ulong dw);

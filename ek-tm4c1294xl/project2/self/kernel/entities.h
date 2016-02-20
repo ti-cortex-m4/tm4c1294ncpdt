@@ -10,26 +10,6 @@ entities.h
 
 typedef enum
 {
-  CHAR,
-  INT,
-  IP,
-  STRING,
-} entityType;
-
-
-typedef struct
-{
-  ulong         dwEepRom;
-  void         *pbRam;
-  uint          wSize;
-  entityType    eType;
-  ulong         dwMin, dwMax, dwDef;
-  const char    *szCode, *szName;
-} entity;
-
-
-typedef enum
-{
   ROUTING_MODE_SERVER = 0,
   ROUTING_MODE_CLIENT = 1,
 } routingMode;
@@ -53,6 +33,7 @@ typedef enum
 #endif
 
 
+#include "entity.h"
 #include "entities_general.h"
 #include "entities_channels.h"
 
