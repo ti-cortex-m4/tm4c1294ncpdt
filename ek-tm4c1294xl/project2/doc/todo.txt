@@ -44,7 +44,8 @@ TelnetWriteDiagInfo
 ^.*//\r\n
 
 валидация ibBaud,ibRoutingMode
-
+ // TODO min max def
+ 
 usTelnetLocalPort in client mode
 
 watchdog

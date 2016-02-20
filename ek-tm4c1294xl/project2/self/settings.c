@@ -62,22 +62,7 @@ uchar   InitSettings(void)
 }
 
 
-
-uchar SaveIP(void)
-{
-  return SaveLong(&dwIP, EEPROM_IP);
-}
-
-uchar SaveGateway(void)
-{
-  return SaveLong(&dwGateway, EEPROM_GATEWAY);
-}
-
-uchar SaveNetmask(void)
-{
-  return SaveLong(&dwNetmask, EEPROM_NETMASK);
-}
-
+/*
 uchar SaveDeviceName(void)
 {
   return SaveString(szDeviceName, EEPROM_DEVICE_NAME);
@@ -87,7 +72,7 @@ uchar SaveOwnerName(void)
 {
   return SaveString(szOwnerName, EEPROM_OWNER_NAME);
 }
-
+*/
 
 uchar    SaveSettings(void)
 {
@@ -99,12 +84,8 @@ uchar    SaveSettings(void)
   if ((err = SaveEntity(&enGateway)) != 0) return err;
   if ((err = SaveEntity(&enNetmask)) != 0) return err;
 
-  err = SaveString(szDeviceName, EEPROM_DEVICE_NAME);
-  if (err != 0) return err;
-
-  err = SaveString(szOwnerName, EEPROM_OWNER_NAME);
-  if (err != 0) return err;
-
+  if ((err = SaveEntity(&enDeviceName)) != 0) return err;
+  if ((err = SaveEntity(&enOwnerName)) != 0) return err;
 
   if ((err = SaveEntity(&enConnectionTimeout0)) != 0) return err;
   if ((err = SaveEntity(&enConnectionTimeout1)) != 0) return err;
@@ -160,8 +141,8 @@ uchar   LoadSettings(void)
     LoadEntity(&enGateway);
     LoadEntity(&enNetmask);
 
-    LoadString(szDeviceName, EEPROM_DEVICE_NAME);
-    LoadString(szOwnerName, EEPROM_OWNER_NAME);
+    LoadEntity(&enDeviceName);
+    LoadEntity(&enOwnerName);
 
     LoadEntity(&enConnectionTimeout0);
     LoadEntity(&enConnectionTimeout1);
