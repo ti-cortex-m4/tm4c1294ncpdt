@@ -52,6 +52,7 @@ typedef enum
 #endif
 
 
+#include "entities_general.h"
 #include "entities_channels.h"
 
 
