@@ -66,4 +66,5 @@ lwIP inside project
 
 const entity * const
 
+usnprintf, remove custom printf
 
