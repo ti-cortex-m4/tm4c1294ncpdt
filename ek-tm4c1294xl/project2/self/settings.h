@@ -53,10 +53,6 @@ extern uint                    cwErrEntitySave;
 
 void InitSettings(void);
 
-void LoadSettings(void);
-void LoadSettingsDef(void);
-void SaveSettings(void);
-
 ulong GetBaud(uchar ibPort);
 ulong getTelnetTimeout(uchar u);
 
