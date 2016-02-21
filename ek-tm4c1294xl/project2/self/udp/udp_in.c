@@ -95,17 +95,17 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
   PushString("A");
   PushArrayString(pbMAC, 6);
   PushString("/");
-  PushString("000001001");
+  PushString("000001001"); // TODO "000001001"
   PushString("/");
-  PushString("N**M*");
+  PushString("N**M*"); // TODO "N**M*"
   PushString("/");
-  PushString("**");
+  PushString("**"); // TODO "**"
   PushString("/");
   PushString(szOwnerName);
   PushString("/");
   PushString(szDeviceName);
   PushString("/");
-  PushString("4");
+  PushCharDec(UART_COUNT);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
