@@ -91,6 +91,14 @@ err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
 err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
+  uint wSfx = 0;
+
+  if (p->len > 1)
+  {
+    err_t err = PopSfx(p, &wSfx);
+    if (err != ERR_OK) return err;
+  }
+
   InitPush();
   PushString("A");
   PushArrayString(pbMAC, 6);
@@ -106,6 +114,11 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
   PushString(szDeviceName);
   PushString("/");
   PushCharDec(UART_COUNT);
+
+  if (p->len > 1)
+  {
+    PushSfx(wSfx);
+  }
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
