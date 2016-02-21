@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-entity,c
+entity.c
 
 
 ------------------------------------------------------------------------------*/
@@ -10,15 +10,15 @@ entity,c
 
 
 
-err_t SaveEntity(const entity * const pen)
+ulong SaveEntity(const entity * const pen)
 {
   switch(pen->eType)
   {
-    case CHAR: return LoadResult(SaveChar(pen->pbRam, pen->dwEepRom));
-    case INT: return LoadResult(SaveInt(pen->pbRam, pen->dwEepRom));
-    case IP: return LoadResult(SaveLong(pen->pbRam, pen->dwEepRom));
-    case STRING: return LoadResult(SaveString(pen->pbRam, pen->dwEepRom));
-    default: ASSERT(false); return ERR_ARG;
+    case CHAR: return SaveChar(pen->pbRam, pen->dwEepRom);
+    case INT: return SaveInt(pen->pbRam, pen->dwEepRom);
+    case IP: return SaveLong(pen->pbRam, pen->dwEepRom);
+    case STRING: return SaveString(pen->pbRam, pen->dwEepRom);
+    default: ASSERT(false); return MAX_LONG;
   }
 }
 

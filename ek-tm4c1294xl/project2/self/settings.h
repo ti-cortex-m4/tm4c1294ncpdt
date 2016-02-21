@@ -24,8 +24,8 @@ extern ulong                   dwIP;
 extern ulong                   dwGateway;
 extern ulong                   dwNetmask;
 
-extern char                    szDeviceName[NAME_SIZE];
 extern char                    szOwnerName[NAME_SIZE];
+extern char                    szDeviceName[NAME_SIZE];
 
 extern uchar                   mbConnectionTimeout[UART_COUNT];
 extern uchar                   mbRoutingMode[UART_COUNT];
@@ -46,13 +46,16 @@ extern uint                    wUdpDebugPort;
 extern bool                    fLwIpDebugFlag;
 extern uint                    wLwIpDebugTimeout;
 
+extern uint                    cwErrStorageInit;
+extern uint                    cwErrEntitySave;
 
 
-void  InitSettings(void);
 
-uchar SaveSettings(void);
+void InitSettings(void);
 
-uchar LoadSettings(void);
+void LoadSettings(void);
+void LoadSettingsDef(void);
+void SaveSettings(void);
 
 ulong GetBaud(uchar ibPort);
 ulong getTelnetTimeout(uchar u);
