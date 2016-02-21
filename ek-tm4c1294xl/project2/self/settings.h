@@ -52,6 +52,7 @@ extern uint                    cwErrEntitySave;
 
 
 void InitSettings(void);
+void ResetSettings(void);
 
 ulong GetBaud(uchar ibPort);
 ulong getTelnetTimeout(uchar u);
