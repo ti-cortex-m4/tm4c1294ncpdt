@@ -48,3 +48,47 @@ void LoadEntityDef(const entity * const pen)
     default: ASSERT(false); break;
   }
 }
+
+
+
+bool CheckEntity(const entity * const pen)
+{
+  switch(pen->eType)
+  {
+    case CHAR:
+    {
+      uchar *pb = (uchar *)pen->pbRam;
+      if ((*pb >= pen->dwMin) && (*pb <= pen->dwMin))
+        return true;
+      else
+      {
+        *pb = pen->dwDef;
+        return false;
+      }
+    }
+    case INT:
+    {
+      uint *pw = (uint *)pen->pbRam;
+      if ((*pw >= pen->dwMin) && (*pw <= pen->dwMin))
+        return true;
+      else
+      {
+        *pw = pen->dwDef;
+        return false;
+      }
+    }
+    case IP:
+    {
+      ulong *pdw = (ulong *)pen->pbRam;
+      if ((*pdw >= pen->dwMin) && (*pdw <= pen->dwMin))
+        return true;
+      else
+      {
+        *pdw = pen->dwDef;
+        return false;
+      }
+    }
+    case STRING: return true;
+    default: ASSERT(false); return true;
+  }
+}
