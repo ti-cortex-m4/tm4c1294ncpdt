@@ -118,6 +118,18 @@ void InitSettings(void)
 }
 
 
+void ResetSettings(void)
+{
+  uchar e;
+  for (e = 0; e < bEntitiesSize; e++)
+  {
+    const entity *pen = mpenEntities[e];
+    if ((pen->dwFlags & FLAG_DONT_RESET) == 0)
+      LoadEntityDef(pen);
+  }
+}
+
+
 
 ulong GetBaud(uchar ibPort)
 {

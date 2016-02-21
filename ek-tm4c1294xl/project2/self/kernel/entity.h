@@ -17,6 +17,12 @@ typedef enum
 } entityType;
 
 
+typedef enum
+{
+  FLAG_DONT_RESET = 1,
+} entityFlags;
+
+
 typedef struct
 {
   ulong         dwEepRom;

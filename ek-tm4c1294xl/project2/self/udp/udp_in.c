@@ -407,6 +407,9 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     SysCtlReset();
   } else if (IsCmd(p,"L")) {
     CmdString(pcb,p,addr,port,broadcast,"");
+  } else if (IsCmd(p,"I")) {
+    ResetSettings();
+    CmdString(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"O")) {
     CmdString(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"V")) {
