@@ -36,18 +36,9 @@ typedef enum
 #include "entity.h"
 #include "entities_general.h"
 #include "entities_channels.h"
+#include "entities_setup.h"
+#include "entities_debug.h"
 
 
 extern const entity * const mpenEntities[];
 extern const uchar bEntitiesSize;
-
-
-extern const entity enSerialNumber;
-
-extern const entity enDebugMode;
-
-extern const entity enUdpDebugIP;
-extern const entity enUdpDebugPort;
-
-extern const entity enLwIpDebugFlag;
-extern const entity enLwIpDebugTimeout;
