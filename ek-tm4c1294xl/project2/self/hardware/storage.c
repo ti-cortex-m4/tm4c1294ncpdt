@@ -6,7 +6,16 @@ storage.c
 
 #include "../main.h"
 #include "driverlib/eeprom.h"
+#include "driverlib/sysctl.h"
 #include "storage.h"
+
+
+
+ulong InitStorage(void)
+{
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_EEPROM0);
+  return EEPROMInit();
+}
 
 
 
@@ -56,11 +65,4 @@ void LoadLong(ulong *pdw, ulong dwEepRom)
 void LoadString(char *sz, ulong dwEepRom)
 {
   EEPROMRead((ulong *)sz, dwEepRom, 4*3);
-}
-
-
-
-err_t LoadResult(ulong dw)
-{
-  return (dw == 0) ? ERR_OK : ERR_VAL;
 }

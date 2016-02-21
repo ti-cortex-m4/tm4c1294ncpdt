@@ -31,6 +31,6 @@ typedef struct
 #endif
 
 
-err_t SaveEntity(const entity * const pen);
+ulong SaveEntity(const entity * const pen);
 void LoadEntity(const entity * const pen);
 void LoadEntityDef(const entity * const pen);
