@@ -12,7 +12,7 @@ entities_setup.c
 
 
 const entity enSerialNumber = {
-  EEPROM_SERIAL_NUMBER, &wSerialNumber, sizeof(uint), INT,
+  EEPROM_SERIAL_NUMBER, &wSerialNumber, sizeof(uint), INT, 0,
   0, 65535, 0,
   "SRNM",
   "AI=SRNM;D=Serial number;T=INT;C=EDIT;V=SRNM>65535?\"Serial number must be between 0 and 65535\":\"\"",

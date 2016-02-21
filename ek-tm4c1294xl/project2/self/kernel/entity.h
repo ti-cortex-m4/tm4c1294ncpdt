@@ -23,6 +23,7 @@ typedef struct
   void         *pbRam;
   uint          wSize;
   entityType    eType;
+  ulong         dwFlags;
   ulong         dwMin, dwMax, dwDef;
   const char    *szCode, *szName;
 } entity;
