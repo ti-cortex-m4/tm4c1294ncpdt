@@ -9,6 +9,7 @@ TODO
 #include "generated/eeprom.h"
 #include "hardware/storage.h"
 #include "kernel/entity.h"
+#include "kernel/log.h"
 #include "settings.h"
 
 
@@ -124,9 +125,13 @@ void ResetSettings(void)
   for (e = 0; e < bEntitiesSize; e++)
   {
     const entity *pen = mpenEntities[e];
-    if ((pen->dwFlags & FLAG_DONT_RESET) == 0)
+    if (((pen->dwFlags) & FLAG_DONT_RESET) == 0)
+    {
       LoadEntityDef(pen);
+    }
   }
+
+  SaveSettings();
 }
 
 
