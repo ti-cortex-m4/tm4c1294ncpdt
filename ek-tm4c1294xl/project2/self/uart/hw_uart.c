@@ -99,12 +99,12 @@ void    InitUart2(ulong dwSysClockFreq)
 
 void    InitUart1(ulong dwSysClockFreq)
 {
-//  SysCtlPeripheralEnable(SYSCTL_PERIPH_UART1);
-//  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_UART1);
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
 
-//  GPIOPinConfigure(GPIO_PA6_U2RX);
-//  GPIOPinConfigure(GPIO_PA7_U2TX);
-//  GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_6 | GPIO_PIN_7);
+  GPIOPinConfigure(GPIO_PB0_U1RX);
+  GPIOPinConfigure(GPIO_PB1_U1TX);
+  GPIOPinTypeUART(GPIO_PORTB_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
   UARTFIFOLevelSet(UART1_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
   UARTTxIntModeSet(UART1_BASE, UART_TXINT_MODE_EOT);
