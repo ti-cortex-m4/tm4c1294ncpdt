@@ -13,6 +13,7 @@ HW_UART.Ñ
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "driverlib/interrupt.h"
+#include "../kernel/log.h"
 #include "hw_uart.h"
 
 
@@ -20,10 +21,10 @@ HW_UART.Ñ
 static ulong GetBaudRate(uchar u)
 {
   ASSERT(u < UART_COUNT);
+  uchar ibBaudRate = mibBaudRate[u] < BAUD_RATE_COUNT ? mibBaudRate[u] : DEFAULT_BAUD_RATE;
 
-  uchar ibBaud = mibBaudRate[u] < BAUD_RATE_COUNT ? mibBaudRate[u] : DEFAULT_BAUD_RATE;
-  ASSERT(ibBaud < BAUD_RATE_COUNT);
-  return mdwBAUDS[ibBaud];
+  ASSERT(ibBaudRate < BAUD_RATE_COUNT);
+  return mdwBAUDS[ibBaudRate];
 }
 
 
@@ -31,53 +32,15 @@ static ulong GetParityMask(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
-  switch(ucParity)
+  switch(mibParity[u])
   {
-    case SERIAL_PARITY_NONE:
-    {
-      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
-      ulNewConfig |= UART_CONFIG_PAR_NONE;
-      g_sParameters.sPort[ulPort].ucParity = ucParity;
-      break;
-    }
+    case 0: return UART_CONFIG_PAR_NONE;
+    case 1: return UART_CONFIG_PAR_EVEN;
+    case 2: return UART_CONFIG_PAR_ODD;
+    case 3: return UART_CONFIG_PAR_ONE;
+    case 4: return UART_CONFIG_PAR_ZERO;
 
-    case SERIAL_PARITY_ODD:
-    {
-      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
-      ulNewConfig |= UART_CONFIG_PAR_ODD;
-      g_sParameters.sPort[ulPort].ucParity = ucParity;
-      break;
-    }
-
-    case SERIAL_PARITY_EVEN:
-    {
-      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
-      ulNewConfig |= UART_CONFIG_PAR_EVEN;
-      g_sParameters.sPort[ulPort].ucParity = ucParity;
-      break;
-    }
-
-    case SERIAL_PARITY_MARK:
-    {
-      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
-      ulNewConfig |= UART_CONFIG_PAR_ONE;
-      g_sParameters.sPort[ulPort].ucParity = ucParity;
-      break;
-    }
-
-    case SERIAL_PARITY_SPACE:
-    {
-      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
-      ulNewConfig |= UART_CONFIG_PAR_ZERO;
-      g_sParameters.sPort[ulPort].ucParity = ucParity;
-      break;
-    }
-
-    default:
-    {
-      ulNewConfig = ulCurrentConfig;
-      break;
-    }
+    default: CONSOLE("%u: WARNING parity %u", u, mibParity[u]); return UART_CONFIG_PAR_NONE;
   }
 }
 
@@ -85,30 +48,13 @@ static ulong GetDataBitsMask(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
-  switch(ucDataSize)
+  switch(mibDataBits[u])
   {
-    case 7:
-    {
-      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_WLEN_MASK);
-      ulNewConfig |= UART_CONFIG_WLEN_7;
-      g_sParameters.sPort[ulPort].ucDataSize = ucDataSize;
-      break;
-    }
+    case 0: return UART_CONFIG_WLEN_7;
+    case 1: return UART_CONFIG_WLEN_8;
 
-    case 8:
-    {
-      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_WLEN_MASK);
-      ulNewConfig |= UART_CONFIG_WLEN_8;
-      g_sParameters.sPort[ulPort].ucDataSize = ucDataSize;
-      break;
-    }
-
-    default:
-    {
-      ulNewConfig = ulCurrentConfig;
-      break;
-    }
- }
+    default: CONSOLE("%u: WARNING data bits %u", u, mibDataBits[u]); return UART_CONFIG_WLEN_8;
+  }
 }
 
 static ulong GetStopBitsMask(uchar u)
@@ -129,7 +75,7 @@ static void InitUart(uchar u, ulong dwUartBase, ulong dwInterrupt, ulong dwSysCl
   IntEnable(dwInterrupt);
   UARTIntEnable(dwUartBase, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  ulong dwConfig = (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE);
+  ulong dwConfig = (GetDataBitsMask(u) | GetStopBitsMask(u) | GetParityMask(u));
   UARTConfigSetExpClk(dwUartBase, dwSysClockFreq, GetBaudRate(u), dwConfig);
 }
 
