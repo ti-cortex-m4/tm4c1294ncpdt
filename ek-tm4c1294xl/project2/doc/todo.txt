@@ -68,3 +68,4 @@ const entity * const
 
 usnprintf, remove custom printf
 
+dont reset serial number

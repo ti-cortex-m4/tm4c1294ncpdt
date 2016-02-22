@@ -221,13 +221,11 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
     case 46: PushString("AI=$SETTINGS;D=Settings;T=GROUP"); break;
     case 47: PushString(enSerialNumber.szName); break;
-
-    case 48: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
-    case 49: PushString(enDebugMode.szName); break;
-    case 50: PushString(enUdpDebugIP.szName); break;
-    case 51: PushString(enUdpDebugPort.szName); break;
-    case 52: PushString(enLwIpDebugFlag.szName); break;
-    case 53: PushString(enLwIpDebugTimeout.szName); break;
+    case 48: PushString(enDebugMode.szName); break;
+    case 49: PushString(enUdpDebugIP.szName); break;
+    case 50: PushString(enUdpDebugPort.szName); break;
+    case 51: PushString(enLwIpDebugFlag.szName); break;
+    case 52: PushString(enLwIpDebugTimeout.szName); break;
 
     default: ASSERT(false); break; // TODO
   }
@@ -239,70 +237,6 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
-/*
-err_t SON(struct pbuf *p)
-{
-  err_t err = PopString(p, (char *)szOwnerName, NAME_SIZE);
-  if (err != ERR_OK) return err;
-
-  err = SaveOwnerName();
-  if (err != ERR_OK) return err;
-
-  return ERR_OK;
-}
-
-
-err_t SDN(struct pbuf *p)
-{
-  err_t err = PopString(p, (char *)szDeviceName, NAME_SIZE);
-  if (err != ERR_OK) return err;
-
-  err = SaveDeviceName();
-  if (err != ERR_OK) return err;
-
-  return ERR_OK;
-}
-
-
-err_t SIP(struct pbuf *p)
-{
-  ulong dw = 0;
-  err_t err = PopIP(p, &dw, 3);
-  if (err != ERR_OK) return err;
-
-  dwIP = dw;
-  err = SaveIP();
-  if (err != ERR_OK) return err;
-
-  return ERR_OK;
-}
-
-err_t SGI(struct pbuf *p)
-{
-  ulong dw = 0;
-  err_t err = PopIP(p, &dw, 3);
-  if (err != ERR_OK) return err;
-
-  dwGateway = dw;
-  err = SaveGateway();
-  if (err != ERR_OK) return err;
-
-  return ERR_OK;
-}
-
-err_t SNM(struct pbuf *p)
-{
-  ulong dw = 0;
-  err_t err = PopIP(p, &dw, 3);
-  if (err != ERR_OK) return err;
-
-  dwNetmask = dw;
-  err = SaveNetmask();
-  if (err != ERR_OK) return err;
-
-  return ERR_OK;
-}
-*/
 static bool IsCmd(struct pbuf *p, const char *szCmd)
 {
   uchar *pb = p->payload;
@@ -448,7 +382,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"54");
+    CmdString(pcb,p,addr,port,broadcast,"53");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {

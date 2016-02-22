@@ -20,6 +20,8 @@ SETTINGS,H
 
 extern uchar                   pbMAC[6];
 
+extern uint                    wSerialNumber;
+
 extern ulong                   dwIP;
 extern ulong                   dwGateway;
 extern ulong                   dwNetmask;
@@ -35,8 +37,6 @@ extern ulong                   mdwDestinationIP[UART_COUNT];
 extern uint                    mwDestinationPort[UART_COUNT];
 
 extern uchar                   mibBaudRate[UART_COUNT];
-
-extern uint                    wSerialNumber;
 
 extern bool                    ibDebugMode;
 
