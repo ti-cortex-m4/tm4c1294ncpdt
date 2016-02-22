@@ -72,4 +72,4 @@ const entity * const mpenEntities[] = {
   &enLwIpDebugTimeout,
 };
 
-const uchar bEntitiesSize = 32; //  TODO sizeof(mpenEntities) / sizeof(mpenEntities[0]);
+const uchar bEntitiesSize = sizeof(mpenEntities) / sizeof(mpenEntities[0]);

@@ -4,6 +4,7 @@ HW_UART,H
 
 ------------------------------------------------------------------------------*/
 
-void    InitUART0(ulong dwSysClockFreq);
-void    InitUART4(ulong dwSysClockFreq);
-void    InitUART3(ulong dwSysClockFreq);
+void    InitUart0(ulong dwSysClockFreq);
+void    InitUart4(ulong dwSysClockFreq);
+void    InitUart3(ulong dwSysClockFreq);
+void    InitUart2(ulong dwSysClockFreq);

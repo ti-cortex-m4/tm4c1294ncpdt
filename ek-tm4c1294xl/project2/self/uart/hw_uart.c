@@ -17,7 +17,7 @@ HW_UART.Ñ
 
 
 
-void    InitUART0(ulong dwSysClockFreq)
+void    InitUart0(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -37,7 +37,7 @@ void    InitUART0(ulong dwSysClockFreq)
 }
 
 
-void    InitUART4(ulong dwSysClockFreq)
+void    InitUart4(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART4);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -53,11 +53,11 @@ void    InitUART4(ulong dwSysClockFreq)
   IntEnable(INT_UART4);
   UARTIntEnable(UART4_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  UARTConfigSetExpClk(UART4_BASE, dwSysClockFreq, GetBaud(0), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  UARTConfigSetExpClk(UART4_BASE, dwSysClockFreq, GetBaud(1), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
 
 
-void    InitUART3(ulong dwSysClockFreq)
+void    InitUart3(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART3);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -73,5 +73,25 @@ void    InitUART3(ulong dwSysClockFreq)
   IntEnable(INT_UART3);
   UARTIntEnable(UART3_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  UARTConfigSetExpClk(UART3_BASE, dwSysClockFreq, GetBaud(1), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  UARTConfigSetExpClk(UART3_BASE, dwSysClockFreq, GetBaud(2), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+}
+
+
+void    InitUart2(ulong dwSysClockFreq)
+{
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_UART2);
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+
+  GPIOPinConfigure(GPIO_PA6_U2RX);
+  GPIOPinConfigure(GPIO_PA7_U2TX);
+  GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_6 | GPIO_PIN_7);
+
+  UARTFIFOLevelSet(UART2_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(UART2_BASE, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(UART2_BASE);
+
+  IntEnable(INT_UART2);
+  UARTIntEnable(UART2_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+
+  UARTConfigSetExpClk(UART2_BASE, dwSysClockFreq, GetBaud(3), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
