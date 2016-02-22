@@ -96,7 +96,7 @@ void TaskLwIpDebug(void)
 {
 static uint wTimeout;
 
-  if ((fLwIpDebugFlag) && (++wTimeout > wLwIpDebugTimeout))
+  if ((fLwIpDebugFlag) && (++wTimeout > wLwIpDebugTimeout*10))
   {
     wTimeout = 0;
     stats_display();

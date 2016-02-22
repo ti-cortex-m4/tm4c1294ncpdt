@@ -69,3 +69,5 @@ const entity * const
 usnprintf, remove custom printf
 
 uart stop bits
+
+убрать enity szCode
