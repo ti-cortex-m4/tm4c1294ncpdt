@@ -14,7 +14,7 @@ TODO
 
 
 
-static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
+const ulong             mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
 #define SETTINGS_LABEL  7
@@ -139,10 +139,6 @@ void ResetSettings(void)
 
   SaveSettings();
 }
-
-
-
-
 
 
 //! The timeout for the TCP connection used for the telnet session, specified in seconds.

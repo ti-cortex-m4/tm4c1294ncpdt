@@ -24,6 +24,7 @@ SETTINGS,H
 #define DEFAULT_DATA_BITS 1
 
 
+extern const ulong             mdwBAUDS[BAUD_RATE_COUNT];
 
 extern uchar                   pbMAC[6];
 
