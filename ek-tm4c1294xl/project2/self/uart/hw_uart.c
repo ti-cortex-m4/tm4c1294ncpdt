@@ -17,6 +17,22 @@ HW_UART.Ñ
 
 
 
+void InitUart(uchar u, ulong dwUartBase, ulong dwInterrupt, ulong dwSysClockFreq)
+{
+  ASSERT(u < UART_COUNT);
+
+  UARTFIFOLevelSet(dwUartBase, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(dwUartBase, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(dwUartBase);
+
+  IntEnable(dwInterrupt);
+  UARTIntEnable(dwUartBase, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+
+  ulong dwConfig = (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE);
+  UARTConfigSetExpClk(dwUartBase, dwSysClockFreq, GetBaudRate(u), dwConfig);
+}
+
+
 void    InitUart0(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
@@ -33,7 +49,7 @@ void    InitUart0(ulong dwSysClockFreq)
   IntEnable(INT_UART0);
   UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  UARTConfigSetExpClk(UART0_BASE, dwSysClockFreq, GetBaud(0), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  UARTConfigSetExpClk(UART0_BASE, dwSysClockFreq, GetBaudRate(0), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
 
 
@@ -53,7 +69,7 @@ void    InitUart4(ulong dwSysClockFreq)
   IntEnable(INT_UART4);
   UARTIntEnable(UART4_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  UARTConfigSetExpClk(UART4_BASE, dwSysClockFreq, GetBaud(1), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  UARTConfigSetExpClk(UART4_BASE, dwSysClockFreq, GetBaudRate(1), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
 
 
@@ -73,7 +89,7 @@ void    InitUart3(ulong dwSysClockFreq)
   IntEnable(INT_UART3);
   UARTIntEnable(UART3_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  UARTConfigSetExpClk(UART3_BASE, dwSysClockFreq, GetBaud(2), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  UARTConfigSetExpClk(UART3_BASE, dwSysClockFreq, GetBaudRate(2), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
 
 
@@ -93,7 +109,7 @@ void    InitUart2(ulong dwSysClockFreq)
   IntEnable(INT_UART2);
   UARTIntEnable(UART2_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  UARTConfigSetExpClk(UART2_BASE, dwSysClockFreq, GetBaud(3), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  UARTConfigSetExpClk(UART2_BASE, dwSysClockFreq, GetBaudRate(3), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
 
 
@@ -113,5 +129,5 @@ void    InitUart1(ulong dwSysClockFreq)
   IntEnable(INT_UART1);
   UARTIntEnable(UART1_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  UARTConfigSetExpClk(UART1_BASE, dwSysClockFreq, GetBaud(4), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  UARTConfigSetExpClk(UART1_BASE, dwSysClockFreq, GetBaudRate(4), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }

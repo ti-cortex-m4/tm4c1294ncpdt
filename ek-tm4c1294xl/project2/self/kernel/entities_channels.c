@@ -261,3 +261,75 @@ const entity enBaudRate4 = {
   "BR@4",
   "AI=BR@4;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13",
 };
+
+
+const entity enParity0 = {
+  EEPROM_PARITY_0, &mibParity[0], sizeof(uchar), CHAR, 0,
+  0, PARITY_COUNT-1, DEFAULT_PARITY,
+  "PR@0",
+  "AI=PR@0;D=Parity;T=INT;C=STATIC;O=0-None/0/1-Even/1/2-Odd/2/3-Mark/3/4-Space/4",
+};
+
+const entity enParity1 = {
+  EEPROM_PARITY_1, &mibParity[1], sizeof(uchar), CHAR, 0,
+  0, PARITY_COUNT-1, DEFAULT_PARITY,
+  "PR@1",
+  "AI=PR@1;D=Parity;T=INT;C=STATIC;O=0-None/0/1-Even/1/2-Odd/2/3-Mark/3/4-Space/4",
+};
+
+const entity enParity2 = {
+  EEPROM_PARITY_2, &mibParity[2], sizeof(uchar), CHAR, 0,
+  0, PARITY_COUNT-1, DEFAULT_PARITY,
+  "PR@2",
+  "AI=PR@2;D=Parity;T=INT;C=STATIC;O=0-None/0/1-Even/1/2-Odd/2/3-Mark/3/4-Space/4",
+};
+
+const entity enParity3 = {
+  EEPROM_PARITY_3, &mibParity[3], sizeof(uchar), CHAR, 0,
+  0, PARITY_COUNT-1, DEFAULT_PARITY,
+  "PR@3",
+  "AI=PR@3;D=Parity;T=INT;C=STATIC;O=0-None/0/1-Even/1/2-Odd/2/3-Mark/3/4-Space/4",
+};
+
+const entity enParity4 = {
+  EEPROM_PARITY_4, &mibParity[4], sizeof(uchar), CHAR, 0,
+  0, PARITY_COUNT-1, DEFAULT_PARITY,
+  "PR@4",
+  "AI=PR@4;D=Parity;T=INT;C=STATIC;O=0-None/0/1-Even/1/2-Odd/2/3-Mark/3/4-Space/4",
+};
+
+
+const entity enDataBits0 = {
+  EEPROM_DATA_BITS_0, &mibDataBits[0], sizeof(uchar), CHAR, 0,
+  0, DATA_BITS_COUNT-1, DEFAULT_DATA_BITS,
+  "DB@0",
+  "AI=DB@0;D=Data bits;T=INT;C=STATIC;O=0-7 bits/0/1-8 bits/1",
+};
+
+const entity enDataBits1 = {
+  EEPROM_DATA_BITS_1, &mibDataBits[1], sizeof(uchar), CHAR, 0,
+  0, DATA_BITS_COUNT-1, DEFAULT_DATA_BITS,
+  "DB@1",
+  "AI=DB@1;D=Data bits;T=INT;C=STATIC;O=0-7 bits/0/1-8 bits/1",
+};
+
+const entity enDataBits2 = {
+  EEPROM_DATA_BITS_2, &mibDataBits[2], sizeof(uchar), CHAR, 0,
+  0, DATA_BITS_COUNT-1, DEFAULT_DATA_BITS,
+  "DB@2",
+  "AI=DB@2;D=Data bits;T=INT;C=STATIC;O=0-7 bits/0/1-8 bits/1",
+};
+
+const entity enDataBits3 = {
+  EEPROM_DATA_BITS_3, &mibDataBits[3], sizeof(uchar), CHAR, 0,
+  0, DATA_BITS_COUNT-1, DEFAULT_DATA_BITS,
+  "DB@3",
+  "AI=DB@3;D=Data bits;T=INT;C=STATIC;O=0-7 bits/0/1-8 bits/1",
+};
+
+const entity enDataBits4 = {
+  EEPROM_DATA_BITS_4, &mibDataBits[4], sizeof(uchar), CHAR, 0,
+  0, DATA_BITS_COUNT-1, DEFAULT_DATA_BITS,
+  "DB@4",
+  "AI=DB@4;D=Data bits;T=INT;C=STATIC;O=0-7 bits/0/1-8 bits/1",
+};
