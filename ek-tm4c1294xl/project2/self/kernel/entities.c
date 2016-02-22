@@ -11,7 +11,10 @@ entities,C
 
 
 
-const entity * const mpenEntities[] = {
+const entity * const mpenEntities[] =
+{
+  &enSerialNumber,
+
   &enIP,
   &enGateway,
   &enNetmask,
@@ -60,8 +63,6 @@ const entity * const mpenEntities[] = {
   &enBaudRate2,
   &enBaudRate3,
   &enBaudRate4,
-
-  &enSerialNumber,
 
   &enDebugMode,
 

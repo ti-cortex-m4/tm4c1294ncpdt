@@ -9,6 +9,7 @@ TELNET,C
 #include "lwip/sys.h"
 #include "../kernel/log.h"
 #include "../uart/serial.h"
+#include "../uart/io_mode.h"
 #include "../settings.h"
 #include "telnet.h"
 
@@ -153,6 +154,8 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 //*****************************************************************************
 static void TelnetProcessCharacter(uint8_t ucChar, tTelnetSession *pState)
 {
+    OutputMode(pState->ulSerialPort);
+
     // Write this character to the UART with no telnet processing.
     SerialSend(pState->ulSerialPort, ucChar);
 }
