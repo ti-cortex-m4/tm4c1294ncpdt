@@ -21,6 +21,7 @@ MAIN,C
 #include "uart/uart.h"
 #include "uart/serial.h"
 #include "uart/uart_log.h"
+#include "uart/io_mode.h"
 #include "udp/udp_log.h"
 #include "udp/udp_handler.h"
 #include "tcp/tcp_handler.h"
@@ -103,6 +104,7 @@ int     main(void)
 
   InitSysTick(dwSysClockFreq);
   InitUART(dwSysClockFreq);
+  InitIoModes();
   InitTimer1(dwSysClockFreq);
 
   // Set the interrupt priorities.  We set the SysTick interrupt to a higher

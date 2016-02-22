@@ -20,31 +20,17 @@ SERIAL,C
 
 
 
-//! The buffer used to hold characters received from the UART0.
-static uint8_t g_pucRX0Buffer[RX_RING_BUF_SIZE];
+// The buffer used to hold characters received from the UARTs.
+static uint8_t mmbRxBuf[UART_COUNT][RX_RING_BUF_SIZE];
 
-//! The buffer used to hold characters to be sent to the UART0.
-static uint8_t g_pucTX0Buffer[TX_RING_BUF_SIZE];
-
-
-//! The buffer used to hold characters received from the UART1.
-static uint8_t g_pucRX1Buffer[RX_RING_BUF_SIZE];
-
-//! The buffer used to hold characters to be sent to the UART1.
-static uint8_t g_pucTX1Buffer[TX_RING_BUF_SIZE];
+// The buffer used to hold characters to be sent to the UARTs.
+static uint8_t mmbTxBuf[UART_COUNT][TX_RING_BUF_SIZE];
 
 
-//! The buffer used to hold characters received from the UART1.
-static uint8_t g_pucRX2Buffer[RX_RING_BUF_SIZE];
-
-//! The buffer used to hold characters to be sent to the UART1.
-static uint8_t g_pucTX2Buffer[TX_RING_BUF_SIZE];
-
-
-//! The ring buffers used to hold characters received from the UARTs.
+// The ring buffers used to hold characters received from the UARTs.
 static tRingBufObject g_sRxBuf[UART_COUNT];
 
-//! The ring buffers used to hold characters to be sent to the UARTs.
+// The ring buffers used to hold characters to be sent to the UARTs.
 static tRingBufObject g_sTxBuf[UART_COUNT];
 
 
@@ -1273,15 +1259,12 @@ SerialSetFactory(uint32_t ulPort)
 //*****************************************************************************
 void SerialInit(void)
 {
-    // Initialize the ring buffers used by the UART Drivers.
-    RingBufInit(&g_sRxBuf[0], g_pucRX0Buffer, sizeof(g_pucRX0Buffer));
-    RingBufInit(&g_sTxBuf[0], g_pucTX0Buffer, sizeof(g_pucTX0Buffer));
-
-    RingBufInit(&g_sRxBuf[1], g_pucRX1Buffer, sizeof(g_pucRX1Buffer));
-    RingBufInit(&g_sTxBuf[1], g_pucTX1Buffer, sizeof(g_pucTX1Buffer));
-
-    RingBufInit(&g_sRxBuf[2], g_pucRX2Buffer, sizeof(g_pucRX2Buffer));
-    RingBufInit(&g_sTxBuf[2], g_pucTX2Buffer, sizeof(g_pucTX2Buffer));
+    uchar u;
+    for(u = 0; u < UART_COUNT; u++)
+    {
+        RingBufInit(&g_sRxBuf[u], mmbRxBuf[u], sizeof(mmbRxBuf[u]));
+        RingBufInit(&g_sTxBuf[u], mmbTxBuf[u], sizeof(mmbTxBuf[u]));
+    }
 
 #if false
     // Configure the Port 0 pins appropriately.

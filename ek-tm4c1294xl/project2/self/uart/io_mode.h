@@ -20,3 +20,6 @@ typedef enum
 
 
 void InitIoModes(void);
+
+void InputMode(uchar u);
+void OutputMode(uchar u);
