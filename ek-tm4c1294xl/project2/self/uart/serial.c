@@ -136,8 +136,7 @@ static void SerialUARTIntHandler(uint32_t ulPort)
                 UARTSpaceAvail(g_ulUARTBase[ulPort]))
         {
             // Write the next character into the transmit FIFO.
-            UARTCharPut(g_ulUARTBase[ulPort],
-                        RingBufReadOne(&g_sTxBuf[ulPort]));
+            UARTCharPut(g_ulUARTBase[ulPort], RingBufReadOne(&g_sTxBuf[ulPort]));
         }
 
         InputMode(ulPort);
@@ -153,31 +152,30 @@ static void SerialUARTIntHandler(uint32_t ulPort)
 //!
 //! \return None.
 //*****************************************************************************
-//void SerialUART0IntHandler(void)
-void UART0IntHandler(void)
+
+void Uart0IntHandler(void)
 {
-    SerialUARTIntHandler(0);
+  SerialUARTIntHandler(0);
 }
 
-//void SerialUART1IntHandler(void)
-void UART4IntHandler(void)
+void Uart4IntHandler(void)
 {
-    SerialUARTIntHandler(1);
+  SerialUARTIntHandler(1);
 }
 
-void UART3IntHandler(void)
+void Uart3IntHandler(void)
 {
-    SerialUARTIntHandler(2);
+  SerialUARTIntHandler(2);
 }
 
-void UART2IntHandler(void)
+void Uart2IntHandler(void)
 {
-    SerialUARTIntHandler(3);
+  SerialUARTIntHandler(3);
 }
 
-void UART1IntHandler(void)
+void Uart1IntHandler(void)
 {
-    SerialUARTIntHandler(4);
+  SerialUARTIntHandler(4);
 }
 
 #if false
