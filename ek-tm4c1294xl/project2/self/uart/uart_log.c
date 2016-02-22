@@ -22,10 +22,10 @@ void    LogTimer_1000Hz(void)
 */
 
 
-void    InitUartLog(ulong dwSysClockFreq)
+void    InitUartLog(ulong dwClockFreq)
 {
 #ifdef DEBUG
-  UARTStdioConfig(0, 115200, dwSysClockFreq);
+  UARTStdioConfig(0, 115200, dwClockFreq);
 #endif
 }
 

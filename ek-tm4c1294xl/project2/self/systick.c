@@ -45,12 +45,12 @@ void    SysTickIntHandler(void)
 
 
 
-void    InitSysTick(ulong dwSysClockFreq)
+void    InitSysTick(ulong dwClockFreq)
 {
   //
   // Configure SysTick for a periodic interrupt.
   //
-  SysTickPeriodSet(dwSysClockFreq / SYSTICKHZ);
+  SysTickPeriodSet(dwClockFreq / SYSTICKHZ);
   SysTickEnable();
   SysTickIntEnable();
 }
