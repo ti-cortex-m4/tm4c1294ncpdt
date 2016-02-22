@@ -154,6 +154,8 @@ static err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 //*****************************************************************************
 static void TelnetProcessCharacter(uint8_t ucChar, tTelnetSession *pState)
 {
+    pState->ulConnectionTimeout = 0;
+
     OutputMode(pState->ulSerialPort);
 
     // Write this character to the UART with no telnet processing.

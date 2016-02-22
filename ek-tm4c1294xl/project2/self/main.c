@@ -123,7 +123,7 @@ int     main(void)
 
   while (true)
   {
-    SysCtlDelay(SysCtlClockGet());
+    DelayMillySecond(100);
 
     TaskConnections();
     TaskLwIpDebug();

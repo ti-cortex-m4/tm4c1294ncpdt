@@ -107,7 +107,7 @@ fn_io_mode mfnOutputModes[UART_COUNT] =
 void InputMode(uchar u)
 {
   ASSERT(u < UART_COUNT);
-  UdpPrintF("input mode: %u\n",u);
+  UdpPrintF("%u: input mode\n",u);
   (*mfnInputModes[u])();
 }
 
@@ -115,7 +115,7 @@ void InputMode(uchar u)
 void OutputMode(uchar u)
 {
   ASSERT(u < UART_COUNT);
-  UdpPrintF("output mode: %u\n",u);
+  UdpPrintF("%u: output mode\n",u);
   (*mfnOutputModes[u])();
 }
 
