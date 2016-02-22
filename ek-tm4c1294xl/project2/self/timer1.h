@@ -4,4 +4,4 @@ TIMER1,H
 
 ------------------------------------------------------------------------------*/
 
-void    InitTimer1(ulong dwSysClockFreq);
+void    InitTimer1(ulong dwClockFreq);

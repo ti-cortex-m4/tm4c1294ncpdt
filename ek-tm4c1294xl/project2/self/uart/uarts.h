@@ -4,4 +4,4 @@ uarts.h
 
 ------------------------------------------------------------------------------*/
 
-void InitUarts(ulong dwSysClockFreq);
+void InitUarts(ulong dwClockFreq);

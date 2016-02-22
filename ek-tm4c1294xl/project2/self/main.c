@@ -70,7 +70,7 @@ int     main(void)
   SysCtlMOSCConfigSet(SYSCTL_MOSC_HIGHFREQ);
 
   // Run from the PLL at 120 MHz.
-  ulong dwSysClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
+  ulong dwClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
   // Configure the device pins.
   PinoutSet(true, false);
@@ -83,7 +83,7 @@ int     main(void)
 
   InitSettings();
 
-  InitUartLog(dwSysClockFreq);
+  InitUartLog(dwClockFreq);
 
   pbMAC[0] = 0x00;
   pbMAC[1] = 0x1B;
@@ -92,7 +92,7 @@ int     main(void)
   pbMAC[4] = wSerialNumber / 0x100;
   pbMAC[5] = wSerialNumber % 0x100;
 
-  lwIPInit(dwSysClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+  lwIPInit(dwClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
   InitUdpLog();
 
@@ -102,10 +102,10 @@ int     main(void)
   SerialInit();
   TelnetInit();
 
-  InitSysTick(dwSysClockFreq);
-  InitUarts(dwSysClockFreq);
+  InitSysTick(dwClockFreq);
+  InitUarts(dwClockFreq);
   InitIoModes();
-  InitTimer1(dwSysClockFreq);
+  InitTimer1(dwClockFreq);
 
   // Set the interrupt priorities.  We set the SysTick interrupt to a higher
   // priority than the Ethernet interrupt to ensure that the file system

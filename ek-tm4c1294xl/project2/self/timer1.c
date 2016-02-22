@@ -20,12 +20,12 @@ TIMER1,C
 
 
 
-void    InitTimer1(ulong dwSysClockFreq)
+void    InitTimer1(ulong dwClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
 
   TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);
-  TimerLoadSet(TIMER1_BASE, TIMER_A, dwSysClockFreq / TIMER1_FREQ);
+  TimerLoadSet(TIMER1_BASE, TIMER_A, dwClockFreq / TIMER1_FREQ);
 
   IntEnable(INT_TIMER1A);
   TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);

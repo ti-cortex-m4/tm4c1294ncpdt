@@ -4,4 +4,4 @@ SYSTICK,H
 
 ------------------------------------------------------------------------------*/
 
-void    InitSysTick(ulong dwSysClockFreq);
+void    InitSysTick(ulong dwClockFreq);
