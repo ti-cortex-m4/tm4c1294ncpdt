@@ -16,6 +16,7 @@ SERIAL,C
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "utils/ringbuf.h"
+#include "../uart/io_mode.h"
 #include "serial.h"
 
 
@@ -40,6 +41,8 @@ static const uint32_t g_ulUARTBase[UART_COUNT] =
     UART0_BASE,
     UART4_BASE,
     UART3_BASE,
+    UART2_BASE,
+    UART1_BASE,
 };
 
 
@@ -136,6 +139,8 @@ static void SerialUARTIntHandler(uint32_t ulPort)
             UARTCharPut(g_ulUARTBase[ulPort],
                         RingBufReadOne(&g_sTxBuf[ulPort]));
         }
+
+        InputMode(ulPort);
     }
 }
 
@@ -163,6 +168,16 @@ void UART4IntHandler(void)
 void UART3IntHandler(void)
 {
     SerialUARTIntHandler(2);
+}
+
+void UART2IntHandler(void)
+{
+    SerialUARTIntHandler(3);
+}
+
+void UART1IntHandler(void)
+{
+    SerialUARTIntHandler(4);
 }
 
 #if false

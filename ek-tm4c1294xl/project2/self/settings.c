@@ -70,7 +70,11 @@ static void LoadSettingsDef(void)
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
-    LoadEntityDef(mpenEntities[e]);
+    const entity *pen = mpenEntities[e];
+    if (pen != &enSerialNumber)
+    {
+      LoadEntityDef(pen);
+    }
   }
 }
 
