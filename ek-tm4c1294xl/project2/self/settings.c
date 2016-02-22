@@ -142,12 +142,7 @@ void ResetSettings(void)
 
 
 
-ulong GetBaudRate(uchar ibPort)
-{
-  uchar ibBaud = mibBaudRate[ibPort] < BAUD_RATE_COUNT ? mibBaudRate[ibPort] : DEFAULT_BAUD_RATE;
-  ASSERT(ibBaud < BAUD_RATE_COUNT);
-  return mdwBAUDS[ibBaud];
-}
+
 
 
 //! The timeout for the TCP connection used for the telnet session, specified in seconds.
