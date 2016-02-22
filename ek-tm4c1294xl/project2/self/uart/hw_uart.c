@@ -17,7 +17,7 @@ HW_UART.Ñ
 
 
 
-void InitUart(uchar u, ulong dwUartBase, ulong dwInterrupt, ulong dwSysClockFreq)
+static void InitUart(uchar u, ulong dwUartBase, ulong dwInterrupt, ulong dwSysClockFreq)
 {
   ASSERT(u < UART_COUNT);
 
@@ -33,7 +33,8 @@ void InitUart(uchar u, ulong dwUartBase, ulong dwInterrupt, ulong dwSysClockFreq
 }
 
 
-void    InitUart0(ulong dwSysClockFreq)
+
+void InitUart0(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -42,18 +43,11 @@ void    InitUart0(ulong dwSysClockFreq)
   GPIOPinConfigure(GPIO_PA1_U0TX);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
-  UARTFIFOLevelSet(UART0_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
-  UARTTxIntModeSet(UART0_BASE, UART_TXINT_MODE_EOT);
-  UARTFIFOEnable(UART0_BASE);
-
-  IntEnable(INT_UART0);
-  UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
-
-  UARTConfigSetExpClk(UART0_BASE, dwSysClockFreq, GetBaudRate(0), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  InitUart(0, UART0_BASE, INT_UART0, dwSysClockFreq);
 }
 
 
-void    InitUart4(ulong dwSysClockFreq)
+void InitUart4(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART4);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -62,18 +56,11 @@ void    InitUart4(ulong dwSysClockFreq)
   GPIOPinConfigure(GPIO_PA3_U4TX);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_2 | GPIO_PIN_3);
 
-  UARTFIFOLevelSet(UART4_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
-  UARTTxIntModeSet(UART4_BASE, UART_TXINT_MODE_EOT);
-  UARTFIFOEnable(UART4_BASE);
-
-  IntEnable(INT_UART4);
-  UARTIntEnable(UART4_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
-
-  UARTConfigSetExpClk(UART4_BASE, dwSysClockFreq, GetBaudRate(1), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  InitUart(1, UART4_BASE, INT_UART4, dwSysClockFreq);
 }
 
 
-void    InitUart3(ulong dwSysClockFreq)
+void InitUart3(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART3);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -82,18 +69,11 @@ void    InitUart3(ulong dwSysClockFreq)
   GPIOPinConfigure(GPIO_PA5_U3TX);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_4 | GPIO_PIN_5);
 
-  UARTFIFOLevelSet(UART3_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
-  UARTTxIntModeSet(UART3_BASE, UART_TXINT_MODE_EOT);
-  UARTFIFOEnable(UART3_BASE);
-
-  IntEnable(INT_UART3);
-  UARTIntEnable(UART3_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
-
-  UARTConfigSetExpClk(UART3_BASE, dwSysClockFreq, GetBaudRate(2), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  InitUart(2, UART3_BASE, INT_UART3, dwSysClockFreq);
 }
 
 
-void    InitUart2(ulong dwSysClockFreq)
+void InitUart2(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART2);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -102,18 +82,11 @@ void    InitUart2(ulong dwSysClockFreq)
   GPIOPinConfigure(GPIO_PA7_U2TX);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_6 | GPIO_PIN_7);
 
-  UARTFIFOLevelSet(UART2_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
-  UARTTxIntModeSet(UART2_BASE, UART_TXINT_MODE_EOT);
-  UARTFIFOEnable(UART2_BASE);
-
-  IntEnable(INT_UART2);
-  UARTIntEnable(UART2_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
-
-  UARTConfigSetExpClk(UART2_BASE, dwSysClockFreq, GetBaudRate(3), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  InitUart(3, UART2_BASE, INT_UART2, dwSysClockFreq);
 }
 
 
-void    InitUart1(ulong dwSysClockFreq)
+void InitUart1(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART1);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
@@ -122,12 +95,5 @@ void    InitUart1(ulong dwSysClockFreq)
   GPIOPinConfigure(GPIO_PB1_U1TX);
   GPIOPinTypeUART(GPIO_PORTB_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
-  UARTFIFOLevelSet(UART1_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
-  UARTTxIntModeSet(UART1_BASE, UART_TXINT_MODE_EOT);
-  UARTFIFOEnable(UART1_BASE);
-
-  IntEnable(INT_UART1);
-  UARTIntEnable(UART1_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
-
-  UARTConfigSetExpClk(UART1_BASE, dwSysClockFreq, GetBaudRate(4), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+  InitUart(4, UART1_BASE, INT_UART1, dwSysClockFreq);
 }
