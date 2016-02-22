@@ -1,3 +1,4 @@
+#if 0
 /*------------------------------------------------------------------------------
 UART,H
 
@@ -14,3 +15,4 @@ void    UART_Out1(uchar* ptr, uint len);
 void    UART_Out2(struct tcp_pcb *tpcb);
 
 void    UART_1000Hz(void);
+#endif
