@@ -95,3 +95,23 @@ void    InitUart2(ulong dwSysClockFreq)
 
   UARTConfigSetExpClk(UART2_BASE, dwSysClockFreq, GetBaud(3), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
 }
+
+
+void    InitUart1(ulong dwSysClockFreq)
+{
+//  SysCtlPeripheralEnable(SYSCTL_PERIPH_UART2);
+//  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+
+//  GPIOPinConfigure(GPIO_PA6_U2RX);
+//  GPIOPinConfigure(GPIO_PA7_U2TX);
+//  GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_6 | GPIO_PIN_7);
+
+//  UARTFIFOLevelSet(UART2_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+//  UARTTxIntModeSet(UART2_BASE, UART_TXINT_MODE_EOT);
+//  UARTFIFOEnable(UART2_BASE);
+
+//  IntEnable(INT_UART2);
+//  UARTIntEnable(UART2_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+
+//  UARTConfigSetExpClk(UART2_BASE, dwSysClockFreq, GetBaud(3), (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE | UART_CONFIG_PAR_NONE));
+}
