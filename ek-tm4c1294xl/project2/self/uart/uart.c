@@ -32,13 +32,14 @@ void    InitUART(ulong dwSysClockFreq)
 
   uart_tpcb = NULL;
 
-  if (ibDebugMode != DEBUG_MODE_UART)
+//  TODO if (ibDebugMode != DEBUG_MODE_UART)
   {
-    InitUART0(dwSysClockFreq);
+    InitUart0(dwSysClockFreq);
   }
 
-  InitUART4(dwSysClockFreq);
-  InitUART3(dwSysClockFreq);
+  InitUart4(dwSysClockFreq);
+  InitUart3(dwSysClockFreq);
+  InitUart2(dwSysClockFreq);
 }
 
 

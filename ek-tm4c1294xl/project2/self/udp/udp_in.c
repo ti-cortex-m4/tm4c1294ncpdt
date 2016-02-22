@@ -201,15 +201,33 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 28: PushString(enDestinationPort2.szName); break;
     case 29: PushString(enBaudRate2.szName); break;
 
-    case 30: PushString("AI=$SETTINGS;D=Settings;T=GROUP"); break;
-    case 31: PushString(enSerialNumber.szName); break;
+    case 30: PushString("AI=$CHANNEL4;D=Channel4;T=GROUP"); break;
+    case 31: PushString(enConnectionTimeout3.szName); break;
+    case 32: PushString(enRoutingMode3.szName); break;
+    case 33: PushString(enPort3.szName); break;
+    case 34: PushString(enConnectionMode3.szName); break;
+    case 35: PushString(enDestinationIP3.szName); break;
+    case 36: PushString(enDestinationPort3.szName); break;
+    case 37: PushString(enBaudRate3.szName); break;
 
-    case 32: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
-    case 33: PushString(enDebugMode.szName); break;
-    case 34: PushString(enUdpDebugIP.szName); break;
-    case 35: PushString(enUdpDebugPort.szName); break;
-    case 36: PushString(enLwIpDebugFlag.szName); break;
-    case 37: PushString(enLwIpDebugTimeout.szName); break;
+    case 38: PushString("AI=$CHANNEL5;D=Channel5;T=GROUP"); break;
+    case 39: PushString(enConnectionTimeout4.szName); break;
+    case 40: PushString(enRoutingMode4.szName); break;
+    case 41: PushString(enPort4.szName); break;
+    case 42: PushString(enConnectionMode4.szName); break;
+    case 43: PushString(enDestinationIP4.szName); break;
+    case 44: PushString(enDestinationPort4.szName); break;
+    case 45: PushString(enBaudRate4.szName); break;
+
+    case 46: PushString("AI=$SETTINGS;D=Settings;T=GROUP"); break;
+    case 47: PushString(enSerialNumber.szName); break;
+
+    case 48: PushString("AI=$DEBUG;D=Debug;T=GROUP"); break;
+    case 49: PushString(enDebugMode.szName); break;
+    case 50: PushString(enUdpDebugIP.szName); break;
+    case 51: PushString(enUdpDebugPort.szName); break;
+    case 52: PushString(enLwIpDebugFlag.szName); break;
+    case 53: PushString(enLwIpDebugTimeout.szName); break;
 
     default: ASSERT(false); break; // TODO
   }
@@ -430,7 +448,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"38");
+    CmdString(pcb,p,addr,port,broadcast,"54");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -446,30 +464,44 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   else if (IsEnity(pcb,p,addr,port,broadcast,&enGateway)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enNetmask)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout4)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout3)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout2)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout1)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionTimeout0)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode4)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode3)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode2)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode1)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enRoutingMode0)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enPort4)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enPort3)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enPort2)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enPort1)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enPort0)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode4)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode3)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode2)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode1)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enConnectionMode0)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP4)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP3)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP2)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP1)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationIP0)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort4)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort3)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort2)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort1)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDestinationPort0)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate4)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate3)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate2)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate1)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate0)) {}
