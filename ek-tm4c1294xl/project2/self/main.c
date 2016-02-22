@@ -18,13 +18,13 @@ MAIN,C
 #include "settings.h"
 #include "systick.h"
 #include "timer1.h"
+#include "hardware/delay.h"
 #include "uart/uarts.h"
 #include "uart/serial.h"
 #include "uart/uart_log.h"
 #include "uart/io_mode.h"
 #include "udp/udp_log.h"
 #include "udp/udp_handler.h"
-#include "tcp/tcp_handler.h"
 #include "tcp/telnet.h"
 
 
