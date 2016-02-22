@@ -45,3 +45,15 @@ extern const entity enBaudRate1;
 extern const entity enBaudRate2;
 extern const entity enBaudRate3;
 extern const entity enBaudRate4;
+
+extern const entity enParity0;
+extern const entity enParity1;
+extern const entity enParity2;
+extern const entity enParity3;
+extern const entity enParity4;
+
+extern const entity enDataBits0;
+extern const entity enDataBits1;
+extern const entity enDataBits2;
+extern const entity enDataBits3;
+extern const entity enDataBits4;

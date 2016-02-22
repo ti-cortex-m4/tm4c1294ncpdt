@@ -17,7 +17,7 @@ TODO
 static const ulong      mdwBAUDS[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
 
 
-#define SETTINGS_LABEL  5
+#define SETTINGS_LABEL  7
 
 
 
@@ -40,6 +40,8 @@ ulong                   mdwDestinationIP[UART_COUNT];
 uint                    mwDestinationPort[UART_COUNT];
 
 uchar                   mibBaudRate[UART_COUNT];
+uchar                   mibParity[UART_COUNT];
+uchar                   mibDataBits[UART_COUNT];
 
 bool                    ibDebugMode;
 
@@ -71,7 +73,7 @@ static void LoadSettingsDef(void)
   for (e = 0; e < bEntitiesSize; e++)
   {
     const entity *pen = mpenEntities[e];
-    if (pen != &enSerialNumber)
+    if (((pen->dwFlags) & FLAG_DONT_RESET) == 0)
     {
       LoadEntityDef(pen);
     }
@@ -140,7 +142,7 @@ void ResetSettings(void)
 
 
 
-ulong GetBaud(uchar ibPort)
+ulong GetBaudRate(uchar ibPort)
 {
   uchar ibBaud = mibBaudRate[ibPort] < BAUD_RATE_COUNT ? mibBaudRate[ibPort] : DEFAULT_BAUD_RATE;
   ASSERT(ibBaud < BAUD_RATE_COUNT);

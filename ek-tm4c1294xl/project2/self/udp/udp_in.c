@@ -182,52 +182,62 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 11: PushString(enDestinationIP0.szName); break;
     case 12: PushString(enDestinationPort0.szName); break;
     case 13: PushString(enBaudRate0.szName); break;
+    case 14: PushString(enParity0.szName); break;
+    case 15: PushString(enDataBits0.szName); break;
 
-    case 14: PushString("AI=$CHANNEL2;D=Channel2;T=GROUP"); break;
-    case 15: PushString(enConnectionTimeout1.szName); break;
-    case 16: PushString(enRoutingMode1.szName); break;
-    case 17: PushString(enPort1.szName); break;
-    case 18: PushString(enConnectionMode1.szName); break;
-    case 19: PushString(enDestinationIP1.szName); break;
-    case 20: PushString(enDestinationPort1.szName); break;
-    case 21: PushString(enBaudRate1.szName); break;
+    case 16: PushString("AI=$CHANNEL2;D=Channel2;T=GROUP"); break;
+    case 17: PushString(enConnectionTimeout1.szName); break;
+    case 18: PushString(enRoutingMode1.szName); break;
+    case 19: PushString(enPort1.szName); break;
+    case 20: PushString(enConnectionMode1.szName); break;
+    case 21: PushString(enDestinationIP1.szName); break;
+    case 22: PushString(enDestinationPort1.szName); break;
+    case 23: PushString(enBaudRate1.szName); break;
+    case 24: PushString(enParity1.szName); break;
+    case 25: PushString(enDataBits1.szName); break;
 
-    case 22: PushString("AI=$CHANNEL3;D=Channel3;T=GROUP"); break;
-    case 23: PushString(enConnectionTimeout2.szName); break;
-    case 24: PushString(enRoutingMode2.szName); break;
-    case 25: PushString(enPort2.szName); break;
-    case 26: PushString(enConnectionMode2.szName); break;
-    case 27: PushString(enDestinationIP2.szName); break;
-    case 28: PushString(enDestinationPort2.szName); break;
-    case 29: PushString(enBaudRate2.szName); break;
+    case 26: PushString("AI=$CHANNEL3;D=Channel3;T=GROUP"); break;
+    case 27: PushString(enConnectionTimeout2.szName); break;
+    case 28: PushString(enRoutingMode2.szName); break;
+    case 29: PushString(enPort2.szName); break;
+    case 30: PushString(enConnectionMode2.szName); break;
+    case 31: PushString(enDestinationIP2.szName); break;
+    case 32: PushString(enDestinationPort2.szName); break;
+    case 33: PushString(enBaudRate2.szName); break;
+    case 34: PushString(enParity2.szName); break;
+    case 35: PushString(enDataBits2.szName); break;
 
-    case 30: PushString("AI=$CHANNEL4;D=Channel4;T=GROUP"); break;
-    case 31: PushString(enConnectionTimeout3.szName); break;
-    case 32: PushString(enRoutingMode3.szName); break;
-    case 33: PushString(enPort3.szName); break;
-    case 34: PushString(enConnectionMode3.szName); break;
-    case 35: PushString(enDestinationIP3.szName); break;
-    case 36: PushString(enDestinationPort3.szName); break;
-    case 37: PushString(enBaudRate3.szName); break;
+    case 36: PushString("AI=$CHANNEL4;D=Channel4;T=GROUP"); break;
+    case 37: PushString(enConnectionTimeout3.szName); break;
+    case 38: PushString(enRoutingMode3.szName); break;
+    case 39: PushString(enPort3.szName); break;
+    case 40: PushString(enConnectionMode3.szName); break;
+    case 41: PushString(enDestinationIP3.szName); break;
+    case 42: PushString(enDestinationPort3.szName); break;
+    case 43: PushString(enBaudRate3.szName); break;
+    case 44: PushString(enParity3.szName); break;
+    case 45: PushString(enDataBits3.szName); break;
 
-    case 38: PushString("AI=$CHANNEL5;D=Channel5;T=GROUP"); break;
-    case 39: PushString(enConnectionTimeout4.szName); break;
-    case 40: PushString(enRoutingMode4.szName); break;
-    case 41: PushString(enPort4.szName); break;
-    case 42: PushString(enConnectionMode4.szName); break;
-    case 43: PushString(enDestinationIP4.szName); break;
-    case 44: PushString(enDestinationPort4.szName); break;
-    case 45: PushString(enBaudRate4.szName); break;
+    case 46: PushString("AI=$CHANNEL5;D=Channel5;T=GROUP"); break;
+    case 47: PushString(enConnectionTimeout4.szName); break;
+    case 48: PushString(enRoutingMode4.szName); break;
+    case 49: PushString(enPort4.szName); break;
+    case 50: PushString(enConnectionMode4.szName); break;
+    case 51: PushString(enDestinationIP4.szName); break;
+    case 52: PushString(enDestinationPort4.szName); break;
+    case 53: PushString(enBaudRate4.szName); break;
+    case 54: PushString(enParity4.szName); break;
+    case 55: PushString(enDataBits4.szName); break;
 
-    case 46: PushString("AI=$SETTINGS;D=Settings;T=GROUP"); break;
-    case 47: PushString(enSerialNumber.szName); break;
-    case 48: PushString(enDebugMode.szName); break;
-    case 49: PushString(enUdpDebugIP.szName); break;
-    case 50: PushString(enUdpDebugPort.szName); break;
-    case 51: PushString(enLwIpDebugFlag.szName); break;
-    case 52: PushString(enLwIpDebugTimeout.szName); break;
+    case 56: PushString("AI=$SETTINGS;D=Settings;T=GROUP"); break;
+    case 57: PushString(enSerialNumber.szName); break;
+    case 58: PushString(enDebugMode.szName); break;
+    case 59: PushString(enUdpDebugIP.szName); break;
+    case 60: PushString(enUdpDebugPort.szName); break;
+    case 61: PushString(enLwIpDebugFlag.szName); break;
+    case 62: PushString(enLwIpDebugTimeout.szName); break;
 
-    default: ASSERT(false); break; // TODO
+    default: CONSOLE("ERROR unknown index %u\n", wArg); ASSERT(false); break; // TODO
   }
 
   PushChar(0x0D);
@@ -382,7 +392,7 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"53");
+    CmdString(pcb,p,addr,port,broadcast,"63");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -440,6 +450,18 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate1)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enBaudRate0)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enParity0)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enParity1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enParity2)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enParity3)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enParity4)) {}
+
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDataBits0)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDataBits1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDataBits2)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDataBits3)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enDataBits4)) {}
+
   else if (IsEnity(pcb,p,addr,port,broadcast,&enSerialNumber)) {}
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDebugMode)) {}
@@ -451,6 +473,6 @@ void    UDP_In(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   else if (IsEnity(pcb,p,addr,port,broadcast,&enLwIpDebugTimeout)) {}
 
   else { // TODO
-    CONSOLE_UART("unknown command: %d\n", broadcast);
+    CONSOLE_UART("unknown command\n");
   }
 }

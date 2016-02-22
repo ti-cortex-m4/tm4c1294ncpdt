@@ -64,6 +64,18 @@ const entity * const mpenEntities[] =
   &enBaudRate3,
   &enBaudRate4,
 
+  &enParity0,
+  &enParity1,
+  &enParity2,
+  &enParity3,
+  &enParity4,
+
+  &enDataBits0,
+  &enDataBits1,
+  &enDataBits2,
+  &enDataBits3,
+  &enDataBits4,
+
   &enDebugMode,
 
   &enUdpDebugIP,
