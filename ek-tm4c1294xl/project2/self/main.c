@@ -18,7 +18,7 @@ MAIN,C
 #include "settings.h"
 #include "systick.h"
 #include "timer1.h"
-#include "uart/uart.h"
+#include "uart/uarts.h"
 #include "uart/serial.h"
 #include "uart/uart_log.h"
 #include "uart/io_mode.h"
@@ -103,7 +103,7 @@ int     main(void)
   TelnetInit();
 
   InitSysTick(dwSysClockFreq);
-  InitUART(dwSysClockFreq);
+  InitUarts(dwSysClockFreq);
   InitIoModes();
   InitTimer1(dwSysClockFreq);
 

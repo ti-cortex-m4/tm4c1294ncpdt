@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-HW_UART.Ñ
+uarts,c
 
 
 ------------------------------------------------------------------------------*/
@@ -14,17 +14,23 @@ HW_UART.Ñ
 #include "driverlib/uart.h"
 #include "driverlib/interrupt.h"
 #include "../kernel/log.h"
-#include "hw_uart.h"
+#include "uarts.h"
 
 
 
 static ulong GetBaudRate(uchar u)
 {
   ASSERT(u < UART_COUNT);
-  uchar ibBaudRate = mibBaudRate[u] < BAUD_RATE_COUNT ? mibBaudRate[u] : DEFAULT_BAUD_RATE;
 
-  ASSERT(ibBaudRate < BAUD_RATE_COUNT);
-  return mdwBAUDS[ibBaudRate];
+  if (mibBaudRate[u] < BAUD_RATE_COUNT)
+  {
+    return mdwBAUDS[mibBaudRate[u]];
+  }
+  else
+  {
+    CONSOLE("%u: WARNING baud rate %u", u, mibBaudRate[u]);
+    return mdwBAUDS[DEFAULT_BAUD_RATE];
+  }
 }
 
 
@@ -81,7 +87,7 @@ static void InitUart(uchar u, ulong dwUartBase, ulong dwInterrupt, ulong dwSysCl
 
 
 
-void InitUart0(ulong dwSysClockFreq)
+static void InitUart0(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -94,7 +100,7 @@ void InitUart0(ulong dwSysClockFreq)
 }
 
 
-void InitUart4(ulong dwSysClockFreq)
+static void InitUart4(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART4);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -107,7 +113,7 @@ void InitUart4(ulong dwSysClockFreq)
 }
 
 
-void InitUart3(ulong dwSysClockFreq)
+static void InitUart3(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART3);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -120,7 +126,7 @@ void InitUart3(ulong dwSysClockFreq)
 }
 
 
-void InitUart2(ulong dwSysClockFreq)
+static void InitUart2(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART2);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -133,7 +139,7 @@ void InitUart2(ulong dwSysClockFreq)
 }
 
 
-void InitUart1(ulong dwSysClockFreq)
+static void InitUart1(ulong dwSysClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART1);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
@@ -143,4 +149,19 @@ void InitUart1(ulong dwSysClockFreq)
   GPIOPinTypeUART(GPIO_PORTB_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
   InitUart(4, UART1_BASE, INT_UART1, dwSysClockFreq);
+}
+
+
+
+void InitUarts(ulong dwSysClockFreq)
+{
+  if (ibDebugMode != DEBUG_MODE_UART)
+  {
+    InitUart0(dwSysClockFreq);
+  }
+
+  InitUart4(dwSysClockFreq);
+  InitUart3(dwSysClockFreq);
+  InitUart2(dwSysClockFreq);
+  InitUart1(dwSysClockFreq);
 }
