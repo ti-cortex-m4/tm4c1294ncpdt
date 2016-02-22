@@ -15,6 +15,17 @@ void Nop(void)
 }
 
 
+void DelayGPIO(void)
+{
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+}
+
+
+
 void DelayMicroSecond(uint wMicroSecond)
 {
   if (wMicroSecond == 0)
