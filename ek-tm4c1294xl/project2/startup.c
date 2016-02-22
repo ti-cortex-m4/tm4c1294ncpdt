@@ -60,8 +60,11 @@ extern void lwIPEthernetIntHandler(void);
 extern void SysTickIntHandler(void);
 
 extern void UART0IntHandler(void);
-extern void UART3IntHandler(void);
 extern void UART4IntHandler(void);
+extern void UART3IntHandler(void);
+extern void UART2IntHandler(void);
+extern void UART1IntHandler(void);
+
 extern void Timer1IntHandler(void);
 
 //*****************************************************************************
@@ -97,7 +100,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // GPIO Port D
     IntDefaultHandler,                      // GPIO Port E
     UART0IntHandler,                      // UART0 Rx and Tx
-	IntDefaultHandler,                      // UART1 Rx and Tx
+    UART1IntHandler,                      // UART1 Rx and Tx
     IntDefaultHandler,                      // SSI0 Rx and Tx
     IntDefaultHandler,                      // I2C0 Master and Slave
     IntDefaultHandler,                      // PWM Fault
@@ -112,7 +115,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // Watchdog timer
     IntDefaultHandler,                      // Timer 0 subtimer A
     IntDefaultHandler,                      // Timer 0 subtimer B
-	Timer1IntHandler,                      // Timer 1 subtimer A
+    Timer1IntHandler,                      // Timer 1 subtimer A
     IntDefaultHandler,                      // Timer 1 subtimer B
     IntDefaultHandler,                      // Timer 2 subtimer A
     IntDefaultHandler,                      // Timer 2 subtimer B
@@ -124,7 +127,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // GPIO Port F
     IntDefaultHandler,                      // GPIO Port G
     IntDefaultHandler,                      // GPIO Port H
-    IntDefaultHandler,                      // UART2 Rx and Tx
+    UART2IntHandler,                      // UART2 Rx and Tx
     IntDefaultHandler,                      // SSI1 Rx and Tx
     IntDefaultHandler,                      // Timer 3 subtimer A
     IntDefaultHandler,                      // Timer 3 subtimer B

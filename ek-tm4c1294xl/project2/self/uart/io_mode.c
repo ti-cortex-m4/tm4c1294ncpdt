@@ -10,6 +10,7 @@ io_mode.c
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
 #include "../hardware/delay.h"
+#include "../kernel/printf.h"
 #include "io_mode.h"
 
 
@@ -52,7 +53,7 @@ static void OutputMode2(void)
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0010) = 0x0004;
 }
 
-/*
+
 static void InputMode3(void)
 {
   mIoModes[3] = IO_MODE_INPUT;
@@ -77,7 +78,7 @@ static void OutputMode4(void)
   mIoModes[4] = IO_MODE_OUTPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0004) = 0x0001;
 }
-*/
+
 
 
 typedef void (*fn_io_mode)(void);
@@ -88,8 +89,8 @@ fn_io_mode mfnInputModes[UART_COUNT] =
   &InputMode0,
   &InputMode1,
   &InputMode2,
-//  &InputMode3,
-//  &InputMode4,
+  &InputMode3,
+  &InputMode4,
 };
 
 fn_io_mode mfnOutputModes[UART_COUNT] =
@@ -97,8 +98,8 @@ fn_io_mode mfnOutputModes[UART_COUNT] =
   &OutputMode0,
   &OutputMode1,
   &OutputMode2,
-//  &OutputMode3,
-//  &OutputMode4,
+  &OutputMode3,
+  &OutputMode4,
 };
 
 
@@ -106,6 +107,7 @@ fn_io_mode mfnOutputModes[UART_COUNT] =
 void InputMode(uchar u)
 {
   ASSERT(u < UART_COUNT);
+  UdpPrintF("\n input mode: %u",u);
   (*mfnInputModes[u])();
 }
 
@@ -113,6 +115,7 @@ void InputMode(uchar u)
 void OutputMode(uchar u)
 {
   ASSERT(u < UART_COUNT);
+  UdpPrintF("\n output mode: %u",u);
   (*mfnOutputModes[u])();
 }
 
@@ -141,7 +144,7 @@ static void InitIoMode2(void) // PF2
 
   InputMode(2);
 }
-/*
+
 static void InitIoMode3(void) // PF1
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R5; // GPIO Port F Run Mode Clock Gating Control
@@ -161,7 +164,7 @@ static void InitIoMode4(void) // PF0
 
   InputMode(4);
 }
-*/
+
 
 void InitIoModes(void)
 {
@@ -174,6 +177,6 @@ void InitIoModes(void)
   InitIoMode0();
   InitIoMode1();
   InitIoMode2();
-//  InitIoMode3();
-//  InitIoMode4();
+  InitIoMode3();
+  InitIoMode4();
 }
