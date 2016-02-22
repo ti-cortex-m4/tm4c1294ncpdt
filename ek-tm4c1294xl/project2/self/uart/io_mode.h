@@ -18,4 +18,5 @@ typedef enum
 
 #endif
 
+
 void InitIoModes(void);
