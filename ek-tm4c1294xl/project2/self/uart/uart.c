@@ -32,7 +32,7 @@ void    InitUART(ulong dwSysClockFreq)
 
   uart_tpcb = NULL;
 
-//  TODO if (ibDebugMode != DEBUG_MODE_UART)
+  if (ibDebugMode != DEBUG_MODE_UART)
   {
     InitUart0(dwSysClockFreq);
   }
