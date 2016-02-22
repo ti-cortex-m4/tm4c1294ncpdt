@@ -1,14 +1,12 @@
 /*------------------------------------------------------------------------------
-io.c
+io_mode.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "inc/hw_memmap.h"
-//#include "inc/hw_uart.h"
 #include "inc/hw_types.h"
-//#include "inc/hw_ints.h"
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
 #include "../hardware/delay.h"
@@ -31,44 +29,52 @@ static void OutputMode0(void)
 
 static void InputMode1(void)
 {
+  mIoModes[1] = IO_MODE_INPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0020) = ~0x0008;
 }
 
 static void OutputMode1(void)
 {
+  mIoModes[1] = IO_MODE_OUTPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0020) = 0x0008;
 }
 
 
 static void InputMode2(void)
 {
+  mIoModes[2] = IO_MODE_INPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0010) = ~0x0004;
 }
 
 static void OutputMode2(void)
 {
+  mIoModes[2] = IO_MODE_OUTPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0010) = 0x0004;
 }
 
 /*
 static void InputMode3(void)
 {
+  mIoModes[3] = IO_MODE_INPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0008) = ~0x0002;
 }
 
 static void OutputMode3(void)
 {
+  mIoModes[3] = IO_MODE_OUTPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0008) = 0x0002;
 }
 
 
 static void InputMode4(void)
 {
+  mIoModes[4] = IO_MODE_INPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0004) = ~0x0001;
 }
 
 static void OutputMode4(void)
 {
+  mIoModes[4] = IO_MODE_OUTPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0004) = 0x0001;
 }
 */
@@ -100,8 +106,6 @@ fn_io_mode mfnOutputModes[UART_COUNT] =
 void InputMode(uchar u)
 {
   ASSERT(u < UART_COUNT);
-
-  mIoModes[u] = IO_MODE_INPUT;
   (*mfnInputModes[u])();
 }
 
@@ -109,8 +113,6 @@ void InputMode(uchar u)
 void OutputMode(uchar u)
 {
   ASSERT(u < UART_COUNT);
-
-  mIoModes[u] = IO_MODE_OUTPUT;
   (*mfnOutputModes[u])();
 }
 
