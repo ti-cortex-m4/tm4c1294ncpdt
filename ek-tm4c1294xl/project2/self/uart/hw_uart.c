@@ -17,6 +17,107 @@ HW_UART.Ñ
 
 
 
+static ulong GetBaudRate(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+
+  uchar ibBaud = mibBaudRate[u] < BAUD_RATE_COUNT ? mibBaudRate[u] : DEFAULT_BAUD_RATE;
+  ASSERT(ibBaud < BAUD_RATE_COUNT);
+  return mdwBAUDS[ibBaud];
+}
+
+
+static ulong GetParityMask(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+
+  switch(ucParity)
+  {
+    case SERIAL_PARITY_NONE:
+    {
+      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
+      ulNewConfig |= UART_CONFIG_PAR_NONE;
+      g_sParameters.sPort[ulPort].ucParity = ucParity;
+      break;
+    }
+
+    case SERIAL_PARITY_ODD:
+    {
+      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
+      ulNewConfig |= UART_CONFIG_PAR_ODD;
+      g_sParameters.sPort[ulPort].ucParity = ucParity;
+      break;
+    }
+
+    case SERIAL_PARITY_EVEN:
+    {
+      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
+      ulNewConfig |= UART_CONFIG_PAR_EVEN;
+      g_sParameters.sPort[ulPort].ucParity = ucParity;
+      break;
+    }
+
+    case SERIAL_PARITY_MARK:
+    {
+      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
+      ulNewConfig |= UART_CONFIG_PAR_ONE;
+      g_sParameters.sPort[ulPort].ucParity = ucParity;
+      break;
+    }
+
+    case SERIAL_PARITY_SPACE:
+    {
+      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_PAR_MASK);
+      ulNewConfig |= UART_CONFIG_PAR_ZERO;
+      g_sParameters.sPort[ulPort].ucParity = ucParity;
+      break;
+    }
+
+    default:
+    {
+      ulNewConfig = ulCurrentConfig;
+      break;
+    }
+  }
+}
+
+static ulong GetDataBitsMask(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+
+  switch(ucDataSize)
+  {
+    case 7:
+    {
+      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_WLEN_MASK);
+      ulNewConfig |= UART_CONFIG_WLEN_7;
+      g_sParameters.sPort[ulPort].ucDataSize = ucDataSize;
+      break;
+    }
+
+    case 8:
+    {
+      ulNewConfig = (ulCurrentConfig & ~UART_CONFIG_WLEN_MASK);
+      ulNewConfig |= UART_CONFIG_WLEN_8;
+      g_sParameters.sPort[ulPort].ucDataSize = ucDataSize;
+      break;
+    }
+
+    default:
+    {
+      ulNewConfig = ulCurrentConfig;
+      break;
+    }
+ }
+}
+
+static ulong GetStopBitsMask(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+  return UART_CONFIG_STOP_ONE;
+}
+
+
 static void InitUart(uchar u, ulong dwUartBase, ulong dwInterrupt, ulong dwSysClockFreq)
 {
   ASSERT(u < UART_COUNT);
