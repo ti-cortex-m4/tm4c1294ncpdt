@@ -14,8 +14,8 @@ entities_channels,C
 const entity enConnectionTimeout0 = {
   EEPROM_CONNECTION_TIMEOUT_0, &mbConnectionTimeout[0], sizeof(uchar), CHAR, 0,
   0, 255, DEFAULT_CONNECTION_TIMEOUT,
-  "CT",
-  "AI=CT;D=Connection timeout (minutes);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT>255?\"Maximum timeout is 255 minutes\":\"\"",
+  "CT@0",
+  "AI=CT@0;D=Connection timeout (minutes);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@0>255?\"Maximum timeout is 255 minutes\":\"\"",
 };
 
 const entity enConnectionTimeout1 = {
@@ -50,8 +50,8 @@ const entity enConnectionTimeout4 = {
 const entity enRoutingMode0 = {
   EEPROM_ROUTING_MODE_0, &mbRoutingMode[0], sizeof(uchar), CHAR, 0,
   0, 1, DEFAULT_ROUTING_MODE,
-  "RM",
-  "AI=RM;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "RM@0",
+  "AI=RM@0;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
 };
 
 const entity enRoutingMode1 = {
@@ -85,35 +85,35 @@ const entity enRoutingMode4 = {
 
 const entity enPort0 = {
   EEPROM_PORT_0, &mwPort[0], sizeof(uint), INT, 0,
-  0, 65534, 1001,
-  "PN",
-  "AI=PN;E=1;D=Port;T=INT;C=EDIT;V=PN>65534?\"Port number must be between 0 and 65534\":\"\";S=RM!=1?\"e\":\"i\"",
+  0, 65534, DEFAULT_PORT+0,
+  "PN@0",
+  "AI=PN@0;E=1;D=Port;T=INT;C=EDIT;V=PN@0>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@0!=1?\"e\":\"i\"",
 };
 
 const entity enPort1 = {
   EEPROM_PORT_1, &mwPort[1], sizeof(uint), INT, 0,
-  0, 65534, 1002,
+  0, 65534, DEFAULT_PORT+1,
   "PN@1",
   "AI=PN@1;E=1;D=Port;T=INT;C=EDIT;V=PN@1>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@1!=1?\"e\":\"i\"",
 };
 
 const entity enPort2 = {
   EEPROM_PORT_2, &mwPort[2], sizeof(uint), INT, 0,
-  0, 65534, 1003,
+  0, 65534, DEFAULT_PORT+2,
   "PN@2",
   "AI=PN@2;E=1;D=Port;T=INT;C=EDIT;V=PN@2>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@2!=1?\"e\":\"i\"",
 };
 
 const entity enPort3 = {
   EEPROM_PORT_3, &mwPort[3], sizeof(uint), INT, 0,
-  0, 65534, 1004,
+  0, 65534, DEFAULT_PORT+3,
   "PN@3",
   "AI=PN@3;E=1;D=Port;T=INT;C=EDIT;V=PN@3>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@3!=1?\"e\":\"i\"",
 };
 
 const entity enPort4 = {
   EEPROM_PORT_4, &mwPort[4], sizeof(uint), INT, 0,
-  0, 65534, 1005,
+  0, 65534, DEFAULT_PORT+4,
   "PN@4",
   "AI=PN@4;E=1;D=Port;T=INT;C=EDIT;V=PN@4>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@4!=1?\"e\":\"i\"",
 };
@@ -122,8 +122,8 @@ const entity enPort4 = {
 const entity enConnectionMode0 = {
   EEPROM_CONNECTION_MODE_0, &mbConnectionMode[0], sizeof(uchar), CHAR, 0,
   0, 1, DEFAULT_CONNECTION_MODE,
-  "CM",
-  "AI=CM;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM!=0?\"e\":\"i\"",
+  "CM@0",
+  "AI=CM@0;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@0!=0?\"e\":\"i\"",
 };
 
 const entity enConnectionMode1 = {
@@ -158,8 +158,8 @@ const entity enConnectionMode4 = {
 const entity enDestinationIP0 = {
   EEPROM_DESTINATION_IP_0, &mdwDestinationIP[0], sizeof(ulong), IP, 0,
   0, MAX_LONG, DEFAULT_DESTINATION_IP,
-  "DI",
-  "AI=DI;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM==1?\"e\":\"i\"",
+  "DI@0",
+  "AI=DI@0;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@0==1?\"e\":\"i\"",
 };
 
 const entity enDestinationIP1 = {
@@ -194,8 +194,8 @@ const entity enDestinationIP4 = {
 const entity enDestinationPort0 = {
   EEPROM_DESTINATION_PORT_0, &mwDestinationPort[0], sizeof(uint), INT, 0,
   0, MAX_INT, DEFAULT_DESTINATION_PORT+0,
-  "DP",
-  "AI=DP;E=1;D=Destination port;T=INT;C=EDIT;S=RM!=0?\"e\":\"i\"",
+  "DP@0",
+  "AI=DP@0;E=1;D=Destination port;T=INT;C=EDIT;S=RM@0!=0?\"e\":\"i\"",
 };
 
 const entity enDestinationPort1 = {
@@ -230,8 +230,8 @@ const entity enDestinationPort4 = {
 const entity enBaudRate0 = {
   EEPROM_BAUD_RATE_0, &mibBaudRate[0], sizeof(uchar), CHAR, 0,
   0, BAUD_RATE_COUNT-1, DEFAULT_BAUD_RATE,
-  "BR",
-  "AI=BR;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13",
+  "BR@0",
+  "AI=BR@0;D=Baud rate;T=INT;C=STATIC;O=0-150bps/0/1-300bps/1/2-600bps/2/3-1200bps/3/4-2400bps/4/5-4800bps/5/6-9600bps/6/7-19200bps/7/8-28800bps/8/9-38400bps/9/10-57600bps/10/11-115200bps/11/12-230400bps/12/13-460800bps/13",
 };
 
 const entity enBaudRate1 = {
