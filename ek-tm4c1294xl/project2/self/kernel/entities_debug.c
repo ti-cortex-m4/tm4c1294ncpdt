@@ -19,7 +19,6 @@ const entity enDebugMode = {
 };
 
 
-
 const entity enUdpDebugIP = {
   EEPROM_UDP_DEBUG_IP, &dwUdpDebugIP, sizeof(ulong), IP, 0,
   0, MAX_LONG, 0xFFFFFFFF,
@@ -44,7 +43,7 @@ const entity enLwIpDebugFlag = {
 
 const entity enLwIpDebugTimeout = {
   EEPROM_LWIP_DEBUG_TIMEOUT, &wLwIpDebugTimeout, sizeof(uint), INT, 0,
-  0, 3600, 60,
+  0, 3600, 300,
   "LWIPDT",
   "AI=LWIPDT;E=1;D=TCP/IP stack debug timeout (seconds);T=INT;C=EDIT;V=LWIPDT>3600?\"Maximum timeout is 3600 seconds\":\"\";S=LWIPDF!=0?\"e\":\"i\"",
 };
