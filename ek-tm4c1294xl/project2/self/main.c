@@ -17,7 +17,7 @@ MAIN,C
 #include "kernel/tasks.h"
 #include "settings.h"
 #include "systick.h"
-#include "timer1.h"
+#include "hardware/timer1.h"
 #include "hardware/delay.h"
 #include "uart/uarts.h"
 #include "uart/serial.h"
