@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-SETTINGS,H
+settings.h
 
 
 ------------------------------------------------------------------------------*/
@@ -11,11 +11,13 @@ SETTINGS,H
 
 extern const ulong             mdwBaudRates[BAUD_RATE_COUNT];
 
-extern uchar                   pbMAC[6];
+
+
+extern uchar                   pbMac[6];
 
 extern uint                    wSerialNumber;
 
-extern ulong                   dwIP;
+extern ulong                   dwIp;
 extern ulong                   dwGateway;
 extern ulong                   dwNetmask;
 
@@ -26,7 +28,7 @@ extern uchar                   mbConnectionTimeout[UART_COUNT];
 extern uchar                   mbRoutingMode[UART_COUNT];
 extern uint                    mwPort[UART_COUNT];
 extern uchar                   mbConnectionMode[UART_COUNT];
-extern ulong                   mdwDestinationIP[UART_COUNT];
+extern ulong                   mdwDestinationIp[UART_COUNT];
 extern uint                    mwDestinationPort[UART_COUNT];
 
 extern uchar                   mibBaudRate[UART_COUNT];
@@ -36,7 +38,7 @@ extern uchar                   mibStopBits[UART_COUNT];
 
 extern bool                    ibDebugMode;
 
-extern ulong                   dwUdpDebugIP;
+extern ulong                   dwUdpDebugIp;
 extern uint                    wUdpDebugPort;
 
 extern bool                    fLwIpDebugFlag;
@@ -50,6 +52,3 @@ extern uint                    cwErrEntitySave;
 
 void InitSettings(void);
 void ResetSettings(void);
-
-ulong getTelnetTimeout(uchar u);
-

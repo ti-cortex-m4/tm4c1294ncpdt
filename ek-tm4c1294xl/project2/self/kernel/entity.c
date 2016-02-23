@@ -50,7 +50,7 @@ void LoadEntityDef(const entity * const pen)
 }
 
 
-
+#if false
 bool CheckEntity(const entity * const pen)
 {
   switch(pen->eType)
@@ -92,3 +92,4 @@ bool CheckEntity(const entity * const pen)
     default: ASSERT(false); return true;
   }
 }
+#endif

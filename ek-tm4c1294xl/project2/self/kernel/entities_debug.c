@@ -20,7 +20,7 @@ const entity enDebugMode = {
 
 
 const entity enUdpDebugIP = {
-  EEPROM_UDP_DEBUG_IP, &dwUdpDebugIP, sizeof(ulong), IP, 0,
+  EEPROM_UDP_DEBUG_IP, &dwUdpDebugIp, sizeof(ulong), IP, 0,
   0, MAX_LONG, 0xFFFFFFFF,
   "UDPDI",
   "AI=UDPDI;E=1;D=UDP debug IP-address;T=STRING;C=IPCTRL;S=DBMD==1?\"e\":\"i\"",

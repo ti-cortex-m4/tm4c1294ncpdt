@@ -22,11 +22,11 @@ const ulong             mdwBaudRates[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4
 
 
 
-uchar                   pbMAC[6];
+uchar                   pbMac[6];
 
 uint                    wSerialNumber;
 
-ulong                   dwIP;
+ulong                   dwIp;
 ulong                   dwGateway;
 ulong                   dwNetmask;
 
@@ -37,7 +37,7 @@ uchar                   mbConnectionTimeout[UART_COUNT];
 uchar                   mbRoutingMode[UART_COUNT];
 uint                    mwPort[UART_COUNT];
 uchar                   mbConnectionMode[UART_COUNT];
-ulong                   mdwDestinationIP[UART_COUNT];
+ulong                   mdwDestinationIp[UART_COUNT];
 uint                    mwDestinationPort[UART_COUNT];
 
 uchar                   mibBaudRate[UART_COUNT];
@@ -47,7 +47,7 @@ uchar                   mibStopBits[UART_COUNT];
 
 bool                    ibDebugMode;
 
-ulong                   dwUdpDebugIP;
+ulong                   dwUdpDebugIp;
 uint                    wUdpDebugPort;
 
 bool                    fLwIpDebugFlag;
@@ -126,7 +126,7 @@ void InitSettings(void)
     LoadSettingsDef();
   }
 
-  if (dwIP == 0)
+  if (dwIp == 0)
   {
     cwErrIpLoad++;
 
@@ -143,13 +143,4 @@ void ResetSettings(void)
 {
   LoadSettingsDef();
   SaveSettings();
-}
-
-
-//! The timeout for the TCP connection used for the telnet session, specified in seconds.
-//! A value of 0 indicates no timeout is to be used.
-ulong getTelnetTimeout(uchar u)
-{
-  ASSERT(u < UART_COUNT);
-  return mbConnectionTimeout[u]*60;
 }

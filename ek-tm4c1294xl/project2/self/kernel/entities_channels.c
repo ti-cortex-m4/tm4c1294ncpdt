@@ -156,35 +156,35 @@ const entity enConnectionMode4 = {
 
 
 const entity enDestinationIP0 = {
-  EEPROM_DESTINATION_IP_0, &mdwDestinationIP[0], sizeof(ulong), IP, 0,
+  EEPROM_DESTINATION_IP_0, &mdwDestinationIp[0], sizeof(ulong), IP, 0,
   0, MAX_LONG, DEFAULT_DESTINATION_IP,
   "DI@0",
   "AI=DI@0;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@0==1?\"e\":\"i\"",
 };
 
 const entity enDestinationIP1 = {
-  EEPROM_DESTINATION_IP_1, &mdwDestinationIP[1], sizeof(ulong), IP, 0,
+  EEPROM_DESTINATION_IP_1, &mdwDestinationIp[1], sizeof(ulong), IP, 0,
   0, MAX_LONG, DEFAULT_DESTINATION_IP,
   "DI@1",
   "AI=DI@1;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@1==1?\"e\":\"i\"",
 };
 
 const entity enDestinationIP2 = {
-  EEPROM_DESTINATION_IP_2, &mdwDestinationIP[2], sizeof(ulong), IP, 0,
+  EEPROM_DESTINATION_IP_2, &mdwDestinationIp[2], sizeof(ulong), IP, 0,
   0, MAX_LONG, DEFAULT_DESTINATION_IP,
   "DI@2",
   "AI=DI@2;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@2==1?\"e\":\"i\"",
 };
 
 const entity enDestinationIP3 = {
-  EEPROM_DESTINATION_IP_3, &mdwDestinationIP[3], sizeof(ulong), IP, 0,
+  EEPROM_DESTINATION_IP_3, &mdwDestinationIp[3], sizeof(ulong), IP, 0,
   0, MAX_LONG, DEFAULT_DESTINATION_IP,
   "DI@3",
   "AI=DI@3;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@3==1?\"e\":\"i\"",
 };
 
 const entity enDestinationIP4 = {
-  EEPROM_DESTINATION_IP_4, &mdwDestinationIP[4], sizeof(ulong), IP, 0,
+  EEPROM_DESTINATION_IP_4, &mdwDestinationIp[4], sizeof(ulong), IP, 0,
   0, MAX_LONG, DEFAULT_DESTINATION_IP,
   "DI@4",
   "AI=DI@4;E=1;D=Destination IP-address;T=STRING;C=IPCTRL;S=RM@4==1?\"e\":\"i\"",
