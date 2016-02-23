@@ -333,3 +333,39 @@ const entity enDataBits4 = {
   "DB@4",
   "AI=DB@4;D=Data bits;T=INT;C=STATIC;O=0-7 bits/0/1-8 bits/1",
 };
+
+
+const entity enStopBits0 = {
+  EEPROM_STOP_BITS_0, &mibStopBits[0], sizeof(uchar), CHAR, 0,
+  0, STOP_BITS_COUNT-1, DEFAULT_STOP_BITS,
+  "SB@0",
+  "AI=SB@0;D=Stop bits;T=INT;C=STATIC;O=0-1 bit/0/1-2 bits/1",
+};
+
+const entity enStopBits1 = {
+  EEPROM_STOP_BITS_1, &mibStopBits[1], sizeof(uchar), CHAR, 0,
+  0, STOP_BITS_COUNT-1, DEFAULT_STOP_BITS,
+  "SB@1",
+  "AI=SB@1;D=Stop bits;T=INT;C=STATIC;O=0-1 bit/0/1-2 bits/1",
+};
+
+const entity enStopBits2 = {
+  EEPROM_STOP_BITS_2, &mibStopBits[2], sizeof(uchar), CHAR, 0,
+  0, STOP_BITS_COUNT-1, DEFAULT_STOP_BITS,
+  "SB@2",
+  "AI=SB@2;D=Stop bits;T=INT;C=STATIC;O=0-1 bit/0/1-2 bits/1",
+};
+
+const entity enStopBits3 = {
+  EEPROM_STOP_BITS_3, &mibStopBits[3], sizeof(uchar), CHAR, 0,
+  0, STOP_BITS_COUNT-1, DEFAULT_STOP_BITS,
+  "SB@3",
+  "AI=SB@3;D=Stop bits;T=INT;C=STATIC;O=0-1 bit/0/1-2 bits/1",
+};
+
+const entity enStopBits4 = {
+  EEPROM_STOP_BITS_4, &mibStopBits[4], sizeof(uchar), CHAR, 0,
+  0, STOP_BITS_COUNT-1, DEFAULT_STOP_BITS,
+  "SB@4",
+  "AI=SB@4;D=Stop bits;T=INT;C=STATIC;O=0-1 bit/0/1-2 bits/1",
+};

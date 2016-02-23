@@ -15,7 +15,7 @@ io_mode.c
 
 
 
-static ioMode mIoModes[UART_COUNT];
+/*static*/ ioMode mIoModes[UART_COUNT];
 
 
 

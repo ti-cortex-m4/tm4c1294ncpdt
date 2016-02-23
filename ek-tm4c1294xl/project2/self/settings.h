@@ -23,6 +23,10 @@ SETTINGS,H
 #define DATA_BITS_COUNT 2
 #define DEFAULT_DATA_BITS 1
 
+#define STOP_BITS_COUNT 2
+#define DEFAULT_STOP_BITS 0
+
+
 
 extern const ulong             mdwBaudRates[BAUD_RATE_COUNT];
 
@@ -47,6 +51,7 @@ extern uint                    mwDestinationPort[UART_COUNT];
 extern uchar                   mibBaudRate[UART_COUNT];
 extern uchar                   mibParity[UART_COUNT];
 extern uchar                   mibDataBits[UART_COUNT];
+extern uchar                   mibStopBits[UART_COUNT];
 
 extern bool                    ibDebugMode;
 

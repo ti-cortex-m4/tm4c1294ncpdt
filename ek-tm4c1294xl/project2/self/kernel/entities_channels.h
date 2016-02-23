@@ -57,3 +57,9 @@ extern const entity enDataBits1;
 extern const entity enDataBits2;
 extern const entity enDataBits3;
 extern const entity enDataBits4;
+
+extern const entity enStopBits0;
+extern const entity enStopBits1;
+extern const entity enStopBits2;
+extern const entity enStopBits3;
+extern const entity enStopBits4;
