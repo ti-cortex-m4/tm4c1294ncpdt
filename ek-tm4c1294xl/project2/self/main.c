@@ -16,7 +16,7 @@ MAIN,C
 #include "kernel/log.h"
 #include "kernel/tasks.h"
 #include "settings.h"
-#include "systick.h"
+#include "hardware/sys_tick.h"
 #include "hardware/timer1.h"
 #include "hardware/delay.h"
 #include "uart/uarts.h"
