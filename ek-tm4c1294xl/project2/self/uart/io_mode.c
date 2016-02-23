@@ -15,7 +15,7 @@ io_mode.c
 
 
 
-ioMode mIoModes[UART_COUNT];
+static ioMode mIoModes[UART_COUNT];
 
 
 
@@ -84,7 +84,7 @@ static void OutputMode4(void)
 typedef void (*fn_io_mode)(void);
 
 
-fn_io_mode mfnInputModes[UART_COUNT] =
+static const fn_io_mode mfnInputModes[UART_COUNT] =
 {
   &InputMode0,
   &InputMode1,
@@ -93,7 +93,7 @@ fn_io_mode mfnInputModes[UART_COUNT] =
   &InputMode4,
 };
 
-fn_io_mode mfnOutputModes[UART_COUNT] =
+static const fn_io_mode mfnOutputModes[UART_COUNT] =
 {
   &OutputMode0,
   &OutputMode1,
