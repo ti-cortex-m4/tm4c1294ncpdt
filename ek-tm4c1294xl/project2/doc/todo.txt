@@ -71,3 +71,5 @@ usnprintf, remove custom printf
 uart stop bits
 
 убрать enity szCode
+
+uarts uart base and int map

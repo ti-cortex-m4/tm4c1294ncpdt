@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-uarts,c
+uarts.c
 
 
 ------------------------------------------------------------------------------*/
@@ -24,12 +24,12 @@ static ulong GetBaudRate(uchar u)
 
   if (mibBaudRate[u] < BAUD_RATE_COUNT)
   {
-    return mdwBAUDS[mibBaudRate[u]];
+    return mdwBaudRates[mibBaudRate[u]];
   }
   else
   {
     CONSOLE("%u: WARNING baud rate %u", u, mibBaudRate[u]);
-    return mdwBAUDS[DEFAULT_BAUD_RATE];
+    return mdwBaudRates[DEFAULT_BAUD_RATE];
   }
 }
 
@@ -46,9 +46,11 @@ static ulong GetParityMask(uchar u)
     case 3: return UART_CONFIG_PAR_ONE;
     case 4: return UART_CONFIG_PAR_ZERO;
 
-    default: CONSOLE("%u: WARNING parity %u", u, mibParity[u]); return UART_CONFIG_PAR_NONE;
+    default: CONSOLE("%u: WARNING parity %u", u, mibParity[u]);
+             return UART_CONFIG_PAR_NONE;
   }
 }
+
 
 static ulong GetDataBitsMask(uchar u)
 {
@@ -59,9 +61,11 @@ static ulong GetDataBitsMask(uchar u)
     case 0: return UART_CONFIG_WLEN_7;
     case 1: return UART_CONFIG_WLEN_8;
 
-    default: CONSOLE("%u: WARNING data bits %u", u, mibDataBits[u]); return UART_CONFIG_WLEN_8;
+    default: CONSOLE("%u: WARNING data bits %u", u, mibDataBits[u]);
+             return UART_CONFIG_WLEN_8;
   }
 }
+
 
 static ulong GetStopBitsMask(uchar u)
 {
@@ -70,19 +74,20 @@ static ulong GetStopBitsMask(uchar u)
 }
 
 
-static void InitUart(uchar u, ulong dwUartBase, ulong dwInterrupt, ulong dwClockFreq)
+static void InitUart(uchar u, ulong dwUart, ulong dwInterrupt, ulong dwClockFreq)
 {
   ASSERT(u < UART_COUNT);
 
-  UARTFIFOLevelSet(dwUartBase, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
-  UARTTxIntModeSet(dwUartBase, UART_TXINT_MODE_EOT);
-  UARTFIFOEnable(dwUartBase);
+  UARTFIFOLevelSet(dwUart, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(dwUart, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(dwUart);
 
   IntEnable(dwInterrupt);
-  UARTIntEnable(dwUartBase, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+  UARTIntEnable(dwUart, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
+  ulong dwBaudRate = GetBaudRate(u);
   ulong dwConfig = (GetDataBitsMask(u) | GetStopBitsMask(u) | GetParityMask(u));
-  UARTConfigSetExpClk(dwUartBase, dwClockFreq, GetBaudRate(u), dwConfig);
+  UARTConfigSetExpClk(dwUart, dwClockFreq, dwBaudRate, dwConfig);
 }
 
 
