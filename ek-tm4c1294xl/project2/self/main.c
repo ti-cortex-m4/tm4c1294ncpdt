@@ -11,11 +11,14 @@ MAIN,C
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/flash.h"
+#include "driverlib/pin_map.h"
 #include "utils/lwiplib_patched.h"
 #include "drivers/pinout.h"
 #include "kernel/log.h"
 #include "kernel/tasks.h"
 #include "kernel/settings.h"
+#include "hardware/gpio.h"
+#include "hardware/led.h"
 #include "hardware/sys_tick.h"
 #include "hardware/timer1.h"
 #include "hardware/delay.h"
@@ -72,14 +75,9 @@ int     main(void)
   // Run from the PLL at 120 MHz.
   ulong dwClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
-  // Configure the device pins.
-  PinoutSet(true, false);
 
-  // Configure Port N1 for as an output for the animation LED.
-  GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_1);
-
-  // Initialize LED to OFF (0)
-  GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, ~GPIO_PIN_1);
+  InitGPIO();
+  InitLED();
 
   InitSettings();
 
