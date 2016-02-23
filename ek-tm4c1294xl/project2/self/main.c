@@ -92,6 +92,8 @@ int     main(void)
   pbMAC[4] = wSerialNumber / 0x100;
   pbMAC[5] = wSerialNumber % 0x100;
 
+  ASSERT(dwIP != 0);
+
   lwIPInit(dwClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
   InitUdpLog();
