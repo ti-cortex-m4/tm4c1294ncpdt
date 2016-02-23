@@ -14,6 +14,7 @@ var
   s,z: string;
   PrevName, PrevAddr: string;
   CurrName, CurrAddr: string;
+  Align: byte;
 
   State: (INIT, FIRST, NEXT, LAST);
 
@@ -30,7 +31,9 @@ begin
     Target2 := TStringList.Create;
 
     try
-      if ParamCount < 3 then raise Exception.Create('stack.exe input_file output_file1 output_file2');
+      if ParamCount < 4 then raise Exception.Create('stack.exe input_file output_file1 output_file2 align');
+
+      Align := StrToInt(ParamStr(4));
       State := INIT;
 
       Source.Loadfromfile(ParamStr(1));
@@ -47,7 +50,7 @@ begin
             PrevName := Trim(Copy(z, 1, j-1));
             PrevAddr := Trim(Copy(z, j+1, Length(z)-j));
 
-            Target1.Add('  ' + PackStrR(PrevName, 21) + ' = ' + PrevAddr + ',');
+            Target1.Add('  ' + PackStrR(PrevName, Align) + ' = ' + PrevAddr + ',');
             Target2.Add('  PUSH_VALUE(' + PrevName + ')');
 
             State := FIRST;
@@ -67,11 +70,11 @@ begin
             if (State = FIRST) then begin
               State := NEXT;
 
-              Target1.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ',');
+              Target1.Add('  ' + PackStrR(CurrName, Align) + ' = ' + PrevName + ',');
               Target2.Add('  PUSH_ADDRESS(' + CurrName + ')');
             end
             else begin
-              Target1.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ' + ' + PrevAddr + ',');
+              Target1.Add('  ' + PackStrR(CurrName, Align) + ' = ' + PrevName + ' + ' + PrevAddr + ',');
               Target2.Add('  PUSH_ADDRESS(' + CurrName + ')');
             end;
 
@@ -88,7 +91,7 @@ begin
           z := Trim(Copy(s, b+4, e-b-4));
           CurrName := z;
 
-          Target1.Add('  ' + PackStrR(CurrName, 21) + ' = ' + PrevName + ' + ' + PrevAddr);
+          Target1.Add('  ' + PackStrR(CurrName, Align) + ' = ' + PrevName + ' + ' + PrevAddr);
           Target2.Add('  PUSH_VALUE(' + CurrName + ')');
 
           State := LAST;
