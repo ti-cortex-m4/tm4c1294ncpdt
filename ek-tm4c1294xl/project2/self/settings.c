@@ -14,10 +14,11 @@ TODO
 
 
 
+#define SETTINGS_LABEL  8
+
+
+
 const ulong             mdwBaudRates[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
-
-
-#define SETTINGS_LABEL  7
 
 
 
@@ -42,6 +43,7 @@ uint                    mwDestinationPort[UART_COUNT];
 uchar                   mibBaudRate[UART_COUNT];
 uchar                   mibParity[UART_COUNT];
 uchar                   mibDataBits[UART_COUNT];
+uchar                   mibStopBits[UART_COUNT];
 
 bool                    ibDebugMode;
 

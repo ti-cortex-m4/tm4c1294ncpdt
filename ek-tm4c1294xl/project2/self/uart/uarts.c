@@ -70,7 +70,15 @@ static ulong GetDataBitsMask(uchar u)
 static ulong GetStopBitsMask(uchar u)
 {
   ASSERT(u < UART_COUNT);
-  return UART_CONFIG_STOP_ONE;
+
+  switch(mibStopBits[u])
+  {
+    case 0: return UART_CONFIG_STOP_ONE;
+    case 1: return UART_CONFIG_STOP_TWO;
+
+    default: CONSOLE("%u: WARNING stop bits %u", u, mibStopBits[u]);
+             return UART_CONFIG_STOP_ONE;
+  }
 }
 
 
@@ -86,7 +94,7 @@ static void InitUart(uchar u, ulong dwUart, ulong dwInterrupt, ulong dwClockFreq
   UARTIntEnable(dwUart, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
   ulong dwBaudRate = GetBaudRate(u);
-  ulong dwConfig = (GetDataBitsMask(u) | GetStopBitsMask(u) | GetParityMask(u));
+  ulong dwConfig = (GetParityMask(u) | GetDataBitsMask(u) | GetStopBitsMask(u));
   UARTConfigSetExpClk(dwUart, dwClockFreq, dwBaudRate, dwConfig);
 }
 
