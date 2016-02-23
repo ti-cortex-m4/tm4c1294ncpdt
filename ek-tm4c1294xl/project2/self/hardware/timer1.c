@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-TIMER1,C
+timer1.c
 
 ------------------------------------------------------------------------------*/
 
@@ -19,7 +19,7 @@ TIMER1,C
 
 
 
-void    InitTimer1(ulong dwClockFreq)
+void InitTimer1(ulong dwClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
 
@@ -34,10 +34,7 @@ void    InitTimer1(ulong dwClockFreq)
 
 
 
-void Timer1IntHandler(void) // TODO Timer1IntHandler
+void Timer1IntHandler(void)
 {
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
-
-//  LogTimer_1000Hz();
-//  UART_1000Hz();
 }
