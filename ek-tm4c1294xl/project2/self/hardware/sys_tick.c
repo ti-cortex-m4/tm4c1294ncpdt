@@ -11,8 +11,8 @@ sys_tick.c
 
 
 
-#define SYSTICK_FREQ    100
-#define SYSTICK_PERIOD  (1000 / SYSTICK_FREQ) // milliseconds
+#define SYS_TICK_FREQ   100
+#define SYS_TICK_PERIOD (1000 / SYS_TICK_FREQ) // milliseconds
 
 
 
@@ -28,17 +28,17 @@ sys_tick.c
 void SysTickIntHandler(void)
 {
   // Increment a local system time.
-  g_ulSystemTimeMS += SYSTICK_PERIOD;
+  g_ulSystemTimeMS += SYS_TICK_PERIOD;
 
   // Call the lwIP timer handler.
-  lwIPTimer(SYSTICK_PERIOD);
+  lwIPTimer(SYS_TICK_PERIOD);
 }
 
 
 
 void InitSysTick(ulong dwClockFreq)
 {
-  SysTickPeriodSet(dwClockFreq / SYSTICK_FREQ);
+  SysTickPeriodSet(dwClockFreq / SYS_TICK_FREQ);
   SysTickEnable();
   SysTickIntEnable();
 }

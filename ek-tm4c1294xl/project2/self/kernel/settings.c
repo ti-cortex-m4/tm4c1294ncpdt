@@ -4,12 +4,12 @@ SETTINGS,C
 TODO
 ------------------------------------------------------------------------------*/
 
-#include "main.h"
+#include "../main.h"
 #include "lwip/inet.h"
-#include "generated/eeprom.h"
-#include "hardware/storage.h"
-#include "kernel/entity.h"
-#include "kernel/log.h"
+#include "../generated/eeprom.h"
+#include "../hardware/storage.h"
+#include "entity.h"
+#include "log.h"
 #include "settings.h"
 
 

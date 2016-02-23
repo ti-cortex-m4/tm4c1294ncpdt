@@ -6,7 +6,7 @@ entities_debug.c
 
 #include "../main.h"
 #include "../generated/eeprom.h"
-#include "../settings.h"
+#include "settings.h"
 #include "entities_debug.h"
 
 

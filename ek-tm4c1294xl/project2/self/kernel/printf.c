@@ -7,7 +7,7 @@ printf.c
 #include "../main.h"
 #include <stdarg.h>
 #include "utils/uartstdio.h"
-#include "../settings.h"
+#include "settings.h"
 #include "../udp/udp_log.h"
 #include "printf.h"
 

@@ -6,7 +6,7 @@ uart_log.c
 
 #include "../main.h"
 #include "utils/uartstdio.h"
-#include "../settings.h"
+#include "../kernel/settings.h"
 #include "uart_log.h"
 
 
