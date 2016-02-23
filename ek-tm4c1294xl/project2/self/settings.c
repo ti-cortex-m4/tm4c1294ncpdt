@@ -55,6 +55,7 @@ uint                    wLwIpDebugTimeout;
 
 
 uint                    cwErrStorageInit;
+uint                    cwErrIpLoad;
 uint                    cwErrEntitySave;
 
 
@@ -80,12 +81,6 @@ static void LoadSettingsDef(void)
       LoadEntityDef(pen);
     }
   }
-
-  LoadEntity(&enIP);
-  if (*(ulong *)enIP.pbRam == 0)
-  {
-    LoadEntityDef(&enIP);
-  }
 }
 
 
@@ -109,7 +104,7 @@ static void SaveSettings(void)
 
 void InitSettings(void)
 {
-  ulong code = InitStorage();
+  const ulong code = InitStorage();
   if (code == 0)
   {
     ulong dw = 0;
@@ -129,6 +124,17 @@ void InitSettings(void)
   {
     cwErrStorageInit++;
     LoadSettingsDef();
+  }
+
+  if (dwIP == 0)
+  {
+    cwErrIpLoad++;
+
+    LoadEntityDef(&enIP);
+    if (code == 0)
+    {
+      SaveEntity(&enIP);
+    }
   }
 }
 

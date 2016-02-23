@@ -64,3 +64,5 @@ usnprintf, remove custom printf
 убрать enity szCode
 
 uarts uart base and int map
+
+close/abort connection
