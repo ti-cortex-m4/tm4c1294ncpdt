@@ -68,3 +68,17 @@ usnprintf, remove custom printf
 uarts uart base and int map
 
 close/abort connection
+
+            //
+            // Delay a couple of seconds to let any pending web server
+            // transmission to complete.  Each loop within SysCtlDelay is
+            // 3 instructions long so this delays approximately 2 seconds.
+            //
+            SysCtlDelay((SysCtlClockGet() / 3) * 2);
+            
+        //
+        // Wait for an event to occur.
+        //
+        SysCtlSleep();
+        
+            
