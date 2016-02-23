@@ -79,7 +79,7 @@ static void SerialUARTIntHandler(uint32_t ulPort)
             // Get the next character from the receive FIFO.
             ucChar = UARTCharGet(g_ulUARTBase[ulPort]);
 
-#if false
+#ifdef PROTOCOL_TELNET
             // If Telnet protocol enabled, check for incoming IAC character,
             // and escape it.
             if((g_sParameters.sPort[ulPort].ucFlags &
