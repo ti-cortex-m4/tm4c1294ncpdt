@@ -4,10 +4,10 @@ SYSTICK,C
 
 ------------------------------------------------------------------------------*/
 
-#include "main.h"
+#include "../main.h"
 #include "driverlib/systick.h"
 #include "utils/lwiplib_patched.h"
-#include "systick.h"
+#include "sys_tick.h"
 
 
 
@@ -45,11 +45,8 @@ void    SysTickIntHandler(void)
 
 
 
-void    InitSysTick(ulong dwClockFreq)
+void InitSysTick(ulong dwClockFreq)
 {
-  //
-  // Configure SysTick for a periodic interrupt.
-  //
   SysTickPeriodSet(dwClockFreq / SYSTICKHZ);
   SysTickEnable();
   SysTickIntEnable();

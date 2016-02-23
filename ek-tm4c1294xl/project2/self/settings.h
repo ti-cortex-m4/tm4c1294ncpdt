@@ -63,6 +63,7 @@ extern bool                    fLwIpDebugFlag;
 extern uint                    wLwIpDebugTimeout;
 
 extern uint                    cwErrStorageInit;
+extern uint                    cwErrIpLoad;
 extern uint                    cwErrEntitySave;
 
 
