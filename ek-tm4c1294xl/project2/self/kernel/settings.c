@@ -1,11 +1,10 @@
 /*------------------------------------------------------------------------------
-SETTINGS,C
+settings,c
 
-TODO
+
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "lwip/inet.h"
 #include "../generated/eeprom.h"
 #include "../hardware/storage.h"
 #include "entity.h"
