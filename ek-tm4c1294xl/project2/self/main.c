@@ -15,7 +15,7 @@ MAIN,C
 #include "drivers/pinout.h"
 #include "kernel/log.h"
 #include "kernel/tasks.h"
-#include "settings.h"
+#include "kernel/settings.h"
 #include "hardware/sys_tick.h"
 #include "hardware/timer1.h"
 #include "hardware/delay.h"

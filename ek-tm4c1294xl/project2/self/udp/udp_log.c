@@ -7,7 +7,7 @@ udp_log,C
 #include "../main.h"
 #include "lwip/inet.h"
 #include "lwip/udp.h"
-#include "../settings.h"
+#include "../kernel/settings.h"
 #include "udp_log.h"
 
 

@@ -5,7 +5,6 @@ uarts.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../settings.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "driverlib/gpio.h"
@@ -13,6 +12,7 @@ uarts.c
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "driverlib/interrupt.h"
+#include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "uarts.h"
 
