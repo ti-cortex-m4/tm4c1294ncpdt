@@ -53,6 +53,8 @@ minimise CONSOLE messages sizes
 
 enet_s2e ISR priorities etc.
 
+led freq
+
 все операции с entities в одно место из udp_in
 
 lwIP inside project

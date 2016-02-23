@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-entities_default.h
+entities_default,h
 
 
 ------------------------------------------------------------------------------*/
@@ -8,12 +8,12 @@ entities_default.h
 #define __ENTITIES_DEFAULT_H__
 
 
-#define DEFAULT_CONNECTION_TIMEOUT     2 // TODO 5
+#define DEFAULT_CONNECTION_TIMEOUT     1 // TODO 5
 #define DEFAULT_ROUTING_MODE           0
-#define DEFAULT_PORT                   1001
+#define DEFAULT_PORT                   1001 // TODO
 #define DEFAULT_CONNECTION_MODE        1
 #define DEFAULT_DESTINATION_IP         0x00000001
-#define DEFAULT_DESTINATION_PORT       1001
+#define DEFAULT_DESTINATION_PORT       1001 // TODO
 
 #define BAUD_RATE_COUNT                14
 #define DEFAULT_BAUD_RATE              6
