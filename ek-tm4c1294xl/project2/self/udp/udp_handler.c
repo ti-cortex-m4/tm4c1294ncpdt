@@ -14,6 +14,6 @@ udp_handler.c
 void InitUdpHandler(void)
 {
   void *pcb = udp_new();
-  udp_recv(pcb, UDP_In, NULL);
+  udp_recv(pcb, UdpInput, NULL);
   udp_bind(pcb, IP_ADDR_ANY, 0xFFFF);
 }

@@ -14,7 +14,7 @@ TODO
 
 
 
-#define SETTINGS_LABEL  8
+#define SETTINGS_LABEL  9
 
 
 
@@ -80,6 +80,12 @@ static void LoadSettingsDef(void)
       LoadEntityDef(pen);
     }
   }
+
+  LoadEntity(&enIP);
+  if (*(ulong *)enIP.pbRam == 0)
+  {
+    LoadEntityDef(&enIP);
+  }
 }
 
 
@@ -129,16 +135,7 @@ void InitSettings(void)
 
 void ResetSettings(void)
 {
-  uchar e;
-  for (e = 0; e < bEntitiesSize; e++)
-  {
-    const entity *pen = mpenEntities[e];
-    if (((pen->dwFlags) & FLAG_DONT_RESET) == 0)
-    {
-      LoadEntityDef(pen);
-    }
-  }
-
+  LoadSettingsDef();
   SaveSettings();
 }
 
