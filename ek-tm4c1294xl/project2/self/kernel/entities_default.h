@@ -8,7 +8,7 @@ entities_default.h
 #define __ENTITIES_DEFAULT_H__
 
 
-#define DEFAULT_CONNECTION_TIMEOUT     1 // TODO 5
+#define DEFAULT_CONNECTION_TIMEOUT     2 // TODO 5
 #define DEFAULT_ROUTING_MODE           0
 #define DEFAULT_PORT                   1001
 #define DEFAULT_CONNECTION_MODE        1
