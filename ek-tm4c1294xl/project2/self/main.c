@@ -75,9 +75,7 @@ int     main(void)
   // Run from the PLL at 120 MHz.
   ulong dwClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
-
   InitGPIO();
-  InitLED();
 
   InitSettings();
 
@@ -93,6 +91,8 @@ int     main(void)
   ASSERT(dwIp != 0);
 
   lwIPInit(dwClockFreq, pbMac, dwIp, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+
+  InitLED();
 
   InitUdpLog();
 
