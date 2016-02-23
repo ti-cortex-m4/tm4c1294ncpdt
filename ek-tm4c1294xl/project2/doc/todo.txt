@@ -11,10 +11,6 @@ TCP_WRITE_FLAG_COPY
 
 rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib
 
-InitSettings check result
-SaveSettings check result 
-#define LWIP_PLATFORM_DIAG(msg)
-
 // Free up the pbuf.  Note that we don't acknowledge receipt of the data since we want it to be retransmitted later.
 // If we already have a connection, kill it and start over.
 // Process the RX ring buffer data if space is available in the TCP output buffer.
@@ -47,14 +43,11 @@ usTelnetLocalPort in client mode
 watchdog
 
 F=R* F=R restart readonly_values
-установка скорости uart без рестарта
 
 return ERR_VAL&ERR_ARG CONSOLE_UART
 
-tibbo initialise routing_status buzz change_ip
+tibbo routing_status buzz change_ip
 tibbo defaults
-
-1 sec. delay
 
 minimise CONSOLE messages sizes
 
@@ -68,10 +61,6 @@ const entity * const
 
 usnprintf, remove custom printf
 
-uart stop bits
-
 убрать enity szCode
 
 uarts uart base and int map
-
-@0 @1
