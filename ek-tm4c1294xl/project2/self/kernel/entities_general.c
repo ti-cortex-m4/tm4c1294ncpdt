@@ -12,7 +12,7 @@ entities_general.c
 
 
 const entity enIP = {
-  EEPROM_IP, &dwIP, sizeof(ulong), IP, FLAG_DONT_RESET,
+  EEPROM_IP, &dwIp, sizeof(ulong), IP, FLAG_DONT_RESET,
   0, MAX_LONG, 0x01000001,
   "IP",
   "AI=IP;D=IP-address;T=STRING;C=IPCTRL;F=R*",

@@ -101,7 +101,7 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 
   InitPush();
   PushString("A");
-  PushArrayString(pbMAC, 6);
+  PushArrayString(pbMac, 6);
   PushString("/");
   PushString("000001001"); // TODO "000001001"
   PushString("/");

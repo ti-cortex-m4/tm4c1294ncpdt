@@ -85,16 +85,16 @@ int     main(void)
 
   InitUartLog(dwClockFreq);
 
-  pbMAC[0] = 0x00;
-  pbMAC[1] = 0x1B;
-  pbMAC[2] = 0xB6;
-  pbMAC[3] = 1;
-  pbMAC[4] = wSerialNumber / 0x100;
-  pbMAC[5] = wSerialNumber % 0x100;
+  pbMac[0] = 0x00;
+  pbMac[1] = 0x1B;
+  pbMac[2] = 0xB6;
+  pbMac[3] = 1;
+  pbMac[4] = wSerialNumber / 0x100;
+  pbMac[5] = wSerialNumber % 0x100;
 
-  ASSERT(dwIP != 0);
+  ASSERT(dwIp != 0);
 
-  lwIPInit(dwClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+  lwIPInit(dwClockFreq, pbMac, dwIp, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
   InitUdpLog();
 

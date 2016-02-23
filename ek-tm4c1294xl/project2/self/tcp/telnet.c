@@ -21,6 +21,15 @@ TELNET,C
 static tTelnetSession g_sTelnetSession[UART_COUNT];
 
 
+//! The timeout for the TCP connection used for the telnet session, specified in seconds.
+//! A value of 0 indicates no timeout is to be used.
+ulong getTelnetTimeout(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+  return mbConnectionTimeout[u]*60;
+}
+
+
 tTelnetSession *getTelnetSession(uchar ibUart)
 {
   ASSERT(ibUart < UART_COUNT);
