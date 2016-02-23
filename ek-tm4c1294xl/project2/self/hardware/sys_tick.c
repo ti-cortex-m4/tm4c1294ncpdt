@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-SYSTICK,C
+sys_tick.c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,17 +11,8 @@ SYSTICK,C
 
 
 
-//
-// Defines for setting up the system clock.
-//
-#define SYSTICKHZ               100
-#define SYSTICKMS               (1000 / SYSTICKHZ)
-
-
-//*****************************************************************************
-// External Reference.
-//*****************************************************************************
-extern uint32_t g_ulSystemTimeMS;
+#define SYSTICK_FREQ    100
+#define SYSTICK_PERIOD  (1000 / SYSTICK_FREQ) // milliseconds
 
 
 
@@ -34,20 +25,20 @@ extern uint32_t g_ulSystemTimeMS;
 //!
 //! \return None.
 //*****************************************************************************
-void    SysTickIntHandler(void)
+void SysTickIntHandler(void)
 {
-    // Increment a local system time.
-    g_ulSystemTimeMS += SYSTICKMS;
+  // Increment a local system time.
+  g_ulSystemTimeMS += SYSTICK_PERIOD;
 
-    // Call the lwIP timer handler.
-    lwIPTimer(SYSTICKMS);
+  // Call the lwIP timer handler.
+  lwIPTimer(SYSTICK_PERIOD);
 }
 
 
 
 void InitSysTick(ulong dwClockFreq)
 {
-  SysTickPeriodSet(dwClockFreq / SYSTICKHZ);
+  SysTickPeriodSet(dwClockFreq / SYSTICK_FREQ);
   SysTickEnable();
   SysTickIntEnable();
 }
