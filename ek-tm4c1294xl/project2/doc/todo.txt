@@ -54,7 +54,8 @@ minimise CONSOLE messages sizes
 enet_s2e ISR priorities etc.
 
 led freq
-
+  EMACPHYExtendedWrite(EMAC0_BASE, 0, EPHY_LEDCR, (EMACPHYExtendedRead(EMAC0_BASE, 0, EPHY_LEDCR) & ~EPHY_LEDCR_BLINKRATE_M) | EPHY_LEDCR_BLINKRATE_10HZ);
+  
 все операции с entities в одно место из udp_in
 
 lwIP inside project
