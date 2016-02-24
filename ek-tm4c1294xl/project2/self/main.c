@@ -13,7 +13,6 @@ MAIN,C
 #include "driverlib/flash.h"
 #include "driverlib/pin_map.h"
 #include "utils/lwiplib_patched.h"
-#include "drivers/pinout.h"
 #include "kernel/log.h"
 #include "kernel/tasks.h"
 #include "kernel/settings.h"
