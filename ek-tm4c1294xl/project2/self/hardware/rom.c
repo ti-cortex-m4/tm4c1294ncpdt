@@ -3,7 +3,7 @@ TODO MEMORY!C
 
 
 ------------------------------------------------------------------------------*/
-
+#if 0
 #include "../main.h"
 #include "inc/hw_types.h"
 #include "driverlib/sysctl.h"
@@ -78,3 +78,4 @@ void    InitCODE(void)
     if ((bCRCHi != 0) || (bCRCLo != 0)) TestError(szBadCODE);
   }
 }
+#endif
