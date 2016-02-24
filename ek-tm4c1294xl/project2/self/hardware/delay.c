@@ -55,7 +55,7 @@ void DelayMicroSecond(uint wMicroSecond)
 }
 
 
-void DelayMillySecond(uint wMillySecond)
+void DelayMilliSecond(uint wMillySecond)
 {
   if (wMillySecond == 0)
     return;
@@ -74,6 +74,6 @@ void DelaySecond(uint wSecond)
 
   while (wSecond-- > 0)
   {
-    DelayMillySecond(1000);
+    DelayMilliSecond(1000);
   }
 }

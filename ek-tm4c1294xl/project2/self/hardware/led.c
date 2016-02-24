@@ -11,6 +11,7 @@ led.c
 #include "driverlib/gpio.h"
 #include "driverlib/pin_map.h"
 #include "driverlib/emac.h"
+#include "delay.h"
 #include "led.h"
 
 
@@ -21,6 +22,18 @@ void InitLEDs(void)
 
   GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_4 | GPIO_PIN_4, 0);
   GPIOPadConfigSet(GPIO_PORTK_BASE, GPIO_PIN_4 | GPIO_PIN_6, GPIO_STRENGTH_12MA, GPIO_PIN_TYPE_STD);
+
+  OnLED1();
+  OnLED2();
+  DelayMilliSecond(300);
+  OffLED1();
+  OnLED2();
+  DelayMilliSecond(300);
+  OnLED1();
+  OffLED2();
+  DelayMilliSecond(300);
+  OffLED1();
+  OffLED2();
 }
 
 
