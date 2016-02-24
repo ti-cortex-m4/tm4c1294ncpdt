@@ -25,13 +25,13 @@ void InitLEDs(void)
 
   OnLED1();
   OnLED2();
-  DelayMilliSecond(300);
+  DelayMilliSecond(200);
   OffLED1();
   OnLED2();
-  DelayMilliSecond(300);
+  DelayMilliSecond(200);
   OnLED1();
   OffLED2();
-  DelayMilliSecond(300);
+  DelayMilliSecond(200);
   OffLED1();
   OffLED2();
 }
