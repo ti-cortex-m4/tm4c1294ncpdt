@@ -11,6 +11,7 @@ tasks.c
 #include "../tcp/telnet.h"
 #include "../uart/serial.h"
 #include "entities.h"
+#include "version.h"
 #include "tasks.h"
 
 
@@ -100,5 +101,7 @@ static uint wTimeout;
   {
     wTimeout = 0;
     stats_display();
+
+    ConsoleVersion();
   }
 }

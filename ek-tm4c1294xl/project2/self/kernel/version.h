@@ -1,11 +1,7 @@
 /*------------------------------------------------------------------------------
-rom.h
+version.h
 
 
 ------------------------------------------------------------------------------*/
 
-void InitROM(void);
-
-uint GetROMChecksum(void);
-uint GetROMBuildNumber(void);
-timedate GetROMBuildTimeDate(void);
+void ConsoleVersion(void);
