@@ -1,21 +1,20 @@
 /*------------------------------------------------------------------------------
-MEMORY!H
+rom,h
 
 
 ------------------------------------------------------------------------------*/
-#if 0
 
-void    InitCODE(void);
+void InitROM(void);
 
-ulong   GetFileSize(void);
-uint    GetRomChecksum(void);
-uint    GetBuildNumber(void);
-uchar   GetBuildDate_Second(void);
-uchar   GetBuildDate_Minute(void);
-uchar   GetBuildDate_Hour(void);
-uchar   GetBuildDate_Day(void);
-uchar   GetBuildDate_Month(void);
-uchar   GetBuildDate_Year(void);
+//ulong   GetBinFileSize(void);
+//uint    GetRomChecksum(void);
 
-void    Restart(void);
-#endif
+//uint    GetBuildNumber(void);
+//uchar   GetBuildDate_Second(void);
+//uchar   GetBuildDate_Minute(void);
+//uchar   GetBuildDate_Hour(void);
+//uchar   GetBuildDate_Day(void);
+//uchar   GetBuildDate_Month(void);
+//uchar   GetBuildDate_Year(void);
+
+//void    Restart(void);
