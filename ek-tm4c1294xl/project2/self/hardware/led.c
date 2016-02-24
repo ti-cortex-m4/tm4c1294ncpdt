@@ -23,38 +23,38 @@ void InitLEDs(void)
   GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_4 | GPIO_PIN_4, 0);
   GPIOPadConfigSet(GPIO_PORTK_BASE, GPIO_PIN_4 | GPIO_PIN_6, GPIO_STRENGTH_12MA, GPIO_PIN_TYPE_STD);
 
+  OnLED0();
   OnLED1();
-  OnLED2();
   DelayMilliSecond(200);
-  OffLED1();
-  OnLED2();
-  DelayMilliSecond(200);
+  OffLED0();
   OnLED1();
-  OffLED2();
   DelayMilliSecond(200);
+  OnLED0();
   OffLED1();
-  OffLED2();
+  DelayMilliSecond(200);
+  OffLED0();
+  OffLED1();
 }
 
 
 
-void OffLED1(void)
+void OffLED0(void)
 {
   GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_4, GPIO_PIN_4);
 }
 
-void OnLED1(void)
+void OnLED0(void)
 {
   GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_4, 0);
 }
 
 
-void OffLED2(void)
+void OffLED1(void)
 {
   GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_6, GPIO_PIN_6);
 }
 
-void OnLED2(void)
+void OnLED1(void)
 {
   GPIOPinWrite(GPIO_PORTK_BASE, GPIO_PIN_6, 0);
 }

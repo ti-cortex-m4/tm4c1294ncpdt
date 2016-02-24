@@ -45,5 +45,5 @@ const entity enLwIpDebugTimeout = {
   EEPROM_LWIP_DEBUG_TIMEOUT, &wLwIpDebugTimeout, sizeof(uint), INT, 0,
   0, 3600, 300,
   "LWIPDT",
-  "AI=LWIPDT;E=1;D=TCP/IP stack debug timeout (seconds);T=INT;C=EDIT;V=LWIPDT>3600?\"Maximum timeout is 3600 seconds\":\"\";S=LWIPDF!=0?\"e\":\"i\"",
+  "AI=LWIPDT;E=1;D=TCP/IP stack debug period (seconds);T=INT;C=EDIT;V=LWIPDT>3600?\"Maximum timeout is 3600 seconds\":\"\";S=LWIPDF!=0?\"e\":\"i\"",
 };
