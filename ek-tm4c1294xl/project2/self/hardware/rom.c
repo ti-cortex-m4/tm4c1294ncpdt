@@ -8,6 +8,8 @@ rom,c
 #include "inc/hw_types.h"
 #include "../kernel/crc16.h"
 #include "../kernel/log.h"
+#include "../hardware/delay.h"
+#include "../hardware/led.h"
 #include "rom.h"
 
 
@@ -16,7 +18,7 @@ static char const       szBinFileSize[] = "BinFileSize    BinFileSize";
 
 
 
-ulong   GetBinFileSize(void)
+static ulong GetBinFileSize(void)
 {
   combo32 co;
   co.mpbBuff[0] = szBinFileSize[11];
@@ -28,10 +30,10 @@ ulong   GetBinFileSize(void)
 }
 
 
-uchar   GetRomChar(uchar  i)
+static uchar GetRomChar(uchar  i)
 {
-  ulong dwFileSize = GetBinFileSize();
-  return dwFileSize == 0x20202020 ? 0 : HWREGB(dwFileSize + i);
+  ulong dwSize = GetBinFileSize();
+  return dwSize == 0x20202020 ? 0 : HWREGB(dwSize + i);
 }
 
 
@@ -63,7 +65,7 @@ void    Restart(void)
 */
 
 
-void    InitROM(void)
+void InitROM(void)
 {
   ulong dwSize = GetBinFileSize();
   if (dwSize != 0x20202020)
@@ -81,6 +83,15 @@ void    InitROM(void)
     if ((bCRCHi != 0) || (bCRCLo != 0))
     {
     }
+  }
+  else
+  {
+    OnLED1();
+    OnLED2();
+    DelaySecond(5);
+    OffLED1();
+    OffLED2();
+    DelaySecond(5);
   }
 }
 

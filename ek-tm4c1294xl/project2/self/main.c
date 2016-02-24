@@ -22,6 +22,7 @@ MAIN,C
 #include "hardware/sys_tick.h"
 #include "hardware/timer1.h"
 #include "hardware/delay.h"
+#include "hardware/rom.h"
 #include "uart/uarts.h"
 #include "uart/serial.h"
 #include "uart/uart_log.h"
@@ -76,9 +77,10 @@ int     main(void)
   ulong dwClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
   InitGPIO();
+  InitLEDs();
+  InitROM();
 
   InitSettings();
-
   InitUartLog(dwClockFreq);
 
   pbMac[0] = 0x00;
@@ -92,7 +94,7 @@ int     main(void)
 
   lwIPInit(dwClockFreq, pbMac, dwIp, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
-  InitLED();
+  InitEthernetLEDs();
 
   InitUdpLog();
 
