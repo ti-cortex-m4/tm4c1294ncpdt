@@ -10,6 +10,7 @@ TELNET,C
 #include "../kernel/log.h"
 #include "../uart/serial.h"
 #include "../uart/serial_send.h"
+#include "../uart/serial_receive.h"
 #include "../uart/io_mode.h"
 #include "../kernel/settings.h"
 #include "telnet.h"
