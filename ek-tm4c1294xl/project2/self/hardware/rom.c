@@ -6,6 +6,7 @@ rom,c
 
 #include "../main.h"
 #include "inc/hw_types.h"
+#include "driverlib/interrupt.h"
 #include "../kernel/crc16.h"
 #include "../kernel/log.h"
 #include "../hardware/delay.h"
@@ -82,6 +83,7 @@ void InitROM(void)
 
     if ((bCRCHi != 0) || (bCRCLo != 0))
     {
+      IntMasterDisable();
       while (true)
       {
         OffLED1();
