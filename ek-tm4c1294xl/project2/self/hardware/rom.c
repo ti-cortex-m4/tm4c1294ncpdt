@@ -82,16 +82,17 @@ void InitROM(void)
 
     if ((bCRCHi != 0) || (bCRCLo != 0))
     {
+      while (true)
+      {
+        OffLED1();
+        OnLED2();
+        DelayMilliSecond(500);
+
+        OnLED1();
+        OffLED2();
+        DelayMilliSecond(500);
+      }
     }
-  }
-  else
-  {
-    OnLED1();
-    OnLED2();
-    DelaySecond(5);
-    OffLED1();
-    OffLED2();
-    DelaySecond(5);
   }
 }
 
