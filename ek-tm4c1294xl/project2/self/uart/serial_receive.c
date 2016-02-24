@@ -23,8 +23,6 @@ serial_receive.c
 //*****************************************************************************
 long SerialReceive(uint32_t ulPort)
 {
-    uint32_t ulData;
-
     // Check the arguments.
     ASSERT(ulPort < UART_COUNT);
 
@@ -36,7 +34,7 @@ long SerialReceive(uint32_t ulPort)
     }
 
     // Read a single character.
-    ulData = (long)RingBufReadOne(&g_sRxBuf[ulPort]);
+    uint32_t ulData = (long)RingBufReadOne(&g_sRxBuf[ulPort]);
 
 #ifdef SERIAL_FLOW_CONTROL
     // If flow control is enabled, check the status of the RX buffer to
