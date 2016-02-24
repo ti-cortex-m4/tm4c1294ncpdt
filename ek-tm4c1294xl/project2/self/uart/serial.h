@@ -1,8 +1,18 @@
 /*------------------------------------------------------------------------------
-serial.h
+serial,h
 
 
 ------------------------------------------------------------------------------*/
+
+#include "utils/ringbuf.h"
+
+
+
+extern tRingBufObject g_sRxBuf[UART_COUNT];
+extern tRingBufObject g_sTxBuf[UART_COUNT];
+
+extern const uint32_t g_ulUARTBase[UART_COUNT];
+
 
 long SerialReceive(uint32_t ulPort);
 uint32_t SerialReceiveAvailable(uint32_t ulPort);

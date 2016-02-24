@@ -5,18 +5,8 @@ serial_send,c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "inc/hw_ints.h"
-#include "inc/hw_memmap.h"
-#include "inc/hw_sysctl.h"
-#include "inc/hw_types.h"
-#include "inc/hw_uart.h"
-#include "driverlib/debug.h"
-#include "driverlib/gpio.h"
-#include "driverlib/interrupt.h"
-#include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
-#include "utils/ringbuf.h"
-#include "../uart/io_mode.h"
+#include "serial.h"
 #include "serial_send.h"
 
 
@@ -40,6 +30,8 @@ bool SerialSendFull(uint32_t ulPort)
     // Return the number of bytes available in the tx ring buffer.
     return(RingBufFull(&g_sTxBuf[ulPort]));
 }
+
+
 
 //*****************************************************************************
 //! Sends a character to the UART.

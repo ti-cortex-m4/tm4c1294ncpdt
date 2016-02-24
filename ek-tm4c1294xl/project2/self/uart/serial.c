@@ -29,14 +29,14 @@ static uint8_t mmbTxBuf[UART_COUNT][TX_RING_BUF_SIZE];
 
 
 // The ring buffers used to hold characters received from the UARTs.
-static tRingBufObject g_sRxBuf[UART_COUNT];
+tRingBufObject g_sRxBuf[UART_COUNT];
 
 // The ring buffers used to hold characters to be sent to the UARTs.
-static tRingBufObject g_sTxBuf[UART_COUNT];
+tRingBufObject g_sTxBuf[UART_COUNT];
 
 
 //! The base address for the UART associated with a port.
-static const uint32_t g_ulUARTBase[UART_COUNT] =
+const uint32_t g_ulUARTBase[UART_COUNT] =
 {
     UART0_BASE,
     UART4_BASE,
