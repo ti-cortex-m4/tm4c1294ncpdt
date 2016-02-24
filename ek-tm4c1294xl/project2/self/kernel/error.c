@@ -23,12 +23,12 @@ void __error__(char *pszFileName, ulong dwLine)
   IntMasterDisable();
   while (true)
   {
+    OffLED0();
     OffLED1();
-    OffLED2();
     DelayMilliSecond(500);
 
+    OnLED0();
     OnLED1();
-    OnLED2();
     DelayMilliSecond(500);
   }
 }

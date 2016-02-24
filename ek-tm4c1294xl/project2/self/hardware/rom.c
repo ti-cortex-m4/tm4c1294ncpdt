@@ -92,12 +92,12 @@ void InitROM(void)
       IntMasterDisable();
       while (true)
       {
-        OffLED1();
-        OnLED2();
+        OffLED0();
+        OnLED1();
         DelayMilliSecond(500);
 
-        OnLED1();
-        OffLED2();
+        OnLED0();
+        OffLED1();
         DelayMilliSecond(500);
       }
     }
