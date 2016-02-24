@@ -38,24 +38,30 @@ static uchar GetRomChar(uchar  i)
 }
 
 
-uint    GetRomChecksum(void)
+
+uint GetROMChecksum(void)
 {
   return GetRomChar(0)*0x100 + GetRomChar(1);
 }
 
 
-uint    GetBuildNumber(void)
+uint GetROMBuildNumber(void)
 {
   return GetRomChar(2)*0x100 + GetRomChar(3);
 }
 
 
-uchar   GetBuildDate_Second(void) { return GetRomChar(4); }
-uchar   GetBuildDate_Minute(void) { return GetRomChar(5); }
-uchar   GetBuildDate_Hour(void)   { return GetRomChar(6); }
-uchar   GetBuildDate_Day(void)    { return GetRomChar(7); }
-uchar   GetBuildDate_Month(void)  { return GetRomChar(8); }
-uchar   GetBuildDate_Year(void)   { return GetRomChar(9); }
+timedate GetROMBuildTimeDate(void)
+{
+  timedate td;
+  td.bSecond = GetRomChar(4);
+  td.bMinute = GetRomChar(5);
+  td.bHour   = GetRomChar(6);
+  td.bDay    = GetRomChar(7);
+  td.bMonth  = GetRomChar(8);
+  td.bYear   = GetRomChar(9);
+  return td;
+}
 
 
 /*

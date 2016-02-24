@@ -17,6 +17,7 @@ MAIN,C
 #include "kernel/log.h"
 #include "kernel/tasks.h"
 #include "kernel/settings.h"
+#include "kernel/version.h"
 #include "hardware/gpio.h"
 #include "hardware/led.h"
 #include "hardware/sys_tick.h"
@@ -91,9 +92,7 @@ int     main(void)
   pbMac[5] = wSerialNumber % 0x100;
 
   ASSERT(dwIp != 0);
-
   lwIPInit(dwClockFreq, pbMac, dwIp, dwGateway, dwNetmask, IPADDR_USE_STATIC);
-
   InitEthernetLEDs();
 
   InitUdpLog();
@@ -121,11 +120,11 @@ int     main(void)
 
   IntMasterEnable();
 
-  CONSOLE("start\n");
+  ConsoleVersion();
 
   while (true)
   {
-    DelayMilliSecond(100); // SysCtlDelay((SysCtlClockGet() / 3) * 2); //
+    DelayMilliSecond(100);
 
     TaskConnections();
     TaskLwIpDebug();

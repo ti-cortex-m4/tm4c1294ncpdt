@@ -25,6 +25,17 @@ typedef union
 } combo32;
 
 
+typedef struct
+{
+  uchar         bSecond;
+  uchar         bMinute;
+  uchar         bHour;
+  uchar         bDay;
+  uchar         bMonth;
+  uchar         bYear;
+} timedate;
+
+
 #define NAME_SIZE       (8+1)
 
 
