@@ -4,9 +4,6 @@ serial.h
 
 ------------------------------------------------------------------------------*/
 
-bool SerialSendFull(uint32_t ulPort);
-void SerialSend(uint32_t ulPort, uint8_t ucChar);
-
 long SerialReceive(uint32_t ulPort);
 uint32_t SerialReceiveAvailable(uint32_t ulPort);
 
