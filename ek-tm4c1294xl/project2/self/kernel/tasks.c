@@ -10,6 +10,7 @@ tasks.c
 #include "settings.h"
 #include "../tcp/telnet.h"
 #include "../uart/serial.h"
+#include "../uart/serial_receive.h"
 #include "entities.h"
 #include "version.h"
 #include "tasks.h"
