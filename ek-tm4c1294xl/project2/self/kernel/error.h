@@ -1,13 +1,11 @@
 /*------------------------------------------------------------------------------
-crc16.h
+error.h
 
 
 ------------------------------------------------------------------------------*/
 
-extern uchar bCRCHi, bCRCLo;
+#ifdef DEBUG
 
+void __error__(char *pszFileName, ulong dwLine);
 
-
-void InitCRC16(void);
-void CalcCRC16(uchar b);
-void MakeCRC16(uchar *pbData, uint wSize);
+#endif
