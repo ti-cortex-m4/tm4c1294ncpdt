@@ -10,7 +10,7 @@ var
   i: longword;
   s: longword;
   j: longint;
-  MARK: AnsiString = 'ImageSize    ';
+  MARK: AnsiString = 'BinFileSize    ';
 begin
   try
     try
@@ -42,7 +42,7 @@ begin
         end;
       end;
 
-      Writeln('Label not found');
+      Writeln('Label not found: ''' + MARK + '''');
     except
       on E: Exception do Writeln(E.Message);
     end;
