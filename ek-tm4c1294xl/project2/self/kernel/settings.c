@@ -13,7 +13,7 @@ settings,c
 
 
 
-#define SETTINGS_LABEL  9
+#define SETTINGS_LABEL  3
 
 
 
