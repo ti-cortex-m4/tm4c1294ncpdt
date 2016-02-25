@@ -40,24 +40,36 @@ static void StartClientConnection(uchar u)
 }
 
 
+
+void InitConnection(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+
+  if (mbRoutingMode[u] == ROUTING_MODE_SERVER)
+  {
+    StartServerConnection(u);
+  }
+  else if (mbRoutingMode[u] == ROUTING_MODE_CLIENT)
+  {
+    if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
+    {
+      CONSOLE("%u: connect as client immediately\n",u);
+      StartClientConnection(u);
+    }
+  }
+  else
+  {
+    CONSOLE("%u: ERROR routing mode %u", u, mbRoutingMode[u]);
+  }
+}
+
+
 void InitConnections(void)
 {
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
   {
-    if (mbRoutingMode[u] == ROUTING_MODE_SERVER)
-    {
-      StartServerConnection(u);
-    }
-
-    if (mbRoutingMode[u] == ROUTING_MODE_CLIENT)
-    {
-      if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
-      {
-        CONSOLE("%u: connect as client immediately\n",u);
-        StartClientConnection(u);
-      }
-    }
+    InitConnection(u);
   }
 }
 
@@ -79,14 +91,17 @@ void TaskConnections(void)
           StartClientConnection(u);
         }
       }
-
-      if (mbConnectionMode[u] == CONNECTION_MODE_ON_DATA)
+      else if (mbConnectionMode[u] == CONNECTION_MODE_ON_DATA)
       {
         if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ulSerialPort))
         {
           CONSOLE("%u: connect as client on data\n",u);
           StartClientConnection(u);
         }
+      }
+      else
+      {
+        CONSOLE("%u: ERROR connection mode %u", u, mbConnectionMode[u]);
       }
     }
   }
