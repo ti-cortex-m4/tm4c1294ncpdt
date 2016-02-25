@@ -82,5 +82,5 @@ close/abort connection
         //
         SysCtlSleep();
         
-IntMasterDisable() _error_ не работает        
+IntMasterDisable() _error_ не работает      lwIPEthernetIntHandler  
             
