@@ -24,7 +24,7 @@ TELNET,C
 //*****************************************************************************
 //! The telnet session data array, for use in the telnet handler function.
 //*****************************************************************************
-static tTelnetSession g_sTelnetSession[UART_COUNT];
+tTelnetSession g_sTelnetSession[UART_COUNT];
 
 
 //! The timeout for the TCP connection used for the telnet session, specified in seconds.
@@ -33,13 +33,6 @@ ulong getTelnetTimeout(uchar u)
 {
   ASSERT(u < UART_COUNT);
   return mbConnectionTimeout[u]*60;
-}
-
-
-tTelnetSession *getTelnetSession(uchar ibUart)
-{
-  ASSERT(ibUart < UART_COUNT);
-  return &g_sTelnetSession[ibUart];
 }
 
 //*****************************************************************************
