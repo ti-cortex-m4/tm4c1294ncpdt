@@ -83,4 +83,6 @@ close/abort connection
         SysCtlSleep();
         
 IntMasterDisable() _error_ не работает      lwIPEthernetIntHandler  
+
+uint32_t ulSerialPort
             
