@@ -52,7 +52,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
     pState->pListenPCB = NULL;
     pState->eTCPState = STATE_TCP_CONNECTING;
 //    pState->eTelnetState = STATE_NORMAL;
-    pState->ucFlags = (1 << OPT_FLAG_WILL_SUPPRESS_GA);
+//    pState->ucFlags = (1 << OPT_FLAG_WILL_SUPPRESS_GA);
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = getTelnetTimeout(ulSerialPort); // g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
     pState->ulSerialPort = ulSerialPort;
