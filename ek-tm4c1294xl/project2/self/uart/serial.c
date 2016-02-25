@@ -21,11 +21,20 @@ SERIAL,C
 
 
 
+// The size of the ring buffers used for interface between the UART and telnet session (RX).
+#define RX_RING_BUF_SIZE        (256 * 2)
+
+// The size of the ring buffers used for interface between the UART and telnet session (TX).
+#define TX_RING_BUF_SIZE        (256 * 6)
+
+
+
 // The buffer used to hold characters received from the UARTs.
 static uint8_t mmbRxBuf[UART_COUNT][RX_RING_BUF_SIZE];
 
 // The buffer used to hold characters to be sent to the UARTs.
 static uint8_t mmbTxBuf[UART_COUNT][TX_RING_BUF_SIZE];
+
 
 
 // The ring buffers used to hold characters received from the UARTs.
