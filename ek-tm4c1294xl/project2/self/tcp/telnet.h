@@ -8,7 +8,10 @@ TELNET,H
 
 
 
-tTelnetSession *getTelnetSession(uchar u);
+extern tTelnetSession g_sTelnetSession[UART_COUNT];
+
+
+
 ulong getTelnetTimeout(uchar u);
 
 void TelnetFreePbufs(tTelnetSession *pState);
