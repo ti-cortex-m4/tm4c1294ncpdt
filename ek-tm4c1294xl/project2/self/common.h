@@ -13,10 +13,6 @@ common.h
 #define MAX_LONG        0xFFFFFFFF
 
 
-#define MAJOR_VERSION   0
-#define MINOR_VERSION   3
-
-
 typedef uint8_t         uchar;
 typedef uint16_t        uint;
 typedef uint32_t        ulong;
