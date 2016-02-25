@@ -7,6 +7,7 @@ telnet_poll,c
 #include "../main.h"
 #include "../kernel/log.h"
 #include "telnet.h"
+#include "telnet_close.h"
 #include "telnet_poll.h"
 
 
@@ -72,7 +73,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
         {
             CONSOLE("%u: poll close server connection by timeout\n", pState->ucSerialPort);
-            return TelnetCloseServer(pState->ucSerialPort);
+            return TelnetCloseServer(pcb, pState->ucSerialPort);
         }
     }
 

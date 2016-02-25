@@ -90,6 +90,9 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         // Clear out any pbufs associated with this session.
         TelnetFreePbufs(pState);
 
+        // Clear out the telnet session PCB.
+        pState->pConnectPCB = NULL;
+
         InitConnection(pState->ucSerialPort);
     }
 
