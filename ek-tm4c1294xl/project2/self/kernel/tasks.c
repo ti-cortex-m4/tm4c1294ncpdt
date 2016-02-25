@@ -95,7 +95,7 @@ void TaskConnections(void)
       }
       else if (mbConnectionMode[u] == CONNECTION_MODE_ON_DATA)
       {
-        if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ulSerialPort))
+        if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ucSerialPort))
         {
           CONSOLE("%u: connect as client on data\n",u);
           StartClientConnection(u);

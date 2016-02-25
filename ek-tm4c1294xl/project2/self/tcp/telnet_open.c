@@ -20,14 +20,14 @@ telnet_open,c
 //! \param ulIPAddr is the IP address of the telnet server.
 //! \param usTelnetRemotePort is port number of the telnet server.
 //! \param usTelnetLocalPort is local port number to connect from.
-//! \param ulSerialPort is the serial port associated with this telnet session.
+//! \param ucSerialPort is the serial port associated with this telnet session.
 //!
 //! This function establishes a TCP session by attempting a connection to
 //! a telnet server.
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTelnetLocalPort,*/ uint32_t ulSerialPort)
+void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTelnetLocalPort,*/ uint8_t ucSerialPort)
 {
     void *pcb;
     struct ip_addr sIPAddr;
@@ -35,16 +35,16 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
 
     // Check the arguments.
     ASSERT(ulIPAddr != 0);
-    ASSERT(ulSerialPort < UART_COUNT);
+    ASSERT(ucSerialPort < UART_COUNT);
     ASSERT(usTelnetRemotePort != 0);
 //    ASSERT(usTelnetLocalPort != 0);
-    tState *pState = &g_sState[ulSerialPort];
+    tState *pState = &g_sState[ucSerialPort];
 
     CONSOLE("%u: open %d.%d.%d.%d port %d, UART %d\n",
-              pState->ulSerialPort,
+              pState->ucSerialPort,
               (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF,
               (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF, usTelnetRemotePort,
-              ulSerialPort);
+              ucSerialPort);
 
     // Fill in the telnet state data structure for this session in client
     // mode.
@@ -54,8 +54,8 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
 //    pState->eTelnetState = STATE_NORMAL;
 //    pState->ucFlags = (1 << OPT_FLAG_WILL_SUPPRESS_GA);
     pState->ulConnectionTimeout = 0;
-    pState->ulMaxTimeout = getTelnetTimeout(ulSerialPort); // g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
-    pState->ulSerialPort = ulSerialPort;
+    pState->ulMaxTimeout = getTelnetTimeout(ucSerialPort); // g_sParameters.sPort[ucSerialPort].ulTelnetTimeout;
+    pState->ucSerialPort = ucSerialPort;
     pState->usTelnetRemotePort = usTelnetRemotePort;
 //    pState->usTelnetLocalPort = usTelnetLocalPort;
     pState->ulTelnetRemoteIP = ulIPAddr;
@@ -86,7 +86,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
     eError = tcp_connect(pcb, &sIPAddr, usTelnetRemotePort, TelnetConnected);
     if(eError != ERR_OK)
     {
-        CONSOLE("%u: Open error %d\n", pState->ulSerialPort, eError);
+        CONSOLE("%u: Open error %d\n", pState->ucSerialPort, eError);
         pState->eLastErr = eError;
         return;
     }

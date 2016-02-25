@@ -15,22 +15,22 @@ telnet_listen,c
 //! Opens a telnet server session (listen).
 //!
 //! \param usTelnetPort is the telnet port number to listen on.
-//! \param ulSerialPort is the serial port associated with this telnet session.
+//! \param ucSerialPort is the serial port associated with this telnet session.
 //!
 //! This function establishes a TCP session in listen mode as a telnet server.
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
+void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
 {
     void *pcb;
 
     // Check the arguments.
-    ASSERT(ulSerialPort < UART_COUNT);
+    ASSERT(ucSerialPort < UART_COUNT);
     ASSERT(usTelnetPort != 0);
-    tState *pState = &g_sState[ulSerialPort];
+    tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: listen port %d, UART %d\n", pState->ulSerialPort, usTelnetPort, ulSerialPort);
+    CONSOLE("%u: listen port %d, UART %d\n", pState->ucSerialPort, usTelnetPort, ucSerialPort);
 
     // Fill in the telnet state data structure for this session in listen
     // (in other words, server) mode.
@@ -39,8 +39,8 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
 //    pState->eTelnetState = STATE_NORMAL;
 //    pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) | (1 << OPT_FLAG_SERVER));
     pState->ulConnectionTimeout = 0;
-    pState->ulMaxTimeout = getTelnetTimeout(ulSerialPort); // g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
-    pState->ulSerialPort = ulSerialPort;
+    pState->ulMaxTimeout = getTelnetTimeout(ucSerialPort); // g_sParameters.sPort[ucSerialPort].ulTelnetTimeout;
+    pState->ucSerialPort = ucSerialPort;
     pState->usTelnetLocalPort = usTelnetPort;
     pState->usTelnetRemotePort = 0;
     pState->ulTelnetRemoteIP = 0;

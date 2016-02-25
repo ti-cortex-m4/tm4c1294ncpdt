@@ -64,7 +64,7 @@ typedef struct
     uint32_t ulMaxTimeout;
 
     //! This value holds the UART Port Number for this telnet session.
-    uint32_t ulSerialPort;
+    uint8_t ucSerialPort;
 
     //! This value holds an array of pbufs.
     struct pbuf *pBufQ[PBUF_POOL_SIZE];
