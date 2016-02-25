@@ -37,7 +37,7 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
     pState->pConnectPCB = NULL;
     pState->eTCPState = STATE_TCP_LISTEN;
 //    pState->eTelnetState = STATE_NORMAL;
-    pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) | (1 << OPT_FLAG_SERVER));
+//    pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) | (1 << OPT_FLAG_SERVER));
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = getTelnetTimeout(ulSerialPort); // g_sParameters.sPort[ulSerialPort].ulTelnetTimeout;
     pState->ulSerialPort = ulSerialPort;

@@ -133,7 +133,7 @@ void TelnetError(void *arg, err_t err)
         pState->pConnectPCB = NULL;
         pState->eTCPState = STATE_TCP_LISTEN;
 //        pState->eTelnetState = STATE_NORMAL;
-        pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) | (1 << OPT_FLAG_SERVER));
+//        pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) | (1 << OPT_FLAG_SERVER));
         pState->ulConnectionTimeout = 0;
         pState->iBufQRead = 0;
         pState->iBufQWrite = 0;
@@ -380,7 +380,7 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
     pState->pListenPCB = NULL;
     pState->eTCPState = STATE_TCP_IDLE;
 //    pState->eTelnetState = STATE_NORMAL;
-    pState->ucFlags = 0;
+//    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
     pState->ulSerialPort = ulSerialPort; // TODO ??? UART_COUNT;
@@ -425,7 +425,7 @@ err_t TelnetCloseServer(uint32_t ulSerialPort)
     pState->pListenPCB = NULL;
     pState->eTCPState = STATE_TCP_IDLE;
 //    pState->eTelnetState = STATE_NORMAL;
-    pState->ucFlags = 0;
+//    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
     pState->ulSerialPort = ulSerialPort; // TODO ??? UART_COUNT;
@@ -494,7 +494,7 @@ void TelnetClose(uint32_t ulSerialPort)
     pState->pListenPCB = NULL;
     pState->eTCPState = STATE_TCP_IDLE;
 //    pState->eTelnetState = STATE_NORMAL;
-    pState->ucFlags = 0;
+//    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
     pState->ulSerialPort = ulSerialPort; // TODO ??? UART_COUNT;
@@ -568,7 +568,7 @@ void TelnetInit(void)
         g_sTelnetSession[iPort].pListenPCB = NULL;
         g_sTelnetSession[iPort].eTCPState = STATE_TCP_IDLE;
 //        g_sTelnetSession[iPort].eTelnetState = STATE_NORMAL;
-        g_sTelnetSession[iPort].ucFlags = 0;
+//        g_sTelnetSession[iPort].ucFlags = 0;
         g_sTelnetSession[iPort].ulConnectionTimeout = 0;
         g_sTelnetSession[iPort].ulMaxTimeout = 0;
         g_sTelnetSession[iPort].ulSerialPort = iPort;// TODO ??? UART_COUNT;
