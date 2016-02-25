@@ -83,7 +83,7 @@ void TaskConnections(void)
   {
     if (mbRoutingMode[u] == ROUTING_MODE_CLIENT)
     {
-      tState *pState = &g_sTelnetSession[u];
+      tState *pState = &g_sState[u];
 
       if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
       {

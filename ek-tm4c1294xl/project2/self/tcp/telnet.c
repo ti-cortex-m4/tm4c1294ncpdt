@@ -24,7 +24,7 @@ TELNET,C
 //*****************************************************************************
 //! The telnet session data array, for use in the telnet handler function.
 //*****************************************************************************
-tState g_sTelnetSession[UART_COUNT];
+tState g_sState[UART_COUNT];
 
 
 
@@ -352,7 +352,7 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
 {
     // Check the arguments.
     ASSERT(ulSerialPort < UART_COUNT);
-    tState *pState = &g_sTelnetSession[ulSerialPort];
+    tState *pState = &g_sState[ulSerialPort];
 
     CONSOLE("%u: close client UART %d\n", pState->ulSerialPort, ulSerialPort);
 
@@ -398,7 +398,7 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
 err_t TelnetCloseServer(uint32_t ulSerialPort)
 {
     ASSERT(ulSerialPort < UART_COUNT);
-    tState *pState = &g_sTelnetSession[ulSerialPort];
+    tState *pState = &g_sState[ulSerialPort];
 
     CONSOLE("%u: close server UART %d\n", pState->ulSerialPort, ulSerialPort);
 
@@ -454,7 +454,7 @@ void TelnetClose(uint32_t ulSerialPort)
 {
     // Check the arguments.
     ASSERT(ulSerialPort < UART_COUNT);
-    tState *pState = &g_sTelnetSession[ulSerialPort];
+    tState *pState = &g_sState[ulSerialPort];
 
     CONSOLE("%u: Close UART %d\n", pState->ulSerialPort, ulSerialPort);
 
@@ -526,7 +526,7 @@ uint16_t TelnetGetLocalPort(uint32_t ulSerialPort)
     // Check the arguments.
     ASSERT(ulSerialPort < UART_COUNT);
 
-    return(g_sTelnetSession[ulSerialPort].usTelnetLocalPort);
+    return(g_sState[ulSerialPort].usTelnetLocalPort);
 }
 
 //*****************************************************************************
@@ -546,7 +546,7 @@ uint16_t TelnetGetRemotePort(uint32_t ulSerialPort)
     // Check the arguments.
     ASSERT(ulSerialPort < UART_COUNT);
 
-    return(g_sTelnetSession[ulSerialPort].usTelnetRemotePort);
+    return(g_sState[ulSerialPort].usTelnetRemotePort);
 }
 #endif
 
@@ -564,28 +564,28 @@ void TelnetInit(void)
     // Initialize the session data for each supported port.
     for(iPort = 0; iPort < UART_COUNT; iPort++)
     {
-        g_sTelnetSession[iPort].pConnectPCB = NULL;
-        g_sTelnetSession[iPort].pListenPCB = NULL;
-        g_sTelnetSession[iPort].eTCPState = STATE_TCP_IDLE;
+        g_sState[iPort].pConnectPCB = NULL;
+        g_sState[iPort].pListenPCB = NULL;
+        g_sState[iPort].eTCPState = STATE_TCP_IDLE;
 //        g_sTelnetSession[iPort].eTelnetState = STATE_NORMAL;
 //        g_sTelnetSession[iPort].ucFlags = 0;
-        g_sTelnetSession[iPort].ulConnectionTimeout = 0;
-        g_sTelnetSession[iPort].ulMaxTimeout = 0;
-        g_sTelnetSession[iPort].ulSerialPort = iPort;// TODO ??? UART_COUNT;
-        g_sTelnetSession[iPort].usTelnetRemotePort = 0;
-        g_sTelnetSession[iPort].usTelnetLocalPort = 0;
-        g_sTelnetSession[iPort].ulTelnetRemoteIP = 0;
-        g_sTelnetSession[iPort].iBufQRead = 0;
-        g_sTelnetSession[iPort].iBufQWrite = 0;
-        g_sTelnetSession[iPort].pBufHead = NULL;
-        g_sTelnetSession[iPort].pBufCurrent = NULL;
-        g_sTelnetSession[iPort].ulBufIndex = 0;
-        g_sTelnetSession[iPort].ulLastTCPSendTime = 0;
-        g_sTelnetSession[iPort].bLinkLost = false;
-        g_sTelnetSession[iPort].ucConnectCount = 0;
-        g_sTelnetSession[iPort].ucReconnectCount = 0;
-        g_sTelnetSession[iPort].ucErrorCount = 0;
-        g_sTelnetSession[iPort].eLastErr = ERR_OK;
+        g_sState[iPort].ulConnectionTimeout = 0;
+        g_sState[iPort].ulMaxTimeout = 0;
+        g_sState[iPort].ulSerialPort = iPort;// TODO ??? UART_COUNT;
+        g_sState[iPort].usTelnetRemotePort = 0;
+        g_sState[iPort].usTelnetLocalPort = 0;
+        g_sState[iPort].ulTelnetRemoteIP = 0;
+        g_sState[iPort].iBufQRead = 0;
+        g_sState[iPort].iBufQWrite = 0;
+        g_sState[iPort].pBufHead = NULL;
+        g_sState[iPort].pBufCurrent = NULL;
+        g_sState[iPort].ulBufIndex = 0;
+        g_sState[iPort].ulLastTCPSendTime = 0;
+        g_sState[iPort].bLinkLost = false;
+        g_sState[iPort].ucConnectCount = 0;
+        g_sState[iPort].ucReconnectCount = 0;
+        g_sState[iPort].ucErrorCount = 0;
+        g_sState[iPort].eLastErr = ERR_OK;
     }
 }
 
@@ -613,7 +613,7 @@ TelnetHandler(void)
     for(iLoop = 0; iLoop < UART_COUNT; iLoop++)
     {
         // Initialize the state pointer.
-        pState = &g_sTelnetSession[iLoop];
+        pState = &g_sState[iLoop];
 
         // If the telnet session is not connected, skip this port.
         if(pState->eTCPState != STATE_TCP_CONNECTED)
@@ -801,7 +801,7 @@ void TelnetNotifyLinkStatus(bool bLinkStatusUp)
         int iPort;
         for(iPort = 0; iPort < UART_COUNT; iPort++)
         {
-            g_sTelnetSession[iPort].bLinkLost = true;
+            g_sState[iPort].bLinkLost = true;
         }
     }
 }

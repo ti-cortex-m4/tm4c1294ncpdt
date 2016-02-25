@@ -15,7 +15,10 @@ MAIN,H
 #include "lwip/tcp.h"
 #include "driverlib/debug.h"
 #include "common.h"
-#include "config.h"
+
+
+// The number of serial to Ethernet ports supported by this module.
+#define UART_COUNT              5
 
 
 extern uint32_t g_ulSystemTimeMS;

@@ -38,7 +38,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
     ASSERT(ulSerialPort < UART_COUNT);
     ASSERT(usTelnetRemotePort != 0);
 //    ASSERT(usTelnetLocalPort != 0);
-    tState *pState = &g_sTelnetSession[ulSerialPort];
+    tState *pState = &g_sState[ulSerialPort];
 
     CONSOLE("%u: open %d.%d.%d.%d port %d, UART %d\n",
               pState->ulSerialPort,

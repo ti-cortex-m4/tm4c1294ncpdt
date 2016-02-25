@@ -8,7 +8,7 @@ TELNET,H
 
 
 
-extern tState g_sTelnetSession[UART_COUNT];
+extern tState g_sState[UART_COUNT];
 
 
 
