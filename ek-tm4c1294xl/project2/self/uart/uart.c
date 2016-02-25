@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-uarts,c
+uart.c
 
 
 ------------------------------------------------------------------------------*/
@@ -14,7 +14,8 @@ uarts,c
 #include "driverlib/interrupt.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
-#include "uarts.h"
+#include "serial.h"
+#include "uart.h"
 
 
 
@@ -82,16 +83,9 @@ static ulong GetStopBitsMask(uchar u)
 }
 
 
-static void InitUart(uchar u, ulong dwClockFreq)
+static void InitUART(uchar u, ulong dwClockFreq)
 {
   ASSERT(u < UART_COUNT);
-
-  UARTFIFOLevelSet(dwUart, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
-  UARTTxIntModeSet(dwUart, UART_TXINT_MODE_EOT);
-  UARTFIFOEnable(dwUart);
-
-  IntEnable(dwInterrupt);
-  UARTIntEnable(dwUart, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
   ulong dwBaudRate = GetBaudRate(u);
   ulong dwConfig = (GetParityMask(u) | GetDataBitsMask(u) | GetStopBitsMask(u));
@@ -100,7 +94,7 @@ static void InitUart(uchar u, ulong dwClockFreq)
 
 
 
-static void InitUart0(ulong dwClockFreq)
+static void InitUART0(ulong dwClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -109,11 +103,18 @@ static void InitUart0(ulong dwClockFreq)
   GPIOPinConfigure(GPIO_PA1_U0TX);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
-  InitUart(0, UART0_BASE, InitUART4, dwClockFreq);
+  UARTFIFOLevelSet(UART0_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(UART0_BASE, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(UART0_BASE);
+
+  IntEnable(INT_UART0);
+  UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+
+  InitUART(0, dwClockFreq);
 }
 
 
-static void InitUart4(ulong dwClockFreq)
+static void InitUART4(ulong dwClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART4);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -129,11 +130,11 @@ static void InitUart4(ulong dwClockFreq)
   IntEnable(INT_UART4);
   UARTIntEnable(UART4_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  InitUart(1, UART4_BASE, INT_UART4, dwClockFreq);
+  InitUART(1, dwClockFreq);
 }
 
 
-static void InitUart3(ulong dwClockFreq)
+static void InitUART3(ulong dwClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART3);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -149,11 +150,11 @@ static void InitUart3(ulong dwClockFreq)
   IntEnable(INT_UART3);
   UARTIntEnable(UART3_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  InitUart(2, UART3_BASE, INT_UART3, dwClockFreq);
+  InitUART(2, dwClockFreq);
 }
 
 
-static void InitUart2(ulong dwClockFreq)
+static void InitUART2(ulong dwClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART2);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -169,11 +170,11 @@ static void InitUart2(ulong dwClockFreq)
   IntEnable(INT_UART2);
   UARTIntEnable(UART2_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  InitUart(3, UART2_BASE, INT_UART2, dwClockFreq);
+  InitUART(3, dwClockFreq);
 }
 
 
-static void InitUart1(ulong dwClockFreq)
+static void InitUART1(ulong dwClockFreq)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART1);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
@@ -189,20 +190,20 @@ static void InitUart1(ulong dwClockFreq)
   IntEnable(INT_UART1);
   UARTIntEnable(UART1_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  InitUart(4, UART1_BASE, INT_UART1, dwClockFreq);
+  InitUART(4, dwClockFreq);
 }
 
 
 
-void InitUarts(ulong dwClockFreq)
+void InitUARTs(ulong dwClockFreq)
 {
   if (ibDebugMode != DEBUG_MODE_UART)
   {
-    InitUart0(dwClockFreq);
+    InitUART0(dwClockFreq);
   }
 
-  InitUart4(dwClockFreq);
-  InitUart3(dwClockFreq);
-  InitUart2(dwClockFreq);
-  InitUart1(dwClockFreq);
+  InitUART4(dwClockFreq);
+  InitUART3(dwClockFreq);
+  InitUART2(dwClockFreq);
+  InitUART1(dwClockFreq);
 }
