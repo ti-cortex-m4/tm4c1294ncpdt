@@ -21,7 +21,7 @@ static void StartServerConnection(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
-  CONSOLE("%u: listens as server on port %u\n", u, mwPort[u]);
+  CONSOLE("%u: listen as server on port %u\n", u, mwPort[u]);
   TelnetListen(mwPort[u], u);
 }
 
@@ -31,7 +31,7 @@ static void StartClientConnection(uchar u)
   ASSERT(u < UART_COUNT);
 
   ulong dw = mdwDestinationIP[u];
-  CONSOLE("%u: connects as client to %u.%u.%u.%u port %u\n",
+  CONSOLE("%u: connect as client to %u.%u.%u.%u port %u\n",
     u,
     (dw >> 24), (dw >> 16) & 0xFF, (dw >> 8) & 0xFF, dw & 0xFF,
     mwDestinationPort[u]);
@@ -54,7 +54,7 @@ void InitConnections(void)
     {
       if (mbConnectionMode[u] == CONNECTION_MODE_IMMEDIATELY)
       {
-        CONSOLE("%u: connects as client immediately\n",u);
+        CONSOLE("%u: connect as client immediately\n",u);
         StartClientConnection(u);
       }
     }
@@ -75,7 +75,7 @@ void TaskConnections(void)
       {
         if (pState->eTCPState == STATE_TCP_IDLE)
         {
-          CONSOLE("%u: connects as client immediately after reset\n",u);
+          CONSOLE("%u: connect as client immediately after reset\n",u);
           StartClientConnection(u);
         }
       }
@@ -84,7 +84,7 @@ void TaskConnections(void)
       {
         if ((pState->eTCPState == STATE_TCP_IDLE) && SerialReceiveAvailable(pState->ulSerialPort))
         {
-          CONSOLE("%u: connects as client on data\n",u);
+          CONSOLE("%u: connect as client on data\n",u);
           StartClientConnection(u);
         }
       }
