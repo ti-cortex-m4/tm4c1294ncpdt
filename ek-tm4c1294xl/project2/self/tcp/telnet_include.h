@@ -98,7 +98,7 @@ typedef struct
     //! The last error reported by lwIP while attempting to make a connection.
     err_t eLastErr;
 }
-tTelnetSession;
+tState;
 
 
 #endif

@@ -24,7 +24,7 @@ TELNET,C
 //*****************************************************************************
 //! The telnet session data array, for use in the telnet handler function.
 //*****************************************************************************
-tTelnetSession g_sTelnetSession[UART_COUNT];
+tState g_sTelnetSession[UART_COUNT];
 
 
 
@@ -45,7 +45,7 @@ ulong getTelnetTimeout(uchar u)
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetFreePbufs(tTelnetSession *pState)
+void TelnetFreePbufs(tState *pState)
 {
     SYS_ARCH_DECL_PROTECT(lev);
 
@@ -86,7 +86,7 @@ void TelnetFreePbufs(tTelnetSession *pState)
 //! \return None.
 //
 //*****************************************************************************
-static void TelnetProcessCharacter(uint8_t ucChar, tTelnetSession *pState)
+static void TelnetProcessCharacter(uint8_t ucChar, tState *pState)
 {
     pState->ulConnectionTimeout = 0;
 
@@ -109,7 +109,7 @@ static void TelnetProcessCharacter(uint8_t ucChar, tTelnetSession *pState)
 //*****************************************************************************
 void TelnetError(void *arg, err_t err)
 {
-    tTelnetSession *pState = arg;
+    tState *pState = arg;
 
     CONSOLE("%u: error 0x%08x, %d\n", pState->ulSerialPort, arg, err);
 
@@ -159,7 +159,7 @@ void TelnetError(void *arg, err_t err)
 //*****************************************************************************
 static err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
-    tTelnetSession *pState = arg;
+    tState *pState = arg;
 
     CONSOLE("%u: sent 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, len);
 
@@ -183,7 +183,7 @@ static err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 //*****************************************************************************
 err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
-    tTelnetSession *pState = arg;
+    tState *pState = arg;
 
     CONSOLE("%u: connected 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, err);
 
@@ -277,7 +277,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 //*****************************************************************************
 err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 {
-    tTelnetSession *pState = arg;
+    tState *pState = arg;
 
     CONSOLE("%u: accept 0x%08x, 0x%08x, 0x%08x\n", pState->ulSerialPort, arg, pcb, err);
 
@@ -352,7 +352,7 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
 {
     // Check the arguments.
     ASSERT(ulSerialPort < UART_COUNT);
-    tTelnetSession *pState = &g_sTelnetSession[ulSerialPort];
+    tState *pState = &g_sTelnetSession[ulSerialPort];
 
     CONSOLE("%u: close client UART %d\n", pState->ulSerialPort, ulSerialPort);
 
@@ -398,7 +398,7 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
 err_t TelnetCloseServer(uint32_t ulSerialPort)
 {
     ASSERT(ulSerialPort < UART_COUNT);
-    tTelnetSession *pState = &g_sTelnetSession[ulSerialPort];
+    tState *pState = &g_sTelnetSession[ulSerialPort];
 
     CONSOLE("%u: close server UART %d\n", pState->ulSerialPort, ulSerialPort);
 
@@ -454,7 +454,7 @@ void TelnetClose(uint32_t ulSerialPort)
 {
     // Check the arguments.
     ASSERT(ulSerialPort < UART_COUNT);
-    tTelnetSession *pState = &g_sTelnetSession[ulSerialPort];
+    tState *pState = &g_sTelnetSession[ulSerialPort];
 
     CONSOLE("%u: Close UART %d\n", pState->ulSerialPort, ulSerialPort);
 
@@ -607,7 +607,7 @@ TelnetHandler(void)
     int iLoop;
     SYS_ARCH_DECL_PROTECT(lev);
     uint8_t *pucData;
-    tTelnetSession *pState;
+    tState *pState;
 
     // Loop through the possible telnet sessions.
     for(iLoop = 0; iLoop < UART_COUNT; iLoop++)
