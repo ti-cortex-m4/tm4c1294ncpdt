@@ -8,7 +8,7 @@ telnet_accept,c
 #include "utils/lwiplib.h"
 #include "lwip/sys.h"
 #include "../kernel/log.h"
-#include "../kernel/settings.h"
+//#include "../kernel/settings.h"
 #include "telnet.h"
 #include "telnet_poll.h"
 #include "telnet_receive.h"
