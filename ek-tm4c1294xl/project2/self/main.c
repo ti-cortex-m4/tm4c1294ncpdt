@@ -41,10 +41,20 @@ MAIN,C
 #define ETHERNET_INT_PRIORITY   0xC0
 
 
+
 //*****************************************************************************
 //! Keeps track of elapsed time in milliseconds.
 //*****************************************************************************
 uint32_t g_ulSystemTimeMS = 0;
+
+
+
+//*****************************************************************************
+//
+//! A flag indicating the current link status.
+//
+//*****************************************************************************
+volatile bool g_bLinkStatusUp = false;
 
 
 
@@ -59,6 +69,18 @@ uint32_t g_ulSystemTimeMS = 0;
 //*****************************************************************************
 void    lwIPHostTimerHandler(void)
 {
+    // Get the current link status and see if it has changed.
+    bool bLinkStatusUp = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_3) ? false : true;
+
+    if(bLinkStatusUp != g_bLinkStatusUp)
+    {
+        // Save the new link status.
+        g_bLinkStatusUp = bLinkStatusUp;
+
+        // Notify the Telnet module that the link status has changed.
+        TelnetNotifyLinkStatus(g_bLinkStatusUp);
+    }
+
     // Service the telnet module.
     TelnetHandler();
 }
@@ -92,7 +114,11 @@ int     main(void)
 
   ASSERT(dwIP != 0);
   lwIPInit(dwClockFreq, pbMac, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+
   InitEthernetLEDs();
+
+  // Set the link status based on the LED0 signal (which defaults to link status in the PHY).
+  g_bLinkStatusUp = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_3) ? false : true;
 
   InitUdpLog();
 
