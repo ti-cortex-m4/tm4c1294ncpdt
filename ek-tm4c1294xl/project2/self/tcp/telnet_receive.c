@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-telnet_receive.c
+telnet_receive,c
 
 
 ------------------------------------------------------------------------------*/
@@ -10,7 +10,6 @@ telnet_receive.c
 #include "../kernel/log.h"
 #include "telnet.h"
 #include "telnet_receive.h"
-
 
 
 
@@ -31,7 +30,6 @@ telnet_receive.c
 err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 {
     tTelnetSession *pState = arg;
-    int iNextWrite;
     SYS_ARCH_DECL_PROTECT(lev);
 
     CONSOLE("%u: receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, p, err);
@@ -43,11 +41,10 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         SYS_ARCH_PROTECT(lev);
 
         // Do we have space in the queue?
-        iNextWrite = ((pState->iBufQWrite + 1) % PBUF_POOL_SIZE);
+        int iNextWrite = ((pState->iBufQWrite + 1) % PBUF_POOL_SIZE);
         if(iNextWrite == pState->iBufQRead)
         {
-            // The queue is full - discard the pbuf and return since we can't
-            // handle it just now.
+            // The queue is full - discard the pbuf and return since we can't handle it just now.
 
             // Restore previous level of protection.
             SYS_ARCH_UNPROTECT(lev);
@@ -72,7 +69,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     // If a null packet is passed in, close the connection.
     else if((err == ERR_OK) && (p == NULL))
     {
-        CONSOLE("%u: receive - close connection\n", pState->ulSerialPort);
+        CONSOLE("%u: receive NULL packet - close connection\n", pState->ulSerialPort);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);
@@ -90,13 +87,11 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         // Clear out the telnet session PCB.
         pState->pConnectPCB = NULL;
 
-        // If we don't have a listen PCB, then we are in client mode, and
-        // should try to reconnect.
+        // If we don't have a listen PCB, then we are in client mode, and should try to reconnect.
         if(pState->pListenPCB == NULL)
         {
             // Re-open the connection.
-            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-                       /*pState->usTelnetLocalPort,*/ pState->ulSerialPort);
+            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, /*pState->usTelnetLocalPort,*/ pState->ulSerialPort);
         }
         else
         {
