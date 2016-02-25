@@ -25,7 +25,7 @@ uchar                   pbMac[6];
 
 uint                    wSerialNumber;
 
-ulong                   dwIp;
+ulong                   dwIP;
 ulong                   dwGateway;
 ulong                   dwNetmask;
 
@@ -36,7 +36,7 @@ uchar                   mbConnectionTimeout[UART_COUNT];
 uchar                   mbRoutingMode[UART_COUNT];
 uint                    mwPort[UART_COUNT];
 uchar                   mbConnectionMode[UART_COUNT];
-ulong                   mdwDestinationIp[UART_COUNT];
+ulong                   mdwDestinationIP[UART_COUNT];
 uint                    mwDestinationPort[UART_COUNT];
 
 uchar                   mibBaudRate[UART_COUNT];
@@ -46,7 +46,7 @@ uchar                   mibStopBits[UART_COUNT];
 
 bool                    ibDebugMode;
 
-ulong                   dwUdpDebugIp;
+ulong                   dwUdpDebugIP;
 uint                    wUdpDebugPort;
 
 bool                    fLwIpDebugFlag;
@@ -125,7 +125,7 @@ void InitSettings(void)
     LoadSettingsDef();
   }
 
-  if (dwIp == 0)
+  if (dwIP == 0)
   {
     cwErrIpLoad++;
 

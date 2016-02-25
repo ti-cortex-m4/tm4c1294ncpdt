@@ -90,8 +90,8 @@ int     main(void)
   pbMac[4] = wSerialNumber / 0x100;
   pbMac[5] = wSerialNumber % 0x100;
 
-  ASSERT(dwIp != 0);
-  lwIPInit(dwClockFreq, pbMac, dwIp, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+  ASSERT(dwIP != 0);
+  lwIPInit(dwClockFreq, pbMac, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
   InitEthernetLEDs();
 
   InitUdpLog();
