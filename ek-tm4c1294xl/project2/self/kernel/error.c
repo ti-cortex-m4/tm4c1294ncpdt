@@ -18,9 +18,11 @@ error.c
 
 void __error__(char *pszFileName, ulong dwLine)
 {
-  CONSOLE("assert error: file %s, line %d\n", pszFileName, dwLine);
+  CONSOLE("ERROR assert: file %s, line %d\n", pszFileName, dwLine);
 
   IntMasterDisable();
+  InitLEDs();
+
   while (true)
   {
     OffLED0();

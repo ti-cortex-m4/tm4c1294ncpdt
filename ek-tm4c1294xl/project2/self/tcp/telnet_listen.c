@@ -28,7 +28,7 @@ void TelnetListen(uint16_t usTelnetPort, uint32_t ulSerialPort)
     // Check the arguments.
     ASSERT(ulSerialPort < UART_COUNT);
     ASSERT(usTelnetPort != 0);
-    tTelnetSession *pState = getTelnetSession(ulSerialPort);
+    tTelnetSession *pState = &g_sTelnetSession[ulSerialPort];
 
     CONSOLE("%u: listen port %d, UART %d\n", pState->ulSerialPort, usTelnetPort, ulSerialPort);
 
