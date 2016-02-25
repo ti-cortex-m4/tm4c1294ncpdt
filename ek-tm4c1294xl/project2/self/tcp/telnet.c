@@ -795,17 +795,20 @@ TelnetHandler(void)
 //*****************************************************************************
 void TelnetNotifyLinkStatus(bool bLinkStatusUp)
 {
-    int iPort;
-
     // We don't care if the link is up, only if it goes down.
     if(bLinkStatusUp)
     {
-        return;
+        CONSOLE("link status: up - ignore%d\n");
     }
-
-    // For every port, indicate that the link has been lost.
-    for(iPort = 0; iPort < UART_COUNT; iPort++)
+    else
     {
-        g_sTelnetSession[iPort].bLinkLost = true;
+        CONSOLE("link status: down\n");
+
+        // For every port, indicate that the link has been lost.
+        int iPort;
+        for(iPort = 0; iPort < UART_COUNT; iPort++)
+        {
+            g_sTelnetSession[iPort].bLinkLost = true;
+        }
     }
 }

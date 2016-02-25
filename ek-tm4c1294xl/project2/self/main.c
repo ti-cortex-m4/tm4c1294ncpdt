@@ -69,8 +69,9 @@ volatile bool g_bLinkStatusUp = false;
 //*****************************************************************************
 void    lwIPHostTimerHandler(void)
 {
+#if 0
     // Get the current link status and see if it has changed.
-    bool bLinkStatusUp = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_3) ? false : true;
+    bool bLinkStatusUp = GPIOPinRead(GPIO_PORTK_BASE, GPIO_PIN_4) ? false : true;
 
     if(bLinkStatusUp != g_bLinkStatusUp)
     {
@@ -80,7 +81,7 @@ void    lwIPHostTimerHandler(void)
         // Notify the Telnet module that the link status has changed.
         TelnetNotifyLinkStatus(g_bLinkStatusUp);
     }
-
+#endif
     // Service the telnet module.
     TelnetHandler();
 }
@@ -116,10 +117,10 @@ int     main(void)
   lwIPInit(dwClockFreq, pbMac, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
   InitEthernetLEDs();
-
+#if 0
   // Set the link status based on the LED0 signal (which defaults to link status in the PHY).
-  g_bLinkStatusUp = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_3) ? false : true;
-
+  g_bLinkStatusUp = GPIOPinRead(GPIO_PORTK_BASE, GPIO_PIN_4) ? false : true;
+#endif
   InitUdpLog();
 
   InitUdpHandler();
