@@ -30,7 +30,7 @@ static ulong GetBaudRate(uchar u)
   else
   {
     CONSOLE("%u: WARNING baud rate %u", u, mibBaudRate[u]);
-    return mdwBaudRates[DEFAULT_BAUD_RATE];
+    return mdwBaudRates[BAUD_RATE_DEFAULT];
   }
 }
 
