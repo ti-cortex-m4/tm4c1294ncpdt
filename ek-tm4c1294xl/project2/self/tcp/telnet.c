@@ -13,6 +13,8 @@ TELNET,C
 #include "../uart/serial_receive.h"
 #include "../uart/io_mode.h"
 #include "../kernel/settings.h"
+#include "telnet_listen.h"
+#include "telnet_open.h"
 #include "telnet_receive.h"
 #include "telnet_poll.h"
 #include "telnet.h"
@@ -111,7 +113,7 @@ static void TelnetProcessCharacter(uint8_t ucChar, tTelnetSession *pState)
 //!
 //! \return None.
 //*****************************************************************************
-static void TelnetError(void *arg, err_t err)
+void TelnetError(void *arg, err_t err)
 {
     tTelnetSession *pState = arg;
 
@@ -279,7 +281,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 //!
 //! \return This function will return an lwIP defined error code.
 //*****************************************************************************
-static err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
+err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tTelnetSession *pState = arg;
 

@@ -9,6 +9,8 @@ tasks.c
 #include "../kernel/log.h"
 #include "settings.h"
 #include "../tcp/telnet.h"
+#include "../tcp/telnet_listen.h"
+#include "../tcp/telnet_open.h"
 #include "../uart/serial.h"
 #include "../uart/serial_receive.h"
 #include "entities.h"

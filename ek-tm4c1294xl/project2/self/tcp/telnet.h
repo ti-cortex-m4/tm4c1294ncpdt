@@ -13,7 +13,10 @@ tTelnetSession *getTelnetSession(uchar ibUart);
 void TelnetFreePbufs(tTelnetSession *pState);
 
 extern void TelnetInit(void);
+
+err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err);
 err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err);
+void TelnetError(void *arg, err_t err);
 
 extern err_t TelnetCloseClient(uint32_t ulSerialPort);
 extern err_t TelnetCloseServer(uint32_t ulSerialPort);
