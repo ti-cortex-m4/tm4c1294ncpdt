@@ -17,7 +17,7 @@ extern uchar                   pbMac[6];
 
 extern uint                    wSerialNumber;
 
-extern ulong                   dwIp;
+extern ulong                   dwIP;
 extern ulong                   dwGateway;
 extern ulong                   dwNetmask;
 
@@ -28,7 +28,7 @@ extern uchar                   mbConnectionTimeout[UART_COUNT];
 extern uchar                   mbRoutingMode[UART_COUNT];
 extern uint                    mwPort[UART_COUNT];
 extern uchar                   mbConnectionMode[UART_COUNT];
-extern ulong                   mdwDestinationIp[UART_COUNT];
+extern ulong                   mdwDestinationIP[UART_COUNT];
 extern uint                    mwDestinationPort[UART_COUNT];
 
 extern uchar                   mibBaudRate[UART_COUNT];
@@ -38,7 +38,7 @@ extern uchar                   mibStopBits[UART_COUNT];
 
 extern bool                    ibDebugMode;
 
-extern ulong                   dwUdpDebugIp;
+extern ulong                   dwUdpDebugIP;
 extern uint                    wUdpDebugPort;
 
 extern bool                    fLwIpDebugFlag;
