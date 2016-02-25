@@ -103,7 +103,7 @@ int     main(void)
   TelnetInit();
 
   InitSysTick(dwClockFreq);
-  InitUarts(dwClockFreq);
+  InitUARTs(dwClockFreq);
   InitIoModes();
   InitTimer1(dwClockFreq);
 
