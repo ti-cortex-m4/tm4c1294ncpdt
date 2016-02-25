@@ -96,6 +96,5 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         InitConnection(pState->ucSerialPort);
     }
 
-    // Return okay.
     return(ERR_OK);
 }

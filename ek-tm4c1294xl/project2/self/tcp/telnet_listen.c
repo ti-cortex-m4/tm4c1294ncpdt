@@ -7,6 +7,7 @@ telnet_listen,c
 #include "../main.h"
 #include "../kernel/log.h"
 #include "telnet.h"
+#include "telnet_accept.h"
 #include "telnet_listen.h"
 
 
