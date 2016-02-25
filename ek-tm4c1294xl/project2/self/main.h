@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-MAIN,H
+main.h
 
 
 ------------------------------------------------------------------------------*/
@@ -17,8 +17,11 @@ MAIN,H
 #include "common.h"
 
 
-// The number of serial to Ethernet ports supported by this module.
-#define UART_COUNT              5
+#define MAJOR_VERSION   0
+#define MINOR_VERSION   3
+
+
+#define UART_COUNT      5
 
 
 extern uint32_t g_ulSystemTimeMS;
