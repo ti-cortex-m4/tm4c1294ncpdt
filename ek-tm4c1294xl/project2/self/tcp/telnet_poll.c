@@ -24,7 +24,6 @@ telnet_poll,c
 //*****************************************************************************
 err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 {
-    struct ip_addr sIPAddr;
     tState *pState = arg;
 
     CONSOLE("%u: poll 0x%08x, 0x%08x %u/%u\n", pState->ucSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
@@ -44,6 +43,8 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
                 // We are trying to reconnect but can't have received the connection
                 // callback in the last 3 seconds so we try connecting again.
                 pState->ucReconnectCount++;
+
+                struct ip_addr sIPAddr;
                 sIPAddr.addr = htonl(pState->ulTelnetRemoteIP);
 
                 err_t err = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort, TelnetConnected);
