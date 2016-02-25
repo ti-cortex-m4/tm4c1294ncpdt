@@ -5,9 +5,6 @@ telnet_poll,c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "utils/lwiplib.h"
-//#include "lwip/sys.h"
-//#include "../kernel/tasks.h"
 #include "../kernel/log.h"
 #include "telnet.h"
 #include "telnet_poll.h"
@@ -30,7 +27,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
     struct ip_addr sIPAddr;
     tTelnetSession *pState = arg;
 
-    CONSOLE("%u: poll 0x%08x, 0x%08x %u %u\n", pState->ulSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
+    CONSOLE("%u: poll 0x%08x, 0x%08x %u/%u\n", pState->ulSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
 
     // Are we operating as a server or a client?
     if(!pState->pListenPCB)
