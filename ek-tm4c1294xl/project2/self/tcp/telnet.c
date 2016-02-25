@@ -83,7 +83,7 @@ void TelnetError(void *arg, err_t err)
 {
     tState *pState = arg;
 
-    CONSOLE("%u: error 0x%08x, %d\n", pState->ulSerialPort, arg, err);
+    CONSOLE("%u: error 0x%08x, %d\n", pState->ucSerialPort, arg, err);
 
     // Increment our error counter.
     pState->ucErrorCount++;
@@ -97,7 +97,7 @@ void TelnetError(void *arg, err_t err)
     {
         // Attempt to reestablish the telnet connection to the server.
         TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-                   /*pState->usTelnetLocalPort,*/ pState->ulSerialPort);
+                   /*pState->usTelnetLocalPort,*/ pState->ucSerialPort);
     }
     else
     {
@@ -133,7 +133,7 @@ static err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
     tState *pState = arg;
 
-    CONSOLE("%u: sent 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, len);
+    CONSOLE("%u: sent 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, len);
 
     // Reset the connection timeout.
     pState->ulConnectionTimeout = 0;
@@ -157,7 +157,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tState *pState = arg;
 
-    CONSOLE("%u: connected 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, err);
+    CONSOLE("%u: connected 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, err);
 
     // Increment our connection counter.
     pState->ucConnectCount++;
@@ -171,7 +171,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
     if(err != ERR_OK)
     {
-        CONSOLE("%u: Connected error %d\n", pState->ulSerialPort, err);
+        CONSOLE("%u: Connected error %d\n", pState->ucSerialPort, err);
         pState->eLastErr = err;
 
         // Clear out all of the TCP callbacks.
@@ -189,7 +189,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
         // Re-open the connection.
         TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-                   /*pState->usTelnetLocalPort,*/ pState->ulSerialPort);
+                   /*pState->usTelnetLocalPort,*/ pState->ucSerialPort);
 
         // And return.
         return(ERR_OK);
@@ -202,7 +202,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
     pState->eTCPState = STATE_TCP_CONNECTED;
 
     // Reset the serial port associated with this session to its default parameters.
-    // TODO SerialSetDefault(pState->ulSerialPort);
+    // TODO SerialSetDefault(pState->ucSerialPort);
 
     // Set the connection timeout to 0.
     pState->ulConnectionTimeout = 0;
@@ -224,7 +224,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
 #ifdef PROTOCOL_TELNET
     // Send the telnet initialization string.
-    if((g_sParameters.sPort[pState->ulSerialPort].ucFlags & PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
+    if((g_sParameters.sPort[pState->ucSerialPort].ucFlags & PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
     {
         tcp_write(pcb, g_pucTelnetInit, sizeof(g_pucTelnetInit), 1);
         tcp_output(pcb);
@@ -251,7 +251,7 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tState *pState = arg;
 
-    CONSOLE("%u: accept 0x%08x, 0x%08x, 0x%08x\n", pState->ulSerialPort, arg, pcb, err);
+    CONSOLE("%u: accept 0x%08x, 0x%08x, 0x%08x\n", pState->ucSerialPort, arg, pcb, err);
 
     // If we are not in the listening state, refuse this connection.
     if(pState->eTCPState != STATE_TCP_LISTEN)
@@ -287,7 +287,7 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
     // TODO tcp_accepted(pcb);
 
     // Reset the serial port associated with this session to its default parameters.
-    // TODO SerialSetDefault(pState->ulSerialPort);
+    // TODO SerialSetDefault(pState->ucSerialPort);
 
     // Set the connection timeout to 0.
     pState->ulConnectionTimeout = 0;
@@ -309,7 +309,7 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 
 #ifdef PROTOCOL_TELNET
     // Send the telnet initialization string.
-    if((g_sParameters.sPort[pState->ulSerialPort].ucFlags & PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
+    if((g_sParameters.sPort[pState->ucSerialPort].ucFlags & PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
     {
         tcp_write(pcb, g_pucTelnetInit, sizeof(g_pucTelnetInit), 1);
         tcp_output(pcb);
@@ -320,18 +320,18 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
     return(ERR_OK);
 }
 
-err_t TelnetCloseClient(uint32_t ulSerialPort)
+err_t TelnetCloseClient(uint8_t ucSerialPort)
 {
     // Check the arguments.
-    ASSERT(ulSerialPort < UART_COUNT);
-    tState *pState = &g_sState[ulSerialPort];
+    ASSERT(ucSerialPort < UART_COUNT);
+    tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: close client UART %d\n", pState->ulSerialPort, ulSerialPort);
+    CONSOLE("%u: close client UART %d\n", pState->ucSerialPort, ucSerialPort);
 
     // If we have a connect PCB, close it down.
     if(pState->pConnectPCB != NULL)
     {
-        CONSOLE("%u: closing client data 0x%08x\n", pState->ulSerialPort, pState->pConnectPCB);
+        CONSOLE("%u: closing client data 0x%08x\n", pState->ucSerialPort, pState->pConnectPCB);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pState->pConnectPCB, NULL);
@@ -355,7 +355,7 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
 //    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
-    pState->ulSerialPort = ulSerialPort; // TODO ??? UART_COUNT;
+    pState->ucSerialPort = ucSerialPort; // TODO ??? UART_COUNT;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
     pState->pBufHead = NULL;
@@ -367,19 +367,19 @@ err_t TelnetCloseClient(uint32_t ulSerialPort)
     return(ERR_ABRT);
 }
 
-err_t TelnetCloseServer(uint32_t ulSerialPort)
+err_t TelnetCloseServer(uint8_t ucSerialPort)
 {
-    ASSERT(ulSerialPort < UART_COUNT);
-    tState *pState = &g_sState[ulSerialPort];
+    ASSERT(ucSerialPort < UART_COUNT);
+    tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: close server UART %d\n", pState->ulSerialPort, ulSerialPort);
+    CONSOLE("%u: close server UART %d\n", pState->ucSerialPort, ucSerialPort);
 
     err_t err = ERR_OK;
 
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
     {
-        CONSOLE("%u: closing server data 0x%08x\n", pState->ulSerialPort, pState->pListenPCB);
+        CONSOLE("%u: closing server data 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
 
         // Close the TCP connection.
         err = tcp_close(pState->pListenPCB);
@@ -400,7 +400,7 @@ err_t TelnetCloseServer(uint32_t ulSerialPort)
 //    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
-    pState->ulSerialPort = ulSerialPort; // TODO ??? UART_COUNT;
+    pState->ucSerialPort = ucSerialPort; // TODO ??? UART_COUNT;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
     pState->pBufHead = NULL;
@@ -415,25 +415,25 @@ err_t TelnetCloseServer(uint32_t ulSerialPort)
 //*****************************************************************************
 //! Closes an existing Ethernet connection.
 //!
-//! \param ulSerialPort is the serial port associated with this telnet session.
+//! \param ucSerialPort is the serial port associated with this telnet session.
 //!
 //! This function is called when the the Telnet/TCP session associated with
 //! the specified serial port is to be closed.
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetClose(uint32_t ulSerialPort)
+void TelnetClose(uint8_t ucSerialPort)
 {
     // Check the arguments.
-    ASSERT(ulSerialPort < UART_COUNT);
-    tState *pState = &g_sState[ulSerialPort];
+    ASSERT(ucSerialPort < UART_COUNT);
+    tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: Close UART %d\n", pState->ulSerialPort, ulSerialPort);
+    CONSOLE("%u: Close UART %d\n", pState->ucSerialPort, ucSerialPort);
 
     // If we have a connect PCB, close it down.
     if(pState->pConnectPCB != NULL)
     {
-        CONSOLE("%u: Closing connect pcb 0x%08x\n", pState->ulSerialPort, pState->pConnectPCB);
+        CONSOLE("%u: Closing connect pcb 0x%08x\n", pState->ucSerialPort, pState->pConnectPCB);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pState->pConnectPCB, NULL);
@@ -452,7 +452,7 @@ void TelnetClose(uint32_t ulSerialPort)
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
     {
-        CONSOLE("%u: Closing listen pcb 0x%08x\n", pState->ulSerialPort, pState->pListenPCB);
+        CONSOLE("%u: Closing listen pcb 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
 
         // Close the TCP connection.
         tcp_close(pState->pListenPCB);
@@ -469,7 +469,7 @@ void TelnetClose(uint32_t ulSerialPort)
 //    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
-    pState->ulSerialPort = ulSerialPort; // TODO ??? UART_COUNT;
+    pState->ucSerialPort = ucSerialPort; // TODO ??? UART_COUNT;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
     pState->pBufHead = NULL;
@@ -483,7 +483,7 @@ void TelnetClose(uint32_t ulSerialPort)
 //*****************************************************************************
 //! Gets the current local port for a connection's telnet session.
 //!
-//! \param ulSerialPort is the serial port associated with this telnet session.
+//! \param ucSerialPort is the serial port associated with this telnet session.
 //!
 //! This function returns the local port in use by the telnet session
 //! associated with the given serial port.  If operating as a telnet server,
@@ -493,18 +493,18 @@ void TelnetClose(uint32_t ulSerialPort)
 //!
 //! \return None.
 //*****************************************************************************
-uint16_t TelnetGetLocalPort(uint32_t ulSerialPort)
+uint16_t TelnetGetLocalPort(uint8_t ucSerialPort)
 {
     // Check the arguments.
-    ASSERT(ulSerialPort < UART_COUNT);
+    ASSERT(ucSerialPort < UART_COUNT);
 
-    return(g_sState[ulSerialPort].usTelnetLocalPort);
+    return(g_sState[ucSerialPort].usTelnetLocalPort);
 }
 
 //*****************************************************************************
 //! Gets the current remote port for a connection's telnet session.
 //!
-//! \param ulSerialPort is the serial port associated with this telnet session.
+//! \param ucSerialPort is the serial port associated with this telnet session.
 //!
 //! This function returns the remote port in use by the telnet session
 //! associated with the given serial port.  If operating as a telnet server,
@@ -513,12 +513,12 @@ uint16_t TelnetGetLocalPort(uint32_t ulSerialPort)
 //!
 //! \return None.
 //*****************************************************************************
-uint16_t TelnetGetRemotePort(uint32_t ulSerialPort)
+uint16_t TelnetGetRemotePort(uint8_t ucSerialPort)
 {
     // Check the arguments.
-    ASSERT(ulSerialPort < UART_COUNT);
+    ASSERT(ucSerialPort < UART_COUNT);
 
-    return(g_sState[ulSerialPort].usTelnetRemotePort);
+    return(g_sState[ucSerialPort].usTelnetRemotePort);
 }
 #endif
 
@@ -543,7 +543,7 @@ void TelnetInit(void)
 //        g_sTelnetSession[iPort].ucFlags = 0;
         g_sState[iPort].ulConnectionTimeout = 0;
         g_sState[iPort].ulMaxTimeout = 0;
-        g_sState[iPort].ulSerialPort = iPort;// TODO ??? UART_COUNT;
+        g_sState[iPort].ucSerialPort = iPort;// TODO ??? UART_COUNT;
         g_sState[iPort].usTelnetRemotePort = 0;
         g_sState[iPort].usTelnetLocalPort = 0;
         g_sState[iPort].ulTelnetRemoteIP = 0;

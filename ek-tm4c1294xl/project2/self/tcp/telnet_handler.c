@@ -34,10 +34,10 @@ static void TelnetProcessCharacter(uint8_t ucChar, tState *pState)
 {
     pState->ulConnectionTimeout = 0;
 
-    OutputMode(pState->ulSerialPort);
+    OutputMode(pState->ucSerialPort);
 
     // Write this character to the UART with no telnet processing.
-    SerialSend(pState->ulSerialPort, ucChar);
+    SerialSend(pState->ucSerialPort, ucChar);
 }
 
 
@@ -184,14 +184,14 @@ void TelnetHandler(void)
 
         // Process the RX ring buffer data if space is available in the
         // TCP output buffer.
-        if(SerialReceiveAvailable(pState->ulSerialPort) &&
+        if(SerialReceiveAvailable(pState->ucSerialPort) &&
            tcp_sndbuf(pState->pConnectPCB) &&
            (pState->pConnectPCB->snd_queuelen < TCP_SND_QUEUELEN))
         {
             // Here, we have data, and we have space.  Set the total amount
             // of data we will process to the lesser of data available or
             // space available.
-            long lCount = (long)SerialReceiveAvailable(pState->ulSerialPort);
+            long lCount = (long)SerialReceiveAvailable(pState->ucSerialPort);
             if(tcp_sndbuf(pState->pConnectPCB) < lCount)
             {
                 lCount = tcp_sndbuf(pState->pConnectPCB);
@@ -209,7 +209,7 @@ void TelnetHandler(void)
                 // and/or space remaining.
                 while(lCount && (lIndex < sizeof(pucTemp)))
                 {
-                    pucTemp[lIndex] = SerialReceive(pState->ulSerialPort);
+                    pucTemp[lIndex] = SerialReceive(pState->ucSerialPort);
                     lIndex++;
                     lCount--;
                 }

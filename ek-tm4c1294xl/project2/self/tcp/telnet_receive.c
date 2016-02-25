@@ -33,7 +33,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     tState *pState = arg;
     SYS_ARCH_DECL_PROTECT(lev);
 
-    CONSOLE("%u: receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, p, err);
+    CONSOLE("%u: receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, p, err);
 
     // Place the incoming packet onto the queue if there is space.
     if((err == ERR_OK) && (p != NULL))
@@ -46,7 +46,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         if(iNextWrite == pState->iBufQRead)
         {
             // The queue is full - discard the pbuf and return since we can't handle it just now.
-            CONSOLE("%u: WARNING queue is full - discard data\n", pState->ulSerialPort);
+            CONSOLE("%u: WARNING queue is full - discard data\n", pState->ucSerialPort);
 
             // Restore previous level of protection.
             SYS_ARCH_UNPROTECT(lev);
@@ -71,7 +71,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     // If a null packet is passed in, close the connection.
     else if((err == ERR_OK) && (p == NULL))
     {
-        CONSOLE("%u: received null packet - close connection\n", pState->ulSerialPort);
+        CONSOLE("%u: received null packet - close connection\n", pState->ucSerialPort);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);
@@ -89,7 +89,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         // Clear out the telnet session PCB.
         pState->pConnectPCB = NULL;
 
-        InitConnection(pState->ulSerialPort);
+        InitConnection(pState->ucSerialPort);
     }
 
     // Return okay.

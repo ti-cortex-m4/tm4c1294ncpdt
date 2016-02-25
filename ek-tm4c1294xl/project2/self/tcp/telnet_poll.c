@@ -27,7 +27,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
     struct ip_addr sIPAddr;
     tState *pState = arg;
 
-    CONSOLE("%u: poll 0x%08x, 0x%08x %u/%u\n", pState->ulSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
+    CONSOLE("%u: poll 0x%08x, 0x%08x %u/%u\n", pState->ucSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
 
     // Are we operating as a server or a client?
     if(!pState->pListenPCB)
@@ -37,7 +37,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         {
             if (pcb->state != CLOSED)
             {
-              CONSOLE("%u: Poll state %d\n", pState->ulSerialPort, pcb->state);
+              CONSOLE("%u: Poll state %d\n", pState->ucSerialPort, pcb->state);
             }
             else
             {
@@ -49,7 +49,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
                 err_t err = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort, TelnetConnected);
                 if(err != ERR_OK)
                 {
-                    CONSOLE("%u: Poll connect error %d\n", pState->ulSerialPort, err);
+                    CONSOLE("%u: Poll connect error %d\n", pState->ucSerialPort, err);
                     pState->eLastErr = err;
                 }
             }
@@ -59,8 +59,8 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
             pState->ulConnectionTimeout++;
             if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
             {
-               CONSOLE("%u: poll close client connection by timeout\n", pState->ulSerialPort);
-               return TelnetCloseClient(pState->ulSerialPort);
+               CONSOLE("%u: poll close client connection by timeout\n", pState->ucSerialPort);
+               return TelnetCloseClient(pState->ucSerialPort);
             }
         }
     }
@@ -70,8 +70,8 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         pState->ulConnectionTimeout++;
         if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
         {
-            CONSOLE("%u: poll close server connection by timeout\n", pState->ulSerialPort);
-            return TelnetCloseServer(pState->ulSerialPort);
+            CONSOLE("%u: poll close server connection by timeout\n", pState->ucSerialPort);
+            return TelnetCloseServer(pState->ucSerialPort);
         }
     }
 
