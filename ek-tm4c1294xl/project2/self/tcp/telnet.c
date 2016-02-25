@@ -381,6 +381,13 @@ err_t TelnetCloseServer(uint8_t ucSerialPort)
     {
         CONSOLE("%u: closing server data 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
 
+        // Clear out all of the TCP callbacks.
+        tcp_arg(pcb, NULL);
+        tcp_sent(pcb, NULL);
+        tcp_recv(pcb, NULL);
+        tcp_err(pcb, NULL);
+        tcp_poll(pcb, NULL, 1);
+
         // Close the TCP connection.
         err = tcp_close(pState->pListenPCB);
         if (err != ERR_OK)
