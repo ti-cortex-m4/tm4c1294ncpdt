@@ -82,7 +82,7 @@ static ulong GetStopBitsMask(uchar u)
 }
 
 
-static void InitUart(uchar u, ulong dwUart, ulong dwInterrupt, ulong dwClockFreq)
+static void InitUart(uchar u, ulong dwClockFreq)
 {
   ASSERT(u < UART_COUNT);
 
@@ -95,7 +95,7 @@ static void InitUart(uchar u, ulong dwUart, ulong dwInterrupt, ulong dwClockFreq
 
   ulong dwBaudRate = GetBaudRate(u);
   ulong dwConfig = (GetParityMask(u) | GetDataBitsMask(u) | GetStopBitsMask(u));
-  UARTConfigSetExpClk(dwUart, dwClockFreq, dwBaudRate, dwConfig);
+  UARTConfigSetExpClk(g_ulUARTBase[u], dwClockFreq, dwBaudRate, dwConfig);
 }
 
 
@@ -109,7 +109,7 @@ static void InitUart0(ulong dwClockFreq)
   GPIOPinConfigure(GPIO_PA1_U0TX);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
-  InitUart(0, UART0_BASE, INT_UART0, dwClockFreq);
+  InitUart(0, UART0_BASE, InitUART4, dwClockFreq);
 }
 
 
@@ -121,6 +121,13 @@ static void InitUart4(ulong dwClockFreq)
   GPIOPinConfigure(GPIO_PA2_U4RX);
   GPIOPinConfigure(GPIO_PA3_U4TX);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_2 | GPIO_PIN_3);
+
+  UARTFIFOLevelSet(UART4_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(UART4_BASE, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(UART4_BASE);
+
+  IntEnable(INT_UART4);
+  UARTIntEnable(UART4_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
   InitUart(1, UART4_BASE, INT_UART4, dwClockFreq);
 }
@@ -135,6 +142,13 @@ static void InitUart3(ulong dwClockFreq)
   GPIOPinConfigure(GPIO_PA5_U3TX);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_4 | GPIO_PIN_5);
 
+  UARTFIFOLevelSet(UART3_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(UART3_BASE, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(UART3_BASE);
+
+  IntEnable(INT_UART3);
+  UARTIntEnable(UART3_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+
   InitUart(2, UART3_BASE, INT_UART3, dwClockFreq);
 }
 
@@ -148,6 +162,13 @@ static void InitUart2(ulong dwClockFreq)
   GPIOPinConfigure(GPIO_PA7_U2TX);
   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_6 | GPIO_PIN_7);
 
+  UARTFIFOLevelSet(UART2_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(UART2_BASE, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(UART2_BASE);
+
+  IntEnable(INT_UART2);
+  UARTIntEnable(UART2_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+
   InitUart(3, UART2_BASE, INT_UART2, dwClockFreq);
 }
 
@@ -160,6 +181,13 @@ static void InitUart1(ulong dwClockFreq)
   GPIOPinConfigure(GPIO_PB0_U1RX);
   GPIOPinConfigure(GPIO_PB1_U1TX);
   GPIOPinTypeUART(GPIO_PORTB_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+
+  UARTFIFOLevelSet(UART1_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+  UARTTxIntModeSet(UART1_BASE, UART_TXINT_MODE_EOT);
+  UARTFIFOEnable(UART1_BASE);
+
+  IntEnable(INT_UART1);
+  UARTIntEnable(UART1_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
   InitUart(4, UART1_BASE, INT_UART1, dwClockFreq);
 }

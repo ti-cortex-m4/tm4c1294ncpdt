@@ -23,7 +23,7 @@ MAIN,C
 #include "hardware/timer1.h"
 #include "hardware/delay.h"
 #include "hardware/rom.h"
-#include "uart/uarts.h"
+#include "uart/uart.h"
 #include "uart/serial.h"
 #include "uart/uart_log.h"
 #include "uart/io_mode.h"
