@@ -5,7 +5,6 @@ telnet_handler,c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "utils/lwiplib.h"
 #include "lwip/sys.h"
 #include "../uart/serial.h"
 #include "../uart/serial_send.h"
@@ -55,18 +54,15 @@ static void TelnetProcessCharacter(uint8_t ucChar, tState *pState)
 //*****************************************************************************
 void TelnetHandler(void)
 {
-    long lCount, lIndex;
     static uint8_t pucTemp[PBUF_POOL_BUFSIZE];
-    int iLoop;
     SYS_ARCH_DECL_PROTECT(lev);
-    uint8_t *pucData;
-    tState *pState;
 
     // Loop through the possible telnet sessions.
+    int iLoop;
     for(iLoop = 0; iLoop < UART_COUNT; iLoop++)
     {
         // Initialize the state pointer.
-        pState = &g_sState[iLoop];
+        tState *pState = &g_sState[iLoop];
 
         // If the telnet session is not connected, skip this port.
         if(pState->eTCPState != STATE_TCP_CONNECTED)
@@ -144,7 +140,7 @@ void TelnetHandler(void)
             }
 
             // Setup the data pointer for the current buffer.
-            pucData = pState->pBufCurrent->payload;
+            uint8_t *pucData = pState->pBufCurrent->payload;
 
             // Process the next character in the buffer.
             TelnetProcessCharacter(pucData[pState->ulBufIndex], pState);
@@ -195,7 +191,7 @@ void TelnetHandler(void)
             // Here, we have data, and we have space.  Set the total amount
             // of data we will process to the lesser of data available or
             // space available.
-            lCount = (long)SerialReceiveAvailable(pState->ulSerialPort);
+            long lCount = (long)SerialReceiveAvailable(pState->ulSerialPort);
             if(tcp_sndbuf(pState->pConnectPCB) < lCount)
             {
                 lCount = tcp_sndbuf(pState->pConnectPCB);
@@ -207,7 +203,7 @@ void TelnetHandler(void)
                   (pState->pConnectPCB->snd_queuelen < TCP_SND_QUEUELEN))
             {
                 // First, reset the index into the local buffer.
-                lIndex = 0;
+                long lIndex = 0;
 
                 // Fill the local buffer with data while there is data
                 // and/or space remaining.
