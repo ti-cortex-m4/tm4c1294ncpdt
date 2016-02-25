@@ -25,7 +25,7 @@ telnet_poll,c
 err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 {
     struct ip_addr sIPAddr;
-    tTelnetSession *pState = arg;
+    tState *pState = arg;
 
     CONSOLE("%u: poll 0x%08x, 0x%08x %u/%u\n", pState->ulSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
 

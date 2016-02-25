@@ -30,7 +30,7 @@ telnet_receive,c
 //*****************************************************************************
 err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
 {
-    tTelnetSession *pState = arg;
+    tState *pState = arg;
     SYS_ARCH_DECL_PROTECT(lev);
 
     CONSOLE("%u: receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ulSerialPort, arg, pcb, p, err);
