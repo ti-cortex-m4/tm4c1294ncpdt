@@ -8,11 +8,9 @@ TELNET,H
 
 
 
-extern tTelnetSession g_sTelnetSession[UART_COUNT];
-
-
-
+tTelnetSession *getTelnetSession(uchar u);
 ulong getTelnetTimeout(uchar u);
+
 void TelnetFreePbufs(tTelnetSession *pState);
 extern void TelnetInit(void);
 
