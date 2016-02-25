@@ -45,7 +45,7 @@ typedef struct
     //! The current state of the telnet option parser.
 //    tTelnetState eTelnetState;
 
-    //! The listen port for the telnet server or the local port for the telnet client.
+    //! The listen port for the telnet server.
     uint16_t usTelnetLocalPort;
 
     //! The remote port that the telnet client connects to.
