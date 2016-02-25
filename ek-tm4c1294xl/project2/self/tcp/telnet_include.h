@@ -1,11 +1,12 @@
 /*------------------------------------------------------------------------------
-TELNET,H
+telnet_include.h
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __TELNET_H__
-#define __TELNET_H__
+#ifndef __TELNET_INCLUDE_H__
+#define __TELNET_INCLUDE_H__
+
 
 //*****************************************************************************
 //! The bit in the flag that is set when the remote client has sent a WILL
@@ -13,17 +14,20 @@ TELNET,H
 //*****************************************************************************
 #define OPT_FLAG_WILL_SUPPRESS_GA 0
 
+
 //*****************************************************************************
 //! The bit in the flag that is set when the remote client has sent a DO
 //! request for SUPPRESS_GA and the server has accepted it.
 //*****************************************************************************
 #define OPT_FLAG_DO_SUPPRESS_GA 1
 
+
 //*****************************************************************************
 //! The bit in the flag that is set when a connection is operating as a telnet
 //! server.  If clear, this implies that this connection is a telnet client.
 //*****************************************************************************
 #define OPT_FLAG_SERVER         4
+
 
 //*****************************************************************************
 //! The possible states of the TCP session.
@@ -45,6 +49,7 @@ typedef enum
 }
 tTCPState;
 
+
 //*****************************************************************************
 //! This structure is used holding the state of a given telnet session.
 //*****************************************************************************
@@ -60,7 +65,7 @@ typedef struct
 
     //! The current state of the TCP session.
     tTCPState eTCPState;
-//
+
 //    //! The current state of the telnet option parser.
 //    tTelnetState eTelnetState;
 
@@ -123,4 +128,5 @@ typedef struct
 }
 tTelnetSession;
 
-#endif // __TELNET_H__
+
+#endif
