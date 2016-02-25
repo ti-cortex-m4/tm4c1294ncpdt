@@ -7,6 +7,7 @@ telnet_receive,c
 #include "../main.h"
 #include "utils/lwiplib.h"
 #include "lwip/sys.h"
+#include "../kernel/tasks.h"
 #include "../kernel/log.h"
 #include "telnet.h"
 #include "telnet_receive.h"
@@ -45,7 +46,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         if(iNextWrite == pState->iBufQRead)
         {
             // The queue is full - discard the pbuf and return since we can't handle it just now.
-            CONSOLE("%u: queue is full - discard data\n", pState->ulSerialPort);
+            CONSOLE("%u: WARNING queue is full - discard data\n", pState->ulSerialPort);
 
             // Restore previous level of protection.
             SYS_ARCH_UNPROTECT(lev);
@@ -70,7 +71,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     // If a null packet is passed in, close the connection.
     else if((err == ERR_OK) && (p == NULL))
     {
-        CONSOLE("%u: received NULL packet - close connection\n", pState->ulSerialPort);
+        CONSOLE("%u: received null packet - close connection\n", pState->ulSerialPort);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);
@@ -88,19 +89,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         // Clear out the telnet session PCB.
         pState->pConnectPCB = NULL;
 
-        // If we don't have a listen PCB, then we are in client mode, and should try to reconnect.
-        if(pState->pListenPCB == NULL)
-        {
-            // Re-open the connection.
-            CONSOLE("%u: connect as client after connection closing\n", pState->ulSerialPort);
-            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, /*pState->usTelnetLocalPort,*/ pState->ulSerialPort);
-        }
-        else
-        {
-            // Revert to listening state.
-            CONSOLE("%u: listen as server after connection closing\n", pState->ulSerialPort);
-            pState->eTCPState = STATE_TCP_LISTEN;
-        }
+        InitConnection(pState->ulSerialPort);
     }
 
     // Return okay.
