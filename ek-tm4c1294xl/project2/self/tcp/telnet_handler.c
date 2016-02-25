@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-telnet_handler,c
+telnet_handler.c
 
 
 ------------------------------------------------------------------------------*/
@@ -35,8 +35,6 @@ static void TelnetProcessCharacter(uint8_t ucChar, tState *pState)
     pState->ulConnectionTimeout = 0;
 
     OutputMode(pState->ucSerialPort);
-
-    // Write this character to the UART with no telnet processing.
     SerialSend(pState->ucSerialPort, ucChar);
 }
 
@@ -58,11 +56,11 @@ void TelnetHandler(void)
     SYS_ARCH_DECL_PROTECT(lev);
 
     // Loop through the possible telnet sessions.
-    int iLoop;
-    for(iLoop = 0; iLoop < UART_COUNT; iLoop++)
+    uint8_t ucSerialPort;
+    for(ucSerialPort = 0; ucSerialPort < UART_COUNT; ucSerialPort++)
     {
         // Initialize the state pointer.
-        tState *pState = &g_sState[iLoop];
+        tState *pState = &g_sState[ucSerialPort];
 
         // If the telnet session is not connected, skip this port.
         if(pState->eTCPState != STATE_TCP_CONNECTED)
@@ -116,9 +114,9 @@ void TelnetHandler(void)
 
         // While space is available in the serial output queue, process the
         // pbufs received on the telnet interface.
-        while(!SerialSendFull(iLoop))
+        while(!SerialSendFull(ucSerialPort))
         {
-            // Pop a pbuf off of the rx queue, if one is available, and we are
+            // Pop a pbuf off of the RX queue, if one is available, and we are
             // not already processing a pbuf.
             if(pState->pBufHead == NULL)
             {
