@@ -15,7 +15,7 @@ serial_handler.c
 //*****************************************************************************
 //! Handles the UART interrupt.
 //!
-//! \param ulPort is the serial port number to be accessed.
+//! \param ucPort is the serial port number to be accessed.
 //!
 //! This function is called when either of the UARTs generate an interrupt.
 //! An interrupt will be generated when data is received and when the transmit
@@ -24,45 +24,42 @@ serial_handler.c
 //!
 //! \return None.
 //*****************************************************************************
-static void SerialUARTIntHandler(uint32_t ulPort)
+static void SerialUARTIntHandler(uint8_t ucPort)
 {
-    uint32_t ulStatus;
-    uint8_t ucChar;
-
     // Get the cause of the interrupt.
-    ulStatus = UARTIntStatus(g_ulUARTBase[ulPort], true);
+    uint32_t ulStatus = UARTIntStatus(g_ulUARTBase[ucPort], true);
 
     // Clear the cause of the interrupt.
-    UARTIntClear(g_ulUARTBase[ulPort], ulStatus);
+    UARTIntClear(g_ulUARTBase[ucPort], ulStatus);
 
     // See if there is data to be processed in the receive FIFO.
     if(ulStatus & (UART_INT_RT | UART_INT_RX))
     {
         // Loop while there are characters available in the receive FIFO.
-        while(UARTCharsAvail(g_ulUARTBase[ulPort]))
+        while(UARTCharsAvail(g_ulUARTBase[ucPort]))
         {
             // Get the next character from the receive FIFO.
-            ucChar = UARTCharGet(g_ulUARTBase[ulPort]);
+            uint8_t ucChar = UARTCharGet(g_ulUARTBase[ucPort]);
 
 #ifdef PROTOCOL_TELNET
             // If Telnet protocol enabled, check for incoming IAC character,
             // and escape it.
-            if((g_sParameters.sPort[ulPort].ucFlags &
+            if((g_sParameters.sPort[ucPort].ucFlags &
                         PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
             {
                 // If this is a Telnet IAC character, write it twice.
                 if((ucChar == TELNET_IAC) &&
-                   (RingBufFree(&g_sRxBuf[ulPort]) >= 2))
+                   (RingBufFree(&g_sRxBuf[ucPort]) >= 2))
                 {
-                    RingBufWriteOne(&g_sRxBuf[ulPort], ucChar);
-                    RingBufWriteOne(&g_sRxBuf[ulPort], ucChar);
+                    RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
+                    RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
                 }
 
                 // If not a Telnet IAC character, only write it once.
                 else if((ucChar != TELNET_IAC) &&
-                        (RingBufFree(&g_sRxBuf[ulPort]) >= 1))
+                        (RingBufFree(&g_sRxBuf[ucPort]) >= 1))
                 {
-                    RingBufWriteOne(&g_sRxBuf[ulPort], ucChar);
+                    RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
                 }
             }
 
@@ -71,7 +68,7 @@ static void SerialUARTIntHandler(uint32_t ulPort)
 #endif
 
             {
-                RingBufWriteOne(&g_sRxBuf[ulPort], ucChar);
+                RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
             }
         }
     }
@@ -79,15 +76,15 @@ static void SerialUARTIntHandler(uint32_t ulPort)
 #ifdef SERIAL_FLOW_CONTROL
     // If flow control is enabled, check the status of the RX buffer to
     // determine if flow control GPIO needs to be asserted.
-    if(g_sParameters.sPort[ulPort].ucFlowControl == SERIAL_FLOW_CONTROL_HW)
+    if(g_sParameters.sPort[ucPort].ucFlowControl == SERIAL_FLOW_CONTROL_HW)
     {
         // If the ring buffer is down to less than 25% free, assert the
         // outbound flow control pin.
-        if(RingBufFree(&g_sRxBuf[ulPort]) <
-           (RingBufSize(&g_sRxBuf[ulPort]) / 4))
+        if(RingBufFree(&g_sRxBuf[ucPort]) <
+           (RingBufSize(&g_sRxBuf[ucPort]) / 4))
         {
-            GPIOPinWrite(g_ulFlowOutBase[ulPort], g_ulFlowOutPin[ulPort],
-                         g_ulFlowOutPin[ulPort]);
+            GPIOPinWrite(g_ulFlowOutBase[ucPort], g_ulFlowOutPin[ucPort],
+                         g_ulFlowOutPin[ucPort]);
         }
     }
 #endif
@@ -97,14 +94,14 @@ static void SerialUARTIntHandler(uint32_t ulPort)
     {
         // Loop while there is space in the transmit FIFO and characters to be
         // sent.
-        while(!RingBufEmpty(&g_sTxBuf[ulPort]) &&
-                UARTSpaceAvail(g_ulUARTBase[ulPort]))
+        while(!RingBufEmpty(&g_sTxBuf[ucPort]) &&
+                UARTSpaceAvail(g_ulUARTBase[ucPort]))
         {
             // Write the next character into the transmit FIFO.
-            UARTCharPut(g_ulUARTBase[ulPort], RingBufReadOne(&g_sTxBuf[ulPort]));
+            UARTCharPut(g_ulUARTBase[ucPort], RingBufReadOne(&g_sTxBuf[ucPort]));
         }
 
-        InputMode(ulPort);
+        InputMode(ucPort);
     }
 }
 
