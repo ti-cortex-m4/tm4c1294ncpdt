@@ -116,7 +116,7 @@ void RunLwipDebug(void)
 {
 static uint wTimeout;
 
-  if ((fLwIpDebugFlag) && (++wTimeout > wLwIpDebugTimeout*10))
+  if ((fLwipDebugFlag) && (++wTimeout > wLwipDebugTimeout*10))
   {
     wTimeout = 0;
     stats_display();

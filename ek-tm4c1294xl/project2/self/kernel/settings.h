@@ -41,8 +41,8 @@ extern bool                    ibDebugMode;
 extern ulong                   dwUdpDebugIP;
 extern uint                    wUdpDebugPort;
 
-extern bool                    fLwIpDebugFlag;
-extern uint                    wLwIpDebugTimeout;
+extern bool                    fLwipDebugFlag;
+extern uint                    wLwipDebugTimeout;
 
 extern uint                    cwErrStorageInit;
 extern uint                    cwErrIpLoad;
