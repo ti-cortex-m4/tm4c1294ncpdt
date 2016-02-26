@@ -142,7 +142,7 @@ int     main(void)
   IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
   IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
-  InitConnections();
+  StartConnections();
 
   IntMasterEnable();
 
@@ -152,7 +152,7 @@ int     main(void)
   {
     DelayMilliSecond(100);
 
-    TaskConnections();
-    TaskLwIpDebug();
+    RunConnections();
+    RunLwipDebug();
   }
 }

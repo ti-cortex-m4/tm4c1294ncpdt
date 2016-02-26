@@ -19,7 +19,7 @@ tasks.c
 
 
 
-static void StartServerConnection(uchar u)
+void StartServerConnection(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
@@ -28,7 +28,7 @@ static void StartServerConnection(uchar u)
 }
 
 
-static void StartClientConnection(uchar u)
+void StartClientConnection(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
@@ -43,7 +43,7 @@ static void StartClientConnection(uchar u)
 
 
 
-void InitConnection(uchar u)
+void StartConnection(uchar u)
 {
   ASSERT(u < UART_COUNT);
 
@@ -66,17 +66,18 @@ void InitConnection(uchar u)
 }
 
 
-void InitConnections(void)
+void StartConnections(void)
 {
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
   {
-    InitConnection(u);
+    StartConnection(u);
   }
 }
 
 
-void TaskConnections(void)
+
+void RunConnections(void)
 {
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
@@ -111,7 +112,7 @@ void TaskConnections(void)
 
 
 
-void TaskLwIpDebug(void)
+void RunLwipDebug(void)
 {
 static uint wTimeout;
 

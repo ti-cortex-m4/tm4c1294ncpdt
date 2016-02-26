@@ -4,8 +4,10 @@ tasks.h
 
 ------------------------------------------------------------------------------*/
 
-void InitConnection(uchar u);
-void InitConnections(void);
-void TaskConnections(void);
+void StartServerConnection(uchar u);
+void StartClientConnection(uchar u);
+void StartConnection(uchar u);
+void StartConnections(void);
 
-void TaskLwIpDebug(void);
+void RunConnections(void);
+void RunLwipDebug(void);
