@@ -48,7 +48,7 @@ err_t TelnetCloseClient(uint8_t ucSerialPort)
 //    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
-    pState->ucSerialPort = ucSerialPort; // TODO ??? UART_COUNT;
+    pState->ucSerialPort = ucSerialPort;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
     pState->pBufHead = NULL;
@@ -85,7 +85,7 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
         err = tcp_close(pState->pListenPCB);
         if (err != ERR_OK)
         {
-           CONSOLE("%u: ERROR tcp_close %u\n", err); // TODO restart
+            CONSOLE("%u: ERROR tcp_close err=%u\n", pState->ucSerialPort, err); // TODO ?
         }
 
         // Clear out any pbufs associated with this session.
@@ -100,7 +100,7 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
 //    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
-    pState->ucSerialPort = ucSerialPort; // TODO ??? UART_COUNT;
+    pState->ucSerialPort = ucSerialPort;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
     pState->pBufHead = NULL;
@@ -167,7 +167,7 @@ void TelnetClose(uint8_t ucSerialPort)
 //    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
-    pState->ucSerialPort = ucSerialPort; // TODO ??? UART_COUNT;
+    pState->ucSerialPort = ucSerialPort;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
     pState->pBufHead = NULL;
