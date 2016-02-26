@@ -49,8 +49,8 @@ bool                    ibDebugMode;
 ulong                   dwUdpDebugIP;
 uint                    wUdpDebugPort;
 
-bool                    fLwIpDebugFlag;
-uint                    wLwIpDebugTimeout;
+bool                    fLwipDebugFlag;
+uint                    wLwipDebugTimeout;
 
 
 uint                    cwErrStorageInit;

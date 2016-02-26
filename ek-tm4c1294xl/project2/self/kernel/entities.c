@@ -87,8 +87,8 @@ const entity * const mpenEntities[] =
   &enUdpDebugIP,
   &enUdpDebugPort,
 
-  &enLwIpDebugFlag,
-  &enLwIpDebugTimeout,
+  &enLwipDebugFlag,
+  &enLwipDebugTimeout,
 };
 
 const uchar bEntitiesSize = sizeof(mpenEntities) / sizeof(mpenEntities[0]);
