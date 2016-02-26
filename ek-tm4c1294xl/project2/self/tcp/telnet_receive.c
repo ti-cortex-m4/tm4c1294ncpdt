@@ -84,7 +84,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         err = tcp_close(pcb);
         if (err != ERR_OK)
         {
-           CONSOLE("%u: ERROR tcp_close %u\n", err); // TODO restart
+           CONSOLE("%u: ERROR tcp_close err=%u\n", pState->ucSerialPort, err); // TODO ?
         }
 
         // Clear out any pbufs associated with this session.
