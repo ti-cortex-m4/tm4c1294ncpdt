@@ -8,7 +8,6 @@ telnet_close,c
 #include "utils/lwiplib.h"
 #include "lwip/sys.h"
 #include "../kernel/log.h"
-//#include "../kernel/settings.h"
 #include "telnet.h"
 #include "telnet_close.h"
 
@@ -61,7 +60,7 @@ err_t TelnetCloseClient(uint8_t ucSerialPort)
     return(ERR_ABRT);
 }
 
-err_t TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
+void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
 {
     ASSERT(ucSerialPort < UART_COUNT);
     tState *pState = &g_sState[ucSerialPort];
@@ -74,14 +73,14 @@ err_t TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
     if(pState->pListenPCB != NULL)
     {
         CONSOLE("%u: closing server data 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
-#if 0
+
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);
         tcp_sent(pcb, NULL);
         tcp_recv(pcb, NULL);
         tcp_err(pcb, NULL);
         tcp_poll(pcb, NULL, 1);
-#endif
+
         // Close the TCP connection.
         err = tcp_close(pState->pListenPCB);
         if (err != ERR_OK)
@@ -109,8 +108,6 @@ err_t TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
     pState->ulBufIndex = 0;
     pState->ulLastTCPSendTime = 0;
     pState->bLinkLost = false;
-
-    return err;
 }
 
 //*****************************************************************************
