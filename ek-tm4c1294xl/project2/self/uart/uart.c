@@ -94,7 +94,7 @@ static void InitUART(uchar u, ulong dwClockFreq)
 
 
 
-static void InitUART0(ulong dwClockFreq)
+static void InitUART0(ulong dwClockFreq, bool fDebugModeUART)
 {
   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -107,10 +107,13 @@ static void InitUART0(ulong dwClockFreq)
   UARTTxIntModeSet(UART0_BASE, UART_TXINT_MODE_EOT);
   UARTFIFOEnable(UART0_BASE);
 
-  IntEnable(INT_UART0);
-  UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
+  if (!fDebugModeUART)
+  {
+    IntEnable(INT_UART0);
+    UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT | UART_INT_TX);
 
-  InitUART(0, dwClockFreq);
+    InitUART(0, dwClockFreq);
+  }
 }
 
 
@@ -197,11 +200,7 @@ static void InitUART1(ulong dwClockFreq)
 
 void InitUARTs(ulong dwClockFreq)
 {
-  if (ibDebugMode != DEBUG_MODE_UART)
-  {
-    InitUART0(dwClockFreq);
-  }
-
+  InitUART0(dwClockFreq, (ibDebugMode == DEBUG_MODE_UART));
   InitUART4(dwClockFreq);
   InitUART3(dwClockFreq);
   InitUART2(dwClockFreq);
