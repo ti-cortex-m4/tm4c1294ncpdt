@@ -71,7 +71,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     // If a null packet is passed in, close the connection.
     else if((err == ERR_OK) && (p == NULL))
     {
-        CONSOLE("%u: received null packet - close connection\n", pState->ucSerialPort);
+        CONSOLE("%u: received NULL packet - close connection\n", pState->ucSerialPort);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);

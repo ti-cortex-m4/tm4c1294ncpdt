@@ -62,7 +62,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
             pState->ulConnectionTimeout++;
             if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
             {
-               CONSOLE("%u: poll close client connection by timeout\n", pState->ucSerialPort);
+               CONSOLE("%u: poll - close client connection by timeout\n", pState->ucSerialPort);
                return TelnetCloseClient(pState->ucSerialPort);
             }
         }
@@ -73,7 +73,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         pState->ulConnectionTimeout++;
         if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
         {
-            CONSOLE("%u: poll close server connection by timeout\n", pState->ucSerialPort);
+            CONSOLE("%u: poll - close server connection by timeout\n", pState->ucSerialPort);
             TelnetCloseServer(pcb, pState->ucSerialPort);
             StartServerConnection(pState->ucSerialPort);
         }
