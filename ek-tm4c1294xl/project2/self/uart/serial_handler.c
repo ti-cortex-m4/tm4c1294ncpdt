@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-serial_handler,c
+serial_handler.c
 
 
 ------------------------------------------------------------------------------*/
@@ -110,27 +110,27 @@ static void SerialUARTIntHandler(uint32_t ulPort)
 
 
 
-void Uart0IntHandler(void)
+void UART0IntHandler(void)
 {
-    SerialUARTIntHandler(0);
+  SerialUARTIntHandler(0);
 }
 
-void Uart4IntHandler(void)
+void UART4IntHandler(void)
 {
-   SerialUARTIntHandler(1);
+  SerialUARTIntHandler(1);
 }
 
-void Uart3IntHandler(void)
+void UART3IntHandler(void)
 {
-   SerialUARTIntHandler(2);
+  SerialUARTIntHandler(2);
 }
 
-void Uart2IntHandler(void)
+void UART2IntHandler(void)
 {
-   SerialUARTIntHandler(3);
+  SerialUARTIntHandler(3);
 }
 
-void Uart1IntHandler(void)
+void UART1IntHandler(void)
 {
-   SerialUARTIntHandler(4);
+  SerialUARTIntHandler(4);
 }

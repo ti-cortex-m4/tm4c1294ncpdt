@@ -59,11 +59,11 @@ extern uint32_t __STACK_TOP;
 extern void lwIPEthernetIntHandler(void);
 extern void SysTickIntHandler(void);
 
-extern void Uart0IntHandler(void);
-extern void Uart4IntHandler(void);
-extern void Uart3IntHandler(void);
-extern void Uart2IntHandler(void);
-extern void Uart1IntHandler(void);
+extern void UART0IntHandler(void);
+extern void UART4IntHandler(void);
+extern void UART3IntHandler(void);
+extern void UART2IntHandler(void);
+extern void UART1IntHandler(void);
 
 extern void Timer1IntHandler(void);
 
@@ -99,8 +99,8 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // GPIO Port C
     IntDefaultHandler,                      // GPIO Port D
     IntDefaultHandler,                      // GPIO Port E
-    Uart0IntHandler,                      // UART0 Rx and Tx
-    Uart1IntHandler,                      // UART1 Rx and Tx
+    UART0IntHandler,                      // UART0 Rx and Tx
+    UART1IntHandler,                      // UART1 Rx and Tx
     IntDefaultHandler,                      // SSI0 Rx and Tx
     IntDefaultHandler,                      // I2C0 Master and Slave
     IntDefaultHandler,                      // PWM Fault
@@ -127,7 +127,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // GPIO Port F
     IntDefaultHandler,                      // GPIO Port G
     IntDefaultHandler,                      // GPIO Port H
-    Uart2IntHandler,                      // UART2 Rx and Tx
+    UART2IntHandler,                      // UART2 Rx and Tx
     IntDefaultHandler,                      // SSI1 Rx and Tx
     IntDefaultHandler,                      // Timer 3 subtimer A
     IntDefaultHandler,                      // Timer 3 subtimer B
@@ -150,8 +150,8 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // GPIO Port L
     IntDefaultHandler,                      // SSI2 Rx and Tx
     IntDefaultHandler,                      // SSI3 Rx and Tx
-    Uart3IntHandler,                      // UART3 Rx and Tx
-    Uart4IntHandler,                      // UART4 Rx and Tx
+    UART3IntHandler,                      // UART3 Rx and Tx
+    UART4IntHandler,                      // UART4 Rx and Tx
     IntDefaultHandler,                      // UART5 Rx and Tx
     IntDefaultHandler,                      // UART6 Rx and Tx
     IntDefaultHandler,                      // UART7 Rx and Tx
