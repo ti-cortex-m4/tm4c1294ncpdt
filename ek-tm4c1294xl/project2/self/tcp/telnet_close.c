@@ -85,7 +85,8 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
         err = tcp_close(pState->pListenPCB);
         if (err != ERR_OK)
         {
-            CONSOLE("%u: ERROR tcp_close err=%u\n", pState->ucSerialPort, err); // TODO ?
+            CONSOLE("%u: ERROR during close server - tcp_close returned %u\n", pState->ucSerialPort, err);
+            ASSERT(false); // TODO ?
         }
 
         // Clear out any pbufs associated with this session.

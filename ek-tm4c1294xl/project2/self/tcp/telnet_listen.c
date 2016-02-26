@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-telnet_listen,c
+telnet_listen.c
 
 
 ------------------------------------------------------------------------------*/
@@ -24,17 +24,13 @@ telnet_listen,c
 //*****************************************************************************
 void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
 {
-    void *pcb;
-
-    // Check the arguments.
     ASSERT(ucSerialPort < UART_COUNT);
     ASSERT(usTelnetPort != 0);
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: listen port %d, UART %d\n", pState->ucSerialPort, usTelnetPort, ucSerialPort);
+    CONSOLE("%u: listen on port %d\n", pState->ucSerialPort, usTelnetPort);
 
-    // Fill in the telnet state data structure for this session in listen
-    // (in other words, server) mode.
+    // Fill in the telnet state data structure for this session in listen (server) mode.
     pState->pConnectPCB = NULL;
     pState->eTCPState = STATE_TCP_LISTEN;
 //    pState->eTelnetState = STATE_NORMAL;
@@ -54,13 +50,18 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
     pState->bLinkLost = false;
 
     // Initialize the application to listen on the requested telnet port.
-    pcb = tcp_new(); // TODO check NULL
+    void *pcb = tcp_new();
+    if (pcb == NULL)
+    {
+        CONSOLE("%u: ERROR during listen - tcp_new returned NULL\n", pState->ucSerialPort);
+        ASSERT(false); // TODO ?
+    }
+
     tcp_bind(pcb, IP_ADDR_ANY, usTelnetPort);
     pcb = tcp_listen(pcb);
     pState->pListenPCB = pcb;
 
-    // Save the requested information and set the TCP callback functions
-    // and arguments.
+    // Save the requested information and set the TCP callback functions and arguments.
     tcp_arg(pcb, pState);
     tcp_accept(pcb, TelnetAccept);
 }
