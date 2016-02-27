@@ -9,19 +9,6 @@ TCP_WRITE_FLAG_COPY
     0,                                      // Reserved
 
 rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib
-
-// Free up the pbuf.  Note that we don't acknowledge receipt of the data since we want it to be retransmitted later.
-// If we already have a connection, kill it and start over.
-// Process the RX ring buffer data if space is available in the TCP output buffer.
-
-как принимать TCP: sw01266.zip -> TelnetReceive
-for(q = p, pucData = q->payload; q != NULL; q = q->next)
- 
-как передавать TCP: ser2enet -> TelnetHandler
-        if(SerialReceiveAvailable(pState->ulSerialPort) &&
-          tcp_sndbuf(pState->pConnectPCB) &&
-          (pState->pConnectPCB->snd_queuelen < TCP_SND_QUEUELEN))
-        {
                 
 SERIAL_FLOW_CONTROL_HW           
 
@@ -70,8 +57,12 @@ close/abort connection
         SysCtlSleep();
         
 IntMasterDisable() _error_ не работает      lwIPEthernetIntHandler  
-NmiSR + FaultISR = reset wathcdog
+NmiSR + FaultISR = wathcdog reset 
+watchdog
 
 debug & release
-watchdog
+            
+rom - build number/data even in .out
+
+timer1
             
