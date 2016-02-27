@@ -4,5 +4,5 @@ serial_send.h
 
 ------------------------------------------------------------------------------*/
 
-bool SerialSendFull(uint32_t ulPort);
-void SerialSend(uint32_t ulPort, uint8_t ucChar);
+bool SerialSendFull(uint8_t ucPort);
+void SerialSend(uint8_t ucPort, uint8_t ucChar);
