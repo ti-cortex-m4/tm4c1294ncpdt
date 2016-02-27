@@ -1,6 +1,5 @@
 проверять возвращаемые значения, особенно MEM
 udp_remove & pbuf_free
-udp HELLO send IP
 tcp port in use
 serial test overflow
 serial4 ((dwStatus & 0x00000020) != 0) || (dwStatus == 0);
@@ -40,8 +39,6 @@ TelnetWriteDiagInfo
  
 usTelnetLocalPort in client mode
 
-watchdog
-
 F=R* F=R restart readonly_values
 
 return ERR_VAL&ERR_ARG CONSOLE_UART
@@ -54,7 +51,7 @@ minimise CONSOLE messages sizes
 enet_s2e ISR priorities etc.
 
 led freq
-  EMACPHYExtendedWrite(EMAC0_BASE, 0, EPHY_LEDCR, (EMACPHYExtendedRead(EMAC0_BASE, 0, EPHY_LEDCR) & ~EPHY_LEDCR_BLINKRATE_M) | EPHY_LEDCR_BLINKRATE_10HZ);
+EMACPHYExtendedWrite(EMAC0_BASE, 0, EPHY_LEDCR, (EMACPHYExtendedRead(EMAC0_BASE, 0, EPHY_LEDCR) & ~EPHY_LEDCR_BLINKRATE_M) | EPHY_LEDCR_BLINKRATE_10HZ);
   
 все операции с entities в одно место из udp_in
 
@@ -66,21 +63,15 @@ usnprintf, remove custom printf
 
 убрать enity szCode
 
-uarts uart base and int map
-
 close/abort connection
-
-            //
-            // Delay a couple of seconds to let any pending web server
-            // transmission to complete.  Each loop within SysCtlDelay is
-            // 3 instructions long so this delays approximately 2 seconds.
-            //
-            SysCtlDelay((SysCtlClockGet() / 3) * 2);
-            
         //
         // Wait for an event to occur.
         //
         SysCtlSleep();
         
 IntMasterDisable() _error_ не работает      lwIPEthernetIntHandler  
+NmiSR + FaultISR = reset wathcdog
+
+debug & release
+watchdog
             
