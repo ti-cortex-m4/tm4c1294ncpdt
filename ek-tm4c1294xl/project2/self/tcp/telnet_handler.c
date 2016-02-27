@@ -10,6 +10,7 @@ telnet_handler.c
 #include "../uart/serial_send.h"
 #include "../uart/serial_receive.h"
 #include "../uart/io_mode.h"
+#include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "telnet.h"
 #include "telnet_handler.h"
@@ -207,7 +208,12 @@ void TelnetHandler(void)
                 // and/or space remaining.
                 while(lCount && (lIndex < sizeof(pucTemp)))
                 {
-                    pucTemp[lIndex] = SerialReceive(pState->ucSerialPort);
+                    uint8_t ucChar = SerialReceive(pState->ucSerialPort);
+
+                    if (fDebug1Flag)
+                      CONSOLE("%u: %02X}\n", ucSerialPort, ucChar);
+
+                    pucTemp[lIndex] = ucChar;
                     lIndex++;
                     lCount--;
                 }

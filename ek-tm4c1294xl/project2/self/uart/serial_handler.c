@@ -7,6 +7,8 @@ serial_handler.c
 #include "../main.h"
 #include "driverlib/uart.h"
 #include "../uart/io_mode.h"
+#include "../kernel/settings.h"
+#include "../kernel/log.h"
 #include "serial.h"
 #include "serial_handler.h"
 
@@ -68,6 +70,9 @@ static void SerialUARTIntHandler(uint8_t ucPort)
 #endif
 
             {
+                if (fDebug1Flag)
+                  CONSOLE("%u: %02X<\n", ucPort, ucChar);
+
                 RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
             }
         }
@@ -92,13 +97,17 @@ static void SerialUARTIntHandler(uint8_t ucPort)
     // See if there is space to be filled in the transmit FIFO.
     if(ulStatus & UART_INT_TX)
     {
-        // Loop while there is space in the transmit FIFO and characters to be
-        // sent.
+        // Loop while there is space in the transmit FIFO and characters to be sent.
         while(!RingBufEmpty(&g_sTxBuf[ucPort]) &&
                 UARTSpaceAvail(g_ulUARTBase[ucPort]))
         {
+            uint8_t ucChar = RingBufReadOne(&g_sTxBuf[ucPort]);
+
+            if (fDebug1Flag)
+              CONSOLE("%u: %02X>\n", ucPort, ucChar);
+
             // Write the next character into the transmit FIFO.
-            UARTCharPut(g_ulUARTBase[ucPort], RingBufReadOne(&g_sTxBuf[ucPort]));
+            UARTCharPut(g_ulUARTBase[ucPort], ucChar);
         }
 
         InputMode(ucPort);
