@@ -52,6 +52,7 @@ uint                    wUdpDebugPort;
 bool                    fLwipDebugFlag;
 uint                    wLwipDebugTimeout;
 
+const bool              fDebug1Flag = true;
 
 uint                    cwErrStorageInit;
 uint                    cwErrIpLoad;
