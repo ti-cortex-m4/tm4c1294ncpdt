@@ -70,7 +70,7 @@ static void SerialUARTIntHandler(uint8_t ucPort)
 #endif
 
             {
-                if (fDebug1Flag)
+                if (fDataDebugFlag)
                   CONSOLE("%u: %02X<\n", ucPort, ucChar);
 
                 RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
@@ -103,7 +103,7 @@ static void SerialUARTIntHandler(uint8_t ucPort)
         {
             uint8_t ucChar = RingBufReadOne(&g_sTxBuf[ucPort]);
 
-            if (fDebug1Flag)
+            if (fDataDebugFlag)
               CONSOLE("%u: %02X>\n", ucPort, ucChar);
 
             // Write the next character into the transmit FIFO.

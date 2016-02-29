@@ -44,7 +44,7 @@ extern uint                    wUdpDebugPort;
 extern bool                    fLwipDebugFlag;
 extern uint                    wLwipDebugTimeout;
 
-extern const bool              fDebug1Flag;
+extern bool                    fDataDebugFlag;
 
 extern uint                    cwErrStorageInit;
 extern uint                    cwErrIpLoad;
