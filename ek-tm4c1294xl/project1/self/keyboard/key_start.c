@@ -15,11 +15,13 @@ KEY_START!C
 #include "../label_global.h"
 #include "../settings.h"
 #include "../groups.h"
+#include "../hardware/watchdog.h"
 #include "../realtime/realtime_start.h"
 #include "../impulses/impulses.h"
 #include "../digitals/digitals.h"
 #include "../special/defects.h"
 #include "../time/rtc.h"
+#include "../time/timedate_display.h"
 #include "../impulses/factors.h"
 #include "../flash/files.h"
 #include "../flash/records.h"
@@ -93,10 +95,10 @@ uchar   c;
 void    key_Start(void)
 {
   if (enKeyboard == KBD_ENTER)
-  {  
-    enKeyboard = KBD_BEGIN; 
+  {
+    enKeyboard = KBD_BEGIN;
 
-    ShowHi(szStart);     
+    ShowHi(szStart);
     Clear();
 
 
@@ -134,7 +136,20 @@ void    key_Start(void)
     if (TestDigitals() == 0)
       return;
 
-// TODO key_Start
+    // при отложенном старте ожидаем перехода на следующий получас
+    if (wProgram == bSET_START_MINUTES30)
+    {
+      while (true)
+      {
+        if (fKey == true) { fKey = false; Stop(); return; }
+        ResetWatchdog();
+
+        time ti = *GetCurrTimeDate();
+        ShowTime(ti);
+
+        if ((ti.bMinute % 30) == 0) break;
+      }
+    }
 
     // рассчитываем массивы индексов тарифов для каждого получаса текущих суток (для мощности и энергии)
     MakeAllCurrTariffs();
@@ -172,11 +187,11 @@ void    key_Start(void)
 void    key_Restart(void)
 {
   if (enKeyboard == KBD_ENTER)
-  {  
-    enKeyboard = KBD_BEGIN; 
+  {
+    enKeyboard = KBD_BEGIN;
 
-    ShowHi(szRestart);     
-    Clear();    
+    ShowHi(szRestart);
+    Clear();
 
     if (boSetPassword == false)
     {
@@ -200,7 +215,7 @@ void    key_Restart(void)
 
     Beep();
 
-    enGlobal = GLB_WORK;  
+    enGlobal = GLB_WORK;
 
     AddSysRecord(EVE_RESTART);
 
@@ -215,10 +230,10 @@ void    key_Restart(void)
 void    key_Debug(void)
 {
   if (enKeyboard == KBD_ENTER)
-  {  
-    enKeyboard = KBD_BEGIN; 
+  {
+    enKeyboard = KBD_BEGIN;
 
-    ShowHi(szDebug);     
+    ShowHi(szDebug);
     Clear();
 
     boSetTime = true;
