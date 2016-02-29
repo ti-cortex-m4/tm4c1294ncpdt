@@ -210,7 +210,7 @@ void TelnetHandler(void)
                 {
                     uint8_t ucChar = SerialReceive(pState->ucSerialPort);
 
-                    if (fDebug1Flag)
+                    if (fDataDebugFlag)
                       CONSOLE("%u: %02X}\n", ucSerialPort, ucChar);
 
                     pucTemp[lIndex] = ucChar;

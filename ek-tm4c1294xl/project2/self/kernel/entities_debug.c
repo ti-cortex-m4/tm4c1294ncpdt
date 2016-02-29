@@ -47,3 +47,12 @@ const entity enLwipDebugTimeout = {
   "LWIPDT",
   "AI=LWIPDT;E=1;D=TCP/IP stack debug period (seconds);T=INT;C=EDIT;V=LWIPDT>3600?\"Maximum timeout is 3600 seconds\":\"\";S=LWIPDF!=0?\"e\":\"i\"",
 };
+
+
+
+const entity enDataDebugFlag = {
+  EEPROM_DATA_DEBUG_FLAG, &fDataDebugFlag, sizeof(uchar), CHAR, 0,
+  0, 1, 0,
+  "DDF",
+  "AI=DDF;D=Data debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+};

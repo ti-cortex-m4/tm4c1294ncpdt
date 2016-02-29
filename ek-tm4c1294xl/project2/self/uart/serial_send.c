@@ -61,7 +61,7 @@ void SerialSend(uint8_t ucPort, uint8_t ucChar)
     // See if the transmit buffer is empty and there is space in the FIFO.
     if(RingBufEmpty(&g_sTxBuf[ucPort]) && (UARTSpaceAvail(g_ulUARTBase[ucPort])))
     {
-        if (fDebug1Flag)
+        if (fDataDebugFlag)
           CONSOLE("%u: %02X]\n", ucPort, ucChar);
 
         // Write this character directly into the FIFO.
