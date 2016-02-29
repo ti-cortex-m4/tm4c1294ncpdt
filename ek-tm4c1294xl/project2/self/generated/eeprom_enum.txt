@@ -84,5 +84,7 @@ typedef enum
 
   EEPROM_DATA_DEBUG_FLAG       = EEPROM_LWIP_DEBUG_TIMEOUT + 4,
 
-  EEPROM_END                   = EEPROM_DATA_DEBUG_FLAG + 4
+  EEPROM_LED_MODE_1            = EEPROM_DATA_DEBUG_FLAG + 4,
+
+  EEPROM_END                   = EEPROM_LED_MODE_1 + 4
 } eeprom;

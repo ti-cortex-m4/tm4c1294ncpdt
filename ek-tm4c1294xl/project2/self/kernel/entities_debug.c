@@ -49,10 +49,17 @@ const entity enLwipDebugTimeout = {
 };
 
 
-
 const entity enDataDebugFlag = {
   EEPROM_DATA_DEBUG_FLAG, &fDataDebugFlag, sizeof(uchar), CHAR, 0,
   0, 1, 0,
   "DTDF",
   "AI=DTDF;D=Data debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+};
+
+
+const entity enLedMode1 = {
+  EEPROM_LED_MODE_1, &bLedMode1, sizeof(uchar), CHAR, 0,
+  0, 8, 1,
+  "LEDMD",
+  "AI=LEDMD;D=Debug mode;T=INT;C=STATIC;O=0-Link OK/0/1-RX.TX Activity/1/2-TX Activity/2/3-RX Activity/3/4-Collision/4/5-100-Base TX speed/5/6-10-Base TX speed/6/7-Full Duplex/7/8-Link OK,Blink on TX,RX Activity /8",
 };
