@@ -53,7 +53,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
                 if(err != ERR_OK)
                 {
                     CONSOLE("%u: Poll connect error %d\n", pState->ucSerialPort, err);
-                    pState->eLastErr = err;
+                    pState->eLastErr = err; // TODO ?
                 }
             }
         }

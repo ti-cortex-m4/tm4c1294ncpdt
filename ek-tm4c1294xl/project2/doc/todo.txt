@@ -8,6 +8,10 @@ TCP_WRITE_FLAG_COPY
     IntDefaultHandler,                      // Fan 1
     0,                                      // Reserved
 
+linker.cmd
+startup.c
+lwipopts.h
+
 rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib
                 
 SERIAL_FLOW_CONTROL_HW           
@@ -65,4 +69,5 @@ debug & release
 rom - build number/data even in .out
 
 timer1
-            
+
+CONSOLE_UART            
