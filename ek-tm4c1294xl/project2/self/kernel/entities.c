@@ -92,7 +92,8 @@ const entity * const mpenEntities[] =
 
   &enDataDebugFlag,
 
-  &enLedMode1,
+  &enLED1Mode,
 };
+
 
 const uchar bEntitiesSize = sizeof(mpenEntities) / sizeof(mpenEntities[0]);

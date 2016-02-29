@@ -242,7 +242,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 66: PushString(enLwipDebugFlag.szName); break;
     case 67: PushString(enLwipDebugTimeout.szName); break;
     case 68: PushString(enDataDebugFlag.szName); break;
-    case 69: PushString(enLedMode1.szName); break;
+    case 69: PushString(enLED1Mode.szName); break;
 
     default: CONSOLE("ERROR unknown index %u\n", wArg); ASSERT(false); break; // TODO
   }
@@ -487,7 +487,7 @@ void    UdpInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDataDebugFlag)) {}
 
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enLedMode1)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enLED1Mode)) {}
 
   else { // TODO
     CONSOLE_UART("unknown command\n");
