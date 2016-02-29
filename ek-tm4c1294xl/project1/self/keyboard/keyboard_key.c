@@ -200,6 +200,7 @@ void    Keyboard_Key(void)
 
       case bSET_START_MINUTES30:
       case bSET_START:          key_Start();            break;
+
       case bSET_DEBUG:          key_Debug();            break;
 
       case bSET_VERSION:        key_GetVersion();       break;
