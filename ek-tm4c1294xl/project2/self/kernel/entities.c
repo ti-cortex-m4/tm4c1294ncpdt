@@ -92,6 +92,7 @@ const entity * const mpenEntities[] =
 
   &enDataDebugFlag,
 
+  &enLED0Mode,
   &enLED1Mode,
 };
 

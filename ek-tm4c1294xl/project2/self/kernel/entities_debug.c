@@ -57,9 +57,16 @@ const entity enDataDebugFlag = {
 };
 
 
+const entity enLED0Mode = {
+  EEPROM_LED_MODE_0, &bLED0Mode, sizeof(uchar), CHAR, 0,
+  0, 0, 0,
+  "LED0MD",
+  "AI=LED0MD;D=Ethernet LED1 mode;T=INT;C=STATIC;O=0-Link OK/0",
+};
+
 const entity enLED1Mode = {
   EEPROM_LED_MODE_1, &bLED1Mode, sizeof(uchar), CHAR, 0,
   0, 8, 1,
-  "LEDMD",
-  "AI=LEDMD;D=Ethernet LED1 mode;T=INT;C=STATIC;O=0-Link OK/0/1-RX\\TX activity/1/2-TX activity/2/3-RX activity/3/4-Collision/4/5-100-Base TX speed/5/6-10-Base TX speed/6/7-Full duplex/7/8-Link OK, blink on TX\\RX activity /8",
+  "LED1MD",
+  "AI=LED1MD;D=Ethernet LED1 mode;T=INT;C=STATIC;O=0-Link OK/0/1-RX\\TX activity/1/2-TX activity/2/3-RX activity/3/4-Collision/4/5-100-Base TX speed/5/6-10-Base TX speed/6/7-Full duplex/7/8-Link OK, blink on TX\\RX activity/8",
 };
