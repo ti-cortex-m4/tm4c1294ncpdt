@@ -52,10 +52,10 @@ void    DelayMicro(uint  wMicroSec) {
 }
 
 
-void    DelayMilly(uint  wMillySec) {
-  if (wMillySec == 0) return;
+void    DelayMilli(uint  wMilliSec) {
+  if (wMilliSec == 0) return;
 
-  while (wMillySec-- > 0) {
+  while (wMilliSec-- > 0) {
     DelayMicro(1000);
   }
 }
@@ -66,14 +66,14 @@ void    DelaySeconds(uint  wSecond) {
 
   while (wSecond-- > 0) {
     ResetWatchdog();
-    DelayMilly(1000);
+    DelayMilli(1000);
   }
 }
 
 
 void    Delay(uint  wMillySec) {
   ResetWatchdog();
-  DelayMilly(wMillySec);
+  DelayMilli(wMillySec);
 }
 
 
