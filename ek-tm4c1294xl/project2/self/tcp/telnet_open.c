@@ -88,7 +88,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
     {
         CONSOLE("%u: Open error %d\n", pState->ucSerialPort, eError);
         pState->eLastErr = eError;
-        return;
+        return; // TODO ?
     }
 }
 
