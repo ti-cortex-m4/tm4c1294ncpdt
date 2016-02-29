@@ -30,6 +30,20 @@ typedef enum
 } debugMode;
 
 
+typedef enum
+{
+  LED_MODE_LINK = 0,
+  LED_MODE_RXTX = 1,
+  LED_MODE_TX = 2,
+  LED_MODE_RX = 3,
+  LED_MODE_COLLISION = 4,
+  LED_MODE_100_BASE_TX = 5,
+  LED_MODE_10_BASE_TX = 6,
+  LED_MODE_FULL_DUPLEX = 7,
+  LED_MODE_LINK_RXTX = 8,
+} ledMode;
+
+
 #endif
 
 
