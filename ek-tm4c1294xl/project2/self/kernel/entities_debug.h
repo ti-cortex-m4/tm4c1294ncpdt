@@ -13,4 +13,4 @@ extern const entity enLwipDebugFlag;
 extern const entity enLwipDebugTimeout;
 
 extern const entity enDataDebugFlag;
-extern const entity enLedMode1;
+extern const entity enLED1Mode;

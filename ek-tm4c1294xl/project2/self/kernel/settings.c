@@ -54,7 +54,7 @@ uint                    wLwipDebugTimeout;
 
 bool                    fDataDebugFlag;
 
-ledMode                 bLedMode1;
+ledMode                 bLED1Mode;
 
 uint                    cwErrStorageInit;
 uint                    cwErrIpLoad;

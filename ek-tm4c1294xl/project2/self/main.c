@@ -116,12 +116,12 @@ int     main(void)
   ASSERT(dwIP != 0);
   lwIPInit(dwClockFreq, pbMac, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
+  InitUdpLog();
   InitEthernetLEDs();
 #if 0
   // Set the link status based on the LED0 signal (which defaults to link status in the PHY).
   g_bLinkStatusUp = GPIOPinRead(GPIO_PORTK_BASE, GPIO_PIN_4) ? false : true;
 #endif
-  InitUdpLog();
 
   InitUdpHandler();
 //  InitTCP_Handler();

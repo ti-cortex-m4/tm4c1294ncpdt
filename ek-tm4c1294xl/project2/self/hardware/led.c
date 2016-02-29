@@ -12,6 +12,9 @@ led.c
 #include "driverlib/gpio.h"
 #include "driverlib/pin_map.h"
 #include "driverlib/emac.h"
+#include "../kernel/settings.h"
+#include "../kernel/entities.h"
+#include "../kernel/log.h"
 #include "delay.h"
 #include "led.h"
 
@@ -62,6 +65,31 @@ void OnLED1(void)
 
 
 
+static ulong GetLED0Mask(void)
+{
+  return EPHY_LEDCFG_LED0_LINK;
+}
+
+static ulong GetLED1Mask(void)
+{
+  switch(bLED1Mode)
+  {
+    case LED_MODE_LINK: return EPHY_LEDCFG_LED1_LINK;
+    case LED_MODE_RXTX: return EPHY_LEDCFG_LED1_RXTX;
+    case LED_MODE_TX: return EPHY_LEDCFG_LED1_TX;
+    case LED_MODE_RX: return EPHY_LEDCFG_LED1_RX;
+    case LED_MODE_COLLISION: return EPHY_LEDCFG_LED1_COL;
+    case LED_MODE_100_BASE_TX: return EPHY_LEDCFG_LED1_100BT;
+    case LED_MODE_10_BASE_TX: return EPHY_LEDCFG_LED1_10BT;
+    case LED_MODE_FULL_DUPLEX: return EPHY_LEDCFG_LED1_FD;
+    case LED_MODE_LINK_RXTX: return EPHY_LEDCFG_LED1_LINKTXRX;
+
+    default: CONSOLE("WARNING ethernet LED1 mode %u", bLED1Mode);
+             return EPHY_LEDCFG_LED1_RXTX;
+  }
+}
+
+
 void InitEthernetLEDs(void)
 {
   // Set Ethernet LED polarity to be active low
@@ -80,7 +108,7 @@ void InitEthernetLEDs(void)
 
   EMACPHYExtendedWrite(EMAC0_BASE, 0, EPHY_LEDCFG,
     (EMACPHYExtendedRead(EMAC0_BASE, 0, EPHY_LEDCFG) & ~(EPHY_LEDCFG_LED0_M | EPHY_LEDCFG_LED1_M | EPHY_LEDCFG_LED2_M)) |
-      EPHY_LEDCFG_LED0_LINK | EPHY_LEDCFG_LED1_RXTX);
+	  GetLED0Mask() | GetLED1Mask());
 }
 
 

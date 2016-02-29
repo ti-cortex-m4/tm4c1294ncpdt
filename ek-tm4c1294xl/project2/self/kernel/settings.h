@@ -46,7 +46,7 @@ extern uint                    wLwipDebugTimeout;
 
 extern bool                    fDataDebugFlag;
 
-extern ledMode                 bLedMode1;
+extern ledMode                 bLED1Mode;
 
 extern uint                    cwErrStorageInit;
 extern uint                    cwErrIpLoad;
