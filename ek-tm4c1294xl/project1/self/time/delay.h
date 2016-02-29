@@ -8,7 +8,7 @@ void    Nop(void);
 void    DelayGPIO(void);
 
 void    DelayMicro(uint  wMicroSec);
-void    DelayMilly(uint  wMillySec);
+void    DelayMilli(uint  wMilliSec);
 void    DelaySeconds(uint  wSecond);
 
 void    Delay(uint  wMillySec);
