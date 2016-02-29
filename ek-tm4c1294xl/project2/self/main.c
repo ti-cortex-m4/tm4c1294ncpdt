@@ -100,7 +100,7 @@ int     main(void)
   ulong dwClockFreq = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), 120000000);
 
   InitGPIO();
-  InitLEDs();
+//  InitLEDs();
   InitROM();
 
   InitSettings();
