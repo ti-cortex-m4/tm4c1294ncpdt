@@ -53,6 +53,6 @@ const entity enLwipDebugTimeout = {
 const entity enDataDebugFlag = {
   EEPROM_DATA_DEBUG_FLAG, &fDataDebugFlag, sizeof(uchar), CHAR, 0,
   0, 1, 0,
-  "DDF",
-  "AI=DDF;D=Data debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+  "DTDF",
+  "AI=DTDF;D=Data debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
