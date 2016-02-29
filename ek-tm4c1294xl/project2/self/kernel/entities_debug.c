@@ -61,7 +61,7 @@ const entity enLED0Mode = {
   EEPROM_LED_MODE_0, &bLED0Mode, sizeof(uchar), CHAR, 0,
   0, 0, 0,
   "LED0MD",
-  "AI=LED0MD;D=Ethernet LED1 mode;T=INT;C=STATIC;O=0-Link OK/0",
+  "AI=LED0MD;D=Ethernet LED0 mode;T=INT;C=STATIC;O=0-Link OK/0",
 };
 
 const entity enLED1Mode = {
