@@ -70,4 +70,6 @@ rom - build number/data even in .out
 
 timer1
 
-CONSOLE_UART            
+CONSOLE_UART
+
+save/load @0            
