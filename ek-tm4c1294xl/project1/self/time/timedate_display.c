@@ -52,15 +52,13 @@ void    ShowDeltaTime(time  ti)
                  ti.bMinute,
                  ti.bSecond);
 
-  uint iwDay1 = GetDayIndexMD(ti.bMonth, ti.bDay);
   ulong dwSecond1 = GetSecondIndex(ti);
 
   time ti2 = *GetCurrTimeDate();
 
-  uint iwDay2 = GetDayIndexMD(ti2.bMonth, ti2.bDay);
   ulong dwSecond2 = GetSecondIndex(ti2);
 
-  if (iwDay1 != iwDay2)
+  if (DifferentDay(ti, ti2))
     sprintf(szLo+9,"?");
   else if (dwSecond1 > dwSecond2)
     sprintf(szLo+9,"-%lu", dwSecond1 - dwSecond2);
