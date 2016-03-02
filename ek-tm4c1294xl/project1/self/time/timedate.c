@@ -157,3 +157,12 @@ ulong   GetSecondIndex(time  ti)
 {
   return( (ulong)ti.bHour*3600 + ti.bMinute*60 + ti.bSecond );
 }
+
+
+
+bool    DifferentDay(time  ti1, time  ti2)
+{
+  return ((ti1.bDay   != ti2.bDay)   ||
+          (ti1.bMonth != ti2.bMonth) ||
+          (ti1.bYear  != ti2.bYear));
+}

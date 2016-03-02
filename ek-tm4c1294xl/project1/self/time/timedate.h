@@ -19,3 +19,5 @@ uint    GetDayIndexMD(uchar  bMonth, uchar  bDay);
 bool    ValidTimeDate(time  ti);
 
 ulong   GetSecondIndex(time  ti);
+
+bool    DifferentDay(time  ti1, time  ti2);
