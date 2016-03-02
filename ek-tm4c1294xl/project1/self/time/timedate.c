@@ -117,7 +117,7 @@ uchar   i;
 uint    j;
 
   ASSERT((bMonth >= 1) && (bMonth <= 12));
-	ASSERT((bDay >= 1) && (bDay <= 31));
+  ASSERT((bDay >= 1) && (bDay <= 31));
 
   j = bDay - 1;
 
