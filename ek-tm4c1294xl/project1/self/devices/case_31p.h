@@ -64,13 +64,10 @@
 
     case DEV_POSTTIME_31P:
       {
-        uint iwDay1 = GetDayIndexMD(tiProfile31.bMonth, tiProfile31.bDay);
         ulong dwSecond1 = GetSecondIndex(tiProfile31);
-
-        uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
 
-        if (iwDay1 != iwDay2)
+        if (DifferentDay(tiProfile31, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
         {

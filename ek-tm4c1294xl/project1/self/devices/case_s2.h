@@ -1,7 +1,7 @@
 
 #ifndef SKIP_S
 
-    case DEV_START_S2:                  
+    case DEV_START_S2:
       cbRepeat = GetMaxRepeats();
       QueryVersionS();
       SetCurr(DEV_VERSION_S2);
@@ -19,67 +19,64 @@
       }
       else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryVersionS();
           SetCurr(DEV_VERSION_S2);
         }
-      } 
+      }
       break;
 
 
-    case DEV_POSTVERSION_S2:                     
+    case DEV_POSTVERSION_S2:
       cbCorrects = 0;
 
       if (fCurrCtrl == true)
         MakePause(DEV_POSTOPENCANAL_S2);
       else
-        MakePause(DEV_POSTCORRECT_S2);  
+        MakePause(DEV_POSTCORRECT_S2);
       break;
 
-    case DEV_POSTOPENCANAL_S2:                  
+    case DEV_POSTOPENCANAL_S2:
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = GetMaxRepeats();
-      QueryTimeS();                          
-      SetCurr(DEV_TIME_S2);          
+      QueryTimeS();
+      SetCurr(DEV_TIME_S2);
       break;
 
-    case DEV_TIME_S2:                      
+    case DEV_TIME_S2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         tiDig = ReadTimeS();
         MakePause(DEV_POSTTIME_S2);
       }
-      else                                    
+      else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryTimeS();
           SetCurr(DEV_TIME_S2);
         }
-      } 
+      }
       break;
 
 
     case DEV_POSTTIME_S2:
       {
-        uint iwDay1 = GetDayIndexMD(tiDig.bMonth, tiDig.bDay);
         ulong dwSecond1 = GetSecondIndex(tiDig);
-
-        uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
 
-        if (iwDay1 != iwDay2)
+        if (DifferentDay(tiDig, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
         {
@@ -95,12 +92,12 @@
       }
       break;
 
-    case DEV_CONTROL_S2: 
-      if (++cbCorrects > bMINORREPEATS)          
+    case DEV_CONTROL_S2:
+      if (++cbCorrects > bMINORREPEATS)
         MakePause(DEV_POSTCORRECT_S2);
       else
       {
-        cbRepeat = GetMaxRepeats();                         
+        cbRepeat = GetMaxRepeats();
         QueryControlS(tiCurr);
         SetCurr(DEV_POSTOPENCANAL_S2);
       }
@@ -123,49 +120,49 @@
       }
       else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryConfigS();
           SetCurr(DEV_CONFIG_S2);
         }
-      } 
+      }
       break;
 
     case DEV_POSTCONFIG_S2:
       ShowPercent(50);
 
       cbRepeat = GetMaxRepeats();
-      QueryTimeS();                          
+      QueryTimeS();
       SetCurr(DEV_VALUE_S2);
       break;
 
-    case DEV_VALUE_S2:                      
+    case DEV_VALUE_S2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         tiValueS = ReadTimeS();
         dwValueS = DateToHouIndex(tiValueS);
         MakePause(DEV_POSTVALUE_S2);
       }
-      else                                    
+      else
       {
-        if (cbRepeat == 0) 
-          ErrorProfile(); 
+        if (cbRepeat == 0)
+          ErrorProfile();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryTimeS();
           SetCurr(DEV_VALUE_S2);
         }
-      } 
+      }
       break;
 
-    case DEV_POSTVALUE_S2:   
+    case DEV_POSTVALUE_S2:
       ShowPercent(75);
       InitHeaderS();
 
@@ -174,12 +171,12 @@
       SetCurr(DEV_HEADER_S2);
       break;
 
-    case DEV_HEADER_S2:                       
+    case DEV_HEADER_S2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTHEADER_S2);         
+        MakePause(DEV_POSTHEADER_S2);
       else
       {
-        if (cbRepeat == 0) ErrorProfile(); 
+        if (cbRepeat == 0) ErrorProfile();
         else
         {
           ErrorLink();
@@ -188,17 +185,17 @@
           QueryHeaderS();
           SetCurr(DEV_HEADER_S2);
         }
-      } 
+      }
       break;
 
     case DEV_POSTHEADER_S2:
       if (ReadHeaderS() == 0)
-        DoneProfile();  
-      else 
-        MakePause(DEV_DATA_S2);         
+        DoneProfile();
+      else
+        MakePause(DEV_DATA_S2);
       break;
 
-    case DEV_DATA_S2:                   
+    case DEV_DATA_S2:
       cbRepeat = GetMaxRepeats();
       QueryHeaderS();
       SetCurr(DEV_HEADER_S2);

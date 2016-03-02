@@ -165,13 +165,10 @@
 
     case DEV_POSTDATE_Q2:
       {
-        uint iwDay1 = GetDayIndexMD(tiDig.bMonth, tiDig.bDay);
         ulong dwSecond1 = GetSecondIndex(tiDig);
-
-        uint iwDay2 = GetDayIndexMD(tiCurr.bMonth, tiCurr.bDay);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
 
-        if (iwDay1 != iwDay2)
+        if (DifferentDay(tiDig, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
         {
