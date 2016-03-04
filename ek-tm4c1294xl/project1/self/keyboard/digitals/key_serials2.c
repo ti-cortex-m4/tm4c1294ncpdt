@@ -20,14 +20,20 @@ static char const       szSerials[]       = "Заводские номера";
 
 
 
+static void ShowSerial(ulong  dw)
+{
+  sprintf(szLo+4,"%9lu",dw);
+}
+
+
 static void Show(uchar  c)
 {
   Clear();
 
   if (GetDigitalDevice(c) == 0)
   {
+    ShowSerial(wPrivate);
     szLo[0] = '*';
-    sprintf(szLo+4,"%9lu",wPrivate);
   }
   else
   {
@@ -41,8 +47,8 @@ static void Show(uchar  c)
       ShowLo(szBlocked);
     else
     {
-//      double2 db2 = ReadCntCurrCan(c);
-//      (db2.fValid) ? ShowDouble(db2.dbValue) : Error();
+      long2 dw2 = ReadSerialCan(c);
+      (dw2.fValid) ? ShowSerial(dw2.dwValue) : Error();
     }
 
     SaveConnect();

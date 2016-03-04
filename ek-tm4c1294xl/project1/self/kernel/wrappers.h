@@ -10,6 +10,13 @@ WRAPPERS,H
 
 typedef struct
 {
+  ulong         dwValue;
+  bool          fValid;
+} ulong2;
+
+
+typedef struct
+{
   float         flValue;
   bool          fValid;
 } float2;
