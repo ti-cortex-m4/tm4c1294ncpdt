@@ -44,6 +44,8 @@ typedef struct
 
 
 
+ulong2  GetLong2(ulong  dwValue, bool  fValid);
+
 float2  GetFloat2(float  flValue, bool  fValid);
 float2  GetFloat2Error(void);
 

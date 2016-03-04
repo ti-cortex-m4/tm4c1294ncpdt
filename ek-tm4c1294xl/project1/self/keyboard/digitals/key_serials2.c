@@ -9,6 +9,7 @@ KEY_SERIALS2,C
 #include "../../memory/mem_digitals.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
+#include "../../digitals/extended/automatic_8.h"
 #include "../../serial/ports.h"
 #include "../../serial/modems.h"
 #include "key_serials2.h"
@@ -47,7 +48,7 @@ static void Show(uchar  c)
       ShowLo(szBlocked);
     else
     {
-      long2 dw2 = ReadSerialCan(c);
+      ulong2 dw2 = ReadSerialCan(c);
       (dw2.fValid) ? ShowSerial(dw2.dwValue) : Error();
     }
 

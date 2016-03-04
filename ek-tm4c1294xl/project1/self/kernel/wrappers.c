@@ -9,6 +9,18 @@ WRAPPERS,C
 
 
 
+ulong2  GetLong2(ulong  dwValue, bool  fValid)
+{
+  ulong2 dw2;
+
+  dw2.dwValue = dwValue;
+  dw2.fValid = fValid;
+
+  return dw2;
+}
+
+
+
 float2  GetFloat2(float  flValue, bool  fValid)
 {
   float2 fl2;

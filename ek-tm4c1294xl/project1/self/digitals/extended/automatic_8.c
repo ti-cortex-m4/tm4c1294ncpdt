@@ -3,7 +3,7 @@ AUTOMATIC_8!C
 
 
 ------------------------------------------------------------------------------*/
-#if 0
+
 #include "../../main.h"
 #include "../../memory/mem_digitals.h"
 #include "../../digitals/digitals.h"
@@ -26,11 +26,10 @@ AUTOMATIC_8!C
 #include "../../sensors/sensor32/device32.h"
 #include "../../sensors/sensor32/automatic32.h"
 #include "../../console.h"
-#include "../../time/timedate.h"
-#include "automatic_0.h"
+#include "automatic_8.h"
 
 
-
+#if 0
 #ifndef SKIP_A
 
 time2   ReadTimeCanA_Short(void)
@@ -472,121 +471,120 @@ time2   ReadTimeCan32_Short(void)
 
 #endif
 
+#endif
 
-
-long2   ReadSerialCan(uchar  ibCan)
+ulong2  ReadSerialCan(uchar  ibCan)
 {
   LoadCurrDigital(ibCan);
   ibPort = diCurr.ibPort;
 
   switch (diCurr.bDevice)
   {
-#ifndef SKIP_A
-    case 15:
-    case 1:  return ReadTimeCanA_Short();
-#endif
+//#ifndef SKIP_A
+//    case 15:
+//    case 1:  return ReadTimeCanA_Short();
+//#endif
+//
+//#ifndef SKIP_B
+//    case 8:
+//    case 2:  return ReadTimeCanB_Short();
+//
+//    case 12: return GetTime2(tiCurr, true);
+//#endif
+//
+//#ifndef SKIP_C
+//    case 3:  return ReadTimeCanC_Short();
+//#endif
+//
+//#ifndef SKIP_D
+//    case 4:  return( ReadTimeCanD_Short() );  break;
+//#endif
+//
+//#ifndef SKIP_E
+//    case 7:
+//    case 5:  return( ReadTimeCanE_Short() );  break;
+//#endif
+//
+//#ifndef SKIP_F
+//    case 6:  return( ReadTimeCanF_Short() );  break;
+//#endif
+//
+//#ifndef SKIP_G
+//    case 9:  return( ReadTimeCanG_Short() );  break;
+//#endif
+//
+//#ifndef SKIP_H
+//    case 10: return( ReadTimeCanH_Short() );  break;
+//#endif
+//
+//#ifndef SKIP_I
+//    case 11: return( ReadTimeCanI_Short() );  break;
+//#endif
+//
+//#ifndef SKIP_K
+//    case 14:
+//    case 13: return ReadTimeCanK_Short();
+//#endif
+//
+//#ifndef SKIP_L
+//    case 17:
+//    case 16: tiAlt = tiCurr; return(1);  break;
+//#endif
+//
+//#ifndef SKIP_M
+//    case 18: tiAlt = tiCurr; return(1);  break;
+//#endif
+//
+//#ifndef SKIP_N
+//    case 19: tiAlt = tiCurr; return(1);  break;
+//#endif
+//
+//#ifndef SKIP_O
+//    case 20: return( ReadTimeCanO_Short() );  break;
+//#endif
+//
+//#ifndef SKIP_P
+//    case 21: return ReadTimeCanP_Short();
+//#endif
+//
+//#ifndef SKIP_Q
+//    case 22: return ReadTimeCanQ_Short();
+//#endif
+//
+//#ifndef SKIP_R
+//    case 23: tiAlt = tiCurr; return(1);  break;
+//#endif
+//
+//#ifndef SKIP_S
+//    case 24: return ReadTimeCanS_Short();
+//#endif
+//
+//#ifndef SKIP_T
+//    case 25: return( ReadTimeCanT_Short() );  break;
+//#endif
+//
+//#ifndef SKIP_U
+//    case 26:
+//    case 28: return ReadTimeCanU_Short();
+//#endif
+//
+//#ifndef SKIP_V
+//    case 27: return ReadTimeCanV_Short();
+//#endif
+//
+//#ifndef SKIP_W
+//    case 29:
+//    case 30: return ReadTimeCanW_Short();
+//#endif
+//
+//#ifndef SKIP_31
+//    case 31: return ReadTimeCan31_Short();
+//#endif
+//
+//#ifndef SKIP_32
+//    case 32: return ReadTimeCan32_Short();
+//#endif
 
-#ifndef SKIP_B
-    case 8:
-    case 2:  return ReadTimeCanB_Short();
-
-    case 12: return GetTime2(tiCurr, true);
-#endif
-
-#ifndef SKIP_C
-    case 3:  return ReadTimeCanC_Short();
-#endif
-
-#ifndef SKIP_D
-    case 4:  return( ReadTimeCanD_Short() );  break;
-#endif
-
-#ifndef SKIP_E
-    case 7:
-    case 5:  return( ReadTimeCanE_Short() );  break;
-#endif
-
-#ifndef SKIP_F
-    case 6:  return( ReadTimeCanF_Short() );  break;
-#endif
-
-#ifndef SKIP_G
-    case 9:  return( ReadTimeCanG_Short() );  break;
-#endif
-
-#ifndef SKIP_H
-    case 10: return( ReadTimeCanH_Short() );  break;
-#endif
-
-#ifndef SKIP_I
-    case 11: return( ReadTimeCanI_Short() );  break;
-#endif
-
-#ifndef SKIP_K
-    case 14:
-    case 13: return ReadTimeCanK_Short();
-#endif
-
-#ifndef SKIP_L
-    case 17:
-    case 16: tiAlt = tiCurr; return(1);  break;
-#endif
-
-#ifndef SKIP_M
-    case 18: tiAlt = tiCurr; return(1);  break;
-#endif
-
-#ifndef SKIP_N
-    case 19: tiAlt = tiCurr; return(1);  break;
-#endif
-
-#ifndef SKIP_O
-    case 20: return( ReadTimeCanO_Short() );  break;
-#endif
-
-#ifndef SKIP_P
-    case 21: return ReadTimeCanP_Short();
-#endif
-
-#ifndef SKIP_Q
-    case 22: return ReadTimeCanQ_Short();
-#endif
-
-#ifndef SKIP_R
-    case 23: tiAlt = tiCurr; return(1);  break;
-#endif
-
-#ifndef SKIP_S
-    case 24: return ReadTimeCanS_Short();
-#endif
-
-#ifndef SKIP_T
-    case 25: return( ReadTimeCanT_Short() );  break;
-#endif
-
-#ifndef SKIP_U
-    case 26:
-    case 28: return ReadTimeCanU_Short();
-#endif
-
-#ifndef SKIP_V
-    case 27: return ReadTimeCanV_Short();
-#endif
-
-#ifndef SKIP_W
-    case 29:
-    case 30: return ReadTimeCanW_Short();
-#endif
-
-#ifndef SKIP_31
-    case 31: return ReadTimeCan31_Short();
-#endif
-
-#ifndef SKIP_32
-    case 32: return ReadTimeCan32_Short();
-#endif
-
-    default: return GetTime2Error();
+    default: return GetLong2(0xFFFFFFFF, true);
   }
 }
-#endif
