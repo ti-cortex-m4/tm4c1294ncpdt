@@ -125,7 +125,7 @@ time                    tiAnswerDisabled, tiAnswerEnabled;
 
 
 // признак
-bool                    fManualSerials;
+bool                    fSerialsManual;
 
 // заводские номера цифровых счётчиков
 ulong                   mdwSerialValues[bCANALS];

@@ -23,7 +23,7 @@ cache const             chKeys = {KEYS, &mpphKeys, sizeof(mpphKeys)};
 cache const             chAddress1 = {ADDRESS1, &mpdwAddress1, sizeof(mpdwAddress1)};
 cache const             chAddress2 = {ADDRESS2, &mpdwAddress2, sizeof(mpdwAddress2)};
 
-cache const             chManualSerials = {MANUAL_SERIALS, &fManualSerials, sizeof(bool)};
+cache const             chSerialsManual = {SERIALS_MANUAL, &fSerialsManual, sizeof(bool)};
 cache const             chSerialValues = {SERIAL_VALUES, &mdwSerialValues, sizeof(mdwSerialValues)};
 cache const             chSerialFlags = {SERIAL_FLAGS, &mfSerialFlags, sizeof(mfSerialFlags)};
 
@@ -42,7 +42,7 @@ void    InitDigitals(void)
   LoadCache(&chAddress1);
   LoadCache(&chAddress2);
 
-  LoadCacheBool(&chManualSerials, false);
+  LoadCacheBool(&chSerialsManual, false);
   LoadCache(&chSerialValues);
   LoadCache(&chSerialFlags);
 }
@@ -83,7 +83,7 @@ void    ResetDigitals(void)
   SaveCache(&chAddress2);
 
 
-  SaveCacheBool(&chManualSerials, false);
+  SaveCacheBool(&chSerialsManual, false);
 
   for (c=0; c<bCANALS; c++)
   {

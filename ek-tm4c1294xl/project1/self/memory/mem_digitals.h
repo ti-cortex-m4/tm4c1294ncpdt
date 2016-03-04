@@ -87,7 +87,7 @@ extern  time                    tiAnswerDisabled, tiAnswerEnabled;
 
 
 
-extern  bool                    fManualSerials;
+extern  bool                    fSerialsManual;
 
 extern  ulong                   mdwSerialValues[bCANALS];
 
