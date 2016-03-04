@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-KEY_SERIALS,C
+KEY_SERIALS1,C
 
 
 ------------------------------------------------------------------------------*/
@@ -8,14 +8,13 @@ KEY_SERIALS,C
 #include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../digitals/digitals.h"
-#include "key_ыукшфды.h"
+#include "key_serials1.h"
 
 
 
 //                                           0123456789ABCDEF
 static char const       szSerials[]       = "Заводские номера",
-                        szMask[]          = "_________",
-                        szSpace[]         = "         ";
+                        szMask[]          = "    _________";
 
 
 
@@ -23,13 +22,13 @@ static void Show(uchar  c)
 {
   Clear();
 
-  sprintf(szLo+7,"%9lu",mdwSerialValues[c]);
-  sprintf(szLo,"%2u",c+1);
+  sprintf(szLo+4,"%9lu",mdwSerialValues[c]);
+  sprintf(szLo+14,"%2u",c+1);
 }
 
 
 
-void    key_SetSerials(void)
+void    key_SetSerials1(void)
 {
 static uchar c;
 
@@ -65,13 +64,16 @@ static uchar c;
     }
     else if (enKeyboard == KBD_POSTINPUT2)
     {
-      ulong dw = GetLongLo(7,15);
+      ulong dw = GetLongLo(4,12);
       if (dw < 1000000000)
       {
         enKeyboard = KBD_POSTENTER;
 
         mdwSerialValues[c] = dw;
         SaveCache(&chSerialValues);
+
+        mdwSerialFlags[c] = true;
+        SaveCache(&chSerialFlags);
 
         if (++c >= bCANALS) c = 0;
         Show(c);
@@ -99,8 +101,11 @@ static uchar c;
     {
       enKeyboard = KBD_POSTENTER;
 
-//      mpdwAddress2[c] = MAX_LONG;
-//      SaveCache(&chAddress2);
+      mdwSerialValues[c] = 0;
+      SaveCache(&chSerialValues);
+
+      mdwSerialFlags[c] = false;
+      SaveCache(&chSerialFlags);
 
       if (++c >= bCANALS) c = 0;
       Show(c);
@@ -116,7 +121,7 @@ static uchar c;
       if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
       {
         enKeyboard = KBD_INPUT2;
-        sprintf(szLo+7,szMask);
+        sprintf(szLo,szMask);
       }
       else Beep();
     }
@@ -130,7 +135,7 @@ static uchar c;
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
-      ShiftLo(7,15);
+      ShiftLo(4,12);
     }
     else Beep();
   }
