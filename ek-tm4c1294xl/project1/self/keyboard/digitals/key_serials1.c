@@ -22,7 +22,16 @@ static void Show(uchar  c)
 {
   Clear();
 
-  sprintf(szLo+4,"%9lu",mdwSerialValues[c]);
+  if (GetDigitalDevice(c) == 0)
+  {
+    szLo[0] = '*';
+    sprintf(szLo+4,"%9lu",wPrivate);
+  }
+  else
+  {
+    sprintf(szLo+4,"%9lu",mdwSerialValues[c]);
+  }
+
   sprintf(szLo+14,"%2u",c+1);
 }
 
@@ -72,7 +81,7 @@ static uchar c;
         mdwSerialValues[c] = dw;
         SaveCache(&chSerialValues);
 
-        mdwSerialFlags[c] = true;
+        mfSerialFlags[c] = true;
         SaveCache(&chSerialFlags);
 
         if (++c >= bCANALS) c = 0;
@@ -104,7 +113,7 @@ static uchar c;
       mdwSerialValues[c] = 0;
       SaveCache(&chSerialValues);
 
-      mdwSerialFlags[c] = false;
+      mfSerialFlags[c] = false;
       SaveCache(&chSerialFlags);
 
       if (++c >= bCANALS) c = 0;
