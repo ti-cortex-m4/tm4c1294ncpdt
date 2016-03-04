@@ -84,3 +84,9 @@ extern  bool                    fEnblAnswerCurr;
 extern  ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
 extern  time                    tiAnswerDisabled, tiAnswerEnabled;
+
+
+
+extern  ulong                   mdwSerialValues[bCANALS];
+
+extern  bool                    mfSerialFlags[bCANALS];
