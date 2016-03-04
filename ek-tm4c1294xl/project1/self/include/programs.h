@@ -248,8 +248,9 @@ PROGRAMS!H
 #define bSET_ENBL_KEYS              170
 #define bSET_KEYS                   171
 #define wSET_KEYS_LEVEL_B           271
-#define bSET_SERIALS1               172
-#define bSET_SERIALS2               173
+#define bSET_SERIALS_MANUAL         172
+#define bSET_SERIALS1               173
+#define bSET_SERIALS2               174
 
 #define bGET_MODEMS_QUALITY         222
 #define bSET_PHONES                 180
