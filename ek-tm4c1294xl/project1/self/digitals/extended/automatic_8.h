@@ -4,4 +4,4 @@ AUTOMATIC_8.H
 
 ------------------------------------------------------------------------------*/
 
-long2   ReadSerialCan(uchar  ibCan);
+ulong2  ReadSerialCan(uchar  ibCan);
