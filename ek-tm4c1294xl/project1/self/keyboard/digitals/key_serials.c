@@ -7,15 +7,13 @@ KEY_SERIALS,C
 #include "../../main.h"
 #include "../../console.h"
 #include "../../memory/mem_digitals.h"
-#include "../../memory/mem_records.h"
 #include "../../digitals/digitals.h"
-#include "../../flash/records.h"
-#include "key_addresses.h"
+#include "key_ыукшфды.h"
 
 
 
 //                                           0123456789ABCDEF
-static char const       szAddresses[]     = "Адреса          ",
+static char const       szSerials[]       = "Заводские номера",
                         szMask[]          = "_________",
                         szSpace[]         = "         ";
 
@@ -25,21 +23,7 @@ static void Show(uchar  c)
 {
   Clear();
 
-  if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
-  {
-    sprintf(szHi+7,"%9lu",mpdwAddress1[c]);
-
-    if (mpdwAddress2[c] == MAX_LONG)
-      sprintf(szLo+7,"        -");
-    else
-      sprintf(szLo+7,"%9lu",mpdwAddress2[c]);
-  }
-  else
-  {
-    sprintf(szHi+7,"%9lu",mpdwAddress1[c]);
-    sprintf(szLo+7,"*********");
-  }
-
+  sprintf(szLo+7,"%9lu",mdwSerialValues[c]);
   sprintf(szLo,"%2u",c+1);
 }
 
@@ -54,9 +38,9 @@ static uchar c;
     if (enKeyboard == KBD_ENTER)
     {
       enKeyboard = KBD_INPUT1;
-      Number();
+      Canal();
 
-      ShowHi(szAddresses);
+      ShowHi(szSerials);
     }
     else if (enKeyboard == KBD_INPUT1)
     {
@@ -79,20 +63,15 @@ static uchar c;
       if (++c >= bCANALS) c = 0;
       Show(c);
     }
-    else if (enKeyboard == KBD_POSTINPUT3)
+    else if (enKeyboard == KBD_POSTINPUT2)
     {
       ulong dw = GetLongLo(7,15);
       if (dw < 1000000000)
       {
         enKeyboard = KBD_POSTENTER;
 
-        ibRecordCan = c;
-        AddSysRecordReprogram(EVE_EDIT_ADDRESS20);
-
-        mpdwAddress2[c] = dw;
-        SaveCache(&chAddress2);
-
-        AddSysRecordReprogram(EVE_EDIT_ADDRESS21);
+        mdwSerialValues[c] = dw;
+        SaveCache(&chSerialValues);
 
         if (++c >= bCANALS) c = 0;
         Show(c);
@@ -110,41 +89,18 @@ static uchar c;
       if (c > 0) c--; else c = bCANALS-1;
       Show(c);
     }
-    else if (enKeyboard == KBD_POSTINPUT2)
-    {
-      ulong dw = GetLongHi(7,15);
-      if (dw < 1000000000)
-      {
-        enKeyboard = KBD_INPUT3;
-        sprintf(szLo+7,szMask);
-
-        ibRecordCan = c;
-        AddSysRecordReprogram(EVE_EDIT_ADDRESS10);
-
-        mpdwAddress1[c] = dw;
-        SaveCache(&chAddress1);
-
-        AddSysRecordReprogram(EVE_EDIT_ADDRESS11);
-      }
-      else Beep();
-    }
     else Beep();
   }
 
 
   else if (bKey == bKEY_MINUS)
   {
-    if ((enKeyboard == KBD_INPUT3) || (enKeyboard == KBD_POSTINPUT3))
+    if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibRecordCan = c;
-      AddSysRecordReprogram(EVE_EDIT_ADDRESS20);
-
-      mpdwAddress2[c] = MAX_LONG;
-      SaveCache(&chAddress2);
-
-      AddSysRecordReprogram(EVE_EDIT_ADDRESS21);
+//      mpdwAddress2[c] = MAX_LONG;
+//      SaveCache(&chAddress2);
 
       if (++c >= bCANALS) c = 0;
       Show(c);
@@ -160,8 +116,7 @@ static uchar c;
       if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
       {
         enKeyboard = KBD_INPUT2;
-        sprintf(szHi+7,szMask);
-        sprintf(szLo+7,szSpace);
+        sprintf(szLo+7,szMask);
       }
       else Beep();
     }
@@ -175,12 +130,6 @@ static uchar c;
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
-      ShiftHi(7,15);
-    }
-    else
-    if ((enKeyboard == KBD_INPUT3) || (enKeyboard == KBD_POSTINPUT3))
-    {
-      enKeyboard = KBD_POSTINPUT3;
       ShiftLo(7,15);
     }
     else Beep();
