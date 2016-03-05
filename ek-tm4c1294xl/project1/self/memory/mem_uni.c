@@ -20,6 +20,9 @@ char                    mpszGroupsName[bGROUPS][bNAME_SIZE];
 // массив устройств
 digital                 mpdiDevicesUni[bCANALS];
 
+// массив индексов первых каналов устройств
+uchar                   mpibFirstCanalsUni[bCANALS];
+
 // количество устройств
 uchar                   cbDevicesUni;
 
