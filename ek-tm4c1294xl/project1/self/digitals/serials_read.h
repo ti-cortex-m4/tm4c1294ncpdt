@@ -4,4 +4,4 @@ SERIALS_READ.H
 
 ------------------------------------------------------------------------------*/
 
-ulong2  ReadSerialCan(uchar  ibCan);
+ulong2  ReadSerial(uchar  ibCan);
