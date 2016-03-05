@@ -13,8 +13,8 @@ AUTOMATIC_B!C
 #include "../serial/ports_devices.h"
 #include "../time/timedate.h"
 #include "../devices/devices.h"
+#include "../digitals/serials.h"
 #include "../digitals/digitals_messages.h"
-
 #include "automatic1.h"
 #include "device_b.h"
 
@@ -46,19 +46,38 @@ uchar   i;
 
 bool    QueryOpenB_Full(uchar  bPercent)
 {
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
     QueryOpenB();
 
-    if (Input() == SER_GOODCHECK) break;  
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (r == bMINORREPEATS) return false;
   ShowPercent(bPercent);
+
+
+  if (fSerialsManual == false)
+  {
+    for (r=0; r<bMINORREPEATS; r++)
+    {
+      DelayOff();
+      QuerySerialB();
+
+      if (Input() == SER_GOODCHECK) break;
+      if (fKey == true) return false;
+    }
+
+    if (r == bMINORREPEATS) return false;
+
+    ulong dw = ReadSerialB();
+    SaveSerial(ibDig, dw);
+    ShowSerial(dw);
+  }
+
 
   return true;
 }

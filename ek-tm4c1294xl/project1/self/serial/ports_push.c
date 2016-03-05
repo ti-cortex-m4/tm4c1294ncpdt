@@ -64,7 +64,7 @@ void    InitPushPck(void) {
 
 
 
-void    Push(void  *pbData, uint  wSize) {
+uint    Push(void  *pbData, uint  wSize) {
   cwPushSize += wSize;
 
   switch (ibPort) {
@@ -98,6 +98,8 @@ void    Push(void  *pbData, uint  wSize) {
 
     default: ASSERT(false);
   }
+
+  return wSize;
 }
 
 
