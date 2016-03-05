@@ -393,23 +393,23 @@ uchar   i,j;
 
 void    GetSerialsUni(void)
 {
-//uchar   i,j;
-//
-//  MakeDevicesUni();
-//
-//  if ((bInBuff6 != 0) || (bInBuff8 != 0))
-//    Result2(bUNI_BADDATA);
-//  else if (bInBuff7 > cbDevicesUni)
-//    Result2(bUNI_BADDATA);
-//  else if (bInBuff7+bInBuff9 > cbDevicesUni + 1)
-//    Result2(bUNI_BADDATA);
-//  else
-//  {
-//    InitPushUni();
-//
-//    uchar c;
-//    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
-//    {
+  MakeDevicesUni();
+
+  if ((bInBuff6 != 0) || (bInBuff8 != 0))
+    Result2(bUNI_BADDATA);
+  else if (bInBuff7 > cbDevicesUni)
+    Result2(bUNI_BADDATA);
+  else if (bInBuff7+bInBuff9 > cbDevicesUni + 1)
+    Result2(bUNI_BADDATA);
+  else
+  {
+    InitPushUni();
+
+    uint wSize = 0;
+
+    uchar c;
+    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
+    {
 //      PushIntBig(c);
 //
 //      PushIntBig(mpdiDevicesUni[c-1].bDevice);
@@ -453,9 +453,9 @@ void    GetSerialsUni(void)
 //        Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szLine, 13);
 //        for (i=0; i<32-13; i++) PushChar(0);
 //      }
-//    }
-//  }
-//  Output2((uint)(2+2+4+2+2+2+2+6+2+8+32)*bInBuff9);
+    }
+  }
+  Output2(wSize);
 }
 
 
