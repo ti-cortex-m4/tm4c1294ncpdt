@@ -201,20 +201,17 @@ void    RunResponseUni(void)
       case wUNI_GETCORRECTTIME: GetCorrectUni(); break;
       case wUNI_GETCORRECTIONS: GetCorrectionsUni(); break;
 
-      case wUNI_GETOPEN:
-        GetOpenUni();
-        break;
+      case wUNI_GETOPEN: GetOpenUni(); break;
 
       case wUNI_GETPARAMS1: GetParamUni1(); break;
       case wUNI_GETPARAMS2: GetParamUni2(); break;
 
-      case wUNI_GETTRANSIT:
-        GetTransitUni();
-        break;
+      case wUNI_GETTRANSIT: GetTransitUni(); break;
 
       case wUNI_GETCONFIG: GetConfigUni(); break;
       case wUNI_GETSENSORS: GetSensorsUni(); break;
       case wUNI_GETDIGITALS: GetDigitalsUni(); break;
+      case wUNI_GETSERIALS: GetSerialsUni(); break;
       case wUNI_GETCANALS: GetCanalsUni(); break;
       case wUNI_GETGROUPS: GetGroupsUni(); break;
 
