@@ -8,7 +8,6 @@ DIGITALS!C
 #include "../memory/mem_digitals0.h"
 #include "../memory/mem_digitals.h"
 #include "../nvram/cache.h"
-#include "../nvram/cache2.h"
 #include "sensors.h"
 #include "digitals.h"
 
@@ -22,10 +21,6 @@ cache const             chKeys = {KEYS, &mpphKeys, sizeof(mpphKeys)};
 
 cache const             chAddress1 = {ADDRESS1, &mpdwAddress1, sizeof(mpdwAddress1)};
 cache const             chAddress2 = {ADDRESS2, &mpdwAddress2, sizeof(mpdwAddress2)};
-
-cache const             chSerialsManual = {SERIALS_MANUAL, &fSerialsManual, sizeof(bool)};
-cache const             chSerialValues = {SERIAL_VALUES, &mdwSerialValues, sizeof(mdwSerialValues)};
-cache const             chSerialFlags = {SERIAL_FLAGS, &mfSerialFlags, sizeof(mfSerialFlags)};
 
 
 
@@ -41,10 +36,6 @@ void    InitDigitals(void)
 
   LoadCache(&chAddress1);
   LoadCache(&chAddress2);
-
-  LoadCacheBool(&chSerialsManual, false);
-  LoadCache(&chSerialValues);
-  LoadCache(&chSerialFlags);
 }
 
 
@@ -81,18 +72,6 @@ void    ResetDigitals(void)
 
   SaveCache(&chAddress1);
   SaveCache(&chAddress2);
-
-
-  SaveCacheBool(&chSerialsManual, false);
-
-  for (c=0; c<bCANALS; c++)
-  {
-    mdwSerialValues[c] = 0;
-    mfSerialFlags[c] = false;
-  }
-
-  SaveCache(&chSerialValues);
-  SaveCache(&chSerialFlags);
 }
 
 

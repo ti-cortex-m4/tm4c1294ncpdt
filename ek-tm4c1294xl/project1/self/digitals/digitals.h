@@ -17,10 +17,6 @@ extern  cache const             chKeys;
 extern  cache const             chAddress1;
 extern  cache const             chAddress2;
 
-extern  cache const             chSerialsManual;
-extern  cache const             chSerialValues;
-extern  cache const             chSerialFlags;
-
 
 
 void    InitDigitals(void);

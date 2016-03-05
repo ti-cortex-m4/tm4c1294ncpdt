@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------
-DIGITALS!C
+SERIALS.C
 
- Цифровые счетчики
+ Заводские номера цифровых счетчиков
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../memory/mem_digitals0.h"
-#include "../memory/mem_digitals.h"
-#include "../nvram/cache.h"
-#include "../nvram/cache2.h"
-#include "sensors.h"
-#include "digitals.h"
+//#include "../memory/mem_digitals0.h"
+//#include "../memory/mem_digitals.h"
+//#include "../nvram/cache.h"
+//#include "../nvram/cache2.h"
+//#include "sensors.h"
+#include "serials.h"
 
 
 
