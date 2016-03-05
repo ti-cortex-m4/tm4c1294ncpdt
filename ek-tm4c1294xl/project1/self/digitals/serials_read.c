@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-AUTOMATIC_8!C
+SERIALS_READ.C
 
 
 ------------------------------------------------------------------------------*/
@@ -7,7 +7,7 @@ AUTOMATIC_8!C
 #include "../main.h"
 //#include "../../memory/mem_digitals.h"
 #include "../digitals/digitals.h"
-//#include "../../serial/ports.h"
+#include "../serial/ports.h"
 //#include "../../serial/ports_devices.h"
 //#include "../../sensors/device_a.h"
 //#include "../../sensors/device_b.h"
