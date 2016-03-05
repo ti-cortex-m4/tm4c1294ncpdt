@@ -8,6 +8,7 @@ KEY_SERIALS1,C
 #include "../../console.h"
 #include "../../memory/mem_digitals.h"
 #include "../../digitals/digitals.h"
+#include "../../digitals/serials.h"
 #include "key_serials1.h"
 
 

@@ -84,11 +84,3 @@ extern  bool                    fEnblAnswerCurr;
 extern  ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
 extern  time                    tiAnswerDisabled, tiAnswerEnabled;
-
-
-
-extern  bool                    fSerialsManual;
-
-extern  ulong                   mdwSerialValues[bCANALS];
-
-extern  bool                    mfSerialFlags[bCANALS];

@@ -5,7 +5,7 @@ KEY_SERIALS_MANUAL.C
 ------------------------------------------------------------------------------*/
 
 #include "../../console.h"
-#include "../../digitals/digitals.h"
+#include "../../digitals/serials.h"
 #include "../common/key_flag.h"
 #include "key_serials_manual.h"
 

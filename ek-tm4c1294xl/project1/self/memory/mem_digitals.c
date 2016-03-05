@@ -121,14 +121,3 @@ ulong                   cdwAnswerDisabled, cdwAnswerEnabled;
 
 // время/дата
 time                    tiAnswerDisabled, tiAnswerEnabled;
-
-
-
-// признак
-bool                    fSerialsManual;
-
-// заводские номера цифровых счётчиков
-ulong                   mdwSerialValues[bCANALS];
-
-// флаги установки заводских номеров цифровых счётчиков
-bool                    mfSerialFlags[bCANALS];

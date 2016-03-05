@@ -9,6 +9,7 @@ DIGITALS!C
 #include "../memory/mem_digitals.h"
 #include "../nvram/cache.h"
 #include "sensors.h"
+#include "serials.h"
 #include "digitals.h"
 
 
@@ -36,6 +37,8 @@ void    InitDigitals(void)
 
   LoadCache(&chAddress1);
   LoadCache(&chAddress2);
+
+  InitSerials();
 }
 
 
@@ -72,6 +75,9 @@ void    ResetDigitals(void)
 
   SaveCache(&chAddress1);
   SaveCache(&chAddress2);
+
+
+  ResetSerials();
 }
 
 
