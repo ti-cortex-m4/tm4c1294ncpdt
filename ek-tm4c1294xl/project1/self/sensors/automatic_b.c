@@ -13,10 +13,10 @@ AUTOMATIC_B!C
 #include "../serial/ports_devices.h"
 #include "../time/timedate.h"
 #include "../devices/devices.h"
-#include "../digitals/serials.h"
 #include "../digitals/digitals_messages.h"
 #include "automatic1.h"
 #include "device_b.h"
+#include "automatic_b.h"
 
 
 
@@ -46,8 +46,9 @@ uchar   i;
 
 bool    QueryOpenB_Full(uchar  bPercent)
 {
-  uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+uchar   i;
+
+  for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
     QueryOpenB();
@@ -56,29 +57,8 @@ bool    QueryOpenB_Full(uchar  bPercent)
     if (fKey == true) return false;
   }
 
-  if (r == bMINORREPEATS) return false;
+  if (i == bMINORREPEATS) return false;
   ShowPercent(bPercent);
-
-
-  if (fSerialsManual == false)
-  {
-    for (r=0; r<bMINORREPEATS; r++)
-    {
-      DelayOff();
-      QuerySerialB();
-
-      if (Input() == SER_GOODCHECK) break;
-      if (fKey == true) return false;
-    }
-
-    if (r == bMINORREPEATS) return false;
-
-    ulong dwSerial = ReadSerialB();
-
-    SaveSerial(ibDig, dwSerial);
-    ShowSerial(dwSerial);
-  }
-
 
   return true;
 }
@@ -148,4 +128,25 @@ uchar   i;
 
   ReadEnergyB();
   return true;
+}
+
+
+
+ulong2  QuerySerialB_Full(void)
+{
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QuerySerialB();
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == true) return false;
+  }
+
+  if (r == bMINORREPEATS) return false;
+
+  ulong dwSerial = ReadSerialB();
+
+  SaveSerial(ibDig, dwSerial);
+  ShowSerial(dwSerial);
 }
