@@ -100,7 +100,9 @@ void    MakeDevicesUni(void)
   {
     if (IsDeviceAdded(c) == 0)
     {
-       mpdiDevicesUni[cbDevicesUni++] = mpdiDigital[c];
+       mpdiDevicesUni[cbDevicesUni] = mpdiDigital[c];
+       mpibFirstCanalsUni[cbDevicesUni] = c;
+       cbDevicesUni++;
     }
   }
 }
@@ -390,8 +392,9 @@ uchar   i,j;
         for (i=0; i<32-13; i++) PushChar(0);
       }
     }
+
+    Output2((uint)(2+2+4+2+2+2+2+6+2+8+32)*bInBuff9);
   }
-  Output2((uint)(2+2+4+2+2+2+2+6+2+8+32)*bInBuff9);
 }
 
 
@@ -459,8 +462,9 @@ void    GetSerialsUni(void)
 //        for (i=0; i<32-13; i++) PushChar(0);
 //      }
     }
+
+    Output2(wSize);
   }
-  Output2(wSize);
 }
 
 
