@@ -20,6 +20,7 @@ U_CONFIG!C
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/devices.h"
+#include "../../digitals/serials.h"
 #include "../../hardware/memory.h"
 #include "../../time/timedate.h"
 #include "../../time/rtc.h"
@@ -331,8 +332,6 @@ void    GetSensorsUni(void)
 
 void    GetDigitalsUni(void)
 {
-uchar   i,j;
-
   MakeDevicesUni();
 
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
@@ -345,22 +344,22 @@ uchar   i,j;
   {
     InitPushUni();
 
-    uchar c;
-    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
+    uchar d;
+    for (d=bInBuff7; d<bInBuff7+bInBuff9; d++)
     {
-      PushIntBig(c);
+      PushIntBig(d);
 
-      PushIntBig(mpdiDevicesUni[c-1].bDevice);
+      PushIntBig(mpdiDevicesUni[d-1].bDevice);
 
       PushChar(0xFF); // заводской номер
       PushChar(0xFF);
       PushChar(0xFF);
       PushChar(0xFF);
 
-      PushIntBig(mpdiDevicesUni[c-1].bAddress);
-      PushIntBig(GetCanalsCount(c-1));
+      PushIntBig(mpdiDevicesUni[d-1].bAddress);
+      PushIntBig(GetCanalsCount(d-1));
       PushIntBig(wHOURS);
-      PushIntBig(GetFirstCanalsNumber(c-1));
+      PushIntBig(GetFirstCanalsNumber(d-1));
 
       PushChar(0);
       PushChar(0);
@@ -371,24 +370,24 @@ uchar   i,j;
 
       PushChar(0);
 
-      i = 0;
+      uchar i = 0;
       if (boEnblCurrent == true) i |= 0x01;
       i |= 0x02;
       if (boEnblProfile == true) i |= 0x04;
       if (boParamsFlag == true) i |= 0x08;
       PushChar(i);
 
-      j = mpdiDevicesUni[c-1].bDevice - 1;
+      uchar j = mpdiDevicesUni[d-1].bDevice - 1;
       for (i=0; i<8; i++)
         PushChar(mpbDevicesMask[j][i]);
 
-      if (mpdiDevicesUni[c-1].ibPhone == 0)
+      if (mpdiDevicesUni[d-1].ibPhone == 0)
       {
         for (i=0; i<32; i++) PushChar(0);
       }
       else
       {
-        Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szLine, 13);
+        Push(&mpphPhones[ mpdiDevicesUni[d-1].ibPhone - 1 ].szLine, 13);
         for (i=0; i<32-13; i++) PushChar(0);
       }
     }
@@ -415,52 +414,13 @@ void    GetSerialsUni(void)
 
     uint wSize = 0;
 
-    uchar c;
-    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
+    uchar d;
+    for (d=bInBuff7; d<bInBuff7+bInBuff9; d++)
     {
-//      PushIntBig(c);
-//
-//      PushIntBig(mpdiDevicesUni[c-1].bDevice);
-//
-//      PushChar(0xFF); // заводской номер
-//      PushChar(0xFF);
-//      PushChar(0xFF);
-//      PushChar(0xFF);
-//
-//      PushIntBig(mpdiDevicesUni[c-1].bAddress);
-//      PushIntBig(GetCanalsCount(c-1));
-//      PushIntBig(wHOURS);
-//      PushIntBig(GetFirstCanalsNumber(c-1));
-//
-//      PushChar(0);
-//      PushChar(0);
-//      PushChar(0);
-//      PushChar(0);
-//      PushChar(0);
-//      PushChar(0);
-//
-//      PushChar(0);
-//
-//      i = 0;
-//      if (boEnblCurrent == true) i |= 0x01;
-//      i |= 0x02;
-//      if (boEnblProfile == true) i |= 0x04;
-//      if (boParamsFlag == true) i |= 0x08;
-//      PushChar(i);
-//
-//      j = mpdiDevicesUni[c-1].bDevice - 1;
-//      for (i=0; i<8; i++)
-//        PushChar(mpbDevicesMask[j][i]);
-//
-//      if (mpdiDevicesUni[c-1].ibPhone == 0)
-//      {
-//        for (i=0; i<32; i++) PushChar(0);
-//      }
-//      else
-//      {
-//        Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szLine, 13);
-//        for (i=0; i<32-13; i++) PushChar(0);
-//      }
+      uchar i = mpibFirstCanalsUni[d];
+
+      wSize += PushLongBig(mdwSerialValues[i]);
+      wSize += PushLongBig(0xFFFFFFFF);
     }
 
     Output2(wSize);
