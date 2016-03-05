@@ -47,3 +47,14 @@ void    ResetSerials(void)
   SaveCache(&chSerialValues);
   SaveCache(&chSerialFlags);
 }
+
+
+
+void    SaveSerial(uchar  ibDig, ulong  dwSerial)
+{
+}
+
+
+void    ShowSerial(ulong  dwSerial)
+{
+}
