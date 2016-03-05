@@ -9,7 +9,8 @@ SERIALS.C
 //#include "../memory/mem_digitals.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
-//#include "sensors.h"
+#include "../display/display.h"
+#include "../time/delay.h"
 #include "serials.h"
 
 
@@ -57,4 +58,7 @@ void    SaveSerial(uchar  ibDig, ulong  dwSerial)
 
 void    ShowSerial(ulong  dwSerial)
 {
+  Clear();
+  sprintf(szLo+3, "#%9lu", dwSerial);
+  DelayInf();
 }
