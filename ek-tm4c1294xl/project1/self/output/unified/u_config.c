@@ -92,12 +92,17 @@ bool    IsDeviceAdded(uchar  ibDev)
 void    MakeDevicesUni(void)
 {
   memset(&mpdiDevicesUni, 0, sizeof(mpdiDevicesUni));
+  memset(&mpibFirstCanalsUni, 0, sizeof(mpibFirstCanalsUni));
   cbDevicesUni = 0;
 
   uchar c;
   for (c=0; c<bCANALS; c++)
+  {
     if (IsDeviceAdded(c) == 0)
+    {
        mpdiDevicesUni[cbDevicesUni++] = mpdiDigital[c];
+    }
+  }
 }
 
 
