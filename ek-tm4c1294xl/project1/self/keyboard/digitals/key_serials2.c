@@ -9,7 +9,7 @@ KEY_SERIALS2,C
 #include "../../memory/mem_digitals.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_messages.h"
-#include "../../digitals/extended/automatic_8.h"
+#include "../../digitals/serials_read.h"
 #include "../../serial/ports.h"
 #include "../../serial/modems.h"
 #include "key_serials2.h"
