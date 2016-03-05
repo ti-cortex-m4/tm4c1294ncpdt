@@ -30,7 +30,13 @@ SERIALS_READ.C
 
 
 
-ulong2  ReadSerialCan(uchar  ibCan)
+ulong2  ReadSerialB(uchar  ibCan)
+{
+}
+
+
+
+ulong2  ReadSerial(uchar  ibCan)
 {
   LoadCurrDigital(ibCan);
   ibPort = diCurr.ibPort;
