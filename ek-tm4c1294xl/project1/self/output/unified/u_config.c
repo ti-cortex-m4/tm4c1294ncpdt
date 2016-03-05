@@ -344,55 +344,63 @@ void    GetDigitalsUni(void)
   {
     InitPushUni();
 
+    uint wSize = 0;
+
     uchar d;
     for (d=bInBuff7; d<bInBuff7+bInBuff9; d++)
     {
-      PushIntBig(d);
+      wSize += PushIntBig(d);
 
-      PushIntBig(mpdiDevicesUni[d-1].bDevice);
+      wSize += PushIntBig(mpdiDevicesUni[d-1].bDevice);
 
-      PushChar(0xFF); // заводской номер
-      PushChar(0xFF);
-      PushChar(0xFF);
-      PushChar(0xFF);
+      uchar c = mpibFirstCanalsUni[d];
+      wSize += PushLongBig(mdwSerialValues[c]);
 
-      PushIntBig(mpdiDevicesUni[d-1].bAddress);
-      PushIntBig(GetCanalsCount(d-1));
-      PushIntBig(wHOURS);
-      PushIntBig(GetFirstCanalsNumber(d-1));
+      wSize += PushIntBig(mpdiDevicesUni[d-1].bAddress);
+      wSize += PushIntBig(GetCanalsCount(d-1));
+      wSize += PushIntBig(wHOURS);
+      wSize += PushIntBig(GetFirstCanalsNumber(d-1));
 
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
 
-      PushChar(0);
+      wSize += PushChar(0);
 
       uchar i = 0;
       if (boEnblCurrent == true) i |= 0x01;
       i |= 0x02;
       if (boEnblProfile == true) i |= 0x04;
       if (boParamsFlag == true) i |= 0x08;
-      PushChar(i);
+      wSize += PushChar(i);
 
       uchar j = mpdiDevicesUni[d-1].bDevice - 1;
       for (i=0; i<8; i++)
-        PushChar(mpbDevicesMask[j][i]);
+      {
+        wSize += PushChar(mpbDevicesMask[j][i]);
+      }
 
       if (mpdiDevicesUni[d-1].ibPhone == 0)
       {
-        for (i=0; i<32; i++) PushChar(0);
+        for (i=0; i<32; i++)
+        {
+          wSize += PushChar(0);
+        }
       }
       else
       {
-        Push(&mpphPhones[ mpdiDevicesUni[d-1].ibPhone - 1 ].szLine, 13);
-        for (i=0; i<32-13; i++) PushChar(0);
+        wSize += Push(&mpphPhones[ mpdiDevicesUni[d-1].ibPhone - 1 ].szLine, 13);
+        for (i=0; i<32-13; i++)
+        {
+          wSize += PushChar(0);
+        }
       }
     }
 
-    Output2((uint)(2+2+4+2+2+2+2+6+2+8+32)*bInBuff9);
+    Output2(wSize);
   }
 }
 
@@ -417,9 +425,8 @@ void    GetSerialsUni(void)
     uchar d;
     for (d=bInBuff7; d<bInBuff7+bInBuff9; d++)
     {
-      uchar i = mpibFirstCanalsUni[d];
-
-      wSize += PushLongBig(mdwSerialValues[i]);
+      uchar c = mpibFirstCanalsUni[d];
+      wSize += PushLongBig(mdwSerialValues[c]);
       wSize += PushLongBig(0xFFFFFFFF);
     }
 
