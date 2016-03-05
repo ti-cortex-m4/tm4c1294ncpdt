@@ -343,7 +343,6 @@ void    GetDigitalsUni(void)
   else
   {
     InitPushUni();
-
     uint wSize = 0;
 
     uchar d;
@@ -419,7 +418,6 @@ void    GetSerialsUni(void)
   else
   {
     InitPushUni();
-
     uint wSize = 0;
 
     uchar d;
