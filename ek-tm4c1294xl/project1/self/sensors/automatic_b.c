@@ -73,9 +73,10 @@ bool    QueryOpenB_Full(uchar  bPercent)
 
     if (r == bMINORREPEATS) return false;
 
-    ulong dw = ReadSerialB();
-    SaveSerial(ibDig, dw);
-    ShowSerial(dw);
+    ulong dwSerial = ReadSerialB();
+
+    SaveSerial(ibDig, dwSerial);
+    ShowSerial(dwSerial);
   }
 
 

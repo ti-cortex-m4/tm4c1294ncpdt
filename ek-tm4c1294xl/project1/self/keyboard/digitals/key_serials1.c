@@ -19,7 +19,7 @@ static char const       szSerials[]       = "Заводские номера",
 
 
 
-static void ShowSerial(ulong  dw)
+static void ShowValue(ulong  dw)
 {
   sprintf(szLo+4,"%9lu",dw);
 }
@@ -31,12 +31,12 @@ static void Show(uchar  c)
 
   if (GetDigitalDevice(c) == 0)
   {
-    ShowSerial(wPrivate);
+    ShowValue(wPrivate);
     szLo[0] = '*';
   }
   else
   {
-    ShowSerial(mdwSerialValues[c]);
+    ShowValue(mdwSerialValues[c]);
   }
 
   sprintf(szLo+14,"%2u",c+1);

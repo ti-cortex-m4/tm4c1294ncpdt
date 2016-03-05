@@ -21,7 +21,7 @@ static char const       szSerials[]       = "Заводские номера";
 
 
 
-static void ShowSerial(ulong  dw)
+static void ShowValue(ulong  dw)
 {
   sprintf(szLo+4,"%9lu",dw);
 }
@@ -33,7 +33,7 @@ static void Show(uchar  c)
 
   if (GetDigitalDevice(c) == 0)
   {
-    ShowSerial(wPrivate);
+    ShowValue(wPrivate);
     szLo[0] = '*';
   }
   else
@@ -49,7 +49,7 @@ static void Show(uchar  c)
     else
     {
       ulong2 dw2 = ReadSerialCan(c);
-      (dw2.fValid) ? ShowSerial(dw2.dwValue) : Error();
+      (dw2.fValid) ? ShowValue(dw2.dwValue) : Error();
     }
 
     SaveConnect();
