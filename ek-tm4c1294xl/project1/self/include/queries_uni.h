@@ -46,6 +46,7 @@ QUERIES2!H
 #define wUNI_GETCONFIG                 0x00D0
 #define wUNI_GETSENSORS                0x00D1
 #define wUNI_GETDIGITALS               0x00D2
+#define wUNI_GETSERIALS                0x8012
 #define wUNI_GETCANALS                 0x00D3
 #define wUNI_GETGROUPS                 0x00D4
 

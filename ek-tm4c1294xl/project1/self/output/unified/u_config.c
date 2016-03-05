@@ -345,7 +345,7 @@ uchar   i,j;
 
       PushIntBig(mpdiDevicesUni[c-1].bDevice);
 
-      PushChar(0xFF);
+      PushChar(0xFF); // заводской номер
       PushChar(0xFF);
       PushChar(0xFF);
       PushChar(0xFF);
@@ -387,6 +387,75 @@ uchar   i,j;
     }
   }
   Output2((uint)(2+2+4+2+2+2+2+6+2+8+32)*bInBuff9);
+}
+
+
+
+void    GetSerialsUni(void)
+{
+//uchar   i,j;
+//
+//  MakeDevicesUni();
+//
+//  if ((bInBuff6 != 0) || (bInBuff8 != 0))
+//    Result2(bUNI_BADDATA);
+//  else if (bInBuff7 > cbDevicesUni)
+//    Result2(bUNI_BADDATA);
+//  else if (bInBuff7+bInBuff9 > cbDevicesUni + 1)
+//    Result2(bUNI_BADDATA);
+//  else
+//  {
+//    InitPushUni();
+//
+//    uchar c;
+//    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
+//    {
+//      PushIntBig(c);
+//
+//      PushIntBig(mpdiDevicesUni[c-1].bDevice);
+//
+//      PushChar(0xFF); // заводской номер
+//      PushChar(0xFF);
+//      PushChar(0xFF);
+//      PushChar(0xFF);
+//
+//      PushIntBig(mpdiDevicesUni[c-1].bAddress);
+//      PushIntBig(GetCanalsCount(c-1));
+//      PushIntBig(wHOURS);
+//      PushIntBig(GetFirstCanalsNumber(c-1));
+//
+//      PushChar(0);
+//      PushChar(0);
+//      PushChar(0);
+//      PushChar(0);
+//      PushChar(0);
+//      PushChar(0);
+//
+//      PushChar(0);
+//
+//      i = 0;
+//      if (boEnblCurrent == true) i |= 0x01;
+//      i |= 0x02;
+//      if (boEnblProfile == true) i |= 0x04;
+//      if (boParamsFlag == true) i |= 0x08;
+//      PushChar(i);
+//
+//      j = mpdiDevicesUni[c-1].bDevice - 1;
+//      for (i=0; i<8; i++)
+//        PushChar(mpbDevicesMask[j][i]);
+//
+//      if (mpdiDevicesUni[c-1].ibPhone == 0)
+//      {
+//        for (i=0; i<32; i++) PushChar(0);
+//      }
+//      else
+//      {
+//        Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szLine, 13);
+//        for (i=0; i<32-13; i++) PushChar(0);
+//      }
+//    }
+//  }
+//  Output2((uint)(2+2+4+2+2+2+2+6+2+8+32)*bInBuff9);
 }
 
 
