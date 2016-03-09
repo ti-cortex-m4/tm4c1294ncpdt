@@ -59,13 +59,13 @@ void    ResetSerials(void)
 
 void    ProcessSerial(uchar  ibDig, ulong  dwSerial)
 {
-  mdwSerialValues[c] = dw;
+  mdwSerialValues[ibDig] = dwSerial;
   SaveCache(&chSerialValues);
 
-  mtiSerialTimes[c] = *GetCurrTimeDate();
+  mtiSerialTimes[ibDig] = *GetCurrTimeDate();
   SaveCache(&chSerialTimes);
 
-  mfSerialFlags[c] = true;
+  mfSerialFlags[ibDig] = true;
   SaveCache(&chSerialFlags);
 }
 
