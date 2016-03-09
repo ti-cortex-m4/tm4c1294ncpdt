@@ -48,7 +48,7 @@ static void Show(uchar  c)
       ShowLo(szBlocked);
     else
     {
-      ulong2 dw2 = ReadSerial(c);
+      ulong2 dw2 = ReadSerialCan(c);
       (dw2.fValid) ? ShowValue(dw2.dwValue) : Error();
     }
 
