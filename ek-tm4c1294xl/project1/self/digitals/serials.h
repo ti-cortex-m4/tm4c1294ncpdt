@@ -21,3 +21,4 @@ void    InitSerials(void);
 void    ResetSerials(void);
 
 void    ProcessSerial(uchar  ibDig, ulong  dwSerial);
+void    ProcessSerials(uchar  ibDig, ulong  dwSerial);

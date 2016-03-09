@@ -4,4 +4,4 @@ uni_utils.h
 
 ------------------------------------------------------------------------------*/
 
-ulong   DateToLongUni(time  *ptm);
+ulong   DateToLongUni(time  *pti);

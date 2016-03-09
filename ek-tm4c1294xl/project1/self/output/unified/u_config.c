@@ -426,10 +426,14 @@ void    GetSerialsUni(void)
       uchar c = mpibFirstCanalsUni[d];
       wSize += PushLongBig(mdwSerialValues[c]);
 
-      ulong dw = 0xFFFFFFFF;
+      ulong dw;
 
-      if (mpboEnblCan[c] == false)
+      if (mfSerialFlags[c] == false)
+        dw = 0xFFFFFFFF;
+      else if (mpboEnblCan[c] == false)
         dw = 0xFFFFFFFE;
+      else
+        dw = DateToLongUni(mtiSerialTimes[c]);
 
       wSize += PushLongBig(dw);
     }

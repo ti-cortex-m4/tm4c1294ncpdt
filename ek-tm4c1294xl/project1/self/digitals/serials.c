@@ -51,12 +51,26 @@ void    ResetSerials(void)
   }
 
   SaveCache(&chSerialValues);
+  SaveCache(&chSerialTimes);
   SaveCache(&chSerialFlags);
 }
 
 
 
 void    ProcessSerial(uchar  ibDig, ulong  dwSerial)
+{
+  mdwSerialValues[c] = dw;
+  SaveCache(&chSerialValues);
+
+  mtiSerialTimes[c] = *GetCurrTimeDate();
+  SaveCache(&chSerialTimes);
+
+  mfSerialFlags[c] = true;
+  SaveCache(&chSerialFlags);
+}
+
+
+void    ProcessSerials(uchar  ibDig, ulong  dwSerial)
 {
   uchar c;
   for (c=0; c<bCANALS; c++)
@@ -70,6 +84,7 @@ void    ProcessSerial(uchar  ibDig, ulong  dwSerial)
   }
 
   SaveCache(&chSerialValues);
+  SaveCache(&chSerialTimes);
   SaveCache(&chSerialFlags);
 
   Clear();

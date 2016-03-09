@@ -148,7 +148,7 @@ ulong2  QuerySerialB_Full(void)
   if (r == bMINORREPEATS) return GetLong2Error();
 
   ulong dwSerial = ReadSerialB();
-  ProcessSerial(ibDig, dwSerial);
+  ProcessSerials(ibDig, dwSerial);
 
   return GetLong2(dwSerial, true);
 }
