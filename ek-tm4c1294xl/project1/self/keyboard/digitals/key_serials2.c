@@ -17,7 +17,8 @@ key_serials2.c
 
 
 //                                           0123456789ABCDEF
-static char const       szSerials[]       = "Заводские номера";
+static char const       szSerials[]       = "Заводские номера",
+                        szNone[]          = "      нет    ";
 
 
 
@@ -34,7 +35,7 @@ static void Show(uchar  c)
 
   if (GetDigitalDevice(c) == 0)
   {
-    ShowValue(wPrivate);
+    ShowLo(szNone);
     szLo[0] = '*';
   }
   else
