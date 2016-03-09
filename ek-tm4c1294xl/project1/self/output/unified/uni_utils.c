@@ -1,12 +1,10 @@
 /*------------------------------------------------------------------------------
-UNI_UTILS.C
+UNI_UTILS,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../time/rtc.h"
-//#include "response_uni.h"
 #include "uni_utils.h"
 
 
@@ -49,10 +47,10 @@ void LongTo_DateTime(time_t j,TimeObj *ttime)
 #endif
 
 #if 1
-ulong   DateTime_ToLong(time  *ttime)
+ulong   DateToLongUni(time  *ptm)
 {
-  uchar month = ttime->bMonth;
-  uint year = 2000 + ttime->bYear;
+  uchar month = ptm->bMonth;
+  uint year = 2000 + ptm->bYear;
 
   if (month > 2)
     month -= 3;
@@ -64,8 +62,8 @@ ulong   DateTime_ToLong(time  *ttime)
 
   ulong c   = year / 100;
   ulong ya  = year - 100 * c;
-  ulong res = (146097 * c)/4 + (1461 * ya)/4 + (153 * month + 2)/5 + ttime->bDay;
+  ulong res = (146097 * c)/4 + (1461 * ya)/4 + (153 * month + 2)/5 + ptm->bDay;
 
-  return (res - 720000) * 86400l + (ttime->bHour * 60l + ttime->bMinute) * 60l + ttime->bSecond;
+  return (res - 720000) * 86400l + (ptm->bHour * 60l + ptm->bMinute) * 60l + ptm->bSecond;
 }
 #endif
