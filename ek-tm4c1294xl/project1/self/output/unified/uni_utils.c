@@ -9,10 +9,10 @@ uni_utils.c
 
 
 
-ulong   DateToLongUni(time  *ptm)
+ulong   DateToLongUni(time  *pti)
 {
-  uchar month = ptm->bMonth;
-  uint year = 2000 + ptm->bYear;
+  uchar month = pti->bMonth;
+  uint year = 2000 + pti->bYear;
 
   if (month > 2)
     month -= 3;
@@ -22,9 +22,9 @@ ulong   DateToLongUni(time  *ptm)
     year--;
   }
 
-  ulong c   = year / 100;
-  ulong y  = year - 100 * c;
-  ulong res = (146097 * c)/4 + (1461 * y)/4 + (153 * month + 2)/5 + ptm->bDay;
+  ulong c = year / 100;
+  ulong y = year - 100 * c;
+  ulong res = (146097 * c)/4 + (1461 * y)/4 + (153 * month + 2)/5 + pti->bDay;
 
-  return (res - 720000) * 86400l + (ptm->bHour * 60l + ptm->bMinute) * 60l + ptm->bSecond;
+  return (res - 720000) * 86400l + (pti->bHour * 60l + pti->bMinute) * 60l + pti->bSecond;
 }

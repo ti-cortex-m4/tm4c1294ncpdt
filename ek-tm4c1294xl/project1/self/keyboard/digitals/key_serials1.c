@@ -75,11 +75,7 @@ static uchar c;
       {
         enKeyboard = KBD_POSTENTER;
 
-        mdwSerialValues[c] = dw;
-        SaveCache(&chSerialValues);
-
-        mfSerialFlags[c] = true;
-        SaveCache(&chSerialFlags);
+        ProcessSerial(c, dw);
 
         if (++c >= bCANALS) c = 0;
         Show(c);
