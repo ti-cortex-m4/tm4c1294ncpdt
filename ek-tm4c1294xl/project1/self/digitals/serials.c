@@ -5,10 +5,9 @@ SERIALS.C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../memory/mem_digitals0.h"
-//#include "../memory/mem_digitals.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
+#include "../digitals/digitals.h"
 #include "../display/display.h"
 #include "../time/delay.h"
 #include "serials.h"
@@ -53,12 +52,27 @@ void    ResetSerials(void)
 
 void    SaveSerial(uchar  ibDig, ulong  dwSerial)
 {
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    if (CompareLines(ibDig,c) == true)
+    {
+      mdwSerialValues[c] = dwSerial;
+      mfSerialFlags[c] = true;
+    }
+  }
+
+  SaveCache(&chSerialValues);
+  SaveCache(&chSerialFlags);
 }
 
 
 void    ShowSerial(ulong  dwSerial)
 {
   Clear();
-  sprintf(szLo+3, "#%9lu", dwSerial);
+
+  szLo[0] = '#';
+  sprintf(szLo+4,"%9lu",dwSerial);
+
   DelayInf();
 }
