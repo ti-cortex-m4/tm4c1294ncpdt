@@ -28,6 +28,7 @@ U_CONFIG!C
 #include "../../access.h"
 #include "../../groups.h"
 #include "response_uni.h"
+#include "uni_utils.h"
 #include "u_config.h"
 
 
@@ -433,7 +434,7 @@ void    GetSerialsUni(void)
       else if (mpboEnblCan[c] == false)
         dw = 0xFFFFFFFE;
       else
-        dw = DateToLongUni(mtiSerialTimes[c]);
+        dw = DateToLongUni(&mtiSerialTimes[c]);
 
       wSize += PushLongBig(dw);
     }
