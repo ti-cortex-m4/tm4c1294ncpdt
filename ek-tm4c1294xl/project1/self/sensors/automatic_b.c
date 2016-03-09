@@ -14,6 +14,7 @@ AUTOMATIC_B!C
 #include "../time/timedate.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_messages.h"
+#include "../digitals/serials.h"
 #include "automatic1.h"
 #include "device_b.h"
 #include "automatic_b.h"
@@ -134,19 +135,22 @@ uchar   i;
 
 ulong2  QuerySerialB_Full(void)
 {
+  uchar r;
   for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
     QuerySerialB();
 
     if (Input() == SER_GOODCHECK) break;
-    if (fKey == true) return false;
+    if (fKey == true) return GetLong2Error();
   }
 
-  if (r == bMINORREPEATS) return false;
+  if (r == bMINORREPEATS) return GetLong2Error();
 
   ulong dwSerial = ReadSerialB();
 
   SaveSerial(ibDig, dwSerial);
   ShowSerial(dwSerial);
+
+ return GetLong2(dwSerial, true);
 }
