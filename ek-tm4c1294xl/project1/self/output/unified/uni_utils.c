@@ -14,8 +14,8 @@ UNI_UTILS.C
 #if 0
 void LongTo_DateTime(time_t j,TimeObj *ttime)
 {
- LgUns d,m,y;
- LgUns date,t;
+ ulong d,m,y;
+ ulong date,t;
 
  date  = j/86400l;
  t = j - (date * 86400l);
@@ -48,27 +48,24 @@ void LongTo_DateTime(time_t j,TimeObj *ttime)
 }
 #endif
 
-#if 0
-time_t  DateTime_ToLong(TimeObj *ttime)
+#if 1
+ulong   DateTime_ToLong(time  *ttime)
 {
- SmUns month;
- MdUns  year;
- LgUns c,ya;
- LgUns res;
+  uchar month = ttime->bMonth;
+  uint year = 2000 + ttime->bYear;
 
- month = ttime->month;
- year = ttime->year;
+  if (month > 2)
+    month -= 3;
+  else
+  {
+    month += 9;
+    year--;
+  }
 
- if(month > 2) month -= 3;
- else {
-  month += 9;
-  year--;
- }
+  ulong c   = year / 100;
+  ulong ya  = year - 100 * c;
+  ulong res = (146097 * c)/4 + (1461 * ya)/4 + (153 * month + 2)/5 + ttime->bDay;
 
- c   = year / 100;
- ya  = year - 100 * c;
- res = (146097 * c)/4 + (1461 * ya)/4 + (153 * month + 2)/5 + ttime->day;
-
- return (res - 720000) * 86400l + (ttime->hour * 60l + ttime->minute) * 60l + ttime->sec;
+  return (res - 720000) * 86400l + (ttime->bHour * 60l + ttime->bMinute) * 60l + ttime->bSecond;
 }
 #endif
