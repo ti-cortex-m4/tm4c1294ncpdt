@@ -96,6 +96,7 @@ serial  Input(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
+  MonitorIn();
   return mpSerial[ibPort];
 }
 
