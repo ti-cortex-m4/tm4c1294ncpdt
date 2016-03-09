@@ -23,6 +23,7 @@ static char const       szSerials[]       = "Заводские номера";
 
 static void ShowValue(ulong  dw)
 {
+  szLo[0] = '#';
   sprintf(szLo+4,"%9lu",dw);
 }
 
