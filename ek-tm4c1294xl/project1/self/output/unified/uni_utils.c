@@ -12,8 +12,8 @@ UNI_UTILS.C
 
 
 #if 0
-
-void LongTo_DateTime(time_t j,TimeObj *ttime) {
+void LongTo_DateTime(time_t j,TimeObj *ttime)
+{
  LgUns d,m,y;
  LgUns date,t;
 
@@ -22,14 +22,14 @@ void LongTo_DateTime(time_t j,TimeObj *ttime) {
  date += 720000;
 
  y  = (4 * date - 1) / 146097;
- d  = (4  date - 1 - 146097  y) / 4l;
+ d  = (4 * date - 1 - 146097 * y) / 4l;
 
  date = (4 * d + 3) / 1461;
 
- d = (4  d + 7 - 1461  date) / 4l;
+ d = (4 * d + 7 - 1461 * date) / 4l;
  m = (5 * d - 3) / 153;
 
- d = (5  d + 2 - 153  m) / 5l;
+ d = (5 * d + 2 - 153 * m) / 5l;
  y = 100 * y + date;
 
  if (m < 10)
@@ -46,8 +46,11 @@ void LongTo_DateTime(time_t j,TimeObj *ttime) {
  ttime->hour   = t / 60l;
  ttime->minute = t % 60l;
 }
+#endif
 
-time_t  DateTime_ToLong(TimeObj *ttime) {
+#if 0
+time_t  DateTime_ToLong(TimeObj *ttime)
+{
  SmUns month;
  MdUns  year;
  LgUns c,ya;
@@ -64,9 +67,8 @@ time_t  DateTime_ToLong(TimeObj *ttime) {
 
  c   = year / 100;
  ya  = year - 100 * c;
- res = (146097  c)/4 + (1461  ya)/4 + (153 * month + 2)/5 + ttime->day;
+ res = (146097 * c)/4 + (1461 * ya)/4 + (153 * month + 2)/5 + ttime->day;
 
- return (res - 720000)  86400l + (ttime->hour  60l + ttime->minute) * 60l + ttime->sec;
+ return (res - 720000) * 86400l + (ttime->hour * 60l + ttime->minute) * 60l + ttime->sec;
 }
-
 #endif

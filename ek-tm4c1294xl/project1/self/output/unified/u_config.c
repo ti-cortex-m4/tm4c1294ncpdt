@@ -425,7 +425,13 @@ void    GetSerialsUni(void)
     {
       uchar c = mpibFirstCanalsUni[d];
       wSize += PushLongBig(mdwSerialValues[c]);
-      wSize += PushLongBig(0xFFFFFFFF);
+
+      ulong dw = 0xFFFFFFFF;
+
+      if (mpboEnblCan[c] == false)
+        dw = 0xFFFFFFFE;
+
+      wSize += PushLongBig(dw);
     }
 
     Output2(wSize);

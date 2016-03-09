@@ -28,17 +28,7 @@ static void ShowValue(ulong  dw)
 static void Show(uchar  c)
 {
   Clear();
-
-  if (GetDigitalDevice(c) == 0)
-  {
-    ShowValue(wPrivate);
-    szLo[0] = '*';
-  }
-  else
-  {
-    ShowValue(mdwSerialValues[c]);
-  }
-
+  ShowValue(mdwSerialValues[c]);
   sprintf(szLo+14,"%2u",c+1);
 }
 
