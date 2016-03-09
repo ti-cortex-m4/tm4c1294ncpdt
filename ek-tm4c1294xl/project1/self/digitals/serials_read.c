@@ -14,6 +14,8 @@ SERIALS_READ.C
 
 ulong2  ReadSerialCanB(void)
 {
+  if (QueryOpenB_Full(25) == 0) GetLong2Error();
+
   return QuerySerialB_Full();
 }
 

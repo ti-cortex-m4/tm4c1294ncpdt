@@ -50,7 +50,7 @@ void    ResetSerials(void)
 
 
 
-void    SaveSerial(uchar  ibDig, ulong  dwSerial)
+void    ProcessSerial(uchar  ibDig, ulong  dwSerial)
 {
   uchar c;
   for (c=0; c<bCANALS; c++)
@@ -64,13 +64,8 @@ void    SaveSerial(uchar  ibDig, ulong  dwSerial)
 
   SaveCache(&chSerialValues);
   SaveCache(&chSerialFlags);
-}
 
-
-void    ShowSerial(ulong  dwSerial)
-{
   Clear();
-
   szLo[0] = '#';
   sprintf(szLo+4,"%9lu",dwSerial);
 
