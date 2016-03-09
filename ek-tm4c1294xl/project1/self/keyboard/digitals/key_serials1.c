@@ -28,6 +28,12 @@ static void ShowValue(ulong  dw)
 static void Show(uchar  c)
 {
   Clear();
+
+  if (GetDigitalDevice(c) == 0)
+  {
+    szLo[0] = '*';
+  }
+
   ShowValue(mdwSerialValues[c]);
   sprintf(szLo+14,"%2u",c+1);
 }

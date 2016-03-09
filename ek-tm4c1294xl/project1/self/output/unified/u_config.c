@@ -428,7 +428,6 @@ void    GetSerialsUni(void)
       wSize += PushLongBig(mdwSerialValues[c]);
 
       ulong dw;
-
       if (mfSerialFlags[c] == false)
         dw = 0xFFFFFFFF;
       else if (mpboEnblCan[c] == false)

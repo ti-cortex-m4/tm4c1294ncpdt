@@ -88,6 +88,7 @@ void    ProcessSerials(uchar  ibDig, ulong  dwSerial)
   SaveCache(&chSerialFlags);
 
   Clear();
+
   szLo[0] = '#';
   sprintf(szLo+4,"%9lu",dwSerial);
 
