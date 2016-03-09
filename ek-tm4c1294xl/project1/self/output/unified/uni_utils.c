@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-UNI_UTILS,C
+uni_utils.c
 
 
 ------------------------------------------------------------------------------*/
@@ -9,44 +9,6 @@ UNI_UTILS,C
 
 
 
-#if 0
-void LongTo_DateTime(time_t j,TimeObj *ttime)
-{
- ulong d,m,y;
- ulong date,t;
-
- date  = j/86400l;
- t = j - (date * 86400l);
- date += 720000;
-
- y  = (4 * date - 1) / 146097;
- d  = (4 * date - 1 - 146097 * y) / 4l;
-
- date = (4 * d + 3) / 1461;
-
- d = (4 * d + 7 - 1461 * date) / 4l;
- m = (5 * d - 3) / 153;
-
- d = (5 * d + 2 - 153 * m) / 5l;
- y = 100 * y + date;
-
- if (m < 10)
-  m += 3;
- else {
-  m -= 9;
-  y++;
- }
- ttime->month  = m;
- ttime->year   = y;
- ttime->day    = d;
-
- ttime->sec    = t % 60l;     t /= 60l;
- ttime->hour   = t / 60l;
- ttime->minute = t % 60l;
-}
-#endif
-
-#if 1
 ulong   DateToLongUni(time  *ptm)
 {
   uchar month = ptm->bMonth;
@@ -61,9 +23,8 @@ ulong   DateToLongUni(time  *ptm)
   }
 
   ulong c   = year / 100;
-  ulong ya  = year - 100 * c;
-  ulong res = (146097 * c)/4 + (1461 * ya)/4 + (153 * month + 2)/5 + ptm->bDay;
+  ulong y  = year - 100 * c;
+  ulong res = (146097 * c)/4 + (1461 * y)/4 + (153 * month + 2)/5 + ptm->bDay;
 
   return (res - 720000) * 86400l + (ptm->bHour * 60l + ptm->bMinute) * 60l + ptm->bSecond;
 }
-#endif
