@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 serials.c
 
- Заводские номера цифровых счетчиков
+Заводские номера цифровых счетчиков
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -9,18 +9,22 @@ serials.c
 #include "../nvram/cache2.h"
 #include "../digitals/digitals.h"
 #include "../display/display.h"
+#include "../time/timedate.h"
 #include "../time/delay.h"
+#include "../time/rtc.h"
 #include "serials.h"
 
 
 
 bool                    fSerialsManual;
 ulong                   mdwSerialValues[bCANALS];
+time                    mtiSerialTimes[bCANALS];
 bool                    mfSerialFlags[bCANALS];
 
 
 cache const             chSerialsManual = {SERIALS_MANUAL, &fSerialsManual, sizeof(bool)};
 cache const             chSerialValues = {SERIAL_VALUES, &mdwSerialValues, sizeof(mdwSerialValues)};
+cache const             chSerialTimes = {SERIAL_TIMES, &mtiSerialTimes, sizeof(mtiSerialTimes)};
 cache const             chSerialFlags = {SERIAL_FLAGS, &mfSerialFlags, sizeof(mfSerialFlags)};
 
 
@@ -29,6 +33,7 @@ void    InitSerials(void)
 {
   LoadCacheBool(&chSerialsManual, false);
   LoadCache(&chSerialValues);
+  LoadCache(&chSerialTimes);
   LoadCache(&chSerialFlags);
 }
 
@@ -41,6 +46,7 @@ void    ResetSerials(void)
   for (c=0; c<bCANALS; c++)
   {
     mdwSerialValues[c] = 0;
+    mtiSerialTimes[c] = tiZero;
     mfSerialFlags[c] = false;
   }
 
@@ -58,6 +64,7 @@ void    ProcessSerial(uchar  ibDig, ulong  dwSerial)
     if (CompareLines(ibDig,c) == true)
     {
       mdwSerialValues[c] = dwSerial;
+      mtiSerialTimes[c] = *GetCurrTimeDate();
       mfSerialFlags[c] = true;
     }
   }

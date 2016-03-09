@@ -257,7 +257,8 @@ typedef enum
 
   SERIALS_MANUAL        = MONITOR_LOG_BASIC + sizeof(bool) + bNVRAM_FOOTER,
   SERIAL_VALUES         = SERIALS_MANUAL + sizeof(bool) + bNVRAM_FOOTER,
-  SERIAL_FLAGS          = SERIAL_VALUES + sizeof(mdwSerialValues) + bNVRAM_FOOTER,
+  SERIAL_TIMES          = SERIAL_VALUES + sizeof(mdwSerialValues) + bNVRAM_FOOTER,
+  SERIAL_FLAGS          = SERIAL_TIMES + sizeof(mtiSerialTimes) + bNVRAM_FOOTER,
 
   NVRAM_END             = SERIAL_FLAGS + sizeof(mfSerialFlags) + bNVRAM_FOOTER
 } nvram;
