@@ -353,7 +353,7 @@ void    GetDigitalsUni(void)
 
       wSize += PushIntBig(mpdiDevicesUni[d-1].bDevice);
 
-      uchar c = mpibFirstCanalsUni[d];
+      uchar c = mpibFirstCanalsUni[d-1];
       wSize += PushLongBig(mdwSerialValues[c]);
 
       wSize += PushIntBig(mpdiDevicesUni[d-1].bAddress);
@@ -424,7 +424,7 @@ void    GetSerialsUni(void)
     uchar d;
     for (d=bInBuff7; d<bInBuff7+bInBuff9; d++)
     {
-      uchar c = mpibFirstCanalsUni[d];
+      uchar c = mpibFirstCanalsUni[d-1];
       wSize += PushLongBig(mdwSerialValues[c]);
 
       ulong dw;
