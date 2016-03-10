@@ -57,6 +57,35 @@ void    ResetSerials(void)
 
 
 
+void    ClearSerial(uchar  ibDig)
+{
+  mdwSerialValues[ibDig] = 0;
+  SaveCache(&chSerialValues);
+
+  mtiSerialTimes[ibDig] = tiZero;
+  SaveCache(&chSerialTimes);
+
+  mfSerialFlags[ibDig] = false;
+  SaveCache(&chSerialFlags);
+}
+
+
+void    ClearSerials(uchar  ibDig, uchar  bSize)
+{
+  uchar c;
+  for (c=ibDig; c<ibDig+bSize; c++)
+  {
+    mdwSerialValues[c] = 0;
+    mtiSerialTimes[c] = tiZero;
+    mfSerialFlags[c] = false;
+  }
+
+  SaveCache(&chSerialValues);
+  SaveCache(&chSerialTimes);
+  SaveCache(&chSerialFlags);
+}
+
+
 void    ProcessSerial(uchar  ibDig, ulong  dwSerial)
 {
   mdwSerialValues[ibDig] = dwSerial;

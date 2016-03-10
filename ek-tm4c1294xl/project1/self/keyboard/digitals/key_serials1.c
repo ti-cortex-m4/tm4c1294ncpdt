@@ -15,7 +15,8 @@ key_serials1.c
 
 //                                           0123456789ABCDEF
 static char const       szSerials[]       = "Заводские номера",
-                        szMask[]          = "    _________";
+                        szMask[]          = "    _________",
+                        szNoSerial[]      = "  нет номера ";
 
 
 
@@ -29,12 +30,15 @@ static void Show(uchar  c)
 {
   Clear();
 
-  if (GetDigitalDevice(c) == 0)
+  if (mfSerialFlags[c] == false)
   {
-    szLo[0] = '*';
+    ShowLo(szNoSerial);
+  }
+  else
+  {
+    ShowValue(mdwSerialValues[c]);
   }
 
-  ShowValue(mdwSerialValues[c]);
   sprintf(szLo+14,"%2u",c+1);
 }
 
