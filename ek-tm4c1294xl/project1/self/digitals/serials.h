@@ -20,5 +20,7 @@ extern  cache const             chSerialFlags;
 void    InitSerials(void);
 void    ResetSerials(void);
 
+void    ClearSerial(uchar  ibDig);
+void    ClearSerials(uchar  ibDig, uchar  bSize);
 void    ProcessSerial(uchar  ibDig, ulong  dwSerial);
 void    ProcessSerials(uchar  ibDig, ulong  dwSerial);
