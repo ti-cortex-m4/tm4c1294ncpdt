@@ -116,13 +116,12 @@ ulong   ReadSerialB(void)
 {
   InitPop(1);
 
-  combo32 cb;
-  cb.mpbBuff[3] = PopChar();
-  cb.mpbBuff[2] = PopChar();
-  cb.mpbBuff[1] = PopChar();
-  cb.mpbBuff[0] = PopChar();
+  ulong dw = PopChar()*1000000;
+  dw += PopChar()*10000;
+  dw += PopChar()*100;
+  dw += PopChar();
 
-  return cb.dwBuff;
+  return dw;
 }
 
 
