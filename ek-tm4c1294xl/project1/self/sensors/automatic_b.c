@@ -63,6 +63,7 @@ bool    QueryOpenB_Full(uchar  ibCan, uchar  bPercent)
   if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
   {
     ulong2 dw2 = QuerySerialB_Full();
+    Clear();
     if (dw2.fValid == false) return false;
   }
 
