@@ -14,6 +14,7 @@ AUTOMATIC_C!C
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_messages.h"
+#include "../digitals/serials.h"
 #include "automatic1.h"
 #include "device_c.h"
 
@@ -124,6 +125,28 @@ time2   QueryTimeC_Full(void)
   if (i == bMINORREPEATS) return GetTime2Error();
 
   return GetTime2(ReadTimeC(), true);
+}
+
+
+
+ulong2  QuerySerialC_Full(void)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QuerySerialC();
+
+    if (RevInput() == SER_GOODCHECK) break;
+    if (fKey == true) return GetLong2Error();
+  }
+
+  if (r == bMINORREPEATS) return GetLong2Error();
+
+  ulong dwSerial = ReadSerialC();
+  ProcessSerials(ibDig, dwSerial);
+
+  return GetLong2(dwSerial, true);
 }
 
 #endif
