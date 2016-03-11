@@ -20,6 +20,7 @@ AUTOMATIC2!C
 #include "../devices/devices.h"
 #include "../sensors/automatic2.h"
 #include "../digitals/digitals.h"
+#include "../digitals/serials.h"
 #include "../time/delay.h"
 #include "../energy.h"
 #include "../energy2.h"
@@ -107,12 +108,12 @@ uchar   i;
 
 #ifndef SKIP_C
 
-double2 ReadCntCurrC(void)
+double2 ReadCntCurrC(uchar  ibCan)
 {
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceC() == 0) return GetDouble2Error();
+  if (ReadKoeffDeviceC(ibCan) == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -668,8 +669,16 @@ uchar   i;
 
 #ifndef SKIP_C
 
-time2   ReadTimeCanC(void)
+time2   ReadTimeCanC(uchar  ibCan)
 {
+  if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
+  {
+    ulong2 dw2 = QuerySerialC_Full();
+    Clear();
+    if (dw2.fValid == false) return GetTime2Error();
+  }
+
+
   Clear();
 
   uchar i;
@@ -1151,12 +1160,12 @@ ulong   dw;
 
 #ifndef SKIP_C
 
-double2 ReadCntMonCanC(uchar  ibMonth)
+double2 ReadCntMonCanC(uchar  ibCan, uchar  ibMonth)
 {
 uchar   i,j;
 
   Clear();
-  if (ReadKoeffDeviceC() == 0) return GetDouble2Error();
+  if (ReadKoeffDeviceC(ibCan) == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -1783,7 +1792,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_C
-    case 3:  return ReadCntCurrC();
+    case 3:  return ReadCntCurrC(ibCan);
 #endif
 
 #ifndef SKIP_D
@@ -1907,7 +1916,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_C
-    case 3:  return ReadTimeCanC();
+    case 3:  return ReadTimeCanC(ibCan);
 #endif
 
 #ifndef SKIP_D
@@ -2037,7 +2046,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_C
-    case 3:  return ReadCntMonCanC(ibMon);
+    case 3:  return ReadCntMonCanC(ibCan, ibMon);
 #endif
 
 #ifndef SKIP_D

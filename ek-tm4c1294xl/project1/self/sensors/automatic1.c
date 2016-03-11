@@ -13,6 +13,7 @@ AUTOMATIC1!C
 #include "../serial/ports_devices.h"
 #include "../serial/ports.h"
 #include "../devices/devices.h"
+#include "../digitals/serials.h"
 #include "../energy.h"
 #include "device_a.h"
 #include "device_b.h"
@@ -222,10 +223,17 @@ bool    ReadKoeffDeviceB_Special(uchar  ibCan)
 #ifndef SKIP_C
 
 // чтение коэффициентов для счётчика СС-301
-bool    ReadKoeffDeviceC(void)
+bool    ReadKoeffDeviceC(uchar  ibCan)
 {
-uchar   i;
+  if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
+  {
+    ulong2 dw2 = QuerySerialC_Full();
+    Clear();
+    if (dw2.fValid == false) return false;
+  }
 
+
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -524,9 +532,9 @@ bool    AutomaticJ(uchar  ibCan)
 #ifndef SKIP_C
 
 // задание параметров для счётчиков СС-301
-bool    AutomaticC(void)
+bool    AutomaticC(uchar  ibCan)
 {
-  if (ReadKoeffDeviceC() == 0) return(0);
+  if (ReadKoeffDeviceC(ibCan) == 0) return(0);
 
 
   SetAllFactors(dbKpulse,dbKtrans);
