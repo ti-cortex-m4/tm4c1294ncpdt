@@ -35,7 +35,7 @@ void    InitExtended3(void);
 void    ResetExtended3(void);
 void    ResetExtended3_Manual(void);
 
-void    MakeExtended3(void);
+void    MakeExtended3(uchar  ibCan);
 
 ulong   DateToEventIndex(time  ti);
 time    EventIndexToDate(ulong  dw);

@@ -107,13 +107,12 @@ uchar   i;
 #ifndef SKIP_B
 
 // чтение коэффициентов для счётчика Меркурий-230
-bool    ReadKoeffDeviceB(void)
+bool    ReadKoeffDeviceB(uchar  ibCan)
 {
-uchar   i;
-
-  if (QueryOpenB_Full(25) == 0) return(0);
+  if (QueryOpenB_Full(ibCan, 25) == 0) return(0);
 
 
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
@@ -183,13 +182,12 @@ uchar   i;
 
 
 // чтение коэффициентов для счётчика Меркурий-230
-bool    ReadKoeffDeviceB_Special(void)
+bool    ReadKoeffDeviceB_Special(uchar  ibCan)
 {
-uchar   i;
-
-  if (QueryOpenB_Full(25) == 0) return(0);
+  if (QueryOpenB_Full(ibCan, 25) == 0) return(0);
 
 
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
@@ -492,9 +490,9 @@ bool    AutomaticA(void)
 #ifndef SKIP_B
 
 // задание параметров для счётчиков Меркурий-230
-bool    AutomaticB(void)
+bool    AutomaticB(uchar  ibCan)
 {
-  if (ReadKoeffDeviceB() == 0) return(0);
+  if (ReadKoeffDeviceB(ibCan) == 0) return(0);
 
 
   SetAllFactors(dbKpulse,dbKtrans);
@@ -506,9 +504,9 @@ bool    AutomaticB(void)
 
 
 // задание параметров для счётчиков Меркурий-230
-bool    AutomaticJ(void)
+bool    AutomaticJ(uchar  ibCan)
 {
-  if (ReadKoeffDeviceB_Special() == 0) return(0);
+  if (ReadKoeffDeviceB_Special(ibCan) == 0) return(0);
   mpdbLevel[ibDig] = dbKpulse / 1000;
 
 

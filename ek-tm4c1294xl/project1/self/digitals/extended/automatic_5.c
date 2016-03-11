@@ -32,7 +32,7 @@ bool    ReadCntDayTariff(uchar  ibCan, uchar  bTrf)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return ReadCntDayTariffB(bTrf);
+    case 2:  return ReadCntDayTariffB(ibCan, bTrf);
 #endif
 
 #ifndef SKIP_C

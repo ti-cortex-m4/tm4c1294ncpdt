@@ -51,10 +51,10 @@ static bool QueryCntMonTariffB_Full(uchar  ibMon, uchar  bTrf) // на начало мес€
 }
 
 
-status ReadCntMonCanTariffB(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
+status ReadCntMonCanTariffB(uchar  ibCan, uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 {
   Clear();
-  if (ReadKoeffDeviceB() == 0) return ST_BADDIGITAL;
+  if (ReadKoeffDeviceB(ibCan) == 0) return ST_BADDIGITAL;
 
   double dbK = dbKtrans/dbKpulse;
 

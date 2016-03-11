@@ -43,7 +43,7 @@ bool LoadExt4TValues(uchar  ibMon)
 
 
 
-void    InitExtended4T(void) 
+void    InitExtended4T(void)
 {
   LoadCacheBool(&chExt4TFlag, false);
   LoadCacheChar(&chExt4TMonths, 1, 12, 4);
@@ -51,7 +51,7 @@ void    InitExtended4T(void)
 
 
 void    ResetExtended4T(bool  fFull)
-{ 
+{
   if (fFull)
   {
     fExt4TFlag = false;
@@ -73,8 +73,8 @@ void    ResetExtended4T(bool  fFull)
 
 
 
-void    ResetExtended4T_Full(void) 
-{ 
+void    ResetExtended4T_Full(void)
+{
   memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
 
   uchar m;
@@ -86,7 +86,7 @@ void    ResetExtended4T_Full(void)
 
 
 void    ResetExtended4T_Custom(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin, uchar  ibMonMax)
-{ 
+{
   uchar m;
   for (m=ibMonMin; m<=ibMonMax; m++)
   {
@@ -104,7 +104,7 @@ void    ResetExtended4T_Custom(uchar  ibCanMin, uchar  ibCanMax, uchar  ibMonMin
 
 
 
-void    NextMonExtended4T(void) 
+void    NextMonExtended4T(void)
 {
   memset(&mpCntMonCan4T, 0, sizeof(mpCntMonCan4T));
   SaveExt4TValues(ibHardMon);
@@ -114,12 +114,12 @@ void    NextMonExtended4T(void)
 
 static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
 {
-  memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));  
+  memset(&mpboChannelsA, 0, sizeof(mpboChannelsA));
 
-  status bStatus = ReadCntMonCanTariff(ibMon, ibDig, ibTrf);
+  status bStatus = ReadCntMonCanTariff(ibDig, ibMon, ibTrf);
 
-  if ((bStatus == ST_BADDIGITAL) || (bStatus == ST_NOTSUPPORTED) || (bStatus == ST_NOTPRESENTED)) 
-  { 
+  if ((bStatus == ST_BADDIGITAL) || (bStatus == ST_NOTSUPPORTED) || (bStatus == ST_NOTPRESENTED))
+  {
     LoadCurrDigital(ibDig);
 
     uchar c;
@@ -142,7 +142,7 @@ static bool MakeDevices(uchar  ibMon, uchar  ibTrf)
     return false;
   }
   else
-  { 
+  {
     LoadCurrDigital(ibDig);
 
     uchar c;
@@ -174,7 +174,7 @@ void    MakeExtended4T(void)
 {
   if ((fExt4TFlag == true) && (mpfExt4EnblCan[ibDig] == true))
   {
-    ShowHi(szExtended4T); 
+    ShowHi(szExtended4T);
     Clear(); sprintf(szLo+3,"глубина: %u", bExt4TMonths);
     DelayInf();
 

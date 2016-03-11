@@ -12,17 +12,17 @@ void    SetAllFactors(double  dbPulse, double  dbTrans);
 void    SetupFactors(factors  fc);
 
 bool    ReadKoeffDeviceA(void);
-bool    ReadKoeffDeviceB(void);
-bool    ReadKoeffDeviceB_Special(void);
+bool    ReadKoeffDeviceB(uchar  ibCan);
+bool    ReadKoeffDeviceB_Special(uchar  ibCan);
 bool    ReadKoeffDeviceC(void);
 bool    ReadKoeffDeviceP(void);
 
 bool    OpenDeviceP(void);
 
 bool    AutomaticA(void);
-bool    AutomaticB(void);
+bool    AutomaticB(uchar  ibCan);
 bool    AutomaticC(void);
-bool    AutomaticJ(void);
+bool    AutomaticJ(uchar  ibCan);
 bool    AutomaticK(void);
 bool    AutomaticP(void);
 bool    AutomaticS(void);

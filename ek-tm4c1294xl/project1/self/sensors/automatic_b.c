@@ -45,11 +45,10 @@ uchar   i;
 
 
 
-bool    QueryOpenB_Full(uchar  bPercent)
+bool    QueryOpenB_Full(uchar  ibCan, uchar  bPercent)
 {
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
     QueryOpenB();
@@ -58,8 +57,14 @@ uchar   i;
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (r == bMINORREPEATS) return false;
   ShowPercent(bPercent);
+
+  if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
+  {
+    ulong2 dw2 = QuerySerialB_Full();
+    if (dw2.fValid == false) return false;
+  }
 
   return true;
 }
