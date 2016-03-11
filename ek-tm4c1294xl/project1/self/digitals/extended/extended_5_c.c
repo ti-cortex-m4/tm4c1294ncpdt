@@ -10,7 +10,7 @@ EXTENDED_5_C,C
 #include "../../serial/ports_devices.h"
 #include "../../console.h"
 #include "../../sensors/automatic1.h"
-#include "../../sensors/device_c.h"
+#include "../../sensors/sensor3/device_c.h"
 #include "../../energy.h"
 #include "extended_5_c.h"
 

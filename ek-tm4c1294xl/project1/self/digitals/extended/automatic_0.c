@@ -11,7 +11,7 @@ AUTOMATIC_0!C
 #include "../../serial/ports_devices.h"
 #include "../../sensors/device_a.h"
 #include "../../sensors/device_b.h"
-#include "../../sensors/device_c.h"
+#include "../../sensors/sensor3/device_c.h"
 #include "../../sensors/device_k.h"
 #include "../../sensors/device_p.h"
 #include "../../sensors/device_s.h"

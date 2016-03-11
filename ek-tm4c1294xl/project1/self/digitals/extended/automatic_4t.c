@@ -8,7 +8,7 @@ AUTOMATIC_4T,C
 #include "../../digitals/digitals.h"
 #include "../../display/display.h"
 #include "../../serial/ports.h"
-#include "../../sensors/automatic_c.h"
+#include "../../sensors/sensor3/automatic_c.h"
 #include "../../sensors/automatic_k.h"
 #include "../../sensors/automatic_p.h"
 #include "../../sensors/automatic_w.h"
