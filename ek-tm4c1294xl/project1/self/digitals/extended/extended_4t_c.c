@@ -9,10 +9,10 @@ EXTENDED_4T_C!C
 #include "../../console.h"
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
-#include "../../sensors/device_c.h"
+#include "../../sensors/sensor3/device_c.h"
 #include "../../time/timedate.h"
 #include "../../sensors/automatic1.h"
-#include "../../sensors/automatic_c.h"
+#include "../../sensors/sensor3/automatic_c.h"
 #include "extended_4t_c.h"
 
 
