@@ -79,12 +79,12 @@ uchar   i;
 
 #ifndef SKIP_B
 
-double2 ReadCntCurrB(void)
+double2 ReadCntCurrB(uchar  ibCan)
 {
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2Error();
+  if (ReadKoeffDeviceB_Special(ibCan) == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -645,13 +645,13 @@ uchar   i;
 
 #ifndef SKIP_B
 
-time2   ReadTimeCanB(void)
+time2   ReadTimeCanB(uchar  ibCan)
 {
 uchar   i;
 
   Clear();
 
-  if (QueryOpenB_Full(25) == 0) return GetTime2Error();
+  if (QueryOpenB_Full(ibCan, 25) == 0) return GetTime2Error();
 
   time2 ti2 = QueryTimeB_Full(75);
   if (ti2.fValid == false) return GetTime2Error();
@@ -1072,13 +1072,13 @@ ulong   dw;
 
 #ifndef SKIP_B
 
-double2 ReadCntMonCanB(uchar  ibMonth)
+double2 ReadCntMonCanB(uchar  ibCan, uchar  ibMonth)
 {
 uchar   i,j;
 ulong   dw;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2Error();
+  if (ReadKoeffDeviceB_Special(ibCan) == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -1777,7 +1777,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return ReadCntCurrB();
+    case 2:  return ReadCntCurrB(ibCan);
 
     case 12: return GetDouble2(mpdwBase[ibCan] * mpdbValueCntHou[ibCan], true);
 #endif
@@ -1901,7 +1901,7 @@ time2   ReadTimeCan(uchar  ibCan)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return ReadTimeCanB();
+    case 2:  return ReadTimeCanB(ibCan);
 
     case 12: return GetTime2(tiCurr, true);
 #endif
@@ -2028,7 +2028,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return ReadCntMonCanB(ibMon);
+    case 2:  return ReadCntMonCanB(ibCan, ibMon);
 
     case 12: if (LoadCntMon(ibMon) == false)
                return GetDouble2Error();

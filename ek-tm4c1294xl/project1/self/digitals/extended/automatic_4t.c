@@ -40,7 +40,7 @@ bool    SupportedExtended4T(uchar  ibCan)
 }
 
 
-status  ReadCntMonCanTariff(uchar  ibMon, uchar  ibCan, uchar  ibTrf)
+status  ReadCntMonCanTariff(uchar  ibCan, uchar  ibMon, uchar  ibTrf)
 {
   Clear();
 
@@ -49,7 +49,7 @@ status  ReadCntMonCanTariff(uchar  ibMon, uchar  ibCan, uchar  ibTrf)
 
   switch (diCurr.bDevice)
   {
-    case 2:  return ReadCntMonCanTariffB(ibMon, ibTrf);
+    case 2:  return ReadCntMonCanTariffB(ibCan, ibMon, ibTrf);
 
     case 3:  return ReadCntMonCanTariffC(ibMon, ibTrf);
 

@@ -501,7 +501,7 @@ void    RunDevices(void)
       {
         if (MakeExtended0() == 0) { MakePause(DEV_MODEM_STOP); break; }
         MakeExtended1();
-        MakeExtended3();
+        MakeExtended3(ibDig);
         MakeExtended4();
         MakeExtended5();
         MakeExtended4T();

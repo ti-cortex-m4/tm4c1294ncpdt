@@ -40,7 +40,7 @@ static bool QueryEngTariffB_Full(uchar  bTime, uchar  bTrf)
     DelayOff();
     QueryEngTariffB(bTime,bTrf);
 
-    if (Input() == SER_GOODCHECK) break;  
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
@@ -51,12 +51,12 @@ static bool QueryEngTariffB_Full(uchar  bTime, uchar  bTrf)
 }
 
 
-bool    ReadCntDayTariffB(uchar  bTrf)
-{ 
+bool    ReadCntDayTariffB(uchar  ibCan, uchar  bTrf)
+{
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return false;
+  if (ReadKoeffDeviceB_Special(ibCan) == 0) return false;
 
   double dbK = dbKtrans/dbKpulse;
 
