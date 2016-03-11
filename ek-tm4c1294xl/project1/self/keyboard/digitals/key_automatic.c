@@ -93,7 +93,7 @@ uchar   i;
 #endif
 
 #ifndef SKIP_C
-          case 3:  if (AutomaticC() != 1) bRes = 0xEE; break;
+          case 3:  if (AutomaticC(i) != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_D

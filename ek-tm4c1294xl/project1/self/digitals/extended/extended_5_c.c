@@ -22,7 +22,7 @@ static void QueryEngDayTariffC(uchar  bTrf)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(2);
 
@@ -38,7 +38,7 @@ static void QueryEngAbsTariffC(uchar  bTrf)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(1);
 
@@ -59,7 +59,7 @@ uchar   i;
     DelayOff();
     QueryEngDayTariffC(bTrf);
 
-    if (RevInput() == SER_GOODCHECK) break;  
+    if (RevInput() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
@@ -78,7 +78,7 @@ static bool QueryEngAbsTariffC_Full(uchar  bTrf)
     DelayOff();
     QueryEngAbsTariffC(bTrf);
 
-    if (RevInput() == SER_GOODCHECK) break;  
+    if (RevInput() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
@@ -89,12 +89,12 @@ static bool QueryEngAbsTariffC_Full(uchar  bTrf)
 }
 
 
-bool    ReadCntDayTariffC(uchar  bTrf)
-{ 
+bool    ReadCntDayTariffC(uchar  ibCan, uchar  bTrf)
+{
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceC() == 0) return false;
+  if (ReadKoeffDeviceC(ibCan) == 0) return false;
 
   double dbK = dbKtrans/dbKpulse;
 

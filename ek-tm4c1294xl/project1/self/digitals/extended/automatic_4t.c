@@ -51,7 +51,7 @@ status  ReadCntMonCanTariff(uchar  ibCan, uchar  ibMon, uchar  ibTrf)
   {
     case 2:  return ReadCntMonCanTariffB(ibCan, ibMon, ibTrf);
 
-    case 3:  return ReadCntMonCanTariffC(ibMon, ibTrf);
+    case 3:  return ReadCntMonCanTariffC(ibCan, ibMon, ibTrf);
 
     case 13: return ReadCntMonCanTariffK(ibMon, ibTrf);
 
