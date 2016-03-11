@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE_C!C
-              
- 
+
+
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
@@ -57,7 +57,7 @@ void    QueryOpenC(void)
 { /*
   InitPush(0);
 
-  PushChar(diCurr.bAddress);       
+  PushChar(diCurr.bAddress);
   PushChar(31);
   PushChar(0);
   PushChar(0);
@@ -75,7 +75,7 @@ void    QueryOpenC(void)
   */
   InitPush(0);
 
-  PushChar(diCurr.bAddress);       
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(32);
 
@@ -88,12 +88,35 @@ void    QueryOpenC(void)
 
 
 
+void    QuerySerialC(void)
+{
+  InitPush(0);
+
+  PushChar(diCurr.bAddress);
+  PushChar(3);
+  PushChar(18);
+
+  PushChar(0);
+  PushChar(0);
+  PushChar(0);
+
+  RevQueryIO(4+10+2, 3+3+2);
+}
+
+
+ulong   ReadSerialC(void)
+{
+  return 1;
+}
+
+
+
 // посылка запроса на чтение логического номера
 void    QueryIdC(void)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);       
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(21);
 
@@ -125,7 +148,7 @@ void    QueryTimeC(void)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);       
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(32);
 
@@ -160,7 +183,7 @@ void    QueryControlC(void)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);       
+  PushChar(diCurr.bAddress);
   PushChar(16);
   PushChar(32);
   PushChar(0);
@@ -195,7 +218,7 @@ void    QueryVersionC(void)
 void    ReadVersionC(void)
 {
   InitPop(4);
-  
+
   Clear();
   sprintf(szLo+2, "версия %c%c%c%c", PopChar(), PopChar(), PopChar(), PopChar());
 }
@@ -206,7 +229,7 @@ void    QueryEnergyAbsC(void)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(1);
 
@@ -223,7 +246,7 @@ void    QueryEnergyMonC(uchar  ibMonth)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(3);
 
@@ -240,7 +263,7 @@ void    QueryEnergyDayC(uchar  ibDay)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(2);
 
@@ -279,7 +302,7 @@ void    InitHeaderC_1(void)
 
   if (!UseBounds())
     wBaseCurr = 0;
-  else 
+  else
   {
     wBaseCurr = mpcwStartRelCan[ibDig];
     sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
@@ -296,7 +319,7 @@ uchar i;
 
   if (!UseBounds())
     wBaseCurr = 0;
-  else 
+  else
   {
     wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
     sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
@@ -347,7 +370,7 @@ void    QueryHeaderC_6(void)
 
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
+  PushChar(diCurr.bAddress);
   PushChar(3);
   PushChar(40);
 
@@ -366,12 +389,12 @@ bool    ReadHeaderC(uchar  ibBlock)
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
 
-  ShowProgressDigHou();      
+  ShowProgressDigHou();
 
   InitPop(4+ibBlock*8);
 
   uchar i;
-  for (i=0; i<4; i++)        
+  for (i=0; i<4; i++)
   {
     uint w = PopChar();
     w += PopChar()*0x100;
@@ -380,7 +403,7 @@ bool    ReadHeaderC(uchar  ibBlock)
   }
 
   if (IsDefect(ibDig)) MakeSpecial(tiDig);
-  return(MakeStopHou(0));  
+  return(MakeStopHou(0));
 }
 
 
@@ -401,10 +424,10 @@ uchar i;
     dw -= (wBaseCurr + i);
     tiDig = HouIndexToDate(dw);
 
-    if (dw < dwValueC)     
+    if (dw < dwValueC)
       if (ReadHeaderC(5-i) == 0) return(0);
   }
-  
+
   wBaseCurr += 6;
   if (wBaseCurr > wHOURS) return(0);
 

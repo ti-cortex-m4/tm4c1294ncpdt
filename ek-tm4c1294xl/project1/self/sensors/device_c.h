@@ -1,11 +1,14 @@
 /*------------------------------------------------------------------------------
 DEVICE_C!H
-              
- 
+
+
 ------------------------------------------------------------------------------*/
 
 bool    ReadResultC(void);
 void    QueryOpenC(void);
+
+void    QuerySerialC(void);
+ulong   ReadSerialC(void);
 
 void    QueryIdC(void);
 bool    ReadIdC(void);
