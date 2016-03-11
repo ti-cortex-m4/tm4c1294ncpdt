@@ -109,10 +109,8 @@ static uchar c;
 
   else if (bKey == bKEY_MINUS)
   {
-    if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
+    if (enKeyboard == KBD_POSTENTER)
     {
-      enKeyboard = KBD_POSTENTER;
-
       mdwSerialValues[c] = 0;
       SaveCache(&chSerialValues);
 
