@@ -4,7 +4,7 @@ DEVICE_P!H
 
 ------------------------------------------------------------------------------*/
 
-#include "../memory/mem_device_p.h"
+#include "../../memory/mem_device_p.h"
 
 
 

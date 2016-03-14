@@ -19,7 +19,7 @@ PROFILE_RUN!C
 #include "../../serial/dtr.h"
 #include "../../sensors/device_k.h"
 #include "../../sensors/device_u.h"
-#include "../../sensors/device_p.h"
+#include "../../sensors/sensor21/device_p.h"
 #include "../../sensors/device_q.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_status.h"

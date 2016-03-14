@@ -13,7 +13,7 @@ SERIALS_READ.C
 #include "../sensors/automatic_b.h"
 #include "../sensors/sensor3/device_c.h"
 #include "../sensors/sensor3/automatic_c.h"
-#include "../sensors/automatic_p.h"
+#include "../sensors/sensor21/automatic_p.h"
 #include "../time/delay.h"
 #include "../display/display.h"
 #include "../keyboard/keyboard.h"
