@@ -74,7 +74,7 @@ bool    OpenOpenP_Full(void)
 }
 
 
-bool    OpenDeviceP2(uchar  c)
+bool    QueryOpenSerialP_Full(uchar  c)
 {
   if (OpenOpenP_Full() == 0) return false;
 
@@ -489,7 +489,7 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
 
 
 
-ulong2  QuerySerialP_Full(uchar  ibDig)
+ulong2  QuerySerialP_Full(uchar  c)
 {
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
@@ -504,7 +504,7 @@ ulong2  QuerySerialP_Full(uchar  ibDig)
   if (r == bMINORREPEATS) return GetLong2Error();
 
   ulong dwSerial = ReadSerialP();
-  ProcessSerials(ibDig, dwSerial);
+  ProcessSerials(c, dwSerial);
 
   return GetLong2(dwSerial, true);
 }
