@@ -18,7 +18,7 @@ CURRENT_RUN!C
 #include "../../serial/flow.h"
 #include "../../realtime/realtime.h"
 #include "../../sensors/device_k.h"
-#include "../../sensors/device_p.h"
+#include "../../sensors/sensor21/device_p.h"
 #include "../../sensors/device_q.h"
 #include "../../sensors/device_u.h"
 #include "../../sensors/device_w.h"

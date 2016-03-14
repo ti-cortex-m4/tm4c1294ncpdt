@@ -13,7 +13,7 @@ EXTENDED_4T,C
 #include "../../digitals/digitals_display.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../devices/devices.h"
-#include "../../sensors/automatic_p.h"
+#include "../../sensors/sensor21/automatic_p.h"
 #include "../../time/rtc.h"
 #include "../../time/timedate.h"
 #include "automatic_4t.h"

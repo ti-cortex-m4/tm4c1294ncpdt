@@ -10,7 +10,7 @@ AUTOMATIC_4T,C
 #include "../../serial/ports.h"
 #include "../../sensors/sensor3/automatic_c.h"
 #include "../../sensors/automatic_k.h"
-#include "../../sensors/automatic_p.h"
+#include "../../sensors/sensor21/automatic_p.h"
 #include "../../sensors/automatic_w.h"
 #include "extended_4t_b.h"
 #include "extended_4t_c.h"
