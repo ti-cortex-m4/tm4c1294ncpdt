@@ -22,6 +22,6 @@ bool    AutomaticB(uchar  ibCan);
 bool    AutomaticC(uchar  ibCan);
 bool    AutomaticJ(uchar  ibCan);
 bool    AutomaticK(void);
-bool    AutomaticP(void);
+bool    AutomaticP(uchar  c);
 bool    AutomaticS(void);
 bool    AutomaticV(void);

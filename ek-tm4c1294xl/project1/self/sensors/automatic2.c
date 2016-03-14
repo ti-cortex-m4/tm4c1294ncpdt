@@ -578,10 +578,10 @@ uchar   i,j;
 
 #ifndef SKIP_P
 
-double2 ReadCntCurrP(void)
+double2 ReadCntCurrP(uchar  ibCan)
 {
   Clear();
-  if (OpenOpenP_Full() == 0) return GetDouble2Error();
+  if (QueryOpenSerialP_Full(ibCan) == 0) return GetDouble2Error();
 
 
   if (ReadKoeffDeviceP() == 0) return GetDouble2Error();
@@ -967,10 +967,10 @@ uchar   i;
 
 #ifndef SKIP_P
 
-time2   ReadTimeCanP(void)
+time2   ReadTimeCanP(uchar  ibCan)
 {
   Clear();
-  if (OpenOpenP_Full() == 0) return GetTime2Error();
+  if (QueryOpenSerialP_Full(ibCan) == 0) return GetTime2Error();
 
 
   uchar i;
@@ -1846,7 +1846,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return ReadCntCurrP();
+    case 21: return ReadCntCurrP(ibCan);
 #endif
 
 #ifndef SKIP_Q
@@ -1967,7 +1967,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return ReadTimeCanP();
+    case 21: return ReadTimeCanP(ibCan);
 #endif
 
 #ifndef SKIP_Q
@@ -2103,7 +2103,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return ReadCntMonCanP(ibMon);
+    case 21: return ReadCntMonCanP(ibCan, ibMon);
 #endif
 
 #ifndef SKIP_Q

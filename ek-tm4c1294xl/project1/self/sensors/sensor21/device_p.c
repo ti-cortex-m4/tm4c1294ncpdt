@@ -191,16 +191,19 @@ ulong   ReadSerialP(void)
   uchar i;
   for (i=0; i<16; i++)
   {
-    uchar a = PopChar();
-    if ((a < '0') || (a > '9')) break;
+    uchar b1 = PopChar();
+    if ((b1 < '0') || (b1 > '9'))
+      break;
 
-    uchar b = PopChar();
-    if ((b < '0') || (b > '9')) break;
+    uchar b2 = PopChar();
+    if ((b2 < '0') || (b2 > '9'))
+      break;
 
-    uchar c = a*10 + b;
-    if ((c < '0') || (c > '9')) break;
+    uchar b = (b1-'0')*0x10 + (b2-'0');
+    if ((b < '0') || (b > '9'))
+      break;
 
-    dw = dw*10 + (c - '0');
+    dw = dw*10 + (b-'0');
   }
 
   return dw;

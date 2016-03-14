@@ -74,13 +74,13 @@ bool    OpenOpenP_Full(void)
 }
 
 
-bool    QueryOpenSerialP_Full(uchar  c)
+bool    QueryOpenSerialP_Full(uchar  ibCan)
 {
   if (OpenOpenP_Full() == 0) return false;
 
-  if ((fSerialsManual == false) && (mfSerialFlags[c] == false))
+  if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
   {
-    ulong2 dw2 = QuerySerialP_Full(c);
+    ulong2 dw2 = QuerySerialP_Full(ibCan);
     Clear();
     if (dw2.fValid == false) return false;
   }
@@ -269,10 +269,10 @@ uint    PopChar2ElsHex(void)
 }
 
 
-double2 ReadCntMonCanP(uchar  ibMonth)
+double2 ReadCntMonCanP(uchar  ibCan, uchar  ibMonth)
 {
   Clear();
-  if (OpenOpenP_Full() == 0) return GetDouble2Error();
+  if (QueryOpenSerialP_Full(ibCan) == 0) return GetDouble2Error();
 
 
   time2 ti2 = QueryTimeP_Full();
@@ -489,7 +489,7 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
 
 
 
-ulong2  QuerySerialP_Full(uchar  c)
+ulong2  QuerySerialP_Full(uchar  ibCan)
 {
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)
@@ -504,7 +504,7 @@ ulong2  QuerySerialP_Full(uchar  c)
   if (r == bMINORREPEATS) return GetLong2Error();
 
   ulong dwSerial = ReadSerialP();
-  ProcessSerials(c, dwSerial);
+  ProcessSerials(ibCan, dwSerial);
 
   return GetLong2(dwSerial, true);
 }
