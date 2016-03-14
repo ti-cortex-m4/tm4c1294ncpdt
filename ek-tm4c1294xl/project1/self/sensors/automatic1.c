@@ -1176,10 +1176,10 @@ uchar   i;
 
 #ifndef SKIP_P
 
-bool    AutomaticP(void)
+bool    AutomaticP(uchar  ibCan)
 {
   Clear();
-  if (OpenOpenP_Full() == 0) return(0);
+  if (QueryOpenSerialP_Full(ibCan) == 0) return(0);
 
 
   uchar i;

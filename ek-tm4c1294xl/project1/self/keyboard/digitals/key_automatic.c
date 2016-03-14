@@ -144,7 +144,7 @@ uchar   i;
 #endif
 
 #ifndef SKIP_P
-          case 21: if (AutomaticP() != 1) bRes = 0xEE; break;
+          case 21: if (AutomaticP(i) != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_Q
