@@ -581,7 +581,7 @@ uchar   i,j;
 double2 ReadCntCurrP(void)
 {
   Clear();
-  if (OpenDeviceP() == 0) return GetDouble2Error();
+  if (OpenOpenP_Full() == 0) return GetDouble2Error();
 
 
   if (ReadKoeffDeviceP() == 0) return GetDouble2Error();
@@ -970,7 +970,7 @@ uchar   i;
 time2   ReadTimeCanP(void)
 {
   Clear();
-  if (OpenDeviceP() == 0) return GetTime2Error();
+  if (OpenOpenP_Full() == 0) return GetTime2Error();
 
 
   uchar i;

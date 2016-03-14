@@ -29,6 +29,67 @@ uchar                   ibMonthP;
 
 #ifndef SKIP_P
 
+bool    OpenOpenP_Full(void)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    QueryOpenP();
+
+    if (ElsInput(1) == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (r == bMINORREPEATS) return(0);
+  ShowPercent(20);
+
+
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QueryModeP();
+
+    if (ElsInput(0) == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (r == bMINORREPEATS) return(0);
+  ShowPercent(30);
+
+
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QueryPasswordP();
+
+    if (ElsInput(2) == SER_GOODCHECK) break;
+    if (fKey == true) return(0);
+  }
+
+  if (r == bMINORREPEATS) return(0);
+  ShowPercent(40);
+
+
+  return(1);
+}
+
+
+bool    OpenDeviceP2(uchar  c)
+{
+  if (OpenOpenP_Full() == 0) return false;
+
+  if ((fSerialsManual == false) && (mfSerialFlags[c] == false))
+  {
+    ulong2 dw2 = QuerySerialP_Full(c);
+    Clear();
+    if (dw2.fValid == false) return false;
+  }
+
+  return true;
+}
+
+
+
 void    QueryHistoryP1(uchar  ibRecord)
 {
   InitPush(0);
@@ -211,7 +272,7 @@ uint    PopChar2ElsHex(void)
 double2 ReadCntMonCanP(uchar  ibMonth)
 {
   Clear();
-  if (OpenDeviceP() == 0) return GetDouble2Error();
+  if (OpenOpenP_Full() == 0) return GetDouble2Error();
 
 
   time2 ti2 = QueryTimeP_Full();
@@ -367,7 +428,7 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
   else
   {
     Clear();
-    if (OpenDeviceP() == 0) return(ST_BADDIGITAL);
+    if (OpenOpenP_Full() == 0) return(ST_BADDIGITAL);
 
     time2 ti2 = QueryTimeP_Full();
     if (ti2.fValid == false) return(ST_BADDIGITAL);

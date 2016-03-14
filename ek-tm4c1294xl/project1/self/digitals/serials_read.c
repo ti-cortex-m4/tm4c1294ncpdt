@@ -63,7 +63,7 @@ ulong2  ReadSerialCanC(uchar  ibCan)
 
 ulong2  ReadSerialCanP(uchar  ibCan)
 {
-  if (OpenDeviceP() == 0) return GetLong2Error();
+  if (OpenOpenP_Full() == 0) return GetLong2Error();
 
   return QuerySerialP_Full(ibCan);
 }

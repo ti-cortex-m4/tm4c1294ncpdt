@@ -8,6 +8,10 @@ extern  uchar                   ibMonthP;
 
 
 
+
+bool    OpenOpenP_Full(void);
+bool    OpenDeviceP2(uchar  c);
+
 bool    QueryEnergyP_Full(uchar  bPart);
 
 double2 ReadCntMonCanP(uchar  ibMonth);
