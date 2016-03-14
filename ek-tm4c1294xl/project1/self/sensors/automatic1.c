@@ -752,73 +752,6 @@ uchar   i;
 
 
 
-#ifndef SKIP_P
-
-// открытие канала для счётчиков Elster A1140
-bool    OpenDeviceP(void)
-{
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    QueryOpenP();
-
-    if (ElsInput(1) == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(20);
-
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryModeP();
-
-    if (ElsInput(0) == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(30);
-
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryPasswordP();
-
-    if (ElsInput(2) == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(40);
-
-
-  return(1);
-}
-
-
-bool    OpenDeviceP2(uchar  ibCan)
-{
-  if (OpenDeviceP() == 0) return false;
-
-  if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
-  {
-    ulong2 dw2 = QuerySerialP_Full(ibCan);
-    Clear();
-    if (dw2.fValid == false) return false;
-  }
-
-  return true;
-}
-
-#endif
-
-
-
 #ifndef SKIP_D
 
 // задание параметров для счётчиков ABB Альфа
@@ -1246,7 +1179,7 @@ uchar   i;
 bool    AutomaticP(void)
 {
   Clear();
-  if (OpenDeviceP() == 0) return(0);
+  if (OpenOpenP_Full() == 0) return(0);
 
 
   uchar i;

@@ -17,9 +17,6 @@ bool    ReadKoeffDeviceB_Special(uchar  ibCan);
 bool    ReadKoeffDeviceC(uchar  ibCan);
 bool    ReadKoeffDeviceP(void);
 
-bool    OpenDeviceP(void);
-bool    OpenDeviceP2(uchar  ibCan);
-
 bool    AutomaticA(void);
 bool    AutomaticB(uchar  ibCan);
 bool    AutomaticC(uchar  ibCan);
