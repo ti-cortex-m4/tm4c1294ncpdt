@@ -16,6 +16,7 @@ AUTOMATIC_P!C
 #include "../serial/ports_devices.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals.h"
+#include "../digitals/serials.h"
 #include "automatic1.h"
 #include "device_p.h"
 #include "automatic_p.h"
@@ -109,7 +110,7 @@ time2   QueryTimeP_Full(void)
     DelayOff();
     QueryTimeP();
 
-    if (ElsInput(0) == SER_GOODCHECK) break;  
+    if (ElsInput(0) == SER_GOODCHECK) break;
     if (fKey == true) return GetTime2Error();
   }
 
@@ -243,12 +244,12 @@ double2 ReadCntMonCanP(uchar  ibMonth)
     }
 
     uchar i;
-    for (i=0; i<15; i++) 
-    { 
+    for (i=0; i<15; i++)
+    {
       if (QueryHistoryP1_Full(i) == 0) return GetDouble2Error();
 
       InitPop(2+8);
-      
+
       uchar j = PopChar2ElsHex();
 
       combo32 co;
@@ -268,14 +269,14 @@ double2 ReadCntMonCanP(uchar  ibMonth)
           ReadEngAbsP(0);
           if (QueryHistoryP2_Full(i*8+1+1) == 0) return GetDouble2Error();
           ReadEngAbsP(1);
-       
+
           double dbTrans = mpdbTransCnt[ibDig];
-          for (i=0; i<16; i++) 
+          for (i=0; i<16; i++)
           {
             mpdbChannelsC[i] *= dbTrans;
           }
 
-          for (i=0; i<4; i++) 
+          for (i=0; i<4; i++)
           {
             if (mpbMappingEls[i] >= 16)
               mpdbChannelsEls[i] = 0;
@@ -283,7 +284,7 @@ double2 ReadCntMonCanP(uchar  ibMonth)
               mpdbChannelsEls[i] = mpdbChannelsC[mpbMappingEls[i]];
           }
 
-          for (i=0; i<4; i++) 
+          for (i=0; i<4; i++)
           {
             mpdbChannelsC[i] = mpdbChannelsEls[i];
             mpboChannelsA[i] = true;
@@ -295,11 +296,11 @@ double2 ReadCntMonCanP(uchar  ibMonth)
         }
       }
     }
-    
+
     QueryCloseP();
 
     sprintf(szLo, " мес€ц %02u.%02u ?  ",tiDigPrev.bMonth,tiDigPrev.bYear);
-    Delay(1000); 
+    Delay(1000);
     return GetDouble2Error();
   }
 }
@@ -379,12 +380,12 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
     tiDig.bDay  = 1;
 
     uchar i;
-    for (i=0; i<15; i++) 
+    for (i=0; i<15; i++)
     {
       if (QueryHistoryP1_Full(i) == 0) return(ST_BADDIGITAL);
 
       InitPop(2+8);
-      
+
       uchar j = PopChar2ElsHex();
 
       combo32 co;
@@ -395,16 +396,16 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
 
       ulong dw = co.dwBuff - (ulong)(23*365 + 7*366)*24*60*60;
       ti = SecIndexToDate(dw);
- 
+
       if ((j == 1) && (co.dwBuff != 0))
       {
         if ((tiDig.bMonth == ti.bMonth) && (tiDig.bYear == ti.bYear))
-        { 
+        {
           if (QueryHistoryP3_Full(i*2+1) == 0) return(ST_BADDIGITAL);
           ReadEngAbsP_RD();
 
           double dbTrans = mpdbTransCnt[ibDig];
-          for (i=0; i<22; i++) 
+          for (i=0; i<22; i++)
           {
             mpdbChannelsC[i] *= dbTrans;
           }
@@ -416,7 +417,7 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
         }
       }
     }
-    
+
     QueryCloseP();
 
     sprintf(szLo, " мес€ц %02u.%02u ?  ",tiDig.bMonth,tiDig.bYear);
@@ -425,5 +426,26 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
   }
 }
 
+
+
+ulong2  QuerySerialP_Full(uchar  ibDig)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QuerySerialP();
+
+    if (ElsInput(0) == SER_GOODCHECK) break;
+    if (fKey == true) return GetLong2Error();
+  }
+
+  if (r == bMINORREPEATS) return GetLong2Error();
+
+  ulong dwSerial = ReadSerialP();
+  ProcessSerials(ibDig, dwSerial);
+
+  return GetLong2(dwSerial, true);
+}
 
 #endif

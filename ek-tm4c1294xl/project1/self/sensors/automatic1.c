@@ -227,7 +227,7 @@ bool    ReadKoeffDeviceC(uchar  ibCan)
 {
   if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
   {
-    ulong2 dw2 = QuerySerialC_Full();
+    ulong2 dw2 = QuerySerialC_Full(ibCan);
     Clear();
     if (dw2.fValid == false) return false;
   }
@@ -798,6 +798,21 @@ uchar   i;
 
 
   return(1);
+}
+
+
+bool    OpenDeviceP2(uchar  ibCan)
+{
+  if (OpenDeviceP() == 0) return false;
+
+  if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
+  {
+    ulong2 dw2 = QuerySerialP_Full(ibCan);
+    Clear();
+    if (dw2.fValid == false) return false;
+  }
+
+  return true;
 }
 
 #endif

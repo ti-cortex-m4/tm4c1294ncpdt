@@ -8,10 +8,12 @@ SERIALS_READ.C
 #include "../digitals/digitals.h"
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
+#include "../sensors/automatic1.h"
 #include "../sensors/device_b.h"
 #include "../sensors/automatic_b.h"
 #include "../sensors/sensor3/device_c.h"
 #include "../sensors/sensor3/automatic_c.h"
+#include "../sensors/automatic_p.h"
 #include "../time/delay.h"
 #include "../display/display.h"
 #include "../keyboard/keyboard.h"
@@ -54,7 +56,16 @@ ulong2  ReadSerialCanC(uchar  ibCan)
   if (r == bMINORREPEATS) return GetLong2Error();
   ShowPercent(25);
 
-  return QuerySerialC_Full();
+  return QuerySerialC_Full(ibCan);
+}
+
+
+
+ulong2  ReadSerialCanP(uchar  ibCan)
+{
+  if (OpenDeviceP() == 0) return GetLong2Error();
+
+  return QuerySerialP_Full(ibCan);
 }
 
 
@@ -75,6 +86,10 @@ ulong2  ReadSerialCan(uchar  ibCan)
 
 #ifndef SKIP_C
     case 3: return ReadSerialCanC(ibCan);
+#endif
+
+#ifndef SKIP_P
+    case 21: return ReadSerialCanP(ibCan);
 #endif
 
     default: return GetLong2Error();

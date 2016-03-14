@@ -129,7 +129,7 @@ time2   QueryTimeC_Full(void)
 
 
 
-ulong2  QuerySerialC_Full(void)
+ulong2  QuerySerialC_Full(uchar  ibDig)
 {
   uchar r;
   for (r=0; r<bMINORREPEATS; r++)

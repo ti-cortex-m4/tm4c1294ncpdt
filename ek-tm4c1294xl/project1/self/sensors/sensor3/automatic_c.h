@@ -9,4 +9,4 @@ bool    QueryEnergyMonC_Full2(uchar  bTime, uchar  bPercent);
 bool    QueryEnergyAbsC_Full2(uchar  bPercent);
 time2   QueryTimeC_Full(void);
 bool    QueryCounterMonTariffC_Full(uchar  ibMonth, uchar  bTariff);
-ulong2  QuerySerialC_Full(void);
+ulong2  QuerySerialC_Full(uchar  ibDig);

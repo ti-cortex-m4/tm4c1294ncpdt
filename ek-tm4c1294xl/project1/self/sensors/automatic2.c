@@ -673,7 +673,7 @@ time2   ReadTimeCanC(uchar  ibCan)
 {
   if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
   {
-    ulong2 dw2 = QuerySerialC_Full();
+    ulong2 dw2 = QuerySerialC_Full(ibCan);
     Clear();
     if (dw2.fValid == false) return GetTime2Error();
   }
