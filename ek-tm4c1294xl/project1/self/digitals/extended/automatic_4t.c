@@ -8,9 +8,9 @@ AUTOMATIC_4T,C
 #include "../../digitals/digitals.h"
 #include "../../display/display.h"
 #include "../../serial/ports.h"
-#include "../../sensors/automatic_c.h"
+#include "../../sensors/sensor3/automatic_c.h"
 #include "../../sensors/automatic_k.h"
-#include "../../sensors/automatic_p.h"
+#include "../../sensors/sensor21/automatic_p.h"
 #include "../../sensors/automatic_w.h"
 #include "extended_4t_b.h"
 #include "extended_4t_c.h"
@@ -40,7 +40,7 @@ bool    SupportedExtended4T(uchar  ibCan)
 }
 
 
-status  ReadCntMonCanTariff(uchar  ibMon, uchar  ibCan, uchar  ibTrf)
+status  ReadCntMonCanTariff(uchar  ibCan, uchar  ibMon, uchar  ibTrf)
 {
   Clear();
 
@@ -49,9 +49,9 @@ status  ReadCntMonCanTariff(uchar  ibMon, uchar  ibCan, uchar  ibTrf)
 
   switch (diCurr.bDevice)
   {
-    case 2:  return ReadCntMonCanTariffB(ibMon, ibTrf);
+    case 2:  return ReadCntMonCanTariffB(ibCan, ibMon, ibTrf);
 
-    case 3:  return ReadCntMonCanTariffC(ibMon, ibTrf);
+    case 3:  return ReadCntMonCanTariffC(ibCan, ibMon, ibTrf);
 
     case 13: return ReadCntMonCanTariffK(ibMon, ibTrf);
 

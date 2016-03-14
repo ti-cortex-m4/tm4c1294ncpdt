@@ -9,7 +9,7 @@ NEXT_SECOND!C
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_profile.h"
-#include "../sensors/device_p.h"
+#include "../sensors/sensor21/device_p.h"
 #include "../digitals/wait_query.h"
 #include "../digitals/profile/profile_run.h"
 #include "../digitals/current/current_run.h"

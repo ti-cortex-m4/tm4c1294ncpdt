@@ -39,10 +39,10 @@ DEVICES.C
 #include "../sensors/device_b.h"
 #include "../sensors/device_b2.h"
 #include "../sensors/device_b12.h"
-#include "../sensors/device_c.h"
+#include "../sensors/sensor3/device_c.h"
 #include "../sensors/device_e.h"
 #include "../sensors/device_k.h"
-#include "../sensors/device_p.h"
+#include "../sensors/sensor21/device_p.h"
 #include "../sensors/device_q.h"
 #include "../sensors/device_s.h"
 #include "../sensors/device_u.h"
@@ -501,7 +501,7 @@ void    RunDevices(void)
       {
         if (MakeExtended0() == 0) { MakePause(DEV_MODEM_STOP); break; }
         MakeExtended1();
-        MakeExtended3();
+        MakeExtended3(ibDig);
         MakeExtended4();
         MakeExtended5();
         MakeExtended4T();
@@ -1073,7 +1073,7 @@ void    RunDevices(void)
       cbRepeat = GetMaxRepeats();
 
       QueryOpenA();
-      SetCurr(DEV_OPENCANAL_A3);             
+      SetCurr(DEV_OPENCANAL_A3);
       break;
 
     case DEV_OPENCANAL_A3:
@@ -1103,19 +1103,19 @@ void    RunDevices(void)
     case DEV_ENERGY_A3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         ReadCurrentA();
-      else 
+      else
       {
         if (cbRepeat == 0)
-          ErrorCurrent(); 
+          ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryEnergyA(0);
           SetCurr(DEV_ENERGY_A3);
         }
-      } 
+      }
       break;
 
 #endif
@@ -1540,7 +1540,7 @@ void    RunDevices(void)
     case DEV_START_B3:
       cbRepeat = GetMaxRepeats();
       QueryOpenB();
-      SetCurr(DEV_OPENCANAL_B3);             
+      SetCurr(DEV_OPENCANAL_B3);
       break;
 
     case DEV_OPENCANAL_B3:
@@ -1570,19 +1570,19 @@ void    RunDevices(void)
     case DEV_ENERGY_B3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         ReadCurrentB();
-      else 
+      else
       {
         if (cbRepeat == 0)
-          ErrorCurrent(); 
+          ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryEnergyB(0);
           SetCurr(DEV_ENERGY_B3);
         }
-      } 
+      }
       break;
 
 #endif
@@ -1592,7 +1592,7 @@ void    RunDevices(void)
     case DEV_START_B312:
       cbRepeat = GetMaxRepeats();
       QueryOpenB();
-      SetCurr(DEV_OPENCANAL_B312);             
+      SetCurr(DEV_OPENCANAL_B312);
       break;
 
     case DEV_OPENCANAL_B312:
@@ -1622,19 +1622,19 @@ void    RunDevices(void)
     case DEV_ENERGY_B312:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         ReadCurrentB12();
-      else 
+      else
       {
         if (cbRepeat == 0)
-          ErrorCurrent(); 
+          ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryEnergyB(0);
           SetCurr(DEV_ENERGY_B312);
         }
-      } 
+      }
       break;
 
 #endif
@@ -2025,7 +2025,7 @@ void    RunDevices(void)
     case DEV_START_C3:
       cbRepeat = GetMaxRepeats();
       QueryOpenC();
-      SetCurr(DEV_OPENCANAL_C3);             
+      SetCurr(DEV_OPENCANAL_C3);
       break;
 
     case DEV_OPENCANAL_C3:
@@ -2048,26 +2048,26 @@ void    RunDevices(void)
 
     case DEV_POSTOPENCANAL_C3:
       cbRepeat = GetMaxRepeats();
-      QueryTimeC();                          
-      SetCurr(DEV_TIME_C3);          
+      QueryTimeC();
+      SetCurr(DEV_TIME_C3);
       break;
 
-    case DEV_TIME_C3:                      
+    case DEV_TIME_C3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTTIME_C3);
-      else                                    
+      else
       {
-        if (cbRepeat == 0) 
-          ErrorCurrent(); 
+        if (cbRepeat == 0)
+          ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryTimeC();
           SetCurr(DEV_TIME_C3);
         }
-      } 
+      }
       break;
 
     case DEV_POSTTIME_C3:
@@ -2081,19 +2081,19 @@ void    RunDevices(void)
     case DEV_ENERGY_C3:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         ReadCurrentC();
-      else 
+      else
       {
         if (cbRepeat == 0)
-          ErrorCurrent(); 
+          ErrorCurrent();
         else
         {
           ErrorLink();
           cbRepeat--;
-          
+
           QueryEnergyAbsC();
           SetCurr(DEV_ENERGY_C3);
         }
-      } 
+      }
       break;
 
 #endif

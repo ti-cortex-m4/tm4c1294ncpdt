@@ -12,7 +12,7 @@ void    InitPushPtr(void);
 void    InitPushUni(void);
 void    InitPushPck(void);
 
-void    Push(void  *pbData, uint  wSize);
+uint    Push(void  *pbData, uint  wSize);
 uchar   PushChar(uchar  b);
 uchar   PushBool(bool  f);
 uchar   PushIntBig(uint  w);

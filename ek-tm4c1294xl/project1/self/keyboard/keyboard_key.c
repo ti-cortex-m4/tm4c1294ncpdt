@@ -30,6 +30,9 @@ KEYBOARD_KEY!C
 #include "digitals/key_addresses.h"
 #include "digitals/key_enbl_keys.h"
 #include "digitals/key_keys.h"
+#include "digitals/key_serials_manual.h"
+#include "digitals/key_serials1.h"
+#include "digitals/key_serials2.h"
 #include "sensors/key_keys_level_b.h"
 #include "digitals/key_search.h"
 #include "digitals/key_automatic.h"
@@ -276,6 +279,9 @@ void    Keyboard_Key(void)
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
+      case bSET_SERIALS_MANUAL: key_SetSerialsManual(); break;
+      case bSET_SERIALS1:       key_SetSerials1();      break;
+      case bSET_SERIALS2:       key_SetSerials2();      break;
 
       case bGET_MODEMS_QUALITY: key_GetModemsQuality(); break;
       case bSET_PHONES:         key_SetPhones();        break;
@@ -490,6 +496,9 @@ void    Keyboard_Key(void)
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
+      case bSET_SERIALS_MANUAL: key_SetSerialsManual(); break;
+      case bSET_SERIALS1:       key_SetSerials1();      break;
+      case bSET_SERIALS2:       key_SetSerials2();      break;
 
       case bGET_MODEMS_QUALITY: key_GetModemsQuality(); break;
       case bSET_PHONES:         key_SetPhones();        break;
@@ -785,6 +794,9 @@ void    Keyboard_Key(void)
       case bSET_ENBL_KEYS:      key_SetEnblKeys();      break;
       case bSET_KEYS:           key_SetKeys();          break;
       case wSET_KEYS_LEVEL_B:   key_SetKeysLevelB();    break;
+      case bSET_SERIALS_MANUAL: key_SetSerialsManual(); break;
+      case bSET_SERIALS1:       key_SetSerials1();      break;
+      case bSET_SERIALS2:       key_SetSerials2();      break;
 
       case bGET_MODEMS_QUALITY: key_GetModemsQuality(); break;
       case bSET_PHONES:         key_SetPhones();        break;

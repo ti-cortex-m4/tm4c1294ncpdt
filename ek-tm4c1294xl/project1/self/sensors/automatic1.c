@@ -13,18 +13,19 @@ AUTOMATIC1!C
 #include "../serial/ports_devices.h"
 #include "../serial/ports.h"
 #include "../devices/devices.h"
+#include "../digitals/serials.h"
 #include "../energy.h"
 #include "device_a.h"
 #include "device_b.h"
-#include "device_c.h"
+#include "sensor3/device_c.h"
 #include "device_k.h"
-#include "device_p.h"
+#include "sensor21/device_p.h"
 #include "device_v.h"
 #include "automatic_a.h"
 #include "automatic_b.h"
-#include "automatic_c.h"
+#include "sensor3/automatic_c.h"
 #include "automatic_k.h"
-#include "automatic_p.h"
+#include "sensor21/automatic_p.h"
 #include "automatic_s.h"
 #include "automatic_v.h"
 #include "automatic1.h"
@@ -107,13 +108,12 @@ uchar   i;
 #ifndef SKIP_B
 
 // чтение коэффициентов для счётчика Меркурий-230
-bool    ReadKoeffDeviceB(void)
+bool    ReadKoeffDeviceB(uchar  ibCan)
 {
-uchar   i;
-
-  if (QueryOpenB_Full(25) == 0) return(0);
+  if (QueryOpenB_Full(ibCan, 25) == 0) return(0);
 
 
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
@@ -183,13 +183,12 @@ uchar   i;
 
 
 // чтение коэффициентов для счётчика Меркурий-230
-bool    ReadKoeffDeviceB_Special(void)
+bool    ReadKoeffDeviceB_Special(uchar  ibCan)
 {
-uchar   i;
-
-  if (QueryOpenB_Full(25) == 0) return(0);
+  if (QueryOpenB_Full(ibCan, 25) == 0) return(0);
 
 
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     InitPush(0);
@@ -224,10 +223,17 @@ uchar   i;
 #ifndef SKIP_C
 
 // чтение коэффициентов для счётчика СС-301
-bool    ReadKoeffDeviceC(void)
+bool    ReadKoeffDeviceC(uchar  ibCan)
 {
-uchar   i;
+  if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
+  {
+    ulong2 dw2 = QuerySerialC_Full(ibCan);
+    Clear();
+    if (dw2.fValid == false) return false;
+  }
 
+
+  uchar i;
   for (i=0; i<bMINORREPEATS; i++)
   {
     DelayOff();
@@ -492,9 +498,9 @@ bool    AutomaticA(void)
 #ifndef SKIP_B
 
 // задание параметров для счётчиков Меркурий-230
-bool    AutomaticB(void)
+bool    AutomaticB(uchar  ibCan)
 {
-  if (ReadKoeffDeviceB() == 0) return(0);
+  if (ReadKoeffDeviceB(ibCan) == 0) return(0);
 
 
   SetAllFactors(dbKpulse,dbKtrans);
@@ -506,9 +512,9 @@ bool    AutomaticB(void)
 
 
 // задание параметров для счётчиков Меркурий-230
-bool    AutomaticJ(void)
+bool    AutomaticJ(uchar  ibCan)
 {
-  if (ReadKoeffDeviceB_Special() == 0) return(0);
+  if (ReadKoeffDeviceB_Special(ibCan) == 0) return(0);
   mpdbLevel[ibDig] = dbKpulse / 1000;
 
 
@@ -526,9 +532,9 @@ bool    AutomaticJ(void)
 #ifndef SKIP_C
 
 // задание параметров для счётчиков СС-301
-bool    AutomaticC(void)
+bool    AutomaticC(uchar  ibCan)
 {
-  if (ReadKoeffDeviceC() == 0) return(0);
+  if (ReadKoeffDeviceC(ibCan) == 0) return(0);
 
 
   SetAllFactors(dbKpulse,dbKtrans);
@@ -737,58 +743,6 @@ uchar   i;
   ShowPercent(100);
 
   ReadQuadrantsD();
-
-
-  return(1);
-}
-
-#endif
-
-
-
-#ifndef SKIP_P
-
-// открытие канала для счётчиков Elster A1140
-bool    OpenDeviceP(void)
-{
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    QueryOpenP();
-
-    if (ElsInput(1) == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(20);
-
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryModeP();
-
-    if (ElsInput(0) == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(30);
-
-
-  for (i=0; i<bMINORREPEATS; i++)
-  {
-    DelayOff();
-    QueryPasswordP();
-
-    if (ElsInput(2) == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (i == bMINORREPEATS) return(0);
-  ShowPercent(40);
 
 
   return(1);
@@ -1222,10 +1176,10 @@ uchar   i;
 
 #ifndef SKIP_P
 
-bool    AutomaticP(void)
+bool    AutomaticP(uchar  ibCan)
 {
   Clear();
-  if (OpenDeviceP() == 0) return(0);
+  if (QueryOpenSerialP_Full(ibCan) == 0) return(0);
 
 
   uchar i;
