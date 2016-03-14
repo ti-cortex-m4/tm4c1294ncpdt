@@ -166,6 +166,48 @@ void    QueryCorrectP(void)
 }
 
 
+
+void    QuerySerialP(void)
+{
+  InitPush(0);
+  PushChar(0x01);
+  PushChar('R');
+  PushChar('1');
+  PushChar(0x02);
+
+  PushString("798001(16)");
+  PushChar(0x03);
+
+  ElsQueryIO(1+47+1, 4+11+1);
+}
+
+
+ulong   ReadSerialP(void)
+{
+  InitPop(2);
+
+  ulong dw = 0;
+
+  uchar i;
+  for (i=0; i<16; i++)
+  {
+    uchar a = PopChar();
+    if ((a < '0') || (a > '9')) break;
+
+    uchar b = PopChar();
+    if ((b < '0') || (b > '9')) break;
+
+    uchar c = a*10 + b;
+    if ((c < '0') || (c > '9')) break;
+
+    dw = dw*10 + (c - '0');
+  }
+
+  return dw;
+}
+
+
+
 void    QueryTimeP(void)
 {
   InitPush(0);
@@ -211,6 +253,7 @@ time    ReadTimeP(void)
 
   return ti;
 }
+
 
 
 void    QueryEngAbsP(uchar  bPart)

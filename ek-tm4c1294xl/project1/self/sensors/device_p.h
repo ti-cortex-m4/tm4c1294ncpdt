@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
 DEVICE_P!H
-              
- 
+
+
 ------------------------------------------------------------------------------*/
 
 #include "../memory/mem_device_p.h"
@@ -15,8 +15,13 @@ uint    PopChar4Els(void);
 void    QueryCloseP(void);
 void    QueryOpenP(void);
 void    QueryCorrectP(void);
+
+void    QuerySerialP(void);
+ulong   ReadSerialP(void);
+
 void    QueryTimeP(void);
 time    ReadTimeP(void);
+
 void    QueryEngAbsP(uchar  bPart);
 void    ReadEngAbsP(uchar  bPart);
 void    ReadEngAbsP_RD(void);
