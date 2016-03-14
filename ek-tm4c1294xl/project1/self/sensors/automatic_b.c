@@ -14,9 +14,10 @@ AUTOMATIC_B!C
 #include "../time/timedate.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_messages.h"
-
+#include "../digitals/serials.h"
 #include "automatic1.h"
 #include "device_b.h"
+#include "automatic_b.h"
 
 
 
@@ -44,21 +45,27 @@ uchar   i;
 
 
 
-bool    QueryOpenB_Full(uchar  bPercent)
+bool    QueryOpenB_Full(uchar  ibCan, uchar  bPercent)
 {
-uchar   i;
-
-  for (i=0; i<bMINORREPEATS; i++)
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
     QueryOpenB();
 
-    if (Input() == SER_GOODCHECK) break;  
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (r == bMINORREPEATS) return false;
   ShowPercent(bPercent);
+
+  if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
+  {
+    ulong2 dw2 = QuerySerialB_Full();
+    Clear();
+    if (dw2.fValid == false) return false;
+  }
 
   return true;
 }
@@ -128,4 +135,26 @@ uchar   i;
 
   ReadEnergyB();
   return true;
+}
+
+
+
+ulong2  QuerySerialB_Full(void)
+{
+  uchar r;
+  for (r=0; r<bMINORREPEATS; r++)
+  {
+    DelayOff();
+    QuerySerialB();
+
+    if (Input() == SER_GOODCHECK) break;
+    if (fKey == true) return GetLong2Error();
+  }
+
+  if (r == bMINORREPEATS) return GetLong2Error();
+
+  ulong dwSerial = ReadSerialB();
+  ProcessSerials(ibDig, dwSerial);
+
+  return GetLong2(dwSerial, true);
 }

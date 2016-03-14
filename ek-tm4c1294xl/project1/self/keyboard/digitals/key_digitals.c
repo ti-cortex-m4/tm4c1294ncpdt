@@ -137,6 +137,8 @@ static uchar AddDigital(uchar  ibCan, digital  *pdi)
   enKeyboard = KBD_POSTENTER;
   ShowHi(szDigitals);
 
+  ClearSerial(ibCan);
+
   ibRecordCan = ibCan;
   AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
   SetDigital(ibCan, pdi);
@@ -160,6 +162,8 @@ static uchar AddAllDigitals(uchar  ibCan, digital  *pdi)
 {
   enKeyboard = KBD_POSTENTER;
   ShowHi(szDigitals);
+
+  ClearSerials(ibCan, mpbMaxLines[ pdi->bDevice ]);
 
   uchar i;
   for (i=0; i<mpbMaxLines[ pdi->bDevice ]; i++)
@@ -204,7 +208,7 @@ static uchar ibCan;
       ShowHi(szDigitals);
 
       Canal();
-    } 
+    }
     else if (enKeyboard == KBD_INPUT1)
     {
       enKeyboard = KBD_POSTENTER;
@@ -276,7 +280,7 @@ static uchar ibCan;
     else if (enKeyboard == KBD_POSTINPUT3)
     {
       if ((diT.ibPhone = GetCharLo(2,3)) < bCANALS)
-      { 
+      {
         if (StreamPortPhoneCan(diT.ibPort,diT.ibPhone,ibCan) == 1)
         {
           enKeyboard = KBD_INPUT4;
@@ -305,7 +309,7 @@ static uchar ibCan;
           SetDigital(ibCan, &diT);
           AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
-          MakeDigitalsMask();  
+          MakeDigitalsMask();
           MakeKeys(ibCan, diT.bDevice);
 
           ShowDigital(ibCan);
@@ -358,12 +362,14 @@ static uchar ibCan;
         diT.bAddress = 0;
         diT.ibLine = 0;
 
+        ClearSerial(ibCan);
+
         ibRecordCan = ibCan;
         AddSysRecordReprogram(EVE_EDIT_DIGITAL1);
         SetDigital(ibCan, &diT);
         AddSysRecordReprogram(EVE_EDIT_DIGITAL2);
 
-        MakeDigitalsMask();  
+        MakeDigitalsMask();
         MakeKeys(ibCan, diT.bDevice);
 
         ShowDigital(ibCan);
@@ -375,7 +381,7 @@ static uchar ibCan;
 
 
   else if (bKey < 10)
-  {        
+  {
     if (enKeyboard == KBD_POSTENTER)
     {
       if ((enGlobal == GLB_PROGRAM) || (enGlobal == GLB_REPROGRAM))
@@ -391,37 +397,37 @@ static uchar ibCan;
       enKeyboard = KBD_POSTINPUT1;
       ShiftLo(10,11);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT2) || (enKeyboard == KBD_POSTINPUT2))
     {
       enKeyboard = KBD_POSTINPUT2;
       ShiftLo(0,0);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT3) || (enKeyboard == KBD_POSTINPUT3))
     {
       enKeyboard = KBD_POSTINPUT3;
       ShiftLo(2,3);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT4) || (enKeyboard == KBD_POSTINPUT4))
     {
       enKeyboard = KBD_POSTINPUT4;
       ShiftLo(5,6);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT5) || (enKeyboard == KBD_POSTINPUT5))
     {
       enKeyboard = KBD_POSTINPUT5;
       ShiftLo(8,10);
     }
-    else 
+    else
     if ((enKeyboard == KBD_INPUT6) || (enKeyboard == KBD_POSTINPUT6))
     {
       enKeyboard = KBD_POSTINPUT6;
       ShiftLo(12,13);
     }
-    else Beep(); 
+    else Beep();
   }
   else Beep();
 }

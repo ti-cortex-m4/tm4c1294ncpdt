@@ -12,6 +12,8 @@ extern  char                    mpszGroupsName[bGROUPS][bNAME_SIZE];
 
 extern  digital                 mpdiDevicesUni[bCANALS];
 
+extern  uchar                   mpibFirstCanalsUni[bCANALS];
+
 extern  uchar                   cbDevicesUni;
 
 extern  uchar                   mpbDelayUni[bPORTS];

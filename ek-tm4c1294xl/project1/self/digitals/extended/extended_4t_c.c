@@ -9,11 +9,10 @@ EXTENDED_4T_C!C
 #include "../../console.h"
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
-#include "../../sensors/device_c.h"
-
+#include "../../sensors/sensor3/device_c.h"
 #include "../../time/timedate.h"
 #include "../../sensors/automatic1.h"
-#include "../../sensors/automatic_c.h"
+#include "../../sensors/sensor3/automatic_c.h"
 #include "extended_4t_c.h"
 
 
@@ -55,10 +54,10 @@ static bool QueryCntMonTariffC_Full(uchar  ibMon, uchar  bTrf) // на начало мес€
 }
 
 
-status ReadCntMonCanTariffC(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
-{ 
+status ReadCntMonCanTariffC(uchar  ibCan, uchar  ibMon, uchar  ibTrf) // на начало мес€ца
+{
   Clear();
-  if (ReadKoeffDeviceC() == 0) return ST_BADDIGITAL;
+  if (ReadKoeffDeviceC(ibCan) == 0) return ST_BADDIGITAL;
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -73,10 +72,10 @@ status ReadCntMonCanTariffC(uchar  ibMon, uchar  ibTrf) // на начало мес€ца
 
 
   uchar i;
-  for (i=0; i<4; i++) 
+  for (i=0; i<4; i++)
   {
   	mpdbChannelsC[i] = mpdwChannelsA[i] * dbK;
-    mpboChannelsA[i] = true;     
+    mpboChannelsA[i] = true;
   }
 
   return ST_OK;

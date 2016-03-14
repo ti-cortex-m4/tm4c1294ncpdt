@@ -176,7 +176,7 @@ time    EventIndexToDate(ulong  dw)
 
 
 
-void    MakeExtended3(void)
+void    MakeExtended3(uchar  ibCan)
 {
   if (fExt3Flag == true)
   {
@@ -186,7 +186,7 @@ void    MakeExtended3(void)
     switch (diCurr.bDevice)
     {
       case 1:  ReadEventsAllA();  break;
-      case 2:  ReadEventsAllB();  break;
+      case 2:  ReadEventsAllB(ibCan);  break;
     }
 
     mpfEventStart[ibDig] = false;

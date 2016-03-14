@@ -26,6 +26,9 @@ bool    ReadResultB(void);
 
 void    QueryOpenB(void);
 
+void    QuerySerialB(void);
+ulong   ReadSerialB(void);
+
 void    QueryVersionB(void);
 void    ReadVersionB(void);
 bool    TestVersionB710(void);

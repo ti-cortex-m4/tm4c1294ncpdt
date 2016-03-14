@@ -4,4 +4,4 @@ EXTENDED_4T_C,H
 
 ------------------------------------------------------------------------------*/
 
-status  ReadCntMonCanTariffC(uchar  ibMon, uchar  ibTrf);
+status  ReadCntMonCanTariffC(uchar  ibCan, uchar  ibMon, uchar  ibTrf);

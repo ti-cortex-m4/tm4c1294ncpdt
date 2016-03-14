@@ -100,6 +100,32 @@ void    QueryOpenB(void)
 
 
 
+void    QuerySerialB(void)
+{
+  InitPush(0);
+
+  PushChar(diCurr.bAddress);
+  PushChar(8);
+  PushChar(0);
+
+  QueryIO(1+4+3+2, 3+0+2);
+}
+
+
+ulong   ReadSerialB(void)
+{
+  InitPop(1);
+
+  ulong dw = PopChar()*1000000;
+  dw += PopChar()*10000;
+  dw += PopChar()*100;
+  dw += PopChar();
+
+  return dw;
+}
+
+
+
 // посылка запроса на чтение версии
 void    QueryVersionB(void)
 {

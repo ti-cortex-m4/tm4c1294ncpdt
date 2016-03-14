@@ -22,7 +22,7 @@ void    ShowEventsB(uchar  ibEvent)
 {
   ShowHi(szClear); ShowHi("Событие:");
   Clear();
-  switch (ibEvent) 
+  switch (ibEvent)
   {
     case 1: sprintf(szHi+9,"прибор"); break;
     case 3: sprintf(szHi+9,"фаза 1"); break;
@@ -37,8 +37,8 @@ void    QueryEventB(uchar  ibEvent, uchar  j)
 {
   InitPush(0);
 
-  PushChar(diCurr.bAddress);           
-  PushChar(4);                       
+  PushChar(diCurr.bAddress);
+  PushChar(4);
 
   PushChar(ibEvent);
   PushChar(j);
@@ -55,7 +55,7 @@ bool    QueryEventB_Full(uchar  ibEvent, uchar  j, uchar  bPercent)
     DelayOff();
     QueryEventB(ibEvent,j);
 
-    if (Input() == SER_GOODCHECK) break;  
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return(0);
   }
 
@@ -93,14 +93,14 @@ uchar   GetEventCodeB(uchar  ibEvent)
 }
 
 
-void    ReadEventsB(uchar  ibEvent)
+void    ReadEventsB(uchar  ibCan, uchar  ibEvent)
 {
 uchar j;
 ulong dwCurr, dwPrev;
- 
+
   ShowEventsB(ibEvent);
 
-  if (QueryOpenB_Full(25) == 0) { bEventCode = 0; AddImpRecord(EVE_EVENTS_BADLINK); return; }
+  if (QueryOpenB_Full(ibCan, 25) == 0) { bEventCode = 0; AddImpRecord(EVE_EVENTS_BADLINK); return; }
 
   uchar i;
   for (i=0; i<10; i++)
@@ -110,7 +110,7 @@ ulong dwCurr, dwPrev;
     InitPop(1);
     mptiEventAB1[i] = ReadEventB();
     mptiEventAB2[i] = ReadEventB();
-  } 
+  }
 
   switch (ibEvent) {
     case 1: dwPrev = mpdwEventDevice[ibDig]; break;
@@ -163,7 +163,7 @@ ulong dwCurr, dwPrev;
       bEventCode = GetEventCodeB(ibEvent) | 0x80; // внимание !
       AddImpRecord(EVE_EVENTS_B);
     }
-  }   
+  }
 
   switch (ibEvent) {
     case 1: mpdwEventDevice[ibDig] = dwCurr; SaveCache(&chEventDevice); break;
@@ -174,18 +174,18 @@ ulong dwCurr, dwPrev;
 }
 
 
-void    ReadEventsAllB(void)
+void    ReadEventsAllB(uchar  ibCan)
 {
   if (mpfEventFlagB[0] == true) {
-    ReadEventsB(1);
+    ReadEventsB(ibCan, 1);
   }
   if (mpfEventFlagB[1] == true) {
-    ReadEventsB(3);
+    ReadEventsB(ibCan, 3);
   }
   if (mpfEventFlagB[2] == true) {
-    ReadEventsB(4);
+    ReadEventsB(ibCan, 4);
   }
   if (mpfEventFlagB[3] == true) {
-    ReadEventsB(5);
+    ReadEventsB(ibCan, 5);
   }
 }

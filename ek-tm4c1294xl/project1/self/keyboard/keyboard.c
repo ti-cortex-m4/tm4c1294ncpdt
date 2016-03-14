@@ -182,6 +182,7 @@ uchar   i;
          (wProgram != wGET_READTRANS)     &&
          (wProgram != wGET_READPULSE)     &&
          (wProgram != bTEST_DIRECT)       &&
+         (wProgram != bSET_SERIALS2)      &&
          (wProgram != bGET_CNTCANYEAR1)   &&
          (wProgram != bGET_CNTCANYEAR10)  &&
 //         (wProgram != bGET_CNTCANYEAR2)   &&

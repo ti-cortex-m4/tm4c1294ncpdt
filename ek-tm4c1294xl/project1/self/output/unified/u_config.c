@@ -20,6 +20,7 @@ U_CONFIG!C
 #include "../../serial/ports.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/devices.h"
+#include "../../digitals/serials.h"
 #include "../../hardware/memory.h"
 #include "../../time/timedate.h"
 #include "../../time/rtc.h"
@@ -27,6 +28,7 @@ U_CONFIG!C
 #include "../../access.h"
 #include "../../groups.h"
 #include "response_uni.h"
+#include "uni_utils.h"
 #include "u_config.h"
 
 
@@ -92,12 +94,19 @@ bool    IsDeviceAdded(uchar  ibDev)
 void    MakeDevicesUni(void)
 {
   memset(&mpdiDevicesUni, 0, sizeof(mpdiDevicesUni));
+  memset(&mpibFirstCanalsUni, 0, sizeof(mpibFirstCanalsUni));
   cbDevicesUni = 0;
 
   uchar c;
   for (c=0; c<bCANALS; c++)
+  {
     if (IsDeviceAdded(c) == 0)
-       mpdiDevicesUni[cbDevicesUni++] = mpdiDigital[c];
+    {
+       mpdiDevicesUni[cbDevicesUni] = mpdiDigital[c];
+       mpibFirstCanalsUni[cbDevicesUni] = c;
+       cbDevicesUni++;
+    }
+  }
 }
 
 
@@ -324,8 +333,6 @@ void    GetSensorsUni(void)
 
 void    GetDigitalsUni(void)
 {
-uchar   i,j;
-
   MakeDevicesUni();
 
   if ((bInBuff6 != 0) || (bInBuff8 != 0))
@@ -337,56 +344,102 @@ uchar   i,j;
   else
   {
     InitPushUni();
+    uint wSize = 0;
 
-    uchar c;
-    for (c=bInBuff7; c<bInBuff7+bInBuff9; c++)
+    uchar d;
+    for (d=bInBuff7; d<bInBuff7+bInBuff9; d++)
     {
-      PushIntBig(c);
+      wSize += PushIntBig(d);
 
-      PushIntBig(mpdiDevicesUni[c-1].bDevice);
+      wSize += PushIntBig(mpdiDevicesUni[d-1].bDevice);
 
-      PushChar(0xFF);
-      PushChar(0xFF);
-      PushChar(0xFF);
-      PushChar(0xFF);
+      uchar c = mpibFirstCanalsUni[d-1];
+      wSize += PushLongBig(mdwSerialValues[c]);
 
-      PushIntBig(mpdiDevicesUni[c-1].bAddress);
-      PushIntBig(GetCanalsCount(c-1));
-      PushIntBig(wHOURS);
-      PushIntBig(GetFirstCanalsNumber(c-1));
+      wSize += PushIntBig(mpdiDevicesUni[d-1].bAddress);
+      wSize += PushIntBig(GetCanalsCount(d-1));
+      wSize += PushIntBig(wHOURS);
+      wSize += PushIntBig(GetFirstCanalsNumber(d-1));
 
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
-      PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
+      wSize += PushChar(0);
 
-      PushChar(0);
+      wSize += PushChar(0);
 
-      i = 0;
+      uchar i = 0;
       if (boEnblCurrent == true) i |= 0x01;
       i |= 0x02;
       if (boEnblProfile == true) i |= 0x04;
       if (boParamsFlag == true) i |= 0x08;
-      PushChar(i);
+      wSize += PushChar(i);
 
-      j = mpdiDevicesUni[c-1].bDevice - 1;
+      uchar j = mpdiDevicesUni[d-1].bDevice - 1;
       for (i=0; i<8; i++)
-        PushChar(mpbDevicesMask[j][i]);
-
-      if (mpdiDevicesUni[c-1].ibPhone == 0)
       {
-        for (i=0; i<32; i++) PushChar(0);
+        wSize += PushChar(mpbDevicesMask[j][i]);
+      }
+
+      if (mpdiDevicesUni[d-1].ibPhone == 0)
+      {
+        for (i=0; i<32; i++)
+        {
+          wSize += PushChar(0);
+        }
       }
       else
       {
-        Push(&mpphPhones[ mpdiDevicesUni[c-1].ibPhone - 1 ].szLine, 13);
-        for (i=0; i<32-13; i++) PushChar(0);
+        wSize += Push(&mpphPhones[ mpdiDevicesUni[d-1].ibPhone - 1 ].szLine, 13);
+        for (i=0; i<32-13; i++)
+        {
+          wSize += PushChar(0);
+        }
       }
     }
+
+    Output2(wSize);
   }
-  Output2((uint)(2+2+4+2+2+2+2+6+2+8+32)*bInBuff9);
+}
+
+
+
+void    GetSerialsUni(void)
+{
+  MakeDevicesUni();
+
+  if ((bInBuff6 != 0) || (bInBuff8 != 0))
+    Result2(bUNI_BADDATA);
+  else if (bInBuff7 > cbDevicesUni)
+    Result2(bUNI_BADDATA);
+  else if (bInBuff7+bInBuff9 > cbDevicesUni + 1)
+    Result2(bUNI_BADDATA);
+  else
+  {
+    InitPushUni();
+    uint wSize = 0;
+
+    uchar d;
+    for (d=bInBuff7; d<bInBuff7+bInBuff9; d++)
+    {
+      uchar c = mpibFirstCanalsUni[d-1];
+      wSize += PushLongBig(mdwSerialValues[c]);
+
+      ulong dw;
+      if (mfSerialFlags[c] == false)
+        dw = 0xFFFFFFFF;
+      else if (mpboEnblCan[c] == false)
+        dw = 0xFFFFFFFE;
+      else
+        dw = DateToLongUni(&mtiSerialTimes[c]);
+
+      wSize += PushLongBig(dw);
+    }
+
+    Output2(wSize);
+  }
 }
 
 

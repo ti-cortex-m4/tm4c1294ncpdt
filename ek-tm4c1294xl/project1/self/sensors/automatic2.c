@@ -20,22 +20,23 @@ AUTOMATIC2!C
 #include "../devices/devices.h"
 #include "../sensors/automatic2.h"
 #include "../digitals/digitals.h"
+#include "../digitals/serials.h"
 #include "../time/delay.h"
 #include "../energy.h"
 #include "../energy2.h"
 #include "automatic1.h"
 #include "device_a.h"
 #include "device_b.h"
-#include "device_c.h"
+#include "sensor3/device_c.h"
 #include "device_k.h"
-#include "device_p.h"
+#include "sensor21/device_p.h"
 #include "device_q.h"
 #include "device_u.h"
 #include "automatic_a.h"
 #include "automatic_b.h"
-#include "automatic_c.h"
+#include "sensor3/automatic_c.h"
 #include "automatic_k.h"
-#include "automatic_p.h"
+#include "sensor21/automatic_p.h"
 #include "automatic_q.h"
 #include "automatic_s.h"
 #include "automatic_u.h"
@@ -79,12 +80,12 @@ uchar   i;
 
 #ifndef SKIP_B
 
-double2 ReadCntCurrB(void)
+double2 ReadCntCurrB(uchar  ibCan)
 {
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2Error();
+  if (ReadKoeffDeviceB_Special(ibCan) == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -107,12 +108,12 @@ uchar   i;
 
 #ifndef SKIP_C
 
-double2 ReadCntCurrC(void)
+double2 ReadCntCurrC(uchar  ibCan)
 {
 uchar   i;
 
   Clear();
-  if (ReadKoeffDeviceC() == 0) return GetDouble2Error();
+  if (ReadKoeffDeviceC(ibCan) == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -577,10 +578,10 @@ uchar   i,j;
 
 #ifndef SKIP_P
 
-double2 ReadCntCurrP(void)
+double2 ReadCntCurrP(uchar  ibCan)
 {
   Clear();
-  if (OpenDeviceP() == 0) return GetDouble2Error();
+  if (QueryOpenSerialP_Full(ibCan) == 0) return GetDouble2Error();
 
 
   if (ReadKoeffDeviceP() == 0) return GetDouble2Error();
@@ -645,13 +646,13 @@ uchar   i;
 
 #ifndef SKIP_B
 
-time2   ReadTimeCanB(void)
+time2   ReadTimeCanB(uchar  ibCan)
 {
 uchar   i;
 
   Clear();
 
-  if (QueryOpenB_Full(25) == 0) return GetTime2Error();
+  if (QueryOpenB_Full(ibCan, 25) == 0) return GetTime2Error();
 
   time2 ti2 = QueryTimeB_Full(75);
   if (ti2.fValid == false) return GetTime2Error();
@@ -668,8 +669,16 @@ uchar   i;
 
 #ifndef SKIP_C
 
-time2   ReadTimeCanC(void)
+time2   ReadTimeCanC(uchar  ibCan)
 {
+  if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
+  {
+    ulong2 dw2 = QuerySerialC_Full(ibCan);
+    Clear();
+    if (dw2.fValid == false) return GetTime2Error();
+  }
+
+
   Clear();
 
   uchar i;
@@ -958,10 +967,10 @@ uchar   i;
 
 #ifndef SKIP_P
 
-time2   ReadTimeCanP(void)
+time2   ReadTimeCanP(uchar  ibCan)
 {
   Clear();
-  if (OpenDeviceP() == 0) return GetTime2Error();
+  if (QueryOpenSerialP_Full(ibCan) == 0) return GetTime2Error();
 
 
   uchar i;
@@ -1072,13 +1081,13 @@ ulong   dw;
 
 #ifndef SKIP_B
 
-double2 ReadCntMonCanB(uchar  ibMonth)
+double2 ReadCntMonCanB(uchar  ibCan, uchar  ibMonth)
 {
 uchar   i,j;
 ulong   dw;
 
   Clear();
-  if (ReadKoeffDeviceB_Special() == 0) return GetDouble2Error();
+  if (ReadKoeffDeviceB_Special(ibCan) == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -1151,12 +1160,12 @@ ulong   dw;
 
 #ifndef SKIP_C
 
-double2 ReadCntMonCanC(uchar  ibMonth)
+double2 ReadCntMonCanC(uchar  ibCan, uchar  ibMonth)
 {
 uchar   i,j;
 
   Clear();
-  if (ReadKoeffDeviceC() == 0) return GetDouble2Error();
+  if (ReadKoeffDeviceC(ibCan) == 0) return GetDouble2Error();
 
   double dbK = dbKtrans/dbKpulse;
 
@@ -1777,13 +1786,13 @@ double2 ReadCntCurrCan(uchar  ibCan)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return ReadCntCurrB();
+    case 2:  return ReadCntCurrB(ibCan);
 
     case 12: return GetDouble2(mpdwBase[ibCan] * mpdbValueCntHou[ibCan], true);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return ReadCntCurrC();
+    case 3:  return ReadCntCurrC(ibCan);
 #endif
 
 #ifndef SKIP_D
@@ -1837,7 +1846,7 @@ double2 ReadCntCurrCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return ReadCntCurrP();
+    case 21: return ReadCntCurrP(ibCan);
 #endif
 
 #ifndef SKIP_Q
@@ -1901,13 +1910,13 @@ time2   ReadTimeCan(uchar  ibCan)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return ReadTimeCanB();
+    case 2:  return ReadTimeCanB(ibCan);
 
     case 12: return GetTime2(tiCurr, true);
 #endif
 
 #ifndef SKIP_C
-    case 3:  return ReadTimeCanC();
+    case 3:  return ReadTimeCanC(ibCan);
 #endif
 
 #ifndef SKIP_D
@@ -1958,7 +1967,7 @@ time2   ReadTimeCan(uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return ReadTimeCanP();
+    case 21: return ReadTimeCanP(ibCan);
 #endif
 
 #ifndef SKIP_Q
@@ -2028,7 +2037,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 
 #ifndef SKIP_B
     case 8:
-    case 2:  return ReadCntMonCanB(ibMon);
+    case 2:  return ReadCntMonCanB(ibCan, ibMon);
 
     case 12: if (LoadCntMon(ibMon) == false)
                return GetDouble2Error();
@@ -2037,7 +2046,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_C
-    case 3:  return ReadCntMonCanC(ibMon);
+    case 3:  return ReadCntMonCanC(ibCan, ibMon);
 #endif
 
 #ifndef SKIP_D
@@ -2094,7 +2103,7 @@ double2 ReadCntMonCan(uchar  ibMon, uchar  ibCan)
 #endif
 
 #ifndef SKIP_P
-    case 21: return ReadCntMonCanP(ibMon);
+    case 21: return ReadCntMonCanP(ibCan, ibMon);
 #endif
 
 #ifndef SKIP_Q

@@ -7,7 +7,7 @@ DEVICES_INPUT,C
 #include "../main.h"
 #include "../memory/mem_digitals.h"
 #include "../digitals/digitals_status.h"
-#include "../sensors/unpack_c.h"
+#include "../sensors/sensor3/unpack_c.h"
 #include "../sensors/unpack_k.h"
 #include "../sensors/unpack_s.h"
 #include "../sensors/unpack_v.h"

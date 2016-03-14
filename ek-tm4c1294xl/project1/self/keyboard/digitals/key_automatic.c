@@ -86,14 +86,14 @@ uchar   i;
 #endif
 
 #ifndef SKIP_B
-          case 12: if (AutomaticJ() != 1) bRes = 0xEE; break;
+          case 12: if (AutomaticJ(i) != 1) bRes = 0xEE; break;
 
           case 8:
-          case 2:  if (AutomaticB() != 1) bRes = 0xEE; break;
+          case 2:  if (AutomaticB(i) != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_C
-          case 3:  if (AutomaticC() != 1) bRes = 0xEE; break;
+          case 3:  if (AutomaticC(i) != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_D
@@ -144,7 +144,7 @@ uchar   i;
 #endif
 
 #ifndef SKIP_P
-          case 21: if (AutomaticP() != 1) bRes = 0xEE; break;
+          case 21: if (AutomaticP(i) != 1) bRes = 0xEE; break;
 #endif
 
 #ifndef SKIP_Q
