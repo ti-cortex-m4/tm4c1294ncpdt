@@ -388,6 +388,7 @@ serial  ElsInput(uchar  bMode)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
+  MonitorIn();
   return mpSerial[ibPort];
 }
 
@@ -421,6 +422,7 @@ serial  ElsInputRD(void)
              (mpSerial[ibPort] == SER_BADLINK)) break;
   }
 
+  MonitorIn();
   return mpSerial[ibPort];
 }
 
