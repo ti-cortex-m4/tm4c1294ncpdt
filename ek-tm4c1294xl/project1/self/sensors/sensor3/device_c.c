@@ -106,7 +106,20 @@ void    QuerySerialC(void)
 
 ulong   ReadSerialC(void)
 {
-  return 1;
+  InitPop(4);
+
+  ulong dw = 0;
+
+  uchar i;
+  for (i=0; i<10; i++)
+  {
+    uchar b = PopChar();
+    if ((b < '0') || (b > '9')) break;
+
+    dw = dw*10 + (b - '0');
+  }
+
+  return dw;
 }
 
 
