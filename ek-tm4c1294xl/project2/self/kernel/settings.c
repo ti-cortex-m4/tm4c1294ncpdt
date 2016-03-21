@@ -53,6 +53,7 @@ bool                    fLwipDebugFlag;
 uint                    wLwipDebugTimeout;
 
 bool                    fDataDebugFlag;
+bool                    fIOModeDebugFlag;
 
 ledMode                 bLED0Mode = LED_MODE_LINK;
 ledMode                 bLED1Mode;

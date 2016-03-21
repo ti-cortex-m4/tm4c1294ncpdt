@@ -242,8 +242,9 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 66: PushString(enLwipDebugFlag.szName); break;
     case 67: PushString(enLwipDebugTimeout.szName); break;
     case 68: PushString(enDataDebugFlag.szName); break;
-    case 69: PushString(enLED0Mode.szName); break;
-    case 70: PushString(enLED1Mode.szName); break;
+    case 69: PushString(enIOModeDebugFlag.szName); break;
+    case 70: PushString(enLED0Mode.szName); break;
+    case 71: PushString(enLED1Mode.szName); break;
 
     default: CONSOLE("ERROR unknown index %u\n", wArg); ASSERT(false); break; // TODO
   }
@@ -400,7 +401,7 @@ void    UdpInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"71");
+    CmdString(pcb,p,addr,port,broadcast,"72");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -487,6 +488,7 @@ void    UdpInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enLwipDebugTimeout)) {}
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDataDebugFlag)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enIOModeDebugFlag)) {}
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enLED0Mode)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enLED1Mode)) {}

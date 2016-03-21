@@ -15,7 +15,7 @@ io_mode.c
 
 
 
-ioMode                  mbIoModes[UART_COUNT];
+ioMode                  mbIOModes[UART_COUNT];
 
 
 
@@ -30,52 +30,52 @@ static void OutputMode0(void)
 
 static void InputMode1(void)
 {
-  mbIoModes[1] = IO_MODE_INPUT;
+  mbIOModes[1] = IO_MODE_INPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0020) = ~0x0008;
 }
 
 static void OutputMode1(void)
 {
-  mbIoModes[1] = IO_MODE_OUTPUT;
+  mbIOModes[1] = IO_MODE_OUTPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0020) = 0x0008;
 }
 
 
 static void InputMode2(void)
 {
-  mbIoModes[2] = IO_MODE_INPUT;
+  mbIOModes[2] = IO_MODE_INPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0010) = ~0x0004;
 }
 
 static void OutputMode2(void)
 {
-  mbIoModes[2] = IO_MODE_OUTPUT;
+  mbIOModes[2] = IO_MODE_OUTPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0010) = 0x0004;
 }
 
 
 static void InputMode3(void)
 {
-  mbIoModes[3] = IO_MODE_INPUT;
+  mbIOModes[3] = IO_MODE_INPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0008) = ~0x0002;
 }
 
 static void OutputMode3(void)
 {
-  mbIoModes[3] = IO_MODE_OUTPUT;
+  mbIOModes[3] = IO_MODE_OUTPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0008) = 0x0002;
 }
 
 
 static void InputMode4(void)
 {
-  mbIoModes[4] = IO_MODE_INPUT;
+  mbIOModes[4] = IO_MODE_INPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0004) = ~0x0001;
 }
 
 static void OutputMode4(void)
 {
-  mbIoModes[4] = IO_MODE_OUTPUT;
+  mbIOModes[4] = IO_MODE_OUTPUT;
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DATA + 0x0004) = 0x0001;
 }
 
@@ -121,11 +121,11 @@ void OutputMode(uchar u)
 
 
 
-static void InitIoMode0(void)
+static void InitIOMode0(void)
 {
 }
 
-static void InitIoMode1(void) // PF3
+static void InitIOMode1(void) // PF3
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R5; // GPIO Port F Run Mode Clock Gating Control
   DelayGPIO();
@@ -135,7 +135,7 @@ static void InitIoMode1(void) // PF3
   InputMode(1);
 }
 
-static void InitIoMode2(void) // PF2
+static void InitIOMode2(void) // PF2
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R5; // GPIO Port F Run Mode Clock Gating Control
   DelayGPIO();
@@ -145,7 +145,7 @@ static void InitIoMode2(void) // PF2
   InputMode(2);
 }
 
-static void InitIoMode3(void) // PF1
+static void InitIOMode3(void) // PF1
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R5; // GPIO Port F Run Mode Clock Gating Control
   DelayGPIO();
@@ -155,7 +155,7 @@ static void InitIoMode3(void) // PF1
   InputMode(3);
 }
 
-static void InitIoMode4(void) // PF0
+static void InitIOMode4(void) // PF0
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R5; // GPIO Port F Run Mode Clock Gating Control
   DelayGPIO();
@@ -171,12 +171,12 @@ void InitIOModes(void)
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
   {
-    mbIoModes[u] = IO_MODE_DEFAULT;
+    mbIOModes[u] = IO_MODE_DEFAULT;
   }
 
-  InitIoMode0();
-  InitIoMode1();
-  InitIoMode2();
-  InitIoMode3();
-  InitIoMode4();
+  InitIOMode0();
+  InitIOMode1();
+  InitIOMode2();
+  InitIOMode3();
+  InitIOMode4();
 }

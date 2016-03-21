@@ -91,6 +91,7 @@ const entity * const mpenEntities[] =
   &enLwipDebugTimeout,
 
   &enDataDebugFlag,
+  &enIOModeDebugFlag,
 
   &enLED0Mode,
   &enLED1Mode,
