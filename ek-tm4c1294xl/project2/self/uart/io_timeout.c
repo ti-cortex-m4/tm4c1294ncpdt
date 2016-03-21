@@ -21,14 +21,35 @@ void InitIOTimeouts(void)
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
   {
-    uchar ibBaudRate = mibBaudRate[u];
-    ASSERT(ibBaudRate < BAUD_RATE_COUNT);
-    mdwTimeouts[u] = mdwBaudRateTimeouts[ibBaudRate];
+    mdwTimeouts[u] = 0;
   }
 }
+
 
 
 void SetIOTimeout(uchar u)
 {
   ASSERT(u < UART_COUNT);
+
+  uchar ibBaudRate = mibBaudRate[u];
+  ASSERT(ibBaudRate < BAUD_RATE_COUNT);
+
+  mdwTimeouts[u] = mdwBaudRateTimeouts[ibBaudRate];
+}
+
+
+
+void TimerIOTimeout(uchar u)
+{
+  uchar u;
+  for(u = 0; u < UART_COUNT; u++)
+  {
+    if (mdwTimeouts[u] > 0)
+    {
+      if (--mdwTimeouts[u] == 0)
+      {
+        InputMode(u);
+      }
+    }
+  }
 }
