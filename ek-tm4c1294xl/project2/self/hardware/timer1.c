@@ -16,7 +16,7 @@ timer1.c
 
 
 
-#define TIMER1_FREQ     1000000
+#define TIMER1_FREQ     100000
 
 
 

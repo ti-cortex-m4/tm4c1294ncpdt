@@ -12,7 +12,7 @@ io_timeout.c
 
 
 
-static const ulong      mdwBaudRateTimeouts[BAUD_RATE_COUNT] = {6667, 3333, 1667, 833, 417, 208, 104, 62, 35, 26, 17, 7, 4, 2};
+static const ulong      mdwBaudRateTimeouts[BAUD_RATE_COUNT] = {6667, 3333, 1667, 833, 417, 208, 104, 62, 35, 26, 17, 7, 4, 2}; // microseconds
 static ulong            mdwTimeouts[UART_COUNT];
 
 
@@ -35,7 +35,10 @@ void SetIOTimeout(uchar u)
   uchar ibBaudRate = mibBaudRate[u];
   ASSERT(ibBaudRate < BAUD_RATE_COUNT);
 
-  mdwTimeouts[u] = mdwBaudRateTimeouts[ibBaudRate];
+  ulong dwTimeout = mdwBaudRateTimeouts[ibBaudRate] / 10;
+  if (dwTimeout == 0) dwTimeout = 1;
+
+  mdwTimeouts[u] = dwTimeout;
 }
 
 
