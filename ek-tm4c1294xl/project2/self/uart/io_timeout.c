@@ -7,6 +7,7 @@ io_timeout.c
 #include "../main.h"
 #include "../kernel/entities_default.h"
 #include "../kernel/settings.h"
+#include "io_mode.h"
 #include "io_timeout.h"
 
 

@@ -11,7 +11,7 @@ timer1.c
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
-#include "uart/io_timeout.h"
+#include "../uart/io_timeout.h"
 #include "timer1.h"
 
 
