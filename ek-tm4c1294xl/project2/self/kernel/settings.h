@@ -10,7 +10,7 @@ settings.h
 
 
 extern const ulong             mdwBaudRates[BAUD_RATE_COUNT];
-
+extern const ulong             mdwTimeouts[BAUD_RATE_COUNT];
 
 
 extern uchar                   pbMac[6];
