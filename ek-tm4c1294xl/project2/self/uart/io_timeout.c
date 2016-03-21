@@ -39,7 +39,7 @@ void SetIOTimeout(uchar u)
 
 
 
-void TimerIOTimeout(uchar u)
+void TimerIOTimeout(void)
 {
   uchar u;
   for(u = 0; u < UART_COUNT; u++)

@@ -64,6 +64,8 @@ void SerialSend(uint8_t ucPort, uint8_t ucChar)
         if (fDataDebugFlag)
           CONSOLE("%u: %02X]\n", ucPort, ucChar);
 
+        SetIOTimeout(u);
+
         // Write this character directly into the FIFO.
         UARTCharPut(g_ulUARTBase[ucPort], ucChar);
     }
@@ -71,6 +73,8 @@ void SerialSend(uint8_t ucPort, uint8_t ucChar)
     // See if there is room in the transmit buffer.
     else if(!RingBufFull(&g_sTxBuf[ucPort]))
     {
+        SetIOTimeout(u);
+
         // Put this character into the transmit buffer.
         RingBufWriteOne(&g_sTxBuf[ucPort], ucChar);
     }
