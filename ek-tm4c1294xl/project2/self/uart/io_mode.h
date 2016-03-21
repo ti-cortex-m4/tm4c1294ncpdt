@@ -19,7 +19,7 @@ typedef enum
 #endif
 
 
-void InitIoModes(void);
+void InitIOModes(void);
 
 void InputMode(uchar u);
 void OutputMode(uchar u);

@@ -166,7 +166,7 @@ static void InitIoMode4(void) // PF0
 }
 
 
-void InitIoModes(void)
+void InitIOModes(void)
 {
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
