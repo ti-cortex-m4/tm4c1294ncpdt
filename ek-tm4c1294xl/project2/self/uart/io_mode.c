@@ -10,6 +10,7 @@ io_mode.c
 #include "inc/hw_sysctl.h"
 #include "inc/hw_gpio.h"
 #include "../hardware/delay.h"
+#include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "io_mode.h"
 
@@ -107,7 +108,10 @@ static const fn_io_mode mfnOutputModes[UART_COUNT] =
 void InputMode(uchar u)
 {
   ASSERT(u < UART_COUNT);
-  CONSOLE("%u: input mode\n",u);
+
+  if (fIOModeDebugFlag)
+    CONSOLE("%u: input mode\n",u);
+
   (*mfnInputModes[u])();
 }
 
@@ -115,7 +119,10 @@ void InputMode(uchar u)
 void OutputMode(uchar u)
 {
   ASSERT(u < UART_COUNT);
-  CONSOLE("%u: output mode\n",u);
+
+  if (fIOModeDebugFlag)
+    CONSOLE("%u: output mode\n",u);
+
   (*mfnOutputModes[u])();
 }
 
