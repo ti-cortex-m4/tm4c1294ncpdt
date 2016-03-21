@@ -11,11 +11,12 @@ timer1.c
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
+#include "uart/io_timeout.h"
 #include "timer1.h"
 
 
 
-#define TIMER1_FREQ     1000
+#define TIMER1_FREQ     1000000
 
 
 
@@ -37,4 +38,6 @@ void InitTimer1(ulong dwClockFreq)
 void Timer1IntHandler(void)
 {
   HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
+
+  TimerIOTimeout();
 }
