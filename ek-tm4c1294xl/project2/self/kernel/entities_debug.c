@@ -57,6 +57,14 @@ const entity enDataDebugFlag = {
 };
 
 
+const entity enIOModeDebugFlag = {
+  EEPROM_IO_MODE_DEBUG_FLAG, &fIOModeDebugFlag, sizeof(uchar), CHAR, 0,
+  0, 1, 0,
+  "IOMDF",
+  "AI=IOMDF;D=RS485 I/O debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+};
+
+
 const entity enLED0Mode = {
   EEPROM_LED_MODE_0, &bLED0Mode, sizeof(uchar), CHAR, 0,
   0, 0, 0,
