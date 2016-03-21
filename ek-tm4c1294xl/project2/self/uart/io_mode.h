@@ -21,5 +21,5 @@ typedef enum
 
 void InitIOModes(void);
 
-void InputMode(uchar u);
-void OutputMode(uchar u);
+void InMode(uchar u);
+void OutMode(uchar u);
