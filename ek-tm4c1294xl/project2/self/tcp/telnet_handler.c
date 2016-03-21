@@ -35,7 +35,7 @@ static void TelnetProcessCharacter(uint8_t ucChar, tState *pState)
 {
     pState->ulConnectionTimeout = 0;
 
-    OutputMode(pState->ucSerialPort);
+    OutMode(pState->ucSerialPort);
     SerialSend(pState->ucSerialPort, ucChar);
 }
 

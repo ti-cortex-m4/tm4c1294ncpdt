@@ -12,8 +12,8 @@ io_timeout.c
 
 
 
-static const ulong      mdwBaudRateTimeouts[BAUD_RATE_COUNT] = {6667, 3333, 1667, 833, 417, 208, 104, 62, 35, 26, 17, 7, 4, 2}; // microseconds
-static ulong            mdwTimeouts[UART_COUNT];
+static const uint       mwBaudRateTimeouts[BAUD_RATE_COUNT] = {6667, 3333, 1667, 833, 417, 208, 104, 62, 35, 26, 17, 7, 4, 2}; // microseconds
+static uint             mwTimeouts[UART_COUNT];
 
 
 
@@ -22,7 +22,7 @@ void InitIOTimeouts(void)
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
   {
-    mdwTimeouts[u] = 0;
+    mwTimeouts[u] = 0;
   }
 }
 
@@ -35,10 +35,10 @@ void SetIOTimeout(uchar u)
   uchar ibBaudRate = mibBaudRate[u];
   ASSERT(ibBaudRate < BAUD_RATE_COUNT);
 
-  ulong dwTimeout = mdwBaudRateTimeouts[ibBaudRate] / 10;
-  if (dwTimeout == 0) dwTimeout = 1;
+  uint wTimeout = mwBaudRateTimeouts[ibBaudRate] / 10;
+  if (wTimeout == 0) wTimeout = 1;
 
-  mdwTimeouts[u] = dwTimeout;
+  mwTimeouts[u] = wTimeout;
 }
 
 
@@ -48,11 +48,11 @@ void TimerIOTimeout(void)
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
   {
-    if (mdwTimeouts[u] > 0)
+    if (mwTimeouts[u] > 0)
     {
-      if (--mdwTimeouts[u] == 0)
+      if (--mwTimeouts[u] == 0)
       {
-        InputMode(u);
+        InMode(u);
       }
     }
   }

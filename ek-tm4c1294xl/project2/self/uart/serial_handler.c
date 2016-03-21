@@ -6,7 +6,6 @@ serial_handler.c
 
 #include "../main.h"
 #include "driverlib/uart.h"
-#include "../uart/io_mode.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "io_timeout.h"
@@ -111,8 +110,6 @@ static void SerialUARTIntHandler(uint8_t ucPort)
             // Write the next character into the transmit FIFO.
             UARTCharPut(g_ulUARTBase[ucPort], ucChar);
         }
-
-        InputMode(ucPort);
     }
 }
 
