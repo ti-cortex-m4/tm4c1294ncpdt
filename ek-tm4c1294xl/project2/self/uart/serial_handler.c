@@ -9,6 +9,7 @@ serial_handler.c
 #include "../uart/io_mode.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
+#include "io_timeout.h"
 #include "serial.h"
 #include "serial_handler.h"
 
@@ -98,13 +99,14 @@ static void SerialUARTIntHandler(uint8_t ucPort)
     if(ulStatus & UART_INT_TX)
     {
         // Loop while there is space in the transmit FIFO and characters to be sent.
-        while(!RingBufEmpty(&g_sTxBuf[ucPort]) &&
-                UARTSpaceAvail(g_ulUARTBase[ucPort]))
+        while(!RingBufEmpty(&g_sTxBuf[ucPort]) && UARTSpaceAvail(g_ulUARTBase[ucPort]))
         {
             uint8_t ucChar = RingBufReadOne(&g_sTxBuf[ucPort]);
 
             if (fDataDebugFlag)
               CONSOLE("%u: %02X>\n", ucPort, ucChar);
+
+            SetIOTimeout(ucPort);
 
             // Write the next character into the transmit FIFO.
             UARTCharPut(g_ulUARTBase[ucPort], ucChar);

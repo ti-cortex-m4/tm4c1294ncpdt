@@ -8,6 +8,7 @@ serial_send.c
 #include "driverlib/uart.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
+#include "io_timeout.h"
 #include "serial.h"
 #include "serial_send.h"
 
@@ -64,7 +65,7 @@ void SerialSend(uint8_t ucPort, uint8_t ucChar)
         if (fDataDebugFlag)
           CONSOLE("%u: %02X]\n", ucPort, ucChar);
 
-        SetIOTimeout(u);
+        SetIOTimeout(ucPort);
 
         // Write this character directly into the FIFO.
         UARTCharPut(g_ulUARTBase[ucPort], ucChar);
@@ -73,7 +74,7 @@ void SerialSend(uint8_t ucPort, uint8_t ucChar)
     // See if there is room in the transmit buffer.
     else if(!RingBufFull(&g_sTxBuf[ucPort]))
     {
-        SetIOTimeout(u);
+        SetIOTimeout(ucPort);
 
         // Put this character into the transmit buffer.
         RingBufWriteOne(&g_sTxBuf[ucPort], ucChar);
