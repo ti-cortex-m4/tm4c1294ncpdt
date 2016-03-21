@@ -18,6 +18,7 @@ settings,c
 
 
 const ulong             mdwBaudRates[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4800,9600,19200,28800,38400,57600,115200,230400,460800};
+const ulong             mdwTimeouts[BAUD_RATE_COUNT] = {6667,3333,1667,833,417,208,104,62,35,26,17,7,4,2};
 
 
 
