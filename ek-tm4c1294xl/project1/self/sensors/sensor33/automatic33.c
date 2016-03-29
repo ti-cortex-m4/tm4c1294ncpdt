@@ -22,7 +22,7 @@ AUTOMATIC33.C
 
 
 #ifndef SKIP_33
-/*
+
 void    Query33(uint  cwIn, uchar  cbOut)
 {
   Query31(cwIn,cbOut);
@@ -77,7 +77,7 @@ time2   QueryTime33_Full(uchar  bPercent)
 }
 
 
-
+/*
 bool    Automatic33(void)
 {
   if (QueryOpen33_Full(25) == false) return false;
@@ -88,7 +88,7 @@ bool    Automatic33(void)
 
   return true;
 }
-
+*/
 
 
 time2   ReadTimeCan33(void)
@@ -111,7 +111,7 @@ time2   ReadTimeCan33(void)
 }
 
 
-
+/*
 double2 ReadCntCurr33(void)
 {
   if (QueryOpen33_Full(25) == 0) GetDouble2Error();
