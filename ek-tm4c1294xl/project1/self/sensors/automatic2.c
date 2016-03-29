@@ -2008,6 +2008,10 @@ time2   ReadTimeCan(uchar  ibCan)
     case 32: return ReadTimeCan32();
 #endif
 
+#ifndef SKIP_33
+    case 33: return ReadTimeCan33();
+#endif
+
     default: return GetTime2Error();
   }
 }
