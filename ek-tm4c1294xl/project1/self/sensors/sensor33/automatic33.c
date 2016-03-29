@@ -111,7 +111,7 @@ time2   ReadTimeCan33(void)
 }
 
 
-/*
+
 double2 ReadCntCurr33(void)
 {
   if (QueryOpen33_Full(25) == 0) GetDouble2Error();
@@ -153,5 +153,5 @@ double2 ReadCntCurr33(void)
 
   return GetDouble2(mpdbChannelsC[diCurr.ibLine], true);
 }
-*/
+
 #endif

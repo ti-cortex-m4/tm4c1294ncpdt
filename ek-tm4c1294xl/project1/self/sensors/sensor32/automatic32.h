@@ -4,8 +4,6 @@ AUTOMATIC32.H
 
 ------------------------------------------------------------------------------*/
 
-bool    Checksum32(uchar  bSize);
-
 void    Query32(uint  cwIn, uchar  cbOut);
 serial  Input32(void);
 

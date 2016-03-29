@@ -178,7 +178,7 @@ void    QueryControl33(time  ti)
 
   Query33(3+1, 3+8+1);
 }
-
+*/
 
 
 void    QueryEngAbs33(uchar  ibTrf)
@@ -200,16 +200,8 @@ void    QueryEngAbs33(uchar  ibTrf)
 
 bool    Checksum33(uchar  bSize)
 {
-  if (OldVersion33())
-  {
-    uint wCRC = MakeCrc16Bit32InBuff(3, bSize-2);
-    return (wCRC == InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
-  }
-  else
-  {
-    uint wCRC = MakeCrc16Bit32InBuff(3, bSize);
-    return (wCRC == 0);
-  }
+  uint wCRC = MakeCrc16Bit32InBuff(3, bSize-2);
+  return (wCRC == InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
 }
-*/
+
 #endif
