@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE32.C
+DEVICE33.C
 
 
 ------------------------------------------------------------------------------*/
@@ -18,25 +18,25 @@ DEVICE32.C
 #include "../../digitals/current/current_run.h"
 #include "../../digitals/digitals_messages.h"
 #include "../sensor31/automatic31.h"
-#include "automatic32.h"
-#include "device32.h"
+#include "automatic33.h"
+#include "device33.h"
 
 
 
-#ifndef SKIP_32
+#ifndef SKIP_33
 
-static uchar            bVersion32;
+static uchar            bVersion33;
 
 
-
-ulong   PopChar3Big32(void)
+/*
+ulong   PopChar3Big33(void)
 {
   return PopChar()*0x10000 + PopChar()*0x100 + PopChar();
 }
+*/
 
 
-
-void    QueryClose32(void)
+void    QueryClose33(void)
 {
   InitPush(0);
 
@@ -44,13 +44,13 @@ void    QueryClose32(void)
   PushChar(0x00);
   PushChar(0x02);
 
-  Query32(0, 3+1);
+  Query33(0, 3+1);
 }
 
 
-void    QueryOpen32(void)
+void    QueryOpen33(void)
 {
-  QueryClose32();
+  QueryClose33();
   DelayOff();
 
   memset(&mpbCoder, 0, sizeof(mpbCoder));
@@ -64,28 +64,25 @@ void    QueryOpen32(void)
   PushLongBig(mpdwAddress1[diCurr.bAddress-1]);
   PushLongBig(mpdwAddress2[diCurr.bAddress-1]);
 
-  Query32(3+8+1, 3+8+1);
+  Query33(3+8+1, 3+8+1);
 }
 
 
-bool    ReadOpen32(void)
+bool    ReadOpen33(void)
 {
   InitPop(3);
 
-  bVersion32 = PopChar();
+  bVersion33 = PopChar();
 
   mpbCoder[0] = PopChar();
   mpbCoder[1] = PopChar();
   mpbCoder[2] = PopChar();
   mpbCoder[3] = PopChar();
 
-  Clear(); sprintf(szLo+3,"версия: %2u",bVersion32);
+  Clear(); sprintf(szLo+3,"версия: %2u",bVersion33);
   DelayInf(); Clear();
 
-  if ((bVersion32 == 51) ||
-      (bVersion32 == 52) ||
-      (bVersion32 == 53) ||
-      (bVersion32 == 54))
+  if (bVersion33 == 16)
     return true;
 
   ShowLo(szNoVersion);
@@ -95,20 +92,20 @@ bool    ReadOpen32(void)
 }
 
 
-uchar   GetVersion32(void)
+uchar   GetVersion33(void)
 {
-  return bVersion32;
+  return bVersion33;
 }
 
-
-bool    OldVersion32(void)
+/*
+bool    OldVersion33(void)
 {
   return false;
 }
+*/
 
 
-
-void    QueryTime32(void)
+void    QueryTime33(void)
 {
   InitPush(0);
 
@@ -116,11 +113,11 @@ void    QueryTime32(void)
   PushChar(0x00);
   PushChar(0x07);
 
-  Query32(3+8+1, 3+1);
+  Query33(3+8+1, 3+1);
 }
 
 
-time    ReadTime32(void)
+time    ReadTime33(void)
 {
   InitPop(3);
 
@@ -136,8 +133,8 @@ time    ReadTime32(void)
   return ti;
 }
 
-
-time    ReadPackTime32(void)
+/*
+time    ReadPackTime33(void)
 {
   InitPop(3);
 
@@ -159,7 +156,7 @@ time    ReadPackTime32(void)
 
 
 
-void    QueryControl32(time  ti)
+void    QueryControl33(time  ti)
 {
   InitPushCod();
 
@@ -179,12 +176,12 @@ void    QueryControl32(time  ti)
   PushCharCod(ti.bYear);
   PushCharCod(20);
 
-  Query32(3+1, 3+8+1);
+  Query33(3+1, 3+8+1);
 }
 
 
 
-void    QueryEngAbs32(uchar  ibTrf)
+void    QueryEngAbs33(uchar  ibTrf)
 {
   InitPushCod();
 
@@ -196,14 +193,14 @@ void    QueryEngAbs32(uchar  ibTrf)
   PushCharCod(0x00);
   PushCharCod(ibTrf);
 
-  Query32(3+14+1, 3+3+1);
+  Query33(3+14+1, 3+3+1);
 }
 
 
 
-bool    Checksum32(uchar  bSize)
+bool    Checksum33(uchar  bSize)
 {
-  if (OldVersion32())
+  if (OldVersion33())
   {
     uint wCRC = MakeCrc16Bit32InBuff(3, bSize-2);
     return (wCRC == InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
@@ -214,5 +211,5 @@ bool    Checksum32(uchar  bSize)
     return (wCRC == 0);
   }
 }
-
+*/
 #endif

@@ -46,6 +46,7 @@ AUTOMATIC2!C
 #include "sensor31/cntmon31.h"
 #include "sensor32/automatic32.h"
 #include "sensor32/cntmon32.h"
+#include "sensor33/automatic33.h"
 #include "automatic2.h"
 
 

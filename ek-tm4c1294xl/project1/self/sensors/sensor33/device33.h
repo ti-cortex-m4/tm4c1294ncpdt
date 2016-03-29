@@ -10,13 +10,13 @@ DEVICE33.H
 
 //ulong   PopChar3Big33(void);
 
-//void    QueryOpen33(void);
-//bool    ReadOpen33(void);
+void    QueryOpen33(void);
+bool    ReadOpen33(void);
 //uchar   GetVersion33(void);
 //bool    OldVersion33(void);
 
-//void    QueryTime33(void);
-//time    ReadTime33(void);
+void    QueryTime33(void);
+time    ReadTime33(void);
 //time    ReadPackTime33(void);
 //void    QueryControl33(time  ti);
 
