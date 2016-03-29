@@ -77,7 +77,7 @@ time2   QueryTime33_Full(uchar  bPercent)
 }
 
 
-/*
+
 bool    Automatic33(void)
 {
   if (QueryOpen33_Full(25) == false) return false;
@@ -88,7 +88,7 @@ bool    Automatic33(void)
 
   return true;
 }
-*/
+
 
 
 time2   ReadTimeCan33(void)
