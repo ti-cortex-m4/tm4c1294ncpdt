@@ -20,6 +20,6 @@ time    ReadTime33(void);
 //time    ReadPackTime33(void);
 //void    QueryControl33(time  ti);
 
-//void    QueryEngAbs33(uchar  ibTrf);
+void    QueryEngAbs33(uchar  ibTrf);
 
-//bool    Checksum33(uchar  bSize);
+bool    Checksum33(uchar  bSize);
