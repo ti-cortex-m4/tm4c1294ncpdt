@@ -1,0 +1,75 @@
+проверять возвращаемые значения, особенно MEM
+udp_remove & pbuf_free
+tcp port in use
+serial test overflow
+serial4 ((dwStatus & 0x00000020) != 0) || (dwStatus == 0);
+TCP_WRITE_FLAG_COPY
+ 
+    IntDefaultHandler,                      // Fan 1
+    0,                                      // Reserved
+
+linker.cmd
+startup.c
+lwipopts.h
+
+rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib
+                
+SERIAL_FLOW_CONTROL_HW           
+
+pState->eLastErr = err;
+pState->eLastErr = eError;     
+
+hidded MAC programming {ds1.0} 
+
+TelnetWriteDiagInfo
+
+^.*//\r\n
+
+валидация ibBaud,ibRoutingMode
+ // TODO min max def
+ 
+usTelnetLocalPort in client mode
+
+F=R* F=R restart readonly_values
+
+return ERR_VAL&ERR_ARG CONSOLE_UART
+
+tibbo routing_status buzz change_ip
+tibbo defaults
+
+minimise CONSOLE messages sizes
+
+enet_s2e ISR priorities etc.
+
+led freq
+EMACPHYExtendedWrite(EMAC0_BASE, 0, EPHY_LEDCR, (EMACPHYExtendedRead(EMAC0_BASE, 0, EPHY_LEDCR) & ~EPHY_LEDCR_BLINKRATE_M) | EPHY_LEDCR_BLINKRATE_10HZ);
+  
+все операции с entities в одно место из udp_in
+
+lwIP inside project
+
+const entity * const
+
+usnprintf, remove custom printf
+
+убрать enity szCode
+
+close/abort connection
+        //
+        // Wait for an event to occur.
+        //
+        SysCtlSleep();
+        
+IntMasterDisable() _error_ не работает      lwIPEthernetIntHandler  
+NmiSR + FaultISR = wathcdog reset 
+watchdog
+
+debug & release
+            
+rom - build number/data even in .out
+
+timer1
+
+CONSOLE_UART
+
+save/load @0            
