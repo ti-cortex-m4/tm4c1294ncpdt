@@ -16,7 +16,6 @@ EXTENDED_6,C
 #include "../../time/rtc.h"
 #include "../../time/timedate.h"
 #include "../../console.h"
-
 #include "../../energy2.h"
 #include "extended_6.h"
 
@@ -48,7 +47,7 @@ void    InitExtended6(void)
 
 
 void    ResetExtended6(bool  fFull)
-{ 
+{
   if (fFull)
   {
     fExt6Flag = false;
@@ -76,7 +75,7 @@ void    ResetExtended6(bool  fFull)
 
 
 void    NextDayExtended6(void)
-{ 
+{
   cwDayCan6++;
 
   memset(&mpCntBoxCan6, 0, sizeof(mpCntBoxCan6));
@@ -84,8 +83,8 @@ void    NextDayExtended6(void)
 }
 
 
-void    NextMonExtended6(void) 
-{ 
+void    NextMonExtended6(void)
+{
   cwMonCan6++;
 
   memset(&mpCntMonCan6, 0, sizeof(mpCntMonCan6));
@@ -100,7 +99,7 @@ void    MakeExtended6(uchar  ibCan, double  db)
   vl.bStatus = ST_OK;
   vl.dbValue = db;
   vl.tiUpdate = *GetCurrTimeDate();
- 
+
   mpCntMonCan6[ibCan] = vl;
   SaveCntMonCan6(ibHardMon);
 
