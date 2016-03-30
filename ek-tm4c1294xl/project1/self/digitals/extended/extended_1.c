@@ -9,6 +9,7 @@ EXTENDED_1.Ñ
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_realtime.h"
 #include "../../memory/mem_extended_1.h"
+#include "../../hardware/watchdog.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_display.h"
 #include "../../digitals/digitals_messages.h"
@@ -232,6 +233,8 @@ void    MakeExtended1(void)
           MakeExtended6(c, db);
           MakeExtended7(c, db);
           MakeDiagram(c, db);
+
+          ResetWatchdog();
 
           mpcwEscS_OK[c]++;
           /*AddDigRecord(EVE_ESC_S_DATA);*/
