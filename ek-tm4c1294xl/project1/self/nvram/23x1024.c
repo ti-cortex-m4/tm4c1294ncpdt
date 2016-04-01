@@ -411,3 +411,139 @@ uint    GetNvramStatus(void)
 
   return w;
 }
+
+
+
+bool    ReadNvramBuffBare_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
+{
+  NvramStart();
+
+  NvramCharOut(0x03); // чтение
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
+
+  NvramCharIn();
+  NvramCharIn();
+  NvramCharIn();
+
+  NvramCharIn();
+  NvramCharIn();
+
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+   *(pbBuff++) = NvramCharIn();
+  }
+
+  NvramStop();
+
+  return true;
+}
+
+
+bool    WriteNvramBuffBare_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
+{
+  NvramStart();
+
+  NvramCharOut(0x02); // запись
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
+
+  InitCRC();
+
+  NvramCharOutCRC(*((uchar*)(&dwAddr)+2));
+  NvramCharOutCRC(*((uchar*)(&dwAddr)+1));
+  NvramCharOutCRC(*((uchar*)(&dwAddr)+0));
+
+  NvramCharOutCRC(wSize / 0x100);
+  NvramCharOutCRC(wSize % 0x100);
+
+  uint i;
+  for (i=0; i<wSize; i++)
+  {
+    NvramCharOutCRC(*(pbBuff++));
+  }
+
+  NvramCharOutCRC(tiCurr.bSecond);
+  NvramCharOutCRC(tiCurr.bMinute);
+  NvramCharOutCRC(tiCurr.bHour);
+  NvramCharOutCRC(tiCurr.bDay);
+  NvramCharOutCRC(tiCurr.bMonth);
+  NvramCharOutCRC(tiCurr.bYear);
+
+  NvramCharOut(bCRCHi);
+  NvramCharOut(bCRCLo);
+
+
+  NvramStop();
+
+  pbBuff -= wSize;
+
+  NvramStart();
+
+  NvramCharOut(0x03); // чтение
+  NvramCharOut(*((uchar*)(&dwAddr)+2));
+  NvramCharOut(*((uchar*)(&dwAddr)+1));
+  NvramCharOut(*((uchar*)(&dwAddr)+0));
+
+  NvramCharIn();
+  NvramCharIn();
+  NvramCharIn();
+
+  NvramCharIn();
+  NvramCharIn();
+
+  bool f = true;
+  for (i=0; i<wSize; i++)
+  {
+    if (*(pbBuff++) != NvramCharIn())
+    {
+      f = false;
+      break;
+    }
+  }
+
+  NvramStop();
+
+  return f;
+}
+
+
+bool    ReadNvramBuffBare(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
+{
+  cdwNvramReadBuff++;
+
+  uchar i;
+  for (i=0; i<NVRAM_REPEATS; i++) {
+    if (ReadNvramBuffBare_Raw(dwAddr, pbBuff, wSize) == true) break;
+    cwNvramReadWrn++;
+  }
+
+  if (i == NVRAM_REPEATS) {
+    cwNvramReadErr++;
+    return false;
+  } else {
+    return true;
+  }
+}
+
+
+bool    WriteNvramBuffBare(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
+{
+  cdwNvramWriteBuff++;
+
+  uchar i;
+  for (i=0; i<NVRAM_REPEATS; i++) {
+    if (WriteNvramBuffBare_Raw(dwAddr, pbBuff, wSize) == true) break;
+    cwNvramWriteWrn++;
+  }
+
+  if (i == NVRAM_REPEATS) {
+    cwNvramWriteErr++;
+    return false;
+  } else {
+    return true;
+  }
+}
