@@ -50,9 +50,11 @@ bool    LoadArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX, void  *pBuff)
 
 bool    SaveArrayXY(ulong  dwAddr, uint  wSizeX, uchar  ibX, uint  wSizeY, uchar  ibY, void  *pBuff)
 {
+  return WriteNvramBuffBare(dwAddr + bNVRAM_PREFIX + (wSizeX + bNVRAM_MARGIN)*ibX + wSizeY*ibY, (uchar *)pBuff, wSizeY);
 }
 
 
 bool    LoadArrayXY(ulong  dwAddr, uint  wSizeX, uchar  ibX, uint  wSizeY, uchar  ibY, void  *pBuff)
 {
+  return ReadNvramBuffBare(dwAddr + bNVRAM_PREFIX + (wSizeX + bNVRAM_MARGIN)*ibX + wSizeY*ibY, (uchar *)pBuff, wSizeY);
 }
