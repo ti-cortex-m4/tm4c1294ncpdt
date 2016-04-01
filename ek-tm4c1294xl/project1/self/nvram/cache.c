@@ -31,30 +31,30 @@ bool    LoadCache(cache const  *pch)
 
 bool    SaveArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX, void  *pBuff)
 {
-  return WriteNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX, (uchar *)pBuff, wSizeX);
+  return WriteNvramBuff(dwAddr + (wSizeX + bNVRAM_MARGIN)*ibX, (uchar *)pBuff, wSizeX);
 }
 
 
 bool    FreeArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX)
 {
-  return FreeNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX, wSizeX);
+  return FreeNvramBuff(dwAddr + (wSizeX + bNVRAM_MARGIN)*ibX, wSizeX);
 }
 
 
 bool    LoadArrayX(ulong  dwAddr, uint  wSizeX, uchar  ibX, void  *pBuff)
 {
-  return ReadNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX, (uchar *)pBuff, wSizeX);
+  return ReadNvramBuff(dwAddr + (wSizeX + bNVRAM_MARGIN)*ibX, (uchar *)pBuff, wSizeX);
 }
 
 
 
 bool    SaveArrayXY(ulong  dwAddr, uint  wSizeX, uchar  ibX, uint  wSizeY, uchar  ibY, void  *pBuff)
 {
-  return WriteNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX + wSizeY*ibY, (uchar *)pBuff, wSizeY);
+  return WriteNvramBuff(dwAddr + (wSizeX + bNVRAM_MARGIN)*ibX + wSizeY*ibY, (uchar *)pBuff, wSizeY);
 }
 
 
 bool    LoadArrayXY(ulong  dwAddr, uint  wSizeX, uchar  ibX, uint  wSizeY, uchar  ibY, void  *pBuff)
 {
-  return ReadNvramBuff(dwAddr + (wSizeX + bNVRAM_FOOTER)*ibX + wSizeY*ibY, (uchar *)pBuff, wSizeY);
+  return ReadNvramBuff(dwAddr + (wSizeX + bNVRAM_MARGIN)*ibX + wSizeY*ibY, (uchar *)pBuff, wSizeY);
 }

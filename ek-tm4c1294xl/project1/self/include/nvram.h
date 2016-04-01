@@ -41,7 +41,9 @@ NVRAM!H
 
 
 // количество байтов служебной информации для каждой записи
-#define bNVRAM_FOOTER   (uchar)(3+2+6+2)
+#define bNVRAM_PREFIX   (uchar)(3+2)
+#define bNVRAM_SUFFIX   (uchar)(6+2)
+#define bNVRAM_MARGIN   (uchar)(3+2+6+2)
 
 
 #include "../generated/nvram_enum.txt"
