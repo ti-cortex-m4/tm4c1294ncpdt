@@ -423,13 +423,6 @@ bool    ReadNvramBuffBare_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   NvramCharOut(*((uchar*)(&dwAddr)+1));
   NvramCharOut(*((uchar*)(&dwAddr)+0));
 
-  NvramCharIn();
-  NvramCharIn();
-  NvramCharIn();
-
-  NvramCharIn();
-  NvramCharIn();
-
   uint i;
   for (i=0; i<wSize; i++)
   {
@@ -451,33 +444,14 @@ bool    WriteNvramBuffBare_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   NvramCharOut(*((uchar*)(&dwAddr)+1));
   NvramCharOut(*((uchar*)(&dwAddr)+0));
 
-  InitCRC();
-
-  NvramCharOutCRC(*((uchar*)(&dwAddr)+2));
-  NvramCharOutCRC(*((uchar*)(&dwAddr)+1));
-  NvramCharOutCRC(*((uchar*)(&dwAddr)+0));
-
-  NvramCharOutCRC(wSize / 0x100);
-  NvramCharOutCRC(wSize % 0x100);
-
   uint i;
   for (i=0; i<wSize; i++)
   {
-    NvramCharOutCRC(*(pbBuff++));
+    NvramCharOut(*(pbBuff++));
   }
 
-  NvramCharOutCRC(tiCurr.bSecond);
-  NvramCharOutCRC(tiCurr.bMinute);
-  NvramCharOutCRC(tiCurr.bHour);
-  NvramCharOutCRC(tiCurr.bDay);
-  NvramCharOutCRC(tiCurr.bMonth);
-  NvramCharOutCRC(tiCurr.bYear);
-
-  NvramCharOut(bCRCHi);
-  NvramCharOut(bCRCLo);
-
-
   NvramStop();
+
 
   pbBuff -= wSize;
 
