@@ -462,13 +462,6 @@ bool    WriteNvramBuffBare_Raw(ulong  dwAddr, uchar  *pbBuff,  uint  wSize)
   NvramCharOut(*((uchar*)(&dwAddr)+1));
   NvramCharOut(*((uchar*)(&dwAddr)+0));
 
-  NvramCharIn();
-  NvramCharIn();
-  NvramCharIn();
-
-  NvramCharIn();
-  NvramCharIn();
-
   bool f = true;
   for (i=0; i<wSize; i++)
   {
