@@ -21,7 +21,7 @@ double  GetCanImp2DoubleEng(impulse  *mpimT, uchar  ibCan, uchar  bMask);
 void    MakeImpSpec(impulse  *mpimT, uchar  ibCan, time  ti);
 void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  ti);
 
-void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uchar  wImp);
+void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uint  wImp);
 
 void    MakeCntMonCan(void);
 double  GetCntCurrImp(uchar  ibCan);

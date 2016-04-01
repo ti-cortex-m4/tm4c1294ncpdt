@@ -263,7 +263,7 @@ void    MakeImpSpec_Winter(impulse  *mpimT, uchar  ibCan, time  ti)
 
 
 // добавляем к канальному массиву impulse (по текущему тарифу для энергии)
-void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uchar  wImp)
+void    AddCanImpEng(impulse  *mpimT, uchar  ibCanal, uint  wImp)
 {
   uchar i = tiPrev.bHour*2 + tiPrev.bMinute/30;
   uchar t = mpibEngCurrTariff[i];
@@ -321,21 +321,19 @@ double GetCntCurrImp(uchar  ibCan)
 
 void    MakeImpulse(void)
 {
-uchar  ibCan;
-uint   w;
-
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    if (mpfUsedNodes[ibCan] == false) continue;
+    if (mpfUsedNodes[c] == false) continue;
 
-    if (GetDigitalDevice(ibCan) == 0)
+    if (GetDigitalDevice(c) == 0)
     {
-      w = mpwImpMntCanCurr[ibCan];
-      mpwImpHouCan[ibSoftHou][ibCan] += w;
+      uint wImp = mpwImpMntCanCurr[c];
+      mpwImpHouCan[ibSoftHou][c] += wImp;
 
-      AddCanImpEng(mpimDayCan[ibSoftDay], ibCan, w);
-      AddCanImpEng(mpimMonCan[ibSoftMon], ibCan, w);
-      AddCanImpEng(mpimAbsCan,            ibCan, w);
+      AddCanImpEng(mpimDayCan[ibSoftDay], c, wImp);
+      AddCanImpEng(mpimMonCan[ibSoftMon], c, wImp);
+      AddCanImpEng(mpimAbsCan,            c, wImp);
     }
   }
 }
