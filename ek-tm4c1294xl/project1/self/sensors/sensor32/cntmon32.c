@@ -372,7 +372,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
       Clear();
       if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
 
-      MonitorString("\n eng mon"); MonitorCharDec(ibMon);
+      MonitorString("\n eng mon."); MonitorCharDec(ibMon);
       double db = dbEngMon;
       MonitorString(" +"); MonitorLongDec(db*1000);
       dbEngSum += db;

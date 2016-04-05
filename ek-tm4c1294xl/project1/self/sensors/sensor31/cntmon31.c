@@ -408,7 +408,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
       Clear();
       if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
 
-      MonitorString("\n eng mon"); MonitorCharDec(ibMon);
+      MonitorString("\n eng mon."); MonitorCharDec(ibMon);
       for (i=0; i<6; i++)
       {
         MonitorString("\n i="); MonitorCharDec(i+1);

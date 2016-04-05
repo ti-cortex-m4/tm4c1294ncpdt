@@ -373,7 +373,7 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
       Clear();
       if (ReadEngMon_Full(idx) == 0) return GetDouble2Error();
 
-      MonitorString("\n eng mon"); MonitorCharDec(ibMon);
+      MonitorString("\n eng mon."); MonitorCharDec(ibMon);
       double db = dbEngMon;
       MonitorString(" +"); MonitorLongDec(db*1000);
       dbEngSum += db;
@@ -415,8 +415,7 @@ double2 ReadCntMonCan33(uchar  ibMon)
   time ti = ti2.tiValue;
 
 
-//  if (NewVersion33())
-//  {
+  {
     if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
       if ((GetVersion33() == 16) || (GetVersion33() == 18))
@@ -432,11 +431,7 @@ double2 ReadCntMonCan33(uchar  ibMon)
     {
       return ReadCntCurrMonCan();
     }
-//  }
-//  else
-//  {
-//    ShowLo(szNoVersion); Delay(1000); return GetDouble2Error();
-//  }
+  }
 }
 
 #endif
