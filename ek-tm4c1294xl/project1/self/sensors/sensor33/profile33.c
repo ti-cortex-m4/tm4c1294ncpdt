@@ -109,7 +109,7 @@ void    QueryHeader33(void)
 
   if (GetVersion33() == 16)
     Query33(3+8+1, 3+3+1);
-  else (GetVersion33() == 18)
+  else
     Query33(3+6+1, 3+3+1);
 }
 
@@ -145,7 +145,7 @@ bool    ReadHeader33(void)
   uchar i;
   for (i=0; i<MAX_LINE_N33; i++)
   {
-    double db = (GetVersion33() == 54) ? PopIntBig() : PopChar3Big33();
+    double db = (GetVersion33() == 16) ? PopLongBig() : PopIntBig();
     MonitorString("\n value1 "); MonitorLongDec(db);
 
     if (new)
