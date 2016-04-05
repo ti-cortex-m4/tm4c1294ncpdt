@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PROFILE32.C
+PROFILE33.C
 
 
 ------------------------------------------------------------------------------*/
@@ -21,32 +21,32 @@ PROFILE32.C
 #include "../../special/special.h"
 #include "../sensor31/automatic31.h"
 #include "../sensor31/procedure31.h"
-#include "automatic32.h"
-#include "device32.h"
-#include "profile32.h"
+#include "automatic33.h"
+#include "device33.h"
+#include "profile33.h"
 
 
 
-#ifndef SKIP_32
+#ifndef SKIP_33
 
-time                    tiProfile32;
+time                    tiProfile33;
 
-static uint             wBaseCurr32, wBaseLast32, iwProfile32;
+static uint             wBaseCurr33, wBaseLast33, iwProfile33;
 
-static uint             cwErrors32;
+static uint             cwErrors33;
 
 
 
 // переход на предыдущую запись
-bool    DecIndex32(void)
+bool    DecIndex33(void)
 {
-  if (wBaseLast32 == wBaseCurr32)
+  if (wBaseLast33 == wBaseCurr33)
   {
-    if (iwProfile32 != 0) iwProfile32--; else return false;
+    if (iwProfile33 != 0) iwProfile33--; else return false;
   }
   else
   {
-    if (iwProfile32 != 0) iwProfile32--; else iwProfile32 = wBaseLast32-1;
+    if (iwProfile33 != 0) iwProfile33--; else iwProfile33 = wBaseLast33-1;
   }
 
   return true;
@@ -54,7 +54,7 @@ bool    DecIndex32(void)
 
 
 
-void    QueryTop32(void)
+void    QueryTop33(void)
 {
   InitPushCod();
 
@@ -66,36 +66,36 @@ void    QueryTop32(void)
   PushCharCod(0x00);
   PushCharCod(0x00);
 
-  Query32(3+8+1, 3+3+1);
+  Query33(3+8+1, 3+3+1);
 }
 
 
 
-bool    ReadTop32(void)
+bool    ReadTop33(void)
 {
   InitPop(3);
 
-  wBaseLast32 = PopIntBig(); // количество записей
-  wBaseCurr32 = PopIntBig(); // индекс текущей записи
+  wBaseLast33 = PopIntBig(); // количество записей
+  wBaseCurr33 = PopIntBig(); // индекс текущей записи
 
-  MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr32);
-  MonitorString("\n\n number "); MonitorIntDec(wBaseLast32);
+  MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr33);
+  MonitorString("\n\n number "); MonitorIntDec(wBaseLast33);
 
-  iwProfile32 = wBaseCurr32;
+  iwProfile33 = wBaseCurr33;
 
-  cwErrors32 = 0; // количество ошибок чтения
+  cwErrors33 = 0; // количество ошибок чтения
 
   ClearProcedure31(true,true);
 
-  Clear(); sprintf(szLo+3,"%4u:%-4u",wBaseLast32,wBaseCurr32); DelayInf();
+  Clear(); sprintf(szLo+3,"%4u:%-4u",wBaseLast33,wBaseCurr33); DelayInf();
 
-  return DecIndex32();
+  return DecIndex33();
 }
 
 
-void    QueryHeader32(void)
+void    QueryHeader33(void)
 {
-  MonitorString("\n\n index "); MonitorIntDec(iwProfile32);
+  MonitorString("\n\n index "); MonitorIntDec(iwProfile33);
 
   InitPushCod();
 
@@ -104,31 +104,31 @@ void    QueryHeader32(void)
   PushChar(0x06); // "чтение данных по идентификатору"
 
   PushCharCod(0x0B); // "график нагрузки"
-  PushCharCod(iwProfile32 / 0x100);
-  PushCharCod(iwProfile32 % 0x100);
+  PushCharCod(iwProfile33 / 0x100);
+  PushCharCod(iwProfile33 % 0x100);
 
-  if (GetVersion32() == 54)
-    Query32(3+6+1, 3+3+1);
+  if (GetVersion33() == 54)
+    Query33(3+6+1, 3+3+1);
   else
-    Query32(3+7+1, 3+3+1);
+    Query33(3+7+1, 3+3+1);
 }
 
-
-bool    ReadHeader32(void)
+/*
+bool    ReadHeader33(void)
 {
   HideCurrTime(1);
 
-  if (Checksum32(GetVersion32() == 54 ? 6 : 7) == false)
+  if (Checksum33(GetVersion33() == 54 ? 6 : 7) == false)
   {
     MonitorString("\n bad CRC");
 
-    Clear(); sprintf(szLo+3,"ошибки: %-4u",cwErrors32);
-    return (++cwErrors32 < 48);
+    Clear(); sprintf(szLo+3,"ошибки: %-4u",cwErrors33);
+    return (++cwErrors33 < 48);
   }
 
 
   InitPop(3);
-  time ti1 = ReadPackTime32();
+  time ti1 = ReadPackTime33();
 
   ShowProfileTime(ti1);
   if ((ti1.bMinute % 30) != 0) { szLo[4] = '?'; DelayInf(); }
@@ -143,9 +143,9 @@ bool    ReadHeader32(void)
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
-  for (i=0; i<MAX_LINE_N32; i++)
+  for (i=0; i<MAX_LINE_N33; i++)
   {
-    double db = (GetVersion32() == 54) ? PopIntBig() : PopChar3Big32();
+    double db = (GetVersion33() == 54) ? PopIntBig() : PopChar3Big33();
     MonitorString("\n value1 "); MonitorLongDec(db);
 
     if (new)
@@ -194,16 +194,16 @@ bool    ReadHeader32(void)
 
     MonitorString("\n time2 "); MonitorTime(ti2);
 
-    for (i=0; i<MAX_LINE_N32; i++)
+    for (i=0; i<MAX_LINE_N33; i++)
     {
       MonitorString("\n value2 ");
       MonitorIntDec(mpwChannels[i]);
     }
 
     if (SearchDefHouIndex(ti2) == false)
-      return (++cwErrors32 < 48);
+      return (++cwErrors33 < 48);
     else
-      cwErrors32 = 0;
+      cwErrors33 = 0;
 
     ShowProgressDigHou();
 
@@ -216,5 +216,5 @@ bool    ReadHeader32(void)
     return true;
   }
 }
-
+*/
 #endif

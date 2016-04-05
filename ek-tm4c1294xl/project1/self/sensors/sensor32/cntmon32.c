@@ -46,7 +46,7 @@ static double           dbEngDayCurr;
 
 
 
-void    QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
+static void QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
 {
   InitPushCod();
 
@@ -304,7 +304,7 @@ static uchar SearchEngMonIdx(uchar  bMon)
 
 
 
-bool  ReadEngMon_Full(uchar  ibMon)
+static bool ReadEngMon_Full(uchar  ibMon)
 {
   dbEngMon = 0;
 

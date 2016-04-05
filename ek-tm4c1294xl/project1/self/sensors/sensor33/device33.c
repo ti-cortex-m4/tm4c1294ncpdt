@@ -133,13 +133,13 @@ time    ReadTime33(void)
   return ti;
 }
 
-/*
+
 time    ReadPackTime33(void)
 {
   InitPop(3);
 
-  uchar a = PopChar();
   uchar b = PopChar();
+  uchar a = PopChar();
 
   time ti;
 
@@ -155,7 +155,7 @@ time    ReadPackTime33(void)
 }
 
 
-
+/*
 void    QueryControl33(time  ti)
 {
   InitPushCod();
