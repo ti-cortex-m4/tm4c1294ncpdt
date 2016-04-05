@@ -107,10 +107,10 @@ void    QueryHeader33(void)
   PushCharCod(iwProfile33 / 0x100);
   PushCharCod(iwProfile33 % 0x100);
 
-  if (GetVersion33() == 54)
+  if (GetVersion33() == 16)
+    Query33(3+8+1, 3+3+1);
+  else (GetVersion33() == 18)
     Query33(3+6+1, 3+3+1);
-  else
-    Query33(3+7+1, 3+3+1);
 }
 
 /*
