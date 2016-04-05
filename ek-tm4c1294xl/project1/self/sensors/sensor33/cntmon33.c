@@ -46,7 +46,7 @@ static double           dbEngDayCurr;
 
 
 
-static void QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
+static void QueryEngMonIdx(uchar  ibMon)
 {
   InitPushCod();
 
@@ -54,13 +54,13 @@ static void QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
   PushChar(0x03);
   PushChar(0x06);
 
-  (GetVersion33() == 16) PushCharCod(24) : PushCharCod(32); // "энерги€ на расчЄтный период"
+  (GetVersion33() == 16) ? PushCharCod(24) : PushCharCod(32); // "энерги€ на расчЄтный период"
 
-  uint w = ibMon*12 + ibTrf*3;
+  uint w = ibMon*2;
   PushCharCod(w / 0x100);
   PushCharCod(w % 0x100);
 
-  Query33(3+14+1, 3+3+1);
+  Query33(3+20+1, 3+3+1);
 }
 
 
@@ -82,7 +82,7 @@ static status ReadTop_Full(uchar  bPercent)
   if (r == bMINORREPEATS) return ST_BADDIGITAL;
   else
   {
-    if (Checksum33(8) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
+    if (Checksum33(6) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
   }
 
   return ST_OK;
@@ -124,7 +124,7 @@ static bool ReadHeader(void)
   MonitorString("\n");
   MonitorTime(ti);
 
-  ulong dw = (GetVersion33() == 16) ? PopLongBig() : PopIntBig();
+  ulong dw = (GetVersion33() == 16) ? PopLongLtl() : PopIntLtl();
   MonitorLongDec(dw);
 
   if (f)
@@ -186,8 +186,8 @@ static bool ReadEngVar_Full(uchar  bPercent)
       if (Checksum33(14) == false) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       InitPop(3);
-      dbEngAbs += (double)PopLongBig()/1000;
-      dbEngMonCurr += (double)PopLongBig()/1000;
+      dbEngAbs += (double)PopLongLtl()/1000;
+      dbEngMonCurr += (double)PopLongLtl()/1000;
     }
   }
 
@@ -239,7 +239,7 @@ static bool ReadEngMonIdx_Full(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryEngMonIdx(m,0);
+      QueryEngMonIdx(m);
 
       if (Input33() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -248,11 +248,11 @@ static bool ReadEngMonIdx_Full(void)
     if (r == bMINORREPEATS) return false;
     else
     {
-      if (Checksum33(14) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
+      if (Checksum33(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       MonitorString("\n month "); MonitorCharDec(m);
 
-      InitPop(3+10);
+      InitPop(3+16);
 
       uchar bMonth = PopChar();
       uchar bYear  = PopChar();
@@ -308,14 +308,12 @@ static bool ReadEngMon_Full(uchar  ibMon)
 {
   dbEngMon = 0;
 
-  uchar t;
-  for (t=0; t<bTARIFFS; t++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryEngMonIdx(ibMon,t);
+      QueryEngMonIdx(ibMon);
 
       if (Input33() == SER_GOODCHECK) break;
       if (fKey == true) return false;
@@ -324,10 +322,13 @@ static bool ReadEngMon_Full(uchar  ibMon)
     if (r == bMINORREPEATS) return false;
     else
     {
-      if (Checksum33(14) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
+      if (Checksum33(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       InitPop(3);
-      dbEngMon += (double)PopLongBig()/1000;
+      dbEngMon += (double)PopLongLtl()/1000;
+      dbEngMon += (double)PopLongLtl()/1000;
+      dbEngMon += (double)PopLongLtl()/1000;
+      dbEngMon += (double)PopLongLtl()/1000;
     }
   }
 
@@ -418,12 +419,12 @@ double2 ReadCntMonCan33(uchar  ibMon)
 //  {
     if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
-      if ((GetVersion33() >= 51) && (GetVersion33() <= 54))
+      if ((GetVersion33() == 16) || (GetVersion33() == 18))
         return ReadCntPrevMonCan(ibMon, ti);
       else
       {
         Clear(); sprintf(szLo+3,"необходимы"); Delay(1000);
-        Clear(); sprintf(szLo+2,"версии 51-54"); Delay(1000);
+        Clear(); sprintf(szLo+2,"версии 16,19"); Delay(1000);
         return GetDouble2Error();
       }
     }

@@ -66,7 +66,7 @@ void    QueryTop33(void)
   PushCharCod(0x00);
   PushCharCod(0x00);
 
-  Query33(3+8+1, 3+3+1);
+  Query33(3+6+1, 3+3+1);
 }
 
 
@@ -75,8 +75,8 @@ bool    ReadTop33(void)
 {
   InitPop(3);
 
-  wBaseLast33 = PopIntBig(); // количество записей
-  wBaseCurr33 = PopIntBig(); // индекс текущей записи
+  wBaseLast33 = PopIntLtl(); // количество записей
+  wBaseCurr33 = PopIntLtl(); // индекс текущей записи
 
   MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr33);
   MonitorString("\n\n number "); MonitorIntDec(wBaseLast33);
@@ -145,7 +145,7 @@ bool    ReadHeader33(void)
   uchar i;
   for (i=0; i<MAX_LINE_N33; i++)
   {
-    double db = (GetVersion33() == 16) ? PopLongBig() : PopIntBig();
+    double db = (GetVersion33() == 16) ? PopLongLtl() : PopIntLtl();
     MonitorString("\n value1 "); MonitorLongDec(db);
 
     if (new)
