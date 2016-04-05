@@ -54,7 +54,7 @@ static void QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
   PushChar(0x03);
   PushChar(0x06);
 
-  PushCharCod(27); // "энергия на расчётный период"
+  (GetVersion33() == 16) PushCharCod(24) : PushCharCod(32); // "энергия на расчётный период"
 
   uint w = ibMon*12 + ibTrf*3;
   PushCharCod(w / 0x100);
@@ -104,7 +104,7 @@ static status ReadHeader_Full(void)
   if (r == bMINORREPEATS) return ST_BADDIGITAL;
   else
   {
-    if (Checksum33(GetVersion33() == 54 ? 6 : 7) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
+    if (Checksum33(GetVersion33() == 16 ? 8 : 6) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
   }
 
   return ST_OK;
@@ -124,7 +124,7 @@ static bool ReadHeader(void)
   MonitorString("\n");
   MonitorTime(ti);
 
-  ulong dw = (GetVersion33() == 54) ? PopIntBig() : PopChar3Big33();
+  ulong dw = (GetVersion33() == 16) ? PopLongBig() : PopIntBig();
   MonitorLongDec(dw);
 
   if (f)
