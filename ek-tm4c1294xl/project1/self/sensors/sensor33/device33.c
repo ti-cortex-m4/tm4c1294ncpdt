@@ -82,7 +82,8 @@ bool    ReadOpen33(void)
   Clear(); sprintf(szLo+3,"версия: %2u",bVersion33);
   DelayInf(); Clear();
 
-  if (bVersion33 == 16)
+  if ((bVersion33 == 16) ||
+      (bVersion33 == 18))
     return true;
 
   ShowLo(szNoVersion);

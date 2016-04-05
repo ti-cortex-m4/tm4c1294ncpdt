@@ -12,7 +12,7 @@ DEVICE33.H
 
 void    QueryOpen33(void);
 bool    ReadOpen33(void);
-//uchar   GetVersion33(void);
+uchar   GetVersion33(void);
 //bool    OldVersion33(void);
 
 void    QueryTime33(void);
