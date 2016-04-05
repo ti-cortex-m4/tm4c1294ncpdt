@@ -415,7 +415,6 @@ double2 ReadCntMonCan33(uchar  ibMon)
   time ti = ti2.tiValue;
 
 
-  {
     if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
       if ((GetVersion33() == 16) || (GetVersion33() == 18))
@@ -423,7 +422,7 @@ double2 ReadCntMonCan33(uchar  ibMon)
       else
       {
         Clear(); sprintf(szLo+3,"необходимы"); Delay(1000);
-        Clear(); sprintf(szLo+2,"версии 16,19"); Delay(1000);
+        Clear(); sprintf(szLo+2,"версии 16,18"); Delay(1000);
         return GetDouble2Error();
       }
     }
@@ -431,7 +430,6 @@ double2 ReadCntMonCan33(uchar  ibMon)
     {
       return ReadCntCurrMonCan();
     }
-  }
 }
 
 #endif
