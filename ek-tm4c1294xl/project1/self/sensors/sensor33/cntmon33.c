@@ -60,7 +60,7 @@ void    QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
   PushCharCod(w / 0x100);
   PushCharCod(w % 0x100);
 
-  Query32(3+14+1, 3+3+1);
+  Query33(3+14+1, 3+3+1);
 }
 
 
@@ -71,11 +71,11 @@ static status ReadTop_Full(uchar  bPercent)
   for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
-    QueryTop32();
+    QueryTop33();
 
     ShowPercent(bPercent);
 
-    if (Input32() == SER_GOODCHECK) break;
+    if (Input33() == SER_GOODCHECK) break;
     if (fKey == true) return ST_BADDIGITAL;
   }
 
@@ -95,16 +95,16 @@ static status ReadHeader_Full(void)
   for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
-    QueryHeader32();
+    QueryHeader33();
 
-    if (Input32() == SER_GOODCHECK) break;
+    if (Input33() == SER_GOODCHECK) break;
     if (fKey == true) return ST_BADDIGITAL;
   }
 
   if (r == bMINORREPEATS) return ST_BADDIGITAL;
   else
   {
-    if (Checksum33(GetVersion32() == 54 ? 6 : 7) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
+    if (Checksum33(GetVersion33() == 54 ? 6 : 7) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
   }
 
   return ST_OK;
@@ -116,7 +116,7 @@ static bool ReadHeader(void)
 {
   InitPop(3);
 
-  time ti = ReadPackTime32();
+  time ti = ReadPackTime33();
   bool f = ((ti.bDay   == tiCurr.bDay)   &&
             (ti.bMonth == tiCurr.bMonth) &&
             (ti.bYear  == tiCurr.bYear));
@@ -124,7 +124,7 @@ static bool ReadHeader(void)
   MonitorString("\n");
   MonitorTime(ti);
 
-  ulong dw = (GetVersion32() == 54) ? PopIntBig() : PopChar3Big32();
+  ulong dw = (GetVersion33() == 54) ? PopIntBig() : PopChar3Big33();
   MonitorLongDec(dw);
 
   if (f)
@@ -144,7 +144,7 @@ static status ReadEngDayCurr_Full(uchar  bPercent)
   status st;
   if ((st = ReadTop_Full(60)) != ST_OK) return st;
 
-  if (ReadTop32() == false) return ST_OK;
+  if (ReadTop33() == false) return ST_OK;
 
   Clear();
   while (true)
@@ -152,7 +152,7 @@ static status ReadEngDayCurr_Full(uchar  bPercent)
     if ((st = ReadHeader_Full()) != ST_OK) return st;
     if (ReadHeader() == false) break;
 
-    if (DecIndex32() == false) return ST_OK;
+    if (DecIndex33() == false) return ST_OK;
   }
 
   return ST_OK;
@@ -172,11 +172,11 @@ static bool ReadEngVar_Full(uchar  bPercent)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryEngAbs32(t);
+      QueryEngAbs33(t);
 
       ShowPercent(bPercent+t);
 
-      if (Input32() == SER_GOODCHECK) break;
+      if (Input33() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
@@ -241,7 +241,7 @@ static bool ReadEngMonIdx_Full(void)
       DelayOff();
       QueryEngMonIdx(m,0);
 
-      if (Input32() == SER_GOODCHECK) break;
+      if (Input33() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
@@ -317,7 +317,7 @@ bool  ReadEngMon_Full(uchar  ibMon)
       DelayOff();
       QueryEngMonIdx(ibMon,t);
 
-      if (Input32() == SER_GOODCHECK) break;
+      if (Input33() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
@@ -407,18 +407,18 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 
 double2 ReadCntMonCan33(uchar  ibMon)
 {
-  if (QueryOpen32_Full(25) == 0) GetDouble2Error();
+  if (QueryOpen33_Full(25) == 0) GetDouble2Error();
 
-  time2 ti2 = QueryTime32_Full(50);
+  time2 ti2 = QueryTime33_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
 
-//  if (NewVersion32())
+//  if (NewVersion33())
 //  {
     if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
-      if ((GetVersion32() >= 51) && (GetVersion32() <= 54))
+      if ((GetVersion33() >= 51) && (GetVersion33() <= 54))
         return ReadCntPrevMonCan(ibMon, ti);
       else
       {
