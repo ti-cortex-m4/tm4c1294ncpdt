@@ -17,7 +17,7 @@ bool    ReadOpen33(void);
 
 void    QueryTime33(void);
 time    ReadTime33(void);
-//time    ReadPackTime33(void);
+time    ReadPackTime33(void);
 //void    QueryControl33(time  ti);
 
 void    QueryEngAbs33(uchar  ibTrf);

@@ -19,7 +19,7 @@ CNTMON33.C
 #include "../sensor31/automatic31.h"
 #include "automatic33.h"
 #include "device33.h"
-//#include "profile33.h"
+#include "profile33.h"
 #include "cntmon33.h"
 
 
@@ -46,7 +46,7 @@ static double           dbEngDayCurr;
 
 
 
-void    QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
+static void QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
 {
   InitPushCod();
 
@@ -304,7 +304,7 @@ static uchar SearchEngMonIdx(uchar  bMon)
 
 
 
-bool  ReadEngMon_Full(uchar  ibMon)
+static bool ReadEngMon_Full(uchar  ibMon)
 {
   dbEngMon = 0;
 

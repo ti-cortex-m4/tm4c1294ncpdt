@@ -319,7 +319,7 @@ static uchar SearchEngMonIdx(uchar  bMon)
 }
 
 
-static bool  ReadEngMon_Full(uchar  ibMon)
+static bool ReadEngMon_Full(uchar  ibMon)
 {
   uchar i;
   for (i=0; i<6; i++)
