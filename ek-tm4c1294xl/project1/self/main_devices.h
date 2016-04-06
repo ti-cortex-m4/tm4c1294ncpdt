@@ -705,6 +705,25 @@ typedef enum
 
 #endif
 
+#ifndef SKIP_33
+
+  DEV_START_33P         =  0x1F00,
+  DEV_OPENCANAL_33P     =  0x1F01,
+  DEV_POSTOPENCANAL_33P =  0x1F02,
+  DEV_TIME_33P          =  0x1F03,
+  DEV_POSTTIME_33P      =  0x1F04,
+  DEV_CONTROL_33P       =  0x1F05,
+  DEV_POSTCONTROL_33P   =  0x1F06,
+  DEV_POSTCORRECT_33P   =  0x1F07,
+  DEV_PROFILE_33P       =  0x1F08,
+  DEV_POSTPROFILE_33P   =  0x1F09,
+  DEV_TOP_33P           =  0x1F0A,
+  DEV_POSTTOP_33P       =  0x1F0B,
+  DEV_HEADER_33P        =  0x1F0C,
+  DEV_POSTHEADER_33P    =  0x1F0D,
+
+#endif
+
   DEV_PAUSE             =  1
 
 } device;
