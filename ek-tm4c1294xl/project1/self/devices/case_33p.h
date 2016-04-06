@@ -1,22 +1,22 @@
-#ifndef SKIP_32
+#ifndef SKIP_33
 
-    case DEV_START_32P:
+    case DEV_START_33P:
       cbCorrects = 0;
 
       cbRepeat = GetMaxRepeats();
-      QueryOpen32();
-      SetCurr(DEV_OPENCANAL_32P);
+      QueryOpen33();
+      SetCurr(DEV_OPENCANAL_33P);
       break;
 
-    case DEV_OPENCANAL_32P:
+    case DEV_OPENCANAL_33P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (ReadOpen32() == 0)
+        if (ReadOpen33() == 0)
           ErrorProfile();
         else if (fCurrCtrl == true)
-          MakePause(DEV_POSTOPENCANAL_32P);
+          MakePause(DEV_POSTOPENCANAL_33P);
         else
-          MakePause(DEV_POSTCORRECT_32P);
+          MakePause(DEV_POSTCORRECT_33P);
       }
       else
       {
@@ -26,26 +26,26 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryOpen32();
-          SetCurr(DEV_OPENCANAL_32P);
+          QueryOpen33();
+          SetCurr(DEV_OPENCANAL_33P);
         }
       }
       break;
 
-    case DEV_POSTOPENCANAL_32P:
+    case DEV_POSTOPENCANAL_33P:
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
       cbRepeat = GetMaxRepeats();
-      QueryTime32();
-      SetCurr(DEV_TIME_32P);
+      QueryTime33();
+      SetCurr(DEV_TIME_33P);
       break;
 
-    case DEV_TIME_32P:
+    case DEV_TIME_33P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        tiProfile32 = ReadTime32();
-        MakePause(DEV_POSTTIME_32P);
+        tiProfile33 = ReadTime33();
+        MakePause(DEV_POSTTIME_33P);
       }
       else
       {
@@ -55,75 +55,75 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTime32();
-          SetCurr(DEV_TIME_32P);
+          QueryTime33();
+          SetCurr(DEV_TIME_33P);
         }
       }
       break;
 
 
-    case DEV_POSTTIME_32P:
+    case DEV_POSTTIME_33P:
       {
-        ulong dwSecond1 = GetSecondIndex(tiProfile32);
+        ulong dwSecond1 = GetSecondIndex(tiProfile33);
         ulong dwSecond2 = GetSecondIndex(tiCurr);
 
-        if (DifferentDay(tiProfile32, tiCurr))
+        if (DifferentDay(tiProfile33, tiCurr))
         { ShowLo(szBadDates); DelayMsg(); ErrorProfile(); }                       // даты не совпадают, коррекция невозможна
         else
         {
           ShowDigitalDeltaTime(ibDig, dwSecond1, dwSecond2);
 
           if (AbsLong(dwSecond1 - dwSecond2) < GetCorrectLimit())                 // без коррекции
-          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_32P); }
-          else if (GetCurrHouIndex() == (tiProfile32.bHour*2 + tiProfile32.bMinute/30))       // простая коррекция
-          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_32P);  }
+          { ShowLo(szCorrectNo); DelayInf(); MakePause(DEV_POSTCORRECT_33P); }
+          else if (GetCurrHouIndex() == (tiProfile33.bHour*2 + tiProfile33.bMinute/30))       // простая коррекция
+          { ShowLo(szCorrectYes); DelayInf(); MakePause(DEV_CONTROL_33P);  }
           else
           { ShowLo(szCorrectBig); DelayMsg(); ErrorProfile(); }                   // разница времени слишком велика, коррекция невозможна
         }
       }
       break;
 
-    case DEV_CONTROL_32P:
+    case DEV_CONTROL_33P:
       if (++cbCorrects > bMINORREPEATS)
-        MakePause(DEV_POSTCORRECT_32P);
+        MakePause(DEV_POSTCORRECT_33P);
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryControl32(tiCurr);
-        SetCurr(DEV_POSTCONTROL_32P);
+        QueryControl33(tiCurr);
+        SetCurr(DEV_POSTCONTROL_33P);
       }
       break;
 
-    case DEV_POSTCONTROL_32P:
+    case DEV_POSTCONTROL_33P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTOPENCANAL_32P);
+        MakePause(DEV_POSTOPENCANAL_33P);
       else
       {
         if (cbRepeat == 0)
-          MakePause(DEV_POSTCORRECT_32P); // да !
+          MakePause(DEV_POSTCORRECT_33P); // да !
         else
         {
           ErrorLink();
           cbRepeat--;
 
-          QueryControl32(tiCurr);
-          SetCurr(DEV_POSTCONTROL_32P);
+          QueryControl33(tiCurr);
+          SetCurr(DEV_POSTCONTROL_33P);
         }
       }
       break;
 
 
-    case DEV_POSTCORRECT_32P:
+    case DEV_POSTCORRECT_33P:
       Clear();
 
       cbRepeat = GetMaxRepeats();
-      QueryTop32();
-      SetCurr(DEV_TOP_32P);
+      QueryTop33();
+      SetCurr(DEV_TOP_33P);
       break;
 
-    case DEV_TOP_32P:
+    case DEV_TOP_33P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTTOP_32P);
+        MakePause(DEV_POSTTOP_33P);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -132,25 +132,25 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryTop32();
-          SetCurr(DEV_TOP_32P);
+          QueryTop33();
+          SetCurr(DEV_TOP_33P);
         }
       }
       break;
 
-    case DEV_POSTTOP_32P:
-      if (ReadTop32() == false) DoneProfile();
+    case DEV_POSTTOP_33P:
+      if (ReadTop33() == false) DoneProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryHeader32();
-        SetCurr(DEV_HEADER_32P);
+        QueryHeader33();
+        SetCurr(DEV_HEADER_33P);
       }
       break;
 
-    case DEV_HEADER_32P:
+    case DEV_HEADER_33P:
       if (mpSerial[ibPort] == SER_GOODCHECK)
-        MakePause(DEV_POSTHEADER_32P);
+        MakePause(DEV_POSTHEADER_33P);
       else
       {
         if (cbRepeat == 0) ErrorProfile();
@@ -159,22 +159,22 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeader32();
-          SetCurr(DEV_HEADER_32P);
+          QueryHeader33();
+          SetCurr(DEV_HEADER_33P);
         }
       }
       break;
 
-    case DEV_POSTHEADER_32P:
-      if (ReadHeader32() == false)
+    case DEV_POSTHEADER_33P:
+      if (ReadHeader33() == false)
         DoneProfile();
-      else if (DecIndex32() == false)
+      else if (DecIndex33() == false)
         DoneProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryHeader32();
-        SetCurr(DEV_HEADER_32P);
+        QueryHeader33();
+        SetCurr(DEV_HEADER_33P);
       }
       break;
 
