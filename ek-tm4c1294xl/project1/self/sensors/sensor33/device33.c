@@ -28,13 +28,6 @@ DEVICE33.C
 static uchar            bVersion33;
 
 
-/*
-ulong   PopChar3Big33(void)
-{
-  return PopChar()*0x10000 + PopChar()*0x100 + PopChar();
-}
-*/
-
 
 void    QueryClose33(void)
 {
@@ -98,12 +91,6 @@ uchar   GetVersion33(void)
   return bVersion33;
 }
 
-/*
-bool    OldVersion33(void)
-{
-  return false;
-}
-*/
 
 
 void    QueryTime33(void)
@@ -156,7 +143,7 @@ time    ReadPackTime33(void)
 }
 
 
-/*
+
 void    QueryControl33(time  ti)
 {
   InitPushCod();
@@ -179,7 +166,7 @@ void    QueryControl33(time  ti)
 
   Query33(3+1, 3+8+1);
 }
-*/
+
 
 
 void    QueryEngAbs33(uchar  ibTrf)
