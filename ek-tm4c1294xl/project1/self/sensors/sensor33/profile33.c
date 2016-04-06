@@ -113,7 +113,7 @@ void    QueryHeader33(void)
     Query33(3+6+1, 3+3+1);
 }
 
-/*
+
 bool    ReadHeader33(void)
 {
   HideCurrTime(1);
@@ -216,5 +216,5 @@ bool    ReadHeader33(void)
     return true;
   }
 }
-*/
+
 #endif
