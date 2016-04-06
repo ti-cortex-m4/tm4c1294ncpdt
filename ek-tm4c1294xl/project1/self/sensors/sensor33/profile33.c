@@ -118,7 +118,6 @@ bool    ReadHeader33(void)
 {
   HideCurrTime(1);
 
-  if (Checksum33(GetVersion33() == 54 ? 6 : 7) == false)
   {
     MonitorString("\n bad CRC");
 
