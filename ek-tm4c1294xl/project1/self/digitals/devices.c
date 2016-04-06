@@ -44,7 +44,7 @@ message                 mpszDevices[bMAXDEVICES+1] = {
                                           ".Rovalant Ã›—-3 ",
                                           ".—“ 3 v48-49    ",
                                           ".—“ 3/1 v51-54  ",
-                                          ".—“ 3 v16       ",
+                                          ".—“ 3 v16,18    ",
                                       };
 
 uchar const             mpbMaxLines[bMAXDEVICES+1] =
