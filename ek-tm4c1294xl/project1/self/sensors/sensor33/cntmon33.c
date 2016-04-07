@@ -124,7 +124,7 @@ static bool ReadHeader(void)
   MonitorString("\n");
   MonitorTime(ti);
 
-  ulong dw = (GetVersion33() == 16) ? PopLongLtl() : PopIntLtl();
+  ulong dw = (GetVersion33() == 16) ? PopLong33() : PopInt33();
   MonitorLongDec(dw);
 
   if (f)
@@ -325,10 +325,10 @@ static bool ReadEngMon_Full(uchar  ibMon)
       if (Checksum33(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       InitPop(3);
-      dbEngMon += (double)PopLongLtl()/1000;
-      dbEngMon += (double)PopLongLtl()/1000;
-      dbEngMon += (double)PopLongLtl()/1000;
-      dbEngMon += (double)PopLongLtl()/1000;
+      dbEngMon += (double)PopLong33()/1000;
+      dbEngMon += (double)PopLong33()/1000;
+      dbEngMon += (double)PopLong33()/1000;
+      dbEngMon += (double)PopLong33()/1000;
     }
   }
 

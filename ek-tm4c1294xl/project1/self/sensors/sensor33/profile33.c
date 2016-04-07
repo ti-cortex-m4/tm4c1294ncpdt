@@ -148,7 +148,7 @@ bool    ReadHeader33(void)
   uchar i;
   for (i=0; i<MAX_LINE_N33; i++)
   {
-    double db = (GetVersion33() == 16) ? PopLongLtl() : PopIntLtl();
+    double db = (GetVersion33() == 16) ? PopLong33() : PopInt33();
     MonitorString("\n value1 "); MonitorLongDec(db);
 
     if (new)
