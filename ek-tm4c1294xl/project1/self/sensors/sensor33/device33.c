@@ -29,6 +29,19 @@ static uchar            bVersion33;
 
 
 
+uint    PopInt33(void)
+{
+  return (bVersion33 == 16) ? PopIntLtl() : PopIntBig();
+}
+
+
+ulong   PopLong33(void)
+{
+  return (bVersion33 == 16) ? PopLongLtl() : PopLongBig();
+}
+
+
+
 void    QueryClose33(void)
 {
   InitPush(0);
@@ -188,8 +201,16 @@ void    QueryEngAbs33(uchar  ibTrf)
 
 bool    Checksum33(uchar  bSize)
 {
-  uint wCRC = MakeCrc16Bit32InBuff(3, bSize-2);
-  return (wCRC == InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
+  if (bVersion33 == 16)
+  {
+    uint wCRC = MakeCrc16Bit32InBuff(3, bSize-2);
+    return (wCRC == InBuff(3+bSize-2) + InBuff(3+bSize-1)*0x100);
+  }
+  else
+  {
+    uint wCRC = MakeCrc16Bit32InBuff(3, bSize);
+    return (wCRC == 0);
+  }
 }
 
 #endif
