@@ -51,7 +51,7 @@ float2  ReadParam33(void)
   {
     case PAR_P : {
                    InitPop(3);
-                   ulong dw = PopLongLtl();
+                   ulong dw = PopLong33();
                    return GetFloat2(dw/1000, true);
                  }
 
