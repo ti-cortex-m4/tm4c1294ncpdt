@@ -8,6 +8,7 @@ DEVICE33.H
 
 
 
+uint    PopInt33(void);
 ulong   PopLong33(void);
 
 void    QueryOpen33(void);

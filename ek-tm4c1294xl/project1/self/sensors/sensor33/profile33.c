@@ -66,7 +66,10 @@ void    QueryTop33(void)
   PushCharCod(0x00);
   PushCharCod(0x00);
 
-  Query33(3+6+1, 3+3+1);
+  if (GetVersion33() == 16)
+    Query33(3+6+1, 3+3+1);
+  else
+    Query33(3+8+1, 3+3+1);
 }
 
 
@@ -75,8 +78,8 @@ bool    ReadTop33(void)
 {
   InitPop(3);
 
-  wBaseLast33 = PopIntLtl(); // количество записей
-  wBaseCurr33 = PopIntLtl(); // индекс текущей записи
+  wBaseLast33 = PopInt33(); // количество записей
+  wBaseCurr33 = PopInt33(); // индекс текущей записи
 
   MonitorString("\n\n current index "); MonitorIntDec(wBaseCurr33);
   MonitorString("\n\n number "); MonitorIntDec(wBaseLast33);
