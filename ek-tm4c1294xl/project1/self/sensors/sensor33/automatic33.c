@@ -141,7 +141,7 @@ double2 ReadCntCurr33(void)
       if (Checksum33(14) == false) { ShowLo(szBadCRC); Delay(1000); return GetDouble2Error(); }
 
       InitPop(3);
-      mpdbChannelsC[0] += (double)PopLongLtl()/1000;
+      mpdbChannelsC[0] += (double)PopLong33()/1000;
     }
   }
 

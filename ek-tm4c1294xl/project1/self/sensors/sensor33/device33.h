@@ -8,6 +8,8 @@ DEVICE33.H
 
 
 
+ulong   PopLong33(void);
+
 void    QueryOpen33(void);
 bool    ReadOpen33(void);
 uchar   GetVersion33(void);
