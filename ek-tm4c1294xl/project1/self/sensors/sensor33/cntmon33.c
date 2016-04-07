@@ -82,7 +82,7 @@ static status ReadTop_Full(uchar  bPercent)
   if (r == bMINORREPEATS) return ST_BADDIGITAL;
   else
   {
-    if (Checksum33(6) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
+    if (Checksum33(GetVersion33() == 16 ? 6 : 8) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
   }
 
   return ST_OK;
@@ -186,8 +186,8 @@ static bool ReadEngVar_Full(uchar  bPercent)
       if (Checksum33(14) == false) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       InitPop(3);
-      dbEngAbs += (double)PopLongLtl()/1000;
-      dbEngMonCurr += (double)PopLongLtl()/1000;
+      dbEngAbs += (double)PopLong33()/1000;
+      dbEngMonCurr += (double)PopLong33()/1000;
     }
   }
 
