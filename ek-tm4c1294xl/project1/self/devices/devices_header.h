@@ -55,6 +55,8 @@ DEVICES.C
 #include "../sensors/sensor31/procedure31.h"
 #include "../sensors/sensor32/device32.h"
 #include "../sensors/sensor32/profile32.h"
+#include "../sensors/sensor33/device33.h"
+#include "../sensors/sensor33/profile33.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-CNTMON32.C
+CNTMON33.C
 
 
 ------------------------------------------------------------------------------*/
@@ -17,14 +17,14 @@ CNTMON32.C
 #include "../../devices/devices.h"
 #include "../../digitals/digitals_messages.h"
 #include "../sensor31/automatic31.h"
-#include "automatic32.h"
-#include "device32.h"
-#include "profile32.h"
-#include "cntmon32.h"
+#include "automatic33.h"
+#include "device33.h"
+#include "profile33.h"
+#include "cntmon33.h"
 
 
 
-#ifndef SKIP_32
+#ifndef SKIP_33
 
 // сумма энергии по мес€цам
 static double           dbEngSum;
@@ -46,7 +46,7 @@ static double           dbEngDayCurr;
 
 
 
-static void QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
+static void QueryEngMonIdx(uchar  ibMon)
 {
   InitPushCod();
 
@@ -54,13 +54,13 @@ static void QueryEngMonIdx(uchar  ibMon, uchar  ibTrf)
   PushChar(0x03);
   PushChar(0x06);
 
-  PushCharCod(27); // "энерги€ на расчЄтный период"
+  (GetVersion33() == 16) ? PushCharCod(24) : PushCharCod(32); // "энерги€ на расчЄтный период"
 
-  uint w = ibMon*12 + ibTrf*3;
+  uint w = ibMon*2;
   PushCharCod(w / 0x100);
   PushCharCod(w % 0x100);
 
-  Query32(3+14+1, 3+3+1);
+  Query33(3+20+1, 3+3+1);
 }
 
 
@@ -71,18 +71,18 @@ static status ReadTop_Full(uchar  bPercent)
   for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
-    QueryTop32();
+    QueryTop33();
 
     ShowPercent(bPercent);
 
-    if (Input32() == SER_GOODCHECK) break;
+    if (Input33() == SER_GOODCHECK) break;
     if (fKey == true) return ST_BADDIGITAL;
   }
 
   if (r == bMINORREPEATS) return ST_BADDIGITAL;
   else
   {
-    if (Checksum32(8) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
+    if (Checksum33(GetVersion33() == 16 ? 6 : 8) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
   }
 
   return ST_OK;
@@ -95,16 +95,16 @@ static status ReadHeader_Full(void)
   for (r=0; r<bMINORREPEATS; r++)
   {
     DelayOff();
-    QueryHeader32();
+    QueryHeader33();
 
-    if (Input32() == SER_GOODCHECK) break;
+    if (Input33() == SER_GOODCHECK) break;
     if (fKey == true) return ST_BADDIGITAL;
   }
 
   if (r == bMINORREPEATS) return ST_BADDIGITAL;
   else
   {
-    if (Checksum32(GetVersion32() == 54 ? 6 : 7) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
+    if (Checksum33(GetVersion33() == 16 ? 8 : 6) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
   }
 
   return ST_OK;
@@ -116,7 +116,7 @@ static bool ReadHeader(void)
 {
   InitPop(3);
 
-  time ti = ReadPackTime32();
+  time ti = ReadPackTime33();
   bool f = ((ti.bDay   == tiCurr.bDay)   &&
             (ti.bMonth == tiCurr.bMonth) &&
             (ti.bYear  == tiCurr.bYear));
@@ -124,7 +124,7 @@ static bool ReadHeader(void)
   MonitorString("\n");
   MonitorTime(ti);
 
-  ulong dw = (GetVersion32() == 54) ? PopIntBig() : PopChar3Big32();
+  ulong dw = (GetVersion33() == 16) ? PopLong33() : PopInt33();
   MonitorLongDec(dw);
 
   if (f)
@@ -144,7 +144,7 @@ static status ReadEngDayCurr_Full(uchar  bPercent)
   status st;
   if ((st = ReadTop_Full(60)) != ST_OK) return st;
 
-  if (ReadTop32() == false) return ST_OK;
+  if (ReadTop33() == false) return ST_OK;
 
   Clear();
   while (true)
@@ -152,7 +152,7 @@ static status ReadEngDayCurr_Full(uchar  bPercent)
     if ((st = ReadHeader_Full()) != ST_OK) return st;
     if (ReadHeader() == false) break;
 
-    if (DecIndex32() == false) return ST_OK;
+    if (DecIndex33() == false) return ST_OK;
   }
 
   return ST_OK;
@@ -172,22 +172,22 @@ static bool ReadEngVar_Full(uchar  bPercent)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryEngAbs32(t);
+      QueryEngAbs33(t);
 
       ShowPercent(bPercent+t);
 
-      if (Input32() == SER_GOODCHECK) break;
+      if (Input33() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
     if (r == bMINORREPEATS) return false;
     else
     {
-      if (Checksum32(14) == false) { ShowLo(szBadCRC); Delay(1000); return false; }
+      if (Checksum33(14) == false) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       InitPop(3);
-      dbEngAbs += (double)PopLongBig()/1000;
-      dbEngMonCurr += (double)PopLongBig()/1000;
+      dbEngAbs += (double)PopLong33()/1000;
+      dbEngMonCurr += (double)PopLong33()/1000;
     }
   }
 
@@ -239,20 +239,20 @@ static bool ReadEngMonIdx_Full(void)
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryEngMonIdx(m,0);
+      QueryEngMonIdx(m);
 
-      if (Input32() == SER_GOODCHECK) break;
+      if (Input33() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
     if (r == bMINORREPEATS) return false;
     else
     {
-      if (Checksum32(14) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
+      if (Checksum33(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       MonitorString("\n month "); MonitorCharDec(m);
 
-      InitPop(3+10);
+      InitPop(3+16);
 
       uchar bMonth = PopChar();
       uchar bYear  = PopChar();
@@ -308,26 +308,27 @@ static bool ReadEngMon_Full(uchar  ibMon)
 {
   dbEngMon = 0;
 
-  uchar t;
-  for (t=0; t<bTARIFFS; t++)
   {
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
       DelayOff();
-      QueryEngMonIdx(ibMon,t);
+      QueryEngMonIdx(ibMon);
 
-      if (Input32() == SER_GOODCHECK) break;
+      if (Input33() == SER_GOODCHECK) break;
       if (fKey == true) return false;
     }
 
     if (r == bMINORREPEATS) return false;
     else
     {
-      if (Checksum32(14) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
+      if (Checksum33(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
 
       InitPop(3);
-      dbEngMon += (double)PopLongBig()/1000;
+      dbEngMon += (double)PopLong33()/1000;
+      dbEngMon += (double)PopLong33()/1000;
+      dbEngMon += (double)PopLong33()/1000;
+      dbEngMon += (double)PopLong33()/1000;
     }
   }
 
@@ -405,25 +406,23 @@ static double2 ReadCntPrevMonCan(uchar  ibMon, time  ti)
 
 
 
-double2 ReadCntMonCan32(uchar  ibMon)
+double2 ReadCntMonCan33(uchar  ibMon)
 {
-  if (QueryOpen32_Full(25) == 0) GetDouble2Error();
+  if (QueryOpen33_Full(25) == 0) GetDouble2Error();
 
-  time2 ti2 = QueryTime32_Full(50);
+  time2 ti2 = QueryTime33_Full(50);
   if (ti2.fValid == false) return GetDouble2Error();
   time ti = ti2.tiValue;
 
 
-//  if (NewVersion32())
-//  {
     if (ti.bMonth != ibMon+1) // значение счЄтчиков на начало всех мес€цев, кроме текущего
     {
-      if ((GetVersion32() >= 51) && (GetVersion32() <= 54))
+      if ((GetVersion33() == 16) || (GetVersion33() == 18))
         return ReadCntPrevMonCan(ibMon, ti);
       else
       {
         Clear(); sprintf(szLo+3,"необходимы"); Delay(1000);
-        Clear(); sprintf(szLo+2,"версии 51-54"); Delay(1000);
+        Clear(); sprintf(szLo+2,"версии 16,18"); Delay(1000);
         return GetDouble2Error();
       }
     }
@@ -431,11 +430,6 @@ double2 ReadCntMonCan32(uchar  ibMon)
     {
       return ReadCntCurrMonCan();
     }
-//  }
-//  else
-//  {
-//    ShowLo(szNoVersion); Delay(1000); return GetDouble2Error();
-//  }
 }
 
 #endif
