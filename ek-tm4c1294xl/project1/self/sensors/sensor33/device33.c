@@ -139,6 +139,7 @@ time    ReadPackTime33(void)
 {
   InitPop(3);
 
+  uchar a,b;
   if (GetVersion33() == 16)
   {
     b = PopChar();
