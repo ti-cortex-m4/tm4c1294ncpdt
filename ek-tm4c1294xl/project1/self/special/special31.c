@@ -25,6 +25,27 @@ SPECIAL31!C
 
 
 
+double                  mpdbChannels31[bCHANNELS];
+
+
+
+void    CalcChannels31(void)
+{
+  double dbPulse = mpdbPulseHou[ibDig];
+
+  for (i=0; i<MAX_LINE_N31; i++)
+  {
+    mpdbEngFracDigCan[ibDig][i] += mpdbChannels31[i];
+    mpdbChannels31[i] = 0;
+
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][ibCan]*dbPulse);
+    mpwChannels[i] = w;
+
+    mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
+  }
+}
+
+
 void    CalcDigCanals31(time  ti)
 {
   LoadImpHouSpec(iwDigHou,1);
@@ -85,6 +106,7 @@ bool    MakeSpecial31(time  ti)
 
     MakeAllPrevTariffs(ti);
 
+    CalcChannels31();
     CalcDigCanals31(ti);
 
     fLoadMem = 0;
