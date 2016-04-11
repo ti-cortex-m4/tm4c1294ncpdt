@@ -4,7 +4,7 @@ SPECIAL31!H
 
 ------------------------------------------------------------------------------*/
 
-extern  double                  mpdbChannels31[bCHANNELS];
+extern  double                  mpdbChannelsA31[bCHANNELS],mpdbChannelsB31[bCHANNELS];
 
 
 

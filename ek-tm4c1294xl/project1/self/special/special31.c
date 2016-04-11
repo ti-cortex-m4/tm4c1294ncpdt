@@ -6,6 +6,7 @@ SPECIAL31!C
 
 #include "../main.h"
 #include "../memory/mem_realtime.h"
+#include "../memory/mem_factors.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_energy_spec.h"
 #include "../display/display.h"
@@ -18,6 +19,7 @@ SPECIAL31!C
 #include "../time/decret.h"
 #include "../energy.h"
 #include "../kernel/arrays_buff.h"
+#include "../serial/monitor.h"
 #include "calc.h"
 #include "recalc_def.h"
 #include "special.h"
@@ -25,20 +27,24 @@ SPECIAL31!C
 
 
 
-double                  mpdbChannels31[bCHANNELS];
+double                  mpdbChannelsA31[bCHANNELS],mpdbChannelsB31[bCHANNELS];
 
 
 
 void    CalcChannels31(void)
 {
+  MonitorString("\n CALC");
   double dbPulse = mpdbPulseHou[ibDig];
 
-  for (i=0; i<MAX_LINE_N31; i++)
+  uchar i;
+  for (i=0; i<6; i++)
   {
-    mpdbEngFracDigCan[ibDig][i] += mpdbChannels31[i];
-    mpdbChannels31[i] = 0;
+    MonitorString("\n +B "); MonitorLongDec(mpdbChannelsB31[i]*1000);
+    mpdbEngFracDigCan[ibDig][i] += mpdbChannelsB31[i];
+    mpdbChannelsB31[i] = 0;
 
-    uint w = (uint)(mpdbEngFracDigCan[ibDig][ibCan]*dbPulse);
+    uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
+    MonitorString(" w "); MonitorIntDec(w);
     mpwChannels[i] = w;
 
     mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
