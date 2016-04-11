@@ -56,24 +56,24 @@ static void MonitorBuff(uchar  ibDig, uchar  ibCan)
 
 void    AddProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  db)
 {
+  MonitorString("\n ADD ");
+
   mtiProcedure31Dig[ibDig] = ti;
 
-  MonitorLongDec(mpdbChannels31[ibCan]); MonitorString("+"); MonitorLongDec(db);
+  MonitorLongDec(mpdbChannelsA31[ibCan]*1000); MonitorString("+"); MonitorLongDec(db);
 
-  mpdbChannels31[ibCan] += (db/1000);
+  mpdbChannelsA31[ibCan] += (db/1000);
 
-  MonitorString("="); MonitorLongDec(mpdbChannels31[ibCan]);
+  MonitorString("=A "); MonitorLongDec(mpdbChannelsA31[ibCan]*1000);
 }
 
 
 void    SubProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  dbPulse)
 {
-//  MonitorBuff(ibDig,ibCan);
-//  uint w = (uint)(mpdbEngFracDigCan[ibDig][ibCan]*dbPulse);
-//
-//  MonitorString("="); MonitorIntDec(w);
-//  mpwChannels[ibCan] = w;
-//
-//  mpdbEngFracDigCan[ibDig][ibCan] -= (double)w/dbPulse;
-//  MonitorString("+"); MonitorBuff(ibDig,ibCan);
+  MonitorString("\n SUB ");
+
+  mpdbChannelsB31[ibCan] = mpdbChannelsA31[ibCan];
+  MonitorString(" +B "); MonitorLongDec(mpdbChannelsB31[ibCan]*1000);
+
+  mpdbChannelsA31[ibCan] = 0;
 }
