@@ -18,7 +18,7 @@ PROFILE31.C
 #include "../../time/timedate.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
-#include "../../special/special.h"
+#include "../../special/special31.h"
 #include "procedure31.h"
 #include "automatic31.h"
 #include "device31.h"
@@ -55,6 +55,9 @@ bool    DecIndex31(void)
 
 void    QueryTop31(void)
 {
+  MonitorOpen(0);
+
+
   InitPushCod();
 
   PushChar(0x7E);
@@ -84,7 +87,7 @@ bool    ReadTop31(void)
 
   cwErrors31 = 0; // количество ошибок чтения
 
-  ClearProcedure31(true,true);
+  ClearProcedure31(false,true);
 
   Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast31,wBaseCurr31); DelayInf();
 
@@ -209,7 +212,7 @@ bool    ReadHeader31(void)
 
     ShowProgressDigHou();
 
-    MakeSpecial(ti2) ? MonitorString("\n is added") : MonitorString("\n isn't added");
+    MakeSpecial31(ti2) ? MonitorString("\n is added") : MonitorString("\n isn't added");
     return MakeStopHou(0);
   }
   else
