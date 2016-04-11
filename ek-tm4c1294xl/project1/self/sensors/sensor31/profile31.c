@@ -55,7 +55,7 @@ bool    DecIndex31(void)
 
 void    QueryTop31(void)
 {
-  MonitorOpen(0);
+//  MonitorOpen(0);
 
 
   InitPushCod();
