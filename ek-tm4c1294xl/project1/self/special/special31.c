@@ -5,11 +5,13 @@ SPECIAL31!C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../memory/mem_realtime.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_energy_spec.h"
 #include "../display/display.h"
 #include "../tariffs/tariffs.h"
 #include "../impulses/energy_spec.h"
+#include "../digitals/digitals.h"
 #include "../devices/devices.h"
 #include "../time/delay.h"
 #include "../time/timedate.h"
@@ -17,7 +19,57 @@ SPECIAL31!C
 #include "../energy.h"
 #include "../kernel/arrays_buff.h"
 #include "calc.h"
+#include "recalc_def.h"
+#include "special.h"
 #include "special31.h"
+
+
+
+void    CalcDigCanals31(time  ti)
+{
+  LoadImpHouSpec(iwDigHou,1);
+
+  LoadCurrDigital(ibDig);
+
+  uchar c;
+  for (c=0; c<bCANALS; c++)
+  {
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == true)
+    {
+      uint w;
+      if (iwDigHou == iwHardHou)
+        w = 0xFFFF;
+      else
+      {
+        w = mpwChannels[ diPrev.ibLine ];
+
+        if (IsWinterDouble(c, ti) && (mpwImpHouCanSpec[c] != 0xFFFF))
+        {
+          w += mpwImpHouCanSpec[c];
+          mpbWinterCan[c]++;
+
+          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, c, ti );
+          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec, c, ti );
+        }
+      }
+
+      mpwImpHouCanSpec[c] = w;
+      mpwImpHouCanDef[c] = w;
+
+      mpboReadyCan[c] = true;
+      mpcwCalcDig[c]++;
+
+      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, ti );
+      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, ti );
+
+      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, ti );
+      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, ti );
+    }
+  }
+
+  SaveImpHouSpec(1,iwDigHou);
+}
 
 
 
@@ -33,7 +85,7 @@ bool    MakeSpecial31(time  ti)
 
     MakeAllPrevTariffs(ti);
 
-    CalcDigCanals(ti);
+    CalcDigCanals31(ti);
 
     fLoadMem = 0;
     CalcAllGroups(1, ti);
