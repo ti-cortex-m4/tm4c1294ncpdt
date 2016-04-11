@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-SPECIAL!C
+SPECIAL31!C
 
 
 ------------------------------------------------------------------------------*/
@@ -17,46 +17,11 @@ SPECIAL!C
 #include "../energy.h"
 #include "../kernel/arrays_buff.h"
 #include "calc.h"
-#include "special.h"
+#include "special31.h"
 
 
 
-//                                          0123456789ABCDEF
-static char const       szSpecialBegin[] = " подготовка...  ",
-                        szSpecialEnd[]   = " завершение...  ";
-
-
-
-bool    IsDefect(uchar  ibCan)
-{
-  LoadImpHouSpec(iwDigHou,1);
-  return mpwImpHouCanSpec[ibCan] == 0xFFFF;
-}
-
-
-bool    IsWinterDouble(uchar  ibCan, time  ti)
-{
-  return(IsWinter(ti) && (mpbWinterCan[ibCan] < 2));
-}
-
-
-
-bool    IsOpenSpecial(void)
-{
-  return(fLoadDay || fLoadMon);
-}
-
-
-void    OpenSpecial(void)
-{
-  ShowLo(szSpecialBegin);
-  DelayInf(); Clear();
-
-  OpenCalc();
-}
-
-
-bool    MakeSpecial(time  ti)
+bool    MakeSpecial31(time  ti)
 {
   if (IsDefect(ibDig) || IsWinterDouble(ibDig, ti))
   {
@@ -77,26 +42,4 @@ bool    MakeSpecial(time  ti)
   }
 
   return false;
-}
-
-
-void    CloseSpecial(void)
-{
-  ShowLo(szSpecialEnd);
-  DelayInf(); Clear();
-
-  CloseCalc(1,1);
-}
-
-
-// TODO CloseSpecialBuff - add flags
-void    CloseSpecialBuff(void)
-{
-  SaveImpHouBuff();
-
-  SaveImpDayBuff();
-  SaveImpMonBuff();
-
-  SavePowDayBuff();
-  SavePowMonBuff();
 }
