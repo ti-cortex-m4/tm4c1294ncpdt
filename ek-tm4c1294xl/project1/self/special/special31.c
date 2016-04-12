@@ -67,7 +67,7 @@ void    CalcChannels31(uchar  bMaxLine)
   uchar i;
   for (i=0; i<bMaxLine; i++)
   {
-    MonitorString("\n"); MonitorBuff(ibDig,i); MonitorString("+"); MonitorChannelsCurr(i);
+    MonitorString("\n value2 "); MonitorBuff(ibDig,i); MonitorString("+"); MonitorChannelsCurr(i);
     mpdbEngFracDigCan[ibDig][i] += mpdbChannelsCurr31[i];
     mpdbChannelsCurr31[i] = 0;
 
