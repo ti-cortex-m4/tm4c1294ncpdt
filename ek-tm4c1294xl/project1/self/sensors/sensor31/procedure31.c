@@ -50,7 +50,7 @@ uchar   GetProcedure31Idx(time  ti)
 
 void    AddProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  db)
 {
-  MonitorString("\n prev.");
+  MonitorString("\n prev. ");
 
   mtiProcedure31Dig[ibDig] = ti;
 
@@ -62,11 +62,11 @@ void    AddProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  db)
 
 void    SubProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  dbPulse)
 {
-  MonitorString("\n curr.");
+  MonitorString("\n curr. ");
 
   MonitorChannelsCurr(ibCan);
   mpdbChannelsCurr31[ibCan] = mpdbChannelsPrev31[ibCan];
-  MonitorString(" "); MonitorChannelsCurr(ibCan);
+  MonitorString("->"); MonitorChannelsCurr(ibCan);
 
   mpdbChannelsPrev31[ibCan] = 0;
 }

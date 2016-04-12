@@ -88,7 +88,7 @@ bool    ReadTop31(void)
   cwErrors31 = 0; // количество ошибок чтения
 
   ClearProcedure31(false,true);
-//  ClearChannels31();
+  ClearChannels31();
 
   Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast31,wBaseCurr31); DelayInf();
 
@@ -199,12 +199,6 @@ bool    ReadHeader31(void)
     ti2 = HouIndexToDate(dw);
 
     MonitorString("\n time2 "); MonitorTime(ti2);
-
-    for (i=0; i<MAX_LINE_N31; i++)
-    {
-      MonitorString("\n value2 ");
-      MonitorIntDec(mpwChannels[i]);
-    }
 
     if (SearchDefHouIndex(ti2) == false)
       return (++cwErrors31 < 48);
