@@ -48,21 +48,15 @@ uchar   GetProcedure31Idx(time  ti)
 
 
 
-void    MonitorBuff(uchar  ibDig, uchar  ibCan)
-{
-  MonitorLongDec(mpdbEngFracDigCan[ibDig][ibCan]*1000);
-}
-
-
 void    AddProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  db)
 {
   MonitorString("\n prev");
 
   mtiProcedure31Dig[ibDig] = ti;
 
-  MonitorLongDec(mpdbChannelsPrev31[ibCan]*1000); MonitorString("+"); MonitorLongDec(db);
+  MonitorChannelsPrev(ibCan); MonitorString("+"); MonitorLongDec(db);
   mpdbChannelsPrev31[ibCan] += (db/1000);
-  MonitorString("="); MonitorLongDec(mpdbChannelsPrev31[ibCan]*1000);
+  MonitorString("="); MonitorChannelsPrev(ibCan);
 }
 
 
@@ -70,9 +64,9 @@ void    SubProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  dbPulse)
 {
   MonitorString("\n curr.");
 
-  MonitorLongDec(mpdbChannelsCurr31[ibCan]*1000);
+  MonitorChannelsCurr(ibCan);
   mpdbChannelsCurr31[ibCan] = mpdbChannelsPrev31[ibCan];
-  MonitorString(">"); MonitorLongDec(mpdbChannelsCurr31[ibCan]*1000);
+  MonitorString(" "); MonitorChannelsCurr(ibCan);
 
   mpdbChannelsPrev31[ibCan] = 0;
 }

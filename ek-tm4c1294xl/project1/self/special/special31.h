@@ -9,4 +9,7 @@ extern  double                  mpdbChannelsPrev31[bCHANNELS],
 
 
 
+void    MonitorChannelsCurr(uchar  ibCan);
+void    MonitorChannelsPrev(uchar  ibCan);
+
 bool    MakeSpecial31(time  ti, uchar  bMaxLine);

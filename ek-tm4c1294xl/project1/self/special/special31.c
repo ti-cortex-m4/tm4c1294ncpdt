@@ -33,6 +33,25 @@ double                  mpdbChannelsPrev31[bCHANNELS],
 
 
 
+void    MonitorBuff(uchar  ibDig, uchar  ibCan)
+{
+  MonitorLongDec(mpdbEngFracDigCan[ibDig][ibCan]*1000);
+}
+
+
+void    MonitorChannelsCurr(uchar  ibCan)
+{
+  MonitorLongDec(mpdbChannelsCurr31[ibCan]*1000);
+}
+
+
+void    MonitorChannelsPrev(uchar  ibCan)
+{
+  MonitorLongDec(mpdbChannelsPrev31[ibCan]*1000);
+}
+
+
+
 void    CalcChannels31(uchar  bMaxLine)
 {
   double dbPulse = mpdbPulseHou[ibDig];
@@ -40,7 +59,7 @@ void    CalcChannels31(uchar  bMaxLine)
   uchar i;
   for (i=0; i<bMaxLine; i++)
   {
-    MonitorBuff(ibDig,i); MonitorString("+"); MonitorLongDec(mpdbChannelsCurr31[i]*1000);
+    MonitorBuff(ibDig,i); MonitorString("+"); MonitorChannelsCurr(i);
     mpdbEngFracDigCan[ibDig][i] += mpdbChannelsCurr31[i];
     mpdbChannelsCurr31[i] = 0;
 
