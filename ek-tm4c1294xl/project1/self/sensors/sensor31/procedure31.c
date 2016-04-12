@@ -50,7 +50,7 @@ uchar   GetProcedure31Idx(time  ti)
 
 void    AddProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  db)
 {
-  MonitorString("\n prev");
+  MonitorString("\n prev.");
 
   mtiProcedure31Dig[ibDig] = ti;
 

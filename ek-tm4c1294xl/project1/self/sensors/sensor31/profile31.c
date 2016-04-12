@@ -55,7 +55,7 @@ bool    DecIndex31(void)
 
 void    QueryTop31(void)
 {
-//  MonitorOpen(0);
+  MonitorOpen(0);
 
 
   InitPushCod();
@@ -88,6 +88,7 @@ bool    ReadTop31(void)
   cwErrors31 = 0; // количество ошибок чтения
 
   ClearProcedure31(false,true);
+//  ClearChannels31();
 
   Clear(); sprintf(szLo+2,"%5u:%-5u",wBaseLast31,wBaseCurr31); DelayInf();
 
