@@ -8,8 +8,6 @@ extern  time                    mtiProcedure31Dig[bCANALS];
 
 
 
-void    MonitorBuff(uchar  ibDig, uchar  ibCan);
-
 void    InitProcedure31(void);
 void    ClearProcedure31(bool  fClearValue, bool  fClearTime);
 
