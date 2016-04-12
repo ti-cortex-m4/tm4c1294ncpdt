@@ -60,11 +60,11 @@ void    AddProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  db)
 
   mtiProcedure31Dig[ibDig] = ti;
 
-  MonitorLongDec(mpdbChannelsA31[ibCan]*1000); MonitorString("+"); MonitorLongDec(db);
+  MonitorLongDec(mpdbChannelsPrev31[ibCan]*1000); MonitorString("+"); MonitorLongDec(db);
 
-  mpdbChannelsA31[ibCan] += (db/1000);
+  mpdbChannelsPrev31[ibCan] += (db/1000);
 
-  MonitorString("=A "); MonitorLongDec(mpdbChannelsA31[ibCan]*1000);
+  MonitorString("=A "); MonitorLongDec(mpdbChannelsPrev31[ibCan]*1000);
 }
 
 
@@ -72,8 +72,8 @@ void    SubProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  dbPulse)
 {
   MonitorString("\n SUB ");
 
-  mpdbChannelsB31[ibCan] = mpdbChannelsA31[ibCan];
-  MonitorString(" +B "); MonitorLongDec(mpdbChannelsB31[ibCan]*1000);
+  mpdbChannelsCurr31[ibCan] = mpdbChannelsPrev31[ibCan];
+  MonitorString(" +B "); MonitorLongDec(mpdbChannelsCurr31[ibCan]*1000);
 
-  mpdbChannelsA31[ibCan] = 0;
+  mpdbChannelsPrev31[ibCan] = 0;
 }
