@@ -27,7 +27,7 @@ SPECIAL31!C
 
 
 
-double                  mpdbChannelsA31[bCHANNELS],mpdbChannelsB31[bCHANNELS];
+double                  mpdbChannelsPrev31[bCHANNELS],mpdbChannelsCurr31[bCHANNELS];
 
 
 
@@ -39,9 +39,9 @@ void    CalcChannels31(uchar  bMaxLine)
   uchar i;
   for (i=0; i<bMaxLine; i++)
   {
-    MonitorString("\n +B "); MonitorLongDec(mpdbChannelsB31[i]*1000);
-    mpdbEngFracDigCan[ibDig][i] += mpdbChannelsB31[i];
-    mpdbChannelsB31[i] = 0;
+    MonitorString("\n +B "); MonitorLongDec(mpdbChannelsCurr31[i]*1000);
+    mpdbEngFracDigCan[ibDig][i] += mpdbChannelsCurr31[i];
+    mpdbChannelsCurr31[i] = 0;
 
     uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
     MonitorString(" w "); MonitorIntDec(w);
