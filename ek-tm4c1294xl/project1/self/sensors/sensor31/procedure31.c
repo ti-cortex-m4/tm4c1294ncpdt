@@ -48,7 +48,7 @@ uchar   GetProcedure31Idx(time  ti)
 
 
 
-static void MonitorBuff(uchar  ibDig, uchar  ibCan)
+/*static*/ void MonitorBuff(uchar  ibDig, uchar  ibCan)
 {
   MonitorLongDec(mpdbEngFracDigCan[ibDig][ibCan]*1000);
 }

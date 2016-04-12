@@ -31,13 +31,13 @@ double                  mpdbChannelsA31[bCHANNELS],mpdbChannelsB31[bCHANNELS];
 
 
 
-void    CalcChannels31(void)
+void    CalcChannels31(uchar  bMaxLine)
 {
   MonitorString("\n CALC");
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
-  for (i=0; i<6; i++)
+  for (i=0; i<bMaxLine; i++)
   {
     MonitorString("\n +B "); MonitorLongDec(mpdbChannelsB31[i]*1000);
     mpdbEngFracDigCan[ibDig][i] += mpdbChannelsB31[i];
@@ -52,55 +52,8 @@ void    CalcChannels31(void)
 }
 
 
-void    CalcDigCanals31(time  ti)
-{
-  LoadImpHouSpec(iwDigHou,1);
 
-  LoadCurrDigital(ibDig);
-
-  uchar c;
-  for (c=0; c<bCANALS; c++)
-  {
-    LoadPrevDigital(c);
-    if (CompareCurrPrevLines(ibDig, c) == true)
-    {
-      uint w;
-      if (iwDigHou == iwHardHou)
-        w = 0xFFFF;
-      else
-      {
-        w = mpwChannels[ diPrev.ibLine ];
-
-        if (IsWinterDouble(c, ti) && (mpwImpHouCanSpec[c] != 0xFFFF))
-        {
-          w += mpwImpHouCanSpec[c];
-          mpbWinterCan[c]++;
-
-          if (fLoadDay == 1) MakeImpSpec_Winter( mpimDayCanSpec, c, ti );
-          if (fLoadMon == 1) MakeImpSpec_Winter( mpimMonCanSpec, c, ti );
-        }
-      }
-
-      mpwImpHouCanSpec[c] = w;
-      mpwImpHouCanDef[c] = w;
-
-      mpboReadyCan[c] = true;
-      mpcwCalcDig[c]++;
-
-      if (fLoadDay == 1) MakeImpSpec( mpimDayCanSpec, c, ti );
-      if (fLoadMon == 1) MakeImpSpec( mpimMonCanSpec, c, ti );
-
-      if (fLoadDay == 1) MakeDefSpec( mpdeDayCan, c, ti );
-      if (fLoadMon == 1) MakeDefSpec( mpdeMonCan, c, ti );
-    }
-  }
-
-  SaveImpHouSpec(1,iwDigHou);
-}
-
-
-
-bool    MakeSpecial31(time  ti)
+bool    MakeSpecial31(time  ti, uchar  bMaxLine)
 {
   if (IsDefect(ibDig) || IsWinterDouble(ibDig, ti))
   {
@@ -112,8 +65,8 @@ bool    MakeSpecial31(time  ti)
 
     MakeAllPrevTariffs(ti);
 
-    CalcChannels31();
-    CalcDigCanals31(ti);
+    CalcChannels31(bMaxLine);
+    CalcDigCanals(ti);
 
     fLoadMem = 0;
     CalcAllGroups(1, ti);

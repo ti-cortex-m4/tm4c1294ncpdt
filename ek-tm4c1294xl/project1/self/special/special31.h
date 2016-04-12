@@ -8,4 +8,4 @@ extern  double                  mpdbChannelsA31[bCHANNELS],mpdbChannelsB31[bCHAN
 
 
 
-bool    MakeSpecial31(time  ti);
+bool    MakeSpecial31(time  ti, uchar  bMaxLine);
