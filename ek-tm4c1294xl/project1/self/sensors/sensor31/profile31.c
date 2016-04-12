@@ -212,7 +212,7 @@ bool    ReadHeader31(void)
 
     ShowProgressDigHou();
 
-    MakeSpecial31(ti2) ? MonitorString("\n is added") : MonitorString("\n isn't added");
+    MakeSpecial31(ti2, MAX_LINE_N31) ? MonitorString("\n is added") : MonitorString("\n isn't added");
     return MakeStopHou(0);
   }
   else
