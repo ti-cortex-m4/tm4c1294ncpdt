@@ -20,6 +20,7 @@ SPECIAL31!C
 #include "../energy.h"
 #include "../kernel/arrays_buff.h"
 #include "../serial/monitor.h"
+#include "../sensors/sensor31/procedure31.h"
 #include "calc.h"
 #include "recalc_def.h"
 #include "special.h"
@@ -27,27 +28,28 @@ SPECIAL31!C
 
 
 
-double                  mpdbChannelsPrev31[bCHANNELS],mpdbChannelsCurr31[bCHANNELS];
+double                  mpdbChannelsPrev31[bCHANNELS],
+                        mpdbChannelsCurr31[bCHANNELS];
 
 
 
 void    CalcChannels31(uchar  bMaxLine)
 {
-  MonitorString("\n CALC");
   double dbPulse = mpdbPulseHou[ibDig];
 
   uchar i;
   for (i=0; i<bMaxLine; i++)
   {
-    MonitorString("\n +B "); MonitorLongDec(mpdbChannelsCurr31[i]*1000);
+    MonitorBuff(ibDig,i); MonitorString("+"); MonitorLongDec(mpdbChannelsCurr31[i]*1000);
     mpdbEngFracDigCan[ibDig][i] += mpdbChannelsCurr31[i];
     mpdbChannelsCurr31[i] = 0;
 
     uint w = (uint)(mpdbEngFracDigCan[ibDig][i]*dbPulse);
-    MonitorString(" w "); MonitorIntDec(w);
+    MonitorString(" = "); MonitorIntDec(w);
     mpwChannels[i] = w;
 
     mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
+    MonitorString("+"); MonitorBuff(ibDig,i);
   }
 }
 
