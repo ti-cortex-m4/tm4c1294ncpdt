@@ -48,25 +48,25 @@ uchar   GetProcedure31Idx(time  ti)
 
 
 
-void    AddProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  db)
+void    AddProcedure31(time  ti, uchar  ibDig, uchar  i, double  db)
 {
-  MonitorString("\n prev. ");
+  MonitorString(" prev. ");
 
   mtiProcedure31Dig[ibDig] = ti;
 
-  MonitorChannelsPrev(ibCan); MonitorString("+"); MonitorLongDec(db);
-  mpdbChannelsPrev31[ibCan] += (db/1000);
-  MonitorString("="); MonitorChannelsPrev(ibCan);
+  MonitorChannelsPrev(i); MonitorString("+"); MonitorLongDec(db);
+  mpdbChannelsPrev31[i] += (db/1000);
+  MonitorString("="); MonitorChannelsPrev(i);
 }
 
 
-void    SubProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  dbPulse)
+void    SubProcedure31(time  ti, uchar  ibDig, uchar  i, double  dbPulse)
 {
-  MonitorString("\n curr. ");
+  MonitorString(" curr. ");
 
-  MonitorChannelsCurr(ibCan);
-  mpdbChannelsCurr31[ibCan] = mpdbChannelsPrev31[ibCan];
-  MonitorString("->"); MonitorChannelsCurr(ibCan);
+  MonitorChannelsCurr(i);
+  mpdbChannelsCurr31[i] = mpdbChannelsPrev31[i];
+  MonitorString("->"); MonitorChannelsCurr(i);
 
-  mpdbChannelsPrev31[ibCan] = 0;
+  mpdbChannelsPrev31[i] = 0;
 }
