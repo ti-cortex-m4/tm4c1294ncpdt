@@ -46,7 +46,6 @@ static void MonitorChannelsCurr(uchar  i)
   MonitorLongDec(mpdbChannelsCurr31[i]*1000);
 }
 
-
 static void MonitorChannelsPrev(uchar  i)
 {
   MonitorLongDec(mpdbChannelsPrev31[i]*1000);
@@ -96,7 +95,7 @@ void    AddProcedure31(time  ti, uchar  ibDig, uchar  i, double  db)
 }
 
 
-void    SubProcedure31(time  ti, uchar  ibDig, uchar  i, double  dbPulse)
+void    SubProcedure31(time  ti, uchar  ibDig, uchar  i)
 {
   MonitorString(" curr. ");
 

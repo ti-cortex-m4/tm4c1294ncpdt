@@ -140,8 +140,6 @@ bool    ReadHeader32(void)
   bool new = (ti2.bYear == 0);
   bool add = false;
 
-  double dbPulse = mpdbPulseHou[ibDig];
-
   uchar i;
   for (i=0; i<MAX_LINE_N32; i++)
   {
@@ -176,7 +174,7 @@ bool    ReadHeader32(void)
         add = true;
         MonitorString("\n another idx ");
 
-        SubProcedure31(ti1, ibDig, i, dbPulse);
+        SubProcedure31(ti1, ibDig, i);
 
         MonitorString("\n next start ");
         AddProcedure31(ti1, ibDig, i, db);
