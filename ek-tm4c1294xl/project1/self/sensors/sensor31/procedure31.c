@@ -121,7 +121,7 @@ void    SubProcedure31(time  ti, uchar  ibDig, uchar  i)
 }
 
 
-void    CalcChannels31(uchar  bMaxLine)
+void    CalcDigCanals31(uchar  bMaxLine)
 {
   double dbPulse = mpdbPulseHou[ibDig];
 
@@ -154,7 +154,7 @@ bool    MakeSpecial31(time  ti, uchar  bMaxLine)
 
     MakeAllPrevTariffs(ti);
 
-    CalcChannels31(bMaxLine);
+    CalcDigCanals31(bMaxLine);
     CalcDigCanals(ti);
 
     fLoadMem = 0;
