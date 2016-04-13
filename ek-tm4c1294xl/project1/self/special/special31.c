@@ -33,21 +33,21 @@ double                  mpdbChannelsPrev31[bCHANNELS],
 
 
 
-void    MonitorBuff(uchar  ibDig, uchar  ibCan)
+void    MonitorBuff(uchar  ibDig, uchar  i)
 {
-  MonitorLongDec(mpdbEngFracDigCan[ibDig][ibCan]*1000);
+  MonitorLongDec(mpdbEngFracDigCan[ibDig][i]*1000);
 }
 
 
-void    MonitorChannelsCurr(uchar  ibCan)
+void    MonitorChannelsCurr(uchar  i)
 {
-  MonitorLongDec(mpdbChannelsCurr31[ibCan]*1000);
+  MonitorLongDec(mpdbChannelsCurr31[i]*1000);
 }
 
 
-void    MonitorChannelsPrev(uchar  ibCan)
+void    MonitorChannelsPrev(uchar  i)
 {
-  MonitorLongDec(mpdbChannelsPrev31[ibCan]*1000);
+  MonitorLongDec(mpdbChannelsPrev31[i]*1000);
 }
 
 

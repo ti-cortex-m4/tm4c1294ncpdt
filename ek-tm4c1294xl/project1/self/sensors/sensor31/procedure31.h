@@ -13,5 +13,5 @@ void    ClearProcedure31(bool  fClearValue, bool  fClearTime);
 
 uchar   GetProcedure31Idx(time  ti);
 
-void    AddProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  db);
-void    SubProcedure31(time  ti, uchar  ibDig, uchar  ibCan, double  dbPulse);
+void    AddProcedure31(time  ti, uchar  ibDig, uchar  i, double  db);
+void    SubProcedure31(time  ti, uchar  ibDig, uchar  i, double  dbPulse);
