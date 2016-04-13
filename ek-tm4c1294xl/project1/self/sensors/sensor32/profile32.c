@@ -85,7 +85,7 @@ bool    ReadTop32(void)
 
   cwErrors32 = 0; // количество ошибок чтения
 
-  ClearProcedure31(true,true);
+  StartProcedure31();
 
   Clear(); sprintf(szLo+3,"%4u:%-4u",wBaseLast32,wBaseCurr32); DelayInf();
 

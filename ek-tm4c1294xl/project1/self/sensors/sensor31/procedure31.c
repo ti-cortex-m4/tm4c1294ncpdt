@@ -53,9 +53,10 @@ static void MonitorChannelsPrev(uchar  i)
 
 
 
-void    InitProcedure31(void)
+void    ClearChannels31(void)
 {
-  ClearProcedure31(true,true);
+  memset(&mpdbChannelsPrev31, 0, sizeof(mpdbChannelsPrev31));
+  memset(&mpdbChannelsCurr31, 0, sizeof(mpdbChannelsCurr31));
 }
 
 
@@ -72,6 +73,19 @@ void    ClearProcedure31(bool  fClearValue, bool  fClearTime)
     MonitorString("\n clear procedure time");
     memset(&mtiProcedure31Dig, 0, sizeof(mtiProcedure31Dig));
   }
+}
+
+
+void    InitProcedure31(void)
+{
+  ClearProcedure31(true,true);
+}
+
+
+void    StartProcedure31(void)
+{
+  ClearProcedure31(false,true);
+  ClearChannels31();
 }
 
 
@@ -104,14 +118,6 @@ void    SubProcedure31(time  ti, uchar  ibDig, uchar  i)
   MonitorString("->"); MonitorChannelsCurr(i);
 
   mpdbChannelsPrev31[i] = 0;
-}
-
-
-
-void    ClearChannels31(void)
-{
-  memset(&mpdbChannelsPrev31, 0, sizeof(mpdbChannelsPrev31));
-  memset(&mpdbChannelsCurr31, 0, sizeof(mpdbChannelsCurr31));
 }
 
 
