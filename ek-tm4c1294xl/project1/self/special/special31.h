@@ -9,8 +9,8 @@ extern  double                  mpdbChannelsPrev31[bCHANNELS],
 
 
 
-void    MonitorChannelsCurr(uchar  ibCan);
-void    MonitorChannelsPrev(uchar  ibCan);
+void    MonitorChannelsCurr(uchar  i);
+void    MonitorChannelsPrev(uchar  i);
 
 void    ClearChannels31(void);
 
