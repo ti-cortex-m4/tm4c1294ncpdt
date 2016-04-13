@@ -18,7 +18,6 @@ PROFILE31.C
 #include "../../time/timedate.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
-#include "../../special/special31.h"
 #include "procedure31.h"
 #include "automatic31.h"
 #include "device31.h"
