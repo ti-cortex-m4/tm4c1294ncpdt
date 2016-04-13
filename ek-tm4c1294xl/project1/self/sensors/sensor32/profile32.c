@@ -18,7 +18,6 @@ PROFILE32.C
 #include "../../time/timedate.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
-#include "../../special/special.h"
 #include "../sensor31/automatic31.h"
 #include "../sensor31/procedure31.h"
 #include "automatic32.h"
@@ -192,12 +191,6 @@ bool    ReadHeader32(void)
 
     MonitorString("\n time2 "); MonitorTime(ti2);
 
-    for (i=0; i<MAX_LINE_N32; i++)
-    {
-      MonitorString("\n value2 ");
-      MonitorIntDec(mpwChannels[i]);
-    }
-
     if (SearchDefHouIndex(ti2) == false)
       return (++cwErrors32 < 48);
     else
@@ -205,7 +198,7 @@ bool    ReadHeader32(void)
 
     ShowProgressDigHou();
 
-    MakeSpecial(ti2) ? MonitorString("\n is added") : MonitorString("\n isn't added");
+    MakeSpecial31(ti2, MAX_LINE_N32) ? MonitorString("\n is added") : MonitorString("\n isn't added");
     return MakeStopHou(0);
   }
   else
