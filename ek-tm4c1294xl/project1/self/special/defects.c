@@ -36,9 +36,8 @@ void    MakeDefectMon(uchar  ibMon, time  ti)
 
 
 
-void    MakeAllDefects(void)
+void    MakeAllDefects(time  ti)
 {
-  time ti = *GetCurrTimeDate();
   ASSERT(ValidTimeDateRTC(ti));
 
   uchar d;
@@ -89,12 +88,12 @@ void    InitDefects_Custom(void)
   }
   else
   {
-    MakeAllDefects();
+    MakeAllDefects(tiCurr);
   }
 }
 
 
 void    StartDefects(void)
 {
-  MakeAllDefects();
+  MakeAllDefects(*GetCurrTimeDate());
 }
