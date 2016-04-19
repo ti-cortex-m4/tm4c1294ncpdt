@@ -14,14 +14,14 @@ PROFILE_FRAC!C
 bool    SaveProfileFrac6(uint  c)
 {
   ASSERT(c < bCANALS);
-  return SaveArrayX(PROFILE_FRAC_6, sizeof(chEngFracDigCan[0]), c, chEngFracDigCan[c]);
+  return SaveArrayX(PROFILE_FRAC_6, sizeof(mpdbEngFracDigCan[0]), c, mpdbEngFracDigCan[c]);
 }
 
 
 bool    LoadProfileFrac6(uint  c)
 {
   ASSERT(c < bCANALS);
-  return LoadArrayX(PROFILE_FRAC_6, sizeof(chEngFracDigCan[0]), c, chEngFracDigCan[c]);
+  return LoadArrayX(PROFILE_FRAC_6, sizeof(mpdbEngFracDigCan[0]), c, mpdbEngFracDigCan[c]);
 }
 
 

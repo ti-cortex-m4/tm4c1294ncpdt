@@ -7,6 +7,7 @@ DEVICES_INIT!C
 #include "../main.h"
 #include "../console.h"
 #include "../memory/mem_digitals.h"
+#include "../memory/mem_profile.h"
 #include "../memory/mem_phones.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../digitals/digitals.h"
@@ -30,6 +31,7 @@ DEVICES_INIT!C
 #include "../serial/speeds_display.h"
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/profile/refill.h"
+#include "../digitals/profile/profile_frac.h"
 #include "../digitals/schedule/schedule.h"
 #include "../digitals/dsbl_answer.h"
 #include "../flash/records.h"
@@ -83,6 +85,8 @@ void    InitDevices1(void)
   LoadCacheChar(&chPlcUSize, 1, 8, 6);
   LoadCacheInt(&chPlcUShutdown, 10, 500, 100);
   LoadCacheBool(&chControlW, false);
+
+  LoadProfileFrac6_All();
 
   InitMaxRepeats();
   InitMaxShutdown();
@@ -161,6 +165,9 @@ void    ResetDevices(bool  fFull)
   SaveCache(&chPlcUShutdown);
 
   SaveCacheBool(&chControlW, false);
+
+  memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
+  SaveProfileFrac6_All();
 
   ResetMaxRepeats();
   ResetMaxShutdown();
