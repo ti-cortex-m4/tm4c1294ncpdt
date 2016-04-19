@@ -61,14 +61,8 @@ void    ClearChannels31(void)
 }
 
 
-void    ClearProcedure31(bool  fClearValue, bool  fClearTime)
+void    ClearProcedure31(bool  fClearTime)
 {
-  if (fClearValue)
-  {
-    MonitorString("\n clear procedure value");
-    memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
-  }
-
   if (fClearTime)
   {
     MonitorString("\n clear procedure time");
@@ -79,13 +73,13 @@ void    ClearProcedure31(bool  fClearValue, bool  fClearTime)
 
 void    InitProcedure31(void)
 {
-  ClearProcedure31(true,true);
+  ClearProcedure31(true);
 }
 
 
 void    StartProcedure31(void)
 {
-  ClearProcedure31(false,true);
+  ClearProcedure31(true);
   ClearChannels31();
 }
 
