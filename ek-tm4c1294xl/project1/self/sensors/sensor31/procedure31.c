@@ -14,6 +14,7 @@ PROCEDURE31.C
 #include "../../tariffs/tariffs.h"
 #include "../../impulses/energy_spec.h"
 #include "../../digitals/digitals.h"
+#include "../../digitals/profile/profile_frac.h"
 #include "../../devices/devices.h"
 #include "../../time/delay.h"
 #include "../../time/timedate.h"
@@ -139,6 +140,8 @@ void    CalcDigCanals31(uchar  bMaxLine)
     mpdbEngFracDigCan[ibDig][i] -= (double)w/dbPulse;
     MonitorString("+"); MonitorBuff(ibDig,i);
   }
+
+  SaveProfileFrac6(ibDig);
 }
 
 

@@ -10,6 +10,7 @@ OUT_PROFILE,C
 #include "../../memory/mem_profile.h"
 #include "../../memory/mem_digitals.h"
 #include "../../serial/ports.h"
+#include "../../digitals/profile/profile_frac.h"
 #include "out_profile.h"
 
 
@@ -82,7 +83,10 @@ void    OutResetEngFrac(void)
 void    OutResetEngFracDigCan(void)
 {
   if (enGlobal == GLB_REPROGRAM)
+  {
     memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
+    SaveProfileFrac6_All();
+  }
   else
     Result(bRES_NEEDREPROGRAM);
 }
