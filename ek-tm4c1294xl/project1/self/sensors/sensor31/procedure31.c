@@ -61,25 +61,16 @@ void    ClearChannels31(void)
 }
 
 
-void    ClearProcedure31(bool  fClearTime)
+void    ClearProcedure31(void)
 {
-  if (fClearTime)
-  {
-    MonitorString("\n clear procedure time");
-    memset(&mtiProcedure31Dig, 0, sizeof(mtiProcedure31Dig));
-  }
-}
-
-
-void    InitProcedure31(void)
-{
-  ClearProcedure31(true);
+  MonitorString("\n clear procedure time");
+  memset(&mtiProcedure31Dig, 0, sizeof(mtiProcedure31Dig));
 }
 
 
 void    StartProcedure31(void)
 {
-  ClearProcedure31(true);
+  ClearProcedure31();
   ClearChannels31();
 }
 

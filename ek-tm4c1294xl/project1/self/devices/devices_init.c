@@ -24,7 +24,6 @@ DEVICES_INIT!C
 #include "../digitals/max_shutdown.h"
 #include "../special/recalc_def.h"
 #include "../sensors/device_b.h"
-#include "../sensors/sensor31/procedure31.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
@@ -94,7 +93,6 @@ void    InitDevices1(void)
   InitRefill();
   InitSchedule();
   InitDsblAnswer();
-  InitProcedure31();
 
   InitExtended0();
   InitExtended1();
