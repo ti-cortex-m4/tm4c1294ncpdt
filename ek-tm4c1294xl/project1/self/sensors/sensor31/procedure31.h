@@ -8,7 +8,6 @@ extern  time                    mtiProcedure31Dig[bCANALS];
 
 
 
-void    InitProcedure31(void);
 void    StartProcedure31(void);
 
 uchar   GetProcedure31Idx(time  ti);
