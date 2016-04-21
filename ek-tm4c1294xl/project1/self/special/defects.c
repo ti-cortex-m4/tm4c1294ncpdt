@@ -36,44 +36,45 @@ void    MakeDefectMon(uchar  ibMon, time  ti)
 
 
 
-void    MakeAllDefects(void)
+void    MakeAllDefects(const time  ti)
 {
-  time ti = *GetCurrTimeDate();
   ASSERT(ValidTimeDateRTC(ti));
+
+  time ti1 = ti;
 
   uchar d;
   for (d=0; d<bDAYS; d++)
   {
-    MakeDefectDay(d, ti);
+    MakeDefectDay(d, ti1);
 
-    if (ti.bDay > 1)
-      ti.bDay--;
+    if (ti1.bDay > 1)
+      ti1.bDay--;
     else
     {
-      if (ti.bMonth > 1)
-        ti.bMonth--;
+      if (ti1.bMonth > 1)
+        ti1.bMonth--;
       else
       {
-        ti.bMonth = 12;
-        ti.bYear--;
+        ti1.bMonth = 12;
+        ti1.bYear--;
       }
-      ti.bDay = GetDaysInMonthYM(ti.bYear, ti.bMonth);
+      ti1.bDay = GetDaysInMonthYM(ti1.bYear, ti1.bMonth);
     }
   }
 
-  ti = *GetCurrTimeDate();
+  time ti2 = ti;
 
   uchar m;
   for (m=0; m<bMONTHS; m++)
   {
-    MakeDefectMon(m, ti);
+    MakeDefectMon(m, ti2);
 
-    if (ti.bMonth > 1)
-      ti.bMonth--;
+    if (ti2.bMonth > 1)
+      ti2.bMonth--;
     else
     {
-      ti.bMonth = 12;
-      ti.bYear--;
+      ti2.bMonth = 12;
+      ti2.bYear--;
     }
   }
 }
@@ -89,12 +90,12 @@ void    InitDefects_Custom(void)
   }
   else
   {
-    MakeAllDefects();
+    MakeAllDefects(tiCurr);
   }
 }
 
 
 void    StartDefects(void)
 {
-  MakeAllDefects();
+  MakeAllDefects(*GetCurrTimeDate());
 }
