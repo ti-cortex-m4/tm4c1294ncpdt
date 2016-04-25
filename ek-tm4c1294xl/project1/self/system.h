@@ -93,7 +93,7 @@ SYSTEM!H
 #define bMAXVERSION     4
 
 // минорная версия прибора
-#define bMINVERSION     19
+#define bMINVERSION     18
 
 
 // количество каналов

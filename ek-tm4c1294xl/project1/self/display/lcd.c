@@ -25,7 +25,7 @@ LCD!C
 #define LCD_FLAG_DATA    0x01 // передать данные
 
 
-static uchar const      szName[]        = "  СЭМ-2.01 тест ",
+static uchar const      szName[]        = "    СЭМ-2.01    ",
                         szTest[]        = "                ";
 
 
