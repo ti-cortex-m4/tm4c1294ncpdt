@@ -260,5 +260,7 @@ typedef enum
   SERIAL_TIMES          = SERIAL_VALUES + sizeof(mdwSerialValues) + bNVRAM_MARGIN,
   SERIAL_FLAGS          = SERIAL_TIMES + sizeof(mtiSerialTimes) + bNVRAM_MARGIN,
 
-  NVRAM_END             = SERIAL_FLAGS + sizeof(mfSerialFlags) + bNVRAM_MARGIN
+  PROFILE_FRAC_6        = SERIAL_FLAGS + sizeof(mfSerialFlags) + bNVRAM_MARGIN,
+
+  NVRAM_END             = PROFILE_FRAC_6 + (sizeof(mpdbEngFracDigCan[0]) + bNVRAM_MARGIN)*bCANALS
 } nvram;

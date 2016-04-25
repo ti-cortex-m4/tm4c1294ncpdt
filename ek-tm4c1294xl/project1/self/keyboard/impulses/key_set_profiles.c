@@ -13,6 +13,7 @@ KEY_SET_PROFILES!C
 #include "../../realtime/realtime_spec.h"
 #include "../../impulses/energy_spec.h"
 #include "../../digitals/digitals.h"
+#include "../../digitals/profile/profile_frac.h"
 #include "../../special/calc.h"
 
 
@@ -51,6 +52,7 @@ void    SetProfiles(uchar  ibDigMin, uchar  ibDigMax, uint  wHhrMin, uint  wHhrM
 
   memset(&mpdbEngFrac, 0, sizeof(mpdbEngFrac));
   memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
+  SaveProfileFrac6_All();
 
   uchar ibDig;
   for (ibDig=ibDigMin; ibDig<=ibDigMax; ibDig++)

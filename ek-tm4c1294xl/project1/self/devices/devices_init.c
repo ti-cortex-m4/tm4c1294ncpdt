@@ -7,6 +7,7 @@ DEVICES_INIT!C
 #include "../main.h"
 #include "../console.h"
 #include "../memory/mem_digitals.h"
+#include "../memory/mem_profile.h"
 #include "../memory/mem_phones.h"
 #include "../keyboard/time/key_timedate.h"
 #include "../digitals/digitals.h"
@@ -23,13 +24,13 @@ DEVICES_INIT!C
 #include "../digitals/max_shutdown.h"
 #include "../special/recalc_def.h"
 #include "../sensors/device_b.h"
-#include "../sensors/sensor31/procedure31.h"
 #include "../serial/ports.h"
 #include "../serial/ports_modems.h"
 #include "../serial/modems.h"
 #include "../serial/speeds_display.h"
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/profile/refill.h"
+#include "../digitals/profile/profile_frac.h"
 #include "../digitals/schedule/schedule.h"
 #include "../digitals/dsbl_answer.h"
 #include "../flash/records.h"
@@ -84,13 +85,14 @@ void    InitDevices1(void)
   LoadCacheInt(&chPlcUShutdown, 10, 500, 100);
   LoadCacheBool(&chControlW, false);
 
+  LoadProfileFrac6_All();
+
   InitMaxRepeats();
   InitMaxShutdown();
   InitDef();
   InitRefill();
   InitSchedule();
   InitDsblAnswer();
-  InitProcedure31();
 
   InitExtended0();
   InitExtended1();
@@ -161,6 +163,9 @@ void    ResetDevices(bool  fFull)
   SaveCache(&chPlcUShutdown);
 
   SaveCacheBool(&chControlW, false);
+
+  memset(&mpdbEngFracDigCan, 0, sizeof(mpdbEngFracDigCan));
+  SaveProfileFrac6_All();
 
   ResetMaxRepeats();
   ResetMaxShutdown();
