@@ -260,5 +260,7 @@ RESERVE(SERIAL_VALUES, sizeof(mdwSerialValues) + bNVRAM_MARGIN)
 RESERVE(SERIAL_TIMES, sizeof(mtiSerialTimes) + bNVRAM_MARGIN)
 RESERVE(SERIAL_FLAGS, sizeof(mfSerialFlags) + bNVRAM_MARGIN)
 
+RESERVE(PROFILE_FRAC_6, (sizeof(mpdbEngFracDigCan[0]) + bNVRAM_MARGIN)*bCANALS)
+
 END(NVRAM_END)
 } nvram;

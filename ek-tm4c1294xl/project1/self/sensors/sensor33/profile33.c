@@ -18,7 +18,6 @@ PROFILE33.C
 #include "../../time/timedate.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
-#include "../../special/special.h"
 #include "../sensor31/automatic31.h"
 #include "../sensor31/procedure31.h"
 #include "automatic33.h"
@@ -88,7 +87,7 @@ bool    ReadTop33(void)
 
   cwErrors33 = 0; // количество ошибок чтения
 
-  ClearProcedure31(true,true);
+  StartProcedure31();
 
   Clear(); sprintf(szLo+3,"%4u:%-4u",wBaseLast33,wBaseCurr33); DelayInf();
 
@@ -143,8 +142,6 @@ bool    ReadHeader33(void)
   bool new = (ti2.bYear == 0);
   bool add = false;
 
-  double dbPulse = mpdbPulseHou[ibDig];
-
   uchar i;
   for (i=0; i<MAX_LINE_N33; i++)
   {
@@ -179,7 +176,7 @@ bool    ReadHeader33(void)
         add = true;
         MonitorString("\n another idx ");
 
-        SubProcedure31(ti1, ibDig, i, dbPulse);
+        SubProcedure31(ti1, ibDig, i);
 
         MonitorString("\n next start ");
         AddProcedure31(ti1, ibDig, i, db);
@@ -197,12 +194,6 @@ bool    ReadHeader33(void)
 
     MonitorString("\n time2 "); MonitorTime(ti2);
 
-    for (i=0; i<MAX_LINE_N33; i++)
-    {
-      MonitorString("\n value2 ");
-      MonitorIntDec(mpwChannels[i]);
-    }
-
     if (SearchDefHouIndex(ti2) == false)
       return (++cwErrors33 < 48);
     else
@@ -210,7 +201,7 @@ bool    ReadHeader33(void)
 
     ShowProgressDigHou();
 
-    MakeSpecial(ti2) ? MonitorString("\n is added") : MonitorString("\n isn't added");
+    MakeSpecial31(ti2, MAX_LINE_N33) ? MonitorString("\n is added") : MonitorString("\n isn't added");
     return MakeStopHou(0);
   }
   else
