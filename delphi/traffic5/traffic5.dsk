@@ -1,18 +1,20 @@
 [Closed Files]
-File_0=SourceModule,'E:\AsyncPro\AdExcept.pas',0,1,367,1,373,0,0
-File_1=SourceModule,'D:\ASYNCPRO\AdExcept.pas',0,1,372,1,380,0,0
-File_2=SourceModule,'D:\Home\Delphi.3\Traffic.3\main.dfm',0,1,1,1,1,0,0
-File_3=SourceModule,'D:\Home\Eva\Use485.2\main.pas',0,1,761,1,764,1,0
-File_4=SourceModule,'D:\Home\Eva\Use485.2\sinput.pas',0,1,573,53,579,0,0
-File_5=SourceModule,'D:\Home\Eva\Use485.2\main.dfm',0,1,1,1,1,0,0
-File_6=SourceModule,'E:\Home\Eva\Use485.2\support.pas',0,1,98,1,116,0,0
-File_7=SourceModule,'E:\Home\Eva\Use485.2\serial.pas',0,1,32,1,43,0,0
-File_8=SourceModule,'C:\ASYNCPRO\AdExcept.pas',0,1,370,1,380,0,0
+File_0=SourceModule,'c:\program files (x86)\borland.7\delphi7\source\rtl\Sys\sysutils.pas',0,1,11219,1,11318,0,0
+File_1=SourceModule,'E:\AsyncPro\AdExcept.pas',0,1,367,1,373,0,0
+File_2=SourceModule,'D:\ASYNCPRO\AdExcept.pas',0,1,372,1,380,0,0
+File_3=SourceModule,'D:\Home\Delphi.3\Traffic.3\main.dfm',0,1,1,1,1,0,0
+File_4=SourceModule,'D:\Home\Eva\Use485.2\main.pas',0,1,761,1,764,1,0
+File_5=SourceModule,'D:\Home\Eva\Use485.2\sinput.pas',0,1,573,53,579,0,0
+File_6=SourceModule,'D:\Home\Eva\Use485.2\main.dfm',0,1,1,1,1,0,0
+File_7=SourceModule,'E:\Home\Eva\Use485.2\support.pas',0,1,98,1,116,0,0
+File_8=SourceModule,'E:\Home\Eva\Use485.2\serial.pas',0,1,32,1,43,0,0
+File_9=SourceModule,'C:\ASYNCPRO\AdExcept.pas',0,1,370,1,380,0,0
 
 [Modules]
 Module0=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\main.pas
 Module1=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\traffic5.dpr
-Count=2
+Module2=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas
+Count=3
 EditWindowCount=1
 
 [D:\Cortex\tm4c1294ncpdt\delphi\traffic5\main.pas]
@@ -25,15 +27,21 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
+[D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
 [C:\Program Files (x86)\Borland.7\Delphi7\Projects\ProjectGroup1.bpg]
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=2
-CurrentView=1
+ViewCount=3
+CurrentView=2
 View0=0
 View1=1
+View2=2
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -58,17 +66,24 @@ BottomPanelClients=MessageView@EditWindow0
 BottomPanelData=0000040000000000A005000000000000029F00000000000000010000000000000000000000000100000000A00500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
-Module=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\traffic5.dpr
-CursorX=1
-CursorY=1
-TopLine=1
+Module=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas
+CursorX=41
+CursorY=58
+TopLine=48
 LeftCol=1
 
 [View1]
+Module=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\traffic5.dpr
+CursorX=34
+CursorY=12
+TopLine=1
+LeftCol=1
+
+[View2]
 Module=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\main.pas
-CursorX=10
-CursorY=114
-TopLine=100
+CursorX=81
+CursorY=330
+TopLine=195
 LeftCol=1
 
 [Watches]
@@ -93,8 +108,7 @@ LRDockWidth=421
 Dockable=1
 
 [Breakpoints]
-Count=1
-Breakpoint0='E:\Home\Delphi\Traffic.4\main.pas',135,'',0,1,'',1,0,0,'',1,'','',''
+Count=0
 
 [AddressBreakpoints]
 Count=0
