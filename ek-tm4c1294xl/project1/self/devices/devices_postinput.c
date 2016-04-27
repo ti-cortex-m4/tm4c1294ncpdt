@@ -28,6 +28,7 @@ void    DevicesPostInput(void)
         (diCurr.bDevice == 18) ||
         (diCurr.bDevice == 19))
     {
+      MonitorIn();
       MakeCRC16InBuff( 0, CountInBuff() );
 
       if ((bCRCHi == 0) && (bCRCLo == 0))
@@ -39,6 +40,7 @@ void    DevicesPostInput(void)
 #ifndef SKIP_C
     else if (diCurr.bDevice == 3)
     {
+      MonitorIn();
       MakeCRC16InBuff( 0, CountInBuff()-2 );
 
       if ((bCRCHi == InBuff( CountInBuff()-1 )) &&
