@@ -219,9 +219,9 @@ begin
 
   if (wComNumberPrev <> wComNumber) and (wComNumberPrev <> 100) then begin
     Terminal('');
-    Terminal('\\ COM' + IntToStr(wComNumberPrev)    + ':   ' + Time2Str(datStop - datStart) +
-             '   COM' + IntToStr(wComNumberPrev)    +
-             '->COM'  + IntToStr(wComNumber) + ':   ' + Time2Str(datNow - datStop));
+    Terminal('\\ COM' + IntToStr(wComNumberPrev) + ':  ' + Time2Str(datStop - datStart) +
+             '   COM' + IntToStr(wComNumberPrev) +
+             '->COM'  + IntToStr(wComNumber) + ':  ' + Time2Str(datNow - datStop));
     datStart := datNow;
   end;
 
@@ -244,7 +244,7 @@ begin
     s := s + IntToHex(mpbInBuff[i],2) + ' ';
   end;
 
-  s := s + '   \\ ' + IntToStr(Count) + ' байт;  ' + Time2Str(Now);
+  s := s + '   \\ ' + IntToStr(Count) + ' байт:  ' + Time2Str(Now);
   Terminal(s);
 end;
 
@@ -322,7 +322,7 @@ end;
 
 procedure TfrmMain.btbSaveInfoClick(Sender: TObject);
 begin
-  SaveMemo(memTerminal, 'Терминал ' + DateTime2Str(Now) + ' ');
+  SaveMemo(memTerminal, 'Траффик ' + DateTime2Str(Now) + ' ');
 end;
 
 procedure TfrmMain.btbCrealInfoClick(Sender: TObject);

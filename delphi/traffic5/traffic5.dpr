@@ -9,7 +9,7 @@ uses
 
 begin
   Application.Initialize;
-  Application.Title := 'COM-COM трафик анализатор';
+  Application.Title := 'COM-COM траффик';
   Application.CreateForm(TfrmMain, frmMain);
   Application.Run;
 end.

@@ -2,8 +2,8 @@ APRO v4.07
 Compiler : Delphi 7
 Operating System : WinNT 6.1 Service Pack 1
 Device: COM5
-Date/time: 27.04.16, 16:13:51
+Date/time: 27.04.16, 17:13:33
 Time      Type      SubType       Data      OtherData
 --------  --------  ------------  --------  ---------
-0000.004  TrDatChg  Avail         00000001  
-0000.004  TrgHdAlc  Window        00150732  
+0000.003  TrDatChg  Avail         00000001  
+0000.003  TrgHdAlc  Window        003704A6  
