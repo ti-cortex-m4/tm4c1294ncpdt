@@ -1,6 +1,9 @@
+*.log
+*.trc
 *.zip
 *.rar
 *.txt
 *.bat
+*.dcu
 *.~???
 __history

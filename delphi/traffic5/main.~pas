@@ -22,24 +22,10 @@ type
     lblBaud1: TLabel;
     lblComm2: TLabel;
     lblBaud2: TLabel;
-    spbLeft: TSpeedButton;
-    spbRight: TSpeedButton;
     pgcMain: TPageControl;
     tbsTerminal: TTabSheet;
     tbsSettings: TTabSheet;
     memTerminal: TMemo;
-    lblFlashDayTo: TLabel;
-    edtFlashDayMax: TEdit;
-    updProbability1: TUpDown;
-    Label1: TLabel;
-    Edit1: TEdit;
-    updProbability2: TUpDown;
-    Label2: TLabel;
-    Edit2: TEdit;
-    updProbability3: TUpDown;
-    Timer1: TTimer;
-    Edit3: TEdit;
-    UpDown1: TUpDown;
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -47,25 +33,16 @@ type
     procedure SetComm1(wComNumber: word);
     procedure SetBaud2(dwBaud: longint);
     procedure SetComm2(wComNumber: word);
-    procedure ErrBox(stOut: string);
-    procedure WrnBox(stOut: string);
-    procedure InfBox(stOut: string);
     procedure Terminal(stT: string);
     procedure Ready(wComNumber: word; Count: word);
     procedure Dump(Count: word);
     function  Time(Time: TDateTime): string;
-    function  Int2Str(wValue: word; bDigits: byte): string;
-    procedure Buttons;
     procedure Comm1TriggerAvail(CP: TObject; Count: Word);
     procedure Comm2TriggerAvail(CP: TObject; Count: Word);
     procedure cmbComm1Change(Sender: TObject);
     procedure cmbComm2Change(Sender: TObject);
     procedure cmbBaud1Change(Sender: TObject);
     procedure cmbBaud2Change(Sender: TObject);
-    procedure memTerminalKeyPress(Sender: TObject; var Key: Char);
-    procedure spbLeftClick(Sender: TObject);
-    procedure spbRightClick(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -90,13 +67,12 @@ const
   stCOMNUMBER:          string  = 'Нумар';
   stBAUD:               string  = 'Хуткасьць';
   stSETTINGS:           string  = 'Налады';
-  stPROBABILITY1:       string  = 'Выпадковасьць1';
-  stPROBABILITY2:       string  = 'Выпадковасьць2';
-  stPROBABILITY3:       string  = 'Выпадковасьць3';
 
   dwDEFAULT_BAUD:       longint = 9600;
 
 implementation
+
+uses support;
 
 {$R *.DFM}
 
@@ -109,6 +85,8 @@ begin
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
+var
+  stIni: string;
 begin
   try
     stIni := ChangeFileExt(ParamStr(0),'.ini');
@@ -124,10 +102,6 @@ begin
 
     SetComm2( FIni.ReadInteger(stCOMM2, stCOMNUMBER, 2) );
     SetBaud2( FIni.ReadInteger(stCOMM2, stBAUD,      dwDEFAULT_BAUD) );
-
-    updProbability1.Position := FIni.ReadInteger(stSETTINGS, stPROBABILITY1, 0);
-    updProbability2.Position := FIni.ReadInteger(stSETTINGS, stPROBABILITY2, 0);
-    updProbability3.Position := FIni.ReadInteger(stSETTINGS, stPROBABILITY3, 0);
   except
     ErrBox('Памылка пры чытаньнi парамертаў');
   end;
@@ -159,8 +133,6 @@ begin
     end;
     cmbBaud2.ItemIndex := cmbBaud2.Items.IndexOf( IntToStr(Baud) );
   end;
-
-  Buttons;
   
   Comm1.Open := True;
   Comm2.Open := True;
@@ -184,10 +156,6 @@ begin
       FIni.WriteInteger(stCOMM2, stCOMNUMBER, ComNumber);
       FIni.WriteInteger(stCOMM2, stBAUD,      Baud);
     end;
-
-    FIni.WriteInteger(stSETTINGS, stPROBABILITY1, updProbability1.Position);
-    FIni.WriteInteger(stSETTINGS, stPROBABILITY2, updProbability2.Position);
-    FIni.WriteInteger(stSETTINGS, stPROBABILITY3, updProbability3.Position);
   except
     ErrBox('Памылка пры запiсваньнi парамертаў');
   end;
@@ -241,37 +209,14 @@ begin
   end;
 end;
 
-procedure TfrmMain.ErrBox(stOut: string);
-begin
-  Application.MessageBox(PChar(stOut),'Памылка', mb_IconHand + mb_Ok);
-end;
-
-procedure TfrmMain.WrnBox(stOut: string);
-begin
-  Application.MessageBox(PChar(stOut),'Увага', mb_IconWarning + mb_Ok);
-end;
-
-procedure TfrmMain.InfBox(stOut: string);
-begin
-  Application.MessageBox(PChar(stOut),'Iнфармацыя', mb_IconAsterisk + mb_Ok);
-end;
-
 procedure TfrmMain.Terminal(stT: string);
 begin
   memTerminal.Lines.Append(stT);
 end;
 
-// преобразование числа в строку с ведущими нулями слева
-function TfrmMain.Int2Str(wValue: word; bDigits: byte): string;
-begin
-  Result := IntToStr(wValue);
-  while Length(Result) < bDigits do
-    Result := '0' + Result;
-end;
-
 function TfrmMain.Time(Time: TDateTime): string;
 var
-  Hour,Min,Sec,MSec:    word;
+  Hour,Min,Sec,MSec: word;
 begin
   DecodeTime(Time, Hour,Min,Sec,MSec);
   Result := Int2Str(Hour,2) + '.' +
@@ -310,60 +255,29 @@ begin
     if (mpbInBuff[i] < $20) then z := z + '_' else z := z + Chr(mpbInBuff[i]);
   end;
 
-  s := s + '   \\ ' + IntToStr(Count) + ' байт: ' {+ z};
+  s := s + '   \\ ' + IntToStr(Count) + ' байт' {+ z};
   Terminal(s);
 end;
 
 procedure TfrmMain.Comm1TriggerAvail(CP: TObject; Count: Word);
-var
-  p1,p2:  byte;
 begin
   if Count > 0 then begin
-    p2 := Random(100);
-    if not(Timer1.Enabled) and (updProbability2.Position > 0) and (p2 < updProbability2.Position) then begin
-      Timer1.Interval := UpDown1.Position;
-      Timer1.Enabled := True;
-      Caption := 'X';
-    end;
-    if (Timer1.Enabled) then begin Terminal('Выпадковасьць 2'); exit; end;
-
-
     Ready(Comm1.ComNumber,Count);
 
     Comm1.GetBlock(mpbInBuff, Count);
-
-    p1 := Random(100);
-    if (updProbability1.Position = 0) or (p1 > updProbability1.Position) then
-      Comm2.PutBlock(mpbInBuff, Count)
-    else
-      Terminal('Выпадковасьць 1,%: ' + IntToStr(p1) + ' ' + IntToStr(updProbability1.Position));
+    Comm2.PutBlock(mpbInBuff, Count);
 
     Dump(Count);
   end;
 end;
 
 procedure TfrmMain.Comm2TriggerAvail(CP: TObject; Count: Word);
-var
-  p1,p2:  byte;
 begin
   if Count > 0 then begin
-    p2 := Random(100);
-    if not(Timer1.Enabled) and (updProbability2.Position > 0) and (p2 < updProbability2.Position) then begin
-      Timer1.Interval := UpDown1.Position;
-      Timer1.Enabled := True;
-      Caption := 'X';
-    end;
-    if (Timer1.Enabled) then begin Terminal('Выпадковасьць 2'); exit; end;
-
     Ready(Comm2.ComNumber,Count);
 
     Comm2.GetBlock(mpbInBuff, Count);
-
-    p1 := Random(100);
-    if (updProbability1.Position = 0) or (p1 > updProbability1.Position) then
-      Comm1.PutBlock(mpbInBuff, Count)
-    else
-      Terminal('Выпадковасьць 1,%: ' + IntToStr(p1) + ' ' + IntToStr(updProbability1.Position));
+    Comm1.PutBlock(mpbInBuff, Count);
 
     Dump(Count);
   end;
@@ -399,42 +313,6 @@ begin
       ErrBox('Памылка пры заданьнi хуткасьцi парта В');
     end;
   end;
-end;
-
-procedure TfrmMain.memTerminalKeyPress(Sender: TObject; var Key: Char);
-begin
-  if spbLeft.Down then
-    Comm1.PutChar(Key)
-  else
-    Comm2.PutChar(Key);
-
-  Terminal(IntToHex(Ord(Key),2) + ' ');
-end;
-
-procedure TfrmMain.Buttons;
-begin
-  if spbLeft.Down then
-    Terminal('\\ COM' + IntToStr(Comm1.ComNumber))
-  else
-    Terminal('\\ COM' + IntToStr(Comm2.ComNumber));
-end;
-
-procedure TfrmMain.spbLeftClick(Sender: TObject);
-begin
-  spbRight.Down := not spbLeft.Down;
-  Buttons;
-end;
-
-procedure TfrmMain.spbRightClick(Sender: TObject);
-begin
-  spbLeft.Down := not spbRight.Down;
-  Buttons;
-end;
-
-procedure TfrmMain.Timer1Timer(Sender: TObject);
-begin
-      Timer1.Enabled := False;
-      Caption := 'OK';
 end;
 
 end.
