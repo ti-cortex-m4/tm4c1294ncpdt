@@ -38,6 +38,8 @@ type
     Edit2: TEdit;
     updProbability3: TUpDown;
     Timer1: TTimer;
+    Edit3: TEdit;
+    UpDown1: TUpDown;
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -109,7 +111,13 @@ end;
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   try
-    FIni := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'traffic3.ini');
+    stIni := ChangeFileExt(ParamStr(0),'.ini');
+    FileSetAttr(stIni, FileGetAttr(stIni) and not faReadOnly);
+  except
+  end;
+
+  try
+    FIni := TIniFile.Create(ChangeFileExt(ParamStr(0),'.ini'));
 
     SetComm1( FIni.ReadInteger(stCOMM1, stCOMNUMBER, 1) );
     SetBaud1( FIni.ReadInteger(stCOMM1, stBAUD,      dwDEFAULT_BAUD) );
@@ -313,6 +321,7 @@ begin
   if Count > 0 then begin
     p2 := Random(100);
     if not(Timer1.Enabled) and (updProbability2.Position > 0) and (p2 < updProbability2.Position) then begin
+      Timer1.Interval := UpDown1.Position;
       Timer1.Enabled := True;
       Caption := 'X';
     end;
@@ -340,6 +349,7 @@ begin
   if Count > 0 then begin
     p2 := Random(100);
     if not(Timer1.Enabled) and (updProbability2.Position > 0) and (p2 < updProbability2.Position) then begin
+      Timer1.Interval := UpDown1.Position;
       Timer1.Enabled := True;
       Caption := 'X';
     end;
