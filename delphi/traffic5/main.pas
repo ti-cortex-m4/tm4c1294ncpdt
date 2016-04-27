@@ -10,22 +10,21 @@ type
   TfrmMain = class(TForm)
     panClient: TPanel;
     panBottom: TPanel;
-    panLeft: TPanel;
-    panRight: TPanel;
     Comm1: TApdComPort;
     Comm2: TApdComPort;
+    pgcMain: TPageControl;
+    tbsTerminal: TTabSheet;
+    memTerminal: TMemo;
+    lblComm1: TLabel;
     cmbComm1: TComboBox;
     cmbBaud1: TComboBox;
     cmbComm2: TComboBox;
     cmbBaud2: TComboBox;
-    lblComm1: TLabel;
-    lblBaud1: TLabel;
     lblComm2: TLabel;
-    lblBaud2: TLabel;
-    pgcMain: TPageControl;
-    tbsTerminal: TTabSheet;
-    tbsSettings: TTabSheet;
-    memTerminal: TMemo;
+    panRigth2: TPanel;
+    btbCrealInfo: TBitBtn;
+    btbSaveInfo: TBitBtn;
+    sd_RichToFile: TSaveDialog;
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -42,6 +41,9 @@ type
     procedure cmbComm2Change(Sender: TObject);
     procedure cmbBaud1Change(Sender: TObject);
     procedure cmbBaud2Change(Sender: TObject);
+    procedure SaveMemo(Memo: TMemo; stName: string);
+    procedure btbSaveInfoClick(Sender: TObject);
+    procedure btbCrealInfoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,8 +58,7 @@ var
   mpbInBuff:            array[0..$FFFF] of byte;
 
   datStart,
-  datStop,
-  datNow:               TDateTime;
+  datStop:              TDateTime;
   wComNumberPrev:       word = 100;
 
 const
@@ -79,8 +80,6 @@ procedure TfrmMain.FormResize(Sender: TObject);
 begin
   if Height < 200 then Height := 200;
   if Width  < 500 then Width  := 500;
-
-  panLeft.Width := panBottom.Width div 2;
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
@@ -138,7 +137,6 @@ begin
 
   datStart := Now;
   datStop  := Now;
-  datNow   := Now;
 
   pgcMain.ActivePage := tbsTerminal;
 end;
@@ -214,36 +212,39 @@ begin
 end;
 
 procedure TfrmMain.Ready(wComNumber: word; Count: word);
+var
+  datNow: TDateTime;
 begin
   datNow := Now;
 
   if (wComNumberPrev <> wComNumber) and (wComNumberPrev <> 100) then begin
+    Terminal('');
     Terminal('\\ COM' + IntToStr(wComNumberPrev)    + ':   ' + Time2Str(datStop - datStart) +
              '   COM' + IntToStr(wComNumberPrev)    +
              '->COM'  + IntToStr(wComNumber) + ':   ' + Time2Str(datNow - datStop));
     datStart := datNow;
   end;
 
+  if (wComNumberPrev <> wComNumber) then begin
+    Terminal('');
+    Terminal('\\ COM' + IntToStr(wComNumber));
+  end;
+
   datStop := datNow;
   wComNumberPrev := wComNumber;
-
-  Terminal('');
-  Terminal('\\ COM' + IntToStr(wComNumber) + '    ' + Time2Str(datNow));
 end;
 
 procedure TfrmMain.Dump(Count: word);
 var
-  i:    word;
-  s,z:  string;
+  i: word;
+  s: string;
 begin
   s := '';
-  z := '';
   for i := 0 to Count - 1 do begin
     s := s + IntToHex(mpbInBuff[i],2) + ' ';
-    if (mpbInBuff[i] < $20) then z := z + '_' else z := z + Chr(mpbInBuff[i]);
   end;
 
-  s := s + '   \\ ' + IntToStr(Count) + ' байт' {+ z};
+  s := s + '   \\ ' + IntToStr(Count) + ' байт;  ' + Time2Str(Now);
   Terminal(s);
 end;
 
@@ -301,6 +302,32 @@ begin
       ErrBox('Памылка пры заданьнi хуткасьцi парта В');
     end;
   end;
+end;
+
+procedure TfrmMain.SaveMemo(Memo: TMemo; stName: string);
+begin
+  with sd_RichToFile,Memo do begin
+    try
+      InitialDir := ExtractFileDir(ParamStr(0));
+
+      ForceDirectories(InitialDir);
+      FileName := stName + '.txt';
+
+      if Execute then Memo.Lines.SaveToFile(FileName);
+    except
+      ErrBox('Ошибка при сохранении отчёта !')
+    end;
+  end;
+end;
+
+procedure TfrmMain.btbSaveInfoClick(Sender: TObject);
+begin
+  SaveMemo(memTerminal, 'Терминал ' + DateTime2Str(Now) + ' ');
+end;
+
+procedure TfrmMain.btbCrealInfoClick(Sender: TObject);
+begin
+  memTerminal.Clear;
 end;
 
 end.
