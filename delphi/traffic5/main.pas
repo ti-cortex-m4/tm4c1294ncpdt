@@ -36,7 +36,6 @@ type
     procedure Terminal(stT: string);
     procedure Ready(wComNumber: word; Count: word);
     procedure Dump(Count: word);
-    function  Time(Time: TDateTime): string;
     procedure Comm1TriggerAvail(CP: TObject; Count: Word);
     procedure Comm2TriggerAvail(CP: TObject; Count: Word);
     procedure cmbComm1Change(Sender: TObject);
@@ -59,7 +58,7 @@ var
   datStart,
   datStop,
   datNow:               TDateTime;
-  wNumber:              word;
+  wComNumberPrev:       word = 100;
 
 const
   stCOMM1:              string  = 'Порт А';
@@ -214,33 +213,22 @@ begin
   memTerminal.Lines.Append(stT);
 end;
 
-function TfrmMain.Time(Time: TDateTime): string;
-var
-  Hour,Min,Sec,MSec: word;
-begin
-  DecodeTime(Time, Hour,Min,Sec,MSec);
-  Result := Int2Str(Hour,2) + '.' +
-            Int2Str(Min, 2)  + '.' +
-            Int2Str(Sec, 2)  + '.' +
-            Int2Str(MSec,3);
-end;
-
 procedure TfrmMain.Ready(wComNumber: word; Count: word);
 begin
   datNow := Now;
 
-  if wNumber <> wComNumber then begin
-    Terminal('\\ COM' + IntToStr(wNumber)    + ':   ' + Time(datStop - datStart) +
-             '   COM' + IntToStr(wNumber)    +
-             '->COM'  + IntToStr(wComNumber) + ':   ' + Time(datNow - datStop));
+  if (wComNumberPrev <> wComNumber) and (wComNumberPrev <> 100) then begin
+    Terminal('\\ COM' + IntToStr(wComNumberPrev)    + ':   ' + Time2Str(datStop - datStart) +
+             '   COM' + IntToStr(wComNumberPrev)    +
+             '->COM'  + IntToStr(wComNumber) + ':   ' + Time2Str(datNow - datStop));
     datStart := datNow;
   end;
 
   datStop := datNow;
-  wNumber := wComNumber;
+  wComNumberPrev := wComNumber;
 
   Terminal('');
-  Terminal('\\ COM' + IntToStr(wComNumber) + '    ' + Time(datNow));
+  Terminal('\\ COM' + IntToStr(wComNumber) + '    ' + Time2Str(datNow));
 end;
 
 procedure TfrmMain.Dump(Count: word);

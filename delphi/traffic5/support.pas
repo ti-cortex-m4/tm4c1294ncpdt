@@ -10,7 +10,8 @@ function PackLine(wSize: word): string;
 function PackStrR(stT: string; wSize: word): string;
 function PackStrL(stT: string; wSize: word): string;
 
-function DateTime2Str: string;
+function DateTime2Str(const DateTime: TDateTime): string;
+function Time2Str(const DateTime: TDateTime): string;
 
 function FromBCD(bT: byte): byte;
 function ToBCD(bT: byte): byte;
@@ -21,7 +22,7 @@ procedure InfBox(stT: string);
 
 implementation
 
-uses Windows, Forms, SysUtils, Graphics;//, main, output, get_config;
+uses Windows, Forms, SysUtils, Graphics;
 
 function Int2Str(wT: word; bSize: byte = 2): string;
 begin
@@ -47,9 +48,14 @@ begin
   while Length(Result) < wSize do Result := ' ' + Result;
 end;
 
-function DateTime2Str: string;
+function DateTime2Str(const DateTime: TDateTime): string;
 begin
-  Result := FormatDateTime('hh.mm.ss dd.mm.yyyy',Now);
+  Result := FormatDateTime('hh.mm.ss dd.mm.yyyy',DateTime);
+end;
+
+function Time2Str(const DateTime: TDateTime): string;
+begin
+  Result := FormatDateTime('hh.mm.ss.sss',DateTime);
 end;
 
 function FromBCD(bT: byte): byte;
