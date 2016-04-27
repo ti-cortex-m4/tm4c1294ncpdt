@@ -109,9 +109,17 @@ begin
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
+var
+  stIni: string;
 begin
   try
-    FIni := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'traffic3.ini');
+    stIni := ChangeFileExt(ParamStr(0),'.ini');
+    FileSetAttr(stIni, FileGetAttr(stIni) and not faReadOnly);
+  except
+  end;
+
+  try
+    FIni := TIniFile.Create(ChangeFileExt(ParamStr(0),'.ini'));
 
     SetComm1( FIni.ReadInteger(stCOMM1, stCOMNUMBER, 1) );
     SetBaud1( FIni.ReadInteger(stCOMM1, stBAUD,      dwDEFAULT_BAUD) );
