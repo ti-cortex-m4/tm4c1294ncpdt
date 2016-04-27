@@ -55,7 +55,7 @@ end;
 
 function Time2Str(const DateTime: TDateTime): string;
 begin
-  Result := FormatDateTime('hh.mm.ss.sss',DateTime);
+  Result := FormatDateTime('hh.mm.ss.zzz',DateTime);
 end;
 
 function FromBCD(bT: byte): byte;
