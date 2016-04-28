@@ -25,6 +25,13 @@ type
     btbCrealInfo: TBitBtn;
     btbSaveInfo: TBitBtn;
     sd_RichToFile: TSaveDialog;
+    tbsSettings: TTabSheet;
+    lblDelay: TLabel;
+    edtDelay: TEdit;
+    updDelay: TUpDown;
+    edtDelayDispersion: TEdit;
+    updDelayDispersion: TUpDown;
+    lblDelayDispersion: TLabel;
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -67,6 +74,8 @@ const
   stCOMNUMBER:          string  = 'Нумар';
   stBAUD:               string  = 'Хуткасьць';
   stSETTINGS:           string  = 'Налады';
+  sDELAY:               string  = 'Delay';
+  sDELAY_DISPERSION:    string  = 'DelayDispersion';
 
   dwDEFAULT_BAUD:       longint = 9600;
 
@@ -100,6 +109,9 @@ begin
 
     SetComm2( FIni.ReadInteger(stCOMM2, stCOMNUMBER, 2) );
     SetBaud2( FIni.ReadInteger(stCOMM2, stBAUD,      dwDEFAULT_BAUD) );
+
+    updDelay.Position := FIni.ReadInteger(stSETTINGS, sDELAY, 0);
+    updDelayDispersion.Position := FIni.ReadInteger(stSETTINGS, sDELAY_DISPERSION, 0);
   except
     ErrBox('Памылка пры чытаньнi парамертаў');
   end;
@@ -153,6 +165,9 @@ begin
       FIni.WriteInteger(stCOMM2, stCOMNUMBER, ComNumber);
       FIni.WriteInteger(stCOMM2, stBAUD,      Baud);
     end;
+
+    FIni.WriteInteger(stSETTINGS, sDELAY, updDelay.Position);
+    FIni.WriteInteger(stSETTINGS, sDELAY_DISPERSION, updDelayDispersion.Position);
   except
     ErrBox('Памылка пры запiсваньнi парамертаў');
   end;
