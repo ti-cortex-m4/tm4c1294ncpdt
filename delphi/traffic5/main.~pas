@@ -263,13 +263,13 @@ begin
   Terminal(s);
 end;
 
-procedure Delay1;
+procedure DelayFull;
 var
   wDelay: word;
 begin
   with frmMain do
   if updDelay.Position > 0 then begin
-    wDelay := Round(updDelay.Position*(1 + (Random(100) - updDelayDispersion.Position)/100));
+    wDelay := Round(updDelay.Position*(1 + (Random(updDelayDispersion.Position*2) - updDelayDispersion.Position)/100));
     Terminal('\\ задержка ' + IntToStr(wDelay) + ' мс.');
     Delay(wDelay);
   end;
@@ -281,7 +281,7 @@ begin
     Ready(Comm1.ComNumber,Count);
 
     Comm1.GetBlock(mpbInBuff, Count);
-    Delay1;
+    DelayFull;
     Comm2.PutBlock(mpbInBuff, Count);
 
     Dump(Count);
@@ -294,7 +294,7 @@ begin
     Ready(Comm2.ComNumber,Count);
 
     Comm2.GetBlock(mpbInBuff, Count);
-    Delay1;
+    DelayFull;
     Comm1.PutBlock(mpbInBuff, Count);
 
     Dump(Count);

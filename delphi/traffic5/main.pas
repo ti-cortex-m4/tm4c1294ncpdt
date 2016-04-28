@@ -263,7 +263,7 @@ begin
   Terminal(s);
 end;
 
-procedure Delay1;
+procedure DelayData;
 var
   wDelay: word;
 begin
@@ -281,7 +281,7 @@ begin
     Ready(Comm1.ComNumber,Count);
 
     Comm1.GetBlock(mpbInBuff, Count);
-    Delay1;
+    DelayData;
     Comm2.PutBlock(mpbInBuff, Count);
 
     Dump(Count);
@@ -294,7 +294,7 @@ begin
     Ready(Comm2.ComNumber,Count);
 
     Comm2.GetBlock(mpbInBuff, Count);
-    Delay1;
+    DelayData;
     Comm1.PutBlock(mpbInBuff, Count);
 
     Dump(Count);
