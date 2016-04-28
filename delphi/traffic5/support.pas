@@ -20,6 +20,8 @@ procedure ErrBox(stT: string);
 procedure WrnBox(stT: string);
 procedure InfBox(stT: string);
 
+procedure Delay(MSec: longword);
+
 implementation
 
 uses Windows, Forms, SysUtils, Graphics;
@@ -81,6 +83,17 @@ end;
 procedure InfBox(stT: string);
 begin
   Application.MessageBox(PChar(stT + ' '), 'Информация', mb_Ok + mb_IconAsterisk);
+end;
+
+procedure Delay(MSec: longword);
+var
+  FirstTickCount,Now: longword;
+begin
+  FirstTickCount := GetTickCount;
+  repeat
+    Application.ProcessMessages;
+    Now := GetTickCount;
+  until (Now - FirstTickCount >= MSec) or (Now < FirstTickCount);
 end;
 
 end.

@@ -12,8 +12,8 @@ File_9=SourceModule,'C:\ASYNCPRO\AdExcept.pas',0,1,370,1,380,0,0
 
 [Modules]
 Module0=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\main.pas
-Module1=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\traffic5.dpr
-Module2=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas
+Module1=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas
+Module2=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\traffic5.dpr
 Count=3
 EditWindowCount=1
 
@@ -22,12 +22,12 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[D:\Cortex\tm4c1294ncpdt\delphi\traffic5\traffic5.dpr]
+[D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas]
+[D:\Cortex\tm4c1294ncpdt\delphi\traffic5\traffic5.dpr]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -67,9 +67,9 @@ BottomPanelData=0000040000000000A005000000000000029F0000000000000001000000000000
 
 [View0]
 Module=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas
-CursorX=41
-CursorY=58
-TopLine=48
+CursorX=1
+CursorY=24
+TopLine=4
 LeftCol=1
 
 [View1]
@@ -81,9 +81,9 @@ LeftCol=1
 
 [View2]
 Module=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\main.pas
-CursorX=81
-CursorY=330
-TopLine=195
+CursorX=30
+CursorY=275
+TopLine=257
 LeftCol=1
 
 [Watches]
@@ -121,8 +121,8 @@ Left=0
 Top=0
 Width=1440
 Height=122
-MaxLeft=-1
-MaxTop=-1
+MaxLeft=-4
+MaxTop=-4
 MaxWidth=1448
 MaxHeight=122
 ClientWidth=1440
@@ -328,11 +328,11 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=556
+Height=552
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=556
+ClientHeight=552
 TBDockHeight=305
 LRDockWidth=140
 Dockable=1
