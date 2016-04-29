@@ -12,6 +12,7 @@ function PackStrL(stT: string; wSize: word): string;
 
 function DateTime2Str(const DateTime: TDateTime): string;
 function Time2Str(const DateTime: TDateTime): string;
+function Buff2Str(const mbBuff: array of byte; const Count: word): string;
 
 function FromBCD(bT: byte): byte;
 function ToBCD(bT: byte): byte;
@@ -58,6 +59,18 @@ end;
 function Time2Str(const DateTime: TDateTime): string;
 begin
   Result := FormatDateTime('hh.mm.ss.zzz',DateTime);
+end;
+
+function Buff2Str(const mbBuff: array of byte; const Count: word): string;
+var
+  i: word;
+begin
+  Result := '';
+  for i := 0 to Count - 1 do begin
+    Result := Result + IntToHex(mbBuff[i],2) + ' ';
+  end;
+
+  Result := Result + '   \\ ' + IntToStr(Count) + ' байт:  ' + Time2Str(Now);
 end;
 
 function FromBCD(bT: byte): byte;

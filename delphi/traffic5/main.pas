@@ -32,6 +32,8 @@ type
     edtDelayDispersion: TEdit;
     updDelayDispersion: TUpDown;
     lblDelayDispersion: TLabel;
+    lblPercent: TLabel;
+    tmrDelay: TTimer;
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -40,8 +42,8 @@ type
     procedure SetBaud2(dwBaud: longint);
     procedure SetComm2(wComNumber: word);
     procedure Terminal(stT: string);
-    procedure Ready(wComNumber: word; Count: word);
-    procedure Dump(Count: word);
+    procedure ShowComNumber(wComNumber: word);
+    procedure ShowData(mbBuff: array of byte; Count: word);
     procedure Comm1TriggerAvail(CP: TObject; Count: Word);
     procedure Comm2TriggerAvail(CP: TObject; Count: Word);
     procedure cmbComm1Change(Sender: TObject);
@@ -51,6 +53,8 @@ type
     procedure SaveMemo(Memo: TMemo; stName: string);
     procedure btbSaveInfoClick(Sender: TObject);
     procedure btbCrealInfoClick(Sender: TObject);
+    procedure tmrDelayTimer(Sender: TObject);
+    procedure Transfer(const CommSrc: TApdComPort; const CommDst: TApdComPort; const Count: Word);
   private
     { Private declarations }
   public
@@ -81,7 +85,10 @@ const
 
 implementation
 
-uses support;
+uses Generics.Collections, support, fifo;
+
+var
+  Queue: TObjectQueue<TItem>;
 
 {$R *.DFM}
 
@@ -151,6 +158,9 @@ begin
   datStop  := Now;
 
   pgcMain.ActivePage := tbsTerminal;
+
+  Queue := TObjectQueue<TItem>.Create;
+  Queue.OwnsObjects := true;
 end;
 
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -226,7 +236,7 @@ begin
   memTerminal.Lines.Append(stT);
 end;
 
-procedure TfrmMain.Ready(wComNumber: word; Count: word);
+procedure TfrmMain.ShowComNumber(wComNumber: word);
 var
   datNow: TDateTime;
 begin
@@ -249,21 +259,12 @@ begin
   wComNumberPrev := wComNumber;
 end;
 
-procedure TfrmMain.Dump(Count: word);
-var
-  i: word;
-  s: string;
+procedure TfrmMain.ShowData(mbBuff: array of byte; Count: word);
 begin
-  s := '';
-  for i := 0 to Count - 1 do begin
-    s := s + IntToHex(mpbInBuff[i],2) + ' ';
-  end;
-
-  s := s + '   \\ ' + IntToStr(Count) + ' байт:  ' + Time2Str(Now);
-  Terminal(s);
+  Terminal(Buff2Str(mbBuff, Count));
 end;
 
-procedure DelayData;
+procedure ShowDelay;
 var
   wDelay: word;
 begin
@@ -275,30 +276,53 @@ begin
   end;
 end;
 
-procedure TfrmMain.Comm1TriggerAvail(CP: TObject; Count: Word);
+procedure TfrmMain.Transfer(const CommSrc: TApdComPort; const CommDst: TApdComPort; const Count: Word);
 begin
   if Count > 0 then begin
-    Ready(Comm1.ComNumber,Count);
+    CommSrc.GetBlock(mpbInBuff, Count);
+    Terminal('src COM' + IntToStr(CommSrc.ComNumber) + '   ' + Buff2Str(mpbInBuff, Count));
 
-    Comm1.GetBlock(mpbInBuff, Count);
-    DelayData;
-    Comm2.PutBlock(mpbInBuff, Count);
-
-    Dump(Count);
+    if updDelay.Position = 0 then begin
+      CommDst.PutBlock(mpbInBuff, Count);
+      Terminal('dst COM' + IntToStr(CommDst.ComNumber) + '   ' + Buff2Str(mpbInBuff, Count));
+    end
+    else begin
+      Terminal('push size ' + IntToStr(Queue.Count));
+      Queue.Enqueue(TItem.Create(CommDst, ToBytes(mpbInBuff,COunt)));
+    end;
   end;
+end;
+
+procedure TfrmMain.Comm1TriggerAvail(CP: TObject; Count: Word);
+begin
+  Transfer(Comm1, Comm2, Count);
 end;
 
 procedure TfrmMain.Comm2TriggerAvail(CP: TObject; Count: Word);
 begin
-  if Count > 0 then begin
-    Ready(Comm2.ComNumber,Count);
+  Transfer(Comm2, Comm1, Count);
+end;
 
-    Comm2.GetBlock(mpbInBuff, Count);
-    DelayData;
-    Comm1.PutBlock(mpbInBuff, Count);
-
-    Dump(Count);
+procedure TfrmMain.tmrDelayTimer(Sender: TObject);
+var
+  item: TItem;
+  i: word;
+begin
+  if Queue.Count > 0  then begin
+    Terminal('\\ задержка ' + IntToStr(tmrDelay.Interval) + ' мс.');
   end;
+  tmrDelay.Interval := Round(updDelay.Position*(1 + (Random(updDelayDispersion.Position*2) - updDelayDispersion.Position)/100));
+
+  if Queue.Count > 0  then begin
+    Terminal('pop size ' + IntToStr(Queue.Count));
+    item := Queue.Extract;
+    Terminal('dst COM' + IntToStr(item.FComPort.ComNumber) + '   ' + Buff2Str(item.FData, Length(item.FData)));
+
+    for i := 0 to Length(item.FData)-1 do begin
+      item.FComPort.PutChar(AnsiChar(item.FData[i]));
+    end;
+  end;
+
 end;
 
 procedure TfrmMain.cmbComm1Change(Sender: TObject);

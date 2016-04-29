@@ -3,7 +3,8 @@ program traffic5;
 uses
   Forms,
   main in 'main.pas' {frmMain},
-  support in 'support.pas';
+  support in 'support.pas',
+  fifo in 'fifo.pas';
 
 {$R *.RES}
 
