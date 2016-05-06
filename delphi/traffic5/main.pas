@@ -34,6 +34,10 @@ type
     lblDelayDispersion: TLabel;
     lblPercent: TLabel;
     tmrDelay: TTimer;
+    tmrTimeout1: TTimer;
+    tmrTimeout2: TTimer;
+    Edit1: TEdit;
+    UpDown1: TUpDown;
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -54,7 +58,10 @@ type
     procedure btbSaveInfoClick(Sender: TObject);
     procedure btbCrealInfoClick(Sender: TObject);
     procedure tmrDelayTimer(Sender: TObject);
-    procedure Transfer(const CommSrc: TApdComPort; const CommDst: TApdComPort; const Count: Word);
+    procedure Transfer(const CommSrc: TApdComPort; const CommDst: TApdComPort);
+    procedure tmrTimeout1Timer(Sender: TObject);
+    procedure tmrTimeout2Timer(Sender: TObject);
+    procedure UpDown1Changing(Sender: TObject; var AllowChange: Boolean);
   private
     { Private declarations }
   public
@@ -150,7 +157,7 @@ begin
     end;
     cmbBaud2.ItemIndex := cmbBaud2.Items.IndexOf( IntToStr(Baud) );
   end;
-  
+
   Comm1.Open := True;
   Comm2.Open := True;
 
@@ -158,6 +165,9 @@ begin
   datStop  := Now;
 
   pgcMain.ActivePage := tbsTerminal;
+
+  tmrTimeout1.Interval := UpDown1.Position;
+  tmrTimeout2.Interval := UpDown1.Position;
 
   Queue := TObjectQueue<TItem>.Create;
   Queue.OwnsObjects := true;
@@ -276,9 +286,13 @@ begin
   end;
 end;
 
-procedure TfrmMain.Transfer(const CommSrc: TApdComPort; const CommDst: TApdComPort; const Count: Word);
+procedure TfrmMain.Transfer(const CommSrc: TApdComPort; const CommDst: TApdComPort);
+var
+  Count: word;
 begin
-  if Count > 0 then begin
+  if CommSrc.InBuffUsed > 0 then begin
+    Count := CommSrc.InBuffUsed;
+
     CommSrc.GetBlock(mpbInBuff, Count);
     Terminal('src COM' + IntToStr(CommSrc.ComNumber) + '   ' + Buff2Str(mpbInBuff, Count));
 
@@ -293,14 +307,37 @@ begin
   end;
 end;
 
+procedure TfrmMain.UpDown1Changing(Sender: TObject; var AllowChange: Boolean);
+var
+  w: word;
+begin
+  w := Round(UpDown1.Position * (1 + Random(20)/100));
+  tmrTimeout1.Interval := w;
+  tmrTimeout2.Interval := w;
+end;
+
 procedure TfrmMain.Comm1TriggerAvail(CP: TObject; Count: Word);
 begin
-  Transfer(Comm1, Comm2, Count);
+  if UpDown1.Position = 0 then begin
+    Transfer(Comm1, Comm2);
+  end
+  else begin
+    Terminal('\\ restart 1 ' + Time2Str(Now));
+    tmrTimeout1.Enabled := False;
+    tmrTimeout1.Enabled := True;
+  end;
 end;
 
 procedure TfrmMain.Comm2TriggerAvail(CP: TObject; Count: Word);
 begin
-  Transfer(Comm2, Comm1, Count);
+  if UpDown1.Position = 0 then begin
+    Transfer(Comm2, Comm1);
+  end
+  else begin
+    Terminal('\\ restart 2 ' + Time2Str(Now));
+    tmrTimeout2.Enabled := False;
+    tmrTimeout2.Enabled := True;
+  end;
 end;
 
 procedure TfrmMain.tmrDelayTimer(Sender: TObject);
@@ -323,6 +360,20 @@ begin
     end;
   end;
 
+end;
+
+procedure TfrmMain.tmrTimeout1Timer(Sender: TObject);
+begin
+  Terminal('\\ timeout 1 ' + Time2Str(Now));
+  tmrTimeout1.Enabled := False;
+  Transfer(Comm1, Comm2);
+end;
+
+procedure TfrmMain.tmrTimeout2Timer(Sender: TObject);
+begin
+  Terminal('\\ timeout 2 ' + Time2Str(Now));
+  tmrTimeout2.Enabled := False;
+  Transfer(Comm2, Comm1);
 end;
 
 procedure TfrmMain.cmbComm1Change(Sender: TObject);
