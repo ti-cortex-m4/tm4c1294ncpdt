@@ -4,8 +4,8 @@ File_1=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\9.0\source\r
 
 [Modules]
 Module0=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\main.pas
-Module1=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\fifo.pas
-Module2=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas
+Module1=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas
+Module2=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\fifo.pas
 Module3=c:\program files (x86)\embarcadero\rad studio\9.0\SOURCE\RTL\SYS\System.pas
 Count=4
 EditWindowCount=1
@@ -15,12 +15,12 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[D:\Cortex\tm4c1294ncpdt\delphi\traffic5\fifo.pas]
+[D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas]
+[D:\Cortex\tm4c1294ncpdt\delphi\traffic5\fifo.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
@@ -41,17 +41,15 @@ PercentageSizes=1
 Create=1
 Visible=1
 Docked=0
-State=2
+State=0
 Left=1688
 Top=1164
 Width=6521
 Height=8652
-MaxLeft=-56
-MaxTop=951
-MaxWidth=6521
-MaxHeight=8652
-ClientWidth=10000
-ClientHeight=8053
+MaxLeft=-7
+MaxTop=-12
+ClientWidth=6465
+ClientHeight=8283
 DockedToMainForm=0
 BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
@@ -60,16 +58,16 @@ LeftPanelClients=BorlandEditorCodeExplorer@EditWindow0
 LeftPanelData=0000080001000100000019000000426F726C616E64456469746F72436F64654578706C6F726572B80C00000000000000DE01000000000000FFFFFFFF
 RightPanelSize=0
 BottomPanelSize=0
-BottomMiddlePanelSize=1378
+BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0,ToDo List,MessageView
-BottomMiddelPanelData=0000080001020200000009000000446F636B53697465300E000000546F446F4C69737457696E646F77803E0000000000000262050000000000000100000000803E00000F0000004D65737361676556696577466F726DFFFFFFFF
+BottomMiddelPanelData=0000080001020300000009000000446F636B53697465300E000000546F446F4C69737457696E646F770F0000004D65737361676556696577466F726D401F000000000000028E05000000000000FFFFFFFF
 
 [View0]
 CustomEditViewType=TEditView
 Module=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\main.pas
-CursorX=21
-CursorY=317
-TopLine=302
+CursorX=1
+CursorY=367
+TopLine=344
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -78,9 +76,9 @@ EditViewName=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\main.pas
 [View1]
 CustomEditViewType=TEditView
 Module=D:\Cortex\tm4c1294ncpdt\delphi\traffic5\support.pas
-CursorX=54
-CursorY=15
-TopLine=6
+CursorX=81
+CursorY=73
+TopLine=73
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -158,7 +156,7 @@ MaxLeft=-7
 MaxTop=-12
 ClientWidth=9944
 ClientHeight=1302
-BottomPanelSize=0
+BottomPanelSize=633
 
 [ProjectManager]
 PercentageSizes=1
@@ -182,18 +180,18 @@ StayOnTop=0
 [MessageView]
 PercentageSizes=1
 Create=1
-Visible=1
+Visible=0
 Docked=1
 State=0
-Left=0
-Top=23
-Width=10000
-Height=1164
+Left=247
+Top=848
+Width=3521
+Height=1244
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=10000
-ClientHeight=1164
-TBDockHeight=1164
+ClientWidth=3521
+ClientHeight=1244
+TBDockHeight=1244
 LRDockWidth=3521
 Dockable=1
 StayOnTop=0
@@ -360,8 +358,8 @@ SplitPos=73
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=Name,
-ExpandedItems=
+SelectedItem=Increment,OnChanging
+ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,HWFlowOptions=0,Associate=0,LiveBindings=0,Margins=0
 
 [TFileExplorerForm]
 PercentageSizes=1
@@ -426,8 +424,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=0
-Top=744
+Left=247
+Top=848
 Width=3674
 Height=1025
 MaxLeft=-1
