@@ -4,9 +4,9 @@ review.c
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../nvram/cache.h"
-#include "../nvram/cache2.h"
+#include "../../main.h"
+#include "../../nvram/cache.h"
+#include "../../nvram/cache2.h"
 #include "review.h"
 
 

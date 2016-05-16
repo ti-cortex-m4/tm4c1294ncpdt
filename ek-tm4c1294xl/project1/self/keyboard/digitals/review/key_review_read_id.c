@@ -1,20 +1,19 @@
 /*------------------------------------------------------------------------------
-KEY_CONTROL_K.C
+key_review_read_id.c
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../../console.h"
-#include "../../devices/devices_init.h"
-#include "../common/key_flag.h"
+#include "../../../console.h"
+#include "../../../digitals/review/review.h"
+#include "../../common/key_bool.h"
+#include "key_review_read_id.h"
 
 
 
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "Контроль времени",
-                        szMessage2[]    = "  для ЦЭ6850М   ",
-                        szTrue[]        = " установка      ",
-                        szFalse[]       = " коррекция      ";
+                        szMessage2[]    = "  для ЦЭ6850М   ";
 
 static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
@@ -22,6 +21,6 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 void    key_SetReviewReadId(void)
 {
-  key_SetFlag(&chControlK, pszMessages, szTrue, szFalse);
+  key_SetBool(&chReviewReadId, pszMessages, szTrue, szFalse);
 }
 
