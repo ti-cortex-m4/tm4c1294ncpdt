@@ -22,12 +22,12 @@ cache const             chReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, size
 void InitReview(void)
 {
   LoadCacheBool(&chReviewReadId, false);
-  LoadCacheChar(&chReviewRepeats, 1, 5, 1);
+  LoadCacheChar(&chReviewRepeats, REVIEW_REPEATS_MIN, REVIEW_REPEATS_MAX, REVIEW_REPEATS_MIN);
 }
 
 
 void ResetReview(void)
 {
   SaveCacheBool(&chReviewReadId, false);
-  SaveCacheChar(&chReviewRepeats, 1);
+  SaveCacheChar(&chReviewRepeats, REVIEW_REPEATS_MIN);
 }
