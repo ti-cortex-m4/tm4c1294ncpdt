@@ -103,6 +103,8 @@ KEYBOARD_KEY!C
 #include "digitals/key_max_repeats.h"
 #include "digitals/key_max_shutdown.h"
 #include "sensors/key_control_w.h"
+#include "digitals/review/key_review_read_id.h"
+#include "digitals/review/key_review_repeats.h"
 #include "digitals/key_dsbl_esc.h"
 #include "key_records_dsbl.h"
 #include "esc/key_machines_esc.h"
@@ -340,6 +342,9 @@ void    Keyboard_Key(void)
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
+
+      case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
+      case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
@@ -641,6 +646,9 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
 
+      case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
+      case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
+
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
       case wSET_RECORDS_DSBL:   key_SetRecordsDsbl();   break;
@@ -860,6 +868,9 @@ void    Keyboard_Key(void)
       case wSET_MAX_REPEATS:    key_SetMaxRepeats();    break;
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
+
+      case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
+      case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
