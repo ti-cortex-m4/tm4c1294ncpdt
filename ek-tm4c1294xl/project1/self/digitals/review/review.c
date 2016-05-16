@@ -15,19 +15,19 @@ bool                    fReviewReadId;
 uchar                   bReviewRepeats;
 
 cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof(bool)};
-cache const             chbReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, sizeof(uchar)};
+cache const             chReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, sizeof(uchar)};
 
 
 
 void    InitReview(void)
 {
   LoadCacheBool(&chReviewReadId, false);
-  LoadCacheChar(&chbReviewRepeats, 1, 5, 1);
+  LoadCacheChar(&chReviewRepeats, 1, 5, 1);
 }
 
 
 void    ResetReview(void)
 {
   SaveCacheBool(&chReviewReadId, false);
-  SaveCacheChar(&chbReviewRepeats, 1);
+  SaveCacheChar(&chReviewRepeats, 1);
 }

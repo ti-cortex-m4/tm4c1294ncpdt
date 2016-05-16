@@ -33,6 +33,7 @@ DEVICES.C
 #include "../digitals/max_repeats.h"
 #include "../digitals/correct_limit.h"
 #include "../digitals/max_shutdown.h"
+#include "../digitals/review/review.h"
 #include "../special/recalc_def.h"
 #include "../special/defects.h"
 #include "../sensors/device_a.h"
@@ -1840,6 +1841,7 @@ void    RunDevices(void)
       }
       break;
 
+
     case DEV_HEADER_6_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_6_C2);
@@ -1907,7 +1909,36 @@ void    RunDevices(void)
       if (ReadHeaderC_6() == 0)
         DoneProfile();
       else
+      {
+        if (fReviewReadId == true)
+          MakePause(DEV_ID_6_C2);
+        else
+          MakePause(DEV_DATA_6_C2);
+      }
+      break;
+
+    case DEV_ID_6_C2:
+      cbRepeat = GetMaxRepeats();
+      QueryIdC();
+      SetCurr(DEV_POSTID_6_C2);
+      break;
+
+    case DEV_POSTID_6_C2:
+      if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadIdC() == 1))
         MakePause(DEV_DATA_6_C2);
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryIdC();
+          SetCurr(DEV_POSTID_6_C2);
+        }
+      }
       break;
 
     case DEV_DATA_6_C2:
@@ -1915,6 +1946,7 @@ void    RunDevices(void)
       QueryHeaderC_6();
       SetCurr(DEV_HEADER_6_C2);
       break;
+
 
     case DEV_HEADER_1_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
