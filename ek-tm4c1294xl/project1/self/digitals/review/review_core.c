@@ -12,15 +12,15 @@ review_core.c
 
 
 static uchar            mbBuff[100];
-static uchar            cbSuccess,cbTotal;
+static uchar            cbRepeats, cbLimits;
 
 
 
 void StartReview(void)
 {
   memset(&mbBuff, 0, sizeof(mbBuff));
-  cbSuccess = 0;
-  cbTotal = 0;
+  cbRepeats = 0;
+  cbLimits = 0;
 }
 
 
@@ -30,7 +30,7 @@ static bool UseReview(void)
   return (bReviewRepeats > REVIEW_REPEATS_MIN) && (bReviewRepeats <= REVIEW_REPEATS_MAX);
 }
 
-static void CopyBuff(uchar  ibMin, uchar  ibMax)
+static void SaveBuff(uchar  ibMin, uchar  ibMax)
 {
   uchar i;
   for (i=ibMin; i<=ibMax; i++)
@@ -39,7 +39,7 @@ static void CopyBuff(uchar  ibMin, uchar  ibMax)
   }
 }
 
-static bool CheckBuff(uchar  ibMin, uchar  ibMax)
+static bool TestBuff(uchar  ibMin, uchar  ibMax)
 {
   uchar i;
   for (i=ibMin; i<=ibMax; i++)
@@ -55,29 +55,29 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
 {
   if (!UseReview())
     return REVIEW_SUCCESS;
-  else if (cbTotal == 0)
+  else if (cbLimits == 0)
   {
-    cbTotal++;
-    CopyBuff(ibMin,ibMax);
+    cbLimits++;
+    SaveBuff(ibMin,ibMax);
     return REVIEW_REPEAT;
   }
   else
   {
-    if (++cbTotal >= 10)
+    if (++cbLimits >= 10)
       return REVIEW_ERROR;
     else
     {
-      if (CheckBuff(ibMin,ibMax))
+      if (TestBuff(ibMin,ibMax))
       {
-        if (++cbSuccess >= bReviewRepeats)
+        if (++cbRepeats >= bReviewRepeats)
           return REVIEW_SUCCESS;
         else
           return REVIEW_REPEAT;
       }
       else
       {
-        cbSuccess = 0;
-        CopyBuff(ibMin,ibMax);
+        cbRepeats = 0;
+        SaveBuff(ibMin,ibMax);
         return REVIEW_REPEAT;
       }
     }
