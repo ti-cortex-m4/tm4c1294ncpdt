@@ -22,6 +22,7 @@ DEVICES_INIT!C
 #include "../digitals/checkup/checkup_run.h"
 #include "../digitals/max_repeats.h"
 #include "../digitals/max_shutdown.h"
+#include "../digitals/review/review.h"
 #include "../special/recalc_def.h"
 #include "../sensors/device_b.h"
 #include "../serial/ports.h"
@@ -93,6 +94,7 @@ void    InitDevices1(void)
   InitRefill();
   InitSchedule();
   InitDsblAnswer();
+  InitReview();
 
   InitExtended0();
   InitExtended1();
@@ -173,6 +175,7 @@ void    ResetDevices(bool  fFull)
   ResetRefill();
   ResetSchedule();
   ResetDsblAnswer();
+  ResetReview();
 
   ResetExtended0(fFull);
   ResetExtended1();

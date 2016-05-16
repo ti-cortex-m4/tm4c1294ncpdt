@@ -21,6 +21,6 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 void    key_SetReviewReadId(void)
 {
-  key_SetBool(&chReviewReadId, pszMessages, szTrue, szFalse);
+  key_SetBool(&chReviewReadId, pszMessages);
 }
 
