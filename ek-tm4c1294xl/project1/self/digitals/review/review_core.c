@@ -15,7 +15,7 @@ static uchar            cbSuccess,cbTotal;
 
 
 
-void    StartReview(void)
+void StartReview(void)
 {
   memset(&mbBuff, 0, sizeof(mbBuff));
   cbSuccess = 0;
@@ -34,6 +34,7 @@ static uchar ReadReview(void)
     {
       cbTotal++;
       // copy
+      return 1; // same profile
     }
   }
   else
