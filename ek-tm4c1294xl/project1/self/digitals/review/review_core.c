@@ -30,7 +30,7 @@ static bool UseReview(void)
   return (bReviewRepeats >= 1) && (bReviewRepeats <= 5);
 }
 
-static void CopyBuff(const uchar  ibMin, const uchar  ibMax)
+static void CopyBuff(uchar  ibMin, uchar  ibMax)
 {
   uchar i;
   for (i=ibMin; i<=ibMax; i++)
@@ -39,7 +39,7 @@ static void CopyBuff(const uchar  ibMin, const uchar  ibMax)
   }
 }
 
-static bool CompareBuff(const uchar  ibMin, const uchar  ibMax)
+static bool CheckBuff(uchar  ibMin, uchar  ibMax)
 {
   uchar i;
   for (i=ibMin; i<=ibMax; i++)
@@ -51,12 +51,10 @@ static bool CompareBuff(const uchar  ibMin, const uchar  ibMax)
   return true;
 }
 
-static review ReadReview(const uchar  ibMin, const uchar  ibMax)
+static review ReadReview(uchar  ibMin, uchar  ibMax)
 {
   if (!UseReview())
-  {
     return REVIEW_SUCCESS;
-  }
   else if (cbTotal == 0)
   {
     cbTotal++;
@@ -66,12 +64,10 @@ static review ReadReview(const uchar  ibMin, const uchar  ibMax)
   else
   {
     if (++cbTotal >= 10)
-    {
       return REVIEW_ERROR;
-    }
     else
     {
-      if (CompareBuff(ibMin,ibMax))
+      if (CheckBuff(ibMin,ibMax))
       {
         if (++cbSuccess >= bReviewRepeats)
           return REVIEW_SUCCESS;
@@ -89,8 +85,7 @@ static review ReadReview(const uchar  ibMin, const uchar  ibMax)
 }
 
 
-review ReadReviewC(void)
+review ReadReviewC6(void)
 {
- // copy
   return ReadReview(0, 53);
 }
