@@ -5,6 +5,7 @@ review_core.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../serial/ports_common.h"
 #include "review.h"
 #include "review_core.h"
 
@@ -24,46 +25,72 @@ void StartReview(void)
 
 
 
-static uchar ReadReview(void)
+static bool UseReview(void)
 {
-  if (cbTotal == 0)
+  return (bReviewRepeats >= 1) && (bReviewRepeats <= 5);
+}
+
+static void CopyBuff(const uchar  ibMin, const uchar  ibMax)
+{
+  uchar i;
+  for (i=ibMin; i<=ibMax; i++)
   {
-    if (bReviewRepeats == 0)
-      return 0; // next profile
-    else
-    {
-      cbTotal++;
-      // copy
-      return 1; // same profile
-    }
+    mbBuff[i] = InBuff(i);
+  }
+}
+
+static bool CompareBuff(const uchar  ibMin, const uchar  ibMax)
+{
+  uchar i;
+  for (i=ibMin; i<=ibMax; i++)
+  {
+    if (mbBuff[i] != InBuff(i))
+      return false;
+  }
+
+  return true;
+}
+
+static review ReadReview(const uchar  ibMin, const uchar  ibMax)
+{
+  if (!UseReview())
+  {
+    return REVIEW_SUCCESS;
+  }
+  else if (cbTotal == 0)
+  {
+    cbTotal++;
+    CopyBuff(ibMin,ibMax);
+    return REVIEW_REPEAT;
   }
   else
   {
     if (++cbTotal >= 10)
     {
-      return 2; // error
+      return REVIEW_ERROR;
     }
     else
     {
-      if (true) // is equal
+      if (CompareBuff(ibMin,ibMax))
       {
         if (++cbSuccess >= bReviewRepeats)
-          return 0; // next profile
+          return REVIEW_SUCCESS;
         else
-          return 1; // same profile
+          return REVIEW_REPEAT;
       }
       else
       {
-        // copy
-        return 1; // same profile
+        cbSuccess = 0;
+        CopyBuff(ibMin,ibMax);
+        return REVIEW_REPEAT;
       }
     }
   }
 }
 
 
-uchar   ReadReviewC(void)
+review ReadReviewC(void)
 {
  // copy
-  return ReadReview();
+  return ReadReview(0, 53);
 }
