@@ -4,13 +4,13 @@ review.h
 
 ------------------------------------------------------------------------------*/
 
-extern  bool                    fReviewReadId;
-extern  uchar                   bReviewRepeats;
+extern bool                    fReviewReadId;
+extern uchar                   bReviewRepeats;
 
-extern  cache const             chReviewReadId;
-extern  cache const             chReviewRepeats;
+extern cache const             chReviewReadId;
+extern cache const             chReviewRepeats;
 
 
 
-void    InitReview(void);
-void    ResetReview(void);
+void InitReview(void);
+void ResetReview(void);

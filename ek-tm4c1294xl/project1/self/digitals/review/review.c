@@ -19,14 +19,14 @@ cache const             chReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, size
 
 
 
-void    InitReview(void)
+void InitReview(void)
 {
   LoadCacheBool(&chReviewReadId, false);
   LoadCacheChar(&chReviewRepeats, 1, 5, 1);
 }
 
 
-void    ResetReview(void)
+void ResetReview(void)
 {
   SaveCacheBool(&chReviewReadId, false);
   SaveCacheChar(&chReviewRepeats, 1);
