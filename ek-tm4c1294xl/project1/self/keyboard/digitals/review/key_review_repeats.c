@@ -12,8 +12,8 @@ key_review_repeats.c
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "Уровень доступа ",
-                        szMessage2[]    = "для Меркурий-230";
+static char const       szMessage1[]    = "  Повторы при   ",
+                        szMessage2[]    = "чтении профилей ";
 
 static char const       *pszMessages[]  = { szMessage1, szMessage2, szNumberLimits, "" };
 
@@ -21,5 +21,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szNumberLimi
 
 void    key_SetReviewRepeats(void)
 {
-  key_SetChar(&chbReviewRepeats, pszMessages, 0, 4);
+  key_SetChar(&chbReviewRepeats, pszMessages, 1, 5);
 }
