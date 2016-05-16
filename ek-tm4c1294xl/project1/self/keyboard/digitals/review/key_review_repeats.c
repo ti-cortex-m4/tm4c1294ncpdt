@@ -1,12 +1,13 @@
 /*------------------------------------------------------------------------------
-KEY_KEYS_LEVEL_B!C
+key_review_repeats.c
 
 
 ------------------------------------------------------------------------------*/
 
-#include "../../console.h"
-#include "../../devices/devices_init.h"
-#include "../common/key_char.h"
+#include "../../../console.h"
+#include "../../../digitals/review/review.h"
+#include "../../common/key_char.h"
+#include "key_review_repeats.h"
 
 
 
@@ -18,7 +19,7 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szNumberLimi
 
 
 
-void    key_SetKeysLevelB(void)
+void    key_SetReviewRepeats(void)
 {
-  key_SetChar(&chKeysLevelB, pszMessages, 1, 2);
+  key_SetChar(&chbReviewRepeats, pszMessages, 0, 4);
 }
