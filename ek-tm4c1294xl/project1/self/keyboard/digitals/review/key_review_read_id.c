@@ -12,10 +12,11 @@ key_review_read_id.c
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "Контроль времени",
-                        szMessage2[]    = "  для ЦЭ6850М   ";
+static char const       szMessage1[]    = " Чтение логич.  ",
+                        szMessage2[]    = "  номеров при   ",
+                        szMessage2[]    = "чтении профилей ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
