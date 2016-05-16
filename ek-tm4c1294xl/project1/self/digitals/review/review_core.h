@@ -19,4 +19,4 @@ typedef enum
 
 
 void StartReview(void);
-uchar ReadReviewC(void);
+uchar ReadReviewC6(void);
