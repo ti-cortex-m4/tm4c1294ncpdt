@@ -4,6 +4,16 @@ review.h
 
 ------------------------------------------------------------------------------*/
 
+#ifndef __REVIEW
+#define __REVIEW
+
+#define REVIEW_REPEATS_MIN    1
+#define REVIEW_REPEATS_MAX    5
+
+#endif
+
+
+
 extern bool                    fReviewReadId;
 extern uchar                   bReviewRepeats;
 

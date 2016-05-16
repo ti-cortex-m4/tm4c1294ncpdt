@@ -22,5 +22,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 void    key_SetReviewRepeats(void)
 {
-  key_SetChar(&chReviewRepeats, pszMessages, 1, 5);
+  key_SetChar(&chReviewRepeats, pszMessages, REVIEW_REPEATS_MIN, REVIEW_REPEATS_MAX);
 }

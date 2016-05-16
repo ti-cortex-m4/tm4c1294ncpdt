@@ -27,7 +27,7 @@ void StartReview(void)
 
 static bool UseReview(void)
 {
-  return (bReviewRepeats >= 1) && (bReviewRepeats <= 5);
+  return (bReviewRepeats > REVIEW_REPEATS_MIN) && (bReviewRepeats <= REVIEW_REPEATS_MAX);
 }
 
 static void CopyBuff(uchar  ibMin, uchar  ibMax)
