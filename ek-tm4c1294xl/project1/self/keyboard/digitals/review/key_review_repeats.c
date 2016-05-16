@@ -12,14 +12,15 @@ key_review_repeats.c
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "  Повторы при   ",
-                        szMessage2[]    = "чтении профилей ";
+static char const       szMessage1[]    = "   Количество   ",
+                        szMessage2[]    = "  повторов при  ",
+                        szMessage3[]    = "чтении профилей ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, szNumberLimits, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szNumberLimits, "" };
 
 
 
 void    key_SetReviewRepeats(void)
 {
-  key_SetChar(&chbReviewRepeats, pszMessages, 1, 5);
+  key_SetChar(&chReviewRepeats, pszMessages, 1, 5);
 }

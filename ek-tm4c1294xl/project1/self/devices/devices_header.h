@@ -33,6 +33,7 @@ DEVICES.C
 #include "../digitals/max_repeats.h"
 #include "../digitals/correct_limit.h"
 #include "../digitals/max_shutdown.h"
+#include "../digitals/review/review.h"
 #include "../special/recalc_def.h"
 #include "../special/defects.h"
 #include "../sensors/device_a.h"

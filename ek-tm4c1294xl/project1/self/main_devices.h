@@ -170,10 +170,14 @@ typedef enum
   DEV_HEADER_6_C2       =  0x30C,
   DEV_POSTHEADER_6_C2   =  0x30D,
   DEV_DATA_6_C2         =  0x30E,
+  DEV_ID_6_C2           =  0x314,
+  DEV_POSTID_6_C2       =  0x315,
 
   DEV_HEADER_1_C2       =  0x30F,
   DEV_POSTHEADER_1_C2   =  0x310,
   DEV_DATA_1_C2         =  0x311,
+  DEV_ID_1_C2           =  0x312,
+  DEV_POSTID_1_C2       =  0x313,
 
 //  DEV_INIT_61_C2        =  0x312,
 //  DEV_DATA_61_C2        =  0x313,
