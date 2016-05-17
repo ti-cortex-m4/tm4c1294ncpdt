@@ -34,6 +34,7 @@ DEVICES.C
 #include "../digitals/correct_limit.h"
 #include "../digitals/max_shutdown.h"
 #include "../digitals/review/review.h"
+#include "../digitals/review/review_core.h"
 #include "../special/recalc_def.h"
 #include "../special/defects.h"
 #include "../sensors/device_a.h"
@@ -1816,20 +1817,19 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTVALUE_C2:
-      /*if (mpbHouCheck[ibDig] != 0)
-      {
-        Clear(); sprintf(szLo+2,"проверки: %bu",mpbHouCheck[ibDig]);
-        MakeLongPause(DEV_INIT_61_C2, 1);
-      }
-      else*/
+//      if (mpbHouCheck[ibDig] != 0)
+//      {
+//        Clear(); sprintf(szLo+2,"проверки: %bu",mpbHouCheck[ibDig]);
+//        MakeLongPause(DEV_INIT_61_C2, 1);
+//      }
+//      else
       cbRepeat2 = 0;
       if (boShortProfileC == false)
       {
         InitHeaderC_6();
 
-        cbRepeat = GetMaxRepeats();
-        QueryHeaderC_6();
-        SetCurr(DEV_HEADER_6_C2);
+        StartReview();
+        MakePause(DEV_DATA_6_C2);
       }
       else
       {
@@ -1842,6 +1842,12 @@ void    RunDevices(void)
       break;
 
 
+    case DEV_DATA_6_C2:
+      cbRepeat = GetMaxRepeats();
+      QueryHeaderC_6();
+      SetCurr(DEV_HEADER_6_C2);
+      break;
+
     case DEV_HEADER_6_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_6_C2);
@@ -1849,17 +1855,6 @@ void    RunDevices(void)
       {
         ShowLo(szFailure1);
         MakePause(DEV_ERROR_6_C2);
-/*
-        if (cbRepeat == 0)
-          ErrorProfile();
-        else
-        {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryHeaderC_6();
-          SetCurr(DEV_HEADER_6_C2);
-        }*/
       }
       break;
 
@@ -1905,15 +1900,30 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_6_C2:
-      cbRepeat2 = 0;
-      if (ReadHeaderC_6() == 0)
-        DoneProfile();
-      else
-      {
-        if (fReviewReadId == true)
-          MakePause(DEV_ID_6_C2);
-        else
+      switch (ReadReviewC6()) {
+        case REVIEW_REPEAT: {
           MakePause(DEV_DATA_6_C2);
+          break;
+        }
+        case REVIEW_SUCCESS: {
+          cbRepeat2 = 0;
+          if (ReadHeaderC_6() == 0)
+            DoneProfile();
+          else {
+            if (fReviewReadId == true)
+              MakePause(DEV_ID_6_C2);
+            else {
+              StartReview();
+              MakePause(DEV_DATA_6_C2);
+            }
+          }
+          break;
+        }
+        case REVIEW_ERROR: {
+          ErrorProfile();
+          break;
+        }
+        default: ASSERT(false);
       }
       break;
 
@@ -1939,12 +1949,6 @@ void    RunDevices(void)
           SetCurr(DEV_POSTID_6_C2);
         }
       }
-      break;
-
-    case DEV_DATA_6_C2:
-      cbRepeat = GetMaxRepeats();
-      QueryHeaderC_6();
-      SetCurr(DEV_HEADER_6_C2);
       break;
 
 
