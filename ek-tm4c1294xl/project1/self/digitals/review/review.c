@@ -17,7 +17,7 @@ uchar                   bReviewMargins;
 
 cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof(bool)};
 cache const             chReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, sizeof(uchar)};
-cache const             chReviewRepeats = {REVIEW_MARGINS, &bReviewMargins, sizeof(uchar)};
+cache const             chReviewMargins = {REVIEW_MARGINS, &bReviewMargins, sizeof(uchar)};
 
 
 

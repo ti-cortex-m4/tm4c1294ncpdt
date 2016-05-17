@@ -82,7 +82,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
     cbMargins++;
     Show();
 
-    if (cbMargins >= 50)
+    if (cbMargins >= bReviewMargins)
     {
       Clear(); strcpy(szLo+3, "ошибка !"); DelayInf(); Clear();
       return REVIEW_ERROR;
