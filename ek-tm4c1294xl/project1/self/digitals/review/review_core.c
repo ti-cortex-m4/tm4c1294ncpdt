@@ -11,8 +11,11 @@ review_core.c
 
 
 
-static uchar            mbBuff[100];
-static uchar            cbRepeats, cbLimits;
+#define REVIEW_BUFF_SIZE     100
+
+
+static uchar            mbBuff[REVIEW_BUFF_SIZE];
+static uchar            cbRepeats, cbMargins;
 
 
 
@@ -20,7 +23,7 @@ void StartReview(void)
 {
   memset(&mbBuff, 0, sizeof(mbBuff));
   cbRepeats = 0;
-  cbLimits = 0;
+  cbMargins = 0;
 }
 
 
@@ -35,6 +38,7 @@ static void SaveBuff(uchar  ibMin, uchar  ibMax)
   uchar i;
   for (i=ibMin; i<=ibMax; i++)
   {
+    ASSERT(i < REVIEW_BUFF_SIZE);
     mbBuff[i] = InBuff(i);
   }
 }
@@ -44,6 +48,7 @@ static bool TestBuff(uchar  ibMin, uchar  ibMax)
   uchar i;
   for (i=ibMin; i<=ibMax; i++)
   {
+    ASSERT(i < REVIEW_BUFF_SIZE);
     if (mbBuff[i] != InBuff(i))
       return false;
   }
@@ -51,19 +56,20 @@ static bool TestBuff(uchar  ibMin, uchar  ibMax)
   return true;
 }
 
+
 static review ReadReview(uchar  ibMin, uchar  ibMax)
 {
   if (!UseReview())
     return REVIEW_SUCCESS;
-  else if (cbLimits == 0)
+  else if (cbMargins == 0) // ������ �����
   {
-    cbLimits++;
+    cbMargins++;
     SaveBuff(ibMin,ibMax);
     return REVIEW_REPEAT;
   }
   else
   {
-    if (++cbLimits >= 10)
+    if (++cbMargins >= 10)
       return REVIEW_ERROR;
     else
     {
