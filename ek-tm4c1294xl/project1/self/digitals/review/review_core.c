@@ -69,7 +69,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
   }
   else
   {
-    if (++cbMargins >= 10)
+    if (++cbMargins >= 50)
       return REVIEW_ERROR;
     else
     {

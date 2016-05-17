@@ -173,12 +173,12 @@
       break;
 
     case DEV_POSTVALUE_C2:
-      /*if (mpbHouCheck[ibDig] != 0)
-      {
-        Clear(); sprintf(szLo+2,"проверки: %bu",mpbHouCheck[ibDig]);
-        MakeLongPause(DEV_INIT_61_C2, 1);
-      }
-      else*/
+//      if (mpbHouCheck[ibDig] != 0)
+//      {
+//        Clear(); sprintf(szLo+2,"проверки: %bu",mpbHouCheck[ibDig]);
+//        MakeLongPause(DEV_INIT_61_C2, 1);
+//      }
+//      else
       cbRepeat2 = 0;
       if (boShortProfileC == false)
       {
