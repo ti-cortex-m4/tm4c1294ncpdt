@@ -61,7 +61,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
 {
   if (!UseReview())
     return REVIEW_SUCCESS;
-  else if (cbMargins == 0) // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+  else if (cbMargins == 0) // первый опрос
   {
     cbMargins++;
     SaveBuff(ibMin,ibMax);
