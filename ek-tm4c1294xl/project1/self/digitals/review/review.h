@@ -10,8 +10,6 @@ review.h
 #define REVIEW_REPEATS_MIN    1
 #define REVIEW_REPEATS_MAX    5
 
-#endif
-
 
 
 extern bool                    fReviewReadId;
@@ -24,3 +22,5 @@ extern cache const             chReviewRepeats;
 
 void InitReview(void);
 void ResetReview(void);
+
+#endif

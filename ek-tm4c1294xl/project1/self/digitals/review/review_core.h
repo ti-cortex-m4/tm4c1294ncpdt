@@ -14,9 +14,9 @@ typedef enum
   REVIEW_ERROR          = 2,
 } review;
 
-#endif
-
 
 
 void StartReview(void);
 review ReadReviewC6(void);
+
+#endif
