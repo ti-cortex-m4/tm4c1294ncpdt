@@ -184,9 +184,8 @@
       {
         InitHeaderC_6();
 
-        cbRepeat = GetMaxRepeats();
-        QueryHeaderC_6();
-        SetCurr(DEV_HEADER_6_C2);
+        StartReview();
+        MakePause(DEV_DATA_6_C2);
       }
       else
       {
@@ -199,6 +198,12 @@
       break;
 
 
+    case DEV_DATA_6_C2:
+      cbRepeat = GetMaxRepeats();
+      QueryHeaderC_6();
+      SetCurr(DEV_HEADER_6_C2);
+      break;
+
     case DEV_HEADER_6_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTHEADER_6_C2);
@@ -206,17 +211,6 @@
       {
         ShowLo(szFailure1);
         MakePause(DEV_ERROR_6_C2);
-/*
-        if (cbRepeat == 0)
-          ErrorProfile();
-        else
-        {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryHeaderC_6();
-          SetCurr(DEV_HEADER_6_C2);
-        }*/
       }
       break;
 
@@ -262,15 +256,30 @@
       break;
 
     case DEV_POSTHEADER_6_C2:
-      cbRepeat2 = 0;
-      if (ReadHeaderC_6() == 0)
-        DoneProfile();
-      else
-      {
-        if (fReviewReadId == true)
-          MakePause(DEV_ID_6_C2);
-        else
+      switch (ReadReviewC6()) {
+        case REVIEW_REPEAT: {
           MakePause(DEV_DATA_6_C2);
+          break;
+        }
+        case REVIEW_SUCCESS: {
+          cbRepeat2 = 0;
+          if (ReadHeaderC_6() == 0)
+            DoneProfile();
+          else {
+            if (fReviewReadId == true)
+              MakePause(DEV_ID_6_C2);
+            else {
+              StartReview();
+              MakePause(DEV_DATA_6_C2);
+            }
+          }
+          break;
+        }
+        case REVIEW_ERROR: {
+          ErrorProfile();
+          break;
+        }
+        default: ASSERT(false);
       }
       break;
 
@@ -296,12 +305,6 @@
           SetCurr(DEV_POSTID_6_C2);
         }
       }
-      break;
-
-    case DEV_DATA_6_C2:
-      cbRepeat = GetMaxRepeats();
-      QueryHeaderC_6();
-      SetCurr(DEV_HEADER_6_C2);
       break;
 
 
