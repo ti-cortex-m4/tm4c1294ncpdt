@@ -73,6 +73,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
     cbMargins++;
     Show();
 
+    cbRepeats++;
     SaveBuff(ibMin,ibMax);
     return REVIEW_REPEAT;
   }
@@ -83,7 +84,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
 
     if (cbMargins >= 50)
     {
-      Clear(); strcpy(szLo+2, "ошибка"); DelayInf(); Clear();
+      Clear(); strcpy(szLo+3, "ошибка !"); DelayInf(); Clear();
       return REVIEW_ERROR;
     }
     else
@@ -99,7 +100,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
       {
         cbRepeats = 0;
         SaveBuff(ibMin,ibMax);
-        Clear(); strcpy(szLo+2, "повтор"); DelayInf(); Clear();
+        Clear(); strcpy(szLo+3, "повтор !"); DelayInf(); Clear();
         return REVIEW_REPEAT;
       }
     }
