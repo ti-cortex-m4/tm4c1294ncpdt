@@ -5,6 +5,8 @@ review_core.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../display/display.h"
+#include "../../time/delay.h"
 #include "../../serial/ports_common.h"
 #include "review.h"
 #include "review_core.h"
@@ -31,6 +33,11 @@ void StartReview(void)
 static bool UseReview(void)
 {
   return (bReviewRepeats > REVIEW_REPEATS_MIN) && (bReviewRepeats <= REVIEW_REPEATS_MAX);
+}
+
+static void Show(void)
+{
+  sprintf(szHi+10, "%2u", cbMargins);
 }
 
 static void SaveBuff(uchar  ibMin, uchar  ibMax)
@@ -64,13 +71,21 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
   else if (cbMargins == 0) // первый опрос
   {
     cbMargins++;
+    Show();
+
     SaveBuff(ibMin,ibMax);
     return REVIEW_REPEAT;
   }
   else
   {
-    if (++cbMargins >= 50)
+    cbMargins++;
+    Show();
+
+    if (cbMargins >= 50)
+    {
+      Clear(); strcpy(szLo+2, "ошибка"); DelayInf(); Clear();
       return REVIEW_ERROR;
+    }
     else
     {
       if (TestBuff(ibMin,ibMax))
@@ -84,6 +99,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
       {
         cbRepeats = 0;
         SaveBuff(ibMin,ibMax);
+        Clear(); strcpy(szLo+2, "повтор"); DelayInf(); Clear();
         return REVIEW_REPEAT;
       }
     }
