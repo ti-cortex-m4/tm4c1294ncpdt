@@ -312,6 +312,7 @@ PROGRAMS!H
 
 #define wSET_REVIEW_READ_ID         440
 #define wSET_REVIEW_REPEATS         441
+#define wSET_REVIEW_MARGINS         442
 
 #define wSET_DSBL_ESC               410
 
