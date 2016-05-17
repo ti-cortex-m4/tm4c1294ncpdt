@@ -105,6 +105,7 @@ KEYBOARD_KEY!C
 #include "sensors/key_control_w.h"
 #include "digitals/review/key_review_read_id.h"
 #include "digitals/review/key_review_repeats.h"
+#include "digitals/review/key_review_margins.h"
 #include "digitals/key_dsbl_esc.h"
 #include "key_records_dsbl.h"
 #include "esc/key_machines_esc.h"
@@ -345,6 +346,7 @@ void    Keyboard_Key(void)
 
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
+      case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
@@ -648,6 +650,7 @@ void    Keyboard_Key(void)
 
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
+      case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
@@ -871,6 +874,7 @@ void    Keyboard_Key(void)
 
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
+      case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
 
       case wSET_DSBL_ESC:       key_SetDsblEsc();       break;
 
