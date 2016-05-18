@@ -179,7 +179,7 @@
 //        MakeLongPause(DEV_INIT_61_C2, 1);
 //      }
 //      else
-      cbRepeat2 = 0;
+      cbIteration = 0;
       if (boShortProfileC == false)
       {
         InitHeaderC_6();
@@ -217,7 +217,7 @@
     case DEV_ERROR_6_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
@@ -262,7 +262,7 @@
           break;
         }
         case REVIEW_SUCCESS: {
-          cbRepeat2 = 0;
+          cbIteration = 0;
           if (ReadHeaderC_6() == 0)
             DoneProfile();
           else {
@@ -310,7 +310,7 @@
     case DEV_HEADER_1_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        cbRepeat2 = 0;
+        cbIteration = 0;
         if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05))      // если нет требуемой записи
         {
           if (++iwMajor > GetMaxShutdown())
@@ -355,7 +355,7 @@
     case DEV_ERROR_1_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();

@@ -187,7 +187,7 @@
       break;
 
     case DEV_POSTTOP_A2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       if (diCurr.bDevice == 1)
       {
         cbRepeat = GetMaxRepeats();
@@ -228,7 +228,7 @@
     case DEV_ERROR1_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
@@ -266,7 +266,7 @@
       break;
 
     case DEV_POSTHEADER_A2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       cbRepeat = GetMaxRepeats();
       QueryDataA();
       SetCurr(DEV_DATA_A2);
@@ -295,7 +295,7 @@
     case DEV_ERROR2_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
@@ -333,7 +333,7 @@
       break;
 
     case DEV_POSTDATA_A2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       NewBoundsAbs16(iwMajor);
       if (ReadDataA() == 0)
         DoneProfile();

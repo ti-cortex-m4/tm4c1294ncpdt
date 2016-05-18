@@ -86,7 +86,7 @@ DEVICES.C
 
 
 // счётчик повторов
-uchar                   cbRepeat, cbRepeat2;
+uchar                   cbRepeat, cbIteration;
 
 // счётчик коррекций времени
 uchar                   cbCorrects;
@@ -853,7 +853,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTTOP_A2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       if (diCurr.bDevice == 1)
       {
         cbRepeat = GetMaxRepeats();
@@ -894,7 +894,7 @@ void    RunDevices(void)
     case DEV_ERROR1_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
@@ -932,7 +932,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_A2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       cbRepeat = GetMaxRepeats();
       QueryDataA();
       SetCurr(DEV_DATA_A2);
@@ -961,7 +961,7 @@ void    RunDevices(void)
     case DEV_ERROR2_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
@@ -999,7 +999,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTDATA_A2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       NewBoundsAbs16(iwMajor);
       if (ReadDataA() == 0)
         DoneProfile();
@@ -1344,7 +1344,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTTOP_B2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       if (diCurr.bDevice == 2)
       {
         if (TestVersionB710())
@@ -1391,7 +1391,7 @@ void    RunDevices(void)
     case DEV_ERROR_B2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
@@ -1429,7 +1429,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_B2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       NewBoundsAbs16(wBaseCurr);
       if (ReadHeaderB(0,0) == 0)
         DoneProfile();
@@ -1823,7 +1823,7 @@ void    RunDevices(void)
 //        MakeLongPause(DEV_INIT_61_C2, 1);
 //      }
 //      else
-      cbRepeat2 = 0;
+      cbIteration = 0;
       if (boShortProfileC == false)
       {
         InitHeaderC_6();
@@ -1861,7 +1861,7 @@ void    RunDevices(void)
     case DEV_ERROR_6_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
@@ -1906,7 +1906,7 @@ void    RunDevices(void)
           break;
         }
         case REVIEW_SUCCESS: {
-          cbRepeat2 = 0;
+          cbIteration = 0;
           if (ReadHeaderC_6() == 0)
             DoneProfile();
           else {
@@ -1954,7 +1954,7 @@ void    RunDevices(void)
     case DEV_HEADER_1_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        cbRepeat2 = 0;
+        cbIteration = 0;
         if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05))      // если нет требуемой записи
         {
           if (++iwMajor > GetMaxShutdown())
@@ -1999,7 +1999,7 @@ void    RunDevices(void)
     case DEV_ERROR_1_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
