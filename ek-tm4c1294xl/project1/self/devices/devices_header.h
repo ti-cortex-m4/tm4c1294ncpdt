@@ -86,7 +86,7 @@ DEVICES.C
 
 
 // счётчик повторов
-uchar                   cbRepeat, cbRepeat2;
+uchar                   cbRepeat, cbIteration;
 
 // счётчик коррекций времени
 uchar                   cbCorrects;

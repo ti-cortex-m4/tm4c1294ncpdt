@@ -84,7 +84,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
 
     if (cbMargins >= bReviewMargins)
     {
-      Clear(); strcpy(szLo+3, "ошибка !"); DelayInf(); Clear();
+      Clear(); strcpy(szLo+0, "ошибка проверки"); DelayInf(); Clear();
       return REVIEW_ERROR;
     }
     else
@@ -100,7 +100,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
       {
         cbRepeats = 0;
         SaveBuff(ibMin,ibMax);
-        Clear(); strcpy(szLo+3, "повтор !"); DelayInf(); Clear();
+        Clear(); strcpy(szLo+0, "повтор проверки"); DelayInf(); Clear();
         return REVIEW_REPEAT;
       }
     }
