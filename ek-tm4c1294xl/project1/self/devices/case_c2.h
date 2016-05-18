@@ -266,12 +266,11 @@
           if (ReadHeaderC_6() == 0)
             DoneProfile();
           else {
+            StartReview();
             if (fReviewReadId == true)
               MakePause(DEV_ID_6_C2);
-            else {
-              StartReview();
+            else
               MakePause(DEV_DATA_6_C2);
-            }
           }
           break;
         }
