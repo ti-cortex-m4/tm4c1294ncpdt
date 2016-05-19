@@ -11,7 +11,7 @@ review.h
 #define REVIEW_REPEATS_MAX    5
 
 #define REVIEW_MARGINS_MIN    10
-#define REVIEW_MARGINS_MAX    25
+#define REVIEW_MARGINS_MAX    50
 
 
 
