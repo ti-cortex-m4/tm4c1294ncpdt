@@ -26,6 +26,6 @@ extern cache const             chReviewMargins;
 
 
 void InitReview(void);
-void ResetReview(void);
+void ResetReview(bool  fFull);
 
 #endif
