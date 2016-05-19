@@ -17,6 +17,7 @@ typedef enum
 
 
 void StartReview(void);
+review ReadReviewC1(void);
 review ReadReviewC6(void);
 
 #endif
