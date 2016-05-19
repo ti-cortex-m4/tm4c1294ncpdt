@@ -19,14 +19,13 @@ PROFILE_C!C
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../digitals/limits.h"
+#include "../../digitals/max_shutdown.h"
 #include "../../special/special.h"
 #include "profile_c.h"
 
 
 
-#ifndef SKIP_C
-
-uint                    cwShutdownC;
+static uint             cwShutdownC;
 
 
 
@@ -143,12 +142,34 @@ bool    ReadHeaderC(uchar  ibBlock)
 
 bool    ReadHeaderC1(void)
 {
+  cwShutdownC = 0;
+
   if (ReadHeaderC(0) == 0)
     return(0);
   else if (++wBaseCurr > wHOURS)
     return(0);
   else
     return(1);
+}
+
+bool    ReadHeaderC1_Shutdown(void)
+{
+  if (++cwShutdownC > GetMaxShutdown())
+    return(0);
+  else
+  {
+    Clear(); sprintf(szLo+1,"выключено: %-4u",cwShutdownC);
+
+    iwDigHou = (wHOURS+iwHardHou-wBaseCurr)%wHOURS;
+    ShowProgressDigHou();
+
+    if (MakeStopHou(0) == 0)
+      return(0);
+    else if (++wBaseCurr > wHOURS)
+      return(0);
+    else
+      return(1);
+  }
 }
 
 
@@ -171,5 +192,3 @@ bool    ReadHeaderC6(void)
 
   return(1);
 }
-
-#endif

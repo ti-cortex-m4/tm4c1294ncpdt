@@ -1961,28 +1961,15 @@ void    RunDevices(void)
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         cbIteration = 0;
-        if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05)) // если нет требуемой записи
+        if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05)) // нет требуемой записи
         {
-          if (++cwShutdownC > GetMaxShutdown())
+          if (ReadHeaderC1_Shutdown() == 0)
             DoneProfile();
           else
-          {
-            Clear(); sprintf(szLo+1,"выключено: %-4u",cwShutdownC);
-
-            iwDigHou = (wHOURS+iwHardHou-wBaseCurr)%wHOURS;
-            ShowProgressDigHou();
-
-            if (MakeStopHou(0) == 0)
-              DoneProfile();
-            else if (++wBaseCurr > wHOURS)
-              DoneProfile();
-            else
-              MakePause(DEV_DATA_1_C2);
-          }
+            MakePause(DEV_DATA_1_C2);
         }
-        else
+        else // есть требуемая запись
         {
-          cwShutdownC = 0; // если есть требуемая запись
           MakePause(DEV_POSTHEADER_1_C2);
         }
       }
