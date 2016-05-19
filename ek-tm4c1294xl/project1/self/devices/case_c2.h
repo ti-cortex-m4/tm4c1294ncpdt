@@ -307,6 +307,12 @@
       break;
 
 
+    case DEV_DATA_1_C2:
+      cbRepeat = GetMaxRepeats();
+      QueryHeaderC_1();
+      SetCurr(DEV_HEADER_1_C2);
+      break;
+
     case DEV_HEADER_1_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {

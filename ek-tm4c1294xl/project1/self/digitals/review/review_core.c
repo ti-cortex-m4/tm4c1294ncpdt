@@ -108,6 +108,12 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
 }
 
 
+
+review ReadReviewC1(void)
+{
+  return ReadReview(0, 13);
+}
+
 review ReadReviewC6(void)
 {
   return ReadReview(0, 53);
