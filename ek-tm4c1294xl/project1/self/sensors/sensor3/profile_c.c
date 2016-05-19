@@ -25,6 +25,7 @@ PROFILE_C!C
 
 
 
+static uint             wProfileC;
 static uint             cwShutdownC;
 
 
@@ -34,11 +35,11 @@ void    InitHeaderC1(void)
   cwShutdownC = 0;
 
   if (!UseBounds())
-    wBaseCurr = 0;
+    wProfileC = 0;
   else
   {
-    wBaseCurr = mpcwStartRelCan[ibDig];
-    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    wProfileC = mpcwStartRelCan[ibDig];
+    sprintf(szLo," начало %04u:%02u ",wProfileC,(uchar)(wProfileC/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
 
@@ -51,11 +52,11 @@ void    InitHeaderC6(void)
 uchar i;
 
   if (!UseBounds())
-    wBaseCurr = 0;
+    wProfileC = 0;
   else
   {
-    wBaseCurr = (mpcwStartRelCan[ibDig] / 6) * 6;
-    sprintf(szLo," начало %04u:%02u ",wBaseCurr,(uchar)(wBaseCurr/48 + 1));
+    wProfileC = (mpcwStartRelCan[ibDig] / 6) * 6;
+    sprintf(szLo," начало %04u:%02u ",wProfileC,(uchar)(wProfileC/48 + 1));
     if (boShowMessages == true) DelayMsg();
   }
 
@@ -74,7 +75,7 @@ void    QueryHeaderC1(void)
   HideCurrTime(1);
 
   ulong dw = DateToHouIndex(tiDigPrev);
-  dw -= wBaseCurr;
+  dw -= wProfileC;
   tiDig = HouIndexToDate(dw);
 
 
@@ -97,7 +98,7 @@ void    QueryHeaderC6(void)
   HideCurrTime(1);
 
   ulong dw = DateToHouIndex(tiDigPrev);
-  dw -= wBaseCurr;
+  dw -= wProfileC;
   tiDig = HouIndexToDate(dw);
 
 
@@ -146,7 +147,7 @@ bool    ReadHeaderC1(void)
 
   if (ReadHeaderC(0) == 0)
     return(0);
-  else if (++wBaseCurr > wHOURS)
+  else if (++wProfileC > wHOURS)
     return(0);
   else
     return(1);
@@ -160,12 +161,12 @@ bool    ReadHeaderC1_Shutdown(void)
   {
     Clear(); sprintf(szLo+1,"выключено: %-4u",cwShutdownC);
 
-    iwDigHou = (wHOURS+iwHardHou-wBaseCurr)%wHOURS;
+    iwDigHou = (wHOURS+iwHardHou-wProfileC)%wHOURS;
     ShowProgressDigHou();
 
     if (MakeStopHou(0) == 0)
       return(0);
-    else if (++wBaseCurr > wHOURS)
+    else if (++wProfileC > wHOURS)
       return(0);
     else
       return(1);
@@ -180,15 +181,15 @@ bool    ReadHeaderC6(void)
   {
     ulong dw = DateToHouIndex(tiDigPrev);
     dw += 5;
-    dw -= (wBaseCurr + i);
+    dw -= (wProfileC + i);
     tiDig = HouIndexToDate(dw);
 
     if (dw < dwValueC)
       if (ReadHeaderC(5-i) == 0) return(0);
   }
 
-  wBaseCurr += 6;
-  if (wBaseCurr > wHOURS) return(0);
+  wProfileC += 6;
+  if (wProfileC > wHOURS) return(0);
 
   return(1);
 }
