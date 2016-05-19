@@ -1826,17 +1826,17 @@ void    RunDevices(void)
       cbIteration = 0;
       if (boShortProfileC == false)
       {
-        InitHeaderC_6();
+        InitHeaderC6();
 
         StartReview();
         MakePause(DEV_DATA_6_C2);
       }
       else
       {
-        InitHeaderC_1();
+        InitHeaderC1();
 
         cbRepeat = GetMaxRepeats();
-        QueryHeaderC_1();
+        QueryHeaderC1();
         SetCurr(DEV_HEADER_1_C2);
       }
       break;
@@ -1844,7 +1844,7 @@ void    RunDevices(void)
 
     case DEV_DATA_6_C2:
       cbRepeat = GetMaxRepeats();
-      QueryHeaderC_6();
+      QueryHeaderC6();
       SetCurr(DEV_HEADER_6_C2);
       break;
 
@@ -1875,7 +1875,7 @@ void    RunDevices(void)
       {
         if (ReadIdC() == 1)
         {
-          QueryHeaderC_6();
+          QueryHeaderC6();
           SetCurr(DEV_HEADER_6_C2);
         }
         else
@@ -1907,7 +1907,7 @@ void    RunDevices(void)
         }
         case REVIEW_SUCCESS: {
           cbIteration = 0;
-          if (ReadHeaderC_6() == 0)
+          if (ReadHeaderC6() == 0)
             DoneProfile();
           else {
             StartReview();
@@ -2013,7 +2013,7 @@ void    RunDevices(void)
       {
         if (ReadIdC() == 1)
         {
-          QueryHeaderC_1();
+          QueryHeaderC1();
           SetCurr(DEV_HEADER_1_C2);
         }
         else
@@ -2038,7 +2038,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_1_C2:
-      if (ReadHeaderC_1() == 0)
+      if (ReadHeaderC1() == 0)
         DoneProfile();
       else
         MakePause(DEV_DATA_1_C2);
@@ -2050,7 +2050,7 @@ void    RunDevices(void)
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryHeaderC_1();
+        QueryHeaderC1();
         SetCurr(DEV_HEADER_1_C2);
       }
       break;

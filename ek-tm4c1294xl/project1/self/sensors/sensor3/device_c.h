@@ -26,12 +26,12 @@ void    QueryEnergyMonC(uchar  ibMonth);
 void    QueryEnergyDayC(uchar  ibDay);
 void    ReadEnergyC(void);
 
-void    InitHeaderC_1(void);
-void    InitHeaderC_6(void);
-void    QueryHeaderC_1(void);
-void    QueryHeaderC_6(void);
-bool    ReadHeaderC_1(void);
-bool    ReadHeaderC_6(void);
+void    InitHeaderC1(void);
+void    InitHeaderC6(void);
+void    QueryHeaderC1(void);
+void    QueryHeaderC6(void);
+bool    ReadHeaderC1(void);
+bool    ReadHeaderC6(void);
 
 void    ReadCurrentC(void);
 

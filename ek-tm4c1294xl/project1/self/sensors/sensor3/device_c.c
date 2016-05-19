@@ -309,7 +309,7 @@ uchar   i;
 }
 
 
-void    InitHeaderC_1(void)
+void    InitHeaderC1(void)
 {
   iwMajor = 0;
 
@@ -326,7 +326,7 @@ void    InitHeaderC_1(void)
 }
 
 
-void    InitHeaderC_6(void)
+void    InitHeaderC6(void)
 {
 uchar i;
 
@@ -349,7 +349,7 @@ uchar i;
 }
 
 
-void    QueryHeaderC_1(void)
+void    QueryHeaderC1(void)
 {
   HideCurrTime(1);
 
@@ -372,7 +372,7 @@ void    QueryHeaderC_1(void)
 }
 
 
-void    QueryHeaderC_6(void)
+void    QueryHeaderC6(void)
 {
   HideCurrTime(1);
 
@@ -420,13 +420,13 @@ bool    ReadHeaderC(uchar  ibBlock)
 }
 
 
-bool    ReadHeaderC_1(void)
+bool    ReadHeaderC1(void)
 {
   return ReadHeaderC(0);
 }
 
 
-bool    ReadHeaderC_6(void)
+bool    ReadHeaderC6(void)
 {
 uchar i;
 
