@@ -191,9 +191,8 @@
       {
         InitHeaderC_1();
 
-        cbRepeat = GetMaxRepeats();
-        QueryHeaderC_1();
-        SetCurr(DEV_HEADER_1_C2);
+        StartReview();
+        MakePause(DEV_DATA_1_C2);
       }
       break;
 
