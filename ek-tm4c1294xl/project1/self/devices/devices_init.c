@@ -175,7 +175,7 @@ void    ResetDevices(bool  fFull)
   ResetRefill();
   ResetSchedule();
   ResetDsblAnswer();
-  ResetReview();
+  ResetReview(fFull);
 
   ResetExtended0(fFull);
   ResetExtended1();

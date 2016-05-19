@@ -29,9 +29,12 @@ void InitReview(void)
 }
 
 
-void ResetReview(void)
+void ResetReview(bool  fFull)
 {
-  SaveCacheBool(&chReviewReadId, false);
-  SaveCacheChar(&chReviewRepeats, REVIEW_REPEATS_MIN);
-  SaveCacheChar(&chReviewMargins, REVIEW_MARGINS_MIN);
+  if (fFull)
+  {
+    SaveCacheBool(&chReviewReadId, false);
+    SaveCacheChar(&chReviewRepeats, REVIEW_REPEATS_MIN);
+    SaveCacheChar(&chReviewMargins, REVIEW_MARGINS_MIN);
+  }
 }
