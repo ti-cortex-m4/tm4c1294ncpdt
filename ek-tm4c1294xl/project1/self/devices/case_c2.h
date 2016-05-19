@@ -405,4 +405,28 @@
       }
       break;
 
+    case DEV_ID_1_C2:
+      cbRepeat = GetMaxRepeats();
+      QueryIdC();
+      SetCurr(DEV_POSTID_1_C2);
+      break;
+
+    case DEV_POSTID_1_C2:
+      if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadIdC() == 1))
+        MakePause(DEV_DATA_1_C2);
+      else
+      {
+        if (cbRepeat == 0)
+          ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryIdC();
+          SetCurr(DEV_POSTID_1_C2);
+        }
+      }
+      break;
+
 #endif
