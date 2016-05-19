@@ -316,13 +316,13 @@
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         cbIteration = 0;
-        if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05))      // если нет требуемой записи
+        if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05)) // если нет требуемой записи
         {
           if (++iwMajor > GetMaxShutdown())
             DoneProfile();
           else
           {
-            sprintf(szLo," выключено: %-4u   ",iwMajor);   // показываем процесс
+            sprintf(szLo," выключено: %-4u   ",iwMajor);
 
             iwDigHou = (wHOURS+iwHardHou-wBaseCurr)%wHOURS;
             ShowProgressDigHou();
@@ -335,7 +335,7 @@
         }
         else
         {
-          iwMajor = 0;                                      // если есть требуемая запись
+          iwMajor = 0; // если есть требуемая запись
           MakePause(DEV_POSTHEADER_1_C2);
         }
       }
@@ -343,17 +343,6 @@
       {
         ShowLo(szFailure1);
         MakePause(DEV_ERROR_1_C2);
-/*
-        if (cbRepeat == 0)
-          ErrorProfile();
-        else
-        {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryHeaderC1();
-          SetCurr(DEV_HEADER_1_C2);
-        }*/
       }
       break;
 

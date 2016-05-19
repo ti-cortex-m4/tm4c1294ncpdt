@@ -1835,9 +1835,8 @@ void    RunDevices(void)
       {
         InitHeaderC1();
 
-        cbRepeat = GetMaxRepeats();
-        QueryHeaderC1();
-        SetCurr(DEV_HEADER_1_C2);
+        StartReview();
+        MakePause(DEV_DATA_1_C2);
       }
       break;
 
@@ -1951,17 +1950,23 @@ void    RunDevices(void)
       break;
 
 
+    case DEV_DATA_1_C2:
+      cbRepeat = GetMaxRepeats();
+      QueryHeaderC1();
+      SetCurr(DEV_HEADER_1_C2);
+      break;
+
     case DEV_HEADER_1_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
         cbIteration = 0;
-        if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05))      // если нет требуемой записи
+        if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05)) // если нет требуемой записи
         {
           if (++iwMajor > GetMaxShutdown())
             DoneProfile();
           else
           {
-            sprintf(szLo," выключено: %-4u   ",iwMajor);   // показываем процесс
+            sprintf(szLo," выключено: %-4u   ",iwMajor);
 
             iwDigHou = (wHOURS+iwHardHou-wBaseCurr)%wHOURS;
             ShowProgressDigHou();
@@ -1974,7 +1979,7 @@ void    RunDevices(void)
         }
         else
         {
-          iwMajor = 0;                                      // если есть требуемая запись
+          iwMajor = 0; // если есть требуемая запись
           MakePause(DEV_POSTHEADER_1_C2);
         }
       }
@@ -1982,17 +1987,6 @@ void    RunDevices(void)
       {
         ShowLo(szFailure1);
         MakePause(DEV_ERROR_1_C2);
-/*
-        if (cbRepeat == 0)
-          ErrorProfile();
-        else
-        {
-          ErrorLink();
-          cbRepeat--;
-
-          QueryHeaderC_1();
-          SetCurr(DEV_HEADER_1_C2);
-        }*/
       }
       break;
 
