@@ -2043,8 +2043,6 @@ void    RunDevices(void)
         case REVIEW_SUCCESS: {
           if (ReadHeaderC1() == 0)
             DoneProfile();
-          else if (++wBaseCurr > wHOURS)
-            DoneProfile();
           else {
             StartReview();
             if (fReviewReadId == true)
