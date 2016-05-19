@@ -1962,16 +1962,18 @@ void    RunDevices(void)
         cbIteration = 0;
         if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05)) // если нет требуемой записи
         {
-          if (++iwMajor > GetMaxShutdown())
+          if (++cwShutdownC > GetMaxShutdown())
             DoneProfile();
           else
           {
-            sprintf(szLo," выключено: %-4u   ",iwMajor);
+            Clear(); sprintf(szLo+1,"выключено: %-4u",cwShutdownC);
 
             iwDigHou = (wHOURS+iwHardHou-wBaseCurr)%wHOURS;
             ShowProgressDigHou();
 
             if (MakeStopHou(0) == 0)
+              DoneProfile();
+            else if (++wBaseCurr > wHOURS)
               DoneProfile();
             else
               MakePause(DEV_DATA_1_C2);
@@ -1979,7 +1981,7 @@ void    RunDevices(void)
         }
         else
         {
-          iwMajor = 0; // если есть требуемая запись
+          cwShutdownC = 0; // если есть требуемая запись
           MakePause(DEV_POSTHEADER_1_C2);
         }
       }
@@ -2032,20 +2034,54 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_1_C2:
-      if (ReadHeaderC1() == 0)
-        DoneProfile();
-      else
-        MakePause(DEV_DATA_1_C2);
+      switch (ReadReviewC1()) {
+        case REVIEW_REPEAT: {
+          MakePause(DEV_DATA_1_C2);
+          break;
+        }
+        case REVIEW_SUCCESS: {
+          if (ReadHeaderC1() == 0)
+            DoneProfile();
+          else if (++wBaseCurr > wHOURS)
+            DoneProfile();
+          else {
+            StartReview();
+            if (fReviewReadId == true)
+              MakePause(DEV_ID_1_C2);
+            else
+              MakePause(DEV_DATA_1_C2);
+          }
+          break;
+        }
+        case REVIEW_ERROR: {
+          ErrorProfile();
+          break;
+        }
+        default: ASSERT(false);
+      }
       break;
 
-    case DEV_DATA_1_C2:
-      if (++wBaseCurr > wHOURS)
-        DoneProfile();
+    case DEV_ID_1_C2:
+      cbRepeat = GetMaxRepeats();
+      QueryIdC();
+      SetCurr(DEV_POSTID_1_C2);
+      break;
+
+    case DEV_POSTID_1_C2:
+      if ((mpSerial[ibPort] == SER_GOODCHECK) && (ReadIdC() == 1))
+        MakePause(DEV_DATA_1_C2);
       else
       {
-        cbRepeat = GetMaxRepeats();
-        QueryHeaderC1();
-        SetCurr(DEV_HEADER_1_C2);
+        if (cbRepeat == 0)
+          ErrorProfile();
+        else
+        {
+          ErrorLink();
+          cbRepeat--;
+
+          QueryIdC();
+          SetCurr(DEV_POSTID_1_C2);
+        }
       }
       break;
 

@@ -36,6 +36,10 @@ DEVICE_C!C
 
 #ifndef SKIP_C
 
+uint                    cwShutdownC;
+
+
+
 // проверка сетевого адреса для счётчиков CC-301
 bool    ReadAddressC(void)
 {
@@ -311,7 +315,7 @@ uchar   i;
 
 void    InitHeaderC1(void)
 {
-  iwMajor = 0;
+  cwShutdownC = 0;
 
   if (!UseBounds())
     wBaseCurr = 0;

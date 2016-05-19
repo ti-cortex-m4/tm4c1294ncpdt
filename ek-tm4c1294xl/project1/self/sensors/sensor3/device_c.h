@@ -4,6 +4,10 @@ DEVICE_C!H
 
 ------------------------------------------------------------------------------*/
 
+extern  uint                    cwShutdownC;
+
+
+
 bool    ReadResultC(void);
 void    QueryOpenC(void);
 
