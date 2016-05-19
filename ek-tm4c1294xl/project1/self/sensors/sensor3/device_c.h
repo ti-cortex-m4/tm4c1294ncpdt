@@ -4,10 +4,6 @@ DEVICE_C!H
 
 ------------------------------------------------------------------------------*/
 
-extern  uint                    cwShutdownC;
-
-
-
 bool    ReadResultC(void);
 void    QueryOpenC(void);
 
@@ -29,13 +25,6 @@ void    QueryEnergyAbsC(void);
 void    QueryEnergyMonC(uchar  ibMonth);
 void    QueryEnergyDayC(uchar  ibDay);
 void    ReadEnergyC(void);
-
-void    InitHeaderC1(void);
-void    InitHeaderC6(void);
-void    QueryHeaderC1(void);
-void    QueryHeaderC6(void);
-bool    ReadHeaderC1(void);
-bool    ReadHeaderC6(void);
 
 void    ReadCurrentC(void);
 
