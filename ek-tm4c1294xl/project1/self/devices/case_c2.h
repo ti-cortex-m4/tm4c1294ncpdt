@@ -182,14 +182,14 @@
       cbIteration = 0;
       if (boShortProfileC == false)
       {
-        InitHeaderC_6();
+        InitHeaderC6();
 
         StartReview();
         MakePause(DEV_DATA_6_C2);
       }
       else
       {
-        InitHeaderC_1();
+        InitHeaderC1();
 
         StartReview();
         MakePause(DEV_DATA_1_C2);
@@ -199,7 +199,7 @@
 
     case DEV_DATA_6_C2:
       cbRepeat = GetMaxRepeats();
-      QueryHeaderC_6();
+      QueryHeaderC6();
       SetCurr(DEV_HEADER_6_C2);
       break;
 
@@ -230,7 +230,7 @@
       {
         if (ReadIdC() == 1)
         {
-          QueryHeaderC_6();
+          QueryHeaderC6();
           SetCurr(DEV_HEADER_6_C2);
         }
         else
@@ -262,7 +262,7 @@
         }
         case REVIEW_SUCCESS: {
           cbIteration = 0;
-          if (ReadHeaderC_6() == 0)
+          if (ReadHeaderC6() == 0)
             DoneProfile();
           else {
             StartReview();
@@ -308,7 +308,7 @@
 
     case DEV_DATA_1_C2:
       cbRepeat = GetMaxRepeats();
-      QueryHeaderC_1();
+      QueryHeaderC1();
       SetCurr(DEV_HEADER_1_C2);
       break;
 
@@ -351,7 +351,7 @@
           ErrorLink();
           cbRepeat--;
 
-          QueryHeaderC_1();
+          QueryHeaderC1();
           SetCurr(DEV_HEADER_1_C2);
         }*/
       }
@@ -374,7 +374,7 @@
       {
         if (ReadIdC() == 1)
         {
-          QueryHeaderC_1();
+          QueryHeaderC1();
           SetCurr(DEV_HEADER_1_C2);
         }
         else
@@ -399,7 +399,7 @@
       break;
 
     case DEV_POSTHEADER_1_C2:
-      if (ReadHeaderC_1() == 0)
+      if (ReadHeaderC1() == 0)
         DoneProfile();
       else
         MakePause(DEV_DATA_1_C2);
@@ -411,7 +411,7 @@
       else
       {
         cbRepeat = GetMaxRepeats();
-        QueryHeaderC_1();
+        QueryHeaderC1();
         SetCurr(DEV_HEADER_1_C2);
       }
       break;
