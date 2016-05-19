@@ -1963,10 +1963,7 @@ void    RunDevices(void)
         cbIteration = 0;
         if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05)) // нет требуемой записи
         {
-          if (ReadHeaderC1_Shutdown() == 0)
-            DoneProfile();
-          else
-            MakePause(DEV_DATA_1_C2);
+          MakePause(DEV_POSTHEADER_0_C2);
         }
         else // есть требуемая запись
         {
@@ -2021,14 +2018,14 @@ void    RunDevices(void)
       }
       break;
 
-    case DEV_POSTHEADER_1_C2:
-      switch (ReadReviewC1()) {
+    case DEV_POSTHEADER_0_C2:
+      switch (ReadReviewC1_Shutdown()) {
         case REVIEW_REPEAT: {
           MakePause(DEV_DATA_1_C2);
           break;
         }
         case REVIEW_SUCCESS: {
-          if (ReadHeaderC1() == 0)
+          if (ReadHeaderC1_Shutdown() == 0)
             DoneProfile();
           else {
             StartReview();
@@ -2046,6 +2043,32 @@ void    RunDevices(void)
         default: ASSERT(false);
       }
       break;
+
+      case DEV_POSTHEADER_1_C2:
+        switch (ReadReviewC1()) {
+          case REVIEW_REPEAT: {
+            MakePause(DEV_DATA_1_C2);
+            break;
+          }
+          case REVIEW_SUCCESS: {
+            if (ReadHeaderC1() == 0)
+              DoneProfile();
+            else {
+              StartReview();
+              if (fReviewReadId == true)
+                MakePause(DEV_ID_1_C2);
+              else
+                MakePause(DEV_DATA_1_C2);
+            }
+            break;
+          }
+          case REVIEW_ERROR: {
+            ErrorProfile();
+            break;
+          }
+          default: ASSERT(false);
+        }
+        break;
 
     case DEV_ID_1_C2:
       cbRepeat = GetMaxRepeats();
