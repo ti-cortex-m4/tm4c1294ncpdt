@@ -17,8 +17,6 @@ DEVICE_C!C
 
 
 
-#ifndef SKIP_C
-
 // проверка сетевого адреса для счётчиков CC-301
 bool    ReadAddressC(void)
 {
@@ -274,10 +272,9 @@ void    QueryEnergyDayC(uchar  ibDay)
 // чтение энергии
 void    ReadEnergyC(void)
 {
-uchar   i;
-
   InitPop(4);
 
+  uchar i;
   for (i=0; i<4; i++)
   {
     coEnergy.mpbBuff[0] = PopChar();
@@ -305,5 +302,3 @@ void    ReadCurrentC(void)
 
   MakeCurrent2();
 }
-
-#endif

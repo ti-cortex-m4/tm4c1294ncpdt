@@ -20,7 +20,6 @@ PROFILE_C!C
 #include "../../devices/devices_time.h"
 #include "../../digitals/limits.h"
 #include "../../special/special.h"
-#include "device_c.h"
 #include "profile_c.h"
 
 
@@ -144,14 +143,18 @@ bool    ReadHeaderC(uchar  ibBlock)
 
 bool    ReadHeaderC1(void)
 {
-  return ReadHeaderC(0);
+  if (ReadHeaderC(0) == 0)
+    return(0);
+  else if (++wBaseCurr > wHOURS)
+    return(0);
+  else
+    return(1);
 }
 
 
 bool    ReadHeaderC6(void)
 {
-uchar i;
-
+  uchar i;
   for (i=0; i<6; i++)
   {
     ulong dw = DateToHouIndex(tiDigPrev);
