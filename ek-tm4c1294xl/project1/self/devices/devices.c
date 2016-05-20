@@ -1900,13 +1900,13 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_6_C2:
+      cbIteration = 0;
       switch (ReadReviewC6()) {
         case REVIEW_REPEAT: {
           MakePause(DEV_DATA_6_C2);
           break;
         }
         case REVIEW_SUCCESS: {
-          cbIteration = 0;
           if (ReadHeaderC6() == 0)
             DoneProfile();
           else {
@@ -1960,7 +1960,6 @@ void    RunDevices(void)
     case DEV_HEADER_1_C2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        cbIteration = 0;
         if ((IndexInBuff() == 6) && (InBuff(1) == 0x83) && (InBuff(2) == 0x24) && (InBuff(3) == 0x05)) // нет требуемой записи
         {
           MakePause(DEV_POSTHEADER_0_C2);
@@ -2019,6 +2018,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTHEADER_0_C2:
+      cbIteration = 0;
       switch (ReadReviewC1_Shutdown()) {
         case REVIEW_REPEAT: {
           MakePause(DEV_DATA_1_C2);
@@ -2045,6 +2045,7 @@ void    RunDevices(void)
       break;
 
       case DEV_POSTHEADER_1_C2:
+        cbIteration = 0;
         switch (ReadReviewC1()) {
           case REVIEW_REPEAT: {
             MakePause(DEV_DATA_1_C2);
