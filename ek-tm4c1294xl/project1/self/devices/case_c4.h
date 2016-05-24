@@ -39,7 +39,7 @@
         ibCheckupDay = 1;
         CheckupShowDay(ibCheckupDay);
 
-        cbRepeat2 = 0;
+        cbIteration = 0;
 
         cbRepeat = GetMaxRepeats();
         QueryEnergyDayC(-ibCheckupDay);                          
@@ -68,7 +68,7 @@
     case DEV_ERROR1_6_C4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
       else 
       {
         cbRepeat = GetMaxRepeats();
@@ -114,7 +114,7 @@
       {
         CheckupShowDay(ibCheckupDay);
 
-        cbRepeat2 = 0;
+        cbIteration = 0;
 
         cbRepeat = GetMaxRepeats();
         QueryEnergyDayC(-ibCheckupDay);                          
@@ -140,7 +140,7 @@
         ibCheckupMon = 1;
         CheckupShowMon(ibCheckupMon);
 
-        cbRepeat2 = 0;
+        cbIteration = 0;
 
         cbRepeat = GetMaxRepeats();
         QueryEnergyMonC(-ibCheckupMon);
@@ -169,7 +169,7 @@
     case DEV_ERROR3_6_C4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
       else 
       {
         cbRepeat = GetMaxRepeats();
@@ -215,7 +215,7 @@
       {
         CheckupShowMon(ibCheckupMon);
 
-        cbRepeat2 = 0;
+        cbIteration = 0;
 
         cbRepeat = GetMaxRepeats();
         QueryEnergyMonC(-ibCheckupMon);                          
@@ -260,7 +260,7 @@
       InitHeaderC_6_Checkup(); 
       //x_str("\n query day "); x_time(&tiDigPrev);
 
-      cbRepeat2 = 0;
+      cbIteration = 0;
 
       cbRepeat = GetMaxRepeats();     
       QueryHeaderC_6();
@@ -280,7 +280,7 @@
     case DEV_ERROR2_6_C4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
       else 
       {
         cbRepeat = GetMaxRepeats();
@@ -340,7 +340,7 @@
       break;
 
     case DEV_DATA_6_C4: 
-      cbRepeat2 = 0;
+      cbIteration = 0;
 
       cbRepeat = GetMaxRepeats();
       QueryHeaderC_6();

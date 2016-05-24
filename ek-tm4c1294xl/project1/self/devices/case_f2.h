@@ -100,7 +100,7 @@
 
 
     case DEV_POSTCORRECT_F2:    
-      cbRepeat2 = 0;              
+      cbIteration = 0;              
       InitEnergyF();
 
       cbRepeat = GetMaxRepeats();
@@ -131,7 +131,7 @@
     case DEV_ERROR_F2: 
       mpcwOutput1[ibDig]++; Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else 
       {
         cbRepeat = GetMaxRepeats();
@@ -169,7 +169,7 @@
       break;
 
     case DEV_POSTENERGY_F2:              
-      cbRepeat2 = 0;
+      cbIteration = 0;
       for (i=0; i<bBLOCKS_F; i++)
       {
         if (ReadEnergyF(i) == 0) break;
