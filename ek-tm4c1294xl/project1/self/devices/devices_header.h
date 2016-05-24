@@ -33,6 +33,8 @@ DEVICES.C
 #include "../digitals/max_repeats.h"
 #include "../digitals/correct_limit.h"
 #include "../digitals/max_shutdown.h"
+#include "../digitals/review/review.h"
+#include "../digitals/review/review_core.h"
 #include "../special/recalc_def.h"
 #include "../special/defects.h"
 #include "../sensors/device_a.h"
@@ -40,6 +42,7 @@ DEVICES.C
 #include "../sensors/device_b2.h"
 #include "../sensors/device_b12.h"
 #include "../sensors/sensor3/device_c.h"
+#include "../sensors/sensor3/profile_c.h"
 #include "../sensors/device_e.h"
 #include "../sensors/device_k.h"
 #include "../sensors/sensor21/device_p.h"
@@ -84,7 +87,7 @@ DEVICES.C
 
 
 // счётчик повторов
-uchar                   cbRepeat, cbRepeat2;
+uchar                   cbRepeat, cbIteration;
 
 // счётчик коррекций времени
 uchar                   cbCorrects;

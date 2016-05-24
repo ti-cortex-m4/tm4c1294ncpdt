@@ -4,7 +4,7 @@ DEVICES!H
 
 ------------------------------------------------------------------------------*/
 
-extern  uchar                   cbRepeat, cbRepeat2;
+extern  uchar                   cbRepeat, cbIteration;
 
 extern  uchar                   cbCorrects;
 

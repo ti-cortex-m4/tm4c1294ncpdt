@@ -219,7 +219,7 @@
       break;
 
     case DEV_POSTTOP_B2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       if (diCurr.bDevice == 2)
       {
         if (TestVersionB710())
@@ -266,7 +266,7 @@
     case DEV_ERROR_B2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbRepeat2 > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
         cbRepeat = GetMaxRepeats();
@@ -304,7 +304,7 @@
       break;
 
     case DEV_POSTHEADER_B2:
-      cbRepeat2 = 0;
+      cbIteration = 0;
       NewBoundsAbs16(wBaseCurr);
       if (ReadHeaderB(0,0) == 0)
         DoneProfile();
