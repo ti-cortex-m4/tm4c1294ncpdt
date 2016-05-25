@@ -41,45 +41,47 @@ static void Show(void)
 
 static review ReadReview(uchar  ibMin, uchar  ibMax)
 {
-  if (!UseReview())
+  if (!UseReview()) {
     return REVIEW_SUCCESS;
-  else if (cbMargins == 0)
-  {
+  } else if (cbMargins == 0) {
     cbMargins++;
     Show();
 
     cbRepeats++;
     SaveReviewBuff(ibMin,ibMax);
-    return REVIEW_REPEAT;
-  }
-  else
-  {
+
+    if (CheckReviewBuff()) {
+      Clear(); strcpy(szLo+3, "проверка *"); DelayInf(); Clear();
+      return REVIEW_ID_REPEAT;
+    } else {
+      return REVIEW_REPEAT;
+    }
+  } else {
     cbMargins++;
     Show();
 
-    if (cbMargins >= bReviewMargins)
-    {
+    if (cbMargins >= bReviewMargins) {
       Clear(); strcpy(szLo+0, "ошибка проверки"); DelayMsg(); Clear();
       return REVIEW_ERROR;
-    }
-    else
-    {
-      if (TestReviewBuff(ibMin,ibMax))
-      {
-        if (++cbRepeats >= bReviewRepeats)
-        {
+    } else {
+      if (TestReviewBuff(ibMin,ibMax)) {
+        if (++cbRepeats >= bReviewRepeats) {
           SwitchReviewBuff();
           return REVIEW_SUCCESS;
-        }
-        else
+        } else {
           return REVIEW_REPEAT;
-      }
-      else
-      {
+        }
+      } else {
         cbRepeats = 0;
         SaveReviewBuff(ibMin,ibMax);
-        Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();
-        return REVIEW_REPEAT;
+
+        if (CheckReviewBuff()) {
+          Clear(); strcpy(szLo+3, "проверка *"); DelayInf(); Clear();
+          return REVIEW_ID_REPEAT;
+        } else {
+          Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();
+          return REVIEW_REPEAT;
+        }
       }
     }
   }

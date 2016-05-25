@@ -376,7 +376,11 @@
       cbIteration = 0;
       switch (ReadReviewC1_Shutdown()) {
         case REVIEW_REPEAT: {
-          MakePause(DEV_PREVID_1_C2);
+          MakePause(DEV_DATA_1_C2);
+          break;
+        }
+        case REVIEW_ID_REPEAT: {
+          MakePause(DEV_ID_1_C2);
           break;
         }
         case REVIEW_SUCCESS: {
@@ -384,7 +388,10 @@
             DoneProfile();
           else {
             StartReview();
-            MakePause(DEV_PREVID_1_C2);
+            if (fReviewReadId == true)
+              MakePause(DEV_ID_1_C2);
+            else
+              MakePause(DEV_DATA_1_C2);
           }
           break;
         }
@@ -400,7 +407,11 @@
         cbIteration = 0;
         switch (ReadReviewC1()) {
           case REVIEW_REPEAT: {
-            MakePause(DEV_PREVID_1_C2);
+            MakePause(DEV_DATA_1_C2);
+            break;
+          }
+          case REVIEW_ID_REPEAT: {
+            MakePause(DEV_ID_1_C2);
             break;
           }
           case REVIEW_SUCCESS: {
@@ -408,7 +419,10 @@
               DoneProfile();
             else {
               StartReview();
-              MakePause(DEV_PREVID_1_C2);
+              if (fReviewReadId == true)
+                MakePause(DEV_ID_1_C2);
+              else
+                MakePause(DEV_DATA_1_C2);
             }
             break;
           }
@@ -419,13 +433,6 @@
           default: ASSERT(false);
         }
         break;
-
-    case DEV_PREVID_1_C2:
-      if (fReviewReadId == true)
-        MakePause(DEV_ID_1_C2);
-      else
-        MakePause(DEV_DATA_1_C2);
-      break;
 
     case DEV_ID_1_C2:
       cbRepeat = GetMaxRepeats();
