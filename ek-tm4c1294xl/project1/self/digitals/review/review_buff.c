@@ -5,11 +5,8 @@ review_buff.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../display/display.h"
-//#include "../../time/delay.h"
-//#include "../../serial/ports_common.h"
-//#include "../../serial/ports.h"
-//#include "review.h"
+#include "../../serial/ports_common.h"
+#include "../../serial/ports.h"
 #include "review_buff.h"
 
 
@@ -23,6 +20,14 @@ static uchar            ibBuff;
 
 
 
+void StartReviewBuff(void)
+{
+  memset(&mmbBuff, 0, sizeof(mmbBuff));
+  ibBuff = 0;
+}
+
+
+
 static uchar CurrBuffIdx(void)
 {
   return (ibBuff == 0) ? 0 : 1;
@@ -33,21 +38,16 @@ static uchar PrevBuffIdx(void)
   return (ibBuff == 0) ? 1 : 0;
 }
 
-static voidNextBuffIdx(void)
+
+
+void SwitchReviewBuff(void)
 {
+  memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
+
   ibBuff = ++ibBuff % REVIEW_BUFF_COUNT;
 }
 
-
-
-void StartReviewBuff(void)
-{
-  memset(&mmbBuff, 0, sizeof(mmbBuff));
-  ibBuff = 0;
-}
-
-
-
+void SaveReviewBuff(uchar  ibMin, uchar  ibMax)
 {
   memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
 
@@ -59,6 +59,7 @@ void StartReviewBuff(void)
   }
 }
 
+bool TestReviewBuff(uchar  ibMin, uchar  ibMax)
 {
   uchar i;
   for (i=ibMin; i<=ibMax; i++)
