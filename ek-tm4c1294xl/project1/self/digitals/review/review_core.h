@@ -10,8 +10,9 @@ review_core.h
 typedef enum
 {
   REVIEW_REPEAT         = 0,
-  REVIEW_SUCCESS        = 1,
-  REVIEW_ERROR          = 2,
+  REVIEW_ID_REPEAT      = 1,
+  REVIEW_SUCCESS        = 2,
+  REVIEW_ERROR          = 3,
 } review;
 
 

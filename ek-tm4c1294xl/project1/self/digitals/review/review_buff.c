@@ -47,6 +47,11 @@ void SwitchReviewBuff(void)
   ibBuff = ++ibBuff % REVIEW_BUFF_COUNT;
 }
 
+bool CheckReviewBuff(void)
+{
+  return false;
+}
+
 void SaveReviewBuff(uchar  ibMin, uchar  ibMax)
 {
   memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
