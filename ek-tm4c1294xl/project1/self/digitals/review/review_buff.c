@@ -7,6 +7,7 @@ review_buff.c
 #include "../../main.h"
 #include "../../serial/ports_common.h"
 #include "../../serial/ports.h"
+#include "../../serial/monitor.h"
 #include "review_buff.h"
 
 
@@ -47,8 +48,18 @@ void SwitchReviewBuff(void)
   ibBuff = ++ibBuff % REVIEW_BUFF_COUNT;
 }
 
-bool CheckReviewBuff(void)
+bool SpecReviewBuff(void)
 {
+  uchar i;
+  for (i=0; i<4; i++) {
+    uint wPrev = mmbBuff[PrevBuffIdx()][4+4*2] + mmbBuff[PrevBuffIdx()][4+4*2+1]*0x100;
+    uint wCurr = mmbBuff[CurrBuffIdx()][4+4*2] + mmbBuff[CurrBuffIdx()][4+4*2+1]*0x100;
+
+    if ((wCurr == 0) && (wPrev != 0)) {
+      MonitorString("\n error: zero ["); MonitorCharDec(i+1); MonitorString("] "); MonitorIntDec(wPrev); MonitorString(" ? "); MonitorIntDec(wCurr);
+      return true;
+    }
+  }
   return false;
 }
 
