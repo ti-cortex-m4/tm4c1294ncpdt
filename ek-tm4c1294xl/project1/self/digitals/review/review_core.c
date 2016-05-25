@@ -10,29 +10,12 @@ review_core.c
 #include "../../serial/ports_common.h"
 #include "../../serial/ports.h"
 #include "review.h"
+#include "review_buff.h"
 #include "review_core.h"
 
 
 
-#define REVIEW_BUFF_SIZE     100
-#define REVIEW_BUFF_COUNT    2
-
-
-static uchar            mmbBuff[REVIEW_BUFF_SIZE][REVIEW_BUFF_COUNT];
-static uchar            ibBuff;
 static uchar            cbRepeats, cbMargins;
-
-
-
-static uchar CurrBuffIdx(void)
-{
-  return (ibBuff == 0) ? 0 : 1;
-}
-
-static uchar PrevBuffIdx(void)
-{
-  return (ibBuff == 0) ? 1 : 0;
-}
 
 
 
@@ -57,30 +40,6 @@ static void Show(void)
   sprintf(szHi+10, "%2u", cbMargins);
 }
 
-static void SaveBuff(uchar  ibMin, uchar  ibMax)
-{
-  memset(&mbBuff, 0, sizeof(mbBuff));
-
-  uchar i;
-  for (i=ibMin; i<=ibMax; i++)
-  {
-    ASSERT(i < REVIEW_BUFF_SIZE);
-    mbBuff[i] = InBuff(i);
-  }
-}
-
-static bool TestBuff(uchar  ibMin, uchar  ibMax)
-{
-  uchar i;
-  for (i=ibMin; i<=ibMax; i++)
-  {
-    ASSERT(i < REVIEW_BUFF_SIZE);
-    if (mbBuff[i] != InBuff(i))
-      return false;
-  }
-
-  return true;
-}
 
 
 static review ReadReview(uchar  ibMin, uchar  ibMax)
@@ -141,21 +100,4 @@ review ReadReviewC1_Shutdown(void)
 review ReadReviewC6(void)
 {
   return ReadReview(0, 53);
-}
-
-
-
-void OutReviewBuff(void)
-{
-  InitPushCRC();
-  uint wSize = 0;
-
-  wSize += PushIntBig(REVIEW_BUFF_SIZE);
-  wSize += PushChar(REVIEW_BUFF_COUNT);
-  wSize += PushChar(ibBuff);
-  wSize += PushChar(CurrBuffIdx());
-  wSize += PushChar(PrevBuffIdx());
-  wSize += Push(&mmbBuff, sizeof(mmbBuff));
-
-  Output(wSize);
 }
