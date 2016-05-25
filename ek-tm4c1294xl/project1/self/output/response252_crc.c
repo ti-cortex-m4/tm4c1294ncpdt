@@ -25,7 +25,7 @@ RESPONSE252_CRC,C
 #include "../realtime/throughput.h"
 #include "../realtime/period30.h"
 #include "../output/out_digitals.h"
-#include "../digitals/review/review_core.h"
+#include "../digitals/review/review_buff.h"
 
 
 
