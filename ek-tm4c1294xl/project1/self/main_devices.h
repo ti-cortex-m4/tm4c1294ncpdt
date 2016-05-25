@@ -177,8 +177,9 @@ typedef enum
   DEV_POSTHEADER_0_C2   =  0x312,
   DEV_POSTHEADER_1_C2   =  0x313,
   DEV_DATA_1_C2         =  0x314,
-  DEV_ID_1_C2           =  0x315,
-  DEV_POSTID_1_C2       =  0x316,
+  DEV_PREVID_1_C2       =  0x315,
+  DEV_ID_1_C2           =  0x316,
+  DEV_POSTID_1_C2       =  0x317,
 
 //  DEV_INIT_61_C2        =  0x312,
 //  DEV_DATA_61_C2        =  0x313,
