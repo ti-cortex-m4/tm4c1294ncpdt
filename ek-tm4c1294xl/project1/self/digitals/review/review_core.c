@@ -7,8 +7,6 @@ review_core.c
 #include "../../main.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
-#include "../../serial/ports_common.h"
-#include "../../serial/ports.h"
 #include "review.h"
 #include "review_buff.h"
 #include "review_core.h"
@@ -21,8 +19,7 @@ static uchar            cbRepeats, cbMargins;
 
 void StartReview(void)
 {
-  memset(&mmbBuff, 0, sizeof(mmbBuff));
-  ibBuff = 0;
+  StartReviewBuff();
 
   cbRepeats = 0;
   cbMargins = 0;
@@ -52,7 +49,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
     Show();
 
     cbRepeats++;
-    SaveBuff(ibMin,ibMax);
+    SaveReviewBuff(ibMin,ibMax);
     return REVIEW_REPEAT;
   }
   else
@@ -67,17 +64,20 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
     }
     else
     {
-      if (TestBuff(ibMin,ibMax))
+      if (TestReviewBuff(ibMin,ibMax))
       {
         if (++cbRepeats >= bReviewRepeats)
+        {
+          SwitchReviewBuff();
           return REVIEW_SUCCESS;
+        }
         else
           return REVIEW_REPEAT;
       }
       else
       {
         cbRepeats = 0;
-        SaveBuff(ibMin,ibMax);
+        SaveReviewBuff(ibMin,ibMax);
         Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();
         return REVIEW_REPEAT;
       }
