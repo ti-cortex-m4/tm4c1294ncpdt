@@ -52,11 +52,12 @@ bool SpecReviewBuff(void)
 {
   uchar i;
   for (i=0; i<4; i++) {
-    uint wPrev = mmbBuff[PrevBuffIdx()][4+4*2] + mmbBuff[PrevBuffIdx()][4+4*2+1]*0x100;
-    uint wCurr = mmbBuff[CurrBuffIdx()][4+4*2] + mmbBuff[CurrBuffIdx()][4+4*2+1]*0x100;
+    uint wCurr = mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
+    uint wPrev = mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
+    MonitorString("\n i="); MonitorCharDec(i); MonitorString(" curr="); MonitorIntDec(wCurr); MonitorString(" prev="); MonitorIntDec(wPrev);
 
     if ((wCurr == 0) && (wPrev != 0)) {
-      MonitorString("\n error: zero ["); MonitorCharDec(i+1); MonitorString("] "); MonitorIntDec(wPrev); MonitorString(" ? "); MonitorIntDec(wCurr);
+      MonitorString("\n error: zero");
       return true;
     }
   }
