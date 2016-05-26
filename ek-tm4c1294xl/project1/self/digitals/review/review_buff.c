@@ -21,8 +21,10 @@ static uchar            ibBuff;
 
 
 
-void StartReviewBuff(void)
+void RestartReviewBuff(void)
 {
+  MonitorString("\n start review buff");
+
   memset(&mmbBuff, 0, sizeof(mmbBuff));
   ibBuff = 0;
 }
@@ -43,20 +45,25 @@ static uchar PrevBuffIdx(void)
 
 void SwitchReviewBuff(void)
 {
-  memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
+  MonitorString("\n switch review buff");
 
   ibBuff = ++ibBuff % REVIEW_BUFF_COUNT;
+  memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
 }
 
 bool SpecReviewBuff(void)
 {
+	  MonitorString("\n ibBuff"); MonitorCharDec(ibBuff);
+	  MonitorString("\n PrevBuffIdx()"); MonitorCharDec(PrevBuffIdx());
+	  MonitorString("\n CurrBuffIdx()"); MonitorCharDec(CurrBuffIdx());
+
   uchar i;
   for (i=0; i<4; i++) {
-    uint wCurr = mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
     uint wPrev = mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
-    MonitorString("\n i="); MonitorCharDec(i); MonitorString(" curr="); MonitorIntDec(wCurr); MonitorString(" prev="); MonitorIntDec(wPrev);
+    uint wCurr = mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
+    MonitorString("\n i="); MonitorCharDec(i); MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
-    if ((wCurr == 0) && (wPrev != 0)) {
+    if ((wPrev != 0) && (wCurr == 0)) {
       MonitorString("\n error: zero");
       return true;
     }
@@ -66,6 +73,7 @@ bool SpecReviewBuff(void)
 
 void SaveReviewBuff(uchar  ibMin, uchar  ibMax)
 {
+  MonitorString("\n save review buff");
   memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
 
   uchar i;

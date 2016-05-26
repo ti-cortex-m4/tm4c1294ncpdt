@@ -17,9 +17,9 @@ static uchar            cbRepeats, cbMargins;
 
 
 
-void StartReview(void)
+void RestartReview(void)
 {
-  StartReviewBuff();
+  RestartReviewBuff();
 
   cbRepeats = 0;
   cbMargins = 0;
@@ -51,7 +51,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
     SaveReviewBuff(ibMin,ibMax);
 
     if (SpecReviewBuff()) {
-      Clear(); strcpy(szLo+3, "проверка *"); DelayInf(); Clear();
+      Clear(); strcpy(szLo+3, "проверка !!"); DelayInf(); Clear();
       return REVIEW_ID_REPEAT;
     } else {
       return REVIEW_REPEAT;
@@ -76,7 +76,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
         SaveReviewBuff(ibMin,ibMax);
 
         if (SpecReviewBuff()) {
-          Clear(); strcpy(szLo+3, "проверка *"); DelayInf(); Clear();
+          Clear(); strcpy(szLo+3, "проверка !!"); DelayInf(); Clear();
           return REVIEW_ID_REPEAT;
         } else {
           Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();
