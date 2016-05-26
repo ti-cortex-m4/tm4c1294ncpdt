@@ -66,11 +66,13 @@ bool SpecReviewBuff(void)
   for (i=0; i<4; i++) {
     uint wPrev = mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
     uint wCurr = mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
-    MonitorString("\n i="); MonitorCharDec(i); MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
+    MonitorString("\n"); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
     if ((wPrev != 0) && (wCurr == 0)) {
       MonitorString("\n error: zero");
+
       bMaxRepeats = REVIEW_REPEATS_MAX;
+      fIdRepeat = true;
       return true;
     }
   }

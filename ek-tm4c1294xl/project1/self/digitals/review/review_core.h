@@ -18,6 +18,7 @@ typedef enum
 
 
 extern  uchar                   bMaxRepeats;
+extern  bool                    fIdRepeat;
 
 
 
