@@ -21,16 +21,6 @@ static uchar            ibBuff;
 
 
 
-void RestartReviewBuff(void)
-{
-  MonitorString("\n start review buff");
-
-  memset(&mmbBuff, 0, sizeof(mmbBuff));
-  ibBuff = 0;
-}
-
-
-
 static uchar CurrBuffIdx(void)
 {
   return (ibBuff == 0) ? 0 : 1;
@@ -39,6 +29,23 @@ static uchar CurrBuffIdx(void)
 static uchar PrevBuffIdx(void)
 {
   return (ibBuff == 0) ? 1 : 0;
+}
+
+
+
+void StartReviewBuff(void)
+{
+  MonitorString("\n start review buff");
+
+  memset(&mmbBuff, 0, sizeof(mmbBuff));
+  ibBuff = 0;
+}
+
+void RestartReviewBuff(void)
+{
+  MonitorString("\n restart review buff");
+
+  memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
 }
 
 
