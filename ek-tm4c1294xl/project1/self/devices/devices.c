@@ -1829,6 +1829,7 @@ void    RunDevices(void)
       {
         InitHeaderC6();
 
+        StartReview();
         RestartReview();
         MakePause(DEV_DATA_6_C2);
       }
@@ -1836,6 +1837,7 @@ void    RunDevices(void)
       {
         InitHeaderC1();
 
+        StartReview();
         RestartReview();
         MakePause(DEV_DATA_1_C2);
       }

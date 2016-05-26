@@ -17,6 +17,11 @@ static uchar            cbRepeats, cbMargins;
 
 
 
+void StartReview(void)
+{
+  StartReviewBuff();
+}
+
 void RestartReview(void)
 {
   RestartReviewBuff();
