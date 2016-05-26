@@ -17,7 +17,7 @@ typedef enum
 
 
 
-void StartReview(void);
+void RestartReview(void);
 
 review ReadReviewC1(void);
 review ReadReviewC1_Shutdown(void);

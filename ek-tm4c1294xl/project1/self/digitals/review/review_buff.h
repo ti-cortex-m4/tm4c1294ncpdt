@@ -4,7 +4,7 @@ review_buff.h
 
 ------------------------------------------------------------------------------*/
 
-void StartReviewBuff(void);
+void RestartReviewBuff(void);
 
 void SwitchReviewBuff(void);
 bool SpecReviewBuff(void);

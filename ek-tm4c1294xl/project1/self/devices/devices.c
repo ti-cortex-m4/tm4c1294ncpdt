@@ -1829,14 +1829,14 @@ void    RunDevices(void)
       {
         InitHeaderC6();
 
-        StartReview();
+        RestartReview();
         MakePause(DEV_DATA_6_C2);
       }
       else
       {
         InitHeaderC1();
 
-        StartReview();
+        RestartReview();
         MakePause(DEV_DATA_1_C2);
       }
       break;
@@ -1910,7 +1910,7 @@ void    RunDevices(void)
           if (ReadHeaderC6() == 0)
             DoneProfile();
           else {
-            StartReview();
+            RestartReview();
             if (fReviewReadId == true)
               MakePause(DEV_ID_6_C2);
             else
@@ -2032,7 +2032,7 @@ void    RunDevices(void)
           if (ReadHeaderC1_Shutdown() == 0)
             DoneProfile();
           else {
-            StartReview();
+            RestartReview();
             if (fReviewReadId == true)
               MakePause(DEV_ID_1_C2);
             else
@@ -2063,7 +2063,7 @@ void    RunDevices(void)
             if (ReadHeaderC1() == 0)
               DoneProfile();
             else {
-              StartReview();
+              RestartReview();
               if (fReviewReadId == true)
                 MakePause(DEV_ID_1_C2);
               else
