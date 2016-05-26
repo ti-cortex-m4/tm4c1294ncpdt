@@ -71,7 +71,7 @@ bool SpecReviewBuff(void)
     if ((wPrev != 0) && (wCurr == 0)) {
       MonitorString("\n error: zero");
 
-      bMaxRepeats = REVIEW_REPEATS_MAX;
+      bMaxRepeats = REVIEW_REPEATS_MAX - 1;
       fIdRepeat = true;
       return true;
     }
