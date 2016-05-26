@@ -51,7 +51,7 @@ static void Show(void)
 
 
 
-static review ReadReview2(uchar  ibMin, uchar  ibMax)
+static review ReadReviewInner(uchar  ibMin, uchar  ibMax)
 {
   if (!UseReview()) {
     return REVIEW_SUCCESS;
@@ -65,7 +65,6 @@ static review ReadReview2(uchar  ibMin, uchar  ibMax)
     if (SpecReviewBuff()) {
       Clear(); strcpy(szLo+3, "проверка !!"); DelayInf(); Clear();
     }
-
     return REVIEW_REPEAT;
   } else {
     cbMargins++;
@@ -73,16 +72,13 @@ static review ReadReview2(uchar  ibMin, uchar  ibMax)
 
     if (cbMargins >= bReviewMargins) {
       Clear(); strcpy(szLo+0, "ошибка проверки"); DelayMsg(); Clear();
-      MonitorString("\n REVIEW_ERROR");
       return REVIEW_ERROR;
     } else {
       if (TestReviewBuff(ibMin,ibMax)) {
         if (++cbRepeats >= bMaxRepeats) {
           SwitchReviewBuff();
-          MonitorString("\n REVIEW_SUCCESS");
           return REVIEW_SUCCESS;
         } else {
-          MonitorString("\n REVIEW_REPEAT 2");
           return REVIEW_REPEAT;
         }
       } else {
@@ -91,25 +87,28 @@ static review ReadReview2(uchar  ibMin, uchar  ibMax)
 
         if (SpecReviewBuff()) {
           Clear(); strcpy(szLo+3, "проверка !!"); DelayInf(); Clear();
-          MonitorString("\n REVIEW_ID_REPEAT 3");
-          return REVIEW_ID_REPEAT;
         } else {
           Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();
-          MonitorString("\n REVIEW_REPEAT 3");
-          return REVIEW_REPEAT;
         }
+        return REVIEW_REPEAT;
       }
     }
   }
 }
 
-static review ReadReview1(uchar  ibMin, uchar  ibMax)
+static review ReadReview(uchar  ibMin, uchar  ibMax)
 {
-  review rv = ReadReview2(ibMin, ibMax);
-  if ((rv == REVIEW_REPEAT) && (fIdRepeat = true)) {
-    rv == REVIEW_ID_REPEAT;
+  review rv = ReadReviewInner(ibMin, ibMax);
+
+  if ((rv == REVIEW_REPEAT) && (fIdRepeat == true)) {
+    rv = REVIEW_ID_REPEAT;
     MonitorString("\n REVIEW_ID_REPEAT");
   }
+
+  if (rv == REVIEW_REPEAT) {
+    MonitorString("\n REVIEW_REPEAT");
+  }
+
   return rv;
 }
 
@@ -117,15 +116,15 @@ static review ReadReview1(uchar  ibMin, uchar  ibMax)
 
 review ReadReviewC1(void)
 {
-  return ReadReview1(0, 13);
+  return ReadReview(0, 13);
 }
 
 review ReadReviewC1_Shutdown(void)
 {
-  return ReadReview1(0, 5);
+  return ReadReview(0, 5);
 }
 
 review ReadReviewC6(void)
 {
-  return ReadReview1(0, 53);
+  return ReadReview(0, 53);
 }
