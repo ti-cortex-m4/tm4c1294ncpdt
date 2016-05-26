@@ -8,6 +8,8 @@ review_buff.c
 #include "../../serial/ports_common.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
+#include "../../display/display.h"
+#include "../../time/delay.h"
 #include "review.h"
 #include "review_core.h"
 #include "review_buff.h"
@@ -69,7 +71,17 @@ bool WarnReviewBuff(void)
     MonitorString("\n "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
     if ((wPrev != 0) && (wCurr == 0)) {
+      Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
       MonitorString("\n warnig: zero");
+
+      bMaxRepeats = REVIEW_REPEATS_MAX;
+      fIdRepeat = true;
+      return true;
+    }
+
+    if ((wPrev != 0) && (wCurr == wPrev)) {
+      Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
+      MonitorString("\n warnig: the same");
 
       bMaxRepeats = REVIEW_REPEATS_MAX;
       fIdRepeat = true;
