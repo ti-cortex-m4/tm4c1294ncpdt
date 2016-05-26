@@ -62,9 +62,7 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax)
     cbRepeats++;
     SaveReviewBuff(ibMin,ibMax);
 
-    if (WarnReviewBuff()) {
-      Clear(); strcpy(szLo+3, "проверка !!"); DelayInf(); Clear();
-    }
+    WarnReviewBuff();
     return REVIEW_REPEAT;
   } else {
     cbMargins++;
@@ -85,9 +83,7 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax)
         cbRepeats = 0;
         SaveReviewBuff(ibMin,ibMax);
 
-        if (WarnReviewBuff()) {
-          Clear(); strcpy(szLo+3, "проверка !!"); DelayInf(); Clear();
-        } else {
+        if (!WarnReviewBuff()) {
           Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();
         }
         return REVIEW_REPEAT;
@@ -96,7 +92,7 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax)
   }
 }
 
-static review ReadReview(uchar  ibMin, uchar  ibMax)
+static review ReadReviewOuter(uchar  ibMin, uchar  ibMax)
 {
   review rv = ReadReviewInner(ibMin, ibMax);
 
@@ -116,15 +112,15 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
 
 review ReadReviewC1(void)
 {
-  return ReadReview(0, 13);
+  return ReadReviewOuter(0, 13);
 }
 
 review ReadReviewC1_Shutdown(void)
 {
-  return ReadReview(0, 5);
+  return ReadReviewOuter(0, 5);
 }
 
 review ReadReviewC6(void)
 {
-  return ReadReview(0, 53);
+  return ReadReviewOuter(0, 53);
 }
