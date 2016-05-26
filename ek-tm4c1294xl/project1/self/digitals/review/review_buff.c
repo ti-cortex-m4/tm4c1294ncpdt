@@ -60,10 +60,6 @@ void SwitchReviewBuff(void)
 
 bool SpecReviewBuff(void)
 {
-	  MonitorString("\n ibBuff"); MonitorCharDec(ibBuff);
-	  MonitorString("\n PrevBuffIdx()"); MonitorCharDec(PrevBuffIdx());
-	  MonitorString("\n CurrBuffIdx()"); MonitorCharDec(CurrBuffIdx());
-
   uchar i;
   for (i=0; i<4; i++) {
     uint wPrev = mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;

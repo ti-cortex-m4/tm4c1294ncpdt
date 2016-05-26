@@ -103,6 +103,7 @@ KEYBOARD_KEY!C
 #include "digitals/key_max_repeats.h"
 #include "digitals/key_max_shutdown.h"
 #include "sensors/key_control_w.h"
+#include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_read_id.h"
 #include "digitals/review/key_review_repeats.h"
 #include "digitals/review/key_review_margins.h"
@@ -344,6 +345,7 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
 
+      case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
@@ -648,6 +650,7 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
 
+      case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
@@ -872,6 +875,7 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
 
+      case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
