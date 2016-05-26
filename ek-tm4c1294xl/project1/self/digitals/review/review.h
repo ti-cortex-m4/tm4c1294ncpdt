@@ -15,10 +15,12 @@ review.h
 
 
 
+extern bool                    fReviewFlag;
 extern bool                    fReviewReadId;
 extern uchar                   bReviewRepeats;
 extern uchar                   bReviewMargins;
 
+extern cache const             chReviewFlag;
 extern cache const             chReviewReadId;
 extern cache const             chReviewRepeats;
 extern cache const             chReviewMargins;
