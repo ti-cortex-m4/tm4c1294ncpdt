@@ -8,6 +8,8 @@ review_buff.c
 #include "../../serial/ports_common.h"
 #include "../../serial/ports.h"
 #include "../../serial/monitor.h"
+#include "review.h"
+#include "review_core.h"
 #include "review_buff.h"
 
 
@@ -68,6 +70,7 @@ bool SpecReviewBuff(void)
 
     if ((wPrev != 0) && (wCurr == 0)) {
       MonitorString("\n error: zero");
+      bMaxRepeats = REVIEW_REPEATS_MAX;
       return true;
     }
   }

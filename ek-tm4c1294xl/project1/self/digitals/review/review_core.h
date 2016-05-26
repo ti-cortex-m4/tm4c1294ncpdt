@@ -17,6 +17,10 @@ typedef enum
 
 
 
+extern  uchar                   bMaxRepeats;
+
+
+
 void StartReview(void);
 void RestartReview(void);
 

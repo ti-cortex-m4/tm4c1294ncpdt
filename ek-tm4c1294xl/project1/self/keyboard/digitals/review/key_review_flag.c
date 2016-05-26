@@ -12,11 +12,10 @@ key_review_flag.c
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = " Чтение логич.  ",
-                        szMessage2[]    = "  номеров при   ",
-                        szMessage3[]    = "чтении профилей ";
+static char const       szMessage1[]    = "  Проверка при  ",
+                        szMessage2[]    = "чтении профилей ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, "" };
 
 
 

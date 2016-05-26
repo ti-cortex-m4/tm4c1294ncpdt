@@ -14,6 +14,7 @@ review_core.c
 
 
 static uchar            cbRepeats, cbMargins;
+uchar                   bMaxRepeats;
 
 
 
@@ -27,6 +28,7 @@ void RestartReview(void)
   RestartReviewBuff();
 
   cbRepeats = 0;
+  bMaxRepeats = bReviewRepeats;
   cbMargins = 0;
 }
 
@@ -34,7 +36,7 @@ void RestartReview(void)
 
 static bool UseReview(void)
 {
-  return (bReviewRepeats > REVIEW_REPEATS_MIN) && (bReviewRepeats <= REVIEW_REPEATS_MAX);
+  return (fReviewFlag == true);
 }
 
 static void Show(void)
@@ -70,7 +72,7 @@ static review ReadReview(uchar  ibMin, uchar  ibMax)
       return REVIEW_ERROR;
     } else {
       if (TestReviewBuff(ibMin,ibMax)) {
-        if (++cbRepeats >= bReviewRepeats) {
+        if (++cbRepeats >= bMaxRepeats) {
           SwitchReviewBuff();
           return REVIEW_SUCCESS;
         } else {
