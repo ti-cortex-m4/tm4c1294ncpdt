@@ -62,7 +62,7 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax)
     cbRepeats++;
     SaveReviewBuff(ibMin,ibMax);
 
-    if (SpecReviewBuff()) {
+    if (WarnReviewBuff()) {
       Clear(); strcpy(szLo+3, "проверка !!"); DelayInf(); Clear();
     }
     return REVIEW_REPEAT;
@@ -85,7 +85,7 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax)
         cbRepeats = 0;
         SaveReviewBuff(ibMin,ibMax);
 
-        if (SpecReviewBuff()) {
+        if (WarnReviewBuff()) {
           Clear(); strcpy(szLo+3, "проверка !!"); DelayInf(); Clear();
         } else {
           Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();

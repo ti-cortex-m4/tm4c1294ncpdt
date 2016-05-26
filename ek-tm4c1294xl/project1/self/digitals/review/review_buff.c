@@ -60,18 +60,18 @@ void SwitchReviewBuff(void)
   memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
 }
 
-bool SpecReviewBuff(void)
+bool WarnReviewBuff(void)
 {
   uchar i;
   for (i=0; i<4; i++) {
     uint wPrev = mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
     uint wCurr = mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
-    MonitorString("\n"); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
+    MonitorString("\n "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
     if ((wPrev != 0) && (wCurr == 0)) {
-      MonitorString("\n error: zero");
+      MonitorString("\n warnig: zero");
 
-      bMaxRepeats = REVIEW_REPEATS_MAX - 1;
+      bMaxRepeats = REVIEW_REPEATS_MAX;
       fIdRepeat = true;
       return true;
     }
