@@ -9,9 +9,19 @@ review.h
 
 #define REVIEW_REPEATS_MIN    1
 #define REVIEW_REPEATS_MAX    5
+#define REVIEW_REPEATS_DEF    1
 
 #define REVIEW_MARGINS_MIN    10
 #define REVIEW_MARGINS_MAX    50
+#define REVIEW_MARGINS_DEF    20
+
+#define REVIEW_WRN_TREND_MIN  10
+#define REVIEW_WRN_TREND_MAX  100
+#define REVIEW_WRN_TREND_DEF  50
+
+#define REVIEW_WRN_TOP_MIN    100
+#define REVIEW_WRN_TOP_MAX    0xFFFF
+#define REVIEW_WRN_TOP_DEF    30000
 
 
 
@@ -19,14 +29,14 @@ extern bool                    fReviewFlag;
 extern bool                    fReviewReadId;
 extern uchar                   bReviewRepeats;
 extern uchar                   bReviewMargins;
-extern uchar                   bReviewWrnPercent;
+extern uchar                   bReviewWrnTrend;
 extern uint                    wReviewWrnTop;
 
 extern cache const             chReviewFlag;
 extern cache const             chReviewReadId;
 extern cache const             chReviewRepeats;
 extern cache const             chReviewMargins;
-extern cache const             chReviewWrnPercent;
+extern cache const             chReviewWrnTrend;
 extern cache const             chReviewWrnTop;
 
 

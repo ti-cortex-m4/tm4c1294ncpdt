@@ -36,7 +36,7 @@ static bool WarningInner(uint  wPrev, uint  wCurr)
 
 static bool Warning(uint  wPrev, uint  wCurr)
 {
-  if (WarningInner(wPrev, wCurr))
+  if (WarningInner(wPrev, wCurr)) {
     bMaxRepeats = REVIEW_REPEATS_MAX;
     fIdRepeat = true;
     return true;
