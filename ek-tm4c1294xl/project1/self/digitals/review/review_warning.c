@@ -15,23 +15,28 @@ review_warning.c
 
 
 
-static bool Warning(uint  wPrev, uint  wCurr)
+static bool WarningInner(uint  wPrev, uint  wCurr)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == 0)) {
     Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
-    MonitorString(" warnig: break ?");
-
-    bMaxRepeats = REVIEW_REPEATS_MAX;
-    fIdRepeat = true;
+    MonitorString(" warning: break ?");
     return true;
   }
 
   if ((wPrev != 0) && (wCurr == wPrev)) {
     Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
-    MonitorString(" warnig: repeat ?");
+    MonitorString(" warning: repeat ?");
+    return true;
+  }
 
+  return false;
+}
+
+static bool Warning(uint  wPrev, uint  wCurr)
+{
+  if (WarningInner(wPrev, wCurr))
     bMaxRepeats = REVIEW_REPEATS_MAX;
     fIdRepeat = true;
     return true;
