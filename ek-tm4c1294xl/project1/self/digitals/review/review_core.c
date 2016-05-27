@@ -10,6 +10,7 @@ review_core.c
 #include "../../serial/monitor.h"
 #include "review.h"
 #include "review_buff.h"
+#include "review_warning.h"
 #include "review_core.h"
 
 
