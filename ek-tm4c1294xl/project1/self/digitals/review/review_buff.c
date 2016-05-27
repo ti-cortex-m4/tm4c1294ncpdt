@@ -80,7 +80,7 @@ static bool Warn(uint  wPrev, uint  wCurr)
 
   if ((wPrev != 0) && (wCurr == 0)) {
     Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
-    MonitorString("\n warnig: break ?");
+    MonitorString(" warnig: break ?");
 
     bMaxRepeats = REVIEW_REPEATS_MAX;
     fIdRepeat = true;
@@ -89,7 +89,7 @@ static bool Warn(uint  wPrev, uint  wCurr)
 
   if ((wPrev != 0) && (wCurr == wPrev)) {
     Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
-    MonitorString("\n warnig: repeat ?");
+    MonitorString(" warnig: repeat ?");
 
     bMaxRepeats = REVIEW_REPEATS_MAX;
     fIdRepeat = true;
@@ -108,6 +108,8 @@ static bool WarnReviewBuffInner6(void)
 
   uchar j;
   for (j=0; j<5; j++) {
+    MonitorString("\n");
+
     uchar i;
     for (i=0; i<4; i++) {
       if (Warn(Curr(j*4+i),Curr((j+1)*4+i))) return true;
