@@ -46,7 +46,7 @@ static bool WarningReviewBuffInner6(void)
 {
   uchar i;
   for (i=0; i<4; i++) {
-    if (Warning(Prev(5*4+i),Curr(0*4+i))) return true;
+    if (Warning(PrevReview(5*4+i),CurrReview(0*4+i))) return true;
   }
 
   uchar j;
@@ -55,7 +55,7 @@ static bool WarningReviewBuffInner6(void)
 
     uchar i;
     for (i=0; i<4; i++) {
-      if (Warning(Curr(j*4+i),Curr((j+1)*4+i))) return true;
+      if (Warning(CurrReview(j*4+i),CurrReview((j+1)*4+i))) return true;
     }
   }
 
@@ -66,7 +66,7 @@ static bool WarningReviewBuffInner1(void)
 {
   uchar i;
   for (i=0; i<4; i++) {
-    if (Warning(Prev(i),Curr(i))) return true;
+    if (Warning(PrevReview(i),CurrReview(i))) return true;
   }
 
   return false;

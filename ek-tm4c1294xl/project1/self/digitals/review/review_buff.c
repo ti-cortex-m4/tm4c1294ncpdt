@@ -37,12 +37,12 @@ static uchar PrevBuffIdx(void)
 
 
 
-uint Prev(uchar  i)
+uint PrevReview(uchar  i)
 {
   return mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
 }
 
-uint Curr(uchar  i)
+uint CurrReview(uchar  i)
 {
   return mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
 }
