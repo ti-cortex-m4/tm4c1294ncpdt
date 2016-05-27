@@ -4,4 +4,4 @@ review_warning.h
 
 ------------------------------------------------------------------------------*/
 
-bool WarnReviewBuff(uchar  bSize);
+bool WarningReviewBuff(uchar  bSize);
