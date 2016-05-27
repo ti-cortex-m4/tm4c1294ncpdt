@@ -25,12 +25,12 @@ static uchar            ibBuff;
 
 
 
-static uchar CurrBuffIdx(void)
+static uchar CurrIdx(void)
 {
   return (ibBuff == 0) ? 0 : 1;
 }
 
-static uchar PrevBuffIdx(void)
+static uchar PrevIdx(void)
 {
   return (ibBuff == 0) ? 1 : 0;
 }
@@ -39,12 +39,12 @@ static uchar PrevBuffIdx(void)
 
 uint PrevReview(uchar  i)
 {
-  return mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
+  return mmbBuff[PrevIdx()][4+i*2] + mmbBuff[PrevIdx()][4+i*2+1]*0x100;
 }
 
 uint CurrReview(uchar  i)
 {
-  return mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
+  return mmbBuff[CurrIdx()][4+i*2] + mmbBuff[CurrIdx()][4+i*2+1]*0x100;
 }
 
 
@@ -61,7 +61,7 @@ void RestartReviewBuff(void)
 {
   MonitorString("\n restart review buff");
 
-  memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
+  memset(&mmbBuff[CurrIdx()], 0, REVIEW_BUFF_SIZE);
 }
 
 
@@ -71,7 +71,7 @@ void NextReviewBuff(void)
   MonitorString("\n next review buff");
 
   ibBuff = ++ibBuff % REVIEW_BUFF_COUNT;
-  memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
+  memset(&mmbBuff[CurrIdx()], 0, REVIEW_BUFF_SIZE);
 }
 
 
@@ -79,13 +79,13 @@ void NextReviewBuff(void)
 void SaveReviewBuff(uchar  ibMin, uchar  ibMax)
 {
   MonitorString("\n save review buff");
-  memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
+  memset(&mmbBuff[CurrIdx()], 0, REVIEW_BUFF_SIZE);
 
   uchar i;
   for (i=ibMin; i<=ibMax; i++)
   {
     ASSERT(i < REVIEW_BUFF_SIZE);
-    mmbBuff[CurrBuffIdx()][i] = InBuff(i);
+    mmbBuff[CurrIdx()][i] = InBuff(i);
   }
 }
 
@@ -95,7 +95,7 @@ bool TestReviewBuff(uchar  ibMin, uchar  ibMax)
   for (i=ibMin; i<=ibMax; i++)
   {
     ASSERT(i < REVIEW_BUFF_SIZE);
-    if (mmbBuff[CurrBuffIdx()][i] != InBuff(i))
+    if (mmbBuff[CurrIdx()][i] != InBuff(i))
       return false;
   }
 
@@ -112,8 +112,8 @@ void OutReviewBuff(void)
   wSize += PushIntBig(REVIEW_BUFF_SIZE);
   wSize += PushChar(REVIEW_BUFF_COUNT);
   wSize += PushChar(ibBuff);
-  wSize += PushChar(CurrBuffIdx());
-  wSize += PushChar(PrevBuffIdx());
+  wSize += PushChar(CurrIdx());
+  wSize += PushChar(PrevIdx());
   wSize += Push(&mmbBuff, sizeof(mmbBuff));
 
   Output(wSize);

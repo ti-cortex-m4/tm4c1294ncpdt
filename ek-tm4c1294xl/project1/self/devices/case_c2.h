@@ -263,6 +263,10 @@
           MakePause(DEV_DATA_6_C2);
           break;
         }
+        case REVIEW_ID_REPEAT: {
+          MakePause(DEV_ID_6_C2);
+          break;
+        }
         case REVIEW_SUCCESS: {
           if (ReadHeaderC6() == 0)
             DoneProfile();
