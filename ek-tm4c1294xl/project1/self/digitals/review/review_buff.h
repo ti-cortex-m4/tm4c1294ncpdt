@@ -4,6 +4,9 @@ review_buff.h
 
 ------------------------------------------------------------------------------*/
 
+uint Prev(uchar  i);
+uint Curr(uchar  i);
+
 void StartReviewBuff(void);
 void RestartReviewBuff(void);
 
