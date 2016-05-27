@@ -62,32 +62,39 @@ void SwitchReviewBuff(void)
   memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
 }
 
-bool WarnReviewBuff(void)
+bool WarnReviewBuff(uchar  bCount)
 {
-  uchar i;
-  for (i=0; i<4; i++) {
-    uint wPrev = mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
-    uint wCurr = mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
-    MonitorString("\n "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
+  if (bCount == 0) return false;
 
-    if ((wPrev != 0) && (wCurr == 0)) {
-      Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
-      MonitorString("\n warnig: zero");
+  uchar j;
+  for (j=0; j<bCount; j++) {
 
-      bMaxRepeats = REVIEW_REPEATS_MAX;
-      fIdRepeat = true;
-      return true;
-    }
+    uchar i;
+    for (i=0; i<4; i++) {
+      uint wPrev = mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
+      uint wCurr = mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
+      MonitorString("\n "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
-    if ((wPrev != 0) && (wCurr == wPrev)) {
-      Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
-      MonitorString("\n warnig: the same");
+      if ((wPrev != 0) && (wCurr == 0)) {
+        Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
+        MonitorString("\n warnig: break ?");
 
-      bMaxRepeats = REVIEW_REPEATS_MAX;
-      fIdRepeat = true;
-      return true;
+        bMaxRepeats = REVIEW_REPEATS_MAX;
+        fIdRepeat = true;
+        return true;
+      }
+
+      if ((wPrev != 0) && (wCurr == wPrev)) {
+        Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
+        MonitorString("\n warnig: repeat ?");
+
+        bMaxRepeats = REVIEW_REPEATS_MAX;
+        fIdRepeat = true;
+        return true;
+      }
     }
   }
+
   return false;
 }
 
