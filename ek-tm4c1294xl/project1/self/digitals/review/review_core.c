@@ -74,7 +74,7 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bSize)
     } else {
       if (TestReviewBuff(ibMin,ibMax)) {
         if (++cbRepeats >= bMaxRepeats) {
-          SwitchReviewBuff();
+          NextReviewBuff();
           return REVIEW_SUCCESS;
         } else {
           return REVIEW_REPEAT;

@@ -54,13 +54,15 @@ void RestartReviewBuff(void)
 
 
 
-void SwitchReviewBuff(void)
+void NextReviewBuff(void)
 {
-  MonitorString("\n switch review buff");
+  MonitorString("\n next review buff");
 
   ibBuff = ++ibBuff % REVIEW_BUFF_COUNT;
   memset(&mmbBuff[CurrBuffIdx()], 0, REVIEW_BUFF_SIZE);
 }
+
+
 
 bool WarnReviewBuff(uchar  bSize)
 {
@@ -100,6 +102,8 @@ bool WarnReviewBuff(uchar  bSize)
 
   return false;
 }
+
+
 
 void SaveReviewBuff(uchar  ibMin, uchar  ibMax)
 {
