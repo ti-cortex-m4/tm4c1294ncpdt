@@ -64,43 +64,101 @@ void NextReviewBuff(void)
 
 
 
-bool WarnReviewBuff(uchar  bSize)
+static uint Prev(uchar  i)
 {
-  if (bSize == 0) return false;
+  return mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
+}
 
-  uchar k = 4;
+static uint Curr(uchar  i)
+{
+  return mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
+}
+
+static bool Warn(uint  wPrev, uint  wCurr)
+{
+  MonitorString("\n "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
+
+  if ((wPrev != 0) && (wCurr == 0)) {
+    Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
+    MonitorString("\n warnig: break ?");
+
+    bMaxRepeats = REVIEW_REPEATS_MAX;
+    fIdRepeat = true;
+    return true;
+  }
+
+  if ((wPrev != 0) && (wCurr == wPrev)) {
+    Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
+    MonitorString("\n warnig: repeat ?");
+
+    bMaxRepeats = REVIEW_REPEATS_MAX;
+    fIdRepeat = true;
+    return true;
+  }
+
+  return false;
+}
+
+static bool WarnReviewBuffInner6(void)
+{
+  uchar i;
+  for (i=0; i<4; i++) {
+    uint wPrev = Prev(5*6+i);
+    uint wCurr = Curr(0*6+i);
+    if (Warn(wPrev,wCurr) == true) return true;
+  }
 
   uchar j;
-  for (j=0; j<bSize; j++) {
+  for (j=0; j<5; j++) {
     uchar i;
     for (i=0; i<4; i++) {
-      uint wPrev = mmbBuff[PrevBuffIdx()][k] + mmbBuff[PrevBuffIdx()][k+1]*0x100;
-      uint wCurr = mmbBuff[CurrBuffIdx()][k] + mmbBuff[CurrBuffIdx()][k+1]*0x100;
-      k += 2;
-
-      MonitorString("\n "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
-
-      if ((wPrev != 0) && (wCurr == 0)) {
-        Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
-        MonitorString("\n warnig: break ?");
-
-        bMaxRepeats = REVIEW_REPEATS_MAX;
-        fIdRepeat = true;
-        return true;
-      }
-
-      if ((wPrev != 0) && (wCurr == wPrev)) {
-        Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
-        MonitorString("\n warnig: repeat ?");
-
-        bMaxRepeats = REVIEW_REPEATS_MAX;
-        fIdRepeat = true;
-        return true;
-      }
+      uint wPrev = Curr(j*6+i);
+      uint wCurr = Curr((j+1)*6+i);
+      if (Warn(wPrev,wCurr) == true) return true;
     }
   }
 
   return false;
+}
+
+static bool WarnReviewBuffInner1(void)
+{
+  uchar i;
+  for (i=0; i<4; i++) {
+    uint wPrev = mmbBuff[PrevBuffIdx()][4+i*2] + mmbBuff[PrevBuffIdx()][4+i*2+1]*0x100;
+    uint wCurr = mmbBuff[CurrBuffIdx()][4+i*2] + mmbBuff[CurrBuffIdx()][4+i*2+1]*0x100;
+    MonitorString("\n "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
+
+    if ((wPrev != 0) && (wCurr == 0)) {
+      Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
+      MonitorString("\n warnig: break ?");
+
+      bMaxRepeats = REVIEW_REPEATS_MAX;
+      fIdRepeat = true;
+      return true;
+    }
+
+    if ((wPrev != 0) && (wCurr == wPrev)) {
+      Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
+      MonitorString("\n warnig: repeat ?");
+
+      bMaxRepeats = REVIEW_REPEATS_MAX;
+      fIdRepeat = true;
+      return true;
+    }
+  }
+
+  return false;
+}
+
+bool WarnReviewBuff(uchar  bSize)
+{
+  switch(bSize) {
+    case 0: return false;
+    case 6: return false;
+    case 1: return WarnReviewBuffInner1();
+    default: ASSERT(false); return false;
+  }
 }
 
 

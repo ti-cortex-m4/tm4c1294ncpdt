@@ -115,7 +115,7 @@ review ReadReviewC1(void)
   return ReadReview(0, 13, 1);
 }
 
-review ReadReviewC1_Shutdown(void) // ???
+review ReadReviewC1_Shutdown(void)
 {
   return ReadReview(0, 5, 0);
 }
