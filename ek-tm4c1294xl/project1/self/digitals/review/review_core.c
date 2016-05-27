@@ -92,7 +92,7 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bCount)
   }
 }
 
-static review ReadReviewOuter(uchar  ibMin, uchar  ibMax, uchar  bCount)
+static review ReadReview(uchar  ibMin, uchar  ibMax, uchar  bCount)
 {
   review rv = ReadReviewInner(ibMin, ibMax, bCount);
 
@@ -112,15 +112,15 @@ static review ReadReviewOuter(uchar  ibMin, uchar  ibMax, uchar  bCount)
 
 review ReadReviewC1(void)
 {
-  return ReadReviewOuter(0, 13, 1);
+  return ReadReview(0, 13, 1);
 }
 
 review ReadReviewC1_Shutdown(void) // ???
 {
-  return ReadReviewOuter(0, 5, 0);
+  return ReadReview(0, 5, 0);
 }
 
 review ReadReviewC6(void)
 {
-  return ReadReviewOuter(0, 53, 6);
+  return ReadReview(0, 53, 6);
 }
