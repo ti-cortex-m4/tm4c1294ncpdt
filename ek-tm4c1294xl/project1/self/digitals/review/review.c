@@ -15,11 +15,15 @@ bool                    fReviewFlag;
 bool                    fReviewReadId;
 uchar                   bReviewRepeats;
 uchar                   bReviewMargins;
+uchar                   bReviewWrnPercent;
+uint                    wReviewWrnTop;
 
 cache const             chReviewFlag = {REVIEW_FLAG, &fReviewFlag, sizeof(bool)};
 cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof(bool)};
 cache const             chReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, sizeof(uchar)};
 cache const             chReviewMargins = {REVIEW_MARGINS, &bReviewMargins, sizeof(uchar)};
+cache const             chReviewWrnPercent = {REVIEW_WRN_RERCENT, &bReviewWrnPercent, sizeof(uchar)};
+cache const             chReviewWrnTop = {REVIEW_WRN_TOP, &wReviewWrnTop, sizeof(uint)};
 
 
 

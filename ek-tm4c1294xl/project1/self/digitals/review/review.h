@@ -19,11 +19,15 @@ extern bool                    fReviewFlag;
 extern bool                    fReviewReadId;
 extern uchar                   bReviewRepeats;
 extern uchar                   bReviewMargins;
+extern uchar                   bReviewWrnPercent;
+extern uint                    wReviewWrnTop;
 
 extern cache const             chReviewFlag;
 extern cache const             chReviewReadId;
 extern cache const             chReviewRepeats;
 extern cache const             chReviewMargins;
+extern cache const             chReviewWrnPercent;
+extern cache const             chReviewWrnTop;
 
 
 
