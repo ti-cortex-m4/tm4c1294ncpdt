@@ -51,7 +51,7 @@ static void Show(void)
 
 
 
-static review ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bCount)
+static review ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bSize)
 {
   if (!UseReview()) {
     return REVIEW_SUCCESS;
@@ -62,7 +62,7 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bCount)
     cbRepeats++;
     SaveReviewBuff(ibMin,ibMax);
 
-    WarnReviewBuff(bCount);
+    WarnReviewBuff(bSize);
     return REVIEW_REPEAT;
   } else {
     cbMargins++;
@@ -83,7 +83,7 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bCount)
         cbRepeats = 0;
         SaveReviewBuff(ibMin,ibMax);
 
-        if (!WarnReviewBuff(bCount)) {
+        if (!WarnReviewBuff(bSize)) {
           Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();
         }
         return REVIEW_REPEAT;
@@ -92,9 +92,9 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bCount)
   }
 }
 
-static review ReadReview(uchar  ibMin, uchar  ibMax, uchar  bCount)
+static review ReadReview(uchar  ibMin, uchar  ibMax, uchar  bSize)
 {
-  review rv = ReadReviewInner(ibMin, ibMax, bCount);
+  review rv = ReadReviewInner(ibMin, ibMax, bSize);
 
   if ((rv == REVIEW_REPEAT) && (fIdRepeat == true)) {
     rv = REVIEW_ID_REPEAT;
