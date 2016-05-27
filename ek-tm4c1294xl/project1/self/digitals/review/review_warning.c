@@ -5,8 +5,6 @@ review_warning.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../serial/ports_common.h"
-//#include "../../serial/ports.h"
 #include "../../serial/monitor.h"
 #include "../../display/display.h"
 #include "../../time/delay.h"
@@ -19,7 +17,7 @@ review_warning.c
 
 static bool Warning(uint  wPrev, uint  wCurr)
 {
-  MonitorString("\n "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
+  MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == 0)) {
     Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
@@ -46,7 +44,7 @@ static bool WarningReviewBuffInner6(void)
 {
   uchar i;
   for (i=0; i<4; i++) {
-    if (Warning(PrevReview(5*4+i),CurrReview(0*4+i))) return true;
+    if (Warning(PrevReviewBuff(5*4+i), CurrReviewBuff(0*4+i))) return true;
   }
 
   uchar j;
@@ -55,7 +53,7 @@ static bool WarningReviewBuffInner6(void)
 
     uchar i;
     for (i=0; i<4; i++) {
-      if (Warning(CurrReview(j*4+i),CurrReview((j+1)*4+i))) return true;
+      if (Warning(CurrReviewBuff(j*4+i), CurrReviewBuff((j+1)*4+i))) return true;
     }
   }
 
@@ -66,7 +64,7 @@ static bool WarningReviewBuffInner1(void)
 {
   uchar i;
   for (i=0; i<4; i++) {
-    if (Warning(PrevReview(i),CurrReview(i))) return true;
+    if (Warning(PrevReviewBuff(i), CurrReviewBuff(i))) return true;
   }
 
   return false;
@@ -74,6 +72,7 @@ static bool WarningReviewBuffInner1(void)
 
 bool WarningReviewBuff(uchar  bSize)
 {
+  MonitorString("\n");
   switch(bSize) {
     case 0: return false;
     case 6: return WarningReviewBuffInner6();
