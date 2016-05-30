@@ -6,7 +6,7 @@ key_review_read_id.c
 
 #include "../../../console.h"
 #include "../../../digitals/review/review.h"
-#include "../../common/key_bool.h"
+#include "../../common/key_bool_blocked.h"
 #include "key_review_read_id.h"
 
 
@@ -22,6 +22,6 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 void    key_SetReviewReadId(void)
 {
-  key_SetBool(&chReviewReadId, pszMessages);
+  key_SetBoolBlocked(&chReviewReadId, pszMessages, fReviewFlag, wSET_REVIEW_FLAG);
 }
 
