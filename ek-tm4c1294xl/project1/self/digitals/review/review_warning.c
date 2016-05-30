@@ -45,7 +45,7 @@ static bool Warning(uint  wPrev, uint  wCurr)
   return false;
 }
 
-static bool WarningReviewBuffInner6(void)
+static bool WarningReviewBuff6(void)
 {
   uchar i;
   for (i=0; i<4; i++) {
@@ -53,7 +53,7 @@ static bool WarningReviewBuffInner6(void)
   }
 
   uchar j;
-  for (j=0; j<5; j++) {
+  for (j=0; j<6-1; j++) {
     MonitorString("\n");
 
     uchar i;
@@ -62,10 +62,19 @@ static bool WarningReviewBuffInner6(void)
     }
   }
 
+  for (j=0; j<6; j++) {
+    MonitorString("\n");
+
+    uchar i;
+    for (i=0; i<4; i++) {
+      if (Warning(PrevReviewBuff(j*4+i), CurrReviewBuff(j*4+i))) return true;
+    }
+  }
+
   return false;
 }
 
-static bool WarningReviewBuffInner1(void)
+static bool WarningReviewBuff1(void)
 {
   uchar i;
   for (i=0; i<4; i++) {
@@ -80,8 +89,8 @@ bool WarningReviewBuff(uchar  bSize)
   MonitorString("\n");
   switch(bSize) {
     case 0: return false;
-    case 6: return WarningReviewBuffInner6();
-    case 1: return WarningReviewBuffInner1();
+    case 6: return WarningReviewBuff6();
+    case 1: return WarningReviewBuff1();
     default: ASSERT(false); return false;
   }
 }
