@@ -6,7 +6,7 @@ key_review_margins.c
 
 #include "../../../console.h"
 #include "../../../digitals/review/review.h"
-#include "../../common/key_char.h"
+#include "../../common/key_char_blocked.h"
 #include "key_review_margins.h"
 
 
@@ -22,5 +22,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 void    key_SetReviewMargins(void)
 {
-  key_SetChar(&chReviewMargins, pszMessages, REVIEW_MARGINS_MIN, REVIEW_MARGINS_MAX);
+  key_SetCharBlocked(&chReviewMargins, pszMessages, REVIEW_MARGINS_MIN, REVIEW_MARGINS_MAX, fReviewFlag, wSET_REVIEW_FLAG);
 }

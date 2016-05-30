@@ -6,7 +6,7 @@ key_review_repeats.c
 
 #include "../../../console.h"
 #include "../../../digitals/review/review.h"
-#include "../../common/key_char.h"
+#include "../../common/key_char_blocked.h"
 #include "key_review_repeats.h"
 
 
@@ -22,5 +22,5 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 void    key_SetReviewRepeats(void)
 {
-  key_SetChar(&chReviewRepeats, pszMessages, REVIEW_REPEATS_MIN, REVIEW_REPEATS_MAX);
+  key_SetCharBlocked(&chReviewRepeats, pszMessages, REVIEW_REPEATS_MIN, REVIEW_REPEATS_MAX, fReviewFlag, wSET_REVIEW_FLAG);
 }
