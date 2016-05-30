@@ -12,10 +12,10 @@ key_review_wrn_trend.c
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  ",
-                        szMessage2[]    = "  % пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  ",
-                        szMessage3[]    = " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ  ",
-                        szMessage4[]    = "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ";
+static char const       szMessage1[]    = "  Максимальный  ",
+                        szMessage2[]    = "  % отклонения  ",
+                        szMessage3[]    = " импульсов при  ",
+                        szMessage4[]    = "чтении профилей ";
 
 static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, szNumberLimits, "" };
 
