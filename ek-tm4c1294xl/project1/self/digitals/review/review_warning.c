@@ -37,6 +37,21 @@ static bool WarningInner(uint  wPrev, uint  wCurr)
     return true;
   }
 
+  ulong dwMax = wPrev*(100 + bReviewWrnTrend) / 100;
+  ulong dwMin = wPrev*(100 - bReviewWrnTrend) / 100;
+
+  if (wCurr > dwMax) {
+    Clear(); strcpy(szLo+4, "пик ?"); DelayInf(); Clear();
+    MonitorString(" warning: value > "); MonitorLongDec(dwMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
+    return true;
+  }
+
+  if (wCurr < dwMin) {
+    Clear(); strcpy(szLo+4, "провал ?"); DelayInf(); Clear();
+    MonitorString(" warning: value < "); MonitorLongDec(dwMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
+    return true;
+  }
+
   return false;
 }
 
