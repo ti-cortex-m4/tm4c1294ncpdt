@@ -16,6 +16,7 @@ PROFILE_C!C
 #include "../../time/delay.h"
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
+#include "../../serial/monitor.h"
 #include "../../devices/devices.h"
 #include "../../devices/devices_time.h"
 #include "../../digitals/limits.h"
@@ -119,6 +120,7 @@ void    QueryHeaderC6(void)
 bool    ReadHeaderC(uchar  ibBlock)
 {
   sprintf(szLo," %02u    %02u.%02u.%02u", tiDig.bHour, tiDig.bDay,tiDig.bMonth,tiDig.bYear);
+  MonitorString("\n time "); MonitorTime(tiDig);
 
   if (SearchDefHouIndex(tiDig) == 0) return(1);
 
