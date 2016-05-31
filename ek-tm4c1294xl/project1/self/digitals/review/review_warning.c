@@ -21,13 +21,19 @@ static bool WarningInner(uint  wPrev, uint  wCurr)
 
   if ((wPrev != 0) && (wCurr == 0)) {
     Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
-    MonitorString(" warning: break ?");
+    MonitorString(" warning: value = 0");
     return true;
   }
 
   if ((wPrev != 0) && (wCurr == wPrev)) {
     Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
     MonitorString(" warning: repeat ?");
+    return true;
+  }
+
+  if (wCurr > wReviewWrnTop) {
+    Clear(); strcpy(szLo+4, "выброс ?"); DelayInf(); Clear();
+    MonitorString(" warning: value > "); MonitorIntDec(wReviewWrnTop);
     return true;
   }
 
