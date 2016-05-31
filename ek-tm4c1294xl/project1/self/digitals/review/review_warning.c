@@ -37,18 +37,18 @@ static bool WarningInner(uint  wPrev, uint  wCurr)
     return true;
   }
 
-  ulong dwMax = wPrev*(100 + bReviewWrnTrend) / 100;
-  ulong dwMin = wPrev*(100 - bReviewWrnTrend) / 100;
+  ulong dwCurrMax = wPrev*(100 + bReviewWrnTrend) / 100;
+  ulong dwCurrMin = wPrev*(100 - bReviewWrnTrend) / 100;
 
-  if ((cwNextBuff > 1) && (wCurr > dwMax)) {
+  if ((cwNextBuff > 1) && (wCurr > dwCurrMax)) {
     Clear(); strcpy(szLo+4, "пик ?"); DelayInf(); Clear();
-    MonitorString(" warning: value > "); MonitorLongDec(dwMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
+    MonitorString(" warning: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return true;
   }
 
-  if ((cwNextBuff > 1) && (wCurr < dwMin)) {
+  if ((cwNextBuff > 1) && (wCurr < dwCurrMin)) {
     Clear(); strcpy(szLo+4, "провал ?"); DelayInf(); Clear();
-    MonitorString(" warning: value < "); MonitorLongDec(dwMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
+    MonitorString(" warning: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return true;
   }
 
@@ -68,15 +68,14 @@ static bool Warning(uint  wPrev, uint  wCurr)
 
 static bool WarningReviewBuff6(void)
 {
-/*
-  MonitorString("\n");
+//  MonitorString("\n");
 
   uchar i;
   for (i=0; i<4; i++) {
     if (Warning(PrevReviewBuff(5*4+i), CurrReviewBuff(0*4+i))) return true;
   }
 
-  MonitorString("\n");
+  MonitorString("\n -");
 
   uchar j;
   for (j=0; j<6-1; j++) {
@@ -87,10 +86,9 @@ static bool WarningReviewBuff6(void)
       if (Warning(CurrReviewBuff(j*4+i), CurrReviewBuff((j+1)*4+i))) return true;
     }
   }
-*/
-  MonitorString("\n");
 
-  uchar j;
+  MonitorString("\n -");
+
   for (j=0; j<6; j++) {
     MonitorString("\n");
 
