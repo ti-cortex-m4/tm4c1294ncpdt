@@ -21,7 +21,7 @@ static bool WarningInner(uint  wPrev, uint  wCurr)
 
   if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == 0)) {
     Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
-    MonitorString(" warning: value = 0");
+    MonitorString(" warning: zero value");
     return true;
   }
 
