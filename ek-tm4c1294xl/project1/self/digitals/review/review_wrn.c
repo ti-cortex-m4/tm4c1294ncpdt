@@ -62,6 +62,7 @@ static bool Wrn(uint  wPrev, uint  wCurr)
   if (rw != REVIEW_WRN_OK) {
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
+
     mcwReviewWrn[rw]++;
     return true;
   }
