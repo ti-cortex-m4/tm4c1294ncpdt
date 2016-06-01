@@ -19,6 +19,7 @@ uchar                   bReviewMargins;
 uchar                   bReviewWrnTrend;
 uint                    wReviewWrnTop;
 
+uint                    mcwReviewEvent[16];
 uint                    mcwReviewWrn[16];
 
 cache const             chReviewFlag = {REVIEW_FLAG, &fReviewFlag, sizeof(bool)};
@@ -41,6 +42,7 @@ void InitReview(void)
   LoadCacheChar(&chReviewWrnTrend, REVIEW_WRN_TREND_MIN, REVIEW_WRN_TREND_MAX, REVIEW_WRN_TREND_DEF);
   LoadCacheInt(&chReviewWrnTop, REVIEW_WRN_TOP_MIN, REVIEW_WRN_TOP_MAX, REVIEW_WRN_TOP_DEF);
 
+  memset(&mcwReviewEvent, 0, sizeof(mcwReviewEvent));
   memset(&mcwReviewWrn, 0, sizeof(mcwReviewWrn));
 }
 
