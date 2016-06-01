@@ -12,11 +12,12 @@ key_review_borders.c
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "   Количество   ",
-                        szMessage2[]    = "  повторов при  ",
-                        szMessage3[]    = "чтении профилей ";
+static char const       szMessage1[]    = "  Проверочное   ",
+                        szMessage2[]    = "   количество   ",
+                        szMessage3[]    = "  повторов при  ",
+                        szMessage4[]    = "чтении профилей ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szNumberLimits, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, szNumberLimits, "" };
 
 
 
