@@ -10,8 +10,8 @@ review_core.c
 #include "../../serial/monitor.h"
 #include "review.h"
 #include "review_buff.h"
-#include "review_wrn.h"
 #include "review_core.h"
+#include "review_warning.h"
 
 
 
@@ -63,7 +63,7 @@ static review_code ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bSize)
     cbRepeats++;
     SaveReviewBuff(ibMin,ibMax);
 
-    WrnReviewBuff(bSize);
+    WarningReviewBuff(bSize);
     return REVIEW_REPEAT;
   } else {
     cbMargins++;
@@ -84,7 +84,7 @@ static review_code ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bSize)
         cbRepeats = 0;
         SaveReviewBuff(ibMin,ibMax);
 
-        if (!WrnReviewBuff(bSize)) {
+        if (!WarningReviewBuff(bSize)) {
           Clear(); strcpy(szLo+3, "проверка !"); DelayInf(); Clear();
         }
         return REVIEW_REPEAT;

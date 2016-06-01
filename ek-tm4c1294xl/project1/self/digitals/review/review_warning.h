@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-review_wrn.h
+review_warning.h
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __REVIEW_WRN
-#define __REVIEW_WRN
+#ifndef __REVIEW_WARNING
+#define __REVIEW_WARNING
 
 typedef enum
 {
@@ -19,6 +19,6 @@ typedef enum
 
 
 
-bool WrnReviewBuff(uchar  bSize);
+bool WarningReviewBuff(uchar  bSize);
 
 #endif

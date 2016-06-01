@@ -31,7 +31,7 @@ void OutReview(void)
     wSize += PushIntBig(mcwReviewEvent[i]);
 
   for (i=0; i<16; i++)
-    wSize += PushIntBig(mcwReviewWrn[i]);
+    wSize += PushIntBig(mcwReviewWarning[i]);
 
   Output(wSize);
 }
