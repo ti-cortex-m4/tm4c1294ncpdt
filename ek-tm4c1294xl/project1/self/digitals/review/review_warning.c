@@ -63,7 +63,7 @@ static bool Warning(uint  wPrev, uint  wCurr)
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
 
-    mcwReviewWarning[rw]++;
+    mcwReviewWarnings[rw]++;
     return true;
   }
 
