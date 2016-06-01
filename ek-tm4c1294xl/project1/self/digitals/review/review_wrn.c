@@ -21,19 +21,19 @@ static review_wrn WrnInner(uint  wPrev, uint  wCurr)
 
   if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == 0)) {
     Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
-    MonitorString(" warning: zero value");
+    MonitorString(" WARNING: zero value");
     return REVIEW_WRN_ZERO;
   }
 
   if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == wPrev)) {
     Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
-    MonitorString(" warning: repeat ?");
+    MonitorString(" WARNING: repeat ?");
     return REVIEW_WRN_REPEAT;
   }
 
   if (wCurr > wReviewWrnTop) {
     Clear(); strcpy(szLo+4, "выброс ?"); DelayInf(); Clear();
-    MonitorString(" warning: value > "); MonitorIntDec(wReviewWrnTop);
+    MonitorString(" WARNING: value > "); MonitorIntDec(wReviewWrnTop);
     return REVIEW_WRN_TOP;
   }
 
@@ -42,13 +42,13 @@ static review_wrn WrnInner(uint  wPrev, uint  wCurr)
 
   if ((cwNextBuff > 1) && (wCurr > dwCurrMax)) {
     Clear(); strcpy(szLo+4, "пик ?"); DelayInf(); Clear();
-    MonitorString(" warning: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
+    MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_TOP;
   }
 
   if ((cwNextBuff > 1) && (wCurr < dwCurrMin)) {
     Clear(); strcpy(szLo+4, "провал ?"); DelayInf(); Clear();
-    MonitorString(" warning: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
+    MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_BOTTOM;
   }
 
