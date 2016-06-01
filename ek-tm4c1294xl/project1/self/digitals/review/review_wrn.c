@@ -71,26 +71,26 @@ static bool Wrn(uint  wPrev, uint  wCurr)
 }
 
 static bool WrnReviewBuff6(void)
-{/*
-  uchar i;
-  for (i=0; i<4; i++) {
-    if (Wrn(PrevReviewBuff(5*4+i), CurrReviewBuff(0*4+i))) return true;
-  }
+{
+//  uchar i;
+//  for (i=0; i<4; i++) {
+//    if (Wrn(PrevReviewBuff(5*4+i), CurrReviewBuff(0*4+i))) return true;
+//  }
+//
+//  MonitorString("\n -");
+//
+//  uchar j;
+//  for (j=0; j<6-1; j++) {
+//    MonitorString("\n");
+//
+//    uchar i;
+//    for (i=0; i<4; i++) {
+//      if (Wrn(CurrReviewBuff(j*4+i), CurrReviewBuff((j+1)*4+i))) return true;
+//    }
+//  }
+//
+//  MonitorString("\n -");
 
-  MonitorString("\n -");
-
-  uchar j;
-  for (j=0; j<6-1; j++) {
-    MonitorString("\n");
-
-    uchar i;
-    for (i=0; i<4; i++) {
-      if (Wrn(CurrReviewBuff(j*4+i), CurrReviewBuff((j+1)*4+i))) return true;
-    }
-  }
-
-  MonitorString("\n -");
-*/
   uchar j;
   for (j=0; j<6; j++) {
     MonitorString("\n");
@@ -106,6 +106,8 @@ static bool WrnReviewBuff6(void)
 
 static bool WrnReviewBuff1(void)
 {
+  MonitorString("\n");
+
   uchar i;
   for (i=0; i<4; i++) {
     if (Wrn(PrevReviewBuff(i), CurrReviewBuff(i))) return true;
@@ -116,7 +118,6 @@ static bool WrnReviewBuff1(void)
 
 bool WrnReviewBuff(uchar  bSize)
 {
-  MonitorString("\n");
   switch(bSize) {
     case 0: return false;
     case 6: return WrnReviewBuff6();

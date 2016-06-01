@@ -151,8 +151,10 @@ bool    ReadHeaderC1(void)
     return(0);
   else if (++wProfileC > wHOURS)
     return(0);
-  else
+  else {
+    MonitorString("\n");
     return(1);
+  }
 }
 
 bool    ReadHeaderC1_Shutdown(void)
@@ -165,6 +167,8 @@ bool    ReadHeaderC1_Shutdown(void)
 
     iwDigHou = (wHOURS+iwHardHou-wProfileC)%wHOURS;
     ShowProgressDigHou();
+
+    MonitorString("\n");
 
     if (MakeStopHou(0) == 0)
       return(0);
@@ -193,5 +197,6 @@ bool    ReadHeaderC6(void)
   wProfileC += 6;
   if (wProfileC > wHOURS) return(0);
 
+  MonitorString("\n");
   return(1);
 }
