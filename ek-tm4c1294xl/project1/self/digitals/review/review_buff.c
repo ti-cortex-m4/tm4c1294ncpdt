@@ -118,7 +118,6 @@ void OutReviewBuff(void)
   InitPushCRC();
   uint wSize = 0;
 
-  wSize += PushChar(0); // версия запроса
   wSize += PushChar(REVIEW_BUFF_COUNT);
   wSize += PushIntBig(REVIEW_BUFF_SIZE);
   wSize += PushChar(ibBuff);

@@ -14,7 +14,7 @@ key_review_wrn_trend.c
 //                                         0123456789ABCDEF
 static char const       szMessage1[]    = "  Максимальный  ",
                         szMessage2[]    = "  % отклонения  ",
-                        szMessage3[]    = "    значения    ",
+                        szMessage3[]    = "    значений    ",
                         szMessage4[]    = " импульсов при  ",
                         szMessage5[]    = "чтении профилей ";
 

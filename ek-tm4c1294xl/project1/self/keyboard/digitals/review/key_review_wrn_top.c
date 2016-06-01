@@ -12,8 +12,8 @@ key_review_wrn_top.c
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "  Максимальное  ",
-                        szMessage2[]    = "    значение    ",
+static char const       szMessage1[]    = "  Максимальные  ",
+                        szMessage2[]    = "    значения    ",
                         szMessage3[]    = " импульсов при  ",
                         szMessage4[]    = "чтении профилей ";
 

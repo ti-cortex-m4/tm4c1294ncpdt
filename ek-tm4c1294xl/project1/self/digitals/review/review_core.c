@@ -106,6 +106,8 @@ static review_code ReadReview(uchar  ibMin, uchar  ibMax, uchar  bSize)
     MonitorString("\n REVIEW_REPEAT");
   }
 
+  mcwReviewEvent[rc]++;
+
   return rc;
 }
 
