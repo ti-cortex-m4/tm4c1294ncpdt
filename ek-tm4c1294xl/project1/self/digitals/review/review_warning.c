@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-review_wrn.c
+review_warning.c
 
 
 ------------------------------------------------------------------------------*/
@@ -11,11 +11,11 @@ review_wrn.c
 #include "review.h"
 #include "review_core.h"
 #include "review_buff.h"
-#include "review_wrn.h"
+#include "review_warning.h"
 
 
 
-static review_wrn WrnInner(uint  wPrev, uint  wCurr)
+static review_wrn WarningInner(uint  wPrev, uint  wCurr)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
@@ -55,26 +55,26 @@ static review_wrn WrnInner(uint  wPrev, uint  wCurr)
   return REVIEW_WRN_OK;
 }
 
-static bool Wrn(uint  wPrev, uint  wCurr)
+static bool Warning(uint  wPrev, uint  wCurr)
 {
-  review_wrn rw = WrnInner(wPrev, wCurr);
+  review_wrn rw = WarningInner(wPrev, wCurr);
 
   if (rw != REVIEW_WRN_OK) {
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
 
-    mcwReviewWrn[rw]++;
+    mcwReviewWarning[rw]++;
     return true;
   }
 
   return false;
 }
 
-static bool WrnReviewBuff6(void)
+static bool WarningReviewBuff6(void)
 {
 //  uchar i;
 //  for (i=0; i<4; i++) {
-//    if (Wrn(PrevReviewBuff(5*4+i), CurrReviewBuff(0*4+i))) return true;
+//    if (Warning(PrevReviewBuff(5*4+i), CurrReviewBuff(0*4+i))) return true;
 //  }
 //
 //  MonitorString("\n -");
@@ -85,7 +85,7 @@ static bool WrnReviewBuff6(void)
 //
 //    uchar i;
 //    for (i=0; i<4; i++) {
-//      if (Wrn(CurrReviewBuff(j*4+i), CurrReviewBuff((j+1)*4+i))) return true;
+//      if (Warning(CurrReviewBuff(j*4+i), CurrReviewBuff((j+1)*4+i))) return true;
 //    }
 //  }
 //
@@ -97,31 +97,31 @@ static bool WrnReviewBuff6(void)
 
     uchar i;
     for (i=0; i<4; i++) {
-      if (Wrn(PrevReviewBuff(j*4+i), CurrReviewBuff(j*4+i))) return true;
+      if (Warning(PrevReviewBuff(j*4+i), CurrReviewBuff(j*4+i))) return true;
     }
   }
 
   return false;
 }
 
-static bool WrnReviewBuff1(void)
+static bool WarningReviewBuff1(void)
 {
   MonitorString("\n");
 
   uchar i;
   for (i=0; i<4; i++) {
-    if (Wrn(PrevReviewBuff(i), CurrReviewBuff(i))) return true;
+    if (Warning(PrevReviewBuff(i), CurrReviewBuff(i))) return true;
   }
 
   return false;
 }
 
-bool WrnReviewBuff(uchar  bSize)
+bool WarningReviewBuff(uchar  bSize)
 {
   switch(bSize) {
     case 0: return false;
-    case 6: return WrnReviewBuff6();
-    case 1: return WrnReviewBuff1();
+    case 6: return WarningReviewBuff6();
+    case 1: return WarningReviewBuff1();
     default: ASSERT(false); return false;
   }
 }
