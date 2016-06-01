@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-review_warning.h
+review_wrn.h
 
 
 ------------------------------------------------------------------------------*/
 
-bool WarningReviewBuff(uchar  bSize);
+bool WrnReviewBuff(uchar  bSize);
