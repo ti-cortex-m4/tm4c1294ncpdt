@@ -114,12 +114,14 @@ void OutReviewBuff(void)
   InitPushCRC();
   uint wSize = 0;
 
-  wSize += PushIntBig(REVIEW_BUFF_SIZE);
+  wSize += PushChar(0); // версия запроса
   wSize += PushChar(REVIEW_BUFF_COUNT);
+  wSize += PushIntBig(REVIEW_BUFF_SIZE);
   wSize += PushChar(ibBuff);
   wSize += PushChar(CurrIdx());
   wSize += PushChar(PrevIdx());
   wSize += Push(&mmbBuff, sizeof(mmbBuff));
+  wSize += PushIntBig(cwNextBuff);
 
   Output(wSize);
 }
