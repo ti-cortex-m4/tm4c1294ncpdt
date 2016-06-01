@@ -4,6 +4,8 @@ review_warning.c
 
 ------------------------------------------------------------------------------*/
 
+#include "review_wrn.h"
+
 #include "../../main.h"
 #include "../../serial/monitor.h"
 #include "../../display/display.h"
@@ -11,7 +13,6 @@ review_warning.c
 #include "review.h"
 #include "review_core.h"
 #include "review_buff.h"
-#include "review_warning.h"
 
 
 
