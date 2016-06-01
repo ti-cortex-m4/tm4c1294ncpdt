@@ -10,7 +10,7 @@ review_core.c
 #include "../../serial/monitor.h"
 #include "review.h"
 #include "review_buff.h"
-#include "review_warning.h"
+#include "review_wrn.h"
 #include "review_core.h"
 
 
@@ -52,7 +52,7 @@ static void Show(void)
 
 
 
-static review ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bSize)
+static review_code ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bSize)
 {
   if (!UseReview()) {
     return REVIEW_SUCCESS;
@@ -93,35 +93,35 @@ static review ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bSize)
   }
 }
 
-static review ReadReview(uchar  ibMin, uchar  ibMax, uchar  bSize)
+static review_code ReadReview(uchar  ibMin, uchar  ibMax, uchar  bSize)
 {
-  review rv = ReadReviewInner(ibMin, ibMax, bSize);
+  review_code rc = ReadReviewInner(ibMin, ibMax, bSize);
 
-  if ((rv == REVIEW_REPEAT) && (fIdRepeat == true)) {
-    rv = REVIEW_ID_REPEAT;
+  if ((rc == REVIEW_REPEAT) && (fIdRepeat == true)) {
+    rc = REVIEW_ID_REPEAT;
     MonitorString("\n REVIEW_ID_REPEAT");
   }
 
-  if (rv == REVIEW_REPEAT) {
+  if (rc == REVIEW_REPEAT) {
     MonitorString("\n REVIEW_REPEAT");
   }
 
-  return rv;
+  return rc;
 }
 
 
 
-review ReadReviewC1(void)
+review_code ReadReviewC1(void)
 {
   return ReadReview(0, 13, 1);
 }
 
-review ReadReviewC1_Shutdown(void)
+review_code ReadReviewC1_Shutdown(void)
 {
   return ReadReview(0, 5, 0);
 }
 
-review ReadReviewC6(void)
+review_code ReadReviewC6(void)
 {
   return ReadReview(0, 53, 6);
 }

@@ -13,7 +13,7 @@ typedef enum
   REVIEW_ID_REPEAT      = 1,
   REVIEW_SUCCESS        = 2,
   REVIEW_ERROR          = 3,
-} review;
+} review_code;
 
 
 
@@ -25,8 +25,8 @@ extern  bool                    fIdRepeat;
 void StartReview(void);
 void RestartReview(void);
 
-review ReadReviewC1(void);
-review ReadReviewC1_Shutdown(void);
-review ReadReviewC6(void);
+review_code ReadReviewC1(void);
+review_code ReadReviewC1_Shutdown(void);
+review_code ReadReviewC6(void);
 
 #endif
