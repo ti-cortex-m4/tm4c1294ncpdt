@@ -58,7 +58,7 @@ static bool WarningInner(uint  wPrev, uint  wCurr)
 static bool Warning(uint  wPrev, uint  wCurr)
 {
   if (WarningInner(wPrev, wCurr)) {
-    bMaxRepeats = REVIEW_REPEATS_MAX;
+    bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
     return true;
   }
@@ -68,8 +68,6 @@ static bool Warning(uint  wPrev, uint  wCurr)
 
 static bool WarningReviewBuff6(void)
 {
-//  MonitorString("\n");
-
   uchar i;
   for (i=0; i<4; i++) {
     if (Warning(PrevReviewBuff(5*4+i), CurrReviewBuff(0*4+i))) return true;
