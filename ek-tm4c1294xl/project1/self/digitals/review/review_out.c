@@ -28,10 +28,10 @@ void OutReview(void)
 
   uchar i;
   for (i=0; i<16; i++)
-    wSize += PushIntBig(mcwReviewEvent[i]);
+    wSize += PushIntBig(mcwReviewEvents[i]);
 
   for (i=0; i<16; i++)
-    wSize += PushIntBig(mcwReviewWarning[i]);
+    wSize += PushIntBig(mcwReviewWarnings[i]);
 
   Output(wSize);
 }
