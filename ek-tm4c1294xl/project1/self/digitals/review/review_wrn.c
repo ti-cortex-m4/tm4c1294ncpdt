@@ -15,26 +15,26 @@ review_wrn.c
 
 
 
-static bool WrnInner(uint  wPrev, uint  wCurr)
+static review_wrn WrnInner(uint  wPrev, uint  wCurr)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
   if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == 0)) {
     Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
     MonitorString(" warning: zero value");
-    return true;
+    return REVIEW_WRN_ZERO;
   }
 
   if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == wPrev)) {
     Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
     MonitorString(" warning: repeat ?");
-    return true;
+    return REVIEW_WRN_REPEAT;
   }
 
   if (wCurr > wReviewWrnTop) {
     Clear(); strcpy(szLo+4, "выброс ?"); DelayInf(); Clear();
     MonitorString(" warning: value > "); MonitorIntDec(wReviewWrnTop);
-    return true;
+    return REVIEW_WRN_TOP;
   }
 
   ulong dwCurrMax = wPrev*(100 + bReviewWrnTrend) / 100;
@@ -43,23 +43,26 @@ static bool WrnInner(uint  wPrev, uint  wCurr)
   if ((cwNextBuff > 1) && (wCurr > dwCurrMax)) {
     Clear(); strcpy(szLo+4, "пик ?"); DelayInf(); Clear();
     MonitorString(" warning: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
-    return true;
+    return REVIEW_WRN_TREND_TOP;
   }
 
   if ((cwNextBuff > 1) && (wCurr < dwCurrMin)) {
     Clear(); strcpy(szLo+4, "провал ?"); DelayInf(); Clear();
     MonitorString(" warning: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
-    return true;
+    return REVIEW_WRN_TREND_BOTTOM;
   }
 
-  return false;
+  return REVIEW_WRN_OK;
 }
 
 static bool Wrn(uint  wPrev, uint  wCurr)
 {
-  if (WrnInner(wPrev, wCurr)) {
+  review_wrn rw = WrnInner(wPrev, wCurr);
+
+  if (rw != REVIEW_WRN_OK) {
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
+    mcwReviewWrn[rw]++;
     return true;
   }
 

@@ -37,6 +37,8 @@ extern uchar                   bReviewMargins;
 extern uchar                   bReviewWrnTrend;
 extern uint                    wReviewWrnTop;
 
+extern uint                    mcwReviewWrn[16];
+
 extern cache const             chReviewFlag;
 extern cache const             chReviewReadId;
 extern cache const             chReviewRepeats;
