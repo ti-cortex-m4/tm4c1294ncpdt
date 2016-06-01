@@ -106,6 +106,7 @@ KEYBOARD_KEY!C
 #include "digitals/review/key_review_flag.h"
 #include "digitals/review/key_review_read_id.h"
 #include "digitals/review/key_review_repeats.h"
+#include "digitals/review/key_review_borders.h"
 #include "digitals/review/key_review_margins.h"
 #include "digitals/review/key_review_wrn_trend.h"
 #include "digitals/review/key_review_wrn_top.h"
@@ -350,6 +351,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
+      case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_TREND: key_SetReviewWrnTrend(); break;
       case wSET_REVIEW_WRN_TOP: key_SetReviewWrnTop(); break;
@@ -657,6 +659,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
+      case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_TREND: key_SetReviewWrnTrend(); break;
       case wSET_REVIEW_WRN_TOP: key_SetReviewWrnTop(); break;
@@ -884,6 +887,7 @@ void    Keyboard_Key(void)
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_READ_ID: key_SetReviewReadId();  break;
       case wSET_REVIEW_REPEATS: key_SetReviewRepeats(); break;
+      case wSET_REVIEW_BORDERS: key_SetReviewBorders(); break;
       case wSET_REVIEW_MARGINS: key_SetReviewMargins(); break;
       case wSET_REVIEW_WRN_TREND: key_SetReviewWrnTrend(); break;
       case wSET_REVIEW_WRN_TOP: key_SetReviewWrnTop(); break;
