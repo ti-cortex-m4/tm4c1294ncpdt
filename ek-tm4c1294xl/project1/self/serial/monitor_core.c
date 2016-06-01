@@ -65,7 +65,7 @@ void    MonitorOpen(uchar  ibPrt)
   if (ibPrt == 0)
   {
     IntDisable(INT_UART0);
-    UARTStdioConfig(0, 38400, 120000000);
+    UARTStdioConfig(0, 57600, 120000000);
 
     ibMonitorPort = 0;
   }

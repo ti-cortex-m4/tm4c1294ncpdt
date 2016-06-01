@@ -71,7 +71,7 @@ static bool Wrn(uint  wPrev, uint  wCurr)
 }
 
 static bool WrnReviewBuff6(void)
-{
+{/*
   uchar i;
   for (i=0; i<4; i++) {
     if (Wrn(PrevReviewBuff(5*4+i), CurrReviewBuff(0*4+i))) return true;
@@ -90,7 +90,8 @@ static bool WrnReviewBuff6(void)
   }
 
   MonitorString("\n -");
-
+*/
+  uchar j;
   for (j=0; j<6; j++) {
     MonitorString("\n");
 
