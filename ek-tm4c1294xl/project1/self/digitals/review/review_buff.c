@@ -60,6 +60,7 @@ void StartReviewBuff(void)
   cwNextBuff = 0;
 }
 
+
 void RestartReviewBuff(void)
 {
   MonitorString("\n restart review buff");
@@ -78,7 +79,6 @@ void NextReviewBuff(void)
 
   cwNextBuff++;
 }
-
 
 
 void SaveReviewBuff(uchar  ibMin, uchar  ibMax)
@@ -101,9 +101,13 @@ bool TestReviewBuff(uchar  ibMin, uchar  ibMax)
   {
     ASSERT(i < REVIEW_BUFF_SIZE);
     if (mmbBuff[CurrIdx()][i] != InBuff(i))
+    {
+      MonitorString("\n test review buff: false");
       return false;
+    }
   }
 
+  MonitorString("\n test review buff: true");
   return true;
 }
 
