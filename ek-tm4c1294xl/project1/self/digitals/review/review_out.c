@@ -26,6 +26,7 @@ void OutReview(void)
   wSize += PushChar(bReviewWrnTrend);
   wSize += PushIntBig(wReviewWrnTop);
 
+  wSize += Push(&mcwReviewEvent, sizeof(mcwReviewEvent));
   wSize += Push(&mcwReviewWrn, sizeof(mcwReviewWrn));
 
   Output(wSize);
