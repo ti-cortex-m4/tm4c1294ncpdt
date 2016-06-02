@@ -15,24 +15,33 @@ review_warning.c
 
 
 
+//                                         0123456789ABCDEF
+static char const       szZero[]        = "   просечка ?   ",
+                        szRepeat[]      = "    повтор ?    ",
+                        szTop[]         = "    выброс ?    ",
+                        szTrendTop[]    = "     пик ?      ",
+                        szTrendBottom[] = "    провал ?    ";
+
+
+
 static review_wrn WarningInner(uint  wPrev, uint  wCurr)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
   if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == 0)) {
-    Clear(); strcpy(szLo+3, "просечка ?"); DelayInf(); Clear();
-    MonitorString(" WARNING: zero value");
+    ShowLo(szZero); DelayInf(); Clear();
+    MonitorString(" WARNING: value 0");
     return REVIEW_WRN_ZERO;
   }
 
   if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == wPrev)) {
-    Clear(); strcpy(szLo+4, "повтор ?"); DelayInf(); Clear();
+    ShowLo(szRepeat); DelayInf(); Clear();
     MonitorString(" WARNING: repeat ?");
     return REVIEW_WRN_REPEAT;
   }
 
   if (wCurr > wReviewWrnTop) {
-    Clear(); strcpy(szLo+4, "выброс ?"); DelayInf(); Clear();
+    ShowLo(szTop); DelayInf(); Clear();
     MonitorString(" WARNING: value > "); MonitorIntDec(wReviewWrnTop);
     return REVIEW_WRN_TOP;
   }
@@ -41,13 +50,13 @@ static review_wrn WarningInner(uint  wPrev, uint  wCurr)
   ulong dwCurrMin = wPrev*(100 - bReviewWrnTrend) / 100;
 
   if ((cwNextBuff > 1) && (wCurr > dwCurrMax)) {
-    Clear(); strcpy(szLo+4, "пик ?"); DelayInf(); Clear();
+    ShowLo(szTrendTop); DelayInf(); Clear();
     MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_TOP;
   }
 
   if ((cwNextBuff > 1) && (wCurr < dwCurrMin)) {
-    Clear(); strcpy(szLo+4, "провал ?"); DelayInf(); Clear();
+    ShowLo(szTrendBottom); DelayInf(); Clear();
     MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_BOTTOM;
   }
