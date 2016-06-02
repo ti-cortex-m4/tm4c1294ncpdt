@@ -33,5 +33,7 @@ void OutReview(void)
   for (i=0; i<16; i++)
     wSize += PushIntBig(mcwReviewWarnings[i]);
 
+  wSize += PushBool(boShortProfileC);
+
   Output(wSize);
 }
