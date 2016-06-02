@@ -28,7 +28,7 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
-  if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == 0)) {
+  if ((wPrev != 0) && (wCurr == 0)) {
     ShowLo(szZero); DelayInf(); Clear();
     MonitorString(" WARNING: value 0");
     return REVIEW_WRN_ZERO;
@@ -43,13 +43,13 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
   ulong dwCurrMax = wPrev*(100 + bReviewWrnTrend) / 100;
   ulong dwCurrMin = wPrev*(100 - bReviewWrnTrend) / 100;
 
-  if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr > dwCurrMax)) {
+  if ((wPrev != 0) && (wCurr > dwCurrMax)) {
     ShowLo(szTrendTop); DelayInf(); Clear();
     MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_TOP;
   }
 
-  if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr < dwCurrMin)) {
+  if ((wPrev != 0) && (wCurr < dwCurrMin)) {
     ShowLo(szTrendBottom); DelayInf(); Clear();
     MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_BOTTOM;
@@ -62,7 +62,7 @@ static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" => "); MonitorIntDec(wCurr);
 
-  if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == wPrev)) {
+  if ((wPrev != 0) && (wCurr == wPrev)) {
     ShowLo(szRepeat); DelayInf(); Clear();
     MonitorString(" WARNING: repeat ?");
     return REVIEW_WRN_REPEAT;
@@ -103,12 +103,12 @@ static bool WarningRepeats(uint  wPrev, uint  wCurr)
 
 static bool WarningReviewBuffX6(void)
 {
+  MonitorString("\n");
+
   uchar i;
   for (i=0; i<4; i++) {
     if (WarningCommon(PrevReviewInt(5*4+i), CurrReviewInt(0*4+i))) return true;
   }
-
-  MonitorString("\n -");
 
   uchar j;
   for (j=0; j<6-1; j++) {
@@ -119,8 +119,6 @@ static bool WarningReviewBuffX6(void)
       if (WarningCommon(CurrReviewInt(j*4+i), CurrReviewInt((j+1)*4+i))) return true;
     }
   }
-
-  MonitorString("\n -");
 
   for (j=0; j<6; j++) {
     MonitorString("\n");

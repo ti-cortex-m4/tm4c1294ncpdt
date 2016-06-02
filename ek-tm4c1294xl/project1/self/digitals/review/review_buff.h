@@ -4,10 +4,6 @@ review_buff.h
 
 ------------------------------------------------------------------------------*/
 
-extern  uint                    cwNextBuff;
-
-
-
 uint PrevReviewInt(uchar  i);
 uint CurrReviewInt(uchar  i);
 
