@@ -19,6 +19,7 @@ void OutReview(void)
   uint wSize = 0;
 
   wSize += PushChar(0); // версия запроса
+
   wSize += PushBool(fReviewFlag);
   wSize += PushBool(fReviewReadId);
   wSize += PushChar(bReviewRepeats);
@@ -27,12 +28,8 @@ void OutReview(void)
   wSize += PushChar(bReviewWrnTrend);
   wSize += PushIntBig(wReviewWrnTop);
 
-  uchar i;
-  for (i=0; i<16; i++)
-    wSize += PushIntBig(mcwReviewEvents[i]);
-
-  for (i=0; i<16; i++)
-    wSize += PushIntBig(mcwReviewWarnings[i]);
+  wSize += PushIntBigArray(mcwReviewEvents, REVIEW_EVENTS_SIZE);
+  wSize += PushIntBigArray(mcwReviewWarnings, REVIEW_EVENTS_SIZE);
 
   wSize += PushBool(boShortProfileC);
 

@@ -163,3 +163,18 @@ void    OutBoolArray(bool  *mpf, uchar  bCount)
   uint wSize = PushBoolArray(mpf,bCount);
   Output(wSize);
 }
+
+
+
+uint    PushIntBigArray(uint  *mpw, uchar  bCount)
+{
+  uint wSize = 0;
+
+  uchar i;
+  for (i=0; i<bCount; i++)
+  {
+    wSize += PushIntBig(mpw[i]);
+  }
+
+  return wSize;
+}

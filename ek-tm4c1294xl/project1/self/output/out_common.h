@@ -18,3 +18,5 @@ uchar   PushStatusFloatOrDouble(status  bStatus, double  db, bool  fDouble);
 
 uint    PushBoolArray(bool  *mpf, uchar  bCount);
 void    OutBoolArray(bool  *mpf, uchar  bCount);
+
+uint    PushIntBigArray(uint  *mpw, uchar  bCount);

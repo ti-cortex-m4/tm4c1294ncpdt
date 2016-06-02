@@ -29,6 +29,10 @@ review.h
 
 
 
+#define REVIEW_EVENTS_SIZE    16
+
+
+
 extern bool                    fReviewFlag;
 extern bool                    fReviewReadId;
 extern uchar                   bReviewRepeats;
@@ -37,8 +41,8 @@ extern uchar                   bReviewMargins;
 extern uchar                   bReviewWrnTrend;
 extern uint                    wReviewWrnTop;
 
-extern uint                    mcwReviewEvents[16];
-extern uint                    mcwReviewWarnings[16];
+extern uint                    mcwReviewEvents[REVIEW_EVENTS_SIZE];
+extern uint                    mcwReviewWarnings[REVIEW_EVENTS_SIZE];
 
 extern cache const             chReviewFlag;
 extern cache const             chReviewReadId;
