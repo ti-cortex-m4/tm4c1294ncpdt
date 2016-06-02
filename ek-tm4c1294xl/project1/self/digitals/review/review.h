@@ -13,7 +13,7 @@ review.h
 
 #define REVIEW_BORDERS_MIN    1
 #define REVIEW_BORDERS_MAX    5
-#define REVIEW_BORDERS_DEF    5
+#define REVIEW_BORDERS_DEF    3
 
 #define REVIEW_MARGINS_MIN    10
 #define REVIEW_MARGINS_MAX    50
