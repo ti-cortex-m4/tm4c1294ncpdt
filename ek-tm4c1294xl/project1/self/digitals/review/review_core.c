@@ -52,7 +52,7 @@ static void Show(void)
 
 
 
-static review_code ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bSize)
+static review_code ReadReview2(uchar  ibMin, uchar  ibMax, uchar  bSize)
 {
   if (!UseReview()) {
     return REVIEW_SUCCESS;
@@ -95,7 +95,7 @@ static review_code ReadReviewInner(uchar  ibMin, uchar  ibMax, uchar  bSize)
 
 static review_code ReadReview(uchar  ibMin, uchar  ibMax, uchar  bSize)
 {
-  review_code rc = ReadReviewInner(ibMin, ibMax, bSize);
+  review_code rc = ReadReview2(ibMin, ibMax, bSize);
 
   if ((rc == REVIEW_REPEAT) && (fIdRepeat == true)) {
     rc = REVIEW_ID_REPEAT;
