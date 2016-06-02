@@ -16,11 +16,11 @@ review_warning.c
 
 
 //                                         0123456789ABCDEF
-static char const       szZero[]        = "      ноль ?    ",
+static char const       szZero[]        = "   просечка ?   ",
                         szRepeat[]      = "    повтор ?    ",
-                        szTop[]         = " абс. выброс ?  ",
-                        szTrendTop[]    = " отн. выброс ?  ",
-                        szTrendBottom[] = " отн. провал ?  ";
+                        szTop[]         = "    выброс ?    ",
+                        szTrendTop[]    = "  повышение ?   ",
+                        szTrendBottom[] = "  понижение ?   ";
 
 
 
