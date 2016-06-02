@@ -19,8 +19,8 @@ uchar                   bReviewMargins;
 uchar                   bReviewWrnTrend;
 uint                    wReviewWrnTop;
 
-uint                    mcwReviewEvents[16];
-uint                    mcwReviewWarnings[16];
+uint                    mcwReviewEvents[REVIEW_EVENTS_SIZE];
+uint                    mcwReviewWarnings[REVIEW_EVENTS_SIZE];
 
 cache const             chReviewFlag = {REVIEW_FLAG, &fReviewFlag, sizeof(bool)};
 cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof(bool)};
