@@ -22,7 +22,6 @@ review_buff.c
 
 static uchar            mmbBuff[REVIEW_BUFF_COUNT][REVIEW_BUFF_SIZE];
 static uchar            ibBuff;
-uint                    cwNextBuff;
 
 
 
@@ -56,8 +55,6 @@ void StartReviewBuff(void)
 
   memset(&mmbBuff, 0, sizeof(mmbBuff));
   ibBuff = 0;
-
-  cwNextBuff = 0;
 }
 
 
@@ -76,8 +73,6 @@ void NextReviewBuff(void)
 
   ibBuff = ++ibBuff % REVIEW_BUFF_COUNT;
   memset(&mmbBuff[CurrIdx()], 0, REVIEW_BUFF_SIZE);
-
-  cwNextBuff++;
 }
 
 
@@ -124,7 +119,6 @@ void OutReviewBuff(void)
   wSize += PushChar(CurrIdx());
   wSize += PushChar(PrevIdx());
   wSize += Push(&mmbBuff, sizeof(mmbBuff));
-  wSize += PushIntBig(cwNextBuff);
 
   Output(wSize);
 }
