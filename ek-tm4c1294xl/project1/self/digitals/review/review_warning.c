@@ -43,13 +43,13 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
   ulong dwCurrMax = wPrev*(100 + bReviewWrnTrend) / 100;
   ulong dwCurrMin = wPrev*(100 - bReviewWrnTrend) / 100;
 
-  if ((cwNextBuff > 1) && (wCurr > dwCurrMax)) {
+  if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr > dwCurrMax)) {
     ShowLo(szTrendTop); DelayInf(); Clear();
     MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_TOP;
   }
 
-  if ((cwNextBuff > 1) && (wCurr < dwCurrMin)) {
+  if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr < dwCurrMin)) {
     ShowLo(szTrendBottom); DelayInf(); Clear();
     MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_BOTTOM;
@@ -70,6 +70,7 @@ static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr)
 
   return REVIEW_WRN_OK;
 }
+
 
 static bool WarningCommon(uint  wPrev, uint  wCurr)
 {
@@ -98,6 +99,7 @@ static bool WarningRepeats(uint  wPrev, uint  wCurr)
 
   return false;
 }
+
 
 static bool WarningReviewBuffX6(void)
 {
