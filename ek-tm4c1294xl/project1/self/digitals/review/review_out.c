@@ -5,6 +5,7 @@ review_out.c
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_digitals.h"
 #include "../../serial/ports_common.h"
 #include "../../serial/ports.h"
 #include "review.h"
