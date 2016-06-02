@@ -24,7 +24,7 @@ static char const       szZero[]        = "      ноль ?    ",
 
 
 
-static review_wrn WarningCommonInner(uint  wPrev, uint  wCurr)
+static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
@@ -33,12 +33,6 @@ static review_wrn WarningCommonInner(uint  wPrev, uint  wCurr)
     MonitorString(" WARNING: value 0");
     return REVIEW_WRN_ZERO;
   }
-
-//  if ((cwNextBuff > 1) && (wPrev != 0) && (wCurr == wPrev)) {
-//    ShowLo(szRepeat); DelayInf(); Clear();
-//    MonitorString(" WARNING: repeat ?");
-//    return REVIEW_WRN_REPEAT;
-//  }
 
   if (wCurr > wReviewWrnTop) {
     ShowLo(szTop); DelayInf(); Clear();
@@ -64,7 +58,7 @@ static review_wrn WarningCommonInner(uint  wPrev, uint  wCurr)
   return REVIEW_WRN_OK;
 }
 
-static review_wrn WarningRepeatsInner(uint  wPrev, uint  wCurr)
+static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" => "); MonitorIntDec(wCurr);
 
@@ -79,7 +73,7 @@ static review_wrn WarningRepeatsInner(uint  wPrev, uint  wCurr)
 
 static bool WarningCommon(uint  wPrev, uint  wCurr)
 {
-  review_wrn rw = WarningCommonInner(wPrev, wCurr);
+  review_wrn rw = WarningCommon2(wPrev, wCurr);
   if (rw != REVIEW_WRN_OK) {
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
@@ -93,7 +87,7 @@ static bool WarningCommon(uint  wPrev, uint  wCurr)
 
 static bool WarningRepeats(uint  wPrev, uint  wCurr)
 {
-  review_wrn rw = WarningRepeatsInner(wPrev, wCurr);
+  review_wrn rw = WarningRepeats2(wPrev, wCurr);
   if (rw != REVIEW_WRN_OK) {
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
@@ -105,7 +99,7 @@ static bool WarningRepeats(uint  wPrev, uint  wCurr)
   return false;
 }
 
-static bool WarningReviewBuff6(void)
+static bool WarningReviewBuffX6(void)
 {
   uchar i;
   for (i=0; i<4; i++) {
@@ -138,7 +132,7 @@ static bool WarningReviewBuff6(void)
   return false;
 }
 
-static bool WarningReviewBuff1(void)
+static bool WarningReviewBuffX1(void)
 {
   MonitorString("\n");
 
@@ -158,8 +152,8 @@ bool WarningReviewBuff(uchar  bSize)
 {
   switch(bSize) {
     case 0: return false;
-    case 6: return WarningReviewBuff6();
-    case 1: return WarningReviewBuff1();
+    case 6: return WarningReviewBuffX6();
+    case 1: return WarningReviewBuffX1();
     default: ASSERT(false); return false;
   }
 }
