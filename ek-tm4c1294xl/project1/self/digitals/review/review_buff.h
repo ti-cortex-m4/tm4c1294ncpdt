@@ -8,8 +8,8 @@ extern  uint                    cwNextBuff;
 
 
 
-uint PrevReviewBuff(uchar  i);
-uint CurrReviewBuff(uchar  i);
+uint PrevReviewInt(uchar  i);
+uint CurrReviewInt(uchar  i);
 
 void StartReviewBuff(void);
 void RestartReviewBuff(void);
