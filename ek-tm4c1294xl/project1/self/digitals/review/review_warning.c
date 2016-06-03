@@ -141,6 +141,8 @@ static bool WarningReviewBuffX1(void)
     if (WarningCommon(PrevReviewInt(i), CurrReviewInt(i))) return true;
   }
 
+  MonitorString("\n");
+
   for (i=0; i<4; i++) {
     if (WarningRepeats(PrevReviewInt(i), CurrReviewInt(i))) return true;
   }
