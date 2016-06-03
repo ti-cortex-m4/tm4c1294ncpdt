@@ -11,7 +11,7 @@ review.h
 #define REVIEW_REPEATS_MAX    5
 #define REVIEW_REPEATS_DEF    2
 
-#define REVIEW_BORDERS_MIN    1
+#define REVIEW_BORDERS_MIN    2
 #define REVIEW_BORDERS_MAX    5
 #define REVIEW_BORDERS_DEF    4
 
