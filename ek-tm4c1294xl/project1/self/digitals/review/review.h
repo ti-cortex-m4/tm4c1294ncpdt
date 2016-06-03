@@ -7,13 +7,13 @@ review.h
 #ifndef __REVIEW
 #define __REVIEW
 
-#define REVIEW_REPEATS_MIN    1
+#define REVIEW_REPEATS_MIN    2
 #define REVIEW_REPEATS_MAX    5
-#define REVIEW_REPEATS_DEF    1
+#define REVIEW_REPEATS_DEF    2
 
 #define REVIEW_BORDERS_MIN    1
 #define REVIEW_BORDERS_MAX    5
-#define REVIEW_BORDERS_DEF    3
+#define REVIEW_BORDERS_DEF    4
 
 #define REVIEW_MARGINS_MIN    10
 #define REVIEW_MARGINS_MAX    50
