@@ -117,6 +117,20 @@ uchar   PushBool(bool  f)
 }
 
 
+uint    PushBoolArray(bool  *mpf, uchar  bCount)
+{
+  uint wSize = 0;
+
+  uchar i;
+  for (i=0; i<bCount; i++)
+  {
+    wSize += PushBool(mpf[i]);
+  }
+
+  return wSize;
+}
+
+
 uchar   PushIntBig(uint  w)
 {
   PushChar(w / 0x100);
