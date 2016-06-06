@@ -23,9 +23,9 @@ review.h
 #define REVIEW_WRN_TREND_MAX  1000
 #define REVIEW_WRN_TREND_DEF  100
 
-#define REVIEW_WRN_TOP_MIN    100
+#define REVIEW_WRN_TOP_MIN    1
 #define REVIEW_WRN_TOP_MAX    0xFFFF
-#define REVIEW_WRN_TOP_DEF    30000
+#define REVIEW_WRN_TOP_DEF    0x7FFF
 
 
 
