@@ -69,7 +69,7 @@ void    InitExtended1(void)
 }
 
 
-void    ResetExtended1(void)
+void    ResetExtended1(bool  fFull)
 {
   memset(&mpdbEsc_S, 0, sizeof(mpdbEsc_S));
   SaveCache(&chEscS_Value);
@@ -92,14 +92,12 @@ void    ResetExtended1(void)
   SaveCache(&chEscU_Time);
 
 
-  boDsblEscU = false;
-  SaveCache(&chDsblEscU);
-
-  boDsblEscV = false;
-  SaveCache(&chDsblEscV);
-
-  boDsblEscS = false;
-  SaveCache(&chDsblEscS);
+  if (fFull)
+  {
+    SaveCacheBool(&chDsblEscU, false);
+    SaveCacheBool(&chDsblEscV, false);
+    SaveCacheBool(&chDsblEscS, false);
+  }
 
 
   boMntEscS = false;
