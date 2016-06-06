@@ -19,23 +19,33 @@ review_warning.c
 static char const       szZero[]        = "   просечка ?   ",
                         szRepeat[]      = "    повтор ?    ",
                         szTop[]         = "    выброс ?    ",
-                        szTrendTop[]    = "  повышение ?   ",
-                        szTrendBottom[] = "  понижение ?   ";
+                        szTrendTop[]    = " повышение %3u%% ",
+                        szTrendBottom[] = " понижение %3u%% ";
 
 
+
+static void Show(char const  *sz)
+{
+  ShowLo(sz); DelayInf(); Clear();
+}
+
+static void ShowTrend(char const  *sz, uint  wPercent)
+{
+  sprintf(szLo, sz, wPercent); DelayInf(); Clear();
+}
 
 static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == 0)) {
-    ShowLo(szZero); DelayInf(); Clear();
+    Show(szZero);
     MonitorString(" WARNING: value 0");
     return REVIEW_WRN_ZERO;
   }
 
   if (wCurr > wReviewWrnTop) {
-    ShowLo(szTop); DelayInf(); Clear();
+    Show(szTop);
     MonitorString(" WARNING: value > "); MonitorIntDec(wReviewWrnTop);
     return REVIEW_WRN_TOP;
   }
@@ -44,13 +54,14 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
   ulong dwCurrMin = wPrev*(100 - bReviewWrnTrend) / 100;
 
   if ((wPrev != 0) && (wCurr > dwCurrMax)) {
-    ShowLo(szTrendTop); DelayInf(); Clear();
+    ulong dwPercent = (ulong)100*wCurr/wPrev - 100;
+    ShowTrend(szTrendTop, dwPercent);
     MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_TOP;
   }
 
   if ((wPrev != 0) && (wCurr < dwCurrMin)) {
-    ShowLo(szTrendBottom); DelayInf(); Clear();
+    Show(szTrendBottom);
     MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(bReviewWrnTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_BOTTOM;
   }
@@ -63,7 +74,7 @@ static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr)
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" => "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == wPrev)) {
-    ShowLo(szRepeat); DelayInf(); Clear();
+    Show(szRepeat);
     MonitorString(" WARNING: repeat ?");
     return REVIEW_WRN_REPEAT;
   }
