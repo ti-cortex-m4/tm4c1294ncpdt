@@ -19,7 +19,7 @@ review_warning.c
 static char const       szZero[]        = "   просечка ?   ",
                         szRepeat[]      = "    повтор ?    ",
                         szTop[]         = "    выброс ?    ",
-                        szTrendTop[]    = " повышение %3f%% ",
+                        szTrendTop[]    = " повышение %u%%   ",
                         szTrendBottom[] = " понижение ?    ";
 
 
@@ -29,10 +29,10 @@ static void Show(char const  *sz)
   ShowLo(sz); DelayInf(); Clear();
 }
 
-static void ShowTrend(char const  *sz, float  flPercent)
+static void ShowTrend(char const  *sz, uint  wPercent)
 {
-  if (flPercent > 999) flPercent = 999;
-  sprintf(szLo, sz, flPercent); DelayInf(); Clear();
+  if (wPercent > 999) wPercent = 999;
+  sprintf(szLo, sz, wPercent); DelayInf(); Clear();
 }
 
 static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
@@ -55,14 +55,16 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
   ulong dwCurrMin = wPrev*(100 - wReviewWrnTrend) / 100;
 
   if ((wPrev != 0) && (wCurr > dwCurrMax)) {
-    ShowTrend(szTrendTop, (float)100*(wCurr/wPrev - 1));
-    MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(wReviewWrnTrend); MonitorString("%%");
+    ulong dwTrend = (ulong)100*wCurr/wPrev - (ulong)100;
+    ShowTrend(szTrendTop, dwTrend);
+    MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_TOP;
   }
 
   if ((wPrev != 0) && (wCurr < dwCurrMin)) {
-    Show(szTrendBottom);
-    MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(wReviewWrnTrend); MonitorString("%%");
+    ulong dwTrend = (ulong)100 - (ulong)100*wCurr/wPrev;
+    ShowTrend(szTrendBottom, dwTrend);
+    MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
     return REVIEW_WRN_TREND_BOTTOM;
   }
 
