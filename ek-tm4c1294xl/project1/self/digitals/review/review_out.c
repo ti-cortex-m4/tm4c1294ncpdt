@@ -25,7 +25,7 @@ void OutReview(void)
   wSize += PushChar(bReviewRepeats);
   wSize += PushChar(bReviewBorders);
   wSize += PushChar(bReviewMargins);
-  wSize += PushChar(bReviewWrnTrend);
+  wSize += PushIntBig(wReviewWrnTrend);
   wSize += PushIntBig(wReviewWrnTop);
 
   wSize += PushIntBigArray(mcwReviewEvents, REVIEW_EVENTS_SIZE);

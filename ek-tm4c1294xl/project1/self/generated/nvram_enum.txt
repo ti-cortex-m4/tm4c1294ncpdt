@@ -268,7 +268,7 @@ typedef enum
   REVIEW_BORDERS        = REVIEW_REPEATS + sizeof(uchar) + bNVRAM_MARGIN,
   REVIEW_MARGINS        = REVIEW_BORDERS + sizeof(uchar) + bNVRAM_MARGIN,
   REVIEW_WRN_TREND      = REVIEW_MARGINS + sizeof(uchar) + bNVRAM_MARGIN,
-  REVIEW_WRN_TOP        = REVIEW_WRN_TREND + sizeof(uchar) + bNVRAM_MARGIN,
+  REVIEW_WRN_TOP        = REVIEW_WRN_TREND + sizeof(uint) + bNVRAM_MARGIN,
 
   NVRAM_END             = REVIEW_WRN_TOP + sizeof(uint) + bNVRAM_MARGIN
 } nvram;
