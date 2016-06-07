@@ -24,28 +24,32 @@ static char const       szZero[]        = "   просечка ?   ",
 
 
 
-static void Show(char const  *sz)
+static void Show(char const  *sz, uchar  i)
 {
-  ShowLo(sz); DelayInf(); Clear();
+  ShowLo(sz);
+  sprintf(szLo+15, "%u", i+1);
+  DelayInf(); Clear();
 }
 
-static void ShowTrend(char const  *sz, uint  wPercent)
+static void ShowTrend(char const  *sz, uint  wPercent, uchar  i)
 {
-  sprintf(szLo, sz, wPercent); DelayInf(); Clear();
+  sprintf(szLo, sz, wPercent);
+  sprintf(szLo+15, "%u", i+1);
+  DelayInf(); Clear();
 }
 
-static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
+static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  i)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == 0)) {
-    Show(szZero);
+    Show(szZero, i);
     MonitorString(" WARNING: value 0");
     return REVIEW_WRN_ZERO;
   }
 
   if (wCurr > wReviewWrnTop) {
-    Show(szTop);
+    Show(szTop, i);
     MonitorString(" WARNING: value > "); MonitorIntDec(wReviewWrnTop);
     return REVIEW_WRN_TOP;
   }
@@ -56,14 +60,14 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
 
     if (wCurr > dwCurrMax) {
       ulong dwTrend = (ulong)wCurr*100/wPrev;
-      ShowTrend(szTrendTop, dwTrend);
+      ShowTrend(szTrendTop, dwTrend, i);
       MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
       return REVIEW_WRN_TREND_TOP;
     }
 
     if ((wPrev != 0) && (wCurr < dwCurrMin)) {
       ulong dwTrend = (ulong)wPrev*100/wCurr;
-      ShowTrend(szTrendBottom, dwTrend);
+      ShowTrend(szTrendBottom, dwTrend, i);
       MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
       return REVIEW_WRN_TREND_BOTTOM;
     }
@@ -72,12 +76,12 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
   return REVIEW_WRN_OK;
 }
 
-static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr)
+static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr, uchar  i)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" => "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == wPrev)) {
-    Show(szRepeat);
+    Show(szRepeat, i);
     MonitorString(" WARNING: repeat ?");
     return REVIEW_WRN_REPEAT;
   }
@@ -86,9 +90,9 @@ static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr)
 }
 
 
-static bool WarningCommon(uint  wPrev, uint  wCurr)
+static bool WarningCommon(uint  wPrev, uint  wCurr, uchar  i)
 {
-  review_wrn rw = WarningCommon2(wPrev, wCurr);
+  review_wrn rw = WarningCommon2(wPrev, wCurr, i);
   if (rw != REVIEW_WRN_OK) {
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
@@ -100,9 +104,9 @@ static bool WarningCommon(uint  wPrev, uint  wCurr)
   return false;
 }
 
-static bool WarningRepeats(uint  wPrev, uint  wCurr)
+static bool WarningRepeats(uint  wPrev, uint  wCurr, uchar  i)
 {
-  review_wrn rw = WarningRepeats2(wPrev, wCurr);
+  review_wrn rw = WarningRepeats2(wPrev, wCurr, i);
   if (rw != REVIEW_WRN_OK) {
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
@@ -121,7 +125,7 @@ static bool WarningReviewBuffX6(void)
 
   uchar i;
   for (i=0; i<4; i++) {
-    if (WarningCommon(PrevReviewInt(5*4+i), CurrReviewInt(0*4+i))) return true;
+    if (WarningCommon(PrevReviewInt(5*4+i), CurrReviewInt(0*4+i), i)) return true;
   }
 
   uchar j;
@@ -130,7 +134,7 @@ static bool WarningReviewBuffX6(void)
 
     uchar i;
     for (i=0; i<4; i++) {
-      if (WarningCommon(CurrReviewInt(j*4+i), CurrReviewInt((j+1)*4+i))) return true;
+      if (WarningCommon(CurrReviewInt(j*4+i), CurrReviewInt((j+1)*4+i), i)) return true;
     }
   }
 
@@ -139,7 +143,7 @@ static bool WarningReviewBuffX6(void)
 
     uchar i;
     for (i=0; i<4; i++) {
-      if (WarningRepeats(PrevReviewInt(j*4+i), CurrReviewInt(j*4+i))) return true;
+      if (WarningRepeats(PrevReviewInt(j*4+i), CurrReviewInt(j*4+i), i)) return true;
     }
   }
 
@@ -152,13 +156,13 @@ static bool WarningReviewBuffX1(void)
 
   uchar i;
   for (i=0; i<4; i++) {
-    if (WarningCommon(PrevReviewInt(i), CurrReviewInt(i))) return true;
+    if (WarningCommon(PrevReviewInt(i), CurrReviewInt(i), i)) return true;
   }
 
   MonitorString("\n");
 
   for (i=0; i<4; i++) {
-    if (WarningRepeats(PrevReviewInt(i), CurrReviewInt(i))) return true;
+    if (WarningRepeats(PrevReviewInt(i), CurrReviewInt(i), i)) return true;
   }
 
   return false;
