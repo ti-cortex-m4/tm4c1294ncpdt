@@ -12,6 +12,7 @@ review.c
 
 
 bool                    fReviewFlag;
+bool                    mfReviewCan[bCANALS];
 bool                    fReviewReadId;
 uchar                   bReviewRepeats;
 uchar                   bReviewBorders;
@@ -23,6 +24,7 @@ uint                    mcwReviewEvents[REVIEW_EVENTS_SIZE];
 uint                    mcwReviewWarnings[REVIEW_EVENTS_SIZE];
 
 cache const             chReviewFlag = {REVIEW_FLAG, &fReviewFlag, sizeof(bool)};
+cache const             chReviewCan = {REVIEW_CAN, &mfReviewCan, sizeof(mfReviewCan)};
 cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof(bool)};
 cache const             chReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, sizeof(uchar)};
 cache const             chReviewBorders = {REVIEW_BORDERS, &bReviewBorders, sizeof(uchar)};
@@ -35,6 +37,7 @@ cache const             chReviewWrnTop = {REVIEW_WRN_TOP, &wReviewWrnTop, sizeof
 void InitReview(void)
 {
   LoadCacheBool(&chReviewFlag, false);
+  LoadCache(&chEnblCan);
   LoadCacheBool(&chReviewReadId, false);
   LoadCacheChar(&chReviewRepeats, REVIEW_REPEATS_MIN, REVIEW_REPEATS_MAX, REVIEW_REPEATS_DEF);
   LoadCacheChar(&chReviewBorders, REVIEW_BORDERS_MIN, REVIEW_BORDERS_MAX, REVIEW_BORDERS_DEF);
@@ -52,6 +55,13 @@ void ResetReview(bool  fFull)
   if (fFull)
   {
     SaveCacheBool(&chReviewFlag, false);
+
+    uchar c;
+    for (c=0; c<bCANALS; c++)
+      mfReviewCan[c] = false;
+
+    SaveCache(&chReviewCan);
+
     SaveCacheBool(&chReviewReadId, false);
     SaveCacheChar(&chReviewRepeats, REVIEW_REPEATS_DEF);
     SaveCacheChar(&chReviewBorders, REVIEW_BORDERS_DEF);
