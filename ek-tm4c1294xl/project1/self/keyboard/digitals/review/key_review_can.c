@@ -51,7 +51,7 @@ static uchar c;
 
         Canal();
       }
-      else BlockProgram(wSET_REVIEW_FLAG);
+      else BlockProgram2(wSET_REVIEW_FLAG, false);
     }
     else if (enKeyboard == KBD_INPUT1)
     {
