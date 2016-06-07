@@ -29,7 +29,7 @@ cache const             chReviewReadId = {REVIEW_READ_ID, &fReviewReadId, sizeof
 cache const             chReviewRepeats = {REVIEW_REPEATS, &bReviewRepeats, sizeof(uchar)};
 cache const             chReviewBorders = {REVIEW_BORDERS, &bReviewBorders, sizeof(uchar)};
 cache const             chReviewMargins = {REVIEW_MARGINS, &bReviewMargins, sizeof(uchar)};
-cache const             chReviewWrnTrend = {REVIEW_WRN_TREND, &wReviewWrnTrend, sizeof(uchar)};
+cache const             chReviewWrnTrend = {REVIEW_WRN_TREND, &wReviewWrnTrend, sizeof(uint)};
 cache const             chReviewWrnTop = {REVIEW_WRN_TOP, &wReviewWrnTop, sizeof(uint)};
 
 
