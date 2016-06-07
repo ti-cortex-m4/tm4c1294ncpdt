@@ -44,10 +44,14 @@ static uchar c;
   {
     if (enKeyboard == KBD_ENTER)
     {
-      enKeyboard = KBD_INPUT1;
-      LoadSlide(pszMessages);
+      if (fReviewFlag == true)
+      {
+        enKeyboard = KBD_INPUT1;
+        LoadSlide(pszMessages);
 
-      Canal();
+        Canal();
+      }
+      else BlockProgram(wSET_REVIEW_FLAG);
     }
     else if (enKeyboard == KBD_INPUT1)
     {
