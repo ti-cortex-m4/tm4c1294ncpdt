@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------
-review_line.c
+review_can.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
 #include "review.h"
-#include "review_line.h"
+#include "review_can.h"
 
 
 
-uchar                   mbRevewLine[4];
+uchar                   mbRevewCanIdx[4];
 
 
 

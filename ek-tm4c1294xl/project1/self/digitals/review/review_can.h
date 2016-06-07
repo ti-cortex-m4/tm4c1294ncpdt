@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------
-review_line.h
+review_can.h
 
 
 ------------------------------------------------------------------------------*/
 
-extern uchar                   mbRevewLine[4];
+extern uchar                   mbRevewCanIdx[4];
 
 
 
-void StartReviewLine(void)
+void StartReviewCan(void)
