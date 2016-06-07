@@ -28,6 +28,8 @@ void OutReview(void)
   wSize += PushIntBig(wReviewWrnTrend);
   wSize += PushIntBig(wReviewWrnTop);
 
+  wSize += PushBoolArray(mfReviewCan, bCANALS);
+
   wSize += PushIntBigArray(mcwReviewEvents, REVIEW_EVENTS_SIZE);
   wSize += PushIntBigArray(mcwReviewWarnings, REVIEW_EVENTS_SIZE);
 
