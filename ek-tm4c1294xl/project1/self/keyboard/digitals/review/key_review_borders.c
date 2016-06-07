@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-key_review_margins.c
+key_review_borders.c
 
 
 ------------------------------------------------------------------------------*/
@@ -7,12 +7,12 @@ key_review_margins.c
 #include "../../../console.h"
 #include "../../../digitals/review/review.h"
 #include "../../common/key_char_blocked.h"
-#include "key_review_margins.h"
+#include "key_review_borders.h"
 
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = "  Максимальное  ",
+static char const       szMessage1[]    = "  Проверочное   ",
                         szMessage2[]    = "   количество   ",
                         szMessage3[]    = "  повторов при  ",
                         szMessage4[]    = "чтении профилей ";
@@ -21,7 +21,7 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 
 
-void    key_SetReviewMargins(void)
+void    key_SetReviewBorders(void)
 {
-  key_SetCharBlocked(&chReviewMargins, pszMessages, REVIEW_MARGINS_MIN, REVIEW_MARGINS_MAX, fReviewFlag, wSET_REVIEW_FLAG);
+  key_SetCharBlocked(&chReviewBorders, pszMessages, REVIEW_BORDERS_MIN, REVIEW_BORDERS_MAX, fReviewFlag, wSET_REVIEW_FLAG);
 }

@@ -310,9 +310,14 @@ PROGRAMS!H
 #define wSET_MAX_SHUTDOWN           423
 #define wSET_CONTROL_W              424
 
-#define wSET_REVIEW_READ_ID         440
-#define wSET_REVIEW_REPEATS         441
-#define wSET_REVIEW_MARGINS         442
+#define wSET_REVIEW_FLAG            440
+#define wSET_REVIEW_CAN             441
+#define wSET_REVIEW_READ_ID         442
+#define wSET_REVIEW_REPEATS         443
+#define wSET_REVIEW_BORDERS         444
+#define wSET_REVIEW_MARGINS         445
+#define wSET_REVIEW_WRN_TREND       446
+#define wSET_REVIEW_WRN_TOP         447
 
 #define wSET_DSBL_ESC               410
 

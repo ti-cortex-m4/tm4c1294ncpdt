@@ -185,6 +185,7 @@
         InitHeaderC6();
 
         StartReview();
+        RestartReview();
         MakePause(DEV_DATA_6_C2);
       }
       else
@@ -192,6 +193,7 @@
         InitHeaderC1();
 
         StartReview();
+        RestartReview();
         MakePause(DEV_DATA_1_C2);
       }
       break;
@@ -261,11 +263,15 @@
           MakePause(DEV_DATA_6_C2);
           break;
         }
+        case REVIEW_ID_REPEAT: {
+          MakePause(DEV_ID_6_C2);
+          break;
+        }
         case REVIEW_SUCCESS: {
           if (ReadHeaderC6() == 0)
             DoneProfile();
           else {
-            StartReview();
+            RestartReview();
             if (fReviewReadId == true)
               MakePause(DEV_ID_6_C2);
             else
@@ -379,11 +385,15 @@
           MakePause(DEV_DATA_1_C2);
           break;
         }
+        case REVIEW_ID_REPEAT: {
+          MakePause(DEV_ID_1_C2);
+          break;
+        }
         case REVIEW_SUCCESS: {
           if (ReadHeaderC1_Shutdown() == 0)
             DoneProfile();
           else {
-            StartReview();
+            RestartReview();
             if (fReviewReadId == true)
               MakePause(DEV_ID_1_C2);
             else
@@ -406,11 +416,15 @@
             MakePause(DEV_DATA_1_C2);
             break;
           }
+          case REVIEW_ID_REPEAT: {
+            MakePause(DEV_ID_1_C2);
+            break;
+          }
           case REVIEW_SUCCESS: {
             if (ReadHeaderC1() == 0)
               DoneProfile();
             else {
-              StartReview();
+              RestartReview();
               if (fReviewReadId == true)
                 MakePause(DEV_ID_1_C2);
               else

@@ -21,6 +21,6 @@ extern  cache const             chExtendedEscS;
 
 
 void    InitExtended1(void);
-void    ResetExtended1(void);
+void    ResetExtended1(bool  fFull);
 
 void    MakeExtended1(void);
