@@ -11,6 +11,7 @@ review_warning.c
 #include "review.h"
 #include "review_core.h"
 #include "review_buff.h"
+#include "review_can.h"
 #include "review_warning.h"
 
 
@@ -24,32 +25,32 @@ static char const       szZero[]        = "   просечка ?   ",
 
 
 
-static void Show(char const  *sz, uchar  i)
+static void Show(char const  *sz, uchar  c)
 {
   ShowLo(sz);
-  sprintf(szLo+15, "%u", i+1);
+  sprintf(szLo+14, "%2u", c+1);
   DelayInf(); Clear();
 }
 
-static void ShowTrend(char const  *sz, uint  wPercent, uchar  i)
+static void ShowTrend(char const  *sz, uint  wPercent, uchar  c)
 {
   sprintf(szLo, sz, wPercent);
-  sprintf(szLo+15, "%u", i+1);
+  sprintf(szLo+14, "%2u", c+1);
   DelayInf(); Clear();
 }
 
-static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  i)
+static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  c)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" -> "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == 0)) {
-    Show(szZero, i);
+    Show(szZero, c);
     MonitorString(" WARNING: value 0");
     return REVIEW_WRN_ZERO;
   }
 
   if (wCurr > wReviewWrnTop) {
-    Show(szTop, i);
+    Show(szTop, c);
     MonitorString(" WARNING: value > "); MonitorIntDec(wReviewWrnTop);
     return REVIEW_WRN_TOP;
   }
@@ -60,14 +61,14 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  i)
 
     if (wCurr > dwCurrMax) {
       ulong dwTrend = (ulong)wCurr*100/wPrev;
-      ShowTrend(szTrendTop, dwTrend, i);
+      ShowTrend(szTrendTop, dwTrend, c);
       MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
       return REVIEW_WRN_TREND_TOP;
     }
 
     if ((wPrev != 0) && (wCurr < dwCurrMin)) {
       ulong dwTrend = (ulong)wPrev*100/wCurr;
-      ShowTrend(szTrendBottom, dwTrend, i);
+      ShowTrend(szTrendBottom, dwTrend, c);
       MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
       return REVIEW_WRN_TREND_BOTTOM;
     }
@@ -76,12 +77,12 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr, uchar  i)
   return REVIEW_WRN_OK;
 }
 
-static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr, uchar  i)
+static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr, uchar  c)
 {
   MonitorString(" "); MonitorIntDec(wPrev); MonitorString(" => "); MonitorIntDec(wCurr);
 
   if ((wPrev != 0) && (wCurr == wPrev)) {
-    Show(szRepeat, i);
+    Show(szRepeat, c);
     MonitorString(" WARNING: repeat ?");
     return REVIEW_WRN_REPEAT;
   }
@@ -92,7 +93,11 @@ static review_wrn WarningRepeats2(uint  wPrev, uint  wCurr, uchar  i)
 
 static bool WarningCommon(uint  wPrev, uint  wCurr, uchar  i)
 {
-  review_wrn rw = WarningCommon2(wPrev, wCurr, i);
+  uchar c = mbRevewCanIdx[i];
+  if (c == 0xFF) return false;
+  if (mfReviewCan[c] != true) return false;
+
+  review_wrn rw = WarningCommon2(wPrev, wCurr, c);
   if (rw != REVIEW_WRN_OK) {
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
@@ -106,7 +111,11 @@ static bool WarningCommon(uint  wPrev, uint  wCurr, uchar  i)
 
 static bool WarningRepeats(uint  wPrev, uint  wCurr, uchar  i)
 {
-  review_wrn rw = WarningRepeats2(wPrev, wCurr, i);
+  uchar c = mbRevewCanIdx[i];
+  if (c == 0xFF) return false;
+  if (mfReviewCan[c] != true) return false;
+
+  review_wrn rw = WarningRepeats2(wPrev, wCurr, c);
   if (rw != REVIEW_WRN_OK) {
     bMaxRepeats = bReviewBorders;
     fIdRepeat = true;
