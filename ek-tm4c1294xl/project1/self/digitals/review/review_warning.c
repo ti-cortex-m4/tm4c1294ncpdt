@@ -17,9 +17,9 @@ review_warning.c
 
 
 //                                         0123456789ABCDEF
-static char const       szZero[]        = "   просечка ?   ",
-                        szRepeat[]      = "    повтор ?    ",
-                        szTop[]         = "    выброс ?    ",
+static char const       szZero[]        = "  просечка ?    ",
+                        szRepeat[]      = "   повтор ?     ",
+                        szTop[]         = "   выброс ?     ",
                         szTrendTop[]    = "   рост %u%%     ",
                         szTrendBottom[] = "   спад %u%%     ";
 
