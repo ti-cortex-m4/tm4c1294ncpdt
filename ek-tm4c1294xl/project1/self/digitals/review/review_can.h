@@ -8,4 +8,4 @@ extern uchar                   mbRevewCanIdx[4];
 
 
 
-void StartReviewCan(void)
+void StartReviewCan(uchar  ibDig);

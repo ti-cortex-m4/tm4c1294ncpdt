@@ -8,9 +8,11 @@ review_core.c
 #include "../../display/display.h"
 #include "../../time/delay.h"
 #include "../../serial/monitor.h"
+#include "../../devices/devices.h"
 #include "review.h"
 #include "review_buff.h"
 #include "review_core.h"
+#include "review_can.h"
 #include "review_warning.h"
 
 
@@ -25,6 +27,7 @@ bool                    fIdRepeat;
 void StartReview(void)
 {
   StartReviewBuff();
+  StartReviewCan(ibDig);
 }
 
 void RestartReview(void)
