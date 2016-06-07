@@ -10,15 +10,23 @@ review_core.h
 typedef enum
 {
   REVIEW_REPEAT         = 0,
-  REVIEW_SUCCESS        = 1,
-  REVIEW_ERROR          = 2,
-} review;
+  REVIEW_ID_REPEAT      = 1,
+  REVIEW_SUCCESS        = 2,
+  REVIEW_ERROR          = 3,
+} review_code;
+
+
+
+extern  uchar                   bMaxRepeats;
+extern  bool                    fIdRepeat;
 
 
 
 void StartReview(void);
-review ReadReviewC1(void);
-review ReadReviewC1_Shutdown(void);
-review ReadReviewC6(void);
+void RestartReview(void);
+
+review_code ReadReviewC1(void);
+review_code ReadReviewC1_Shutdown(void);
+review_code ReadReviewC6(void);
 
 #endif

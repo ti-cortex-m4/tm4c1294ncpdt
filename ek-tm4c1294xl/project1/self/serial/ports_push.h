@@ -15,6 +15,7 @@ void    InitPushPck(void);
 uint    Push(void  *pbData, uint  wSize);
 uchar   PushChar(uchar  b);
 uchar   PushBool(bool  f);
+uint    PushBoolArray(bool  *mpf, uchar  bCount);
 uchar   PushIntBig(uint  w);
 uchar   PushIntLtl(uint  w);
 uint    PushIntBigArray(uint  *mpw, uint  wCount);

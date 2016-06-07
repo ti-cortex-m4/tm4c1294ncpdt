@@ -25,6 +25,8 @@ RESPONSE252_CRC,C
 #include "../realtime/throughput.h"
 #include "../realtime/period30.h"
 #include "../output/out_digitals.h"
+#include "../digitals/review/review_out.h"
+#include "../digitals/review/review_buff.h"
 
 
 
@@ -71,6 +73,9 @@ void    Response252_CRC(void)
     case 23: OutPeriod30(); break;
 
     case 24: OutKeysExt(); break;
+
+    case 25: OutReview(); break;
+    case 26: OutReviewBuff(); break;
 
     default:
       ShowResponseCRC(bSTA_BADCOMMAND);

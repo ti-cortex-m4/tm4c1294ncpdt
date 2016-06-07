@@ -12,6 +12,7 @@ NVRAM!H
 #include "../kernel/asserts.h"
 #include "../realtime/period30.h"
 #include "../digitals/serials.h"
+#include "../digitals/review/review.h"
 #include "../memory/mem_groups.h"
 #include "../memory/mem_digitals0.h"
 #include "../memory/mem_digitals.h"
