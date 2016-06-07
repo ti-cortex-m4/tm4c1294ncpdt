@@ -19,8 +19,8 @@ review_warning.c
 static char const       szZero[]        = "   просечка ?   ",
                         szRepeat[]      = "    повтор ?    ",
                         szTop[]         = "    выброс ?    ",
-                        szTrendTop[]    = " повышение %u%%   ",
-                        szTrendBottom[] = " понижение ?    ";
+                        szTrendTop[]    = "   рост %u%%     ",
+                        szTrendBottom[] = "   спад %u%%     ";
 
 
 
@@ -31,7 +31,6 @@ static void Show(char const  *sz)
 
 static void ShowTrend(char const  *sz, uint  wPercent)
 {
-  if (wPercent > 999) wPercent = 999;
   sprintf(szLo, sz, wPercent); DelayInf(); Clear();
 }
 
@@ -51,21 +50,23 @@ static review_wrn WarningCommon2(uint  wPrev, uint  wCurr)
     return REVIEW_WRN_TOP;
   }
 
-  ulong dwCurrMax = wPrev*(100 + wReviewWrnTrend) / 100;
-  ulong dwCurrMin = wPrev*(100 - wReviewWrnTrend) / 100;
+  if ((wPrev != 0) && (wCurr != 0)) {
+    ulong dwCurrMax = (ulong)wPrev*wReviewWrnTrend/100;
+    ulong dwCurrMin = (ulong)wPrev*100/wReviewWrnTrend;
 
-  if ((wPrev != 0) && (wCurr > dwCurrMax)) {
-    ulong dwTrend = (ulong)100*wCurr/wPrev - (ulong)100;
-    ShowTrend(szTrendTop, dwTrend);
-    MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
-    return REVIEW_WRN_TREND_TOP;
-  }
+    if (wCurr > dwCurrMax) {
+      ulong dwTrend = (ulong)wCurr*100/wPrev;
+      ShowTrend(szTrendTop, dwTrend);
+      MonitorString(" WARNING: value > "); MonitorLongDec(dwCurrMax); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
+      return REVIEW_WRN_TREND_TOP;
+    }
 
-  if ((wPrev != 0) && (wCurr < dwCurrMin)) {
-    ulong dwTrend = (ulong)100 - (ulong)100*wCurr/wPrev;
-    ShowTrend(szTrendBottom, dwTrend);
-    MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
-    return REVIEW_WRN_TREND_BOTTOM;
+    if ((wPrev != 0) && (wCurr < dwCurrMin)) {
+      ulong dwTrend = (ulong)wPrev*100/wCurr;
+      ShowTrend(szTrendBottom, dwTrend);
+      MonitorString(" WARNING: value < "); MonitorLongDec(dwCurrMin); MonitorString(" "); MonitorIntDec(dwTrend); MonitorString("%%");
+      return REVIEW_WRN_TREND_BOTTOM;
+    }
   }
 
   return REVIEW_WRN_OK;
