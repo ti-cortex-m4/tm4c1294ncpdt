@@ -34,6 +34,7 @@ review.h
 
 
 extern bool                    fReviewFlag;
+extern bool                    mfReviewCan[bCANALS];
 extern bool                    fReviewReadId;
 extern uchar                   bReviewRepeats;
 extern uchar                   bReviewBorders;
@@ -45,6 +46,7 @@ extern uint                    mcwReviewEvents[REVIEW_EVENTS_SIZE];
 extern uint                    mcwReviewWarnings[REVIEW_EVENTS_SIZE];
 
 extern cache const             chReviewFlag;
+extern cache const             chReviewCan;
 extern cache const             chReviewReadId;
 extern cache const             chReviewRepeats;
 extern cache const             chReviewBorders;
