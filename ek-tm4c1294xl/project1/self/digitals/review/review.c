@@ -37,7 +37,7 @@ cache const             chReviewWrnTop = {REVIEW_WRN_TOP, &wReviewWrnTop, sizeof
 void InitReview(void)
 {
   LoadCacheBool(&chReviewFlag, false);
-  LoadCache(&chEnblCan);
+  LoadCache(&chReviewCan);
   LoadCacheBool(&chReviewReadId, false);
   LoadCacheChar(&chReviewRepeats, REVIEW_REPEATS_MIN, REVIEW_REPEATS_MAX, REVIEW_REPEATS_DEF);
   LoadCacheChar(&chReviewBorders, REVIEW_BORDERS_MIN, REVIEW_BORDERS_MAX, REVIEW_BORDERS_DEF);
