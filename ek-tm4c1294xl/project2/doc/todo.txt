@@ -68,8 +68,8 @@ debug & release
             
 rom - build number/data even in .out
 
-timer1
-
 CONSOLE_UART
 
 save/load @0            
+
+static const char * const szContent1 = "  ";
