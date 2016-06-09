@@ -27,7 +27,6 @@ MAIN,C
 #include "uart/serial.h"
 #include "uart/uart_log.h"
 #include "uart/io_mode.h"
-#include "uart/io_timeout.h"
 #include "udp/udp_log.h"
 #include "udp/udp_handler.h"
 #include "tcp/telnet.h"
@@ -129,7 +128,6 @@ int     main(void)
   InitSysTick(dwClockFreq);
   InitUARTs(dwClockFreq);
   InitIOModes();
-  InitIOTimeouts();
   InitTimer1(dwClockFreq);
 
   // Set the interrupt priorities.  We set the SysTick interrupt to a higher
