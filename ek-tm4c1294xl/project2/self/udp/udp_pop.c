@@ -48,6 +48,27 @@ static err_t PopInt(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix) // TO
   return ERR_ARG;
 }
 
+err_t PopInt2(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix) // TODO
+{
+  uchar *pb = p->payload;
+
+  *pw = 0;
+
+  uchar i;
+  for (i=ibStart; i<p->len; i++)
+  {
+    if (pb[i] == '@') return ERR_OK;
+
+    char b = DecodeChar(pb[i],bRadix);
+    if (b == 0xFF) { CONSOLE_UART("WARNING PopInt #1\n"); return ERR_VAL; }
+
+    *pw = *pw*bRadix + b;
+  }
+
+  CONSOLE_UART("WARNING PopInt #2\n");
+  return ERR_ARG;
+}
+
 err_t PopIntDec(struct pbuf *p, uint *pw, const uchar ibStart)
 {
   return PopInt(p, pw, ibStart, 10);
