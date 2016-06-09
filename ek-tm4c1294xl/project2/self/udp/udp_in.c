@@ -13,6 +13,8 @@ UDP_IN,C
 #include "../uart/uart_log.h"
 #include "udp_pop.h"
 #include "udp_push.h"
+#include "udp_cmd.h"
+#include "routing_status.h"
 #include "udp_in.h"
 
 
@@ -29,64 +31,6 @@ typedef struct
   uchar broadcast;
 } udp_arg;
 
-
-
-err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *sz)
-{
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  InitPush();
-  PushChar('A');
-  PushString(sz);
-  PushSfx(wSfx);
-
-  return PushOut(pcb,p,addr,port,broadcast);
-}
-
-
-err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong dw)
-{
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  InitPush();
-  PushChar('A');
-  PushIP(dw);
-  PushSfx(wSfx);
-
-  return PushOut(pcb,p,addr,port,broadcast);
-}
-
-err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uchar b)
-{
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  InitPush();
-  PushChar('A');
-  PushCharDec(b);
-  PushSfx(wSfx);
-
-  return PushOut(pcb,p,addr,port,broadcast);
-}
-
-err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uint w)
-{
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
-
-  InitPush();
-  PushChar('A');
-  PushIntDec(w);
-  PushSfx(wSfx);
-
-  return PushOut(pcb,p,addr,port,broadcast);
-}
 
 
 err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
@@ -256,19 +200,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
-static bool IsCmd(struct pbuf *p, const char *szCmd)
-{
-  uchar *pb = p->payload;
 
-  uchar i = 0;
-  while (*szCmd)
-  {
-    if (i >= p->len) return false;
-    if (pb[i++] != *szCmd++) return false;
-  }
-
-  return true;
-}
 
 static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode, uchar *pibStart)
 {
@@ -408,6 +340,8 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
     CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"SPW")) {
     CmdString(pcb,p,addr,port,broadcast,"0");
+  } else if (IsRoutingStatusSize(p)) {
+    GetRouingStatusSize(pcb,p,addr,port,broadcast);
   }
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enOwnerName)) {}
@@ -492,6 +426,10 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enLED0Mode)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enLED1Mode)) {}
+
+  else if (IsRoutingStatusContent(p)) {
+    GetRouingStatusContent(pcb,p,addr,port,broadcast);
+  }
 
   else { // TODO
     CONSOLE_UART("unknown command\n");
