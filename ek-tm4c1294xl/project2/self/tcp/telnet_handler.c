@@ -56,12 +56,11 @@ void TelnetHandler(void)
     static uint8_t pucTemp[PBUF_POOL_BUFSIZE];
     SYS_ARCH_DECL_PROTECT(lev);
 
-    // Loop through the possible telnet sessions.
-    uint8_t ucSerialPort;
-    for(ucSerialPort = 0; ucSerialPort < UART_COUNT; ucSerialPort++)
+    uint8_t u;
+    for(u = 0; u < UART_COUNT; u++)
     {
         // Initialize the state pointer.
-        tState *pState = &g_sState[ucSerialPort];
+        tState *pState = &g_sState[u];
 
         // If the telnet session is not connected, skip this port.
         if(pState->eTCPState != STATE_TCP_CONNECTED)
@@ -115,7 +114,7 @@ void TelnetHandler(void)
 
         // While space is available in the serial output queue, process the
         // pbufs received on the telnet interface.
-        while(!SerialSendFull(ucSerialPort))
+        while(!SerialSendFull(u))
         {
             // Pop a pbuf off of the RX queue, if one is available, and we are
             // not already processing a pbuf.
@@ -128,6 +127,7 @@ void TelnetHandler(void)
                     pState->iBufQRead = ((pState->iBufQRead + 1) % PBUF_POOL_SIZE);
                     pState->pBufCurrent = pState->pBufHead;
                     pState->ulBufIndex = 0;
+                    mwTxSize[u] += pState->pBufCurrent->len;
                     SYS_ARCH_UNPROTECT(lev);
                 }
             }
@@ -211,7 +211,7 @@ void TelnetHandler(void)
                     uint8_t ucChar = SerialReceive(pState->ucSerialPort);
 
                     if (fDataDebugFlag)
-                      CONSOLE("%u: %02X}\n", ucSerialPort, ucChar);
+                      CONSOLE("%u: %02X}\n", u, ucChar);
 
                     pucTemp[lIndex] = ucChar;
                     lIndex++;
