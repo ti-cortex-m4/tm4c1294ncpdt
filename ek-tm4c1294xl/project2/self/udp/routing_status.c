@@ -18,7 +18,7 @@ static const uchar CONTENT_SIZE = 5;
 static const char * const szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
 static const char * const szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
 static const char * const szHeader1 = "<tr><td colspan=2 class='head'>Serial Port</td></tr>";
-static const char * const szRow10 = "<tr><td>Ethernet -> Serial (data/capacity)</td><td>0/1263</td></tr>";
+static const char * const szRow10 = "<tr><td>RS-485 Direction</td><td>0/1263</td></tr>";
 static const char * const szBodyEnd = "</table></body>";
 
 
@@ -54,14 +54,12 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
 
   uint wIdx = 0xFF;
   err_t err = PopInt2(p, &wIdx, ibStart, 10);
-
   if (err != ERR_OK) {
     CONSOLE("WARNING bad routing mode index\n");
     return ERR_OK;
   }
 
-  switch (wIdx)
-  {
+  switch (wIdx) {
     case 0: CmdString(pcb,p,addr,port,broadcast,szHead); break;
     case 1: CmdString(pcb,p,addr,port,broadcast,szBodyStart); break;
     case 2: CmdString(pcb,p,addr,port,broadcast,szHeader1); break;
