@@ -8,6 +8,7 @@ routing_status,c
 #include "../kernel/log.h"
 #include "../kernel/printf.h"
 #include "../uart/io_mode.h"
+#include "../uart/serial.h"
 #include "udp_pop.h"
 #include "udp_push.h"
 #include "udp_cmd.h"
@@ -15,13 +16,15 @@ routing_status,c
 
 
 
-static const uchar CONTENT_SIZE = 5;
+static const uchar CONTENT_SIZE = 7;
 
+static const char * const szSerialPort = "Serial Port";
 static const char * const szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
+static const char * const szVariables = "Variables";
 
 static const char * const szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
 static const char * const szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
-static const char * const szHeader1 = "<tr><td colspan=2 class='head'>Serial Port</td></tr>";
+static const char * const szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
 static const char * const szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
 static const char * const szBodyEnd = "</table></body>";
 
@@ -80,12 +83,17 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
     return ERR_OK;
   }
 
+  uchar u = bPort-1;
+  ASSERT(u < UART_COUNT);
+
   switch (wIdx) {
     case 0: CmdString(pcb,p,addr,port,broadcast,szHead); break;
     case 1: CmdString(pcb,p,addr,port,broadcast,szBodyStart); break;
-    case 2: CmdString(pcb,p,addr,port,broadcast,szHeader1); break;
-    case 3: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szIOMode, GetIOMode(bPort-1))); break;
-    case 4: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
+    case 2: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szSerialPort)); break;
+    case 3: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szIOMode, GetIOMode(u))); break;
+    case 4: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
+    case 5: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mwTxSize", mwTxSize[u])); break;
+    case 6: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     default: CONSOLE("WARNING unknown routing mode index %u\n", wIdx); break;
   }
 
