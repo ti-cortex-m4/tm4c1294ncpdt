@@ -6,6 +6,8 @@ routing_status.c
 
 #include "../main.h"
 #include "../kernel/log.h"
+#include "../kernel/printf.h"
+#include "../uart/io_mode.h"
 #include "udp_pop.h"
 #include "udp_push.h"
 #include "udp_cmd.h"
@@ -18,7 +20,7 @@ static const uchar CONTENT_SIZE = 5;
 static const char * const szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
 static const char * const szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
 static const char * const szHeader1 = "<tr><td colspan=2 class='head'>Serial Port</td></tr>";
-static const char * const szRow10 = "<tr><td>RS-485 Direction</td><td>0/1263</td></tr>";
+static const char * const szRowIOMode = "<tr><td>RS-485 Direction (0 - unknown, 1 - input, 2 - output)</td><td>%u</td></tr>";
 static const char * const szBodyEnd = "</table></body>";
 
 
@@ -63,7 +65,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
     case 0: CmdString(pcb,p,addr,port,broadcast,szHead); break;
     case 1: CmdString(pcb,p,addr,port,broadcast,szBodyStart); break;
     case 2: CmdString(pcb,p,addr,port,broadcast,szHeader1); break;
-    case 3: CmdString(pcb,p,addr,port,broadcast,szRow10); break;
+    case 3: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowIOMode, GetIOMode(0))); break;
     case 4: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     default: CONSOLE("WARNING unknown routing mode index %u\n", wIdx); break;
   }

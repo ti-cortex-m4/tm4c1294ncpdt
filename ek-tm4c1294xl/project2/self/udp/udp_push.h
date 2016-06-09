@@ -13,6 +13,7 @@ void PushChar(uchar b);
 //void PushIntLtl(uint w);
 //void PushLongLtl(ulong dw);
 void PushString(const char *sz);
+void PushBuff(buff bf);
 uchar PushCharDec(uchar b);
 //uchar PushCharHex(uchar b);
 uchar PushIntDec(uint w);

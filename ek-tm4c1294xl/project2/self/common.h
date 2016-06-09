@@ -36,6 +36,13 @@ typedef struct
 } timedate;
 
 
+typedef struct
+{
+  uchar        *pbBuff;
+  uint          wSize;
+} buff;
+
+
 #define NAME_SIZE       (8+1)
 
 

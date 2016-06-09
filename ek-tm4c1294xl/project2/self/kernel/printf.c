@@ -375,7 +375,7 @@ void DebugPrintF(const char *pcsz, ...)
 }
 
 
-void BuffPrintF(const char *pcsz, ...)
+buff BuffPrintF(const char *pcsz, ...)
 {
   memset(&mbLog, 0, sizeof(mbLog));
   iwLog = 0;
@@ -388,7 +388,7 @@ void BuffPrintF(const char *pcsz, ...)
   va_end(va);
 
   buff bf;
-  bf.pbBuff = &mbLog;
+  bf.pbBuff = (uchar *)&mbLog;
   bf.wSize = iwLog;
 
   return bf;
