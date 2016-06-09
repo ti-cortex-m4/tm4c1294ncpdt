@@ -53,6 +53,16 @@ const uint32_t g_ulUARTBase[UART_COUNT] =
     UART1_BASE,
 };
 
+const uint32_t g_ulIntUART[UART_COUNT] =
+{
+    INT_UART0,
+    INT_UART4,
+    INT_UART3,
+    INT_UART2,
+    INT_UART1,
+};
+
+volatile uint16_t mwTxSize[UART_COUNT];
 
 
 
@@ -1029,6 +1039,7 @@ void SerialInit(void)
     {
         RingBufInit(&g_sRxBuf[u], mmbRxBuf[u], sizeof(mmbRxBuf[u]));
         RingBufInit(&g_sTxBuf[u], mmbTxBuf[u], sizeof(mmbTxBuf[u]));
+        mwTxSize[u] = 0;
     }
 
 #if false
