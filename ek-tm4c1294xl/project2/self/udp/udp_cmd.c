@@ -26,6 +26,21 @@ err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 }
 
 
+err_t CmdBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, buff bf)
+{
+  uint wSfx = 0;
+  err_t err = PopSfx(p, &wSfx);
+  if (err != ERR_OK) return err;
+
+  InitPush();
+  PushChar('A');
+  PushBuff(bf);
+  PushSfx(wSfx);
+
+  return PushOut(pcb,p,addr,port,broadcast);
+}
+
+
 err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong dw)
 {
   uint wSfx = 0;

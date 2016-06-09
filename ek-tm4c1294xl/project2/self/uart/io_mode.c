@@ -16,7 +16,7 @@ io_mode.c
 
 
 
-ioMode                  mbIOModes[UART_COUNT];
+static ioMode           mbIOModes[UART_COUNT];
 
 
 
@@ -186,4 +186,12 @@ void InitIOModes(void)
   InitIOMode2();
   InitIOMode3();
   InitIOMode4();
+}
+
+
+
+ioMode GetIOMode(uchar u)
+{
+  ASSERT(u < UART_COUNT);
+  return mbIOModes[u];
 }

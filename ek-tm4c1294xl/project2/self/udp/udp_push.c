@@ -53,6 +53,15 @@ void PushString(const char *sz)
 }
 
 
+void PushBuff(buff bf)
+{
+  while (bf.wSize-- > 0 > 0)
+  {
+    PushChar(*(bf.pbBuff++));
+  }
+}
+
+
 
 uchar   PushCharDec(uchar b)
 {

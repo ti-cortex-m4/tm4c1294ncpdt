@@ -23,3 +23,5 @@ void InitIOModes(void);
 
 void InMode(uchar u);
 void OutMode(uchar u);
+
+ioMode GetIOMode(uchar u);
