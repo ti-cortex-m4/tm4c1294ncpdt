@@ -65,8 +65,13 @@ bool IsRoutingStatusContent(struct pbuf *p) {
 err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar ibStart = 0xFF;
   if (IsPrefix(p, "FU", &ibStart)) {
-    uchar bIdx = 0;
-    err_t err = PopCharDec(p, &bIdx, ibStart);
+
+  CONSOLE("ibStart %u\n", ibStart);
+
+    uint bIdx = 0;
+    err_t err = PopInt2(p, &bIdx, ibStart, 10);
+
+    CONSOLE("index %u\n", bIdx);
 
     switch (bIdx)
     {
@@ -77,6 +82,8 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 4: CmdString(pcb,p,addr,port,broadcast,szContent5); break;
       default: CONSOLE("ERROR unknown index %u\n", bIdx); ASSERT(false); break; // TODO
     }
+
+    return ERR_OK;
   }
 
   ASSERT(false);
