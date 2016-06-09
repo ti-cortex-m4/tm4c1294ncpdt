@@ -124,7 +124,7 @@ int     main(void)
   SerialInit();
   TelnetInit();
 
-  InitUdpHandler();
+  InitUDPHandler();
   InitSysTick(dwClockFreq);
   InitUARTs(dwClockFreq);
   InitIOModes();

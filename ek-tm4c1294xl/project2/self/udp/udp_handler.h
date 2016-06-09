@@ -4,4 +4,4 @@ udp_handler.h
 
 ------------------------------------------------------------------------------*/
 
-void InitUdpHandler(void);
+void InitUDPHandler(void);
