@@ -15,4 +15,4 @@ err_t PopIP(struct pbuf *p, ulong *pdw, const uchar ibStart);
 err_t PopString(struct pbuf *p, char *sz, const uchar bSize, const uchar ibStart);
 err_t PopSfx(struct pbuf *p, uint *pw);
 
-err_t PopInt2(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix); // TODO
+err_t PopInt2(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix, uchar bChar); // TODO

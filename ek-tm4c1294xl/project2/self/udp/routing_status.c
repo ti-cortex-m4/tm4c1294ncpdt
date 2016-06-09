@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-routing_status.c
+routing_status,c
 
 
 ------------------------------------------------------------------------------*/
@@ -48,16 +48,33 @@ bool IsRoutingStatusContent(struct pbuf *p) {
 
 err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar ibStart = 0xFF;
-
   if (!IsPrefix(p, "FU", &ibStart)) {
-    CONSOLE("WARNING bad routing mode request\n");
+    CONSOLE("WARNING routing mode: not found \"FU\"\n");
     return ERR_OK;
   }
 
   uint wIdx = 0xFF;
-  err_t err = PopInt2(p, &wIdx, ibStart, 10);
+  err_t err = PopInt2(p, &wIdx, ibStart, 10, '@');
   if (err != ERR_OK) {
     CONSOLE("WARNING bad routing mode index\n");
+    return ERR_OK;
+  }
+
+  ibStart = 0xFF;
+  if (!IsChar(p, '@', &ibStart)) {
+    CONSOLE("WARNING routing mode: not found '@'\n");
+    return ERR_OK;
+  }
+
+  uchar bPort = 0xFF;
+  err = PopCharDec(p, &bPort, ibStart);
+  if (err != ERR_OK) {
+    CONSOLE("WARNING bad routing mode port\n");
+    return ERR_OK;
+  }
+
+  if (!(bPort >= 1) && (bPort <= UART_COUNT)) {
+    CONSOLE("WARNING bad routing mode port %u\n",bPort);
     return ERR_OK;
   }
 
@@ -65,7 +82,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
     case 0: CmdString(pcb,p,addr,port,broadcast,szHead); break;
     case 1: CmdString(pcb,p,addr,port,broadcast,szBodyStart); break;
     case 2: CmdString(pcb,p,addr,port,broadcast,szHeader1); break;
-    case 3: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowIOMode, GetIOMode(0))); break;
+    case 3: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowIOMode, GetIOMode(bPort-1))); break;
     case 4: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     default: CONSOLE("WARNING unknown routing mode index %u\n", wIdx); break;
   }

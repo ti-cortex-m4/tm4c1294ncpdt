@@ -16,3 +16,4 @@ err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
 bool IsCmd(struct pbuf *p, const char *szCmd);
 bool IsPrefix(struct pbuf *p, const char *szCode, uchar *pibStart);
+bool IsChar(struct pbuf *p, uchar bChar, uchar *pibStart);
