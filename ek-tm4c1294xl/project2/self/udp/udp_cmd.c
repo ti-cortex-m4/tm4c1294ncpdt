@@ -98,6 +98,7 @@ bool IsCmd(struct pbuf *p, const char *szCmd)
   return true;
 }
 
+
 bool IsPrefix(struct pbuf *p, const char *szCode, uchar *pibStart) // TODO
 {
   uchar *pb = p->payload;
@@ -111,4 +112,23 @@ bool IsPrefix(struct pbuf *p, const char *szCode, uchar *pibStart) // TODO
 
   *pibStart = i;
   return true;
+}
+
+
+bool IsChar(struct pbuf *p, uchar bChar, uchar *pibStart) // TODO
+{
+  uchar *pb = p->payload;
+  uchar i = 0;
+
+  while (true)
+  {
+    if (i >= p->len) return false;
+    if (pb[i++] == bChar)
+    {
+      *pibStart = i;
+      return true;
+    }
+  }
+
+//  return false;
 }
