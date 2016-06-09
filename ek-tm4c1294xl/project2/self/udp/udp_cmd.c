@@ -5,16 +5,8 @@ udp_cmd,c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../kernel/entities.h"
-//#include "../kernel/log.h"
-//#include "../kernel/settings.h"
-//#include "driverlib/sysctl.h"
-//#include "../hardware/storage.h"
-//#include "../uart/uart_log.h"
 #include "udp_pop.h"
 #include "udp_push.h"
-//#include "routing_status.h"
-//#include "udp_in.h"
 #include "udp_cmd.h"
 
 
@@ -88,5 +80,20 @@ bool IsCmd(struct pbuf *p, const char *szCmd)
     if (pb[i++] != *szCmd++) return false;
   }
 
+  return true;
+}
+
+bool IsPrefix(struct pbuf *p, const char *szCode, uchar *pibStart) // TODO
+{
+  uchar *pb = p->payload;
+  uchar i = 0;
+
+  while (*szCode)
+  {
+    if (i >= p->len) return false;
+    if (pb[i++] != *szCode++) return false;
+  }
+
+  *pibStart = i;
   return true;
 }

@@ -190,7 +190,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 70: PushString(enLED0Mode.szName); break;
     case 71: PushString(enLED1Mode.szName); break;
 
-    default: CONSOLE("ERROR unknown index %u\n", wArg); ASSERT(false); break; // TODO
+    default: CONSOLE("WARNING unknown index %u\n", wArg); ASSERT(false); break; // TODO
   }
 
   PushChar(0x0D);
