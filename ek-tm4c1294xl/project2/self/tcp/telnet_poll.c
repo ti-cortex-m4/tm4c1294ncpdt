@@ -28,7 +28,11 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 {
     tState *pState = arg;
 
+#if true
+    CONSOLE("%u: poll %u/%u\n", pState->ucSerialPort, pState->ulConnectionTimeout, pState->ulMaxTimeout);
+#else
     CONSOLE("%u: poll 0x%08x, 0x%08x %u/%u\n", pState->ucSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
+#endif
 
     // Are we operating as a server or a client?
     if(!pState->pListenPCB)
