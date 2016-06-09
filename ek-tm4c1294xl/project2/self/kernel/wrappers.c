@@ -9,41 +9,43 @@ wrappers.c
 
 
 
-uchar GetChar2(uchar  w, err_t  err);
+uchar2 GetChar2(uchar b, err_t err)
 {
-  uchar dw;
+  uchar2 b2;
 
-  dw.dw = dw;
-  dw.err = err;
+  b2.b = b;
+  b2.err = err;
 
-  return dw;
+  return b2;
 }
 
 
-uchar  GetChar2Error(void)
+uchar2 GetChar2Error(void)
 {
   return GetChar2(MAX_CHAR, ERR_VAL);
 }
 
-uint GetInt2(uint  w, err_t  err);
+
+
+uint2 GetInt2(uint w, err_t err)
 {
-  uint dw;
+  uint2 w2;
 
-  dw.dw = dw;
-  dw.err = err;
+  w2.w = w;
+  w2.err = err;
 
-  return dw;
+  return w2;
 }
 
 
-uint  GetInt2Error(void)
+uint2 GetInt2Error(void)
 {
   return GetInt2(MAX_INT, ERR_VAL);
 }
 
 
 
-ulong2 GetLong2(ulong  dw, err_t  err);
+ulong2 GetLong2(ulong dw, err_t err)
 {
   ulong2 dw2;
 
@@ -54,7 +56,7 @@ ulong2 GetLong2(ulong  dw, err_t  err);
 }
 
 
-ulong2  GetLong2Error(void)
+ulong2 GetLong2Error(void)
 {
   return GetLong2(MAX_LONG, ERR_VAL);
 }
