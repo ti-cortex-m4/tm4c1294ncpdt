@@ -331,7 +331,7 @@ convert:
 
 
 
-void UdpPrintF(const char *pcsz, ...)
+void UDPPrintF(const char *pcsz, ...)
 {
   memset(&mbLog, 0, sizeof(mbLog));
   iwLog = 0;
@@ -372,4 +372,24 @@ void DebugPrintF(const char *pcsz, ...)
 
     va_end(va);
   }
+}
+
+
+void BuffPrintF(const char *pcsz, ...)
+{
+  memset(&mbLog, 0, sizeof(mbLog));
+  iwLog = 0;
+
+  va_list va;
+  va_start(va, pcsz);
+
+  LogPrintVarArg(pcsz, va);
+
+  va_end(va);
+
+  buff bf;
+  bf.pbBuff = &mbLog;
+  bf.wSize = iwLog;
+
+  return bf;
 }

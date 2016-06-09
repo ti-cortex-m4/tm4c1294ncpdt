@@ -21,7 +21,7 @@ log.h
 
 
 void DebugPrintF(const char *sz, ...);
-void UdpPrintF(const char *sz, ...);
+void UDPPrintF(const char *sz, ...);
 void UartPrintF(const char *sz, ...);
 void UARTprintf(const char *sz, ...);
 
