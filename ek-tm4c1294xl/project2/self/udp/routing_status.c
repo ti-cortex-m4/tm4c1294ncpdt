@@ -13,11 +13,13 @@ routing_status.c
 
 
 
-static const uchar ROUTING_STATUS_SIZE = 3;
+static const uchar ROUTING_STATUS_SIZE = 5;
 
-static const char * const szContent1 = "  ";
-static const char * const szContent2 = "  ";
-static const char * const szContent3 = "  ";
+static const char * const szContent1 = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
+static const char * const szContent2 = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
+static const char * const szContent3 = "<tr><td colspan=2 class='head'>Routing Buffers</td></tr>";
+static const char * const szContent4 = "<tr><td>Ethernet -> Serial (data/capacity)</td><td>0/1263</td></tr>";
+static const char * const szContent5 = "</table></body>";
 
 
 
@@ -68,9 +70,11 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
 
     switch (bIdx)
     {
-      case 0: PushString(szContent1); break;
-      case 1: PushString(szContent2); break;
-      case 2: PushString(szContent3); break;
+      case 0: CmdString(pcb,p,addr,port,broadcast,szContent1); break;
+      case 1: CmdString(pcb,p,addr,port,broadcast,szContent2); break;
+      case 2: CmdString(pcb,p,addr,port,broadcast,szContent3); break;
+      case 3: CmdString(pcb,p,addr,port,broadcast,szContent4); break;
+      case 4: CmdString(pcb,p,addr,port,broadcast,szContent5); break;
       default: CONSOLE("ERROR unknown index %u\n", bIdx); ASSERT(false); break; // TODO
     }
   }
