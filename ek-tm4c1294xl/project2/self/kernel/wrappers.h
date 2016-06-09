@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-WRAPPERS,H
+wrappers.h
 
 
 ------------------------------------------------------------------------------*/
@@ -7,56 +7,36 @@ WRAPPERS,H
 #ifndef __WRAPPERS
 #define __WRAPPERS
 
+#include "lwip/err.h"
+
 
 typedef struct
 {
-  ulong         dwValue;
-  bool          fValid;
+  uchar          b;
+  err_t          err;
+} uchar2;
+
+typedef struct
+{
+  ulong          w;
+  err_t          err;
+} uint2;
+
+typedef struct
+{
+  ulong          dw;
+  err_t          err;
 } ulong2;
 
 
-typedef struct
-{
-  float         flValue;
-  bool          fValid;
-} float2;
+uint2 GetChar2(uchar  b, err_t  err);
+uint2 GetChar2Error(void);
 
+uint2 GetInt2(uint  w, err_t  err);
+uint2 GetInt2Error(void);
 
-typedef struct
-{
-  double        dbValue;
-  bool          fValid;
-} double2;
+ulong2 GetLong2(ulong  dw, err_t  err);
+ulong2 GetLong2Error(void);
 
-
-typedef struct
-{
-  time          tiValue;
-  bool          fValid;
-} time2;
-
-
-typedef struct
-{
-  factors       fcValue;
-  bool          fValid;
-} factors2;
-
-
-
-ulong2  GetLong2(ulong  dwValue, bool  fValid);
-ulong2  GetLong2Error(void);
-
-float2  GetFloat2(float  flValue, bool  fValid);
-float2  GetFloat2Error(void);
-
-double2 GetDouble2(double  dbValue, bool  fValid);
-double2 GetDouble2Error(void);
-
-time2   GetTime2(time  tiValue, bool  fValid);
-time2   GetTime2Error(void);
-
-factors2 GetFactors2(factors  fcValue, bool  fValid);
-factors2 GetFactors2Error(void);
 
 #endif
