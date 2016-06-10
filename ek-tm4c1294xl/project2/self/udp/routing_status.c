@@ -76,32 +76,32 @@ static void CmdUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
 err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar ibStart = 0xFF;
   if (!IsPrefix(p, "FU", &ibStart)) {
-    CONSOLE("WARNING routing mode: not found \"FU\"\n");
+    WARNING("WARNING routing mode: not found \"FU\"\n");
     return ERR_OK;
   }
 
   uint2 w2 = PopInt(p, ibStart, 10, '@');
   if (InvalidInt2(w2)) {
-    CONSOLE("WARNING bad routing mode index\n");
+    WARNING("WARNING bad routing mode index\n");
     return ERR_OK;
   }
   uint wIdx = w2.w;
 
   ibStart = 0xFF;
   if (!IsChar(p, '@', &ibStart)) {
-    CONSOLE("WARNING routing mode: not found '@'\n");
+    WARNING("WARNING routing mode: not found '@'\n");
     return ERR_OK;
   }
 
   uchar2 b2 = PopCharDec(p, ibStart);
   if (InvalidChar2(b2)) {
-    CONSOLE("WARNING bad routing mode port\n");
+    WARNING("WARNING bad routing mode port\n");
     return ERR_OK;
   }
 
   uchar bPort = b2.b;
   if (!(bPort >= 1) && (bPort <= UART_COUNT)) {
-    CONSOLE("WARNING bad routing mode port %u\n",bPort);
+    WARNING("WARNING bad routing mode port %u\n",bPort);
     return ERR_OK;
   }
 
@@ -120,7 +120,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   if (u != UART_COUNT-1) {
     switch (wIdx) {
       case 6: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
-      default: CONSOLE("WARNING unknown routing mode index %u\n", wIdx); break;
+      default: WARNING("WARNING unknown routing mode index %u\n", wIdx); break;
     }
   } else {
     switch (wIdx) {
@@ -128,7 +128,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 7: CmdUptime(pcb,p,addr,port,broadcast); break;
       case 8: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset)); break;
       case 9: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
-      default: CONSOLE("WARNING unknown routing mode index %u\n", wIdx); break;
+      default: WARNING("WARNING unknown routing mode index %u\n", wIdx); break;
     }
   }
 
