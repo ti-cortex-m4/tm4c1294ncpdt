@@ -81,7 +81,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   }
 
   uint2 w2 = PopInt(p, ibStart, 10, '@');
-  if (w2.err != ERR_OK) {
+  if (InvalidInt2(w2)) {
     CONSOLE("WARNING bad routing mode index\n");
     return ERR_OK;
   }

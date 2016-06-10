@@ -104,7 +104,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   if (err != ERR_OK) return err;
 
   uint2 w2 = PopIntDec(p, 2);
-  if (w2.err != ERR_OK) return err;
+  if (InvalidInt2(w2)) return err;
   uint wArg = w2.w;
 
   InitPush();
@@ -250,7 +250,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
        case INT:
        {
          uint2 w2 = PopIntDec(p, ibStart);
-         if (w2.err != ERR_OK) {
+         if (InvalidInt2(w2)) {
            *(uint *)pen->pbRam = w2.w;
          }
 //         CONSOLE_UART("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);

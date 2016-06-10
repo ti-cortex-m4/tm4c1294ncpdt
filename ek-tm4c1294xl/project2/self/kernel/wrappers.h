@@ -15,7 +15,7 @@ wrappers.h
 typedef struct
 {
   uchar          b;
-  err_t          err2;
+  err_t          err;
 } uchar2;
 
 typedef struct

@@ -70,7 +70,7 @@ uint2 PopIntHex(struct pbuf *p, const uchar ibStart)
 static uchar2 PopChar(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder)
 {
   uint2 w2 = PopInt(p, ibStart, bRadix, cBorder);
-  if (w2.err != ERR_OK)
+  if (InvalidInt2(w2))
     return GetChar2Error();
 
   if (w2.w >= 0x100) {

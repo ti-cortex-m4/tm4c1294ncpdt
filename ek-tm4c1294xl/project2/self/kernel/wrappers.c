@@ -28,7 +28,7 @@ uchar2 GetChar2Error(void)
 
 bool InvalidChar2(uchar2 b2)
 {
-  return b2.eer != ERR_OK;
+  return b2.err != ERR_OK;
 }
 
 
@@ -73,7 +73,7 @@ ulong2 GetLong2Error(void)
 }
 
 
-bool ValidLong2(ulong2 dw2)
+bool InvalidLong2(ulong2 dw2)
 {
   return dw2.err != ERR_OK;
 }
