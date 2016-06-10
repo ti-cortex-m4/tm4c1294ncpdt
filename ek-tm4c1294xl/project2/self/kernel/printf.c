@@ -343,7 +343,7 @@ void UDPPrintF(const char *pcsz, ...)
 
   va_end(va);
 
-  UdpLog((unsigned char *)mbLog, iwLog);
+  UDPLog((unsigned char *)mbLog, iwLog);
 }
 
 
@@ -361,7 +361,7 @@ void DebugPrintF(const char *pcsz, ...)
 
     va_end(va);
 
-    UdpLog((unsigned char *)mbLog, iwLog);
+    UDPLog((unsigned char *)mbLog, iwLog);
   }
   else if (ibDebugMode == DEBUG_MODE_UART)
   {

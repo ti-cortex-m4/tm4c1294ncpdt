@@ -20,7 +20,7 @@ static uint             errors1, errors2;
 
 
 
-void InitUdpLog(void)
+void InitUDPLog(void)
 {
   if (enabled)
   {
@@ -30,7 +30,7 @@ void InitUdpLog(void)
 
 
 
-void UdpLog(uchar *pb, uint wSize)
+void UDPLog(uchar *pb, uint wSize)
 {
   if (enabled)
   {

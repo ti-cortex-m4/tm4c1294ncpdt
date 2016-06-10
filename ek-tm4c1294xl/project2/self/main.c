@@ -117,7 +117,7 @@ int     main(void)
   ASSERT(dwIP != 0);
   lwIPInit(dwClockFreq, pbMac, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
-  InitUdpLog();
+  InitUDPLog();
   InitEthernetLEDs();
 
   // Set the link status based on the LED0 signal (which defaults to link status in the PHY).
