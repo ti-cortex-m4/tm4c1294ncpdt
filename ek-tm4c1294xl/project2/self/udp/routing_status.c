@@ -82,7 +82,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
 
   uint2 w2 = PopInt(p, ibStart, 10, '@'); // TODO char ?
   if (InvalidInt2(w2)) {
-    WARNING("bad routing mode index\n");
+    WARNING("wrong routing mode index\n");
     return ERR_OK;
   }
   uint wIdx = w2.w;
@@ -95,13 +95,13 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
 
   uchar2 b2 = PopCharDec(p, ibStart);
   if (InvalidChar2(b2)) {
-    WARNING("bad routing mode port\n");
+    WARNING("wrong routing mode port\n");
     return ERR_OK;
   }
 
   uchar bPort = b2.b;
   if (!(bPort >= 1) && (bPort <= UART_COUNT)) {
-    WARNING("bad routing mode port %u\n",bPort);
+    WARNING("wrong routing mode port %u\n",bPort);
     return ERR_OK;
   }
 

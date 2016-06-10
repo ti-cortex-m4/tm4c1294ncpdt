@@ -25,7 +25,7 @@ const static char mbCHARS[] = "0123456789abcdef";
       return GetChar2Success(i);
   }
 
-  WARNING("bad char %02X of radix %u\n", b, bRadix);
+  WARNING("wrong char %02X of radix %u\n", b, bRadix);
   return GetChar2Error();
 }
 
@@ -44,7 +44,7 @@ uint2 PopInt(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder)
 
     uchar2 b2 = DecodeChar(pb[i],bRadix);
     if (InvalidChar2(b2)) {
-      WARNING("bad integer of radix %u with border @c\n",bRadix,cBorder);
+      WARNING("wrong integer of radix %u with border @c\n",bRadix,cBorder);
       return GetInt2Error();
     }
 
