@@ -8,7 +8,7 @@ serial_handler.c
 #include "driverlib/uart.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
-#include "io_timeout.h"
+#include "io_mode.h"
 #include "serial.h"
 #include "serial_handler.h"
 
@@ -71,7 +71,7 @@ static void SerialUARTIntHandler(uint8_t ucPort)
 
             {
                 if (fDataDebugFlag)
-                  CONSOLE("%u: %02X<\n", ucPort, ucChar);
+                  CONSOLE("%u: from UART %02X\n", ucPort, ucChar);
 
                 RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
             }
@@ -95,7 +95,7 @@ static void SerialUARTIntHandler(uint8_t ucPort)
 #endif
 
     // See if there is space to be filled in the transmit FIFO.
-    if(ulStatus & UART_INT_TX)
+    if(((ulStatus & UART_INT_TX) != 0) || (ulStatus == 0))
     {
         // Loop while there is space in the transmit FIFO and characters to be sent.
         while(!RingBufEmpty(&g_sTxBuf[ucPort]) && UARTSpaceAvail(g_ulUARTBase[ucPort]))
@@ -103,12 +103,18 @@ static void SerialUARTIntHandler(uint8_t ucPort)
             uint8_t ucChar = RingBufReadOne(&g_sTxBuf[ucPort]);
 
             if (fDataDebugFlag)
-              CONSOLE("%u: %02X>\n", ucPort, ucChar);
-
-            SetIOTimeout(ucPort);
+              CONSOLE("%u: to UART %02X\n", ucPort, ucChar);
 
             // Write the next character into the transmit FIFO.
             UARTCharPut(g_ulUARTBase[ucPort], ucChar);
+
+            mwTxSize[ucPort]--;
+        }
+
+        if((ulStatus & UART_INT_TX) != 0)
+        {
+          if (mwTxSize[ucPort] == 0)
+            InMode(ucPort);
         }
     }
 }
