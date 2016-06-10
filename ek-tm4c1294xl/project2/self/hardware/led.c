@@ -84,7 +84,7 @@ static ulong GetLED1Mask(void)
     case LED_MODE_FULL_DUPLEX: return EPHY_LEDCFG_LED1_FD;
     case LED_MODE_LINK_RXTX: return EPHY_LEDCFG_LED1_LINKTXRX;
 
-    default: WARNING("WARNING ethernet LED1 mode %u", bLED1Mode);
+    default: WARNING("ethernet LED1 mode %u", bLED1Mode);
              return EPHY_LEDCFG_LED1_RXTX;
   }
 }
