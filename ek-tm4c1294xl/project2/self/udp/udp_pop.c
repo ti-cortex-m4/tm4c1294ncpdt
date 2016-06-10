@@ -87,7 +87,7 @@ uchar2 PopCharDec(struct pbuf *p, const uchar ibStart)
 }
 
 
-err_t PopIP(struct pbuf *p, ulong *pdw, const uchar ibStart) // TODO
+ulong2 PopIP(struct pbuf *p, const uchar ibStart) // TODO
 {
   uchar *pb = p->payload;
 
@@ -102,7 +102,7 @@ err_t PopIP(struct pbuf *p, ulong *pdw, const uchar ibStart) // TODO
   {
     if (pb[i] == '.')
     {
-      if (y > 3) { CONSOLE_UART("WARNING PopIP #1\n"); return ERR_VAL; }
+      if (y > 3) { CONSOLE_UART("WARNING PopIP #1\n"); return GetLong2Error(); }
       else
       {
         cb.mpbBuff[3-y] = x;
@@ -114,21 +114,20 @@ err_t PopIP(struct pbuf *p, ulong *pdw, const uchar ibStart) // TODO
     else if (pb[i] == '|')
     {
       cb.mpbBuff[3-y] = x;
-      *pdw = cb.dwBuff;
-      return ERR_OK;
+      return GetLong2(cb.dwBuff, ERR_OK);
     }
 
     else
     {
       uchar2 b2 = DecodeChar(pb[i],10);
-      if (InvalidChar2(b2)) { CONSOLE_UART("WARNING PopIP #2\n"); return ERR_VAL; }
+      if (InvalidChar2(b2)) { CONSOLE_UART("WARNING PopIP #2\n"); return GetLong2Error(); }
 
       x = x*10 + b2.b;
     }
   }
 
   CONSOLE_UART("WARNING PopIP #3\n");
-  return ERR_ARG;
+  return GetLong2Error();
 }
 
 
