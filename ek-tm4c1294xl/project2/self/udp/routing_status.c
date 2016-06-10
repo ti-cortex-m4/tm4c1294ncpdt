@@ -76,32 +76,32 @@ static void CmdUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
 err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar ibStart = 0xFF;
   if (!IsPrefix(p, "FU", &ibStart)) {
-    WARNING("WARNING routing mode: not found \"FU\"\n");
+    WARNING("routing mode: not found \"FU\"\n");
     return ERR_OK;
   }
 
   uint2 w2 = PopInt(p, ibStart, 10, '@'); // TODO char ?
   if (InvalidInt2(w2)) {
-    WARNING("WARNING bad routing mode index\n");
+    WARNING("bad routing mode index\n");
     return ERR_OK;
   }
   uint wIdx = w2.w;
 
   ibStart = 0xFF;
   if (!IsChar(p, '@', &ibStart)) {
-    WARNING("WARNING routing mode: not found '@'\n");
+    WARNING("routing mode: not found '@'\n");
     return ERR_OK;
   }
 
   uchar2 b2 = PopCharDec(p, ibStart);
   if (InvalidChar2(b2)) {
-    WARNING("WARNING bad routing mode port\n");
+    WARNING("bad routing mode port\n");
     return ERR_OK;
   }
 
   uchar bPort = b2.b;
   if (!(bPort >= 1) && (bPort <= UART_COUNT)) {
-    WARNING("WARNING bad routing mode port %u\n",bPort);
+    WARNING("bad routing mode port %u\n",bPort);
     return ERR_OK;
   }
 
@@ -122,7 +122,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 6: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= CONTENT_SIZE) {
-      WARNING("WARNING unknown routing mode index %u\n", wIdx);
+      WARNING("unknown routing mode index %u\n", wIdx);
     }
   } else {
     switch (wIdx) {
@@ -132,7 +132,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 9: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= CONTENT_SIZE + CONTENT_EXTRA_SIZE) {
-      WARNING("WARNING unknown routing mode index %u\n", wIdx);
+      WARNING("unknown routing mode index %u\n", wIdx);
     }
   }
 
