@@ -4,6 +4,6 @@ udp_log.h
 
 ------------------------------------------------------------------------------*/
 
-void InitUdpLog(void);
+void InitUDPLog(void);
 
-void UdpLog(uchar *pb, uint wSize);
+void UDPLog(uchar *pb, uint wSize);
