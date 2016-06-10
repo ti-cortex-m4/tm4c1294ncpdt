@@ -17,3 +17,11 @@ const entity enSerialNumber = {
   "SRNM",
   "AI=SRNM;D=Serial number;T=INT;C=EDIT;V=SRNM>65535?\"Serial number must be between 0 and 65535\":\"\"",
 };
+
+
+const entity enWatchdogFlag = {
+  EEPROM_WATCHDOG_FLAG, &fWatchdogFlag, sizeof(uchar), CHAR, 0,
+  0, 1, 1,
+  "WDT",
+  "AI=WDT;D=Enable watchdog;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
+};

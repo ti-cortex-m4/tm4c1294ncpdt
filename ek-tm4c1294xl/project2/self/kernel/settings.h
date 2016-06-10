@@ -36,6 +36,7 @@ extern uchar                   mibParity[UART_COUNT];
 extern uchar                   mibDataBits[UART_COUNT];
 extern uchar                   mibStopBits[UART_COUNT];
 
+extern bool                    fWatchdogFlag;
 extern bool                    ibDebugMode;
 
 extern ulong                   dwUdpDebugIP;
