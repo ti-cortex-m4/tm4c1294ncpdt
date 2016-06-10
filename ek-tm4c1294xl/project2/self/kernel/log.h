@@ -10,10 +10,10 @@ log.h
 
 #ifdef DEBUG
 #define CONSOLE DebugPrintF
-#define CONSOLE_UART DebugPrintF
+#define WARNING DebugPrintF
 #else
 #define CONSOLE
-#define CONSOLE_UART
+#define WARNING
 #endif
 
 
