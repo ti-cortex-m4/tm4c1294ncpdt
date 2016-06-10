@@ -49,7 +49,7 @@ uint2 GetInt2Error(void)
 }
 
 
-bool ValidInt2(uint2 w2)
+bool InvalidInt2(uint2 w2)
 {
   return w2.err != ERR_OK;
 }

@@ -39,8 +39,9 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 
   if (p->len > 1)
   {
-    err_t err = PopSfx(p, &wSfx);
-    if (err != ERR_OK) return err;
+    uint2 w2 = PopSuffix(p);
+    if (InvalidInt2(w2)) return w2.err;
+    wSfx = w2.w;
   }
 
   InitPush();
@@ -69,29 +70,27 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 
 err_t CmdW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
-  PushSfx(wSfx);
+  PushSfx(wSfx.w);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
 err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, in_fn in)
 {
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
 
-  err = in(p);
+  err_t err = in(p);
   if (err != ERR_OK) return err;
 
   InitPush();
   PushChar('A');
-  PushSfx(wSfx);
+  PushSfx(wSfx.w);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
@@ -99,12 +98,11 @@ err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
 err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
 
   uint2 w2 = PopIntDec(p, 2);
-  if (InvalidInt2(w2)) return err;
+  if (InvalidInt2(w2)) return w2.err;
   uint wArg = w2.w;
 
   InitPush();
@@ -196,7 +194,7 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
   PushChar(0x0D);
   PushChar(0x0A);
-  PushSfx(wSfx);
+  PushSfx(wSfx.w);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
@@ -274,11 +272,10 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
 
 err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, uchar *pibStart)
 {
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
 
-  err = PopEntity(p, pen, pibStart);
+  err_t err = PopEntity(p, pen, pibStart);
   if (err != ERR_OK) return err;
 
   err = SaveEntity(pen);
@@ -286,7 +283,7 @@ err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
   InitPush();
   PushChar('A');
-  PushSfx(wSfx);
+  PushSfx(wSfx.w);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }

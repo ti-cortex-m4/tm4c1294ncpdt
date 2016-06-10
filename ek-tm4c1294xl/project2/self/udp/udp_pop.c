@@ -155,12 +155,12 @@ err_t PopString(struct pbuf *p, char *sz, const uchar bSize, const uchar ibStart
 }
 
 
-err_t PopSfx(struct pbuf *p, uint *pw) // TODO
+uint2 PopSuffix(struct pbuf *p)
 {
   uchar *pb = p->payload;
 
   bool f = false;
-  *pw = 0;
+  uint w = 0;
 
   uchar i;
   for (i=0; i<p->len; i++)
@@ -168,9 +168,12 @@ err_t PopSfx(struct pbuf *p, uint *pw) // TODO
     if (f)
     {
       uchar2 b2 = DecodeChar(pb[i],0x10);
-      if (InvalidChar2(b2)) { CONSOLE_UART("WARNING PopSfx #1\n"); return ERR_VAL; }
+      if (InvalidChar2(b2)) {
+        CONSOLE_UART("WARNING PopSfx #1\n");
+        return GetInt2Error();
+      }
 
-     *pw = *pw*0x10 + b2.b;
+     w = w*0x10 + b2.b;
     }
     else
     {
@@ -180,11 +183,11 @@ err_t PopSfx(struct pbuf *p, uint *pw) // TODO
 
   if (f)
   {
-    return ERR_OK;
+    return GetInt2(w, ERR_OK);
   }
   else
   {
-    CONSOLE_UART("WARNING PopSfx #2\n");
-    return ERR_ARG;
+    CONSOLE("WARNING PopSfx #2\n");
+    return GetInt2Error();
   }
 }

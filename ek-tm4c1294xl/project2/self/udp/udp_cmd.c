@@ -13,14 +13,13 @@ udp_cmd,c
 
 err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *sz)
 {
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushString(sz);
-  PushSfx(wSfx);
+  PushSfx(wSfx.w);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
@@ -28,14 +27,13 @@ err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
 err_t CmdBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, buff bf)
 {
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushBuff(bf);
-  PushSfx(wSfx);
+  PushSfx(wSfx.w);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
@@ -43,42 +41,39 @@ err_t CmdBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
 
 err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong dw)
 {
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushIP(dw);
-  PushSfx(wSfx);
+  PushSfx(wSfx.w);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
 err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uchar b)
 {
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushCharDec(b);
-  PushSfx(wSfx);
+  PushSfx(wSfx.w);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
 
 err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uint w)
 {
-  uint wSfx = 0;
-  err_t err = PopSfx(p, &wSfx);
-  if (err != ERR_OK) return err;
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushIntDec(w);
-  PushSfx(wSfx);
+  PushSfx(wSfx.w);
 
   return PushOut(pcb,p,addr,port,broadcast);
 }
