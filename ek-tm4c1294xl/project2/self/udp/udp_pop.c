@@ -155,7 +155,7 @@ err_t PopString(struct pbuf *p, char *sz, const uchar bSize, const uchar ibStart
 }
 
 
-uint2 PopSuffix(struct pbuf *p)
+uint2 PopSfx(struct pbuf *p)
 {
   uchar *pb = p->payload;
 
