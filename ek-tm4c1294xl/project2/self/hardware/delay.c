@@ -5,6 +5,7 @@ delay.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "watchdog.h"
 #include "delay.h"
 
 
@@ -74,6 +75,7 @@ void DelaySecond(uint wSecond)
 
   while (wSecond-- > 0)
   {
+    ResetWatchdog();
     DelayMilliSecond(1000);
   }
 }
