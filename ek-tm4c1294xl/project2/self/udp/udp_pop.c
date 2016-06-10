@@ -44,14 +44,14 @@ uint2 PopInt(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder)
 
     uchar2 b2 = DecodeChar(pb[i],bRadix);
     if (InvalidChar2(b2)) {
-      CONSOLE_UART("WARNING bad integer of radix %u with border @c\n",bRadix,cBorder);
+      WARNING("WARNING bad integer of radix %u with border @c\n",bRadix,cBorder);
       return GetInt2Error();
     }
 
     w = w*bRadix + b2.b;
   }
 
-  CONSOLE_UART("WARNING PopInt #2\n");
+  WARNING("WARNING PopInt #2\n");
   return GetInt2Error();
 }
 
@@ -74,7 +74,7 @@ static uchar2 PopChar(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder
     return GetChar2Error();
 
   if (w2.w >= 0x100) {
-    CONSOLE_UART("WARNING char overflow\n");
+    WARNING("WARNING char overflow\n");
     return GetChar2Error();
   }
 
@@ -102,7 +102,7 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart) // TODO
   {
     if (pb[i] == '.')
     {
-      if (y > 3) { CONSOLE_UART("WARNING PopIP #1\n"); return GetLong2Error(); }
+      if (y > 3) { WARNING("WARNING PopIP #1\n"); return GetLong2Error(); }
       else
       {
         cb.mpbBuff[3-y] = x;
@@ -120,13 +120,13 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart) // TODO
     else
     {
       uchar2 b2 = DecodeChar(pb[i],10);
-      if (InvalidChar2(b2)) { CONSOLE_UART("WARNING PopIP #2\n"); return GetLong2Error(); }
+      if (InvalidChar2(b2)) { WARNING("WARNING PopIP #2\n"); return GetLong2Error(); }
 
       x = x*10 + b2.b;
     }
   }
 
-  CONSOLE_UART("WARNING PopIP #3\n");
+  WARNING("WARNING PopIP #3\n");
   return GetLong2Error();
 }
 
@@ -143,13 +143,13 @@ err_t PopString(struct pbuf *p, char *sz, const uchar bSize, const uchar ibStart
     if (pb[i] == '|') return ERR_OK;
 
     char b = pb[i];
-    if (b < 0x20) { CONSOLE_UART("WARNING PopString #1\n"); return ERR_VAL; }
+    if (b < 0x20) { WARNING("WARNING PopString #1\n"); return ERR_VAL; }
 
-    if (i-ibStart >= bSize) { CONSOLE_UART("WARNING PopString #2\n"); return ERR_VAL; }
+    if (i-ibStart >= bSize) { WARNING("WARNING PopString #2\n"); return ERR_VAL; }
     sz[i-ibStart] = b;
   }
 
-  CONSOLE_UART("WARNING PopString #3\n");
+  WARNING("WARNING PopString #3\n");
   return ERR_ARG;
 }
 
@@ -168,7 +168,7 @@ uint2 PopSfx(struct pbuf *p)
     {
       uchar2 b2 = DecodeChar(pb[i],0x10);
       if (InvalidChar2(b2)) {
-        CONSOLE_UART("WARNING PopSfx #1\n");
+        WARNING("WARNING PopSfx #1\n");
         return GetInt2Error();
       }
 

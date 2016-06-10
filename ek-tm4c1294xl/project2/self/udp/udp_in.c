@@ -217,7 +217,7 @@ static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCo
     if (pb[i++] != *szCode++) return false;
   }
 
-//  CONSOLE_UART("code: %c%s %u\n", bOperation, sz, i);
+//  WARNING("code: %c%s %u\n", bOperation, sz, i);
 
   *pibStart = i;
   return true;
@@ -229,7 +229,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
 
   if (ibStart == 0xFF)
   {
-    CONSOLE_UART("WARNING index %u\n",ibStart);
+    WARNING("WARNING index %u\n",ibStart);
     return -1;
   }
   else
@@ -242,7 +242,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
          if (!InvalidChar2(b2)) {
            (*(uchar *)pen->pbRam) = b2.b;
          }
-//         CONSOLE_UART("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
+//         WARNING("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
          return b2.err;
        }
        case INT:
@@ -251,7 +251,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
          if (!InvalidInt2(w2)) {
            *(uint *)pen->pbRam = w2.w;
          }
-//         CONSOLE_UART("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
+//         WARNING("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
          return w2.err;
        }
        case IP:
@@ -260,7 +260,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
          if (!InvalidLong2(dw2)) {
            *(ulong *)pen->pbRam = dw2.dw;
          }
-//         CONSOLE_UART("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
+//         WARNING("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
          return dw2.err;
        }
        case STRING:
@@ -320,7 +320,7 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 
 void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
-//  CONSOLE_UART("broadcast: %d\n", broadcast);
+//  WARNING("broadcast: %d\n", broadcast);
 
   if (IsCmd(p,"X")) {
     CmdX(pcb,p,addr,port,broadcast);
@@ -440,6 +440,6 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   }
 
   else { // TODO
-    CONSOLE_UART("unknown command\n");
+    WARNING("unknown command\n");
   }
 }
