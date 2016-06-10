@@ -180,15 +180,16 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
     case 61: PushString("AI=$SETTINGS;D=Settings;T=GROUP"); break;
     case 62: PushString(enSerialNumber.szName); break;
-    case 63: PushString(enDebugMode.szName); break;
-    case 64: PushString(enUdpDebugIP.szName); break;
-    case 65: PushString(enUdpDebugPort.szName); break;
-    case 66: PushString(enLwipDebugFlag.szName); break;
-    case 67: PushString(enLwipDebugTimeout.szName); break;
-    case 68: PushString(enDataDebugFlag.szName); break;
-    case 69: PushString(enIOModeDebugFlag.szName); break;
-    case 70: PushString(enLED0Mode.szName); break;
-    case 71: PushString(enLED1Mode.szName); break;
+    case 63: PushString(enWatchdogFlag.szName); break;
+    case 64: PushString(enDebugMode.szName); break;
+    case 65: PushString(enUdpDebugIP.szName); break;
+    case 66: PushString(enUdpDebugPort.szName); break;
+    case 67: PushString(enLwipDebugFlag.szName); break;
+    case 68: PushString(enLwipDebugTimeout.szName); break;
+    case 69: PushString(enDataDebugFlag.szName); break;
+    case 70: PushString(enIOModeDebugFlag.szName); break;
+    case 71: PushString(enLED0Mode.szName); break;
+    case 72: PushString(enLED1Mode.szName); break;
 
     default: CONSOLE("WARNING unknown index %u\n", wArg); ASSERT(false); break; // TODO
   }
@@ -333,7 +334,7 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"72");
+    CmdString(pcb,p,addr,port,broadcast,"73");
   } else if (IsCmd(p,"FS")) {
     CmdFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
@@ -413,6 +414,7 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enSerialNumber)) {}
 
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enWatchdogFlag)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDebugMode)) {}
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugIP)) {}

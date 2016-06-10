@@ -82,6 +82,7 @@ const entity * const mpenEntities[] =
   &enStopBits3,
   &enStopBits4,
 
+  &enWatchdogFlag,
   &enDebugMode,
 
   &enUdpDebugIP,

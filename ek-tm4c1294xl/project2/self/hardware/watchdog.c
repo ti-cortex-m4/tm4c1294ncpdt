@@ -61,6 +61,8 @@ void ResetWatchdog(void)
 
 void InitWatchdog(void)
 {
+  DisableWatchdog();
+  EnableWatchdog();
 }
 
 

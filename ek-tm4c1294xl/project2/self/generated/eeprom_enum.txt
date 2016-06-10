@@ -94,5 +94,7 @@ typedef enum
   EEPROM_LED_MODE_0            = EEPROM_IO_MODE_DEBUG_FLAG + 4,
   EEPROM_LED_MODE_1            = EEPROM_LED_MODE_0 + 4,
 
-  EEPROM_END                   = EEPROM_LED_MODE_1 + 4
+  EEPROM_WATCHDOG_FLAG         = EEPROM_LED_MODE_1 + 4,
+
+  EEPROM_END                   = EEPROM_WATCHDOG_FLAG + 4
 } eeprom;
