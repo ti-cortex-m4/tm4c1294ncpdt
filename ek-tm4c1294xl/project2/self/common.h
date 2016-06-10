@@ -17,6 +17,8 @@ typedef uint8_t         uchar;
 typedef uint16_t        uint;
 typedef uint32_t        ulong;
 
+typedef const char * const message;
+
 
 typedef union
 {
