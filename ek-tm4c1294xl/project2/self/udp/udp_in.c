@@ -103,9 +103,9 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   err_t err = PopSfx(p, &wSfx);
   if (err != ERR_OK) return err;
 
-  uint wArg = 0;
-  err = PopIntDec(p, &wArg, 2);
-  if (err != ERR_OK) return err;
+  uint2 w2 = PopIntDec(p, 2);
+  if (w2.err != ERR_OK) return err;
+  uint wArg = w2.w;
 
   InitPush();
 
@@ -240,15 +240,21 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
     {
        case CHAR:
        {
-         err_t err = PopCharDec(p, pen->pbRam, ibStart);
+         uchar2 b2 = PopCharDec(p, ibStart);
+         if (b2.err != ERR_OK) {
+           (*(uchar *)pen->pbRam) = b2.b;
+         }
 //         CONSOLE_UART("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
-         return err;
+         return b2.err;
        }
        case INT:
        {
-         err_t err = PopIntDec(p, pen->pbRam, ibStart);
+         uint2 w2 = PopIntDec(p, ibStart);
+         if (w2.err != ERR_OK) {
+           *(uint *)pen->pbRam = w2.w;
+         }
 //         CONSOLE_UART("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
-         return err;
+         return w2.err;
        }
        case IP:
        {

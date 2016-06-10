@@ -6,12 +6,13 @@ UDP_POP,C
 
 #include "../main.h"
 #include "../kernel/log.h"
+#include "../kernel/wrappers.h"
 #include "../uart/uart_log.h"
 #include "udp_pop.h"
 
 
 
-static uchar DecodeChar(uchar b, uchar bRadix) // TODO
+static uchar2 DecodeChar(uchar b, uchar bRadix)
 {
 const static char mbCHARS[] = "0123456789abcdef";
 
@@ -20,81 +21,69 @@ const static char mbCHARS[] = "0123456789abcdef";
   uchar i;
   for (i=0; i<bRadix; i++)
   {
-    if (mbCHARS[i] == b) return i;
+    if (mbCHARS[i] == b)
+      return GetChar2(i, ERR_OK);
   }
 
-  return 0xFF;
+  CONSOLE("WARNING bad char %02X of radix %u\n", b, bRadix);
+  return GetChar2Error();
 }
 
 
-static err_t PopInt(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix) // TODO
+uint2 PopInt(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder)
 {
   uchar *pb = p->payload;
 
-  *pw = 0;
-
-  uchar i;
-  for (i=ibStart; i<p->len; i++)
-  {
-    if (pb[i] == '|') return ERR_OK;
-
-    char b = DecodeChar(pb[i],bRadix);
-    if (b == 0xFF) { CONSOLE_UART("WARNING PopInt #1\n"); return ERR_VAL; }
-
-    *pw = *pw*bRadix + b;
-  }
-
-  CONSOLE_UART("WARNING PopInt #2\n");
-  return ERR_ARG;
-}
-
-err_t PopInt2(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix, uchar bChar) // TODO
-{
-  uchar *pb = p->payload;
-
-  *pw = 0;
-
-  uchar i;
-  for (i=ibStart; i<p->len; i++)
-  {
-    if (pb[i] == bChar) return ERR_OK;
-
-    char b = DecodeChar(pb[i],bRadix);
-    if (b == 0xFF) { CONSOLE_UART("WARNING PopInt #1\n"); return ERR_VAL; }
-
-    *pw = *pw*bRadix + b;
-  }
-
-  CONSOLE_UART("WARNING PopInt #2\n");
-  return ERR_ARG;
-}
-
-err_t PopIntDec(struct pbuf *p, uint *pw, const uchar ibStart)
-{
-  return PopInt(p, pw, ibStart, 10);
-}
-
-err_t PopIntHex(struct pbuf *p, uint *pw, const uchar ibStart)
-{
-  return PopInt(p, pw, ibStart, 0x10);
-}
-
-
-static err_t PopChar(struct pbuf *p, uchar *pb, uchar ibStart, uchar bRadix)
-{
   uint w = 0;
-  err_t err = PopInt(p, &w, ibStart, bRadix);
-  if (err != ERR_OK) return err;
 
-  if (w >= 0x100) { CONSOLE_UART("WARNING PopChar #1\n"); return ERR_ARG; }
-  *pb = w;
+  uchar i;
+  for (i=ibStart; i<p->len; i++)
+  {
+    if (pb[i] == cBorder)
+      return GetInt2(w, ERR_OK);
 
-  return ERR_OK;
+    uchar2 b2 = DecodeChar(pb[i],bRadix);
+    if (b2.err != ERR_OK) {
+      CONSOLE_UART("WARNING bad integer of radix %u with border @c\n",bRadix,cBorder);
+      return GetInt2Error();
+    }
+
+    w = w*bRadix + b2.b;
+  }
+
+  CONSOLE_UART("WARNING PopInt #2\n");
+  return GetInt2Error();
 }
 
-err_t PopCharDec(struct pbuf *p, uchar *pb, const uchar ibStart)
+
+uint2 PopIntDec(struct pbuf *p, const uchar ibStart)
 {
-  return PopChar(p, pb, ibStart, 10);
+  return PopInt(p, ibStart, 10, '|');
+}
+
+uint2 PopIntHex(struct pbuf *p, const uchar ibStart)
+{
+  return PopInt(p, ibStart, 0x10, '|');
+}
+
+
+static uchar2 PopChar(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder)
+{
+  uint2 w2 = PopInt(p, ibStart, bRadix, cBorder);
+  if (w2.err != ERR_OK)
+    return GetChar2Error();
+
+  if (w2.w >= 0x100) {
+    CONSOLE_UART("WARNING char overflow\n");
+    return GetChar2Error();
+  }
+
+  return GetChar2(w2.w, ERR_OK);
+}
+
+uchar2 PopCharDec(struct pbuf *p, const uchar ibStart)
+{
+  return PopChar(p, ibStart, 10, '|');
 }
 
 
@@ -131,10 +120,10 @@ err_t PopIP(struct pbuf *p, ulong *pdw, const uchar ibStart) // TODO
 
     else
     {
-      char b = DecodeChar(pb[i],10);
-      if (b == 0xFF) { CONSOLE_UART("WARNING PopIP #2\n"); return ERR_VAL; }
+      uchar2 b2 = DecodeChar(pb[i],10);
+      if (b2.err != ERR_OK) { CONSOLE_UART("WARNING PopIP #2\n"); return ERR_VAL; }
 
-      x = x*10 + b;
+      x = x*10 + b2.b;
     }
   }
 
@@ -178,10 +167,10 @@ err_t PopSfx(struct pbuf *p, uint *pw) // TODO
   {
     if (f)
     {
-      char b = DecodeChar(pb[i],0x10);
-      if (b == 0xFF) { CONSOLE_UART("WARNING PopSfx #1\n"); return ERR_VAL; }
+      uchar2 b2 = DecodeChar(pb[i],0x10);
+      if (b2.err != ERR_OK) { CONSOLE_UART("WARNING PopSfx #1\n"); return ERR_VAL; }
 
-     *pw = *pw*0x10 + b;
+     *pw = *pw*0x10 + b2.b;
     }
     else
     {

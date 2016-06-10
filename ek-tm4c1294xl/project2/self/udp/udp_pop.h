@@ -5,14 +5,14 @@ UDP_POP,H
 ------------------------------------------------------------------------------*/
 
 #include "lwip/udp.h"
+#include "../kernel/wrappers.h"
 
 
 
-err_t PopIntDec(struct pbuf *p, uint *pw, const uchar ibStart);
-err_t PopIntHex(struct pbuf *p, uint *pw, const uchar ibStart);
-err_t PopCharDec(struct pbuf *p, uchar *pb, const uchar ibStart);
+uint2 PopInt(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder);
+uint2 PopIntDec(struct pbuf *p, const uchar ibStart);
+uint2 PopIntHex(struct pbuf *p, const uchar ibStart);
+uchar2 PopCharDec(struct pbuf *p, const uchar ibStart);
 err_t PopIP(struct pbuf *p, ulong *pdw, const uchar ibStart);
 err_t PopString(struct pbuf *p, char *sz, const uchar bSize, const uchar ibStart);
 err_t PopSfx(struct pbuf *p, uint *pw);
-
-err_t PopInt2(struct pbuf *p, uint *pw, uchar ibStart, uchar bRadix, uchar bChar); // TODO
