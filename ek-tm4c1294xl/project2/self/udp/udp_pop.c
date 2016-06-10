@@ -22,7 +22,7 @@ const static char mbCHARS[] = "0123456789abcdef";
   for (i=0; i<bRadix; i++)
   {
     if (mbCHARS[i] == b)
-      return GetChar2(i, ERR_OK);
+      return GetChar2Success(i);
   }
 
   WARNING("WARNING bad char %02X of radix %u\n", b, bRadix);
@@ -40,7 +40,7 @@ uint2 PopInt(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder)
   for (i=ibStart; i<p->len; i++)
   {
     if (pb[i] == cBorder)
-      return GetInt2(w, ERR_OK);
+      return GetInt2Success(w);
 
     uchar2 b2 = DecodeChar(pb[i],bRadix);
     if (InvalidChar2(b2)) {
@@ -78,7 +78,7 @@ static uchar2 PopChar(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder
     return GetChar2Error();
   }
 
-  return GetChar2(w2.w, ERR_OK);
+  return GetChar2Success(w2.w);
 }
 
 uchar2 PopCharDec(struct pbuf *p, const uchar ibStart)
@@ -114,7 +114,7 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart) // TODO
     else if (pb[i] == '|')
     {
       cb.mpbBuff[3-y] = x;
-      return GetLong2(cb.dwBuff, ERR_OK);
+      return GetLong2Success(cb.dwBuff);
     }
 
     else
@@ -182,7 +182,7 @@ uint2 PopSfx(struct pbuf *p)
 
   if (f)
   {
-    return GetInt2(w, ERR_OK);
+    return GetInt2Success(w);
   }
   else
   {
