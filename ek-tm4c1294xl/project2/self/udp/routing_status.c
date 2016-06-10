@@ -120,7 +120,9 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   if (u != UART_COUNT-1) {
     switch (wIdx) {
       case 6: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
-      default: WARNING("WARNING unknown routing mode index %u\n", wIdx); break;
+    }
+    if (wIdx >= CONTENT_SIZE) {
+      WARNING("WARNING unknown routing mode index %u\n", wIdx);
     }
   } else {
     switch (wIdx) {
@@ -128,7 +130,9 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 7: CmdUptime(pcb,p,addr,port,broadcast); break;
       case 8: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset)); break;
       case 9: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
-      default: WARNING("WARNING unknown routing mode index %u\n", wIdx); break;
+    }
+    if (wIdx >= CONTENT_SIZE + CONTENT_EXTRA_SIZE) {
+      WARNING("WARNING unknown routing mode index %u\n", wIdx);
     }
   }
 
