@@ -11,30 +11,32 @@ timer2.c
 #include "driverlib/interrupt.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
+#include "../kernel/clock.h"
 #include "timer2.h"
 
 
 
-#define TIMER1_FREQ     1000
+#define TIMER2_FREQ     1
 
 
 
 void InitTimer2(ulong dwClockFreq)
 {
-  SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER2);
 
-  TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);
-  TimerLoadSet(TIMER1_BASE, TIMER_A, dwClockFreq / TIMER1_FREQ);
+  TimerConfigure(TIMER2_BASE, TIMER_CFG_PERIODIC);
+  TimerLoadSet(TIMER2_BASE, TIMER_A, dwClockFreq / TIMER2_FREQ);
 
-  IntEnable(INT_TIMER1A);
-  TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+  IntEnable(INT_TIMER2A);
+  TimerIntEnable(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
 
-  TimerEnable(TIMER1_BASE, TIMER_A);
+  TimerEnable(TIMER2_BASE, TIMER_A);
 }
 
 
 
 void Timer2IntHandler(void)
 {
-  HWREG(TIMER1_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
+  HWREG(TIMER2_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
+  Clock_1Hz();
 }

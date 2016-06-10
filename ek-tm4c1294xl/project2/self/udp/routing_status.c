@@ -7,6 +7,7 @@ routing_status,c
 #include "../main.h"
 #include "../kernel/log.h"
 #include "../kernel/printf.h"
+#include "../kernel/clock.h"
 #include "../uart/io_mode.h"
 #include "../uart/serial.h"
 #include "udp_pop.h"
@@ -17,10 +18,12 @@ routing_status,c
 
 
 static const uchar CONTENT_SIZE = 7;
+static const uchar CONTENT_EXTRA_SIZE = 2;
 
 static const char * const szSerialPort = "Serial Port";
 static const char * const szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
 static const char * const szVariables = "Variables";
+static const char * const szRuntime = "Runtime";
 
 static const char * const szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
 static const char * const szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
@@ -41,7 +44,9 @@ bool IsRoutingStatusSize(struct pbuf *p) { // TODO
 
 
 err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
-  return CmdCharDec(pcb,p,addr,port,broadcast,CONTENT_SIZE);
+  uchar bSize = CONTENT_SIZE;
+  if (IsCmd(p,"CU@5")) bSize += CONTENT_EXTRA_SIZE;
+  return CmdCharDec(pcb,p,addr,port,broadcast,bSize);
 }
 
 
@@ -93,7 +98,9 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
     case 3: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szIOMode, GetIOMode(u))); break;
     case 4: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
     case 5: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mwTxSize", mwTxSize[u])); break;
-    case 6: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
+    case 6: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szRuntime)); break;
+    case 7: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "Working time (seconds)", GetClock())); break;
+    case 8: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     default: CONSOLE("WARNING unknown routing mode index %u\n", wIdx); break;
   }
 

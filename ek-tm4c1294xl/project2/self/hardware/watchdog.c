@@ -10,7 +10,7 @@ watchdog,c
 #include "inc/hw_sysctl.h"
 #include "driverlib/watchdog.h"
 #include "driverlib/sysctl.h"
-//#include "../memory/mem_program.h"
+#include "../kernel/settings.h"
 #include "watchdog.h"
 
 

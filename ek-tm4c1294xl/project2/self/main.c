@@ -21,6 +21,7 @@ MAIN,C
 #include "hardware/led.h"
 #include "hardware/sys_tick.h"
 #include "hardware/timer1.h"
+#include "hardware/timer2.h"
 #include "hardware/delay.h"
 #include "hardware/rom.h"
 #include "hardware/watchdog.h"
@@ -130,6 +131,7 @@ int     main(void)
   InitUARTs(dwClockFreq);
   InitIOModes();
   InitTimer1(dwClockFreq);
+  InitTimer2(dwClockFreq);
 
   // Set the interrupt priorities.  We set the SysTick interrupt to a higher
   // priority than the Ethernet interrupt to ensure that the file system
