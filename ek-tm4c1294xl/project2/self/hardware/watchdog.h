@@ -1,14 +1,16 @@
 /*------------------------------------------------------------------------------
-WATCHDOG,H
+watchdog.h
 
 
 ------------------------------------------------------------------------------*/
-#if 0
+
 #define ENABLE_WATCHDOG
 
 
-void    EnableWatchdog(void);
-void    DisableWatchdog(void);
-void    ResetWatchdog(void);
-bool    IsResetWatchdog(void);
-#endif
+
+void EnableWatchdog(void);
+void DisableWatchdog(void);
+void ResetWatchdog(void);
+
+void InitWatchdog(void);
+bool IsWatchdogReset(void);

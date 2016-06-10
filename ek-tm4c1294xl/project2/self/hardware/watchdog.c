@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------
-WATCHDOG,C
+watchdog,c
 
- Watchdog timer
+
 ------------------------------------------------------------------------------*/
-#if 0
+
 #include "../main.h"
 #include "inc/hw_types.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_sysctl.h"
 #include "driverlib/watchdog.h"
 #include "driverlib/sysctl.h"
-#include "../memory/mem_program.h"
+//#include "../memory/mem_program.h"
 #include "watchdog.h"
 
 
@@ -19,7 +19,7 @@ WATCHDOG,C
 
 
 
-void    EnableWatchdog(void)
+void EnableWatchdog(void)
 {
 #ifdef ENABLE_WATCHDOG
 
@@ -35,7 +35,7 @@ void    EnableWatchdog(void)
 }
 
 
-void    DisableWatchdog(void)
+void DisableWatchdog(void)
 {
 #ifdef ENABLE_WATCHDOG
 
@@ -48,7 +48,7 @@ void    DisableWatchdog(void)
 }
 
 
-void    ResetWatchdog(void)
+void ResetWatchdog(void)
 {
 #ifdef ENABLE_WATCHDOG
 
@@ -58,10 +58,16 @@ void    ResetWatchdog(void)
 }
 
 
-bool    IsResetWatchdog(void)
+
+void InitWatchdog(void)
+{
+}
+
+
+bool IsWatchdogReset(void)
 {
   bool f = ((SysCtlResetCauseGet() & SYSCTL_CAUSE_WDOG0) != 0);
   SysCtlResetCauseClear(SYSCTL_CAUSE_WDOG0);
   return f;
 }
-#endif
+
