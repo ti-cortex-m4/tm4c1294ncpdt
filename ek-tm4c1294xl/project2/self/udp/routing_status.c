@@ -29,7 +29,7 @@ static const char * const szHead = "<head><style type='text/css'>table{border-co
 static const char * const szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
 static const char * const szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
 static const char * const szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
-static const char * const szRowClock = "<tr><td>%s</td><td>%u %2u:%2u:%2u</td></tr>";
+static const char * const szRowClock = "<tr><td>%s</td><td>%u day(s) %02u:%02u:%02u</td></tr>";
 static const char * const szBodyEnd = "</table></body>";
 
 
@@ -59,14 +59,14 @@ bool IsRoutingStatusContent(struct pbuf *p) {
 
 static void CmdClock(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   ulong dwSeconds = GetClockSeconds();
-  uint wDays = dwSeconds / (ulong)24*60*60;
-  dwSeconds -= (ulong)24*60*60;
-  uchar bHours = dwSeconds / (uint)60*60;
-  dwSeconds -= (uint)60*60;
-  uchar bMinutes = dwSeconds / 60;
-  dwSeconds -= dwSeconds / 60;
+  uint wDays = dwSeconds / SECONDS_IN_DAY;
+  dwSeconds %= SECONDS_IN_DAY;
+  uchar bHours = dwSeconds / SECONDS_IN_HOUR;
+  dwSeconds %= SECONDS_IN_HOUR;
+  uchar bMinutes = dwSeconds / SECONDS_IN_MINUTE;
+  dwSeconds %= dwSeconds / SECONDS_IN_MINUTE;
 
-  CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, "Working time", dwSeconds, wDays, bHours, bMinutes, dwSeconds));
+  CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, "Working time", wDays, bHours, bMinutes, dwSeconds));
 }
 
 
