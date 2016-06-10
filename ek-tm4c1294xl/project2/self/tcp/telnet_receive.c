@@ -33,7 +33,11 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
     tState *pState = arg;
     SYS_ARCH_DECL_PROTECT(lev);
 
+#if 0
     CONSOLE("%u: receive 0x%08x, 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, p, err);
+#else
+    CONSOLE("%u: receive error=%d\n", pState->ucSerialPort, err);
+#endif
 
     // Place the incoming packet onto the queue if there is space.
     if((err == ERR_OK) && (p != NULL))
