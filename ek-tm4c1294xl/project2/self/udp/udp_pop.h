@@ -15,4 +15,4 @@ uint2 PopIntHex(struct pbuf *p, const uchar ibStart);
 uchar2 PopCharDec(struct pbuf *p, const uchar ibStart);
 err_t PopIP(struct pbuf *p, ulong *pdw, const uchar ibStart);
 err_t PopString(struct pbuf *p, char *sz, const uchar bSize, const uchar ibStart);
-uint2 PopSuffix(struct pbuf *p);
+uint2 PopSfx(struct pbuf *p);
