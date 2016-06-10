@@ -25,7 +25,7 @@ const static char mbCHARS[] = "0123456789abcdef";
       return GetChar2(i, ERR_OK);
   }
 
-  CONSOLE("WARNING bad char %02X of radix %u\n", b, bRadix);
+  WARNING("WARNING bad char %02X of radix %u\n", b, bRadix);
   return GetChar2Error();
 }
 
@@ -186,7 +186,7 @@ uint2 PopSfx(struct pbuf *p)
   }
   else
   {
-    CONSOLE("WARNING PopSfx #2\n");
+    WARNING("WARNING PopSfx #2\n");
     return GetInt2Error();
   }
 }
