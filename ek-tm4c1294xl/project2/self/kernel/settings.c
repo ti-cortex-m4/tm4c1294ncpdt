@@ -45,6 +45,8 @@ uchar                   mibDataBits[UART_COUNT];
 uchar                   mibStopBits[UART_COUNT];
 
 bool                    fWatchdogFlag;
+bool                    fWatchdogReset;
+
 bool                    ibDebugMode;
 
 ulong                   dwUdpDebugIP;

@@ -65,6 +65,8 @@ void InitWatchdog(void)
 
   if (fWatchdogFlag)
     EnableWatchdog();
+
+  fWatchdogReset = IsWatchdogReset();
 }
 
 
