@@ -239,7 +239,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
        case CHAR:
        {
          uchar2 b2 = PopCharDec(p, ibStart);
-         if (InvalidChar2(b2)) {
+         if (!InvalidChar2(b2)) {
            (*(uchar *)pen->pbRam) = b2.b;
          }
 //         CONSOLE_UART("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
@@ -248,7 +248,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
        case INT:
        {
          uint2 w2 = PopIntDec(p, ibStart);
-         if (InvalidInt2(w2)) {
+         if (!InvalidInt2(w2)) {
            *(uint *)pen->pbRam = w2.w;
          }
 //         CONSOLE_UART("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
@@ -256,9 +256,12 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
        }
        case IP:
        {
-         err_t err = PopIP(p, pen->pbRam, ibStart);
+         ulong2 dw2 = PopIP(p, ibStart);
+         if (!InvalidLong2(dw2)) {
+           *(ulong *)pen->pbRam = dw2.dw;
+         }
 //         CONSOLE_UART("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
-         return err;
+         return dw2.err;
        }
        case STRING:
        {
