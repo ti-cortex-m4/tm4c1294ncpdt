@@ -21,23 +21,23 @@ routing_status,c
 static const uchar CONTENT_SIZE = 7;
 static const uchar CONTENT_EXTRA_SIZE = 3;
 
-static const char * const szSerialPort = "Serial Port";
-static const char * const szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
-static const char * const szVariables = "Variables";
-static const char * const szRuntime = "Runtime";
-static const char * const szUptime = "Working time after last restart";
-static const char * const szWatchdogReset = "Last restart type (0 - power-up, 1 - watchdog)";
+static message szSerialPort = "Serial Port";
+static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
+static message szVariables = "Variables";
+static message szRuntime = "Runtime";
+static message szUptime = "Working time after last restart";
+static message szWatchdogReset = "Last restart type (0 - power-up, 1 - watchdog)";
 
-static const char * const szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
-static const char * const szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
-static const char * const szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
-static const char * const szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
-static const char * const szRowClock = "<tr><td>%s</td><td>%u day(s) %02u:%02u:%02u</td></tr>";
-static const char * const szBodyEnd = "</table></body>";
+static message szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
+static message szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
+static message szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
+static message szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
+static message szRowClock = "<tr><td>%s</td><td>%u day(s) %02u:%02u:%02u</td></tr>";
+static message szBodyEnd = "</table></body>";
 
 
 
-bool IsRoutingStatusSize(struct pbuf *p) { // TODO
+bool IsRoutingStatusSize(struct pbuf *p) {
   if (IsCmd(p,"CU@1")) return true;
   if (IsCmd(p,"CU@2")) return true;
   if (IsCmd(p,"CU@3")) return true;
