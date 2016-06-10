@@ -9,17 +9,17 @@ clock.c
 
 
 
-static volatile ulong dwClock = 0;
+static volatile ulong dwClockSeconds = 0;
 
 
 
 void Clock_1Hz(void)
 {
-  dwClock++;
+  dwClockSeconds++;
 }
 
 
-ulong GetClock(void)
+ulong GetClockSeconds(void)
 {
-  return dwClock;
+  return dwClockSeconds;
 }

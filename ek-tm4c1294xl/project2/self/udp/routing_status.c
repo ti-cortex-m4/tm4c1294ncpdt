@@ -29,6 +29,7 @@ static const char * const szHead = "<head><style type='text/css'>table{border-co
 static const char * const szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
 static const char * const szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
 static const char * const szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
+static const char * const szRowClock = "<tr><td>%s</td><td>%u %2u:%2u:%2u</td></tr>";
 static const char * const szBodyEnd = "</table></body>";
 
 
@@ -53,6 +54,19 @@ err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
 
 bool IsRoutingStatusContent(struct pbuf *p) {
   return IsCmd(p, "FU");
+}
+
+
+static void CmdClock(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+  ulong dwSeconds = GetClockSeconds();
+  uint wDays = dwSeconds / (ulong)24*60*60;
+  dwSeconds -= (ulong)24*60*60;
+  uchar bHours = dwSeconds / (uint)60*60;
+  dwSeconds -= (uint)60*60;
+  uchar bMinutes = dwSeconds / 60;
+  dwSeconds -= dwSeconds / 60;
+
+  CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, "Working time", dwSeconds, wDays, bHours, bMinutes, dwSeconds));
 }
 
 
@@ -99,7 +113,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
     case 4: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
     case 5: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mwTxSize", mwTxSize[u])); break;
     case 6: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szRuntime)); break;
-    case 7: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "Working time (seconds)", GetClock())); break;
+    case 7: CmdClock(pcb,p,addr,port,broadcast); break;
     case 8: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     default: CONSOLE("WARNING unknown routing mode index %u\n", wIdx); break;
   }
