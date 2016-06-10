@@ -5,4 +5,4 @@ clock.h
 ------------------------------------------------------------------------------*/
 
 void Clock_1Hz(void);
-ulong GetClock(void);
+ulong GetClockSeconds(void);
