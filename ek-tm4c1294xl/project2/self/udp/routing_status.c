@@ -94,7 +94,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   }
 
   uchar2 b2 = PopCharDec(p, ibStart);
-  if (b2.err != ERR_OK) {
+  if (InvalidChar2(b2)) {
     CONSOLE("WARNING bad routing mode port\n");
     return ERR_OK;
   }

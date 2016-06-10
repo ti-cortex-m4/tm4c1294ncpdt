@@ -241,7 +241,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
        case CHAR:
        {
          uchar2 b2 = PopCharDec(p, ibStart);
-         if (b2.err != ERR_OK) {
+         if (InvalidChar2(b2)) {
            (*(uchar *)pen->pbRam) = b2.b;
          }
 //         CONSOLE_UART("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
