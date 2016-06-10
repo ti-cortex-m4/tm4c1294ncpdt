@@ -12,7 +12,7 @@ UDP_POP,C
 
 
 
-static uchar2 DecodeChar(uchar b, uchar bRadix)
+static uchar2 DecodeChar(const uchar b, const uchar bRadix)
 {
 const static char mbCHARS[] = "0123456789abcdef";
 
@@ -30,7 +30,7 @@ const static char mbCHARS[] = "0123456789abcdef";
 }
 
 
-uint2 PopInt(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder)
+uint2 PopInt(struct pbuf *p, const uchar ibStart, const uchar bRadix, const uchar cBorder)
 {
   uchar *pb = p->payload;
 
@@ -67,7 +67,7 @@ uint2 PopIntHex(struct pbuf *p, const uchar ibStart)
 }
 
 
-static uchar2 PopChar(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder)
+uchar2 PopChar(struct pbuf *p, const uchar ibStart, const uchar bRadix, const uchar cBorder)
 {
   uint2 w2 = PopInt(p, ibStart, bRadix, cBorder);
   if (InvalidInt2(w2))
@@ -131,11 +131,11 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart) // TODO
 }
 
 
-err_t PopString(struct pbuf *p, char *sz, const uchar bSize, const uchar ibStart) // TODO
+err_t PopString(struct pbuf *p, char *szString, const uchar bSize, const uchar ibStart) // TODO
 {
   uchar *pb = p->payload;
 
-  memset(sz, 0, bSize);
+  memset(szString, 0, bSize);
 
   uchar i;
   for (i=ibStart; i<p->len; i++)
@@ -146,7 +146,7 @@ err_t PopString(struct pbuf *p, char *sz, const uchar bSize, const uchar ibStart
     if (b < 0x20) { WARNING("PopString #1\n"); return ERR_VAL; }
 
     if (i-ibStart >= bSize) { WARNING("PopString #2\n"); return ERR_VAL; }
-    sz[i-ibStart] = b;
+    szString[i-ibStart] = b;
   }
 
   WARNING("PopString #3\n");
