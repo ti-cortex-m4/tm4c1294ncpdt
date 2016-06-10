@@ -170,7 +170,7 @@ err_t PopString(struct pbuf *p, char *szString, const uchar bSize, const uchar i
 }
 
 
-uint2 PopSfx(struct pbuf *p)
+uint2 PopSuffix(struct pbuf *p)
 {
   uchar *pb = p->payload;
 
@@ -185,7 +185,7 @@ uint2 PopSfx(struct pbuf *p)
       uchar2 b2 = DecodeChar(pb[i], 0x10);
       if (InvalidChar2(b2))
       {
-        WARNING("PopSfx failed: wrong char\n");
+        WARNING("PopSuffix failed: wrong char\n");
         return GetInt2Error();
       }
 
@@ -203,7 +203,7 @@ uint2 PopSfx(struct pbuf *p)
   }
   else
   {
-    WARNING("PopSfx failed: cycle\n");
+    WARNING("PopSuffix failed: cycle\n");
     return GetInt2Error();
   }
 }
