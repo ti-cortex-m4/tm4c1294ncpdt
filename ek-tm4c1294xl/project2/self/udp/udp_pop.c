@@ -25,9 +25,10 @@ const static char mbCHARS[] = "0123456789abcdef";
       return GetChar2Success(i);
   }
 
-  WARNING("wrong char %02X of radix %u\n", b, bRadix);
+  WARNING("failed char decoding: wrong char %02X for radix %u\n", b, bRadix);
   return GetChar2Error();
 }
+
 
 
 uint2 PopInt(struct pbuf *p, const uchar ibStart, const uchar bRadix, const uchar cBorder)
@@ -36,22 +37,23 @@ uint2 PopInt(struct pbuf *p, const uchar ibStart, const uchar bRadix, const ucha
 
   uint w = 0;
 
-  uchar i;
+  uint i;
   for (i=ibStart; i<p->len; i++)
   {
     if (pb[i] == cBorder)
       return GetInt2Success(w);
 
     uchar2 b2 = DecodeChar(pb[i],bRadix);
-    if (InvalidChar2(b2)) {
-      WARNING("wrong integer of radix %u with border @c\n",bRadix,cBorder);
+    if (InvalidChar2(b2))
+    {
+      WARNING("wrong integer for radix %u with border @c\n",bRadix,cBorder);
       return GetInt2Error();
     }
 
     w = w*bRadix + b2.b;
   }
 
-  WARNING("PopInt #2\n");
+  WARNING("failed integer popping\n");
   return GetInt2Error();
 }
 
@@ -61,30 +63,37 @@ uint2 PopIntDec(struct pbuf *p, const uchar ibStart)
   return PopInt(p, ibStart, 10, '|');
 }
 
+
 uint2 PopIntHex(struct pbuf *p, const uchar ibStart)
 {
   return PopInt(p, ibStart, 0x10, '|');
 }
 
 
+
 uchar2 PopChar(struct pbuf *p, const uchar ibStart, const uchar bRadix, const uchar cBorder)
 {
   uint2 w2 = PopInt(p, ibStart, bRadix, cBorder);
   if (InvalidInt2(w2))
+  {
+    WARNING("failed char popping\n");
     return GetChar2Error();
+  }
 
   if (w2.w >= 0x100) {
-    WARNING("char overflow\n");
+    WARNING("failed char popping: char overflow %u\n",w2.w);
     return GetChar2Error();
   }
 
   return GetChar2Success(w2.w);
 }
 
+
 uchar2 PopCharDec(struct pbuf *p, const uchar ibStart)
 {
   return PopChar(p, ibStart, 10, '|');
 }
+
 
 
 ulong2 PopIP(struct pbuf *p, const uchar ibStart) // TODO
