@@ -26,6 +26,11 @@ uchar2 GetChar2Error(void)
 }
 
 
+bool InvalidChar2(uchar2 b2)
+{
+  return b2.eer != ERR_OK;
+}
+
 
 uint2 GetInt2(uint w, err_t err)
 {
@@ -44,6 +49,12 @@ uint2 GetInt2Error(void)
 }
 
 
+bool ValidInt2(uint2 w2)
+{
+  return w2.err != ERR_OK;
+}
+
+
 
 ulong2 GetLong2(ulong dw, err_t err)
 {
@@ -59,4 +70,10 @@ ulong2 GetLong2(ulong dw, err_t err)
 ulong2 GetLong2Error(void)
 {
   return GetLong2(MAX_LONG, ERR_VAL);
+}
+
+
+bool ValidLong2(ulong2 dw2)
+{
+  return dw2.err != ERR_OK;
 }

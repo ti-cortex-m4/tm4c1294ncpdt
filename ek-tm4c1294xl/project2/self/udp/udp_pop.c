@@ -43,7 +43,7 @@ uint2 PopInt(struct pbuf *p, uchar ibStart, uchar bRadix, uchar cBorder)
       return GetInt2(w, ERR_OK);
 
     uchar2 b2 = DecodeChar(pb[i],bRadix);
-    if (b2.err != ERR_OK) {
+    if (InvalidChar2(b2)) {
       CONSOLE_UART("WARNING bad integer of radix %u with border @c\n",bRadix,cBorder);
       return GetInt2Error();
     }
@@ -121,7 +121,7 @@ err_t PopIP(struct pbuf *p, ulong *pdw, const uchar ibStart) // TODO
     else
     {
       uchar2 b2 = DecodeChar(pb[i],10);
-      if (b2.err != ERR_OK) { CONSOLE_UART("WARNING PopIP #2\n"); return ERR_VAL; }
+      if (InvalidChar2(b2)) { CONSOLE_UART("WARNING PopIP #2\n"); return ERR_VAL; }
 
       x = x*10 + b2.b;
     }
@@ -168,7 +168,7 @@ err_t PopSfx(struct pbuf *p, uint *pw) // TODO
     if (f)
     {
       uchar2 b2 = DecodeChar(pb[i],0x10);
-      if (b2.err != ERR_OK) { CONSOLE_UART("WARNING PopSfx #1\n"); return ERR_VAL; }
+      if (InvalidChar2(b2)) { CONSOLE_UART("WARNING PopSfx #1\n"); return ERR_VAL; }
 
      *pw = *pw*0x10 + b2.b;
     }
