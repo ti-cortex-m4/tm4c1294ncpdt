@@ -19,7 +19,7 @@ routing_status,c
 
 
 static const uchar ROUTING_STATUS_SIZE = 7; // TODO define
-static const uchar CONTENT_DEBUG_SIZE = 3;
+static const uchar CONTENT_DEBUG_SIZE = 9;
 
 static message szSerialPort = "Serial Port";
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
