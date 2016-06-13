@@ -23,11 +23,11 @@ uint                    cwErrUPDPushNumbersOverflow = 0;
 
 
 
-static uchar PushNumberDec(uint w)
+static uchar PushNumber(const char *pcszFormat, uint w)
 {
   memset(&mbNumbers, 0, sizeof(mbNumbers));
 
-  uchar n = usprintf(mbNumbers, "%u" ,w);
+  uchar n = usprintf(mbNumbers, pcszFormat ,w);
   if (n >= NUMBERS_SIZE)
     cwErrUPDPushNumbersOverflow++;
 
@@ -38,6 +38,12 @@ static uchar PushNumberDec(uint w)
   }
 
   return n;
+}
+
+
+static uchar PushNumberDec(uint w)
+{
+  return PushNumber("%u", w);
 }
 
 
@@ -57,19 +63,7 @@ uchar PushIntDec(uint w)
 
 static uchar PushNumberHex(uint w)
 {
-  memset(&mbNumbers, 0, sizeof(mbNumbers));
-
-  uchar n = usprintf(mbNumbers, "%X" ,w);
-  if (n >= NUMBERS_SIZE)
-    cwErrUPDPushNumbersOverflow++;
-
-  uchar i;
-  for (i=0; i<n; i++)
-  {
-    PushChar(mbNumbers[i]);
-  }
-
-  return n;
+  return PushNumber("%X", w);
 }
 
 
