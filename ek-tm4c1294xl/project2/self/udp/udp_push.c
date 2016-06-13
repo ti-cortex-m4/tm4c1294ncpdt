@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-UDP_PUSH,C
+udp_push,c
 
 
 ------------------------------------------------------------------------------*/
@@ -16,7 +16,7 @@ static uchar            mbPush[PUSH_SIZE];
 static uint             iwPush;
 
 
-uint                    cwErrUPDPushOverflow = 0;
+uint                    cwErrUPDPushCharOverflow = 0;
 
 
 
@@ -31,7 +31,7 @@ void PushChar(uchar b)
   if (iwPush < PUSH_SIZE)
     mbPush[iwPush++] = b;
   else
-    cwErrUPDPushOverflow++;
+    cwErrUPDPushCharOverflow++;
 }
 
 
