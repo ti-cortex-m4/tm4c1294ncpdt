@@ -9,7 +9,7 @@ udp_push.h
 
 
 
-extern uint                    cwErrUPDPushOverflow;
+extern uint                    cwErrUPDPushCharOverflow;
 
 
 
