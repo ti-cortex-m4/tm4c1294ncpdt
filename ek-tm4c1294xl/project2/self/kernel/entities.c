@@ -85,8 +85,8 @@ const entity * const mpenEntities[] =
   &enWatchdogFlag,
   &enDebugMode,
 
-  &enUdpDebugIP,
-  &enUdpDebugPort,
+  &enUDPDebugIP,
+  &enUDPDebugPort,
 
   &enLwipDebugFlag,
   &enLwipDebugTimeout,

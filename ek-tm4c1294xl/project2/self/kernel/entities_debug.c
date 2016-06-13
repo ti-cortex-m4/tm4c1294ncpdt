@@ -19,15 +19,15 @@ const entity enDebugMode = {
 };
 
 
-const entity enUdpDebugIP = {
-  EEPROM_UDP_DEBUG_IP, &dwUdpDebugIP, sizeof(ulong), IP, 0,
+const entity enUDPDebugIP = {
+  EEPROM_UDP_DEBUG_IP, &dwUDPDebugIP, sizeof(ulong), IP, 0,
   0, MAX_LONG, 0xFFFFFFFF,
   "UDPDI",
   "AI=UDPDI;E=1;D=UDP debug IP-address;T=STRING;C=IPCTRL;S=DBMD==1?\"e\":\"i\"",
 };
 
-const entity enUdpDebugPort = {
-  EEPROM_UDP_DEBUG_PORT, &wUdpDebugPort, sizeof(uint), INT, 0,
+const entity enUDPDebugPort = {
+  EEPROM_UDP_DEBUG_PORT, &wUDPDebugPort, sizeof(uint), INT, 0,
   0, MAX_INT, 50000,
   "UDPDP",
   "AI=UDPDP;E=1;D=UDP debug port;T=INT;C=EDIT;S=DBMD==1?\"e\":\"i\"",

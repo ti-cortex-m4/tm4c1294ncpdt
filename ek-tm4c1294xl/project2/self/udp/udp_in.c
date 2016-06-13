@@ -181,8 +181,8 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
     case 62: PushString(enSerialNumber.szName); break;
     case 63: PushString(enWatchdogFlag.szName); break;
     case 64: PushString(enDebugMode.szName); break;
-    case 65: PushString(enUdpDebugIP.szName); break;
-    case 66: PushString(enUdpDebugPort.szName); break;
+    case 65: PushString(enUDPDebugIP.szName); break;
+    case 66: PushString(enUDPDebugPort.szName); break;
     case 67: PushString(enLwipDebugFlag.szName); break;
     case 68: PushString(enLwipDebugTimeout.szName); break;
     case 69: PushString(enDataDebugFlag.szName); break;
@@ -426,8 +426,8 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enWatchdogFlag)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enDebugMode)) {}
 
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugIP)) {}
-  else if (IsEnity(pcb,p,addr,port,broadcast,&enUdpDebugPort)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUDPDebugIP)) {}
+  else if (IsEnity(pcb,p,addr,port,broadcast,&enUDPDebugPort)) {}
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enLwipDebugFlag)) {}
   else if (IsEnity(pcb,p,addr,port,broadcast,&enLwipDebugTimeout)) {}

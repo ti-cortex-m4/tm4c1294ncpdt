@@ -43,7 +43,7 @@ void UDPLog(uchar *pb, uint wSize)
     {
       memcpy(p->payload, pb, wSize);
 
-      err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, wUdpDebugPort);
+      err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, wUDPDebugPort);
       if (err != 0)
       {
         errors2++;
