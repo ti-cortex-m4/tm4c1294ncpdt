@@ -33,18 +33,19 @@ void PushChar(const uchar b)
 }
 
 
-void PushString(const char *sz)
+void PushString(const char *pcsz)
 {
-  while (*sz)
+  while (*pcsz)
   {
-    PushChar(*sz++);
+    PushChar(*pcsz++);
   }
 }
 
 
 void PushBuff(buff bf) // TODO const
 {
-  while (bf.wSize-- > 0)
+  uint i;
+  for (i=0; i<bf.wSize; i++)
   {
     PushChar(*(bf.pbBuff++));
   }
