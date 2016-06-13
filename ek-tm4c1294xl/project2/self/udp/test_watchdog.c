@@ -6,7 +6,7 @@ test_watchdog.c
 
 #include "../main.h"
 #include "../kernel/log.h"
-#include "udp_push.h"
+#include "udp_out.h"
 #include "test_watchdog.h"
 
 

@@ -10,10 +10,8 @@ udp_push,c
 
 
 
-#define PUSH_SIZE       0x200
-
-static uchar            mbPush[PUSH_SIZE];
-static uint             iwPush;
+uchar                   mbUDPPush[UDP_PUSH_SIZE];
+uint                    iwUDPPush;
 
 
 uint                    cwErrUPDPushCharOverflow = 0;
@@ -22,14 +20,14 @@ uint                    cwErrUPDPushCharOverflow = 0;
 
 void InitPush(void)
 {
-  iwPush = 0;
+  iwUDPPush = 0;
 }
 
 
 void PushChar(uchar b)
 {
-  if (iwPush < PUSH_SIZE)
-    mbPush[iwPush++] = b;
+  if (iwUDPPush < UDP_PUSH_SIZE)
+    mbUDPPush[iwUDPPush++] = b;
   else
     cwErrUPDPushCharOverflow++;
 }
