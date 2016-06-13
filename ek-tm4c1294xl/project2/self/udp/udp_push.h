@@ -10,6 +10,9 @@ udp_push,h
 
 
 extern uint                    cwErrUPDPushCharOverflow;
+extern uint                    cwErrUPDPushAlloc;
+extern uint                    cwErrUPDPushSendUnicast;
+extern uint                    cwErrUPDPushSendBroadcast;
 
 
 
