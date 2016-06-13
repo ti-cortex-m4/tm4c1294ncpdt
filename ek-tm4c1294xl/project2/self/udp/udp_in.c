@@ -13,7 +13,7 @@ UDP_IN,C
 #include "../uart/uart_log.h"
 #include "udp_pop.h"
 #include "udp_out.h"
-#include "udp_out_fs.h"
+#include "udp_out_controls.h"
 #include "udp_cmd.h"
 #include "routing_status.h"
 #include "test_watchdog.h"
@@ -238,9 +238,9 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   } else if (IsCmd(p,"H")) {
     CmdString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdString(pcb,p,addr,port,broadcast,"73");
+    CmdIntDec(pcb,p,addr,port,broadcast,wControlsSize);
   } else if (IsCmd(p,"FS")) {
-    OutFS(pcb,p,addr,port,broadcast);
+    OutControls(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
     CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"SPW")) {

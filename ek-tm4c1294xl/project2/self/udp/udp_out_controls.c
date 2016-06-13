@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-udp_out_fs,c
+udp_out_controls,c
 
 
 ------------------------------------------------------------------------------*/
@@ -10,7 +10,7 @@ udp_out_fs,c
 #include "../kernel/wrappers.h"
 #include "udp_pop.h"
 #include "udp_out.h"
-#include "udp_out_fs.h"
+#include "udp_out_controls.h"
 
 
 
@@ -111,7 +111,7 @@ const uint wControlsSize = sizeof(mppcszControls) / sizeof(mppcszControls[0]);
 
 
 
-err_t OutFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t OutControls(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
