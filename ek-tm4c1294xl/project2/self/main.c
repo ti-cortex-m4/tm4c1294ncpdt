@@ -105,7 +105,7 @@ int     main(void)
   InitROM();
 
   InitSettings();
-  InitUartLog(dwClockFreq);
+  InitUARTLog(dwClockFreq);
 
   pbMac[0] = 0x00;
   pbMac[1] = 0x1B;
