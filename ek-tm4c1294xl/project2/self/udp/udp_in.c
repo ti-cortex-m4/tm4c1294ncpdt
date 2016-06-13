@@ -240,7 +240,7 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   } else if (IsCmd(p,"CS")) {
     CmdString(pcb,p,addr,port,broadcast,"73");
   } else if (IsCmd(p,"FS")) {
-    CmdFS(pcb,p,addr,port,broadcast);
+    OutFS(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
     CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"SPW")) {
