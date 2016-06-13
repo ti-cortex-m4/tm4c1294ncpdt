@@ -5,6 +5,7 @@ udp_push,c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../kernel/log.h"
 #include "udp_push_numbers.h"
 #include "udp_push.h"
 
@@ -17,6 +18,8 @@ static uint             iwPush;
 
 
 uint                    cwErrUPDPushCharOverflow = 0;
+uint                    cwErrUPDPushAlloc = 0;
+uint                    cwErrUPDPushSend = 0;
 
 
 
@@ -94,14 +97,32 @@ err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint por
 
   p = pbuf_alloc(PBUF_TRANSPORT, iwPush, PBUF_RAM);
   if (p == NULL)
+  {
+    ERROR("UDPOut.pbuf_alloc: NULL\n");
+    cwErrUPDPushAlloc++;
     return ERR_MEM;
+  }
 
   memcpy(p->payload, mbPush, iwPush);
 
   if (broadcast != 0)
-    udp_sendto(pcb, p, IP_ADDR_BROADCAST, port); // TODO check result
+  {
+    err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
+    if (err != ERR_OK)
+    {
+      ERROR("UDPOut.udp_sendto: err=%u", err);
+      cwErrUPDPushSend++;
+    }
+  }
   else
-    udp_sendto(pcb, p, addr, port); // TODO check result
+  {
+    err_t err = udp_sendto(pcb, p, addr, port);
+    if (err != ERR_OK)
+    {
+      ERROR("UDPOut.udp_sendto: err=%u", err);
+      cwErrUPDPushSend++;
+    }
+  }
 
   pbuf_free(p);
   return ERR_OK;
