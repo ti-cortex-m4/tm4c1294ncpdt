@@ -8,6 +8,10 @@ udp_push.h
 
 
 
+extern uint                    cwErrUPDPushOverflow;
+
+
+
 void InitPush(void);
 void PushChar(uchar b);
 void PushString(const char *sz);
@@ -19,4 +23,4 @@ uchar PushIntHex(uint w);
 void PushIP(ulong dw);
 void PushSuffix(uint w);
 
-err_t UDPPush(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
+err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
