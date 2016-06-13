@@ -30,25 +30,22 @@ void PushChar(uchar b)
 }
 
 
-void PushIntLtl(uint w)
-{
-  PushChar(w % 0x100);
-  PushChar(w / 0x100);
-}
-
-
-void PushLongLtl(ulong dw)
-{
-  PushIntLtl(dw % 0x10000);
-  PushIntLtl(dw / 0x10000);
-}
-
-
 void PushString(const char *sz)
 {
   while (*sz)
   {
     PushChar(*sz++);
+  }
+}
+
+
+void PushArrayString(uchar *pb, uchar bSize)
+{
+  uchar i;
+  for (i=0; i<bSize; i++)
+  {
+    PushCharDec(pb[i]);
+    if (i < bSize-1) PushChar('.');
   }
 }
 
@@ -69,22 +66,6 @@ static char mb[4*2];
 
   memset(&mb, 0, sizeof(mb));
   uchar n = usprintf(mb, "%u" ,b);
-
-  uchar i;
-  for (i=0; i<n; i++)
-  {
-    PushChar(mb[i]);
-  }
-
-  return n;
-}
-
-uchar   PushCharHex(uchar b)
-{
-static char mb[3*2];
-
-  memset(&mb, 0, sizeof(mb));
-  uchar n = usprintf(mb, "%X" ,b);
 
   uchar i;
   for (i=0; i<n; i++)
@@ -158,17 +139,6 @@ void PushArray(uchar *pb, uchar bSize)
   for (i=0; i<bSize; i++)
   {
     PushChar(pb[i]);
-  }
-}
-
-
-void PushArrayString(uchar *pb, uchar bSize)
-{
-  uchar i;
-  for (i=0; i<bSize; i++)
-  {
-    PushCharDec(pb[i]);
-    if (i < bSize-1) PushChar('.');
   }
 }
 
