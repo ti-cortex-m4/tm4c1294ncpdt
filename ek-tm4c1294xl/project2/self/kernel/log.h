@@ -22,8 +22,8 @@ log.h
 #endif
 
 
-void DebugPrintF(const char *sz, ...);
-void UDPPrintF(const char *sz, ...);
-void UARTPrintF(const char *sz, ...);
-void UARTprintf(const char *sz, ...);
+void DebugPrintF(const char *pcsz, ...);
+void UDPPrintF(const char *pcsz, ...);
+void UARTPrintF(const char *pcsz, ...);
+void UARTprintf(const char *pcsz, ...);
 
