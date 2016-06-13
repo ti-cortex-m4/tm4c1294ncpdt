@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-udp_push,c
+udp_push.c
 
 
 ------------------------------------------------------------------------------*/
@@ -55,16 +55,16 @@ void PushBuff(buff bf) // TODO const
 
 void PushIP(const ulong dw)
 {
-  combo32 cb;
-  cb.dw = dw;
+  combo32 cm;
+  cm.dw = dw;
 
-  PushCharDec(cb.mb4[3]);
+  PushCharDec(cm.mb4[3]);
   PushChar('.');
-  PushCharDec(cb.mb4[2]);
+  PushCharDec(cm.mb4[2]);
   PushChar('.');
-  PushCharDec(cb.mb4[1]);
+  PushCharDec(cm.mb4[1]);
   PushChar('.');
-  PushCharDec(cb.mb4[0]);
+  PushCharDec(cm.mb4[0]);
 }
 
 
