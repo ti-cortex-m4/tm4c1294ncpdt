@@ -31,7 +31,8 @@ typedef struct
   entityType    eType;
   ulong         dwFlags;
   ulong         dwMin, dwMax, dwDef;
-  const char    *szCode, *szName;
+  message       szCode;
+  message       szName;
 } entity;
 
 
