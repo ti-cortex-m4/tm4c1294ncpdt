@@ -18,8 +18,8 @@ routing_status,c
 
 
 
-static const uchar CONTENT_SIZE = 7;
-static const uchar CONTENT_EXTRA_SIZE = 7;
+static const uchar ROUTING_STATUS_SIZE = 7;
+static const uchar CONTENT_DEBUG_SIZE = 7;
 
 static message szSerialPort = "Serial Port";
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
@@ -48,8 +48,8 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 
 
 err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
-  uchar bSize = CONTENT_SIZE;
-  if (IsCmd(p,"CU@5")) bSize += CONTENT_EXTRA_SIZE;
+  uchar bSize = ROUTING_STATUS_SIZE;
+  if (IsCmd(p,"CU@5")) bSize += CONTENT_DEBUG_SIZE;
   return CmdCharDec(pcb,p,addr,port,broadcast,bSize);
 }
 
@@ -121,7 +121,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
     switch (wIdx) {
       case 6: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
-    if (wIdx >= CONTENT_SIZE) {
+    if (wIdx >= ROUTING_STATUS_SIZE) {
       WARNING("unknown routing mode index %u\n", wIdx);
     }
   } else {
@@ -135,7 +135,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 12: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow)); break;
       case 13: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
-    if (wIdx >= CONTENT_SIZE + CONTENT_EXTRA_SIZE) {
+    if (wIdx >= ROUTING_STATUS_SIZE + CONTENT_DEBUG_SIZE) {
       WARNING("unknown routing mode index %u\n", wIdx);
     }
   }
