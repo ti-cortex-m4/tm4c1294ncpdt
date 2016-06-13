@@ -19,7 +19,7 @@ routing_status,c
 
 
 static const uchar CONTENT_SIZE = 7;
-static const uchar CONTENT_EXTRA_SIZE = 6;
+static const uchar CONTENT_EXTRA_SIZE = 7;
 
 static message szSerialPort = "Serial Port";
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
@@ -130,9 +130,10 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 7: CmdUptime(pcb,p,addr,port,broadcast); break;
       case 8: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset)); break;
       case 9: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
-      case 10: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushCharOverflow", cwErrUPDPushCharOverflow)); break;
-      case 11: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow)); break;
-      case 12: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
+      case 10: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrPrintfOverflow", cwErrPrintfOverflow)); break;
+      case 11: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushCharOverflow", cwErrUPDPushCharOverflow)); break;
+      case 12: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow)); break;
+      case 13: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= CONTENT_SIZE + CONTENT_EXTRA_SIZE) {
       WARNING("unknown routing mode index %u\n", wIdx);

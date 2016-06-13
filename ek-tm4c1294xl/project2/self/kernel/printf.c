@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-printf,c
+printf.c
 
 
 ------------------------------------------------------------------------------*/
@@ -18,7 +18,8 @@ printf,c
 static uchar            mbPrintf[PRINTF_SIZE];
 static uint             iwPrintf;
 
-uint                    cwErrPrintfOverflow = 0; // TODO
+
+uint                    cwErrPrintfOverflow = 0;
 
 
 

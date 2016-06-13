@@ -16,7 +16,6 @@ void PushChar(uchar b);
 
 #define NUMBERS_SIZE    32
 
-
 static char             mbNumbers[NUMBERS_SIZE];
 
 
