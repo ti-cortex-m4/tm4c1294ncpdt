@@ -22,12 +22,12 @@ static char const       szBinFileSize[] = "BinFileSize    BinFileSize";
 static ulong GetBinFileSize(void)
 {
   combo32 co;
-  co.mpbBuff[0] = szBinFileSize[11];
-  co.mpbBuff[1] = szBinFileSize[12];
-  co.mpbBuff[2] = szBinFileSize[13];
-  co.mpbBuff[3] = szBinFileSize[14];
+  co.mb4[0] = szBinFileSize[11];
+  co.mb4[1] = szBinFileSize[12];
+  co.mb4[2] = szBinFileSize[13];
+  co.mb4[3] = szBinFileSize[14];
 
-  return co.dwBuff;
+  return co.dw;
 }
 
 

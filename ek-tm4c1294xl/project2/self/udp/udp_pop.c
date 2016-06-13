@@ -101,7 +101,7 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart)
   uchar *pb = p->payload;
 
   combo32 cb;
-  cb.dwBuff = 0;
+  cb.dw = 0;
 
   uchar j = 0;
   uchar b = 0;
@@ -118,15 +118,15 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart)
       }
       else
       {
-        cb.mpbBuff[3-j] = b;
+        cb.mb4[3-j] = b;
         j++;
         b = 0;
       }
     }
     else if (pb[i] == '|')
     {
-      cb.mpbBuff[3-j] = b;
-      return GetLong2Success(cb.dwBuff);
+      cb.mb4[3-j] = b;
+      return GetLong2Success(cb.dw);
     }
     else
     {
