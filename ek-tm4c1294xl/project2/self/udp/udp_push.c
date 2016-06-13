@@ -56,15 +56,15 @@ void PushBuff(buff bf) // TODO const
 void PushIP(const ulong dw)
 {
   combo32 cb;
-  cb.dwBuff = dw;
+  cb.dw = dw;
 
-  PushCharDec(cb.mpbBuff[3]);
+  PushCharDec(cb.mb4[3]);
   PushChar('.');
-  PushCharDec(cb.mpbBuff[2]);
+  PushCharDec(cb.mb4[2]);
   PushChar('.');
-  PushCharDec(cb.mpbBuff[1]);
+  PushCharDec(cb.mb4[1]);
   PushChar('.');
-  PushCharDec(cb.mpbBuff[0]);
+  PushCharDec(cb.mb4[0]);
 }
 
 

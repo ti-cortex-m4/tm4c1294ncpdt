@@ -22,8 +22,8 @@ typedef const char * const message;
 
 typedef union
 {
-  uchar         mpbBuff[4];
-  ulong         dwBuff;
+  uchar         mb4[4];
+  ulong         dw;
 } combo32;
 
 
