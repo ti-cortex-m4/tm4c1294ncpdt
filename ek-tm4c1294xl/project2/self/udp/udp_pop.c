@@ -146,7 +146,6 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart)
 }
 
 
-
 err_t PopBuff(struct pbuf *p, char *mpBuff, const uchar bSize, const uchar ibStart)
 {
   uchar *pb = p->payload;
@@ -178,7 +177,6 @@ err_t PopBuff(struct pbuf *p, char *mpBuff, const uchar bSize, const uchar ibSta
   WARNING("PopBuff[%u]: wrong length \n", i, p->len);
   return ERR_VAL;
 }
-
 
 
 uint2 PopSuffix(struct pbuf *p)
