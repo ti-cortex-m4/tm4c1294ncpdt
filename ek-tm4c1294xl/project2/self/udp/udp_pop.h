@@ -18,6 +18,6 @@ uchar2 PopCharDec(struct pbuf *p, const uchar ibStart);
 
 ulong2 PopIP(struct pbuf *p, const uchar ibStart);
 
-err_t PopString(struct pbuf *p, char *szBuff, const uchar bSize, const uchar ibStart);
+err_t PopBuff(struct pbuf *p, char *szBuff, const uchar bSize, const uchar ibStart);
 
 uint2 PopSuffix(struct pbuf *p);

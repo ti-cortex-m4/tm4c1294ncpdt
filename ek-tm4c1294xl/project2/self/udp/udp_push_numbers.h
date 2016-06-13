@@ -1,10 +1,10 @@
 /*------------------------------------------------------------------------------
-udp_push_number.h
+udp_push_numbers.h
 
 
 ------------------------------------------------------------------------------*/
 
-extern uint                    cwErrUPDPushNumberOverflow;
+extern uint                    cwErrUPDPushNumbersOverflow;
 
 
 

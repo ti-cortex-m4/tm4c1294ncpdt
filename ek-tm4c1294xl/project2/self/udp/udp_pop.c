@@ -147,11 +147,11 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart)
 
 
 
-err_t PopString(struct pbuf *p, char *szBuff, const uchar bSize, const uchar ibStart)
+err_t PopBuff(struct pbuf *p, char *mpBuff, const uchar bSize, const uchar ibStart)
 {
   uchar *pb = p->payload;
 
-  memset(szBuff, 0, bSize);
+  memset(mpBuff, 0, bSize);
 
   uint i;
   for (i=ibStart; i<p->len; i++)
@@ -162,20 +162,20 @@ err_t PopString(struct pbuf *p, char *szBuff, const uchar bSize, const uchar ibS
     char b = pb[i];
     if (b < 0x20)
     {
-      WARNING("PopString[%u]: wrong char %02X\n", i, b);
+      WARNING("PopBuff[%u]: wrong char %02X\n", i, b);
       return ERR_VAL;
     }
 
     if (i-ibStart >= bSize)
     {
-      WARNING("PopString[%u]: wrong size %u %u\n", i, i-ibStart, bSize);
+      WARNING("PopBuff[%u]: wrong size %u %u\n", i, i-ibStart, bSize);
       return ERR_VAL;
     }
 
-    szBuff[i-ibStart] = b;
+    mpBuff[i-ibStart] = b;
   }
 
-  WARNING("PopString[%u]: wrong length \n", i, p->len);
+  WARNING("PopBuff[%u]: wrong length \n", i, p->len);
   return ERR_VAL;
 }
 

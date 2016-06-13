@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
-udp_push_number,c
+udp_push_numbers,c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "utils/ustdlib.h"
-#include "udp_push_number.h"
+#include "udp_push_numbers.h"
 
 
 
@@ -19,7 +19,7 @@ void PushChar(uchar b);
 static char             mbPush[PUSH_SIZE];
 
 
-uint                    cwErrUPDPushNumberOverflow = 0;
+uint                    cwErrUPDPushNumbersOverflow = 0;
 
 
 
@@ -29,7 +29,7 @@ uchar PushCharDec(uchar b)
 
   uchar n = usprintf(mbPush, "%u" ,b);
   if (n >= PUSH_SIZE)
-    cwErrUPDPushNumberOverflow++;
+    cwErrUPDPushNumbersOverflow++;
 
   uchar i;
   for (i=0; i<n; i++)
@@ -47,7 +47,7 @@ uchar PushIntDec(uint w)
 
   uchar n = usprintf(mbPush, "%u" ,w);
   if (n >= PUSH_SIZE)
-    cwErrUPDPushNumberOverflow++;
+    cwErrUPDPushNumbersOverflow++;
 
   uchar i;
   for (i=0; i<n; i++)
@@ -65,7 +65,7 @@ uchar PushIntHex(uint w)
 
   uchar n = usprintf(mbPush, "%X" ,w);
   if (n >= PUSH_SIZE)
-    cwErrUPDPushNumberOverflow++;
+    cwErrUPDPushNumbersOverflow++;
 
   uchar i;
   for (i=0; i<n; i++)

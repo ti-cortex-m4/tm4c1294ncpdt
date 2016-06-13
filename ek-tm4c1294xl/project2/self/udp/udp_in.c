@@ -266,7 +266,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
        }
        case STRING:
        {
-         err_t err = PopString(p, (char *)pen->pbRam, NAME_SIZE, ibStart);
+         err_t err = PopBuff(p, (char *)pen->pbRam, NAME_SIZE, ibStart);
          return err;
        }
        default: ASSERT(false); return -1;

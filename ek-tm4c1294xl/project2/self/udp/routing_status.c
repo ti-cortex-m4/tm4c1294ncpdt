@@ -131,7 +131,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 8: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset)); break;
       case 9: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
       case 10: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushCharOverflow", cwErrUPDPushCharOverflow)); break;
-      case 11: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumberOverflow", cwErrUPDPushNumberOverflow)); break;
+      case 11: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow)); break;
       case 12: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= CONTENT_SIZE + CONTENT_EXTRA_SIZE) {
