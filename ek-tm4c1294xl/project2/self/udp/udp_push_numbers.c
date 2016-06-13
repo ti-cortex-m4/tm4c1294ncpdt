@@ -14,45 +14,59 @@ void PushChar(uchar b);
 
 
 
-#define PUSH_SIZE       32
+#define NUMBERS_SIZE    32
 
-static char             mbPush[PUSH_SIZE];
+static char             mbNumbers[NUMBERS_SIZE];
 
 
 uint                    cwErrUPDPushNumbersOverflow = 0;
 
 
 
-uchar PushCharDec(uchar b)
+static uchar PushNumberDec(uint w)
 {
-  memset(&mbPush, 0, sizeof(mbPush));
+  memset(&mbNumbers, 0, sizeof(mbNumbers));
 
-  uchar n = usprintf(mbPush, "%u" ,b);
-  if (n >= PUSH_SIZE)
+  uchar n = usprintf(mbNumbers, "%u" ,w);
+  if (n >= NUMBERS_SIZE)
     cwErrUPDPushNumbersOverflow++;
 
   uchar i;
   for (i=0; i<n; i++)
   {
-    PushChar(mbPush[i]);
+    PushChar(mbNumbers[i]);
   }
 
   return n;
 }
 
 
+
+uchar PushCharDec(uchar b)
+{
+  return PushNumberDec(b);
+}
+
+
 uchar PushIntDec(uint w)
 {
-  memset(&mbPush, 0, sizeof(mbPush));
+  return PushNumberDec(w);
+}
 
-  uchar n = usprintf(mbPush, "%u" ,w);
-  if (n >= PUSH_SIZE)
+
+
+static uchar PushNumberHex(uint w)
+{
+  memset(&mbNumbers, 0, sizeof(mbNumbers));
+
+  uchar n = usprintf(mbNumbers, "%X" ,w);
+  if (n >= NUMBERS_SIZE)
     cwErrUPDPushNumbersOverflow++;
 
   uchar i;
   for (i=0; i<n; i++)
   {
-    PushChar(mbPush[i]);
+    PushChar(mbNumbers[i]);
   }
 
   return n;
@@ -61,17 +75,5 @@ uchar PushIntDec(uint w)
 
 uchar PushIntHex(uint w)
 {
-  memset(&mbPush, 0, sizeof(mbPush));
-
-  uchar n = usprintf(mbPush, "%X" ,w);
-  if (n >= PUSH_SIZE)
-    cwErrUPDPushNumbersOverflow++;
-
-  uchar i;
-  for (i=0; i<n; i++)
-  {
-    PushChar(mbPush[i]);
-  }
-
-  return n;
+  return PushNumberHex(w);
 }

@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-printf.c
+printf,c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,10 +13,12 @@ printf.c
 
 
 
-#define LOG_BUFF_SIZE   0x400
+#define PRINTF_SIZE     0x400
 
-static uchar            mbLog[LOG_BUFF_SIZE];
-static uint             iwLog;
+static uchar            mbPrintf[PRINTF_SIZE];
+static uint             iwPrintf;
+
+uint                    cwErrPrintfOverflow = 0; // TODO
 
 
 
@@ -26,10 +28,10 @@ static const char * const pczHex = "0123456789abcdef";
 
 static void CharPut(unsigned char ucData)
 {
-  if (iwLog < LOG_BUFF_SIZE)
-  {
-    mbLog[iwLog++] = ucData;
-  }
+  if (iwPrintf < PRINTF_SIZE)
+    mbPrintf[iwPrintf++] = ucData;
+  else
+    cwErrPrintfOverflow++;
 }
 
 
@@ -333,8 +335,8 @@ convert:
 
 void UDPPrintF(const char *pcsz, ...)
 {
-  memset(&mbLog, 0, sizeof(mbLog));
-  iwLog = 0;
+  memset(&mbPrintf, 0, sizeof(mbPrintf));
+  iwPrintf = 0;
 
   va_list va;
   va_start(va, pcsz);
@@ -343,7 +345,7 @@ void UDPPrintF(const char *pcsz, ...)
 
   va_end(va);
 
-  UDPLog((unsigned char *)mbLog, iwLog);
+  UDPLog((unsigned char *)mbPrintf, iwPrintf);
 }
 
 
@@ -351,8 +353,8 @@ void DebugPrintF(const char *pcsz, ...)
 {
   if (ibDebugMode == DEBUG_MODE_UDP)
   {
-    memset(&mbLog, 0, sizeof(mbLog));
-    iwLog = 0;
+    memset(&mbPrintf, 0, sizeof(mbPrintf));
+    iwPrintf = 0;
 
     va_list va;
     va_start(va, pcsz);
@@ -361,7 +363,7 @@ void DebugPrintF(const char *pcsz, ...)
 
     va_end(va);
 
-    UDPLog((unsigned char *)mbLog, iwLog);
+    UDPLog((unsigned char *)mbPrintf, iwPrintf);
   }
   else if (ibDebugMode == DEBUG_MODE_UART)
   {
@@ -377,8 +379,8 @@ void DebugPrintF(const char *pcsz, ...)
 
 buff BuffPrintF(const char *pcsz, ...)
 {
-  memset(&mbLog, 0, sizeof(mbLog));
-  iwLog = 0;
+  memset(&mbPrintf, 0, sizeof(mbPrintf));
+  iwPrintf = 0;
 
   va_list va;
   va_start(va, pcsz);
@@ -388,8 +390,8 @@ buff BuffPrintF(const char *pcsz, ...)
   va_end(va);
 
   buff bf;
-  bf.pbBuff = (uchar *)&mbLog;
-  bf.wSize = iwLog;
+  bf.pbBuff = (uchar *)&mbPrintf;
+  bf.wSize = iwPrintf;
 
   return bf;
 }
