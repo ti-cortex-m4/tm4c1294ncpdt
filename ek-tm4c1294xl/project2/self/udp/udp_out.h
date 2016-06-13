@@ -10,8 +10,10 @@ udp_out,h
 
 
 
-extern uint                    cwErrUPDPushAlloc;
-extern uint                    cwErrUPDPushSendUnicast;
-extern uint                    cwErrUPDPushSendBroadcast;
+extern uint                    cwErrUPDOutPbufAlloc;
+extern uint                    cwErrUPDOutSendUnicast;
+extern uint                    cwErrUPDOutSendBroadcast;
 
-err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
+
+
+err_t Out(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);

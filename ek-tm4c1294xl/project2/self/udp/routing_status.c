@@ -19,7 +19,7 @@ routing_status,c
 
 
 static const uchar ROUTING_STATUS_SIZE = 7; // TODO define
-static const uchar CONTENT_DEBUG_SIZE = 7;
+static const uchar CONTENT_DEBUG_SIZE = 3;
 
 static message szSerialPort = "Serial Port";
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
@@ -133,7 +133,10 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 10: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrPrintfOverflow", cwErrPrintfOverflow)); break; // TODO define
       case 11: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushCharOverflow", cwErrUPDPushCharOverflow)); break;
       case 12: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow)); break;
-      case 13: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
+      case 13: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutPbufAlloc", cwErrUPDOutPbufAlloc)); break;
+      case 14: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendUnicast", cwErrUPDOutSendUnicast)); break;
+      case 15: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendBroadcast", cwErrUPDOutSendBroadcast)); break;
+      case 16: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE + CONTENT_DEBUG_SIZE) {
       WARNING("unknown routing mode index %u\n", wIdx);
