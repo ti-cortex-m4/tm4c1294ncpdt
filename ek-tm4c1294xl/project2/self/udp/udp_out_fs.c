@@ -14,6 +14,103 @@ udp_out_fs,c
 
 
 
+static message pcszGeneral = "AI=$GENERAL;D=General;T=GROUP";
+static message pcszChannel1 = "AI=$CHANNEL1;D=Channel1;T=GROUP";
+static message pcszChannel2 = "AI=$CHANNEL2;D=Channel2;T=GROUP";
+static message pcszChannel3 = "AI=$CHANNEL3;D=Channel3;T=GROUP";
+static message pcszChannel4 = "AI=$CHANNEL4;D=Channel4;T=GROUP";
+static message pcszChannel5 = "AI=$CHANNEL5;D=Channel5;T=GROUP";
+static message pcszSettings = "AI=$SETTINGS;D=Settings;T=GROUP";
+
+
+
+static message *mppcszControls[] =
+{
+  &pcszGeneral,
+  &enOwnerName.szName,
+  &enDeviceName.szName,
+  &enIP.szName,
+  &enGateway.szName,
+  &enNetmask.szName,
+
+  &pcszChannel1,
+  &enConnectionTimeout0.szName,
+  &enRoutingMode0.szName,
+  &enPort0.szName,
+  &enConnectionMode0.szName,
+  &enDestinationIP0.szName,
+  &enDestinationPort0.szName,
+  &enBaudRate0.szName,
+  &enParity0.szName,
+  &enDataBits0.szName,
+  &enStopBits0.szName,
+
+  &pcszChannel2,
+  &enConnectionTimeout1.szName,
+  &enRoutingMode1.szName,
+  &enPort1.szName,
+  &enConnectionMode1.szName,
+  &enDestinationIP1.szName,
+  &enDestinationPort1.szName,
+  &enBaudRate1.szName,
+  &enParity1.szName,
+  &enDataBits1.szName,
+  &enStopBits1.szName,
+
+  &pcszChannel3,
+  &enConnectionTimeout2.szName,
+  &enRoutingMode2.szName,
+  &enPort2.szName,
+  &enConnectionMode2.szName,
+  &enDestinationIP2.szName,
+  &enDestinationPort2.szName,
+  &enBaudRate2.szName,
+  &enParity2.szName,
+  &enDataBits2.szName,
+  &enStopBits2.szName,
+
+  &pcszChannel4,
+  &enConnectionTimeout3.szName,
+  &enRoutingMode3.szName,
+  &enPort3.szName,
+  &enConnectionMode3.szName,
+  &enDestinationIP3.szName,
+  &enDestinationPort3.szName,
+  &enBaudRate3.szName,
+  &enParity3.szName,
+  &enDataBits3.szName,
+  &enStopBits3.szName,
+
+  &pcszChannel5,
+  &enConnectionTimeout4.szName,
+  &enRoutingMode4.szName,
+  &enPort4.szName,
+  &enConnectionMode4.szName,
+  &enDestinationIP4.szName,
+  &enDestinationPort4.szName,
+  &enBaudRate4.szName,
+  &enParity4.szName,
+  &enDataBits4.szName,
+  &enStopBits4.szName,
+
+  &pcszSettings,
+  &enSerialNumber.szName,
+  &enWatchdogFlag.szName,
+  &enDebugMode.szName,
+  &enUDPDebugIP.szName,
+  &enUDPDebugPort.szName,
+  &enLwipDebugFlag.szName,
+  &enLwipDebugTimeout.szName,
+  &enDataDebugFlag.szName,
+  &enIOModeDebugFlag.szName,
+  &enLED0Mode.szName,
+  &enLED1Mode.szName,
+};
+
+const uint wControlsSize = sizeof(mppcszControls) / sizeof(mppcszControls[0]);
+
+
+
 err_t OutFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint2 wSfx = PopSuffix(p);
@@ -25,89 +122,11 @@ err_t OutFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
   InitPush();
 
-  switch (wArg)
+  if (wArg < wControlsSize)
+    PushString(*mppcszControls[wArg]);
+  else
   {
-    case 0: PushString("AI=$GENERAL;D=General;T=GROUP"); break;
-    case 1: PushString(enOwnerName.szName); break;
-    case 2: PushString(enDeviceName.szName); break;
-    case 3: PushString(enIP.szName); break;
-    case 4: PushString(enGateway.szName); break;
-    case 5: PushString(enNetmask.szName); break;
-
-    case 6: PushString("AI=$CHANNEL1;D=Channel1;T=GROUP"); break;
-    case 7: PushString(enConnectionTimeout0.szName); break;
-    case 8: PushString(enRoutingMode0.szName); break;
-    case 9: PushString(enPort0.szName); break;
-    case 10: PushString(enConnectionMode0.szName); break;
-    case 11: PushString(enDestinationIP0.szName); break;
-    case 12: PushString(enDestinationPort0.szName); break;
-    case 13: PushString(enBaudRate0.szName); break;
-    case 14: PushString(enParity0.szName); break;
-    case 15: PushString(enDataBits0.szName); break;
-    case 16: PushString(enStopBits0.szName); break;
-
-    case 17: PushString("AI=$CHANNEL2;D=Channel2;T=GROUP"); break;
-    case 18: PushString(enConnectionTimeout1.szName); break;
-    case 19: PushString(enRoutingMode1.szName); break;
-    case 20: PushString(enPort1.szName); break;
-    case 21: PushString(enConnectionMode1.szName); break;
-    case 22: PushString(enDestinationIP1.szName); break;
-    case 23: PushString(enDestinationPort1.szName); break;
-    case 24: PushString(enBaudRate1.szName); break;
-    case 25: PushString(enParity1.szName); break;
-    case 26: PushString(enDataBits1.szName); break;
-    case 27: PushString(enStopBits1.szName); break;
-
-    case 28: PushString("AI=$CHANNEL3;D=Channel3;T=GROUP"); break;
-    case 29: PushString(enConnectionTimeout2.szName); break;
-    case 30: PushString(enRoutingMode2.szName); break;
-    case 31: PushString(enPort2.szName); break;
-    case 32: PushString(enConnectionMode2.szName); break;
-    case 33: PushString(enDestinationIP2.szName); break;
-    case 34: PushString(enDestinationPort2.szName); break;
-    case 35: PushString(enBaudRate2.szName); break;
-    case 36: PushString(enParity2.szName); break;
-    case 37: PushString(enDataBits2.szName); break;
-    case 38: PushString(enStopBits2.szName); break;
-
-    case 39: PushString("AI=$CHANNEL4;D=Channel4;T=GROUP"); break;
-    case 40: PushString(enConnectionTimeout3.szName); break;
-    case 41: PushString(enRoutingMode3.szName); break;
-    case 42: PushString(enPort3.szName); break;
-    case 43: PushString(enConnectionMode3.szName); break;
-    case 44: PushString(enDestinationIP3.szName); break;
-    case 45: PushString(enDestinationPort3.szName); break;
-    case 46: PushString(enBaudRate3.szName); break;
-    case 47: PushString(enParity3.szName); break;
-    case 48: PushString(enDataBits3.szName); break;
-    case 49: PushString(enStopBits3.szName); break;
-
-    case 50: PushString("AI=$CHANNEL5;D=Channel5;T=GROUP"); break;
-    case 51: PushString(enConnectionTimeout4.szName); break;
-    case 52: PushString(enRoutingMode4.szName); break;
-    case 53: PushString(enPort4.szName); break;
-    case 54: PushString(enConnectionMode4.szName); break;
-    case 55: PushString(enDestinationIP4.szName); break;
-    case 56: PushString(enDestinationPort4.szName); break;
-    case 57: PushString(enBaudRate4.szName); break;
-    case 58: PushString(enParity4.szName); break;
-    case 59: PushString(enDataBits4.szName); break;
-    case 60: PushString(enStopBits4.szName); break;
-
-    case 61: PushString("AI=$SETTINGS;D=Settings;T=GROUP"); break;
-    case 62: PushString(enSerialNumber.szName); break;
-    case 63: PushString(enWatchdogFlag.szName); break;
-    case 64: PushString(enDebugMode.szName); break;
-    case 65: PushString(enUDPDebugIP.szName); break;
-    case 66: PushString(enUDPDebugPort.szName); break;
-    case 67: PushString(enLwipDebugFlag.szName); break;
-    case 68: PushString(enLwipDebugTimeout.szName); break;
-    case 69: PushString(enDataDebugFlag.szName); break;
-    case 70: PushString(enIOModeDebugFlag.szName); break;
-    case 71: PushString(enLED0Mode.szName); break;
-    case 72: PushString(enLED1Mode.szName); break;
-
-    default: WARNING("unknown index %u\n", wArg); break; // TODO
+    WARNING("unknown index %u\n", wArg);
   }
 
   PushChar(0x0D);
