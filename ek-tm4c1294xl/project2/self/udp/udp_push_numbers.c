@@ -47,6 +47,11 @@ static uchar PushNumberDec(uint w)
 }
 
 
+static uchar PushNumberHex(uint w)
+{
+  return PushNumber("%X", w);
+}
+
 
 uchar PushCharDec(uchar b)
 {
@@ -57,13 +62,6 @@ uchar PushCharDec(uchar b)
 uchar PushIntDec(uint w)
 {
   return PushNumberDec(w);
-}
-
-
-
-static uchar PushNumberHex(uint w)
-{
-  return PushNumber("%X", w);
 }
 
 
