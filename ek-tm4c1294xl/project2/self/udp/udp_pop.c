@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-udp_pop,c
+udp_pop.c
 
 
 ------------------------------------------------------------------------------*/
@@ -103,29 +103,29 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart)
   combo32 cb;
   cb.dwBuff = 0;
 
-  uchar y = 0;
-  uchar x = 0;
+  uchar j = 0;
+  uchar b = 0;
 
   uint i;
   for (i=ibStart; i<p->len; i++)
   {
     if (pb[i] == '.')
     {
-      if (y > 3)
+      if (j > 3)
       {
-        WARNING("PopIP[%u]: wrong points number %u\n", i, y);
+        WARNING("PopIP[%u]: wrong points number %u\n", i, j);
         return GetLong2Error();
       }
       else
       {
-        cb.mpbBuff[3-y] = x;
-        y++;
-        x = 0;
+        cb.mpbBuff[3-j] = b;
+        j++;
+        b = 0;
       }
     }
     else if (pb[i] == '|')
     {
-      cb.mpbBuff[3-y] = x;
+      cb.mpbBuff[3-j] = b;
       return GetLong2Success(cb.dwBuff);
     }
     else
@@ -137,7 +137,7 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart)
         return GetLong2Error();
       }
 
-      x = x*10 + b2.b;
+      b = b*10 + b2.b;
     }
   }
 
@@ -176,7 +176,7 @@ err_t PopString(struct pbuf *p, char *szBuff, const uchar bSize, const uchar ibS
   }
 
   WARNING("PopString[%u]: wrong length \n", i, p->len);
-  return ERR_ARG;
+  return ERR_VAL;
 }
 
 
