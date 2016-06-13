@@ -19,7 +19,7 @@ void TestWatchdog(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uin
 
     InitPush();
     PushChar('A');
-    PushOut(pcb,p,addr,port,broadcast);
+    UDPPush(pcb,p,addr,port,broadcast);
 
     while (1);
   }

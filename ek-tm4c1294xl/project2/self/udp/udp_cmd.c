@@ -19,9 +19,9 @@ err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   InitPush();
   PushChar('A');
   PushString(sz);
-  PushSfx(wSfx.w);
+  PushSuffix(wSfx.w);
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 
@@ -33,9 +33,9 @@ err_t CmdBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
   InitPush();
   PushChar('A');
   PushBuff(bf);
-  PushSfx(wSfx.w);
+  PushSuffix(wSfx.w);
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 
@@ -47,9 +47,9 @@ err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   InitPush();
   PushChar('A');
   PushIP(dw);
-  PushSfx(wSfx.w);
+  PushSuffix(wSfx.w);
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uchar b)
@@ -60,9 +60,9 @@ err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   InitPush();
   PushChar('A');
   PushCharDec(b);
-  PushSfx(wSfx.w);
+  PushSuffix(wSfx.w);
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uint w)
@@ -73,9 +73,9 @@ err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
   InitPush();
   PushChar('A');
   PushIntDec(w);
-  PushSfx(wSfx.w);
+  PushSuffix(wSfx.w);
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 

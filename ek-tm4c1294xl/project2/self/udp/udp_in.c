@@ -63,10 +63,10 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 
   if (p->len > 1)
   {
-    PushSfx(wSfx);
+    PushSuffix(wSfx);
   }
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 err_t CmdW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
@@ -76,9 +76,9 @@ err_t CmdW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 
   InitPush();
   PushChar('A');
-  PushSfx(wSfx.w);
+  PushSuffix(wSfx.w);
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, in_fn in)
@@ -91,9 +91,9 @@ err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
   InitPush();
   PushChar('A');
-  PushSfx(wSfx.w);
+  PushSuffix(wSfx.w);
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 
@@ -195,9 +195,9 @@ err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
   PushChar(0x0D);
   PushChar(0x0A);
-  PushSfx(wSfx.w);
+  PushSuffix(wSfx.w);
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 
@@ -287,9 +287,9 @@ err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
   InitPush();
   PushChar('A');
-  PushSfx(wSfx.w);
+  PushSuffix(wSfx.w);
 
-  return PushOut(pcb,p,addr,port,broadcast);
+  return UDPPush(pcb,p,addr,port,broadcast);
 }
 
 static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen) // TODO check errors

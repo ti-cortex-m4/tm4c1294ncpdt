@@ -10,7 +10,7 @@ UDP_PUSH,C
 
 
 
-#define PUSH_SIZE       0x200
+#define PUSH_SIZE       0x200 // TODO check overflow
 
 
 static uchar            mbPush[PUSH_SIZE];
@@ -126,7 +126,7 @@ void PushIP(ulong dw)
 }
 
 
-void PushSfx(uint w)
+void PushSuffix(uint w)
 {
   PushChar('|');
   PushIntHex(w);
@@ -143,22 +143,20 @@ void PushArray(uchar *pb, uchar bSize)
 }
 
 
-err_t PushOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) // TODO
+err_t UDPPush(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) // TODO
 {
   pbuf_free(p);
   p = pbuf_alloc(PBUF_TRANSPORT, iwPush, PBUF_RAM);
-  if (p == NULL) return ERR_MEM;
+  if (p == NULL)
+    return ERR_MEM;
 
   memcpy(p->payload, mbPush, iwPush);
 
-//  if (addr->addr == IPADDR_BROADCAST)
-    udp_sendto(pcb, p, IP_ADDR_BROADCAST, port); // TODO broadcast
-//  else
-//    udp_sendto(pcb, p, addr, port);
+  if (broadcast != 0)
+    udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
+  else
+    udp_sendto(pcb, p, addr, port); // TODO check result
 
   pbuf_free(p);
   return ERR_OK;
 }
-
-
-// TODO test overflow
