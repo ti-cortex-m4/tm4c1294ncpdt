@@ -4,6 +4,13 @@ udp_push,h
 
 ------------------------------------------------------------------------------*/
 
+#define UDP_PUSH_SIZE   0x200
+
+extern uchar                   mbUDPPush[UDP_PUSH_SIZE];
+extern uint                    iwUDPPush;
+
+
+
 extern uint                    cwErrUPDPushCharOverflow;
 
 
