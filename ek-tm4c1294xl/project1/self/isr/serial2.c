@@ -293,7 +293,10 @@ uint32_t ui32Status;
         else
         {
           if (bT == 0x1A)
+          {
+            InputMode2();
             mpSerial[2] = SER_CTRL_Z;
+          }
 
           else if ((bT == 0x1B) && ((mpSerial[2] == SER_BEGIN) || (mpSerial[2] == SER_PAUSE)))
             mpSerial[2] = SER_ESC;
