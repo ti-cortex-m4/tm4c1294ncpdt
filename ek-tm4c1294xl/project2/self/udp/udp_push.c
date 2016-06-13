@@ -45,17 +45,6 @@ void PushString(const char *sz)
 }
 
 
-void PushArrayString(uchar *pb, uchar bSize)
-{
-  uchar i;
-  for (i=0; i<bSize; i++)
-  {
-    PushCharDec(pb[i]);
-    if (i < bSize-1) PushChar('.');
-  }
-}
-
-
 void PushBuff(buff bf)
 {
   while (bf.wSize-- > 0)
@@ -132,6 +121,17 @@ void PushIP(ulong dw)
 }
 
 
+void PushMAC(uchar *pb, uchar bSize)
+{
+  uchar i;
+  for (i=0; i<bSize; i++)
+  {
+    PushCharDec(pb[i]);
+    if (i < bSize-1) PushChar('.');
+  }
+}
+
+
 void PushSuffix(uint w)
 {
   PushChar('|');
@@ -140,9 +140,10 @@ void PushSuffix(uint w)
 
 
 
-err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) // TODO
+err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   pbuf_free(p);
+
   p = pbuf_alloc(PBUF_TRANSPORT, iwPush, PBUF_RAM);
   if (p == NULL)
     return ERR_MEM;
@@ -150,7 +151,7 @@ err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint por
   memcpy(p->payload, mbPush, iwPush);
 
   if (broadcast != 0)
-    udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
+    udp_sendto(pcb, p, IP_ADDR_BROADCAST, port); // TODO check result
   else
     udp_sendto(pcb, p, addr, port); // TODO check result
 
