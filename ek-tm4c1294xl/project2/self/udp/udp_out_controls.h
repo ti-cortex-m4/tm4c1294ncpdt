@@ -12,4 +12,4 @@ extern const uint wControlsSize;
 
 
 
-err_t OutFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
+err_t OutControls(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);

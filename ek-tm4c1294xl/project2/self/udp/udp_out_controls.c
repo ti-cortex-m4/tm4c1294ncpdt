@@ -15,11 +15,11 @@ udp_out_controls,c
 
 
 static message pcszGeneral = "AI=$GENERAL;D=General;T=GROUP";
-static message pcszChannel1 = "AI=$CHANNEL1;D=Channel1;T=GROUP";
-static message pcszChannel2 = "AI=$CHANNEL2;D=Channel2;T=GROUP";
-static message pcszChannel3 = "AI=$CHANNEL3;D=Channel3;T=GROUP";
-static message pcszChannel4 = "AI=$CHANNEL4;D=Channel4;T=GROUP";
-static message pcszChannel5 = "AI=$CHANNEL5;D=Channel5;T=GROUP";
+static message pcszChannel0 = "AI=$CHANNEL1;D=Channel1;T=GROUP";
+static message pcszChannel1 = "AI=$CHANNEL2;D=Channel2;T=GROUP";
+static message pcszChannel2 = "AI=$CHANNEL3;D=Channel3;T=GROUP";
+static message pcszChannel3 = "AI=$CHANNEL4;D=Channel4;T=GROUP";
+static message pcszChannel4 = "AI=$CHANNEL5;D=Channel5;T=GROUP";
 static message pcszSettings = "AI=$SETTINGS;D=Settings;T=GROUP";
 
 
@@ -33,7 +33,7 @@ static message *mppcszControls[] =
   &enGateway.szName,
   &enNetmask.szName,
 
-  &pcszChannel1,
+  &pcszChannel0,
   &enConnectionTimeout0.szName,
   &enRoutingMode0.szName,
   &enPort0.szName,
@@ -45,7 +45,7 @@ static message *mppcszControls[] =
   &enDataBits0.szName,
   &enStopBits0.szName,
 
-  &pcszChannel2,
+  &pcszChannel1,
   &enConnectionTimeout1.szName,
   &enRoutingMode1.szName,
   &enPort1.szName,
@@ -57,7 +57,7 @@ static message *mppcszControls[] =
   &enDataBits1.szName,
   &enStopBits1.szName,
 
-  &pcszChannel3,
+  &pcszChannel2,
   &enConnectionTimeout2.szName,
   &enRoutingMode2.szName,
   &enPort2.szName,
@@ -69,7 +69,7 @@ static message *mppcszControls[] =
   &enDataBits2.szName,
   &enStopBits2.szName,
 
-  &pcszChannel4,
+  &pcszChannel3,
   &enConnectionTimeout3.szName,
   &enRoutingMode3.szName,
   &enPort3.szName,
@@ -81,7 +81,7 @@ static message *mppcszControls[] =
   &enDataBits3.szName,
   &enStopBits3.szName,
 
-  &pcszChannel5,
+  &pcszChannel4,
   &enConnectionTimeout4.szName,
   &enRoutingMode4.szName,
   &enPort4.szName,
@@ -126,7 +126,7 @@ err_t OutControls(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uin
     PushString(*mppcszControls[wArg]);
   else
   {
-    WARNING("unknown index %u\n", wArg);
+    WARNING("OutControls: wrong index, must be %u < %u\n", wArg, wControlsSize);
   }
 
   PushChar(0x0D);
