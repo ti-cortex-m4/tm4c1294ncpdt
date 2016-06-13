@@ -23,7 +23,7 @@ static const uchar CONTENT_EXTRA_SIZE = 3;
 
 static message szSerialPort = "Serial Port";
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
-static message szVariables = "Variables";
+static message szVariables = "Metrics";
 static message szRuntime = "Runtime";
 static message szUptime = "Working time after last restart";
 static message szWatchdogReset = "Last restart type (0 - power-up, 1 - watchdog)";

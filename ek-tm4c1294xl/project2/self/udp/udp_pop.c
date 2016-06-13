@@ -25,7 +25,7 @@ const static char mbCHARS[] = "0123456789abcdef";
       return GetChar2Success(i);
   }
 
-  WARNING("DecodeChar failed: wrong char %02X for radix %u\n", b, bRadix);
+  WARNING("DecodeChar: wrong char %02X for radix %u\n", b, bRadix);
   return GetChar2Error();
 }
 
@@ -46,14 +46,14 @@ uint2 PopInt(struct pbuf *p, const uchar ibStart, const uchar bRadix, const ucha
     uchar2 b2 = DecodeChar(pb[i], bRadix);
     if (InvalidChar2(b2))
     {
-      WARNING("PopInt failed: wrong integer for radix %u with border @c, position %u\n", bRadix, cBorder, i);
+      WARNING("PopInt: wrong integer for radix %u with border @c, position %u\n", bRadix, cBorder, i);
       return GetInt2Error();
     }
 
     w = w*bRadix + b2.b;
   }
 
-  WARNING("PopInt failed: cycle, position %u\n", i);
+  WARNING("PopInt: cycle, position %u\n", i);
   return GetInt2Error();
 }
 
@@ -81,7 +81,7 @@ uchar2 PopChar(struct pbuf *p, const uchar ibStart, const uchar bRadix, const uc
   }
 
   if (w2.w >= 0x100) {
-    WARNING("PopChar failed: char overflow %u\n", w2.w);
+    WARNING("PopChar: char overflow %u\n", w2.w);
     return GetChar2Error();
   }
 
@@ -113,7 +113,7 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart)
     {
       if (y > 3)
       {
-        WARNING("PopIP failed: points, position %u\n", i);
+        WARNING("PopIP: points, position %u\n", i);
         return GetLong2Error();
       }
       else
@@ -133,7 +133,7 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart)
       uchar2 b2 = DecodeChar(pb[i],10);
       if (InvalidChar2(b2))
       {
-        WARNING("PopIP failed: char decoding, position %u\n", i);
+        WARNING("PopIP: char decoding, position %u\n", i);
         return GetLong2Error();
       }
 
@@ -141,17 +141,17 @@ ulong2 PopIP(struct pbuf *p, const uchar ibStart)
     }
   }
 
-  WARNING("PopIP failed: cycle, position %u\n",i );
+  WARNING("PopIP: cycle, position %u\n",i );
   return GetLong2Error();
 }
 
 
 
-err_t PopString(struct pbuf *p, char *szString, const uchar bSize, const uchar ibStart)
+err_t PopString(struct pbuf *p, char *szBuff, const uchar bSize, const uchar ibStart)
 {
   uchar *pb = p->payload;
 
-  memset(szString, 0, bSize);
+  memset(szBuff, 0, bSize);
 
   uint i;
   for (i=ibStart; i<p->len; i++)
@@ -162,7 +162,7 @@ err_t PopString(struct pbuf *p, char *szString, const uchar bSize, const uchar i
     char b = pb[i];
     if (b < 0x20)
     {
-      WARNING("PopString failed: wrong char %02X, position %u\n", b, i);
+      WARNING("PopString: wrong char %02X, position %u\n", b, i);
       return ERR_VAL;
     }
 
@@ -172,10 +172,10 @@ err_t PopString(struct pbuf *p, char *szString, const uchar bSize, const uchar i
       return ERR_VAL;
     }
 
-    szString[i-ibStart] = b;
+    szBuff[i-ibStart] = b;
   }
 
-  WARNING("PopString failed: cycle, position %u\n", i);
+  WARNING("PopString: cycle, position %u\n", i);
   return ERR_ARG;
 }
 
@@ -196,7 +196,7 @@ uint2 PopSuffix(struct pbuf *p)
       uchar2 b2 = DecodeChar(pb[i], 0x10);
       if (InvalidChar2(b2))
       {
-        WARNING("PopSuffix failed: wrong char, position %u\n", i);
+        WARNING("PopSuffix: wrong char, position %u\n", i);
         return GetInt2Error();
       }
 
@@ -214,7 +214,7 @@ uint2 PopSuffix(struct pbuf *p)
   }
   else
   {
-    WARNING("PopSuffix failed: not found '|'\n");
+    WARNING("PopSuffix: not found '|'\n");
     return GetInt2Error();
   }
 }
