@@ -18,7 +18,7 @@ main.h
 
 
 #define MAJOR_VERSION   0
-#define MINOR_VERSION   4
+#define MINOR_VERSION   5
 
 
 #define UART_COUNT      5
