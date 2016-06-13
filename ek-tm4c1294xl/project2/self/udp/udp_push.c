@@ -18,8 +18,9 @@ static uint             iwPush;
 
 
 uint                    cwErrUPDPushCharOverflow = 0;
-uint                    cwErrUPDPushAlloc = 0;
-uint                    cwErrUPDPushSend = 0;
+uint                    cwErrUPDPushAlloc = 0; // TODO
+uint                    cwErrUPDPushSendUnicast = 0;
+uint                    cwErrUPDPushSendBroadcast = 0;
 
 
 
@@ -111,7 +112,7 @@ err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint por
     if (err != ERR_OK)
     {
       ERROR("UDPOut.udp_sendto: err=%u", err);
-      cwErrUPDPushSend++;
+      cwErrUPDPushSendBroadcast++;
     }
   }
   else
@@ -120,7 +121,7 @@ err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint por
     if (err != ERR_OK)
     {
       ERROR("UDPOut.udp_sendto: err=%u", err);
-      cwErrUPDPushSend++;
+      cwErrUPDPushSendUnicast++;
     }
   }
 
