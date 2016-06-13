@@ -24,7 +24,7 @@ void InitPush(void)
 }
 
 
-void PushChar(uchar b)
+void PushChar(const uchar b)
 {
   if (iwUDPPush < UDP_PUSH_SIZE)
     mbUDPPush[iwUDPPush++] = b;
@@ -52,7 +52,7 @@ void PushBuff(buff bf)
 
 
 
-void PushIP(ulong dw)
+void PushIP(const ulong dw)
 {
   combo32 cb;
   cb.dwBuff = dw;
@@ -67,7 +67,7 @@ void PushIP(ulong dw)
 }
 
 
-void PushMAC(uchar *pb, uchar bSize)
+void PushMAC(uchar *pb, const uchar bSize)
 {
   uchar i;
   for (i=0; i<bSize; i++)
@@ -78,7 +78,7 @@ void PushMAC(uchar *pb, uchar bSize)
 }
 
 
-void PushSuffix(uint w)
+void PushSuffix(const uint w)
 {
   PushChar('|');
   PushIntHex(w);
