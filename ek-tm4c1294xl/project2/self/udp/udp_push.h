@@ -16,7 +16,7 @@ extern uint                    cwErrUPDPushCharOverflow;
 
 void InitPush(void);
 void PushChar(const uchar b);
-void PushString(const char *sz);
+void PushString(const char *pcsz);
 void PushBuff(buff bf);
 
 void PushIP(const ulong dw);
