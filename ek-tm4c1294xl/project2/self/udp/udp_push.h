@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-UDP_PUSH,H
+udp_push.h
 
 
 ------------------------------------------------------------------------------*/
@@ -17,6 +17,6 @@ uchar PushCharDec(uchar b);
 uchar PushIntDec(uint w);
 uchar PushIntHex(uint w);
 void PushIP(ulong dw);
-void PushSfx(uint w);
+void PushSuffix(uint w);
 
-err_t PushOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
+err_t UDPPush(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
