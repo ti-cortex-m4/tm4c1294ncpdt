@@ -42,7 +42,7 @@ void PushString(const char *sz)
 }
 
 
-void PushBuff(buff bf)
+void PushBuff(buff bf) // TODO const
 {
   while (bf.wSize-- > 0)
   {
@@ -67,13 +67,15 @@ void PushIP(const ulong dw)
 }
 
 
-void PushMAC(uchar *pb, const uchar bSize)
+void PushMAC(const uchar *pb, const uchar bSize)
 {
   uchar i;
   for (i=0; i<bSize; i++)
   {
     PushCharDec(pb[i]);
-    if (i < bSize-1) PushChar('.');
+
+    if (i < bSize-1)
+      PushChar('.');
   }
 }
 
