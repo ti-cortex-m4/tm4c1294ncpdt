@@ -14,7 +14,7 @@ udp_out_fs,c
 
 
 
-err_t CmdFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t OutFS(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
