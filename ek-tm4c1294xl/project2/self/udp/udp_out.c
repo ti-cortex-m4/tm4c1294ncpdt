@@ -20,7 +20,7 @@ err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint por
 {
   pbuf_free(p);
 
-  p = pbuf_alloc(PBUF_TRANSPORT, iwPush, PBUF_RAM);
+  p = pbuf_alloc(PBUF_TRANSPORT, iwUDPPush, PBUF_RAM);
   if (p == NULL)
   {
     ERROR("UDPOut.pbuf_alloc: NULL\n");
@@ -28,7 +28,7 @@ err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint por
     return ERR_MEM;
   }
 
-  memcpy(p->payload, mbPush, iwPush);
+  memcpy(p->payload, mbUDPPush, iwUDPPush);
 
   if (broadcast != 0)
   {
