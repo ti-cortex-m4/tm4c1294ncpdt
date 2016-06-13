@@ -6,6 +6,7 @@ UDP_IN,C
 
 #include "../main.h"
 #include "../kernel/entities.h"
+#include "../kernel/controls.h"
 #include "../kernel/log.h"
 #include "../kernel/settings.h"
 #include "driverlib/sysctl.h"
