@@ -10,11 +10,14 @@ UDP_PUSH,C
 
 
 
-#define PUSH_SIZE       0x200 // TODO check overflow
+#define PUSH_SIZE       0x200
 
 
 static uchar            mbPush[PUSH_SIZE];
 static uint             iwPush;
+
+
+uint                    cwErrUPDPushOverflow = 0;
 
 
 
@@ -26,7 +29,10 @@ void InitPush(void)
 
 void PushChar(uchar b)
 {
-  mbPush[iwPush++] = b;
+  if (iwPush < PUSH_SIZE)
+    mbPush[iwPush++] = b;
+  else
+    cwErrUPDPushOverflow++;
 }
 
 
@@ -52,12 +58,11 @@ void PushArrayString(uchar *pb, uchar bSize)
 
 void PushBuff(buff bf)
 {
-  while (bf.wSize-- > 0 > 0)
+  while (bf.wSize-- > 0)
   {
     PushChar(*(bf.pbBuff++));
   }
 }
-
 
 
 uchar   PushCharDec(uchar b)
@@ -92,6 +97,7 @@ static char mb[6*2];
 
   return n;
 }
+
 
 uchar   PushIntHex(uint w)
 {
@@ -133,17 +139,8 @@ void PushSuffix(uint w)
 }
 
 
-void PushArray(uchar *pb, uchar bSize)
-{
-  uchar i;
-  for (i=0; i<bSize; i++)
-  {
-    PushChar(pb[i]);
-  }
-}
 
-
-err_t UDPPush(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) // TODO
+err_t UDPOut(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) // TODO
 {
   pbuf_free(p);
   p = pbuf_alloc(PBUF_TRANSPORT, iwPush, PBUF_RAM);
