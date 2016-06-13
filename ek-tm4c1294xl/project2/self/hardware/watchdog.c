@@ -63,7 +63,7 @@ void InitWatchdog(void)
 {
   DisableWatchdog();
 
-  if (fWatchdogFlag)
+  if (fWatchdogFlag != false)
     EnableWatchdog();
 
   fWatchdogReset = IsWatchdogReset();

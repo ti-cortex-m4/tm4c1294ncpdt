@@ -15,6 +15,7 @@ UDP_IN,C
 #include "udp_push.h"
 #include "udp_cmd.h"
 #include "routing_status.h"
+#include "test_watchdog.h"
 #include "udp_in.h"
 
 
@@ -320,7 +321,7 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 
 void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
-//  WARNING("broadcast: %d\n", broadcast);
+//  CONSOLE("broadcast: %d\n", broadcast);
 
   if (IsCmd(p,"X")) {
     CmdX(pcb,p,addr,port,broadcast);
@@ -349,6 +350,8 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
     CmdString(pcb,p,addr,port,broadcast,"0");
   } else if (IsRoutingStatusSize(p)) {
     GetRouingStatusSize(pcb,p,addr,port,broadcast);
+  } else if (IsCmd(p,"watchdog")) {
+    TestWatchdog(pcb,p,addr,port,broadcast);
   }
 
   else if (IsEnity(pcb,p,addr,port,broadcast,&enOwnerName)) {}
