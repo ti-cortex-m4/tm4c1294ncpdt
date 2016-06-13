@@ -8,6 +8,6 @@ extern uint                    cwErrUPDPushNumbersOverflow;
 
 
 
-uchar PushCharDec(uchar b);
-uchar PushIntDec(uint w);
-uchar PushIntHex(uint w);
+uchar PushCharDec(const uchar b);
+uchar PushIntDec(const uint w);
+uchar PushIntHex(const uint w);
