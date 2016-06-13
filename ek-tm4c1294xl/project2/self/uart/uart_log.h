@@ -11,7 +11,7 @@ uart_log,h
 
 //void    LogTimer_1000Hz(void);
 
-void    InitUartLog(ulong dwClockFreq);
+void    InitUARTLog(ulong dwClockFreq);
 //void    PrintLogTimer(void);
 
 

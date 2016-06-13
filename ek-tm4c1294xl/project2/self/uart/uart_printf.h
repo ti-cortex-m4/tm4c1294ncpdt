@@ -4,4 +4,4 @@ uart_printf.h
 
 ------------------------------------------------------------------------------*/
 
-void UartPrintF(const char *pcsz, ...);
+void UARTPrintF(const char *pcsz, ...);

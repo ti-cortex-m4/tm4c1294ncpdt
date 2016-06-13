@@ -11,7 +11,7 @@ uart_printf.c
 
 
 
-void UartPrintF(const char *pcsz, ...)
+void UARTPrintF(const char *pcsz, ...)
 {
   if (ibDebugMode == DEBUG_MODE_UART)
   {
