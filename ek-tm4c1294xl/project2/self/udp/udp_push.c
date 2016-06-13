@@ -5,13 +5,12 @@ UDP_PUSH,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "utils/ustdlib.h"
+#include "udp_push_number.h"
 #include "udp_push.h"
 
 
 
 #define PUSH_SIZE       0x200
-
 
 static uchar            mbPush[PUSH_SIZE];
 static uint             iwPush;
@@ -51,57 +50,6 @@ void PushBuff(buff bf)
   {
     PushChar(*(bf.pbBuff++));
   }
-}
-
-
-uchar   PushCharDec(uchar b)
-{
-static char mb[4*2];
-
-  memset(&mb, 0, sizeof(mb));
-  uchar n = usprintf(mb, "%u" ,b);
-
-  uchar i;
-  for (i=0; i<n; i++)
-  {
-    PushChar(mb[i]);
-  }
-
-  return n;
-}
-
-
-uchar   PushIntDec(uint w)
-{
-static char mb[6*2];
-
-  memset(&mb, 0, sizeof(mb));
-  uchar n = usprintf(mb, "%u" ,w);
-
-  uchar i;
-  for (i=0; i<n; i++)
-  {
-    PushChar(mb[i]);
-  }
-
-  return n;
-}
-
-
-uchar   PushIntHex(uint w)
-{
-static char mb[5*2];
-
-  memset(&mb, 0, sizeof(mb));
-  uchar n = usprintf(mb, "%X" ,w);
-
-  uchar i;
-  for (i=0; i<n; i++)
-  {
-    PushChar(mb[i]);
-  }
-
-  return n;
 }
 
 
