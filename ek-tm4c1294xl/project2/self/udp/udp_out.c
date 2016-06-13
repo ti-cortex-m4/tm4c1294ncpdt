@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-udp_out,c
+udp_out.c
 
 
 ------------------------------------------------------------------------------*/
@@ -17,13 +17,11 @@ uint                    cwErrUPDOutSendBroadcast = 0;
 
 
 
-err_t Out(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
+err_t Out(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   pbuf_free(p);
 
   p = pbuf_alloc(PBUF_TRANSPORT, iwUDPPush, PBUF_RAM);
-  if (p == NULL)
-  {
+  if (p == NULL) {
     ERROR("UDPOut.pbuf_alloc: NULL\n");
     cwErrUPDOutPbufAlloc++;
     return ERR_MEM;
@@ -31,20 +29,15 @@ err_t Out(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, 
 
   memcpy(p->payload, mbUDPPush, iwUDPPush);
 
-  if (broadcast != 0)
-  {
+  if (broadcast != 0) {
     err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
-    if (err != ERR_OK)
-    {
+    if (err != ERR_OK) {
       ERROR("UDPOut.udp_sendto: send broadcast, error=%u\n", err);
       cwErrUPDOutSendBroadcast++;
     }
-  }
-  else
-  {
+  } else {
     err_t err = udp_sendto(pcb, p, addr, port);
-    if (err != ERR_OK)
-    {
+    if (err != ERR_OK) {
       ERROR("UDPOut.udp_sendto: send unicast, error=%u\n", err);
       cwErrUPDOutSendUnicast++;
     }
