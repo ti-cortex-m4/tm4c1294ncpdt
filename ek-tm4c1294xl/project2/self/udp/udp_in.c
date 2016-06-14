@@ -71,18 +71,6 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
   return Out(pcb,p,addr,port,broadcast);
 }
 
-err_t CmdW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
-{
-  uint2 wSfx = PopSfx(p);
-  if (InvalidInt2(wSfx)) return wSfx.err;
-
-  InitPush();
-  PushChar('A');
-  PushSfx(wSfx.w);
-
-  return Out(pcb,p,addr,port,broadcast);
-}
-
 
 
 void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
@@ -92,7 +80,7 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   if (IsCmd(p,"X")) {
     CmdX(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"W")) {
-    CmdW(pcb,p,addr,port,broadcast); // TODO
+    OutStringZ(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"E")) {
     SysCtlReset();
   } else if (IsCmd(p,"L")) {
