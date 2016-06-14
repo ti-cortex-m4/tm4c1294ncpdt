@@ -74,3 +74,13 @@ ulong2 GetLong2Error(void) {
 bool InvalidLong2(ulong2 dw2) {
   return dw2.err != ERR_OK;
 }
+
+
+
+err_t GetSuccess(void) {
+  return ERR_OK;
+}
+
+err_t GetError(void) {
+  return ERR_VAL;
+}

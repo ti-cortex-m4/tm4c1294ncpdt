@@ -43,4 +43,7 @@ ulong2 GetLong2Success(ulong dw);
 ulong2 GetLong2Error(void);
 bool InvalidLong2(ulong2 dw2);
 
+err_t GetSuccess(void);
+err_t GetError(void);
+
 #endif

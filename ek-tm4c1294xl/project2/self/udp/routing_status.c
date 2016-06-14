@@ -20,7 +20,7 @@ routing_status,c
 
 
 #define ROUTING_STATUS_SIZE  7
-#define CONTENT_DEBUG_SIZE   12
+#define ROUTING_DEBUG_SIZE   12
 
 
 static message szSerialPort = "Serial Port";
@@ -53,7 +53,7 @@ err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   uchar bSize = ROUTING_STATUS_SIZE;
 
   if (IsCmd(p,"CU@5"))
-    bSize += CONTENT_DEBUG_SIZE;
+    bSize += ROUTING_DEBUG_SIZE;
 
   return OutCharDec(pcb,p,addr,port,broadcast,bSize);
 }
@@ -101,13 +101,13 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   uchar2 b2 = PopCharDec(p, ibStart.b);
   if (InvalidChar2(b2)) {
     WARNING("routing status: wrong port\n");
-    return ERR_OK;
+    return b2.err;
   }
 
   uchar bPort = b2.b;
   if (!(bPort >= 1) && (bPort <= UART_COUNT)) {
-    WARNING("routing status: wrong port %u\n",bPort);
-    return ERR_OK;
+    WARNING("routing status: wrong port %u\n", bPort);
+    return GetError();
   }
 
   uchar u = bPort-1;
@@ -146,10 +146,10 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 18: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsEntitySave", cwErrSettingsEntitySave)); break;
       case 19: OutString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
-    if (wIdx >= ROUTING_STATUS_SIZE + CONTENT_DEBUG_SIZE) {
+    if (wIdx >= ROUTING_STATUS_SIZE + ROUTING_DEBUG_SIZE) {
       WARNING("routing status: wrong debug index %u\n", wIdx);
     }
   }
 
-  return ERR_OK;
+  return GetSuccess();
 }
