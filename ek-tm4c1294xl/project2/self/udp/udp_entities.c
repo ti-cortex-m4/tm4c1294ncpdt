@@ -39,7 +39,7 @@ static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *sz
 
 
 
-static err_t GetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen)
+static err_t GetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const entity * const pen)
 {
   switch (pen->eType)
   {

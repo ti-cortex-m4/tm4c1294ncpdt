@@ -19,7 +19,7 @@ err_t OutString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
   InitPush();
   PushChar('A');
-  PushString(pcsz);
+  PushStringZ(pcsz);
   PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);

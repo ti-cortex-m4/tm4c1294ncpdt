@@ -33,7 +33,7 @@ void PushChar(const uchar b)
 }
 
 
-void PushString(const char *pcsz)
+void PushStringZ(const char *pcsz)
 {
   while (*pcsz)
   {
