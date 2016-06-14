@@ -46,7 +46,7 @@ static err_t GetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
     case CHAR: return OutCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRam);
     case INT: return OutIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRam);
     case IP: return OutIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRam);
-    case STRING: return OutString(pcb,p,addr,port,broadcast,(const char *)pen->pbRam);
+    case STRING: return OutStringZ(pcb,p,addr,port,broadcast,(const char *)pen->pbRam);
     default: ASSERT(false); return GetError();
   }
 }
