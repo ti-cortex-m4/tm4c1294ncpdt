@@ -64,6 +64,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, const uchar ibStart) /
       }
       return b2.err;
     }
+
     case INT:
     {
       uint2 w2 = PopIntDec(p, ibStart);
@@ -72,6 +73,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, const uchar ibStart) /
       }
       return w2.err;
     }
+
     case IP:
     {
       ulong2 dw2 = PopIP(p, ibStart);
@@ -80,17 +82,18 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, const uchar ibStart) /
       }
       return dw2.err;
     }
+
     case STRING:
     {
-      err_t err = PopBuff(p, (char *)pen->pbRam, NAME_SIZE, ibStart);
-      return err;
+      return PopBuff(p, (char *)pen->pbRam, NAME_SIZE, ibStart);
     }
-    default: ASSERT(false); return -1;
+
+    default: ASSERT(false); return GetError();
   }
 }
 
 
-static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, const uchar ibStart) // TODO
+static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, const uchar ibStart)
 {
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -98,8 +101,7 @@ static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
   err_t err = PopEntity(p, pen, ibStart);
   if (err != ERR_OK) return err;
 
-  ulong dw = SaveEntity(pen);
-  if (dw != 0) return GetError();
+  if (SaveEntity(pen) != 0) return GetError();
 
   InitPush();
   PushChar('A');
