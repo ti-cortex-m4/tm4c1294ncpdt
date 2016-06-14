@@ -47,19 +47,19 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
   }
 
   InitPush();
-  PushString("A");
+  PushStringZ("A");
   PushMAC(pbMac, 6);
-  PushString("/");
-  PushString("000001001"); // TODO "000001001"
-  PushString("/");
-  PushString("N**M*"); // TODO "N**M*"
-  PushString("/");
-  PushString("**"); // TODO "**"
-  PushString("/");
-  PushString(szOwnerName);
-  PushString("/");
-  PushString(szDeviceName);
-  PushString("/");
+  PushStringZ("/");
+  PushStringZ("000001001"); // TODO "000001001"
+  PushStringZ("/");
+  PushStringZ("N**M*"); // TODO "N**M*"
+  PushStringZ("/");
+  PushStringZ("**"); // TODO "**"
+  PushStringZ("/");
+  PushStringZ(szOwnerName);
+  PushStringZ("/");
+  PushStringZ(szDeviceName);
+  PushStringZ("/");
   PushCharDec(UART_COUNT);
 
   if (p->len > 1)
