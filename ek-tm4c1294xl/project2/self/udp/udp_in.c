@@ -197,10 +197,10 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
   {
     switch (pen->eType)
     {
-      case CHAR: CmdCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRam); break;
-      case INT: CmdIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRam); break;
-      case IP: CmdIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRam); break;
-      case STRING: CmdString(pcb,p,addr,port,broadcast,(const char *)pen->pbRam); break;
+      case CHAR: OutCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRam); break;
+      case INT: OutIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRam); break;
+      case IP: OutIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRam); break;
+      case STRING: OutString(pcb,p,addr,port,broadcast,(const char *)pen->pbRam); break;
       default: ASSERT(false); break;
     }
 
@@ -228,24 +228,24 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   } else if (IsCmd(p,"E")) {
     SysCtlReset();
   } else if (IsCmd(p,"L")) {
-    CmdString(pcb,p,addr,port,broadcast,"");
+    OutString(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"I")) {
     ResetSettings();
-    CmdString(pcb,p,addr,port,broadcast,"");
+    OutString(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"O")) {
-    CmdString(pcb,p,addr,port,broadcast,"");
+    OutString(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"V")) {
-    CmdString(pcb,p,addr,port,broadcast,"{ds1.0}");
+    OutString(pcb,p,addr,port,broadcast,"{ds1.0}");
   } else if (IsCmd(p,"H")) {
-    CmdString(pcb,p,addr,port,broadcast,"1A");
+    OutString(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
-    CmdIntDec(pcb,p,addr,port,broadcast,wControlsSize);
+    OutIntDec(pcb,p,addr,port,broadcast,wControlsSize);
   } else if (IsCmd(p,"FS")) {
     OutControls(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
-    CmdString(pcb,p,addr,port,broadcast,"0");
+    OutString(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"SPW")) {
-    CmdString(pcb,p,addr,port,broadcast,"0");
+    OutString(pcb,p,addr,port,broadcast,"0");
   } else if (IsRoutingStatusSize(p)) {
     GetRouingStatusSize(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"watchdog")) {
