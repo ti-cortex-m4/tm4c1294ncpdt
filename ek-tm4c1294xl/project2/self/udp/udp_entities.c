@@ -112,7 +112,7 @@ static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
 
 
 
-static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen) // TODO check errors
+static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen)
 {
   uchar2 ibStart = IsEnityCode(p, 'G', pen->szCode);
   if (!InvalidChar2(ibStart))
@@ -136,7 +136,8 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 }
 
 
-bool AreEnities(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast) {
+bool AreEnities(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
+{
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
