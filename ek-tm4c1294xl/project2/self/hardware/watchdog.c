@@ -70,7 +70,7 @@ void InitWatchdog(void)
   fWatchdogReset = IsWatchdogReset();
   if (fWatchdogReset)
   {
-    WARNING("watchdog reset");
+    WARNING("watchdog reset\n");
   }
 }
 
