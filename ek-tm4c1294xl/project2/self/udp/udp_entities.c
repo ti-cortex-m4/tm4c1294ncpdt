@@ -14,7 +14,7 @@ udp_entities,c
 
 
 
-static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)  // TODO
+static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)
 {
   uchar *pb = p->payload;
   uchar i = 0;
@@ -38,7 +38,8 @@ static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *sz
 }
 
 
-static err_t GetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen)  // TODO
+
+static err_t GetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen)
 {
   switch (pen->eType)
   {
@@ -89,7 +90,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, const uchar ibStart) /
 }
 
 
-static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, uchar ibStart) // TODO
+static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, const uchar ibStart) // TODO
 {
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -97,8 +98,8 @@ static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
   err_t err = PopEntity(p, pen, ibStart);
   if (err != ERR_OK) return err;
 
-  err = SaveEntity(pen);
-  if (err != ERR_OK) return err;
+  ulong dw = SaveEntity(pen);
+  if (dw != 0) return GetError();
 
   InitPush();
   PushChar('A');
@@ -133,7 +134,7 @@ static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u
 }
 
 
-bool AreEnities(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast) { // TODO
+bool AreEnities(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast) {
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
