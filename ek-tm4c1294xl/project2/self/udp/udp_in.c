@@ -112,8 +112,6 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
     OutStringZ(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"SPW")) {
     OutStringZ(pcb,p,addr,port,broadcast,"0");
-  } else if (IsRoutingStatusSize(p)) {
-    GetRouingStatusSize(pcb,p,addr,port,broadcast);
   }
 
   else if (IsCmd(p,"watchdog")) {
@@ -123,7 +121,9 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   else if (AreEnities(pcb,p,addr,port,broadcast)) {
   }
 
-  else if (IsRoutingStatusContent(p)) {
+  else if (IsRoutingStatusSize(p)) {
+    GetRouingStatusSize(pcb,p,addr,port,broadcast);
+  } else if (IsRoutingStatusContent(p)) {
     GetRouingStatusContent(pcb,p,addr,port,broadcast);
   }
 
