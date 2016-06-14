@@ -32,7 +32,8 @@ err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
   PushChar('/');
   PushStringZ("N**M*"); // TODO "N**M*"
   PushChar('/');
-  PushStringZ("**"); // TODO "**"
+  (false) ? PushChar('E') : PushChar('*'); // TODO Ethernet-to-serial buffer overflow
+  (false) ? PushChar('S') : PushChar('*'); // TODO serial-to-Ethernet buffer overflow
   PushChar('/');
   PushStringZ(szOwnerName);
   PushChar('/');
