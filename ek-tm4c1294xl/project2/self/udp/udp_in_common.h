@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-udp_entities.h
+udp_in_common.h
 
 
 ------------------------------------------------------------------------------*/
@@ -8,4 +8,6 @@ udp_entities.h
 
 
 
-bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen);
+bool IsCmd(struct pbuf *p, const char *pcszCmd);
+uchar2 GetCmdEndIndex(struct pbuf *p, const char *pcszCmd);
+uchar2 GetBorderIndex(struct pbuf *p, uchar bBorder);
