@@ -44,6 +44,7 @@ static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCo
   return true;
 }
 
+
 static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
 {
   uchar ibStart = *pibStart;
@@ -94,6 +95,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
   }
 }
 
+
 static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, uchar *pibStart)
 {
   uint2 wSfx = PopSfx(p);
@@ -111,6 +113,7 @@ static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
 
   return Out(pcb,p,addr,port,broadcast);
 }
+
 
 bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen) // TODO check errors
 {
