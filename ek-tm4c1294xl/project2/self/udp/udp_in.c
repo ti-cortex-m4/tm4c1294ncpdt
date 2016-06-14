@@ -14,6 +14,7 @@ UDP_IN,C
 #include "../uart/uart_log.h"
 #include "udp_pop.h"
 #include "udp_out.h"
+#include "udp_in_common.h"
 #include "udp_out_common.h"
 #include "udp_out_controls.h"
 #include "udp_entities.h"
