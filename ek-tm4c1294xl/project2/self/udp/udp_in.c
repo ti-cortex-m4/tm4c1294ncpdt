@@ -24,9 +24,6 @@ UDP_IN,C
 
 
 
-typedef err_t (*in_fn)(struct pbuf *p);
-
-
 typedef struct
 {
   struct udp_pcb *pcb;
@@ -85,21 +82,6 @@ err_t CmdW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
   return Out(pcb,p,addr,port,broadcast);
 }
 
-err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, in_fn in)
-{
-  uint2 wSfx = PopSfx(p);
-  if (InvalidInt2(wSfx)) return wSfx.err;
-
-  err_t err = in(p);
-  if (err != ERR_OK) return err;
-
-  InitPush();
-  PushChar('A');
-  PushSfx(wSfx.w);
-
-  return Out(pcb,p,addr,port,broadcast);
-}
-
 
 void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
@@ -132,7 +114,9 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
     OutString(pcb,p,addr,port,broadcast,"0");
   } else if (IsRoutingStatusSize(p)) {
     GetRouingStatusSize(pcb,p,addr,port,broadcast);
-  } else if (IsCmd(p,"watchdog")) {
+  }
+
+  else if (IsCmd(p,"watchdog")) {
     TestWatchdog(pcb,p,addr,port,broadcast);
   }
 
@@ -143,7 +127,7 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
     GetRouingStatusContent(pcb,p,addr,port,broadcast);
   }
 
-  else { // TODO
-    WARNING("unknown command\n");
+  else {
+    WARNING("UDPInput: unknown command\n");
   }
 }

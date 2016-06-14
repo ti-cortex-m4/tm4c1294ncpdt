@@ -51,7 +51,7 @@ void LoadEntityDef(const entity * const pen)
 
 
 #if false
-bool CheckEntity(const entity * const pen)
+bool TODO CheckEntity(const entity * const pen)
 {
   switch(pen->eType)
   {
