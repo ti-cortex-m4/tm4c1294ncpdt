@@ -74,7 +74,7 @@ static void OutUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
 
 
 err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
-  uchar2 ibStart = GetCmdIndex(p, "FU");
+  uchar2 ibStart = GetCmdEndIndex(p, "FU");
   if (InvalidChar2(ibStart)) {
     WARNING("routing mode: not found 'FU'\n");
     return ibStart.err;

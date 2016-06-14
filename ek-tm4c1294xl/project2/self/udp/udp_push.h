@@ -21,4 +21,4 @@ void PushBuff(buff bf);
 
 void PushIP(const ulong dw);
 void PushMAC(const uchar *pb, const uchar bSize);
-void PushSuffix(const uint w);
+void PushSfx(const uint w);
