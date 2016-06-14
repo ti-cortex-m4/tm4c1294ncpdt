@@ -42,7 +42,7 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 
   if (p->len > 1)
   {
-    uint2 w2 = PopSuffix(p);
+    uint2 w2 = PopSfx(p);
     if (InvalidInt2(w2)) return w2.err;
     wSfx = w2.w;
   }
@@ -65,7 +65,7 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 
   if (p->len > 1)
   {
-    PushSuffix(wSfx);
+    PushSfx(wSfx);
   }
 
   return Out(pcb,p,addr,port,broadcast);
@@ -73,19 +73,19 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 
 err_t CmdW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint2 wSfx = PopSuffix(p);
+  uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
-  PushSuffix(wSfx.w);
+  PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
 }
 
 err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, in_fn in)
 {
-  uint2 wSfx = PopSuffix(p);
+  uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   err_t err = in(p);
@@ -93,7 +93,7 @@ err_t CmdIn(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
   InitPush();
   PushChar('A');
-  PushSuffix(wSfx.w);
+  PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
 }
@@ -174,7 +174,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
 
 err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, uchar *pibStart)
 {
-  uint2 wSfx = PopSuffix(p);
+  uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   err_t err = PopEntity(p, pen, pibStart);
@@ -185,7 +185,7 @@ err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
   InitPush();
   PushChar('A');
-  PushSuffix(wSfx.w);
+  PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
 }

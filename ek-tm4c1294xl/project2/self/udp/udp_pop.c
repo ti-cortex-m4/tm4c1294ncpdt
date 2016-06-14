@@ -179,7 +179,7 @@ err_t PopBuff(struct pbuf *p, char *mpBuff, const uchar bSize, const uchar ibSta
 }
 
 
-uint2 PopSuffix(struct pbuf *p)
+uint2 PopSfx(struct pbuf *p)
 {
   uchar *pb = p->payload;
 

@@ -16,7 +16,7 @@ udp_out_controls.c
 
 err_t OutControls(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  uint2 wSfx = PopSuffix(p);
+  uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   uint2 w2 = PopIntDec(p, 2);
@@ -34,7 +34,7 @@ err_t OutControls(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uin
 
   PushChar(0x0D);
   PushChar(0x0A);
-  PushSuffix(wSfx.w);
+  PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
 }

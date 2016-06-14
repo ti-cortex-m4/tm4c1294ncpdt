@@ -15,5 +15,5 @@ err_t OutIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 err_t OutIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const ulong dw);
 
 bool IsCmd(struct pbuf *p, const char *pcszCmd);
-uchar2 GetCmdIndex(struct pbuf *p, const char *pcszCmd);
+uchar2 GetCmdEndIndex(struct pbuf *p, const char *pcszCmd);
 uchar2 GetBorderIndex(struct pbuf *p, uchar bBorder);

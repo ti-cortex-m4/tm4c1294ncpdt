@@ -81,7 +81,7 @@ void PushMAC(const uchar *pb, const uchar bSize)
 }
 
 
-void PushSuffix(const uint w)
+void PushSfx(const uint w)
 {
   PushChar('|');
   PushIntHex(w);

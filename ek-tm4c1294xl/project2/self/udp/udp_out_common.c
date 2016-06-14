@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-udp_out_common,c
+udp_out_common.c
 
 
 ------------------------------------------------------------------------------*/
@@ -13,13 +13,13 @@ udp_out_common,c
 
 err_t OutString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcsz)
 {
-  uint2 wSfx = PopSuffix(p);
+  uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushString(pcsz);
-  PushSuffix(wSfx.w);
+  PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
 }
@@ -27,13 +27,13 @@ err_t OutString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
 err_t OutBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, buff bf)
 {
-  uint2 wSfx = PopSuffix(p);
+  uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushBuff(bf);
-  PushSuffix(wSfx.w);
+  PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
 }
@@ -41,13 +41,13 @@ err_t OutBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
 
 err_t OutCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uchar b)
 {
-  uint2 wSfx = PopSuffix(p);
+  uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushCharDec(b);
-  PushSuffix(wSfx.w);
+  PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
 }
@@ -55,13 +55,13 @@ err_t OutCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 
 err_t OutIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint w)
 {
-  uint2 wSfx = PopSuffix(p);
+  uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushIntDec(w);
-  PushSuffix(wSfx.w);
+  PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
 }
@@ -69,13 +69,13 @@ err_t OutIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
 err_t OutIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const ulong dw)
 {
-  uint2 wSfx = PopSuffix(p);
+  uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
   PushIP(dw);
-  PushSuffix(wSfx.w);
+  PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
 }
@@ -100,7 +100,7 @@ bool IsCmd(struct pbuf *p, const char *pcszCmd)
 }
 
 
-uchar2 GetCmdIndex(struct pbuf *p, const char *pcszCmd)
+uchar2 GetCmdEndIndex(struct pbuf *p, const char *pcszCmd)
 {
   uchar *pb = p->payload;
 
