@@ -11,6 +11,7 @@ watchdog,c
 #include "driverlib/watchdog.h"
 #include "driverlib/sysctl.h"
 #include "../kernel/settings.h"
+#include "../kernel/log.h"
 #include "watchdog.h"
 
 
@@ -67,6 +68,10 @@ void InitWatchdog(void)
     EnableWatchdog();
 
   fWatchdogReset = IsWatchdogReset();
+  if (fWatchdogReset)
+  {
+    WARNING("watchdog reset");
+  }
 }
 
 

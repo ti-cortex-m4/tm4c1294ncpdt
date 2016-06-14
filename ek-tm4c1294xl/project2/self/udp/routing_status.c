@@ -11,6 +11,7 @@ routing_status.c
 #include "../kernel/settings.h"
 #include "../uart/io_mode.h"
 #include "../uart/serial.h"
+#include "udp_log.h"
 #include "udp_pop.h"
 #include "udp_out.h"
 #include "udp_in_common.h"
