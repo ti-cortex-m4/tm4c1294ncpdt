@@ -19,8 +19,9 @@ routing_status,c
 
 
 
-static const uchar ROUTING_STATUS_SIZE = 7; // TODO define
-static const uchar CONTENT_DEBUG_SIZE = 12;
+#define ROUTING_STATUS_SIZE  7
+#define CONTENT_DEBUG_SIZE   12
+
 
 static message szSerialPort = "Serial Port";
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
@@ -50,7 +51,10 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 
 err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar bSize = ROUTING_STATUS_SIZE;
-  if (IsCmd(p,"CU@5")) bSize += CONTENT_DEBUG_SIZE;
+
+  if (IsCmd(p,"CU@5"))
+    bSize += CONTENT_DEBUG_SIZE;
+
   return OutCharDec(pcb,p,addr,port,broadcast,bSize);
 }
 
@@ -77,32 +81,32 @@ static void OutUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
 err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar2 ibStart = GetCmdEndIndex(p, "FU");
   if (InvalidChar2(ibStart)) {
-    WARNING("routing mode: not found 'FU'\n");
+    WARNING("routing status: not found 'FU'\n");
     return ibStart.err;
   }
 
-  uint2 w2 = PopInt(p, ibStart.b, 10, '@'); // TODO char ?
+  uint2 w2 = PopInt(p, ibStart.b, 10, '@');
   if (InvalidInt2(w2)) {
-    WARNING("wrong routing mode index\n");
+    WARNING("routing status: wrong index\n");
     return w2.err;
   }
   uint wIdx = w2.w;
 
   ibStart = GetBorderIndex(p, '@');
   if (InvalidChar2(ibStart)) {
-    WARNING("routing mode: not found '@'\n");
+    WARNING("routing status: not found '@'\n");
     return ibStart.err;
   }
 
   uchar2 b2 = PopCharDec(p, ibStart.b);
   if (InvalidChar2(b2)) {
-    WARNING("wrong routing mode port\n");
+    WARNING("routing status: wrong port\n");
     return ERR_OK;
   }
 
   uchar bPort = b2.b;
   if (!(bPort >= 1) && (bPort <= UART_COUNT)) {
-    WARNING("wrong routing mode port %u\n",bPort);
+    WARNING("routing status: wrong port %u\n",bPort);
     return ERR_OK;
   }
 
@@ -123,7 +127,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 6: OutString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE) {
-      WARNING("unknown routing mode index %u\n", wIdx);
+      WARNING("routing status: wrong index %u\n", wIdx);
     }
   } else {
     switch (wIdx) {
@@ -143,7 +147,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 19: OutString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE + CONTENT_DEBUG_SIZE) {
-      WARNING("unknown routing mode index %u\n", wIdx);
+      WARNING("routing status: wrong debug index %u\n", wIdx);
     }
   }
 
