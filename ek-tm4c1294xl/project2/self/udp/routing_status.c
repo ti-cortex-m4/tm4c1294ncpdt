@@ -50,7 +50,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar bSize = ROUTING_STATUS_SIZE;
   if (IsCmd(p,"CU@5")) bSize += CONTENT_DEBUG_SIZE;
-  return CmdCharDec(pcb,p,addr,port,broadcast,bSize);
+  return OutCharDec(pcb,p,addr,port,broadcast,bSize);
 }
 
 
@@ -69,7 +69,7 @@ static void CmdUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
   uchar bMinutes = dwSeconds / SECONDS_IN_MINUTE;
   dwSeconds %= SECONDS_IN_MINUTE;
 
-  CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, szUptime, wDays, bHours, bMinutes, dwSeconds));
+  OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, szUptime, wDays, bHours, bMinutes, dwSeconds));
 }
 
 
@@ -109,34 +109,34 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   ASSERT(u < UART_COUNT);
 
   switch (wIdx) {
-    case 0: CmdString(pcb,p,addr,port,broadcast,szHead); break;
-    case 1: CmdString(pcb,p,addr,port,broadcast,szBodyStart); break;
-    case 2: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szSerialPort)); break;
-    case 3: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szIOMode, GetIOMode(u))); break;
-    case 4: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
-    case 5: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mwTxSize", mwTxSize[u])); break;
+    case 0: OutString(pcb,p,addr,port,broadcast,szHead); break;
+    case 1: OutString(pcb,p,addr,port,broadcast,szBodyStart); break;
+    case 2: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szSerialPort)); break;
+    case 3: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szIOMode, GetIOMode(u))); break;
+    case 4: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
+    case 5: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mwTxSize", mwTxSize[u])); break;
   }
 
   if (u != UART_COUNT-1) {
     switch (wIdx) {
-      case 6: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
+      case 6: OutString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE) {
       WARNING("unknown routing mode index %u\n", wIdx);
     }
   } else {
     switch (wIdx) {
-      case 6: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szRuntime)); break;
+      case 6: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szRuntime)); break;
       case 7: CmdUptime(pcb,p,addr,port,broadcast); break;
-      case 8: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset)); break;
-      case 9: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
-      case 10: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrPrintfOverflow", cwErrPrintfOverflow)); break; // TODO define
-      case 11: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushCharOverflow", cwErrUPDPushCharOverflow)); break;
-      case 12: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow)); break;
-      case 13: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutPbufAlloc", cwErrUPDOutPbufAlloc)); break;
-      case 14: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendUnicast", cwErrUPDOutSendUnicast)); break;
-      case 15: CmdBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendBroadcast", cwErrUPDOutSendBroadcast)); break;
-      case 16: CmdString(pcb,p,addr,port,broadcast,szBodyEnd); break;
+      case 8: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset)); break;
+      case 9: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
+      case 10: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrPrintfOverflow", cwErrPrintfOverflow)); break; // TODO define
+      case 11: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushCharOverflow", cwErrUPDPushCharOverflow)); break;
+      case 12: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow)); break;
+      case 13: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutPbufAlloc", cwErrUPDOutPbufAlloc)); break;
+      case 14: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendUnicast", cwErrUPDOutSendUnicast)); break;
+      case 15: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendBroadcast", cwErrUPDOutSendBroadcast)); break;
+      case 16: OutString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE + CONTENT_DEBUG_SIZE) {
       WARNING("unknown routing mode index %u\n", wIdx);

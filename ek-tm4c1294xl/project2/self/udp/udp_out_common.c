@@ -11,7 +11,7 @@ udp_out_common,c
 
 
 
-err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcsz)
+err_t OutString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcsz)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -25,7 +25,7 @@ err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 }
 
 
-err_t CmdBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, buff bf)
+err_t OutBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, buff bf)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -39,7 +39,7 @@ err_t CmdBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
 }
 
 
-err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uchar b)
+err_t OutCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uchar b)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -53,7 +53,7 @@ err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 }
 
 
-err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint w)
+err_t OutIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint w)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -67,7 +67,7 @@ err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 }
 
 
-err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const ulong dw)
+err_t OutIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const ulong dw)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
