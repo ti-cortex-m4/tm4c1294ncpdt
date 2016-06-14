@@ -11,14 +11,14 @@ udp_cmd,c
 
 
 
-err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *sz)
+err_t CmdString(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcsz)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
   InitPush();
   PushChar('A');
-  PushString(sz);
+  PushString(pcsz);
   PushSuffix(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
