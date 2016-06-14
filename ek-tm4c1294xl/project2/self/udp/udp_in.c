@@ -94,24 +94,24 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   } else if (IsCmd(p,"E")) {
     SysCtlReset();
   } else if (IsCmd(p,"L")) {
-    OutString(pcb,p,addr,port,broadcast,"");
+    OutStringZ(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"I")) {
     ResetSettings();
-    OutString(pcb,p,addr,port,broadcast,"");
+    OutStringZ(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"O")) {
-    OutString(pcb,p,addr,port,broadcast,"");
+    OutStringZ(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"V")) {
-    OutString(pcb,p,addr,port,broadcast,"{ds1.0}");
+    OutStringZ(pcb,p,addr,port,broadcast,"{ds1.0}");
   } else if (IsCmd(p,"H")) {
-    OutString(pcb,p,addr,port,broadcast,"1A");
+    OutStringZ(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {
     OutIntDec(pcb,p,addr,port,broadcast,wControlsSize);
   } else if (IsCmd(p,"FS")) {
     OutControls(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"GPW")) {
-    OutString(pcb,p,addr,port,broadcast,"0");
+    OutStringZ(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"SPW")) {
-    OutString(pcb,p,addr,port,broadcast,"0");
+    OutStringZ(pcb,p,addr,port,broadcast,"0");
   } else if (IsRoutingStatusSize(p)) {
     GetRouingStatusSize(pcb,p,addr,port,broadcast);
   }

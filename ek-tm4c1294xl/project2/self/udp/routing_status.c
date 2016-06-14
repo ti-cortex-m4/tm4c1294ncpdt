@@ -115,8 +115,8 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   ASSERT(u < UART_COUNT);
 
   switch (wIdx) {
-    case 0: OutString(pcb,p,addr,port,broadcast,szHead); break;
-    case 1: OutString(pcb,p,addr,port,broadcast,szBodyStart); break;
+    case 0: OutStringZ(pcb,p,addr,port,broadcast,szHead); break;
+    case 1: OutStringZ(pcb,p,addr,port,broadcast,szBodyStart); break;
     case 2: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szSerialPort)); break;
     case 3: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szIOMode, GetIOMode(u))); break;
     case 4: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
@@ -125,7 +125,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
 
   if (u != UART_COUNT-1) {
     switch (wIdx) {
-      case 6: OutString(pcb,p,addr,port,broadcast,szBodyEnd); break;
+      case 6: OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE) {
       WARNING("routing status: wrong index %u\n", wIdx);
@@ -147,7 +147,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 18: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsStorageInit", cwErrSettingsStorageInit)); break;
       case 19: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsIPLoad", cwErrSettingsIPLoad)); break;
       case 20: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsEntitySave", cwErrSettingsEntitySave)); break;
-      case 21: OutString(pcb,p,addr,port,broadcast,szBodyEnd); break;
+      case 21: OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE + ROUTING_DEBUG_SIZE) {
       WARNING("routing status: wrong debug index %u\n", wIdx);
