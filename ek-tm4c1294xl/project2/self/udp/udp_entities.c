@@ -6,49 +6,40 @@ udp_entities,c
 
 #include "../main.h"
 #include "../kernel/entities.h"
-//#include "../kernel/controls.h"
 #include "../kernel/log.h"
-//#include "../kernel/settings.h"
-//#include "driverlib/sysctl.h"
-//#include "../hardware/storage.h"
-//#include "../uart/uart_log.h"
 #include "udp_pop.h"
 #include "udp_out.h"
 #include "udp_out_common.h"
-//#include "udp_out_controls.h"
-//#include "routing_status.h"
-//#include "test_watchdog.h"
 #include "udp_entities.h"
 
 
 
-static bool IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode, uchar *pibStart)
+static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)
 {
-//  const char *sz = szCode;
-
   uchar *pb = p->payload;
   uchar i = 0;
 
-  if (i >= p->len) return false;
-  if (pb[i++] != bOperation) return false;
+  if (i >= p->len)
+    return GetChar2Error();
+
+  if (pb[i++] != bOperation)
+    return GetChar2Error();
 
   while (*szCode)
   {
-    if (i >= p->len) return false;
-    if (pb[i++] != *szCode++) return false;
+    if (i >= p->len)
+      return GetChar2Error();
+
+    if (pb[i++] != *szCode++)
+      return GetChar2Error();
   }
 
-//  WARNING("code: %c%s %u\n", bOperation, sz, i);
-
-  *pibStart = i;
-  return true;
+  return GetChar2Success(i);
 }
 
 
-static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
+static err_t PopEntity(struct pbuf *p, entity const *pen, uchar ibStart)
 {
-  uchar ibStart = *pibStart;
-
   if (ibStart == 0xFF)
   {
     WARNING("index %u\n",ibStart);
@@ -96,12 +87,12 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, uchar *pibStart)
 }
 
 
-static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, uchar *pibStart)
+static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, uchar ibStart)
 {
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
-  err_t err = PopEntity(p, pen, pibStart);
+  err_t err = PopEntity(p, pen, ibStart);
   if (err != ERR_OK) return err;
 
   err = SaveEntity(pen);
@@ -117,8 +108,8 @@ static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
 
 bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen) // TODO check errors
 {
-  uchar ibStart = 0xFF;
-  if (IsEnityCode(p, 'G', pen->szCode, &ibStart))
+  uchar2 ibStart = IsEnityCode(p, 'G', pen->szCode);
+  if (!InvalidChar2(ibStart))
   {
     switch (pen->eType)
     {
@@ -131,13 +122,17 @@ bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t po
 
     return true;
   }
-  else if (IsEnityCode(p, 'S', pen->szCode, &ibStart))
-  {
-    SetEntity(pcb,p,addr,port,broadcast,pen,&ibStart);
-    return true;
-  }
   else
   {
-    return false;
+    ibStart = IsEnityCode(p, 'S', pen->szCode);
+    if (!InvalidChar2(ibStart))
+    {
+      SetEntity(pcb,p,addr,port,broadcast,pen,ibStart.b);
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 }
