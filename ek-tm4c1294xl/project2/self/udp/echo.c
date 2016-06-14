@@ -13,7 +13,7 @@ echo.c
 
 
 
-err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint wSfx = 0;
 
@@ -25,19 +25,19 @@ err_t CmdX(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
   }
 
   InitPush();
-  PushStringZ("A");
+  PushChar('A');
   PushMAC(pbMAC, 6);
-  PushStringZ("/");
+  PushChar('/');
   PushStringZ("000001001"); // TODO "000001001"
-  PushStringZ("/");
+  PushChar('/');
   PushStringZ("N**M*"); // TODO "N**M*"
-  PushStringZ("/");
+  PushChar('/');
   PushStringZ("**"); // TODO "**"
-  PushStringZ("/");
+  PushChar('/');
   PushStringZ(szOwnerName);
-  PushStringZ("/");
+  PushChar('/');
   PushStringZ(szDeviceName);
-  PushStringZ("/");
+  PushChar('/');
   PushCharDec(UART_COUNT);
 
   if (p->len > 1)

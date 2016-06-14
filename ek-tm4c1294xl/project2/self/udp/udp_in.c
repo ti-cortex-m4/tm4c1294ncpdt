@@ -41,7 +41,7 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
 //  CONSOLE("broadcast: %d\n", broadcast);
 
   if (IsCmd(p,"X")) {
-    CmdX(pcb,p,addr,port,broadcast);
+    OutEcho(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"W")) {
     OutStringZ(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"E")) {
