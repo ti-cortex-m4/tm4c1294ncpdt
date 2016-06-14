@@ -1,10 +1,11 @@
 /*------------------------------------------------------------------------------
-udp_out_common.c
+udp_out_common,c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../kernel/wrappers.h"
 #include "udp_pop.h"
 #include "udp_out.h"
 #include "udp_out_common.h"
@@ -78,65 +79,4 @@ err_t OutIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
   PushSfx(wSfx.w);
 
   return Out(pcb,p,addr,port,broadcast);
-}
-
-
-
-bool IsCmd(struct pbuf *p, const char *pcszCmd)
-{
-  uchar *pb = p->payload;
-
-  uchar i = 0;
-  while (*pcszCmd)
-  {
-    if (i >= p->len)
-      return false;
-
-    if (pb[i++] != *pcszCmd++)
-      return false;
-  }
-
-  return true;
-}
-
-
-uchar2 GetCmdEndIndex(struct pbuf *p, const char *pcszCmd)
-{
-  uchar *pb = p->payload;
-
-  uchar i = 0;
-  while (*pcszCmd)
-  {
-    if (i >= p->len)
-    {
-      return GetChar2Error();
-    }
-
-    if (pb[i++] != *pcszCmd++)
-    {
-      return GetChar2Error();
-    }
-  }
-
-  return GetChar2Success(i);
-}
-
-
-uchar2 GetBorderIndex(struct pbuf *p, uchar bBorder)
-{
-  uchar *pb = p->payload;
-
-  uchar i = 0;
-  while (true)
-  {
-    if (i >= p->len)
-    {
-      return GetChar2Error();
-    }
-
-    if (pb[i++] == bBorder)
-    {
-      return GetChar2Success(i);
-    }
-  }
 }

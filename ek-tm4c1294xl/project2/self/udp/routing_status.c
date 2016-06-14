@@ -13,6 +13,7 @@ routing_status,c
 #include "../uart/serial.h"
 #include "udp_pop.h"
 #include "udp_out.h"
+#include "udp_in_common.h"
 #include "udp_out_common.h"
 #include "routing_status.h"
 
