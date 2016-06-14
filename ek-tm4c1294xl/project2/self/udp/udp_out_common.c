@@ -1,13 +1,13 @@
 /*------------------------------------------------------------------------------
-udp_cmd,c
+udp_out_common,c
 
 
 ------------------------------------------------------------------------------*/
 
+#include <self/udp/udp_out_common.h>
 #include "../main.h"
 #include "udp_pop.h"
 #include "udp_out.h"
-#include "udp_cmd.h"
 
 
 
@@ -38,21 +38,7 @@ err_t CmdBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
   return Out(pcb,p,addr,port,broadcast);
 }
 
-
-err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, ulong dw)
-{
-  uint2 wSfx = PopSuffix(p);
-  if (InvalidInt2(wSfx)) return wSfx.err;
-
-  InitPush();
-  PushChar('A');
-  PushIP(dw);
-  PushSuffix(wSfx.w);
-
-  return Out(pcb,p,addr,port,broadcast);
-}
-
-err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uchar b)
+err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uchar b)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -65,7 +51,7 @@ err_t CmdCharDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
   return Out(pcb,p,addr,port,broadcast);
 }
 
-err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, uint w)
+err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint w)
 {
   uint2 wSfx = PopSuffix(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -77,6 +63,21 @@ err_t CmdIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 
   return Out(pcb,p,addr,port,broadcast);
 }
+
+err_t CmdIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const ulong dw)
+{
+  uint2 wSfx = PopSuffix(p);
+  if (InvalidInt2(wSfx)) return wSfx.err;
+
+  InitPush();
+  PushChar('A');
+  PushIP(dw);
+  PushSuffix(wSfx.w);
+
+  return Out(pcb,p,addr,port,broadcast);
+}
+
+
 
 
 bool IsCmd(struct pbuf *p, const char *szCmd)
