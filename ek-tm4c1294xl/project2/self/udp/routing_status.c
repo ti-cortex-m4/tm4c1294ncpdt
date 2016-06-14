@@ -60,7 +60,7 @@ bool IsRoutingStatusContent(struct pbuf *p) {
 }
 
 
-static void CmdUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+static void OutUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   ulong dwSeconds = GetClockSeconds();
   uint wDays = dwSeconds / SECONDS_IN_DAY;
   dwSeconds %= SECONDS_IN_DAY;
@@ -77,13 +77,13 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   uchar2 ibStart = GetCmdIndex(p, "FU");
   if (InvalidChar2(ibStart)) {
     WARNING("routing mode: not found 'FU'\n");
-    return ERR_OK;
+    return ibStart.err;
   }
 
   uint2 w2 = PopInt(p, ibStart.b, 10, '@'); // TODO char ?
   if (InvalidInt2(w2)) {
     WARNING("wrong routing mode index\n");
-    return ERR_OK; // TODO error ?
+    return w2.err;
   }
   uint wIdx = w2.w;
 
@@ -127,7 +127,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   } else {
     switch (wIdx) {
       case 6: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szRuntime)); break;
-      case 7: CmdUptime(pcb,p,addr,port,broadcast); break;
+      case 7: OutUptime(pcb,p,addr,port,broadcast); break;
       case 8: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset)); break;
       case 9: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
       case 10: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrPrintfOverflow", cwErrPrintfOverflow)); break; // TODO define

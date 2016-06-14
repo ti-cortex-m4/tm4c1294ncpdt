@@ -82,17 +82,17 @@ err_t OutIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port
 
 
 
-bool IsCmd(struct pbuf *p, const char *szCmd)
+bool IsCmd(struct pbuf *p, const char *pcszCmd)
 {
   uchar *pb = p->payload;
 
   uchar i = 0;
-  while (*szCmd)
+  while (*pcszCmd)
   {
     if (i >= p->len)
       return false;
 
-    if (pb[i++] != *szCmd++)
+    if (pb[i++] != *pcszCmd++)
       return false;
   }
 
@@ -100,18 +100,22 @@ bool IsCmd(struct pbuf *p, const char *szCmd)
 }
 
 
-uchar2 GetCmdIndex(struct pbuf *p, const char *szCmd)
+uchar2 GetCmdIndex(struct pbuf *p, const char *pcszCmd)
 {
   uchar *pb = p->payload;
 
   uchar i = 0;
-  while (*szCmd)
+  while (*pcszCmd)
   {
     if (i >= p->len)
+    {
       return GetChar2Error();
+    }
 
-    if (pb[i++] != *szCmd++)
+    if (pb[i++] != *pcszCmd++)
+    {
       return GetChar2Error();
+    }
   }
 
   return GetChar2Success(i);
