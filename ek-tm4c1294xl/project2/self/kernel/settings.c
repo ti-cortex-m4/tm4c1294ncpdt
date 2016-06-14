@@ -21,7 +21,7 @@ const ulong             mdwBaudRates[BAUD_RATE_COUNT] = {150,300,600,1200,2400,4
 
 
 
-uchar                   pbMac[6];
+uchar                   pbMAC[6];
 
 uint                    wSerialNumber;
 

@@ -13,7 +13,7 @@ extern const ulong             mdwBaudRates[BAUD_RATE_COUNT];
 
 
 
-extern uchar                   pbMac[6];
+extern uchar                   pbMAC[6];
 
 extern uint                    wSerialNumber;
 
