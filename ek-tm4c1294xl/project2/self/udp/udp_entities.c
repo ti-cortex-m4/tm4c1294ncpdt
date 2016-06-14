@@ -14,7 +14,7 @@ udp_entities,c
 
 
 
-static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)
+static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)  // TODO
 {
   uchar *pb = p->payload;
   uchar i = 0;
@@ -38,56 +38,58 @@ static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *sz
 }
 
 
-static err_t PopEntity(struct pbuf *p, entity const *pen, uchar ibStart)
+static err_t GetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen)  // TODO
 {
-  if (ibStart == 0xFF)
+  switch (pen->eType)
   {
-    WARNING("index %u\n",ibStart);
-    return -1;
-  }
-  else
-  {
-    switch (pen->eType)
-    {
-       case CHAR:
-       {
-         uchar2 b2 = PopCharDec(p, ibStart);
-         if (!InvalidChar2(b2)) {
-           (*(uchar *)pen->pbRam) = b2.b;
-         }
-//         WARNING("char[%u]=%u \n",ibStart,*(uchar *)pen->pbRAM);
-         return b2.err;
-       }
-       case INT:
-       {
-         uint2 w2 = PopIntDec(p, ibStart);
-         if (!InvalidInt2(w2)) {
-           *(uint *)pen->pbRam = w2.w;
-         }
-//         WARNING("int[%u]=%u \n",ibStart,*(uint *)pen->pbRAM);
-         return w2.err;
-       }
-       case IP:
-       {
-         ulong2 dw2 = PopIP(p, ibStart);
-         if (!InvalidLong2(dw2)) {
-           *(ulong *)pen->pbRam = dw2.dw;
-         }
-//         WARNING("long[%u]=%08x \n",ibStart,*(ulong *)pen->pbRAM);
-         return dw2.err;
-       }
-       case STRING:
-       {
-         err_t err = PopBuff(p, (char *)pen->pbRam, NAME_SIZE, ibStart);
-         return err;
-       }
-       default: ASSERT(false); return -1;
-    }
+    case CHAR: return OutCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRam);
+    case INT: return OutIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRam);
+    case IP: return OutIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRam);
+    case STRING: return OutString(pcb,p,addr,port,broadcast,(const char *)pen->pbRam);
+    default: ASSERT(false); return GetError();
   }
 }
 
 
-static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, uchar ibStart)
+static err_t PopEntity(struct pbuf *p, entity const *pen, const uchar ibStart) // TODO
+{
+  switch (pen->eType)
+  {
+    case CHAR:
+    {
+      uchar2 b2 = PopCharDec(p, ibStart);
+      if (!InvalidChar2(b2)) {
+        (*(uchar *)pen->pbRam) = b2.b;
+      }
+      return b2.err;
+    }
+    case INT:
+    {
+      uint2 w2 = PopIntDec(p, ibStart);
+      if (!InvalidInt2(w2)) {
+        *(uint *)pen->pbRam = w2.w;
+      }
+      return w2.err;
+    }
+    case IP:
+    {
+      ulong2 dw2 = PopIP(p, ibStart);
+      if (!InvalidLong2(dw2)) {
+        *(ulong *)pen->pbRam = dw2.dw;
+      }
+      return dw2.err;
+    }
+    case STRING:
+    {
+      err_t err = PopBuff(p, (char *)pen->pbRam, NAME_SIZE, ibStart);
+      return err;
+    }
+    default: ASSERT(false); return -1;
+  }
+}
+
+
+static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, uchar ibStart) // TODO
 {
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -106,20 +108,13 @@ static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
 }
 
 
-bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen) // TODO check errors
+
+static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen) // TODO check errors
 {
   uchar2 ibStart = IsEnityCode(p, 'G', pen->szCode);
   if (!InvalidChar2(ibStart))
   {
-    switch (pen->eType)
-    {
-      case CHAR: OutCharDec(pcb,p,addr,port,broadcast,*(uchar *)pen->pbRam); break;
-      case INT: OutIntDec(pcb,p,addr,port,broadcast,*(uint *)pen->pbRam); break;
-      case IP: OutIP(pcb,p,addr,port,broadcast,*(ulong *)pen->pbRam); break;
-      case STRING: OutString(pcb,p,addr,port,broadcast,(const char *)pen->pbRam); break;
-      default: ASSERT(false); break;
-    }
-
+    GetEntity(pcb,p,addr,port,broadcast,pen);
     return true;
   }
   else
@@ -135,4 +130,16 @@ bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t po
       return false;
     }
   }
+}
+
+
+bool AreEnities(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast) { // TODO
+  uchar e;
+  for (e = 0; e < bEntitiesSize; e++)
+  {
+    if (IsEnity(pcb,p,addr,port,broadcast,mpenEntities[e]))
+      return true;
+  }
+
+  return false;
 }
