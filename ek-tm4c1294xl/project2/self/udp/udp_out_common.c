@@ -89,44 +89,50 @@ bool IsCmd(struct pbuf *p, const char *szCmd)
   uchar i = 0;
   while (*szCmd)
   {
-    if (i >= p->len) return false;
-    if (pb[i++] != *szCmd++) return false;
+    if (i >= p->len)
+      return false;
+
+    if (pb[i++] != *szCmd++)
+      return false;
   }
 
   return true;
 }
 
 
-bool IsPrefix(struct pbuf *p, const char *szCode, uchar *pibStart) // TODO
+uchar2 GetCmdIndex(struct pbuf *p, const char *szCmd)
 {
   uchar *pb = p->payload;
-  uchar i = 0;
 
-  while (*szCode)
+  uchar i = 0;
+  while (*szCmd)
   {
-    if (i >= p->len) return false;
-    if (pb[i++] != *szCode++) return false;
+    if (i >= p->len)
+      return GetChar2Error();
+
+    if (pb[i++] != *szCmd++)
+      return GetChar2Error();
   }
 
-  *pibStart = i;
-  return true;
+  return GetChar2Success(i);
 }
 
 
-bool IsChar(struct pbuf *p, uchar bChar, uchar *pibStart) // TODO
+uchar2 GetBorderIndex(struct pbuf *p, uchar bBorder)
 {
   uchar *pb = p->payload;
-  uchar i = 0;
 
+  uchar i = 0;
   while (true)
   {
-    if (i >= p->len) return false;
-    if (pb[i++] == bChar)
+    if (i >= p->len)
     {
-      *pibStart = i;
-      return true;
+      return GetChar2Error();
+    }
+
+    if (pb[i++] == bBorder)
+    {
+      return GetChar2Success(i);
     }
   }
-
-//  return false;
 }

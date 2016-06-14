@@ -74,26 +74,26 @@ static void CmdUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr,
 
 
 err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
-  uchar ibStart = 0xFF;
-  if (!IsPrefix(p, "FU", &ibStart)) {
+  uchar2 ibStart = GetCmdIndex(p, "FU");
+  if (InvalidChar2(ibStart)) {
     WARNING("routing mode: not found 'FU'\n");
     return ERR_OK;
   }
 
-  uint2 w2 = PopInt(p, ibStart, 10, '@'); // TODO char ?
+  uint2 w2 = PopInt(p, ibStart.b, 10, '@'); // TODO char ?
   if (InvalidInt2(w2)) {
     WARNING("wrong routing mode index\n");
-    return ERR_OK;
+    return ERR_OK; // TODO error ?
   }
   uint wIdx = w2.w;
 
-  ibStart = 0xFF;
-  if (!IsChar(p, '@', &ibStart)) {
+  ibStart = GetBorderIndex(p, '@');
+  if (InvalidChar2(ibStart)) {
     WARNING("routing mode: not found '@'\n");
-    return ERR_OK;
+    return ibStart.err;
   }
 
-  uchar2 b2 = PopCharDec(p, ibStart);
+  uchar2 b2 = PopCharDec(p, ibStart.b);
   if (InvalidChar2(b2)) {
     WARNING("wrong routing mode port\n");
     return ERR_OK;

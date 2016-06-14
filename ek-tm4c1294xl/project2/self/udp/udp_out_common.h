@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-udp_out_common,h
+udp_out_common.h
 
 
 ------------------------------------------------------------------------------*/
@@ -15,5 +15,5 @@ err_t OutIntDec(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint 
 err_t OutIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const ulong dw);
 
 bool IsCmd(struct pbuf *p, const char *szCmd);
-bool IsPrefix(struct pbuf *p, const char *szCode, uchar *pibStart);
-bool IsChar(struct pbuf *p, uchar bChar, uchar *pibStart);
+uchar2 GetCmdIndex(struct pbuf *p, const char *szCmd);
+uchar2 GetBorderIndex(struct pbuf *p, uchar bBorder);
