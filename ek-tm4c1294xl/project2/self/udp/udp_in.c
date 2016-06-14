@@ -12,6 +12,7 @@ UDP_IN,C
 #include "driverlib/sysctl.h"
 #include "../hardware/storage.h"
 #include "../uart/uart_log.h"
+#include "buzz.h"
 #include "udp_pop.h"
 #include "udp_out.h"
 #include "udp_in_common.h"
@@ -83,6 +84,7 @@ err_t CmdW(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port,
 }
 
 
+
 void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast)
 {
 //  CONSOLE("broadcast: %d\n", broadcast);
@@ -112,6 +114,8 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
     OutStringZ(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"SPW")) {
     OutStringZ(pcb,p,addr,port,broadcast,"0");
+  } else if (IsCmd(p,"B")) {
+    OutBuzz(pcb,p,addr,port,broadcast);
   }
 
   else if (IsCmd(p,"watchdog")) {
