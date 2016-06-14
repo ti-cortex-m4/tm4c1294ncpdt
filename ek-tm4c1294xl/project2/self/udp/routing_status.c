@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-routing_status,c
+routing_status.c
 
 
 ------------------------------------------------------------------------------*/
@@ -20,7 +20,7 @@ routing_status,c
 
 
 #define ROUTING_STATUS_SIZE  7
-#define ROUTING_DEBUG_SIZE   12
+#define ROUTING_DEBUG_SIZE   14
 
 
 static message szSerialPort = "Serial Port";
@@ -141,10 +141,12 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 13: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutPbufAlloc", cwErrUPDOutPbufAlloc)); break;
       case 14: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendUnicast", cwErrUPDOutSendUnicast)); break;
       case 15: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendBroadcast", cwErrUPDOutSendBroadcast)); break;
-      case 16: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsStorageInit", cwErrSettingsStorageInit)); break;
-      case 17: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsIPLoad", cwErrSettingsIPLoad)); break;
-      case 18: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsEntitySave", cwErrSettingsEntitySave)); break;
-      case 19: OutString(pcb,p,addr,port,broadcast,szBodyEnd); break;
+      case 16: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUDPLogPbufAlloc", cwErrUDPLogPbufAlloc)); break;
+      case 17: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUDPLogSend", cwErrUDPLogSend)); break;
+      case 18: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsStorageInit", cwErrSettingsStorageInit)); break;
+      case 19: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsIPLoad", cwErrSettingsIPLoad)); break;
+      case 20: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsEntitySave", cwErrSettingsEntitySave)); break;
+      case 21: OutString(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE + ROUTING_DEBUG_SIZE) {
       WARNING("routing status: wrong debug index %u\n", wIdx);

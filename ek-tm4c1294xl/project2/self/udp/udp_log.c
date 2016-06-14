@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-udp_log,C
+udp_log.c
 
 
 ------------------------------------------------------------------------------*/
@@ -14,42 +14,35 @@ udp_log,C
 
 static void            *pcb;
 
-static bool             enabled = true;
 
-static uint             errors1, errors2;
+uint                    cwErrUDPLogPbufAlloc;
+uint                    cwErrUDPLogSend;
 
 
 
-void InitUDPLog(void)
-{
-  if (enabled)
-  {
+void InitUDPLog(void) {
+  if (ibDebugMode == DEBUG_MODE_UDP) {
     pcb = udp_new();
   }
 }
 
 
 
-void UDPLog(uchar *pb, uint wSize)
-{
-  if (enabled)
-  {
+void UDPLog(uchar *pb, uint wSize) {
+  if (ibDebugMode == DEBUG_MODE_UDP) {
     struct pbuf *p = pbuf_alloc(PBUF_TRANSPORT, wSize, PBUF_RAM);
-    if (p == NULL)
-    {
-      errors1++;
+    if (p == NULL) {
+      cwErrUDPLogPbufAlloc++;
+      return;
     }
-    else
-    {
-      memcpy(p->payload, pb, wSize);
 
-      err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, wUDPDebugPort);
-      if (err != 0)
-      {
-        errors2++;
-      }
+    memcpy(p->payload, pb, wSize);
 
-      pbuf_free(p);
+    err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, wUDPDebugPort);
+    if (err != 0) {
+      cwErrUDPLogSend++;
     }
+
+    pbuf_free(p);
   }
 }
