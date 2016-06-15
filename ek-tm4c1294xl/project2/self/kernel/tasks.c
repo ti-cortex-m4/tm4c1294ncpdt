@@ -121,6 +121,10 @@ static uint wTimeout;
     wTimeout = 0;
     stats_display();
 
+#if TCP_DEBUG || TCP_INPUT_DEBUG || TCP_OUTPUT_DEBUG
+    tcp_debug_print_pcbs();
+#endif
+
     ConsoleVersion();
   }
 }
