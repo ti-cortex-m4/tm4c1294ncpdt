@@ -419,7 +419,7 @@ extern void DebugPrintF(const char *pcString, ...);
 #define MEM_DEBUG                       LWIP_DBG_ON
 #define MEMP_DEBUG                      LWIP_DBG_ON
 #define SYS_DEBUG                       LWIP_DBG_OFF
-#define TCP_DEBUG                       LWIP_DBG_ON
+#define TCP_DEBUG                       LWIP_DBG_OFF
 #define TCP_INPUT_DEBUG                 LWIP_DBG_OFF
 #define TCP_FR_DEBUG                    LWIP_DBG_OFF
 #define TCP_RTO_DEBUG                   LWIP_DBG_OFF
