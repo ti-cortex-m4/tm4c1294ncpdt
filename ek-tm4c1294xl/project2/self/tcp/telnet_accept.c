@@ -32,7 +32,7 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 {
     tState *pState = arg;
 
-    CONSOLE("%u: accept 0x%08x, 0x%08x, 0x%08x\n", pState->ucSerialPort, arg, pcb, err);
+    CONSOLE("%u: accept 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, err);
 
     // If we are not in the listening state, refuse this connection.
     if(pState->eTCPState != STATE_TCP_LISTEN)
