@@ -536,7 +536,7 @@ tcp_listen_with_backlog(struct tcp_pcb *pcb, u8_t backlog)
       if (lpcb->local_port == pcb->local_port) {
         if (ip_addr_cmp(&lpcb->local_ip, &pcb->local_ip)) {
           /* this address/port is already used */
-          return lpcb;
+          return (struct tcp_pcb *)lpcb; // TODO project2 patch
         }
       }
     }
