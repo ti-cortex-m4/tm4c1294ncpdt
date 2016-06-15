@@ -32,13 +32,13 @@ err_t Out(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, 
   if (broadcast != 0) {
     err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
     if (err != ERR_OK) {
-      ERROR("Out.udp_sendto: send broadcast, error=%u\n", err);
+      ERROR("Out.udp_sendto: send broadcast, error=%d\n", err);
       cwErrUPDOutSendBroadcast++;
     }
   } else {
     err_t err = udp_sendto(pcb, p, addr, port);
     if (err != ERR_OK) {
-      ERROR("Out.udp_sendto: send unicast, error=%u\n", err);
+      ERROR("Out.udp_sendto: send unicast, error=%d\n", err);
       cwErrUPDOutSendUnicast++;
     }
   }
