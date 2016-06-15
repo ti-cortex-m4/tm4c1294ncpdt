@@ -57,7 +57,11 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
         ASSERT(false); // TODO ?
     }
 
-    tcp_bind(pcb, IP_ADDR_ANY, usTelnetPort);
+    err_t err = tcp_bind(pcb, IP_ADDR_ANY, usTelnetPort);
+    if (err != ERR_OK)
+    {
+      ERROR("%u: tcp_bind to port %u failed, error=%X\n", pState->ucSerialPort, usTelnetPort, err);
+    }
     pcb = tcp_listen(pcb);
     pState->pListenPCB = pcb;
 
