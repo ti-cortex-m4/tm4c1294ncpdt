@@ -4,20 +4,20 @@
 //
 // Copyright (c) 2008-2015 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement
-// 
+//
 // Texas Instruments (TI) is supplying this software for use solely and
 // exclusively on TI's microcontroller products. The software is owned by
 // TI and/or its suppliers, and is protected under applicable copyright
 // laws. You may not combine this software with "viral" open-source
 // software in order to form a larger program.
-// 
+//
 // THIS SOFTWARE IS PROVIDED "AS IS" AND WITH ALL FAULTS.
 // NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT
 // NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
 // A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. TI SHALL NOT, UNDER ANY
 // CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL
 // DAMAGES, FOR ANY REASON WHATSOEVER.
-// 
+//
 // This is part of revision 2.1.1.71 of the Tiva Utility Library.
 //
 //*****************************************************************************
@@ -30,7 +30,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "utils/lwiplib.h"
+#include "inc/hw_types.h"
+#include "etharp.h"
 
+void lwip_init(void);
+void tivaif_interrupt(struct netif *psNetif, uint32_t ui32Status);
+void etharp_tmr(void);
+err_t tivaif_init(struct netif *psNetif);
 //*****************************************************************************
 //
 // Ensure that ICMP checksum offloading is enabled; otherwise the TM4C129
@@ -40,117 +46,6 @@
 #ifndef LWIP_OFFLOAD_ICMP_CHKSUM
 #define LWIP_OFFLOAD_ICMP_CHKSUM 1
 #endif
-
-//*****************************************************************************
-//
-// Include lwIP high-level API code.
-//
-//*****************************************************************************
-#include "third_party/lwip-1.4.1.patched/src/api/api_lib.c"
-#include "third_party/lwip-1.4.1.patched/src/api/api_msg.c"
-#include "third_party/lwip-1.4.1.patched/src/api/err.c"
-#include "third_party/lwip-1.4.1.patched/src/api/netbuf.c"
-#include "third_party/lwip-1.4.1.patched/src/api/netdb.c"
-#include "third_party/lwip-1.4.1.patched/src/api/netifapi.c"
-#include "third_party/lwip-1.4.1.patched/src/api/sockets.c"
-#include "third_party/lwip-1.4.1.patched/src/api/tcpip.c"
-
-//*****************************************************************************
-//
-// Include the core lwIP TCP/IP stack code.
-//
-//*****************************************************************************
-#include "third_party/lwip-1.4.1.patched/src/core/def.c"
-#include "third_party/lwip-1.4.1.patched/src/core/dhcp.c"
-#include "third_party/lwip-1.4.1.patched/src/core/dns.c"
-#include "third_party/lwip-1.4.1.patched/src/core/init.c"
-#include "third_party/lwip-1.4.1.patched/src/core/mem.c"
-#include "third_party/lwip-1.4.1.patched/src/core/memp.c"
-#include "third_party/lwip-1.4.1.patched/src/core/netif.c"
-#include "third_party/lwip-1.4.1.patched/src/core/pbuf.c"
-#include "third_party/lwip-1.4.1.patched/src/core/raw.c"
-#include "third_party/lwip-1.4.1.patched/src/core/stats.c"
-#include "third_party/lwip-1.4.1.patched/src/core/sys.c"
-#include "third_party/lwip-1.4.1.patched/src/core/tcp.c"
-#include "third_party/lwip-1.4.1.patched/src/core/tcp_in.c"
-#include "third_party/lwip-1.4.1.patched/src/core/tcp_out.c"
-#include "third_party/lwip-1.4.1.patched/src/core/timers.c"
-#include "third_party/lwip-1.4.1.patched/src/core/udp.c"
-
-//*****************************************************************************
-//
-// Include the IPV4 code.
-//
-//*****************************************************************************
-#include "third_party/lwip-1.4.1.patched/src/core/ipv4/autoip.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv4/icmp.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv4/igmp.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv4/inet.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv4/inet_chksum.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv4/ip.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv4/ip_addr.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv4/ip_frag.c"
-
-//*****************************************************************************
-//
-// Include the IPV6 code.
-// Note:  Code is experimental and not ready for use.
-// References are included for completeness.
-//
-//*****************************************************************************
-#if 0
-#include "third_party/lwip-1.4.1.patched/src/core/ipv6/icmp6.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv6/inet6.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv6/ip6.c"
-#include "third_party/lwip-1.4.1.patched/src/core/ipv6/ip6_addr.c"
-#endif
-
-//*****************************************************************************
-//
-// Include the lwIP SNMP code.
-//
-//*****************************************************************************
-#include "third_party/lwip-1.4.1.patched/src/core/snmp/asn1_dec.c"
-#include "third_party/lwip-1.4.1.patched/src/core/snmp/asn1_enc.c"
-#include "third_party/lwip-1.4.1.patched/src/core/snmp/mib2.c"
-#include "third_party/lwip-1.4.1.patched/src/core/snmp/mib_structs.c"
-#include "third_party/lwip-1.4.1.patched/src/core/snmp/msg_in.c"
-#include "third_party/lwip-1.4.1.patched/src/core/snmp/msg_out.c"
-
-//*****************************************************************************
-//
-// Include the network interface code.
-//
-//*****************************************************************************
-#include "third_party/lwip-1.4.1.patched/src/netif/etharp.c"
-
-//*****************************************************************************
-//
-// Include the network interface PPP code.
-//
-//*****************************************************************************
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/auth.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/chap.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/chpms.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/fsm.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/ipcp.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/lcp.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/magic.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/md5.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/pap.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/ppp.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/ppp_oe.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/randm.c"
-#include "third_party/lwip-1.4.1.patched/src/netif/ppp/vj.c"
-
-//*****************************************************************************
-//
-// Include Tiva-specific lwIP interface/porting layer code.
-//
-//*****************************************************************************
-#include "third_party/lwip-1.4.1.patched/ports/tiva-tm4c129/perf.c"
-#include "third_party/lwip-1.4.1.patched/ports/tiva-tm4c129/sys_arch.c"
-#include "third_party/lwip-1.4.1.patched/ports/tiva-tm4c129/netif/tiva-tm4c129.c"
 
 //*****************************************************************************
 //
