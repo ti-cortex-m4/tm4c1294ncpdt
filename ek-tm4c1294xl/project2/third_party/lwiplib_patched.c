@@ -1,6 +1,6 @@
 //*****************************************************************************
 //
-// lwiplib.c - lwIP TCP/IP Library Abstraction Layer.
+// lwiplib,c - lwIP TCP/IP Library Abstraction Layer.
 //
 // Copyright (c) 2008-2015 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement
