@@ -50,17 +50,19 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
     pState->bLinkLost = false;
 
     // Initialize the application to listen on the requested telnet port.
-    void *pcb = tcp_new();
+    struct tcp_pcb *pcb = tcp_new();
     if (pcb == NULL)
     {
         ERROR("%u: TelnetListen.tcp_new failed - NULL\n", pState->ucSerialPort);
         ASSERT(false); // TODO ?
     }
 
+	ip_set_option(pcb, SOF_REUSEADDR);
+
     err_t err = tcp_bind(pcb, IP_ADDR_ANY, usTelnetPort);
     if (err != ERR_OK)
     {
-      ERROR("%u: TelnetListen.tcp_bind to port %u failed, error=%X\n", pState->ucSerialPort, usTelnetPort, err);
+      ERROR("%u: TelnetListen.tcp_bind to port %u failed, error=%d\n", pState->ucSerialPort, usTelnetPort, err);
     }
     pcb = tcp_listen(pcb);
     pState->pListenPCB = pcb;
