@@ -67,7 +67,7 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
     OutBuzz(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"watchdog")) {
     TestWatchdog(pcb,p,addr,port,broadcast);
-  } else if (AreEnities(pcb,p,addr,port,broadcast)) {
+  } else if (IsSomeEnity(pcb,p,addr,port,broadcast)) {
     //
   } else if (IsRoutingStatusSize(p)) {
     GetRouingStatusSize(pcb,p,addr,port,broadcast);
