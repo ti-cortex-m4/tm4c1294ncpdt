@@ -5,12 +5,10 @@ UDP_IN,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "../kernel/entities.h"
 #include "../kernel/controls.h"
 #include "../kernel/log.h"
 #include "../kernel/settings.h"
 #include "driverlib/sysctl.h"
-#include "../hardware/storage.h"
 #include "echo.h"
 #include "buzz.h"
 #include "udp_pop.h"
@@ -67,22 +65,15 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
     OutStringZ(pcb,p,addr,port,broadcast,"0");
   } else if (IsCmd(p,"B")) {
     OutBuzz(pcb,p,addr,port,broadcast);
-  }
-
-  else if (IsCmd(p,"watchdog")) {
+  } else if (IsCmd(p,"watchdog")) {
     TestWatchdog(pcb,p,addr,port,broadcast);
-  }
-
-  else if (AreEnities(pcb,p,addr,port,broadcast)) {
-  }
-
-  else if (IsRoutingStatusSize(p)) {
+  } else if (AreEnities(pcb,p,addr,port,broadcast)) {
+    //
+  } else if (IsRoutingStatusSize(p)) {
     GetRouingStatusSize(pcb,p,addr,port,broadcast);
   } else if (IsRoutingStatusContent(p)) {
     GetRouingStatusContent(pcb,p,addr,port,broadcast);
-  }
-
-  else {
+  } else {
     WARNING("UDPInput: unknown command\n");
   }
 }
