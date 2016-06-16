@@ -14,7 +14,7 @@ udp_entities,c
 
 
 
-static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *szCode)
+static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *pcszCode)
 {
   uchar *pb = p->payload;
   uchar i = 0;
@@ -25,12 +25,12 @@ static uchar2 IsEnityCode(struct pbuf *p, uchar const bOperation, const char *sz
   if (pb[i++] != bOperation)
     return GetChar2Error();
 
-  while (*szCode)
+  while (*pcszCode)
   {
     if (i >= p->len)
       return GetChar2Error();
 
-    if (pb[i++] != *szCode++)
+    if (pb[i++] != *pcszCode++)
       return GetChar2Error();
   }
 
