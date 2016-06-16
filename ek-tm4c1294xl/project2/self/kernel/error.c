@@ -10,6 +10,7 @@ error.c
 #include "../hardware/led.h"
 #include "../hardware/delay.h"
 #include "../uart/uart_log.h"
+#include "version.h"
 #include "error.h"
 
 
@@ -18,6 +19,7 @@ error.c
 
 void __error__(char *pszFileName, ulong dwLine)
 {
+  ConsoleVersion();
   CONSOLE("ERROR assert: file %s, line %d\n", pszFileName, dwLine);
 
   IntMasterDisable();
