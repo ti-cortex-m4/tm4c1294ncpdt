@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-UDP_IN,C
+udp_in.c
 
 
 ------------------------------------------------------------------------------*/
@@ -20,17 +20,6 @@ UDP_IN,C
 #include "routing_status.h"
 #include "test_watchdog.h"
 #include "udp_in.h"
-
-
-
-typedef struct
-{
-  struct udp_pcb *pcb;
-  struct pbuf *p;
-  struct ip_addr *addr;
-  uint port;
-  uchar broadcast;
-} udp_arg;
 
 
 

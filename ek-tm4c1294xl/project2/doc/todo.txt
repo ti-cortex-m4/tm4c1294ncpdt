@@ -68,8 +68,11 @@ debug & release
             
 rom - build number/data even in .out
 
-CONSOLE_UART
-
-save/load @0            
-
-static const char * const szContent1 = "  ";
+typedef struct
+{
+  struct udp_pcb *pcb;
+  struct pbuf *p;
+  struct ip_addr *addr;
+  uint port;
+  uchar broadcast;
+} udp_arg;

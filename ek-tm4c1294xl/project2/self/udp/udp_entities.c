@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-udp_entities,c
+udp_entities.c
 
 
 ------------------------------------------------------------------------------*/
@@ -52,7 +52,7 @@ static err_t GetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
 }
 
 
-static err_t PopEntity(struct pbuf *p, entity const *pen, const uchar ibStart) // TODO
+static err_t PopEntity(struct pbuf *p, entity const *pen, const uchar ibStart)
 {
   switch (pen->eType)
   {
