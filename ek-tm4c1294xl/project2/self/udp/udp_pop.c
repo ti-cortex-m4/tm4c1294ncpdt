@@ -162,20 +162,20 @@ err_t PopBuff(struct pbuf *p, char *mpBuff, const uchar bSize, const uchar ibSta
     if (b < 0x20)
     {
       WARNING("PopBuff[%u]: wrong char %02X\n", i, b);
-      return ERR_VAL;
+      return GetError();
     }
 
     if (i-ibStart >= bSize)
     {
       WARNING("PopBuff[%u]: wrong size %u %u\n", i, i-ibStart, bSize);
-      return ERR_VAL;
+      return GetError();
     }
 
     mpBuff[i-ibStart] = b;
   }
 
   WARNING("PopBuff[%u]: wrong length \n", i, p->len);
-  return ERR_VAL;
+  return GetError();
 }
 
 
