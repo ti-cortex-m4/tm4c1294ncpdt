@@ -82,7 +82,7 @@ static void LoadSettingsDef(void)
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
-    const entity *pen = mpenEntities[e];
+    const entity * const pen = mpenEntities[e];
     if (((pen->dwFlags) & FLAG_DONT_RESET) == 0)
     {
       LoadEntityDef(pen);

@@ -52,7 +52,7 @@ static err_t GetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
 }
 
 
-static err_t PopEntity(struct pbuf *p, entity const *pen, const uchar ibStart)
+static err_t PopEntity(struct pbuf *p, const entity * const pen, const uchar ibStart)
 {
   switch (pen->eType)
   {
@@ -93,7 +93,7 @@ static err_t PopEntity(struct pbuf *p, entity const *pen, const uchar ibStart)
 }
 
 
-static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, entity const *pen, const uchar ibStart)
+static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const entity * const pen, const uchar ibStart)
 {
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
@@ -112,7 +112,7 @@ static err_t SetEntity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
 
 
 
-static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, entity const *pen)
+static bool IsEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port, u8_t broadcast, const entity * const pen)
 {
   uchar2 ibStart = IsEnityCode(p, 'G', pen->szCode);
   if (!InvalidChar2(ibStart))
