@@ -1,6 +1,6 @@
 //*****************************************************************************
 //
-// lwiplib,c - lwIP TCP/IP Library Abstraction Layer.
+// lwiplib.c - lwIP TCP/IP Library Abstraction Layer.
 //
 // Copyright (c) 2008-2015 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement
@@ -34,9 +34,10 @@
 #include "etharp.h"
 
 void lwip_init(void);
+err_t tivaif_init(struct netif *psNetif);
 void tivaif_interrupt(struct netif *psNetif, uint32_t ui32Status);
 void etharp_tmr(void);
-err_t tivaif_init(struct netif *psNetif);
+
 //*****************************************************************************
 //
 // Ensure that ICMP checksum offloading is enabled; otherwise the TM4C129
