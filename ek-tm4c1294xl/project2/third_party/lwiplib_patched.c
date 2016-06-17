@@ -30,6 +30,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "utils/lwiplib.h"
+
+#if true // project2 patch
 #include "inc/hw_types.h"
 #include "etharp.h"
 
@@ -37,6 +39,7 @@ void lwip_init(void);
 err_t tivaif_init(struct netif *psNetif);
 void tivaif_interrupt(struct netif *psNetif, uint32_t ui32Status);
 void etharp_tmr(void);
+#endif
 
 //*****************************************************************************
 //
