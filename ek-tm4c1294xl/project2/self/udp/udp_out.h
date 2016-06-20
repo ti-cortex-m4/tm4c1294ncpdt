@@ -4,7 +4,6 @@ udp_out.h
 
 ------------------------------------------------------------------------------*/
 
-#include "lwip/udp.h"
 #include "udp_push.h"
 #include "udp_push_numbers.h"
 

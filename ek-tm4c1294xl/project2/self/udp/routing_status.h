@@ -4,10 +4,6 @@ routing_status.h
 
 ------------------------------------------------------------------------------*/
 
-#include "lwip/udp.h"
-
-
-
 bool IsRoutingStatusSize(struct pbuf *p);
 err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast);
 
