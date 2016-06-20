@@ -6,11 +6,12 @@ entity.c
 
 #include "../main.h"
 #include "../hardware/storage.h"
+#include "settings.h"
 #include "entity.h"
 
 
 
-ulong SaveEntity(const entity * const pen)
+static ulong SaveEntityInner(const entity * const pen)
 {
   switch(pen->eType)
   {
@@ -20,6 +21,15 @@ ulong SaveEntity(const entity * const pen)
     case STRING: return SaveString(pen->pbRam, pen->dwEepRom);
     default: ASSERT(false); return MAX_LONG;
   }
+}
+
+ulong SaveEntity(const entity * const pen)
+{
+  const ulong code = SaveEntityInner(pen);
+  if (code != 0)
+    cwErrSettingsSaveEntity++;
+
+  return code;
 }
 
 

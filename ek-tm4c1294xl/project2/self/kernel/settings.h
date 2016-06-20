@@ -53,9 +53,9 @@ extern bool                    fIOModeDebugFlag;
 extern ledMode                 bLED0Mode;
 extern ledMode                 bLED1Mode;
 
-extern uint                    cwErrSettingsStorageInit;
-extern uint                    cwErrSettingsIPLoad;
-extern uint                    cwErrSettingsEntitySave;
+extern uint                    cwErrSettingsInitStorage;
+extern uint                    cwErrSettingsSaveEntity;
+extern uint                    cwErrSettingsLoadIP;
 
 
 
