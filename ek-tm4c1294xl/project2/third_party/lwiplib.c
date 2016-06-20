@@ -31,7 +31,7 @@
 #include <stdbool.h>
 #include "utils/lwiplib.h"
 
-#if 1 // project2 patch
+#if 1 // project2
 #include "inc/hw_types.h"
 #include "etharp.h"
 
@@ -39,7 +39,7 @@ void lwip_init(void);
 err_t tivaif_init(struct netif *psNetif);
 void tivaif_interrupt(struct netif *psNetif, uint32_t ui32Status);
 void etharp_tmr(void);
-#endif // project2 patch
+#endif
 
 //*****************************************************************************
 //
@@ -51,7 +51,7 @@ void etharp_tmr(void);
 #define LWIP_OFFLOAD_ICMP_CHKSUM 1
 #endif
 
-#if 0 // project2 patch
+#if 0 // project2
 //*****************************************************************************
 //
 // Include lwIP high-level API code.
@@ -162,7 +162,7 @@ void etharp_tmr(void);
 #include "third_party/lwip-1.4.1.patched/ports/tiva-tm4c129/perf.c"
 #include "third_party/lwip-1.4.1.patched/ports/tiva-tm4c129/sys_arch.c"
 #include "third_party/lwip-1.4.1.patched/ports/tiva-tm4c129/netif/tiva-tm4c129.c"
-#endif // project2 patch
+#endif
 
 //*****************************************************************************
 //
