@@ -90,7 +90,7 @@ typedef u8_t                sys_prot_t;
 // what display routines are available.
 //
 #ifndef LWIP_PLATFORM_DIAG
-#define LWIP_PLATFORM_DIAG(msg) { DebugPrintF msg; }
+#define LWIP_PLATFORM_DIAG(msg) { DebugPrintF msg; } // project2
 #endif
 
 //
@@ -107,7 +107,7 @@ typedef u8_t                sys_prot_t;
 extern void __error__(char *pcFilename, uint32_t ui32Line);
 #define LWIP_PLATFORM_ASSERT(msg)       \
 {                                       \
-    LWIP_PLATFORM_DIAG((msg));          \
+    LWIP_PLATFORM_DIAG((msg));          \ // project2
     __error__(__FILE__, __LINE__);      \
 }
 #else
