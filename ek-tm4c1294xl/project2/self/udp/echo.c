@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-echo,c
+echo.c
 
 
 ------------------------------------------------------------------------------*/
@@ -30,7 +30,11 @@ err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
   PushChar('/');
   PushStringZ("000001001"); // TODO "000001001"
   PushChar('/');
-  PushStringZ("N**M*"); // TODO "N**M*"
+  PushChar('N');
+  PushChar('*');
+  PushChar('*');
+  PushChar('M');
+  PushChar('*');
   PushChar('/');
   (false) ? PushChar('E') : PushChar('*'); // TODO Ethernet-to-serial buffer overflow
   (false) ? PushChar('S') : PushChar('*'); // TODO serial-to-Ethernet buffer overflow
