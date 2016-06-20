@@ -32,7 +32,7 @@ err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
   PushChar('/');
   PushChar('N');
   PushChar('*');
-  PushChar('*');
+  ((cwErrSettingsInitStorage > 0) || (cwErrSettingsSaveEntity > 0)) ? PushChar('E') : PushChar('*');
   PushChar('M');
   PushChar('*');
   PushChar('/');

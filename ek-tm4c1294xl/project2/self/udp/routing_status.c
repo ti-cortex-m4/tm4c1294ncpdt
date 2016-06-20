@@ -144,9 +144,9 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
       case 15: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendBroadcast", cwErrUPDOutSendBroadcast)); break;
       case 16: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUDPLogPbufAlloc", cwErrUDPLogPbufAlloc)); break;
       case 17: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUDPLogSend", cwErrUDPLogSend)); break;
-      case 18: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsStorageInit", cwErrSettingsStorageInit)); break;
-      case 19: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsIPLoad", cwErrSettingsIPLoad)); break;
-      case 20: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsEntitySave", cwErrSettingsEntitySave)); break;
+      case 18: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsInitStorage", cwErrSettingsInitStorage)); break;
+      case 19: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsSaveEntity", cwErrSettingsSaveEntity)); break;
+      case 20: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsLoadIP", cwErrSettingsLoadIP)); break;
       case 21: OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE + ROUTING_DEBUG_SIZE) {

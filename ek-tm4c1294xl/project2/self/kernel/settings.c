@@ -61,9 +61,9 @@ bool                    fIOModeDebugFlag;
 ledMode                 bLED0Mode = LED_MODE_LINK;
 ledMode                 bLED1Mode;
 
-uint                    cwErrSettingsStorageInit;
-uint                    cwErrSettingsIPLoad;
-uint                    cwErrSettingsEntitySave;
+uint                    cwErrSettingsInitStorage;
+uint                    cwErrSettingsSaveEntity;
+uint                    cwErrSettingsLoadIP;
 
 
 
@@ -94,16 +94,15 @@ static void LoadSettingsDef(void)
 static void SaveSettings(void)
 {
   ulong dw = SETTINGS_LABEL;
-  ulong code = SaveLong(&dw, EEPROM_LABEL);
 
+  const ulong code = SaveLong(&dw, EEPROM_LABEL);
   if (code != 0)
-    cwErrSettingsEntitySave++;
+    cwErrSettingsSaveEntity++;
 
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
-    if (SaveEntity(mpenEntities[e]) != 0)
-      cwErrSettingsEntitySave++;
+    SaveEntity(mpenEntities[e]);
   }
 }
 
@@ -129,13 +128,13 @@ void InitSettings(void)
   }
   else
   {
-    cwErrSettingsStorageInit++;
+    cwErrSettingsInitStorage++;
     LoadSettingsDef();
   }
 
   if (dwIP == 0)
   {
-    cwErrSettingsIPLoad++;
+    cwErrSettingsLoadIP++;
 
     LoadEntityDef(&enIP);
     if (code == 0)
