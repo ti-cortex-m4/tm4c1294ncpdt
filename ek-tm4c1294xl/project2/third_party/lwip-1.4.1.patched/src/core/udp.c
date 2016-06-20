@@ -400,7 +400,7 @@ udp_input(struct pbuf *p, struct netif *inp)
       /* callback */
       if (pcb->recv != NULL) {
         /* now the recv function is responsible for freeing p */
-        pcb->recv(pcb->recv_arg, pcb, p, ip_current_src_addr(), src, broadcast); // project2 patch
+        pcb->recv(pcb->recv_arg, pcb, p, ip_current_src_addr(), src, broadcast); // project2
       } else {
         /* no recv function registered? then we have to free the pbuf! */
         pbuf_free(p);
