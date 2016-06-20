@@ -11,12 +11,12 @@ controls.c
 
 
 static message pcszGeneral = "AI=$GENERAL;D=General;T=GROUP";
-static message pcszChannel0 = "AI=$CHANNEL1;D=Channel1;T=GROUP";
-static message pcszChannel1 = "AI=$CHANNEL2;D=Channel2;T=GROUP";
-static message pcszChannel2 = "AI=$CHANNEL3;D=Channel3;T=GROUP";
-static message pcszChannel3 = "AI=$CHANNEL4;D=Channel4;T=GROUP";
-static message pcszChannel4 = "AI=$CHANNEL5;D=Channel5;T=GROUP";
-static message pcszSettings = "AI=$SETTINGS;D=Settings;T=GROUP";
+static message pcszChannel0 = "AI=$CANAL1;D=Canal1;T=GROUP";
+static message pcszChannel1 = "AI=$CANAL2;D=Canal2;T=GROUP";
+static message pcszChannel2 = "AI=$CANAL3;D=Canal3;T=GROUP";
+static message pcszChannel3 = "AI=$CANAL4;D=Canal4;T=GROUP";
+static message pcszChannel4 = "AI=$CANAL5;D=Canal5;T=GROUP";
+static message pcszSettings = "AI=$SETUP;D=Setup;T=GROUP";
 
 
 
