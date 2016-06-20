@@ -6,7 +6,6 @@ udp_log.c
 
 #include "../main.h"
 #include "lwip/inet.h"
-#include "lwip/udp.h"
 #include "../kernel/settings.h"
 #include "udp_log.h"
 

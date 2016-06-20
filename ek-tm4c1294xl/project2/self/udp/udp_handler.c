@@ -5,7 +5,6 @@ udp_handler.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "lwip/udp.h"
 #include "udp_in.h"
 #include "udp_handler.h"
 
