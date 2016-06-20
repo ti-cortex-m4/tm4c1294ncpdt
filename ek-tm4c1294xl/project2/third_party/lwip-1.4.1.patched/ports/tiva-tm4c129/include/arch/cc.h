@@ -107,7 +107,7 @@ typedef u8_t                sys_prot_t;
 extern void __error__(char *pcFilename, uint32_t ui32Line);
 #define LWIP_PLATFORM_ASSERT(msg)       \
 {                                       \
-    LWIP_PLATFORM_DIAG((msg));          \ // project2
+    LWIP_PLATFORM_DIAG((msg));          \
     __error__(__FILE__, __LINE__);      \
 }
 #else

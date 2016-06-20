@@ -49,8 +49,8 @@
 									<listOptionValue builtIn="false" value="&quot;${SW_ROOT}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/third_party/lwip-1.4.1.patched/src/core&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/third_party/lwip-1.4.1.patched/src/netif&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/third_party/lwip-1.4.1.patched/src/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/third_party/lwip-1.4.1.patched/src/netif&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/third_party/lwip-1.4.1.patched/src/include/ipv4&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/third_party/lwip-1.4.1.patched/src/include/netif&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/third_party/lwip-1.4.1.patched/ports/tiva-tm4c129/include&quot;"/>
