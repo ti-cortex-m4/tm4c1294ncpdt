@@ -26,7 +26,7 @@ err_t OutStringZ(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint
 }
 
 
-err_t OutBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, buff bf)
+err_t OutBuff(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const buff bf)
 {
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
