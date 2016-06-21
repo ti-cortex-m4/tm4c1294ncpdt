@@ -15,35 +15,35 @@ const entity enConnectionTimeout0 = {
   EEPROM_CONNECTION_TIMEOUT_0, &mbConnectionTimeout[0], sizeof(uchar), CHAR, 0,
   0, 255, CONNECTION_TIMEOUT_DEFAULT,
   "CT@0",
-  "AI=CT@0;D=Connection timeout (minutes);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@0>255?\"Maximum timeout is 255 minutes\":\"\"",
+  "AI=CT@0;D=Connection timeout (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@0>255?\"Maximum timeout is 255 seconds\":\"\"",
 };
 
 const entity enConnectionTimeout1 = {
   EEPROM_CONNECTION_TIMEOUT_1, &mbConnectionTimeout[1], sizeof(uchar), CHAR, 0,
   0, 255, CONNECTION_TIMEOUT_DEFAULT,
   "CT@1",
-  "AI=CT@1;D=Connection timeout (minutes);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@1>255?\"Maximum timeout is 255 minutes\":\"\"",
+  "AI=CT@1;D=Connection timeout (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@1>255?\"Maximum timeout is 255 seconds\":\"\"",
 };
 
 const entity enConnectionTimeout2 = {
   EEPROM_CONNECTION_TIMEOUT_2, &mbConnectionTimeout[2], sizeof(uchar), CHAR, 0,
   0, 255, CONNECTION_TIMEOUT_DEFAULT,
   "CT@2",
-  "AI=CT@2;D=Connection timeout (minutes);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@2>255?\"Maximum timeout is 255 minutes\":\"\"",
+  "AI=CT@2;D=Connection timeout (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@2>255?\"Maximum timeout is 255 seconds\":\"\"",
 };
 
 const entity enConnectionTimeout3 = {
   EEPROM_CONNECTION_TIMEOUT_3, &mbConnectionTimeout[3], sizeof(uchar), CHAR, 0,
   0, 255, CONNECTION_TIMEOUT_DEFAULT,
   "CT@3",
-  "AI=CT@3;D=Connection timeout (minutes);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@3>255?\"Maximum timeout is 255 minutes\":\"\"",
+  "AI=CT@3;D=Connection timeout (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@3>255?\"Maximum timeout is 255 seconds\":\"\"",
 };
 
 const entity enConnectionTimeout4 = {
   EEPROM_CONNECTION_TIMEOUT_4, &mbConnectionTimeout[4], sizeof(uchar), CHAR, 0,
   0, 255, CONNECTION_TIMEOUT_DEFAULT,
   "CT@4",
-  "AI=CT@4;D=Connection timeout (minutes);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@4>255?\"Maximum timeout is 255 minutes\":\"\"",
+  "AI=CT@4;D=Connection timeout (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=CT@4>255?\"Maximum timeout is 255 seconds\":\"\"",
 };
 
 

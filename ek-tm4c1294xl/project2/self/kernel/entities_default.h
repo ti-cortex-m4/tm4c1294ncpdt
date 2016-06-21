@@ -8,7 +8,7 @@ entities_default,h
 #define __ENTITIES_DEFAULT_H__
 
 
-#define CONNECTION_TIMEOUT_DEFAULT     1 // TODO 5
+#define CONNECTION_TIMEOUT_DEFAULT     60
 #define ROUTING_MODE_DEFAULT           0
 #define PORT_DEFAULT                   1001 // TODO
 #define CONNECTION_MODE_DEFAULT        1
