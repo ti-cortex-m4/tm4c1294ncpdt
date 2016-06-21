@@ -29,7 +29,7 @@ tState g_sState[UART_COUNT];
 ulong getTelnetTimeout(uchar u)
 {
   ASSERT(u < UART_COUNT);
-  return mbConnectionTimeout[u]*60;
+  return mbConnectionTimeout[u];
 }
 
 //*****************************************************************************
