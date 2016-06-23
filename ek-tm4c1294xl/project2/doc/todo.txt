@@ -4,12 +4,9 @@ tcp port in use
 serial test overflow
 serial4 ((dwStatus & 0x00000020) != 0) || (dwStatus == 0);
 TCP_WRITE_FLAG_COPY
- 
-    IntDefaultHandler,                      // Fan 1
-    0,                                      // Reserved
 
 linker.cmd
-startup.c
++ startup.c
 lwipopts.h
 
 rtsv7M4_T_le_eabi.lib vs rtsv7M4_T_le_eabi.lib

@@ -1,6 +1,6 @@
 //*****************************************************************************
 //
-// startup_ccs,c - Startup code for use with TI's Code Composer Studio.
+// startup.c - Startup code for use with TI's Code Composer Studio.
 //
 // Copyright (c) 2013-2015 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement
@@ -94,14 +94,14 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // Debug monitor handler
     0,                                      // Reserved
     IntDefaultHandler,                      // The PendSV handler
-    SysTickIntHandler,                      // The SysTick handler
+    SysTickIntHandler,                     // The SysTick handler
     IntDefaultHandler,                      // GPIO Port A
     IntDefaultHandler,                      // GPIO Port B
     IntDefaultHandler,                      // GPIO Port C
     IntDefaultHandler,                      // GPIO Port D
     IntDefaultHandler,                      // GPIO Port E
-    UART0IntHandler,                      // UART0 Rx and Tx
-    UART1IntHandler,                      // UART1 Rx and Tx
+    UART0IntHandler,                       // UART0 Rx and Tx
+    UART1IntHandler,                       // UART1 Rx and Tx
     IntDefaultHandler,                      // SSI0 Rx and Tx
     IntDefaultHandler,                      // I2C0 Master and Slave
     IntDefaultHandler,                      // PWM Fault
@@ -128,7 +128,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // GPIO Port F
     IntDefaultHandler,                      // GPIO Port G
     IntDefaultHandler,                      // GPIO Port H
-    UART2IntHandler,                      // UART2 Rx and Tx
+    UART2IntHandler,                       // UART2 Rx and Tx
     IntDefaultHandler,                      // SSI1 Rx and Tx
     IntDefaultHandler,                      // Timer 3 subtimer A
     IntDefaultHandler,                      // Timer 3 subtimer B
@@ -151,8 +151,8 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // GPIO Port L
     IntDefaultHandler,                      // SSI2 Rx and Tx
     IntDefaultHandler,                      // SSI3 Rx and Tx
-    UART3IntHandler,                      // UART3 Rx and Tx
-    UART4IntHandler,                      // UART4 Rx and Tx
+    UART3IntHandler,                       // UART3 Rx and Tx
+    UART4IntHandler,                       // UART4 Rx and Tx
     IntDefaultHandler,                      // UART5 Rx and Tx
     IntDefaultHandler,                      // UART6 Rx and Tx
     IntDefaultHandler,                      // UART7 Rx and Tx
@@ -206,7 +206,9 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // HIM Consumer IR 0
     IntDefaultHandler,                      // I2C8 Master and Slave
     IntDefaultHandler,                      // I2C9 Master and Slave
-    IntDefaultHandler                       // GPIO Port T
+    IntDefaultHandler,                      // GPIO Port T
+    IntDefaultHandler,                      // Fan 1
+    0,                                      // Reserved
 };
 
 //*****************************************************************************
