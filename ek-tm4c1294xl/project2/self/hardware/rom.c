@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-rom,c
+rom.c
 
 
 ------------------------------------------------------------------------------*/
@@ -21,13 +21,13 @@ static char const       szBinFileSize[] = "BinFileSize    BinFileSize";
 
 static ulong GetBinFileSize(void)
 {
-  combo32 co;
-  co.mb4[0] = szBinFileSize[11];
-  co.mb4[1] = szBinFileSize[12];
-  co.mb4[2] = szBinFileSize[13];
-  co.mb4[3] = szBinFileSize[14];
+  combo32 cm;
+  cm.mb4[0] = szBinFileSize[11];
+  cm.mb4[1] = szBinFileSize[12];
+  cm.mb4[2] = szBinFileSize[13];
+  cm.mb4[3] = szBinFileSize[14];
 
-  return co.dw;
+  return cm.dw;
 }
 
 
@@ -63,13 +63,6 @@ timedate GetROMBuildTimeDate(void)
   return td;
 }
 
-
-/*
-void    Restart(void)
-{
-  SysCtlReset();
-}
-*/
 
 
 void InitROM(void)
