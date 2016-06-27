@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-telnet_include,h
+telnet_include.h
 
 
 ------------------------------------------------------------------------------*/
@@ -42,9 +42,6 @@ typedef struct
     //! The current state of the TCP session.
     tTCPState eTCPState;
 
-    //! The current state of the telnet option parser.
-//    tTelnetState eTelnetState;
-
     //! The listen port for the telnet server.
     uint16_t usTelnetLocalPort;
 
@@ -53,9 +50,6 @@ typedef struct
 
     //! The remote address that the telnet client connects to.
     uint32_t ulTelnetRemoteIP;
-
-    //! Flags for various options associated with the telnet session.
-//    uint8_t ucFlags;
 
     //! A counter for the TCP connection timeout.
     uint32_t ulConnectionTimeout;
