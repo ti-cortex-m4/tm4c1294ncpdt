@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-serial,h
+serial.h
 
 
 ------------------------------------------------------------------------------*/
@@ -16,8 +16,6 @@ extern const uint32_t g_ulIntUART[UART_COUNT];
 
 extern volatile uint16_t mwTxSize[UART_COUNT];
 
-//void SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand);
-//void SerialSetDefault(uint32_t ulPort);
-//void SerialSetFactory(uint32_t ulPort);
-//void SerialSetCurrent(uint32_t ulPort);
+
+
 void SerialInit(void);

@@ -43,7 +43,7 @@ tRingBufObject g_sRxBuf[UART_COUNT];
 tRingBufObject g_sTxBuf[UART_COUNT];
 
 
-//! The base address for the UART associated with a port.
+// The base address for the UART associated with a port.
 const uint32_t g_ulUARTBase[UART_COUNT] =
 {
     UART0_BASE,
@@ -53,6 +53,7 @@ const uint32_t g_ulUARTBase[UART_COUNT] =
     UART1_BASE,
 };
 
+// The interrupt address for the UART associated with a port.
 const uint32_t g_ulIntUART[UART_COUNT] =
 {
     INT_UART0,
@@ -168,7 +169,7 @@ SerialGPIOAIntHandler(void)
 //!
 //! \return None.
 //*****************************************************************************
-static void 
+static void
 SerialUARTEnable(uint32_t ulPort)
 {
     // Enable the FIFO.
@@ -186,10 +187,7 @@ SerialUARTEnable(uint32_t ulPort)
         HWREG(g_ulUARTBase[ulPort] + UART_O_CTL) |= UART_CTL_TXE;
     }
 }
-#endif
 
-
-#if false
 //*****************************************************************************
 //! Configures the serial port baud rate.
 //!
@@ -1034,7 +1032,7 @@ SerialSetFactory(uint32_t ulPort)
 //!
 //! \return None.
 //*****************************************************************************
-void 
+void
 SerialInit(void)
 {
     uchar u;
