@@ -168,7 +168,8 @@ SerialGPIOAIntHandler(void)
 //!
 //! \return None.
 //*****************************************************************************
-static void SerialUARTEnable(uint32_t ulPort)
+static void 
+SerialUARTEnable(uint32_t ulPort)
 {
     // Enable the FIFO.
     HWREG(g_ulUARTBase[ulPort] + UART_O_LCRH) |= UART_LCRH_FEN;
@@ -896,7 +897,8 @@ SerialPurgeData(uint32_t ulPort, uint8_t ucPurgeCommand)
 //!
 //! \return None.
 //*****************************************************************************
-void SerialSetDefault(uint32_t ulPort)
+void
+SerialSetDefault(uint32_t ulPort)
 {
     // Check the arguments.
     ASSERT(ulPort < UART_COUNT);
@@ -1032,7 +1034,8 @@ SerialSetFactory(uint32_t ulPort)
 //!
 //! \return None.
 //*****************************************************************************
-void SerialInit(void)
+void 
+SerialInit(void)
 {
     uchar u;
     for(u = 0; u < UART_COUNT; u++)
