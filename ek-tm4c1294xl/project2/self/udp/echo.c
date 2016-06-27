@@ -13,6 +13,22 @@ echo.c
 
 
 
+static bool HardwareError(void)
+{
+  return ((cwErrSettingsInitStorage > 0) || (cwErrSettingsSaveEntity > 0));
+}
+
+static bool EthernetToSerialBufferOverflow(void)
+{
+  return false; // TODO Ethernet-to-serial buffer overflow
+}
+
+static bool SerialToEthernetBufferOverflow(void)
+{
+  return false; // TODO serial-to-Ethernet buffer overflow
+}
+
+
 err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   uint wSfx = 0;
@@ -32,12 +48,12 @@ err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
   PushChar('/');
   PushChar('N');
   PushChar('*');
-  ((cwErrSettingsInitStorage > 0) || (cwErrSettingsSaveEntity > 0)) ? PushChar('E') : PushChar('*');
+  HardwareError() ? PushChar('E') : PushChar('*');
   PushChar('M');
   PushChar('*');
   PushChar('/');
-  (false) ? PushChar('E') : PushChar('*'); // TODO Ethernet-to-serial buffer overflow
-  (false) ? PushChar('S') : PushChar('*'); // TODO serial-to-Ethernet buffer overflow
+  EthernetToSerialBufferOverflow() ? PushChar('E') : PushChar('*');
+  SerialToEthernetBufferOverflow() ? PushChar('S') : PushChar('*');
   PushChar('/');
   PushStringZ(szOwnerName);
   PushChar('/');
