@@ -44,8 +44,7 @@
 //#define LWIP_HTTPD_CGI                  1
 #define LWIP_HTTPD_DYNAMIC_HEADERS      1
 //#define HTTPD_DEBUG                     LWIP_DBG_ON
-#define EMAC_PHY_CONFIG (EMAC_PHY_TYPE_INTERNAL | EMAC_PHY_INT_MDIX_EN |      \
-                         EMAC_PHY_AN_100B_T_FULL_DUPLEX)
+#define EMAC_PHY_CONFIG    (EMAC_PHY_TYPE_INTERNAL | EMAC_PHY_INT_MDIX_EN | EMAC_PHY_AN_100B_T_FULL_DUPLEX)
 #define PHY_PHYS_ADDR      0
 #define NUM_TX_DESCRIPTORS 24
 #define NUM_RX_DESCRIPTORS 8
@@ -401,8 +400,7 @@ extern void DebugPrintF(const char *pcString, ...);
 //#define LWIP_DBG_MIN_LEVEL              LWIP_DBG_LEVEL_SEVERE
 
 //#define LWIP_DBG_TYPES_ON               LWIP_DBG_ON
-#define LWIP_DBG_TYPES_ON               (LWIP_DBG_ON|LWIP_DBG_TRACE|          \
-                                         LWIP_DBG_STATE|LWIP_DBG_FRESH)
+#define LWIP_DBG_TYPES_ON               (LWIP_DBG_ON | LWIP_DBG_TRACE | LWIP_DBG_STATE | LWIP_DBG_FRESH)
 
 //#define ETHARP_DEBUG                    LWIP_DBG_ON     // default is OFF
 //#define NETIF_DEBUG                     LWIP_DBG_ON     // default is OFF
