@@ -73,3 +73,8 @@ typedef struct
   uint port;
   uchar broadcast;
 } udp_arg;
+
+
+err_t eLastErr;
++ last error type
++ time

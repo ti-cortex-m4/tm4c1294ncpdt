@@ -10,9 +10,13 @@ tcp_errors.h
 
 typedef enum
 {
-  TCP_NEW,
-  TCP_BIND,
-} tcp_function_t;
+  TCP_NEW_LISTEN,
+  TCP_BIND_LISTEN,
+} tcp_operation_t;
+
+
+
+void ErrorTCPOperation(uchar u, err_t err, tcp_operation_t op);
 
 
 #endif
