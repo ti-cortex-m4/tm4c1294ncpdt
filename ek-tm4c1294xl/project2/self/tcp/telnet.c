@@ -9,6 +9,7 @@ TELNET,C
 #include "lwip/sys.h"
 #include "../kernel/log.h"
 #include "../kernel/settings.h"
+#include "tcp_errors.h"
 #include "telnet_listen.h"
 #include "telnet_open.h"
 #include "telnet_receive.h"
@@ -87,7 +88,7 @@ void TelnetError(void *arg, err_t err)
 
     // Increment our error counter.
     pState->ucErrorCount++;
-    pState->eLastErr = err;
+    ErrorTCPOperation(pState->ucSerialPort, err, HANDLER_ERROR);
 
     // Free the pbufs associated with this session.
     TelnetFreePbufs(pState);
@@ -175,8 +176,8 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
     if(err != ERR_OK)
     {
-        CONSOLE("%u: Connected error %d\n", pState->ucSerialPort, err);
-        pState->eLastErr = err;
+        ERROR("%u: connected error=%d\n", pState->ucSerialPort, err);
+        ErrorTCPOperation(pState->ucSerialPort, err, HANDLER_CONNECTED);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pcb, NULL);
@@ -247,33 +248,28 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 //*****************************************************************************
 void TelnetInit(void)
 {
-    int iPort;
-
-    // Initialize the session data for each supported port.
-    for(iPort = 0; iPort < UART_COUNT; iPort++)
+    uchar u;
+    for(u = 0; u < UART_COUNT; u++)
     {
-        g_sState[iPort].pConnectPCB = NULL;
-        g_sState[iPort].pListenPCB = NULL;
-        g_sState[iPort].eTCPState = STATE_TCP_IDLE;
-//        g_sTelnetSession[iPort].eTelnetState = STATE_NORMAL;
-//        g_sTelnetSession[iPort].ucFlags = 0;
-        g_sState[iPort].ulConnectionTimeout = 0;
-        g_sState[iPort].ulMaxTimeout = 0;
-        g_sState[iPort].ucSerialPort = iPort;// TODO ??? UART_COUNT;
-        g_sState[iPort].usTelnetRemotePort = 0;
-        g_sState[iPort].usTelnetLocalPort = 0;
-        g_sState[iPort].ulTelnetRemoteIP = 0;
-        g_sState[iPort].iBufQRead = 0;
-        g_sState[iPort].iBufQWrite = 0;
-        g_sState[iPort].pBufHead = NULL;
-        g_sState[iPort].pBufCurrent = NULL;
-        g_sState[iPort].ulBufIndex = 0;
-        g_sState[iPort].ulLastTCPSendTime = 0;
-        g_sState[iPort].bLinkLost = false;
-        g_sState[iPort].ucConnectCount = 0;
-        g_sState[iPort].ucReconnectCount = 0;
-        g_sState[iPort].ucErrorCount = 0;
-        g_sState[iPort].eLastErr = ERR_OK;
+        g_sState[u].pConnectPCB = NULL;
+        g_sState[u].pListenPCB = NULL;
+        g_sState[u].eTCPState = STATE_TCP_IDLE;
+        g_sState[u].ulConnectionTimeout = 0;
+        g_sState[u].ulMaxTimeout = 0;
+        g_sState[u].ucSerialPort = u;
+        g_sState[u].usTelnetRemotePort = 0;
+        g_sState[u].usTelnetLocalPort = 0;
+        g_sState[u].ulTelnetRemoteIP = 0;
+        g_sState[u].iBufQRead = 0;
+        g_sState[u].iBufQWrite = 0;
+        g_sState[u].pBufHead = NULL;
+        g_sState[u].pBufCurrent = NULL;
+        g_sState[u].ulBufIndex = 0;
+        g_sState[u].ulLastTCPSendTime = 0;
+        g_sState[u].bLinkLost = false;
+        g_sState[u].ucConnectCount = 0;
+        g_sState[u].ucReconnectCount = 0;
+        g_sState[u].ucErrorCount = 0;
     }
 }
 

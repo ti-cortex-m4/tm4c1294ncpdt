@@ -88,9 +88,6 @@ typedef struct
     uint8_t ucErrorCount;
     uint8_t ucReconnectCount;
     uint8_t ucConnectCount;
-
-    //! The last error reported by lwIP while attempting to make a connection.
-    err_t eLastErr;
 }
 tState;
 

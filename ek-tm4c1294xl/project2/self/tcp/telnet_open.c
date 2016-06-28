@@ -85,7 +85,6 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     {
         ERROR("%u: open.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
         ErrorTCPOperation(pState->ucSerialPort, err, TCP_CONNECT_OPEN);
-        pState->eLastErr = err;
         return;
     }
 }

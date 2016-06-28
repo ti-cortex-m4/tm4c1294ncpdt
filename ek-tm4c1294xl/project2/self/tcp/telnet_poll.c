@@ -7,6 +7,7 @@ telnet_poll,c
 #include "../main.h"
 #include "../kernel/log.h"
 #include "../kernel/tasks.h"
+#include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_close.h"
 #include "telnet_poll.h"
@@ -56,8 +57,9 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
                 err_t err = tcp_connect(pcb, &sIPAddr, pState->usTelnetRemotePort, TelnetConnected);
                 if(err != ERR_OK)
                 {
-                    CONSOLE("%u: Poll connect error %d\n", pState->ucSerialPort, err);
-                    pState->eLastErr = err; // TODO ?
+                    ERROR("%u: poll.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
+                    ErrorTCPOperation(pState->ucSerialPort, err, TCP_CONNECT_POLL);
+                    // TODO return;
                 }
             }
         }
