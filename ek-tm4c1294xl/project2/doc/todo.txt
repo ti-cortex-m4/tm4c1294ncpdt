@@ -31,8 +31,7 @@ F=R* F=R restart readonly_values
 
 return ERR_VAL&ERR_ARG CONSOLE_UART
 
-tibbo routing_status buzz change_ip
-tibbo defaults
+tibbo defaults change_ip
 
 minimise CONSOLE messages sizes
 
@@ -40,10 +39,6 @@ enet_s2e ISR priorities etc.
 
 led freq
 EMACPHYExtendedWrite(EMAC0_BASE, 0, EPHY_LEDCR, (EMACPHYExtendedRead(EMAC0_BASE, 0, EPHY_LEDCR) & ~EPHY_LEDCR_BLINKRATE_M) | EPHY_LEDCR_BLINKRATE_10HZ);
-  
-все операции с entities в одно место из udp_in
-
-lwIP inside project
 
 const entity * const
 
@@ -59,7 +54,6 @@ close/abort connection
         
 IntMasterDisable() _error_ не работает      lwIPEthernetIntHandler  
 NmiSR + FaultISR = wathcdog reset 
-watchdog
 
 debug & release
             
