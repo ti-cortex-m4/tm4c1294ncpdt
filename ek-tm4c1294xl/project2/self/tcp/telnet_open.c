@@ -61,7 +61,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     void *pcb = tcp_new();
     if (pcb == NULL)
     {
-        ERROR("%u: open.tcp_new failed with NULL\n", pState->ucSerialPort);
+        ERROR("%u: open.tcp_new failed, NULL\n", pState->ucSerialPort);
         ErrorTCPOperation(pState->ucSerialPort, ERR_MEM, TCP_NEW_OPEN);
         return;
     }

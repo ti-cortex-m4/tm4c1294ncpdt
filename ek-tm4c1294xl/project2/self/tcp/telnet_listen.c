@@ -53,7 +53,7 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
     struct tcp_pcb *pcb = tcp_new();
     if (pcb == NULL)
     {
-        ERROR("%u: listen.tcp_new failed with NULL\n", pState->ucSerialPort);
+        ERROR("%u: listen.tcp_new failed, NULL\n", pState->ucSerialPort);
         ErrorTCPOperation(pState->ucSerialPort, ERR_MEM, TCP_NEW_LISTEN);
         return;
     }
