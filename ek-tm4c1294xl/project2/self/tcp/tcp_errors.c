@@ -10,10 +10,6 @@ tcp_errors.c
 
 
 
-#define TCP_OPERATIONS  10
-
-
-
 err_t                   mwErrTCPCodes[UART_COUNT][TCP_OPERATIONS];
 uint                    mcwErrTCPCounters[UART_COUNT][TCP_OPERATIONS];
 ulong                   mdwErrTCPClockSeconds[UART_COUNT][TCP_OPERATIONS];
