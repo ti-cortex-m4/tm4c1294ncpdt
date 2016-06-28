@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-telnet_open,c
+telnet_open.c
 
 
 ------------------------------------------------------------------------------*/
@@ -8,6 +8,7 @@ telnet_open,c
 #include "utils/lwiplib.h"
 #include "lwip/sys.h"
 #include "../kernel/log.h"
+#include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_poll.h"
 #include "telnet_open.h"
@@ -19,7 +20,6 @@ telnet_open,c
 //!
 //! \param ulIPAddr is the IP address of the telnet server.
 //! \param usTelnetRemotePort is port number of the telnet server.
-//! \param usTelnetLocalPort is local port number to connect from.
 //! \param ucSerialPort is the serial port associated with this telnet session.
 //!
 //! This function establishes a TCP session by attempting a connection to
@@ -27,37 +27,27 @@ telnet_open,c
 //!
 //! \return None.
 //*****************************************************************************
-void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTelnetLocalPort,*/ uint8_t ucSerialPort)
+void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerialPort)
 {
-    void *pcb;
-    struct ip_addr sIPAddr;
-    err_t eError;
-
-    // Check the arguments.
     ASSERT(ulIPAddr != 0);
     ASSERT(ucSerialPort < UART_COUNT);
     ASSERT(usTelnetRemotePort != 0);
-//    ASSERT(usTelnetLocalPort != 0);
+
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: open %d.%d.%d.%d port %d, UART %d\n",
+    CONSOLE("%u: open %d.%d.%d.%d port %d\n",
               pState->ucSerialPort,
-              (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF,
-              (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF, usTelnetRemotePort,
-              ucSerialPort);
+              (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF, (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF,
+              usTelnetRemotePort);
 
-    // Fill in the telnet state data structure for this session in client
-    // mode.
+    // Fill in the telnet state data structure for this session in client mode.
     pState->pConnectPCB = NULL;
     pState->pListenPCB = NULL;
     pState->eTCPState = STATE_TCP_CONNECTING;
-//    pState->eTelnetState = STATE_NORMAL;
-//    pState->ucFlags = (1 << OPT_FLAG_WILL_SUPPRESS_GA);
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = getTelnetTimeout(ucSerialPort); // g_sParameters.sPort[ucSerialPort].ulTelnetTimeout;
     pState->ucSerialPort = ucSerialPort;
     pState->usTelnetRemotePort = usTelnetRemotePort;
-//    pState->usTelnetLocalPort = usTelnetLocalPort;
     pState->ulTelnetRemoteIP = ulIPAddr;
     pState->iBufQRead = 0;
     pState->iBufQWrite = 0;
@@ -68,11 +58,14 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
     pState->bLinkLost = false;
 
     // Make a connection to the remote telnet server.
-    sIPAddr.addr = htonl(ulIPAddr);
-    pcb = tcp_new(); // TODO check NULL
+    void *pcb = tcp_new();
+    if (pcb == NULL)
+    {
+        ERROR("%u: open.tcp_new failed with NULL\n", pState->ucSerialPort);
+        ErrorTCPOperation(pState->ucSerialPort, ERR_MEM, TCP_NEW_OPEN);
+    }
 
-    // Save the requested information and set the TCP callback functions
-    // and arguments.
+    // Save the requested information and set the TCP callback functions and arguments.
     tcp_arg(pcb, pState);
 
     // Set the TCP error callback.
@@ -82,13 +75,18 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort,/* uint16_t usTel
     // reattempt the connection if we do not receive a response.
     tcp_poll(pcb, TelnetPoll, (3000 / TCP_SLOW_INTERVAL));
 
+    struct ip_addr sIPAddr;
+    sIPAddr.addr = htonl(ulIPAddr);
+
     // Attempt to connect to the server.
-    eError = tcp_connect(pcb, &sIPAddr, usTelnetRemotePort, TelnetConnected);
-    if(eError != ERR_OK)
+    err_t err = tcp_connect(pcb, &sIPAddr, usTelnetRemotePort, TelnetConnected);
+    if(err != ERR_OK)
     {
-        CONSOLE("%u: Open error %d\n", pState->ucSerialPort, eError);
-        pState->eLastErr = eError;
-        return; // TODO ?
+        ERROR("%u: open.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
+        ErrorTCPOperation(pState->ucSerialPort, err, TCP_CONNECT_OPEN);
+
+        pState->eLastErr = err;
+        return;
     }
 }
 
