@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-telnet_accept,c
+telnet_accept.c
 
 
 ------------------------------------------------------------------------------*/
@@ -8,7 +8,6 @@ telnet_accept,c
 #include "utils/lwiplib.h"
 #include "lwip/sys.h"
 #include "../kernel/log.h"
-//#include "../kernel/settings.h"
 #include "telnet.h"
 #include "telnet_poll.h"
 #include "telnet_receive.h"
@@ -41,6 +40,7 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
         if(!pState->bLinkLost)
         {
             // If we already have a connection, kill it and start over.
+            CONSOLE("%u: accept - already connected\n", pState->ucSerialPort);
             return(ERR_CONN);
         }
 
@@ -55,7 +55,6 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 
         // Clear out the telnet session PCB.
         pState->pConnectPCB = NULL;
-
     }
 
     // Save the PCB for future reference.
@@ -66,9 +65,6 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
 
     // Acknowledge that we have accepted this connection.
     // TODO tcp_accepted(pcb);
-
-    // Reset the serial port associated with this session to its default parameters.
-    // TODO SerialSetDefault(pState->ucSerialPort);
 
     // Set the connection timeout to 0.
     pState->ulConnectionTimeout = 0;
