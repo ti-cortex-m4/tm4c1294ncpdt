@@ -10,10 +10,13 @@ tcp_errors.h
 
 typedef enum
 {
+  HANDLER_ERROR,
+  HANDLER_CONNECTED,
   TCP_NEW_LISTEN,
   TCP_BIND_LISTEN,
   TCP_NEW_OPEN,
   TCP_CONNECT_OPEN,
+  TCP_CONNECT_POLL,
 } tcp_operation_t;
 
 
