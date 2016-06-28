@@ -248,7 +248,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 //*****************************************************************************
 void TelnetInit(void)
 {
-    uchar u;
+    uint8_t u;
     for(u = 0; u < UART_COUNT; u++)
     {
         g_sState[u].pConnectPCB = NULL;

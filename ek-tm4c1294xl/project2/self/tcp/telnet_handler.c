@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-telnet_handler,c
+telnet_handler.c
 
 
 ------------------------------------------------------------------------------*/
@@ -127,6 +127,7 @@ void TelnetHandler(void)
                     pState->iBufQRead = ((pState->iBufQRead + 1) % PBUF_POOL_SIZE);
                     pState->pBufCurrent = pState->pBufHead;
                     pState->ulBufIndex = 0;
+
                     mwTxSize[u] += pState->pBufCurrent->len;
                     SYS_ARCH_UNPROTECT(lev);
                 }
@@ -196,8 +197,7 @@ void TelnetHandler(void)
                 lCount = tcp_sndbuf(pState->pConnectPCB);
             }
 
-            // While we have data remaining to process, continue in this
-            // loop.
+            // While we have data remaining to process, continue in this loop.
             while((lCount) &&
                   (pState->pConnectPCB->snd_queuelen < TCP_SND_QUEUELEN))
             {
@@ -222,8 +222,7 @@ void TelnetHandler(void)
                 tcp_write(pState->pConnectPCB, pucTemp, lIndex, 1);
             }
 
-            // Flush the data that has been written into the TCP output
-            // buffer.
+            // Flush the data that has been written into the TCP output buffer.
             tcp_output(pState->pConnectPCB);
             pState->ulLastTCPSendTime = g_ulSystemTimeMS;
         }
