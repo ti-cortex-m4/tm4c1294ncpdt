@@ -1,11 +1,12 @@
 /*------------------------------------------------------------------------------
-telnet_listen,c
+telnet_listen.c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "../kernel/log.h"
+#include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_accept.h"
 #include "telnet_listen.h"
@@ -33,8 +34,6 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
     // Fill in the telnet state data structure for this session in listen (server) mode.
     pState->pConnectPCB = NULL;
     pState->eTCPState = STATE_TCP_LISTEN;
-//    pState->eTelnetState = STATE_NORMAL;
-//    pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) | (1 << OPT_FLAG_SERVER));
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = getTelnetTimeout(ucSerialPort); // g_sParameters.sPort[ucSerialPort].ulTelnetTimeout;
     pState->ucSerialPort = ucSerialPort;
@@ -53,17 +52,19 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
     struct tcp_pcb *pcb = tcp_new();
     if (pcb == NULL)
     {
-        ERROR("%u: TelnetListen.tcp_new failed - NULL\n", pState->ucSerialPort);
-        ASSERT(false); // TODO ?
+        ERROR("%u: listen.tcp_new failed with NULL\n", pState->ucSerialPort);
+        ErrorTCPOperation(pState->ucSerialPort, ERR_MEM, TCP_NEW_LISTEN);
     }
 
-	ip_set_option(pcb, SOF_REUSEADDR);
+    ip_set_option(pcb, SOF_REUSEADDR);
 
     err_t err = tcp_bind(pcb, IP_ADDR_ANY, usTelnetPort);
     if (err != ERR_OK)
     {
-      ERROR("%u: TelnetListen.tcp_bind to port %u failed, error=%d\n", pState->ucSerialPort, usTelnetPort, err);
+      ERROR("%u: listen.tcp_bind to port %u failed, error=%d\n", pState->ucSerialPort, usTelnetPort, err);
+      ErrorTCPOperation(pState->ucSerialPort, err, TCP_BIND_LISTEN);
     }
+
     pcb = tcp_listen(pcb);
     pState->pListenPCB = pcb;
 
