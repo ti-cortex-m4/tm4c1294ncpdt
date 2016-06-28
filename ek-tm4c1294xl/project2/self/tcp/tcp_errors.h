@@ -12,6 +12,8 @@ typedef enum
 {
   TCP_NEW_LISTEN,
   TCP_BIND_LISTEN,
+  TCP_NEW_OPEN,
+  TCP_CONNECT_OPEN,
 } tcp_operation_t;
 
 
