@@ -21,6 +21,16 @@ typedef enum
 
 
 
+#define TCP_OPERATIONS  7
+
+
+
+extern err_t                   mwErrTCPCodes[UART_COUNT][TCP_OPERATIONS];
+extern uint                    mcwErrTCPCounters[UART_COUNT][TCP_OPERATIONS];
+extern ulong                   mdwErrTCPClockSeconds[UART_COUNT][TCP_OPERATIONS];
+
+
+
 void ErrorTCPOperation(uchar u, err_t err, tcp_operation_t op);
 
 
