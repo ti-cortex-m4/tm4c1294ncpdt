@@ -36,9 +36,9 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     tState *pState = &g_sState[ucSerialPort];
 
     CONSOLE("%u: open %d.%d.%d.%d port %d\n",
-              pState->ucSerialPort,
-              (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF, (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF,
-              usTelnetRemotePort);
+            pState->ucSerialPort,
+            (ulIPAddr >> 24), (ulIPAddr >> 16) & 0xFF, (ulIPAddr >> 8) & 0xFF, ulIPAddr & 0xFF,
+            usTelnetRemotePort);
 
     // Fill in the telnet state data structure for this session in client mode.
     pState->pConnectPCB = NULL;
@@ -63,6 +63,7 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     {
         ERROR("%u: open.tcp_new failed with NULL\n", pState->ucSerialPort);
         ErrorTCPOperation(pState->ucSerialPort, ERR_MEM, TCP_NEW_OPEN);
+        return;
     }
 
     // Save the requested information and set the TCP callback functions and arguments.
@@ -84,7 +85,6 @@ void TelnetOpen(uint32_t ulIPAddr, uint16_t usTelnetRemotePort, uint8_t ucSerial
     {
         ERROR("%u: open.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
         ErrorTCPOperation(pState->ucSerialPort, err, TCP_CONNECT_OPEN);
-
         pState->eLastErr = err;
         return;
     }

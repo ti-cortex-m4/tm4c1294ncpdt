@@ -27,6 +27,7 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
 {
     ASSERT(ucSerialPort < UART_COUNT);
     ASSERT(usTelnetPort != 0);
+
     tState *pState = &g_sState[ucSerialPort];
 
     CONSOLE("%u: listen on port %d\n", pState->ucSerialPort, usTelnetPort);
@@ -54,6 +55,7 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
     {
         ERROR("%u: listen.tcp_new failed with NULL\n", pState->ucSerialPort);
         ErrorTCPOperation(pState->ucSerialPort, ERR_MEM, TCP_NEW_LISTEN);
+        return;
     }
 
     ip_set_option(pcb, SOF_REUSEADDR);
@@ -61,8 +63,9 @@ void TelnetListen(uint16_t usTelnetPort, uint8_t ucSerialPort)
     err_t err = tcp_bind(pcb, IP_ADDR_ANY, usTelnetPort);
     if (err != ERR_OK)
     {
-      ERROR("%u: listen.tcp_bind to port %u failed, error=%d\n", pState->ucSerialPort, usTelnetPort, err);
-      ErrorTCPOperation(pState->ucSerialPort, err, TCP_BIND_LISTEN);
+        ERROR("%u: listen.tcp_bind to port %u failed, error=%d\n", pState->ucSerialPort, usTelnetPort, err);
+        ErrorTCPOperation(pState->ucSerialPort, err, TCP_BIND_LISTEN);
+        return;
     }
 
     pcb = tcp_listen(pcb);
