@@ -4,11 +4,23 @@ clock.h
 
 ------------------------------------------------------------------------------*/
 
-#define SECONDS_IN_DAY      (ulong)(24*60*60)
-#define SECONDS_IN_HOUR     (uint)(60*60)
-#define SECONDS_IN_MINUTE   (uchar)60
+#ifndef __CLOCK_H__
+#define __CLOCK_H__
 
+
+typedef struct
+{
+  uint          wDays;
+  uchar         bHours;
+  uchar         bMinutes;
+  uchar         bSeconds;
+} days_t;
 
 
 void Clock_1Hz(void);
 ulong GetClockSeconds(void);
+
+days_t SecondsToDays(ulong dwSeconds);
+
+
+#endif

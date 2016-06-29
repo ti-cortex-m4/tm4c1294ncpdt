@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-telnet_poll,c
+telnet_poll.c
 
 
 ------------------------------------------------------------------------------*/
@@ -30,11 +30,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
 {
     tState *pState = arg;
 
-#if 0
     CONSOLE("%u: poll 0x%08x, 0x%08x %u/%u\n", pState->ucSerialPort, arg, pcb, pState->ulConnectionTimeout, pState->ulMaxTimeout);
-#else
-    CONSOLE("%u: poll timeout=%u/%u\n", pState->ucSerialPort, pState->ulConnectionTimeout, pState->ulMaxTimeout);
-#endif
 
     // Are we operating as a server or a client?
     if(!pState->pListenPCB)
@@ -44,7 +40,7 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
         {
             if (pcb->state != CLOSED)
             {
-              CONSOLE("%u: Poll state %d\n", pState->ucSerialPort, pcb->state);
+              CONSOLE("%u: poll state=%d\n", pState->ucSerialPort, pcb->state);
             }
             else
             {
@@ -60,7 +56,6 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
                 {
                     ERROR("%u: poll.tcp_connect failed, error=%d\n", pState->ucSerialPort, err);
                     ErrorTCPOperation(pState->ucSerialPort, err, TCP_CONNECT_POLL);
-                    // TODO return;
                 }
             }
         }
