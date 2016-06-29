@@ -16,10 +16,5 @@ ulong getTelnetTimeout(uchar u);
 
 void TelnetFreePbufs(tState *pState);
 void TelnetInit(void);
-
-void TelnetError(void *arg, err_t err);
-err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len);
-
 void TelnetHandler(void);
-
 void TelnetNotifyLinkStatus(bool bLinkStatusUp);

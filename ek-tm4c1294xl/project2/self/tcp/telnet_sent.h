@@ -4,3 +4,4 @@ telnet_sent.h
 
 ------------------------------------------------------------------------------*/
 
+err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len);
