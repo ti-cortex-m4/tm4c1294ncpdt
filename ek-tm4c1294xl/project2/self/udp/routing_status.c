@@ -38,7 +38,7 @@ static message szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'
 static message szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
 static message szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
 static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
-static message szRowTCPError = "<tr><td>%s</td><td>%d | %u | %u %02u:%02u:%02u</td></tr>";
+static message szRowTCPError = "<tr><td>%s</td><td>%d, %u, %u %02u:%02u:%02u</td></tr>";
 static message szBodyEnd = "</table></body>";
 
 
