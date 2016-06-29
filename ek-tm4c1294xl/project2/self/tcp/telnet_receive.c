@@ -9,6 +9,7 @@ telnet_receive,c
 #include "lwip/sys.h"
 #include "../kernel/tasks.h"
 #include "../kernel/log.h"
+#include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_receive.h"
 
@@ -89,7 +90,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         if (err != ERR_OK)
         {
            WARNING("%u: TelnetReceive.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
-           ASSERT(false); // TODO ?
+           ErrorTCPOperation(pState->ucSerialPort, err, TCP_CLOSE_RECEIVE);
         }
 
         // Clear out any pbufs associated with this session.
