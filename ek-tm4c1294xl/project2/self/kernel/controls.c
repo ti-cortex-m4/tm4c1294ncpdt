@@ -10,26 +10,26 @@ controls.c
 
 
 
-static message pcszGeneral = "AI=$GENERAL;D=General;T=GROUP";
-static message pcszChannel0 = "AI=$CANAL1;D=Canal1;T=GROUP";
-static message pcszChannel1 = "AI=$CANAL2;D=Canal2;T=GROUP";
-static message pcszChannel2 = "AI=$CANAL3;D=Canal3;T=GROUP";
-static message pcszChannel3 = "AI=$CANAL4;D=Canal4;T=GROUP";
-static message pcszChannel4 = "AI=$CANAL5;D=Canal5;T=GROUP";
-static message pcszSettings = "AI=$SETUP;D=Setup;T=GROUP";
+static message szGeneral = "AI=$GENERAL;D=General;T=GROUP";
+static message szCanal0 = "AI=$CANAL1;D=Canal1;T=GROUP";
+static message szCanal1 = "AI=$CANAL2;D=Canal2;T=GROUP";
+static message szCanal2 = "AI=$CANAL3;D=Canal3;T=GROUP";
+static message szCanal3 = "AI=$CANAL4;D=Canal4;T=GROUP";
+static message szCanal4 = "AI=$CANAL5;D=Canal5;T=GROUP";
+static message szSetup = "AI=$SETUP;D=Setup;T=GROUP";
 
 
 
 const message * const mppcszControls[] =
 {
-  &pcszGeneral,
+  &szGeneral,
   &enOwnerName.szName,
   &enDeviceName.szName,
   &enIP.szName,
   &enGateway.szName,
   &enNetmask.szName,
 
-  &pcszChannel0,
+  &szCanal0,
   &enConnectionTimeout0.szName,
   &enRoutingMode0.szName,
   &enPort0.szName,
@@ -41,7 +41,7 @@ const message * const mppcszControls[] =
   &enDataBits0.szName,
   &enStopBits0.szName,
 
-  &pcszChannel1,
+  &szCanal1,
   &enConnectionTimeout1.szName,
   &enRoutingMode1.szName,
   &enPort1.szName,
@@ -53,7 +53,7 @@ const message * const mppcszControls[] =
   &enDataBits1.szName,
   &enStopBits1.szName,
 
-  &pcszChannel2,
+  &szCanal2,
   &enConnectionTimeout2.szName,
   &enRoutingMode2.szName,
   &enPort2.szName,
@@ -65,7 +65,7 @@ const message * const mppcszControls[] =
   &enDataBits2.szName,
   &enStopBits2.szName,
 
-  &pcszChannel3,
+  &szCanal3,
   &enConnectionTimeout3.szName,
   &enRoutingMode3.szName,
   &enPort3.szName,
@@ -77,7 +77,7 @@ const message * const mppcszControls[] =
   &enDataBits3.szName,
   &enStopBits3.szName,
 
-  &pcszChannel4,
+  &szCanal4,
   &enConnectionTimeout4.szName,
   &enRoutingMode4.szName,
   &enPort4.szName,
@@ -89,7 +89,7 @@ const message * const mppcszControls[] =
   &enDataBits4.szName,
   &enStopBits4.szName,
 
-  &pcszSettings,
+  &szSetup,
   &enSerialNumber.szName,
   &enWatchdogFlag.szName,
   &enDebugMode.szName,
