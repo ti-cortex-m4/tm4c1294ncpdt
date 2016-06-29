@@ -52,8 +52,8 @@ bool                    ibDebugMode;
 ulong                   dwUDPDebugIP;
 uint                    wUDPDebugPort;
 
-bool                    fLwipDebugFlag;
-uint                    wLwipDebugTimeout;
+bool                    fLWIPDebugFlag;
+uint                    wLWIPDebugTimeout;
 
 bool                    fDataDebugFlag;
 bool                    fIOModeDebugFlag;
@@ -82,10 +82,9 @@ static void LoadSettingsDef(void)
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
-    const entity * const pen = mpenEntities[e];
-    if (((pen->dwFlags) & FLAG_DONT_RESET) == 0)
+    if (((mpenEntities[e]->dwFlags) & FLAG_DONT_RESET) == 0)
     {
-      LoadEntityDef(pen);
+      LoadEntityDef(mpenEntities[e]);
     }
   }
 }
