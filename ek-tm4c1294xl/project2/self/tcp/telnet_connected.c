@@ -9,9 +9,11 @@ telnet_connected.c
 #include "../kernel/log.h"
 #include "tcp_errors.h"
 #include "telnet.h"
+#include "telnet_error.h"
 #include "telnet_poll.h"
 #include "telnet_open.h"
 #include "telnet_receive.h"
+#include "telnet_sent.h"
 #include "telnet_connected.h"
 
 

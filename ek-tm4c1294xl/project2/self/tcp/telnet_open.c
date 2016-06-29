@@ -6,10 +6,10 @@ telnet_open.c
 
 #include "../main.h"
 #include "utils/lwiplib.h"
-//#include "lwip/sys.h"
 #include "../kernel/log.h"
 #include "tcp_errors.h"
 #include "telnet.h"
+#include "telnet_error.h"
 #include "telnet_poll.h"
 #include "telnet_connected.h"
 #include "telnet_open.h"

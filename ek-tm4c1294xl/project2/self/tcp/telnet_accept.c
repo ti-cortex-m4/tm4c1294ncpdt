@@ -8,8 +8,10 @@ telnet_accept.c
 #include "utils/lwiplib.h"
 #include "../kernel/log.h"
 #include "telnet.h"
+#include "telnet_error.h"
 #include "telnet_poll.h"
 #include "telnet_receive.h"
+#include "telnet_sent.h"
 #include "telnet_accept.h"
 
 
