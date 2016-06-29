@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-telnet_connected,c
+telnet_connected.c
 
 
 ------------------------------------------------------------------------------*/
@@ -41,7 +41,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
     if(pState->eTCPState != STATE_TCP_CONNECTING)
     {
         // If we already have a connection, kill it and start over.
-        CONSOLE("%u: connected - already connected\n", pState->ucSerialPort);
+        CONSOLE("%u: connected - already connected, start over\n", pState->ucSerialPort);
         return(ERR_CONN);
     }
 
@@ -61,8 +61,8 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
         err_t err = tcp_close(pcb);
         if (err != ERR_OK)
         {
-           WARNING("%u: TelnetConnected.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
-           ASSERT(false); // TODO ?
+           WARNING("%u: connected.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
+           ErrorTCPOperation(pState->ucSerialPort, err, TCP_CLOSE_CONNECTED);
         }
 
         // Clear out any pbufs associated with this session.

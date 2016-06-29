@@ -18,6 +18,7 @@ ulong                   mdwErrTCPClockSeconds[UART_COUNT][TCP_OPERATIONS];
 
 void ErrorTCPOperation(uchar u, err_t err, tcp_operation_t op)
 {
+  ASSERT(u < UART_COUNT);
   ASSERT(op < TCP_OPERATIONS);
 
   mwErrTCPErrors[u][op] = err;

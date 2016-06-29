@@ -39,7 +39,7 @@ err_t TelnetAccept(void *arg, struct tcp_pcb *pcb, err_t err)
         if(!pState->bLinkLost)
         {
             // If we already have a connection, kill it and start over.
-            CONSOLE("%u: accept - already connected\n", pState->ucSerialPort);
+            CONSOLE("%u: accept - already connected, start over\n", pState->ucSerialPort);
             return(ERR_CONN);
         }
 
