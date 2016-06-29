@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-SERIAL,C
+SERIAL.C
 
 
 ------------------------------------------------------------------------------*/
@@ -917,15 +917,13 @@ SerialSetDefault(uint32_t ulPort)
     SerialSetStopBits(ulPort, g_psDefaultParameters->sPort[ulPort].ucStopBits);
 
     // Set the flow control.
-    SerialSetFlowControl(ulPort,
-                      g_psDefaultParameters->sPort[ulPort].ucFlowControl);
+    SerialSetFlowControl(ulPort, g_psDefaultParameters->sPort[ulPort].ucFlowControl);
 
     // Purge the Serial Tx/Rx Ring Buffers.
     SerialPurgeData(ulPort, 0x03);
 
     // (Re)enable the UART transmit and receive interrupts.
-    UARTIntEnable(g_ulUARTBase[ulPort],
-                 (UART_INT_RX | UART_INT_RT | UART_INT_TX));
+    UARTIntEnable(g_ulUARTBase[ulPort], (UART_INT_RX | UART_INT_RT | UART_INT_TX));
     IntEnable(g_ulUARTInterrupt[ulPort]);
 }
 
@@ -969,16 +967,14 @@ SerialSetCurrent(uint32_t ulPort)
     g_sParameters.sPort[ulPort].ucStopBits = SerialGetStopBits(ulPort);
 
     // Set the flow control.
-    SerialSetFlowControl(ulPort,
-                      g_sParameters.sPort[ulPort].ucFlowControl);
+    SerialSetFlowControl(ulPort, g_sParameters.sPort[ulPort].ucFlowControl);
     g_sParameters.sPort[ulPort].ucFlowControl = SerialGetFlowControl(ulPort);
 
     // Purge the Serial Tx/Rx Ring Buffers.
     SerialPurgeData(ulPort, 0x03);
 
     // (Re)enable the UART transmit and receive interrupts.
-    UARTIntEnable(g_ulUARTBase[ulPort],
-                 (UART_INT_RX | UART_INT_RT | UART_INT_TX));
+    UARTIntEnable(g_ulUARTBase[ulPort], (UART_INT_RX | UART_INT_RT | UART_INT_TX));
     IntEnable(g_ulUARTInterrupt[ulPort]);
 }
 
@@ -1013,15 +1009,13 @@ SerialSetFactory(uint32_t ulPort)
     SerialSetStopBits(ulPort, g_psFactoryParameters->sPort[ulPort].ucStopBits);
 
     // Set the flow control.
-    SerialSetFlowControl(ulPort,
-                      g_psFactoryParameters->sPort[ulPort].ucFlowControl);
+    SerialSetFlowControl(ulPort, g_psFactoryParameters->sPort[ulPort].ucFlowControl);
 
     // Purge the Serial Tx/Rx Ring Buffers.
     SerialPurgeData(ulPort, 0x03);
 
     // (Re)enable the UART transmit and receive interrupts.
-    UARTIntEnable(g_ulUARTBase[ulPort],
-                 (UART_INT_RX | UART_INT_RT | UART_INT_TX));
+    UARTIntEnable(g_ulUARTBase[ulPort], (UART_INT_RX | UART_INT_RT | UART_INT_TX));
     IntEnable(g_ulUARTInterrupt[ulPort]);
 }
 #endif
