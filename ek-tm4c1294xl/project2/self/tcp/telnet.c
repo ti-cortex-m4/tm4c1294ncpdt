@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-TELNET,C
+TELNET.C
 
 
 ------------------------------------------------------------------------------*/
@@ -110,7 +110,6 @@ void TelnetInit(void)
 //*****************************************************************************
 void TelnetNotifyLinkStatus(bool bLinkStatusUp)
 {
-    // We don't care if the link is up, only if it goes down.
     if(bLinkStatusUp)
     {
         CONSOLE("link status: up, ignore\n");
@@ -119,7 +118,6 @@ void TelnetNotifyLinkStatus(bool bLinkStatusUp)
     {
         CONSOLE("link status: down\n");
 
-        // For every port, indicate that the link has been lost.
         uint8_t u;
         for(u = 0; u < UART_COUNT; u++)
         {
