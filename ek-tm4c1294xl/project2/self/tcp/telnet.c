@@ -5,15 +5,9 @@ TELNET,C
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-#include "utils/lwiplib.h"
 #include "lwip/sys.h"
 #include "../kernel/log.h"
 #include "../kernel/settings.h"
-#include "tcp_errors.h"
-#include "telnet_listen.h"
-#include "telnet_open.h"
-#include "telnet_receive.h"
-#include "telnet_poll.h"
 #include "telnet.h"
 
 

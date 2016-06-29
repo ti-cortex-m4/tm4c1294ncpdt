@@ -18,11 +18,13 @@ typedef enum
   TCP_CONNECT_OPEN = 5,
   TCP_CONNECT_POLL = 6,
   TCP_CLOSE_CONNECTED = 7,
+  TCP_CLOSE_RECEIVE = 8,
+  TCP_CLOSE_CLOSE = 9,
 } tcp_operation_t;
 
 
 
-#define TCP_OPERATIONS  8
+#define TCP_OPERATIONS  10
 
 
 

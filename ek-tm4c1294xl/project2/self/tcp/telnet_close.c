@@ -6,8 +6,8 @@ telnet_close,c
 
 #include "../main.h"
 #include "utils/lwiplib.h"
-//#include "lwip/sys.h"
 #include "../kernel/log.h"
+#include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_close.h"
 
@@ -86,7 +86,7 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
         if (err != ERR_OK)
         {
             WARNING("%u: TelnetCloseServer.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
-            ASSERT(false); // TODO ?
+            ErrorTCPOperation(pState->ucSerialPort, err, TCP_CLOSE_CLOSE);
         }
 
         // Clear out any pbufs associated with this session.
