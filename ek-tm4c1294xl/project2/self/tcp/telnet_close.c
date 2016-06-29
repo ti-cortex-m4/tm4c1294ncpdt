@@ -6,7 +6,7 @@ telnet_close,c
 
 #include "../main.h"
 #include "utils/lwiplib.h"
-#include "lwip/sys.h"
+//#include "lwip/sys.h"
 #include "../kernel/log.h"
 #include "telnet.h"
 #include "telnet_close.h"
