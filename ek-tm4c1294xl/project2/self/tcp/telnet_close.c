@@ -85,7 +85,7 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
         err = tcp_close(pState->pListenPCB);
         if (err != ERR_OK)
         {
-            CONSOLE("%u: ERROR during close server - tcp_close returned %d\n", pState->ucSerialPort, err);
+            WARNING("%u: TelnetCloseServer.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
             ASSERT(false); // TODO ?
         }
 
