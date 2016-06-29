@@ -31,9 +31,7 @@ F=R* F=R restart readonly_values
 
 return ERR_VAL&ERR_ARG CONSOLE_UART
 
-tibbo defaults change_ip
-
-minimise CONSOLE messages sizes
+tibbo change_ip
 
 enet_s2e ISR priorities etc.
 

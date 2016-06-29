@@ -13,7 +13,7 @@ entities_debug.c
 
 const entity enDebugMode = {
   EEPROM_DEBUG_MODE, &ibDebugMode, sizeof(uchar), CHAR, 0,
-  0, 2, 1,
+  0, 2, 0,
   "DBMD",
   "AI=DBMD;D=Debug mode;T=INT;C=STATIC;O=0-No/0/1-UDP/1/2-UART/2",
 };
@@ -36,7 +36,7 @@ const entity enUDPDebugPort = {
 
 const entity enLWIPDebugFlag = {
   EEPROM_LWIP_DEBUG_FLAG, &fLWIPDebugFlag, sizeof(uchar), CHAR, 0,
-  0, 1, 1,
+  0, 1, 0,
   "LWIPDF",
   "AI=LWIPDF;D=TCP/IP stack debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
