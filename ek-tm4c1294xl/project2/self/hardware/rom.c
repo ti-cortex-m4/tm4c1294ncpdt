@@ -51,9 +51,9 @@ uint GetROMBuildNumber(void)
 }
 
 
-timedate GetROMBuildTimeDate(void)
+timedate_t GetROMBuildTimeDate(void)
 {
-  timedate td;
+  timedate_t td;
   td.bSecond = GetRomChar(4);
   td.bMinute = GetRomChar(5);
   td.bHour   = GetRomChar(6);

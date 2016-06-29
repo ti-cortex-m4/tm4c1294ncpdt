@@ -32,9 +32,9 @@ ulong GetClockSeconds(void)
 
 
 
-days_t SecondsToDays(ulong dwSeconds)
+date_t SecondsToDate(ulong dwSeconds)
 {
-  days_t days;
+  date_t days;
 
   days.wDays = dwSeconds / SECONDS_IN_DAY;
   dwSeconds %= SECONDS_IN_DAY;

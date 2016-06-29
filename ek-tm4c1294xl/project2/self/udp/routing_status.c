@@ -11,6 +11,7 @@ routing_status.c
 #include "../kernel/settings.h"
 #include "../uart/io_mode.h"
 #include "../uart/serial.h"
+#include "../tcp/tcp_errors.h"
 #include "../tcp/telnet.h"
 #include "udp_log.h"
 #include "udp_pop.h"
@@ -21,7 +22,7 @@ routing_status.c
 
 
 
-#define ROUTING_STATUS_SIZE  8
+#define ROUTING_STATUS_SIZE  9
 #define ROUTING_DEBUG_SIZE   14
 
 
@@ -29,14 +30,15 @@ static message szSerialPort = "Serial Port";
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
 static message szVariables = "Variables";
 static message szRuntime = "Runtime";
-static message szUptime = "Working time after last restart";
+static message szUptime = "Working time (since last restart)";
 static message szWatchdogReset = "Last restart type (0 - power-up, 1 - watchdog)";
 
 static message szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
 static message szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'>";
 static message szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
 static message szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
-static message szRowClock = "<tr><td>%s</td><td>%u day(s) %02u:%02u:%02u</td></tr>";
+static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
+static message szRowTCPError = "<tr><td>%s</td><td>code %d; counter %u; time %u %02u:%02u:%02u</td></tr>";
 static message szBodyEnd = "</table></body>";
 
 
@@ -67,10 +69,27 @@ bool IsRoutingStatusContent(struct pbuf *p) {
 }
 
 
+
 static void OutUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
-  days_t days = SecondsToDays(GetClockSeconds());
+  date_t days = SecondsToDate(GetClockSeconds());
   OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, szUptime, days.wDays, days.bHours, days.bMinutes, days.bSeconds));
 }
+
+static void OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszOperation, const uchar u, const uchar op) {
+  ASSERT(u < UART_COUNT);
+  ASSERT(op < TCP_OPERATIONS);
+
+  date_t days = SecondsToDate(mdwErrTCPClockSeconds[u][op]);
+
+  OutBuff(pcb,p,addr,port,broadcast,
+      BuffPrintF(szRowTCPError, pcszOperation,
+          mwErrTCPErrors[u][op],
+          mcwErrTCPCounters[u][op],
+          days.wDays, days.bHours, days.bMinutes, days.bSeconds
+      )
+  );
+}
+
 
 
 err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
@@ -116,33 +135,34 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
     case 4: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
     case 5: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mwTxSize", mwTxSize[u])); break;
     case 6: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState)); break;
+    case 7: OutTCPError(pcb,p,addr,port,broadcast,"HANDLER_ERROR",u,0); break;
   }
 
   if (u != UART_COUNT-1) {
     switch (wIdx) {
-      case 7: OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd); break;
+      case 8: OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE) {
       WARNING("routing status: wrong index %u\n", wIdx);
     }
   } else {
     switch (wIdx) {
-      case 7: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szRuntime)); break;
-      case 8: OutUptime(pcb,p,addr,port,broadcast); break;
-      case 9: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset)); break;
-      case 10: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
-      case 11: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrPrintfOverflow", cwErrPrintfOverflow)); break;
-      case 12: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushCharOverflow", cwErrUPDPushCharOverflow)); break;
-      case 13: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow)); break;
-      case 14: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutPbufAlloc", cwErrUPDOutPbufAlloc)); break;
-      case 15: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendUnicast", cwErrUPDOutSendUnicast)); break;
-      case 16: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendBroadcast", cwErrUPDOutSendBroadcast)); break;
-      case 17: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUDPLogPbufAlloc", cwErrUDPLogPbufAlloc)); break;
-      case 18: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUDPLogSend", cwErrUDPLogSend)); break;
-      case 19: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsInitStorage", cwErrSettingsInitStorage)); break;
-      case 20: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsSaveEntity", cwErrSettingsSaveEntity)); break;
-      case 21: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsLoadIP", cwErrSettingsLoadIP)); break;
-      case 22: OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd); break;
+      case 8: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szRuntime)); break;
+      case 9: OutUptime(pcb,p,addr,port,broadcast); break;
+      case 10: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset)); break;
+      case 11: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
+      case 12: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrPrintfOverflow", cwErrPrintfOverflow)); break;
+      case 13: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushCharOverflow", cwErrUPDPushCharOverflow)); break;
+      case 14: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow)); break;
+      case 15: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutPbufAlloc", cwErrUPDOutPbufAlloc)); break;
+      case 16: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendUnicast", cwErrUPDOutSendUnicast)); break;
+      case 17: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDOutSendBroadcast", cwErrUPDOutSendBroadcast)); break;
+      case 18: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUDPLogPbufAlloc", cwErrUDPLogPbufAlloc)); break;
+      case 19: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUDPLogSend", cwErrUDPLogSend)); break;
+      case 20: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsInitStorage", cwErrSettingsInitStorage)); break;
+      case 21: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsSaveEntity", cwErrSettingsSaveEntity)); break;
+      case 22: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsLoadIP", cwErrSettingsLoadIP)); break;
+      case 23: OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd); break;
     }
     if (wIdx >= ROUTING_STATUS_SIZE + ROUTING_DEBUG_SIZE) {
       WARNING("routing status: wrong debug index %u\n", wIdx);

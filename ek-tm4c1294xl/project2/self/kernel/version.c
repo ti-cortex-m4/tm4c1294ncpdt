@@ -13,7 +13,7 @@ version.c
 
 void ConsoleVersion(void)
 {
-  timedate td = GetROMBuildTimeDate();
+  timedate_t td = GetROMBuildTimeDate();
   CONSOLE("version %u.%u.%u.%04x %02u.%02u.%02u %02u:%02u:%02u\n",
     MAJOR_VERSION, MINOR_VERSION,
     GetROMBuildNumber(),

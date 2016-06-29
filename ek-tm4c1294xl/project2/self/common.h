@@ -35,7 +35,16 @@ typedef struct
   uchar         bDay;
   uchar         bMonth;
   uchar         bYear;
-} timedate;
+} timedate_t;
+
+
+typedef struct
+{
+  uint          wDays;
+  uchar         bHours;
+  uchar         bMinutes;
+  uchar         bSeconds;
+} date_t;
 
 
 typedef struct
