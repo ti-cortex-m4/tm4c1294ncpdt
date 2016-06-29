@@ -42,6 +42,7 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
     if(pState->eTCPState != STATE_TCP_CONNECTING)
     {
         // If we already have a connection, kill it and start over.
+        CONSOLE("%u: connected - already connected\n", pState->ucSerialPort);
         return(ERR_CONN);
     }
 
@@ -64,10 +65,8 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
         TelnetFreePbufs(pState);
 
         // Re-open the connection.
-        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-                   /*pState->usTelnetLocalPort,*/ pState->ucSerialPort);
+        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
 
-        // And return.
         return(ERR_OK);
     }
 
@@ -76,9 +75,6 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
 
     // Change TCP state to connected.
     pState->eTCPState = STATE_TCP_CONNECTED;
-
-    // Reset the serial port associated with this session to its default parameters.
-    // TODO SerialSetDefault(pState->ucSerialPort);
 
     // Set the connection timeout to 0.
     pState->ulConnectionTimeout = 0;
