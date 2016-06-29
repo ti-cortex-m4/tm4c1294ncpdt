@@ -1,12 +1,11 @@
 /*------------------------------------------------------------------------------
-telnet_connected.c
+telnet_connected,c
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
 #include "utils/lwiplib.h"
-#include "lwip/sys.h"
 #include "../kernel/log.h"
 #include "tcp_errors.h"
 #include "telnet.h"
@@ -59,7 +58,12 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
         tcp_poll(pcb, NULL, 1);
 
         // Close the TCP connection.
-        tcp_close(pcb);
+        err_t err = tcp_close(pcb);
+        if (err != ERR_OK)
+        {
+           WARNING("%u: TelnetConnected.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
+           ASSERT(false); // TODO ?
+        }
 
         // Clear out any pbufs associated with this session.
         TelnetFreePbufs(pState);

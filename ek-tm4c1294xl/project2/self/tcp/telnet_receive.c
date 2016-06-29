@@ -88,7 +88,7 @@ err_t TelnetReceive(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err)
         err = tcp_close(pcb);
         if (err != ERR_OK)
         {
-           ERROR("%u: TelnetReceive.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
+           WARNING("%u: TelnetReceive.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
            ASSERT(false); // TODO ?
         }
 
