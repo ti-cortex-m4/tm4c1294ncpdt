@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-settings,c
+settings.c
 
 
 ------------------------------------------------------------------------------*/
@@ -93,9 +93,8 @@ static void LoadSettingsDef(void)
 
 static void SaveSettings(void)
 {
-  ulong dw = SETTINGS_LABEL;
-
-  const ulong code = SaveLong(&dw, EEPROM_LABEL);
+  ulong dwLabel = SETTINGS_LABEL;
+  const ulong code = SaveLong(&dwLabel, EEPROM_LABEL);
   if (code != 0)
     cwErrSettingsSaveEntity++;
 
@@ -113,10 +112,10 @@ void InitSettings(void)
   const ulong code = InitStorage();
   if (code == 0)
   {
-    ulong dw = 0;
-    LoadLong(&dw, EEPROM_LABEL);
+    ulong dwLabel = 0;
+    LoadLong(&dwLabel, EEPROM_LABEL);
 
-    if (dw == SETTINGS_LABEL)
+    if (dwLabel == SETTINGS_LABEL)
     {
       LoadSettings();
     }
