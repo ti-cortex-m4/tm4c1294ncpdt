@@ -63,6 +63,7 @@ const uint32_t g_ulIntUART[UART_COUNT] =
     INT_UART1,
 };
 
+// TODO
 volatile uint16_t mwTxSize[UART_COUNT];
 
 
