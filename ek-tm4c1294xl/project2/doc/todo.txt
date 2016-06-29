@@ -16,8 +16,6 @@ SERIAL_FLOW_CONTROL_HW
 pState->eLastErr = err;
 pState->eLastErr = eError;     
 
-hidded MAC programming {ds1.0} 
-
 TelnetWriteDiagInfo
 
 ^.*//\r\n
@@ -66,7 +64,8 @@ typedef struct
   uchar broadcast;
 } udp_arg;
 
-
 err_t eLastErr;
 + last error type
 + time
+
+volatile g_sState
