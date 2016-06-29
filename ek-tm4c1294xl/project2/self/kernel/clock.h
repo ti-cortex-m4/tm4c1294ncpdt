@@ -8,19 +8,10 @@ clock.h
 #define __CLOCK_H__
 
 
-typedef struct
-{
-  uint          wDays;
-  uchar         bHours;
-  uchar         bMinutes;
-  uchar         bSeconds;
-} days_t;
-
-
 void Clock_1Hz(void);
 ulong GetClockSeconds(void);
 
-days_t SecondsToDays(ulong dwSeconds);
+date_t SecondsToDate(ulong dwSeconds);
 
 
 #endif
