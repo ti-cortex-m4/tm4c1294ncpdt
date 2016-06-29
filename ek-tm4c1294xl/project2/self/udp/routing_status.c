@@ -68,15 +68,8 @@ bool IsRoutingStatusContent(struct pbuf *p) {
 
 
 static void OutUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
-  ulong dwSeconds = GetClockSeconds();
-  uint wDays = dwSeconds / SECONDS_IN_DAY;
-  dwSeconds %= SECONDS_IN_DAY;
-  uchar bHours = dwSeconds / SECONDS_IN_HOUR;
-  dwSeconds %= SECONDS_IN_HOUR;
-  uchar bMinutes = dwSeconds / SECONDS_IN_MINUTE;
-  dwSeconds %= SECONDS_IN_MINUTE;
-
-  OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, szUptime, wDays, bHours, bMinutes, dwSeconds));
+  days_t days = SecondsToDays(GetClockSeconds());
+  OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, szUptime, days.wDays, days.bHours, days.bMinutes, days.bSeconds));
 }
 
 
