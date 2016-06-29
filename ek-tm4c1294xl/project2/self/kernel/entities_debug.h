@@ -9,8 +9,8 @@ extern const entity enDebugMode;
 extern const entity enUDPDebugIP;
 extern const entity enUDPDebugPort;
 
-extern const entity enLwipDebugFlag;
-extern const entity enLwipDebugTimeout;
+extern const entity enLWIPDebugFlag;
+extern const entity enLWIPDebugTimeout;
 
 extern const entity enDataDebugFlag;
 extern const entity enIOModeDebugFlag;

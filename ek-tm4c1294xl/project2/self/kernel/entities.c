@@ -86,8 +86,8 @@ const entity * const mpenEntities[] =
   &enUDPDebugIP,
   &enUDPDebugPort,
 
-  &enLwipDebugFlag,
-  &enLwipDebugTimeout,
+  &enLWIPDebugFlag,
+  &enLWIPDebugTimeout,
 
   &enDataDebugFlag,
   &enIOModeDebugFlag,

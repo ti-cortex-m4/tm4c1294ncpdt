@@ -34,15 +34,15 @@ const entity enUDPDebugPort = {
 };
 
 
-const entity enLwipDebugFlag = {
-  EEPROM_LWIP_DEBUG_FLAG, &fLwipDebugFlag, sizeof(uchar), CHAR, 0,
+const entity enLWIPDebugFlag = {
+  EEPROM_LWIP_DEBUG_FLAG, &fLWIPDebugFlag, sizeof(uchar), CHAR, 0,
   0, 1, 1,
   "LWIPDF",
   "AI=LWIPDF;D=TCP/IP stack debug;T=INT;C=STATIC;O=0-No/0/1-Yes/1",
 };
 
-const entity enLwipDebugTimeout = {
-  EEPROM_LWIP_DEBUG_TIMEOUT, &wLwipDebugTimeout, sizeof(uint), INT, 0,
+const entity enLWIPDebugTimeout = {
+  EEPROM_LWIP_DEBUG_TIMEOUT, &wLWIPDebugTimeout, sizeof(uint), INT, 0,
   0, 3600, 300,
   "LWIPDT",
   "AI=LWIPDT;E=1;D=TCP/IP stack debug period (seconds);T=INT;C=EDIT;V=LWIPDT>3600?\"Maximum timeout is 3600 seconds\":\"\";S=LWIPDF!=0?\"e\":\"i\"",
