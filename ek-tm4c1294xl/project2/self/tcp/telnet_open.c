@@ -11,6 +11,7 @@ telnet_open.c
 #include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_poll.h"
+#include "telnet_connected.h"
 #include "telnet_open.h"
 
 

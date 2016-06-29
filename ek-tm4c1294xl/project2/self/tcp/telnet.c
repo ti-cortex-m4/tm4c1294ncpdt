@@ -25,8 +25,10 @@ tState g_sState[UART_COUNT];
 
 
 
+//*****************************************************************************
 //! The timeout for the TCP connection used for the telnet session, specified in seconds.
 //! A value of 0 indicates no timeout is to be used.
+//*****************************************************************************
 ulong getTelnetTimeout(uchar u)
 {
   ASSERT(u < UART_COUNT);
@@ -97,16 +99,13 @@ void TelnetError(void *arg, err_t err)
     if(pState->pListenPCB == NULL)
     {
         // Attempt to reestablish the telnet connection to the server.
-        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-                   /*pState->usTelnetLocalPort,*/ pState->ucSerialPort);
+        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
     }
     else
     {
         // Reinitialize the server state to wait for incoming connections.
         pState->pConnectPCB = NULL;
         pState->eTCPState = STATE_TCP_LISTEN;
-//        pState->eTelnetState = STATE_NORMAL;
-//        pState->ucFlags = ((1 << OPT_FLAG_WILL_SUPPRESS_GA) | (1 << OPT_FLAG_SERVER));
         pState->ulConnectionTimeout = 0;
         pState->iBufQRead = 0;
         pState->iBufQWrite = 0;
@@ -134,107 +133,10 @@ err_t TelnetSent(void *arg, struct tcp_pcb *pcb, u16_t len)
 {
     tState *pState = arg;
 
-#if 0
     CONSOLE("%u: sent 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, len);
-#else
-    CONSOLE("%u: sent size=%d\n", pState->ucSerialPort, len);
-#endif
 
     // Reset the connection timeout.
     pState->ulConnectionTimeout = 0;
-
-    return(ERR_OK);
-}
-
-//*****************************************************************************
-//! Finalizes the TCP connection in client mode.
-//!
-//! \param arg is the telnet state data for this connection.
-//! \param pcb is the pointer to the TCP control structure.
-//! \param err is not used in this implementation.
-//!
-//! This function is called when the lwIP TCP/IP stack has completed a TCP
-//! connection.
-//!
-//! \return This function will return an lwIP defined error code.
-//*****************************************************************************
-err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
-{
-    tState *pState = arg;
-
-    CONSOLE("%u: connected 0x%08x, 0x%08x, %d\n", pState->ucSerialPort, arg, pcb, err);
-
-    // Increment our connection counter.
-    pState->ucConnectCount++;
-
-    // If we are not in the listening state, refuse this connection.
-    if(pState->eTCPState != STATE_TCP_CONNECTING)
-    {
-        // If we already have a connection, kill it and start over.
-        return(ERR_CONN);
-    }
-
-    if(err != ERR_OK)
-    {
-        ERROR("%u: connected error=%d\n", pState->ucSerialPort, err);
-        ErrorTCPOperation(pState->ucSerialPort, err, HANDLER_CONNECTED);
-
-        // Clear out all of the TCP callbacks.
-        tcp_arg(pcb, NULL);
-        tcp_sent(pcb, NULL);
-        tcp_recv(pcb, NULL);
-        tcp_err(pcb, NULL);
-        tcp_poll(pcb, NULL, 1);
-
-        // Close the TCP connection.
-        tcp_close(pcb);
-
-        // Clear out any pbufs associated with this session.
-        TelnetFreePbufs(pState);
-
-        // Re-open the connection.
-        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort,
-                   /*pState->usTelnetLocalPort,*/ pState->ucSerialPort);
-
-        // And return.
-        return(ERR_OK);
-    }
-
-    // Save the PCB for future reference.
-    pState->pConnectPCB = pcb;
-
-    // Change TCP state to connected.
-    pState->eTCPState = STATE_TCP_CONNECTED;
-
-    // Reset the serial port associated with this session to its default parameters.
-    // TODO SerialSetDefault(pState->ucSerialPort);
-
-    // Set the connection timeout to 0.
-    pState->ulConnectionTimeout = 0;
-
-    // Setup the TCP connection priority.
-    tcp_setprio(pcb, TCP_PRIO_MIN);
-
-    // Setup the TCP receive function.
-    tcp_recv(pcb, TelnetReceive);
-
-    // Setup the TCP error function.
-    tcp_err(pcb, TelnetError);
-
-    // Setup the TCP polling function/interval.
-    tcp_poll(pcb, TelnetPoll, (1000 / TCP_SLOW_INTERVAL));
-
-    // Setup the TCP sent callback function.
-    tcp_sent(pcb, TelnetSent);
-
-#ifdef PROTOCOL_TELNET
-    // Send the telnet initialization string.
-    if((g_sParameters.sPort[pState->ucSerialPort].ucFlags & PORT_FLAG_PROTOCOL) == PORT_PROTOCOL_TELNET)
-    {
-        tcp_write(pcb, g_pucTelnetInit, sizeof(g_pucTelnetInit), 1);
-        tcp_output(pcb);
-    }
-#endif
 
     return(ERR_OK);
 }
@@ -294,10 +196,10 @@ void TelnetNotifyLinkStatus(bool bLinkStatusUp)
         CONSOLE("link status: down\n");
 
         // For every port, indicate that the link has been lost.
-        uint8_t ucSerialPort;
-        for(ucSerialPort = 0; ucSerialPort < UART_COUNT; ucSerialPort++)
+        uint8_t u;
+        for(u = 0; u < UART_COUNT; u++)
         {
-            g_sState[ucSerialPort].bLinkLost = true;
+            g_sState[u].bLinkLost = true;
         }
     }
 }

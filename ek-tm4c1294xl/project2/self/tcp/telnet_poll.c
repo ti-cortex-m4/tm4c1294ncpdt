@@ -10,6 +10,7 @@ telnet_poll,c
 #include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_close.h"
+#include "telnet_connected.h"
 #include "telnet_poll.h"
 
 
