@@ -108,12 +108,12 @@ static void SerialUARTIntHandler(uint8_t ucPort)
             // Write the next character into the transmit FIFO.
             UARTCharPut(g_ulUARTBase[ucPort], ucChar);
 
-            mwTxSize[ucPort]--;
+            mcwUARTTxOut[ucPort]--;
         }
 
         if((ulStatus & UART_INT_TX) != 0)
         {
-          if (mwTxSize[ucPort] == 0)
+          if (mcwUARTTxOut[ucPort] == 0)
             InMode(ucPort);
         }
     }
