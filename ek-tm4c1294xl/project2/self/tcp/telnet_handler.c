@@ -128,7 +128,7 @@ void TelnetHandler(void)
                     pState->pBufCurrent = pState->pBufHead;
                     pState->ulBufIndex = 0;
 
-                    mwTxSize[u] += pState->pBufCurrent->len;
+                    mcwUARTTxOut[u] += pState->pBufCurrent->len;
                     SYS_ARCH_UNPROTECT(lev);
                 }
             }

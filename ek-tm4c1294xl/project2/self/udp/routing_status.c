@@ -133,7 +133,7 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
     case 2: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szSerialPort)); break;
     case 3: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szIOMode, GetIOMode(u))); break;
     case 4: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables)); break;
-    case 5: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mwTxSize", mwTxSize[u])); break;
+    case 5: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mwTxSize", mcwUARTTxOut[u])); break;
     case 6: OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState)); break;
     case 7: OutTCPError(pcb,p,addr,port,broadcast,"HANDLER_ERROR",u,0); break;
     case 8: OutTCPError(pcb,p,addr,port,broadcast,"HANDLER_CONNECTED",u,1); break;

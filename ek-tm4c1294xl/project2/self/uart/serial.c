@@ -63,8 +63,7 @@ const uint32_t g_ulIntUART[UART_COUNT] =
     INT_UART1,
 };
 
-// TODO
-volatile uint16_t mwTxSize[UART_COUNT];
+volatile uint16_t mcwUARTTxOut[UART_COUNT];
 
 
 
@@ -1041,7 +1040,7 @@ SerialInit(void)
     {
         RingBufInit(&g_sRxBuf[u], mmbRxBuf[u], sizeof(mmbRxBuf[u]));
         RingBufInit(&g_sTxBuf[u], mmbTxBuf[u], sizeof(mmbTxBuf[u]));
-        mwTxSize[u] = 0;
+        mcwUARTTxOut[u] = 0;
     }
 
 #if false
