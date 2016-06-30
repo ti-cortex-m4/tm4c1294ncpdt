@@ -1031,7 +1031,7 @@ SerialSetFactory(uint32_t ulPort)
 void
 SerialInit(void)
 {
-    uchar u;
+    uint8_t u;
     for(u = 0; u < UART_COUNT; u++)
     {
         RingBufInit(&g_sRxBuf[u], mmbRxBuf[u], sizeof(mmbRxBuf[u]));
