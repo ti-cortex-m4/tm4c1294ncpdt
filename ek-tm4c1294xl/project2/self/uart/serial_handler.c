@@ -10,6 +10,7 @@ serial_handler.c
 #include "../kernel/log.h"
 #include "io_mode.h"
 #include "serial.h"
+#include "modem.h"
 #include "serial_handler.h"
 
 
@@ -73,7 +74,10 @@ static void SerialUARTIntHandler(uint8_t ucPort)
                 if (fDataDebugFlag)
                   CONSOLE("%u: from UART %02X\n", ucPort, ucChar);
 
-                RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
+                if (IsModemCommandMode(ucPort))
+                  ProcessModemCommandMode(ucPort, ucChar);
+                else
+                  RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
             }
         }
     }

@@ -13,6 +13,7 @@ tasks.c
 #include "../tcp/telnet_open.h"
 #include "../uart/serial.h"
 #include "../uart/serial_receive.h"
+#include "../uart/modem.h"
 #include "entities.h"
 #include "version.h"
 #include "tasks.h"
@@ -104,8 +105,12 @@ void RunConnections(void)
       }
       else
       {
-        CONSOLE("%u: ERROR connection mode %u", u, mbConnectionMode[u]);
+        ERROR("%u: wrong connection mode %u", u, mbConnectionMode[u]);
       }
+    }
+    else if (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM)
+    {
+      RunModem(u);
     }
   }
 }
