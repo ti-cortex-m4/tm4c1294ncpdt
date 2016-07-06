@@ -22,6 +22,8 @@ static volatile bool    mfModemDataMode[UART_COUNT];
 static volatile uchar   mmbModemBuf[UART_COUNT][MODEM_BUF_SIZE];
 static volatile uchar   mibModemBuf[UART_COUNT];
 
+static uchar            mibPop[UART_COUNT];
+
 
 
 void InitModem(void)
@@ -36,13 +38,13 @@ void InitModem(void)
 
 
 
-bool IsModemCommandMode(const char u)
+bool IsModemCommandMode(const uchar u)
 {
   return (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mfModemDataMode[u] == false);
 }
 
 
-void ProcessModemCommandMode(const char u, const char b)
+void ProcessModemCommandMode(const uchar u, const char b)
 {
   if (mibModemBuf[u] >= MODEM_BUF_SIZE)
     mibModemBuf[u] = 0;
@@ -53,7 +55,7 @@ void ProcessModemCommandMode(const char u, const char b)
 
 
 
-bool IsModemCmd(const char u, const char *pcszCmd)
+bool IsModemCmd(const uchar u, const char *pcszCmd)
 {
   uchar i = 0;
   while (*pcszCmd)
@@ -70,7 +72,7 @@ bool IsModemCmd(const char u, const char *pcszCmd)
 }
 
 
-bool IsModemCmdPrefix(const char u, const char *pcszCmd)
+bool IsModemCmdPrefix(const uchar u, const char *pcszCmd)
 {
   uchar i = 0;
   while (*pcszCmd)
@@ -83,16 +85,36 @@ bool IsModemCmdPrefix(const char u, const char *pcszCmd)
 }
 
 
-void ModemOut(const char u, const char b)
+void ModemOut(const uchar u, const char b)
 {
   SerialSend(u, b);
 }
 
 
-void ModemConnect(const char u, const char b)
+void InitPop(const uchar u, const uchar i)
 {
-  ulong dwIP = 0;
-  uint wPort = 0;
+  mibPop[u] = i;
+}
+
+
+void ModemConnect(const uchar u, const char b)
+{
+  if (PopSize(u) != 4 + 4*3 + 5)
+  {
+    ModemOut(u, 4);
+    return;
+  }
+
+  InitPop(u, 4);
+
+  combo32 cmIP;
+  cmIP.mb4[0] = PopChar(u);
+  cmIP.mb4[1] = PopChar(u);
+  cmIP.mb4[2] = PopChar(u);
+  cmIP.mb4[3] = PopChar(u);
+
+  ulong dwIP = cmIP.dw;
+  uint wPort = PopInt(u);
 
   CONSOLE("%u: connect as modem to %u.%u.%u.%u port %u\n",
     u,
@@ -103,7 +125,7 @@ void ModemConnect(const char u, const char b)
 }
 
 
-void RunModem(const char u)
+void RunModem(const uchar u)
 {
   if (mfModemDataMode[u] == false)
   {
