@@ -9,6 +9,7 @@ modem.c
 #include "../kernel/log.h"
 #include "../kernel/wrappers.h"
 #include "../tcp/telnet_open.h"
+#include "../tcp/telnet_close.h"
 #include "../uart/serial_send.h"
 #include "modem.h"
 
@@ -114,7 +115,10 @@ static uchar PopChar(const uchar u)
 
 static uchar2 PopCharDec(const uchar u)
 {
-  uint w = (uint)PopChar(u)*100 + PopChar(u)*10 + PopChar(u);
+  uint w = (uint)PopChar(u)*100;
+  w += PopChar(u)*10;
+  w += PopChar(u);
+
   if (w < MAX_CHAR)
     return GetChar2Error();
   else
@@ -122,9 +126,32 @@ static uchar2 PopCharDec(const uchar u)
 }
 
 
+static ulong2 PopIPDec(const uchar u)
+{
+  combo32 cm;
+
+  uchar i;
+  for (i=0; i<4; i++)
+  {
+    uchar2 b2 = PopCharDec(u);
+    if (InvalidChar2(b2))
+      return GetLong2Error();
+
+    cm.mb4[i] = b2.b;
+  }
+
+  return GetLong2Success(cm.dw);
+}
+
+
 static uint2 PopIntDec(const uchar u)
 {
-  ulong dw = (ulong)PopChar(u)*10000 + PopChar(u)*1000 + PopChar(u)*100 + PopChar(u)*10 + PopChar(u);
+  ulong dw = (ulong)PopChar(u)*10000;
+  dw += PopChar(u)*1000;
+  dw += PopChar(u)*100;
+  dw += PopChar(u)*10;
+  dw += PopChar(u);
+
   if (dw < MAX_INT)
     return GetInt2Error();
   else
@@ -141,19 +168,12 @@ void ModemConnect(const uchar u)
 
   InitPop(u, 4);
 
-  combo32 cmIP;
-
-  uchar i;
-  for (i=0; i<4; i++) {
-    uchar2 b2 = PopCharDec(u);
-    if (InvalidChar2(b2)) {
-      ModemOut(u, 4);
-      return;
-    }
-    cmIP.mb4[i] = b2.b;
+  ulong2 dw2 = PopIPDec(u);
+  if (InvalidLong2(dw2)) {
+    ModemOut(u, 4);
+    return;
   }
-
-  ulong dwIP = cmIP.dw;
+  ulong dwIP = dw2.dw;
 
   uint2 w2 = PopIntDec(u);
   if (InvalidInt2(w2)) {
@@ -162,12 +182,12 @@ void ModemConnect(const uchar u)
   }
   uint wPort = w2.w;
 
-//  if ((b == '\r') || (b == '\n'))
+//  TODO if ((b == '\r') || (b == '\n'))
 
   CONSOLE("%u: connect as modem to %u.%u.%u.%u port %u\n",
     u,
     (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
-	wPort);
+    wPort);
 
   TelnetOpen(dwIP, wPort, u);
 }
@@ -175,6 +195,11 @@ void ModemConnect(const uchar u)
 
 void ModemDisconnect(const uchar u)
 {
+  CONSOLE("%u: disconnect as modem\n", u);
+
+  // TODO check status
+  TelnetCloseClient(u);
+  // TODO check result
 }
 
 
