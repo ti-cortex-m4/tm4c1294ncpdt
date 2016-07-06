@@ -12,6 +12,7 @@ typedef enum
 {
   ROUTING_MODE_SERVER = 0,
   ROUTING_MODE_CLIENT = 1,
+  ROUTING_MODE_CLIENT_MODEM = 2,
 } routingMode;
 
 

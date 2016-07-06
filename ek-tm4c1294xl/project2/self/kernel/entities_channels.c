@@ -51,35 +51,35 @@ const entity enRoutingMode0 = {
   EEPROM_ROUTING_MODE_0, &mbRoutingMode[0], sizeof(uchar), CHAR, 0,
   0, 1, ROUTING_MODE_DEFAULT,
   "RM@0",
-  "AI=RM@0;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@0;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Client modem/2",
 };
 
 const entity enRoutingMode1 = {
   EEPROM_ROUTING_MODE_1, &mbRoutingMode[1], sizeof(uchar), CHAR, 0,
   0, 1, ROUTING_MODE_DEFAULT,
   "RM@1",
-  "AI=RM@1;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@1;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Client modem/2",
 };
 
 const entity enRoutingMode2 = {
   EEPROM_ROUTING_MODE_2, &mbRoutingMode[2], sizeof(uchar), CHAR, 0,
   0, 1, ROUTING_MODE_DEFAULT,
   "RM@2",
-  "AI=RM@2;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@2;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Client modem/2",
 };
 
 const entity enRoutingMode3 = {
   EEPROM_ROUTING_MODE_3, &mbRoutingMode[3], sizeof(uchar), CHAR, 0,
   0, 1, ROUTING_MODE_DEFAULT,
   "RM@3",
-  "AI=RM@3;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@3;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Client modem/2",
 };
 
 const entity enRoutingMode4 = {
   EEPROM_ROUTING_MODE_4, &mbRoutingMode[4], sizeof(uchar), CHAR, 0,
   0, 1, ROUTING_MODE_DEFAULT,
   "RM@4",
-  "AI=RM@4;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@4;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Client modem/2",
 };
 
 
