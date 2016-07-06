@@ -7,9 +7,9 @@ modem.c
 #include "../main.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
-#include "../kernel/log.h"
+#include "../kernel/wrappers.h"
 #include "../tcp/telnet_open.h"
-#include "serial_send.h"
+#include "../uart/serial_send.h"
 #include "modem.h"
 
 
@@ -44,7 +44,7 @@ bool IsModemCommandMode(const uchar u)
 }
 
 
-void ProcessModemCommandMode(const uchar u, const char b)
+void ProcessModemCommandMode(const uchar u, const uchar b)
 {
   if (mibModemBuf[u] >= MODEM_BUF_SIZE)
     mibModemBuf[u] = 0;
@@ -55,7 +55,7 @@ void ProcessModemCommandMode(const uchar u, const char b)
 
 
 
-bool IsModemCmd(const uchar u, const char *pcszCmd)
+bool IsModemCmd(const uchar u, const uchar *pcszCmd)
 {
   uchar i = 0;
   while (*pcszCmd)
@@ -72,7 +72,7 @@ bool IsModemCmd(const uchar u, const char *pcszCmd)
 }
 
 
-bool IsModemCmdPrefix(const uchar u, const char *pcszCmd)
+bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
 {
   uchar i = 0;
   while (*pcszCmd)
@@ -85,22 +85,56 @@ bool IsModemCmdPrefix(const uchar u, const char *pcszCmd)
 }
 
 
-void ModemOut(const uchar u, const char b)
+void ModemOut(const uchar u, const uchar b)
 {
   SerialSend(u, b);
 }
 
 
-void InitPop(const uchar u, const uchar i)
+
+static uchar PopSize(const uchar u)
+{
+  return mibModemBuf[u];
+}
+
+
+static void InitPop(const uchar u, const uchar i)
 {
   mibPop[u] = i;
 }
 
 
-void ModemConnect(const uchar u, const char b)
+static uchar PopChar(const uchar u)
 {
-  if (PopSize(u) != 4 + 4*3 + 5)
-  {
+  uchar b = mmbModemBuf[u][ mibPop[u] ];
+  mibPop[u]++;
+  return b;
+}
+
+
+static uchar2 PopCharDec(const uchar u)
+{
+  uint w = (uint)PopChar(u)*100 + PopChar(u)*10 + PopChar(u);
+  if (w < MAX_CHAR)
+    return GetChar2Error();
+  else
+    return GetChar2Success(w);
+}
+
+
+static uint2 PopIntDec(const uchar u)
+{
+  ulong dw = (ulong)PopChar(u)*10000 + PopChar(u)*1000 + PopChar(u)*100 + PopChar(u)*10 + PopChar(u);
+  if (dw < MAX_INT)
+    return GetInt2Error();
+  else
+    return GetInt2Success(dw);
+}
+
+
+void ModemConnect(const uchar u)
+{
+  if (PopSize(u) != 4 + 4*3 + 5) {
     ModemOut(u, 4);
     return;
   }
@@ -108,13 +142,27 @@ void ModemConnect(const uchar u, const char b)
   InitPop(u, 4);
 
   combo32 cmIP;
-  cmIP.mb4[0] = PopChar(u);
-  cmIP.mb4[1] = PopChar(u);
-  cmIP.mb4[2] = PopChar(u);
-  cmIP.mb4[3] = PopChar(u);
+
+  uchar i;
+  for (i=0; i<4; i++) {
+    uchar2 b2 = PopCharDec(u);
+    if (InvalidChar2(b2)) {
+      ModemOut(u, 4);
+      return;
+    }
+    cmIP.mb4[i] = b2.b;
+  }
 
   ulong dwIP = cmIP.dw;
-  uint wPort = PopInt(u);
+
+  uint2 w2 = PopIntDec(u);
+  if (InvalidInt2(w2)) {
+    ModemOut(u, 4);
+    return;
+  }
+  uint wPort = w2.w;
+
+//  if ((b == '\r') || (b == '\n'))
 
   CONSOLE("%u: connect as modem to %u.%u.%u.%u port %u\n",
     u,
@@ -122,6 +170,11 @@ void ModemConnect(const uchar u, const char b)
 	wPort);
 
   TelnetOpen(dwIP, wPort, u);
+}
+
+
+void ModemDisconnect(const uchar u)
+{
 }
 
 
