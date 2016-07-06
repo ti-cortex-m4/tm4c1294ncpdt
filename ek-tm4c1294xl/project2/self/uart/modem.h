@@ -6,7 +6,7 @@ modem.h
 
 void InitModem(void);
 
-bool IsModemCommandMode(const char u);
-void ProcessModemCommandMode(const char u, const char b);
+bool IsModemCommandMode(const uchar u);
+void ProcessModemCommandMode(const uchar u, const uchar b);
 
-void RunModem(const char u);
+void RunModem(const uchar u);
