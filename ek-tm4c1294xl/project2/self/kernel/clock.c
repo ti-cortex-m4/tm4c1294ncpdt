@@ -19,9 +19,14 @@ static volatile ulong dwClockSeconds = 0;
 
 
 
-void Clock_1Hz(void)
+void Clock_10Hz(void)
 {
-  dwClockSeconds++;
+  static uchar i;
+  if (++i >= 10)
+  {
+    i = 0;
+    dwClockSeconds++;
+  }
 }
 
 

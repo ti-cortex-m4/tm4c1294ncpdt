@@ -77,7 +77,10 @@ static void SerialUARTIntHandler(uint8_t ucPort)
                 if (IsModemModeCommand(ucPort))
                   ProcessModemModeCommand(ucPort, ucChar);
                 else
+                {
+                  ProcessModemModeData(ucPort, ucChar);
                   RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
+                }
             }
         }
     }
