@@ -5,10 +5,10 @@ udp_in.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../hardware/restart.h"
 #include "../kernel/controls.h"
 #include "../kernel/log.h"
 #include "../kernel/settings.h"
-#include "driverlib/sysctl.h"
 #include "echo.h"
 #include "buzz.h"
 #include "udp_pop.h"
@@ -32,7 +32,7 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   } else if (IsCmd(p,"W")) {
     OutStringZ(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"E")) {
-    SysCtlReset();
+    Restart();
   } else if (IsCmd(p,"L")) {
     OutStringZ(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"I")) {

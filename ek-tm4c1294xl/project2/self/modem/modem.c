@@ -5,6 +5,7 @@ modem.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../hardware/restart.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "../kernel/wrappers.h"
@@ -291,6 +292,8 @@ void RunModem(const uchar u)
 {
   if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
   {
+    if (IsModemCmd(u, "ATRESTART"))
+      Restart();
     if (IsModemCmd(u, "AT"))
       ModemOut(u, 0); // TODO
     else if (IsModemCmdPrefix(u, "ATDP"))
