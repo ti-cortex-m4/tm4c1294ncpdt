@@ -91,6 +91,48 @@ void ProcessModemModeCommand(const uchar u, const uchar b)
 }
 
 
+void ProcessModemModeData(const uchar u, const uchar b)
+{
+  mbEscapeCnt[u] = 0;
+
+  if ((mbEscapeMode[u] == ESCAPE_MODE_PAUSE_BEFORE) && (b == '+'))
+  {
+    mbEscapeMode[u] == ESCAPE_MODE_PLUS_1;
+  }
+  else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_1) && (b == '+'))
+  {
+    mbEscapeMode[u] == ESCAPE_MODE_PLUS_2;
+  }
+  else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_2) && (b == '+'))
+  {
+    mbEscapeMode[u] == ESCAPE_MODE_PLUS_3;
+  }
+  else
+  {
+    mbEscapeMode[u] = ESCAPE_MODE_DATA;
+  }
+}
+
+
+void Modem_10Hz(void)
+{
+  uchar u;
+  for (u=0; u<UART_COUNT; u++)
+  {
+     if (mbEscapeMode[u] == ESCAPE_MODE_DATA)
+     {
+       if (++mbEscapeCnt[u] > 10)
+         mbEscapeMode[u] = ESCAPE_MODE_PAUSE_BEFORE;
+     }
+     else if (mbEscapeMode[u] == ESCAPE_MODE_PLUS_3)
+     {
+       if (++mbEscapeCnt[u] > 10)
+         mbEscapeMode[u] = ESCAPE_MODE_PAUSE_AFTER;
+     }
+  }
+}
+
+
 
 bool IsModemCmd(const uchar u, const uchar *pcszCmd)
 {
@@ -300,47 +342,6 @@ void RunModem(const uchar u)
 }
 
 
-
-void Modem_10Hz(void)
-{
-  uchar u;
-  for (u=0; u<UART_COUNT; u++)
-  {
-     if (mbEscapeMode[u] == ESCAPE_MODE_DATA)
-     {
-       if (++mbEscapeCnt[u] > 10)
-         mbEscapeMode[u] = ESCAPE_MODE_PAUSE_BEFORE;
-     }
-     else if (mbEscapeMode[u] == ESCAPE_MODE_PLUS_3)
-     {
-       if (++mbEscapeCnt[u] > 10)
-         mbEscapeMode[u] = ESCAPE_MODE_PAUSE_AFTER;
-     }
-  }
-}
-
-
-void ProcessModemModeData(const uchar u, const uchar b)
-{
-  mbEscapeCnt[u] = 0;
-
-  if ((mbEscapeMode[u] == ESCAPE_MODE_PAUSE_BEFORE) && (b == '+'))
-  {
-    mbEscapeMode[u] == ESCAPE_MODE_PLUS_1;
-  }
-  else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_1) && (b == '+'))
-  {
-    mbEscapeMode[u] == ESCAPE_MODE_PLUS_2;
-  }
-  else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_2) && (b == '+'))
-  {
-    mbEscapeMode[u] == ESCAPE_MODE_PLUS_3;
-  }
-  else
-  {
-    mbEscapeMode[u] = ESCAPE_MODE_DATA;
-  }
-}
 
 // локальный порт недоступен
 // удаленный порт недоступен
