@@ -29,9 +29,8 @@ volatile escape_mode_t  mbEscapeMode[UART_COUNT];
 #define MODEM_BUF_SIZE  32
 
 static volatile uchar   mmbModemBuf[UART_COUNT][MODEM_BUF_SIZE];
-static volatile uchar   mibModemPtr[UART_COUNT];
-
-static uchar            mibPop[UART_COUNT];
+static volatile uchar   mibPush[UART_COUNT];
+static volatile uchar   mibPop[UART_COUNT];
 
 
 
@@ -74,16 +73,16 @@ void ProcessModemModeCommand(const uchar u, const uchar b)
   if (mbInputMode[u] == INPUT_MODE_BEGIN)
   {
     mbInputMode[u] == INPUT_MODE_DATA;
-    mibModemPtr[u] = 0;
+    mibPush[u] = 0;
   }
 
   if (mbInputMode[u] == INPUT_MODE_DATA)
   {
-    if (mibModemPtr[u] >= MODEM_BUF_SIZE)
-      mibModemPtr[u] = 0;
+    if (mibPush[u] >= MODEM_BUF_SIZE)
+      mibPush[u] = 0;
 
-    mmbModemBuf[u][ mibModemPtr[u] ] = b;
-    mibModemPtr[u]++;
+    mmbModemBuf[u][ mibPush[u] ] = b;
+    mibPush[u]++;
 
     if (IsEOL(b))
       mbInputMode[u] = INPUT_MODE_READY;
@@ -139,7 +138,7 @@ bool IsModemCmd(const uchar u, const uchar *pcszCmd)
   uchar i = 0;
   while (*pcszCmd)
   {
-    if (i >= mibModemPtr[u])
+    if (i >= mibPush[u])
       return false;
 
     if (_toupper(mmbModemBuf[u][i++]) != _toupper(*pcszCmd++))
@@ -155,7 +154,7 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
   uchar i = 0;
   while (*pcszCmd)
   {
-    if (i >= mibModemPtr[u])
+    if (i >= mibPush[u])
       return false;
 
     if (_toupper(mmbModemBuf[u][i++]) != _toupper(*pcszCmd++))
