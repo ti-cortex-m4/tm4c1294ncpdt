@@ -241,20 +241,20 @@ void ModemConnect(const uchar u)
 
   ulong2 dw2 = PopIPDec(u);
   if (InvalidLong2(dw2)) {
-    ModemOut(u, 4);
+    ModemOut(u, 4); // TODO
     return;
   }
   ulong dwIP = dw2.dw;
 
   uint2 w2 = PopIntDec(u);
   if (InvalidInt2(w2)) {
-    ModemOut(u, 4);
+    ModemOut(u, 4); // TODO
     return;
   }
   uint wPort = w2.w;
 
   if (!IsEOL(PopChar(u))) {
-    ModemOut(u, 4);
+    ModemOut(u, 4); // TODO
     return;
   }
 
@@ -269,10 +269,10 @@ void ModemConnect(const uchar u)
 
 void ModemConnected(const uchar u)
 {
-  if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND))
+  if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND)) // ???
   {
     mbModemMode[u] = MODEM_MODE_DATA;
-    ModemOut(u, 1);
+    ModemOut(u, 1); // TODO
   }
 }
 
@@ -292,13 +292,16 @@ void RunModem(const uchar u)
   if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
   {
     if (IsModemCmd(u, "AT"))
-      ModemOut(u, 0);
+      ModemOut(u, 0); // TODO
     else if (IsModemCmdPrefix(u, "ATDP"))
       ModemConnect(u);
     else if (IsModemCmd(u, "ATH0"))
       ModemDisconnect(u);
     else
+    {
       WARNING("RunModem: unknown command\n");
+      ModemOut(u, 4);
+    }
 
     mbInputMode[u] == INPUT_MODE_BEGIN;
   }
@@ -308,7 +311,8 @@ void RunModem(const uchar u)
     if (mbEscapeMode[u] == ESCAPE_MODE_PAUSE_AFTER)
     {
       mbModemMode[u] = MODEM_MODE_COMMAND;
-      ModemOut(u, 0);
+      ModemOut(u, 0); // TODO
+      mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
     }
   }
 }
@@ -355,3 +359,7 @@ void ProcessModemModeData(const uchar u, const uchar b)
     mbEscapeMode[u] = ESCAPE_MODE_DATA;
   }
 }
+
+// локальный порт недоступен
+// удаленный порт недоступен
+// ATH0 в неправильном режиме
