@@ -49,17 +49,25 @@ void InitModem(void)
 
 
 
-bool IsEOL(const uchar b)
+static bool IsEOL(const uchar b)
 {
   return (b == '\r') || (b == '\n');
 }
 
 
-bool IsNumber(const uchar b)
+static bool IsNumber(const uchar b)
 {
   return (b >= '0') || (b <= '9');
 }
 
+
+uchar ToUpper(const uchar b)
+{
+  if ((b >= 'a') && (b <= 'z'))
+    return 'A' + (b - 'a');
+  else
+    return b;
+}
 
 
 bool IsModemModeCommand(const uchar u)
@@ -95,21 +103,13 @@ void ProcessModemModeData(const uchar u, const uchar b)
   mbEscapeCnt[u] = 0;
 
   if ((mbEscapeMode[u] == ESCAPE_MODE_PAUSE_BEFORE) && (b == '+'))
-  {
     mbEscapeMode[u] == ESCAPE_MODE_PLUS_1;
-  }
   else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_1) && (b == '+'))
-  {
     mbEscapeMode[u] == ESCAPE_MODE_PLUS_2;
-  }
   else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_2) && (b == '+'))
-  {
     mbEscapeMode[u] == ESCAPE_MODE_PLUS_3;
-  }
   else
-  {
     mbEscapeMode[u] = ESCAPE_MODE_DATA;
-  }
 }
 
 
@@ -118,16 +118,15 @@ void Modem_10Hz(void)
   uchar u;
   for (u=0; u<UART_COUNT; u++)
   {
-     if (mbEscapeMode[u] == ESCAPE_MODE_DATA)
-     {
-       if (++mbEscapeCnt[u] > 10)
-         mbEscapeMode[u] = ESCAPE_MODE_PAUSE_BEFORE;
-     }
-     else if (mbEscapeMode[u] == ESCAPE_MODE_PLUS_3)
-     {
-       if (++mbEscapeCnt[u] > 10)
-         mbEscapeMode[u] = ESCAPE_MODE_PAUSE_AFTER;
-     }
+    if (mbEscapeCnt[u] >= 10)
+    {
+      if (mbEscapeMode[u] == ESCAPE_MODE_DATA)
+        mbEscapeMode[u] = ESCAPE_MODE_PAUSE_BEFORE;
+      else if (mbEscapeMode[u] == ESCAPE_MODE_PLUS_3)
+        mbEscapeMode[u] = ESCAPE_MODE_PAUSE_AFTER;
+    }
+    else
+      mbEscapeCnt[u]++;
   }
 }
 
@@ -163,6 +162,7 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
 
   return true;
 }
+
 
 
 void ModemOut(const uchar u, const uchar b)
@@ -252,6 +252,7 @@ static uint2 PopIntDec(const uchar u)
 }
 
 
+
 bool ModemConnect(const uchar u)
 {
   InitPop(u, 4);
@@ -283,10 +284,10 @@ bool ModemConnect(const uchar u)
 
 void ModemConnected(const uchar u)
 {
-  if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND)) // ???
+  if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND)) // TODO ???
   {
     mbModemMode[u] = MODEM_MODE_DATA;
-    ModemOut(u, 1); // TODO
+    ModemOut(u, 1);
   }
 }
 
