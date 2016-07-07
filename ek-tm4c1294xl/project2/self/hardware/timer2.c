@@ -12,11 +12,12 @@ timer2.c
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 #include "../kernel/clock.h"
+#include "../modem/modem.h"
 #include "timer2.h"
 
 
 
-#define TIMER2_FREQ     1
+#define TIMER2_FREQ     10
 
 
 
@@ -38,5 +39,7 @@ void InitTimer2(ulong dwClockFreq)
 void Timer2IntHandler(void)
 {
   HWREG(TIMER2_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
-  Clock_1Hz();
+
+  Clock_10Hz();
+  Modem_10Hz();
 }

@@ -251,7 +251,7 @@ void ModemConnect(const uchar u)
 
 void ModemConnected(const uchar u)
 {
-  if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] = MODEM_MODE_COMMAND))
+  if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND))
   {
     mbModemMode[u] = MODEM_MODE_DATA;
     ModemOut(u, 1);
@@ -284,4 +284,15 @@ void RunModem(const uchar u)
 
     mbInputMode[u] == INPUT_MODE_BEGIN;
   }
+}
+
+
+
+void Modem_10Hz(void)
+{
+}
+
+
+void ProcessModemModeData(const uchar u, const uchar b)
+{
 }
