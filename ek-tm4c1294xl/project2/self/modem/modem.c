@@ -62,6 +62,11 @@ bool IsEOL(const uchar b)
 }
 
 
+bool IsNumber(const uchar b)
+{
+  return (b >= '0') || (b <= '9');
+}
+
 
 bool IsModemModeCommand(const uchar u)
 {
@@ -96,15 +101,14 @@ bool IsModemCmd(const uchar u, const uchar *pcszCmd)
   uchar i = 0;
   while (*pcszCmd)
   {
+    if (i >= mibModemPtr[u])
+      return false;
+
     if (mmbModemBuf[u][i++] != *pcszCmd++)
       return false;
   }
 
-  uchar b = mmbModemBuf[u][i];
-  if ((b == '\r') || (b == '\n'))
-    return true;
-
-  return false;
+  return IsEOL(mmbModemBuf[u][i]);
 }
 
 
@@ -113,6 +117,9 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
   uchar i = 0;
   while (*pcszCmd)
   {
+    if (i >= mibModemPtr[u])
+      return false;
+
     if (mmbModemBuf[u][i++] != *pcszCmd++)
       return false;
   }
@@ -130,7 +137,7 @@ void ModemOut(const uchar u, const uchar b)
 
 
 
-static uchar PopSize(const uchar u)
+static uchar PopSize(const uchar u) // TODO ???
 {
   return mibModemPtr[u];
 }
@@ -152,9 +159,19 @@ static uchar PopChar(const uchar u)
 
 static uchar2 PopCharDec(const uchar u)
 {
-  uint w = (uint)PopChar(u)*100;
-  w += PopChar(u)*10;
-  w += PopChar(u);
+  uint w = 0;
+  uchar m = 100;
+
+  uchar i;
+  for (i=0; i<3; i++)
+  {
+    uchar b = PopChar(u);
+    if (!IsNumber(b))
+      GetChar2Error();
+
+    w += (b - '0')*m;
+    m /= 10;
+  }
 
   if (w < MAX_CHAR)
     return GetChar2Error();
@@ -183,11 +200,19 @@ static ulong2 PopIPDec(const uchar u)
 
 static uint2 PopIntDec(const uchar u)
 {
-  ulong dw = (ulong)PopChar(u)*10000;
-  dw += PopChar(u)*1000;
-  dw += PopChar(u)*100;
-  dw += PopChar(u)*10;
-  dw += PopChar(u);
+  ulong dw = 0;
+  uint m = 10000;
+
+  uchar i;
+  for (i=0; i<5; i++)
+  {
+    uchar b = PopChar(u);
+    if (!IsNumber(b))
+      GetChar2Error();
+
+    dw += (b - '0')*m;
+    m /= 10;
+  }
 
   if (dw < MAX_INT)
     return GetInt2Error();
@@ -242,7 +267,7 @@ void ModemDisconnect(const uchar u)
 
 void RunModem(const uchar u)
 {
-  if (mbModemMode[u] == MODEM_MODE_COMMAND)
+  if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
   {
     if (IsModemCmd(u, "AT"))
       ModemOut(u, 0);
@@ -252,5 +277,7 @@ void RunModem(const uchar u)
       ModemDisconnect(u);
     else
       WARNING("RunModem: unknown command\n");
+
+    mbInputMode[u] == INPUT_MODE_BEGIN;
   }
 }
