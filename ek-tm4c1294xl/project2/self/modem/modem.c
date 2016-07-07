@@ -15,7 +15,15 @@ modem.c
 
 
 
-static volatile bool    mfModemDataMode[UART_COUNT];
+typedef enum
+{
+  MODEM_MODE_COMMAND = 0,
+  MODEM_MODE_DATA = 1,
+} modem_mode_t;
+
+
+
+volatile modem_mode_t   mbModemMode[UART_COUNT];
 
 
 #define MODEM_BUF_SIZE  32
@@ -32,7 +40,7 @@ void InitModem(void)
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
   {
-    mfModemDataMode[u] = false;
+    mbModemMode[u] = MODEM_MODE_COMMAND;
     mibModemBuf[u] = 0;
   }
 }
@@ -41,7 +49,7 @@ void InitModem(void)
 
 bool IsModemCommandMode(const uchar u)
 {
-  return (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mfModemDataMode[u] == false);
+  return (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND);
 }
 
 
@@ -205,7 +213,7 @@ void ModemDisconnect(const uchar u)
 
 void RunModem(const uchar u)
 {
-  if (mfModemDataMode[u] == false)
+  if (mbModemMode[u] == MODEM_MODE_COMMAND)
   {
     if (IsModemCmd(u, "AT"))
       ModemOut(u, 0);
