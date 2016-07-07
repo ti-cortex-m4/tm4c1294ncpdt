@@ -4,7 +4,9 @@ modem.c
 
 ------------------------------------------------------------------------------*/
 
+#include <ctype.h>
 #include "../main.h"
+#include "../hardware/delay.h"
 #include "../hardware/restart.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
@@ -125,7 +127,7 @@ bool IsModemCmd(const uchar u, const uchar *pcszCmd)
     if (i >= mibModemPtr[u])
       return false;
 
-    if (mmbModemBuf[u][i++] != *pcszCmd++)
+    if (_toupper(mmbModemBuf[u][i++]) != _toupper(*pcszCmd++))
       return false;
   }
 
@@ -141,7 +143,7 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
     if (i >= mibModemPtr[u])
       return false;
 
-    if (mmbModemBuf[u][i++] != *pcszCmd++)
+    if (_toupper(mmbModemBuf[u][i++]) != _toupper(*pcszCmd++))
       return false;
   }
 
@@ -236,28 +238,24 @@ static uint2 PopIntDec(const uchar u)
 }
 
 
-void ModemConnect(const uchar u)
+bool ModemConnect(const uchar u)
 {
   InitPop(u, 4);
 
   ulong2 dw2 = PopIPDec(u);
-  if (InvalidLong2(dw2)) {
-    ModemOut(u, 4); // TODO
-    return;
-  }
+  if (InvalidLong2(dw2))
+    return false;
+
   ulong dwIP = dw2.dw;
 
   uint2 w2 = PopIntDec(u);
-  if (InvalidInt2(w2)) {
-    ModemOut(u, 4); // TODO
-    return;
-  }
+  if (InvalidInt2(w2))
+    return false;
+
   uint wPort = w2.w;
 
-  if (!IsEOL(PopChar(u))) {
-    ModemOut(u, 4); // TODO
-    return;
-  }
+  if (!IsEOL(PopChar(u)))
+    return false;
 
   CONSOLE("%u: connect as modem to %u.%u.%u.%u port %u\n",
     u,
@@ -265,6 +263,7 @@ void ModemConnect(const uchar u)
     wPort);
 
   TelnetOpen(dwIP, wPort, u);
+  return true;
 }
 
 
@@ -292,13 +291,20 @@ void RunModem(const uchar u)
 {
   if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
   {
-    if (IsModemCmd(u, "ATRESTART"))
+    if (IsModemCmd(u, "at-restart"))
+    {
+      ModemOut(u, 0);
+      DelayMilliSecond(500);
       Restart();
-    if (IsModemCmd(u, "AT"))
-      ModemOut(u, 0); // TODO
-    else if (IsModemCmdPrefix(u, "ATDP"))
-      ModemConnect(u);
-    else if (IsModemCmd(u, "ATH0"))
+    }
+    if (IsModemCmd(u, "at"))
+      ModemOut(u, 0);
+    else if (IsModemCmdPrefix(u, "atdp"))
+    {
+      if (!ModemConnect(u))
+        ModemOut(u, 4);
+    }
+    else if (IsModemCmd(u, "ath0"))
       ModemDisconnect(u);
     else
     {
