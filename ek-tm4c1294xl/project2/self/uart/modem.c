@@ -53,6 +53,7 @@ volatile uchar          mbEscapeCnt[UART_COUNT];
 volatile escape_mode_t  mbEscapeMode[UART_COUNT];
 
 
+
 #define MODEM_BUF_SIZE  32
 
 static volatile uchar   mmbModemBuf[UART_COUNT][MODEM_BUF_SIZE];
