@@ -74,8 +74,8 @@ static void SerialUARTIntHandler(uint8_t ucPort)
                 if (fDataDebugFlag)
                   CONSOLE("%u: from UART %02X\n", ucPort, ucChar);
 
-                if (IsModemCommandMode(ucPort))
-                  ProcessModemCommandMode(ucPort, ucChar);
+                if (IsModemModeCommand(ucPort))
+                  ProcessModemModeCommand(ucPort, ucChar);
                 else
                   RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
             }

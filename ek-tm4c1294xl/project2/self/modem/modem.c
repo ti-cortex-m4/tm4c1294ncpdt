@@ -22,14 +22,23 @@ typedef enum
 } modem_mode_t;
 
 
+typedef enum
+{
+  INPUT_MODE_BEGIN = 0,
+  INPUT_MODE_DATA = 1,
+  INPUT_MODE_READY = 2,
+} input_mode_t;
+
+
 
 volatile modem_mode_t   mbModemMode[UART_COUNT];
+volatile input_mode_t   mbInputMode[UART_COUNT];
 
 
 #define MODEM_BUF_SIZE  32
 
 static volatile uchar   mmbModemBuf[UART_COUNT][MODEM_BUF_SIZE];
-static volatile uchar   mibModemBuf[UART_COUNT];
+static volatile uchar   mibModemPtr[UART_COUNT];
 
 static uchar            mibPop[UART_COUNT];
 
@@ -41,25 +50,43 @@ void InitModem(void)
   for(u = 0; u < UART_COUNT; u++)
   {
     mbModemMode[u] = MODEM_MODE_COMMAND;
-    mibModemBuf[u] = 0;
+    mbInputMode[u] = INPUT_MODE_BEGIN;
   }
 }
 
 
 
-bool IsModemCommandMode(const uchar u)
+bool IsEOL(const uchar b)
+{
+  return (b == '\r') || (b == '\n');
+}
+
+
+
+bool IsModemModeCommand(const uchar u)
 {
   return (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND);
 }
 
 
-void ProcessModemCommandMode(const uchar u, const uchar b)
+void ProcessModemModeCommand(const uchar u, const uchar b)
 {
-  if (mibModemBuf[u] >= MODEM_BUF_SIZE)
-    mibModemBuf[u] = 0;
+  if (mbInputMode[u] == INPUT_MODE_BEGIN)
+  {
+    mbInputMode[u] == INPUT_MODE_DATA;
+    mibModemPtr[u] = 0;
+  }
+  else if (mbInputMode[u] == INPUT_MODE_DATA)
+  {
+    if (mibModemPtr[u] >= MODEM_BUF_SIZE)
+      mibModemPtr[u] = 0;
 
-  mmbModemBuf[u][ mibModemBuf[u] ] = b;
-  mibModemBuf[u]++;
+    mmbModemBuf[u][ mibModemPtr[u] ] = b;
+    mibModemPtr[u]++;
+
+    if (IsEOL(b))
+      mbInputMode[u] = INPUT_MODE_READY;
+  }
 }
 
 
@@ -97,13 +124,15 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
 void ModemOut(const uchar u, const uchar b)
 {
   SerialSend(u, b);
+  SerialSend(u, '\r');
+  SerialSend(u, '\n');
 }
 
 
 
 static uchar PopSize(const uchar u)
 {
-  return mibModemBuf[u];
+  return mibModemPtr[u];
 }
 
 
