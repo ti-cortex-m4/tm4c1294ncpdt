@@ -7,7 +7,7 @@ telnet_connected.c
 #include "../main.h"
 #include "utils/lwiplib.h"
 #include "../kernel/log.h"
-#include "../modem/modem.h"
+#include "../uart/modem.h"
 #include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_error.h"

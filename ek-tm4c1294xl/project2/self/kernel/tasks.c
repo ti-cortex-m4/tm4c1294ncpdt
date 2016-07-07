@@ -13,7 +13,7 @@ tasks.c
 #include "../tcp/telnet_open.h"
 #include "../uart/serial.h"
 #include "../uart/serial_receive.h"
-#include "../modem/modem.h"
+#include "../uart/modem.h"
 #include "entities.h"
 #include "version.h"
 #include "tasks.h"
