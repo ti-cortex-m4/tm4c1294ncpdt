@@ -30,9 +30,24 @@ typedef enum
 } input_mode_t;
 
 
+typedef enum
+{
+  ESCAPE_MODE_BEGIN = 0,
+  ESCAPE_MODE_DATA = 1,
+  ESCAPE_MODE_PAUSE_BEFORE = 2,
+  ESCAPE_MODE_PLUS_1 = 3,
+  ESCAPE_MODE_PLUS_2 = 4,
+  ESCAPE_MODE_PLUS_3 = 5,
+  ESCAPE_MODE_PAUSE_AFTER = 6,
+} escape_mode_t;
+
+
 
 volatile modem_mode_t   mbModemMode[UART_COUNT];
 volatile input_mode_t   mbInputMode[UART_COUNT];
+
+volatile uchar          mbEscapeCnt[UART_COUNT];
+volatile escape_mode_t  mbEscapeMode[UART_COUNT];
 
 
 #define MODEM_BUF_SIZE  32
@@ -51,6 +66,9 @@ void InitModem(void)
   {
     mbModemMode[u] = MODEM_MODE_COMMAND;
     mbInputMode[u] = INPUT_MODE_BEGIN;
+
+    mbEscapeCnt[u] = 0;
+    mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
   }
 }
 
@@ -284,15 +302,56 @@ void RunModem(const uchar u)
 
     mbInputMode[u] == INPUT_MODE_BEGIN;
   }
+
+  if (mbModemMode[u] == MODEM_MODE_DATA)
+  {
+    if (mbEscapeMode[u] == ESCAPE_MODE_PAUSE_AFTER)
+    {
+      mbModemMode[u] = MODEM_MODE_COMMAND;
+      ModemOut(u, 0);
+    }
+  }
 }
 
 
 
 void Modem_10Hz(void)
 {
+  uchar u;
+  for (u=0; u<UART_COUNT; u++)
+  {
+     if (mbEscapeMode[u] == ESCAPE_MODE_DATA)
+     {
+       if (++mbEscapeCnt[u] > 10)
+         mbEscapeMode[u] = ESCAPE_MODE_PAUSE_BEFORE;
+     }
+     else if (mbEscapeMode[u] == ESCAPE_MODE_PLUS_3)
+     {
+       if (++mbEscapeCnt[u] > 10)
+         mbEscapeMode[u] = ESCAPE_MODE_PAUSE_AFTER;
+     }
+  }
 }
 
 
 void ProcessModemModeData(const uchar u, const uchar b)
 {
+  mbEscapeCnt[u] = 0;
+
+  if ((mbEscapeMode[u] == ESCAPE_MODE_PAUSE_BEFORE) && (b == '+'))
+  {
+    mbEscapeMode[u] == ESCAPE_MODE_PLUS_1;
+  }
+  else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_1) && (b == '+'))
+  {
+    mbEscapeMode[u] == ESCAPE_MODE_PLUS_2;
+  }
+  else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_2) && (b == '+'))
+  {
+    mbEscapeMode[u] == ESCAPE_MODE_PLUS_3;
+  }
+  else
+  {
+    mbEscapeMode[u] = ESCAPE_MODE_DATA;
+  }
 }
