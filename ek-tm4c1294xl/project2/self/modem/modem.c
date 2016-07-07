@@ -68,6 +68,7 @@ bool IsNumber(const uchar b)
 }
 
 
+
 bool IsModemModeCommand(const uchar u)
 {
   return (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND);
@@ -81,7 +82,8 @@ void ProcessModemModeCommand(const uchar u, const uchar b)
     mbInputMode[u] == INPUT_MODE_DATA;
     mibModemPtr[u] = 0;
   }
-  else if (mbInputMode[u] == INPUT_MODE_DATA)
+
+  if (mbInputMode[u] == INPUT_MODE_DATA)
   {
     if (mibModemPtr[u] >= MODEM_BUF_SIZE)
       mibModemPtr[u] = 0;
@@ -135,12 +137,6 @@ void ModemOut(const uchar u, const uchar b)
   SerialSend(u, '\n');
 }
 
-
-
-static uchar PopSize(const uchar u) // TODO ???
-{
-  return mibModemPtr[u];
-}
 
 
 static void InitPop(const uchar u, const uchar i)
@@ -223,11 +219,6 @@ static uint2 PopIntDec(const uchar u)
 
 void ModemConnect(const uchar u)
 {
-  if (PopSize(u) != 4 + 4*3 + 5) {
-    ModemOut(u, 4);
-    return;
-  }
-
   InitPop(u, 4);
 
   ulong2 dw2 = PopIPDec(u);
@@ -244,7 +235,10 @@ void ModemConnect(const uchar u)
   }
   uint wPort = w2.w;
 
-//  TODO if ((b == '\r') || (b == '\n'))
+  if (!IsEOL(PopChar(u))) {
+    ModemOut(u, 4);
+    return;
+  }
 
   CONSOLE("%u: connect as modem to %u.%u.%u.%u port %u\n",
     u,
@@ -252,6 +246,16 @@ void ModemConnect(const uchar u)
     wPort);
 
   TelnetOpen(dwIP, wPort, u);
+}
+
+
+void ModemConnected(const uchar u)
+{
+  if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] = MODEM_MODE_COMMAND))
+  {
+    mbModemMode[u] = MODEM_MODE_DATA;
+    ModemOut(u, 1);
+  }
 }
 
 

@@ -7,6 +7,7 @@ telnet_connected.c
 #include "../main.h"
 #include "utils/lwiplib.h"
 #include "../kernel/log.h"
+#include "../modem/modem.h"
 #include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_error.h"
@@ -108,6 +109,8 @@ err_t TelnetConnected(void *arg, struct tcp_pcb *pcb, err_t err)
         tcp_output(pcb);
     }
 #endif
+
+    ModemConnected(pState->ucSerialPort);
 
     return(ERR_OK);
 }
