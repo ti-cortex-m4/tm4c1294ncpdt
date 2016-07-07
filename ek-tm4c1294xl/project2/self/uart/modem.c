@@ -80,7 +80,7 @@ void ProcessModemModeCommand(const uchar u, const uchar b)
 {
   if (mbInputMode[u] == INPUT_MODE_BEGIN)
   {
-    mbInputMode[u] == INPUT_MODE_DATA;
+    mbInputMode[u] = INPUT_MODE_DATA;
     mibPush[u] = 0;
   }
 
@@ -100,16 +100,19 @@ void ProcessModemModeCommand(const uchar u, const uchar b)
 
 void ProcessModemModeData(const uchar u, const uchar b)
 {
-  mbEscapeCnt[u] = 0;
+  if (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM)
+  {
+    mbEscapeCnt[u] = 0;
 
-  if ((mbEscapeMode[u] == ESCAPE_MODE_PAUSE_BEFORE) && (b == '+'))
-    mbEscapeMode[u] == ESCAPE_MODE_PLUS_1;
-  else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_1) && (b == '+'))
-    mbEscapeMode[u] == ESCAPE_MODE_PLUS_2;
-  else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_2) && (b == '+'))
-    mbEscapeMode[u] == ESCAPE_MODE_PLUS_3;
-  else
-    mbEscapeMode[u] = ESCAPE_MODE_DATA;
+    if ((mbEscapeMode[u] == ESCAPE_MODE_PAUSE_BEFORE) && (b == '+'))
+      mbEscapeMode[u] == ESCAPE_MODE_PLUS_1;
+    else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_1) && (b == '+'))
+      mbEscapeMode[u] == ESCAPE_MODE_PLUS_2;
+    else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_2) && (b == '+'))
+      mbEscapeMode[u] == ESCAPE_MODE_PLUS_3;
+    else
+      mbEscapeMode[u] = ESCAPE_MODE_DATA;
+  }
 }
 
 
@@ -118,15 +121,18 @@ void Modem_10Hz(void)
   uchar u;
   for (u=0; u<UART_COUNT; u++)
   {
-    if (mbEscapeCnt[u] >= 10)
+    if (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM)
     {
-      if (mbEscapeMode[u] == ESCAPE_MODE_DATA)
-        mbEscapeMode[u] = ESCAPE_MODE_PAUSE_BEFORE;
-      else if (mbEscapeMode[u] == ESCAPE_MODE_PLUS_3)
-        mbEscapeMode[u] = ESCAPE_MODE_PAUSE_AFTER;
+      if (mbEscapeCnt[u] >= 10)
+      {
+        if (mbEscapeMode[u] == ESCAPE_MODE_DATA)
+          mbEscapeMode[u] = ESCAPE_MODE_PAUSE_BEFORE;
+        else if (mbEscapeMode[u] == ESCAPE_MODE_PLUS_3)
+          mbEscapeMode[u] = ESCAPE_MODE_PAUSE_AFTER;
+      }
+      else
+        mbEscapeCnt[u]++;
     }
-    else
-      mbEscapeCnt[u]++;
   }
 }
 
@@ -167,7 +173,7 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
 
 void ModemOut(const uchar u, const uchar b)
 {
-  SerialSend(u, b);
+  SerialSend(u, '0' + b);
   SerialSend(u, '\r');
   SerialSend(u, '\n');
 }
@@ -327,7 +333,7 @@ void RunModem(const uchar u)
       ModemOut(u, 4);
     }
 
-    mbInputMode[u] == INPUT_MODE_BEGIN;
+    mbInputMode[u] = INPUT_MODE_BEGIN;
   }
 
   if (mbModemMode[u] == MODEM_MODE_DATA)
@@ -346,3 +352,4 @@ void RunModem(const uchar u)
 // локальный порт недоступен
 // удаленный порт недоступен
 // ATH0 в неправильном режиме
+// символьный формат

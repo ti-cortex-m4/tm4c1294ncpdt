@@ -60,9 +60,12 @@ void StartConnection(uchar u)
       StartClientConnection(u);
     }
   }
+  else if (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM)
+  {
+  }
   else
   {
-    CONSOLE("%u: ERROR routing mode %u", u, mbRoutingMode[u]);
+    ERROR("%u: wrong routing mode %u\n", u, mbRoutingMode[u]);
   }
 }
 
