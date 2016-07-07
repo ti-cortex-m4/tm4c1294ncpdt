@@ -12,7 +12,7 @@ timer2.c
 #include "driverlib/sysctl.h"
 #include "driverlib/timer.h"
 #include "../kernel/clock.h"
-#include "../modem/modem.h"
+#include "../uart/modem.h"
 #include "timer2.h"
 
 

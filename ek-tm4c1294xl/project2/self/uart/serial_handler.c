@@ -10,7 +10,7 @@ serial_handler.c
 #include "../kernel/log.h"
 #include "io_mode.h"
 #include "serial.h"
-#include "../modem/modem.h"
+#include "modem.h"
 #include "serial_handler.h"
 
 
