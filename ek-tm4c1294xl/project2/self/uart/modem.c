@@ -60,7 +60,7 @@ static bool IsNumber(const uchar b)
 }
 
 
-uchar ToUpper(const uchar b)
+static uchar ToUpper(const uchar b)
 {
   if ((b >= 'a') && (b <= 'z'))
     return 'A' + (b - 'a');
@@ -145,7 +145,7 @@ bool IsModemCmd(const uchar u, const uchar *pcszCmd)
     if (i >= mibPush[u])
       return false;
 
-    if (_toupper(mmbModemBuf[u][i++]) != _toupper(*pcszCmd++))
+    if (ToUpper(mmbModemBuf[u][i++]) != ToUpper(*pcszCmd++))
       return false;
   }
 
@@ -161,7 +161,7 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
     if (i >= mibPush[u])
       return false;
 
-    if (_toupper(mmbModemBuf[u][i++]) != _toupper(*pcszCmd++))
+    if (ToUpper(mmbModemBuf[u][i++]) != ToUpper(*pcszCmd++))
       return false;
   }
 
@@ -170,7 +170,7 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
 
 
 
-void ModemOut(const uchar u, const uchar b)
+static void ModemOut(const uchar u, const uchar b)
 {
   SerialSend(u, '0' + b);
   SerialSend(u, '\r');
@@ -355,3 +355,6 @@ void RunModem(const uchar u)
 // символьный формат
 // сброс по умолчанию
 // connect без повторов
+// W command UDP
+// DS Manager
+// не отключать по таймауту
