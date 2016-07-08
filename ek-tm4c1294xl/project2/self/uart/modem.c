@@ -4,7 +4,6 @@ modem.c
 
 ------------------------------------------------------------------------------*/
 
-#include <ctype.h>
 #include "../main.h"
 #include "../hardware/delay.h"
 #include "../hardware/restart.h"
@@ -105,11 +104,11 @@ void ProcessModemModeData(const uchar u, const uchar b)
     mbEscapeCnt[u] = 0;
 
     if ((mbEscapeMode[u] == ESCAPE_MODE_PAUSE_BEFORE) && (b == '+'))
-      mbEscapeMode[u] == ESCAPE_MODE_PLUS_1;
+      mbEscapeMode[u] = ESCAPE_MODE_PLUS_1;
     else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_1) && (b == '+'))
-      mbEscapeMode[u] == ESCAPE_MODE_PLUS_2;
+      mbEscapeMode[u] = ESCAPE_MODE_PLUS_2;
     else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_2) && (b == '+'))
-      mbEscapeMode[u] == ESCAPE_MODE_PLUS_3;
+      mbEscapeMode[u] = ESCAPE_MODE_PLUS_3;
     else
       mbEscapeMode[u] = ESCAPE_MODE_DATA;
   }
@@ -304,6 +303,7 @@ void ModemDisconnect(const uchar u)
 
   // TODO check status
   TelnetCloseClient(u);
+  ModemOut(u, 0);
   // TODO check result
 }
 
@@ -324,7 +324,7 @@ void RunModem(const uchar u)
     else if (IsModemCmd(u, "at-restart"))
     {
       ModemOut(u, 0);
-      DelayMilliSecond(500);
+      DelayMilliSecond(100);
       Restart();
     }
     else
