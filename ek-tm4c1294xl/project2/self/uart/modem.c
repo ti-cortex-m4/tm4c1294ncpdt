@@ -211,9 +211,9 @@ static uchar2 PopCharDec(const uchar u)
   }
 
   if (w < MAX_CHAR)
-    return GetChar2Error();
-  else
     return GetChar2Success(w);
+  else
+    return GetChar2Error();
 }
 
 
@@ -252,9 +252,9 @@ static uint2 PopIntDec(const uchar u)
   }
 
   if (dw < MAX_INT)
-    return GetInt2Error();
-  else
     return GetInt2Success(dw);
+  else
+    return GetInt2Error();
 }
 
 
@@ -312,12 +312,6 @@ void RunModem(const uchar u)
 {
   if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
   {
-    if (IsModemCmd(u, "at-restart"))
-    {
-      ModemOut(u, 0);
-      DelayMilliSecond(500);
-      Restart();
-    }
     if (IsModemCmd(u, "at"))
       ModemOut(u, 0);
     else if (IsModemCmdPrefix(u, "atdp"))
@@ -327,6 +321,12 @@ void RunModem(const uchar u)
     }
     else if (IsModemCmd(u, "ath0"))
       ModemDisconnect(u);
+    else if (IsModemCmd(u, "at-restart"))
+    {
+      ModemOut(u, 0);
+      DelayMilliSecond(500);
+      Restart();
+    }
     else
     {
       WARNING("RunModem: unknown command\n");
@@ -350,6 +350,8 @@ void RunModem(const uchar u)
 
 
 // локальный порт недоступен
-// удаленный порт недоступен
+// удаленный порт недоступен - соединение завершилось неудачно
 // ATH0 в неправильном режиме
 // символьный формат
+// сброс по умолчанию
+// connect без повторов
