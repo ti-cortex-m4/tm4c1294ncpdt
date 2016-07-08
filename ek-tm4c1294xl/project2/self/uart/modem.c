@@ -356,5 +356,4 @@ void RunModem(const uchar u)
 // сброс по умолчанию
 // connect без повторов
 // W command UDP
-// DS Manager
 // не отключать по таймауту
