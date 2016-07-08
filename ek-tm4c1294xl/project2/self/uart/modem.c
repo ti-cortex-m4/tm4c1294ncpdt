@@ -228,7 +228,7 @@ static ulong2 PopIPDec(const uchar u)
     if (InvalidChar2(b2))
       return GetLong2Error();
 
-    cm.mb4[i] = b2.b;
+    cm.mb4[3-i] = b2.b;
   }
 
   return GetLong2Success(cm.dw);
