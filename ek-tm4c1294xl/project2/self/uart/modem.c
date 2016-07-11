@@ -73,6 +73,12 @@ static uchar ToUpper(const uchar b)
 }
 
 
+bool IsModem(const uchar u)
+{
+  return (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM);
+}
+
+
 bool IsModemModeCommand(const uchar u)
 {
   return (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND);
@@ -310,6 +316,12 @@ void ModemConnected(const uchar u)
 }
 
 
+void ModemConnectFailed(const uchar u, const err_t err)
+{
+  ModemOut(u, 7, "7 BUSY, connection failed");
+}
+
+
 void ModemDisconnect(const uchar u)
 {
   CONSOLE("%u: disconnect as modem\n", u);
@@ -376,6 +388,8 @@ void RunModem(const uchar u)
 // удаленный порт недоступен - соединение завершилось неудачно
 // ATH0 в неправильном режиме
 // сброс по умолчанию
-// connect без повторов
 // не отключать по таймауту
 // текущией статус - соединено/отсоединено
+// not connected - busy или другая ошибка
+// unknown command - текст
+/// +++ +++

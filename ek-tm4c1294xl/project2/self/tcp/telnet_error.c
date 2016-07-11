@@ -7,6 +7,7 @@ telnet_error.c
 #include "../main.h"
 #include "utils/lwiplib.h"
 #include "../kernel/log.h"
+#include "../uart/modem.h"
 #include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_open.h"
@@ -41,8 +42,17 @@ void TelnetError(void *arg, err_t err)
     // Reset the session data for this port.
     if(pState->pListenPCB == NULL)
     {
-        // Attempt to reestablish the telnet connection to the server.
-        TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
+        if (IsModem(pState->ucSerialPort))
+        {
+            ModemConnectFailed(pState->ucSerialPort, err);
+        }
+        else
+        {
+            CONSOLE("%u: try to open again\n", pState->ucSerialPort);
+
+            // Attempt to reestablish the telnet connection to the server.
+            TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
+        }
     }
     else
     {
