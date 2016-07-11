@@ -9,7 +9,7 @@ udp_out.h
 
 
 
-extern bool                    fBroadcastSelected;
+extern bool                    fBroadcastSelect;
 extern bool                    fBroadcastAlways;
 
 

@@ -93,15 +93,15 @@ void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
   {
     if (IsCmd(p,"W|"))
     {
-      fBroadcastSelected = true;
+      fBroadcastSelect = true;
       CONSOLE("broadcast select: yes, by default\n");
     }
     else
     {
       if (PopBuff6(p, 1))
       {
-        fBroadcastSelected = GetBroadcastSelect();
-        if (fBroadcastSelected)
+        fBroadcastSelect = GetBroadcastSelect();
+        if (fBroadcastSelect)
         {
           CONSOLE("broadcast select: yes\n");
           OutStringZ(pcb,p,addr,port,broadcast,"");
