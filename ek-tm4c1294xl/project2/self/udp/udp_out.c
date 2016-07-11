@@ -11,7 +11,7 @@ udp_out.c
 
 
 
-bool                    fBroadcastSelected;
+bool                    fBroadcastSelect;
 bool                    fBroadcastAlways;
 
 
@@ -34,7 +34,7 @@ err_t Out(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, 
   memcpy(p->payload, mbUDPPush, iwUDPPush);
 
   if (broadcast != 0) {
-    if (fBroadcastAlways || fBroadcastSelected) {
+    if (fBroadcastAlways || fBroadcastSelect) {
       err_t err = udp_sendto(pcb, p, IP_ADDR_BROADCAST, port);
       if (err != ERR_OK) {
         ERROR("Out.udp_sendto: send broadcast, error=%d\n", err);
