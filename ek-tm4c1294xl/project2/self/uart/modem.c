@@ -31,6 +31,8 @@ static volatile uchar   mmbModemBuf[UART_COUNT][MODEM_BUF_SIZE];
 static volatile uchar   mibPush[UART_COUNT];
 static volatile uchar   mibPop[UART_COUNT];
 
+static bool             fVerbose;
+
 
 
 void InitModem(void)
@@ -44,6 +46,8 @@ void InitModem(void)
     mbEscapeCnt[u] = 0;
     mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
   }
+
+  fVerbose = false;
 }
 
 
@@ -170,9 +174,18 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
 
 
 
-static void ModemOut(const uchar u, const uchar b)
+static void ModemOut(const uchar u, const uchar b, const char *pcsz)
 {
-  SerialSend(u, '0' + b);
+  if (fVerbose)
+  {
+    while (*pcsz)
+      SerialSend(u, *pcsz++);
+  }
+  else
+  {
+    SerialSend(u, '0' + b);
+  }
+
   SerialSend(u, '\r');
   SerialSend(u, '\n');
 }
@@ -292,7 +305,7 @@ void ModemConnected(const uchar u)
   if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND)) // TODO ???
   {
     mbModemMode[u] = MODEM_MODE_DATA;
-    ModemOut(u, 1);
+    ModemOut(u, 1, "1 CONNECT");
   }
 }
 
@@ -303,7 +316,7 @@ void ModemDisconnect(const uchar u)
 
   // TODO check status
   TelnetCloseClient(u);
-  ModemOut(u, 0);
+  ModemOut(u, 0, "0 OK, disconnected");
   // TODO check result
 }
 
@@ -313,24 +326,34 @@ void RunModem(const uchar u)
   if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
   {
     if (IsModemCmd(u, "at"))
-      ModemOut(u, 0);
+      ModemOut(u, 0, "0 OK, modem available");
     else if (IsModemCmdPrefix(u, "atdp"))
     {
       if (!ModemConnect(u))
-        ModemOut(u, 4);
+        ModemOut(u, 4, "4 ERROR, no connection");
     }
     else if (IsModemCmd(u, "ath0"))
       ModemDisconnect(u);
+    else if (IsModemCmd(u, "atv0"))
+    {
+      fVerbose = false;
+      ModemOut(u, 0, "0 OK, verbose answers");
+    }
+    else if (IsModemCmd(u, "atv1"))
+    {
+      fVerbose = true;
+      ModemOut(u, 0, "0 OK, numeric answers");
+    }
     else if (IsModemCmd(u, "at-restart"))
     {
-      ModemOut(u, 0);
+      ModemOut(u, 0, "0 OK, going to restart");
       DelayMilliSecond(100);
       Restart();
     }
     else
     {
       WARNING("RunModem: unknown command\n");
-      ModemOut(u, 4);
+      ModemOut(u, 4, "4 ERROR, unknown command");
     }
 
     mbInputMode[u] = INPUT_MODE_BEGIN;
@@ -341,7 +364,7 @@ void RunModem(const uchar u)
     if (mbEscapeMode[u] == ESCAPE_MODE_PAUSE_AFTER)
     {
       mbModemMode[u] = MODEM_MODE_COMMAND;
-      ModemOut(u, 0); // TODO
+      ModemOut(u, 0, "0 OK, command mode");
       mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
     }
   }
@@ -352,9 +375,7 @@ void RunModem(const uchar u)
 // локальный порт недоступен
 // удаленный порт недоступен - соединение завершилось неудачно
 // ATH0 в неправильном режиме
-// символьный формат
 // сброс по умолчанию
 // connect без повторов
-// W command UDP
 // не отключать по таймауту
 // текущией статус - соединено/отсоединено
