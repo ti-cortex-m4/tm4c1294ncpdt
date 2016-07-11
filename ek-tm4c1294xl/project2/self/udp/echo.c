@@ -42,7 +42,7 @@ err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
 
   InitPush();
   PushChar('A');
-  PushMAC(pbMAC, 6);
+  PushMAC(mbMAC, 6);
   PushChar('/');
   PushStringZ("000001001"); // TODO "000001001"
   PushChar('/');

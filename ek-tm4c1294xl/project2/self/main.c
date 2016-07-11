@@ -108,15 +108,15 @@ int     main(void)
   InitSettings();
   InitUARTLog(dwClockFreq);
 
-  pbMAC[0] = 0x00;
-  pbMAC[1] = 0x1B;
-  pbMAC[2] = 0xB6;
-  pbMAC[3] = 1;
-  pbMAC[4] = wSerialNumber / 0x100;
-  pbMAC[5] = wSerialNumber % 0x100;
+  mbMAC[0] = 0x00;
+  mbMAC[1] = 0x1B;
+  mbMAC[2] = 0xB6;
+  mbMAC[3] = 1;
+  mbMAC[4] = wSerialNumber / 0x100;
+  mbMAC[5] = wSerialNumber % 0x100;
 
   ASSERT(dwIP != 0);
-  lwIPInit(dwClockFreq, pbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
+  lwIPInit(dwClockFreq, mbMAC, dwIP, dwGateway, dwNetmask, IPADDR_USE_STATIC);
 
   InitUDPLog();
   InitEthernetLEDs();

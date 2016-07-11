@@ -14,7 +14,59 @@ broadcast_select.c
 
 
 
+uchar                   mbT[6];
 bool                    fBroadcastSelect;
+
+
+
+static bool PopMAC(struct pbuf *p, const uchar ibStart)
+{
+  uchar *pb = p->payload;
+
+  combo32 cb;
+  cb.dw = 0;
+
+  uchar j = 0;
+  uchar b = 0;
+
+  uint i;
+  for (i=ibStart; i<p->len; i++)
+  {
+    if (pb[i] == '.')
+    {
+      if (j > 3)
+      {
+        WARNING("PopIP[%u]: wrong points number %u\n", i, j);
+        return GetLong2Error();
+      }
+      else
+      {
+        cb.mb4[3-j] = b;
+        j++;
+        b = 0;
+      }
+    }
+    else if (pb[i] == '|')
+    {
+      cb.mb4[3-j] = b;
+      return GetLong2Success(cb.dw);
+    }
+    else
+    {
+      uchar2 b2 = DecodeChar(pb[i],10);
+      if (InvalidChar2(b2))
+      {
+        WARNING("PopIP[%u]: wrong char\n", i);
+        return GetLong2Error();
+      }
+
+      b = b*10 + b2.b;
+    }
+  }
+
+  WARNING("PopIP[%u]: wrong length \n", i, p->len);
+  return GetLong2Error();
+}
 
 
 
@@ -27,7 +79,7 @@ err_t OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
   else
   {
     if (IsCmd(p,"W|"))
-      fBroadcastSelect = true
+      fBroadcastSelect = true;
     else
     {
     }
