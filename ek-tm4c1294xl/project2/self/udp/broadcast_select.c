@@ -14,8 +14,26 @@ broadcast_select.c
 
 
 
+bool                    fBroadcastSelect;
+
+
+
 err_t OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
+  if (broadcast == 0)
+  {
+    OutStringZ(pcb,p,addr,port,broadcast,"");
+  }
+  else
+  {
+    if (IsCmd(p,"W|"))
+      fBroadcastSelect = true
+    else
+    {
+    }
+
+  }
+
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
@@ -27,3 +45,5 @@ err_t OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
 
   return Out(pcb,p,addr,port,broadcast);
 }
+
+OutStringZ(pcb,p,addr,port,broadcast,"");

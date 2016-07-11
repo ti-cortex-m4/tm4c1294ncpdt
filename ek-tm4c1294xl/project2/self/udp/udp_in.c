@@ -19,6 +19,7 @@ udp_in.c
 #include "udp_entities.h"
 #include "routing_status.h"
 #include "test_watchdog.h"
+#include "broadcast_select.h"
 #include "udp_in.h"
 
 
@@ -30,7 +31,7 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   if (IsCmd(p,"X")) {
     OutEcho(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"W")) {
-    OutStringZ(pcb,p,addr,port,broadcast,"");
+    OutBroadcastSelect(pcb,p,addr,port,broadcast);
   } else if (IsCmd(p,"E")) {
     Restart();
   } else if (IsCmd(p,"L")) {
