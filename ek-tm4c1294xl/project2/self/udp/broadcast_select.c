@@ -39,14 +39,14 @@ static bool PopBuff6(struct pbuf *p, const uchar ibStart)
       }
       else
       {
-        mbBuff6[5-j] = b;
+        mbBuff6[j] = b;
         j++;
         b = 0;
       }
     }
     else if (pb[i] == '|')
     {
-      mbBuff6[5-j] = b;
+      mbBuff6[j] = b;
       return true;
     }
     else
@@ -110,7 +110,9 @@ void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
           CONSOLE("broadcast select: no\n");
       }
       else
+      {
         WARNING("wrong broadcast-selected MAC\n");
+      }
     }
   }
 }
