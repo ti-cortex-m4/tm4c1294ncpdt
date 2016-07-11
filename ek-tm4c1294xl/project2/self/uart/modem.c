@@ -9,6 +9,7 @@ modem.c
 #include "../hardware/restart.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
+#include "../kernel/printf.h"
 #include "../kernel/wrappers.h"
 #include "../tcp/telnet_open.h"
 #include "../tcp/telnet_close.h"
@@ -120,7 +121,7 @@ void ProcessModemModeData(const uchar u, const uchar b)
     else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_2) && (b == '+'))
       mbEscapeMode[u] = ESCAPE_MODE_PLUS_3;
     else
-      mbEscapeMode[u] = ESCAPE_MODE_DATA;
+      mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
   }
 }
 
@@ -134,7 +135,7 @@ void Modem_10Hz(void)
     {
       if (mbEscapeCnt[u] >= 10)
       {
-        if (mbEscapeMode[u] == ESCAPE_MODE_DATA)
+        if (mbEscapeMode[u] == ESCAPE_MODE_BEGIN)
           mbEscapeMode[u] = ESCAPE_MODE_PAUSE_BEFORE;
         else if (mbEscapeMode[u] == ESCAPE_MODE_PLUS_3)
           mbEscapeMode[u] = ESCAPE_MODE_PAUSE_AFTER;
@@ -180,7 +181,7 @@ bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
 
 
 
-static void ModemOut(const uchar u, const uchar b, const char *pcsz)
+static void ModemOut(const uchar u, const uchar b, char *pcsz)
 {
   if (fVerbose)
   {
@@ -311,14 +312,14 @@ void ModemConnected(const uchar u)
   if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND)) // TODO ???
   {
     mbModemMode[u] = MODEM_MODE_DATA;
-    ModemOut(u, 1, "1 CONNECT");
+    ModemOut(u, 1, "1 CONNECT, connected");
   }
 }
 
 
 void ModemConnectFailed(const uchar u, const err_t err)
 {
-  ModemOut(u, 7, "7 BUSY, connection failed");
+  ModemOut(u, 7, (char *)BuffPrintF("7 BUSY, connection failed with error %d", err).pbBuff);
 }
 
 
@@ -387,9 +388,5 @@ void RunModem(const uchar u)
 // локальный порт недоступен
 // удаленный порт недоступен - соединение завершилось неудачно
 // ATH0 в неправильном режиме
-// сброс по умолчанию
 // не отключать по таймауту
 // текущией статус - соединено/отсоединено
-// not connected - busy или другая ошибка
-// unknown command - текст
-/// +++ +++
