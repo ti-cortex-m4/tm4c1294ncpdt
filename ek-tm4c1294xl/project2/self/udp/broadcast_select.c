@@ -6,7 +6,7 @@ broadcast_select.c
 
 #include "../main.h"
 #include "../kernel/log.h"
-#include "../kernel/setting.h"
+#include "../kernel/settings.h"
 #include "../kernel/wrappers.h"
 #include "udp_pop.h"
 #include "udp_in_common.h"
@@ -87,18 +87,29 @@ static bool GetBroadcastSelect(void)
 void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   if (broadcast == 0)
+  {
+    CONSOLE("broadcast select: ignore, no broadcast\n");
     OutStringZ(pcb,p,addr,port,broadcast,"");
+  }
   else
   {
     if (IsCmd(p,"W|"))
+    {
       fBroadcastSelect = true;
+      CONSOLE("broadcast select: yes, by default\n");
+    }
     else
     {
       if (PopBuff6(p, 1))
       {
         fBroadcastSelect = GetBroadcastSelect();
         if (fBroadcastSelect)
+        {
+          CONSOLE("broadcast select: yes\n");
           OutStringZ(pcb,p,addr,port,broadcast,"");
+        }
+        else
+          CONSOLE("broadcast select: no\n");
       }
       else
         WARNING("wrong broadcast-selected MAC\n");
