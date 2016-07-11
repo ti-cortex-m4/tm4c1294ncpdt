@@ -9,6 +9,10 @@ udp_out.h
 
 
 
+extern bool                    fBroadcastSelected;
+extern bool                    fBroadcastAlways;
+
+
 extern uint                    cwErrUPDOutPbufAlloc;
 extern uint                    cwErrUPDOutSendUnicast;
 extern uint                    cwErrUPDOutSendBroadcast;

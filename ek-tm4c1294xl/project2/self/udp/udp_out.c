@@ -11,6 +11,10 @@ udp_out.c
 
 
 
+bool                    fBroadcastSelected;
+bool                    fBroadcastAlways;
+
+
 uint                    cwErrUPDOutPbufAlloc = 0;
 uint                    cwErrUPDOutSendUnicast = 0;
 uint                    cwErrUPDOutSendBroadcast = 0;

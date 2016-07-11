@@ -16,8 +16,6 @@ broadcast_select.c
 
 
 
-bool                    fBroadcastSelect;
-
 static uchar            mbBuff6[6];
 
 
@@ -95,15 +93,15 @@ void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
   {
     if (IsCmd(p,"W|"))
     {
-      fBroadcastSelect = true;
+      fBroadcastSelected = true;
       CONSOLE("broadcast select: yes, by default\n");
     }
     else
     {
       if (PopBuff6(p, 1))
       {
-        fBroadcastSelect = GetBroadcastSelect();
-        if (fBroadcastSelect)
+        fBroadcastSelected = GetBroadcastSelect();
+        if (fBroadcastSelected)
         {
           CONSOLE("broadcast select: yes\n");
           OutStringZ(pcb,p,addr,port,broadcast,"");

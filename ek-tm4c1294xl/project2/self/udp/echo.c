@@ -66,5 +66,6 @@ err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
     PushSfx(wSfx);
   }
 
+  fBroadcastAlways = true;
   return Out(pcb,p,addr,port,broadcast);
 }
