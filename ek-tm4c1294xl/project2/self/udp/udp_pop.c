@@ -12,7 +12,7 @@ udp_pop.c
 
 
 
-static uchar2 DecodeChar(const uchar b, const uchar bRadix)
+uchar2 DecodeChar(const uchar b, const uchar bRadix)
 {
 const static char mbCHARS[] = "0123456789abcdef";
 

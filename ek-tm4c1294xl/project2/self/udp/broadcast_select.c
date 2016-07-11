@@ -5,26 +5,26 @@ broadcast_select.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
-//#include "../hardware/led.h"
-//#include "../hardware/delay.h"
-//#include "../kernel/wrappers.h"
-//#include "udp_pop.h"
-//#include "udp_out.h"
+#include "../kernel/log.h"
+#include "../kernel/setting.h"
+#include "../kernel/wrappers.h"
+#include "udp_pop.h"
+#include "udp_in_common.h"
+#include "udp_out.h"
+#include "udp_out_common.h"
 #include "broadcast_select.h"
 
 
 
-uchar                   mbT[6];
 bool                    fBroadcastSelect;
 
+static uchar            mbBuff6[6];
 
 
-static bool PopMAC(struct pbuf *p, const uchar ibStart)
+
+static bool PopBuff6(struct pbuf *p, const uchar ibStart)
 {
   uchar *pb = p->payload;
-
-  combo32 cb;
-  cb.dw = 0;
 
   uchar j = 0;
   uchar b = 0;
@@ -34,68 +34,74 @@ static bool PopMAC(struct pbuf *p, const uchar ibStart)
   {
     if (pb[i] == '.')
     {
-      if (j > 3)
+      if (j > 5)
       {
-        WARNING("PopIP[%u]: wrong points number %u\n", i, j);
-        return GetLong2Error();
+        WARNING("PopBuff6[%u]: wrong points number %u\n", i, j);
+        return false;
       }
       else
       {
-        cb.mb4[3-j] = b;
+        mbBuff6[5-j] = b;
         j++;
         b = 0;
       }
     }
     else if (pb[i] == '|')
     {
-      cb.mb4[3-j] = b;
-      return GetLong2Success(cb.dw);
+      mbBuff6[5-j] = b;
+      return true;
     }
     else
     {
       uchar2 b2 = DecodeChar(pb[i],10);
       if (InvalidChar2(b2))
       {
-        WARNING("PopIP[%u]: wrong char\n", i);
-        return GetLong2Error();
+        WARNING("PopBuff6[%u]: wrong char\n", i);
+        return false;
       }
 
       b = b*10 + b2.b;
     }
   }
 
-  WARNING("PopIP[%u]: wrong length \n", i, p->len);
-  return GetLong2Error();
+  WARNING("PopBuff6[%u]: wrong length \n", i, p->len);
+  return false;
 }
 
 
 
-err_t OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
+static bool GetBroadcastSelect(void)
+{
+  uchar i;
+  for (i=0; i<6; i++)
+  {
+    if (mbMAC[i] != mbBuff6[i])
+      return false;
+  }
+
+  return true;
+}
+
+
+
+void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
   if (broadcast == 0)
-  {
     OutStringZ(pcb,p,addr,port,broadcast,"");
-  }
   else
   {
     if (IsCmd(p,"W|"))
       fBroadcastSelect = true;
     else
     {
+      if (PopBuff6(p, 1))
+      {
+        fBroadcastSelect = GetBroadcastSelect();
+        if (fBroadcastSelect)
+          OutStringZ(pcb,p,addr,port,broadcast,"");
+      }
+      else
+        WARNING("wrong broadcast-selected MAC\n");
     }
-
   }
-
-  uint2 wSfx = PopSfx(p);
-  if (InvalidInt2(wSfx)) return wSfx.err;
-
-  Buzz();
-
-  InitPush();
-  PushChar('A');
-  PushSfx(wSfx.w);
-
-  return Out(pcb,p,addr,port,broadcast);
 }
-
-OutStringZ(pcb,p,addr,port,broadcast,"");
