@@ -84,10 +84,7 @@ static bool GetBroadcastSelect(void)
 
 void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  if (broadcast == 0) {
-    CONSOLE("broadcast select: ignore, no broadcast\n");
-    OutStringZ(pcb,p,addr,port,broadcast,"");
-  } else {
+  if (broadcast != 0) {
     if (IsCmd(p,"W|")) {
       fBroadcastSelect = true;
       CONSOLE("broadcast select: yes, by default\n");
@@ -101,8 +98,10 @@ void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
           CONSOLE("broadcast select: no\n");
         }
       } else {
-        WARNING("wrong broadcast-selected MAC\n");
+        WARNING("broadcast select: wrong MAC\n");
       }
     }
+  } else {
+    WARNING("broadcast select: wrong mode\n");
   }
 }
