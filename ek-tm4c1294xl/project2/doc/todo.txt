@@ -69,3 +69,5 @@ err_t eLastErr;
 + time
 
 volatile g_sState
+
+MEMP_STATS_INC(err, type); & stats_display_memp

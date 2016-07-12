@@ -55,6 +55,7 @@ void RunModem(const uchar u);
 
 void ModemConnected(const uchar u);
 void ModemConnectFailed(const uchar u, const err_t err);
+void ModemDisconnectedByTimeout(const uchar u);
 
 
 #endif

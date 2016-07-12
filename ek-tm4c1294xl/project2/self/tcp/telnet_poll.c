@@ -7,6 +7,7 @@ telnet_poll.c
 #include "../main.h"
 #include "../kernel/log.h"
 #include "../kernel/tasks.h"
+#include "../uart/modem.h"
 #include "tcp_errors.h"
 #include "telnet.h"
 #include "telnet_close.h"
@@ -64,6 +65,8 @@ err_t TelnetPoll(void *arg, struct tcp_pcb *pcb)
             pState->ulConnectionTimeout++;
             if ((pState->ulMaxTimeout != 0) && (pState->ulConnectionTimeout > pState->ulMaxTimeout))
             {
+               ModemDisconnectedByTimeout(pState->ucSerialPort);
+
                CONSOLE("%u: poll - close client connection by timeout\n", pState->ucSerialPort);
                return TelnetCloseClient(pState->ucSerialPort);
             }
