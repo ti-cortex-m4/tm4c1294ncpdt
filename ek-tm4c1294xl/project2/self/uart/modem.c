@@ -11,6 +11,7 @@ modem.c
 #include "../kernel/log.h"
 #include "../kernel/printf.h"
 #include "../kernel/wrappers.h"
+#include "../tcp/telnet.h"
 #include "../tcp/telnet_open.h"
 #include "../tcp/telnet_close.h"
 #include "../uart/serial_send.h"
@@ -82,7 +83,7 @@ bool IsModem(const uchar u)
 
 bool IsModemModeCommand(const uchar u)
 {
-  return (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND);
+  return IsModem(u) && (mbModemMode[u] == MODEM_MODE_COMMAND);
 }
 
 
@@ -343,7 +344,7 @@ void RunModem(const uchar u)
     else if (IsModemCmdPrefix(u, "atdp"))
     {
       if (!ModemConnect(u))
-        ModemOut(u, 4, "4 ERROR, no connection");
+        ModemOut(u, 4, "4 ERROR, wrong address");
     }
     else if (IsModemCmd(u, "ath0"))
       ModemDisconnect(u);
@@ -363,11 +364,15 @@ void RunModem(const uchar u)
       DelayMilliSecond(100);
       Restart();
     }
-    else
+    else if (IsModemCmd(u, "at-connected"))
     {
-      WARNING("RunModem: unknown command\n");
-      ModemOut(u, 4, "4 ERROR, unknown command");
+      if (g_sState[u].eTCPState == STATE_TCP_CONNECTED)
+        ModemOut(u, 1, "1 YES, is connected");
+      else
+        ModemOut(u, 0, "0 NO, isn't connected");
     }
+    else
+      ModemOut(u, 4, "4 ERROR, unknown command");
 
     mbInputMode[u] = INPUT_MODE_BEGIN;
   }
@@ -386,7 +391,5 @@ void RunModem(const uchar u)
 
 
 // локальный порт недоступен
-// удаленный порт недоступен - соединение завершилось неудачно
 // ATH0 в неправильном режиме
 // не отключать по таймауту
-// текущией статус - соединено/отсоединено
