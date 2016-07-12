@@ -310,7 +310,7 @@ bool ModemConnect(const uchar u)
 
 void ModemConnected(const uchar u)
 {
-  if (IsModem(u) && (mbModemMode[u] == MODEM_MODE_COMMAND)) // TODO ???
+  if (IsModem(u) && (mbModemMode[u] == MODEM_MODE_COMMAND))
   {
     mbModemMode[u] = MODEM_MODE_DATA;
     ModemOut(u, 1, "1 CONNECT, connected");
@@ -338,14 +338,18 @@ void RunModem(const uchar u)
   if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
   {
     if (IsModemCmd(u, "at"))
+    {
       ModemOut(u, 0, "0 OK, modem available");
+    }
     else if (IsModemCmdPrefix(u, "atdp"))
     {
       if (!ModemConnect(u))
         ModemOut(u, 4, "4 ERROR, wrong address");
     }
     else if (IsModemCmd(u, "ath0"))
+    {
       ModemDisconnect(u);
+    }
     else if (IsModemCmd(u, "atv0"))
     {
       fVerbose = false;
@@ -370,7 +374,9 @@ void RunModem(const uchar u)
         ModemOut(u, 0, "0 NO, isn't connected");
     }
     else
+    {
       ModemOut(u, 4, "4 ERROR, unknown command");
+    }
 
     mbInputMode[u] = INPUT_MODE_BEGIN;
   }
@@ -385,7 +391,3 @@ void RunModem(const uchar u)
     }
   }
 }
-
-
-
-// ATH0 в неправильном режиме
