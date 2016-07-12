@@ -67,7 +67,6 @@ static bool PopBuff6(struct pbuf *p, const uchar ibStart)
 }
 
 
-
 static bool GetBroadcastSelect(void)
 {
   uchar i;
@@ -81,36 +80,25 @@ static bool GetBroadcastSelect(void)
 }
 
 
-
 void OutBroadcastSelect(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
-  if (broadcast == 0)
-  {
+  if (broadcast == 0) {
     CONSOLE("broadcast select: ignore, no broadcast\n");
     OutStringZ(pcb,p,addr,port,broadcast,"");
-  }
-  else
-  {
-    if (IsCmd(p,"W|"))
-    {
+  } else {
+    if (IsCmd(p,"W|")) {
       fBroadcastSelect = true;
       CONSOLE("broadcast select: yes, by default\n");
-    }
-    else
-    {
-      if (PopBuff6(p, 1))
-      {
+    } else {
+      if (PopBuff6(p, 1)) {
         fBroadcastSelect = GetBroadcastSelect();
-        if (fBroadcastSelect)
-        {
+        if (fBroadcastSelect) {
           CONSOLE("broadcast select: yes\n");
           OutStringZ(pcb,p,addr,port,broadcast,"");
-        }
-        else
+        } else {
           CONSOLE("broadcast select: no\n");
-      }
-      else
-      {
+        }
+      } else {
         WARNING("wrong broadcast-selected MAC\n");
       }
     }
