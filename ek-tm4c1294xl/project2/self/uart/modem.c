@@ -377,27 +377,27 @@ void RunModem(const uchar u)
       fVerbose = true;
       ModemOut(u, 0, "0 OK, verbose answers");
     }
-    else if (IsModemCmd(u, "at-restart"))
+    else if (IsModemCmd(u, "at-rst"))
     {
       ModemOut(u, 0, "0 OK, going to restart");
       DelayMilliSecond(100);
       Restart();
     }
-    else if (IsModemCmd(u, "at-connected"))
+    else if (IsModemCmd(u, "at-ic"))
     {
       if (g_sState[u].eTCPState == STATE_TCP_CONNECTED)
         ModemOut(u, 1, "1 YES, is connected");
       else
         ModemOut(u, 0, "0 NO, is not connected");
     }
-    else if (IsModemCmd(u, "at-disconnected-by-timeout"))
+    else if (IsModemCmd(u, "at-dcbt"))
     {
       if (mbDisconnectedByTimeout[u] == false)
         ModemOut(u, 0, "0 NO, disconnected normally");
       else if (mbDisconnectedByTimeout[u] == true)
         ModemOut(u, 1, "1 YES, disconnected by timeout");
       else
-        ModemOut(u, 2, "2 UNKNOWN, connection in progress");
+        ModemOut(u, 2, "2 UNKNOWN");
     }
     else
     {
