@@ -50,7 +50,7 @@ void InitModem(void)
     mbEscapeCnt[u] = 0;
     mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
 
-    mfDisconnectedByTimeout[u] = false;
+    mfDisconnectedByTimeout[u] = UNKNOWN;
   }
 
   fVerbose = false;
@@ -308,6 +308,8 @@ bool ModemConnect(const uchar u)
     (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
     wPort);
 
+  mfDisconnectedByTimeout[u] = UNKNOWN;
+
   TelnetOpen(dwIP, wPort, u);
   return true;
 }
@@ -385,6 +387,15 @@ void RunModem(const uchar u)
         ModemOut(u, 1, "1 YES, is connected");
       else
         ModemOut(u, 0, "0 NO, is not connected");
+    }
+    else if (IsModemCmd(u, "at-disconnected-by-timeout"))
+    {
+      if (mfDisconnectedByTimeout[u] == false)
+        ModemOut(u, 0, "0 NO, disconnected normally");
+      else if (mfDisconnectedByTimeout[u] == true)
+        ModemOut(u, 1, "1 YES, disconnected by timeout");
+      else
+        ModemOut(u, 2, "2 UNKNOWN, connection in progress");
     }
     else
     {
