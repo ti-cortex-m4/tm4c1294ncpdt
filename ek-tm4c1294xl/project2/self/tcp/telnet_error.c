@@ -48,7 +48,7 @@ void TelnetError(void *arg, err_t err)
         }
         else
         {
-            CONSOLE("%u: try to open again\n", pState->ucSerialPort);
+            CONSOLE("%u: try to connect again\n", pState->ucSerialPort);
 
             // Attempt to reestablish the telnet connection to the server.
             TelnetOpen(pState->ulTelnetRemoteIP, pState->usTelnetRemotePort, pState->ucSerialPort);
