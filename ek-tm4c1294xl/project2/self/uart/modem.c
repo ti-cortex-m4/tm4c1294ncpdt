@@ -111,7 +111,7 @@ void ProcessModemModeCommand(const uchar u, const uchar b)
 
 void ProcessModemModeData(const uchar u, const uchar b)
 {
-  if (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM)
+  if (IsModem(u))
   {
     mbEscapeCnt[u] = 0;
 
@@ -132,7 +132,7 @@ void Modem_10Hz(void)
   uchar u;
   for (u=0; u<UART_COUNT; u++)
   {
-    if (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM)
+    if (IsModem(u))
     {
       if (mbEscapeCnt[u] >= 10)
       {
@@ -310,7 +310,7 @@ bool ModemConnect(const uchar u)
 
 void ModemConnected(const uchar u)
 {
-  if ((mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM) && (mbModemMode[u] == MODEM_MODE_COMMAND)) // TODO ???
+  if (IsModem(u) && (mbModemMode[u] == MODEM_MODE_COMMAND)) // TODO ???
   {
     mbModemMode[u] = MODEM_MODE_DATA;
     ModemOut(u, 1, "1 CONNECT, connected");
@@ -328,10 +328,8 @@ void ModemDisconnect(const uchar u)
 {
   CONSOLE("%u: disconnect as modem\n", u);
 
-  // TODO check status
   TelnetCloseClient(u);
   ModemOut(u, 0, "0 OK, disconnected");
-  // TODO check result
 }
 
 
@@ -390,6 +388,4 @@ void RunModem(const uchar u)
 
 
 
-// локальный порт недоступен
 // ATH0 в неправильном режиме
-// не отключать по таймауту

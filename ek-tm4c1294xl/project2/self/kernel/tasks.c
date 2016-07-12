@@ -60,7 +60,7 @@ void StartConnection(uchar u)
       StartClientConnection(u);
     }
   }
-  else if (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM)
+  else if (IsModem(u))
   {
   }
   else
@@ -111,7 +111,7 @@ void RunConnections(void)
         ERROR("%u: wrong connection mode %u", u, mbConnectionMode[u]);
       }
     }
-    else if (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM)
+    else if (IsModem(u))
     {
       RunModem(u);
     }
