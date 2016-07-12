@@ -30,9 +30,18 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
 
   if (IsCmd(p,"X")) {
     OutEcho(pcb,p,addr,port,broadcast);
+    return;
   } else if (IsCmd(p,"W")) {
     OutBroadcastSelect(pcb,p,addr,port,broadcast);
-  } else if (IsCmd(p,"E")) {
+    return;
+  }
+
+  if (fBroadcastSelect != true) {
+    pbuf_free(p);
+    return;
+  }
+
+  if (IsCmd(p,"E")) {
     Restart();
   } else if (IsCmd(p,"L")) {
     OutStringZ(pcb,p,addr,port,broadcast,"");
