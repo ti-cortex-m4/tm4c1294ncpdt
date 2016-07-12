@@ -25,6 +25,8 @@ volatile input_mode_t   mbInputMode[UART_COUNT];
 volatile uchar          mbEscapeCnt[UART_COUNT];
 volatile escape_mode_t  mbEscapeMode[UART_COUNT];
 
+volatile bool           mfDisconnectedByTimeout[UART_COUNT];
+
 
 
 #define MODEM_BUF_SIZE  32
@@ -47,6 +49,8 @@ void InitModem(void)
 
     mbEscapeCnt[u] = 0;
     mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
+
+    mfDisconnectedByTimeout[u] = false;
   }
 
   fVerbose = false;
@@ -325,12 +329,20 @@ void ModemConnectFailed(const uchar u, const err_t err)
 }
 
 
-void ModemDisconnect(const uchar u)
+static void ModemDisconnect(const uchar u)
 {
   CONSOLE("%u: disconnect as modem\n", u);
 
+  mfDisconnectedByTimeout[u] = false;
+
   TelnetCloseClient(u);
   ModemOut(u, 0, "0 OK, disconnected");
+}
+
+
+void ModemDisconnectedByTimeout(const uchar u)
+{
+  mfDisconnectedByTimeout[u] = true;
 }
 
 
