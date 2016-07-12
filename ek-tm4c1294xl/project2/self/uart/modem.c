@@ -75,9 +75,10 @@ static uchar ToUpper(const uchar b)
 }
 
 
+
 bool IsModem(const uchar u)
 {
-  return (mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM);
+  return mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM;
 }
 
 
@@ -149,7 +150,7 @@ void Modem_10Hz(void)
 
 
 
-bool IsModemCmd(const uchar u, const uchar *pcszCmd)
+static bool IsModemCmd(const uchar u, const uchar *pcszCmd)
 {
   uchar i = 0;
   while (*pcszCmd)
@@ -165,7 +166,7 @@ bool IsModemCmd(const uchar u, const uchar *pcszCmd)
 }
 
 
-bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
+static bool IsModemCmdPrefix(const uchar u, const uchar *pcszCmd)
 {
   uchar i = 0;
   while (*pcszCmd)
