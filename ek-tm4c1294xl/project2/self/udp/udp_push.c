@@ -17,14 +17,10 @@ uint                    iwUDPPush;
 uint                    cwErrUPDPushCharOverflow = 0;
 
 
-extern bool             fBroadcastAlways;
-
-
 
 void InitPush(void)
 {
   iwUDPPush = 0;
-  fBroadcastAlways = false;
 }
 
 

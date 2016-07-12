@@ -16,6 +16,8 @@ broadcast_select.c
 
 
 
+bool                    fBroadcastSelect;
+
 static uchar            mbBuff6[6];
 
 
