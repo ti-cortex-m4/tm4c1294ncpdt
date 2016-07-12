@@ -25,7 +25,7 @@ volatile input_mode_t   mbInputMode[UART_COUNT];
 volatile uchar          mbEscapeCnt[UART_COUNT];
 volatile escape_mode_t  mbEscapeMode[UART_COUNT];
 
-volatile bool           mfDisconnectedByTimeout[UART_COUNT];
+volatile uchar          mbDisconnectedByTimeout[UART_COUNT];
 
 
 
@@ -50,7 +50,7 @@ void InitModem(void)
     mbEscapeCnt[u] = 0;
     mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
 
-    mfDisconnectedByTimeout[u] = UNKNOWN;
+    mbDisconnectedByTimeout[u] = UNKNOWN;
   }
 
   fVerbose = false;
@@ -308,7 +308,7 @@ bool ModemConnect(const uchar u)
     (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
     wPort);
 
-  mfDisconnectedByTimeout[u] = UNKNOWN;
+  mbDisconnectedByTimeout[u] = UNKNOWN;
 
   TelnetOpen(dwIP, wPort, u);
   return true;
@@ -335,7 +335,7 @@ static void ModemDisconnect(const uchar u)
 {
   CONSOLE("%u: disconnect as modem\n", u);
 
-  mfDisconnectedByTimeout[u] = false;
+  mbDisconnectedByTimeout[u] = false;
 
   TelnetCloseClient(u);
   ModemOut(u, 0, "0 OK, disconnected");
@@ -344,7 +344,9 @@ static void ModemDisconnect(const uchar u)
 
 void ModemDisconnectedByTimeout(const uchar u)
 {
-  mfDisconnectedByTimeout[u] = true;
+  mbModemMode[u] = MODEM_MODE_COMMAND;
+
+  mbDisconnectedByTimeout[u] = true;
 }
 
 
@@ -390,9 +392,9 @@ void RunModem(const uchar u)
     }
     else if (IsModemCmd(u, "at-disconnected-by-timeout"))
     {
-      if (mfDisconnectedByTimeout[u] == false)
+      if (mbDisconnectedByTimeout[u] == false)
         ModemOut(u, 0, "0 NO, disconnected normally");
-      else if (mfDisconnectedByTimeout[u] == true)
+      else if (mbDisconnectedByTimeout[u] == true)
         ModemOut(u, 1, "1 YES, disconnected by timeout");
       else
         ModemOut(u, 2, "2 UNKNOWN, connection in progress");
