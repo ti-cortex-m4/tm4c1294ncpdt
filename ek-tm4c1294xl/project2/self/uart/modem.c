@@ -354,12 +354,12 @@ void RunModem(const uchar u)
     else if (IsModemCmd(u, "atv0"))
     {
       fVerbose = false;
-      ModemOut(u, 0, "0 OK, verbose answers");
+      ModemOut(u, 0, "0 OK, numeric answers");
     }
     else if (IsModemCmd(u, "atv1"))
     {
       fVerbose = true;
-      ModemOut(u, 0, "0 OK, numeric answers");
+      ModemOut(u, 0, "0 OK, verbose answers");
     }
     else if (IsModemCmd(u, "at-restart"))
     {
@@ -372,7 +372,7 @@ void RunModem(const uchar u)
       if (g_sState[u].eTCPState == STATE_TCP_CONNECTED)
         ModemOut(u, 1, "1 YES, is connected");
       else
-        ModemOut(u, 0, "0 NO, isn't connected");
+        ModemOut(u, 0, "0 NO, is not connected");
     }
     else
     {
