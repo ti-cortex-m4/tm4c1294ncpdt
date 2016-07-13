@@ -44,7 +44,7 @@ void InitModem(void)
   uchar u;
   for(u = 0; u < UART_COUNT; u++)
   {
-    mbModemMode[u] = MODEM_MODE_COMMAND;
+    mbModemMode[u] = MM_COMMAND;
     mbInputMode[u] = IM_BEGIN;
 
     mbEscapeCnt[u] = 0;
@@ -88,7 +88,7 @@ bool IsModem(const uchar u)
 
 bool IsModemModeCommand(const uchar u)
 {
-  return IsModem(u) && (mbModemMode[u] == MODEM_MODE_COMMAND);
+  return IsModem(u) && (mbModemMode[u] == MM_COMMAND);
 }
 
 
@@ -323,11 +323,11 @@ bool ModemConnect(const uchar u)
 
 void ModemConnected(const uchar u)
 {
-  if (IsModem(u) && (mbModemMode[u] == MODEM_MODE_COMMAND))
+  if (IsModem(u) && (mbModemMode[u] == MM_COMMAND))
   {
     mbDisconnect[u] = DC_UNKNOWN;
 
-    mbModemMode[u] = MODEM_MODE_DATA;
+    mbModemMode[u] = MM_DATA;
     ModemOut(u, 1, "CONNECT, connected");
   }
 }
@@ -335,17 +335,17 @@ void ModemConnected(const uchar u)
 
 void ModemConnectFailed(const uchar u, const err_t err)
 {
-  mbModemMode[u] = MODEM_MODE_COMMAND;
+  mbModemMode[u] = MM_COMMAND;
 
   if (err == ERR_ABRT)
-    ModemOutBuff(u, 8, BuffPrintF("NO ANSWER, no answer from remote host error=%d", err));
+    ModemOutBuff(u, 8, BuffPrintF("NO ANSWER, no answer from remote host, error, %d", err));
   else if (err == ERR_RST) {
     mbDisconnect[u] = DC_REMOTE;
     TelnetCloseClient(u);
 
-    ModemOutBuff(u, 3, BuffPrintF("NO CARRIER, connection dropped by remote host error=%d", err));
+    ModemOutBuff(u, 3, BuffPrintF("NO CARRIER, connection dropped by remote host, error %d", err));
   } else
-    ModemOutBuff(u, 7, BuffPrintF("BUSY, connection failed error=%d", err));
+    ModemOutBuff(u, 7, BuffPrintF("BUSY, connection failed, error %d", err));
 }
 
 
@@ -362,7 +362,7 @@ static void ModemDisconnect(const uchar u)
 
 void ModemDisconnectedByTimeout(const uchar u)
 {
-  mbModemMode[u] = MODEM_MODE_COMMAND;
+  mbModemMode[u] = MM_COMMAND;
   mbDisconnect[u] = DC_TIMEOUT;
 
   ModemOut(u, 6, "NO DIALTONE, disconnected by timeout");
@@ -371,7 +371,7 @@ void ModemDisconnectedByTimeout(const uchar u)
 
 void RunModem(const uchar u)
 {
-  if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == IM_READY))
+  if ((mbModemMode[u] == MM_COMMAND) && (mbInputMode[u] == IM_READY))
   {
     if (IsModemCmd(u, "at")) {
       ModemOut(u, 0, "OK, modem available");
@@ -411,9 +411,9 @@ void RunModem(const uchar u)
     mbInputMode[u] = IM_BEGIN;
   }
 
-  if (mbModemMode[u] == MODEM_MODE_DATA) {
+  if (mbModemMode[u] == MM_DATA) {
     if (mbEscapeMode[u] == EM_PAUSE_AFTER) {
-      mbModemMode[u] = MODEM_MODE_COMMAND;
+      mbModemMode[u] = MM_COMMAND;
       ModemOut(u, 0, "OK, command mode");
       mbEscapeMode[u] = EM_BEGIN;
     }

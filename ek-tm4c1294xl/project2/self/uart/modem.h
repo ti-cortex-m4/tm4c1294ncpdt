@@ -10,8 +10,8 @@ modem.h
 
 typedef enum
 {
-  MODEM_MODE_COMMAND = 0,
-  MODEM_MODE_DATA = 1,
+  MM_COMMAND = 0,
+  MM_DATA = 1,
 } modem_mode_t;
 
 
