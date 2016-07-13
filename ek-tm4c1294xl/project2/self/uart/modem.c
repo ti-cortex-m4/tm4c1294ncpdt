@@ -45,10 +45,10 @@ void InitModem(void)
   for(u = 0; u < UART_COUNT; u++)
   {
     mbModemMode[u] = MODEM_MODE_COMMAND;
-    mbInputMode[u] = INPUT_MODE_BEGIN;
+    mbInputMode[u] = IM_BEGIN;
 
     mbEscapeCnt[u] = 0;
-    mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
+    mbEscapeMode[u] = EM_BEGIN;
 
     mbDisconnect[u] = DC_UNKNOWN;
   }
@@ -94,13 +94,13 @@ bool IsModemModeCommand(const uchar u)
 
 void ProcessModemModeCommand(const uchar u, const uchar b)
 {
-  if (mbInputMode[u] == INPUT_MODE_BEGIN)
+  if (mbInputMode[u] == IM_BEGIN)
   {
-    mbInputMode[u] = INPUT_MODE_DATA;
+    mbInputMode[u] = IM_DATA;
     mibPush[u] = 0;
   }
 
-  if (mbInputMode[u] == INPUT_MODE_DATA)
+  if (mbInputMode[u] == IM_DATA)
   {
     if (mibPush[u] >= MODEM_BUF_SIZE)
       mibPush[u] = 0;
@@ -109,7 +109,7 @@ void ProcessModemModeCommand(const uchar u, const uchar b)
     mibPush[u]++;
 
     if (IsEOL(b))
-      mbInputMode[u] = INPUT_MODE_READY;
+      mbInputMode[u] = IM_READY;
   }
 }
 
@@ -120,14 +120,14 @@ void ProcessModemModeData(const uchar u, const uchar b)
   {
     mbEscapeCnt[u] = 0;
 
-    if ((mbEscapeMode[u] == ESCAPE_MODE_PAUSE_BEFORE) && (b == '+'))
-      mbEscapeMode[u] = ESCAPE_MODE_PLUS_1;
-    else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_1) && (b == '+'))
-      mbEscapeMode[u] = ESCAPE_MODE_PLUS_2;
-    else if ((mbEscapeMode[u] == ESCAPE_MODE_PLUS_2) && (b == '+'))
-      mbEscapeMode[u] = ESCAPE_MODE_PLUS_3;
+    if ((mbEscapeMode[u] == EM_PAUSE_BEFORE) && (b == '+'))
+      mbEscapeMode[u] = EM_PLUS_1;
+    else if ((mbEscapeMode[u] == EM_PLUS_1) && (b == '+'))
+      mbEscapeMode[u] = EM_PLUS_2;
+    else if ((mbEscapeMode[u] == EM_PLUS_2) && (b == '+'))
+      mbEscapeMode[u] = EM_PLUS_3;
     else
-      mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
+      mbEscapeMode[u] = EM_BEGIN;
   }
 }
 
@@ -141,10 +141,10 @@ void Modem_10Hz(void)
     {
       if (mbEscapeCnt[u] >= 10)
       {
-        if (mbEscapeMode[u] == ESCAPE_MODE_BEGIN)
-          mbEscapeMode[u] = ESCAPE_MODE_PAUSE_BEFORE;
-        else if (mbEscapeMode[u] == ESCAPE_MODE_PLUS_3)
-          mbEscapeMode[u] = ESCAPE_MODE_PAUSE_AFTER;
+        if (mbEscapeMode[u] == EM_BEGIN)
+          mbEscapeMode[u] = EM_PAUSE_BEFORE;
+        else if (mbEscapeMode[u] == EM_PLUS_3)
+          mbEscapeMode[u] = EM_PAUSE_AFTER;
       }
       else
         mbEscapeCnt[u]++;
@@ -371,7 +371,7 @@ void ModemDisconnectedByTimeout(const uchar u)
 
 void RunModem(const uchar u)
 {
-  if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
+  if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == IM_READY))
   {
     if (IsModemCmd(u, "at")) {
       ModemOut(u, 0, "OK, modem available");
@@ -408,14 +408,14 @@ void RunModem(const uchar u)
       ModemOut(u, 4, "ERROR, unknown command");
     }
 
-    mbInputMode[u] = INPUT_MODE_BEGIN;
+    mbInputMode[u] = IM_BEGIN;
   }
 
   if (mbModemMode[u] == MODEM_MODE_DATA) {
-    if (mbEscapeMode[u] == ESCAPE_MODE_PAUSE_AFTER) {
+    if (mbEscapeMode[u] == EM_PAUSE_AFTER) {
       mbModemMode[u] = MODEM_MODE_COMMAND;
       ModemOut(u, 0, "OK, command mode");
-      mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
+      mbEscapeMode[u] = EM_BEGIN;
     }
   }
 }
