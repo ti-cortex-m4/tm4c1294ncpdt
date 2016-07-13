@@ -191,6 +191,9 @@ static void ModemOut(const uchar u, const uchar b, char *pcsz)
 {
   if (fVerbose)
   {
+    SerialSend(u, '0' + b);
+    SerialSend(u, ' ');
+
     while (*pcsz)
       SerialSend(u, *pcsz++);
   }
@@ -320,7 +323,7 @@ void ModemConnected(const uchar u)
     mbDisconnectedByTimeout[u] = UNKNOWN;
 
     mbModemMode[u] = MODEM_MODE_DATA;
-    ModemOut(u, 1, "1 CONNECT, connected");
+    ModemOut(u, 1, "CONNECT, connected");
   }
 }
 
@@ -328,7 +331,7 @@ void ModemConnected(const uchar u)
 void ModemConnectFailed(const uchar u, const err_t err)
 {
   mbModemMode[u] = MODEM_MODE_COMMAND;
-  ModemOut(u, 7, (char *)BuffPrintF("7 BUSY, connection failed with error %d", err).pbBuff);
+  ModemOut(u, 7, (char *)BuffPrintF("BUSY, connection failed with error %d", err).pbBuff);
 }
 
 
@@ -339,7 +342,7 @@ static void ModemDisconnect(const uchar u)
   mbDisconnectedByTimeout[u] = false;
 
   TelnetCloseClient(u);
-  ModemOut(u, 0, "0 OK, disconnected");
+  ModemOut(u, 0, "OK, disconnected");
 }
 
 
@@ -347,6 +350,8 @@ void ModemDisconnectedByTimeout(const uchar u)
 {
   mbModemMode[u] = MODEM_MODE_COMMAND;
   mbDisconnectedByTimeout[u] = true;
+
+  ModemOut(u, 0, "OK, disconnected by timeout");
 }
 
 
@@ -355,36 +360,36 @@ void RunModem(const uchar u)
   if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
   {
     if (IsModemCmd(u, "at")) {
-      ModemOut(u, 0, "0 OK, modem available");
+      ModemOut(u, 0, "OK, modem available");
     } else if (IsModemCmdPrefix(u, "atdp")) {
       if (!ModemConnect(u))
-        ModemOut(u, 4, "4 ERROR, wrong address");
+        ModemOut(u, 4, "ERROR, wrong address");
     } else if (IsModemCmd(u, "ath0")) {
       ModemDisconnect(u);
     } else if (IsModemCmd(u, "atv0")) {
       fVerbose = false;
-      ModemOut(u, 0, "0 OK, numeric answers");
+      ModemOut(u, 0, "OK, numeric answers");
     } else if (IsModemCmd(u, "atv1")) {
       fVerbose = true;
-      ModemOut(u, 0, "0 OK, verbose answers");
+      ModemOut(u, 0, "OK, verbose answers");
     } else if (IsModemCmd(u, "at-rst")) {
-      ModemOut(u, 0, "0 OK, going to restart");
+      ModemOut(u, 0, "OK, going to restart");
       DelayMilliSecond(100);
       Restart();
     } else if (IsModemCmd(u, "at-c")) {
       if (g_sState[u].eTCPState == STATE_TCP_CONNECTED)
-        ModemOut(u, 1, "1 YES, connected");
+        ModemOut(u, 1, "YES, connected");
       else
-        ModemOut(u, 0, "0 NO, not connected");
+        ModemOut(u, 0, "NO, not connected");
     } else if (IsModemCmd(u, "at-dcbt")) {
       if (mbDisconnectedByTimeout[u] == false)
-        ModemOut(u, 0, "0 NO, disconnected normally");
+        ModemOut(u, 0, "NO, disconnected normally");
       else if (mbDisconnectedByTimeout[u] == true)
-        ModemOut(u, 1, "1 YES, disconnected by timeout");
+        ModemOut(u, 1, "YES, disconnected by timeout");
       else
-        ModemOut(u, 2, "2 UNKNOWN, never disconnected");
+        ModemOut(u, 2, "UNKNOWN, never disconnected");
     } else {
-      ModemOut(u, 4, "4 ERROR, unknown command");
+      ModemOut(u, 4, "ERROR, unknown command");
     }
 
     mbInputMode[u] = INPUT_MODE_BEGIN;
@@ -393,7 +398,7 @@ void RunModem(const uchar u)
   if (mbModemMode[u] == MODEM_MODE_DATA) {
     if (mbEscapeMode[u] == ESCAPE_MODE_PAUSE_AFTER) {
       mbModemMode[u] = MODEM_MODE_COMMAND;
-      ModemOut(u, 0, "0 OK, command mode");
+      ModemOut(u, 0, "OK, command mode");
       mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
     }
   }
