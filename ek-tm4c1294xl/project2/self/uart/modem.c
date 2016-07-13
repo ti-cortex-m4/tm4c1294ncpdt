@@ -327,6 +327,7 @@ void ModemConnected(const uchar u)
 
 void ModemConnectFailed(const uchar u, const err_t err)
 {
+  mbModemMode[u] = MODEM_MODE_COMMAND;
   ModemOut(u, 7, (char *)BuffPrintF("7 BUSY, connection failed with error %d", err).pbBuff);
 }
 
@@ -345,7 +346,6 @@ static void ModemDisconnect(const uchar u)
 void ModemDisconnectedByTimeout(const uchar u)
 {
   mbModemMode[u] = MODEM_MODE_COMMAND;
-
   mbDisconnectedByTimeout[u] = true;
 }
 
@@ -354,63 +354,44 @@ void RunModem(const uchar u)
 {
   if ((mbModemMode[u] == MODEM_MODE_COMMAND) && (mbInputMode[u] == INPUT_MODE_READY))
   {
-    if (IsModemCmd(u, "at"))
-    {
+    if (IsModemCmd(u, "at")) {
       ModemOut(u, 0, "0 OK, modem available");
-    }
-    else if (IsModemCmdPrefix(u, "atdp"))
-    {
+    } else if (IsModemCmdPrefix(u, "atdp")) {
       if (!ModemConnect(u))
         ModemOut(u, 4, "4 ERROR, wrong address");
-    }
-    else if (IsModemCmd(u, "ath0"))
-    {
+    } else if (IsModemCmd(u, "ath0")) {
       ModemDisconnect(u);
-    }
-    else if (IsModemCmd(u, "atv0"))
-    {
+    } else if (IsModemCmd(u, "atv0")) {
       fVerbose = false;
       ModemOut(u, 0, "0 OK, numeric answers");
-    }
-    else if (IsModemCmd(u, "atv1"))
-    {
+    } else if (IsModemCmd(u, "atv1")) {
       fVerbose = true;
       ModemOut(u, 0, "0 OK, verbose answers");
-    }
-    else if (IsModemCmd(u, "at-rst"))
-    {
+    } else if (IsModemCmd(u, "at-rst")) {
       ModemOut(u, 0, "0 OK, going to restart");
       DelayMilliSecond(100);
       Restart();
-    }
-    else if (IsModemCmd(u, "at-ic"))
-    {
+    } else if (IsModemCmd(u, "at-c")) {
       if (g_sState[u].eTCPState == STATE_TCP_CONNECTED)
-        ModemOut(u, 1, "1 YES, is connected");
+        ModemOut(u, 1, "1 YES, connected");
       else
-        ModemOut(u, 0, "0 NO, is not connected");
-    }
-    else if (IsModemCmd(u, "at-dcbt"))
-    {
+        ModemOut(u, 0, "0 NO, not connected");
+    } else if (IsModemCmd(u, "at-dcbt")) {
       if (mbDisconnectedByTimeout[u] == false)
         ModemOut(u, 0, "0 NO, disconnected normally");
       else if (mbDisconnectedByTimeout[u] == true)
         ModemOut(u, 1, "1 YES, disconnected by timeout");
       else
         ModemOut(u, 2, "2 UNKNOWN, never disconnected");
-    }
-    else
-    {
+    } else {
       ModemOut(u, 4, "4 ERROR, unknown command");
     }
 
     mbInputMode[u] = INPUT_MODE_BEGIN;
   }
 
-  if (mbModemMode[u] == MODEM_MODE_DATA)
-  {
-    if (mbEscapeMode[u] == ESCAPE_MODE_PAUSE_AFTER)
-    {
+  if (mbModemMode[u] == MODEM_MODE_DATA) {
+    if (mbEscapeMode[u] == ESCAPE_MODE_PAUSE_AFTER) {
       mbModemMode[u] = MODEM_MODE_COMMAND;
       ModemOut(u, 0, "0 OK, command mode");
       mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
