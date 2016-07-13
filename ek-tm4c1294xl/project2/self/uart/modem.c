@@ -207,6 +207,11 @@ static void ModemOut(const uchar u, const uchar b, char *pcsz)
 }
 
 
+static void ModemOutBuff(const uchar u, const uchar b, const buff bf)
+{
+  ModemOut(u, b, (char *)bf.pbBuff);
+}
+
 
 static void InitPop(const uchar u, const uchar i)
 {
@@ -331,7 +336,13 @@ void ModemConnected(const uchar u)
 void ModemConnectFailed(const uchar u, const err_t err)
 {
   mbModemMode[u] = MODEM_MODE_COMMAND;
-  ModemOut(u, 7, (char *)BuffPrintF("BUSY, connection failed with error %d", err).pbBuff);
+
+  if (err == ERR_ABRT)
+    ModemOutBuff(u, 8, BuffPrintF("NO ANSWER, no answer from remote host error=%d", err));
+  else if (err == ERR_RST)
+    ModemOutBuff(u, 3, BuffPrintF("NO CARRIER, connection dropped by remote host error=%d", err));
+  else
+    ModemOutBuff(u, 7, BuffPrintF("BUSY, connection failed error=%d", err));
 }
 
 
@@ -351,7 +362,7 @@ void ModemDisconnectedByTimeout(const uchar u)
   mbModemMode[u] = MODEM_MODE_COMMAND;
   mbDisconnectedByTimeout[u] = true;
 
-  ModemOut(u, 0, "OK, disconnected by timeout");
+  ModemOut(u, 6, "NO DIALTONE, disconnected by timeout");
 }
 
 
