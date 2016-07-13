@@ -338,7 +338,7 @@ void ModemConnectFailed(const uchar u, const err_t err)
   mbModemMode[u] = MM_COMMAND;
 
   if (err == ERR_ABRT)
-    ModemOutBuff(u, 8, BuffPrintF("NO ANSWER, no answer from remote host, error, %d", err));
+    ModemOutBuff(u, 8, BuffPrintF("NO ANSWER, no answer from remote host, error %d", err));
   else if (err == ERR_RST) {
     mbDisconnect[u] = DC_REMOTE;
     TelnetCloseClient(u);
@@ -399,9 +399,9 @@ void RunModem(const uchar u)
       if (mbDisconnect[u] == DC_NORMALLY)
         ModemOut(u, 0, "NORMALLY, disconnected normally");
       else if (mbDisconnect[u] == DC_TIMEOUT)
-        ModemOut(u, 1, "BY TIMEOUT, disconnected by timeout");
+        ModemOut(u, 1, "TIMEOUT, disconnected by timeout");
       else if (mbDisconnect[u] == DC_REMOTE)
-        ModemOut(u, 2, "BY REMOTE HOST, disconnected by remote host");
+        ModemOut(u, 2, "REMOTE, disconnected by remote host");
       else
         ModemOut(u, 3, "UNKNOWN, never disconnected");
     } else {
