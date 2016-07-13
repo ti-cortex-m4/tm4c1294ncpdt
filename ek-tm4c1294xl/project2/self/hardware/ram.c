@@ -9,6 +9,14 @@ ram.c
 
 
 
+static uchar            i = 0;
+
+
+
 void OutOfMemory(void)
 {
+  if (++i > 3)
+  {
+    ASSERT(false);
+  }
 }
