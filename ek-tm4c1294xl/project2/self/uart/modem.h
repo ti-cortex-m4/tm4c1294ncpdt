@@ -17,20 +17,20 @@ typedef enum
 
 typedef enum
 {
-  INPUT_MODE_BEGIN = 0,
-  INPUT_MODE_DATA = 1,
-  INPUT_MODE_READY = 2,
+  IM_BEGIN = 0,
+  IM_DATA = 1,
+  IM_READY = 2,
 } input_mode_t;
 
 
 typedef enum
 {
-  ESCAPE_MODE_BEGIN = 0,
-  ESCAPE_MODE_PAUSE_BEFORE = 1,
-  ESCAPE_MODE_PLUS_1 = 2,
-  ESCAPE_MODE_PLUS_2 = 3,
-  ESCAPE_MODE_PLUS_3 = 4,
-  ESCAPE_MODE_PAUSE_AFTER = 5,
+  EM_BEGIN = 0,
+  EM_PAUSE_BEFORE = 1,
+  EM_PLUS_1 = 2,
+  EM_PLUS_2 = 3,
+  EM_PLUS_3 = 4,
+  EM_PAUSE_AFTER = 5,
 } escape_mode_t;
 
 
