@@ -308,8 +308,6 @@ bool ModemConnect(const uchar u)
     (dwIP >> 24), (dwIP >> 16) & 0xFF, (dwIP >> 8) & 0xFF, dwIP & 0xFF,
     wPort);
 
-  mbDisconnectedByTimeout[u] = UNKNOWN;
-
   TelnetOpen(dwIP, wPort, u);
   return true;
 }
@@ -319,6 +317,8 @@ void ModemConnected(const uchar u)
 {
   if (IsModem(u) && (mbModemMode[u] == MODEM_MODE_COMMAND))
   {
+    mbDisconnectedByTimeout[u] = UNKNOWN;
+
     mbModemMode[u] = MODEM_MODE_DATA;
     ModemOut(u, 1, "1 CONNECT, connected");
   }
@@ -397,7 +397,7 @@ void RunModem(const uchar u)
       else if (mbDisconnectedByTimeout[u] == true)
         ModemOut(u, 1, "1 YES, disconnected by timeout");
       else
-        ModemOut(u, 2, "2 UNKNOWN");
+        ModemOut(u, 2, "2 UNKNOWN, never disconnected");
     }
     else
     {
