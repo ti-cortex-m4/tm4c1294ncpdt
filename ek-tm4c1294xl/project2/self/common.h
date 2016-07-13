@@ -8,9 +8,6 @@ common.h
 #define __COMMON_H__
 
 
-#define UNKNOWN         0x55
-
-
 #define MAX_CHAR        0xFF
 #define MAX_INT         0xFFFF
 #define MAX_LONG        0xFFFFFFFF

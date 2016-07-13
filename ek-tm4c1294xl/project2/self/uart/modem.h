@@ -34,6 +34,14 @@ typedef enum
 } escape_mode_t;
 
 
+typedef enum
+{
+  DC_UNKNOWN = 0,
+  DC_NORMALLY = 1,
+  DC_TIMEOUT = 2,
+  DC_REMOTE = 3,
+} disconnect_t;
+
 
 extern volatile modem_mode_t   mbModemMode[UART_COUNT];
 extern volatile input_mode_t   mbInputMode[UART_COUNT];
