@@ -25,7 +25,7 @@ volatile input_mode_t   mbInputMode[UART_COUNT];
 volatile uchar          mbEscapeCnt[UART_COUNT];
 volatile escape_mode_t  mbEscapeMode[UART_COUNT];
 
-volatile uchar          mbDisconnectedByTimeout[UART_COUNT];
+volatile disconnect_t   mbDisconnect[UART_COUNT];
 
 
 
@@ -50,7 +50,7 @@ void InitModem(void)
     mbEscapeCnt[u] = 0;
     mbEscapeMode[u] = ESCAPE_MODE_BEGIN;
 
-    mbDisconnectedByTimeout[u] = UNKNOWN;
+    mbDisconnect[u] = DC_UNKNOWN;
   }
 
   fVerbose = false;
@@ -325,7 +325,7 @@ void ModemConnected(const uchar u)
 {
   if (IsModem(u) && (mbModemMode[u] == MODEM_MODE_COMMAND))
   {
-    mbDisconnectedByTimeout[u] = UNKNOWN;
+    mbDisconnect[u] = DC_UNKNOWN;
 
     mbModemMode[u] = MODEM_MODE_DATA;
     ModemOut(u, 1, "CONNECT, connected");
@@ -339,9 +339,12 @@ void ModemConnectFailed(const uchar u, const err_t err)
 
   if (err == ERR_ABRT)
     ModemOutBuff(u, 8, BuffPrintF("NO ANSWER, no answer from remote host error=%d", err));
-  else if (err == ERR_RST)
+  else if (err == ERR_RST) {
+    mbDisconnect[u] = DC_REMOTE;
+    TelnetCloseClient(u);
+
     ModemOutBuff(u, 3, BuffPrintF("NO CARRIER, connection dropped by remote host error=%d", err));
-  else
+  } else
     ModemOutBuff(u, 7, BuffPrintF("BUSY, connection failed error=%d", err));
 }
 
@@ -350,9 +353,9 @@ static void ModemDisconnect(const uchar u)
 {
   CONSOLE("%u: disconnect as modem\n", u);
 
-  mbDisconnectedByTimeout[u] = false;
-
+  mbDisconnect[u] = DC_NORMALLY;
   TelnetCloseClient(u);
+
   ModemOut(u, 0, "OK, disconnected");
 }
 
@@ -360,7 +363,7 @@ static void ModemDisconnect(const uchar u)
 void ModemDisconnectedByTimeout(const uchar u)
 {
   mbModemMode[u] = MODEM_MODE_COMMAND;
-  mbDisconnectedByTimeout[u] = true;
+  mbDisconnect[u] = DC_TIMEOUT;
 
   ModemOut(u, 6, "NO DIALTONE, disconnected by timeout");
 }
@@ -392,13 +395,15 @@ void RunModem(const uchar u)
         ModemOut(u, 1, "YES, connected");
       else
         ModemOut(u, 0, "NO, not connected");
-    } else if (IsModemCmd(u, "at-dcbt")) {
-      if (mbDisconnectedByTimeout[u] == false)
-        ModemOut(u, 0, "NO, disconnected normally");
-      else if (mbDisconnectedByTimeout[u] == true)
-        ModemOut(u, 1, "YES, disconnected by timeout");
+    } else if (IsModemCmd(u, "at-dc")) {
+      if (mbDisconnect[u] == DC_NORMALLY)
+        ModemOut(u, 0, "NORMALLY, disconnected normally");
+      else if (mbDisconnect[u] == DC_TIMEOUT)
+        ModemOut(u, 1, "BY TIMEOUT, disconnected by timeout");
+      else if (mbDisconnect[u] == DC_REMOTE)
+        ModemOut(u, 2, "BY REMOTE HOST, disconnected by remote host");
       else
-        ModemOut(u, 2, "UNKNOWN, never disconnected");
+        ModemOut(u, 3, "UNKNOWN, never disconnected");
     } else {
       ModemOut(u, 4, "ERROR, unknown command");
     }
