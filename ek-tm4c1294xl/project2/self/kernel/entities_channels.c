@@ -49,37 +49,37 @@ const entity enConnectionTimeout4 = {
 
 const entity enRoutingMode0 = {
   EEPROM_ROUTING_MODE_0, &mbRoutingMode[0], sizeof(uchar), CHAR, 0,
-  0, 1, ROUTING_MODE_DEFAULT,
+  0, 2, ROUTING_MODE_DEFAULT,
   "RM@0",
-  "AI=RM@0;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@0;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Modem (Master)/2",
 };
 
 const entity enRoutingMode1 = {
   EEPROM_ROUTING_MODE_1, &mbRoutingMode[1], sizeof(uchar), CHAR, 0,
-  0, 1, ROUTING_MODE_DEFAULT,
+  0, 2, ROUTING_MODE_DEFAULT,
   "RM@1",
-  "AI=RM@1;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@1;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Modem (Master)/2",
 };
 
 const entity enRoutingMode2 = {
   EEPROM_ROUTING_MODE_2, &mbRoutingMode[2], sizeof(uchar), CHAR, 0,
-  0, 1, ROUTING_MODE_DEFAULT,
+  0, 2, ROUTING_MODE_DEFAULT,
   "RM@2",
-  "AI=RM@2;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@2;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Modem (Master)/2",
 };
 
 const entity enRoutingMode3 = {
   EEPROM_ROUTING_MODE_3, &mbRoutingMode[3], sizeof(uchar), CHAR, 0,
-  0, 1, ROUTING_MODE_DEFAULT,
+  0, 2, ROUTING_MODE_DEFAULT,
   "RM@3",
-  "AI=RM@3;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@3;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Modem (Master)/2",
 };
 
 const entity enRoutingMode4 = {
   EEPROM_ROUTING_MODE_4, &mbRoutingMode[4], sizeof(uchar), CHAR, 0,
-  0, 1, ROUTING_MODE_DEFAULT,
+  0, 2, ROUTING_MODE_DEFAULT,
   "RM@4",
-  "AI=RM@4;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1",
+  "AI=RM@4;D=Routing mode;T=INT;C=STATIC;O=0-Server (Slave)/0/1-Client (Master)/1/2-Modem (Master)/2",
 };
 
 
@@ -87,35 +87,35 @@ const entity enPort0 = {
   EEPROM_PORT_0, &mwPort[0], sizeof(uint), INT, 0,
   0, 65534, PORT_DEFAULT+0,
   "PN@0",
-  "AI=PN@0;E=1;D=Port;T=INT;C=EDIT;V=PN@0>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@0!=1?\"e\":\"i\"",
+  "AI=PN@0;E=1;D=Port;T=INT;C=EDIT;V=PN@0>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@0==0?\"e\":\"i\"",
 };
 
 const entity enPort1 = {
   EEPROM_PORT_1, &mwPort[1], sizeof(uint), INT, 0,
   0, 65534, PORT_DEFAULT+1,
   "PN@1",
-  "AI=PN@1;E=1;D=Port;T=INT;C=EDIT;V=PN@1>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@1!=1?\"e\":\"i\"",
+  "AI=PN@1;E=1;D=Port;T=INT;C=EDIT;V=PN@1>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@1==0?\"e\":\"i\"",
 };
 
 const entity enPort2 = {
   EEPROM_PORT_2, &mwPort[2], sizeof(uint), INT, 0,
   0, 65534, PORT_DEFAULT+2,
   "PN@2",
-  "AI=PN@2;E=1;D=Port;T=INT;C=EDIT;V=PN@2>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@2!=1?\"e\":\"i\"",
+  "AI=PN@2;E=1;D=Port;T=INT;C=EDIT;V=PN@2>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@2==0?\"e\":\"i\"",
 };
 
 const entity enPort3 = {
   EEPROM_PORT_3, &mwPort[3], sizeof(uint), INT, 0,
   0, 65534, PORT_DEFAULT+3,
   "PN@3",
-  "AI=PN@3;E=1;D=Port;T=INT;C=EDIT;V=PN@3>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@3!=1?\"e\":\"i\"",
+  "AI=PN@3;E=1;D=Port;T=INT;C=EDIT;V=PN@3>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@3==0?\"e\":\"i\"",
 };
 
 const entity enPort4 = {
   EEPROM_PORT_4, &mwPort[4], sizeof(uint), INT, 0,
   0, 65534, PORT_DEFAULT+4,
   "PN@4",
-  "AI=PN@4;E=1;D=Port;T=INT;C=EDIT;V=PN@4>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@4!=1?\"e\":\"i\"",
+  "AI=PN@4;E=1;D=Port;T=INT;C=EDIT;V=PN@4>65534?\"Port number must be between 0 and 65534\":\"\";S=RM@4==0?\"e\":\"i\"",
 };
 
 
@@ -123,35 +123,35 @@ const entity enConnectionMode0 = {
   EEPROM_CONNECTION_MODE_0, &mbConnectionMode[0], sizeof(uchar), CHAR, 0,
   0, 1, CONNECTION_MODE_DEFAULT,
   "CM@0",
-  "AI=CM@0;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@0!=0?\"e\":\"i\"",
+  "AI=CM@0;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@0==1?\"e\":\"i\"",
 };
 
 const entity enConnectionMode1 = {
   EEPROM_CONNECTION_MODE_1, &mbConnectionMode[1], sizeof(uchar), CHAR, 0,
   0, 1, CONNECTION_MODE_DEFAULT,
   "CM@1",
-  "AI=CM@1;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@1!=0?\"e\":\"i\"",
+  "AI=CM@1;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@1==1?\"e\":\"i\"",
 };
 
 const entity enConnectionMode2 = {
   EEPROM_CONNECTION_MODE_2, &mbConnectionMode[2], sizeof(uchar), CHAR, 0,
   0, 1, CONNECTION_MODE_DEFAULT,
   "CM@2",
-  "AI=CM@2;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@2!=0?\"e\":\"i\"",
+  "AI=CM@2;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@2==1?\"e\":\"i\"",
 };
 
 const entity enConnectionMode3 = {
   EEPROM_CONNECTION_MODE_3, &mbConnectionMode[3], sizeof(uchar), CHAR, 0,
   0, 1, CONNECTION_MODE_DEFAULT,
   "CM@3",
-  "AI=CM@3;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@3!=0?\"e\":\"i\"",
+  "AI=CM@3;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@3==1?\"e\":\"i\"",
 };
 
 const entity enConnectionMode4 = {
   EEPROM_CONNECTION_MODE_4, &mbConnectionMode[4], sizeof(uchar), CHAR, 0,
   0, 1, CONNECTION_MODE_DEFAULT,
   "CM@4",
-  "AI=CM@4;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@4!=0?\"e\":\"i\"",
+  "AI=CM@4;E=1;D=Connection mode;T=INT;C=STATIC;O=0-Immediately/0/1-On data/1;S=RM@4==1?\"e\":\"i\"",
 };
 
 
@@ -195,35 +195,35 @@ const entity enDestinationPort0 = {
   EEPROM_DESTINATION_PORT_0, &mwDestinationPort[0], sizeof(uint), INT, 0,
   0, MAX_INT, DESTINATION_PORT_DEFAULT+0,
   "DP@0",
-  "AI=DP@0;E=1;D=Destination port;T=INT;C=EDIT;S=RM@0!=0?\"e\":\"i\"",
+  "AI=DP@0;E=1;D=Destination port;T=INT;C=EDIT;S=RM@0==1?\"e\":\"i\"",
 };
 
 const entity enDestinationPort1 = {
   EEPROM_DESTINATION_PORT_1, &mwDestinationPort[1], sizeof(uint), INT, 0,
   0, MAX_INT, DESTINATION_PORT_DEFAULT+1,
   "DP@1",
-  "AI=DP@1;E=1;D=Destination port;T=INT;C=EDIT;S=RM@1!=0?\"e\":\"i\"",
+  "AI=DP@1;E=1;D=Destination port;T=INT;C=EDIT;S=RM@1==1?\"e\":\"i\"",
 };
 
 const entity enDestinationPort2 = {
   EEPROM_DESTINATION_PORT_2, &mwDestinationPort[2], sizeof(uint), INT, 0,
   0, MAX_INT, DESTINATION_PORT_DEFAULT+2,
   "DP@2",
-  "AI=DP@2;E=1;D=Destination port;T=INT;C=EDIT;S=RM@2!=0?\"e\":\"i\"",
+  "AI=DP@2;E=1;D=Destination port;T=INT;C=EDIT;S=RM@2==1?\"e\":\"i\"",
 };
 
 const entity enDestinationPort3 = {
   EEPROM_DESTINATION_PORT_3, &mwDestinationPort[3], sizeof(uint), INT, 0,
   0, MAX_INT, DESTINATION_PORT_DEFAULT+3,
   "DP@3",
-  "AI=DP@3;E=1;D=Destination port;T=INT;C=EDIT;S=RM@3!=0?\"e\":\"i\"",
+  "AI=DP@3;E=1;D=Destination port;T=INT;C=EDIT;S=RM@3==1?\"e\":\"i\"",
 };
 
 const entity enDestinationPort4 = {
   EEPROM_DESTINATION_PORT_4, &mwDestinationPort[4], sizeof(uint), INT, 0,
   0, MAX_INT, DESTINATION_PORT_DEFAULT+4,
   "DP@4",
-  "AI=DP@4;E=1;D=Destination port;T=INT;C=EDIT;S=RM@4!=0?\"e\":\"i\"",
+  "AI=DP@4;E=1;D=Destination port;T=INT;C=EDIT;S=RM@4==1?\"e\":\"i\"",
 };
 
 

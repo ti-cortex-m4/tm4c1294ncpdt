@@ -418,6 +418,7 @@ memp_malloc_fn(memp_t type, const char* file, const int line)
   } else {
     LWIP_DEBUGF(MEMP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("memp_malloc: out of memory in pool %s\n", memp_desc[type]));
     MEMP_STATS_INC(err, type);
+    OutOfMemory(); // project2
   }
 
   SYS_ARCH_UNPROTECT(old_level);

@@ -15,11 +15,10 @@ telnet_close,c
 
 err_t TelnetCloseClient(uint8_t ucSerialPort)
 {
-    // Check the arguments.
     ASSERT(ucSerialPort < UART_COUNT);
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: close client UART %d\n", pState->ucSerialPort, ucSerialPort);
+    CONSOLE("%u: close client\n", pState->ucSerialPort);
 
     // If we have a connect PCB, close it down.
     if(pState->pConnectPCB != NULL)
@@ -44,8 +43,6 @@ err_t TelnetCloseClient(uint8_t ucSerialPort)
     pState->pConnectPCB = NULL;
     pState->pListenPCB = NULL;
     pState->eTCPState = STATE_TCP_IDLE;
-//    pState->eTelnetState = STATE_NORMAL;
-//    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
     pState->ucSerialPort = ucSerialPort;
@@ -60,14 +57,13 @@ err_t TelnetCloseClient(uint8_t ucSerialPort)
     return(ERR_ABRT);
 }
 
+
 void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
 {
     ASSERT(ucSerialPort < UART_COUNT);
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: close server UART %d\n", pState->ucSerialPort, ucSerialPort);
-
-    err_t err = ERR_OK;
+    CONSOLE("%u: close server\n", pState->ucSerialPort);
 
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
@@ -82,7 +78,7 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
         tcp_poll(pcb, NULL, 1);
 
         // Close the TCP connection.
-        err = tcp_close(pState->pListenPCB);
+        err_t err = tcp_close(pState->pListenPCB);
         if (err != ERR_OK)
         {
             WARNING("%u: TelnetCloseServer.tcp_close failed, error=%d\n", pState->ucSerialPort, err);
@@ -97,8 +93,6 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
     pState->pConnectPCB = NULL;
 //    pState->pListenPCB = NULL; TODO ???
 //    pState->eTCPState = STATE_TCP_IDLE; TODO ???
-//    pState->eTelnetState = STATE_NORMAL;
-//    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
     pState->ucSerialPort = ucSerialPort;
@@ -110,6 +104,8 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
     pState->ulLastTCPSendTime = 0;
     pState->bLinkLost = false;
 }
+
+#if 0
 
 //*****************************************************************************
 //! Closes an existing Ethernet connection.
@@ -123,16 +119,15 @@ void TelnetCloseServer(struct tcp_pcb *pcb, uint8_t ucSerialPort)
 //*****************************************************************************
 void TelnetClose(uint8_t ucSerialPort)
 {
-    // Check the arguments.
     ASSERT(ucSerialPort < UART_COUNT);
     tState *pState = &g_sState[ucSerialPort];
 
-    CONSOLE("%u: Close UART %d\n", pState->ucSerialPort, ucSerialPort);
+    CONSOLE("%u: close\n", pState->ucSerialPort);
 
     // If we have a connect PCB, close it down.
     if(pState->pConnectPCB != NULL)
     {
-        CONSOLE("%u: Closing connect pcb 0x%08x\n", pState->ucSerialPort, pState->pConnectPCB);
+        CONSOLE("%u: closing client data 0x%08x\n", pState->ucSerialPort, pState->pConnectPCB);
 
         // Clear out all of the TCP callbacks.
         tcp_arg(pState->pConnectPCB, NULL);
@@ -151,7 +146,7 @@ void TelnetClose(uint8_t ucSerialPort)
     // If we have a listen PCB, close it down as well.
     if(pState->pListenPCB != NULL)
     {
-        CONSOLE("%u: Closing listen pcb 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
+        CONSOLE("%u: closing server data 0x%08x\n", pState->ucSerialPort, pState->pListenPCB);
 
         // Close the TCP connection.
         tcp_close(pState->pListenPCB);
@@ -164,8 +159,6 @@ void TelnetClose(uint8_t ucSerialPort)
     pState->pConnectPCB = NULL;
     pState->pListenPCB = NULL;
     pState->eTCPState = STATE_TCP_IDLE;
-//    pState->eTelnetState = STATE_NORMAL;
-//    pState->ucFlags = 0;
     pState->ulConnectionTimeout = 0;
     pState->ulMaxTimeout = 0;
     pState->ucSerialPort = ucSerialPort;
@@ -177,3 +170,6 @@ void TelnetClose(uint8_t ucSerialPort)
     pState->ulLastTCPSendTime = 0;
     pState->bLinkLost = false;
 }
+
+#endif
+

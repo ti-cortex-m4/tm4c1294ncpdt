@@ -5,10 +5,10 @@ udp_in.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../hardware/restart.h"
 #include "../kernel/controls.h"
 #include "../kernel/log.h"
 #include "../kernel/settings.h"
-#include "driverlib/sysctl.h"
 #include "echo.h"
 #include "buzz.h"
 #include "udp_pop.h"
@@ -19,6 +19,7 @@ udp_in.c
 #include "udp_entities.h"
 #include "routing_status.h"
 #include "test_watchdog.h"
+#include "broadcast_select.h"
 #include "udp_in.h"
 
 
@@ -29,10 +30,19 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
 
   if (IsCmd(p,"X")) {
     OutEcho(pcb,p,addr,port,broadcast);
+    return;
   } else if (IsCmd(p,"W")) {
-    OutStringZ(pcb,p,addr,port,broadcast,"");
-  } else if (IsCmd(p,"E")) {
-    SysCtlReset();
+    OutBroadcastSelect(pcb,p,addr,port,broadcast);
+    return;
+  }
+
+  if (fBroadcastSelect != true) {
+    pbuf_free(p);
+    return;
+  }
+
+  if (IsCmd(p,"E")) {
+    Restart();
   } else if (IsCmd(p,"L")) {
     OutStringZ(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"I")) {

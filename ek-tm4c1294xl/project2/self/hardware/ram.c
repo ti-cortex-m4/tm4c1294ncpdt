@@ -1,17 +1,22 @@
 /*------------------------------------------------------------------------------
-clock.h
+ram.c
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __CLOCK_H__
-#define __CLOCK_H__
+#include "../main.h"
+#include "ram.h"
 
 
-void Clock_10Hz(void);
-ulong GetClockSeconds(void);
 
-date_t SecondsToDate(ulong dwSeconds);
+static uchar            i = 0;
 
 
-#endif
+
+void OutOfMemory(void)
+{
+  if (++i > 3)
+  {
+    ASSERT(false);
+  }
+}

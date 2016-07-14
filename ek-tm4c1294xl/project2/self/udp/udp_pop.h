@@ -8,6 +8,8 @@ udp_pop.h
 
 
 
+uchar2 DecodeChar(const uchar b, const uchar bRadix);
+
 uint2 PopInt(struct pbuf *p, const uchar ibStart, const uchar bRadix, const uchar cBorder);
 uint2 PopIntDec(struct pbuf *p, const uchar ibStart);
 uint2 PopIntHex(struct pbuf *p, const uchar ibStart);
