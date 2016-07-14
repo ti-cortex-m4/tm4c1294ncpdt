@@ -346,7 +346,7 @@ void UDPPrintF(const char *pcsz, ...)
 
   va_end(va);
 
-  UDPLog((unsigned char *)mbPrintf, iwPrintf);
+  UDPLog((uchar *)mbPrintf, iwPrintf);
 }
 
 

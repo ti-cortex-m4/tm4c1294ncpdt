@@ -1,17 +1,16 @@
 /*------------------------------------------------------------------------------
-clock.h
+restart.c
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __CLOCK_H__
-#define __CLOCK_H__
+#include "../main.h"
+#include "driverlib/sysctl.h"
+#include "restart.h"
 
 
-void Clock_10Hz(void);
-ulong GetClockSeconds(void);
 
-date_t SecondsToDate(ulong dwSeconds);
-
-
-#endif
+void Restart(void)
+{
+  SysCtlReset();
+}

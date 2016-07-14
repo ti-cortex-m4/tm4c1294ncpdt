@@ -9,6 +9,7 @@ echo.c
 #include "../kernel/settings.h"
 #include "udp_pop.h"
 #include "udp_out.h"
+#include "broadcast_select.h"
 #include "echo.h"
 
 
@@ -31,6 +32,9 @@ static bool SerialToEthernetBufferOverflow(void)
 
 err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast)
 {
+  if (broadcast == 0)
+    fBroadcastSelect = true;
+
   uint wSfx = 0;
 
   if (p->len > 1)
@@ -42,7 +46,7 @@ err_t OutEcho(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
 
   InitPush();
   PushChar('A');
-  PushMAC(pbMAC, 6);
+  PushMAC(mbMAC, 6);
   PushChar('/');
   PushStringZ("000001001"); // TODO "000001001"
   PushChar('/');
