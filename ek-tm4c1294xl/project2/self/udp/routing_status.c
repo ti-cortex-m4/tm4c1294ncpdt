@@ -110,13 +110,13 @@ static err_t GetRouingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct
     case 6: return OutUptime(pcb,p,addr,port,broadcast);
     case 7: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
 
-    case 8: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Modem Variables"));
+    case 8: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Modem"));
     case 9: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbModemMode", mbModemMode[u]));
     case 10: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbInputMode", mbInputMode[u]));
     case 11: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeCnt", mbEscapeCnt[u]));
     case 12: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeMode", mbEscapeMode[u]));
 
-    case 13: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Kernel Variables"));
+    case 13: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Kernel"));
     case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState));
 
     case 15: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
