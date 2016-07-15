@@ -26,12 +26,7 @@ routing_status.c
 static uchar            ibRoutingStatus = 0;
 
 
-static message szSerialPort = "Serial Port";
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
-static message szVariables = "Variables";
-static message szRuntime = "Runtime";
-static message szTCPCounters = "TCP Counters";
-static message szErrorCounters = "Error Counters";
 static message szUptime = "Working time (since last restart)";
 static message szWatchdogReset = "Last restart type (0 - power-up, 1 - watchdog)";
 
@@ -42,6 +37,12 @@ static message szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
 static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
 static message szRowTCPError = "<tr><td>%s</td><td>%d, %u, %u %02u:%02u:%02u</td></tr>";
 static message szBodyEnd = "</table></body>";
+
+
+
+void NextRouingStatus(void) {
+  ibRoutingStatus = ++ibRoutingStatus % 3;
+}
 
 
 
@@ -79,12 +80,12 @@ static err_t OutUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
   return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, szUptime, days.wDays, days.bHours, days.bMinutes, days.bSeconds));
 }
 
-static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszOperation, const uchar u, const uchar op) {
-  ASSERT(u < UART_COUNT);
+
+static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszOperation, const uchar op, const uchar u) {
   ASSERT(op < TCP_OPERATIONS);
+  ASSERT(u < UART_COUNT);
 
   date_t days = SecondsToDate(mdwErrTCPClockSeconds[u][op]);
-
   return OutBuff(pcb,p,addr,port,broadcast,
       BuffPrintF(szRowTCPError, pcszOperation,
           mwErrTCPErrors[u][op],
@@ -96,66 +97,61 @@ static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
 
 
 
-void NextRouingStatus(void) {
-  ibRoutingStatus = ++ibRoutingStatus % 3;
-}
-
-
 static err_t GetRouingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
 
-    case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szSerialPort));
+    case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Serial Port"));
     case 3: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szIOMode, GetIOMode(u)));
+    case 4: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mcwUARTTxOut", mcwUARTTxOut[u]));
 
-    case 4: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szRuntime));
-    case 5: return OutUptime(pcb,p,addr,port,broadcast);
-    case 6: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
+    case 5: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Runtime"));
+    case 6: return OutUptime(pcb,p,addr,port,broadcast);
+    case 7: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
 
-    case 7: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables));
-    case 8: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mcwUARTTxOut", mcwUARTTxOut[u]));
+    case 8: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Modem Variables"));
+    case 9: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbModemMode", mbModemMode[u]));
+    case 10: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbInputMode", mbInputMode[u]));
+    case 11: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeCnt", mbEscapeCnt[u]));
+    case 12: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeMode", mbEscapeMode[u]));
 
-    case 9: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables));
-    case 10: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbModemMode", mbModemMode[u]));
-    case 11: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbInputMode", mbInputMode[u]));
-    case 12: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeCnt", mbEscapeCnt[u]));
-    case 13: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeMode", mbEscapeMode[u]));
+    case 13: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Kernel Variables"));
+    case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState));
 
-    case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables));
-    case 15: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState));
-
-    case 16: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+    case 15: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
     default: WARNING("routing status 0: wrong index %u\n", wIdx); return GetError();
   }
 }
+
 
 static err_t GetRouingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
-    case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szTCPCounters));
-    case 3: return OutTCPError(pcb,p,addr,port,broadcast,"HANDLER_ERROR",u,0);
-    case 4: return OutTCPError(pcb,p,addr,port,broadcast,"HANDLER_CONNECTED",u,1);
-    case 5: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_NEW_LISTEN",u,2);
-    case 6: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_BIND_LISTEN",u,3);
-    case 7: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_NEW_OPEN",u,4);
-    case 8: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CONNECT_OPEN",u,5);
-    case 9: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CONNECT_POLL",u,6);
-    case 10: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_CONNECTED",u,7);
-    case 11: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_RECEIVE",u,8);
-    case 12: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_CLOSE",u,9);
+    case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "TCP Events"));
+    case 3: return OutTCPError(pcb,p,addr,port,broadcast,"HANDLER_ERROR",0,u);
+    case 4: return OutTCPError(pcb,p,addr,port,broadcast,"HANDLER_CONNECTED",1,u);
+    case 5: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_NEW_LISTEN",2,u);
+    case 6: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_BIND_LISTEN",3,u);
+    case 7: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_NEW_OPEN",4,u);
+    case 8: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CONNECT_OPEN",5,u);
+    case 9: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CONNECT_POLL",6,u);
+    case 10: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_CONNECTED",7,u);
+    case 11: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_RECEIVE",8,u);
+    case 12: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_CLOSE",9,u);
     case 13: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
     default: WARNING("routing status 1: wrong index %u\n", wIdx); return GetError();
   }
 }
+
 
 static err_t GetRouingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   if (u == 0) {
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
       case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
-      case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szErrorCounters));
+      case 2: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Error Counters"));
       case 3: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrPrintfOverflow", cwErrPrintfOverflow));
       case 4: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushCharOverflow", cwErrUPDPushCharOverflow));
       case 5: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrUPDPushNumbersOverflow", cwErrUPDPushNumbersOverflow));
