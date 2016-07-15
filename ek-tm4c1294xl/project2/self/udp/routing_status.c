@@ -97,13 +97,8 @@ static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *ad
 
 
 
-static void NextRouingStatus(const uchar u) {
-  CONSOLE("NextRouingStatus1 ibRoutingStatus=%u u=%u\n", ibRoutingStatus, u);
-
-  if (u == UART_COUNT-1) {
-    ibRoutingStatus = ++ibRoutingStatus % 3;
-    CONSOLE("NextRouingStatus2 ibRoutingStatus=%u u=%u\n", ibRoutingStatus, u);
-  }
+void NextRouingStatus(void) {
+  ibRoutingStatus = ++ibRoutingStatus % 3;
 }
 
 
@@ -131,7 +126,7 @@ static err_t GetRouingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct
     case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, szVariables));
     case 15: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState));
 
-    case 16: NextRouingStatus(u); return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+    case 16: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
     default: WARNING("routing status 1: wrong index %u\n", wIdx); return GetError();
   }
 }
@@ -151,7 +146,7 @@ static err_t GetRouingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct
     case 10: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_CONNECTED",u,7);
     case 11: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_RECEIVE",u,8);
     case 12: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_CLOSE",u,9);
-    case 13: NextRouingStatus(u); return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+    case 13: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
     default: WARNING("routing status 2: wrong index %u\n", wIdx); return GetError();
   }
 }
@@ -180,7 +175,7 @@ static err_t GetRouingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
       case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
-      case 2: NextRouingStatus(u); return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+      case 2: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
       default: WARNING("routing status 3: wrong index %u\n", wIdx); return GetError();
     }
   }
@@ -221,8 +216,6 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
 
   uchar u = bPort-1;
   ASSERT(u < UART_COUNT);
-
-//  CONSOLE("GetRouingStatusContent ibRoutingStatus=%u wIdx=%u u=%u\n", ibRoutingStatus, wIdx, u);
 
   switch (ibRoutingStatus) {
     case 0: return GetRouingStatusContent1(pcb,p,addr,port,broadcast,wIdx,u);
