@@ -63,7 +63,6 @@ err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
     default: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
   }
 
-  CONSOLE("GetRouingStatusSize ibRoutingStatus=%u bSize=%u\n", ibRoutingStatus, bSize);
   return OutCharDec(pcb,p,addr,port,broadcast,bSize);
 }
 
@@ -102,7 +101,7 @@ void NextRouingStatus(void) {
 }
 
 
-static err_t GetRouingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRouingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -127,11 +126,11 @@ static err_t GetRouingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct
     case 15: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState));
 
     case 16: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
-    default: WARNING("routing status 1: wrong index %u\n", wIdx); return GetError();
+    default: WARNING("routing status 0: wrong index %u\n", wIdx); return GetError();
   }
 }
 
-static err_t GetRouingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRouingStatusContent1(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   switch (wIdx) {
     case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
     case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
@@ -147,11 +146,11 @@ static err_t GetRouingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct
     case 11: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_RECEIVE",u,8);
     case 12: return OutTCPError(pcb,p,addr,port,broadcast,"TCP_CLOSE_CLOSE",u,9);
     case 13: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
-    default: WARNING("routing status 2: wrong index %u\n", wIdx); return GetError();
+    default: WARNING("routing status 1: wrong index %u\n", wIdx); return GetError();
   }
 }
 
-static err_t GetRouingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
+static err_t GetRouingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const uint wIdx, const uchar u) {
   if (u == 0) {
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
@@ -169,14 +168,14 @@ static err_t GetRouingStatusContent3(struct udp_pcb *pcb, struct pbuf *p, struct
       case 12: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsSaveEntity", cwErrSettingsSaveEntity));
       case 13: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "cwErrSettingsLoadIP", cwErrSettingsLoadIP));
       case 14: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
-      default: WARNING("routing status 3: wrong index %u\n", wIdx); return GetError();
+      default: WARNING("routing status 2: wrong index %u\n", wIdx); return GetError();
     }
   } else {
     switch (wIdx) {
       case 0: return OutStringZ(pcb,p,addr,port,broadcast,szHead);
       case 1: return OutStringZ(pcb,p,addr,port,broadcast,szBodyStart);
       case 2: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
-      default: WARNING("routing status 3: wrong index %u\n", wIdx); return GetError();
+      default: WARNING("routing status 2: wrong index %u\n", wIdx); return GetError();
     }
   }
 }
@@ -218,8 +217,8 @@ err_t GetRouingStatusContent(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr
   ASSERT(u < UART_COUNT);
 
   switch (ibRoutingStatus) {
-    case 0: return GetRouingStatusContent1(pcb,p,addr,port,broadcast,wIdx,u);
-    case 1: return GetRouingStatusContent2(pcb,p,addr,port,broadcast,wIdx,u);
-    default: return GetRouingStatusContent3(pcb,p,addr,port,broadcast,wIdx,u);
+    case 0: return GetRouingStatusContent0(pcb,p,addr,port,broadcast,wIdx,u);
+    case 1: return GetRouingStatusContent1(pcb,p,addr,port,broadcast,wIdx,u);
+    default: return GetRouingStatusContent2(pcb,p,addr,port,broadcast,wIdx,u);
   }
 }
