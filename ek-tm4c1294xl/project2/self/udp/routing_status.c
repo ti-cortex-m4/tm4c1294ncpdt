@@ -59,7 +59,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = 17; break;
+    case 0: bSize = 16; break;
     case 1: bSize = 14; break;
     default: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
   }
