@@ -5,6 +5,7 @@ routing_status.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../hardware/rom.h"
 #include "../kernel/log.h"
 #include "../kernel/printf.h"
 #include "../kernel/clock.h"
@@ -28,6 +29,7 @@ static uchar            ibRoutingStatus = 0;
 
 static message szIOMode = "RS-485 Direction (0 - unknown, 1 - input, 2 - output)";
 static message szUptime = "Working time (since last restart)";
+static message szVersion = "Version";
 static message szWatchdogReset = "Last restart type (0 - power-up, 1 - watchdog)";
 
 static message szHead = "<head><style type='text/css'>table{border-collapse:collapse;font:11px arial;background-color:#C0C0C0}td.head{color:white;background-color:#648CC8}</style></head>";
@@ -35,6 +37,7 @@ static message szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'
 static message szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
 static message szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
 static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
+static message szRowVersion = "<tr><td>%s</td><td>%u.%u.%u.%04x %02u.%02u.%02u %02u:%02u:%02u</td></tr>";
 static message szRowTCPError = "<tr><td>%s</td><td>%d, %u, %u %02u:%02u:%02u</td></tr>";
 static message szBodyEnd = "</table></body>";
 
@@ -59,7 +62,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = 16; break;
+    case 0: bSize = 17; break;
     case 1: bSize = 14; break;
     default: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
   }
@@ -80,6 +83,17 @@ static err_t OutUptime(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr
   return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowClock, szUptime, days.wDays, days.bHours, days.bMinutes, days.bSeconds));
 }
 
+static err_t OutVersion(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
+  timedate_t td = GetROMBuildTimeDate();
+  return OutBuff(pcb,p,addr,port,broadcast,
+      BuffPrintF(szRowVersion, szVersion,
+          MAJOR_VERSION, MINOR_VERSION,
+          GetROMBuildNumber(),
+          GetROMChecksum(),
+          td.bDay, td.bMonth, td.bYear, td.bHour, td.bMinute, td.bSecond
+      )
+  );
+}
 
 static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszOperation, const uchar op, const uchar u) {
   ASSERT(op < TCP_OPERATIONS);
@@ -108,18 +122,19 @@ static err_t GetRouingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct
 
     case 5: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Runtime"));
     case 6: return OutUptime(pcb,p,addr,port,broadcast);
-    case 7: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
+    case 7: return OutVersion(pcb,p,addr,port,broadcast);
+    case 8: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
 
-    case 8: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Modem"));
-    case 9: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbModemMode", mbModemMode[u]));
-    case 10: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbInputMode", mbInputMode[u]));
-    case 11: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeCnt", mbEscapeCnt[u]));
-    case 12: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeMode", mbEscapeMode[u]));
+    case 9: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Modem"));
+    case 10: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbModemMode", mbModemMode[u]));
+    case 11: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbInputMode", mbInputMode[u]));
+    case 12: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeCnt", mbEscapeCnt[u]));
+    case 13: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "mbEscapeMode", mbEscapeMode[u]));
 
-    case 13: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Kernel"));
-    case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState));
+    case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Kernel"));
+    case 15: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState));
 
-    case 15: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+    case 16: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
     default: WARNING("routing status 0: wrong index %u\n", wIdx); return GetError();
   }
 }
