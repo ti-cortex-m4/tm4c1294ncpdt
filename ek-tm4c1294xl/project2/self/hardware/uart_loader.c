@@ -11,7 +11,7 @@ UART_LOADER!C
 #include "inc/hw_types.h"
 #include "inc/hw_types.h"
 #include "inc/hw_flash.h"
-#include "../time/delay.h"
+#include "delay.h"
 #include "uart_loader.h"
 
 
@@ -20,7 +20,7 @@ UART_LOADER!C
 // bNumPin - номер пина (0-Pin0, 1-Pin1, 2-Pin2, 3-Pin3, 4-Pin4, 5-Pin5, 6-Pin6, 7-Pin7)
 // bPolarity - полярность сигнала на пине порта (0 - уровень 0, 1 - уровень 1)
 // bEnableNegative - активация запуска загрузчика при старте (0 - загрузчик активен)
-void    BOOTCFG_Write(uchar bNumPort, uchar bNumPin, uchar bPolarity, uchar bEnableNegative)
+static void WriteBOOTCFG(uchar bNumPort, uchar bNumPin, uchar bPolarity, uchar bEnableNegative)
 {
   ASSERT(bNumPort <= 7);
   ASSERT(bNumPin <= 7);
@@ -41,7 +41,7 @@ void    BOOTCFG_Write(uchar bNumPort, uchar bNumPin, uchar bPolarity, uchar bEna
 }
 
 
-void    InitUartLoader(void)
+void InitUARTLoader(void)
 {
   HWREG(SYSCTL_RCGCGPIO) |= SYSCTL_RCGCGPIO_R2; // GPIO Port C Run Mode Clock Gating Control
   DelayGPIO();
@@ -50,6 +50,6 @@ void    InitUartLoader(void)
 
   if (HWREG(FLASH_BOOTCFG) == 0xFFFFFFFE)
   {
-    BOOTCFG_Write(2, 4, 0, 0);
+    WriteBOOTCFG(2, 4, 0, 0);
   }
 }
