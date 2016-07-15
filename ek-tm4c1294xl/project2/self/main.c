@@ -24,6 +24,7 @@ MAIN,C
 #include "hardware/timer2.h"
 #include "hardware/delay.h"
 #include "hardware/rom.h"
+#include "hardware/uart_loader.h"
 #include "hardware/watchdog.h"
 #include "uart/uart.h"
 #include "uart/serial.h"
@@ -104,6 +105,7 @@ int     main(void)
   InitGPIO();
 //  InitLEDs();
   InitROM();
+  InitUartLoader();
 
   InitSettings();
   InitUARTLog(dwClockFreq);
