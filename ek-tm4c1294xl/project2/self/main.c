@@ -105,7 +105,7 @@ int     main(void)
   InitGPIO();
 //  InitLEDs();
   InitROM();
-  InitUartLoader();
+  InitUARTLoader();
 
   InitSettings();
   InitUARTLog(dwClockFreq);
