@@ -40,12 +40,14 @@ err_t OutBuzz(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
-  NextRouingStatus();
-  Buzz();
-
   InitPush();
   PushChar('A');
   PushSfx(wSfx.w);
 
-  return Out(pcb,p,addr,port,broadcast);
+  err_t err = Out(pcb,p,addr,port,broadcast);
+
+  NextRouingStatus();
+  Buzz();
+
+  return err;
 }
