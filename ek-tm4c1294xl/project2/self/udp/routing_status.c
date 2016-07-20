@@ -37,6 +37,7 @@ static message szBodyStart = "<body><table width=100% bgcolor=#C0C0C0 border='1'
 static message szHeaderS = "<tr><td colspan=2 class='head'>%s</td></tr>";
 static message szRowS08X = "<tr><td>%s</td><td>0x%08x</td></tr>";
 static message szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
+static message szRowSIP = "<tr><td>%s</td><td>%u.%u.%u.%u</td></tr>";
 static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
 static message szRowVersion = "<tr><td>%s</td><td>%u.%u.%u.%04x %02u.%02u.%02u %02u:%02u:%02u</td></tr>";
 static message szRowTCPError = "<tr><td>%s</td><td>%d, %u, %u %02u:%02u:%02u</td></tr>";
@@ -63,7 +64,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = 19; break;
+    case 0: bSize = 21; break;
     case 1: bSize = 14; break;
     default: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
   }
@@ -96,13 +97,21 @@ static err_t OutVersion(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *add
   );
 }
 
-static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszOperation, const uchar op, const uchar u) {
+static err_t OutRemoteIP(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszName, const ulong dw) {
+  return OutBuff(pcb,p,addr,port,broadcast,
+      BuffPrintF(szRowSIP, pcszName,
+        (dw >> 24), (dw >> 16) & 0xFF, (dw >> 8) & 0xFF, dw & 0xFF
+      )
+  );
+}
+
+static err_t OutTCPError(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast, const char *pcszName, const uchar op, const uchar u) {
   ASSERT(op < TCP_OPERATIONS);
   ASSERT(u < UART_COUNT);
 
   date_t days = SecondsToDate(mdwErrTCPClockSeconds[u][op]);
   return OutBuff(pcb,p,addr,port,broadcast,
-      BuffPrintF(szRowTCPError, pcszOperation,
+      BuffPrintF(szRowTCPError, pcszName,
           mwErrTCPErrors[u][op],
           mcwErrTCPCounters[u][op],
           days.wDays, days.bHours, days.bMinutes, days.bSeconds
@@ -131,13 +140,16 @@ static err_t GetRouingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct
     case 11: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowS08X, "pConnectPCB", g_sState[u].pConnectPCB));
     case 12: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowS08X, "pListenPCB", g_sState[u].pListenPCB));
     case 13: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "tTCPState", g_sState[u].eTCPState));
+    case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "usTelnetLocalPort", g_sState[u].usTelnetLocalPort));
+    case 15: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "usTelnetRemotePort", g_sState[u].usTelnetRemotePort));
+    case 16: return OutRemoteIP(pcb,p,addr,port,broadcast, "ulTelnetRemoteIP", g_sState[u].ulTelnetRemoteIP);
 
-    case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Runtime"));
-    case 15: return OutUptime(pcb,p,addr,port,broadcast);
-    case 16: return OutVersion(pcb,p,addr,port,broadcast);
-    case 17: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
+    case 17: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Runtime"));
+    case 18: return OutUptime(pcb,p,addr,port,broadcast);
+    case 19: return OutVersion(pcb,p,addr,port,broadcast);
+    case 20: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
 
-    case 18: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+    case 21: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
     default: WARNING("routing status 0: wrong index %u\n", wIdx); return GetError();
   }
 }
