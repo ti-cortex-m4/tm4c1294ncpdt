@@ -34,6 +34,9 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
   } else if (IsCmd(p,"W")) {
     OutBroadcastSelect(pcb,p,addr,port,broadcast);
     return;
+  } else if (IsCmd(p,"V")) {
+    OutStringZ(pcb,p,addr,port,broadcast,"{ds1.0}");
+    return;
   }
 
   if (fBroadcastSelect != true) {
@@ -50,8 +53,6 @@ void    UDPInput(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr 
     OutStringZ(pcb,p,addr,port,broadcast,"");
   } else if (IsCmd(p,"O")) {
     OutStringZ(pcb,p,addr,port,broadcast,"");
-  } else if (IsCmd(p,"V")) {
-    OutStringZ(pcb,p,addr,port,broadcast,"{ds1.0}");
   } else if (IsCmd(p,"H")) {
     OutStringZ(pcb,p,addr,port,broadcast,"1A");
   } else if (IsCmd(p,"CS")) {

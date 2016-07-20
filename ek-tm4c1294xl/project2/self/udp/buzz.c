@@ -10,6 +10,7 @@ buzz.c
 #include "../kernel/wrappers.h"
 #include "udp_pop.h"
 #include "udp_out.h"
+#include "routing_status.h"
 #include "buzz.h"
 
 
@@ -39,11 +40,14 @@ err_t OutBuzz(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint po
   uint2 wSfx = PopSfx(p);
   if (InvalidInt2(wSfx)) return wSfx.err;
 
-  Buzz();
-
   InitPush();
   PushChar('A');
   PushSfx(wSfx.w);
 
-  return Out(pcb,p,addr,port,broadcast);
+  err_t err = Out(pcb,p,addr,port,broadcast);
+
+  NextRouingStatus();
+  Buzz();
+
+  return err;
 }
