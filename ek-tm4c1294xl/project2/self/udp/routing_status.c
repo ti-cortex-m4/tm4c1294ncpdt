@@ -64,7 +64,7 @@ bool IsRoutingStatusSize(struct pbuf *p) {
 err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uint port, uchar broadcast) {
   uchar bSize;
   switch (ibRoutingStatus) {
-    case 0: bSize = 21; break;
+    case 0: bSize = 24; break;
     case 1: bSize = 14; break;
     default: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
   }
@@ -143,13 +143,16 @@ static err_t GetRouingStatusContent0(struct udp_pcb *pcb, struct pbuf *p, struct
     case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "usTelnetLocalPort", g_sState[u].usTelnetLocalPort));
     case 15: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "usTelnetRemotePort", g_sState[u].usTelnetRemotePort));
     case 16: return OutRemoteIP(pcb,p,addr,port,broadcast, "ulTelnetRemoteIP", g_sState[u].ulTelnetRemoteIP);
+    case 17: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "ulConnectionTimeout", g_sState[u].ulConnectionTimeout));
+    case 18: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "ulMaxTimeout", g_sState[u].ulMaxTimeout));
+    case 19: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "ucSerialPort", g_sState[u].ucSerialPort));
 
-    case 17: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Runtime"));
-    case 18: return OutUptime(pcb,p,addr,port,broadcast);
-    case 19: return OutVersion(pcb,p,addr,port,broadcast);
-    case 20: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
+    case 20: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szHeaderS, "Runtime"));
+    case 21: return OutUptime(pcb,p,addr,port,broadcast);
+    case 22: return OutVersion(pcb,p,addr,port,broadcast);
+    case 23: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, szWatchdogReset, fWatchdogReset));
 
-    case 21: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+    case 24: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
     default: WARNING("routing status 0: wrong index %u\n", wIdx); return GetError();
   }
 }
