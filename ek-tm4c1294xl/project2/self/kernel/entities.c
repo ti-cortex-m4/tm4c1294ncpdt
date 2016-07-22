@@ -9,7 +9,7 @@ entities.c
 
 
 
-const entity * const mpenEntities[] =
+const entity * const menEntities[] =
 {
   &enSerialNumber,
 
@@ -97,4 +97,15 @@ const entity * const mpenEntities[] =
 };
 
 
-const uchar bEntitiesSize = sizeof(mpenEntities) / sizeof(mpenEntities[0]);
+const uchar bEntitiesSize = sizeof(menEntities) / sizeof(menEntities[0]);
+
+
+
+const entity * const menRoutingModes[UART_COUNT] =
+{
+  &enRoutingMode0,
+  &enRoutingMode1,
+  &enRoutingMode2,
+  &enRoutingMode3,
+  &enRoutingMode4,
+};
