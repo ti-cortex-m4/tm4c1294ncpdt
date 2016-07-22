@@ -448,7 +448,7 @@ void RunModem(const uchar u)
     } else if (IsModemCmd(u, "at-rm=modem")) {
       ModemOutSetRoutingModeModem(u);
     } else if (IsModemCmd(u, "at-rm=server")) {
-    	ModemOutSetRoutingModeServer(u);
+      ModemOutSetRoutingModeServer(u);
     } else {
       ModemOut(u, 4, "ERROR, unknown command");
     }
