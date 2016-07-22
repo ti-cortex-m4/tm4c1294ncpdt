@@ -20,7 +20,7 @@ static message szSetup = "AI=$SETUP;D=Setup;T=GROUP";
 
 
 
-const message * const mppcszControls[] =
+const message * const mpcszControls[] =
 {
   &szGeneral,
   &enOwnerName.szName,
@@ -104,4 +104,4 @@ const message * const mppcszControls[] =
 };
 
 
-const uint wControlsSize = sizeof(mppcszControls) / sizeof(mppcszControls[0]);
+const uint wControlsSize = sizeof(mpcszControls) / sizeof(mpcszControls[0]);
