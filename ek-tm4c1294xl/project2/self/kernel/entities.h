@@ -55,8 +55,8 @@ typedef enum
 #include "entities_debug.h"
 
 
-extern const entity * const menEntities[];
+extern const entity * const mpenEntities[];
 extern const uchar bEntitiesSize;
 
 
-extern const entity * const menRoutingModes[UART_COUNT];
+extern const entity * const mpenRoutingModes[UART_COUNT];

@@ -72,7 +72,7 @@ static void LoadSettings(void)
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
-    LoadEntity(menEntities[e]);
+    LoadEntity(mpenEntities[e]);
   }
 }
 
@@ -82,9 +82,9 @@ static void LoadSettingsDef(void)
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
-    if (((menEntities[e]->dwFlags) & FLAG_DONT_RESET) == 0)
+    if (((mpenEntities[e]->dwFlags) & FLAG_DONT_RESET) == 0)
     {
-      LoadEntityDef(menEntities[e]);
+      LoadEntityDef(mpenEntities[e]);
     }
   }
 }
@@ -100,7 +100,7 @@ static void SaveSettings(void)
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
-    SaveEntity(menEntities[e]);
+    SaveEntity(mpenEntities[e]);
   }
 }
 

@@ -141,7 +141,7 @@ bool IsSomeEnity(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_
   uchar e;
   for (e = 0; e < bEntitiesSize; e++)
   {
-    if (IsEnity(pcb,p,addr,port,broadcast,menEntities[e]))
+    if (IsEnity(pcb,p,addr,port,broadcast,mpenEntities[e]))
       return true;
   }
 

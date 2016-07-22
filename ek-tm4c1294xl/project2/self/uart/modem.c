@@ -373,7 +373,7 @@ void ModemDisconnectedByTimeout(const uchar u)
 static void ModemOutGetRoutingMode(const uchar u)
 {
   uchar bRoutingMode = MAX_CHAR;
-  LoadChar(&bRoutingMode, menRoutingModes[u]->dwEepRom);
+  LoadChar(&bRoutingMode, mpenRoutingModes[u]->dwEepRom);
 
   switch (bRoutingMode) {
     case 0: ModemOut(u, 0, "SERVER, routing mode will be 'server' after next restart"); break;
@@ -387,7 +387,7 @@ static void ModemOutGetRoutingMode(const uchar u)
 static void ModemOutSetRoutingModeModem(const uchar u)
 {
   uchar bRoutingMode = 2;
-  const ulong code = SaveChar(&bRoutingMode, menRoutingModes[u]->dwEepRom);
+  const ulong code = SaveChar(&bRoutingMode, mpenRoutingModes[u]->dwEepRom);
 
   switch (code) {
     case 0: ModemOut(u, 0, "OK, routing mode will be 'modem' after next restart"); break;
@@ -399,7 +399,7 @@ static void ModemOutSetRoutingModeModem(const uchar u)
 static void ModemOutSetRoutingModeServer(const uchar u)
 {
   uchar bRoutingMode = 0;
-  const ulong code = SaveChar(&bRoutingMode, menRoutingModes[u]->dwEepRom);
+  const ulong code = SaveChar(&bRoutingMode, mpenRoutingModes[u]->dwEepRom);
 
   switch (code) {
     case 0: ModemOut(u, 0, "OK, routing mode will be 'server' after next restart"); break;
