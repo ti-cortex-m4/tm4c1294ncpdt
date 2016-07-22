@@ -7,6 +7,7 @@ modem.c
 #include "../main.h"
 #include "../hardware/delay.h"
 #include "../hardware/restart.h"
+#include "../hardware/storage.h"
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "../kernel/printf.h"
@@ -371,6 +372,15 @@ void ModemDisconnectedByTimeout(const uchar u)
 
 static void ModemOutGetRoutingMode(const uchar u)
 {
+  uchar bRoutingMode = MAX_CHAR;
+  LoadChar(&bRoutingMode, menRoutingModes[u]->dwEepRom);
+
+  switch (bRoutingMode) {
+    case 0: ModemOut(u, 0, "SERVER, routing mode"); break;
+    case 1: ModemOut(u, 1, "CLIENT, routing mode"); break;
+    case 2: ModemOut(u, 2, "MODEM, routing mode"); break;
+    default: ModemOut(u, 3, "ERROR, wrong routing mode"); break;
+  }
 }
 
 
