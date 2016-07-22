@@ -26,7 +26,7 @@ err_t OutControls(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, uin
   InitPush();
 
   if (wArg < wControlsSize)
-    PushStringZ(*mpcszControls[wArg]);
+    PushStringZ(*mppcszControls[wArg]);
   else
   {
     WARNING("OutControls: wrong index, must be %u < %u\n", wArg, wControlsSize);
