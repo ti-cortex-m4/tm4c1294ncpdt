@@ -376,9 +376,9 @@ static void ModemOutGetRoutingMode(const uchar u)
   LoadChar(&bRoutingMode, menRoutingModes[u]->dwEepRom);
 
   switch (bRoutingMode) {
-    case 0: ModemOut(u, 0, "SERVER, routing mode"); break;
-    case 1: ModemOut(u, 1, "CLIENT, routing mode"); break;
-    case 2: ModemOut(u, 2, "MODEM, routing mode"); break;
+    case 0: ModemOut(u, 0, "SERVER, routing mode will be 'server' after next restart"); break;
+    case 1: ModemOut(u, 1, "CLIENT, routing mode will be 'client' after next restart"); break;
+    case 2: ModemOut(u, 2, "MODEM, routing mode will be 'modem' after next restart"); break;
     default: ModemOut(u, 3, "ERROR, wrong routing mode"); break;
   }
 }
@@ -386,11 +386,25 @@ static void ModemOutGetRoutingMode(const uchar u)
 
 static void ModemOutSetRoutingModeModem(const uchar u)
 {
+  uchar bRoutingMode = 2;
+  const ulong code = SaveChar(&bRoutingMode, menRoutingModes[u]->dwEepRom);
+
+  switch (code) {
+    case 0: ModemOut(u, 0, "OK, routing mode will be 'modem' after next restart"); break;
+    default: ModemOut(u, 1, "ERROR, unable to save - hardware error"); break;
+  }
 }
 
 
 static void ModemOutSetRoutingModeServer(const uchar u)
 {
+  uchar bRoutingMode = 0;
+  const ulong code = SaveChar(&bRoutingMode, menRoutingModes[u]->dwEepRom);
+
+  switch (code) {
+    case 0: ModemOut(u, 0, "OK, routing mode will be 'server' after next restart"); break;
+    default: ModemOut(u, 1, "ERROR, unable to save - hardware error"); break;
+  }
 }
 
 
