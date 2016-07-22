@@ -369,6 +369,21 @@ void ModemDisconnectedByTimeout(const uchar u)
 }
 
 
+static void ModemOutGetRoutingMode(const uchar u)
+{
+}
+
+
+static void ModemOutSetRoutingModeModem(const uchar u)
+{
+}
+
+
+static void ModemOutSetRoutingModeServer(const uchar u)
+{
+}
+
+
 void RunModem(const uchar u)
 {
   if ((mbModemMode[u] == MM_COMMAND) && (mbInputMode[u] == IM_READY))
@@ -404,6 +419,12 @@ void RunModem(const uchar u)
         ModemOut(u, 2, "REMOTE, disconnected by remote host");
       else
         ModemOut(u, 3, "UNKNOWN, never disconnected");
+    } else if (IsModemCmd(u, "at-rm")) {
+      ModemOutGetRoutingMode(u);
+    } else if (IsModemCmd(u, "at-rm=modem")) {
+      ModemOutSetRoutingModeModem(u);
+    } else if (IsModemCmd(u, "at-rm=server")) {
+    	ModemOutSetRoutingModeServer(u);
     } else {
       ModemOut(u, 4, "ERROR, unknown command");
     }
