@@ -66,7 +66,7 @@ err_t GetRouingStatusSize(struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *a
   switch (ibRoutingStatus) {
     case 0: bSize = 15; break;
     case 1: bSize = 14; break;
-    case 2: bSize = 13; break;
+    case 2: bSize = 16; break;
     default: bSize = IsCmd(p,"CU@1") ? 15 : 3; break;
   }
 
@@ -183,7 +183,10 @@ static err_t GetRouingStatusContent2(struct udp_pcb *pcb, struct pbuf *p, struct
     case 9: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "ulConnectionTimeout", g_sState[u].ulConnectionTimeout));
     case 10: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "ulMaxTimeout", g_sState[u].ulMaxTimeout));
     case 11: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "ucSerialPort", g_sState[u].ucSerialPort));
-    case 12: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
+    case 12: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowS08X, "pBufQ", g_sState[u].pBufQ));
+    case 13: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "iBufQRead", g_sState[u].iBufQRead));
+    case 14: return OutBuff(pcb,p,addr,port,broadcast,BuffPrintF(szRowSU, "iBufQWrite", g_sState[u].iBufQWrite));
+    case 15: return OutStringZ(pcb,p,addr,port,broadcast,szBodyEnd);
     default: WARNING("routing status 2: wrong index %u\n", wIdx); return GetError();
   }
 }
