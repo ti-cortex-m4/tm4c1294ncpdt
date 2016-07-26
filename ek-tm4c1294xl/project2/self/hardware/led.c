@@ -108,9 +108,21 @@ void InitEthernetLEDs(void)
 
   EMACPHYExtendedWrite(EMAC0_BASE, 0, EPHY_LEDCFG,
     (EMACPHYExtendedRead(EMAC0_BASE, 0, EPHY_LEDCFG) & ~(EPHY_LEDCFG_LED0_M | EPHY_LEDCFG_LED1_M | EPHY_LEDCFG_LED2_M)) |
-	  GetLED0Mask() | GetLED1Mask());
+      GetLED0Mask() | GetLED1Mask());
 }
 
+
+
+void InitLEDs_After(void)
+{
+  OnLED0();
+  OnLED1();
+  DelayMilliSecond(500);
+  OffLED0();
+  OffLED1();
+
+  InitEthernetLEDs();
+}
 
 
 // http://e2e.ti.com/support/microcontrollers/tiva_arm/f/908/t/378413

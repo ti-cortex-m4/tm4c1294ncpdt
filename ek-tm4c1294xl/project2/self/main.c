@@ -151,6 +151,7 @@ int     main(void)
 
   ConsoleVersion();
   InitWatchdog();
+  InitLEDs_After();
 
   while (true)
   {
