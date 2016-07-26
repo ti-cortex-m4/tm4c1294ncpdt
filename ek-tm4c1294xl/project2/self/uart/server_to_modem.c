@@ -5,7 +5,12 @@ server_to_modem.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../hardware/delay.h"
+#include "../hardware/restart.h"
+//#include "../hardware/storage.h"
 #include "../kernel/settings.h"
+//#include "../uart/serial_send.h"
+#include "modem.h"
 #include "server_to_modem.h"
 
 
@@ -87,6 +92,8 @@ void ServerToModem_10Hz(void)
 void RunServerToModem(const uchar u)
 {
   if (mbFallbackMode[u] == FM_PAUSE_AFTER) {
-    mbFallbackMode[u] = FM_BEGIN;
+    ModemOutSetRoutingModeModem(u);
+    DelayMilliSecond(100);
+    Restart();
   }
 }
