@@ -376,33 +376,33 @@ const entity enServerToModem0 = {
   EEPROM_SERVER_TO_MODEM_0, &mfServerToModem[0], sizeof(uchar), CHAR, 0,
   0, 1, 0,
   "STM@0",
-  "AI=STM@0;E=1;D=Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@0==0?\"e\":\"i\"",
+  "AI=STM@0;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@0==0?\"e\":\"i\"",
 };
 
 const entity enServerToModem1 = {
   EEPROM_SERVER_TO_MODEM_1, &mfServerToModem[1], sizeof(uchar), CHAR, 0,
   0, 1, 0,
   "STM@1",
-  "AI=STM@1;E=1;D=Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@1==0?\"e\":\"i\"",
+  "AI=STM@1;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@1==0?\"e\":\"i\"",
 };
 
 const entity enServerToModem2 = {
   EEPROM_SERVER_TO_MODEM_2, &mfServerToModem[2], sizeof(uchar), CHAR, 0,
   0, 1, 0,
   "STM@2",
-  "AI=STM@2;E=1;D=Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@2==0?\"e\":\"i\"",
+  "AI=STM@2;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@2==0?\"e\":\"i\"",
 };
 
 const entity enServerToModem3 = {
   EEPROM_SERVER_TO_MODEM_3, &mfServerToModem[3], sizeof(uchar), CHAR, 0,
   0, 1, 0,
   "STM@3",
-  "AI=STM@3;E=1;D=Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@3==0?\"e\":\"i\"",
+  "AI=STM@3;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@3==0?\"e\":\"i\"",
 };
 
 const entity enServerToModem4 = {
   EEPROM_SERVER_TO_MODEM_4, &mfServerToModem[4], sizeof(uchar), CHAR, 0,
   0, 1, 0,
   "STM@4",
-  "AI=STM@4;E=1;D=Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@4==0?\"e\":\"i\"",
+  "AI=STM@4;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@4==0?\"e\":\"i\"",
 };
