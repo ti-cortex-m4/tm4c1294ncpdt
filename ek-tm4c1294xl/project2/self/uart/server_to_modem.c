@@ -5,12 +5,17 @@ server_to_modem.c
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include "../kernel/settings.h"
 #include "server_to_modem.h"
 
 
 
 volatile uchar          mbFallbackCnt[UART_COUNT];
-volatile escape_mode_t  mbFallbackMode[UART_COUNT];
+volatile fallback_mode_t mbFallbackMode[UART_COUNT];
+
+
+static const uchar     szPacket[] = "abc";
+static volatile uchar  mibPacket[UART_COUNT];
 
 
 
@@ -21,26 +26,40 @@ void InitServerToModem(void)
   {
     mbFallbackCnt[u] = 0;
     mbFallbackMode[u] = FM_BEGIN;
+
+    mibPacket[u] = 0;
   }
 }
 
 
-//void ProcessModemModeData(const uchar u, const uchar b)
-//{
-//  if (IsServerToModem(u))
-//  {
-//    mbFallbackCnt[u] = 0;
-//
-//    if ((mbFallbackMode[u] == FM_PAUSE_BEFORE) && (b == '+'))
-//      mbFallbackMode[u] = FM_PLUS_1;
-//    else if ((mbFallbackMode[u] == FM_PLUS_1) && (b == '+'))
-//      mbFallbackMode[u] = FM_PLUS_2;
-//    else if ((mbFallbackMode[u] == FM_PLUS_2) && (b == '+'))
-//      mbFallbackMode[u] = FM_PLUS_3;
-//    else
-//      mbFallbackMode[u] = FM_BEGIN;
-//  }
-//}
+
+bool IsServerToModem(const uchar u)
+{
+  return (mbRoutingMode[u] == ROUTING_MODE_SERVER) && (mfServerToModem[u] == true);
+}
+
+
+
+void ProcessServerToModemData(const uchar u, const uchar b)
+{
+  if (IsServerToModem(u))
+  {
+    mbFallbackCnt[u] = 0;
+
+    if ((mbFallbackMode[u] == FM_PAUSE_BEFORE) && (b == szPacket[0])) {
+      mibPacket[u] = 1;
+      mbFallbackMode[u] = FM_DATA;
+    } else if ((mbFallbackMode[u] == FM_DATA) && (b == szPacket[mibPacket[u]])) {
+      if (++mibPacket[u] >= sizeof(szPacket) - 1) {
+        mibPacket[u] = 0;
+        mbFallbackMode[u] = FM_DATA_FINISH;
+      }
+    } else {
+      mibPacket[u] = 0;
+      mbFallbackMode[u] = FM_BEGIN;
+    }
+  }
+}
 
 
 void ServerToModem_10Hz(void)
@@ -65,13 +84,9 @@ void ServerToModem_10Hz(void)
 
 
 
-//        if (bT == szPacketCRC[ibPacket0])
-//        {
-//          if (++ibPacket0 >= bPACKET_HEADER)
-//          {
-//            ibPacket0 = 0;
-//            mpSerial[0] = SER_PACKET_HEADER;
-//            iwInBuff0 = 0;
-//          }
-//        }
-//        else if (bT != szPacketCRC[0]) ibPacket0 = 0;
+void RunServerToModem(const uchar u)
+{
+  if (mbFallbackMode[u] == FM_PAUSE_AFTER) {
+    mbFallbackMode[u] = FM_BEGIN;
+  }
+}
