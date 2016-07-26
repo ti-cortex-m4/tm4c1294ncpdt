@@ -39,6 +39,8 @@ uchar                   mbConnectionMode[UART_COUNT];
 ulong                   mdwDestinationIP[UART_COUNT];
 uint                    mwDestinationPort[UART_COUNT];
 
+bool                    mfServerToModem[UART_COUNT];
+
 uchar                   mibBaudRate[UART_COUNT];
 uchar                   mibParity[UART_COUNT];
 uchar                   mibDataBits[UART_COUNT];
