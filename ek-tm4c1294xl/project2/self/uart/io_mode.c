@@ -176,7 +176,7 @@ static void InitIOMode4(void) // PF0
 void InitIOModes(void)
 {
   uchar u;
-  for(u = 0; u < UART_COUNT; u++)
+  for (u = 0; u < UART_COUNT; u++)
   {
     mbIOModes[u] = IO_MODE_DEFAULT;
   }

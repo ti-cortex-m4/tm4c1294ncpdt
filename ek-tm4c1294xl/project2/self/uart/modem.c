@@ -43,7 +43,7 @@ static bool             fVerbose;
 void InitModem(void)
 {
   uchar u;
-  for(u = 0; u < UART_COUNT; u++)
+  for (u = 0; u < UART_COUNT; u++)
   {
     mbModemMode[u] = MM_COMMAND;
     mbInputMode[u] = IM_BEGIN;
