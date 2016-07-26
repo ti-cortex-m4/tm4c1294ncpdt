@@ -13,6 +13,7 @@ timer2.c
 #include "driverlib/timer.h"
 #include "../kernel/clock.h"
 #include "../uart/modem.h"
+#include "../uart/server_to_modem.h"
 #include "timer2.h"
 
 
@@ -42,4 +43,5 @@ void Timer2IntHandler(void)
 
   Clock_10Hz();
   Modem_10Hz();
+  ServerToModem_10Hz();
 }

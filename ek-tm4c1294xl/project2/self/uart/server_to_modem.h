@@ -18,4 +18,11 @@ typedef enum
 } fallback_mode_t;
 
 
+void InitServerToModem(void);
+bool IsServerToModem(const uchar u);
+void ProcessServerToModemData(const uchar u, const uchar b);
+void ServerToModem_10Hz(void);
+void RunServerToModem(const uchar u);
+
+
 #endif

@@ -14,6 +14,7 @@ tasks.c
 #include "../uart/serial.h"
 #include "../uart/serial_receive.h"
 #include "../uart/modem.h"
+#include "../uart/server_to_modem.h"
 #include "entities.h"
 #include "version.h"
 #include "tasks.h"
@@ -114,6 +115,10 @@ void RunConnections(void)
     else if (IsModem(u))
     {
       RunModem(u);
+    }
+    else if (IsServerToModem(u))
+    {
+      RunServerToModem(u);
     }
   }
 }
