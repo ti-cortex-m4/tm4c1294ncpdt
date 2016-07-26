@@ -12,3 +12,5 @@ void OffLED1(void);
 void OnLED1(void);
 
 void InitEthernetLEDs(void);
+
+void InitLEDs_After(void);
