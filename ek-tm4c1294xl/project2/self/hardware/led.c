@@ -29,13 +29,7 @@ void InitLEDs(void)
 
   OnLED0();
   OnLED1();
-  DelayMilliSecond(200);
-  OffLED0();
-  OnLED1();
-  DelayMilliSecond(200);
-  OnLED0();
-  OffLED1();
-  DelayMilliSecond(200);
+  DelayMilliSecond(300);
   OffLED0();
   OffLED1();
 }
@@ -115,9 +109,11 @@ void InitEthernetLEDs(void)
 
 void InitLEDs_After(void)
 {
+  InitLEDs();
+
   OnLED0();
   OnLED1();
-  DelayMilliSecond(500);
+  DelayMilliSecond(300);
   OffLED0();
   OffLED1();
 
