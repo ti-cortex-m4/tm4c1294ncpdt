@@ -56,6 +56,12 @@ const entity * const mpenEntities[] =
   &enDestinationPort3,
   &enDestinationPort4,
 
+  &enServerToModem0,
+  &enServerToModem1,
+  &enServerToModem2,
+  &enServerToModem3,
+  &enServerToModem4,
+
   &enBaudRate0,
   &enBaudRate1,
   &enBaudRate2,
