@@ -73,7 +73,7 @@ void StartConnection(uchar u)
 void StartConnections(void)
 {
   uchar u;
-  for(u = 0; u < UART_COUNT; u++)
+  for (u = 0; u < UART_COUNT; u++)
   {
     StartConnection(u);
   }
@@ -84,7 +84,7 @@ void StartConnections(void)
 void RunConnections(void)
 {
   uchar u;
-  for(u = 0; u < UART_COUNT; u++)
+  for (u = 0; u < UART_COUNT; u++)
   {
     if (mbRoutingMode[u] == ROUTING_MODE_CLIENT)
     {
