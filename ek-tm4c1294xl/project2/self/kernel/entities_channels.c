@@ -411,35 +411,35 @@ const entity enServerToModem4 = {
 
 const entity enModemToServerTimeout0 = {
   EEPROM_MODEM_TO_SERVER_TIMEOUT_0, &mbModemToServerTimeout[0], sizeof(uchar), CHAR, 0,
-  0, 1, 0,
+  0, 255, 0,
   "MTST@0",
-  "AI=MTST@0;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@0==0?\"e\":\"i\"",
+  "AI=MTST@0;E=1;D=Fallback timeout from Modem to Server (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=MTST@0>255?\"Maximum timeout is 255 seconds\":\"\";S=RM@0==2?\"e\":\"i\"",
 };
 
 const entity enModemToServerTimeout1 = {
   EEPROM_MODEM_TO_SERVER_TIMEOUT_1, &mbModemToServerTimeout[1], sizeof(uchar), CHAR, 0,
-  0, 1, 0,
+  0, 255, 0,
   "MTST@1",
-  "AI=MTST@1;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@1==0?\"e\":\"i\"",
+  "AI=MTST@1;E=1;D=Fallback timeout from Modem to Server (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=MTST@1>255?\"Maximum timeout is 255 seconds\":\"\";S=RM@1==2?\"e\":\"i\"",
 };
 
 const entity enModemToServerTimeout2 = {
   EEPROM_MODEM_TO_SERVER_TIMEOUT_2, &mbModemToServerTimeout[2], sizeof(uchar), CHAR, 0,
-  0, 1, 0,
+  0, 255, 0,
   "MTST@2",
-  "AI=MTST@2;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@2==0?\"e\":\"i\"",
+  "AI=MTST@2;E=1;D=Fallback timeout from Modem to Server (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=MTST@2>255?\"Maximum timeout is 255 seconds\":\"\";S=RM@2==2?\"e\":\"i\"",
 };
 
 const entity enModemToServerTimeout3 = {
   EEPROM_MODEM_TO_SERVER_TIMEOUT_3, &mbModemToServerTimeout[3], sizeof(uchar), CHAR, 0,
-  0, 1, 0,
+  0, 255, 0,
   "MTST@3",
-  "AI=MTST@3;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@3==0?\"e\":\"i\"",
+  "AI=MTST@3;E=1;D=Fallback timeout from Modem to Server (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=MTST@3>255?\"Maximum timeout is 255 seconds\":\"\";S=RM@3==2?\"e\":\"i\"",
 };
 
 const entity enModemToServerTimeout4 = {
   EEPROM_MODEM_TO_SERVER_TIMEOUT_4, &mbModemToServerTimeout[4], sizeof(uchar), CHAR, 0,
-  0, 1, 0,
+  0, 255, 0,
   "MTST@4",
-  "AI=MTST@4;E=1;D=Fallback from Server to Modem;T=INT;C=STATIC;O=0-No/0/1-Yes/1;S=RM@4==0?\"e\":\"i\"",
+  "AI=MTST@4;E=1;D=Fallback timeout from Modem to Server (seconds);T=INT;C=EDIT/SPIN/0/1/1/10;O=0-Disabled/0;V=MTST@4>255?\"Maximum timeout is 255 seconds\":\"\";S=RM@4==2?\"e\":\"i\"",
 };
