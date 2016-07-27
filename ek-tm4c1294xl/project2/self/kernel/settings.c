@@ -40,6 +40,7 @@ ulong                   mdwDestinationIP[UART_COUNT];
 uint                    mwDestinationPort[UART_COUNT];
 
 bool                    mfServerToModem[UART_COUNT];
+uchar                   mbModemToServerTimeout[UART_COUNT];
 
 uchar                   mibBaudRate[UART_COUNT];
 uchar                   mibParity[UART_COUNT];
