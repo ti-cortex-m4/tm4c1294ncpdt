@@ -53,6 +53,7 @@ extern volatile escape_mode_t  mbEscapeMode[UART_COUNT];
 
 void InitModem(void);
 
+void ModemSetVerbose(const bool f);
 bool IsModem(const uchar u);
 bool IsModemModeCommand(const uchar u);
 void ProcessModemModeCommand(const uchar u, const uchar b);
