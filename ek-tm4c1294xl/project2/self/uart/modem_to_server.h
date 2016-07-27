@@ -12,7 +12,7 @@ typedef enum
 {
   MTS_BEGIN = 0,
   MTS_TIMEOUT = 1,
-} mts_mode_t;
+} mts_t;
 
 
 

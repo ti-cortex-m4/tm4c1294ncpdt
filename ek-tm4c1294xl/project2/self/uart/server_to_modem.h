@@ -15,7 +15,7 @@ typedef enum
   STM_DATA = 2,
   STM_DATA_FINISH = 3,
   STM_PAUSE_AFTER = 4,
-} stm_mode_t;
+} stm_t;
 
 
 void InitServerToModem(void);
