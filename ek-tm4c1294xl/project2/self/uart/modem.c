@@ -81,6 +81,12 @@ static uchar ToUpper(const uchar b)
 
 
 
+void ModemSetVerbose(const bool f)
+{
+  fVerbose = f;
+}
+
+
 bool IsModem(const uchar u)
 {
   return mbRoutingMode[u] == ROUTING_MODE_CLIENT_MODEM;
@@ -443,11 +449,11 @@ void RunModem(const uchar u)
         ModemOut(u, 2, "REMOTE, disconnected by remote host");
       else
         ModemOut(u, 3, "UNKNOWN, never disconnected");
-    } else if (IsModemCmd(u, "at-rm")) {
+    } else if (IsModemCmd(u, "at-frm")) {
       ModemOutGetRoutingMode(u);
-    } else if (IsModemCmd(u, "at-rm=modem")) {
+    } else if (IsModemCmd(u, "at-frm=modem")) {
       ModemOutSetRoutingModeModem(u);
-    } else if (IsModemCmd(u, "at-rm=server")) {
+    } else if (IsModemCmd(u, "at-frm=server")) {
       ModemOutSetRoutingModeServer(u);
     } else {
       ModemOut(u, 4, "ERROR, unknown command");
