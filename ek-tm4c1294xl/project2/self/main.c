@@ -31,6 +31,7 @@ MAIN,C
 #include "uart/uart_log.h"
 #include "uart/io_mode.h"
 #include "uart/modem.h"
+#include "uart/modem_to_server.h"
 #include "uart/server_to_modem.h"
 #include "udp/udp_log.h"
 #include "udp/udp_handler.h"
@@ -135,6 +136,7 @@ int     main(void)
   InitUARTs(dwClockFreq);
   InitIOModes();
   InitModem();
+  InitModemToServer();
   InitServerToModem();
   InitTimer1(dwClockFreq);
   InitTimer2(dwClockFreq);

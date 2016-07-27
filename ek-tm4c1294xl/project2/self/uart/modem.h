@@ -61,6 +61,7 @@ void ProcessModemModeData(const uchar u, const uchar b);
 void Modem_10Hz(void);
 
 void ModemOutSetRoutingModeModem(const uchar u);
+void ModemOutSetRoutingModeServer(const uchar u);
 void RunModem(const uchar u);
 
 void ModemConnected(const uchar u);

@@ -11,6 +11,7 @@ serial_handler.c
 #include "io_mode.h"
 #include "serial.h"
 #include "modem.h"
+#include "modem_to_server.h"
 #include "server_to_modem.h"
 #include "serial_handler.h"
 
@@ -83,6 +84,7 @@ static void SerialUARTIntHandler(uint8_t ucPort)
                   RingBufWriteOne(&g_sRxBuf[ucPort], ucChar);
                 }
 
+                ProcessModemToServerData(ucPort);
                 ProcessServerToModemData(ucPort, ucChar);
             }
         }

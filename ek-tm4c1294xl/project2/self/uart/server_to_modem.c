@@ -89,12 +89,15 @@ void ServerToModem_10Hz(void)
 
 void RunServerToModem(const uchar u)
 {
-  if (mbFallbackMode[u] == STM_PAUSE_AFTER)
+  if (IsServerToModem(u) == true)
   {
-    ModemSetVerbose(false);
+    if (mbFallbackMode[u] == STM_PAUSE_AFTER)
+    {
+      ModemSetVerbose(false);
 
-    ModemOutSetRoutingModeModem(u);
-    DelayMilliSecond(100);
-    Restart();
+      ModemOutSetRoutingModeModem(u);
+      DelayMilliSecond(100);
+      Restart();
+    }
   }
 }
