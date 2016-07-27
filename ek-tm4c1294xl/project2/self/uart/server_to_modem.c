@@ -14,7 +14,7 @@ server_to_modem.c
 
 
 static volatile uchar   mbFallbackCnt[UART_COUNT];
-static volatile stm_mode_t mbFallbackMode[UART_COUNT];
+static volatile stm_t   mbFallbackMode[UART_COUNT];
 
 
 static const uchar      szPacket[] = "+ restart as modem +";

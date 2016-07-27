@@ -13,7 +13,7 @@ modem_to_server.c
 
 
 
-static volatile mts_mode_t mbFallbackMode[UART_COUNT];
+static volatile mts_t   mbFallbackMode[UART_COUNT];
 static volatile uchar   mbTimeout[UART_COUNT];
 
 
