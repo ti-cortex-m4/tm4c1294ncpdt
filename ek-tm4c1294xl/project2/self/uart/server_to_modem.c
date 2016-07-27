@@ -17,7 +17,7 @@ volatile uchar          mbFallbackCnt[UART_COUNT];
 volatile fallback_mode_t mbFallbackMode[UART_COUNT];
 
 
-static const uchar     szPacket[] = "abc";
+static const uchar     szPacket[] = "+++to modem+++";
 static volatile uchar  mibPacket[UART_COUNT];
 
 

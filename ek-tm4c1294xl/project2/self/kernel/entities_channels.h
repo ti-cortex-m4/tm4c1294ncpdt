@@ -46,6 +46,12 @@ extern const entity enServerToModem2;
 extern const entity enServerToModem3;
 extern const entity enServerToModem4;
 
+extern const entity enModemToServerTimeout0;
+extern const entity enModemToServerTimeout1;
+extern const entity enModemToServerTimeout2;
+extern const entity enModemToServerTimeout3;
+extern const entity enModemToServerTimeout4;
+
 extern const entity enBaudRate0;
 extern const entity enBaudRate1;
 extern const entity enBaudRate2;
