@@ -13,6 +13,8 @@ timer2.c
 #include "driverlib/timer.h"
 #include "../kernel/clock.h"
 #include "../uart/modem.h"
+#include "../uart/server_to_modem.h"
+#include "../uart/modem_to_server.h"
 #include "timer2.h"
 
 
@@ -40,6 +42,15 @@ void Timer2IntHandler(void)
 {
   HWREG(TIMER2_BASE + TIMER_O_ICR) = TIMER_TIMA_TIMEOUT;
 
-  Clock_10Hz();
+  static uchar i;
+  if (++i >= 10)
+  {
+    i = 0;
+
+    Clock_1Hz();
+    ModemToServer_1Hz();
+  }
+
   Modem_10Hz();
+  ServerToModem_10Hz();
 }

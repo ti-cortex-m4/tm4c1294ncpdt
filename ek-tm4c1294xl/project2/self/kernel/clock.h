@@ -8,7 +8,7 @@ clock.h
 #define __CLOCK_H__
 
 
-void Clock_10Hz(void);
+void Clock_1Hz(void);
 ulong GetClockSeconds(void);
 
 date_t SecondsToDate(ulong dwSeconds);

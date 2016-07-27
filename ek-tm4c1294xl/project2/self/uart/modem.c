@@ -43,7 +43,7 @@ static bool             fVerbose;
 void InitModem(void)
 {
   uchar u;
-  for(u = 0; u < UART_COUNT; u++)
+  for (u = 0; u < UART_COUNT; u++)
   {
     mbModemMode[u] = MM_COMMAND;
     mbInputMode[u] = IM_BEGIN;
@@ -79,6 +79,12 @@ static uchar ToUpper(const uchar b)
     return b;
 }
 
+
+
+void ModemSetVerbose(const bool f)
+{
+  fVerbose = f;
+}
 
 
 bool IsModem(const uchar u)
@@ -384,7 +390,7 @@ static void ModemOutGetRoutingMode(const uchar u)
 }
 
 
-static void ModemOutSetRoutingModeModem(const uchar u)
+void ModemOutSetRoutingModeModem(const uchar u)
 {
   uchar bRoutingMode = 2;
   const ulong code = SaveChar(&bRoutingMode, mpenRoutingModes[u]->dwEepRom);
@@ -396,7 +402,7 @@ static void ModemOutSetRoutingModeModem(const uchar u)
 }
 
 
-static void ModemOutSetRoutingModeServer(const uchar u)
+void ModemOutSetRoutingModeServer(const uchar u)
 {
   uchar bRoutingMode = 0;
   const ulong code = SaveChar(&bRoutingMode, mpenRoutingModes[u]->dwEepRom);
@@ -443,11 +449,11 @@ void RunModem(const uchar u)
         ModemOut(u, 2, "REMOTE, disconnected by remote host");
       else
         ModemOut(u, 3, "UNKNOWN, never disconnected");
-    } else if (IsModemCmd(u, "at-rm")) {
+    } else if (IsModemCmd(u, "at-frm")) {
       ModemOutGetRoutingMode(u);
-    } else if (IsModemCmd(u, "at-rm=modem")) {
+    } else if (IsModemCmd(u, "at-frm=modem")) {
       ModemOutSetRoutingModeModem(u);
-    } else if (IsModemCmd(u, "at-rm=server")) {
+    } else if (IsModemCmd(u, "at-frm=server")) {
       ModemOutSetRoutingModeServer(u);
     } else {
       ModemOut(u, 4, "ERROR, unknown command");
