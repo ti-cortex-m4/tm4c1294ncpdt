@@ -14,11 +14,11 @@ server_to_modem.c
 
 
 volatile uchar          mbFallbackCnt[UART_COUNT];
-volatile fallback_mode_t mbFallbackMode[UART_COUNT];
+volatile stm_mode_t     mbFallbackMode[UART_COUNT];
 
 
-static const uchar     szPacket[] = "+++ restart as modem +++";
-static volatile uchar  mibPacket[UART_COUNT];
+static const uchar      szPacket[] = "+++ restart as modem +++";
+static volatile uchar   mibPacket[UART_COUNT];
 
 
 
@@ -28,7 +28,7 @@ void InitServerToModem(void)
   for (u = 0; u < UART_COUNT; u++)
   {
     mbFallbackCnt[u] = 0;
-    mbFallbackMode[u] = FM_BEGIN;
+    mbFallbackMode[u] = STM_BEGIN;
 
     mibPacket[u] = 0;
   }
@@ -36,7 +36,7 @@ void InitServerToModem(void)
 
 
 
-bool IsServerToModem(const uchar u)
+static bool IsServerToModem(const uchar u)
 {
   return (mbRoutingMode[u] == ROUTING_MODE_SERVER) && (mfServerToModem[u] == true);
 }
@@ -49,17 +49,17 @@ void ProcessServerToModemData(const uchar u, const uchar b)
   {
     mbFallbackCnt[u] = 0;
 
-    if ((mbFallbackMode[u] == FM_PAUSE_BEFORE) && (b == szPacket[0])) {
+    if ((mbFallbackMode[u] == STM_PAUSE_BEFORE) && (b == szPacket[0])) {
       mibPacket[u] = 1;
-      mbFallbackMode[u] = FM_DATA;
-    } else if ((mbFallbackMode[u] == FM_DATA) && (b == szPacket[mibPacket[u]])) {
+      mbFallbackMode[u] = STM_DATA;
+    } else if ((mbFallbackMode[u] == STM_DATA) && (b == szPacket[mibPacket[u]])) {
       if (++mibPacket[u] >= sizeof(szPacket) - 1) {
         mibPacket[u] = 0;
-        mbFallbackMode[u] = FM_DATA_FINISH;
+        mbFallbackMode[u] = STM_DATA_FINISH;
       }
     } else {
       mibPacket[u] = 0;
-      mbFallbackMode[u] = FM_BEGIN;
+      mbFallbackMode[u] = STM_BEGIN;
     }
   }
 }
@@ -74,10 +74,10 @@ void ServerToModem_10Hz(void)
     {
       if (mbFallbackCnt[u] >= 10)
       {
-        if (mbFallbackMode[u] == FM_BEGIN)
-          mbFallbackMode[u] = FM_PAUSE_BEFORE;
-        else if (mbFallbackMode[u] == FM_DATA_FINISH)
-          mbFallbackMode[u] = FM_PAUSE_AFTER;
+        if (mbFallbackMode[u] == STM_BEGIN)
+          mbFallbackMode[u] = STM_PAUSE_BEFORE;
+        else if (mbFallbackMode[u] == STM_DATA_FINISH)
+          mbFallbackMode[u] = STM_PAUSE_AFTER;
       }
       else
         mbFallbackCnt[u]++;
@@ -89,7 +89,7 @@ void ServerToModem_10Hz(void)
 
 void RunServerToModem(const uchar u)
 {
-  if (mbFallbackMode[u] == FM_PAUSE_AFTER)
+  if (mbFallbackMode[u] == STM_PAUSE_AFTER)
   {
     ModemSetVerbose(false);
 

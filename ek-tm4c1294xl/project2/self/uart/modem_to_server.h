@@ -1,17 +1,9 @@
 /*------------------------------------------------------------------------------
-clock.h
+modem_to_server.h
 
 
 ------------------------------------------------------------------------------*/
 
-#ifndef __CLOCK_H__
-#define __CLOCK_H__
-
-
-void Clock_1Hz(void);
-ulong GetClockSeconds(void);
-
-date_t SecondsToDate(ulong dwSeconds);
-
-
-#endif
+void ProcessModemToServerData(const uchar u, const uchar b);
+void ModemToServer_1Hz(void);
+void RunModemToServer(const uchar u);
