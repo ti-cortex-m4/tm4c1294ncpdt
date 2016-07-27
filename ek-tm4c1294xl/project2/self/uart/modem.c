@@ -402,7 +402,7 @@ void ModemOutSetRoutingModeModem(const uchar u)
 }
 
 
-static void ModemOutSetRoutingModeServer(const uchar u)
+void ModemOutSetRoutingModeServer(const uchar u)
 {
   uchar bRoutingMode = 0;
   const ulong code = SaveChar(&bRoutingMode, mpenRoutingModes[u]->dwEepRom);

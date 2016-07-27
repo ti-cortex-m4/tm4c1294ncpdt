@@ -14,6 +14,7 @@ tasks.c
 #include "../uart/serial.h"
 #include "../uart/serial_receive.h"
 #include "../uart/modem.h"
+#include "../uart/modem_to_server.h"
 #include "../uart/server_to_modem.h"
 #include "entities.h"
 #include "version.h"
@@ -87,7 +88,11 @@ void RunConnections(void)
   uchar u;
   for (u = 0; u < UART_COUNT; u++)
   {
-    if (mbRoutingMode[u] == ROUTING_MODE_CLIENT)
+    if (mbRoutingMode[u] == ROUTING_MODE_SERVER)
+    {
+      RunServerToModem(u);
+    }
+    else if (mbRoutingMode[u] == ROUTING_MODE_CLIENT)
     {
       tState *pState = &g_sState[u];
 
@@ -115,10 +120,7 @@ void RunConnections(void)
     else if (IsModem(u))
     {
       RunModem(u);
-    }
-    else if (IsServerToModem(u))
-    {
-      RunServerToModem(u);
+      RunModemToServer(u);
     }
   }
 }
