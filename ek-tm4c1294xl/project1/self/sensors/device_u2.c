@@ -11,7 +11,6 @@ DEVICE_U2.C
 #include "../serial/ports_stack.h"
 #include "../serial/ports_devices.h"
 #include "device_k.h"
-#include "device_q.h"
 #include "device_u2.h"
 
 
@@ -35,7 +34,7 @@ void    QueryEnergyDayDatesU(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO(1+128*17+2, n+8+1, 45);
+  BccQueryIO(1+128*17+2, n+8+1, 128);
 }
 
 
@@ -52,7 +51,7 @@ void    QueryEnergyMonDatesU(void)
   PushChar1Bcc(')');
   PushChar1Bcc(0x03);
 
-  BccQueryIO(1+36*14+2, n+8+1, 24);
+  BccQueryIO(1+36*14+2, n+8+1, 36);
 }
 
 
@@ -169,7 +168,7 @@ void    ReadEnergyDayDatesU(void)
   ClearDatesU();
 
   uchar i;
-  for (i=0; i<45; i++)
+  for (i=0; i<128; i++)
   {
     mpdtDatesU[cbDatesU++] = PopDayDateU();
   }
@@ -183,7 +182,7 @@ void    ReadEnergyMonDatesU(void)
   ClearDatesU();
 
   uchar	i;
-  for (i=0; i<24; i++)
+  for (i=0; i<36; i++)
   {
     mpdtDatesU[cbDatesU++] = PopMonDateU();
   }
@@ -254,7 +253,7 @@ double db;
   uchar i;
   for (i=0; i<ibTrf+2; i++)
   {
-    db = PopDoubleQ();
+    db = PopDoubleU();
   }
 
   mpdbChannelsC[ibLine] = db;
