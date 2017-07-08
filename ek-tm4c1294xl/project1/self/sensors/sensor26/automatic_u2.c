@@ -68,7 +68,7 @@ bool    ReadEnergyMonDatesU_Full(void)
 
 
 
-bool    ReadEnergyMonTariffU_Full(uchar  bMon, uchar  ibTariff, uchar  bMaxLines)
+bool    ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
 {
   uchar i;
   for (i=0; i<bMaxLines; i++)
@@ -77,7 +77,7 @@ bool    ReadEnergyMonTariffU_Full(uchar  bMon, uchar  ibTariff, uchar  bMaxLines
     for (r=0; r<bMINORREPEATS; r++)
     {
       QueryCloseU();
-      QueryEnergyMonU(i,bMon);
+      QueryEngMonU(i,ti);
 
       if (BccInput() == SER_GOODCHECK) break;
       if (fKey == true) return(0);
@@ -126,7 +126,7 @@ status  ReadCntMonCanTariffU(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines) 
     Delay(1000);
     return(ST_NOTPRESENTED);
   }
-  if (ReadEnergyMonTariffU_Full(bMon,ibTariff,bMaxLines) == 0) return ST_BADDIGITAL;
+  if (ReadEnergyMonTariffU_Full(ti,ibTariff,bMaxLines) == 0) return ST_BADDIGITAL;
 
   QueryCloseU();
 
