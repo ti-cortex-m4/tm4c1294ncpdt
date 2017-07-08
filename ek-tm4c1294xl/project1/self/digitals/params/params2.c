@@ -24,7 +24,7 @@ PARAMS2!C
 #include    "../../sensors/sensor21/device_p.h"
 #include    "../../sensors/sensor21/automatic_p.h"
 #include    "../../sensors/device_q.h"
-#include    "../../sensors/device_u.h"
+#include    "../../sensors/sensor26/device_u.h"
 #include    "../../sensors/device_v.h"
 #include    "../../sensors/device_w.h"
 #include    "../../sensors/sensor31/params31.h"

@@ -11,7 +11,7 @@ AUTOMATIC_4T,C
 #include "../../sensors/sensor3/automatic_c.h"
 #include "../../sensors/automatic_k.h"
 #include "../../sensors/sensor21/automatic_p.h"
-#include "../../sensors/automatic_u2.h"
+#include "../../sensors/sensor26/automatic_u2.h"
 #include "../../sensors/automatic_w.h"
 #include "extended_4t_b.h"
 #include "extended_4t_c.h"
