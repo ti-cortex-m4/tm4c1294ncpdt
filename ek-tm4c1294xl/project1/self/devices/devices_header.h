@@ -49,7 +49,7 @@ DEVICES.C
 #include "../sensors/device_q.h"
 #include "../sensors/device_s.h"
 #include "../sensors/device_u.h"
-#include "../sensors/device_u2.h"
+#include "../sensors/device_u_plc.h"
 #include "../sensors/device_v.h"
 #include "../sensors/device_w.h"
 #include "../sensors/unpack_w.h"
