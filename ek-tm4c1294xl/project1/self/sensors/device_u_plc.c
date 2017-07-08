@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-DEVICE_U2!C
+DEVICE_U_PLC!C
 
 
 ------------------------------------------------------------------------------*/
@@ -33,7 +33,7 @@ DEVICE_U2!C
 #include "device_k.h"
 #include "device_q.h"
 #include "device_u.h"
-#include "device_u2.h"
+#include "device_u_plc.h"
 
 
 
