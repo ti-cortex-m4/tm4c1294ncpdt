@@ -11,6 +11,7 @@ DEVICE_U2.C
 #include "../../serial/ports_stack.h"
 #include "../../serial/ports_devices.h"
 #include "../device_k.h"
+#include "../device_q.h"
 #include "device_u2.h"
 
 
@@ -52,45 +53,6 @@ void    QueryEnergyMonDatesU(void)
   PushChar1Bcc(0x03);
 
   BccQueryIO(1+36*14+2, n+8+1, 36);
-}
-
-
-
-void    QueryEnergyDayU(uchar  ibLine, uchar  bDay)
-{
-  uchar n = PushAddress2Bcc();
-
-  PushChar1Bcc('E');
-  PushChar1Bcc('D');
-  PushChar1Bcc('0');
-
-  PushLineBcc(ibLine);
-
-  PushChar1Bcc('(');
-  PushChar2Bcc(bDay);
-  PushChar1Bcc(')');
-  PushChar1Bcc(0x03);
-
-  BccQueryIO(1+6*28+2, n+10+1, 6);
-}
-
-
-void    QueryEnergyMonU(uchar  ibLine, uchar  bMon)
-{
-  uchar n = PushAddress2Bcc();
-
-  PushChar1Bcc('E');
-  PushChar1Bcc('M');
-  PushChar1Bcc('0');
-
-  PushLineBcc(ibLine);
-
-  PushChar1Bcc('(');
-  PushChar2Bcc(bMon);
-  PushChar1Bcc(')');
-  PushChar1Bcc(0x03);
-
-  BccQueryIO(1+6*28+2, n+10+1, 6);
 }
 
 
@@ -253,7 +215,7 @@ double db;
   uchar i;
   for (i=0; i<ibTrf+2; i++)
   {
-    db = PopDoubleU();
+    db = PopDoubleQ();
   }
 
   mpdbChannelsC[ibLine] = db;
