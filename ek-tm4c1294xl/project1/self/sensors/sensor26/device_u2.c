@@ -4,13 +4,13 @@ DEVICE_U2.C
 
 ------------------------------------------------------------------------------*/
 
-#include "../main.h"
-#include "../memory/mem_digitals.h"
-#include "../display/display.h"
-#include "../time/delay.h"
-#include "../serial/ports_stack.h"
-#include "../serial/ports_devices.h"
-#include "device_k.h"
+#include "../../main.h"
+#include "../../memory/mem_digitals.h"
+#include "../../display/display.h"
+#include "../../time/delay.h"
+#include "../../serial/ports_stack.h"
+#include "../../serial/ports_devices.h"
+#include "../device_k.h"
 #include "device_u2.h"
 
 
