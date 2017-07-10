@@ -25,50 +25,7 @@ AUTOMATIC_U2!C
 
 #ifndef SKIP_U
 
-bool    ReadEnergyDayDatesU_Full(void)
-{
-  uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
-  {
-    QueryCloseU();
-    QueryEnergyDayDatesU();
-
-    if (BccInput() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (r == bMINORREPEATS) return(0);
-  ShowPercent(60);
-
-  ReadEnergyDayDatesU();
-
-  return(1);
-}
-
-
-bool    ReadEnergyMonDatesU_Full(void)
-{
-  uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
-  {
-    QueryCloseU();
-    QueryEnergyMonDatesU();
-
-    if (BccInput() == SER_GOODCHECK) break;
-    if (fKey == true) return(0);
-  }
-
-  if (r == bMINORREPEATS) return(0);
-  ShowPercent(60);
-
-  ReadEnergyMonDatesU();
-
-  return(1);
-}
-
-
-
-bool    ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
+status   ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
 {
   uchar i;
   for (i=0; i<bMaxLines; i++)
@@ -80,16 +37,18 @@ bool    ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
       QueryEngMonU(i,ti);
 
       if (BccInput() == SER_GOODCHECK) break;
-      if (fKey == true) return(0);
+      if (fKey == true) return ST_BADDIGITAL;
+
+      if (IndexInBuff() == 10) return ST_NOTPRESENTED;
     }
 
-    if (r == bMINORREPEATS) return(0);
+    if (r == bMINORREPEATS) return ST_BADDIGITAL;
     ShowPercent(70+i);
 
     ReadEnergyTariffU(i,ibTariff);
   }
 
-  return(1);
+  return ST_OK;
 }
 
 
@@ -111,22 +70,18 @@ status  ReadCntMonCanTariffU(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines) 
     ti.bMonth = ibMonth;
   }
 
-  if (ReadEnergyMonDatesU_Full() == 0) return ST_BADDIGITAL;
+  status st = ReadEnergyMonTariffU_Full(ti,ibTariff,bMaxLines);
 
-  date dt;
-  dt.bDay   = ti.bDay;
-  dt.bMonth = ti.bMonth;
-  dt.bYear  = ti.bYear;
-  uchar bMon = IsMonAddedU(dt);
-
-  if (bMon == 0)
+  if (st == ST_NOTPRESENTED)
   {
     Clear();
     sprintf(szLo+1, "мес€ц %02u.%02u ?",ti.bMonth,ti.bYear);
     Delay(1000);
     return(ST_NOTPRESENTED);
   }
-  if (ReadEnergyMonTariffU_Full(ti,ibTariff,bMaxLines) == 0) return ST_BADDIGITAL;
+
+  if (st != ST_OK) return st;
+
 
   QueryCloseU();
 
