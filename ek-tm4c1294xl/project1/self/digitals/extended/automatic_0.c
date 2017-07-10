@@ -16,7 +16,7 @@ AUTOMATIC_0!C
 #include "../../sensors/sensor21/device_p.h"
 #include "../../sensors/device_s.h"
 #include "../../sensors/automatic_s.h"
-#include "../../sensors/device_u.h"
+#include "../../sensors/sensor26/device_u.h"
 #include "../../sensors/device_v.h"
 #include "../../sensors/automatic_v.h"
 #include "../../sensors/device_w.h"
