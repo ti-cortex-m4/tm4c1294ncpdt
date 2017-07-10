@@ -1,10 +1,7 @@
 /*------------------------------------------------------------------------------
-DEVICE_U2!H
+AUTOMATIC_U2!H
 
 
 ------------------------------------------------------------------------------*/
 
-void    InitHeaderU_Plc(void);
-void    QueryHeaderU_Plc(void);
-void    ReadHeaderU_Plc(void);
-bool    ReadDataU_Plc(void);
+status  ReadCntMonCanTariffU(uchar  ibMonth, uchar  ibTariff, uchar  bMaxLines);

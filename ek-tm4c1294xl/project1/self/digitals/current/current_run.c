@@ -20,7 +20,7 @@ CURRENT_RUN!C
 #include "../../sensors/device_k.h"
 #include "../../sensors/sensor21/device_p.h"
 #include "../../sensors/device_q.h"
-#include "../../sensors/device_u.h"
+#include "../../sensors/sensor26/device_u.h"
 #include "../../sensors/device_w.h"
 #include "../../digitals/digitals.h"
 #include "../../digitals/digitals_status.h"
