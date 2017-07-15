@@ -4,4 +4,5 @@ OUT_REALTIME,H
 
 ------------------------------------------------------------------------------*/
 
-void    OutRealtime(void);
+void    OutRealtime1(void);
+void    OutRealtime2(void);
