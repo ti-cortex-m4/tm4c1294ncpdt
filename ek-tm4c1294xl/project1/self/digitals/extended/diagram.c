@@ -8,30 +8,49 @@ DIAGRAM!C
 #include "../../memory/mem_diagram.h"
 #include "../../memory/mem_factors.h"
 #include "../../memory/mem_energy.h"
-#include "../../memory/mem_realtime.h"
 #include "../../memory/mem_ports.h"
 #include "../../hardware/watchdog.h"
 #include "../../digitals/digitals.h"
 #include "../../realtime/realtime.h"
+#include "../../realtime/realtime_storage.h"
 #include "../../energy.h"
 #include "../../flash/flash.h"
 #include "../../flash/files.h"
+#include "../../nvram/cache.h"
+#include "../../nvram/cache2.h"
 #include "../../time/rtc.h"
 #include "../../serial/ports.h"
 #include "diagram.h"
 
 
 
-bool    SaveDgrHou(uint  iwHouTo)
+cache const             chEnblDiagram = {ENBL_DIAGRAM, &fEnblDiagram, sizeof(bool)};
+
+
+
+void    InitDiagram(void)
 {
-  ASSERT(iwHouTo < wHOURS);
+  LoadCache(&chEnblDiagram);
+}
+
+
+void    ResetDiagram(void)
+{
+  SaveCacheBool(&chEnblDiagram, false);
+}
+
+
+
+static bool SaveDgrHou(uint  iwHouTo)
+{
+  ASSERT(iwHouTo < wHOURS_DIAGRAM);
   return SaveBuff(DIAGRAM_HHR_VALUES + iwHouTo*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
 }
 
 
-bool    LoadDgrHou(uint  iwHouFrom)
+static bool LoadDgrHou(uint  iwHouFrom)
 {
-  ASSERT(iwHouFrom < wHOURS);
+  ASSERT(iwHouFrom < wHOURS_DIAGRAM);
   return LoadBuff(DIAGRAM_HHR_VALUES + iwHouFrom*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
 }
 
@@ -54,38 +73,50 @@ bool    ClearDiagram(void)
 
 void    NextHouDiagram(void)
 {
-  LoadDgrHou(iwHardHou);
+  if (++iwHardDgr >= wHOURS_DIAGRAM)
+    iwHardDgr = 0;
 
-  memset(&mpDiagram, 0xFF, sizeof(mpDiagram));
+  if (++ibSoftDgr >= 2)
+    ibSoftDgr = 0;
 
-  uchar c;
-  for (c=0; c<16; c++)
+  SavePointersDgr();
+
+
+  if (fEnblDiagram)
   {
-    if (GetDigitalDevice(c) == 0)
+    LoadDgrHou(iwHardDgr);
+
+    memset(&mpDiagram, 0xFF, sizeof(mpDiagram));
+
+    uchar c;
+    for (c=0; c<16; c++)
     {
-      double db = *PGetCanImpAll(mpimAbsCan,c);
-      db *= mpdbValueCntHou[c];
-      db += mpdbCount[c];
+      if (GetDigitalDevice(c) == 0)
+      {
+        double db = *PGetCanImpAll(mpimAbsCan,c);
+        db *= mpdbValueCntHou[c];
+        db += mpdbCount[c];
 
-      diagram vl;
-      vl.dbValue = db;
+        diagram vl;
+        vl.dbValue = db;
 
-      time ti = *GetCurrTimeDate();
-      vl.stValue.bSecond = ti.bSecond;
-      vl.stValue.bMinute = ti.bMinute;
-      vl.stValue.bHour   = ti.bHour;
+        time ti = *GetCurrTimeDate();
+        vl.stValue.bSecond = ti.bSecond;
+        vl.stValue.bMinute = ti.bMinute;
+        vl.stValue.bHour   = ti.bHour;
 
-      mpDiagram[c] = vl;
+        mpDiagram[c] = vl;
+      }
     }
-  }
 
-  SaveDgrHou(iwHardHou);
+    SaveDgrHou(iwHardDgr);
+  }
 }
 
 
 void    MakeDiagram(uchar  ibCan, double  db)
 {
-  LoadDgrHou(iwHardHou);
+  LoadDgrHou(iwHardDgr);
 
   diagram vl;
   vl.dbValue = db;
@@ -97,7 +128,7 @@ void    MakeDiagram(uchar  ibCan, double  db)
 
   mpDiagram[ibCan] = vl;
 
-  SaveDgrHou(iwHardHou);
+  SaveDgrHou(iwHardDgr);
 }
 
 
@@ -106,7 +137,7 @@ void    MakeDiagram(uchar  ibCan, double  db)
 static uint GetDayHouIndex_Diagram(uchar  ibDay)
 {
   // индекс на первый получас текущих суток
-  uint w = (wHOURS_DIAGRAM+iwHardHou-GetCurrHouIndex()) % wHOURS_DIAGRAM;
+  uint w = (wHOURS_DIAGRAM+iwHardDgr-GetCurrHouIndex()) % wHOURS_DIAGRAM;
 
   // индексы на первые получасы суток назад
   uchar i;
