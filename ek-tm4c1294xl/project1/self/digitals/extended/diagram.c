@@ -10,7 +10,6 @@ DIAGRAM!C
 #include "../../memory/mem_energy.h"
 #include "../../hardware/watchdog.h"
 #include "../../digitals/digitals.h"
-//#include "../../realtime/realtime.h"
 #include "../../realtime/realtime_storage.h"
 #include "../../energy.h"
 #include "../../flash/flash.h"
@@ -39,14 +38,14 @@ void    ResetDiagram(void)
 
 
 
-static bool SaveDgrHou(uint  iwHouTo)
+bool 	SaveDgrHou(uint  iwHouTo)
 {
   ASSERT(iwHouTo < wHOURS_DIAGRAM);
   return SaveBuff(DIAGRAM_HHR_VALUES + iwHouTo*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
 }
 
 
-bool LoadDgrHou(uint  iwHouFrom)
+bool 	LoadDgrHou(uint  iwHouFrom)
 {
   ASSERT(iwHouFrom < wHOURS_DIAGRAM);
   return LoadBuff(DIAGRAM_HHR_VALUES + iwHouFrom*DIAGRAM_CAN_PAGES, mpDiagram, sizeof(mpDiagram));
