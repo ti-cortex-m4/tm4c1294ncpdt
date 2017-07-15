@@ -309,6 +309,7 @@ PROGRAMS!H
 #define wSET_MAX_REPEATS            409
 #define wSET_MAX_SHUTDOWN           423
 #define wSET_CONTROL_W              424
+#define wSET_ENBL_DIAGRAM           425
 
 #define wSET_REVIEW_FLAG            440
 #define wSET_REVIEW_CAN             441
