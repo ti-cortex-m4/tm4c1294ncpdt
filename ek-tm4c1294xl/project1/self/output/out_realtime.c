@@ -64,7 +64,7 @@ void    OutRealtime2(void)
 
   uchar i;
   for (i=0; i<wSize; i++)
-    PushChar(0);
+    PushChar(0xFF);
 
 
   InitPushCRC();
