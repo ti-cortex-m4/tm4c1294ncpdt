@@ -8,6 +8,7 @@ REALTIME_INIT!C
 #include "../memory/mem_realtime.h"
 #include "../memory/mem_params.h"
 #include "../memory/mem_settings.h"
+#include "../memory/mem_diagram.h"
 #include "../flash/records.h"
 #include "../time/timedate.h"
 #include "../time/rtc.h"
@@ -154,12 +155,14 @@ void    LoadRealtime(void)
   LoadPointersDay();
   LoadPointersMon();
   LoadPointersTim();
+  LoadPointersDgr();
 
   PrintString("\n 3min.   "); PrintInt(ibSoftMnt); PrintInt(iwHardMnt);
   PrintString("\n 30 min. "); PrintInt(ibSoftHou); PrintInt(iwHardHou);
   PrintString("\n day     "); PrintInt(ibSoftDay); PrintInt(ibHardDay);
   PrintString("\n month   "); PrintInt(ibSoftMon); PrintInt(ibHardMon);
   PrintString("\n time    "); PrintInt(ibSoftTim); PrintInt(iwHardTim);
+  PrintString("\n diagram "); PrintInt(ibSoftDgr); PrintInt(iwHardDgr);
 
   LoadRealtimeTimes();
   LoadCache(&chRealtimeValues);
