@@ -10,3 +10,12 @@ MEM_DIAGRAM,C
 
 // буфер значений
 diagram                 mpDiagram[bCANALS];
+
+// индекс по кольцевому буферу
+uchar                   ibSoftDgr;
+
+// индекс по кольцевому буферу
+uint                    iwHardDgr;
+
+// флаг включения
+bool                    fEnblDiagram;
