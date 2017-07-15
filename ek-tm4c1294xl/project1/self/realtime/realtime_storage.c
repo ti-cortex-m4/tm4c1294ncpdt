@@ -106,6 +106,24 @@ bool    LoadPointersTim(void)
 
 
 
+bool    SavePointersDgr(void)
+{
+  t2uint tp = GetTuple2Int(ibSoftDgr, iwHardDgr);
+  return WriteNvramBuff(PTR_DIAGRAM, (uchar *) &tp, sizeof(tp));
+}
+
+
+bool    LoadPointersDgr(void)
+{
+  t2uint tp;
+  bool f = ReadNvramBuff(PTR_DIAGRAM, (uchar *) &tp, sizeof(tp));
+  ibSoftDgr = tp.w1;
+  iwHardDgr = tp.w2;
+  return f;
+}
+
+
+
 bool    SaveRealtimeTimes(void)
 {
   t2time tp = GetTuple2Time(tiCurr, tiPrev);

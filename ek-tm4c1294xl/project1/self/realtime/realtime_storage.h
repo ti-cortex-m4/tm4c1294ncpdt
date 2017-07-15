@@ -23,5 +23,8 @@ bool    LoadPointersMon(void);
 bool    SavePointersTim(void);
 bool    LoadPointersTim(void);
 
+bool    SavePointersDgr(void);
+bool    LoadPointersDgr(void);
+
 bool    SaveRealtimeTimes(void);
 bool    LoadRealtimeTimes(void);
