@@ -217,7 +217,7 @@ void    ProcessTime(void)
       { }
     else
     {
-    	PrintString("\n next 30 min.");
+      PrintString("\n next 30 min.");
       NextMinute30();
       PrintInt(ibSoftHou); PrintInt(iwHardHou);
     }
