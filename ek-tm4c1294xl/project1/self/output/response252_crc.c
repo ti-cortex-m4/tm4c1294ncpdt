@@ -38,7 +38,7 @@ void    Response252_CRC(void)
 
     case 1: OutDelay(); break;
 
-    case 2: OutRealtime(); break;
+    case 2: OutRealtime1(); break;
 
     case 3: OutFlashStack(); break;
     case 7: OutNvramStack(); break;
@@ -76,6 +76,8 @@ void    Response252_CRC(void)
 
     case 25: OutReview(); break;
     case 26: OutReviewBuff(); break;
+
+    case 27: OutRealtime2(); break;
 
     default:
       ShowResponseCRC(bSTA_BADCOMMAND);
