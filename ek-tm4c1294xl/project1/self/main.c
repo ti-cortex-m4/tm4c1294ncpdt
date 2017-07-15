@@ -64,6 +64,7 @@ MAIN,C
 #include "digitals/params/params.h"
 #include "digitals/current/current2.h"
 #include "digitals/profile/profile_core.h"
+#include "digitals/extended/diagram.h"
 #include "devices/devices_init.h"
 #include "devices/devices.h"
 #include "digitals/phones.h"
@@ -157,6 +158,7 @@ int     main(void)
   InitRealtime_Custom();
   InitThroughput();
   InitPeriod30();
+  InitDiagram();
   PrintStop();
 
   InitDisplay();

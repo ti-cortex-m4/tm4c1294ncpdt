@@ -18,6 +18,7 @@ KEY_RESET!C
 #include "../digitals/params/params.h"
 #include "../digitals/profile/profile_core.h"
 #include "../digitals/phones.h"
+#include "../digitals/extended/diagram.h"
 #include "../devices/devices_init.h"
 #include "../serial/speeds.h"
 #include "../serial/input_mode_reset.h"
@@ -167,6 +168,7 @@ void    key_SetReset(void)
           ResetMonitor();
 
           ResetPeriod30();
+          ResetDiagram();
 
 //          ResetCurrent();
           ResetCurrent2();
