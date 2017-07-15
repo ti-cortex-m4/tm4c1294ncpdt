@@ -271,8 +271,8 @@ typedef enum
   REVIEW_WRN_TREND      = REVIEW_MARGINS + sizeof(uchar) + bNVRAM_MARGIN,
   REVIEW_WRN_TOP        = REVIEW_WRN_TREND + sizeof(uint) + bNVRAM_MARGIN,
 
-  PTR_DGR               = REVIEW_WRN_TOP + sizeof(uint) + bNVRAM_MARGIN,
-  ENBL_DIAGRAM          = PTR_DGR + sizeof(t2uint) + bNVRAM_MARGIN,
+  PTR_DIAGRAM           = REVIEW_WRN_TOP + sizeof(uint) + bNVRAM_MARGIN,
+  ENBL_DIAGRAM          = PTR_DIAGRAM + sizeof(t2uint) + bNVRAM_MARGIN,
 
   NVRAM_END             = ENBL_DIAGRAM + sizeof(bool) + bNVRAM_MARGIN
 } nvram;
