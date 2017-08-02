@@ -4524,7 +4524,6 @@ void    RunDevices(void)
 #ifndef SKIP_W
 
     case DEV_START_W2:
-      Clear();
       ShowPercent(50);
 
       if (fCurrCtrl == true)
@@ -4558,6 +4557,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTOPENCANAL_W2:
+      Clear();
       ShowPercent(51);
 
       cbRepeat = GetMaxRepeats();
