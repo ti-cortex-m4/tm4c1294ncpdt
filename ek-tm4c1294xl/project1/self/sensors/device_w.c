@@ -315,12 +315,7 @@ void    QueryControlW(time  ti)
 
 void    QueryGetCorrectW(void)
 {
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('R');
-  PushChar1Bcc('1');
-  PushChar1Bcc(0x02);
+  PushAddressW_DirectRead();
 
   PushStringBcc("0-0:96.52.0");
 
@@ -345,12 +340,7 @@ void    QuerySetCorrectW(sint  wSecond)
 {
   Clear(); sprintf(szLo+1,"коррекция: %d",wSecond);
 
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('W');
-  PushChar1Bcc('1');
-  PushChar1Bcc(0x02);
+  PushAddressW_DirectWrite();
 
   PushStringBcc("0-0:96.51.0");
   PushChar1Bcc('(');

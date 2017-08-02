@@ -5,7 +5,7 @@
       ShowPercent(50);
 
       if (fCurrCtrl == true)
-        MakePause(DEV_PREVTIME_W2); // read sensor's time to check
+        MakePause(DEV_PREVTIME_W2);
       else
         MakePause(DEV_POSTCORRECT_W2); // read profiles
       break;
@@ -88,7 +88,7 @@
       break;
 
 
-    case DEV_PREVTIME_W2: // read sensor's time to check
+    case DEV_PREVTIME_W2:
       cbRepeat = GetMaxRepeats();
       QueryTimeW();
       SetCurr(DEV_TIME_W2);
