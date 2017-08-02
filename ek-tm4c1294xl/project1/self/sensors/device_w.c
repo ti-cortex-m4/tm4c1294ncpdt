@@ -251,22 +251,6 @@ void    ReadTypeW(void)
 }
 
 
-void    QueryTimeW_Profile(void)
-{
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('R');
-  PushChar1Bcc('1');
-  PushChar1Bcc(0x02);
-
-  PushStringBcc("1-0:0.9.1");
-  PushChar1Bcc(0x03);
-
-  QueryW(1+28+2, 0);
-}
-
-
 void    QueryTimeW(void)
 {
   uchar n = PushAddressW_DirectRead();

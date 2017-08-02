@@ -28,7 +28,6 @@ void    QueryOpenW(void);
 void    QueryTypeW(void);
 void    ReadTypeW(void);
 
-void    QueryTimeW_Profile(void);
 void    QueryTimeW(void);
 time    ReadTimeW(void);
 
