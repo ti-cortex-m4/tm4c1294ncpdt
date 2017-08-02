@@ -164,7 +164,7 @@ void    QueryCloseW(void)
 
 
 
-uchar   PushAddress1W(void)
+uchar   PushAddressW(void)
 {
   InitPush(0);
   PushChar1Bcc('/');
@@ -179,7 +179,7 @@ uchar   PushAddress1W(void)
 
 uchar   PushAddress2W(void)
 {
-  uchar n = PushAddress1W();
+  uchar n = PushAddressW();
 
   PushChar1Bcc('R');
   PushChar1Bcc('1');
@@ -194,7 +194,7 @@ void    QueryOpenW(void)
 {
   QueryCloseW();
 
-  uchar n = PushAddress1W();
+  uchar n = PushAddressW();
 
   PushChar1Bcc(0x0D);
   PushChar1Bcc(0x0A);
