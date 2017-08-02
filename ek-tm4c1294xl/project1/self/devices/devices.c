@@ -4526,11 +4526,13 @@ void    RunDevices(void)
     case DEV_START_W2:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
-      QueryOpenW();
-      SetCurr(DEV_OPENCANAL_W2);
-      break;
+      MakePause(DEV_POSTCORRECT_W2); // TODO
 
+//      cbRepeat = GetMaxRepeats();
+//      QueryOpenW();
+//      SetCurr(DEV_OPENCANAL_W2);
+      break;
+/*
     case DEV_OPENCANAL_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
         MakePause(DEV_POSTOPENCANAL_W2);
@@ -4736,8 +4738,7 @@ void    RunDevices(void)
         }
       }
       break;
-
-
+*/
     case DEV_POSTCORRECT_W2:
       InitProfileW();
       MakePause(DEV_PREVPROFILE_W2);
