@@ -656,6 +656,7 @@ typedef enum
   DEV_PREVPROFILE_W2    =  0x1C17,
   DEV_PROFILE_W2        =  0x1C18,
   DEV_POSTPROFILE_W2    =  0x1C19,
+  DEV_PREVOPENCANAL_W2  =  0x1C1A,
 
   DEV_START_W3          =  0x1C40,
   DEV_OPENCANAL_W3      =  0x1C41,
