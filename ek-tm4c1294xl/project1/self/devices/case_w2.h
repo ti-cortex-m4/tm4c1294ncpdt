@@ -2,6 +2,7 @@
 #ifndef SKIP_W
 
     case DEV_START_W2:
+      Clear();
       ShowPercent(50);
 
       if (fCurrCtrl == true)
@@ -219,6 +220,8 @@
 
 
     case DEV_POSTCORRECT_W2: // read profiles
+      QueryCloseW();
+
       InitProfileW();
       MakePause(DEV_PREVPROFILE_W2);
       break;
