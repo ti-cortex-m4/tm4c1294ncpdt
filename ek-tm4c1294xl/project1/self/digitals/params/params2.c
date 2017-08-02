@@ -953,7 +953,7 @@ bool    ReadParamV(void)
 
 void    QueryParamW1(char  *psz)
 {
-  PushAddress2W();
+  PushAddressW_DirectRead();
 
   PushStringBcc("1-0:");
   PushStringBcc(psz);

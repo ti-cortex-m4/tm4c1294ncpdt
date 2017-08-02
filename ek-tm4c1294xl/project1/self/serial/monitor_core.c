@@ -29,7 +29,7 @@ static volatile uchar   ibMonitorPort;
 
 void    InitMonitor(void)
 {
-  fMonitor = false;
+  fMonitor = true; // TODO
   cwMonitorDelay = 0;
 
   InitMonitorSettings();
