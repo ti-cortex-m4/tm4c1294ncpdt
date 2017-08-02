@@ -20,7 +20,7 @@ extern  uint                    wProfileW;
 
 double  PopDoubleW(void);
 
-uchar   PushAddress2W(void);
+uchar   PushAddressW_DirectRead(void);
 
 void    QueryCloseW(void);
 void    QueryOpenW(void);
