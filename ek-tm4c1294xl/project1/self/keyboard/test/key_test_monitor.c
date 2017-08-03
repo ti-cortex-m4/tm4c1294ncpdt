@@ -41,7 +41,7 @@ void    auto_TestMonitor(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   {
-    (SuperUser()) ? (szHi[10] = '+') : (szHi[10] = '-');
+    SuperUser() ? (szHi[10] = '+') : (szHi[10] = '-');
 
     uint w = GetMonitorDelay();
 
