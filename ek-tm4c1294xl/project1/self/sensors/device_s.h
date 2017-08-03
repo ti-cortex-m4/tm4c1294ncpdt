@@ -4,6 +4,8 @@ DEVICE_S.C
 
 ------------------------------------------------------------------------------*/
 
+void    PushAddressS(void);
+
 void    QueryTimeS(void);
 time    ReadTimeS(void);
 
