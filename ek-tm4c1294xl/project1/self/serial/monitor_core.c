@@ -19,8 +19,6 @@ MONITOR_CORE.C
 
 
 
-static volatile bool    fMonitor;
-
 static volatile uint    cwMonitorDelay;
 
 static volatile uchar   ibMonitorPort;
@@ -29,7 +27,6 @@ static volatile uchar   ibMonitorPort;
 
 void    InitMonitor(void)
 {
-  fMonitor = false;
   cwMonitorDelay = 0;
 
   InitMonitorSettings();
@@ -45,7 +42,7 @@ void    ResetMonitor(void)
 
 bool    UseMonitor(void)
 {
-  return (fMonitor == true) && (cwMonitorDelay > 0);
+  return (cwMonitorDelay > 0) && SuperUser();
 }
 
 

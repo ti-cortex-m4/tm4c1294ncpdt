@@ -164,7 +164,7 @@ void    QueryCloseW(void)
 
 
 
-uchar   PushAddress1W(void)
+uchar   PushAddressW(void)
 {
   InitPush(0);
   PushChar1Bcc('/');
@@ -177,11 +177,23 @@ uchar   PushAddress1W(void)
 }
 
 
-uchar   PushAddress2W(void)
+uchar   PushAddressW_DirectRead(void)
 {
-  uchar n = PushAddress1W();
+  uchar n = PushAddressW();
 
   PushChar1Bcc('R');
+  PushChar1Bcc('1');
+  PushChar1Bcc(0x02);
+
+  return n+3;
+}
+
+
+uchar   PushAddressW_DirectWrite(void)
+{
+  uchar n = PushAddressW();
+
+  PushChar1Bcc('W');
   PushChar1Bcc('1');
   PushChar1Bcc(0x02);
 
@@ -194,7 +206,7 @@ void    QueryOpenW(void)
 {
   QueryCloseW();
 
-  uchar n = PushAddress1W();
+  uchar n = PushAddressW();
 
   PushChar1Bcc(0x0D);
   PushChar1Bcc(0x0A);
@@ -206,7 +218,7 @@ void    QueryOpenW(void)
 
 void    QueryTypeW(void)
 {
-  PushAddress2W();
+  PushAddressW_DirectRead();
 
   PushStringBcc("0-0:");
   PushStringBcc("96.53.0");
@@ -239,25 +251,9 @@ void    ReadTypeW(void)
 }
 
 
-void    QueryTimeW_Profile(void)
-{
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('R');
-  PushChar1Bcc('1');
-  PushChar1Bcc(0x02);
-
-  PushStringBcc("1-0:0.9.1");
-  PushChar1Bcc(0x03);
-
-  QueryW(1+28+2, 0);
-}
-
-
 void    QueryTimeW(void)
 {
-  uchar n = PushAddress2W();
+  uchar n = PushAddressW_DirectRead();
 
   PushStringBcc("1-0:0.9.1");
   PushChar1Bcc(0x03);
@@ -319,12 +315,7 @@ void    QueryControlW(time  ti)
 
 void    QueryGetCorrectW(void)
 {
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('R');
-  PushChar1Bcc('1');
-  PushChar1Bcc(0x02);
+  PushAddressW_DirectRead();
 
   PushStringBcc("0-0:96.52.0");
 
@@ -349,12 +340,7 @@ void    QuerySetCorrectW(sint  wSecond)
 {
   Clear(); sprintf(szLo+1,"коррекция: %d",wSecond);
 
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('W');
-  PushChar1Bcc('1');
-  PushChar1Bcc(0x02);
+  PushAddressW_DirectWrite();
 
   PushStringBcc("0-0:96.51.0");
   PushChar1Bcc('(');
@@ -422,7 +408,7 @@ void    QueryTransW(uchar  ibTrans)
 {
   ASSERT(ibTrans < 2);
 
-  PushAddress2W();
+  PushAddressW_DirectRead();
 
   PushStringBcc("0-0:");
   PushStringBcc("96.68.");
@@ -466,7 +452,7 @@ void    QueryEngAbsW(uchar  ibLine)
 {
   ASSERT(ibLine < MAX_LINE_W);
 
-  PushAddress2W();
+  PushAddressW_DirectRead();
 
   PushStringBcc("1-1:");
   PushLineW(ibLine);
@@ -482,7 +468,7 @@ void    QueryEngMonW(uchar  ibLine, uchar  bTime)
 {
   ASSERT(ibLine < MAX_LINE_W);
 
-  PushAddress2W();
+  PushAddressW_DirectRead();
 
   PushStringBcc("1-1:");
   PushLineW(ibLine);
@@ -499,7 +485,7 @@ void    QueryEngDayW(uchar  ibLine, uchar  bTime)
 {
   ASSERT(ibLine < MAX_LINE_W);
 
-  PushAddress2W();
+  PushAddressW_DirectRead();
 
   PushStringBcc("1-1:");
   PushLineW(ibLine);
@@ -516,7 +502,7 @@ void    QueryEngMonTrfW(uchar  ibLine, uchar  bTime)
 {
   ASSERT(ibLine < MAX_LINE_W);
 
-  PushAddress2W();
+  PushAddressW_DirectRead();
 
   PushStringBcc("1-1:");
   PushLineW(ibLine);
@@ -576,12 +562,7 @@ void    QueryProfileW(void)
   MonitorString("\n\n index "); MonitorIntDec(wProfileW);
 
 
-  InitPush(0);
-
-  PushChar1Bcc(0x01);
-  PushChar1Bcc('R');
-  PushChar1Bcc('1');
-  PushChar1Bcc(0x02);
+  PushAddressW_DirectRead();
 
   if (diCurr.bDevice == 29)
     PushStringBcc("1-1:15.29.0*"); // МЭС-1
