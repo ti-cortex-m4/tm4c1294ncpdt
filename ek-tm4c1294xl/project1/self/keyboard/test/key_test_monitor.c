@@ -6,6 +6,7 @@ KEY_TEST_MONITOR.C
 
 #include "../../main.h"
 #include "../../console.h"
+#include "../../access.h"
 #include "../../serial/monitor.h"
 #include "key_test_monitor.h"
 
@@ -40,6 +41,8 @@ void    auto_TestMonitor(void)
 {
   if (enKeyboard == KBD_POSTENTER)
   {
+    (SuperUser()) ? (szHi[10] = '+') : (szHi[10] = '-');
+
     uint w = GetMonitorDelay();
 
     Hi(12, w / 0x100);
