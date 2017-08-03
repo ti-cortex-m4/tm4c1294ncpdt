@@ -4,6 +4,14 @@
     case DEV_START_W2:
       ShowPercent(50);
 
+      if (fCurrCtrl == true)
+        MakePause(DEV_PREVTIME_W2);
+      else
+        MakePause(DEV_POSTCORRECT_W2); // read profiles
+      break;
+
+
+    case DEV_PREVOPENCANAL_W2:
       cbRepeat = GetMaxRepeats();
       QueryOpenW();
       SetCurr(DEV_OPENCANAL_W2);
@@ -27,6 +35,7 @@
       break;
 
     case DEV_POSTOPENCANAL_W2:
+      Clear();
       ShowPercent(51);
 
       cbRepeat = GetMaxRepeats();
@@ -63,10 +72,7 @@
     case DEV_PASSWORD_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        if (fCurrCtrl == true)
-          MakePause(DEV_PREVTIME_W2);
-        else
-          MakePause(DEV_POSTCORRECT_W2);
+        MakePause(DEV_CONTROL_W2);
       }
       else
       {
@@ -85,7 +91,7 @@
 
     case DEV_PREVTIME_W2:
       cbRepeat = GetMaxRepeats();
-      QueryTimeW_Profile();
+      QueryTimeW();
       SetCurr(DEV_TIME_W2);
       break;
 
@@ -128,7 +134,7 @@
             ShowLo(szCorrectYes); DelayInf();
 
             if (boControlW)
-              MakePause(DEV_CONTROL_W2);
+              MakePause(DEV_PREVOPENCANAL_W2);
             else
               MakePause(DEV_GETCORRECT_W2);
           }
@@ -148,11 +154,8 @@
     case DEV_POSTGETCORRECT_W2:
       if (mpSerial[ibPort] == SER_GOODCHECK)
       {
-        uint w = ReadGetCorrectW();
-        if (w <= 1800)
-          MakeLongPause(DEV_SETCORRECT_W2,1);
-        else
-          MakeLongPause(DEV_CONTROL_W2,1);
+        ReadGetCorrectW();
+        MakeLongPause(DEV_SETCORRECT_W2,1);
       }
       else
       {
@@ -216,7 +219,9 @@
       break;
 
 
-    case DEV_POSTCORRECT_W2:
+    case DEV_POSTCORRECT_W2: // read profiles
+      QueryCloseW();
+
       InitProfileW();
       MakePause(DEV_PREVPROFILE_W2);
       break;
