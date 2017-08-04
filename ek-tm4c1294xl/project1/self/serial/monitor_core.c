@@ -8,7 +8,6 @@ MONITOR_CORE.C
 #include "utils/uartstdio.h"
 #include "driverlib/interrupt.h"
 #include "inc/hw_ints.h"
-#include "../access.h"
 #include "speeds.h"
 #include "ports_common.h"
 #include "monitor_settings.h"
@@ -20,6 +19,8 @@ MONITOR_CORE.C
 
 
 
+static volatile bool    fMonitor;
+
 static volatile uint    cwMonitorDelay;
 
 static volatile uchar   ibMonitorPort;
@@ -28,6 +29,7 @@ static volatile uchar   ibMonitorPort;
 
 void    InitMonitor(void)
 {
+  fMonitor = false;
   cwMonitorDelay = 0;
 
   InitMonitorSettings();
@@ -43,7 +45,7 @@ void    ResetMonitor(void)
 
 bool    UseMonitor(void)
 {
-  return (cwMonitorDelay > 0) && SuperUser();
+  return (fMonitor == true) && (cwMonitorDelay > 0);
 }
 
 
@@ -70,7 +72,7 @@ void    MonitorOpen(uchar  ibPrt)
   else if (ibPrt == 1)
   {
     IntDisable(INT_UART1);
-    UARTStdioConfig(1, 57600, 120000000);
+    UARTStdioConfig(1, 38400, 120000000);
 
     ibMonitorPort = 1;
   }
@@ -79,23 +81,28 @@ void    MonitorOpen(uchar  ibPrt)
     ASSERT(false);
   }
 
+  fMonitor = true;
   cwMonitorDelay = MONITOR_DELAY;
 }
 
 
 void    MonitorClose(void)
 {
-  cwMonitorDelay = 0;
+  if (fMonitor == true)
+  {
+    fMonitor = false;
+    cwMonitorDelay = 0;
 
-  if (ibMonitorPort == 0)
-  {
-    SetSpeed(0);
-    IntEnable(INT_UART0);
-  }
-  else if (ibMonitorPort == 1)
-  {
-    SetSpeed(1);
-    IntEnable(INT_UART1);
+    if (ibMonitorPort == 0)
+    {
+      SetSpeed(0);
+      IntEnable(INT_UART0);
+    }
+    else if (ibMonitorPort == 1)
+    {
+      SetSpeed(1);
+      IntEnable(INT_UART1);
+    }
   }
 }
 
