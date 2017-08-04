@@ -714,19 +714,19 @@ void    QueryParamS(void)
   PushChar(0x01);
   PushChar(0x32);
 
-  QueryS(100+18, 15);
+  QueryS(100+14, 15);
 }
 
 
 void    ReadParamS(void)
 {
-  InitPop(13);
+  InitPop(9);
 
   ulong dw = PopChar();
-  dw += PopChar()*0x100;
-  dw += PopChar()*0x10000;
+  dw += PopChar()*100;
+  dw += PopChar()*10000;
 
-  reValue = dw * 10;
+  reValue = dw;
 }
 
 
