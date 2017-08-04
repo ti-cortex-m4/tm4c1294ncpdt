@@ -703,14 +703,18 @@ bool    ReadParamP(void)
 
 void    QueryParamS(void)
 {
-  InitPush(2);
+  InitPush(0);
 
-  PushChar(0x20);
-  PushChar(0x00);
+  PushChar(0xC0);
+  PushChar(0x48);
 
-  PushAddressV(0x2D);
+  PushAddressS();
 
-  QueryV(100+20, 15);
+  PushChar(0xD0);
+  PushChar(0x01);
+  PushChar(0x32);
+
+  QueryS(100+18, 15);
 }
 
 
