@@ -23,6 +23,8 @@ PARAMS2!C
 #include    "../../sensors/device_k.h"
 #include    "../../sensors/sensor21/device_p.h"
 #include    "../../sensors/sensor21/automatic_p.h"
+#include    "../../sensors/device_s.h"
+#include    "../../sensors/automatic_s.h"
 #include    "../../sensors/device_q.h"
 #include    "../../sensors/sensor26/device_u.h"
 #include    "../../sensors/device_v.h"
@@ -701,7 +703,7 @@ bool    ReadParamP(void)
 
 #ifndef SKIP_S
 
-void    QueryParamS(void)
+void    QueryParamS1(void)
 {
   InitPush(0);
 
@@ -718,7 +720,7 @@ void    QueryParamS(void)
 }
 
 
-void    ReadParamS(void)
+void    ReadParamS1(void)
 {
   InitPop(9);
 
@@ -726,7 +728,7 @@ void    ReadParamS(void)
   dw += PopChar()*100;
   dw += PopChar()*10000;
 
-  reValue = dw;
+  reValue = dw*10;
 }
 
 
@@ -734,12 +736,12 @@ bool    ReadParamS(void)
 {
   Clear();
 
-  QueryParamS();
+  QueryParamS1();
   if (InputS() != SER_GOODCHECK) return(0);
 
   switch (diCurr.ibLine)
   {
-    case PAR_P : ReadParamS(); break;
+    case PAR_P : ReadParamS1(); break;
 
     default: return(0);
   }
