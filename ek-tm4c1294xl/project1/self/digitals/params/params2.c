@@ -699,6 +699,54 @@ bool    ReadParamP(void)
 
 
 
+#ifndef SKIP_S
+
+void    QueryParamS(void)
+{
+  InitPush(2);
+
+  PushChar(0x20);
+  PushChar(0x00);
+
+  PushAddressV(0x2D);
+
+  QueryV(100+20, 15);
+}
+
+
+void    ReadParamS(void)
+{
+  InitPop(13);
+
+  ulong dw = PopChar();
+  dw += PopChar()*0x100;
+  dw += PopChar()*0x10000;
+
+  reValue = dw * 10;
+}
+
+
+bool    ReadParamS(void)
+{
+  Clear();
+
+  QueryParamS();
+  if (InputS() != SER_GOODCHECK) return(0);
+
+  switch (diCurr.ibLine)
+  {
+    case PAR_P : ReadParamS(); break;
+
+    default: return(0);
+  }
+
+  return(1);
+}
+
+#endif
+
+
+
 #ifndef SKIP_T
 
 void    ReadParamT1(void)
@@ -1108,6 +1156,10 @@ float2  ReadParam(uint  iwPrm)
 
 #ifndef SKIP_P
     case 21: return GetFloat2(reValue, ReadParamP());
+#endif
+
+#ifndef SKIP_S
+    case 24: return GetFloat2(reValue, ReadParamS());
 #endif
 
 #ifndef SKIP_T
