@@ -184,7 +184,7 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="project1.com.ti.ccstudio.buildDefinitions.TMS470.ProjectType.155849752" name="ARM" projectType="com.ti.ccstudio.buildDefinitions.TMS470.ProjectType"/>
+		<project id="project1a.com.ti.ccstudio.buildDefinitions.TMS470.ProjectType.155849752" name="ARM" projectType="com.ti.ccstudio.buildDefinitions.TMS470.ProjectType"/>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration"/>
 	<storageModule moduleId="org.eclipse.cdt.core.language.mapping">
@@ -198,10 +198,10 @@
 	</storageModule>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Release">
-			<resource resourceType="PROJECT" workspacePath="/project1"/>
+			<resource resourceType="PROJECT" workspacePath="/project1a"/>
 		</configuration>
 		<configuration configurationName="Debug">
-			<resource resourceType="PROJECT" workspacePath="/project1"/>
+			<resource resourceType="PROJECT" workspacePath="/project1a"/>
 		</configuration>
 	</storageModule>
 </cproject>
