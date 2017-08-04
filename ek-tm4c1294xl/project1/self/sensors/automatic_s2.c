@@ -43,7 +43,7 @@ void    QueryEngMonTariffS(uchar  ibMon, uchar  ibTrf)
 
   PushAddressS();
 
-  PushChar(0xD1);
+  PushChar(0xD2);
   PushChar(0x01);
   PushChar(0x30);
   PushChar(ibTrf);
@@ -85,7 +85,7 @@ status  ReadCntMonCanTariffS(uchar  ibMonth, uchar  ibTrf) // на начало мес€ца
   time ti = ti2.tiValue;
 
 
-  uchar ibMon = ((12 + ti.bMonth - 1 - ibMonth) % 12) + 1; // ???
+  uchar ibMon = ((12 + ti.bMonth - 1 - ibMonth) % 12) + 1;
   if (QueryEngMonTariffS_Full(ibMon, ibTrf, 75) == 0) return ST_BADDIGITAL;
 
 
