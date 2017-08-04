@@ -147,7 +147,7 @@ void    MakeParamDiv(uint  iwPrm)
       mpboEnblParams[iwPrm] = false;
     else
     {
-      fl = 100;
+      fl = 1;
       mpboEnblParams[iwPrm] = true;
     }
   }
