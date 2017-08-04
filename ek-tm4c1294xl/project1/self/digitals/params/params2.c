@@ -23,6 +23,8 @@ PARAMS2!C
 #include    "../../sensors/device_k.h"
 #include    "../../sensors/sensor21/device_p.h"
 #include    "../../sensors/sensor21/automatic_p.h"
+#include    "../../sensors/device_s.h"
+#include    "../../sensors/automatic_s.h"
 #include    "../../sensors/device_q.h"
 #include    "../../sensors/sensor26/device_u.h"
 #include    "../../sensors/device_v.h"
@@ -699,6 +701,58 @@ bool    ReadParamP(void)
 
 
 
+#ifndef SKIP_S
+
+void    QueryParamS1(void)
+{
+  InitPush(0);
+
+  PushChar(0xC0);
+  PushChar(0x48);
+
+  PushAddressS();
+
+  PushChar(0xD0);
+  PushChar(0x01);
+  PushChar(0x32);
+
+  QueryS(100+14, 15);
+}
+
+
+void    ReadParamS1(void)
+{
+  InitPop(9);
+
+  ulong dw = PopChar();
+  dw += PopChar()*100;
+  dw += PopChar()*10000;
+
+  reValue = dw*10;
+}
+
+
+bool    ReadParamS(void)
+{
+  Clear();
+
+  QueryParamS1();
+  if (InputS() != SER_GOODCHECK) return(0);
+
+  switch (diCurr.ibLine)
+  {
+    case PAR_P : ReadParamS1(); break;
+
+    default: return(0);
+  }
+
+  return(1);
+}
+
+#endif
+
+
+
 #ifndef SKIP_T
 
 void    ReadParamT1(void)
@@ -1108,6 +1162,10 @@ float2  ReadParam(uint  iwPrm)
 
 #ifndef SKIP_P
     case 21: return GetFloat2(reValue, ReadParamP());
+#endif
+
+#ifndef SKIP_S
+    case 24: return GetFloat2(reValue, ReadParamS());
 #endif
 
 #ifndef SKIP_T
