@@ -1,0 +1,278 @@
+
+// адреса страниц Non-volatile RAM
+typedef enum
+{
+  NVRAM_BEGIN           = 0,
+
+  LABEL_GLOBAL          = NVRAM_BEGIN,
+
+  REALTIME_TIMES        = LABEL_GLOBAL + sizeof(mpbLabelGlobal) + bNVRAM_MARGIN,
+  REALTIME_VALUES       = REALTIME_TIMES + sizeof(t2time) + bNVRAM_MARGIN,
+
+  PTR_MNT               = REALTIME_VALUES + sizeof(realtime1) + bNVRAM_MARGIN,
+  PTR_HHR               = PTR_MNT + sizeof(t2uint) + bNVRAM_MARGIN,
+  PTR_DAY               = PTR_HHR + sizeof(t2uint) + bNVRAM_MARGIN,
+  PTR_MON               = PTR_DAY + sizeof(t2uint) + bNVRAM_MARGIN,
+  PTR_TIM               = PTR_MON + sizeof(t2uint) + bNVRAM_MARGIN,
+
+  PUBLIC_TRF            = PTR_TIM + sizeof(t2uint) + bNVRAM_MARGIN,
+  PUBLIC_TRF_PREV_MON   = PUBLIC_TRF + sizeof(bool) + bNVRAM_MARGIN,
+  OLD_TRF_MODE          = PUBLIC_TRF_PREV_MON + sizeof(bool) + bNVRAM_MARGIN,
+
+  ZONES_POW             = OLD_TRF_MODE + sizeof(uchar) + bNVRAM_MARGIN,
+  ZONES_ENG             = ZONES_POW + (sizeof(zone) + bNVRAM_MARGIN)*12*bMODES,
+
+  ZONE_DAY              = ZONES_ENG + (sizeof(zone) + bNVRAM_MARGIN)*12*bMODES,
+
+  PERIOD_TRF_POW        = ZONE_DAY + sizeof(zone) + bNVRAM_MARGIN,
+  PERIOD_TRF_ENG        = PERIOD_TRF_POW + sizeof(mpePeriodTrfPow) + bNVRAM_MARGIN,
+
+  RELAXS_FLAG           = PERIOD_TRF_ENG + sizeof(mpePeriodTrfEng) + bNVRAM_MARGIN,
+  RELAXS_TARIFF         = RELAXS_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  RELAXS                = RELAXS_TARIFF + sizeof(uchar) + bNVRAM_MARGIN,
+
+  GAPS_FLAG             = RELAXS + sizeof(relaxs) + bNVRAM_MARGIN,
+  GAPS                  = GAPS_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+
+  DECRET                = GAPS + sizeof(gaps) + bNVRAM_MARGIN,
+  SUMMER                = DECRET + sizeof(decret) + bNVRAM_MARGIN,
+  WINTER                = SUMMER + sizeof(time) + bNVRAM_MARGIN,
+
+  IMPMNTCAN             = WINTER + sizeof(time) + bNVRAM_MARGIN,
+
+  IMPHOUCAN_BUFF        = IMPMNTCAN + (sizeof(uint)*bCANALS + bNVRAM_MARGIN)*bMINUTES,
+  IMPDAYCAN_BUFF        = IMPHOUCAN_BUFF + sizeof(uint)*bCANALS + bNVRAM_MARGIN,
+  IMPMONCAN_BUFF        = IMPDAYCAN_BUFF + sizeof(impulse)*bCANALS + bNVRAM_MARGIN,
+  IMPABSCAN_BUFF        = IMPMONCAN_BUFF + sizeof(impulse)*bCANALS + bNVRAM_MARGIN,
+  POWDAYGRP_BUFF        = IMPABSCAN_BUFF + sizeof(impulse)*bCANALS + bNVRAM_MARGIN,
+  POWMONGRP_BUFF        = POWDAYGRP_BUFF + sizeof(power)*bGROUPS + bNVRAM_MARGIN,
+  CNTMONCAN_BUFF        = POWMONGRP_BUFF + sizeof(power)*bGROUPS + bNVRAM_MARGIN,
+
+  GROUPS                = CNTMONCAN_BUFF + sizeof(double)*bCANALS + bNVRAM_MARGIN,
+
+  TRANS_ENG             = GROUPS + sizeof(mpgrGroups) + bNVRAM_MARGIN,
+  TRANS_CNT             = TRANS_ENG + sizeof(double)*bCANALS + bNVRAM_MARGIN,
+  PULSE_HOU             = TRANS_CNT + sizeof(double)*bCANALS + bNVRAM_MARGIN,
+  PULSE_MNT             = PULSE_HOU + sizeof(double)*bCANALS + bNVRAM_MARGIN,
+
+  COUNT                 = PULSE_MNT + sizeof(double)*bCANALS + bNVRAM_MARGIN,
+  LOSSE                 = COUNT + sizeof(double)*bCANALS + bNVRAM_MARGIN,
+  LEVEL                 = LOSSE + sizeof(double)*bCANALS + bNVRAM_MARGIN,
+
+  OBJECT_NAME           = LEVEL + sizeof(double)*bCANALS + bNVRAM_MARGIN,
+  CANALS_NAME           = OBJECT_NAME + sizeof(szObjectName) + bNVRAM_MARGIN,
+  GROUPS_NAME           = CANALS_NAME + sizeof(mpszCanalsName) + bNVRAM_MARGIN,
+
+  DIGITALS              = GROUPS_NAME + sizeof(mpszGroupsName) + bNVRAM_MARGIN,
+  ENBL_CAN              = DIGITALS + sizeof(mpdiDigital) + bNVRAM_MARGIN,
+
+  PHONES                = ENBL_CAN + sizeof(mpboEnblCan) + bNVRAM_MARGIN,
+
+  ENBL_KEYS             = PHONES + sizeof(mpphPhones) + bNVRAM_MARGIN,
+  KEYS                  = ENBL_KEYS + sizeof(bool) + bNVRAM_MARGIN,
+
+  ADDRESS1              = KEYS + sizeof(mpphKeys) + bNVRAM_MARGIN,
+  ADDRESS2              = ADDRESS1 + sizeof(mpdwAddress1) + bNVRAM_MARGIN,
+
+  ENBL_PRT_HOU          = ADDRESS2 + sizeof(mpdwAddress2) + bNVRAM_MARGIN,
+  CTRL_HOU              = ENBL_PRT_HOU + sizeof(mpboEnblPrtHou) + bNVRAM_MARGIN,
+  RECALC_HOU            = CTRL_HOU + sizeof(mpboCtrlHou) + bNVRAM_MARGIN,
+
+  PARAMS                = RECALC_HOU + sizeof(mpboRecalcHou) + bNVRAM_MARGIN,
+  PARAMS_DIV            = PARAMS + sizeof(mpdiParam) + bNVRAM_MARGIN,
+  ENBL_PARAMS           = PARAMS_DIV + sizeof(mpreParamsDiv) + bNVRAM_MARGIN,
+
+  START_REL_CAN         = ENBL_PARAMS + sizeof(mpboEnblParams) + bNVRAM_MARGIN,
+  START_ABS16_CAN       = START_REL_CAN + sizeof(mpcwStartRelCan) + bNVRAM_MARGIN,
+  START_ABS32_CAN       = START_ABS16_CAN + sizeof(mpcwStartAbs16Can) + bNVRAM_MARGIN,
+  START_CAN             = START_ABS32_CAN + sizeof(mpcdwStartAbs32Can) + bNVRAM_MARGIN,
+  STOP_CAN              = START_CAN + sizeof(mpboStartCan) + bNVRAM_MARGIN,
+  STOP_AUX_CAN          = STOP_CAN + sizeof(mpcwStopCan) + bNVRAM_MARGIN,
+
+  MAX_CONNECT           = STOP_AUX_CAN + sizeof(mpcwStopAuxCan) + bNVRAM_MARGIN,
+  CUSTOM_MODEM          = MAX_CONNECT + sizeof(uchar) + bNVRAM_MARGIN,
+
+  SEPARATE_CAN          = CUSTOM_MODEM + sizeof(bool) + bNVRAM_MARGIN,
+  SHOW_MESSAGES         = SEPARATE_CAN + sizeof(bool) + bNVRAM_MARGIN,
+  HIDE_MESSAGES         = SHOW_MESSAGES + sizeof(bool) + bNVRAM_MARGIN,
+  CONTROL_TIME          = HIDE_MESSAGES + sizeof(bool) + bNVRAM_MARGIN,
+  MANAGE_TIME           = CONTROL_TIME + sizeof(bool) + bNVRAM_MARGIN,
+
+  LOGICAL               = MANAGE_TIME + sizeof(bool) + bNVRAM_MARGIN,
+
+  FIRST_RESET           = LOGICAL + sizeof(uchar) + bNVRAM_MARGIN,
+  ENBL_WDT              = FIRST_RESET + sizeof(bool) + bNVRAM_MARGIN,
+
+  SET_TIME              = ENBL_WDT + sizeof(bool) + bNVRAM_MARGIN,
+  SET_DATE              = SET_TIME + sizeof(bool) + bNVRAM_MARGIN,
+  SET_GROUPS            = SET_DATE + sizeof(bool) + bNVRAM_MARGIN,
+  SET_PASSWORD          = SET_GROUPS + sizeof(bool) + bNVRAM_MARGIN,
+
+  PORTS                 = SET_PASSWORD + sizeof(bool) + bNVRAM_MARGIN,
+  LOCAL_DISABLE         = PORTS + sizeof(mppoPorts) + bNVRAM_MARGIN,
+  MAJOR_IN_DELAY        = LOCAL_DISABLE + sizeof(mpboLocalDisable) + bNVRAM_MARGIN,
+  MINOR_IN_DELAY        = MAJOR_IN_DELAY + sizeof(mpwMajorInDelay) + bNVRAM_MARGIN,
+  CORRECT_LIMIT         = MINOR_IN_DELAY + sizeof(mpwMinorInDelay) + bNVRAM_MARGIN,
+
+  EXT_4_FLAG            = CORRECT_LIMIT + sizeof(mpbCorrectLimit) + bNVRAM_MARGIN,
+  EXT_4_MONTHS          = EXT_4_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  EXT_4T_FLAG           = EXT_4_MONTHS + sizeof(bool) + bNVRAM_MARGIN,
+  EXT_4T_MONTHS         = EXT_4T_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  EXT_5_FLAG            = EXT_4T_MONTHS + sizeof(bool) + bNVRAM_MARGIN,
+  EXT_6_FLAG            = EXT_5_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+
+  DSBL_ESC_U            = EXT_6_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  DSBL_ESC_V            = DSBL_ESC_U + sizeof(bool) + bNVRAM_MARGIN,
+  DSBL_ESC_S            = DSBL_ESC_V + sizeof(bool) + bNVRAM_MARGIN,
+  MNT_ESC_S             = DSBL_ESC_S + sizeof(bool) + bNVRAM_MARGIN,
+  EXTENDED_ESC_U        = MNT_ESC_S + sizeof(bool) + bNVRAM_MARGIN,
+  EXTENDED_ESC_V        = EXTENDED_ESC_U + sizeof(bool) + bNVRAM_MARGIN,
+  EXTENDED_ESC_S        = EXTENDED_ESC_V + sizeof(bool) + bNVRAM_MARGIN,
+
+  ESC_S_VALUE           = EXTENDED_ESC_S + sizeof(bool) + bNVRAM_MARGIN,
+  ESC_S_TIME            = ESC_S_VALUE + sizeof(mpdbEsc_S) + bNVRAM_MARGIN,
+  ESC_V_VALUE           = ESC_S_TIME + sizeof(mptiEsc_S) + bNVRAM_MARGIN,
+  ESC_V_TIME            = ESC_V_VALUE + sizeof(mpdbEsc_V) + bNVRAM_MARGIN,
+  ESC_U_VALUE           = ESC_V_TIME + sizeof(mptiEsc_V) + bNVRAM_MARGIN,
+  ESC_U_TIME            = ESC_U_VALUE + sizeof(mptiEsc_U1) + bNVRAM_MARGIN,
+
+  EXT_7_DAY_VALUES      = ESC_U_TIME + sizeof(mptiEsc_U2) + bNVRAM_MARGIN,
+
+  MACHINES_ESC          = EXT_7_DAY_VALUES + (sizeof(mpCntDayCan7) + bNVRAM_MARGIN)*bDAYS,
+  BLOCK_ESC             = MACHINES_ESC + sizeof(bool) + bNVRAM_MARGIN,
+
+  STRICT_UNI            = BLOCK_ESC + sizeof(bool) + bNVRAM_MARGIN,
+  MAX_DELAY_UNI         = STRICT_UNI + sizeof(bool) + bNVRAM_MARGIN,
+  REPEAT_FLOW_INI       = MAX_DELAY_UNI + sizeof(bool) + bNVRAM_MARGIN,
+  ENBL_PASS_INI         = REPEAT_FLOW_INI + sizeof(bool) + bNVRAM_MARGIN,
+
+  ENBL_CURRENT          = ENBL_PASS_INI + sizeof(bool) + bNVRAM_MARGIN,
+  ENBL_PROFILE          = ENBL_CURRENT + sizeof(bool) + bNVRAM_MARGIN,
+  TIMEOUT_CURRENT       = ENBL_PROFILE + sizeof(bool) + bNVRAM_MARGIN,
+  TIMEOUT_PROFILE       = TIMEOUT_CURRENT + sizeof(bool) + bNVRAM_MARGIN,
+
+  DSBL_REFILL           = TIMEOUT_PROFILE + sizeof(bool) + bNVRAM_MARGIN,
+  USE_BOUNDS            = DSBL_REFILL + sizeof(bool) + bNVRAM_MARGIN,
+  MAX_REPEATS           = USE_BOUNDS + sizeof(bool) + bNVRAM_MARGIN,
+  RECALC_ALWAYS         = MAX_REPEATS + sizeof(uchar) + bNVRAM_MARGIN,
+
+  OPEN_CALC             = RECALC_ALWAYS + sizeof(bool) + bNVRAM_MARGIN,
+
+  FLOW_PORT_FROM        = OPEN_CALC + sizeof(bool) + bNVRAM_MARGIN,
+  MAX_FLOW_DELAY        = FLOW_PORT_FROM + sizeof(bool) + bNVRAM_MARGIN,
+  FLOW_PORT_TO          = MAX_FLOW_DELAY + sizeof(bool) + bNVRAM_MARGIN,
+
+  PARAMS_FLAG           = FLOW_PORT_TO + sizeof(bool) + bNVRAM_MARGIN,
+  MNT_PARAMS            = PARAMS_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+
+  FIX_PARAMS_BUGS       = MNT_PARAMS + sizeof(bool) + bNVRAM_MARGIN,
+  USE_PARAMS_DIV        = FIX_PARAMS_BUGS + sizeof(bool) + bNVRAM_MARGIN,
+
+  KEYS_LEVEL_B          = USE_PARAMS_DIV + sizeof(bool) + bNVRAM_MARGIN,
+  SHORT_PROFILE_C       = KEYS_LEVEL_B + sizeof(uchar) + bNVRAM_MARGIN,
+  CONTROL_Q             = SHORT_PROFILE_C + sizeof(bool) + bNVRAM_MARGIN,
+  CONTROL_K             = CONTROL_Q + sizeof(bool) + bNVRAM_MARGIN,
+  PLC_U_FLAG            = CONTROL_K + sizeof(bool) + bNVRAM_MARGIN,
+  PLC_U_SIZE            = PLC_U_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  PLC_U_SHUTDOWN        = PLC_U_SIZE + sizeof(uchar) + bNVRAM_MARGIN,
+
+  CORRECT1              = PLC_U_SHUTDOWN + sizeof(uint) + bNVRAM_MARGIN,
+  CORRECT2_FLAG         = CORRECT1 + sizeof(Correct1) + bNVRAM_MARGIN,
+
+  KEY_INDEX             = CORRECT2_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  SYS_INDEX             = KEY_INDEX + sizeof(ulong) + bNVRAM_MARGIN,
+  DIG_INDEX             = SYS_INDEX + sizeof(ulong) + bNVRAM_MARGIN,
+  IMP_INDEX             = DIG_INDEX + sizeof(ulong) + bNVRAM_MARGIN,
+  MOD_INDEX             = IMP_INDEX + sizeof(ulong) + bNVRAM_MARGIN,
+  PH2_INDEX             = MOD_INDEX + sizeof(ulong) + bNVRAM_MARGIN,
+  AUX_INDEX             = PH2_INDEX + sizeof(ulong) + bNVRAM_MARGIN,
+
+  RECORDS_DSBL          = AUX_INDEX + sizeof(ulong) + bNVRAM_MARGIN,
+
+  ASSERTS_IDX           = RECORDS_DSBL + sizeof(mpfRecordDsbl) + bNVRAM_MARGIN,
+  ASSERTS               = ASSERTS_IDX + sizeof(ulong) + bNVRAM_MARGIN,
+
+  START                 = ASSERTS + sizeof(mpAsserts) + bNVRAM_MARGIN,
+  POWER_OFF             = START + sizeof(time) + bNVRAM_MARGIN,
+  POWER_ON              = POWER_OFF + sizeof(time) + bNVRAM_MARGIN,
+  SWITCH_ON             = POWER_ON + sizeof(time) + bNVRAM_MARGIN,
+
+  OUTPUT_DELAY          = SWITCH_ON + sizeof(uchar) + bNVRAM_MARGIN,
+
+  PORT_GPS              = OUTPUT_DELAY + sizeof(mpwOutputDelay) + bNVRAM_MARGIN,
+  GMT_GPS               = PORT_GPS + sizeof(uchar) + bNVRAM_MARGIN,
+  SEASON_GPS            = GMT_GPS + sizeof(uchar) + bNVRAM_MARGIN,
+  SCHEDULE_GPS          = SEASON_GPS + sizeof(bool) + bNVRAM_MARGIN,
+
+  CORRECT2_STATUS       = SCHEDULE_GPS + sizeof(mpboScheduleGps) + bNVRAM_MARGIN,
+
+  CORRECT3_FLAG         = CORRECT2_STATUS + sizeof(mpcwCorrect2Status15) + bNVRAM_MARGIN,
+  CORRECT3_SUCCESS_MAX  = CORRECT3_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  CORRECT3_TOTAL        = CORRECT3_SUCCESS_MAX + sizeof(uchar) + bNVRAM_MARGIN,
+  CORRECT3_SUCCESS      = CORRECT3_TOTAL + sizeof(ulong) + bNVRAM_MARGIN,
+  CORRECT3_SUCCESS_TIME = CORRECT3_SUCCESS + sizeof(ulong) + bNVRAM_MARGIN,
+  CORRECT3_ERROR_TIME   = CORRECT3_SUCCESS_TIME + sizeof(time) + bNVRAM_MARGIN,
+  CORRECT3_STATUS       = CORRECT3_ERROR_TIME + sizeof(time) + bNVRAM_MARGIN,
+
+  EXT_3_FLAG            = CORRECT3_STATUS + sizeof(mpcwCorrect3Status15) + bNVRAM_MARGIN,
+  EXT_3_EVENT_FLAG_A    = EXT_3_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  EXT_3_EVENT_FLAG_B    = EXT_3_EVENT_FLAG_A + sizeof(mpfEventFlagA) + bNVRAM_MARGIN,
+  EXT_3_EVENT_START     = EXT_3_EVENT_FLAG_B + sizeof(mpfEventFlagB) + bNVRAM_MARGIN,
+  EXT_3_EVENT_DEVICE    = EXT_3_EVENT_START + sizeof(mpfEventStart) + bNVRAM_MARGIN,
+  EXT_3_EVENT_PHASE1    = EXT_3_EVENT_DEVICE + sizeof(mpdwEventDevice) + bNVRAM_MARGIN,
+  EXT_3_EVENT_PHASE2    = EXT_3_EVENT_PHASE1 + sizeof(mpdwEventPhase1) + bNVRAM_MARGIN,
+  EXT_3_EVENT_PHASE3    = EXT_3_EVENT_PHASE2 + sizeof(mpdwEventPhase2) + bNVRAM_MARGIN,
+
+  EXT_0_FLAG            = EXT_3_EVENT_PHASE3 + sizeof(mpdwEventPhase3) + bNVRAM_MARGIN,
+  EXT_0_LIMIT           = EXT_0_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  EXT_0_COUNTER         = EXT_0_LIMIT + sizeof(uchar) + bNVRAM_MARGIN,
+
+  ENBL_CURRENT2         = EXT_0_COUNTER + sizeof(uchar) + bNVRAM_MARGIN,
+  CURRENT2_MNT          = ENBL_CURRENT2 + sizeof(bool) + bNVRAM_MARGIN,
+  CURRENT2_OVERFLOW     = CURRENT2_MNT + sizeof(mpwCurrent2Mnt) + bNVRAM_MARGIN,
+
+  INPUT_MODE_RESET      = CURRENT2_OVERFLOW + sizeof(mpwCurrent2Overflow) + bNVRAM_MARGIN,
+  SLAVE_MODEM           = INPUT_MODE_RESET + sizeof(uchar) + bNVRAM_MARGIN,
+
+  BULK_ENBL             = SLAVE_MODEM + sizeof(bool) + bNVRAM_MARGIN,
+  BULK_SIZE             = BULK_ENBL + sizeof(bool) + bNVRAM_MARGIN,
+  BULK_MAX_DELAY        = BULK_SIZE + sizeof(uchar) + bNVRAM_MARGIN,
+
+  DSBL_ANSWER           = BULK_MAX_DELAY + sizeof(uint) + bNVRAM_MARGIN,
+
+  MAX_SHUTDOWN          = DSBL_ANSWER + sizeof(bool) + bNVRAM_MARGIN,
+
+  MONITOR_LOG_HEX       = MAX_SHUTDOWN + sizeof(uint) + bNVRAM_MARGIN,
+  MONITOR_LOG_CHAR7     = MONITOR_LOG_HEX + sizeof(bool) + bNVRAM_MARGIN,
+  MONITOR_LOG_CHAR8     = MONITOR_LOG_CHAR7 + sizeof(bool) + bNVRAM_MARGIN,
+
+  TX_DELAY              = MONITOR_LOG_CHAR8 + sizeof(bool) + bNVRAM_MARGIN,
+
+  PERIOD30_VALUES       = TX_DELAY + sizeof(mpwTxDelay) + bNVRAM_MARGIN,
+  PERIOD30_IDX          = PERIOD30_VALUES + (sizeof(period30) + bNVRAM_MARGIN)*PERIOD30_SIZE,
+
+  CONTROL_W             = PERIOD30_IDX + sizeof(uint) + bNVRAM_MARGIN,
+
+  MONITOR_LOG_BASIC     = CONTROL_W + sizeof(bool) + bNVRAM_MARGIN,
+
+  SERIALS_MANUAL        = MONITOR_LOG_BASIC + sizeof(bool) + bNVRAM_MARGIN,
+  SERIAL_VALUES         = SERIALS_MANUAL + sizeof(bool) + bNVRAM_MARGIN,
+  SERIAL_TIMES          = SERIAL_VALUES + sizeof(mdwSerialValues) + bNVRAM_MARGIN,
+  SERIAL_FLAGS          = SERIAL_TIMES + sizeof(mtiSerialTimes) + bNVRAM_MARGIN,
+
+  PROFILE_FRAC_6        = SERIAL_FLAGS + sizeof(mfSerialFlags) + bNVRAM_MARGIN,
+
+  REVIEW_FLAG           = PROFILE_FRAC_6 + (sizeof(mpdbEngFracDigCan[0]) + bNVRAM_MARGIN)*bCANALS,
+  REVIEW_CAN            = REVIEW_FLAG + sizeof(bool) + bNVRAM_MARGIN,
+  REVIEW_READ_ID        = REVIEW_CAN + sizeof(mfReviewCan) + bNVRAM_MARGIN,
+  REVIEW_REPEATS        = REVIEW_READ_ID + sizeof(bool) + bNVRAM_MARGIN,
+  REVIEW_BORDERS        = REVIEW_REPEATS + sizeof(uchar) + bNVRAM_MARGIN,
+  REVIEW_MARGINS        = REVIEW_BORDERS + sizeof(uchar) + bNVRAM_MARGIN,
+  REVIEW_WRN_TREND      = REVIEW_MARGINS + sizeof(uchar) + bNVRAM_MARGIN,
+  REVIEW_WRN_TOP        = REVIEW_WRN_TREND + sizeof(uint) + bNVRAM_MARGIN,
+
+  PTR_DIAGRAM           = REVIEW_WRN_TOP + sizeof(uint) + bNVRAM_MARGIN,
+  ENBL_DIAGRAM          = PTR_DIAGRAM + sizeof(t2uint) + bNVRAM_MARGIN,
+
+  NVRAM_END             = ENBL_DIAGRAM + sizeof(bool) + bNVRAM_MARGIN
+} nvram;
