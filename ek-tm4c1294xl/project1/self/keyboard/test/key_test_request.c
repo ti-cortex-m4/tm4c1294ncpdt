@@ -49,8 +49,8 @@ void    key_TestRequest(void)
 }
 
 
-static void Dump(uchar  i, uint iMax, uchar  bT) {
-  if (i < iMax)
+static void LoHex(uchar  i, uchar  bT) {
+  if (i < wOffset+7)
     Lo(i, bT);
   else
   {
@@ -73,14 +73,14 @@ static void TestRequest3(void) {
   szHi[7] = '-';
   HiDec(8, wOffset+7);
 
-  Dump(0, mpbInBuff3[0]);
-  Dump(1, mpbInBuff3[1]);
-  Dump(2, mpbInBuff3[2]);
-  Dump(3, mpbInBuff3[3]);
-  Dump(4, mpbInBuff3[4]);
-  Dump(5, mpbInBuff3[5]);
-  Dump(6, mpbInBuff3[6]);
-  Dump(7, mpbInBuff3[7]);
+  LoHex(0, mpbInBuff3[0]);
+  LoHex(1, mpbInBuff3[1]);
+  LoHex(2, mpbInBuff3[2]);
+  LoHex(3, mpbInBuff3[3]);
+  LoHex(4, mpbInBuff3[4]);
+  LoHex(5, mpbInBuff3[5]);
+  LoHex(6, mpbInBuff3[6]);
+  LoHex(7, mpbInBuff3[7]);
 }
 
 
