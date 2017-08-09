@@ -15,8 +15,11 @@ KEY_REQUEST,H
 
 
 
-//                                          0123456789ABCDEF
-static char const       szTestRequest[] = "Запросы         ";
+//                                         0123456789ABCDEF
+static char const       szTestRequest[] = "                ";
+
+
+static uint wOffset = 0;
 
 
 
@@ -30,8 +33,54 @@ void    key_TestRequest(void)
 
       ShowHi(szTestRequest);
       Clear();
+
+      wOffset = 0;
     }
   }
+  else if (bKey == bKEY_POINT)
+  {
+    wOffset += 8;
+  }
+  else if (bKey == bKEY_MINUS)
+  {
+    if (wOffset >= 8)
+      wOffset -= 8;
+  }
+}
+
+
+static void Dump(uchar  i, uint iMax, uchar  bT) {
+  if (i < iMax)
+    Lo(i, bT);
+  else
+  {
+    szLo[i+0] = '-';
+    szLo[i+1] = '-';
+  }
+}
+
+static void HiDec(uchar  i, uchar  bT) {
+  szHi[i+0] = szDigits[bT / 100];
+  szHi[i+1] = szDigits[(bT % 100) / 10];
+  szHi[i+2] = szDigits[bT % 10];
+}
+
+
+static void TestRequest3(void) {
+  HiDec(0, iwInBuff3);
+
+  HiDec(4, wOffset);
+  szHi[7] = '-';
+  HiDec(8, wOffset+7);
+
+  Dump(0, mpbInBuff3[0]);
+  Dump(1, mpbInBuff3[1]);
+  Dump(2, mpbInBuff3[2]);
+  Dump(3, mpbInBuff3[3]);
+  Dump(4, mpbInBuff3[4]);
+  Dump(5, mpbInBuff3[5]);
+  Dump(6, mpbInBuff3[6]);
+  Dump(7, mpbInBuff3[7]);
 }
 
 
@@ -66,11 +115,7 @@ void    auto_TestRequest(void)
         break;
 
       case 3:
-        Lo(0,  mpSerial[3]);
-        Lo(3,  cwIn3 % 0x100);
-        Lo(5,  bIn3);
-        Lo(8,  iwInBuff3 % 0x100);
-        Lo(11, ibPacket3);
+        TestRequest3();
         break;
     }
   }
