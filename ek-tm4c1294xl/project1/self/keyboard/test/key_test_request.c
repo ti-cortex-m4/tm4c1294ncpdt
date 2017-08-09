@@ -50,12 +50,14 @@ void    key_TestRequest(void)
 
 
 static void LoHex(uchar  i, uchar  bT) {
-  if (i < wOffset+7)
-    Lo(i, bT);
+  uchar j = i*2;
+
+  if (i <= wOffset+7)
+    Lo(j, bT);
   else
   {
-    szLo[i+0] = '-';
-    szLo[i+1] = '-';
+    szLo[j+0] = '-';
+    szLo[j+1] = '-';
   }
 }
 
@@ -66,21 +68,21 @@ static void HiDec(uchar  i, uchar  bT) {
 }
 
 
-static void TestRequest3(void) {
-  HiDec(0, iwInBuff3);
+static void TestRequest(uint iwInBuff, uchar  *pbData) {
+  HiDec(0, iwInBuff);
 
   HiDec(4, wOffset);
   szHi[7] = '-';
   HiDec(8, wOffset+7);
 
-  LoHex(0, mpbInBuff3[0]);
-  LoHex(1, mpbInBuff3[1]);
-  LoHex(2, mpbInBuff3[2]);
-  LoHex(3, mpbInBuff3[3]);
-  LoHex(4, mpbInBuff3[4]);
-  LoHex(5, mpbInBuff3[5]);
-  LoHex(6, mpbInBuff3[6]);
-  LoHex(7, mpbInBuff3[7]);
+  LoHex(0, *(pbData++));
+  LoHex(1, *(pbData++));
+  LoHex(2, *(pbData++));
+  LoHex(3, *(pbData++));
+  LoHex(4, *(pbData++));
+  LoHex(5, *(pbData++));
+  LoHex(6, *(pbData++));
+  LoHex(7, *(pbData++));
 }
 
 
@@ -115,7 +117,7 @@ void    auto_TestRequest(void)
         break;
 
       case 3:
-        TestRequest3();
+        TestRequest(iwInBuff3, mpbInBuff3 + wOffset);
         break;
     }
   }
