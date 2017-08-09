@@ -89,6 +89,12 @@ static void EscError(uchar  bCode)
 
 static void ShowCtrlZ()
 {
+  if (wProgram == bTEST_REQUEST)
+  {
+    ibPortActive = ibPort;
+    HideCurrTime(0);
+  }
+
   if (wProgram == bTEST_RESPONSE)
   {
     sprintf(szHi,"Порт %u: Ctrl Z",ibPort+1);
@@ -101,6 +107,12 @@ static void ShowCtrlZ()
 
 static void ShowEsc(void)
 {
+  if (wProgram == bTEST_REQUEST)
+  {
+    ibPortActive = ibPort;
+    HideCurrTime(0);
+  }
+
   if (wProgram == bTEST_RESPONSE)
   {
     sprintf(szHi,"Порт %u: Esc %c",ibPort+1,bQuery);
