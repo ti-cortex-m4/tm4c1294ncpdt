@@ -35,6 +35,12 @@ RESPONSE_UNI!C
 
 void    ShowCommandUni(uchar  i)
 {
+  if (wProgram == bTEST_REQUEST)
+  {
+    ibPortActive = ibPort;
+    HideCurrTime(0);
+  }
+
   if (wProgram == bTEST_RESPONSE)
   {
     sprintf(szHi,"Порт %u: U-%02X%02X %u",ibPort+1,InBuff(4),InBuff(5),i);
