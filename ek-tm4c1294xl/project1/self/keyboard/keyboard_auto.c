@@ -15,6 +15,7 @@ KEYBOARD_AUTO!C
 #include "impulses/key_single2.h"
 #include "impulses/key_oldprogram73.h"
 #include "impulses/key_oldprogram74.h"
+#include "test/key_test_request.h"
 #include "test/key_test_response.h"
 #include "test/key_test_flow.h"
 #include "test/key_test_ports_io.h"
@@ -41,6 +42,7 @@ void    Keyboard_Auto(void)
       case bGET_GPS_DATA:       auto_GetGpsData();      break;
       case bGET_GPS_CORRECT:    auto_GetGpsCorrect();   break;
 
+      case bTEST_REQUEST:       auto_TestRequest();     break;
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
@@ -65,6 +67,7 @@ void    Keyboard_Auto(void)
       case bGET_GPS_DATA:       auto_GetGpsData();      break;
       case bGET_GPS_CORRECT:    auto_GetGpsCorrect();   break;
 
+      case bTEST_REQUEST:       auto_TestRequest();     break;
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
@@ -123,6 +126,7 @@ void    Keyboard_Auto(void)
       case bGET_GPS_DATA:       auto_GetGpsData();      break;
       case bGET_GPS_CORRECT:    auto_GetGpsCorrect();   break;
 
+      case bTEST_REQUEST:       auto_TestRequest();     break;
       case bTEST_RESPONSE:      auto_TestResponse();    break;
       case bTEST_FLOW:          auto_TestFlow();        break;
       case bTEST_PORTS_IO:      auto_TestPortsIO();     break;
