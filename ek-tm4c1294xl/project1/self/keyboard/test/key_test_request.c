@@ -49,10 +49,10 @@ void    key_TestRequest(void)
 }
 
 
-static void LoHex(uchar  i, uchar  bT) {
+static void LoHex(uchar  i, uint iwInBuff, uchar  bT) {
   uchar j = i*2;
 
-  if (i <= wOffset+7)
+  if (i + wOffset <= iwInBuff)
     Lo(j, bT);
   else
   {
@@ -68,21 +68,21 @@ static void HiDec(uchar  i, uchar  bT) {
 }
 
 
-static void TestRequest(uint iwInBuff, uchar  *pbData) {
+static void TestRequest(uint  iwInBuff, uchar  *pbData) {
   HiDec(0, iwInBuff);
 
   HiDec(4, wOffset);
   szHi[7] = '-';
   HiDec(8, wOffset+7);
 
-  LoHex(0, *(pbData++));
-  LoHex(1, *(pbData++));
-  LoHex(2, *(pbData++));
-  LoHex(3, *(pbData++));
-  LoHex(4, *(pbData++));
-  LoHex(5, *(pbData++));
-  LoHex(6, *(pbData++));
-  LoHex(7, *(pbData++));
+  LoHex(0, iwInBuff, *(pbData++));
+  LoHex(1, iwInBuff, *(pbData++));
+  LoHex(2, iwInBuff, *(pbData++));
+  LoHex(3, iwInBuff, *(pbData++));
+  LoHex(4, iwInBuff, *(pbData++));
+  LoHex(5, iwInBuff, *(pbData++));
+  LoHex(6, iwInBuff, *(pbData++));
+  LoHex(7, iwInBuff, *(pbData++));
 }
 
 

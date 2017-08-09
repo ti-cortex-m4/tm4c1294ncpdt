@@ -22,6 +22,12 @@ RESPONSE_CRC!C
 
 
 void    ShowResponseCRC(uchar  bState) {
+  if (wProgram == bTEST_REQUEST)
+  {
+    ibPortActive = ibPort;
+    HideCurrTime(0);
+  }
+
   if (wProgram == bTEST_RESPONSE)
   {
 #ifdef  MODBUS
