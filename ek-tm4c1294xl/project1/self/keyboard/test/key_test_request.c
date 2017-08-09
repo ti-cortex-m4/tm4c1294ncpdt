@@ -39,11 +39,12 @@ void    key_TestRequest(void)
   }
   else if (bKey == bKEY_POINT)
   {
-    wOffset += 8;
+    if (wOffset <= 999 - 8)
+      wOffset += 8;
   }
   else if (bKey == bKEY_MINUS)
   {
-    if (wOffset >= 8)
+    if (wOffset >= 0 + 8)
       wOffset -= 8;
   }
 }
