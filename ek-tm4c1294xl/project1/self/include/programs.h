@@ -272,6 +272,7 @@ PROGRAMS!H
 #define bTEST_DIRECT                216
 
 #define bTEST_UART                  85
+#define bTEST_REQUEST               239
 #define bTEST_RESPONSE              220
 #define bTEST_FLOW                  221
 #define bTEST_PORTS_IO              237
