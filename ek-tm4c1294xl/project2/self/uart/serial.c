@@ -21,10 +21,10 @@ serial.c
 
 
 // The size of the ring buffers used for interface between the UART and telnet session (RX).
-#define RX_RING_BUF_SIZE        (256 * 2)
+#define RX_RING_BUF_SIZE        (2048 * 2)
 
 // The size of the ring buffers used for interface between the UART and telnet session (TX).
-#define TX_RING_BUF_SIZE        (256 * 6)
+#define TX_RING_BUF_SIZE        (2048 * 6)
 
 
 
