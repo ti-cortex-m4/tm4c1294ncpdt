@@ -109,6 +109,8 @@ static void SerialUARTIntHandler(uint8_t ucPort)
     // See if there is space to be filled in the transmit FIFO.
     if(((ulStatus & UART_INT_TX) != 0) || (ulStatus == 0))
     {
+        bool fInMode = true;
+
         // Loop while there is space in the transmit FIFO and characters to be sent.
         while(!RingBufEmpty(&g_sTxBuf[ucPort]) && UARTSpaceAvail(g_ulUARTBase[ucPort]))
         {
@@ -121,12 +123,15 @@ static void SerialUARTIntHandler(uint8_t ucPort)
             UARTCharPut(g_ulUARTBase[ucPort], ucChar);
 
             mcwUARTTxOut[ucPort]--;
+
+            fInMode = false;
         }
 
         if((ulStatus & UART_INT_TX) != 0)
         {
-          if (mcwUARTTxOut[ucPort] == 0)
-            InMode(ucPort);
+          if ((mcwUARTTxOut[ucPort] == 0) && (fInMode)) {
+              InMode(ucPort);
+          }
         }
     }
 }
