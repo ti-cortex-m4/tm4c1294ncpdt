@@ -13,6 +13,8 @@ io_mode.c
 #include "../kernel/settings.h"
 #include "../kernel/log.h"
 #include "io_mode.h"
+#include "driverlib/gpio.h"
+#include "driverlib/pin_map.h"
 
 
 
@@ -138,6 +140,7 @@ static void InitIOMode1(void) // PF3
   DelayGPIO();
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0x0008; // GPIO Direction
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DEN) |= 0x0008; // GPIO Digital Enable
+  GPIOPadConfigSet(GPIO_PORTF_BASE, GPIO_PIN_3, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
 
   InMode(1);
 }
@@ -148,6 +151,7 @@ static void InitIOMode2(void) // PF2
   DelayGPIO();
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0x0004; // GPIO Direction
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DEN) |= 0x0004; // GPIO Digital Enable
+  GPIOPadConfigSet(GPIO_PORTF_BASE, GPIO_PIN_2, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
 
   InMode(2);
 }
@@ -158,6 +162,7 @@ static void InitIOMode3(void) // PF1
   DelayGPIO();
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0x0002; // GPIO Direction
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DEN) |= 0x0002; // GPIO Digital Enable
+  GPIOPadConfigSet(GPIO_PORTF_BASE, GPIO_PIN_1, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
 
   InMode(3);
 }
@@ -168,6 +173,7 @@ static void InitIOMode4(void) // PF0
   DelayGPIO();
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DIR) |= 0x0001; // GPIO Direction
   HWREG(GPIO_PORTF_AHB_BASE + GPIO_O_DEN) |= 0x0001; // GPIO Digital Enable
+  GPIOPadConfigSet(GPIO_PORTF_BASE, GPIO_PIN_0, GPIO_STRENGTH_8MA, GPIO_PIN_TYPE_STD_WPU);
 
   InMode(4);
 }
