@@ -39,7 +39,7 @@ static message szRowS08X = "<tr><td>%s</td><td>0x%08x</td></tr>";
 static message szRowSU = "<tr><td>%s</td><td>%u</td></tr>";
 static message szRowSIP = "<tr><td>%s</td><td>%u.%u.%u.%u</td></tr>";
 static message szRowClock = "<tr><td>%s</td><td>%u %02u:%02u:%02u</td></tr>";
-static message szRowVersion = "<tr><td>%s</td><td>%u.%u.%u.%04x %02u.%02u.%02u %02u:%02u:%02u</td></tr>";
+static message szRowVersion = "<tr><td>%s</td><td>%u.%u.%u.%04X %02u.%02u.%02u %02u:%02u:%02u</td></tr>";
 static message szRowTCPError = "<tr><td>%s</td><td>%d, %u, %u %02u:%02u:%02u</td></tr>";
 static message szBodyEnd = "</table></body>";
 
