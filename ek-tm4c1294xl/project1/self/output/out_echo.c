@@ -14,7 +14,7 @@ OUT_ECHO!C
 
 void    OutEcho(void)
 {
-  uint wSize = bInBuff6 + bInBuff7*0x100;
+  uint wSize = bInBuff6*0x100 + bInBuff7;
 
   if (wSize >= (wOUTBUFF_SIZE-0x40))
     Result(bRES_OUTOVERFLOW);
