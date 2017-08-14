@@ -14,14 +14,18 @@ OUT_ECHO!C
 
 void    OutEcho(void)
 {
-uint    i;
+  uint wSize = bInBuff6 + bInBuff7*0x100;
 
-  InitPushCRC();
-  for (i=0; i<100; i++) PushChar(0x55);
+  if (wSize >= (wOUTBUFF_SIZE-0x40))
+    Result(bRES_OUTOVERFLOW);
+  else
+  {
+    InitPushCRC();
 
-  InitPushCRC();
-  PushBool(fHealthLabelRTC);
-  PushBool(fHealthTimeRTC);
+    uint i;
+    for (i=0; i<wSize; i++)
+      PushChar(0x55);
 
-  Output(1000);
+    Output(wSize);
+  }
 }
