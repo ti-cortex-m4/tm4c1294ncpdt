@@ -19,7 +19,8 @@ KEY_REQUEST,H
 static char const       szTestRequest[] = "                ";
 
 
-static uint wOffset = 0;
+static uint             wOffset;
+static uchar            bDirection;
 
 
 
@@ -35,8 +36,10 @@ void    key_TestRequest(void)
       Clear();
 
       wOffset = 0;
+      bDirection = 1;
     }
   }
+
   else if (bKey == bKEY_POINT)
   {
     if (wOffset <= 999 - 8)
@@ -46,6 +49,17 @@ void    key_TestRequest(void)
   {
     if (wOffset >= 0 + 8)
       wOffset -= 8;
+  }
+
+  else if (bKey == 0)
+  {
+    wOffset = 0;
+    bDirection = 0;
+  }
+  else if (bKey == 1)
+  {
+    wOffset = 0;
+    bDirection = 1;
   }
 }
 
@@ -69,24 +83,24 @@ static void HiDec(uchar  i, uchar  bT) {
 }
 
 
-static void TestRequest(uint  iwInBuff, uchar  *pbData) {
-  szHi[0+0] = 'Ï';
+static void TestRequest(uint  iwBuff, uchar  *pbData) {
+  szHi[0+0] = (bDirection == 0 ? 'O' : 'I');
   szHi[0+1] = '1'+ibPortActive;
 
-  HiDec(5, iwInBuff);
+  HiDec(5, iwBuff);
 
   HiDec(9, wOffset);
   szHi[12] = '-';
   HiDec(13, wOffset+7);
 
-  LoHex(0, iwInBuff, *(pbData++));
-  LoHex(1, iwInBuff, *(pbData++));
-  LoHex(2, iwInBuff, *(pbData++));
-  LoHex(3, iwInBuff, *(pbData++));
-  LoHex(4, iwInBuff, *(pbData++));
-  LoHex(5, iwInBuff, *(pbData++));
-  LoHex(6, iwInBuff, *(pbData++));
-  LoHex(7, iwInBuff, *(pbData++));
+  LoHex(0, iwBuff, *(pbData++));
+  LoHex(1, iwBuff, *(pbData++));
+  LoHex(2, iwBuff, *(pbData++));
+  LoHex(3, iwBuff, *(pbData++));
+  LoHex(4, iwBuff, *(pbData++));
+  LoHex(5, iwBuff, *(pbData++));
+  LoHex(6, iwBuff, *(pbData++));
+  LoHex(7, iwBuff, *(pbData++));
 }
 
 
@@ -97,19 +111,27 @@ void    auto_TestRequest(void)
     switch (ibPortActive)
     {
       case 0:
-        TestRequest(iwInBuff0, mpbInBuff0 + wOffset);
+        bDirection == 0
+        ? TestRequest(iwOutBuff0 - 1, mpbOutBuff0 + wOffset)
+        : TestRequest(iwInBuff0, mpbInBuff0 + wOffset);
         break;
 
       case 1:
-        TestRequest(iwInBuff1, mpbInBuff1 + wOffset);
+        bDirection == 0
+        ? TestRequest(iwOutBuff1 - 1, mpbOutBuff1 + wOffset)
+        : TestRequest(iwInBuff1, mpbInBuff1 + wOffset);
         break;
 
       case 2:
-        TestRequest(iwInBuff2, mpbInBuff2 + wOffset);
+        bDirection == 0
+        ? TestRequest(iwOutBuff2 - 1, mpbOutBuff2 + wOffset)
+        : TestRequest(iwInBuff2, mpbInBuff2 + wOffset);
         break;
 
       case 3:
-        TestRequest(iwInBuff3, mpbInBuff3 + wOffset);
+        bDirection == 0
+        ? TestRequest(iwOutBuff3 - 1, mpbOutBuff3 + wOffset)
+        : TestRequest(iwInBuff3, mpbInBuff3 + wOffset);
         break;
     }
   }
