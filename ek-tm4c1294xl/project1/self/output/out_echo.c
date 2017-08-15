@@ -14,45 +14,40 @@ OUT_ECHO!C
 
 void    OutEchoNtoN(void)
 {
-  uint wSize = bInBuff6*0x100 + bInBuff7;
-
-  if (wSize >= (wOUTBUFF_SIZE-0x40))
-    Result(bRES_OUTOVERFLOW);
+  if (CountInBuff() <= 7)
+    Result(bRES_BADDATA);
   else
   {
-    InitPushCRC();
+    uint wSize = CountInBuff() - 7;
 
-    uint i;
-    for (i=0; i<wSize; i++)
-      PushChar(0x55);
+    if (wSize >= (wOUTBUFF_SIZE-0x40))
+      Result(bRES_OUTOVERFLOW);
+    else
+    {
+      InitPushCRC();
 
-    Output(wSize);
+      uint i;
+      for (i=0; i<wSize; i++)
+        PushChar(InBuff(i + 5));
+
+      Output(wSize);
+    }
   }
 }
 
 
 void    OutEchoNto1(void)
 {
-  uint wSize = bInBuff6*0x100 + bInBuff7;
-
-  if (wSize >= (wOUTBUFF_SIZE-0x40))
-    Result(bRES_OUTOVERFLOW);
-  else
-  {
-    InitPushCRC();
-
-    uint i;
-    for (i=0; i<wSize; i++)
-      PushChar(0x55);
-
-    Output(wSize);
-  }
+  InitPushCRC();
+  PushIntBig(CountInBuff());
+  Output(2);
 }
 
 
 void    OutEcho1toN(void)
 {
-  uint wSize = bInBuff6*0x100 + bInBuff7;
+  uchar b = bInBuff6;
+  uint wSize = bInBuff7*0x100 + bInBuff8;
 
   if (wSize >= (wOUTBUFF_SIZE-0x40))
     Result(bRES_OUTOVERFLOW);
@@ -62,7 +57,7 @@ void    OutEcho1toN(void)
 
     uint i;
     for (i=0; i<wSize; i++)
-      PushChar(0x55);
+      PushChar(b);
 
     Output(wSize);
   }
