@@ -4,4 +4,6 @@ OUT_ECHO!H
 
 ------------------------------------------------------------------------------*/
 
-void    OutEcho(void);
+void    OutEchoNtoN(void);
+void    OutEchoNto1(void);
+void    OutEcho1toN(void);

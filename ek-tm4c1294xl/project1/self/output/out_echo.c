@@ -12,7 +12,45 @@ OUT_ECHO!C
 
 
 
-void    OutEcho(void)
+void    OutEchoNtoN(void)
+{
+  uint wSize = bInBuff6*0x100 + bInBuff7;
+
+  if (wSize >= (wOUTBUFF_SIZE-0x40))
+    Result(bRES_OUTOVERFLOW);
+  else
+  {
+    InitPushCRC();
+
+    uint i;
+    for (i=0; i<wSize; i++)
+      PushChar(0x55);
+
+    Output(wSize);
+  }
+}
+
+
+void    OutEchoNto1(void)
+{
+  uint wSize = bInBuff6*0x100 + bInBuff7;
+
+  if (wSize >= (wOUTBUFF_SIZE-0x40))
+    Result(bRES_OUTOVERFLOW);
+  else
+  {
+    InitPushCRC();
+
+    uint i;
+    for (i=0; i<wSize; i++)
+      PushChar(0x55);
+
+    Output(wSize);
+  }
+}
+
+
+void    OutEcho1toN(void)
 {
   uint wSize = bInBuff6*0x100 + bInBuff7;
 
