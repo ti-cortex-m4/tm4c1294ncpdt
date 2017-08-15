@@ -14,11 +14,11 @@ OUT_ECHO!C
 
 void    OutEchoNtoN(void)
 {
-  if (CountInBuff() <= 7)
+  if (CountInBuff() < 8)
     Result(bRES_BADDATA);
   else
   {
-    uint wSize = CountInBuff() - 7;
+    const uint wSize = CountInBuff() - 7;
 
     if (wSize >= (wOUTBUFF_SIZE-0x40))
       Result(bRES_OUTOVERFLOW);
@@ -46,8 +46,8 @@ void    OutEchoNto1(void)
 
 void    OutEcho1toN(void)
 {
-  uchar b = bInBuff6;
-  uint wSize = bInBuff7*0x100 + bInBuff8;
+  const uchar b = bInBuff6;
+  const uint wSize = bInBuff7*0x100 + bInBuff8;
 
   if (wSize >= (wOUTBUFF_SIZE-0x40))
     Result(bRES_OUTOVERFLOW);
