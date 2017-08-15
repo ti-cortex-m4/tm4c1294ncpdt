@@ -27,6 +27,7 @@ RESPONSE252_CRC,C
 #include "../output/out_digitals.h"
 #include "../digitals/review/review_out.h"
 #include "../digitals/review/review_buff.h"
+#include "../output/out_echo.h"
 
 
 
@@ -78,6 +79,10 @@ void    Response252_CRC(void)
     case 26: OutReviewBuff(); break;
 
     case 27: OutRealtime2(); break;
+
+    case 28: OutEchoNtoN(); break;
+    case 29: OutEchoNto1(); break;
+    case 30: OutEcho1toN(); break;
 
     default:
       ShowResponseCRC(bSTA_BADCOMMAND);
