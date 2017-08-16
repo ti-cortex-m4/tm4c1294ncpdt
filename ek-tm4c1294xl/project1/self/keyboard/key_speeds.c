@@ -18,6 +18,8 @@ KEY_SPEEDS!C
 //                                         0123456789ABCDEF
 static char const       szPorts[]       = "Порты           ";
 
+uchar                   ibSetSpeedsPort;
+
 
 
 static void ShowPort(uchar  ibPrt)
@@ -41,6 +43,8 @@ static uchar ibPrt;
       Waiting(); DelayInf();
 
       ibPrt = 0;
+      ibSetSpeedsPort = ibPrt;
+
       ShowSpeeds(ibPrt,1);
       ShowPort(ibPrt);
     }
@@ -48,6 +52,7 @@ static uchar ibPrt;
     {
       if (++ibPrt >= bPORTS)
         ibPrt = 0;
+      ibSetSpeedsPort = ibPrt;
 
       ShowSpeeds(ibPrt,1);
       ShowPort(ibPrt);
@@ -59,9 +64,9 @@ static uchar ibPrt;
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      ((ibPrt == 0) || (ibPrt == 1)) ? (ibY = bBAUDS) : (ibY = 7);
+      uchar ibBaudMax = ((ibPrt == 0) || (ibPrt == 1)) ? bBAUDS : 7;
 
-      if (++mppoPorts[ibPrt].ibBaud >= ibY)
+      if (++mppoPorts[ibPrt].ibBaud >= ibBaudMax)
         mppoPorts[ibPrt].ibBaud = 0;
 
       SetSpeed(ibPrt);
