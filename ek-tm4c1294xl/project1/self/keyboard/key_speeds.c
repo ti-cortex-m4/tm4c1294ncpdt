@@ -20,7 +20,7 @@ static char const       szPorts[]       = "Порты           ";
 
 
 
-static void ShowPort(void)
+static void ShowPort(uchar  ibX)
 {
   sprintf(szLo+15,"%u",ibX+1);
 }
@@ -40,7 +40,7 @@ void    key_SetSpeeds(void)
 
       ibX = 0;
       ShowSpeeds(ibX,1);
-      ShowPort();
+      ShowPort(ibX);
     }
     else if (enKeyboard == KBD_POSTENTER)
     {
@@ -48,7 +48,7 @@ void    key_SetSpeeds(void)
         ibX = 0;
 
       ShowSpeeds(ibX,1);
-      ShowPort();
+      ShowPort(ibX);
     }
   }
 
