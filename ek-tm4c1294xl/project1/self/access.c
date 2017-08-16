@@ -8,6 +8,8 @@ ACCESS,C
 #include "main.h"
 #include "keyboard/keyboard.h"
 #include "memory/mem_settings.h"
+#include "serial/ports.h"
+#include "keyboard/key_speeds.h"
 
 
 
@@ -53,7 +55,7 @@ bool    ValidKey(uchar  bKey)
     if ((enGlobal != GLB_WORK) && (wProgram == bSET_SPEED))
     {
       if ((bKey != bKEY_PROGRAM) && (bKey != bKEY_ENTER))
-        return false;
+        return ibPort != ibSetSpeedsPort;
     }
 
     return true;

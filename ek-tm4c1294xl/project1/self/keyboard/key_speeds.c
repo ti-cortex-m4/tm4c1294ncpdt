@@ -18,17 +18,21 @@ KEY_SPEEDS!C
 //                                         0123456789ABCDEF
 static char const       szPorts[]       = "Порты           ";
 
+uchar                   ibSetSpeedsPort;
 
 
-static void ShowPort(void)
-{ 
-  sprintf(szLo+15,"%u",ibX+1);
+
+static void ShowPort(uchar  ibPrt)
+{
+  sprintf(szLo+15,"%u",ibPrt+1);
 }
 
 
 
 void    key_SetSpeeds(void)
 {
+static uchar ibPrt;
+
   if (bKey == bKEY_ENTER)
   {
     if (enKeyboard == KBD_ENTER)
@@ -38,17 +42,20 @@ void    key_SetSpeeds(void)
 
       Waiting(); DelayInf();
 
-      ibX = 0;                    
-      ShowSpeeds(ibX,1);
-      ShowPort();
+      ibPrt = 0;
+      ibSetSpeedsPort = ibPrt;
+
+      ShowSpeeds(ibPrt,1);
+      ShowPort(ibPrt);
     }
     else if (enKeyboard == KBD_POSTENTER)
-    {                                   
-      if (++ibX >= bPORTS) 
-        ibX = 0;
+    {
+      if (++ibPrt >= bPORTS)
+        ibPrt = 0;
+      ibSetSpeedsPort = ibPrt;
 
-      ShowSpeeds(ibX,1);      
-      ShowPort();
+      ShowSpeeds(ibPrt,1);
+      ShowPort(ibPrt);
     }
   }
 
@@ -56,16 +63,16 @@ void    key_SetSpeeds(void)
   else if (bKey == bKEY_POINT)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
-    {                                   
-      ((ibX == 0) || (ibX == 1)) ? (ibY = bBAUDS) : (ibY = 7);
+    {
+      uchar ibBaudMax = ((ibPrt == 0) || (ibPrt == 1)) ? bBAUDS : 7;
 
-      if (++mppoPorts[ibX].ibBaud >= ibY) 
-        mppoPorts[ibX].ibBaud = 0;
+      if (++mppoPorts[ibPrt].ibBaud >= ibBaudMax)
+        mppoPorts[ibPrt].ibBaud = 0;
 
-      SetSpeed(ibX);
-      if (IsSlave(ibX) == 1) SetDefaultDelay(ibX);
+      SetSpeed(ibPrt);
+      if (IsSlave(ibPrt) == 1) SetDefaultDelay(ibPrt);
 
-      ShowSpeeds(ibX,1);
+      ShowSpeeds(ibPrt,1);
     }
     else Beep();
   }
@@ -74,15 +81,15 @@ void    key_SetSpeeds(void)
   else if (bKey == bKEY_MINUS)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
-    {                                   
-      if (++mppoPorts[ibX].enStream >= bSTREAMS) 
-        mppoPorts[ibX].enStream = STR_SLAVEESC;
+    {
+      if (++mppoPorts[ibPrt].enStream >= bSTREAMS)
+        mppoPorts[ibPrt].enStream = STR_SLAVEESC;
 
-      SetSpeed(ibX);
-      SetCorrectLimit(ibX);
-      if (IsSlave(ibX) == 1) SetDefaultDelay(ibX);
+      SetSpeed(ibPrt);
+      SetCorrectLimit(ibPrt);
+      if (IsSlave(ibPrt) == 1) SetDefaultDelay(ibPrt);
 
-      ShowSpeeds(ibX,1);
+      ShowSpeeds(ibPrt,1);
     }
     else Beep();
   }
@@ -92,13 +99,13 @@ void    key_SetSpeeds(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      if (++mppoPorts[ibX].ibParity >= bPARITYS) 
-        mppoPorts[ibX].ibParity = 0; 
+      if (++mppoPorts[ibPrt].ibParity >= bPARITYS)
+        mppoPorts[ibPrt].ibParity = 0;
 
-      SetSpeed(ibX);
-      if (IsSlave(ibX) == 1) SetDefaultDelay(ibX);
+      SetSpeed(ibPrt);
+      if (IsSlave(ibPrt) == 1) SetDefaultDelay(ibPrt);
 
-      ShowSpeeds(ibX,1);
+      ShowSpeeds(ibPrt,1);
     }
     else Beep();
   }
@@ -108,19 +115,19 @@ void    key_SetSpeeds(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      if (IsMaster(ibX) == 1) 
+      if (IsMaster(ibPrt) == 1)
       {
-        if (mpboLocalDisable[ibX] == true)
-          mpboLocalDisable[ibX] = false;
-        else 
-        { 
-          mpboLocalDisable[ibX] = true;
-          mpboLocal[ibX] = false;
+        if (mpboLocalDisable[ibPrt] == true)
+          mpboLocalDisable[ibPrt] = false;
+        else
+        {
+          mpboLocalDisable[ibPrt] = true;
+          mpboLocal[ibPrt] = false;
         }
         SaveLocalDisable();
 
-        ShowSpeeds(ibX,1);
-      }  
+        ShowSpeeds(ibPrt,1);
+      }
       else Beep();
     }
     else Beep();

@@ -4,4 +4,8 @@ KEY_SPEEDS!H
 
 ------------------------------------------------------------------------------*/
 
+extern uchar                   ibSetSpeedsPort;
+
+
+
 void    key_SetSpeeds(void);
