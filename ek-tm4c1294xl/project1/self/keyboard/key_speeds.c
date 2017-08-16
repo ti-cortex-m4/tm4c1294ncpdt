@@ -21,7 +21,7 @@ static char const       szPorts[]       = "Порты           ";
 
 
 static void ShowPort(void)
-{ 
+{
   sprintf(szLo+15,"%u",ibX+1);
 }
 
@@ -38,16 +38,16 @@ void    key_SetSpeeds(void)
 
       Waiting(); DelayInf();
 
-      ibX = 0;                    
+      ibX = 0;
       ShowSpeeds(ibX,1);
       ShowPort();
     }
     else if (enKeyboard == KBD_POSTENTER)
-    {                                   
-      if (++ibX >= bPORTS) 
+    {
+      if (++ibX >= bPORTS)
         ibX = 0;
 
-      ShowSpeeds(ibX,1);      
+      ShowSpeeds(ibX,1);
       ShowPort();
     }
   }
@@ -56,10 +56,10 @@ void    key_SetSpeeds(void)
   else if (bKey == bKEY_POINT)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
-    {                                   
+    {
       ((ibX == 0) || (ibX == 1)) ? (ibY = bBAUDS) : (ibY = 7);
 
-      if (++mppoPorts[ibX].ibBaud >= ibY) 
+      if (++mppoPorts[ibX].ibBaud >= ibY)
         mppoPorts[ibX].ibBaud = 0;
 
       SetSpeed(ibX);
@@ -74,8 +74,8 @@ void    key_SetSpeeds(void)
   else if (bKey == bKEY_MINUS)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
-    {                                   
-      if (++mppoPorts[ibX].enStream >= bSTREAMS) 
+    {
+      if (++mppoPorts[ibX].enStream >= bSTREAMS)
         mppoPorts[ibX].enStream = STR_SLAVEESC;
 
       SetSpeed(ibX);
@@ -92,8 +92,8 @@ void    key_SetSpeeds(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      if (++mppoPorts[ibX].ibParity >= bPARITYS) 
-        mppoPorts[ibX].ibParity = 0; 
+      if (++mppoPorts[ibX].ibParity >= bPARITYS)
+        mppoPorts[ibX].ibParity = 0;
 
       SetSpeed(ibX);
       if (IsSlave(ibX) == 1) SetDefaultDelay(ibX);
@@ -108,19 +108,19 @@ void    key_SetSpeeds(void)
   {
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
-      if (IsMaster(ibX) == 1) 
+      if (IsMaster(ibX) == 1)
       {
         if (mpboLocalDisable[ibX] == true)
           mpboLocalDisable[ibX] = false;
-        else 
-        { 
+        else
+        {
           mpboLocalDisable[ibX] = true;
           mpboLocal[ibX] = false;
         }
         SaveLocalDisable();
 
         ShowSpeeds(ibX,1);
-      }  
+      }
       else Beep();
     }
     else Beep();
