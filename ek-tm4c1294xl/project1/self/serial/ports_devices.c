@@ -26,6 +26,7 @@ PORTS_DEVICES.H
 #include "../serial/monitor.h"
 #include "../serial/print2.h"
 #include "monitor.h"
+#include "input.h"
 #include "ports.h"
 #include "ports_devices.h"
 
@@ -71,6 +72,7 @@ void    QueryIO(uint  cwIn, uchar  cbOut)
 
 serial  Input(void)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -86,7 +88,10 @@ serial  Input(void)
       MakeCRC16InBuff( 0, CountInBuff() );
 
       if ((bCRCHi == 0) && (bCRCLo == 0))
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
 
@@ -147,6 +152,7 @@ bool    RevLinkErrors(void)
 
 serial  RevInput(void)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -165,7 +171,10 @@ serial  RevInput(void)
           (bCRCLo == InBuff( CountInBuff()-2 ))) {
 
           if (RevLinkErrors() == 0)
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -246,6 +255,7 @@ uint    i;
 
 serial  BccInput(void)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -262,7 +272,10 @@ serial  BccInput(void)
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
       if (MakeBccInBuff())
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
 
@@ -342,6 +355,7 @@ bool    MakeElsInBuff2(void)
 
 serial  ElsInput(uchar  bMode)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -357,6 +371,7 @@ serial  ElsInput(uchar  bMode)
       if (bMode == 0)
       {
         if ( MakeElsInBuff0() ) {
+          InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
         }
         else {
@@ -366,6 +381,7 @@ serial  ElsInput(uchar  bMode)
       else if (bMode == 1)
       {
         if ( MakeElsInBuff1() ) {
+          InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
         }
         else {
@@ -375,6 +391,7 @@ serial  ElsInput(uchar  bMode)
       else
       {
         if ( MakeElsInBuff2() ) {
+          InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
         }
         else {
@@ -395,6 +412,7 @@ serial  ElsInput(uchar  bMode)
 
 serial  ElsInputRD(void)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -410,6 +428,7 @@ serial  ElsInputRD(void)
       MakeCRCElsInBuff(0, CountInBuff());
 
       if (wCrcEls == 0) {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else {
