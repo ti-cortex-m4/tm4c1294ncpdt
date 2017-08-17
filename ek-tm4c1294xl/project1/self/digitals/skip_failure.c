@@ -35,6 +35,12 @@ void    ResetSkipFailure(void)
 
 void   SkipFailure_Start(void)
 {
+  SkipFailure_Success();
+}
+
+
+void   SkipFailure_Success(void)
+{
   fFailure = false;
 }
 
