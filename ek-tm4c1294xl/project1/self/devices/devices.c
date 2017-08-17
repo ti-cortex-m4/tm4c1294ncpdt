@@ -67,6 +67,7 @@ DEVICES.C
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
+#include "../digitals/skip_failure.h"
 #include "../digitals/extended/extended_0.h"
 #include "../digitals/extended/extended_1.h"
 #include "../digitals/extended/extended_3.h"
@@ -505,11 +506,11 @@ void    RunDevices(void)
       if (exExtended == EXT_PROFILE_30MIN)
       {
         if (MakeExtended0() == 0) { MakePause(DEV_MODEM_STOP); break; }
-        MakeExtended1();
-        MakeExtended3(ibDig);
-        MakeExtended4();
-        MakeExtended5();
-        MakeExtended4T();
+        if (!SkipFailure_IsFailure()) MakeExtended1();
+        if (!SkipFailure_IsFailure()) MakeExtended3(ibDig);
+        if (!SkipFailure_IsFailure()) MakeExtended4();
+        if (!SkipFailure_IsFailure()) MakeExtended5();
+        if (!SkipFailure_IsFailure()) MakeExtended4T();
       }
 
       if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == false))
