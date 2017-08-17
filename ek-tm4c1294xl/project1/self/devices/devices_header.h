@@ -67,6 +67,7 @@ DEVICES.C
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
+#include "../digitals/skip_failure.h"
 #include "../digitals/extended/extended_0.h"
 #include "../digitals/extended/extended_1.h"
 #include "../digitals/extended/extended_3.h"
