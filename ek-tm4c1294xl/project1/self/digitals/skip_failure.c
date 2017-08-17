@@ -16,6 +16,9 @@ bool                    fSkipFailure;
 cache const             chSkipFailure = {SKIP_FAILURE, &fSkipFailure, sizeof(bool)};
 
 
+static bool             fFailure;
+
+
 
 void    InitSkipFailure(void)
 {
@@ -26,4 +29,23 @@ void    InitSkipFailure(void)
 void    ResetSkipFailure(void)
 {
   SaveCacheBool(&chSkipFailure, false);
+}
+
+
+
+void   SkipFailure_Start(void)
+{
+  fFailure = false;
+}
+
+
+void   SkipFailure_Failure(void)
+{
+  fFailure = true;
+}
+
+
+bool   SkipFailure_IsFailure(void)
+{
+  return fFailure;
 }
