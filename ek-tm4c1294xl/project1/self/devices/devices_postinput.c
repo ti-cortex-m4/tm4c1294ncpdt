@@ -15,6 +15,7 @@ DEVICES_POSTINPUT,C
 #include "../sensors/unpack_v.h"
 #include "../sensors/sensor31/unpack31.h"
 #include "../sensors/automatic_w.h"
+#include "../sensors/sensor21/input_p.h"
 #include "../digitals/digitals_status.h"
 #include "devices_postinput.h"
 

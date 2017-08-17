@@ -18,6 +18,7 @@ AUTOMATIC_P!C
 #include "../../digitals/digitals.h"
 #include "../../digitals/serials.h"
 #include "../automatic1.h"
+#include "input_p.h"
 #include "device_p.h"
 #include "automatic_p.h"
 
