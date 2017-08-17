@@ -29,6 +29,7 @@ PROFILE_RUN!C
 #include "../../digitals/digitals_display.h"
 #include "../../digitals/dsbl_answer.h"
 #include "../../digitals/schedule/enbl_hours.h"
+#include "../../digitals/skip_failure.h"
 #include "../../special/special.h"
 #include "../../special/recalc.h"
 #include "../../time/decret.h"
@@ -125,6 +126,8 @@ bool    StartProfile(uchar  ibCanal)
   Clear();
 
   cwHouRead = 0;
+
+  SkipFailure_Start();
 
   // TODO fBreakRead = 0;
 
