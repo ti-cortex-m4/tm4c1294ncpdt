@@ -4,4 +4,4 @@ KEY_SKIP_FAILURE_ENBL,H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetSkipFalureEnbl(void);
+void    key_SetSkipFailureEnbl(void);

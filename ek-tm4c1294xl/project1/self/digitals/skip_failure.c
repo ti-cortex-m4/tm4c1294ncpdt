@@ -27,7 +27,7 @@ static bool             fFailure;
 void    InitSkipFailure(void)
 {
   LoadCacheBool(&chSkipFailureEnbl, false);
-  LoadCacheChar(&chSkipFailureRepeats, 1, 5, bMINORREPEATS);
+  LoadCacheChar(&chSkipFailureRepeats, 1, bMINORREPEATS, 2);
 }
 
 
