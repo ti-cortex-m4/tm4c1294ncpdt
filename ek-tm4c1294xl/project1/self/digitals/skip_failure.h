@@ -5,6 +5,7 @@ skip_failure.h
 ------------------------------------------------------------------------------*/
 
 extern  cache const             chSkipFailureEnbl;
+extern  cache const             chSkipFailureRepeats;
 
 
 
