@@ -4,6 +4,10 @@ skip_failure.h
 
 ------------------------------------------------------------------------------*/
 
+extern  cache const             chSkipFailure;
+
+
+
 void    InitSkipFailure(void);
 void    ResetSkipFailure(void);
 

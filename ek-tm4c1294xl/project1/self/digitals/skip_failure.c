@@ -11,10 +11,9 @@ skip_failure.c
 
 
 
-bool                    fSkipFailure;
+static bool             fSkipFailure;
 
 cache const             chSkipFailure = {SKIP_FAILURE, &fSkipFailure, sizeof(bool)};
-
 
 static bool             fFailure;
 
