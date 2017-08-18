@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-KEY_SKIP_FAILURE,H
+KEY_SKIP_FAILURE_ENBL,H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetSkipFalure(void);
+void    key_SetSkipFalureEnbl(void);

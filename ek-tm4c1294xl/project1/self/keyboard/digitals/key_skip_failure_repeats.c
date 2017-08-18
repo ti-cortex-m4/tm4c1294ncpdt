@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------------------
-KEY_MAX_REPEATS!C
+KEY_SKIP_FAILURE_REPEATS!C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../digitals/max_repeats.h"
-#include "../common/key_char.h"
+#include "../../digitals/skip_failure.h"
+#include "../common/key_bool.h"
 
 
 
@@ -18,7 +18,7 @@ static char const       *pszMessages[]     = { szMessage1, szMessage2, szNumberL
 
 
 
-void    key_SetMaxRepeats(void)
+void    key_SetSkipFalureRepeats(void)
 {
-  key_SetChar(&chMaxRepeats, pszMessages, 1, 20);
+  key_SetChar(&chSkipFailureRepeats, pszMessages, 1, 5);
 }

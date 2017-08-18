@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------
-KEY_MAX_REPEATS!H
+KEY_SKIP_FAILURE_REPEATS!H
 
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetMaxRepeats(void);
+void    key_SetSkipFalureRepeats(void);

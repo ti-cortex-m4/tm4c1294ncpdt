@@ -1,11 +1,10 @@
 /*------------------------------------------------------------------------------
-KEY_SKIP_FAILURE,C
+KEY_SKIP_FAILURE_ENBL,C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_digitals.h"
 #include "../../digitals/skip_failure.h"
 #include "../common/key_bool.h"
 
@@ -20,7 +19,7 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 
 
-void    key_SetSkipFalure(void)
+void    key_SetSkipFalureEnbl(void)
 {
   key_SetBool(&chSkipFailureEnbl, pszMessages);
 }

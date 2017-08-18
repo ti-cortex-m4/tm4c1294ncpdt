@@ -309,7 +309,8 @@ PROGRAMS!H
 #define wSET_MAX_SHUTDOWN           423
 #define wSET_CONTROL_W              424
 #define wSET_ENBL_DIAGRAM           425
-#define wSET_SKIP_FAILURE           426
+#define wSET_SKIP_FAILURE_ENBL      426
+#define wSET_SKIP_FAILURE_REPEATS   427
 
 #define wSET_REVIEW_FLAG            440
 #define wSET_REVIEW_CAN             441

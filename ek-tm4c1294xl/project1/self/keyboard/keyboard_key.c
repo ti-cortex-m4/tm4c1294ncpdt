@@ -49,7 +49,6 @@ KEYBOARD_KEY!C
 #include "digitals/profile/key_limits32.h"
 #include "digitals/profile/key_limits33.h"
 #include "digitals/extended/key_enbl_diagram.h"
-#include "digitals/key_skip_failure.h"
 #include "phones/key_modems2.h"
 #include "phones/key_phones.h"
 #include "phones/key_max_connect.h"
@@ -157,6 +156,8 @@ KEYBOARD_KEY!C
 #include "devices/key_ext_4t_reset_custom.h"
 #include "devices/key_ext_5_flag.h"
 #include "devices/key_ext_6_flag.h"
+#include "digitals/key_skip_failure_enbl.h"
+#include "digitals/key_skip_failure_repeats.h"
 #include "time/key_correct2_flag.h"
 #include "time/key_correct3_flag.h"
 #include "time/key_correct3_value.h"
@@ -353,7 +354,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
-      case wSET_SKIP_FAILURE:   key_SetSkipFalure();    break;
+      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFalureEnbl(); break;
+      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFalureRepeats(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -665,7 +667,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
-      case wSET_SKIP_FAILURE:   key_SetSkipFalure();    break;
+      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFalureEnbl(); break;
+      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFalureRepeats(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -897,7 +900,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
-      case wSET_SKIP_FAILURE:   key_SetSkipFalure();    break;
+      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFalureEnbl(); break;
+      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFalureRepeats(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
