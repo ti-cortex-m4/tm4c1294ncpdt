@@ -49,6 +49,7 @@ KEYBOARD_KEY!C
 #include "digitals/profile/key_limits32.h"
 #include "digitals/profile/key_limits33.h"
 #include "digitals/extended/key_enbl_diagram.h"
+#include "digitals/digitals/key_skip_failure.h"
 #include "phones/key_modems2.h"
 #include "phones/key_phones.h"
 #include "phones/key_max_connect.h"
@@ -352,6 +353,7 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
+      case wSET_SKIP_FAILURE:   key_SetSkipFalure();    break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -663,6 +665,7 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
+      case wSET_SKIP_FAILURE:   key_SetSkipFalure();    break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -894,6 +897,7 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
+      case wSET_SKIP_FAILURE:   key_SetSkipFalure();    break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
