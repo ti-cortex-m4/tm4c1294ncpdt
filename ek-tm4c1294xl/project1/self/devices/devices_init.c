@@ -34,6 +34,7 @@ DEVICES_INIT!C
 #include "../digitals/profile/profile_frac.h"
 #include "../digitals/schedule/schedule.h"
 #include "../digitals/dsbl_answer.h"
+#include "../digitals/skip_failure.h"
 #include "../flash/records.h"
 #include "../time/delay.h"
 #include "../digitals/extended/extended_0.h"
@@ -103,6 +104,8 @@ void    InitDevices1(void)
   InitExtended4T();
   InitExtended5();
   InitExtended6();
+
+  InitSkipFailure();
 }
 
 
@@ -185,4 +188,6 @@ void    ResetDevices(bool  fFull)
   ResetExtended5(fFull);
   ResetExtended6(fFull);
   ResetExtended7();
+
+  ResetSkipFailure();
 }
