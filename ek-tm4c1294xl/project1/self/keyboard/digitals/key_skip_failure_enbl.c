@@ -19,7 +19,7 @@ static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, 
 
 
 
-void    key_SetSkipFalureEnbl(void)
+void    key_SetSkipFailureEnbl(void)
 {
   key_SetBool(&chSkipFailureEnbl, pszMessages);
 }

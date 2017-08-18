@@ -354,8 +354,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
-      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFalureEnbl(); break;
-      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFalureRepeats(); break;
+      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFailureEnbl(); break;
+      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -667,8 +667,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
-      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFalureEnbl(); break;
-      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFalureRepeats(); break;
+      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFailureEnbl(); break;
+      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -900,8 +900,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
-      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFalureEnbl(); break;
-      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFalureRepeats(); break;
+      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFailureEnbl(); break;
+      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;

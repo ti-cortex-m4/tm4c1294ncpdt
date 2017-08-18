@@ -4,4 +4,4 @@ KEY_SKIP_FAILURE_REPEATS!H
 
 ------------------------------------------------------------------------------*/
 
-void    key_SetSkipFalureRepeats(void);
+void    key_SetSkipFailureRepeats(void);
