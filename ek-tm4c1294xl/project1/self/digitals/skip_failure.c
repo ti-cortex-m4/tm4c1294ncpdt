@@ -14,8 +14,10 @@ skip_failure.c
 
 
 static bool             fSkipFailureEnbl;
-
 cache const             chSkipFailureEnbl = {SKIP_FAILURE_ENBL, &fSkipFailureEnbl, sizeof(bool)};
+
+static uchar            bSkipFailureRepeats;
+cache const             chSkipFailureRepeats = {SKIP_FAILURE_REPEATS, &bSkipFailureRepeats, sizeof(uchar)};
 
 
 static bool             fFailure;
@@ -25,12 +27,14 @@ static bool             fFailure;
 void    InitSkipFailure(void)
 {
   LoadCacheBool(&chSkipFailureEnbl, false);
+  LoadCacheChar(&chSkipFailureRepeats, 1, 5, bMINORREPEATS);
 }
 
 
 void    ResetSkipFailure(void)
 {
   SaveCacheBool(&chSkipFailureEnbl, false);
+  SaveCacheChar(&chSkipFailureRepeats, bMINORREPEATS);
 }
 
 
