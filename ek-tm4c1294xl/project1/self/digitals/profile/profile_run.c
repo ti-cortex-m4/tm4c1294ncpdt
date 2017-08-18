@@ -267,11 +267,11 @@ void    NextProfile(void)
   }
 
   LoadCurrDigital(ibDig);
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpcwProfile_OK[ibCan]++;
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == 1) mpcwProfile_OK[c]++;
   }
 
   AddDigRecord(EVE_PROFILE_OK2);
@@ -282,10 +282,10 @@ void    NextProfile(void)
   {
     // запрещаем опрашивать другие каналы, принадлежащие текущему счётчику
     LoadCurrDigital(ibDig);
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    for (c=0; c<bCANALS; c++)
     {
-      LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = true;
+      LoadPrevDigital(c);
+      if (CompareCurrPrevLines(ibDig, c) == 1) mpboReadyCan[c] = true;
     }
 
     ShowLo(szNoData); if (boHideMessages == false) DelayMsg();
