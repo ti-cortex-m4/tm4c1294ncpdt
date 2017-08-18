@@ -7,6 +7,8 @@ skip_failure.c
 #include "../main.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
+#include "../display/display.h"
+#include "../time/delay.h"
 #include "skip_failure.h"
 
 
@@ -14,6 +16,7 @@ skip_failure.c
 static bool             fSkipFailure;
 
 cache const             chSkipFailure = {SKIP_FAILURE, &fSkipFailure, sizeof(bool)};
+
 
 static bool             fFailure;
 
@@ -52,5 +55,17 @@ void    SkipFailure_Failure(void)
 
 bool    SkipFailure_IsFailure(void)
 {
-  return fFailure;
+  bool fResult = fFailure & fSkipFailure;
+
+  if (fResult)
+  {
+    SaveDisplay();
+
+    ShowLo("быстрый пропуск ");
+    DelayInf();
+
+    LoadDisplay();
+  }
+
+  return fResult;
 }

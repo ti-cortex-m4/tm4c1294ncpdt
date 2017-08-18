@@ -49,7 +49,7 @@ KEYBOARD_KEY!C
 #include "digitals/profile/key_limits32.h"
 #include "digitals/profile/key_limits33.h"
 #include "digitals/extended/key_enbl_diagram.h"
-#include "digitals/digitals/key_skip_failure.h"
+#include "digitals/key_skip_failure.h"
 #include "phones/key_modems2.h"
 #include "phones/key_phones.h"
 #include "phones/key_max_connect.h"
