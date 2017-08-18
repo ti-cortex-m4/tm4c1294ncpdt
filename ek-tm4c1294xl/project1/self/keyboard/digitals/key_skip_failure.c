@@ -12,12 +12,11 @@ KEY_SKIP_FAILURE,C
 
 
 //                                         0123456789ABCDEF
-static char const       szMessage1[]    = " Запрет ответа  ",
-                        szMessage2[]    = "   на запросы   ",
-                        szMessage3[]    = "во время опроса ",
-                        szMessage4[]    = "   счетчиков    ";
+static char const       szMessage1[]    = "Быстрый пропуск ",
+                        szMessage2[]    = "  отключенных   ",
+                        szMessage3[]    = "   счетчиков    ";
 
-static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, szMessage4, "" };
+static char const       *pszMessages[]  = { szMessage1, szMessage2, szMessage3, "" };
 
 
 
