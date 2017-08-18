@@ -260,10 +260,9 @@ void    RunProfile(bool  _fCtrlHou)
 
 void    NextProfile(void)
 {
-  if (boHideMessages == false)
+  if ((boHideMessages == false) && !SkipFailureEnbl())
   {
-    Clear(); sprintf(szLo+1,"принято: %04u",cwHouRead);
-    DelayMsg();
+    Clear(); sprintf(szLo+1,"принято: %04u",cwHouRead); DelayMsg();
   }
 
   LoadCurrDigital(ibDig);
@@ -288,7 +287,10 @@ void    NextProfile(void)
       if (CompareCurrPrevLines(ibDig, c) == 1) mpboReadyCan[c] = true;
     }
 
-    ShowLo(szNoData); if (boHideMessages == false) DelayMsg();
+    if ((boHideMessages == false) && !SkipFailureEnbl())
+    {
+      ShowLo(szNoData); DelayMsg();
+    }
   }
 
   Clear();
