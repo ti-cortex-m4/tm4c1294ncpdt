@@ -13,9 +13,9 @@ skip_failure.c
 
 
 
-static bool             fSkipFailure;
+static bool             fSkipFailureEnbl;
 
-cache const             chSkipFailure = {SKIP_FAILURE, &fSkipFailure, sizeof(bool)};
+cache const             chSkipFailureEnbl = {SKIP_FAILURE_ENBL, &fSkipFailureEnbl, sizeof(bool)};
 
 
 static bool             fFailure;
@@ -24,19 +24,19 @@ static bool             fFailure;
 
 void    InitSkipFailure(void)
 {
-  LoadCacheBool(&chSkipFailure, false);
+  LoadCacheBool(&chSkipFailureEnbl, false);
 }
 
 
 void    ResetSkipFailure(void)
 {
-  SaveCacheBool(&chSkipFailure, false);
+  SaveCacheBool(&chSkipFailureEnbl, false);
 }
 
 
 
 bool    SkipFailureEnbl(void) {
-  return fSkipFailure;
+  return fSkipFailureEnbl;
 }
 
 
@@ -61,16 +61,11 @@ void    SkipFailure_Failure(void)
 
 bool    SkipFailure_IsFailure(void)
 {
-  bool fResult = fFailure & fSkipFailure;
-
+  bool fResult = SkipFailureEnbl() & fFailure;
   if (fResult)
   {
-    SaveDisplay();
-
     ShowLo("быстрый пропуск ");
     DelayInf();
-
-    LoadDisplay();
   }
 
   return fResult;
