@@ -20,6 +20,7 @@ static uchar            bSkipFailureRepeats;
 cache const             chSkipFailureRepeats = {SKIP_FAILURE_REPEATS, &bSkipFailureRepeats, sizeof(uchar)};
 
 
+static bool             fFirstQuery;
 static bool             fFailure;
 
 
@@ -48,12 +49,14 @@ bool    SkipFailureEnbl(void) {
 void    SkipFailure_Start(void)
 {
   SkipFailure_Success();
+  fFirstQuery = true;
 }
 
 
 void    SkipFailure_Success(void)
 {
   fFailure = false;
+  fFirstQuery = false;
 }
 
 
