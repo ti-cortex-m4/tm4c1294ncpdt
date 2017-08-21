@@ -41,7 +41,7 @@ double2 ReadCntCurrQ(void)
   Clear();
 
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryCloseQ();
     QueryEnergyAbsQ();
@@ -50,7 +50,7 @@ double2 ReadCntCurrQ(void)
     if (fKey == true) GetDouble2Error();
   }
 
-  if (r == bMINORREPEATS) GetDouble2Error();
+  if (r == MaxRepeats()) GetDouble2Error();
 
   ReadEnergyQ();
   QueryCloseQ();
@@ -95,7 +95,7 @@ double2 ReadCntMonCanQ(uchar  ibMon)
     }
 
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseQ();
       QueryEnergyDayQ(ti);
@@ -111,7 +111,7 @@ double2 ReadCntMonCanQ(uchar  ibMon)
       if (fKey == true) return GetDouble2Error();
     }
 
-    if (r == bMINORREPEATS) return GetDouble2Error();
+    if (r == MaxRepeats()) return GetDouble2Error();
 
     ReadEnergyQ();
     QueryCloseQ();
@@ -122,7 +122,7 @@ double2 ReadCntMonCanQ(uchar  ibMon)
     ti.bMonth = ibMon+1;
 
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseQ();
       QueryEnergyMonQ(ti);
@@ -138,7 +138,7 @@ double2 ReadCntMonCanQ(uchar  ibMon)
       if (fKey == true) return GetDouble2Error();
     }
 
-    if (r == bMINORREPEATS) return GetDouble2Error();
+    if (r == MaxRepeats()) return GetDouble2Error();
 
     ReadEnergyQ();
     QueryCloseQ();

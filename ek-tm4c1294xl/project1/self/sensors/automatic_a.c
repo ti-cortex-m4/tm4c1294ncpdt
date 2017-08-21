@@ -85,7 +85,7 @@ bool    QueryIdA_Full(void)
 {
 uchar  x;
 
-  for (x=0; x<bMINORREPEATS; x++)
+  for (x=0; x<MaxRepeats(); x++)
   {
     DelayOff();
     QueryIdA();
@@ -98,7 +98,7 @@ uchar  x;
   }
 
   Clear();
-  if (x == bMINORREPEATS) return(0);
+  if (x == MaxRepeats()) return(0);
 
   return(1);
 }

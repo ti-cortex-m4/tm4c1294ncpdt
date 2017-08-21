@@ -127,7 +127,7 @@ bool    QueryOpen31_Full(uchar  bPercent)
   Clear();
 
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryOpen31();
@@ -136,7 +136,7 @@ bool    QueryOpen31_Full(uchar  bPercent)
     if (fKey == true) return false;
   }
 
-  if (r == bMINORREPEATS) return false;
+  if (r == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   if (ReadOpen31() == false) return false;
@@ -148,7 +148,7 @@ bool    QueryOpen31_Full(uchar  bPercent)
 time2   QueryTime31_Full(uchar  bPercent)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryTime31();
@@ -157,7 +157,7 @@ time2   QueryTime31_Full(uchar  bPercent)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (r == bMINORREPEATS) return GetTime2Error();
+  if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTime31(), true);
@@ -170,7 +170,7 @@ double2 ReadTrans31_Full(void)
 
 
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryTrans31();
@@ -179,7 +179,7 @@ double2 ReadTrans31_Full(void)
     if (fKey == true) return GetDouble2Error();
   }
 
-  if (r == bMINORREPEATS) return GetDouble2Error();
+  if (r == MaxRepeats()) return GetDouble2Error();
   ShowPercent(50);
 
 
@@ -209,7 +209,7 @@ bool    Automatic31(void)
 bool    QueryEngAbs31_Full(uchar  bPercent)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryEngAbs31();
@@ -218,7 +218,7 @@ bool    QueryEngAbs31_Full(uchar  bPercent)
     if (fKey == true) return false;
   }
 
-  if (r == bMINORREPEATS) return false;
+  if (r == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   ReadEng31();
@@ -233,7 +233,7 @@ bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
   for (i=0; i<MAX_LINE_N31; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseW();
       QueryEngMonW(i,bTime);
@@ -249,7 +249,7 @@ bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     ShowPercent(bPercent+i);
 
     ReadEngW(i);
@@ -267,7 +267,7 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
   for (i=0; i<MAX_LINE_N31; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseW();
       QueryEngDayW(i,bTime);
@@ -283,7 +283,7 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     ShowPercent(bPercent+i);
 
     ReadEngW(i);
@@ -301,7 +301,7 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
   for (i=0; i<MAX_LINE_N31; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseW();
       QueryEngMonTrfW(i,bTime);
@@ -317,7 +317,7 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
       if (fKey == true) return ST_OK;
     }
 
-    if (r == bMINORREPEATS) return ST_OK;
+    if (r == MaxRepeats()) return ST_OK;
     ShowPercent(bPercent+i);
 
     ReadEngTrfW(i,ibTrf);

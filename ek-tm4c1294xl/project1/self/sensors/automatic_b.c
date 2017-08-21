@@ -48,7 +48,7 @@ uchar   i;
 bool    QueryOpenB_Full(uchar  ibCan, uchar  bPercent)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryOpenB();
@@ -57,7 +57,7 @@ bool    QueryOpenB_Full(uchar  ibCan, uchar  bPercent)
     if (fKey == true) return false;
   }
 
-  if (r == bMINORREPEATS) return false;
+  if (r == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   if ((fSerialsManual == false) && (mfSerialFlags[ibCan] == false))
@@ -142,7 +142,7 @@ uchar   i;
 ulong2  QuerySerialB_Full(void)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QuerySerialB();
@@ -151,7 +151,7 @@ ulong2  QuerySerialB_Full(void)
     if (fKey == true) return GetLong2Error();
   }
 
-  if (r == bMINORREPEATS) return GetLong2Error();
+  if (r == MaxRepeats()) return GetLong2Error();
 
   ulong dwSerial = ReadSerialB();
   ProcessSerials(ibDig, dwSerial);

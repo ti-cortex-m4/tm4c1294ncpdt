@@ -41,7 +41,7 @@ double2 ReadCntCurrU(uchar  bMaxLines)
     if (SkipLine(ibDig, i) == true) { mpdbChannelsC[i] = 0; continue; }
 
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       ShowPercent(50 + i);
       QueryCloseU();
@@ -51,7 +51,7 @@ double2 ReadCntCurrU(uchar  bMaxLines)
       if (fKey == true) return GetDouble2Error();
     }
 
-    if (r == bMINORREPEATS) return GetDouble2Error();
+    if (r == MaxRepeats()) return GetDouble2Error();
     ReadEngU(i);
   }
 
@@ -98,7 +98,7 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
       if (SkipLine(ibDig, i) == true) { mpdbChannelsC[i] = 0; continue; }
 
       uchar r;
-      for (r=0; r<bMINORREPEATS; r++)
+      for (r=0; r<MaxRepeats(); r++)
       {
         ShowPercent(50 + i);
         QueryCloseU();
@@ -115,7 +115,7 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
         if (fKey == true) return GetDouble2Error();
       }
 
-      if (r == bMINORREPEATS) return GetDouble2Error();
+      if (r == MaxRepeats()) return GetDouble2Error();
       ReadEngU(i);
     }
 
@@ -132,7 +132,7 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
       if (SkipLine(ibDig, i) == true) { mpdbChannelsC[i] = 0; continue; }
 
       uchar r;
-      for (r=0; r<bMINORREPEATS; r++)
+      for (r=0; r<MaxRepeats(); r++)
       {
         ShowPercent(50 + i);
         QueryCloseU();
@@ -149,7 +149,7 @@ double2 ReadCntMonCanU(uchar  ibMon, uchar  bMaxLines)
         if (fKey == true) return GetDouble2Error();
       }
 
-      if (r == bMINORREPEATS) return GetDouble2Error();
+      if (r == MaxRepeats()) return GetDouble2Error();
       ReadEngU(i);
     }
 
