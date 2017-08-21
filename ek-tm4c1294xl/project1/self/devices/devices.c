@@ -775,7 +775,7 @@ void    RunDevices(void)
 
 
     case DEV_CONTROL_A2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_A2);
       else
       {
@@ -803,7 +803,7 @@ void    RunDevices(void)
       break;
 
     case DEV_MANAGE_A2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_A2);
       else
       {
@@ -1238,7 +1238,7 @@ void    RunDevices(void)
 
 
     case DEV_CONTROL_B2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_B2);
       else
       {
@@ -1266,7 +1266,7 @@ void    RunDevices(void)
       break;
 /*
     case DEV_MANAGE_B2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_B2);
       else
       {
@@ -3606,7 +3606,7 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_S2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_S2);
       else
       {
@@ -4419,7 +4419,7 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_V2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_V2);
       else
       {
@@ -4972,7 +4972,7 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_31P:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_31P);
       else
       {
@@ -5207,7 +5207,7 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_32P:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_32P);
       else
       {
@@ -5388,7 +5388,7 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_33P:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_33P);
       else
       {

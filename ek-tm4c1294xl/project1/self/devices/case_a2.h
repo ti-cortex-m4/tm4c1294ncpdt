@@ -102,7 +102,7 @@
 
 
     case DEV_CONTROL_A2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_A2);
       else
       {
@@ -130,7 +130,7 @@
       break;
 
     case DEV_MANAGE_A2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_A2);
       else
       {

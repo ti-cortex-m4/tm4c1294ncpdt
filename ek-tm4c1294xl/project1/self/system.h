@@ -157,6 +157,12 @@ SYSTEM!H
 // максимальное количество повторов при чтении данных с цифровых счётчиков
 #define bMINORREPEATS   5
 
+//
+#define bCORRECTS       5
+
+//
+#define bITERATIONS     5
+
 
 // таймаут после посылки последного запроса
 #define bMAXWAITQUERY   20
