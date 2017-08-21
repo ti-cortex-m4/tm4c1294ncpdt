@@ -167,7 +167,7 @@ void    QueryHistoryP3(uchar  ibRecord)
 time2   QueryTimeP_Full(void)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeP();
@@ -176,7 +176,7 @@ time2   QueryTimeP_Full(void)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
 
   time ti = ReadTimeP();
   ShowPercent(50);
@@ -189,7 +189,7 @@ time2   QueryTimeP_Full(void)
 bool    QueryEnergyP_Full(uchar  bPart)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngAbsP(bPart);
@@ -197,7 +197,7 @@ bool    QueryEnergyP_Full(uchar  bPart)
     if (ElsInput(0) != SER_GOODCHECK) continue; else break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(70+bPart);
 
   ReadEngAbsP(bPart);
@@ -211,7 +211,7 @@ bool    QueryHistoryP1_Full(uchar  ibRecord)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryHistoryP1(ibRecord*8+8);
@@ -219,7 +219,7 @@ uchar   i;
     if (ElsInput(0) != SER_GOODCHECK) continue; else break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(60+ibRecord);
 
   return(1);
@@ -230,7 +230,7 @@ bool    QueryHistoryP2_Full(uchar  ibRecord)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryHistoryP2(ibRecord);
@@ -238,7 +238,7 @@ uchar   i;
     if (ElsInput(0) != SER_GOODCHECK) continue; else break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(80+ibRecord/8);
 
   return(1);
@@ -249,7 +249,7 @@ bool    QueryHistoryP3_Full(uchar  ibRecord)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryHistoryP3(ibRecord);
@@ -257,7 +257,7 @@ uchar   i;
     if (ElsInputRD() != SER_GOODCHECK) continue; else break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(60+ibRecord);
 
   return(1);

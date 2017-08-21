@@ -336,7 +336,7 @@ uchar   i;
   ShowPort(diCurr.ibPort);
   ShowLo(szConnect); DelayInf();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
 //    QueResult(bRES_MODEMBAUD, i);
 
@@ -347,12 +347,12 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) ;
+  if (i == MaxRepeats()) ;
   else
     { ShowLo(szBaudOK); DelayInf(); mpcwBaud[diCurr.ibPort]++; }
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
 //    QueResult(bRES_MODEMCOMMON, i);
 
@@ -378,13 +378,13 @@ uchar   i;
     }
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowLo(szCommonOK); DelayInf(); mpcwCommon[diCurr.ibPort]++;
 
 
   if (boCustomModem == true)
   {
-    for (i=0; i<bMINORREPEATS; i++)
+    for (i=0; i<MaxRepeats(); i++)
     {
 //      QueResult(bRES_MODEMCUSTOM, i);
 
@@ -395,12 +395,12 @@ uchar   i;
       if (fKey == true) return(0);
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (i == MaxRepeats()) return(0);
     ShowLo(szCustomOK); DelayInf(); mpcwCustom[diCurr.ibPort]++;
   }
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
 //    QueResult(bRES_MODEMCONNECT, i);
 
@@ -413,7 +413,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
 
 
   cbWaitOnline = 0;
@@ -455,7 +455,7 @@ bool    fResult;
   ShowPort(diCurr.ibPort);
   ShowLo(szDisconnect); DelayInf();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     // переход из состояния hook on
 //    QueResult(bRES_MODEMESCAPE, i);
@@ -476,12 +476,12 @@ bool    fResult;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) ;
+  if (i == MaxRepeats()) ;
   else
     { ShowLo(szEscapeOK); DelayInf(); mpcwEscape[diCurr.ibPort]++; }
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
 //    QueResult(bRES_MODEMHOOKOFF, i);
 
@@ -492,7 +492,7 @@ bool    fResult;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) ;
+  if (i == MaxRepeats()) ;
   else
   {
     fResult = 1;

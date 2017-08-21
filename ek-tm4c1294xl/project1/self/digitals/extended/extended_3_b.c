@@ -50,7 +50,7 @@ void    QueryEventB(uchar  ibEvent, uchar  j)
 bool    QueryEventB_Full(uchar  ibEvent, uchar  j, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEventB(ibEvent,j);
@@ -59,7 +59,7 @@ bool    QueryEventB_Full(uchar  ibEvent, uchar  j, uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent+j);
 
   return(1);

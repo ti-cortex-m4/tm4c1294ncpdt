@@ -107,7 +107,7 @@ serial  InputS(void)
 bool    QueryConfigS_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryConfigS();
@@ -116,7 +116,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadConfigS();
@@ -127,7 +127,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
 time2   QueryTimeS_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeS();
@@ -136,7 +136,7 @@ time2   QueryTimeS_Full(uchar  bPercent)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTimeS(), true);
@@ -146,7 +146,7 @@ time2   QueryTimeS_Full(uchar  bPercent)
 bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngDayS(bTime);
@@ -155,7 +155,7 @@ bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEnergyS();
@@ -166,7 +166,7 @@ bool    QueryEngDayS_Full(uchar  bTime, uchar  bPercent)
 bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngMonS(bTime);
@@ -175,7 +175,7 @@ bool    QueryEngMonS_Full(uchar  bTime, uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEnergyS();

@@ -54,7 +54,7 @@ bit     QueryOpenDeviceH_X5(uchar  bTariff)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryOpenH();
@@ -63,7 +63,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
 
   if (ReadOpenH_X5(bTariff) == 0) return(0);
 
@@ -75,7 +75,7 @@ bit     QueryEnergyAbsTariffH_Full(uchar  bTariff)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyAbsH(bTariff-1);
@@ -84,7 +84,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
 
 
   if (ChecksumH(14) == 0) { sprintf(szLo," ошибка CRC: H8 "); Delay(1000); return(0); }

@@ -314,7 +314,7 @@ uchar   i,j;
 
   Clear();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryBreakE(); 
 
