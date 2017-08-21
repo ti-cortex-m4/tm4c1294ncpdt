@@ -68,7 +68,7 @@
     case DEV_ERROR1_6_C4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bITERATIONS) ErrorCheckup();
       else 
       {
         cbRepeat = MaxRepeats();
@@ -169,7 +169,7 @@
     case DEV_ERROR3_6_C4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bITERATIONS) ErrorCheckup();
       else 
       {
         cbRepeat = MaxRepeats();
@@ -280,7 +280,7 @@
     case DEV_ERROR2_6_C4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bITERATIONS) ErrorCheckup();
       else 
       {
         cbRepeat = MaxRepeats();
