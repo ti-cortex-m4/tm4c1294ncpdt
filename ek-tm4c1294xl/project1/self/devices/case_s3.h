@@ -4,7 +4,7 @@
     case DEV_START_S3:
       ShowPercent(25);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryConfigS();
       SetCurr(DEV_CONFIG_S3);
       break;
@@ -32,7 +32,7 @@
     case DEV_POSTCONFIG_S3:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngMonS(0);
       SetCurr(DEV_ENERGY_S3);
       break;

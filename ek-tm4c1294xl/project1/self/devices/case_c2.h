@@ -4,7 +4,7 @@
     case DEV_START_C2:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenC();
       SetCurr(DEV_OPENCANAL_C2);
       break;
@@ -36,7 +36,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeC();
       SetCurr(DEV_TIME_C2);
       break;
@@ -89,7 +89,7 @@
         MakePause(DEV_POSTCORRECT_C2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControlC();
         SetCurr(DEV_POSTCONTROL_C2);
       }
@@ -115,7 +115,7 @@
 
 
     case DEV_POSTCORRECT_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryVersionC();
       SetCurr(DEV_VERSION_C2);
       break;
@@ -145,7 +145,7 @@
       break;
 
     case DEV_POSTVERSION_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeC();
       SetCurr(DEV_VALUE_C2);
       break;
@@ -200,7 +200,7 @@
 
 
     case DEV_DATA_6_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderC6();
       SetCurr(DEV_HEADER_6_C2);
       break;
@@ -221,7 +221,7 @@
       if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR_6_C2);
       }
@@ -288,7 +288,7 @@
       break;
 
     case DEV_ID_6_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryIdC();
       SetCurr(DEV_POSTID_6_C2);
       break;
@@ -313,7 +313,7 @@
 
 
     case DEV_DATA_1_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderC1();
       SetCurr(DEV_HEADER_1_C2);
       break;
@@ -343,7 +343,7 @@
       if (++cbIteration > bMINORREPEATS) ErrorProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR_1_C2);
       }
@@ -441,7 +441,7 @@
         break;
 
     case DEV_ID_1_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryIdC();
       SetCurr(DEV_POSTID_1_C2);
       break;

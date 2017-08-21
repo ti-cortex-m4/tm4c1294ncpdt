@@ -12,7 +12,7 @@
 
 
     case DEV_PREVOPENCANAL_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenW();
       SetCurr(DEV_OPENCANAL_W2);
       break;
@@ -38,7 +38,7 @@
       Clear();
       ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionW();
       SetCurr(DEV_OPTION_W2);
       break;
@@ -64,7 +64,7 @@
     case DEV_POSTOPTION_W2:
       ShowPercent(52);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordW();
       SetCurr(DEV_PASSWORD_W2);
       break;
@@ -90,7 +90,7 @@
 
 
     case DEV_PREVTIME_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeW();
       SetCurr(DEV_TIME_W2);
       break;
@@ -146,7 +146,7 @@
 
 
     case DEV_GETCORRECT_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryGetCorrectW();
       SetCurr(DEV_POSTGETCORRECT_W2);
       break;
@@ -172,7 +172,7 @@
       break;
 
     case DEV_SETCORRECT_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QuerySetCorrectW(dwCorrectW);
       SetCurr(DEV_POSTSETCORRECT_W2);
       break;
@@ -196,7 +196,7 @@
 
 
     case DEV_CONTROL_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryControlW(tiCurr);
       SetCurr(DEV_POSTCONTROL_W2);
       break;
@@ -227,7 +227,7 @@
       break;
 
     case DEV_PREVPROFILE_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryProfileW();
       SetCurr(DEV_PROFILE_W2);
       break;

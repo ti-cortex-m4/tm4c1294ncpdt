@@ -30,7 +30,7 @@ void    ResetMaxRepeats(void)
 }
 
 
-uchar   GetMaxRepeats(void)
+uchar   MaxRepeats(void)
 {
   return bMaxRepeats;
 }

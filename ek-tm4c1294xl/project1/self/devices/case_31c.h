@@ -1,7 +1,7 @@
 #ifndef SKIP_31
 
     case DEV_START_31C:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpen31();
       SetCurr(DEV_OPENCANAL_31C);
       break;
@@ -29,7 +29,7 @@
       break;
 
     case DEV_POSTOPENCANAL_31C:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbs31();
       SetCurr(DEV_ENERGY_31C);
       break;

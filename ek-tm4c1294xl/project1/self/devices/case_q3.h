@@ -4,7 +4,7 @@
     case DEV_START_Q3:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_Q3);
       break;
@@ -29,7 +29,7 @@
     case DEV_POSTOPENCANAL_Q3:
       Clear(); ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionQ();
       SetCurr(DEV_OPTION_Q3);
       break;
@@ -54,7 +54,7 @@
     case DEV_POSTOPTION_Q3:
       ShowPercent(52);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEnergySpecQ();
       SetCurr(DEV_ENERGY_Q3);
       break;

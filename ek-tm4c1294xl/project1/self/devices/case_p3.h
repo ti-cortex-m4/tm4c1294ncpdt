@@ -4,7 +4,7 @@
     case DEV_START_P3:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenP();
       SetCurr(DEV_OPENCANAL_P3);
     break;
@@ -31,7 +31,7 @@
     case DEV_POSTOPENCANAL_P3:
       ShowPercent(60);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryModeP();
       SetCurr(DEV_MODE_P3);
     break;
@@ -58,7 +58,7 @@
     case DEV_POSTMODE_P3:
       ShowPercent(70);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordP();
       SetCurr(DEV_PASSWORD_P3);
     break;
@@ -85,7 +85,7 @@
     case DEV_POSTPASSWORD_P3:
       ShowPercent(80);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryRegisterP();
       SetCurr(DEV_REGISTER_P3);
       break;
@@ -113,7 +113,7 @@
     case DEV_POSTREGISTER_P3:
       ShowPercent(90);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbsP(0);
       SetCurr(DEV_ENERGY0_P3);
       break;
@@ -141,7 +141,7 @@
     case DEV_POSTENERGY0_P3:
       ShowPercent(91);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbsP(1);
       SetCurr(DEV_ENERGY1_P3);
       break;

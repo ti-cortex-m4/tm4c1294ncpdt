@@ -4,7 +4,7 @@
     case DEV_START_P2:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenP();
       SetCurr(DEV_OPENCANAL_P2);
     break;
@@ -31,7 +31,7 @@
     case DEV_POSTOPENCANAL_P2:
       ShowPercent(60);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryModeP();
       SetCurr(DEV_MODE_P2);
     break;
@@ -58,7 +58,7 @@
     case DEV_POSTMODE_P2:
       ShowPercent(70);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordP();
       SetCurr(DEV_PASSWORD_P2);
     break;
@@ -85,7 +85,7 @@
     case DEV_POSTPASSWORD_P2:
       ShowPercent(80);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeP();
       SetCurr(DEV_TIME_P2);
       break;
@@ -135,7 +135,7 @@
           Clear(); sprintf(szLo+1,"коррекция: -%u с", iwMajor); DelayInf();
           iwMajor |= 0x8000;
 
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryCorrectP();
           SetCurr(DEV_CORRECT_P2);
         }
@@ -149,7 +149,7 @@
 
           Clear(); sprintf(szLo+1,"коррекция: +%u с", iwMajor); DelayInf();
 
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryCorrectP();
           SetCurr(DEV_CORRECT_P2);
         }
@@ -180,7 +180,7 @@
     case DEV_POSTCORRECT_P2:
       ShowPercent(90);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryRegisterP();
       SetCurr(DEV_REGISTER_P2);
       break;
@@ -211,7 +211,7 @@
     case DEV_POSTREGISTER_P2:
       Setup1P();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QuerySetValueP(); // возвращает (ERR5), если прошло более 6 минут после команды Р2
       SetCurr(DEV_SETVALUE_P2);
       break;
@@ -236,7 +236,7 @@
       break;
 
     case DEV_POSTSETVALUE_P2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryGetValueP();
       SetCurr(DEV_GETVALUE_P2);
       break;
@@ -262,7 +262,7 @@
       break;
 
     case DEV_POSTGETVALUE_P2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryProfileP();
       SetCurr(DEV_PROFILE_P2);
       break;
@@ -307,13 +307,13 @@
 
             if (cwSecondLockoutP > 60)
             {
-              cbRepeat = GetMaxRepeats();
+              cbRepeat = MaxRepeats();
               QueryRepasswordP();
               SetCurr(DEV_REPASSWORD_P2);
             }
             else
             {
-              cbRepeat = GetMaxRepeats();
+              cbRepeat = MaxRepeats();
               QuerySetValueP();
               SetCurr(DEV_SETVALUE_P2);
             }
@@ -322,7 +322,7 @@
       }
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryProfileP();
         SetCurr(DEV_PROFILE_P2);
       }
@@ -348,7 +348,7 @@
       break;
 
     case DEV_POSTREPASSWORD_P2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QuerySetValueP();
       SetCurr(DEV_SETVALUE_P2);
       break;

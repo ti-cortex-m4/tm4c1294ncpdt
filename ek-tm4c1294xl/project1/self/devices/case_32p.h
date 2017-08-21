@@ -3,7 +3,7 @@
     case DEV_START_32P:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpen32();
       SetCurr(DEV_OPENCANAL_32P);
       break;
@@ -36,7 +36,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTime32();
       SetCurr(DEV_TIME_32P);
       break;
@@ -88,7 +88,7 @@
         MakePause(DEV_POSTCORRECT_32P);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControl32(tiCurr);
         SetCurr(DEV_POSTCONTROL_32P);
       }
@@ -116,7 +116,7 @@
     case DEV_POSTCORRECT_32P:
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTop32();
       SetCurr(DEV_TOP_32P);
       break;
@@ -142,7 +142,7 @@
       if (ReadTop32() == false) DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader32();
         SetCurr(DEV_HEADER_32P);
       }
@@ -172,7 +172,7 @@
         DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader32();
         SetCurr(DEV_HEADER_32P);
       }
