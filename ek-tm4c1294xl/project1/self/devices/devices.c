@@ -344,7 +344,7 @@ void    RunDevices(void)
           cbRepeat--;
           ShowRepeat();
 
-          if (cbRepeat == bMINORREPEATS-1)
+          if (cbRepeat == MaxRepeats()-1)
           {
             QueryModemCommon(1);
             MakeLongPause(DEV_MODEM_COMMON,1);
