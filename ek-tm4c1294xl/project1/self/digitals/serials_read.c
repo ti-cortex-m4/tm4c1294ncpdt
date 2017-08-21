@@ -24,7 +24,7 @@ SERIALS_READ.C
 ulong2  ReadSerialCanB(uchar  ibCan)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryOpenB();
@@ -33,7 +33,7 @@ ulong2  ReadSerialCanB(uchar  ibCan)
     if (fKey == true) return GetLong2Error();
   }
 
-  if (r == bMINORREPEATS) return GetLong2Error();
+  if (r == MaxRepeats()) return GetLong2Error();
   ShowPercent(25);
 
   return QuerySerialB_Full();
@@ -44,7 +44,7 @@ ulong2  ReadSerialCanB(uchar  ibCan)
 ulong2  ReadSerialCanC(uchar  ibCan)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryOpenC();
@@ -53,7 +53,7 @@ ulong2  ReadSerialCanC(uchar  ibCan)
     if (fKey == true) return GetLong2Error();
   }
 
-  if (r == bMINORREPEATS) return GetLong2Error();
+  if (r == MaxRepeats()) return GetLong2Error();
   ShowPercent(25);
 
   return QuerySerialC_Full(ibCan);
