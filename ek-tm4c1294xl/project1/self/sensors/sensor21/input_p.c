@@ -11,7 +11,7 @@ INPUT_P.H
 #include "../../digitals/wait_answer.h"
 #include "../../kernel/crc_els.h"
 #include "../../serial/monitor.h"
-#include "../../serial/input.h"
+#include "../../serial/input_wrapper.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_devices.h"
 #include "input_p.h"
