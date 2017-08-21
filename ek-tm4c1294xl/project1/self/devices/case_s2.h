@@ -93,7 +93,7 @@
       break;
 
     case DEV_CONTROL_S2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_S2);
       else
       {

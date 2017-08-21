@@ -84,7 +84,7 @@
       break;
 
     case DEV_CONTROL_31P:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_31P);
       else
       {
