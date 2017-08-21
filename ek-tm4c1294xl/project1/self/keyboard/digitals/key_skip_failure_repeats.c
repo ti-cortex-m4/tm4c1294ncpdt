@@ -22,5 +22,5 @@ static char const       *pszMessages[]     = { szMessage1, szMessage2, szMessage
 
 void    key_SetSkipFailureRepeats(void)
 {
-  key_SetChar(&chSkipFailureRepeats, pszMessages, 1, bMINORREPEATS);
+  key_SetChar(&chSkipFailureRepeats, pszMessages, 1, bREPEATS);
 }

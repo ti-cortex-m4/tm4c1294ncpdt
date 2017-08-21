@@ -20,13 +20,13 @@ cache const             chMaxRepeats = {MAX_REPEATS, &bMaxRepeats, sizeof(uchar)
 
 void    InitMaxRepeats(void)
 {
-  LoadCacheChar(&chMaxRepeats, 1, 20, bMINORREPEATS);
+  LoadCacheChar(&chMaxRepeats, 1, 20, bREPEATS);
 }
 
 
 void    ResetMaxRepeats(void)
 {
-  SaveCacheChar(&chMaxRepeats, bMINORREPEATS);
+  SaveCacheChar(&chMaxRepeats, bREPEATS);
 }
 
 
