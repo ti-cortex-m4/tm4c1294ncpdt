@@ -38,7 +38,7 @@ static void QueryCntMonTariffC(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 static bool QueryCntMonTariffC_Full(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryCntMonTariffC(ibMon, bTrf);
@@ -47,7 +47,7 @@ static bool QueryCntMonTariffC_Full(uchar  ibMon, uchar  bTrf) // на начало мес€
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
 
   ReadEnergyC();
   return true;

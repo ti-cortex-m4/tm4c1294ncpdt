@@ -25,7 +25,7 @@ bool    QueryIdB_Full(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryIdB();
@@ -38,7 +38,7 @@ uchar   i;
   }
 
   Clear();
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
 
   return true;
 }
@@ -76,7 +76,7 @@ time2   QueryTimeB_Full(uchar  bPercent)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeB();
@@ -85,7 +85,7 @@ uchar   i;
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTimeB(), true);
@@ -97,7 +97,7 @@ bool    QueryEnergyB_Full(uchar  bTime, uchar  bPercent)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyB(bTime);
@@ -106,7 +106,7 @@ uchar   i;
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   ReadEnergyB();
@@ -119,7 +119,7 @@ bool    QueryEnergyB_Full2(uchar  bTime, uchar  bPercent)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyB(bTime);
@@ -130,7 +130,7 @@ uchar   i;
     if (QueryIdB_Full() == 0) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   ReadEnergyB();

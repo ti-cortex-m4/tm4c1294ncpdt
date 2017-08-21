@@ -1207,7 +1207,7 @@ float2  ReadParam(uint  iwPrm)
 float2  ReadParamRepeat(uint  iwPrm)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     if (fKey == true) return GetFloat2Error();
 

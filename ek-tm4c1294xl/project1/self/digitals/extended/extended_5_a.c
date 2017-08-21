@@ -34,7 +34,7 @@ static bool QueryEngTariffA_Full(uchar  bTime, uchar  bTrf)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngTariffA(bTime,bTrf);
@@ -43,7 +43,7 @@ uchar   i;
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
 
   ReadEnergyA();
   return true;

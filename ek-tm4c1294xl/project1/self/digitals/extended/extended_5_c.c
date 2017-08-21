@@ -54,7 +54,7 @@ static bool QueryEngDayTariffC_Full(uchar  bTrf)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngDayTariffC(bTrf);
@@ -63,7 +63,7 @@ uchar   i;
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
 
   ReadEnergyC();
   return true;
@@ -73,7 +73,7 @@ uchar   i;
 static bool QueryEngAbsTariffC_Full(uchar  bTrf)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngAbsTariffC(bTrf);
@@ -82,7 +82,7 @@ static bool QueryEngAbsTariffC_Full(uchar  bTrf)
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
 
   ReadEnergyC();
   return true;

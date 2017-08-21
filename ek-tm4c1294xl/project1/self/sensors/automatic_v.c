@@ -100,7 +100,7 @@ serial  InputV(void)
 bool    QueryConfigS_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryConfigS();
@@ -109,7 +109,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadConfigS();
@@ -120,7 +120,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
 time2   QueryTimeV_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeV();
@@ -129,7 +129,7 @@ time2   QueryTimeV_Full(uchar  bPercent)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTimeV(), true);
@@ -139,7 +139,7 @@ time2   QueryTimeV_Full(uchar  bPercent)
 bool    QueryEngAbsV_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngAbsV();
@@ -148,7 +148,7 @@ bool    QueryEngAbsV_Full(uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEngAbsV();
@@ -159,7 +159,7 @@ bool    QueryEngAbsV_Full(uchar  bPercent)
 bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngMonV(bMonth,bYear);
@@ -168,7 +168,7 @@ bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEngMonV();
@@ -179,7 +179,7 @@ bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
 bool    QueryEngDayV_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngDayV(bDay,bMonth,bYear);
@@ -188,7 +188,7 @@ bool    QueryEngDayV_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPerc
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEngDayV();

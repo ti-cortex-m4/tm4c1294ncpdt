@@ -47,7 +47,7 @@ uchar   i;
   if (QueryOpenA_Full(25) == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     InitPush(0);
     PushChar(diCurr.bAddress);
@@ -61,7 +61,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
 
@@ -69,7 +69,7 @@ uchar   i;
   dbKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     InitPush(0);
     PushChar(diCurr.bAddress);
@@ -83,7 +83,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(75);
 
 
@@ -115,7 +115,7 @@ bool    ReadKoeffDeviceB(uchar  ibCan)
 
 
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     InitPush(0);
     PushChar(diCurr.bAddress);
@@ -129,7 +129,7 @@ bool    ReadKoeffDeviceB(uchar  ibCan)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
 
@@ -137,7 +137,7 @@ bool    ReadKoeffDeviceB(uchar  ibCan)
   dbKtrans = (InBuff(1)*0x100 + InBuff(2)) * (InBuff(3)*0x100 + InBuff(4));
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     // первый вариант: ответ 3 байта
     InitPush(0);
@@ -164,7 +164,7 @@ bool    ReadKoeffDeviceB(uchar  ibCan)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(75);
 
   switch (InBuff(3) & 0x0F)             // K преобразования
@@ -190,7 +190,7 @@ bool    ReadKoeffDeviceB_Special(uchar  ibCan)
 
 
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     InitPush(0);
     PushChar(diCurr.bAddress);
@@ -204,7 +204,7 @@ bool    ReadKoeffDeviceB_Special(uchar  ibCan)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
 
@@ -235,7 +235,7 @@ bool    ReadKoeffDeviceC(uchar  ibCan)
 
 
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryOpenC();                       // открытие канала связи
@@ -244,11 +244,11 @@ bool    ReadKoeffDeviceC(uchar  ibCan)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(25);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
 
@@ -267,7 +267,7 @@ bool    ReadKoeffDeviceC(uchar  ibCan)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
 
@@ -288,7 +288,7 @@ bool    ReadKoeffDeviceC(uchar  ibCan)
   dbKtrans *= co.dwBuff;            // K трансформации
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
 
@@ -307,7 +307,7 @@ bool    ReadKoeffDeviceC(uchar  ibCan)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(60);
 
 
@@ -327,7 +327,7 @@ bool    ReadKoeffDeviceG(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryOpenG();
 
@@ -335,12 +335,12 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
 
   if (ReadOpenG() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     InitPushCod();
@@ -359,7 +359,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
 
@@ -387,7 +387,7 @@ bool    ReadKoeffDeviceH(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryOpenH();
 
@@ -395,7 +395,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
 
   if (ReadOpenH() == 0) return(0);
 
@@ -420,7 +420,7 @@ bool    ReadKoeffDeviceP(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryRegisterP();
@@ -428,7 +428,7 @@ uchar   i;
     if (ElsInput(0) != SER_GOODCHECK) continue; else break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(60);
 
   ReadRegisterP();
@@ -578,7 +578,7 @@ uchar   i;
   ShowPercent(48);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryPasswordD();
@@ -587,7 +587,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(49);
 
   if (InBuff(2) != 0) return(0);
@@ -608,7 +608,7 @@ bool    OpenDeviceE(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     if (diCurr.bAddress <= 16)
     {
@@ -626,7 +626,7 @@ uchar   i;
     else return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
   return(1);
@@ -643,7 +643,7 @@ bool    OpenDeviceG(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryOpenG();
 
@@ -651,7 +651,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
 
 
   if (ReadOpenG() == 0) return(0);
@@ -670,7 +670,7 @@ bool    OpenDeviceH(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryOpenH();
 
@@ -678,7 +678,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
 
 
   if (ReadOpenH() == 0) return(0);
@@ -697,7 +697,7 @@ bool    ReadAllEnergyD(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyD();
@@ -706,7 +706,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(75);
 
   ibMinor = 0;
@@ -715,7 +715,7 @@ uchar   i;
 
   while (ibMinor < GetEnergyBlocksD())
   {
-    for (i=0; i<bMINORREPEATS; i++)
+    for (i=0; i<MaxRepeats(); i++)
     {
       DelayOff();
       QueryContinueD();
@@ -724,14 +724,14 @@ uchar   i;
       if (fKey == true) return(0);
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (i == MaxRepeats()) return(0);
     ShowPercent(76 + ibMinor);
 
     ReadEnergyD();
   }
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryStopD();
@@ -740,7 +740,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(100);
 
   ReadQuadrantsD();
@@ -763,7 +763,7 @@ uchar   i;
   if (OpenDeviceD() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryConfigD();
@@ -772,7 +772,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(51);
 
   if (InBuff(2) != 0) return(0);
@@ -807,7 +807,7 @@ uchar   i;
   if (OpenDeviceE() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     InitPush(0);
     PushChar(0x1B);
@@ -819,7 +819,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(75);
 
 
@@ -837,7 +837,7 @@ uchar   i;
 
   DelayOff();
 
-  for (i=0; i<bMINORREPEATS; i++)       // чтение накопленной энергии
+  for (i=0; i<MaxRepeats(); i++)       // чтение накопленной энергии
   {
     InitPush(0);
     PushChar(0x1B);
@@ -849,7 +849,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(100);
 
 
@@ -878,7 +878,7 @@ bool    AutomaticF(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryBreakF();
     QueryKoeffF();
@@ -887,13 +887,13 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
   ReadKoeffF();
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryRealExtendedF(bEXT_GET_ESC_S_VALUE);
 
@@ -901,7 +901,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(100);
 
   ReadRealExtendedF();
@@ -954,7 +954,7 @@ bool    AutomaticI(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryOpenI();
 
@@ -962,7 +962,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ReadOpenI();
 
   dbKtrans = 1;                         // K трансформации
@@ -985,7 +985,7 @@ bool    AutomaticK(void)
 {
 uchar   i,bT;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryCloseK();
     QueryOpenK();
@@ -998,7 +998,7 @@ uchar   i,bT;
       break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ReadOpenK();
 
   QueryCloseK();
@@ -1024,7 +1024,7 @@ bool    AutomaticM(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryEnergyAbsM();
 
@@ -1032,7 +1032,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
 
   dbKtrans = 1;                         // K трансформации
   reBuffA = 100;                        // K преобразования
@@ -1054,7 +1054,7 @@ bool    AutomaticN(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     InitPush(0);
     PushChar(0);
@@ -1077,7 +1077,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
 
   sprintf(szLo+1,"версия:");
   szLo[ 9] = InBuff(3);
@@ -1089,7 +1089,7 @@ uchar   i;
   DelayInf(); Clear();
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryEnergyAbsN();
 
@@ -1097,7 +1097,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
   ReadEnergyN();
@@ -1117,7 +1117,7 @@ bool    AutomaticO(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryOpenO();
 
@@ -1125,7 +1125,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ReadOpenO();
 
   dbKtrans = 1;                         // K трансформации
@@ -1148,7 +1148,7 @@ bool    AutomaticT(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryVersionT();
 
@@ -1156,7 +1156,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ReadVersionT();
 
   Delay(1000); Clear();
@@ -1184,7 +1184,7 @@ bool    AutomaticP(uchar  ibCan)
 
 
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTransP();
@@ -1192,7 +1192,7 @@ bool    AutomaticP(uchar  ibCan)
     if (ElsInput(0) == SER_GOODCHECK) break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
   ReadTransP();                         // K трансформации
