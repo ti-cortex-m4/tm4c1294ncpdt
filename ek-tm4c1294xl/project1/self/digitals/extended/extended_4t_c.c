@@ -13,6 +13,7 @@ EXTENDED_4T_C!C
 #include "../../time/timedate.h"
 #include "../../sensors/automatic1.h"
 #include "../../sensors/sensor3/automatic_c.h"
+#include "../../digitals/max_repeats.h"
 #include "extended_4t_c.h"
 
 

@@ -14,6 +14,7 @@ AUTOMATIC_A!C
 #include "../time/timedate.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_messages.h"
+#include "../digitals/max_repeats.h"
 #include "device_a.h"
 
 
@@ -48,7 +49,7 @@ time2   QueryTimeA_Full(uchar  bPercent)
     DelayOff();
     QueryTimeA();
 
-    if (Input() == SER_GOODCHECK) break;  
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return GetTime2Error();
   }
 

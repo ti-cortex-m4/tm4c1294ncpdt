@@ -9,6 +9,7 @@ PORTS!H
 #include "../include/queries.h"
 #include "../include/queries255.h"
 #include "../memory/mem_ports.h"
+#include "../digitals/max_repeats.h"
 #include "ports_push.h"
 #include "ports_pop.h"
 #include "ports_common.h"

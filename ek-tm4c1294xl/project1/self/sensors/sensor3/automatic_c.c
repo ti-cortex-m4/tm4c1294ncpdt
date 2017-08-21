@@ -15,6 +15,7 @@ AUTOMATIC_C!C
 #include "../../devices/devices.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../digitals/serials.h"
+#include "../../digitals/max_repeats.h"
 #include "../automatic1.h"
 #include "device_c.h"
 
