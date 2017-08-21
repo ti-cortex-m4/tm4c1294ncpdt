@@ -40,7 +40,7 @@ bool    QueryOpen32_Full(uchar  bPercent)
   Clear();
 
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryOpen32();
@@ -49,7 +49,7 @@ bool    QueryOpen32_Full(uchar  bPercent)
     if (fKey == true) return false;
   }
 
-  if (r == bMINORREPEATS) return false;
+  if (r == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   if (ReadOpen32() == false) return false;
@@ -61,7 +61,7 @@ bool    QueryOpen32_Full(uchar  bPercent)
 time2   QueryTime32_Full(uchar  bPercent)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryTime32();
@@ -70,7 +70,7 @@ time2   QueryTime32_Full(uchar  bPercent)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (r == bMINORREPEATS) return GetTime2Error();
+  if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTime32(), true);
@@ -123,7 +123,7 @@ double2 ReadCntCurr32(void)
   for (t=0; t<bTARIFFS; t++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       DelayOff();
       QueryEngAbs32(t);
@@ -134,7 +134,7 @@ double2 ReadCntCurr32(void)
       if (fKey == true) return GetDouble2Error();
     }
 
-    if (r == bMINORREPEATS) return GetDouble2Error();
+    if (r == MaxRepeats()) return GetDouble2Error();
     else
     {
       if (Checksum32(14) == false) { ShowLo(szBadCRC); Delay(1000); return GetDouble2Error(); }

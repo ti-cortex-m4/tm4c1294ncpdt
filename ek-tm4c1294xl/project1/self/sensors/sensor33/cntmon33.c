@@ -68,7 +68,7 @@ static void QueryEngMonIdx(uchar  ibMon)
 static status ReadTop_Full(uchar  bPercent)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryTop33();
@@ -79,7 +79,7 @@ static status ReadTop_Full(uchar  bPercent)
     if (fKey == true) return ST_BADDIGITAL;
   }
 
-  if (r == bMINORREPEATS) return ST_BADDIGITAL;
+  if (r == MaxRepeats()) return ST_BADDIGITAL;
   else
   {
     if (Checksum33(GetVersion33() == 16 ? 6 : 8) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
@@ -92,7 +92,7 @@ static status ReadTop_Full(uchar  bPercent)
 static status ReadHeader_Full(void)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryHeader33();
@@ -101,7 +101,7 @@ static status ReadHeader_Full(void)
     if (fKey == true) return ST_BADDIGITAL;
   }
 
-  if (r == bMINORREPEATS) return ST_BADDIGITAL;
+  if (r == MaxRepeats()) return ST_BADDIGITAL;
   else
   {
     if (Checksum33(GetVersion33() == 16 ? 8 : 6) == false) { ShowLo(szBadCRC); Delay(1000); return ST_BAD_CRC; }
@@ -169,7 +169,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
   for (t=0; t<bTARIFFS; t++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       DelayOff();
       QueryEngAbs33(t);
@@ -180,7 +180,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     else
     {
       if (Checksum33(14) == false) { ShowLo(szBadCRC); Delay(1000); return false; }
@@ -236,7 +236,7 @@ static bool ReadEngMonIdx_Full(void)
   for (m=0; m<=12; m++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       DelayOff();
       QueryEngMonIdx(m);
@@ -245,7 +245,7 @@ static bool ReadEngMonIdx_Full(void)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     else
     {
       if (Checksum33(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }
@@ -310,7 +310,7 @@ static bool ReadEngMon_Full(uchar  ibMon)
 
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       DelayOff();
       QueryEngMonIdx(ibMon);
@@ -319,7 +319,7 @@ static bool ReadEngMon_Full(uchar  ibMon)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     else
     {
       if (Checksum33(20) == 0) { ShowLo(szBadCRC); Delay(1000); return false; }

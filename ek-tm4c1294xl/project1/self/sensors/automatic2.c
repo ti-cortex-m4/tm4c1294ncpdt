@@ -413,7 +413,7 @@ double2 ReadCntCurrK(uchar  bMaxLines)
   for (i=0; i<bMaxLines; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseK();
       QueryEnergyAbsK(i);
@@ -422,7 +422,7 @@ double2 ReadCntCurrK(uchar  bMaxLines)
       if (fKey == true) return GetDouble2Error();
     }
 
-    if (r == bMINORREPEATS) return GetDouble2Error();
+    if (r == MaxRepeats()) return GetDouble2Error();
     ShowPercent(50+i);
 
     ReadEnergyK(i);

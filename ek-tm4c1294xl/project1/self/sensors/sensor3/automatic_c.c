@@ -132,7 +132,7 @@ time2   QueryTimeC_Full(void)
 ulong2  QuerySerialC_Full(uchar  ibDig)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QuerySerialC();
@@ -141,7 +141,7 @@ ulong2  QuerySerialC_Full(uchar  ibDig)
     if (fKey == true) return GetLong2Error();
   }
 
-  if (r == bMINORREPEATS) return GetLong2Error();
+  if (r == MaxRepeats()) return GetLong2Error();
 
   ulong dwSerial = ReadSerialC();
   ProcessSerials(ibDig, dwSerial);

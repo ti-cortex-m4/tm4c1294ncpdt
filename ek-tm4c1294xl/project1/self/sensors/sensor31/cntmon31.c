@@ -126,7 +126,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
   for (t=0; t<bTARIFFS; t++) // в счётчике 72 тарифа
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       DelayOff();
       QueryEngVar(t);
@@ -137,7 +137,7 @@ static bool ReadEngVar_Full(uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     else
     {
       if (ValidPackTime() == 0) break; // тариф не используется
@@ -186,7 +186,7 @@ static bool ReadEngAbs_Full(uchar  bPercent)
   for (t=0; t<bTARIFFS; t++) // в счётчике 72 тарифа
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       DelayOff();
       QueryEngAbs(t);
@@ -197,7 +197,7 @@ static bool ReadEngAbs_Full(uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     else
     {
       if (ValidPackTime() == 0) break; // тариф не используется
@@ -268,7 +268,7 @@ static bool ReadEngMonIdx_Full(void)
   for (m=0; m<=12; m++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       DelayOff();
       QueryEngMon(m, 0);
@@ -277,7 +277,7 @@ static bool ReadEngMonIdx_Full(void)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     else
     {
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);
@@ -331,7 +331,7 @@ static bool ReadEngMon_Full(uchar  ibMon)
   for (t=0; t<bTARIFFS; t++) // в счётчике 72 тарифа
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       DelayOff();
       QueryEngMon(ibMon, t);
@@ -340,7 +340,7 @@ static bool ReadEngMon_Full(uchar  ibMon)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     else
     {
       uint wCRC = MakeCrc16Bit31InBuff(3, 100);

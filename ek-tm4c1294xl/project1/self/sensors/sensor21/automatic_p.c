@@ -33,7 +33,7 @@ uchar                   ibMonthP;
 bool    OpenOpenP_Full(void)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryOpenP();
 
@@ -41,11 +41,11 @@ bool    OpenOpenP_Full(void)
     if (fKey == true) return(0);
   }
 
-  if (r == bMINORREPEATS) return(0);
+  if (r == MaxRepeats()) return(0);
   ShowPercent(20);
 
 
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryModeP();
@@ -54,11 +54,11 @@ bool    OpenOpenP_Full(void)
     if (fKey == true) return(0);
   }
 
-  if (r == bMINORREPEATS) return(0);
+  if (r == MaxRepeats()) return(0);
   ShowPercent(30);
 
 
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryPasswordP();
@@ -67,7 +67,7 @@ bool    OpenOpenP_Full(void)
     if (fKey == true) return(0);
   }
 
-  if (r == bMINORREPEATS) return(0);
+  if (r == MaxRepeats()) return(0);
   ShowPercent(40);
 
 
@@ -493,7 +493,7 @@ status  ReadCntMonCanTariffP(uchar  ibMonth, uchar  ibTariff) // на начало мес€ц
 ulong2  QuerySerialP_Full(uchar  ibCan)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QuerySerialP();
@@ -502,7 +502,7 @@ ulong2  QuerySerialP_Full(uchar  ibCan)
     if (fKey == true) return GetLong2Error();
   }
 
-  if (r == bMINORREPEATS) return GetLong2Error();
+  if (r == MaxRepeats()) return GetLong2Error();
 
   ulong dwSerial = ReadSerialP();
   ProcessSerials(ibCan, dwSerial);
