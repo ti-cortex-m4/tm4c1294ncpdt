@@ -28,14 +28,14 @@ static bool             fFailure;
 void    InitSkipFailure(void)
 {
   LoadCacheBool(&chSkipFailureEnbl, false);
-  LoadCacheChar(&chSkipFailureRepeats, 1, bMINORREPEATS, 2);
+  LoadCacheChar(&chSkipFailureRepeats, 1, bREPEATS, 2);
 }
 
 
 void    ResetSkipFailure(void)
 {
   SaveCacheBool(&chSkipFailureEnbl, false);
-  SaveCacheChar(&chSkipFailureRepeats, bMINORREPEATS);
+  SaveCacheChar(&chSkipFailureRepeats, bREPEATS);
 }
 
 
