@@ -2,7 +2,7 @@
 #ifndef SKIP_V
 
     case DEV_START_V3:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbsV();
       SetCurr(DEV_ENERGY_V3);
       break;

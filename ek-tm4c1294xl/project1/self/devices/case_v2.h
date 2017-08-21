@@ -2,7 +2,7 @@
 #ifndef SKIP_V
 
     case DEV_START_V2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryVersionV();
       SetCurr(DEV_VERSION_V2);
       break;
@@ -51,7 +51,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeV();
       SetCurr(DEV_TIME_V2);
       break;
@@ -103,7 +103,7 @@
         MakePause(DEV_POSTCORRECT_V2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControlV(tiCurr);
         SetCurr(DEV_POSTOPENCANAL_V2);
       }
@@ -113,7 +113,7 @@
     case DEV_POSTCORRECT_V2:
       Clear(); ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeV();
       SetCurr(DEV_VALUE_V2);
       break;
@@ -143,7 +143,7 @@
       ShowPercent(75);
       InitHeaderV();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderV();
       SetCurr(DEV_HEADER_V2);
       break;
@@ -173,7 +173,7 @@
       break;
 
     case DEV_DATA_V2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderV();
       SetCurr(DEV_HEADER_V2);
       break;

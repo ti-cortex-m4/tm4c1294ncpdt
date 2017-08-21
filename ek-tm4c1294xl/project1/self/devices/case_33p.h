@@ -3,7 +3,7 @@
     case DEV_START_33P:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpen33();
       SetCurr(DEV_OPENCANAL_33P);
       break;
@@ -36,7 +36,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTime33();
       SetCurr(DEV_TIME_33P);
       break;
@@ -88,7 +88,7 @@
         MakePause(DEV_POSTCORRECT_33P);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControl33(tiCurr);
         SetCurr(DEV_POSTCONTROL_33P);
       }
@@ -116,7 +116,7 @@
     case DEV_POSTCORRECT_33P:
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTop33();
       SetCurr(DEV_TOP_33P);
       break;
@@ -142,7 +142,7 @@
       if (ReadTop33() == false) DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader33();
         SetCurr(DEV_HEADER_33P);
       }
@@ -172,7 +172,7 @@
         DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader33();
         SetCurr(DEV_HEADER_33P);
       }
