@@ -30,6 +30,8 @@ status   ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
   uchar i;
   for (i=0; i<bMaxLines; i++)
   {
+    if (SkipLine(ibDig, i) == true) { mpdbChannelsC[i] = 0; continue; }
+
     uchar r;
     for (r=0; r<bMINORREPEATS; r++)
     {
