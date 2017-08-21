@@ -901,7 +901,7 @@ void    RunDevices(void)
     case DEV_ERROR1_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
         cbRepeat = MaxRepeats();
@@ -968,7 +968,7 @@ void    RunDevices(void)
     case DEV_ERROR2_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
         cbRepeat = MaxRepeats();
@@ -1398,7 +1398,7 @@ void    RunDevices(void)
     case DEV_ERROR_B2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
         cbRepeat = MaxRepeats();
@@ -1869,7 +1869,7 @@ void    RunDevices(void)
     case DEV_ERROR_6_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
         cbRepeat = MaxRepeats();
@@ -1991,7 +1991,7 @@ void    RunDevices(void)
     case DEV_ERROR_1_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
         cbRepeat = MaxRepeats();

@@ -228,7 +228,7 @@
     case DEV_ERROR1_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
         cbRepeat = MaxRepeats();
@@ -295,7 +295,7 @@
     case DEV_ERROR2_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
         cbRepeat = MaxRepeats();
