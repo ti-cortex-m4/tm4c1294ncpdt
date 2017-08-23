@@ -7,6 +7,7 @@ MAX_REPEATS!C
 #include "../main.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
+#include "skip_failure.h"
 #include "max_repeats.h"
 
 
@@ -30,7 +31,14 @@ void    ResetMaxRepeats(void)
 }
 
 
+
 uchar   MaxRepeats(void)
+{
+  return SkipFailure_IsFirstQuery() ? SkipFailureRepeats() : bMaxRepeats;
+}
+
+
+uchar   MaxRepeatsFixed(void)
 {
   return bMaxRepeats;
 }

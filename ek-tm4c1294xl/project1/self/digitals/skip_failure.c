@@ -25,15 +25,13 @@ static bool             fFailure;
 
 
 
-void    InitSkipFailure(void)
-{
+void    InitSkipFailure(void) {
   LoadCacheBool(&chSkipFailureEnbl, false);
   LoadCacheChar(&chSkipFailureRepeats, 1, bREPEATS, 2);
 }
 
 
-void    ResetSkipFailure(void)
-{
+void    ResetSkipFailure(void) {
   SaveCacheBool(&chSkipFailureEnbl, false);
   SaveCacheChar(&chSkipFailureRepeats, bREPEATS);
 }
@@ -46,34 +44,41 @@ bool    SkipFailureEnbl(void) {
 
 
 
-void    SkipFailure_Start(void)
-{
+void    SkipFailure_Start(void) {
   SkipFailure_Success();
   fFirstQuery = true;
 }
 
 
-void    SkipFailure_Success(void)
-{
+void    SkipFailure_Success(void) {
   fFailure = false;
   fFirstQuery = false;
 }
 
 
-void    SkipFailure_Failure(void)
-{
+void    SkipFailure_Failure(void) {
   fFailure = true;
 }
 
 
-bool    SkipFailure_IsFailure(void)
-{
+bool    SkipFailure_IsFailure(void) {
   bool fResult = SkipFailureEnbl() & fFailure;
-  if (fResult)
-  {
+
+  if (fResult) {
     ShowLo("быстрый пропуск ");
     DelayInf();
   }
 
   return fResult;
+}
+
+
+
+uchar   SkipFailureRepeats(void) {
+  return bSkipFailureRepeats;
+}
+
+
+bool    SkipFailure_IsFirstQuery(void) {
+  return fFirstQuery;
 }
