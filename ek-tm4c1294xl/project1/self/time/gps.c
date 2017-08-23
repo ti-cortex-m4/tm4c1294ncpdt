@@ -166,7 +166,7 @@ time2   ReadTimeDateGps(void)
   ibPort = bPortGps-1;
 
   uchar i;
-  for (i=0; i<MaxRepeats(); i++)
+  for (i=0; i<MaxRepeatsFixed(); i++)
   {
     Delay(100);
     QueryTimeGps();
@@ -175,7 +175,7 @@ time2   ReadTimeDateGps(void)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == MaxRepeats()) return GetTime2Error();
+  if (i == MaxRepeatsFixed()) return GetTime2Error();
 
   return GetTime2(ReadTimeGps(), true);
 }
