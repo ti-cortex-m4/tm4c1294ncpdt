@@ -27,13 +27,13 @@ static bool             fFailure;
 
 void    InitSkipFailure(void) {
   LoadCacheBool(&chSkipFailureEnbl, false);
-  LoadCacheChar(&chSkipFailureRepeats, 1, bREPEATS, 2);
+  LoadCacheChar(&chSkipFailureRepeats, 1, 5, 2);
 }
 
 
 void    ResetSkipFailure(void) {
   SaveCacheBool(&chSkipFailureEnbl, false);
-  SaveCacheChar(&chSkipFailureRepeats, bREPEATS);
+  SaveCacheChar(&chSkipFailureRepeats, 2);
 }
 
 
@@ -45,7 +45,7 @@ bool    SkipFailureEnbl(void) {
 
 
 void    SkipFailure_Start(void) {
-  SkipFailure_Success();
+  SkipFailure_Failure();
   fFirstQuery = true;
 }
 

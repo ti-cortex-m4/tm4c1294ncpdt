@@ -11,6 +11,7 @@ AUTOMATIC_W!C
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
 #include "../serial/monitor.h"
+#include "../serial/input_wrapper.h"
 #include "../devices/devices.h"
 #include "../sensors/unpack_w.h"
 #include "../digitals/wait_answer.h"
