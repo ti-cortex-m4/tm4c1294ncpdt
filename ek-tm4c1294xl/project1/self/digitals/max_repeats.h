@@ -12,3 +12,4 @@ void    InitMaxRepeats(void);
 void    ResetMaxRepeats(void);
 
 uchar   MaxRepeats(void);
+uchar   MaxRepeatsFixed(void);
