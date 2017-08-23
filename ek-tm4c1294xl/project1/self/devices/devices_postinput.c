@@ -10,6 +10,7 @@ DEVICES_POSTINPUT,C
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
 #include "../serial/monitor.h"
+#include "../serial/input_wrapper.h"
 #include "../sensors/unpack_k.h"
 #include "../sensors/unpack_s.h"
 #include "../sensors/unpack_v.h"
