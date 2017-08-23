@@ -44,21 +44,28 @@ bool    SkipFailureEnbl(void) {
 
 
 
-void    SkipFailure_Start(void) {
-  SkipFailure_Failure();
+void    SkipFailure_BeforeExtended(void) {
+  fFailure = false;
   fFirstQuery = true;
 }
 
 
-void    SkipFailure_Success(void) {
+void    SkipFailure_AfterExtended(void) {
+  fFailure = true;
+}
+
+
+
+void    SkipFailure_InputStart(void) {
+  fFailure = true;
+}
+
+
+void    SkipFailure_InputGoodCheck(void) {
   fFailure = false;
   fFirstQuery = false;
 }
 
-
-void    SkipFailure_Failure(void) {
-  fFailure = true;
-}
 
 
 bool    SkipFailure_IsFailure(void) {

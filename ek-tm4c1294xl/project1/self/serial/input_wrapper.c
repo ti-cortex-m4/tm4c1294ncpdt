@@ -12,11 +12,11 @@ input_wrapper.c
 
 void    InputStart(void)
 {
-  SkipFailure_Failure();
+  SkipFailure_InputStart();
 }
 
 
 void    InputGoodCheck(void)
 {
-  SkipFailure_Success();
+  SkipFailure_InputGoodCheck();
 }
