@@ -50,8 +50,7 @@ void    DevicesPostInput(void)
       if ((bCRCHi == InBuff( CountInBuff()-1 )) &&
           (bCRCLo == InBuff( CountInBuff()-2 ))) {
 
-        if (RevLinkErrors() == 0)
-        {
+        if (RevLinkErrors() == 0) {
           InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
         }
