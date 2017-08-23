@@ -14,9 +14,12 @@ void    ResetSkipFailure(void);
 
 bool    SkipFailureEnbl(void);
 
-void    SkipFailure_Start(void);
-void    SkipFailure_Success(void);
-void    SkipFailure_Failure(void);
+void    SkipFailure_BeforeExtended(void);
+void    SkipFailure_AfterExtended(void);
+
+void    SkipFailure_InputStart(void);
+void    SkipFailure_InputGoodCheck(void);
+
 bool    SkipFailure_IsFailure(void);
 
 bool    SkipFailure_IsCustomRepeats(void);

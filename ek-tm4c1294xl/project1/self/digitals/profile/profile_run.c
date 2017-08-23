@@ -127,8 +127,6 @@ bool    StartProfile(uchar  ibCanal)
 
   cwHouRead = 0;
 
-  SkipFailure_Start();
-
   // TODO fBreakRead = 0;
 
   LoadCurrDigital(ibDig);

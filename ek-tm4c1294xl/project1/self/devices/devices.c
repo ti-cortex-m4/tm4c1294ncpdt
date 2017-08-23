@@ -503,6 +503,8 @@ void    RunDevices(void)
 
     case DEV_MODEM_POSTCONNECT:
 
+      SkipFailure_BeforeExtended();
+
       if (exExtended == EXT_PROFILE_30MIN)
       {
         if (MakeExtended0() == 0) { MakePause(DEV_MODEM_STOP); break; }
@@ -523,6 +525,8 @@ void    RunDevices(void)
       {
         MakeExtended2();      if (SkipFailure_IsFailure()) { MakePause(DEV_MODEM_STOP); break; }
       }
+
+      SkipFailure_AfterExtended();
 
       HideCurrTime(1);
       MakePause(GetNext());
