@@ -51,7 +51,6 @@ void    SkipFailure_BeforeExtended(void) {
 
 
 void    SkipFailure_AfterExtended(void) {
-  fFailure = true;
 }
 
 
