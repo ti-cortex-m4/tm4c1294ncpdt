@@ -6,7 +6,7 @@ KEY_SKIP_FAILURE_REPEATS!C
 
 #include "../../main.h"
 #include "../../digitals/skip_failure.h"
-#include "../common/key_char.h"
+#include "../common/key_char_blocked.h"
 
 
 
@@ -22,5 +22,5 @@ static char const       *pszMessages[]     = { szMessage1, szMessage2, szMessage
 
 void    key_SetSkipFailureRepeats(void)
 {
-  key_SetChar(&chSkipFailureRepeats, pszMessages, 1, 5);
+  key_SetCharBlocked(&chSkipFailureRepeats, pszMessages, 1, 5, fSkipFailureEnbl, wSET_SKIP_FAILURE_ENBL);
 }
