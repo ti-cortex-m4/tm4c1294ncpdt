@@ -66,6 +66,7 @@ void    QueryV(uchar  cbIn, uchar  cbOut)
 
 serial  InputV(void)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -82,7 +83,10 @@ serial  InputV(void)
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
       if (ChecksumV() == 0)
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
 

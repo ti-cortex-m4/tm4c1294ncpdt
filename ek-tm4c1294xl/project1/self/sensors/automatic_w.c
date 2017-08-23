@@ -69,6 +69,7 @@ bool    ChecksumW(void)
 
 serial  InputW(void)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -85,7 +86,10 @@ serial  InputW(void)
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
       if (ChecksumW())
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
 
