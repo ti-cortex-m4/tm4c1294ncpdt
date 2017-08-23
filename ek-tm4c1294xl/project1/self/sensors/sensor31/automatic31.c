@@ -72,6 +72,7 @@ void    Query31(uint  cwIn, uchar  cbOut)
 
 serial  Input31(void)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -94,6 +95,7 @@ serial  Input31(void)
       if (bCrc == 0)
       {
         Unpack31();
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else
@@ -107,6 +109,7 @@ serial  Input31(void)
       if (bCrc == 0)
       {
         Unpack31();
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else

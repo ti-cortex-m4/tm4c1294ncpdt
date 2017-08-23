@@ -19,5 +19,5 @@ void    SkipFailure_Success(void);
 void    SkipFailure_Failure(void);
 bool    SkipFailure_IsFailure(void);
 
-uchar   SkipFailureRepeats(void);
-bool    SkipFailure_IsFirstQuery(void);
+bool    SkipFailure_IsCustomRepeats(void);
+uchar   MaxRepeatsSkipFailure(void);

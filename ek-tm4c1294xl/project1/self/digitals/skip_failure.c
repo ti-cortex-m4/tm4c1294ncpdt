@@ -74,11 +74,11 @@ bool    SkipFailure_IsFailure(void) {
 
 
 
-uchar   SkipFailureRepeats(void) {
-  return bSkipFailureRepeats;
+bool    SkipFailure_IsCustomRepeats(void) {
+  return SkipFailureEnbl() & fFirstQuery;
 }
 
 
-bool    SkipFailure_IsFirstQuery(void) {
-  return fFirstQuery;
+uchar   MaxRepeatsSkipFailure(void) {
+  return bSkipFailureRepeats;
 }
