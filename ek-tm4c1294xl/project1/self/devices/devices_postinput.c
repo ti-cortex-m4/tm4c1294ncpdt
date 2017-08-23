@@ -33,7 +33,10 @@ void    DevicesPostInput(void)
       MakeCRC16InBuff( 0, CountInBuff() );
 
       if ((bCRCHi == 0) && (bCRCLo == 0))
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
@@ -48,7 +51,10 @@ void    DevicesPostInput(void)
           (bCRCLo == InBuff( CountInBuff()-2 ))) {
 
         if (RevLinkErrors() == 0)
+        {
+          InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
+        }
         else
           mpSerial[ibPort] = SER_BADCHECK;
       }
@@ -65,7 +71,10 @@ void    DevicesPostInput(void)
       MakeCRC12InBuff( 0, CountInBuff() );
 
       if (wCRC == 0)
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
@@ -75,7 +84,10 @@ void    DevicesPostInput(void)
     else if ((diCurr.bDevice == 5) || (diCurr.bDevice == 7))
     {
       if ( MakeEscInBuff() )
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
@@ -89,6 +101,7 @@ void    DevicesPostInput(void)
       if (bCrc == 0)
       {
         Unpack31();
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
       }
       else
@@ -105,7 +118,10 @@ void    DevicesPostInput(void)
       for (i=0; i<CountInBuff()-3; i++) bT += PopChar();
 
       if ((bT/0x10 == PopChar1Txt()) && (bT%0x10 == PopChar1Txt()))
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
@@ -116,7 +132,10 @@ void    DevicesPostInput(void)
              (diCurr.bDevice == 16) || (diCurr.bDevice == 17))
     {
       if ( MakeBccInBuff() )
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
@@ -130,6 +149,7 @@ void    DevicesPostInput(void)
           (GetCurr() == DEV_CORRECT_P2))
       {
         if ( MakeElsInBuff2() ) {
+          InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
         }
         else {
@@ -140,6 +160,7 @@ void    DevicesPostInput(void)
                (GetCurr() == DEV_OPENCANAL_P2))
       {
         if ( MakeElsInBuff1() ) {
+          InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
         }
         else {
@@ -149,6 +170,7 @@ void    DevicesPostInput(void)
       else
       {
         if ( MakeElsInBuff0() ) {
+          InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
         }
         else {
@@ -161,8 +183,10 @@ void    DevicesPostInput(void)
 #ifndef SKIP_Q
     else if (diCurr.bDevice == 22)
     {
-      if ( MakeBccInBuff() )
+      if ( MakeBccInBuff() ) {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
@@ -171,6 +195,7 @@ void    DevicesPostInput(void)
 #ifndef SKIP_R
     else if (diCurr.bDevice == 23)
     {
+      InputGoodCheck();
       mpSerial[ibPort] = SER_GOODCHECK;
     }
 #endif
@@ -179,7 +204,10 @@ void    DevicesPostInput(void)
     else if (diCurr.bDevice == 24)
     {
       if (ChecksumS() == 0)
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
@@ -189,7 +217,10 @@ void    DevicesPostInput(void)
     else if ((diCurr.bDevice == 26) || (diCurr.bDevice == 28))
     {
       if (MakeBccInBuff())
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
@@ -199,7 +230,10 @@ void    DevicesPostInput(void)
     else if (diCurr.bDevice == 27)
     {
       if (ChecksumV() == 0)
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
@@ -210,7 +244,10 @@ void    DevicesPostInput(void)
     {
       MonitorIn();
       if (ChecksumW())
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
     }
