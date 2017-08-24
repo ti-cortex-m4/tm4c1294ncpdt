@@ -43,6 +43,11 @@ bool    SkipFailureEnbl(void) {
 }
 
 
+uchar   SkipFailureRepeats(void) {
+  return bSkipFailureRepeats;
+}
+
+
 
 void    SkipFailure_BeforeExtended(void) {
   fFailure = false;
@@ -68,7 +73,12 @@ void    SkipFailure_InputGoodCheck(void) {
 
 
 bool    SkipFailure_IsFailure(void) {
-  bool f = SkipFailureEnbl() & fFailure;
+  return SkipFailureEnbl() & fFailure;
+}
+
+
+bool    SkipFailure_IsFailureMsg(void) {
+  bool f = SkipFailure_IsFailure();
 
   if (f) {
     ShowLo("быстрый пропуск ");
@@ -82,9 +92,4 @@ bool    SkipFailure_IsFailure(void) {
 
 bool    SkipFailure_IsReducedRepeats(void) {
   return SkipFailureEnbl() & fFirstQuery;
-}
-
-
-uchar   SkipFailureRepeats(void) {
-  return bSkipFailureRepeats;
 }

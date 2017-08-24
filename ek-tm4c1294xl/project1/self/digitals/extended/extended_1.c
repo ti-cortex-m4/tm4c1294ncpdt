@@ -119,7 +119,7 @@ void    ResetExtended1(bool  fFull)
 
 void    MakeExtended1(void)
 {
-  if (SkipFailure_IsFailure()) return;
+  if (SkipFailure_IsFailureMsg()) return;
 
   if (boDsblEscU == true)
   {
@@ -162,7 +162,7 @@ void    MakeExtended1(void)
   }
 
 
-  if (SkipFailure_IsFailure()) return;
+  if (SkipFailure_IsFailureMsg()) return;
 
   if (boDsblEscV == true)
   {
@@ -207,7 +207,7 @@ void    MakeExtended1(void)
   }
 
 
-  if (SkipFailure_IsFailure()) return;
+  if (SkipFailure_IsFailureMsg()) return;
 
   if (boDsblEscS == true)
   {
