@@ -34,7 +34,7 @@ void    ResetMaxRepeats(void)
 
 uchar   MaxRepeats(void)
 {
-  return SkipFailure_IsReducedRepeats() ? MaxRepeatsSkipFailure() : MaxRepeatsFixed();
+  return SkipFailure_IsReducedRepeats() ? SkipFailureRepeats() : bMaxRepeats;
 }
 
 

@@ -85,6 +85,6 @@ bool    SkipFailure_IsReducedRepeats(void) {
 }
 
 
-uchar   MaxRepeatsSkipFailure(void) {
+uchar   SkipFailureRepeats(void) {
   return bSkipFailureRepeats;
 }
