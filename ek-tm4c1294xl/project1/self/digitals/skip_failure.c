@@ -68,14 +68,14 @@ void    SkipFailure_InputGoodCheck(void) {
 
 
 bool    SkipFailure_IsFailure(void) {
-  bool fResult = SkipFailureEnbl() & fFailure;
+  bool f = SkipFailureEnbl() & fFailure;
 
-  if (fResult) {
+  if (f) {
     ShowLo("быстрый пропуск ");
     DelayInf();
   }
 
-  return fResult;
+  return f;
 }
 
 
