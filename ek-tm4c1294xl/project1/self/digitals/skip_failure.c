@@ -80,7 +80,7 @@ bool    SkipFailure_IsFailure(void) {
 
 
 
-bool    SkipFailure_IsCustomRepeats(void) {
+bool    SkipFailure_IsReducedRepeats(void) {
   return SkipFailureEnbl() & fFirstQuery;
 }
 

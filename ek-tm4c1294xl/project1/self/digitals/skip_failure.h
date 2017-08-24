@@ -22,5 +22,5 @@ void    SkipFailure_InputGoodCheck(void);
 
 bool    SkipFailure_IsFailure(void);
 
-bool    SkipFailure_IsCustomRepeats(void);
+bool    SkipFailure_IsReducedRepeats(void);
 uchar   MaxRepeatsSkipFailure(void);
