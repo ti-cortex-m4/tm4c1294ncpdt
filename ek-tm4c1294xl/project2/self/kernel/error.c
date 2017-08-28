@@ -10,7 +10,7 @@ error.c
 #include "../hardware/led.h"
 #include "../hardware/delay.h"
 #include "../uart/uart_log.h"
-#include "version.h"
+#include "console_version.h"
 #include "error.h"
 
 

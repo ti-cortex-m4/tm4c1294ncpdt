@@ -17,7 +17,7 @@ tasks.c
 #include "../uart/modem_to_server.h"
 #include "../uart/server_to_modem.h"
 #include "entities.h"
-#include "version.h"
+#include "console_version.h"
 #include "tasks.h"
 
 

@@ -16,7 +16,8 @@ MAIN,C
 #include "kernel/log.h"
 #include "kernel/tasks.h"
 #include "kernel/settings.h"
-#include "kernel/version.h"
+#include "kernel/console_version.h"
+#include "kernel/console_pins.h"
 #include "hardware/gpio.h"
 #include "hardware/led.h"
 #include "hardware/sys_tick.h"
@@ -154,6 +155,7 @@ int     main(void)
   IntMasterEnable();
 
   ConsoleVersion();
+  ConsolePins();
   InitWatchdog();
   InitLEDs_After();
 
