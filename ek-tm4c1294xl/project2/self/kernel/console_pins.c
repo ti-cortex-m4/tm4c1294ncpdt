@@ -25,26 +25,26 @@ void ConsolePins(void)
 {
 #if 1
   CONSOLE("UART0 \n");
-  OutStrengthAndPadType("A0", GPIO_PORTA_BASE, GPIO_PIN_0);
-  OutStrengthAndPadType("A1", GPIO_PORTA_BASE, GPIO_PIN_1);
+  OutStrengthAndPadType("A0", GPIO_PORTA_BASE, 0);
+  OutStrengthAndPadType("A1", GPIO_PORTA_BASE, 1);
   CONSOLE("UART4 \n");
-  OutStrengthAndPadType("A2", GPIO_PORTA_BASE, GPIO_PIN_2);
-  OutStrengthAndPadType("A3", GPIO_PORTA_BASE, GPIO_PIN_3);
+  OutStrengthAndPadType("A2", GPIO_PORTA_BASE, 2);
+  OutStrengthAndPadType("A3", GPIO_PORTA_BASE, 3);
   CONSOLE("UART3 \n");
-  OutStrengthAndPadType("A4", GPIO_PORTA_BASE, GPIO_PIN_4);
-  OutStrengthAndPadType("A5", GPIO_PORTA_BASE, GPIO_PIN_5);
+  OutStrengthAndPadType("A4", GPIO_PORTA_BASE, 4);
+  OutStrengthAndPadType("A5", GPIO_PORTA_BASE, 5);
   CONSOLE("UART2 \n");
-  OutStrengthAndPadType("A6", GPIO_PORTA_BASE, GPIO_PIN_6);
-  OutStrengthAndPadType("A7", GPIO_PORTA_BASE, GPIO_PIN_7);
+  OutStrengthAndPadType("A6", GPIO_PORTA_BASE, 6);
+  OutStrengthAndPadType("A7", GPIO_PORTA_BASE, 7);
   CONSOLE("UART1 \n");
-  OutStrengthAndPadType("B0", GPIO_PORTB_BASE, GPIO_PIN_0);
-  OutStrengthAndPadType("B1", GPIO_PORTB_BASE, GPIO_PIN_1);
+  OutStrengthAndPadType("B0", GPIO_PORTB_BASE, 0);
+  OutStrengthAndPadType("B1", GPIO_PORTB_BASE, 1);
 
   CONSOLE("\n");
-  OutStrengthAndPadType("F3", GPIO_PORTF_BASE, GPIO_PIN_3);
-  OutStrengthAndPadType("F2", GPIO_PORTF_BASE, GPIO_PIN_2);
-  OutStrengthAndPadType("F1", GPIO_PORTF_BASE, GPIO_PIN_1);
-  OutStrengthAndPadType("F0", GPIO_PORTF_BASE, GPIO_PIN_0);
+  OutStrengthAndPadType("F3", GPIO_PORTF_BASE, 3);
+  OutStrengthAndPadType("F2", GPIO_PORTF_BASE, 2);
+  OutStrengthAndPadType("F1", GPIO_PORTF_BASE, 1);
+  OutStrengthAndPadType("F0", GPIO_PORTF_BASE, 0);
 #endif
 }
 
