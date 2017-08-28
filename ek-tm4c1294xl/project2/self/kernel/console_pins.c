@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-version.c
+console_pins.c
 
 
 ------------------------------------------------------------------------------*/
@@ -7,11 +7,11 @@ version.c
 #include "../main.h"
 #include "../hardware/rom.h"
 #include "log.h"
-#include "version.h"
+#include "console_pins.h"
 
 
 
-void ConsoleVersion(void)
+void ConsolePins(void)
 {
   timedate_t td = GetROMBuildTimeDate();
   CONSOLE("version %u.%u.%u.%04X %02u.%02u.%02u %02u:%02u:%02u\n",
