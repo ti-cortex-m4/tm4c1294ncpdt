@@ -29,6 +29,7 @@ PROFILE_RUN!C
 #include "../../digitals/digitals_display.h"
 #include "../../digitals/dsbl_answer.h"
 #include "../../digitals/schedule/enbl_hours.h"
+#include "../../digitals/skip_failure.h"
 #include "../../special/special.h"
 #include "../../special/recalc.h"
 #include "../../time/decret.h"
@@ -257,18 +258,17 @@ void    RunProfile(bool  _fCtrlHou)
 
 void    NextProfile(void)
 {
-  if (boHideMessages == false)
+  if ((boHideMessages == false) && !SkipFailure_IsFailure())
   {
-    Clear(); sprintf(szLo+1,"принято: %04u",cwHouRead);
-    DelayMsg();
+    Clear(); sprintf(szLo+1,"принято: %04u",cwHouRead); DelayMsg();
   }
 
   LoadCurrDigital(ibDig);
-  uchar ibCan;
-  for (ibCan=0; ibCan<bCANALS; ibCan++)
+  uchar c;
+  for (c=0; c<bCANALS; c++)
   {
-    LoadPrevDigital(ibCan);
-    if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpcwProfile_OK[ibCan]++;
+    LoadPrevDigital(c);
+    if (CompareCurrPrevLines(ibDig, c) == 1) mpcwProfile_OK[c]++;
   }
 
   AddDigRecord(EVE_PROFILE_OK2);
@@ -279,13 +279,16 @@ void    NextProfile(void)
   {
     // запрещаем опрашивать другие каналы, принадлежащие текущему счётчику
     LoadCurrDigital(ibDig);
-    for (ibCan=0; ibCan<bCANALS; ibCan++)
+    for (c=0; c<bCANALS; c++)
     {
-      LoadPrevDigital(ibCan);
-      if (CompareCurrPrevLines(ibDig, ibCan) == 1) mpboReadyCan[ibCan] = true;
+      LoadPrevDigital(c);
+      if (CompareCurrPrevLines(ibDig, c) == 1) mpboReadyCan[c] = true;
     }
 
-    ShowLo(szNoData); if (boHideMessages == false) DelayMsg();
+    if ((boHideMessages == false) && !SkipFailure_IsFailure())
+    {
+      ShowLo(szNoData); DelayMsg();
+    }
   }
 
   Clear();

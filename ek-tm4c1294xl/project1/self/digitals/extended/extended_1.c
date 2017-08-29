@@ -17,6 +17,7 @@ EXTENDED_1.Ñ
 #include "../../digitals/extended/extended_6.h"
 #include "../../digitals/extended/extended_7.h"
 #include "../../digitals/extended/diagram.h"
+#include "../../digitals/skip_failure.h"
 #include "../../sensors/automatic2.h"
 #include "../../time/timedate.h"
 #include "../../time/rtc.h"
@@ -118,6 +119,8 @@ void    ResetExtended1(bool  fFull)
 
 void    MakeExtended1(void)
 {
+  if (SkipFailure_IsFailureMsg()) return;
+
   if (boDsblEscU == true)
   {
     BlockProgram2(wSET_DSBL_ESC, 0); DelayInf();
@@ -157,6 +160,9 @@ void    MakeExtended1(void)
     SaveCache(&chEscU_Value);
     SaveCache(&chEscU_Time);
   }
+
+
+  if (SkipFailure_IsFailureMsg()) return;
 
   if (boDsblEscV == true)
   {
@@ -199,6 +205,9 @@ void    MakeExtended1(void)
     SaveCache(&chEscV_Value);
     SaveCache(&chEscV_Time);
   }
+
+
+  if (SkipFailure_IsFailureMsg()) return;
 
   if (boDsblEscS == true)
   {

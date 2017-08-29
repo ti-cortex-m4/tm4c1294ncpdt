@@ -14,6 +14,7 @@ AUTOMATIC_A!C
 #include "../time/timedate.h"
 #include "../devices/devices.h"
 #include "../digitals/digitals_messages.h"
+#include "../digitals/max_repeats.h"
 #include "device_a.h"
 
 
@@ -24,7 +25,7 @@ bool    QueryOpenA_Full(uchar  bPercent)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryOpenA();
@@ -33,7 +34,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   return(1);
@@ -43,16 +44,16 @@ uchar   i;
 time2   QueryTimeA_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeA();
 
-    if (Input() == SER_GOODCHECK) break;  
+    if (Input() == SER_GOODCHECK) break;
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTimeA(), true);
@@ -63,7 +64,7 @@ bool    QueryEnergyA_Full(uchar  bTime, uchar  bPercent)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyA(bTime);
@@ -72,7 +73,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEnergyA();
@@ -85,7 +86,7 @@ bool    QueryIdA_Full(void)
 {
 uchar  x;
 
-  for (x=0; x<bMINORREPEATS; x++)
+  for (x=0; x<MaxRepeats(); x++)
   {
     DelayOff();
     QueryIdA();
@@ -98,7 +99,7 @@ uchar  x;
   }
 
   Clear();
-  if (x == bMINORREPEATS) return(0);
+  if (x == MaxRepeats()) return(0);
 
   return(1);
 }
@@ -108,7 +109,7 @@ bool    QueryEnergyA_Full2(uchar  bTime, uchar  bPercent)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyA(bTime);
@@ -119,7 +120,7 @@ uchar   i;
     if (QueryIdA_Full() == 0) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEnergyA();

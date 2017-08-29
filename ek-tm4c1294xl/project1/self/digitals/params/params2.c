@@ -21,6 +21,7 @@ PARAMS2!C
 #include    "../../sensors/device_b.h"
 #include    "../../sensors/sensor3/device_c.h"
 #include    "../../sensors/device_k.h"
+#include    "../../sensors/sensor21/input_p.h"
 #include    "../../sensors/sensor21/device_p.h"
 #include    "../../sensors/sensor21/automatic_p.h"
 #include    "../../sensors/device_s.h"
@@ -1206,7 +1207,7 @@ float2  ReadParam(uint  iwPrm)
 float2  ReadParamRepeat(uint  iwPrm)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeatsFixed(); i++)
   {
     if (fKey == true) return GetFloat2Error();
 

@@ -4,7 +4,7 @@
     case DEV_START_A2:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenA();
       SetCurr(DEV_OPENCANAL_A2);
       break;
@@ -35,7 +35,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeA();
       SetCurr(DEV_TIME_A2);
       break;
@@ -102,11 +102,11 @@
 
 
     case DEV_CONTROL_A2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_A2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControlA();
         SetCurr(DEV_POSTCONTROL_A2);
       }
@@ -130,11 +130,11 @@
       break;
 
     case DEV_MANAGE_A2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_A2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryManageA();
         SetCurr(DEV_POSTMANAGE_A2);
       }
@@ -161,7 +161,7 @@
     case DEV_POSTCORRECT_A2:
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTopA();
       SetCurr(DEV_TOP_A2);
       break;
@@ -190,13 +190,13 @@
       cbIteration = 0;
       if (diCurr.bDevice == 1)
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderA();
         SetCurr(DEV_HEADER_A2);
       }
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderA_Plus(bBLOCKS_A);
         SetCurr(DEV_HEADER_A2PLUS);
       }
@@ -228,10 +228,10 @@
     case DEV_ERROR1_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdA();
         SetCurr(DEV_POSTERROR1_A2);
       }
@@ -267,7 +267,7 @@
 
     case DEV_POSTHEADER_A2:
       cbIteration = 0;
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryDataA();
       SetCurr(DEV_DATA_A2);
       break;
@@ -295,10 +295,10 @@
     case DEV_ERROR2_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdA();
         SetCurr(DEV_POSTERROR2_A2);
       }
@@ -341,7 +341,7 @@
       {
         (iwMajor == 0) ? (iwMajor = 8192/3 - 1) : (iwMajor--);
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderA();
         SetCurr(DEV_HEADER_A2);
       }
@@ -395,7 +395,7 @@
           DoneProfile();
         else
         {
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryHeaderA_Plus(bBLOCKS_A);
           SetCurr(DEV_HEADER_A2PLUS);
         }

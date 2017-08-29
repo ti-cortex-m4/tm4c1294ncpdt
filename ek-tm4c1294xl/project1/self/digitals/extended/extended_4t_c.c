@@ -13,6 +13,7 @@ EXTENDED_4T_C!C
 #include "../../time/timedate.h"
 #include "../../sensors/automatic1.h"
 #include "../../sensors/sensor3/automatic_c.h"
+#include "../../digitals/max_repeats.h"
 #include "extended_4t_c.h"
 
 
@@ -38,7 +39,7 @@ static void QueryCntMonTariffC(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 static bool QueryCntMonTariffC_Full(uchar  ibMon, uchar  bTrf) // на начало мес€ца
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryCntMonTariffC(ibMon, bTrf);
@@ -47,7 +48,7 @@ static bool QueryCntMonTariffC_Full(uchar  ibMon, uchar  bTrf) // на начало мес€
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
 
   ReadEnergyC();
   return true;

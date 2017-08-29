@@ -29,7 +29,7 @@ bool    ReadCntMonCanF_Curr(uchar  ibMon, uchar  ibCan)
   ibPort = diCurr.ibPort;
 
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryBreakF();
 
@@ -51,7 +51,7 @@ bool    ReadCntMonCanF_Curr(uchar  ibMon, uchar  ibCan)
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
   ShowPercent(100);
 
 
@@ -74,7 +74,7 @@ bool    ReadCntMonCanF_Buff(uchar  ibMon, uchar  ibCan)
   ibPort = diCurr.ibPort;
 
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryBreakF();
 
@@ -104,7 +104,7 @@ bool    ReadCntMonCanF_Buff(uchar  ibMon, uchar  ibCan)
     if (fKey == true) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
   ShowPercent(100);
 
 

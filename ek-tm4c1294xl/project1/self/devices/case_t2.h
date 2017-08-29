@@ -2,7 +2,7 @@
 #ifndef SKIP_T
 
     case DEV_START_T2:                     
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryVersionT();
       SetCurr(DEV_VERSION_T2);
       break;
@@ -41,7 +41,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeT();                          
       SetCurr(DEV_TIME_T2);          
       break;
@@ -92,11 +92,11 @@
       break;
 
     case DEV_CONTROL_T2: 
-      if (++cbCorrects > bMINORREPEATS)          
+      if (++cbCorrects > bCORRECTS)          
         MakePause(DEV_POSTCORRECT_T2);
       else
       {
-        cbRepeat = GetMaxRepeats();                         
+        cbRepeat = MaxRepeats();                         
         QueryControlT();                          
         SetCurr(DEV_POSTCONTROL_T2);
       }
@@ -109,7 +109,7 @@
     case DEV_POSTCORRECT_T2:                  
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeT();                          
       SetCurr(DEV_PREVHEADER_T2);          
       break;
@@ -120,7 +120,7 @@
         ReadTimeAltT();
         InitHeaderT();
    
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderT();                         
         SetCurr(DEV_HEADER_T2);
       }
@@ -160,7 +160,7 @@
         DoneProfile();  
       else
       { 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderT();
         SetCurr(DEV_HEADER_T2);
       }

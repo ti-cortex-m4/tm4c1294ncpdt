@@ -33,7 +33,7 @@ status   ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
     if (SkipLine(ibDig, i) == true) { mpdbChannelsC[i] = 0; continue; }
 
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseU();
       QueryEngMonU(i,ti);
@@ -44,7 +44,7 @@ status   ReadEnergyMonTariffU_Full(time  ti, uchar  ibTariff, uchar  bMaxLines)
       if (IndexInBuff() == 10) return ST_NOTPRESENTED;
     }
 
-    if (r == bMINORREPEATS) return ST_BADDIGITAL;
+    if (r == MaxRepeats()) return ST_BADDIGITAL;
     ShowPercent(70+i);
 
     ReadEnergyTariffU(i,ibTariff);

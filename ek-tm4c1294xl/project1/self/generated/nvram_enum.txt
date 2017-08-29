@@ -274,5 +274,8 @@ typedef enum
   PTR_DIAGRAM           = REVIEW_WRN_TOP + sizeof(uint) + bNVRAM_MARGIN,
   ENBL_DIAGRAM          = PTR_DIAGRAM + sizeof(t2uint) + bNVRAM_MARGIN,
 
-  NVRAM_END             = ENBL_DIAGRAM + sizeof(bool) + bNVRAM_MARGIN
+  SKIP_FAILURE_ENBL     = ENBL_DIAGRAM + sizeof(bool) + bNVRAM_MARGIN,
+  SKIP_FAILURE_REPEATS  = SKIP_FAILURE_ENBL + sizeof(bool) + bNVRAM_MARGIN,
+
+  NVRAM_END             = SKIP_FAILURE_REPEATS + sizeof(bool) + bNVRAM_MARGIN
 } nvram;

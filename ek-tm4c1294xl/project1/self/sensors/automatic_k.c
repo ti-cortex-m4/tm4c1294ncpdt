@@ -25,7 +25,7 @@ time2   ReadTimeCanK(void)
   Clear();
 
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryCloseK();
     QueryTimeK();
@@ -33,13 +33,13 @@ time2   ReadTimeCanK(void)
     if (BccInput() == SER_GOODCHECK) break;
   }
 
-  if (r == bMINORREPEATS) return GetTime2Error();
+  if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(25);
 
   time ti = ReadTimeK();
 
 
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryCloseK();
     QueryDateK();
@@ -47,7 +47,7 @@ time2   ReadTimeCanK(void)
     if (BccInput() == SER_GOODCHECK) break;
   }
 
-  if (r == bMINORREPEATS) return GetTime2Error();
+  if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(50);
 
   ti = ReadDateK(ti);
@@ -69,7 +69,7 @@ time2   ReadTimeCanK(void)
 bool    ReadEnergyDayDatesK_Full(void)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryCloseK();
     QueryEnergyDayDatesK();
@@ -78,7 +78,7 @@ bool    ReadEnergyDayDatesK_Full(void)
     if (fKey == true) return(0);
   }
 
-  if (r == bMINORREPEATS) return(0);
+  if (r == MaxRepeats()) return(0);
   ShowPercent(60);
 
   ReadEnergyDayDatesK();
@@ -90,7 +90,7 @@ bool    ReadEnergyDayDatesK_Full(void)
 bool    ReadEnergyMonDatesK_Full(void)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryCloseK();
     QueryEnergyMonDatesK();
@@ -99,7 +99,7 @@ bool    ReadEnergyMonDatesK_Full(void)
     if (fKey == true) return(0);
   }
 
-  if (r == bMINORREPEATS) return(0);
+  if (r == MaxRepeats()) return(0);
   ShowPercent(60);
 
   ReadEnergyMonDatesK();
@@ -115,7 +115,7 @@ bool    ReadEnergyDayK_Full(uchar  bDay)
   for (i=0; i<4; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseK();
       QueryEnergyDayK(i,bDay);
@@ -124,7 +124,7 @@ bool    ReadEnergyDayK_Full(uchar  bDay)
       if (fKey == true) return(0);
     }
 
-    if (r == bMINORREPEATS) return(0);
+    if (r == MaxRepeats()) return(0);
     ShowPercent(70+i);
 
     ReadEnergyK(i);
@@ -140,7 +140,7 @@ bool    ReadEnergyMonK_Full(uchar  bMon)
   for (i=0; i<4; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseK();
       QueryEnergyMonK(i,bMon);
@@ -149,7 +149,7 @@ bool    ReadEnergyMonK_Full(uchar  bMon)
       if (fKey == true) return(0);
     }
 
-    if (r == bMINORREPEATS) return(0);
+    if (r == MaxRepeats()) return(0);
     ShowPercent(70+i);
 
     ReadEnergyK(i);
@@ -165,7 +165,7 @@ bool    ReadEnergyMonTariffK_Full(uchar  bMon, uchar  ibTariff)
   for (i=0; i<4; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseK();
       QueryEnergyMonK(i,bMon);
@@ -174,7 +174,7 @@ bool    ReadEnergyMonTariffK_Full(uchar  bMon, uchar  ibTariff)
       if (fKey == true) return(0);
     }
 
-    if (r == bMINORREPEATS) return(0);
+    if (r == MaxRepeats()) return(0);
     ShowPercent(70+i);
 
     ReadEnergyTariffK(i,ibTariff);

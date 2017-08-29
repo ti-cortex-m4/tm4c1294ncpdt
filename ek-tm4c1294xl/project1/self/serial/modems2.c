@@ -42,7 +42,7 @@ void    QueryModemQuality(void)
 bool    ReadModemQuality(void)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeatsFixed(); i++)
   {
     DelayOff();
     QueryModemBaud(0);
@@ -51,9 +51,9 @@ bool    ReadModemQuality(void)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) ;
+  if (i == MaxRepeatsFixed()) ;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeatsFixed(); i++)
   {
     DelayOff();
     QueryModemCommon(0);
@@ -63,9 +63,9 @@ bool    ReadModemQuality(void)
     sprintf(szLo+15, "%1u", i+1);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeatsFixed()) return(0);
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeatsFixed(); i++)
   {
     DelayOff();
     QueryModemQuality();

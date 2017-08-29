@@ -10,7 +10,7 @@
       InitWaitAnswer();
       QueryBreakE();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenE();
       SetCurr(DEV_OPENCANAL_E2);
       break;
@@ -48,7 +48,7 @@
     case DEV_POSTOPENCANAL_E2:                  
       Log(LOG_BEG_CORRECT_E);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeE();                          
       SetCurr(DEV_TIME0_E2);                // первичное чтение времени
       break;
@@ -105,7 +105,7 @@
         }
         else if (dwBuffC < wMAJORCORRECT_E)
         {
-          cbRepeat = GetMaxRepeats();         
+          cbRepeat = MaxRepeats();         
           QueryTimeE();                          
           SetCurr(DEV_TIME2LO_E2);
         }
@@ -131,7 +131,7 @@
         }
         else if (dwBuffC < wMAJORCORRECT_E)
         {
-          cbRepeat = GetMaxRepeats();         
+          cbRepeat = MaxRepeats();         
           QueryTimeE();                          
           SetCurr(DEV_TIME2HI_E2);
         }
@@ -149,7 +149,7 @@
       {
         Beep();
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryCorrectE();                          
         SetCurr(DEV_CORRECT3_E2);           // исполняем простую коррекцию
       }
@@ -186,7 +186,7 @@
       {
         Beep();
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryCorrectE();                          
         SetCurr(DEV_CORRECT2LO_E2);
       }
@@ -194,7 +194,7 @@
       {
         ShowTimeTwoE();
 
-        cbRepeat = GetMaxRepeats();         
+        cbRepeat = MaxRepeats();         
         QueryTimeE();                          
         SetCurr(DEV_TIME2LO_E2);
       }
@@ -219,7 +219,7 @@
       break;
 
     case DEV_POSTCORRECT2LO_E2:                  
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeE();                          
       SetCurr(DEV_TIME0_E2);
       break;
@@ -230,7 +230,7 @@
       {
         Beep();
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryCorrectE();                          
         SetCurr(DEV_CORRECT3_E2);
       }
@@ -267,7 +267,7 @@
       {
         Beep();
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryCorrectE();                          
         SetCurr(DEV_CORRECT2HI_E2);
       }
@@ -275,7 +275,7 @@
       {
         ShowTimeTwoE();
 
-        cbRepeat = GetMaxRepeats();         
+        cbRepeat = MaxRepeats();         
         QueryTimeE();                          
         SetCurr(DEV_TIME2HI_E2);
       }
@@ -300,7 +300,7 @@
       break;
 
     case DEV_POSTCORRECT2HI_E2:                  
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeE();                          
       SetCurr(DEV_TIME0_E2);
       break;
@@ -332,7 +332,7 @@
 
       ibMinor = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeE();                          
       SetCurr(DEV_TIME3_E2);
       break;
@@ -385,7 +385,7 @@
             ShowLo(szDelay); 
             SetPause(DEV_ENERGY_E2);
 
-            cbRepeat = GetMaxRepeats();
+            cbRepeat = MaxRepeats();
             QueryEnergyE();                          
             SetCurr(DEV_ENERGY_E2);
           }
@@ -435,7 +435,7 @@
       Log(LOG_BEG_DEFECT_E);
       ShowLo(szDefect); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryDefectE();     
       SetCurr(DEV_DEFECT_E2); 
       break;
@@ -466,7 +466,7 @@
       Log(LOG_BEG_INDEX_E);
       ShowLo(szIndex); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryIndexE();     
       SetCurr(DEV_INDEX_E2); 
       break;
@@ -511,7 +511,7 @@
 
           ibMinor++;
 
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryTimeE();
           SetCurr(DEV_TIME3_E2);
         }

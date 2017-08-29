@@ -5,7 +5,7 @@
       ShowPercent(50);
       ibMinor = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_K3);
       break;
@@ -30,7 +30,7 @@
     case DEV_POSTOPENCANAL_K3:
       Clear(); ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionK();
       SetCurr(DEV_OPTION_K3);
       break;
@@ -55,7 +55,7 @@
     case DEV_POSTOPTION_K3:
       ShowPercent(52+ibMinor);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEnergySpecK(ibMinor);
       SetCurr(DEV_ENERGY_K3);
       break;

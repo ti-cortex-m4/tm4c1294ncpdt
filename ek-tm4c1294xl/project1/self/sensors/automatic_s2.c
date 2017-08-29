@@ -56,7 +56,7 @@ void    QueryEngMonTariffS(uchar  ibMon, uchar  ibTrf)
 bool    QueryEngMonTariffS_Full(uchar  ibMon, uchar  ibTrf, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngMonTariffS(ibMon, ibTrf);
@@ -65,7 +65,7 @@ bool    QueryEngMonTariffS_Full(uchar  ibMon, uchar  ibTrf, uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEnergyS();

@@ -9,6 +9,7 @@ DEVICES_PAUSE,C
 #include "../memory/mem_flow.h"
 #include "../serial/ports.h"
 #include "../serial/monitor.h"
+#include "../serial/input_wrapper.h"
 #include "../sensors/unpack_w.h"
 #include "../sensors/sensor31/unpack31.h"
 #include "../digitals/digitals_status.h"
@@ -28,6 +29,7 @@ void    DevicesPause(void)
         if (bCrc == 0)
         {
           Unpack31();
+          InputGoodCheck();
           mpSerial[ibPort] = SER_GOODCHECK;
         }
         else
@@ -47,7 +49,10 @@ void    DevicesPause(void)
           MonitorIn();
           uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((b == '\r') || (b == '\n'))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -56,7 +61,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -65,7 +73,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -74,7 +85,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if (IndexInBuff() == 10)
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -92,7 +106,10 @@ void    DevicesPause(void)
           MonitorIn();
           uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((b == '\r') || (b == '\n'))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -101,7 +118,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -110,7 +130,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -119,7 +142,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if (IndexInBuff() == 10)
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -137,7 +163,10 @@ void    DevicesPause(void)
           MonitorIn();
           uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((b == '\r') || (b == '\n'))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -146,7 +175,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -155,7 +187,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -164,7 +199,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if (IndexInBuff() == 3)
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -182,7 +220,10 @@ void    DevicesPause(void)
           MonitorIn();
           uchar b = InBuff(IndexInBuff() - 1) & 0x7F;
           if ((b == '\r') || (b == '\n'))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -193,7 +234,10 @@ void    DevicesPause(void)
         {
           MonitorIn();
           if ((IndexInBuff() == 1) && ((InBuff(0) & 0x7F) == 0x06))
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }
@@ -201,7 +245,10 @@ void    DevicesPause(void)
         else if (GetCurr() == DEV_PROFILE_W2)
         {
           if (DoneProfileW())
+          {
+            InputGoodCheck();
             mpSerial[ibPort] = SER_GOODCHECK;
+          }
           else
             mpSerial[ibPort] = SER_BADCHECK;
         }

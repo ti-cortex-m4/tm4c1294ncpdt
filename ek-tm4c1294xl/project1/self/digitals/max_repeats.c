@@ -7,6 +7,7 @@ MAX_REPEATS!C
 #include "../main.h"
 #include "../nvram/cache.h"
 #include "../nvram/cache2.h"
+#include "skip_failure.h"
 #include "max_repeats.h"
 
 
@@ -20,17 +21,24 @@ cache const             chMaxRepeats = {MAX_REPEATS, &bMaxRepeats, sizeof(uchar)
 
 void    InitMaxRepeats(void)
 {
-  LoadCacheChar(&chMaxRepeats, 1, 20, bMINORREPEATS);
+  LoadCacheChar(&chMaxRepeats, 1, 20, bREPEATS);
 }
 
 
 void    ResetMaxRepeats(void)
 {
-  SaveCacheChar(&chMaxRepeats, bMINORREPEATS);
+  SaveCacheChar(&chMaxRepeats, bREPEATS);
 }
 
 
-uchar   GetMaxRepeats(void)
+
+uchar   MaxRepeats(void)
+{
+  return SkipFailure_IsReducedRepeats() ? SkipFailureRepeats() : bMaxRepeats;
+}
+
+
+uchar   MaxRepeatsFixed(void)
 {
   return bMaxRepeats;
 }

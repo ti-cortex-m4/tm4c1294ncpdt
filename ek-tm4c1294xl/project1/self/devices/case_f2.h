@@ -19,7 +19,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeF();                          
       SetCurr(DEV_TIME_F2);          
       break;
@@ -71,11 +71,11 @@
       break;
 
     case DEV_CONTROL_F2: 
-      if (++cbCorrects > bMINORREPEATS)          
+      if (++cbCorrects > bCORRECTS)          
         MakePause(DEV_POSTCORRECT_F2);
       else
       {
-        cbRepeat = GetMaxRepeats();                         
+        cbRepeat = MaxRepeats();                         
         QueryControlF();                          
         SetCurr(DEV_POSTCONTROL_F2);
       }
@@ -103,7 +103,7 @@
       cbIteration = 0;              
       InitEnergyF();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEnergyF();                          
       SetCurr(DEV_ENERGY_F2);
       break;
@@ -131,10 +131,10 @@
     case DEV_ERROR_F2: 
       mpcwOutput1[ibDig]++; Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else 
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdF();
         SetCurr(DEV_POSTERROR_F2);
       }
@@ -178,13 +178,13 @@
 
       if (i == bBLOCKS_F)
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryEnergyF();                          
         SetCurr(DEV_ENERGY_F2);
       }
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderF();                          
         SetCurr(DEV_HEADER_F2);
       }

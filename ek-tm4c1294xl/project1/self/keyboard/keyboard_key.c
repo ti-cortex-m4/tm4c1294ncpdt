@@ -156,6 +156,8 @@ KEYBOARD_KEY!C
 #include "devices/key_ext_4t_reset_custom.h"
 #include "devices/key_ext_5_flag.h"
 #include "devices/key_ext_6_flag.h"
+#include "digitals/key_skip_failure_enbl.h"
+#include "digitals/key_skip_failure_repeats.h"
 #include "time/key_correct2_flag.h"
 #include "time/key_correct3_flag.h"
 #include "time/key_correct3_value.h"
@@ -352,6 +354,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
+      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFailureEnbl(); break;
+      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -663,6 +667,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
+      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFailureEnbl(); break;
+      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;
@@ -894,6 +900,8 @@ void    Keyboard_Key(void)
       case wSET_MAX_SHUTDOWN:   key_SetMaxShutdown();   break;
       case wSET_CONTROL_W:      key_SetControlW();      break;
       case wSET_ENBL_DIAGRAM:   key_SetEnblDiagram();   break;
+      case wSET_SKIP_FAILURE_ENBL: key_SetSkipFailureEnbl(); break;
+      case wSET_SKIP_FAILURE_REPEATS: key_SetSkipFailureRepeats(); break;
 
       case wSET_REVIEW_FLAG:    key_SetReviewFlag();    break;
       case wSET_REVIEW_CAN:     key_SetReviewCan();     break;

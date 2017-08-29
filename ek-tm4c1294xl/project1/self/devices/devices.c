@@ -67,6 +67,7 @@ DEVICES.C
 #include "../digitals/dsbl_answer.h"
 #include "../digitals/limits.h"
 #include "../digitals/digitals_display.h"
+#include "../digitals/skip_failure.h"
 #include "../digitals/extended/extended_0.h"
 #include "../digitals/extended/extended_1.h"
 #include "../digitals/extended/extended_3.h"
@@ -283,7 +284,7 @@ void    RunDevices(void)
       break;
 
     case DEV_MODEM_POSTSTART:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemBaud(1);
       MakeLongPause(DEV_MODEM_BAUD,1);
@@ -318,7 +319,7 @@ void    RunDevices(void)
       break;
 
     case DEV_MODEM_POSTBAUD:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemCommon(1);
       MakeLongPause(DEV_MODEM_COMMON,1);
@@ -343,7 +344,7 @@ void    RunDevices(void)
           cbRepeat--;
           ShowRepeat();
 
-          if (cbRepeat == bMINORREPEATS-1)
+          if (cbRepeat == MaxRepeatsFixed()-1)
           {
             QueryModemCommon(1);
             MakeLongPause(DEV_MODEM_COMMON,1);
@@ -423,7 +424,7 @@ void    RunDevices(void)
       break;
 
     case DEV_MODEM_NORMAL:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemCustom();
       MakeLongPause(DEV_MODEM_CUSTOM,1);
@@ -459,7 +460,7 @@ void    RunDevices(void)
     case DEV_MODEM_POSTCUSTOM:
       InitWaitAnswer();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       fConnect = 1;
       QueryModemConnect();
@@ -502,21 +503,30 @@ void    RunDevices(void)
 
     case DEV_MODEM_POSTCONNECT:
 
+      SkipFailure_BeforeExtended();
+
       if (exExtended == EXT_PROFILE_30MIN)
       {
-        if (MakeExtended0() == 0) { MakePause(DEV_MODEM_STOP); break; }
-        MakeExtended1();
-        MakeExtended3(ibDig);
-        MakeExtended4();
-        MakeExtended5();
-        MakeExtended4T();
+        if (MakeExtended0() == 0) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+
+        MakeExtended1();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended3(ibDig); if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended4();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended5();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended4T();     if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
       }
 
       if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == false))
-        MakeExtended2();
+      {
+        MakeExtended2();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+      }
 
       if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == true))
-        MakeExtended2();
+      {
+        MakeExtended2();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+      }
+
+      SkipFailure_AfterExtended();
 
       HideCurrTime(1);
       MakePause(GetNext());
@@ -537,7 +547,7 @@ void    RunDevices(void)
       break;
 
     case DEV_MODEM_POSTSTOP:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemEscape();
       MakeLongPause(DEV_MODEM_ESCAPE,3);
@@ -599,7 +609,7 @@ void    RunDevices(void)
       break;
 
     case DEV_MODEM_POSTESCAPE:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemHookOff();
       MakeLongPause(DEV_MODEM_HOOKOFF,1);
@@ -671,7 +681,7 @@ void    RunDevices(void)
     case DEV_START_A2:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenA();
       SetCurr(DEV_OPENCANAL_A2);
       break;
@@ -702,7 +712,7 @@ void    RunDevices(void)
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeA();
       SetCurr(DEV_TIME_A2);
       break;
@@ -769,11 +779,11 @@ void    RunDevices(void)
 
 
     case DEV_CONTROL_A2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_A2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControlA();
         SetCurr(DEV_POSTCONTROL_A2);
       }
@@ -797,11 +807,11 @@ void    RunDevices(void)
       break;
 
     case DEV_MANAGE_A2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_A2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryManageA();
         SetCurr(DEV_POSTMANAGE_A2);
       }
@@ -828,7 +838,7 @@ void    RunDevices(void)
     case DEV_POSTCORRECT_A2:
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTopA();
       SetCurr(DEV_TOP_A2);
       break;
@@ -857,13 +867,13 @@ void    RunDevices(void)
       cbIteration = 0;
       if (diCurr.bDevice == 1)
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderA();
         SetCurr(DEV_HEADER_A2);
       }
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderA_Plus(bBLOCKS_A);
         SetCurr(DEV_HEADER_A2PLUS);
       }
@@ -895,10 +905,10 @@ void    RunDevices(void)
     case DEV_ERROR1_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdA();
         SetCurr(DEV_POSTERROR1_A2);
       }
@@ -934,7 +944,7 @@ void    RunDevices(void)
 
     case DEV_POSTHEADER_A2:
       cbIteration = 0;
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryDataA();
       SetCurr(DEV_DATA_A2);
       break;
@@ -962,10 +972,10 @@ void    RunDevices(void)
     case DEV_ERROR2_A2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdA();
         SetCurr(DEV_POSTERROR2_A2);
       }
@@ -1008,7 +1018,7 @@ void    RunDevices(void)
       {
         (iwMajor == 0) ? (iwMajor = 8192/3 - 1) : (iwMajor--);
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderA();
         SetCurr(DEV_HEADER_A2);
       }
@@ -1062,7 +1072,7 @@ void    RunDevices(void)
           DoneProfile();
         else
         {
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryHeaderA_Plus(bBLOCKS_A);
           SetCurr(DEV_HEADER_A2PLUS);
         }
@@ -1075,7 +1085,7 @@ void    RunDevices(void)
 #ifndef SKIP_A
 
     case DEV_START_A3:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
 
       QueryOpenA();
       SetCurr(DEV_OPENCANAL_A3);             
@@ -1100,7 +1110,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTOPENCANAL_A3:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEnergyA(0);
       SetCurr(DEV_ENERGY_A3);
       break;
@@ -1130,7 +1140,7 @@ void    RunDevices(void)
     case DEV_START_B2:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenB();
       SetCurr(DEV_OPENCANAL_B2);
       break;
@@ -1161,7 +1171,7 @@ void    RunDevices(void)
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeB();
       SetCurr(DEV_TIME_B2);
       break;
@@ -1232,11 +1242,11 @@ void    RunDevices(void)
 
 
     case DEV_CONTROL_B2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_B2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControlB();
         SetCurr(DEV_POSTCONTROL_B2);
       }
@@ -1260,11 +1270,11 @@ void    RunDevices(void)
       break;
 /*
     case DEV_MANAGE_B2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_B2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryManageB();
         SetCurr(DEV_POSTMANAGE_B2);
       }
@@ -1291,7 +1301,7 @@ void    RunDevices(void)
     case DEV_POSTCORRECT_B2:
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryVersionB();
       SetCurr(DEV_VERSION_B2);
       break;
@@ -1319,7 +1329,7 @@ void    RunDevices(void)
     case DEV_POSTVERSION_B2:
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTopB();
       SetCurr(DEV_TOP_B2);
       break;
@@ -1350,20 +1360,20 @@ void    RunDevices(void)
       {
         if (TestVersionB710())
         {
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryHeaderBNew();
           SetCurr(DEV_HEADER_B2NEXT);
         }
         else
         {
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryHeaderB();
           SetCurr(DEV_HEADER_B2);
         }
       }
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderB_Plus(bBLOCKS_B);
         SetCurr(DEV_HEADER_B2PLUS);
       }
@@ -1392,10 +1402,10 @@ void    RunDevices(void)
     case DEV_ERROR_B2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdB();
         SetCurr(DEV_POSTERROR_B2);
       }
@@ -1438,7 +1448,7 @@ void    RunDevices(void)
       {
         (wBaseCurr == 0) ? (wBaseCurr = 0xFFF0) : (wBaseCurr -= 0x0010);
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderB();
         SetCurr(DEV_HEADER_B2);
       }
@@ -1492,7 +1502,7 @@ void    RunDevices(void)
           DoneProfile();
         else
         {
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryHeaderB_Plus(bBLOCKS_B);
           SetCurr(DEV_HEADER_B2PLUS);
         }
@@ -1531,7 +1541,7 @@ void    RunDevices(void)
           DoneProfile();
         else
         {
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryHeaderBNew();
           SetCurr(DEV_HEADER_B2NEXT);
         }
@@ -1543,7 +1553,7 @@ void    RunDevices(void)
 #ifndef SKIP_B
 
     case DEV_START_B3:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenB();
       SetCurr(DEV_OPENCANAL_B3);             
       break;
@@ -1567,7 +1577,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTOPENCANAL_B3:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEnergyB(0);
       SetCurr(DEV_ENERGY_B3);
       break;
@@ -1595,7 +1605,7 @@ void    RunDevices(void)
 #ifndef SKIP_B
 
     case DEV_START_B312:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenB();
       SetCurr(DEV_OPENCANAL_B312);             
       break;
@@ -1619,7 +1629,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTOPENCANAL_B312:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEnergyB(0);
       SetCurr(DEV_ENERGY_B312);
       break;
@@ -1649,7 +1659,7 @@ void    RunDevices(void)
     case DEV_START_C2:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenC();
       SetCurr(DEV_OPENCANAL_C2);
       break;
@@ -1681,7 +1691,7 @@ void    RunDevices(void)
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeC();
       SetCurr(DEV_TIME_C2);
       break;
@@ -1734,7 +1744,7 @@ void    RunDevices(void)
         MakePause(DEV_POSTCORRECT_C2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControlC();
         SetCurr(DEV_POSTCONTROL_C2);
       }
@@ -1760,7 +1770,7 @@ void    RunDevices(void)
 
 
     case DEV_POSTCORRECT_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryVersionC();
       SetCurr(DEV_VERSION_C2);
       break;
@@ -1790,7 +1800,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTVERSION_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeC();
       SetCurr(DEV_VALUE_C2);
       break;
@@ -1845,7 +1855,7 @@ void    RunDevices(void)
 
 
     case DEV_DATA_6_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderC6();
       SetCurr(DEV_HEADER_6_C2);
       break;
@@ -1863,10 +1873,10 @@ void    RunDevices(void)
     case DEV_ERROR_6_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR_6_C2);
       }
@@ -1933,7 +1943,7 @@ void    RunDevices(void)
       break;
 
     case DEV_ID_6_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryIdC();
       SetCurr(DEV_POSTID_6_C2);
       break;
@@ -1958,7 +1968,7 @@ void    RunDevices(void)
 
 
     case DEV_DATA_1_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderC1();
       SetCurr(DEV_HEADER_1_C2);
       break;
@@ -1985,10 +1995,10 @@ void    RunDevices(void)
     case DEV_ERROR_1_C2:
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorProfile();
+      if (++cbIteration > bITERATIONS) ErrorProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdC();
         SetCurr(DEV_POSTERROR_1_C2);
       }
@@ -2086,7 +2096,7 @@ void    RunDevices(void)
         break;
 
     case DEV_ID_1_C2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryIdC();
       SetCurr(DEV_POSTID_1_C2);
       break;
@@ -2114,7 +2124,7 @@ void    RunDevices(void)
 #ifndef SKIP_C
 
     case DEV_START_C3:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenC();
       SetCurr(DEV_OPENCANAL_C3);             
       break;
@@ -2138,7 +2148,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTOPENCANAL_C3:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeC();                          
       SetCurr(DEV_TIME_C3);          
       break;
@@ -2164,7 +2174,7 @@ void    RunDevices(void)
     case DEV_POSTTIME_C3:
       tiOffs = ReadTimeC();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEnergyAbsC();
       SetCurr(DEV_ENERGY_C3);
       break;
@@ -2221,7 +2231,7 @@ void    RunDevices(void)
     case DEV_OPEN_K2:
       Clear(); ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_K2);
       break;
@@ -2249,7 +2259,7 @@ void    RunDevices(void)
     case DEV_POSTOPENCANAL_K2:
       Clear(); ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionK();
       SetCurr(DEV_OPTION_K2);
       break;
@@ -2279,7 +2289,7 @@ void    RunDevices(void)
     case DEV_POSTOPTION_K2:
       ShowPercent(52);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordK();
       SetCurr(DEV_PASSWORD_K2);
       break;
@@ -2311,7 +2321,7 @@ void    RunDevices(void)
     case DEV_PREVTIME_K2:
       ShowPercent(53);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeSpecK();
       SetCurr(DEV_TIME_K2);
       break;
@@ -2339,7 +2349,7 @@ void    RunDevices(void)
     case DEV_POSTTIME_K2:
       ShowPercent(54);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryDateSpecK();
       SetCurr(DEV_DATE_K2);
       break;
@@ -2388,7 +2398,7 @@ void    RunDevices(void)
 
 
     case DEV_CONTROL_K2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryControlK();
       SetCurr(DEV_POSTCONTROL_K2);
       break;
@@ -2418,7 +2428,7 @@ void    RunDevices(void)
       wBaseCurr = 0;
       tiDigPrev = tiCurr;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderK();
       SetCurr(DEV_HEADER_K2);
       break;
@@ -2475,7 +2485,7 @@ void    RunDevices(void)
     case DEV_POSTHEADER_K2:
       if (++ibMinor < ibMinorMax)
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderK();
         SetCurr(DEV_HEADER_K2);
       }
@@ -2494,7 +2504,7 @@ void    RunDevices(void)
         DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderK();
         SetCurr(DEV_HEADER_K2);
       }
@@ -2508,7 +2518,7 @@ void    RunDevices(void)
       ShowPercent(50);
       ibMinor = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_K3);
       break;
@@ -2533,7 +2543,7 @@ void    RunDevices(void)
     case DEV_POSTOPENCANAL_K3:
       Clear(); ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionK();
       SetCurr(DEV_OPTION_K3);
       break;
@@ -2558,7 +2568,7 @@ void    RunDevices(void)
     case DEV_POSTOPTION_K3:
       ShowPercent(52+ibMinor);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEnergySpecK(ibMinor);
       SetCurr(DEV_ENERGY_K3);
       break;
@@ -2602,7 +2612,7 @@ void    RunDevices(void)
     case DEV_START_P2:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenP();
       SetCurr(DEV_OPENCANAL_P2);
     break;
@@ -2629,7 +2639,7 @@ void    RunDevices(void)
     case DEV_POSTOPENCANAL_P2:
       ShowPercent(60);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryModeP();
       SetCurr(DEV_MODE_P2);
     break;
@@ -2656,7 +2666,7 @@ void    RunDevices(void)
     case DEV_POSTMODE_P2:
       ShowPercent(70);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordP();
       SetCurr(DEV_PASSWORD_P2);
     break;
@@ -2683,7 +2693,7 @@ void    RunDevices(void)
     case DEV_POSTPASSWORD_P2:
       ShowPercent(80);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeP();
       SetCurr(DEV_TIME_P2);
       break;
@@ -2733,7 +2743,7 @@ void    RunDevices(void)
           Clear(); sprintf(szLo+1,"коррекция: -%u с", iwMajor); DelayInf();
           iwMajor |= 0x8000;
 
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryCorrectP();
           SetCurr(DEV_CORRECT_P2);
         }
@@ -2747,7 +2757,7 @@ void    RunDevices(void)
 
           Clear(); sprintf(szLo+1,"коррекция: +%u с", iwMajor); DelayInf();
 
-          cbRepeat = GetMaxRepeats();
+          cbRepeat = MaxRepeats();
           QueryCorrectP();
           SetCurr(DEV_CORRECT_P2);
         }
@@ -2778,7 +2788,7 @@ void    RunDevices(void)
     case DEV_POSTCORRECT_P2:
       ShowPercent(90);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryRegisterP();
       SetCurr(DEV_REGISTER_P2);
       break;
@@ -2809,7 +2819,7 @@ void    RunDevices(void)
     case DEV_POSTREGISTER_P2:
       Setup1P();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QuerySetValueP(); // возвращает (ERR5), если прошло более 6 минут после команды Р2
       SetCurr(DEV_SETVALUE_P2);
       break;
@@ -2834,7 +2844,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTSETVALUE_P2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryGetValueP();
       SetCurr(DEV_GETVALUE_P2);
       break;
@@ -2860,7 +2870,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTGETVALUE_P2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryProfileP();
       SetCurr(DEV_PROFILE_P2);
       break;
@@ -2905,13 +2915,13 @@ void    RunDevices(void)
 
             if (cwSecondLockoutP > 60)
             {
-              cbRepeat = GetMaxRepeats();
+              cbRepeat = MaxRepeats();
               QueryRepasswordP();
               SetCurr(DEV_REPASSWORD_P2);
             }
             else
             {
-              cbRepeat = GetMaxRepeats();
+              cbRepeat = MaxRepeats();
               QuerySetValueP();
               SetCurr(DEV_SETVALUE_P2);
             }
@@ -2920,7 +2930,7 @@ void    RunDevices(void)
       }
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryProfileP();
         SetCurr(DEV_PROFILE_P2);
       }
@@ -2946,7 +2956,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTREPASSWORD_P2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QuerySetValueP();
       SetCurr(DEV_SETVALUE_P2);
       break;
@@ -2958,7 +2968,7 @@ void    RunDevices(void)
     case DEV_START_P3:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenP();
       SetCurr(DEV_OPENCANAL_P3);
     break;
@@ -2985,7 +2995,7 @@ void    RunDevices(void)
     case DEV_POSTOPENCANAL_P3:
       ShowPercent(60);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryModeP();
       SetCurr(DEV_MODE_P3);
     break;
@@ -3012,7 +3022,7 @@ void    RunDevices(void)
     case DEV_POSTMODE_P3:
       ShowPercent(70);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordP();
       SetCurr(DEV_PASSWORD_P3);
     break;
@@ -3039,7 +3049,7 @@ void    RunDevices(void)
     case DEV_POSTPASSWORD_P3:
       ShowPercent(80);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryRegisterP();
       SetCurr(DEV_REGISTER_P3);
       break;
@@ -3067,7 +3077,7 @@ void    RunDevices(void)
     case DEV_POSTREGISTER_P3:
       ShowPercent(90);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbsP(0);
       SetCurr(DEV_ENERGY0_P3);
       break;
@@ -3095,7 +3105,7 @@ void    RunDevices(void)
     case DEV_POSTENERGY0_P3:
       ShowPercent(91);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbsP(1);
       SetCurr(DEV_ENERGY1_P3);
       break;
@@ -3143,7 +3153,7 @@ void    RunDevices(void)
     case DEV_OPEN_Q2:
       Clear(); ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_Q2);
       break;
@@ -3171,7 +3181,7 @@ void    RunDevices(void)
     case DEV_POSTOPENCANAL_Q2:
       Clear(); ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionQ();
       SetCurr(DEV_OPTION_Q2);
       break;
@@ -3201,7 +3211,7 @@ void    RunDevices(void)
     case DEV_POSTOPTION_Q2:
       ShowPercent(52);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordK();
       SetCurr(DEV_PASSWORD_Q2);
       break;
@@ -3233,7 +3243,7 @@ void    RunDevices(void)
     case DEV_PREVTIME_Q2:
       ShowPercent(53);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeSpecK();
       SetCurr(DEV_TIME_Q2);
       break;
@@ -3261,7 +3271,7 @@ void    RunDevices(void)
     case DEV_POSTTIME_Q2:
       ShowPercent(54);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryDateSpecK();
       SetCurr(DEV_DATE_Q2);
       break;
@@ -3310,7 +3320,7 @@ void    RunDevices(void)
 
 
     case DEV_CONTROL_Q2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryControlK();
       SetCurr(DEV_POSTCONTROL_Q2);
       break;
@@ -3339,7 +3349,7 @@ void    RunDevices(void)
 
       InitHeaderQ();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderQ();
       SetCurr(DEV_HEADER_Q2);
       break;
@@ -3396,7 +3406,7 @@ void    RunDevices(void)
     case DEV_POSTHEADER_Q2:
       if (++ibLineQ < MAX_LINE_Q)
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderQ();
         SetCurr(DEV_HEADER_Q2);
       }
@@ -3415,7 +3425,7 @@ void    RunDevices(void)
         DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderQ();
         SetCurr(DEV_HEADER_Q2);
       }
@@ -3429,7 +3439,7 @@ void    RunDevices(void)
     case DEV_START_Q3:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_Q3);
       break;
@@ -3454,7 +3464,7 @@ void    RunDevices(void)
     case DEV_POSTOPENCANAL_Q3:
       Clear(); ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionQ();
       SetCurr(DEV_OPTION_Q3);
       break;
@@ -3479,7 +3489,7 @@ void    RunDevices(void)
     case DEV_POSTOPTION_Q3:
       ShowPercent(52);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEnergySpecQ();
       SetCurr(DEV_ENERGY_Q3);
       break;
@@ -3509,7 +3519,7 @@ void    RunDevices(void)
 #ifndef SKIP_S
 
     case DEV_START_S2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryVersionS();
       SetCurr(DEV_VERSION_S2);
       break;
@@ -3552,7 +3562,7 @@ void    RunDevices(void)
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeS();
       SetCurr(DEV_TIME_S2);
       break;
@@ -3600,11 +3610,11 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_S2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_S2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControlS(tiCurr);
         SetCurr(DEV_POSTOPENCANAL_S2);
       }
@@ -3614,7 +3624,7 @@ void    RunDevices(void)
     case DEV_POSTCORRECT_S2:
       Clear(); ShowPercent(25);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryConfigS();
       SetCurr(DEV_CONFIG_S2);
       break;
@@ -3642,7 +3652,7 @@ void    RunDevices(void)
     case DEV_POSTCONFIG_S2:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeS();
       SetCurr(DEV_VALUE_S2);
       break;
@@ -3673,7 +3683,7 @@ void    RunDevices(void)
       ShowPercent(75);
       InitHeaderS();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderS();
       SetCurr(DEV_HEADER_S2);
       break;
@@ -3703,7 +3713,7 @@ void    RunDevices(void)
       break;
 
     case DEV_DATA_S2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderS();
       SetCurr(DEV_HEADER_S2);
       break;
@@ -3715,7 +3725,7 @@ void    RunDevices(void)
     case DEV_START_S3:
       ShowPercent(25);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryConfigS();
       SetCurr(DEV_CONFIG_S3);
       break;
@@ -3743,7 +3753,7 @@ void    RunDevices(void)
     case DEV_POSTCONFIG_S3:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngMonS(0);
       SetCurr(DEV_ENERGY_S3);
       break;
@@ -3794,7 +3804,7 @@ void    RunDevices(void)
     case DEV_OPEN_U2:
       Clear(); ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_U2);
       break;
@@ -3822,7 +3832,7 @@ void    RunDevices(void)
     case DEV_POSTOPENCANAL_U2:
       Clear(); ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionU();
       SetCurr(DEV_OPTION_U2);
       break;
@@ -3852,7 +3862,7 @@ void    RunDevices(void)
     case DEV_POSTOPTION_U2:
       ShowPercent(52);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordK();
       SetCurr(DEV_PASSWORD_U2);
       break;
@@ -3884,7 +3894,7 @@ void    RunDevices(void)
     case DEV_PREVTIME_U2:
       ShowPercent(53);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeSpecK();
       SetCurr(DEV_TIME_U2);
       break;
@@ -3912,7 +3922,7 @@ void    RunDevices(void)
     case DEV_POSTTIME_U2:
       ShowPercent(54);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryDateSpecK();
       SetCurr(DEV_DATE_U2);
       break;
@@ -3961,7 +3971,7 @@ void    RunDevices(void)
 
 
     case DEV_CONTROL_U2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryControlK();
       SetCurr(DEV_POSTCONTROL_U2);
       break;
@@ -4006,7 +4016,7 @@ void    RunDevices(void)
         ibLineU++;
       }
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderU();
       SetCurr(DEV_HEADER_U2);
       break;
@@ -4067,7 +4077,7 @@ void    RunDevices(void)
     case DEV_POSTHEADER_U2:
       if (++ibLineU < bMaxLineU)
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderU();
         SetCurr(DEV_HEADER_U2);
       }
@@ -4093,7 +4103,7 @@ void    RunDevices(void)
           ibLineU++;
         }
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderU();
         SetCurr(DEV_HEADER_U2);
       }
@@ -4106,7 +4116,7 @@ void    RunDevices(void)
     case DEV_START_U3:
       Clear(); ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_U3);
       break;
@@ -4131,7 +4141,7 @@ void    RunDevices(void)
     case DEV_POSTOPENCANAL_U3:
       Clear(); ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionU();
       SetCurr(DEV_OPTION_U3);
       break;
@@ -4163,7 +4173,7 @@ void    RunDevices(void)
         ibLineU++;
       }
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngSpecU(ibLineU);
       SetCurr(DEV_ENERGY_U3);
       break;
@@ -4218,7 +4228,7 @@ void    RunDevices(void)
         ibLineU++;
       }
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderU_Plc();
       SetCurr(DEV_HEADER_U4);
       break;
@@ -4279,7 +4289,7 @@ void    RunDevices(void)
     case DEV_POSTHEADER_U4:
       if (++ibLineU < bMaxLineU)
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderU_Plc();
         SetCurr(DEV_HEADER_U4);
       }
@@ -4305,7 +4315,7 @@ void    RunDevices(void)
           ibLineU++;
         }
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderU_Plc();
         SetCurr(DEV_HEADER_U4);
       }
@@ -4316,7 +4326,7 @@ void    RunDevices(void)
 #ifndef SKIP_V
 
     case DEV_START_V2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryVersionV();
       SetCurr(DEV_VERSION_V2);
       break;
@@ -4365,7 +4375,7 @@ void    RunDevices(void)
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeV();
       SetCurr(DEV_TIME_V2);
       break;
@@ -4413,11 +4423,11 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_V2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_V2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControlV(tiCurr);
         SetCurr(DEV_POSTOPENCANAL_V2);
       }
@@ -4427,7 +4437,7 @@ void    RunDevices(void)
     case DEV_POSTCORRECT_V2:
       Clear(); ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeV();
       SetCurr(DEV_VALUE_V2);
       break;
@@ -4457,7 +4467,7 @@ void    RunDevices(void)
       ShowPercent(75);
       InitHeaderV();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderV();
       SetCurr(DEV_HEADER_V2);
       break;
@@ -4487,7 +4497,7 @@ void    RunDevices(void)
       break;
 
     case DEV_DATA_V2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderV();
       SetCurr(DEV_HEADER_V2);
       break;
@@ -4497,7 +4507,7 @@ void    RunDevices(void)
 #ifndef SKIP_V
 
     case DEV_START_V3:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbsV();
       SetCurr(DEV_ENERGY_V3);
       break;
@@ -4534,7 +4544,7 @@ void    RunDevices(void)
 
 
     case DEV_PREVOPENCANAL_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenW();
       SetCurr(DEV_OPENCANAL_W2);
       break;
@@ -4560,7 +4570,7 @@ void    RunDevices(void)
       Clear();
       ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionW();
       SetCurr(DEV_OPTION_W2);
       break;
@@ -4586,7 +4596,7 @@ void    RunDevices(void)
     case DEV_POSTOPTION_W2:
       ShowPercent(52);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordW();
       SetCurr(DEV_PASSWORD_W2);
       break;
@@ -4612,7 +4622,7 @@ void    RunDevices(void)
 
 
     case DEV_PREVTIME_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeW();
       SetCurr(DEV_TIME_W2);
       break;
@@ -4668,7 +4678,7 @@ void    RunDevices(void)
 
 
     case DEV_GETCORRECT_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryGetCorrectW();
       SetCurr(DEV_POSTGETCORRECT_W2);
       break;
@@ -4694,7 +4704,7 @@ void    RunDevices(void)
       break;
 
     case DEV_SETCORRECT_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QuerySetCorrectW(dwCorrectW);
       SetCurr(DEV_POSTSETCORRECT_W2);
       break;
@@ -4718,7 +4728,7 @@ void    RunDevices(void)
 
 
     case DEV_CONTROL_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryControlW(tiCurr);
       SetCurr(DEV_POSTCONTROL_W2);
       break;
@@ -4749,7 +4759,7 @@ void    RunDevices(void)
       break;
 
     case DEV_PREVPROFILE_W2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryProfileW();
       SetCurr(DEV_PROFILE_W2);
       break;
@@ -4795,7 +4805,7 @@ void    RunDevices(void)
     case DEV_START_W3:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenW();
       SetCurr(DEV_OPENCANAL_W3);
       break;
@@ -4820,7 +4830,7 @@ void    RunDevices(void)
     case DEV_POSTOPENCANAL_W3:
       ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionW();
       SetCurr(DEV_OPTION_W3);
       break;
@@ -4848,7 +4858,7 @@ void    RunDevices(void)
     case DEV_POSTOPTION_W3:
       ShowPercent(52+ibLineW);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbsW_Current(ibLineW);
       SetCurr(DEV_ENERGY_W3);
       break;
@@ -4885,7 +4895,7 @@ void    RunDevices(void)
     case DEV_START_31P:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpen31();
       SetCurr(DEV_OPENCANAL_31P);
       break;
@@ -4918,7 +4928,7 @@ void    RunDevices(void)
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTime31();
       SetCurr(DEV_TIME_31P);
       break;
@@ -4966,11 +4976,11 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_31P:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_31P);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControl31(tiCurr);
         SetCurr(DEV_POSTCONTROL_31P);
       }
@@ -4998,7 +5008,7 @@ void    RunDevices(void)
     case DEV_POSTCORRECT_31P:
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTop31();
       SetCurr(DEV_TOP_31P);
       break;
@@ -5024,7 +5034,7 @@ void    RunDevices(void)
       if (ReadTop31() == false) DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader31();
         SetCurr(DEV_HEADER_31P);
       }
@@ -5054,7 +5064,7 @@ void    RunDevices(void)
         DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader31();
         SetCurr(DEV_HEADER_31P);
       }
@@ -5064,7 +5074,7 @@ void    RunDevices(void)
 #ifndef SKIP_31
 
     case DEV_START_31C:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpen31();
       SetCurr(DEV_OPENCANAL_31C);
       break;
@@ -5092,7 +5102,7 @@ void    RunDevices(void)
       break;
 
     case DEV_POSTOPENCANAL_31C:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbs31();
       SetCurr(DEV_ENERGY_31C);
       break;
@@ -5120,7 +5130,7 @@ void    RunDevices(void)
     case DEV_START_32P:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpen32();
       SetCurr(DEV_OPENCANAL_32P);
       break;
@@ -5153,7 +5163,7 @@ void    RunDevices(void)
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTime32();
       SetCurr(DEV_TIME_32P);
       break;
@@ -5201,11 +5211,11 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_32P:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_32P);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControl32(tiCurr);
         SetCurr(DEV_POSTCONTROL_32P);
       }
@@ -5233,7 +5243,7 @@ void    RunDevices(void)
     case DEV_POSTCORRECT_32P:
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTop32();
       SetCurr(DEV_TOP_32P);
       break;
@@ -5259,7 +5269,7 @@ void    RunDevices(void)
       if (ReadTop32() == false) DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader32();
         SetCurr(DEV_HEADER_32P);
       }
@@ -5289,7 +5299,7 @@ void    RunDevices(void)
         DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader32();
         SetCurr(DEV_HEADER_32P);
       }
@@ -5301,7 +5311,7 @@ void    RunDevices(void)
     case DEV_START_33P:
       cbCorrects = 0;
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpen33();
       SetCurr(DEV_OPENCANAL_33P);
       break;
@@ -5334,7 +5344,7 @@ void    RunDevices(void)
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTime33();
       SetCurr(DEV_TIME_33P);
       break;
@@ -5382,11 +5392,11 @@ void    RunDevices(void)
       break;
 
     case DEV_CONTROL_33P:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_33P);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControl33(tiCurr);
         SetCurr(DEV_POSTCONTROL_33P);
       }
@@ -5414,7 +5424,7 @@ void    RunDevices(void)
     case DEV_POSTCORRECT_33P:
       Clear();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTop33();
       SetCurr(DEV_TOP_33P);
       break;
@@ -5440,7 +5450,7 @@ void    RunDevices(void)
       if (ReadTop33() == false) DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader33();
         SetCurr(DEV_HEADER_33P);
       }
@@ -5470,7 +5480,7 @@ void    RunDevices(void)
         DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeader33();
         SetCurr(DEV_HEADER_33P);
       }
