@@ -4,7 +4,7 @@
     case DEV_START_B4:
       SetupCheckup();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenB();
       SetCurr(DEV_OPENCANAL_B4);             
       break;
@@ -33,7 +33,7 @@
 
 
     case DEV_PREVTOP1_B4:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTopB();                          
       SetCurr(DEV_TOP1_B4);
       break;
@@ -67,7 +67,7 @@
     case DEV_PREVHEADER1_B4:
       cbIteration = 0;
 
-      cbRepeat = GetMaxRepeats();     
+      cbRepeat = MaxRepeats();     
       QueryHeaderB();
       SetCurr(DEV_HEADER1_B4);
       break;
@@ -85,10 +85,10 @@
     case DEV_ERROR4_B4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bITERATIONS) ErrorCheckup();
       else 
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdB();
         SetCurr(DEV_POSTERROR4_B4);
       }
@@ -151,7 +151,7 @@
 
         cbIteration = 0;
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryEnergyPrevDayB();                          
         SetCurr(DEV_ENERGY_DAY_B4);          
       }
@@ -170,10 +170,10 @@
     case DEV_ERROR1_B4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bITERATIONS) ErrorCheckup();
       else 
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdB();
         SetCurr(DEV_POSTERROR1_B4);
       }
@@ -241,7 +241,7 @@
 
         cbIteration = 0;
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryEnergyPrevMonB(ibCheckupMon);
         SetCurr(DEV_ENERGY_MON_B4);          
       }
@@ -260,10 +260,10 @@
     case DEV_ERROR3_B4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bITERATIONS) ErrorCheckup();
       else 
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdB();
         SetCurr(DEV_POSTERROR3_B4);
       }
@@ -308,7 +308,7 @@
 
         cbIteration = 0;
 
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryEnergyPrevMonB(ibCheckupMon);
         SetCurr(DEV_ENERGY_MON_B4);          
       }
@@ -350,7 +350,7 @@
 
 
     case DEV_PREVTOP2_B4:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTopB();                          
       SetCurr(DEV_TOP2_B4);
       break;
@@ -385,7 +385,7 @@
     case DEV_PREVHEADER2_B4:
       cbIteration = 0;
 
-      cbRepeat = GetMaxRepeats();     
+      cbRepeat = MaxRepeats();     
       QueryHeaderB();
       SetCurr(DEV_HEADER2_B4);
       break;
@@ -403,10 +403,10 @@
     case DEV_ERROR2_B4: 
       mpcwOutput1[ibDig]++; //Beep();
 
-      if (++cbIteration > bMINORREPEATS) ErrorCheckup();
+      if (++cbIteration > bITERATIONS) ErrorCheckup();
       else 
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryIdB();
         SetCurr(DEV_POSTERROR2_B4);
       }

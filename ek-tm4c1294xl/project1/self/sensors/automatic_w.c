@@ -11,6 +11,7 @@ AUTOMATIC_W!C
 #include "../serial/ports.h"
 #include "../serial/ports_devices.h"
 #include "../serial/monitor.h"
+#include "../serial/input_wrapper.h"
 #include "../devices/devices.h"
 #include "../sensors/unpack_w.h"
 #include "../digitals/wait_answer.h"
@@ -69,6 +70,7 @@ bool    ChecksumW(void)
 
 serial  InputW(void)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -85,7 +87,10 @@ serial  InputW(void)
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
       if (ChecksumW())
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
 
@@ -104,7 +109,7 @@ serial  InputW(void)
 time2   QueryTimeW_Full(uchar  bPercent)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryCloseW();
     QueryTimeW();
@@ -113,7 +118,7 @@ time2   QueryTimeW_Full(uchar  bPercent)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (r == bMINORREPEATS) return GetTime2Error();
+  if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   QueryCloseW();
@@ -125,7 +130,7 @@ time2   QueryTimeW_Full(uchar  bPercent)
 double2 QueryTransW_Full(uchar  bPercent)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryCloseW();
     QueryTransW(0);
@@ -134,14 +139,14 @@ double2 QueryTransW_Full(uchar  bPercent)
     if (fKey == true) return GetDouble2Error();
   }
 
-  if (r == bMINORREPEATS) return GetDouble2Error();
+  if (r == MaxRepeats()) return GetDouble2Error();
   ShowPercent(bPercent+0);
 
   InitPop(1);
   double dbTransI = PopDoubleW();
 
 
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryCloseW();
     QueryTransW(1);
@@ -150,7 +155,7 @@ double2 QueryTransW_Full(uchar  bPercent)
     if (fKey == true) return GetDouble2Error();
   }
 
-  if (r == bMINORREPEATS) return GetDouble2Error();
+  if (r == MaxRepeats()) return GetDouble2Error();
   ShowPercent(bPercent+1);
 
   InitPop(1);
@@ -177,7 +182,7 @@ bool    AutomaticW(void)
   Clear();
 
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     QueryCloseW();
     QueryTypeW();
@@ -186,7 +191,7 @@ bool    AutomaticW(void)
     if (fKey == true) return false;
   }
 
-  if (r == bMINORREPEATS) return false;
+  if (r == MaxRepeats()) return false;
   ReadTypeW();
 
   QueryCloseW();
@@ -205,7 +210,7 @@ bool    QueryEngAbsW_Full(uchar  bPercent)
   for (i=0; i<MAX_LINE_W; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseW();
       QueryEngAbsW(i);
@@ -214,7 +219,7 @@ bool    QueryEngAbsW_Full(uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     ShowPercent(bPercent);
 
     ReadEngW(i);
@@ -232,7 +237,7 @@ bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
   for (i=0; i<MAX_LINE_W; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseW();
       QueryEngMonW(i,bTime);
@@ -248,7 +253,7 @@ bool    QueryEngMonW_Full(uchar  bTime, uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     ShowPercent(bPercent+i);
 
     ReadEngW(i);
@@ -266,7 +271,7 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
   for (i=0; i<MAX_LINE_W; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseW();
       QueryEngDayW(i,bTime);
@@ -282,7 +287,7 @@ bool    QueryEngDayW_Full(uchar  bTime, uchar  bPercent)
       if (fKey == true) return false;
     }
 
-    if (r == bMINORREPEATS) return false;
+    if (r == MaxRepeats()) return false;
     ShowPercent(bPercent+i);
 
     ReadEngW(i);
@@ -300,7 +305,7 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
   for (i=0; i<MAX_LINE_W; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseW();
       QueryEngMonTrfW(i,bTime);
@@ -316,7 +321,7 @@ status  QueryEngMonTrfW_Full(uchar  bTime, uchar  bPercent, uchar  ibTrf)
       if (fKey == true) return ST_OK;
     }
 
-    if (r == bMINORREPEATS) return ST_OK;
+    if (r == MaxRepeats()) return ST_OK;
     ShowPercent(bPercent+i);
 
     ReadEngTrfW(i,ibTrf);

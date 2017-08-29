@@ -24,7 +24,7 @@
       break;
 
     case DEV_MODEM_POSTSTART:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemBaud(1);
       MakeLongPause(DEV_MODEM_BAUD,1);
@@ -59,7 +59,7 @@
       break;
 
     case DEV_MODEM_POSTBAUD:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemCommon(1);
       MakeLongPause(DEV_MODEM_COMMON,1);
@@ -84,7 +84,7 @@
           cbRepeat--;
           ShowRepeat();
 
-          if (cbRepeat == bMINORREPEATS-1)
+          if (cbRepeat == MaxRepeatsFixed()-1)
           {
             QueryModemCommon(1);
             MakeLongPause(DEV_MODEM_COMMON,1);
@@ -164,7 +164,7 @@
       break;
 
     case DEV_MODEM_NORMAL:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemCustom();
       MakeLongPause(DEV_MODEM_CUSTOM,1);
@@ -200,7 +200,7 @@
     case DEV_MODEM_POSTCUSTOM:
       InitWaitAnswer();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       fConnect = 1;
       QueryModemConnect();
@@ -243,21 +243,30 @@
 
     case DEV_MODEM_POSTCONNECT:
 
+      SkipFailure_BeforeExtended();
+
       if (exExtended == EXT_PROFILE_30MIN)
       {
-        if (MakeExtended0() == 0) { MakePause(DEV_MODEM_STOP); break; }
-        MakeExtended1();
-        MakeExtended3(ibDig);
-        MakeExtended4();
-        MakeExtended5();
-        MakeExtended4T();
+        if (MakeExtended0() == 0) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+
+        MakeExtended1();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended3(ibDig); if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended4();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended5();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended4T();     if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
       }
 
       if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == false))
-        MakeExtended2();
+      {
+        MakeExtended2();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+      }
 
       if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == true))
-        MakeExtended2();
+      {
+        MakeExtended2();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+      }
+
+      SkipFailure_AfterExtended();
 
       HideCurrTime(1);
       MakePause(GetNext());
@@ -278,7 +287,7 @@
       break;
 
     case DEV_MODEM_POSTSTOP:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemEscape();
       MakeLongPause(DEV_MODEM_ESCAPE,3);
@@ -340,7 +349,7 @@
       break;
 
     case DEV_MODEM_POSTESCAPE:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeatsFixed();
 
       QueryModemHookOff();
       MakeLongPause(DEV_MODEM_HOOKOFF,1);

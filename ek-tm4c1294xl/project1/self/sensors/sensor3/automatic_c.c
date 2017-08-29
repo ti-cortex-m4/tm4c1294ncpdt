@@ -15,6 +15,7 @@ AUTOMATIC_C!C
 #include "../../devices/devices.h"
 #include "../../digitals/digitals_messages.h"
 #include "../../digitals/serials.h"
+#include "../../digitals/max_repeats.h"
 #include "../automatic1.h"
 #include "device_c.h"
 
@@ -25,7 +26,7 @@ AUTOMATIC_C!C
 bool    QueryIdC_Full(void)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryIdC();
@@ -38,7 +39,7 @@ bool    QueryIdC_Full(void)
   }
 
   Clear();
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
 
   return(1);
 }
@@ -47,7 +48,7 @@ bool    QueryIdC_Full(void)
 bool    QueryEnergyDayC_Full2(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyDayC(bTime);
@@ -58,7 +59,7 @@ bool    QueryEnergyDayC_Full2(uchar  bTime, uchar  bPercent)
     if (QueryIdC_Full() == 0) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   ReadEnergyC();
@@ -69,7 +70,7 @@ bool    QueryEnergyDayC_Full2(uchar  bTime, uchar  bPercent)
 bool    QueryEnergyMonC_Full2(uchar  bTime, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyMonC(bTime);
@@ -80,7 +81,7 @@ bool    QueryEnergyMonC_Full2(uchar  bTime, uchar  bPercent)
     if (QueryIdC_Full() == 0) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   ReadEnergyC();
@@ -91,7 +92,7 @@ bool    QueryEnergyMonC_Full2(uchar  bTime, uchar  bPercent)
 bool    QueryEnergyAbsC_Full2(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyAbsC();
@@ -102,7 +103,7 @@ bool    QueryEnergyAbsC_Full2(uchar  bPercent)
     if (QueryIdC_Full() == 0) return false;
   }
 
-  if (i == bMINORREPEATS) return false;
+  if (i == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   ReadEnergyC();
@@ -113,7 +114,7 @@ bool    QueryEnergyAbsC_Full2(uchar  bPercent)
 time2   QueryTimeC_Full(void)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeC();
@@ -122,7 +123,7 @@ time2   QueryTimeC_Full(void)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
 
   return GetTime2(ReadTimeC(), true);
 }
@@ -132,7 +133,7 @@ time2   QueryTimeC_Full(void)
 ulong2  QuerySerialC_Full(uchar  ibDig)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QuerySerialC();
@@ -141,7 +142,7 @@ ulong2  QuerySerialC_Full(uchar  ibDig)
     if (fKey == true) return GetLong2Error();
   }
 
-  if (r == bMINORREPEATS) return GetLong2Error();
+  if (r == MaxRepeats()) return GetLong2Error();
 
   ulong dwSerial = ReadSerialC();
   ProcessSerials(ibDig, dwSerial);

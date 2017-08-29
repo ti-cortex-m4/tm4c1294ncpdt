@@ -19,7 +19,7 @@
     case DEV_OPEN_Q2:
       Clear(); ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenK();
       SetCurr(DEV_OPENCANAL_Q2);
       break;
@@ -47,7 +47,7 @@
     case DEV_POSTOPENCANAL_Q2:
       Clear(); ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionQ();
       SetCurr(DEV_OPTION_Q2);
       break;
@@ -77,7 +77,7 @@
     case DEV_POSTOPTION_Q2:
       ShowPercent(52);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryPasswordK();
       SetCurr(DEV_PASSWORD_Q2);
       break;
@@ -109,7 +109,7 @@
     case DEV_PREVTIME_Q2:
       ShowPercent(53);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeSpecK();
       SetCurr(DEV_TIME_Q2);
       break;
@@ -137,7 +137,7 @@
     case DEV_POSTTIME_Q2:
       ShowPercent(54);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryDateSpecK();
       SetCurr(DEV_DATE_Q2);
       break;
@@ -186,7 +186,7 @@
 
 
     case DEV_CONTROL_Q2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryControlK();
       SetCurr(DEV_POSTCONTROL_Q2);
       break;
@@ -215,7 +215,7 @@
 
       InitHeaderQ();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderQ();
       SetCurr(DEV_HEADER_Q2);
       break;
@@ -272,7 +272,7 @@
     case DEV_POSTHEADER_Q2:
       if (++ibLineQ < MAX_LINE_Q)
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderQ();
         SetCurr(DEV_HEADER_Q2);
       }
@@ -291,7 +291,7 @@
         DoneProfile();
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryHeaderQ();
         SetCurr(DEV_HEADER_Q2);
       }

@@ -36,6 +36,7 @@ AUTOMATIC2!C
 #include "automatic_b.h"
 #include "sensor3/automatic_c.h"
 #include "automatic_k.h"
+#include "sensor21/input_p.h"
 #include "sensor21/automatic_p.h"
 #include "automatic_q.h"
 #include "automatic_s.h"
@@ -175,7 +176,7 @@ uchar   i;
     if (OpenDeviceE() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     InitPush(0);
     PushChar(0x1B);
@@ -187,7 +188,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(85);
 
 
@@ -223,7 +224,7 @@ bool    ReadCntCurrF(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryBreakF();
     QueryRealExtendedF(bEXT_GET_ESC_S_VALUE);
@@ -232,7 +233,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(100);
 
 
@@ -256,7 +257,7 @@ uchar   i;
   if (OpenDeviceG() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEnergyAbsG();                      // чтение накопленной энергии
@@ -267,7 +268,7 @@ uchar   i;
       break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(100);
 
 
@@ -300,7 +301,7 @@ uchar   i,j;
   {
     if (fKey == true) return(0);
 
-    for (i=0; i<bMINORREPEATS; i++)
+    for (i=0; i<MaxRepeats(); i++)
     {
       DelayOff();
       QueryEnergyAbsH(j);
@@ -310,7 +311,7 @@ uchar   i,j;
       if (CodInput() != SER_GOODCHECK) continue; else break;
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (i == MaxRepeats()) return(0);
     else
     {
       if (ChecksumH(14) == 0) { sprintf(szLo," ошибка CRC: H5 "); Delay(1000); return(0); }
@@ -363,7 +364,7 @@ uchar   i,j;
   {
     if (fKey == true) return(0);
 
-    for (i=0; i<bMINORREPEATS; i++)
+    for (i=0; i<MaxRepeats(); i++)
     {
       DelayOff();
       QueryEnergyAbsI(j);
@@ -376,7 +377,7 @@ uchar   i,j;
         break;
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (i == MaxRepeats()) return(0);
     else
     {
       ReadEnergyI();
@@ -412,7 +413,7 @@ double2 ReadCntCurrK(uchar  bMaxLines)
   for (i=0; i<bMaxLines; i++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       QueryCloseK();
       QueryEnergyAbsK(i);
@@ -421,7 +422,7 @@ double2 ReadCntCurrK(uchar  bMaxLines)
       if (fKey == true) return GetDouble2Error();
     }
 
-    if (r == bMINORREPEATS) return GetDouble2Error();
+    if (r == MaxRepeats()) return GetDouble2Error();
     ShowPercent(50+i);
 
     ReadEnergyK(i);
@@ -455,7 +456,7 @@ uchar   i;
 
   Clear();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryEnergyAbsM();
 
@@ -463,7 +464,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
   ReadEnergyM();
@@ -494,7 +495,7 @@ uchar   i;
 
   Clear();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryEnergyAbsN();
 
@@ -502,7 +503,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
   ReadEnergyN();
@@ -539,7 +540,7 @@ uchar   i,j;
   {
     if (fKey == true) return(0);
 
-    for (i=0; i<bMINORREPEATS; i++)
+    for (i=0; i<MaxRepeats(); i++)
     {
       DelayOff();
       QueryEnergyAbsO(j);
@@ -552,7 +553,7 @@ uchar   i,j;
         break;
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (i == MaxRepeats()) return(0);
     else
     {
       ReadEnergyO();
@@ -684,7 +685,7 @@ time2   ReadTimeCanC(uchar  ibCan)
   Clear();
 
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeC();
@@ -693,7 +694,7 @@ time2   ReadTimeCanC(uchar  ibCan)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(75);
 
   time ti = ReadTimeC();
@@ -720,7 +721,7 @@ uchar   i;
   if (OpenDeviceD() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeD();
@@ -729,7 +730,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(75);
 
   ReadTimeD();
@@ -757,7 +758,7 @@ uchar   i;
   if (OpenDeviceE() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     InitPush(0);
     PushChar(0x1B);
@@ -769,7 +770,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(75);
 
 
@@ -793,7 +794,7 @@ bool    ReadTimeCanF(void)
 {
 uchar   i;
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryBreakF();
     QueryTimeF();
@@ -802,7 +803,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(100);
 
 
@@ -830,7 +831,7 @@ uchar   i;
   if (OpenDeviceG() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeG();
@@ -841,7 +842,7 @@ uchar   i;
       break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(100);
 
   ReadTimeAltG();
@@ -868,7 +869,7 @@ uchar   i;
   if (OpenDeviceH() == 0) return(0);
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeH();
@@ -879,7 +880,7 @@ uchar   i;
       break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(100);
 
   ReadTimeAltH();
@@ -904,7 +905,7 @@ uchar   i;
 
   Clear();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeI();
@@ -915,7 +916,7 @@ uchar   i;
       break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(75);
 
   ReadTimeAltI();
@@ -940,7 +941,7 @@ uchar   i;
 
   Clear();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeO();
@@ -951,7 +952,7 @@ uchar   i;
       break;
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(75);
 
   ReadTimeAltO();
@@ -976,7 +977,7 @@ time2   ReadTimeCanP(uchar  ibCan)
 
 
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeP();
@@ -985,7 +986,7 @@ time2   ReadTimeCanP(uchar  ibCan)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(50);
 
   time ti = ReadTimeP();
@@ -1374,7 +1375,7 @@ uchar   i;
 
   Clear();
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryBreakF();
     QueryTimeF();
@@ -1383,7 +1384,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(50);
 
 
@@ -1391,7 +1392,7 @@ uchar   i;
   if (tiAlt.bMonth != ibMonth+1) return(0);     // значени€е счЄтчиков на начало текущего мес€ца
 
 
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     QueryRealExtendedF(bINQ_GETCNTCANMONCURR_ALL);
 
@@ -1399,7 +1400,7 @@ uchar   i;
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(100);
 
 
@@ -1519,7 +1520,7 @@ uchar   i,j;
   {
     if (fKey == true) return(0);
 
-    for (i=0; i<bMINORREPEATS; i++)
+    for (i=0; i<MaxRepeats(); i++)
     {
       DelayOff();
       QueryEnergyAbsH(j);
@@ -1529,7 +1530,7 @@ uchar   i,j;
       if (CodInput() != SER_GOODCHECK) continue; else break;
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (i == MaxRepeats()) return(0);
     else
     {
       if (ChecksumH(14) == 0) { sprintf(szLo," ошибка CRC: H7 "); Delay(1000); return(0); }
@@ -1594,7 +1595,7 @@ uchar   i,j;
   {
     if (fKey == true) return(0);
 
-    for (i=0; i<bMINORREPEATS; i++)
+    for (i=0; i<MaxRepeats(); i++)
     {
       DelayOff();
       QueryEnergyAbsI(j);
@@ -1607,7 +1608,7 @@ uchar   i,j;
         break;
     }
 
-    if (i == bMINORREPEATS) return(0);
+    if (i == MaxRepeats()) return(0);
     else
     {
       ReadEnergyI();
@@ -1700,7 +1701,7 @@ uchar   i,j;
     for (j=0; j<bTARIFFS; j++)
     {
       if (fKey == true) return(0);
-      for (i=0; i<bMINORREPEATS; i++)
+      for (i=0; i<MaxRepeats(); i++)
       {
         DelayOff();
         QueryEnergyAbsMonO(j, (ibMonth+1)%12+1);
@@ -1709,7 +1710,7 @@ uchar   i,j;
         if (TxtInput() != SER_GOODCHECK) continue; else break;
       }
 
-      if (i == bMINORREPEATS) return(0);
+      if (i == MaxRepeats()) return(0);
       else
       {
         ReadEnergyO();
@@ -1729,7 +1730,7 @@ uchar   i,j;
     for (j=0; j<bTARIFFS; j++)
     {
       if (fKey == true) return(0);
-      for (i=0; i<bMINORREPEATS; i++)
+      for (i=0; i<MaxRepeats(); i++)
       {
         DelayOff();
         QueryEnergyAbsO(j);
@@ -1738,7 +1739,7 @@ uchar   i,j;
         if (TxtInput() != SER_GOODCHECK) continue; else break;
       }
 
-      if (i == bMINORREPEATS) return(0);
+      if (i == MaxRepeats()) return(0);
       else
       {
         ReadEnergyO();

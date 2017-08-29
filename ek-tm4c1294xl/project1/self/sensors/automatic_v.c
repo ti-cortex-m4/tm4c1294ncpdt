@@ -7,19 +7,15 @@ AUTOMATIC_V!C
 #include "../main.h"
 #include "../console.h"
 #include "../memory/mem_profile.h"
-//#include "../memory/mem_factors.h"
-//#include "../time/delay.h"
 #include "../time/timedate.h"
 #include "../hardware/watchdog.h"
 #include "../kernel/crc_v.h"
 #include "../serial/ports.h"
 #include "../serial/ports2.h"
 #include "../serial/ports_devices.h"
-//#include "../devices/devices.h"
+#include "../serial/input_wrapper.h"
 #include "../sensors/unpack_v.h"
-//#include "../digitals/digitals.h"
 #include "../digitals/wait_answer.h"
-//#include "automatic1.h"
 #include "device_v.h"
 #include "automatic_v.h"
 
@@ -66,6 +62,7 @@ void    QueryV(uchar  cbIn, uchar  cbOut)
 
 serial  InputV(void)
 {
+  InputStart();
   InitWaitAnswer();
 
   while (1)
@@ -82,7 +79,10 @@ serial  InputV(void)
     if (mpSerial[ibPort] == SER_POSTINPUT_MASTER)
     {
       if (ChecksumV() == 0)
+      {
+        InputGoodCheck();
         mpSerial[ibPort] = SER_GOODCHECK;
+      }
       else
         mpSerial[ibPort] = SER_BADCHECK;
 
@@ -100,7 +100,7 @@ serial  InputV(void)
 bool    QueryConfigS_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryConfigS();
@@ -109,7 +109,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadConfigS();
@@ -120,7 +120,7 @@ bool    QueryConfigS_Full(uchar  bPercent)
 time2   QueryTimeV_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryTimeV();
@@ -129,7 +129,7 @@ time2   QueryTimeV_Full(uchar  bPercent)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (i == bMINORREPEATS) return GetTime2Error();
+  if (i == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTimeV(), true);
@@ -139,7 +139,7 @@ time2   QueryTimeV_Full(uchar  bPercent)
 bool    QueryEngAbsV_Full(uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngAbsV();
@@ -148,7 +148,7 @@ bool    QueryEngAbsV_Full(uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEngAbsV();
@@ -159,7 +159,7 @@ bool    QueryEngAbsV_Full(uchar  bPercent)
 bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngMonV(bMonth,bYear);
@@ -168,7 +168,7 @@ bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEngMonV();
@@ -179,7 +179,7 @@ bool    QueryEngMonV_Full(uchar  bMonth, uchar  bYear, uchar  bPercent)
 bool    QueryEngDayV_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPercent)
 {
   uchar i;
-  for (i=0; i<bMINORREPEATS; i++)
+  for (i=0; i<MaxRepeats(); i++)
   {
     DelayOff();
     QueryEngDayV(bDay,bMonth,bYear);
@@ -188,7 +188,7 @@ bool    QueryEngDayV_Full(uchar  bDay, uchar  bMonth, uchar  bYear, uchar  bPerc
     if (fKey == true) return(0);
   }
 
-  if (i == bMINORREPEATS) return(0);
+  if (i == MaxRepeats()) return(0);
   ShowPercent(bPercent);
 
   ReadEngDayV();

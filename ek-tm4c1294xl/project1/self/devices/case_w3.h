@@ -4,7 +4,7 @@
     case DEV_START_W3:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOpenW();
       SetCurr(DEV_OPENCANAL_W3);
       break;
@@ -29,7 +29,7 @@
     case DEV_POSTOPENCANAL_W3:
       ShowPercent(51);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryOptionW();
       SetCurr(DEV_OPTION_W3);
       break;
@@ -57,7 +57,7 @@
     case DEV_POSTOPTION_W3:
       ShowPercent(52+ibLineW);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryEngAbsW_Current(ibLineW);
       SetCurr(DEV_ENERGY_W3);
       break;

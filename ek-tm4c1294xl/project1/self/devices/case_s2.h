@@ -2,7 +2,7 @@
 #ifndef SKIP_S
 
     case DEV_START_S2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryVersionS();
       SetCurr(DEV_VERSION_S2);
       break;
@@ -45,7 +45,7 @@
       Clear(); ShowLo(szRepeats);
       sprintf(szLo+8,"%1u",cbCorrects+1); DelayInf();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeS();
       SetCurr(DEV_TIME_S2);
       break;
@@ -93,11 +93,11 @@
       break;
 
     case DEV_CONTROL_S2:
-      if (++cbCorrects > bMINORREPEATS)
+      if (++cbCorrects > bCORRECTS)
         MakePause(DEV_POSTCORRECT_S2);
       else
       {
-        cbRepeat = GetMaxRepeats();
+        cbRepeat = MaxRepeats();
         QueryControlS(tiCurr);
         SetCurr(DEV_POSTOPENCANAL_S2);
       }
@@ -107,7 +107,7 @@
     case DEV_POSTCORRECT_S2:
       Clear(); ShowPercent(25);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryConfigS();
       SetCurr(DEV_CONFIG_S2);
       break;
@@ -135,7 +135,7 @@
     case DEV_POSTCONFIG_S2:
       ShowPercent(50);
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryTimeS();
       SetCurr(DEV_VALUE_S2);
       break;
@@ -166,7 +166,7 @@
       ShowPercent(75);
       InitHeaderS();
 
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderS();
       SetCurr(DEV_HEADER_S2);
       break;
@@ -196,7 +196,7 @@
       break;
 
     case DEV_DATA_S2:
-      cbRepeat = GetMaxRepeats();
+      cbRepeat = MaxRepeats();
       QueryHeaderS();
       SetCurr(DEV_HEADER_S2);
       break;

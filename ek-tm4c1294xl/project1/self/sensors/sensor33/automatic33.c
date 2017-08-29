@@ -40,7 +40,7 @@ bool    QueryOpen33_Full(uchar  bPercent)
   Clear();
 
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryOpen33();
@@ -49,7 +49,7 @@ bool    QueryOpen33_Full(uchar  bPercent)
     if (fKey == true) return false;
   }
 
-  if (r == bMINORREPEATS) return false;
+  if (r == MaxRepeats()) return false;
   ShowPercent(bPercent);
 
   if (ReadOpen33() == false) return false;
@@ -61,7 +61,7 @@ bool    QueryOpen33_Full(uchar  bPercent)
 time2   QueryTime33_Full(uchar  bPercent)
 {
   uchar r;
-  for (r=0; r<bMINORREPEATS; r++)
+  for (r=0; r<MaxRepeats(); r++)
   {
     DelayOff();
     QueryTime33();
@@ -70,7 +70,7 @@ time2   QueryTime33_Full(uchar  bPercent)
     if (fKey == true) return GetTime2Error();
   }
 
-  if (r == bMINORREPEATS) return GetTime2Error();
+  if (r == MaxRepeats()) return GetTime2Error();
   ShowPercent(bPercent);
 
   return GetTime2(ReadTime33(), true);
@@ -124,7 +124,7 @@ double2 ReadCntCurr33(void)
   for (t=0; t<bTARIFFS; t++)
   {
     uchar r;
-    for (r=0; r<bMINORREPEATS; r++)
+    for (r=0; r<MaxRepeats(); r++)
     {
       DelayOff();
       QueryEngAbs33(t);
@@ -135,7 +135,7 @@ double2 ReadCntCurr33(void)
       if (fKey == true) return GetDouble2Error();
     }
 
-    if (r == bMINORREPEATS) return GetDouble2Error();
+    if (r == MaxRepeats()) return GetDouble2Error();
     else
     {
       if (Checksum33(14) == false) { ShowLo(szBadCRC); Delay(1000); return GetDouble2Error(); }

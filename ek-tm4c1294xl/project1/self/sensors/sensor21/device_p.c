@@ -35,6 +35,7 @@ DEVICE_P!C
 #include "../../hardware/watchdog.h"
 #include "../../flash/records.h"
 #include "../automatic1.h"
+#include "input_p.h"
 #include "automatic_p.h"
 #include "device_p.h"
 
