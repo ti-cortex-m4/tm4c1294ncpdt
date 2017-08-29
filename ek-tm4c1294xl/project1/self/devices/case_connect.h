@@ -247,23 +247,23 @@
 
       if (exExtended == EXT_PROFILE_30MIN)
       {
-        if (MakeExtended0() == 0) { MakePause(DEV_MODEM_STOP); break; }
+        if (MakeExtended0() == 0) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
 
-        MakeExtended1();      if (SkipFailure_IsFailureMsg()) { MakePause(DEV_MODEM_STOP); break; }
-        MakeExtended3(ibDig); if (SkipFailure_IsFailureMsg()) { MakePause(DEV_MODEM_STOP); break; }
-        MakeExtended4();      if (SkipFailure_IsFailureMsg()) { MakePause(DEV_MODEM_STOP); break; }
-        MakeExtended5();      if (SkipFailure_IsFailureMsg()) { MakePause(DEV_MODEM_STOP); break; }
-        MakeExtended4T();     if (SkipFailure_IsFailureMsg()) { MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended1();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended3(ibDig); if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended4();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended5();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended4T();     if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
       }
 
       if ((exExtended == EXT_PROFILE_30MIN) && (boMntParams == false))
       {
-        MakeExtended2();      if (SkipFailure_IsFailureMsg()) { MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended2();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
       }
 
       if ((exExtended == EXT_CURRENT_3MIN) && (boMntParams == true))
       {
-        MakeExtended2();      if (SkipFailure_IsFailureMsg()) { MakePause(DEV_MODEM_STOP); break; }
+        MakeExtended2();      if (SkipFailure_IsFailureMsg()) { fKeyOn = 0; MakePause(DEV_MODEM_STOP); break; }
       }
 
       SkipFailure_AfterExtended();
