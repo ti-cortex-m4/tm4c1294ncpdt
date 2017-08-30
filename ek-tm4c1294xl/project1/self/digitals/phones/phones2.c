@@ -13,6 +13,7 @@ PHONES2!C
 #include "../../keyboard/keyboard.h"
 #include "../../time/rtc.h"
 #include "../../time/timedate.h"
+#include "../../realtime/realtime.h"
 #include "../../energy4.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_push.h"
@@ -311,19 +312,19 @@ uint    w;
 phones2 f;
 
   if (mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) {
-    w = mpwMinInDelay[ibPrt];
-    mpwMinInDelay[ibPrt] = 5*wFREQUENCY_T0;
+    w = mpwMinorInDelay[ibPrt];
+    mpwMinorInDelay[ibPrt] = 5*wFREQUENCY_T0;
     f = WritePhones2();
-    mpwMinInDelay[ibPrt] = w;
+    mpwMinorInDelay[ibPrt] = w;
   }
   else {
     s = mppoPorts[ibPrt].enStream;
     mppoPorts[ibPrt].enStream = STR_MASTERDIRECT;
-    w = mpwMinInDelay[ibPrt];
-    mpwMinInDelay[ibPrt] = 5*wFREQUENCY_T0;
+    w = mpwMinorInDelay[ibPrt];
+    mpwMinorInDelay[ibPrt] = 5*wFREQUENCY_T0;
     f = WritePhones2();
     mppoPorts[ibPrt].enStream = s;
-    mpwMinInDelay[ibPrt] = w;
+    mpwMinorInDelay[ibPrt] = w;
   }
 
   mpbBuffPhones2[PHONE2_RECORD-1] = f;
@@ -378,8 +379,8 @@ void    MakePhones2(void) {
   if (UsePhones2() && (enGlobal != GLB_PROGRAM))  {
 
     cdwPhones20++;
-    if ((mpibPowCurrTariff[ GetHouIndex() ] == 2) ||
-        (mpibPowCurrTariff[ GetHouIndex() ] == 3))  {
+    if ((mpibPowCurrTariff[ GetCurrHouIndex() ] == 2) ||
+        (mpibPowCurrTariff[ GetCurrHouIndex() ] == 3))  {
 
       cdwPhones21++;
       reCurrPhones2 = GetPowGrpHouCurr(0,2);
@@ -397,7 +398,7 @@ void    MakePhones2(void) {
         Work(); OK();
 
         wProgram = 0;
-        cbShowTime = 2;
+        cbShowCurrTime = 2;
 
         SetCurr(DEV_BEGIN);
         ibPortPause = 0xFF;
