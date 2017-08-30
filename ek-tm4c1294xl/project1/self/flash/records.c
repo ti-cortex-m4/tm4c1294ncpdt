@@ -16,6 +16,7 @@ RECORDS,C
 #include "../devices/devices.h"
 #include "../digitals/digitals_status.h"
 #include "../digitals/profile/refill.h"
+#include "../digitals/phones/phones2.h"
 #include "../time/rtc.h"
 #include "../nvram/cache.h"
 #include "files.h"
@@ -442,33 +443,25 @@ bool    AddModRecord(event  ev)
 }
 
 
-bool    AddModRecord(event  ev)
+bool    AddPh2Record(event  ev)
 {
   if (IsRecordDisabled(ev)) return true;
 
-  uint i = OpenRecord(MOD_RECORD, cdwModRecord);
+  uint i = OpenRecord(PH2_RECORD, cdwPh2Record);
 
   reCurr.ti = *GetCurrTimeDate();
-  reCurr.cdwRecord = cdwModRecord++; SaveCache(&chModRecord);
+  reCurr.cdwRecord = cdwPh2Record++; SaveCache(&chPh2Record);
   reCurr.ev = ev;
-
-  PutChar(0, ibDig);
 
   switch (ev)
   {
-    case EVE_MODEM_PROFILEOPEN:
-    case EVE_MODEM_SPECIALOPEN:  Put(1, (uchar *) &mpdiDigital[ibDig], sizeof(digital)); break;
+    case EVE_PH2_START: memcpy(&reCurr.mpbBuff+0, &reCurrPhones2, sizeof(float));
+                        memcpy(&reCurr.mpbBuff+4, &reMaxxPhones2, sizeof(float)); break;
 
-    case EVE_MODEM_PROFILE:      PutInt(1, mpcwStopCan[ibDig]); break;
-
-    case EVE_MODEM_PROFILEOK:    PutInt(1, cwHouRead);
-                                 PutInt(3, mpcwStopCan[ibDig]); break;
-
-    case EVE_MODEM_PROFILEERROR2:PutInt(1, GetCurr());
-                                 PutChar(3, mpSerial[ibPort]); break;
+    case EVE_PH2_FINISH: memcpy(&reCurr.mpbBuff+0, &mpbBuffPhones2, 8); break;
   }
 
-  CloseRecord(MOD_RECORD, i);
+  CloseRecord(PH2_RECORD, i);
 
   return CloseOut();
 }

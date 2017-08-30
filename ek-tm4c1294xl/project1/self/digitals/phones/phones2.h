@@ -7,6 +7,10 @@ PHONES2!H
 #include "phones2_include.h"
 
 
+extern float                  reCurrPhones2;
+extern float                  reMaxxPhones2;
+extern uchar                  mpbBuffPhones2[PHONE2_RECORD];
+
 
 //void    ResetPhones2(void);
 //bit     UsePhones2(void);
