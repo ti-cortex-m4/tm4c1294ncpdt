@@ -440,3 +440,35 @@ bool    AddModRecord(event  ev)
 
   return CloseOut();
 }
+
+
+bool    AddModRecord(event  ev)
+{
+  if (IsRecordDisabled(ev)) return true;
+
+  uint i = OpenRecord(MOD_RECORD, cdwModRecord);
+
+  reCurr.ti = *GetCurrTimeDate();
+  reCurr.cdwRecord = cdwModRecord++; SaveCache(&chModRecord);
+  reCurr.ev = ev;
+
+  PutChar(0, ibDig);
+
+  switch (ev)
+  {
+    case EVE_MODEM_PROFILEOPEN:
+    case EVE_MODEM_SPECIALOPEN:  Put(1, (uchar *) &mpdiDigital[ibDig], sizeof(digital)); break;
+
+    case EVE_MODEM_PROFILE:      PutInt(1, mpcwStopCan[ibDig]); break;
+
+    case EVE_MODEM_PROFILEOK:    PutInt(1, cwHouRead);
+                                 PutInt(3, mpcwStopCan[ibDig]); break;
+
+    case EVE_MODEM_PROFILEERROR2:PutInt(1, GetCurr());
+                                 PutChar(3, mpSerial[ibPort]); break;
+  }
+
+  CloseRecord(MOD_RECORD, i);
+
+  return CloseOut();
+}
