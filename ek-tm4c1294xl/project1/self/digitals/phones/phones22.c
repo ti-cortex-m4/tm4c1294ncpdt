@@ -26,10 +26,10 @@ extern uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones
 
 
 bool    MakePhones2Input0(void) {
-uchar i;
-
   memset(&mpbAnswer1Phones2, 0, sizeof(mpbAnswer1Phones2));
   InitPop(0);
+
+  uchar i;
   for (i=0; i<IndexInBuff(); i++) {
     if (i >= PHONE2_ANSWER) break;
     mpbAnswer1Phones2[i] = PopChar();
@@ -48,10 +48,10 @@ uchar i;
 
 
 bool    MakePhones2Input1(void) {
-uchar i;
-
   memset(&mpbAnswer2Phones2, 0, sizeof(mpbAnswer2Phones2));
   InitPop(0);
+
+  uchar i;
   for (i=0; i<IndexInBuff(); i++) {
     if (i >= PHONE2_ANSWER) break;
     mpbAnswer2Phones2[i] = PopChar();

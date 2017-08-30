@@ -21,7 +21,7 @@ PHONES2!C
 #include "../../serial/ports_modems.h"
 #include "../../serial/modems.h"
 #include "../../digitals/digitals_status.h"
-#include "phones21.h"
+#include "../../flash/records.h"
 #include "phones22.h"
 #include "phones2.h"
 
