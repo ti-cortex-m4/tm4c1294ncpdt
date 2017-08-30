@@ -8,11 +8,8 @@ phones2_include.h
 #define __PHONES2_INCLUDE
 
 
-// размер телефонного номера
-#define bPHONENUMBER    13
-
 // количество телефонов для SMS-контроля
-#define bPHONES2        4
+#define bPHONES2          4
 
 
 
