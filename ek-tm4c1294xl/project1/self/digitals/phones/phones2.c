@@ -1,70 +1,77 @@
 /*------------------------------------------------------------------------------
-PHONES2.C
+PHONES2!C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include    "main.h"
-#include    "xdata.h"
-#include    "timer0.h"
-#include    "display.h"
-#include    "delay.h"
-#include    "keyboard.h"
-#include    "nexttime.h"
-#include    "ports.h"
-#include    "status.h"
-#include    "modems.h"
-#include    "engine.h"
-#include    "energy.h"
-#include    "rtc.h"
-#include    "timedate.h"
-#include    "phones21.h"
 
+#include "../../main.h"
+#include "../../memory/mem_settings.h"
+#include "../../memory/mem_digitals.h"
+#include "../../display/display.h"
+#include "../../keyboard/keyboard.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_push.h"
+#include "../../serial/ports_devices.h"
+#include "../../serial/ports_modems.h"
+#include "../../serial/modems.h"
+#include "phones2.h"
+#include "phones2.h"
+
+
+
+// размер буфера результата СМС-контроля
+#define PHONE2_ANSWER     50
+
+// количество кодов результата СМС-контроля
+#define PHONE2_CODES      10
+
+// размер буфера журнала СМС-контроля
+#define PHONE2_RECORD     8
 
 
 
 // номер порта
-uchar         _xdata    bPortPhones2;
+uchar                  bPortPhones2;
 
 // прогнозируемая мощность
-real          _xdata    reCurrPhones2;
+real                   reCurrPhones2;
 
 // лимит мощности
-real          _xdata    reMaxxPhones2;
+real                   reMaxxPhones2;
 
 // список телефонов
-phone         _xdata    mpphPhones2[bPHONES2];
+phone                  mpphPhones2[bPHONES2];
 
 // режим работы
-boolean       _xdata    boDebugPhones2;
+bool                   boDebugPhones2;
 
 // таймаут
-uchar         _xdata    bDelayPhone2;
+uchar                  bDelayPhone2;
 
 // буфера
-uchar         _xdata    mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
+uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
 
 // буфер
-stamp         _xdata    mpstPhones2[PHONE2_CODES];
+stamp                  mpstPhones2[PHONE2_CODES];
 
 // буфер
-uchar         _xdata    mpbBuffPhones2[PHONE2_RECORD];
+uchar                  mpbBuffPhones2[PHONE2_RECORD];
 
 // счётчик записей
-ulong         _xdata    cdwPh2Record;
+ulong                  cdwPh2Record;
 
 // счётчики
-ulong         _xdata    cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPhones24, cdwPhones25;
+ulong                  cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPhones24, cdwPhones25;
 
 
 
 //                                         0123456789ABCDEF
-message         code    szPhonesRun2    = "СМС-контроль    ",
-                        szPhonesMode21  = " настройки 1... ",
-                        szPhonesMode22  = " настройки 2... ",
-                        szPhonesMode23  = " настройки 3... ",
-                        szNoExcess      = "нет превышения !",
-                        szNoPeak        = "непиковые зоны !";
+char const              szPhonesRun2[]    = "СМС-контроль    ",
+                        szPhonesMode21[]  = " настройки 1... ",
+                        szPhonesMode22[]  = " настройки 2... ",
+                        szPhonesMode23[]  = " настройки 3... ",
+                        szNoExcess[]      = "нет превышения !",
+                        szNoPeak[]        = "непиковые зоны !";
 
 
 void    ResetPhones2(void) {
@@ -77,7 +84,7 @@ uchar   i;
   for (i=0; i<bPHONES2; i++)
     strcpy(&mpphPhones2[i].szNumber, "0");
 
-  boDebugPhones2 = boFalse;
+  boDebugPhones2 = false;
   bDelayPhone2 = 0;
 
   memset(&mpbAnswer1Phones2, 0, sizeof(mpbAnswer1Phones2));
@@ -100,7 +107,7 @@ uchar   i;
 
 
 
-bit     UsePhones2(void) {
+bool    UsePhones2(void) {
   return ((bPortPhones2 > 0) && (bPortPhones2 <= bPORTS));
 }
 
@@ -108,7 +115,7 @@ bit     UsePhones2(void) {
 
 void    QueryMessageMode(void) {
   InitPush();
-  PushMessage("AT+CMGF=1\r\n");
+  PushString("AT+CMGF=1\r\n");
   Query(SERIAL_MODEM, 11, 1);
 }
 
@@ -127,7 +134,7 @@ void    QueryMessage1(uchar  ibPhn) {
 uchar i;
 
   InitPush();
-  PushMessage("AT+CMGS=");
+  PushString("AT+CMGS=");
 
   phT = mpphPhones2[ibPhn];
 
@@ -161,9 +168,9 @@ uint  i;
     tiCurr.bYear
   );
 
-  i = PushMessage(mpbInBuffSave);
+  i = PushString(mpbInBuffSave);
 
-  if (boDebugPhones2 == boTrue)
+  if (boDebugPhones2 == true)
     sprintf(mpbInBuffSave+i, "test");
   else
     sprintf(mpbInBuffSave+i, "prognoz %.3f bolsche limita %.3f !", reCurrPhones2, reMaxxPhones2);
@@ -303,7 +310,7 @@ void    RunPhones2() {
     diCurr.ibPort = bPortPhones2-1;
 
     if (SafeWritePhones2(bPortPhones2-1) == PH2_OK) {
-      if (boDebugPhones2 == boFalse) cdwPhones25++;
+      if (boDebugPhones2 == false) cdwPhones25++;
     }
     else
       Error();
@@ -343,7 +350,7 @@ void    MakePhones2(void) {
         AddPh2Record(EVE_PH2_START);
         memset(&mpbBuffPhones2, 0, sizeof(mpbBuffPhones2));
 
-        boDebugPhones2 = boFalse;
+        boDebugPhones2 = false;
         RunPhones2();
 
         AddPh2Record(EVE_PH2_FINISH);
@@ -358,7 +365,7 @@ void    MakePhones2(void) {
       }
       else {
         cdwPhones24++;
-        if (boShowMessages == boTrue) {
+        if (boShowMessages == true) {
           ShowHi(szPhonesRun2); ShowLo(szNoExcess);
           DelayMsg();
           Work(); OK();
@@ -367,7 +374,7 @@ void    MakePhones2(void) {
     }
     else {
       cdwPhones22++;
-      if (boShowMessages == boTrue) {
+      if (boShowMessages == true) {
         ShowHi(szPhonesRun2); ShowLo(szNoPeak);
         DelayMsg();
         Work(); OK();
@@ -376,7 +383,7 @@ void    MakePhones2(void) {
   }
 }
 
-
+/*
 
 #ifndef MODBUS
 
