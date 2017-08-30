@@ -160,8 +160,6 @@ void    QueryMessage0(void) {
 
 
 void    QueryMessage1(uchar  ibPhn) {
-uchar i;
-
   InitPush(0);
   PushString("AT+CMGS=");
 
@@ -170,7 +168,8 @@ uchar i;
   Clear();
   strcpy(szLo, phT.szLine);
 
-  for (i=0; i<bPHONENUMBER; i++)
+  uchar i;
+  for (i=0; i<bLINE_SIZE; i++)
   {
     if (phT.szLine[i] == 0) break;
     PushChar(phT.szLine[i]);
