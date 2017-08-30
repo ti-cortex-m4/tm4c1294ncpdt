@@ -6,6 +6,11 @@ PHONES2!H
 
 
 
+// размер буфера результата СМС-контроля
+#define PHONE2_ANSWER     50
+
+// размер буфера журнала СМС-контроля
+#define PHONE2_RECORD     8
 
 
 typedef enum

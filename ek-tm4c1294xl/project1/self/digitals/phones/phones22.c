@@ -21,6 +21,10 @@ PHONES22!C
 
 
 
+extern uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
+
+
+
 bool    MakePhones2Input0(void) {
 uchar i;
 
