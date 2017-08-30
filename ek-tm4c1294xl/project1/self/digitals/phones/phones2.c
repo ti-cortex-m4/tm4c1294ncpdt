@@ -177,12 +177,12 @@ uchar i;
   line phT = mpphPhones2[ibPhn];
 
   Clear();
-  strcpy(szLo, phT.szNumber);
+  strcpy(szLo, phT.szLine);
 
   for (i=0; i<bPHONENUMBER; i++)
   {
-    if (phT.szNumber[i] == 0) break;
-    PushChar(phT.szNumber[i]);
+    if (phT.szLine[i] == 0) break;
+    PushChar(phT.szLine[i]);
   }
 
   PushChar(0x0D);
@@ -228,7 +228,7 @@ uchar i;
   QueryMessage0();
 
   ShowLo(szPhonesMode21);
-  for (i=0; i<bMINORREPEATS; i++) {
+  for (i=0; i<MaxRepeatsFixed(); i++) {
     DelayOff();
     QueryModemBaud(0);
 
@@ -236,11 +236,11 @@ uchar i;
     if (fKey == 1) return PH2_KEYBREAK;
   }
 
-  if (i == bMINORREPEATS) ;
+  if (i == MaxRepeatsFixed()) ;
 
 
   ShowLo(szPhonesMode22);
-  for (i=0; i<bMINORREPEATS; i++) {
+  for (i=0; i<MaxRepeatsFixed(); i++) {
     DelayOff();
     QueryModemCommon(0);
 
@@ -249,12 +249,12 @@ uchar i;
     sprintf(szLo+15, "%1u", i+1);
   }
 
-  if (i == bMINORREPEATS)
+  if (i == MaxRepeatsFixed())
     return PH2_MODEMCOMMON;
 
 
   ShowLo(szPhonesMode23);
-  for (i=0; i<bMINORREPEATS; i++) {
+  for (i=0; i<MaxRepeatsFixed(); i++) {
     DelayOff();
     QueryMessageMode();
 
@@ -263,7 +263,7 @@ uchar i;
     sprintf(szLo+15, "%1u", i+1);
   }
 
-  if (i == bMINORREPEATS)
+  if (i == MaxRepeatsFixed())
     return PH2_MESSAGEMODE;
 
 
@@ -271,11 +271,11 @@ uchar i;
   for (ibCan=0; ibCan<bPHONES2; ibCan++) {
 
     line phT = mpphPhones2[ibCan];
-    if ((phT.szNumber[0] == '0') && (phT.szNumber[1] == 0)) continue;
+    if ((phT.szLine[0] == '0') && (phT.szLine[1] == 0)) continue;
 
     mpbBuffPhones2[ibCan] = ibCan+1;
 
-    for (i=0; i<bMINORREPEATS; i++) {
+    for (i=0; i<MaxRepeatsFixed(); i++) {
       DelayOff();
       QueryMessage1(ibCan);
 
@@ -284,7 +284,7 @@ uchar i;
       sprintf(szLo+15, "%1u", i+1);
     }
 
-    if (i == bMINORREPEATS)
+    if (i == MaxRepeatsFixed())
       return PH2_MESSAGE1;
 
     DelayOff();
@@ -396,7 +396,7 @@ void    MakePhones2(void) {
 
         Work(); OK();
 
-        bProgram = 0; wProgram = 0;
+        wProgram = 0;
         cbShowTime = 2;
 
         SetCurr(DEV_BEGIN);
