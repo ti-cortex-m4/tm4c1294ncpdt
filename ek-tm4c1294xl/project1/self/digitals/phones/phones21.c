@@ -17,7 +17,7 @@ PHONES21!C
 //#include "../../digitals/digitals_status.h"
 //#include "../../digitals/profile/refill.h"
 #include "../../time/rtc.h"
-//#include "../../nvram/cache.h"
+#include "../../nvram/cache.h"
 #include "../../flash/files.h"
 #include "../../flash/records_dsbl.h"
 #include "phones2.h"
@@ -39,14 +39,14 @@ uint    i;
 
   i = (cdwPh2Record % wRECORDS);
 
-  OpenIn(wFLA_PH2RECORD + i / bRECORD_BLOCK);
+  OpenIn(PH2_RECORD + i / bRECORD_BLOCK);
   memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
   memset(&reCurr, 0, sizeof(record));
 
-  reCurr.ti        = *GetCurrTimeDate();
-  reCurr.cdwRecord = cdwPh2Record++;
-  reCurr.ev        = evCode;
+  reCurr.ti = *GetCurrTimeDate();
+  reCurr.cdwRecord = cdwPh2Record++; SaveCache(&chPh2Record);
+  reCurr.ev = evCode;
 
   switch (evCode)
   {
