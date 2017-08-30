@@ -21,6 +21,43 @@ PHONES2.C
 #include    "phones21.h"
 
 
+
+
+// номер порта
+uchar         _xdata    bPortPhones2;
+
+// прогнозируемая мощность
+real          _xdata    reCurrPhones2;
+
+// лимит мощности
+real          _xdata    reMaxxPhones2;
+
+// список телефонов
+phone         _xdata    mpphPhones2[bPHONES2];
+
+// режим работы
+boolean       _xdata    boDebugPhones2;
+
+// таймаут
+uchar         _xdata    bDelayPhone2;
+
+// буфера
+uchar         _xdata    mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
+
+// буфер
+stamp         _xdata    mpstPhones2[PHONE2_CODES];
+
+// буфер
+uchar         _xdata    mpbBuffPhones2[PHONE2_RECORD];
+
+// счётчик записей
+ulong         _xdata    cdwPh2Record;
+
+// счётчики
+ulong         _xdata    cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPhones24, cdwPhones25;
+
+
+
 //                                         0123456789ABCDEF
 message         code    szPhonesRun2    = "СМС-контроль    ",
                         szPhonesMode21  = " настройки 1... ",
