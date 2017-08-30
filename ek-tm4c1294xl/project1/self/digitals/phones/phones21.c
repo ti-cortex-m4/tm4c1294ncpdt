@@ -20,7 +20,15 @@ PHONES21!C
 //#include "../../nvram/cache.h"
 #include "../../flash/files.h"
 #include "../../flash/records_dsbl.h"
-//#include "../records.h"
+#include "phones2.h"
+#include "phones21.h"
+
+
+
+extern float                  reCurrPhones2;
+extern float                  reMaxxPhones2;
+extern uchar                  mpbBuffPhones2[PHONE2_RECORD];
+
 
 
 bool    AddPh2Record(event  evCode)
@@ -32,7 +40,7 @@ uint    i;
   i = (cdwPh2Record % wRECORDS);
 
   OpenIn(wFLA_PH2RECORD + i / bRECORD_BLOCK);
-  memcpy(mpbPageOut, mpbPageIn, wFREEPAGE_SIZE);
+  memcpy(mpbPageOut, mpbPageIn, wLEAF_BYTES);
 
   memset(&reCurr, 0, sizeof(record));
 
