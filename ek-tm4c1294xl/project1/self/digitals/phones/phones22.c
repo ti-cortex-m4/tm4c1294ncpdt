@@ -8,17 +8,20 @@ PHONES22!C
 //#include "../../memory/mem_settings.h"
 //#include "../../memory/mem_digitals.h"
 //#include "../../display/display.h"
-//#include "../../keyboard/keyboard.h"
-//#include "../../serial/ports.h"
-//#include "../../serial/ports_push.h"
-//#include "../../serial/ports_devices.h"
-//#include "../../serial/ports_modems.h"
-//#include "../../serial/modems.h"
+#include "../../keyboard/keyboard.h"
+#include "../../serial/ports.h"
+#include "../../serial/ports_push.h"
+#include "../../serial/ports_devices.h"
+#include "../../serial/ports_modems.h"
+#include "../../serial/modems.h"
+#include "../../digitals/wait_answer.h"
+#include "../../hardware/watchdog.h"
+#include "phones2.h"
 #include "phones22.h"
 
 
-/*
-bit     MakePhones2Input0(void) {
+
+bool    MakePhones2Input0(void) {
 uchar i;
 
   memset(&mpbAnswer1Phones2, 0, sizeof(mpbAnswer1Phones2));
@@ -40,7 +43,7 @@ uchar i;
 }
 
 
-bit     MakePhones2Input1(void) {
+bool    MakePhones2Input1(void) {
 uchar i;
 
   memset(&mpbAnswer2Phones2, 0, sizeof(mpbAnswer2Phones2));
@@ -60,7 +63,7 @@ uchar i;
 }
 
 
-bit     Phones2Answer(void)  {
+bool    Phones2Answer(void)  {
   return  (IndexInBuff() >= 2);
 }
 
@@ -79,7 +82,7 @@ serial  Phones2Input0(void)
   {
     if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-    ResetWDT();
+    ResetWatchdog();
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { mpSerial[ibPort] = SER_BADLINK; break; }
 
@@ -108,7 +111,7 @@ serial  Phones2Input1(void)
   {
     if (fKey == 1) { mpSerial[ibPort] = SER_BADLINK; break; }
 
-    ResetWDT();
+    ResetWatchdog();
     ShowWaitAnswer(1);
     if (GetWaitAnswer()) { if (MakePhones2Input1()) mpSerial[ibPort] = SER_GOODCHECK; else mpSerial[ibPort] = SER_BADCHECK; break; }
 
@@ -123,4 +126,4 @@ serial  Phones2Input1(void)
 
   return( mpSerial[ibPort] );
 }
-*/
+

@@ -83,10 +83,13 @@ stamp2                 mpstPhones2[PHONE2_CODES];
 uchar                  mpbBuffPhones2[PHONE2_RECORD];
 
 // счётчик записей
-ulong                  cdwPh2Record;
+//ulong                  cdwPh2Record;
 
 // счётчики
 ulong                  cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPhones24, cdwPhones25;
+
+// промежуточный буфер
+char                   mpbInBuffSave2[100];
 
 
 
@@ -106,8 +109,11 @@ uchar   i;
   reCurrPhones2 = 0;
   reMaxxPhones2 = 1000;
 
-  for (i=0; i<bPHONES2; i++)
-    strcpy(&mpphPhones2[i].szLine, "0");
+  uchar c;
+  for (c=0; c<bPHONES2; c++)
+  {
+    mpphPhones2[c].szLine[0] = '0';
+  }
 
   boDebugPhones2 = false;
   bDelayPhone2 = 0;
@@ -137,7 +143,7 @@ bool    UsePhones2(void) {
 }
 
 
-uint    PushMessage(message  msT)
+uint    PushMessage(char*  msT)
 {
 uint  i = 0;
 
@@ -154,7 +160,7 @@ uint  i = 0;
 
 void    QueryMessageMode(void) {
   InitPush(0);
-  PushMessage("AT+CMGF=1\r\n");
+  PushString("AT+CMGF=1\r\n");
   Query(SERIAL_MODEM, 11, 1);
 }
 
@@ -173,7 +179,7 @@ void    QueryMessage1(uchar  ibPhn) {
 uchar i;
 
   InitPush(0);
-  PushMessage("AT+CMGS=");
+  PushString("AT+CMGS=");
 
   line phT = mpphPhones2[ibPhn];
 
@@ -198,7 +204,7 @@ uint  i;
 
   InitPush(0);
 
-  sprintf(mpbInBuffSave, "SEM-2 %02u:%02u:%02u %02u.%02u.20%02u - ",
+  sprintf(mpbInBuffSave2, "SEM-2 %02u:%02u:%02u %02u.%02u.20%02u - ",
     tiCurr.bHour,
     tiCurr.bMinute,
     tiCurr.bSecond,
@@ -207,14 +213,14 @@ uint  i;
     tiCurr.bYear
   );
 
-  i = PushMessage(mpbInBuffSave);
+  i = PushMessage(mpbInBuffSave2);
 
   if (boDebugPhones2 == true)
-    sprintf(mpbInBuffSave+i, "test");
+    sprintf(mpbInBuffSave2+i, "test");
   else
-    sprintf(mpbInBuffSave+i, "prognoz %.3f bolsche limita %.3f !", reCurrPhones2, reMaxxPhones2);
+    sprintf(mpbInBuffSave2+i, "prognoz %.3f bolsche limita %.3f !", reCurrPhones2, reMaxxPhones2);
 
-  i += PushMessage(mpbInBuffSave+i);
+  i += PushMessage(mpbInBuffSave2+i);
 
   PushChar(0x1A);   // 0x1A - send message, 0x1B - don't send message
 
