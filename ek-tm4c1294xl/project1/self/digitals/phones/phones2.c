@@ -7,15 +7,31 @@ PHONES2!C
 #include "../../main.h"
 #include "../../memory/mem_settings.h"
 #include "../../memory/mem_digitals.h"
+#include "../../memory/mem_tariffs.h"
+#include "../../memory/mem_realtime.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
+#include "../../time/rtc.h"
+#include "../../time/timedate.h"
+#include "../../energy4.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_push.h"
 #include "../../serial/ports_devices.h"
 #include "../../serial/ports_modems.h"
 #include "../../serial/modems.h"
+#include "../../digitals/digitals_status.h"
+#include "phones21.h"
+#include "phones22.h"
 #include "phones2.h"
-#include "phones2.h"
+
+
+
+// размер телефонного номера
+#define bPHONENUMBER    13
+
+
+// количество телефонов для SMS-контроля
+#define bPHONES2        4
 
 
 
@@ -30,17 +46,25 @@ PHONES2!C
 
 
 
+typedef struct
+{
+  uint          cwSelf;
+  time          tiSelf;
+} stamp2;
+
+
+
 // номер порта
 uchar                  bPortPhones2;
 
 // прогнозируемая мощность
-real                   reCurrPhones2;
+float                  reCurrPhones2;
 
 // лимит мощности
-real                   reMaxxPhones2;
+float                  reMaxxPhones2;
 
 // список телефонов
-phone                  mpphPhones2[bPHONES2];
+line                   mpphPhones2[bPHONES2];
 
 // режим работы
 bool                   boDebugPhones2;
@@ -52,7 +76,7 @@ uchar                  bDelayPhone2;
 uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
 
 // буфер
-stamp                  mpstPhones2[PHONE2_CODES];
+stamp2                 mpstPhones2[PHONE2_CODES];
 
 // буфер
 uchar                  mpbBuffPhones2[PHONE2_RECORD];
@@ -82,7 +106,7 @@ uchar   i;
   reMaxxPhones2 = 1000;
 
   for (i=0; i<bPHONES2; i++)
-    strcpy(&mpphPhones2[i].szNumber, "0");
+    strcpy(&mpphPhones2[i].szLine, "0");
 
   boDebugPhones2 = false;
   bDelayPhone2 = 0;
@@ -112,17 +136,31 @@ bool    UsePhones2(void) {
 }
 
 
+uint    PushMessage(message  msT)
+{
+uint  i = 0;
+
+  while (1)
+  {
+    if (!*msT) break;
+    PushChar(*msT++);
+    i++;
+  }
+
+  return i;
+}
+
 
 void    QueryMessageMode(void) {
-  InitPush();
-  PushString("AT+CMGF=1\r\n");
+  InitPush(0);
+  PushMessage("AT+CMGF=1\r\n");
   Query(SERIAL_MODEM, 11, 1);
 }
 
 
 
 void    QueryMessage0(void) {
-  InitPush();
+  InitPush(0);
   PushChar(0x1B);
   Query(0, 1, 1);
   DelayOff();
@@ -133,10 +171,10 @@ void    QueryMessage0(void) {
 void    QueryMessage1(uchar  ibPhn) {
 uchar i;
 
-  InitPush();
-  PushString("AT+CMGS=");
+  InitPush(0);
+  PushMessage("AT+CMGS=");
 
-  phT = mpphPhones2[ibPhn];
+  line phT = mpphPhones2[ibPhn];
 
   Clear();
   strcpy(szLo, phT.szNumber);
@@ -157,9 +195,9 @@ uchar i;
 void    QueryMessage2() {
 uint  i;
 
-  InitPush();
+  InitPush(0);
 
-  sprintf(mpbInBuffSave, "SEM-2 %02bu:%02bu:%02bu %02bu.%02bu.20%02bu - ",
+  sprintf(mpbInBuffSave, "SEM-2 %02u:%02u:%02u %02u.%02u.20%02u - ",
     tiCurr.bHour,
     tiCurr.bMinute,
     tiCurr.bSecond,
@@ -168,7 +206,7 @@ uint  i;
     tiCurr.bYear
   );
 
-  i = PushString(mpbInBuffSave);
+  i = PushMessage(mpbInBuffSave);
 
   if (boDebugPhones2 == true)
     sprintf(mpbInBuffSave+i, "test");
@@ -208,7 +246,7 @@ uchar i;
 
     if (ModInputOK(1) == 1) break;
     if (fKey == 1) return PH2_KEYBREAK;
-    sprintf(szLo+15, "%1bu", i+1);
+    sprintf(szLo+15, "%1u", i+1);
   }
 
   if (i == bMINORREPEATS)
@@ -222,16 +260,17 @@ uchar i;
 
     if (ModInputOK(1) == 1) break;
     if (fKey == 1) return PH2_KEYBREAK;
-    sprintf(szLo+15, "%1bu", i+1);
+    sprintf(szLo+15, "%1u", i+1);
   }
 
   if (i == bMINORREPEATS)
     return PH2_MESSAGEMODE;
 
 
+  uchar ibCan;
   for (ibCan=0; ibCan<bPHONES2; ibCan++) {
 
-    phT = mpphPhones2[ibCan];
+    line phT = mpphPhones2[ibCan];
     if ((phT.szNumber[0] == '0') && (phT.szNumber[1] == 0)) continue;
 
     mpbBuffPhones2[ibCan] = ibCan+1;
@@ -242,7 +281,7 @@ uchar i;
 
       if (Phones2Input0() == SER_GOODCHECK) break;
       if (fKey == 1) return PH2_KEYBREAK;
-      sprintf(szLo+15, "%1bu", i+1);
+      sprintf(szLo+15, "%1u", i+1);
     }
 
     if (i == bMINORREPEATS)
@@ -291,11 +330,11 @@ phones2 f;
 
   if (f < PHONE2_CODES-1) {
     mpstPhones2[f].cwSelf++;
-    mpstPhones2[f].tiSelf = *PGetCurrTimeDate();
+    mpstPhones2[f].tiSelf = *GetCurrTimeDate();
   }
   else {
     mpstPhones2[PHONE2_CODES-1].cwSelf++;
-    mpstPhones2[PHONE2_CODES-1].tiSelf = *PGetCurrTimeDate();
+    mpstPhones2[PHONE2_CODES-1].tiSelf = *GetCurrTimeDate();
   }
 
   return f;
@@ -343,7 +382,7 @@ void    MakePhones2(void) {
         (mpibPowCurrTariff[ GetHouIndex() ] == 3))  {
 
       cdwPhones21++;
-      reCurrPhones2 = *PGetPowGrpHouCurr(0,2);
+      reCurrPhones2 = GetPowGrpHouCurr(0,2);
       if (reCurrPhones2 > reMaxxPhones2) {
 
         cdwPhones23++;

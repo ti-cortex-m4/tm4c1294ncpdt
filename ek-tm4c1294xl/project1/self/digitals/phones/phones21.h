@@ -4,5 +4,5 @@ PHONES21!H
 
 ------------------------------------------------------------------------------*/
 
-//bit     AddPh2Record(event  evCode);
+bool    AddPh2Record(event  evCode);
 
