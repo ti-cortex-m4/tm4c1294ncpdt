@@ -9,6 +9,7 @@ PHONES2!H
 
 extern float                  reCurrPhones2;
 extern float                  reMaxxPhones2;
+extern line                   mpphPhones2[bPHONES2];
 extern uchar                  mpbBuffPhones2[PHONE2_RECORD];
 
 
