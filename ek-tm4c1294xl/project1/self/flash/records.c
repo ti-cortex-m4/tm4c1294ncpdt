@@ -16,7 +16,7 @@ RECORDS,C
 #include "../devices/devices.h"
 #include "../digitals/digitals_status.h"
 #include "../digitals/profile/refill.h"
-#include "../digitals/phones/phones2.h"
+#include "../digitals/phones2/phones2.h"
 #include "../time/rtc.h"
 #include "../nvram/cache.h"
 #include "files.h"

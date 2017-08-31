@@ -8,7 +8,7 @@ KEY_PHONES22.C
 #include "../../console.h"
 #include "../../memory/mem_phones.h"
 #include "../../memory/mem_ports.h"
-#include "../../digitals/phones.h"
+#include "../../digitals/phones2/phones2.h"
 
 
 
@@ -17,7 +17,7 @@ static char const       szMessage1[]    = "    Телефоны    ",
                         szMessage2[]    = "для СМС-контроля",
                         szMask[]        = "_____________";
 
-static char const       *pszPhones22[]   = { szMessage1, szMessage2, "" };
+static char const      *pszMessages[]   = { szMessage1, szMessage2, "" };
 
 static uchar            ibCan, ibPos;
 
@@ -28,7 +28,7 @@ static void Show(void)
   Clear();
   strcpy(szLo, mpphPhones2[ibCan].szNumber);
 
-  sprintf(szLo+14,"%2bu",ibCan+1);
+  sprintf(szLo+14,"%2u",ibCan+1);
 }
 
 
@@ -54,7 +54,7 @@ void    key_SetPhones22(void)
         enKeyboard = KBD_INPUT1;
         Number();
 
-        LoadSlide(pszPhones22);
+        LoadSlide(pszMessages);
       }
       else BlockProgram(bSET_PHONES20);
     }
@@ -67,7 +67,7 @@ void    key_SetPhones22(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      if ((ibCan = GetChar(10,11) - 1) < bPHONES2)
+      if ((ibCan = GetCharLo(10,11) - 1) < bPHONES2)
       {
         enKeyboard = KBD_POSTENTER;
         Show();
@@ -147,7 +147,7 @@ void    key_SetPhones22(void)
     {
       enKeyboard = KBD_POSTINPUT2;
 
-      if (ibPos < bPHONENUMBER)
+      if (ibPos < bLINE_SIZE)
         szLo[ibPos++] = szDigits[bKey];
       else Beep();
     }
