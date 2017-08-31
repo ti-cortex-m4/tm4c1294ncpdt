@@ -26,8 +26,7 @@ static uchar            ibCan, ibPos;
 static void Show(void)
 {
   Clear();
-  strcpy(szLo, mpphPhones2[ibCan].szNumber);
-
+  strcpy(szLo, mpphPhones2[ibCan].szLine);
   sprintf(szLo+14,"%2u",ibCan+1);
 }
 
@@ -112,7 +111,7 @@ void    key_SetPhones22(void)
     {
       if (enGlobal != GLB_WORK)
         Mask();
-      else 
+      else
         Beep();
     }
     else Beep();
@@ -125,7 +124,7 @@ void    key_SetPhones22(void)
     {
       if (ibPos == 1)
         szLo[ibPos++] = 'W';
-      else 
+      else
         Beep();
     }
     else Beep();
@@ -138,7 +137,7 @@ void    key_SetPhones22(void)
     {
       if (enGlobal != GLB_WORK)
         Mask();
-      else 
+      else
         Beep();
     }
 
@@ -154,7 +153,7 @@ void    key_SetPhones22(void)
 
       if (ibPos < bLINE_SIZE)
         szLo[ibPos++] = szDigits[bKey];
-      else 
+      else
         Beep();
     }
     else Beep();
