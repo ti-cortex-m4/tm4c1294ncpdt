@@ -87,8 +87,10 @@ void    key_SetPhones22(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        szLo[ibPos] = 0;
-        strcpy(&mpphPhones2[ibCan].szNumber,szLo);
+        memset((char *)mpphPhones2[ibCan].szLine, 0, sizeof(line));
+        strncpy((char *)mpphPhones2[ibCan].szLine, szLo, ibPos);
+
+        SaveCache(&chPhones2);
       }
 
       if (enKeyboard == KBD_POSTENTER)
@@ -110,7 +112,8 @@ void    key_SetPhones22(void)
     {
       if (enGlobal != GLB_WORK)
         Mask();
-      else Beep();
+      else 
+        Beep();
     }
     else Beep();
   }
@@ -122,7 +125,8 @@ void    key_SetPhones22(void)
     {
       if (ibPos == 1)
         szLo[ibPos++] = 'W';
-      else Beep();
+      else 
+        Beep();
     }
     else Beep();
   }
@@ -134,7 +138,8 @@ void    key_SetPhones22(void)
     {
       if (enGlobal != GLB_WORK)
         Mask();
-      else Beep();
+      else 
+        Beep();
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
@@ -149,7 +154,8 @@ void    key_SetPhones22(void)
 
       if (ibPos < bLINE_SIZE)
         szLo[ibPos++] = szDigits[bKey];
-      else Beep();
+      else 
+        Beep();
     }
     else Beep();
   }
