@@ -53,6 +53,10 @@ KEYBOARD_KEY!C
 #include "phones/key_phones.h"
 #include "phones/key_max_connect.h"
 #include "phones/key_custom_modem.h"
+#include "phones2/key_phones20.h"
+#include "phones2/key_phones21.h"
+#include "phones2/key_phones22.h"
+#include "phones2/key_phones23.h"
 #include "time/key_decret.h"
 #include "time/key_season.h"
 #include "key_groups.h"
@@ -233,6 +237,11 @@ void    Keyboard_Key(void)
 
       case bSET_MAJOR_DELAYS:
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
+
+      case bSET_PHONES20:       key_SetPhones20();      break;
+      case bSET_PHONES21:       key_SetPhones21();      break;
+      case bSET_PHONES22:       key_SetPhones22();      break;
+      case bSET_PHONES23:       key_SetPhones23();      break;
 
       case bSET_CORRECT2_FLAG:  key_SetCorrect2Flag();  break;
       case bSET_CORRECT3_FLAG:  key_SetCorrect3Flag();  break;
@@ -463,6 +472,11 @@ void    Keyboard_Key(void)
 
       case bSET_MAJOR_DELAYS:
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
+
+      case bSET_PHONES20:       key_SetPhones20();      break;
+      case bSET_PHONES21:       key_SetPhones21();      break;
+      case bSET_PHONES22:       key_SetPhones22();      break;
+      case bSET_PHONES23:       key_SetPhones23();      break;
 
       case bSET_CORRECT2_FLAG:  key_SetCorrect2Flag();  break;
       case bSET_CORRECT3_FLAG:  key_SetCorrect3Flag();  break;
@@ -774,6 +788,11 @@ void    Keyboard_Key(void)
 
       case bSET_MAJOR_DELAYS:
       case bSET_MINOR_DELAYS:   key_SetDelays();        break;
+
+      case bSET_PHONES20:       key_SetPhones20();      break;
+      case bSET_PHONES21:       key_SetPhones21();      break;
+      case bSET_PHONES22:       key_SetPhones22();      break;
+      case bSET_PHONES23:       key_SetPhones23();      break;
 
       case bSET_CORRECT2_FLAG:  key_SetCorrect2Flag();  break;
       case bSET_CORRECT3_FLAG:  key_SetCorrect3Flag();  break;
