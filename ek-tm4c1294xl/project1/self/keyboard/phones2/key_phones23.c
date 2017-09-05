@@ -38,8 +38,7 @@ void    key_SetPhones23(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      boDebugPhones2 = true;
-      TestPhones2();
+      TestPhones2(true);
 
       enKeyboard = KBD_INPUT1;
     }

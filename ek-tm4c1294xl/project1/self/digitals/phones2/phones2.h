@@ -11,7 +11,6 @@ PHONES2!H
 
 
 extern float                  reCurrPhones2;
-extern bool                   boDebugPhones2;
 extern uchar                  mpbBuffPhones2[PHONE2_RECORD];
 
 
@@ -24,7 +23,7 @@ extern cache const            chMaxxPhones2;
 //void    ResetPhones2(void);
 bool    UsePhones2(void);
 
-void    TestPhones2(void);
+void    TestPhones2(bool  fDebug);
 //void    MakePhones2(void);
 
 //void    OutPhones2(void);

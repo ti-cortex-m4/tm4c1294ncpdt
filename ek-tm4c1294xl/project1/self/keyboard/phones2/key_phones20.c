@@ -51,7 +51,6 @@ void    key_SetPhones20(void)
       if (b <= bPORTS)
       {
         bPortPhones2 = b;
-
         SaveCache(&chPortPhones2);
 
         Show();
