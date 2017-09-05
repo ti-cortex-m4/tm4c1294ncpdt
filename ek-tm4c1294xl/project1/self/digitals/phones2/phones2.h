@@ -11,13 +11,14 @@ PHONES2!H
 
 
 extern float                  reCurrPhones2;
-extern float                  reMaxxPhones2;
 extern bool                   boDebugPhones2;
 extern uchar                  mpbBuffPhones2[PHONE2_RECORD];
 
 
 extern cache const            chPortPhones2;
 extern cache const            chPhones2;
+extern cache const            chMaxxPhones2;
+
 
 
 //void    ResetPhones2(void);

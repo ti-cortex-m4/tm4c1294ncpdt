@@ -13,3 +13,6 @@ uchar                  bPortPhones2;
 
 // список телефонов для СМС-контроля
 line                   mpphPhones2[bPHONES2];
+
+// лимит мощности для СМС-контроля
+float                  reMaxxPhones2;

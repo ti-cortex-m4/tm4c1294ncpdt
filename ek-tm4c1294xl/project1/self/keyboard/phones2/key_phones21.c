@@ -50,7 +50,9 @@ void    key_SetPhones21(void)
       if (fl > 0)
       {
         enKeyboard = KBD_POSTENTER;
+
         reMaxxPhones2 = fl;
+        SaveCache(&chMaxxPhones2);
       }
       else Beep();
 
