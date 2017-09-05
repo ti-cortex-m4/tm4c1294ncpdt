@@ -41,7 +41,8 @@ void    TestPhones2(void) {
 }
 
 
-void    MakePhones2(void) {
+
+static void MakePhones2(void) {
   if (UsePhones2() && (enGlobal != GLB_PROGRAM))  {
 
     cdwPhones20++;
@@ -86,4 +87,16 @@ void    MakePhones2(void) {
       }
     }
   }
+}
+
+
+void   EverySecondPhones2(void) {
+  if (bDelayPhone2 > 0) {
+    if (bDelayPhone2-- == 1) MakePhones2();
+  }
+}
+
+
+void    AfterCurrectPhones2(void) {
+  bDelayPhone2 = 3;
 }

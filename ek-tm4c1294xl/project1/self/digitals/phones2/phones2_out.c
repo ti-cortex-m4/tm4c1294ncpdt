@@ -35,7 +35,7 @@ void    OutPhones2(void) {
   Push(&mpphPhones2, sizeof(mpphPhones2));
 
   PushChar(false);
-  PushChar(0);
+  PushChar(bDelayPhone2);
 
   Push(&mpbAnswer1Phones2, sizeof(mpbAnswer1Phones2));
   Push(&mpbAnswer2Phones2, sizeof(mpbAnswer2Phones2));

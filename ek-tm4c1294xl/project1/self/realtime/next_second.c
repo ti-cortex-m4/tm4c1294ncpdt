@@ -14,6 +14,7 @@ NEXT_SECOND!C
 #include "../digitals/profile/profile_run.h"
 #include "../digitals/current/current_run.h"
 #include "../digitals/schedule/ctrl_hours.h"
+#include "../digitals/phones2/phones2_z.h"
 #include "period30.h"
 #include "realtime.h"
 
@@ -51,6 +52,11 @@ void    NextSecond(void)
   if ((fActive == true) && (enGlobal != GLB_PROGRAM))
   {
     EverySecondP();
+  }
+
+  if ((fActive == 1) && (enGlobal != GLB_PROGRAM))
+  {
+    EverySecondPhones2();
   }
 
   NextSecPeriod30();
