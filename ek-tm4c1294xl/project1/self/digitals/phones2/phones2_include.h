@@ -29,4 +29,11 @@ typedef enum
 } phones2;
 
 
+typedef struct
+{
+  uint          cwSelf;
+  time          tiSelf;
+} stamp2;
+
+
 #endif

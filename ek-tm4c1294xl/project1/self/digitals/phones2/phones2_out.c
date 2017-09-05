@@ -5,9 +5,16 @@ PHONES2_OUT!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_digitals.h"
 #include "../../memory/mem_phones2.h"
 #include "../../serial/ports.h"
+#include "phones2.h"
 #include "phones2_out.h"
+
+
+
+extern uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
+extern stamp2                 mpstPhones2[PHONE2_CODES];
 
 
 
@@ -29,7 +36,7 @@ void    OutPhones2(void) {
   Push(&mpphPhones2, sizeof(mpphPhones2));
 
   PushChar(false);
-  PushChar(bDelayPhone2);
+  PushChar(0);
 
   Push(&mpbAnswer1Phones2, sizeof(mpbAnswer1Phones2));
   Push(&mpbAnswer2Phones2, sizeof(mpbAnswer2Phones2));

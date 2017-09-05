@@ -5,17 +5,24 @@ PHONES2_FACADE!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
+#include "../../memory/mem_tariffs.h"
+#include "../../memory/mem_digitals.h"
 #include "../../memory/mem_phones2.h"
-#include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
+#include "../../display/display.h"
+#include "../../serial/ports.h"
+#include "../../realtime/realtime.h"
+#include "../../digitals/digitals_status.h"
+#include "../../time/delay.h"
+#include "../../flash/records.h"
+#include "../../energy4.h"
+#include "phones2.h"
+#include "phones2_facade.h"
 
 
 
 //                                         0123456789ABCDEF
-char const              szPhonesRun2[]    = "СМС-контроль    ",
-                        szPhonesMode21[]  = " настройки 1... ",
-                        szPhonesMode22[]  = " настройки 2... ",
-                        szPhonesMode23[]  = " настройки 3... ",
+static char const       szPhonesRun2[]    = "СМС-контроль    ",
                         szNoExcess[]      = "нет превышения !",
                         szNoPeak[]        = "непиковые зоны !";
 
@@ -25,7 +32,7 @@ void    TestPhones2(void) {
   AddPh2Record(EVE_PH2_DEBUG);
   memset(&mpbBuffPhones2, 0, sizeof(mpbBuffPhones2));
 
-  RunPhones2(fDebug);
+  RunPhones2(false);
 
   AddPh2Record(EVE_PH2_FINISH);
 
