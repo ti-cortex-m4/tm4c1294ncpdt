@@ -47,9 +47,6 @@ typedef struct
 // прогнозируемая мощность
 float                  reCurrPhones2;
 
-// режим работы
-bool                   boDebugPhones2;
-
 // таймаут
 uchar                  bDelayPhone2;
 
@@ -101,7 +98,6 @@ uchar   i;
     mpphPhones2[c].szLine[0] = '0';
   }
 
-  boDebugPhones2 = false;
   bDelayPhone2 = 0;
 
   memset(&mpbAnswer1Phones2, 0, sizeof(mpbAnswer1Phones2));
@@ -184,7 +180,7 @@ void    QueryMessage1(uchar  ibPhn) {
 
 
 
-void    QueryMessage2() {
+void    QueryMessage2(bool  fDebug) {
 uint  i;
 
   InitPush(0);
@@ -200,7 +196,7 @@ uint  i;
 
   i = PushMessage(mpbInBuffSave2);
 
-  if (boDebugPhones2 == true)
+  if (fDebug == true)
     sprintf(mpbInBuffSave2+i, "test");
   else
     sprintf(mpbInBuffSave2+i, "prognoz %.3f bolsche limita %.3f !", reCurrPhones2, reMaxxPhones2);
@@ -213,7 +209,7 @@ uint  i;
 }
 
 
-phones2 WritePhones2() {
+phones2 WritePhones2(bool  fDebug) {
 uchar i;
 
   ShowHi(szPhonesRun2);
@@ -280,7 +276,7 @@ uchar i;
       return PH2_MESSAGE1;
 
     DelayOff();
-    QueryMessage2();
+    QueryMessage2(fDebug);
 
     if (Phones2Input1() == SER_GOODCHECK) ;
 
@@ -297,7 +293,7 @@ uchar i;
 }
 
 
-phones2 SafeWritePhones2(uchar  ibPrt) {
+phones2 SafeWritePhones2(uchar  ibPrt, bool  fDebug) {
 stream  s;
 uint    w;
 phones2 f;
@@ -305,7 +301,7 @@ phones2 f;
   if (mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) {
     w = mpwMinorInDelay[ibPrt];
     mpwMinorInDelay[ibPrt] = 5*wFREQUENCY_T0;
-    f = WritePhones2();
+    f = WritePhones2(fDebug);
     mpwMinorInDelay[ibPrt] = w;
   }
   else {
@@ -313,7 +309,7 @@ phones2 f;
     mppoPorts[ibPrt].enStream = STR_MASTERDIRECT;
     w = mpwMinorInDelay[ibPrt];
     mpwMinorInDelay[ibPrt] = 5*wFREQUENCY_T0;
-    f = WritePhones2();
+    f = WritePhones2(fDebug);
     mppoPorts[ibPrt].enStream = s;
     mpwMinorInDelay[ibPrt] = w;
   }
@@ -333,15 +329,15 @@ phones2 f;
 }
 
 
-void    RunPhones2() {
+void    RunPhones2(bool  fDebug) {
   if (UsePhones2()) {
     Clear();
 
     ibPort = bPortPhones2-1;
     diCurr.ibPort = bPortPhones2-1;
 
-    if (SafeWritePhones2(bPortPhones2-1) == PH2_OK) {
-      if (boDebugPhones2 == false) cdwPhones25++;
+    if (SafeWritePhones2(bPortPhones2-1, fDebug) == PH2_OK) {
+      if (fDebug == false) cdwPhones25++;
     }
     else
       Error();
@@ -353,11 +349,11 @@ void    RunPhones2() {
 }
 
 
-void    TestPhones2() {
+void    TestPhones2(bool  fDebug) {
   AddPh2Record(EVE_PH2_DEBUG);
   memset(&mpbBuffPhones2, 0, sizeof(mpbBuffPhones2));
 
-  RunPhones2();
+  RunPhones2(fDebug);
 
   AddPh2Record(EVE_PH2_FINISH);
 
@@ -381,8 +377,7 @@ void    MakePhones2(void) {
         AddPh2Record(EVE_PH2_START);
         memset(&mpbBuffPhones2, 0, sizeof(mpbBuffPhones2));
 
-        boDebugPhones2 = false;
-        RunPhones2();
+        RunPhones2(false);
 
         AddPh2Record(EVE_PH2_FINISH);
 
@@ -435,7 +430,7 @@ uint  i;
 
   Push(&mpphPhones2, bPHONES2*sizeof(phone));
 
-  PushChar(boDebugPhones2);
+  PushChar(fDebug);
   PushChar(bDelayPhone2);
 
   Push(&mpbAnswer1Phones2, sizeof(mpbAnswer1Phones2));
