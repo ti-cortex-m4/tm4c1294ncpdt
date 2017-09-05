@@ -3,23 +3,20 @@ KEY_PHONES23.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "keyboard.h"
-#include        "programs.h"
-#include        "phones2.h"
+
+#include "../../main.h"
+#include "../../console.h"
+#include "../../memory/mem_phones.h"
+#include "../../memory/mem_ports.h"
+#include "../../digitals/phones2/phones2.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szUse23         = "    Проверка    ",
-                        szPhones23      = "для СМС-контроля";
+static char const       szMessage1[]    = "    Проверка    ",
+                        szMessage2[]    = "для СМС-контроля";
 
-uchar           *code   pszPhones23[]   = { szUse23, szPhones23, "" };
+static char const      *pszMessages[]   = { szMessage1, szMessage2, "" };
 
 
 
@@ -34,14 +31,14 @@ void    key_SetPhones23(void)
         enKeyboard = KBD_INPUT1;
         Clear();
 
-        LoadSlide(pszPhones23);
+        LoadSlide(pszMessages);
         ShowAnswer();
       }
       else BlockProgram(bSET_PHONES20);
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      boDebugPhones2 = boTrue;
+      boDebugPhones2 = true;
       TestPhones2();
 
       enKeyboard = KBD_INPUT1;
@@ -70,4 +67,3 @@ void    key_SetPhones23(void)
   }
   else Beep();
 }
-*/
