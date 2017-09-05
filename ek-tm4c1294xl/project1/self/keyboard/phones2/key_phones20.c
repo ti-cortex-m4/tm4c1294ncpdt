@@ -3,27 +3,26 @@ KEY_PHONES30.C
 
 
 ------------------------------------------------------------------------------*/
-/*
-#include        "main.h"
-#include        "xdata.h"
-#include        "display.h"
-#include        "beep.h"
-#include        "timer0.h"
-#include        "keyboard.h"
+
+#include "../../main.h"
+#include "../../console.h"
+#include "../../memory/mem_phones.h"
+#include "../../memory/mem_ports.h"
+#include "../../digitals/phones2/phones2.h"
 
 
 
 //                                         0123456789ABCDEF
-message         code    szUse20         = "     Модем      ",
-                        szUsePhones20   = "для СМС-контроля",
-                        szMaskPhones20  = "      ___       ";
+static char const       szMessage1[]    = "     Модем      ",
+                        szMessage2[]    = "для СМС-контроля",
+                        szMask[]        = "      ___       ";
 
 
-uchar           *code   pszPhones20[]   = { szUse20, szUsePhones20, "" };
+static char const      *pszMessages[]   = { szMessage1, szMessage2, "" };
 
 
 
-void    ShowPhones20(void)
+static void Show(void)
 {
   ShowChar(bPortPhones2);
   sprintf(szLo+2,"порт:");
@@ -39,32 +38,32 @@ void    key_SetPhones20(void)
     {
       enKeyboard = KBD_POSTENTER;
 
-      LoadSlide(pszPhones20);
+      LoadSlide(pszMessages);
       Clear();
 
-      ShowPhones20();
+      Show();
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
       enKeyboard = KBD_POSTENTER;
 
-      ibX = GetChar(6,8);
-      if (ibX == 0)
+      uchar b = GetCharLo(6,8);
+      if (b == 0)
       {
         bPortPhones2 = 0;
-        ShowPhones20();
+        Show();
       }
-      else if (ibX <= bPORTS)
+      else if (b <= bPORTS)
       {
-        bPortPhones2 = ibX;
-        ShowPhones20();
+        bPortPhones2 = b;
+        Show();
       }
       else
       {
         enKeyboard = KBD_INPUT1;
         LongBeep();
 
-        ShowLo(szMaskPhones20);
+        ShowLo(szMask);
       }
     }
     else Beep();
@@ -76,7 +75,7 @@ void    key_SetPhones20(void)
     if ((enGlobal != GLB_WORK) && (enKeyboard == KBD_POSTENTER))
     {
       enKeyboard = KBD_INPUT1;
-      ShowLo(szMaskPhones20);
+      ShowLo(szMask);
     }
 
     if ((enKeyboard == KBD_INPUT1) || (enKeyboard == KBD_POSTINPUT1))
@@ -87,4 +86,4 @@ void    key_SetPhones20(void)
   }
   else Beep();
 }
-*/
+
