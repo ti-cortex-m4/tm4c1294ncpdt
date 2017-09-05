@@ -42,8 +42,7 @@ typedef struct
 
 
 
-// номер порта
-uchar                  bPortPhones2;
+
 
 // прогнозируемая мощность
 float                  reCurrPhones2;
@@ -76,6 +75,8 @@ ulong                  cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPh
 char                   mpbInBuffSave2[100];
 
 
+
+cache const             chPortPhones2 = {PORT_PHONES2, &bPortPhones2, sizeof(uchar)};
 cache const             chPhones2 = {PHONES2, &mpphPhones2, sizeof(mpphPhones2)};
 
 

@@ -8,5 +8,8 @@ MEM_PHONES!C
 
 
 
+// номер порта модема для СМС-контроля
+uchar                  bPortPhones2;
+
 // список телефонов для СМС-контроля
 line                   mpphPhones2[bPHONES2];
