@@ -52,7 +52,7 @@ void    key_SetPhones20(void)
       {
         bPortPhones2 = b;
 
-        SaveCache(&chPortPhones);
+        SaveCache(&chPortPhones2);
 
         Show();
       }
