@@ -22,6 +22,5 @@ extern cache const            chMaxxPhones2;
 //void    ResetPhones2(void);
 bool    UsePhones2(void);
 
-void    TestPhones2(bool  fDebug);
-//void    MakePhones2(void);
-void    OutPhones2(void);
+
+

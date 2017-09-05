@@ -8,7 +8,7 @@ KEY_PHONES23.C
 #include "../../console.h"
 #include "../../memory/mem_phones.h"
 #include "../../memory/mem_ports.h"
-#include "../../digitals/phones2/phones2.h"
+#include "../../digitals/phones2/phones2_facade.h"
 
 
 
@@ -38,7 +38,7 @@ void    key_SetPhones23(void)
     }
     else if (enKeyboard == KBD_POSTINPUT1)
     {
-      TestPhones2(true);
+      TestPhones2();
 
       enKeyboard = KBD_INPUT1;
     }
