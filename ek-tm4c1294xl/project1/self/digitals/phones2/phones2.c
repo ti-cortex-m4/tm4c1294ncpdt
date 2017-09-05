@@ -30,17 +30,11 @@ PHONES2!C
 
 
 
-
-
-
-
 typedef struct
 {
   uint          cwSelf;
   time          tiSelf;
 } stamp2;
-
-
 
 
 
@@ -58,9 +52,6 @@ stamp2                 mpstPhones2[PHONE2_CODES];
 
 // буфер
 uchar                  mpbBuffPhones2[PHONE2_RECORD];
-
-// счётчик записей
-//ulong                  cdwPh2Record;
 
 // счётчики
 ulong                  cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPhones24, cdwPhones25;
@@ -409,14 +400,12 @@ void    MakePhones2(void) {
   }
 }
 
-/*
 
-#ifndef MODBUS
 
 void    OutPhones2(void) {
-uint  i;
-
   InitPushCRC();
+
+  uint  i;
   for (i=0; i<400; i++) PushChar(0);
 
   InitPushCRC();
@@ -425,12 +414,12 @@ uint  i;
   PushChar(UsePhones2());
   PushChar(bPortPhones2);
 
-  reBuffA = reCurrPhones2; PushReal();
-  reBuffA = reMaxxPhones2; PushReal();
+  PushFloat(reCurrPhones2);
+  PushFloat(reMaxxPhones2);
 
-  Push(&mpphPhones2, bPHONES2*sizeof(phone));
+  Push(&mpphPhones2, sizeof(mpphPhones2));
 
-  PushChar(fDebug);
+  PushChar(false);
   PushChar(bDelayPhone2);
 
   Push(&mpbAnswer1Phones2, sizeof(mpbAnswer1Phones2));
@@ -440,15 +429,12 @@ uint  i;
 
   Push(&mpbBuffPhones2, sizeof(mpbBuffPhones2));
 
-  PushLong(&cdwPhones20);
-  PushLong(&cdwPhones21);
-  PushLong(&cdwPhones22);
-  PushLong(&cdwPhones23);
-  PushLong(&cdwPhones24);
-  PushLong(&cdwPhones25);
+  PushLongBig(cdwPhones20);
+  PushLongBig(cdwPhones21);
+  PushLongBig(cdwPhones22);
+  PushLongBig(cdwPhones23);
+  PushLongBig(cdwPhones24);
+  PushLongBig(cdwPhones25);
 
   Output(400);
 }
-
-#endif
-*/

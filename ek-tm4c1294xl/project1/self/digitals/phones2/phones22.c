@@ -5,9 +5,6 @@ PHONES22!C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-//#include "../../memory/mem_settings.h"
-//#include "../../memory/mem_digitals.h"
-//#include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../serial/ports.h"
 #include "../../serial/ports_push.h"
