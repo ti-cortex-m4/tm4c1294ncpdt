@@ -9,7 +9,6 @@ PHONES2!H
 
 
 
-
 extern float                  reCurrPhones2;
 extern uchar                  mpbBuffPhones2[PHONE2_RECORD];
 
@@ -25,5 +24,4 @@ bool    UsePhones2(void);
 
 void    TestPhones2(bool  fDebug);
 //void    MakePhones2(void);
-
-//void    OutPhones2(void);
+void    OutPhones2(void);

@@ -8,10 +8,6 @@ phones2_include.h
 #define __PHONES2_INCLUDE
 
 
-
-
-
-
 // количество кодов результата -контроля
 #define PHONE2_CODES      10
 
