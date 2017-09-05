@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES2!C
+PHONES2*C
 
 
 ------------------------------------------------------------------------------*/
@@ -54,12 +54,6 @@ cache const             chPhones2 = {PHONES2, &mpphPhones2, sizeof(mpphPhones2)}
 cache const             chMaxxPhones2 = {PORT_PHONES2, &reMaxxPhones2, sizeof(float)};
 
 
-//                                         0123456789ABCDEF
-static char const       szPhonesRun2[]    = "СМС-контроль    ",
-                        szPhonesMode21[]  = " настройки 1... ",
-                        szPhonesMode22[]  = " настройки 2... ",
-                        szPhonesMode23[]  = " настройки 3... ";
-
 
 
 void    ResetPhones2(void) {
@@ -97,64 +91,4 @@ uchar   i;
 
 bool    UsePhones2(void) {
   return ((bPortPhones2 > 0) && (bPortPhones2 <= bPORTS));
-}
-
-
-
-
-
-
-phones2 SafeWritePhones2(uchar  ibPrt, bool  fDebug) {
-stream  s;
-uint    w;
-phones2 f;
-
-  if (mppoPorts[ibPrt].enStream == STR_MASTERDIRECT) {
-    w = mpwMinorInDelay[ibPrt];
-    mpwMinorInDelay[ibPrt] = 5*wFREQUENCY_T0;
-    f = WritePhones2(fDebug);
-    mpwMinorInDelay[ibPrt] = w;
-  }
-  else {
-    s = mppoPorts[ibPrt].enStream;
-    mppoPorts[ibPrt].enStream = STR_MASTERDIRECT;
-    w = mpwMinorInDelay[ibPrt];
-    mpwMinorInDelay[ibPrt] = 5*wFREQUENCY_T0;
-    f = WritePhones2(fDebug);
-    mppoPorts[ibPrt].enStream = s;
-    mpwMinorInDelay[ibPrt] = w;
-  }
-
-  mpbBuffPhones2[PHONE2_RECORD-1] = f;
-
-  if (f < PHONE2_CODES-1) {
-    mpstPhones2[f].cwSelf++;
-    mpstPhones2[f].tiSelf = *GetCurrTimeDate();
-  }
-  else {
-    mpstPhones2[PHONE2_CODES-1].cwSelf++;
-    mpstPhones2[PHONE2_CODES-1].tiSelf = *GetCurrTimeDate();
-  }
-
-  return f;
-}
-
-
-void    RunPhones2(bool  fDebug) {
-  if (UsePhones2()) {
-    Clear();
-
-    ibPort = bPortPhones2-1;
-    diCurr.ibPort = bPortPhones2-1;
-
-    if (SafeWritePhones2(bPortPhones2-1, fDebug) == PH2_OK) {
-      if (fDebug == false) cdwPhones25++;
-    }
-    else
-      Error();
-
-    mpSerial[ibPort] = SER_BEGIN;
-
-    Work();
-  }
 }
