@@ -48,14 +48,12 @@ void    key_SetPhones20(void)
       enKeyboard = KBD_POSTENTER;
 
       uchar b = GetCharLo(6,8);
-      if (b == 0)
-      {
-        bPortPhones2 = 0;
-        Show();
-      }
-      else if (b <= bPORTS)
+      if (b <= bPORTS)
       {
         bPortPhones2 = b;
+
+        SaveCache(&chPortPhones);
+
         Show();
       }
       else
