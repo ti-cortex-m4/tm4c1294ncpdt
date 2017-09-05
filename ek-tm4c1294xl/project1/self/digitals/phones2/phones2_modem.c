@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES2_MODEM*C
+PHONES2_MODEM!C
 
 
 ------------------------------------------------------------------------------*/
@@ -18,12 +18,9 @@ PHONES2_MODEM*C
 
 
 
-extern uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
-
-
-
 bool    MakePhones2Input0(void) {
   memset(&mpbAnswer1Phones2, 0, sizeof(mpbAnswer1Phones2));
+
   InitPop(0);
 
   uchar i;
@@ -46,6 +43,7 @@ bool    MakePhones2Input0(void) {
 
 bool    MakePhones2Input1(void) {
   memset(&mpbAnswer2Phones2, 0, sizeof(mpbAnswer2Phones2));
+
   InitPop(0);
 
   uchar i;

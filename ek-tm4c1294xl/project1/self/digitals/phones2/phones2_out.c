@@ -13,7 +13,6 @@ PHONES2_OUT*C
 
 
 
-extern uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
 extern stamp2                 mpstPhones2[PHONE2_CODES];
 
 
