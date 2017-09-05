@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES22!C
+PHONES2_MODEM!C
 
 
 ------------------------------------------------------------------------------*/
@@ -14,7 +14,7 @@ PHONES22!C
 #include "../../digitals/wait_answer.h"
 #include "../../hardware/watchdog.h"
 #include "phones2.h"
-#include "phones22.h"
+#include "phones2_modem.h"
 
 
 
