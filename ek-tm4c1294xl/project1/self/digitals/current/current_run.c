@@ -30,6 +30,7 @@ CURRENT_RUN!C
 #include "../../digitals/digitals_display.h"
 #include "../../digitals/current/current.h"
 #include "../../digitals/current/current2.h"
+#include "../../digitals/phones2/phones2_z.h"
 #include "../../time/timedate.h"
 #include "../../time/rtc.h"
 #include "../../kernel/array_mnt.h"
@@ -271,6 +272,8 @@ void    NextCurrent(void)
     cbShowCurrTime = 2;
 
     ibPortPause = 0xFF;
+
+    AfterCurrectPhones2();
   }
 }
 

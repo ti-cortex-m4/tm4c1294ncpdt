@@ -5,25 +5,11 @@ PHONES2*C
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_settings.h"
-#include "../../memory/mem_digitals.h"
-#include "../../memory/mem_tariffs.h"
-#include "../../memory/mem_realtime.h"
-#include "../../memory/mem_phones2.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
-#include "../../time/rtc.h"
-#include "../../time/timedate.h"
-#include "../../realtime/realtime.h"
-#include "../../energy4.h"
-#include "../../serial/ports.h"
-#include "../../serial/ports_push.h"
-#include "../../serial/ports_devices.h"
 #include "../../serial/ports_modems.h"
 #include "../../serial/modems.h"
-#include "../../flash/records.h"
-#include "../../nvram/cache.h"
-#include "../../nvram/cache2.h"
+#include "../../digitals/max_repeats.h"
 #include "phones2_serial.h"
 #include "phones2_modem.h"
 #include "phones2.h"
@@ -40,12 +26,12 @@ static char const       szPhonesRun2[]    = "СМС-контроль    ",
 
 
 phones2 WritePhones2(bool  fDebug) {
-uchar i;
-
   ShowHi(szPhonesRun2);
   QueryMessage0();
 
   ShowLo(szPhonesMode21);
+
+  uchar i;
   for (i=0; i<MaxRepeatsFixed(); i++) {
     DelayOff();
     QueryModemBaud(0);
@@ -85,17 +71,17 @@ uchar i;
     return PH2_MESSAGEMODE;
 
 
-  uchar ibCan;
-  for (ibCan=0; ibCan<bPHONES2; ibCan++) {
+  uchar p;
+  for (p=0; p<bPHONES2; p++) {
 
-    line phT = mpphPhones2[ibCan];
+    line phT = mpphPhones2[p];
     if ((phT.szLine[0] == '0') && (phT.szLine[1] == 0)) continue;
 
-    mpbBuffPhones2[ibCan] = ibCan+1;
+    mpbBuffPhones2[p] = p+1;
 
     for (i=0; i<MaxRepeatsFixed(); i++) {
       DelayOff();
-      QueryMessage1(ibCan);
+      QueryMessage1(p);
 
       if (Phones2Input0() == SER_GOODCHECK) break;
       if (fKey == 1) return PH2_KEYBREAK;
@@ -111,15 +97,16 @@ uchar i;
     if (Phones2Input1() == SER_GOODCHECK) ;
 
     Clear();
+
     if (Phones2Answer()) {
       (Phones2Result() == 0x30) ? OK() : sprintf(szLo+3, "ошибка: %c", Phones2Result()); // нужно обрабатывать ошибку
     }
-    else Error(); // нужно обрабатывать ошибку
+    else {
+      Error(); // нужно обрабатывать ошибку
+    }
+
     DelayMsg();
   }
 
-
   return PH2_OK;
 }
-
-

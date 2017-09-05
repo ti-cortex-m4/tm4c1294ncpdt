@@ -35,6 +35,9 @@ float                  reCurrPhones2;
 // αστεπΰ
 uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
 
+//
+uchar                  bDelayPhone2;
+
 // αστεπ
 stamp2                 mpstPhones2[PHONE2_CODES];
 
@@ -68,6 +71,8 @@ uchar   i;
   {
     mpphPhones2[c].szLine[0] = '0';
   }
+
+  bDelayPhone2 = 0;
 
   memset(&mpbAnswer1Phones2, 0, sizeof(mpbAnswer1Phones2));
   memset(&mpbAnswer2Phones2, 0, sizeof(mpbAnswer2Phones2));
