@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES2!C
+PHONES2*C
 
 
 ------------------------------------------------------------------------------*/
@@ -26,6 +26,10 @@ PHONES2!C
 #include "../../nvram/cache2.h"
 #include "phones2_x.h"
 #include "phones2.h"
+
+
+
+extern stamp2                 mpstPhones2[PHONE2_CODES];
 
 
 

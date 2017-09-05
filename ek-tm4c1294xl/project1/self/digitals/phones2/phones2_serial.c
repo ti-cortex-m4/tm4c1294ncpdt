@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES2_SERIAL!C
+PHONES2_SERIAL*C
 
 
 ------------------------------------------------------------------------------*/
@@ -26,6 +26,10 @@ PHONES2_SERIAL!C
 #include "../../nvram/cache2.h"
 #include "phones2_modem.h"
 
+
+
+extern char                   mpbInBuffSave2[100];
+extern float                  reCurrPhones2;
 
 
 uint    PushMessage(char*  msT)

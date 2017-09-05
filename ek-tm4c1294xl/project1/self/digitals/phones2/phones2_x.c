@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES2!C
+PHONES2*C
 
 
 ------------------------------------------------------------------------------*/
@@ -27,6 +27,15 @@ PHONES2!C
 #include "phones2_serial.h"
 #include "phones2_modem.h"
 #include "phones2.h"
+
+
+
+
+//                                         0123456789ABCDEF
+static char const       szPhonesRun2[]    = "СМС-контроль    ",
+                        szPhonesMode21[]  = " настройки 1... ",
+                        szPhonesMode22[]  = " настройки 2... ",
+                        szPhonesMode23[]  = " настройки 3... ";
 
 
 
