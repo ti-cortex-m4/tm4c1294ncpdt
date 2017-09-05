@@ -21,7 +21,6 @@ PHONES2!C
 #include "../../serial/ports_devices.h"
 #include "../../serial/ports_modems.h"
 #include "../../serial/modems.h"
-#include "../../digitals/digitals_status.h"
 #include "../../flash/records.h"
 #include "../../nvram/cache.h"
 #include "../../nvram/cache2.h"
@@ -30,19 +29,8 @@ PHONES2!C
 
 
 
-typedef struct
-{
-  uint          cwSelf;
-  time          tiSelf;
-} stamp2;
-
-
-
 // прогнозируемая мощность
 float                  reCurrPhones2;
-
-// таймаут
-uchar                  bDelayPhone2;
 
 // буфера
 uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
@@ -66,6 +54,13 @@ cache const             chPhones2 = {PHONES2, &mpphPhones2, sizeof(mpphPhones2)}
 cache const             chMaxxPhones2 = {PORT_PHONES2, &reMaxxPhones2, sizeof(float)};
 
 
+//                                         0123456789ABCDEF
+static char const       szPhonesRun2[]    = "СМС-контроль    ",
+                        szPhonesMode21[]  = " настройки 1... ",
+                        szPhonesMode22[]  = " настройки 2... ",
+                        szPhonesMode23[]  = " настройки 3... ";
+
+
 
 void    ResetPhones2(void) {
 uchar   i;
@@ -79,8 +74,6 @@ uchar   i;
   {
     mpphPhones2[c].szLine[0] = '0';
   }
-
-  bDelayPhone2 = 0;
 
   memset(&mpbAnswer1Phones2, 0, sizeof(mpbAnswer1Phones2));
   memset(&mpbAnswer2Phones2, 0, sizeof(mpbAnswer2Phones2));
