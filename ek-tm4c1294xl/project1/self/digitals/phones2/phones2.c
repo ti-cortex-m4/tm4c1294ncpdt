@@ -9,6 +9,7 @@ PHONES2!C
 #include "../../memory/mem_digitals.h"
 #include "../../memory/mem_tariffs.h"
 #include "../../memory/mem_realtime.h"
+#include "../../memory/mem_phones2.h"
 #include "../../display/display.h"
 #include "../../keyboard/keyboard.h"
 #include "../../time/rtc.h"
@@ -22,6 +23,8 @@ PHONES2!C
 #include "../../serial/modems.h"
 #include "../../digitals/digitals_status.h"
 #include "../../flash/records.h"
+#include "../../nvram/cache.h"
+#include "../../nvram/cache2.h"
 #include "phones22.h"
 #include "phones2.h"
 
@@ -48,9 +51,6 @@ float                  reCurrPhones2;
 // лимит мощности
 float                  reMaxxPhones2;
 
-// список телефонов
-line                   mpphPhones2[bPHONES2];
-
 // режим работы
 bool                   boDebugPhones2;
 
@@ -76,6 +76,8 @@ ulong                  cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPh
 char                   mpbInBuffSave2[100];
 
 
+cache const             chPhones2 = {PHONES2, &mpphPhones2, sizeof(mpphPhones2)};
+
 
 //                                         0123456789ABCDEF
 char const              szPhonesRun2[]    = "СМС-контроль    ",
@@ -84,6 +86,7 @@ char const              szPhonesRun2[]    = "СМС-контроль    ",
                         szPhonesMode23[]  = " настройки 3... ",
                         szNoExcess[]      = "нет превышения !",
                         szNoPeak[]        = "непиковые зоны !";
+
 
 
 void    ResetPhones2(void) {
