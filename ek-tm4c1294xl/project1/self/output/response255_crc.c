@@ -31,7 +31,7 @@ RESPONSE255_CRC!C
 #include "../digitals/extended/extended_6_out.h"
 #include "../digitals/extended/extended_7_out.h"
 #include "../digitals/extended/diagram_out.h"
-#include "../digitals/phones2/phones2.h"
+#include "../digitals/phones2/phones2_out.h"
 #include "out_common.h"
 #include "out_cntmon.h"
 #include "out_settings.h"
