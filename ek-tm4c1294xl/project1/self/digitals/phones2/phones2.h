@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES2*H
+PHONES2!H
 
 
 ------------------------------------------------------------------------------*/
@@ -16,15 +16,17 @@ extern uchar                  bDelayPhone2;
 extern stamp2                 mpstPhones2[PHONE2_CODES];
 extern ulong                  cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPhones24, cdwPhones25;
 
+
 extern cache const            chPortPhones2;
 extern cache const            chPhones2;
 extern cache const            chMaxxPhones2;
 
 
 
-//void    ResetPhones2(void);
+void    InitPhones2(void);
+void    ResetPhones2(void);
+
 bool    UsePhones2(void);
-void    RunPhones2(bool  fDebug);
 
 
 

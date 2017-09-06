@@ -99,7 +99,8 @@ phones2 WritePhones2(bool  fDebug) {
 
     if (Phones2Answer()) {
       (Phones2Result() == 0x30) ? OK() : sprintf(szLo+3, "ошибка: %c", Phones2Result()); // нужно обрабатывать ошибку
-    } else {
+    }
+    else {
       Error(); // нужно обрабатывать ошибку
     }
 
