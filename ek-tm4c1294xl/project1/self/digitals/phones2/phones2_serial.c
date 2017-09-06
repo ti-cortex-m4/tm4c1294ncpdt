@@ -1,31 +1,19 @@
 /*------------------------------------------------------------------------------
-PHONES2_SERIAL*C
+PHONES2_SERIAL!C
 
 
 ------------------------------------------------------------------------------*/
 
 #include "../../main.h"
-#include "../../memory/mem_settings.h"
-#include "../../memory/mem_digitals.h"
-#include "../../memory/mem_tariffs.h"
 #include "../../memory/mem_realtime.h"
-#include "../../memory/mem_phones2.h"
 #include "../../display/display.h"
-#include "../../keyboard/keyboard.h"
-#include "../../time/rtc.h"
+#include "../../time/delay.h"
 #include "../../time/timedate.h"
-#include "../../realtime/realtime.h"
-#include "../../energy4.h"
-#include "../../serial/ports.h"
 #include "../../serial/ports_push.h"
 #include "../../serial/ports_devices.h"
-#include "../../serial/ports_modems.h"
-#include "../../serial/modems.h"
-#include "../../flash/records.h"
-#include "../../nvram/cache.h"
-#include "../../nvram/cache2.h"
 #include "phones2_modem.h"
 #include "phones2.h"
+#include "phones2_serial.h"
 
 
 
@@ -46,11 +34,11 @@ void    QueryMessage0(void) {
 
 
 
-void    QueryMessage1(uchar  ibPhn) {
+void    QueryMessage1(uchar  p) {
   InitPush(0);
   PushString("AT+CMGS=");
 
-  line ph = mpphPhones2[ibPhn];
+  line ph = mpphPhones2[p];
 
   Clear();
   strcpy(szLo, ph.szLine);
