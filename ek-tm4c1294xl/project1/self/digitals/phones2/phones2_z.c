@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES2_FACADE*C
+PHONES2_Z!C
 
 
 ------------------------------------------------------------------------------*/
@@ -51,8 +51,8 @@ static void MakePhones2(void) {
         (mpibPowCurrTariff[ GetCurrHouIndex() ] == 3))  {
 
       cdwPhones21++;
-      reCurrPhones2 = GetPowGrpHouCurr(0,2);
-      if (reCurrPhones2 > reMaxxPhones2) {
+      reValPhones2 = GetPowGrpHouCurr(0,2);
+      if (reValPhones2 > reMaxPhones2) {
 
         cdwPhones23++;
         AddPh2Record(EVE_PH2_START);
@@ -103,5 +103,3 @@ void   EverySecondPhones2(void) {
       MakePhones2();
   }
 }
-
-

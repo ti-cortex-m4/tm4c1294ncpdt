@@ -23,7 +23,7 @@ static char const      *pszMessages[]   = { szMessage1, szMessage2, "" };
 
 static void Show(void)
 {
-  ShowFloat(reMaxxPhones2);
+  ShowFloat(reMaxPhones2);
 }
 
 
@@ -51,8 +51,8 @@ void    key_SetPhones21(void)
       {
         enKeyboard = KBD_POSTENTER;
 
-        reMaxxPhones2 = fl;
-        SaveCache(&chMaxxPhones2);
+        reMaxPhones2 = fl;
+        SaveCache(&chMaxPhones2);
       }
       else Beep();
 

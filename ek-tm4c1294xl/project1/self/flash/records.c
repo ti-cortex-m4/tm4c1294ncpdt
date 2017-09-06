@@ -455,8 +455,8 @@ bool    AddPh2Record(event  ev)
 
   switch (ev)
   {
-    case EVE_PH2_START: memcpy(&reCurr.mpbBuff+0, &reCurrPhones2, sizeof(float));
-                        memcpy(&reCurr.mpbBuff+4, &reMaxxPhones2, sizeof(float)); break;
+    case EVE_PH2_START: memcpy(&reCurr.mpbBuff+0, &reValPhones2, sizeof(float));
+                        memcpy(&reCurr.mpbBuff+4, &reMaxPhones2, sizeof(float)); break;
 
     case EVE_PH2_FINISH: memcpy(&reCurr.mpbBuff+0, &mpbBuffPhones2, 8); break;
   }

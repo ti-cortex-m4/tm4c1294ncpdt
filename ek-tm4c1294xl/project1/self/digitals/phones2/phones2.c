@@ -30,12 +30,12 @@ PHONES2*C
 
 
 // прогнозируемая мощность
-float                   reCurrPhones2;
+float                   reValPhones2;
 
 // буфера
 uchar                   mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
 
-//
+// таймаут
 uchar                   bDelayPhone2;
 
 // буфер
@@ -54,14 +54,14 @@ char                    mpbInBuffSave2[100];
 
 cache const           	chPortPhones2 = {PORT_PHONES2, &bPortPhones2, sizeof(uchar)};
 cache const             chPhones2 = {PHONES2, &mpphPhones2, sizeof(mpphPhones2)};
-cache const             chMaxxPhones2 = {MAX_PHONES2, &reMaxxPhones2, sizeof(float)};
+cache const             chMaxPhones2 = {MAX_PHONES2, &reMaxPhones2, sizeof(float)};
 
 
 
 void    InitPhones2(void) {
   LoadCacheChar(&chPortPhones2, 0, bPORTS, 0);
   LoadCache(&chPhones2);
-  LoadCache(&chMaxxPhones2);
+  LoadCache(&chMaxPhones2);
 }
 
 
@@ -70,10 +70,10 @@ void    ResetPhones2(void) {
   SaveCacheChar(&chPortPhones2, 0);
 
 
-  reCurrPhones2 = 0;
+  reValPhones2 = 0;
 
-  reMaxxPhones2 = 1000;
-  SaveCache(&chMaxxPhones2);
+  reMaxPhones2 = 1000;
+  SaveCache(&chMaxPhones2);
 
 
   memset(&mpphPhones2, 0, sizeof(mpphPhones2));
