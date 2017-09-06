@@ -54,7 +54,7 @@ char                   mpbInBuffSave2[100];
 
 cache const             chPortPhones2 = {PORT_PHONES2, &bPortPhones2, sizeof(uchar)};
 cache const             chPhones2 = {PHONES2, &mpphPhones2, sizeof(mpphPhones2)};
-cache const             chMaxxPhones2 = {PORT_PHONES2, &reMaxxPhones2, sizeof(float)};
+cache const             chMaxxPhones2 = {MAX_PHONES2, &reMaxxPhones2, sizeof(float)};
 
 
 

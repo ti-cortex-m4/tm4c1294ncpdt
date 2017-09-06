@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES2_OUT*C
+PHONES2_OUT!C
 
 
 ------------------------------------------------------------------------------*/
@@ -13,14 +13,10 @@ PHONES2_OUT*C
 
 
 
-extern stamp2                 mpstPhones2[PHONE2_CODES];
-
-
-
 void    OutPhones2(void) {
   InitPushCRC();
 
-  uint  i;
+  uint i;
   for (i=0; i<400; i++) PushChar(0);
 
   InitPushCRC();

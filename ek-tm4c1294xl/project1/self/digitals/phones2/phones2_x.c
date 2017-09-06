@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------
-PHONES2*C
+PHONES2_X!C
 
 
 ------------------------------------------------------------------------------*/
@@ -13,7 +13,6 @@ PHONES2*C
 #include "phones2_serial.h"
 #include "phones2_modem.h"
 #include "phones2.h"
-
 
 
 
@@ -74,8 +73,8 @@ phones2 WritePhones2(bool  fDebug) {
   uchar p;
   for (p=0; p<bPHONES2; p++) {
 
-    line phT = mpphPhones2[p];
-    if ((phT.szLine[0] == '0') && (phT.szLine[1] == 0)) continue;
+    line ph = mpphPhones2[p];
+    if ((ph.szLine[0] == '0') && (ph.szLine[1] == 0)) continue;
 
     mpbBuffPhones2[p] = p+1;
 
@@ -100,8 +99,7 @@ phones2 WritePhones2(bool  fDebug) {
 
     if (Phones2Answer()) {
       (Phones2Result() == 0x30) ? OK() : sprintf(szLo+3, "ошибка: %c", Phones2Result()); // нужно обрабатывать ошибку
-    }
-    else {
+    } else {
       Error(); // нужно обрабатывать ошибку
     }
 
