@@ -25,8 +25,8 @@ void    OutPhones2(void) {
   PushChar(UsePhones2());
   PushChar(bPortPhones2);
 
-  PushFloat(reCurrPhones2);
-  PushFloat(reMaxxPhones2);
+  PushFloat(reValPhones2);
+  PushFloat(reMaxPhones2);
 
   Push(&mpphPhones2, sizeof(mpphPhones2));
 

@@ -8,4 +8,4 @@ extern  uchar                  bPortPhones2;
 
 extern  line                   mpphPhones2[bPHONES2];
 
-extern  float                  reMaxxPhones2;
+extern  float                  reMaxPhones2;

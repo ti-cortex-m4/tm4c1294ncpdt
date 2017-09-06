@@ -29,7 +29,7 @@ PHONES2_SERIAL*C
 
 
 extern char                   mpbInBuffSave2[100];
-extern float                  reCurrPhones2;
+extern float                  reValPhones2;
 
 
 uint    PushMessage(char*  msT)
@@ -106,7 +106,7 @@ uint  i;
   if (fDebug == true)
     sprintf(mpbInBuffSave2+i, "test");
   else
-    sprintf(mpbInBuffSave2+i, "prognoz %.3f bolsche limita %.3f !", reCurrPhones2, reMaxxPhones2);
+    sprintf(mpbInBuffSave2+i, "prognoz %.3f bolsche limita %.3f !", reValPhones2, reMaxPhones2);
 
   i += PushMessage(mpbInBuffSave2+i);
 
