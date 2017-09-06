@@ -18,6 +18,7 @@ KEY_RESET!C
 #include "../digitals/params/params.h"
 #include "../digitals/profile/profile_core.h"
 #include "../digitals/phones.h"
+#include "../digitals/phones2/phones2.h"
 #include "../digitals/extended/diagram.h"
 #include "../devices/devices_init.h"
 #include "../serial/speeds.h"
@@ -157,6 +158,7 @@ void    key_SetReset(void)
           ResetLimits();
           ResetParams();
           ResetPhones();
+          ResetPhones2();
           ResetProfile();
           ResetSpeeds();
           ResetInputModeReset();

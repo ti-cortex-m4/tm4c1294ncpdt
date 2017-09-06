@@ -17,6 +17,7 @@ PHONES2_FACADE*C
 #include "../../flash/records.h"
 #include "../../energy4.h"
 #include "phones2.h"
+#include "phones2_y.h"
 #include "phones2_z.h"
 
 
@@ -90,13 +91,17 @@ static void MakePhones2(void) {
 }
 
 
-void   EverySecondPhones2(void) {
-  if (bDelayPhone2 > 0) {
-    if (bDelayPhone2-- == 1) MakePhones2();
-  }
-}
-
 
 void    AfterCurrectPhones2(void) {
   bDelayPhone2 = 3;
 }
+
+
+void   EverySecondPhones2(void) {
+  if (bDelayPhone2 > 0) {
+    if (bDelayPhone2-- == 1)
+      MakePhones2();
+  }
+}
+
+

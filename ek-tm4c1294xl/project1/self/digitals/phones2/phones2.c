@@ -30,59 +30,78 @@ PHONES2*C
 
 
 // прогнозируемая мощность
-float                  reCurrPhones2;
+float                   reCurrPhones2;
 
 // буфера
-uchar                  mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
+uchar                   mpbAnswer1Phones2[PHONE2_ANSWER], mpbAnswer2Phones2[PHONE2_ANSWER];
 
 //
-uchar                  bDelayPhone2;
+uchar                   bDelayPhone2;
 
 // буфер
-stamp2                 mpstPhones2[PHONE2_CODES];
+stamp2                  mpstPhones2[PHONE2_CODES];
 
 // буфер
-uchar                  mpbBuffPhones2[PHONE2_RECORD];
+uchar                   mpbBuffPhones2[PHONE2_RECORD];
 
 // счётчики
-ulong                  cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPhones24, cdwPhones25;
+ulong                   cdwPhones20, cdwPhones21, cdwPhones22, cdwPhones23, cdwPhones24, cdwPhones25;
 
 // промежуточный буфер
-char                   mpbInBuffSave2[100];
+char                    mpbInBuffSave2[100];
 
 
 
-cache const             chPortPhones2 = {PORT_PHONES2, &bPortPhones2, sizeof(uchar)};
+cache const           	chPortPhones2 = {PORT_PHONES2, &bPortPhones2, sizeof(uchar)};
 cache const             chPhones2 = {PHONES2, &mpphPhones2, sizeof(mpphPhones2)};
 cache const             chMaxxPhones2 = {MAX_PHONES2, &reMaxxPhones2, sizeof(float)};
 
 
 
+void    InitPhones2(void) {
+  LoadCacheChar(&chPortPhones2, 0, bPORTS, 0);
+  LoadCache(&chPhones2);
+  LoadCache(&chMaxxPhones2);
+}
+
 
 void    ResetPhones2(void) {
-uchar   i;
 
-  bPortPhones2 = 0;
+  SaveCacheChar(&chPortPhones2, 0);
+
+
   reCurrPhones2 = 0;
-  reMaxxPhones2 = 1000;
 
-  uchar c;
-  for (c=0; c<bPHONES2; c++)
+  reMaxxPhones2 = 1000;
+  SaveCache(&chMaxxPhones2);
+
+
+  memset(&mpphPhones2, 0, sizeof(mpphPhones2));
+
+  uchar p;
+  for (p=0; p<bPHONES2; p++)
   {
-    mpphPhones2[c].szLine[0] = '0';
+    mpphPhones2[p].szLine[0] = '0';
   }
+  SaveCache(&chPhones2);
+
 
   bDelayPhone2 = 0;
+
 
   memset(&mpbAnswer1Phones2, 0, sizeof(mpbAnswer1Phones2));
   memset(&mpbAnswer2Phones2, 0, sizeof(mpbAnswer2Phones2));
 
+
+  uchar i;
   for (i=0; i<PHONE2_CODES; i++) {
     mpstPhones2[i].cwSelf = 0;
     mpstPhones2[i].tiSelf = tiZero;
   }
 
+
   memset(&mpbBuffPhones2, 0, sizeof(mpbBuffPhones2));
+
 
   cdwPhones20 = 0;
   cdwPhones21 = 0;
