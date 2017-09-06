@@ -277,5 +277,9 @@ typedef enum
   SKIP_FAILURE_ENBL     = ENBL_DIAGRAM + sizeof(bool) + bNVRAM_MARGIN,
   SKIP_FAILURE_REPEATS  = SKIP_FAILURE_ENBL + sizeof(bool) + bNVRAM_MARGIN,
 
-  NVRAM_END             = SKIP_FAILURE_REPEATS + sizeof(bool) + bNVRAM_MARGIN
+  PORT_PHONES2          = SKIP_FAILURE_REPEATS + sizeof(bool) + bNVRAM_MARGIN,
+  PHONES2               = PORT_PHONES2 + sizeof(uchar) + bNVRAM_MARGIN,
+  MAX_PHONES2           = PHONES2 + sizeof(mpphPhones2) + bNVRAM_MARGIN,
+
+  NVRAM_END             = MAX_PHONES2 + sizeof(float) + bNVRAM_MARGIN
 } nvram;

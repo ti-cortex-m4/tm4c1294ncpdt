@@ -16,3 +16,4 @@ bool    AddSysRecordReprogram(event  ev);
 bool    AddDigRecord(event  ev);
 bool    AddImpRecord(event  ev);
 bool    AddModRecord(event  ev);
+bool    AddPh2Record(event  ev);

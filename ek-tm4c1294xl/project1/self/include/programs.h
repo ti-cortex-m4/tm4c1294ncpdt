@@ -183,6 +183,11 @@ PROGRAMS!H
 
 // все режимы
 
+#define bSET_PHONES20               66
+#define bSET_PHONES21               67
+#define bSET_PHONES22               68
+#define bSET_PHONES23               69
+
 #define bSET_CORRECT2_FLAG          75
 #define bSET_CORRECT3_FLAG          76
 #define bSET_CORRECT3_VALUE         77

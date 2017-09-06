@@ -18,6 +18,7 @@ NVRAM!H
 #include "../memory/mem_digitals.h"
 #include "../memory/mem_profile.h"
 #include "../memory/mem_phones.h"
+#include "../memory/mem_phones2.h"
 #include "../memory/mem_params0.h"
 #include "../memory/mem_params.h"
 #include "../memory/mem_settings.h"

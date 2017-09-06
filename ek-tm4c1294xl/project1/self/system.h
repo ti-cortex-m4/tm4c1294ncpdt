@@ -179,4 +179,8 @@ SYSTEM!H
 #define wMAXCORRECT     300
 
 
+// количество телефонов для СМС-контроля
+#define bPHONES2        4
+
+
 #endif

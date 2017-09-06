@@ -5,6 +5,7 @@ PORTS_PUSH!H
 ------------------------------------------------------------------------------*/
 
 #include "../main.h"
+#include <stdio.h>
 #include "../memory/mem_serial0.h"
 #include "../memory/mem_serial1.h"
 #include "../memory/mem_serial2.h"
@@ -13,6 +14,10 @@ PORTS_PUSH!H
 #include "../display/lines.h"
 #include "ports.h"
 #include "ports_push.h"
+
+
+
+extern int usprintf(char * restrict s, const char * restrict format, ...);
 
 
 
@@ -263,13 +268,18 @@ uchar   PushTime(time  ti)
 }
 
 
-void    PushString(char  *psz)
+uint    PushString(char  *psz)
 {
+  uint wSize = 0;
+
   while (true)
   {
     if (!*psz) break;
     PushChar(*psz++);
+    wSize++;
   }
+
+  return wSize;
 }
 
 
@@ -307,10 +317,30 @@ void	PushCharHex2Txt(uchar  bT)
 }
 
 
-void	PushCharDec2Txt(uchar  bT)
+uchar   PushCharDec2Txt(uchar  bT)
 {
   PushChar(szDigits[ bT / 10 ]);
   PushChar(szDigits[ bT % 10 ]);
+
+  return 2;
+}
+
+
+
+uchar   PushFloat3(float  fl)
+{
+static char mbT[15*2];
+
+  memset(&mbT, 0, sizeof(mbT));
+  uchar n = sprintf(mbT, "%.3f", fl);
+
+  uchar i;
+  for (i=0; i<n; i++)
+  {
+    PushChar(mbT[i]);
+  }
+
+  return n;
 }
 
 
@@ -332,7 +362,6 @@ void	PushChar2Bcc(uchar  bT)
 }
 
 
-extern int usprintf(char * restrict s, const char * restrict format, ...);
 
 uchar   PushNumberBcc(ulong  dwT)
 {
