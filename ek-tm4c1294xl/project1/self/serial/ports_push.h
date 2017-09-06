@@ -27,12 +27,13 @@ uchar   PushDouble(double  db);
 uchar   PushFloatOrDouble(double  db, bool  fDouble);
 uchar   GetFloatOrDoubleSize(bool  fDouble);
 uchar   PushTime(time  ti);
-void    PushString(char  *psz);
+uint    PushString(char  *psz);
 void    PushLongAsString(ulong  dw);
 void    PushBuffInt(uint  *pwData, uint  wSize);
 void    PushBuffLong(ulong  *pdwData, uint  wSize);
 void    PushCharHex2Txt(uchar  bT);
-void    PushCharDec2Txt(uchar  bT);
+uchar   PushCharDec2Txt(uchar  bT);
+uchar   PushFloat3(float  fl);
 
 void    PushChar1Bcc(uchar  bT);
 void    PushChar2Bcc(uchar  bT);
