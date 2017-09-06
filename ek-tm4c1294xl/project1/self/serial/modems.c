@@ -179,8 +179,6 @@ void    QueryModemCustom(void)
 
 void    QueryModemConnect(void)
 {
-uchar   i;
-
   HideCurrTime(0);
 
   InitPush(0);
@@ -195,6 +193,7 @@ uchar   i;
   Clear();
   strcpy(szLo, ph.szLine);
 
+  uchar i;
   for (i=0; i<bLINE_SIZE; i++)
   {
     if ( ph.szLine[i] == 0 ) break;

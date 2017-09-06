@@ -31,6 +31,7 @@ RESPONSE255_CRC!C
 #include "../digitals/extended/extended_6_out.h"
 #include "../digitals/extended/extended_7_out.h"
 #include "../digitals/extended/diagram_out.h"
+#include "../digitals/phones2/phones2_out.h"
 #include "out_common.h"
 #include "out_cntmon.h"
 #include "out_settings.h"
@@ -185,6 +186,8 @@ void    Response255_CRC(void)
     case bEXT_GETSTARTCAN: OutStartCan(); break;
 
     case bEXT_GETVERSION: OutVersion(); break;
+
+    case bEXT_GETPHONES2: OutPhones2(); break;
 
     case bEXT_GETPORTS: OutPorts(); break;
     case bEXT_GETOUTPUTDELAY: OutOutputDelay(); break;

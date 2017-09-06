@@ -16,6 +16,7 @@ RECORDS,C
 #include "../devices/devices.h"
 #include "../digitals/digitals_status.h"
 #include "../digitals/profile/refill.h"
+#include "../digitals/phones2/phones2.h"
 #include "../time/rtc.h"
 #include "../nvram/cache.h"
 #include "files.h"
@@ -437,6 +438,30 @@ bool    AddModRecord(event  ev)
   }
 
   CloseRecord(MOD_RECORD, i);
+
+  return CloseOut();
+}
+
+
+bool    AddPh2Record(event  ev)
+{
+  if (IsRecordDisabled(ev)) return true;
+
+  uint i = OpenRecord(PH2_RECORD, cdwPh2Record);
+
+  reCurr.ti = *GetCurrTimeDate();
+  reCurr.cdwRecord = cdwPh2Record++; SaveCache(&chPh2Record);
+  reCurr.ev = ev;
+
+  switch (ev)
+  {
+    case EVE_PH2_START: memcpy(&reCurr.mpbBuff+0, &reValPhones2, sizeof(float));
+                        memcpy(&reCurr.mpbBuff+4, &reMaxPhones2, sizeof(float)); break;
+
+    case EVE_PH2_FINISH: memcpy(&reCurr.mpbBuff+0, &mpbBuffPhones2, 8); break;
+  }
+
+  CloseRecord(PH2_RECORD, i);
 
   return CloseOut();
 }

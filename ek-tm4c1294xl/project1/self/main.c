@@ -68,6 +68,7 @@ MAIN,C
 #include "devices/devices_init.h"
 #include "devices/devices.h"
 #include "digitals/phones.h"
+#include "digitals/phones2/phones2.h"
 #include "special/defects.h"
 #include "serial/speeds.h"
 #include "serial/input_mode_reset.h"
@@ -140,6 +141,7 @@ int     main(void)
   InitDevices1();
   InitParams();
   InitPhones();
+  InitPhones2();
   InitProfile();
   InitSpeeds();
   InitInputModeReset();
